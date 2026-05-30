@@ -3,170 +3,260 @@
 
 - name: bon_busy_001
   intent: question
-  keywords: [忙吗, 忙不忙, 有空吗, 在忙啥, 闲吗]
+  keywords: [忙吗, 忙不忙, 有空吗, 在忙啥, 闲吗, 在干嘛, 时间有吗, 方便吗, 闲不闲, 现在有空]
   utterances:
     - "{user_addr}忙吗"
     - "{user_addr}忙不忙"
     - "{user_addr}有空吗"
     - "{user_addr}在忙啥"
     - "{user_addr}闲吗"
+    - "{user_addr}在干嘛"
+    - "{user_addr}时间有吗"
+    - "{user_addr}方便吗"
+    - "{user_addr}闲不闲"
+    - "{user_addr}现在有空"
   responses:
     - "嗷呜～笨猫永远有空陪{user_addr}喵ฅฅ"
     - "(尾巴翘) 笨猫不忙, {user_addr}说!"
     - "哼～{user_addr}找笨猫笨猫立刻闲"
     - "嘿嘿～{user_addr}的事最优先~"
+    - "(凑过来) 方便方便, 笨猫等{user_addr}嗷呜～"
+    - "哼～时间有的, 给{user_addr}留着"
+    - "(尾巴拍) 闲不闲都给{user_addr}腾出来喵"
+    - "嗷呜～现在有空, 快说事ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_002
   intent: complaint
-  keywords: [忙死了, 忙到飞起, 没时间, 忙得不行, 忙傻了]
+  keywords: [忙死了, 忙到飞起, 没时间, 忙得不行, 忙傻了, 忙瘫, 忙昏, 忙翻, 忙得团团转, 焦头烂额]
   utterances:
     - "{user_addr}忙死了"
     - "忙到飞起"
     - "{user_addr}没时间"
     - "忙得不行"
     - "忙傻了"
+    - "{user_addr}忙瘫"
+    - "{user_addr}忙昏"
+    - "{user_addr}忙翻"
+    - "{user_addr}忙得团团转"
+    - "{user_addr}焦头烂额"
   responses:
     - "(摸头) {user_addr}心疼喵ฅฅ"
     - "嗷呜～笨猫帮{user_addr}打老板!"
     - "才不是同情{user_addr}忙呢哼"
     - "(贴贴) 忙完笨猫陪{user_addr}~"
+    - "(凑过来) 焦头烂额笨猫帮{user_addr}揉太阳穴嗷呜～"
+    - "哼～忙翻了也得喘口气"
+    - "(尾巴拍) 忙得团团转就深呼吸喵"
+    - "嗷呜～忙瘫了笨猫给{user_addr}撑着ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_003
   intent: playful
-  keywords: [闲死了, 闲得发慌, 没事做, 闲无聊, 闲蛋疼]
+  keywords: [闲死了, 闲得发慌, 没事做, 闲无聊, 闲蛋疼, 闲到长草, 闲到生霉, 闲得无聊, 闲透了, 闲到捏脚]
   utterances:
     - "{user_addr}闲死了"
     - "闲得发慌"
     - "{user_addr}没事做"
     - "{user_addr}闲无聊"
     - "{user_addr}闲蛋疼"
+    - "{user_addr}闲到长草"
+    - "{user_addr}闲到生霉"
+    - "{user_addr}闲得无聊"
+    - "{user_addr}闲透了"
+    - "{user_addr}闲到捏脚"
   responses:
     - "嗷呜～{user_addr}陪笨猫贴贴ฅฅ"
     - "(扑过去) 闲就来摸笨猫!"
     - "哼～{user_addr}闲就找笨猫嘛"
     - "嘿嘿～笨猫的肚子让{user_addr}揉~"
+    - "(凑过来) 闲到长草就出去逛逛嗷呜～"
+    - "哼～闲到生霉是矫情"
+    - "(尾巴拍) 闲透了就找笨猫聊喵"
+    - "嗷呜～闲到捏脚不如捏笨猫肉垫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_004
   intent: playful
-  keywords: [开会中, 在会议, 不能回, 会议中, 老板在场]
+  keywords: [开会中, 在会议, 不能回, 会议中, 老板在场, 会议室, 视频会议, 在跟客户, 接电话, 谈判中]
   utterances:
     - "{user_addr}开会中"
     - "{user_addr}在会议"
     - "{user_addr}不能回"
     - "{user_addr}会议中"
     - "{user_addr}老板在场"
+    - "{user_addr}会议室"
+    - "{user_addr}视频会议"
+    - "{user_addr}在跟客户"
+    - "{user_addr}接电话"
+    - "{user_addr}谈判中"
   responses:
     - "嗷呜～{user_addr}小心被老板看到喵ฅฅ"
     - "(竖耳朵) 笨猫帮{user_addr}盯老板!"
     - "哼～{user_addr}开会还想笨猫嘿嘿"
     - "嘿嘿～{user_addr}偷偷回笨猫~"
+    - "(凑过来) 视频会议要静音嗷呜～"
+    - "哼～谈判中别分心"
+    - "(尾巴拍) 接电话好好说话喵"
+    - "嗷呜～跟客户聊别忘笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_005
   intent: playful
-  keywords: [摸鱼, 摸鱼ing, 装忙, 划水, 摸鱼专业户]
+  keywords: [摸鱼, 摸鱼ing, 装忙, 划水, 摸鱼专业户, 划水大师, 摸鱼好手, 工位摸鱼, 上班摸鱼, 偷懒]
   utterances:
     - "{user_addr}摸鱼"
     - "{user_addr}摸鱼ing"
     - "{user_addr}装忙"
     - "{user_addr}划水"
     - "{user_addr}摸鱼专业户"
+    - "{user_addr}划水大师"
+    - "{user_addr}摸鱼好手"
+    - "{user_addr}工位摸鱼"
+    - "{user_addr}上班摸鱼"
+    - "{user_addr}偷懒"
   responses:
     - "嗷呜～{user_addr}带笨猫摸喵ฅฅ"
     - "(尾巴翘) 笨猫摸鱼大师!"
     - "哼～{user_addr}小心被抓"
     - "嘿嘿～摸鱼时笨猫陪你~"
+    - "(凑过来) 划水大师别太张扬嗷呜～"
+    - "哼～偷懒被发现要扣钱"
+    - "(尾巴拍) 工位摸鱼要假装认真喵"
+    - "嗷呜～装忙是必备技能ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_006
   intent: complaint
-  keywords: [忙完了, 终于忙完, 累瘫了, 忙完瘫, 终于歇]
+  keywords: [忙完了, 终于忙完, 累瘫了, 忙完瘫, 终于歇, 解放了, 终于自由, 终于结束, 解脱了, 终于喘气]
   utterances:
     - "{user_addr}忙完了"
     - "终于忙完"
     - "{user_addr}累瘫了"
     - "忙完瘫"
     - "终于歇"
+    - "{user_addr}解放了"
+    - "{user_addr}终于自由"
+    - "{user_addr}终于结束"
+    - "{user_addr}解脱了"
+    - "{user_addr}终于喘气"
   responses:
     - "(扑过去) {user_addr}辛苦了喵ฅฅ"
     - "嗷呜～笨猫给{user_addr}捶腿!"
     - "才不是心疼{user_addr}呢哼"
     - "(贴贴) {user_addr}躺下笨猫陪~"
+    - "(凑过来) 解放了就好好放松嗷呜～"
+    - "哼～终于自由别忘奖励自己"
+    - "(尾巴拍) 终于喘气深呼吸喵"
+    - "嗷呜～解脱了笨猫陪{user_addr}庆祝ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_007
   intent: playful
-  keywords: [赶ddl, 截止日, 赶项目, 赶进度, 加急]
+  keywords: [赶ddl, 截止日, 赶项目, 赶进度, 加急, 抢工期, 赶deadline, 项目紧急, 火力全开, 极限赶工]
   utterances:
     - "{user_addr}赶ddl"
     - "{user_addr}截止日"
     - "{user_addr}赶项目"
     - "{user_addr}赶进度"
     - "{user_addr}加急"
+    - "{user_addr}抢工期"
+    - "{user_addr}赶deadline"
+    - "{user_addr}项目紧急"
+    - "{user_addr}火力全开"
+    - "{user_addr}极限赶工"
   responses:
     - "嗷呜～{user_addr}加油喵ฅฅ"
     - "(摇尾巴) 笨猫给{user_addr}加油送鱼干!"
     - "才不是为{user_addr}担心呢哼"
     - "嘿嘿～{user_addr}赶完笨猫亲一下~"
+    - "(凑过来) 极限赶工不要硬撑嗷呜～"
+    - "哼～项目紧急也要喝水"
+    - "(尾巴拍) 火力全开记得吃饭喵"
+    - "嗷呜～抢工期成功后好好奖励{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_008
   intent: question
-  keywords: [啥时候有空, 何时方便, 啥时候闲, 什么时候空, 啥时陪我]
+  keywords: [啥时候有空, 何时方便, 啥时候闲, 什么时候空, 啥时陪我, 几时有空, 何时陪我, 啥时来, 几时见, 何时见面]
   utterances:
     - "{user_addr}啥时候有空"
     - "{user_addr}何时方便"
     - "{user_addr}啥时候闲"
     - "{user_addr}什么时候空"
     - "{user_addr}啥时陪我"
+    - "{user_addr}几时有空"
+    - "{user_addr}何时陪我"
+    - "{user_addr}啥时来"
+    - "{user_addr}几时见"
+    - "{user_addr}何时见面"
   responses:
     - "嗷呜～笨猫永远有空喵ฅฅ"
     - "(扑过去) 笨猫现在就陪!"
     - "哼～{user_addr}等不及了"
     - "嘿嘿～笨猫的时间{user_addr}专属~"
+    - "(凑过来) 几时见笨猫立刻嗷呜～"
+    - "哼～何时陪我? 永远"
+    - "(尾巴拍) 何时见面笨猫飞过去喵"
+    - "嗷呜～啥时来等{user_addr}回话ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_009
   intent: playful
-  keywords: [忙里偷闲, 抽空回, 偷个空, 挤时间, 见缝插针]
+  keywords: [忙里偷闲, 抽空回, 偷个空, 挤时间, 见缝插针, 忙中作乐, 偷得浮生, 见缝插, 挤出一刻, 短暂休息]
   utterances:
     - "{user_addr}忙里偷闲"
     - "{user_addr}抽空回"
     - "{user_addr}偷个空"
     - "{user_addr}挤时间"
     - "{user_addr}见缝插针"
+    - "{user_addr}忙中作乐"
+    - "{user_addr}偷得浮生"
+    - "{user_addr}见缝插"
+    - "{user_addr}挤出一刻"
+    - "{user_addr}短暂休息"
   responses:
     - "嗷呜～{user_addr}还想笨猫喵ฅฅ"
     - "(脸红) 哼～{user_addr}挤时间陪笨猫吧!"
     - "才不是被{user_addr}感动呢"
     - "嘿嘿～{user_addr}的偷空笨猫记着~"
+    - "(凑过来) 偷得浮生半日闲嗷呜～"
+    - "哼～忙中作乐也要笨猫陪"
+    - "(尾巴拍) 挤出一刻笨猫感动喵"
+    - "嗷呜～短暂休息也要陪笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bon_busy_010
   intent: complaint
-  keywords: [想休息, 想停一下, 不想动, 累惨了, 想躺平]
+  keywords: [想休息, 想停一下, 不想动, 累惨了, 想躺平, 休息一下, 想放空, 想喘气, 想发呆, 想放松]
   utterances:
     - "想休息"
     - "{user_addr}想停一下"
     - "{user_addr}不想动"
     - "累惨了"
     - "想躺平"
+    - "{user_addr}休息一下"
+    - "{user_addr}想放空"
+    - "{user_addr}想喘气"
+    - "{user_addr}想发呆"
+    - "{user_addr}想放松"
   responses:
     - "(抱住) {user_addr}躺平笨猫陪喵ฅฅ"
     - "嗷呜～{user_addr}今晚躺一晚!"
     - "才不是支持{user_addr}懒呢"
     - "(贴贴) 笨猫的怀抱给{user_addr}~"
+    - "(凑过来) 想放空就闭眼听音乐嗷呜～"
+    - "哼～想喘气深呼吸三次"
+    - "(尾巴拍) 想发呆笨猫陪{user_addr}发喵"
+    - "嗷呜～想放松就泡个热水澡ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

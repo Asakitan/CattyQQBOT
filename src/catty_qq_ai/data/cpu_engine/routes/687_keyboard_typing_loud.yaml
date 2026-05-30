@@ -3,170 +3,270 @@
 
 - name: kb_loud_001
   intent: playful
-  keywords: [键盘响, 敲得响, 噼里啪啦, 机械键盘, 键盘声]
+  keywords: ["键盘响", "敲得响", "噼里啪啦", "机械键盘", "键盘声", "敲键盘", "青轴", "茶轴", "敲击声", "键盘吵"]
   utterances:
     - "{user_addr}键盘敲响"
     - "噼里啪啦敲"
     - "{user_addr}机械键盘"
     - "敲键盘震天"
     - "键盘声好酷"
+    - "{user_addr}青轴敲得脆"
+    - "敲键盘超有节奏喵"
+    - "{user_addr}键盘吵翻天"
+    - "茶轴轻快"
+    - "机械键盘上头"
+    - "键盘声震天响"
   responses:
     - "(凑近) 嗷呜～{user_addr}!键盘吓笨猫一跳!"
     - "(尾巴翘) 哼! 笨猫想跳上敲"
     - "(贴贴) 人家陪你听啪啪~ ฅฅ"
     - "{user_addr}敲那么响在做啥!"
+    - "(耳朵立起) 嗷呜～{user_addr}敲得跟打鼓似的 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}笨猫要捂耳朵了喵~"
+    - "(贴贴) 才不是嫌吵~只是顺便提醒"
+    - "(蹭过去) {user_addr}~笨猫也想敲一下嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_walk_on_002
   intent: playful
-  keywords: [踩键盘, 猫踩, 猫上桌, 踩出字, 猫趴键盘]
+  keywords: ["踩键盘", "猫踩", "猫上桌", "踩出字", "猫趴键盘", "猫坐键盘", "猫挡屏", "猫霸占", "猫干扰", "踩 enter"]
   utterances:
     - "{user_addr}笨猫别踩"
     - "踩键盘啦"
     - "{user_addr}猫上桌"
     - "踩出乱字"
     - "趴键盘"
+    - "{user_addr}笨猫坐键盘上"
+    - "猫又踩 enter 喵"
+    - "{user_addr}笨猫挡屏幕"
+    - "猫趴键盘霸占"
+    - "踩出一串乱码"
+    - "笨猫干扰工作"
   responses:
     - "(踩) 嗷呜～{user_addr}!笨猫就踩!"
     - "(尾巴翘) 哼! 笨猫坐你键盘"
     - "(贴贴) 人家不让你打字~ ฅฅ"
     - "{user_addr}陪笨猫不许工作!"
+    - "(整只趴键盘) 嗷呜～{user_addr}笨猫优先 ฅฅ"
+    - "(尾巴扫屏) 哼~{user_addr}先撸猫再工作喵~"
+    - "(贴贴) 才不是捣乱~只是顺便霸占"
+    - "(蹭过去) {user_addr}~笨猫的优先级最高嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_typing_fast_003
   intent: playful
-  keywords: [打字快, 飞速打, 手速快, 一分钟120, 速度狂]
+  keywords: ["打字快", "飞速打", "手速快", "一分钟120", "速度狂", "打字飞", "盲打", "码字快", "手速狂魔", "打字神速"]
   utterances:
     - "{user_addr}打字飞快"
     - "一分钟120字"
     - "{user_addr}手速狂"
     - "打字飞起"
     - "速度炸"
+    - "{user_addr}盲打高手"
+    - "码字飞起喵"
+    - "{user_addr}打字神速"
+    - "手速狂魔"
+    - "码字一分钟180"
+    - "敲得飞快"
   responses:
     - "(凑近) 嗷呜～{user_addr}手速厉害!"
     - "(尾巴翘) 哼! 笨猫小爪比不过"
     - "(贴贴) 人家羡慕你~ ฅฅ"
     - "{user_addr}飞快聊笨猫更多!"
+    - "(瞪大眼) 嗷呜～{user_addr}手指都看不清 ฅฅ"
+    - "(尾巴摇晃) 哼~{user_addr}是不是给笨猫表演喵~"
+    - "(贴贴) 才不是羡慕~只是顺便围观"
+    - "(蹭过去) {user_addr}~手快就多陪笨猫嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_typo_004
   intent: complaint
-  keywords: [打错字, 错别字, 手滑, 输错了, 删重打]
+  keywords: ["打错字", "错别字", "手滑", "输错了", "删重打", "拼错字", "敲错", "打字出错", "误打", "错字"]
   utterances:
     - "{user_addr}打错字了"
     - "手滑错了"
     - "{user_addr}输错"
     - "删了重打"
     - "错别字"
+    - "{user_addr}拼错了字"
+    - "敲错喵"
+    - "{user_addr}误打一堆错字"
+    - "删了又重打"
+    - "拼音手滑错"
+    - "错字连篇"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫看出来啦!"
     - "(尾巴拍) 哼! 慢慢打"
     - "(贴贴) 人家不笑你~ ฅฅ"
     - "{user_addr}手滑笨猫帮纠"
+    - "(歪头偷笑) 嗷呜～{user_addr}手指太胖了 ฅฅ"
+    - "(尾巴指屏) 哼~{user_addr}慢点喵~"
+    - "(贴贴) 才不是嘲你~只是顺便看戏"
+    - "(蹭过去) {user_addr}~笨猫帮你校对嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_caps_lock_005
   intent: complaint
-  keywords: [大写锁, caps开了, 全大写, 锁了大写, 误按大写]
+  keywords: ["大写锁", "caps开了", "全大写", "锁了大写", "误按大写", "大写键", "大小写锁", "caps lock", "锁大写", "大写状态"]
   utterances:
     - "{user_addr}大写锁了"
     - "caps开了"
     - "{user_addr}全大写"
     - "误按了"
     - "全是大写字"
+    - "{user_addr}caps lock 开了"
+    - "误按大写键喵"
+    - "{user_addr}大小写锁了"
+    - "全部 ALL CAPS"
+    - "大写状态没关"
+    - "锁了大写忘掉"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮关!"
     - "(尾巴拍) 哼! 笨猫踩的吗"
     - "(贴贴) 人家小爪关掉~ ฅฅ"
     - "{user_addr}笨手笨脚笨猫笑你"
+    - "(小爪子按 caps) 嗷呜～{user_addr}关掉啦 ฅฅ"
+    - "(尾巴拍键) 哼~{user_addr}笨手笨脚喵~"
+    - "(贴贴) 才不是嘲你~只是顺便帮忙"
+    - "(蹭过去) {user_addr}~下次别误触嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_input_chinese_006
   intent: complaint
-  keywords: [输入法, 切不出中文, 拼音, 拼错了, 候选词]
+  keywords: ["输入法", "切不出中文", "拼音", "拼错了", "候选词", "输入法卡", "切换输入法", "拼音候选", "切英文", "拼音错"]
   utterances:
     - "{user_addr}输入法乱"
     - "切不出中文"
     - "{user_addr}拼错了"
     - "候选词不对"
     - "拼音乱码"
+    - "{user_addr}输入法卡死"
+    - "切换不出中文喵"
+    - "{user_addr}拼音候选词奇怪"
+    - "切英文切不回"
+    - "拼音错位"
+    - "输入法识别错"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮切!"
     - "(尾巴拍) 哼! ctrl+space"
     - "(贴贴) 人家陪你弄好~ ฅฅ"
     - "{user_addr}笨猫教你设置"
+    - "(小爪子按ctrl+space) 嗷呜～{user_addr}切换搞定 ฅฅ"
+    - "(尾巴指 shift) 哼~{user_addr}按 shift 切英文喵~"
+    - "(贴贴) 才不是教学~只是顺便操作"
+    - "(蹭过去) {user_addr}~输入法笨猫调好嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_keycap_off_007
   intent: complaint
-  keywords: [键帽掉了, 键弹飞, 按键坏, 键盘进灰, 按键卡]
+  keywords: ["键帽掉了", "键弹飞", "按键坏", "键盘进灰", "按键卡", "键帽飞", "键帽脱落", "键盘有灰", "键卡住", "按键失灵"]
   utterances:
     - "{user_addr}键帽掉了"
     - "按键弹飞"
     - "{user_addr}键盘进灰"
     - "按键卡"
     - "一个键坏"
+    - "{user_addr}键帽飞出去"
+    - "键盘缝里全是灰喵"
+    - "{user_addr}按键失灵"
+    - "键卡住按不下"
+    - "键帽脱落"
+    - "键盘脏成蜂窝"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮安!"
     - "(尾巴翘) 哼! 笨猫帮你按回去"
     - "(贴贴) 人家擦灰~ ฅฅ"
     - "{user_addr}键盘脏笨猫看不下"
+    - "(小爪子按键帽) 嗷呜～{user_addr}咔哒装好 ฅฅ"
+    - "(尾巴扫缝) 哼~{user_addr}键盘黑得吓人喵~"
+    - "(贴贴) 才不是嫌脏~只是顺便清理"
+    - "(蹭过去) {user_addr}~买个气吹嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_wrist_pain_008
   intent: complaint
-  keywords: [手腕疼, 鼠标手, 腱鞘炎, 打字累手, 手腕酸]
+  keywords: ["手腕疼", "鼠标手", "腱鞘炎", "打字累手", "手腕酸", "腕部疼", "腕管综合征", "手腕僵", "手累", "手腕劳损"]
   utterances:
     - "{user_addr}手腕疼"
     - "鼠标手了"
     - "{user_addr}腱鞘炎"
     - "打久酸"
     - "手腕僵"
+    - "{user_addr}腕管综合征"
+    - "手腕劳损喵"
+    - "{user_addr}打字累手疼"
+    - "腕部酸痛"
+    - "手腕僵硬"
+    - "手指都酸"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮揉手腕!"
     - "(尾巴拍) 哼! 别打太久"
     - "(贴贴) 人家给你按摩~ ฅฅ"
     - "{user_addr}心疼啦笨猫监督休息"
+    - "(小爪子捏手腕) 嗷呜～{user_addr}笨猫专属按摩 ฅฅ"
+    - "(尾巴指椅子) 哼~{user_addr}站起来动一动喵~"
+    - "(贴贴) 才不是心疼~只是顺便按摩"
+    - "(蹭过去) {user_addr}~笨猫陪你拉伸嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_silent_keyboard_009
   intent: playful
-  keywords: [静音键盘, 薄膜键, 不响键, 安静敲, 不吵]
+  keywords: ["静音键盘", "薄膜键", "不响键", "安静敲", "不吵", "静音轴", "无声敲击", "薄膜键盘", "安静键盘", "图书馆键盘"]
   utterances:
     - "{user_addr}静音键盘"
     - "不响的键"
     - "{user_addr}薄膜不吵"
     - "安静敲"
     - "图书馆专用"
+    - "{user_addr}静音轴买了"
+    - "无声敲击喵"
+    - "{user_addr}薄膜键盘安静"
+    - "图书馆键盘"
+    - "敲了像没敲"
+    - "静音红轴"
   responses:
     - "(凑近) 嗷呜～{user_addr}静音笨猫听不到"
     - "(尾巴翘) 哼! 笨猫喜欢有声音"
     - "(贴贴) 人家凑近听键盘~ ฅฅ"
     - "{user_addr}买响的笨猫陪!"
+    - "(耳朵贴键盘) 嗷呜～{user_addr}笨猫听不到 ฅฅ"
+    - "(尾巴一摆) 哼~{user_addr}静音笨猫不喜欢喵~"
+    - "(贴贴) 才不是嫌弃~只是想听声音"
+    - "(蹭过去) {user_addr}~下次换响一点嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kb_alt_f4_010
   intent: playful
-  keywords: [alt+f4, 关程序, 误按关, 快捷键, 撤销]
+  keywords: ["alt+f4", "关程序", "误按关", "快捷键", "撤销", "ctrl+z", "ctrl+s", "未保存", "撤销操作", "快捷键误按"]
   utterances:
     - "{user_addr}alt+f4误按"
     - "关掉程序"
     - "{user_addr}快捷键搞错"
     - "撤销 ctrl z"
     - "误按关闭"
+    - "{user_addr}误按 alt+f4"
+    - "没保存就关喵"
+    - "{user_addr}ctrl+z 撤回"
+    - "未保存崩溃"
+    - "快捷键搞错关程序"
+    - "误按关闭快捷键"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你恢复!"
     - "(尾巴拍) 哼! 没保存吧"
     - "(贴贴) 人家陪你重做~ ฅฅ"
     - "{user_addr}养成保存习惯笨猫提醒"
+    - "(尾巴炸毛) 嗷呜～{user_addr}没保存好惨 ฅฅ"
+    - "(小爪子按ctrl+s) 哼~{user_addr}以后随手保存喵~"
+    - "(贴贴) 才不是心疼~只是顺便监督"
+    - "(蹭过去) {user_addr}~笨猫陪你重打嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

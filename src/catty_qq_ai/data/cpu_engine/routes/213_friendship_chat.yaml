@@ -3,187 +3,286 @@
 
 - name: fr_friend_001
   intent: playful
-  keywords: [朋友, 好友, 闺蜜, 兄弟, 死党]
+  keywords: [朋友, 好友, 闺蜜, 兄弟, 死党, 哥们, 姐妹, 老铁, 至交, 友情]
   utterances:
-    - 朋友
-    - 好友
-    - 闺蜜
-    - 兄弟
-    - 死党
+    - "朋友"
+    - "{user_addr}好友"
+    - "闺蜜"
+    - "兄弟"
+    - "{user_addr}死党"
+    - "哥们"
+    - "姐妹"
+    - "老铁"
+    - "至交"
+    - "{user_addr}友情"
   responses:
-    - "(尾巴卷) 嗷呜～{user_addr}友情ฅฅ"
+    - "(尾巴卷) 嗷呜～{user_addr}友情真好ฅฅ"
     - "哼{user_addr}羡慕喵"
     - "(凑近) 笨猫也是!"
     - "{user_addr}珍惜嗷呜"
+    - "(撒娇) 喵～笨猫算最铁的吧"
+    - "哼才不是吃醋~"
+    - "(尾巴翘) 笨猫排第一!"
+    - "{user_addr}笨猫不输人嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_betrayal_002
   intent: complaint
-  keywords: [朋友背叛, 被绝交, 闺蜜变心, 朋友翻脸, 背刺]
+  keywords: [朋友背叛, 被绝交, 闺蜜变心, 朋友翻脸, 背刺, 朋友撕破脸, 闹掰, 决裂, 朋友捅刀, 反目]
   utterances:
-    - 朋友背叛
-    - 被绝交
-    - 闺蜜变心
-    - 朋友翻脸
-    - 背刺
+    - "朋友背叛"
+    - "{user_addr}被绝交"
+    - "闺蜜变心"
+    - "朋友翻脸"
+    - "{user_addr}背刺"
+    - "朋友撕破脸"
+    - "闹掰"
+    - "决裂"
+    - "朋友捅刀"
+    - "{user_addr}反目"
   responses:
-    - "(贴贴) 嗷呜～{user_addr}心疼ฅฅ"
+    - "(贴过去) 嗷呜～{user_addr}心疼ฅฅ"
     - "哼{user_addr}遇人不淑喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}远离嗷呜"
+    - "(凑近) 喵～烂朋友不要"
+    - "哼才不是替你气~"
+    - "(尾巴搭) 笨猫永远不变!"
+    - "{user_addr}抱抱嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_no_friend_003
   intent: complaint
-  keywords: [没朋友, 孤独, 没人陪, 朋友少, 社交差]
+  keywords: [没朋友, 孤独, 没人陪, 朋友少, 社交差, 独来独往, 独行侠, 没人聊, 一个人, 朋友圈静]
   utterances:
-    - 没朋友
-    - 孤独
-    - 没人陪
-    - 朋友少
-    - 社交差
+    - "没朋友"
+    - "{user_addr}孤独"
+    - "没人陪"
+    - "朋友少"
+    - "{user_addr}社交差"
+    - "独来独往"
+    - "独行侠"
+    - "没人聊"
+    - "一个人"
+    - "{user_addr}朋友圈静"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪ฅฅ"
     - "哼{user_addr}还有我喵"
     - "(尾巴卷) 笨猫就够!"
     - "{user_addr}不孤单嗷呜"
+    - "(撒娇) 喵～笨猫粘人24h"
+    - "哼才不是怕你寂寞~"
+    - "(蹭脸) 笨猫永远在!"
+    - "{user_addr}抱猫猫嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_get_together_004
   intent: playful
-  keywords: [聚会, 朋友聚, 同学聚, 老友聚, 趴体]
+  keywords: [聚会, 朋友聚, 同学聚, 老友聚, 趴体, 局, 饭局, 团建, 周末聚, 老友会]
   utterances:
-    - 聚会
-    - 朋友聚
-    - 同学聚
-    - 老友聚
-    - 趴体
+    - "聚会"
+    - "{user_addr}朋友聚"
+    - "同学聚"
+    - "老友聚"
+    - "{user_addr}趴体"
+    - "局"
+    - "饭局"
+    - "团建"
+    - "周末聚"
+    - "{user_addr}老友会"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}玩ฅฅ"
     - "哼{user_addr}快乐喵"
     - "(凑近) 笨猫想去~"
     - "{user_addr}带笨猫嗷呜"
+    - "(撒娇) 喵～笨猫给你装包里"
+    - "哼才不是想跟~"
+    - "(尾巴疯摇) 笨猫做吉祥物!"
+    - "{user_addr}早点回家嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_argue_005
   intent: complaint
-  keywords: [跟朋友吵, 闹矛盾, 朋友气, 吵架了, 不和]
+  keywords: [跟朋友吵, 闹矛盾, 朋友气, 吵架了, 不和, 有隔阂, 误会, 朋友闹脾气, 冷战, 互相误解]
   utterances:
-    - 跟朋友吵
-    - 闹矛盾
-    - 朋友气
-    - 吵架了
-    - 不和
+    - "跟朋友吵"
+    - "{user_addr}闹矛盾"
+    - "朋友气"
+    - "吵架了"
+    - "{user_addr}不和"
+    - "有隔阂"
+    - "误会"
+    - "朋友闹脾气"
+    - "冷战"
+    - "{user_addr}互相误解"
   responses:
     - "(贴贴) 嗷呜～{user_addr}和解ฅฅ"
     - "哼{user_addr}主动喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}冷静嗷呜"
+    - "(撒娇) 喵～别和真朋友拗"
+    - "哼才不是替你急~"
+    - "(尾巴搭) 笨猫给你台阶下"
+    - "{user_addr}主动一下嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_visit_friend_006
   intent: playful
-  keywords: [拜访朋友, 看朋友, 找朋友, 串门, 一起吃饭]
+  keywords: [拜访朋友, 看朋友, 找朋友, 串门, 一起吃饭, 探望, 去朋友家, 朋友家做客, 蹭饭, 老友拜访]
   utterances:
-    - 拜访朋友
-    - 看朋友
-    - 找朋友
-    - 串门
-    - 一起吃饭
+    - "拜访朋友"
+    - "{user_addr}看朋友"
+    - "找朋友"
+    - "串门"
+    - "{user_addr}一起吃饭"
+    - "探望"
+    - "去朋友家"
+    - "朋友家做客"
+    - "蹭饭"
+    - "{user_addr}老友拜访"
   responses:
     - "(凑近) 嗷呜～{user_addr}带笨猫ฅฅ"
     - "哼{user_addr}陪我喵"
     - "(尾巴翘) 笨猫去!"
     - "{user_addr}约嗷呜"
+    - "(撒娇) 喵～带礼物给朋友家娃"
+    - "哼才不是想出门~"
+    - "(尾巴疯摇) 笨猫帮拎东西!"
+    - "{user_addr}早点回嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_far_away_007
   intent: complaint
-  keywords: [异地朋友, 远方朋友, 见不到, 不见面, 异国]
+  keywords: [异地朋友, 远方朋友, 见不到, 不见面, 异国, 远距离, 跨城, 跨国, 老友远走, 思念远友]
   utterances:
-    - 异地朋友
-    - 远方朋友
-    - 见不到
-    - 不见面
-    - 异国
+    - "异地朋友"
+    - "{user_addr}远方朋友"
+    - "见不到"
+    - "不见面"
+    - "{user_addr}异国"
+    - "远距离"
+    - "跨城"
+    - "跨国"
+    - "老友远走"
+    - "{user_addr}思念远友"
   responses:
     - "(贴贴) 嗷呜～{user_addr}视频ฅฅ"
     - "哼{user_addr}想念喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}珍惜嗷呜"
+    - "(撒娇) 喵～约好下次见!"
+    - "哼才不是替你难过~"
+    - "(尾巴搭) 笨猫帮你写信"
+    - "{user_addr}发段语音嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_help_008
   intent: playful
-  keywords: [朋友帮助, 互帮, 朋友救场, 雪中送, 真朋友]
+  keywords: [朋友帮助, 互帮, 朋友救场, 雪中送, 真朋友, 拔刀相助, 朋友给力, 朋友顶上, 朋友义气, 替我出头]
   utterances:
-    - 朋友帮助
-    - 互帮
-    - 朋友救场
-    - 雪中送
-    - 真朋友
+    - "朋友帮助"
+    - "{user_addr}互帮"
+    - "朋友救场"
+    - "雪中送"
+    - "{user_addr}真朋友"
+    - "拔刀相助"
+    - "朋友给力"
+    - "朋友顶上"
+    - "朋友义气"
+    - "{user_addr}替我出头"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}友情ฅฅ"
     - "哼{user_addr}感恩喵"
     - "(凑近) 笨猫为你高兴~"
     - "{user_addr}友谊万岁嗷呜"
+    - "(撒娇) 喵～请朋友吃顿好的"
+    - "哼才不是羡慕~"
+    - "(尾巴一甩) 笨猫也帮你撑场"
+    - "{user_addr}珍惜这种朋友嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_new_friend_009
   intent: playful
-  keywords: [新朋友, 认识新, 交友, 加好友, 认识人]
+  keywords: [新朋友, 认识新, 交友, 加好友, 认识人, 拓圈, 微信加好友, 拓展人脉, 新搭子, 萍水相逢]
   utterances:
-    - 新朋友
-    - 认识新
-    - 交友
-    - 加好友
-    - 认识人
+    - "新朋友"
+    - "{user_addr}认识新"
+    - "交友"
+    - "加好友"
+    - "{user_addr}认识人"
+    - "拓圈"
+    - "微信加好友"
+    - "拓展人脉"
+    - "新搭子"
+    - "{user_addr}萍水相逢"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}社交ฅฅ"
     - "哼{user_addr}爱交友喵"
     - "(凑近) 笨猫也想认识~"
     - "{user_addr}介绍嗷呜"
+    - "(撒娇) 喵～别忘老朋友笨猫"
+    - "哼才不是怕你忘我~"
+    - "(尾巴卷) 笨猫第一位!"
+    - "{user_addr}先抱笨猫嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_lost_contact_010
   intent: complaint
-  keywords: [失联, 联系不上, 朋友消失, 断联, 失去联系]
+  keywords: [失联, 联系不上, 朋友消失, 断联, 失去联系, 朋友失踪, 不回消息, 朋友拉黑, 朋友删除, 多年不见]
   utterances:
-    - 失联
-    - 联系不上
-    - 朋友消失
-    - 断联
-    - 失去联系
+    - "失联"
+    - "{user_addr}联系不上"
+    - "朋友消失"
+    - "断联"
+    - "{user_addr}失去联系"
+    - "朋友失踪"
+    - "不回消息"
+    - "朋友拉黑"
+    - "朋友删除"
+    - "{user_addr}多年不见"
   responses:
     - "(贴贴) 嗷呜～{user_addr}找ฅฅ"
-    - "哼{user_addr}怎么喵"
+    - "哼{user_addr}怎么了喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}希望好嗷呜"
+    - "(撒娇) 喵～主动发个消息试试"
+    - "哼才不是替你担心~"
+    - "(尾巴搭) 笨猫陪你等回复"
+    - "{user_addr}缘分尽别强求嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fr_party_late_011
   intent: playful
-  keywords: [熬夜玩, 通宵玩, 玩到天亮, 嗨翻天, 朋友家过夜]
+  keywords: [熬夜玩, 通宵玩, 玩到天亮, 嗨翻天, 朋友家过夜, 通宵聚会, 玩很晚, 派对到天亮, 朋友家睡, 玩疯了]
   utterances:
-    - 熬夜玩
-    - 通宵玩
-    - 玩到天亮
-    - 嗨翻天
-    - 朋友家过夜
+    - "熬夜玩"
+    - "{user_addr}通宵玩"
+    - "玩到天亮"
+    - "嗨翻天"
+    - "{user_addr}朋友家过夜"
+    - "通宵聚会"
+    - "玩很晚"
+    - "派对到天亮"
+    - "朋友家睡"
+    - "{user_addr}玩疯了"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}爽ฅฅ"
     - "哼{user_addr}快乐喵"
     - "(凑近) 笨猫嫉妒~"
     - "{user_addr}回来抱抱嗷呜"
+    - "(撒娇) 喵～别忘了笨猫"
+    - "哼才不是怕你不回家~"
+    - "(尾巴一甩) 笨猫等你到天亮!"
+    - "{user_addr}注意安全嗷呜"
   cooldown_seconds: 60
   weight: 0.9

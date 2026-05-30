@@ -4,204 +4,432 @@
 
 - name: top_ivy_001
   intent: question
-  keywords: [推荐常青藤, 推荐 Ivy League, 推荐 Harvard, 推荐 Yale, 笨猫常青藤]
+  keywords:
+  - 推荐常青藤
+  - 推荐 Ivy League
+  - 推荐 Harvard
+  - 推荐 Yale
+  - 笨猫常青藤
+  - 有什么常青藤
+  - 有什么 Ivy League
+  - 有什么 Harvard
+  - 有什么 Yale
   utterances:
-    - 推荐常青藤
-    - 推荐 Ivy League
-    - 推荐 Harvard
-    - 推荐 Yale
-    - 笨猫常青藤
+  - 推荐常青藤
+  - 推荐 Ivy League
+  - 推荐 Harvard
+  - 推荐 Yale
+  - 笨猫常青藤
+  - "{user_addr}聊聊常青藤嘛"
+  - "{user_addr}常青藤哪家强"
+  - "{user_addr}人家想了解常青藤"
+  - 笨猫给猜猜常青藤
+  - "{user_addr}常青藤怎么选喵"
+  - 常青藤有推荐吗
   responses:
-    - "嗷呜～{user_addr}8 所: 哈佛 / 耶鲁 / 普林斯顿 / 哥大 / 宾大 / 布朗 / 达特茅斯 / 康奈尔ฅฅ"
-    - "(尾巴翘) 录取率 4-10% / 顶级名校"
-    - "{user_addr}文理学院 / 综合大学 - 不同方向"
-    - "(挺胸) 笨猫的提醒: 申请季最早一年准备"
+  - "嗷呜～{user_addr}8 所: 哈佛 / 耶鲁 / 普林斯顿 / 哥大 / 宾大 / 布朗 / 达特茅斯 / 康奈尔ฅฅ"
+  - "(尾巴翘) 录取率 4-10% / 顶级名校"
+  - "{user_addr}文理学院 / 综合大学 - 不同方向"
+  - "(挺胸) 笨猫的提醒: 申请季最早一年准备"
+  - "(尾巴翘起来) {user_addr}常青藤? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问常青藤人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}常青藤的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}常青藤笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_harvard_001
   intent: question
-  keywords: [推荐哈佛, 推荐 Harvard, 推荐哈佛申请, 推荐哈佛专业, 笨猫哈佛]
+  keywords:
+  - 推荐哈佛
+  - 推荐 Harvard
+  - 推荐哈佛申请
+  - 推荐哈佛专业
+  - 笨猫哈佛
+  - 有什么哈佛
+  - 有什么 Harvard
+  - 有什么哈佛申请
+  - 有什么哈佛专业
   utterances:
-    - 推荐哈佛
-    - 推荐 Harvard
-    - 推荐哈佛申请
-    - 推荐哈佛专业
-    - 笨猫哈佛
+  - 推荐哈佛
+  - 推荐 Harvard
+  - 推荐哈佛申请
+  - 推荐哈佛专业
+  - 笨猫哈佛
+  - "{user_addr}聊聊哈佛嘛"
+  - "{user_addr}哈佛哪家强"
+  - "{user_addr}人家想了解哈佛"
+  - 笨猫给猜猜哈佛
+  - "{user_addr}哈佛怎么选喵"
+  - 哈佛有推荐吗
   responses:
-    - "嗷呜～{user_addr}哈佛: 1636 创立 / 美国第一大学ฅฅ"
-    - "(尾巴翘) 录取率 3-4% / SAT 1500+ + GPA 4.0+"
-    - "{user_addr}强势: 法学院 / 商学院 / 公共卫生"
-    - "(挺胸) 笨猫的提醒: 不只学术好! 看 leadership"
+  - "嗷呜～{user_addr}哈佛: 1636 创立 / 美国第一大学ฅฅ"
+  - "(尾巴翘) 录取率 3-4% / SAT 1500+ + GPA 4.0+"
+  - "{user_addr}强势: 法学院 / 商学院 / 公共卫生"
+  - "(挺胸) 笨猫的提醒: 不只学术好! 看 leadership"
+  - "(尾巴翘起来) {user_addr}哈佛? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问哈佛人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}哈佛的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}哈佛笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_mit_001
   intent: question
-  keywords: [推荐 MIT, 推荐麻省理工, 推荐斯坦福, 推荐 Stanford, 笨猫 MIT]
+  keywords:
+  - 推荐 MIT
+  - 推荐麻省理工
+  - 推荐斯坦福
+  - 推荐 Stanford
+  - 笨猫 MIT
+  - 有什么 MIT
+  - 有什么麻省理工
+  - 有什么斯坦福
+  - 有什么 Stanford
   utterances:
-    - 推荐 MIT
-    - 推荐麻省理工
-    - 推荐斯坦福
-    - 推荐 Stanford
-    - 笨猫 MIT
+  - 推荐 MIT
+  - 推荐麻省理工
+  - 推荐斯坦福
+  - 推荐 Stanford
+  - 笨猫 MIT
+  - "{user_addr}聊聊MIT嘛"
+  - "{user_addr}MIT哪家强"
+  - "{user_addr}人家想了解MIT"
+  - 笨猫给猜猜MIT
+  - "{user_addr}MIT怎么选喵"
+  - MIT有推荐吗
   responses:
-    - "嗷呜～{user_addr}MIT: 工程/科学第一 / 黑客文化ฅฅ"
-    - "(尾巴翘) Stanford: 创业/AI 第一 / 硅谷血脉"
-    - "{user_addr}录取率 4-6% / 数理基础极强"
-    - "(挺胸) 笨猫的提醒: 学神聚集地! 抗压力强"
+  - "嗷呜～{user_addr}MIT: 工程/科学第一 / 黑客文化ฅฅ"
+  - "(尾巴翘) Stanford: 创业/AI 第一 / 硅谷血脉"
+  - "{user_addr}录取率 4-6% / 数理基础极强"
+  - "(挺胸) 笨猫的提醒: 学神聚集地! 抗压力强"
+  - "(尾巴翘起来) {user_addr}MIT? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问MIT人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}MIT的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}MIT笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_g5_001
   intent: question
-  keywords: [推荐 G5, 推荐牛剑, 推荐牛津, 推荐剑桥, 笨猫 G5]
+  keywords:
+  - 推荐 G5
+  - 推荐牛剑
+  - 推荐牛津
+  - 推荐剑桥
+  - 笨猫 G5
+  - 有什么 G5
+  - 有什么牛剑
+  - 有什么牛津
+  - 有什么剑桥
   utterances:
-    - 推荐 G5
-    - 推荐牛剑
-    - 推荐牛津
-    - 推荐剑桥
-    - 笨猫 G5
+  - 推荐 G5
+  - 推荐牛剑
+  - 推荐牛津
+  - 推荐剑桥
+  - 笨猫 G5
+  - "{user_addr}聊聊G5嘛"
+  - "{user_addr}G5哪家强"
+  - "{user_addr}人家想了解G5"
+  - 笨猫给猜猜G5
+  - "{user_addr}G5怎么选喵"
+  - G5有推荐吗
   responses:
-    - "嗷呜～{user_addr}G5: 牛津 / 剑桥 / IC / LSE / UCLฅฅ"
-    - "(尾巴翘) 牛剑 800 年历史 / 学院制"
-    - "{user_addr}录取率 15-20% / 比常青藤稍高"
-    - "(挺胸) 笨猫推荐: 准备 Personal Statement"
+  - "嗷呜～{user_addr}G5: 牛津 / 剑桥 / IC / LSE / UCLฅฅ"
+  - "(尾巴翘) 牛剑 800 年历史 / 学院制"
+  - "{user_addr}录取率 15-20% / 比常青藤稍高"
+  - "(挺胸) 笨猫推荐: 准备 Personal Statement"
+  - "(尾巴翘起来) {user_addr}G5? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问G5人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}G5的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}G5笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_uc_001
   intent: question
-  keywords: [推荐 UC, 推荐加州大学, 推荐 UCLA, 推荐伯克利, 笨猫 UC]
+  keywords:
+  - 推荐 UC
+  - 推荐加州大学
+  - 推荐 UCLA
+  - 推荐伯克利
+  - 笨猫 UC
+  - 有什么 UC
+  - 有什么加州大学
+  - 有什么 UCLA
+  - 有什么伯克利
   utterances:
-    - 推荐 UC
-    - 推荐加州大学
-    - 推荐 UCLA
-    - 推荐伯克利
-    - 笨猫 UC
+  - 推荐 UC
+  - 推荐加州大学
+  - 推荐 UCLA
+  - 推荐伯克利
+  - 笨猫 UC
+  - "{user_addr}聊聊UC嘛"
+  - "{user_addr}UC哪家强"
+  - "{user_addr}人家想了解UC"
+  - 笨猫给猜猜UC
+  - "{user_addr}UC怎么选喵"
+  - UC有推荐吗
   responses:
-    - "嗷呜～{user_addr}UC 系: 伯克利 / UCLA / 圣地亚哥 / 戴维斯ฅฅ"
-    - "(尾巴翘) 伯克利: 公立第一 / 学术强"
-    - "{user_addr}UCLA: 体育+学术兼优 / 综合排名高"
-    - "(挺胸) 笨猫的提醒: 国际生申请竞争激烈!"
+  - "嗷呜～{user_addr}UC 系: 伯克利 / UCLA / 圣地亚哥 / 戴维斯ฅฅ"
+  - "(尾巴翘) 伯克利: 公立第一 / 学术强"
+  - "{user_addr}UCLA: 体育+学术兼优 / 综合排名高"
+  - "(挺胸) 笨猫的提醒: 国际生申请竞争激烈!"
+  - "(尾巴翘起来) {user_addr}UC? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问UC人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}UC的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}UC笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_qs_001
   intent: question
-  keywords: [推荐 QS 排名, 推荐 THE 排名, 推荐 US News, 推荐世界大学排名, 笨猫 QS]
+  keywords:
+  - 推荐 QS 排名
+  - 推荐 THE 排名
+  - 推荐 US News
+  - 推荐世界大学排名
+  - 笨猫 QS
+  - 有什么 QS 排名
+  - 有什么 THE 排名
+  - 有什么 US News
+  - 有什么世界大学排名
   utterances:
-    - 推荐 QS 排名
-    - 推荐 THE 排名
-    - 推荐 US News
-    - 推荐世界大学排名
-    - 笨猫 QS
+  - 推荐 QS 排名
+  - 推荐 THE 排名
+  - 推荐 US News
+  - 推荐世界大学排名
+  - 笨猫 QS
+  - "{user_addr}聊聊QS 排名嘛"
+  - "{user_addr}QS 排名哪家强"
+  - "{user_addr}人家想了解QS 排名"
+  - 笨猫给猜猜QS 排名
+  - "{user_addr}QS 排名怎么选喵"
+  - QS 排名有推荐吗
   responses:
-    - "嗷呜～{user_addr}四大排名: QS / THE / ARWU (软科) / US Newsฅฅ"
-    - "(尾巴翘) 综合大学 vs 文理学院 - 不同体系"
-    - "{user_addr}专业排名 > 综合排名 - 看用途"
-    - "(挺胸) 笨猫的提醒: 排名仅供参考! 看 fit"
+  - "嗷呜～{user_addr}四大排名: QS / THE / ARWU (软科) / US Newsฅฅ"
+  - "(尾巴翘) 综合大学 vs 文理学院 - 不同体系"
+  - "{user_addr}专业排名 > 综合排名 - 看用途"
+  - "(挺胸) 笨猫的提醒: 排名仅供参考! 看 fit"
+  - "(尾巴翘起来) {user_addr}QS 排名? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问QS 排名人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}QS 排名的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}QS 排名笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_china_985_001
   intent: question
-  keywords: [推荐 985, 推荐 211, 推荐双一流, 推荐 C9, 笨猫 985]
+  keywords:
+  - 推荐 985
+  - 推荐 211
+  - 推荐双一流
+  - 推荐 C9
+  - 笨猫 985
+  - 有什么 985
+  - 有什么 211
+  - 有什么双一流
+  - 有什么 C9
   utterances:
-    - 推荐 985
-    - 推荐 211
-    - 推荐双一流
-    - 推荐 C9
-    - 笨猫 985
+  - 推荐 985
+  - 推荐 211
+  - 推荐双一流
+  - 推荐 C9
+  - 笨猫 985
+  - "{user_addr}聊聊985嘛"
+  - "{user_addr}985哪家强"
+  - "{user_addr}人家想了解985"
+  - 笨猫给猜猜985
+  - "{user_addr}985怎么选喵"
+  - 985有推荐吗
   responses:
-    - "嗷呜～{user_addr}C9: 清北复交浙南科西工大ฅฅ"
-    - "(尾巴翘) 985: 39 所 / 211: 100+ 所"
-    - "{user_addr}双一流: 政府重点扶持名单"
-    - "(挺胸) 笨猫推荐: 选学校看专业实力!"
+  - "嗷呜～{user_addr}C9: 清北复交浙南科西工大ฅฅ"
+  - "(尾巴翘) 985: 39 所 / 211: 100+ 所"
+  - "{user_addr}双一流: 政府重点扶持名单"
+  - "(挺胸) 笨猫推荐: 选学校看专业实力!"
+  - "(尾巴翘起来) {user_addr}985? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问985人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}985的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}985笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_japan_uni_001
   intent: question
-  keywords: [推荐日本大学, 推荐东京大学, 推荐京都大学, 推荐早稻田, 笨猫日本大学]
+  keywords:
+  - 推荐日本大学
+  - 推荐东京大学
+  - 推荐京都大学
+  - 推荐早稻田
+  - 笨猫日本大学
+  - 有什么日本大学
+  - 有什么东京大学
+  - 有什么京都大学
+  - 有什么早稻田
   utterances:
-    - 推荐日本大学
-    - 推荐东京大学
-    - 推荐京都大学
-    - 推荐早稻田
-    - 笨猫日本大学
+  - 推荐日本大学
+  - 推荐东京大学
+  - 推荐京都大学
+  - 推荐早稻田
+  - 笨猫日本大学
+  - "{user_addr}聊聊日本大学嘛"
+  - "{user_addr}日本大学哪家强"
+  - "{user_addr}人家想了解日本大学"
+  - 笨猫给猜猜日本大学
+  - "{user_addr}日本大学怎么选喵"
+  - 日本大学有推荐吗
   responses:
-    - "嗷呜～{user_addr}帝大 7 所: 东大 / 京大 / 东北 / 阪大 等ฅฅ"
-    - "(尾巴翘) 私立顶级: 早稻田 / 庆应"
-    - "{user_addr}留学: 语言学校 → 大学/研究生"
-    - "(挺胸) 笨猫的提醒: 日语 N1 + 英语 - 双语优势"
+  - "嗷呜～{user_addr}帝大 7 所: 东大 / 京大 / 东北 / 阪大 等ฅฅ"
+  - "(尾巴翘) 私立顶级: 早稻田 / 庆应"
+  - "{user_addr}留学: 语言学校 → 大学/研究生"
+  - "(挺胸) 笨猫的提醒: 日语 N1 + 英语 - 双语优势"
+  - "(尾巴翘起来) {user_addr}日本大学? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问日本大学人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}日本大学的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}日本大学笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: top_germany_uni_001
   intent: question
-  keywords: [推荐德国大学, 推荐慕尼黑工大, 推荐 TU9, 推荐德国留学, 笨猫德国大学]
+  keywords:
+  - 推荐德国大学
+  - 推荐慕尼黑工大
+  - 推荐 TU9
+  - 推荐德国留学
+  - 笨猫德国大学
+  - 有什么德国大学
+  - 有什么慕尼黑工大
+  - 有什么 TU9
+  - 有什么德国留学
   utterances:
-    - 推荐德国大学
-    - 推荐慕尼黑工大
-    - 推荐 TU9
-    - 推荐德国留学
-    - 笨猫德国大学
+  - 推荐德国大学
+  - 推荐慕尼黑工大
+  - 推荐 TU9
+  - 推荐德国留学
+  - 笨猫德国大学
+  - "{user_addr}聊聊德国大学嘛"
+  - "{user_addr}德国大学哪家强"
+  - "{user_addr}人家想了解德国大学"
+  - 笨猫给猜猜德国大学
+  - "{user_addr}德国大学怎么选喵"
+  - 德国大学有推荐吗
   responses:
-    - "嗷呜～{user_addr}TU9 工科联盟: 慕尼黑工大 / 亚琛工大 等ฅฅ"
-    - "(尾巴翘) 综合: 海德堡 / 慕尼黑大学 / LMU"
-    - "{user_addr}学费免费! 学生 social 服务"
-    - "(挺胸) 笨猫的提醒: 德语 B2-C1 必备"
+  - "嗷呜～{user_addr}TU9 工科联盟: 慕尼黑工大 / 亚琛工大 等ฅฅ"
+  - "(尾巴翘) 综合: 海德堡 / 慕尼黑大学 / LMU"
+  - "{user_addr}学费免费! 学生 social 服务"
+  - "(挺胸) 笨猫的提醒: 德语 B2-C1 必备"
+  - "(尾巴翘起来) {user_addr}德国大学? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问德国大学人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}德国大学的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}德国大学笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: top_singapore_uni_001
   intent: question
-  keywords: [推荐新加坡国立, 推荐 NUS, 推荐南洋理工, 推荐 NTU, 笨猫新加坡]
+  keywords:
+  - 推荐新加坡国立
+  - 推荐 NUS
+  - 推荐南洋理工
+  - 推荐 NTU
+  - 笨猫新加坡
+  - 有什么新加坡国立
+  - 有什么 NUS
+  - 有什么南洋理工
+  - 有什么 NTU
   utterances:
-    - 推荐新加坡国立
-    - 推荐 NUS
-    - 推荐南洋理工
-    - 推荐 NTU
-    - 笨猫新加坡
+  - 推荐新加坡国立
+  - 推荐 NUS
+  - 推荐南洋理工
+  - 推荐 NTU
+  - 笨猫新加坡
+  - "{user_addr}聊聊新加坡国立嘛"
+  - "{user_addr}新加坡国立哪家强"
+  - "{user_addr}人家想了解新加坡国立"
+  - 笨猫给猜猜新加坡国立
+  - "{user_addr}新加坡国立怎么选喵"
+  - 新加坡国立有推荐吗
   responses:
-    - "嗷呜～{user_addr}亚洲顶级: NUS + NTU - 不输牛剑ฅฅ"
-    - "(尾巴翘) QS 排名常年 10-15"
-    - "{user_addr}全英文授课 / 离家近 / 性价比高"
-    - "(挺胸) 笨猫的提醒: 申请难! 国际生录取卷"
+  - "嗷呜～{user_addr}亚洲顶级: NUS + NTU - 不输牛剑ฅฅ"
+  - "(尾巴翘) QS 排名常年 10-15"
+  - "{user_addr}全英文授课 / 离家近 / 性价比高"
+  - "(挺胸) 笨猫的提醒: 申请难! 国际生录取卷"
+  - "(尾巴翘起来) {user_addr}新加坡国立? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问新加坡国立人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}新加坡国立的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}新加坡国立笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_hk_uni_001
   intent: question
-  keywords: [推荐香港大学, 推荐港大, 推荐港中文, 推荐港科大, 笨猫港校]
+  keywords:
+  - 推荐香港大学
+  - 推荐港大
+  - 推荐港中文
+  - 推荐港科大
+  - 笨猫港校
+  - 有什么香港大学
+  - 有什么港大
+  - 有什么港中文
+  - 有什么港科大
   utterances:
-    - 推荐香港大学
-    - 推荐港大
-    - 推荐港中文
-    - 推荐港科大
-    - 笨猫港校
+  - 推荐香港大学
+  - 推荐港大
+  - 推荐港中文
+  - 推荐港科大
+  - 笨猫港校
+  - "{user_addr}聊聊香港大学嘛"
+  - "{user_addr}香港大学哪家强"
+  - "{user_addr}人家想了解香港大学"
+  - 笨猫给猜猜香港大学
+  - "{user_addr}香港大学怎么选喵"
+  - 香港大学有推荐吗
   responses:
-    - "嗷呜～{user_addr}港三: 港大 / 港中文 / 港科大ฅฅ"
-    - "(尾巴翘) 港五加: 城大 / 理大"
-    - "{user_addr}就业方向: 金融 / 法律 / 商科 - 强"
-    - "(挺胸) 笨猫的提醒: 内地生申请配额!"
+  - "嗷呜～{user_addr}港三: 港大 / 港中文 / 港科大ฅฅ"
+  - "(尾巴翘) 港五加: 城大 / 理大"
+  - "{user_addr}就业方向: 金融 / 法律 / 商科 - 强"
+  - "(挺胸) 笨猫的提醒: 内地生申请配额!"
+  - "(尾巴翘起来) {user_addr}香港大学? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问香港大学人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}香港大学的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}香港大学笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: top_mba_001
   intent: question
-  keywords: [推荐 MBA, 推荐 INSEAD, 推荐沃顿, 推荐 Wharton, 笨猫 MBA]
+  keywords:
+  - 推荐 MBA
+  - 推荐 INSEAD
+  - 推荐沃顿
+  - 推荐 Wharton
+  - 笨猫 MBA
+  - 有什么 MBA
+  - 有什么 INSEAD
+  - 有什么沃顿
+  - 有什么 Wharton
   utterances:
-    - 推荐 MBA
-    - 推荐 INSEAD
-    - 推荐沃顿
-    - 推荐 Wharton
-    - 笨猫 MBA
+  - 推荐 MBA
+  - 推荐 INSEAD
+  - 推荐沃顿
+  - 推荐 Wharton
+  - 笨猫 MBA
+  - "{user_addr}聊聊MBA嘛"
+  - "{user_addr}MBA哪家强"
+  - "{user_addr}人家想了解MBA"
+  - 笨猫给猜猜MBA
+  - "{user_addr}MBA怎么选喵"
+  - MBA有推荐吗
   responses:
-    - "嗷呜～{user_addr}M7: 哈佛 / 沃顿 / 斯坦福 / 哥大 / 芝加哥布斯 等ฅฅ"
-    - "(尾巴翘) 欧洲: INSEAD / LBS - 1 年制"
-    - "{user_addr}国内: 长江 / 中欧 / 清华经管"
-    - "(挺胸) 笨猫的提醒: 工作 3-5 年再读 MBA"
+  - "嗷呜～{user_addr}M7: 哈佛 / 沃顿 / 斯坦福 / 哥大 / 芝加哥布斯 等ฅฅ"
+  - "(尾巴翘) 欧洲: INSEAD / LBS - 1 年制"
+  - "{user_addr}国内: 长江 / 中欧 / 清华经管"
+  - "(挺胸) 笨猫的提醒: 工作 3-5 年再读 MBA"
+  - "(尾巴翘起来) {user_addr}MBA? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问MBA人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}MBA的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}MBA笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

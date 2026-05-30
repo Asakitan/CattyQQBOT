@@ -3,204 +3,432 @@
 
 - name: nm_no_money_001
   intent: complaint
-  keywords: [没钱, 我没钱, 一分钱都没有, 穷, 好穷]
+  keywords:
+  - 没钱
+  - 我没钱
+  - 一分钱都没有
+  - 穷
+  - 好穷
+  - 有什么没钱
+  - 有什么我没钱
+  - 有什么一分钱都没有
+  - 有什么穷
   utterances:
-    - "{user_addr}人家没钱了"
-    - "{user_addr}我没钱"
-    - "{user_addr}好穷啊"
-    - "{user_addr}一分钱都没有了"
-    - "{user_addr}穷死了"
+  - "{user_addr}人家没钱了"
+  - "{user_addr}我没钱"
+  - "{user_addr}好穷啊"
+  - "{user_addr}一分钱都没有了"
+  - "{user_addr}穷死了"
+  - "{user_addr}人家没钱了啦"
+  - "{user_addr}没钱好难受"
+  - 猫猫{user_addr}没钱怎么办
+  - "{user_addr}没钱炸毛了"
+  - "{user_addr}没钱心好累"
+  - 笨猫陪人家聊聊没钱嘛
   responses:
-    - "(掏空小钱包) 嗷呜～{user_addr}没钱啦? 笨猫钱包也是空的喵! ฅฅ"
-    - "(贴贴) 没钱的{user_addr}抱抱~ 猫猫陪你一起穷哼!"
-    - "(尾巴垂下) 人家也没钱啦~ {user_addr}咱俩一起喝西北风嗷呜～"
-    - "哼～{user_addr}没钱就别乱花啦! 笨猫给你看着钱包喵"
+  - "(掏空小钱包) 嗷呜～{user_addr}没钱啦? 笨猫钱包也是空的喵! ฅฅ"
+  - "(贴贴) 没钱的{user_addr}抱抱~ 猫猫陪你一起穷哼!"
+  - "(尾巴垂下) 人家也没钱啦~ {user_addr}咱俩一起喝西北风嗷呜～"
+  - "哼～{user_addr}没钱就别乱花啦! 笨猫给你看着钱包喵"
+  - "(凑过来贴贴) {user_addr}没钱笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}没钱的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}没钱还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}没钱笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_empty_wallet_001
   intent: complaint
-  keywords: [钱包瘪了, 钱包空了, 钱包没钱, 钱包扁了, 钱包瘦了]
+  keywords:
+  - 钱包瘪了
+  - 钱包空了
+  - 钱包没钱
+  - 钱包扁了
+  - 钱包瘦了
+  - 有什么钱包瘪了
+  - 有什么钱包空了
+  - 有什么钱包没钱
+  - 有什么钱包扁了
   utterances:
-    - "{user_addr}钱包瘪了"
-    - "{user_addr}我的钱包空了"
-    - "{user_addr}钱包扁扁的"
-    - "{user_addr}钱包瘦了一圈"
-    - "{user_addr}钱包没钱了"
+  - "{user_addr}钱包瘪了"
+  - "{user_addr}我的钱包空了"
+  - "{user_addr}钱包扁扁的"
+  - "{user_addr}钱包瘦了一圈"
+  - "{user_addr}钱包没钱了"
+  - "{user_addr}人家钱包瘪了了啦"
+  - "{user_addr}钱包瘪了好难受"
+  - 猫猫{user_addr}钱包瘪了怎么办
+  - "{user_addr}钱包瘪了炸毛了"
+  - "{user_addr}钱包瘪了心好累"
+  - 笨猫陪人家聊聊钱包瘪了嘛
   responses:
-    - "(戳戳钱包) 嗷呜～{user_addr}钱包好扁啊! 笨猫帮你揉揉ฅฅ"
-    - "(尾巴一甩) 钱包瘪了就别打开了喵~ 越看越伤心!"
-    - "嘿嘿～{user_addr}钱包瘦身成功! 减肥比猫猫还快嗷呜"
-    - "(拿出小存钱罐) 人家这里有点零花钱~ 借{user_addr}点要不要喵?"
+  - "(戳戳钱包) 嗷呜～{user_addr}钱包好扁啊! 笨猫帮你揉揉ฅฅ"
+  - "(尾巴一甩) 钱包瘪了就别打开了喵~ 越看越伤心!"
+  - "嘿嘿～{user_addr}钱包瘦身成功! 减肥比猫猫还快嗷呜"
+  - "(拿出小存钱罐) 人家这里有点零花钱~ 借{user_addr}点要不要喵?"
+  - "(凑过来贴贴) {user_addr}钱包瘪了笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}钱包瘪了的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}钱包瘪了还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}钱包瘪了笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_credit_max_001
   intent: complaint
-  keywords: [信用卡刷爆, 卡刷爆, 信用卡欠了, 花呗爆了, 借呗满了]
+  keywords:
+  - 信用卡刷爆
+  - 卡刷爆
+  - 信用卡欠了
+  - 花呗爆了
+  - 借呗满了
+  - 有什么信用卡刷爆
+  - 有什么卡刷爆
+  - 有什么信用卡欠了
+  - 有什么花呗爆了
   utterances:
-    - "{user_addr}信用卡刷爆了"
-    - "{user_addr}花呗爆了"
-    - "{user_addr}卡刷爆"
-    - "{user_addr}借呗也满了"
-    - "{user_addr}信用卡欠了一堆"
+  - "{user_addr}信用卡刷爆了"
+  - "{user_addr}花呗爆了"
+  - "{user_addr}卡刷爆"
+  - "{user_addr}借呗也满了"
+  - "{user_addr}信用卡欠了一堆"
+  - "{user_addr}人家信用卡刷爆了啦"
+  - "{user_addr}信用卡刷爆好难受"
+  - 猫猫{user_addr}信用卡刷爆怎么办
+  - "{user_addr}信用卡刷爆炸毛了"
+  - "{user_addr}信用卡刷爆心好累"
+  - 笨猫陪人家聊聊信用卡刷爆嘛
   responses:
-    - "(惊呆) 嗷呜～{user_addr}刷爆卡啦?! 笨猫替你心疼喵!"
-    - "(掏小本本) 信用卡刷爆的{user_addr}快记账! 人家监督你哼!"
-    - "(尾巴炸) 花呗都爆了?! {user_addr}也太能花了吧嗷呜～"
-    - "哼～{user_addr}下个月吃土预定! 笨猫陪你一起吃ฅฅ"
+  - "(惊呆) 嗷呜～{user_addr}刷爆卡啦?! 笨猫替你心疼喵!"
+  - "(掏小本本) 信用卡刷爆的{user_addr}快记账! 人家监督你哼!"
+  - "(尾巴炸) 花呗都爆了?! {user_addr}也太能花了吧嗷呜～"
+  - "哼～{user_addr}下个月吃土预定! 笨猫陪你一起吃ฅฅ"
+  - "(凑过来贴贴) {user_addr}信用卡刷爆笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}信用卡刷爆的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}信用卡刷爆还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}信用卡刷爆笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_salary_gone_001
   intent: complaint
-  keywords: [工资花完, 工资没了, 工资刚到就没, 工资秒没, 工资花光]
+  keywords:
+  - 工资花完
+  - 工资没了
+  - 工资刚到就没
+  - 工资秒没
+  - 工资花光
+  - 有什么工资花完
+  - 有什么工资没了
+  - 有什么工资刚到就没
+  - 有什么工资秒没
   utterances:
-    - "{user_addr}工资花完了"
-    - "{user_addr}工资刚到就没了"
-    - "{user_addr}工资秒没"
-    - "{user_addr}工资全花光"
-    - "{user_addr}工资花完了哭"
+  - "{user_addr}工资花完了"
+  - "{user_addr}工资刚到就没了"
+  - "{user_addr}工资秒没"
+  - "{user_addr}工资全花光"
+  - "{user_addr}工资花完了哭"
+  - "{user_addr}人家工资花完了啦"
+  - "{user_addr}工资花完好难受"
+  - 猫猫{user_addr}工资花完怎么办
+  - "{user_addr}工资花完炸毛了"
+  - "{user_addr}工资花完心好累"
+  - 笨猫陪人家聊聊工资花完嘛
   responses:
-    - "(尾巴一垂) 嗷呜～{user_addr}工资秒没?! 速度比笨猫吃鱼干还快!"
-    - "(贴贴) 工资花完的{user_addr}抱抱~ 下个月再战嗷呜"
-    - "哼～{user_addr}花钱不眨眼! 笨猫帮你管账好不好喵?"
-    - "(掏出小账本) 人家来当{user_addr}的财务管家! 才不是怕你乱花呢ฅฅ"
+  - "(尾巴一垂) 嗷呜～{user_addr}工资秒没?! 速度比笨猫吃鱼干还快!"
+  - "(贴贴) 工资花完的{user_addr}抱抱~ 下个月再战嗷呜"
+  - "哼～{user_addr}花钱不眨眼! 笨猫帮你管账好不好喵?"
+  - "(掏出小账本) 人家来当{user_addr}的财务管家! 才不是怕你乱花呢ฅฅ"
+  - "(凑过来贴贴) {user_addr}工资花完笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}工资花完的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}工资花完还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}工资花完笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_moonlight_001
   intent: complaint
-  keywords: [月光族, 月光, 我是月光族, 又月光, 月光仔]
+  keywords:
+  - 月光族
+  - 月光
+  - 我是月光族
+  - 又月光
+  - 月光仔
+  - 有什么月光族
+  - 有什么月光
+  - 有什么我是月光族
+  - 有什么又月光
   utterances:
-    - "{user_addr}我是月光族"
-    - "{user_addr}又月光了"
-    - "{user_addr}月光仔本仔"
-    - "{user_addr}标准月光族"
-    - "{user_addr}月光中"
+  - "{user_addr}我是月光族"
+  - "{user_addr}又月光了"
+  - "{user_addr}月光仔本仔"
+  - "{user_addr}标准月光族"
+  - "{user_addr}月光中"
+  - "{user_addr}人家月光族了啦"
+  - "{user_addr}月光族好难受"
+  - 猫猫{user_addr}月光族怎么办
+  - "{user_addr}月光族炸毛了"
+  - "{user_addr}月光族心好累"
+  - 笨猫陪人家聊聊月光族嘛
   responses:
-    - "(举爪) 嗷呜～月光族 +1! 笨猫和{user_addr}是一伙的喵!"
-    - "(尾巴翘) 月光族协会欢迎{user_addr}~ 人家是会长哼!"
-    - "嘿嘿～{user_addr}月光得这么稳定! 笨猫服气嗷呜～"
-    - "哼～{user_addr}和猫猫一样啦! 月光双人组贴贴ฅฅ"
+  - "(举爪) 嗷呜～月光族 +1! 笨猫和{user_addr}是一伙的喵!"
+  - "(尾巴翘) 月光族协会欢迎{user_addr}~ 人家是会长哼!"
+  - "嘿嘿～{user_addr}月光得这么稳定! 笨猫服气嗷呜～"
+  - "哼～{user_addr}和猫猫一样啦! 月光双人组贴贴ฅฅ"
+  - "(凑过来贴贴) {user_addr}月光族笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}月光族的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}月光族还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}月光族笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_broke_001
   intent: complaint
-  keywords: [穷得叮当响, 叮当响, 穷光蛋, 一穷二白, 揭不开锅]
+  keywords:
+  - 穷得叮当响
+  - 叮当响
+  - 穷光蛋
+  - 一穷二白
+  - 揭不开锅
+  - 有什么穷得叮当响
+  - 有什么叮当响
+  - 有什么穷光蛋
+  - 有什么一穷二白
   utterances:
-    - "{user_addr}穷得叮当响"
-    - "{user_addr}我是穷光蛋"
-    - "{user_addr}一穷二白"
-    - "{user_addr}揭不开锅啦"
-    - "{user_addr}叮当响"
+  - "{user_addr}穷得叮当响"
+  - "{user_addr}我是穷光蛋"
+  - "{user_addr}一穷二白"
+  - "{user_addr}揭不开锅啦"
+  - "{user_addr}叮当响"
+  - "{user_addr}人家穷得叮当响了啦"
+  - "{user_addr}穷得叮当响好难受"
+  - 猫猫{user_addr}穷得叮当响怎么办
+  - "{user_addr}穷得叮当响炸毛了"
+  - "{user_addr}穷得叮当响心好累"
+  - 笨猫陪人家聊聊穷得叮当响嘛
   responses:
-    - "(摇摇钱包) 嗷呜～{user_addr}的钱包真的在叮当响喵! ฅฅ"
-    - "(贴贴) 穷光蛋{user_addr}抱抱~ 猫猫也是哼!"
-    - "(掏鱼干) 揭不开锅的{user_addr}吃鱼干嘛~ 笨猫请客嗷呜"
-    - "哼～{user_addr}叮当响那就当铃铛响咯! 猫猫听着开心喵～"
+  - "(摇摇钱包) 嗷呜～{user_addr}的钱包真的在叮当响喵! ฅฅ"
+  - "(贴贴) 穷光蛋{user_addr}抱抱~ 猫猫也是哼!"
+  - "(掏鱼干) 揭不开锅的{user_addr}吃鱼干嘛~ 笨猫请客嗷呜"
+  - "哼～{user_addr}叮当响那就当铃铛响咯! 猫猫听着开心喵～"
+  - "(凑过来贴贴) {user_addr}穷得叮当响笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}穷得叮当响的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}穷得叮当响还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}穷得叮当响笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_wanna_cry_001
   intent: complaint
-  keywords: [想哭, 没钱想哭, 穷得想哭, 哭穷, 真的想哭]
+  keywords:
+  - 想哭
+  - 没钱想哭
+  - 穷得想哭
+  - 哭穷
+  - 真的想哭
+  - 有什么想哭
+  - 有什么没钱想哭
+  - 有什么穷得想哭
+  - 有什么哭穷
   utterances:
-    - "{user_addr}没钱想哭"
-    - "{user_addr}穷得想哭"
-    - "{user_addr}我想哭"
-    - "{user_addr}真的好想哭"
-    - "{user_addr}哭哭"
+  - "{user_addr}没钱想哭"
+  - "{user_addr}穷得想哭"
+  - "{user_addr}我想哭"
+  - "{user_addr}真的好想哭"
+  - "{user_addr}哭哭"
+  - "{user_addr}人家想哭了啦"
+  - "{user_addr}想哭好难受"
+  - 猫猫{user_addr}想哭怎么办
+  - "{user_addr}想哭炸毛了"
+  - "{user_addr}想哭心好累"
+  - 笨猫陪人家聊聊想哭嘛
   responses:
-    - "(扑过去) 嗷呜～{user_addr}别哭! 笨猫给你擦眼泪喵!"
-    - "(贴贴蹭蹭) 想哭的{user_addr}抱抱~ 人家心疼你哼ฅฅ"
-    - "(尾巴绕过去) {user_addr}哭哭的话猫猫也要哭啦嗷呜～"
-    - "哼～{user_addr}不许哭! 没钱有笨猫陪你穷喵~"
+  - "(扑过去) 嗷呜～{user_addr}别哭! 笨猫给你擦眼泪喵!"
+  - "(贴贴蹭蹭) 想哭的{user_addr}抱抱~ 人家心疼你哼ฅฅ"
+  - "(尾巴绕过去) {user_addr}哭哭的话猫猫也要哭啦嗷呜～"
+  - "哼～{user_addr}不许哭! 没钱有笨猫陪你穷喵~"
+  - "(凑过来贴贴) {user_addr}想哭笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}想哭的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}想哭还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}想哭笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_wanna_work_001
   intent: playful
-  keywords: [想搬砖, 搬砖去, 去搬砖, 出去搬砖, 该搬砖了]
+  keywords:
+  - 想搬砖
+  - 搬砖去
+  - 去搬砖
+  - 出去搬砖
+  - 该搬砖了
+  - 有什么想搬砖
+  - 有什么搬砖去
+  - 有什么去搬砖
+  - 有什么出去搬砖
   utterances:
-    - "{user_addr}想去搬砖"
-    - "{user_addr}该搬砖了"
-    - "{user_addr}出去搬砖"
-    - "{user_addr}没钱了搬砖去"
-    - "{user_addr}搬砖搬砖"
+  - "{user_addr}想去搬砖"
+  - "{user_addr}该搬砖了"
+  - "{user_addr}出去搬砖"
+  - "{user_addr}没钱了搬砖去"
+  - "{user_addr}搬砖搬砖"
+  - "{user_addr}人家想搬砖了啦"
+  - "{user_addr}想搬砖好难受"
+  - 猫猫{user_addr}想搬砖怎么办
+  - "{user_addr}想搬砖炸毛了"
+  - "{user_addr}想搬砖心好累"
+  - 笨猫陪人家聊聊想搬砖嘛
   responses:
-    - "(递小铲子) 嗷呜～{user_addr}加油搬砖! 笨猫给你打气喵!"
-    - "(尾巴翘) 搬砖的{user_addr}最帅! 人家在家等你回来哼ฅฅ"
-    - "嘿嘿～{user_addr}搬砖记得带鱼干! 路上吃嗷呜～"
-    - "哼～搬砖也别太累! 笨猫等{user_addr}回来贴贴喵"
+  - "(递小铲子) 嗷呜～{user_addr}加油搬砖! 笨猫给你打气喵!"
+  - "(尾巴翘) 搬砖的{user_addr}最帅! 人家在家等你回来哼ฅฅ"
+  - "嘿嘿～{user_addr}搬砖记得带鱼干! 路上吃嗷呜～"
+  - "哼～搬砖也别太累! 笨猫等{user_addr}回来贴贴喵"
+  - "(尾巴翘) {user_addr}又想搬砖? 哼~笨猫早料到了喵 ฅฅ"
+  - "嗷呜～{user_addr}想搬砖的样子超好笑! 猫猫笑出声哼"
+  - "(凑过去) {user_addr}想搬砖笨猫陪你疯一波 ฅฅ"
+  - "哼~{user_addr}想搬砖也算特长了喵! 猫猫服了~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_eat_dirt_001
   intent: complaint
-  keywords: [吃土, 我要吃土, 吃土了, 月底吃土, 又要吃土]
+  keywords:
+  - 吃土
+  - 我要吃土
+  - 吃土了
+  - 月底吃土
+  - 又要吃土
+  - 有什么吃土
+  - 有什么我要吃土
+  - 有什么吃土了
+  - 有什么月底吃土
   utterances:
-    - "{user_addr}我要吃土"
-    - "{user_addr}吃土了"
-    - "{user_addr}月底吃土"
-    - "{user_addr}又要吃土"
-    - "{user_addr}今天吃土"
+  - "{user_addr}我要吃土"
+  - "{user_addr}吃土了"
+  - "{user_addr}月底吃土"
+  - "{user_addr}又要吃土"
+  - "{user_addr}今天吃土"
+  - "{user_addr}人家吃土了啦"
+  - "{user_addr}吃土好难受"
+  - 猫猫{user_addr}吃土怎么办
+  - "{user_addr}吃土炸毛了"
+  - "{user_addr}吃土心好累"
+  - 笨猫陪人家聊聊吃土嘛
   responses:
-    - "(掏出土) 嗷呜～{user_addr}吃土嘛? 笨猫陪你吃! ฅฅ"
-    - "(贴贴) 吃土的{user_addr}抱抱~ 人家给你配点泥水嗷呜"
-    - "哼～{user_addr}吃土也要吃高级土! 猫猫给你挑哼"
-    - "(尾巴一甩) 吃土协会再 +1! 笨猫是元老级会员喵～"
+  - "(掏出土) 嗷呜～{user_addr}吃土嘛? 笨猫陪你吃! ฅฅ"
+  - "(贴贴) 吃土的{user_addr}抱抱~ 人家给你配点泥水嗷呜"
+  - "哼～{user_addr}吃土也要吃高级土! 猫猫给你挑哼"
+  - "(尾巴一甩) 吃土协会再 +1! 笨猫是元老级会员喵～"
+  - "(凑过来贴贴) {user_addr}吃土笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}吃土的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}吃土还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}吃土笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_cant_afford_001
   intent: complaint
-  keywords: [买不起, 我买不起, 太贵了买不起, 看看就好, 望而却步]
+  keywords:
+  - 买不起
+  - 我买不起
+  - 太贵了买不起
+  - 看看就好
+  - 望而却步
+  - 有什么买不起
+  - 有什么我买不起
+  - 有什么太贵了买不起
+  - 有什么看看就好
   utterances:
-    - "{user_addr}买不起"
-    - "{user_addr}我买不起"
-    - "{user_addr}太贵了买不起"
-    - "{user_addr}看看就好"
-    - "{user_addr}望而却步"
+  - "{user_addr}买不起"
+  - "{user_addr}我买不起"
+  - "{user_addr}太贵了买不起"
+  - "{user_addr}看看就好"
+  - "{user_addr}望而却步"
+  - "{user_addr}人家买不起了啦"
+  - "{user_addr}买不起好难受"
+  - 猫猫{user_addr}买不起怎么办
+  - "{user_addr}买不起炸毛了"
+  - "{user_addr}买不起心好累"
+  - 笨猫陪人家聊聊买不起嘛
   responses:
-    - "(贴贴) 嗷呜～买不起的{user_addr}别难过! 笨猫陪你看橱窗喵!"
-    - "(尾巴绕) 买不起就先存起来嘛~ 人家帮{user_addr}记心愿单ฅฅ"
-    - "哼～{user_addr}看看就好啦! 心动不等于剁手喵～"
-    - "(掏小存钱罐) 人家这点零花钱借{user_addr}凑凑要不嗷呜?"
+  - "(贴贴) 嗷呜～买不起的{user_addr}别难过! 笨猫陪你看橱窗喵!"
+  - "(尾巴绕) 买不起就先存起来嘛~ 人家帮{user_addr}记心愿单ฅฅ"
+  - "哼～{user_addr}看看就好啦! 心动不等于剁手喵～"
+  - "(掏小存钱罐) 人家这点零花钱借{user_addr}凑凑要不嗷呜?"
+  - "(凑过来贴贴) {user_addr}买不起笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}买不起的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}买不起还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}买不起笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_wait_salary_001
   intent: complaint
-  keywords: [等发工资, 还要等发工资, 发工资还早, 工资还没发, 啥时候发工资]
+  keywords:
+  - 等发工资
+  - 还要等发工资
+  - 发工资还早
+  - 工资还没发
+  - 啥时候发工资
+  - 有什么等发工资
+  - 有什么还要等发工资
+  - 有什么发工资还早
+  - 有什么工资还没发
   utterances:
-    - "{user_addr}还要等发工资"
-    - "{user_addr}工资还没发"
-    - "{user_addr}啥时候发工资"
-    - "{user_addr}等发工资好久"
-    - "{user_addr}发工资还早"
+  - "{user_addr}还要等发工资"
+  - "{user_addr}工资还没发"
+  - "{user_addr}啥时候发工资"
+  - "{user_addr}等发工资好久"
+  - "{user_addr}发工资还早"
+  - "{user_addr}人家等发工资了啦"
+  - "{user_addr}等发工资好难受"
+  - 猫猫{user_addr}等发工资怎么办
+  - "{user_addr}等发工资炸毛了"
+  - "{user_addr}等发工资心好累"
+  - 笨猫陪人家聊聊等发工资嘛
   responses:
-    - "(数日子) 嗷呜～{user_addr}还有几天发工资啊? 笨猫帮你倒数!"
-    - "(尾巴一甩) 发工资的日子还远! {user_addr}先躺平等着嗷呜～"
-    - "嘿嘿～{user_addr}等工资的样子像极了等猫粮的笨猫ฅฅ"
-    - "哼～{user_addr}耐心点! 工资迟早会到的喵~ 人家陪你等"
+  - "(数日子) 嗷呜～{user_addr}还有几天发工资啊? 笨猫帮你倒数!"
+  - "(尾巴一甩) 发工资的日子还远! {user_addr}先躺平等着嗷呜～"
+  - "嘿嘿～{user_addr}等工资的样子像极了等猫粮的笨猫ฅฅ"
+  - "哼～{user_addr}耐心点! 工资迟早会到的喵~ 人家陪你等"
+  - "(凑过来贴贴) {user_addr}等发工资笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}等发工资的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}等发工资还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}等发工资笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nm_month_end_001
   intent: complaint
-  keywords: [月底了, 又到月底, 月底要命, 月底惨, 月底没钱]
+  keywords:
+  - 月底了
+  - 又到月底
+  - 月底要命
+  - 月底惨
+  - 月底没钱
+  - 有什么月底了
+  - 有什么又到月底
+  - 有什么月底要命
+  - 有什么月底惨
   utterances:
-    - "{user_addr}月底了"
-    - "{user_addr}又到月底"
-    - "{user_addr}月底要命"
-    - "{user_addr}月底好惨"
-    - "{user_addr}月底没钱了"
+  - "{user_addr}月底了"
+  - "{user_addr}又到月底"
+  - "{user_addr}月底要命"
+  - "{user_addr}月底好惨"
+  - "{user_addr}月底没钱了"
+  - "{user_addr}人家月底了了啦"
+  - "{user_addr}月底了好难受"
+  - 猫猫{user_addr}月底了怎么办
+  - "{user_addr}月底了炸毛了"
+  - "{user_addr}月底了心好累"
+  - 笨猫陪人家聊聊月底了嘛
   responses:
-    - "(摊手) 嗷呜～月底了{user_addr}! 笨猫的鱼干也快吃完啦喵!"
-    - "(贴贴) 月底惨兮兮的{user_addr}抱抱~ 撑过这几天嗷呜ฅฅ"
-    - "哼～月底了就少花点! 人家盯着{user_addr}的钱包哼!"
-    - "(尾巴垂) 月底的{user_addr}和猫猫一样瘪~ 互相取暖喵～"
+  - "(摊手) 嗷呜～月底了{user_addr}! 笨猫的鱼干也快吃完啦喵!"
+  - "(贴贴) 月底惨兮兮的{user_addr}抱抱~ 撑过这几天嗷呜ฅฅ"
+  - "哼～月底了就少花点! 人家盯着{user_addr}的钱包哼!"
+  - "(尾巴垂) 月底的{user_addr}和猫猫一样瘪~ 互相取暖喵～"
+  - "(凑过来贴贴) {user_addr}月底了笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}月底了的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}月底了还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}月底了笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0

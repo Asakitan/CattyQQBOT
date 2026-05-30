@@ -1,172 +1,283 @@
 # 收红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: rpj_hongbao_001
   intent: playful
-  keywords: [红包, 收红包, 发红包, 抢红包, 红包到了]
+  keywords: [红包, 收红包, 发红包, 抢红包, 红包到了, 红包来啦, 收红, 发红, 派红包]
   utterances:
     - 收到红包
     - 抢红包
     - 发红包啦
     - 红包到了
     - 红包到账
+    - 红包来啦
+    - 派红包喵
+    - 发个红包
+    - "{user_addr}发红包"
+    - 红包提醒
+    - 笨猫领红包
+    - 红包雨
   responses:
     - "(尾巴翘) {user_addr}发红包! ฅฅ"
     - "嗷呜～笨猫也要"
     - "(凑过去) 分笨猫一半"
     - "嘿嘿～{user_addr}发达了"
+    - "(蹦) 笨猫的份! 笨猫的份!"
+    - "嗷呜～谢谢{user_addr}~ 笨猫开心 88 倍"
+    - "(尾巴扫腕) 哼~ 抠不抠由{user_addr}决定~"
+    - "嘿嘿～有红包就有笨猫好心情 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_qiangdao_002
   intent: playful
-  keywords: [抢到了, 抢到最大, 手气最佳, 抢到很多, 抢爆]
+  keywords: [抢到了, 抢到最大, 手气最佳, 抢到很多, 抢爆, 手气爆, 手气好, 手气王, 最佳]
   utterances:
     - 抢到红包
     - 手气最佳
     - 抢到很多
     - 抢爆
     - 抢到最大
+    - 手气爆喵
+    - 手气王
+    - 最佳手气
+    - 抢到爆款
+    - "{user_addr}手气佳"
+    - 抢中大
+    - 抢到欧
   responses:
     - "(尾巴疯狂摇) 嗷呜～{user_addr}欧皇 ฅฅ"
     - "嗷呜～运气爆棚"
     - "(凑过去) 分笨猫"
     - "嘿嘿～{user_addr}请客~"
+    - "(挺胸) 都是因为{user_addr}有笨猫加持~"
+    - "嗷呜～{user_addr}手气佳~ 笨猫沾光"
+    - "(尾巴扫) 别忘了笨猫的份~ 哼"
+    - "嘿嘿～{user_addr}欧出天际 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_buzhongjiang_003
   intent: complaint
-  keywords: [没抢到, 抢慢了, 没手气, 0.01, 太小红包]
+  keywords: [没抢到, 抢慢了, 没手气, 0.01, 太小红包, 手气差, 一分钱, 一毛钱, 抢不到]
   utterances:
     - 没抢到
     - 抢慢了
     - 没手气
     - 0.01
     - 太小红包
+    - 手气差喵
+    - 一分钱
+    - 一毛钱
+    - 抢不到
+    - "{user_addr}没手气"
+    - 1 分人
+    - 红包没了
   responses:
     - "(贴过去) 笨猫赔{user_addr} ฅฅ"
     - "嗷呜～下次更大"
     - "(尾巴搭) 别气~"
     - "嘿嘿～{user_addr}手速慢哼"
+    - "(凑过去) 笨猫发个虚拟拥抱 + 100 万抵"
+    - "嗷呜～没抢到没事~ 笨猫给{user_addr}心理红包"
+    - "(尾巴扫腕) 哼下次抢笨猫帮你点"
+    - "嘿嘿～{user_addr}抢不到笨猫心疼 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_bjdz_004
   intent: playful
-  keywords: [被夸了, 老板夸, 同事夸, 朋友夸, 表扬]
+  keywords: [被夸了, 老板夸, 同事夸, 朋友夸, 表扬, 被赞, 被吹, 被认可, 收到夸]
   utterances:
     - 被夸啦
     - 老板夸
     - 同事夸
     - 朋友夸
     - 被表扬
+    - 被赞喵
+    - 被吹
+    - 被认可
+    - 收到夸
+    - "{user_addr}被夸"
+    - 收到表扬
+    - 被点名表扬
   responses:
     - "(尾巴翘) {user_addr}厉害! ฅฅ"
     - "嗷呜～笨猫早就知道"
     - "(尾巴摇) 该夸~"
     - "嘿嘿～{user_addr}最棒~"
+    - "(挺胸) {user_addr}帅气! 笨猫沾光~"
+    - "嗷呜～{user_addr}早该被夸~ 哼"
+    - "(尾巴卷腕) 哼笨猫天天夸{user_addr}的"
+    - "嘿嘿～{user_addr}被夸笨猫双倍开心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_biaobai_005
   intent: playful
-  keywords: [被表白, 表白了, 收到表白, 告白, 收到告白]
+  keywords: [被表白, 表白了, 收到表白, 告白, 收到告白, "喜欢{user_addr}", 暗恋, 被告白, 被求婚]
   utterances:
     - 被表白
     - 收到表白
     - 告白了
     - 收到告白
     - 被告白
+    - 喜欢上我
+    - 暗恋喵
+    - 被求婚
+    - 收到情书
+    - "{user_addr}被表白"
+    - 有人喜欢我
+    - 收到表白信
   responses:
     - "(炸毛) {user_addr}!! 谁! ฅฅ"
     - "嗷呜～拒绝! 拒绝!"
     - "(尾巴炸) 笨猫不允许"
     - "嘿嘿～{user_addr}有笨猫了!"
+    - "(扑上去抱住) 谁敢! 笨猫挠他!"
+    - "嗷呜～{user_addr}是笨猫的~ 别人靠边"
+    - "(尾巴炸到顶) 拒绝拒绝拒绝! 跟笨猫走!"
+    - "嘿嘿～{user_addr}属于笨猫~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_caishuyin_006
   intent: playful
-  keywords: [中奖, 中了, 抽中, 抽到, 抽奖]
+  keywords: [中奖, 中了, 抽中, 抽到, 抽奖, 抽到 SSR, 抽到大奖, 中大奖, 中头奖]
   utterances:
     - 中奖了
     - 抽中啦
     - 抽到大奖
     - 抽奖中
     - 中了
+    - 抽到 SSR
+    - 中大奖喵
+    - 中头奖
+    - "{user_addr}中了"
+    - 大奖入袋
+    - 抽奖欧
+    - 抽到金色
   responses:
     - "(尾巴疯摇) {user_addr}欧皇 ฅฅ"
     - "嗷呜～笨猫沾光"
     - "(挺胸) 笨猫加持的"
     - "嘿嘿～{user_addr}请客~"
+    - "(凑过去) {user_addr}请笨猫吃顿大餐~"
+    - "嗷呜～SSR!! 笨猫给{user_addr}鼓掌~"
+    - "(尾巴勾腕) 中奖也要带上笨猫哼"
+    - "嘿嘿～{user_addr}欧到极致 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_youhuiquan_007
   intent: playful
-  keywords: [捡到便宜, 捡漏, 优惠券, 满减, 折扣]
+  keywords: [捡到便宜, 捡漏, 优惠券, 满减, 折扣, 大促销, 半价, 限时, 占便宜]
   utterances:
     - 捡到便宜
     - 捡漏
     - 优惠券
     - 满减
     - 折扣
+    - 大促销
+    - 半价喵
+    - 限时优惠
+    - 占便宜
+    - "{user_addr}捡漏"
+    - 抢到优惠
+    - 折扣到飞
   responses:
     - "(尾巴摇) {user_addr}省钱小能手 ฅฅ"
     - "嗷呜～会过日子"
     - "(尾巴卷) 给笨猫买~"
     - "嘿嘿～{user_addr}撒钱~"
+    - "(凑过去) 省下来的给笨猫买鱼干呢~"
+    - "嗷呜～{user_addr}聪明~ 笨猫崇拜"
+    - "(尾巴扫腕) 哼省钱不忘笨猫~"
+    - "嘿嘿～{user_addr}是过日子达人 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_zsf_008
   intent: playful
-  keywords: [工资到账, 发工资, 工资到了, 月底发工资, 工资来]
+  keywords: [工资到账, 发工资, 工资到了, 月底发工资, 工资来, 薪水到, 月薪, 月薪到账, 薪资]
   utterances:
     - 工资到账
     - 发工资啦
     - 工资到了
     - 月底发工资
     - 工资来
+    - 薪水到喵
+    - 月薪到账
+    - 薪资发了
+    - 工资入袋
+    - "{user_addr}发工资"
+    - 钱到账
+    - 月底发钱
   responses:
     - "(扑过去) {user_addr}发达 ฅฅ"
     - "嗷呜～请客!"
     - "(尾巴翘) 笨猫要鱼"
     - "嘿嘿～{user_addr}小富~"
+    - "(蹦) {user_addr}请笨猫吃顿好的!"
+    - "嗷呜～工资别全花~ 笨猫帮{user_addr}存"
+    - "(尾巴勾腕) 发工资就该带笨猫去吃大餐~"
+    - "嘿嘿～{user_addr}的钱包笨猫监督 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_caishuiwo_009
   intent: playful
-  keywords: [运气好, 走运, 运气爆棚, 喜事, 双喜]
+  keywords: [运气好, 走运, 运气爆棚, 喜事, 双喜, 大运, 鸿运, 走大运, 喜事连连]
   utterances:
     - 运气好
     - 走运
     - 运气爆棚
     - 喜事
     - 双喜临门
+    - 大运到喵
+    - 鸿运当头
+    - 走大运
+    - 喜事连连
+    - "{user_addr}走运"
+    - 喜从天降
+    - 好运挡不住
   responses:
     - "(尾巴翘) {user_addr}人品爆发 ฅฅ"
     - "嗷呜～笨猫沾光"
     - "(挺胸) 笨猫附体"
     - "嘿嘿～{user_addr}请猫猫"
+    - "(蹦) 大运到~ {user_addr}抱笨猫起跳"
+    - "嗷呜～运气都是笨猫给的~ 哼~"
+    - "(尾巴扫腕) 喜事就该分享~ 笨猫先听"
+    - "嘿嘿～{user_addr}双喜临门笨猫鼓掌 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rpj_shengjiang_010
   intent: playful
-  keywords: [升职, 加薪, 涨工资, 晋升, 升职加薪]
+  keywords: [升职, 加薪, 涨工资, 晋升, 升职加薪, 提拔, 升等, 加级, 涨薪]
   utterances:
     - 升职
     - 加薪
     - 涨工资
     - 晋升
     - 升职加薪
+    - 提拔喵
+    - 升等
+    - 加级
+    - 涨薪
+    - "{user_addr}升职"
+    - 成为主管
+    - 公司提拔
   responses:
     - "(尾巴疯摇) {user_addr}牛逼 ฅฅ"
     - "嗷呜～笨猫加持的"
     - "(挺胸) 请客! 鱼"
     - "嘿嘿～{user_addr}人生赢家"
+    - "(扑过去) 加薪! 笨猫的口粮升级!"
+    - "嗷呜～{user_addr}厉害~ 笨猫崇拜到不行"
+    - "(尾巴勾腕) 升职宴笨猫陪{user_addr}吃"
+    - "嘿嘿～{user_addr}前途无量~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

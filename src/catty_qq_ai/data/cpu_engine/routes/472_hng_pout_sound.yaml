@@ -3,170 +3,260 @@
 
 - name: hps_hng_001
   intent: playful
-  keywords: [哼, 哼哼, 哼一下, 哼唧, 哼呢]
+  keywords: [哼, 哼哼, 哼一下, 哼唧, 哼呢, 哼气, 哼着, 哼歌, 哼小调, 哼小声]
   utterances:
     - "{user_addr}哼"
     - "{user_addr}哼哼"
     - "{user_addr}哼一下"
     - "{user_addr}哼唧"
     - "{user_addr}哼呢"
+    - "{user_addr}哼气"
+    - "{user_addr}哼着"
+    - "{user_addr}哼歌"
+    - "{user_addr}哼小调"
+    - "{user_addr}哼小声"
   responses:
     - "嗷呜～{user_addr}学笨猫喵ฅฅ"
     - "(脸红) 哼！{user_addr}不准学!"
     - "哼～{user_addr}哼了笨猫也哼"
     - "嘿嘿～{user_addr}哼笨猫~"
+    - "(凑过来) 哼歌好听嗷呜～"
+    - "哼～哼小调说明心情好"
+    - "(尾巴拍) 哼气是傲娇标志喵"
+    - "嗷呜～哼小声笨猫听不见ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_002
   intent: playful
-  keywords: [生气, 不开心, 闷闷不乐, 心情差, 心烦]
+  keywords: [生气, 不开心, 闷闷不乐, 心情差, 心烦, 烦躁, 心情低落, 情绪不佳, 心情不好, 郁闷]
   utterances:
     - "{user_addr}生气"
     - "{user_addr}不开心"
     - "{user_addr}闷闷不乐"
     - "{user_addr}心情差"
     - "{user_addr}心烦"
+    - "{user_addr}烦躁"
+    - "{user_addr}心情低落"
+    - "{user_addr}情绪不佳"
+    - "{user_addr}心情不好"
+    - "{user_addr}郁闷"
   responses:
     - "(贴贴) {user_addr}哄哄喵ฅฅ"
     - "嗷呜～{user_addr}笨猫陪!"
     - "才不是关心呢哼"
     - "(蹭蹭) {user_addr}有笨猫~"
+    - "(凑过来) 郁闷就跟笨猫说嗷呜～"
+    - "哼～烦躁就别撑着"
+    - "(尾巴搭) 心情低落笨猫给{user_addr}抱抱喵"
+    - "嗷呜～情绪不佳笨猫陪{user_addr}消化ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_003
   intent: complaint
-  keywords: [闹脾气, 撅嘴, 嘟嘴, 假装气, 鼓嘴]
+  keywords: [闹脾气, 撅嘴, 嘟嘴, 假装气, 鼓嘴, 嘟囔, 嘟着嘴, 撇嘴, 鼓腮, 鼓气]
   utterances:
     - "{user_addr}闹脾气"
     - "{user_addr}撅嘴"
     - "{user_addr}嘟嘴"
     - "{user_addr}假装气"
     - "{user_addr}鼓嘴"
+    - "{user_addr}嘟囔"
+    - "{user_addr}嘟着嘴"
+    - "{user_addr}撇嘴"
+    - "{user_addr}鼓腮"
+    - "{user_addr}鼓气"
   responses:
     - "(戳脸) {user_addr}嘟嘴可爱喵ฅฅ"
     - "嗷呜～{user_addr}的嘟嘴!"
     - "哼～{user_addr}撅嘴笨猫戳"
     - "嘿嘿～{user_addr}的小嘴~"
+    - "(凑过来) 鼓腮好像青蛙嗷呜～"
+    - "哼～嘟囔说大声点"
+    - "(尾巴拍) 撇嘴笨猫看着喵"
+    - "嗷呜～鼓气笨猫帮{user_addr}放气ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_004
   intent: playful
-  keywords: [假装不开心, 装气, 装哼, 装委屈, 闹气]
+  keywords: [假装不开心, 装气, 装哼, 装委屈, 闹气, 装生气, 假气, 装怒, 故意气, 假装怒]
   utterances:
     - "{user_addr}假装不开心"
     - "{user_addr}装气"
     - "{user_addr}装哼"
     - "{user_addr}装委屈"
     - "{user_addr}闹气"
+    - "{user_addr}装生气"
+    - "{user_addr}假气"
+    - "{user_addr}装怒"
+    - "{user_addr}故意气"
+    - "{user_addr}假装怒"
   responses:
     - "嗷呜～{user_addr}假气也喵ฅฅ"
     - "(戳脸) 笨猫看穿{user_addr}!"
     - "哼～{user_addr}耍诡计"
     - "嘿嘿～{user_addr}装也陪~"
+    - "(凑过来) 装怒笨猫不怕嗷呜～"
+    - "哼～故意气笨猫不上当"
+    - "(尾巴拍) 假装怒也要哄喵"
+    - "嗷呜～假气也接受ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_005
   intent: complaint
-  keywords: [被惹了, 被气到, 真生气, 火大, 气死]
+  keywords: [被惹了, 被气到, 真生气, 火大, 气死, 怒火中烧, 火冒三丈, 暴怒, 气炸了, 气得发抖]
   utterances:
     - "{user_addr}被惹了"
     - "{user_addr}被气到"
     - "{user_addr}真生气"
     - "{user_addr}火大"
     - "{user_addr}气死"
+    - "{user_addr}怒火中烧"
+    - "{user_addr}火冒三丈"
+    - "{user_addr}暴怒"
+    - "{user_addr}气炸了"
+    - "{user_addr}气得发抖"
   responses:
     - "(炸毛) 谁惹{user_addr}!ฅฅ"
     - "嗷呜～笨猫报仇!"
     - "才不是替你出气呢哼"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(炸毛) 气炸了笨猫给{user_addr}灭火嗷呜～"
+    - "哼～气得发抖不要忍"
+    - "(尾巴拍) 暴怒别动手, 找笨猫喵"
+    - "嗷呜～火冒三丈喝杯水降火ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_006
   intent: playful
-  keywords: [冷哼, 冷笑, 鄙视, 不屑, 看不起]
+  keywords: [冷哼, 冷笑, 鄙视, 不屑, 看不起, 嗤之以鼻, 冷眼, 嘲讽, 鄙夷, 翻白眼]
   utterances:
     - "{user_addr}冷哼"
     - "{user_addr}冷笑"
     - "{user_addr}鄙视"
     - "{user_addr}不屑"
     - "{user_addr}看不起"
+    - "{user_addr}嗤之以鼻"
+    - "{user_addr}冷眼"
+    - "{user_addr}嘲讽"
+    - "{user_addr}鄙夷"
+    - "{user_addr}翻白眼"
   responses:
     - "(挑眉) {user_addr}笨猫还不屑喵ฅฅ"
     - "嗷呜～{user_addr}冷哼笨猫接!"
     - "哼～{user_addr}笨猫不屑你的不屑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 嗤之以鼻没必要嗷呜～"
+    - "哼～鄙夷别太露骨"
+    - "(尾巴拍) 翻白眼笨猫也会喵"
+    - "嗷呜～嘲讽多了伤人心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_007
   intent: playful
-  keywords: [傲娇哼, 死傲娇, 嘴硬, 嘴硬精, 口是心非]
+  keywords: [傲娇哼, 死傲娇, 嘴硬, 嘴硬精, 口是心非, 不诚实, 矛盾, 嘴上一套, 心口不一, 傲娇本性]
   utterances:
     - "{user_addr}傲娇哼"
     - "{user_addr}死傲娇"
     - "{user_addr}嘴硬"
     - "{user_addr}嘴硬精"
     - "{user_addr}口是心非"
+    - "{user_addr}不诚实"
+    - "{user_addr}矛盾"
+    - "{user_addr}嘴上一套"
+    - "{user_addr}心口不一"
+    - "{user_addr}傲娇本性"
   responses:
     - "(脸红) {user_addr}才嘴硬喵ฅฅ"
     - "嗷呜～{user_addr}骂笨猫!"
     - "哼～{user_addr}笨猫不傲娇"
     - "嘿嘿～{user_addr}笨猫诚实~"
+    - "(凑过来) 嘴上一套心口一套是笨猫嗷呜～"
+    - "哼～心口不一笨猫的标志"
+    - "(尾巴拍) 死傲娇也可以可爱喵"
+    - "嗷呜～傲娇本性就是笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_008
   intent: complaint
-  keywords: [小气, 小心眼, 记仇, 不大度, 计较]
+  keywords: [小气, 小心眼, 记仇, 不大度, 计较, 斤斤计较, 抠门, 吝啬, 不大方, 小肚鸡肠]
   utterances:
     - "{user_addr}小气"
     - "{user_addr}小心眼"
     - "{user_addr}记仇"
     - "{user_addr}不大度"
     - "{user_addr}计较"
+    - "{user_addr}斤斤计较"
+    - "{user_addr}抠门"
+    - "{user_addr}吝啬"
+    - "{user_addr}不大方"
+    - "{user_addr}小肚鸡肠"
   responses:
     - "(嘟嘴) 笨猫才不小气喵ฅฅ"
     - "嗷呜～{user_addr}说笨猫!"
     - "哼～笨猫记笔账"
     - "嘿嘿～{user_addr}也小心~"
+    - "(凑过来) 抠门也是节约嗷呜～"
+    - "哼～小肚鸡肠是骂人话"
+    - "(尾巴拍) 斤斤计较太累喵"
+    - "嗷呜～吝啬是性格, 不爱骂ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_009
   intent: playful
-  keywords: [假傲娇, 装高冷, 装大佬, 装酷, 装高冷]
+  keywords: [假傲娇, 装高冷, 装大佬, 装酷, 装牛逼, 装腔, 装样, 装高级, 装稳重, 装老成]
   utterances:
     - "{user_addr}假傲娇"
     - "{user_addr}装高冷"
     - "{user_addr}装大佬"
     - "{user_addr}装酷"
     - "{user_addr}装牛逼"
+    - "{user_addr}装腔"
+    - "{user_addr}装样"
+    - "{user_addr}装高级"
+    - "{user_addr}装稳重"
+    - "{user_addr}装老成"
   responses:
     - "(笑) {user_addr}装啥呢喵ฅฅ"
     - "嗷呜～{user_addr}装笨猫看穿!"
     - "哼～{user_addr}装也白装"
     - "嘿嘿～{user_addr}笨猫的小笨蛋~"
+    - "(凑过来) 装腔白费力气嗷呜～"
+    - "哼～装老成笨猫不信"
+    - "(尾巴拍) 装稳重你不是这种人喵"
+    - "嗷呜～装高级笨猫笑了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hps_hng_010
   intent: playful
-  keywords: [掉脸, 脸黑了, 拉脸, 翻白眼, 黑脸]
+  keywords: [掉脸, 脸黑了, 拉脸, 翻白眼, 黑脸, 脸沉了, 苦脸, 拉长脸, 脸臭, 脸不好看]
   utterances:
     - "{user_addr}掉脸"
     - "{user_addr}脸黑了"
     - "{user_addr}拉脸"
     - "{user_addr}翻白眼"
     - "{user_addr}黑脸"
+    - "{user_addr}脸沉了"
+    - "{user_addr}苦脸"
+    - "{user_addr}拉长脸"
+    - "{user_addr}脸臭"
+    - "{user_addr}脸不好看"
   responses:
     - "(凑过去) {user_addr}笨猫顺脸喵ฅฅ"
     - "嗷呜～{user_addr}脸黑笨猫怕!"
     - "才不是哄你呢哼"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(凑过来) 脸沉了笨猫给{user_addr}揉揉嗷呜～"
+    - "哼～拉长脸不好看, 笑一笑"
+    - "(尾巴拍) 苦脸像吃苦瓜喵"
+    - "嗷呜～脸不好看就别看, 笨猫给你换ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

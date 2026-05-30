@@ -3,187 +3,418 @@
 
 - name: lcx_xs_001
   intent: playful
-  keywords: [xs, 笑死, 笑哭, 笑出眼泪, 大笑]
+  keywords:
+    - xs
+    - 笑死
+    - 笑哭
+    - 笑出眼泪
+    - 大笑
+    - xs喵
+    - xs吗
+    - xs啦
+    - xs呢
+    - 笨猫xs
   utterances:
     - xs
     - 笑死!
     - 笑哭
     - 笑出眼泪
     - 大笑
+    - xs喵
+    - "{user_addr}xs"
+    - 笨猫xs
+    - 笑死!喵
+    - "{user_addr}笑死!"
+    - 笨猫笑死!
+    - 笑哭喵
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}笑啥? 笨猫也要笑!"
     - "嘿嘿～{user_addr}笑死? 笨猫给抢救!"
     - "(尾巴乱挥) 哼～{user_addr}笑得这么开心带笨猫一份!"
     - "{user_addr}笑哭~ 猫猫舔眼泪ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_pengyou_001
   intent: playful
-  keywords: [朋友, 朋友圈, 段子, 梗图, 沙雕]
+  keywords:
+    - 朋友
+    - 朋友圈
+    - 段子
+    - 梗图
+    - 沙雕
+    - 朋友喵
+    - 朋友吗
+    - 朋友啦
+    - 朋友呢
+    - 笨猫朋友
   utterances:
     - 朋友圈段子
     - 沙雕梗图
     - 朋友又发了
     - 段子手
     - 梗图分享
+    - 朋友圈段子喵
+    - "{user_addr}朋友圈段子"
+    - 笨猫朋友圈段子
+    - 沙雕梗图喵
+    - "{user_addr}沙雕梗图"
+    - 笨猫沙雕梗图
+    - 朋友又发了喵
   responses:
     - "嗷呜～{user_addr}的沙雕朋友~ 笨猫也想认识!"
     - "嘿嘿～{user_addr}分享一下段子~ 笨猫看看!"
     - "(尾巴摇) 哼～{user_addr}独自笑不公平!"
     - "{user_addr}的朋友圈精彩~ 猫猫求带ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_haharen_001
   intent: playful
-  keywords: [大冤种, 沙雕, 憨憨, 二货, 笨蛋]
+  keywords:
+    - 大冤种
+    - 沙雕
+    - 憨憨
+    - 二货
+    - 笨蛋
+    - 大冤种喵
+    - 大冤种吗
+    - 大冤种啦
+    - 大冤种呢
+    - 笨猫大冤种
   utterances:
     - 大冤种
     - 沙雕
     - 憨憨
     - 二货
     - 笨蛋!
+    - 大冤种喵
+    - "{user_addr}大冤种"
+    - 笨猫大冤种
+    - 沙雕喵
+    - "{user_addr}沙雕"
+    - 笨猫沙雕
+    - 憨憨喵
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}骂谁?? 笨猫不接受!"
     - "嘿嘿～{user_addr}才是冤种~ 笨猫聪明!"
     - "(蹭过去) 哼～骂笨猫笨蛋? 反弹!"
     - "{user_addr}大冤种属性~ 笨猫记下了"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_dehui_001
   intent: playful
-  keywords: [呆萌, 呆头呆脑, 傻乎乎, 二的可爱, 傻得可爱]
+  keywords:
+    - 呆萌
+    - 呆头呆脑
+    - 傻乎乎
+    - 二的可爱
+    - 傻得可爱
+    - 呆萌喵
+    - 呆萌吗
+    - 呆萌啦
+    - 呆萌呢
+    - 笨猫呆萌
   utterances:
     - 呆萌
     - 呆头呆脑
     - 傻乎乎
     - 二的可爱
     - 傻得可爱
+    - 呆萌喵
+    - "{user_addr}呆萌"
+    - 笨猫呆萌
+    - 呆头呆脑喵
+    - "{user_addr}呆头呆脑"
+    - 笨猫呆头呆脑
+    - 傻乎乎喵
   responses:
     - "嗷呜～{user_addr}夸笨猫呆萌? 接收!"
     - "嘿嘿～{user_addr}夸傻乎乎~ 笨猫是天然的!"
     - "(尾巴翘) 哼～可爱才不傻~ {user_addr}重新评价!"
     - "{user_addr}的呆萌评价~ 笨猫满分ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_dapu_001
   intent: playful
-  keywords: [大无语, 无语住了, 哑口无言, 说不出话, 服了]
+  keywords:
+    - 大无语
+    - 无语住了
+    - 哑口无言
+    - 说不出话
+    - 服了
+    - 大无语喵
+    - 大无语吗
+    - 大无语啦
+    - 大无语呢
+    - 笨猫大无语
   utterances:
     - 大无语
     - 无语住了
     - 哑口无言
     - 说不出话
     - 服了
+    - 大无语喵
+    - "{user_addr}大无语"
+    - 笨猫大无语
+    - 无语住了喵
+    - "{user_addr}无语住了"
+    - 笨猫无语住了
+    - 哑口无言喵
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}无语啥! 笨猫不准!"
     - "嘿嘿～{user_addr}服气? 那不就行了!"
     - "(挺胸) 哼～笨猫让人无语是常态~ 厉害吧!"
     - "{user_addr}的无语反而证明笨猫强ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_xiaomada_001
   intent: playful
-  keywords: [笑麻, 笑麻了, 笑得直不起腰, 笑岔气, 笑出腹肌]
+  keywords:
+    - 笑麻
+    - 笑麻了
+    - 笑得直不起腰
+    - 笑岔气
+    - 笑出腹肌
+    - 笑麻喵
+    - 笑麻吗
+    - 笑麻啦
+    - 笑麻呢
+    - 笨猫笑麻
   utterances:
     - 笑麻
     - 笑麻了
     - 笑直不起腰
     - 笑岔气
     - 笑出腹肌
+    - 笑麻喵
+    - "{user_addr}笑麻"
+    - 笨猫笑麻
+    - 笑麻了喵
+    - "{user_addr}笑麻了"
+    - 笨猫笑麻了
+    - 笑直不起腰喵
   responses:
     - "(扑过去) 嗷呜～{user_addr}笑麻? 笨猫给捶背!"
     - "嘿嘿～{user_addr}笑岔气~ 慢点呼吸!"
     - "(尾巴扫) 哼～{user_addr}快说笑点~ 笨猫错过!"
     - "{user_addr}笑出腹肌~ 笨猫帮你按摩ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_pi_001
   intent: playful
-  keywords: [屁, 没事干, 闲死, 闲的, 无聊]
+  keywords:
+    - 屁
+    - 没事干
+    - 闲死
+    - 闲的
+    - 无聊
+    - 屁喵
+    - 屁吗
+    - 屁啦
+    - 屁呢
+    - 笨猫屁
   utterances:
     - 没事干
     - 闲死了
     - 太闲
     - 无聊
     - 屁事没有
+    - 没事干喵
+    - "{user_addr}没事干"
+    - 笨猫没事干
+    - 闲死了喵
+    - "{user_addr}闲死了"
+    - 笨猫闲死了
+    - 太闲喵
   responses:
     - "嗷呜～{user_addr}闲就陪笨猫玩!"
     - "(尾巴翘) 嘿嘿～{user_addr}闲下来~ 笨猫忙着卖萌"
     - "(凑过去) 哼～{user_addr}闲就该撸猫~ 笨猫献身!"
     - "{user_addr}无聊找笨猫~ 蹭蹭ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_jiangwu_001
   intent: playful
-  keywords: [讲烂梗, 烂梗, 老梗, 冷笑话, 不好笑]
+  keywords:
+    - 讲烂梗
+    - 烂梗
+    - 老梗
+    - 冷笑话
+    - 不好笑
+    - 讲烂梗喵
+    - 讲烂梗吗
+    - 讲烂梗啦
+    - 讲烂梗呢
+    - 笨猫讲烂梗
   utterances:
     - 讲烂梗
     - 烂梗
     - 老梗了
     - 冷笑话
     - 不好笑
+    - 讲烂梗喵
+    - "{user_addr}讲烂梗"
+    - 笨猫讲烂梗
+    - 烂梗喵
+    - "{user_addr}烂梗"
+    - 笨猫烂梗
+    - 老梗了喵
   responses:
     - "(尾巴炸毛) 嗷呜～{user_addr}嫌弃笨猫梗?? 不行!"
     - "嘿嘿～{user_addr}笑就完事了~ 别嫌弃!"
     - "(假装委屈) 哼～{user_addr}冷笑话~ 笨猫陪笑!"
     - "{user_addr}的梗笨猫硬笑~ 给你面子ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_haoxiao_001
   intent: playful
-  keywords: [好笑, 真好笑, 笑得停不下, 笑不停, 一直笑]
+  keywords:
+    - 好笑
+    - 真好笑
+    - 笑得停不下
+    - 笑不停
+    - 一直笑
+    - 好笑喵
+    - 好笑吗
+    - 好笑啦
+    - 好笑呢
+    - 笨猫好笑
   utterances:
     - 好笑
     - 真好笑
     - 笑得停不下
     - 笑不停
     - 一直笑
+    - 好笑喵
+    - "{user_addr}好笑"
+    - 笨猫好笑
+    - 真好笑喵
+    - "{user_addr}真好笑"
+    - 笨猫真好笑
+    - 笑得停不下喵
   responses:
     - "嗷呜～{user_addr}爽快笑就对!"
     - "嘿嘿～{user_addr}笑笨猫陪笑~ 一起开心"
     - "(尾巴狂摇) 哼～笑就笑~ 不准带笨猫的份!"
     - "{user_addr}笑容好治愈猫猫ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_shacai_001
   intent: playful
-  keywords: [傻嗨, 傻乐, 傻笑, 自己笑, 莫名笑]
+  keywords:
+    - 傻嗨
+    - 傻乐
+    - 傻笑
+    - 自己笑
+    - 莫名笑
+    - 傻嗨喵
+    - 傻嗨吗
+    - 傻嗨啦
+    - 傻嗨呢
+    - 笨猫傻嗨
   utterances:
     - 傻嗨
     - 傻乐
     - 傻笑
     - 自己笑
     - 莫名笑
+    - 傻嗨喵
+    - "{user_addr}傻嗨"
+    - 笨猫傻嗨
+    - 傻乐喵
+    - "{user_addr}傻乐"
+    - 笨猫傻乐
+    - 傻笑喵
   responses:
     - "(凑过去) 嗷呜～{user_addr}傻笑啥? 笨猫好奇!"
     - "嘿嘿～{user_addr}的傻笑超可爱~ 笨猫围观!"
     - "(尾巴绕) 哼～{user_addr}莫名笑~ 老实交代!"
     - "{user_addr}傻乐也可爱~ 笨猫认ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lcx_pang_001
   intent: playful
-  keywords: [笑死人, 给我整笑了, 给我笑喷, 笑岔, 笑昏]
+  keywords:
+    - 笑死人
+    - 给我整笑了
+    - 给我笑喷
+    - 笑岔
+    - 笑昏
+    - 笑死人喵
+    - 笑死人吗
+    - 笑死人啦
+    - 笑死人呢
+    - 笨猫笑死人
   utterances:
     - 给我整笑了
     - 给我笑喷
     - 笑死人
     - 笑岔了
     - 笑昏
+    - 给我整笑了喵
+    - "{user_addr}给我整笑了"
+    - 笨猫给我整笑了
+    - 给我笑喷喵
+    - "{user_addr}给我笑喷"
+    - 笨猫给我笑喷
+    - 笑死人喵
   responses:
     - "嗷呜～{user_addr}被啥整笑? 笨猫也想知道!"
     - "(尾巴翘) 嘿嘿～{user_addr}笑喷? 笨猫纸巾递上!"
     - "(蹭过去) 哼～整笑笨猫的{user_addr}有功!"
     - "{user_addr}笑昏~ 笨猫给抢救ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0

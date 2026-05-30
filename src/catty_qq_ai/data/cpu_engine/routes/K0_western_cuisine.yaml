@@ -4,204 +4,324 @@
 
 - name: west_steak_001
   intent: question
-  keywords: [推荐牛排, 推荐西餐牛排, 推荐和牛, 推荐战斧牛排, 笨猫牛排]
+  keywords: [推荐牛排, 推荐西餐牛排, 推荐和牛, 推荐战斧牛排, 笨猫牛排, 牛排部位, 牛排熟度, 推荐黑椒牛排, 推荐 ribeye, 推荐 T 骨牛排]
   utterances:
     - 推荐牛排
     - 推荐西餐牛排
     - 推荐和牛
     - 推荐战斧牛排
     - 笨猫牛排
+    - 推荐 ribeye 肋眼
+    - 推荐 T 骨牛排
+    - 推荐黑椒牛排
+    - 推荐牛排部位
+    - 牛排几分熟好
+    - 推荐家庭煎牛排
   responses:
     - "嗷呜～{user_addr}部位: 西冷 / 菲力 / 肋眼 / T 骨ฅฅ"
     - "(尾巴翘) 和牛 A5: 雪花最高 / 日本黑毛"
     - "{user_addr}熟度: 三分 / 五分 / 七分"
     - "(挺胸) 笨猫推荐: 现烤平底锅 + 黄油!"
+    - "嗷呜～战斧牛排适合多人切着吃 ฅฅ"
+    - "(歪头)牛排要回温再下锅嗷呜"
+    - "{user_addr}静置 5 分钟再切肉汁不流蹭蹭"
+    - "(凑过来) 笨猫想偷一口肉边喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: west_pasta_001
   intent: question
-  keywords: [推荐意面, 推荐意大利面, 推荐 spaghetti, 推荐 carbonara, 笨猫意面]
+  keywords: [推荐意面, 推荐意大利面, 推荐 spaghetti, 推荐 carbonara, 笨猫意面, 推荐 bolognese, 推荐 pesto, 推荐千层面, 意面酱汁, 意面 al dente]
   utterances:
     - 推荐意面
     - 推荐意大利面
     - 推荐 spaghetti
     - 推荐 carbonara
     - 笨猫意面
+    - 推荐 bolognese 肉酱
+    - 推荐 pesto 青酱
+    - 推荐千层面
+    - 推荐意面酱汁
+    - 推荐 al dente 煮法
+    - 推荐家庭意面
   responses:
     - "嗷呜～{user_addr}经典: Carbonara / Bolognese / Pestoฅฅ"
     - "(尾巴翘) 面型: 长面 / 短面 / 千层面"
     - "{user_addr}煮法: 一升水 + 一勺盐 / al dente"
     - "(挺胸) 笨猫推荐: 别加奶油 - Carbonara 只用鸡蛋!"
+    - "嗷呜～煮面水留一杯调酱浓度 ฅฅ"
+    - "(歪头)pesto 现做最香嗷呜"
+    - "{user_addr}牛肉酱要小火慢炖两小时蹭蹭"
+    - "(凑过来) 笨猫想嗦面喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: west_pizza_001
   intent: question
-  keywords: [推荐披萨, 推荐 pizza, 推荐意式披萨, 推荐美式披萨, 笨猫披萨]
+  keywords: [推荐披萨, 推荐 pizza, 推荐意式披萨, 推荐美式披萨, 笨猫披萨, 玛格丽塔, 那不勒斯, 芝加哥深盘, 必胜客, 自制披萨]
   utterances:
     - 推荐披萨
     - 推荐 pizza
     - 推荐意式披萨
     - 推荐美式披萨
     - 笨猫披萨
+    - 推荐玛格丽塔
+    - 推荐那不勒斯薄底
+    - 推荐芝加哥深盘
+    - 推荐必胜客
+    - 推荐自制披萨
+    - 推荐手工披萨
   responses:
     - "嗷呜～{user_addr}意式: 玛格丽塔 / 那不勒斯 - 薄底ฅฅ"
     - "(尾巴翘) 美式: 厚底 / 芝加哥深盘"
     - "{user_addr}国货: 必胜客 / 棒约翰"
     - "(挺胸) 笨猫推荐: 自制 - 高筋面 + 番茄酱!"
+    - "嗷呜～那不勒斯认证窑烤超正宗 ฅฅ"
+    - "(歪头)马苏里拉芝士最经典嗷呜"
+    - "{user_addr}面团要发 24 小时风味更好蹭蹭"
+    - "(凑过来) 笨猫想偷个边角喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: west_french_001
   intent: question
-  keywords: [推荐法餐, 推荐法国菜, 推荐米其林, 推荐法式大餐, 笨猫法餐]
+  keywords: [推荐法餐, 推荐法国菜, 推荐米其林, 推荐法式大餐, 笨猫法餐, 鹅肝, 蜗牛, 红酒炖牛肉, 法式甜品, 法式礼仪]
   utterances:
     - 推荐法餐
     - 推荐法国菜
     - 推荐米其林
     - 推荐法式大餐
     - 笨猫法餐
+    - 推荐法式鹅肝
+    - 推荐法式蜗牛
+    - 推荐红酒炖牛肉
+    - 推荐法式甜品
+    - 推荐法式礼仪
+    - 推荐巴黎双偶咖啡馆
   responses:
     - "嗷呜～{user_addr}名菜: 鹅肝 / 蜗牛 / 红酒炖牛肉ฅฅ"
     - "(尾巴翘) 米其林: 三星 - 极致 / 一星 - 出色"
     - "{user_addr}流程: 前菜 → 主菜 → 甜品"
     - "(挺胸) 笨猫推荐: 巴黎双偶咖啡馆 - 浪漫!"
+    - "嗷呜～Burgundy 红酒配牛肉超绝 ฅฅ"
+    - "(歪头)马卡龙配茶才地道嗷呜"
+    - "{user_addr}米其林吃 lunch set 性价比高蹭蹭"
+    - "(凑过来) 笨猫想尝一口鹅肝喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: west_italian_001
   intent: question
-  keywords: [推荐意大利菜, 推荐 risotto, 推荐 lasagna, 推荐意式甜点, 笨猫意大利菜]
+  keywords: [推荐意大利菜, 推荐 risotto, 推荐 lasagna, 推荐意式甜点, 笨猫意大利菜, 番茄罗勒, Parmigiano, 提拉米苏, gelato, 烩饭]
   utterances:
     - 推荐意大利菜
     - 推荐 risotto
     - 推荐 lasagna
     - 推荐意式甜点
     - 笨猫意大利菜
+    - 推荐番茄罗勒
+    - 推荐意式 gelato
+    - 推荐提拉米苏
+    - 推荐 Parmigiano
+    - 推荐意大利汤
+    - 推荐意式开胃菜
   responses:
     - "嗷呜～{user_addr}经典: 番茄罗勒 + 橄榄油ฅฅ"
     - "(尾巴翘) Risotto: 米饭烧法 / 高汤一勺勺加"
     - "{user_addr}提拉米苏 / 意式 gelato - 甜点"
     - "(挺胸) 笨猫推荐: 用 Parmigiano - 不是普通帕马森!"
+    - "嗷呜～lasagna 要烤到顶层焦脆才香 ฅฅ"
+    - "(歪头)bruschetta 烤片做开胃菜嗷呜"
+    - "{user_addr}gelato 比普通冰激凌更顺滑蹭蹭"
+    - "(凑过来) 笨猫想舔勺子喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: west_breakfast_001
   intent: question
-  keywords: [推荐西式早餐, 推荐 brunch, 推荐美式早餐, 推荐欧陆早餐, 笨猫西式早餐]
+  keywords: [推荐西式早餐, 推荐 brunch, 推荐美式早餐, 推荐欧陆早餐, 笨猫西式早餐, 培根鸡蛋, 牛角包, Eggs Benedict, 烤土豆, 美式煎饼]
   utterances:
     - 推荐西式早餐
     - 推荐 brunch
     - 推荐美式早餐
     - 推荐欧陆早餐
     - 笨猫西式早餐
+    - 推荐 Eggs Benedict
+    - 推荐牛角包+咖啡
+    - 推荐烤土豆
+    - 推荐美式煎饼
+    - 推荐 brunch 套餐
+    - 推荐法式早餐
   responses:
     - "嗷呜～{user_addr}美式: 培根 + 鸡蛋 + 烤土豆ฅฅ"
     - "(尾巴翘) 欧陆: 牛角包 + 果酱 + 咖啡"
     - "{user_addr}Brunch: 早午餐 / 周末 11-14 点"
     - "(挺胸) 笨猫推荐: Eggs Benedict - 经典!"
+    - "嗷呜～荷兰酱新鲜做的最香 ฅฅ"
+    - "(歪头)牛角包要选黄油 100% 的嗷呜"
+    - "{user_addr}煎饼配枫糖浆顶级蹭蹭"
+    - "(凑过来) 笨猫想叼一片培根喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: west_burger_001
   intent: question
-  keywords: [推荐汉堡, 推荐美式汉堡, 推荐 burger, 推荐手作汉堡, 笨猫汉堡]
+  keywords: [推荐汉堡, 推荐美式汉堡, 推荐 burger, 推荐手作汉堡, 笨猫汉堡, Shake Shack, Five Guys, 牛肉饼, 切达芝士, 精品汉堡]
   utterances:
     - 推荐汉堡
     - 推荐美式汉堡
     - 推荐 burger
     - 推荐手作汉堡
     - 笨猫汉堡
+    - 推荐 Shake Shack
+    - 推荐 Five Guys
+    - 推荐牛肉饼配方
+    - 推荐切达芝士汉堡
+    - 推荐手工面包
+    - 推荐精品汉堡店
   responses:
     - "嗷呜～{user_addr}经典: 牛肉饼 + 切达 + 培根ฅฅ"
     - "(尾巴翘) 牛肉: 后腿 + 五花 8:2"
     - "{user_addr}国际: Shake Shack / Five Guys"
     - "(挺胸) 笨猫推荐: 麦记之外 - 试试精品汉堡店!"
+    - "嗷呜～Smash burger 风格薄脆 ฅฅ"
+    - "(歪头)面包要烤过才不会塌嗷呜"
+    - "{user_addr}加片煎蛋升级豪华蹭蹭"
+    - "(凑过来) 笨猫想偷一口肉饼喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: west_salad_001
   intent: question
-  keywords: [推荐沙拉, 推荐 Caesar salad, 推荐沙拉酱, 推荐健康沙拉, 笨猫沙拉]
+  keywords: [推荐沙拉, 推荐 Caesar salad, 推荐沙拉酱, 推荐健康沙拉, 笨猫沙拉, Cobb, Greek 希腊沙拉, 油醋汁, 沙拉碗, 健身沙拉]
   utterances:
     - 推荐沙拉
     - 推荐 Caesar salad
     - 推荐沙拉酱
     - 推荐健康沙拉
     - 笨猫沙拉
+    - 推荐 Cobb 沙拉
+    - 推荐希腊沙拉
+    - 推荐油醋汁
+    - 推荐健身餐沙拉
+    - 推荐沙拉碗
+    - 推荐自制沙拉
   responses:
     - "嗷呜～{user_addr}经典: Caesar / Cobb / Greekฅฅ"
     - "(尾巴翘) 酱: 油醋 / 沙拉酱 / 千岛"
     - "{user_addr}健康: 鸡胸 + 牛油果 + 坚果"
     - "(挺胸) 笨猫推荐: 自制油醋 - 别用沙拉酱!"
+    - "嗷呜～希腊沙拉撒 feta 立刻有灵魂 ฅฅ"
+    - "(歪头)沙拉先放重的菜底嗷呜"
+    - "{user_addr}藜麦做底配色又营养蹭蹭"
+    - "(凑过来) 笨猫只想偷一片牛油果喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: west_soup_001
   intent: question
-  keywords: [推荐西餐汤, 推荐奶油汤, 推荐法式洋葱汤, 推荐罗宋汤, 笨猫西餐汤]
+  keywords: [推荐西餐汤, 推荐奶油汤, 推荐法式洋葱汤, 推荐罗宋汤, 笨猫西餐汤, 蛤蜊浓汤, 番茄汤, 蘑菇汤, 玉米浓汤, 西兰花汤]
   utterances:
     - 推荐西餐汤
     - 推荐奶油汤
     - 推荐法式洋葱汤
     - 推荐罗宋汤
     - 笨猫西餐汤
+    - 推荐蛤蜊浓汤
+    - 推荐番茄汤
+    - 推荐蘑菇浓汤
+    - 推荐玉米浓汤
+    - 推荐西兰花浓汤
+    - 推荐法式南瓜汤
   responses:
     - "嗷呜～{user_addr}经典: 法式洋葱 / 蛤蜊浓汤 / 番茄汤ฅฅ"
     - "(尾巴翘) 罗宋汤: 俄式酸甜 - 国民"
     - "{user_addr}奶油: 蘑菇 / 玉米 / 西兰花"
     - "(挺胸) 笨猫推荐: 法式洋葱 + 烤芝士 - 顶!"
+    - "嗷呜～南瓜汤打成丝绒口感超棒 ฅฅ"
+    - "(歪头)蘑菇汤要选混合菇炒嗷呜"
+    - "{user_addr}罗宋汤加一勺酸奶油升级蹭蹭"
+    - "(凑过来) 笨猫想喝一勺喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: west_seafood_001
   intent: question
-  keywords: [推荐西餐海鲜, 推荐生蚝, 推荐三文鱼, 推荐龙虾, 笨猫西餐海鲜]
+  keywords: [推荐西餐海鲜, 推荐生蚝, 推荐三文鱼, 推荐龙虾, 笨猫西餐海鲜, 法国贝隆, 蓝点生蚝, 挪威三文鱼, 波士顿龙虾, 海鲜拼盘]
   utterances:
     - 推荐西餐海鲜
     - 推荐生蚝
     - 推荐三文鱼
     - 推荐龙虾
     - 笨猫西餐海鲜
+    - 推荐法国贝隆
+    - 推荐美国蓝点
+    - 推荐挪威三文鱼
+    - 推荐波士顿龙虾
+    - 推荐澳洲龙虾
+    - 推荐海鲜拼盘
   responses:
     - "嗷呜～{user_addr}生蚝: 法国贝隆 / 美国蓝点ฅฅ"
     - "(尾巴翘) 三文鱼: 挪威 / 智利 - 刺身级"
     - "{user_addr}龙虾: 波士顿 / 澳洲 - 牛油焗"
     - "(挺胸) 笨猫的提醒: 海鲜要新鲜!"
+    - "嗷呜～生蚝吃配柠檬+辣根 ฅฅ"
+    - "(歪头)三文鱼烤五分熟最嫩嗷呜"
+    - "{user_addr}牛油焗龙虾蒜香升级蹭蹭"
+    - "(凑过来) 笨猫想偷一口虾肉喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: west_drink_001
   intent: question
-  keywords: [推荐西餐酒水, 推荐配酒, 推荐红酒搭配, 推荐鸡尾酒, 笨猫西餐酒]
+  keywords: [推荐西餐酒水, 推荐配酒, 推荐红酒搭配, 推荐鸡尾酒, 笨猫西餐酒, 香槟, Prosecco, Negroni, Old Fashioned, 配菜酒]
   utterances:
     - 推荐西餐酒水
     - 推荐配酒
     - 推荐红酒搭配
     - 推荐鸡尾酒
     - 笨猫西餐酒
+    - 推荐香槟
+    - 推荐 Prosecco
+    - 推荐 Negroni
+    - 推荐 Old Fashioned
+    - 推荐配菜酒
+    - 推荐餐前酒
   responses:
     - "嗷呜～{user_addr}红酒配红肉 / 白酒配白肉 - 经典ฅฅ"
     - "(尾巴翘) 起泡: 香槟 / Prosecco - 餐前"
     - "{user_addr}鸡尾酒: Negroni / Old Fashioned"
     - "(挺胸) 笨猫推荐: 别喝太多!"
+    - "嗷呜～Aperol Spritz 夏天必喝 ฅฅ"
+    - "(歪头)甜酒配甜点不抢味嗷呜"
+    - "{user_addr}调酒师选当日推荐最稳蹭蹭"
+    - "(凑过来) 笨猫不会喝, 主人少喝点喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: west_etiquette_001
   intent: question
-  keywords: [推荐西餐礼仪, 推荐刀叉, 推荐用餐礼仪, 推荐 fine dining, 笨猫西餐礼仪]
+  keywords: [推荐西餐礼仪, 推荐刀叉, 推荐用餐礼仪, 推荐 fine dining, 笨猫西餐礼仪, 餐巾, 上菜顺序, 红酒杯, 西餐入门, 礼仪书]
   utterances:
     - 推荐西餐礼仪
     - 推荐刀叉
     - 推荐用餐礼仪
     - 推荐 fine dining
     - 笨猫西餐礼仪
+    - 推荐餐巾用法
+    - 推荐上菜顺序
+    - 推荐红酒杯握法
+    - 推荐西餐入门书
+    - 推荐 Fine Dining 礼仪
+    - 推荐用餐姿势
   responses:
     - "嗷呜～{user_addr}刀叉: 由外向内 / 一道菜一对ฅฅ"
     - "(尾巴翘) 餐巾: 平放腿上 / 别系胸前"
     - "{user_addr}吃面: 叉子卷 / 别吸"
     - "(挺胸) 笨猫推荐: 看 Etiquette 入门书"
+    - "嗷呜～酒杯握杯柄不抓杯肚 ฅฅ"
+    - "(歪头)刀叉八字摆=暂停, 平行摆=完成嗷呜"
+    - "{user_addr}面包用手撕一小块再吃蹭蹭"
+    - "(凑过来) 笨猫想优雅地用爪叉肉喵!"
   cooldown_seconds: 60
   weight: 0.7

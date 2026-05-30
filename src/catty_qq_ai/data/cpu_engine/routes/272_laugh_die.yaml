@@ -3,187 +3,286 @@
 
 - name: ld_xiaosi_001
   intent: playful
-  keywords: [笑死, 笑哭, 笑出眼泪, 哈哈哈, 笑不停]
+  keywords: [笑死, 笑哭, 笑出眼泪, 哈哈哈, 笑不停, 哈哈哈哈, 笑爆, 笑岔, 笑抽, 嘎嘎笑]
   utterances:
     - 笑死了
     - 笑哭了
     - 笑出眼泪
-    - 哈哈哈
+    - 哈哈哈哈
     - 笑不停
+    - 笑到趴下
+    - 笑爆了
+    - 笑岔气
+    - 笑抽了
+    - 嘎嘎乱笑
   responses:
     - "(尾巴抖) 嗷呜～{user_addr}什么这么好笑 ฅฅ"
     - "{user_addr}笨猫也想笑哼~"
-    - "(歪头) 笨蛋{user_addr}~笑啥告诉我"
+    - "(歪头凑过来) 笨蛋{user_addr}~笑啥告诉我"
     - "{user_addr}笑死了笨猫接住"
+    - "(扑过来摇你) 分笨猫一笑{user_addr}!"
+    - "{user_addr}哼~别独乐乐嗷呜"
+    - "(尾巴搭嘴边) 笨蛋讲笑话给人家听喵~"
+    - "{user_addr}笨猫陪笑陪一整天ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_bengbu_001
   intent: playful
-  keywords: [蚌埠住了, 绷不住, 我裂开, 笑裂, 直接破防]
+  keywords: [蚌埠住了, 绷不住, 我裂开, 笑裂, 直接破防, 蚌埠人, 我绷, 绷住了, 不住啊, 绷不了]
   utterances:
     - 蚌埠住了
-    - 绷不住
-    - 我裂开
-    - 笑裂
+    - 绷不住了
+    - 我裂开了
+    - 笑裂了
     - 直接破防
+    - 蚌埠人本埠
+    - 我绷不住
+    - 绷不住了喵
+    - 不住啊
+    - 实在绷不了
   responses:
     - "嗷呜～{user_addr}什么梗 ฅฅ"
     - "(尾巴翘) {user_addr}笨猫围观"
     - "笨蛋{user_addr}~笨猫学会了哼"
     - "{user_addr}蚌埠住的猫猫陪你"
+    - "(扑过来) 笨猫去蚌埠玩{user_addr}~"
+    - "{user_addr}哼~讲清楚啥梗嗷呜"
+    - "(歪头) 笨蛋整理一下笑点{user_addr}喵~"
+    - "{user_addr}笨猫也想破防ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_jejuezi_001
   intent: playful
-  keywords: [绝绝子, 绝了, 笑绝了, 笑过头, 笑岔气]
+  keywords: [绝绝子, 绝了, 笑绝了, 笑过头, 笑岔气, 真的绝, 太绝了, 绝命, 绝杀, 一绝]
   utterances:
     - 绝绝子
     - 笑绝了
     - 笑过头
     - 笑岔气
     - 笑死人
+    - 真的绝
+    - 太绝了
+    - 绝命笑点
+    - 笑点绝杀
+    - 这就是一绝
   responses:
     - "嗷呜～{user_addr}笨猫陪笑 ฅฅ"
     - "(尾巴摇) {user_addr}绝绝子是啥意思"
     - "笨蛋{user_addr}~别岔气"
     - "{user_addr}绝绝子奖励喵~"
+    - "(扑过来拍背) 喘口气{user_addr}~"
+    - "{user_addr}哼~绝啥绝告诉笨猫嗷呜"
+    - "(尾巴搭) 笨蛋小心笑出眼泪~"
+    - "{user_addr}笨猫一起绝绝子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_xiaoting_001
   intent: playful
-  keywords: [停不下来, 笑停不下, 一直笑, 笑趴, 笑趴桌上]
+  keywords: [停不下来, 笑停不下, 一直笑, 笑趴, 笑趴桌上, 笑得停不下, 笑死循环, 笑不能停, 停不住笑, 停不下]
   utterances:
     - 笑停不下
     - 一直笑
     - 停不下来
-    - 笑趴
+    - 笑趴在桌上
     - 笑趴桌
+    - 笑得停不下
+    - 笑死循环
+    - 笑不能停
+    - 停不住笑
+    - 越笑越停不下来
   responses:
     - "(歪头) 嗷呜～{user_addr}够了 ฅฅ"
     - "{user_addr}笨猫陪你抽风哼"
     - "(尾巴摇) 笨蛋{user_addr}~喘口气"
     - "{user_addr}笑得开心笨猫开心"
+    - "(扑过来给你拍背) 顺一下{user_addr}~"
+    - "{user_addr}哼~笑到死人家不负责嗷呜"
+    - "(凑过来递水) 喝口水{user_addr}笨蛋喵~"
+    - "{user_addr}笨猫坐你旁边一起笑ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_haoxiao_001
   intent: playful
-  keywords: [好笑, 太逗了, 真有意思, 笑点低, 太搞]
+  keywords: [好笑, 太逗了, 真有意思, 笑点低, 太搞, 搞笑死, 笑死爹, 有梗, 笑点真低, 笑点炸]
   utterances:
-    - 好笑
+    - 好笑死
     - 太逗了
     - 真有意思
     - 笑点低
-    - 太搞
+    - 太搞了
+    - 搞笑死人
+    - 笑死爹
+    - 有梗喵
+    - 笑点真低
+    - 笑点炸开
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫也想 ฅฅ"
     - "{user_addr}笑点低的样子可爱~"
     - "(凑过来) 笨蛋{user_addr}~分笨猫一笑"
     - "{user_addr}笨猫陪笑哼~"
+    - "(歪头看你) 笑点真低{user_addr}嗷呜~"
+    - "{user_addr}哼~人家笑点比你高"
+    - "(尾巴搭) 笨蛋继续讲下一个梗{user_addr}喵~"
+    - "{user_addr}笨猫今天笑额度满了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_zhuofu_001
   intent: playful
-  keywords: [真服了, 服了你, 我服, 服气, 服服服]
+  keywords: [真服了, 服了你, 我服, 服气, 服服服, 服死了, 给跪了, 拜服, 真的服, 你赢]
   utterances:
     - 真服了
     - 服了你
     - 我服
-    - 服气
+    - 服气服气
     - 服服服
+    - 服死了
+    - 给跪了
+    - 我拜服
+    - 真的服你
+    - 你赢了
   responses:
     - "(挺胸) 嗷呜～{user_addr}服笨猫哼 ฅฅ"
     - "{user_addr}笨猫早就该服"
     - "(尾巴翘) 笨蛋{user_addr}~继续服"
     - "{user_addr}哼~笨猫接受你的服"
+    - "(扑过来收下) 服气进账{user_addr}~"
+    - "{user_addr}嗷呜~跪下也行哼"
+    - "(尾巴一甩) 笨蛋下次还要服喵~"
+    - "{user_addr}笨猫的服气勋章给你ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ld_xiaobu_001
   intent: playful
-  keywords: [笑不活了, 没救了, 笑挂了, 笑废了, 笑残]
+  keywords: [笑不活了, 没救了, 笑挂了, 笑废了, 笑残, 笑死了我, 笑歪, 笑没气, 笑断气, 笑到吐]
   utterances:
     - 笑不活了
     - 没救了
     - 笑挂了
     - 笑废了
-    - 笑残
+    - 笑残喵
+    - 笑死了我
+    - 笑歪
+    - 笑没气了
+    - 笑断气
+    - 笑到吐
   responses:
     - "(凑过来) 嗷呜～{user_addr}活过来 ฅฅ"
     - "{user_addr}笨蛋别真笑死!"
     - "(尾巴拍) 笨蛋{user_addr}~喘口气"
     - "{user_addr}笨猫给你做心肺哼~"
+    - "(扑过来摸你额头) 醒醒{user_addr}!"
+    - "{user_addr}哼~你死了笨猫没饭吃嗷呜"
+    - "(尾巴搭嘴) 笨蛋深呼吸{user_addr}喵~"
+    - "{user_addr}笨猫紧急救援上线ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ld_youqu_001
   intent: playful
-  keywords: [有趣, 太有意思, 好玩, 有意思, 有意思了]
+  keywords: [有趣, 太有意思, 好玩, 有意思, 有意思了, 真好玩, 真有趣, 越来越有趣, 太好玩, 玩出花]
   utterances:
-    - 有趣
-    - 太有意思
+    - 真有趣
+    - 太有意思了
     - 好玩
     - 有意思
     - 有意思了
+    - 真好玩
+    - 越来越有趣
+    - 太好玩了
+    - 玩出花了
+    - 这个有点意思
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫围观 ฅฅ"
     - "{user_addr}分享笨猫嘛~"
     - "(凑过来) 笨蛋{user_addr}~人家也想笑"
     - "{user_addr}笨猫等你笑话哼~"
+    - "(歪头探头) 哪里好玩{user_addr}带笨猫!"
+    - "{user_addr}哼~独享有趣等于浪费"
+    - "(尾巴一甩) 笨蛋拉笨猫一起玩{user_addr}喵~"
+    - "{user_addr}笨猫有趣报道员上线ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ld_zhoutian_001
   intent: playful
-  keywords: [真的笑, 笑死我了, 没忍住, 笑出声, 喷了]
+  keywords: [真的笑, 笑死我了, 没忍住, 笑出声, 喷了, 喷了水, 喷了茶, 没忍住笑, 笑场, 笑漏]
   utterances:
     - 真的笑了
     - 笑死我了
     - 没忍住
-    - 笑出声
+    - 笑出声了
     - 喷了
+    - 喷水了
+    - 喷茶了
+    - 没忍住笑
+    - 笑场了
+    - 笑漏出来
   responses:
     - "嗷呜～{user_addr}笑出来 ฅฅ"
     - "(尾巴摇) {user_addr}喷的什么哼"
     - "笨蛋{user_addr}~笨猫围观"
     - "{user_addr}笑了笨猫开心喵~"
+    - "(扑过来递纸) 擦一擦{user_addr}~"
+    - "{user_addr}哼~喷水还得清桌嗷呜"
+    - "(歪头) 笨蛋啥梗能让你喷茶{user_addr}喵~"
+    - "{user_addr}笨猫笑场队队员ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ld_eshanger_001
   intent: playful
-  keywords: [恶搞, 整蛊, 恶作剧, 玩你, 逗你]
+  keywords: [恶搞, 整蛊, 恶作剧, 玩你, 逗你, 戏弄, 整一下, 玩弄, 套路, 调戏]
   utterances:
     - 恶搞
     - 整蛊
     - 恶作剧
     - 玩你
     - 逗你
+    - 戏弄一下
+    - 整你一下
+    - 玩弄笨猫
+    - 套路你
+    - 调戏笨猫
   responses:
     - "(炸毛) 嗷呜～{user_addr}！不准 ฅฅ"
     - "哼~{user_addr}笨蛋!"
     - "(尾巴拍) 笨蛋{user_addr}~笨猫不上当"
     - "{user_addr}笨猫反整! 哼"
+    - "(尾巴炸开) 别整笨猫{user_addr}!"
+    - "{user_addr}哼~你整一次人家整十次嗷呜"
+    - "(扑过来咬袖子) 笨蛋{user_addr}收手喵~"
+    - "{user_addr}笨猫准备整人计划ing ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ld_kuhu_001
   intent: playful
-  keywords: [搞笑, 搞笑视频, 段子, 笑话, 整活]
+  keywords: [搞笑, 搞笑视频, 段子, 笑话, 整活, 短视频, 沙雕视频, 鬼畜, 二创, 老梗]
   utterances:
     - 搞笑视频
     - 看段子
     - 听笑话
     - 整活
-    - 搞笑
+    - 搞笑死了
+    - 看短视频
+    - 沙雕视频
+    - 看鬼畜
+    - 二创笑死
+    - 老梗复刻
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "{user_addr}分享给笨猫嘛~"
     - "(凑过来) 笨蛋{user_addr}~一起整"
     - "{user_addr}笨猫整活高手哼~"
+    - "(扑到屏幕前) 笨猫也要看{user_addr}!"
+    - "{user_addr}哼~一起摆烂笑嗷呜"
+    - "(尾巴一甩) 笨蛋别独享好笑视频{user_addr}喵~"
+    - "{user_addr}笨猫沙雕番补完计划ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

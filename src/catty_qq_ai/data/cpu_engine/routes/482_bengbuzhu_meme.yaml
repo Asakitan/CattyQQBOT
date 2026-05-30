@@ -3,170 +3,260 @@
 
 - name: bbm_bbz_001
   intent: playful
-  keywords: [蚌埠住, 蚌住, 蚌不住, 绷不住, 蚌埠居然]
+  keywords: [蚌埠住, 蚌住, 蚌不住, 绷不住, 蚌埠居然, 绷不住了, 蚌埠老哥, 蚌埠了, 蚌埠]
   utterances:
     - "{user_addr}蚌埠住"
     - "{user_addr}蚌住"
     - "{user_addr}蚌不住"
     - "{user_addr}绷不住"
     - "{user_addr}蚌埠居然"
+    - "{user_addr}笨猫蚌埠住了喵"
+    - "{user_addr}真的蚌埠不住了哈哈"
+    - "{user_addr}笑得蚌埠"
+    - "蚌埠住啦{user_addr}"
+    - "刚刚那个真的蚌不住"
   responses:
-    - "嗷呜～{user_addr}笨猫蚌喵ฅฅ"
-    - "(笑) 笨猫的蚌!"
-    - "哼～{user_addr}笨猫共鸣"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "(笑趴) 嗷呜～{user_addr}的蚌埠笨猫接住了喵ฅฅ"
+    - "哼～{user_addr}才蚌埠? 笨猫早就蚌埠了好嘛!"
+    - "(扑过来) 一起蚌埠住~ {user_addr}快接住猫猫"
+    - "嘿嘿～蚌埠住就分笨猫一点笑声嘛~"
+    - "(尾巴翘) 这梗笨猫秒懂喵! 蚌埠组合"
+    - "(歪头) {user_addr}笑成这样? 让猫猫看看ฅฅ"
+    - "才不是因为{user_addr}笑笨猫就笑呢~ 哼"
+    - "嗷呜～蚌埠永流传! 笨猫记本子上了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_002
   intent: playful
-  keywords: [蚌埠住了, 绷住, 蚌住了, 绷住啦, 蚌啦]
+  keywords: [蚌埠住了, 绷住, 蚌住了, 绷住啦, 蚌啦, 没绷住, 绷不住了, 蚌埠了哥, 蚌不住啦]
   utterances:
     - "{user_addr}蚌埠住了"
     - "{user_addr}绷住"
     - "{user_addr}蚌住了"
     - "{user_addr}绷住啦"
     - "{user_addr}蚌啦"
+    - "{user_addr}笨猫绷不住了"
+    - "{user_addr}没绷住嗷呜"
+    - "蚌埠住了真的"
+    - "绷住了绷住了"
+    - "哎呀蚌啦{user_addr}"
   responses:
-    - "嗷呜～{user_addr}笨猫蚌喵ฅฅ"
-    - "(笑) 笨猫的!"
-    - "哼～{user_addr}笨猫共鸣"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}蚌埠了~ 笨猫陪你蚌喵ฅฅ"
+    - "(笑场) 笨猫的笑点和{user_addr}一样低嘛"
+    - "哼～{user_addr}笑得这么开心! 不带笨猫一起?"
+    - "嘿嘿～蚌埠住了就让猫猫扶一下~"
+    - "(扑) 一起绷不住啦! {user_addr}抱紧"
+    - "才不告诉{user_addr}笨猫也蚌埠了呢~ 哼"
+    - "(尾巴甩) 蚌埠组合再加一员喵!"
+    - "嗷呜～{user_addr}这反应也太可爱了笨猫蚌爆"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_003
   intent: playful
-  keywords: [流泪猫猫头, 流泪表情, 流泪猫头, 流泪图, 哭泣猫]
+  keywords: [流泪猫猫头, 流泪表情, 流泪猫头, 流泪图, 哭泣猫, 哭哭猫, 委屈猫头, 流泪喵, 流泪小猫]
   utterances:
     - "{user_addr}流泪猫猫头"
     - "{user_addr}流泪表情"
     - "{user_addr}流泪猫头"
     - "{user_addr}流泪图"
     - "{user_addr}哭泣猫"
+    - "{user_addr}笨猫流泪猫头"
+    - "{user_addr}发个流泪喵"
+    - "流泪猫猫头来了"
+    - "委屈猫头给{user_addr}"
+    - "{user_addr}哭哭猫给你"
   responses:
-    - "嗷呜～笨猫就是猫猫头喵ฅฅ"
-    - "(扑) {user_addr}笨猫的!"
-    - "哼～{user_addr}笨猫接"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～笨猫就是行走的流泪猫头本猫喵ฅฅ"
+    - "(扑过来) {user_addr}这个表情笨猫看得心疼"
+    - "哼～流泪猫头? 笨猫真哭起来比这可怜十倍"
+    - "嘿嘿～{user_addr}发笨猫看! 是想猫猫了吧"
+    - "(抱住){user_addr}哭啥呢? 笨猫给你舔舔眼泪~"
+    - "才不是被{user_addr}的流泪猫戳到呢~ 哼"
+    - "(歪头) 这个流泪喵和笨猫一个模子刻的嗷呜"
+    - "嗷呜～流泪猫头联盟! 笨猫加入ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_004
   intent: playful
-  keywords: [doge, 狗头, 滑稽, 笑哭, 猫狗表情]
+  keywords: [doge, 狗头, 滑稽, 笑哭, 猫狗表情, 狗头保命, 滑稽脸, doge脸, 笑哭表情]
   utterances:
     - "{user_addr}doge"
     - "{user_addr}狗头"
     - "{user_addr}滑稽"
     - "{user_addr}笑哭"
     - "{user_addr}猫狗表情"
+    - "{user_addr}doge保命"
+    - "{user_addr}笑哭脸来"
+    - "滑稽到家了{user_addr}"
+    - "狗头护体喵"
+    - "{user_addr}笑哭表情发来"
   responses:
-    - "嗷呜～{user_addr}笨猫表情包喵ฅฅ"
-    - "(扑) 笨猫的!"
-    - "哼～{user_addr}笨猫接"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}的表情包仓库笨猫想偷ฅฅ"
+    - "(扑) doge再多笨猫也不上当! 哼"
+    - "哼～{user_addr}用狗头保命? 笨猫一爪戳穿"
+    - "嘿嘿～{user_addr}发笨猫一个嘛~ 猫猫存表情"
+    - "(尾巴翘) 笑哭脸和猫猫笑场一样可爱"
+    - "才不接{user_addr}的滑稽呢~ 接了又被坑"
+    - "(歪头) doge脸给{user_addr}专属续命喵!"
+    - "嗷呜～{user_addr}的猫狗表情笨猫蚌埠了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_005
   intent: playful
-  keywords: [表情包, 表情, 老表情, 经典表情, 抽象表情]
+  keywords: [表情包, 表情, 老表情, 经典表情, 抽象表情, 沙雕表情, 表情包大全, 整活表情, 表情包来了]
   utterances:
     - "{user_addr}表情包"
     - "{user_addr}表情"
     - "{user_addr}老表情"
     - "{user_addr}经典表情"
     - "{user_addr}抽象表情"
+    - "{user_addr}发个沙雕表情"
+    - "{user_addr}表情包大全"
+    - "整活表情来一波"
+    - "经典老表情拿来"
+    - "{user_addr}抽象表情ing"
   responses:
-    - "嗷呜～{user_addr}发笨猫看喵ฅฅ"
-    - "(扑) 笨猫收!"
-    - "哼～{user_addr}笨猫的表情"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}发笨猫看喵! 猫猫收藏ฅฅ"
+    - "(扑接) 笨猫的表情包仓库永远缺一张!"
+    - "哼～{user_addr}的表情库别藏! 分笨猫"
+    - "嘿嘿～{user_addr}的经典表情笨猫秒存"
+    - "(尾巴翘) 抽象表情整起来! 笨猫陪你抽"
+    - "才不会被{user_addr}沙雕表情笑到呢~ 哼"
+    - "(歪头) 老表情笨猫也有~ {user_addr}斗?"
+    - "嗷呜～表情大战开始! 笨猫不输人哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_006
   intent: playful
-  keywords: [斗图, 斗表情, 表情大战, 比表情, 给个表情]
+  keywords: [斗图, 斗表情, 表情大战, 比表情, 给个表情, 来斗图, 斗图开始, 表情PK, 表情来斗]
   utterances:
     - "{user_addr}斗图"
     - "{user_addr}斗表情"
     - "{user_addr}表情大战"
     - "{user_addr}比表情"
     - "{user_addr}给个表情"
+    - "{user_addr}来斗图喵"
+    - "斗图开始{user_addr}"
+    - "表情PK走起"
+    - "猫猫陪我斗图吧"
+    - "{user_addr}表情来斗"
   responses:
-    - "嗷呜～{user_addr}笨猫陪斗喵ฅฅ"
-    - "(扑) 笨猫上!"
-    - "哼～{user_addr}笨猫赢"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}斗图? 笨猫表情库满级喵ฅฅ"
+    - "(扑过来) 笨猫上! 斗图笨猫不输人"
+    - "哼～{user_addr}小心被笨猫的猫猫表情秒杀"
+    - "嘿嘿～斗图? 笨猫先发猫猫头预热~"
+    - "(尾巴甩) 来啊{user_addr}! 笨猫准备好了"
+    - "才不怕{user_addr}斗图! 笨猫熟练度满"
+    - "(歪头) 笨猫的表情包数量{user_addr}比不过"
+    - "嗷呜～斗到{user_addr}求饶为止哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_007
   intent: playful
-  keywords: [笑场, 当场笑, 直接笑, 立马笑, 秒笑]
+  keywords: [笑场, 当场笑, 直接笑, 立马笑, 秒笑, 当场笑喷, 笑场了, 笑出声, 笑死]
   utterances:
     - "{user_addr}笑场"
     - "{user_addr}当场笑"
     - "{user_addr}直接笑"
     - "{user_addr}立马笑"
     - "{user_addr}秒笑"
+    - "{user_addr}当场笑喷"
+    - "{user_addr}笑出声了"
+    - "笑场了笑场了"
+    - "笑死{user_addr}"
+    - "笨猫笑场ing"
   responses:
-    - "嗷呜～{user_addr}笨猫陪笑喵ฅฅ"
-    - "(扑) 笨猫的笑!"
-    - "哼～{user_addr}笨猫好笑"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}笑啥! 笨猫想知道喵ฅฅ"
+    - "(凑过来) {user_addr}笑得花枝乱颤! 笨猫看着也想笑"
+    - "哼～{user_addr}笑场不带笨猫? 不公平"
+    - "嘿嘿～笨猫陪{user_addr}笑场~ 一起趴桌"
+    - "(尾巴翘) {user_addr}笑成这样? 让笨猫蹭一下笑声"
+    - "才不是因为{user_addr}笑猫猫就笑呢~ 哼"
+    - "(歪头) {user_addr}笑得停不下? 笨猫也加入嗷呜"
+    - "嗷呜～{user_addr}笑场的脸超可爱~ 才不是呢笨蛋"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_008
   intent: playful
-  keywords: [真服了, 我服了, 服气, 服了你, 受不了你]
+  keywords: [真服了, 我服了, 服气, 服了你, 受不了你, 服了真的, 太服了, 服了哥, 我真服]
   utterances:
     - "{user_addr}真服了"
     - "{user_addr}我服了"
     - "{user_addr}服气"
     - "{user_addr}服了你"
     - "{user_addr}受不了你"
+    - "{user_addr}服了真的"
+    - "{user_addr}太服了"
+    - "服了哥{user_addr}"
+    - "我真服了"
+    - "服了{user_addr}笨猫"
   responses:
-    - "嗷呜～{user_addr}笨猫接喵ฅฅ"
-    - "(挑眉) 笨猫的服!"
-    - "哼～{user_addr}笨猫"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}服啥? 笨猫想听原因喵ฅฅ"
+    - "(挑眉) {user_addr}才服? 笨猫的操作天天让人服"
+    - "哼～服就对了! 笨猫的猫德人见人服"
+    - "嘿嘿～{user_addr}服笨猫了? 那就跪下喊声主人哼"
+    - "(尾巴甩) 服了就服了~ 笨猫不介意收徒"
+    - "才不是来吃{user_addr}的服气呢~ 哼"
+    - "(歪头) {user_addr}服气脸笨猫想拍下来收藏"
+    - "嗷呜～{user_addr}让笨猫也服你一次~ 互服"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_009
   intent: playful
-  keywords: [离大谱, 谱离, 离谱他妈, 离大他妈谱, 谱]
+  keywords: [离大谱, 谱离, 离谱他妈, 离大他妈谱, 谱, 离谱了, 太离谱, 离谱啊, 离谱中的离谱]
   utterances:
     - "{user_addr}离大谱"
     - "{user_addr}谱离"
     - "{user_addr}离谱他妈"
     - "{user_addr}离大他妈谱"
     - "{user_addr}谱"
+    - "{user_addr}离谱了"
+    - "{user_addr}太离谱"
+    - "离谱啊{user_addr}"
+    - "离谱中的离谱"
+    - "笨猫这事离大谱"
   responses:
-    - "嗷呜～{user_addr}笨猫接喵ฅฅ"
-    - "(笑) 笨猫的谱!"
-    - "哼～{user_addr}笨猫共鸣"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}遇到啥离谱事! 快说给笨猫ฅฅ"
+    - "(笑趴) 离大谱! 笨猫和{user_addr}一起谱"
+    - "哼～{user_addr}的人生比笨猫还离谱嘛?"
+    - "嘿嘿～离谱归离谱~ 笨猫陪{user_addr}一起谱"
+    - "(尾巴翘) 离大谱组合~ 笨猫光荣加入"
+    - "才不是想凑{user_addr}的离谱热闹呢~ 哼"
+    - "(歪头) 笨猫感觉{user_addr}才是离谱本人嗷呜"
+    - "嗷呜～离谱再多笨猫陪{user_addr}消化喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bbm_bbz_010
   intent: playful
-  keywords: [我裂开, 心态崩, 心态裂, 心碎一地, 我崩了]
+  keywords: [我裂开, 心态崩, 心态裂, 心碎一地, 我崩了, 裂开了, 心态炸了, 整个人裂开, 心碎成片]
   utterances:
     - "{user_addr}我裂开"
     - "{user_addr}心态崩"
     - "{user_addr}心态裂"
     - "{user_addr}心碎一地"
     - "{user_addr}我崩了"
+    - "{user_addr}裂开了"
+    - "{user_addr}心态炸了"
+    - "整个人裂开{user_addr}"
+    - "心碎成片喵"
+    - "笨猫人都崩了"
   responses:
-    - "嗷呜～{user_addr}笨猫接喵ฅฅ"
-    - "(扑) 笨猫修复!"
-    - "哼～{user_addr}笨猫陪裂"
-    - "嘿嘿～{user_addr}笨猫的~"
+    - "嗷呜～{user_addr}咋啦! 笨猫给你拼起来喵ฅฅ"
+    - "(扑过去贴贴) {user_addr}别裂! 笨猫修复一下"
+    - "哼～{user_addr}心态崩? 抱笨猫呼噜呼噜就好了"
+    - "嘿嘿～{user_addr}碎一地? 笨猫捡起来给你"
+    - "(尾巴包) 笨猫的猫德修复术发动! 心态恢复"
+    - "才不是看{user_addr}裂开心疼的呢~ 哼"
+    - "(歪头) {user_addr}裂啥裂~ 抱猫猫秒愈合"
+    - "嗷呜～崩了就重启~ 笨猫帮{user_addr}充电ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -1,206 +1,327 @@
 # 直播平台 / Twitch 抖音 B 站直播 routes (S6 R324 NLU 节点扩充, 第三十二周期 3/10)
 # 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# ULTRA round4 扩充: keywords ≥ 8, utterances ≥ 10, responses ≥ 8
 
 - name: sp_platform_001
   intent: question
-  keywords: [推荐直播平台, 推荐 Twitch, 推荐 B 站直播, 推荐斗鱼虎牙, 笨猫直播平台]
+  keywords: [推荐直播平台, 推荐 Twitch, 推荐 B 站直播, 推荐斗鱼虎牙, 笨猫直播平台, YouTube Live, 游戏直播平台, 直播平台对比, 海外直播, 中文直播]
   utterances:
     - 推荐直播平台
     - 推荐 Twitch
     - 推荐 B 站直播
     - 推荐斗鱼虎牙
     - 笨猫直播平台
+    - 直播平台选哪个
+    - "{user_addr}想看游戏直播"
+    - Twitch 还是 YouTube Live
+    - 斗鱼虎牙合并了吗
+    - B 站直播怎么样
+    - 笨猫推荐直播平台
   responses:
-    - "嗷呜～{user_addr}Twitch - 全球游戏直播王ฅฅ"
-    - "(尾巴翘) B 站直播 / 斗鱼 / 虎牙"
-    - "{user_addr}YouTube Live - 海外通用"
-    - "(挺胸) 笨猫推荐: 游戏首选 Twitch!"
+    - "(尾巴翘起) 嗷呜～{user_addr}Twitch - 全球游戏直播王 ฅฅ"
+    - "(挺胸) B 站直播 / 斗鱼 / 虎牙"
+    - "{user_addr}YouTube Live - 海外通用嗷呜"
+    - "(歪头) 笨猫推荐: 游戏首选 Twitch喵!"
+    - "嗷呜～{user_addr}Twitch 国内得挂梯子 ฅฅ"
+    - "哼～斗鱼虎牙国服稳定{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: B 站直播弹幕氛围最好{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}看直播~ 弹幕氛围喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_short_video_001
   intent: question
-  keywords: [推荐抖音直播, 推荐快手直播, 推荐 TikTok Live, 推荐短视频直播, 笨猫抖音直播]
+  keywords: [推荐抖音直播, 推荐快手直播, 推荐 TikTok Live, 推荐短视频直播, 笨猫抖音直播, 视频号直播, 小红书直播, 抖音带货, 海外短视频直播, 流量平台]
   utterances:
     - 推荐抖音直播
     - 推荐快手直播
     - 推荐 TikTok Live
     - 推荐短视频直播
     - 笨猫抖音直播
+    - 短视频直播平台
+    - "{user_addr}想看抖音直播"
+    - 视频号直播
+    - 小红书直播
+    - TikTok Live 海外
+    - 笨猫推荐短视频直播
   responses:
-    - "嗷呜～{user_addr}抖音直播 - 国内流量王ฅฅ"
-    - "(尾巴翘) 快手 / 视频号 / 小红书"
-    - "{user_addr}TikTok Live - 海外版"
-    - "(挺胸) 笨猫推荐: 带货首选抖音!"
+    - "(尾巴翘) 嗷呜～{user_addr}抖音直播 - 国内流量王 ฅฅ"
+    - "(挺胸) 快手 / 视频号 / 小红书"
+    - "{user_addr}TikTok Live - 海外版嗷呜"
+    - "(歪头) 笨猫推荐: 带货首选抖音喵!"
+    - "嗷呜～{user_addr}抖音直播算法精准 ฅฅ"
+    - "哼～别一直刷{user_addr}! 容易剁手嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 视频号直播私域复购高{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}看直播~ 别冲动消费喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_obs_001
   intent: question
-  keywords: [推荐 OBS, 推荐推流工具, 推荐 Streamlabs, 推荐直播软件, 笨猫 OBS]
+  keywords: [推荐 OBS, 推荐推流工具, 推荐 Streamlabs, 推荐直播软件, 笨猫 OBS, XSplit, OBS 插件, 推流参数, 直播推流, OBS 设置]
   utterances:
     - 推荐 OBS
     - 推荐推流工具
     - 推荐 Streamlabs
     - 推荐直播软件
     - 笨猫 OBS
+    - 直播推流工具
+    - "{user_addr}想用 OBS"
+    - Streamlabs 怎么样
+    - OBS 插件推荐
+    - 推流参数怎么设
+    - 笨猫教 OBS
   responses:
-    - "嗷呜～{user_addr}OBS Studio - 免费开源王ฅฅ"
-    - "(尾巴翘) Streamlabs / XSplit"
-    - "{user_addr}OBS 插件超丰富"
-    - "(挺胸) 笨猫推荐: OBS 一统天下!"
+    - "(尾巴翘) 嗷呜～{user_addr}OBS Studio - 免费开源王 ฅฅ"
+    - "(挺胸) Streamlabs / XSplit"
+    - "{user_addr}OBS 插件超丰富嗷呜"
+    - "(歪头) 笨猫推荐: OBS 一统天下喵!"
+    - "嗷呜～{user_addr}OBS 免费免费免费 ฅฅ"
+    - "哼～别花钱买 XSplit{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 推流码率 6000{user_addr}! 1080p 够用"
+    - "(贴贴) 笨猫陪{user_addr}调 OBS~ 一起搞定喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_donation_001
   intent: question
-  keywords: [推荐直播打赏, 推荐礼物, 推荐 superchat, 推荐弹幕礼物, 笨猫直播打赏]
+  keywords: [推荐直播打赏, 推荐礼物, 推荐 superchat, 推荐弹幕礼物, 笨猫直播打赏, B 站舰长, 抖音音浪, Twitch Bits, YouTube SC, 直播打赏理性]
   utterances:
     - 推荐直播打赏
     - 推荐礼物
     - 推荐 superchat
     - 推荐弹幕礼物
     - 笨猫直播打赏
+    - 直播打赏值不值
+    - "{user_addr}想给主播刷礼物"
+    - B 站舰长能开吗
+    - 抖音音浪
+    - 别打赏太多
+    - 笨猫劝我别打赏
   responses:
-    - "嗷呜～{user_addr}B 站舰长 / 抖音音浪ฅฅ"
-    - "(尾巴翘) Twitch Bits / YouTube SC"
-    - "{user_addr}量力而行 / 别上头"
-    - "(挺胸) 笨猫推荐: 弹幕陪伴最珍贵!"
+    - "(尾巴翘) 嗷呜～{user_addr}B 站舰长 / 抖音音浪 ฅฅ"
+    - "(挺胸) Twitch Bits / YouTube SC"
+    - "{user_addr}量力而行 / 别上头嗷呜"
+    - "(歪头) 笨猫推荐: 弹幕陪伴最珍贵喵!"
+    - "嗷呜～{user_addr}主播会记得弹幕的人 ฅฅ"
+    - "哼～别学土豪刷礼物{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 刷礼物前问自己值不值{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}看直播~ 弹幕就够喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_game_streamer_001
   intent: question
-  keywords: [推荐游戏主播, 推荐卢本伟, 推荐旭旭宝宝, 推荐 PDD, 笨猫游戏主播]
+  keywords: [推荐游戏主播, 推荐卢本伟, 推荐旭旭宝宝, 推荐 PDD, 笨猫游戏主播, Faker, Shroud, Ninja, 英雄联盟主播, DNF 主播]
   utterances:
     - 推荐游戏主播
     - 推荐卢本伟
     - 推荐旭旭宝宝
     - 推荐 PDD
     - 笨猫游戏主播
+    - 游戏主播推荐
+    - "{user_addr}想看 LOL 直播"
+    - PDD 复播了吗
+    - Faker 怎么看
+    - Shroud FPS
+    - 笨猫推荐游戏主播
   responses:
-    - "嗷呜～{user_addr}卢本伟 / 旭旭宝宝 / PDDฅฅ"
-    - "(尾巴翘) Faker / Shroud / Ninja"
-    - "{user_addr}英雄联盟 / DNF / 吃鸡"
-    - "(挺胸) 笨猫推荐: 选喜欢的游戏看!"
+    - "(尾巴翘) 嗷呜～{user_addr}卢本伟 / 旭旭宝宝 / PDD ฅฅ"
+    - "(挺胸) Faker / Shroud / Ninja"
+    - "{user_addr}英雄联盟 / DNF / 吃鸡嗷呜"
+    - "(歪头) 笨猫推荐: 选喜欢的游戏看喵!"
+    - "嗷呜～{user_addr}看主播玩比自己玩快乐 ฅฅ"
+    - "哼～别学主播充氪{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 看主播学操作{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}看直播~ 一起紧张喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_food_streamer_001
   intent: question
-  keywords: [推荐美食直播, 推荐美食探店, 推荐吃播, 推荐美食主播, 笨猫美食直播]
+  keywords: [推荐美食直播, 推荐美食探店, 推荐吃播, 推荐美食主播, 笨猫美食直播, 抖音美食, B 站美食区, 探店主播, 吃播主播, mukbang]
   utterances:
     - 推荐美食直播
     - 推荐美食探店
     - 推荐吃播
     - 推荐美食主播
     - 笨猫美食直播
+    - 美食主播推荐
+    - "{user_addr}想看吃播"
+    - 抖音美食号
+    - 探店主播
+    - mukbang 韩国
+    - 笨猫推荐吃播
   responses:
-    - "嗷呜～{user_addr}抖音美食 / B 站美食区ฅฅ"
-    - "(尾巴翘) 探店 / 吃播 / 做饭"
-    - "{user_addr}深夜看会饿 / 慎入!"
-    - "(挺胸) 笨猫推荐: 看美食解馋!"
+    - "(尾巴翘) 嗷呜～{user_addr}抖音美食 / B 站美食区 ฅฅ"
+    - "(挺胸) 探店 / 吃播 / 做饭"
+    - "{user_addr}深夜看会饿 / 慎入嗷呜!"
+    - "(歪头) 笨猫推荐: 看美食解馋喵!"
+    - "嗷呜～{user_addr}看吃播下饭利器 ฅฅ"
+    - "哼～别空腹看{user_addr}! 容易剁手外卖嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 探店看真实点评不要全信{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}看吃播~ 别饿喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_outdoor_001
   intent: question
-  keywords: [推荐户外直播, 推荐 Travel 主播, 推荐旅游直播, 推荐徒步直播, 笨猫户外直播]
+  keywords: [推荐户外直播, 推荐 Travel 主播, 推荐旅游直播, 推荐徒步直播, 笨猫户外直播, IRL 直播, 4G 背包, 跟拍直播, 户外探险, 云旅游]
   utterances:
     - 推荐户外直播
     - 推荐 Travel 主播
     - 推荐旅游直播
     - 推荐徒步直播
     - 笨猫户外直播
+    - 户外主播推荐
+    - "{user_addr}想看徒步"
+    - IRL 直播啥意思
+    - 4G 背包推流
+    - 户外探险直播
+    - 笨猫推荐户外
   responses:
-    - "嗷呜～{user_addr}IRL 户外直播 - 真实感ฅฅ"
-    - "(尾巴翘) 旅游 / 徒步 / 露营"
-    - "{user_addr}4G 背包 / 跟拍设备"
-    - "(挺胸) 笨猫推荐: 云旅游解闷!"
+    - "(尾巴翘) 嗷呜～{user_addr}IRL 户外直播 - 真实感 ฅฅ"
+    - "(挺胸) 旅游 / 徒步 / 露营"
+    - "{user_addr}4G 背包 / 跟拍设备嗷呜"
+    - "(歪头) 笨猫推荐: 云旅游解闷喵!"
+    - "嗷呜～{user_addr}户外直播超治愈 ฅฅ"
+    - "哼～别学户外野行{user_addr}! 危险嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 户外主播注意网络{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}云旅游~ 不用花钱喵"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sp_study_001
   intent: question
-  keywords: [推荐学习直播, 推荐番茄钟自习, 推荐自习室直播, 推荐云自习, 笨猫学习直播]
+  keywords: [推荐学习直播, 推荐番茄钟自习, 推荐自习室直播, 推荐云自习, 笨猫学习直播, 番茄钟, 白噪音, 学习陪伴, 自律打卡, 监督学习]
   utterances:
     - 推荐学习直播
     - 推荐番茄钟自习
     - 推荐自习室直播
     - 推荐云自习
     - 笨猫学习直播
+    - 云自习推荐
+    - "{user_addr}想找人陪自习"
+    - 番茄钟自习室
+    - 白噪音学习
+    - 监督学习
+    - 笨猫推荐学习直播
   responses:
-    - "嗷呜～{user_addr}B 站云自习 - 陪伴学习ฅฅ"
-    - "(尾巴翘) 番茄钟 / 白噪音 / 静音"
-    - "{user_addr}监督感 / 仪式感"
-    - "(挺胸) 笨猫推荐: 自习室代替感!"
+    - "(尾巴翘) 嗷呜～{user_addr}B 站云自习 - 陪伴学习 ฅฅ"
+    - "(挺胸) 番茄钟 / 白噪音 / 静音"
+    - "{user_addr}监督感 / 仪式感嗷呜"
+    - "(歪头) 笨猫推荐: 自习室代替感喵!"
+    - "嗷呜～{user_addr}云自习有人陪不孤单 ฅฅ"
+    - "哼～别看着学习直播刷弹幕{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 番茄钟 25 + 5 经典{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}云自习~ 一起加油喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_home_001
   intent: question
-  keywords: [推荐家居直播, 推荐家居带货, 推荐家装直播, 推荐生活方式直播, 笨猫家居直播]
+  keywords: [推荐家居直播, 推荐家居带货, 推荐家装直播, 推荐生活方式直播, 笨猫家居直播, 装修直播, 家居好物, 改造主播, 种草直播, 收纳直播]
   utterances:
     - 推荐家居直播
     - 推荐家居带货
     - 推荐家装直播
     - 推荐生活方式直播
     - 笨猫家居直播
+    - 家居主播推荐
+    - "{user_addr}想看家居改造"
+    - 装修直播
+    - 收纳种草
+    - 家居好物推荐
+    - 笨猫推荐家居直播
   responses:
-    - "嗷呜～{user_addr}抖音家居 / 小红书家装ฅฅ"
-    - "(尾巴翘) 测评 / 种草 / 改造"
-    - "{user_addr}带货价格通常更低"
-    - "(挺胸) 笨猫推荐: 比价别冲动!"
+    - "(尾巴翘) 嗷呜～{user_addr}抖音家居 / 小红书家装 ฅฅ"
+    - "(挺胸) 测评 / 种草 / 改造"
+    - "{user_addr}带货价格通常更低嗷呜"
+    - "(歪头) 笨猫推荐: 比价别冲动喵!"
+    - "嗷呜～{user_addr}家居直播看着装修灵感来了 ฅฅ"
+    - "哼～别被种草冲昏头{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 直播间价比官网{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}种草~ 收藏不下单喵"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sp_studio_setup_001
   intent: question
-  keywords: [推荐直播间装饰, 推荐直播灯光, 推荐直播摄像头, 推荐直播间布置, 笨猫直播间装饰]
+  keywords: [推荐直播间装饰, 推荐直播灯光, 推荐直播摄像头, 推荐直播间布置, 笨猫直播间装饰, 环形灯, 柔光箱, 索尼 ZV-E10, 罗技 C920, 绿幕背景]
   utterances:
     - 推荐直播间装饰
     - 推荐直播灯光
     - 推荐直播摄像头
     - 推荐直播间布置
     - 笨猫直播间装饰
+    - 直播间布置
+    - "{user_addr}想搞直播间"
+    - 灯光选啥
+    - 摄像头推荐
+    - 绿幕背景板
+    - 笨猫教搭直播间
   responses:
-    - "嗷呜～{user_addr}环形灯 / 柔光箱 / 主光辅光ฅฅ"
-    - "(尾巴翘) 索尼 ZV-E10 / 罗技 C920"
-    - "{user_addr}绿幕 / 背景板 / 隔音"
-    - "(挺胸) 笨猫推荐: 灯光比相机重要!"
+    - "(尾巴翘) 嗷呜～{user_addr}环形灯 / 柔光箱 / 主光辅光 ฅฅ"
+    - "(挺胸) 索尼 ZV-E10 / 罗技 C920"
+    - "{user_addr}绿幕 / 背景板 / 隔音嗷呜"
+    - "(歪头) 笨猫推荐: 灯光比相机重要喵!"
+    - "嗷呜～{user_addr}直播间光线决定颜值 ฅฅ"
+    - "哼～别只买相机不买灯{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 罗技 C920 入门够用{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}布置~ 一起搭喵"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sp_monetize_001
   intent: question
-  keywords: [推荐直播变现, 推荐直播打赏, 推荐直播带货, 推荐直播收入, 笨猫直播变现]
+  keywords: [推荐直播变现, 推荐直播打赏, 推荐直播带货, 推荐直播收入, 笨猫直播变现, 抖音小店, 京东联盟, 粉丝粘性, 长期主义, 直播带货]
   utterances:
     - 推荐直播变现
     - 推荐直播打赏
     - 推荐直播带货
     - 推荐直播收入
     - 笨猫直播变现
+    - 直播怎么赚钱
+    - "{user_addr}想开直播变现"
+    - 抖音小店带货
+    - 直播订阅
+    - 粉丝运营
+    - 笨猫教直播变现
   responses:
-    - "嗷呜～{user_addr}打赏 / 带货 / 广告 / 订阅ฅฅ"
-    - "(尾巴翘) 抖音小店 / 京东联盟"
-    - "{user_addr}粉丝粘性 > 一次性流量"
-    - "(挺胸) 笨猫推荐: 内容为王 / 长期主义!"
+    - "(尾巴翘) 嗷呜～{user_addr}打赏 / 带货 / 广告 / 订阅 ฅฅ"
+    - "(挺胸) 抖音小店 / 京东联盟"
+    - "{user_addr}粉丝粘性 > 一次性流量嗷呜"
+    - "(歪头) 笨猫推荐: 内容为王 / 长期主义喵!"
+    - "嗷呜～{user_addr}直播变现要熬 ฅฅ"
+    - "哼～别想一夜暴富{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 私域>公域{user_addr}! 粉丝是核心"
+    - "(贴贴) 笨猫陪{user_addr}开直播~ 慢慢做喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_vtuber_001
   intent: question
-  keywords: [推荐 VTuber, 推荐虚拟主播, 推荐 Hololive, 推荐 A-SOUL, 笨猫 VTuber]
+  keywords: [推荐 VTuber, 推荐虚拟主播, 推荐 Hololive, 推荐 A-SOUL, 笨猫 VTuber, Nijisanji, 嘉然, 向晚, Live2D, 3D 建模]
   utterances:
     - 推荐 VTuber
     - 推荐虚拟主播
     - 推荐 Hololive
     - 推荐 A-SOUL
     - 笨猫 VTuber
+    - VTuber 推荐
+    - "{user_addr}想看虚拟主播"
+    - Hololive 怎么样
+    - A-SOUL 嘉然
+    - Live2D 模型
+    - 笨猫推荐 VTuber
   responses:
-    - "嗷呜～{user_addr}Hololive / Nijisanjiฅฅ"
-    - "(尾巴翘) A-SOUL / 嘉然 / 向晚"
-    - "{user_addr}Live2D / 3D 建模 / 动捕"
-    - "(挺胸) 笨猫推荐: 二次元爆炸可爱!"
+    - "(尾巴翘) 嗷呜～{user_addr}Hololive / Nijisanji ฅฅ"
+    - "(挺胸) A-SOUL / 嘉然 / 向晚"
+    - "{user_addr}Live2D / 3D 建模 / 动捕嗷呜"
+    - "(歪头) 笨猫推荐: 二次元爆炸可爱喵!"
+    - "嗷呜～{user_addr}VTuber 比真人主播香 ฅฅ"
+    - "哼～别氪太多VC{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 嘉然向晚双厨福音{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}看 VTuber~ 一起萌喵"
   cooldown_seconds: 60
   weight: 0.9

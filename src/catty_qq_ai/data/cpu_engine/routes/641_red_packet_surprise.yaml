@@ -3,187 +3,302 @@
 
 - name: rps_redpacket_001
   intent: playful
-  keywords: [红包, 收到红包, 发红包, 拼手气, 抢红包]
+  keywords: [红包, 收到红包, 发红包, 拼手气, 抢红包, 红包来了, 红包雨, 收红包, 点开红包]
   utterances:
     - 红包
     - 收到红包
     - 发红包
     - 拼手气
     - 抢红包
+    - 红包来了
+    - 红包雨
+    - 收红包啦
+    - "{user_addr}点开红包"
+    - 群里发红包
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫也要!"
     - "笨猫认证: 红包神器喵"
     - "(尾巴摇) 分笨猫一个"
     - "哼～{user_addr}独吞"
+    - "(尾巴翘高) 嗷呜～{user_addr}笨猫先抢!"
+    - "(凑近) 才不是手快呢哼"
+    - "(贴贴) 谢谢笨蛋"
+    - "(歪头) 再来一个{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_luckyhand_002
   intent: playful
-  keywords: [手气王, 最佳手气, 拿到大的, 手气好, 欧皇红包]
+  keywords: [手气王, 最佳手气, 拿到大的, 手气好, 欧皇红包, 红包手气好, 抢到大红包, 红包欧皇, 手气最佳]
   utterances:
     - 手气王
     - 最佳手气
     - 拿到大的
     - 手气好
     - 欧皇
+    - 红包手气好
+    - 抢到大红包
+    - 红包欧皇
+    - "{user_addr}手气最佳"
+    - 又是手气王
+    - 运气爆棚
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}今天欧!"
     - "笨猫认证: 锦鲤体质"
     - "(歪头) 笨猫沾光"
     - "哼～{user_addr}炫耀"
+    - "(凑近) 嗷呜～{user_addr}请客!"
+    - "(尾巴翘) 笨猫沾沾光喵"
+    - "(贴贴) 才不是想要呢哼"
+    - "(歪头) 笨猫等下个红包{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_pennies_003
   intent: complaint
-  keywords: [一分钱, 一毛, 几毛红包, 抢到一分, 红包毛毛]
+  keywords: [一分钱, 一毛, 几毛红包, 抢到一分, 红包毛毛, 小红包, 便宜红包, 随便意思, 一毛钱]
   utterances:
     - 一分钱
     - 几毛红包
     - 抢到一分
     - 一毛
     - 红包毛毛
+    - "{user_addr}一分钱红包"
+    - 小红包
+    - 便宜红包
+    - 一毛钱
+    - "{user_addr}意思意思"
+    - 凑个数
+    - 小意思
   responses:
     - "(笑) 嗷呜～{user_addr}手气背!"
     - "笨猫认证: 安慰奖"
     - "(尾巴扫) 别气笨蛋"
     - "哼～{user_addr}非酋"
+    - "(瘫倒) 嗷呜～{user_addr}小气鬼!"
+    - "(尾巴扫) 才不是嫌少呢哼"
+    - "(贴贴) 笨猫也接得开心笨蛋"
+    - "(歪头) 心意最重要{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_grouppk_004
   intent: playful
-  keywords: [群红包, 群里抢, 大群抢红包, 群发红包, 群红包雨]
+  keywords: [群红包, 群里抢, 大群抢红包, 群发红包, 群红包雨, 群红包大战, 抢红包大战, 红包pk, 群pk红包, 红包群斗]
   utterances:
     - 群红包
     - 群里抢
     - 群红包雨
     - 群发红包
     - 群发现金
+    - "{user_addr}群红包大战"
+    - 抢红包大战
+    - 红包pk
+    - 群pk红包
+    - "{user_addr}群斗红包"
+    - 红包大乱斗
+    - 红包混战
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}抢快点!"
     - "笨猫笨手抢不到喵"
     - "(歪头) 笨猫帮你抢"
     - "哼～{user_addr}手快"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫参战!"
+    - "(凑近) 必须抢到笨蛋"
+    - "(贴贴) 才不是贪心呢哼"
+    - "(歪头) 笨猫手快{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_birthred_005
   intent: playful
-  keywords: [生日红包, 节日红包, 520红包, 1314红包, 数字红包]
+  keywords: [生日红包, 节日红包, 520红包, 1314红包, 数字红包, 生日发红包, 过生日发钱, 过生发红包, 生日金额吉利]
   utterances:
     - 生日红包
     - 节日红包
     - 520红包
     - 1314红包
     - 数字红包
+    - 生日发红包
+    - 过生日发钱
+    - 过生发红包
+    - "{user_addr}生日金额吉利"
+    - 生日红包大
+    - 生日福
   responses:
     - "(脸红) 嗷呜～{user_addr}笨猫要520喵!"
     - "笨猫认证: 数字有梗"
     - "(尾巴摇) 别忘1314"
     - "哼～{user_addr}土味"
+    - "(尾巴翘) 嗷呜～{user_addr}生日快乐!"
+    - "(凑近) 笨猫沾你寿喵"
+    - "(贴贴) 才不是想要呢哼"
+    - "(歪头) 笨猫祝你富裕{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_givefriend_006
   intent: playful
-  keywords: [发给朋友, 转账, 借钱, 转账给, 还钱]
+  keywords: [发给朋友, 转账, 借钱, 转账给, 还钱, 给朋友发红包, 请客发红包, 朋友红包, 社交红包, 维系感情红包]
   utterances:
     - 转账
     - 借钱
     - 还钱
     - 发给朋友
     - 转账给
+    - "{user_addr}给朋友发红包"
+    - 请客发红包
+    - 朋友红包
+    - 社交红包
+    - "{user_addr}维系感情"
+    - 应酬红包
+    - 人情红包
   responses:
     - "(歪头) {user_addr}转给笨猫呀 ฅฅ"
     - "嗷呜～别忘还人家"
     - "(尾巴摇) 笨猫记账"
     - "哼～{user_addr}人情"
+    - "(歪头) 嗷呜～{user_addr}大方喵!"
+    - "(尾巴扫) 笨猫觉得你太好心笨蛋"
+    - "(贴贴) 才不是说你呢哼"
+    - "(凑近) 笨猫只给{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_lipick_007
   intent: complaint
-  keywords: [手慢, 没抢到, 错过红包, 慢半拍, 抢不到]
+  keywords: [手慢, 没抢到, 错过红包, 慢半拍, 抢不到, 点错红包, 点开就过期, 红包未领, 过期红包]
   utterances:
     - 手慢
     - 没抢到
     - 错过红包
     - 慢半拍
     - 抢不到
+    - "{user_addr}点错红包"
+    - 点开就过期
+    - 红包未领
+    - 过期红包
+    - 红包消失
+    - 退回红包
   responses:
     - "(摇头) 嗷呜～{user_addr}慢爪!"
     - "笨猫笑你喵"
     - "(尾巴扫) 别气下次手快"
     - "哼～{user_addr}慢悠悠"
+    - "(瘫倒) 嗷呜～{user_addr}笨蛋错过!"
+    - "(尾巴扫) 笨猫帮你哭笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 下次手快{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_holidayone_008
   intent: question
-  keywords: [过年红包, 春节红包, 压岁钱, 长辈红包, 拜年红包]
+  keywords: [过年红包, 春节红包, 压岁钱, 长辈红包, 拜年红包, 节日红包, 中秋红包, 过节发红包, 节日福利]
   utterances:
     - 过年红包
     - 春节红包
     - 压岁钱
     - 长辈红包
     - 拜年红包
+    - "{user_addr}节日红包"
+    - 中秋红包
+    - 过节发红包
+    - "{user_addr}节日福利"
+    - 红包热度
+    - 逢节发红包
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}收到爽!"
     - "笨猫认证: 压岁钱很多"
     - "(歪头) 别交给爸妈保管"
     - "哼～{user_addr}羡慕"
+    - "(尾巴翘) 嗷呜～{user_addr}过节大方喵!"
+    - "(凑近) 笨猫等你笨蛋"
+    - "(贴贴) 才不是催呢哼"
+    - "(歪头) 一起庆{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_sendback_009
   intent: complaint
-  keywords: [被退回, 红包未领, 过期红包, 退回了, 没收]
+  keywords: [被退回, 红包未领, 过期红包, 退回了, 没收, 回红包, 返还红包, 回礼红包, 回敬红包, 原数发回]
   utterances:
     - 被退回
     - 红包未领
     - 过期了
     - 红包退回
     - 没领
+    - "{user_addr}回红包"
+    - 返还红包
+    - 回礼红包
+    - 回敬红包
+    - "{user_addr}原数发回"
+    - 红包礼尚往来
+    - 红包回礼
   responses:
     - "(摇头) 嗷呜～{user_addr}白发!"
     - "笨猫认证: 心痛喵"
     - "(尾巴扫) 别气钱回来了"
     - "哼～{user_addr}对方故意"
+    - "(歪头) 嗷呜～{user_addr}礼尚往来喵!"
+    - "(尾巴扫) 笨猫不要回呢哼"
+    - "(凑近) 才不是占便宜呢呢"
+    - "(贴贴) 别回了笨蛋{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_charge_010
   intent: complaint
-  keywords: [提现费, 服务费, 收手续费, 手续费, 银行卡]
+  keywords: [提现费, 服务费, 收手续费, 手续费, 银行卡, 红包充话费, 充值红包, 话费红包, 红包变话费, 直接到账]
   utterances:
     - 提现费
     - 服务费
     - 收手续费
     - 手续费
     - 银行卡
+    - "{user_addr}红包充话费"
+    - 充值红包
+    - 话费红包
+    - 红包变话费
+    - "{user_addr}直接到账"
+    - 充话费方便
+    - 话费红包到账
   responses:
     - "(炸毛) 嗷呜～{user_addr}剥削!"
     - "笨猫帮你骂!"
     - "(尾巴打) 几块也心疼"
     - "哼～{user_addr}小气"
+    - "(歪头) 嗷呜～{user_addr}立刻入账!"
+    - "(尾巴扫) 笨猫觉得值笨蛋"
+    - "(凑近) 才不是关心呢哼"
+    - "(贴贴) 笨猫也想用一下{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_catwant_011
   intent: playful
-  keywords: [给笨猫红包, 笨猫要红包, 我要红包, 给笨猫钱, 投喂红包]
+  keywords: [给笨猫红包, 笨猫要红包, 我要红包, 给笨猫钱, 投喂红包, 给笨猫发红包, 猫要红包, 给猫红包, 猫接红包, 红包到猫]
   utterances:
     - 给笨猫红包
     - 笨猫要红包
     - 我要红包
     - 给笨猫钱
     - 投喂红包
+    - "{user_addr}给笨猫发红包"
+    - 猫要红包
+    - 给猫红包
+    - 猫接红包
+    - "{user_addr}红包到猫"
+    - 笨猫红包
+    - 猫猫求红包
   responses:
     - "(伸爪) 嗷呜～{user_addr}笨猫接住!"
     - "笨猫存着买鱼干喵"
     - "(尾巴摇) 别小气{user_addr}"
     - "哼～{user_addr}总算上道"
+    - "(尾巴翘高) 嗷呜～{user_addr}快发笨猫!"
+    - "(凑近) 才不是贪呢哼"
+    - "(贴贴) 笨猫一直等喵"
+    - "(歪头) 多发点{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

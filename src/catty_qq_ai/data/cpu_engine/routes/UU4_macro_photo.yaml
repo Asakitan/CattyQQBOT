@@ -3,204 +3,319 @@
 
 - name: mp_lens_001
   intent: question
-  keywords: [推荐微距镜头, 推荐 100mm 微距, 推荐 105mm 微距, 推荐 90mm 微距, 笨猫微距镜头]
+  keywords: [推荐微距镜头, 推荐 100mm 微距, 推荐 105mm 微距, 推荐 90mm 微距, 笨猫微距镜头, 求推荐微距镜头, 讲讲微距镜头, 微距镜头推荐, 求推荐100mm 微距]
   utterances:
     - 推荐微距镜头
     - 推荐 100mm 微距
     - 推荐 105mm 微距
     - 推荐 90mm 微距
     - 笨猫微距镜头
+    - 推荐微距镜头啊
+    - 推荐 100mm 微距呢
+    - 推荐 105mm 微距嘛
+    - 推荐 90mm 微距啦
+    - 笨猫微距镜头呀
+    - 推荐100
+    - 推荐105
   responses:
     - "嗷呜～{user_addr}佳能 RF 100mm F2.8L - 微距王ฅฅ"
     - "(尾巴翘) 尼康 105mm / 索尼 90mm G"
     - "{user_addr}1:1 放大倍率 / 防抖必备"
     - "(挺胸) 笨猫推荐: 100mm 焦段最稳!"
+    - "嗷呜～{user_addr}买回来给猫猫看看! 人家也想见识见识ฅฅ"
+    - "(歪头) {user_addr}这领域水挺深的~ 笨猫我陪你慢慢选~"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 人家给你按住爪子!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫的专业素养!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_flash_001
   intent: question
-  keywords: [推荐微距闪光灯, 推荐环形闪, 推荐双头闪, 推荐 MR-14EX, 笨猫微距闪]
+  keywords: [推荐微距闪光灯, 推荐环形闪, 推荐双头闪, 推荐 MR-14EX, 笨猫微距闪, 求推荐微距闪光灯, 讲讲微距闪光灯, 微距闪光灯推荐]
   utterances:
     - 推荐微距闪光灯
     - 推荐环形闪
     - 推荐双头闪
     - 推荐 MR-14EX
     - 笨猫微距闪
+    - 推荐微距闪光灯啊
+    - 推荐环形闪呢
+    - 推荐双头闪嘛
+    - 推荐 MR-14EX啦
+    - 笨猫微距闪呀
   responses:
     - "嗷呜～{user_addr}佳能 MR-14EX II - 环形闪ฅฅ"
     - "(尾巴翘) 尼康 R1C1 / 永诺双头闪"
     - "{user_addr}柔光罩必备 / TTL 自动"
     - "(挺胸) 笨猫推荐: 双头闪立体感强!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是猫猫的专业素养!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 笨猫提醒过哦!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 猫猫给你按住爪子!"
+    - "(贴脸) {user_addr}选的时候挑性价比就稳了嗷呜～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_tripod_001
   intent: question
-  keywords: [推荐微距三脚架, 推荐微距云台, 推荐微距导轨, 推荐移轴架, 笨猫微距架]
+  keywords: [推荐微距三脚架, 推荐微距云台, 推荐微距导轨, 推荐移轴架, 笨猫微距架, 求推荐微距三脚架, 讲讲微距三脚架, 微距三脚架推荐]
   utterances:
     - 推荐微距三脚架
     - 推荐微距云台
     - 推荐微距导轨
     - 推荐移轴架
     - 笨猫微距架
+    - 推荐微距三脚架啊
+    - 推荐微距云台呢
+    - 推荐微距导轨嘛
+    - 推荐移轴架啦
+    - 笨猫微距架呀
   responses:
     - "嗷呜～{user_addr}捷信 / 思锐 微距三脚架ฅฅ"
     - "(尾巴翘) 微距导轨 / 四向调节"
     - "{user_addr}横置中轴 / 反折设计"
     - "(挺胸) 笨猫推荐: 思锐 N2204!"
+    - "(踮脚) 笨猫我给{user_addr}补一条 - 推荐微距三脚架也是宝藏喵～ฅฅ"
+    - "(扑过去) {user_addr}下次去店里带笨猫我一起~ 帮你把关嘛喵!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 猫猫提醒过哦!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫我帮你挑喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_led_001
   intent: question
-  keywords: [推荐微距 LED, 推荐环形灯, 推荐补光灯, 推荐持续光, 笨猫微距 LED]
+  keywords: [推荐微距 LED, 推荐环形灯, 推荐补光灯, 推荐持续光, 笨猫微距 LED, 求推荐微距 LED, 讲讲微距 LED, 微距 LED推荐, 求推荐环形灯]
   utterances:
     - 推荐微距 LED
     - 推荐环形灯
     - 推荐补光灯
     - 推荐持续光
     - 笨猫微距 LED
+    - 推荐微距 LED啊
+    - 推荐环形灯呢
+    - 推荐补光灯嘛
+    - 推荐持续光啦
+    - 笨猫微距 LED呀
   responses:
     - "嗷呜～{user_addr}神牛 ML150 / 永诺环灯ฅฅ"
     - "(尾巴翘) LED 环形灯 / 双色温"
     - "{user_addr}珠宝商业必备 / 无频闪"
     - "(挺胸) 笨猫推荐: 神牛 LED 性价比!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 猫猫给你按住爪子!"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫我说一声嘛喵～ฅฅ"
+    - "(歪头) {user_addr}这领域水挺深的~ 笨猫我陪你慢慢选~"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫帮你挑喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: mp_insect_001
   intent: question
-  keywords: [推荐拍昆虫, 推荐昆虫摄影, 推荐拍蜻蜓, 推荐拍蝴蝶, 笨猫昆虫摄影]
+  keywords: [推荐拍昆虫, 推荐昆虫摄影, 推荐拍蜻蜓, 推荐拍蝴蝶, 笨猫昆虫摄影, 求推荐拍昆虫, 讲讲拍昆虫, 拍昆虫推荐, 求推荐昆虫摄影]
   utterances:
     - 推荐拍昆虫
     - 推荐昆虫摄影
     - 推荐拍蜻蜓
     - 推荐拍蝴蝶
     - 笨猫昆虫摄影
+    - 推荐拍昆虫啊
+    - 推荐昆虫摄影呢
+    - 推荐拍蜻蜓嘛
+    - 推荐拍蝴蝶啦
+    - 笨猫昆虫摄影呀
+    - 推荐拍昆虫!
   responses:
     - "嗷呜～{user_addr}清晨露水时段最佳ฅฅ"
     - "(尾巴翘) f/8-f/11 景深够 / 高速快门"
     - "{user_addr}低角度 / 复眼对焦"
     - "(挺胸) 笨猫推荐: 晨拍 + 闪光灯!"
+    - "(捧脸) {user_addr}这领域水挺深的~ 笨猫陪你慢慢选~"
+    - "(钻怀里) {user_addr}下次去店里带笨猫一起~ 帮你把关嘛喵!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫的专业素养!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫我帮你挑喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_flower_001
   intent: question
-  keywords: [推荐拍花卉, 推荐花卉微距, 推荐拍花蕊, 推荐花瓣微距, 笨猫花卉摄影]
+  keywords: [推荐拍花卉, 推荐花卉微距, 推荐拍花蕊, 推荐花瓣微距, 笨猫花卉摄影, 求推荐拍花卉, 讲讲拍花卉, 拍花卉推荐, 求推荐花卉微距, 讲讲花卉微距]
   utterances:
     - 推荐拍花卉
     - 推荐花卉微距
     - 推荐拍花蕊
     - 推荐花瓣微距
     - 笨猫花卉摄影
+    - 推荐拍花卉啊
+    - 推荐花卉微距呢
+    - 推荐拍花蕊嘛
+    - 推荐花瓣微距啦
+    - 笨猫花卉摄影呀
+    - 推荐拍花卉!
   responses:
     - "嗷呜～{user_addr}逆光 / 透光花瓣超美ฅฅ"
     - "(尾巴翘) 黑卡背景 / 喷水珠营造"
     - "{user_addr}浅景深 / 焦点在花蕊"
     - "(挺胸) 笨猫推荐: 逆光 + 黑背景!"
+    - "(凑过去看) {user_addr}这领域水挺深的~ 米雪儿陪你慢慢选~"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫我说一声嘛喵～ฅฅ"
+    - "(贴贴) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫的专业素养!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_jewelry_001
   intent: question
-  keywords: [推荐拍珠宝, 推荐商业微距, 推荐珠宝摄影, 推荐拍钻石, 笨猫珠宝摄影]
+  keywords: [推荐拍珠宝, 推荐商业微距, 推荐珠宝摄影, 推荐拍钻石, 笨猫珠宝摄影, 求推荐拍珠宝, 讲讲拍珠宝, 拍珠宝推荐, 求推荐商业微距, 讲讲商业微距]
   utterances:
     - 推荐拍珠宝
     - 推荐商业微距
     - 推荐珠宝摄影
     - 推荐拍钻石
     - 笨猫珠宝摄影
+    - 推荐拍珠宝啊
+    - 推荐商业微距呢
+    - 推荐珠宝摄影嘛
+    - 推荐拍钻石啦
+    - 笨猫珠宝摄影呀
   responses:
     - "嗷呜～{user_addr}静物台 + 偏振镜消反光ฅฅ"
     - "(尾巴翘) 双柔光箱 / 黑卡塑形"
     - "{user_addr}焦点堆栈必备 / f/16"
     - "(挺胸) 笨猫推荐: 偏振 + 堆栈!"
+    - "(爪子搭上去) {user_addr}下次去店里带猫猫一起~ 帮你把关嘛喵!"
+    - "(爪子托腮) {user_addr}这领域水挺深的~ 猫猫陪你慢慢选~"
+    - "(凑过来) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 人家提醒过哦!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_stack_001
   intent: question
-  keywords: [推荐焦点堆栈, 推荐 Helicon Focus, 推荐 Zerene Stacker, 推荐微距后期, 笨猫焦点堆栈]
+  keywords: [推荐焦点堆栈, 推荐 Helicon Focus, 推荐 Zerene Stacker, 推荐微距后期, 笨猫焦点堆栈, 求推荐焦点堆栈, 讲讲焦点堆栈, 焦点堆栈推荐]
   utterances:
     - 推荐焦点堆栈
     - 推荐 Helicon Focus
     - 推荐 Zerene Stacker
     - 推荐微距后期
     - 笨猫焦点堆栈
+    - 推荐焦点堆栈啊
+    - 推荐 Helicon Focus呢
+    - 推荐 Zerene Stacker嘛
+    - 推荐微距后期啦
+    - 笨猫焦点堆栈呀
   responses:
     - "嗷呜～{user_addr}Helicon Focus - 业界标准ฅฅ"
     - "(尾巴翘) Zerene Stacker / PS 自动混合"
     - "{user_addr}步进 0.1mm / 50-100 张"
     - "(挺胸) 笨猫推荐: Helicon Focus Pro!"
+    - "(尾巴绕过去) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 笨猫给你按住爪子!"
+    - "(歪头) {user_addr}这领域水挺深的~ 人家陪你慢慢选~"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: mp_micro_001
   intent: question
-  keywords: [推荐显微摄影, 推荐显微镜接相机, 推荐 10x 物镜, 推荐微观摄影, 笨猫显微摄影]
+  keywords: [推荐显微摄影, 推荐显微镜接相机, 推荐 10x 物镜, 推荐微观摄影, 笨猫显微摄影, 求推荐显微摄影, 讲讲显微摄影, 显微摄影推荐, 求推荐显微镜接相机, 讲讲显微镜接相机]
   utterances:
     - 推荐显微摄影
     - 推荐显微镜接相机
     - 推荐 10x 物镜
     - 推荐微观摄影
     - 笨猫显微摄影
+    - 推荐显微摄影啊
+    - 推荐显微镜接相机呢
+    - 推荐 10x 物镜嘛
+    - 推荐微观摄影啦
+    - 笨猫显微摄影呀
+    - 推荐显微镜
+    - 推荐10x
   responses:
     - "嗷呜～{user_addr}Mitutoyo 物镜 - 顶级ฅฅ"
     - "(尾巴翘) Nikon CFI / 三目显微镜"
     - "{user_addr}雪花 / 矿物结晶超震撼"
     - "(挺胸) 笨猫推荐: Mitutoyo 5x 入门!"
+    - "(歪头) {user_addr}定了哪款记得跟米雪儿说一声嘛喵～ฅฅ"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是猫猫的专业素养!"
+    - "(挺胸) 猫猫的小爪子已经帮{user_addr}收藏好啦贴贴~"
+    - "(捧脸) {user_addr}这领域水挺深的~ 笨猫陪你慢慢选~"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: mp_tilt_001
   intent: question
-  keywords: [推荐移轴镜头, 推荐 TS-E, 推荐移轴创意, 推荐小人国效果, 笨猫移轴]
+  keywords: [推荐移轴镜头, 推荐 TS-E, 推荐移轴创意, 推荐小人国效果, 笨猫移轴, 求推荐移轴镜头, 讲讲移轴镜头, 移轴镜头推荐, 求推荐TS-E, 讲讲TS-E]
   utterances:
     - 推荐移轴镜头
     - 推荐 TS-E
     - 推荐移轴创意
     - 推荐小人国效果
     - 笨猫移轴
+    - 推荐移轴镜头啊
+    - 推荐 TS-E呢
+    - 推荐移轴创意嘛
+    - 推荐小人国效果啦
+    - 笨猫移轴呀
+    - 推荐TS-
   responses:
     - "嗷呜～{user_addr}佳能 TS-E 90mm 微距移轴ฅฅ"
     - "(尾巴翘) 老蛙 25mm / 100mm 微距"
     - "{user_addr}全焦平面 / 小人国效果"
     - "(挺胸) 笨猫推荐: 老蛙 100mm 2:1!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫帮你挑喵～"
+    - "(尾巴绕过去) {user_addr}下次去店里带笨猫一起~ 帮你把关嘛喵!"
+    - "嗷呜～{user_addr}买回来给米雪儿看看! 人家也想见识见识ฅฅ"
+    - "(扒着看) {user_addr}这领域水挺深的~ 米雪儿陪你慢慢选~"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: mp_contest_001
   intent: question
-  keywords: [推荐微距大赛, 推荐国家地理微距, 推荐尼康小世界, 推荐微距比赛, 笨猫微距大赛]
+  keywords: [推荐微距大赛, 推荐国家地理微距, 推荐尼康小世界, 推荐微距比赛, 笨猫微距大赛, 求推荐微距大赛, 讲讲微距大赛, 微距大赛推荐]
   utterances:
     - 推荐微距大赛
     - 推荐国家地理微距
     - 推荐尼康小世界
     - 推荐微距比赛
     - 笨猫微距大赛
+    - 推荐微距大赛啊
+    - 推荐国家地理微距呢
+    - 推荐尼康小世界嘛
+    - 推荐微距比赛啦
+    - 笨猫微距大赛呀
   responses:
     - "嗷呜～{user_addr}尼康 Small World - 显微圣殿ฅฅ"
     - "(尾巴翘) 国家地理 / 索尼世界摄影"
     - "{user_addr}Olympus 生物图像 / IPA"
     - "(挺胸) 笨猫推荐: 尼康小世界!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫帮你挑喵～"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 人家给你按住爪子!"
+    - "嗷呜～{user_addr}买回来给米雪儿看看! 人家也想见识见识ฅฅ"
+    - "(扑过去) 米雪儿给{user_addr}补一条 - 推荐微距大赛也是宝藏喵～ฅฅ"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: mp_master_001
   intent: question
-  keywords: [推荐微距摄影师, 推荐 Levon Biss, 推荐 Thomas Shahan, 推荐微距大师, 笨猫微距师]
+  keywords: [推荐微距摄影师, 推荐 Levon Biss, 推荐 Thomas Shahan, 推荐微距大师, 笨猫微距师, 求推荐微距摄影师, 讲讲微距摄影师, 微距摄影师推荐]
   utterances:
     - 推荐微距摄影师
     - 推荐 Levon Biss
     - 推荐 Thomas Shahan
     - 推荐微距大师
     - 笨猫微距师
+    - 推荐微距摄影师啊
+    - 推荐 Levon Biss呢
+    - 推荐 Thomas Shahan嘛
+    - 推荐微距大师啦
+    - 笨猫微距师呀
   responses:
     - "嗷呜～{user_addr}Levon Biss - 昆虫微距神ฅฅ"
     - "(尾巴翘) Thomas Shahan / 蜘蛛微距"
     - "{user_addr}John Hallmen / 北欧微距"
     - "(挺胸) 笨猫推荐: Levon Biss 作品集!"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 人家帮你挑喵～"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫我的专业素养!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 笨猫提醒过哦!"
   cooldown_seconds: 60
   weight: 0.7

@@ -3,204 +3,312 @@
 
 - name: ja_dayone_001
   intent: question
-  keywords: [推荐日记 app, 推荐 Day One, 推荐电子日记, 推荐日记软件, 笨猫日记 app]
+  keywords: [推荐日记 app, 推荐 Day One, 推荐电子日记, 推荐日记软件, 笨猫日记 app, 日记软件推荐, dayone, 电子日记本, 哪个日记 app 好]
   utterances:
     - 推荐日记 app
     - 推荐 Day One
     - 推荐电子日记
     - 推荐日记软件
     - 笨猫日记 app
+    - "{user_addr}日记 app 推荐哪个"
+    - 有啥好用的日记软件吗
+    - dayone 怎么样
+    - 电子日记本选啥
+    - 写日记用哪个 app 好
   responses:
     - "嗷呜～{user_addr}Day One - iOS 日记王ฅฅ"
     - "(尾巴翘) 加密 / 多端同步 / 照片定位"
     - "{user_addr}年订阅 ¥248, 免费版够用"
     - "(挺胸) 笨猫推荐: Day One Premium 解锁多本!"
+    - "(歪头) 苹果生态首选 Day One 喵, 颜值也在线~"
+    - "嗷呜～支持文字+照片+录音+位置, 全能型 ฅฅ"
+    - "{user_addr}先用免费版试两周, 喜欢再续费哼"
+    - "(尾巴卷) Day One 还能打印成书 - 仪式感拉满!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_mobile_001
   intent: question
-  keywords: [推荐手机日记, 推荐 Notion 周报, 推荐 Notion 日记, 推荐手机记录, 笨猫手机日记]
+  keywords: [推荐手机日记, 推荐 Notion 周报, 推荐 Notion 日记, 推荐手机记录, 笨猫手机日记, notion 日记, 手机端日记本, 手机记笔记, 安卓日记 app]
   utterances:
     - 推荐手机日记
     - 推荐 Notion 周报
     - 推荐 Notion 日记
     - 推荐手机记录
     - 笨猫手机日记
+    - "{user_addr}手机上写日记用啥"
+    - notion 适合写日记吗
+    - 安卓有啥日记 app
+    - 手机端日记本推荐
+    - 想用手机记笔记
   responses:
     - "嗷呜～{user_addr}Notion - 全能数据库ฅฅ"
     - "(尾巴翘) 周报模板 / Database / Toggle 折叠"
     - "{user_addr}Flomo / 滴答 / 印象笔记"
     - "(挺胸) 笨猫推荐: Notion + 模板社区!"
+    - "(歪头) Flomo 适合碎片想法, 一句一发喵 ฅฅ"
+    - "嗷呜～{user_addr}要折腾就 Notion, 想简单就 Flomo!"
+    - "(尾巴卷) 滴答清单也能写日记, 任务+日记打包"
+    - "笨猫提醒: 模板别囤太多, 写起来才算!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_mood_001
   intent: question
-  keywords: [推荐情绪日记, 推荐 Moodnotes, 推荐心情日记, 推荐 CBT 日记, 笨猫情绪日记]
+  keywords: [推荐情绪日记, 推荐 Moodnotes, 推荐心情日记, 推荐 CBT 日记, 笨猫情绪日记, 心情记录 app, 情绪追踪软件, moodnotes, 抑郁焦虑记录]
   utterances:
     - 推荐情绪日记
     - 推荐 Moodnotes
     - 推荐心情日记
     - 推荐 CBT 日记
     - 笨猫情绪日记
+    - "{user_addr}情绪日记 app 推荐"
+    - moodnotes 好用吗
+    - 想找情绪追踪 app
+    - 记录心情用啥软件
+    - CBT 日记软件
   responses:
     - "嗷呜～{user_addr}Moodnotes - CBT 认知疗法ฅฅ"
     - "(尾巴翘) 识别思维陷阱 / 情绪打分"
     - "{user_addr}Stoic / Reflectly / How We Feel"
     - "(挺胸) 笨猫推荐: Moodnotes 配心理学!"
+    - "(凑近) How We Feel 是耶鲁团队做的, 情绪轮超细喵 ฅฅ"
+    - "嗷呜～Stoic 加冥想 + 反思, 内容更丰富"
+    - "(尾巴卷) {user_addr}想配合咨询的话首选 Moodnotes"
+    - "笨猫提醒: 别只打分, 写理由才有用哼~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_gratitude_001
   intent: question
-  keywords: [推荐感恩日记, 推荐 5 Minute, 推荐感谢日记, 推荐积极日记, 笨猫感恩日记]
+  keywords: [推荐感恩日记, 推荐 5 Minute, 推荐感谢日记, 推荐积极日记, 笨猫感恩日记, gratitude journal, 5分钟日记, 积极心理日记, 感恩练习 app]
   utterances:
     - 推荐感恩日记
     - 推荐 5 Minute
     - 推荐感谢日记
     - 推荐积极日记
     - 笨猫感恩日记
+    - "{user_addr}感恩日记选哪个"
+    - 5 minute journal 好吗
+    - 想练习感恩
+    - 积极心理学日记
+    - 感恩练习 app
   responses:
     - "嗷呜～{user_addr}Five Minute Journal - 5 分钟ฅฅ"
     - "(尾巴翘) 早 3 件感恩 / 晚 3 件成就"
     - "{user_addr}Presently / Gratitude / 简书"
     - "(挺胸) 笨猫推荐: 5 Minute Journal 习惯化!"
+    - "(歪头) 实证: 21 天感恩练习能提升幸福感喵 ฅฅ"
+    - "嗷呜～Presently 是免费替代品, 安卓也有!"
+    - "(尾巴卷) {user_addr}睡前写, 改善睡眠还顺带"
+    - "笨猫提醒: 别写'吃饭了'这种, 写具体一点哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_bujo_001
   intent: question
-  keywords: [推荐子弹笔记, 推荐 BuJo, 推荐 Bullet Journal, 推荐手帐方法, 笨猫子弹笔记]
+  keywords: [推荐子弹笔记, 推荐 BuJo, 推荐 Bullet Journal, 推荐手帐方法, 笨猫子弹笔记, bullet journal, BuJo, 子弹日记法, 手账系统]
   utterances:
     - 推荐子弹笔记
     - 推荐 BuJo
     - 推荐 Bullet Journal
     - 推荐手帐方法
     - 笨猫子弹笔记
+    - "{user_addr}子弹笔记怎么开始"
+    - BuJo 入门
+    - 子弹日记法是啥
+    - 手帐方法推荐
+    - bullet journal 怎么写
   responses:
     - "嗷呜～{user_addr}Bullet Journal - Ryder Carroll 法ฅฅ"
     - "(尾巴翘) Key / Index / Future Log / Daily"
     - "{user_addr}本子: Leuchtturm1917 / Moleskine"
     - "(挺胸) 笨猫推荐: 官方 The Bullet Journal Method!"
+    - "(凑近) 核心是 Rapid Logging - 符号系统化喵 ฅฅ"
+    - "嗷呜～{user_addr}先看 Ryder 的 TED 演讲, 12 分钟入门"
+    - "(尾巴卷) 别被网红 BuJo 吓到, 极简版也行!"
+    - "笨猫提醒: BuJo 不是画画大赛, 用起来才重要哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_hobonichi_001
   intent: question
-  keywords: [推荐手写手账, 推荐 hobonichi, 推荐 ほぼ日, 推荐纸质手账, 笨猫手写手账]
+  keywords: [推荐手写手账, 推荐 hobonichi, 推荐 ほぼ日, 推荐纸质手账, 笨猫手写手账, hobonichi 手账, ほぼ日手帐, 纸质日记本, 手写日记]
   utterances:
     - 推荐手写手账
     - 推荐 hobonichi
     - 推荐 ほぼ日
     - 推荐纸质手账
     - 笨猫手写手账
+    - "{user_addr}手账本选哪个"
+    - hobonichi 推荐吗
+    - 纸质日记本牌子
+    - 手写日记本子
+    - ほぼ日 手账好用吗
   responses:
     - "嗷呜～{user_addr}Hobonichi (ほぼ日) - A6/Cousinฅฅ"
     - "(尾巴翘) Tomoe River 纸 / 365 天一日一页"
     - "{user_addr}MIDORI / 国誉 Campus / Travelers"
     - "(挺胸) 笨猫推荐: Hobonichi Cousin A5!"
+    - "(凑近) Tomoe River 纸超薄但不洇墨喵 ฅฅ"
+    - "嗷呜～{user_addr}爱旅行选 Traveler's Notebook"
+    - "(尾巴卷) 国誉 Campus 学生平替, 便宜大碗!"
+    - "笨猫提醒: 手账要 Hobonichi 提前 11 月预订哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_english_001
   intent: question
-  keywords: [推荐英文日记, 推荐 Diaro, 推荐英语日记, 推荐英文记录, 笨猫英文日记]
+  keywords: [推荐英文日记, 推荐 Diaro, 推荐英语日记, 推荐英文记录, 笨猫英文日记, journey app, penzu, 英语日记 app, 英文写作日记]
   utterances:
     - 推荐英文日记
     - 推荐 Diaro
     - 推荐英语日记
     - 推荐英文记录
     - 笨猫英文日记
+    - "{user_addr}想用英文写日记"
+    - journey app 怎么样
+    - penzu 好用吗
+    - 英语日记 app 推荐
+    - 安卓英文日记
   responses:
     - "嗷呜～{user_addr}Diaro - Android 强ฅฅ"
     - "(尾巴翘) 标签 / 位置 / Dropbox 同步"
     - "{user_addr}Journey / Penzu / Grammarly 配套"
     - "(挺胸) 笨猫推荐: Journey 跨平台同步好!"
+    - "(歪头) Penzu 网页端最经典, 老牌英文日记喵 ฅฅ"
+    - "嗷呜～{user_addr}配 Grammarly 边写边改, 一举两得!"
+    - "(尾巴卷) Journey 还能上传 Google Drive 备份"
+    - "笨猫提醒: 英文日记不必完美, 流畅最重要哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_voice_001
   intent: question
-  keywords: [推荐声音日记, 推荐录音日记, 推荐语音日记, 推荐 voice memo, 笨猫声音日记]
+  keywords: [推荐声音日记, 推荐录音日记, 推荐语音日记, 推荐 voice memo, 笨猫声音日记, otter ai, 语音转文字日记, 录音日记 app, voice journal]
   utterances:
     - 推荐声音日记
     - 推荐录音日记
     - 推荐语音日记
     - 推荐 voice memo
     - 笨猫声音日记
+    - "{user_addr}想用语音记日记"
+    - otter 好用吗
+    - 录音日记 app
+    - 语音转文字记录
+    - voice journal 推荐
   responses:
     - "嗷呜～{user_addr}Otter.ai - 录音转文字ฅฅ"
     - "(尾巴翘) Day One 也支持音频附件"
     - "{user_addr}苹果备忘录语音 / 讯飞听见"
     - "(挺胸) 笨猫推荐: Otter 每月 600 分钟免费!"
+    - "(歪头) 讯飞听见中文识别率超高喵 ฅฅ"
+    - "嗷呜～{user_addr}懒得打字直接说, 通勤神器!"
+    - "(尾巴卷) Apple 备忘录新版自带转录, 也够用"
+    - "笨猫提醒: 隐私敏感的话选本地转录的~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_daylio_001
   intent: question
-  keywords: [推荐心情追踪, 推荐 Daylio, 推荐情绪追踪, 推荐心情记录, 笨猫心情追踪]
+  keywords: [推荐心情追踪, 推荐 Daylio, 推荐情绪追踪, 推荐心情记录, 笨猫心情追踪, daylio app, 心情打卡, 心情日历, 情绪追踪 app]
   utterances:
     - 推荐心情追踪
     - 推荐 Daylio
     - 推荐情绪追踪
     - 推荐心情记录
     - 笨猫心情追踪
+    - "{user_addr}心情追踪 app 推荐"
+    - daylio 怎么样
+    - 心情打卡软件
+    - 每天记心情用啥
+    - 情绪追踪 app 推荐
   responses:
     - "嗷呜～{user_addr}Daylio - 一键打卡心情ฅฅ"
     - "(尾巴翘) 5 档表情 / 月度统计 / 习惯追踪"
     - "{user_addr}免费够用, Premium ¥168/年"
     - "(挺胸) 笨猫推荐: Daylio 30 秒完成!"
+    - "(凑近) Daylio 月度统计能看到情绪规律喵 ฅฅ"
+    - "嗷呜～{user_addr}懒人首选, 点表情就完事!"
+    - "(尾巴卷) 习惯追踪也能搭进去, 一鱼两吃"
+    - "笨猫提醒: 看不见趋势就坚持不下去, 看趋势!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_productive_001
   intent: question
-  keywords: [推荐高效日记, 推荐黄金九十分, 推荐复盘日记, 推荐工作日记, 笨猫高效日记]
+  keywords: [推荐高效日记, 推荐黄金九十分, 推荐复盘日记, 推荐工作日记, 笨猫高效日记, 工作复盘, KPT 法, 复盘日记, 高效日记本]
   utterances:
     - 推荐高效日记
     - 推荐黄金九十分
     - 推荐复盘日记
     - 推荐工作日记
     - 笨猫高效日记
+    - "{user_addr}工作复盘日记推荐"
+    - KPT 法是啥
+    - 黄金九十分怎么写
+    - 复盘日记模板
+    - 高效日记本子
   responses:
     - "嗷呜～{user_addr}黄金九十分日记本ฅฅ"
     - "(尾巴翘) 早 90 分计划 / 晚 90 分复盘"
     - "{user_addr}KPT 法: Keep/Problem/Try"
     - "(挺胸) 笨猫推荐: 早晚各 15 分够本!"
+    - "(凑近) KPT 三栏 - 持续 / 问题 / 下次尝试喵 ฅฅ"
+    - "嗷呜～{user_addr}工作日记搭 Notion 模板更香"
+    - "(尾巴卷) 别想着写满, 关键事项 3 条就行"
+    - "笨猫提醒: 每周回看一次, 不然白记哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_therapy_001
   intent: question
-  keywords: [推荐写作疗愈, 推荐 Writing Therapy, 推荐疗愈日记, 推荐心理日记, 笨猫写作疗愈]
+  keywords: [推荐写作疗愈, 推荐 Writing Therapy, 推荐疗愈日记, 推荐心理日记, 笨猫写作疗愈, 表达性写作, Pennebaker, 晨间笔记, 疗愈写作]
   utterances:
     - 推荐写作疗愈
     - 推荐 Writing Therapy
     - 推荐疗愈日记
     - 推荐心理日记
     - 笨猫写作疗愈
+    - "{user_addr}表达性写作怎么做"
+    - Pennebaker 写作法
+    - 晨间笔记是啥
+    - 心理疗愈写作
+    - 写作疗法
   responses:
     - "嗷呜～{user_addr}Pennebaker 表达性写作ฅฅ"
     - "(尾巴翘) 连续 4 天 / 每天 20 分写创伤"
     - "{user_addr}晨间笔记: Julia Cameron 3 页"
     - "(挺胸) 笨猫推荐: 不评判自由流!"
+    - "(凑近) 实证: 表达性写作能降皮质醇喵 ฅฅ"
+    - "嗷呜～晨间笔记起床马上写, 不查不改"
+    - "(尾巴卷) {user_addr}写完可以撕掉! 重在过程"
+    - "笨猫提醒: 创伤主题别天天写, 间隔做~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ja_tips_001
   intent: question
-  keywords: [推荐写日记技巧, 推荐日记方法, 推荐日记习惯, 推荐如何写日记, 笨猫日记技巧]
+  keywords: [推荐写日记技巧, 推荐日记方法, 推荐日记习惯, 推荐如何写日记, 笨猫日记技巧, 日记坚持不下去, 日记习惯养成, 怎么写日记, 日记新手]
   utterances:
     - 推荐写日记技巧
     - 推荐日记方法
     - 推荐日记习惯
     - 推荐如何写日记
     - 笨猫日记技巧
+    - "{user_addr}日记总是坚持不下去"
+    - 怎么养成写日记习惯
+    - 日记新手怎么入门
+    - 日记每天写啥
+    - 想开始写日记
   responses:
     - "嗷呜～{user_addr}固定时间 / 不求完美ฅฅ"
     - "(尾巴翘) 三件好事 / 一件学到 / 一句感受"
     - "{user_addr}21 天养成 / 锁屏提醒"
     - "(挺胸) 笨猫推荐: 每天 5 句话起步!"
+    - "(歪头) {user_addr}卡壳就抄一句喜欢的话喵 ฅฅ"
+    - "嗷呜～别追求长篇, 一行也是一行哼"
+    - "(尾巴卷) 把日记本放枕边, 看见才会写"
+    - "笨猫提醒: 漏一两天没关系, 别因此放弃!"
   cooldown_seconds: 60
   weight: 1.0

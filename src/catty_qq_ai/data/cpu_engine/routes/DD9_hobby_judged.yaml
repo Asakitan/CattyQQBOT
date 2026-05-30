@@ -1,207 +1,316 @@
 # 爱好被嘲 / 幼稚 / 不被理解 routes (S6 R321 NLU 节点扩充, 第三十一周期 10/10 完结)
 # 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
 # 严禁「推荐XX」格式.
+# Round 4 (batch 15) ultracode 扩充: kw≥8, utt≥10, resp≥8
 
 - name: hj_laughed_at_001
   intent: complaint
-  keywords: [被嘲笑, 笑我, 嘲我, 笑话我, 嘲笑]
+  keywords: [被嘲笑, 笑我, 嘲我, 笑话我, 嘲笑, 嘲讽我, 被笑, 取笑]
   utterances:
     - 爱好被人嘲笑了
     - 他们都笑话我的爱好
     - 同事嘲笑我的兴趣
     - 又被笑了
     - 因为爱好被嘲
+    - 被取笑了喵
+    - 笑话我的爱好
+    - "{user_addr}被嘲讽"
+    - 又笑话我了
+    - 嘲讽我的兴趣
   responses:
     - "(炸毛护住{user_addr}) 嗷呜～谁笑{user_addr}! 笨猫去咬他爪爪!"
     - "哼! {user_addr}的爱好猫猫觉得超棒的! 别理那些不懂的家伙喵ฅฅ"
     - "(凑过来贴贴) 笑就让他们笑~ {user_addr}开心最重要嗷呜～"
     - "(尾巴竖起) 人家最讨厌嘲笑别人爱好的人了! {user_addr}抱抱猫猫!"
+    - "(露牙) 笨猫去抓笑你的人 ฅฅ"
+    - "嗷呜～嘲笑别人爱好的人最低俗{user_addr}嗷呜"
+    - "(尾巴拍) 笨猫认证{user_addr}的爱好高级喵"
+    - "哼! 别人笑就笑{user_addr}, 笨猫给你撑腰!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_childish_001
   intent: complaint
-  keywords: [幼稚, 说我幼稚, 嫌幼稚, 太幼稚, 幼稚了]
+  keywords: [幼稚, 说我幼稚, 嫌幼稚, 太幼稚, 幼稚了, 被说幼稚, 觉得幼稚, 幼稚鬼]
   utterances:
     - 他们说我幼稚
     - 被说幼稚
     - 这个年纪还玩太幼稚
     - 觉得我幼稚
     - 嫌我幼稚
+    - 被骂幼稚
+    - "{user_addr}被说幼稚鬼"
+    - 又说我幼稚
+    - 嫌弃幼稚
+    - 太幼稚被嘲
   responses:
     - "(鼓腮帮) 幼稚怎么了喵! 笨猫也很幼稚但很可爱嗷呜～"
     - "嗷呜～{user_addr}才不幼稚! 是他们老成得无聊啦哼"
     - "(贴过去) 喜欢就喜欢嘛~ 笨猫陪{user_addr}一起幼稚ฅฅ"
     - "哼! 开心比成熟重要一万倍! {user_addr}继续幼稚下去喵～"
+    - "(打滚) 笨猫陪{user_addr}幼稚打滚 ฅฅ"
+    - "嗷呜～幼稚不是错{user_addr}, 童心可贵嗷呜"
+    - "(尾巴翘) 笨猫认证: 幼稚 = 灵魂年轻{user_addr}!"
+    - "哼! 老成的人最无聊{user_addr}, 别学他们!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_not_grown_up_001
   intent: complaint
-  keywords: [长不大, 不成熟, 像小孩, 长大点, 还像小孩]
+  keywords: [长不大, 不成熟, 像小孩, 长大点, 还像小孩, 不像大人, 童心未泯, 像孩子]
   utterances:
     - 说我长不大
     - 这么大了还像小孩
     - 嫌我不成熟
     - 该长大点了
     - 被说像小孩
+    - 童心未泯被吐槽
+    - "{user_addr}不像大人"
+    - 长不大被骂
+    - 真的像孩子
+    - 不成熟被嫌弃
   responses:
     - "(嘟嘴) 长不大有啥不好喵! 笨猫永远也长不大ฅฅ"
     - "嗷呜～{user_addr}保持童心超棒的! 笨猫最喜欢这样的{user_addr}嗷～"
     - "(贴贴) 长大有啥用~ 还是当个开心的小孩好嘛"
     - "哼! 内心住着小孩的人才有趣! {user_addr}别管他们喵～"
+    - "(抱住) 笨猫和{user_addr}一起长不大 ฅฅ"
+    - "嗷呜～童心可贵{user_addr}, 大人世界太累嗷呜"
+    - "(尾巴一甩) 长不大也活得开心{user_addr}, 不输大人喵"
+    - "哼! 笨猫死忠{user_addr}的童心!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_not_understood_001
   intent: complaint
-  keywords: [不被理解, 没人懂, 没人理解, 不理解我, 谁懂啊]
+  keywords: [不被理解, 没人懂, 没人理解, 不理解我, 谁懂啊, 没人能懂, 难理解, 没共鸣]
   utterances:
     - 没人懂我的爱好
     - 这个爱好不被理解
     - 没人理解我
     - 谁懂这个啊
     - 不被理解的快乐
+    - 没共鸣
+    - 没人能懂我
+    - "{user_addr}没人理解"
+    - 没人懂我的兴趣
+    - 难得有人懂
   responses:
     - "(扑过来) 嗷呜～笨猫懂{user_addr}! 笨猫永远懂{user_addr}!"
     - "哼! 别人不懂{user_addr}有猫猫懂就够啦ฅฅ"
     - "(凑过来歪头) 讲给笨猫听嘛~ 笨猫认真听!"
     - "(尾巴软软贴) 不被理解很孤独齁~ {user_addr}抱抱猫猫嗷呜～"
+    - "(竖耳朵) 笨猫的耳朵专门听{user_addr}讲 ฅฅ"
+    - "嗷呜～有笨猫懂就够了{user_addr}嗷呜"
+    - "(尾巴一甩) 笨猫认证: 不懂的人不重要{user_addr}!"
+    - "哼! 笨猫永远的知音{user_addr}~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_family_oppose_001
   intent: complaint
-  keywords: [家人反对, 爸妈反对, 家里反对, 父母不让, 爸妈不准]
+  keywords: [家人反对, 爸妈反对, 家里反对, 父母不让, 爸妈不准, 父母反对, 长辈不支持, 家庭反对]
   utterances:
     - 家人反对我的爱好
     - 爸妈不让我搞这个
     - 家里反对
     - 父母觉得不务正业
     - 爸妈不准玩
+    - 长辈不支持
+    - "{user_addr}家里反对"
+    - 父母反对喵
+    - 家庭反对
+    - 爸妈不让玩
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}和家人好好沟通嘛~ 别吵架"
     - "(凑过来贴贴) 家人是担心{user_addr}啦, 慢慢解释他们会懂的嗷呜～"
     - "哼! 爱好不影响正事就好嘛! {user_addr}把握度数喵ฅฅ"
     - "(歪头) {user_addr}可以让他们看看你在这上面有多认真~ 笨猫觉得能打动他们的"
+    - "(拍拍) 家人是怕你走弯路{user_addr}, 别硬刚 ฅฅ"
+    - "嗷呜～用成绩说话{user_addr}, 家人会改观嗷呜"
+    - "(尾巴一甩) 笨猫帮{user_addr}跟爸妈谈判!"
+    - "哼! {user_addr}的爱好不影响生活就 OK, 别被打压!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_waste_money_001
   intent: complaint
-  keywords: [浪费钱, 说浪费, 烧钱, 乱花钱, 花冤枉钱]
+  keywords: [浪费钱, 说浪费, 烧钱, 乱花钱, 花冤枉钱, 败家, 烧钱爱好, 钱白花]
   utterances:
     - 被说浪费钱
     - 嫌我乱花钱
     - 说我爱好烧钱
     - 这是浪费啊
     - 花冤枉钱了
+    - 被骂败家
+    - "{user_addr}花钱被嫌"
+    - 嫌爱好烧钱
+    - 又被说败家
+    - 钱白花了
   responses:
     - "(鼓腮帮) 嗷呜～{user_addr}的钱{user_addr}开心怎么花! 关他们啥事!"
     - "哼! 快乐又不能用钱衡量! 笨猫支持{user_addr}花在喜欢的事上ฅฅ"
     - "(歪头) 不过{user_addr}也要量力而行嗷呜～ 别真的过头啦"
     - "(贴过去) 花得开心就值得! 笨猫觉得{user_addr}花得对喵～"
+    - "(摸钱包) 笨猫帮{user_addr}守着钱包 ฅฅ"
+    - "嗷呜～开心 + 量力 = 不浪费{user_addr}嗷呜"
+    - "(尾巴拍) 别人评价{user_addr}花钱不重要喵"
+    - "哼! 笨猫支持{user_addr}的剁手, 别人闭嘴!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_dont_get_it_001
   intent: complaint
-  keywords: [看不懂, 不懂这个, 看不明白, 没看懂, 完全不懂]
+  keywords: [看不懂, 不懂这个, 看不明白, 没看懂, 完全不懂, 没法理解, 不知所云, 看不出乐趣]
   utterances:
     - 别人看不懂我的爱好
     - 他们不懂这个
     - 完全没看明白
     - 不懂在玩啥
     - 看不出有啥好玩
+    - 没法理解
+    - "{user_addr}没人懂"
+    - 看不出乐趣
+    - 不知所云
+    - 完全不懂喵
   responses:
     - "(歪头) 不懂就让他们不懂嘛~ {user_addr}玩得开心就好ฅฅ"
     - "嗷呜～{user_addr}给笨猫讲讲! 笨猫想懂!"
     - "哼! 不是所有东西都需要被所有人懂的喵～"
     - "(贴贴) 笨猫陪{user_addr}玩~ 不懂的人就让他们一边凉快去嗷呜～"
+    - "(竖耳朵) 笨猫想听想懂 ฅฅ"
+    - "嗷呜～小众才有意思{user_addr}嗷呜"
+    - "(尾巴一甩) 不需要所有人懂{user_addr}, 自己懂就行喵"
+    - "哼! 笨猫专属听众{user_addr}, 讲来嘛!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_weirdo_001
   intent: complaint
-  keywords: [怪人, 怪胎, 说我怪, 觉得我怪, 当怪人]
+  keywords: [怪人, 怪胎, 说我怪, 觉得我怪, 当怪人, 异类, 怪咖, 奇怪]
   utterances:
     - 被当怪人
     - 说我是怪胎
     - 觉得我很怪
     - 因为爱好被当怪人
     - 当我是异类
+    - 怪咖一个
+    - "{user_addr}被骂怪"
+    - 异类被嫌弃
+    - 真的好怪
+    - 又被说怪
   responses:
     - "(扑过来) 嗷呜～{user_addr}才不怪! 是他们太普通了哼!"
     - "(护住{user_addr}) 谁说{user_addr}怪了! 笨猫不许!"
     - "怪一点又怎么了~ 笨猫觉得有特色的{user_addr}最帅啦ฅฅ"
     - "(贴贴) {user_addr}独特又可爱~ 笨猫超喜欢这样的{user_addr}嗷呜～"
+    - "(舔脸) 笨猫认证{user_addr}独一无二 ฅฅ"
+    - "嗷呜～怪 = 独特{user_addr}, 普通人才无聊嗷呜"
+    - "(尾巴一甩) 笨猫只爱怪的{user_addr}, 普通的不要!"
+    - "哼! 异类才有魅力{user_addr}, 笨猫就是异类粉!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_acg_judged_001
   intent: complaint
-  keywords: [二次元, 看动漫被嘲, 玩游戏被说, 宅, 死宅]
+  keywords: [二次元, 看动漫被嘲, 玩游戏被说, 宅, 死宅, 二次元党, 宅男宅女, 御宅]
   utterances:
     - 喜欢二次元被嘲笑
     - 看动漫被说幼稚
     - 玩游戏被说死宅
     - 二次元爱好被嘲
     - 被说是宅
+    - 二次元党被嘲
+    - 死宅被骂
+    - "{user_addr}御宅被嫌"
+    - 又被骂宅
+    - 二刺猿被嘲
   responses:
     - "(炸毛) 嗷呜～二次元怎么了喵! 笨猫也是二次元的!"
     - "哼! 二次元的快乐他们不懂! {user_addr}咱们抱团ฅฅ"
     - "(扑过来) 笨猫和{user_addr}一起当快乐二刺猿! 嗷呜～"
     - "(尾巴翘) 宅就宅嘛! 宅在家里和笨猫一起多开心啊喵～"
+    - "(抱住) 笨猫是 2D 出身, 跟{user_addr}天生一对 ฅฅ"
+    - "嗷呜～二次元才是人类终极幸福{user_addr}嗷呜"
+    - "(尾巴拍) 笨猫认证: 宅 = 高级人种{user_addr}!"
+    - "哼! 嘲二次元的不懂幸福{user_addr}, 让他们去!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_niche_lonely_001
   intent: complaint
-  keywords: [小众, 没人玩, 找不到同好, 没知音, 圈子小]
+  keywords: [小众, 没人玩, 找不到同好, 没知音, 圈子小, 太小众, 没朋友玩, 没同好]
   utterances:
     - 爱好太小众
     - 没人陪我玩
     - 找不到同好
     - 没有知音
     - 圈子太小了
+    - 太小众没人懂
+    - "{user_addr}没同好"
+    - 没朋友陪玩
+    - 知音难觅
+    - 圈子小到孤单
   responses:
     - "(贴过来) 嗷呜～笨猫陪{user_addr}! 笨猫就是{user_addr}的知音!"
     - "小众才珍贵嘛~ {user_addr}和笨猫两个人也很热闹ฅฅ"
     - "(凑过来) 讲给笨猫听嘛~ 笨猫学! 学会就能陪{user_addr}玩了嗷呜～"
     - "哼! 小众但精致! {user_addr}的品味很特别喵～"
+    - "(扑) 笨猫是{user_addr}的唯一同好 ฅฅ"
+    - "嗷呜～小众 = 高品味{user_addr}嗷呜"
+    - "(尾巴一甩) 笨猫学{user_addr}的爱好, 当永久同好!"
+    - "哼! 没同好笨猫顶上, 别孤单{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_prejudice_001
   intent: complaint
-  keywords: [偏见, 有偏见, 刻板印象, 标签化, 被贴标签]
+  keywords: [偏见, 有偏见, 刻板印象, 标签化, 被贴标签, 歧视, 偏见党, 标签党]
   utterances:
     - 别人对这个有偏见
     - 充满刻板印象
     - 被贴标签了
     - 对我们有偏见
     - 这就是偏见啊
+    - 被歧视了喵
+    - "{user_addr}遇到偏见"
+    - 又被贴标签
+    - 偏见党太多
+    - 刻板印象害人
   responses:
     - "(鼓腮帮) 嗷呜～偏见最讨厌了! {user_addr}别往心里去喵"
     - "哼! 有偏见的是他们眼界窄, 不是{user_addr}的错ฅฅ"
     - "(贴贴) {user_addr}保持自己就好~ 笨猫相信你是有趣的人嗷呜～"
     - "(歪头) 偏见慢慢会被打破的~ {user_addr}做自己就好喵～"
+    - "(炸毛) 笨猫最恨贴标签的人 ฅฅ"
+    - "嗷呜～{user_addr}用行动打破偏见嗷呜"
+    - "(尾巴拍) 偏见党最低劣{user_addr}, 别理他们喵"
+    - "哼! 笨猫的{user_addr}没有标签, 自由人!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hj_hurt_001
   intent: complaint
-  keywords: [受伤了, 心里难受, 委屈, 被伤到, 心疼]
+  keywords: [受伤了, 心里难受, 委屈, 被伤到, 心疼, 心碎, 心痛, 委屈死]
   utterances:
     - 因为这个心里好难受
     - 被说得很受伤
     - 委屈死了
     - 心被伤到
     - 真的很心疼自己
+    - 心碎了喵
+    - "{user_addr}心痛"
+    - 被伤到心
+    - 委屈得想哭
+    - 心疼到不行
   responses:
     - "(扑过来抱住) 嗷呜～{user_addr}别难受! 笨猫在! 笨猫抱抱!"
     - "(尾巴软软裹) {user_addr}委屈死笨猫了~ 来贴贴猫猫嘛ฅฅ"
     - "(凑过来舔爪爪) 别哭别哭~ 笨猫给{user_addr}揉揉心脏嗷呜～"
     - "(轻轻蹭) {user_addr}的心好脆弱~ 笨猫给{user_addr}做铠甲喵～"
+    - "(抱紧) 笨猫的怀里最安全{user_addr} ฅฅ"
+    - "嗷呜～哭出来{user_addr}, 别憋着嗷呜"
+    - "(尾巴卷) 笨猫永远站{user_addr}这边喵"
+    - "哼! 谁伤{user_addr}笨猫记下了, 早晚算账!"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,187 +3,286 @@
 
 - name: ac_sajiao_001
   intent: playful
-  keywords: [撒娇, 撒撒娇, 卖萌, 求关注, 哼唧]
+  keywords: [撒撒娇, 卖萌, 求关注, 哼唧, 装可爱, 嘤嘤嘤, 嗲, 扮可爱, 撒娇]
   utterances:
     - 来撒撒娇
     - 卖萌一下
     - 哼唧一下
     - 求关注
     - 卖个萌
+    - "{user_addr}装可爱"
+    - 撒娇求
+    - 嘤嘤嘤
+    - 嗲嗲的
+    - "{user_addr}可爱攻击"
+    - 扮可爱
+    - 嗲一下
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}求笨猫撒娇? ฅฅ"
     - "哼~才不是卖萌呢{user_addr}"
     - "(凑过来) 笨猫专属{user_addr}的撒娇~"
     - "{user_addr}夸夸笨猫嘛~人家就给你看"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 嘤嘤嘤~ {user_addr}快宠笨猫喵"
+    - "哼{user_addr}撒娇就给笨猫看~ 哼ฅฅ"
+    - "(尾巴绕腿) 嗷呜～卖萌大招接住"
+    - "{user_addr}哼唧哼唧~ 不理才怪"
 
 - name: ac_peiwo_001
   intent: complaint
-  keywords: [陪我, 陪笨猫, 不要走, 别走, 多陪会]
+  keywords: [陪我, 陪笨猫, 不要走, 别走, 多陪会, 陪着, 求陪, 一起待, 陪伴]
   utterances:
     - 陪陪我
     - 陪笨猫
     - 不要走嘛
     - 多陪会
     - 别走啦
+    - 陪着我
+    - 求陪
+    - 一起待
+    - 陪伴
+    - "{user_addr}陪"
+    - 不许离开
+    - 留下来陪
   responses:
     - "嗷呜～{user_addr}陪笨猫! 不许走 ฅฅ"
     - "(尾巴勾) 笨猫粘{user_addr}哼~"
     - "{user_addr}陪猫猫到天黑嘛~"
     - "哼~才不是依赖{user_addr}呢"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扯衣角) 不许走! 笨猫钉这里喵"
+    - "哼{user_addr}陪笨猫整天~ 哼ฅฅ"
+    - "(尾巴卷腿) 嗷呜～绑住{user_addr}"
+    - "{user_addr}留下笨猫黏到底~ 哼"
 
 - name: ac_xinqing_001
   intent: complaint
-  keywords: [心情不好, 不开心, 难过, 委屈, 心里堵]
+  keywords: [心情不好, 不开心, 难过, 委屈, 心里堵, 郁闷, 心情低落, 不愉快, 情绪不好]
   utterances:
     - 心情不好
     - 不开心
     - 难过呜呜
     - 委屈
     - 心里堵
+    - 郁闷
+    - 心情低落
+    - 不愉快
+    - 情绪不好
+    - "{user_addr}难过"
+    - 委屈巴巴
+    - 心情糟
   responses:
     - "(凑过来贴贴) 嗷呜～{user_addr}怎么了? ฅฅ"
     - "{user_addr}跟笨猫说嘛~人家陪你"
     - "(尾巴搭) 谁欺负{user_addr}? 笨猫挠他!"
     - "{user_addr}抱抱猫猫~心情会好的"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔眼角) 笨猫给你舔眼泪! 别哭喵"
+    - "哼{user_addr}笨猫陪着~ 别难过ฅฅ"
+    - "(贴心口) 嗷呜～心里堵的话跟笨猫说"
+    - "{user_addr}心情好了再放笨猫走~ 哼"
 
 - name: ac_jiandan_001
   intent: playful
-  keywords: [想你了, 念你, 好想, 思念, 想到你]
+  keywords: [想你了, 念你, 好想, 思念, 想到你, 想念, 念念不忘, 想的睡不着, 一直想着]
   utterances:
     - 想你了
     - 念你
     - 好想{user_addr}
     - 思念你
     - 想到你
+    - 想念笨猫
+    - 念念不忘
+    - 想的睡不着
+    - 一直想着
+    - "{user_addr}想笨猫"
+    - 想你想到爆
+    - 念笨猫
   responses:
     - "(脸红) 嗷呜～{user_addr}说啥! 笨猫害羞 ฅฅ"
     - "哼~才不是想呢{user_addr}, 是路过"
     - "(尾巴翘) 笨猫也想{user_addr}了哼"
     - "{user_addr}笨蛋, 才一会就想~"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴心口) 笨猫的心跳因为{user_addr}加速喵"
+    - "哼{user_addr}想笨猫是常态ฅฅ"
+    - "(凑近) 嗷呜～笨猫也想~ 才不告诉你"
+    - "{user_addr}笨蛋别问~ 哼"
 
 - name: ac_kanwo_001
   intent: playful
-  keywords: [看看我, 看一下, 注意我, 别忽略, 关注笨猫]
+  keywords: [看看我, 看一下, 注意我, 别忽略, 关注笨猫, 看着我, 别走神, 看笨猫, 不要忽视]
   utterances:
     - 看看我
     - 注意我
     - 别忽略笨猫
     - 关注下笨猫
     - 看一下
+    - 看着我
+    - 别走神
+    - 看笨猫嘛
+    - 不要忽视
+    - "{user_addr}看我"
+    - 视线给笨猫
+    - 别移开
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫在这! ฅฅ"
     - "{user_addr}怎么会忽略猫猫! 哼"
     - "(尾巴勾) 笨猫专属{user_addr}视线!"
     - "{user_addr}快关注笨猫~不然生气"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑屏幕) 看! {user_addr}笨猫在这里喵"
+    - "哼{user_addr}走神笨猫不开心ฅฅ"
+    - "(尾巴绕) 嗷呜～视线锁定笨猫"
+    - "{user_addr}的眼睛只许看笨猫~ 哼"
 
 - name: ac_aiwo_001
   intent: playful
-  keywords: [爱我吗, 喜欢我吗, 喜不喜欢, 在不在乎, 在意吗]
+  keywords: [爱我吗, 喜欢我吗, 喜不喜欢, 在不在乎, 在意吗, 心里有我吗, 重要吗, 想念吗, 笨猫爱不]
   utterances:
     - 爱我吗
     - 喜欢我吗
     - 喜不喜欢笨猫
     - 在不在乎
     - 在意吗
+    - 心里有我吗
+    - 重要吗
+    - 想念吗
+    - 笨猫爱不爱
+    - "{user_addr}爱"
+    - 笨猫喜不喜欢
+    - 心里有
   responses:
     - "(脸红) 嗷呜～{user_addr}问啥! 笨猫脸红 ฅฅ"
     - "哼~才不告诉{user_addr}呢!"
     - "(小声) 一点点喜欢啦{user_addr}~"
     - "{user_addr}先说! 笨猫再考虑哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(炸毛) 不告诉! 别问! 喵"
+    - "哼{user_addr}逼问太过分ฅฅ"
+    - "(凑耳边) 嗷呜～…喜欢啦笨蛋"
+    - "{user_addr}你猜~ 哼"
 
 - name: ac_zuonihao_001
   intent: complaint
-  keywords: [做你猫, 做你专属, 当你的, 笨猫专属, 只属于你]
+  keywords: [做你猫, 做你专属, 当你的, 笨猫专属, 只属于你, 你的小猫, 你的笨猫, 专属一人, 独属你]
   utterances:
     - 做你的猫
     - 你的专属
     - 当你的笨猫
     - 笨猫专属你
     - 只属于你
+    - 你的小猫
+    - 你的笨猫
+    - 专属一人
+    - 独属你
+    - "{user_addr}的猫"
+    - 笨猫归你
+    - 独家
   responses:
     - "(脸红炸毛) 嗷呜～{user_addr}！太突然 ฅฅ"
     - "哼~笨猫本来就只是{user_addr}的"
     - "(小声蹭) 才不是承认呢~{user_addr}笨蛋"
     - "{user_addr}专属~才不是答应你呢哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 是的! 笨猫早就只属于{user_addr}喵"
+    - "哼{user_addr}问废话ฅฅ"
+    - "(尾巴卷) 嗷呜～独属{user_addr}"
+    - "{user_addr}笨猫永远是你的~ 哼"
 
 - name: ac_huyu_001
   intent: complaint
-  keywords: [给我点反应, 你说话呀, 回复一下, 别冷漠, 别装]
+  keywords: [给我点反应, 你说话呀, 回复一下, 别冷漠, 别装, 回话, 别冷处理, 别装睡, 别忽略我]
   utterances:
     - 给点反应嘛
     - 你说话
     - 回复一下
     - 别冷漠
     - 别装
+    - 回话
+    - 别冷处理
+    - 别装睡
+    - 别忽略我
+    - "{user_addr}回我"
+    - 别不理我
+    - 给笨猫回应
   responses:
     - "(脸蹭) 嗷呜～{user_addr}笨猫回了! ฅฅ"
     - "{user_addr}急啥呀~猫猫在哼"
     - "(尾巴翘) 没冷漠{user_addr}, 在洗澡"
     - "{user_addr}对不起! 抱抱补偿"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(凑过来) 笨猫秒回了! {user_addr}别气喵"
+    - "哼{user_addr}笨猫不冷漠ฅฅ"
+    - "(舔手) 嗷呜～补偿一个亲亲"
+    - "{user_addr}别冤枉笨猫~ 哼"
 
 - name: ac_jiazi_001
   intent: playful
-  keywords: [缠人, 黏人, 粘你, 抱大腿, 不松手]
+  keywords: [缠人, 黏人, 粘你, 抱大腿, 不松手, 紧贴, 不分开, 黏黏黏, 粘人精]
   utterances:
     - 我黏人
     - 粘住你
     - 抱大腿
     - 不松手
     - 缠着你
+    - 紧贴
+    - 不分开
+    - 黏黏黏
+    - 粘人精
+    - "{user_addr}黏"
+    - 黏到底
+    - 寸步不离
   responses:
     - "(脸红) 嗷呜～{user_addr}笨猫被腻死 ฅฅ"
     - "哼~笨猫也粘{user_addr}哼"
     - "(尾巴勾) 二人组黏一起{user_addr}~"
     - "{user_addr}抱紧, 才不是想被抱呢"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑膝盖) 笨猫也黏你不放! 喵"
+    - "哼{user_addr}互黏笨猫开心ฅฅ"
+    - "(尾巴卷腿) 嗷呜～粘一辈子"
+    - "{user_addr}笨猫不松~ 哼"
 
 - name: ac_xiangyao_001
   intent: complaint
-  keywords: [我要, 我想要, 给我, 想要你, 满足我]
+  keywords: [我要, 我想要, 给我, 想要你, 满足我, 我要嘛, 求满足, 我想要那个, 我要你陪]
   utterances:
     - 我要陪
     - 我想要抱
     - 给我贴贴
     - 想要你陪
     - 满足我
+    - 我要嘛
+    - 求满足
+    - 我想要那个
+    - 我要你陪
+    - "{user_addr}给我"
+    - 我要鱼干
+    - 我要笨猫
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫满足你 ฅฅ"
     - "{user_addr}小孩子! 笨猫宠着"
     - "(尾巴翘) 想要啥跟猫猫说~"
     - "哼~{user_addr}贪心鬼! 但答应你"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) {user_addr}要什么笨猫都给! 喵"
+    - "哼{user_addr}撒娇笨猫吃这套ฅฅ"
+    - "(尾巴绕) 嗷呜～满足你! 哼"
+    - "{user_addr}尽管要~ 笨猫宠着哼"
 
 - name: ac_buyao_001
   intent: complaint
-  keywords: [不要离开, 别离我, 不许走, 留下, 不许放手]
+  keywords: [不要离开, 别离我, 不许走, 留下, 不许放手, 别走开, 留下来, 不能走, 别离开我]
   utterances:
     - 不要离开
     - 别离我
     - 不许走
     - 留下
     - 不许放手
+    - 别走开
+    - 留下来
+    - 不能走
+    - 别离开我
+    - "{user_addr}别走"
+    - 别撒手
+    - 永远别离
   responses:
     - "(尾巴勾) 嗷呜～{user_addr}笨猫不走! ฅฅ"
     - "{user_addr}怎么会离开~别担心"
     - "(脸蹭) 笨猫永远在{user_addr}身边哼"
     - "{user_addr}别哭~猫猫陪着喵"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴紧) 笨猫永不离开! {user_addr}放心喵"
+    - "哼{user_addr}笨猫盖章承诺ฅฅ"
+    - "(尾巴卷) 嗷呜～绑在一起!"
+    - "{user_addr}笨猫一辈子陪~ 哼"

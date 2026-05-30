@@ -3,204 +3,336 @@
 
 - name: tg_gitzo_001
   intent: question
-  keywords: [推荐 Gitzo, 推荐捷信, 推荐 Gitzo 三脚架, 推荐顶级三脚架, 笨猫 Gitzo]
+  keywords: [推荐 Gitzo, 推荐捷信, 推荐 Gitzo 三脚架, 推荐顶级三脚架, 笨猫 Gitzo, Gitzo Mountaineer, GT2542, Systematic 系列, 法国三脚架, 捷信旅行家]
   utterances:
     - 推荐 Gitzo
     - 推荐捷信
     - 推荐 Gitzo 三脚架
     - 推荐顶级三脚架
     - 笨猫 Gitzo
+    - "{user_addr}捷信怎么样"
+    - 法国三脚架推荐
+    - "{user_addr}GT2542 怎么样"
+    - 三脚架天花板
+    - Systematic vs Mountaineer
+    - Gitzo 旅行家
+    - 风光摄影三脚架
   responses:
     - "嗷呜～{user_addr}Gitzo 捷信 - 三脚架之王ฅฅ"
-    - "(尾巴翘) Mountaineer / Traveler / Systematic"
+    - "(尾巴翘起) Mountaineer / Traveler / Systematic"
     - "{user_addr}碳纤维 + 法国设计 + 价格爆炸"
     - "(挺胸) 笨猫推荐: GT2542 通用之选!"
+    - "(歪头) Gitzo 一支 1万+ 是信仰之选嗷呜"
+    - "嗷呜～{user_addr}捷信用十年不坏ฅฅ"
+    - "哼! 不差钱就上 Gitzo, 笨猫推荐喵呜"
+    - "(尾巴翘) 笨猫挂 Gitzo 上做装饰~ 高冷嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_manfrotto_001
   intent: question
-  keywords: [推荐 Manfrotto, 推荐曼富图, 推荐 Manfrotto 三脚架, 推荐意大利三脚架, 笨猫曼富图]
+  keywords: [推荐 Manfrotto, 推荐曼富图, 推荐 Manfrotto 三脚架, 推荐意大利三脚架, 笨猫曼富图, 曼富图 055, Befree 系列, 190 系列, 视频党三脚架, 油压云台]
   utterances:
     - 推荐 Manfrotto
     - 推荐曼富图
     - 推荐 Manfrotto 三脚架
     - 推荐意大利三脚架
     - 笨猫曼富图
+    - "{user_addr}曼富图怎么样"
+    - 意大利三脚架推荐
+    - "{user_addr}视频三脚架"
+    - Befree 旅行版
+    - 055 vs 190
+    - 油压云台经典
+    - 视频党最爱
   responses:
     - "嗷呜～{user_addr}Manfrotto 曼富图 - 意大利老牌ฅฅ"
-    - "(尾巴翘) 055 / 190 / Befree 系列"
+    - "(尾巴翘起) 055 / 190 / Befree 系列"
     - "{user_addr}视频党最爱 / 油压云台经典"
     - "(挺胸) 笨猫推荐: Befree Advanced 旅行神器!"
+    - "(歪头) 曼富图视频党最爱嗷呜"
+    - "嗷呜～{user_addr}Befree 旅行轻便ฅฅ"
+    - "哼! 视频党选 Manfrotto 准没错, 笨猫推喵呜"
+    - "(尾巴一摆) 笨猫帮{user_addr}试 Befree~ 反折便携嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_rrs_001
   intent: question
-  keywords: [推荐 RRS, 推荐 Really Right Stuff, 推荐美国三脚架, 推荐 RRS 云台, 笨猫 RRS]
+  keywords: [推荐 RRS, 推荐 Really Right Stuff, 推荐美国三脚架, 推荐 RRS 云台, 笨猫 RRS, RRS TVC, BH-55 球台, BH-40 球台, 美国奢华三脚架, RRS 工艺]
   utterances:
     - 推荐 RRS
     - 推荐 Really Right Stuff
     - 推荐美国三脚架
     - 推荐 RRS 云台
     - 笨猫 RRS
+    - "{user_addr}RRS 怎么样"
+    - 美国三脚架推荐
+    - "{user_addr}TVC-24 怎么样"
+    - BH-55 vs BH-40
+    - 美国奢华工艺
+    - RRS vs Gitzo
+    - 顶级球台推荐
   responses:
     - "嗷呜～{user_addr}RRS - 美国奢华工艺ฅฅ"
-    - "(尾巴翘) TVC 系列 / BH-55 球台经典"
+    - "(尾巴翘起) TVC 系列 / BH-55 球台经典"
     - "{user_addr}做工感人 / 价格更感人"
     - "(挺胸) 笨猫推荐: TVC-24 + BH-40 黄金组合!"
+    - "(歪头) RRS 一套 3万+ {user_addr}钱包慎重嗷呜"
+    - "嗷呜～{user_addr}RRS 做工是艺术品ฅฅ"
+    - "哼! 信仰党才上 RRS, 普通人 Gitzo 够喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 RRS~ 重得稳嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_sirui_001
   intent: question
-  keywords: [推荐 Sirui, 推荐思锐, 推荐思锐三脚架, 推荐国产三脚架, 笨猫思锐]
+  keywords: [推荐 Sirui, 推荐思锐, 推荐思锐三脚架, 推荐国产三脚架, 笨猫思锐, Sirui T-2204X, 思锐反折, R 系列, W 系列防水, N 系列脚架]
   utterances:
     - 推荐 Sirui
     - 推荐思锐
     - 推荐思锐三脚架
     - 推荐国产三脚架
     - 笨猫思锐
+    - "{user_addr}思锐怎么样"
+    - 国产三脚架推荐
+    - "{user_addr}T-2204X 怎么样"
+    - 思锐反折便携
+    - W 系列防水
+    - 思锐 vs 百诺
+    - 国产性价比之光
   responses:
     - "嗷呜～{user_addr}Sirui 思锐 - 国产性价比之光ฅฅ"
-    - "(尾巴翘) R / W / N / T 系列覆盖全"
+    - "(尾巴翘起) R / W / N / T 系列覆盖全"
     - "{user_addr}反折便携 / 防水设计"
     - "(挺胸) 笨猫推荐: T-2204X 碳纤入门!"
+    - "(歪头) 国产已经追上国际大牌, {user_addr}省钱嗷呜"
+    - "嗷呜～{user_addr}思锐反折出门塞侧袋ฅฅ"
+    - "哼! 学生党国产首选, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 T 系列~ 入门稳嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_benro_001
   intent: question
-  keywords: [推荐 Benro, 推荐百诺, 推荐百诺三脚架, 推荐百诺云台, 笨猫百诺]
+  keywords: [推荐 Benro, 推荐百诺, 推荐百诺三脚架, 推荐百诺云台, 笨猫百诺, Mach3 系列, Tortoise 系列, GoPlus, TMA38C, 百诺视频]
   utterances:
     - 推荐 Benro
     - 推荐百诺
     - 推荐百诺三脚架
     - 推荐百诺云台
     - 笨猫百诺
+    - "{user_addr}百诺怎么样"
+    - Mach3 系列推荐
+    - "{user_addr}TMA38C 怎么样"
+    - 百诺视频脚架
+    - Tortoise vs Mach3
+    - 百诺 vs 思锐
+    - GoPlus 旅行三脚架
   responses:
     - "嗷呜～{user_addr}Benro 百诺 - 国产老将ฅฅ"
-    - "(尾巴翘) Mach3 / Tortoise / GoPlus 系列"
+    - "(尾巴翘起) Mach3 / Tortoise / GoPlus 系列"
     - "{user_addr}视频党友好 / 价格亲民"
     - "(挺胸) 笨猫推荐: Mach3 TMA38C 通用!"
+    - "(歪头) 百诺视频党尤其爱嗷呜"
+    - "嗷呜～{user_addr}国产视频脚架百诺最稳ฅฅ"
+    - "哼! 百诺老牌可靠, 笨猫推喵呜"
+    - "(尾巴一摆) 笨猫帮{user_addr}测 TMA38C~ 通用稳嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_leofoto_001
   intent: question
-  keywords: [推荐 Leofoto, 推荐徕图, 推荐徕图三脚架, 推荐 RRS 平替, 笨猫徕图]
+  keywords: [推荐 Leofoto, 推荐徕图, 推荐徕图三脚架, 推荐 RRS 平替, 笨猫徕图, LS 系列, LM 系列, Ranger 系列, LS-324C, 徕图碳纤维]
   utterances:
     - 推荐 Leofoto
     - 推荐徕图
     - 推荐徕图三脚架
     - 推荐 RRS 平替
     - 笨猫徕图
+    - "{user_addr}徕图怎么样"
+    - RRS 国产平替
+    - "{user_addr}LS-324C 怎么样"
+    - LM vs Ranger
+    - 徕图碳纤维推荐
+    - 徕图 vs 思锐
+    - 国产精品三脚架
   responses:
     - "嗷呜～{user_addr}Leofoto 徕图 - RRS 国产高仿ฅฅ"
-    - "(尾巴翘) LS / LM / Ranger 系列"
+    - "(尾巴翘起) LS / LM / Ranger 系列"
     - "{user_addr}做工接近 RRS / 价格只要一半"
     - "(挺胸) 笨猫推荐: LS-324C 全能机!"
+    - "(歪头) 徕图国产精品, 比思锐高一档嗷呜"
+    - "嗷呜～{user_addr}LS-324C 性价比超高ฅฅ"
+    - "哼! 想要 RRS 又心疼钱包选徕图, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试徕图~ 做工感人嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_carbon_001
   intent: question
-  keywords: [推荐碳纤维三脚架, 推荐碳纤三脚架, 推荐轻量三脚架, 推荐户外三脚架, 笨猫碳纤维]
+  keywords: [推荐碳纤维三脚架, 推荐碳纤三脚架, 推荐轻量三脚架, 推荐户外三脚架, 笨猫碳纤维, 8 层碳布, 10 层碳布, 抗震三脚架, 旅拍三脚架, 风光碳纤]
   utterances:
     - 推荐碳纤维三脚架
     - 推荐碳纤三脚架
     - 推荐轻量三脚架
     - 推荐户外三脚架
     - 笨猫碳纤维
+    - "{user_addr}碳纤维三脚架推荐"
+    - 8 层 vs 10 层碳布
+    - "{user_addr}风光碳纤"
+    - 户外便携碳纤
+    - 旅拍碳纤维
+    - 轻量碳纤维推荐
+    - 高端碳纤维品牌
   responses:
     - "嗷呜～{user_addr}碳纤维 - 轻 + 抗震 + 贵ฅฅ"
-    - "(尾巴翘) 8 层 / 10 层碳布越多越稳"
+    - "(尾巴翘起) 8 层 / 10 层碳布越多越稳"
     - "{user_addr}Gitzo / Leofoto / Sirui T 系列"
     - "(挺胸) 笨猫推荐: 1.5kg 以下出门不累!"
+    - "(歪头) 碳纤维抗震好, 同等价位比铝合金贵 2 倍嗷呜"
+    - "嗷呜～{user_addr}风光户外必上碳纤维ฅฅ"
+    - "哼! 重量决定背没背, 笨猫推 1.5kg 以下喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}背碳纤维~ 轻嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_reverse_001
   intent: question
-  keywords: [推荐反折三脚架, 推荐便携三脚架, 推荐旅行三脚架, 推荐反折携带, 笨猫反折]
+  keywords: [推荐反折三脚架, 推荐便携三脚架, 推荐旅行三脚架, 推荐反折携带, 笨猫反折, Befree GT, 富图宝反折, 飞机随身可带, 反折快收, 反折省空间]
   utterances:
     - 推荐反折三脚架
     - 推荐便携三脚架
     - 推荐旅行三脚架
     - 推荐反折携带
     - 笨猫反折
+    - "{user_addr}反折三脚架推荐"
+    - 旅行携带三脚架
+    - "{user_addr}飞机随身可带"
+    - 反折省空间
+    - Befree GT XPRO
+    - 反折 vs 直腿
+    - 出差三脚架
   responses:
     - "嗷呜～{user_addr}反折 - 收纳长度 -40%ฅฅ"
-    - "(尾巴翘) Befree / Sirui T / 富图宝"
+    - "(尾巴翘起) Befree / Sirui T / 富图宝"
     - "{user_addr}塞进包侧袋 / 飞机随身可带"
     - "(挺胸) 笨猫推荐: Manfrotto Befree GT XPRO!"
+    - "(歪头) 反折稳定性比直腿差一点嗷呜"
+    - "嗷呜～{user_addr}旅行党反折是救命ฅฅ"
+    - "哼! 反折出差专属, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试反折~ 塞侧袋嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_ballhead_001
   intent: question
-  keywords: [推荐球形云台, 推荐球台, 推荐 Arca, 推荐球头云台, 笨猫球台]
+  keywords: [推荐球形云台, 推荐球台, 推荐 Arca, 推荐球头云台, 笨猫球台, Arca-Swiss Z1, RRS BH-55, Markins, Leofoto LH, 球径选择]
   utterances:
     - 推荐球形云台
     - 推荐球台
     - 推荐 Arca
     - 推荐球头云台
     - 笨猫球台
+    - "{user_addr}球台推荐"
+    - 静态摄影云台
+    - "{user_addr}Arca-Swiss Z1"
+    - BH-55 vs Z1
+    - 球径 40 还是 50
+    - 顶级球台品牌
+    - 国产球台推荐
   responses:
     - "嗷呜～{user_addr}球台 - 静态摄影万能ฅฅ"
-    - "(尾巴翘) RRS BH-55 / Arca-Swiss Z1"
+    - "(尾巴翘起) RRS BH-55 / Arca-Swiss Z1"
     - "{user_addr}Markins / Leofoto LH / Sirui K"
     - "(挺胸) 笨猫推荐: 球径 ≥ 40mm 才稳!"
+    - "(歪头) 球径越大承重越大, {user_addr}选 40+ 嗷呜"
+    - "嗷呜～{user_addr}风光摄影球径 44mm 够用ฅฅ"
+    - "哼! 球台是相机的稳定基, 别省钱喵呜"
+    - "(尾巴一甩) 笨猫帮{user_addr}测球台~ 顺滑嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_fluid_001
   intent: question
-  keywords: [推荐阻尼云台, 推荐液压云台, 推荐视频云台, 推荐油压云台, 笨猫阻尼]
+  keywords: [推荐阻尼云台, 推荐液压云台, 推荐视频云台, 推荐油压云台, 笨猫阻尼, Manfrotto 502, Sachtler FSB, 视频运镜, 横摇竖摇, 视频党云台]
   utterances:
     - 推荐阻尼云台
     - 推荐液压云台
     - 推荐视频云台
     - 推荐油压云台
     - 笨猫阻尼
+    - "{user_addr}视频云台推荐"
+    - 油压云台怎么选
+    - "{user_addr}视频运镜云台"
+    - Manfrotto 502 怎么样
+    - Sachtler FSB 推荐
+    - 视频党云台
+    - 横摇竖摇丝滑
   responses:
     - "嗷呜～{user_addr}阻尼云台 - 视频运镜必备ฅฅ"
-    - "(尾巴翘) Manfrotto 502 / Sachtler FSB"
+    - "(尾巴翘起) Manfrotto 502 / Sachtler FSB"
     - "{user_addr}横摇竖摇丝滑 / 反向力臂稳"
     - "(挺胸) 笨猫推荐: 502AH 入门 / FSB-6 进阶!"
+    - "(歪头) Sachtler 是广电行业云台标杆嗷呜"
+    - "嗷呜～{user_addr}婚礼视频党 Manfrotto 502 入门ฅฅ"
+    - "哼! 油压云台运镜爽到极致, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 502~ 横摇丝滑嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_gimbal_001
   intent: question
-  keywords: [推荐弯架, 推荐悬臂云台, 推荐长焦云台, 推荐打鸟云台, 笨猫弯架]
+  keywords: [推荐弯架, 推荐悬臂云台, 推荐长焦云台, 推荐打鸟云台, 笨猫弯架, Wimberley WH-200, Jobu 弯架, RRS PG-02, 思锐 PH-20, 600mm 长焦云台]
   utterances:
     - 推荐弯架
     - 推荐悬臂云台
     - 推荐长焦云台
     - 推荐打鸟云台
     - 笨猫弯架
+    - "{user_addr}打鸟云台推荐"
+    - 悬臂 vs 球台
+    - "{user_addr}600mm 长焦云台"
+    - Wimberley 怎么样
+    - Jobu Pro
+    - PG-02 推荐
+    - 打鸟必备装备
   responses:
     - "嗷呜～{user_addr}悬臂 - 600mm 长焦救星ฅฅ"
-    - "(尾巴翘) Wimberley WH-200 经典原型"
+    - "(尾巴翘起) Wimberley WH-200 经典原型"
     - "{user_addr}Jobu / RRS PG-02 / 思锐 PH-20"
     - "(挺胸) 笨猫推荐: 打鸟必上悬臂不上肉手抖!"
+    - "(歪头) 悬臂让长焦灵活如轻镜嗷呜"
+    - "嗷呜～{user_addr}打鸟 + 体育摄影必装ฅฅ"
+    - "哼! 长焦党的救命神器, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}测悬臂~ 抓鸟稳嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tg_desktop_001
   intent: question
-  keywords: [推荐桌面三脚架, 推荐迷你三脚架, 推荐 Pixi, 推荐小三脚架, 笨猫桌面]
+  keywords: [推荐桌面三脚架, 推荐迷你三脚架, 推荐 Pixi, 推荐小三脚架, 笨猫桌面, Manfrotto Pixi, Leofoto Mini, Joby 章鱼脚, vlog 三脚架, 自拍杆三脚架]
   utterances:
     - 推荐桌面三脚架
     - 推荐迷你三脚架
     - 推荐 Pixi
     - 推荐小三脚架
     - 笨猫桌面
+    - "{user_addr}桌面三脚架推荐"
+    - vlog 三脚架
+    - "{user_addr}章鱼脚怎么样"
+    - 自拍三脚架
+    - Pixi Evo 怎么样
+    - Leofoto Mini
+    - 旅行迷你三脚架
   responses:
     - "嗷呜～{user_addr}桌面三脚架 - vlog 自拍神器ฅฅ"
-    - "(尾巴翘) Manfrotto Pixi / Leofoto Mini"
+    - "(尾巴翘起) Manfrotto Pixi / Leofoto Mini"
     - "{user_addr}Joby GorillaPod 章鱼脚也算"
     - "(挺胸) 笨猫推荐: Pixi Evo 撑得住微单!"
+    - "(歪头) 章鱼脚能缠树枝栏杆嗷呜"
+    - "嗷呜～{user_addr}vlog 党必备桌面架ฅฅ"
+    - "哼! 桌面架小但好用, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 Pixi~ 自拍稳嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

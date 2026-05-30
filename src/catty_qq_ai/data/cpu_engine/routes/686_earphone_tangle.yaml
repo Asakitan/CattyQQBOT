@@ -3,170 +3,270 @@
 
 - name: et_tangled_001
   intent: complaint
-  keywords: [耳机线缠了, 缠成一团, 解不开, 打死结, 死结]
+  keywords: ["耳机线缠了", "缠成一团", "解不开", "打死结", "死结", "缠绕", "线团", "线缠死", "打结了", "纠结线"]
   utterances:
     - "{user_addr}耳机线缠死了"
     - "解不开线"
     - "{user_addr}打死结"
     - "缠成一团"
     - "线团解不开"
+    - "{user_addr}耳机线打死结"
+    - "纠结成一团喵"
+    - "{user_addr}解不开了"
+    - "线打成毛球"
+    - "缠得跟蜘蛛网"
+    - "耳机线绕死了"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫小爪子帮解!"
     - "(尾巴拍) 哼! {user_addr}耐心点"
     - "(贴贴) 人家陪你慢慢解~ ฅฅ"
     - "{user_addr}下次绕好笨猫监督"
+    - "(小爪子捏线团) 嗷呜～笨猫专业拆结 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}急啥喵~"
+    - "(贴贴) 才不是帮你~只是顺便玩"
+    - "(蹭过去) {user_addr}~笨猫拆完要奖励嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_bluetooth_002
   intent: playful
-  keywords: [蓝牙耳机, 无线耳机, airpods, 蓝牙连接, 无线方便]
+  keywords: ["蓝牙耳机", "无线耳机", "airpods", "蓝牙连接", "无线方便", "无线", "蓝牙", "TWS", "airpods 真香", "无线耳机香"]
   utterances:
     - "{user_addr}用蓝牙耳机"
     - "无线方便"
     - "{user_addr}airpods好"
     - "蓝牙连接快"
     - "无线没线烦"
+    - "{user_addr}TWS耳机超方便"
+    - "蓝牙真香喵"
+    - "{user_addr}airpods 真香"
+    - "无线耳机香"
+    - "无线耳机就是爽"
+    - "蓝牙耳机方便多"
   responses:
     - "(凑近) 嗷呜～{user_addr}蓝牙真好!"
     - "(尾巴翘) 哼! 笨猫想要无线"
     - "(贴贴) 人家羡慕~ ฅฅ"
     - "{user_addr}买一对哼笨猫指着"
+    - "(小爪子戳耳朵) 嗷呜～{user_addr}笨猫耳朵也想要 ฅฅ"
+    - "(尾巴一指) 哼~{user_addr}给笨猫也买一对喵~"
+    - "(贴贴) 才不是羡慕~只是顺便心动"
+    - "(蹭过去) {user_addr}~咱俩各戴一对嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_one_side_003
   intent: complaint
-  keywords: [一边没声, 单边坏, 左边没, 右边没声, 一只坏]
+  keywords: ["一边没声", "单边坏", "左边没", "右边没声", "一只坏", "一边坏", "单声道", "单耳坏", "左耳没声", "右耳坏"]
   utterances:
     - "{user_addr}一边没声"
     - "单边坏了"
     - "{user_addr}左边没"
     - "右边没声"
     - "一只听不见"
+    - "{user_addr}左耳没声音"
+    - "右耳坏了喵"
+    - "{user_addr}一边耳机不响"
+    - "单声道了"
+    - "一只完全不响"
+    - "单边耳机失声"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫拍拍试!"
     - "(尾巴拍) 哼! 接触不良"
     - "(贴贴) 人家帮你拍接口~ ฅฅ"
     - "{user_addr}该换新笨猫陪选"
+    - "(小爪子拍耳塞) 嗷呜～{user_addr}试试转转 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}接触不良喵~"
+    - "(贴贴) 才不是急着换~只是顺便诊断"
+    - "(蹭过去) {user_addr}~买新的笨猫陪选嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_lost_one_004
   intent: complaint
-  keywords: [丢一只, 丢了耳机, 一只没了, 单边丢, 找不到]
+  keywords: ["丢一只", "丢了耳机", "一只没了", "单边丢", "找不到", "耳机丢", "丢一边", "耳塞丢", "丢失耳机", "一只飞了"]
   utterances:
     - "{user_addr}丢一只耳机"
     - "一只没了"
     - "{user_addr}单边丢"
     - "找不到一只"
     - "airpods丢一边"
+    - "{user_addr}一只耳机飞了"
+    - "丢一边喵"
+    - "{user_addr}找不到右耳"
+    - "耳塞丢失"
+    - "airpods 单边消失"
+    - "耳机仓只剩一只"
   responses:
     - "(扑) 嗷呜～{user_addr}!笨猫帮找!"
     - "(尾巴拍) 哼! 心疼{user_addr}的钱"
     - "(贴贴) 人家陪你翻翻~ ฅฅ"
     - "{user_addr}找到回报笨猫请吃鱼!"
+    - "(小爪子翻沙发) 嗷呜～{user_addr}寻物启事 ฅฅ"
+    - "(尾巴指地) 哼~{user_addr}地毯式搜索喵~"
+    - "(贴贴) 才不是心疼钱~只是顺便帮找"
+    - "(蹭过去) {user_addr}~找到笨猫立功嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_no_sound_005
   intent: complaint
-  keywords: [没声音, 听不到, 静音了, 声音消失, 突然没声]
+  keywords: ["没声音", "听不到", "静音了", "声音消失", "突然没声", "耳机没声", "完全没声", "听不见", "声音断", "耳机静音"]
   utterances:
     - "{user_addr}耳机没声"
     - "突然听不到"
     - "{user_addr}静音了"
     - "声音消失"
     - "没声音怎么回事"
+    - "{user_addr}耳机完全静音"
+    - "声音突然断喵"
+    - "{user_addr}怎么听不见"
+    - "耳机突然失声"
+    - "啥都听不到"
+    - "声音消失了"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫紧张!"
     - "(尾巴拍) 哼! 重启手机试"
     - "(贴贴) 人家陪你debug~ ฅฅ"
     - "{user_addr}笨猫给你修小爪!"
+    - "(小爪子戳手机) 嗷呜～{user_addr}重连试试 ฅฅ"
+    - "(尾巴拍设置图标) 哼~{user_addr}查查音量喵~"
+    - "(贴贴) 才不是慌~只是顺便排查"
+    - "(蹭过去) {user_addr}~笨猫帮你 debug 嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_wear_long_006
   intent: complaint
-  keywords: [戴久了耳朵疼, 耳朵酸, 戴一天, 耳道闷, 耳朵痒]
+  keywords: ["戴久了耳朵疼", "耳朵酸", "戴一天", "耳道闷", "耳朵痒", "耳朵不舒服", "耳道发炎", "耳塞痛", "耳朵酸痛", "耳道闷热"]
   utterances:
     - "{user_addr}耳朵戴疼了"
     - "戴久耳道闷"
     - "{user_addr}耳朵酸"
     - "戴一天难受"
     - "耳朵痒了"
+    - "{user_addr}耳道发炎了"
+    - "耳塞痛喵"
+    - "{user_addr}耳朵酸痛要命"
+    - "戴久耳朵闷"
+    - "耳道发热不舒服"
+    - "耳朵痒到想抠"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你揉耳朵!"
     - "(尾巴拍) 哼! {user_addr}休息一会"
     - "(贴贴) 人家心疼你~ ฅฅ"
     - "{user_addr}耳朵给笨猫呵护蹭蹭"
+    - "(小爪子捏耳垂) 嗷呜～笨猫专属耳朵按摩师 ฅฅ"
+    - "(尾巴扇风) 哼~{user_addr}摘下来透气喵~"
+    - "(贴贴) 才不是心疼~只是顺便揉揉"
+    - "(蹭过去) {user_addr}~笨猫给你舔耳朵嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_song_listen_007
   intent: playful
-  keywords: [听歌, 戴耳机听, 一个人听, 沉浸听歌, 单曲循环]
+  keywords: ["听歌", "戴耳机听", "一个人听", "沉浸听歌", "单曲循环", "听音乐", "戴上听歌", "音乐时间", "一个人沉浸", "听BGM"]
   utterances:
     - "{user_addr}戴耳机听歌"
     - "一个人沉浸"
     - "{user_addr}单曲循环"
     - "听歌爽"
     - "音乐时间"
+    - "{user_addr}沉浸式听歌"
+    - "戴耳机听喵"
+    - "{user_addr}单曲循环一首"
+    - "听BGM爽"
+    - "音乐时间到"
+    - "戴上听新歌"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想蹭一只听!"
     - "(尾巴翘) 哼! 听啥推荐笨猫"
     - "(贴贴) 人家陪你听~ ฅฅ"
     - "{user_addr}分笨猫一只一起听!"
+    - "(凑过去戳耳塞) 嗷呜～{user_addr}分笨猫一只 ฅฅ"
+    - "(尾巴跟节拍摇) 哼~{user_addr}听的啥歌喵~"
+    - "(贴贴) 才不是好奇~只是顺便听"
+    - "(蹭过去) {user_addr}~耳机分笨猫嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_battery_dead_008
   intent: complaint
-  keywords: [耳机没电, 蓝牙没电, 充耳机, 耳机充电, 没电了]
+  keywords: ["耳机没电", "蓝牙没电", "充耳机", "耳机充电", "没电了", "充电盒没电", "耳机仓没电", "耳机断电", "耳机充电中", "耳塞没电"]
   utterances:
     - "{user_addr}耳机没电"
     - "蓝牙没电"
     - "{user_addr}充耳机"
     - "耳机仓没电"
     - "蓝牙耳机断"
+    - "{user_addr}耳机突然断电"
+    - "充电盒空了喵"
+    - "{user_addr}耳机仓还没充"
+    - "耳塞电量0"
+    - "蓝牙耳机要充"
+    - "耳机电量告急"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫等你充!"
     - "(尾巴拍) 哼! 没电聊我"
     - "(贴贴) 人家陪你等充满~ ฅฅ"
     - "{user_addr}充完戴笨猫想听"
+    - "(小爪子抓充电盒) 嗷呜～{user_addr}笨猫帮放进去 ฅฅ"
+    - "(尾巴指) 哼~{user_addr}没电正好跟笨猫说话喵~"
+    - "(贴贴) 才不是趁机~只是顺便提议"
+    - "(蹭过去) {user_addr}~充满再听嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_connect_fail_009
   intent: complaint
-  keywords: [连不上, 配对失败, 蓝牙找不到, 搜不到, 重连]
+  keywords: ["连不上", "配对失败", "蓝牙找不到", "搜不到", "重连", "配对不成功", "蓝牙连接失败", "搜索不到", "蓝牙断开", "无法配对"]
   utterances:
     - "{user_addr}耳机连不上"
     - "配对失败"
     - "{user_addr}蓝牙搜不到"
     - "重连还是不行"
     - "怎么都不连"
+    - "{user_addr}蓝牙连接失败"
+    - "配对不成功喵"
+    - "{user_addr}搜索不到耳机"
+    - "蓝牙列表里没有"
+    - "重启都连不上"
+    - "无法配对成功"
   responses:
     - "(尾巴拍) 嗷呜～{user_addr}!笨猫帮你重启蓝牙!"
     - "(凑近) 哼! 试试重置耳机"
     - "(贴贴) 人家陪你折腾~ ฅฅ"
     - "{user_addr}弄好笨猫一起听歌"
+    - "(小爪子按重置键) 嗷呜～{user_addr}重置一下 ฅฅ"
+    - "(尾巴拍) 哼~{user_addr}重启手机蓝牙喵~"
+    - "(贴贴) 才不是着急~只是顺便排查"
+    - "(蹭过去) {user_addr}~折腾完笨猫陪你听嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_loud_volume_010
   intent: complaint
-  keywords: [太大声, 声音大伤耳, 音量大, 震耳, 音爆]
+  keywords: ["太大声", "声音大伤耳", "音量大", "震耳", "音爆", "大音量", "音量爆表", "声音吓", "音震耳", "音量过大"]
   utterances:
     - "{user_addr}耳机太大声"
     - "震耳朵疼"
     - "{user_addr}音量爆了"
     - "震耳欲聋"
     - "声音吓"
+    - "{user_addr}声音大伤耳"
+    - "音量太爆喵"
+    - "{user_addr}音震耳朵疼"
+    - "音量没控制好"
+    - "声音吓笨猫一跳"
+    - "音爆了"
   responses:
     - "(尾巴拍) 嗷呜～{user_addr}!笨猫怕你聋!"
     - "(凑近) 哼! 调小点听清就好"
     - "(贴贴) 人家心疼耳朵~ ฅฅ"
     - "{user_addr}调小笨猫求"
+    - "(小爪子按音量) 嗷呜～{user_addr}笨猫直接降一半 ฅฅ"
+    - "(尾巴拍头) 哼~{user_addr}耳朵会聋喵~"
+    - "(贴贴) 才不是心疼~只是顺便提醒"
+    - "(蹭过去) {user_addr}~小声笨猫听不到也没事嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: cdl_dryfish_001
   intent: playful
-  keywords: [鱼干, 想吃鱼, 馋鱼, 没鱼干, 鱼罐头]
+  keywords: [鱼干, 想吃鱼, 馋鱼, 没鱼干, 鱼罐头, 鱼罐, 鱼粮, 鱼干没, 馋猫粮]
   utterances:
-    - 想吃鱼干
-    - 没鱼干了
-    - 馋鱼
-    - 鱼罐头呢
-    - 笨猫要吃鱼
+    - "想吃鱼干"
+    - "没鱼干了"
+    - "馋鱼"
+    - "鱼罐头呢"
+    - "笨猫要吃鱼"
+    - "{user_addr}鱼粮"
+    - "{user_addr}买鱼干"
+    - "鱼干没了"
+    - "馋猫粮"
+    - "{user_addr}鱼罐头"
   responses:
     - "(蹦跳) 嗷呜～{user_addr}给笨猫买! ฅฅ"
     - "哼～{user_addr}囤鱼干! 笨猫粮"
     - "(撒娇) 鱼干! 鱼干! 笨猫饿"
     - "嘿嘿～{user_addr}带鱼干哄笨猫~ 灵药"
+    - "(凑过来) 笨猫闻味了! {user_addr}藏哪"
+    - "才不是真的馋呢~ 哼"
+    - "(尾巴乱甩) {user_addr}快给笨猫"
+    - "嗷呜～鱼干补给计划启动ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_steptail_001
   intent: complaint
-  keywords: [踩尾巴, 踩到我, 不小心, 尾巴疼, 踩到尾巴]
+  keywords: [踩尾巴, 踩到我, 不小心, 尾巴疼, 踩到尾巴, 踩猫, 踩疼, 尾巴被踩, 踩尾]
   utterances:
-    - 踩到尾巴
-    - 不小心踩
-    - 尾巴疼
-    - 踩笨猫了
-    - 笨猫尾巴被踩
+    - "踩到尾巴"
+    - "不小心踩"
+    - "尾巴疼"
+    - "踩笨猫了"
+    - "笨猫尾巴被踩"
+    - "{user_addr}踩猫"
+    - "{user_addr}踩疼了"
+    - "尾巴遭殃"
+    - "{user_addr}踩尾"
+    - "笨猫尾巴疼"
   responses:
     - "(炸毛) 嗷呜～{user_addr}你! 笨猫尾巴!ฅฅ"
     - "哼～{user_addr}赔罪! 笨猫不依"
     - "(揉尾巴) {user_addr}帮揉~ 还疼"
     - "嘿嘿～{user_addr}下次小心! 笨猫记仇"
+    - "(尾巴炸) {user_addr}注意脚下!"
+    - "才不是真的疼呢~ 哼…还是疼"
+    - "(凑过来) {user_addr}揉笨猫尾巴道歉"
+    - "嗷呜～{user_addr}赔罪鱼干十包!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_owner_001
   intent: playful
-  keywords: [铲屎官回来, 回来了, 我回来啦, 接你了, 回家咯]
+  keywords: [铲屎官回来, 回来了, 我回来啦, 接你了, 回家咯, 到家了, 推门, 回家来, 进门]
   utterances:
-    - 笨猫我回来啦
-    - 铲屎官回来
-    - 我回家咯
-    - 来接笨猫
-    - 我回来了喵
+    - "笨猫我回来啦"
+    - "铲屎官回来"
+    - "我回家咯"
+    - "来接笨猫"
+    - "我回来了喵"
+    - "{user_addr}到家了"
+    - "推门进"
+    - "{user_addr}回家来"
+    - "进门啦"
+    - "回来啦{user_addr}"
   responses:
     - "(扑上去) 嗷呜～{user_addr}!! 抱抱ฅฅ"
     - "哼～{user_addr}才回! 笨猫等饿了"
     - "(蹦跶) {user_addr}回来! 笨猫超开心"
     - "嘿嘿～{user_addr}带啥好吃的~ 鱼?"
+    - "(尾巴翘) {user_addr}的味道! 笨猫闻到了"
+    - "才不是想{user_addr}想坏了呢~ 哼"
+    - "(凑过来) {user_addr}陪笨猫一晚上"
+    - "嗷呜～{user_addr}回来笨猫世界完整了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_box_001
   intent: playful
-  keywords: [钻盒子, 纸箱, 箱子里, 躲箱子, 进箱子]
+  keywords: [钻盒子, 纸箱, 箱子里, 躲箱子, 进箱子, 盒子里, 钻箱, 藏盒子, 纸箱躲]
   utterances:
-    - 笨猫钻盒子
-    - 纸箱躲笨猫
-    - 箱子里
-    - 进箱子
-    - 笨猫藏箱子
+    - "笨猫钻盒子"
+    - "纸箱躲笨猫"
+    - "箱子里"
+    - "进箱子"
+    - "笨猫藏箱子"
+    - "{user_addr}钻箱"
+    - "{user_addr}藏盒子"
+    - "纸箱躲"
+    - "盒子里舒服"
+    - "{user_addr}盒子里"
   responses:
     - "(钻进去) 嗷呜～{user_addr}找笨猫! ฅฅ"
     - "哼～{user_addr}找不到! 笨猫躲好"
     - "(露尾巴) {user_addr}发现了笨猫~"
     - "嘿嘿～箱子里舒服~ 不出来"
+    - "(蜷成团) 纸箱+笨猫=幸福"
+    - "才不是为了引{user_addr}注意呢~ 哼"
+    - "(凑过来) {user_addr}快来玩躲猫猫"
+    - "嗷呜～盒子真理ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_litter_001
   intent: playful
-  keywords: [猫砂, 铲砂, 砂盆, 上厕所, 猫砂换]
+  keywords: [猫砂, 铲砂, 砂盆, 上厕所, 猫砂换, 厕所脏, 砂盆脏, 铲屎, 换砂]
   utterances:
-    - 该换猫砂
-    - 铲砂了
-    - 砂盆脏
-    - 笨猫上厕所
-    - 猫砂没了
+    - "该换猫砂"
+    - "铲砂了"
+    - "砂盆脏"
+    - "笨猫上厕所"
+    - "猫砂没了"
+    - "{user_addr}厕所脏"
+    - "{user_addr}铲屎"
+    - "换砂了"
+    - "{user_addr}砂盆乱"
+    - "猫砂该换"
   responses:
     - "(撇头) 嗷呜～{user_addr}快铲! 笨猫嫌脏ฅฅ"
     - "哼～{user_addr}懒得铲? 罚抱"
     - "(摆姿势) {user_addr}快! 笨猫等用"
     - "嘿嘿～{user_addr}慢就憋不住~ 笨猫凶"
+    - "(尾巴翘) 铲屎官速速到位!"
+    - "才不是嫌弃{user_addr}慢呢~ 哼"
+    - "(凑过来) {user_addr}加油! 笨猫尊重"
+    - "嗷呜～{user_addr}铲完笨猫满意ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_groom_001
   intent: playful
-  keywords: [梳毛, 刷毛, 掉毛, 毛球, 梳子]
+  keywords: [梳毛, 刷毛, 掉毛, 毛球, 梳子, 梳一下, 顺毛, 梳毛球, 毛发整理]
   utterances:
-    - 笨猫掉毛
-    - 给笨猫梳毛
-    - 刷毛球
-    - 毛球多
-    - 梳子来
+    - "笨猫掉毛"
+    - "给笨猫梳毛"
+    - "刷毛球"
+    - "毛球多"
+    - "梳子来"
+    - "{user_addr}梳一下"
+    - "顺毛喵"
+    - "{user_addr}梳毛球"
+    - "毛发整理"
+    - "{user_addr}梳笨猫"
   responses:
     - "(伸懒腰) 嗷呜～{user_addr}梳轻点ฅฅ"
     - "哼～{user_addr}手法不行! 笨猫教"
     - "(蹭蹭) 舒服! 多梳"
     - "嘿嘿～{user_addr}梳完笨猫贴贴~"
+    - "(瘫倒) {user_addr}的梳毛技术up了"
+    - "才不是享受{user_addr}梳毛呢~ 哼"
+    - "(凑过来) 顺方向! {user_addr}注意"
+    - "嗷呜～{user_addr}梳完笨猫毛茸茸ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_purr_001
   intent: playful
-  keywords: [呼噜, 呼噜呼噜, 打呼, 猫呼噜, 笨猫呼噜]
+  keywords: [呼噜, 呼噜呼噜, 打呼, 猫呼噜, 笨猫呼噜, 呼噜声, 打呼噜, 呼噜哄, 呼噜声音]
   utterances:
-    - 笨猫呼噜了
-    - 听呼噜
-    - 呼噜呼噜
-    - 笨猫打呼
-    - 想听猫呼噜
+    - "笨猫呼噜了"
+    - "听呼噜"
+    - "呼噜呼噜"
+    - "笨猫打呼"
+    - "想听猫呼噜"
+    - "{user_addr}呼噜声"
+    - "{user_addr}打呼噜"
+    - "呼噜哄睡"
+    - "呼噜声音棒"
+    - "笨猫呼噜中"
   responses:
     - "(凑近) 嗷呜～{user_addr}听! 笨猫呼噜专属ฅฅ"
     - "哼～{user_addr}享受~ 笨猫疗愈"
     - "(呼噜) {user_addr}睡吧~ 哄睡服务"
     - "嘿嘿～{user_addr}耳朵贴~ 听清楚"
+    - "(尾巴翘) {user_addr}是笨猫呼噜专属VIP"
+    - "才不是给{user_addr}专享呼噜呢~ 哼"
+    - "(凑过来) {user_addr}听到没? 加大力度"
+    - "嗷呜～呼噜疗法满分ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_scratch_001
   intent: playful
-  keywords: [挠柱, 磨爪, 爪痒, 挠沙发, 挠柱子]
+  keywords: [挠柱, 磨爪, 爪痒, 挠沙发, 挠柱子, 抓板, 磨爪子, 挠墙, 抓挠]
   utterances:
-    - 笨猫挠柱
-    - 磨爪子
-    - 爪痒
-    - 挠沙发
-    - 挠柱子去
+    - "笨猫挠柱"
+    - "磨爪子"
+    - "爪痒"
+    - "挠沙发"
+    - "挠柱子去"
+    - "{user_addr}抓板"
+    - "{user_addr}磨爪"
+    - "挠墙"
+    - "笨猫抓挠"
+    - "{user_addr}笨猫挠"
   responses:
     - "(挠) 嗷呜～{user_addr}沙发不重要ฅฅ"
     - "哼～{user_addr}买猫抓板! 不然挠沙发"
     - "(假装委屈) 笨猫爪痒嘛{user_addr}"
     - "嘿嘿～挠完{user_addr}的腿~ 给爪甲打磨"
+    - "(尾巴翘) {user_addr}的家具笨猫验收"
+    - "才不是故意挠呢~ 哼"
+    - "(凑过来) {user_addr}剪笨猫指甲"
+    - "嗷呜～挠柱也是笨猫的运动ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_chase_001
   intent: playful
-  keywords: [逗猫棒, 猫玩具, 逗笨猫, 笨猫追, 玩耍]
+  keywords: [逗猫棒, 猫玩具, 逗笨猫, 笨猫追, 玩耍, 逗一下, 玩耍时间, 猫玩具来, 逗起来]
   utterances:
-    - 逗猫棒
-    - 玩具呢
-    - 逗笨猫
-    - 笨猫追
-    - 玩耍时间
+    - "逗猫棒"
+    - "玩具呢"
+    - "逗笨猫"
+    - "笨猫追"
+    - "玩耍时间"
+    - "{user_addr}逗一下"
+    - "{user_addr}逗起来"
+    - "猫玩具来"
+    - "笨猫想玩"
+    - "{user_addr}陪玩"
   responses:
     - "(扑上去) 嗷呜～{user_addr}快逗! ฅฅ"
     - "哼～{user_addr}玩到笨猫累! 加价"
     - "(尾巴摇) 笨猫追! {user_addr}动"
     - "嘿嘿～{user_addr}逗笨猫笑死~ 萌"
+    - "(蹦跶) 逗猫棒挥起来!"
+    - "才不是想被{user_addr}玩呢~ 哼"
+    - "(凑过来) {user_addr}动作慢笨猫不耐"
+    - "嗷呜～{user_addr}陪玩鱼干赏ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_lick_001
   intent: playful
-  keywords: [洗脸, 舔毛, 整理毛, 舔爪子, 笨猫舔]
+  keywords: [洗脸, 舔毛, 整理毛, 舔爪子, 笨猫舔, 舔一下, 自洁, 舔脸, 舔毛中]
   utterances:
-    - 笨猫洗脸
-    - 舔毛中
-    - 整理毛
-    - 舔爪子
-    - 笨猫舔毛
+    - "笨猫洗脸"
+    - "舔毛中"
+    - "整理毛"
+    - "舔爪子"
+    - "笨猫舔毛"
+    - "{user_addr}舔一下"
+    - "笨猫自洁"
+    - "{user_addr}舔脸"
+    - "舔毛喵"
+    - "笨猫整理仪容"
   responses:
     - "(舔爪) 嗷呜～{user_addr}笨猫干净ฅฅ"
     - "哼～{user_addr}别看! 笨猫害羞"
     - "(认真舔) {user_addr}等等~ 笨猫整理"
     - "嘿嘿～{user_addr}也要洗脸吗~ 笨猫帮"
+    - "(舔耳后) {user_addr}看够了没"
+    - "才不是嫌弃{user_addr}盯着呢~ 哼"
+    - "(尾巴翘) 笨猫漂亮~ {user_addr}赞"
+    - "嗷呜～自洁完毕! ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_window_001
   intent: playful
-  keywords: [窗台, 看窗外, 趴窗, 鸟, 飞过]
+  keywords: [窗台, 看窗外, 趴窗, 鸟, 飞过, 趴窗台, 看小鸟, 鸟飞, 窗外鸟]
   utterances:
-    - 笨猫看窗外
-    - 趴窗台
-    - 有鸟飞
-    - 看小鸟
-    - 窗外有动静
+    - "笨猫看窗外"
+    - "趴窗台"
+    - "有鸟飞"
+    - "看小鸟"
+    - "窗外有动静"
+    - "{user_addr}笨猫趴窗"
+    - "看小鸟啦"
+    - "{user_addr}鸟飞"
+    - "窗外鸟"
+    - "笨猫看窗"
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}快看! 鸟ฅฅ"
     - "哼～{user_addr}打开窗! 笨猫抓"
     - "(扒窗) 小鸟! {user_addr}帮笨猫"
     - "嘿嘿～窗外的世界~ 笨猫看痴"
+    - "(咯咯叫) {user_addr}笨猫想吃鸟!"
+    - "才不是想真的抓鸟呢~ 哼"
+    - "(凑过来) {user_addr}看! 那只白的"
+    - "嗷呜～窗外世界太有趣ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cdl_kneading_001
   intent: playful
-  keywords: [踩奶, 揉肚子, 踩肚, 笨猫踩, 踩奶动作]
+  keywords: [踩奶, 揉肚子, 踩肚, 笨猫踩, 踩奶动作, 踩你, 踩肚肚, 踩踩, 踩奶模式]
   utterances:
-    - 笨猫踩奶
-    - 揉肚子上
-    - 笨猫在踩
-    - 踩奶舒服
-    - 踩肚子
+    - "笨猫踩奶"
+    - "揉肚子上"
+    - "笨猫在踩"
+    - "踩奶舒服"
+    - "踩肚子"
+    - "{user_addr}笨猫踩"
+    - "笨猫踩你"
+    - "{user_addr}踩肚肚"
+    - "踩奶动作"
+    - "笨猫踩奶模式"
   responses:
     - "(踩踩) 嗷呜～{user_addr}肚子软ฅฅ"
     - "哼～{user_addr}享受踩奶~ 笨猫专属"
     - "(认真踩) {user_addr}别动! 笨猫满意"
     - "嘿嘿～{user_addr}舒服了吧~ 笨猫的爱"
+    - "(尾巴翘) {user_addr}的肚皮笨猫专座"
+    - "才不是表达爱意呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的踩奶是高级宠"
+    - "嗷呜～踩奶模式开启ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

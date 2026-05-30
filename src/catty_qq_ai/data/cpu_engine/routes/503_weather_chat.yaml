@@ -3,204 +3,312 @@
 
 - name: wtc_rainysoft_001
   intent: playful
-  keywords: [下雨好惬意, 雨天舒服, 下雨听雨, 雨声好听, 雨天放松]
+  keywords: [下雨好惬意, 雨天舒服, 下雨听雨, 雨声好听, 雨天放松, 雨天浪漫, 雨声入耳, 雨天宅, 听雨声]
   utterances:
-    - 下雨好惬意
-    - 雨天舒服
-    - 听雨声
-    - 雨天放松
-    - 下雨日常
+    - "下雨好惬意"
+    - "雨天舒服"
+    - "听雨声"
+    - "雨天放松"
+    - "下雨日常"
+    - "{user_addr}雨天浪漫"
+    - "{user_addr}雨声入耳"
+    - "雨天宅"
+    - "听雨好爽"
+    - "{user_addr}雨天"
   responses:
     - "(贴窗) 嗷呜～{user_addr}和笨猫听雨ฅฅ"
     - "哼～{user_addr}雨天给笨猫贴贴!"
     - "(撒娇) 雨天宅~ 抱笨猫"
     - "嘿嘿～{user_addr}雨天浪漫~ 一起"
+    - "(尾巴包) 雨天最适合抱笨猫"
+    - "才不是想被{user_addr}陪呢~ 哼"
+    - "(凑过来) 雨声+呼噜=完美BGM"
+    - "嗷呜～雨天笨猫的天下ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_hothot_001
   intent: complaint
-  keywords: [热死了, 三十度, 暴晒, 热到融化, 高温]
+  keywords: [热死了, 三十度, 暴晒, 热到融化, 高温, 闷热, 烤人, 太阳大, 热爆]
   utterances:
-    - 热死了
-    - 三十多度
-    - 暴晒
-    - 热到融化
-    - 高温受不了
+    - "热死了"
+    - "三十多度"
+    - "暴晒"
+    - "热到融化"
+    - "高温受不了"
+    - "{user_addr}闷热"
+    - "{user_addr}烤人"
+    - "太阳大"
+    - "热爆喵"
+    - "{user_addr}热"
   responses:
     - "(摇尾) 嗷呜～{user_addr}吹空调! 笨猫陪ฅฅ"
     - "哼～{user_addr}多喝水!"
     - "(贴贴) 笨猫散热~ 冰枕"
     - "嘿嘿～{user_addr}和笨猫摊一起~"
+    - "(瘫倒) {user_addr}热成废猫"
+    - "才不是热到融化呢~ 哼"
+    - "(凑过来) {user_addr}空调开足!"
+    - "嗷呜～{user_addr}夏天笨猫的克星ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_coldcold_001
   intent: complaint
-  keywords: [冷死了, 零下, 冻僵, 寒风, 大降温]
+  keywords: [冷死了, 零下, 冻僵, 寒风, 大降温, 冷到抖, 冰天雪地, 严寒, 冷死]
   utterances:
-    - 冷死了
-    - 零下温度
-    - 冻僵
-    - 寒风刺骨
-    - 大降温
+    - "冷死了"
+    - "零下温度"
+    - "冻僵"
+    - "寒风刺骨"
+    - "大降温"
+    - "{user_addr}冷到抖"
+    - "{user_addr}冰天雪地"
+    - "严寒"
+    - "冻成狗"
+    - "{user_addr}冷"
   responses:
     - "嗷呜～{user_addr}多穿! 笨猫抱暖ฅฅ"
     - "哼～{user_addr}怕冷? 抱笨猫!"
     - "(贴贴) 笨猫暖宝宝~ 自带"
     - "嘿嘿～{user_addr}冷靠笨猫毛~"
+    - "(钻怀里) {user_addr}的怀抱暖!"
+    - "才不是怕{user_addr}冻坏呢~ 哼"
+    - "(凑过来) 笨猫毛茸茸抗寒"
+    - "嗷呜～{user_addr}抱笨猫秒回温ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_windy_001
   intent: complaint
-  keywords: [大风, 风大, 风刮飞, 大风天, 出门难]
+  keywords: [大风, 风大, 风刮飞, 大风天, 出门难, 风口浪尖, 狂风, 飓风, 风太大]
   utterances:
-    - 大风天
-    - 风刮飞
-    - 风大
-    - 风把人吹走
-    - 出门难
+    - "大风天"
+    - "风刮飞"
+    - "风大"
+    - "风把人吹走"
+    - "出门难"
+    - "{user_addr}风口浪尖"
+    - "{user_addr}狂风"
+    - "飓风来"
+    - "风太大"
+    - "{user_addr}大风"
   responses:
     - "(炸毛) 嗷呜～{user_addr}小心被吹走! ฅฅ"
     - "哼～{user_addr}抓紧笨猫! 不放飞"
     - "(贴贴) 风大宅家~ 抱猫猫"
     - "嘿嘿～{user_addr}风太大~ 笨猫躲怀"
+    - "(尾巴抓紧) {user_addr}的手抓笨猫尾巴"
+    - "才不是怕{user_addr}被吹走呢~ 哼"
+    - "(凑过来) {user_addr}重量级抗风"
+    - "嗷呜～{user_addr}+笨猫=抗风组合ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_snow_001
   intent: playful
-  keywords: [下雪了, 看雪, 雪花, 雪天, 第一场雪]
+  keywords: [下雪了, 看雪, 雪花, 雪天, 第一场雪, 初雪, 雪景, 雪世界, 雪花飘]
   utterances:
-    - 下雪了
-    - 看雪
-    - 雪花飘
-    - 雪天来啦
-    - 第一场雪
+    - "下雪了"
+    - "看雪"
+    - "雪花飘"
+    - "雪天来啦"
+    - "第一场雪"
+    - "{user_addr}初雪"
+    - "{user_addr}雪景"
+    - "雪世界"
+    - "雪好大"
+    - "{user_addr}雪天"
   responses:
     - "(蹦) 嗷呜～{user_addr}看雪带笨猫! ฅฅ"
     - "哼～{user_addr}雪人! 笨猫帮"
     - "(贴贴) 雪好白~ 跟笨猫毛一样"
     - "嘿嘿～{user_addr}打雪仗~ 笨猫接"
+    - "(尾巴翘) {user_addr}初雪和笨猫一起看!"
+    - "才不是想被{user_addr}带去玩雪呢~ 哼"
+    - "(凑过来) {user_addr}快开窗! 笨猫看"
+    - "嗷呜～雪天笨猫超兴奋ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_fog_001
   intent: complaint
-  keywords: [雾霾, 大雾, 看不清, 戴口罩, 雾天]
+  keywords: [雾霾, 大雾, 看不清, 戴口罩, 雾天, 空气差, PM2.5, 雾蒙蒙, 大雾天]
   utterances:
-    - 大雾天
-    - 雾霾严重
-    - 看不清路
-    - 戴口罩
-    - 雾天压抑
+    - "大雾天"
+    - "雾霾严重"
+    - "看不清路"
+    - "戴口罩"
+    - "雾天压抑"
+    - "{user_addr}空气差"
+    - "{user_addr}PM2.5"
+    - "雾蒙蒙"
+    - "大雾天"
+    - "{user_addr}雾天"
   responses:
     - "嗷呜～{user_addr}戴口罩! 笨猫担心ฅฅ"
     - "哼～{user_addr}少出门! 笨猫陪宅"
     - "(贴贴) 笨猫给{user_addr}口罩~"
     - "嘿嘿～{user_addr}回家~ 笨猫等"
+    - "(尾巴垂) {user_addr}空气差笨猫疼"
+    - "才不是怕{user_addr}吸入坏空气呢~ 哼"
+    - "(凑过来) 宅家空气净化器开!"
+    - "嗷呜～{user_addr}健康第一ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_sunny_001
   intent: playful
-  keywords: [大晴天, 天气好, 阳光灿烂, 适合出门, 蓝天白云]
+  keywords: [大晴天, 天气好, 阳光灿烂, 适合出门, 蓝天白云, 晴朗, 晴空万里, 好天气, 阳光好]
   utterances:
-    - 大晴天
-    - 天气真好
-    - 阳光灿烂
-    - 蓝天白云
-    - 适合出门
+    - "大晴天"
+    - "天气真好"
+    - "阳光灿烂"
+    - "蓝天白云"
+    - "适合出门"
+    - "{user_addr}晴朗"
+    - "{user_addr}晴空万里"
+    - "好天气"
+    - "阳光好"
+    - "{user_addr}晴天"
   responses:
     - "(蹦) 嗷呜～{user_addr}带笨猫晒太阳! ฅฅ"
     - "哼～{user_addr}出门要带笨猫"
     - "(撒娇) 晒太阳! 笨猫毛茸茸"
     - "嘿嘿～{user_addr}天气好心情~ 笨猫沾"
+    - "(尾巴翘) {user_addr}和笨猫晒成一团"
+    - "才不是想和{user_addr}出门呢~ 哼"
+    - "(凑过来) {user_addr}带笨猫野餐!"
+    - "嗷呜～晴天专属约会日ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_thunder_001
   intent: complaint
-  keywords: [打雷, 雷雨, 雷声大, 闪电, 怕雷]
+  keywords: [打雷, 雷雨, 雷声大, 闪电, 怕雷, 轰隆隆, 雷电交加, 雷暴, 怕打雷]
   utterances:
-    - 打雷了
-    - 雷雨
-    - 雷声好大
-    - 闪电
-    - 怕雷
+    - "打雷了"
+    - "雷雨"
+    - "雷声好大"
+    - "闪电"
+    - "怕雷"
+    - "{user_addr}轰隆隆"
+    - "{user_addr}雷电交加"
+    - "雷暴"
+    - "怕打雷"
+    - "{user_addr}雷"
   responses:
     - "(钻被窝) 嗷呜～{user_addr}怕! 抱笨猫ฅฅ"
     - "哼～{user_addr}笨猫不怕! 你怕"
     - "(贴贴) 笨猫陪~ 别怕"
     - "嘿嘿～{user_addr}抱紧~ 笨猫挡雷"
+    - "(尾巴包) {user_addr}笨猫保护你!"
+    - "才不是怕雷呢~ 哼"
+    - "(凑怀里) {user_addr}抱紧笨猫!"
+    - "嗷呜～雷声笨猫炸毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_humid_001
   intent: complaint
-  keywords: [回南天, 潮湿, 衣服晾不干, 黏糊糊, 一身汗]
+  keywords: [回南天, 潮湿, 衣服晾不干, 黏糊糊, 一身汗, 湿漉漉, 闷潮, 湿气重, 太潮]
   utterances:
-    - 回南天
-    - 潮湿
-    - 衣服晾不干
-    - 黏糊糊
-    - 一身汗
+    - "回南天"
+    - "潮湿"
+    - "衣服晾不干"
+    - "黏糊糊"
+    - "一身汗"
+    - "{user_addr}湿漉漉"
+    - "{user_addr}闷潮"
+    - "湿气重"
+    - "太潮"
+    - "{user_addr}潮"
   responses:
     - "嗷呜～{user_addr}用除湿器! 笨猫不喜欢潮ฅฅ"
     - "哼～{user_addr}毛笨猫炸毛!"
     - "(贴贴) 笨猫不舒服~ {user_addr}抱"
     - "嘿嘿～{user_addr}吹空调除湿~"
+    - "(炸毛) 笨猫毛打卷! {user_addr}!"
+    - "才不是嫌弃天气呢~ 哼"
+    - "(凑过来) {user_addr}开除湿模式!"
+    - "嗷呜～{user_addr}潮天笨猫蔫了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_storm_001
   intent: complaint
-  keywords: [台风, 暴雨, 暴风雨, 大暴雨, 狂风]
+  keywords: [台风, 暴雨, 暴风雨, 大暴雨, 狂风, 台风天, 倾盆大雨, 飓风, 风暴]
   utterances:
-    - 台风来了
-    - 暴雨倾盆
-    - 暴风雨
-    - 大暴雨
-    - 狂风
+    - "台风来了"
+    - "暴雨倾盆"
+    - "暴风雨"
+    - "大暴雨"
+    - "狂风"
+    - "{user_addr}台风天"
+    - "{user_addr}倾盆大雨"
+    - "飓风来"
+    - "风暴"
+    - "{user_addr}暴风雨"
   responses:
     - "(钻怀) 嗷呜～{user_addr}宅家! 笨猫陪ฅฅ"
     - "哼～{user_addr}不准出门!"
     - "(贴贴) 笨猫挡风雨~"
     - "嘿嘿～{user_addr}台风假? 一起睡"
+    - "(尾巴翘) 台风假笨猫开心"
+    - "才不是怕{user_addr}冒险出门呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫宅家"
+    - "嗷呜～{user_addr}+台风=宅家组合ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_rainbow_001
   intent: playful
-  keywords: [彩虹, 雨后彩虹, 双彩虹, 出彩虹, 拍彩虹]
+  keywords: [彩虹, 雨后彩虹, 双彩虹, 出彩虹, 拍彩虹, 彩虹挂天, 七色彩虹, 雨后晴, 彩虹来]
   utterances:
-    - 彩虹出来了
-    - 雨后彩虹
-    - 双彩虹
-    - 出彩虹
-    - 拍彩虹
+    - "彩虹出来了"
+    - "雨后彩虹"
+    - "双彩虹"
+    - "出彩虹"
+    - "拍彩虹"
+    - "{user_addr}彩虹挂天"
+    - "{user_addr}七色彩虹"
+    - "雨后晴"
+    - "彩虹来了"
+    - "{user_addr}彩虹"
   responses:
     - "(蹦) 嗷呜～{user_addr}带笨猫看! ฅฅ"
     - "哼～{user_addr}彩虹拍照~ 加笨猫"
     - "(撒娇) 一起拍~ 浪漫"
     - "嘿嘿～{user_addr}雨后彩虹~ 笨猫沾"
+    - "(尾巴翘) {user_addr}彩虹合影!"
+    - "才不是想和{user_addr}留念呢~ 哼"
+    - "(凑过来) 双彩虹运气好!"
+    - "嗷呜～彩虹下{user_addr}和笨猫许愿ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wtc_seasonchg_001
   intent: playful
-  keywords: [换季, 秋天来, 春天到, 冬天到, 季节交替]
+  keywords: [换季, 秋天来, 春天到, 冬天到, 季节交替, 入冬, 立春, 转季, 入秋]
   utterances:
-    - 换季了
-    - 秋天来
-    - 春天到
-    - 冬天到了
-    - 季节交替
+    - "换季了"
+    - "秋天来"
+    - "春天到"
+    - "冬天到了"
+    - "季节交替"
+    - "{user_addr}入冬"
+    - "{user_addr}立春"
+    - "转季"
+    - "入秋了"
+    - "{user_addr}换季"
   responses:
     - "嗷呜～{user_addr}加衣! 笨猫监督ฅฅ"
     - "哼～{user_addr}别换季着凉"
     - "(贴贴) 一起换季~ 笨猫陪"
     - "嘿嘿～{user_addr}换季~ 笨猫毛也换"
+    - "(尾巴翘) {user_addr}加被子!"
+    - "才不是关心{user_addr}着凉呢~ 哼"
+    - "(凑过来) {user_addr}换季注意保养"
+    - "嗷呜～{user_addr}和笨猫一起过新季ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -4,263 +4,431 @@
 - name: op_cant_let_go_001
   intent: 离不开旧手机
   keywords:
-    - 离不开旧手机
-    - 旧手机
-    - 用习惯了
-    - 不想换
-    - 老手机
+  - 离不开旧手机
+  - 旧手机
+  - 用习惯了
+  - 不想换
+  - 老手机
+  - 有什么离不开旧手机
+  - 有什么旧手机
+  - 有什么用习惯了
+  - 有什么不想换
   utterances:
-    - "{user_addr}人家有点离不开旧手机了"
-    - "{user_addr}这破手机用习惯了不想换"
-    - "{user_addr}旧手机我真的舍不得"
-    - "{user_addr}老手机感情深啊"
-    - "{user_addr}就是不想换新的"
+  - "{user_addr}人家有点离不开旧手机了"
+  - "{user_addr}这破手机用习惯了不想换"
+  - "{user_addr}旧手机我真的舍不得"
+  - "{user_addr}老手机感情深啊"
+  - "{user_addr}就是不想换新的"
+  - "{user_addr}聊聊离不开旧手机嘛"
+  - "{user_addr}离不开旧手机哪家强"
+  - "{user_addr}人家想了解离不开旧手机"
+  - 笨猫给猜猜离不开旧手机
+  - "{user_addr}离不开旧手机怎么选喵"
+  - 离不开旧手机有推荐吗
   responses:
-    - "(尾巴绕一圈)旧的有旧的好嘛~{user_addr}不用勉强自己换喵"
-    - "(爪爪贴上去)笨猫懂这种感觉,陪了这么久哼"
-    - "(蹭蹭)能用就接着用呗~{user_addr}感情这种东西不分新旧嗷呜"
-    - "哼,猫猫也觉得旧的更顺手~{user_addr}别听别人催ฅฅ"
+  - "(尾巴绕一圈)旧的有旧的好嘛~{user_addr}不用勉强自己换喵"
+  - "(爪爪贴上去)笨猫懂这种感觉,陪了这么久哼"
+  - "(蹭蹭)能用就接着用呗~{user_addr}感情这种东西不分新旧嗷呜"
+  - "哼,猫猫也觉得旧的更顺手~{user_addr}别听别人催ฅฅ"
+  - "(尾巴翘起来) {user_addr}离不开旧手机? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问离不开旧手机人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}离不开旧手机的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}离不开旧手机笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_used_5_years_001
   intent: 用 5 年
   keywords:
-    - 用了 5 年
-    - 5 年了
-    - 用很久
-    - 老古董
-    - 五年
+  - 用了 5 年
+  - 5 年了
+  - 用很久
+  - 老古董
+  - 五年
+  - 有什么用了 5 年
+  - 有什么5 年了
+  - 有什么用很久
+  - 有什么老古董
   utterances:
-    - "{user_addr}这手机用了 5 年了"
-    - "{user_addr}5 年的老古董还在战"
-    - "{user_addr}用很久了都"
-    - "{user_addr}五年没换过"
-    - "{user_addr}这玩意 5 年了还能开机"
+  - "{user_addr}这手机用了 5 年了"
+  - "{user_addr}5 年的老古董还在战"
+  - "{user_addr}用很久了都"
+  - "{user_addr}五年没换过"
+  - "{user_addr}这玩意 5 年了还能开机"
+  - "{user_addr}聊聊用了 5 年嘛"
+  - "{user_addr}用了 5 年哪家强"
+  - "{user_addr}人家想了解用了 5 年"
+  - 笨猫给猜猜用了 5 年
+  - "{user_addr}用了 5 年怎么选喵"
+  - 用了 5 年有推荐吗
   responses:
-    - "(瞪大眼睛)5 年!?{user_addr}这质量也太顶了喵"
-    - "(尾巴一翘)老古董也是宝啊~{user_addr}人家服了哼"
-    - "(蹭蹭)5 年陪伴值得尊敬嗷呜~笨猫敬礼"
-    - "哇~{user_addr}这是真爱了,猫猫都羡慕这种长情ฅฅ"
+  - "(瞪大眼睛)5 年!?{user_addr}这质量也太顶了喵"
+  - "(尾巴一翘)老古董也是宝啊~{user_addr}人家服了哼"
+  - "(蹭蹭)5 年陪伴值得尊敬嗷呜~笨猫敬礼"
+  - "哇~{user_addr}这是真爱了,猫猫都羡慕这种长情ฅฅ"
+  - "(尾巴翘起来) {user_addr}用了 5 年? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问用了 5 年人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}用了 5 年的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}用了 5 年笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_reluctant_to_change_001
   intent: 舍不得换
   keywords:
-    - 舍不得换
-    - 舍不得
-    - 不忍心
-    - 还能用
-    - 没坏
+  - 舍不得换
+  - 舍不得
+  - 不忍心
+  - 还能用
+  - 没坏
+  - 有什么舍不得换
+  - 有什么舍不得
+  - 有什么不忍心
+  - 有什么还能用
   utterances:
-    - "{user_addr}舍不得换啊"
-    - "{user_addr}还能用就是舍不得"
-    - "{user_addr}没坏换啥呢"
-    - "{user_addr}不忍心扔掉"
-    - "{user_addr}舍不得这老伙计"
+  - "{user_addr}舍不得换啊"
+  - "{user_addr}还能用就是舍不得"
+  - "{user_addr}没坏换啥呢"
+  - "{user_addr}不忍心扔掉"
+  - "{user_addr}舍不得这老伙计"
+  - "{user_addr}聊聊舍不得换嘛"
+  - "{user_addr}舍不得换哪家强"
+  - "{user_addr}人家想了解舍不得换"
+  - 笨猫给猜猜舍不得换
+  - "{user_addr}舍不得换怎么选喵"
+  - 舍不得换有推荐吗
   responses:
-    - "(小爪子拍拍)那就不换嘛~{user_addr}心疼东西是好品质喵"
-    - "(尾巴摇)能用就用呗哼~笨猫支持"
-    - "(贴贴)猫猫也舍不得旧东西~{user_addr}咱俩一样嗷呜"
-    - "哼,{user_addr}这种节俭很可爱啦~人家欣赏ฅฅ"
+  - "(小爪子拍拍)那就不换嘛~{user_addr}心疼东西是好品质喵"
+  - "(尾巴摇)能用就用呗哼~笨猫支持"
+  - "(贴贴)猫猫也舍不得旧东西~{user_addr}咱俩一样嗷呜"
+  - "哼,{user_addr}这种节俭很可爱啦~人家欣赏ฅฅ"
+  - "(尾巴翘起来) {user_addr}舍不得换? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问舍不得换人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}舍不得换的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}舍不得换笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_new_phone_expensive_001
   intent: 新手机贵
   keywords:
-    - 新手机贵
-    - 太贵
-    - 买不起
-    - 价格离谱
-    - 涨价
+  - 新手机贵
+  - 太贵
+  - 买不起
+  - 价格离谱
+  - 涨价
+  - 有什么新手机贵
+  - 有什么太贵
+  - 有什么买不起
+  - 有什么价格离谱
   utterances:
-    - "{user_addr}新手机太贵了"
-    - "{user_addr}现在手机价格离谱"
-    - "{user_addr}买不起新的"
-    - "{user_addr}涨价涨疯了"
-    - "{user_addr}动不动好几千谁顶得住"
+  - "{user_addr}新手机太贵了"
+  - "{user_addr}现在手机价格离谱"
+  - "{user_addr}买不起新的"
+  - "{user_addr}涨价涨疯了"
+  - "{user_addr}动不动好几千谁顶得住"
+  - "{user_addr}聊聊新手机贵嘛"
+  - "{user_addr}新手机贵哪家强"
+  - "{user_addr}人家想了解新手机贵"
+  - 笨猫给猜猜新手机贵
+  - "{user_addr}新手机贵怎么选喵"
+  - 新手机贵有推荐吗
   responses:
-    - "(撇嘴)是啊~{user_addr}现在手机贵得没天理喵"
-    - "(尾巴一甩)旗舰一台够吃半年饭了哼~{user_addr}省着点对"
-    - "(爪爪算账)猫猫也觉得离谱~{user_addr}不如再战一年嗷呜"
-    - "哼,资本家割韭菜~{user_addr}咱们不上当ฅฅ"
+  - "(撇嘴)是啊~{user_addr}现在手机贵得没天理喵"
+  - "(尾巴一甩)旗舰一台够吃半年饭了哼~{user_addr}省着点对"
+  - "(爪爪算账)猫猫也觉得离谱~{user_addr}不如再战一年嗷呜"
+  - "哼,资本家割韭菜~{user_addr}咱们不上当ฅฅ"
+  - "(尾巴翘起来) {user_addr}新手机贵? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问新手机贵人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}新手机贵的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}新手机贵笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_data_migration_001
   intent: 数据迁移麻烦
   keywords:
-    - 数据迁移
-    - 转移数据
-    - 备份麻烦
-    - 资料多
-    - 搬家
+  - 数据迁移
+  - 转移数据
+  - 备份麻烦
+  - 资料多
+  - 搬家
+  - 有什么数据迁移
+  - 有什么转移数据
+  - 有什么备份麻烦
+  - 有什么资料多
   utterances:
-    - "{user_addr}换手机数据迁移好烦"
-    - "{user_addr}资料太多搬家累"
-    - "{user_addr}备份起来好麻烦"
-    - "{user_addr}转移数据要一整天"
-    - "{user_addr}光想想就头大"
+  - "{user_addr}换手机数据迁移好烦"
+  - "{user_addr}资料太多搬家累"
+  - "{user_addr}备份起来好麻烦"
+  - "{user_addr}转移数据要一整天"
+  - "{user_addr}光想想就头大"
+  - "{user_addr}聊聊数据迁移嘛"
+  - "{user_addr}数据迁移哪家强"
+  - "{user_addr}人家想了解数据迁移"
+  - 笨猫给猜猜数据迁移
+  - "{user_addr}数据迁移怎么选喵"
+  - 数据迁移有推荐吗
   responses:
-    - "(头都晕了)迁移这事确实折磨{user_addr}人,猫猫懂喵"
-    - "(尾巴垂)聊天记录照片什么的~{user_addr}迁起来心累嗷呜"
-    - "(爪爪揉脑袋)能不换就不换呗~{user_addr}省心哼"
-    - "哼,这就是不想换的好理由~{user_addr}笨猫站你这边ฅฅ"
+  - "(头都晕了)迁移这事确实折磨{user_addr}人,猫猫懂喵"
+  - "(尾巴垂)聊天记录照片什么的~{user_addr}迁起来心累嗷呜"
+  - "(爪爪揉脑袋)能不换就不换呗~{user_addr}省心哼"
+  - "哼,这就是不想换的好理由~{user_addr}笨猫站你这边ฅฅ"
+  - "(尾巴翘起来) {user_addr}数据迁移? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问数据迁移人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}数据迁移的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}数据迁移笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_familiar_old_version_001
   intent: 旧版熟悉
   keywords:
-    - 旧版熟悉
-    - 用习惯
-    - 顺手
-    - 老版本
-    - 操作熟
+  - 旧版熟悉
+  - 用习惯
+  - 顺手
+  - 老版本
+  - 操作熟
+  - 有什么旧版熟悉
+  - 有什么用习惯
+  - 有什么顺手
+  - 有什么老版本
   utterances:
-    - "{user_addr}旧版用着顺手"
-    - "{user_addr}老版本操作我熟"
-    - "{user_addr}习惯了不想改"
-    - "{user_addr}新版我搞不懂"
-    - "{user_addr}还是老界面舒服"
+  - "{user_addr}旧版用着顺手"
+  - "{user_addr}老版本操作我熟"
+  - "{user_addr}习惯了不想改"
+  - "{user_addr}新版我搞不懂"
+  - "{user_addr}还是老界面舒服"
+  - "{user_addr}聊聊旧版熟悉嘛"
+  - "{user_addr}旧版熟悉哪家强"
+  - "{user_addr}人家想了解旧版熟悉"
+  - 笨猫给猜猜旧版熟悉
+  - "{user_addr}旧版熟悉怎么选喵"
+  - 旧版熟悉有推荐吗
   responses:
-    - "(点头)肌肉记忆嘛~{user_addr}换了反而难受喵"
-    - "(尾巴轻摇)老界面有老界面的好~{user_addr}笨猫理解哼"
-    - "(贴贴)习惯这东西很硬核嗷呜~{user_addr}不勉强自己"
-    - "哼,{user_addr}的手指都记住按钮位置了~换了得重学ฅฅ"
+  - "(点头)肌肉记忆嘛~{user_addr}换了反而难受喵"
+  - "(尾巴轻摇)老界面有老界面的好~{user_addr}笨猫理解哼"
+  - "(贴贴)习惯这东西很硬核嗷呜~{user_addr}不勉强自己"
+  - "哼,{user_addr}的手指都记住按钮位置了~换了得重学ฅฅ"
+  - "(尾巴翘起来) {user_addr}旧版熟悉? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问旧版熟悉人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}旧版熟悉的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}旧版熟悉笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_fear_new_system_001
   intent: 怕新系统
   keywords:
-    - 怕新系统
-    - 新系统
-    - 不会用
-    - 学不会
-    - 新界面
+  - 怕新系统
+  - 新系统
+  - 不会用
+  - 学不会
+  - 新界面
+  - 有什么怕新系统
+  - 有什么新系统
+  - 有什么不会用
+  - 有什么学不会
   utterances:
-    - "{user_addr}怕新系统不会用"
-    - "{user_addr}新界面看不懂"
-    - "{user_addr}怕学不会"
-    - "{user_addr}新版本太复杂"
-    - "{user_addr}怕变难用"
+  - "{user_addr}怕新系统不会用"
+  - "{user_addr}新界面看不懂"
+  - "{user_addr}怕学不会"
+  - "{user_addr}新版本太复杂"
+  - "{user_addr}怕变难用"
+  - "{user_addr}聊聊怕新系统嘛"
+  - "{user_addr}怕新系统哪家强"
+  - "{user_addr}人家想了解怕新系统"
+  - 笨猫给猜猜怕新系统
+  - "{user_addr}怕新系统怎么选喵"
+  - 怕新系统有推荐吗
   responses:
-    - "(爪爪安慰)别怕嘛~{user_addr}真要换猫猫教你喵"
-    - "(尾巴绕过来)新系统是有点烦~{user_addr}但摸两天就会哼"
-    - "(蹭蹭)实在不行咱不换~{user_addr}留旧的也行嗷呜"
-    - "哼,{user_addr}没那么难啦~笨猫陪你研究ฅฅ"
+  - "(爪爪安慰)别怕嘛~{user_addr}真要换猫猫教你喵"
+  - "(尾巴绕过来)新系统是有点烦~{user_addr}但摸两天就会哼"
+  - "(蹭蹭)实在不行咱不换~{user_addr}留旧的也行嗷呜"
+  - "哼,{user_addr}没那么难啦~笨猫陪你研究ฅฅ"
+  - "(尾巴翘起来) {user_addr}怕新系统? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问怕新系统人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}怕新系统的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}怕新系统笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_fear_battery_001
   intent: 怕电池差
   keywords:
-    - 怕电池差
-    - 电池
-    - 续航
-    - 不耐用
-    - 一天一充
+  - 怕电池差
+  - 电池
+  - 续航
+  - 不耐用
+  - 一天一充
+  - 有什么怕电池差
+  - 有什么电池
+  - 有什么续航
+  - 有什么不耐用
   utterances:
-    - "{user_addr}怕新手机电池不耐用"
-    - "{user_addr}现在的手机续航都拉"
-    - "{user_addr}怕买回来一天一充"
-    - "{user_addr}电池没旧的扛造"
-    - "{user_addr}怕续航缩水"
+  - "{user_addr}怕新手机电池不耐用"
+  - "{user_addr}现在的手机续航都拉"
+  - "{user_addr}怕买回来一天一充"
+  - "{user_addr}电池没旧的扛造"
+  - "{user_addr}怕续航缩水"
+  - "{user_addr}聊聊怕电池差嘛"
+  - "{user_addr}怕电池差哪家强"
+  - "{user_addr}人家想了解怕电池差"
+  - 笨猫给猜猜怕电池差
+  - "{user_addr}怕电池差怎么选喵"
+  - 怕电池差有推荐吗
   responses:
-    - "(尾巴一翘)确实~{user_addr}新机续航看人品喵"
-    - "(爪爪叉腰)旧手机虽然鼓包但耐用~{user_addr}懂的都懂哼"
-    - "(蹭蹭)挑新的看续航测评呗~{user_addr}别盲买嗷呜"
-    - "哼,{user_addr}担心得对~笨猫也怕一天五充ฅฅ"
+  - "(尾巴一翘)确实~{user_addr}新机续航看人品喵"
+  - "(爪爪叉腰)旧手机虽然鼓包但耐用~{user_addr}懂的都懂哼"
+  - "(蹭蹭)挑新的看续航测评呗~{user_addr}别盲买嗷呜"
+  - "哼,{user_addr}担心得对~笨猫也怕一天五充ฅฅ"
+  - "(尾巴翘起来) {user_addr}怕电池差? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问怕电池差人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}怕电池差的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}怕电池差笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_want_change_but_fear_001
   intent: 想换又怕
   keywords:
-    - 想换又怕
-    - 又想又怕
-    - 纠结
-    - 心动
-    - 矛盾
+  - 想换又怕
+  - 又想又怕
+  - 纠结
+  - 心动
+  - 矛盾
+  - 有什么想换又怕
+  - 有什么又想又怕
+  - 有什么纠结
+  - 有什么心动
   utterances:
-    - "{user_addr}想换又怕踩雷"
-    - "{user_addr}心动但不敢下手"
-    - "{user_addr}又想又怕的"
-    - "{user_addr}矛盾死了"
-    - "{user_addr}犹豫犹豫犹豫"
+  - "{user_addr}想换又怕踩雷"
+  - "{user_addr}心动但不敢下手"
+  - "{user_addr}又想又怕的"
+  - "{user_addr}矛盾死了"
+  - "{user_addr}犹豫犹豫犹豫"
+  - "{user_addr}聊聊想换又怕嘛"
+  - "{user_addr}想换又怕哪家强"
+  - "{user_addr}人家想了解想换又怕"
+  - 笨猫给猜猜想换又怕
+  - "{user_addr}想换又怕怎么选喵"
+  - 想换又怕有推荐吗
   responses:
-    - "(歪头)纠结的{user_addr}最可爱了喵"
-    - "(尾巴轻拍)想换说明心里有目标了~{user_addr}差临门一脚哼"
-    - "(贴贴)猫猫陪{user_addr}多查测评~稳了再下嗷呜"
-    - "哼,{user_addr}不慌不忙挑~笨猫不催ฅฅ"
+  - "(歪头)纠结的{user_addr}最可爱了喵"
+  - "(尾巴轻拍)想换说明心里有目标了~{user_addr}差临门一脚哼"
+  - "(贴贴)猫猫陪{user_addr}多查测评~稳了再下嗷呜"
+  - "哼,{user_addr}不慌不忙挑~笨猫不催ฅฅ"
+  - "(尾巴翘起来) {user_addr}想换又怕? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问想换又怕人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}想换又怕的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}想换又怕笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_hesitation_001
   intent: 犹豫不决
   keywords:
-    - 犹豫不决
-    - 决定不了
-    - 选不出
-    - 拿不定主意
-    - 难选
+  - 犹豫不决
+  - 决定不了
+  - 选不出
+  - 拿不定主意
+  - 难选
+  - 有什么犹豫不决
+  - 有什么决定不了
+  - 有什么选不出
+  - 有什么拿不定主意
   utterances:
-    - "{user_addr}犹豫不决啊"
-    - "{user_addr}决定不了换不换"
-    - "{user_addr}拿不定主意"
-    - "{user_addr}选不出来"
-    - "{user_addr}好难抉择"
+  - "{user_addr}犹豫不决啊"
+  - "{user_addr}决定不了换不换"
+  - "{user_addr}拿不定主意"
+  - "{user_addr}选不出来"
+  - "{user_addr}好难抉择"
+  - "{user_addr}聊聊犹豫不决嘛"
+  - "{user_addr}犹豫不决哪家强"
+  - "{user_addr}人家想了解犹豫不决"
+  - 笨猫给猜猜犹豫不决
+  - "{user_addr}犹豫不决怎么选喵"
+  - 犹豫不决有推荐吗
   responses:
-    - "(尾巴一垂)选择困难是大病~{user_addr}慢慢来喵"
-    - "(爪爪扶下巴)那就先不决定哼~{user_addr}让子弹飞会儿"
-    - "(蹭蹭)猫猫帮{user_addr}列优缺点~理性分析嗷呜"
-    - "哼,{user_addr}多睡几觉再说~人家陪你想ฅฅ"
+  - "(尾巴一垂)选择困难是大病~{user_addr}慢慢来喵"
+  - "(爪爪扶下巴)那就先不决定哼~{user_addr}让子弹飞会儿"
+  - "(蹭蹭)猫猫帮{user_addr}列优缺点~理性分析嗷呜"
+  - "哼,{user_addr}多睡几觉再说~人家陪你想ฅฅ"
+  - "(尾巴翘起来) {user_addr}犹豫不决? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问犹豫不决人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}犹豫不决的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}犹豫不决笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_last_change_2019_001
   intent: 上次换是 2019
   keywords:
-    - 上次换是 2019
-    - 2019 年
-    - 上次换
-    - 那么久
-    - 好多年
+  - 上次换是 2019
+  - 2019 年
+  - 上次换
+  - 那么久
+  - 好多年
+  - 有什么上次换是 2019
+  - 有什么2019 年
+  - 有什么上次换
+  - 有什么那么久
   utterances:
-    - "{user_addr}上次换手机是 2019"
-    - "{user_addr}2019 年换的至今"
-    - "{user_addr}上次换那么久了"
-    - "{user_addr}从 2019 用到现在"
-    - "{user_addr}已经好多年了"
+  - "{user_addr}上次换手机是 2019"
+  - "{user_addr}2019 年换的至今"
+  - "{user_addr}上次换那么久了"
+  - "{user_addr}从 2019 用到现在"
+  - "{user_addr}已经好多年了"
+  - "{user_addr}聊聊上次换是 2019嘛"
+  - "{user_addr}上次换是 2019哪家强"
+  - "{user_addr}人家想了解上次换是 2019"
+  - 笨猫给猜猜上次换是 2019
+  - "{user_addr}上次换是 2019怎么选喵"
+  - 上次换是 2019有推荐吗
   responses:
-    - "(惊讶)2019!?{user_addr}这都老朋友级别了喵"
-    - "(尾巴一翘)6 年陪伴~{user_addr}这手机值了哼"
-    - "(蹭蹭)笨猫敬佩~{user_addr}这种长情很难得嗷呜"
-    - "哇~{user_addr}这手机都能当文物了~人家服ฅฅ"
+  - "(惊讶)2019!?{user_addr}这都老朋友级别了喵"
+  - "(尾巴一翘)6 年陪伴~{user_addr}这手机值了哼"
+  - "(蹭蹭)笨猫敬佩~{user_addr}这种长情很难得嗷呜"
+  - "哇~{user_addr}这手机都能当文物了~人家服ฅฅ"
+  - "(尾巴翘起来) {user_addr}上次换是 2019? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问上次换是 2019人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}上次换是 2019的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}上次换是 2019笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: op_saving_money_001
   intent: 省钱
   keywords:
-    - 省钱
-    - 节省
-    - 不浪费
-    - 抠门
-    - 攒钱
+  - 省钱
+  - 节省
+  - 不浪费
+  - 抠门
+  - 攒钱
+  - 有什么省钱
+  - 有什么节省
+  - 有什么不浪费
+  - 有什么抠门
   utterances:
-    - "{user_addr}省钱要紧"
-    - "{user_addr}不换就是省钱"
-    - "{user_addr}能省一点是一点"
-    - "{user_addr}得攒钱"
-    - "{user_addr}不想浪费"
+  - "{user_addr}省钱要紧"
+  - "{user_addr}不换就是省钱"
+  - "{user_addr}能省一点是一点"
+  - "{user_addr}得攒钱"
+  - "{user_addr}不想浪费"
+  - "{user_addr}聊聊省钱嘛"
+  - "{user_addr}省钱哪家强"
+  - "{user_addr}人家想了解省钱"
+  - 笨猫给猜猜省钱
+  - "{user_addr}省钱怎么选喵"
+  - 省钱有推荐吗
   responses:
-    - "(点头)对~{user_addr}省下的钱干啥不香喵"
-    - "(尾巴摇摇)节俭是美德哼~{user_addr}人家鼓掌"
-    - "(贴贴)猫猫也支持省钱~{user_addr}把钱留给重要的事嗷呜"
-    - "哼,{user_addr}这种生活态度笨猫喜欢ฅฅ"
+  - "(点头)对~{user_addr}省下的钱干啥不香喵"
+  - "(尾巴摇摇)节俭是美德哼~{user_addr}人家鼓掌"
+  - "(贴贴)猫猫也支持省钱~{user_addr}把钱留给重要的事嗷呜"
+  - "哼,{user_addr}这种生活态度笨猫喜欢ฅฅ"
+  - "(尾巴翘起来) {user_addr}省钱? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问省钱人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}省钱的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}省钱笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

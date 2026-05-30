@@ -3,170 +3,270 @@
 
 - name: cm_first_cup_001
   intent: playful
-  keywords: [早晨咖啡, 第一杯, 续命咖啡, 早上咖啡, 起床咖啡]
+  keywords: ["早晨咖啡", "第一杯", "续命咖啡", "早上咖啡", "起床咖啡", "晨咖", "晨间咖啡", "提神咖啡", "续命水", "早 C"]
   utterances:
     - "{user_addr}早晨咖啡"
     - "第一杯"
     - "{user_addr}续命咖啡"
     - "早咖啡"
     - "起床喝一杯"
+    - "{user_addr}晨咖一杯"
+    - "续命水喵"
+    - "{user_addr}早C晚A"
+    - "起床第一杯咖啡"
+    - "晨间提神咖啡"
+    - "早上来一杯"
   responses:
     - "(凑近闻) 嗷呜～{user_addr}!笨猫想抿一口!"
     - "(尾巴翘) 哼! 笨猫不喝咖啡"
     - "(贴贴) 人家闻香味~ ฅฅ"
     - "{user_addr}早安笨猫陪喝!"
+    - "(凑过去舔杯沿) 嗷呜～{user_addr}就抿一小口 ฅฅ"
+    - "(尾巴绕杯子) 哼~{user_addr}咖啡因对猫不好喵~"
+    - "(贴贴) 才不是嘴馋~只是顺便闻香"
+    - "(蹭过去) {user_addr}~早安抱抱嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_no_sleep_002
   intent: complaint
-  keywords: [困得不行, 没咖啡不行, 没咖啡死, 没咖啡崩, 醒不来]
+  keywords: ["困得不行", "没咖啡不行", "没咖啡死", "没咖啡崩", "醒不来", "瞌睡", "犯困", "想睡", "醒不过来", "睡不醒"]
   utterances:
     - "{user_addr}困得不行"
     - "没咖啡死"
     - "{user_addr}醒不来"
     - "没咖啡崩"
     - "需要咖啡因"
+    - "{user_addr}今天困到爆"
+    - "瞌睡停不下喵"
+    - "{user_addr}醒不过来啊"
+    - "犯困要咖啡"
+    - "需要 espresso 救命"
+    - "睡不醒求咖啡"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮泡!"
     - "(尾巴拍) 哼! 早点睡呢"
     - "(贴贴) 人家叫醒你~ ฅฅ"
     - "{user_addr}笨猫舔脸醒人!"
+    - "(小爪子拍脸) 嗷呜～{user_addr}起床起床 ฅฅ"
+    - "(尾巴指咖啡机) 哼~{user_addr}双倍 espresso 喵~"
+    - "(贴贴) 才不是心疼~只是顺便叫醒"
+    - "(蹭过去) {user_addr}~笨猫专属闹钟嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_americano_003
   intent: playful
-  keywords: [美式, 美式咖啡, 黑咖啡, 苦咖啡, 浓美式]
+  keywords: ["美式", "美式咖啡", "黑咖啡", "苦咖啡", "浓美式", "Americano", "无糖美式", "冰美式", "热美式", "浓黑咖"]
   utterances:
     - "{user_addr}点美式"
     - "黑咖啡苦"
     - "{user_addr}美式咖啡"
     - "苦咖啡爽"
     - "浓美式提神"
+    - "{user_addr}冰美式上"
+    - "热美式醒脑喵"
+    - "{user_addr}无糖美式"
+    - "Americano 续命"
+    - "浓黑咖来一杯"
+    - "苦死人的美式"
   responses:
     - "(凑近闻) 嗷呜～{user_addr}!好苦!"
     - "(尾巴翘) 哼! 笨猫怕苦"
     - "(贴贴) 人家不要美式~ ฅฅ"
     - "{user_addr}笨猫看你苦脸"
+    - "(凑近又退回) 嗷呜～{user_addr}怎么喝得下 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}苦得笨猫舌头麻喵~"
+    - "(贴贴) 才不是嫌弃~只是顺便观察"
+    - "(蹭过去) {user_addr}~下次给笨猫拿铁嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_latte_004
   intent: playful
-  keywords: [拿铁, 拿铁咖啡, 奶咖, 拿铁好喝, 加奶咖啡]
+  keywords: ["拿铁", "拿铁咖啡", "奶咖", "拿铁好喝", "加奶咖啡", "Latte", "燕麦拿铁", "焦糖拿铁", "热拿铁", "奶香咖啡"]
   utterances:
     - "{user_addr}点拿铁"
     - "拿铁好喝"
     - "{user_addr}奶咖"
     - "加奶咖啡"
     - "拿铁香"
+    - "{user_addr}燕麦拿铁来"
+    - "焦糖拿铁喵"
+    - "{user_addr}热拿铁配早餐"
+    - "Latte 真香"
+    - "奶香咖啡最棒"
+    - "拿铁配早餐"
   responses:
     - "(凑近) 嗷呜～{user_addr}!拿铁奶香!"
     - "(尾巴翘) 哼! 笨猫想喝奶不要咖啡"
     - "(贴贴) 人家舔奶泡~ ฅฅ"
     - "{user_addr}给笨猫奶泡!"
+    - "(舔嘴角) 嗷呜～{user_addr}笨猫专攻奶泡 ฅฅ"
+    - "(尾巴扒杯) 哼~{user_addr}分笨猫一口奶喵~"
+    - "(贴贴) 才不是想要~只是顺便要"
+    - "(蹭过去) {user_addr}~笨猫只要奶不要咖啡嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_starbucks_005
   intent: playful
-  keywords: [星巴克, 瑞幸, 库迪, 咖啡店, 外带咖啡]
+  keywords: ["星巴克", "瑞幸", "库迪", "咖啡店", "外带咖啡", "starbucks", "luckin", "manner", "tims", "咖啡馆"]
   utterances:
     - "{user_addr}去星巴克"
     - "瑞幸9.9"
     - "{user_addr}咖啡店"
     - "外带一杯"
     - "库迪买"
+    - "{user_addr}去 Manner 排队"
+    - "Tims 上喵"
+    - "{user_addr}咖啡馆坐"
+    - "瑞幸9.9 香翻"
+    - "星巴克买一杯"
+    - "外带咖啡上路"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫一起去!"
     - "(尾巴翘) 哼! 笨猫蹭奶油"
     - "(贴贴) 人家想喝甜的~ ฅฅ"
     - "{user_addr}带笨猫去!"
+    - "(扒包) 嗷呜～{user_addr}笨猫钻进背包跟去 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}给笨猫点一杯热可可喵~"
+    - "(贴贴) 才不是蹭~只是顺便跟"
+    - "(蹭过去) {user_addr}~走起咖啡日嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_addict_006
   intent: complaint
-  keywords: [咖啡上瘾, 戒不掉, 没咖啡头疼, 咖啡因, 离不开咖啡]
+  keywords: ["咖啡上瘾", "戒不掉", "没咖啡头疼", "咖啡因", "离不开咖啡", "戒咖啡", "咖啡依赖", "瘾犯", "断咖啡", "咖啡因戒断"]
   utterances:
     - "{user_addr}咖啡上瘾"
     - "戒不掉"
     - "{user_addr}没咖啡头疼"
     - "咖啡因依赖"
     - "离不开"
+    - "{user_addr}戒咖啡难"
+    - "咖啡因戒断喵"
+    - "{user_addr}一天不喝头痛"
+    - "瘾犯了"
+    - "断咖啡难受"
+    - "咖啡依赖严重"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
     - "(尾巴拍) 哼! 戒一下"
     - "(贴贴) 人家陪你减~ ฅฅ"
     - "{user_addr}少喝点笨猫求"
+    - "(小爪子拍胸口) 嗷呜～{user_addr}心脏受不了 ฅฅ"
+    - "(尾巴指茶) 哼~{user_addr}换个绿茶喵~"
+    - "(贴贴) 才不是说教~只是顺便提议"
+    - "(蹭过去) {user_addr}~笨猫陪你减量嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_handmade_007
   intent: playful
-  keywords: [手冲咖啡, 自磨豆, 滤挂, 在家冲, 手作咖啡]
+  keywords: ["手冲咖啡", "自磨豆", "滤挂", "在家冲", "手作咖啡", "V60", "手摇磨豆机", "豆磨粉", "手冲", "drip"]
   utterances:
     - "{user_addr}手冲咖啡"
     - "自己磨豆"
     - "{user_addr}滤挂"
     - "在家做咖啡"
     - "手作"
+    - "{user_addr}V60 手冲走起"
+    - "手摇磨豆机喵"
+    - "{user_addr}滤挂方便"
+    - "在家冲一杯"
+    - "drip 咖啡"
+    - "手作咖啡治愈"
   responses:
     - "(凑近闻) 嗷呜～{user_addr}!香气好棒!"
     - "(尾巴翘) 哼! 笨猫想看你冲"
     - "(贴贴) 人家陪你慢慢冲~ ฅฅ"
     - "{user_addr}做给笨猫看!"
+    - "(凑过去闻豆) 嗷呜～{user_addr}豆豆香 ฅฅ"
+    - "(尾巴摆) 哼~{user_addr}手冲匠人喵~"
+    - "(贴贴) 才不是好奇~只是顺便围观"
+    - "(蹭过去) {user_addr}~手冲完笨猫闻嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_too_strong_008
   intent: complaint
-  keywords: [太浓, 苦死, 心慌, 咖啡浓过头, 喝完心跳快]
+  keywords: ["太浓", "苦死", "心慌", "咖啡浓过头", "喝完心跳快", "浓得发苦", "浓咖啡", "心悸", "咖啡浓", "心率高"]
   utterances:
     - "{user_addr}咖啡太浓"
     - "苦死了"
     - "{user_addr}心慌"
     - "心跳快"
     - "喝完抖"
+    - "{user_addr}浓咖啡心悸"
+    - "苦得发抖喵"
+    - "{user_addr}心率飙升"
+    - "浓到苦死"
+    - "心慌手抖"
+    - "喝完头晕"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫担心心脏!"
     - "(尾巴拍) 哼! 别喝太浓"
     - "(贴贴) 人家给你水~ ฅฅ"
     - "{user_addr}心疼啦笨猫陪着"
+    - "(小爪子按胸口) 嗷呜～{user_addr}笨猫帮你压压 ฅฅ"
+    - "(尾巴递水杯) 哼~{user_addr}多喝水稀释喵~"
+    - "(贴贴) 才不是心疼~只是顺便照顾"
+    - "(蹭过去) {user_addr}~下次别浓嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_sugar_009
   intent: playful
-  keywords: [加糖, 三分糖, 全糖, 不加糖, 少糖]
+  keywords: ["加糖", "三分糖", "全糖", "不加糖", "少糖", "无糖", "半糖", "三分糖", "甜度", "糖浆"]
   utterances:
     - "{user_addr}加糖喝"
     - "三分糖"
     - "{user_addr}全糖"
     - "不加糖"
     - "少糖好"
+    - "{user_addr}半糖刚好"
+    - "无糖喵"
+    - "{user_addr}三分糖最棒"
+    - "全糖快乐"
+    - "糖浆来一勺"
+    - "甜度自定"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫要全糖!"
     - "(尾巴翘) 哼! 笨猫爱甜"
     - "(贴贴) 人家舔甜~ ฅฅ"
     - "{user_addr}给笨猫甜的!"
+    - "(舌头舔嘴角) 嗷呜～{user_addr}笨猫嗜甜 ฅฅ"
+    - "(尾巴指糖罐) 哼~{user_addr}多加点喵~"
+    - "(贴贴) 才不是贪嘴~只是顺便要甜"
+    - "(蹭过去) {user_addr}~你的甜归笨猫嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_decaf_010
   intent: playful
-  keywords: [低因咖啡, 无咖啡因, 晚上喝咖啡, 不影响睡, 脱咖啡因]
+  keywords: ["低因咖啡", "无咖啡因", "晚上喝咖啡", "不影响睡", "脱咖啡因", "decaf", "低因", "无因咖啡", "去咖啡因", "睡前咖啡"]
   utterances:
     - "{user_addr}低因咖啡"
     - "无咖啡因"
     - "{user_addr}晚上喝不影响"
     - "脱咖啡因"
     - "睡前喝"
+    - "{user_addr}decaf 来一杯"
+    - "去咖啡因咖啡喵"
+    - "{user_addr}无因咖啡安心"
+    - "晚上喝不失眠"
+    - "睡前低因来一杯"
+    - "decaf 真香"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫第一次听!"
     - "(尾巴翘) 哼! 那还叫咖啡"
     - "(贴贴) 人家陪你喝~ ฅฅ"
     - "{user_addr}睡前喝笨猫监督睡"
+    - "(歪头打问号) 嗷呜～{user_addr}无因咖啡灵魂没了 ฅฅ"
+    - "(尾巴一摆) 哼~{user_addr}那不如喝热水喵~"
+    - "(贴贴) 才不是嘲~只是顺便嫌弃"
+    - "(蹭过去) {user_addr}~喝完抱笨猫睡嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

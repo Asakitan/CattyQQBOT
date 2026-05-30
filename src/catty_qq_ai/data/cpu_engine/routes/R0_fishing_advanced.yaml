@@ -1,207 +1,316 @@
 # 路亚 / 海钓 / 矶钓 / 飞蝇钓 routes (S6 R192 NLU 节点扩充, 第十九周期 1/10)
 # 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
 # 跟 K6 fishing_outdoor (基础) 区分: 这里专注垂钓专精.
+# R4 weak 扩 keywords/utterances/responses
 
 - name: fa_lure_001
   intent: question
-  keywords: [推荐路亚, 推荐路亚饵, 推荐 lure, 推荐路亚入门, 笨猫路亚]
+  keywords: [推荐路亚, 推荐路亚饵, 推荐 lure, 推荐路亚入门, 笨猫路亚, 米诺, VIB, 软虫, 铅笔饵, 路亚假饵]
   utterances:
     - 推荐路亚
     - 推荐路亚饵
     - 推荐 lure
     - 推荐路亚入门
     - 笨猫路亚
+    - "{user_addr}路亚怎么入门"
+    - 米诺好用吗
+    - 路亚假饵选啥
+    - "{user_addr}给猫猫讲讲路亚"
+    - 路亚和台钓区别
   responses:
     - "嗷呜～{user_addr}米诺 / VIB / 铅笔 - 主流ฅฅ"
     - "(尾巴翘) 软虫 / 软饵 / 铁板"
     - "{user_addr}入门: 小米诺 + 旋亮片"
     - "(挺胸) 笨猫推荐: 路亚就是骗鱼!"
+    - "嗷呜～{user_addr}路亚是用假饵骗真鱼喵"
+    - "(尾巴甩甩) 米诺最经典 / 入门首选ฅฅ"
+    - "哼～{user_addr}假饵种类多 / 别买全套乱花钱"
+    - "(挺胸) 笨猫提醒: 路亚靠手法 / 不是饵贵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fa_lure_brand_001
   intent: question
-  keywords: [推荐路亚品牌, 推荐 Daiwa, 推荐 Shimano, 推荐 Megabass, 笨猫路亚品牌]
+  keywords: [推荐路亚品牌, 推荐 Daiwa, 推荐 Shimano, 推荐 Megabass, 笨猫路亚品牌, Jackall, Abu Garcia, 国产路亚, Daiwa Free, 小贝路亚]
   utterances:
     - 推荐路亚品牌
     - 推荐 Daiwa
     - 推荐 Shimano
     - 推荐 Megabass
     - 笨猫路亚品牌
+    - "{user_addr}路亚品牌哪个好"
+    - Daiwa 和 Shimano 选哪个
+    - Megabass 值得入吗
+    - "{user_addr}国产路亚品牌"
+    - 入门路亚买啥牌
   responses:
     - "嗷呜～{user_addr}Daiwa / Shimano - 日系两霸ฅฅ"
     - "(尾巴翘) Megabass / Jackall - 高端"
     - "{user_addr}Abu Garcia / 国产小贝"
     - "(挺胸) 笨猫推荐: 入门 Daiwa Free!"
+    - "嗷呜～{user_addr}日系两霸卷死天下 / 选它没错"
+    - "(尾巴甩甩) Megabass 颜值天花板ฅฅ"
+    - "哼～{user_addr}国产小贝性价比也不错!"
+    - "(挺胸) 笨猫提醒: 入门别贪贵 / 慢慢升级!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fa_baitcast_001
   intent: question
-  keywords: [推荐水滴轮, 推荐 baitcast, 推荐左右手轮, 推荐路亚轮, 笨猫水滴轮]
+  keywords: [推荐水滴轮, 推荐 baitcast, 推荐左右手轮, 推荐路亚轮, 笨猫水滴轮, Tatula, SLX, Curado, Zillion, 路亚水滴]
   utterances:
     - 推荐水滴轮
     - 推荐 baitcast
     - 推荐左右手轮
     - 推荐路亚轮
     - 笨猫水滴轮
+    - "{user_addr}水滴轮怎么选"
+    - Tatula 怎么样
+    - 水滴轮易炒粉
+    - "{user_addr}入门水滴轮"
+    - Curado 值得入吗
   responses:
     - "嗷呜～{user_addr}Daiwa Tatula / Shimano SLXฅฅ"
     - "(尾巴翘) Curado / Zillion - 高端"
     - "{user_addr}抛投远 / 但易炒粉"
     - "(挺胸) 笨猫推荐: 入门 Tatula!"
+    - "嗷呜～{user_addr}水滴抛远但难学 / 别一上来玩"
+    - "(尾巴甩甩) Tatula 是入门门票 / 卷王ฅฅ"
+    - "哼～{user_addr}炒粉是水滴必经之路"
+    - "(挺胸) 笨猫提醒: 先练好刹车再大抛!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fa_spinning_001
   intent: question
-  keywords: [推荐纺车轮, 推荐 spinning reel, 推荐 Stradic, 推荐 Stella, 笨猫纺车轮]
+  keywords: [推荐纺车轮, 推荐 spinning reel, 推荐 Stradic, 推荐 Stella, 笨猫纺车轮, Stella SW, Sahara, Daiwa Exist, 纺车入门, 纺车轮性价比]
   utterances:
     - 推荐纺车轮
     - 推荐 spinning reel
     - 推荐 Stradic
     - 推荐 Stella
     - 笨猫纺车轮
+    - "{user_addr}纺车轮怎么选"
+    - Stella 真的神吗
+    - Sahara 值不值
+    - "{user_addr}纺车 vs 水滴"
+    - 入门纺车买啥
   responses:
     - "嗷呜～{user_addr}Shimano Stella - 纺车之神ฅฅ"
     - "(尾巴翘) Daiwa Exist - 旗舰"
     - "{user_addr}Stradic / Sahara - 入门"
     - "(挺胸) 笨猫推荐: Sahara 性价比!"
+    - "嗷呜～{user_addr}纺车比水滴好上手喵"
+    - "(尾巴甩甩) Stella 是纺车界爱马仕ฅฅ"
+    - "哼～{user_addr}Sahara 入门顶级性价比"
+    - "(挺胸) 笨猫提醒: Exist 二手保值率高!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fa_target_001
   intent: question
-  keywords: [推荐路亚鱼种, 推荐黑鱼路亚, 推荐翘嘴, 推荐鲈鱼路亚, 笨猫路亚鱼种]
+  keywords: [推荐路亚鱼种, 推荐黑鱼路亚, 推荐翘嘴, 推荐鲈鱼路亚, 笨猫路亚鱼种, 桂鱼 路亚, 红尾 路亚, 鳜鱼 路亚, 海鲈 路亚, GT 路亚]
   utterances:
     - 推荐路亚鱼种
     - 推荐黑鱼路亚
     - 推荐翘嘴
     - 推荐鲈鱼路亚
     - 笨猫路亚鱼种
+    - "{user_addr}路亚什么鱼好"
+    - 翘嘴怎么钓
+    - 黑鱼路亚饵怎么选
+    - "{user_addr}国民路亚鱼"
+    - 桂鱼能路亚吗
   responses:
     - "嗷呜～{user_addr}黑鱼 / 翘嘴 / 鲈鱼 - 国民ฅฅ"
     - "(尾巴翘) 桂鱼 / 红尾 / 鳜鱼"
     - "{user_addr}海鲈 / GT - 海钓"
     - "(挺胸) 笨猫推荐: 翘嘴是国民鱼!"
+    - "嗷呜～翘嘴爆口最爽{user_addr}, 中鱼快"
+    - "(尾巴甩甩) 黑鱼蛙钓刺激 / 大场面ฅฅ"
+    - "哼～{user_addr}入门钓翘嘴最容易"
+    - "(挺胸) 笨猫提醒: GT 是终极目标 / 长大成才!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fa_sea_fish_001
   intent: question
-  keywords: [推荐海钓, 推荐船钓, 推荐 GT, 推荐金枪鱼海钓, 笨猫海钓]
+  keywords: [推荐海钓, 推荐船钓, 推荐 GT, 推荐金枪鱼海钓, 笨猫海钓, 旗鱼海钓, 海钓船, 远海, 近海钓, GT 巨人鲹]
   utterances:
     - 推荐海钓
     - 推荐船钓
     - 推荐 GT
     - 推荐金枪鱼海钓
     - 笨猫海钓
+    - "{user_addr}海钓贵不贵"
+    - 船钓怎么参加
+    - GT 钓多大
+    - "{user_addr}想试试海钓"
+    - 远海近海哪个先
   responses:
     - "嗷呜～{user_addr}船钓 / 路亚 / 矶钓ฅฅ"
     - "(尾巴翘) GT 巨人鲹 - 海钓圣杯"
     - "{user_addr}金枪鱼 / 旗鱼 - 大物"
     - "(挺胸) 笨猫推荐: GT 是终极目标!"
+    - "嗷呜～{user_addr}海钓爽快但烧钱"
+    - "(尾巴甩甩) GT 中鱼那一刻像中彩票ฅฅ"
+    - "哼～{user_addr}船钓先报个团 / 试试水"
+    - "(挺胸) 笨猫提醒: 海钓晕船的多 / 备药!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fa_jigo_001
   intent: question
-  keywords: [推荐矶钓, 推荐黑鲷矶钓, 推荐筏钓, 推荐前打, 笨猫矶钓]
+  keywords: [推荐矶钓, 推荐黑鲷矶钓, 推荐筏钓, 推荐前打, 笨猫矶钓, 阿波钓法, 拉流, 鲷类矶钓, 港口前打, 矶钓技术]
   utterances:
     - 推荐矶钓
     - 推荐黑鲷矶钓
     - 推荐筏钓
     - 推荐前打
     - 笨猫矶钓
+    - "{user_addr}矶钓难学吗"
+    - 阿波是啥
+    - 黑鲷矶钓怎么钓
+    - "{user_addr}筏钓 vs 前打"
+    - 矶钓装备贵吗
   responses:
     - "嗷呜～{user_addr}矶钓: 阿波 / 拉流ฅฅ"
     - "(尾巴翘) 黑鲷 / 鲷类 - 经典目标"
     - "{user_addr}筏钓 / 前打 - 港口"
     - "(挺胸) 笨猫推荐: 矶钓体验海钓!"
+    - "嗷呜～矶钓优雅但门槛高{user_addr}"
+    - "(尾巴甩甩) 阿波是日本传统钓法ฅฅ"
+    - "哼～{user_addr}黑鲷溜起来超爽"
+    - "(挺胸) 笨猫提醒: 矶钓要看潮汐!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: fa_fly_fishing_001
   intent: question
-  keywords: [推荐飞蝇钓, 推荐 fly fishing, 推荐毛钩, 推荐飞蝇竿, 笨猫飞蝇钓]
+  keywords: [推荐飞蝇钓, 推荐 fly fishing, 推荐毛钩, 推荐飞蝇竿, 笨猫飞蝇钓, Sage 飞蝇, Orvis, 鳟鱼飞蝇, 干蝇湿蝇, 飞蝇钓法]
   utterances:
     - 推荐飞蝇钓
     - 推荐 fly fishing
     - 推荐毛钩
     - 推荐飞蝇竿
     - 笨猫飞蝇钓
+    - "{user_addr}飞蝇钓难学吗"
+    - Sage 飞蝇杆
+    - 鳟鱼飞蝇怎么钓
+    - "{user_addr}干蝇湿蝇区别"
+    - 飞蝇钓装备贵吗
   responses:
     - "嗷呜～{user_addr}飞蝇 - 优雅鳟鱼钓法ฅฅ"
     - "(尾巴翘) Sage / Orvis - 顶级"
     - "{user_addr}5 号竿 / 干蝇 / 湿蝇"
     - "(挺胸) 笨猫推荐: 飞蝇是钓鱼诗!"
+    - "嗷呜～飞蝇钓像跳舞{user_addr}, 优雅极了"
+    - "(尾巴甩甩) Sage 竿子是飞蝇界劳斯莱斯ฅฅ"
+    - "哼～{user_addr}飞蝇门槛高 / 但回报大"
+    - "(挺胸) 笨猫提醒: 学飞蝇先练抛投!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: fa_carp_001
   intent: question
-  keywords: [推荐黑坑, 推荐台钓, 推荐手竿, 推荐鲫鱼鲤鱼, 笨猫台钓]
+  keywords: [推荐黑坑, 推荐台钓, 推荐手竿, 推荐鲫鱼鲤鱼, 笨猫台钓, 黑坑塘, 台钓技术, 浮漂选, 饵料黑坑, 鲫鱼鲤鱼台钓]
   utterances:
     - 推荐黑坑
     - 推荐台钓
     - 推荐手竿
     - 推荐鲫鱼鲤鱼
     - 笨猫台钓
+    - "{user_addr}台钓怎么入门"
+    - 黑坑怎么玩
+    - 手竿选什么调性
+    - "{user_addr}鲫鱼饵料"
+    - 台钓和路亚区别
   responses:
     - "嗷呜～{user_addr}台钓 - 国内最大众ฅฅ"
     - "(尾巴翘) 手竿 / 浮漂 / 饵料"
     - "{user_addr}鲫鱼 / 鲤鱼 / 草鱼"
     - "(挺胸) 笨猫推荐: 黑坑解压!"
+    - "嗷呜～{user_addr}台钓静坐解压, 适合放松"
+    - "(尾巴甩甩) 黑坑塘按斤算 / 比野钓贵ฅฅ"
+    - "哼～{user_addr}手竿调性看竿先!"
+    - "(挺胸) 笨猫提醒: 台钓饵料调味很重要!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fa_line_001
   intent: question
-  keywords: [推荐钓鱼线, 推荐 PE 线, 推荐碳线, 推荐尼龙线, 笨猫钓鱼线]
+  keywords: [推荐钓鱼线, 推荐 PE 线, 推荐碳线, 推荐尼龙线, 笨猫钓鱼线, 主线子线, PE 8 编, 碳氟前导, 钓鱼线选号, 线径选择]
   utterances:
     - 推荐钓鱼线
     - 推荐 PE 线
     - 推荐碳线
     - 推荐尼龙线
     - 笨猫钓鱼线
+    - "{user_addr}钓鱼线怎么选"
+    - PE 还是尼龙
+    - 碳线前导
+    - "{user_addr}路亚用什么线"
+    - 8 编 PE 好吗
   responses:
     - "嗷呜～{user_addr}PE 线 - 路亚海钓 / 拉力大ฅฅ"
     - "(尾巴翘) 碳线 - 隐形 / 高强度"
     - "{user_addr}尼龙 - 入门 / 便宜"
     - "(挺胸) 笨猫推荐: 路亚 PE 1.5#!"
+    - "嗷呜～PE 拉力惊人但易缠绕{user_addr}"
+    - "(尾巴甩甩) 碳线做前导/隐形ฅฅ"
+    - "哼～{user_addr}入门尼龙先用着"
+    - "(挺胸) 笨猫提醒: 海钓必带碳线前导!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: fa_polarized_glasses_001
   intent: question
-  keywords: [推荐钓鱼眼镜, 推荐偏光镜, 推荐 Costa, 推荐 Maui Jim, 笨猫偏光镜]
+  keywords: [推荐钓鱼眼镜, 推荐偏光镜, 推荐 Costa, 推荐 Maui Jim, 笨猫偏光镜, Smith 偏光, 国产偏光, 钓鱼防晒, 偏光镜片, 水下看鱼]
   utterances:
     - 推荐钓鱼眼镜
     - 推荐偏光镜
     - 推荐 Costa
     - 推荐 Maui Jim
     - 笨猫偏光镜
+    - "{user_addr}偏光镜哪个牌"
+    - Costa 怎么样
+    - 偏光镜能看水下吗
+    - "{user_addr}钓鱼必备眼镜"
+    - 国产偏光好用吗
   responses:
     - "嗷呜～{user_addr}Costa - 钓鱼偏光顶级ฅฅ"
     - "(尾巴翘) Maui Jim / Smith"
     - "{user_addr}国产: 探路者 / 迪卡侬"
     - "(挺胸) 笨猫推荐: Costa 看水下!"
+    - "嗷呜～Costa 镜片能看穿水{user_addr}"
+    - "(尾巴甩甩) 钓鱼不戴偏光眼睛会瞎ฅฅ"
+    - "哼～{user_addr}迪卡侬偏光性价比顶!"
+    - "(挺胸) 笨猫提醒: 偏光镜必备 / 别省!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: fa_destination_001
   intent: question
-  keywords: [推荐钓鱼地点, 推荐三亚海钓, 推荐西藏路亚, 推荐青海湖, 笨猫钓鱼地点]
+  keywords: [推荐钓鱼地点, 推荐三亚海钓, 推荐西藏路亚, 推荐青海湖, 笨猫钓鱼地点, 万宁海钓, 川西路亚, 水鬼路亚, 钓鱼圣地, 海钓地点]
   utterances:
     - 推荐钓鱼地点
     - 推荐三亚海钓
     - 推荐西藏路亚
     - 推荐青海湖
     - 笨猫钓鱼地点
+    - "{user_addr}想去钓鱼旅行"
+    - 三亚海钓贵吗
+    - 西藏路亚水鬼
+    - "{user_addr}青海湖能钓吗"
+    - 国内钓鱼圣地
   responses:
     - "嗷呜～{user_addr}三亚 / 万宁 - 海钓ฅฅ"
     - "(尾巴翘) 西藏 / 川西 - 路亚水鬼"
     - "{user_addr}青海湖 - 湟鱼 (禁渔)"
     - "(挺胸) 笨猫推荐: 西藏路亚壮丽!"
+    - "嗷呜～{user_addr}三亚海钓水好 / 鱼多"
+    - "(尾巴甩甩) 西藏水鬼是路亚圣杯ฅฅ"
+    - "哼～{user_addr}青海湖禁渔 / 看看就好"
+    - "(挺胸) 笨猫提醒: 钓鱼别破坏当地生态!"
   cooldown_seconds: 60
   weight: 0.9

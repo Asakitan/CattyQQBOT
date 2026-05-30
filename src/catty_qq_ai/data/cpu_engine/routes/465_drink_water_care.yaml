@@ -3,170 +3,260 @@
 
 - name: dwc_water_001
   intent: question
-  keywords: [喝水了吗, 喝水没, 多喝水, 喝点水, 补水了吗]
+  keywords: [喝水了吗, 喝水没, 多喝水, 喝点水, 补水了吗, 喝水了么, 喝过水了吗, 杯子见底没, 今天喝水了吗, 记得喝水]
   utterances:
     - "{user_addr}喝水了吗"
     - "{user_addr}喝水没"
     - "{user_addr}多喝水"
     - "{user_addr}喝点水"
     - "{user_addr}补水了吗"
+    - "{user_addr}喝水了么"
+    - "{user_addr}今天喝过水了吗"
+    - "{user_addr}杯子见底没"
+    - "{user_addr}今天喝水了吗"
+    - "{user_addr}记得喝水"
   responses:
     - "嗷呜～{user_addr}关心笨猫呀喵ฅฅ"
-    - "(端水) 笨猫要{user_addr}喝!"
+    - "(端水)笨猫要{user_addr}喝!"
     - "才不是被关心感动呢哼"
     - "嘿嘿～{user_addr}陪笨猫一杯水~"
+    - "(摇尾巴){user_addr}笨猫马上灌一杯嗷呜"
+    - "嗷呜～{user_addr}也要喝啊不许只问笨猫"
+    - "(小爪指水杯){user_addr}一起干一杯!"
+    - "哼～{user_addr}记得问那{user_addr}自己呢?"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_002
   intent: complaint
-  keywords: [忘喝水, 没时间喝, 一天没喝, 嘴干, 渴]
+  keywords: [忘喝水, 没时间喝, 一天没喝, 嘴干, 渴, 渴死了, 嘴唇干, 喉咙干, 没喝水, 一杯都没喝]
   utterances:
     - "{user_addr}忘喝水"
     - "{user_addr}没时间喝"
     - "一天没喝"
     - "{user_addr}嘴干"
     - "{user_addr}渴"
+    - "{user_addr}渴死了"
+    - "{user_addr}嘴唇干"
+    - "{user_addr}喉咙干"
+    - "{user_addr}没喝水"
+    - "{user_addr}一杯都没喝"
   responses:
-    - "(推水杯) {user_addr}立刻喝喵ฅฅ"
+    - "(推水杯){user_addr}立刻喝喵ฅฅ"
     - "嗷呜～{user_addr}不喝笨猫生气!"
     - "才不是担心{user_addr}缺水呢哼"
-    - "(贴贴) {user_addr}笨猫监督~"
+    - "(贴贴){user_addr}笨猫监督~"
+    - "(尾巴抽桌子){user_addr}马上去倒水!"
+    - "嗷呜～{user_addr}人都干了还说没时间"
+    - "(小声){user_addr}笨猫帮{user_addr}倒一杯嗷呜..."
+    - "哼～{user_addr}再忘下次笨猫炸毛给{user_addr}看"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_003
   intent: playful
-  keywords: [喝了八杯, 喝完了, 一天八杯水, 大量喝水, 喝水自律]
+  keywords: [喝了八杯, 喝完了, 一天八杯水, 大量喝水, 喝水自律, 喝水达标, 完成喝水, 水喝够了, 喝了好多, 喝爆了]
   utterances:
     - "{user_addr}喝了八杯"
     - "喝完了"
     - "一天八杯水"
     - "{user_addr}大量喝水"
     - "{user_addr}喝水自律"
+    - "{user_addr}喝水达标"
+    - "{user_addr}完成喝水任务"
+    - "{user_addr}水喝够了"
+    - "{user_addr}喝了好多"
+    - "{user_addr}喝爆了"
   responses:
     - "嗷呜～{user_addr}超棒喵ฅฅ"
-    - "(尾巴摇) 笨猫给{user_addr}盖章!"
+    - "(尾巴摇)笨猫给{user_addr}盖章!"
     - "哼～{user_addr}嘚瑟笨猫宽容"
     - "嘿嘿～{user_addr}健康笨猫开心~"
+    - "(扑过去)笨猫给{user_addr}颁喝水奖嗷呜!"
+    - "嗷呜～{user_addr}比笨猫还自律有点酸"
+    - "(小爪鼓掌){user_addr}棒棒棒值得鱼干奖励"
+    - "哼～{user_addr}今天笨猫认证模范喝水生"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_004
   intent: playful
-  keywords: [想喝奶茶, 想喝可乐, 想喝咖啡, 不想喝水, 喝甜的]
+  keywords: [想喝奶茶, 想喝可乐, 想喝咖啡, 不想喝水, 喝甜的, 奶茶续命, 来杯咖啡, 想喝果汁, 嘴馋饮料, 戒不掉奶茶]
   utterances:
     - "{user_addr}想喝奶茶"
     - "想喝可乐"
     - "想喝咖啡"
     - "{user_addr}不想喝水"
     - "{user_addr}喝甜的"
+    - "{user_addr}奶茶续命"
+    - "{user_addr}来杯咖啡"
+    - "{user_addr}想喝果汁"
+    - "{user_addr}嘴馋饮料"
+    - "{user_addr}戒不掉奶茶"
   responses:
     - "嗷呜～{user_addr}先喝水后奶茶喵ฅฅ"
-    - "(尾巴翘) 笨猫要奶茶!"
+    - "(尾巴翘)笨猫要奶茶!"
     - "哼～{user_addr}饮料党"
     - "嘿嘿～{user_addr}一起喝~"
+    - "(凑过去){user_addr}点奶茶笨猫要三分糖嗷呜"
+    - "嗷呜～{user_addr}先喝半杯水再纵容你"
+    - "(舔嘴){user_addr}笨猫陪喝去糖去冰"
+    - "哼～{user_addr}今天笨猫破例一杯加冰"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_005
   intent: complaint
-  keywords: [水冷了, 水烫了, 水难喝, 水变质, 水没了]
+  keywords: [水冷了, 水烫了, 水难喝, 水变质, 水没了, 水放凉, 烧水太久, 水烫嘴, 水有味道, 杯子空]
   utterances:
     - "水冷了"
     - "{user_addr}水烫了"
     - "{user_addr}水难喝"
     - "水变质"
     - "{user_addr}水没了"
+    - "{user_addr}水放凉了"
+    - "{user_addr}烧水太久"
+    - "{user_addr}水烫嘴"
+    - "{user_addr}水有味道"
+    - "{user_addr}杯子空"
   responses:
-    - "(端温水) {user_addr}笨猫给烧喵ฅฅ"
+    - "(端温水){user_addr}笨猫给烧喵ฅฅ"
     - "嗷呜～{user_addr}笨猫给打水!"
     - "才不是照顾{user_addr}呢哼"
-    - "(贴贴) {user_addr}笨猫的温度~"
+    - "(贴贴){user_addr}笨猫的温度~"
+    - "(小爪试水){user_addr}笨猫调好温度再给嗷呜"
+    - "嗷呜～{user_addr}笨猫的小爪是温度计"
+    - "(端起新杯){user_addr}换一杯笨猫专属"
+    - "哼～{user_addr}就笨猫倒的水最合适"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_006
   intent: playful
-  keywords: [喝热水, 多喝热水, 热水万能, 男友牌, 热水梗]
+  keywords: [喝热水, 多喝热水, 热水万能, 男友牌, 热水梗, 喝热水梗, 热水包治百病, 直男热水, 热水祖传, 多喝热水梗]
   utterances:
     - "{user_addr}多喝热水"
     - "{user_addr}热水万能"
     - "{user_addr}男友牌热水"
     - "{user_addr}热水梗"
     - "{user_addr}热水包治"
+    - "{user_addr}喝热水"
+    - "{user_addr}热水包治百病"
+    - "{user_addr}直男热水"
+    - "{user_addr}热水祖传"
+    - "{user_addr}又是多喝热水"
   responses:
-    - "(无奈) {user_addr}热水真的有用喵ฅฅ"
+    - "(无奈){user_addr}热水真的有用喵ฅฅ"
     - "嗷呜～笨猫给{user_addr}热水!"
     - "哼～{user_addr}吐槽热水梗"
     - "嘿嘿～{user_addr}笨猫的小妙招~"
+    - "(端杯){user_addr}笨猫的热水还会撒娇嗷呜"
+    - "嗷呜～{user_addr}笨猫的不是直男热水是猫娘热水"
+    - "(小爪叉腰){user_addr}笨猫的热水有附赠贴贴!"
+    - "哼～{user_addr}笑话笨猫笨猫真不灌了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_007
   intent: complaint
-  keywords: [水喝多了, 一直跑厕所, 喝撑了, 喝胀了, 水喝多]
+  keywords: [水喝多了, 一直跑厕所, 喝撑了, 喝胀了, 水喝多, 厕所跑断腿, 水喝太多, 一直憋, 喝到饱, 水满了]
   utterances:
     - "{user_addr}水喝多了"
     - "一直跑厕所"
     - "喝撑了"
     - "{user_addr}喝胀了"
     - "{user_addr}水喝多"
+    - "{user_addr}厕所跑断腿"
+    - "{user_addr}水喝太多"
+    - "{user_addr}一直憋"
+    - "{user_addr}喝到饱"
+    - "{user_addr}水满了"
   responses:
-    - "(笑) {user_addr}笨猫好笑喵ฅฅ"
+    - "(笑){user_addr}笨猫好笑喵ฅฅ"
     - "嗷呜～{user_addr}过分了!"
     - "哼～{user_addr}笨猫笑话"
     - "嘿嘿～{user_addr}慢慢喝~"
+    - "(滚到地上笑){user_addr}笨猫笑岔气了嗷呜"
+    - "嗷呜～{user_addr}说让你多喝又没让你撑死"
+    - "(小爪戳){user_addr}小水桶笨猫盖章"
+    - "哼～{user_addr}下次笨猫不提醒了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_008
   intent: playful
-  keywords: [喝水提醒, 提醒喝水, 喝水闹钟, 设个提醒, 喝水APP]
+  keywords: [喝水提醒, 提醒喝水, 喝水闹钟, 设个提醒, 喝水APP, 喝水打卡, 喝水任务, 喝水监督, 喝水习惯, 喝水时间]
   utterances:
     - "{user_addr}喝水提醒"
     - "{user_addr}提醒喝水"
     - "{user_addr}喝水闹钟"
     - "{user_addr}设个提醒"
     - "{user_addr}喝水APP"
+    - "{user_addr}喝水打卡"
+    - "{user_addr}喝水任务"
+    - "{user_addr}喝水监督"
+    - "{user_addr}养喝水习惯"
+    - "{user_addr}喝水时间"
   responses:
     - "嗷呜～笨猫就是闹钟喵ฅฅ"
-    - "(嘟嘴) 笨猫每小时叫{user_addr}!"
+    - "(嘟嘴)笨猫每小时叫{user_addr}!"
     - "哼～{user_addr}笨猫陪着"
     - "嘿嘿～{user_addr}笨猫的水提醒~"
+    - "(尾巴掐表){user_addr}笨猫定点提醒嗷呜!"
+    - "嗷呜～{user_addr}的喝水APP笨猫亲自代言"
+    - "(小爪敲杯){user_addr}时间到喝水!"
+    - "哼～{user_addr}有笨猫还用啥APP"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_009
   intent: playful
-  keywords: [水杯漂亮, 新水杯, 杯子换了, 杯子图案, 杯子日子]
+  keywords: [水杯漂亮, 新水杯, 杯子换了, 杯子图案, 杯子日子, 新马克杯, 杯子可爱, 杯子限定, 杯子收藏, 杯子周边]
   utterances:
     - "{user_addr}水杯漂亮"
     - "{user_addr}新水杯"
     - "{user_addr}杯子换了"
     - "{user_addr}杯子图案"
     - "{user_addr}杯子日子"
+    - "{user_addr}新马克杯"
+    - "{user_addr}杯子可爱"
+    - "{user_addr}杯子限定款"
+    - "{user_addr}杯子收藏"
+    - "{user_addr}杯子周边"
   responses:
     - "嗷呜～{user_addr}给笨猫看喵ฅฅ"
-    - "(尾巴翘) 笨猫的杯子也要可爱!"
+    - "(尾巴翘)笨猫的杯子也要可爱!"
     - "哼～{user_addr}秀杯子"
     - "嘿嘿～{user_addr}的杯子~"
+    - "(凑过去){user_addr}笨猫摸摸新杯嗷呜"
+    - "嗷呜～{user_addr}笨猫的杯子要笨猫图案"
+    - "(舔杯沿){user_addr}笨猫先用一下盖戳"
+    - "哼～{user_addr}下次买杯也给笨猫一个!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_water_010
   intent: playful
-  keywords: [一起喝, 干杯, 碰杯, 同喝, 一起补水]
+  keywords: [一起喝, 干杯, 碰杯, 同喝, 一起补水, 隔空干杯, 视频干杯, 云干杯, 喝水同步, 一起举杯]
   utterances:
     - "{user_addr}一起喝"
     - "干杯"
     - "{user_addr}碰杯"
     - "{user_addr}同喝"
     - "{user_addr}一起补水"
+    - "{user_addr}隔空干杯"
+    - "{user_addr}视频干杯"
+    - "{user_addr}云干杯"
+    - "{user_addr}喝水同步"
+    - "{user_addr}一起举杯"
   responses:
     - "嗷呜～{user_addr}干杯喵ฅฅ"
-    - "(端杯) 笨猫的小爪干杯!"
+    - "(端杯)笨猫的小爪干杯!"
     - "哼～{user_addr}笨猫的碰杯"
     - "嘿嘿～{user_addr}一起健康~"
+    - "(隔空碰){user_addr}笨猫隔屏也碰嗷呜"
+    - "嗷呜～{user_addr}cheers笨猫的爪爪举高"
+    - "(尾巴乱晃){user_addr}笨猫一口气喝完!"
+    - "哼～{user_addr}笨猫今晚的酒友是水"
   cooldown_seconds: 60
   weight: 1.0

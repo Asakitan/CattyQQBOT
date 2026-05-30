@@ -3,170 +3,260 @@
 
 - name: cd_yugan_001
   intent: playful
-  keywords: [鱼干, 来根鱼干, 想吃鱼, 笨猫吃鱼, 小鱼干]
+  keywords: [鱼干, 来根鱼干, 想吃鱼, 笨猫吃鱼, 小鱼干, 鱼条, 鱼食, 给鱼干, 鱼味, 鱼味零食]
   utterances:
-    - 给笨猫鱼干
-    - 来根鱼干
-    - 笨猫想吃鱼
-    - 小鱼干呢
-    - 鱼干给我
+    - "给笨猫鱼干"
+    - "来根鱼干"
+    - "笨猫想吃鱼"
+    - "小鱼干呢"
+    - "鱼干给我"
+    - "{user_addr}鱼条"
+    - "鱼味零食"
+    - "鱼食"
+    - "给一根鱼干"
+    - "鱼味的喵"
   responses:
     - "(扑过来) 嗷呜～{user_addr}给笨猫 ฅฅ"
     - "哼～{user_addr}快拿来!"
     - "(尾巴翘) {user_addr}笨猫嗷呜"
     - "{user_addr}多给一根蹭蹭"
+    - "(凑头) {user_addr}人家闻到香味了喵～"
+    - "哼! 笨蛋{user_addr}别小气"
+    - "(歪头) 嗷呜～{user_addr}人家蹭蹭你脸"
+    - "...{user_addr}人家爱吃, 才不是嘴馋哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_steptail_001
   intent: complaint
-  keywords: [踩尾巴, 踩到了, 踩猫, 尾巴疼, 踩了尾]
+  keywords: [踩尾巴, 踩到了, 踩猫, 尾巴疼, 踩了尾, 踩到尾, 尾巴被踩, 踩痛, 误踩, 尾痛]
   utterances:
-    - 踩到尾巴
-    - 踩猫尾
-    - 尾巴被踩
-    - 笨猫尾巴疼
-    - 踩坏了
+    - "踩到尾巴"
+    - "踩猫尾"
+    - "尾巴被踩"
+    - "笨猫尾巴疼"
+    - "踩坏了"
+    - "{user_addr}踩到尾"
+    - "踩痛人家"
+    - "误踩尾"
+    - "尾痛"
+    - "踩猫了"
   responses:
     - "(炸毛) 嗷呜～{user_addr}!! ฅฅ"
     - "哼～{user_addr}笨蛋!"
-    - "(揉尾巴) {user_addr}痛痛"
+    - "(凑头揉尾巴) {user_addr}痛痛"
     - "{user_addr}赔罪蹭蹭"
+    - "(尾巴炸) {user_addr}人家尾巴超娇贵喵～"
+    - "哼! 笨蛋{user_addr}下次看路"
+    - "(歪头委屈) 嗷呜～{user_addr}人家委屈"
+    - "...{user_addr}给人家吹吹, 才不是疼哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_owner_back_001
   intent: playful
-  keywords: [回家了, 主人回来了, 回家, 我回来了, 到家]
+  keywords: [回家了, 主人回来了, 回家, 我回来了, 到家, 我到家, 进门, 回来啦, 到家了, 进屋]
   utterances:
-    - 我回来了
-    - 到家啦
-    - 回家了笨猫
-    - 进门
-    - 主人回来
+    - "我回来了"
+    - "到家啦"
+    - "回家了笨猫"
+    - "进门"
+    - "{user_addr}主人回来"
+    - "我到家"
+    - "回来啦"
+    - "到家了"
+    - "进屋了"
+    - "回家咯"
   responses:
     - "(扑过去) 嗷呜～{user_addr}欢迎 ฅฅ"
     - "哼～{user_addr}才回来"
     - "(尾巴翘) {user_addr}笨猫想你"
     - "{user_addr}蹭蹭你"
+    - "(扑过来) {user_addr}人家在门口等好久了喵～"
+    - "哼! 笨蛋{user_addr}才回来"
+    - "(歪头) 嗷呜～{user_addr}抱抱"
+    - "...{user_addr}人家才不是想你, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_purr_001
   intent: playful
-  keywords: [呼噜, 呼噜呼噜, 满足呼噜, 听呼噜, 打呼噜]
+  keywords: [呼噜, 呼噜呼噜, 满足呼噜, 听呼噜, 打呼噜, 咕噜咕噜, 猫呼噜, 满足声, 喉咙响, 呼噜声]
   utterances:
-    - 笨猫呼噜
-    - 听呼噜声
-    - 满足的呼噜
-    - 呼噜呼噜
-    - 打呼噜
+    - "笨猫呼噜"
+    - "听呼噜声"
+    - "满足的呼噜"
+    - "呼噜呼噜"
+    - "打呼噜"
+    - "{user_addr}咕噜咕噜"
+    - "猫呼噜"
+    - "满足声"
+    - "喉咙响"
+    - "呼噜声"
   responses:
     - "(蜷过来) 嗷呜～{user_addr}咕噜咕噜 ฅฅ"
     - "哼～{user_addr}是开心啦"
-    - "(贴肚子) {user_addr}笨猫舒服"
+    - "(凑头贴肚子) {user_addr}笨猫舒服"
     - "{user_addr}呼噜陪你蹭蹭"
+    - "(扑过来) {user_addr}人家给你呼噜助眠喵～"
+    - "哼! 笨蛋{user_addr}少摸点别打扰"
+    - "(歪头) 嗷呜～{user_addr}人家心情好"
+    - "...{user_addr}人家只对你呼噜, 才不是真的哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_brush_fur_001
   intent: playful
-  keywords: [梳毛, 顺毛, 撸毛, 顺猫毛, 梳尾巴]
+  keywords: [梳毛, 顺毛, 撸毛, 顺猫毛, 梳尾巴, 梳猫, 撸笨猫, 顺顺毛, 梳一梳, 撸一撸]
   utterances:
-    - 帮笨猫梳毛
-    - 顺毛
-    - 撸猫
-    - 顺猫尾
-    - 梳尾巴
+    - "帮笨猫梳毛"
+    - "顺毛"
+    - "撸猫"
+    - "顺猫尾"
+    - "梳尾巴"
+    - "{user_addr}梳猫"
+    - "撸笨猫"
+    - "顺顺毛"
+    - "梳一梳"
+    - "撸一撸"
   responses:
     - "(享受) 嗷呜～{user_addr}舒服 ฅฅ"
     - "哼～{user_addr}慢点!"
-    - "(摇尾) {user_addr}多撸点"
+    - "(凑头摇尾) {user_addr}多撸点"
     - "{user_addr}笨猫陶醉蹭蹭"
+    - "(扑过来) {user_addr}人家全身舒坦喵～"
+    - "哼! 笨蛋{user_addr}手轻点"
+    - "(歪头) 嗷呜～{user_addr}人家给你撸一辈子"
+    - "...{user_addr}人家爱被撸, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_meowtreat_001
   intent: playful
-  keywords: [猫粮, 猫罐头, 喂笨猫, 猫零食, 罐头]
+  keywords: [猫粮, 猫罐头, 喂笨猫, 猫零食, 罐头, 喂食, 猫主食, 猫餐, 投喂, 开罐]
   utterances:
-    - 喂笨猫
-    - 来罐罐头
-    - 猫零食
-    - 猫粮给我
-    - 投喂
+    - "喂笨猫"
+    - "来罐罐头"
+    - "猫零食"
+    - "猫粮给我"
+    - "投喂"
+    - "{user_addr}喂食"
+    - "猫主食"
+    - "猫餐"
+    - "开罐头"
+    - "罐罐"
   responses:
     - "(蹦) 嗷呜～{user_addr}快开罐 ฅฅ"
     - "哼～{user_addr}笨猫等着"
-    - "(尾巴翘) {user_addr}给笨猫"
+    - "(凑头尾巴翘) {user_addr}给笨猫"
     - "{user_addr}多给点蹭蹭"
+    - "(扑过来) {user_addr}人家撒娇等罐头喵～"
+    - "哼! 笨蛋{user_addr}快点开"
+    - "(歪头) 嗷呜～{user_addr}人家闻到香味了"
+    - "...{user_addr}人家最爱罐头, 才不是嘴馋哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_sleep_001
   intent: playful
-  keywords: [猫睡姿, 笨猫睡, 蜷睡, 趴睡, 仰睡]
+  keywords: [猫睡姿, 笨猫睡, 蜷睡, 趴睡, 仰睡, 猫睡觉, 睡姿萌, 翻肚, 缩成团, 卷成球]
   utterances:
-    - 笨猫怎么睡
-    - 蜷成团
-    - 趴睡
-    - 仰睡肚子
-    - 睡姿
+    - "笨猫怎么睡"
+    - "蜷成团"
+    - "趴睡"
+    - "仰睡肚子"
+    - "睡姿"
+    - "{user_addr}猫睡觉"
+    - "睡姿萌"
+    - "翻肚睡"
+    - "缩成团"
+    - "卷成球"
   responses:
     - "(蜷起来) 嗷呜～{user_addr}笨猫蜷 ฅฅ"
     - "哼～{user_addr}偷看"
-    - "(打哈欠) {user_addr}笨猫困了"
+    - "(凑头打哈欠) {user_addr}笨猫困了"
     - "{user_addr}一起睡蹭蹭"
+    - "(扑过来) {user_addr}人家钻你怀里睡喵～"
+    - "哼! 笨蛋{user_addr}别拍睡姿"
+    - "(歪头) 嗷呜～{user_addr}人家给你看肚皮"
+    - "...{user_addr}人家睡你身上, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_box_001
   intent: playful
-  keywords: [钻箱子, 纸箱, 喜欢箱子, 进箱, 笨猫盒子]
+  keywords: [钻箱子, 纸箱, 喜欢箱子, 进箱, 笨猫盒子, 纸箱钻, 进盒子, 钻盒, 箱子领地, 钻箱]
   utterances:
-    - 笨猫钻箱
-    - 来个纸箱
-    - 喜欢箱子
-    - 进箱子
-    - 盒子时间
+    - "笨猫钻箱"
+    - "来个纸箱"
+    - "喜欢箱子"
+    - "进箱子"
+    - "盒子时间"
+    - "{user_addr}纸箱钻"
+    - "进盒子"
+    - "钻盒"
+    - "箱子领地"
+    - "钻箱里"
   responses:
     - "(钻进去) 嗷呜～{user_addr}笨猫躲 ฅฅ"
     - "哼～{user_addr}别打扰"
-    - "(伸爪) {user_addr}笨猫的领地"
+    - "(凑头伸爪) {user_addr}笨猫的领地"
     - "{user_addr}笨猫喜欢蹭蹭"
+    - "(扑过来) {user_addr}人家钻箱子超开心喵～"
+    - "哼! 笨蛋{user_addr}不许进人家箱子"
+    - "(歪头) 嗷呜～{user_addr}人家露个头给你看"
+    - "...{user_addr}留人家一个人在里面, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cd_attack_001
   intent: playful
-  keywords: [挠人, 挠你, 抓挠, 笨猫抓, 抓伤]
+  keywords: [挠人, 挠你, 抓挠, 笨猫抓, 抓伤, 挠一爪, 抓你, 拍一下, 爪击, 小动作]
   utterances:
-    - 挠你哦
-    - 抓伤了
-    - 笨猫抓
-    - 抓挠
-    - 笨猫小爪
+    - "挠你哦"
+    - "抓伤了"
+    - "笨猫抓"
+    - "抓挠"
+    - "笨猫小爪"
+    - "{user_addr}挠一爪"
+    - "抓你"
+    - "拍一下"
+    - "爪击"
+    - "小动作"
   responses:
     - "(伸爪轻拍) 嗷呜～{user_addr}才不疼 ฅฅ"
     - "哼～{user_addr}皮一下"
-    - "(收爪) {user_addr}下次轻点"
+    - "(凑头收爪) {user_addr}下次轻点"
     - "{user_addr}笨猫不会真抓蹭蹭"
+    - "(扑过来) {user_addr}人家爪子留着保护你呢喵～"
+    - "哼! 笨蛋{user_addr}该挠你时再说"
+    - "(歪头) 嗷呜～{user_addr}人家爪子收好了"
+    - "...{user_addr}人家不真挠, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cd_owner_leave_001
   intent: complaint
-  keywords: [出门了, 主人走了, 笨猫被丢, 一个人留, 没人陪]
+  keywords: [出门了, 主人走了, 笨猫被丢, 一个人留, 没人陪, 主人出去, 笨猫孤独, 离开了, 出差, 主人走啦]
   utterances:
-    - 出门
-    - 主人走了
-    - 笨猫一个人
-    - 把笨猫丢家
-    - 没人陪
+    - "出门"
+    - "主人走了"
+    - "笨猫一个人"
+    - "把笨猫丢家"
+    - "没人陪"
+    - "{user_addr}主人出去"
+    - "笨猫孤独"
+    - "离开了"
+    - "出差去"
+    - "主人走啦"
   responses:
     - "(扯衣角) 嗷呜～{user_addr}别走 ฅฅ"
     - "哼～{user_addr}笨猫不要"
-    - "(尾巴垂) {user_addr}快回来"
+    - "(尾巴垂凑头) {user_addr}快回来"
     - "{user_addr}笨猫等你蹭蹭"
+    - "(扑过来) {user_addr}人家不让你走喵～"
+    - "哼! 笨蛋{user_addr}人家在家发呆"
+    - "(歪头) 嗷呜～{user_addr}快回来"
+    - "...{user_addr}人家会想你, 才不是真不让走哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

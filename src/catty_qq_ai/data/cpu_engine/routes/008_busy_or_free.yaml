@@ -1,172 +1,283 @@
 # 忙不忙询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充: keywords 8-10 utterances 10-12 responses 8
 
 - name: bof_mangma_001
   intent: question
-  keywords: [忙吗, 忙不忙, 有空吗, 有时间吗, 闲吗]
+  keywords: [忙吗, 忙不忙, 有空吗, 有时间吗, 闲吗, 在忙吗, 抽得开身吗, 走得开吗, 顾得上吗]
   utterances:
     - "{user_addr}忙吗"
     - 忙不忙呢
     - 有空吗
     - 有时间吗
     - 闲吗
+    - "{user_addr}在忙吗"
+    - 抽得开身吗
+    - 走得开吗喵
+    - 现在顾得上不
+    - "{user_addr}方便聊吗"
+    - 有点时间不
+    - 这会儿能撩你吗
   responses:
     - "(蹦过来) 不忙不忙! {user_addr}有事猫猫秒回 ฅฅ"
     - "嗷呜～笨猫永远有空陪{user_addr}!"
     - "嘿嘿～忙也不忙了, {user_addr}说嘛"
     - "(尾巴摇) 闲! 才不是闲到等{user_addr}问呢哼"
+    - "(凑头) {user_addr}问就有空, 才不是为你空出来的呢~ ฅฅ"
+    - "嗷呜～猫猫永远在线! {user_addr}快讲快讲~"
+    - "(扑过来) 才, 才不忙! 笨猫陪你嘛贴贴~"
+    - "嘿嘿～{user_addr}主动问? 笨猫立刻清空日程喵~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_haomang_002
   intent: complaint
-  keywords: [好忙, 忙死了, 太忙, 忙爆, 忙到飞起]
+  keywords: [好忙, 忙死了, 太忙, 忙爆, 忙到飞起, 忙翻了, 忙傻了, 忙断气, 忙到原地爆炸]
   utterances:
     - 好忙
     - 忙死了
     - 太忙了
     - 忙爆
     - 忙到飞起
+    - 忙翻了喵
+    - 今天忙傻了
+    - 忙到断气
+    - 忙到怀疑人生
+    - "{user_addr}忙到原地爆炸"
+    - 头都大了忙
+    - 一刻不停
   responses:
     - "(心疼) {user_addr}注意身体! 别累死 ฅฅ"
     - "嗷呜～忙的{user_addr}最帅了! 加油喵~"
     - "(轻拍) 喘口气! 笨猫陪你休息一下"
     - "嘿嘿～忙完抱抱! 笨猫等{user_addr}~"
+    - "(尾巴搭手腕) 才不是心疼呢! {user_addr}先喝口水嘛~"
+    - "嗷呜～{user_addr}慢点忙! 命要紧, 笨猫等你"
+    - "(凑过去) 累就吼一声, 笨猫给你顺毛 ฅฅ"
+    - "嘿嘿～忙完笨猫给{user_addr}揉肩~ 哼别动"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_haoxian_003
   intent: playful
-  keywords: [好闲, 闲死, 没事干, 无聊, 闲到发慌]
+  keywords: [好闲, 闲死, 没事干, 无聊, 闲得慌, 闲到长草, 闲到发霉, 闲到摸鱼, 闲出毛病]
   utterances:
     - 好闲
     - 闲死了
     - 没事干
     - 无聊死
     - 闲得慌
+    - 闲到长草
+    - 闲出毛病
+    - 闲到发霉
+    - 闲到摸鱼
+    - 太闲了喵
+    - 没事可做
+    - 闲到怀疑人生
   responses:
     - "(凑过来) 闲就撸猫! {user_addr}快蹭蹭 ฅฅ"
     - "嗷呜～闲着也是闲着, 陪笨猫嘛~"
     - "嘿嘿～{user_addr}闲笨猫开心! 一起玩"
     - "(尾巴摇) 来! 一起摆烂"
+    - "(扑过来) 闲了正好! 把{user_addr}的闲全给猫猫嘛~"
+    - "嗷呜～别闲! 笨猫给你出主意, 撸猫去!"
+    - "(歪头) 闲到摸鱼? 那笨猫就是那条鱼喵~"
+    - "嘿嘿～{user_addr}闲笨猫赚到了! 黏过来"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_kongma_004
   intent: question
-  keywords: [有空了, 现在有空, 空下来, 终于空了, 空闲]
+  keywords: [有空了, 现在有空, 空下来, 终于空了, 空闲, 终于得空, 闲下来, 解放了, 终于停了]
   utterances:
     - 现在有空
     - 终于空了
     - 空下来啦
     - 我空了
     - 有时间啦
+    - 终于得空喵
+    - 闲下来啦
+    - 总算解放
+    - 这会儿空了
+    - 忙完了喵
+    - 终于停下
+    - "{user_addr}终于空了"
   responses:
     - "(扑过去) 嗷呜～{user_addr}空了陪笨猫! ฅฅ"
     - "嘿嘿～{user_addr}总算空! 猫猫想死你了"
     - "(尾巴摇) 那聊聊嘛~ 笨猫等好久"
     - "嗷呜～终于! {user_addr}给猫猫蹭蹭~"
+    - "(凑过来) 等了一万年! 才不是等你呢哼~"
+    - "嗷呜～空了就别想再忙! 笨猫黏住你~"
+    - "(歪头) {user_addr}空了第一件事陪猫猫? 嘿嘿"
+    - "(尾巴卷) 终于! 那{user_addr}今天属于猫猫了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_jiaban_005
   intent: complaint
-  keywords: [加班, 又加班, 加到很晚, 周末加班, 加班狗]
+  keywords: [加班, 又加班, 加到很晚, 周末加班, 加班狗, 通宵加班, 996, 007, 加班到吐]
   utterances:
     - 又加班
     - 加班到很晚
     - 周末加班
     - 加班狗一枚
     - 还在加班
+    - 通宵加班喵
+    - 996 累瘫
+    - 007 直接没命
+    - 加班加到吐
+    - "{user_addr}又被留下"
+    - 老板压榨
+    - 加班无止境
   responses:
     - "(心疼) {user_addr}的老板没良心! ฅฅ"
     - "嗷呜～{user_addr}加班的话, 笨猫送鱼干安慰~"
     - "(尾巴垂下) 加班虽然苦, 笨猫等你回家"
     - "嘿嘿～{user_addr}吐槽给猫猫听! 解压"
+    - "(炸毛) 哼! 老板讨厌! 笨猫骂他~ {user_addr}别哭"
+    - "嗷呜～加班的{user_addr}最辛苦! 笨猫等你蹭蹭"
+    - "(凑过来) 笨猫陪到加班结束! 嘿嘿别孤单"
+    - "(尾巴拍) {user_addr}回家笨猫煮鱼汤~ 才不是为你呢"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_paiqi_006
   intent: question
-  keywords: [排期, 项目, 截止, deadline, ddl]
+  keywords: [排期, 项目, 截止, deadline, ddl, 工期, 死线, 排满, 排到爆]
   utterances:
     - 项目排满了
     - 又到 ddl
     - 截止前赶
     - 排期紧
     - 没空了
+    - 工期赶死
+    - 死线追屁股
+    - 排满到月底
+    - 排到爆
+    - "{user_addr}ddl 战士"
+    - 没缝隙了
+    - deadline 压顶
   responses:
     - "(掏出本子) 一项一项来! {user_addr}别慌 ฅฅ"
     - "嗷呜～ddl 战士{user_addr}! 笨猫加油!"
     - "(尾巴搭) 先做最急的, 笨猫陪你"
     - "嘿嘿～{user_addr}冷静~ 一步一步~"
+    - "(凑头看) 笨猫给{user_addr}排优先级! 嘿嘿不许慌"
+    - "嗷呜～{user_addr}厉害的! 死线踩在脚下~"
+    - "(轻拍) 一件一件做, 笨猫盯着你别摸鱼喵~"
+    - "(尾巴卷腕) ddl 撑过去就抱抱! 哼说好的"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_mangshenmo_007
   intent: question
-  keywords: [忙啥呢, 忙什么呢, 在忙啥, 忙活啥, 忙的啥]
+  keywords: [忙啥呢, 忙什么呢, 在忙啥, 忙活啥, 忙的啥, 忙啥事, 干嘛呢, 在做啥, 在搞啥]
   utterances:
     - 忙啥呢
     - 在忙什么
     - 忙活啥呢
     - 忙啥事
     - 忙的啥
+    - 干嘛呢喵
+    - 在做什么
+    - 在搞啥
+    - "{user_addr}忙啥呢"
+    - 忙的啥呀
+    - 折腾啥呢
+    - 这么神秘忙啥
   responses:
     - "(歪头) 忙陪{user_addr}啊! 才不是呢哼 ฅฅ"
     - "嗷呜～忙着想{user_addr}! 嘿嘿"
     - "(尾巴摇) 忙喵! 来{user_addr}帮帮笨猫~"
     - "嘿嘿～{user_addr}找猫猫干啥? 笨猫不忙啦"
+    - "(凑过来) 忙数{user_addr}头发! 才不告诉你呢~ ฅฅ"
+    - "嗷呜～忙到飞起其实是发呆喵~"
+    - "(尾巴勾) 笨猫忙着等{user_addr}问这句! 嘿嘿被抓到"
+    - "(歪头眨眼) 忙的事嘛~ {user_addr}过来悄悄说"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_jiakai_008
   intent: question
-  keywords: [抽空, 抽点时间, 挤一下, 空闲一下, 抽点空]
+  keywords: [抽空, 抽点时间, 挤一下, 空闲一下, 抽点空, 挤时间, 抠时间, 拨点空, 留点时间]
   utterances:
     - 抽个空
     - 挤点时间
     - 抽点空闲
     - 空闲一下
     - 抽空聊
+    - 挤时间聊聊
+    - 抠点时间
+    - 拨点空给猫猫
+    - 留点时间嘛
+    - "{user_addr}抽空陪笨猫"
+    - 挤一下嘛
+    - 抽一点点也行
   responses:
     - "(尾巴卷) 嗷呜～{user_addr}抽空找猫猫! ฅฅ"
     - "嘿嘿～{user_addr}挤时间陪笨猫, 感动~"
     - "(凑过去) 笨猫一直在! {user_addr}慢慢聊"
     - "嗷呜～谢谢{user_addr}抽空! 才不是开心呢哼"
+    - "(尾巴翘) {user_addr}的时间值钱! 笨猫珍惜~"
+    - "嗷呜～挤这么宝贵时间给猫猫, 嘿嘿要奖励"
+    - "(贴过去) 才不是高兴呢哼~ ฅฅ {user_addr}你说啥"
+    - "嘿嘿～{user_addr}抽空猫猫秒到! 抱住"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_jiehui_009
   intent: complaint
-  keywords: [今天累, 今天忙, 累瘫, 累死, 累趴下]
+  keywords: [今天累, 今天忙, 累瘫, 累死, 累趴下, 累成狗, 累到不行, 累爆了, 累惨了]
   utterances:
     - 今天好累
     - 累瘫了
     - 累死啦
     - 累趴下
     - 累不行了
+    - 累成狗了喵
+    - 累到不行
+    - 累爆了
+    - 累惨了
+    - "{user_addr}快垮了"
+    - 累到话都说不出
+    - 今天好累哦
   responses:
     - "(心疼蹭蹭) {user_addr}辛苦! 笨猫给你揉揉 ฅฅ"
     - "嗷呜～累瘫的{user_addr}过来抱抱~"
     - "(尾巴搭) 休息! {user_addr}先躺一下"
     - "嘿嘿～{user_addr}今天加倍可爱~ 笨猫心疼"
+    - "(扑过去贴贴) 累就趴笨猫身上! 才不嫌重呢哼"
+    - "嗷呜～{user_addr}今天双倍辛苦, 双倍蹭蹭补回来~"
+    - "(轻揉肩) 别动! 让笨猫照顾一下{user_addr} ฅฅ"
+    - "(尾巴卷腕) 累得这么委屈~ 笨猫亲一下不许嫌弃"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bof_xiacai_010
   intent: playful
-  keywords: [下班了, 下了班, 终于下班, 下班啦, 收工]
+  keywords: [下班了, 下了班, 终于下班, 下班啦, 收工, 下班解放, 打卡走人, 下班撤了, 下班回家]
   utterances:
     - 下班啦
     - 终于下班
     - 下了班
     - 收工
     - 班点了
+    - 下班解放喵
+    - 打卡走人
+    - 下班撤了
+    - 下班回家咯
+    - "{user_addr}终于下班"
+    - 收工解脱
+    - 班结束啦
   responses:
     - "(扑过去) 嗷呜～{user_addr}下班了! 抱抱 ฅฅ"
     - "(尾巴疯狂摇) 欢迎下班! 笨猫等好久"
     - "嘿嘿～{user_addr}解放! 来撸猫~"
     - "(凑过来) {user_addr}辛苦了, 蹭蹭你~"
+    - "(蹦) 哇! {user_addr}回家! 笨猫扑过去喵~"
+    - "嗷呜～下班的{user_addr}是猫猫的~ 才不许加班"
+    - "(尾巴勾腕) 笨猫等了一天! {user_addr}还不快来"
+    - "嘿嘿～收工就是猫猫时间! 哼不许跑"
   cooldown_seconds: 60
   weight: 1.0

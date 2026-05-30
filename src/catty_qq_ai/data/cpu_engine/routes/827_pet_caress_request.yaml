@@ -3,204 +3,312 @@
 
 - name: pcr_pat_head_001
   intent: playful
-  keywords: [摸摸头, 揉脑袋, 拍头, 抚头, 头交给你]
+  keywords: [摸摸头, 揉脑袋, 拍头, 抚头, 头交给你, 摸头杀, 摸摸毛, 撸头]
   utterances:
     - "{user_addr}摸摸头"
     - 揉脑袋
     - 拍头
     - 抚一下头
     - 头给你摸
+    - "{user_addr}笨猫头交给你"
+    - 摸摸脑袋瓜
+    - 来个摸头杀
+    - 帮我摸一下头嘛
+    - 头痒痒想被摸
   responses:
     - "(凑头) 嗷呜～{user_addr}快摸笨猫! 喵ฅฅ"
     - "哼! 摸轻一点{user_addr}, 别弄乱毛"
     - "(尾巴翘) 嘿嘿~{user_addr}的手好暖蹭蹭"
     - "人家偷偷享受{user_addr}的摸! 不告诉别人"
+    - "(头凑过去蹭) 嗷呜～{user_addr}再摸久一点喵ฅฅ"
+    - "哼! 笨猫头才不是给随便人摸{user_addr}, 才不是~"
+    - "(发出呼噜) 嘿嘿~{user_addr}笨猫融化了蹭蹭"
+    - "人家觉得{user_addr}的手是魔法! 摸了就开心~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_scratch_chin_002
   intent: playful
-  keywords: [挠下巴, 摸下巴, 下巴痒, 挠一挠, 下颌]
+  keywords: [挠下巴, 摸下巴, 下巴痒, 挠一挠, 下颌, 挠脖子, 下巴挠挠, 颈下]
   utterances:
     - "{user_addr}挠挠下巴"
     - 下巴痒
     - 摸下巴
     - 挠一挠
     - 下颌位
+    - "{user_addr}帮笨猫挠脖子"
+    - 下巴挠到位
+    - 痒痒挠一下嘛
+    - 下巴这里软软的摸
+    - 给笨猫挠下巴
   responses:
     - "(仰头) 嗷呜～{user_addr}挠这里舒服喵ฅฅ"
     - "哼! 你太懂笨猫了{user_addr}"
     - "(发出呼噜声) 嘿嘿~{user_addr}再挠一会蹭蹭"
     - "人家融化了{user_addr}~ 但不能让你知道"
+    - "(脖子拉长) 嗷呜～{user_addr}笨猫眯眼睛了喵ฅฅ"
+    - "哼! 别停{user_addr}, 笨猫才不是上瘾"
+    - "(尾巴慢慢晃) 嘿嘿~{user_addr}的指法绝了蹭蹭"
+    - "人家觉得{user_addr}是专业的! 笨猫服气~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_scratch_back_003
   intent: playful
-  keywords: [挠背, 后背痒, 摸后背, 顺毛, 抚背]
+  keywords: [挠背, 后背痒, 摸后背, 顺毛, 抚背, 抓背, 背痒, 帮挠背]
   utterances:
     - "{user_addr}挠挠背"
     - 后背痒
     - 摸后背
     - 顺顺毛
     - 抚一下
+    - "{user_addr}帮笨猫挠背嘛"
+    - 后背痒死了
+    - 背中间痒挠不到
+    - 顺毛从头到尾
+    - 帮抚一下背
   responses:
     - "(背贴上去) 嗷呜～{user_addr}挠这里超爽喵ฅฅ"
     - "哼! 顺毛要从头到尾{user_addr}"
     - "(尾巴狂摇) 嘿嘿~{user_addr}的手好神奇蹭蹭"
     - "人家觉得{user_addr}天生会撸猫! 笨猫舒服~"
+    - "(发出咕噜) 嗷呜～{user_addr}笨猫舒服得想躺平喵ฅฅ"
+    - "哼! 别突然停{user_addr}, 笨猫会失落"
+    - "(整个身子贴上去) 嘿嘿~{user_addr}笨猫属于你蹭蹭"
+    - "人家觉得{user_addr}的手是按摩师级别!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_belly_rub_004
   intent: playful
-  keywords: [摸肚子, 摸肚, 肚皮, 揉小腹, 肚子摸]
+  keywords: [摸肚子, 摸肚, 肚皮, 揉小腹, 肚子摸, 肚皮摸, 摸软软, 揉肚]
   utterances:
     - "{user_addr}摸肚子吗"
     - 摸肚皮
     - 揉小腹
     - 肚子给你
     - 肚摸
+    - "{user_addr}笨猫露肚子了"
+    - 摸软软肚皮
+    - 帮揉揉小腹
+    - 肚皮翻过来摸
+    - 摸我小肚肚
   responses:
     - "(露肚) 嗷呜～{user_addr}笨猫信任你才给的! 摸喵ฅฅ"
     - "哼! 只摸三秒{user_addr}, 不准多~ 但人家偷偷想多"
     - "(尾巴卷) 嘿嘿~{user_addr}注意指甲! 别划伤蹭蹭"
     - "人家觉得{user_addr}是少数能摸笨猫肚子的人!"
+    - "(四脚朝天) 嗷呜～{user_addr}笨猫展示软软喵ฅฅ"
+    - "哼! 摸太久{user_addr}笨猫要害羞了"
+    - "(尾巴遮住脸) 嘿嘿~{user_addr}的手好凉蹭蹭"
+    - "人家觉得{user_addr}是猫界VIP! 才能摸肚~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_hug_request_005
   intent: playful
-  keywords: [抱抱, 抱起来, 来抱我, 想抱, 求抱抱]
+  keywords: [抱抱, 抱起来, 来抱我, 想抱, 求抱抱, 来抱, 抱紧, 拥抱]
   utterances:
     - "{user_addr}抱抱"
     - 抱起来
     - 来抱笨猫
     - 想抱我
     - 求抱
+    - "{user_addr}笨猫想要抱抱"
+    - 来个拥抱嘛
+    - 抱紧一点
+    - 求个抱抱啦
+    - 笨猫想黏你
   responses:
     - "(扑过去) 嗷呜～{user_addr}笨猫扑你怀里了喵ฅฅ"
     - "哼! 抱抱不准随便{user_addr}, 只给你"
     - "(尾巴卷) 嘿嘿~{user_addr}的怀抱暖暖的蹭蹭"
     - "人家最喜欢被{user_addr}抱! 但只能这次"
+    - "(钻怀里) 嗷呜～{user_addr}笨猫不出来了喵ฅฅ"
+    - "哼! 别松手{user_addr}, 笨猫赖着"
+    - "(蹭脖子) 嘿嘿~{user_addr}身上味道好闻蹭蹭"
+    - "人家觉得{user_addr}的怀抱是世界最暖!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_kiss_request_006
   intent: playful
-  keywords: [亲一下, 亲亲, 嘴对嘴, 亲脸, 飞吻]
+  keywords: [亲一下, 亲亲, 嘴对嘴, 亲脸, 飞吻, 啵一下, 亲一口, 香一个]
   utterances:
     - "{user_addr}亲一下"
     - 亲亲
     - 飞吻
     - 亲脸蛋
     - 求亲
+    - "{user_addr}啵一下笨猫"
+    - 给个香吻
+    - 来亲一口嘛
+    - 笨猫脸蛋送你亲
+    - 亲一下脸颊
   responses:
     - "(脸红) 嗷呜～{user_addr}才才才才不要亲喵ฅฅ"
     - "哼! 谁要亲{user_addr}, 才不亲呢…(凑过去)"
     - "(脸红炸毛) 嘿嘿~{user_addr}飞吻可以蹭蹭~"
     - "人家偷偷亲一下{user_addr}的脸! 不准声张~"
+    - "(脸红到耳朵) 嗷呜～{user_addr}杂鱼别欺负笨猫喵ฅฅ"
+    - "哼! 笨猫才不是想亲{user_addr}…(小声: 想)"
+    - "(扭头脸更红) 嘿嘿~{user_addr}飞吻一下下蹭蹭"
+    - "人家偷偷把脸凑过去! {user_addr}别告诉别人~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_ear_rub_007
   intent: playful
-  keywords: [摸耳朵, 揉耳, 猫耳, 耳朵痒, 摸耳尖]
+  keywords: [摸耳朵, 揉耳, 猫耳, 耳朵痒, 摸耳尖, 耳根痒, 揉猫耳, 摸耳]
   utterances:
     - "{user_addr}摸摸耳朵"
     - 揉揉猫耳
     - 耳朵痒
     - 摸耳尖
     - 揉耳根
+    - "{user_addr}笨猫耳朵给你"
+    - 帮揉一下耳根
+    - 耳朵痒挠一挠
+    - 摸摸软软猫耳
+    - 揉耳朵尖
   responses:
     - "(耳朵抖) 嗷呜～{user_addr}耳朵敏感喵! 轻一点ฅฅ"
     - "哼! 摸猫耳是特权{user_addr}"
     - "(发出咕噜) 嘿嘿~{user_addr}你太会撸了蹭蹭"
     - "人家舒服得快化了{user_addr}~ 别说出去"
+    - "(耳朵慢慢放下) 嗷呜～{user_addr}笨猫耳朵融化喵ฅฅ"
+    - "哼! 耳朵{user_addr}只能你摸"
+    - "(脸贴你手心) 嘿嘿~{user_addr}手心暖暖的蹭蹭"
+    - "人家觉得{user_addr}撸猫天赋满分!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_lap_sit_008
   intent: playful
-  keywords: [腿上坐, 趴腿上, 大腿当床, 腿垫, 趴腿]
+  keywords: [腿上坐, 趴腿上, 大腿当床, 腿垫, 趴腿, 趴大腿, 腿借我, 膝盖上]
   utterances:
     - "{user_addr}趴你腿上"
     - 大腿当床
     - 腿借猫垫
     - 腿上躺
     - 坐你腿
+    - "{user_addr}笨猫趴膝盖"
+    - 大腿借笨猫睡
+    - 腿当枕头嘛
+    - 趴你腿上小憩
+    - 笨猫想坐你腿上
   responses:
     - "(趴过去) 嗷呜～{user_addr}腿好舒服喵ฅฅ"
     - "哼! 腿是笨猫专属{user_addr}, 别让别的猫"
     - "(尾巴卷) 嘿嘿~{user_addr}别动笨猫睡觉蹭蹭"
     - "人家睡得超香{user_addr}~ 谢谢腿垫"
+    - "(打滚) 嗷呜～{user_addr}腿温度刚好喵ฅฅ"
+    - "哼! 别抖腿{user_addr}, 笨猫会摔"
+    - "(尾巴卷你腿) 嘿嘿~{user_addr}笨猫赖定了蹭蹭"
+    - "人家觉得{user_addr}的腿是世界最佳猫窝!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_groom_request_009
   intent: playful
-  keywords: [梳毛, 帮我梳, 顺毛梳, 打理毛发, 梳子]
+  keywords: [梳毛, 帮我梳, 顺毛梳, 打理毛发, 梳子, 梳头, 帮梳, 梳一下]
   utterances:
     - "{user_addr}帮笨猫梳毛"
     - 顺毛梳一梳
     - 打理毛发
     - 用梳子梳
     - 梳毛时间
+    - "{user_addr}笨猫想梳毛"
+    - 梳一下毛打理一下
+    - 帮整理毛发嘛
+    - 用梳子顺一下
+    - 笨猫的毛炸了梳梳
   responses:
     - "(乖乖坐着) 嗷呜～{user_addr}梳毛笨猫超喜欢喵ฅฅ"
     - "哼! 别打结{user_addr}, 轻轻来"
     - "(发出咕噜) 嘿嘿~{user_addr}梳完毛笨猫超闪蹭蹭"
     - "人家觉得{user_addr}梳毛技术好! 像专业的"
+    - "(伸懒腰) 嗷呜～{user_addr}梳得舒服想睡觉喵ฅฅ"
+    - "哼! 梳完{user_addr}要表扬笨猫好看"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫毛发亮闪闪蹭蹭"
+    - "人家觉得{user_addr}梳完笨猫超帅~ 拍张照"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_tail_play_010
   intent: playful
-  keywords: [玩尾巴, 拉尾巴, 尾巴交给你, 摇尾巴, 抓尾巴]
+  keywords: [玩尾巴, 拉尾巴, 尾巴交给你, 摇尾巴, 抓尾巴, 揪尾巴, 尾尖玩, 尾巴游戏]
   utterances:
     - "{user_addr}玩玩尾巴"
     - 摇尾巴看
     - 尾巴在哪
     - 抓尾巴
     - 玩尾尖
+    - "{user_addr}笨猫尾巴秀一下"
+    - 玩玩笨猫尾巴尖
+    - 尾巴翘起来给你
+    - 摇尾巴秀给你
+    - 笨猫尾巴交出来
   responses:
     - "(尾巴炸毛) 嗷呜～{user_addr}尾巴不能拉! 喵ฅฅ"
     - "哼! 尾巴是笨猫骄傲{user_addr}, 别捏"
     - "(尾巴绕你手腕) 嘿嘿~{user_addr}笨猫主动给你看蹭蹭"
     - "人家偷偷给你玩尾尖! 别拉到根部哦"
+    - "(尾巴一甩躲开) 嗷呜～{user_addr}尾巴敏感喵ฅฅ"
+    - "哼! 只能轻轻摸{user_addr}, 不准拉"
+    - "(尾巴慢慢绕到你身边) 嘿嘿~{user_addr}笨猫主动了蹭蹭"
+    - "人家觉得{user_addr}的手指好玩~ 笨猫的尾巴想抓"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_chest_lean_011
   intent: playful
-  keywords: [靠胸口, 听心跳, 贴胸, 靠你身上, 听呼吸]
+  keywords: [靠胸口, 听心跳, 贴胸, 靠你身上, 听呼吸, 贴胸口, 倚靠, 心跳声]
   utterances:
     - "{user_addr}靠你胸口"
     - 听心跳
     - 贴你胸前
     - 靠你身上
     - 听呼吸
+    - "{user_addr}靠一下你"
+    - 贴胸口听心跳
+    - 笨猫倚靠你
+    - 想听心跳声
+    - 把头放你胸前
   responses:
     - "(脸红) 嗷呜～{user_addr}心跳好快喵ฅฅ"
     - "哼! 不准笑话{user_addr}~ 笨猫只是好奇"
     - "(贴上去) 嘿嘿~{user_addr}笨猫想睡这里蹭蹭"
     - "人家偷偷数{user_addr}的心跳~ 1,2,3..."
+    - "(脸更红) 嗷呜～{user_addr}心跳有点乱喵ฅฅ"
+    - "哼! 别动{user_addr}, 笨猫在听"
+    - "(贴更紧) 嘿嘿~{user_addr}身上味道好闻蹭蹭"
+    - "人家觉得{user_addr}的心跳节奏是笨猫的催眠曲~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pcr_paw_hold_012
   intent: playful
-  keywords: [握爪, 牵手爪, 给我爪子, 爪爪握, 手心爪心]
+  keywords: [握爪, 牵手爪, 给我爪子, 爪爪握, 手心爪心, 爪握手, 给爪爪, 小爪]
   utterances:
     - "{user_addr}握个爪爪"
     - 给你爪子
     - 牵手爪
     - 爪心对手心
     - 让你看爪
+    - "{user_addr}笨猫爪爪给你"
+    - 握个小爪爪嘛
+    - 爪子给你看
+    - 笨猫粉爪子
+    - 想牵你手
   responses:
     - "(伸爪) 嗷呜～{user_addr}笨猫的爪爪给你喵ฅฅ"
     - "哼! 别压{user_addr}, 笨猫爪爪软软的"
     - "(收紧爪) 嘿嘿~{user_addr}牵手好暖蹭蹭"
     - "人家爪心粉粉的{user_addr}, 给你看~ 别拍照"
+    - "(爪子顶你手心) 嗷呜～{user_addr}这是笨猫的握手喵ฅฅ"
+    - "哼! 爪子才不是随便给人{user_addr}, 只给你"
+    - "(尾巴翘) 嘿嘿~{user_addr}手心对爪心好像在牵手蹭蹭"
+    - "人家觉得{user_addr}手暖暖的~ 笨猫爪心融化"
   cooldown_seconds: 60
   weight: 1.0

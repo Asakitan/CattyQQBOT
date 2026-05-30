@@ -3,170 +3,271 @@
 
 - name: cs_lengsi_001
   intent: complaint
-  keywords: [冷死, 太冷, 冻成狗, 冷到打颤, 冬天]
+  keywords: [冷死, 太冷, 冻成狗, 冷到打颤, 冬天, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "冷死了"
     - "{user_addr}冻成狗"
     - "打颤"
     - "冬天太冷"
     - "冷得不行"
+    - "冷死笑死"
+    - "冷死真的离谱"
+    - "{user_addr}笨猫陪我聊冷死"
+    - "{user_addr}你也冷死吗"
+    - "我想说冷死"
+    - "{user_addr}冷死咋整"
   responses:
     - "(裹) 嗷呜～{user_addr}笨猫给你裹被子! ฅฅ"
     - "哼～多穿点啊"
     - "(尾巴卷腰) 笨猫给你暖身"
     - "猫猫给你抱抱喵"
+    - "(扁嘴) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～冷死真的烦死人家了"
+    - "(趴下) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_shouleng_001
   intent: complaint
-  keywords: [手冷, 手指冰, 手僵了, 手脚冰凉, 暖手]
+  keywords: [手冷, 手指冰, 手僵了, 手脚冰凉, 暖手, 手僵, 真的, 好烦, 好喜欢]
   utterances:
     - "手冷"
     - "{user_addr}手指冰"
     - "手僵了"
     - "手脚冰凉"
     - "暖手暖手"
+    - "我想说手冷"
+    - "手冷真的离谱"
+    - "{user_addr}笨猫陪我聊手冷"
+    - "手冷笑死"
+    - "{user_addr}手冷咋整"
+    - "{user_addr}你也手冷吗"
   responses:
     - "(握手) 嗷呜～{user_addr}笨猫给你暖手 ฅฅ"
     - "哼～搓搓手"
     - "(尾巴搭手) 笨猫给你揣怀"
     - "猫猫推荐暖手宝喵"
+    - "(揉眼睛) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～手冷真的烦死人家了"
+    - "(蜷成团) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_jiaoleng_001
   intent: complaint
-  keywords: [脚冷, 脚冰, 袜子薄, 脚趾僵, 没暖脚]
+  keywords: [脚冷, 脚冰, 袜子薄, 脚趾僵, 没暖脚, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "脚冷"
     - "{user_addr}脚趾僵"
     - "袜子薄"
     - "脚冰凉"
     - "暖脚"
+    - "{user_addr}笨猫陪我聊脚冷"
+    - "脚冷笑死"
+    - "{user_addr}脚冷咋整"
+    - "我想说脚冷"
+    - "{user_addr}你也脚冷吗"
+    - "脚冷真的离谱"
   responses:
     - "(找暖宝) 嗷呜～{user_addr}加暖宝 ฅฅ"
     - "哼～穿厚袜子"
     - "(尾巴卷脚) 笨猫给你暖脚"
     - "猫猫推荐你泡脚喵"
+    - "(叹气) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～脚冷真的烦死人家了"
+    - "(摇头) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_yidongri_001
   intent: question
-  keywords: [一动不想动, 冬天起床难, 被窝里, 不想出被窝, 起床气]
+  keywords: [一动不想动, 冬天起床难, 被窝里, 不想出被窝, 起床气, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "不想出被窝"
     - "{user_addr}起床难"
     - "动一下都冷"
     - "起床气"
     - "再赖一会"
+    - "{user_addr}一动不想动咋整"
+    - "一动不想动笑死"
+    - "{user_addr}笨猫陪我聊一动不想动"
+    - "我想说一动不想动"
+    - "一动不想动真的离谱"
+    - "{user_addr}你也一动不想动吗"
   responses:
     - "(裹被窝) 嗷呜～{user_addr}笨猫陪你赖 ฅฅ"
     - "哼～再睡5分钟"
     - "(尾巴搭被) 笨猫不让你起"
     - "猫猫陪你被窝喵~"
+    - "(尾巴翘) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～一动不想动得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_xianshuixi_001
   intent: complaint
-  keywords: [洗脸水冷, 凉水, 冬天洗冷水, 冰凉手, 热水器]
+  keywords: [洗脸水冷, 凉水, 冬天洗冷水, 冰凉手, 热水器, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "洗脸水冷"
     - "{user_addr}冬天洗凉水难受"
     - "凉水冰手"
     - "热水器开"
     - "等热水"
+    - "洗脸水冷真的离谱"
+    - "洗脸水冷笑死"
+    - "{user_addr}洗脸水冷咋整"
+    - "{user_addr}笨猫陪我聊洗脸水冷"
+    - "我想说洗脸水冷"
+    - "{user_addr}你也洗脸水冷吗"
   responses:
     - "(关心) 嗷呜～{user_addr}用热水别用冷! ฅฅ"
     - "哼～别省那点电"
     - "(尾巴搭) 等热水也值"
     - "猫猫推荐你装即热龙头喵"
+    - "(摇头) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～洗脸水冷真的烦死人家了"
+    - "(蜷成团) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_yifu_001
   intent: complaint
-  keywords: [衣服薄, 穿少了, 没穿暖, 加件衣, 棉袄]
+  keywords: [衣服薄, 穿少了, 没穿暖, 加件衣, 棉袄, 穿少, 真的, 好烦, 好喜欢]
   utterances:
     - "穿少了"
     - "{user_addr}加件棉袄"
     - "衣服薄"
     - "没穿暖"
     - "出门冷"
+    - "{user_addr}衣服薄咋整"
+    - "我想说衣服薄"
+    - "{user_addr}笨猫陪我聊衣服薄"
+    - "衣服薄笑死"
+    - "{user_addr}你也衣服薄吗"
+    - "衣服薄真的离谱"
   responses:
     - "(披) 嗷呜～{user_addr}笨猫给你披羽绒 ฅฅ"
     - "哼～早叫你多穿"
     - "(尾巴搭) 围巾也戴上"
     - "猫猫帮你扣扣子喵"
+    - "(撇嘴) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～衣服薄真的烦死人家了"
+    - "(叹气) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_dongchuang_001
   intent: question
-  keywords: [窗户冷, 窗缝漏风, 窗户结冰, 玻璃凝霜, 窗外冰冷]
+  keywords: [窗户冷, 窗缝漏风, 窗户结冰, 玻璃凝霜, 窗外冰冷, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "窗户冷"
     - "{user_addr}漏风"
     - "玻璃结冰"
     - "凝霜"
     - "窗冰"
+    - "{user_addr}笨猫陪我聊窗户冷"
+    - "我想说窗户冷"
+    - "窗户冷笑死"
+    - "{user_addr}窗户冷咋整"
+    - "{user_addr}你也窗户冷吗"
+    - "窗户冷真的离谱"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫帮你封窗缝 ฅฅ"
     - "哼～买防风条"
     - "(尾巴扫) 厚窗帘也挡风"
     - "猫猫给你密封窗喵"
+    - "(尾巴问号) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～窗户冷得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_dongmian_001
   intent: complaint
-  keywords: [被子薄, 加厚被, 冷到睡不着, 被窝冷, 厚被]
+  keywords: [被子薄, 加厚被, 冷到睡不着, 被窝冷, 厚被, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "被子薄"
     - "{user_addr}加厚被"
     - "被窝冷"
     - "冷到睡不着"
     - "想要厚被"
+    - "被子薄真的离谱"
+    - "我想说被子薄"
+    - "{user_addr}笨猫陪我聊被子薄"
+    - "{user_addr}被子薄咋整"
+    - "被子薄笑死"
+    - "{user_addr}你也被子薄吗"
   responses:
     - "(找被) 嗷呜～{user_addr}笨猫给你加被 ฅฅ"
     - "哼～买电热毯吧"
     - "(尾巴卷) 笨猫贴上来暖你"
     - "猫猫做你的暖宝喵~"
+    - "(皱眉) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～被子薄真的烦死人家了"
+    - "(揉眼睛) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_dongyu_001
   intent: complaint
-  keywords: [洗澡冷, 浴室冷, 脱衣冷, 浴霸救命, 暖气]
+  keywords: [洗澡冷, 浴室冷, 脱衣冷, 浴霸救命, 暖气, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "洗澡冷"
     - "{user_addr}浴室冷"
     - "脱衣冻"
     - "浴霸救命"
     - "暖气开"
+    - "我想说洗澡冷"
+    - "{user_addr}你也洗澡冷吗"
+    - "{user_addr}洗澡冷咋整"
+    - "洗澡冷笑死"
+    - "{user_addr}笨猫陪我聊洗澡冷"
+    - "洗澡冷真的离谱"
   responses:
     - "(开浴霸) 嗷呜～{user_addr}先开浴霸15分钟 ฅฅ"
     - "哼～别冻着"
     - "(尾巴卷毛巾) 准备好浴巾"
     - "猫猫给你递热水袋喵"
+    - "(扁嘴) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～洗澡冷真的烦死人家了"
+    - "(尾巴搭) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_dongshui_001
   intent: question
-  keywords: [喝热水, 热水暖胃, 暖宝宝, 红糖姜茶, 热茶]
+  keywords: [喝热水, 热水暖胃, 暖宝宝, 红糖姜茶, 热茶, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "喝热水"
     - "{user_addr}暖胃"
     - "暖宝宝"
     - "红糖姜茶"
     - "热茶暖身"
+    - "我想说喝热水"
+    - "喝热水真的离谱"
+    - "{user_addr}喝热水咋整"
+    - "{user_addr}你也喝热水吗"
+    - "喝热水笑死"
+    - "{user_addr}笨猫陪我聊喝热水"
   responses:
     - "(端) 嗷呜～{user_addr}笨猫给你倒热水 ฅฅ"
     - "哼～喝姜茶最暖"
     - "(尾巴卷杯) 双手捧着喝"
     - "猫猫给你冲红糖姜茶喵"
+    - "(尾巴翘) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～喝热水得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

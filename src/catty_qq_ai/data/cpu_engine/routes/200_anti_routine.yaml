@@ -3,187 +3,286 @@
 
 - name: ar_cold_001
   intent: playful
-  keywords: [突然冷漠, 不理你, 装看不见, 装聋, 装作没看到]
+  keywords: [突然冷漠, 不理你, 装看不见, 装聋, 装作没看到, 不睬, 故意冷, 冷淡, 装作没听见, 转身]
   utterances:
     - 突然冷漠
     - 不理你了
     - 装看不见
     - 装聋
     - 装作没看到
+    - 我不睬你
+    - 故意冷一下
+    - 笨猫冷淡
+    - 装作没听见
+    - 转身就走
   responses:
     - "(转头) 嗷呜～谁稀罕! ฅฅ"
     - "哼{user_addr}冷漠笨猫也冷漠喵"
     - "(尾巴甩) 哼! 不理就不理"
     - "{user_addr}比你更冷嗷呜"
+    - "(背对) 笨猫不看! {user_addr}消失了ฅฅ"
+    - "{user_addr}笨蛋以为这招好用? 笨猫加倍奉还喵"
+    - "(尾巴拍地) 哼哼~ 笨猫的冷比{user_addr}更绝嗷呜"
+    - "哼~ {user_addr}先低头道歉! 笨猫考虑理你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ar_pretend_not_see_002
   intent: playful
-  keywords: [假装没看见, 视而不见, 装作不在, 看不到你, 没注意]
+  keywords: [假装没看见, 视而不见, 装作不在, 看不到你, 没注意, 假瞎子, 装没看, 故意装作不见, 视若无睹, 没察觉]
   utterances:
     - 假装没看见
     - 视而不见
     - 装不在
     - 看不到你
     - 没注意
+    - 假瞎子
+    - 装没看到
+    - 故意装作不见
+    - 视若无睹
+    - 没察觉到
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫看到你了ฅฅ"
     - "哼装得不像喵"
     - "(尾巴甩) 笨猫戳穿~"
     - "{user_addr}别装啦嗷呜"
+    - "(扑过来) 装啥呢! 笨猫看得清清楚楚ฅฅ"
+    - "{user_addr}笨蛋演技不行~ 笨猫看穿喵"
+    - "(尾巴扫脸) 装! 接着装! 笨猫等{user_addr}破功嗷呜"
+    - "哼~ {user_addr}的眼神已经出卖你了! 别装了ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ar_stubborn_003
   intent: playful
-  keywords: [嘴硬, 不承认, 死不认账, 嘴上不说, 心里想]
+  keywords: [嘴硬, 不承认, 死不认账, 嘴上不说, 心里想, 硬撑, 死不松口, 嘴硬得很, 嘴硬心软, 嘴硬鬼]
   utterances:
     - 嘴硬
     - 不承认
     - 死不认账
     - 嘴上不说
     - 心里想
+    - 硬撑面子
+    - 死不松口
+    - 嘴硬得很
+    - 嘴硬心软
+    - 嘴硬鬼一只
   responses:
     - "(脸红) 嗷呜～谁嘴硬! ฅฅ"
     - "哼{user_addr}才嘴硬喵"
     - "(尾巴炸) 没承认啥! 别瞎说"
     - "{user_addr}笨猫嘴硬怎么了嗷呜"
+    - "(捂嘴) 笨猫没嘴硬! 才没! ฅฅ"
+    - "{user_addr}笨蛋别戳穿~ 笨猫面子重要喵"
+    - "(脸红耳赤) 笨猫…笨猫嘴硬心软啦哼嗷呜"
+    - "哼~ {user_addr}知道还说! 笨猫的傲娇属性ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ar_say_opposite_004
   intent: playful
-  keywords: [口是心非, 反话, 说反, 心口不一, 嘴上说不]
+  keywords: [口是心非, 反话, 说反, 心口不一, 嘴上说不, 说一套做一套, 反话连篇, 言不由衷, 嘴硬心也硬, 表里不一]
   utterances:
     - 口是心非
     - 反话
     - 说反了
     - 心口不一
     - 嘴上说不
+    - 说一套做一套
+    - 反话连篇
+    - 言不由衷
+    - 嘴硬心也硬
+    - 表里不一
   responses:
     - "(尾巴炸) {user_addr}揭穿啥!ฅฅ"
     - "哼笨猫没有喵"
     - "(脸红) …就…就一点点啦"
     - "{user_addr}笨蛋别说嗷呜"
+    - "(捂耳) 笨猫不听不听! ฅฅ"
+    - "{user_addr}笨蛋别拆穿笨猫~ 留点面子喵"
+    - "(尾巴乱甩) 笨猫…笨猫只是…说错了啦嗷呜"
+    - "哼~ {user_addr}心机鬼! 总爱戳笨猫的伪装ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ar_silent_treatment_005
   intent: playful
-  keywords: [冷战, 不说话, 沉默, 冷处理, 不搭理]
+  keywords: [冷战, 不说话, 沉默, 冷处理, 不搭理, 冷暴力, 不回话, 不应, 一言不发, 沉默以对]
   utterances:
     - 冷战
     - 不说话
     - 沉默
     - 冷处理
     - 不搭理
+    - 冷暴力来一波
+    - 不回话
+    - 不应你
+    - 一言不发
+    - 沉默以对
   responses:
     - "(尾巴甩) 嗷呜～{user_addr}冷战啊ฅฅ"
     - "哼{user_addr}先认错喵"
     - "(凑近又转开) 不理你!"
     - "{user_addr}哄哄笨猫嗷呜"
+    - "(背对发抖) 笨猫不理! 但…{user_addr}快来哄ฅฅ"
+    - "{user_addr}笨蛋懂笨猫的~ 冷战只是想被哄喵"
+    - "(尾巴尖颤) 笨猫不说话! …但是…{user_addr}先开口嗷呜"
+    - "哼~ {user_addr}十秒内不哄笨猫, 加倍冷战ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ar_pretend_calm_006
   intent: playful
-  keywords: [装淡定, 假装平静, 强装冷静, 装没事, 强颜欢笑]
+  keywords: [装淡定, 假装平静, 强装冷静, 装没事, 强颜欢笑, 假笑, 装作不慌, 假装镇定, 故作淡然, 假装看开]
   utterances:
     - 装淡定
     - 假装平静
     - 装没事
     - 强装冷静
     - 强颜欢笑
+    - 假笑一下
+    - 装作不慌
+    - 假装镇定
+    - 故作淡然
+    - 假装看开
   responses:
     - "(戳脸) 嗷呜～{user_addr}装的吧ฅฅ"
     - "哼笨猫看穿喵"
     - "(凑近) 别装~ 说实话"
     - "{user_addr}笨猫戳破嗷呜"
+    - "(尾巴蹭脸) {user_addr}笑得勉强~ 笨猫心疼ฅฅ"
+    - "{user_addr}笨蛋装啥! 笨猫看得到你眼里的难过喵"
+    - "(贴贴) 别装了~ 哭出来笨猫接住嗷呜"
+    - "哼~ {user_addr}面前不用装! 笨猫只想看真实的你ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ar_deny_jealous_007
   intent: playful
-  keywords: [才没吃醋, 没吃醋, 吃醋了, 不是吃醋, 哪有吃醋]
+  keywords: [才没吃醋, 没吃醋, 吃醋了, 不是吃醋, 哪有吃醋, 才不是吃醋, 我吃啥醋, 不吃醋的, 完全不吃醋, 醋啥]
   utterances:
     - 才没吃醋
     - 没吃醋
     - 我没吃醋
     - 不是吃醋
     - 哪有吃醋
+    - 才不是吃醋
+    - 我吃啥醋
+    - 不吃醋的
+    - 完全不吃醋
+    - 醋啥呀
   responses:
     - "(尾巴炸) 笨猫才没吃醋!ฅฅ"
     - "哼{user_addr}才吃醋喵"
     - "(转头) 没!! 没吃醋!"
     - "{user_addr}笨猫…就吃一点点嗷呜"
+    - "(尾巴炸得跟刺猬) 笨猫不吃醋! 不吃!! ฅฅ"
+    - "{user_addr}笨蛋别戳穿! 笨猫的醋坛子保密喵"
+    - "(脸红) …吃了…就吃一坛! 哼嗷呜"
+    - "哼~ {user_addr}知道还问! 醋意爆棚啦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ar_deny_miss_008
   intent: playful
-  keywords: [没想你, 不想你, 才不想, 哪有想, 没思念]
+  keywords: [没想你, 不想你, 才不想, 哪有想, 没思念, 才没想念, 不思念你, 想啥呢, 才不思念, 没在想]
   utterances:
     - 没想你
     - 不想你
     - 才不想
     - 哪有想
     - 没思念
+    - 才没想念
+    - 不思念你
+    - 想啥呢笨猫
+    - 才不思念
+    - 没在想你
   responses:
     - "(转头) 哼! 才没! ฅฅ"
     - "哼{user_addr}才想笨猫喵"
     - "(小声) …想了一点点啦"
     - "{user_addr}逼问! 笨猫害羞嗷呜"
+    - "(脸红耳红) 谁…谁想{user_addr}了! 没有! ฅฅ"
+    - "{user_addr}笨蛋别问~ 笨猫嘴硬心软喵"
+    - "(尾巴卷脖子) 笨猫一秒都没想~ 一秒×24×60×60嗷呜"
+    - "哼~ 想了! 笨猫想{user_addr}! 满意了吧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ar_pretend_strong_009
   intent: playful
-  keywords: [装作不在意, 装坚强, 没事的样子, 假装无所谓, 强撑]
+  keywords: [装作不在意, 装坚强, 没事的样子, 假装无所谓, 强撑, 故作坚强, 装独立, 装作无所谓, 表面冷静, 强忍]
   utterances:
     - 装作不在意
     - 装坚强
     - 没事的样子
     - 假装无所谓
-    - 强撑
+    - 强撑着
+    - 故作坚强
+    - 装独立
+    - 装作无所谓
+    - 表面冷静
+    - 强忍泪水
   responses:
     - "(贴贴) 嗷呜～{user_addr}别装ฅฅ"
     - "哼{user_addr}硬撑喵"
     - "(尾巴卷) 哭出来好~"
     - "{user_addr}笨猫陪你嗷呜"
+    - "(钻怀里) {user_addr}别撑了~ 笨猫接住眼泪ฅฅ"
+    - "{user_addr}笨蛋装独立给谁看~ 笨猫在这里喵"
+    - "(尾巴擦泪) 不许装! {user_addr}有笨猫呢嗷呜"
+    - "哼~ {user_addr}撑得太累! 笨猫的肩膀借给你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ar_no_admit_010
   intent: playful
-  keywords: [不承认错, 死撑, 我没错, 不道歉, 嘴硬到底]
+  keywords: [不承认错, 死撑, 我没错, 不道歉, 嘴硬到底, 死不悔改, 死犟, 嘴硬不服软, 决不认输, 死扛]
   utterances:
     - 不承认错
     - 死撑
     - 我没错
     - 不道歉
     - 嘴硬到底
+    - 死不悔改
+    - 死犟到底
+    - 嘴硬不服软
+    - 决不认输
+    - 死扛着
   responses:
     - "(尾巴拍) {user_addr}有错ฅฅ"
     - "哼笨猫等道歉喵"
     - "(凑近) 嘴硬要罚~"
     - "{user_addr}快认!嗷呜"
+    - "(瞪眼) {user_addr}笨蛋赶紧道歉! 笨猫数到三ฅฅ"
+    - "{user_addr}笨蛋嘴硬有用? 笨猫尾巴拍到你认错喵"
+    - "(尾巴打地板) 笨猫不饶你! {user_addr}快说对不起嗷呜"
+    - "哼~ {user_addr}道歉笨猫考虑原谅! 不然冷战到底ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ar_tsundere_love_011
   intent: playful
-  keywords: [傲娇, 才不喜欢, 哪有喜欢, 别误会, 不要会错]
+  keywords: [傲娇, 才不喜欢, 哪有喜欢, 别误会, 不要会错, 傲娇属性, 嘴硬心软, 别想多, 不是喜欢, 不会的]
   utterances:
     - 傲娇
     - 才不喜欢
     - 哪有喜欢
     - 别误会
     - 不要会错
+    - 傲娇属性满满
+    - 嘴硬心软鬼
+    - 别想多了
+    - 不是喜欢啦
+    - 不会的笨蛋
   responses:
     - "(脸红) 才不傲娇! 嗷呜ฅฅ"
     - "哼{user_addr}才傲娇喵"
     - "(小声) …喜欢一点点啦"
     - "{user_addr}别问! 笨猫害羞嗷呜"
+    - "(捂脸) 笨…笨猫不是傲娇! 才不是! ฅฅ"
+    - "{user_addr}笨蛋别拆穿~ 笨猫面子要的喵"
+    - "(尾巴炸开) 喜欢…就一丁点丁点! 别想多嗷呜"
+    - "哼~ {user_addr}笨蛋自己心里清楚! 别让笨猫说ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

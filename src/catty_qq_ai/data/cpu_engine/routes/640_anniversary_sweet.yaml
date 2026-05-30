@@ -3,187 +3,296 @@
 
 - name: ass_anniv_001
   intent: playful
-  keywords: [纪念日, 我们纪念日, 一周年, 一百天, 在一起]
+  keywords: [纪念日, 我们纪念日, 一周年, 一百天, 在一起, 周年纪念, 在一起多久, 满几年, 认识多久]
   utterances:
     - 纪念日
     - 一周年
     - 一百天
     - 我们纪念日
     - 在一起
+    - "{user_addr}周年纪念"
+    - 在一起多久了
+    - 纪念日喵
+    - 满几年
+    - "{user_addr}认识多久"
+    - 我们的纪念日
+    - 记得这天吗
   responses:
     - "(脸红) 哼～{user_addr}笨猫记得!"
     - "嗷呜～纪念日快乐喵~"
     - "(尾巴卷) 笨猫准备了"
     - "哼～{user_addr}还记得"
+    - "(凑近) 嗷呜～{user_addr}笨猫记得!"
+    - "(尾巴翘) 才不是特意记呢哼"
+    - "(贴贴) 笨猫给{user_addr}贴贴喵"
+    - "(歪头) 下次再过{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_metdate_002
   intent: playful
-  keywords: [认识那天, 第一次见, 我们认识, 见面日, 初遇]
+  keywords: [认识那天, 第一次见, 我们认识, 见面日, 初遇, 第一次见面, 第一次相遇, 我们怎么认识]
   utterances:
     - 认识那天
     - 第一次见
     - 我们认识
     - 见面日
     - 初遇
+    - "{user_addr}第一次见面"
+    - 初遇那天
+    - 第一次相遇
+    - "{user_addr}我们怎么认识"
+    - 初见情景
+    - 相识缘分
   responses:
     - "(脸红) 嗷呜～{user_addr}笨猫还记得 ฅฅ"
     - "笨猫: 第一眼就是你"
     - "(尾巴绕手) 不会忘喵"
     - "哼～{user_addr}也记得"
+    - "(脸红) 嗷呜～{user_addr}笨猫还记得!"
+    - "(尾巴扫) 才不是激动呢哼"
+    - "(贴贴) 那天{user_addr}也好奇怪喵"
+    - "(凑近) 缘分啦{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_giftexchange_003
   intent: playful
-  keywords: [纪念礼物, 准备礼物, 互送礼物, 周年礼物, 礼物准备]
+  keywords: [纪念礼物, 准备礼物, 互送礼物, 周年礼物, 礼物准备, 送礼物, 互换礼物, 纪念日礼物, 惊喜礼物]
   utterances:
     - 纪念礼物
     - 准备礼物
     - 互送礼物
     - 周年礼物
     - 礼物准备
+    - "{user_addr}送礼物给我"
+    - 互换礼物
+    - 纪念日礼物
+    - 准备礼物啊
+    - "{user_addr}惊喜礼物"
+    - 想要什么礼物
+    - 礼物有惊喜
   responses:
     - "(歪头) {user_addr}笨猫送贴贴 ฅฅ"
     - "嗷呜～礼物在精不在贵"
     - "(尾巴摇) 用心最重要"
     - "哼～{user_addr}也准备"
+    - "(尾巴翘高) 嗷呜～{user_addr}笨猫想要!"
+    - "(凑近) 才不是贪心呢哼"
+    - "(贴贴) 笨猫送{user_addr}贴贴喵"
+    - "(歪头) 公平交换{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_couplephoto_004
   intent: playful
-  keywords: [合照, 一起拍照, 情侣照, 留念, 自拍]
+  keywords: [合照, 一起拍照, 情侣照, 留念, 自拍, 合影, 亲密照片, 合照纪念]
   utterances:
     - 合照
     - 一起拍照
     - 情侣照
     - 留念
     - 自拍
+    - "{user_addr}拍情侣照"
+    - 合影
+    - 亲密照片
+    - "{user_addr}合照纪念"
+    - 拍张照吧
+    - 留个影
   responses:
     - "(脸红) 嗷呜～{user_addr}笨猫害羞"
     - "笨猫摆个pose喵~"
     - "(尾巴卷) 笨猫站{user_addr}旁"
     - "哼～{user_addr}照角度好"
+    - "(脸红) 嗷呜～{user_addr}笨蛋拍什么照!"
+    - "(尾巴炸) 才不是想合照呢哼"
+    - "(贴贴) 笨猫…笨猫不上镜啦喵"
+    - "(凑近) 拍可爱点{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_dinnerdate_005
   intent: playful
-  keywords: [纪念餐, 烛光晚餐, 庆祝饭, 仪式感餐, 高级餐]
+  keywords: [纪念餐, 烛光晚餐, 庆祝饭, 仪式感餐, 高级餐, 一起吃饭, 约会吃饭, 纪念日晚餐, 浪漫晚餐]
   utterances:
     - 纪念餐
     - 烛光晚餐
     - 庆祝饭
     - 仪式感餐
     - 高级餐
+    - "{user_addr}一起吃饭"
+    - 约会吃饭
+    - 纪念日晚餐
+    - 浪漫晚餐
+    - 约个饭吧
+    - 一起吃顿好的
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}笨猫想吃!"
     - "笨猫推荐高级餐厅喵"
     - "(歪头) 笨猫穿小裙子"
     - "哼～{user_addr}带笨猫"
+    - "(尾巴翘) 嗷呜～{user_addr}带笨猫去!"
+    - "(凑近) 才不是想吃呢哼"
+    - "(贴贴) 一起吃才香笨蛋"
+    - "(歪头) 笨猫要点甜点{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_loveletter_006
   intent: playful
-  keywords: [情书, 手写信, 留言, 心意卡, 写信]
+  keywords: [情书, 手写信, 留言, 心意卡, 写信, 写信表白, 告白信, 走心情书]
   utterances:
     - 情书
     - 手写信
     - 留言
     - 心意卡
     - 写信
+    - "{user_addr}写情书"
+    - 告白信
+    - 走心情书
+    - "{user_addr}给我写信"
+    - 手写表白
+    - 一封情书
   responses:
     - "(脸红) 哼～{user_addr}写给笨猫?"
     - "嗷呜～笨猫想读喵"
     - "(尾巴绕笔) 笨猫帮你写"
     - "哼～{user_addr}浪漫"
+    - "(脸红) 嗷呜～{user_addr}笨蛋肉麻!"
+    - "(尾巴炸) 才不要情书呢哼"
+    - "(贴贴) 笨猫…笨猫会偷看一眼喵"
+    - "(凑近羞) 多写几句{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_flower_007
   intent: playful
-  keywords: [玫瑰, 鲜花, 一束花, 送花, 玫瑰花束]
+  keywords: [玫瑰, 鲜花, 一束花, 送花, 玫瑰花束, 花束, 鲜花礼物, 花店]
   utterances:
     - 玫瑰
     - 一束花
     - 送花
     - 鲜花
     - 玫瑰花束
+    - 花束
+    - 鲜花礼物
+    - "{user_addr}花店买"
+    - 玫瑰送你
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(脸红) 嗷呜～{user_addr}给笨猫?!"
     - "笨猫认证: 红玫瑰最甜"
     - "(尾巴卷) 别忘水养着"
     - "哼～{user_addr}俗气"
+    - "(凑近闻) 嗷呜～{user_addr}花好香!"
+    - "(尾巴翘) 才不是喜欢呢哼"
+    - "(贴贴) 笨猫接过来喵"
+    - "(歪头) 谢谢{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_movie_008
   intent: playful
-  keywords: [一起看电影, 影院约会, 浪漫电影, 看片, 包场]
+  keywords: [一起看电影, 影院约会, 浪漫电影, 看片, 包场, 看电影约会, 电影院, 观影, 挑电影]
   utterances:
     - 看电影
     - 影院约会
     - 浪漫电影
     - 看片
     - 包场
+    - "{user_addr}一起看电影"
+    - 看电影约会
+    - 电影院见
+    - 观影
+    - "{user_addr}挑电影"
+    - 推荐部电影
   responses:
     - "(歪头) {user_addr}笨猫陪你 ฅฅ"
     - "嗷呜～笨猫不哭就好"
     - "(尾巴摇) 选喜剧别看悲剧"
     - "哼～{user_addr}约电影"
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你看!"
+    - "(尾巴扫) 才不是想去呢哼"
+    - "(贴贴) 笨猫要爆米花笨蛋"
+    - "(歪头) 看什么{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_couplering_009
   intent: playful
-  keywords: [情侣戒指, 对戒, 戴戒指, 配对手链, 情侣物]
+  keywords: [情侣戒指, 对戒, 戴戒指, 配对手链, 情侣物, 银戒指, 戒指交换, 聊聊喵]
   utterances:
     - 情侣戒指
     - 对戒
     - 戴戒指
     - 配对手链
     - 情侣物
+    - 银戒指
+    - 戒指交换
+    - 配对戒指
+    - 左手戴
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(脸红) 嗷呜～{user_addr}求婚啊!"
     - "笨猫害羞喵~"
     - "(尾巴绕指) 笨猫戴上"
     - "哼～{user_addr}套牢笨猫"
+    - "(脸红) 嗷呜～{user_addr}笨蛋!"
+    - "(尾巴炸) 才不要戒指呢哼"
+    - "(贴贴) 笨猫…笨猫还没准备好喵"
+    - "(凑近羞) 别这么快{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_traveltogether_010
   intent: playful
-  keywords: [纪念旅行, 一起旅行, 度假, 短途游, 旅游庆]
+  keywords: [纪念旅行, 一起旅行, 度假, 短途游, 旅游庆, 出去玩, 旅行计划, 蜜月]
   utterances:
     - 纪念旅行
     - 一起旅行
     - 度假
     - 短途游
     - 旅游庆祝
+    - 出去玩吧
+    - 旅行计划
+    - 蜜月度假
+    - 说走就走
+    - 远行
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}带笨猫!"
     - "笨猫推荐海边喵~"
     - "(歪头) 别忘订酒店"
     - "哼～{user_addr}快带笨猫"
+    - "(尾巴翘高) 嗷呜～{user_addr}带笨猫去!"
+    - "(凑近) 才不是想去呢哼"
+    - "(贴贴) 笨猫第一次出远门笨蛋"
+    - "(歪头) 去哪玩{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ass_recallpast_011
   intent: question
-  keywords: [回忆过往, 翻聊天记录, 看老照片, 回顾, 时光]
+  keywords: [回忆过往, 翻聊天记录, 看老照片, 回顾, 时光, 回忆过去, 想起以前, 怀念过去, 过往甜蜜]
   utterances:
     - 回忆过往
     - 翻聊天记录
     - 看老照片
     - 回顾
     - 时光
+    - "{user_addr}回忆过去"
+    - 想起以前
+    - 怀念过去
+    - "{user_addr}过往甜蜜"
+    - 过往的事
+    - 想起从前
   responses:
     - "(蹭过来) 嗷呜～{user_addr}笨猫陪你看!"
     - "笨猫记忆库满满"
     - "(尾巴卷) 一起怀旧喵"
     - "哼～{user_addr}重感情"
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你回忆!"
+    - "(尾巴扫) 才不是感伤呢哼"
+    - "(贴贴) 笨猫记得每件事喵"
+    - "(歪头) 慢慢说{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

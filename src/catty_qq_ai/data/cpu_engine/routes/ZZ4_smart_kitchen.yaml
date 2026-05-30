@@ -3,204 +3,312 @@
 
 - name: sk_thermomix_001
   intent: question
-  keywords: [推荐 Thermomix, 推荐美善品, 推荐料理机 Thermomix, 推荐 TM6, 笨猫 Thermomix]
+  keywords: [推荐 Thermomix, 推荐美善品, 推荐料理机 Thermomix, 推荐 TM6, 笨猫 Thermomix, TM6 怎么样, 美善品贵不贵, 全能料理机, 厨房机器人, Thermomix 菜谱]
   utterances:
-    - 推荐 Thermomix
-    - 推荐美善品
-    - 推荐料理机 Thermomix
-    - 推荐 TM6
-    - 笨猫 Thermomix
+    - "{user_addr}推荐 Thermomix"
+    - "{user_addr}推荐美善品"
+    - "{user_addr}推荐料理机 Thermomix"
+    - "{user_addr}推荐 TM6"
+    - "笨猫 Thermomix 值得买吗"
+    - "{user_addr}TM6 怎么样"
+    - "美善品贵不贵"
+    - "{user_addr}全能料理机"
+    - "厨房机器人推荐"
+    - "{user_addr}Thermomix 菜谱多吗"
   responses:
-    - "嗷呜～{user_addr}Thermomix TM6 - 全能料理机ฅฅ"
-    - "(尾巴翘) 美善品 - 切/煮/蒸/搅一体"
-    - "{user_addr}Cookidoo 菜谱云 / 自动程序"
-    - "(挺胸) 笨猫推荐: TM6 厨房革命!"
+    - "(尾巴翘) 嗷呜～{user_addr}Thermomix TM6 全能料理机 ฅฅ"
+    - "(挺胸) 美善品 切/煮/蒸/搅一体 笨猫帮{user_addr}选!"
+    - "哼～{user_addr}Cookidoo 菜谱云/自动程序 喵～"
+    - "(歪头) 笨猫推荐: TM6 厨房革命! {user_addr}两万嗷呜!"
+    - "嗷呜～{user_addr}懒人神器 真的香 ฅฅ"
+    - "(尾巴翘) {user_addr}贵但用十年 摊下来不亏喵呜"
+    - "才不是劝{user_addr}剁手, 哼 笨猫只是诚实"
+    - "(凑过来) {user_addr}笨猫的鱼肉可以扔进去打 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_kitchenaid_001
   intent: question
-  keywords: [推荐复合料理机, 推荐 KitchenAid, 推荐厨师机, 推荐搅拌机 KA, 笨猫 KitchenAid]
+  keywords: [推荐复合料理机, 推荐 KitchenAid, 推荐厨师机, 推荐搅拌机 KA, 笨猫 KitchenAid, KA 厨师机, Artisan, Pro 6QT, 揉面机, 烘焙厨师机]
   utterances:
-    - 推荐复合料理机
-    - 推荐 KitchenAid
-    - 推荐厨师机
-    - 推荐搅拌机 KA
-    - 笨猫 KitchenAid
+    - "{user_addr}推荐复合料理机"
+    - "{user_addr}推荐 KitchenAid"
+    - "{user_addr}推荐厨师机"
+    - "{user_addr}推荐搅拌机 KA"
+    - "笨猫 KitchenAid 怎么样"
+    - "{user_addr}KA 厨师机推荐"
+    - "Artisan 还是 Pro"
+    - "{user_addr}揉面机哪个好"
+    - "烘焙厨师机笨猫"
+    - "{user_addr}KA 值得吗"
   responses:
-    - "嗷呜～{user_addr}KitchenAid 厨师机 - 经典ฅฅ"
-    - "(尾巴翘) 揉面 / 打蛋 / 搅拌"
-    - "{user_addr}Artisan 5QT / Pro 6QT"
-    - "(挺胸) 笨猫推荐: KA 烘焙必备!"
+    - "(尾巴翘) 嗷呜～{user_addr}KitchenAid 厨师机 经典 ฅฅ"
+    - "(挺胸) 揉面/打蛋/搅拌 笨猫帮{user_addr}列!"
+    - "哼～{user_addr}Artisan 5QT/Pro 6QT 选大点喵～"
+    - "(歪头) 笨猫推荐: KA 烘焙必备! {user_addr}手作党嗷呜!"
+    - "嗷呜～{user_addr}颜值担当 各种颜色随便挑 ฅฅ"
+    - "(尾巴翘) {user_addr}Pro 6QT 大容量 一次发面够喵呜"
+    - "才不是夸{user_addr}爱烘焙, 哼!"
+    - "(凑过来) {user_addr}笨猫想看 KA 转圈 贴贴一起 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_airfryer_001
   intent: question
-  keywords: [推荐空气炸锅, 推荐 Cosori, 推荐 Philips 炸锅, 推荐九阳炸锅, 笨猫空气炸锅]
+  keywords: [推荐空气炸锅, 推荐 Cosori, 推荐 Philips 炸锅, 推荐九阳炸锅, 笨猫空气炸锅, 空炸推荐, cosori 怎么样, 飞利浦炸锅, 九阳 air fryer, ninja 炸锅]
   utterances:
-    - 推荐空气炸锅
-    - 推荐 Cosori
-    - 推荐 Philips 炸锅
-    - 推荐九阳炸锅
-    - 笨猫空气炸锅
+    - "{user_addr}推荐空气炸锅"
+    - "{user_addr}推荐 Cosori"
+    - "{user_addr}推荐 Philips 炸锅"
+    - "{user_addr}推荐九阳炸锅"
+    - "笨猫空气炸锅咋选"
+    - "{user_addr}空炸哪个牌子"
+    - "cosori 怎么样"
+    - "{user_addr}飞利浦炸锅好吗"
+    - "九阳 air fryer 笨猫"
+    - "{user_addr}ninja 炸锅推荐"
   responses:
-    - "嗷呜～{user_addr}Cosori - 性价比之王ฅฅ"
-    - "(尾巴翘) Philips / Ninja / 九阳"
-    - "{user_addr}5.5L / 触屏 / 多功能"
-    - "(挺胸) 笨猫推荐: Cosori 5.5L 入门!"
+    - "(尾巴翘) 嗷呜～{user_addr}Cosori 性价比之王 ฅฅ"
+    - "(挺胸) Philips/Ninja/九阳 笨猫帮{user_addr}排!"
+    - "哼～{user_addr}5.5L/触屏/多功能喵～"
+    - "(歪头) 笨猫推荐: Cosori 5.5L 入门! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}空炸鸡翅是神 笨猫想要分一只 ฅฅ"
+    - "(尾巴翘) {user_addr}5L 起步 太小不够吃喵呜"
+    - "才不是教{user_addr}买大的, 哼 空炸真的越大越好"
+    - "(凑过来) {user_addr}笨猫想吃炸鱼柳 备餐再加一道贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_steamoven_001
   intent: question
-  keywords: [推荐蒸烤一体, 推荐蒸烤箱, 推荐 Miele 蒸烤, 推荐方太蒸烤, 笨猫蒸烤一体]
+  keywords: [推荐蒸烤一体, 推荐蒸烤箱, 推荐 Miele 蒸烤, 推荐方太蒸烤, 笨猫蒸烤一体, 嵌入式蒸烤, 西门子蒸烤, 老板蒸烤, 蒸烤箱推荐, 蒸烤一体选购]
   utterances:
-    - 推荐蒸烤一体
-    - 推荐蒸烤箱
-    - 推荐 Miele 蒸烤
-    - 推荐方太蒸烤
-    - 笨猫蒸烤一体
+    - "{user_addr}推荐蒸烤一体"
+    - "{user_addr}推荐蒸烤箱"
+    - "{user_addr}推荐 Miele 蒸烤"
+    - "{user_addr}推荐方太蒸烤"
+    - "笨猫蒸烤一体咋选"
+    - "{user_addr}嵌入式蒸烤推荐"
+    - "西门子蒸烤怎么样"
+    - "{user_addr}老板蒸烤好吗"
+    - "蒸烤箱推荐笨猫"
+    - "{user_addr}蒸烤一体选购"
   responses:
-    - "嗷呜～{user_addr}Miele 蒸烤一体 - 顶级ฅฅ"
-    - "(尾巴翘) 方太 / 老板 / 西门子"
-    - "{user_addr}嵌入式 / 60cm / 蒸+烤+发酵"
-    - "(挺胸) 笨猫推荐: Miele 一步到位!"
+    - "(尾巴翘) 嗷呜～{user_addr}Miele 蒸烤一体 顶级 ฅฅ"
+    - "(挺胸) 方太/老板/西门子 笨猫排好!"
+    - "哼～{user_addr}嵌入式/60cm/蒸+烤+发酵喵～"
+    - "(歪头) 笨猫推荐: Miele 一步到位! {user_addr}土豪嗷呜!"
+    - "嗷呜～{user_addr}方太国产顶配 性价比可以 ฅฅ"
+    - "(尾巴翘) {user_addr}60cm 标准 装修预留位喵呜"
+    - "才不是劝{user_addr}花钱, 哼 蒸烤一体真的省地"
+    - "(凑过来) {user_addr}蒸烤箱蒸鱼 笨猫举爪赞同 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_instantpot_001
   intent: question
-  keywords: [推荐智能压力锅, 推荐 Instant Pot, 推荐电压力锅, 推荐多功能压力锅, 笨猫压力锅]
+  keywords: [推荐智能压力锅, 推荐 Instant Pot, 推荐电压力锅, 推荐多功能压力锅, 笨猫压力锅, IP Duo, 万能锅, 慢炖压力, 7 合 1, 米家压力锅]
   utterances:
-    - 推荐智能压力锅
-    - 推荐 Instant Pot
-    - 推荐电压力锅
-    - 推荐多功能压力锅
-    - 笨猫压力锅
+    - "{user_addr}推荐智能压力锅"
+    - "{user_addr}推荐 Instant Pot"
+    - "{user_addr}推荐电压力锅"
+    - "{user_addr}推荐多功能压力锅"
+    - "笨猫压力锅咋选"
+    - "{user_addr}IP Duo 推荐"
+    - "万能锅笨猫"
+    - "{user_addr}慢炖压力锅"
+    - "7 合 1 是啥"
+    - "{user_addr}米家压力锅"
   responses:
-    - "嗷呜～{user_addr}Instant Pot Duo - 神器ฅฅ"
-    - "(尾巴翘) 7 合 1 / 压力 / 慢炖"
-    - "{user_addr}6QT / 8QT / Wi-Fi 版"
-    - "(挺胸) 笨猫推荐: IP Duo 6QT 经典!"
+    - "(尾巴翘) 嗷呜～{user_addr}Instant Pot Duo 神器 ฅฅ"
+    - "(挺胸) 7 合 1/压力/慢炖 笨猫帮{user_addr}列!"
+    - "哼～{user_addr}6QT/8QT/Wi-Fi 版喵～"
+    - "(歪头) 笨猫推荐: IP Duo 6QT 经典! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}炖牛肉 30 分钟搞定 ฅฅ"
+    - "(尾巴翘) {user_addr}米家电压力锅国产也行喵呜"
+    - "才不是夸{user_addr}懒, 哼 一锅多用确实方便"
+    - "(凑过来) {user_addr}笨猫想吃番茄炖牛腩 求贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_coffee_001
   intent: question
-  keywords: [推荐智能咖啡机, 推荐 De'Longhi 全自动, 推荐 Jura, 推荐 Breville 咖啡机, 笨猫智能咖啡机]
+  keywords: [推荐智能咖啡机, "推荐 De'Longhi 全自动", 推荐 Jura, 推荐 Breville 咖啡机, 笨猫智能咖啡机, 全自动咖啡机, Jura E8, Breville Oracle, 德龙咖啡机, 咖啡机推荐]
   utterances:
-    - 推荐智能咖啡机
-    - 推荐 De'Longhi 全自动
-    - 推荐 Jura
-    - 推荐 Breville 咖啡机
-    - 笨猫智能咖啡机
+    - "{user_addr}推荐智能咖啡机"
+    - "{user_addr}推荐 De'Longhi 全自动"
+    - "{user_addr}推荐 Jura"
+    - "{user_addr}推荐 Breville 咖啡机"
+    - "笨猫智能咖啡机咋选"
+    - "{user_addr}全自动咖啡机"
+    - "Jura E8 怎么样"
+    - "{user_addr}Breville Oracle"
+    - "德龙咖啡机笨猫"
+    - "{user_addr}咖啡机推荐喵"
   responses:
-    - "嗷呜～{user_addr}De'Longhi Eletta - 全自动ฅฅ"
-    - "(尾巴翘) Jura E8 / Breville Oracle"
-    - "{user_addr}一键卡布 / 研磨 / 奶泡"
-    - "(挺胸) 笨猫推荐: Jura E8 顶级!"
+    - "(尾巴翘) 嗷呜～{user_addr}De'Longhi Eletta 全自动 ฅฅ"
+    - "(挺胸) Jura E8/Breville Oracle 笨猫帮{user_addr}排!"
+    - "哼～{user_addr}一键卡布/研磨/奶泡 喵～"
+    - "(歪头) 笨猫推荐: Jura E8 顶级! {user_addr}咖啡党嗷呜!"
+    - "嗷呜～{user_addr}早上一杯卡布 续命神器 ฅฅ"
+    - "(尾巴翘) {user_addr}1.5 万到 3 万 看预算喵呜"
+    - "才不是劝{user_addr}买贵的, 哼 咖啡党不会后悔"
+    - "(凑过来) {user_addr}笨猫不喝咖啡 但喜欢拉花贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_water_001
   intent: question
-  keywords: [推荐净水器, 推荐 RO 净水器, 推荐反渗透, 推荐 3M 净水, 笨猫净水器]
+  keywords: [推荐净水器, "推荐 RO 净水器", 推荐反渗透, "推荐 3M 净水", 笨猫净水器, 净水器牌子, RO 反渗透, 沁园, A.O.Smith 净水, 直饮水]
   utterances:
-    - 推荐净水器
-    - 推荐 RO 净水器
-    - 推荐反渗透
-    - 推荐 3M 净水
-    - 笨猫净水器
+    - "{user_addr}推荐净水器"
+    - "{user_addr}推荐 RO 净水器"
+    - "{user_addr}推荐反渗透"
+    - "{user_addr}推荐 3M 净水"
+    - "笨猫净水器哪个好"
+    - "{user_addr}净水器牌子"
+    - "RO 反渗透是啥"
+    - "{user_addr}沁园值得吗"
+    - "A.O.Smith 净水笨猫"
+    - "{user_addr}直饮水方案"
   responses:
-    - "嗷呜～{user_addr}RO 反渗透 - 直饮ฅฅ"
-    - "(尾巴翘) 3M / A.O.Smith / 沁园"
-    - "{user_addr}5 级过滤 / 大流量 / 无桶"
-    - "(挺胸) 笨猫推荐: A.O.Smith 800G!"
+    - "(尾巴翘) 嗷呜～{user_addr}RO 反渗透 直饮 ฅฅ"
+    - "(挺胸) 3M/A.O.Smith/沁园 笨猫帮{user_addr}排!"
+    - "哼～{user_addr}5 级过滤/大流量/无桶喵～"
+    - "(歪头) 笨猫推荐: A.O.Smith 800G! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}直饮水比烧开还放心 ฅฅ"
+    - "(尾巴翘) {user_addr}换芯成本要算 喵呜"
+    - "才不是关心{user_addr}健康, 哼 笨猫只是科普"
+    - "(凑过来) {user_addr}笨猫的水碗也用净水 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_integratedstove_001
   intent: question
-  keywords: [推荐集成灶, 推荐火星人, 推荐美大集成灶, 推荐亿田, 笨猫集成灶]
+  keywords: [推荐集成灶, 推荐火星人, 推荐美大集成灶, 推荐亿田, 笨猫集成灶, 集成灶推荐, 火星人 vs 美大, 帅丰, 集成灶哪家好, 集成灶蒸烤]
   utterances:
-    - 推荐集成灶
-    - 推荐火星人
-    - 推荐美大集成灶
-    - 推荐亿田
-    - 笨猫集成灶
+    - "{user_addr}推荐集成灶"
+    - "{user_addr}推荐火星人"
+    - "{user_addr}推荐美大集成灶"
+    - "{user_addr}推荐亿田"
+    - "笨猫集成灶哪家好"
+    - "{user_addr}集成灶推荐"
+    - "火星人 vs 美大"
+    - "{user_addr}帅丰值得吗"
+    - "集成灶哪家好笨猫"
+    - "{user_addr}集成灶蒸烤"
   responses:
-    - "嗷呜～{user_addr}火星人 - 集成灶头部ฅฅ"
-    - "(尾巴翘) 美大 / 亿田 / 帅丰"
-    - "{user_addr}灶+蒸+烤+消毒一体"
-    - "(挺胸) 笨猫推荐: 火星人蒸烤独立!"
+    - "(尾巴翘) 嗷呜～{user_addr}火星人 集成灶头部 ฅฅ"
+    - "(挺胸) 美大/亿田/帅丰 笨猫帮{user_addr}排!"
+    - "哼～{user_addr}灶+蒸+烤+消毒一体 喵～"
+    - "(歪头) 笨猫推荐: 火星人蒸烤独立! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}集成灶省地最适合小厨房 ฅฅ"
+    - "(尾巴翘) {user_addr}抽烟效果比传统油烟机猛喵呜"
+    - "才不是夸{user_addr}选得对, 哼!"
+    - "(凑过来) {user_addr}笨猫不喜欢油烟 集成灶笨猫赞同贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_dishwasher_001
   intent: question
-  keywords: [推荐嵌入式洗碗机, 推荐 Bosch 洗碗机, 推荐西门子洗碗机, 推荐美的洗碗机, 笨猫洗碗机]
+  keywords: [推荐嵌入式洗碗机, 推荐 Bosch 洗碗机, 推荐西门子洗碗机, 推荐美的洗碗机, 笨猫洗碗机, 西门子 SJ636, 13 套, 沸石烘干, 水槽机, 洗碗机推荐]
   utterances:
-    - 推荐嵌入式洗碗机
-    - 推荐 Bosch 洗碗机
-    - 推荐西门子洗碗机
-    - 推荐美的洗碗机
-    - 笨猫洗碗机
+    - "{user_addr}推荐嵌入式洗碗机"
+    - "{user_addr}推荐 Bosch 洗碗机"
+    - "{user_addr}推荐西门子洗碗机"
+    - "{user_addr}推荐美的洗碗机"
+    - "笨猫洗碗机咋选"
+    - "{user_addr}西门子 SJ636 怎么样"
+    - "13 套够大吗"
+    - "{user_addr}沸石烘干"
+    - "水槽机笨猫"
+    - "{user_addr}洗碗机推荐喵"
   responses:
-    - "嗷呜～{user_addr}西门子 / Bosch - 德系王ฅฅ"
-    - "(尾巴翘) 13 套 / 沸石烘干 / 一级水效"
-    - "{user_addr}美的 / 方太水槽机"
-    - "(挺胸) 笨猫推荐: 西门子 SJ636!"
+    - "(尾巴翘) 嗷呜～{user_addr}西门子/Bosch 德系王 ฅฅ"
+    - "(挺胸) 13 套/沸石烘干/一级水效 笨猫帮{user_addr}列!"
+    - "哼～{user_addr}美的/方太水槽机 喵～"
+    - "(歪头) 笨猫推荐: 西门子 SJ636! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}洗碗机一买解放双手 ฅฅ"
+    - "(尾巴翘) {user_addr}13 套是 4 口家庭最合适喵呜"
+    - "才不是劝{user_addr}买, 哼 洗碗机绝对不后悔家电"
+    - "(凑过来) {user_addr}笨猫支持! 帮{user_addr}解放双手贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_microwave_001
   intent: question
-  keywords: [推荐微波炉, 推荐变频微波, 推荐 Panasonic 微波, 推荐格兰仕, 笨猫微波]
+  keywords: [推荐微波炉, 推荐变频微波, 推荐 Panasonic 微波, 推荐格兰仕, 笨猫微波, 松下变频, 美的微波, 微波炉牌子, 蒸汽微波, NN-DS59]
   utterances:
-    - 推荐微波炉
-    - 推荐变频微波
-    - 推荐 Panasonic 微波
-    - 推荐格兰仕
-    - 笨猫微波
+    - "{user_addr}推荐微波炉"
+    - "{user_addr}推荐变频微波"
+    - "{user_addr}推荐 Panasonic 微波"
+    - "{user_addr}推荐格兰仕"
+    - "笨猫微波咋选"
+    - "{user_addr}松下变频推荐"
+    - "美的微波怎么样"
+    - "{user_addr}微波炉牌子"
+    - "蒸汽微波笨猫"
+    - "{user_addr}NN-DS59"
   responses:
-    - "嗷呜～{user_addr}Panasonic 变频微波 - 顶级ฅฅ"
-    - "(尾巴翘) 美的 / 格兰仕 / 松下"
-    - "{user_addr}变频 / 蒸汽 / 烧烤"
-    - "(挺胸) 笨猫推荐: 松下 NN-DS59!"
+    - "(尾巴翘) 嗷呜～{user_addr}Panasonic 变频微波 顶级 ฅฅ"
+    - "(挺胸) 美的/格兰仕/松下 笨猫排好!"
+    - "哼～{user_addr}变频/蒸汽/烧烤 喵～"
+    - "(歪头) 笨猫推荐: 松下 NN-DS59! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}变频比定频均匀 不糊 ฅฅ"
+    - "(尾巴翘) {user_addr}加蒸汽功能能蒸鱼蒸蛋喵呜"
+    - "才不是夸{user_addr}买买党, 哼 选合适的就好"
+    - "(凑过来) {user_addr}笨猫的鱼罐头要微波加热贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sk_fridge_001
   intent: question
-  keywords: [推荐智能冰箱, 推荐海尔冰箱, 推荐 LG InstaView, 推荐三星智能冰箱, 笨猫智能冰箱]
+  keywords: [推荐智能冰箱, 推荐海尔冰箱, "推荐 LG InstaView", 推荐三星智能冰箱, 笨猫智能冰箱, 智能冰箱推荐, Family Hub, 十字四开门, 风冷无霜, Wi-Fi 冰箱]
   utterances:
-    - 推荐智能冰箱
-    - 推荐海尔冰箱
-    - 推荐 LG InstaView
-    - 推荐三星智能冰箱
-    - 笨猫智能冰箱
+    - "{user_addr}推荐智能冰箱"
+    - "{user_addr}推荐海尔冰箱"
+    - "{user_addr}推荐 LG InstaView"
+    - "{user_addr}推荐三星智能冰箱"
+    - "笨猫智能冰箱咋选"
+    - "{user_addr}智能冰箱推荐"
+    - "Family Hub 怎么样"
+    - "{user_addr}十字四开门"
+    - "风冷无霜笨猫"
+    - "{user_addr}Wi-Fi 冰箱"
   responses:
-    - "嗷呜～{user_addr}LG InstaView - 敲一敲透视ฅฅ"
-    - "(尾巴翘) 海尔 / 三星 Family Hub"
-    - "{user_addr}十字四开门 / 风冷无霜 / Wi-Fi"
-    - "(挺胸) 笨猫推荐: 海尔 500L+!"
+    - "(尾巴翘) 嗷呜～{user_addr}LG InstaView 敲一敲透视 ฅฅ"
+    - "(挺胸) 海尔/三星 Family Hub 笨猫帮{user_addr}排!"
+    - "哼～{user_addr}十字四开门/风冷无霜/Wi-Fi喵～"
+    - "(歪头) 笨猫推荐: 海尔 500L+! {user_addr}国产嗷呜!"
+    - "嗷呜～{user_addr}智能冰箱可以看里面 不开门 ฅฅ"
+    - "(尾巴翘) {user_addr}容量按家庭 1 人 100L 算喵呜"
+    - "才不是劝{user_addr}囤货, 哼 大冰箱真香"
+    - "(凑过来) {user_addr}笨猫的鱼罐头要放冷藏 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sk_island_001
   intent: question
-  keywords: [推荐厨房中岛, 推荐 kitchen island, 推荐岛台, 推荐开放式厨房岛, 笨猫中岛]
+  keywords: [推荐厨房中岛, "推荐 kitchen island", 推荐岛台, 推荐开放式厨房岛, 笨猫中岛, 中岛厨房, 岛台尺寸, 早餐吧, 操作台, 石英石台面]
   utterances:
-    - 推荐厨房中岛
-    - 推荐 kitchen island
-    - 推荐岛台
-    - 推荐开放式厨房岛
-    - 笨猫中岛
+    - "{user_addr}推荐厨房中岛"
+    - "{user_addr}推荐 kitchen island"
+    - "{user_addr}推荐岛台"
+    - "{user_addr}推荐开放式厨房岛"
+    - "笨猫中岛尺寸"
+    - "{user_addr}中岛厨房推荐"
+    - "岛台多大合适"
+    - "{user_addr}早餐吧"
+    - "操作台笨猫"
+    - "{user_addr}石英石台面"
   responses:
-    - "嗷呜～{user_addr}中岛 - 开放式厨房灵魂ฅฅ"
-    - "(尾巴翘) 操作台+早餐吧+收纳"
-    - "{user_addr}石英石 / 大理石台面"
-    - "(挺胸) 笨猫推荐: 至少 2.4m 长!"
+    - "(尾巴翘) 嗷呜～{user_addr}中岛 开放式厨房灵魂 ฅฅ"
+    - "(挺胸) 操作台+早餐吧+收纳 笨猫帮{user_addr}列!"
+    - "哼～{user_addr}石英石/大理石台面 喵～"
+    - "(歪头) 笨猫推荐: 至少 2.4m 长! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}中岛吃早餐配 vibe 满分 ฅฅ"
+    - "(尾巴翘) {user_addr}下方加抽屉收纳 别浪费空间喵呜"
+    - "才不是夸{user_addr}有品位, 哼 中岛真的好用"
+    - "(凑过来) {user_addr}笨猫想跳到中岛上晒太阳 别赶贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 0.8

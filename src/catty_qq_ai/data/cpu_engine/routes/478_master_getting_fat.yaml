@@ -3,170 +3,260 @@
 
 - name: mgf_fat_001
   intent: playful
-  keywords: [变胖了, 胖了一圈, 长肉, 长胖, 肉肉]
+  keywords: [变胖了, 胖了一圈, 长肉, 长胖, 肉肉, 圆了, 涨膘, 长肉了, 体重涨, 胖了]
   utterances:
     - "{user_addr}变胖了"
     - "{user_addr}胖了一圈"
     - "{user_addr}长肉"
     - "{user_addr}长胖"
     - "{user_addr}肉肉"
+    - "{user_addr}圆了"
+    - "{user_addr}涨膘"
+    - "{user_addr}长肉了"
+    - "{user_addr}体重涨"
+    - "{user_addr}胖了"
   responses:
     - "(戳肚) {user_addr}笨猫戳喵ฅฅ"
     - "嗷呜～{user_addr}小猪!"
     - "哼～{user_addr}笨猫笑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 涨膘是冬天准备嗷呜～"
+    - "哼～圆了一圈也可爱"
+    - "(尾巴拍) 长肉了笨猫抱着舒服喵"
+    - "嗷呜～肉肉的{user_addr}最萌ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_002
   intent: complaint
-  keywords: [体重涨了, 体重增, 体重秤, 称重, 体重坏]
+  keywords: [体重涨了, 体重增, 体重秤, 称重, 体重坏, BMI高, 数字涨, 体重指数, 秤背叛, 体重纪录]
   utterances:
     - "{user_addr}体重涨了"
     - "{user_addr}体重增"
     - "{user_addr}体重秤"
     - "{user_addr}称重"
     - "{user_addr}体重坏"
+    - "{user_addr}BMI高"
+    - "{user_addr}数字涨"
+    - "{user_addr}体重指数"
+    - "{user_addr}秤背叛"
+    - "{user_addr}体重纪录"
   responses:
     - "(扶头) {user_addr}笨猫摇头喵ฅฅ"
     - "嗷呜～{user_addr}笨猫监督!"
     - "才不是替你担心呢哼"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(凑过来) BMI高了就别贪嘴嗷呜～"
+    - "哼～秤背叛是你的错"
+    - "(尾巴拍) 体重纪录破了不是好事喵"
+    - "嗷呜～数字涨吓人也得面对ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_003
   intent: playful
-  keywords: [大圆脸, 双下巴, 脸圆了, 苹果脸, 婴儿肥]
+  keywords: [大圆脸, 双下巴, 脸圆了, 苹果脸, 婴儿肥, 包子脸, 馒头脸, 月饼脸, 大饼脸, 圆鼓鼓]
   utterances:
     - "{user_addr}大圆脸"
     - "{user_addr}双下巴"
     - "{user_addr}脸圆了"
     - "{user_addr}苹果脸"
     - "{user_addr}婴儿肥"
+    - "{user_addr}包子脸"
+    - "{user_addr}馒头脸"
+    - "{user_addr}月饼脸"
+    - "{user_addr}大饼脸"
+    - "{user_addr}圆鼓鼓"
   responses:
     - "(戳脸) {user_addr}苹果喵ฅฅ"
     - "嗷呜～{user_addr}笨猫戳!"
     - "哼～{user_addr}笨猫笑"
     - "嘿嘿～{user_addr}笨猫的小~"
+    - "(凑过来) 包子脸笨猫想咬一口嗷呜～"
+    - "哼～月饼脸到中秋节就涨"
+    - "(尾巴拍) 圆鼓鼓的脸最萌喵"
+    - "嗷呜～大饼脸笨猫的爱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_004
   intent: complaint
-  keywords: [裤子紧, 衣服紧, 衣服小, 穿不下, 紧绷]
+  keywords: [裤子紧, 衣服紧, 衣服小, 穿不下, 紧绷, 扣子崩, 拉链拉不上, 卡腰, 撑爆, 紧身]
   utterances:
     - "{user_addr}裤子紧"
     - "{user_addr}衣服紧"
     - "{user_addr}衣服小"
     - "{user_addr}穿不下"
     - "{user_addr}紧绷"
+    - "{user_addr}扣子崩"
+    - "{user_addr}拉链拉不上"
+    - "{user_addr}卡腰"
+    - "{user_addr}撑爆"
+    - "{user_addr}紧身"
   responses:
     - "(笑) {user_addr}减肥喵ฅฅ"
     - "嗷呜～{user_addr}笨猫提醒!"
     - "哼～{user_addr}笨猫笑"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(凑过来) 扣子崩飞太危险嗷呜～"
+    - "哼～拉链拉不上换大码"
+    - "(尾巴拍) 卡腰勒得难受喵"
+    - "嗷呜～撑爆是预警, {user_addr}减重吧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_005
   intent: playful
-  keywords: [我要减肥, 减肥宣言, 求减肥, 不吃了, 节食]
+  keywords: [我要减肥, 减肥宣言, 求减肥, 不吃了, 节食, 戒糖, 戒油, 健康饮食, 沙拉日, 喝粥]
   utterances:
     - "{user_addr}我要减肥"
     - "{user_addr}减肥宣言"
     - "{user_addr}求减肥"
     - "{user_addr}不吃了"
     - "{user_addr}节食"
+    - "{user_addr}戒糖"
+    - "{user_addr}戒油"
+    - "{user_addr}健康饮食"
+    - "{user_addr}沙拉日"
+    - "{user_addr}喝粥"
   responses:
     - "嗷呜～{user_addr}加油喵ฅฅ"
     - "(尾巴翘) 笨猫监督!"
     - "哼～{user_addr}笨猫不信"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(凑过来) 戒糖最难, {user_addr}加油嗷呜～"
+    - "哼～健康饮食是长期的"
+    - "(尾巴拍) 沙拉日笨猫想吃肉喵"
+    - "嗷呜～喝粥三天笨猫怀疑{user_addr}毅力ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_006
   intent: complaint
-  keywords: [肉很难减, 难瘦, 减肥失败, 反弹, 越减越胖]
+  keywords: [肉很难减, 难瘦, 减肥失败, 反弹, 越减越胖, 减肥困难, 减不下, 平台期, 减不动, 瘦不下来]
   utterances:
     - "{user_addr}肉很难减"
     - "{user_addr}难瘦"
     - "{user_addr}减肥失败"
     - "{user_addr}反弹"
     - "{user_addr}越减越胖"
+    - "{user_addr}减肥困难"
+    - "{user_addr}减不下"
+    - "{user_addr}平台期"
+    - "{user_addr}减不动"
+    - "{user_addr}瘦不下来"
   responses:
     - "(贴贴) {user_addr}笨猫陪喵ฅฅ"
     - "嗷呜～{user_addr}笨猫给加油!"
     - "才不是心疼呢哼"
     - "(贴贴) {user_addr}笨猫~"
+    - "(凑过来) 平台期撑过去就突破嗷呜～"
+    - "哼～反弹是吃多了"
+    - "(尾巴拍) 减不动换方法喵"
+    - "嗷呜～瘦不下来去运动ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_007
   intent: playful
-  keywords: [可爱胖, 胖也可爱, 肉肉好抱, 胖萌, 圆滚滚]
+  keywords: [可爱胖, 胖也可爱, 肉肉好抱, 胖萌, 圆滚滚, 软萌, 软乎乎, 软糯糯, 肉感, 胖嘟嘟]
   utterances:
     - "{user_addr}可爱胖"
     - "{user_addr}胖也可爱"
     - "{user_addr}肉肉好抱"
     - "{user_addr}胖萌"
     - "{user_addr}圆滚滚"
+    - "{user_addr}软萌"
+    - "{user_addr}软乎乎"
+    - "{user_addr}软糯糯"
+    - "{user_addr}肉感"
+    - "{user_addr}胖嘟嘟"
   responses:
     - "嗷呜～{user_addr}圆滚滚喵ฅฅ"
     - "(贴贴) 笨猫的圆!"
     - "哼～{user_addr}笨猫的胖"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 软乎乎抱起来超舒服嗷呜～"
+    - "哼～胖嘟嘟的脸笨猫想戳"
+    - "(尾巴拍) 肉感是优点喵"
+    - "嗷呜～软糯糯的{user_addr}最萌ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_008
   intent: playful
-  keywords: [吃太多了, 暴饮暴食, 吃货长肉, 嘴馋, 撑饱]
+  keywords: [吃太多了, 暴饮暴食, 吃货长肉, 嘴馋, 撑饱, 吃撑, 吃多, 大胃, 食量大, 没节制]
   utterances:
     - "{user_addr}吃太多了"
     - "{user_addr}暴饮暴食"
     - "{user_addr}吃货长肉"
     - "{user_addr}嘴馋"
     - "{user_addr}撑饱"
+    - "{user_addr}吃撑"
+    - "{user_addr}吃多"
+    - "{user_addr}大胃"
+    - "{user_addr}食量大"
+    - "{user_addr}没节制"
   responses:
     - "(笑) {user_addr}吃货喵ฅฅ"
     - "嗷呜～{user_addr}笨猫提醒!"
     - "哼～{user_addr}笨猫笑"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(凑过来) 没节制要长肉嗷呜～"
+    - "哼～大胃别夸口"
+    - "(尾巴拍) 食量大要消化喵"
+    - "嗷呜～暴饮暴食对胃不好ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_009
   intent: playful
-  keywords: [运动减, 跑步减肥, 健身减, 跳操减, 锻炼减]
+  keywords: [运动减, 跑步减肥, 健身减, 跳操减, 锻炼减, 撸铁减, 游泳减, HIIT, 有氧减, 拉伸减]
   utterances:
     - "{user_addr}运动减"
     - "{user_addr}跑步减肥"
     - "{user_addr}健身减"
     - "{user_addr}跳操减"
     - "{user_addr}锻炼减"
+    - "{user_addr}撸铁减"
+    - "{user_addr}游泳减"
+    - "{user_addr}HIIT"
+    - "{user_addr}有氧减"
+    - "{user_addr}拉伸减"
   responses:
     - "嗷呜～{user_addr}加油喵ฅฅ"
     - "(尾巴翘) 笨猫监督!"
     - "哼～{user_addr}毅力少"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(凑过来) HIIT高效, {user_addr}试试嗷呜～"
+    - "哼～撸铁能塑形"
+    - "(尾巴拍) 有氧减脂最稳喵"
+    - "嗷呜～游泳全身锻炼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mgf_fat_010
   intent: playful
-  keywords: [体重秤坏了, 称怕了, 不敢称, 体重不准, 体重秤背叛]
+  keywords: [体重秤坏了, 称怕了, 不敢称, 体重不准, 体重秤背叛, 秤坏掉, 不准的秤, 秤说谎, 秤无情, 秤数字怪]
   utterances:
     - "{user_addr}体重秤坏了"
     - "{user_addr}称怕了"
     - "{user_addr}不敢称"
     - "{user_addr}体重不准"
     - "{user_addr}体重秤背叛"
+    - "{user_addr}秤坏掉"
+    - "{user_addr}不准的秤"
+    - "{user_addr}秤说谎"
+    - "{user_addr}秤无情"
+    - "{user_addr}秤数字怪"
   responses:
     - "嗷呜～{user_addr}笑死喵ฅฅ"
     - "(拍肩) 笨猫笑场!"
     - "哼～{user_addr}逃避"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 秤无情但是真实嗷呜～"
+    - "哼～秤说谎? 你真信吗"
+    - "(尾巴拍) 不敢称就是怕真相喵"
+    - "嗷呜～秤数字怪不是借口ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

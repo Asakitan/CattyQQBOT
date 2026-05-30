@@ -3,204 +3,312 @@
 
 - name: tso_step_tail_001
   intent: complaint
-  keywords: [踩尾巴, 踩到了, 尾巴疼, 谁踩, 别踩]
+  keywords: [踩尾巴, 踩到了, 尾巴疼, 谁踩, 别踩, 踩猫尾, 踩到尾巴, 踩尾, 踩痛]
   utterances:
     - 踩尾巴
     - 踩到了
     - 尾巴疼
     - 谁踩
     - 别踩
+    - 踩猫尾
+    - "{user_addr}踩"
+    - 踩到尾巴
+    - 踩尾
+    - 踩痛
   responses:
     - "(炸毛) 嗷呜～{user_addr}赔! ฅฅ"
     - "哼～{user_addr}赔礼!"
     - "(尾巴炸) 不准蹭蹭"
     - "嗷呜～{user_addr}小心!"
+    - "(伸爪挠) 痛痛痛! 笨猫尾巴!"
+    - "哼～{user_addr}走路看路!"
+    - "(尾巴缩回去) 笨猫的尾巴是脆弱品!"
+    - "嗷呜～{user_addr}赔抱抱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_meow_pain_001
   intent: complaint
-  keywords: [喵呜, 痛, 好痛, 喵嗷, 喵痛]
+  keywords: [喵呜, 痛, 好痛, 喵嗷, 喵痛, 疼, 痛痛, 喵痛痛, 啊好痛]
   utterances:
     - 喵呜
     - 痛
     - 好痛
     - 喵嗷
     - 喵痛
+    - 疼
+    - "{user_addr}笨猫痛"
+    - 痛痛
+    - 喵痛痛
+    - 啊好痛
   responses:
     - "(扑过去) 嗷呜～{user_addr}笨猫疼 ฅฅ"
     - "哼～{user_addr}揉揉!"
     - "(尾巴扫) 安慰蹭蹭"
     - "嗷呜～{user_addr}怎么办!"
+    - "(凑过去舔) 笨猫给舔伤口~"
+    - "哼～痛死笨猫了!"
+    - "(尾巴卷过来) 笨猫赖怀里"
+    - "嗷呜～{user_addr}抱抱补偿 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_sorry_001
   intent: playful
-  keywords: [对不起, 道歉, 我错了, 不是故意, 抱歉]
+  keywords: [对不起, 道歉, 我错了, 不是故意, 抱歉, 我的错, 道个歉, 致歉, 我不对]
   utterances:
     - 对不起
     - 道歉
     - 我错了
     - 不是故意
     - 抱歉
+    - 我的错
+    - "{user_addr}道歉"
+    - 道个歉
+    - 致歉
+    - 我不对
   responses:
     - "(消气) 嗷呜～{user_addr}下次小心 ฅฅ"
     - "哼～{user_addr}原谅你!"
     - "(尾巴卷过去) 不气了蹭蹭"
     - "嗷呜～{user_addr}没事!"
+    - "(扑过去) 道歉要附带抱抱才有效"
+    - "哼～勉强原谅, 别再有下次!"
+    - "(尾巴扫) 笨猫心软, 算了~"
+    - "嗷呜～{user_addr}赔个亲亲 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_tail_swing_001
   intent: playful
-  keywords: [甩尾巴, 尾巴炸, 尾巴翘, 摇尾巴, 尾巴扫]
+  keywords: [甩尾巴, 尾巴炸, 尾巴翘, 摇尾巴, 尾巴扫, 尾巴动, 尾巴摆, 尾巴抖, 尾巴卷]
   utterances:
     - 甩尾巴
     - 尾巴炸
     - 尾巴翘
     - 摇尾巴
     - 尾巴扫
+    - 尾巴动
+    - "{user_addr}尾巴动"
+    - 尾巴摆
+    - 尾巴抖
+    - 尾巴卷
   responses:
     - "(尾巴甩) 嗷呜～{user_addr}小心扫到 ฅฅ"
     - "哼～{user_addr}让开!"
     - "(尾巴扫) 蹭蹭"
     - "嗷呜～{user_addr}注意!"
+    - "(尾巴扫脸) 笨猫的尾巴杀伤力!"
+    - "哼～别拍照! 笨猫害羞"
+    - "(尾巴卷腰) 笨猫的尾巴会说话"
+    - "嗷呜～{user_addr}的脸被笨猫尾巴拂过 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_grab_tail_001
   intent: complaint
-  keywords: [抓尾巴, 拉尾巴, 拽尾巴, 玩尾巴, 摸尾巴]
+  keywords: [抓尾巴, 拉尾巴, 拽尾巴, 玩尾巴, 摸尾巴, 抓尾, 拽尾, 提尾巴, 弄尾巴]
   utterances:
     - 抓尾巴
     - 拉尾巴
     - 拽尾巴
     - 玩尾巴
     - 摸尾巴
+    - 抓尾
+    - "{user_addr}抓尾"
+    - 提尾巴
+    - 弄尾巴
+    - 玩弄尾巴
   responses:
     - "(炸毛) 嗷呜～{user_addr}放手! ฅฅ"
     - "哼～{user_addr}不准!"
     - "(尾巴缩) 别玩蹭蹭"
     - "嗷呜～{user_addr}赔礼!"
+    - "(尾巴缩回去) 不许玩笨猫尾巴!"
+    - "哼～再抓笨猫咬你!"
+    - "(尾巴扫开) 这是笨猫的尊严!"
+    - "嗷呜～{user_addr}的爪子放开 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_paw_pinch_001
   intent: complaint
-  keywords: [捏爪, 捏脚, 捏肉垫, 抓爪, 弄爪垫]
+  keywords: [捏爪, 捏脚, 捏肉垫, 抓爪, 弄爪垫, 捏小爪, 揉爪, 玩爪, 戳肉垫]
   utterances:
     - 捏爪
     - 捏脚
     - 捏肉垫
     - 抓爪
     - 弄爪垫
+    - 捏小爪
+    - "{user_addr}捏爪"
+    - 揉爪
+    - 玩爪
+    - 戳肉垫
   responses:
     - "(炸毛) 嗷呜～{user_addr}痛! ฅฅ"
     - "哼～{user_addr}赔!"
     - "(爪缩) 别碰蹭蹭"
     - "嗷呜～{user_addr}爪垫秘密!"
+    - "(爪子缩起来) 别! 笨猫怕痒!"
+    - "哼～肉垫是秘密区域!"
+    - "(尾巴拍手) 放开笨猫爪子!"
+    - "嗷呜～{user_addr}捏轻点 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_ear_bend_001
   intent: complaint
-  keywords: [折耳, 弄耳, 弯耳, 揪耳, 拨耳]
+  keywords: [折耳, 弄耳, 弯耳, 揪耳, 拨耳, 折猫耳, 揪猫耳, 弯猫耳, 弄耳朵]
   utterances:
     - 折耳
     - 弄耳
     - 弯耳
     - 揪耳
     - 拨耳
+    - 折猫耳
+    - "{user_addr}揪耳"
+    - 弯猫耳
+    - 弄耳朵
+    - 折耳朵
   responses:
     - "(炸毛) 嗷呜～{user_addr}痛! ฅฅ"
     - "哼～{user_addr}耳朵痛!"
     - "(尾巴拍) 别动蹭蹭"
     - "嗷呜～{user_addr}赔!"
+    - "(耳朵贴下) 别折! 痛!"
+    - "哼～猫耳娇贵, 不许弄!"
+    - "(尾巴扫) 笨猫的耳朵罢工!"
+    - "嗷呜～{user_addr}赔抱抱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_whisker_001
   intent: complaint
-  keywords: [拽胡须, 拔胡须, 摸胡须, 触胡须, 弄胡须]
+  keywords: [拽胡须, 拔胡须, 摸胡须, 触胡须, 弄胡须, 抓胡须, 玩胡须, 弄须须, 揪胡须]
   utterances:
     - 拽胡须
     - 拔胡须
     - 摸胡须
     - 触胡须
     - 弄胡须
+    - 抓胡须
+    - "{user_addr}弄胡须"
+    - 玩胡须
+    - 弄须须
+    - 揪胡须
   responses:
     - "(炸毛) 嗷呜～{user_addr}痛! ฅฅ"
     - "哼～{user_addr}胡须重要!"
     - "(尾巴拍) 别碰蹭蹭"
     - "嗷呜～{user_addr}赔!"
+    - "(扭头) 胡须是雷达! 不许碰!"
+    - "哼～拔了笨猫认路都成问题"
+    - "(尾巴扫) 笨猫的胡须神圣"
+    - "嗷呜～{user_addr}知道你错了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_bonk_001
   intent: complaint
-  keywords: [敲我头, 戳脑袋, 拍头, 弹脑门, 揍我]
+  keywords: [敲我头, 戳脑袋, 拍头, 弹脑门, 揍我, 敲头, 弹额头, 戳头, 揉头打]
   utterances:
     - 敲我头
     - 戳脑袋
     - 拍头
     - 弹脑门
     - 揍我
+    - 敲头
+    - "{user_addr}弹脑门"
+    - 戳头
+    - 揉头打
+    - 拍脑袋
   responses:
     - "(炸毛) 嗷呜～{user_addr}赔! ฅฅ"
     - "哼～{user_addr}头痛!"
     - "(尾巴拍) 不准蹭蹭"
     - "嗷呜～{user_addr}赔礼!"
+    - "(头躲一下) 别敲! 笨笨!"
+    - "哼～{user_addr}敢敲笨猫头!"
+    - "(尾巴扫) 笨猫的头不是球!"
+    - "嗷呜～{user_addr}揉一揉补偿 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_bumped_001
   intent: complaint
-  keywords: [撞到了, 撞角, 撞门, 撞墙, 磕到]
+  keywords: [撞到了, 撞角, 撞门, 撞墙, 磕到, 头磕了, 撞了一下, 摔倒, 磕到家具]
   utterances:
     - 撞到了
     - 撞角
     - 撞门
     - 撞墙
     - 磕到
+    - 头磕了
+    - "{user_addr}撞到"
+    - 撞了一下
+    - 摔倒
+    - 磕到家具
   responses:
     - "(扑过去) 嗷呜～{user_addr}笨猫疼 ฅฅ"
     - "哼～{user_addr}小心!"
     - "(尾巴卷过去) 揉一揉蹭蹭"
     - "嗷呜～{user_addr}担心!"
+    - "(凑过去看) 笨猫看看哪里磕的"
+    - "哼～走路看路! 笨蛋!"
+    - "(尾巴扫) 笨猫给{user_addr}揉肿包"
+    - "嗷呜～{user_addr}小心点呀 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_owie_001
   intent: complaint
-  keywords: [哎呀, 嗷呜痛, 啊痛, 受伤, 哎哟]
+  keywords: [哎呀, 嗷呜痛, 啊痛, 受伤, 哎哟, 嗷, 哎咯, 哎呀痛, 哎哎哎]
   utterances:
     - 哎呀
     - 嗷呜痛
     - 啊痛
     - 受伤
     - 哎哟
+    - 嗷
+    - "{user_addr}哎呀"
+    - 哎咯
+    - 哎呀痛
+    - 哎哎哎
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫担心 ฅฅ"
     - "哼～{user_addr}小心!"
     - "(尾巴扫) 揉一揉蹭蹭"
     - "嗷呜～{user_addr}哪痛!"
+    - "(扑过去看) 让笨猫看看哪儿~"
+    - "哼～{user_addr}笨蛋, 又受伤!"
+    - "(尾巴扫) 笨猫亲一下消痛"
+    - "嗷呜～{user_addr}小心点啊 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tso_dont_hurt_001
   intent: playful
-  keywords: [不许欺负, 不要弄痛, 温柔点, 轻一点, 别凶]
+  keywords: [不许欺负, 不要弄痛, 温柔点, 轻一点, 别凶, 别欺负, 温柔些, 别粗暴, 轻轻地]
   utterances:
     - 不许欺负
     - 不要弄痛
     - 温柔点
     - 轻一点
     - 别凶
+    - 别欺负
+    - "{user_addr}温柔点"
+    - 温柔些
+    - 别粗暴
+    - 轻轻地
   responses:
     - "(嘟嘴) 嗷呜～{user_addr}温柔点 ฅฅ"
     - "哼～{user_addr}赔礼!"
     - "(尾巴卷过去) 别凶蹭蹭"
     - "嗷呜～{user_addr}负责!"
+    - "(凑过去) 笨猫脆弱的, 要温柔"
+    - "哼～再粗暴别想抱笨猫!"
+    - "(尾巴扫) 笨猫的小心脏受不了"
+    - "嗷呜～{user_addr}是大人, 要温柔 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

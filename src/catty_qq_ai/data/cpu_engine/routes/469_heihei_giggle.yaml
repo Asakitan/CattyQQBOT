@@ -3,170 +3,260 @@
 
 - name: hhg_giggle_001
   intent: playful
-  keywords: [嘿嘿, 嘿嘿嘿, 嗨嗨, 嘿嘿笑, 嘿嘿声]
+  keywords: [嘿嘿, 嘿嘿嘿, 嗨嗨, 嘿嘿笑, 嘿嘿声, 嘿一下, 嘿黑笑, 嘿嘿哒, 嘿嘿一下, 笑嘿嘿]
   utterances:
     - "{user_addr}嘿嘿"
     - "{user_addr}嘿嘿嘿"
     - "{user_addr}嗨嗨"
     - "嘿嘿笑"
     - "嘿嘿声"
+    - "{user_addr}嘿一下"
+    - "{user_addr}嘿黑笑"
+    - "{user_addr}嘿嘿哒"
+    - "{user_addr}嘿嘿一下"
+    - "{user_addr}笑嘿嘿"
   responses:
     - "嗷呜～{user_addr}笑啥呢喵ฅฅ"
-    - "(尾巴翘) 嘿嘿! 笨猫陪!"
+    - "(尾巴翘)嘿嘿! 笨猫陪!"
     - "哼～{user_addr}得意嘿嘿"
     - "嘿嘿～{user_addr}笨猫接住~"
+    - "(凑过去){user_addr}笨猫也想笑嗷呜"
+    - "嗷呜～{user_addr}嘿嘿是不是有阴谋哦"
+    - "(歪头)笨猫嘿嘿陪{user_addr}笑场"
+    - "哼～{user_addr}得意完别忘了笨猫一份"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_002
   intent: playful
-  keywords: [偷笑, 暗笑, 自己笑, 笑出声, 抿嘴笑]
+  keywords: [偷笑, 暗笑, 自己笑, 笑出声, 抿嘴笑, 偷偷乐, 偷乐, 闷笑, 小声笑, 低头笑]
   utterances:
     - "{user_addr}偷笑"
     - "{user_addr}暗笑"
     - "{user_addr}自己笑"
     - "{user_addr}笑出声"
     - "{user_addr}抿嘴笑"
+    - "{user_addr}偷偷乐"
+    - "{user_addr}偷乐"
+    - "{user_addr}闷笑"
+    - "{user_addr}小声笑"
+    - "{user_addr}低头笑"
   responses:
-    - "(凑过去) {user_addr}笑啥喵ฅฅ"
+    - "(凑过去){user_addr}笑啥喵ฅฅ"
     - "嗷呜～{user_addr}分享给笨猫!"
     - "哼～{user_addr}不告诉笨猫"
     - "嘿嘿～{user_addr}的笑笨猫看~"
+    - "(歪头){user_addr}藏不住笨猫了嗷呜"
+    - "嗷呜～{user_addr}偷笑也得算笨猫一份!"
+    - "(戳){user_addr}笑这么坏笨猫戒备了"
+    - "哼～{user_addr}不带笨猫笑笨猫不开心"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_003
   intent: playful
-  keywords: [hhhh, 哈哈, 哈哈哈, 笑死了, 笑炸了]
+  keywords: [hhhh, 哈哈, 哈哈哈, 笑死了, 笑炸了, 笑疯了, 笑岔气, 笑到喷, 哈哈哈哈, 大笑]
   utterances:
     - "{user_addr}hhhh"
     - "{user_addr}哈哈"
     - "{user_addr}哈哈哈"
     - "{user_addr}笑死了"
     - "{user_addr}笑炸了"
+    - "{user_addr}笑疯了"
+    - "{user_addr}笑岔气"
+    - "{user_addr}笑到喷"
+    - "{user_addr}哈哈哈哈"
+    - "{user_addr}大笑"
   responses:
     - "嗷呜～{user_addr}笑啥喵ฅฅ"
-    - "(扑过去) 笨猫一起!"
+    - "(扑过去)笨猫一起!"
     - "哼～{user_addr}笑笨猫看!"
     - "嘿嘿～{user_addr}的笑~"
+    - "(尾巴乱晃){user_addr}笨猫的笑被勾起嗷呜"
+    - "嗷呜～{user_addr}笑成这样把笨猫吓到!"
+    - "(滚地){user_addr}笨猫也滚一个"
+    - "哼～{user_addr}快说啥事让笨猫笑笑"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_004
   intent: playful
-  keywords: [开心一下, 心情好, 笑容大, 美滋滋, 蜜汁开心]
+  keywords: [开心一下, 心情好, 笑容大, 美滋滋, 蜜汁开心, 心花怒放, 嘴角上扬, 心情靓, 心爽, 高兴一下]
   utterances:
     - "{user_addr}开心一下"
     - "{user_addr}心情好"
     - "{user_addr}笑容大"
     - "{user_addr}美滋滋"
     - "{user_addr}蜜汁开心"
+    - "{user_addr}心花怒放"
+    - "{user_addr}嘴角上扬"
+    - "{user_addr}心情靓"
+    - "{user_addr}心爽"
+    - "{user_addr}高兴一下"
   responses:
     - "嗷呜～{user_addr}开心笨猫蹭ฅฅ"
-    - "(扑) 笨猫的开心翻倍!"
+    - "(扑)笨猫的开心翻倍!"
     - "哼～{user_addr}得瑟"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(尾巴翘到天){user_addr}笨猫感染快乐嗷呜"
+    - "嗷呜～{user_addr}的开心传染力max"
+    - "(扑进怀里){user_addr}笨猫也要分一份"
+    - "哼～{user_addr}笑得这么开心啥好事"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_005
   intent: playful
-  keywords: [小开心, 一点点开心, 小确幸, 小快乐, 小高兴]
+  keywords: [小开心, 一点点开心, 小确幸, 小快乐, 小高兴, 微开心, 小情绪, 小满足, 心头甜, 心头暖]
   utterances:
     - "{user_addr}小开心"
     - "{user_addr}一点点开心"
     - "{user_addr}小确幸"
     - "{user_addr}小快乐"
     - "{user_addr}小高兴"
+    - "{user_addr}微开心"
+    - "{user_addr}小情绪"
+    - "{user_addr}小满足"
+    - "{user_addr}心头甜"
+    - "{user_addr}心头暖"
   responses:
-    - "(贴贴) {user_addr}小确幸喵ฅฅ"
+    - "(贴贴){user_addr}小确幸喵ฅฅ"
     - "嗷呜～笨猫的{user_addr}!"
     - "哼～{user_addr}贪心"
     - "嘿嘿～{user_addr}笨猫继续~"
+    - "(蹭脸){user_addr}笨猫也感染甜甜嗷呜"
+    - "嗷呜～{user_addr}小确幸笨猫的浓缩快乐"
+    - "(尾巴绕){user_addr}笨猫保存这一刻!"
+    - "哼～{user_addr}的小开心要分笨猫一勺"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_006
   intent: playful
-  keywords: [想笑, 控制不住笑, 忍不住笑, 笑爆, 一直笑]
+  keywords: [想笑, 控制不住笑, 忍不住笑, 笑爆, 一直笑, 停不下笑, 笑停不下, 笑场, 笑岔, 憋笑]
   utterances:
     - "{user_addr}想笑"
     - "{user_addr}控制不住笑"
     - "{user_addr}忍不住笑"
     - "{user_addr}笑爆"
     - "{user_addr}一直笑"
+    - "{user_addr}停不下笑"
+    - "{user_addr}笑停不下"
+    - "{user_addr}笑场"
+    - "{user_addr}笑岔"
+    - "{user_addr}憋笑"
   responses:
     - "嗷呜～{user_addr}笑出来喵ฅฅ"
-    - "(笑场) 笨猫陪笑!"
+    - "(笑场)笨猫陪笑!"
     - "哼～{user_addr}笑得真大声"
     - "嘿嘿～{user_addr}笨猫接~"
+    - "(尾巴抖){user_addr}笨猫也憋不住嗷呜"
+    - "嗷呜～{user_addr}笨猫的笑点被{user_addr}攻破"
+    - "(滚一圈){user_addr}笑死笨猫了!"
+    - "哼～{user_addr}笑完赔笨猫一颗糖"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_007
   intent: playful
-  keywords: [呵呵, 呵呵笑, 呵呵呵, 呵呵哒, 呵笑]
+  keywords: [呵呵, 呵呵笑, 呵呵呵, 呵呵哒, 呵笑, 冷呵, 呵呵冷, 嘲讽呵, 呵了, 呵到底]
   utterances:
     - "{user_addr}呵呵"
     - "{user_addr}呵呵笑"
     - "{user_addr}呵呵呵"
     - "{user_addr}呵呵哒"
     - "{user_addr}呵笑"
+    - "{user_addr}冷呵"
+    - "{user_addr}呵呵冷"
+    - "{user_addr}嘲讽呵"
+    - "{user_addr}呵了"
+    - "{user_addr}呵到底"
   responses:
-    - "(警惕) {user_addr}呵呵啥意思喵ฅฅ"
+    - "(警惕){user_addr}呵呵啥意思喵ฅฅ"
     - "嗷呜～{user_addr}呵呵笨猫怕!"
     - "哼～{user_addr}呵呵警告!"
     - "嘿嘿～{user_addr}呵呵是真笑~"
+    - "(炸毛){user_addr}笨猫感觉危险嗷呜"
+    - "嗷呜～{user_addr}是真生气还是真无语啊"
+    - "(贴贴){user_addr}消消气说说看"
+    - "哼～{user_addr}呵呵笨猫拒绝接收"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_008
   intent: playful
-  keywords: [心花怒放, 心花开, 笑开花, 乐开怀, 乐疯了]
+  keywords: [心花怒放, 心花开, 笑开花, 乐开怀, 乐疯了, 乐翻天, 心情爆好, 笑成桃花, 乐成花, 喜上眉梢]
   utterances:
     - "{user_addr}心花怒放"
     - "{user_addr}心花开"
     - "{user_addr}笑开花"
     - "{user_addr}乐开怀"
     - "{user_addr}乐疯了"
+    - "{user_addr}乐翻天"
+    - "{user_addr}心情爆好"
+    - "{user_addr}笑成桃花"
+    - "{user_addr}乐成花"
+    - "{user_addr}喜上眉梢"
   responses:
     - "嗷呜～{user_addr}开心笨猫陪喵ฅฅ"
-    - "(扑) 笨猫的快乐!"
+    - "(扑)笨猫的快乐!"
     - "哼～{user_addr}笑成花"
     - "嘿嘿～{user_addr}笨猫共~"
+    - "(扑过去亲){user_addr}笨猫也跟着开花嗷呜"
+    - "嗷呜～{user_addr}什么好事说给笨猫听!"
+    - "(尾巴搂){user_addr}笨猫共享{user_addr}的乐"
+    - "哼～{user_addr}笑成这样也太可爱了吧"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_009
   intent: playful
-  keywords: [笑场, 笑岔气, 笑出眼泪, 笑到肚子疼, 笑趴下]
+  keywords: [笑场, 笑岔气, 笑出眼泪, 笑到肚子疼, 笑趴下, 笑塌, 笑滚, 笑成傻子, 笑昏, 笑到喘]
   utterances:
     - "{user_addr}笑场"
     - "{user_addr}笑岔气"
     - "{user_addr}笑出眼泪"
     - "{user_addr}笑到肚子疼"
     - "{user_addr}笑趴下"
+    - "{user_addr}笑塌"
+    - "{user_addr}笑滚"
+    - "{user_addr}笑成傻子"
+    - "{user_addr}笑昏"
+    - "{user_addr}笑到喘"
   responses:
     - "嗷呜～{user_addr}笑得喵ฅฅ"
-    - "(扶) 笨猫给{user_addr}揉肚!"
+    - "(扶)笨猫给{user_addr}揉肚!"
     - "哼～{user_addr}笑成这样"
     - "嘿嘿～{user_addr}笑死人~"
+    - "(扑过去){user_addr}笨猫先送水让你顺顺气嗷呜"
+    - "嗷呜～{user_addr}这笑点也太低了"
+    - "(给纸巾){user_addr}擦擦泪笨猫陪你笑"
+    - "哼～{user_addr}笑完肋骨别裂哦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hhg_giggle_010
   intent: playful
-  keywords: [笑得开心, 微笑, 嘴角上扬, 笑容好看, 笑死]
+  keywords: [笑得开心, 微笑, 嘴角上扬, 笑容好看, 笑死, 笑容暖, 笑成阳光, 笑得甜, 抿嘴, 笑面如花]
   utterances:
     - "{user_addr}笑得开心"
     - "{user_addr}微笑"
     - "{user_addr}嘴角上扬"
     - "{user_addr}笑容好看"
     - "{user_addr}笑死"
+    - "{user_addr}笑容暖"
+    - "{user_addr}笑成阳光"
+    - "{user_addr}笑得甜"
+    - "{user_addr}抿嘴一笑"
+    - "{user_addr}笑面如花"
   responses:
     - "嗷呜～{user_addr}笑容笨猫的喵ฅฅ"
-    - "(脸红) {user_addr}笑容好看!"
+    - "(脸红){user_addr}笑容好看!"
     - "哼～{user_addr}笨猫颜值党"
     - "嘿嘿～{user_addr}笨猫被~"
+    - "(看呆){user_addr}笨猫记住{user_addr}今天的笑嗷呜"
+    - "嗷呜～{user_addr}笑得笨猫心脏漏跳了"
+    - "(小声){user_addr}多笑笨猫眼睛都不眨..."
+    - "哼～{user_addr}笨猫先收藏{user_addr}的笑容"
   cooldown_seconds: 60
   weight: 1.0

@@ -4,204 +4,324 @@
 
 - name: kt_montessori_001
   intent: question
-  keywords: [推荐益智玩具, 推荐蒙特梭利, 推荐 Montessori, 推荐早教玩具, 笨猫益智玩具]
+  keywords: [推荐益智玩具, 推荐蒙特梭利, 推荐 Montessori, 推荐早教玩具, 笨猫益智玩具, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐益智玩具
     - 推荐蒙特梭利
     - 推荐 Montessori
     - 推荐早教玩具
     - 笨猫益智玩具
+    - 推荐益智玩具怎么办
+    - 推荐益智玩具怎么选
+    - "{user_addr}推荐益智玩具"
+    - 推荐益智玩具捏
+    - 推荐益智玩具嘛
+    - 推荐益智玩具有啥推荐
   responses:
     - "嗷呜～{user_addr}蒙特梭利 - 自主探索ฅฅ"
     - "(尾巴翘) 形状配对 / 串珠 / 木质教具"
     - "{user_addr}1-3 岁感官 / 3-6 岁数学"
     - "(挺胸) 笨猫推荐: 木质蒙氏教具!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kt_lego_duplo_001
   intent: question
-  keywords: [推荐乐高, 推荐 LEGO, 推荐 Duplo, 推荐得宝, 笨猫乐高]
+  keywords: [推荐乐高, 推荐 LEGO, 推荐 Duplo, 推荐得宝, 笨猫乐高, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐乐高
     - 推荐 LEGO
     - 推荐 Duplo
     - 推荐得宝
     - 笨猫乐高
+    - 推荐乐高怎么办
+    - 推荐乐高怎么选
+    - "{user_addr}推荐乐高"
+    - 推荐乐高捏
+    - 推荐乐高嘛
+    - 推荐乐高有啥推荐
   responses:
     - "嗷呜～{user_addr}Duplo 得宝 - 1.5-5 岁ฅฅ"
     - "(尾巴翘) LEGO Classic / City / Friends"
     - "{user_addr}大颗粒不误食 / 经典百搭"
     - "(挺胸) 笨猫推荐: Duplo 大盒装入门!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kt_magnetic_001
   intent: question
-  keywords: [推荐磁力片, 推荐磁力球, 推荐 Magformers, 推荐 PicassoTiles, 笨猫磁力片]
+  keywords: [推荐磁力片, 推荐磁力球, 推荐 Magformers, 推荐 PicassoTiles, 笨猫磁力片, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐磁力片
     - 推荐磁力球
     - 推荐 Magformers
     - 推荐 PicassoTiles
     - 笨猫磁力片
+    - 推荐磁力片怎么办
+    - 推荐磁力片怎么选
+    - "{user_addr}推荐磁力片"
+    - 推荐磁力片捏
+    - 推荐磁力片嘛
+    - 推荐磁力片有啥推荐
   responses:
     - "嗷呜～{user_addr}Magformers - 韩国原版ฅฅ"
     - "(尾巴翘) PicassoTiles / 科乐思 - 性价比"
     - "{user_addr}3D 立体 / 培养空间感"
     - "(挺胸) 笨猫推荐: 100 片入门套!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kt_puzzle_001
   intent: question
-  keywords: [推荐拼图, 推荐木制拼图, 推荐大块拼图, 推荐 Ravensburger, 笨猫拼图]
+  keywords: [推荐拼图, 推荐木制拼图, 推荐大块拼图, 推荐 Ravensburger, 笨猫拼图, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐拼图
     - 推荐木制拼图
     - 推荐大块拼图
     - 推荐 Ravensburger
     - 笨猫拼图
+    - 推荐拼图怎么办
+    - 推荐拼图怎么选
+    - "{user_addr}推荐拼图"
+    - 推荐拼图捏
+    - 推荐拼图嘛
+    - 推荐拼图有啥推荐
   responses:
     - "嗷呜～{user_addr}Ravensburger - 德国老牌ฅฅ"
     - "(尾巴翘) 木制嵌板 - 1-3 岁"
     - "{user_addr}24 / 48 / 100 片渐进"
     - "(挺胸) 笨猫推荐: Hape 木制拼图!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: kt_blocks_001
   intent: question
-  keywords: [推荐儿童积木, 推荐大颗粒积木, 推荐木质积木, 推荐 Hape, 笨猫积木]
+  keywords: [推荐儿童积木, 推荐大颗粒积木, 推荐木质积木, 推荐 Hape, 笨猫积木, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐儿童积木
     - 推荐大颗粒积木
     - 推荐木质积木
     - 推荐 Hape
     - 笨猫积木
+    - 推荐儿童积木怎么办
+    - 推荐儿童积木怎么选
+    - "{user_addr}推荐儿童积木"
+    - 推荐儿童积木捏
+    - 推荐儿童积木嘛
+    - 推荐儿童积木有啥推荐
   responses:
     - "嗷呜～{user_addr}Hape 木质积木 - 安全无毒ฅฅ"
     - "(尾巴翘) Melissa & Doug / 米兔"
     - "{user_addr}原木色培养审美"
     - "(挺胸) 笨猫推荐: Hape 100 块经典!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: kt_book_001
   intent: question
-  keywords: [推荐绘本, 推荐翻翻书, 推荐布书, 推荐立体书, 笨猫绘本]
+  keywords: [推荐绘本, 推荐翻翻书, 推荐布书, 推荐立体书, 笨猫绘本, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐绘本
     - 推荐翻翻书
     - 推荐布书
     - 推荐立体书
     - 笨猫绘本
+    - 推荐绘本怎么办
+    - 推荐绘本怎么选
+    - "{user_addr}推荐绘本"
+    - 推荐绘本捏
+    - 推荐绘本嘛
+    - 推荐绘本有啥推荐
   responses:
     - "嗷呜～{user_addr}《好饿的毛毛虫》经典ฅฅ"
     - "(尾巴翘) 翻翻书 / 洞洞书 / 立体书"
     - "{user_addr}艾瑞卡尔 / 宫西达也"
     - "(挺胸) 笨猫推荐: 卡尔爷爷全集!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kt_drawing_001
   intent: question
-  keywords: [推荐儿童画板, 推荐涂鸦, 推荐磁性画板, 推荐 Crayola, 笨猫画板]
+  keywords: [推荐儿童画板, 推荐涂鸦, 推荐磁性画板, 推荐 Crayola, 笨猫画板, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐儿童画板
     - 推荐涂鸦
     - 推荐磁性画板
     - 推荐 Crayola
     - 笨猫画板
+    - 推荐儿童画板怎么办
+    - 推荐儿童画板怎么选
+    - "{user_addr}推荐儿童画板"
+    - 推荐儿童画板捏
+    - 推荐儿童画板嘛
+    - 推荐儿童画板有啥推荐
   responses:
     - "嗷呜～{user_addr}磁性画板 - 反复涂鸦ฅฅ"
     - "(尾巴翘) Crayola 蜡笔 / 水彩笔"
     - "{user_addr}水画毯 - 不脏地"
     - "(挺胸) 笨猫推荐: 磁性画板入门!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: kt_kitchen_play_001
   intent: question
-  keywords: [推荐厨房过家家, 推荐过家家玩具, 推荐角色扮演, 推荐儿童厨房, 笨猫过家家]
+  keywords: [推荐厨房过家家, 推荐过家家玩具, 推荐角色扮演, 推荐儿童厨房, 笨猫过家家, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐厨房过家家
     - 推荐过家家玩具
     - 推荐角色扮演
     - 推荐儿童厨房
     - 笨猫过家家
+    - 推荐厨房过家家怎么办
+    - 推荐厨房过家家怎么选
+    - "{user_addr}推荐厨房过家家"
+    - 推荐厨房过家家捏
+    - 推荐厨房过家家嘛
+    - 推荐厨房过家家有啥推荐
   responses:
     - "嗷呜～{user_addr}木质厨房 - 培养想象力ฅฅ"
     - "(尾巴翘) Hape / KidKraft / IKEA"
     - "{user_addr}医生 / 超市 / 工具套装"
     - "(挺胸) 笨猫推荐: IKEA 儿童厨房!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: kt_plush_001
   intent: question
-  keywords: [推荐毛绒玩具, 推荐安抚玩具, 推荐 Jellycat, 推荐毛绒娃娃, 笨猫毛绒]
+  keywords: [推荐毛绒玩具, 推荐安抚玩具, 推荐 Jellycat, 推荐毛绒娃娃, 笨猫毛绒, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐毛绒玩具
     - 推荐安抚玩具
     - 推荐 Jellycat
     - 推荐毛绒娃娃
     - 笨猫毛绒
+    - 推荐毛绒玩具怎么办
+    - 推荐毛绒玩具怎么选
+    - "{user_addr}推荐毛绒玩具"
+    - 推荐毛绒玩具捏
+    - 推荐毛绒玩具嘛
+    - 推荐毛绒玩具有啥推荐
   responses:
     - "嗷呜～{user_addr}Jellycat - 英国软糯ฅฅ"
     - "(尾巴翘) Steiff 德国百年 / 迪士尼"
     - "{user_addr}安抚巾 / 玩偶陪睡"
     - "(挺胸) 笨猫推荐: Jellycat 邦尼兔!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kt_music_001
   intent: function_call
-  keywords: [推荐音乐启蒙, 推荐电子琴, 推荐儿童乐器, 推荐 Hape 乐器, 笨猫音乐启蒙]
+  keywords: [推荐音乐启蒙, 推荐电子琴, 推荐儿童乐器, 推荐 Hape 乐器, 笨猫音乐启蒙, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐音乐启蒙
     - 推荐电子琴
     - 推荐儿童乐器
     - 推荐 Hape 乐器
     - 笨猫音乐启蒙
+    - 推荐音乐启蒙怎么办
+    - 推荐音乐启蒙怎么选
+    - "{user_addr}推荐音乐启蒙"
+    - 推荐音乐启蒙捏
+    - 推荐音乐启蒙嘛
+    - 推荐音乐启蒙有啥推荐
   responses:
     - "嗷呜～{user_addr}Hape 木琴 - 经典启蒙ฅฅ"
     - "(尾巴翘) 雅马哈 PSS 系列电子琴"
     - "{user_addr}手摇铃 / 小鼓 / 卡林巴"
     - "(挺胸) 笨猫推荐: Hape 八音木琴!"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫给{user_addr}讲讲喵～ฅฅ"
+    - "(凑过来) 哼! {user_addr}问对人了, 猫猫还算懂哼～"
+    - "(歪头) {user_addr}慢慢来嘛~ 笨猫陪{user_addr}捋嗷呜～"
+    - "(挺胸) 笨猫的提醒: 别贪多~ 抓重点最有效贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: kt_princess_001
   intent: question
-  keywords: [推荐迪士尼公主, 推荐公主玩具, 推荐艾莎冰雪, 推荐美乐蒂, 笨猫公主玩具]
+  keywords: [推荐迪士尼公主, 推荐公主玩具, 推荐艾莎冰雪, 推荐美乐蒂, 笨猫公主玩具, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐迪士尼公主
     - 推荐公主玩具
     - 推荐艾莎冰雪
     - 推荐美乐蒂
     - 笨猫公主玩具
+    - 推荐迪士尼公主怎么办
+    - 推荐迪士尼公主怎么选
+    - "{user_addr}推荐迪士尼公主"
+    - 推荐迪士尼公主捏
+    - 推荐迪士尼公主嘛
+    - 推荐迪士尼公主有啥推荐
   responses:
     - "嗷呜～{user_addr}艾莎 / 安娜 - 冰雪奇缘ฅฅ"
     - "(尾巴翘) 芭比 Barbie / 美泰公主系列"
     - "{user_addr}换装 / 城堡 / 魔法棒"
     - "(挺胸) 笨猫推荐: 艾莎换装套!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: kt_scooter_001
   intent: question
-  keywords: [推荐儿童滑板车, 推荐 Micro, 推荐 Globber, 推荐三轮滑板车, 笨猫滑板车]
+  keywords: [推荐儿童滑板车, 推荐 Micro, 推荐 Globber, 推荐三轮滑板车, 笨猫滑板车, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐儿童滑板车
     - 推荐 Micro
     - 推荐 Globber
     - 推荐三轮滑板车
     - 笨猫滑板车
+    - 推荐儿童滑板车怎么办
+    - 推荐儿童滑板车怎么选
+    - "{user_addr}推荐儿童滑板车"
+    - 推荐儿童滑板车捏
+    - 推荐儿童滑板车嘛
+    - 推荐儿童滑板车有啥推荐
   responses:
     - "嗷呜～{user_addr}Micro 米高 - 瑞士高端ฅฅ"
     - "(尾巴翘) Globber 高乐宝 / 性价比王"
     - "{user_addr}3 轮稳 / 5 岁后 2 轮"
     - "(挺胸) 笨猫推荐: Micro Mini Deluxe!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9

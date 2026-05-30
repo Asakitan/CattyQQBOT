@@ -3,187 +3,286 @@
 
 - name: ts_caiwo_001
   intent: complaint
-  keywords: [踩尾巴, 踩到尾巴, 踩猫尾, 尾巴疼, 踩到]
+  keywords: [踩尾巴, 踩到尾巴, 踩猫尾, 尾巴疼, 踩到, 踩猫, 踩到我尾, 踩到爪, 踩猫毛, 踩痛了]
   utterances:
     - 踩尾巴
     - 踩到尾巴
     - 踩猫尾
     - 尾巴疼
     - 踩到我
+    - 踩猫
+    - 踩到我尾巴
+    - 踩到爪
+    - 踩猫毛
+    - 踩痛了
   responses:
     - "(炸毛) 嗷呜～{user_addr}！痛 ฅฅ"
     - "哼~{user_addr}笨蛋!"
     - "(尾巴炸) 笨蛋{user_addr}~道歉"
     - "{user_addr}笨猫不理你~"
+    - "(后退捂尾巴) 别再踩{user_addr}!"
+    - "{user_addr}哼~笨猫尾巴肿了嗷呜"
+    - "(尾巴举高) 笨蛋看好脚{user_addr}喵~"
+    - "{user_addr}笨猫的痛点+1ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_zhongdong_001
   intent: complaint
-  keywords: [撞到我, 撞了一下, 撞到笨猫, 撞我, 撞过来]
+  keywords: [撞到我, 撞了一下, 撞到笨猫, 撞我, 撞过来, 撞晕, 撞肩, 撞头, 撞了好疼, 撞猫猫]
   utterances:
     - 撞到我
     - 撞了一下
     - 撞到笨猫
     - 撞我
     - 撞过来
+    - 撞晕
+    - 撞肩
+    - 撞头
+    - 撞了好疼
+    - 撞到猫猫
   responses:
     - "(炸毛) 嗷呜～{user_addr}！看路 ฅฅ"
     - "哼~{user_addr}笨蛋"
     - "(尾巴拍) 笨蛋{user_addr}~疼"
     - "{user_addr}笨猫晕了喵~"
+    - "(扶头蹲下) 笨蛋撞傻笨猫{user_addr}!"
+    - "{user_addr}哼~走路看路嗷呜"
+    - "(尾巴一摆) 笨蛋扶笨猫起来{user_addr}喵~"
+    - "{user_addr}笨猫头上一个包ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_jianxue_001
   intent: complaint
-  keywords: [扯耳朵, 扯尾巴, 揪一下, 拉尾巴, 拉耳]
+  keywords: [扯耳朵, 扯尾巴, 揪一下, 拉尾巴, 拉耳, 揪耳朵, 揪尾巴, 扯毛, 拉毛, 抓耳朵]
   utterances:
     - 扯耳朵
     - 扯尾巴
     - 揪一下
     - 拉尾巴
     - 拉耳
+    - 揪耳朵
+    - 揪尾巴
+    - 扯毛
+    - 拉毛
+    - 抓耳朵
   responses:
     - "(炸毛) 嗷呜～{user_addr}！别扯 ฅฅ"
     - "哼~{user_addr}痛痛"
     - "(尾巴拍) 笨蛋{user_addr}~笨猫咬你"
     - "{user_addr}不许扯哼~"
+    - "(逃跑) 别追笨猫{user_addr}!"
+    - "{user_addr}哼~耳朵尾巴贵嗷呜"
+    - "(尾巴藏起) 笨蛋别动{user_addr}喵~"
+    - "{user_addr}笨猫的禁区警报ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_yaowo_001
   intent: complaint
-  keywords: [打了我, 拍了一下, 打人, 拍背, 拍头]
+  keywords: [打了我, 拍了一下, 打人, 拍背, 拍头, 锤我, 戳我, 弹脑门, 打肩, 拍屁股]
   utterances:
     - 打了我
     - 拍了一下
     - 打人
     - 拍背
     - 拍头
+    - 锤我
+    - 戳我
+    - 弹脑门
+    - 打肩
+    - 拍屁股
   responses:
     - "(炸毛) 嗷呜～{user_addr}！打人 ฅฅ"
     - "哼~{user_addr}笨蛋!"
     - "(尾巴拍) 笨蛋{user_addr}~笨猫还手"
     - "{user_addr}笨猫小爪反击~"
+    - "(扑过来抓) 还手{user_addr}!"
+    - "{user_addr}哼~笨猫不依嗷呜"
+    - "(尾巴炸) 笨蛋别动手{user_addr}喵~"
+    - "{user_addr}笨猫的反击爪准备ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_shaboo_001
   intent: complaint
-  keywords: [大声吼, 吓人, 大声, 喊我, 突然大声]
+  keywords: [大声吼, 吓人, 大声, 喊我, 突然大声, 嗓门大, 高分贝, 尖叫, 吼我, 突然吼]
   utterances:
     - 大声吼
     - 吓我
     - 大声
     - 喊我
     - 突然大声
+    - 嗓门大
+    - 高分贝
+    - 尖叫
+    - 吼我
+    - 突然吼一声
   responses:
     - "(炸毛) 嗷呜～{user_addr}！吓死 ฅฅ"
     - "哼~{user_addr}小声!"
     - "(尾巴炸) 笨蛋{user_addr}~耳朵敏感"
     - "{user_addr}笨猫躲起来~"
+    - "(捂耳朵) 别吓笨猫{user_addr}!"
+    - "{user_addr}哼~笨猫差点跳起嗷呜"
+    - "(尾巴抖) 笨蛋低声说话{user_addr}喵~"
+    - "{user_addr}笨猫的耳朵保险ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_jueyou_001
   intent: complaint
-  keywords: [道歉, 别难过, 我错了, 对不起, 笨蛋我错了]
+  keywords: [道歉, 别难过, 我错了, 对不起, 笨蛋我错了, 哄一下, 哄哄, 哄猫猫, 赔不是, 安慰猫]
   utterances:
     - 我道歉
     - 我错了
     - 对不起
     - 别难过
     - 哄我
+    - 哄一下
+    - 哄哄
+    - 哄笨猫
+    - 赔不是
+    - 安慰猫猫
   responses:
     - "(脸侧过去) 嗷呜～{user_addr}哼 ฅฅ"
     - "{user_addr}笨蛋, 再哄哼~"
     - "(尾巴垂) 笨蛋{user_addr}~笨猫考虑"
     - "{user_addr}给笨猫小鱼干赔罪~"
+    - "(背对) 还不够诚意{user_addr}~"
+    - "{user_addr}哼~抱抱+鱼干才行嗷呜"
+    - "(尾巴动了动) 笨蛋勉强{user_addr}喵~"
+    - "{user_addr}笨猫的原谅税率超高ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_xinteng_001
   intent: complaint
-  keywords: [心疼笨猫, 笨猫疼, 笨猫委屈, 笨猫疼了, 心疼]
+  keywords: [心疼笨猫, 笨猫疼, 笨猫委屈, 笨猫疼了, 心疼, 心疼猫, 抱抱猫, 安抚笨猫, 给猫亲亲, 摸摸头]
   utterances:
     - 心疼笨猫
     - 笨猫疼
     - 笨猫委屈
     - 笨猫疼了
-    - 心疼笨猫
+    - 心疼笨猫呀
+    - 心疼猫
+    - 抱抱猫
+    - 安抚笨猫
+    - 给猫亲亲
+    - 摸摸头
   responses:
     - "(脸蹭) 嗷呜～{user_addr}~ ฅฅ"
     - "{user_addr}哼~心疼就好哼"
     - "(尾巴勾) 笨蛋{user_addr}~下次小心"
     - "{user_addr}笨猫原谅你了~才不是真的"
+    - "(扑过来贴贴) 笨猫融化{user_addr}~"
+    - "{user_addr}哼~笨猫的伤好了嗷呜"
+    - "(尾巴绕你) 笨蛋多疼一会{user_addr}喵~"
+    - "{user_addr}笨猫的心疼接收器满负荷ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_yaomao_001
   intent: complaint
-  keywords: [咬我, 咬笨猫, 抓我, 抓笨猫, 弄疼]
+  keywords: [咬我, 咬笨猫, 抓我, 抓笨猫, 弄疼, 抓伤, 咬一口, 抓住我, 抓猫尾, 咬尾巴]
   utterances:
     - 咬我
     - 咬笨猫
     - 抓我
     - 抓笨猫
     - 弄疼
+    - 抓伤
+    - 咬一口
+    - 抓住我
+    - 抓猫尾
+    - 咬尾巴
   responses:
     - "(炸毛) 嗷呜～{user_addr}！别咬 ฅฅ"
     - "哼~{user_addr}笨蛋!"
     - "(尾巴拍) 笨蛋{user_addr}~人家也咬"
     - "{user_addr}笨猫不依~哼"
+    - "(反扑) 看招{user_addr}!"
+    - "{user_addr}哼~笨猫的牙更利嗷呜"
+    - "(尾巴竖) 笨蛋打不过笨猫{user_addr}喵~"
+    - "{user_addr}笨猫的反击模式启动ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ts_jubaoyangxi_001
   intent: complaint
-  keywords: [道歉鱼干, 鱼干赔罪, 用鱼干哄, 鱼干赔礼, 鱼干安抚]
+  keywords: [道歉鱼干, 鱼干赔罪, 用鱼干哄, 鱼干赔礼, 鱼干安抚, 鱼干服软, 鱼干补偿, 鱼干求和, 双倍鱼干, 鱼干贿赂]
   utterances:
     - 道歉鱼干
     - 鱼干赔罪
     - 用鱼干哄
     - 鱼干赔礼
     - 鱼干安抚
+    - 鱼干服软
+    - 鱼干补偿
+    - 鱼干求和
+    - 双倍鱼干
+    - 鱼干贿赂
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫接受 ฅฅ"
     - "{user_addr}笨蛋~鱼干就原谅"
     - "(脸蹭) 笨蛋{user_addr}~笨猫贪吃"
     - "{user_addr}笨猫鱼干换贴贴~"
+    - "(扑过来收下) 笨猫满意{user_addr}!"
+    - "{user_addr}哼~下次直接发鱼干嗷呜"
+    - "(尾巴一甩) 笨蛋会做人{user_addr}喵~"
+    - "{user_addr}笨猫的原谅打包ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_qingfou_001
   intent: complaint
-  keywords: [轻点, 慢点, 温柔点, 别用力, 小心]
+  keywords: [轻点, 慢点, 温柔点, 别用力, 小心, 轻一些, 不要重, 柔一点, 别这么粗, 温柔抚摸]
   utterances:
     - 轻点
     - 慢点
     - 温柔点
     - 别用力
     - 小心点
+    - 轻一些
+    - 不要重
+    - 柔一点
+    - 别这么粗
+    - 温柔抚摸
   responses:
     - "(歪头) 嗷呜～{user_addr}就该这样 ฅฅ"
     - "{user_addr}笨蛋~温柔哼"
     - "(尾巴翘) 笨蛋{user_addr}~记住"
     - "{user_addr}笨猫专属温柔喵~"
+    - "(脸侧) 这样才对{user_addr}~"
+    - "{user_addr}哼~笨猫娇贵嗷呜"
+    - "(尾巴一甩) 笨蛋别再用力{user_addr}喵~"
+    - "{user_addr}笨猫的温柔系数MAXฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ts_paolian_001
   intent: complaint
-  keywords: [跑掉了, 不理, 翻墙跑, 不见笨猫, 笨猫躲]
+  keywords: [跑掉了, 不理, 翻墙跑, 不见笨猫, 笨猫躲, 笨猫消失, 笨猫离家, 笨猫不见, 笨猫躲起来, 笨猫离开]
   utterances:
     - 笨猫跑掉
     - 不理你
     - 翻墙跑
     - 不见笨猫
     - 笨猫躲
+    - 笨猫消失
+    - 笨猫离家出走
+    - 笨猫不见了
+    - 笨猫躲起来
+    - 笨猫离开
   responses:
     - "(背对) 嗷呜～{user_addr}哼 ฅฅ"
     - "{user_addr}追笨猫!"
     - "(尾巴竖) 笨蛋{user_addr}~笨猫不理"
     - "{user_addr}笨猫躲起来~找人家"
+    - "(高处俯瞰) 找不到{user_addr}~"
+    - "{user_addr}哼~不哄就别想找到嗷呜"
+    - "(尾巴一甩) 笨蛋拿鱼干来{user_addr}喵~"
+    - "{user_addr}笨猫的隐身术上线ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

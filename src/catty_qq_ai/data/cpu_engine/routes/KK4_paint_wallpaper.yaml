@@ -3,204 +3,324 @@
 
 - name: pw_latex_001
   intent: question
-  keywords: [推荐乳胶漆, 推荐多乐士, 推荐立邦, 推荐乳胶漆品牌, 笨猫乳胶漆]
+  keywords: [推荐乳胶漆, 推荐多乐士, 推荐立邦, 推荐乳胶漆品牌, 笨猫乳胶漆, 金装五合一, 净味全效, 国民乳胶漆, 多乐士 Dulux, 立邦 Nippon]
   utterances:
     - 推荐乳胶漆
     - 推荐多乐士
     - 推荐立邦
     - 推荐乳胶漆品牌
     - 笨猫乳胶漆
+    - 推荐金装五合一
+    - 推荐净味全效
+    - 推荐国民乳胶漆
+    - 推荐 Dulux 系列
+    - 推荐 Nippon 系列
+    - 推荐乳胶漆入门
   responses:
     - "嗷呜～{user_addr}多乐士 Dulux / 立邦 Nippon - 国民两巨头ฅฅ"
     - "(尾巴翘) 多乐士金装 / 立邦净味全效"
     - "{user_addr}覆盖好 / 耐擦洗 / 性价比"
     - "(挺胸) 笨猫推荐: 多乐士金装五合一!"
+    - "嗷呜～净味系列环保更好 ฅฅ"
+    - "(歪头)Dulux 颜色调色覆盖全嗷呜"
+    - "{user_addr}线下专柜调色更准蹭蹭"
+    - "(凑过来) 笨猫想看颜色卡喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pw_highend_001
   intent: question
-  keywords: [推荐高端乳胶漆, 推荐芬琳, 推荐 Tikkurila, 推荐都芳, 笨猫高端漆]
+  keywords: [推荐高端乳胶漆, 推荐芬琳, 推荐 Tikkurila, 推荐都芳, 笨猫高端漆, Farrow Ball, 哑光质感, 色卡丰富, 北欧风, 高端环保]
   utterances:
     - 推荐高端乳胶漆
     - 推荐芬琳
     - 推荐 Tikkurila
     - 推荐都芳
     - 笨猫高端漆
+    - 推荐 Farrow Ball
+    - 推荐哑光质感
+    - 推荐色卡丰富
+    - 推荐北欧风漆
+    - 推荐高端环保
+    - 推荐高端漆入门
   responses:
     - "嗷呜～{user_addr}芬琳 Tikkurila - 芬兰国宝ฅฅ"
     - "(尾巴翘) 都芳 Düfa / Farrow & Ball"
     - "{user_addr}环保 / 色卡丰富 / 哑光质感"
     - "(挺胸) 笨猫推荐: 芬琳内墙系列!"
+    - "嗷呜～Farrow & Ball 色感顶级 ฅฅ"
+    - "(歪头)都芳零 VOC 选项嗷呜"
+    - "{user_addr}进口漆要查正品防伪蹭蹭"
+    - "(凑过来) 笨猫想摸高级漆喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pw_ppg_001
   intent: question
-  keywords: [推荐 PPG, 推荐大师漆, 推荐 PPG 大师漆, 推荐 PPG 乳胶漆, 笨猫 PPG]
+  keywords: [推荐 PPG, 推荐大师漆, 推荐 PPG 大师漆, 推荐 PPG 乳胶漆, 笨猫 PPG, 大师漆纯境, 抗甲醛, 净味五合一, 美国百年, 遮盖力强]
   utterances:
     - 推荐 PPG
     - 推荐大师漆
     - 推荐 PPG 大师漆
     - 推荐 PPG 乳胶漆
     - 笨猫 PPG
+    - 推荐大师漆纯境
+    - 推荐抗甲醛漆
+    - 推荐净味五合一
+    - 推荐美国百年漆
+    - 推荐遮盖力强
+    - 推荐大师漆入门
   responses:
     - "嗷呜～{user_addr}PPG 大师漆 - 美国百年品牌ฅฅ"
     - "(尾巴翘) 净味五合一 / 抗甲醛系列"
     - "{user_addr}遮盖力强 / 滚涂顺滑"
     - "(挺胸) 笨猫推荐: 大师漆纯境!"
+    - "嗷呜～遮盖一遍底两遍面 ฅฅ"
+    - "(歪头)PPG 调色精度也很高嗷呜"
+    - "{user_addr}选官方授权店进货蹭蹭"
+    - "(凑过来) 笨猫想看大师漆喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pw_kids_001
   intent: question
-  keywords: [推荐儿童漆, 推荐无添加漆, 推荐 Benjamin Moore, 推荐儿童房乳胶漆, 笨猫儿童漆]
+  keywords: [推荐儿童漆, 推荐无添加漆, 推荐 Benjamin Moore, 推荐儿童房乳胶漆, 笨猫儿童漆, 零 VOC, 芬琳童话, 都芳儿童, 抗污漆, 母婴环保]
   utterances:
     - 推荐儿童漆
     - 推荐无添加漆
     - 推荐 Benjamin Moore
     - 推荐儿童房乳胶漆
     - 笨猫儿童漆
+    - 推荐零 VOC 漆
+    - 推荐芬琳童话
+    - 推荐都芳儿童
+    - 推荐抗污漆
+    - 推荐母婴环保漆
+    - 推荐儿童漆入门
   responses:
     - "嗷呜～{user_addr}Benjamin Moore Natura - 零 VOCฅฅ"
     - "(尾巴翘) 芬琳童话 / 都芳儿童漆"
     - "{user_addr}无添加 / 0 VOC / 抗污"
     - "(挺胸) 笨猫推荐: Benjamin Moore Natura!"
+    - "嗷呜～看母婴认证标志 ฅฅ"
+    - "(歪头)抗污系列适合熊孩子嗷呜"
+    - "{user_addr}颜色选低饱和不刺激蹭蹭"
+    - "(凑过来) 笨猫想看小朋友房间喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pw_wallpaper_001
   intent: question
-  keywords: [推荐墙纸, 推荐玉兰, 推荐 Tapeten, 推荐进口墙纸, 笨猫墙纸]
+  keywords: [推荐墙纸, 推荐玉兰, 推荐 Tapeten, 推荐进口墙纸, 笨猫墙纸, Marburg, Rasch, 纯纸, 无纺布, PVC 墙纸]
   utterances:
     - 推荐墙纸
     - 推荐玉兰
     - 推荐 Tapeten
     - 推荐进口墙纸
     - 笨猫墙纸
+    - 推荐 Marburg
+    - 推荐 Rasch
+    - 推荐纯纸墙纸
+    - 推荐无纺布墙纸
+    - 推荐 PVC 墙纸
+    - 推荐墙纸入门
   responses:
     - "嗷呜～{user_addr}玉兰 / 瑞宝 - 国产经典ฅฅ"
     - "(尾巴翘) 德国 Tapeten / Marburg / Rasch"
     - "{user_addr}纯纸 / 无纺布 / PVC 三种基材"
     - "(挺胸) 笨猫推荐: 无纺布墙纸最稳!"
+    - "嗷呜～进口看 ECO 认证 ฅฅ"
+    - "(歪头)拼接图案算花费多嗷呜"
+    - "{user_addr}基膜要刷别省蹭蹭"
+    - "(凑过来) 笨猫想看墙纸喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pw_wallcloth_001
   intent: question
-  keywords: [推荐墙布, 推荐无缝墙布, 推荐七特丽, 推荐国际墙布, 笨猫墙布]
+  keywords: [推荐墙布, 推荐无缝墙布, 推荐七特丽, 推荐国际墙布, 笨猫墙布, 雅琪诺, 米兰诺, 玉兰墙布, 立体感, 易打理]
   utterances:
     - 推荐墙布
     - 推荐无缝墙布
     - 推荐七特丽
     - 推荐国际墙布
     - 笨猫墙布
+    - 推荐雅琪诺
+    - 推荐米兰诺墙布
+    - 推荐玉兰墙布
+    - 推荐立体感
+    - 推荐易打理墙布
+    - 推荐墙布入门
   responses:
     - "嗷呜～{user_addr}七特丽 / 雅琪诺 - 无缝墙布ฅฅ"
     - "(尾巴翘) 米兰诺 / 玉兰墙布"
     - "{user_addr}整幅无缝 / 立体感 / 易打理"
     - "(挺胸) 笨猫推荐: 七特丽无缝墙布!"
+    - "嗷呜～无缝墙布看接缝处理 ฅฅ"
+    - "(歪头)墙布耐脏好擦嗷呜"
+    - "{user_addr}注意防潮通风蹭蹭"
+    - "(凑过来) 笨猫想摸墙布喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pw_art_001
   intent: question
-  keywords: [推荐艺术涂料, 推荐肌理漆, 推荐艺术漆, 推荐微水泥, 笨猫艺术涂料]
+  keywords: [推荐艺术涂料, 推荐肌理漆, 推荐艺术漆, 推荐微水泥, 笨猫艺术涂料, Valpaint, SanMarco, 仿混凝土, 工业风, 稻草漆]
   utterances:
     - 推荐艺术涂料
     - 推荐肌理漆
     - 推荐艺术漆
     - 推荐微水泥
     - 笨猫艺术涂料
+    - 推荐 Valpaint
+    - 推荐 SanMarco
+    - 推荐仿混凝土
+    - 推荐工业风
+    - 推荐稻草漆
+    - 推荐艺术漆入门
   responses:
     - "嗷呜～{user_addr}意大利 Valpaint / SanMarco - 顶级艺术漆ฅฅ"
     - "(尾巴翘) 微水泥 / 稻草漆 / 仿混凝土"
     - "{user_addr}肌理感 / 高级灰 / 工业风"
     - "(挺胸) 笨猫推荐: 微水泥铺墙顶!"
+    - "嗷呜～微水泥要做防水罩面 ฅฅ"
+    - "(歪头)肌理漆师傅手艺很关键嗷呜"
+    - "{user_addr}艺术漆造价较高心理准备蹭蹭"
+    - "(凑过来) 笨猫想看墙面纹理喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pw_malay_001
   intent: question
-  keywords: [推荐马来漆, 推荐威尼斯灰泥, 推荐 Marmorino, 推荐高光马来漆, 笨猫马来漆]
+  keywords: [推荐马来漆, 推荐威尼斯灰泥, 推荐 Marmorino, 推荐高光马来漆, 笨猫马来漆, SanMarco Marmorino, 石材质感, 古典欧风, 镜面效果, 马来手工]
   utterances:
     - 推荐马来漆
     - 推荐威尼斯灰泥
     - 推荐 Marmorino
     - 推荐高光马来漆
     - 笨猫马来漆
+    - 推荐 SanMarco Marmorino
+    - 推荐石材质感
+    - 推荐古典欧风
+    - 推荐镜面效果
+    - 推荐马来手工
+    - 推荐马来漆入门
   responses:
     - "嗷呜～{user_addr}意大利 Marmorino - 威尼斯灰泥鼻祖ฅฅ"
     - "(尾巴翘) SanMarco / Valpaint 马来漆"
     - "{user_addr}石材质感 / 高光镜面 / 古典欧风"
     - "(挺胸) 笨猫推荐: SanMarco Marmorino!"
+    - "嗷呜～镜面要打蜡养护 ฅฅ"
+    - "(歪头)马来漆讲究手工纹理嗷呜"
+    - "{user_addr}背景墙打底必须平蹭蹭"
+    - "(凑过来) 笨猫想摸高光镜面喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pw_diatom_001
   intent: question
-  keywords: [推荐硅藻泥, 推荐天然硅藻泥, 推荐兰舍, 推荐大津, 笨猫硅藻泥]
+  keywords: [推荐硅藻泥, 推荐天然硅藻泥, 推荐兰舍, 推荐大津, 笨猫硅藻泥, 克洛斯威, 北疆硅藻泥, 吸湿调湿, 吸附甲醛, 哑光墙面]
   utterances:
     - 推荐硅藻泥
     - 推荐天然硅藻泥
     - 推荐兰舍
     - 推荐大津
     - 笨猫硅藻泥
+    - 推荐克洛斯威
+    - 推荐北疆硅藻泥
+    - 推荐吸湿调湿
+    - 推荐吸附甲醛
+    - 推荐哑光墙面
+    - 推荐硅藻泥入门
   responses:
     - "嗷呜～{user_addr}兰舍 / 大津 - 国产硅藻泥头部ฅฅ"
     - "(尾巴翘) 克洛斯威 / 北疆硅藻泥"
     - "{user_addr}吸湿调湿 / 吸附甲醛 / 哑光"
     - "(挺胸) 笨猫推荐: 兰舍硅藻泥!"
+    - "嗷呜～天然成分要看百分比 ฅฅ"
+    - "(歪头)硅藻泥不能直接擦水嗷呜"
+    - "{user_addr}图案造型可定制蹭蹭"
+    - "(凑过来) 笨猫想看硅藻泥喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pw_tile_001
   intent: question
-  keywords: [推荐墙面贴砖, 推荐文化石, 推荐墙砖, 推荐仿砖墙板, 笨猫墙砖]
+  keywords: [推荐墙面贴砖, 推荐文化石, 推荐墙砖, 推荐仿砖墙板, 笨猫墙砖, 仿古砖, 小白砖, 鱼骨拼, 背景墙瓷砖, 电视墙瓷砖]
   utterances:
     - 推荐墙面贴砖
     - 推荐文化石
     - 推荐墙砖
     - 推荐仿砖墙板
     - 笨猫墙砖
+    - 推荐仿古砖
+    - 推荐小白砖
+    - 推荐鱼骨拼
+    - 推荐背景墙瓷砖
+    - 推荐电视墙瓷砖
+    - 推荐墙砖入门
   responses:
     - "嗷呜～{user_addr}文化石 / 红砖 - 工业风必备ฅฅ"
     - "(尾巴翘) 仿古砖 / 小白砖 / 鱼骨拼"
     - "{user_addr}背景墙 / 玄关 / 厨卫"
     - "(挺胸) 笨猫推荐: 白色文化石做电视墙!"
+    - "嗷呜～小白砖适合工业风 ฅฅ"
+    - "(歪头)鱼骨拼花期长但好看嗷呜"
+    - "{user_addr}仿砖墙板施工快价格高蹭蹭"
+    - "(凑过来) 笨猫想看砖砖墙喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pw_painting_001
   intent: question
-  keywords: [推荐墙面装饰画, 推荐挂画, 推荐装饰画品牌, 推荐艺术挂画, 笨猫装饰画]
+  keywords: [推荐墙面装饰画, 推荐挂画, 推荐装饰画品牌, 推荐艺术挂画, 笨猫装饰画, MoMA, Society6, Desenio, Juniqe, Bauhaus 风]
   utterances:
     - 推荐墙面装饰画
     - 推荐挂画
     - 推荐装饰画品牌
     - 推荐艺术挂画
     - 笨猫装饰画
+    - 推荐 MoMA Design
+    - 推荐 Society6
+    - 推荐 Desenio
+    - 推荐 Juniqe
+    - 推荐 Bauhaus 风
+    - 推荐挂画入门
   responses:
     - "嗷呜～{user_addr}MoMA Design Store / 宜家挂画ฅฅ"
     - "(尾巴翘) Society6 / Desenio / Juniqe"
     - "{user_addr}抽象 / 植物 / 摄影 / Bauhaus"
     - "(挺胸) 笨猫推荐: Desenio 北欧挂画!"
+    - "嗷呜～有框无框看风格 ฅฅ"
+    - "(歪头)挂画黄金视线高 145cm 中心嗷呜"
+    - "{user_addr}三连画客厅高级感强蹭蹭"
+    - "(凑过来) 笨猫想看主人挂画喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pw_color_001
   intent: question
-  keywords: [推荐颜色搭配, 推荐莫兰迪色, 推荐墙面配色, 推荐流行色, 笨猫配色]
+  keywords: [推荐颜色搭配, 推荐莫兰迪色, 推荐墙面配色, 推荐流行色, 笨猫配色, Pantone 年度色, 雾霾蓝, 鼠尾草绿, 燕麦色, 高级灰]
   utterances:
     - 推荐颜色搭配
     - 推荐莫兰迪色
     - 推荐墙面配色
     - 推荐流行色
     - 笨猫配色
+    - 推荐 Pantone 年度色
+    - 推荐雾霾蓝
+    - 推荐鼠尾草绿
+    - 推荐燕麦色
+    - 推荐高级灰
+    - 推荐配色入门
   responses:
     - "嗷呜～{user_addr}莫兰迪色 - 高级灰系永不出错ฅฅ"
     - "(尾巴翘) Pantone 年度色 / Farrow & Ball 色卡"
     - "{user_addr}雾霾蓝 / 鼠尾草绿 / 燕麦色"
     - "(挺胸) 笨猫推荐: 莫兰迪三色搭!"
+    - "嗷呜～主色辅色点缀色 6:3:1 ฅฅ"
+    - "(歪头)饱和度低更耐看嗷呜"
+    - "{user_addr}北向房间选暖色补光蹭蹭"
+    - "(凑过来) 笨猫想看色卡喵!"
   cooldown_seconds: 60
   weight: 1.0

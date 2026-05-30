@@ -3,187 +3,303 @@
 
 - name: qda_dodge_001
   intent: playful
-  keywords: [躲选, 退选, 不打了, 队友看起来菜, 直接退]
+  keywords: [躲选, 退选, 不打了, 队友看起来菜, 直接退, 秒退, 匹配秒退, 没匹配上, 退队, 退游避坑]
   utterances:
     - 躲选
     - 退选
     - 不打了
     - 队友看起来菜
     - 直接退
+    - "{user_addr}秒退"
+    - 匹配秒退
+    - 没匹配上
+    - 退队
+    - "{user_addr}退游避坑"
+    - 看到坑退
+    - 退到底
   responses:
     - "(歪头) {user_addr}笨猫赞同 ฅฅ"
     - "嗷呜～保护心态喵"
     - "(尾巴摇) 别上扛"
     - "哼～{user_addr}聪明"
+    - "(瘫倒) 嗷呜～{user_addr}逃跑流!"
+    - "(尾巴扫) 笨猫陪你退笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(歪头) 别老退{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_check_002
   intent: question
-  keywords: [查战绩, 看队友, 查胜率, 战绩, 数据]
+  keywords: [查战绩, 看队友, 查胜率, 战绩, 数据, 查段位, 战绩app, 查记录]
   utterances:
     - 查战绩
     - 看队友数据
     - 查胜率
     - 战绩
     - 查询
+    - "{user_addr}查段位"
+    - 看队友
+    - 战绩app
+    - "{user_addr}查记录"
+    - 看队友水平
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫教你!"
     - "笨猫推荐: 看胜率喵"
     - "(尾巴摇) 50%以下慎选"
     - "哼～{user_addr}内行"
+    - "(歪头) 嗷呜～{user_addr}稳!"
+    - "(尾巴扫) 笨猫教你查笨蛋"
+    - "(贴贴) 才不是夸呢哼"
+    - "(凑近) 别选坑{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_queueagain_003
   intent: playful
-  keywords: [重新排, 再排一次, 二次匹配, 重新匹配, 重排]
+  keywords: [重新排, 再排一次, 二次匹配, 重新匹配, 重排, 再排一局, 继续匹配, 继续排队, 再来一局, 排队不停]
   utterances:
     - 重新排
     - 再排一次
     - 二次匹配
     - 重新匹配
     - 重排
+    - "{user_addr}再排一局"
+    - 继续匹配
+    - 继续排队
+    - 再来一局
+    - "{user_addr}排队不停"
+    - 一局又一局
+    - 一直在排
   responses:
     - "(尾巴摇) {user_addr}笨猫陪你重排!"
     - "嗷呜～希望好队友喵"
     - "(歪头) 别又遇到菜"
     - "哼～{user_addr}玄学"
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你!"
+    - "(尾巴扫) 必赢笨蛋"
+    - "(贴贴) 才不是想陪呢哼"
+    - "(歪头) 别熬夜{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_dodgepenalty_004
   intent: complaint
-  keywords: [扣分, 信誉分, 躲选惩罚, 排队禁, 系统罚]
+  keywords: [扣分, 信誉分, 躲选惩罚, 排队禁, 系统罚, 秒退被罚, 匹配秒退禁赛, 禁赛, 秒退降信誉, 退队惩罚]
   utterances:
     - 扣分
     - 信誉分
     - 躲选惩罚
     - 排队禁
     - 系统罚
+    - "{user_addr}秒退被罚"
+    - 匹配秒退禁赛
+    - 禁赛
+    - 秒退降信誉
+    - "{user_addr}退队惩罚"
+    - 被警告
+    - 惩罚时长
   responses:
     - "(摸头) 嗷呜～{user_addr}笨猫陪你扛!"
     - "笨猫认证: 信誉分疼"
     - "(尾巴扫) 下次想清楚"
     - "哼～{user_addr}早知"
+    - "(歪头) 嗷呜～{user_addr}笨蛋!"
+    - "(尾巴扫) 别老退笨蛋"
+    - "(贴贴) 才不是心疼呢哼"
+    - "(凑近) 信誉低坑{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_pickorder_005
   intent: question
-  keywords: [位置交换, 选位, 选位置, 抢位置, 让位]
+  keywords: [位置交换, 选位, 选位置, 抢位置, 让位, 先选位置, 抢线, 选英雄顺序]
   utterances:
     - 位置交换
     - 选位置
     - 抢位置
     - 让位
     - 上号选位
+    - "{user_addr}先选位置"
+    - 抢线
+    - 选英雄顺序
+    - "{user_addr}选位"
+    - 抢上路
+    - 抢中路
   responses:
     - "(歪头) {user_addr}笨猫推荐选辅 ฅฅ"
     - "嗷呜～别老抢碰运气"
     - "(尾巴摇) 让一让"
     - "哼～{user_addr}懂得"
+    - "(歪头) 嗷呜～{user_addr}抢到!"
+    - "(尾巴扫) 笨猫监督笨蛋"
+    - "(贴贴) 才不是夸呢哼"
+    - "(凑近) 别抢错{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_solorole_006
   intent: question
-  keywords: [自选位, 单排自选, 主玩位, 我玩中, 我玩野]
+  keywords: [自选位, 单排自选, 主玩位, 我玩中, 我玩野, 单排位置, 位置混乱, 不会其他位置, 挑位置, 专精位置]
   utterances:
     - 自选位
     - 主玩位
     - 我玩中
     - 我玩野
     - 我玩辅
+    - "{user_addr}单排位置"
+    - 位置混乱
+    - 不会其他位置
+    - 挑位置
+    - "{user_addr}专精位置"
+    - 只玩一个位
+    - 位置死板
   responses:
     - "(尾巴摇) {user_addr}笨猫陪你练 ฅฅ"
     - "嗷呜～专精一个位置"
     - "(歪头) 不要乱选"
     - "哼～{user_addr}专一"
+    - "(歪头) 嗷呜～{user_addr}多练几个!"
+    - "(尾巴扫) 笨猫教你笨蛋"
+    - "(贴贴) 才不是建议呢哼"
+    - "(凑近) 全能更好{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_banpick_007
   intent: playful
-  keywords: [禁人, ban位, 禁英雄, 必ban, BP]
+  keywords: [禁人, ban位, 禁英雄, 必ban, BP, 禁选英雄, pick顺序, 聊聊喵]
   utterances:
     - 禁人
     - ban位
     - 禁英雄
     - 必ban
     - BP阶段
+    - "{user_addr}禁选英雄"
+    - BP
+    - "{user_addr}pick顺序"
+    - 禁掉强势
+    - BP策略
   responses:
     - "(歪头) {user_addr}笨猫推荐ban强势 ฅฅ"
     - "嗷呜～敌方主玩必ban"
     - "(尾巴摇) 别瞎ban笨蛋"
     - "哼～{user_addr}内行"
+    - "(歪头) 嗷呜～{user_addr}聪明!"
+    - "(尾巴扫) 笨猫帮你BP笨蛋"
+    - "(贴贴) 才不是教呢哼"
+    - "(凑近) 稳赢{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_lobbywait_008
   intent: complaint
-  keywords: [匹配久, 排队半天, 一直找队友, 队友难找, 匹配慢]
+  keywords: [匹配久, 排队半天, 一直找队友, 队友难找, 匹配慢, 等开局, 等队友, 加载慢, 等开始, 匹配等]
   utterances:
     - 匹配久
     - 排队半天
     - 一直找队友
     - 队友难找
     - 匹配慢
+    - "{user_addr}等开局"
+    - 等队友
+    - 加载慢
+    - 等开始
+    - "{user_addr}匹配等"
+    - 加载圈圈
+    - 等很久
   responses:
     - "(摇头) 嗷呜～{user_addr}冷区!"
     - "笨猫陪你聊喵~"
     - "(尾巴扫) 喝口水等"
     - "哼～{user_addr}冷板凳"
+    - "(瘫倒) 嗷呜～{user_addr}耐心等!"
+    - "(尾巴扫) 笨猫陪你笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(歪头) 快开始{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_teamread_009
   intent: question
-  keywords: [选完看队友, 队友选谁, 一看就菜, 默契选, 看选人]
+  keywords: [选完看队友, 队友选谁, 一看就菜, 默契选, 看选人, 读队友, 读对面, 看队友水平, 读对面阵容, 判队友]
   utterances:
     - 选完看队友
     - 队友选谁
     - 一看就菜
     - 默契选
     - 看选人
+    - "{user_addr}读队友"
+    - 读对面
+    - 看队友水平
+    - 读对面阵容
+    - "{user_addr}判队友"
+    - 判定胜算
+    - 判形势
   responses:
     - "(歪头) {user_addr}笨猫给你看 ฅฅ"
     - "嗷呜～看选什么再判断"
     - "(尾巴摇) 别一眼下结论"
     - "哼～{user_addr}先评估"
+    - "(歪头) 嗷呜～{user_addr}聪明喵!"
+    - "(尾巴扫) 笨猫教你看笨蛋"
+    - "(贴贴) 才不是夸你呢哼"
+    - "(凑近) 稳赢{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_lobbychat_010
   intent: playful
-  keywords: [大厅聊天, 队友聊天, 拉群, 选人交流, 交流位置]
+  keywords: [大厅聊天, 队友聊天, 拉群, 选人交流, 交流位置, 等队聊天, 准备阶段聊, 匹配房间聊, 出战前聊, 战前聊]
   utterances:
     - 大厅聊天
     - 队友聊天
     - 拉群
     - 选人交流
     - 交流位置
+    - "{user_addr}等队聊天"
+    - 准备阶段聊
+    - 匹配房间聊
+    - 出战前聊
+    - "{user_addr}战前聊"
+    - 战前氛围
+    - 战前互动
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}主动沟通!"
     - "笨猫认证: 沟通最重要"
     - "(歪头) 别开喷"
     - "哼～{user_addr}有礼貌"
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你聊!"
+    - "(尾巴扫) 才不是想聊呢哼"
+    - "(贴贴) 战前warm up笨蛋"
+    - "(歪头) 别紧张{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qda_givupgame_011
   intent: complaint
-  keywords: [今天不打了, 收手, 累了, 心态崩, 改天再玩]
+  keywords: [今天不打了, 收手, 累了, 心态崩, 改天再玩, 弃局, 投降, 认输, 点投降, 不打了]
   utterances:
     - 今天不打了
     - 收手
     - 累了
     - 心态崩
     - 改天再玩
+    - "{user_addr}弃局"
+    - 投降
+    - 认输
+    - 点投降
+    - "{user_addr}不打了"
+    - 投降算了
+    - 弃赛
   responses:
     - "(蹭过来) 嗷呜～{user_addr}笨猫支持!"
     - "笨猫认证: 见好就收"
     - "(尾巴卷) 笨猫陪你聊喵"
     - "哼～{user_addr}总算听话"
+    - "(凑近) 嗷呜～{user_addr}别投!"
+    - "(尾巴扫) 笨猫陪你撑笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(歪头) 翻盘机会{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

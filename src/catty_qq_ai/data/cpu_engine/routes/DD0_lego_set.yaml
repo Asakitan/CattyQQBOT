@@ -4,204 +4,324 @@
 
 - name: ls_classic_001
   intent: question
-  keywords: [推荐乐高入坑, 推荐 Classic, 推荐 Creator, 推荐乐高新手, 笨猫乐高入坑]
+  keywords: [推荐乐高入坑, 推荐 Classic, 推荐 Creator, 推荐乐高新手, 笨猫乐高入坑, 笨猫 乐高入坑, 乐高入坑 怎么样, 乐高入坑 推荐, 问 乐高入坑]
   utterances:
     - 推荐乐高入坑
     - 推荐 Classic
     - 推荐 Creator
     - 推荐乐高新手
     - 笨猫乐高入坑
+    - 乐高入坑 推荐一下
+    - 乐高入坑 怎么选嗷
+    - 笨猫聊聊 乐高入坑
+    - 乐高入坑 有什么好的
+    - 乐高入坑 经验分享下
+    - 乐高入坑 真的有用吗
   responses:
     - "嗷呜～{user_addr}Classic 大盒 - 基础颗粒ฅฅ"
     - "(尾巴翘) Creator 3-in-1 - 一盒三拼"
     - "{user_addr}10696 / 31136 - 经典入门"
     - "(挺胸) 笨猫推荐: Classic 万能起步!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高入坑 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高入坑 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高入坑 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ls_starwars_001
   intent: question
-  keywords: [推荐乐高 Star Wars, 推荐千年隼, 推荐星战乐高, 推荐 UCS, 笨猫星战乐高]
+  keywords: [推荐乐高 Star Wars, 推荐千年隼, 推荐星战乐高, 推荐 UCS, 笨猫星战乐高, 笨猫 乐高 Star Wars, 乐高 Star Wars 怎么样, 乐高 Star Wars 推荐, 问 乐高 Star Wars]
   utterances:
     - 推荐乐高 Star Wars
     - 推荐千年隼
     - 推荐星战乐高
     - 推荐 UCS
     - 笨猫星战乐高
+    - 乐高 Star Wars 推荐一下
+    - 乐高 Star Wars 怎么选嗷
+    - 笨猫聊聊 乐高 Star Wars
+    - 乐高 Star Wars 有什么好的
+    - 乐高 Star Wars 经验分享下
+    - 乐高 Star Wars 真的有用吗
   responses:
     - "嗷呜～{user_addr}75192 UCS 千年隼 - 7541 颗粒ฅฅ"
     - "(尾巴翘) 75257 标准版 / 75375 新版"
     - "{user_addr}UCS 系列 - 收藏级巨型"
     - "(挺胸) 笨猫推荐: UCS 千年隼之王!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 Star Wars 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 Star Wars 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 Star Wars 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ls_technic_001
   intent: question
-  keywords: [推荐乐高 Technic, 推荐机械组, 推荐 Bugatti, 推荐保时捷, 笨猫 Technic]
+  keywords: [推荐乐高 Technic, 推荐机械组, 推荐 Bugatti, 推荐保时捷, 笨猫 Technic, 笨猫 乐高 Technic, 乐高 Technic 怎么样, 乐高 Technic 推荐, 问 乐高 Technic]
   utterances:
     - 推荐乐高 Technic
     - 推荐机械组
     - 推荐 Bugatti
     - 推荐保时捷
     - 笨猫 Technic
+    - 乐高 Technic 推荐一下
+    - 乐高 Technic 怎么选嗷
+    - 笨猫聊聊 乐高 Technic
+    - 乐高 Technic 有什么好的
+    - 乐高 Technic 经验分享下
+    - 乐高 Technic 真的有用吗
   responses:
     - "嗷呜～{user_addr}42083 Bugatti Chiron - 神车ฅฅ"
     - "(尾巴翘) 42096 保时捷 911 RSR"
     - "{user_addr}42115 Sian / 42143 法拉利"
     - "(挺胸) 笨猫推荐: Bugatti 工程美学!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 Technic 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 Technic 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 Technic 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ls_architecture_001
   intent: question
-  keywords: [推荐乐高 Architecture, 推荐建筑系列, 推荐天际线, 推荐世界地标, 笨猫建筑乐高]
+  keywords: [推荐乐高 Architecture, 推荐建筑系列, 推荐天际线, 推荐世界地标, 笨猫建筑乐高, 笨猫 乐高 Architecture, 乐高 Architecture 怎么样, 乐高 Architecture 推荐, 问 乐高 Architecture]
   utterances:
     - 推荐乐高 Architecture
     - 推荐建筑系列
     - 推荐天际线
     - 推荐世界地标
     - 笨猫建筑乐高
+    - 乐高 Architecture 推荐一下
+    - 乐高 Architecture 怎么选嗷
+    - 笨猫聊聊 乐高 Architecture
+    - 乐高 Architecture 有什么好的
+    - 乐高 Architecture 经验分享下
+    - 乐高 Architecture 真的有用吗
   responses:
     - "嗷呜～{user_addr}21044 巴黎 / 21047 拉斯维加斯ฅฅ"
     - "(尾巴翘) 21058 金字塔 - 巨型"
     - "{user_addr}21034 伦敦 / 21039 上海"
     - "(挺胸) 笨猫推荐: 天际线系列雅致!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 Architecture 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 Architecture 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 Architecture 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ls_ideas_001
   intent: question
-  keywords: [推荐乐高 Ideas, 推荐创意系列, 推荐玩家投稿, 推荐 21318 树屋, 笨猫 Ideas]
+  keywords: [推荐乐高 Ideas, 推荐创意系列, 推荐玩家投稿, 推荐 21318 树屋, 笨猫 Ideas, 笨猫 乐高 Ideas, 乐高 Ideas 怎么样, 乐高 Ideas 推荐, 问 乐高 Ideas]
   utterances:
     - 推荐乐高 Ideas
     - 推荐创意系列
     - 推荐玩家投稿
     - 推荐 21318 树屋
     - 笨猫 Ideas
+    - 乐高 Ideas 推荐一下
+    - 乐高 Ideas 怎么选嗷
+    - 笨猫聊聊 乐高 Ideas
+    - 乐高 Ideas 有什么好的
+    - 乐高 Ideas 经验分享下
+    - 乐高 Ideas 真的有用吗
   responses:
     - "嗷呜～{user_addr}21318 树屋 - Ideas 巅峰ฅฅ"
     - "(尾巴翘) 21335 灯塔 / 21342 昆虫"
     - "{user_addr}21341 哈萨布鲁 / 21329 桅杆"
     - "(挺胸) 笨猫推荐: Ideas 玩家票选灵魂!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 Ideas 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 Ideas 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 Ideas 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ls_friends_001
   intent: function
-  keywords: [推荐乐高 Friends, 推荐女孩乐高, 推荐 Heartlake, 推荐少女系, 笨猫 Friends]
+  keywords: [推荐乐高 Friends, 推荐女孩乐高, 推荐 Heartlake, 推荐少女系, 笨猫 Friends, 笨猫 乐高 Friends, 乐高 Friends 怎么样, 乐高 Friends 推荐, 问 乐高 Friends]
   utterances:
     - 推荐乐高 Friends
     - 推荐女孩乐高
     - 推荐 Heartlake
     - 推荐少女系
     - 笨猫 Friends
+    - 乐高 Friends 推荐一下
+    - 乐高 Friends 怎么选嗷
+    - 笨猫聊聊 乐高 Friends
+    - 乐高 Friends 有什么好的
+    - 乐高 Friends 经验分享下
+    - 乐高 Friends 真的有用吗
   responses:
     - "嗷呜～{user_addr}Friends 心湖城 - 粉粉女孩系ฅฅ"
     - "(尾巴翘) 41684 / 41703 / 41744"
     - "{user_addr}咖啡店 / 沙龙 / 海洋"
     - "(挺胸) 笨猫推荐: 41684 大酒店治愈!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 Friends 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 Friends 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 Friends 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ls_duplo_001
   intent: question
-  keywords: [推荐乐高 Duplo, 推荐大颗粒, 推荐幼儿乐高, 推荐宝宝积木, 笨猫 Duplo]
+  keywords: [推荐乐高 Duplo, 推荐大颗粒, 推荐幼儿乐高, 推荐宝宝积木, 笨猫 Duplo, 笨猫 乐高 Duplo, 乐高 Duplo 怎么样, 乐高 Duplo 推荐, 问 乐高 Duplo]
   utterances:
     - 推荐乐高 Duplo
     - 推荐大颗粒
     - 推荐幼儿乐高
     - 推荐宝宝积木
     - 笨猫 Duplo
+    - 乐高 Duplo 推荐一下
+    - 乐高 Duplo 怎么选嗷
+    - 笨猫聊聊 乐高 Duplo
+    - 乐高 Duplo 有什么好的
+    - 乐高 Duplo 经验分享下
+    - 乐高 Duplo 真的有用吗
   responses:
     - "嗷呜～{user_addr}Duplo 1.5-5 岁 - 大颗粒安全ฅฅ"
     - "(尾巴翘) 10913 大箱子 / 10954 火车"
     - "{user_addr}动物 / 数字 / 字母 启蒙"
     - "(挺胸) 笨猫推荐: 给小宝宝就选 Duplo!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 Duplo 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 Duplo 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 Duplo 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ls_city_001
   intent: question
-  keywords: [推荐乐高 City, 推荐城市系列, 推荐警车消防, 推荐火车场景, 笨猫 City]
+  keywords: [推荐乐高 City, 推荐城市系列, 推荐警车消防, 推荐火车场景, 笨猫 City, 笨猫 乐高 City, 乐高 City 怎么样, 乐高 City 推荐, 问 乐高 City]
   utterances:
     - 推荐乐高 City
     - 推荐城市系列
     - 推荐警车消防
     - 推荐火车场景
     - 笨猫 City
+    - 乐高 City 推荐一下
+    - 乐高 City 怎么选嗷
+    - 笨猫聊聊 乐高 City
+    - 乐高 City 有什么好的
+    - 乐高 City 经验分享下
+    - 乐高 City 真的有用吗
   responses:
     - "嗷呜～{user_addr}City 警察局 / 消防局 - 角色扮演ฅฅ"
     - "(尾巴翘) 60253 / 60321 / 60337 火车"
     - "{user_addr}太空 / 海洋 / 农场 多场景"
     - "(挺胸) 笨猫推荐: 60337 火车套装超棒!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 City 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 City 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 City 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ls_marvel_001
   intent: question
-  keywords: [推荐乐高 Marvel, 推荐乐高 DC, 推荐漫威乐高, 推荐复仇者联盟, 笨猫漫威乐高]
+  keywords: [推荐乐高 Marvel, 推荐乐高 DC, 推荐漫威乐高, 推荐复仇者联盟, 笨猫漫威乐高, 笨猫 乐高 Marvel, 乐高 Marvel 怎么样, 乐高 Marvel 推荐, 问 乐高 Marvel]
   utterances:
     - 推荐乐高 Marvel
     - 推荐乐高 DC
     - 推荐漫威乐高
     - 推荐复仇者联盟
     - 笨猫漫威乐高
+    - 乐高 Marvel 推荐一下
+    - 乐高 Marvel 怎么选嗷
+    - 笨猫聊聊 乐高 Marvel
+    - 乐高 Marvel 有什么好的
+    - 乐高 Marvel 经验分享下
+    - 乐高 Marvel 真的有用吗
   responses:
     - "嗷呜～{user_addr}76210 钢铁侠机甲 - UCS 级ฅฅ"
     - "(尾巴翘) 76218 至尊圣所 / 76269 复联塔"
     - "{user_addr}DC 76240 蝙蝠车 / 蝙蝠侠面具"
     - "(挺胸) 笨猫推荐: 76269 复联塔超带感!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 Marvel 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 Marvel 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 Marvel 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ls_cheap_001
   intent: question
-  keywords: [推荐便宜乐高, 推荐 100-500 乐高, 推荐入门款乐高, 推荐学生党乐高, 笨猫便宜乐高]
+  keywords: [推荐便宜乐高, 推荐 100-500 乐高, 推荐入门款乐高, 推荐学生党乐高, 笨猫便宜乐高, 笨猫 便宜乐高, 便宜乐高 怎么样, 便宜乐高 推荐, 问 便宜乐高]
   utterances:
     - 推荐便宜乐高
     - 推荐 100-500 乐高
     - 推荐入门款乐高
     - 推荐学生党乐高
     - 笨猫便宜乐高
+    - 便宜乐高 推荐一下
+    - 便宜乐高 怎么选嗷
+    - 笨猫聊聊 便宜乐高
+    - 便宜乐高 有什么好的
+    - 便宜乐高 经验分享下
+    - 便宜乐高 真的有用吗
   responses:
     - "嗷呜～{user_addr}Creator 3-in-1 - 200 价位ฅฅ"
     - "(尾巴翘) Friends 小套 / City 小套 100-300"
     - "{user_addr}盆栽系列 / Botanical 200-400"
     - "(挺胸) 笨猫推荐: 30 系列盲盒便宜!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 便宜乐高 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 便宜乐高 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 便宜乐高 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ls_huge_001
   intent: question
-  keywords: [推荐乐高巨型, 推荐 1000+ 乐高, 推荐 UCS 巨型, 推荐玩家收藏级, 笨猫顶级乐高]
+  keywords: [推荐乐高巨型, 推荐 1000+ 乐高, 推荐 UCS 巨型, 推荐玩家收藏级, 笨猫顶级乐高, 笨猫 乐高巨型, 乐高巨型 怎么样, 乐高巨型 推荐, 问 乐高巨型]
   utterances:
     - 推荐乐高巨型
     - 推荐 1000+ 乐高
     - 推荐 UCS 巨型
     - 推荐玩家收藏级
     - 笨猫顶级乐高
+    - 乐高巨型 推荐一下
+    - 乐高巨型 怎么选嗷
+    - 笨猫聊聊 乐高巨型
+    - 乐高巨型 有什么好的
+    - 乐高巨型 经验分享下
+    - 乐高巨型 真的有用吗
   responses:
     - "嗷呜～{user_addr}75192 千年隼 7541 颗粒ฅฅ"
     - "(尾巴翘) 10307 埃菲尔 10001 颗粒"
     - "{user_addr}10294 泰坦尼克 9090 颗粒"
     - "(挺胸) 笨猫推荐: 10307 埃菲尔之王!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高巨型 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高巨型 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高巨型 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ls_moc_001
   intent: question
-  keywords: [推荐乐高 MOC, 推荐自由拼搭, 推荐乐高散件, 推荐 BrickLink, 笨猫 MOC]
+  keywords: [推荐乐高 MOC, 推荐自由拼搭, 推荐乐高散件, 推荐 BrickLink, 笨猫 MOC, 笨猫 乐高 MOC, 乐高 MOC 怎么样, 乐高 MOC 推荐, 问 乐高 MOC]
   utterances:
     - 推荐乐高 MOC
     - 推荐自由拼搭
     - 推荐乐高散件
     - 推荐 BrickLink
     - 笨猫 MOC
+    - 乐高 MOC 推荐一下
+    - 乐高 MOC 怎么选嗷
+    - 笨猫聊聊 乐高 MOC
+    - 乐高 MOC 有什么好的
+    - 乐高 MOC 经验分享下
+    - 乐高 MOC 真的有用吗
   responses:
     - "嗷呜～{user_addr}MOC = My Own Creation 自由创作ฅฅ"
     - "(尾巴翘) BrickLink 买散件 / Stud.io 设计"
     - "{user_addr}Rebrickable 找图纸 / MOCPages"
     - "(挺胸) 笨猫推荐: 玩了 MOC 才算入坑!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乐高 MOC 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乐高 MOC 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乐高 MOC 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8

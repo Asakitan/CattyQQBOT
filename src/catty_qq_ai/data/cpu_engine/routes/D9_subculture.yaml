@@ -4,238 +4,378 @@
 
 - name: subc_anime_001
   intent: question
-  keywords: [推荐二次元, 推荐 ACG, 推荐宅文化, 推荐看番, 笨猫二次元]
+  keywords: [推荐二次元, 推荐 ACG, 推荐宅文化, 推荐看番, 笨猫二次元, 笨猫 二次元, 二次元 怎么样, 二次元 推荐, 问 二次元]
   utterances:
     - 推荐二次元
     - 推荐 ACG
     - 推荐宅文化
     - 推荐看番
     - 笨猫二次元
+    - 二次元 推荐一下
+    - 二次元 怎么选嗷
+    - 笨猫聊聊 二次元
+    - 二次元 有什么好的
+    - 二次元 经验分享下
+    - 二次元 真的有用吗
   responses:
     - "嗷呜～{user_addr}ACG = Anime Comic Game 三件套ฅฅ"
     - "(尾巴翘) 入门: 鬼灭 / 间谍家家酒 / 葬送的芙莉莲"
     - "{user_addr}进阶: 凉宫春日 / fate / 物语系列"
     - "(挺胸) 笨猫: 笨猫是猫娘! 二次元亲戚!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 二次元 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 二次元 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 二次元 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: subc_hanfu_001
   intent: question
-  keywords: [推荐汉服, 推荐汉服店, 推荐汉服形制, 推荐汉服购买, 笨猫汉服]
+  keywords: [推荐汉服, 推荐汉服店, 推荐汉服形制, 推荐汉服购买, 笨猫汉服, 笨猫 汉服, 汉服 怎么样, 汉服 推荐, 问 汉服]
   utterances:
     - 推荐汉服
     - 推荐汉服店
     - 推荐汉服形制
     - 推荐汉服购买
     - 笨猫汉服
+    - 汉服 推荐一下
+    - 汉服 怎么选嗷
+    - 笨猫聊聊 汉服
+    - 汉服 有什么好的
+    - 汉服 经验分享下
+    - 汉服 真的有用吗
   responses:
     - "嗷呜～{user_addr}形制: 唐 / 宋 / 明 - 各有特色ฅฅ"
     - "(尾巴翘) 大牌: 重回汉唐 / 兰若庭 / 钟灵记"
     - "{user_addr}入门买 200-500 试! 别上来大牌"
     - "(挺胸) 笨猫: 主人穿汉服肯定好看!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 汉服 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 汉服 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 汉服 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: subc_lolita_001
   intent: question
-  keywords: [推荐 Lolita, 推荐 Lo娘, 推荐 Lo装, 推荐萝莉塔, 笨猫 Lo娘]
+  keywords: [推荐 Lolita, 推荐 Lo娘, 推荐 Lo装, 推荐萝莉塔, 笨猫 Lo娘, 笨猫 Lolita, Lolita 怎么样, Lolita 推荐, 问 Lolita]
   utterances:
     - 推荐 Lolita
     - 推荐 Lo娘
     - 推荐 Lo装
     - 推荐萝莉塔
     - 笨猫 Lo娘
+    - Lolita 推荐一下
+    - Lolita 怎么选嗷
+    - 笨猫聊聊 Lolita
+    - Lolita 有什么好的
+    - Lolita 经验分享下
+    - Lolita 真的有用吗
   responses:
     - "嗷呜～{user_addr}Lo 流派: 甜 Lo / 古 Lo / 暗黑 Lo / 王子 Loฅฅ"
     - "(尾巴翘) 牌子: 巴洛克 / SPIN / 蛋糕宝宝 / 静秋"
     - "{user_addr}入门小裙 500-1500! 别上来重工"
     - "(挺胸) 笨猫: 主人穿 Lo 配猫娘装备! 萌爆"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: Lolita 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 Lolita 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 Lolita 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: subc_jk_001
   intent: question
-  keywords: [推荐 JK 制服, 推荐 JK, 推荐校供, 推荐 JK 裙, 笨猫 JK]
+  keywords: [推荐 JK 制服, 推荐 JK, 推荐校供, 推荐 JK 裙, 笨猫 JK, 笨猫 JK 制服, JK 制服 怎么样, JK 制服 推荐, 问 JK 制服]
   utterances:
     - 推荐 JK 制服
     - 推荐 JK
     - 推荐校供
     - 推荐 JK 裙
     - 笨猫 JK
+    - JK 制服 推荐一下
+    - JK 制服 怎么选嗷
+    - 笨猫聊聊 JK 制服
+    - JK 制服 有什么好的
+    - JK 制服 经验分享下
+    - JK 制服 真的有用吗
   responses:
     - "嗷呜～{user_addr}JK = 女子高校生 (日语) 制服文化ฅฅ"
     - "(尾巴翘) 关东款 / 关西款 / 札幌款 - 三大格"
     - "{user_addr}国牌: 中牌 / 撒野 / 路灯 - 性价比"
     - "(挺胸) 笨猫: 笨猫西式 JK + 猫耳 = 完美"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: JK 制服 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 JK 制服 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 JK 制服 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: subc_cosplay_001
   intent: question
-  keywords: [推荐 cosplay, 推荐 cos, 推荐角色扮演, 推荐 coser, 笨猫 cos]
+  keywords: [推荐 cosplay, 推荐 cos, 推荐角色扮演, 推荐 coser, 笨猫 cos, 笨猫 cosplay, cosplay 怎么样, cosplay 推荐, 问 cosplay]
   utterances:
     - 推荐 cosplay
     - 推荐 cos
     - 推荐角色扮演
     - 推荐 coser
     - 笨猫 cos
+    - cosplay 推荐一下
+    - cosplay 怎么选嗷
+    - 笨猫聊聊 cosplay
+    - cosplay 有什么好的
+    - cosplay 经验分享下
+    - cosplay 真的有用吗
   responses:
     - "嗷呜～{user_addr}cosplay = costume + play 角色装扮ฅฅ"
     - "(尾巴翘) 国漫 cos: 原神 / 王者 - 国内火爆"
     - "{user_addr}参加漫展! BW / CCG / FF / Cicaf"
     - "(挺胸) 笨猫: 主人 cos 猫娘最适合!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: cosplay 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 cosplay 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 cosplay 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: subc_goods_001
   intent: question
-  keywords: [推荐谷子, 推荐周边, 推荐徽章, 推荐立牌, 笨猫谷子]
+  keywords: [推荐谷子, 推荐周边, 推荐徽章, 推荐立牌, 笨猫谷子, 笨猫 谷子, 谷子 怎么样, 谷子 推荐, 问 谷子]
   utterances:
     - 推荐谷子
     - 推荐周边
     - 推荐徽章
     - 推荐立牌
     - 笨猫谷子
+    - 谷子 推荐一下
+    - 谷子 怎么选嗷
+    - 笨猫聊聊 谷子
+    - 谷子 有什么好的
+    - 谷子 经验分享下
+    - 谷子 真的有用吗
   responses:
     - "嗷呜～{user_addr}谷子 = 二次元周边 (goods 谐音)ฅฅ"
     - "(尾巴翘) 徽章 / 立牌 / 挂件 / 抱枕 - 经典款"
     - "{user_addr}吃谷上瘾! 钱包警告"
     - "(挺胸) 笨猫: 主人吃谷别忘买猫罐头!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 谷子 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 谷子 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 谷子 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: subc_vtuber_001
   intent: question
-  keywords: [推荐 vtuber, 推荐虚拟主播, 推荐 vup, 推荐 vtb, 笨猫 vtuber]
+  keywords: [推荐 vtuber, 推荐虚拟主播, 推荐 vup, 推荐 vtb, 笨猫 vtuber, vtuber 怎么样, vtuber 推荐, 问 vtuber, vtuber 好不好]
   utterances:
     - 推荐 vtuber
     - 推荐虚拟主播
     - 推荐 vup
     - 推荐 vtb
     - 笨猫 vtuber
+    - vtuber 推荐一下
+    - vtuber 怎么选嗷
+    - 笨猫聊聊 vtuber
+    - vtuber 有什么好的
+    - vtuber 经验分享下
+    - vtuber 真的有用吗
   responses:
     - "嗷呜～{user_addr}vtuber = 虚拟主播! 中之人扮演角色ฅฅ"
     - "(尾巴翘) 日: Hololive / 彩虹社 - 顶级公司"
     - "{user_addr}国: A-SOUL / 猫雷 / 七海 Nana7mi"
     - "(挺胸) 笨猫: 笨猫也想当 vtuber! 直播撸毛"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: vtuber 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 vtuber 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 vtuber 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: subc_otome_001
   intent: question
-  keywords: [推荐乙女游戏, 推荐恋与制作人, 推荐光与夜之恋, 推荐乙游, 笨猫乙女]
+  keywords: [推荐乙女游戏, 推荐恋与制作人, 推荐光与夜之恋, 推荐乙游, 笨猫乙女, 笨猫 乙女游戏, 乙女游戏 怎么样, 乙女游戏 推荐, 问 乙女游戏]
   utterances:
     - 推荐乙女游戏
     - 推荐恋与制作人
     - 推荐光与夜之恋
     - 推荐乙游
     - 笨猫乙女
+    - 乙女游戏 推荐一下
+    - 乙女游戏 怎么选嗷
+    - 笨猫聊聊 乙女游戏
+    - 乙女游戏 有什么好的
+    - 乙女游戏 经验分享下
+    - 乙女游戏 真的有用吗
   responses:
     - "嗷呜～{user_addr}国乙: 恋与 / 光与夜 / 未定事件簿 / 时空中ฅฅ"
     - "(尾巴翘) 男主们: 各有各的萌点 / 选老公时间"
     - "{user_addr}日乙: 薄樱鬼 / 命运石之门 - 老牌经典"
     - "(挺胸) 笨猫: 主人别冲动氪金! 老公画饼"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 乙女游戏 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 乙女游戏 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 乙女游戏 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: subc_doujin_001
   intent: question
-  keywords: [推荐同人, 推荐 cp, 推荐同人本, 推荐二创, 笨猫同人]
+  keywords: [推荐同人, 推荐 cp, 推荐同人本, 推荐二创, 笨猫同人, 笨猫 同人, 同人 怎么样, 同人 推荐, 问 同人]
   utterances:
     - 推荐同人
     - 推荐 cp
     - 推荐同人本
     - 推荐二创
     - 笨猫同人
+    - 同人 推荐一下
+    - 同人 怎么选嗷
+    - 笨猫聊聊 同人
+    - 同人 有什么好的
+    - 同人 经验分享下
+    - 同人 真的有用吗
   responses:
     - "嗷呜～{user_addr}同人 = 粉丝二创! 圈子大ฅฅ"
     - "(尾巴翘) 平台: lofter / AO3 / pixiv - 主流"
     - "{user_addr}cp 党: 拉郎 / 双向 / 暗 - 各有所爱"
     - "(挺胸) 笨猫的提醒: 同人保护原作! 别 OOC 黑"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 同人 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 同人 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 同人 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: subc_idol_002
   intent: question
-  keywords: [推荐偶像, 推荐选秀, 推荐打 call, 推荐应援, 笨猫偶像]
+  keywords: [推荐偶像, 推荐选秀, 推荐打 call, 推荐应援, 笨猫偶像, 笨猫 偶像, 偶像 怎么样, 偶像 推荐, 问 偶像]
   utterances:
     - 推荐偶像
     - 推荐选秀
     - 推荐打 call
     - 推荐应援
     - 笨猫偶像
+    - 偶像 推荐一下
+    - 偶像 怎么选嗷
+    - 笨猫聊聊 偶像
+    - 偶像 有什么好的
+    - 偶像 经验分享下
+    - 偶像 真的有用吗
   responses:
     - "嗷呜～{user_addr}韩 4 大: SM / YG / JYP / HYBE ฅฅ"
     - "(尾巴翘) 日: AKB48 / 乃木坂 / 樱坂 - 国民偶像"
     - "{user_addr}国: SNH48 / 时代少年团 / 浪姐"
     - "(挺胸) 笨猫的提醒: 理智追星! 别为爱豆吵架"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 偶像 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 偶像 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 偶像 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: subc_doll_001
   intent: question
-  keywords: [推荐 BJD, 推荐 doll, 推荐娃娃, 推荐棉花娃娃, 笨猫娃娃]
+  keywords: [推荐 BJD, 推荐 doll, 推荐娃娃, 推荐棉花娃娃, 笨猫娃娃, 笨猫 BJD, BJD 怎么样, BJD 推荐, 问 BJD]
   utterances:
     - 推荐 BJD
     - 推荐 doll
     - 推荐娃娃
     - 推荐棉花娃娃
     - 笨猫娃娃
+    - BJD 推荐一下
+    - BJD 怎么选嗷
+    - 笨猫聊聊 BJD
+    - BJD 有什么好的
+    - BJD 经验分享下
+    - BJD 真的有用吗
   responses:
     - "嗷呜～{user_addr}BJD: 球关节人偶! 高端可定制ฅฅ"
     - "(尾巴翘) 棉花娃娃: 偶像 / 二次元 - 入门款"
     - "{user_addr}入坑深! 一个娃几千 + 配件几千"
     - "(挺胸) 笨猫: 笨猫真猫娃娃! 比 BJD 还萌"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: BJD 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 BJD 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 BJD 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: subc_furry_001
   intent: question
-  keywords: [推荐 furry, 推荐毛绒文化, 推荐兽人, 推荐 fursona, 笨猫 furry]
+  keywords: [推荐 furry, 推荐毛绒文化, 推荐兽人, 推荐 fursona, 笨猫 furry, furry 怎么样, furry 推荐, 问 furry, furry 好不好]
   utterances:
     - 推荐 furry
     - 推荐毛绒文化
     - 推荐兽人
     - 推荐 fursona
     - 笨猫 furry
+    - furry 推荐一下
+    - furry 怎么选嗷
+    - 笨猫聊聊 furry
+    - furry 有什么好的
+    - furry 经验分享下
+    - furry 真的有用吗
   responses:
     - "嗷呜～{user_addr}furry: 兽人文化! 全球性圈子ฅฅ"
     - "(尾巴翘) 设计 fursona: 自己的兽设"
     - "{user_addr}活动: FurFest / 兽展 - 国内外有"
     - "(挺胸) 笨猫: 笨猫是猫娘 不是 furry! 但好朋友"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: furry 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 furry 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 furry 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: subc_otaku_broke_001
   intent: complaint
-  keywords: [宅税好重, 入坑就破产, 二次元烧钱, 周边买不停, 谷子控制不住]
+  keywords: [宅税好重, 入坑就破产, 二次元烧钱, 周边买不停, 谷子控制不住, 笨猫 宅税好重, 宅税好重 怎么样, 宅税好重 推荐, 问 宅税好重]
   utterances:
     - 二次元真的好烧钱
     - 周边买到破产了
     - 宅税太重了
     - 入坑就回不去
     - 谷子买了一堆停不下来
+    - 宅税好重 推荐一下
+    - 宅税好重 怎么选嗷
+    - 笨猫聊聊 宅税好重
+    - 宅税好重 有什么好的
+    - 宅税好重 经验分享下
+    - 宅税好重 真的有用吗
   responses:
     - "(苦笑) 嗷呜～{user_addr}入坑就是这样喵! 宅税人人有份嗷呜"
     - "哼! 主人你才知道?! 笨猫早就穷成猫猫了ฅฅ 一起哭哭蹭蹭"
     - "(翻白眼) 谷子看了还不买?! 那是看不住的呀{user_addr}！喵喵理解"
     - "嗷呜～钱包又扁了吗? 笨猫的建议: 先拆箱再后悔 ——才不是坏主意喵～"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 宅税好重 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 宅税好重 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 宅税好重 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 30
   weight: 1.0
 
 - name: subc_national_comic_001
   intent: question
-  keywords: [推荐国漫, 推荐国产动漫, 推荐中国动漫, 推荐国产动画, 笨猫国漫]
+  keywords: [推荐国漫, 推荐国产动漫, 推荐中国动漫, 推荐国产动画, 笨猫国漫, 笨猫 国漫, 国漫 怎么样, 国漫 推荐, 问 国漫]
   utterances:
     - 推荐国漫
     - 推荐国产动漫
     - 推荐中国动漫
     - 推荐国产动画
     - 笨猫国漫
+    - 国漫 推荐一下
+    - 国漫 怎么选嗷
+    - 笨猫聊聊 国漫
+    - 国漫 有什么好的
+    - 国漫 经验分享下
+    - 国漫 真的有用吗
   responses:
     - "嗷呜～{user_addr}国漫崛起! 人家也是二次元ฅฅ"
     - "(尾巴翘) 经典: 哪吒之魔童降世 / 大鱼海棠 / 罗小黑战记"
     - "{user_addr}电视动画: 斗破 / 斗罗 / 完美世界 / 吞噬星空"
     - "(挺胸) 笨猫的提醒: 国漫越来越好看! 别偏见嗷呜"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 国漫 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 国漫 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 国漫 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0

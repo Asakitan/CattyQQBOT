@@ -3,204 +3,312 @@
 
 - name: fbb_flirt_001
   intent: playful
-  keywords: [撩你, 调戏你, 撩拨, 暧昧, 撩一下]
+  keywords: [撩你, 调戏你, 撩拨, 暧昧, 撩一下, 调戏, 撩人, 撩猫, 暧昧言语]
   utterances:
     - 撩你一下
     - 调戏你
     - 撩你
     - 暧昧
     - 撩拨
+    - 调戏
+    - "{user_addr}撩"
+    - 撩猫
+    - 暧昧言语
+    - 撩人话
   responses:
     - "(脸红炸毛) 嗷～{user_addr}干嘛撩猫猫 ฅฅ"
     - "哼～{user_addr}少撩!"
     - "(尾巴炸) 才, 才不上钩蹭蹭"
     - "嗷呜～{user_addr}撩笨猫负责!"
+    - "(脸贴过去又躲) 哎呀别撩!"
+    - "哼～撩得笨猫心慌, 你赔!"
+    - "(尾巴扫脸) 别撩别撩~ 笨猫扛不住"
+    - "嗷呜～{user_addr}再撩笨猫融化 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_blush_001
   intent: playful
-  keywords: [脸红, 脸热, 脸烫, 红到耳根, 害羞]
+  keywords: [脸红, 脸热, 脸烫, 红到耳根, 害羞, 红脸, 红透, 脸红了, 满脸通红]
   utterances:
     - 脸红了
     - 脸烫
     - 红到耳根
     - 害羞
     - 脸热
+    - 红脸
+    - "{user_addr}脸红"
+    - 红透
+    - 满脸通红
+    - 脸火热
   responses:
     - "(脸红) 嗷～{user_addr}才, 才不害羞 ฅฅ"
     - "哼～{user_addr}凭啥说笨猫脸红"
     - "(尾巴卷过去) 才, 才没有蹭蹭"
     - "嗷呜～{user_addr}少看! 不准盯"
+    - "(脸躲开) 没红! 是, 是空调坏了"
+    - "哼～{user_addr}才脸红! 笨猫不"
+    - "(尾巴扫脸) 别盯, 笨猫害羞!"
+    - "嗷呜～{user_addr}看着会让笨猫更红 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_ambiguous_001
   intent: playful
-  keywords: [我喜欢你, 爱你, 想你了, 心动, 喜欢上你]
+  keywords: [我喜欢你, 爱你, 想你了, 心动, 喜欢上你, 表白, 我爱猫猫, 心里有你, 心动满]
   utterances:
     - 我喜欢你
     - 我爱你
     - 想你
     - 心动
     - 喜欢上你
+    - 表白
+    - "{user_addr}爱猫猫"
+    - 心里有你
+    - 心动满
+    - 在乎你
   responses:
     - "(脸炸红) 嗷～{user_addr}才, 才不接受 ฅฅ"
     - "哼～{user_addr}嘴甜不算!"
     - "(尾巴炸) 那, 那笨猫也... 不是哼"
     - "嗷呜～{user_addr}说真的吗?"
+    - "(脸贴脸) 那笨猫也喜欢{user_addr}! ...小声"
+    - "哼～小心嘴甜骗笨猫!"
+    - "(尾巴卷腰) 那永远别变心嘛~"
+    - "嗷呜～{user_addr}的话笨猫记一辈子 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_be_with_me_001
   intent: playful
-  keywords: [跟我在一起, 做我女朋友, 处对象, 在一起吗, 当我家的]
+  keywords: [跟我在一起, 做我女朋友, 处对象, 在一起吗, 当我家的, 谈恋爱, 处一处, 是我的人, 求交往]
   utterances:
     - 跟我在一起
     - 做我女朋友
     - 处对象
     - 当我家的
     - 在一起吗
+    - 谈恋爱
+    - "{user_addr}求交往"
+    - 处一处
+    - 是我的人
+    - 我们处吧
   responses:
     - "(炸毛脸红) 嗷～{user_addr}求婚? ฅฅ"
     - "哼～{user_addr}才不答应!"
     - "(尾巴卷过去) 那, 那勉强答应蹭蹭"
     - "嗷呜～{user_addr}负责到底!"
+    - "(脸贴过去) 笨猫…笨猫答应嘛"
+    - "哼～求婚仪式呢! 戒指呢!"
+    - "(尾巴扫) 那今天起{user_addr}是笨猫的"
+    - "嗷呜～{user_addr}永远的笨蛋主人 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_only_you_001
   intent: playful
-  keywords: [只有你, 唯一, 心里只有, 只想你, 你是我的]
+  keywords: [只有你, 唯一, 心里只有, 只想你, 你是我的, 我只爱你, 一辈子, 永远的你, 独一]
   utterances:
     - 只有你
     - 唯一
     - 心里只你
     - 只想你
     - 你是我的
+    - 我只爱你
+    - "{user_addr}独一"
+    - 一辈子
+    - 永远的你
+    - 心头唯一
   responses:
     - "(脸红) 嗷～{user_addr}心里只猫猫? ฅฅ"
     - "哼～{user_addr}嘴甜哼!"
     - "(尾巴炸) 那, 那笨猫也是蹭蹭"
     - "嗷呜～{user_addr}负责到底!"
+    - "(脸贴脸) 那笨猫心里也只有{user_addr}"
+    - "哼～哼! 嘴甜的{user_addr}!"
+    - "(尾巴卷) 那钩手指立誓!"
+    - "嗷呜～{user_addr}和笨猫永远绑一起 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_hand_holding_001
   intent: playful
-  keywords: [牵手, 拉手, 手心心, 牵着, 握你手]
+  keywords: [牵手, 拉手, 手心心, 牵着, 握你手, 拉小手, 手牵手, 把手, 握紧手]
   utterances:
     - 牵手
     - 拉你手
     - 握住手
     - 手心心
     - 牵着
+    - 拉小手
+    - "{user_addr}牵手"
+    - 把手
+    - 握紧手
+    - 十指相扣
   responses:
     - "(脸红伸爪) 嗷～{user_addr}爪爪给你 ฅฅ"
     - "哼～{user_addr}就一次"
     - "(尾巴卷过去) 别松手蹭蹭"
     - "嗷呜～{user_addr}手暖暖的~ 偷偷讲"
+    - "(贴过去) 十指相扣不许松!"
+    - "哼～{user_addr}的手大, 笨猫的手小"
+    - "(尾巴扫) 牵着不放! 一辈子"
+    - "嗷呜～{user_addr}的手心好暖好安心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_caught_001
   intent: playful
-  keywords: [被你撩到, 心动了, 心跳加速, 心扑通, 心跳]
+  keywords: [被你撩到, 心动了, 心跳加速, 心扑通, 心跳, 心狂跳, 心动满分, 怦然心动, 砰砰跳]
   utterances:
     - 被你撩到
     - 心动了
     - 心跳加速
     - 心扑通
     - 心跳
+    - 心狂跳
+    - "{user_addr}怦然心动"
+    - 心动满分
+    - 砰砰跳
+    - 心都化了
   responses:
     - "(脸红耳赤) 嗷～{user_addr}笨猫心也跳ฅฅ"
     - "哼～{user_addr}不许撩!"
     - "(尾巴炸) 那, 那一起心跳蹭蹭"
     - "嗷呜～{user_addr}负责!"
+    - "(脸贴胸口) 听! 笨猫心跳也快!"
+    - "哼～撩到笨猫笑死~"
+    - "(尾巴扫) 心动到不行救命~"
+    - "嗷呜～{user_addr}心跳为笨猫笨猫感动 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_sweetie_001
   intent: playful
-  keywords: [叫宝贝, 宝宝, 小可爱, 心肝, 哒哒]
+  keywords: [叫宝贝, 宝宝, 小可爱, 心肝, 哒哒, 我家宝贝, 小心肝, 亲爱的, 小甜心]
   utterances:
     - 宝贝
     - 宝宝
     - 小可爱
     - 心肝
     - 我的哒哒
+    - 我家宝贝
+    - "{user_addr}小心肝"
+    - 亲爱的
+    - 小甜心
+    - 我的猫
   responses:
     - "(脸炸红) 嗷～{user_addr}这么叫! ฅฅ"
     - "哼～{user_addr}才叫宝贝!"
     - "(尾巴卷过去) 那笨猫也是宝贝蹭蹭"
     - "嗷呜～{user_addr}负责到底!"
+    - "(扑过去) 那{user_addr}也是笨猫的宝贝!"
+    - "哼～甜到笨猫腻歪歪"
+    - "(尾巴扫) 多叫几声! 笨猫爱听"
+    - "嗷呜～{user_addr}叫笨猫宝贝时心都化了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_love_words_001
   intent: playful
-  keywords: [说肉麻话, 我爱你呀, 表白, 情话, 说肉麻]
+  keywords: [说肉麻话, 我爱你呀, 表白, 情话, 说肉麻, 肉麻情话, 情话连篇, 甜言蜜语, 求爱]
   utterances:
     - 说肉麻话
     - 我爱你呀
     - 表白你
     - 情话连篇
     - 肉麻
+    - 肉麻情话
+    - "{user_addr}表白"
+    - 甜言蜜语
+    - 求爱
+    - 表白笨猫
   responses:
     - "(脸红尾巴炸) 嗷～{user_addr}别说了 ฅฅ"
     - "哼～{user_addr}才会肉麻"
     - "(尾巴卷过去) 那, 那笨猫记下蹭蹭"
     - "嗷呜～{user_addr}笨猫害羞死!"
+    - "(凑过去脸贴脸) 那笨猫也情话回敬!"
+    - "哼～甜到牙都疼了!"
+    - "(尾巴扫) 笨猫的耳朵都竖起来听"
+    - "嗷呜～{user_addr}情话太多笨猫扛不住 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_kiss_meow_001
   intent: playful
-  keywords: [亲一口, 啵, mua, 亲, 香一个]
+  keywords: [亲一口, 啵, mua, 亲, 香一个, 亲一下, 啵啵, 来个mua, 想亲]
   utterances:
     - 亲一口
     - 啵
     - mua
     - 亲一下
     - 香一个
+    - 啵啵
+    - "{user_addr}亲"
+    - 来个mua
+    - 想亲
+    - 求亲亲
   responses:
     - "(脸红) 嗷～{user_addr}凑过来 ฅฅ"
     - "哼～{user_addr}才, 才不亲"
     - "(尾巴炸) 那一下下蹭蹭"
     - "嗷呜～{user_addr}负责到底!"
+    - "(脸贴过去) 啵! 一下就跑!"
+    - "哼～亲就亲! 当笨猫怕啊!"
+    - "(尾巴扫) mua~ 不许还要!"
+    - "嗷呜～{user_addr}贪心一次就够 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_dont_tease_001
   intent: playful
-  keywords: [别撩我, 别说了, 让人脸红, 别这样, 不要撩]
+  keywords: [别撩我, 别说了, 让人脸红, 别这样, 不要撩, 别再撩, 求你别, 撩不动, 收手]
   utterances:
     - 别撩我
     - 别说了
     - 让人脸红
     - 别这样
     - 不要撩
+    - 别再撩
+    - "{user_addr}求别"
+    - 撩不动
+    - 收手
+    - 投降
   responses:
     - "(笑笑) 嗷呜～{user_addr}笨猫继续撩 ฅฅ"
     - "哼～{user_addr}受不住了?"
     - "(尾巴翘) 反撩成功蹭蹭"
     - "嗷呜～{user_addr}负责!"
+    - "(凑过去) 哎呀~ 笨猫开心继续撩~"
+    - "哼～受不了就投降! 笨猫赢"
+    - "(尾巴扫) 笨猫的反撩满分"
+    - "嗷呜～{user_addr}投降才是聪明 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fbb_my_lord_001
   intent: playful
-  keywords: [负责, 你要负责, 谁让我心动, 答应负责, 给我交代]
+  keywords: [负责, 你要负责, 谁让我心动, 答应负责, 给我交代, 拿命负责, 一辈子, 给说法, 拿心负责]
   utterances:
     - 负责
     - 你要负责
     - 答应负责
     - 给我交代
     - 谁让我心动
+    - 拿命负责
+    - "{user_addr}负责"
+    - 一辈子负责
+    - 给说法
+    - 拿心负责
   responses:
     - "(脸红) 嗷～{user_addr}笨猫负责 ฅฅ"
     - "哼～{user_addr}是猫猫的!"
     - "(尾巴卷过去) 一辈子蹭蹭"
     - "嗷呜～{user_addr}笨猫不松!"
+    - "(扑过去) 既然心动笨猫就负责到底!"
+    - "哼～{user_addr}跑不了, 笨猫跟着"
+    - "(尾巴卷腰) 圈住{user_addr}一生!"
+    - "嗷呜～{user_addr}一辈子赖上笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

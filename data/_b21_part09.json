@@ -1,0 +1,982 @@
+[
+ {
+  "name": "tr_xiuxile_001",
+  "file": "260_take_rest.yaml",
+  "keywords": [
+   "休息了吗",
+   "该休息",
+   "累不累",
+   "歇会",
+   "缓一缓"
+  ],
+  "utterances": [
+   "{user_addr}休息了吗",
+   "累不累呀",
+   "该休息了"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "rwc_rest_001",
+    "topic_hint": "467_rest_well_care",
+    "first_utterance": "{user_addr}休息了吗"
+   },
+   {
+    "name": "cls_restrest_001",
+    "topic_hint": "487_care_lifestyle",
+    "first_utterance": "休息一下"
+   },
+   {
+    "name": "cd_rest_004",
+    "topic_hint": "190_care_drinking",
+    "first_utterance": "好好休息"
+   },
+   {
+    "name": "rw_xiuxi_001",
+    "topic_hint": "401_rest_well",
+    "first_utterance": "{user_addr}休息了吗"
+   },
+   {
+    "name": "trc_rest_001",
+    "topic_hint": "528_take_rest_care",
+    "first_utterance": "休息了吗"
+   },
+   {
+    "name": "lc_lc_xiuxi_004",
+    "topic_hint": "239_life_care",
+    "first_utterance": "休息了吗"
+   }
+  ]
+ },
+ {
+  "name": "hle_hehe_001",
+  "file": "330_hehe_laugh_emoji.yaml",
+  "keywords": [
+   "嘿嘿",
+   "hehe",
+   "嘿嘿嘿",
+   "偷笑",
+   "坏笑"
+  ],
+  "utterances": [
+   "嘿嘿",
+   "hehe",
+   "嘿嘿嘿"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "hhg_giggle_001",
+    "topic_hint": "469_heihei_giggle",
+    "first_utterance": "{user_addr}嘿嘿"
+   },
+   {
+    "name": "er_heihei_009",
+    "topic_hint": "158_emoji_reactions",
+    "first_utterance": "嘿嘿"
+   },
+   {
+    "name": "te_haha_001",
+    "topic_hint": "191_text_emoji",
+    "first_utterance": "哈哈"
+   },
+   {
+    "name": "eh_heihei_001",
+    "topic_hint": "052_emoji_heihei_laugh",
+    "first_utterance": "嘿嘿"
+   },
+   {
+    "name": "eh_haha_002",
+    "topic_hint": "431_emoji_haha",
+    "first_utterance": "嘿嘿"
+   },
+   {
+    "name": "et_xiehei_001",
+    "topic_hint": "129_emoji_text",
+    "first_utterance": "嘿嘿"
+   }
+  ]
+ },
+ {
+  "name": "gnr_lateagain_001",
+  "file": "515_goodnight_routine.yaml",
+  "keywords": [
+   "又晚睡",
+   "又熬夜",
+   "这么晚",
+   "几点了还不睡",
+   "还没睡"
+  ],
+  "utterances": [
+   "又熬夜",
+   "又晚睡",
+   "这么晚"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "ser_aoye_001",
+    "topic_hint": "370_sleep_early_remind",
+    "first_utterance": "熬夜"
+   },
+   {
+    "name": "wa_aoye_004",
+    "topic_hint": "286_wanan_night_greeting",
+    "first_utterance": "又熬夜了"
+   },
+   {
+    "name": "il_stay_up_001",
+    "topic_hint": "S7_insomnia_late",
+    "first_utterance": "又熬夜了"
+   },
+   {
+    "name": "lnc_baoye_001",
+    "topic_hint": "352_late_night_call",
+    "first_utterance": "{user_addr}熬夜了"
+   },
+   {
+    "name": "lno_aoye_005",
+    "topic_hint": "002_late_night_owl",
+    "first_utterance": "又熬夜了"
+   },
+   {
+    "name": "nsc_too_late_001",
+    "topic_hint": "075_night_sleep_chat",
+    "first_utterance": "现在几点"
+   }
+  ]
+ },
+ {
+  "name": "wn_zainali_002",
+  "file": "289_where_are_you_now.yaml",
+  "keywords": [
+   "在哪",
+   "在哪儿",
+   "哪里",
+   "在何处",
+   "你在哪"
+  ],
+  "utterances": [
+   "你在哪",
+   "{user_addr}在哪儿",
+   "现在哪里"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "ms_search_001",
+    "topic_hint": "942_missed_message",
+    "first_utterance": "翻聊天记录"
+   },
+   {
+    "name": "jv_jiucha_001",
+    "topic_hint": "262_jealous_vinegar",
+    "first_utterance": "查岗"
+   },
+   {
+    "name": "pbc_battery_002",
+    "topic_hint": "663_phone_low_battery_chat",
+    "first_utterance": "充电器在哪{user_addr}"
+   },
+   {
+    "name": "way_where_001",
+    "topic_hint": "323_where_are_you",
+    "first_utterance": "笨猫你在哪"
+   },
+   {
+    "name": "afc_flirt_010",
+    "topic_hint": "677_ambiguous_flirt_chat",
+    "first_utterance": "{user_addr}想见面"
+   },
+   {
+    "name": "qc_where_001",
+    "topic_hint": "148_question_curiosity",
+    "first_utterance": "哪里"
+   }
+  ]
+ },
+ {
+  "name": "ws_coworker_001",
+  "file": "140_work_slack.yaml",
+  "keywords": [
+   "同事八卦",
+   "同事聊",
+   "摸鱼聊",
+   "同事八卦",
+   "办公室八卦"
+  ],
+  "utterances": [
+   "同事八卦",
+   "摸鱼聊",
+   "办公室八卦"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "wm_bagua_001",
+    "topic_hint": "073_work_slack_moyu",
+    "first_utterance": "八卦"
+   },
+   {
+    "name": "ws_gossip_004",
+    "topic_hint": "203_work_slack",
+    "first_utterance": "同事八卦"
+   },
+   {
+    "name": "ws_gossip_003",
+    "topic_hint": "167_work_slack",
+    "first_utterance": "同事八卦"
+   },
+   {
+    "name": "wfi_fish_003",
+    "topic_hint": "656_workfish_idle_chat",
+    "first_utterance": "同事在八卦{user_addr}"
+   },
+   {
+    "name": "sow_gossip_001",
+    "topic_hint": "548_slack_off_work",
+    "first_utterance": "同事八卦"
+   },
+   {
+    "name": "osc_baguatongshi_001",
+    "topic_hint": "739_office_slacking_check",
+    "first_utterance": "同事八卦"
+   }
+  ]
+ },
+ {
+  "name": "nsc_warm_quilt_001",
+  "file": "075_night_sleep_chat.yaml",
+  "keywords": [
+   "被窝暖",
+   "钻被窝",
+   "抱被子",
+   "被子好暖",
+   "不想出被窝"
+  ],
+  "utterances": [
+   "被窝好暖",
+   "钻被窝了",
+   "{user_addr}抱着被子"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "bb_blk_001",
+    "topic_hint": "583_blanket_burrow_cozy",
+    "first_utterance": "钻被窝了"
+   },
+   {
+    "name": "wc_quilt_006",
+    "topic_hint": "172_warm_clothing",
+    "first_utterance": "被子厚"
+   },
+   {
+    "name": "nf_wan_shangchuang_003",
+    "topic_hint": "220_night_farewell",
+    "first_utterance": "躺下了"
+   },
+   {
+    "name": "ino_warm_bed_001",
+    "topic_hint": "541_insomnia_overthink",
+    "first_utterance": "被窝暖"
+   },
+   {
+    "name": "syc_about_to_sleep_001",
+    "topic_hint": "521_sleep_yet_check",
+    "first_utterance": "要睡了"
+   },
+   {
+    "name": "phs_blanket_003",
+    "topic_hint": "616_pillow_hug_sleep",
+    "first_utterance": "钻被窝了"
+   }
+  ]
+ },
+ {
+  "name": "lsw_wn_006",
+  "file": "777_lucky_streak_win.yaml",
+  "keywords": [
+   "打野",
+   "抓人",
+   "gank",
+   "五杀",
+   "mvp"
+  ],
+  "utterances": [
+   "打野gank",
+   "抓人",
+   "五杀"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "gcl_jungle_001",
+    "topic_hint": "498_gacha_luck",
+    "first_utterance": "打野去抓人"
+   },
+   {
+    "name": "gv_daye_001",
+    "topic_hint": "138_game_vibes",
+    "first_utterance": "打野"
+   },
+   {
+    "name": "gs_strange_match_011",
+    "topic_hint": "169_game_session",
+    "first_utterance": "想打野"
+   },
+   {
+    "name": "gpl_jungle_001",
+    "topic_hint": "546_gacha_pull_luck",
+    "first_utterance": "打野"
+   },
+   {
+    "name": "jcg_junglestart_001",
+    "topic_hint": "645_jungle_carry_glory",
+    "first_utterance": "打野"
+   },
+   {
+    "name": "gg_dayue_001",
+    "topic_hint": "071_game_gacha_pull",
+    "first_utterance": "打野"
+   }
+  ]
+ },
+ {
+  "name": "wc_wc_paobu_003",
+  "file": "225_want_comfort.yaml",
+  "keywords": [
+   "不想说话",
+   "沉默",
+   "静静",
+   "不想理",
+   "闭嘴模式"
+  ],
+  "utterances": [
+   "不想说话",
+   "让我静静",
+   "沉默"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "cm_zibi_001",
+    "topic_hint": "DDD8_cleansing_mind",
+    "first_utterance": "想自闭一下"
+   },
+   {
+    "name": "ew_buxiang_001",
+    "topic_hint": "053_emoji_wuwu_yingying",
+    "first_utterance": "不想动"
+   },
+   {
+    "name": "ld_avoid_people_001",
+    "topic_hint": "LL5_lonely_depression",
+    "first_utterance": "{user_addr}谁也不想见"
+   },
+   {
+    "name": "mg_qichuangqi_003",
+    "topic_hint": "441_morning_grumpy",
+    "first_utterance": "脸臭"
+   },
+   {
+    "name": "mwk_qichuangqi_007",
+    "topic_hint": "001_morning_wakeup_chat",
+    "first_utterance": "有点起床气"
+   },
+   {
+    "name": "myw_morning_mood_008",
+    "topic_hint": "814_morning_first_yawn",
+    "first_utterance": "{user_addr}早上心情不好"
+   }
+  ]
+ },
+ {
+  "name": "sb_gaofeng_001",
+  "file": "812_subway_crowded_squish.yaml",
+  "keywords": [
+   "早高峰挤",
+   "晚高峰",
+   "高峰期",
+   "上下班高峰",
+   "人潮"
+  ],
+  "utterances": [
+   "早高峰挤",
+   "晚高峰",
+   "高峰期"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "ct_yongji_002",
+    "topic_hint": "316_commute_traffic",
+    "first_utterance": "地铁挤"
+   },
+   {
+    "name": "ct_tongqin_003",
+    "topic_hint": "442_commute_tired",
+    "first_utterance": "堵车"
+   },
+   {
+    "name": "st_jam_003",
+    "topic_hint": "195_small_things",
+    "first_utterance": "堵车"
+   },
+   {
+    "name": "tjl_xitong_001",
+    "topic_hint": "731_traffic_jam_late",
+    "first_utterance": "高速堵"
+   },
+   {
+    "name": "sc_traffic_001",
+    "topic_hint": "132_small_complaints",
+    "first_utterance": "堵车死了"
+   },
+   {
+    "name": "ct_huijia_012",
+    "topic_hint": "316_commute_traffic",
+    "first_utterance": "下班路"
+   }
+  ]
+ },
+ {
+  "name": "gpd_pulldeep_003",
+  "file": "643_gacha_pull_dream.yaml",
+  "keywords": [
+   "井了",
+   "抽不出",
+   "歪了",
+   "大保底",
+   "抽光"
+  ],
+  "utterances": [
+   "井了",
+   "抽不出",
+   "歪了"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "gs_dark_lord_006",
+    "topic_hint": "169_game_session",
+    "first_utterance": "非洲人"
+   },
+   {
+    "name": "gpl_eat_egg_001",
+    "topic_hint": "546_gacha_pull_luck",
+    "first_utterance": "全黑"
+   },
+   {
+    "name": "gv_choka_001",
+    "topic_hint": "138_game_vibes",
+    "first_utterance": "抽卡了"
+   },
+   {
+    "name": "gcl_nogo_001",
+    "topic_hint": "498_gacha_luck",
+    "first_utterance": "歪了"
+   },
+   {
+    "name": "ggc_gacha_001",
+    "topic_hint": "658_game_gacha_chat",
+    "first_utterance": "{user_addr}抽卡歪了"
+   },
+   {
+    "name": "gpd_huangoff_007",
+    "topic_hint": "643_gacha_pull_dream",
+    "first_utterance": "歪了"
+   }
+  ]
+ },
+ {
+  "name": "eaj_hengjihaha_001",
+  "file": "725_emoji_awsl_juejue.yaml",
+  "keywords": [
+   "哼",
+   "哈哈哈",
+   "嗨嗨嗨",
+   "嘿嘿",
+   "呵呵"
+  ],
+  "utterances": [
+   "哼",
+   "哈哈哈",
+   "嗨嗨嗨"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "jv_bushuanghua_001",
+    "topic_hint": "262_jealous_vinegar",
+    "first_utterance": "我不爽了"
+   },
+   {
+    "name": "jp_hmph_001",
+    "topic_hint": "U0_jealous_petty",
+    "first_utterance": "哼"
+   },
+   {
+    "name": "er_heng_008",
+    "topic_hint": "158_emoji_reactions",
+    "first_utterance": "哼"
+   },
+   {
+    "name": "hy_heng_005",
+    "topic_hint": "303_heihei_yingying",
+    "first_utterance": "哼"
+   },
+   {
+    "name": "hpt_hng_001",
+    "topic_hint": "333_hng_pout_tsundere",
+    "first_utterance": "哼"
+   },
+   {
+    "name": "res_heng_001",
+    "topic_hint": "358_random_emoji_spam",
+    "first_utterance": "哼"
+   }
+  ]
+ },
+ {
+  "name": "mzo_ot_002",
+  "file": "770_meeting_zone_out.yaml",
+  "keywords": [
+   "假装做笔记",
+   "摸鱼",
+   "桌下手机",
+   "暗号同事",
+   "划水"
+  ],
+  "utterances": [
+   "假装做笔记",
+   "摸鱼",
+   "桌下手机"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "ws_moyu_001",
+    "topic_hint": "236_work_slack",
+    "first_utterance": "摸鱼"
+   },
+   {
+    "name": "ws_slacking_001",
+    "topic_hint": "167_work_slack",
+    "first_utterance": "摸鱼中"
+   },
+   {
+    "name": "cf_huyu_001",
+    "topic_hint": "066_cat_fish_snack",
+    "first_utterance": "钓鱼"
+   },
+   {
+    "name": "wm_moyu_001",
+    "topic_hint": "073_work_slack_moyu",
+    "first_utterance": "摸鱼"
+   },
+   {
+    "name": "bof_chill_001",
+    "topic_hint": "083_busy_or_free",
+    "first_utterance": "无所事事"
+   },
+   {
+    "name": "ws_slack_001",
+    "topic_hint": "203_work_slack",
+    "first_utterance": "摸鱼"
+   }
+  ]
+ },
+ {
+  "name": "rfb_baolao_001",
+  "file": "726_reverse_flirt_back.yaml",
+  "keywords": [
+   "谁先动心",
+   "你心动了",
+   "你脸红",
+   "你不行了",
+   "撑不住"
+  ],
+  "utterances": [
+   "{user_addr}心动了",
+   "你脸红了",
+   "{user_addr}不行了"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "wwc_xinjituijie_010",
+    "topic_hint": "021_wuwu_crying",
+    "first_utterance": "我崩溃"
+   },
+   {
+    "name": "nsc_sleepy_001",
+    "topic_hint": "075_night_sleep_chat",
+    "first_utterance": "好困啊"
+   },
+   {
+    "name": "nc_yali_001",
+    "topic_hint": "263_need_comfort",
+    "first_utterance": "压力大"
+   },
+   {
+    "name": "sct_helpless_001",
+    "topic_hint": "094_seek_comfort",
+    "first_utterance": "无助"
+   },
+   {
+    "name": "rt_fanliao_007",
+    "topic_hint": "398_reverse_tease",
+    "first_utterance": "{user_addr}脸红了"
+   },
+   {
+    "name": "rc_chat_sleep_011",
+    "topic_hint": "179_random_chat",
+    "first_utterance": "越聊越困"
+   }
+  ]
+ },
+ {
+  "name": "er_er_juejuezi_003",
+  "file": "229_emoji_react.yaml",
+  "keywords": [
+   "绝绝子",
+   "绝了",
+   "绝",
+   "好绝",
+   "太绝"
+  ],
+  "utterances": [
+   "绝绝子",
+   "绝了",
+   "好绝"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "ex_juejuezi_001",
+    "topic_hint": "059_expression_xiaosi",
+    "first_utterance": "绝绝子"
+   },
+   {
+    "name": "lld_juejuezi_003",
+    "topic_hint": "029_lol_dying",
+    "first_utterance": "绝绝子"
+   },
+   {
+    "name": "er_juejuezi_003",
+    "topic_hint": "158_emoji_reactions",
+    "first_utterance": "绝绝子"
+   },
+   {
+    "name": "et_juejue_001",
+    "topic_hint": "129_emoji_text",
+    "first_utterance": "绝绝子"
+   },
+   {
+    "name": "ld_jejuezi_001",
+    "topic_hint": "272_laugh_die",
+    "first_utterance": "绝绝子"
+   },
+   {
+    "name": "bb_juewei_004",
+    "topic_hint": "313_bengbu_meme",
+    "first_utterance": "绝了"
+   }
+  ]
+ },
+ {
+  "name": "ay_zaima_001",
+  "file": "421_are_you_there.yaml",
+  "keywords": [
+   "在吗",
+   "在不在",
+   "你在么",
+   "笨猫呢",
+   "没消息"
+  ],
+  "utterances": [
+   "在吗喵",
+   "笨猫在不在",
+   "你在么"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "wn_zaima_001",
+    "topic_hint": "289_where_are_you_now",
+    "first_utterance": "{user_addr}在吗"
+   },
+   {
+    "name": "aytp_zaima_001",
+    "topic_hint": "357_are_you_there_ping",
+    "first_utterance": "{user_addr}在吗"
+   },
+   {
+    "name": "ayt_basic_001",
+    "topic_hint": "079_are_you_there",
+    "first_utterance": "在吗"
+   },
+   {
+    "name": "ayt_zaima_001",
+    "topic_hint": "518_are_you_there_ping",
+    "first_utterance": "{user_addr}在吗"
+   },
+   {
+    "name": "sc_are_you_there_001",
+    "topic_hint": "188_status_check",
+    "first_utterance": "在吗"
+   },
+   {
+    "name": "abn_zaima_001",
+    "topic_hint": "322_asking_busy_now",
+    "first_utterance": "笨猫在吗"
+   }
+  ]
+ },
+ {
+  "name": "wcm_comfort_010",
+  "file": "462_want_comfort.yaml",
+  "keywords": [
+   "给个抱",
+   "给个安慰一下",
+   "摸摸头",
+   "安慰式抚摸",
+   "温柔下"
+  ],
+  "utterances": [
+   "{user_addr}给个抱",
+   "{user_addr}给个安慰一下",
+   "{user_addr}摸摸头"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "hpb_motou_001",
+    "topic_hint": "363_head_pat_beg",
+    "first_utterance": "求摸头"
+   },
+   {
+    "name": "cc_cc_motoutou_003",
+    "topic_hint": "223_clingy_companion",
+    "first_utterance": "摸头"
+   },
+   {
+    "name": "hp_motou_001",
+    "topic_hint": "396_head_pat_beg",
+    "first_utterance": "摸摸头"
+   },
+   {
+    "name": "whb_hug_001",
+    "topic_hint": "475_want_hug_beg",
+    "first_utterance": "{user_addr}抱抱"
+   },
+   {
+    "name": "sp_head_pat_005",
+    "topic_hint": "189_seek_praise",
+    "first_utterance": "摸摸头"
+   },
+   {
+    "name": "hpb_pat_001",
+    "topic_hint": "534_head_pat_beg",
+    "first_utterance": "摸摸头"
+   }
+  ]
+ },
+ {
+  "name": "lk_key_009",
+  "file": "605_lost_keys_panic.yaml",
+  "keywords": [
+   "找了一小时",
+   "翻箱倒柜",
+   "钥匙难找",
+   "全屋翻",
+   "找到崩溃"
+  ],
+  "utterances": [
+   "找了一小时",
+   "翻箱倒柜",
+   "钥匙难找"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "sf_cant_find_001",
+    "topic_hint": "TTT7_storage_full",
+    "first_utterance": "找不到东西啦"
+   },
+   {
+    "name": "cls_pck_006",
+    "topic_hint": "867_closet_pick",
+    "first_utterance": "衣柜整理"
+   },
+   {
+    "name": "lsr_search_001",
+    "topic_hint": "114_lost_something_road",
+    "first_utterance": "找了好久"
+   },
+   {
+    "name": "pm_fanxiang_001",
+    "topic_hint": "CCC8_pet_misbehavior",
+    "first_utterance": "狗把柜子翻了"
+   },
+   {
+    "name": "ltp_quanmianzhaong_001",
+    "topic_hint": "381_lost_thing_panic",
+    "first_utterance": "全屋找"
+   },
+   {
+    "name": "mgm_wupinbang_001",
+    "topic_hint": "729_morning_grouchy_mood",
+    "first_utterance": "找不到衣服"
+   }
+  ]
+ },
+ {
+  "name": "sa_focus_fail_001",
+  "file": "139_study_anxiety.yaml",
+  "keywords": [
+   "集中不了",
+   "注意力差",
+   "走神",
+   "学不下去",
+   "心不在焉"
+  ],
+  "utterances": [
+   "集中不了",
+   "走神",
+   "学不下去"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "dz_zhuanzhu_001",
+    "topic_hint": "042_daydream_zoning_out",
+    "first_utterance": "注意力不集中"
+   },
+   {
+    "name": "stc_focus_001",
+    "topic_hint": "499_study_cram",
+    "first_utterance": "注意力差"
+   },
+   {
+    "name": "wdn_shenmou_002",
+    "topic_hint": "005_what_doing_now",
+    "first_utterance": "在想啥"
+   },
+   {
+    "name": "ss_focus_lost_006",
+    "topic_hint": "202_study_scene",
+    "first_utterance": "集中不了"
+   },
+   {
+    "name": "sep_lihai_001",
+    "topic_hint": "738_study_exam_panic",
+    "first_utterance": "上课走神"
+   },
+   {
+    "name": "dz_zoushen_001",
+    "topic_hint": "042_daydream_zoning_out",
+    "first_utterance": "走神"
+   }
+  ]
+ },
+ {
+  "name": "ts_weiba_003",
+  "file": "410_tail_stepped.yaml",
+  "keywords": [
+   "摸尾巴",
+   "顺尾毛",
+   "撸尾巴",
+   "摸尾",
+   "揉尾巴"
+  ],
+  "utterances": [
+   "摸尾巴",
+   "顺尾毛",
+   "撸尾巴"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "hp_weiba_001",
+    "topic_hint": "056_head_pat_request",
+    "first_utterance": "摸尾巴"
+   },
+   {
+    "name": "ah_motou_006",
+    "topic_hint": "436_ask_for_headpat",
+    "first_utterance": "摸尾巴"
+   },
+   {
+    "name": "hpb_moweiba_003",
+    "topic_hint": "026_head_pat_beg",
+    "first_utterance": "摸尾巴"
+   },
+   {
+    "name": "hbl_tail_grab_009",
+    "topic_hint": "336_hug_beg_lap",
+    "first_utterance": "抓尾巴"
+   },
+   {
+    "name": "fb_lianhong_005",
+    "topic_hint": "433_flirt_back_blush",
+    "first_utterance": "摸耳朵"
+   },
+   {
+    "name": "tso_grab_tail_001",
+    "topic_hint": "544_tail_stepped_owie",
+    "first_utterance": "抓尾巴"
+   }
+  ]
+ },
+ {
+  "name": "hcc_hiccup_009",
+  "file": "560_hiccup_chat.yaml",
+  "keywords": [
+   "喝水",
+   "屏息",
+   "打嗝",
+   "嗝",
+   "停不下"
+  ],
+  "utterances": [
+   "屏住呼吸试试",
+   "猫猫嘲笑我",
+   "{user_addr}打嗝停不下来"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "dwc_basic_001",
+    "topic_hint": "084_drink_water_check",
+    "first_utterance": "{user_addr}喝水了吗"
+   },
+   {
+    "name": "wr_drink_water_001",
+    "topic_hint": "156_water_reminder",
+    "first_utterance": "{user_addr}喝水了吗"
+   },
+   {
+    "name": "hcc_hiccup_001",
+    "topic_hint": "560_hiccup_chat",
+    "first_utterance": "{user_addr}打嗝停不下来"
+   },
+   {
+    "name": "dwr_heshui_001",
+    "topic_hint": "723_drink_water_remind",
+    "first_utterance": "{user_addr}喝水了吗"
+   },
+   {
+    "name": "lnc_drink_water_001",
+    "topic_hint": "076_late_night_call",
+    "first_utterance": "好渴啊"
+   },
+   {
+    "name": "mw_morning_drink_011",
+    "topic_hint": "153_morning_wakeup",
+    "first_utterance": "早上喝水了"
+   }
+  ]
+ }
+]

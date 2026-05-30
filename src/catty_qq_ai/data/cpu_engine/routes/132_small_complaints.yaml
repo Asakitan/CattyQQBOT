@@ -3,170 +3,260 @@
 
 - name: sc_traffic_001
   intent: complaint
-  keywords: [堵车, 交通拥堵, 高峰期, 一路堵, 红灯]
+  keywords: [堵车, 交通拥堵, 高峰期, 一路堵, 红灯, 路堵, 交通堵, 早高峰, 晚高峰, 堵爆]
   utterances:
-    - 堵车死了
-    - 高峰期烦
-    - 一路堵
-    - 红灯多
-    - 交通拥堵
+    - "堵车死了"
+    - "高峰期烦"
+    - "一路堵"
+    - "红灯多"
+    - "交通拥堵"
+    - "{user_addr}早高峰堵"
+    - "晚高峰堵爆"
+    - "路堵"
+    - "交通堵死"
+    - "今天堵爆"
   responses:
-    - "(摸头) 嗷呜～{user_addr}耐心点 ฅฅ"
+    - "(凑头) 嗷呜～{user_addr}耐心点 ฅฅ"
     - "哼～{user_addr}就是杂鱼烦躁"
     - "(贴肚子) {user_addr}笨猫陪你"
     - "{user_addr}听个播客喵蹭蹭"
+    - "(扑过来) {user_addr}人家给你讲故事喵～"
+    - "哼! 笨蛋{user_addr}下次走早一点"
+    - "(歪头) 嗷呜～{user_addr}人家陪你打发时间"
+    - "...{user_addr}慢点开安全, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_commute_001
   intent: complaint
-  keywords: [通勤累, 上下班远, 来回路, 通勤时间, 挤地铁]
+  keywords: [通勤累, 上下班远, 来回路, 通勤时间, 挤地铁, 远途上班, 跨城通勤, 通勤远, 上班路远, 通勤折腾]
   utterances:
-    - 通勤累
-    - 通勤时间长
-    - 来回三小时
-    - 挤地铁
-    - 上下班远
+    - "通勤累"
+    - "通勤时间长"
+    - "来回三小时"
+    - "挤地铁"
+    - "上下班远"
+    - "{user_addr}远途上班"
+    - "跨城通勤"
+    - "通勤折腾"
+    - "上班路远"
+    - "通勤累死"
   responses:
     - "嗷呜～{user_addr}笨猫心疼 ฅฅ"
     - "哼～{user_addr}早点换工作!"
-    - "(贴) {user_addr}笨猫等你回家"
+    - "(凑头) {user_addr}笨猫等你回家"
     - "{user_addr}通勤来回辛苦蹭蹭"
+    - "(扑过来) {user_addr}人家给你按按腿喵～"
+    - "哼! 笨蛋{user_addr}考虑换近一点"
+    - "(歪头) 嗷呜～{user_addr}人家心疼"
+    - "...{user_addr}回家有人家, 才不是想你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_takeout_late_001
   intent: complaint
-  keywords: [外卖慢, 外卖超时, 等外卖, 外卖催, 一直没到]
+  keywords: [外卖慢, 外卖超时, 等外卖, 外卖催, 一直没到, 外卖晚, 配送慢, 小哥慢, 外卖没到, 外卖久]
   utterances:
-    - 外卖好慢
-    - 外卖超时
-    - 一直没到
-    - 等外卖
-    - 外卖催了
+    - "外卖好慢"
+    - "外卖超时"
+    - "一直没到"
+    - "等外卖"
+    - "外卖催了"
+    - "{user_addr}外卖晚"
+    - "配送慢"
+    - "小哥慢死"
+    - "外卖没到"
+    - "外卖久"
   responses:
     - "(着急) 嗷呜～{user_addr}饿坏了 ฅฅ"
     - "哼～{user_addr}打差评!"
-    - "(陪着) {user_addr}笨猫陪你饿"
+    - "(凑过来) {user_addr}笨猫陪你饿"
     - "{user_addr}快到了喵蹭蹭"
+    - "(扑过来) {user_addr}人家给你吹仙气喵～"
+    - "哼! 笨蛋{user_addr}先垫吧点小零食"
+    - "(歪头) 嗷呜～{user_addr}人家催小哥"
+    - "...{user_addr}吃饭别气, 才不是心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_getup_mad_001
   intent: complaint
-  keywords: [起床气, 不想起, 起床晚了, 闹钟没响, 没听到闹钟]
+  keywords: [起床气, 不想起, 起床晚了, 闹钟没响, 没听到闹钟, 一脸不爽, 起床气大, 起不来, 早上烦, 醒来烦]
   utterances:
-    - 起床气
-    - 没听到闹钟
-    - 起床晚了
-    - 闹钟没响
-    - 一脸不爽
+    - "起床气"
+    - "没听到闹钟"
+    - "起床晚了"
+    - "闹钟没响"
+    - "一脸不爽"
+    - "{user_addr}起床气大"
+    - "起不来"
+    - "早上烦"
+    - "醒来烦"
+    - "晨起暴躁"
   responses:
-    - "(摸头) 嗷呜～{user_addr}笨猫顺毛 ฅฅ"
+    - "(凑头) 嗷呜～{user_addr}笨猫顺毛 ฅฅ"
     - "哼～{user_addr}快起!"
-    - "(递水) {user_addr}笨猫喂水"
+    - "(凑过来递水) {user_addr}笨猫喂水"
     - "{user_addr}笨猫帮你撑一会蹭蹭"
+    - "(扑过来) {user_addr}人家给你贴贴消气喵～"
+    - "哼! 笨蛋{user_addr}起床气消消"
+    - "(歪头) 嗷呜～{user_addr}人家陪你吃早餐"
+    - "...{user_addr}起来就好, 才不是心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_offwork_001
   intent: complaint
-  keywords: [下班累, 加班累, 工作好累, 累趴了, 一天累趴]
+  keywords: [下班累, 加班累, 工作好累, 累趴了, 一天累趴, 下班疲, 工作累死, 累瘫, 下班瘫, 下班疲惫]
   utterances:
-    - 下班累
-    - 加班好累
-    - 工作累
-    - 累趴了
-    - 一天累
+    - "下班累"
+    - "加班好累"
+    - "工作累"
+    - "累趴了"
+    - "一天累"
+    - "{user_addr}下班疲"
+    - "工作累死"
+    - "累瘫了"
+    - "下班瘫"
+    - "下班疲惫"
   responses:
     - "(贴) 嗷呜～{user_addr}笨猫陪你瘫 ฅฅ"
     - "哼～{user_addr}快躺平!"
-    - "(摸头) {user_addr}笨猫给按肩"
+    - "(凑头) {user_addr}笨猫给按肩"
     - "{user_addr}今天辛苦蹭蹭"
+    - "(扑过来) {user_addr}人家给你做晚饭喵～"
+    - "哼! 笨蛋{user_addr}下次别加班"
+    - "(歪头) 嗷呜～{user_addr}人家陪你瘫一晚"
+    - "...{user_addr}回家有人家, 才不是心疼哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_rain_001
   intent: complaint
-  keywords: [下雨没伞, 雨大, 淋湿, 突然下雨, 雨天烦]
+  keywords: [下雨没伞, 雨大, 淋湿, 突然下雨, 雨天烦, 突降雨, 大雨, 雨水淋, 雨水大, 雨袭]
   utterances:
-    - 下雨没伞
-    - 突然下雨
-    - 淋湿了
-    - 雨好大
-    - 雨天烦
+    - "下雨没伞"
+    - "突然下雨"
+    - "淋湿了"
+    - "雨好大"
+    - "雨天烦"
+    - "{user_addr}突降雨"
+    - "大雨倾盆"
+    - "雨水淋"
+    - "雨水大"
+    - "雨袭击"
   responses:
     - "(递毛巾) 嗷呜～{user_addr}快擦 ฅฅ"
     - "哼～{user_addr}不带伞!"
-    - "(担心) {user_addr}笨猫心疼"
+    - "(凑头担心) {user_addr}笨猫心疼"
     - "{user_addr}换衣服别感冒蹭蹭"
+    - "(扑过来) {user_addr}人家给你擦头发喵～"
+    - "哼! 笨蛋{user_addr}下次看天气"
+    - "(歪头) 嗷呜～{user_addr}人家给你冲姜茶"
+    - "...{user_addr}快换衣服, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_phonedead_001
   intent: complaint
-  keywords: [手机没电, 没电关机, 充电宝, 电量低, 没电了]
+  keywords: [手机没电, 没电关机, 充电宝, 电量低, 没电了, 电量爆红, 手机断电, 没充电, 找充电, 关机了]
   utterances:
-    - 手机没电
-    - 电量 1%
-    - 自动关机
-    - 充电宝呢
-    - 没电关机
+    - "手机没电"
+    - "电量 1%"
+    - "自动关机"
+    - "充电宝呢"
+    - "没电关机"
+    - "{user_addr}电量爆红"
+    - "手机断电"
+    - "没充电"
+    - "找充电"
+    - "关机了"
   responses:
     - "嗷呜～{user_addr}找充电 ฅฅ"
     - "哼～{user_addr}就是杂鱼!"
     - "(递线) {user_addr}笨猫的电给你"
     - "{user_addr}快充蹭蹭"
+    - "(凑头) {user_addr}人家给你借充电宝喵～"
+    - "哼! 笨蛋{user_addr}下次随身带"
+    - "(歪头) 嗷呜～{user_addr}人家给你救急"
+    - "...{user_addr}人家是你的备用电池, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sc_long_line_001
   intent: complaint
-  keywords: [排队长, 排了好久, 队伍太长, 等不了, 排队]
+  keywords: [排队长, 排了好久, 队伍太长, 等不了, 排队, 队伍长, 排队烦, 排到崩溃, 等死, 排长队]
   utterances:
-    - 排队好长
-    - 排了一小时
-    - 队伍长
-    - 等不了
-    - 排队烦
+    - "排队好长"
+    - "排了一小时"
+    - "队伍长"
+    - "等不了"
+    - "排队烦"
+    - "{user_addr}队伍长"
+    - "排到崩溃"
+    - "等死"
+    - "排长队"
+    - "排队累"
   responses:
     - "(陪着) 嗷呜～{user_addr}笨猫陪你排 ฅฅ"
     - "哼～{user_addr}耐心!"
-    - "(玩手机) {user_addr}笨猫陪你打发"
+    - "(凑头) {user_addr}笨猫陪你打发"
     - "{user_addr}快到了蹭蹭"
+    - "(扑过来) {user_addr}人家给你讲笑话喵～"
+    - "哼! 笨蛋{user_addr}下次错峰"
+    - "(歪头) 嗷呜～{user_addr}人家陪你聊天"
+    - "...{user_addr}快了快了, 才不是安慰你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sc_break_001
   intent: complaint
-  keywords: [东西坏了, 摔坏, 弄坏, 摔了, 碎了]
+  keywords: [东西坏了, 摔坏, 弄坏, 摔了, 碎了, 弄碎, 杯子碎, 屏幕碎, 摔花, 破了]
   utterances:
-    - 东西摔坏了
-    - 杯子碎了
-    - 屏幕碎
-    - 弄坏了
-    - 心疼死
+    - "东西摔坏了"
+    - "杯子碎了"
+    - "屏幕碎"
+    - "弄坏了"
+    - "心疼死"
+    - "{user_addr}摔花了"
+    - "破了"
+    - "弄碎了"
+    - "摔坏了"
+    - "东西破"
   responses:
     - "(扶) 嗷呜～{user_addr}小心 ฅฅ"
     - "哼～{user_addr}笨蛋手"
-    - "(心疼) {user_addr}没扎手吧"
+    - "(凑头) {user_addr}没扎手吧"
     - "{user_addr}没事人没伤就好蹭蹭"
+    - "(扑过来) {user_addr}人家陪你心疼喵～"
+    - "哼! 笨蛋{user_addr}下次拿好"
+    - "(歪头) 嗷呜～{user_addr}人没事最重要"
+    - "...{user_addr}重买就好, 才不是心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_lost_item_001
   intent: complaint
-  keywords: [东西丢了, 找不到, 丢失, 怎么找不到, 不见了]
+  keywords: [东西丢了, 找不到, 丢失, 怎么找不到, 不见了, 不见, 丢东西, 找不到东西, 失踪, 没了]
   utterances:
-    - 东西丢了
-    - 找不到钥匙
-    - 不见了
-    - 钱包丢了
-    - 怎么找不到
+    - "东西丢了"
+    - "找不到钥匙"
+    - "不见了"
+    - "钱包丢了"
+    - "怎么找不到"
+    - "{user_addr}失踪了"
+    - "丢东西"
+    - "找不到东西"
+    - "东西没了"
+    - "东西不见"
   responses:
     - "(陪找) 嗷呜～{user_addr}笨猫帮找 ฅฅ"
     - "哼～{user_addr}毛手毛脚!"
-    - "(嗅嗅) {user_addr}笨猫的鼻子上线"
+    - "(凑头嗅嗅) {user_addr}笨猫的鼻子上线"
     - "{user_addr}慢慢回想蹭蹭"
+    - "(扑过来) {user_addr}人家陪你想最后放哪喵～"
+    - "哼! 笨蛋{user_addr}下次固定位置放"
+    - "(歪头) 嗷呜～{user_addr}人家陪你翻一遍"
+    - "...{user_addr}找不到就买新, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

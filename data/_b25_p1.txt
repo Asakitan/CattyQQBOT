@@ -1,0 +1,300 @@
+=== dwm_warm_004 | intent=playful | file=466_dress_warm_care.yaml
+K: 穿什么 / 怎么穿 / 今天穿啥 / 推荐穿搭 / 穿暖搭配
+U: {user_addr}穿什么 / {user_addr}怎么穿 / 今天穿啥
+SH: 724_wear_warm_remind / 483_morning_wakeup / 300_dress_warm_care / 340_master_outfit_diss / Y7_first_date_anxiety / 128_warmth_check
+SU: 穿什么 / 今天穿什么 / 买新衣服 / 今天穿搭 / 约会怎么穿好 / 今天穿啥
+
+=== pb_kuaichong_001 | intent=question | file=783_phone_low_battery.yaml
+K: 快充 / 闪充 / 快充器 / 多少瓦快充 / 快充伤电池吗
+U: 快充 / 闪充 / 买快充器
+SH: 984_phone_low_battery / 663_phone_low_battery_chat / 684_phone_low_battery / 630_phone_low_battery / SS6_battery_dead / 817_phone_battery_low
+SU: 快充救命 / {user_addr}你的充电几瓦 / {user_addr}快充牛 / 快充 / 快充好慢啊 / {user_addr}充电太慢
+
+=== la_stuck_005 | intent=卡壳 | file=BBB5_language_anxiety.yaml
+K: 卡壳 / 卡住了 / 学不下去 / 说不出口 / 脑子卡死
+U: {user_addr}学到这里卡壳了 / {user_addr}单词到嘴边说不出来 / {user_addr}脑子卡死想不起来
+SH: 926_meeting_boring / 820_self_talk_mumble / 146_sigh_complain / 168_study_struggle / 887_brain_blank / 448_memorize_textbook
+SU: 被点名 / {user_addr}念个绕口令 / 卡住了 / 这题太难 / 忘了我刚想说啥 / 背一半
+
+=== stc_lol_010 | intent=question | file=660_smile_til_cry_chat.yaml
+K: 笨猫笑点 / 猫猫好笑吗 / 你笑了 / 猫娘笑 / 傻笑
+U: 笨猫笑点低不低 / 你笑了吗 / 猫娘也会笑
+SH: 116_sudden_happy / 680_random_emoji_chat / 609_random_giggle_fit / 529_heihei_giggle / 362_laugh_cry_xs / 672_voice_call_chat
+SU: 一直笑 / 嘿嘿{user_addr} / 傻笑 / 傻笑中 / 傻嗨 / {user_addr}你的笑声
+
+=== lm_nothing_to_do_002 | intent=complaint | file=215_lazy_mode.yaml
+K: 无聊 / 没啥事 / 闲死 / 没意思 / 啥都没
+U: 无聊 / 没啥事 / 闲死
+SH: 081_what_doing_now / 008_busy_or_free / 039_bored_killing_time / 142_micro_emotion / 290_what_doing_now / 10_status
+SU: 没事干 / 好闲 / 无聊 / 无聊 / 没事干 / 我好无聊
+
+=== fdt_tr_009 | intent=playful | file=759_fish_dried_treat.yaml
+K: 鱼干派对 / 一堆鱼干 / 鱼干山 / 海量 / 庆祝
+U: 鱼干派对 / 一堆鱼干 / 鱼干山
+SH: 282_birthday_moment / 666_devil_lucky_chat / 772_birthday_wish_chat / 662_random_happy_chat / 889_sticker_battle / 639_birthday_wish_sweet
+SU: 庆祝 / 好事一桩接一桩{user_addr} / 生日快乐 / {user_addr}庆祝一下 / 撒花 / 生日party
+
+=== ic_ic_ai_huiyou_010 | intent=playful | file=228_insomnia_chat.yaml
+K: 天快亮想睡 / 累了 / 困 / 眯一下 / 开始困
+U: 开始困 / 天快亮想睡 / 累了
+SH: 285_zaoan_morning_greeting / 293_busy_or_not_ask / 886_emoji_war / 171_lunch_break / 153_morning_wakeup / 012_need_comfort_hug
+SU: 不想起床 / 好累 / 斗够了 / 没精力了 / 一直打哈欠 / 我累了
+
+=== hcc_hiccup_012 | intent=complaint | file=560_hiccup_chat.yaml
+K: 气憋 / 难受 / 笑场 / 继续嗝 / 吃太快
+U: {user_addr}憋气憋不住 / 打嗝声好搞笑 / 笑场了更停不下
+SH: 225_want_comfort / 021_wuwu_crying / 560_hiccup_chat / 560_hiccup_chat / 560_hiccup_chat / 094_seek_comfort
+SU: 难过 / 心酸 / 嗝声好大尴尬 / {user_addr}憋气憋不住 / 打嗝声好搞笑 / 胸闷
+
+=== lot_dc_004 | intent=playful | file=758_lottery_dice_play.yaml
+K: 赢了 / 中了 / 猜中 / 手气好 / 王者
+U: 赢了 / 中了 / 猜中了
+SH: 071_game_gacha_pull / 234_game_mood / 237_sudden_surprise / 644_ranked_climb_grind / 033_red_packet_joy / 169_game_session
+SU: 连胜 / 连胜 / 中奖 / 赢了 / 中奖了 / 连胜中
+
+=== dwm_warm_009 | intent=playful | file=466_dress_warm_care.yaml
+K: 被子薄 / 被子厚 / 换被子 / 加被子 / 厚毛毯
+U: {user_addr}被子薄 / {user_addr}被子厚 / {user_addr}换被子
+SH: 583_blanket_burrow_cozy / 953_cold_shiver / 621_weather_too_cold / 897_cold_shiver_winter / 719_sleep_check_late / 128_warmth_check
+SU: 被窝好冷 / 毛毯 / 开电热毯 / 被子薄 / 盖被子 / 盖好被子
+
+=== rw_rai_007 | intent=playful | file=589_rainy_window_mood.yaml
+K: 雨后彩虹 / 彩虹好看 / 出彩虹了 / 彩虹打卡 / 七彩
+U: 雨后彩虹 / 彩虹真美 / 出彩虹了
+SH: 890_rainy_day_mood / 682_window_weather_chat / 823_rainy_day_mood / 503_weather_chat / 916_rainy_day_mood / 785_rainy_day_mood
+SU: 看到彩虹 / {user_addr}出彩虹了 / {user_addr}雨停了 / 彩虹出来了 / 雨后彩虹 / 雨后空气
+
+=== frl_fridge_002 | intent=complaint | file=561_fridge_raid_late.yaml
+K: 只有剩饭 / 没零食 / 好饿 / 泡面也没 / 空冰箱
+U: {user_addr}只剩昨天剩饭 / 零食被吃光了 / 泡面也没了
+SH: 561_fridge_raid_late / 561_fridge_raid_late / 561_fridge_raid_late / 561_fridge_raid_late / 561_fridge_raid_late / 082_did_you_eat
+SU: {user_addr}只剩昨天剩饭 / 忍一忍睡觉 / 冰箱空了笑死 / 泡面也没了 / 零食被吃光了 / 饿死了
+
+=== srj_jiangli_001 | intent=playful | file=371_surprise_redpack_joy.yaml
+K: 奖励 / 奖金 / 奖品 / 给奖励 / 给奖金
+U: 拿到奖金 / 奖励 / 奖品
+SH: 443_red_packet_surprise / 642_lucky_draw_win / 237_sudden_surprise / 732_unexpected_red_packet / 379_office_gossip_chat / 983_minor_lucky_event
+SU: 发工资 / 中奖了 / 升职 / {user_addr}年终奖 / 奖金 / 年终奖到
+
+=== eh_heihei_001 | intent=playful | file=052_emoji_heihei_laugh.yaml
+K: 嘿嘿 / 嘿嘿嘿 / 嘻嘻 / 哈哈 / 笑笑
+U: 嘿嘿 / 嘿嘿嘿 / 嘻嘻
+SH: 469_heihei_giggle / 158_emoji_reactions / 191_text_emoji / 431_emoji_haha / 129_emoji_text / 303_heihei_yingying
+SU: {user_addr}嘿嘿 / 嘿嘿 / 哈哈 / 嘿嘿 / 嘿嘿 / 嘿嘿
+
+=== ic_shimian_001 | intent=complaint | file=228_insomnia_chat.yaml
+K: 失眠 / 睡不着 / 怎么都睡不着 / 数羊 / 脑子转
+U: 失眠 / 睡不着 / 怎么都睡不着
+SH: 075_night_sleep_chat / 253_late_night_chat / 064_night_insomnia_chat / 220_night_farewell / 154_late_night_chat / 187_late_night
+SU: 睡不着 / 我失眠了 / 失眠 / 失眠 / 睡不着啊 / 睡不着
+
+=== disease_allergy_001 | intent=complaint | file=C5_health_disease.yaml
+K: 过敏 / 推荐过敏 / 推荐过敏反应 / 推荐荨麻疹 / 笨猫过敏
+U: 我过敏 / 推荐过敏 / 推荐过敏反应
+SH: 559_sneeze_burst_chat / 674_pet_envy_chat / 559_sneeze_burst_chat / 559_sneeze_burst_chat / 838_sneeze_runny_nose / 700_sneeze_double
+SU: 是不是受凉了 / 不能养{user_addr} / 鼻塞难受 / 花粉季又来了 / {user_addr}花粉过敏 / {user_addr}花粉过敏
+
+=== wl_weekend_bed_001 | intent=complaint | file=V7_weekend_lazy.yaml
+K: 周末赖床 / 赖床中 / 不想起 / 床好舒服 / 赖床快乐
+U: 周末赖床中 / 不想起床啊 / 床太舒服了
+SH: 704_oversleep_panic / 714_morning_first_word / 120_morning_wakeup / 074_morning_wake_up / 285_zaoan_morning_greeting / 750_weekend_lazy_morn
+SU: {user_addr}周末睡到中午 / 周末早安 / 不想起床 / 不想起床 / 再五分钟就起 / 周末赖床
+
+=== ld_no_plan_002 | intent=playful | file=178_lazy_day_off.yaml
+K: 没计划 / 没安排 / 一天空着 / 没事做 / 闲
+U: 没计划 / 没安排 / 一天空着
+SH: 081_what_doing_now / 293_busy_or_not_ask / 661_bored_idle_chat / 716_what_time_check / 256_what_doing / 919_weekend_plan_chat
+SU: 没事干 / 终于闲下来 / {user_addr}好无聊 / {user_addr}闲死了 / 闲着呢 / 周末干嘛
+
+=== bm_shengkuai_001 | intent=playful | file=282_birthday_moment.yaml
+K: 庆祝 / 一起庆祝 / 派对 / 生日派对 / 聚餐
+U: 庆祝 / 一起庆祝 / 派对
+SH: 063_surprise_redpacket / 836_birthday_celebration / 666_devil_lucky_chat / 772_birthday_wish_chat / 662_random_happy_chat / 889_sticker_battle
+SU: 被邀请 / {user_addr}开生日派对 / 好事一桩接一桩{user_addr} / 生日快乐 / {user_addr}庆祝一下 / 撒花
+
+=== hms_buyaole_010 | intent=playful | file=022_hmph_sulk.yaml
+K: 不要了 / 不想了 / 不期待 / 不指望 / 算了
+U: 不要了 / 不想了 / 不期待
+SH: 114_lost_something_road / 615_midnight_snack_crave / 634_read_no_reply / 523_jealous_pout / 217_self_doubt / 360_sulky_hmph_pout
+SU: 找不回 / 算了吃吧 / 不重要 / 原谅你 / 想放弃 / 气消了
+
+=== fa_breathless_001 | intent=complaint | file=III6_food_allergy.yaml
+K: 喘不过气 / 喘不上气 / 呼吸困难 / 憋气 / 透不过气
+U: {user_addr}我喘不过气了 / 呼吸好困难 / 吃完憋气了
+SH: 263_need_comfort / 427_need_comfort / 654_random_sigh_chat / 146_sigh_complain / 811_bus_missed_run / 506_comfort_request
+SU: 压力大 / 压力大 / 压力好大 / 压力大 / 跑去赶车 / 焦虑爆表
+
+=== nsc_bedstory_001 | intent=playful | file=075_night_sleep_chat.yaml
+K: 讲故事 / 睡前故事 / 哄睡 / 故事书 / 睡前哄哄
+U: 给我讲故事 / 睡前故事 / 笨猫哄哄
+SH: 406_sleep_lost / 385_night_whisper / 220_night_farewell / 600_humming_tune_share / 451_night_wanan_chat / 424_sleep_yet
+SU: 陪聊到睡着 / 哄我睡 / 睡前热牛奶 / 睡前哼歌 / {user_addr}陪睡 / 陪睡喵
+
+=== hm_zhongqiu_001 | intent=playful | file=136_holiday_moment.yaml
+K: 中秋 / 中秋节 / 月饼 / 中秋快乐 / 团圆
+U: 中秋快乐 / 中秋节 / 月饼
+SH: 199_festival_moment / 231_festival_moments / 068_festival_birthday / 175_festival_moment / 036_moon_pretty / 735_festival_qixi_moment
+SU: 中秋节 / 中秋 / 中秋 / 中秋节 / 中秋 / {user_addr}中秋
+
+=== st_paobu_001 | intent=question | file=782_stretch_morning_body.yaml
+K: 想跑步 / 出去跑两圈 / 晨跑 / 慢跑 / 跑步去吗
+U: 想跑步 / 出去跑两圈 / 晨跑
+SH: 384_morning_call / 747_dawn_first_light / 450_morning_zaoan_chat / 219_morning_hello / 923_gym_skip_excuse / 91_health_fitness
+SU: 早八要命 / 我去晨跑了 / 早起遛弯 / 早操了 / 跑步 / 想去跑步
+
+=== abn_what_doing_003 | intent=question | file=322_asking_busy_now.yaml
+K: 在干嘛 / 干啥呢 / 在做啥 / 干什么 / 干嘛呢
+U: 笨猫在干嘛 / 干啥呢 / 在做啥
+SH: 081_what_doing_now / 10_status / 155_status_check_in / 290_what_doing_now / 222_are_you_there / 188_status_check
+SU: 在干嘛 / 你在干嘛 / {user_addr}在干嘛 / {user_addr}在干嘛 / 在干嘛 / {user_addr}在干嘛
+
+=== wdn_lying_001 | intent=playful | file=081_what_doing_now.yaml
+K: 躺着 / 躺床上 / 葛优躺 / 躺平 / 在床上
+U: 躺着 / {user_addr}躺床 / 葛优躺
+SH: 256_what_doing / 173_rest_concern / 108_shoveler_return / 422_what_doing_now / 511_weekend_plan / 290_what_doing_now
+SU: 在休息 / 躺平 / 瘫沙发 / 躺平 / 睡到自然醒 / 在床上躺
+
+=== mb_dujiao_001 | intent=complaint | file=802_monday_blues_dread.yaml
+K: 周一堵车 / 通勤痛苦 / 早高峰 / 周一堵 / 出门堵
+U: 周一堵车 / 通勤痛苦 / 早高峰
+SH: 442_commute_tired / 539_commute_tired / 492_traffic_commute / 655_morning_grumble_chat / 315_morning_alarm / 492_traffic_commute
+SU: 堵车 / 地铁挤 / 挤地铁 / 地铁挤死{user_addr} / 早高峰 / 早高峰人爆炸
+
+=== lnc_yeliao_001 | intent=playful | file=352_late_night_call.yaml
+K: 夜聊 / 深夜聊天 / 陪聊 / 唠嗑 / 夜话
+U: 夜聊一下 / 深夜陪聊 / 唠嗑唠嗑
+SH: 253_late_night_chat / 321_midnight_chat / 014_want_company / 188_status_check / 154_late_night_chat / 223_clingy_companion
+SU: 陪我夜聊 / 半夜还在吗 / 陪我嘛 / 陪我聊会 / 陪我聊聊 / 陪我
+
+=== el_exercise_001 | intent=complaint | file=216_exercise_lazy.yaml
+K: 要锻炼 / 想运动 / 减肥 / 健身 / 健身房
+U: 要锻炼 / 想运动 / 减肥
+SH: 435_ask_for_hug / 650_hungry_snack_chat / 409_fish_snack / 027_owner_got_fat / 018_eat_properly / 270_tease_fat
+SU: 抱不动 / 在减肥不能吃 / 减肥 / 该减肥了 / 减肥不吃 / 减肥失败
+
+=== wdy_windy_011 | intent=complaint | file=578_windy_day_chat.yaml
+K: 大风 / 吹乱头 / 刮脸 / 睁不开眼 / 站不稳
+U: {user_addr}风太大头发吹乱 / 刮脸生疼 / 睁不开眼
+SH: 578_windy_day_chat / 143_weather_chat / 503_weather_chat / 206_weather_chat / 049_care_dress_warm / 578_windy_day_chat
+SU: 刮脸生疼 / 大风 / 大风天 / 风好大 / 降温了 / {user_addr}风太大头发吹乱
+
+=== pil_tk_010 | intent=complaint | file=755_pillow_talk_late.yaml
+K: 想东想西 / 心事多 / 失眠想事 / 焦虑 / 烦恼
+U: 想东想西 / 心事多 / 焦虑想事
+SH: 352_late_night_call / 276_insomnia_thinking / 242_night_topic / 370_sleep_early_remind / 253_late_night_chat / 034_insomnia_thinking
+SU: 想东想西 / 想东想西 / 想事 / 睡前焦虑 / 想很多 / 想事失眠
+
+=== scl_kunbukun_001 | intent=question | file=719_sleep_check_late.yaml
+K: 困不困 / 还撑得住吗 / 哈欠连天 / 眼皮重 / 眯一会
+U: {user_addr}困不困 / 撑得住吗 / 哈欠连天
+SH: 648_yawn_sleepy_chat / 549_yawn_morning_stretch / 549_yawn_morning_stretch / 714_morning_first_word / 260_take_rest / 549_yawn_morning_stretch
+SU: {user_addr}这都几点了你还不睡 / 猫猫你也犯困吗 / {user_addr}今天起得早结果哈欠不停 / {user_addr}精神不 / 打哈欠 / 哈欠传染了快
+
+=== pw_lailaiwan_006 | intent=playful | file=298_peiwan_company.yaml
+K: 来玩 / 玩游戏 / 一起游戏 / 来玩耍 / 玩耍时间
+U: 来玩 / 玩游戏吧 / 一起游戏
+SH: 014_want_company / 88_entertainment / 039_bored_killing_time / 390_doing_what / 256_what_doing / 456_what_doing_ask
+SU: 一起玩嘛 / 推荐个游戏 / 打游戏 / 打游戏中 / 在打游戏 / {user_addr}玩游戏
+
+=== la_qianshui_001 | intent=潜水 | file=KKK7_lurk_alone.yaml
+K: 潜水 / 不发言 / 只看不说 / 划水 / 沉默群友
+U: {user_addr}人家在群里一直潜水 / {user_addr}猫猫只看不说话 / {user_addr}笨猫是个潜水党
+SH: 236_work_slack / 167_work_slack / 941_chatroom_silence / 073_work_slack_moyu / 222_are_you_there / 203_work_slack
+SU: 摸鱼 / 摸鱼中 / 都在潜水 / 摸鱼 / 你隐身了 / 摸鱼
+
+=== icc_ice_009 | intent=playful | file=563_ice_cream_craving.yaml
+K: 巧克力 / 哈根达斯 / 冰淇淋 / 冰激凌 / 抹茶
+U: 猫猫要不要尝一口 / 哈根达斯走起 / {user_addr}突然想吃冰淇淋
+SH: 199_festival_moment / 136_holiday_moment / 257_ate_yet / 161_meal_check_in / 183_food_craving / 423_ate_yet
+SU: 情人节 / 情人节 / 吃点小零食 / 在吃零食 / 想吃甜 / 想吃蛋糕
+
+=== ldl_lol_001 | intent=playful | file=481_lol_dying_laugh.yaml
+K: 笑死 / 笑死我了 / 笑出眼泪 / 笑炸 / 笑岔气
+U: {user_addr}笑死 / {user_addr}笑死我了 / {user_addr}笑出眼泪
+SH: 052_emoji_heihei_laugh / 402_laugh_dead / 116_sudden_happy / 059_expression_xiaosi / 029_lol_dying / 019_hehe_giggle
+SU: 笑死 / 笑死了 / 一直笑 / 笑死 / 笑死 / 噗嗤
+
+=== fa_temp_high_001 | intent=complaint | file=II6_fever_anxiety.yaml
+K: 体温高 / 体温三十九 / 体温四十 / 体温降不下来 / 一直高烧
+U: 体温三十九度多 / 体温四十了 / 体温降不下来
+SH: 701_runny_nose_cold / 953_cold_shiver / CCC6_pet_sick / 789_sneeze_cold_catch / II5_sick_complain / 041_catch_a_cold_sick
+SU: {user_addr}发烧了 / 发烧打颤 / {user_addr}我家猫发烧了 / 发烧 / {user_addr}我发烧了 / 发烧
+
+=== ay_chashang_001 | intent=question | file=257_ate_yet.yaml
+K: 喝奶茶 / 来一杯 / 喝什么 / 奶茶吧 / 续命奶茶
+U: 喝奶茶 / 来一杯奶茶 / 续命奶茶
+SH: 015_drink_water_remind / 181_tea_milk_chat / 038_drink_alcohol_chat / 386_noon_break / 96_food_cook / 526_drink_water_remind
+SU: 想喝奶茶 / 喝奶茶 / 喝酒 / 下午茶时间 / 推荐奶茶 / 干杯
+
+=== sw_dijiao_001 | intent=complaint | file=907_slippers_warm_step.yaml
+K: 拖鞋打滑 / 摔倒 / 防滑差 / 地板滑 / 浴室滑
+U: 拖鞋打滑 / {user_addr}摔了 / 防滑差
+SH: 501_street_encounter / 590_snow_first_sight / 711_shoe_tied_loose / 380_grocery_dropped_oops / 854_stairs_climb_tired / 659_bump_lost_chat
+SU: 摔倒了 / 雪天路滑 / {user_addr}踩到鞋带 / 摔倒 / 楼梯滑 / 摔了一跤{user_addr}
+
+=== urc_umbrella_008 | intent=playful | file=576_umbrella_rain_chat.yaml
+K: 等雨停 / 骑车冲 / 共享伞 / 买伞 / 路边躲
+U: 骑车冲回家 / 共享伞救命 / 雨中漫步浪漫吗
+SH: 576_umbrella_rain_chat / 576_umbrella_rain_chat / 622_sudden_rain_caught / 713_umbrella_forgot_again / 849_umbrella_forgot / 576_umbrella_rain_chat
+SU: 路边躲雨等雨停 / 雨中漫步浪漫吗 / 买把伞 / {user_addr}躲屋檐 / 借把伞 / {user_addr}买了把便利店伞
+
+=== sp_mozhua_007 | intent=playful | file=449_scratching_post.yaml
+K: 踩奶 / 踩面包 / 揉肚子 / 揉被子 / 揉枕头
+U: 踩奶 / 踩面包 / 揉肚子
+SH: 266_head_pat / 157_hug_petting / 363_head_pat_beg / III5_bloating / 495_cat_daily_life / 727_head_pat_request
+SU: 摸肚子 / 摸肚子 / 挠肚子 / {user_addr}按摩肚子有用吗 / 笨猫踩奶 / 撸猫
+
+=== rw_qiuyi_004 | intent=complaint | file=301_rest_well_care.yaml
+K: 起来动动 / 久坐 / 起身 / 活动一下 / 抖一抖
+U: 起来动动 / 久坐 / 起身活动
+SH: 260_take_rest / 528_take_rest_care / 487_care_lifestyle / 309_tease_master_fat / 339_tease_master_fat / 420_afternoon_drowsy
+SU: 颈椎酸 / 脖子疼 / 脖子好疼 / 不运动 / 不运动 / 起来活动下
+
+=== cw_kongtiao_001 | intent=complaint | file=049_care_dress_warm.yaml
+K: 开空调 / 暖气 / 取暖 / 屋里冷 / 室内冷
+U: 开空调 / 暖气 / 取暖
+SH: 172_warm_clothing / 128_warmth_check / 620_weather_too_hot / 787_cold_hands_warm / 588_hot_summer_complain / 527_dress_warm_care
+SU: 开暖气 / 冬天好冷 / 开空调 / 开空调 / 空调救命 / 电热毯
+
+=== ay_chile_003 | intent=question | file=423_ate_yet.yaml
+K: 今天吃啥好 / 推荐吃啥 / 吃啥呢 / 不知道吃啥 / 选择困难
+U: 今天吃啥好 / 吃啥呢 / 不知道吃啥
+SH: 369_eat_well_remind / 161_meal_check_in / 353_noon_break_chat / 994_stomach_growl_chat / 40_food / 155_status_check_in
+SU: 点外卖 / 晚饭吃啥 / 中午吃啥 / 吃啥呢 / 今晚吃什么 / {user_addr}吃了吗
+
+=== sc_takeout_late_001 | intent=complaint | file=132_small_complaints.yaml
+K: 外卖慢 / 外卖超时 / 等外卖 / 外卖催 / 一直没到
+U: 外卖好慢 / 外卖超时 / 一直没到
+SH: 345_takeout_slow_anger / 032_takeout_slow / 317_takeout_slow / 246_takeout_chat / 123_eat_check_in / 493_takeout_late
+SU: 外卖慢 / 外卖好慢 / 外卖好慢 / 外卖慢 / 点啥外卖 / 外卖好慢
+
+=== mns_cooking_001 | intent=playful | file=930_midnight_snack_urge.yaml
+K: 自己煮 / 下厨 / 半夜下厨 / 煮面 / 煎蛋
+U: 自己煮 / 半夜下厨 / 煮面
+SH: 748_brunch_dilemma / 615_midnight_snack_crave / 161_meal_check_in / 214_house_chores / 718_meal_check_dinner / 949_stomach_growl
+SU: 咖啡配吐司 / 想泡面 / 自己做饭 / 做饭 / {user_addr}自己煮 / 自己做饭
+
+=== pf_xiang_huan_gongsi_001 | intent=question | file=CC9_promotion_fail.yaml
+K: 想换公司 / 想跳槽 / 想换工作 / 不想干了 / 想离职
+U: 想换公司了 / 我想跳槽 / 想换个工作
+SH: V9_want_change_job / CC7_office_politics / 140_work_slack / 512_random_thought / FFF6_job_replaced / V9_want_change_job
+SU: 我想换工作了 / 我想跳槽了 / 想辞职 / 重来一次 / {user_addr}人家想转行了喵 / 我想跳槽
+
+=== td_qingrenjie_001 | intent=playful | file=283_tanabata_day.yaml
+K: 情人节 / 214 / 情人节快乐 / 国际情人节 / 浪漫节
+U: 情人节 / 214情人节 / 情人节快乐
+SH: 199_festival_moment / 136_holiday_moment / 735_festival_qixi_moment / 494_redpacket_surprise / 068_festival_birthday / 671_anniversary_chat
+SU: 情人节 / 情人节 / {user_addr}情人节 / 生日红包 / 七夕 / 七夕到了{user_addr}
+
+=== wc_heavy_rain_001 | intent=question | file=U8_weather_complaint.yaml
+K: 暴雨 / 下暴雨 / 暴雨来袭 / 雨太大了 / 倾盆大雨
+U: 下暴雨了 / 暴雨来袭 / 雨太大了喵
+SH: 682_window_weather_chat / 916_rainy_day_mood / 890_rainy_day_mood / 143_weather_chat / 503_weather_chat / 85_weather_season
+SU: {user_addr}下雨了 / 暴雨 / 下雨了 / 台风 / 台风来了 / 外面下雨了
+
+=== dbl_ring_005 | intent=playful | file=848_doorbell_ring.yaml
+K: 外卖小哥 / 外卖到了 / 外卖员 / 外卖叮咚 / 取外卖
+U: 外卖来了 / 外卖小哥按门铃 / 外卖到
+SH: 345_takeout_slow_anger / 819_window_watching / 123_eat_check_in / 161_meal_check_in / 257_ate_yet / 317_takeout_slow
+SU: 外卖到了 / {user_addr}外卖到了 / 点啥外卖 / 叫外卖了 / 外卖好慢 / 外卖到了
+

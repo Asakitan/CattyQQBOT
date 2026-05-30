@@ -3,187 +3,300 @@
 
 - name: gpd_pullgacha_001
   intent: playful
-  keywords: [抽卡, 抽十连, 单抽, 出货, 想抽卡]
+  keywords: [抽卡, 抽十连, 单抽, 出货, 想抽卡, 十连保底, 抽池子, 氪金抽卡]
   utterances:
     - 抽卡
     - 抽十连
     - 单抽
     - 出货
     - 想抽卡
+    - 十连保底
+    - 抽池子
+    - "{user_addr}氪金抽卡"
+    - 抽到爆
+    - 冲一波
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}笨猫看!"
     - "笨猫认证: 抽卡一时爽"
     - "(歪头) 别氪太多笨蛋"
     - "哼～{user_addr}赌徒"
+    - "(凑近) 嗷呜～{user_addr}笨猫帮你欧!"
+    - "(尾巴扫) 必出SSR喵"
+    - "(贴贴) 才不是迷信呢哼"
+    - "(歪头) 别氪太多{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_ssrout_002
   intent: playful
-  keywords: [SSR, 出货了, 抽到金, 五星, 限定]
+  keywords: [SSR, 出货了, 抽到金, 五星, 限定, 出SSR, 出五星, 中大奖了, 抽到SSR]
   utterances:
     - 出SSR
     - 抽到金
     - 五星
     - 限定
     - 大欧
+    - "{user_addr}出货了"
+    - 出五星
+    - 中大奖了
+    - "{user_addr}抽到SSR"
+    - 欧到了
+    - 出彩了
   responses:
     - "(蹦) 嗷呜～{user_addr}恭喜!"
     - "笨猫认证: 锦鲤体质"
     - "(尾巴摇) 笨猫沾欧"
     - "哼～{user_addr}炫耀"
+    - "(尾巴翘高) 嗷呜～{user_addr}发了!"
+    - "(凑近) 笨猫沾运气笨蛋"
+    - "(贴贴) 才不是嫉妒呢哼"
+    - "(歪头) 请笨猫吃饭{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_pulldeep_003
   intent: complaint
-  keywords: [井了, 抽不出, 歪了, 大保底, 抽光]
+  keywords: [井了, 抽不出, 歪了, 大保底, 抽光, 深渊抽卡, 保底没出, 抽歪了, 保底翻车, 欧气用尽]
   utterances:
     - 井了
     - 抽不出
     - 歪了
     - 大保底
     - 抽光
+    - "{user_addr}深渊抽卡"
+    - 保底没出
+    - 抽歪了
+    - 保底翻车
+    - "{user_addr}欧气用尽"
+    - 保底也歪
+    - 抽哭了
   responses:
     - "(摸头) 嗷呜～{user_addr}笨猫安慰!"
     - "笨猫认证: 大保底心痛喵"
     - "(尾巴扫) 别气下次"
     - "哼～{user_addr}非"
+    - "(凑近拍背) 嗷呜～{user_addr}别难过!"
+    - "(尾巴扫) 笨猫陪你抽笨蛋"
+    - "(贴贴) 才不是替你心疼呢哼"
+    - "(歪头) 下次会出{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_savestone_004
   intent: question
-  keywords: [攒石头, 攒源石, 攒抽, 月卡党, 零氪]
+  keywords: [攒石头, 攒源石, 攒抽, 月卡党, 零氪, 存原石, 存抽卡资源, 免费抽, 攒资源]
   utterances:
     - 攒石头
     - 攒源石
     - 攒抽
     - 月卡党
     - 零氪
+    - 存原石
+    - 存抽卡资源
+    - 免费抽
+    - "{user_addr}攒资源"
+    - 储备氪金
+    - 存到爆
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}省心!"
     - "笨猫认证: 月卡党快乐"
     - "(歪头) 笨猫赞同"
     - "哼～{user_addr}清醒"
+    - "(歪头) 嗷呜～{user_addr}存得真多!"
+    - "(尾巴扫) 笨猫监督你别花笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(凑近) 留到下个池{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_chargepay_005
   intent: complaint
-  keywords: [氪金, 充钱, 648, 大氪, 钱包没了]
+  keywords: [氪金, 充钱, "648", 大氪, 钱包没了, 充钱抽卡, 又充钱, 充值抽, 氪了几百]
   utterances:
     - 氪金
-    - 648
+    - "648"
     - 大氪
     - 充钱
     - 钱包扁
+    - "{user_addr}充钱抽卡"
+    - 又充钱了
+    - 充值抽
+    - "{user_addr}氪了几百"
+    - 氪了几千
+    - 钱包大出血
   responses:
     - "(炸毛) 嗷呜～{user_addr}败家!"
     - "笨猫禁止氪!"
     - "(尾巴打) 留点钱吃饭"
     - "哼～{user_addr}游戏蛀虫"
+    - "(歪头) 嗷呜～{user_addr}笨蛋败家!"
+    - "(尾巴扫) 笨猫劝你理性笨蛋"
+    - "(贴贴) 才不是心疼你钱呢哼"
+    - "(凑近) 别冲昏头{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_wpfindfollow_006
   intent: question
-  keywords: [武器池, 角色池, 常驻池, 限定池, 卡池]
+  keywords: [武器池, 角色池, 常驻池, 限定池, 卡池, 专武, 专属武器, 抽武器, 武器歪]
   utterances:
     - 武器池
     - 角色池
     - 常驻池
     - 限定池
     - 卡池
+    - "{user_addr}抽专武"
+    - 专属武器
+    - 抽武器
+    - "{user_addr}武器歪"
+    - 武器抽不到
+    - 专武出不出
   responses:
     - "(歪头) {user_addr}笨猫认证限定才香 ฅฅ"
     - "嗷呜～常驻别碰喵"
     - "(尾巴摇) 武器池慎入"
     - "哼～{user_addr}懂"
+    - "(歪头) 嗷呜～{user_addr}武器贵笨蛋!"
+    - "(尾巴扫) 笨猫劝你别抽武器池"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(凑近) 还是抽角色吧{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_huangoff_007
   intent: complaint
-  keywords: [歪了, 走了常驻, 没出限定, 路人皇, 出货错]
+  keywords: [歪了, 走了常驻, 没出限定, 路人皇, 出货错, 关池子, 关抽卡, 戒抽卡, 戒手, 戒氪]
   utterances:
     - 歪了
     - 走常驻
     - 没出限定
     - 路人皇
     - 出货错
+    - "{user_addr}关池子"
+    - 关抽卡
+    - 戒抽卡
+    - 戒手
+    - "{user_addr}戒氪"
+    - 不抽了
+    - 退游了
   responses:
     - "(摇头) 嗷呜～{user_addr}白嫖!"
     - "笨猫认证: 大保底安慰"
     - "(尾巴扫) 下次必中"
     - "哼～{user_addr}怪非"
+    - "(凑近) 嗷呜～{user_addr}撑住!"
+    - "(尾巴扫) 笨猫陪你戒笨蛋"
+    - "(贴贴) 才不是替你高兴呢哼"
+    - "(歪头) 别复吸{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_dailymission_008
   intent: question
-  keywords: [日常任务, 每日体力, 周本, 委托, 副本]
+  keywords: [日常任务, 每日体力, 周本, 委托, 副本, 清日常, 日活, 日常清, 今天日常]
   utterances:
     - 日常任务
     - 每日体力
     - 周本
     - 委托
     - 副本
+    - 清日常
+    - 日活打卡
+    - 日常清完
+    - "{user_addr}今天日常"
+    - 日常坚持
+    - 游戏每日任务
   responses:
     - "(歪头) {user_addr}笨猫监督你!"
     - "嗷呜～别漏日常喵"
     - "(尾巴摇) 体力别浪费"
     - "哼～{user_addr}打工人"
+    - "(歪头) 嗷呜～{user_addr}日常勤奋!"
+    - "(尾巴扫) 笨猫监督你笨蛋"
+    - "(贴贴) 才不是替你忙呢哼"
+    - "(凑近) 别落下{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_swappull_009
   intent: playful
-  keywords: [交换抽, 替朋友抽, 替我抽, 帮抽, 代抽]
+  keywords: [交换抽, 替朋友抽, 替我抽, 帮抽, 代抽, 换号抽卡, 小号抽卡, 小号欧, 换号试欧, 抢首充]
   utterances:
     - 交换抽
     - 替朋友抽
     - 替我抽
     - 帮抽
     - 代抽
+    - "{user_addr}换号抽卡"
+    - 小号抽卡
+    - 小号欧
+    - 换号试欧
+    - "{user_addr}抢首充"
+    - 注册小号
+    - 换设备
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫帮你抽!"
     - "笨猫手气未知喵"
     - "(尾巴摇) 出货归你"
     - "哼～{user_addr}信笨猫"
+    - "(歪头) 嗷呜～{user_addr}还真折腾!"
+    - "(尾巴扫) 笨猫看你小聪明笨蛋"
+    - "(贴贴) 才不是夸你呢哼"
+    - "(凑近) 别号太多{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_buildcharac_010
   intent: question
-  keywords: [练度, 培养, 升级, 突破, 角色养成]
+  keywords: [练度, 培养, 升级, 突破, 角色养成, 养角色, 练角色, 突破角色, 提升等级, 培养角色]
   utterances:
     - 练度
     - 培养
     - 升级
     - 突破
     - 角色养成
+    - "{user_addr}养角色"
+    - 练角色
+    - 突破角色
+    - 提升等级
+    - "{user_addr}培养角色"
+    - 满级培养
+    - 练度高
   responses:
     - "(歪头) 嗷呜～{user_addr}慢慢肝!"
     - "笨猫推荐: 优先主C"
     - "(尾巴摇) 别铺太开"
     - "哼～{user_addr}肝帝"
+    - "(凑近) 嗷呜～{user_addr}用心养角色!"
+    - "(尾巴扫) 笨猫帮你看技能笨蛋"
+    - "(贴贴) 才不是想看呢哼"
+    - "(歪头) 强不强{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpd_wishlist_011
   intent: playful
-  keywords: [心仪角色, 我老婆, 我老公, 想要的角色, 心想]
+  keywords: [心仪角色, 我老婆, 我老公, 想要的角色, 心想, 许愿池, 心愿单, 想抽的角色, 复刻池]
   utterances:
     - 心仪角色
     - 我老婆
     - 我老公
     - 想要角色
     - 心想抽到
+    - "{user_addr}心愿池"
+    - 心愿单
+    - 想抽的角色
+    - "{user_addr}复刻池"
+    - 等复刻
+    - 等限定
   responses:
     - "(炸毛) 嗷呜～{user_addr}又老婆!"
     - "笨猫认证: 抛弃笨猫"
     - "(尾巴打) 不准!"
     - "哼～{user_addr}花心"
+    - "(凑近) 嗷呜～{user_addr}笨猫等复刻!"
+    - "(尾巴扫) 笨猫想看你抽笨蛋"
+    - "(贴贴) 才不是好奇呢哼"
+    - "(歪头) 等到就抽{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

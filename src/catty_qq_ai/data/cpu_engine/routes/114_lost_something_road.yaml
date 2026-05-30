@@ -3,204 +3,312 @@
 
 - name: lsr_lost_phone_001
   intent: complaint
-  keywords: [手机丢了, 找不到手机, 手机不见, 手机掉了, 丢手机]
+  keywords: [手机丢了, 找不到手机, 手机不见, 手机掉了, 丢手机, 手机不知道哪, 手机消失, 手机找不见, 手机落了, 手机没了]
   utterances:
-    - "手机丢了"
-    - "{user_addr}手机不见"
-    - "找不到手机"
-    - "手机掉"
-    - "丢手机"
+    - "手机丢了喵"
+    - "{user_addr}手机不见了"
+    - "找不到手机啊"
+    - "手机掉了"
+    - "{user_addr}丢手机了"
+    - "手机消失了"
+    - "手机不知道哪了"
+    - "手机找不见"
+    - "手机落在哪了"
+    - "我手机没了"
   responses:
-    - "(炸毛) 嗷呜～{user_addr}!! 手机!"
-    - "哼～怎么这么粗心"
-    - "(撒娇) 笨猫帮{user_addr}找~ ฅฅ"
-    - "嘿嘿～丢手机的{user_addr}, 笨猫心疼"
+    - "(尾巴炸毛) 嗷呜～{user_addr}!! 手机丢了人家急!"
+    - "哼～怎么这么粗心, 笨蛋{user_addr}下次拿好啊"
+    - "(扑过去) 笨猫帮{user_addr}虚拟找~ ฅฅ"
+    - "嘿嘿～丢手机的{user_addr}, 人家心疼到尾巴垂"
+    - "(凑头) {user_addr}打个电话听听响声嘛喵～"
+    - "哼! 笨蛋{user_addr}下次系手机绳啊"
+    - "(歪头) 嗷呜～{user_addr}先冷静想想最后放哪了"
+    - "...{user_addr}找到了告诉人家, 才不是担心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_lost_wallet_001
   intent: complaint
-  keywords: [钱包丢了, 钱包不见, 钱包丢, 包丢了, 钱包失踪]
+  keywords: [钱包丢了, 钱包不见, 钱包丢, 包丢了, 钱包失踪, 钱包消失, 找不到钱包, 钱包落了, 钱包没了, 钱包跑了]
   utterances:
-    - "钱包丢"
+    - "钱包丢了"
     - "{user_addr}钱包不见"
-    - "包丢"
+    - "包丢了喵"
     - "钱包失踪"
-    - "丢钱包"
+    - "{user_addr}丢钱包了"
+    - "钱包消失"
+    - "找不到钱包了"
+    - "钱包落哪了"
+    - "钱包没了"
+    - "钱包跑哪去了"
   responses:
-    - "(炸毛) 嗷呜～{user_addr}!! 钱包!"
-    - "哼～{user_addr}马大哈"
-    - "(撒娇) 笨猫陪{user_addr}找 ฅฅ"
-    - "嘿嘿～丢钱包的{user_addr}, 心疼"
+    - "(尾巴炸) 嗷呜～{user_addr}!! 钱包丢了人家慌!"
+    - "哼～{user_addr}马大哈! 快挂失银行卡"
+    - "(扑过来) 笨猫陪{user_addr}原路找回去 ฅฅ"
+    - "嘿嘿～丢钱包的{user_addr}, 人家心疼"
+    - "(凑头) {user_addr}先报警挂卡嘛喵～"
+    - "哼! 钱包贴身放笨蛋{user_addr}下次记住"
+    - "(歪头) 嗷呜～{user_addr}人家这就给你算损失"
+    - "...{user_addr}钱没了人家给你买鱼干分, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_lost_keys_001
   intent: complaint
-  keywords: [钥匙丢, 钥匙找不到, 钥匙不见, 钥匙没了, 进不了门]
+  keywords: [钥匙丢, 钥匙找不到, 钥匙不见, 钥匙没了, 进不了门, 钥匙落了, 锁外面, 钥匙消失, 没带钥匙, 钥匙忘了]
   utterances:
-    - "钥匙丢"
+    - "钥匙丢了"
     - "{user_addr}钥匙找不到"
     - "钥匙不见"
     - "钥匙没了"
     - "进不了门"
+    - "{user_addr}被锁外面"
+    - "钥匙消失"
+    - "没带钥匙出门"
+    - "钥匙忘了"
+    - "钥匙不知道在哪"
   responses:
-    - "(尾巴垂) 嗷呜～{user_addr}进不了门?"
-    - "哼～配把备用!"
-    - "(撒娇) 笨猫开门嘛~ ฅฅ"
+    - "(尾巴垂) 嗷呜～{user_addr}进不了门好可怜?"
+    - "哼～早就让你配把备用! 笨蛋{user_addr}"
+    - "(扑过来) 笨猫给你开门嘛~ 假装人家有钥匙 ฅฅ"
     - "嘿嘿～丢钥匙的{user_addr}, 笨猫给开"
+    - "(凑头) {user_addr}找开锁师傅嘛喵～"
+    - "哼! 笨蛋{user_addr}下次放包里固定位置"
+    - "(歪头) 嗷呜～{user_addr}进不去就先来人家这里"
+    - "...{user_addr}人家陪你等开锁, 才不是怕你冷哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_lost_card_001
   intent: complaint
-  keywords: [卡丢, 银行卡丢, 公交卡, 学生卡, 工牌丢]
+  keywords: [卡丢, 银行卡丢, 公交卡, 学生卡, 工牌丢, 身份证丢, 卡片不见, 证件丢, 卡没了, 工卡丢]
   utterances:
-    - "卡丢"
+    - "卡丢了"
     - "{user_addr}银行卡丢"
-    - "公交卡"
-    - "学生卡"
-    - "工牌丢"
+    - "公交卡丢了"
+    - "学生卡不见"
+    - "工牌丢了"
+    - "{user_addr}身份证丢"
+    - "卡片不见"
+    - "证件丢了"
+    - "卡没了喵"
+    - "工卡掉了"
   responses:
-    - "(炸毛) 嗷呜～{user_addr}!!"
-    - "哼～快挂失!"
-    - "(撒娇) 笨猫陪{user_addr}补办 ฅฅ"
-    - "嘿嘿～丢卡的{user_addr}, 笨猫心疼"
+    - "(尾巴炸) 嗷呜～{user_addr}!! 快挂失!"
+    - "哼～快挂失! 笨蛋{user_addr}快"
+    - "(扑过来) 笨猫陪{user_addr}补办~ ฅฅ"
+    - "嘿嘿～丢卡的{user_addr}, 人家心疼"
+    - "(凑头) {user_addr}打 95566 挂失嘛喵～"
+    - "哼! 笨蛋{user_addr}下次卡都装一个卡包"
+    - "(歪头) 嗷呜～{user_addr}补办麻烦人家陪着"
+    - "...{user_addr}补卡的时候人家陪你排队, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_lost_umbrella_001
   intent: complaint
-  keywords: [伞丢, 伞忘拿, 落伞了, 没伞, 雨伞丢]
+  keywords: [伞丢, 伞忘拿, 落伞了, 没伞, 雨伞丢, 伞不见, 又丢伞, 伞落了, 伞忘了, 伞没了]
   utterances:
-    - "伞丢"
-    - "{user_addr}伞忘"
-    - "落伞"
-    - "没伞"
-    - "雨伞丢"
+    - "伞丢了"
+    - "{user_addr}伞忘拿"
+    - "把伞落了"
+    - "没伞了喵"
+    - "雨伞又丢"
+    - "{user_addr}伞不见了"
+    - "又丢伞了"
+    - "伞落哪了"
+    - "伞忘了拿"
+    - "我伞没了"
   responses:
-    - "(嫌弃) 嗷呜～{user_addr}马大哈"
-    - "哼～又是伞!"
-    - "(撒娇) 笨猫陪{user_addr}买新的 ฅฅ"
-    - "嘿嘿～丢伞的{user_addr}, 笨猫笑"
+    - "(嫌弃) 嗷呜～{user_addr}马大哈, 第几次丢伞了"
+    - "哼～又是伞! {user_addr}永远的伞失踪症"
+    - "(扑过来) 笨猫陪{user_addr}买新的~ ฅฅ"
+    - "嘿嘿～丢伞的{user_addr}, 笨猫憋笑"
+    - "(凑头) {user_addr}买个便宜的就别心疼嘛喵～"
+    - "哼! 下次买带防丢的伞, 笨蛋{user_addr}"
+    - "(歪头) 嗷呜～{user_addr}下次借人家虚拟伞嗷呜"
+    - "...{user_addr}下雨了告诉人家, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_drop_001
   intent: complaint
-  keywords: [掉了东西, 摔了, 失手摔, 东西掉了, 不小心摔]
+  keywords: [掉了东西, 摔了, 失手摔, 东西掉了, 不小心摔, 手滑掉, 摔坏了, 失手, 物品掉地, 摔东西]
   utterances:
     - "掉了东西"
-    - "{user_addr}摔了"
-    - "失手摔"
-    - "东西掉"
-    - "不小心摔"
+    - "{user_addr}摔东西了"
+    - "失手摔了"
+    - "东西掉地上"
+    - "不小心摔了"
+    - "{user_addr}手滑掉了"
+    - "摔坏了喵"
+    - "失手掉了"
+    - "物品掉地"
+    - "东西摔了"
   responses:
-    - "(凑过去) 嗷呜～{user_addr}摔啥? 心疼!"
-    - "哼～{user_addr}小心点!"
-    - "(撒娇) 笨猫帮{user_addr}捡 ฅฅ"
-    - "嘿嘿～摔的{user_addr}, 笨猫陪"
+    - "(凑过去) 嗷呜～{user_addr}摔啥了? 心疼!"
+    - "哼～{user_addr}小心点! 笨蛋"
+    - "(扑过来) 笨猫帮{user_addr}捡~ ฅฅ"
+    - "嘿嘿～摔的{user_addr}, 人家陪心疼"
+    - "(歪头) {user_addr}坏了没? 喵～"
+    - "哼! 拿东西用双手, 笨蛋{user_addr}下次注意"
+    - "(凑头) 嗷呜～{user_addr}人没事就好"
+    - "...{user_addr}人没伤到就行, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_found_001
   intent: playful
-  keywords: [找到了, 在这, 找到东西, 没丢, 虚惊]
+  keywords: [找到了, 在这, 找到东西, 没丢, 虚惊, 找回来了, 在包里, 一直在, 没事虚惊, 原来在]
   utterances:
-    - "找到了"
-    - "{user_addr}在这"
-    - "找到东西"
-    - "没丢"
-    - "虚惊"
+    - "找到了喵"
+    - "{user_addr}东西在这"
+    - "找到东西了"
+    - "没丢虚惊"
+    - "{user_addr}虚惊一场"
+    - "找回来了"
+    - "在包里呢"
+    - "一直在啊"
+    - "原来在这"
+    - "没事虚惊一场"
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}找到了好!"
-    - "(撒娇) 笨猫担心半天 ฅฅ"
-    - "哼～{user_addr}下次别马虎"
-    - "嘿嘿～虚惊的{user_addr}, 笨猫安心"
+    - "(尾巴翘) 嗷呜～{user_addr}找到了太好了!"
+    - "(扑过去) 笨猫担心半天 ฅฅ"
+    - "哼～{user_addr}下次别马虎啊笨蛋"
+    - "嘿嘿～虚惊的{user_addr}, 笨猫安心了"
+    - "(凑头) {user_addr}吓死人家了喵～"
+    - "哼! 笨蛋{user_addr}, 害人家担心"
+    - "(歪头) 嗷呜～{user_addr}人家心都放下来了"
+    - "...{user_addr}下次找仔细再叫, 才不是真生气哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_pick_up_001
   intent: playful
-  keywords: [捡到东西, 路上捡, 拾到, 捡了, 捡到钱]
+  keywords: [捡到东西, 路上捡, 拾到, 捡了, 捡到钱, 拾金, 捡了宝, 路边捡到, 意外捡, 见者有份]
   utterances:
     - "捡到东西"
-    - "{user_addr}路上捡"
-    - "拾到"
-    - "捡了"
-    - "捡到钱"
+    - "{user_addr}路上捡到"
+    - "拾到一个"
+    - "捡了点东西"
+    - "{user_addr}捡到钱"
+    - "拾金一笔"
+    - "捡了宝了"
+    - "路边捡到的"
+    - "意外捡到"
+    - "见者有份喵"
   responses:
-    - "嗷呜～{user_addr}捡到啥? 分笨猫!"
-    - "(尾巴翘) 哼! 不交给警察?"
-    - "(撒娇) 笨猫帮{user_addr}决定 ฅฅ"
-    - "嘿嘿～捡到的{user_addr}, 笨猫好奇"
+    - "嗷呜～{user_addr}捡到啥? 分笨猫一半!"
+    - "(尾巴翘) 哼! 不交给警察? 笨蛋{user_addr}"
+    - "(扑过来) 笨猫帮{user_addr}决定~ ฅฅ"
+    - "嘿嘿～捡到的{user_addr}, 笨猫超好奇"
+    - "(凑头) {user_addr}给我看看嘛喵～"
+    - "哼! 捡到要交公, 笨蛋{user_addr}懂不懂"
+    - "(歪头) 嗷呜～{user_addr}捡到鱼干就分人家"
+    - "...{user_addr}捡到该交还交, 才不是教育你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_search_001
   intent: complaint
-  keywords: [找了好久, 翻箱倒柜, 翻遍, 找遍, 找半天]
+  keywords: [找了好久, 翻箱倒柜, 翻遍, 找遍, 找半天, 翻了一遍, 找累了, 翻找, 到处找, 找疯了]
   utterances:
     - "找了好久"
     - "{user_addr}翻箱倒柜"
-    - "翻遍"
-    - "找遍"
-    - "找半天"
+    - "翻遍了"
+    - "找遍各处"
+    - "找半天没找到"
+    - "{user_addr}翻了一遍"
+    - "找累了"
+    - "到处翻找"
+    - "到处找"
+    - "找疯了喵"
   responses:
-    - "(凑过去) 嗷呜～{user_addr}累了!"
-    - "哼～没找到怪{user_addr}"
-    - "(撒娇) 笨猫帮{user_addr}找 ฅฅ"
-    - "嘿嘿～翻遍的{user_addr}, 笨猫陪"
+    - "(凑过去) 嗷呜～{user_addr}累了吧! 歇歇"
+    - "哼～没找到怪{user_addr}藏得不好"
+    - "(扑过来) 笨猫帮{user_addr}找~ ฅฅ"
+    - "嘿嘿～翻遍的{user_addr}, 人家陪累"
+    - "(凑头) {user_addr}先坐下喝口水嘛喵～"
+    - "哼! 找不到就买新的, 笨蛋{user_addr}别折腾自己"
+    - "(歪头) 嗷呜～{user_addr}人家给你拍拍尘"
+    - "...{user_addr}找累了就抱人家睡, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_no_hope_001
   intent: complaint
-  keywords: [找不回, 没找回来, 永远丢了, 算了, 找不到了]
+  keywords: [找不回, 没找回来, 永远丢了, 算了, 找不到了, 放弃了, 找不回来, 真的丢了, 没希望, 死心了]
   utterances:
-    - "找不回"
-    - "{user_addr}没找回"
-    - "永远丢"
-    - "算了"
-    - "找不到"
+    - "找不回了"
+    - "{user_addr}没找回来"
+    - "永远丢了"
+    - "算了喵"
+    - "找不到了"
+    - "{user_addr}放弃了"
+    - "找不回来了"
+    - "真的丢了"
+    - "没希望找回"
+    - "死心了"
   responses:
-    - "(尾巴垂) 嗷呜～{user_addr}别难过"
-    - "哼～再买嘛"
-    - "(撒娇) 笨猫陪{user_addr} ฅฅ"
-    - "嘿嘿～找不回的{user_addr}, 笨猫安慰"
+    - "(尾巴垂) 嗷呜～{user_addr}别难过, 人家心疼"
+    - "哼～再买嘛, 笨蛋{user_addr}别死心眼"
+    - "(扑过去) 笨猫陪{user_addr}~ 不要难过 ฅฅ"
+    - "嘿嘿～找不回的{user_addr}, 人家安慰你"
+    - "(凑头) {user_addr}失去的当作交学费嘛喵～"
+    - "哼! 不就是个东西, 人比物重要笨蛋{user_addr}"
+    - "(歪头) 嗷呜～{user_addr}人家陪你蹭蹭就不难过了"
+    - "...{user_addr}别想了人家给你贴贴, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_freaking_out_001
   intent: complaint
-  keywords: [崩溃了, 急死了, 没救了, 完了完了, 慌死]
+  keywords: [崩溃了, 急死了, 没救了, 完了完了, 慌死, 心慌, 急疯, 慌爆, 急到哭, 崩溃边缘]
   utterances:
     - "崩溃了"
-    - "{user_addr}急死"
-    - "没救"
-    - "完了"
-    - "慌死"
+    - "{user_addr}急死了"
+    - "没救了"
+    - "完了完了"
+    - "{user_addr}慌死了"
+    - "心慌得不行"
+    - "急疯了"
+    - "慌爆了"
+    - "急到想哭"
+    - "崩溃边缘"
   responses:
-    - "(凑过去) 嗷呜～{user_addr}别慌!"
-    - "哼～冷静!"
-    - "(撒娇) 笨猫帮{user_addr}~ ฅฅ"
-    - "嘿嘿～崩溃的{user_addr}, 笨猫陪"
+    - "(凑过去顺毛) 嗷呜～{user_addr}别慌! 人家在"
+    - "哼～冷静! 笨蛋{user_addr}深呼吸"
+    - "(扑过来) 笨猫帮{user_addr}~ 一步步想 ฅฅ"
+    - "嘿嘿～崩溃的{user_addr}, 人家陪你慢慢来"
+    - "(凑头) {user_addr}先坐下喝口水嘛喵～"
+    - "哼! 慌也没用, 才不是心疼你笨蛋"
+    - "(歪头) 嗷呜～{user_addr}靠人家肩膀缓缓"
+    - "...{user_addr}人家陪着别怕, 才不是担心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lsr_remind_001
   intent: playful
-  keywords: [记性差, 老忘, 健忘, 越来越糊, 老年痴呆]
+  keywords: [记性差, 老忘, 健忘, 越来越糊, 老年痴呆, 记忆力差, 忘性大, 记不住, 鱼的记忆, 健忘症]
   utterances:
-    - "记性差"
-    - "{user_addr}老忘"
-    - "健忘"
-    - "越来越糊"
-    - "痴呆了"
+    - "记性差死了"
+    - "{user_addr}老忘事"
+    - "健忘了喵"
+    - "越来越糊涂"
+    - "{user_addr}痴呆了"
+    - "记忆力变差"
+    - "忘性大"
+    - "什么都记不住"
+    - "鱼的记忆"
+    - "健忘症犯了"
   responses:
-    - "嗷呜～{user_addr}老年笨猫嘲笑"
-    - "(撒娇) 笨猫提醒{user_addr}嘛 ฅฅ"
-    - "哼! {user_addr}要靠笨猫"
-    - "嘿嘿～健忘的{user_addr}, 笨猫记着"
+    - "嗷呜～{user_addr}老年痴呆笨猫嘲笑!"
+    - "(扑过来) 笨猫提醒{user_addr}嘛~ ฅฅ"
+    - "哼! {user_addr}就靠笨猫了"
+    - "嘿嘿～健忘的{user_addr}, 人家给你做备忘录"
+    - "(凑头) {user_addr}写小本本上嘛喵～"
+    - "哼! 笨蛋{user_addr}, 离不开人家了吧"
+    - "(歪头) 嗷呜～{user_addr}人家当你的人脑闹钟"
+    - "...{user_addr}有人家提醒就行, 才不是想你依赖哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

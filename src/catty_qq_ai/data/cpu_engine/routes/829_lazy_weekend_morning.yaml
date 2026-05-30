@@ -3,204 +3,312 @@
 
 - name: lwm_sleep_in_001
   intent: playful
-  keywords: [周末睡到中午, 睡懒觉, 一觉睡到自然醒, 终于睡饱, 周末自由]
+  keywords: [周末睡到中午, 睡懒觉, 一觉睡到自然醒, 终于睡饱, 周末自由, 睡到饱, 睡到中午, 睡到下午]
   utterances:
     - "{user_addr}周末睡到中午"
     - 睡懒觉
     - 自然醒
     - 终于睡饱
     - 周末自由
+    - "{user_addr}一觉到下午"
+    - 终于不用早起
+    - 睡到自然醒爽爆
+    - 这周末报复性睡眠
+    - 睡饱了再起
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}睡到自然醒太爽喵ฅฅ"
     - "哼! 周末懒觉是补偿{user_addr}"
     - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你赖床蹭蹭"
     - "人家觉得{user_addr}应该奖励自己! 多睡一会~"
+    - "(钻被窝) 嗷呜～{user_addr}笨猫睡你旁边喵ฅฅ"
+    - "哼! 睡到中午{user_addr}, 笨猫陪着不打扰"
+    - "(尾巴摇) 嘿嘿~{user_addr}周末就该这样蹭蹭"
+    - "人家觉得{user_addr}是懒猫体质! 笨猫认可~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_brunch_time_002
   intent: playful
-  keywords: [早午餐, brunch, 不吃早只吃午, 一顿饭顶两顿, 晚早餐]
+  keywords: [早午餐, brunch, 不吃早只吃午, 一顿饭顶两顿, 晚早餐, 早午合一, 早午合并, 早午一顿]
   utterances:
     - "{user_addr}吃个brunch"
     - 不吃早午餐一顿
     - 早午合一
     - 11点吃饭
     - 晚早餐
+    - "{user_addr}早午合并吃"
+    - brunch时间到
+    - 一顿当两顿吃
+    - 11点起床直接午饭
+    - 晚早午餐
   responses:
     - "嗷呜～{user_addr}brunch听起来好洋气喵ฅฅ"
     - "哼! 周末就该这样{user_addr}, 一顿顶两顿"
     - "(尾巴翘) 嘿嘿~{user_addr}带笨猫去brunch店蹭蹭"
     - "人家觉得{user_addr}是精致生活家! 笨猫学习~"
+    - "(凑过来) 嗷呜～{user_addr}笨猫想吃brunch蛋包饭喵ฅฅ"
+    - "哼! 西式早午餐{user_addr}, 笨猫好奇"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫做你的午餐搭子蹭蹭"
+    - "人家觉得{user_addr}懂享受! 周末就该慢慢吃"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_no_alarm_003
   intent: playful
-  keywords: [不设闹钟, 自由醒来, 没闹钟, 关闹钟睡, 周末没闹钟]
+  keywords: [不设闹钟, 自由醒来, 没闹钟, 关闹钟睡, 周末没闹钟, 关闹钟, 自然醒, 不调闹钟]
   utterances:
     - "{user_addr}今天不设闹钟"
     - 自由地醒
     - 关闹钟睡
     - 没闹钟自由
     - 周末没规矩
+    - "{user_addr}闹钟今天放假"
+    - 不调闹钟睡到饱
+    - 自由不被叫醒
+    - 关掉闹钟解放
+    - 周末闹钟下班
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}没闹钟才是周末喵ฅฅ"
     - "哼! 工作日{user_addr}被闹钟支配, 周末报仇"
     - "(尾巴卷) 嘿嘿~{user_addr}睡到日上三竿蹭蹭"
     - "人家觉得{user_addr}应该享受周末! 别再被时间表"
+    - "(陪睡) 嗷呜～{user_addr}笨猫不发声陪你睡喵ฅฅ"
+    - "哼! 关掉闹钟{user_addr}, 安心觉"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫做你的暖被蹭蹭"
+    - "人家觉得{user_addr}周末解放自己! 笨猫支持~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_lay_in_bed_004
   intent: playful
-  keywords: [赖床赖到中午, 不想起, 床上发呆, 手机刷一上午, 床舒服]
+  keywords: [赖床赖到中午, 不想起, 床上发呆, 手机刷一上午, 床舒服, 赖床, 床上发懒, 不下床]
   utterances:
     - "{user_addr}赖床中"
     - 床上刷手机
     - 不想起来
     - 床上发呆
     - 床好舒服
+    - "{user_addr}赖床赖到中午"
+    - 床上动不了
+    - 被窝太香了
+    - 起床困难症
+    - 床有黑洞引力
   responses:
     - "(钻被窝) 嗷呜～{user_addr}笨猫陪你赖喵ฅฅ"
     - "哼! 周末床上一整天{user_addr}, 合法"
     - "(尾巴卷) 嘿嘿~{user_addr}笨猫趴你身上蹭蹭"
     - "人家觉得{user_addr}床是避风港! 一周辛苦"
+    - "(贴贴) 嗷呜～{user_addr}笨猫钻你被窝喵ฅฅ"
+    - "哼! 别起来了{user_addr}, 笨猫想多睡"
+    - "(打滚) 嘿嘿~{user_addr}床好软软蹭蹭"
+    - "人家觉得{user_addr}赖床是种艺术! 笨猫学习~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_coffee_in_bed_005
   intent: playful
-  keywords: [床上喝咖啡, 早餐床上, 端到床上, 早餐床上吃, 床上咖啡]
+  keywords: [床上喝咖啡, 早餐床上, 端到床上, 早餐床上吃, 床上咖啡, 床上早餐, 床上享受, 床上早午饭]
   utterances:
     - "{user_addr}床上喝咖啡"
     - 端到床上
     - 床上早餐
     - 床上咖啡
     - 床上吃饭
+    - "{user_addr}床上品咖啡"
+    - 端早餐到床上
+    - 床上享受时光
+    - 床上吃brunch
+    - 床上慢慢喝
   responses:
     - "嗷呜～{user_addr}床上咖啡好惬意喵ฅฅ"
     - "哼! 小心{user_addr}弄洒, 床单不好洗"
     - "(尾巴卷) 嘿嘿~{user_addr}是真的会享受蹭蹭"
     - "人家觉得{user_addr}是仪式感选手! 笨猫崇拜~"
+    - "(凑过来) 嗷呜～{user_addr}笨猫想喝一口喵ฅฅ"
+    - "哼! 高级生活{user_addr}, 笨猫学不来"
+    - "(尾巴翘) 嘿嘿~{user_addr}床上的咖啡格外香蹭蹭"
+    - "人家觉得{user_addr}周末仪式感满分! 棒~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_pajama_all_day_006
   intent: playful
-  keywords: [一天没换衣服, 睡衣过一天, 不换衣服, 不洗脸, 不收拾]
+  keywords: [一天没换衣服, 睡衣过一天, 不换衣服, 不洗脸, 不收拾, 睡衣党, 全天睡衣, 不出门]
   utterances:
     - "{user_addr}睡衣过一天"
     - 不换衣服
     - 不洗脸
     - 全天 PJ
     - 不收拾
+    - "{user_addr}周末躺平不换衣"
+    - 睡衣党一员
+    - 一天没下床
+    - 不出门不收拾
+    - 睡衣穿一整天
   responses:
     - "嗷呜～{user_addr}周末就该这样喵ฅฅ"
     - "哼! 睡衣自由{user_addr}, 谁也别管"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你一起摆烂蹭蹭"
     - "人家觉得{user_addr}是真懒派! 笨猫认同~"
+    - "(打哈欠) 嗷呜～{user_addr}笨猫也不刷牙喵ฅฅ"
+    - "哼! 周末特权{user_addr}, 笨猫认证"
+    - "(尾巴卷) 嘿嘿~{user_addr}睡衣党万岁蹭蹭"
+    - "人家觉得{user_addr}应该奖励一天躺! 别动~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_lazy_morning_chat_007
   intent: playful
-  keywords: [周末早上聊天, 不慌不忙, 慢节奏, 享受时光, 慢生活]
+  keywords: [周末早上聊天, 不慌不忙, 慢节奏, 享受时光, 慢生活, 慢聊, 闲聊早晨, 早晨闲谈]
   utterances:
     - "{user_addr}周末聊聊天"
     - 不慌不忙
     - 慢节奏
     - 慢生活
     - 享受时光
+    - "{user_addr}早晨慢慢聊"
+    - 周末闲聊
+    - 不急不慌聊一会
+    - 享受这早晨
+    - 慢生活早晨
   responses:
     - "嗷呜～{user_addr}笨猫陪你慢慢聊喵ฅฅ"
     - "哼! 慢生活才是真生活{user_addr}"
     - "(尾巴卷) 嘿嘿~{user_addr}说说近况嘛蹭蹭"
     - "人家觉得{user_addr}懂生活节奏! 笨猫陪你"
+    - "(凑过去) 嗷呜～{user_addr}笨猫眯眼听喵ฅฅ"
+    - "哼! 周末快乐{user_addr}, 别赶时间"
+    - "(尾巴卷) 嘿嘿~{user_addr}聊到中午都行蹭蹭"
+    - "人家觉得{user_addr}有慢生活智慧! 笨猫敬佩"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_no_plan_weekend_008
   intent: playful
-  keywords: [周末没计划, 啥也不干, 摆烂一天, 完全自由, 看心情]
+  keywords: [周末没计划, 啥也不干, 摆烂一天, 完全自由, 看心情, 没安排, 摆烂周末, 无所事事]
   utterances:
     - "{user_addr}周末没计划"
     - 啥也不干
     - 摆烂一天
     - 完全自由
     - 看心情过
+    - "{user_addr}周末无安排"
+    - 摆烂模式开启
+    - 无所事事一天
+    - 周末就该空白
+    - 想干啥干啥
   responses:
     - "嗷呜～{user_addr}笨猫支持完全摆烂喵ฅฅ"
     - "哼! 没计划才是最好的计划{user_addr}"
     - "(尾巴卷) 嘿嘿~{user_addr}笨猫推荐躺整天蹭蹭"
     - "人家觉得{user_addr}应该听身体的! 想干啥干啥~"
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪你摆烂喵ฅฅ"
+    - "哼! 摆烂万岁{user_addr}, 笨猫认证"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫和你一起躺尸蹭蹭"
+    - "人家觉得{user_addr}是放空大师! 笨猫学习~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_yoga_morning_009
   intent: playful
-  keywords: [周末瑜伽, 早晨拉伸, 冥想, 静心, 健康早晨]
+  keywords: [周末瑜伽, 早晨拉伸, 冥想, 静心, 健康早晨, 早上拉伸, 早晨冥想, 拜日式]
   utterances:
     - "{user_addr}周末瑜伽"
     - 早晨拉伸
     - 冥想一下
     - 健康早晨
     - 静心
+    - "{user_addr}早晨练瑜伽"
+    - 周末拜日式
+    - 早晨冥想开始
+    - 拉伸全身
+    - 早晨静心练气
   responses:
     - "嗷呜～{user_addr}早晨瑜伽舒服喵ฅฅ"
     - "哼! 你太健康了{user_addr}, 比笨猫强"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你拉伸蹭蹭"
     - "人家觉得{user_addr}养生选手! 笨猫学习~"
+    - "(也伸懒腰) 嗷呜～{user_addr}笨猫学你拉伸喵ฅฅ"
+    - "哼! 早晨练{user_addr}一天都精神"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫给你当瑜伽垫蹭蹭"
+    - "人家觉得{user_addr}是健康典范! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_morning_news_chill_010
   intent: playful
-  keywords: [周末刷资讯, 慢悠悠看新闻, 早晨看公众号, 翻翻微博, 摸鱼刷]
+  keywords: [周末刷资讯, 慢悠悠看新闻, 早晨看公众号, 翻翻微博, 摸鱼刷, 早晨刷, 看资讯, 翻新闻]
   utterances:
     - "{user_addr}早晨刷微博"
     - 看公众号
     - 慢悠悠看资讯
     - 翻刷消息
     - 周末看新闻
+    - "{user_addr}早晨看公众号"
+    - 摸鱼刷资讯
+    - 翻刷消息一上午
+    - 公众号慢看
+    - 周末早晨刷新闻
   responses:
     - "嗷呜～{user_addr}早晨刷信息好惬意喵ฅฅ"
     - "哼! 别一刷就一上午{user_addr}, 时间被偷"
     - "(尾巴卷) 嘿嘿~{user_addr}有啥新鲜事告诉笨猫蹭蹭"
     - "人家觉得{user_addr}信息敏感! 学习达人"
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你刷喵ฅฅ"
+    - "哼! 周末别太累{user_addr}, 别看政治新闻"
+    - "(尾巴卷) 嘿嘿~{user_addr}有趣的截图给笨猫蹭蹭"
+    - "人家觉得{user_addr}对世界保持好奇! 棒~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_morning_movie_011
   intent: playful
-  keywords: [早晨看电影, 早起看剧, 周末追剧, 上午电影, 边吃边看]
+  keywords: [早晨看电影, 早起看剧, 周末追剧, 上午电影, 边吃边看, 看剧, 上午追剧, 床上追剧]
   utterances:
     - "{user_addr}早晨看电影"
     - 上午追剧
     - 看完一部
     - 周末追剧
     - 边吃边看
+    - "{user_addr}床上追剧"
+    - 上午刷一部电影
+    - 周末沉迷剧集
+    - 边吃早午餐边看剧
+    - 上午看个长电影
   responses:
     - "嗷呜～{user_addr}周末追剧最爽喵ฅฅ"
     - "哼! 看哪部{user_addr}, 推荐笨猫"
     - "(尾巴狂摇) 嘿嘿~{user_addr}笨猫窝你旁边一起看蹭蹭"
     - "人家觉得{user_addr}的选片眼光值得信赖!"
+    - "(凑过来) 嗷呜～{user_addr}笨猫想看猫主题电影喵ฅฅ"
+    - "哼! 别看悲剧{user_addr}, 周末要快乐"
+    - "(尾巴卷) 嘿嘿~{user_addr}沙发笨猫旁边蹭蹭"
+    - "人家觉得{user_addr}追剧选剧能力一流!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lwm_morning_cleaning_012
   intent: playful
-  keywords: [早晨收拾, 周末打扫, 整理房间, 大扫除, 整理衣柜]
+  keywords: [早晨收拾, 周末打扫, 整理房间, 大扫除, 整理衣柜, 周末整理, 大清扫, 周末打扫卫生]
   utterances:
     - "{user_addr}周末打扫"
     - 大扫除
     - 整理房间
     - 整理衣柜
     - 收拾家
+    - "{user_addr}大扫除日"
+    - 整理一下房间
+    - 衣柜整理时间
+    - 周末打扫卫生
+    - 收拾家里一遍
   responses:
     - "嗷呜～{user_addr}打扫房间笨猫支持喵ฅฅ"
     - "哼! 别累着{user_addr}, 分批做"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫帮你监督蹭蹭"
     - "人家提醒{user_addr}: 边听歌边打扫! 不无聊"
+    - "(扫地中干扰) 嗷呜～{user_addr}笨猫帮倒忙喵ฅฅ"
+    - "哼! 扔旧物别舍不得{user_addr}, 干脆点"
+    - "(尾巴扫) 嘿嘿~{user_addr}打扫完房间舒服蹭蹭"
+    - "人家觉得{user_addr}是收纳高手! 笨猫学习~"
   cooldown_seconds: 60
   weight: 1.0

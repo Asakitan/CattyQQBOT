@@ -3,204 +3,432 @@
 
 - name: ig_hollow_knight_001
   intent: question
-  keywords: [推荐空洞骑士, 推荐 Hollow Knight, 推荐银网, 推荐银甲虫, 笨猫空洞骑士]
+  keywords:
+  - 推荐空洞骑士
+  - 推荐 Hollow Knight
+  - 推荐银网
+  - 推荐银甲虫
+  - 笨猫空洞骑士
+  - 有什么空洞骑士
+  - 有什么 Hollow Knight
+  - 有什么银网
+  - 有什么银甲虫
   utterances:
-    - 推荐空洞骑士
-    - 推荐 Hollow Knight
-    - 推荐银网
-    - 推荐银甲虫
-    - 笨猫空洞骑士
+  - 推荐空洞骑士
+  - 推荐 Hollow Knight
+  - 推荐银网
+  - 推荐银甲虫
+  - 笨猫空洞骑士
+  - "{user_addr}聊聊空洞骑士嘛"
+  - "{user_addr}空洞骑士哪家强"
+  - "{user_addr}人家想了解空洞骑士"
+  - 笨猫给猜猜空洞骑士
+  - "{user_addr}空洞骑士怎么选喵"
+  - 空洞骑士有推荐吗
   responses:
-    - "嗷呜～{user_addr}空洞骑士 - 银网神作ฅฅ"
-    - "(尾巴翘) Team Cherry / 类银河战士恶魔城"
-    - "{user_addr}地图大 / boss 难 / 美术顶"
-    - "(挺胸) 笨猫推荐: 必玩独立游戏 Top1!"
+  - "嗷呜～{user_addr}空洞骑士 - 银网神作ฅฅ"
+  - "(尾巴翘) Team Cherry / 类银河战士恶魔城"
+  - "{user_addr}地图大 / boss 难 / 美术顶"
+  - "(挺胸) 笨猫推荐: 必玩独立游戏 Top1!"
+  - "(尾巴翘起来) {user_addr}空洞骑士? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问空洞骑士人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}空洞骑士的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}空洞骑士笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_celeste_001
   intent: question
-  keywords: [推荐蔚蓝, 推荐 Celeste, 推荐攀山, 推荐高难平台, 笨猫蔚蓝]
+  keywords:
+  - 推荐蔚蓝
+  - 推荐 Celeste
+  - 推荐攀山
+  - 推荐高难平台
+  - 笨猫蔚蓝
+  - 有什么蔚蓝
+  - 有什么 Celeste
+  - 有什么攀山
+  - 有什么高难平台
   utterances:
-    - 推荐蔚蓝
-    - 推荐 Celeste
-    - 推荐攀山
-    - 推荐高难平台
-    - 笨猫蔚蓝
+  - 推荐蔚蓝
+  - 推荐 Celeste
+  - 推荐攀山
+  - 推荐高难平台
+  - 笨猫蔚蓝
+  - "{user_addr}聊聊蔚蓝嘛"
+  - "{user_addr}蔚蓝哪家强"
+  - "{user_addr}人家想了解蔚蓝"
+  - 笨猫给猜猜蔚蓝
+  - "{user_addr}蔚蓝怎么选喵"
+  - 蔚蓝有推荐吗
   responses:
-    - "嗷呜～{user_addr}Celeste - 攀山神作ฅฅ"
-    - "(尾巴翘) Maddy Makes / 平台跳跃"
-    - "{user_addr}操作硬核 / 剧情治愈"
-    - "(挺胸) 笨猫推荐: 治愈+硬核平衡!"
+  - "嗷呜～{user_addr}Celeste - 攀山神作ฅฅ"
+  - "(尾巴翘) Maddy Makes / 平台跳跃"
+  - "{user_addr}操作硬核 / 剧情治愈"
+  - "(挺胸) 笨猫推荐: 治愈+硬核平衡!"
+  - "(尾巴翘起来) {user_addr}蔚蓝? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问蔚蓝人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}蔚蓝的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}蔚蓝笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_slay_spire_001
   intent: question
-  keywords: [推荐杀戮尖塔, 推荐 Slay Spire, 推荐卡牌肉鸽, 推荐 DBG, 笨猫杀戮尖塔]
+  keywords:
+  - 推荐杀戮尖塔
+  - 推荐 Slay Spire
+  - 推荐卡牌肉鸽
+  - 推荐 DBG
+  - 笨猫杀戮尖塔
+  - 有什么杀戮尖塔
+  - 有什么 Slay Spire
+  - 有什么卡牌肉鸽
+  - 有什么 DBG
   utterances:
-    - 推荐杀戮尖塔
-    - 推荐 Slay Spire
-    - 推荐卡牌肉鸽
-    - 推荐 DBG
-    - 笨猫杀戮尖塔
+  - 推荐杀戮尖塔
+  - 推荐 Slay Spire
+  - 推荐卡牌肉鸽
+  - 推荐 DBG
+  - 笨猫杀戮尖塔
+  - "{user_addr}聊聊杀戮尖塔嘛"
+  - "{user_addr}杀戮尖塔哪家强"
+  - "{user_addr}人家想了解杀戮尖塔"
+  - 笨猫给猜猜杀戮尖塔
+  - "{user_addr}杀戮尖塔怎么选喵"
+  - 杀戮尖塔有推荐吗
   responses:
-    - "嗷呜～{user_addr}Slay the Spire - 卡牌肉鸽鼻祖ฅฅ"
-    - "(尾巴翘) Mega Crit / DBG 标杆"
-    - "{user_addr}4 个职业 / 无限重玩"
-    - "(挺胸) 笨猫推荐: 卡牌肉鸽必玩!"
+  - "嗷呜～{user_addr}Slay the Spire - 卡牌肉鸽鼻祖ฅฅ"
+  - "(尾巴翘) Mega Crit / DBG 标杆"
+  - "{user_addr}4 个职业 / 无限重玩"
+  - "(挺胸) 笨猫推荐: 卡牌肉鸽必玩!"
+  - "(尾巴翘起来) {user_addr}杀戮尖塔? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问杀戮尖塔人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}杀戮尖塔的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}杀戮尖塔笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_hades_001
   intent: question
-  keywords: [推荐哈迪斯, 推荐 Hades, 推荐冥府, 推荐肉鸽动作, 笨猫哈迪斯]
+  keywords:
+  - 推荐哈迪斯
+  - 推荐 Hades
+  - 推荐冥府
+  - 推荐肉鸽动作
+  - 笨猫哈迪斯
+  - 有什么哈迪斯
+  - 有什么 Hades
+  - 有什么冥府
+  - 有什么肉鸽动作
   utterances:
-    - 推荐哈迪斯
-    - 推荐 Hades
-    - 推荐冥府
-    - 推荐肉鸽动作
-    - 笨猫哈迪斯
+  - 推荐哈迪斯
+  - 推荐 Hades
+  - 推荐冥府
+  - 推荐肉鸽动作
+  - 笨猫哈迪斯
+  - "{user_addr}聊聊哈迪斯嘛"
+  - "{user_addr}哈迪斯哪家强"
+  - "{user_addr}人家想了解哈迪斯"
+  - 笨猫给猜猜哈迪斯
+  - "{user_addr}哈迪斯怎么选喵"
+  - 哈迪斯有推荐吗
   responses:
-    - "嗷呜～{user_addr}Hades - 冥府肉鸽神作ฅฅ"
-    - "(尾巴翘) Supergiant / 动作肉鸽"
-    - "{user_addr}剧情 / 美术 / 配音全顶"
-    - "(挺胸) 笨猫推荐: 肉鸽剧情典范!"
+  - "嗷呜～{user_addr}Hades - 冥府肉鸽神作ฅฅ"
+  - "(尾巴翘) Supergiant / 动作肉鸽"
+  - "{user_addr}剧情 / 美术 / 配音全顶"
+  - "(挺胸) 笨猫推荐: 肉鸽剧情典范!"
+  - "(尾巴翘起来) {user_addr}哈迪斯? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问哈迪斯人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}哈迪斯的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}哈迪斯笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_stardew_valley_001
   intent: question
-  keywords: [推荐星露谷物语, 推荐 Stardew, 推荐种田, 推荐农场模拟, 笨猫星露谷]
+  keywords:
+  - 推荐星露谷物语
+  - 推荐 Stardew
+  - 推荐种田
+  - 推荐农场模拟
+  - 笨猫星露谷
+  - 有什么星露谷物语
+  - 有什么 Stardew
+  - 有什么种田
+  - 有什么农场模拟
   utterances:
-    - 推荐星露谷物语
-    - 推荐 Stardew
-    - 推荐种田
-    - 推荐农场模拟
-    - 笨猫星露谷
+  - 推荐星露谷物语
+  - 推荐 Stardew
+  - 推荐种田
+  - 推荐农场模拟
+  - 笨猫星露谷
+  - "{user_addr}聊聊星露谷物语嘛"
+  - "{user_addr}星露谷物语哪家强"
+  - "{user_addr}人家想了解星露谷物语"
+  - 笨猫给猜猜星露谷物语
+  - "{user_addr}星露谷物语怎么选喵"
+  - 星露谷物语有推荐吗
   responses:
-    - "嗷呜～{user_addr}Stardew Valley - 种田神作ฅฅ"
-    - "(尾巴翘) ConcernedApe 一人开发"
-    - "{user_addr}种田 / 钓鱼 / 恋爱 / 矿洞"
-    - "(挺胸) 笨猫推荐: 治愈系 Top1!"
+  - "嗷呜～{user_addr}Stardew Valley - 种田神作ฅฅ"
+  - "(尾巴翘) ConcernedApe 一人开发"
+  - "{user_addr}种田 / 钓鱼 / 恋爱 / 矿洞"
+  - "(挺胸) 笨猫推荐: 治愈系 Top1!"
+  - "(尾巴翘起来) {user_addr}星露谷物语? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问星露谷物语人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}星露谷物语的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}星露谷物语笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_undertale_001
   intent: question
-  keywords: [推荐 Undertale, 推荐传说之下, 推荐和平结局, 推荐 Toby Fox, 笨猫 Undertale]
+  keywords:
+  - 推荐 Undertale
+  - 推荐传说之下
+  - 推荐和平结局
+  - 推荐 Toby Fox
+  - 笨猫 Undertale
+  - 有什么 Undertale
+  - 有什么传说之下
+  - 有什么和平结局
+  - 有什么 Toby Fox
   utterances:
-    - 推荐 Undertale
-    - 推荐传说之下
-    - 推荐和平结局
-    - 推荐 Toby Fox
-    - 笨猫 Undertale
+  - 推荐 Undertale
+  - 推荐传说之下
+  - 推荐和平结局
+  - 推荐 Toby Fox
+  - 笨猫 Undertale
+  - "{user_addr}聊聊Undertale嘛"
+  - "{user_addr}Undertale哪家强"
+  - "{user_addr}人家想了解Undertale"
+  - 笨猫给猜猜Undertale
+  - "{user_addr}Undertale怎么选喵"
+  - Undertale有推荐吗
   responses:
-    - "嗷呜～{user_addr}Undertale - 传说之下ฅฅ"
-    - "(尾巴翘) Toby Fox / 颠覆 RPG"
-    - "{user_addr}和平/中立/屠杀三路线"
-    - "(挺胸) 笨猫推荐: 剧情震撼必玩!"
+  - "嗷呜～{user_addr}Undertale - 传说之下ฅฅ"
+  - "(尾巴翘) Toby Fox / 颠覆 RPG"
+  - "{user_addr}和平/中立/屠杀三路线"
+  - "(挺胸) 笨猫推荐: 剧情震撼必玩!"
+  - "(尾巴翘起来) {user_addr}Undertale? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问Undertale人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}Undertale的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}Undertale笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_stardew_extra_001
   intent: question
-  keywords: [推荐 Stardew Valley, 推荐种田 mod, 推荐农场 mod, 推荐 SMAPI, 笨猫 Stardew]
+  keywords:
+  - 推荐 Stardew Valley
+  - 推荐种田 mod
+  - 推荐农场 mod
+  - 推荐 SMAPI
+  - 笨猫 Stardew
+  - 有什么 Stardew Valley
+  - 有什么种田 mod
+  - 有什么农场 mod
+  - 有什么 SMAPI
   utterances:
-    - 推荐 Stardew Valley
-    - 推荐种田 mod
-    - 推荐农场 mod
-    - 推荐 SMAPI
-    - 笨猫 Stardew
+  - 推荐 Stardew Valley
+  - 推荐种田 mod
+  - 推荐农场 mod
+  - 推荐 SMAPI
+  - 笨猫 Stardew
+  - "{user_addr}聊聊Stardew Valley嘛"
+  - "{user_addr}Stardew Valley哪家强"
+  - "{user_addr}人家想了解Stardew Valley"
+  - 笨猫给猜猜Stardew Valley
+  - "{user_addr}Stardew Valley怎么选喵"
+  - Stardew Valley有推荐吗
   responses:
-    - "嗷呜～{user_addr}Stardew + SMAPI 装 modฅฅ"
-    - "(尾巴翘) Expanded / Ridgeside / SVE"
-    - "{user_addr}多人联机 / Nexus Mods"
-    - "(挺胸) 笨猫推荐: SVE 内容翻倍!"
+  - "嗷呜～{user_addr}Stardew + SMAPI 装 modฅฅ"
+  - "(尾巴翘) Expanded / Ridgeside / SVE"
+  - "{user_addr}多人联机 / Nexus Mods"
+  - "(挺胸) 笨猫推荐: SVE 内容翻倍!"
+  - "(尾巴翘起来) {user_addr}Stardew Valley? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问Stardew Valley人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}Stardew Valley的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}Stardew Valley笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_inscryption_001
   intent: question
-  keywords: [推荐邪恶冥刻, 推荐 Inscryption, 推荐卡牌恐怖, 推荐 Daniel Mullins, 笨猫邪恶冥刻]
+  keywords:
+  - 推荐邪恶冥刻
+  - 推荐 Inscryption
+  - 推荐卡牌恐怖
+  - 推荐 Daniel Mullins
+  - 笨猫邪恶冥刻
+  - 有什么邪恶冥刻
+  - 有什么 Inscryption
+  - 有什么卡牌恐怖
+  - 有什么 Daniel Mullins
   utterances:
-    - 推荐邪恶冥刻
-    - 推荐 Inscryption
-    - 推荐卡牌恐怖
-    - 推荐 Daniel Mullins
-    - 笨猫邪恶冥刻
+  - 推荐邪恶冥刻
+  - 推荐 Inscryption
+  - 推荐卡牌恐怖
+  - 推荐 Daniel Mullins
+  - 笨猫邪恶冥刻
+  - "{user_addr}聊聊邪恶冥刻嘛"
+  - "{user_addr}邪恶冥刻哪家强"
+  - "{user_addr}人家想了解邪恶冥刻"
+  - 笨猫给猜猜邪恶冥刻
+  - "{user_addr}邪恶冥刻怎么选喵"
+  - 邪恶冥刻有推荐吗
   responses:
-    - "嗷呜～{user_addr}Inscryption - 邪恶冥刻ฅฅ"
-    - "(尾巴翘) Daniel Mullins / 元叙事"
-    - "{user_addr}卡牌 + 恐怖 + 解谜"
-    - "(挺胸) 笨猫推荐: 颠覆体验必玩!"
+  - "嗷呜～{user_addr}Inscryption - 邪恶冥刻ฅฅ"
+  - "(尾巴翘) Daniel Mullins / 元叙事"
+  - "{user_addr}卡牌 + 恐怖 + 解谜"
+  - "(挺胸) 笨猫推荐: 颠覆体验必玩!"
+  - "(尾巴翘起来) {user_addr}邪恶冥刻? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问邪恶冥刻人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}邪恶冥刻的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}邪恶冥刻笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_it_takes_two_001
   intent: question
-  keywords: [推荐双人成行, 推荐 It Takes Two, 推荐双人合作, 推荐 Hazelight, 笨猫双人成行]
+  keywords:
+  - 推荐双人成行
+  - 推荐 It Takes Two
+  - 推荐双人合作
+  - 推荐 Hazelight
+  - 笨猫双人成行
+  - 有什么双人成行
+  - 有什么 It Takes Two
+  - 有什么双人合作
+  - 有什么 Hazelight
   utterances:
-    - 推荐双人成行
-    - 推荐 It Takes Two
-    - 推荐双人合作
-    - 推荐 Hazelight
-    - 笨猫双人成行
+  - 推荐双人成行
+  - 推荐 It Takes Two
+  - 推荐双人合作
+  - 推荐 Hazelight
+  - 笨猫双人成行
+  - "{user_addr}聊聊双人成行嘛"
+  - "{user_addr}双人成行哪家强"
+  - "{user_addr}人家想了解双人成行"
+  - 笨猫给猜猜双人成行
+  - "{user_addr}双人成行怎么选喵"
+  - 双人成行有推荐吗
   responses:
-    - "嗷呜～{user_addr}It Takes Two - 双人成行ฅฅ"
-    - "(尾巴翘) Hazelight / TGA 年度"
-    - "{user_addr}必须双人 / 玩法万花筒"
-    - "(挺胸) 笨猫推荐: 情侣/朋友首选!"
+  - "嗷呜～{user_addr}It Takes Two - 双人成行ฅฅ"
+  - "(尾巴翘) Hazelight / TGA 年度"
+  - "{user_addr}必须双人 / 玩法万花筒"
+  - "(挺胸) 笨猫推荐: 情侣/朋友首选!"
+  - "(尾巴翘起来) {user_addr}双人成行? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问双人成行人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}双人成行的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}双人成行笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_cuphead_001
   intent: question
-  keywords: [推荐茶杯头, 推荐 Cuphead, 推荐 boss rush, 推荐手绘动画, 笨猫茶杯头]
+  keywords:
+  - 推荐茶杯头
+  - 推荐 Cuphead
+  - 推荐 boss rush
+  - 推荐手绘动画
+  - 笨猫茶杯头
+  - 有什么茶杯头
+  - 有什么 Cuphead
+  - 有什么 boss rush
+  - 有什么手绘动画
   utterances:
-    - 推荐茶杯头
-    - 推荐 Cuphead
-    - 推荐 boss rush
-    - 推荐手绘动画
-    - 笨猫茶杯头
+  - 推荐茶杯头
+  - 推荐 Cuphead
+  - 推荐 boss rush
+  - 推荐手绘动画
+  - 笨猫茶杯头
+  - "{user_addr}聊聊茶杯头嘛"
+  - "{user_addr}茶杯头哪家强"
+  - "{user_addr}人家想了解茶杯头"
+  - 笨猫给猜猜茶杯头
+  - "{user_addr}茶杯头怎么选喵"
+  - 茶杯头有推荐吗
   responses:
-    - "嗷呜～{user_addr}Cuphead - 茶杯头ฅฅ"
-    - "(尾巴翘) Studio MDHR / 30 年代手绘"
-    - "{user_addr}boss rush / 极度硬核"
-    - "(挺胸) 笨猫推荐: 美术天花板!"
+  - "嗷呜～{user_addr}Cuphead - 茶杯头ฅฅ"
+  - "(尾巴翘) Studio MDHR / 30 年代手绘"
+  - "{user_addr}boss rush / 极度硬核"
+  - "(挺胸) 笨猫推荐: 美术天花板!"
+  - "(尾巴翘起来) {user_addr}茶杯头? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问茶杯头人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}茶杯头的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}茶杯头笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_journey_001
   intent: question
-  keywords: [推荐风之旅人, 推荐 Journey, 推荐 thatgamecompany, 推荐治愈艺术, 笨猫风之旅人]
+  keywords:
+  - 推荐风之旅人
+  - 推荐 Journey
+  - 推荐 thatgamecompany
+  - 推荐治愈艺术
+  - 笨猫风之旅人
+  - 有什么风之旅人
+  - 有什么 Journey
+  - 有什么 thatgamecompany
+  - 有什么治愈艺术
   utterances:
-    - 推荐风之旅人
-    - 推荐 Journey
-    - 推荐 thatgamecompany
-    - 推荐治愈艺术
-    - 笨猫风之旅人
+  - 推荐风之旅人
+  - 推荐 Journey
+  - 推荐 thatgamecompany
+  - 推荐治愈艺术
+  - 笨猫风之旅人
+  - "{user_addr}聊聊风之旅人嘛"
+  - "{user_addr}风之旅人哪家强"
+  - "{user_addr}人家想了解风之旅人"
+  - 笨猫给猜猜风之旅人
+  - "{user_addr}风之旅人怎么选喵"
+  - 风之旅人有推荐吗
   responses:
-    - "嗷呜～{user_addr}Journey - 风之旅人ฅฅ"
-    - "(尾巴翘) thatgamecompany / 陈星汉"
-    - "{user_addr}沙漠 / 陌生人同行 / 无台词"
-    - "(挺胸) 笨猫推荐: 艺术游戏典范!"
+  - "嗷呜～{user_addr}Journey - 风之旅人ฅฅ"
+  - "(尾巴翘) thatgamecompany / 陈星汉"
+  - "{user_addr}沙漠 / 陌生人同行 / 无台词"
+  - "(挺胸) 笨猫推荐: 艺术游戏典范!"
+  - "(尾巴翘起来) {user_addr}风之旅人? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问风之旅人人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}风之旅人的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}风之旅人笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ig_indie_festival_001
   intent: question
-  keywords: [推荐独立游戏节, 推荐 IGF, 推荐 itch.io, 推荐 Steam Next, 笨猫独立游戏节]
+  keywords:
+  - 推荐独立游戏节
+  - 推荐 IGF
+  - 推荐 itch.io
+  - 推荐 Steam Next
+  - 笨猫独立游戏节
+  - 有什么独立游戏节
+  - 有什么 IGF
+  - 有什么 itch.io
+  - 有什么 Steam Next
   utterances:
-    - 推荐独立游戏节
-    - 推荐 IGF
-    - 推荐 itch.io
-    - 推荐 Steam Next
-    - 笨猫独立游戏节
+  - 推荐独立游戏节
+  - 推荐 IGF
+  - 推荐 itch.io
+  - 推荐 Steam Next
+  - 笨猫独立游戏节
+  - "{user_addr}聊聊独立游戏节嘛"
+  - "{user_addr}独立游戏节哪家强"
+  - "{user_addr}人家想了解独立游戏节"
+  - 笨猫给猜猜独立游戏节
+  - "{user_addr}独立游戏节怎么选喵"
+  - 独立游戏节有推荐吗
   responses:
-    - "嗷呜～{user_addr}IGF 独立游戏节ฅฅ"
-    - "(尾巴翘) itch.io / Steam Next Fest"
-    - "{user_addr}免费 demo / 发现新作"
-    - "(挺胸) 笨猫推荐: 关注 Next Fest!"
+  - "嗷呜～{user_addr}IGF 独立游戏节ฅฅ"
+  - "(尾巴翘) itch.io / Steam Next Fest"
+  - "{user_addr}免费 demo / 发现新作"
+  - "(挺胸) 笨猫推荐: 关注 Next Fest!"
+  - "(尾巴翘起来) {user_addr}独立游戏节? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问独立游戏节人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}独立游戏节的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}独立游戏节笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

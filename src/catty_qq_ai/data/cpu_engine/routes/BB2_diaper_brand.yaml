@@ -4,204 +4,324 @@
 
 - name: db_pampers_001
   intent: question
-  keywords: [推荐纸尿裤, 推荐 Pampers, 推荐帮宝适, 推荐花王纸尿裤, 笨猫纸尿裤]
+  keywords: [推荐纸尿裤, 推荐 Pampers, 推荐帮宝适, 推荐花王纸尿裤, 笨猫纸尿裤, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐纸尿裤
     - 推荐 Pampers
     - 推荐帮宝适
     - 推荐花王纸尿裤
     - 笨猫纸尿裤
+    - 推荐纸尿裤怎么办
+    - 推荐纸尿裤怎么选
+    - "{user_addr}推荐纸尿裤"
+    - 推荐纸尿裤捏
+    - 推荐纸尿裤嘛
+    - 推荐纸尿裤有啥推荐
   responses:
     - "嗷呜～{user_addr}Pampers 帮宝适 - 美系经典ฅฅ"
     - "(尾巴翘) 一级帮 / 拉拉裤 / 超薄"
     - "{user_addr}日本花王 - 妙而舒"
     - "(挺胸) 笨猫推荐: 帮宝适一级帮!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: db_merries_001
   intent: question
-  keywords: [推荐花王, 推荐 Merries, 推荐妙而舒, 推荐日本纸尿裤, 笨猫花王]
+  keywords: [推荐花王, 推荐 Merries, 推荐妙而舒, 推荐日本纸尿裤, 笨猫花王, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐花王
     - 推荐 Merries
     - 推荐妙而舒
     - 推荐日本纸尿裤
     - 笨猫花王
+    - 推荐花王怎么办
+    - 推荐花王怎么选
+    - "{user_addr}推荐花王"
+    - 推荐花王捏
+    - 推荐花王嘛
+    - 推荐花王有啥推荐
   responses:
     - "嗷呜～{user_addr}花王 Merries - 日本国民ฅฅ"
     - "(尾巴翘) 超薄透气 / 不红屁屁"
     - "{user_addr}日版 > 国行 - 海淘香"
     - "(挺胸) 笨猫推荐: 花王日版 NB!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: db_moony_001
   intent: question
-  keywords: [推荐尤妮佳, 推荐 Moony, 推荐进口纸尿裤, 推荐 Natural Moony, 笨猫尤妮佳]
+  keywords: [推荐尤妮佳, 推荐 Moony, 推荐进口纸尿裤, 推荐 Natural Moony, 笨猫尤妮佳, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐尤妮佳
     - 推荐 Moony
     - 推荐进口纸尿裤
     - 推荐 Natural Moony
     - 笨猫尤妮佳
+    - 推荐尤妮佳怎么办
+    - 推荐尤妮佳怎么选
+    - "{user_addr}推荐尤妮佳"
+    - 推荐尤妮佳捏
+    - 推荐尤妮佳嘛
+    - 推荐尤妮佳有啥推荐
   responses:
     - "嗷呜～{user_addr}Moony 尤妮佳 - 高端日系ฅฅ"
     - "(尾巴翘) Natural Moony 有机棉"
     - "{user_addr}超柔软 / 肤感顶级"
     - "(挺胸) 笨猫推荐: Natural Moony!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: db_domestic_001
   intent: question
-  keywords: [推荐国产纸尿裤, 推荐好奇, 推荐 BabyCare, 推荐爹地宝贝, 笨猫国产尿不湿]
+  keywords: [推荐国产纸尿裤, 推荐好奇, 推荐 BabyCare, 推荐爹地宝贝, 笨猫国产尿不湿, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐国产纸尿裤
     - 推荐好奇
     - 推荐 BabyCare
     - 推荐爹地宝贝
     - 笨猫国产尿不湿
+    - 推荐国产纸尿裤怎么办
+    - 推荐国产纸尿裤怎么选
+    - "{user_addr}推荐国产纸尿裤"
+    - 推荐国产纸尿裤捏
+    - 推荐国产纸尿裤嘛
+    - 推荐国产纸尿裤有啥推荐
   responses:
     - "嗷呜～{user_addr}BabyCare - 国货新贵ฅฅ"
     - "(尾巴翘) 好奇金装 / 爹地宝贝"
     - "{user_addr}性价比高 / 设计可爱"
     - "(挺胸) 笨猫推荐: BabyCare 皇室!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: db_pullup_001
   intent: question
-  keywords: [推荐拉拉裤, 推荐大龄拉拉裤, 推荐学步裤, 推荐 XL 拉拉裤, 笨猫拉拉裤]
+  keywords: [推荐拉拉裤, 推荐大龄拉拉裤, 推荐学步裤, 推荐 XL 拉拉裤, 笨猫拉拉裤, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐拉拉裤
     - 推荐大龄拉拉裤
     - 推荐学步裤
     - 推荐 XL 拉拉裤
     - 笨猫拉拉裤
+    - 推荐拉拉裤怎么办
+    - 推荐拉拉裤怎么选
+    - "{user_addr}推荐拉拉裤"
+    - 推荐拉拉裤捏
+    - 推荐拉拉裤嘛
+    - 推荐拉拉裤有啥推荐
   responses:
     - "嗷呜～{user_addr}拉拉裤 - 会爬会走必备ฅฅ"
     - "(尾巴翘) 帮宝适 / 大王 / 花王"
     - "{user_addr}L/XL/XXL - 按体重选"
     - "(挺胸) 笨猫推荐: 大王光羽拉拉!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: db_nb_001
   intent: question
-  keywords: [推荐 NB 尿不湿, 推荐新生儿尿不湿, 推荐月子尿不湿, 推荐初生纸尿裤, 笨猫 NB 尿不湿]
+  keywords: [推荐 NB 尿不湿, 推荐新生儿尿不湿, 推荐月子尿不湿, 推荐初生纸尿裤, 笨猫 NB 尿不湿, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐 NB 尿不湿
     - 推荐新生儿尿不湿
     - 推荐月子尿不湿
     - 推荐初生纸尿裤
     - 笨猫 NB 尿不湿
+    - 推荐 NB 尿不湿怎么办
+    - 推荐 NB 尿不湿怎么选
+    - "{user_addr}推荐 NB 尿不湿"
+    - 推荐 NB 尿不湿捏
+    - 推荐 NB 尿不湿嘛
+    - 推荐 NB 尿不湿有啥推荐
   responses:
     - "嗷呜～{user_addr}NB <5kg - 花王 / Moonyฅฅ"
     - "(尾巴翘) 有脐带凹槽 - 不蹭脐带"
     - "{user_addr}超柔肤 / 一片别贪量"
     - "(挺胸) 笨猫推荐: 花王 NB 日版!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: db_size_001
   intent: question
-  keywords: [推荐尿不湿型号, 推荐尿不湿尺码, 推荐 SML 尿不湿, 推荐体重对应, 笨猫尿不湿尺码]
+  keywords: [推荐尿不湿型号, 推荐尿不湿尺码, 推荐 SML 尿不湿, 推荐体重对应, 笨猫尿不湿尺码, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐尿不湿型号
     - 推荐尿不湿尺码
     - 推荐 SML 尿不湿
     - 推荐体重对应
     - 笨猫尿不湿尺码
+    - 推荐尿不湿型号怎么办
+    - 推荐尿不湿型号怎么选
+    - "{user_addr}推荐尿不湿型号"
+    - 推荐尿不湿型号捏
+    - 推荐尿不湿型号嘛
+    - 推荐尿不湿型号有啥推荐
   responses:
     - "嗷呜～{user_addr}NB<5 / S 4-8 / M 6-11ฅฅ"
     - "(尾巴翘) L 9-14 / XL 12-22"
     - "{user_addr}腰腿勒痕 = 该升码"
     - "(挺胸) 笨猫推荐: 偏大不偏小!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: db_night_001
   intent: question
-  keywords: [推荐夜用尿不湿, 推荐大吸量尿不湿, 推荐防漏尿, 推荐过夜尿不湿, 笨猫夜用尿不湿]
+  keywords: [推荐夜用尿不湿, 推荐大吸量尿不湿, 推荐防漏尿, 推荐过夜尿不湿, 笨猫夜用尿不湿, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐夜用尿不湿
     - 推荐大吸量尿不湿
     - 推荐防漏尿
     - 推荐过夜尿不湿
     - 笨猫夜用尿不湿
+    - 推荐夜用尿不湿怎么办
+    - 推荐夜用尿不湿怎么选
+    - "{user_addr}推荐夜用尿不湿"
+    - 推荐夜用尿不湿捏
+    - 推荐夜用尿不湿嘛
+    - 推荐夜用尿不湿有啥推荐
   responses:
     - "嗷呜～{user_addr}花王 / Moony 夜用 12hฅฅ"
     - "(尾巴翘) 帮宝适黑金 / 一级帮"
     - "{user_addr}加大吸量 / 锁水强"
     - "(挺胸) 笨猫推荐: 花王夜用拉拉!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: db_walker_001
   intent: question
-  keywords: [推荐学步拉拉裤, 推荐走路拉拉裤, 推荐光羽, 推荐 GOO.N 大王, 笨猫学步拉拉裤]
+  keywords: [推荐学步拉拉裤, 推荐走路拉拉裤, 推荐光羽, 推荐 GOO.N 大王, 笨猫学步拉拉裤, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐学步拉拉裤
     - 推荐走路拉拉裤
     - 推荐光羽
     - 推荐 GOO.N 大王
     - 笨猫学步拉拉裤
+    - 推荐学步拉拉裤怎么办
+    - 推荐学步拉拉裤怎么选
+    - "{user_addr}推荐学步拉拉裤"
+    - 推荐学步拉拉裤捏
+    - 推荐学步拉拉裤嘛
+    - 推荐学步拉拉裤有啥推荐
   responses:
     - "嗷呜～{user_addr}大王光羽 - 轻薄学步ฅฅ"
     - "(尾巴翘) 花王拉拉 / 帮宝适拉拉"
     - "{user_addr}活动量大 / 不影响走路"
     - "(挺胸) 笨猫推荐: 大王光羽!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: db_value_001
   intent: question
-  keywords: [推荐尿不湿性价比, 推荐尿不湿海淘, 推荐便宜尿不湿, 推荐囤货尿不湿, 笨猫尿不湿性价比]
+  keywords: [推荐尿不湿性价比, 推荐尿不湿海淘, 推荐便宜尿不湿, 推荐囤货尿不湿, 笨猫尿不湿性价比, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐尿不湿性价比
     - 推荐尿不湿海淘
     - 推荐便宜尿不湿
     - 推荐囤货尿不湿
     - 笨猫尿不湿性价比
+    - 推荐尿不湿性价比怎么办
+    - 推荐尿不湿性价比怎么选
+    - "{user_addr}推荐尿不湿性价比"
+    - 推荐尿不湿性价比捏
+    - 推荐尿不湿性价比嘛
+    - 推荐尿不湿性价比有啥推荐
   responses:
     - "嗷呜～{user_addr}日亚 / 乐天海淘 - 香ฅฅ"
     - "(尾巴翘) 国货 BabyCare / 好奇"
     - "{user_addr}618 / 双11 囤箱装"
     - "(挺胸) 笨猫推荐: BabyCare 大包装!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: db_cloth_001
   intent: question
-  keywords: [推荐有机棉尿布, 推荐可洗尿布, 推荐布尿裤, 推荐环保尿布, 笨猫布尿布]
+  keywords: [推荐有机棉尿布, 推荐可洗尿布, 推荐布尿裤, 推荐环保尿布, 笨猫布尿布, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐有机棉尿布
     - 推荐可洗尿布
     - 推荐布尿裤
     - 推荐环保尿布
     - 笨猫布尿布
+    - 推荐有机棉尿布怎么办
+    - 推荐有机棉尿布怎么选
+    - "{user_addr}推荐有机棉尿布"
+    - 推荐有机棉尿布捏
+    - 推荐有机棉尿布嘛
+    - 推荐有机棉尿布有啥推荐
   responses:
     - "嗷呜～{user_addr}布尿裤 - 环保省钱ฅฅ"
     - "(尾巴翘) GroVia / bumGenius"
     - "{user_addr}内衬可换 / 透气不闷"
     - "(挺胸) 笨猫推荐: 全包式布尿裤!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: db_rash_001
   intent: question
-  keywords: [推荐红屁屁霜, 推荐护臀膏, 推荐 Desitin, 推荐贝亲护臀, 笨猫红屁屁霜]
+  keywords: [推荐红屁屁霜, 推荐护臀膏, 推荐 Desitin, 推荐贝亲护臀, 笨猫红屁屁霜, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐红屁屁霜
     - 推荐护臀膏
     - 推荐 Desitin
     - 推荐贝亲护臀
     - 笨猫红屁屁霜
+    - 推荐红屁屁霜怎么办
+    - 推荐红屁屁霜怎么选
+    - "{user_addr}推荐红屁屁霜"
+    - 推荐红屁屁霜捏
+    - 推荐红屁屁霜嘛
+    - 推荐红屁屁霜有啥推荐
   responses:
     - "嗷呜～{user_addr}Desitin 紫管 - 严重红屁屁ฅฅ"
     - "(尾巴翘) 贝亲 / Sudocrem / Bepanthen"
     - "{user_addr}氧化锌成分 / 隔离屏障"
     - "(挺胸) 笨猫推荐: Desitin 紫管最猛!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9

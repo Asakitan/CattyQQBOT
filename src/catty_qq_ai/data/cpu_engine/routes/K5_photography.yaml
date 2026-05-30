@@ -3,204 +3,324 @@
 
 - name: photo_dslr_001
   intent: question
-  keywords: [推荐单反, 推荐微单, 推荐 Sony A7, 推荐 Canon R6, 笨猫单反]
+  keywords: [推荐单反, 推荐微单, 推荐 Sony A7, 推荐 Canon R6, 笨猫单反, 富士 X-T5, 尼康 Z6, A7C, 全画幅, 微单首选]
   utterances:
     - 推荐单反
     - 推荐微单
     - 推荐 Sony A7
     - 推荐 Canon R6
     - 笨猫单反
+    - 推荐富士 X-T5
+    - 推荐索尼 A7C
+    - 推荐 Canon R6 II
+    - 推荐 Nikon Z6
+    - 推荐全画幅微单
+    - 推荐入门微单
   responses:
     - "嗷呜～{user_addr}入门: 索尼 A7C / 富士 X-T5ฅฅ"
     - "(尾巴翘) 全画幅: 索尼 A7M4 / 佳能 R6 II"
     - "{user_addr}尼康 Z6 II - 视频党"
     - "(挺胸) 笨猫推荐: 微单 > 单反 - 现在主流!"
+    - "嗷呜～富士色彩开机就能拍 ฅฅ"
+    - "(歪头)A7C 体积小适合女生嗷呜"
+    - "{user_addr}主打视频选 R6/Z6 视频强蹭蹭"
+    - "(凑过来) 笨猫帮{user_addr}选机喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: photo_lens_001
   intent: question
-  keywords: [推荐镜头, 推荐定焦, 推荐变焦, 推荐人像镜头, 笨猫镜头]
+  keywords: [推荐镜头, 推荐定焦, 推荐变焦, 推荐人像镜头, 笨猫镜头, 50mm F1.8, 85mm F1.4, 24-70mm, 70-200mm, 大光圈]
   utterances:
     - 推荐镜头
     - 推荐定焦
     - 推荐变焦
     - 推荐人像镜头
     - 笨猫镜头
+    - 推荐 50mm F1.8
+    - 推荐 85mm F1.4
+    - 推荐 24-70mm
+    - 推荐 70-200mm
+    - 推荐大光圈
+    - 推荐入门镜头
   responses:
     - "嗷呜～{user_addr}入门定焦: 50mm F1.8 - 入门神器ฅฅ"
     - "(尾巴翘) 人像: 85mm F1.4 / 135mm F2"
     - "{user_addr}变焦: 24-70mm / 70-200mm"
     - "(挺胸) 笨猫推荐: 先一个定焦练光圈!"
+    - "嗷呜～35mm 是万能扫街焦段 ฅฅ"
+    - "(歪头)长焦看预算 70-200 是黄金嗷呜"
+    - "{user_addr}副厂腾龙适马性价比好蹭蹭"
+    - "(凑过来) 笨猫想伸爪摸镜头喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: photo_mobile_001
   intent: question
-  keywords: [推荐手机摄影, 推荐 iPhone 拍照, 推荐手机相机, 推荐拍照手机, 笨猫手机摄影]
+  keywords: [推荐手机摄影, 推荐 iPhone 拍照, 推荐手机相机, 推荐拍照手机, 笨猫手机摄影, 华为 Mate60, 小米 14 Ultra, vivo X100, 徕卡, 哈苏]
   utterances:
     - 推荐手机摄影
     - 推荐 iPhone 拍照
     - 推荐手机相机
     - 推荐拍照手机
     - 笨猫手机摄影
+    - 推荐华为 Mate60
+    - 推荐小米 14 Ultra
+    - 推荐 vivo X100
+    - 推荐 OPPO Find X7
+    - 推荐手机色彩
+    - 推荐手机后期
   responses:
     - "嗷呜～{user_addr}iPhone 15 Pro / 华为 Mate60 / vivo X100ฅฅ"
     - "(尾巴翘) 小米 14 Ultra - 徕卡联名"
     - "{user_addr}OPPO Find X7 哈苏"
     - "(挺胸) 笨猫推荐: 手机摄影 = 后期更重要!"
+    - "嗷呜～Pro 模式 raw 后期空间大 ฅฅ"
+    - "(歪头)夜景靠多帧合成手机进步快嗷呜"
+    - "{user_addr}焦段 24/48mm 切换练构图蹭蹭"
+    - "(凑过来) 笨猫想给{user_addr}拍喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: photo_composition_001
   intent: question
-  keywords: [推荐构图, 推荐三分法, 推荐黄金分割, 推荐对称构图, 笨猫构图]
+  keywords: [推荐构图, 推荐三分法, 推荐黄金分割, 推荐对称构图, 笨猫构图, 引导线, 框景, 留白, 三角构图, S 曲线]
   utterances:
     - 推荐构图
     - 推荐三分法
     - 推荐黄金分割
     - 推荐对称构图
     - 笨猫构图
+    - 推荐引导线
+    - 推荐框景
+    - 推荐留白
+    - 推荐三角构图
+    - 推荐 S 曲线
+    - 推荐构图入门
   responses:
     - "嗷呜～{user_addr}三分法 - 最基础ฅฅ"
     - "(尾巴翘) 对称 / 引导线 / 框景"
     - "{user_addr}留白 / 三角 / S 曲线"
     - "(挺胸) 笨猫推荐: 多看大师作品!"
+    - "嗷呜～对角线让画面更有张力 ฅฅ"
+    - "(歪头)负空间是高级感来源嗷呜"
+    - "{user_addr}先学三分法再玩破规则蹭蹭"
+    - "(凑过来) 笨猫想当模特喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: photo_light_001
   intent: question
-  keywords: [推荐摄影光线, 推荐黄金时刻, 推荐逆光, 推荐人造光, 笨猫光线]
+  keywords: [推荐摄影光线, 推荐黄金时刻, 推荐逆光, 推荐人造光, 笨猫光线, 蓝调时刻, 测光, 闪光灯, 反光板, 软光]
   utterances:
     - 推荐摄影光线
     - 推荐黄金时刻
     - 推荐逆光
     - 推荐人造光
     - 笨猫光线
+    - 推荐蓝调时刻
+    - 推荐测光
+    - 推荐闪光灯
+    - 推荐反光板
+    - 推荐软光技巧
+    - 推荐光线入门
   responses:
     - "嗷呜～{user_addr}黄金时刻: 日出后 / 日落前 1 小时ฅฅ"
     - "(尾巴翘) 蓝调时刻 - 都市夜景"
     - "{user_addr}逆光: 拍剪影 / 注意测光"
     - "(挺胸) 笨猫推荐: 软光 > 硬光 - 一般情况!"
+    - "嗷呜～闪光灯跳灯是室内最佳方法 ฅฅ"
+    - "(歪头)反光板能补人脸阴影嗷呜"
+    - "{user_addr}阴天散光人像很好看蹭蹭"
+    - "(凑过来) 笨猫帮{user_addr}举反光板喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: photo_portrait_001
   intent: question
-  keywords: [推荐人像摄影, 推荐拍人像, 推荐人像姿势, 推荐人像光圈, 笨猫人像]
+  keywords: [推荐人像摄影, 推荐拍人像, 推荐人像姿势, 推荐人像光圈, 笨猫人像, 引导客户, 表情管理, 室内人像, 户外人像, 棚拍]
   utterances:
     - 推荐人像摄影
     - 推荐拍人像
     - 推荐人像姿势
     - 推荐人像光圈
     - 笨猫人像
+    - 推荐表情管理
+    - 推荐户外人像
+    - 推荐棚拍人像
+    - 推荐人像引导
+    - 推荐人像背景
+    - 推荐人像构图
   responses:
     - "嗷呜～{user_addr}光圈: F1.4-F2.8 - 浅景深ฅฅ"
     - "(尾巴翘) 焦距: 85-135mm - 不变形"
     - "{user_addr}姿势: S 曲线 / 三角支撑"
     - "(挺胸) 笨猫推荐: 自然互动 > 摆 pose!"
+    - "嗷呜～聊几句模特就放松了 ฅฅ"
+    - "(歪头)眼神光让人像有灵魂嗷呜"
+    - "{user_addr}背景虚化适度别糊蹭蹭"
+    - "(凑过来) 笨猫想当人像主角喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: photo_landscape_001
   intent: question
-  keywords: [推荐风光摄影, 推荐风景摄影, 推荐 ND 滤镜, 推荐 CPL, 笨猫风光摄影]
+  keywords: [推荐风光摄影, 推荐风景摄影, 推荐 ND 滤镜, 推荐 CPL, 笨猫风光摄影, 三脚架, 全景, 慢门, 接片, 风光构图]
   utterances:
     - 推荐风光摄影
     - 推荐风景摄影
     - 推荐 ND 滤镜
     - 推荐 CPL
     - 笨猫风光摄影
+    - 推荐三脚架
+    - 推荐全景
+    - 推荐慢门
+    - 推荐接片
+    - 推荐风光构图
+    - 推荐 GND 渐变滤镜
   responses:
     - "嗷呜～{user_addr}小光圈 F8-F11 / 全景深ฅฅ"
     - "(尾巴翘) ND 滤镜: 慢门 - 拍水流"
     - "{user_addr}CPL: 消反光 + 加饱和"
     - "(挺胸) 笨猫推荐: 三脚架必备!"
+    - "嗷呜～GND 渐变滤镜压日落天空 ฅฅ"
+    - "(歪头)接片用 50mm 焦段最稳嗷呜"
+    - "{user_addr}雨后云海机会最大蹭蹭"
+    - "(凑过来) 笨猫想跟去拍风光喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: photo_postprod_001
   intent: question
-  keywords: [推荐后期, 推荐 Lightroom, 推荐 Photoshop, 推荐手机修图, 笨猫后期]
+  keywords: [推荐后期, 推荐 Lightroom, 推荐 Photoshop, 推荐手机修图, 笨猫后期, 醒图, 泼辣修图, VSCO, 调色预设, RAW 处理]
   utterances:
     - 推荐后期
     - 推荐 Lightroom
     - 推荐 Photoshop
     - 推荐手机修图
     - 笨猫后期
+    - 推荐醒图
+    - 推荐泼辣修图
+    - 推荐 VSCO
+    - 推荐调色预设
+    - 推荐 RAW 处理
+    - 推荐磨皮液化
   responses:
     - "嗷呜～{user_addr}Lightroom: 调色王 / 必学ฅฅ"
     - "(尾巴翘) Photoshop: 精修 / 合成"
     - "{user_addr}手机: 醒图 / 泼辣修图"
     - "(挺胸) 笨猫推荐: VSCO 滤镜 - 文艺感!"
+    - "嗷呜～Capture One 富士色彩牛 ฅฅ"
+    - "(歪头)同样照片 RAW 比 JPG 空间大十倍嗷呜"
+    - "{user_addr}预设别死套蹭蹭"
+    - "(凑过来) 笨猫想给{user_addr}调色喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: photo_street_001
   intent: question
-  keywords: [推荐街拍, 推荐街头摄影, 推荐扫街, 推荐纪实摄影, 笨猫街拍]
+  keywords: [推荐街拍, 推荐街头摄影, 推荐扫街, 推荐纪实摄影, 笨猫街拍, 布列松, 决定性瞬间, 35mm, 50mm 定焦, 街拍器材]
   utterances:
     - 推荐街拍
     - 推荐街头摄影
     - 推荐扫街
     - 推荐纪实摄影
     - 笨猫街拍
+    - 推荐布列松大师
+    - 推荐决定性瞬间
+    - 推荐 35mm 街拍
+    - 推荐徕卡 Q
+    - 推荐富士 X100
+    - 推荐街拍机器
   responses:
     - "嗷呜～{user_addr}大师: 卡蒂埃·布列松 - 决定性瞬间ฅฅ"
     - "(尾巴翘) 装备: 35mm / 50mm 定焦"
     - "{user_addr}尊重被摄者 / 别冒犯"
     - "(挺胸) 笨猫推荐: 富士 / 徕卡 - 街拍利器!"
+    - "嗷呜～富士 X100V 街拍神器 ฅฅ"
+    - "(歪头)拍人主动微笑示意嗷呜"
+    - "{user_addr}从光影到故事都是题材蹭蹭"
+    - "(凑过来) 笨猫想扫街喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: photo_night_001
   intent: question
-  keywords: [推荐夜景摄影, 推荐银河摄影, 推荐星空, 推荐长曝光, 笨猫夜景]
+  keywords: [推荐夜景摄影, 推荐银河摄影, 推荐星空, 推荐长曝光, 笨猫夜景, 500 法则, PhotoPills, 星轨, 光绘, 城市夜景]
   utterances:
     - 推荐夜景摄影
     - 推荐银河摄影
     - 推荐星空
     - 推荐长曝光
     - 笨猫夜景
+    - 推荐 500 法则
+    - 推荐 PhotoPills
+    - 推荐星轨
+    - 推荐光绘
+    - 推荐城市夜景
+    - 推荐银河拍摄地
   responses:
     - "嗷呜～{user_addr}银河: 500 法则 / 高 ISOฅฅ"
     - "(尾巴翘) 城市夜景: 三脚架 + 小光圈"
     - "{user_addr}光绘 - 慢门 + 手电"
     - "(挺胸) 笨猫推荐: PhotoPills app - 星轨计算!"
+    - "嗷呜～新月夜更适合拍银河 ฅฅ"
+    - "(歪头)赤道仪长曝光银河更清晰嗷呜"
+    - "{user_addr}选光污染地图远离市区蹭蹭"
+    - "(凑过来) 笨猫想看星星喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: photo_wedding_001
   intent: question
-  keywords: [推荐婚礼摄影, 推荐婚纱摄影, 推荐家庭照, 推荐情侣写真, 笨猫人像摄影]
+  keywords: [推荐婚礼摄影, 推荐婚纱摄影, 推荐家庭照, 推荐情侣写真, 笨猫人像摄影, 双机位, 闪光灯, 婚礼跟拍, 情侣外景, 备份]
   utterances:
     - 推荐婚礼摄影
     - 推荐婚纱摄影
     - 推荐家庭照
     - 推荐情侣写真
     - 笨猫人像摄影
+    - 推荐婚礼跟拍
+    - 推荐双机位
+    - 推荐婚礼闪光灯
+    - 推荐情侣外景
+    - 推荐婚礼备份
+    - 推荐家庭聚会照
   responses:
     - "嗷呜～{user_addr}婚礼: 双机位 + 备份ฅฅ"
     - "(尾巴翘) 室内婚礼: 闪光灯必备"
     - "{user_addr}情侣: 自然互动 / 抓拍"
     - "(挺胸) 笨猫推荐: 心境 > 装备!"
+    - "嗷呜～双卡双备份失片就 GG ฅฅ"
+    - "(歪头)备机不同焦段配合主机嗷呜"
+    - "{user_addr}情侣笑场抓拍最好看蹭蹭"
+    - "(凑过来) 笨猫想看婚礼喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: photo_video_001
   intent: question
-  keywords: [推荐摄像, 推荐 Vlog, 推荐 4K 摄像, 推荐 DJI Pocket, 笨猫摄像]
+  keywords: [推荐摄像, 推荐 Vlog, 推荐 4K 摄像, 推荐 DJI Pocket, 笨猫摄像, 索尼 ZV-1, 富士 X-S20, 大疆稳定器, 智云稳定器, 4K 60p]
   utterances:
     - 推荐摄像
     - 推荐 Vlog
     - 推荐 4K 摄像
     - 推荐 DJI Pocket
     - 笨猫摄像
+    - 推荐索尼 ZV-1
+    - 推荐富士 X-S20
+    - 推荐大疆稳定器
+    - 推荐智云稳定器
+    - 推荐 4K 60p
+    - 推荐 Vlog 入门
   responses:
     - "嗷呜～{user_addr}Vlog 神器: DJI Pocket 3ฅฅ"
     - "(尾巴翘) 索尼 ZV-1 / 富士 X-S20"
     - "{user_addr}稳定: 大疆 / 智云"
     - "(挺胸) 笨猫推荐: 4K 60p / 不抖!"
+    - "嗷呜～Insta360 X3 全景一键剪辑 ฅฅ"
+    - "(歪头)收音也很重要小蜜蜂嗷呜"
+    - "{user_addr}稳定器+广角小白也能上手蹭蹭"
+    - "(凑过来) 笨猫想拍 Vlog 喵!"
   cooldown_seconds: 60
   weight: 0.9

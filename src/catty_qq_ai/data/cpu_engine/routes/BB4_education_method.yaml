@@ -4,204 +4,324 @@
 
 - name: em_montessori_001
   intent: question
-  keywords: [推荐蒙特梭利, 推荐 Montessori, 推荐蒙特梭利教育, 推荐蒙氏教育, 笨猫蒙特梭利]
+  keywords: [推荐蒙特梭利, 推荐 Montessori, 推荐蒙特梭利教育, 推荐蒙氏教育, 笨猫蒙特梭利, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐蒙特梭利
     - 推荐 Montessori
     - 推荐蒙特梭利教育
     - 推荐蒙氏教育
     - 笨猫蒙特梭利
+    - 推荐蒙特梭利怎么办
+    - 推荐蒙特梭利怎么选
+    - "{user_addr}推荐蒙特梭利"
+    - 推荐蒙特梭利捏
+    - 推荐蒙特梭利嘛
+    - 推荐蒙特梭利有啥推荐
   responses:
     - "嗷呜～{user_addr}蒙特梭利 - 自主探索ฅฅ"
     - "(尾巴翘) 教具 / 工作 / 敏感期"
     - "{user_addr}尊重孩子 / 准备环境"
     - "(挺胸) 笨猫推荐: 0-6 岁黄金期!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: em_waldorf_001
   intent: question
-  keywords: [推荐华德福, 推荐 Waldorf, 推荐华德福教育, 推荐斯坦纳, 笨猫华德福]
+  keywords: [推荐华德福, 推荐 Waldorf, 推荐华德福教育, 推荐斯坦纳, 笨猫华德福, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐华德福
     - 推荐 Waldorf
     - 推荐华德福教育
     - 推荐斯坦纳
     - 笨猫华德福
+    - 推荐华德福怎么办
+    - 推荐华德福怎么选
+    - "{user_addr}推荐华德福"
+    - 推荐华德福捏
+    - 推荐华德福嘛
+    - 推荐华德福有啥推荐
   responses:
     - "嗷呜～{user_addr}华德福 - 艺术化教育ฅฅ"
     - "(尾巴翘) 节奏 / 自然 / 想象力"
     - "{user_addr}手工 / 故事 / 慢成长"
     - "(挺胸) 笨猫推荐: 7 岁前不识字!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: em_rie_001
   intent: question
-  keywords: [推荐 RIE, 推荐 RIE 育儿, 推荐 Magda Gerber, 推荐尊重式育儿, 笨猫 RIE]
+  keywords: [推荐 RIE, 推荐 RIE 育儿, 推荐 Magda Gerber, 推荐尊重式育儿, 笨猫 RIE, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐 RIE
     - 推荐 RIE 育儿
     - 推荐 Magda Gerber
     - 推荐尊重式育儿
     - 笨猫 RIE
+    - 推荐 RIE怎么办
+    - 推荐 RIE怎么选
+    - "{user_addr}推荐 RIE"
+    - 推荐 RIE捏
+    - 推荐 RIE嘛
+    - 推荐 RIE有啥推荐
   responses:
     - "嗷呜～{user_addr}RIE - 婴儿尊重教育ฅฅ"
     - "(尾巴翘) 慢动作 / 解说 / 观察"
     - "{user_addr}不打扰 / 自主玩耍"
     - "(挺胸) 笨猫推荐: 0-2 岁神器!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: em_positive_001
   intent: question
-  keywords: [推荐正面管教, 推荐 Positive Discipline, 推荐简尼尔森, 推荐和善而坚定, 笨猫正面管教]
+  keywords: [推荐正面管教, 推荐 Positive Discipline, 推荐简尼尔森, 推荐和善而坚定, 笨猫正面管教, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐正面管教
     - 推荐 Positive Discipline
     - 推荐简尼尔森
     - 推荐和善而坚定
     - 笨猫正面管教
+    - 推荐正面管教怎么办
+    - 推荐正面管教怎么选
+    - "{user_addr}推荐正面管教"
+    - 推荐正面管教捏
+    - 推荐正面管教嘛
+    - 推荐正面管教有啥推荐
   responses:
     - "嗷呜～{user_addr}正面管教 - 不惩罚不娇纵ฅฅ"
     - "(尾巴翘) 和善 + 坚定 / 家庭会议"
     - "{user_addr}启发式提问 / 自然后果"
     - "(挺胸) 笨猫推荐: 简尼尔森全套!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: em_sears_001
   intent: question
-  keywords: [推荐西尔斯, 推荐亲密育儿, 推荐 Attachment Parenting, 推荐母乳喂养, 笨猫亲密育儿]
+  keywords: [推荐西尔斯, 推荐亲密育儿, 推荐 Attachment Parenting, 推荐母乳喂养, 笨猫亲密育儿, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐西尔斯
     - 推荐亲密育儿
     - 推荐 Attachment Parenting
     - 推荐母乳喂养
     - 笨猫亲密育儿
+    - 推荐西尔斯怎么办
+    - 推荐西尔斯怎么选
+    - "{user_addr}推荐西尔斯"
+    - 推荐西尔斯捏
+    - 推荐西尔斯嘛
+    - 推荐西尔斯有啥推荐
   responses:
     - "嗷呜～{user_addr}西尔斯 - 亲密育儿之父ฅฅ"
     - "(尾巴翘) 7B: 母乳 / 背巾 / 同睡"
     - "{user_addr}安全感 / 高需求宝宝"
     - "(挺胸) 笨猫推荐: 西尔斯亲密育儿百科!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: em_psychology_001
   intent: question
-  keywords: [推荐儿童心理学, 推荐儿童心理书, 推荐皮亚杰, 推荐发展心理学, 笨猫儿童心理]
+  keywords: [推荐儿童心理学, 推荐儿童心理书, 推荐皮亚杰, 推荐发展心理学, 笨猫儿童心理, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐儿童心理学
     - 推荐儿童心理书
     - 推荐皮亚杰
     - 推荐发展心理学
     - 笨猫儿童心理
+    - 推荐儿童心理学怎么办
+    - 推荐儿童心理学怎么选
+    - "{user_addr}推荐儿童心理学"
+    - 推荐儿童心理学捏
+    - 推荐儿童心理学嘛
+    - 推荐儿童心理学有啥推荐
   responses:
     - "嗷呜～{user_addr}皮亚杰 / 维果茨基ฅฅ"
     - "(尾巴翘) 《全脑教养法》/《如何说》"
     - "{user_addr}埃里克森 8 阶段"
     - "(挺胸) 笨猫推荐: 全脑教养法入门!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: em_early_class_001
   intent: question
-  keywords: [推荐早教课程, 推荐美吉姆, 推荐金宝贝, 推荐悦宝园, 笨猫早教]
+  keywords: [推荐早教课程, 推荐美吉姆, 推荐金宝贝, 推荐悦宝园, 笨猫早教, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐早教课程
     - 推荐美吉姆
     - 推荐金宝贝
     - 推荐悦宝园
     - 笨猫早教
+    - 推荐早教课程怎么办
+    - 推荐早教课程怎么选
+    - "{user_addr}推荐早教课程"
+    - 推荐早教课程捏
+    - 推荐早教课程嘛
+    - 推荐早教课程有啥推荐
   responses:
     - "嗷呜～{user_addr}美吉姆 - 运动型ฅฅ"
     - "(尾巴翘) 金宝贝 / 悦宝园 / 红黄蓝"
     - "{user_addr}不强求 / 家庭最重要"
     - "(挺胸) 笨猫推荐: 美吉姆体能棒!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: em_bilingual_001
   intent: question
-  keywords: [推荐双语启蒙, 推荐英语启蒙, 推荐 baby English, 推荐英文绘本, 笨猫英语启蒙]
+  keywords: [推荐双语启蒙, 推荐英语启蒙, 推荐 baby English, 推荐英文绘本, 笨猫英语启蒙, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐双语启蒙
     - 推荐英语启蒙
     - 推荐 baby English
     - 推荐英文绘本
     - 笨猫英语启蒙
+    - 推荐双语启蒙怎么办
+    - 推荐双语启蒙怎么选
+    - "{user_addr}推荐双语启蒙"
+    - 推荐双语启蒙捏
+    - 推荐双语启蒙嘛
+    - 推荐双语启蒙有啥推荐
   responses:
     - "嗷呜～{user_addr}英文儿歌 / Super Simpleฅฅ"
     - "(尾巴翘) 廖彩杏书单 / 汪培珽"
     - "{user_addr}原版绘本 / 不翻译"
     - "(挺胸) 笨猫推荐: 0 岁就可以听!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: em_picture_book_001
   intent: question
-  keywords: [推荐绘本阅读, 推荐亲子阅读, 推荐绘本时间, 推荐睡前故事, 笨猫绘本]
+  keywords: [推荐绘本阅读, 推荐亲子阅读, 推荐绘本时间, 推荐睡前故事, 笨猫绘本, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐绘本阅读
     - 推荐亲子阅读
     - 推荐绘本时间
     - 推荐睡前故事
     - 笨猫绘本
+    - 推荐绘本阅读怎么办
+    - 推荐绘本阅读怎么选
+    - "{user_addr}推荐绘本阅读"
+    - 推荐绘本阅读捏
+    - 推荐绘本阅读嘛
+    - 推荐绘本阅读有啥推荐
   responses:
     - "嗷呜～{user_addr}每天 15-30 分钟ฅฅ"
     - "(尾巴翘) 睡前 / 餐后 / 沙发"
     - "{user_addr}重复读 / 孩子选"
     - "(挺胸) 笨猫推荐: 阅读是最好的启蒙!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: em_screen_time_001
   intent: question
-  keywords: [推荐儿童动画, 推荐动画时间, 推荐小猪佩奇, 推荐 Bluey, 笨猫儿童动画]
+  keywords: [推荐儿童动画, 推荐动画时间, 推荐小猪佩奇, 推荐 Bluey, 笨猫儿童动画, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐儿童动画
     - 推荐动画时间
     - 推荐小猪佩奇
     - 推荐 Bluey
     - 笨猫儿童动画
+    - 推荐儿童动画怎么办
+    - 推荐儿童动画怎么选
+    - "{user_addr}推荐儿童动画"
+    - 推荐儿童动画捏
+    - 推荐儿童动画嘛
+    - 推荐儿童动画有啥推荐
   responses:
     - "嗷呜～{user_addr}Bluey - 神级育儿动画ฅฅ"
     - "(尾巴翘) 小猪佩奇 / 巧虎 / 汪汪队"
     - "{user_addr}陪看 / 讨论 / 限时"
     - "(挺胸) 笨猫推荐: Bluey 大人也爱看!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: em_screen_control_001
   intent: question
-  keywords: [推荐屏幕时间控制, 推荐手机使用, 推荐平板控制, 推荐 AAP 指南, 笨猫屏幕时间]
+  keywords: [推荐屏幕时间控制, 推荐手机使用, 推荐平板控制, 推荐 AAP 指南, 笨猫屏幕时间, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐屏幕时间控制
     - 推荐手机使用
     - 推荐平板控制
     - 推荐 AAP 指南
     - 笨猫屏幕时间
+    - 推荐屏幕时间控制怎么办
+    - 推荐屏幕时间控制怎么选
+    - "{user_addr}推荐屏幕时间控制"
+    - 推荐屏幕时间控制捏
+    - 推荐屏幕时间控制嘛
+    - 推荐屏幕时间控制有啥推荐
   responses:
     - "嗷呜～{user_addr}2 岁前不接触屏幕ฅฅ"
     - "(尾巴翘) 2-5 岁每天 ≤1 小时"
     - "{user_addr}陪看 / 优质内容"
     - "(挺胸) 笨猫推荐: AAP 屏幕指南!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: em_eq_001
   intent: question
-  keywords: [推荐情商培养, 推荐情绪管理, 推荐 EQ 教育, 推荐共情, 笨猫情商]
+  keywords: [推荐情商培养, 推荐情绪管理, 推荐 EQ 教育, 推荐共情, 笨猫情商, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐情商培养
     - 推荐情绪管理
     - 推荐 EQ 教育
     - 推荐共情
     - 笨猫情商
+    - 推荐情商培养怎么办
+    - 推荐情商培养怎么选
+    - "{user_addr}推荐情商培养"
+    - 推荐情商培养捏
+    - 推荐情商培养嘛
+    - 推荐情商培养有啥推荐
   responses:
     - "嗷呜～{user_addr}共情 / 命名情绪ฅฅ"
     - "(尾巴翘) 《如何说孩子才会听》"
     - "{user_addr}不压抑 / 接纳 / 引导"
     - "(挺胸) 笨猫推荐: 情商比智商重要!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0

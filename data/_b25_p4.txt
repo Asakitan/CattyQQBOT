@@ -1,0 +1,120 @@
+=== bzm_yancang_006 | intent=playful | file=342_bengbuzhule_meme.yaml
+K: 栓q / 栓 q / 谢谢您嘞 / sayq / 栓桥
+U: 栓Q / 栓 Q / 谢谢您嘞
+SH: 917_random_meme_laugh / 473_awsl_meme_chat / 537_laugh_die_meme / 439_meme_juejuezi / 680_random_emoji_chat
+SU: 栓Q / {user_addr}栓Q / 栓Q / 栓Q / 乐{user_addr}
+
+=== sou_lemon_001 | intent=playful | file=959_sour_face.yaml
+K: 柠檬 / 柠檬酸 / 切柠檬 / 柠檬水 / 黄柠檬
+U: 柠檬 / 柠檬好酸 / {user_addr}切柠檬
+SH: 669_water_drink_remind_chat / 618_hot_water_remind / 526_drink_water_remind / 978_perfume_choice / 156_water_reminder / 723_drink_water_remind
+SU: 柠檬水{user_addr} / 蜂蜜水 / 柠檬水 / 柑橘 / 喝柠檬水 / {user_addr}枸杞水
+
+=== bs_shaibei_001 | intent=playful | file=901_blanket_steal_fight.yaml
+K: 晒被子 / 阳光味 / 晒过香香 / 被子有阳光 / 翻面
+U: 晒被子 / {user_addr}阳光味 / 晒过香香
+SH: 895_sunny_lazy_chat / 351_morning_first_word / 259_wear_warm / 174_catty_fish_dream / 583_blanket_burrow_cozy / 786_sunny_day_warm
+SU: 晒被子 / 太阳出来啦 / 晒被子 / 翻肚皮 / 被套多久换一次 / 想晒太阳
+
+=== wda_doing_002 | intent=playful | file=456_what_doing_ask.yaml
+K: 发呆 / 走神 / 想事情 / 神游 / 神情恍惚
+U: {user_addr}发呆 / {user_addr}走神 / {user_addr}想事情
+SH: 164_mood_swings / 205_micro_mood / 256_what_doing / 005_what_doing_now / 081_what_doing_now / 390_doing_what
+SU: 一直发呆 / 发呆 / 在休息 / 在想啥 / 在想事 / 在发呆
+
+=== sp_lazi_001 | intent=complaint | file=796_spicy_food_cry.yaml
+K: 辣到拉肚子 / 辣拉 / 上火 / 辣痘 / 嘴起泡
+U: 辣到拉肚子 / 辣拉 / 上火
+SH: 929_spicy_food_love / 950_nose_tickle / 618_hot_water_remind / 625_spicy_food_lover / 697_spicy_food_burn / 932_hotpot_dream
+SU: 上火 / 流鼻血 / 皮肤干干 / 辣拉肚子 / {user_addr}肚子疼 / 深夜火锅
+
+=== ldm_xiao_si_001 | intent=playful | file=537_laugh_die_meme.yaml
+K: 笑死 / 笑死我 / 太搞笑 / 死于 / 笑出眼泪
+U: 笑死 / 笑死我了 / 太搞笑
+SH: 052_emoji_heihei_laugh / 402_laugh_dead / 116_sudden_happy / 059_expression_xiaosi / 029_lol_dying / 019_hehe_giggle
+SU: 笑死 / 笑死了 / 一直笑 / 笑死 / 笑死 / 噗嗤
+
+=== wdc_wifi_001 | intent=complaint | file=574_wifi_died_chat.yaml
+K: wifi / 断网 / 刷不出 / 重启路由 / 卡死
+U: {user_addr}WiFi又断了 / 刷不出页面急死 / 重启路由器没用
+SH: 574_wifi_died_chat / 574_wifi_died_chat / 222_are_you_there / 574_wifi_died_chat / 574_wifi_died_chat / 184_self_care_check
+SU: 重启路由器没用 / {user_addr}WiFi又断了 / 手机没电 / 卡在加载圈 / 打客服打通了吗 / 关机
+
+=== ws_deadline_001 | intent=complaint | file=140_work_slack.yaml
+K: ddl / 截止日期 / 加急 / 赶 ddl / 紧急任务
+U: DDL 到了 / 截止日期近 / 赶 DDL
+SH: 459_busy_or_not / 008_busy_or_free / 034_insomnia_thinking / 167_work_slack / 043_procrastination_putoff / 548_slack_off_work
+SU: {user_addr}赶ddl / 项目排满了 / 想工作 / 赶 ddl / 死线前 / 截止前
+
+=== gdo_diushou_001 | intent=complaint | file=380_grocery_dropped_oops.yaml
+K: 捡回来 / 找回来 / 失而复得 / 找回 / 捡到
+U: 找回来 / 失而复得 / 找回
+SH: 523_jealous_pout / 842_random_kindness / 659_bump_lost_chat / 659_bump_lost_chat / 237_sudden_surprise / 141_street_encounter
+SU: 报复你 / {user_addr}捡到东西归还 / 失而复得{user_addr} / 笨猫帮我找 / 捡到钱 / 捡到东西
+
+=== frl_fridge_003 | intent=playful | file=561_fridge_raid_late.yaml
+K: 找吃的 / 冰箱光 / 夜宵 / 翻冰箱 / 深夜饿
+U: 找夜宵找半天 / 什么都没有啊 / 猫猫也想吃
+SH: 561_fridge_raid_late / 561_fridge_raid_late / 065_night_moon_stars / 561_fridge_raid_late / 561_fridge_raid_late / 002_late_night_owl
+SU: {user_addr}深夜翻冰箱中 / 猫猫也想吃 / 深夜想吃 / {user_addr}深夜翻冰箱中 / 冰箱光一开亮瞎眼 / 半夜饿了
+
+=== mcf_morning_012 | intent=complaint | file=552_morning_coffee_first.yaml
+K: 咖啡涨价 / 加奶 / 太苦 / 冲掉 / 没喝困
+U: {user_addr}早上不喝咖啡撑不住 / 咖啡冲淡了不够提神 / 加奶不加糖好不好
+SH: 552_morning_coffee_first / 552_morning_coffee_first / 552_morning_coffee_first / 753_coffee_break_talk / 552_morning_coffee_first / 552_morning_coffee_first
+SU: 咖啡冲淡了不够提神 / {user_addr}早上不喝咖啡撑不住 / 喝完咖啡心跳加快 / 咖啡不好喝 / 咖啡今天又涨价了气 / 加奶不加糖好不好
+
+=== pt_jiangli_001 | intent=playful | file=275_praised_today.yaml
+K: 奖金 / 涨工资 / 加薪 / 奖励 / 升职
+U: 拿到奖金 / 涨工资 / 加薪
+SH: 443_red_packet_surprise / 170_surprise_moment / 033_red_packet_joy / 237_sudden_surprise / 732_unexpected_red_packet / 379_office_gossip_chat
+SU: 发工资 / 升职了 / 升职 / 升职 / {user_addr}年终奖 / 奖金
+
+=== asc_alarm_003 | intent=complaint | file=551_alarm_snooze_chat.yaml
+K: 贪睡 / 响个不停 / 烦闹钟 / 闹钟 / 按掉
+U: 贪睡按到手酸 / 闹钟铃声听吐了 / {user_addr}差点睡过头
+SH: 343_morning_alarm_anger / 655_morning_grumble_chat / 538_morning_grumpy / 551_alarm_snooze_chat / 551_alarm_snooze_chat / 617_alarm_clock_hate
+SU: 贪睡键 / 闹钟响七次了{user_addr} / 恨闹钟 / {user_addr}讨厌闹钟 / {user_addr}差点睡过头 / 再睡5分钟
+
+=== em_breakfast_003 | intent=question | file=186_early_morning.yaml
+K: 早饭 / 早餐 / 吃啥 / 没吃饭 / 早餐吃啥
+U: 早餐吃啥 / {user_addr}吃早饭没 / 没吃饭
+SH: 252_morning_wakeup / 153_morning_wakeup / 120_morning_wakeup / 219_morning_hello / 001_morning_wakeup_chat / 369_eat_well_remind
+SU: {user_addr}早餐吃了吗 / {user_addr}吃早饭了吗 / 早饭吃啥 / 早餐吃啥 / 早饭吃什么 / 早餐
+
+=== kbs_lip_004 | intent=playful | file=338_kiss_beg_shy.yaml
+K: 嘴对嘴 / 唇吻 / 嘴巴亲 / 唇唇 / 接吻
+U: 嘴对嘴 / 唇吻 / 嘴巴亲
+SH: 365_kiss_tease_blush / 474_blush_dodge_anti_flirt / 267_kiss_request / 054_reverse_flirt_blush / 477_want_kiss_beg / 726_reverse_flirt_back
+SU: 嘴对嘴 / {user_addr}亲一下 / 啵一个 / 亲一下 / {user_addr}嘴对嘴 / {user_addr}亲一下
+
+=== to_bad_at_game_011 | intent=playful | file=194_tease_owner.yaml
+K: 菜鸡 / 打不过 / 又输了 / 上不去 / 段位差
+U: 菜鸡 / 打不过 / 又输了
+SH: 166_commute_tired / 571_bus_packed_chat / WW8_skill_stuck / 571_bus_packed_chat / 571_bus_packed_chat / 571_bus_packed_chat
+SU: 挤不进地铁 / 等了三辆车 / 打不过对手 / 上不去车了 / 高峰期讨厌 / {user_addr}公交挤成沙丁鱼
+
+=== ah_motou_004 | intent=playful | file=436_ask_for_headpat.yaml
+K: 顺毛 / 撸毛 / 抚摸 / 顺一顺 / 梳毛
+U: 顺毛 / 撸毛 / 抚摸喵
+SH: 476_want_headpat_beg / 056_head_pat_request / 135_cat_daily / 307_motoutou_pat_head / 157_hug_petting / 337_head_pat_beg
+SU: {user_addr}挠后背 / 顺毛 / 帮笨猫梳毛 / 撸笨猫 / 挠耳朵 / 揉头发
+
+=== hsv_bald_jokes_008 | intent=playful | file=831_haircut_salon_visit.yaml
+K: 头发少 / 秃了 / 发际线 / 脱发 / 中年秃
+U: {user_addr}头发少了 / 秃了 / 发际线高
+SH: 665_jeer_master_chat / 162_tease_master / 536_tease_master_fat / 728_tease_owner_chubby / 972_hair_messy_morning / 933_hair_messy_today
+SU: {user_addr}发际线后移 / 秃了 / 掉头发 / {user_addr}脱发 / 掉发 / 掉发
+
+=== ac_clingy_001 | intent=playful | file=124_acting_clingy.yaml
+K: 粘人 / 跟着你 / 不放手 / 挂着 / 抱大腿
+U: 跟着你 / 笨猫粘 / 抱大腿
+SH: 460_spoiled_clingy / 727_head_pat_request / 092_spoil_clingy / 398_reverse_tease / 522_spoiled_clingy / 434_ambiguous_tease
+SU: {user_addr}挂在身上 / 我要黏你 / 绕你身边 / 赖着{user_addr} / 一直黏你 / 不要走
+
+=== is_slow_001 | intent=complaint | file=PPP9_internet_slow.yaml
+K: 网慢 / 网卡 / 网速慢 / 龟速 / 慢成龟
+U: 网好慢 / 网速慢成龟 / 网卡死了
+SH: 498_gacha_luck / 542_full_moon_night / 658_game_gacha_chat / 169_game_session / 195_small_things / 593_wifi_disconnect_rage
+SU: 460 / 信号差 / 连跪五把{user_addr} / 游戏卡顿 / 网卡 / wifi断了
+

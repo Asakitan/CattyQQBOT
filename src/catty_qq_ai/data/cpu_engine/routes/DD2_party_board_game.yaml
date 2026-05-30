@@ -4,204 +4,324 @@
 
 - name: pbg_undercover_001
   intent: question
-  keywords: [推荐派对桌游, 推荐谁是卧底, 推荐 Undercover, 推荐多人派对游戏, 笨猫谁是卧底]
+  keywords: [推荐派对桌游, 推荐谁是卧底, 推荐 Undercover, 推荐多人派对游戏, 笨猫谁是卧底, 笨猫 派对桌游, 派对桌游 怎么样, 派对桌游 推荐, 问 派对桌游]
   utterances:
     - 推荐派对桌游
     - 推荐谁是卧底
     - 推荐 Undercover
     - 推荐多人派对游戏
     - 笨猫谁是卧底
+    - 派对桌游 推荐一下
+    - 派对桌游 怎么选嗷
+    - 笨猫聊聊 派对桌游
+    - 派对桌游 有什么好的
+    - 派对桌游 经验分享下
+    - 派对桌游 真的有用吗
   responses:
     - "嗷呜～{user_addr}谁是卧底 - 派对开胃菜ฅฅ"
     - "(尾巴翘) 4-12 人 / 词语描述找内鬼"
     - "{user_addr}规则秒懂 / 全场爆笑"
     - "(挺胸) 笨猫推荐: 破冰神器!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 派对桌游 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 派对桌游 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 派对桌游 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pbg_werewolf_001
   intent: question
-  keywords: [推荐狼人杀, 推荐 Werewolf, 推荐阵营游戏, 推荐天黑请闭眼, 笨猫狼人杀]
+  keywords: [推荐狼人杀, 推荐 Werewolf, 推荐阵营游戏, 推荐天黑请闭眼, 笨猫狼人杀, 笨猫 狼人杀, 狼人杀 怎么样, 狼人杀 推荐, 问 狼人杀]
   utterances:
     - 推荐狼人杀
     - 推荐 Werewolf
     - 推荐阵营游戏
     - 推荐天黑请闭眼
     - 笨猫狼人杀
+    - 狼人杀 推荐一下
+    - 狼人杀 怎么选嗷
+    - 笨猫聊聊 狼人杀
+    - 狼人杀 有什么好的
+    - 狼人杀 经验分享下
+    - 狼人杀 真的有用吗
   responses:
     - "嗷呜～{user_addr}狼人杀 - 阵营之王ฅฅ"
     - "(尾巴翘) 预言家/女巫/猎人/守卫"
     - "{user_addr}9-12 人最香 / 重逻辑发言"
     - "(挺胸) 笨猫推荐: 板子要选 12 人局!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 狼人杀 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 狼人杀 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 狼人杀 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pbg_codenames_001
   intent: question
-  keywords: [推荐 Codenames, 推荐行动代号, 推荐词语联想, 推荐双队对战, 笨猫 Codenames]
+  keywords: [推荐 Codenames, 推荐行动代号, 推荐词语联想, 推荐双队对战, 笨猫 Codenames, Codenames 怎么样, Codenames 推荐, 问 Codenames, Codenames 好不好]
   utterances:
     - 推荐 Codenames
     - 推荐行动代号
     - 推荐词语联想
     - 推荐双队对战
     - 笨猫 Codenames
+    - Codenames 推荐一下
+    - Codenames 怎么选嗷
+    - 笨猫聊聊 Codenames
+    - Codenames 有什么好的
+    - Codenames 经验分享下
+    - Codenames 真的有用吗
   responses:
     - "嗷呜～{user_addr}Codenames - 词语联想神作ฅฅ"
     - "(尾巴翘) Spymaster 一词关联多卡"
     - "{user_addr}2017 SDJ 大奖 / 4-8 人"
     - "(挺胸) 笨猫推荐: 经典版+图片版都收!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: Codenames 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 Codenames 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 Codenames 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pbg_pictionary_001
   intent: question
-  keywords: [推荐你画我猜, 推荐 Pictionary, 推荐画图猜词, 推荐 Telestrations, 笨猫你画我猜]
+  keywords: [推荐你画我猜, 推荐 Pictionary, 推荐画图猜词, 推荐 Telestrations, 笨猫你画我猜, 笨猫 你画我猜, 你画我猜 怎么样, 你画我猜 推荐, 问 你画我猜]
   utterances:
     - 推荐你画我猜
     - 推荐 Pictionary
     - 推荐画图猜词
     - 推荐 Telestrations
     - 笨猫你画我猜
+    - 你画我猜 推荐一下
+    - 你画我猜 怎么选嗷
+    - 笨猫聊聊 你画我猜
+    - 你画我猜 有什么好的
+    - 你画我猜 经验分享下
+    - 你画我猜 真的有用吗
   responses:
     - "嗷呜～{user_addr}Telestrations - 画图传话ฅฅ"
     - "(尾巴翘) Pictionary - 经典原版"
     - "{user_addr}画得越烂越好笑"
     - "(挺胸) 笨猫推荐: Telestrations 翻车王!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 你画我猜 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 你画我猜 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 你画我猜 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pbg_justone_001
   intent: question
-  keywords: [推荐 Just One, 推荐一桩美事, 推荐合作猜词, 推荐 SDJ 2019, 笨猫 Just One]
+  keywords: [推荐 Just One, 推荐一桩美事, 推荐合作猜词, 推荐 SDJ 2019, 笨猫 Just One, Just One 怎么样, Just One 推荐, 问 Just One, Just One 好不好]
   utterances:
     - 推荐 Just One
     - 推荐一桩美事
     - 推荐合作猜词
     - 推荐 SDJ 2019
     - 笨猫 Just One
+    - Just One 推荐一下
+    - Just One 怎么选嗷
+    - 笨猫聊聊 Just One
+    - Just One 有什么好的
+    - Just One 经验分享下
+    - Just One 真的有用吗
   responses:
     - "嗷呜～{user_addr}Just One - 2019 SDJ 年度桌游ฅฅ"
     - "(尾巴翘) 合作单词提示 / 重复消除"
     - "{user_addr}3-7 人 / 15 分钟一局"
     - "(挺胸) 笨猫推荐: 全年龄神作!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: Just One 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 Just One 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 Just One 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pbg_avalon_001
   intent: question
-  keywords: [推荐 Avalon, 推荐阿瓦隆, 推荐梅林刺客, 推荐圆桌骑士, 笨猫 Avalon]
+  keywords: [推荐 Avalon, 推荐阿瓦隆, 推荐梅林刺客, 推荐圆桌骑士, 笨猫 Avalon, Avalon 怎么样, Avalon 推荐, 问 Avalon, Avalon 好不好]
   utterances:
     - 推荐 Avalon
     - 推荐阿瓦隆
     - 推荐梅林刺客
     - 推荐圆桌骑士
     - 笨猫 Avalon
+    - Avalon 推荐一下
+    - Avalon 怎么选嗷
+    - 笨猫聊聊 Avalon
+    - Avalon 有什么好的
+    - Avalon 经验分享下
+    - Avalon 真的有用吗
   responses:
     - "嗷呜～{user_addr}Avalon - 比抵抗更精致ฅฅ"
     - "(尾巴翘) 梅林/派西维尔/莫甘娜/刺客"
     - "{user_addr}5-10 人 / 任务+刺杀"
     - "(挺胸) 笨猫推荐: 入坑社团推理!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: Avalon 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 Avalon 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 Avalon 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pbg_resistance_001
   intent: question
-  keywords: [推荐抵抗组织, 推荐 The Resistance, 推荐隐藏身份, 推荐间谍游戏, 笨猫抵抗组织]
+  keywords: [推荐抵抗组织, 推荐 The Resistance, 推荐隐藏身份, 推荐间谍游戏, 笨猫抵抗组织, 笨猫 抵抗组织, 抵抗组织 怎么样, 抵抗组织 推荐, 问 抵抗组织]
   utterances:
     - 推荐抵抗组织
     - 推荐 The Resistance
     - 推荐隐藏身份
     - 推荐间谍游戏
     - 笨猫抵抗组织
+    - 抵抗组织 推荐一下
+    - 抵抗组织 怎么选嗷
+    - 笨猫聊聊 抵抗组织
+    - 抵抗组织 有什么好的
+    - 抵抗组织 经验分享下
+    - 抵抗组织 真的有用吗
   responses:
     - "嗷呜～{user_addr}抵抗组织 - 隐藏身份鼻祖ฅฅ"
     - "(尾巴翘) 无淘汰 / 全程参与"
     - "{user_addr}5-10 人 / 30 分钟"
     - "(挺胸) 笨猫推荐: Avalon 前置课!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 抵抗组织 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 抵抗组织 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 抵抗组织 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pbg_catan_001
   intent: question
-  keywords: [推荐卡坦岛, 推荐 Catan, 推荐经典策略, 推荐资源交换, 笨猫卡坦岛]
+  keywords: [推荐卡坦岛, 推荐 Catan, 推荐经典策略, 推荐资源交换, 笨猫卡坦岛, 笨猫 卡坦岛, 卡坦岛 怎么样, 卡坦岛 推荐, 问 卡坦岛]
   utterances:
     - 推荐卡坦岛
     - 推荐 Catan
     - 推荐经典策略
     - 推荐资源交换
     - 笨猫卡坦岛
+    - 卡坦岛 推荐一下
+    - 卡坦岛 怎么选嗷
+    - 笨猫聊聊 卡坦岛
+    - 卡坦岛 有什么好的
+    - 卡坦岛 经验分享下
+    - 卡坦岛 真的有用吗
   responses:
     - "嗷呜～{user_addr}Catan - 桌游界 MC ฅฅ"
     - "(尾巴翘) 1995 SDJ / 现代桌游开山"
     - "{user_addr}3-4 人 / 60-90 分钟"
     - "(挺胸) 笨猫推荐: 必收入门石碑!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 卡坦岛 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 卡坦岛 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 卡坦岛 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pbg_carcassonne_001
   intent: question
-  keywords: [推荐家庭桌游, 推荐 Carcassonne, 推荐卡卡颂, 推荐铺板桌游, 笨猫卡卡颂]
+  keywords: [推荐家庭桌游, 推荐 Carcassonne, 推荐卡卡颂, 推荐铺板桌游, 笨猫卡卡颂, 笨猫 家庭桌游, 家庭桌游 怎么样, 家庭桌游 推荐, 问 家庭桌游]
   utterances:
     - 推荐家庭桌游
     - 推荐 Carcassonne
     - 推荐卡卡颂
     - 推荐铺板桌游
     - 笨猫卡卡颂
+    - 家庭桌游 推荐一下
+    - 家庭桌游 怎么选嗷
+    - 笨猫聊聊 家庭桌游
+    - 家庭桌游 有什么好的
+    - 家庭桌游 经验分享下
+    - 家庭桌游 真的有用吗
   responses:
     - "嗷呜～{user_addr}Carcassonne - 全家欢ฅฅ"
     - "(尾巴翘) 2001 SDJ / 拼版铺路"
     - "{user_addr}2-5 人 / 30-45 分钟"
     - "(挺胸) 笨猫推荐: 老少咸宜!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 家庭桌游 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 家庭桌游 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 家庭桌游 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pbg_patchwork_001
   intent: question
-  keywords: [推荐两人桌游, 推荐 Patchwork, 推荐拼布对决, 推荐情侣桌游, 笨猫 Patchwork]
+  keywords: [推荐两人桌游, 推荐 Patchwork, 推荐拼布对决, 推荐情侣桌游, 笨猫 Patchwork, 笨猫 两人桌游, 两人桌游 怎么样, 两人桌游 推荐, 问 两人桌游]
   utterances:
     - 推荐两人桌游
     - 推荐 Patchwork
     - 推荐拼布对决
     - 推荐情侣桌游
     - 笨猫 Patchwork
+    - 两人桌游 推荐一下
+    - 两人桌游 怎么选嗷
+    - 笨猫聊聊 两人桌游
+    - 两人桌游 有什么好的
+    - 两人桌游 经验分享下
+    - 两人桌游 真的有用吗
   responses:
     - "嗷呜～{user_addr}Patchwork 拼布对决ฅฅ"
     - "(尾巴翘) Uwe 双人神作 / 俄罗斯方块感"
     - "{user_addr}2 人 / 30 分钟"
     - "(挺胸) 笨猫推荐: 情侣桌游首选!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 两人桌游 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 两人桌游 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 两人桌游 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pbg_quick_001
   intent: question
-  keywords: [推荐速通桌游, 推荐 30 分钟桌游, 推荐 Azul, 推荐 Splendor, 笨猫速通桌游]
+  keywords: [推荐速通桌游, 推荐 30 分钟桌游, 推荐 Azul, 推荐 Splendor, 笨猫速通桌游, 笨猫 速通桌游, 速通桌游 怎么样, 速通桌游 推荐, 问 速通桌游]
   utterances:
     - 推荐速通桌游
     - 推荐 30 分钟桌游
     - 推荐 Azul
     - 推荐 Splendor
     - 笨猫速通桌游
+    - 速通桌游 推荐一下
+    - 速通桌游 怎么选嗷
+    - 笨猫聊聊 速通桌游
+    - 速通桌游 有什么好的
+    - 速通桌游 经验分享下
+    - 速通桌游 真的有用吗
   responses:
     - "嗷呜～{user_addr}Azul 花砖物语 / Splendor 璀璨宝石ฅฅ"
     - "(尾巴翘) 规则 5 分钟 / 一局 30 分钟"
     - "{user_addr}2018 SDJ Azul / 现代轻策"
     - "(挺胸) 笨猫推荐: Azul 颜值党!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 速通桌游 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 速通桌游 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 速通桌游 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pbg_cafe_001
   intent: question
-  keywords: [推荐桌游吧, 推荐桌游店, 推荐桌游约局, 推荐桌游俱乐部, 笨猫桌游吧]
+  keywords: [推荐桌游吧, 推荐桌游店, 推荐桌游约局, 推荐桌游俱乐部, 笨猫桌游吧, 笨猫 桌游吧, 桌游吧 怎么样, 桌游吧 推荐, 问 桌游吧]
   utterances:
     - 推荐桌游吧
     - 推荐桌游店
     - 推荐桌游约局
     - 推荐桌游俱乐部
     - 笨猫桌游吧
+    - 桌游吧 推荐一下
+    - 桌游吧 怎么选嗷
+    - 笨猫聊聊 桌游吧
+    - 桌游吧 有什么好的
+    - 桌游吧 经验分享下
+    - 桌游吧 真的有用吗
   responses:
     - "嗷呜～{user_addr}桌游吧 - 一晚 30-80 不限玩ฅฅ"
     - "(尾巴翘) 上百款桌游 / 店员开局"
     - "{user_addr}周末 4 人去 / 性价比高"
     - "(挺胸) 笨猫推荐: 找当地评分前三!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 桌游吧 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 桌游吧 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 桌游吧 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8

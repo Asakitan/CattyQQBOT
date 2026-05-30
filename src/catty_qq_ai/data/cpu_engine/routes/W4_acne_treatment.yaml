@@ -4,204 +4,336 @@
 
 - name: at_topical_rx_001
   intent: question
-  keywords: [推荐祛痘药, 推荐阿达帕林, 推荐克林霉素, 推荐处方祛痘, 笨猫祛痘药]
+  keywords: [推荐祛痘药, 推荐阿达帕林, 推荐克林霉素, 推荐处方祛痘, 笨猫祛痘药, 达芙文凝胶, 阿达帕林 0.1, 抗炎祛痘, 痘痘处方药, 一代神药]
   utterances:
     - 推荐祛痘药
     - 推荐阿达帕林
     - 推荐克林霉素
     - 推荐处方祛痘
     - 笨猫祛痘药
+    - "{user_addr}阿达帕林怎么用"
+    - 达芙文凝胶
+    - "{user_addr}克林霉素夫西地酸"
+    - 处方祛痘药
+    - 抗炎祛痘
+    - 阿达帕林 vs 维 A 酸
+    - 痘痘药膏推荐
   responses:
     - "嗷呜～{user_addr}阿达帕林 (达芙文) - 一代神药ฅฅ"
-    - "(尾巴翘) 克林霉素 / 夫西地酸 - 抗炎"
+    - "(尾巴翘起) 克林霉素 / 夫西地酸 - 抗炎"
     - "{user_addr}建立耐受 / 少量 / 隔天"
     - "(挺胸) 笨猫推荐: 阿达帕林夜用从豌豆大!"
+    - "(歪头) 阿达帕林前几周可能爆痘嗷呜"
+    - "嗷呜～{user_addr}夜用 + 必涂防晒ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 隔天用建立耐受喵呜"
+    - "哼! 阿达帕林是金标准, 长期用更香, {user_addr}嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: at_bpo_001
   intent: question
-  keywords: [推荐过氧化苯甲酰, 推荐 BPO, 推荐班赛, 推荐祛痘凝胶, 笨猫过氧化苯甲酰]
+  keywords: [推荐过氧化苯甲酰, 推荐 BPO, 推荐班赛, 推荐祛痘凝胶, 笨猫过氧化苯甲酰, 班赛 5%, 杀痤疮丙酸杆菌, 短接触法, 不耐药, 班赛漂衣服]
   utterances:
     - 推荐过氧化苯甲酰
     - 推荐 BPO
     - 推荐班赛
     - 推荐祛痘凝胶
     - 笨猫过氧化苯甲酰
+    - "{user_addr}班赛怎么用"
+    - BPO 5% 推荐
+    - "{user_addr}祛痘凝胶"
+    - 不耐药杀菌
+    - 班赛短接触法
+    - 班赛漂衣服怎么办
+    - 过氧化苯甲酰副作用
   responses:
     - "嗷呜～{user_addr}班赛 5% - 经典 BPOฅฅ"
-    - "(尾巴翘) 杀痤疮丙酸杆菌 / 不耐药"
+    - "(尾巴翘起) 杀痤疮丙酸杆菌 / 不耐药"
     - "{user_addr}漂衣服 / 注意刺激"
     - "(挺胸) 笨猫推荐: 班赛点涂 + 短接触法!"
+    - "(歪头) 班赛会漂白衣服床单嗷呜"
+    - "嗷呜～{user_addr}从短接触 5 分钟开始ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 单点涂 + 别全脸喵呜"
+    - "哼! BPO 不耐药, 长期用都有效, {user_addr}嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: at_cleanser_001
   intent: question
-  keywords: [推荐祛痘洗面奶, 推荐露得清, 推荐珂润, 推荐控油洗面奶, 笨猫祛痘洗面奶]
+  keywords: [推荐祛痘洗面奶, 推荐露得清, 推荐珂润, 推荐控油洗面奶, 笨猫祛痘洗面奶, 理肤泉 Effaclar, CeraVe 洗面奶, 氨基酸洗面奶, 痘肌洗面奶, 温和清洁]
   utterances:
     - 推荐祛痘洗面奶
     - 推荐露得清
     - 推荐珂润
     - 推荐控油洗面奶
     - 笨猫祛痘洗面奶
+    - "{user_addr}痘肌洗面奶"
+    - 理肤泉 Effaclar
+    - "{user_addr}CeraVe 控油"
+    - 氨基酸洗面奶
+    - 露得清水杨酸
+    - 痘肌温和清洁
+    - 控油洗面奶推荐
   responses:
     - "嗷呜～{user_addr}露得清水杨酸 / 理肤泉 Effaclarฅฅ"
-    - "(尾巴翘) 珂润 / CeraVe - 温和"
+    - "(尾巴翘起) 珂润 / CeraVe - 温和"
     - "{user_addr}氨基酸 > 皂基 / 别过度清洁"
     - "(挺胸) 笨猫推荐: 理肤泉 Effaclar 经典!"
+    - "(歪头) 过度清洁伤屏障嗷呜"
+    - "嗷呜～{user_addr}氨基酸洗面奶最温和ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 早晚 1 次喵呜"
+    - "哼! 洗面奶只是基础, {user_addr}别太多功能嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: at_patch_001
   intent: question
-  keywords: [推荐祛痘贴, 推荐 Cosrx 痘痘贴, 推荐人工皮, 推荐水胶体, 笨猫祛痘贴]
+  keywords: [推荐祛痘贴, 推荐 Cosrx 痘痘贴, 推荐人工皮, 推荐水胶体, 笨猫祛痘贴, 3M 痘痘贴, Hero Mighty, 水胶体敷料, 痘印吸脓, 急救痘贴]
   utterances:
     - 推荐祛痘贴
     - 推荐 Cosrx 痘痘贴
     - 推荐人工皮
     - 推荐水胶体
     - 笨猫祛痘贴
+    - "{user_addr}痘痘贴有效吗"
+    - Cosrx vs 3M
+    - "{user_addr}水胶体敷料"
+    - 急救痘贴推荐
+    - Hero Mighty Patch
+    - 破皮才贴吗
+    - 隐形痘痘贴
   responses:
     - "嗷呜～{user_addr}Cosrx Master Patch - 韩系经典ฅฅ"
-    - "(尾巴翘) 3M 痘痘贴 / Hero Mighty"
+    - "(尾巴翘起) 3M 痘痘贴 / Hero Mighty"
     - "{user_addr}已破皮才贴 / 吸脓"
     - "(挺胸) 笨猫推荐: Cosrx 24 片装够用一年!"
+    - "(歪头) 没破皮贴效果一般嗷呜"
+    - "嗷呜～{user_addr}重要场合前贴超救命ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} Cosrx 性价比高喵呜"
+    - "哼! 痘痘贴是急救, 不能根治, {user_addr}嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: at_pih_001
   intent: question
-  keywords: [推荐去痘印, 推荐烟酰胺, 推荐壬二酸, 推荐痘印淡化, 笨猫去痘印]
+  keywords: [推荐去痘印, 推荐烟酰胺, 推荐壬二酸, 推荐痘印淡化, 笨猫去痘印, 红印自愈, 黑印美白, 修丽可 CE, 377 美白痘印, 痘印产品]
   utterances:
     - 推荐去痘印
     - 推荐烟酰胺
     - 推荐壬二酸
     - 推荐痘印淡化
     - 笨猫去痘印
+    - "{user_addr}红痘印怎么消"
+    - 黑痘印淡化
+    - "{user_addr}壬二酸 15"
+    - 修丽可 CE 推荐
+    - 377 痘印
+    - 烟酰胺去痘印
+    - 痘印多久消
   responses:
     - "嗷呜～{user_addr}烟酰胺 5% / 壬二酸 15%ฅฅ"
-    - "(尾巴翘) 修丽可 CE / 377 美白"
+    - "(尾巴翘起) 修丽可 CE / 377 美白"
     - "{user_addr}红印自愈 / 黑印需美白"
     - "(挺胸) 笨猫推荐: 壬二酸祛痘 + 淡印一举两得!"
+    - "(歪头) 红印 3 个月自愈, 黑印需 6+嗷呜"
+    - "嗷呜～{user_addr}必涂防晒, 不然黑印加重ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 壬二酸 + 烟酰胺组合喵呜"
+    - "哼! 去痘印急不得, {user_addr}耐心嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: at_tea_tree_001
   intent: question
-  keywords: [推荐茶树精油, 推荐单方祛痘, 推荐 The Body Shop 茶树, 推荐天然祛痘, 笨猫茶树精油]
+  keywords: [推荐茶树精油, 推荐单方祛痘, 推荐 The Body Shop 茶树, 推荐天然祛痘, 笨猫茶树精油, Thursday Plantation, 澳洲茶树, 茶树水, 茶树凝胶, 天然抗菌]
   utterances:
     - 推荐茶树精油
     - 推荐单方祛痘
     - 推荐 The Body Shop 茶树
     - 推荐天然祛痘
     - 笨猫茶树精油
+    - "{user_addr}茶树精油怎么用"
+    - The Body Shop 茶树系列
+    - "{user_addr}天然祛痘"
+    - Thursday Plantation
+    - 茶树水凝胶
+    - 茶树精油稀释
+    - 茶树油副作用
   responses:
     - "嗷呜～{user_addr}茶树精油 - 天然抗菌ฅฅ"
-    - "(尾巴翘) The Body Shop / Thursday Plantation"
+    - "(尾巴翘起) The Body Shop / Thursday Plantation"
     - "{user_addr}稀释用 / 点涂别全脸"
     - "(挺胸) 笨猫推荐: 茶树水/凝胶比纯油安全!"
+    - "(歪头) 纯油刺激强嗷呜"
+    - "嗷呜～{user_addr}茶树水睡前湿敷ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 选凝胶款喵呜"
+    - "哼! 茶树是辅助, 重痘别只靠它, {user_addr}嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: at_dermatology_001
   intent: question
-  keywords: [推荐皮肤科, 推荐就医祛痘, 推荐看医生, 推荐痤疮科, 笨猫皮肤科]
+  keywords: [推荐皮肤科, 推荐就医祛痘, 推荐看医生, 推荐痤疮科, 笨猫皮肤科, 三甲皮肤科, 公立医院, 痤疮专科, 中重度痤疮, 看皮肤科]
   utterances:
     - 推荐皮肤科
     - 推荐就医祛痘
     - 推荐看医生
     - 推荐痤疮科
     - 笨猫皮肤科
+    - "{user_addr}痘痘看医生"
+    - 三甲皮肤科推荐
+    - "{user_addr}痤疮专科"
+    - 中重度痤疮就医
+    - 皮肤科挂号
+    - 痘痘留疤就医
+    - 国民皮肤科医院
   responses:
     - "嗷呜～{user_addr}痘痘多/疼/留疤就快看医生ฅฅ"
-    - "(尾巴翘) 三甲皮肤科 / 公立优先"
+    - "(尾巴翘起) 三甲皮肤科 / 公立优先"
     - "{user_addr}别迷信美容院 / 别挤"
     - "(挺胸) 笨猫推荐: 中重度痤疮医生开方比 OTC 快!"
+    - "(歪头) 公立挂号难, {user_addr}提前一周嗷呜"
+    - "嗷呜～{user_addr}国家皮肤病医院最权威ฅฅ"
+    - "(尾巴一甩) 笨猫提醒 {user_addr} 别去美容院乱搞喵呜"
+    - "哼! 大痘必须就医, 别拖留疤, {user_addr}嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: at_isotretinoin_001
   intent: question
-  keywords: [推荐异维 A 酸, 推荐泰尔丝, 推荐口服祛痘, 推荐严重痤疮, 笨猫异维 A 酸]
+  keywords: [推荐异维 A 酸, 推荐泰尔丝, 推荐口服祛痘, 推荐严重痤疮, 笨猫异维 A 酸, 口服 A 酸, 重度痤疮终极, 异维 A 酸副作用, 泰尔丝肝功, 严禁怀孕]
   utterances:
     - 推荐异维 A 酸
     - 推荐泰尔丝
     - 推荐口服祛痘
     - 推荐严重痤疮
     - 笨猫异维 A 酸
+    - "{user_addr}异维 A 酸怎么吃"
+    - 泰尔丝有效吗
+    - "{user_addr}口服祛痘"
+    - 严重痤疮终极方案
+    - 异维 A 酸副作用
+    - 肝功检查
+    - 异维 A 酸女性禁忌
   responses:
     - "嗷呜～{user_addr}泰尔丝 - 重度痤疮终极ฅฅ"
-    - "(尾巴翘) 皮脂腺缩小 / 治本"
+    - "(尾巴翘起) 皮脂腺缩小 / 治本"
     - "{user_addr}严控肝功 / 严禁怀孕 / 干唇"
     - "(挺胸) 笨猫推荐: 必须医生处方 + 复查!"
+    - "(歪头) 副作用强, {user_addr}必须遵医嗷呜"
+    - "嗷呜～{user_addr}女性禁用 (致畸)ฅฅ"
+    - "(尾巴一甩) 笨猫提醒 {user_addr} 定期查肝功喵呜"
+    - "哼! 异维 A 酸不是儿戏, {user_addr}严格按医嘱嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: at_diet_001
   intent: question
-  keywords: [推荐祛痘饮食, 推荐戒糖戒奶, 推荐低 GI 饮食, 推荐祛痘食谱, 笨猫祛痘饮食]
+  keywords: [推荐祛痘饮食, 推荐戒糖戒奶, 推荐低 GI 饮食, 推荐祛痘食谱, 笨猫祛痘饮食, 痘肌饮食, 戒奶茶, 低 GI 痘, 高糖痘, Omega-3]
   utterances:
     - 推荐祛痘饮食
     - 推荐戒糖戒奶
     - 推荐低 GI 饮食
     - 推荐祛痘食谱
     - 笨猫祛痘饮食
+    - "{user_addr}痘肌吃什么"
+    - 戒糖戒奶
+    - "{user_addr}痘痘忌口"
+    - 低 GI 饮食推荐
+    - 高 Omega-3 食物
+    - 戒奶茶治痘
+    - 早睡治痘
   responses:
     - "嗷呜～{user_addr}戒糖 + 戒奶 (尤其脱脂)ฅฅ"
-    - "(尾巴翘) 低 GI / 多 Omega-3 / 多蔬菜"
+    - "(尾巴翘起) 低 GI / 多 Omega-3 / 多蔬菜"
     - "{user_addr}少油炸 / 少辛辣 / 早睡"
     - "(挺胸) 笨猫推荐: 戒奶茶 + 11 点前睡!"
+    - "(歪头) 脱脂奶比全脂奶更伤痘嗷呜"
+    - "嗷呜～{user_addr}戒奶茶一周就少痘ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 多吃三文鱼 + 蓝莓喵呜"
+    - "哼! 饮食影响大, {user_addr}从今天开始嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: at_chemical_peel_001
   intent: question
-  keywords: [推荐刷酸, 推荐水杨酸, 推荐果酸, 推荐家用刷酸, 笨猫刷酸]
+  keywords: [推荐刷酸, 推荐水杨酸, 推荐果酸, 推荐家用刷酸, 笨猫刷酸, BHA 2%, 杏仁酸, 宝拉 BHA, 家用刷酸入门, 果酸焕肤]
   utterances:
     - 推荐刷酸
     - 推荐水杨酸
     - 推荐果酸
     - 推荐家用刷酸
     - 笨猫刷酸
+    - "{user_addr}刷酸入门"
+    - 宝拉 BHA 2%
+    - "{user_addr}果酸 vs 水杨酸"
+    - 杏仁酸推荐
+    - 家用刷酸建议
+    - 刷酸建立耐受
+    - 痘肌刷酸
   responses:
     - "嗷呜～{user_addr}水杨酸 2% (宝拉 BHA) - 王者ฅฅ"
-    - "(尾巴翘) 杏仁酸 / 果酸 - 温和"
+    - "(尾巴翘起) 杏仁酸 / 果酸 - 温和"
     - "{user_addr}建立耐受 / 严格防晒"
     - "(挺胸) 笨猫推荐: 宝拉 BHA 入门家用刷酸!"
+    - "(歪头) 刷酸前 2 周耐受期会脱皮嗷呜"
+    - "嗷呜～{user_addr}夜用 + 早涂防晒ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 杏仁酸最温和喵呜"
+    - "哼! 刷酸虽好别频繁, {user_addr}一周 2 次嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: at_injection_001
-  intent: function
-  keywords: [推荐封闭治疗, 推荐打针祛痘, 推荐曲安奈德, 推荐大痘治疗, 笨猫封闭]
+  intent: question
+  keywords: [推荐封闭治疗, 推荐打针祛痘, 推荐曲安奈德, 推荐大痘治疗, 笨猫封闭, 局部封闭, 痘痘急救针, 大痘速消, 封闭凹陷, 封闭风险]
   utterances:
     - 推荐封闭治疗
     - 推荐打针祛痘
     - 推荐曲安奈德
     - 推荐大痘治疗
     - 笨猫封闭
+    - "{user_addr}封闭打多少钱"
+    - 曲安奈德局部
+    - "{user_addr}大痘急救"
+    - 24 小时速消痘
+    - 封闭凹陷风险
+    - 重要场合祛痘
+    - 大痘速消方案
   responses:
     - "嗷呜～{user_addr}曲安奈德局部注射 - 大痘救星ฅฅ"
-    - "(尾巴翘) 24-48h 速消 / 急救"
+    - "(尾巴翘起) 24-48h 速消 / 急救"
     - "{user_addr}医生操作 / 别频繁打 / 可能凹陷"
     - "(挺胸) 笨猫推荐: 重要场合前 2 天打!"
+    - "(歪头) 频繁打可能凹陷嗷呜"
+    - "嗷呜～{user_addr}必须皮肤科医生打ฅฅ"
+    - "(尾巴一甩) 笨猫提醒 {user_addr} 一年别超 3 次喵呜"
+    - "哼! 封闭是急救不是常态, {user_addr}慎重嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: at_medical_aesthetic_001
-  intent: function
-  keywords: [推荐医美祛痘, 推荐红蓝光, 推荐光动力, 推荐果酸焕肤, 笨猫医美祛痘]
+  intent: question
+  keywords: [推荐医美祛痘, 推荐红蓝光, 推荐光动力, 推荐果酸焕肤, 笨猫医美祛痘, ALA-PDT, 红蓝光治疗, 光动力 PDT, 点阵激光痘坑, 医美痘痘]
   utterances:
     - 推荐医美祛痘
     - 推荐红蓝光
     - 推荐光动力
     - 推荐果酸焕肤
     - 笨猫医美祛痘
+    - "{user_addr}医美祛痘选什么"
+    - 红蓝光治疗
+    - "{user_addr}光动力 ALA-PDT"
+    - 果酸焕肤推荐
+    - 点阵激光去痘坑
+    - 医美祛痘价格
+    - 医美 vs OTC
   responses:
     - "嗷呜～{user_addr}红蓝光 - 抗炎杀菌入门ฅฅ"
-    - "(尾巴翘) 光动力 ALA-PDT - 中重度神器"
+    - "(尾巴翘起) 光动力 ALA-PDT - 中重度神器"
     - "{user_addr}果酸焕肤 / 点阵激光去痘坑"
     - "(挺胸) 笨猫推荐: 正规医院 / 别去美容院!"
+    - "(歪头) 美容院光动力没医生不安全嗷呜"
+    - "嗷呜～{user_addr}光动力比口服快但贵ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 选公立医院科室喵呜"
+    - "哼! 医美是辅助, {user_addr}基础护肤别忘嗷呜!"
   cooldown_seconds: 60
   weight: 0.9

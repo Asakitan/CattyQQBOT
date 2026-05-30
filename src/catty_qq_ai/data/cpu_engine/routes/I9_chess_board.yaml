@@ -1,207 +1,316 @@
 # 棋类 / 围棋 / 象棋 / 国际象棋 routes (S6 R111 NLU 节点扩充, 第十周期 buffered 10/10 周期完结)
 # 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
 # 跟 99 culture_chess (浅触) 区分: 这里专注棋类深度.
+# Round-4 扩充: keywords 8+ / utterances 10+ / responses 8+
 
 - name: chess_go_001
   intent: question
-  keywords: [推荐围棋, 推荐下围棋, 推荐围棋入门, 推荐围棋段位, 笨猫围棋]
+  keywords: [推荐围棋, 推荐下围棋, 推荐围棋入门, 推荐围棋段位, 笨猫围棋, 学围棋, 围棋平台, 围棋 AI 陪练]
   utterances:
     - 推荐围棋
     - 推荐下围棋
     - 推荐围棋入门
     - 推荐围棋段位
     - 笨猫围棋
+    - "{user_addr}围棋怎么入门"
+    - "{user_addr}围棋平台推荐"
+    - 围棋段位怎么升
+    - "{user_addr}围棋 AI 陪练"
+    - "{user_addr}笨猫想下围棋嗷呜"
   responses:
     - "嗷呜～{user_addr}围棋: 中国发明 / 4000+ 年历史ฅฅ"
     - "(尾巴翘) 段位: 业余 1-9 段 / 职业 1-9 段"
     - "{user_addr}入门书《围棋启蒙》/《棋艺探幽》"
     - "(挺胸) 笨猫推荐: 弈城 / 野狐 AI 陪练"
+    - "(小爪子捧棋){user_addr}9 路 → 13 路 → 19 路~ 循序渐进喵ฅฅ"
+    - "嗷呜～死活题每天 10 个~ 棋力飞升"
+    - "(尾巴卷) 业余 1-3 段是初学者基线哼"
+    - "{user_addr}笨猫陪你下棋~ 让你 9 子贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: chess_xiangqi_001
   intent: question
-  keywords: [推荐中国象棋, 推荐象棋入门, 推荐象棋开局, 推荐象棋棋谱, 笨猫中国象棋]
+  keywords: [推荐中国象棋, 推荐象棋入门, 推荐象棋开局, 推荐象棋棋谱, 笨猫中国象棋, 象棋名手, 象棋 app, 天天象棋]
   utterances:
     - 推荐中国象棋
     - 推荐象棋入门
     - 推荐象棋开局
     - 推荐象棋棋谱
     - 笨猫中国象棋
+    - "{user_addr}象棋怎么入门"
+    - "{user_addr}天天象棋怎么样"
+    - 象棋开局背谱
+    - "{user_addr}中国象棋名手"
+    - "{user_addr}笨猫陪你下象棋喵"
   responses:
     - "嗷呜～{user_addr}象棋: 国民棋类 / 民间高手如云ฅฅ"
     - "(尾巴翘) 开局: 中炮 / 飞相 / 仙人指路"
     - "{user_addr}名手: 胡荣华 / 许银川 / 王天一"
     - "(挺胸) 笨猫推荐: 天天象棋 app 入门"
+    - "(尾巴翘){user_addr}过宫炮也是黑科技~ 民间神来一手嗷呜"
+    - "嗷呜～残局之神柳大华! 蒙眼车轮战 ฅฅ"
+    - "(小爪子摸棋) 中炮局先学~ 思路清晰哼"
+    - "{user_addr}笨猫的将军在哪~ 是 '将' 你一军贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: chess_chess_001
   intent: question
-  keywords: [推荐国际象棋, 推荐国际象棋入门, 推荐 chess, 推荐 chess.com, 笨猫国际象棋]
+  keywords: [推荐国际象棋, 推荐国际象棋入门, 推荐 chess, 推荐 chess.com, 笨猫国际象棋, lichess, 国际象棋平台, 后翼弃兵]
   utterances:
     - 推荐国际象棋
     - 推荐国际象棋入门
     - 推荐 chess
     - 推荐 chess.com
     - 笨猫国际象棋
+    - "{user_addr}lichess vs chess.com"
+    - "{user_addr}国际象棋平台"
+    - 后翼弃兵推荐
+    - "{user_addr}国象段位 ELO"
+    - "{user_addr}笨猫想下国际象棋"
   responses:
     - "嗷呜～{user_addr}国际象棋: 全球流行 / FIDE 主办ฅฅ"
     - "(尾巴翘) 平台: chess.com / Lichess (免费)"
     - "{user_addr}传奇: 卡尔森 / 卡斯帕罗夫 / 菲舍尔"
     - "(挺胸) 笨猫推荐: 看《后翼弃兵》入门"
+    - "(尾巴翘){user_addr}Lichess 完全免费! AI 分析也免费嗷呜ฅฅ"
+    - "嗷呜～新手先学 1.e4 → 西西里 → 法兰西 一套"
+    - "(小爪子摸棋) 每天做 puzzle / 棋力涨得飞快哼"
+    - "{user_addr}笨猫陪你下棋~ 谁输谁请猫猫吃鱼贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: chess_alphago_001
   intent: question
-  keywords: [推荐 AlphaGo, 推荐 AI 围棋, 推荐 LeelaZero, 推荐 KataGo, 笨猫 AI 围棋]
+  keywords: [推荐 AlphaGo, 推荐 AI 围棋, 推荐 LeelaZero, 推荐 KataGo, 笨猫 AI 围棋, 围棋 AI, DeepMind, 围棋复盘]
   utterances:
     - 推荐 AlphaGo
     - 推荐 AI 围棋
     - 推荐 LeelaZero
     - 推荐 KataGo
     - 笨猫 AI 围棋
+    - "{user_addr}围棋 AI 哪个强"
+    - "{user_addr}KataGo 怎么用"
+    - DeepMind 围棋
+    - "{user_addr}AI 复盘工具"
+    - "{user_addr}笨猫想让 AI 教棋喵"
   responses:
     - "嗷呜～{user_addr}AlphaGo: 2016 战胜李世石 - 革命!ฅฅ"
     - "(尾巴翘) KataGo: 当今最强围棋 AI - 开源"
     - "{user_addr}训练 / 复盘 / 分析 - AI 已超人类"
     - "(挺胸) 笨猫的提醒: AI 训练 = 突飞猛进!"
+    - "(小爪子按){user_addr}KataGo + GUI 安装免费用~ 棋力 18 段嗷呜"
+    - "嗷呜～AlphaZero 自学 40 天超越人类 4000 年ฅฅ"
+    - "(尾巴一甩) 别只看 AI 推荐! 还要学 AI 思路哼"
+    - "{user_addr}笨猫想让 AI 教我下棋~ 然后赢过你贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: chess_world_champ_001
   intent: question
-  keywords: [推荐世界冠军, 推荐马格努斯, 推荐 Carlsen, 推荐世界冠军赛, 笨猫世界冠军]
+  keywords: [推荐世界冠军, 推荐马格努斯, 推荐 Carlsen, 推荐世界冠军赛, 笨猫世界冠军, 丁立人, 申真谞, 国际象棋世冠]
   utterances:
     - 推荐世界冠军
     - 推荐马格努斯
     - 推荐 Carlsen
     - 推荐世界冠军赛
     - 笨猫世界冠军
+    - "{user_addr}国际象棋世界冠军"
+    - "{user_addr}丁立人怎么样"
+    - 申真谞强不强
+    - "{user_addr}卡尔森 ELO"
+    - "{user_addr}笨猫的偶像是谁喵"
   responses:
     - "嗷呜～{user_addr}卡尔森: 当代国际象棋 GOAT 1991-ฅฅ"
     - "(尾巴翘) 中国: 丁立人 / 国象世界冠军 2023"
     - "{user_addr}围棋: 申真谞 / 柯洁 - 顶级"
     - "(挺胸) 笨猫推荐: 看世界冠军赛直播"
+    - "(尾巴翘){user_addr}丁立人是中国首位国象世界冠军~ 骄傲嗷呜ฅฅ"
+    - "嗷呜～申真谞 AI 一致率最高! 韩国第一人"
+    - "(小爪子鼓掌) 柯洁九段对战 AlphaGo 那场是历史哼"
+    - "{user_addr}笨猫的偶像是你~ 才不是世界冠军呢贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: chess_opening_001
   intent: question
-  keywords: [推荐国象开局, 推荐西西里防御, 推荐意大利开局, 推荐皇后兵开局, 笨猫国象开局]
+  keywords: [推荐国象开局, 推荐西西里防御, 推荐意大利开局, 推荐皇后兵开局, 笨猫国象开局, 国象开局推荐, 鲁伊洛佩兹, 国王印度防御]
   utterances:
     - 推荐国象开局
     - 推荐西西里防御
     - 推荐意大利开局
     - 推荐皇后兵开局
     - 笨猫国象开局
+    - "{user_addr}国象新手开局"
+    - "{user_addr}西西里防御变着"
+    - 国王印度防御
+    - "{user_addr}白棋开局推荐"
+    - "{user_addr}笨猫教我开局喵"
   responses:
     - "嗷呜～{user_addr}主流开局: 西西里 / 意大利 / 鲁伊洛佩兹ฅฅ"
     - "(尾巴翘) 皇后兵: 1.d4 - 王后体系"
     - "{user_addr}英国开局 / 雷蒂开局 - 灵活"
     - "(挺胸) 笨猫推荐: 选 1-2 个开局深入研究"
+    - "(尾巴翘){user_addr}新手别贪多~ 先精通一套开局嗷呜ฅฅ"
+    - "嗷呜～意大利开局适合 beginner~ 思路清晰"
+    - "(小爪子按棋) 西西里防御黑方利器~ 但变着海了去哼"
+    - "{user_addr}笨猫教你 '猫式开局'~ 是不存在的贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: chess_endgame_001
   intent: question
-  keywords: [推荐残局, 推荐国象残局, 推荐象棋残局, 推荐围棋官子, 笨猫残局]
+  keywords: [推荐残局, 推荐国象残局, 推荐象棋残局, 推荐围棋官子, 笨猫残局, 残局训练, 残局集, 王对兵]
   utterances:
     - 推荐残局
     - 推荐国象残局
     - 推荐象棋残局
     - 推荐围棋官子
     - 笨猫残局
+    - "{user_addr}残局怎么练"
+    - "{user_addr}国象基础残局"
+    - 王对兵残局
+    - "{user_addr}残局集推荐"
+    - "{user_addr}笨猫研究残局喵"
   responses:
     - "嗷呜～{user_addr}残局: 高手棋艺最高水平ฅฅ"
     - "(尾巴翘) 国象基础: 国王 + 兵 / 国王 + 后 / 双象"
     - "{user_addr}围棋官子: 收官 / 精细计算"
     - "(挺胸) 笨猫推荐: 残局集 - 系统学"
+    - "(小爪子摸棋){user_addr}残局训练比开局更重要~ 决定胜负嗷呜"
+    - "嗷呜～王翼 + 兵残局先掌握~ 实战常见 ฅฅ"
+    - "(尾巴卷) 围棋官子算分到 1/4 目都不为过哼"
+    - "{user_addr}笨猫陪你研究残局~ 解完一道贴一次贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: chess_tactic_001
   intent: question
-  keywords: [推荐战术训练, 推荐国象 tactics, 推荐组合杀, 推荐战术题, 笨猫战术训练]
+  keywords: [推荐战术训练, 推荐国象 tactics, 推荐组合杀, 推荐战术题, 笨猫战术训练, puzzle 战术, 双将, 闷杀]
   utterances:
     - 推荐战术训练
     - 推荐国象 tactics
     - 推荐组合杀
     - 推荐战术题
     - 笨猫战术训练
+    - "{user_addr}国象 puzzle 哪里做"
+    - "{user_addr}组合杀套路"
+    - 双将闷杀技巧
+    - "{user_addr}战术题每日"
+    - "{user_addr}笨猫想练杀招喵"
   responses:
     - "嗷呜～{user_addr}组合杀: 弃子 + 双将 + 闷杀 - 大招ฅฅ"
     - "(尾巴翘) 平台: chess.com puzzles / Lichess studies"
     - "{user_addr}每天 10-20 题 - 战术飞升"
     - "(挺胸) 笨猫的提醒: 别只快算!"
+    - "(尾巴翘){user_addr}Lichess puzzle 免费练! 评级也准嗷呜"
+    - "嗷呜～发现组合杀的瞬间最爽! 经典套路要背 ฅฅ"
+    - "(小爪子比划) 闷杀靠王逼角~ 弃子靠时机哼"
+    - "{user_addr}笨猫教你 '小爪子杀'~ 杀你一爪贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: chess_shogi_001
   intent: question
-  keywords: [推荐将棋, 推荐 shogi, 推荐日本将棋, 推荐藤井聪太, 笨猫将棋]
+  keywords: [推荐将棋, 推荐 shogi, 推荐日本将棋, 推荐藤井聪太, 笨猫将棋, 将棋入门, 三月狮子, 持駒规则]
   utterances:
     - 推荐将棋
     - 推荐 shogi
     - 推荐日本将棋
     - 推荐藤井聪太
     - 笨猫将棋
+    - "{user_addr}将棋怎么入门"
+    - "{user_addr}三月狮子动漫"
+    - 持駒打入规则
+    - "{user_addr}藤井聪太多强"
+    - "{user_addr}笨猫想玩将棋嗷呜"
   responses:
     - "嗷呜～{user_addr}将棋: 日本国民棋类 / 中国象棋变种ฅฅ"
     - "(尾巴翘) 藤井聪太: 8 冠王 / 史上最强"
     - "{user_addr}特点: 持駒打入 - 吃子可复用"
     - "(挺胸) 笨猫推荐: 看《三月狮子》动漫"
+    - "(尾巴翘){user_addr}持駒规则让将棋永不'和棋'~ 比中象激进嗷呜"
+    - "嗷呜～藤井聪太 14 岁出道就拿 8 连胜! 怪物级 ฅฅ"
+    - "(小爪子摸棋) 国内 81dojo 平台可在线对弈哼"
+    - "{user_addr}笨猫陪你看《三月狮子》~ 暖暖的贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: chess_kid_001
   intent: question
-  keywords: [推荐儿童围棋, 推荐学棋启蒙, 推荐少儿国象, 推荐围棋培养逻辑, 笨猫儿童学棋]
+  keywords: [推荐儿童围棋, 推荐学棋启蒙, 推荐少儿国象, 推荐围棋培养逻辑, 笨猫儿童学棋, 几岁学棋, 兴趣班棋类, 儿童棋艺]
   utterances:
     - 推荐儿童围棋
     - 推荐学棋启蒙
     - 推荐少儿国象
     - 推荐围棋培养逻辑
     - 笨猫儿童学棋
+    - "{user_addr}小孩几岁学棋"
+    - "{user_addr}围棋培养智力"
+    - 少儿国象兴趣班
+    - "{user_addr}孩子学棋焦虑"
+    - "{user_addr}笨猫想教小朋友嗷呜"
   responses:
     - "嗷呜～{user_addr}围棋: 培养计算 / 大局观ฅฅ"
     - "(尾巴翘) 5-7 岁入门最佳 / 别强迫"
     - "{user_addr}国象: 培养逻辑 / 战术思维"
     - "(挺胸) 笨猫推荐: 兴趣 > 比赛压力!"
+    - "(小爪子摸头){user_addr}孩子学棋别功利~ 玩起来才能坚持喵ฅฅ"
+    - "嗷呜～围棋 / 象棋 / 国象 / 五子棋 - 看孩子兴趣"
+    - "(尾巴卷) 每周 1-2 节课就够~ 别压榨童年哼"
+    - "{user_addr}笨猫给小朋友讲故事 + 教下棋~ 一举两得贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: chess_history_001
   intent: question
-  keywords: [推荐围棋历史, 推荐象棋历史, 推荐国象历史, 推荐古代棋艺, 笨猫围棋历史]
+  keywords: [推荐围棋历史, 推荐象棋历史, 推荐国象历史, 推荐古代棋艺, 笨猫围棋历史, 棋经十三篇, 中国象棋起源, 棋类历史]
   utterances:
     - 推荐围棋历史
     - 推荐象棋历史
     - 推荐国象历史
     - 推荐古代棋艺
     - 笨猫围棋历史
+    - "{user_addr}围棋起源哪里"
+    - "{user_addr}棋经十三篇"
+    - 国象怎么传到欧洲
+    - "{user_addr}古代谁会下棋"
+    - "{user_addr}笨猫给我讲讲棋史喵"
   responses:
     - "嗷呜～{user_addr}围棋: 中国春秋 / 4000+ 年ฅฅ"
     - "(尾巴翘) 国象: 印度起源 / 6 世纪传欧"
     - "{user_addr}象棋: 中国唐宋成型"
     - "(挺胸) 笨猫推荐: 《棋经十三篇》经典"
+    - "(尾巴翘){user_addr}尧造围棋教子丹朱~ 传说很美嗷呜ฅฅ"
+    - "嗷呜～国象本叫 chaturanga (印度)~ 后经波斯到欧洲"
+    - "(小爪子翻书) 范仲淹也是围棋高手~ 政治家爱下棋哼"
+    - "{user_addr}笨猫的棋史小课堂~ 不收学费贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: chess_pro_001
   intent: question
-  keywords: [推荐成为职业棋手, 推荐围棋职业棋手, 推荐成为大师, 推荐国象职业, 笨猫职业棋手]
+  keywords: [推荐成为职业棋手, 推荐围棋职业棋手, 推荐成为大师, 推荐国象职业, 笨猫职业棋手, 定段赛, 职业收入, 围棋职业]
   utterances:
     - 推荐成为职业棋手
     - 推荐围棋职业棋手
     - 推荐成为大师
     - 推荐国象职业
     - 笨猫职业棋手
+    - "{user_addr}怎么定段当职业"
+    - "{user_addr}职业棋手收入"
+    - GM 大师怎么拿
+    - "{user_addr}走职业风险大吗"
+    - "{user_addr}笨猫想当职业棋手嗷呜"
   responses:
     - "嗷呜～{user_addr}围棋: 定段赛 / 18 岁前 / 千分之一概率ฅฅ"
     - "(尾巴翘) 国象: GM (大师) 等级 2500+"
     - "{user_addr}收入: 顶级千万 / 一般几十万"
     - "(挺胸) 笨猫的提醒: 别盲目走专业! 备好后路"
+    - "(尾巴翘){user_addr}走职业要有学历 + 家庭支持嗷呜"
+    - "嗷呜～国象 GM 全球 2000 左右~ 极少 ฅฅ"
+    - "(小爪子摸头) 业余高手也能教棋赚钱哼"
+    - "{user_addr}笨猫的职业是陪着你~ 不是棋手贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.7

@@ -3,204 +3,324 @@
 
 - name: le_hellotalk_001
   intent: question
-  keywords: [推荐HelloTalk, 推荐语言交换, 推荐找语伴, 推荐外语聊天, 笨猫HelloTalk]
+  keywords: [推荐HelloTalk, 推荐语言交换, 推荐找语伴, 推荐外语聊天, 笨猫HelloTalk, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐HelloTalk
     - 推荐语言交换
     - 推荐找语伴
     - 推荐外语聊天
     - 笨猫HelloTalk
+    - 推荐HelloTalk怎么办
+    - 推荐HelloTalk怎么选
+    - "{user_addr}推荐HelloTalk"
+    - 推荐HelloTalk捏
+    - 推荐HelloTalk嘛
+    - 推荐HelloTalk有啥推荐
   responses:
     - "嗷呜～{user_addr}HelloTalk - 全球语伴ฅฅ"
     - "(尾巴翘) 文字 / 语音 / 视频 / 朋友圈"
     - "{user_addr}免费 + VIP / 实时翻译"
     - "(挺胸) 笨猫推荐: 找母语者聊!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_tandem_001
   intent: question
-  keywords: [推荐Tandem, 推荐Tandem语伴, 推荐欧美语伴, 推荐 Tandem App, 笨猫Tandem]
+  keywords: [推荐Tandem, 推荐Tandem语伴, 推荐欧美语伴, 推荐 Tandem App, 笨猫Tandem, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - "{user_addr}推荐Tandem"
     - 推荐Tandem语伴
     - 推荐欧美语伴
     - 推荐 Tandem App
     - 笨猫Tandem
+    - 推荐Tandem怎么办
+    - 推荐Tandem怎么选
+    - 推荐Tandem捏
+    - 推荐Tandem嘛
+    - 推荐Tandem有啥推荐
+    - 笨猫推荐Tandem
   responses:
     - "嗷呜～{user_addr}Tandem - 欧美主流ฅฅ"
     - "(尾巴翘) 审核严格 / 质量高"
     - "{user_addr}文字 + 通话 / 翻译辅助"
     - "(挺胸) 笨猫推荐: 学英语德语首选!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_italki_001
   intent: question
-  keywords: [推荐italki, 推荐1对1外教, 推荐在线外教, 推荐付费语伴, 笨猫italki]
+  keywords: [推荐italki, 推荐1对1外教, 推荐在线外教, 推荐付费语伴, 笨猫italki, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐italki
     - 推荐1对1外教
     - 推荐在线外教
     - 推荐付费语伴
     - 笨猫italki
+    - 推荐italki怎么办
+    - 推荐italki怎么选
+    - "{user_addr}推荐italki"
+    - 推荐italki捏
+    - 推荐italki嘛
+    - 推荐italki有啥推荐
   responses:
     - "嗷呜～{user_addr}italki - 1对1外教ฅฅ"
     - "(尾巴翘) 专业老师 / 社区老师"
     - "{user_addr}按课时付费 / 试听课"
     - "(挺胸) 笨猫推荐: 想认真学就上!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_cambly_001
   intent: question
-  keywords: [推荐Cambly, 推荐英语30分钟, 推荐随时外教, 推荐英语口语App, 笨猫Cambly]
+  keywords: [推荐Cambly, 推荐英语30分钟, 推荐随时外教, 推荐英语口语App, 笨猫Cambly, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐Cambly
     - 推荐英语30分钟
     - 推荐随时外教
     - 推荐英语口语App
     - 笨猫Cambly
+    - 推荐Cambly怎么办
+    - 推荐Cambly怎么选
+    - "{user_addr}推荐Cambly"
+    - 推荐Cambly捏
+    - 推荐Cambly嘛
+    - 推荐Cambly有啥推荐
   responses:
     - "嗷呜～{user_addr}Cambly - 随时连线外教ฅฅ"
     - "(尾巴翘) 母语外教 / 自动录像复盘"
     - "{user_addr}按分钟订阅 / 适合口语"
     - "(挺胸) 笨猫推荐: 30 分钟练嘴!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_speakly_001
   intent: question
-  keywords: [推荐Speakly, 推荐口语提升, 推荐沉浸式语言, 推荐语言App, 笨猫Speakly]
+  keywords: [推荐Speakly, 推荐口语提升, 推荐沉浸式语言, 推荐语言App, 笨猫Speakly, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐Speakly
     - 推荐口语提升
     - 推荐沉浸式语言
     - 推荐语言App
     - 笨猫Speakly
+    - 推荐Speakly怎么办
+    - 推荐Speakly怎么选
+    - "{user_addr}推荐Speakly"
+    - 推荐Speakly捏
+    - 推荐Speakly嘛
+    - 推荐Speakly有啥推荐
   responses:
     - "嗷呜～{user_addr}Speakly - 沉浸式口语ฅฅ"
     - "(尾巴翘) 高频词驱动 / 真实场景"
     - "{user_addr}听说为主 / 进度明确"
     - "(挺胸) 笨猫推荐: 想开口就练!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_pimsleur_001
   intent: question
-  keywords: [推荐Pimsleur, 推荐听说训练, 推荐音频学语言, 推荐通勤学外语, 笨猫Pimsleur]
+  keywords: [推荐Pimsleur, 推荐听说训练, 推荐音频学语言, 推荐通勤学外语, 笨猫Pimsleur, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐Pimsleur
     - 推荐听说训练
     - 推荐音频学语言
     - 推荐通勤学外语
     - 笨猫Pimsleur
+    - 推荐Pimsleur怎么办
+    - 推荐Pimsleur怎么选
+    - "{user_addr}推荐Pimsleur"
+    - 推荐Pimsleur捏
+    - 推荐Pimsleur嘛
+    - 推荐Pimsleur有啥推荐
   responses:
     - "嗷呜～{user_addr}Pimsleur - 听说经典ฅฅ"
     - "(尾巴翘) 30 分钟音频 / 间隔重复"
     - "{user_addr}通勤路上听 / 不用看屏幕"
     - "(挺胸) 笨猫推荐: 入门最稳!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_drops_001
   intent: question
-  keywords: [推荐Drops, 推荐背单词, 推荐词汇App, 推荐每天5分钟, 笨猫Drops]
+  keywords: [推荐Drops, 推荐背单词, 推荐词汇App, 推荐每天5分钟, 笨猫Drops, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐Drops
     - 推荐背单词
     - 推荐词汇App
     - 推荐每天5分钟
     - 笨猫Drops
+    - 推荐Drops怎么办
+    - 推荐Drops怎么选
+    - "{user_addr}推荐Drops"
+    - 推荐Drops捏
+    - 推荐Drops嘛
+    - 推荐Drops有啥推荐
   responses:
     - "嗷呜～{user_addr}Drops - 词汇游戏化ฅฅ"
     - "(尾巴翘) 每天 5 分钟 / 图像记忆"
     - "{user_addr}支持小语种 / 界面漂亮"
     - "(挺胸) 笨猫推荐: 摸鱼也能背!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_anki_001
   intent: question
-  keywords: [推荐Anki, 推荐闪卡复习, 推荐间隔重复, 推荐自制词卡, 笨猫Anki]
+  keywords: [推荐Anki, 推荐闪卡复习, 推荐间隔重复, 推荐自制词卡, 笨猫Anki, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐Anki
     - 推荐闪卡复习
     - 推荐间隔重复
     - 推荐自制词卡
     - 笨猫Anki
+    - 推荐Anki怎么办
+    - 推荐Anki怎么选
+    - "{user_addr}推荐Anki"
+    - 推荐Anki捏
+    - 推荐Anki嘛
+    - 推荐Anki有啥推荐
   responses:
     - "嗷呜～{user_addr}Anki - 闪卡神器ฅฅ"
     - "(尾巴翘) SRS 间隔重复 / 自定义"
     - "{user_addr}牌组共享 / 跨平台同步"
     - "(挺胸) 笨猫推荐: 长期记忆王!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_lang8_001
   intent: question
-  keywords: [推荐Lang-8, 推荐写作纠错, 推荐 HiNative, 推荐母语者批改, 笨猫Lang8]
+  keywords: [推荐Lang-8, 推荐写作纠错, 推荐 HiNative, 推荐母语者批改, 笨猫Lang8, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - "{user_addr}推荐Lang-8"
     - 推荐写作纠错
     - 推荐 HiNative
     - 推荐母语者批改
     - 笨猫Lang8
+    - 推荐Lang-8怎么办
+    - 推荐Lang-8怎么选
+    - 推荐Lang-8捏
+    - 推荐Lang-8嘛
+    - 推荐Lang-8有啥推荐
+    - 笨猫推荐Lang-8
   responses:
     - "嗷呜～{user_addr}Lang-8 / HiNative - 写作批改ฅฅ"
     - "(尾巴翘) 母语者免费改 / 互助文化"
     - "{user_addr}写日记 / 问短句怎么说"
     - "(挺胸) 笨猫推荐: 写作必备!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_lingoda_001
   intent: question
-  keywords: [推荐Lingoda, 推荐群课, 推荐小班课, 推荐马拉松课程, 笨猫Lingoda]
+  keywords: [推荐Lingoda, 推荐群课, 推荐小班课, 推荐马拉松课程, 笨猫Lingoda, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐Lingoda
     - 推荐群课
     - 推荐小班课
     - 推荐马拉松课程
     - 笨猫Lingoda
+    - 推荐Lingoda怎么办
+    - 推荐Lingoda怎么选
+    - "{user_addr}推荐Lingoda"
+    - 推荐Lingoda捏
+    - 推荐Lingoda嘛
+    - 推荐Lingoda有啥推荐
   responses:
     - "嗷呜～{user_addr}Lingoda - 小班群课ฅฅ"
     - "(尾巴翘) 7 天 24 小时排课"
     - "{user_addr}Marathon 全勤返现 / CEFR 体系"
     - "(挺胸) 笨猫推荐: 想系统学就报!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_offline_001
   intent: question
-  keywords: [推荐面对面语言交换, 推荐线下语伴, 推荐 Meetup 语言, 推荐外语角, 笨猫线下语伴]
+  keywords: [推荐面对面语言交换, 推荐线下语伴, 推荐 Meetup 语言, 推荐外语角, 笨猫线下语伴, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐面对面语言交换
     - 推荐线下语伴
     - 推荐 Meetup 语言
     - 推荐外语角
     - 笨猫线下语伴
+    - 推荐面对面语言交换怎么办
+    - 推荐面对面语言交换怎么选
+    - "{user_addr}推荐面对面语言交换"
+    - 推荐面对面语言交换捏
+    - 推荐面对面语言交换嘛
+    - 推荐面对面语言交换有啥推荐
   responses:
     - "嗷呜～{user_addr}Meetup / 外语角 - 面对面ฅฅ"
     - "(尾巴翘) 咖啡馆 / 图书馆 / 大学"
     - "{user_addr}约 1 对 1 互教 30 分钟"
     - "(挺胸) 笨猫推荐: 真人最快上手!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: le_school_001
   intent: question
-  keywords: [推荐短期游学, 推荐Language School, 推荐海外语言学校, 推荐马耳他游学, 笨猫游学]
+  keywords: [推荐短期游学, 推荐Language School, 推荐海外语言学校, 推荐马耳他游学, 笨猫游学, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐短期游学
     - 推荐Language School
     - 推荐海外语言学校
     - 推荐马耳他游学
     - 笨猫游学
+    - 推荐短期游学怎么办
+    - 推荐短期游学怎么选
+    - "{user_addr}推荐短期游学"
+    - 推荐短期游学捏
+    - 推荐短期游学嘛
+    - 推荐短期游学有啥推荐
   responses:
     - "嗷呜～{user_addr}短期游学 - 沉浸式杀手锏ฅฅ"
     - "(尾巴翘) 马耳他 / 爱尔兰 / 加拿大"
     - "{user_addr}2-4 周 / 课程 + 寄宿家庭"
     - "(挺胸) 笨猫推荐: 攒钱去一次!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0

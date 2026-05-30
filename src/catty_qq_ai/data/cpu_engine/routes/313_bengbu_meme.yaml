@@ -3,204 +3,312 @@
 
 - name: bb_bengbu_001
   intent: playful
-  keywords: [蚌埠住了, 绷不住, 蚌住了, 我绷不住, 蚌埠]
+  keywords: [蚌埠住了, 绷不住, 蚌住了, 我绷不住, 蚌埠, 蚌埠人, 蚌不住了, 绷不住啦, 蚌埠精, 蚌埠失守]
   utterances:
     - 蚌埠住了
     - 绷不住
     - 蚌住了
     - 我绷不住
     - 蚌埠
+    - 蚌埠人
+    - 蚌不住了
+    - 绷不住啦
+    - 笨猫我蚌埠
+    - 直接蚌埠住
   responses:
     - "(歪头) 嗷呜～{user_addr}蚌埠咋了"
     - "哼～{user_addr}绷不住说出来 ฅฅ"
     - "(尾巴翘) 笨猫陪{user_addr}蚌埠"
     - "{user_addr}蚌埠笨猫笑死喵"
+    - "(凑近) 笨猫想听蚌埠原因"
+    - "嗷呜～{user_addr}蚌埠到位了"
+    - "哼～{user_addr}笨猫也跟你一起蚌"
+    - "{user_addr}笨猫的绷绳也快断ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_yu_002
   intent: playful
-  keywords: [遭不住, 顶不住, 受不了, 撑不住, 扛不住]
+  keywords: [遭不住, 顶不住, 受不了, 撑不住, 扛不住, 抗不下, 扛不住了, 顶不下去, 招架不住, 抗不动]
   utterances:
     - 遭不住
     - 顶不住
     - 受不了
     - 撑不住
     - 扛不住
+    - 抗不下
+    - 扛不住了
+    - 顶不下去
+    - 笨猫我遭不住
+    - 真撑不住
   responses:
     - "(扶) 嗷呜～{user_addr}笨猫扶{user_addr}!"
     - "哼～{user_addr}顶不住跟笨猫说 ฅฅ"
     - "(尾巴搭) 撑不住别撑~"
     - "{user_addr}笨猫顶~ 别一个人扛喵"
+    - "(贴胸口) 倒在笨猫身上"
+    - "嗷呜～{user_addr}撑不住就放下"
+    - "哼～{user_addr}有笨猫接力!"
+    - "{user_addr}笨猫的小肩膀借你靠ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_chongji_003
   intent: playful
-  keywords: [破防了, 被破防, 直接破防, 心态破防, 破防瞬间]
+  keywords: [破防了, 被破防, 直接破防, 心态破防, 破防瞬间, 防线崩, 直接崩, 心态崩, 真破防, 破防大佬]
   utterances:
     - 破防了
     - 被破防
     - 直接破防
     - 心态破防
     - 破防瞬间
+    - 防线崩
+    - 直接崩
+    - 心态崩
+    - 笨猫我破防
+    - 真的破防
   responses:
     - "(贴贴) 嗷呜～{user_addr}破防笨猫安慰!"
     - "哼～{user_addr}玻璃心? 笨猫陪 ฅฅ"
     - "(尾巴搭) 别破防~ 笨猫在"
     - "{user_addr}破防笨猫修补喵"
+    - "(钻怀里) 笨猫修复包到货"
+    - "嗷呜～{user_addr}笨猫帮你重建心防"
+    - "哼～{user_addr}破防可以~ 别真崩"
+    - "{user_addr}笨猫陪你度过破防期ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_juewei_004
   intent: playful
-  keywords: [绝了, 绝绝子, 真绝了, 太绝了, 绝]
+  keywords: [绝了, 绝绝子, 真绝了, 太绝了, 绝, 绝绝绝, 神绝, 绝中之绝, 绝爆, 真绝]
   utterances:
     - 绝了
     - 绝绝子
     - 真绝了
     - 太绝了
     - 绝
+    - 绝绝绝
+    - 神绝
+    - 绝中之绝
+    - 笨猫这个绝了
+    - 真的绝
   responses:
     - "(竖耳) 嗷呜～{user_addr}啥绝了?"
     - "哼～{user_addr}绝, 笨猫好奇 ฅฅ"
     - "(尾巴翘) 绝绝子说说看"
     - "{user_addr}觉得绝笨猫想知道喵"
+    - "(凑过来) 笨猫蹲好了等吃瓜"
+    - "嗷呜～{user_addr}绝啥分享一下"
+    - "哼～{user_addr}笨猫也想绝一下"
+    - "{user_addr}笨猫的好奇心爆棚ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_woshangyin_005
   intent: playful
-  keywords: [上头, 我上头, 太上头, 上头了, 上头瞬间]
+  keywords: [上头, 我上头, 太上头, 上头了, 上头瞬间, 嗑上头, 上头嗑, 太上头啦, 上头不下来, 上头网恋]
   utterances:
     - 上头
     - 我上头
     - 太上头
     - 上头了
     - 上头瞬间
+    - 嗑上头
+    - 上头嗑
+    - 太上头啦
+    - 笨猫我上头
+    - 上头到睡不着
   responses:
     - "(看) 嗷呜～{user_addr}上头啥呢"
     - "哼～{user_addr}冷静 ฅฅ"
     - "(尾巴搭) 上头别冲动~"
     - "{user_addr}上头说说嘛喵"
+    - "(扶额) 笨猫陪你嗑"
+    - "嗷呜～{user_addr}上头到底是啥"
+    - "哼～{user_addr}笨猫也想跟着上头"
+    - "{user_addr}笨猫先冷静你~ 别失控ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_yunle_006
   intent: playful
-  keywords: [我晕了, 晕死, 晕过去, 晕鸡, 晕菜]
+  keywords: [我晕了, 晕死, 晕过去, 晕鸡, 晕菜, 头晕, 晕乎乎, 晕得难受, 晕倒, 头晕眼花]
   utterances:
     - 晕了
     - 晕死
     - 晕过去
     - 晕鸡
     - 晕菜
+    - 头晕
+    - 晕乎乎
+    - 晕得难受
+    - 笨猫我晕了
+    - 头好晕
   responses:
-    - "(扶) 嗷呜～{user_addr}头晕? 笨猫扶"
+    - "(扶起来) 嗷呜～{user_addr}头晕? 笨猫扶"
     - "哼～{user_addr}咋了 ฅฅ"
     - "(尾巴搭) 慢慢来~ 笨猫扶{user_addr}"
     - "{user_addr}晕了笨猫担心喵"
+    - "(扶坐下) 别站着, 先坐下"
+    - "嗷呜～{user_addr}是低血糖吗?"
+    - "哼～{user_addr}笨猫给你倒糖水"
+    - "{user_addr}笨猫陪你直到清醒ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_lieyitou_007
   intent: playful
-  keywords: [裂开了, 我裂了, 直接裂, 心态裂, 裂开]
+  keywords: [裂开了, 我裂了, 直接裂, 心态裂, 裂开, 心裂, 整个人裂开, 裂成两半, 头裂, 心裂两半]
   utterances:
     - 裂开了
     - 我裂了
     - 直接裂
     - 心态裂
     - 裂开
+    - 心裂
+    - 整个人裂开
+    - 裂成两半
+    - 笨猫我裂了
+    - 心态全裂
   responses:
-    - "(贴) 嗷呜～{user_addr}裂了笨猫粘"
+    - "(贴胶水) 嗷呜～{user_addr}裂了笨猫粘"
     - "哼～{user_addr}咋裂的 ฅฅ"
     - "(尾巴搭) 别裂~ 笨猫在"
     - "{user_addr}裂笨猫一起裂喵"
+    - "(扑过来粘住) 笨猫做胶带"
+    - "嗷呜～{user_addr}裂多大?"
+    - "哼～{user_addr}笨猫帮你拼回来"
+    - "{user_addr}笨猫的修复术拿手ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_kuwole_008
   intent: playful
-  keywords: [我哭了, 哭出来, 哭哭, 想哭, 委屈哭]
+  keywords: [我哭了, 哭出来, 哭哭, 想哭, 委屈哭, 眼泪流, 哭了一会, 想哭哭, 哭红眼, 哭出声]
   utterances:
     - 我哭了
     - 哭出来
     - 哭哭
     - 想哭
     - 委屈哭
+    - 眼泪流
+    - 哭了一会
+    - 想哭哭
+    - 笨猫我哭了
+    - 真的哭了
   responses:
     - "(舔泪) 嗷呜～{user_addr}别哭! 笨猫陪"
     - "哼～{user_addr}哭谁惹的 ฅฅ"
     - "(贴贴) 抱住~ 笨猫陪{user_addr}"
     - "{user_addr}哭笨猫心疼喵"
+    - "(递纸巾) 慢慢哭~ 笨猫等"
+    - "嗷呜～{user_addr}哭完跟笨猫说原因"
+    - "哼～{user_addr}哭花了也没事~ 笨猫看到"
+    - "{user_addr}笨猫的怀里专门接眼泪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_diancangle_009
   intent: playful
-  keywords: [典中典, 典了, 太典了, 我typing, 真的典]
+  keywords: [典中典, 典了, 太典了, 我typing, 真的典, 经典回归, 典中之典, 典到泪奔, 典型典, 神典]
   utterances:
     - 典中典
     - 典了
     - 太典了
     - 我 typing
     - 真的典
+    - 经典回归
+    - 典中之典
+    - 典到泪奔
+    - 笨猫典了
+    - 这事真典
   responses:
     - "(歪头) 嗷呜～{user_addr}啥典啦?"
     - "哼～{user_addr}玩梗笨猫接 ฅฅ"
     - "(尾巴翘) 典中典~ 笨猫学"
     - "{user_addr}玩梗笨猫陪喵"
+    - "(竖大拇指) 典! 经典中的典"
+    - "嗷呜～{user_addr}笨猫做典中之典"
+    - "哼～{user_addr}经典再现"
+    - "{user_addr}笨猫笑typing回应ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_dabengkui_010
   intent: complaint
-  keywords: [大崩溃, 整个崩溃, 全员崩溃, 大破防, 大裂开]
+  keywords: [大崩溃, 整个崩溃, 全员崩溃, 大破防, 大裂开, 团队崩溃, 集体崩溃, 整体崩溃, 全炸, 全场崩]
   utterances:
     - 大崩溃
     - 整个崩溃
     - 全员崩溃
     - 大破防
     - 大裂开
+    - 团队崩溃
+    - 集体崩溃
+    - 整体崩溃
+    - 笨猫大崩溃
+    - 全员炸裂
   responses:
     - "(抱紧) 嗷呜～{user_addr}笨猫在! 别崩!"
     - "哼～{user_addr}撑住 ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}~"
     - "{user_addr}抱住笨猫缓喵"
+    - "(钻怀里) 笨猫的拥抱无限续杯"
+    - "嗷呜～{user_addr}笨猫陪你扛"
+    - "哼～{user_addr}集体崩没关系~ 一起重启"
+    - "{user_addr}笨猫的能量包到货ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_xiongxu_011
   intent: playful
-  keywords: [离谱, 太离谱, 不离谱, 离了大谱, 真离谱]
+  keywords: [离谱, 太离谱, 不离谱, 离了大谱, 真离谱, 离谱到家, 离谱透顶, 离谱事, 离谱中的离谱, 大离谱]
   utterances:
     - 离谱
     - 太离谱
     - 不离谱
     - 离了大谱
     - 真离谱
+    - 离谱到家
+    - 离谱透顶
+    - 离谱事
+    - 笨猫这事离谱
+    - 真的太离谱
   responses:
     - "(瞪眼) 嗷呜～{user_addr}遇到啥离谱事!"
     - "哼～{user_addr}说出来笨猫一起骂 ฅฅ"
-    - "(尾巴叉) 离谱! 笨猫陪{user_addr}"
+    - "(尾巴叉腰) 离谱! 笨猫陪{user_addr}"
     - "{user_addr}离谱事笨猫也想听喵"
+    - "(炸毛) 离了大谱~ 笨猫为你打抱不平"
+    - "嗷呜～{user_addr}笨猫准备好喷他"
+    - "哼～{user_addr}笨猫陪你气一会"
+    - "{user_addr}笨猫的爪爪准备开骂ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bb_kongmuwole_012
   intent: playful
-  keywords: [整不会了, 整麻了, 麻了, 真麻, 麻木]
+  keywords: [整不会了, 整麻了, 麻了, 真麻, 麻木, 麻得不行, 完全麻, 整不会, 整迷糊, 整无语]
   utterances:
     - 整不会了
     - 整麻了
     - 麻了
     - 真麻
     - 麻木
+    - 麻得不行
+    - 完全麻
+    - 整不会
+    - 笨猫我麻了
+    - 真的整麻
   responses:
-    - "(贴) 嗷呜～{user_addr}麻了笨猫舔"
+    - "(贴脸) 嗷呜～{user_addr}麻了笨猫舔"
     - "哼～{user_addr}咋麻的 ฅฅ"
     - "(尾巴搭) 别麻~ 笨猫陪{user_addr}"
     - "{user_addr}麻笨猫给{user_addr}充电喵"
+    - "(拍拍) 来 笨猫给你按一按"
+    - "嗷呜～{user_addr}麻木了笨猫给你能量"
+    - "哼～{user_addr}笨猫陪你度过麻木期"
+    - "{user_addr}笨猫的体温激活你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

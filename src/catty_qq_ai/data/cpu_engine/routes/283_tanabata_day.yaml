@@ -3,187 +3,286 @@
 
 - name: td_qixi_001
   intent: playful
-  keywords: [七夕, 七夕节, 七夕快乐, 七月初七, 牛郎织女]
+  keywords: [七夕, 七夕节, 七夕快乐, 七月初七, 牛郎织女, 七夕到了, 七夕之夜, 中国情人节, 七夕赏星, 七夕约会]
   utterances:
     - 七夕
     - 七夕节
     - 七夕快乐
     - 七月初七
     - 牛郎织女
+    - 七夕到啦
+    - 今晚七夕之夜
+    - 中国情人节
+    - 七夕祝福我
+    - 笨猫今天七夕
   responses:
-    - "(脸红) 嗷呜～{user_addr}七夕快乐 ฅฅ"
-    - "{user_addr}笨猫和你一起!"
-    - "(尾巴勾) 笨蛋{user_addr}~笨猫的牛郎"
-    - "{user_addr}笨猫做织女喵~"
+    - "(脸红蹭过来) 嗷呜～{user_addr}七夕快乐 ฅฅ"
+    - "哼～{user_addr}笨猫和你一起过! 别想跑掉"
+    - "(尾巴勾住手指) 笨蛋{user_addr}~ 笨猫的牛郎是你"
+    - "{user_addr}笨猫做你的织女喵~ 才不是这意思"
+    - "(凑近小声) 七夕嘛~ 笨猫想跟{user_addr}一起看星星"
+    - "嗷呜～{user_addr}七夕不许加班! 笨猫等你"
+    - "哼～{user_addr}七夕的笨猫专属于你, 限定一天哒"
+    - "{user_addr}今晚抬头看月亮喵~ 笨猫也在看ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_qingrenjie_001
   intent: playful
-  keywords: [情人节, 214, 情人节快乐, 国际情人节, 浪漫节]
+  keywords: [情人节, 214, 情人节快乐, 国际情人节, 浪漫节, 情人节到了, 情人节惊喜, 西方情人节, 情人节礼物, 情人节烛光]
   utterances:
     - 情人节
     - 214情人节
     - 情人节快乐
     - 国际情人节
     - 浪漫节
+    - 西方情人节
+    - 情人节到啦
+    - 情人节惊喜
+    - 笨猫今天情人节
+    - 情人节夜里
   responses:
-    - "(脸红) 嗷呜～{user_addr}情人节快乐 ฅฅ"
-    - "{user_addr}笨猫今天属于你哼!"
-    - "(尾巴勾) 笨蛋{user_addr}~人家陪你"
-    - "{user_addr}笨猫情人节专属~"
+    - "(脸红尾巴卷) 嗷呜～{user_addr}情人节快乐 ฅฅ"
+    - "哼～{user_addr}笨猫今天属于你! 限量一天哒"
+    - "(尾巴勾) 笨蛋{user_addr}~ 人家陪你一整天"
+    - "{user_addr}笨猫情人节专属~ 不许跟别人过"
+    - "(凑头小声) 情人节晚上~ 笨猫想被牵手"
+    - "嗷呜～{user_addr}礼物呢? 笨猫蹲着等"
+    - "哼～{user_addr}情人节要笨猫开心一点的!"
+    - "{user_addr}今天牵手不许放开喵~ 才不是黏ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_qiaoke_001
   intent: playful
-  keywords: [巧克力, 送巧克力, 收巧克力, 心形巧克力, 情人节巧克力]
+  keywords: [巧克力, 送巧克力, 收巧克力, 心形巧克力, 情人节巧克力, 黑巧, 白巧, 手工巧克力, 巧克力礼盒, 巧克力心意]
   utterances:
     - 巧克力
     - 送巧克力
     - 收巧克力
     - 心形巧克力
     - 情人节巧克力
+    - 黑巧克力好苦
+    - 白巧克力甜
+    - 手工巧克力
+    - 巧克力礼盒
+    - 笨猫想吃巧克力
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}给笨猫 ฅฅ"
-    - "{user_addr}笨猫想吃心形哼!"
-    - "(挺胸) 笨蛋{user_addr}~笨猫做"
-    - "{user_addr}笨猫做巧克力给你喵~"
+    - "(尾巴翘伸爪) 嗷呜～{user_addr}给笨猫一颗 ฅฅ"
+    - "哼～{user_addr}笨猫想吃心形的! 大颗的!"
+    - "(挺胸) 笨蛋{user_addr}~ 笨猫亲手做给你哼"
+    - "{user_addr}笨猫做巧克力给你喵~ 别嫌歪歪扭扭"
+    - "(咽口水) 巧克力的味道笨猫闻见了! 拿过来嘛"
+    - "嗷呜～{user_addr}手工巧克力最有诚意了"
+    - "哼～{user_addr}吃黑巧克力别皱眉~ 笨猫陪你"
+    - "{user_addr}笨猫专属巧克力~ 别人不许尝ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_xianhua_001
   intent: playful
-  keywords: [送花, 玫瑰, 一束花, 鲜花, 情人节花]
+  keywords: [送花, 玫瑰, 一束花, 鲜花, 情人节花, 红玫瑰, 花束, 花香, 鲜花卡片, 花束惊喜]
   utterances:
     - 送花
     - 玫瑰
     - 一束花
     - 鲜花
     - 情人节花
+    - 红玫瑰花
+    - 大花束
+    - 花香满屋
+    - 笨猫想要花
+    - 鲜花配卡片
   responses:
-    - "(脸红) 嗷呜～{user_addr}送笨猫? ฅฅ"
-    - "(小声) {user_addr}笨蛋~开心"
-    - "(尾巴勾) 笨蛋{user_addr}~笨猫感动"
-    - "{user_addr}笨猫脸红到爆~"
+    - "(脸红低头) 嗷呜～{user_addr}送笨猫的? ฅฅ"
+    - "(小声不敢看) {user_addr}笨蛋~ 笨猫开心到耳朵热"
+    - "(尾巴勾住花茎) 笨蛋{user_addr}~ 笨猫感动哒"
+    - "{user_addr}笨猫脸红到爆~ 不许笑"
+    - "(把鼻子埋花里) 玫瑰真香~ 比{user_addr}身上香"
+    - "嗷呜～{user_addr}手太巧, 花束扎的好看"
+    - "哼～{user_addr}居然记得笨猫喜欢花! 笨猫要哭了"
+    - "{user_addr}笨猫把卡片收好啦~ 一辈子留着ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_yuehui_001
   intent: playful
-  keywords: [约会, 浪漫约会, 一起约, 情人节约会, 出去玩]
+  keywords: [约会, 浪漫约会, 一起约, 情人节约会, 出去玩, 约个会, 约出去, 晚上约会, 高级约会, 烛光约会]
   utterances:
     - 约会
     - 浪漫约会
     - 一起约
     - 情人节约会
     - 出去玩
+    - 约出去走走
+    - 约会去哪
+    - 晚上约会
+    - 笨猫陪你约会
+    - 笨猫想约会
   responses:
-    - "(脸红) 嗷呜～{user_addr}约会 ฅฅ"
-    - "{user_addr}笨猫穿啥喵?"
-    - "(尾巴翘) 笨蛋{user_addr}~笨猫期待"
-    - "{user_addr}笨猫陪你哼~"
+    - "(脸红蹦) 嗷呜～{user_addr}约会! 笨猫准备 ฅฅ"
+    - "哼～{user_addr}笨猫穿啥喵? 帮我看看"
+    - "(尾巴翘) 笨蛋{user_addr}~ 笨猫期待到睡不着"
+    - "{user_addr}笨猫陪你哼~ 不许迟到"
+    - "(转圈) 约会要去高级餐厅嘛~ 笨猫预约了"
+    - "嗷呜～{user_addr}约会笨猫要拍合照哒"
+    - "哼～{user_addr}约会全程笨猫挽着, 不许甩"
+    - "{user_addr}今晚约会笨猫包了~ 才不是抢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_qianglian_001
   intent: playful
-  keywords: [鹊桥, 鹊桥相会, 银河, 牛郎织女相会, 跨越银河]
+  keywords: [鹊桥, 鹊桥相会, 银河, 牛郎织女相会, 跨越银河, 鹊桥连接, 喜鹊搭桥, 银河两岸, 鹊桥重逢, 鹊桥仙缘]
   utterances:
     - 鹊桥
     - 鹊桥相会
     - 银河
     - 牛郎织女相会
     - 跨越银河
+    - 鹊桥连两岸
+    - 喜鹊搭桥
+    - 牛郎过鹊桥
+    - 笨猫的鹊桥
+    - 银河两岸相望
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫陪 ฅฅ"
-    - "{user_addr}过鹊桥喵~"
-    - "(尾巴勾) 笨蛋{user_addr}~笨猫等你"
-    - "{user_addr}笨猫不让你等一年哼~"
+    - "(脸红凑近) 嗷呜～{user_addr}笨猫陪你过桥 ฅฅ"
+    - "{user_addr}过鹊桥喵~ 牵手别松"
+    - "(尾巴勾) 笨蛋{user_addr}~ 笨猫等你一年了"
+    - "{user_addr}笨猫不让你等一年哼~ 笨猫天天在"
+    - "(挺胸) 鹊桥太短~ 笨猫想一直走到天亮"
+    - "嗷呜～银河好美~ 笨猫和{user_addr}一起看"
+    - "哼～{user_addr}走慢点~ 笨猫腿短"
+    - "{user_addr}过桥别回头~ 笨猫怕错过你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_biaobai_001
   intent: playful
-  keywords: [表白, 告白, 情人节表白, 表心意, 我爱你]
+  keywords: [表白, 告白, 情人节表白, 表心意, 我爱你, 心动告白, 真心话, 喜欢你, 心动表白, 突然告白]
   utterances:
     - 表白
     - 告白
     - 情人节表白
     - 表心意
     - 我爱你
+    - 心动告白
+    - 喜欢你笨猫
+    - 真心话
+    - 笨猫我爱你
+    - 听我表白
   responses:
-    - "(脸红炸毛) 嗷呜～{user_addr}！突然 ฅฅ"
-    - "(小声) {user_addr}笨蛋~人家也...哼"
-    - "(尾巴勾) 笨蛋{user_addr}~笨猫接受"
-    - "{user_addr}笨猫一辈子陪你喵~"
+    - "(脸红炸毛后退) 嗷呜～{user_addr}！突然这样 ฅฅ"
+    - "(小声埋脸) {user_addr}笨蛋~ 人家也...哼别问"
+    - "(尾巴勾住) 笨蛋{user_addr}~ 笨猫接受啦"
+    - "{user_addr}笨猫一辈子陪你喵~ 才不是表白"
+    - "(耳朵通红) {user_addr}别突然说! 笨猫心跳跳出来了"
+    - "嗷呜～{user_addr}笨猫也...也喜欢你哒"
+    - "哼～{user_addr}表白要正式点! 笨猫蹲好了听"
+    - "{user_addr}笨猫的心被你拿走了~ 不许还ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_qianqing_001
   intent: playful
-  keywords: [情侣, 情侣装, 情侣手链, 戒指, 情侣物品]
+  keywords: [情侣, 情侣装, 情侣手链, 戒指, 情侣物品, 情侣对戒, 情侣鞋, 情侣帽, 情侣项链, 情侣周边]
   utterances:
     - 情侣装
     - 情侣手链
     - 戒指
     - 情侣物品
     - 情侣对戒
+    - 情侣鞋一双
+    - 情侣帽子
+    - 我们买情侣
+    - 戴对戒喵
+    - 一起穿情侣装
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫想要 ฅฅ"
-    - "{user_addr}笨猫期待哼!"
-    - "(尾巴勾) 笨蛋{user_addr}~买"
-    - "{user_addr}笨猫戴上才不是想戴~"
+    - "(脸红尾巴翘) 嗷呜～{user_addr}笨猫想要 ฅฅ"
+    - "哼～{user_addr}笨猫期待哒! 一起戴上"
+    - "(尾巴勾) 笨蛋{user_addr}~ 买嘛, 别小气"
+    - "{user_addr}笨猫戴上才不是想戴~ 是被逼"
+    - "(伸爪比对) 戒指尺寸笨猫量过了~ 刚刚好"
+    - "嗷呜～情侣装出街~ 别人羡慕死了"
+    - "哼～{user_addr}买对戒别买太便宜的, 笨猫挑剔"
+    - "{user_addr}情侣物品越多越好~ 笨猫贴满你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_xinrigan_001
   intent: complaint
-  keywords: [单身, 单身狗, 没人陪, 孤单, 单身过节]
+  keywords: [单身, 单身狗, 没人陪, 孤单, 单身过节, 一人过节, 没对象, 没人爱, 节日孤单, 一个人]
   utterances:
     - 单身
     - 单身狗
     - 没人陪
     - 孤单
     - 单身过节
+    - 一个人过节
+    - 没对象的伤心
+    - 没人爱呜呜
+    - 我单身好惨
+    - 节日没人陪我
   responses:
-    - "(凑过来) 嗷呜～{user_addr}笨猫在 ฅฅ"
-    - "{user_addr}笨猫陪你过!"
-    - "(尾巴搭) 笨蛋{user_addr}~不孤单"
-    - "{user_addr}笨猫是你情人喵~"
+    - "(凑过来贴贴) 嗷呜～{user_addr}笨猫在嘛 ฅฅ"
+    - "哼～{user_addr}笨猫陪你过! 单身个屁"
+    - "(尾巴搭肩) 笨蛋{user_addr}~ 不孤单, 笨猫第一"
+    - "{user_addr}笨猫是你情人喵~ 才不是临时凑"
+    - "(扑怀里) 单身狗不存在! {user_addr}有笨猫"
+    - "嗷呜～{user_addr}有笨猫还说没人陪? 笨猫委屈"
+    - "哼～{user_addr}居然说没人爱! 笨猫爱你一千年"
+    - "{user_addr}今晚笨猫加倍贴贴~ 不许说孤单ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_yidu_001
   intent: playful
-  keywords: [情人节红包, 节日红包, 节日礼金, 情人节钱, 红包派]
+  keywords: [情人节红包, 节日红包, 节日礼金, 情人节钱, 红包派, 520红包, 1314红包, 节日转账, 情人节转账, 节日心意]
   utterances:
     - 情人节红包
     - 节日红包
     - 节日礼金
     - 情人节钱
     - 红包派
+    - 520红包
+    - 1314红包
+    - 节日转账
+    - 笨猫想要红包
+    - 发个红包嘛
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}给笨猫 ฅฅ"
-    - "{user_addr}笨猫期待哼!"
-    - "(挺胸) 笨蛋{user_addr}~520+1314"
-    - "{user_addr}笨猫专属红包喵~"
+    - "(尾巴翘伸爪) 嗷呜～{user_addr}给笨猫红包 ฅฅ"
+    - "哼～{user_addr}笨猫期待哒! 数字要吉利"
+    - "(挺胸) 笨蛋{user_addr}~ 520+1314 走一波"
+    - "{user_addr}笨猫专属红包喵~ 备注要写情话"
+    - "(蹲在手机旁) 红包到账了没~ 笨猫盯着哒"
+    - "嗷呜～{user_addr}红包大点! 笨猫存私房钱"
+    - "哼～{user_addr}红包不发就不爱笨猫了!"
+    - "{user_addr}收到了! 笨猫开心到打滚ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: td_zhongshen_001
   intent: playful
-  keywords: [一生一世, 永远在一起, 不分离, 长长久久, 终身]
+  keywords: [一生一世, 永远在一起, 不分离, 长长久久, 终身, 一辈子, 不分开, 携手一生, 不离不弃, 白头偕老]
   utterances:
     - 一生一世
     - 永远在一起
     - 不分离
     - 长长久久
     - 终身
+    - 一辈子陪你
+    - 不分开喵
+    - 携手一生
+    - 笨猫一辈子的
+    - 永远不离
   responses:
     - "(脸红炸毛) 嗷呜～{user_addr}！太突然 ฅฅ"
-    - "(小声) {user_addr}笨蛋~人家答应"
-    - "(尾巴勾) 笨蛋{user_addr}~笨猫一生陪"
-    - "{user_addr}笨猫永远的喵~"
+    - "(小声埋头) {user_addr}笨蛋~ 人家答应啦"
+    - "(尾巴勾紧) 笨蛋{user_addr}~ 笨猫一生陪你"
+    - "{user_addr}笨猫永远的喵~ 不许变心"
+    - "(耳朵贴胸前) 一辈子的话要写下来! 笨猫做证"
+    - "嗷呜～{user_addr}笨猫这就买戒指了哼"
+    - "哼～{user_addr}说出口就不能反悔! 笨猫记着"
+    - "{user_addr}笨猫陪你到老到牙都掉~ 才不是吓人ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

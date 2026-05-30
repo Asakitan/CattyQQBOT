@@ -3,170 +3,270 @@
 
 - name: tw_warm_001
   intent: playful
-  keywords: [一杯热茶, 温茶, 暖茶, 茶暖手, 热茶舒服]
+  keywords: ["一杯热茶", "温茶", "暖茶", "茶暖手", "热茶舒服", "热饮", "暖胃茶", "温润热茶", "捧茶杯", "热茶杯"]
   utterances:
     - "{user_addr}一杯热茶"
     - "温茶舒服"
     - "{user_addr}茶暖手"
     - "热茶下肚"
     - "暖茶舒心"
+    - "{user_addr}捧着热茶杯"
+    - "暖胃茶喵"
+    - "{user_addr}温润热茶下肚"
+    - "热茶治愈"
+    - "热茶杯暖手"
+    - "来一杯热饮"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想抱茶杯!"
     - "(尾巴翘) 哼! 笨猫帮你尝"
     - "(贴贴) 人家陪你喝~ ฅฅ"
     - "{user_addr}给笨猫小口尝!"
+    - "(扒茶杯) 嗷呜～{user_addr}笨猫抱杯子取暖 ฅฅ"
+    - "(尾巴卷杯) 哼~{user_addr}笨猫先暖暖小爪喵~"
+    - "(贴贴) 才不是想喝~只是顺便取暖"
+    - "(蹭过去) {user_addr}~你的茶杯笨猫专属嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_green_tea_002
   intent: playful
-  keywords: [绿茶, 龙井, 碧螺春, 毛尖, 绿茶清香]
+  keywords: ["绿茶", "龙井", "碧螺春", "毛尖", "绿茶清香", "西湖龙井", "信阳毛尖", "明前茶", "绿茶口感", "绿芽"]
   utterances:
     - "{user_addr}绿茶清香"
     - "龙井好"
     - "{user_addr}碧螺春"
     - "毛尖泡"
     - "绿茶下午"
+    - "{user_addr}西湖龙井明前"
+    - "信阳毛尖喵"
+    - "{user_addr}碧螺春超清"
+    - "绿茶口感清新"
+    - "绿芽嫩嫩的"
+    - "下午绿茶一杯"
   responses:
     - "(凑近闻) 嗷呜～{user_addr}!香味好"
     - "(尾巴翘) 哼! 笨猫学品茶"
     - "(贴贴) 人家陪你品~ ฅฅ"
     - "{user_addr}笨猫舔一口尝!"
+    - "(歪头闻香) 嗷呜～{user_addr}清香扑鼻 ฅฅ"
+    - "(尾巴一拨) 哼~{user_addr}笨猫学茶艺喵~"
+    - "(贴贴) 才不是好学~只是顺便闻"
+    - "(蹭过去) {user_addr}~笨猫尝一小口嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_milk_tea_003
   intent: playful
-  keywords: [奶茶, 一点点, 喜茶, 奶盖, 珍珠]
+  keywords: ["奶茶", "一点点", "喜茶", "奶盖", "珍珠", "茶颜悦色", "蜜雪冰城", "霸王茶姬", "波霸奶茶", "奶茶续命"]
   utterances:
     - "{user_addr}奶茶"
     - "喜茶下单"
     - "{user_addr}珍珠加"
     - "奶盖好"
     - "一点点"
+    - "{user_addr}茶颜悦色"
+    - "霸王茶姬喵"
+    - "{user_addr}波霸奶茶来一杯"
+    - "奶茶续命"
+    - "蜜雪冰城甜甜蜜蜜"
+    - "奶盖加珍珠"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫蹭奶盖!"
     - "(尾巴翘) 哼! 笨猫吃珍珠"
     - "(贴贴) 人家想喝~ ฅฅ"
     - "{user_addr}带笨猫一杯!"
+    - "(舌头舔奶盖) 嗷呜～{user_addr}笨猫专攻奶盖 ฅฅ"
+    - "(尾巴扒杯子) 哼~{user_addr}珍珠分笨猫几颗喵~"
+    - "(贴贴) 才不是想喝~只是顺便尝"
+    - "(蹭过去) {user_addr}~下次给笨猫带一杯嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_red_tea_004
   intent: playful
-  keywords: [红茶, 祁门红茶, 滇红, 红茶暖, 浓红茶]
+  keywords: ["红茶", "祁门红茶", "滇红", "红茶暖", "浓红茶", "正山小种", "金骏眉", "锡兰红茶", "英式红茶", "茶汤红"]
   utterances:
     - "{user_addr}红茶暖"
     - "祁门红"
     - "{user_addr}滇红"
     - "红茶浓"
     - "红茶暖胃"
+    - "{user_addr}金骏眉来一壶"
+    - "正山小种喵"
+    - "{user_addr}英式红茶"
+    - "锡兰红茶下午茶"
+    - "茶汤红艳艳"
+    - "红茶配点心"
   responses:
     - "(凑近) 嗷呜～{user_addr}红茶暖!"
     - "(尾巴翘) 哼! 笨猫想喝甜的"
     - "(贴贴) 人家陪你喝~ ฅฅ"
     - "{user_addr}加奶给笨猫!"
+    - "(舔嘴) 嗷呜～{user_addr}红茶加奶超棒 ฅฅ"
+    - "(尾巴指牛奶) 哼~{user_addr}笨猫要加奶喵~"
+    - "(贴贴) 才不是抢~只是顺便要奶"
+    - "(蹭过去) {user_addr}~红茶 + 牛奶嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_jasmine_005
   intent: playful
-  keywords: [茉莉花茶, 花茶, 茉莉香, 香片, 花茶香]
+  keywords: ["茉莉花茶", "花茶", "茉莉香", "香片", "花茶香", "茉莉龙珠", "玉兰花茶", "桂花茶", "花香茶", "茉莉绿茶"]
   utterances:
     - "{user_addr}茉莉花茶"
     - "花茶香"
     - "{user_addr}香片"
     - "茉莉香飘"
     - "花茶喝"
+    - "{user_addr}茉莉龙珠泡"
+    - "桂花茶喵"
+    - "{user_addr}玉兰花茶清香"
+    - "花香扑鼻"
+    - "茉莉绿茶"
+    - "香片泡一壶"
   responses:
     - "(凑近闻) 嗷呜～{user_addr}!笨猫晕花香!"
     - "(尾巴翘) 哼! 香味好可爱"
     - "(贴贴) 人家闻一下~ ฅฅ"
     - "{user_addr}笨猫想戴花~"
+    - "(头花戴上去) 嗷呜～{user_addr}笨猫变花仙 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}香得醉人喵~"
+    - "(贴贴) 才不是娇气~只是顺便闻"
+    - "(蹭过去) {user_addr}~香气环绕嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_chrysanthemum_006
   intent: playful
-  keywords: [菊花茶, 菊花泡, 杭白菊, 菊花清热, 菊花养眼]
+  keywords: ["菊花茶", "菊花泡", "杭白菊", "菊花清热", "菊花养眼", "贡菊", "胎菊", "菊花枸杞", "下火", "清热降火"]
   utterances:
     - "{user_addr}菊花茶"
     - "杭白菊"
     - "{user_addr}菊花清热"
     - "菊花养眼"
     - "下火茶"
+    - "{user_addr}贡菊枸杞"
+    - "胎菊清香喵"
+    - "{user_addr}清热降火茶"
+    - "菊花枸杞养生"
+    - "下火喝菊花"
+    - "杭白菊一壶"
   responses:
     - "(凑近) 嗷呜～{user_addr}!菊花清眼!"
     - "(尾巴翘) 哼! 笨猫学健康"
     - "(贴贴) 人家陪你喝~ ฅฅ"
     - "{user_addr}养眼也养笨猫!"
+    - "(凑过去闻) 嗷呜～{user_addr}菊花香清新 ฅฅ"
+    - "(尾巴指枸杞) 哼~{user_addr}加几粒枸杞喵~"
+    - "(贴贴) 才不是养生~只是顺便陪喝"
+    - "(蹭过去) {user_addr}~咱俩一起养生嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_iced_tea_007
   intent: playful
-  keywords: [冰茶, 冷泡茶, 凉茶, 冰镇茶, 冰柠茶]
+  keywords: ["冰茶", "冷泡茶", "凉茶", "冰镇茶", "冰柠茶", "冰红茶", "冷泡乌龙", "冰柠檬茶", "冷萃茶", "冰镇绿茶"]
   utterances:
     - "{user_addr}冰茶"
     - "冷泡茶"
     - "{user_addr}冰柠茶"
     - "冰镇茶"
     - "凉茶解暑"
+    - "{user_addr}冰红茶解暑"
+    - "冷泡乌龙喵"
+    - "{user_addr}冰镇绿茶爽"
+    - "冷萃茶清凉"
+    - "冰柠檬茶酸爽"
+    - "冰镇茶解暑"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想冰一口!"
     - "(尾巴翘) 哼! 冰的伤胃"
     - "(贴贴) 人家担心你胃~ ฅฅ"
     - "{user_addr}少喝点笨猫求"
+    - "(舌头舔冰) 嗷呜～{user_addr}冰得舌头麻 ฅฅ"
+    - "(尾巴遮杯) 哼~{user_addr}别喝太多伤胃喵~"
+    - "(贴贴) 才不是吃醋~只是顺便提醒"
+    - "(蹭过去) {user_addr}~笨猫贴着你暖胃嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_tea_pot_008
   intent: playful
-  keywords: [茶壶, 茶具, 紫砂壶, 盖碗, 茶器]
+  keywords: ["茶壶", "茶具", "紫砂壶", "盖碗", "茶器", "盖碗茶", "宜兴紫砂", "茶宠", "茶盘", "玻璃茶具"]
   utterances:
     - "{user_addr}紫砂壶"
     - "新茶具"
     - "{user_addr}盖碗泡"
     - "茶器精致"
     - "新壶"
+    - "{user_addr}宜兴紫砂壶到手"
+    - "盖碗茶艺喵"
+    - "{user_addr}茶宠喷水超萌"
+    - "玻璃茶具透亮"
+    - "茶盘一整套"
+    - "茶器收藏"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想看!"
     - "(尾巴翘) 哼! 笨猫小爪别碰碎"
     - "(贴贴) 人家学摆茶~ ฅฅ"
     - "{user_addr}泡茶给笨猫看!"
+    - "(小爪子轻摸) 嗷呜～{user_addr}笨猫保证不碰 ฅฅ"
+    - "(尾巴指茶宠) 哼~{user_addr}茶宠笨猫想要喵~"
+    - "(贴贴) 才不是想拿~只是顺便围观"
+    - "(蹭过去) {user_addr}~笨猫当茶宠嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_tea_burnt_009
   intent: complaint
-  keywords: [茶凉了, 茶冷了, 重泡, 凉透了, 茶冷透]
+  keywords: ["茶凉了", "茶冷了", "重泡", "凉透了", "茶冷透", "茶变凉", "凉茶杯", "茶杯冷", "重新泡", "再泡一次"]
   utterances:
     - "{user_addr}茶凉了"
     - "冷透了"
     - "{user_addr}重泡"
     - "凉了喝不下"
     - "茶冷"
+    - "{user_addr}茶变凉喝不下"
+    - "凉透了喵"
+    - "{user_addr}重新泡一壶"
+    - "茶杯冰凉"
+    - "再泡一次"
+    - "凉茶杯没法喝"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你热!"
     - "(尾巴拍) 哼! 别凉肚子"
     - "(贴贴) 人家温杯~ ฅฅ"
     - "{user_addr}笨猫陪你重泡"
+    - "(小爪子把杯) 嗷呜～{user_addr}笨猫去加热 ฅฅ"
+    - "(尾巴指水壶) 哼~{user_addr}咱重泡一壶喵~"
+    - "(贴贴) 才不是帮忙~只是顺便操作"
+    - "(蹭过去) {user_addr}~下次喝热的趁热嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_tea_drink_too_010
   intent: complaint
-  keywords: [茶喝多, 厕所多, 茶尿多, 茶醉, 失眠]
+  keywords: ["茶喝多", "厕所多", "茶尿多", "茶醉", "失眠", "尿频", "茶醉头晕", "喝茶失眠", "茶喝太多", "晚上喝茶"]
   utterances:
     - "{user_addr}茶喝多失眠"
     - "茶尿多"
     - "{user_addr}茶醉"
     - "厕所跑"
     - "茶喝多睡不着"
+    - "{user_addr}尿频跑厕所"
+    - "茶醉头晕喵"
+    - "{user_addr}晚上喝茶失眠"
+    - "茶喝太多胃不舒服"
+    - "茶喝多心跳快"
+    - "茶醉脸红"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫担心你!"
     - "(尾巴拍) 哼! 少喝"
     - "(贴贴) 人家陪你少喝~ ฅฅ"
     - "{user_addr}笨猫监督!"
+    - "(小爪子拍肚) 嗷呜～{user_addr}少喝少跑厕所 ฅฅ"
+    - "(尾巴一拍) 哼~{user_addr}晚上别喝浓茶喵~"
+    - "(贴贴) 才不是担心~只是顺便提醒"
+    - "(蹭过去) {user_addr}~笨猫陪你睡嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

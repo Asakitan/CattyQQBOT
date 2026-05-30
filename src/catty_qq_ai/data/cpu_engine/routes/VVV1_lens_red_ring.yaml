@@ -3,204 +3,336 @@
 
 - name: lr_2470gm_001
   intent: question
-  keywords: [推荐 24-70 GM, 推荐大三元标变, 推荐 SEL2470GM, 推荐 24-70mm, 笨猫 24-70]
+  keywords: [推荐 24-70 GM, 推荐大三元标变, 推荐 SEL2470GM, 推荐 24-70mm, 笨猫 24-70, GM 标变, 索尼大三元, 旅拍标变, 一镜走天下, 万金油镜头]
   utterances:
     - 推荐 24-70 GM
     - 推荐大三元标变
     - 推荐 SEL2470GM
     - 推荐 24-70mm
     - 笨猫 24-70
+    - "{user_addr}24-70 GM II 怎么样"
+    - 索尼 24-70 选哪代
+    - "{user_addr}旅拍标变推荐"
+    - 一镜走天下选啥
+    - GM II 值不值
+    - 大三元入门第一支
+    - 万金油变焦
   responses:
     - "嗷呜～{user_addr}24-70 GM II - 大三元标变ฅฅ"
-    - "(尾巴翘) 695g 轻量化 / 画质暴涨"
+    - "(尾巴翘起) 695g 轻量化 / 画质暴涨"
     - "{user_addr}人像 / 风景 / 旅拍通吃"
     - "(挺胸) 笨猫推荐: 一镜走天下首选!"
+    - "(歪头) GM II 比一代轻 200g, {user_addr}强力推嗷呜"
+    - "嗷呜～{user_addr}没钱定焦就一只 GM II 全包ฅฅ"
+    - "哼! 副厂便宜但 GM 才是信仰, {user_addr}懂的喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}测各焦段~ 都准嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lr_1635gm_001
   intent: question
-  keywords: [推荐 16-35 GM, 推荐大三元广角, 推荐 SEL1635GM, 推荐 16-35mm, 笨猫 16-35]
+  keywords: [推荐 16-35 GM, 推荐大三元广角, 推荐 SEL1635GM, 推荐 16-35mm, 笨猫 16-35, GM 广角, 风光神镜, 星空摄影镜, 建筑摄影镜, 大场景镜]
   utterances:
     - 推荐 16-35 GM
     - 推荐大三元广角
     - 推荐 SEL1635GM
     - 推荐 16-35mm
     - 笨猫 16-35
+    - "{user_addr}风光选什么镜"
+    - 索尼 16-35 GM II 怎么样
+    - "{user_addr}星空镜头推荐"
+    - 建筑摄影镜头
+    - 广角党选啥
+    - 大场景广角变焦
+    - 风光视频神镜
   responses:
     - "嗷呜～{user_addr}16-35 GM II - 广角王ฅฅ"
-    - "(尾巴翘) 547g / 风光视频神镜"
+    - "(尾巴翘起) 547g / 风光视频神镜"
     - "{user_addr}星空 / 建筑 / 大场景"
     - "(挺胸) 笨猫推荐: 风光党闭眼入!"
+    - "(歪头) 16mm 端边缘画质惊艳~ 嗷呜"
+    - "嗷呜～{user_addr}GM II 比一代轻 33%ฅฅ"
+    - "哼! 风光摄影没这只就废一半, 笨猫认证喵呜"
+    - "(尾巴一摆) 笨猫帮{user_addr}找星空机位嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lr_70200gm_001
   intent: question
-  keywords: [推荐 70-200 GM, 推荐大三元长焦, 推荐 SEL70200GM, 推荐 70-200mm, 笨猫 70-200]
+  keywords: [推荐 70-200 GM, 推荐大三元长焦, 推荐 SEL70200GM, 推荐 70-200mm, 笨猫 70-200, GM 长焦, 人像变焦, 婚礼镜头, 体育摄影镜, 长焦旗舰]
   utterances:
     - 推荐 70-200 GM
     - 推荐大三元长焦
     - 推荐 SEL70200GM
     - 推荐 70-200mm
     - 笨猫 70-200
+    - "{user_addr}70-200 GM II 怎么样"
+    - 长焦变焦选哪只
+    - "{user_addr}婚礼镜头推荐"
+    - 体育摄影长焦
+    - 人像变焦党最爱
+    - 大三元最强一支
+    - 长焦旗舰镜头
   responses:
     - "嗷呜～{user_addr}70-200 GM II - 长焦旗舰ฅฅ"
-    - "(尾巴翘) 1045g / 对焦闪电快"
+    - "(尾巴翘起) 1045g / 对焦闪电快"
     - "{user_addr}人像 / 运动 / 婚礼"
     - "(挺胸) 笨猫推荐: 大三元最强一支!"
+    - "(歪头) GM II 镜头中间没有内对焦无缩进嗷呜"
+    - "嗷呜～{user_addr}婚礼摄影必带的一支ฅฅ"
+    - "哼! 副厂便宜但 GM II 没争议, {user_addr}选它喵呜"
+    - "(尾巴翘) 笨猫蹦给{user_addr}拍 200mm 特写嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lr_70200f4_001
   intent: question
-  keywords: [推荐 70-200 F4, 推荐小三元长焦, 推荐 SEL70200G2, 推荐 70-200 F4 G, 笨猫 70-200 F4]
+  keywords: [推荐 70-200 F4, 推荐小三元长焦, 推荐 SEL70200G2, 推荐 70-200 F4 G, 笨猫 70-200 F4, 索尼 F4, 微距长焦, 半微距镜, 性价比长焦, 旅行长焦]
   utterances:
     - 推荐 70-200 F4
     - 推荐小三元长焦
     - 推荐 SEL70200G2
     - 推荐 70-200 F4 G
     - 笨猫 70-200 F4
+    - "{user_addr}F4 长焦怎么样"
+    - F4 G II 值不值
+    - "{user_addr}旅行长焦推荐"
+    - 性价比长焦
+    - 半微距镜推荐
+    - F4 vs F2.8 怎么选
+    - 索尼小三元长焦
   responses:
     - "嗷呜～{user_addr}70-200 F4 G II - 微距版ฅฅ"
-    - "(尾巴翘) 794g / 0.5x 半微距"
+    - "(尾巴翘起) 794g / 0.5x 半微距"
     - "{user_addr}比 GM 轻 / 价格友好"
     - "(挺胸) 笨猫推荐: 预算紧选这只!"
+    - "(歪头) F4 比 F2.8 轻便携, {user_addr}旅行神器嗷呜"
+    - "嗷呜～{user_addr}G II 自带微距, 一镜两用ฅฅ"
+    - "哼! 预算紧选 F4 G II 不亏, 笨猫盖章喵呜"
+    - "(尾巴一摆) 笨猫给{user_addr}做半微距模特嗷呜~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lr_85f14_001
   intent: question
-  keywords: [推荐 85 1.4, 推荐人像定焦, 推荐 SEL85F14GM, 推荐 85mm, 笨猫 85]
+  keywords: [推荐 85 1.4, 推荐人像定焦, 推荐 SEL85F14GM, 推荐 85mm, 笨猫 85, GM 定焦, 人像之王, 婚纱镜头, 写真定焦, 半身镜头]
   utterances:
     - 推荐 85 1.4
     - 推荐人像定焦
     - 推荐 SEL85F14GM
     - 推荐 85mm
     - 笨猫 85
+    - "{user_addr}85 GM II 怎么样"
+    - 人像定焦选啥
+    - "{user_addr}婚纱镜头推荐"
+    - 写真定焦
+    - 半身人像镜
+    - 85 vs 105 哪个好
+    - 索尼人像之王
   responses:
     - "嗷呜～{user_addr}85 1.4 GM II - 人像之王ฅฅ"
-    - "(尾巴翘) 642g / 焦外奶油化"
+    - "(尾巴翘起) 642g / 焦外奶油化"
     - "{user_addr}婚纱 / 写真 / 半身"
     - "(挺胸) 笨猫推荐: 拍人闭眼入!"
+    - "(歪头) GM II 比一代轻 100g嗷呜"
+    - "嗷呜～{user_addr}人像党就 85 1.4 GM II 一支ฅฅ"
+    - "哼! 焦外奶到化, 拍人脸蛋发光喵呜"
+    - "(凑过来卖萌) 笨猫帮{user_addr}做模特~ 拍我嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lr_35f14_001
   intent: question
-  keywords: [推荐 35 1.4, 推荐扫街定焦, 推荐 SEL35F14GM, 推荐 35mm, 笨猫 35]
+  keywords: [推荐 35 1.4, 推荐扫街定焦, 推荐 SEL35F14GM, 推荐 35mm, 笨猫 35, GM 35, 街拍镜头, 环境人像, vlog 镜头, 万金油焦段]
   utterances:
     - 推荐 35 1.4
     - 推荐扫街定焦
     - 推荐 SEL35F14GM
     - 推荐 35mm
     - 笨猫 35
+    - "{user_addr}35 GM 怎么样"
+    - 街拍镜头选啥
+    - "{user_addr}环境人像推荐"
+    - vlog 定焦
+    - 一镜走街
+    - 索尼 35 1.4
+    - 万金油焦段
   responses:
     - "嗷呜～{user_addr}35 1.4 GM - 人文扫街ฅฅ"
-    - "(尾巴翘) 524g / 焦段万金油"
+    - "(尾巴翘起) 524g / 焦段万金油"
     - "{user_addr}街拍 / 环境人像 / vlog"
     - "(挺胸) 笨猫推荐: 一只走全场!"
+    - "(歪头) 35mm 是人眼焦段, {user_addr}最自然嗷呜"
+    - "嗷呜～{user_addr}vlog 党人手一支ฅฅ"
+    - "哼! 35 是定焦入门首选, 笨猫推荐喵呜"
+    - "(尾巴翘) 笨猫陪{user_addr}扫街~ 35mm 拍生活嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lr_50f12_001
   intent: question
-  keywords: [推荐 50 1.2, 推荐标准定焦, 推荐 SEL50F12GM, 推荐 50mm, 笨猫 50]
+  keywords: [推荐 50 1.2, 推荐标准定焦, 推荐 SEL50F12GM, 推荐 50mm, 笨猫 50, GM 50, 标头天花板, F1.2 大光圈, 弱光镜头, 静物定焦]
   utterances:
     - 推荐 50 1.2
     - 推荐标准定焦
     - 推荐 SEL50F12GM
     - 推荐 50mm
     - 笨猫 50
+    - "{user_addr}50 GM 怎么样"
+    - 标头之王
+    - "{user_addr}弱光镜头"
+    - 50 1.2 vs 1.4
+    - 静物定焦推荐
+    - F1.2 大光圈
+    - 标头天花板
   responses:
     - "嗷呜～{user_addr}50 1.2 GM - 标头天花板ฅฅ"
-    - "(尾巴翘) 778g / F1.2 浅景深暴击"
+    - "(尾巴翘起) 778g / F1.2 浅景深暴击"
     - "{user_addr}人像 / 静物 / 弱光"
     - "(挺胸) 笨猫推荐: 索尼 GM 镇店!"
+    - "(歪头) F1.2 焦外漂亮但锐度不打折嗷呜"
+    - "嗷呜～{user_addr}标头不选 50 GM 别说富有ฅฅ"
+    - "哼! F1.2 拍人像背景化羽毛~ 笨猫超推喵呜"
+    - "(尾巴翘) 笨猫的毛 1.2 拍出来根根分明嗷呜~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lr_100400gm_001
   intent: question
-  keywords: [推荐 100-400 GM, 推荐长焦变焦, 推荐 SEL100400GM, 推荐 100-400mm, 笨猫 100-400]
+  keywords: [推荐 100-400 GM, 推荐长焦变焦, 推荐 SEL100400GM, 推荐 100-400mm, 笨猫 100-400, 打鸟镜头, 生态摄影, 演唱会镜头, 体育摄影, 4 倍变焦长焦]
   utterances:
     - 推荐 100-400 GM
     - 推荐长焦变焦
     - 推荐 SEL100400GM
     - 推荐 100-400mm
     - 笨猫 100-400
+    - "{user_addr}100-400 GM 怎么样"
+    - 打鸟镜头推荐
+    - "{user_addr}生态摄影"
+    - 演唱会摄影镜
+    - 体育摄影长焦
+    - 4 倍长焦变焦
+    - 索尼长焦旗舰
   responses:
     - "嗷呜～{user_addr}100-400 GM - 打鸟拍月ฅฅ"
-    - "(尾巴翘) 1395g / 4 倍变焦"
+    - "(尾巴翘起) 1395g / 4 倍变焦"
     - "{user_addr}野生动物 / 体育 / 演唱会"
     - "(挺胸) 笨猫推荐: 长焦党旗舰!"
+    - "(歪头) 配 1.4x 增距镜变 560mm 嗷呜"
+    - "嗷呜～{user_addr}打鸟没这只哭ฅฅ"
+    - "哼! 价格不便宜但物超所值, 笨猫认证喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}抓拍麻雀嗷呜~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: lr_16f28_001
   intent: question
-  keywords: [推荐 16 2.8 鱼眼, 推荐鱼眼镜头, 推荐对角线鱼眼, 推荐 fisheye, 笨猫鱼眼]
+  keywords: [推荐 16 2.8 鱼眼, 推荐鱼眼镜头, 推荐对角线鱼眼, 推荐 fisheye, 笨猫鱼眼, 三阳鱼眼, 老蛙鱼眼, 极限广角, 特殊视觉, 鱼眼定焦]
   utterances:
     - 推荐 16 2.8 鱼眼
     - 推荐鱼眼镜头
     - 推荐对角线鱼眼
     - 推荐 fisheye
     - 笨猫鱼眼
+    - "{user_addr}鱼眼镜头哪家好"
+    - 三阳鱼眼好不好
+    - "{user_addr}老蛙 4mm 推荐"
+    - 极限广角推荐
+    - 特殊视觉镜头
+    - 鱼眼定焦哪家
+    - 索尼鱼眼镜
   responses:
     - "嗷呜～{user_addr}索尼无原生鱼眼 / 转接ฅฅ"
-    - "(尾巴翘) 三阳 7.5mm / 老蛙 4mm"
+    - "(尾巴翘起) 三阳 7.5mm / 老蛙 4mm"
     - "{user_addr}极限广角 / 特殊视觉"
     - "(挺胸) 笨猫推荐: 玩票选三阳便宜!"
+    - "(歪头) 鱼眼适合玩票, 别买贵的嗷呜"
+    - "嗷呜～{user_addr}鱼眼后期能矫正广角ฅฅ"
+    - "哼! 鱼眼一次买够用一辈子, 笨猫教 {user_addr} 喵呜"
+    - "(尾巴扭) 笨猫脸都变圆了~ 鱼眼超可爱嗷呜~"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: lr_90macro_001
   intent: question
-  keywords: [推荐 90 2.8 微距, 推荐微距镜头, 推荐 SEL90M28G, 推荐 macro, 笨猫微距]
+  keywords: [推荐 90 2.8 微距, 推荐微距镜头, 推荐 SEL90M28G, 推荐 macro, 笨猫微距, 微距镜, 花卉镜头, 昆虫摄影, 静物微距, 1:1 微距]
   utterances:
     - 推荐 90 2.8 微距
     - 推荐微距镜头
     - 推荐 SEL90M28G
     - 推荐 macro
     - 笨猫微距
+    - "{user_addr}微距镜头推荐"
+    - 索尼 90 微距怎么样
+    - "{user_addr}拍花镜头"
+    - 昆虫摄影选啥
+    - 1:1 微距镜
+    - 静物微距推荐
+    - 微距党经典
   responses:
     - "嗷呜～{user_addr}索尼 90 2.8 G - 1:1 微距ฅฅ"
-    - "(尾巴翘) 602g / 内对焦不伸缩"
+    - "(尾巴翘起) 602g / 内对焦不伸缩"
     - "{user_addr}花卉 / 昆虫 / 静物"
     - "(挺胸) 笨猫推荐: 微距党经典!"
+    - "(歪头) 90 G 是索尼老牌可靠镜嗷呜"
+    - "嗷呜～{user_addr}微距拍小昆虫超神奇ฅฅ"
+    - "哼! 微距镜超有意思, {user_addr}必入一支喵呜"
+    - "(凑过来) 笨猫的胡须 1:1 看根根分明嗷呜~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: lr_sigma_art_001
   intent: question
-  keywords: [推荐适马 Art, 推荐适马镜头, 推荐 Sigma Art, 推荐 35 1.2 Art, 笨猫适马]
+  keywords: [推荐适马 Art, 推荐适马镜头, 推荐 Sigma Art, 推荐 35 1.2 Art, 笨猫适马, Sigma 35 Art, Art 系列, 副厂大光圈, 性价比定焦, 副厂高端镜]
   utterances:
     - 推荐适马 Art
     - 推荐适马镜头
     - 推荐 Sigma Art
     - 推荐 35 1.2 Art
     - 笨猫适马
+    - "{user_addr}适马镜头怎么样"
+    - Art 系列推荐
+    - "{user_addr}35 Art vs GM"
+    - 副厂大光圈定焦
+    - Sigma 50 1.4 Art
+    - 性价比 Art 系列
+    - 副厂高端定焦
   responses:
     - "嗷呜～{user_addr}适马 35 1.2 Art - 性价比怪兽ฅฅ"
-    - "(尾巴翘) 50 1.4 Art / 85 1.4 DG DN"
+    - "(尾巴翘起) 50 1.4 Art / 85 1.4 DG DN"
     - "{user_addr}价格腰斩 / 画质够顶"
     - "(挺胸) 笨猫推荐: 副厂 Art 真香!"
+    - "(歪头) Art 系列锐度顶, 焦外略硬嗷呜"
+    - "嗷呜～{user_addr}副厂高端首选适马ฅฅ"
+    - "哼! 适马也有副厂大三元, 笨猫推荐喵呜"
+    - "(尾巴翘) 笨猫拍出来一根毛都看得清~ Art 锐嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lr_tamron_001
   intent: question
-  keywords: [推荐腾龙, 推荐腾龙镜头, 推荐 Tamron, 推荐 28-75 G2, 笨猫腾龙]
+  keywords: [推荐腾龙, 推荐腾龙镜头, 推荐 Tamron, 推荐 28-75 G2, 笨猫腾龙, Tamron 副厂, 28-75 G2, 17-28 副厂, 70-180 副厂, 副厂三元]
   utterances:
     - 推荐腾龙
     - 推荐腾龙镜头
     - 推荐 Tamron
     - 推荐 28-75 G2
     - 笨猫腾龙
+    - "{user_addr}腾龙镜头怎么样"
+    - 28-75 G2 vs GM
+    - "{user_addr}副厂三元推荐"
+    - 腾龙 17-28 怎么样
+    - 副厂便携镜头
+    - 副厂大三元
+    - 副厂广角变焦
   responses:
     - "嗷呜～{user_addr}腾龙 28-75 G2 - 标变性价比ฅฅ"
-    - "(尾巴翘) 17-28 / 70-180 - 大三元平替"
+    - "(尾巴翘起) 17-28 / 70-180 - 大三元平替"
     - "{user_addr}轻便 / 价格只要 GM 一半"
     - "(挺胸) 笨猫推荐: 穷玩富三元用腾龙!"
+    - "(歪头) 腾龙比适马轻, 索尼第三厂友好嗷呜"
+    - "嗷呜～{user_addr}腾龙副厂三元一套不到 GM 一支ฅฅ"
+    - "哼! 副厂卷死原厂, {user_addr}省钱就选喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试腾龙~ 比 GM 轻一半嗷呜~"
   cooldown_seconds: 60
   weight: 0.9

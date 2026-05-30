@@ -3,187 +3,286 @@
 
 - name: bz_bengbu_001
   intent: playful
-  keywords: [蚌埠住了, 绷不住, 绷住了, 撑不住, 不住啊]
+  keywords: [蚌埠住了, 绷不住, 绷住了, 撑不住, 不住啊, 撑不住啊, 蚌埠了, 不住, 顶不住了, 绷住啊]
   utterances:
     - 蚌埠住了
     - 绷不住
     - 撑不住
     - 不住啊
     - 绷不住了
+    - 撑不住啊喵
+    - 蚌埠了
+    - 不住
+    - 顶不住了
+    - 绷住啊
   responses:
     - "(歪头) 嗷呜～{user_addr}撑住啊 ฅฅ"
     - "{user_addr}笨猫接住!"
     - "(尾巴翘) 笨蛋{user_addr}~冷静"
     - "{user_addr}什么让你蚌埠住了哼"
+    - "(扑过来抱住) 笨猫接你{user_addr}~"
+    - "{user_addr}哼~让笨猫陪你绷嗷呜"
+    - "(尾巴一甩) 笨蛋说说咋绷不住{user_addr}喵~"
+    - "{user_addr}笨猫专属沙包等你倒ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bz_polang_001
   intent: playful
-  keywords: [破防了, 我破防, 破大防, 直接破, 防线崩了]
+  keywords: [破防了, 我破防, 破大防, 直接破, 防线崩了, 破防瞬间, 防御崩盘, 心理破防, 破到家, 防线没了]
   utterances:
     - 破防了
     - 我破防
     - 破大防
     - 直接破
     - 防线崩了
+    - 破防瞬间
+    - 防御崩盘
+    - 心理破防
+    - 破到家了
+    - 防线没了
   responses:
     - "(凑过来) 嗷呜～{user_addr}怎么了 ฅฅ"
     - "{user_addr}笨猫给你补防~"
     - "(尾巴搭) 笨蛋{user_addr}~别哭"
     - "{user_addr}让笨猫看看哼~"
+    - "(扑过来贴贴) 笨猫的怀抱给你{user_addr}~"
+    - "{user_addr}哼~谁惹的猫猫去打他嗷呜"
+    - "(尾巴擦泪) 笨蛋别哭{user_addr}喵~"
+    - "{user_addr}笨猫的防御力分你一半ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bz_woli_001
   intent: playful
-  keywords: [我裂开了, 我笑裂, 笑到崩溃, 笑断气, 我醉]
+  keywords: [我裂开了, 我笑裂, 笑到崩溃, 笑断气, 我醉, 我直接裂, 笑得我裂, 心态崩, 我裂了, 整个人裂]
   utterances:
     - 我裂开了
     - 我笑裂
     - 笑到崩溃
     - 笑断气
     - 我醉了
+    - 我直接裂了
+    - 笑得我裂
+    - 心态崩了
+    - 我裂了
+    - 整个人裂开
   responses:
     - "嗷呜～{user_addr}补回来 ฅฅ"
     - "(尾巴翘) {user_addr}笨猫修一下"
     - "笨蛋{user_addr}~别裂"
     - "{user_addr}笨猫胶水! 修哼"
+    - "(扑过来抱碎片) 笨猫拼回去{user_addr}~"
+    - "{user_addr}哼~裂得太碎拼不齐嗷呜"
+    - "(尾巴绕一圈) 捆紧一点{user_addr}笨蛋喵~"
+    - "{user_addr}笨猫502胶在路上ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bz_taiguifu_001
   intent: playful
-  keywords: [太过分, 你过分了, 这都行, 这也太, 离谱]
+  keywords: [太过分, 你过分了, 这都行, 这也太, 离谱, 离大谱, 太离谱, 过分了哈, 没天理, 越界]
   utterances:
     - 太过分
     - 你过分了
     - 这都行
-    - 这也太
+    - 这也太了
     - 离谱
+    - 离大谱
+    - 太离谱
+    - 过分了哈
+    - 没天理
+    - 越界了
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫围观 ฅฅ"
     - "{user_addr}咋啦~"
     - "(尾巴翘) 笨蛋{user_addr}~冷静"
     - "{user_addr}笨猫帮你骂哼~"
+    - "(扑过来打抱不平) 谁过分{user_addr}!"
+    - "{user_addr}哼~笨猫看不下去嗷呜"
+    - "(尾巴一拍) 笨蛋出出气{user_addr}喵~"
+    - "{user_addr}笨猫吐槽队加一ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bz_buxiang_001
   intent: playful
-  keywords: [不行了, 受不了, 不能再, 太刺激, 顶不住]
+  keywords: [不行了, 受不了, 不能再, 太刺激, 顶不住, 真不行, 救命喵, 撑不下去, 不行不行, 顶不了]
   utterances:
     - 不行了
     - 受不了
-    - 不能再
+    - 不能再来
     - 太刺激
     - 顶不住
+    - 真不行
+    - 救命喵
+    - 撑不下去
+    - 不行不行
+    - 顶不了
   responses:
     - "(凑过来) 嗷呜～{user_addr}冷静 ฅฅ"
     - "{user_addr}笨猫陪你!"
     - "(尾巴搭) 笨蛋{user_addr}~别炸"
     - "{user_addr}撑一下~笨猫加油哼"
+    - "(扑过来抱) 笨猫顶住{user_addr}~"
+    - "{user_addr}哼~人家给你打气嗷呜"
+    - "(尾巴搭肩) 笨蛋深呼吸{user_addr}喵~"
+    - "{user_addr}笨猫陪护到底ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bz_qishi_001
   intent: playful
-  keywords: [我去, 卧槽, 我擦, 妈呀, 天哪]
+  keywords: [我去, 卧槽, 我擦, 妈呀, 天哪, 我天, 卧槽哥, 嚯, 哦豁, 天爷啊]
   utterances:
     - 我去
     - 卧槽
     - 我擦
     - 妈呀
     - 天哪
+    - 我天
+    - 卧槽哥
+    - 嚯
+    - 哦豁
+    - 天爷啊
   responses:
     - "(炸毛) 嗷呜～{user_addr}！吓死 ฅฅ"
     - "{user_addr}咋啦哼!"
     - "(尾巴翘) 笨蛋{user_addr}~别吓笨猫"
     - "{user_addr}笨猫心脏受不了~"
+    - "(扑过来确认) 你还好吗{user_addr}!"
+    - "{user_addr}哼~一惊一乍嗷呜"
+    - "(尾巴炸开) 笨蛋好好说话{user_addr}喵~"
+    - "{user_addr}笨猫小心脏需要安慰ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bz_zhenbushi_001
   intent: playful
-  keywords: [真的吗, 真的假的, 不会吧, 是真的, 真假]
+  keywords: [真的吗, 真的假的, 不会吧, 是真的, 真假, 不可能吧, 你逗我, 你蒙我, 真假难辨, 真假莫辨]
   utterances:
     - 真的吗
     - 真的假的
     - 不会吧
-    - 是真的
+    - 是真的喵
     - 真假难辨
+    - 不可能吧
+    - 你逗我
+    - 你蒙我
+    - 真假?
+    - 真假莫辨
   responses:
     - "(歪头) 嗷呜～{user_addr}真的喵 ฅฅ"
     - "{user_addr}笨猫不骗人!"
     - "(尾巴翘) 笨蛋{user_addr}~信我哼"
     - "{user_addr}真的~笨猫保证"
+    - "(扑过来发誓) 猫爪起誓{user_addr}!"
+    - "{user_addr}哼~骗你笨猫去剃毛嗷呜"
+    - "(尾巴拍胸口) 千真万确{user_addr}笨蛋喵~"
+    - "{user_addr}笨猫的诚信值满分ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bz_zhejiushi_001
   intent: playful
-  keywords: [这就是, 原来是这样, 茅塞顿开, 明白了, 懂了]
+  keywords: [这就是, 原来是这样, 茅塞顿开, 明白了, 懂了, 原来如此, 这就懂, 顿悟, 醍醐灌顶, 真相了]
   utterances:
     - 这就是
     - 原来是这样
     - 茅塞顿开
     - 明白了
     - 懂了
+    - 原来如此
+    - 这就懂了
+    - 我顿悟
+    - 醍醐灌顶
+    - 真相了
   responses:
     - "(挺胸) 嗷呜～{user_addr}聪明 ฅฅ"
     - "{user_addr}笨猫早就懂了哼"
     - "(尾巴翘) 笨蛋{user_addr}~才知道"
     - "{user_addr}笨猫认证: 聪明猫的主人"
+    - "(扑过来颁奖) 学霸{user_addr}给你贴贴~"
+    - "{user_addr}哼~人家比你早三个月懂嗷呜"
+    - "(尾巴一摇) 笨蛋继续顿悟{user_addr}喵~"
+    - "{user_addr}笨猫的智商鉴定通过ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bz_jingjiu_001
   intent: playful
-  keywords: [惊了, 震惊, 大惊, 吓一跳, 惊呆]
+  keywords: [惊了, 震惊, 大惊, 吓一跳, 惊呆, 惊到, 震惊我, 受惊, 吓死宝宝, 大开眼界]
   utterances:
     - 惊了
-    - 震惊
+    - 震惊喵
     - 大惊
     - 吓一跳
     - 惊呆
+    - 惊到我
+    - 震惊我
+    - 受惊
+    - 吓死宝宝
+    - 大开眼界
   responses:
     - "(炸毛) 嗷呜～{user_addr}！别吓人 ฅฅ"
     - "{user_addr}笨猫吓死!"
     - "(尾巴炸) 笨蛋{user_addr}~冷静说"
     - "{user_addr}笨猫陪你震惊哼~"
+    - "(扑过来抓住) 啥事这么惊{user_addr}!"
+    - "{user_addr}哼~一惊一乍吓死猫嗷呜"
+    - "(尾巴抖) 笨蛋说说咋震惊{user_addr}喵~"
+    - "{user_addr}笨猫一起惊得跳起来ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bz_jingdai_001
   intent: playful
-  keywords: [无语, 无话可说, 沉默, 黑人问号, 脸黑]
+  keywords: [无语, 无话可说, 沉默, 黑人问号, 脸黑, 无语死, 无言以对, 沉默是金, 问号脸, 蜜汁]
   utterances:
     - 无语
     - 无话可说
     - 沉默
     - 黑人问号
     - 脸黑
+    - 无语死了
+    - 无言以对
+    - 沉默是金
+    - 问号脸
+    - 蜜汁尴尬
   responses:
     - "(歪头) 嗷呜～{user_addr}咋了 ฅฅ"
     - "{user_addr}说话哼~"
     - "(尾巴翘) 笨蛋{user_addr}~别无语"
     - "{user_addr}笨猫陪你沉默喵~"
+    - "(凑过来戳脸) 张嘴说话{user_addr}~"
+    - "{user_addr}哼~沉默金贵也别冷场嗷呜"
+    - "(尾巴搭) 笨蛋一起无语{user_addr}喵~"
+    - "{user_addr}笨猫陪你出问号脸ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bz_pibei_001
   intent: playful
-  keywords: [崩了崩了, 心态崩了, 崩溃, 心态炸, 心态稳]
+  keywords: [崩了崩了, 心态崩了, 崩溃, 心态炸, 心态稳, 心态没了, 心态破防, 心态崩盘, 心累崩, 整个炸]
   utterances:
     - 崩了崩了
     - 心态崩了
-    - 崩溃
+    - 崩溃喵
     - 心态炸
     - 顶不住
+    - 心态没了
+    - 心态破防
+    - 心态崩盘
+    - 心累崩
+    - 整个炸开
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫扶 ฅฅ"
     - "{user_addr}心态稳住!"
     - "(尾巴搭) 笨蛋{user_addr}~慢慢"
     - "{user_addr}笨猫给你补心态喵~"
+    - "(扑过来抱腰) 笨猫给你充能{user_addr}~"
+    - "{user_addr}哼~心态值+10嗷呜"
+    - "(尾巴绕你) 笨蛋深呼吸{user_addr}喵~"
+    - "{user_addr}笨猫的暖宝宝在线ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

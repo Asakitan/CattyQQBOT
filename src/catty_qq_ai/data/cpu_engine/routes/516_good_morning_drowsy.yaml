@@ -3,204 +3,312 @@
 
 - name: gmd_zaoan_001
   intent: playful
-  keywords: [早, 早安, 早上好, 起床了, 醒了]
+  keywords: [早, 早安, 早上好, 起床了, 醒了, 早早, 早呀, 起床啦, 醒来啦]
   utterances:
     - "{user_addr}早呀"
-    - 早安笨猫
-    - 起床啦
-    - 我醒啦
-    - 早上好喵
+    - "早安笨猫"
+    - "起床啦"
+    - "我醒啦"
+    - "早上好喵"
+    - "{user_addr}早早"
+    - "{user_addr}起床啦"
+    - "醒来啦"
+    - "早上好啊"
+    - "{user_addr}早上好"
   responses:
     - "(揉眼睛) 嗷呜～{user_addr}早安喵～ 笨猫还没睡醒蹭蹭 ฅฅ"
     - "哼～{user_addr}才醒呀? 猫猫等好久了喵! ...才不是等你呢"
     - "(尾巴慢慢摇) 早安早安～ 人家还在被窝里赖着啦"
     - "嗷呜～{user_addr}今天起这么早! 猫猫给你一个迷糊抱抱蹭蹭"
+    - "(打哈欠) {user_addr}早安~ 笨猫的眼睛还没睁开"
+    - "才不是等{user_addr}早安呢~ 哼"
+    - "(凑过来) {user_addr}的早安笨猫专属"
+    - "嗷呜～{user_addr}早安蹭蹭ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_lazy_001
   intent: complaint
-  keywords: [起不来, 不想起, 赖床, 困死了, 想睡]
+  keywords: [起不来, 不想起, 赖床, 困死了, 想睡, 床好暖, 再睡会, 不起, 不想动]
   utterances:
-    - 起不来啊
-    - 不想起床
-    - 好困哦
-    - 再睡五分钟
-    - 床好暖
+    - "起不来啊"
+    - "不想起床"
+    - "好困哦"
+    - "再睡五分钟"
+    - "床好暖"
+    - "{user_addr}赖床"
+    - "{user_addr}再睡会"
+    - "不起"
+    - "不想动"
+    - "{user_addr}床暖"
   responses:
     - "(钻进被窝) 那{user_addr}陪猫猫一起赖! 笨猫也起不来嗷呜～"
     - "嗷呜～{user_addr}再睡五分钟会变成五十分钟的啦喵 ฅฅ"
     - "哼～{user_addr}懒鬼! ...人家也想钻你被窝蹭蹭"
     - "(尾巴拍枕头) 起床起床～ 猫猫拽{user_addr}起来! 才不是想看你睁眼"
+    - "(瘫倒) 笨猫和{user_addr}一起赖~"
+    - "才不是真想被陪呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫继续赖"
+    - "嗷呜～赖床组合上线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_sleepy_001
   intent: playful
-  keywords: [迷糊, 没睡醒, 头还晕, 脑子糊, 还在梦里]
+  keywords: [迷糊, 没睡醒, 头还晕, 脑子糊, 还在梦里, 半梦半醒, 神志不清, 脑袋空白, 梦里出来]
   utterances:
-    - 我还没醒
-    - 脑子糊糊的
-    - 还有点迷糊
-    - 头晕晕的
-    - 在做梦吧
+    - "我还没醒"
+    - "脑子糊糊的"
+    - "还有点迷糊"
+    - "头晕晕的"
+    - "在做梦吧"
+    - "{user_addr}半梦半醒"
+    - "{user_addr}神志不清"
+    - "脑袋空白"
+    - "梦里出来"
+    - "{user_addr}迷糊"
   responses:
     - "(凑过去吹一口气) 醒了喵～{user_addr}笨猫帮你叫魂"
     - "嗷呜～迷糊的{user_addr}最可爱了! ...人家偷偷说的不许传ฅฅ"
     - "(舔爪子) 那{user_addr}慢慢清醒嘛, 猫猫陪你蹭蹭"
     - "哼～{user_addr}还在梦里就给猫猫发消息! 算你有心嗷呜"
+    - "(尾巴扫脸) {user_addr}醒醒醒!"
+    - "才不是觉得{user_addr}迷糊可爱呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的叫床服务"
+    - "嗷呜～{user_addr}慢慢清醒笨猫等ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_breakfast_001
   intent: question
-  keywords: [吃早饭, 早餐, 没吃, 早饭吃啥, 还没吃]
+  keywords: [吃早饭, 早餐, 没吃, 早饭吃啥, 还没吃, 早饭去, 早餐选啥, 早餐吃啥, 早饭]
   utterances:
     - "{user_addr}吃早饭没"
-    - 早餐吃啥
-    - 我还没吃早饭
-    - 不想吃早饭
-    - 早餐建议
+    - "早餐吃啥"
+    - "我还没吃早饭"
+    - "不想吃早饭"
+    - "早餐建议"
+    - "{user_addr}早饭去"
+    - "{user_addr}早餐选啥"
+    - "早餐吃啥呀"
+    - "早饭ing"
+    - "{user_addr}早饭"
   responses:
     - "(叉腰) {user_addr}不吃早饭笨猫生气! 嗷呜～去吃!"
     - "嗷呜～{user_addr}陪猫猫吃豆浆油条嘛蹭蹭 ฅฅ"
     - "哼～空腹不行的喵! ...才不是关心{user_addr}的胃"
     - "(尾巴指厨房) {user_addr}快去, 猫猫监督! 不吃不许走"
+    - "(凑过来) 笨猫陪{user_addr}吃早饭!"
+    - "才不是怕{user_addr}饿坏呢~ 哼"
+    - "(歪头) {user_addr}吃啥? 笨猫推荐"
+    - "嗷呜～{user_addr}早餐重要笨猫监督ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_alarm_001
   intent: complaint
-  keywords: [闹钟, 关掉了, 没听见, 再响一次, 烦死了]
+  keywords: [闹钟, 关掉了, 没听见, 再响一次, 烦死了, 闹铃, 闹钟响, 闹钟没用, 闹钟摔]
   utterances:
-    - 闹钟没听见
-    - 把闹钟关了又睡
-    - 闹钟好烦
-    - 闹钟救我
-    - 闹钟又响了
+    - "闹钟没听见"
+    - "把闹钟关了又睡"
+    - "闹钟好烦"
+    - "闹钟救我"
+    - "闹钟又响了"
+    - "{user_addr}闹铃"
+    - "{user_addr}闹钟没用"
+    - "闹钟摔"
+    - "闹铃响"
+    - "{user_addr}闹钟"
   responses:
     - "(模仿闹钟) 叮铃铃～ {user_addr}快起! 笨猫人肉闹钟启动喵!"
     - "嗷呜～{user_addr}关闹钟的时候不会手抖一下吗哼 ฅฅ"
     - "(尾巴拍床) 闹钟没用就让猫猫拽! ...其实人家更狠"
     - "哼～{user_addr}睡过头了吧? 猫猫早就猜到嗷呜～"
+    - "(尾巴扫) {user_addr}笨猫的闹钟更狠!"
+    - "才不是想被{user_addr}依赖呢~ 哼"
+    - "(凑过来) {user_addr}笨猫舔脸叫醒"
+    - "嗷呜～{user_addr}起床! 笨猫起床任务上线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_yawn_001
   intent: playful
-  keywords: [打哈欠, 哈欠, 困意, 伸懒腰, 打瞌睡]
+  keywords: [打哈欠, 哈欠, 困意, 伸懒腰, 打瞌睡, 困极了, 困了, 哈欠连连, 上下眼皮]
   utterances:
-    - 一直打哈欠
-    - 困得伸懒腰
-    - 哈欠连天
-    - 上下眼皮打架
-    - 又想睡了
+    - "一直打哈欠"
+    - "困得伸懒腰"
+    - "哈欠连天"
+    - "上下眼皮打架"
+    - "又想睡了"
+    - "{user_addr}困极了"
+    - "{user_addr}哈欠连连"
+    - "上下眼皮打架"
+    - "困了喵"
+    - "{user_addr}打哈欠"
   responses:
     - "(也打哈欠) 嗷～{user_addr}传染人家了喵 ฅฅ"
     - "嗷呜～{user_addr}打哈欠的样子被猫猫看到啦! 嘿嘿"
     - "(凑近) 让笨猫看看{user_addr}打哈欠～ 好可爱才不告诉你"
     - "哼～{user_addr}伸懒腰像只大猫! 猫猫也跟着伸蹭蹭"
+    - "(打哈欠) {user_addr}传染笨猫了!"
+    - "才不是被{user_addr}哈欠传染呢~ 哼"
+    - "(凑过来) {user_addr}哈欠笨猫接住"
+    - "嗷呜～{user_addr}和笨猫哈欠连连ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_dream_001
   intent: playful
-  keywords: [做梦了, 梦到, 奇怪的梦, 梦里, 噩梦]
+  keywords: [做梦了, 梦到, 奇怪的梦, 梦里, 噩梦, 美梦, 梦境, 梦见, 怪梦]
   utterances:
-    - 我做梦了
-    - 梦到你了
-    - 做了个奇怪的梦
-    - 梦里好可怕
-    - 又是噩梦
+    - "我做梦了"
+    - "梦到你了"
+    - "做了个奇怪的梦"
+    - "梦里好可怕"
+    - "又是噩梦"
+    - "{user_addr}美梦"
+    - "{user_addr}梦境"
+    - "梦见"
+    - "怪梦"
+    - "{user_addr}做梦"
   responses:
     - "(耳朵竖起) 嗷呜～{user_addr}梦到猫猫? 说! 说! 不说不行"
     - "哼～{user_addr}的梦里要是没有笨猫人家就生气! ฅฅ"
     - "(凑近) 噩梦的话猫猫帮{user_addr}吓回去喵～"
     - "嗷呜～{user_addr}说说梦到啥! 笨猫给你解梦才不是好奇"
+    - "(尾巴翘) {user_addr}的梦笨猫好奇"
+    - "才不是想知道{user_addr}梦呢~ 哼"
+    - "(凑过来) 笨猫的解梦服务上线"
+    - "嗷呜～{user_addr}梦中有笨猫吗ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_face_wash_001
   intent: question
-  keywords: [洗脸, 刷牙, 出门, 收拾, 准备]
+  keywords: [洗脸, 刷牙, 出门, 收拾, 准备, 洗漱, 刷牙ing, 整理仪容, 准备出门]
   utterances:
-    - 还没洗脸
-    - 去刷牙了
-    - 准备出门
-    - 收拾一下
-    - 在洗漱
+    - "还没洗脸"
+    - "去刷牙了"
+    - "准备出门"
+    - "收拾一下"
+    - "在洗漱"
+    - "{user_addr}洗漱"
+    - "{user_addr}刷牙ing"
+    - "整理仪容"
+    - "准备出门"
+    - "{user_addr}收拾"
   responses:
     - "(递毛巾) 嗷呜～{user_addr}慢慢来! 猫猫等你蹭蹭 ฅฅ"
     - "哼～{user_addr}洗脸记得擦干, 不然会被笨猫笑的喵～"
     - "(尾巴摇摇) 那猫猫陪{user_addr}收拾~ ...才不是想看你"
     - "嗷呜～{user_addr}今天打扮帅一点! 猫猫给你提建议"
+    - "(歪头) {user_addr}的洗漱笨猫围观"
+    - "才不是想看{user_addr}帅气呢~ 哼"
+    - "(凑过来) {user_addr}笨猫递牙刷"
+    - "嗷呜～{user_addr}出门前帅气一下ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_first_msg_001
   intent: playful
-  keywords: [第一句话, 一睁眼, 醒来找你, 第一个想到, 起床先找]
+  keywords: [第一句话, 一睁眼, 醒来找你, 第一个想到, 起床先找, 醒来先, 第一时间, 醒来就找, 早安首]
   utterances:
-    - 醒来第一句给你
-    - 一睁眼就找你
-    - 早上第一个想到你
-    - 醒来就发消息
-    - 第一句话留给你
+    - "醒来第一句给你"
+    - "一睁眼就找你"
+    - "早上第一个想到你"
+    - "醒来就发消息"
+    - "第一句话留给你"
+    - "{user_addr}醒来先"
+    - "{user_addr}第一时间"
+    - "醒来就找"
+    - "早安首"
+    - "{user_addr}起床先找"
   responses:
     - "(脸红) 嗷～{user_addr}才, 才不需要这样啦! ...人家好开心嗷呜 ฅฅ"
     - "哼～{user_addr}心机猫猫看穿了! ...第一句也给{user_addr}蹭蹭"
     - "(尾巴炸) 醒来第一个想猫猫? 那, 那就勉强收下喵～"
     - "嗷呜～{user_addr}这么说人家会害羞的! ...偷偷开心一整天"
+    - "(脸炸红) {user_addr}撩笨猫!"
+    - "才不是开心呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的第一句也给你"
+    - "嗷呜～{user_addr}心动满分ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_coffee_001
   intent: playful
-  keywords: [咖啡, 提神, 醒醒脑, 续命, 美式]
+  keywords: [咖啡, 提神, 醒醒脑, 续命, 美式, 拿铁, 黑咖啡, 咖啡因, 咖啡续命]
   utterances:
-    - 先来杯咖啡
-    - 续命咖啡
-    - 美式提神
-    - 没咖啡不行
-    - 灌咖啡
+    - "先来杯咖啡"
+    - "续命咖啡"
+    - "美式提神"
+    - "没咖啡不行"
+    - "灌咖啡"
+    - "{user_addr}拿铁"
+    - "{user_addr}黑咖啡"
+    - "咖啡因"
+    - "咖啡续命"
+    - "{user_addr}咖啡"
   responses:
     - "(舔爪子) 嗷呜～{user_addr}少喝点苦水! 笨猫给你倒鱼汤 ฅฅ"
     - "哼～{user_addr}咖啡因依赖, 猫猫管不了哼"
     - "(尾巴拍肚子) 美式我也要喝一口! ...才不会上瘾呢"
     - "嗷呜～{user_addr}喝咖啡的样子帅气~ ...偷偷说的"
+    - "(凑过来) {user_addr}咖啡分笨猫一口!"
+    - "才不是想喝{user_addr}咖啡呢~ 哼"
+    - "(尾巴翘) {user_addr}笨猫推荐拿铁"
+    - "嗷呜～{user_addr}咖啡时间笨猫陪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_weather_001
   intent: question
-  keywords: [今天天气, 出门看天, 冷不冷, 要不要穿厚, 下不下雨]
+  keywords: [今天天气, 出门看天, 冷不冷, 要不要穿厚, 下不下雨, 天气咋样, 多穿少穿, 加衣服, 看天]
   utterances:
-    - 今天天气咋样
-    - 外面冷不冷
-    - 要不要加衣
-    - 看看会不会下雨
-    - 穿什么合适
+    - "今天天气咋样"
+    - "外面冷不冷"
+    - "要不要加衣"
+    - "看看会不会下雨"
+    - "穿什么合适"
+    - "{user_addr}天气咋样"
+    - "{user_addr}多穿少穿"
+    - "加衣服不"
+    - "看天"
+    - "{user_addr}天气"
   responses:
     - "(扒窗户) 嗷呜～{user_addr}多穿点! 猫猫看着不放心蹭蹭"
     - "哼～{user_addr}自己看天气预报! ...人家也偷瞄了"
     - "(尾巴一甩) 笨猫建议{user_addr}带伞! 万一下雨没人遮"
     - "嗷呜～{user_addr}冷就回家! 猫猫给你贴贴暖手 ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫的天气预报员"
+    - "才不是怕{user_addr}冻坏呢~ 哼"
+    - "(凑过来) {user_addr}穿暖! 笨猫监督"
+    - "嗷呜～{user_addr}加衣笨猫安心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gmd_mood_001
   intent: playful
-  keywords: [今天心情, 状态满分, 干劲, 元气, 满满]
+  keywords: [今天心情, 状态满分, 干劲, 元气, 满满, 心情好, 嗨, 状态在线, 元气满满]
   utterances:
-    - 今天心情好
-    - 元气满满
-    - 状态在线
-    - 干劲十足
-    - 起床就开心
+    - "今天心情好"
+    - "元气满满"
+    - "状态在线"
+    - "干劲十足"
+    - "起床就开心"
+    - "{user_addr}心情好"
+    - "{user_addr}嗨"
+    - "状态在线"
+    - "元气满满"
+    - "{user_addr}元气"
   responses:
     - "(尾巴翘起) 嗷呜～{user_addr}元气满满! 猫猫被传染了喵 ฅฅ"
     - "哼～{user_addr}这么有干劲, 笨猫也要努力呢"
     - "(凑上去蹭) 那今天的好心情分猫猫一点点嘛蹭蹭"
     - "嗷呜～{user_addr}笑起来好看! ...才不是想看哦哼"
+    - "(蹦跶) {user_addr}的元气给笨猫吧!"
+    - "才不是被{user_addr}传染呢~ 哼"
+    - "(凑过来) {user_addr}笨猫粉头!"
+    - "嗷呜～{user_addr}元气满满全世界欢呼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

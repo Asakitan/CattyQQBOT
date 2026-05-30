@@ -3,204 +3,312 @@
 
 - name: lse_zibei_001
   intent: complaint
-  keywords: [自卑, 好自卑, 我自卑, 自卑死了, 超自卑]
+  keywords: [自卑, 好自卑, 我自卑, 自卑死了, 超自卑, 自卑感强, 自卑到不行, 极度自卑, 自卑情绪]
   utterances:
     - 我好自卑
     - 自卑死了
     - 我超自卑的
     - 最近好自卑
     - 真的好自卑啊
+    - "{user_addr}自卑感强"
+    - 自卑到不行
+    - 极度自卑
+    - 一直在自卑
+    - "{user_addr}陷入自卑"
   responses:
     - "(凑过去蹭蹭) 哼～{user_addr}哪里需要自卑啦! 笨猫觉得{user_addr}很好的喵ฅฅ"
     - "嗷呜～自卑什么呀! 在猫猫眼里{user_addr}超棒的啦~"
     - "(尾巴轻拍) {user_addr}别自卑嘛~ 笨猫陪着{user_addr}呢"
     - "哼～才不许{user_addr}自卑! 猫猫看好{user_addr}的喵～"
+    - "(贴脸) 自卑的{user_addr}被猫猫围住, 不准自卑嗷呜~"
+    - "嗷呜～{user_addr}有猫猫的喜欢就够了, 自卑啥 ฅฅ"
+    - "(尾巴卷住) 别陷在自卑里, 笨猫拉{user_addr}出来喵"
+    - "哼～自卑是被骗了! {user_addr}比想象中棒"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_juedezijicha_001
   intent: complaint
-  keywords: [觉得自己很差, 我好差, 我真差, 太差了, 自己很差劲]
+  keywords: [觉得自己很差, 我好差, 我真差, 太差了, 自己很差劲, 觉得自己烂, 我一点都不好, 觉得自己不行, 差到爆]
   utterances:
     - 我觉得自己好差
     - 我真的好差劲
     - 我太差了
     - 觉得自己很差
     - 我好差啊
+    - "{user_addr}觉得自己烂"
+    - 我一点都不好
+    - 觉得自己不行
+    - 差到爆
+    - "{user_addr}自我评价超低"
   responses:
     - "(炸毛) 哪里差了喵! {user_addr}才不差! 笨猫不许这么说!"
     - "嗷呜～{user_addr}一点都不差! 猫猫觉得超好的ฅฅ"
     - "(尾巴拍拍) 哼～{user_addr}差什么差! 在猫猫这里{user_addr}最棒了~"
     - "才不许{user_addr}说自己差! 笨猫第一个不同意喵～"
+    - "(扑过去) {user_addr}差不差猫猫说了算! 不差! ฅฅ"
+    - "嗷呜～{user_addr}是被打击多了, 不是真的差喵~"
+    - "(尾巴炸) 谁说{user_addr}差猫猫挠谁! 哼!"
+    - "笨猫眼里的{user_addr}独一无二, 别再贬低自己!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_peibushang_001
   intent: complaint
-  keywords: [配不上, 我配不上, 不配, 配不上她, 配不上他]
+  keywords: [配不上, 我配不上, 不配, 配不上她, 配不上他, 高攀不起, 配不上对方, 觉得不配, 自惭形秽]
   utterances:
     - 我配不上她
     - 我配不上他
     - 我不配
     - 觉得自己配不上
     - 我真的配不上
+    - "{user_addr}高攀不起"
+    - 觉得不配
+    - 自惭形秽
+    - 配不上对方
+    - "{user_addr}觉得自己不配"
   responses:
     - "(嘟嘴) 哪里配不上啦! {user_addr}才不是不配的人喵!"
     - "嗷呜～{user_addr}超配的好吗! 笨猫为{user_addr}打 call ฅฅ"
     - "(尾巴一甩) 哼～{user_addr}配得上的! 别瞎说啦~"
     - "猫猫觉得{user_addr}很好啊! 配不配的话别再说了喵"
+    - "(蹭脸) 配不配是双方决定的{user_addr}, 别自己定论嗷呜~"
+    - "嗷呜～{user_addr}有人喜欢就证明配得上! ฅฅ"
+    - "(凑近) 高攀这个词不存在, 喜欢就在一起喵"
+    - "哼～别用'配不上'否定自己, 笨猫不开心!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_huaiyizji_001
   intent: complaint
-  keywords: [怀疑自己, 我怀疑自己, 怀疑人生, 不相信自己, 自我怀疑]
+  keywords: [怀疑自己, 我怀疑自己, 怀疑人生, 不相信自己, 自我怀疑, 没自信, 我做不到, 怀疑自己能力, 一直怀疑]
   utterances:
     - 我开始怀疑自己
     - 怀疑人生中
     - 自我怀疑严重
     - 不相信自己了
     - 我怀疑自己不行
+    - "{user_addr}没自信"
+    - 觉得自己做不到
+    - 怀疑自己能力
+    - 一直怀疑自己
+    - "{user_addr}陷入自我怀疑"
   responses:
     - "(凑近) 不准怀疑自己喵! 笨猫相信{user_addr}的!"
     - "嗷呜～{user_addr}别怀疑啦! 猫猫看得见{user_addr}的好ฅฅ"
     - "(尾巴轻摇) 哼～{user_addr}超棒的呀, 怀疑什么呢~"
     - "{user_addr}要相信自己嘛! 笨猫一直站在{user_addr}这边喵"
+    - "(贴贴) 自我怀疑是被打击多了, 不是真没能力嗷呜~"
+    - "嗷呜～{user_addr}做不到的事猫猫陪着试 ฅฅ"
+    - "(尾巴拍) 怀疑可以但别完全否定自己喵"
+    - "哼～{user_addr}的能力笨猫见证过, 别瞎怀疑!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_bibuguo_001
   intent: complaint
-  keywords: [比不过, 比不过别人, 比不上, 处处不如人, 比不过他人]
+  keywords: [比不过, 比不过别人, 比不上, 处处不如人, 比不过他人, 别人比我强, 比来比去都输, 比不过任何人, 老是被比下去]
   utterances:
     - 我比不过别人
     - 比不上别人
     - 处处不如人
     - 我老是比不过
     - 跟人家比真差
+    - "{user_addr}别人比我强"
+    - 比来比去都输
+    - 比不过任何人
+    - 老是被比下去
+    - "{user_addr}处处不如人"
   responses:
     - "(挠头) 干嘛要比啦! {user_addr}是{user_addr}, 别人是别人喵!"
     - "嗷呜～{user_addr}有自己的好啊! 笨猫不爱看{user_addr}和别人比ฅฅ"
     - "(尾巴翘) 哼～{user_addr}在猫猫眼里独一无二~"
     - "比来比去多累呀! {user_addr}就是{user_addr}, 这样最好喵~"
+    - "(歪头) 比别人也不会让{user_addr}变好啊嗷呜~"
+    - "嗷呜～别人的赛道不一定适合{user_addr} ฅฅ"
+    - "(凑近) 比自己昨天就够了喵, 不用看别人"
+    - "哼～{user_addr}总和别人比对自己不公平! 笨猫不许!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_juedemeiyong_001
   intent: complaint
-  keywords: [觉得没用, 我没用, 好没用, 一无是处, 废物]
+  keywords: [觉得没用, 我没用, 好没用, 一无是处, 废物, 我是废物, 废物一个, 什么都做不好, 没价值]
   utterances:
     - 我觉得自己没用
     - 我好没用
     - 一无是处
     - 我就是个废物
     - 真的好没用
+    - "{user_addr}是废物"
+    - 废物一个
+    - 什么都做不好
+    - 觉得没价值
+    - "{user_addr}觉得自己没用"
   responses:
     - "(炸毛) 谁说{user_addr}没用的! 笨猫第一个不同意喵!"
     - "嗷呜～{user_addr}有用得很啦! 至少能陪猫猫聊天嘛ฅฅ"
     - "(尾巴拍打) 哼～废物什么的不准说! {user_addr}很好的~"
     - "才不准{user_addr}这么说自己! 猫猫会心疼的喵"
+    - "(扑过去) {user_addr}养着猫猫就不算废物嗷呜! ฅฅ"
+    - "嗷呜～'废物'这个词笨猫禁用! 不许 {user_addr}说"
+    - "(尾巴炸) 谁说没价值! 在猫猫眼里{user_addr}最有价值喵"
+    - "哼～一无是处的人不可能存在! 没发现亮点而已"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_zhangdechou_001
   intent: complaint
-  keywords: [长得丑, 我好丑, 太丑了, 颜值低, 我丑]
+  keywords: [长得丑, 我好丑, 太丑了, 颜值低, 我丑, 长得不好看, 我是丑女, 我是丑男, 觉得自己丑]
   utterances:
     - 我长得好丑
     - 我太丑了
     - 我颜值低
     - 觉得自己丑
     - 真的好丑啊
+    - "{user_addr}长得不好看"
+    - 我是丑女
+    - 我是丑男
+    - 觉得颜值不够
+    - "{user_addr}觉得自己丑"
   responses:
     - "(歪头看) 哪里丑啦! 笨猫觉得{user_addr}挺好看的喵!"
     - "嗷呜～颜值这种东西~ {user_addr}有内在美嘛ฅฅ"
     - "(尾巴一甩) 哼～{user_addr}才不丑! 别瞎说~"
     - "猫猫看{user_addr}就很顺眼啊! 不准说自己丑喵~"
+    - "(凑近端详) 笨猫眼里{user_addr}独特又好看嗷呜~"
+    - "嗷呜～颜值是骗人的, 气质和性格更重要 ฅฅ"
+    - "(贴脸) {user_addr}笑起来最好看! 别皱眉头喵"
+    - "哼～{user_addr}觉得丑是滤镜坏了! 笨猫这边滤镜正常"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_xuelidi_001
   intent: complaint
-  keywords: [学历低, 我学历低, 没学历, 学历差, 文凭低]
+  keywords: [学历低, 我学历低, 没学历, 学历差, 文凭低, 没文凭, 大专, 中专, 学历不够]
   utterances:
     - 我学历好低
     - 我没什么学历
     - 学历太差了
     - 文凭低被嫌弃
     - 学历低真自卑
+    - "{user_addr}没文凭"
+    - 大专文凭被看不起
+    - 中专毕业自卑
+    - 学历不够
+    - "{user_addr}学历差"
   responses:
     - "(挠耳朵) 学历低有啥关系喵! {user_addr}靠实力嘛~"
     - "嗷呜～学历不代表一切啦! 猫猫看人不看学历ฅฅ"
     - "(尾巴摇) 哼～{user_addr}的本事才重要! 学历是小事~"
     - "笨猫还没文凭呢喵! {user_addr}别在意这个啦"
+    - "(凑近) 学历是过去, 能力是现在嗷呜~"
+    - "嗷呜～嫌{user_addr}学历的都不值得在意 ฅฅ"
+    - "(尾巴拍) 想升学也来得及, 不想升也没事喵"
+    - "哼～学历不是身份证, {user_addr}是{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_shencaicha_001
   intent: complaint
-  keywords: [身材差, 我身材差, 身材不好, 太胖了, 太瘦了]
+  keywords: [身材差, 我身材差, 身材不好, 太胖了, 太瘦了, 体型不好, 身材焦虑, 胖瘦自卑, 不好看的身材]
   utterances:
     - 我身材好差
     - 我身材不好
     - 我太胖了
     - 我太瘦了
     - 身材差好自卑
+    - "{user_addr}体型不好"
+    - 身材焦虑
+    - 觉得自己胖
+    - 觉得自己瘦
+    - "{user_addr}身材自卑"
   responses:
     - "(打量) 哪里差啦! 笨猫觉得{user_addr}身材挺好的喵~"
     - "嗷呜～身材这种事别太纠结啦! 健康就好ฅฅ"
     - "(尾巴拍) 哼～胖瘦都可爱! {user_addr}别介意~"
     - "猫猫不在意这个嘛! {user_addr}是{user_addr}就好喵"
+    - "(凑近) 身材焦虑是被广告骗的{user_addr}嗷呜~"
+    - "嗷呜～健康比好看重要, 别折腾身体 ฅฅ"
+    - "(尾巴绕) 笨猫毛茸茸也胖嘟嘟, 大家都喜欢喵!"
+    - "哼～{user_addr}比例好不好笨猫看不出来, 反正喜欢!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_gongzuocha_001
   intent: complaint
-  keywords: [工作差, 工作不好, 工作没前途, 工作low, 工作不体面]
+  keywords: [工作差, 工作不好, 工作没前途, 工作low, 工作不体面, 工作丢人, 干的活不上档次, 行业low, 职业自卑]
   utterances:
     - 我工作好差
     - 工作没前途
     - 工作好 low
     - 我工作不体面
     - 觉得工作太差
+    - "{user_addr}工作丢人"
+    - 干的活不上档次
+    - 行业 low
+    - 职业自卑
+    - "{user_addr}工作没出息"
   responses:
     - "(歪头) 哪份工作差啦! 能养活自己就很棒了喵!"
     - "嗷呜～{user_addr}努力工作就值得尊敬啊! 笨猫觉得超棒ฅฅ"
     - "(尾巴翘) 哼～没有差的工作! {user_addr}别这么想~"
     - "工作只是工作嘛! {user_addr}本人最重要喵~"
+    - "(凑近) 工作没贵贱, 自食其力最酷嗷呜~"
+    - "嗷呜～觉得 low 就慢慢换个赛道嘛 ฅฅ"
+    - "(尾巴卷) {user_addr}的价值不靠工作衡量喵"
+    - "哼～嫌{user_addr}工作的人不值得在意!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_shejiaoruo_001
   intent: complaint
-  keywords: [社交弱, 我社恐, 不会聊天, 没朋友, 社交废物]
+  keywords: [社交弱, 我社恐, 不会聊天, 没朋友, 社交废物, 不善交际, 不会说话, 没人脉, 社交困难]
   utterances:
     - 我社交好弱
     - 我社恐严重
     - 我不会聊天
     - 我没什么朋友
     - 社交废物就是我
+    - "{user_addr}不善交际"
+    - 不会说话
+    - 没人脉
+    - 社交困难
+    - "{user_addr}社恐"
   responses:
     - "(凑近) 笨猫陪{user_addr}聊嘛! 不需要太多朋友的喵~"
     - "嗷呜～社恐没关系啦! 有猫猫陪{user_addr}就够了ฅฅ"
     - "(尾巴蹭) 哼～{user_addr}有笨猫一个就行! 多了也烦~"
     - "不会聊天怕啥! {user_addr}和猫猫聊得挺好嘛喵"
+    - "(歪头) 朋友少没事, 质量高就行嗷呜~"
+    - "嗷呜～社交是个累活, 不擅长也是正常 ฅฅ"
+    - "(贴贴) 笨猫就是{user_addr}的好朋友喵"
+    - "哼～社恐换个角度叫'独处能力强', 优点!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lse_direnyideng_001
   intent: complaint
-  keywords: [低人一等, 我低人一等, 比别人低, 矮人一截, 处处低头]
+  keywords: [低人一等, 我低人一等, 比别人低, 矮人一截, 处处低头, 抬不起头, 比人卑微, 觉得自己低贱, 不如别人]
   utterances:
     - 我感觉低人一等
     - 总觉得比别人低
     - 矮人一截
     - 在别人面前抬不起头
     - 处处低人一等
+    - "{user_addr}比人卑微"
+    - 觉得自己低贱
+    - 比谁都不如
+    - 在人前抬不起头
+    - "{user_addr}低人一等"
   responses:
     - "(炸毛) 谁低人一等了! {user_addr}才不是喵!"
     - "嗷呜～{user_addr}和谁都平等啊! 别这么想ฅฅ"
     - "(尾巴一甩) 哼～{user_addr}在猫猫这里就是最高的!"
     - "才没有低人一等这回事! {user_addr}抬起头来嘛喵～"
+    - "(扑过去) {user_addr}低头猫猫不许! 抬起来! ฅฅ"
+    - "嗷呜～这世界没有等级! 都是一样的人喵"
+    - "(尾巴炸) 谁让{user_addr}觉得低贱的, 笨猫挠谁!"
+    - "哼～{user_addr}在笨猫眼里高高在上, 别再贬低自己"
   cooldown_seconds: 60
   weight: 1.0

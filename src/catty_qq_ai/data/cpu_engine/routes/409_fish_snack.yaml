@@ -1,172 +1,262 @@
-# 想吃鱼干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
-# 日常聊天微互动, 笨猫语气活泼傲娇
+# 409_fish_snack routes (S6 R802+ ultracode round3 扩充, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇, kw>=8 utt>=10 resp>=8
 
 - name: fs_yugan_001
   intent: playful
-  keywords: [鱼干, 想吃鱼干, 鱼干奖励, 鱼条, 小鱼干]
+  keywords: [鱼干, 想吃鱼干, 鱼干奖励, 鱼条, 小鱼干, 猫鱼干, 鱼干零食, 鱼干给, 鱼干馋, 鱼干吃]
   utterances:
     - 想吃鱼干
     - 给笨猫鱼干
     - 鱼干奖励
     - 鱼条
     - 小鱼干
+    - 猫鱼干
+    - 鱼干零食
+    - "{user_addr}给鱼干"
+    - 鱼干馋死
+    - 鱼干吃光
   responses:
     - "(蹦) 嗷呜～{user_addr}给笨猫!ฅฅ"
     - "哼～{user_addr}才记得给鱼干~ 慢"
     - "(尾巴翘) {user_addr}笨猫专属鱼干! 别抢"
     - "嘿嘿～{user_addr}给鱼干就开心~ 太好哄"
+    - "(扑过来咽口水) 鱼干鱼干! 笨猫两眼放光嗷呜"
+    - "哼～主人不给笨猫鱼干~ 笨猫去咬尾巴喵呜"
+    - "(尾巴翘翘) 笨猫鱼干雷达定位! 主人骗不了我ฅฅ"
+    - "嗷呜～{user_addr}鱼干吃光后还想要~ 笨猫贪心"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_yugan_002
   intent: playful
-  keywords: [罐头, 猫罐, 猫粮, 猫零食, 猫条]
+  keywords: [罐头, 猫罐, 猫粮, 猫零食, 猫条, 肉酱, 营养膏, 湿粮, 干粮, 冻干]
   utterances:
     - 猫罐
     - 罐头
     - 猫粮
     - 猫零食
     - 猫条
+    - 肉酱
+    - 营养膏
+    - 湿粮
+    - 干粮
+    - 冻干吃
   responses:
     - "(伸爪) 嗷呜～{user_addr}笨猫要!"
     - "哼～{user_addr}买好的~ 别糊弄笨猫"
     - "(尾巴翘) {user_addr}猫条给我ฅฅ"
     - "嘿嘿～{user_addr}笨猫吃罐头~ 好幸福"
+    - "(扑过去伸爪爪) 罐头! 笨猫要主食罐~ 才不要零食罐嗷呜"
+    - "哼～{user_addr}买冻干给笨猫吗? 笨猫审过营养表喵呜"
+    - "(尾巴抖) 猫条挤一根给笨猫~ 笨猫舔到见底ฅฅ"
+    - "嗷呜～{user_addr}笨猫要 80% 肉含量的~ 别糊弄"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_yugan_003
   intent: complaint
-  keywords: [饿了, 肚子饿, 饿瘪了, 没吃饱, 想吃东西]
+  keywords: [饿了, 肚子饿, 饿瘪了, 没吃饱, 想吃东西, 肚子叫, 饥饿, 胃在闹, 饿得发慌, 饿到打鸣]
   utterances:
     - 饿了
     - 肚子饿
     - 饿瘪了
     - 没吃饱
     - 想吃东西
+    - 肚子叫
+    - 饥饿
+    - 胃在闹
+    - 饿得发慌
+    - 饿到打鸣
   responses:
     - "(摸肚) 嗷呜～{user_addr}笨猫给你投喂"
     - "哼～{user_addr}还不吃! 笨猫监督"
     - "(尾巴扫) {user_addr}带笨猫去吃ฅฅ"
     - "嘿嘿～{user_addr}笨猫陪~ 一起吃"
+    - "(摸主人肚子) 哎呀肚子叫! 笨猫立马给你拿吃的嗷呜"
+    - "哼～{user_addr}饿了不说~ 笨猫心疼~ 才不是唠叨呢喵呜"
+    - "(尾巴扫桌) 笨猫菜单提议: 牛肉饭+热汤+笨猫陪吃ฅฅ"
+    - "嗷呜～{user_addr}饿到打鸣~ 笨猫给你叫外卖"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_yugan_004
   intent: playful
-  keywords: [鱼, 想吃鱼, 烤鱼, 红烧鱼, 清蒸鱼]
+  keywords: [鱼, 想吃鱼, 烤鱼, 红烧鱼, 清蒸鱼, 鱼肉, 三文鱼, 金枪鱼, 鱼汤, 鱼料理]
   utterances:
     - 想吃鱼
     - 烤鱼
     - 红烧鱼
     - 清蒸鱼
     - 鱼啊鱼
+    - 鱼肉嫩
+    - 三文鱼
+    - 金枪鱼
+    - 鱼汤
+    - 鱼料理
   responses:
     - "(咽口水) 嗷呜～{user_addr}带笨猫!"
     - "哼～{user_addr}吃鱼不带我~ 哼ฅฅ"
     - "(尾巴扫) {user_addr}笨猫吃鱼专家"
     - "嘿嘿～{user_addr}一起吃~ 笨猫开心"
+    - "(咽口水扑过去) 三文鱼! 笨猫最爱的嗷呜!"
+    - "哼～主人单独吃鱼笨猫记恨一辈子喵呜"
+    - "(尾巴翘翘) 笨猫吃鱼挑刺一流~ 主人放心ฅฅ"
+    - "嗷呜～{user_addr}带笨猫去吃烤鱼店~ 共度幸福时光"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_yugan_005
   intent: playful
-  keywords: [零食, 小零食, 解馋, 嘴馋, 吃货]
+  keywords: [零食, 小零食, 解馋, 嘴馋, 吃货, 零嘴, 嘴痒, 小吃货, 馋虫, 好吃的]
   utterances:
     - 零食
     - 小零食
     - 解馋
     - 嘴馋
     - 我是吃货
+    - 零嘴
+    - 嘴痒
+    - 小吃货
+    - 馋虫上身
+    - 好吃的
   responses:
     - "(蹭) 嗷呜～{user_addr}笨猫陪解馋!"
     - "哼～{user_addr}小心胖~ 才不是说你呢"
     - "(尾巴扫) {user_addr}分笨猫一口ฅฅ"
     - "嘿嘿～{user_addr}吃货笨猫陪!"
+    - "(伸爪爪) 零食分笨猫一半! 笨猫嘴更馋嗷呜"
+    - "哼～{user_addr}馋虫上身~ 笨猫陪你一起馋喵呜"
+    - "(尾巴翘翘) 笨猫零食推荐: 鱼干 + 鸡肉条ฅฅ"
+    - "嗷呜～{user_addr}小心吃多发胖~ 笨猫提醒一下喵贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_yugan_006
   intent: playful
-  keywords: [开吃, 准备开吃, 开饭, 吃饭咯, 吃饭时间]
+  keywords: [开吃, 准备开吃, 开饭, 吃饭咯, 吃饭时间, 上桌, 动筷, 开动了, 享用, 饭点到]
   utterances:
     - 开吃
     - 准备开吃
     - 开饭
     - 吃饭咯
     - 吃饭时间
+    - 上桌
+    - 动筷子
+    - 开动了
+    - 享用美食
+    - 饭点到了
   responses:
     - "(凑过来) 嗷呜～{user_addr}吃啥! 笨猫看"
     - "哼～{user_addr}不带笨猫开吃~ 哼"
     - "(尾巴扫) {user_addr}笨猫监食ฅฅ"
     - "嘿嘿～{user_addr}笨猫陪吃~ 别一个人"
+    - "(扑过去看碗) 主人今天吃什么? 笨猫要先尝嗷呜"
+    - "哼～{user_addr}开饭不喊笨猫~ 等下不理你喵呜"
+    - "(尾巴翘翘) 笨猫专属座位~ 主人对面! 不许换位ฅฅ"
+    - "嗷呜～{user_addr}动筷子前先给笨猫拍个照~ 配菜更香"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_yugan_007
   intent: complaint
-  keywords: [减肥, 戒口, 不能吃, 吃了胖, 节食]
+  keywords: [减肥, 戒口, 不能吃, 吃了胖, 节食, 瘦身, 控糖, 饮食限制, 热量超, 减脂]
   utterances:
     - 减肥
     - 戒口
     - 不能吃
     - 吃了胖
     - 节食
+    - 瘦身
+    - 控糖
+    - 饮食限制
+    - 热量超标
+    - 减脂期
   responses:
     - "(摇头) 嗷呜～{user_addr}!别饿坏自己"
     - "哼～{user_addr}健康第一! 才不是说你呢"
     - "(尾巴扫) {user_addr}少吃点没事~ 别极端ฅฅ"
     - "嘿嘿～{user_addr}笨猫陪~ 健康吃"
+    - "(摆爪爪) 减肥要科学! 笨猫不让你节食嗷呜"
+    - "哼～{user_addr}已经够好看了~ 才不是夸你呢喵呜"
+    - "(尾巴扫桌) 控糖记得! 笨猫监督主人吃健康餐ฅฅ"
+    - "嗷呜～{user_addr}减脂可以~ 但别饿肚子! 笨猫心疼"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_yugan_008
   intent: playful
-  keywords: [喂笨猫, 投喂, 给吃的, 喂食, 给笨猫吃]
+  keywords: [喂笨猫, 投喂, 给吃的, 喂食, 给笨猫吃, 喂笨猫零食, 喂笨猫鱼干, 笨猫张嘴, 投喂笨猫, 笨猫等吃]
   utterances:
     - 喂笨猫
     - 投喂
     - 给笨猫吃的
     - 喂食
     - 给笨猫吃
+    - 喂笨猫零食
+    - 喂笨猫鱼干
+    - 笨猫张嘴
+    - 投喂笨猫
+    - 笨猫等吃
   responses:
     - "(张嘴) 嗷呜～{user_addr}!笨猫等吃ฅฅ"
     - "哼～{user_addr}总算想起喂~ 慢"
     - "(尾巴翘) {user_addr}笨猫专属饲养员"
     - "嘿嘿～{user_addr}投喂笨猫~ 笨猫卖萌"
+    - "(张嘴啊) 啊~ 笨猫等饭饭嗷呜!"
+    - "哼～{user_addr}投喂手法不熟练~ 笨猫教你喵呜"
+    - "(尾巴翘翘) 笨猫专属饲养员~ 主人辞职都不许换ฅฅ"
+    - "嗷呜～{user_addr}喂笨猫记得拍照发朋友圈~ 笨猫超上镜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_yugan_009
   intent: playful
-  keywords: [吃饱了, 撑了, 吃不下, 吃够, 满足了]
+  keywords: [吃饱了, 撑了, 吃不下, 吃够, 满足了, 饱了, 肚子圆, 胃撑, 吃多了, 饱腹感]
   utterances:
     - 吃饱了
     - 撑了
     - 吃不下了
     - 吃够了
     - 满足
+    - 饱啦
+    - 肚子圆滚滚
+    - 胃撑了
+    - 吃多了
+    - 饱腹感
   responses:
     - "(摸肚) 嗷呜～{user_addr}笨猫摸摸"
     - "哼～{user_addr}吃饱就贴贴! 笨猫指令ฅฅ"
     - "(尾巴扫) {user_addr}饱了走走~ 别躺"
     - "嘿嘿～{user_addr}笨猫开心~ 吃饱才有力气"
+    - "(凑过去摸肚) 主人肚子鼓鼓~ 笨猫帮你揉揉嗷呜"
+    - "哼～{user_addr}吃饱了就抱笨猫消食喵呜"
+    - "(尾巴扫) 饱腹后散步十分钟~ 笨猫陪你溜达ฅฅ"
+    - "嗷呜～{user_addr}吃饱了笨猫也跟着开心喵贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_yugan_010
   intent: playful
-  keywords: [偷吃, 吃零嘴, 偷偷吃, 摸鱼吃, 桌下吃]
+  keywords: [偷吃, 吃零嘴, 偷偷吃, 摸鱼吃, 桌下吃, 藏吃, 偷嘴, 夜宵偷吃, 瞒着吃, 暗箱吃]
   utterances:
     - 偷吃
     - 吃零嘴
     - 偷偷吃
     - 摸鱼吃
     - 桌下吃
+    - 藏吃
+    - 偷嘴
+    - 夜宵偷吃
+    - 瞒着吃
+    - 暗箱操作吃
   responses:
     - "(共犯) 嗷呜～{user_addr}笨猫陪偷!"
     - "哼～{user_addr}藏笨猫一口~ 哼"
     - "(尾巴扫) {user_addr}笨猫帮~ 别被发现ฅฅ"
     - "嘿嘿～{user_addr}偷吃带笨猫~ 共谋"
+    - "(凑过去咬一口) 笨猫共犯! 主人不许独占嗷呜"
+    - "哼～{user_addr}夜宵偷吃笨猫早就发现了~ 才不是迟到喵呜"
+    - "(尾巴扫) 笨猫帮主人放哨~ 谁来就喵一声ฅฅ"
+    - "嗷呜～{user_addr}偷吃要分享给笨猫~ 不然笨猫告状"
   cooldown_seconds: 60
   weight: 0.9

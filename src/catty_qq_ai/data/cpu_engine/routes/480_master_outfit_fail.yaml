@@ -3,170 +3,260 @@
 
 - name: mof_outfit_001
   intent: playful
-  keywords: [穿搭塌房, 穿得丑, 穿搭翻车, 衣品差, 配色辣眼]
+  keywords: [穿搭塌房, 穿得丑, 穿搭翻车, 衣品差, 配色辣眼, 穿成龙袍, 农村风, 配错色, 时尚黑洞, 衣品死]
   utterances:
     - "{user_addr}穿搭塌房"
     - "{user_addr}穿得丑"
     - "{user_addr}穿搭翻车"
     - "{user_addr}衣品差"
     - "{user_addr}配色辣眼"
+    - "{user_addr}穿成龙袍"
+    - "{user_addr}农村风"
+    - "{user_addr}配错色"
+    - "{user_addr}时尚黑洞"
+    - "{user_addr}衣品死"
   responses:
     - "(扶头) {user_addr}笨猫笑喵ฅฅ"
     - "嗷呜～{user_addr}审美!"
     - "哼～{user_addr}笨猫帮选"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 时尚黑洞是天赋嗷呜～"
+    - "哼～配错色就重新搭"
+    - "(尾巴拍) 农村风也是一种风格喵"
+    - "嗷呜～衣品死笨猫救活ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_002
   intent: playful
-  keywords: [乱搭, 配色乱, 不协调, 五颜六色, 大花]
+  keywords: [乱搭, 配色乱, 不协调, 五颜六色, 大花, 花花绿绿, 像彩虹, 像孔雀, 杂色, 撞色]
   utterances:
     - "{user_addr}乱搭"
     - "{user_addr}配色乱"
     - "{user_addr}不协调"
     - "{user_addr}五颜六色"
     - "{user_addr}大花"
+    - "{user_addr}花花绿绿"
+    - "{user_addr}像彩虹"
+    - "{user_addr}像孔雀"
+    - "{user_addr}杂色"
+    - "{user_addr}撞色"
   responses:
     - "(笑) {user_addr}彩虹喵ฅฅ"
     - "嗷呜～{user_addr}花孔雀!"
     - "哼～{user_addr}笨猫笑场"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 像孔雀开屏一样嗷呜～"
+    - "哼～撞色太夸张"
+    - "(尾巴拍) 五颜六色去当小丑喵"
+    - "嗷呜～大花朵看着头晕ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_003
   intent: playful
-  keywords: [发型塌, 发型乱, 头发乱, 发型炸毛, 头炸了]
+  keywords: [发型塌, 发型乱, 头发乱, 发型炸毛, 头炸了, 鸡窝头, 没梳头, 早起头, 一团乱, 油头]
   utterances:
     - "{user_addr}发型塌"
     - "{user_addr}发型乱"
     - "{user_addr}头发乱"
     - "{user_addr}发型炸毛"
     - "{user_addr}头炸了"
+    - "{user_addr}鸡窝头"
+    - "{user_addr}没梳头"
+    - "{user_addr}早起头"
+    - "{user_addr}一团乱"
+    - "{user_addr}油头"
   responses:
     - "(笑) {user_addr}炸毛喵ฅฅ"
     - "嗷呜～{user_addr}笨猫一样!"
     - "哼～{user_addr}笨猫的"
     - "嘿嘿～{user_addr}笨猫给梳~"
+    - "(凑过来) 鸡窝头要梳嗷呜～"
+    - "哼～油头快去洗"
+    - "(尾巴拍) 早起头是常态喵"
+    - "嗷呜～一团乱也是个性ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_004
   intent: playful
-  keywords: [鞋丑, 鞋搭错, 拖鞋出门, 凉鞋不对, 鞋袜不对]
+  keywords: [鞋丑, 鞋搭错, 拖鞋出门, 凉鞋不对, 鞋袜不对, 拖鞋出街, 鞋袜配错, 鞋色不对, 鞋款不对, 拖鞋袜子]
   utterances:
     - "{user_addr}鞋丑"
     - "{user_addr}鞋搭错"
     - "{user_addr}拖鞋出门"
     - "{user_addr}凉鞋不对"
     - "{user_addr}鞋袜不对"
+    - "{user_addr}拖鞋出街"
+    - "{user_addr}鞋袜配错"
+    - "{user_addr}鞋色不对"
+    - "{user_addr}鞋款不对"
+    - "{user_addr}拖鞋袜子"
   responses:
     - "(笑) {user_addr}笑死喵ฅฅ"
     - "嗷呜～{user_addr}笨猫笑场!"
     - "哼～{user_addr}笨猫提醒"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(凑过来) 拖鞋袜子最尴尬嗷呜～"
+    - "哼～鞋款不对气场全无"
+    - "(尾巴拍) 拖鞋出街是种自由喵"
+    - "嗷呜～鞋袜配错笨猫笑出声ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_005
   intent: playful
-  keywords: [显胖, 显矮, 显土, 没气质, 不显瘦]
+  keywords: [显胖, 显矮, 显土, 没气质, 不显瘦, 显穷, 显丑, 没气场, 没精神, 显疲惫]
   utterances:
     - "{user_addr}显胖"
     - "{user_addr}显矮"
     - "{user_addr}显土"
     - "{user_addr}没气质"
     - "{user_addr}不显瘦"
+    - "{user_addr}显穷"
+    - "{user_addr}显丑"
+    - "{user_addr}没气场"
+    - "{user_addr}没精神"
+    - "{user_addr}显疲惫"
   responses:
     - "(扶头) {user_addr}笨猫帮喵ฅฅ"
     - "嗷呜～{user_addr}换!"
     - "哼～{user_addr}笨猫指导"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(凑过来) 显穷不是衣服的问题嗷呜～"
+    - "哼～没气场是态度问题"
+    - "(尾巴拍) 没精神先睡好觉喵"
+    - "嗷呜～显疲惫笨猫给{user_addr}揉揉ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_006
   intent: playful
-  keywords: [搭配大师, 配色高手, 衣品好, 时尚, 潮]
+  keywords: [搭配大师, 配色高手, 衣品好, 时尚, 潮, 潮流, 走秀, 穿搭达人, 穿搭博主, 时髦]
   utterances:
     - "{user_addr}搭配大师"
     - "{user_addr}配色高手"
     - "{user_addr}衣品好"
     - "{user_addr}时尚"
     - "{user_addr}潮"
+    - "{user_addr}潮流"
+    - "{user_addr}走秀"
+    - "{user_addr}穿搭达人"
+    - "{user_addr}穿搭博主"
+    - "{user_addr}时髦"
   responses:
     - "嗷呜～{user_addr}笨猫服喵ฅฅ"
     - "(尾巴翘) {user_addr}潮人!"
     - "哼～{user_addr}夸"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 穿搭博主是真有水平嗷呜～"
+    - "哼～走秀级别笨猫膜拜"
+    - "(尾巴拍) 时髦也要看心情喵"
+    - "嗷呜～潮流前线笨猫跟着学ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_007
   intent: complaint
-  keywords: [不知道穿啥, 穿什么好, 衣柜空, 不会搭, 找不到衣服]
+  keywords: [不知道穿啥, 穿什么好, 衣柜空, 不会搭, 找不到衣服, 衣服没准备, 没衣服穿, 衣柜满满没啥穿, 衣柜爆炸没穿的, 缺衣服]
   utterances:
     - "{user_addr}不知道穿啥"
     - "{user_addr}穿什么好"
     - "{user_addr}衣柜空"
     - "{user_addr}不会搭"
     - "{user_addr}找不到衣服"
+    - "{user_addr}衣服没准备"
+    - "{user_addr}没衣服穿"
+    - "{user_addr}衣柜满满没啥穿"
+    - "{user_addr}衣柜爆炸没穿的"
+    - "{user_addr}缺衣服"
   responses:
     - "嗷呜～笨猫帮{user_addr}选喵ฅฅ"
     - "(扑) {user_addr}笨猫的衣!"
     - "哼～{user_addr}笨猫挑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 衣柜满满没啥穿是经典嗷呜～"
+    - "哼～不会搭笨猫教"
+    - "(尾巴拍) 缺衣服那笨猫陪{user_addr}买喵"
+    - "嗷呜～没衣服穿就别赖人ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_008
   intent: playful
-  keywords: [秀肌肉, 秀身材, 秀腹肌, 紧身衣, 健身搭]
+  keywords: [秀肌肉, 秀身材, 秀腹肌, 紧身衣, 健身搭, 露胳膊, 紧绷, 显健, 秀八块腹肌, 健美]
   utterances:
     - "{user_addr}秀肌肉"
     - "{user_addr}秀身材"
     - "{user_addr}秀腹肌"
     - "{user_addr}紧身衣"
     - "{user_addr}健身搭"
+    - "{user_addr}露胳膊"
+    - "{user_addr}紧绷"
+    - "{user_addr}显健"
+    - "{user_addr}秀八块腹肌"
+    - "{user_addr}健美"
   responses:
     - "(脸红) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～{user_addr}笨猫不看!"
     - "哼～{user_addr}耍帅"
     - "(小声) {user_addr}笨猫的~"
+    - "(脸红更甚) 八块腹肌笨猫脸红嗷呜～"
+    - "哼～健美比例好"
+    - "(尾巴拍) 紧身衣笨猫看不下去喵"
+    - "嗷呜～秀身材笨猫偷偷看ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_009
   intent: playful
-  keywords: [复古风, 复古搭, 复古衣, 古风, 复古]
+  keywords: [复古风, 复古搭, 复古衣, 古风, 复古, 复古港风, 复古日系, 复古英伦, 复古美式, 古典]
   utterances:
     - "{user_addr}复古风"
     - "{user_addr}复古搭"
     - "{user_addr}复古衣"
     - "{user_addr}古风"
     - "{user_addr}复古"
+    - "{user_addr}复古港风"
+    - "{user_addr}复古日系"
+    - "{user_addr}复古英伦"
+    - "{user_addr}复古美式"
+    - "{user_addr}古典"
   responses:
     - "嗷呜～{user_addr}帅喵ฅฅ"
     - "(尾巴翘) 笨猫的复古!"
     - "哼～{user_addr}有品"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 复古港风超有韵味嗷呜～"
+    - "哼～复古日系也很可爱"
+    - "(尾巴拍) 复古英伦最有绅士范喵"
+    - "嗷呜～复古美式自由感拉满ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mof_outfit_010
   intent: playful
-  keywords: [被嘲穿搭, 朋友吐槽, 同事吐槽, 被议论, 被笑]
+  keywords: [被嘲穿搭, 朋友吐槽, 同事吐槽, 被议论, 被笑, 被吐槽穿搭, 被点评, 被嫌弃穿搭, 被指责穿搭, 被群嘲]
   utterances:
     - "{user_addr}被嘲穿搭"
     - "{user_addr}朋友吐槽"
     - "{user_addr}同事吐槽"
     - "{user_addr}被议论"
     - "{user_addr}被笑"
+    - "{user_addr}被吐槽穿搭"
+    - "{user_addr}被点评"
+    - "{user_addr}被嫌弃穿搭"
+    - "{user_addr}被指责穿搭"
+    - "{user_addr}被群嘲"
   responses:
     - "(贴贴) {user_addr}笨猫不嫌喵ฅฅ"
     - "嗷呜～{user_addr}笨猫!"
     - "才不是替你出气呢哼"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(炸毛) 被群嘲笨猫帮{user_addr}咬人嗷呜～"
+    - "哼～别人爱怎么说就怎么说"
+    - "(尾巴拍) 被嫌弃穿搭也是种关注喵"
+    - "嗷呜～被点评说明{user_addr}有存在感ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

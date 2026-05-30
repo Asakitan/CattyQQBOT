@@ -3,204 +3,432 @@
 
 - name: sa_ashare_001
   intent: question
-  keywords: [推荐 A 股 app, 推荐同花顺, 推荐东方财富, 推荐通达信, 笨猫 A 股 app]
+  keywords:
+  - 推荐 A 股 app
+  - 推荐同花顺
+  - 推荐东方财富
+  - 推荐通达信
+  - 笨猫 A 股 app
+  - 有什么 A 股 app
+  - 有什么同花顺
+  - 有什么东方财富
+  - 有什么通达信
   utterances:
-    - 推荐 A 股 app
-    - 推荐同花顺
-    - 推荐东方财富
-    - 推荐通达信
-    - 笨猫 A 股 app
+  - 推荐 A 股 app
+  - 推荐同花顺
+  - 推荐东方财富
+  - 推荐通达信
+  - 笨猫 A 股 app
+  - "{user_addr}聊聊A 股 app嘛"
+  - "{user_addr}A 股 app哪家强"
+  - "{user_addr}人家想了解A 股 app"
+  - 笨猫给猜猜A 股 app
+  - "{user_addr}A 股 app怎么选喵"
+  - A 股 app有推荐吗
   responses:
-    - "嗷呜～{user_addr}同花顺 - A 股老牌 No.1ฅฅ"
-    - "(尾巴翘) 东方财富 - 资讯 + 交易"
-    - "{user_addr}通达信 - 专业看盘"
-    - "(挺胸) 笨猫推荐: 同花顺日常 + 东财资讯!"
+  - "嗷呜～{user_addr}同花顺 - A 股老牌 No.1ฅฅ"
+  - "(尾巴翘) 东方财富 - 资讯 + 交易"
+  - "{user_addr}通达信 - 专业看盘"
+  - "(挺胸) 笨猫推荐: 同花顺日常 + 东财资讯!"
+  - "(尾巴翘起来) {user_addr}A 股 app? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问A 股 app人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}A 股 app的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}A 股 app笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_usstock_001
   intent: question
-  keywords: [推荐美股 app, 推荐富途牛牛, 推荐老虎证券, 推荐 Robinhood, 笨猫美股 app]
+  keywords:
+  - 推荐美股 app
+  - 推荐富途牛牛
+  - 推荐老虎证券
+  - 推荐 Robinhood
+  - 笨猫美股 app
+  - 有什么美股 app
+  - 有什么富途牛牛
+  - 有什么老虎证券
+  - 有什么 Robinhood
   utterances:
-    - 推荐美股 app
-    - 推荐富途牛牛
-    - 推荐老虎证券
-    - 推荐 Robinhood
-    - 笨猫美股 app
+  - 推荐美股 app
+  - 推荐富途牛牛
+  - 推荐老虎证券
+  - 推荐 Robinhood
+  - 笨猫美股 app
+  - "{user_addr}聊聊美股 app嘛"
+  - "{user_addr}美股 app哪家强"
+  - "{user_addr}人家想了解美股 app"
+  - 笨猫给猜猜美股 app
+  - "{user_addr}美股 app怎么选喵"
+  - 美股 app有推荐吗
   responses:
-    - "嗷呜～{user_addr}富途牛牛 - 港美股神器ฅฅ"
-    - "(尾巴翘) 老虎 Tiger - 中文友好"
-    - "{user_addr}Robinhood / IBKR 盈透"
-    - "(挺胸) 笨猫推荐: 富途入门 + IBKR 进阶!"
+  - "嗷呜～{user_addr}富途牛牛 - 港美股神器ฅฅ"
+  - "(尾巴翘) 老虎 Tiger - 中文友好"
+  - "{user_addr}Robinhood / IBKR 盈透"
+  - "(挺胸) 笨猫推荐: 富途入门 + IBKR 进阶!"
+  - "(尾巴翘起来) {user_addr}美股 app? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问美股 app人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}美股 app的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}美股 app笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_hkstock_001
   intent: question
-  keywords: [推荐港股 app, 推荐雪盈, 推荐富途港股, 推荐华盛通, 笨猫港股]
+  keywords:
+  - 推荐港股 app
+  - 推荐雪盈
+  - 推荐富途港股
+  - 推荐华盛通
+  - 笨猫港股
+  - 有什么港股 app
+  - 有什么雪盈
+  - 有什么富途港股
+  - 有什么华盛通
   utterances:
-    - 推荐港股 app
-    - 推荐雪盈
-    - 推荐富途港股
-    - 推荐华盛通
-    - 笨猫港股
+  - 推荐港股 app
+  - 推荐雪盈
+  - 推荐富途港股
+  - 推荐华盛通
+  - 笨猫港股
+  - "{user_addr}聊聊港股 app嘛"
+  - "{user_addr}港股 app哪家强"
+  - "{user_addr}人家想了解港股 app"
+  - 笨猫给猜猜港股 app
+  - "{user_addr}港股 app怎么选喵"
+  - 港股 app有推荐吗
   responses:
-    - "嗷呜～{user_addr}富途 / 老虎 - 港股主流ฅฅ"
-    - "(尾巴翘) 雪盈证券 - 雪球旗下"
-    - "{user_addr}华盛通 / 耀才 / 辉立"
-    - "(挺胸) 笨猫推荐: 富途港美一站式!"
+  - "嗷呜～{user_addr}富途 / 老虎 - 港股主流ฅฅ"
+  - "(尾巴翘) 雪盈证券 - 雪球旗下"
+  - "{user_addr}华盛通 / 耀才 / 辉立"
+  - "(挺胸) 笨猫推荐: 富途港美一站式!"
+  - "(尾巴翘起来) {user_addr}港股 app? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问港股 app人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}港股 app的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}港股 app笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_quant_001
   intent: question
-  keywords: [推荐量化交易, 推荐 iQuant, 推荐雪球量化, 推荐聚宽, 笨猫量化]
+  keywords:
+  - 推荐量化交易
+  - 推荐 iQuant
+  - 推荐雪球量化
+  - 推荐聚宽
+  - 笨猫量化
+  - 有什么量化交易
+  - 有什么 iQuant
+  - 有什么雪球量化
+  - 有什么聚宽
   utterances:
-    - 推荐量化交易
-    - 推荐 iQuant
-    - 推荐雪球量化
-    - 推荐聚宽
-    - 笨猫量化
+  - 推荐量化交易
+  - 推荐 iQuant
+  - 推荐雪球量化
+  - 推荐聚宽
+  - 笨猫量化
+  - "{user_addr}聊聊量化交易嘛"
+  - "{user_addr}量化交易哪家强"
+  - "{user_addr}人家想了解量化交易"
+  - 笨猫给猜猜量化交易
+  - "{user_addr}量化交易怎么选喵"
+  - 量化交易有推荐吗
   responses:
-    - "嗷呜～{user_addr}聚宽 JoinQuant - 入门首选ฅฅ"
-    - "(尾巴翘) 米筐 RiceQuant / 优矿"
-    - "{user_addr}vnpy 开源 / Backtrader"
-    - "(挺胸) 笨猫推荐: 聚宽学策略 + vnpy 实盘!"
+  - "嗷呜～{user_addr}聚宽 JoinQuant - 入门首选ฅฅ"
+  - "(尾巴翘) 米筐 RiceQuant / 优矿"
+  - "{user_addr}vnpy 开源 / Backtrader"
+  - "(挺胸) 笨猫推荐: 聚宽学策略 + vnpy 实盘!"
+  - "(尾巴翘起来) {user_addr}量化交易? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问量化交易人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}量化交易的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}量化交易笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sa_learn_001
   intent: question
-  keywords: [推荐投资学习, 推荐雪球社区, 推荐东方财富吧, 推荐股票入门, 笨猫投资学习]
+  keywords:
+  - 推荐投资学习
+  - 推荐雪球社区
+  - 推荐东方财富吧
+  - 推荐股票入门
+  - 笨猫投资学习
+  - 有什么投资学习
+  - 有什么雪球社区
+  - 有什么东方财富吧
+  - 有什么股票入门
   utterances:
-    - 推荐投资学习
-    - 推荐雪球社区
-    - 推荐东方财富吧
-    - 推荐股票入门
-    - 笨猫投资学习
+  - 推荐投资学习
+  - 推荐雪球社区
+  - 推荐东方财富吧
+  - 推荐股票入门
+  - 笨猫投资学习
+  - "{user_addr}聊聊投资学习嘛"
+  - "{user_addr}投资学习哪家强"
+  - "{user_addr}人家想了解投资学习"
+  - 笨猫给猜猜投资学习
+  - "{user_addr}投资学习怎么选喵"
+  - 投资学习有推荐吗
   responses:
-    - "嗷呜～{user_addr}雪球 - 投资社区龙头ฅฅ"
-    - "(尾巴翘) 东方财富股吧 / 知乎"
-    - "{user_addr}《聪明的投资者》《股票作手》"
-    - "(挺胸) 笨猫推荐: 先看书再开户!"
+  - "嗷呜～{user_addr}雪球 - 投资社区龙头ฅฅ"
+  - "(尾巴翘) 东方财富股吧 / 知乎"
+  - "{user_addr}《聪明的投资者》《股票作手》"
+  - "(挺胸) 笨猫推荐: 先看书再开户!"
+  - "(尾巴翘起来) {user_addr}投资学习? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问投资学习人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}投资学习的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}投资学习笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_kline_001
   intent: question
-  keywords: [推荐 K 线分析, 推荐技术分析, 推荐均线, 推荐 MACD, 笨猫 K 线]
+  keywords:
+  - 推荐 K 线分析
+  - 推荐技术分析
+  - 推荐均线
+  - 推荐 MACD
+  - 笨猫 K 线
+  - 有什么 K 线分析
+  - 有什么技术分析
+  - 有什么均线
+  - 有什么 MACD
   utterances:
-    - 推荐 K 线分析
-    - 推荐技术分析
-    - 推荐均线
-    - 推荐 MACD
-    - 笨猫 K 线
+  - 推荐 K 线分析
+  - 推荐技术分析
+  - 推荐均线
+  - 推荐 MACD
+  - 笨猫 K 线
+  - "{user_addr}聊聊K 线分析嘛"
+  - "{user_addr}K 线分析哪家强"
+  - "{user_addr}人家想了解K 线分析"
+  - 笨猫给猜猜K 线分析
+  - "{user_addr}K 线分析怎么选喵"
+  - K 线分析有推荐吗
   responses:
-    - "嗷呜～{user_addr}日 K + 周 K + 月 K 三维度ฅฅ"
-    - "(尾巴翘) MA5/MA20/MA60 均线"
-    - "{user_addr}MACD / KDJ / BOLL 三件套"
-    - "(挺胸) 笨猫提醒: 技术分析只是参考!"
+  - "嗷呜～{user_addr}日 K + 周 K + 月 K 三维度ฅฅ"
+  - "(尾巴翘) MA5/MA20/MA60 均线"
+  - "{user_addr}MACD / KDJ / BOLL 三件套"
+  - "(挺胸) 笨猫提醒: 技术分析只是参考!"
+  - "(尾巴翘起来) {user_addr}K 线分析? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问K 线分析人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}K 线分析的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}K 线分析笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sa_fundamental_001
   intent: question
-  keywords: [推荐基本面分析, 推荐财报分析, 推荐 PE PB, 推荐 ROE, 笨猫基本面]
+  keywords:
+  - 推荐基本面分析
+  - 推荐财报分析
+  - 推荐 PE PB
+  - 推荐 ROE
+  - 笨猫基本面
+  - 有什么基本面分析
+  - 有什么财报分析
+  - 有什么 PE PB
+  - 有什么 ROE
   utterances:
-    - 推荐基本面分析
-    - 推荐财报分析
-    - 推荐 PE PB
-    - 推荐 ROE
-    - 笨猫基本面
+  - 推荐基本面分析
+  - 推荐财报分析
+  - 推荐 PE PB
+  - 推荐 ROE
+  - 笨猫基本面
+  - "{user_addr}聊聊基本面分析嘛"
+  - "{user_addr}基本面分析哪家强"
+  - "{user_addr}人家想了解基本面分析"
+  - 笨猫给猜猜基本面分析
+  - "{user_addr}基本面分析怎么选喵"
+  - 基本面分析有推荐吗
   responses:
-    - "嗷呜～{user_addr}PE 市盈率 + PB 市净率ฅฅ"
-    - "(尾巴翘) ROE > 15% 是好公司"
-    - "{user_addr}年报 / 季报 / 现金流"
-    - "(挺胸) 笨猫推荐: 长期看基本面!"
+  - "嗷呜～{user_addr}PE 市盈率 + PB 市净率ฅฅ"
+  - "(尾巴翘) ROE > 15% 是好公司"
+  - "{user_addr}年报 / 季报 / 现金流"
+  - "(挺胸) 笨猫推荐: 长期看基本面!"
+  - "(尾巴翘起来) {user_addr}基本面分析? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问基本面分析人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}基本面分析的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}基本面分析笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_value_001
   intent: question
-  keywords: [推荐价值投资, 推荐巴菲特, 推荐芒格, 推荐长期持有, 笨猫价值投资]
+  keywords:
+  - 推荐价值投资
+  - 推荐巴菲特
+  - 推荐芒格
+  - 推荐长期持有
+  - 笨猫价值投资
+  - 有什么价值投资
+  - 有什么巴菲特
+  - 有什么芒格
+  - 有什么长期持有
   utterances:
-    - 推荐价值投资
-    - 推荐巴菲特
-    - 推荐芒格
-    - 推荐长期持有
-    - 笨猫价值投资
+  - 推荐价值投资
+  - 推荐巴菲特
+  - 推荐芒格
+  - 推荐长期持有
+  - 笨猫价值投资
+  - "{user_addr}聊聊价值投资嘛"
+  - "{user_addr}价值投资哪家强"
+  - "{user_addr}人家想了解价值投资"
+  - 笨猫给猜猜价值投资
+  - "{user_addr}价值投资怎么选喵"
+  - 价值投资有推荐吗
   responses:
-    - "嗷呜～{user_addr}巴菲特《致股东信》必读ฅฅ"
-    - "(尾巴翘) 护城河 + 安全边际 + 复利"
-    - "{user_addr}买股票 = 买公司股权"
-    - "(挺胸) 笨猫推荐: 时间是朋友!"
+  - "嗷呜～{user_addr}巴菲特《致股东信》必读ฅฅ"
+  - "(尾巴翘) 护城河 + 安全边际 + 复利"
+  - "{user_addr}买股票 = 买公司股权"
+  - "(挺胸) 笨猫推荐: 时间是朋友!"
+  - "(尾巴翘起来) {user_addr}价值投资? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问价值投资人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}价值投资的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}价值投资笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_ipo_001
   intent: question
-  keywords: [推荐打新股, 推荐 IPO, 推荐新股申购, 推荐港股打新, 笨猫打新]
+  keywords:
+  - 推荐打新股
+  - 推荐 IPO
+  - 推荐新股申购
+  - 推荐港股打新
+  - 笨猫打新
+  - 有什么打新股
+  - 有什么 IPO
+  - 有什么新股申购
+  - 有什么港股打新
   utterances:
-    - 推荐打新股
-    - 推荐 IPO
-    - 推荐新股申购
-    - 推荐港股打新
-    - 笨猫打新
+  - 推荐打新股
+  - 推荐 IPO
+  - 推荐新股申购
+  - 推荐港股打新
+  - 笨猫打新
+  - "{user_addr}聊聊打新股嘛"
+  - "{user_addr}打新股哪家强"
+  - "{user_addr}人家想了解打新股"
+  - 笨猫给猜猜打新股
+  - "{user_addr}打新股怎么选喵"
+  - 打新股有推荐吗
   responses:
-    - "嗷呜～{user_addr}A 股打新 - 市值门槛ฅฅ"
-    - "(尾巴翘) 港股打新 - 现金 / 融资"
-    - "{user_addr}科创板 / 创业板需开通"
-    - "(挺胸) 笨猫提醒: 新股也会破发!"
+  - "嗷呜～{user_addr}A 股打新 - 市值门槛ฅฅ"
+  - "(尾巴翘) 港股打新 - 现金 / 融资"
+  - "{user_addr}科创板 / 创业板需开通"
+  - "(挺胸) 笨猫提醒: 新股也会破发!"
+  - "(尾巴翘起来) {user_addr}打新股? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问打新股人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}打新股的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}打新股笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: sa_futures_001
   intent: question
-  keywords: [推荐期货, 推荐外汇, 推荐高杠杆, 推荐衍生品, 笨猫期货]
+  keywords:
+  - 推荐期货
+  - 推荐外汇
+  - 推荐高杠杆
+  - 推荐衍生品
+  - 笨猫期货
+  - 有什么期货
+  - 有什么外汇
+  - 有什么高杠杆
+  - 有什么衍生品
   utterances:
-    - 推荐期货
-    - 推荐外汇
-    - 推荐高杠杆
-    - 推荐衍生品
-    - 笨猫期货
+  - 推荐期货
+  - 推荐外汇
+  - 推荐高杠杆
+  - 推荐衍生品
+  - 笨猫期货
+  - "{user_addr}聊聊期货嘛"
+  - "{user_addr}期货哪家强"
+  - "{user_addr}人家想了解期货"
+  - 笨猫给猜猜期货
+  - "{user_addr}期货怎么选喵"
+  - 期货有推荐吗
   responses:
-    - "嗷呜～{user_addr}期货高杠杆高风险ฅฅ"
-    - "(尾巴翘) 文华财经 / 博易大师"
-    - "{user_addr}外汇 MT4 / MT5"
-    - "(警告) 笨猫提醒: 小白远离!爆仓血本无归!"
+  - "嗷呜～{user_addr}期货高杠杆高风险ฅฅ"
+  - "(尾巴翘) 文华财经 / 博易大师"
+  - "{user_addr}外汇 MT4 / MT5"
+  - "(警告) 笨猫提醒: 小白远离!爆仓血本无归!"
+  - "(尾巴翘起来) {user_addr}期货? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问期货人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}期货的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}期货笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: sa_stoploss_001
   intent: question
-  keywords: [推荐止损, 推荐止盈, 推荐风险控制, 推荐仓位管理, 笨猫止损]
+  keywords:
+  - 推荐止损
+  - 推荐止盈
+  - 推荐风险控制
+  - 推荐仓位管理
+  - 笨猫止损
+  - 有什么止损
+  - 有什么止盈
+  - 有什么风险控制
+  - 有什么仓位管理
   utterances:
-    - 推荐止损
-    - 推荐止盈
-    - 推荐风险控制
-    - 推荐仓位管理
-    - 笨猫止损
+  - 推荐止损
+  - 推荐止盈
+  - 推荐风险控制
+  - 推荐仓位管理
+  - 笨猫止损
+  - "{user_addr}聊聊止损嘛"
+  - "{user_addr}止损哪家强"
+  - "{user_addr}人家想了解止损"
+  - 笨猫给猜猜止损
+  - "{user_addr}止损怎么选喵"
+  - 止损有推荐吗
   responses:
-    - "嗷呜～{user_addr}止损 -7% 铁律ฅฅ"
-    - "(尾巴翘) 止盈分批 / 移动止盈"
-    - "{user_addr}单只仓位 < 20%"
-    - "(挺胸) 笨猫推荐: 活下来比赚钱重要!"
+  - "嗷呜～{user_addr}止损 -7% 铁律ฅฅ"
+  - "(尾巴翘) 止盈分批 / 移动止盈"
+  - "{user_addr}单只仓位 < 20%"
+  - "(挺胸) 笨猫推荐: 活下来比赚钱重要!"
+  - "(尾巴翘起来) {user_addr}止损? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问止损人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}止损的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}止损笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_psychology_001
   intent: question
-  keywords: [推荐避免追涨杀跌, 推荐情绪控制, 推荐定投, 推荐反人性, 笨猫炒股心态]
+  keywords:
+  - 推荐避免追涨杀跌
+  - 推荐情绪控制
+  - 推荐定投
+  - 推荐反人性
+  - 笨猫炒股心态
+  - 有什么避免追涨杀跌
+  - 有什么情绪控制
+  - 有什么定投
+  - 有什么反人性
   utterances:
-    - 推荐避免追涨杀跌
-    - 推荐情绪控制
-    - 推荐定投
-    - 推荐反人性
-    - 笨猫炒股心态
+  - 推荐避免追涨杀跌
+  - 推荐情绪控制
+  - 推荐定投
+  - 推荐反人性
+  - 笨猫炒股心态
+  - "{user_addr}聊聊避免追涨杀跌嘛"
+  - "{user_addr}避免追涨杀跌哪家强"
+  - "{user_addr}人家想了解避免追涨杀跌"
+  - 笨猫给猜猜避免追涨杀跌
+  - "{user_addr}避免追涨杀跌怎么选喵"
+  - 避免追涨杀跌有推荐吗
   responses:
-    - "嗷呜～{user_addr}追涨杀跌 = 韭菜典型ฅฅ"
-    - "(尾巴翘) 别人贪婪我恐惧"
-    - "{user_addr}定投 ETF 最反人性"
-    - "(挺胸) 笨猫推荐: 闲钱 + 长期 + 不看!"
+  - "嗷呜～{user_addr}追涨杀跌 = 韭菜典型ฅฅ"
+  - "(尾巴翘) 别人贪婪我恐惧"
+  - "{user_addr}定投 ETF 最反人性"
+  - "(挺胸) 笨猫推荐: 闲钱 + 长期 + 不看!"
+  - "(尾巴翘起来) {user_addr}避免追涨杀跌? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问避免追涨杀跌人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}避免追涨杀跌的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}避免追涨杀跌笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9

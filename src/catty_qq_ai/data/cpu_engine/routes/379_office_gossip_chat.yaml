@@ -3,187 +3,330 @@
 
 - name: ogc_bagua_001
   intent: playful
-  keywords: [八卦, 听说, 听到没, 偷听到, 八卦时间]
+  keywords: [八卦, 听说, 听到没, 偷听到, 八卦时间, 八卦啦, 听说啦, 听到没啦, 八卦喵, 听说喵]
   utterances:
-    - 八卦
-    - 听说
-    - 听到没
-    - 偷听到
-    - 八卦时间
+    - "八卦"
+    - "听说"
+    - "听到没"
+    - "偷听到"
+    - "八卦时间"
+    - "{user_addr}八卦"
+    - "八卦啦"
+    - "八卦嗷"
+    - "{user_addr}听说"
+    - "听说啦"
+    - "嘿{user_addr}八卦"
+    - "嘿{user_addr}听说"
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}讲讲!"
     - "嘿嘿～{user_addr}的八卦~ 笨猫等!"
     - "(凑过去) 哼～{user_addr}快说!"
     - "{user_addr}的瓜~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_lijinhui_001
   intent: playful
-  keywords: [离婚, 离职, 跳槽, 跑路, 转岗]
+  keywords: [离婚, 离职, 跳槽, 跑路, 转岗, 离婚啦, 离职啦, 跳槽啦, 离婚喵, 离职喵]
   utterances:
-    - 离婚
-    - 离职
-    - 跳槽
-    - 跑路
-    - 转岗
+    - "离婚"
+    - "离职"
+    - "跳槽"
+    - "跑路"
+    - "转岗"
+    - "{user_addr}离婚"
+    - "离婚啦"
+    - "离婚嗷"
+    - "{user_addr}离职"
+    - "离职啦"
+    - "嘿{user_addr}离婚"
+    - "嘿{user_addr}离职"
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}!! 谁?!"
     - "嘿嘿～{user_addr}的瓜大!"
     - "(尾巴翘) 哼～{user_addr}的消息~"
     - "{user_addr}的瓜~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_xinshi_001
   intent: playful
-  keywords: [新同事, 新来的, 入职, 新人, 新员工]
+  keywords: [新同事, 新来的, 入职, 新人, 新员工, 新同事啦, 新来的啦, 入职啦, 新同事喵, 新来的喵]
   utterances:
-    - 新同事
-    - 新来的
-    - 入职
-    - 新人
-    - 新员工
+    - "新同事"
+    - "新来的"
+    - "入职"
+    - "新人"
+    - "新员工"
+    - "{user_addr}新同事"
+    - "新同事啦"
+    - "新同事嗷"
+    - "{user_addr}新来的"
+    - "新来的啦"
+    - "嘿{user_addr}新同事"
+    - "嘿{user_addr}新来的"
   responses:
     - "嗷呜～{user_addr}的新同事~ 啥样?"
     - "嘿嘿～{user_addr}的新人帮忙!"
     - "(尾巴绕) 哼～{user_addr}的新同事介绍!"
     - "{user_addr}的同事圈~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_xiezuo_001
   intent: playful
-  keywords: [恋情, 办公室恋情, 同事恋, 暗恋, 表白同事]
+  keywords: [恋情, 办公室恋情, 同事恋, 暗恋, 表白同事, 恋情啦, 办公室恋情啦, 同事恋啦, 恋情喵, 办公室恋情喵]
   utterances:
-    - 恋情
-    - 办公室恋情
-    - 同事恋
-    - 暗恋
-    - 表白同事
+    - "恋情"
+    - "办公室恋情"
+    - "同事恋"
+    - "暗恋"
+    - "表白同事"
+    - "{user_addr}恋情"
+    - "恋情啦"
+    - "恋情嗷"
+    - "{user_addr}办公室恋情"
+    - "办公室恋情啦"
+    - "嘿{user_addr}恋情"
+    - "嘿{user_addr}办公室恋情"
   responses:
     - "(炸毛) 嗷呜～{user_addr}!!"
     - "嘿嘿～{user_addr}的瓜大!"
     - "(凑过去) 哼～{user_addr}!"
     - "{user_addr}的恋情~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_jiangjin_001
   intent: playful
-  keywords: [奖金, 涨薪, 年终, 提薪, 加薪]
+  keywords: [奖金, 涨薪, 年终, 提薪, 加薪, 奖金啦, 涨薪啦, 年终啦, 奖金喵, 涨薪喵]
   utterances:
-    - 奖金
-    - 涨薪
-    - 年终
-    - 提薪
-    - 加薪
+    - "奖金"
+    - "涨薪"
+    - "年终"
+    - "提薪"
+    - "加薪"
+    - "{user_addr}奖金"
+    - "奖金啦"
+    - "奖金嗷"
+    - "{user_addr}涨薪"
+    - "涨薪啦"
+    - "嘿{user_addr}奖金"
+    - "嘿{user_addr}涨薪"
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}涨薪!"
     - "嘿嘿～{user_addr}的奖金~ 笨猫沾!"
     - "(凑过去) 哼～{user_addr}!"
     - "{user_addr}的财~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_shengzhi_001
   intent: playful
-  keywords: [升职, 晋升, 升级, 当主管, 当领导]
+  keywords: [升职, 晋升, 升级, 当主管, 当领导, 升职啦, 晋升啦, 升级啦, 升职喵, 晋升喵]
   utterances:
-    - 升职
-    - 晋升
-    - 升级
-    - 当主管
-    - 当领导
+    - "升职"
+    - "晋升"
+    - "升级"
+    - "当主管"
+    - "当领导"
+    - "{user_addr}升职"
+    - "升职啦"
+    - "升职嗷"
+    - "{user_addr}晋升"
+    - "晋升啦"
+    - "嘿{user_addr}升职"
+    - "嘿{user_addr}晋升"
   responses:
     - "嗷呜～{user_addr}晋升!! 笨猫骄傲!"
     - "嘿嘿～{user_addr}的升职~ 请客!"
     - "(尾巴翘) 哼～{user_addr}应该的!"
     - "{user_addr}的高升~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_chuihu_001
   intent: playful
-  keywords: [跪舔, 拍马屁, 巴结, 讨好领导, 谄媚]
+  keywords: [跪舔, 拍马屁, 巴结, 讨好领导, 谄媚, 跪舔啦, 拍马屁啦, 巴结啦, 跪舔喵, 拍马屁喵]
   utterances:
-    - 跪舔
-    - 拍马屁
-    - 巴结
-    - 讨好领导
-    - 谄媚
+    - "跪舔"
+    - "拍马屁"
+    - "巴结"
+    - "讨好领导"
+    - "谄媚"
+    - "{user_addr}跪舔"
+    - "跪舔啦"
+    - "跪舔嗷"
+    - "{user_addr}拍马屁"
+    - "拍马屁啦"
+    - "嘿{user_addr}跪舔"
+    - "嘿{user_addr}拍马屁"
   responses:
     - "(尾巴扫) 嗷呜～{user_addr}的同事!"
     - "嘿嘿～{user_addr}的吐槽~ 笨猫接!"
     - "(凑过去) 哼～{user_addr}的同事讨厌!"
     - "{user_addr}的吐槽~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_tuancan_001
   intent: playful
-  keywords: [团建, 聚餐, 团队聚餐, 部门活动, 公司活动]
+  keywords: [团建, 聚餐, 团队聚餐, 部门活动, 公司活动, 团建啦, 聚餐啦, 团队聚餐啦, 团建喵, 聚餐喵]
   utterances:
-    - 团建
-    - 聚餐
-    - 团队聚餐
-    - 部门活动
-    - 公司活动
+    - "团建"
+    - "聚餐"
+    - "团队聚餐"
+    - "部门活动"
+    - "公司活动"
+    - "{user_addr}团建"
+    - "团建啦"
+    - "团建嗷"
+    - "{user_addr}聚餐"
+    - "聚餐啦"
+    - "嘿{user_addr}团建"
+    - "嘿{user_addr}聚餐"
   responses:
     - "嗷呜～{user_addr}团建吃啥?"
     - "嘿嘿～{user_addr}的聚餐~ 笨猫想去!"
     - "(尾巴翘) 哼～{user_addr}带笨猫!"
     - "{user_addr}的团建~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_jianzhi_001
   intent: complaint
-  keywords: [辞职念头, 想辞职, 跑路念头, 不想干, 待不下去]
+  keywords: [辞职念头, 想辞职, 跑路念头, 不想干, 待不下去, 辞职念头啦, 想辞职啦, 跑路念头啦, 辞职念头喵, 想辞职喵]
   utterances:
-    - 想辞职
-    - 辞职念头
-    - 跑路念头
-    - 不想干
-    - 待不下去
+    - "想辞职"
+    - "辞职念头"
+    - "跑路念头"
+    - "不想干"
+    - "待不下去"
+    - "{user_addr}想辞职"
+    - "想辞职啦"
+    - "想辞职嗷"
+    - "{user_addr}辞职念头"
+    - "辞职念头啦"
+    - "嘿{user_addr}想辞职"
+    - "嘿{user_addr}辞职念头"
   responses:
     - "(凑过去) 嗷呜～{user_addr}!!"
     - "嘿嘿～{user_addr}的想法~ 笨猫陪!"
     - "(尾巴搭) 哼～{user_addr}考虑清楚!"
     - "{user_addr}的决定~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_zaowayu_001
   intent: playful
-  keywords: [上班造谣, 公司谣言, 内部消息, 风声, 不实消息]
+  keywords: [上班造谣, 公司谣言, 内部消息, 风声, 不实消息, 上班造谣啦, 公司谣言啦, 内部消息啦, 上班造谣喵, 公司谣言喵]
   utterances:
-    - 公司谣言
-    - 内部消息
-    - 风声
-    - 上班造谣
-    - 不实消息
+    - "公司谣言"
+    - "内部消息"
+    - "风声"
+    - "上班造谣"
+    - "不实消息"
+    - "{user_addr}公司谣言"
+    - "公司谣言啦"
+    - "公司谣言嗷"
+    - "{user_addr}内部消息"
+    - "内部消息啦"
+    - "嘿{user_addr}公司谣言"
+    - "嘿{user_addr}内部消息"
   responses:
     - "嗷呜～{user_addr}的谣言?!"
     - "嘿嘿～{user_addr}的消息~ 笨猫等真相!"
     - "(尾巴翘) 哼～{user_addr}别传!"
     - "{user_addr}的内部消息~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogc_caishuixu_001
   intent: playful
-  keywords: [年会, 抽奖年会, 公司晚会, 年终晚会, 晚会]
+  keywords: [年会, 抽奖年会, 公司晚会, 年终晚会, 晚会, 年会啦, 抽奖年会啦, 公司晚会啦, 年会喵, 抽奖年会喵]
   utterances:
-    - 年会
-    - 抽奖年会
-    - 公司晚会
-    - 年终晚会
-    - 晚会
+    - "年会"
+    - "抽奖年会"
+    - "公司晚会"
+    - "年终晚会"
+    - "晚会"
+    - "{user_addr}年会"
+    - "年会啦"
+    - "年会嗷"
+    - "{user_addr}抽奖年会"
+    - "抽奖年会啦"
+    - "嘿{user_addr}年会"
+    - "嘿{user_addr}抽奖年会"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}抽奖!"
     - "嘿嘿～{user_addr}的年会~ 笨猫想去!"
     - "(凑过去) 哼～{user_addr}带笨猫!"
     - "{user_addr}的年会~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

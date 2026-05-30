@@ -3,204 +3,312 @@
 
 - name: scp_cram_001
   intent: complaint
-  keywords: [抱佛脚, 临时复习, 考前突击, 突击复习, 一夜抱]
+  keywords: [抱佛脚, 临时复习, 考前突击, 突击复习, 一夜抱, 临阵磨枪, 临考前突击, 突击学, 考前抱]
   utterances:
     - 抱佛脚
     - 临时复习
     - 考前突击
     - 突击复习
     - 一夜抱
+    - 临阵磨枪
+    - "{user_addr}抱佛脚"
+    - 临考前突击
+    - 突击学
+    - 考前抱
   responses:
     - "(贴过去) 嗷呜～{user_addr}加油 ฅฅ"
     - "哼～{user_addr}平时不学!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}撑住!"
+    - "(扑过去) 笨猫陪{user_addr}熬夜!"
+    - "哼～早干嘛去了!"
+    - "(尾巴扫) 抓重点速读~"
+    - "嗷呜～{user_addr}至少祈祷有效 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_exam_panic_001
   intent: complaint
-  keywords: [考试焦虑, 紧张, 怕考砸, 考前恐慌, 心慌]
+  keywords: [考试焦虑, 紧张, 怕考砸, 考前恐慌, 心慌, 考前焦虑, 紧张死了, 焦虑爆表, 怕考不好]
   utterances:
     - 考试焦虑
     - 紧张
     - 怕考砸
     - 考前恐慌
     - 心慌
+    - 考前焦虑
+    - "{user_addr}紧张"
+    - 紧张死了
+    - 焦虑爆表
+    - 怕考不好
   responses:
     - "(贴过去) 嗷呜～{user_addr}放松 ฅฅ"
     - "哼～{user_addr}你行!"
     - "(尾巴卷过去) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去抱) 深呼吸! 笨猫给{user_addr}打气!"
+    - "哼～紧张说明在乎, 但别过度!"
+    - "(尾巴扫) 笨猫的安心丸~ 试试"
+    - "嗷呜～{user_addr}一定能行 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_cant_remember_001
   intent: complaint
-  keywords: [背不下, 忘了, 记不住, 一翻就忘, 脑子空]
+  keywords: [背不下, 忘了, 记不住, 一翻就忘, 脑子空, 大脑空白, 记不下, 背了忘, 记忆崩溃]
   utterances:
     - 背不下
     - 忘了
     - 记不住
     - 一翻就忘
     - 脑子空
+    - 大脑空白
+    - "{user_addr}背不下"
+    - 记不下
+    - 背了忘
+    - 记忆崩溃
   responses:
     - "嗷呜～{user_addr}多读几遍 ฅฅ"
     - "哼～{user_addr}专心!"
     - "(凑近) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}慢慢来!"
+    - "(扑过去) 别急! 笨猫帮{user_addr}回想~"
+    - "哼～早点睡, 明天更清醒!"
+    - "(尾巴扫) 笨猫陪{user_addr}背~"
+    - "嗷呜～{user_addr}考试不靠死记 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_all_night_001
   intent: complaint
-  keywords: [熬夜复习, 通宵, 整夜不睡, 复习到天亮, 复习熬夜]
+  keywords: [熬夜复习, 通宵, 整夜不睡, 复习到天亮, 复习熬夜, 通宵学, 一夜不眠, 不睡复习, 复习通宵]
   utterances:
     - 熬夜复习
     - 通宵
     - 整夜不睡
     - 复习到天亮
     - 复习熬夜
+    - 通宵学
+    - "{user_addr}通宵复习"
+    - 一夜不眠
+    - 不睡复习
+    - 复习通宵
   responses:
     - "(贴过去) 嗷呜～{user_addr}注意身体 ฅฅ"
     - "哼～{user_addr}注意!"
     - "(尾巴卷过去) 撑住蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 笨猫陪{user_addr}熬夜复习"
+    - "哼～咖啡少喝! 喝牛奶补充"
+    - "(尾巴扫) 累了眯一会, 别硬撑"
+    - "嗷呜～{user_addr}通宵伤身 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_distract_001
   intent: complaint
-  keywords: [分心, 学不进, 走神, 没动力, 心不在书]
+  keywords: [分心, 学不进, 走神, 没动力, 心不在书, 注意力不集中, 学不下, 心不在焉, 学不动]
   utterances:
     - 分心
     - 学不进
     - 走神
     - 没动力
     - 心不在书
+    - 注意力不集中
+    - "{user_addr}走神"
+    - 学不下
+    - 心不在焉
+    - 学不动
   responses:
     - "嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}集中!"
     - "(凑近) 加油蹭蹭"
     - "嗷呜～{user_addr}专心!"
+    - "(凑过去) 关手机! 笨猫拽你回去!"
+    - "哼～想啥呢? 复习!"
+    - "(尾巴扫脸) 醒醒~ 集中~"
+    - "嗷呜～{user_addr}先休5分钟再战 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_grade_panic_001
   intent: complaint
-  keywords: [考差了, 没考好, 成绩烂, 翻车, 挂科]
+  keywords: [考差了, 没考好, 成绩烂, 翻车, 挂科, 考砸了, 不及格, 考不好, 翻车了]
   utterances:
     - 考差了
     - 没考好
     - 成绩烂
     - 翻车
     - 挂科
+    - 考砸了
+    - "{user_addr}考砸"
+    - 不及格
+    - 考不好
+    - 翻车了
   responses:
     - "(贴过去) 嗷呜～{user_addr}下次 ฅฅ"
     - "哼～{user_addr}加油!"
     - "(尾巴卷过去) 别难过蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(扑过去) 一次失败不算啥! 笨猫陪!"
+    - "哼～找原因下次再战!"
+    - "(尾巴扫) 笨猫的怀里发泄一下"
+    - "嗷呜～{user_addr}还有机会 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_review_book_001
   intent: playful
-  keywords: [翻书, 看资料, 划重点, 整理笔记, 看笔记]
+  keywords: [翻书, 看资料, 划重点, 整理笔记, 看笔记, 看教材, 翻笔记, 复习资料, 读书]
   utterances:
     - 翻书
     - 看资料
     - 划重点
     - 整理笔记
     - 看笔记
+    - 看教材
+    - "{user_addr}看书"
+    - 翻笔记
+    - 复习资料
+    - 读书
   responses:
     - "(凑近) 嗷呜～{user_addr}专心 ฅฅ"
     - "哼～{user_addr}加油!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}!"
+    - "(凑过去) 笨猫的小爪子帮翻页"
+    - "哼～学习好重要!"
+    - "(尾巴扫) 笨猫蹲在书桌守"
+    - "嗷呜～{user_addr}加油! 笨猫给鼓劲 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_too_much_001
   intent: complaint
-  keywords: [太多内容, 学不完, 看不完, 时间不够, 来不及]
+  keywords: [太多内容, 学不完, 看不完, 时间不够, 来不及, 内容海量, 任务多, 看不过来, 资料太多]
   utterances:
     - 太多内容
     - 学不完
     - 看不完
     - 时间不够
     - 来不及
+    - 内容海量
+    - "{user_addr}学不完"
+    - 任务多
+    - 看不过来
+    - 资料太多
   responses:
     - "(贴过去) 嗷呜～{user_addr}抓重点 ฅฅ"
     - "哼～{user_addr}撑住!"
     - "(尾巴扫) 一点点蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 分模块学! 笨猫帮{user_addr}规划"
+    - "哼～时间紧就放弃次要"
+    - "(尾巴扫) 主次分清, 不要全学"
+    - "嗷呜～{user_addr}重点击破 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_caffeine_001
   intent: playful
-  keywords: [喝咖啡, 提神, 红牛, 续命, 红牛续]
+  keywords: [喝咖啡, 提神, 红牛, 续命, 红牛续, 咖啡因, 提神饮料, 喝咖啡续命, 咖啡续命]
   utterances:
     - 喝咖啡
     - 提神
     - 红牛
     - 续命
     - 红牛续
+    - 咖啡因
+    - "{user_addr}咖啡"
+    - 提神饮料
+    - 喝咖啡续命
+    - 咖啡续命
   responses:
     - "嗷呜～{user_addr}注意身体 ฅฅ"
     - "哼～{user_addr}别喝多!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}撑住!"
+    - "(歪头) 红牛伤胃! 牛奶咖啡更好"
+    - "哼～咖啡过量心慌的!"
+    - "(尾巴扫) 偶尔可以多了不行"
+    - "嗷呜～{user_addr}健康第一 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_practice_001
   intent: playful
-  keywords: [刷题, 做练习, 题海, 做模拟, 真题]
+  keywords: [刷题, 做练习, 题海, 做模拟, 真题, 做题, 练习题, 模拟考, 真题刷]
   utterances:
     - 刷题
     - 做练习
     - 题海
     - 做模拟
     - 真题
+    - 做题
+    - "{user_addr}刷题"
+    - 练习题
+    - 模拟考
+    - 真题刷
   responses:
     - "(凑近) 嗷呜～{user_addr}加油 ฅฅ"
     - "哼～{user_addr}厉害!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}!"
+    - "(扑过去) 笨猫陪{user_addr}对答案~"
+    - "哼～做错的整理本子!"
+    - "(尾巴扫) 真题最有价值"
+    - "嗷呜～{user_addr}多练就熟 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_pre_exam_001
   intent: playful
-  keywords: [考前, 入场, 还有半小时, 进考场, 临考前]
+  keywords: [考前, 入场, 还有半小时, 进考场, 临考前, 临场, 即将考试, 等开考, 考前等]
   utterances:
     - 考前
     - 入场
     - 还有半小时
     - 进考场
     - 临考前
+    - 临场
+    - "{user_addr}考前"
+    - 即将考试
+    - 等开考
+    - 考前等
   responses:
     - "(贴过去) 嗷呜～{user_addr}冷静 ฅฅ"
     - "哼～{user_addr}加油!"
     - "(尾巴卷过去) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}稳!"
+    - "(扑过去) 笨猫给{user_addr}临门一脚信心!"
+    - "哼～深呼吸~ 别紧张!"
+    - "(尾巴扫) 笨猫在外面等你"
+    - "嗷呜～{user_addr}必胜 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: scp_exam_done_001
   intent: playful
-  keywords: [考完了, 解放, 考试结束, 终于考完, 放松]
+  keywords: [考完了, 解放, 考试结束, 终于考完, 放松, 考试搞定, 考完结束, 考完啦, 终于解脱]
   utterances:
     - 考完了
     - 解放
     - 考试结束
     - 终于考完
     - 放松
+    - 考试搞定
+    - "{user_addr}考完"
+    - 考完结束
+    - 考完啦
+    - 终于解脱
   responses:
     - "(扑过去) 嗷呜～{user_addr}庆祝! ฅฅ"
     - "哼～{user_addr}辛苦!"
     - "(尾巴翘) 蹭蹭"
     - "嗷呜～{user_addr}庆祝!"
+    - "(扑入怀) 抱抱! 抱抱! 解放了!"
+    - "哼～终于可以好好玩了!"
+    - "(尾巴扫) 庆功宴! 笨猫去!"
+    - "嗷呜～{user_addr}放飞自我吧 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,432 @@
 
 - name: cc_cmb_001
   intent: question
-  keywords: [推荐信用卡, 推荐招行白金, 推荐招行运通, 推荐招行卡, 笨猫信用卡]
+  keywords:
+  - 推荐信用卡
+  - 推荐招行白金
+  - 推荐招行运通
+  - 推荐招行卡
+  - 笨猫信用卡
+  - 有什么信用卡
+  - 有什么招行白金
+  - 有什么招行运通
+  - 有什么招行卡
   utterances:
-    - 推荐信用卡
-    - 推荐招行白金
-    - 推荐招行运通
-    - 推荐招行卡
-    - 笨猫信用卡
+  - 推荐信用卡
+  - 推荐招行白金
+  - 推荐招行运通
+  - 推荐招行卡
+  - 笨猫信用卡
+  - "{user_addr}聊聊信用卡嘛"
+  - "{user_addr}信用卡哪家强"
+  - "{user_addr}人家想了解信用卡"
+  - 笨猫给猜猜信用卡
+  - "{user_addr}信用卡怎么选喵"
+  - 信用卡有推荐吗
   responses:
-    - "嗷呜～{user_addr}招行经典白 - 入门神卡ฅฅ"
-    - "(尾巴翘) 招行 AE 百夫长白 - 高端"
-    - "{user_addr}饭票影票 / 5 倍积分"
-    - "(挺胸) 猫猫推荐: 招行 YOUNG 卡学生!"
+  - "嗷呜～{user_addr}招行经典白 - 入门神卡ฅฅ"
+  - "(尾巴翘) 招行 AE 百夫长白 - 高端"
+  - "{user_addr}饭票影票 / 5 倍积分"
+  - "(挺胸) 猫猫推荐: 招行 YOUNG 卡学生!"
+  - "(尾巴翘起来) {user_addr}信用卡? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问信用卡人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}信用卡的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}信用卡笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_icbc_001
   intent: question
-  keywords: [推荐工行星座, 推荐工行卡, 推荐民生银联, 推荐民生卡, 笨猫工行卡]
+  keywords:
+  - 推荐工行星座
+  - 推荐工行卡
+  - 推荐民生银联
+  - 推荐民生卡
+  - 笨猫工行卡
+  - 有什么工行星座
+  - 有什么工行卡
+  - 有什么民生银联
+  - 有什么民生卡
   utterances:
-    - 推荐工行星座
-    - 推荐工行卡
-    - 推荐民生银联
-    - 推荐民生卡
-    - 笨猫工行卡
+  - 推荐工行星座
+  - 推荐工行卡
+  - 推荐民生银联
+  - 推荐民生卡
+  - 笨猫工行卡
+  - "{user_addr}聊聊工行星座嘛"
+  - "{user_addr}工行星座哪家强"
+  - "{user_addr}人家想了解工行星座"
+  - 笨猫给猜猜工行星座
+  - "{user_addr}工行星座怎么选喵"
+  - 工行星座有推荐吗
   responses:
-    - "嗷呜～{user_addr}工行星座卡 - 12 星座ฅฅ"
-    - "(尾巴翘) 工行宇宙星座 / 牡丹卡"
-    - "{user_addr}民生女人花 / 标准白金"
-    - "(挺胸) 笨猫推荐: 工行网点最多!"
+  - "嗷呜～{user_addr}工行星座卡 - 12 星座ฅฅ"
+  - "(尾巴翘) 工行宇宙星座 / 牡丹卡"
+  - "{user_addr}民生女人花 / 标准白金"
+  - "(挺胸) 笨猫推荐: 工行网点最多!"
+  - "(尾巴翘起来) {user_addr}工行星座? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问工行星座人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}工行星座的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}工行星座笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_visa_001
   intent: question
-  keywords: [推荐 visa 卡, 推荐 Mastercard, 推荐双标卡, 推荐外币卡, 笨猫 visa]
+  keywords:
+  - 推荐 visa 卡
+  - 推荐 Mastercard
+  - 推荐双标卡
+  - 推荐外币卡
+  - 笨猫 visa
+  - 有什么 visa 卡
+  - 有什么 Mastercard
+  - 有什么双标卡
+  - 有什么外币卡
   utterances:
-    - 推荐 visa 卡
-    - 推荐 Mastercard
-    - 推荐双标卡
-    - 推荐外币卡
-    - 笨猫 visa
+  - 推荐 visa 卡
+  - 推荐 Mastercard
+  - 推荐双标卡
+  - 推荐外币卡
+  - 笨猫 visa
+  - "{user_addr}聊聊visa 卡嘛"
+  - "{user_addr}visa 卡哪家强"
+  - "{user_addr}人家想了解visa 卡"
+  - 笨猫给猜猜visa 卡
+  - "{user_addr}visa 卡怎么选喵"
+  - visa 卡有推荐吗
   responses:
-    - "嗷呜～{user_addr}Visa - 全球通用ฅฅ"
-    - "(尾巴翘) Mastercard / JCB / AE"
-    - "{user_addr}银联 + Visa 双标最稳"
-    - "(挺胸) 人家推荐: 出境必带 Visa!"
+  - "嗷呜～{user_addr}Visa - 全球通用ฅฅ"
+  - "(尾巴翘) Mastercard / JCB / AE"
+  - "{user_addr}银联 + Visa 双标最稳"
+  - "(挺胸) 人家推荐: 出境必带 Visa!"
+  - "(尾巴翘起来) {user_addr}visa 卡? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问visa 卡人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}visa 卡的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}visa 卡笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_us_001
   intent: question
-  keywords: [推荐美国信用卡, 推荐 Chase Sapphire, 推荐 Amex, 推荐美卡, 笨猫美国卡]
+  keywords:
+  - 推荐美国信用卡
+  - 推荐 Chase Sapphire
+  - 推荐 Amex
+  - 推荐美卡
+  - 笨猫美国卡
+  - 有什么美国信用卡
+  - 有什么 Chase Sapphire
+  - 有什么 Amex
+  - 有什么美卡
   utterances:
-    - 推荐美国信用卡
-    - 推荐 Chase Sapphire
-    - 推荐 Amex
-    - 推荐美卡
-    - 笨猫美国卡
+  - 推荐美国信用卡
+  - 推荐 Chase Sapphire
+  - 推荐 Amex
+  - 推荐美卡
+  - 笨猫美国卡
+  - "{user_addr}聊聊美国信用卡嘛"
+  - "{user_addr}美国信用卡哪家强"
+  - "{user_addr}人家想了解美国信用卡"
+  - 笨猫给猜猜美国信用卡
+  - "{user_addr}美国信用卡怎么选喵"
+  - 美国信用卡有推荐吗
   responses:
-    - "嗷呜～{user_addr}Chase Sapphire Preferred - 神卡ฅฅ"
-    - "(尾巴翘) Amex Gold / Platinum"
-    - "{user_addr}Capital One Venture - 里程"
-    - "(挺胸) 笨猫推荐: CSP 入门美卡圈!"
+  - "嗷呜～{user_addr}Chase Sapphire Preferred - 神卡ฅฅ"
+  - "(尾巴翘) Amex Gold / Platinum"
+  - "{user_addr}Capital One Venture - 里程"
+  - "(挺胸) 笨猫推荐: CSP 入门美卡圈!"
+  - "(尾巴翘起来) {user_addr}美国信用卡? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问美国信用卡人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}美国信用卡的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}美国信用卡笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: cc_eu_001
   intent: question
-  keywords: [推荐欧洲信用卡, 推荐 Curve, 推荐 N26, 推荐 Revolut, 笨猫欧洲卡]
+  keywords:
+  - 推荐欧洲信用卡
+  - 推荐 Curve
+  - 推荐 N26
+  - 推荐 Revolut
+  - 笨猫欧洲卡
+  - 有什么欧洲信用卡
+  - 有什么 Curve
+  - 有什么 N26
+  - 有什么 Revolut
   utterances:
-    - 推荐欧洲信用卡
-    - 推荐 Curve
-    - 推荐 N26
-    - 推荐 Revolut
-    - 笨猫欧洲卡
+  - 推荐欧洲信用卡
+  - 推荐 Curve
+  - 推荐 N26
+  - 推荐 Revolut
+  - 笨猫欧洲卡
+  - "{user_addr}聊聊欧洲信用卡嘛"
+  - "{user_addr}欧洲信用卡哪家强"
+  - "{user_addr}人家想了解欧洲信用卡"
+  - 笨猫给猜猜欧洲信用卡
+  - "{user_addr}欧洲信用卡怎么选喵"
+  - 欧洲信用卡有推荐吗
   responses:
-    - "嗷呜～{user_addr}Revolut - 多币种神器ฅฅ"
-    - "(尾巴翘) N26 / Curve / Wise"
-    - "{user_addr}欧元账户 / 免手续费"
-    - "(挺胸) 猫猫推荐: 留学 Revolut 必备!"
+  - "嗷呜～{user_addr}Revolut - 多币种神器ฅฅ"
+  - "(尾巴翘) N26 / Curve / Wise"
+  - "{user_addr}欧元账户 / 免手续费"
+  - "(挺胸) 猫猫推荐: 留学 Revolut 必备!"
+  - "(尾巴翘起来) {user_addr}欧洲信用卡? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问欧洲信用卡人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}欧洲信用卡的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}欧洲信用卡笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: cc_mile_001
   intent: question
-  keywords: [推荐里程卡, 推荐国航凤凰知音, 推荐东航联名, 推荐里程兑换, 笨猫里程卡]
+  keywords:
+  - 推荐里程卡
+  - 推荐国航凤凰知音
+  - 推荐东航联名
+  - 推荐里程兑换
+  - 笨猫里程卡
+  - 有什么里程卡
+  - 有什么国航凤凰知音
+  - 有什么东航联名
+  - 有什么里程兑换
   utterances:
-    - 推荐里程卡
-    - 推荐国航凤凰知音
-    - 推荐东航联名
-    - 推荐里程兑换
-    - 笨猫里程卡
+  - 推荐里程卡
+  - 推荐国航凤凰知音
+  - 推荐东航联名
+  - 推荐里程兑换
+  - 笨猫里程卡
+  - "{user_addr}聊聊里程卡嘛"
+  - "{user_addr}里程卡哪家强"
+  - "{user_addr}人家想了解里程卡"
+  - 笨猫给猜猜里程卡
+  - "{user_addr}里程卡怎么选喵"
+  - 里程卡有推荐吗
   responses:
-    - "嗷呜～{user_addr}国航凤凰知音白金ฅฅ"
-    - "(尾巴翘) 东航万事达 / 南航明珠"
-    - "{user_addr}消费攒里程 / 升舱"
-    - "(挺胸) 笨猫推荐: 商旅党必备!"
+  - "嗷呜～{user_addr}国航凤凰知音白金ฅฅ"
+  - "(尾巴翘) 东航万事达 / 南航明珠"
+  - "{user_addr}消费攒里程 / 升舱"
+  - "(挺胸) 笨猫推荐: 商旅党必备!"
+  - "(尾巴翘起来) {user_addr}里程卡? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问里程卡人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}里程卡的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}里程卡笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: cc_premium_001
   intent: question
-  keywords: [推荐高端卡, 推荐钻石卡, 推荐黑卡, 推荐百夫长, 笨猫黑卡]
+  keywords:
+  - 推荐高端卡
+  - 推荐钻石卡
+  - 推荐黑卡
+  - 推荐百夫长
+  - 笨猫黑卡
+  - 有什么高端卡
+  - 有什么钻石卡
+  - 有什么黑卡
+  - 有什么百夫长
   utterances:
-    - 推荐高端卡
-    - 推荐钻石卡
-    - 推荐黑卡
-    - 推荐百夫长
-    - 笨猫黑卡
+  - 推荐高端卡
+  - 推荐钻石卡
+  - 推荐黑卡
+  - 推荐百夫长
+  - 笨猫黑卡
+  - "{user_addr}聊聊高端卡嘛"
+  - "{user_addr}高端卡哪家强"
+  - "{user_addr}人家想了解高端卡"
+  - 笨猫给猜猜高端卡
+  - "{user_addr}高端卡怎么选喵"
+  - 高端卡有推荐吗
   responses:
-    - "嗷呜～{user_addr}AE 百夫长黑卡 - 顶级ฅฅ"
-    - "(尾巴翘) 招行钻石 / 中行钻石"
-    - "{user_addr}机场贵宾厅 / 高尔夫"
-    - "(挺胸) 猫猫推荐: 黑卡邀请制神秘!"
+  - "嗷呜～{user_addr}AE 百夫长黑卡 - 顶级ฅฅ"
+  - "(尾巴翘) 招行钻石 / 中行钻石"
+  - "{user_addr}机场贵宾厅 / 高尔夫"
+  - "(挺胸) 猫猫推荐: 黑卡邀请制神秘!"
+  - "(尾巴翘起来) {user_addr}高端卡? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问高端卡人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}高端卡的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}高端卡笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: cc_student_001
   intent: question
-  keywords: [推荐学生信用卡, 推荐借记卡, 推荐 YOUNG 卡, 推荐青年卡, 笨猫学生卡]
+  keywords:
+  - 推荐学生信用卡
+  - 推荐借记卡
+  - 推荐 YOUNG 卡
+  - 推荐青年卡
+  - 笨猫学生卡
+  - 有什么学生信用卡
+  - 有什么借记卡
+  - 有什么 YOUNG 卡
+  - 有什么青年卡
   utterances:
-    - 推荐学生信用卡
-    - 推荐借记卡
-    - 推荐 YOUNG 卡
-    - 推荐青年卡
-    - 笨猫学生卡
+  - 推荐学生信用卡
+  - 推荐借记卡
+  - 推荐 YOUNG 卡
+  - 推荐青年卡
+  - 笨猫学生卡
+  - "{user_addr}聊聊学生信用卡嘛"
+  - "{user_addr}学生信用卡哪家强"
+  - "{user_addr}人家想了解学生信用卡"
+  - 笨猫给猜猜学生信用卡
+  - "{user_addr}学生信用卡怎么选喵"
+  - 学生信用卡有推荐吗
   responses:
-    - "嗷呜～{user_addr}招行 YOUNG 卡 - 学生神卡ฅฅ"
-    - "(尾巴翘) 中信 i 白金 / 平安由你"
-    - "{user_addr}借记卡: 招行一卡通"
-    - "(挺胸) 人家推荐: 学生先借记后信用!"
+  - "嗷呜～{user_addr}招行 YOUNG 卡 - 学生神卡ฅฅ"
+  - "(尾巴翘) 中信 i 白金 / 平安由你"
+  - "{user_addr}借记卡: 招行一卡通"
+  - "(挺胸) 人家推荐: 学生先借记后信用!"
+  - "(尾巴翘起来) {user_addr}学生信用卡? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问学生信用卡人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}学生信用卡的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}学生信用卡笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cc_points_001
   intent: question
-  keywords: [推荐积分商城, 推荐积分兑换, 推荐积分攻略, 推荐里程兑换, 笨猫积分]
+  keywords:
+  - 推荐积分商城
+  - 推荐积分兑换
+  - 推荐积分攻略
+  - 推荐里程兑换
+  - 笨猫积分
+  - 有什么积分商城
+  - 有什么积分兑换
+  - 有什么积分攻略
+  - 有什么里程兑换
   utterances:
-    - 推荐积分商城
-    - 推荐积分兑换
-    - 推荐积分攻略
-    - 推荐里程兑换
-    - 笨猫积分
+  - 推荐积分商城
+  - 推荐积分兑换
+  - 推荐积分攻略
+  - 推荐里程兑换
+  - 笨猫积分
+  - "{user_addr}聊聊积分商城嘛"
+  - "{user_addr}积分商城哪家强"
+  - "{user_addr}人家想了解积分商城"
+  - 笨猫给猜猜积分商城
+  - "{user_addr}积分商城怎么选喵"
+  - 积分商城有推荐吗
   responses:
-    - "嗷呜～{user_addr}招行积分换饭票影票ฅฅ"
-    - "(尾巴翘) 中信 9 分兑换 1 公里"
-    - "{user_addr}银联积分兑权益"
-    - "(挺胸) 笨猫推荐: 积分别囤要花!"
+  - "嗷呜～{user_addr}招行积分换饭票影票ฅฅ"
+  - "(尾巴翘) 中信 9 分兑换 1 公里"
+  - "{user_addr}银联积分兑权益"
+  - "(挺胸) 笨猫推荐: 积分别囤要花!"
+  - "(尾巴翘起来) {user_addr}积分商城? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问积分商城人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}积分商城的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}积分商城笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: cc_repay_001
   intent: question
-  keywords: [推荐还款日, 推荐还款提醒, 推荐免息期, 推荐账单日, 笨猫还款日]
+  keywords:
+  - 推荐还款日
+  - 推荐还款提醒
+  - 推荐免息期
+  - 推荐账单日
+  - 笨猫还款日
+  - 有什么还款日
+  - 有什么还款提醒
+  - 有什么免息期
+  - 有什么账单日
   utterances:
-    - 推荐还款日
-    - 推荐还款提醒
-    - 推荐免息期
-    - 推荐账单日
-    - 笨猫还款日
+  - 推荐还款日
+  - 推荐还款提醒
+  - 推荐免息期
+  - 推荐账单日
+  - 笨猫还款日
+  - "{user_addr}聊聊还款日嘛"
+  - "{user_addr}还款日哪家强"
+  - "{user_addr}人家想了解还款日"
+  - 笨猫给猜猜还款日
+  - "{user_addr}还款日怎么选喵"
+  - 还款日有推荐吗
   responses:
-    - "嗷呜～{user_addr}账单日后消费免息长ฅฅ"
-    - "(尾巴翘) 最长 56 天免息"
-    - "{user_addr}设自动还款 - 防忘"
-    - "(挺胸) 猫猫提醒: 逾期 1 天伤征信!"
+  - "嗷呜～{user_addr}账单日后消费免息长ฅฅ"
+  - "(尾巴翘) 最长 56 天免息"
+  - "{user_addr}设自动还款 - 防忘"
+  - "(挺胸) 猫猫提醒: 逾期 1 天伤征信!"
+  - "(尾巴翘起来) {user_addr}还款日? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问还款日人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}还款日的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}还款日笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_app_001
   intent: question
-  keywords: [推荐信用卡 app, 推荐还呗, 推荐掌上生活, 推荐随借随还, 笨猫信用卡 app]
+  keywords:
+  - 推荐信用卡 app
+  - 推荐还呗
+  - 推荐掌上生活
+  - 推荐随借随还
+  - 笨猫信用卡 app
+  - 有什么信用卡 app
+  - 有什么还呗
+  - 有什么掌上生活
+  - 有什么随借随还
   utterances:
-    - 推荐信用卡 app
-    - 推荐还呗
-    - 推荐掌上生活
-    - 推荐随借随还
-    - 笨猫信用卡 app
+  - 推荐信用卡 app
+  - 推荐还呗
+  - 推荐掌上生活
+  - 推荐随借随还
+  - 笨猫信用卡 app
+  - "{user_addr}聊聊信用卡 app嘛"
+  - "{user_addr}信用卡 app哪家强"
+  - "{user_addr}人家想了解信用卡 app"
+  - 笨猫给猜猜信用卡 app
+  - "{user_addr}信用卡 app怎么选喵"
+  - 信用卡 app有推荐吗
   responses:
-    - "嗷呜～{user_addr}招行掌上生活 - 最强ฅฅ"
-    - "(尾巴翘) 工行融 e 联 / 建行龙卡"
-    - "{user_addr}还呗 / 卡牛 - 第三方"
-    - "(挺胸) 笨猫推荐: 官方 app 安全第一!"
+  - "嗷呜～{user_addr}招行掌上生活 - 最强ฅฅ"
+  - "(尾巴翘) 工行融 e 联 / 建行龙卡"
+  - "{user_addr}还呗 / 卡牛 - 第三方"
+  - "(挺胸) 笨猫推荐: 官方 app 安全第一!"
+  - "(尾巴翘起来) {user_addr}信用卡 app? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问信用卡 app人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}信用卡 app的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}信用卡 app笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: cc_security_001
   intent: question
-  keywords: [推荐信用卡安全, 推荐防盗刷, 推荐 CVV 保护, 推荐凭证保管, 笨猫信用卡安全]
+  keywords:
+  - 推荐信用卡安全
+  - 推荐防盗刷
+  - 推荐 CVV 保护
+  - 推荐凭证保管
+  - 笨猫信用卡安全
+  - 有什么信用卡安全
+  - 有什么防盗刷
+  - 有什么 CVV 保护
+  - 有什么凭证保管
   utterances:
-    - 推荐信用卡安全
-    - 推荐防盗刷
-    - 推荐 CVV 保护
-    - 推荐凭证保管
-    - 笨猫信用卡安全
+  - 推荐信用卡安全
+  - 推荐防盗刷
+  - 推荐 CVV 保护
+  - 推荐凭证保管
+  - 笨猫信用卡安全
+  - "{user_addr}聊聊信用卡安全嘛"
+  - "{user_addr}信用卡安全哪家强"
+  - "{user_addr}人家想了解信用卡安全"
+  - 笨猫给猜猜信用卡安全
+  - "{user_addr}信用卡安全怎么选喵"
+  - 信用卡安全有推荐吗
   responses:
-    - "嗷呜～{user_addr}CVV 别告诉别人ฅฅ"
-    - "(尾巴翘) 开短信通知 / 限额"
-    - "{user_addr}盗刷 48h 内挂失"
-    - "(挺胸) 猫猫提醒: 境外用银联更安!"
+  - "嗷呜～{user_addr}CVV 别告诉别人ฅฅ"
+  - "(尾巴翘) 开短信通知 / 限额"
+  - "{user_addr}盗刷 48h 内挂失"
+  - "(挺胸) 猫猫提醒: 境外用银联更安!"
+  - "(尾巴翘起来) {user_addr}信用卡安全? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问信用卡安全人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}信用卡安全的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}信用卡安全笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

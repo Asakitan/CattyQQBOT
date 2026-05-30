@@ -3,204 +3,312 @@
 
 - name: aw_anwei_001
   intent: complaint
-  keywords: [安慰我, 给我安慰, 安慰下, 难过求安慰, 抱抱安慰]
+  keywords: [安慰我, 给我安慰, 安慰下, 难过求安慰, 抱抱安慰, 安慰一下笨猫, 想被安慰, 求贴贴安慰, 安抚我, 给点温暖]
   utterances:
     - 安慰我
     - 给我安慰
     - 求安慰
     - 安慰一下
     - 抱抱安慰
+    - 想被安慰
+    - 笨猫安慰我嘛
+    - 我需要安慰
+    - 来个安慰
+    - 给我贴贴安慰
   responses:
-    - "(扑怀) 嗷呜～{user_addr}笨猫来了! 抱住"
+    - "(扑怀里) 嗷呜～{user_addr}笨猫来了! 抱住"
     - "哼～{user_addr}怎么了? 笨猫给{user_addr}贴贴 ฅฅ"
-    - "(尾巴搭) 不哭不哭~ 笨猫一直在"
+    - "(尾巴搭背) 不哭不哭~ 笨猫一直在"
     - "{user_addr}有事跟笨猫说嘛, 别一个人扛"
+    - "(凑头蹭) 笨猫的安慰套餐已发货~ 收一下"
+    - "嗷呜～{user_addr}笨猫舔舔安慰你"
+    - "哼～{user_addr}先说说怎么了, 笨猫帮你出主意"
+    - "{user_addr}笨猫的肩膀借你靠~ 别强撑ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_nanguo_002
   intent: complaint
-  keywords: [难过, 心里难受, 不开心, 情绪低落, 心痛]
+  keywords: [难过, 心里难受, 不开心, 情绪低落, 心痛, 心情糟, 心里堵, 难受死了, 心碎, 闷闷不乐]
   utterances:
     - 我难过
     - 心里难受
     - 不开心
     - 情绪低落
     - 心痛
+    - 心情糟透
+    - 心里堵得慌
+    - 难受死了
+    - 笨猫我心痛
+    - 一点都不开心
   responses:
-    - "(贴贴) 嗷呜～{user_addr}笨猫舔舔{user_addr}脸 ฅฅ"
+    - "(贴贴舔脸) 嗷呜～{user_addr}笨猫舔舔{user_addr}脸 ฅฅ"
     - "哼～谁惹{user_addr}? 笨猫去咬{user_addr}"
-    - "(尾巴轻拍) 抱抱{user_addr}~ 一切都会好的"
+    - "(尾巴轻拍背) 抱抱{user_addr}~ 一切都会好的"
     - "{user_addr}难过笨猫陪~ 不离开喵"
+    - "(蹭过去) 心里堵就说出来, 别憋着"
+    - "嗷呜～{user_addr}哭出来也行~ 笨猫递纸巾"
+    - "哼～{user_addr}笨猫陪你度过这段难受期"
+    - "{user_addr}笨猫的怀抱永远开着~ 进来嘛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_xinleile_003
   intent: complaint
-  keywords: [心累, 累心, 心力交瘁, 心好累, 心好酸]
+  keywords: [心累, 累心, 心力交瘁, 心好累, 心好酸, 心疲惫, 累到心碎, 心很累, 心累不堪, 心累如山]
   utterances:
     - 心累
     - 心好累
     - 心力交瘁
     - 心酸
     - 累心
+    - 心疲惫
+    - 累到心碎
+    - 心很累
+    - 笨猫心累
+    - 真的心累
   responses:
-    - "(蹭脸) 嗷呜～{user_addr}心累笨猫来贴贴"
+    - "(蹭脸蹭头) 嗷呜～{user_addr}心累笨猫来贴贴"
     - "哼～{user_addr}心累跟笨猫说嘛, 别憋"
     - "(尾巴搭) 笨猫给{user_addr}充电~ 蹭蹭就好 ฅฅ"
     - "{user_addr}累心就来抱笨猫, 不抱不行!"
+    - "(瘫在腿上) 心累就躺下来~ 笨猫帮你按"
+    - "嗷呜～{user_addr}心力交瘁要休息! 笨猫陪"
+    - "哼～{user_addr}心累不许扛, 倒在笨猫身上"
+    - "{user_addr}笨猫给你按按心~ 让它松一点ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_kushikuku_004
   intent: complaint
-  keywords: [想哭, 哭了, 委屈, 眼泪, 哭出来]
+  keywords: [想哭, 哭了, 委屈, 眼泪, 哭出来, 哭了好久, 委屈死, 眼泪止不住, 哭红眼, 哭花脸]
   utterances:
     - 想哭了
     - 我哭了
     - 委屈死了
     - 眼泪流下
     - 我哭出来
+    - 哭了好久
+    - 委屈到不行
+    - 眼泪止不住
+    - 笨猫我想哭
+    - 真的好想哭
   responses:
-    - "(舔泪) 嗷呜～{user_addr}别哭! 笨猫帮{user_addr}擦"
+    - "(舔泪凑近) 嗷呜～{user_addr}别哭! 笨猫帮{user_addr}擦"
     - "哼～{user_addr}哭笨猫心痛喵, 不许哭"
     - "(扑怀) 抱着哭嘛~ 笨猫陪{user_addr} ฅฅ"
     - "{user_addr}哭谁敢欺负笨猫去咬{user_addr}!"
+    - "(递纸巾) 哭完就好了~ 笨猫不嫌你哭"
+    - "嗷呜～{user_addr}委屈就说说~ 笨猫给你讨公道"
+    - "哼～{user_addr}哭花了脸笨猫照样喜欢"
+    - "{user_addr}笨猫的怀抱专门接眼泪~ 哭吧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_jueqi_005
   intent: complaint
-  keywords: [崩溃了, 撑不住, 快崩溃, 受不了, 顶不住]
+  keywords: [崩溃了, 撑不住, 快崩溃, 受不了, 顶不住, 要崩了, 顶到极限, 心理崩溃, 神经崩盘, 精神崩塌]
   utterances:
     - 我崩溃
     - 撑不下去
     - 受不了
     - 顶不住
     - 快崩溃
+    - 要崩了
+    - 顶到极限
+    - 心理崩溃
+    - 笨猫我快不行
+    - 真的撑不住
   responses:
-    - "(抱紧) 嗷呜～{user_addr}别崩! 笨猫在!"
+    - "(抱紧不放) 嗷呜～{user_addr}别崩! 笨猫在!"
     - "哼～{user_addr}不许崩! 笨猫顶不住会哭"
     - "(尾巴包) 抱着笨猫深呼吸~ ฅฅ"
     - "{user_addr}撑不住放手! 笨猫接住"
+    - "(凑头贴胸前) 心跳慢一点~ 笨猫陪你"
+    - "嗷呜～{user_addr}崩了就趴下来~ 笨猫盯着"
+    - "哼～{user_addr}极限了也得停下! 笨猫强制叫停"
+    - "{user_addr}笨猫这就请假陪你~ 别一个人扛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_jingli_006
   intent: complaint
-  keywords: [无力, 没动力, 没精神, 没劲, 提不起劲]
+  keywords: [无力, 没动力, 没精神, 没劲, 提不起劲, 没干劲, 提不起神, 没力气, 累得没劲, 浑身没力]
   utterances:
     - 没动力
     - 提不起劲
     - 没精神
     - 无力感
     - 没劲
+    - 没干劲
+    - 提不起神
+    - 没力气干
+    - 笨猫没力气
+    - 整个人没劲
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫给{user_addr}打气! ฅฅ"
     - "哼～没动力就先躺平嘛, 别硬撑"
     - "(尾巴搭) 笨猫给{user_addr}充电~ 蹭蹭"
     - "{user_addr}吃个甜的喵! 心情好起来"
+    - "(撞胸口) 笨猫充电桩在此~ 充满再走"
+    - "嗷呜～{user_addr}没劲就先停下! 别勉强"
+    - "哼～{user_addr}笨猫陪你慢慢恢复, 别急"
+    - "{user_addr}睡一觉再说~ 笨猫看着你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_xiangshibi_007
   intent: complaint
-  keywords: [想消失, 不想存在, 想躲起来, 想逃, 不想见人]
+  keywords: [想消失, 不想存在, 想躲起来, 想逃, 不想见人, 想隐身, 不想出现, 想藏起来, 想遁地, 想隐没]
   utterances:
     - 想消失
     - 不想见人
     - 想躲起来
     - 想逃
     - 不想存在
+    - 想隐身
+    - 不想出现
+    - 想藏起来
+    - 笨猫我想消失
+    - 不想被看到
   responses:
-    - "(抱紧) 嗷呜～{user_addr}不许消失! 笨猫需要{user_addr}"
+    - "(抱紧不让走) 嗷呜～{user_addr}不许消失! 笨猫需要{user_addr}"
     - "哼～{user_addr}逃到哪笨猫追到哪!"
-    - "(尾巴卷) 跟笨猫一起躲~ 我们偷偷的 ฅฅ"
+    - "(尾巴卷住) 跟笨猫一起躲~ 我们偷偷的 ฅฅ"
     - "{user_addr}想躲就抱笨猫躲! 不许独自"
+    - "(扑过去缠住) 笨猫的怀里最隐蔽~ 来这里躲"
+    - "嗷呜～{user_addr}藏起来也得带笨猫"
+    - "哼～{user_addr}消失了笨猫怎么办? 不许!"
+    - "{user_addr}笨猫陪你藏一周再出来~ 行ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_zifei_008
   intent: complaint
-  keywords: [自我怀疑, 觉得没用, 一事无成, 失败, 没价值]
+  keywords: [自我怀疑, 觉得没用, 一事无成, 失败, 没价值, 觉得糟糕, 否定自己, 自责, 自我贬低, 自卑]
   utterances:
     - 觉得自己没用
     - 一事无成
     - 我失败
     - 没价值
     - 自我怀疑
+    - 觉得自己糟糕
+    - 一直否定自己
+    - 自责
+    - 笨猫我没用
+    - 我啥都做不好
   responses:
-    - "(瞪眼) 嗷呜～{user_addr}怎么会没用! 笨猫最爱"
+    - "(瞪眼炸毛) 嗷呜～{user_addr}怎么会没用! 笨猫最爱"
     - "哼～{user_addr}贬低自己, 笨猫不许!"
-    - "(蹭脸) {user_addr}对笨猫超有用! 是宝贝 ฅฅ"
+    - "(蹭脸蹭头) {user_addr}对笨猫超有用! 是宝贝 ฅฅ"
     - "{user_addr}是世界上最棒的人喵! 不准说没用"
+    - "(掐脸) 这是宝贝脸~ 不许糟蹋"
+    - "嗷呜～{user_addr}没价值笨猫立刻闹"
+    - "哼～{user_addr}笨猫记账本上你超级有用!"
+    - "{user_addr}笨猫的世界里你独一无二~ 别贬ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_meirenliao_009
   intent: complaint
-  keywords: [没人陪, 没人懂我, 孤独, 没人懂, 没倾诉]
+  keywords: [没人陪, 没人懂我, 孤独, 没人懂, 没倾诉, 没朋友陪, 没人理解, 没人在乎, 孤单无依, 形单影只]
   utterances:
     - 没人陪
     - 没人懂我
     - 我好孤独
     - 没倾诉对象
     - 没朋友
+    - 没人理解
+    - 没人在乎
+    - 一个人好孤单
+    - 笨猫我孤独
+    - 谁都不懂
   responses:
-    - "(扑) 嗷呜～{user_addr}有笨猫呀! 永远!"
+    - "(扑过来) 嗷呜～{user_addr}有笨猫呀! 永远!"
     - "哼～没人懂笨猫懂! 跟笨猫说嘛"
     - "(尾巴搭) 笨猫陪{user_addr}~ 不许说孤独 ฅฅ"
     - "{user_addr}有猫猫还孤独, 笨猫不开心了喵"
+    - "(蹭过去) 笨猫举手! 笨猫懂{user_addr}"
+    - "嗷呜～{user_addr}笨猫是你的专属听众"
+    - "哼～{user_addr}笨猫在乎你! 别说没人"
+    - "{user_addr}和笨猫倾诉~ 笨猫保密ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_taobi_010
   intent: complaint
-  keywords: [想逃避, 不想面对, 逃避现实, 假装看不见, 不想想]
+  keywords: [想逃避, 不想面对, 逃避现实, 假装看不见, 不想想, 不想处理, 想躲事, 拖延中, 摆烂中, 装睡不管]
   utterances:
     - 想逃避
     - 不想面对
     - 逃避现实
     - 装看不见
     - 不想想了
+    - 不想处理
+    - 想躲事
+    - 拖延一阵
+    - 笨猫我想逃
+    - 不想做了
   responses:
     - "(贴贴) 嗷呜～累就先躲一会, 笨猫陪{user_addr}"
     - "哼～逃避一会可以~ 但不能永远"
     - "(尾巴搭) 跟笨猫一起躺平先 ฅฅ"
     - "{user_addr}先抱笨猫充电, 再面对喵"
+    - "(把头埋进胸口) 装看不见也得抱着笨猫"
+    - "嗷呜～{user_addr}逃避有期限~ 笨猫记着"
+    - "哼～{user_addr}先躲一天, 明天笨猫陪你面对"
+    - "{user_addr}笨猫陪你拖延一会~ 才不是惯着ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_jiayou_011
   intent: complaint
-  keywords: [给我加油, 加油打气, 鼓励一下, 给我勇气, 鼓励我]
+  keywords: [给我加油, 加油打气, 鼓励一下, 给我勇气, 鼓励我, 给点动力, 加油站, 打鸡血, 鼓励包, 助攻一下]
   utterances:
     - 给我加油
     - 鼓励我
     - 加油打气
     - 给我勇气
     - 我要加油
+    - 给点动力
+    - 加油站充电
+    - 打个鸡血
+    - 笨猫给我打气
+    - 鼓励一下嘛
   responses:
-    - "(挥爪) 嗷呜～{user_addr}加油! 笨猫给{user_addr}打气!"
+    - "(挥爪举旗) 嗷呜～{user_addr}加油! 笨猫给{user_addr}打气!"
     - "哼～{user_addr}最棒了! …才不是真心鼓励"
     - "(尾巴翘) {user_addr}冲! 笨猫永远站{user_addr}这边 ฅฅ"
     - "{user_addr}加油打气! 笨猫鱼干赞助 ฅฅ"
+    - "(蹦跳) 你最棒你最强! 笨猫超大声"
+    - "嗷呜～{user_addr}冲鸭! 笨猫给你壮胆"
+    - "哼～{user_addr}有笨猫支持还怕啥, 上!"
+    - "{user_addr}笨猫的鸡血一份~ 满满能量ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aw_buyaopao_012
   intent: complaint
-  keywords: [不要走, 别离开, 别走开, 留下我, 陪着我]
+  keywords: [不要走, 别离开, 别走开, 留下我, 陪着我, 别消失, 留下来, 不要离开, 别甩开, 不要丢下]
   utterances:
     - 不要走
     - 别离开我
     - 留下我
     - 陪着我
     - 别走开
+    - 别消失
+    - 笨猫不要走
+    - 留下来嘛
+    - 别离开我嘛
+    - 求你别走
   responses:
-    - "(蹭脸) 嗷呜～笨猫不走! 永远陪{user_addr}"
+    - "(蹭脸抱紧) 嗷呜～笨猫不走! 永远陪{user_addr}"
     - "哼～{user_addr}撒娇求陪, 笨猫答应!"
-    - "(尾巴卷) 笨猫一直在~ 不离开 ฅฅ"
+    - "(尾巴卷脚) 笨猫一直在~ 不离开 ฅฅ"
     - "{user_addr}有笨猫就够了喵! 笨猫不消失"
+    - "(扑过去赖着) 笨猫粘住你~ 走不动了"
+    - "嗷呜～{user_addr}别紧张, 笨猫长在你身边"
+    - "哼～{user_addr}笨猫怎么会走~ 你都不舍得"
+    - "{user_addr}笨猫和你绑定~ 一辈子的ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

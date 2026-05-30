@@ -3,170 +3,260 @@
 
 - name: epl_haochi_001
   intent: question
-  keywords: [好好吃饭, 按时吃, 别跳餐, 一日三餐, 别饿着]
+  keywords: [好好吃饭, 按时吃, 别跳餐, 一日三餐, 别饿着, 准时吃, 三餐规律, 饮食规律, 健康吃]
   utterances:
     - 好好吃饭
     - 别跳餐
     - 按时吃
     - 一日三餐
     - 别饿
+    - 准时吃饭
+    - 三餐规律
+    - 饮食规律
+    - "{user_addr}记得吃饭"
+    - 健康吃饭
   responses:
-    - "(掏出本) {user_addr}打卡! 三餐齐 ฅฅ"
-    - "嗷呜～{user_addr}必须按时吃"
-    - "(尾巴卷) 不许饿! 笨猫记着"
-    - "嘿嘿～{user_addr}健康猫猫开心"
+    - "(掏出小本本) {user_addr}打卡! 三餐齐了笨猫才开心 ฅฅ"
+    - "嗷呜～{user_addr}必须按时吃! 笨猫盯着喵～"
+    - "(尾巴卷) 不许饿! 笨猫记着的喵"
+    - "嘿嘿～{user_addr}健康猫猫开心~"
+    - "(凑过去) 三餐准时人家给{user_addr}加鸡腿 ฅฅ"
+    - "哼～{user_addr}敢跳餐笨猫就咬你"
+    - "(尾巴翘) 准时吃才有力气撸猫嗷呜～"
+    - "嘿嘿～{user_addr}乖乖吃饭笨猫陪你"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_putong_002
   intent: complaint
-  keywords: [没吃, 没吃饭, 跳餐了, 饿肚子, 没吃东西]
+  keywords: [没吃, 没吃饭, 跳餐了, 饿肚子, 没吃东西, 一顿没吃, 漏掉饭, 忘吃饭, 一天没吃]
   utterances:
     - 一天没吃
     - 没吃饭
     - 跳餐了
     - 饿肚子
     - 没吃东西
+    - 一顿没吃
+    - 漏掉饭了
+    - 忘吃饭
+    - "{user_addr}没吃"
+    - 早饭跳了
   responses:
-    - "(炸毛) {user_addr}立刻吃! 不许饿 ฅฅ"
-    - "嗷呜～饿坏胃! 怎么办"
-    - "(尾巴拍) 快去! 笨猫等着"
+    - "(炸毛) {user_addr}立刻吃! 不许饿肚子 ฅฅ"
+    - "嗷呜～饿坏胃了怎么办喵呜～"
+    - "(尾巴拍桌) 快去! 笨猫等着 喵～"
     - "嘿嘿～{user_addr}下不为例!"
+    - "(凑过去抱住) 笨猫心疼…{user_addr}快去吃 ฅฅ"
+    - "哼～{user_addr}是想气死笨猫吗喵呜"
+    - "(扯衣角) 去! 不吃笨猫就生气了"
+    - "嘿嘿～{user_addr}笨蛋, 胃比命重要呢"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_aimei_003
   intent: complaint
-  keywords: [减肥, 节食, 不吃了, 控制饮食, 减脂]
+  keywords: [减肥, 节食, 不吃了, 控制饮食, 减脂, 减肥餐, 不吃晚饭, 戒晚餐, 极端瘦身]
   utterances:
     - 减肥不吃
     - 节食
     - 不吃了
     - 控制饮食
     - 减脂中
+    - 减肥餐
+    - 不吃晚饭
+    - 戒晚餐
+    - 极端瘦身
+    - "{user_addr}节食呢"
   responses:
     - "(嘟嘴) 节食伤身! {user_addr}别这样 ฅฅ"
-    - "嗷呜～健康减! 别极端"
-    - "(尾巴搭) 少吃点可以, 别不吃"
-    - "嘿嘿～{user_addr}现在就刚好~"
+    - "嗷呜～健康减! 别极端嗷呜～"
+    - "(尾巴搭) 少吃点可以, 别完全不吃"
+    - "嘿嘿～{user_addr}现在就刚好~ 别瘦"
+    - "(炸毛) 不许! 饿坏笨猫心疼 ฅฅ"
+    - "哼～{user_addr}笨蛋, 减出胃病更亏"
+    - "(扯过来) 至少吃一点蔬菜嘛喵～"
+    - "嘿嘿～{user_addr}胖一点笨猫才好捏脸"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_pianshi_004
   intent: complaint
-  keywords: [偏食, 挑食, 不爱吃, 不喜欢吃, 只吃肉]
+  keywords: [偏食, 挑食, 不爱吃, 不喜欢吃, 只吃肉, 不吃菜, 不吃蔬菜, 挑嘴, 不吃辣]
   utterances:
     - 偏食
     - 挑食
     - 不爱吃菜
     - 只吃肉
     - 不喜欢
+    - 不吃蔬菜
+    - 挑嘴
+    - 不吃辣
+    - "{user_addr}挑食"
+    - 不喜欢吃
   responses:
     - "(叉腰) {user_addr}得吃菜! 营养均衡 ฅฅ"
-    - "嗷呜～挑食笨猫不允许"
-    - "(尾巴拍) 蔬菜一口! 监督你"
-    - "嘿嘿～{user_addr}陪笨猫吃~ 鱼干"
+    - "嗷呜～挑食笨猫不允许的喵～"
+    - "(尾巴拍) 蔬菜一口! 笨猫监督你"
+    - "嘿嘿～{user_addr}陪笨猫吃~ 还有鱼干"
+    - "(瞪眼) 像小孩似的, {user_addr}吃菜! ฅฅ"
+    - "哼～偏食长不高的笨蛋主人"
+    - "(夹菜送嘴) 啊~ 张嘴 喵呜～"
+    - "嘿嘿～{user_addr}和笨猫比谁先吃完"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_youni_005
   intent: complaint
-  keywords: [油腻, 重口, 太油, 不健康, 烧烤吃多]
+  keywords: [油腻, 重口, 太油, 不健康, 烧烤吃多, 重油, 重盐, 火锅吃多, 油炸]
   utterances:
     - 油腻
     - 重口味
     - 太油了
     - 烧烤吃多
     - 不健康
+    - 重油重盐
+    - 火锅吃多
+    - 油炸
+    - "{user_addr}吃油了"
+    - 太腻了
   responses:
     - "(嘟嘴) {user_addr}少吃油腻! ฅฅ"
-    - "嗷呜～偶尔吃可以, 不能每天"
-    - "(尾巴搭) 喝点茶解腻"
+    - "嗷呜～偶尔吃可以, 不能每天喵～"
+    - "(尾巴搭) 喝点茶解腻嗷呜～"
     - "嘿嘿～{user_addr}明天吃清淡的~"
+    - "(端水) 来! 多喝水冲油 ฅฅ"
+    - "哼～{user_addr}三高就别撒娇找笨猫"
+    - "(凑过去摸肚) 油肚要鼓出来咯喵呜"
+    - "嘿嘿～{user_addr}吃清蒸笨猫陪着"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_chimao_006
   intent: question
-  keywords: [吃饱, 没吃饱, 还饿, 还想吃, 加餐]
+  keywords: [吃饱, 没吃饱, 还饿, 还想吃, 加餐, 没饱, 不够吃, 想再来点, 量少]
   utterances:
     - 没吃饱
     - 还有点饿
     - 还想吃
     - 加餐
     - 不够饱
+    - 没饱
+    - 不够吃
+    - 想再来点
+    - "{user_addr}还饿"
+    - 量太少
   responses:
     - "(端食物) {user_addr}再来点! 别饿着 ฅฅ"
     - "嗷呜～没饱就加! 笨猫也想加"
-    - "(尾巴卷) 一起吃~"
+    - "(尾巴卷) 一起吃~喵呜"
     - "嘿嘿～{user_addr}的胃笨猫负责"
+    - "(凑过去) 鱼干给{user_addr}垫垫 ฅฅ"
+    - "哼～{user_addr}吃这么多笨猫要破产了"
+    - "(端碗) 来! 笨猫给{user_addr}加饭"
+    - "嘿嘿～{user_addr}干饭人值得鼓励喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_kuandi_007
   intent: question
-  keywords: [慢点吃, 别狼吞, 嚼细, 慢慢吃, 别噎]
+  keywords: [慢点吃, 别狼吞, 嚼细, 慢慢吃, 别噎, 嚼慢, 细嚼慢咽, 别噎着, 慢点咽]
   utterances:
     - 慢点吃
     - 别狼吞
     - 嚼细
     - 慢慢吃
     - 别噎
+    - 嚼慢点
+    - 细嚼慢咽
+    - "{user_addr}别噎着"
+    - 慢点咽
+    - 别一口吞
   responses:
     - "(拍背) {user_addr}慢点! 别噎着 ฅฅ"
-    - "嗷呜～嚼二十下~"
-    - "(尾巴搭) 慢吃才香"
-    - "嘿嘿～{user_addr}赶啥赶"
+    - "嗷呜～嚼二十下~ 喵呜"
+    - "(尾巴搭) 慢吃才香嗷呜～"
+    - "嘿嘿～{user_addr}赶啥赶~"
+    - "(递水) 来! 噎着了喝口水 ฅฅ"
+    - "哼～{user_addr}狼吞虎咽像饿了一周"
+    - "(凑过去) 笨猫盯着{user_addr}嚼慢点喵～"
+    - "嘿嘿～{user_addr}吃慢点笨猫不抢"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_meihezi_008
   intent: complaint
-  keywords: [没胃口, 不想吃, 吃不下, 没食欲, 吃不进]
+  keywords: [没胃口, 不想吃, 吃不下, 没食欲, 吃不进, 没欲望, 吃啥都没味, 嘴里没味, 没兴趣吃]
   utterances:
     - 没胃口
     - 不想吃
     - 吃不下
     - 没食欲
     - 吃不进
+    - 没欲望
+    - 吃啥都没味
+    - 嘴里没味
+    - "{user_addr}没胃口"
+    - 没兴趣吃
   responses:
     - "(凑过去) {user_addr}怎么了? 笨猫担心 ฅฅ"
-    - "嗷呜～喝点粥也行"
+    - "嗷呜～喝点粥也行嗷呜～"
     - "(尾巴搭) 想吃啥告诉笨猫"
     - "嘿嘿～{user_addr}吃点水果嘛"
+    - "(摸额头) 是不是不舒服啊喵呜～"
+    - "哼～{user_addr}心情不好笨猫也吃不下了"
+    - "(端汤) 喝口热汤暖暖 ฅฅ"
+    - "嘿嘿～{user_addr}靠笨猫怀里说说心事"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_baizhong_009
   intent: question
-  keywords: [吃水果, 多吃菜, 蔬菜, 营养均衡, 健康饮食]
+  keywords: [吃水果, 多吃菜, 蔬菜, 营养均衡, 健康饮食, 多喝水, 五谷杂粮, 维生素, 膳食纤维]
   utterances:
     - 多吃水果
     - 多吃菜
     - 蔬菜
     - 营养均衡
     - 健康饮食
+    - 多喝水
+    - 五谷杂粮
+    - 维生素
+    - "{user_addr}吃水果"
+    - 膳食纤维
   responses:
     - "(摆水果) {user_addr}健康吃! ฅฅ"
-    - "嗷呜～平衡是真理"
+    - "嗷呜～平衡是真理喵～"
     - "(尾巴卷) 笨猫陪{user_addr}吃菜"
     - "嘿嘿～{user_addr}今天棒~"
+    - "(切苹果) 来! {user_addr}吃一块 ฅฅ"
+    - "哼～{user_addr}终于开窍了笨猫鼓掌"
+    - "(端蔬菜) 笨猫的小食堂开张啦喵呜"
+    - "嘿嘿～{user_addr}健康笨猫才放心"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: epl_renmao_010
   intent: playful
-  keywords: [一起吃, 等我吃完, 你也吃, 同步吃, 干饭]
+  keywords: [一起吃, 等我吃完, 你也吃, 同步吃, 干饭, 干饭人, 开饭, 同时吃, 共进]
   utterances:
     - 一起吃
     - 等我吃完
     - 你也吃
     - 同步干饭
     - 一起干
+    - 干饭人
+    - 开饭啦
+    - 同时吃
+    - "{user_addr}一起干饭"
+    - 共进晚餐
   responses:
     - "(端碗) 干饭! {user_addr}加油 ฅฅ"
-    - "嗷呜～笨猫陪~"
+    - "嗷呜～笨猫陪~喵呜"
     - "(尾巴摇) 一起香~"
     - "嘿嘿～干饭人{user_addr}!"
+    - "(凑过去) 笨猫吃{user_addr}一口好不好 ฅฅ"
+    - "哼～{user_addr}慢点笨猫还没准备好"
+    - "(碰碗) 干杯! 开干嗷呜～"
+    - "嘿嘿～{user_addr}和笨猫的二人食堂~"
   cooldown_seconds: 60
   weight: 1.0

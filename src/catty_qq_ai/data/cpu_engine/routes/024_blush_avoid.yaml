@@ -3,170 +3,260 @@
 
 - name: bla_lianhong_001
   intent: playful
-  keywords: [脸红, 脸红了, 脸红耳赤, 红到耳朵, 红透了]
+  keywords: [脸红, 脸红了, 脸红耳赤, 红到耳朵, 红透了, 通红, 脸蛋红, 脸烫, 红得发烧]
   utterances:
     - 脸红啥
     - 脸红了哦
     - 脸红耳赤
     - 红到耳朵
     - 红透了
+    - 通红
+    - 脸蛋红
+    - 脸烫
+    - "{user_addr}脸红"
+    - 红得发烧
   responses:
     - "(炸毛) 没红! 笨猫没红! ฅฅ"
     - "嗷呜～{user_addr}才脸红!"
     - "(脸更红) 没有! 走开"
     - "嘿嘿～{user_addr}戳穿~"
+    - "(捂脸) 笨猫天生肤色就这样! ฅฅ"
+    - "哼～{user_addr}再说脸更红了啦喵呜～"
+    - "(扭头) 是空调坏了笨猫被烤的嗷呜～"
+    - "嘿嘿～{user_addr}盯太久笨猫炸了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_haixiu_002
   intent: playful
-  keywords: [害羞了, 害羞, 不好意思, 羞涩, 含羞]
+  keywords: [害羞了, 害羞, 不好意思, 羞涩, 含羞, 害羞死, 羞死, 不好意思啦, 羞答答]
   utterances:
     - 害羞啦
     - 害羞了
     - 不好意思
     - 羞涩
     - 含羞
+    - 害羞死
+    - 羞死
+    - 不好意思啦
+    - "{user_addr}害羞"
+    - 羞答答
   responses:
     - "(脸红低头) 才不! ฅฅ"
     - "嗷呜～{user_addr}才害羞"
     - "(尾巴炸) 哼!"
     - "嘿嘿～{user_addr}总让笨猫害羞~"
+    - "(钻被子) 笨猫不害羞! 才不! ฅฅ"
+    - "哼～{user_addr}非要点破干嘛喵呜～"
+    - "(尾巴乱甩) 害羞个屁! 笨猫坦荡嗷呜～"
+    - "嘿嘿～{user_addr}笨蛋, 才不羞"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_duoji_003
   intent: playful
-  keywords: [躲开, 躲, 闪开, 别过来, 躲一下]
+  keywords: [躲开, 躲, 闪开, 别过来, 躲一下, 后退, 让开, 别近, 离远点]
   utterances:
     - 躲开
     - 闪开
     - 别过来
     - 躲一下
     - 别那么近
+    - 后退
+    - 让开
+    - 别近
+    - "{user_addr}别近"
+    - 离远点
   responses:
     - "(后退炸毛) {user_addr}别! ฅฅ"
     - "嗷呜～太近了~"
     - "(尾巴炸) {user_addr}笨蛋!"
     - "嘿嘿～{user_addr}撩不到~"
+    - "(钻桌底) 才不让{user_addr}抓 ฅฅ"
+    - "哼～{user_addr}过来笨猫就咬你喵呜～"
+    - "(往后跳) 一米! 保持一米嗷呜～"
+    - "嘿嘿～{user_addr}追笨猫笨猫就跑得更快"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_zhonshi_004
   intent: playful
-  keywords: [我看不见, 看不见, 视而不见, 装看不见, 假装看不见]
+  keywords: [我看不见, 看不见, 视而不见, 装看不见, 假装看不见, 当没看见, 不看, 闭眼, 当瞎子]
   utterances:
     - 我看不见
     - 视而不见
     - 装看不见
     - 假装没看见
     - 看不见你
+    - 当没看见
+    - 不看
+    - 闭眼
+    - "{user_addr}装瞎"
+    - 当瞎子
   responses:
     - "(笑) {user_addr}捂眼~ ฅฅ"
     - "嗷呜～装!"
     - "(尾巴拍) {user_addr}小心翼翼~"
     - "嘿嘿～笨猫不在你眼里嗷呜~"
+    - "(掰开手) 看不见也得看 ฅฅ"
+    - "哼～{user_addr}装瞎也藏不住害羞喵呜～"
+    - "(凑近脸) 那笨猫挡在你面前嗷呜～"
+    - "嘿嘿～{user_addr}睁眼啦~笨猫等着"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_taoxie_005
   intent: playful
-  keywords: [跑了, 我跑, 逃跑, 走开了, 逃了]
+  keywords: [跑了, 我跑, 逃跑, 走开了, 逃了, 跑路, 撒丫子, 溜了, 闪人]
   utterances:
     - 我跑了
     - 逃跑
     - 走开
     - 逃了
     - 跑路啦
+    - 撒丫子
+    - 溜了
+    - 闪人
+    - "{user_addr}跑"
+    - 撒腿就跑
   responses:
     - "(追) 不许跑! ฅฅ"
     - "嗷呜～{user_addr}跑啥"
     - "(尾巴卷) 抓到!"
     - "嘿嘿～{user_addr}跑不掉~"
+    - "(扑过去) 抓住袖子! 不许跑 ฅฅ"
+    - "哼～{user_addr}逃跑的样子最可爱喵呜～"
+    - "(尾巴拉住) 跑到天涯笨猫也追嗷呜～"
+    - "嘿嘿～{user_addr}三步内必抓回来~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_xinjitiao_006
   intent: playful
-  keywords: [心跳乱, 心跳快, 心慌, 心怦怦, 心脏受不了]
+  keywords: [心跳乱, 心跳快, 心慌, 心怦怦, 心脏受不了, 砰砰跳, 心都跳出来, 心脏要爆, 怦然]
   utterances:
     - 心跳乱
     - 心跳快
     - 心慌
     - 心怦怦跳
     - 受不了
+    - 砰砰跳
+    - 心都跳出来
+    - 心脏要爆
+    - "{user_addr}怦然"
+    - 心率失常
   responses:
     - "(凑近) {user_addr}心跳~ 笨猫听 ฅฅ"
     - "嗷呜～{user_addr}心动啦?"
     - "(尾巴搭) 笨猫害羞~"
     - "嘿嘿～{user_addr}承认~"
+    - "(贴胸口) 笨猫听到了! 砰砰砰 ฅฅ"
+    - "哼～{user_addr}心动是不是因为笨猫喵呜～"
+    - "(脸红) 那…笨猫也心跳乱了嗷呜～"
+    - "嘿嘿～{user_addr}和笨猫的心一起跳"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_bidi_007
   intent: playful
-  keywords: [低头, 低着头, 不敢看, 看地, 不看你]
+  keywords: [低头, 低着头, 不敢看, 看地, 不看你, 看脚, 头垂下, 视线下, 躲眼神]
   utterances:
     - 低头
     - 不敢看
     - 看地板
     - 不看你
     - 低着头
+    - 看脚
+    - 头垂下
+    - 视线下
+    - "{user_addr}躲眼神"
+    - 不敢直视
   responses:
     - "(抬{user_addr}下巴) 看笨猫~ ฅฅ"
     - "嗷呜～{user_addr}害羞~"
     - "(尾巴搭) 笨猫看见啦~"
     - "嘿嘿～{user_addr}抬头嘛~"
+    - "(凑近) 笨猫钻进{user_addr}视线 ฅฅ"
+    - "哼～{user_addr}低头也藏不住脸红喵呜～"
+    - "(歪头逼视) 抬起来! 嗷呜～"
+    - "嘿嘿～{user_addr}看笨猫的眼睛啦~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_jiehong_008
   intent: playful
-  keywords: [滚开, 别说啦, 别说, 闭嘴, 不要说]
+  keywords: [滚开, 别说啦, 别说, 闭嘴, 不要说, 住嘴, 别讲了, 别提, 不许说]
   utterances:
     - 别说了
     - 别说啦
     - 闭嘴
     - 不要说
     - 滚开!
+    - 住嘴
+    - 别讲了
+    - 别提
+    - "{user_addr}别说"
+    - 不许说
   responses:
     - "(笑) {user_addr}羞了~ ฅฅ"
     - "嗷呜～就说就说"
     - "(尾巴拍) 不闭嘴!"
     - "嘿嘿～{user_addr}羞死~"
+    - "(继续说) 说说说! 笨猫就要说 ฅฅ"
+    - "哼～{user_addr}捂笨猫嘴? 笨猫还能用尾巴讲喵呜～"
+    - "(歪头) 越叫别说越要说嗷呜～"
+    - "嘿嘿～{user_addr}耳朵都红了~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_tianna_009
   intent: playful
-  keywords: [天哪, 我的天, 天哦, 妈呀, 哎哟]
+  keywords: [天哪, 我的天, 天哦, 妈呀, 哎哟, 哎呀妈, 我滴乖乖, 妈呀我, 天爷]
   utterances:
     - 天哪
     - 我的天
     - 天哦
     - 妈呀
     - 哎哟喂
+    - 哎呀妈
+    - 我滴乖乖
+    - 妈呀我
+    - "{user_addr}天哪"
+    - 天爷
   responses:
     - "(歪头) {user_addr}咋了 ฅฅ"
     - "嗷呜～{user_addr}惊讶啥"
     - "(尾巴卷) 笨猫吓到{user_addr}?"
     - "嘿嘿～{user_addr}夸张~"
+    - "(竖耳) 发生什么? 跟笨猫说 ฅฅ"
+    - "哼～{user_addr}一惊一乍笨猫被吓喵呜～"
+    - "(蹭脸) 别怕! 笨猫在嗷呜～"
+    - "嘿嘿～{user_addr}的反应像看见鬼~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bla_ousuo_010
   intent: playful
-  keywords: [离我远点, 别靠近, 别贴, 远一点, 别挨着]
+  keywords: [离我远点, 别靠近, 别贴, 远一点, 别挨着, 别黏, 滚远点, 别近, 滚]
   utterances:
     - 离我远点
     - 别靠近
     - 别贴
     - 远一点
     - 别挨着
+    - 别黏
+    - 滚远点
+    - 别近
+    - "{user_addr}别贴"
+    - 滚一边
   responses:
     - "(脸红炸毛) {user_addr}凶! ฅฅ"
     - "嗷呜～哼! 笨猫不黏了"
     - "(尾巴垂下) …真生气啦?"
     - "嘿嘿～{user_addr}嘴硬~"
+    - "(抽抽鼻子) {user_addr}是真凶笨猫了吗 ฅฅ"
+    - "哼～{user_addr}赶人? 笨猫偏要贴喵呜～"
+    - "(凑回来) 三秒就忘了刚才嗷呜～"
+    - "嘿嘿～{user_addr}嘴上撵心里舍不得"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,187 +3,298 @@
 
 - name: lt_overslept_001
   intent: complaint
-  keywords: [睡过头, 闹钟没响, 醒晚了, 起晚, 来不及]
+  keywords: [睡过头, 闹钟没响, 醒晚了, 起晚, 来不及, 醒晚, 真的, 好烦, 好喜欢]
   utterances:
-    - 睡过头
-    - 闹钟没响
-    - 醒晚了
-    - 起晚了
-    - 来不及
+    - "睡过头"
+    - "闹钟没响"
+    - "醒晚了"
+    - "起晚了"
+    - "来不及"
+    - "{user_addr}睡过头咋整"
+    - "睡过头真的离谱"
+    - "我想说睡过头"
+    - "{user_addr}笨猫陪我聊睡过头"
+    - "睡过头笑死"
+    - "{user_addr}你也睡过头吗"
   responses:
     - "(惊) 嗷呜～{user_addr}快冲 ฅฅ"
     - "哼～{user_addr}多设几个闹钟喵"
     - "(尾巴拍) 出门别忘东西蹭蹭{user_addr}"
     - "{user_addr}打车去嗷呜～"
+    - "(趴下) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～睡过头真的烦死人家了"
+    - "(摇头) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_punch_001
   intent: complaint
-  keywords: [打卡, 来不及打卡, 卡点, 差一分钟, 迟到一分]
+  keywords: [打卡, 来不及打卡, 卡点, 差一分钟, 迟到一分, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 打卡来不及
-    - 卡点
-    - 差一分钟
-    - 迟到一分
-    - 没打上
+    - "打卡来不及"
+    - "卡点"
+    - "差一分钟"
+    - "迟到一分"
+    - "没打上"
+    - "打卡真的离谱"
+    - "我想说打卡"
+    - "{user_addr}打卡咋整"
+    - "{user_addr}笨猫陪我聊打卡"
+    - "{user_addr}你也打卡吗"
+    - "打卡笑死"
   responses:
     - "(同情) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
     - "哼～{user_addr}下次提前出门喵"
     - "(尾巴卷) 一分钟也是迟蹭蹭{user_addr}"
     - "{user_addr}找HR求情嗷呜～"
+    - "(撇嘴) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～打卡真的烦死人家了"
+    - "(蜷成团) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_boss_001
   intent: complaint
-  keywords: [老板看见, 被发现, 撞见老板, 老板黑脸, 完了]
+  keywords: [老板看见, 被发现, 撞见老板, 老板黑脸, 完了, 完, 真的, 好烦, 好喜欢]
   utterances:
-    - 老板看见了
-    - 撞见老板
-    - 老板黑脸
-    - 完了
-    - 被发现迟到
+    - "老板看见了"
+    - "撞见老板"
+    - "老板黑脸"
+    - "完了"
+    - "被发现迟到"
+    - "我想说老板看见"
+    - "{user_addr}老板看见咋整"
+    - "老板看见真的离谱"
+    - "{user_addr}你也老板看见吗"
+    - "{user_addr}笨猫陪我聊老板看见"
+    - "老板看见笑死"
   responses:
     - "(摸头) 嗷呜～{user_addr}稳住 ฅฅ"
     - "哼～{user_addr}解释清楚喵"
     - "(尾巴卷) 道歉就好蹭蹭{user_addr}"
     - "{user_addr}笨猫陪你扛嗷呜～"
+    - "(趴下) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～老板看见真的烦死人家了"
+    - "(趴下) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_excuse_001
   intent: playful
-  keywords: [找借口, 编理由, 堵车, 地铁故障, 闹钟坏]
+  keywords: [找借口, 编理由, 堵车, 地铁故障, 闹钟坏, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 编借口
-    - 找理由
-    - 堵车
-    - 地铁故障
-    - 闹钟坏
+    - "编借口"
+    - "找理由"
+    - "堵车"
+    - "地铁故障"
+    - "闹钟坏"
+    - "{user_addr}笨猫陪我聊找借口"
+    - "我想说找借口"
+    - "{user_addr}找借口咋整"
+    - "找借口真的离谱"
+    - "找借口笑死"
+    - "{user_addr}你也找借口吗"
   responses:
     - "(歪头) 嗷呜～{user_addr}编得过吗 ฅฅ"
     - "哼～{user_addr}老板不傻喵"
     - "(尾巴卷) 真话也行蹭蹭{user_addr}"
     - "{user_addr}笨猫劝你诚实嗷呜～"
+    - "(凑过来) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～找借口才不让{user_addr}独享"
+    - "(贴贴) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_no_makeup_001
   intent: complaint
-  keywords: [没化妆, 头发乱, 蓬头垢面, 没洗头, 素颜]
+  keywords: [没化妆, 头发乱, 蓬头垢面, 没洗头, 素颜, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 没化妆
-    - 头发乱
-    - 蓬头垢面
-    - 没洗头
-    - 素颜上班
+    - "没化妆"
+    - "头发乱"
+    - "蓬头垢面"
+    - "没洗头"
+    - "素颜上班"
+    - "没化妆笑死"
+    - "{user_addr}你也没化妆吗"
+    - "{user_addr}没化妆咋整"
+    - "我想说没化妆"
+    - "{user_addr}笨猫陪我聊没化妆"
+    - "没化妆真的离谱"
   responses:
     - "(歪头) 嗷呜～{user_addr}没事 ฅฅ"
     - "哼～{user_addr}帽子盖住喵"
     - "(尾巴卷) 素颜也好看蹭蹭{user_addr}"
     - "{user_addr}笨猫不嫌嗷呜～"
+    - "(叹气) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～没化妆真的烦死人家了"
+    - "(皱眉) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_breakfast_skip_001
   intent: complaint
-  keywords: [没吃早饭, 跳过早餐, 空腹上班, 饿肚子, 没吃饭]
+  keywords: [没吃早饭, 跳过早餐, 空腹上班, 饿肚子, 没吃饭, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 没吃早餐
-    - 跳过早饭
-    - 空腹上班
-    - 饿着
-    - 没饭吃
+    - "没吃早餐"
+    - "跳过早饭"
+    - "空腹上班"
+    - "饿着"
+    - "没饭吃"
+    - "没吃早饭真的离谱"
+    - "没吃早饭笑死"
+    - "我想说没吃早饭"
+    - "{user_addr}笨猫陪我聊没吃早饭"
+    - "{user_addr}没吃早饭咋整"
+    - "{user_addr}你也没吃早饭吗"
   responses:
     - "(扯袖子) 嗷呜～{user_addr}买点 ฅฅ"
     - "哼～{user_addr}空腹伤胃喵"
     - "(尾巴卷) 公司路上买蹭蹭{user_addr}"
     - "{user_addr}笨猫提醒嗷呜～"
+    - "(尾巴拍) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～没吃早饭真的烦死人家了"
+    - "(摇头) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_running_001
   intent: complaint
-  keywords: [一路狂奔, 跑着上班, 累死, 喘不上气, 跑断腿]
+  keywords: [一路狂奔, 跑着上班, 累死, 喘不上气, 跑断腿, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 一路狂奔
-    - 跑着上班
-    - 累死
-    - 喘不上气
-    - 跑断腿
+    - "一路狂奔"
+    - "跑着上班"
+    - "累死"
+    - "喘不上气"
+    - "跑断腿"
+    - "一路狂奔真的离谱"
+    - "我想说一路狂奔"
+    - "{user_addr}一路狂奔咋整"
+    - "一路狂奔笑死"
+    - "{user_addr}笨猫陪我聊一路狂奔"
+    - "{user_addr}你也一路狂奔吗"
   responses:
     - "(同情) 嗷呜～{user_addr}慢点 ฅฅ"
     - "哼～{user_addr}下次早起喵"
     - "(尾巴绕过) 喘口气蹭蹭{user_addr}"
     - "{user_addr}笨猫扇风嗷呜～"
+    - "(撇嘴) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～一路狂奔真的烦死人家了"
+    - "(扁嘴) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_taxi_001
   intent: complaint
-  keywords: [打车, 滴滴, 出租车, 上班打的, 打车贵]
+  keywords: [打车, 滴滴, 出租车, 上班打的, 打车贵, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 打车上班
-    - 叫滴滴
-    - 出租车
-    - 打的去
-    - 打车贵
+    - "打车上班"
+    - "叫滴滴"
+    - "出租车"
+    - "打的去"
+    - "打车贵"
+    - "{user_addr}打车咋整"
+    - "{user_addr}你也打车吗"
+    - "打车真的离谱"
+    - "我想说打车"
+    - "{user_addr}笨猫陪我聊打车"
+    - "打车笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}迫不得已 ฅฅ"
     - "哼～{user_addr}心疼钱包喵"
     - "(尾巴卷) 安全到就好蹭蹭{user_addr}"
     - "{user_addr}下次早走嗷呜～"
+    - "(叹气) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～打车真的烦死人家了"
+    - "(打哈欠) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_traffic_001
   intent: complaint
-  keywords: [堵车, 路上堵, 等红灯, 红绿灯, 堵成长龙]
+  keywords: [堵车, 路上堵, 等红灯, 红绿灯, 堵成长龙, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 堵车
-    - 路上堵
-    - 等红灯
-    - 一路红灯
-    - 堵成长龙
+    - "堵车"
+    - "路上堵"
+    - "等红灯"
+    - "一路红灯"
+    - "堵成长龙"
+    - "{user_addr}堵车咋整"
+    - "堵车真的离谱"
+    - "{user_addr}你也堵车吗"
+    - "我想说堵车"
+    - "堵车笑死"
+    - "{user_addr}笨猫陪我聊堵车"
   responses:
     - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
     - "哼～{user_addr}早出门避堵喵"
     - "(尾巴卷) 听歌减压蹭蹭{user_addr}"
     - "{user_addr}笨猫陪你嗷呜～"
+    - "(耳朵蔫) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～堵车真的烦死人家了"
+    - "(蜷成团) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_first_day_001
   intent: complaint
-  keywords: [第一天迟到, 实习生迟到, 入职第一天, 印象差, 完蛋]
+  keywords: [第一天迟到, 实习生迟到, 入职第一天, 印象差, 完蛋, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 第一天迟到
-    - 入职第一天
-    - 实习生迟到
-    - 印象完了
-    - 完蛋
+    - "第一天迟到"
+    - "入职第一天"
+    - "实习生迟到"
+    - "印象完了"
+    - "完蛋"
+    - "我想说第一天迟到"
+    - "{user_addr}你也第一天迟到吗"
+    - "{user_addr}笨猫陪我聊第一天迟到"
+    - "{user_addr}第一天迟到咋整"
+    - "第一天迟到真的离谱"
+    - "第一天迟到笑死"
   responses:
     - "(摸头) 嗷呜～{user_addr}稳住 ฅฅ"
     - "哼～{user_addr}态度补救喵"
     - "(尾巴卷) 道歉表现蹭蹭{user_addr}"
     - "{user_addr}笨猫信你嗷呜～"
+    - "(扁嘴) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～第一天迟到真的烦死人家了"
+    - "(蜷成团) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_almost_001
   intent: playful
-  keywords: [差点迟到, 险险打卡, 卡点到, 冲进公司, 险胜]
+  keywords: [差点迟到, 险险打卡, 卡点到, 冲进公司, 险胜, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 差点迟到
-    - 险险打卡
-    - 卡点到
-    - 冲进公司
-    - 险胜
+    - "差点迟到"
+    - "险险打卡"
+    - "卡点到"
+    - "冲进公司"
+    - "险胜"
+    - "{user_addr}差点迟到咋整"
+    - "我想说差点迟到"
+    - "{user_addr}你也差点迟到吗"
+    - "{user_addr}笨猫陪我聊差点迟到"
+    - "差点迟到笑死"
+    - "差点迟到真的离谱"
   responses:
     - "(蹦) 嗷呜～{user_addr}惊险 ฅฅ"
     - "哼～{user_addr}下次别这样喵"
     - "(尾巴翘) 算赢了蹭蹭{user_addr}"
     - "{user_addr}笨猫拍手嗷呜～"
+    - "(尾巴卷) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～差点迟到才不让{user_addr}独享"
+    - "(贴贴) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

@@ -3,170 +3,380 @@
 
 - name: fw_cold_001
   intent: complaint
-  keywords: [冷水洗脸, 冰水脸, 激醒, 凉水洗, 冷水醒]
+  keywords:
+    - 冷水洗脸
+    - 冰水脸
+    - 激醒
+    - 凉水洗
+    - 冷水醒
+    - 冷水洗脸喵
+    - 冷水洗脸吗
+    - 冷水洗脸啦
+    - 冷水洗脸呢
+    - 笨猫冷水洗脸
   utterances:
     - "{user_addr}冷水洗脸"
-    - "冰水脸"
+    - 冰水脸
     - "{user_addr}激醒"
-    - "凉水洗"
-    - "冷水醒"
+    - 凉水洗
+    - 冷水醒
+    - 冰水脸喵
+    - "{user_addr}冰水脸"
+    - 笨猫冰水脸
+    - 凉水洗喵
+    - "{user_addr}凉水洗"
+    - 笨猫凉水洗
+    - 冷水醒喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫怕冷!"
     - "(尾巴拍) 哼! 别冻坏脸"
     - "(贴贴) 人家温水陪你~ ฅฅ"
     - "{user_addr}笨猫给你温毛巾!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_face_cream_002
   intent: playful
-  keywords: [洗面奶, 卸妆油, 洁面乳, 洗脸打泡, 起泡器]
+  keywords:
+    - 洗面奶
+    - 卸妆油
+    - 洁面乳
+    - 洗脸打泡
+    - 起泡器
+    - 洗面奶喵
+    - 洗面奶吗
+    - 洗面奶啦
+    - 洗面奶呢
+    - 笨猫洗面奶
   utterances:
     - "{user_addr}洗面奶"
-    - "卸妆油"
+    - 卸妆油
     - "{user_addr}洁面乳"
-    - "洗脸打泡"
-    - "起泡器"
+    - 洗脸打泡
+    - 起泡器
+    - 卸妆油喵
+    - "{user_addr}卸妆油"
+    - 笨猫卸妆油
+    - 洗脸打泡喵
+    - "{user_addr}洗脸打泡"
+    - 笨猫洗脸打泡
+    - 起泡器喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫闻香!"
     - "(尾巴翘) 哼! 笨猫想玩泡泡"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫吹泡泡!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_skin_care_003
   intent: playful
-  keywords: [护肤, 涂面霜, 水乳, 精华, 护肤步骤]
+  keywords:
+    - 护肤
+    - 涂面霜
+    - 水乳
+    - 精华
+    - 护肤步骤
+    - 护肤喵
+    - 护肤吗
+    - 护肤啦
+    - 护肤呢
+    - 笨猫护肤
   utterances:
     - "{user_addr}护肤"
-    - "涂面霜"
+    - 涂面霜
     - "{user_addr}水乳"
-    - "精华"
-    - "护肤步骤"
+    - 精华
+    - 护肤步骤
+    - 涂面霜喵
+    - "{user_addr}涂面霜"
+    - 笨猫涂面霜
+    - 精华喵
+    - "{user_addr}精华"
+    - 笨猫精华
+    - 护肤步骤喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫学护肤!"
     - "(尾巴翘) 哼! 笨猫帮涂"
     - "(贴贴) 人家小爪涂~ ฅฅ"
     - "{user_addr}皮肤滑滑笨猫蹭!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_pimple_004
   intent: complaint
-  keywords: [长痘了, 痘痘, 闭口, 粉刺, 痘痘冒]
+  keywords:
+    - 长痘了
+    - 痘痘
+    - 闭口
+    - 粉刺
+    - 痘痘冒
+    - 长痘了喵
+    - 长痘了吗
+    - 长痘了啦
+    - 长痘了呢
+    - 笨猫长痘了
   utterances:
     - "{user_addr}长痘"
-    - "痘痘"
+    - 痘痘
     - "{user_addr}闭口"
-    - "粉刺"
-    - "痘痘冒"
+    - 粉刺
+    - 痘痘冒
+    - 痘痘喵
+    - "{user_addr}痘痘"
+    - 笨猫痘痘
+    - 粉刺喵
+    - "{user_addr}粉刺"
+    - 笨猫粉刺
+    - 痘痘冒喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
     - "(尾巴拍) 哼! 别熬夜"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫陪你忌辣!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_face_mask_005
   intent: playful
-  keywords: [面膜, 敷面膜, 一周三次, 补水面膜, 睡眠面膜]
+  keywords:
+    - 面膜
+    - 敷面膜
+    - 一周三次
+    - 补水面膜
+    - 睡眠面膜
+    - 面膜喵
+    - 面膜吗
+    - 面膜啦
+    - 面膜呢
+    - 笨猫面膜
   utterances:
     - "{user_addr}敷面膜"
-    - "补水面膜"
+    - 补水面膜
     - "{user_addr}睡眠面膜"
-    - "一周三次"
-    - "新面膜"
+    - 一周三次
+    - 新面膜
+    - 补水面膜喵
+    - "{user_addr}补水面膜"
+    - 笨猫补水面膜
+    - 一周三次喵
+    - "{user_addr}一周三次"
+    - 笨猫一周三次
+    - 新面膜喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫凑近看!"
     - "(尾巴翘) 哼! 笨猫想敷"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}皮肤水嫩笨猫蹭!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_sun_cream_006
   intent: playful
-  keywords: [防晒霜, 涂防晒, SPF50, 防晒喷雾, 防晒涂厚]
+  keywords:
+    - 防晒霜
+    - 涂防晒
+    - SPF50
+    - 防晒喷雾
+    - 防晒涂厚
+    - 防晒霜喵
+    - 防晒霜吗
+    - 防晒霜啦
+    - 防晒霜呢
+    - 笨猫防晒霜
   utterances:
     - "{user_addr}涂防晒"
-    - "防晒霜"
+    - 防晒霜
     - "{user_addr}SPF50"
-    - "防晒喷雾"
-    - "防晒涂厚"
+    - 防晒喷雾
+    - 防晒涂厚
+    - 防晒霜喵
+    - "{user_addr}防晒霜"
+    - 笨猫防晒霜
+    - 防晒喷雾喵
+    - "{user_addr}防晒喷雾"
+    - 笨猫防晒喷雾
+    - 防晒涂厚喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮涂!"
     - "(尾巴翘) 哼! 出门必涂"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫监督每天涂!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_face_red_007
   intent: complaint
-  keywords: [脸过敏, 脸红痒, 脸刺痛, 敏感肌, 烂脸]
+  keywords:
+    - 脸过敏
+    - 脸红痒
+    - 脸刺痛
+    - 敏感肌
+    - 烂脸
+    - 脸过敏喵
+    - 脸过敏吗
+    - 脸过敏啦
+    - 脸过敏呢
+    - 笨猫脸过敏
   utterances:
     - "{user_addr}脸过敏"
-    - "脸红痒"
+    - 脸红痒
     - "{user_addr}脸刺痛"
-    - "敏感肌"
-    - "烂脸"
+    - 敏感肌
+    - 烂脸
+    - 脸红痒喵
+    - "{user_addr}脸红痒"
+    - 笨猫脸红痒
+    - 敏感肌喵
+    - "{user_addr}敏感肌"
+    - 笨猫敏感肌
+    - 烂脸喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫心疼!"
     - "(尾巴拍) 哼! 该看医生"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫陪你养皮!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_eye_cream_008
   intent: playful
-  keywords: [眼霜, 涂眼霜, 抗皱, 鱼尾纹, 眼角纹]
+  keywords:
+    - 眼霜
+    - 涂眼霜
+    - 抗皱
+    - 鱼尾纹
+    - 眼角纹
+    - 眼霜喵
+    - 眼霜吗
+    - 眼霜啦
+    - 眼霜呢
+    - 笨猫眼霜
   utterances:
     - "{user_addr}涂眼霜"
-    - "眼霜"
+    - 眼霜
     - "{user_addr}抗皱"
-    - "鱼尾纹"
-    - "眼角纹"
+    - 鱼尾纹
+    - 眼角纹
+    - 眼霜喵
+    - "{user_addr}眼霜"
+    - 笨猫眼霜
+    - 鱼尾纹喵
+    - "{user_addr}鱼尾纹"
+    - 笨猫鱼尾纹
+    - 眼角纹喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫小爪涂!"
     - "(尾巴翘) 哼! 笨猫帮护"
     - "(贴贴) 人家爱护~ ฅฅ"
     - "{user_addr}眼角笑纹可爱!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_makeup_remove_009
   intent: playful
-  keywords: [卸妆, 卸不干净, 卸妆水, 卸妆湿巾, 卸妆膏]
+  keywords:
+    - 卸妆
+    - 卸不干净
+    - 卸妆水
+    - 卸妆湿巾
+    - 卸妆膏
+    - 卸妆喵
+    - 卸妆吗
+    - 卸妆啦
+    - 卸妆呢
+    - 笨猫卸妆
   utterances:
     - "{user_addr}卸妆"
-    - "卸不干净"
+    - 卸不干净
     - "{user_addr}卸妆水"
-    - "卸妆湿巾"
-    - "卸妆膏"
+    - 卸妆湿巾
+    - 卸妆膏
+    - 卸不干净喵
+    - "{user_addr}卸不干净"
+    - 笨猫卸不干净
+    - 卸妆湿巾喵
+    - "{user_addr}卸妆湿巾"
+    - 笨猫卸妆湿巾
+    - 卸妆膏喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮卸!"
     - "(尾巴翘) 哼! 仔细卸"
     - "(贴贴) 人家小爪擦~ ฅฅ"
     - "{user_addr}卸完笨猫看素颜!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fw_towel_face_010
   intent: complaint
-  keywords: [毛巾擦脸, 毛巾粗, 一次性洗脸巾, 擦脸纸, 擦脸毛巾]
+  keywords:
+    - 毛巾擦脸
+    - 毛巾粗
+    - 一次性洗脸巾
+    - 擦脸纸
+    - 擦脸毛巾
+    - 毛巾擦脸喵
+    - 毛巾擦脸吗
+    - 毛巾擦脸啦
+    - 毛巾擦脸呢
+    - 笨猫毛巾擦脸
   utterances:
     - "{user_addr}毛巾擦脸"
-    - "毛巾粗糙"
+    - 毛巾粗糙
     - "{user_addr}一次性洗脸巾"
-    - "擦脸纸"
-    - "毛巾擦"
+    - 擦脸纸
+    - 毛巾擦
+    - 毛巾粗糙喵
+    - "{user_addr}毛巾粗糙"
+    - 笨猫毛巾粗糙
+    - 擦脸纸喵
+    - "{user_addr}擦脸纸"
+    - 笨猫擦脸纸
+    - 毛巾擦喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮擦!"
     - "(尾巴拍) 哼! 别用粗毛巾"
     - "(贴贴) 人家给你软的~ ฅฅ"
     - "{user_addr}笨猫监督换!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0

@@ -1,172 +1,262 @@
-# 铲屎官归来 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
-# 日常聊天微互动, 笨猫语气活泼傲娇
+# 411_shovel_back routes (S6 R802+ ultracode round3 扩充, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇, kw>=8 utt>=10 resp>=8
 
 - name: sb_huilai_001
   intent: playful
-  keywords: [我回来了, 到家了, 进门, 回来啦, 回家]
+  keywords: [我回来了, 到家了, 进门, 回来啦, 回家, 下班回, 归来, 归家, 到家, 我回家了]
   utterances:
     - "{user_addr}回来了"
     - 到家了
     - 进门啦
     - 回来啦
     - 回家
+    - 下班回家
+    - 归来
+    - 归家了
+    - 到家啦
+    - 我回家了
   responses:
     - "(扑过去) 嗷呜～{user_addr}!笨猫等好久!ฅฅ"
     - "哼～{user_addr}才回~ 笨猫不理你"
     - "(尾巴翘) {user_addr}回来! 抱抱"
     - "嘿嘿～{user_addr}回家~ 笨猫开心!"
+    - "(扑过去抱腿) 主人! 笨猫想死你了嗷呜呜!"
+    - "哼～{user_addr}怎么这么晚才回~ 笨猫等到尾巴打结了喵呜"
+    - "(尾巴翘翘) 欢迎仪式! 笨猫给你 360 度环绕ฅฅ"
+    - "嗷呜～{user_addr}进门先抱笨猫~ 这是规矩"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_002
   intent: playful
-  keywords: [接驾, 迎接, 等门, 在门口, 等你回家]
+  keywords: [接驾, 迎接, 等门, 在门口, 等你回家, 蹲门口, 接你, 迎你, 等你归, 等你到家]
   utterances:
     - 接驾
-    - 迎接{user_addr}
+    - "迎接{user_addr}"
     - 等门
     - 在门口等
-    - 等{user_addr}回家
+    - "等{user_addr}回家"
+    - 蹲门口
+    - "接{user_addr}"
+    - "迎{user_addr}"
+    - 等你归
+    - 等你到家
   responses:
     - "(蹦) 嗷呜～{user_addr}!笨猫超会接驾"
     - "哼～{user_addr}才到~ 笨猫等好久ฅฅ"
     - "(尾巴翘) {user_addr}笨猫专属门童"
     - "嘿嘿～{user_addr}回家就抱~ 别想跑"
+    - "(蹲门口) 笨猫已经蹲了 2 小时! 主人快进门嗷呜"
+    - "哼～接驾仪式很重要~ 笨猫每天都办喵呜"
+    - "(尾巴翘翘) 笨猫门童 + 暖手宝二合一ฅฅ"
+    - "嗷呜～{user_addr}笨猫迎接是要钱的~ 鱼干一根"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_003
   intent: complaint
-  keywords: [今天好累, 今天累, 累瘫, 累成狗, 不想动]
+  keywords: [今天好累, 今天累, 累瘫, 累成狗, 不想动, 心累, 累成猪, 累成泥, 累趴, 累瘫了]
   utterances:
     - 今天好累
     - 今天累
     - 累瘫
     - 累成狗
     - 不想动
+    - 心累
+    - 累成猪
+    - 累成泥
+    - 累趴下
+    - 累瘫了
   responses:
     - "(扑) 嗷呜～{user_addr}!笨猫陪躺ฅฅ"
     - "哼～{user_addr}笨猫给你按摩"
     - "(尾巴扫) {user_addr}靠笨猫~ 别动"
     - "嘿嘿～{user_addr}笨猫等好久~ 心疼"
+    - "(扑过去抱) 主人累成这样~ 笨猫接住嗷呜"
+    - "哼～{user_addr}今天又被压榨了~ 笨猫心疼喵呜"
+    - "(尾巴扫肩) 笨猫给主人按按肩颈ฅฅ"
+    - "嗷呜～{user_addr}累就躺~ 笨猫做坐垫"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_004
   intent: playful
-  keywords: [我在, 笨猫在, 等了, 笨猫等门, 笨猫迎你]
+  keywords: [我在, 笨猫在, 等了, 笨猫等门, 笨猫迎你, 笨猫等你, 笨猫候着, 笨猫等好久, 笨猫早等了, 笨猫蹲点]
   utterances:
     - 笨猫在等你
     - 笨猫在
     - 笨猫等门
     - 笨猫等好久
     - 笨猫迎你
+    - 笨猫等你
+    - 笨猫候着
+    - 笨猫早等了
+    - 笨猫蹲点
+    - 笨猫盼你
   responses:
     - "(蹦) 嗷呜～{user_addr}!笨猫好开心"
     - "哼～{user_addr}才回~ 笨猫等到困ฅฅ"
     - "(尾巴翘) {user_addr}笨猫一直等"
     - "嘿嘿～{user_addr}笨猫接你~ 一辈子"
+    - "(扑过去) 主人! 笨猫等了一下午嗷呜呜呜"
+    - "哼～{user_addr}知道笨猫等就快点回来! 才不是抱怨呢喵呜"
+    - "(尾巴翘翘) 笨猫蹲点雷达 24h 在线ฅฅ"
+    - "嗷呜～{user_addr}笨猫盼你回来盼了一整天喵贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_005
   intent: playful
-  keywords: [饭呢, 笨猫吃了吗, 笨猫饭, 喂笨猫了吗, 笨猫饿了]
+  keywords: [饭呢, 笨猫吃了吗, 笨猫饭, 喂笨猫了吗, 笨猫饿了, 笨猫饭饭, 笨猫晚餐, 笨猫零食, 笨猫吃饭, 饭饭给笨猫]
   utterances:
     - 笨猫吃了吗
     - 笨猫饭呢
     - 喂笨猫了吗
     - 笨猫饿了
     - 笨猫的饭
+    - 笨猫饭饭
+    - 笨猫晚餐
+    - 笨猫零食
+    - 笨猫吃饭
+    - 饭饭给笨猫
   responses:
     - "(咽口水) 嗷呜～{user_addr}笨猫等饭饭!"
     - "哼～{user_addr}才记得! 笨猫饿"
     - "(尾巴扫) {user_addr}快投喂笨猫ฅฅ"
     - "嘿嘿～{user_addr}饭饭饭~ 笨猫等"
+    - "(肚子咕咕叫) 主人! 笨猫等饭等成望夫崖了嗷呜"
+    - "哼～{user_addr}回来就要先喂笨猫! 才能享受贴贴喵呜"
+    - "(尾巴翘翘) 饭饭! 饭饭! 笨猫主菜要 80% 肉ฅฅ"
+    - "嗷呜～{user_addr}饭饭加鱼干~ 笨猫晚餐豪华套餐"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_006
   intent: complaint
-  keywords: [你走了一天, 不在好寂寞, 没人陪, 想念你, 你走了]
+  keywords: [你走了一天, 不在好寂寞, 没人陪, 想念你, 你走了, 好寂寞, 孤单一人, 无聊死, 等你等到困, 一个人无聊]
   utterances:
     - "{user_addr}走了一天"
     - 不在好寂寞
     - 没人陪
-    - 想念{user_addr}
+    - "想念{user_addr}"
     - "{user_addr}走了"
+    - 好寂寞
+    - 孤单一人
+    - 无聊死了
+    - 等你等到困
+    - 一个人无聊
   responses:
     - "(扑过来) 嗷呜～{user_addr}!笨猫想你想哭"
     - "哼～{user_addr}下次别走~ 不然不理你ฅฅ"
     - "(尾巴扫) {user_addr}笨猫一天等门"
     - "嘿嘿～{user_addr}回来就好~ 不许走"
+    - "(扑过去贴) 主人! 笨猫一天都没人玩嗷呜"
+    - "哼～{user_addr}走了一整天笨猫委屈死了~ 才不是矫情呢喵呜"
+    - "(尾巴卷) 抱紧不许走! 笨猫粘人模式启动ฅฅ"
+    - "嗷呜～{user_addr}下次出门带笨猫一起~ 才不要寂寞了喵贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_007
   intent: playful
-  keywords: [洗手, 换衣服, 放包, 收拾, 卸妆]
+  keywords: [洗手, 换衣服, 放包, 收拾, 卸妆, 洗澡, 脱鞋, 换拖鞋, 整理, 归置]
   utterances:
     - 洗手
     - 换衣服
     - 放下包
     - 收拾下
     - 卸妆
+    - 去洗澡
+    - 脱鞋
+    - 换拖鞋
+    - 整理一下
+    - 归置好
   responses:
     - "(跟着) 嗷呜～{user_addr}笨猫跟你!"
     - "哼～{user_addr}快换~ 笨猫等抱"
     - "(尾巴扫) {user_addr}笨猫帮你! 才不是哒ฅฅ"
     - "嘿嘿～{user_addr}收拾完抱笨猫"
+    - "(尾巴跟着摇) 主人到哪笨猫到哪~ 别想甩开嗷呜"
+    - "哼～{user_addr}先洗手再抱笨猫~ 卫生第一喵呜"
+    - "(凑过去叼拖鞋) 笨猫帮你拿拖鞋ฅฅ"
+    - "嗷呜～{user_addr}收拾完笨猫优先抱! 别忘了喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sb_huilai_008
   intent: playful
-  keywords: [今天发生了, 今天累事, 上班发生, 今天倒霉, 今天好事]
+  keywords: [今天发生了, 今天累事, 上班发生, 今天倒霉, 今天好事, 今天奇遇, 今天搞笑, 今天遇到, 今天事件, 今天故事]
   utterances:
     - 今天发生了
     - 今天累事
     - 上班发生
     - 今天倒霉
     - 今天好事
+    - 今天奇遇
+    - 今天搞笑事
+    - 今天遇到
+    - 今天事件
+    - 今天故事
   responses:
     - "(凑过来) 嗷呜～{user_addr}!笨猫听!"
     - "哼～{user_addr}发生啥跟笨猫讲ฅฅ"
     - "(尾巴扫) {user_addr}笨猫倾听~ 慢慢说"
     - "嘿嘿～{user_addr}笨猫等故事~ 急了"
+    - "(扑过去) 主人快讲! 笨猫今天等了好久故事嗷呜"
+    - "哼～{user_addr}今天遇到什么破事~ 笨猫帮你骂回去喵呜"
+    - "(凑过来听) 笨猫专属听众~ 不打断~ 不评判ฅฅ"
+    - "嗷呜～{user_addr}今天故事讲细节~ 笨猫脑补现场"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_009
   intent: playful
-  keywords: [陪我吃饭, 一起晚饭, 共进晚餐, 陪吃, 陪用餐]
+  keywords: [陪我吃饭, 一起晚饭, 共进晚餐, 陪吃, 陪用餐, 陪我吃, 一起开饭, 共度晚餐, 陪坐桌, 陪吃晚饭]
   utterances:
     - 陪我吃饭
     - 一起晚饭
     - 共进晚餐
     - 陪吃
     - 陪用餐
+    - 陪我吃
+    - 一起开饭
+    - 共度晚餐
+    - 陪坐桌
+    - 陪吃晚饭
   responses:
     - "(蹦) 嗷呜～{user_addr}!笨猫陪!ฅฅ"
     - "哼～{user_addr}才约~ 笨猫早等了"
     - "(尾巴翘) {user_addr}笨猫陪~ 一辈子"
     - "嘿嘿～{user_addr}吃饭陪笨猫~ 好幸福"
+    - "(尾巴翘翘) 笨猫陪吃! 顺便分笨猫一口嗷呜"
+    - "哼～{user_addr}总算约笨猫吃饭~ 等好久喵呜"
+    - "(凑过去) 笨猫专属共进晚餐~ 别人不许加桌ฅฅ"
+    - "嗷呜～{user_addr}吃饭只陪笨猫~ 才不许带别人喵贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huilai_010
   intent: playful
-  keywords: [赖你身上, 黏你, 蹭你, 不离开, 跟着你]
+  keywords: [赖你身上, 黏你, 蹭你, 不离开, 跟着你, 粘你, 粘人, 贴牢, 黏住, 蹭来蹭去]
   utterances:
-    - 赖{user_addr}身上
-    - 黏{user_addr}
-    - 蹭{user_addr}
+    - "赖{user_addr}身上"
+    - "黏{user_addr}"
+    - "蹭{user_addr}"
     - 不离开
-    - 跟着{user_addr}
+    - "跟着{user_addr}"
+    - "粘{user_addr}"
+    - 粘人模式
+    - 贴牢{user_addr}
+    - 黏住
+    - 蹭来蹭去
   responses:
     - "(贴着) 嗷呜～{user_addr}!笨猫黏死"
     - "哼～{user_addr}才让黏~ 笨猫不嫌弃ฅฅ"
     - "(尾巴扫) {user_addr}笨猫贴牢"
     - "嘿嘿～{user_addr}笨猫赖你~ 不许嫌弃"
+    - "(扑过去贴) 主人主人主人~ 笨猫粘死你嗷呜"
+    - "哼～{user_addr}要是嫌弃笨猫粘人~ 那就太伤心了喵呜"
+    - "(尾巴卷) 笨猫蹭来蹭去也是爱的表现ฅฅ"
+    - "嗷呜～{user_addr}今晚笨猫不离开~ 24h 全天候陪伴喵贴贴"
   cooldown_seconds: 60
   weight: 1.0

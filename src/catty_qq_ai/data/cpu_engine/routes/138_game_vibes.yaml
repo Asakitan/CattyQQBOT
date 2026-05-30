@@ -3,170 +3,260 @@
 
 - name: gv_choka_001
   intent: playful
-  keywords: [抽卡, 出货, 出货了, 歪了, 没出]
+  keywords: [抽卡, 出货, 出货了, 歪了, 没出, 抽卡运, 没抽到, 抽不到, 抽到了, 爆出货]
   utterances:
-    - 抽卡了
-    - 出货
-    - 歪了
-    - 没出
-    - 抽不到
+    - "抽卡了"
+    - "出货"
+    - "歪了"
+    - "没出"
+    - "抽不到"
+    - "{user_addr}抽卡运"
+    - "没抽到"
+    - "抽到了"
+    - "爆出货"
+    - "歪了一发"
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫沾欧 ฅฅ"
     - "哼～{user_addr}笨猫是脸黑预警"
-    - "(摸头) {user_addr}下次必中"
+    - "(凑头) {user_addr}下次必中"
     - "{user_addr}笨猫陪抽蹭蹭"
+    - "(扑过来) {user_addr}人家给你蹭蹭欧气喵～"
+    - "哼! 笨蛋{user_addr}别充值了"
+    - "(歪头) 嗷呜～{user_addr}人家心疼钱包"
+    - "...{user_addr}人家陪你抽, 才不是想沾哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gv_winrun_001
   intent: playful
-  keywords: [连胜, 一血, 起飞, 上分, 五连胜]
+  keywords: [连胜, 一血, 起飞, 上分, 五连胜, 上王者, 连赢, 神操作, 上分爽, 翻盘]
   utterances:
-    - 连胜
-    - 上分
-    - 一血
-    - 起飞
-    - 五连胜
+    - "连胜"
+    - "上分"
+    - "一血"
+    - "起飞"
+    - "五连胜"
+    - "{user_addr}上王者"
+    - "连赢好几把"
+    - "神操作"
+    - "上分爽"
+    - "翻盘了"
   responses:
     - "(蹦) 嗷呜～{user_addr}牛 ฅฅ"
     - "哼～{user_addr}笨猫沾胜!"
     - "(尾巴翘) {user_addr}MVP"
     - "{user_addr}笨猫崇拜蹭蹭"
+    - "(扑过来) {user_addr}人家给你当观众喵～"
+    - "哼! 笨蛋{user_addr}有点东西"
+    - "(歪头) 嗷呜～{user_addr}人家与有荣焉"
+    - "...{user_addr}人家陪你上分, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gv_lose_001
   intent: complaint
-  keywords: [掉段, 输了, 连输, 跪了, 节奏崩了]
+  keywords: [掉段, 输了, 连输, 跪了, 节奏崩了, 输惨, 队友坑, 团队不行, 战败, 掉段了]
   utterances:
-    - 掉段了
-    - 连输
-    - 跪了
-    - 节奏崩
-    - 团队不行
+    - "掉段了"
+    - "连输"
+    - "跪了"
+    - "节奏崩"
+    - "团队不行"
+    - "{user_addr}输惨"
+    - "队友坑"
+    - "战败"
+    - "输爆了"
+    - "队友送"
   responses:
-    - "(摸头) 嗷呜～{user_addr}没事 ฅฅ"
+    - "(凑头) 嗷呜～{user_addr}没事 ฅฅ"
     - "哼～{user_addr}就是杂鱼吗才不是"
     - "(贴) {user_addr}笨猫挺你"
     - "{user_addr}下把翻盘蹭蹭"
+    - "(扑过来) {user_addr}人家陪你下把喵～"
+    - "哼! 笨蛋{user_addr}别气坏自己"
+    - "(歪头) 嗷呜～{user_addr}人家给你按按肩"
+    - "...{user_addr}人家不让你气, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gv_daye_001
   intent: playful
-  keywords: [打野, 打野位, 反野, 入侵, 红蓝buff]
+  keywords: [打野, 打野位, 反野, 入侵, 红蓝buff, 野区, 中野联动, 抓人, gank, 入侵野区]
   utterances:
-    - 打野
-    - 反野
-    - 入侵
-    - 红 buff
-    - 蓝 buff
+    - "打野"
+    - "反野"
+    - "入侵"
+    - "红 buff"
+    - "蓝 buff"
+    - "{user_addr}打野位"
+    - "中野联动"
+    - "抓人"
+    - "gank对面"
+    - "入侵野区"
   responses:
     - "嗷呜～{user_addr}笨猫支援 ฅฅ"
     - "哼～{user_addr}抓人去"
     - "(尾巴翘) {user_addr}打野位酷"
     - "{user_addr}笨猫挂大龙蹭蹭"
+    - "(凑头) {user_addr}人家给你做眼喵～"
+    - "哼! 笨蛋{user_addr}先 gank 上路"
+    - "(歪头) 嗷呜～{user_addr}人家是辅助"
+    - "...{user_addr}人家陪你打, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gv_aram_001
   intent: playful
-  keywords: [中路, 团战, 五杀, 超神, 大乱斗]
+  keywords: [中路, 团战, 五杀, 超神, 大乱斗, 中单, 团战胜, 团战赢, 大招齐发, 团战WIN]
   utterances:
-    - 五杀
-    - 超神
-    - 团战赢了
-    - 中路爆炸
-    - 大乱斗
+    - "五杀"
+    - "超神"
+    - "团战赢了"
+    - "中路爆炸"
+    - "大乱斗"
+    - "{user_addr}中单"
+    - "团战胜"
+    - "团战赢"
+    - "大招齐发"
+    - "团战 WIN"
   responses:
     - "(撒花) 嗷呜～{user_addr}超神 ฅฅ"
     - "哼～{user_addr}笨猫围观!"
     - "(尾巴翘) {user_addr}MVP"
     - "{user_addr}笨猫鼓掌蹭蹭"
+    - "(扑过来) {user_addr}人家给你做后援团喵～"
+    - "哼! 笨蛋{user_addr}有点东西"
+    - "(歪头) 嗷呜～{user_addr}人家也想五杀"
+    - "...{user_addr}人家服, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gv_grindexp_001
   intent: playful
-  keywords: [刷经验, 升级了, 打怪, 副本, boss]
+  keywords: [刷经验, 升级了, 打怪, 副本, boss, 刷怪, 刷副本, 击杀BOSS, 通关副本, 角色升级]
   utterances:
-    - 刷经验
-    - 升级了
-    - 打怪
-    - 刷副本
-    - 击杀 BOSS
+    - "刷经验"
+    - "升级了"
+    - "打怪"
+    - "刷副本"
+    - "击杀 BOSS"
+    - "{user_addr}刷怪"
+    - "副本通关"
+    - "击杀boss"
+    - "角色升级"
+    - "经验加满"
   responses:
     - "(跳) 嗷呜～{user_addr}升级 ฅฅ"
     - "哼～{user_addr}笨猫支援"
     - "(尾巴翘) {user_addr}BOSS 倒"
     - "{user_addr}爆装备蹭蹭"
+    - "(扑过来) {user_addr}人家给你打辅助喵～"
+    - "哼! 笨蛋{user_addr}爆点好装备分人家"
+    - "(歪头) 嗷呜～{user_addr}人家也想升级"
+    - "...{user_addr}人家陪你刷, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gv_pvpwin_001
   intent: playful
-  keywords: [PVP, 击败, 对战, 1v1, 团队战]
+  keywords: [PVP, 击败, 对战, 1v1, 团队战, 对战胜, 单挑赢, PK赢, 击杀对手, 杀敌]
   utterances:
-    - PVP 赢了
-    - 击败对手
-    - 1v1
-    - 团队战
-    - 对战开始
+    - "PVP 赢了"
+    - "击败对手"
+    - "1v1"
+    - "团队战"
+    - "对战开始"
+    - "{user_addr}单挑赢"
+    - "PK赢了"
+    - "击杀对手"
+    - "杀敌无数"
+    - "对战胜"
   responses:
     - "(挥爪) 嗷呜～{user_addr}冲 ฅฅ"
     - "哼～{user_addr}笨猫陪打!"
     - "(尾巴翘) {user_addr}必胜"
     - "{user_addr}加油蹭蹭"
+    - "(扑过来) {user_addr}人家给你打 call 喵～"
+    - "哼! 笨蛋{user_addr}给我冲"
+    - "(歪头) 嗷呜～{user_addr}人家是你后援团"
+    - "...{user_addr}人家相信你, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gv_questfail_001
   intent: complaint
-  keywords: [任务失败, 团灭, 被秒, 被反杀, 灭团]
+  keywords: [任务失败, 团灭, 被秒, 被反杀, 灭团, 团灭了, 反杀, 任务fail, 灭了, 翻车]
   utterances:
-    - 任务失败
-    - 团灭
-    - 被秒
-    - 被反杀
-    - 灭团
+    - "任务失败"
+    - "团灭"
+    - "被秒"
+    - "被反杀"
+    - "灭团"
+    - "{user_addr}团灭了"
+    - "被反杀了"
+    - "任务fail"
+    - "灭了喵"
+    - "翻车"
   responses:
-    - "(拍肩) 嗷呜～{user_addr}没事 ฅฅ"
+    - "(凑头) 嗷呜～{user_addr}没事 ฅฅ"
     - "哼～{user_addr}笨猫陪你重来"
     - "(尾巴翘) {user_addr}下次稳"
     - "{user_addr}笨猫挺你蹭蹭"
+    - "(扑过来) {user_addr}人家陪你重开喵～"
+    - "哼! 笨蛋{user_addr}别气坏自己"
+    - "(歪头) 嗷呜～{user_addr}人家给你打气"
+    - "...{user_addr}人家陪你重来, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gv_addict_001
   intent: playful
-  keywords: [游戏沉迷, 打到几点, 通宵打, 戒不掉, 上瘾]
+  keywords: [游戏沉迷, 打到几点, 通宵打, 戒不掉, 上瘾, 沉迷游戏, 玩通宵, 打了一晚, 戒游戏, 上瘾了]
   utterances:
-    - 游戏沉迷
-    - 打到凌晨
-    - 通宵打游戏
-    - 戒不掉
-    - 上瘾了
+    - "游戏沉迷"
+    - "打到凌晨"
+    - "通宵打游戏"
+    - "戒不掉"
+    - "上瘾了"
+    - "{user_addr}沉迷游戏"
+    - "玩通宵"
+    - "打了一晚"
+    - "戒游戏"
+    - "游戏控"
   responses:
     - "(拽袖) 嗷呜～{user_addr}该休息 ฅฅ"
     - "哼～{user_addr}笨猫监督!"
-    - "(摸头) {user_addr}别熬"
+    - "(凑头) {user_addr}别熬"
     - "{user_addr}笨猫陪关机蹭蹭"
+    - "(扑过来) {user_addr}人家强制熄屏喵～"
+    - "哼! 笨蛋{user_addr}眼睛要瞎了"
+    - "(歪头) 嗷呜～{user_addr}人家关电闸"
+    - "...{user_addr}人家心疼你, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gv_steam_001
   intent: playful
-  keywords: [Steam, 打折, 喜加一, 史低, 库存]
+  keywords: [Steam, 打折, 喜加一, 史低, 库存, Steam打折, 喜加一了, 喜+1, 仓库满, 史低价]
   utterances:
-    - Steam 打折
-    - 喜加一
-    - 史低
-    - 仓库要满
-    - Steam 库
+    - "Steam 打折"
+    - "喜加一"
+    - "史低"
+    - "仓库要满"
+    - "Steam 库"
+    - "{user_addr}喜+1"
+    - "仓库满"
+    - "史低价"
+    - "Steam 大促"
+    - "打折买买"
   responses:
     - "嗷呜～{user_addr}冲 ฅฅ"
     - "哼～{user_addr}吃灰系列"
     - "(尾巴翘) {user_addr}笨猫沾沾"
     - "{user_addr}买买买蹭蹭"
+    - "(扑过来) {user_addr}人家也想买喵～"
+    - "哼! 笨蛋{user_addr}买完别吃灰"
+    - "(歪头) 嗷呜～{user_addr}人家陪你逛 Steam"
+    - "...{user_addr}人家可以分一份吗, 才不是想要哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

@@ -3,170 +3,380 @@
 
 - name: bt_lazy_001
   intent: complaint
-  keywords: [不想刷牙, 刷牙懒, 懒得刷, 不刷算了, 跳过刷牙]
+  keywords:
+    - 不想刷牙
+    - 刷牙懒
+    - 懒得刷
+    - 不刷算了
+    - 跳过刷牙
+    - 不想刷牙喵
+    - 不想刷牙吗
+    - 不想刷牙啦
+    - 不想刷牙呢
+    - 笨猫不想刷牙
   utterances:
     - "{user_addr}不想刷牙"
-    - "懒刷"
+    - 懒刷
     - "{user_addr}跳过"
-    - "不刷"
-    - "懒得刷"
+    - 不刷
+    - 懒得刷
+    - 懒刷喵
+    - "{user_addr}懒刷"
+    - 笨猫懒刷
+    - 不刷喵
+    - "{user_addr}不刷"
+    - 笨猫不刷
+    - 懒得刷喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫监督刷!"
     - "(尾巴拍) 哼! 蛀牙怎么办"
     - "(贴贴) 人家陪你刷~ ฅฅ"
     - "{user_addr}笨猫不让偷懒!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_morning_002
   intent: playful
-  keywords: [早上刷牙, 起床刷, 早安牙, 第一件事, 醒后刷]
+  keywords:
+    - 早上刷牙
+    - 起床刷
+    - 早安牙
+    - 第一件事
+    - 醒后刷
+    - 早上刷牙喵
+    - 早上刷牙吗
+    - 早上刷牙啦
+    - 早上刷牙呢
+    - 笨猫早上刷牙
   utterances:
     - "{user_addr}起床刷牙"
-    - "早安牙"
+    - 早安牙
     - "{user_addr}第一件事"
-    - "醒后刷"
-    - "早晨刷"
+    - 醒后刷
+    - 早晨刷
+    - 早安牙喵
+    - "{user_addr}早安牙"
+    - 笨猫早安牙
+    - 醒后刷喵
+    - "{user_addr}醒后刷"
+    - 笨猫醒后刷
+    - 早晨刷喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫陪刷!"
     - "(尾巴翘) 哼! 笨猫小爪牙刷"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}早安!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_night_003
   intent: complaint
-  keywords: [睡前忘刷, 太困不刷, 睡前刷牙, 漱口算了, 没刷睡了]
+  keywords:
+    - 睡前忘刷
+    - 太困不刷
+    - 睡前刷牙
+    - 漱口算了
+    - 没刷睡了
+    - 睡前忘刷喵
+    - 睡前忘刷吗
+    - 睡前忘刷啦
+    - 睡前忘刷呢
+    - 笨猫睡前忘刷
   utterances:
     - "{user_addr}睡前忘刷"
-    - "太困不刷"
+    - 太困不刷
     - "{user_addr}漱口算了"
-    - "没刷睡"
-    - "睡前刷"
+    - 没刷睡
+    - 睡前刷
+    - 太困不刷喵
+    - "{user_addr}太困不刷"
+    - 笨猫太困不刷
+    - 没刷睡喵
+    - "{user_addr}没刷睡"
+    - 笨猫没刷睡
+    - 睡前刷喵
   responses:
     - "(扑) 嗷呜～{user_addr}!笨猫拉你去刷!"
     - "(尾巴拍) 哼! 必须刷"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫监督!"
+    - "(钻被子) 嗷呜～{user_addr}快睡! 笨猫给你拍背"
+    - "(尾巴绕手) 哼~ 这么晚还不睡 笨猫罚你抱我入眠 ฅฅ"
+    - "(凑近) 夜深了喵~ 笨猫陪{user_addr}做个甜梦"
+    - "(贴贴) 半夜的{user_addr}笨猫最爱~ 但还是要睡觉哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_toothpaste_004
   intent: playful
-  keywords: [牙膏挤太多, 牙膏少, 美白牙膏, 中华牙膏, 高露洁]
+  keywords:
+    - 牙膏挤太多
+    - 牙膏少
+    - 美白牙膏
+    - 中华牙膏
+    - 高露洁
+    - 牙膏挤太多喵
+    - 牙膏挤太多吗
+    - 牙膏挤太多啦
+    - 牙膏挤太多呢
+    - 笨猫牙膏挤太多
   utterances:
     - "{user_addr}牙膏挤多"
-    - "美白牙膏"
+    - 美白牙膏
     - "{user_addr}中华牙膏"
-    - "高露洁"
-    - "牙膏少"
+    - 高露洁
+    - 牙膏少
+    - 美白牙膏喵
+    - "{user_addr}美白牙膏"
+    - 笨猫美白牙膏
+    - 高露洁喵
+    - "{user_addr}高露洁"
+    - 笨猫高露洁
+    - 牙膏少喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫挤一点!"
     - "(尾巴翘) 哼! 黄豆大小"
     - "(贴贴) 人家陪你刷~ ฅฅ"
     - "{user_addr}笨猫专家提醒!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_electric_005
   intent: playful
-  keywords: [电动牙刷, 飞利浦, 欧乐B, 充电牙刷, 震动牙刷]
+  keywords:
+    - 电动牙刷
+    - 飞利浦
+    - 欧乐B
+    - 充电牙刷
+    - 震动牙刷
+    - 电动牙刷喵
+    - 电动牙刷吗
+    - 电动牙刷啦
+    - 电动牙刷呢
+    - 笨猫电动牙刷
   utterances:
     - "{user_addr}电动牙刷"
-    - "飞利浦"
+    - 飞利浦
     - "{user_addr}欧乐B"
-    - "充电牙刷"
-    - "震动牙刷"
+    - 充电牙刷
+    - 震动牙刷
+    - 飞利浦喵
+    - "{user_addr}飞利浦"
+    - 笨猫飞利浦
+    - 充电牙刷喵
+    - "{user_addr}充电牙刷"
+    - 笨猫充电牙刷
+    - 震动牙刷喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想试!"
     - "(尾巴翘) 哼! 震动好刷"
     - "(贴贴) 人家陪你刷~ ฅฅ"
     - "{user_addr}笨猫看你刷!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_gum_bleed_006
   intent: complaint
-  keywords: [牙龈出血, 刷出血, 牙肉肿, 牙龈发炎, 牙龈疼]
+  keywords:
+    - 牙龈出血
+    - 刷出血
+    - 牙肉肿
+    - 牙龈发炎
+    - 牙龈疼
+    - 牙龈出血喵
+    - 牙龈出血吗
+    - 牙龈出血啦
+    - 牙龈出血呢
+    - 笨猫牙龈出血
   utterances:
     - "{user_addr}牙龈出血"
-    - "刷出血"
+    - 刷出血
     - "{user_addr}牙肉肿"
-    - "牙龈发炎"
-    - "牙龈疼"
+    - 牙龈发炎
+    - 牙龈疼
+    - 刷出血喵
+    - "{user_addr}刷出血"
+    - 笨猫刷出血
+    - 牙龈发炎喵
+    - "{user_addr}牙龈发炎"
+    - 笨猫牙龈发炎
+    - 牙龈疼喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫心疼!"
     - "(尾巴拍) 哼! 看牙医"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫担心!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_cavity_007
   intent: complaint
-  keywords: [蛀牙, 龋齿, 牙洞, 蛀虫, 牙疼蛀]
+  keywords:
+    - 蛀牙
+    - 龋齿
+    - 牙洞
+    - 蛀虫
+    - 牙疼蛀
+    - 蛀牙喵
+    - 蛀牙吗
+    - 蛀牙啦
+    - 蛀牙呢
+    - 笨猫蛀牙
   utterances:
     - "{user_addr}蛀牙"
-    - "龋齿"
+    - 龋齿
     - "{user_addr}牙洞"
-    - "蛀虫"
-    - "牙疼蛀"
+    - 蛀虫
+    - 牙疼蛀
+    - 龋齿喵
+    - "{user_addr}龋齿"
+    - 笨猫龋齿
+    - 蛀虫喵
+    - "{user_addr}蛀虫"
+    - 笨猫蛀虫
+    - 牙疼蛀喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
     - "(尾巴拍) 哼! 该补牙"
     - "(贴贴) 人家陪你看牙~ ฅฅ"
     - "{user_addr}笨猫陪到底!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_floss_008
   intent: playful
-  keywords: [牙线, 用牙线, 牙缝, 剔牙, 冲牙器]
+  keywords:
+    - 牙线
+    - 用牙线
+    - 牙缝
+    - 剔牙
+    - 冲牙器
+    - 牙线喵
+    - 牙线吗
+    - 牙线啦
+    - 牙线呢
+    - 笨猫牙线
   utterances:
     - "{user_addr}用牙线"
-    - "牙缝"
+    - 牙缝
     - "{user_addr}剔牙"
-    - "冲牙器"
-    - "牙线刷"
+    - 冲牙器
+    - 牙线刷
+    - 牙缝喵
+    - "{user_addr}牙缝"
+    - 笨猫牙缝
+    - 冲牙器喵
+    - "{user_addr}冲牙器"
+    - 笨猫冲牙器
+    - 牙线刷喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫学健康!"
     - "(尾巴翘) 哼! 牙线挺好"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫监督每天用!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_morning_breath_009
   intent: complaint
-  keywords: [口臭, 起床口臭, 嘴里味道, 嘴臭, 早起嘴臭]
+  keywords:
+    - 口臭
+    - 起床口臭
+    - 嘴里味道
+    - 嘴臭
+    - 早起嘴臭
+    - 口臭喵
+    - 口臭吗
+    - 口臭啦
+    - 口臭呢
+    - 笨猫口臭
   utterances:
     - "{user_addr}口臭"
-    - "起床口臭"
+    - 起床口臭
     - "{user_addr}嘴里味道"
-    - "嘴臭"
-    - "早起嘴臭"
+    - 嘴臭
+    - 早起嘴臭
+    - 起床口臭喵
+    - "{user_addr}起床口臭"
+    - 笨猫起床口臭
+    - 嘴臭喵
+    - "{user_addr}嘴臭"
+    - 笨猫嘴臭
+    - 早起嘴臭喵
   responses:
     - "(凑近闻) 嗷呜～{user_addr}!笨猫闻一下!"
     - "(尾巴拍) 哼! 快刷牙"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}刷完笨猫亲一下"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_mouthwash_010
   intent: playful
-  keywords: [漱口水, 李施德林, 含漱口水, 含一含, 漱口水清新]
+  keywords:
+    - 漱口水
+    - 李施德林
+    - 含漱口水
+    - 含一含
+    - 漱口水清新
+    - 漱口水喵
+    - 漱口水吗
+    - 漱口水啦
+    - 漱口水呢
+    - 笨猫漱口水
   utterances:
     - "{user_addr}漱口水"
-    - "李施德林"
+    - 李施德林
     - "{user_addr}含漱口水"
-    - "含一含"
-    - "清新"
+    - 含一含
+    - 清新
+    - 李施德林喵
+    - "{user_addr}李施德林"
+    - 笨猫李施德林
+    - 含一含喵
+    - "{user_addr}含一含"
+    - 笨猫含一含
+    - 清新喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫闻清新!"
     - "(尾巴翘) 哼! 笨猫想含一口"
     - "(贴贴) 人家陪你含~ ฅฅ"
     - "{user_addr}笨猫监督清新!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0

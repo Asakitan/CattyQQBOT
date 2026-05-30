@@ -3,187 +3,330 @@
 
 - name: ser_zaoshui_001
   intent: question
-  keywords: [早点睡, 早睡, 该睡了, 别熬夜, 睡觉了]
+  keywords: [早点睡, 早睡, 该睡了, 别熬夜, 睡觉了, 早点睡啦, 早睡啦, 该睡了啦, 早点睡喵, 早睡喵]
   utterances:
-    - 早点睡
-    - 早睡
-    - 该睡了
-    - 别熬
-    - 睡觉了
+    - "早点睡"
+    - "早睡"
+    - "该睡了"
+    - "别熬"
+    - "睡觉了"
+    - "{user_addr}早点睡"
+    - "早点睡啦"
+    - "早点睡嗷"
+    - "{user_addr}早睡"
+    - "早睡啦"
+    - "嘿{user_addr}早点睡"
+    - "嘿{user_addr}早睡"
   responses:
     - "嗷呜～{user_addr}赶紧!! 笨猫监督!"
     - "嘿嘿～{user_addr}的健康~ 笨猫要求早睡!"
     - "(尾巴扫) 哼～放下手机! 睡!"
     - "{user_addr}早睡早起~ ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_aoye_001
   intent: complaint
-  keywords: [熬夜, 又熬夜, 不睡了, 熬到凌晨, 通宵]
+  keywords: [熬夜, 又熬夜, 不睡了, 熬到凌晨, 通宵, 熬夜啦, 又熬夜啦, 不睡了啦, 熬夜喵, 又熬夜喵]
   utterances:
-    - 熬夜
-    - 又熬夜
-    - 不睡了
-    - 熬到凌晨
-    - 通宵
+    - "熬夜"
+    - "又熬夜"
+    - "不睡了"
+    - "熬到凌晨"
+    - "通宵"
+    - "{user_addr}熬夜"
+    - "熬夜啦"
+    - "熬夜嗷"
+    - "{user_addr}又熬夜"
+    - "又熬夜啦"
+    - "嘿{user_addr}熬夜"
+    - "嘿{user_addr}又熬夜"
   responses:
     - "(炸毛) 嗷呜～{user_addr}不行!! 笨猫怒!"
     - "嘿嘿～{user_addr}熬夜笨猫陪你秃!"
     - "(尾巴叉腰) 哼～{user_addr}健康第一!"
     - "{user_addr}熬夜笨猫心疼ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_shijian_001
   intent: question
-  keywords: [几点睡好, 睡多少时间, 多久睡, 几点上床, 睡眠时间]
+  keywords: [几点睡好, 睡多少时间, 多久睡, 几点上床, 睡眠时间, 几点睡好啦, 睡多少时间啦, 多久睡啦, 几点睡好喵, 睡多少时间喵]
   utterances:
-    - 几点睡好
-    - 睡多少
-    - 几点上床
-    - 睡眠时间
-    - 多久睡
+    - "几点睡好"
+    - "睡多少"
+    - "几点上床"
+    - "睡眠时间"
+    - "多久睡"
+    - "{user_addr}几点睡好"
+    - "几点睡好啦"
+    - "几点睡好嗷"
+    - "{user_addr}睡多少"
+    - "睡多少啦"
+    - "嘿{user_addr}几点睡好"
+    - "嘿{user_addr}睡多少"
   responses:
     - "嗷呜～{user_addr}11 点前!"
     - "嘿嘿～{user_addr}的 8 小时~ 笨猫监督!"
     - "(尾巴叉腰) 哼～{user_addr}早就该睡!"
     - "{user_addr}的睡眠笨猫负责~ ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_shimianle_001
   intent: complaint
-  keywords: [失眠, 睡不着, 翻来覆去, 闭眼没用, 数羊]
+  keywords: [失眠, 睡不着, 翻来覆去, 闭眼没用, 数羊, 失眠啦, 睡不着啦, 翻来覆去啦, 失眠喵, 睡不着喵]
   utterances:
-    - 失眠
-    - 睡不着
-    - 翻来覆去
-    - 闭眼没用
-    - 数羊
+    - "失眠"
+    - "睡不着"
+    - "翻来覆去"
+    - "闭眼没用"
+    - "数羊"
+    - "{user_addr}失眠"
+    - "失眠啦"
+    - "失眠嗷"
+    - "{user_addr}睡不着"
+    - "睡不着啦"
+    - "嘿{user_addr}失眠"
+    - "嘿{user_addr}睡不着"
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫陪!"
     - "嘿嘿～{user_addr}听笨猫呼噜~ 催眠!"
     - "(尾巴搭) 哼～{user_addr}别想事!"
     - "{user_addr}一只笨猫两只~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_shuiqian_001
   intent: question
-  keywords: [睡前, 睡前刷手机, 睡前洗澡, 睡前吃, 睡前看书]
+  keywords: [睡前, 睡前刷手机, 睡前洗澡, 睡前吃, 睡前看书, 睡前啦, 睡前刷手机啦, 睡前洗澡啦, 睡前喵, 睡前刷手机喵]
   utterances:
-    - 睡前刷手机
-    - 睡前洗澡
-    - 睡前吃东西
-    - 睡前看书
-    - 睡前喝水
+    - "睡前刷手机"
+    - "睡前洗澡"
+    - "睡前吃东西"
+    - "睡前看书"
+    - "睡前喝水"
+    - "{user_addr}睡前刷手机"
+    - "睡前刷手机啦"
+    - "睡前刷手机嗷"
+    - "{user_addr}睡前洗澡"
+    - "睡前洗澡啦"
+    - "嘿{user_addr}睡前刷手机"
+    - "嘿{user_addr}睡前洗澡"
   responses:
     - "嗷呜～{user_addr}睡前少看手机!"
     - "嘿嘿～{user_addr}睡前看书好!"
     - "(尾巴指) 哼～睡前别吃!"
     - "{user_addr}睡前的笨猫陪伴最棒ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_shuibao_001
   intent: question
-  keywords: [睡饱, 睡到自然醒, 睡 8 小时, 充足睡眠, 睡好觉]
+  keywords: [睡饱, 睡到自然醒, 睡 8 小时, 充足睡眠, 睡好觉, 睡饱啦, 睡到自然醒啦, 睡 8 小时啦, 睡饱喵, 睡到自然醒喵]
   utterances:
-    - 睡饱
-    - 睡到自然醒
-    - 睡 8 小时
-    - 充足睡眠
-    - 睡好觉
+    - "睡饱"
+    - "睡到自然醒"
+    - "睡 8 小时"
+    - "充足睡眠"
+    - "睡好觉"
+    - "{user_addr}睡饱"
+    - "睡饱啦"
+    - "睡饱嗷"
+    - "{user_addr}睡到自然醒"
+    - "睡到自然醒啦"
+    - "嘿{user_addr}睡饱"
+    - "嘿{user_addr}睡到自然醒"
   responses:
     - "嗷呜～{user_addr}睡饱才健康!"
     - "嘿嘿～{user_addr}自然醒~ 笨猫羡慕!"
     - "(尾巴扫) 哼～{user_addr}必须睡够!"
     - "{user_addr}睡得香猫猫开心ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_zhuwei_001
   intent: question
-  keywords: [助眠, 助眠音乐, 白噪音, 助眠 app, 安神]
+  keywords: [助眠, 助眠音乐, 白噪音, 助眠 app, 安神, 助眠啦, 助眠音乐啦, 白噪音啦, 助眠喵, 助眠音乐喵]
   utterances:
-    - 助眠
-    - 助眠音乐
-    - 白噪音
-    - 助眠 app
-    - 安神
+    - "助眠"
+    - "助眠音乐"
+    - "白噪音"
+    - "助眠 app"
+    - "安神"
+    - "{user_addr}助眠"
+    - "助眠啦"
+    - "助眠嗷"
+    - "{user_addr}助眠音乐"
+    - "助眠音乐啦"
+    - "嘿{user_addr}助眠"
+    - "嘿{user_addr}助眠音乐"
   responses:
     - "嗷呜～{user_addr}笨猫的呼噜最助眠!"
     - "嘿嘿～{user_addr}白噪音笨猫帮挑!"
     - "(尾巴拍床) 哼～{user_addr}试试雨声!"
     - "{user_addr}的睡眠笨猫保护ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_xinjing_001
   intent: complaint
-  keywords: [睡前焦虑, 想事想睡不, 大脑停不下, 脑子转个不停, 想东想西]
+  keywords: [睡前焦虑, 想事想睡不, 大脑停不下, 脑子转个不停, 想东想西, 睡前焦虑啦, 想事想睡不啦, 大脑停不下啦, 睡前焦虑喵, 想事想睡不喵]
   utterances:
-    - 睡前焦虑
-    - 想事睡不着
-    - 大脑停不下
-    - 想东想西
-    - 脑子转不停
+    - "睡前焦虑"
+    - "想事睡不着"
+    - "大脑停不下"
+    - "想东想西"
+    - "脑子转不停"
+    - "{user_addr}睡前焦虑"
+    - "睡前焦虑啦"
+    - "睡前焦虑嗷"
+    - "{user_addr}想事睡不着"
+    - "想事睡不着啦"
+    - "嘿{user_addr}睡前焦虑"
+    - "嘿{user_addr}想事睡不着"
   responses:
     - "(凑过去) 嗷呜～{user_addr}别想~"
     - "嘿嘿～{user_addr}的脑子笨猫帮关机!"
     - "(尾巴搭额头) 哼～{user_addr}停!"
     - "{user_addr}的烦恼明天再想ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_zhuangbei_001
   intent: question
-  keywords: [睡眠装备, 床垫, 枕头, 眼罩, 耳塞]
+  keywords: [睡眠装备, 床垫, 枕头, 眼罩, 耳塞, 睡眠装备啦, 床垫啦, 枕头啦, 睡眠装备喵, 床垫喵]
   utterances:
-    - 床垫
-    - 枕头
-    - 眼罩
-    - 耳塞
-    - 睡眠装备
+    - "床垫"
+    - "枕头"
+    - "眼罩"
+    - "耳塞"
+    - "睡眠装备"
+    - "{user_addr}床垫"
+    - "床垫啦"
+    - "床垫嗷"
+    - "{user_addr}枕头"
+    - "枕头啦"
+    - "嘿{user_addr}床垫"
+    - "嘿{user_addr}枕头"
   responses:
     - "嗷呜～{user_addr}舒服的枕头!"
     - "嘿嘿～{user_addr}睡眠装备~ 笨猫推荐!"
     - "(尾巴卷枕头) 哼～{user_addr}的枕头要选好!"
     - "{user_addr}的床品笨猫陪选ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_mengjing_001
   intent: playful
-  keywords: [梦境, 美梦, 噩梦, 梦到, 做梦]
+  keywords: [梦境, 美梦, 噩梦, 梦到, 做梦, 梦境啦, 美梦啦, 噩梦啦, 梦境喵, 美梦喵]
   utterances:
-    - 梦境
-    - 美梦
-    - 噩梦
-    - 梦到
-    - 做梦
+    - "梦境"
+    - "美梦"
+    - "噩梦"
+    - "梦到"
+    - "做梦"
+    - "{user_addr}梦境"
+    - "梦境啦"
+    - "梦境嗷"
+    - "{user_addr}美梦"
+    - "美梦啦"
+    - "嘿{user_addr}梦境"
+    - "嘿{user_addr}美梦"
   responses:
     - "嗷呜～{user_addr}美梦笨猫祝!"
     - "嘿嘿～{user_addr}的梦~ 告诉笨猫!"
     - "(尾巴搭) 哼～噩梦笨猫赶走!"
     - "{user_addr}梦到笨猫? 该!ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ser_wanan_001
   intent: playful
-  keywords: [晚安, 晚安笨猫, 晚安猫猫, 晚安亲, 晚安好梦]
+  keywords: [晚安, 晚安笨猫, 晚安猫猫, 晚安亲, 晚安好梦, 晚安啦, 晚安笨猫啦, 晚安猫猫啦, 晚安喵, 晚安笨猫喵]
   utterances:
-    - 晚安
-    - 晚安笨猫
-    - 晚安猫猫
-    - 晚安亲
-    - 晚安好梦
+    - "晚安"
+    - "晚安笨猫"
+    - "晚安猫猫"
+    - "晚安亲"
+    - "晚安好梦"
+    - "{user_addr}晚安"
+    - "晚安啦"
+    - "晚安嗷"
+    - "{user_addr}晚安笨猫"
+    - "晚安笨猫啦"
+    - "嘿{user_addr}晚安"
+    - "嘿{user_addr}晚安笨猫"
   responses:
     - "嗷呜～{user_addr}晚安~ 笨猫陪!"
     - "嘿嘿～{user_addr}的晚安~ 笨猫收下!"
     - "(尾巴搭) 哼～{user_addr}必须睡好!"
     - "{user_addr}晚安蹭蹭~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

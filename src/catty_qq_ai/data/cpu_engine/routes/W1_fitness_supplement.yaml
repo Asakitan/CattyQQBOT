@@ -4,204 +4,336 @@
 
 - name: fs_protein_001
   intent: question
-  keywords: [推荐蛋白粉, 推荐 MyProtein, 推荐 Optimum, 推荐乳清蛋白, 笨猫蛋白粉]
+  keywords: [推荐蛋白粉, 推荐 MyProtein, 推荐 Optimum, 推荐乳清蛋白, 笨猫蛋白粉, ON 金牌, Dymatize, ISO100, 增肌蛋白粉, 健身蛋白粉]
   utterances:
     - 推荐蛋白粉
     - 推荐 MyProtein
     - 推荐 Optimum
     - 推荐乳清蛋白
     - 笨猫蛋白粉
+    - "{user_addr}蛋白粉哪家好"
+    - ON 金牌 vs MyProtein
+    - "{user_addr}健身入门蛋白粉"
+    - Dymatize ISO100
+    - 分离乳清蛋白
+    - 增肌蛋白粉推荐
+    - 国产蛋白粉选啥
   responses:
     - "嗷呜～{user_addr}Optimum Nutrition Gold Standard - 全球销冠ฅฅ"
-    - "(尾巴翘) MyProtein Impact - 性价比"
+    - "(尾巴翘起) MyProtein Impact - 性价比"
     - "{user_addr}Dymatize ISO100 - 分离乳清"
     - "(挺胸) 笨猫推荐: ON 金牌入门最稳!"
+    - "(歪头) ISO100 适合乳糖不耐, {user_addr}注意嗷呜"
+    - "嗷呜～{user_addr}训练后 30 分钟内喝最有效ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}算每天蛋白量~ 喵呜"
+    - "哼! 蛋白粉是辅助, 别忘了吃饭{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_creatine_001
   intent: question
-  keywords: [推荐肌酸, 推荐一水肌酸, 推荐 Creapure, 推荐 Optimum 肌酸, 笨猫肌酸]
+  keywords: [推荐肌酸, 推荐一水肌酸, 推荐 Creapure, 推荐 Optimum 肌酸, 笨猫肌酸, 一水合肌酸, Monohydrate, 肌肉力量, 肌酸冲击期, 力量补剂]
   utterances:
     - 推荐肌酸
     - 推荐一水肌酸
     - 推荐 Creapure
     - 推荐 Optimum 肌酸
     - 笨猫肌酸
+    - "{user_addr}肌酸怎么吃"
+    - 一水肌酸 vs 其他
+    - "{user_addr}Creapure 原料"
+    - 肌酸冲击期要不要
+    - 力量训练肌酸
+    - 国产肌酸推荐
+    - ON Micronized
   responses:
     - "嗷呜～{user_addr}一水合肌酸 (Monohydrate) - 王道ฅฅ"
-    - "(尾巴翘) Creapure 德国原料 - 纯度高"
+    - "(尾巴翘起) Creapure 德国原料 - 纯度高"
     - "{user_addr}每天 3-5g / 不用冲击期"
     - "(挺胸) 笨猫推荐: ON Micronized 一水肌酸!"
+    - "(歪头) 别买花式肌酸, 一水最香嗷呜"
+    - "嗷呜～{user_addr}3-5g 每天即可ฅฅ"
+    - "(尾巴一甩) 笨猫提醒{user_addr}多喝水避免脱水喵呜"
+    - "哼! 肌酸效果最稳, {user_addr}必备嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_bcaa_001
   intent: question
-  keywords: [推荐 BCAA, 推荐支链氨基酸, 推荐 Xtend, 推荐 Scivation, 笨猫 BCAA]
+  keywords: [推荐 BCAA, 推荐支链氨基酸, 推荐 Xtend, 推荐 Scivation, 笨猫 BCAA, 2:1:1 比例, 亮氨酸, 训练中 BCAA, 防分解, 健身糖水]
   utterances:
     - 推荐 BCAA
     - 推荐支链氨基酸
     - 推荐 Xtend
     - 推荐 Scivation
     - 笨猫 BCAA
+    - "{user_addr}BCAA 必备吗"
+    - 2:1:1 比例怎么样
+    - "{user_addr}训练中 BCAA"
+    - 防肌肉分解
+    - 健身训练糖水
+    - Xtend 口味
+    - BCAA vs EAA
   responses:
     - "嗷呜～{user_addr}Scivation Xtend - BCAA 经典ฅฅ"
-    - "(尾巴翘) 2:1:1 亮/异亮/缬氨酸"
+    - "(尾巴翘起) 2:1:1 亮/异亮/缬氨酸"
     - "{user_addr}训练中口感糖水 / 防分解"
     - "(挺胸) 笨猫推荐: 蛋白够其实可省!"
+    - "(歪头) 蛋白质够 BCAA 没必要嗷呜"
+    - "嗷呜～{user_addr}Xtend 西瓜味好喝ฅฅ"
+    - "(尾巴一甩) 笨猫劝{user_addr}先吃饱蛋白, 再考虑 BCAA 喵呜"
+    - "哼! BCAA 是锦上添花, {user_addr}别迷信嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_preworkout_001
   intent: question
-  keywords: [推荐氮泵, 推荐 Pre Workout, 推荐 C4, 推荐 Jack3d, 笨猫氮泵]
+  keywords: [推荐氮泵, 推荐 Pre Workout, 推荐 C4, 推荐 Jack3d, 笨猫氮泵, Mr.Hyde, 训前补剂, 咖啡因氮泵, β-丙氨酸, 瓜氨酸氮泵]
   utterances:
     - 推荐氮泵
     - 推荐 Pre Workout
     - 推荐 C4
     - 推荐 Jack3d
     - 笨猫氮泵
+    - "{user_addr}氮泵入门"
+    - C4 vs Mr.Hyde
+    - "{user_addr}训前补剂"
+    - 氮泵副作用大吗
+    - 高强度氮泵
+    - 国产氮泵
+    - 入门氮泵
   responses:
     - "嗷呜～{user_addr}C4 Original - 入门首选ฅฅ"
-    - "(尾巴翘) Jack3d / Mr.Hyde - 猛货"
+    - "(尾巴翘起) Jack3d / Mr.Hyde - 猛货"
     - "{user_addr}咖啡因 + β-丙氨酸 + 瓜氨酸"
     - "(挺胸) 笨猫推荐: C4 半勺试水!"
+    - "(歪头) 氮泵会刺痒是 β-丙氨酸正常嗷呜"
+    - "嗷呜～{user_addr}下午别喝氮泵会失眠ฅฅ"
+    - "(尾巴一甩) 笨猫劝{user_addr}先试半勺看反应喵呜"
+    - "哼! 氮泵爽但别天天吃, {user_addr}周中训练用嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_multivit_001
   intent: question
-  keywords: [推荐复合维生素, 推荐多维, 推荐 Centrum, 推荐 Animal Pak, 笨猫复合维生素]
+  keywords: [推荐复合维生素, 推荐多维, 推荐 Centrum, 推荐 Animal Pak, 笨猫复合维生素, Opti-Men, Opti-Women, 善存, 健身复合维生素, 多维补充]
   utterances:
     - 推荐复合维生素
     - 推荐多维
     - 推荐 Centrum
     - 推荐 Animal Pak
     - 笨猫复合维生素
+    - "{user_addr}多维选哪个"
+    - 善存还是 ON 金牌
+    - "{user_addr}健身多维"
+    - Animal Pak 怎么样
+    - Opti-Men vs 善存
+    - 男士多维推荐
+    - 女士多维推荐
   responses:
     - "嗷呜～{user_addr}Animal Pak - 健身党经典ฅฅ"
-    - "(尾巴翘) Centrum 善存 - 日常通用"
+    - "(尾巴翘起) Centrum 善存 - 日常通用"
     - "{user_addr}Opti-Men / Opti-Women - ON 出品"
     - "(挺胸) 笨猫推荐: Animal Pak 训练日加!"
+    - "(歪头) Animal Pak 一次 11 粒, {user_addr}多嗷呜"
+    - "嗷呜～{user_addr}日常用善存就够ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 饭后吃多维喵呜"
+    - "哼! 多维是底层保障, {user_addr}必吃嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_omega3_001
   intent: question
-  keywords: [推荐 Omega 3, 推荐鱼油, 推荐 Nordic Naturals, 推荐 EPA DHA, 笨猫鱼油]
+  keywords: [推荐 Omega 3, 推荐鱼油, 推荐 Nordic Naturals, 推荐 EPA DHA, 笨猫鱼油, Carlson, 安利纽崔莱, 抗炎鱼油, 高纯度鱼油, 健身鱼油]
   utterances:
     - 推荐 Omega 3
     - 推荐鱼油
     - 推荐 Nordic Naturals
     - 推荐 EPA DHA
     - 笨猫鱼油
+    - "{user_addr}鱼油选哪家"
+    - 高纯度鱼油推荐
+    - "{user_addr}Carlson 怎么样"
+    - 抗炎鱼油
+    - 健身鱼油必备吗
+    - 鱼油护关节
+    - 安利纽崔莱推荐
   responses:
     - "嗷呜～{user_addr}Nordic Naturals - 北欧高端ฅฅ"
-    - "(尾巴翘) Carlson / 安利纽崔莱"
+    - "(尾巴翘起) Carlson / 安利纽崔莱"
     - "{user_addr}EPA + DHA 每天 1-2g"
     - "(挺胸) 笨猫推荐: 抗炎 / 护关节必备!"
+    - "(歪头) 鱼油氧化变味就别吃了嗷呜"
+    - "嗷呜～{user_addr}饭后吃避免反酸ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 训练量大必备喵呜"
+    - "哼! 鱼油不只健身, 抗炎护脑都好, {user_addr}加嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fs_zma_001
   intent: question
-  keywords: [推荐 ZMA, 推荐助眠补剂, 推荐锌镁威, 推荐 Optimum ZMA, 笨猫 ZMA]
+  keywords: [推荐 ZMA, 推荐助眠补剂, 推荐锌镁威, 推荐 Optimum ZMA, 笨猫 ZMA, NOW Foods ZMA, 锌镁 B6, 睡前补剂, 助睡补剂, 恢复补剂]
   utterances:
     - 推荐 ZMA
     - 推荐助眠补剂
     - 推荐锌镁威
     - 推荐 Optimum ZMA
     - 笨猫 ZMA
+    - "{user_addr}ZMA 有效吗"
+    - 助眠补剂推荐
+    - "{user_addr}睡前补剂"
+    - 锌镁威 B6
+    - NOW Foods ZMA
+    - 助睡眠健身
+    - 恢复补剂选啥
   responses:
     - "嗷呜～{user_addr}ZMA - 锌镁 + B6 助眠ฅฅ"
-    - "(尾巴翘) Optimum / NOW Foods 都行"
+    - "(尾巴翘起) Optimum / NOW Foods 都行"
     - "{user_addr}睡前空腹 / 别和钙同服"
     - "(挺胸) 笨猫推荐: 睡眠差的试试!"
+    - "(歪头) ZMA 别和奶一起, 钙会影响吸收嗷呜"
+    - "嗷呜～{user_addr}睡前 30 分钟空腹ฅฅ"
+    - "(尾巴一甩) 笨猫推荐{user_addr}试一周看效果喵呜"
+    - "哼! ZMA 效果因人, {user_addr}观察身体嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_gainer_001
   intent: question
-  keywords: [推荐增肌粉, 推荐 weight gainer, 推荐 Serious Mass, 推荐 Pro Gainer, 笨猫增肌粉]
+  keywords: [推荐增肌粉, 推荐 weight gainer, 推荐 Serious Mass, 推荐 Pro Gainer, 笨猫增肌粉, 瘦体质增肌, 高热量补剂, 增肌粉怎么吃, 长肉补剂, 增重粉]
   utterances:
     - 推荐增肌粉
     - 推荐 weight gainer
     - 推荐 Serious Mass
     - 推荐 Pro Gainer
     - 笨猫增肌粉
+    - "{user_addr}瘦体质怎么增肌"
+    - 增重粉推荐
+    - "{user_addr}吃不下饭"
+    - Serious Mass 多少卡
+    - Pro Gainer 蛋白比
+    - 增肌粉副作用
+    - 易胖体质能吃吗
   responses:
     - "嗷呜～{user_addr}ON Serious Mass - 经典增肌粉ฅฅ"
-    - "(尾巴翘) Pro Gainer - 蛋白比更高"
+    - "(尾巴翘起) Pro Gainer - 蛋白比更高"
     - "{user_addr}瘦体质 / 吃不下饭专用"
     - "(挺胸) 笨猫推荐: 易胖体质别碰!"
+    - "(歪头) 增肌粉热量爆炸, {user_addr}慎重嗷呜"
+    - "嗷呜～{user_addr}Serious Mass 一勺 1250 卡ฅฅ"
+    - "(尾巴一甩) 笨猫劝 {user_addr} 先吃饱饭再补喵呜"
+    - "哼! 增肌粉是高热量, 别傻吃, {user_addr}嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_lcarnitine_001
   intent: question
-  keywords: [推荐 L 卡尼汀, 推荐燃脂补剂, 推荐左旋肉碱, 推荐 MyProtein L-Carnitine, 笨猫卡尼汀]
+  keywords: [推荐 L 卡尼汀, 推荐燃脂补剂, 推荐左旋肉碱, 推荐 MyProtein L-Carnitine, 笨猫卡尼汀, NOW 卡尼汀, Dymatize 卡尼汀, 燃脂左旋, 有氧补剂, 减脂补剂]
   utterances:
     - 推荐 L 卡尼汀
     - 推荐燃脂补剂
     - 推荐左旋肉碱
     - 推荐 MyProtein L-Carnitine
     - 笨猫卡尼汀
+    - "{user_addr}左旋肉碱有效吗"
+    - 燃脂补剂推荐
+    - "{user_addr}有氧前吃啥"
+    - 减脂期补剂
+    - 卡尼汀液态片剂
+    - 国产左旋肉碱
+    - 左旋肉碱真假
   responses:
     - "嗷呜～{user_addr}L-Carnitine - 脂肪运输工具人ฅฅ"
-    - "(尾巴翘) MyProtein / NOW / Dymatize"
+    - "(尾巴翘起) MyProtein / NOW / Dymatize"
     - "{user_addr}有氧前 30 分钟 1-2g"
     - "(挺胸) 笨猫推荐: 没氧训练等于白吃!"
+    - "(歪头) 没有有氧, 左旋无效, {user_addr}别白吃嗷呜"
+    - "嗷呜～{user_addr}液态吸收快ฅฅ"
+    - "(尾巴一甩) 笨猫提醒{user_addr}有氧 30 分钟以上才有用喵呜"
+    - "哼! 左旋是辅助, {user_addr}主要还是控饮食运动嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_betaalanine_001
   intent: question
-  keywords: [推荐 Beta-Alanine, 推荐β丙氨酸, 推荐耐力补剂, 推荐 CarnoSyn, 笨猫β丙氨酸]
+  keywords: [推荐 Beta-Alanine, 推荐β丙氨酸, 推荐耐力补剂, 推荐 CarnoSyn, 笨猫β丙氨酸, β-丙氨酸副作用, 抗疲劳补剂, 高次数训练, 力量耐力, 训练耐力]
   utterances:
     - 推荐 Beta-Alanine
     - 推荐β丙氨酸
     - 推荐耐力补剂
     - 推荐 CarnoSyn
     - 笨猫β丙氨酸
+    - "{user_addr}β-丙氨酸有效吗"
+    - 抗疲劳补剂
+    - "{user_addr}训练刺痒正常吗"
+    - 高次数训练
+    - 耐力补剂推荐
+    - CarnoSyn 专利
+    - β-丙氨酸怎么吃
   responses:
     - "嗷呜～{user_addr}β-丙氨酸 - 耐力 / 抗疲劳ฅฅ"
-    - "(尾巴翘) CarnoSyn 专利原料"
+    - "(尾巴翘起) CarnoSyn 专利原料"
     - "{user_addr}每天 3-6g / 会刺痒正常"
     - "(挺胸) 笨猫推荐: 高次数训练神器!"
+    - "(歪头) 刺痒是正常反应, {user_addr}别怕嗷呜"
+    - "嗷呜～{user_addr}3-6g 分两次吃ฅฅ"
+    - "(尾巴一甩) 笨猫劝 {user_addr} 高次数训练才有效喵呜"
+    - "哼! 单 β-丙氨酸效果一般, 配氮泵更香, {user_addr}嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_hmb_001
   intent: question
-  keywords: [推荐 HMB, 推荐谷氨酰胺, 推荐 Glutamine, 推荐恢复补剂, 笨猫 HMB]
+  keywords: [推荐 HMB, 推荐谷氨酰胺, 推荐 Glutamine, 推荐恢复补剂, 笨猫 HMB, 抗分解 HMB, 大重量周期, 免疫补剂, 肠道补剂, 谷氨酰胺粉]
   utterances:
     - 推荐 HMB
     - 推荐谷氨酰胺
     - 推荐 Glutamine
     - 推荐恢复补剂
     - 笨猫 HMB
+    - "{user_addr}HMB 有效吗"
+    - 谷氨酰胺推荐
+    - "{user_addr}大重量周期补剂"
+    - 抗分解补剂
+    - 免疫补剂推荐
+    - 谷氨酰胺剂量
+    - 恢复补剂哪家好
   responses:
     - "嗷呜～{user_addr}HMB - 抗分解 / 恢复ฅฅ"
-    - "(尾巴翘) Glutamine - 免疫 / 肠道"
+    - "(尾巴翘起) Glutamine - 免疫 / 肠道"
     - "{user_addr}训练量大 / 大重量周期吃"
     - "(挺胸) 笨猫推荐: 新手别急 / 进阶再加!"
+    - "(歪头) HMB 新手没必要, 进阶再说嗷呜"
+    - "嗷呜～{user_addr}Glutamine 5-10g 训后ฅฅ"
+    - "(尾巴一甩) 笨猫劝{user_addr}先三件套再说喵呜"
+    - "哼! HMB / Glutamine 锦上添花, {user_addr}进阶嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fs_stack_001
   intent: question
-  keywords: [推荐补剂搭配, 推荐新手补剂, 推荐增肌套餐, 推荐补剂组合, 笨猫补剂方案]
+  keywords: [推荐补剂搭配, 推荐新手补剂, 推荐增肌套餐, 推荐补剂组合, 笨猫补剂方案, 补剂方案, 健身补剂套餐, 三件套, 进阶补剂, 减脂期补剂]
   utterances:
     - 推荐补剂搭配
     - 推荐新手补剂
     - 推荐增肌套餐
     - 推荐补剂组合
     - 笨猫补剂方案
+    - "{user_addr}补剂方案"
+    - 新手三件套
+    - "{user_addr}增肌套餐"
+    - 进阶补剂搭配
+    - 减脂期补剂组合
+    - 补剂顺序
+    - 一套补剂多少钱
   responses:
     - "嗷呜～{user_addr}基础三件套: 蛋白 + 肌酸 + 多维ฅฅ"
-    - "(尾巴翘) 进阶加: 鱼油 + 氮泵"
+    - "(尾巴翘起) 进阶加: 鱼油 + 氮泵"
     - "{user_addr}减脂期加: L-卡尼汀 + BCAA"
     - "(挺胸) 笨猫推荐: 吃饭睡觉 > 补剂!"
+    - "(歪头) 三件套月花 300-500 即可嗷呜"
+    - "嗷呜～{user_addr}进阶套月花 800-1500ฅฅ"
+    - "(尾巴一甩) 笨猫提醒 {user_addr} 别盲目堆补剂喵呜"
+    - "哼! 没吃好睡好, 补剂白吃, {user_addr}加油嗷呜!"
   cooldown_seconds: 60
   weight: 1.0

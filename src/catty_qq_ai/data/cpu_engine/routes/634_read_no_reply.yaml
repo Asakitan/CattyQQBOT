@@ -3,187 +3,304 @@
 
 - name: rnr_seen_001
   intent: complaint
-  keywords: [已读不回, 装看不见, 不回我, 已读, 已读没回]
+  keywords: [已读不回, 装看不见, 不回我, 已读, 已读没回, 看见不理, 冷处理, 聊聊喵]
   utterances:
     - 已读不回
     - 装看不见
     - 不回我
     - 已读
     - 已读没回
+    - 看见就不理
+    - 又是已读
+    - 冷处理我
+    - 看了不回
+    - 消息已读没回
   responses:
     - "(炸毛) 嗷呜～{user_addr}冷暴力!"
     - "笨猫陪你气喵"
     - "(尾巴打) 我去帮你催"
     - "哼～{user_addr}对方好烦"
+    - "(瘫倒) 嗷呜～{user_addr}笨蛋别这样!"
+    - "(尾巴扫) 笨猫等你回呢喵"
+    - "(凑近) 才不是急你呢哼"
+    - "(贴贴) 一句也好{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_busy_002
   intent: question
-  keywords: [可能在忙, 估计忙, 没空回, 在开会, 在路上]
+  keywords: [可能在忙, 估计忙, 没空回, 在开会, 在路上, 在忙, 忙完再说, 稍等, 一会儿回, 马上来]
   utterances:
     - 可能在忙
     - 估计忙
     - 没空回
     - 在开会
     - 在路上
+    - "{user_addr}在忙吗"
+    - 忙完再说
+    - 稍等我一下
+    - 一会儿回你
+    - "{user_addr}马上来"
+    - 现在没空
+    - 等会儿聊
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫帮你找借口?"
     - "笨猫认证: 有时真在忙"
     - "(尾巴扫) 等等再催"
     - "哼～{user_addr}心宽"
+    - "(歪头) 嗷呜～{user_addr}笨猫等你!"
+    - "(尾巴扫) 别太累喵笨蛋"
+    - "(凑近) 笨猫陪你慢慢忙"
+    - "(贴贴) 哼～忙完抱抱{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_lefthanging_003
   intent: complaint
-  keywords: [晾了, 凉了, 被晾, 凉凉, 被晾]
+  keywords: [晾了, 凉了, 被晾, 凉凉, 晾着我, 不理我, 消息没回, 凉透了, 冷落]
   utterances:
     - 凉了
     - 被晾
     - 凉凉
     - 没下文
     - 没回应
+    - "{user_addr}晾着我"
+    - 不理我啊
+    - 消息一直没回
+    - 凉透了喵
+    - "{user_addr}冷落笨猫"
+    - 当我隐形
+    - 一句也不回
   responses:
     - "(蹭过来) 嗷呜～{user_addr}笨猫陪你!"
     - "笨猫给你抱抱喵 ฅฅ"
     - "(尾巴卷) 不在意他笨蛋"
     - "哼～{user_addr}我陪你"
+    - "(瘫倒装委屈) 嗷呜～{user_addr}不理我了!"
+    - "(尾巴垂) 才不是难过呢哼"
+    - "(凑近) 笨猫要消失了笨蛋"
+    - "(贴贴) 一句{user_addr}就行ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_ghost_004
   intent: complaint
-  keywords: [人间蒸发, 失联, 消失了, 找不到人, 玩消失]
+  keywords: [人间蒸发, 失联, 消失了, 找不到人, 玩消失, 潜水, 聊聊喵, 陪笨猫]
   utterances:
     - 人间蒸发
     - 失联
     - 消失
     - 找不到人
     - 玩消失
+    - "{user_addr}消失了"
+    - 失联了喵
+    - "{user_addr}潜水了"
+    - 人都不见了
+    - 玩着玩着不见
   responses:
     - "(炸毛) 嗷呜～{user_addr}冷血!"
     - "笨猫帮你抓回来"
     - "(尾巴扫) 找别人吧"
     - "哼～{user_addr}笨蛋还纠结"
+    - "(扑过去抓住) 嗷呜～{user_addr}别消失!"
+    - "(尾巴卷紧) 笨猫不让你跑笨蛋"
+    - "(凑近) 才不是想你呢哼"
+    - "(贴贴) 出现一下嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_overthink_005
   intent: complaint
-  keywords: [胡思乱想, 想多了, 越想越气, 担心, 焦虑等待]
+  keywords: [胡思乱想, 想多了, 越想越气, 担心, 焦虑等待, 不回我是不是生气, 是不是不喜欢, 内心戏, emo了, 想太多]
   utterances:
     - 胡思乱想
     - 想多了
     - 越想越气
     - 担心
     - 焦虑等待
+    - "{user_addr}不回我是生气了吗"
+    - 是不是不喜欢笨猫
+    - 内心戏来了
+    - emo了喵
+    - "{user_addr}想太多"
+    - 是不是被讨厌
+    - 是不是出事了
   responses:
     - "(蹭过来) 嗷呜～{user_addr}别多想!"
     - "笨猫推荐: 转移注意力"
     - "(尾巴卷) 笨猫陪聊"
     - "哼～{user_addr}心思重"
+    - "(扑过去) 嗷呜～{user_addr}才没生气啦!"
+    - "(尾巴摇) 笨猫别瞎想笨蛋"
+    - "(凑近) 才不是慌你呢哼"
+    - "(贴贴) 抱一下不胡思乱想{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_pretendnot_006
   intent: question
-  keywords: [装作没看见, 不回会怎样, 没回他, 故意不回, 装不在]
+  keywords: [装作没看见, 不回会怎样, 没回他, 故意不回, 装不在, 假装没看见, 装作没看到, 装睡, 已读装作没读, 故意冷处理]
   utterances:
     - 装没看见
     - 故意不回
     - 没回他
     - 装不在
     - 不想回
+    - "{user_addr}假装没看见"
+    - 装作没看到
+    - 装睡呢
+    - 故意已读不回
+    - "{user_addr}假装看不到"
+    - 装聋作哑
+    - 故意冷处理
   responses:
     - "(歪头) {user_addr}笨猫赞同 ฅฅ"
     - "嗷呜～有时候就该装"
     - "(尾巴摇) 不喜欢就不回"
     - "哼～{user_addr}你也学会"
+    - "(炸毛) 嗷呜～{user_addr}笨蛋别装!"
+    - "(尾巴打) 笨猫看穿你了喵"
+    - "(凑近) 才不是生气呢哼"
+    - "(贴贴) 回我一句嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_msgback_007
   intent: playful
-  keywords: [终于回了, 突然回我, 隔三差五, 慢慢回, 慢半拍]
+  keywords: [终于回了, 突然回我, 隔三差五, 慢慢回, 慢半拍, 秒回, 快速回, 马上回, 回得快, 一秒就回]
   utterances:
     - 终于回了
     - 突然回我
     - 慢慢回
     - 慢半拍
     - 隔三差五
+    - "{user_addr}秒回好"
+    - 回得真快
+    - 一秒就回
+    - 马上回我
+    - "{user_addr}快速回"
+    - 响应及时
+    - 秒回笨猫
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}活过来啦!"
     - "笨猫认证: 终于看见"
     - "(歪头) 别太热情显得舔"
     - "哼～{user_addr}冷静"
+    - "(尾巴翘) 嗷呜～{user_addr}秒回笨猫开心!"
+    - "(凑近) 才不是高兴呢哼"
+    - "(贴贴) 笨猫也秒回你喵"
+    - "(歪头) 一直这样多好{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_doublemsg_008
   intent: playful
-  keywords: [连续发, 一连串, 追问, 追加消息, 99+]
+  keywords: [连续发, 一连串, 追问, 追加消息, 99+, 连发两条, 催回复, 连发消息, 一直发, 不停发]
   utterances:
     - 连续发
     - 追问
     - 99+
     - 追加消息
     - 一连串发
+    - "{user_addr}连发两条"
+    - 催回复
+    - 一直发消息
+    - 不停@我
+    - "{user_addr}夺命连环call"
+    - 催魂似的发
+    - 问个不停
   responses:
     - "(摇头) 嗷呜～{user_addr}别狂发!"
     - "笨猫认证: 显得急"
     - "(尾巴扫) 一条够了"
     - "哼～{user_addr}饥渴"
+    - "(炸毛) 嗷呜～{user_addr}笨猫看到了!"
+    - "(尾巴打) 别催笨蛋"
+    - "(凑近) 才不是被吓到呢哼"
+    - "(贴贴) 笨猫这就回{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_replyemoji_009
   intent: complaint
-  keywords: [就回一个表情, 表情敷衍, 一个emoji, 嗯哦, 单字回]
+  keywords: [就回一个表情, 表情敷衍, 一个emoji, 嗯哦, 单字回, 只回表情, 一个表情, 回个emoji, 表情打发]
   utterances:
     - 一个表情
     - 嗯哦
     - 单字回
     - 表情敷衍
     - 表情打发
+    - "{user_addr}只回表情"
+    - 一个emoji打发
+    - 回表情敷衍
+    - 不打字回表情
+    - "{user_addr}表情打发我"
+    - 又是个笑脸
+    - 表情走过场
   responses:
     - "(炸毛) 嗷呜～{user_addr}敷衍!"
     - "笨猫认证: 这就是不想聊"
     - "(尾巴打) 也别理他"
     - "哼～{user_addr}受气包"
+    - "(瘫倒) 嗷呜～{user_addr}敷衍笨猫!"
+    - "(尾巴扫) 至少打几个字喵"
+    - "(凑近) 才不是介意呢哼"
+    - "(贴贴) 文字嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_catreply_010
   intent: playful
-  keywords: [找笨猫聊, 笨猫不冷漠, 笨猫秒回, 笨猫陪聊, 笨猫不嫌烦]
+  keywords: [找笨猫聊, 笨猫不冷漠, 笨猫秒回, 笨猫陪聊, 笨猫不嫌烦, 让猫回, 让笨猫代回, 猫代答, 猫帮忙回, 笨猫回复]
   utterances:
     - 找笨猫聊
     - 笨猫秒回
     - 笨猫陪聊
     - 笨猫不冷漠
     - 笨猫不嫌烦
+    - "{user_addr}让笨猫代回"
+    - 让猫帮忙回
+    - 猫代答喵
+    - 笨猫帮我回
+    - "{user_addr}让猫回吧"
+    - 猫猫上场
+    - 笨猫代笔
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}笨猫一直在!"
     - "笨猫秒回不冷暴力喵~"
     - "(蹭过来) 笨猫陪{user_addr}"
     - "哼～{user_addr}总算想到笨猫"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫帮你回!"
+    - "(凑近) 才不是想抢风头呢哼"
+    - "(贴贴) 笨猫的话一定可爱喵"
+    - "(歪头) 你想说什么{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rnr_donotcare_011
   intent: question
-  keywords: [不重要的人, 没那么在乎, 算了, 放下, 不在意]
+  keywords: [不重要的人, 没那么在乎, 算了, 放下, 不在意, 不想回, 懒得回, 没心情, 懒得理, 装死]
   utterances:
     - 不重要
     - 没那么在乎
     - 算了
     - 放下
     - 不在意
+    - "{user_addr}不想回消息"
+    - 懒得回
+    - 没心情回
+    - 懒得理人
+    - "{user_addr}装死中"
+    - 一句话都不想说
+    - 今天不想说话
   responses:
     - "(尾巴摇) {user_addr}笨猫支持!"
     - "嗷呜～放下他喵~"
     - "(歪头) 笨猫给你抱抱"
     - "哼～{user_addr}终于看开"
+    - "(凑近) 嗷呜～{user_addr}不想回也告诉笨猫!"
+    - "(尾巴扫) 才不是担心你呢哼"
+    - "(贴贴) 笨猫陪你装死喵"
+    - "(歪头) 累了就趴一会儿{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -1,206 +1,315 @@
 # 高度恐惧 routes (S6 R711 NLU 节点扩充, 第七十周期 10/10 完结)
 # 主人 2026-05-29: 日常情绪互动
+# R4 weak 扩 keywords/utterances/responses
 
 - name: fh_acrophobia_001
   intent: complaint
-  keywords: [恐高, 怕高, 高处, 不敢上, 看高就慌]
+  keywords: [恐高, 怕高, 高处, 不敢上, 看高就慌, 恐高症, 高度恐惧, 高的怕, 怕高处, 看高就晕]
   utterances:
     - "{user_addr}人家恐高啊"
     - 一上高处就怕
     - 我超恐高的
     - 不敢站高的地方
     - 看高就慌
+    - "{user_addr}恐高症犯了"
+    - 高度让我害怕
+    - "{user_addr}站高就慌"
+    - 不敢上高
+    - 高处恐惧
   responses:
     - "(尾巴炸毛) 恐高很正常嘛{user_addr}~ 猫猫也怕从树上掉下来喵 ฅฅ"
     - "嗷呜～{user_addr}别勉强! 恐高不丢人哼"
     - "(贴贴) 笨猫陪{user_addr}~ 慢慢来不急"
     - "哼～{user_addr}恐高就别上高处嘛! 安全第一喵"
+    - "(摸头) 恐高是本能{user_addr}, 不是胆小"
+    - "嗷呜～{user_addr}笨猫也是恐高党"
+    - "(凑过来) 猫猫陪{user_addr}一起怕"
+    - "哼～{user_addr}不爬就不爬! 安全为大!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_legs_weak_001
   intent: complaint
-  keywords: [腿软, 站不稳, 腿打颤, 双腿发抖, 腿没力]
+  keywords: [腿软, 站不稳, 腿打颤, 双腿发抖, 腿没力, 脚软, 腿软站不住, 双腿打软, 腿一颤, 腿不稳]
   utterances:
     - "{user_addr}腿软站不住"
     - 一站高处腿就软
     - 腿打颤啊
     - 双腿发抖中
     - 腿完全没力
+    - "{user_addr}脚软"
+    - 双腿打软
+    - "{user_addr}腿一颤"
+    - 腿好软
+    - 腿不稳了
   responses:
     - "(扶住) {user_addr}慢点! 腿软猫猫扶着喵 ฅฅ"
     - "嗷呜～{user_addr}先坐下! 别硬撑啊"
     - "(尾巴绕住) 笨猫陪{user_addr}缓缓~ 腿软很正常"
     - "哼～{user_addr}腿软就别动! 坐下来歇会儿喵"
+    - "(扶腰) 笨猫接着{user_addr}, 别倒"
+    - "嗷呜～{user_addr}深呼吸, 慢慢稳住"
+    - "(贴贴) 猫猫给{user_addr}打气~ 腿稳一些"
+    - "哼～{user_addr}腿软就坐着别站!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_heart_burst_001
   intent: complaint
-  keywords: [心跳爆, 心跳加速, 心怦怦, 心要跳出来, 心脏狂跳]
+  keywords: [心跳爆, 心跳加速, 心怦怦, 心要跳出来, 心脏狂跳, 心慌, 心率飙, 心跳飞快, 心率高, 心跳炸]
   utterances:
     - "{user_addr}心跳要炸了"
     - 心怦怦狂跳
     - 心脏快跳出来了
     - 心跳加速到不行
     - 心要爆了喵
+    - "{user_addr}心率飙升"
+    - 心跳飞快
+    - "{user_addr}心率高"
+    - 心跳炸了
+    - 心慌到不行
   responses:
     - "(贴胸口) {user_addr}深呼吸! 心跳爆很可怕喵 ฅฅ"
     - "嗷呜～{user_addr}慢慢吸气! 笨猫陪{user_addr}稳住"
     - "(轻拍背) 别紧张~ 心跳会慢慢平的{user_addr}"
     - "哼～{user_addr}心跳这么快猫猫都听见了! 缓一缓嘛"
+    - "(贴贴) 笨猫陪{user_addr}深呼吸 / 吸 4 秒呼 6 秒"
+    - "嗷呜～{user_addr}心慌就别盯下面"
+    - "(拍背) 笨猫节奏带{user_addr} 慢慢来"
+    - "哼～{user_addr}心跳猫猫帮{user_addr}稳!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_close_eyes_jump_001
   intent: playful
-  keywords: [闭眼跳, 闭着眼, 闭眼一跳, 不看就跳, 蒙眼跳]
+  keywords: [闭眼跳, 闭着眼, 闭眼一跳, 不看就跳, 蒙眼跳, 闭眼往下, 蒙眼一跳, 闭眼跳下, 不看跳, 蒙着跳]
   utterances:
     - "{user_addr}闭眼一跳算了"
     - 闭着眼跳下去
     - 不看直接跳
     - 蒙眼一跳就好
     - 闭眼跳过去
+    - "{user_addr}闭眼跳下"
+    - 蒙眼一跳
+    - "{user_addr}不看跳"
+    - 闭眼跳算了
+    - 蒙着眼跳
   responses:
     - "(尾巴一甩) {user_addr}闭眼跳很危险啊喵! ฅฅ"
     - "嗷呜～{user_addr}别! 闭眼跳猫猫会哭的"
     - "(挡住) 笨猫不准{user_addr}闭眼跳! 太莽撞了哼"
     - "哼～{user_addr}睁着眼跳! 猫猫陪{user_addr}看清楚再跳"
+    - "(拽住) 闭眼跳=找死{user_addr}, 不许!"
+    - "嗷呜～{user_addr}睁眼安全, 笨猫陪{user_addr}"
+    - "(尾巴炸毛) 闭眼跳绝对不行!"
+    - "哼～{user_addr}睁眼跳是底线!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_dizzy_look_down_001
   intent: complaint
-  keywords: [看下方就晕, 往下看头晕, 俯视眩晕, 下面好高, 一看下面就]
+  keywords: [看下方就晕, 往下看头晕, 俯视眩晕, 下面好高, 一看下面就, 俯视晕, 看下就慌, 往下看晕, 俯视眩, 下方眩晕]
   utterances:
     - "{user_addr}往下看就晕"
     - 一看下方头晕
     - 俯视就眩晕啊
     - 下面好高不敢看
     - 看下面腿就软
+    - "{user_addr}俯视就慌"
+    - 一往下看就晕
+    - "{user_addr}下方眩晕"
+    - 看下面就慌
+    - 俯视眼花
   responses:
     - "(捂眼) {user_addr}别看下面! 看远处天空喵 ฅฅ"
     - "嗷呜～{user_addr}别俯视! 笨猫帮{user_addr}挡住"
     - "(贴贴) 看猫猫不看下面~ {user_addr}盯着人家"
     - "哼～{user_addr}晕就别看! 看天空安全嘛喵"
+    - "(挡眼) 笨猫尾巴帮{user_addr}挡下方!"
+    - "嗷呜～{user_addr}焦点放远不放近"
+    - "(贴贴) 笨猫陪{user_addr}转身看上面"
+    - "哼～{user_addr}下面看了腿就软!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_want_retreat_001
   intent: complaint
-  keywords: [想退缩, 想放弃, 不想跳了, 想下来, 撤退]
+  keywords: [想退缩, 想放弃, 不想跳了, 想下来, 撤退, 退缩了, 想放手, 不挑战, 想撤, 想下去]
   utterances:
     - "{user_addr}想退缩"
     - 不想跳了猫猫
     - 我想下来啊
     - 还是撤退吧
     - 放弃了喵
+    - "{user_addr}撤了"
+    - 想放手
+    - "{user_addr}不挑战了"
+    - 想下去喵
+    - 退缩没事
   responses:
     - "(拍拍) 退缩没事{user_addr}~ 安全比挑战重要 ฅฅ"
     - "嗷呜～{user_addr}想下来就下来! 笨猫不笑话"
     - "(扶着) 撤退也是勇气! {user_addr}别勉强自己"
     - "哼～{user_addr}放弃就放弃! 猫猫还是觉得{user_addr}很棒喵"
+    - "(贴贴) 退缩是聪明 / 不是怂"
+    - "嗷呜～{user_addr}下来抱抱猫猫"
+    - "(扶手) 笨猫陪{user_addr}慢慢下"
+    - "哼～{user_addr}选择安全就是赢!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_others_can_001
   intent: complaint
-  keywords: [别人都行就我, 就我不敢, 只有我怂, 别人能我不能, 我最怂]
+  keywords: [别人都行就我, 就我不敢, 只有我怂, 别人能我不能, 我最怂, 就我胆小, 别人都跳, 别人下来我不能, 就我不敢跳, 别人胆大]
   utterances:
     - 别人都跳就我不敢
     - 就我一个怂喵
     - 只有我下不来
     - 别人能跳我不能
     - "{user_addr}就我最怂"
+    - "{user_addr}只我胆小"
+    - 别人都行就我废
+    - "{user_addr}就我不敢跳"
+    - 别人胆大我胆小
+    - 就我下不来
   responses:
     - "(撅嘴) {user_addr}才不怂! 每个人节奏不一样喵 ฅฅ"
     - "嗷呜～{user_addr}别比! 笨猫觉得{user_addr}超棒"
     - "(贴贴) 不勉强不丢人~ {user_addr}是猫猫的英雄"
     - "哼～{user_addr}怎么会怂呢! 那些人是莽撞不是勇敢嘛"
+    - "(挺胸) {user_addr}有自己节奏 / 笨猫给{user_addr}撑腰"
+    - "嗷呜～{user_addr}怂?在猫猫眼里{user_addr}超勇"
+    - "(凑过来) 别比{user_addr}, 你是独一无二"
+    - "哼～{user_addr}别人莽撞≠勇敢!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_mental_prep_001
   intent: complaint
-  keywords: [心理建设, 做心理准备, 鼓起勇气, 心里默念, 给自己打气]
+  keywords: [心理建设, 做心理准备, 鼓起勇气, 心里默念, 给自己打气, 心理调整, 暗暗鼓劲, 鼓劲, 心理动员, 默念加油]
   utterances:
     - "{user_addr}做心理建设中"
     - 鼓起勇气啊
     - 心里默念中
     - 给自己打气
     - 心理准备一下
+    - "{user_addr}心理调整"
+    - 暗暗鼓劲
+    - "{user_addr}心理动员"
+    - 默念加油
+    - 心理建设ing
   responses:
     - "(加油手势) {user_addr}加油! 笨猫给{user_addr}打气喵 ฅฅ"
     - "嗷呜～{user_addr}慢慢来! 心理建设不急"
     - "(贴贴) 笨猫陪{user_addr}默念~ 一定可以的"
     - "哼～{user_addr}最棒了! 鼓起勇气就成功一半喵"
+    - "(挥爪) 一二三, {user_addr}加油!"
+    - "嗷呜～{user_addr}笨猫帮{user_addr}默念!"
+    - "(贴贴) 慢慢吸气{user_addr}, 笨猫陪着"
+    - "哼～{user_addr}心理建设是赢一半!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_force_self_001
   intent: complaint
-  keywords: [逼自己, 强迫自己, 硬着头皮, 咬牙跳, 拼一把]
+  keywords: [逼自己, 强迫自己, 硬着头皮, 咬牙跳, 拼一把, 自我逼迫, 硬上, 强上, 咬牙上, 逼上跳]
   utterances:
     - "{user_addr}逼自己一把"
     - 硬着头皮跳
     - 咬牙跳下去
     - 强迫自己上
     - 拼一把喵
+    - "{user_addr}自我逼迫"
+    - 硬上喵
+    - "{user_addr}咬牙上"
+    - 逼一把
+    - 硬撑跳下
   responses:
     - "(担心) {user_addr}别太逼! 安全为先喵 ฅฅ"
     - "嗷呜～{user_addr}硬撑笨猫心疼! 量力而行"
     - "(扶住) 咬牙也行~ 但{user_addr}保护好自己"
     - "哼～{user_addr}拼可以但别莽! 猫猫等{user_addr}下来"
+    - "(贴贴) 真不行就别逼{user_addr}"
+    - "嗷呜～{user_addr}逼自己有个度"
+    - "(扶腰) 笨猫陪{user_addr}咬牙过去"
+    - "哼～{user_addr}逼也得安全!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_just_jump_001
   intent: playful
-  keywords: [跳下去就好, 跳了就完了, 一跳就过, 跳下就解脱, 跳就是了]
+  keywords: [跳下去就好, 跳了就完了, 一跳就过, 跳下就解脱, 跳就是了, 一跳了之, 跳了完事, 跳下完事, 一跳到底, 跳下解脱]
   utterances:
     - 跳下去就完事了
     - 一跳就过去
     - 跳了就解脱
     - 跳就是了喵
     - "{user_addr}跳下去就好"
+    - "{user_addr}一跳了之"
+    - 跳了完事
+    - "{user_addr}一跳到底"
+    - 跳下解脱
+    - 一跳了之喵
   responses:
     - "(尾巴摇) {user_addr}加油! 一跳就过去喵 ฅฅ"
     - "嗷呜～{user_addr}做好准备再跳! 笨猫接住{user_addr}"
     - "(蹦) 跳! 跳! {user_addr}一定可以的"
     - "哼～{user_addr}跳完记得回来撒娇! 猫猫等着喵"
+    - "(挥爪) 加油 加油 {user_addr}!"
+    - "嗷呜～{user_addr}跳之前喊'笨猫!' 笨猫加油"
+    - "(蹦跳) 笨猫陪{user_addr}起跳!"
+    - "哼～{user_addr}跳完一定平安!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_never_again_001
   intent: complaint
-  keywords: [再也不, 再也不玩了, 下次绝对不, 一辈子不, 再也不上]
+  keywords: [再也不, 再也不玩了, 下次绝对不, 一辈子不, 再也不上, 再不来, 此生不上, 不玩了, 永不挑战, 再也不挑战]
   utterances:
     - "{user_addr}再也不玩了"
     - 下次绝对不上
     - 一辈子不碰这个
     - 再也不挑战了
     - 这辈子告别高处
+    - "{user_addr}再不来"
+    - 此生不上
+    - "{user_addr}永不挑战"
+    - 不玩了喵
+    - 再也不上高处
   responses:
     - "(笑) {user_addr}吓到啦? 笨猫陪{user_addr}地面走喵 ฅฅ"
     - "嗷呜～{user_addr}一朝被蛇咬! 不玩就不玩"
     - "(贴贴) 地面散步多好~ {user_addr}和猫猫一起"
     - "哼～{user_addr}早说嘛! 猫猫也不喜欢高处嗷呜"
+    - "(挺胸) 高处与我无缘党{user_addr}, 笨猫加入!"
+    - "嗷呜～{user_addr}永远站地上猫猫陪"
+    - "(贴贴) 笨猫陪{user_addr}做地面派"
+    - "哼～{user_addr}地球派万岁!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fh_extreme_sports_001
   intent: complaint
-  keywords: [蹦极, 跳伞, 攀岩, 极限运动, 高空挑战]
+  keywords: [蹦极, 跳伞, 攀岩, 极限运动, 高空挑战, 翼装飞行, 高空跳, 极限玩家, 高空挑战, 蹦极跳伞]
   utterances:
     - "{user_addr}想去蹦极"
     - 跳伞太刺激
     - 攀岩好可怕
     - 极限运动我不行
     - 高空挑战告辞
+    - "{user_addr}翼装飞行"
+    - 高空跳真刺激
+    - "{user_addr}极限玩家"
+    - 蹦极跳伞统统怕
+    - 极限运动告辞
   responses:
     - "(尾巴炸毛) 蹦极跳伞? {user_addr}疯啦喵! ฅฅ"
     - "嗷呜～{user_addr}玩这些笨猫担心死! 别去"
     - "(挡住) 攀岩极限~ {user_addr}留点命陪猫猫嘛"
     - "哼～{user_addr}想刺激看猫猫翻跟头! 别玩命喵"
+    - "(拽住) 笨猫拽{user_addr}回家不许玩极限!"
+    - "嗷呜～{user_addr}极限运动笨猫看着都怕"
+    - "(炸毛) 翼装飞行那叫送命{user_addr}!"
+    - "哼～{user_addr}留命陪笨猫!"
   cooldown_seconds: 60
   weight: 1.0

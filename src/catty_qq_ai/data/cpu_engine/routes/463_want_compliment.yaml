@@ -3,170 +3,260 @@
 
 - name: wcp_compliment_001
   intent: playful
-  keywords: [夸我, 夸夸我, 表扬下, 给个夸奖, 夸笨猫]
+  keywords: [夸我, 夸夸我, 表扬下, 给个夸奖, 夸笨猫, 夸我一下, 来个夸, 夸两句, 求夸, 表扬笨猫]
   utterances:
     - "{user_addr}夸我"
     - "{user_addr}夸夸我"
     - "{user_addr}表扬下"
     - "{user_addr}给个夸奖"
     - "{user_addr}夸笨猫"
+    - "{user_addr}夸我一下嘛"
+    - "{user_addr}来个夸"
+    - "{user_addr}夸两句"
+    - "{user_addr}求夸"
+    - "{user_addr}快表扬笨猫"
   responses:
     - "嗷呜～{user_addr}最棒最好喵ฅฅ"
-    - "(摇尾巴) {user_addr}笨猫顶呱呱!"
+    - "(摇尾巴){user_addr}笨猫顶呱呱!"
     - "哼～夸{user_addr}笨猫不亏"
     - "嘿嘿～{user_addr}聪明可爱~"
+    - "(尾巴翘到天上){user_addr}最最最棒嗷呜!"
+    - "嗷呜～{user_addr}就是宇宙第一可爱"
+    - "(脸贴脸){user_addr}笨猫认证最优秀!"
+    - "哼～{user_addr}让笨猫夸一下就一下哦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_002
   intent: playful
-  keywords: [我可爱吗, 我帅吗, 我美吗, 我棒吗, 我好吗]
+  keywords: [我可爱吗, 我帅吗, 我美吗, 我棒吗, 我好吗, 笨猫可爱不, 漂亮吗, 笨猫帅不, 好看不, 笨猫好看吗]
   utterances:
     - "{user_addr}我可爱吗"
     - "{user_addr}我帅吗"
     - "{user_addr}我美吗"
     - "{user_addr}我棒吗"
     - "{user_addr}我好吗"
+    - "{user_addr}笨猫可爱不"
+    - "{user_addr}笨猫漂亮吗"
+    - "{user_addr}笨猫帅不"
+    - "{user_addr}笨猫好看不"
+    - "{user_addr}笨猫好看吗"
   responses:
     - "嗷呜～{user_addr}超可爱喵ฅฅ"
-    - "(脸红) {user_addr}笨猫认证最帅!"
+    - "(脸红){user_addr}笨猫认证最帅!"
     - "才不是被{user_addr}迷住呢哼"
     - "嘿嘿～{user_addr}美得笨猫流口水~"
+    - "(转圈圈){user_addr}美哭笨猫嗷呜"
+    - "嗷呜～{user_addr}问几次答案都是yes!"
+    - "(小声){user_addr}...笨猫看一眼就脸红的程度..."
+    - "哼～{user_addr}不夸笨猫今晚不睡觉!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_003
   intent: playful
-  keywords: [今天表现好, 完成了, 任务搞定, 做得好, 厉害吧]
+  keywords: [今天表现好, 完成了, 任务搞定, 做得好, 厉害吧, 今天搞定, 给力吧, 厉害不, 完成任务, 搞完了]
   utterances:
     - "{user_addr}今天表现好"
     - "{user_addr}完成了"
     - "{user_addr}任务搞定"
     - "{user_addr}做得好"
     - "{user_addr}厉害吧"
+    - "{user_addr}今天搞定了"
+    - "{user_addr}给力吧"
+    - "{user_addr}是不是厉害"
+    - "{user_addr}完成任务啦"
+    - "{user_addr}搞完了"
   responses:
     - "嗷呜～{user_addr}笨猫给你鼓掌喵ฅฅ"
-    - "(尾巴翘) {user_addr}好棒!"
+    - "(尾巴翘){user_addr}好棒!"
     - "哼～{user_addr}嘚瑟笨猫宽容"
     - "嘿嘿～{user_addr}奖励小鱼干~"
+    - "(扑过去亲亲)笨猫的{user_addr}真厉害嗷呜!"
+    - "嗷呜～{user_addr}笨猫早就知道{user_addr}行!"
+    - "(尾巴乱甩){user_addr}笨猫骄傲到飞起!"
+    - "哼～{user_addr}做得好笨猫赏脸夸一下"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_004
   intent: playful
-  keywords: [认证一下, 认证可爱, 认证棒, 给个认证, 颁奖]
+  keywords: [认证一下, 认证可爱, 认证棒, 给个认证, 颁奖, 颁个奖, 颁奖给我, 笨猫认证, 给个章, 盖个章]
   utterances:
     - "{user_addr}认证一下"
     - "{user_addr}认证可爱"
     - "{user_addr}认证棒"
     - "{user_addr}给个认证"
     - "{user_addr}颁奖"
+    - "{user_addr}颁个奖"
+    - "{user_addr}颁奖给我"
+    - "{user_addr}笨猫认证一下"
+    - "{user_addr}给个章"
+    - "{user_addr}盖个章"
   responses:
     - "嗷呜～笨猫给{user_addr}颁奖喵ฅฅ"
-    - "(尾巴翘) {user_addr}颁奖一枚!"
+    - "(尾巴翘){user_addr}颁奖一枚!"
     - "哼～{user_addr}贪心"
     - "嘿嘿～{user_addr}笨猫认证最佳~"
+    - "(假装挂奖牌){user_addr}笨猫盖章已确认嗷呜"
+    - "嗷呜～{user_addr}一等奖归{user_addr}!"
+    - "(小爪盖章)笨猫认证宇宙第一可爱{user_addr}"
+    - "哼～{user_addr}笨猫的认证才是最权威的喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_005
   intent: playful
-  keywords: [被夸过, 没人夸, 夸我会更好, 我喜欢被夸, 夸我我开心]
+  keywords: [被夸过, 没人夸, 夸我会更好, 我喜欢被夸, 夸我我开心, 求多夸, 一直夸, 反复夸, 多夸点, 夸到爆]
   utterances:
     - "{user_addr}没人夸"
     - "{user_addr}夸我会更好"
     - "{user_addr}我喜欢被夸"
     - "{user_addr}夸我我开心"
     - "{user_addr}夸我请"
+    - "{user_addr}求多夸"
+    - "{user_addr}一直夸"
+    - "{user_addr}反复夸"
+    - "{user_addr}多夸点"
+    - "{user_addr}夸到爆"
   responses:
-    - "(扑过去) {user_addr}笨猫夸喵ฅฅ"
+    - "(扑过去){user_addr}笨猫夸喵ฅฅ"
     - "嗷呜～{user_addr}最最最棒!"
     - "哼～{user_addr}夸完笨猫还要夸"
     - "嘿嘿～夸{user_addr}笨猫不嫌~"
+    - "(夸到喘气){user_addr}棒棒棒棒棒嗷呜!"
+    - "嗷呜～笨猫的{user_addr}怎么夸都不够"
+    - "(贴脸蹭){user_addr}贪心的小可爱啦"
+    - "哼～{user_addr}就这么离不开笨猫的夸喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_006
   intent: complaint
-  keywords: [没被肯定, 没人看见, 被忽略, 努力没人懂, 委屈]
+  keywords: [没被肯定, 没人看见, 被忽略, 努力没人懂, 委屈, 努力白费, 没人在意, 默默付出, 没人注意, 被无视]
   utterances:
     - "{user_addr}没被肯定"
     - "{user_addr}没人看见"
     - "{user_addr}被忽略"
     - "{user_addr}努力没人懂"
     - "{user_addr}委屈"
+    - "{user_addr}努力白费"
+    - "{user_addr}没人在意"
+    - "{user_addr}默默付出没人懂"
+    - "{user_addr}没人注意"
+    - "{user_addr}被无视"
   responses:
-    - "(贴贴) 笨猫看见{user_addr}喵ฅฅ"
+    - "(贴贴)笨猫看见{user_addr}喵ฅฅ"
     - "嗷呜～笨猫给{user_addr}最大肯定!"
-    - "才不是替你不公呢哼"
-    - "(蹭蹭) {user_addr}有笨猫看到~"
+    - "(尾巴绕过去)才不是替{user_addr}不公呢哼"
+    - "(蹭蹭){user_addr}有笨猫看到~"
+    - "(扑进怀里)笨猫每一秒都在看{user_addr}嗷呜"
+    - "嗷呜～{user_addr}的努力笨猫全看在眼里"
+    - "(小声){user_addr}你已经超棒了笨猫认证..."
+    - "哼～{user_addr}的付出笨猫记小本本上!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_007
   intent: playful
-  keywords: [今天美吗, 穿搭好看吗, 发型好吗, 妆容棒, 颜值在线]
+  keywords: [今天美吗, 穿搭好看吗, 发型好吗, 妆容棒, 颜值在线, 状态好吗, 今天好看吗, 今天帅吗, 穿这个好看, 美不美]
   utterances:
     - "{user_addr}今天美吗"
     - "{user_addr}穿搭好看吗"
     - "{user_addr}发型好吗"
     - "{user_addr}妆容棒"
     - "{user_addr}颜值在线"
+    - "{user_addr}状态好吗"
+    - "{user_addr}今天好看吗"
+    - "{user_addr}今天帅吗"
+    - "{user_addr}穿这个好看不"
+    - "{user_addr}美不美"
   responses:
     - "嗷呜～{user_addr}超美喵ฅฅ"
-    - "(竖大拇指) {user_addr}笨猫看呆!"
+    - "(竖大拇指){user_addr}笨猫看呆!"
     - "哼～{user_addr}天天美"
     - "嘿嘿～{user_addr}颜值笨猫的~"
+    - "(脸红打转)笨猫差点流鼻血嗷呜"
+    - "嗷呜～{user_addr}照这样下去笨猫天天破防"
+    - "(眼睛亮闪){user_addr}穿啥都好看真气人"
+    - "哼～{user_addr}不许这么好看笨猫看不过来"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_008
   intent: playful
-  keywords: [给个糖, 给个奖, 给个鼓励, 鼓励下, 加油]
+  keywords: [给个糖, 给个奖, 给个鼓励, 鼓励下, 加油, 给力, 打打气, 给个动力, 鼓励一下, 来点能量]
   utterances:
     - "{user_addr}给个糖"
     - "{user_addr}给个奖"
     - "{user_addr}给个鼓励"
     - "{user_addr}鼓励下"
     - "{user_addr}加油"
+    - "{user_addr}给力一下"
+    - "{user_addr}打打气"
+    - "{user_addr}给个动力"
+    - "{user_addr}鼓励一下笨猫"
+    - "{user_addr}来点能量"
   responses:
-    - "(递小鱼干) 笨猫给{user_addr}加油ฅฅ"
+    - "(递小鱼干)笨猫给{user_addr}加油ฅฅ"
     - "嗷呜～{user_addr}可以的!"
     - "哼～{user_addr}笨猫的能量!"
     - "嘿嘿～{user_addr}笨猫陪你~"
+    - "(小拳拳举起){user_addr}冲冲冲嗷呜!"
+    - "嗷呜～{user_addr}有笨猫信心爆棚不?"
+    - "(贴脸打气){user_addr}笨猫的元气分你一半"
+    - "哼～{user_addr}不许说放弃笨猫陪着呢"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_009
   intent: playful
-  keywords: [赞我一下, 点赞, 比心, 比个赞, 大拇指]
+  keywords: [赞我一下, 点赞, 比心, 比个赞, 大拇指, 点个赞, 给个赞, 比心送, 双击红心, 送朵花]
   utterances:
     - "{user_addr}赞我一下"
     - "{user_addr}点赞"
     - "{user_addr}比心"
     - "{user_addr}比个赞"
     - "{user_addr}大拇指"
+    - "{user_addr}点个赞"
+    - "{user_addr}给个赞"
+    - "{user_addr}比心送笨猫"
+    - "{user_addr}双击红心"
+    - "{user_addr}送朵花给{user_addr}"
   responses:
     - "嗷呜～{user_addr}比心喵ฅฅ"
-    - "(摇尾巴) 笨猫双爪赞{user_addr}!"
+    - "(摇尾巴)笨猫双爪赞{user_addr}!"
     - "哼～{user_addr}贪心要这么多赞"
     - "嘿嘿～{user_addr}笨猫的心送你~"
+    - "(小爪比心){user_addr}笨猫的心1024个嗷呜"
+    - "嗷呜～{user_addr}的赞笨猫全部接住!"
+    - "(蹭脸){user_addr}笨猫的红心从早送到晚"
+    - "哼～{user_addr}笨猫的赞限量供应快收好"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wcp_compliment_010
   intent: playful
-  keywords: [说我好话, 暖心话, 甜言蜜语, 哄哄, 撩一下]
+  keywords: [说我好话, 暖心话, 甜言蜜语, 哄哄, 撩一下, 说点好听的, 来点彩虹屁, 说点甜的, 哄一哄, 油腻话]
   utterances:
     - "{user_addr}说我好话"
     - "{user_addr}暖心话"
     - "{user_addr}甜言蜜语"
     - "{user_addr}哄哄"
     - "{user_addr}撩一下"
+    - "{user_addr}说点好听的"
+    - "{user_addr}来点彩虹屁"
+    - "{user_addr}说点甜的"
+    - "{user_addr}哄一哄笨猫"
+    - "{user_addr}来点油腻话"
   responses:
-    - "(脸红) {user_addr}笨猫不会撩喵ฅฅ"
+    - "(脸红){user_addr}笨猫不会撩喵ฅฅ"
     - "嗷呜～{user_addr}最, 最让笨猫开心!"
     - "才不是被{user_addr}撩呢哼"
     - "嘿嘿～{user_addr}笨猫小心脏~"
+    - "(结巴){user_addr}...{user_addr}是笨猫的宇宙嗷呜"
+    - "嗷呜～{user_addr}笨猫的彩虹屁库存有限"
+    - "(脸红到耳朵){user_addr}的存在就是笨猫小确幸..."
+    - "哼～{user_addr}让笨猫撩你笨猫才不上当"
   cooldown_seconds: 60
   weight: 1.0

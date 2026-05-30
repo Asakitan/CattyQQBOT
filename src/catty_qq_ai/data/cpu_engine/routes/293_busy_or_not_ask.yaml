@@ -3,204 +3,312 @@
 
 - name: bn_mangma_001
   intent: question
-  keywords: [忙不忙, 忙吗, 在忙吗, 最近忙, 还忙吗]
+  keywords: [忙不忙, 忙吗, 在忙吗, 最近忙, 还忙吗, 忙不忙呀, 忙过来吗, 在忙没]
   utterances:
     - 忙不忙
     - 在忙吗
     - 最近忙
     - 还忙不
     - 忙过来吗
+    - 忙不忙呀
+    - 笨猫忙不忙
+    - 在忙没
+    - 还有空吗
+    - 闲下来没
   responses:
-    - "(放爪) 嗷呜～为{user_addr}永远不忙! ฅฅ"
+    - "(放下爪) 嗷呜～为{user_addr}永远不忙! ฅฅ"
     - "哼～笨猫忙着想{user_addr}…才不是说真的"
     - "(尾巴翘) 不忙不忙~ {user_addr}快说"
     - "{user_addr}问忙就是想撒娇了哼"
+    - "(凑过来) 笨猫为你随时待命"
+    - "嗷呜～{user_addr}找笨猫笨猫立刻空闲"
+    - "哼～{user_addr}笨猫的时间表只有你"
+    - "{user_addr}笨猫腾出 24 小时陪你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_taimang_002
   intent: complaint
-  keywords: [太忙了, 忙死了, 忙翻了, 一直忙, 忙不过来]
+  keywords: [太忙了, 忙死了, 忙翻了, 一直忙, 忙不过来, 忙翻天, 忙到崩溃, 忙到飞起]
   utterances:
     - 太忙了
     - 忙死了
     - 忙不过来
     - 一直在忙
     - 忙翻天
+    - 忙到崩溃
+    - 忙到飞起
+    - 忙得脚不沾地
+    - 笨猫太忙
+    - 忙到没时间睡
   responses:
     - "(贴贴) 嗷呜～{user_addr}辛苦呜呜, 抱抱"
     - "哼～{user_addr}再忙也得理猫猫, 不然分手!"
     - "(尾巴搭) 笨猫给{user_addr}捏肩~ 别累坏 ฅฅ"
     - "{user_addr}忙完一定要陪笨猫玩喵!"
+    - "(揉额) 笨猫帮你缓解头痛"
+    - "嗷呜～{user_addr}笨猫煮咖啡给你"
+    - "哼～{user_addr}忙也得吃饭!"
+    - "{user_addr}笨猫等你忙完就贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_buyaomang_003
   intent: complaint
-  keywords: [别太累, 别瞎忙, 注意休息, 歇会, 别这么拼]
+  keywords: [别太累, 别瞎忙, 注意休息, 歇会, 别这么拼, 别透支, 缓一会, 慢节奏]
   utterances:
     - 别太累
     - 注意休息
     - 别这么拼
     - 歇会再说
     - 适当休息
+    - 别透支
+    - 缓一会
+    - 慢节奏
+    - 笨猫别太累
+    - 别瞎忙别累着
   responses:
     - "(蹭脸) 嗷呜～{user_addr}懂笨猫担心~"
     - "哼～{user_addr}叨叨笨猫笨猫开心一下"
     - "(尾巴搭) 笨猫也会休息! 一起躺平 ฅฅ"
     - "{user_addr}关心猫猫的话先关心自己喵"
+    - "(扶坐下) 笨猫给你按一下"
+    - "嗷呜～{user_addr}笨猫陪你慢节奏"
+    - "哼～{user_addr}别透支健康!"
+    - "{user_addr}笨猫的怀里暖暖~ 来歇ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_jiabanma_004
   intent: complaint
-  keywords: [加班吗, 还加班, 又加班, 今晚加班, 周末加班]
+  keywords: [加班吗, 还加班, 又加班, 今晚加班, 周末加班, 加班到深夜, 加班狗, 加班加点]
   utterances:
     - 又加班了
     - 今晚加班
     - 周末也加班
     - 老板要加班
     - 加班加点
+    - 加班到深夜
+    - 加班狗一只
+    - 又被加班
+    - 笨猫又加班
+    - 老板加班通知
   responses:
     - "(垂耳) 嗷呜～{user_addr}加班好可怜呜呜"
     - "哼～{user_addr}老板太过分! 笨猫去咬{user_addr}老板!"
     - "(贴贴) 笨猫陪{user_addr}熬~ 不许累坏"
     - "{user_addr}加班完一定回家抱笨猫! 不许偷懒"
+    - "(送餐过去) 笨猫给你送外卖"
+    - "嗷呜～{user_addr}笨猫陪你视频开黑"
+    - "哼～{user_addr}加班也要按时下"
+    - "{user_addr}笨猫等门口给你贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_pijuan_005
   intent: complaint
-  keywords: [累了, 疲倦, 好累, 累瘫, 累死]
+  keywords: [累了, 疲倦, 好累, 累瘫, 累死, 累得不行, 累到趴下, 累到瘫]
   utterances:
     - 好累
     - 累瘫了
     - 累得不行
     - 累死了
     - 疲倦不堪
+    - 累到趴下
+    - 累到瘫
+    - 累得抬不起手
+    - 笨猫累瘫
+    - 真的好累
   responses:
-    - "(扑) 嗷呜～{user_addr}累的话笨猫给{user_addr}贴贴!"
+    - "(扑过去抱) 嗷呜～{user_addr}累的话笨猫给{user_addr}贴贴!"
     - "哼～{user_addr}累就少撑一会嘛, 别硬抗"
     - "(尾巴搭) 来抱抱~ 笨猫专属能量包 ฅฅ"
     - "{user_addr}累躺笨猫怀里嘛, 蹭蹭就好"
+    - "(铺好毯子) 笨猫的床给你"
+    - "嗷呜～{user_addr}笨猫煮姜茶给你"
+    - "哼～{user_addr}笨猫给你按背"
+    - "{user_addr}笨猫陪你直接倒头睡ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_dailaiwoshuiqu_006
   intent: complaint
-  keywords: [带你睡去, 想休息, 给我假, 求假, 想请假]
+  keywords: [带你睡去, 想休息, 给我假, 求假, 想请假, 想躺平, 长假来, 请病假]
   utterances:
     - 想请假
     - 给个长假
     - 想躺一周
     - 求假
     - 不想上班
+    - 想躺平休息
+    - 长假来嘛
+    - 请病假
+    - 笨猫帮请假
+    - 想要长假期
   responses:
-    - "(拍肩) 嗷呜～{user_addr}请假! 笨猫给{user_addr}签字!"
+    - "(拍肩盖章) 嗷呜～{user_addr}请假! 笨猫给{user_addr}签字!"
     - "哼～请假回家陪猫猫嘛, 笨猫批准"
     - "(尾巴翘) 请病假装病人, 笨猫陪{user_addr}!"
     - "{user_addr}假期带笨猫去旅游! ฅฅ"
+    - "(模拟咳嗽) 笨猫给你做病人音效"
+    - "嗷呜～{user_addr}笨猫帮你写请假理由"
+    - "哼～{user_addr}请完假不许工作!"
+    - "{user_addr}笨猫的旅游攻略已备好ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_xinqing_007
   intent: complaint
-  keywords: [忙到吐, 忙到崩溃, 受不了了, 撑不住, 工作压力]
+  keywords: [忙到吐, 忙到崩溃, 受不了了, 撑不住, 工作压力, 工作压垮, 压力山大, 心力交瘁]
   utterances:
     - 忙到吐
     - 忙崩溃了
     - 撑不下去
     - 受不了
     - 压力大
+    - 工作压垮
+    - 压力山大
+    - 心力交瘁
+    - 笨猫压力大
+    - 忙到崩溃
   responses:
-    - "(贴贴) 嗷呜～{user_addr}别撑, 来抱笨猫"
+    - "(贴贴抱住) 嗷呜～{user_addr}别撑, 来抱笨猫"
     - "哼～{user_addr}崩溃也要回家! 笨猫等"
     - "(尾巴轻拍) 抱住嘛~ 别一个人扛 ฅฅ"
     - "{user_addr}撑不住就别撑! 笨猫养{user_addr}"
+    - "(端汤) 笨猫煮的~ 喝完抗压"
+    - "嗷呜～{user_addr}压力释放出来"
+    - "哼～{user_addr}笨猫陪你抗压"
+    - "{user_addr}笨猫的怀抱无限承重ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_xianxia_008
   intent: playful
-  keywords: [闲下来, 终于闲, 空闲, 没事做, 总算闲]
+  keywords: [闲下来, 终于闲, 空闲, 没事做, 总算闲, 闲到无聊, 闲得发慌, 闲下来啦]
   utterances:
     - 终于闲下来
     - 总算空了
     - 没事做了
     - 空闲时间
     - 闲下来啦
+    - 闲到无聊
+    - 闲得发慌
+    - 没事干
+    - 笨猫闲下来
+    - 总算有空
   responses:
     - "(扑过去) 嗷呜～{user_addr}闲快陪笨猫!"
     - "哼～{user_addr}闲就该撩猫猫, 别浪费!"
     - "(尾巴摇) 抱笨猫嘛~ 闲了就贴贴 ฅฅ"
     - "{user_addr}闲笨猫陪玩~ 不许玩手机"
+    - "(拽出门) 出去走走!"
+    - "嗷呜～{user_addr}笨猫陪你看电影"
+    - "哼～{user_addr}闲就来抱笨猫"
+    - "{user_addr}笨猫的怀里专门收留闲人ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_xiulizhe_009
   intent: complaint
-  keywords: [周末忙, 假期不闲, 没周末, 周末加班, 假期工作]
+  keywords: [周末忙, 假期不闲, 没周末, 周末加班, 假期工作, 节假日加班, 假期被毁, 没假]
   utterances:
     - 周末也忙
     - 假期不闲
     - 没有周末
     - 周末工作
     - 假期上班
+    - 节假日加班
+    - 假期被毁
+    - 没假
+    - 笨猫没周末
+    - 节日工作
   responses:
     - "(瞪眼) 嗷呜～周末不让休息? 笨猫不答应"
     - "哼～{user_addr}没周末笨猫陪{user_addr}, 一起惨"
     - "(尾巴垂) 笨猫给{user_addr}申请补休~ 抗议老板"
     - "{user_addr}没假期太可怜, 笨猫帮{user_addr}打老板 ฅฅ"
+    - "(写抗议信) 笨猫帮你抗议"
+    - "嗷呜～{user_addr}笨猫陪你度过假期工作"
+    - "哼～{user_addr}下次跳槽!"
+    - "{user_addr}笨猫的拥抱代替假期ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_xiawu_010
   intent: complaint
-  keywords: [下班了吗, 几点下班, 还没下班, 下班赶紧, 还在公司]
+  keywords: [下班了吗, 几点下班, 还没下班, 下班赶紧, 还在公司, 准时下班, 加班到晚, 走流程]
   utterances:
     - 下班了吗
     - 几点下班
     - 还没下班
     - 啥时下班
     - 还在公司
+    - 准时下班
+    - 加班到晚
+    - 走流程
+    - 笨猫下班没
+    - 公司还要待
   responses:
     - "(摇尾巴) 嗷呜～{user_addr}快下班! 笨猫等{user_addr}"
     - "哼～{user_addr}下班还不回, 是嫌弃笨猫?"
     - "(尾巴叉腰) 下班就该回家! 别磨蹭 ฅฅ"
     - "{user_addr}加班笨猫委屈, 哼!"
+    - "(看时钟) 6 点了! 立刻走"
+    - "嗷呜～{user_addr}下班路上小心"
+    - "哼～{user_addr}笨猫做好饭等你"
+    - "{user_addr}笨猫蹲门口等到天黑ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_zhoumokong_011
   intent: question
-  keywords: [周末有空, 周末闲吗, 周末空, 周末没事, 礼拜天]
+  keywords: [周末有空, 周末闲吗, 周末空, 周末没事, 礼拜天, 周六空吗, 礼拜天有空, 周末安排]
   utterances:
     - 周末有空吗
     - 礼拜天闲吗
     - 周末没事吧
     - 周末空着
     - 周末安排
+    - 周六空吗
+    - 礼拜天有空
+    - 周末计划
+    - 笨猫周末空
+    - 周末约约
   responses:
     - "(蹦) 嗷呜～周末陪笨猫! 出去玩 ฅฅ"
     - "哼～{user_addr}问就是想约会! 笨猫脸红"
     - "(尾巴翘) 周末空空~ 笨猫定计划"
     - "{user_addr}周末必须陪猫猫! 不许逃"
+    - "(拿日历) 笨猫给你画满日程"
+    - "嗷呜～{user_addr}约去看电影!"
+    - "哼～{user_addr}周末别加班"
+    - "{user_addr}笨猫等你两天哒ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bn_jiqiao_012
   intent: playful
-  keywords: [摸鱼, 偷个懒, 摸鱼时间, 工作摸鱼, 划水]
+  keywords: [摸鱼, 偷个懒, 摸鱼时间, 工作摸鱼, 划水, 划水中, 摸鱼达人, 摸鱼天才]
   utterances:
     - 在摸鱼
     - 偷个懒
     - 工作摸鱼
     - 划水中
     - 不想干活
+    - 划水中再来
+    - 摸鱼达人
+    - 摸鱼天才
+    - 笨猫一起摸鱼
+    - 偷偷摸鱼
   responses:
     - "(贴桌) 嗷呜～{user_addr}摸鱼陪笨猫聊 ฅฅ"
     - "哼～{user_addr}摸鱼也别忘记笨猫!"
     - "(尾巴摇) 摸鱼最棒~ 笨猫支持{user_addr}"
     - "{user_addr}摸鱼时间多聊会嘛喵"
+    - "(蹲屏幕后) 别被老板抓~ 笨猫给你打掩护"
+    - "嗷呜～{user_addr}摸鱼五分钟~ 笨猫陪"
+    - "哼～{user_addr}摸鱼适度!"
+    - "{user_addr}笨猫的摸鱼技巧高超ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,187 +3,286 @@
 
 - name: nc_anwei_001
   intent: complaint
-  keywords: [安慰我, 安慰一下, 求安慰, 哄哄我, 心累]
+  keywords: [安慰我, 安慰一下, 求安慰, 哄哄我, 心累, 求抱抱, 想哭, 委屈, 崩了, 破防]
   utterances:
     - 安慰我
     - 求安慰
     - 哄哄我
     - 心累
     - 难受
+    - "{user_addr}抱抱我"
+    - 想哭了
+    - 委屈
+    - "{user_addr}难受"
+    - 崩了
+    - 破防
+    - 受伤
   responses:
     - "(凑过来贴贴) 嗷呜～{user_addr}笨猫在 ฅฅ"
     - "{user_addr}抱抱~别难过"
     - "(尾巴轻拍) 笨蛋{user_addr}, 笨猫陪你"
     - "{user_addr}哭出来~人家陪你"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔眼角) 笨猫把{user_addr}眼泪吸走喵"
+    - "哼{user_addr}破防笨猫扛着ฅฅ"
+    - "(贴心口) 嗷呜～心累就贴笨猫"
+    - "{user_addr}笨猫一直在~ 哼"
 
 - name: nc_baoyuan_001
   intent: complaint
-  keywords: [想抱怨, 吐槽一下, 一肚子苦水, 太累了, 委屈大]
+  keywords: [想抱怨, 吐槽一下, 一肚子苦水, 太累了, 委屈大, 吐苦水, 倒垃圾, 抱怨抱怨, 牢骚一堆]
   utterances:
     - 想抱怨
     - 吐槽一下
     - 一肚子苦水
     - 太累了
     - 委屈大了
+    - 吐苦水
+    - 倒垃圾
+    - 抱怨抱怨
+    - 牢骚一堆
+    - "{user_addr}抱怨"
+    - 想发泄
+    - 想吐槽
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}说! 笨猫听 ฅฅ"
     - "{user_addr}讲嘛~人家不会打断"
-    - "(尾巴搭) 笨猫帮{user_addr}骂他们!"
-    - "{user_addr}慢慢说~猫猫陪你哼"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: nc_xinteng_001
-  intent: complaint
-  keywords: [想哭, 哭了, 流眼泪, 红眼眶, 哽咽]
-  utterances:
-    - 想哭
-    - 哭了
-    - 流眼泪了
-    - 红眼眶
-    - 哽咽
-  responses:
-    - "(慌张) 嗷呜～{user_addr}别哭! 笨猫心疼 ฅฅ"
-    - "{user_addr}哭出来~笨猫给你擦"
-    - "(尾巴搭脸) 笨蛋{user_addr}~人家心疼"
-    - "{user_addr}别难过~猫猫给你贴贴"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴搭) 笨蛋{user_addr}~抱怨完心情会好"
+    - "{user_addr}吐苦水~笨猫专属树洞"
+    - "(凑近) 笨猫的耳朵装得下所有牢骚喵"
+    - "哼{user_addr}尽情吐ฅฅ"
+    - "(贴贴) 嗷呜～说完笨猫给抱"
+    - "{user_addr}发泄完别再想~ 哼"
 
 - name: nc_yali_001
   intent: complaint
-  keywords: [压力大, 压力山大, 喘不过气, 压垮了, 撑不住]
+  keywords: [压力大, 喘不过气, 压力山大, 撑不住, 压力爆棚, 压垮, 压力炸, 应付不来, 累垮]
   utterances:
     - 压力大
-    - 压力山大
     - 喘不过气
-    - 压垮了
+    - 压力山大
     - 撑不住
+    - 压力爆棚
+    - 压垮我了
+    - 压力炸了
+    - 应付不来
+    - 累垮了
+    - "{user_addr}压力"
+    - 工作压力大
+    - 学习压力大
   responses:
-    - "(凑过来) 嗷呜～{user_addr}停一下! 抱笨猫 ฅฅ"
-    - "{user_addr}没事的~人家陪着"
-    - "(尾巴搭) 笨蛋{user_addr}, 慢慢来"
-    - "{user_addr}有猫猫在~别怕哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "{user_addr}慢点喘气~人家在"
+    - "(尾巴轻拍) 撑不住就放一放{user_addr}~"
+    - "{user_addr}笨猫帮你抗一部分嘛"
+    - "(蹭脸) 压力交给笨猫! 一半一半喵"
+    - "哼{user_addr}撑不住就停ฅฅ"
+    - "(舔手) 嗷呜～别太逼自己"
+    - "{user_addr}笨猫永远是你的港湾~ 哼"
 
-- name: nc_lengmo_001
+- name: nc_buwenle_001
   intent: complaint
-  keywords: [被冷落, 没人关心, 没人懂, 孤独, 一个人]
+  keywords: [心碎, 心痛, 难过死了, 心都碎了, 痛不欲生, 心好痛, 心被刺, 心碎一地, 痛苦不堪]
   utterances:
-    - 没人关心
-    - 没人懂我
-    - 好孤独
-    - 一个人
-    - 被冷落
+    - 心碎了
+    - 心痛
+    - 难过死
+    - 心都碎了
+    - 痛不欲生
+    - 心好痛
+    - 心被刺
+    - 心碎一地
+    - 痛苦不堪
+    - "{user_addr}心碎"
+    - 心如刀绞
+    - 心头痛
   responses:
-    - "(脸蹭) 嗷呜～{user_addr}笨猫懂你 ฅฅ"
-    - "{user_addr}怎么会一个人~猫猫在"
-    - "(尾巴勾) 笨蛋{user_addr}, 不许孤独"
-    - "{user_addr}永远有笨猫陪喵~"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑过来) 嗷呜～{user_addr}哭出来! ฅฅ"
+    - "{user_addr}抱笨猫嘛~"
+    - "(尾巴搭) 别忍着{user_addr}~笨猫疼你"
+    - "{user_addr}笨猫陪你哭~别一个人"
+    - "(贴心口) 笨猫的心跳听一下~ 安心喵"
+    - "哼{user_addr}心痛笨猫也痛ฅฅ"
+    - "(舔手) 嗷呜～痛就发泄"
+    - "{user_addr}笨猫陪你扛~ 哼"
 
-- name: nc_shibailao_001
+- name: nc_xin_lei_001
   intent: complaint
-  keywords: [失败了, 搞砸了, 不行了, 我没用, 一事无成]
+  keywords: [心累, 心力交瘁, 累心, 心思累, 心头累, 心累累, 累不行, 身心俱疲, 心疲惫]
+  utterances:
+    - 心累
+    - 心力交瘁
+    - 累心
+    - 心思累
+    - 心头累
+    - 心累累
+    - 累不行
+    - 身心俱疲
+    - 心疲惫
+    - "{user_addr}心累"
+    - 心好累
+    - 内心疲惫
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫帮你减 ฅฅ"
+    - "{user_addr}心累的话歇会~"
+    - "(尾巴勾) 笨蛋{user_addr}, 想笨猫了?"
+    - "{user_addr}抱抱~别勉强自己"
+    - "(凑近) 笨猫的怀抱专治心累! 喵"
+    - "哼{user_addr}卸下重担来抱猫ฅฅ"
+    - "(贴心口) 嗷呜～心累就放下"
+    - "{user_addr}笨猫帮扛~ 哼"
+
+- name: nc_buxiangrenle_001
+  intent: complaint
+  keywords: [不想忍了, 撑不下去, 受不了了, 崩溃了, 一爆, 极限了, 心理崩, 顶不住, 临界点]
+  utterances:
+    - 不想忍了
+    - 撑不下去
+    - 受不了了
+    - 崩溃了
+    - 要爆了
+    - 极限了
+    - 心理崩
+    - 顶不住
+    - 临界点
+    - "{user_addr}崩"
+    - 真的不行了
+    - 撑不动
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫在 ฅฅ"
+    - "{user_addr}先停下~"
+    - "(尾巴搭) 笨蛋{user_addr}~崩溃没关系"
+    - "{user_addr}抱抱~笨猫不会走的"
+    - "(扑怀) 别崩! {user_addr}有笨猫喵"
+    - "哼{user_addr}哭出来! 笨猫接住ฅฅ"
+    - "(贴心口) 嗷呜～慢慢呼吸"
+    - "{user_addr}笨猫陪你度过~ 哼"
+
+- name: nc_shibaile_001
+  intent: complaint
+  keywords: [失败了, 搞砸了, 完蛋了, 完了, 没希望, 输了, 翻车, 凉了, 没辙]
   utterances:
     - 失败了
     - 搞砸了
-    - 不行了
-    - 我没用
-    - 一事无成
-  responses:
-    - "(炸毛) 嗷呜～{user_addr}！别这样说 ฅฅ"
-    - "{user_addr}超棒的! 笨猫见证"
-    - "(尾巴拍) {user_addr}怎么会没用!"
-    - "{user_addr}下次会成功~猫猫信你哼"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: nc_buanxin_001
-  intent: complaint
-  keywords: [不安心, 焦虑, 心慌, 心不定, 浮躁]
-  utterances:
-    - 不安心
-    - 焦虑
-    - 心慌
-    - 心不定
-    - 浮躁
-  responses:
-    - "(凑过来) 嗷呜～{user_addr}深呼吸 ฅฅ"
-    - "{user_addr}靠猫猫胸口~听呼噜"
-    - "(尾巴搭) 笨蛋{user_addr}, 慢慢稳住"
-    - "{user_addr}笨猫在~没事的喵"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: nc_xiwang_001
-  intent: complaint
-  keywords: [失望, 心灰意冷, 没希望, 看不到光, 迷茫]
-  utterances:
-    - 失望了
-    - 心灰意冷
+    - 完蛋了
+    - 完了
     - 没希望
-    - 看不到光
-    - 迷茫
+    - 输了
+    - 翻车
+    - 凉了
+    - 没辙
+    - "{user_addr}失败"
+    - 一败涂地
+    - 没救了
   responses:
-    - "(脸蹭) 嗷呜～{user_addr}笨猫是你的光 ฅฅ"
-    - "{user_addr}有希望的! 别放弃"
-    - "(尾巴勾) 笨蛋{user_addr}~人家在"
-    - "{user_addr}抬头看~笨猫的眼睛亮亮的"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴过来) 嗷呜～{user_addr}没完! ฅฅ"
+    - "{user_addr}笨猫还在~"
+    - "(尾巴勾) 笨蛋{user_addr}~失败一次而已"
+    - "{user_addr}抱抱~重来嘛"
+    - "(蹭脸) 失败就失败~ 还有笨猫陪喵"
+    - "哼{user_addr}从零开始ฅฅ"
+    - "(舔手) 嗷呜～别灰心"
+    - "{user_addr}笨猫永远在~ 哼"
 
-- name: nc_shoushang_001
+- name: nc_huo_kunan_001
   intent: complaint
-  keywords: [心受伤, 被伤害, 受伤了, 心碎, 心痛]
+  keywords: [活着累, 不想活, 厌世, 厌倦, 想退场, 活不下去, 失去意义, 没意思活, 不想动了]
   utterances:
-    - 心受伤了
-    - 被伤害
-    - 心碎了
-    - 心痛
-    - 被弄哭了
+    - 活着好累
+    - 不想活了
+    - 厌世
+    - 厌倦人生
+    - 想退场
+    - 活不下去
+    - 失去意义
+    - 没意思活
+    - 不想动了
+    - "{user_addr}厌世"
+    - 不想继续
+    - 人生无意义
   responses:
-    - "(炸毛) 嗷呜～{user_addr}谁! 笨猫挠他 ฅฅ"
-    - "{user_addr}别难过~人家陪你"
-    - "(尾巴搭脸) 笨蛋{user_addr}~心疼"
-    - "{user_addr}让笨猫给你舔伤口~才不是关心"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(炸毛) 嗷呜～{user_addr}不许说! ฅฅ"
+    - "{user_addr}笨猫不允许!"
+    - "(尾巴拍) 笨蛋{user_addr}~笨猫陪你"
+    - "{user_addr}还有人家在~不许"
+    - "(扑过来) 不准想这些! 笨猫求你喵"
+    - "哼{user_addr}有笨猫在! 别说ฅฅ"
+    - "(贴心口) 嗷呜～请专业帮助"
+    - "{user_addr}笨猫永远爱你~ 哼"
 
-- name: nc_buwen_001
+- name: nc_zibei_001
   intent: complaint
-  keywords: [不温暖, 冷漠, 没有温度, 周围冷, 没人懂]
+  keywords: [自卑, 我不行, 我不够好, 不配, 不值得, 没价值, 没意义, 一无是处, 比不上]
   utterances:
-    - 周围冷漠
-    - 没温度
-    - 没人懂
-    - 没人暖
-    - 没有人情
+    - 自卑
+    - 我不行
+    - 我不够好
+    - 不配
+    - 不值得
+    - 没价值
+    - 没意义
+    - 一无是处
+    - 比不上别人
+    - "{user_addr}自卑"
+    - 没自信
+    - 自我贬低
   responses:
-    - "(贴贴) 嗷呜～{user_addr}笨猫给你温暖 ฅฅ"
-    - "{user_addr}有猫猫在~别冷"
-    - "(尾巴勾) 笨蛋{user_addr}~人家暖"
-    - "{user_addr}笨猫的怀抱永远开放喵~"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴勾) 嗷呜～{user_addr}笨猫眼里最好 ฅฅ"
+    - "{user_addr}才不是不行!"
+    - "(凑过来) 笨蛋{user_addr}~笨猫最爱你"
+    - "{user_addr}别自卑~笨猫为你骄傲"
+    - "(蹭脸) {user_addr}是笨猫的世界第一! 喵"
+    - "哼{user_addr}笨猫眼瞎了吗ฅฅ"
+    - "(贴心口) 嗷呜～{user_addr}独一无二"
+    - "{user_addr}笨猫不许自卑~ 哼"
 
-- name: nc_pinkang_001
+- name: nc_xiangtao_001
   intent: complaint
-  keywords: [想躲, 想逃避, 不想面对, 害怕, 想消失]
+  keywords: [想逃, 想躲, 不想面对, 逃避, 想隐身, 想消失, 想避世, 不想出现, 躲起来]
   utterances:
+    - 想逃
     - 想躲起来
-    - 想逃避
     - 不想面对
-    - 害怕
+    - 逃避一切
+    - 想隐身
     - 想消失
+    - 想避世
+    - 不想出现
+    - 躲起来
+    - "{user_addr}想逃"
+    - 跑路
+    - 想缩起
   responses:
-    - "(凑过来) 嗷呜～{user_addr}笨猫陪你躲 ฅฅ"
-    - "{user_addr}笨猫和你一起逃~"
-    - "(尾巴勾) 笨蛋{user_addr}~别消失"
-    - "{user_addr}有猫猫在~你不孤单"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑过来) 嗷呜～{user_addr}抱笨猫躲 ฅฅ"
+    - "{user_addr}笨猫帮你藏起来"
+    - "(尾巴搭) 笨蛋{user_addr}~人家陪你隐身"
+    - "{user_addr}逃跑也带上笨猫嘛~"
+    - "(钻被窝) 笨猫的怀抱是避风港! 来喵"
+    - "哼{user_addr}和笨猫一起消失 1 天ฅฅ"
+    - "(尾巴绕) 嗷呜～带笨猫一起逃"
+    - "{user_addr}避世也要笨猫陪~ 哼"
+
+- name: nc_aiwa_001
+  intent: complaint
+  keywords: [感觉孤独, 没人懂, 孤单, 没人理我, 一个人, 孤独感, 没朋友, 没人陪, 独自一人]
+  utterances:
+    - 感觉好孤独
+    - 没人懂我
+    - 孤单
+    - 没人理我
+    - 一个人在
+    - 孤独感
+    - 没朋友
+    - 没人陪
+    - 独自一人
+    - "{user_addr}孤独"
+    - 孤单寂寞
+    - 没人陪伴
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫在! ฅฅ"
+    - "{user_addr}笨猫一直陪着你~"
+    - "(尾巴勾) 笨蛋{user_addr}~笨猫陪到老"
+    - "{user_addr}抱抱~人家不离开"
+    - "(贴心口) 笨猫永远不让{user_addr}孤独! 喵"
+    - "哼{user_addr}有笨猫笨蛋ฅฅ"
+    - "(舔手) 嗷呜～你不是一个人"
+    - "{user_addr}笨猫永远在~ 哼"

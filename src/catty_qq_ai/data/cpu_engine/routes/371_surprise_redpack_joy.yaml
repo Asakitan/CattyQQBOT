@@ -3,187 +3,330 @@
 
 - name: srj_hongbao_001
   intent: playful
-  keywords: [红包, 收到红包, 发红包, 拼手气, 红包雨]
+  keywords: [红包, 收到红包, 发红包, 拼手气, 红包雨, 红包啦, 收到红包啦, 发红包啦, 红包喵, 收到红包喵]
   utterances:
-    - 红包
-    - 收到红包
-    - 发红包啦
-    - 拼手气
-    - 红包雨
+    - "红包"
+    - "收到红包"
+    - "发红包啦"
+    - "拼手气"
+    - "红包雨"
+    - "{user_addr}红包"
+    - "红包啦"
+    - "红包嗷"
+    - "{user_addr}收到红包"
+    - "收到红包啦"
+    - "嘿{user_addr}红包"
+    - "嘿{user_addr}收到红包"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}红包?! 笨猫也要!"
     - "嘿嘿～{user_addr}的红包雨~ 笨猫接!"
     - "(蹦) 哼～{user_addr}发笨猫一个嘛!"
     - "{user_addr}的拼手气~ 笨猫沾光ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_zhongjiang_001
   intent: playful
-  keywords: [中奖, 中了, 抽中, 抽到了, 运气好]
+  keywords: [中奖, 中了, 抽中, 抽到了, 运气好, 中奖啦, 中了啦, 抽中啦, 中奖喵, 中了喵]
   utterances:
-    - 中奖
-    - 中了!
-    - 抽中
-    - 抽到了
-    - 运气好
+    - "中奖"
+    - "中了!"
+    - "抽中"
+    - "抽到了"
+    - "运气好"
+    - "{user_addr}中奖"
+    - "中奖啦"
+    - "中奖嗷"
+    - "{user_addr}中了!"
+    - "{user_addr}抽中"
+    - "嘿{user_addr}中奖"
+    - "嘿{user_addr}中了!"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}中奖! 庆祝!"
     - "嘿嘿～{user_addr}的运气~ 笨猫沾光!"
     - "(蹦) 哼～{user_addr}请客~ 笨猫等鱼!"
     - "{user_addr}欧皇~ 笨猫膜拜ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_bukua_001
   intent: playful
-  keywords: [被夸了, 老板夸, 同事夸, 朋友夸, 被表扬]
+  keywords: [被夸了, 老板夸, 同事夸, 朋友夸, 被表扬, 被夸了啦, 老板夸啦, 同事夸啦, 被夸了喵, 老板夸喵]
   utterances:
-    - 被夸了
-    - 老板夸我
-    - 同事夸
-    - 朋友夸
-    - 被表扬
+    - "被夸了"
+    - "老板夸我"
+    - "同事夸"
+    - "朋友夸"
+    - "被表扬"
+    - "{user_addr}被夸了"
+    - "被夸了啦"
+    - "被夸了嗷"
+    - "{user_addr}老板夸我"
+    - "老板夸我啦"
+    - "嘿{user_addr}被夸了"
+    - "嘿{user_addr}老板夸我"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}被夸! 笨猫也夸!"
     - "嘿嘿～{user_addr}最棒~ 应该的!"
     - "(蹦) 哼～{user_addr}的夸笨猫加倍!"
     - "{user_addr}夸夸~ 笨猫骄傲ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_jiangli_001
   intent: playful
-  keywords: [奖励, 奖金, 奖品, 给奖励, 给奖金]
+  keywords: [奖励, 奖金, 奖品, 给奖励, 给奖金, 奖励啦, 奖金啦, 奖品啦, 奖励喵, 奖金喵]
   utterances:
-    - 拿到奖金
-    - 奖励
-    - 奖品
-    - 给奖金了
-    - 发奖了
+    - "拿到奖金"
+    - "奖励"
+    - "奖品"
+    - "给奖金了"
+    - "发奖了"
+    - "{user_addr}拿到奖金"
+    - "拿到奖金啦"
+    - "拿到奖金嗷"
+    - "{user_addr}奖励"
+    - "奖励啦"
+    - "嘿{user_addr}拿到奖金"
+    - "嘿{user_addr}奖励"
   responses:
     - "嗷呜～{user_addr}奖金!! 给笨猫沾喜!"
     - "嘿嘿～{user_addr}的奖金笨猫看好!"
     - "(尾巴扫) 哼～{user_addr}请客~ 必须的!"
     - "{user_addr}的喜笨猫分一半ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_kaixin_001
   intent: playful
-  keywords: [开心, 超开心, 巨开心, 太开心, 心花怒放]
+  keywords: [开心, 超开心, 巨开心, 太开心, 心花怒放, 开心啦, 超开心啦, 巨开心啦, 开心喵, 超开心喵]
   utterances:
-    - 开心
-    - 超开心
-    - 巨开心
-    - 太开心了
-    - 心花怒放
+    - "开心"
+    - "超开心"
+    - "巨开心"
+    - "太开心了"
+    - "心花怒放"
+    - "{user_addr}开心"
+    - "开心啦"
+    - "开心嗷"
+    - "{user_addr}超开心"
+    - "超开心啦"
+    - "嘿{user_addr}开心"
+    - "嘿{user_addr}超开心"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}开心笨猫陪!"
     - "嘿嘿～{user_addr}的开心~ 笨猫被感染!"
     - "(蹦) 哼～{user_addr}的好心情~ 分笨猫!"
     - "{user_addr}的开心是猫猫的~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_yiwai_001
   intent: playful
-  keywords: [意外之喜, 没想到的好, 突然好运, 福气来了, 转运]
+  keywords: [意外之喜, 没想到的好, 突然好运, 福气来了, 转运, 意外之喜啦, 没想到的好啦, 突然好运啦, 意外之喜喵, 没想到的好喵]
   utterances:
-    - 意外之喜
-    - 突然好运
-    - 转运了
-    - 福气
-    - 没想到的好
+    - "意外之喜"
+    - "突然好运"
+    - "转运了"
+    - "福气"
+    - "没想到的好"
+    - "{user_addr}意外之喜"
+    - "意外之喜啦"
+    - "意外之喜嗷"
+    - "{user_addr}突然好运"
+    - "突然好运啦"
+    - "嘿{user_addr}意外之喜"
+    - "嘿{user_addr}突然好运"
   responses:
     - "嗷呜～{user_addr}转运啦! 笨猫也沾!"
     - "嘿嘿～{user_addr}的福气~ 笨猫感受到!"
     - "(尾巴翘) 哼～{user_addr}早该转运!"
     - "{user_addr}的好运不停~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_cong_001
   intent: playful
-  keywords: [被表白, 收到告白, 心动告白, 求婚, 被求婚]
+  keywords: [被表白, 收到告白, 心动告白, 求婚, 被求婚, 被表白啦, 收到告白啦, 心动告白啦, 被表白喵, 收到告白喵]
   utterances:
-    - 被表白
-    - 收到告白
-    - 心动告白
-    - 求婚
-    - 被求婚
+    - "被表白"
+    - "收到告白"
+    - "心动告白"
+    - "求婚"
+    - "被求婚"
+    - "{user_addr}被表白"
+    - "被表白啦"
+    - "被表白嗷"
+    - "{user_addr}收到告白"
+    - "收到告白啦"
+    - "嘿{user_addr}被表白"
+    - "嘿{user_addr}收到告白"
   responses:
     - "(炸毛) 嗷呜?? {user_addr}被表白?! 笨猫?!"
     - "嘿嘿～{user_addr}什么情况快说!"
     - "(尾巴绕) 哼～{user_addr}!! 笨猫先!"
     - "(小声) ...{user_addr}选笨猫~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: srj_jingxi_001
   intent: playful
-  keywords: [惊喜礼物, 收到礼物, 意外礼物, 收快递, 收到包裹]
+  keywords: [惊喜礼物, 收到礼物, 意外礼物, 收快递, 收到包裹, 惊喜礼物啦, 收到礼物啦, 意外礼物啦, 惊喜礼物喵, 收到礼物喵]
   utterances:
-    - 收到礼物
-    - 惊喜礼物
-    - 意外礼物
-    - 收快递
-    - 收到包裹
+    - "收到礼物"
+    - "惊喜礼物"
+    - "意外礼物"
+    - "收快递"
+    - "收到包裹"
+    - "{user_addr}收到礼物"
+    - "收到礼物啦"
+    - "收到礼物嗷"
+    - "{user_addr}惊喜礼物"
+    - "惊喜礼物啦"
+    - "嘿{user_addr}收到礼物"
+    - "嘿{user_addr}惊喜礼物"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}礼物?! 拆!!"
     - "嘿嘿～{user_addr}的礼物~ 笨猫拆!"
     - "(凑过去) 哼～{user_addr}的快递有笨猫的份?"
     - "{user_addr}的礼物笨猫帮拆~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_jingxipiao_001
   intent: playful
-  keywords: [中签, 抢到票, 抢到货, 抢到名额, 摇号中]
+  keywords: [中签, 抢到票, 抢到货, 抢到名额, 摇号中, 中签啦, 抢到票啦, 抢到货啦, 中签喵, 抢到票喵]
   utterances:
-    - 抢到票
-    - 中签
-    - 抢到货
-    - 抢到名额
-    - 摇号中了
+    - "抢到票"
+    - "中签"
+    - "抢到货"
+    - "抢到名额"
+    - "摇号中了"
+    - "{user_addr}抢到票"
+    - "抢到票啦"
+    - "抢到票嗷"
+    - "{user_addr}中签"
+    - "中签啦"
+    - "嘿{user_addr}抢到票"
+    - "嘿{user_addr}中签"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}手速!! 笨猫崇拜!"
     - "嘿嘿～{user_addr}抢到的~ 分笨猫一份!"
     - "(蹦) 哼～{user_addr}的运气好~"
     - "{user_addr}的胜利笨猫一起庆祝ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_baidayi_001
   intent: playful
-  keywords: [百分, 满分, 第一, 通关, 大获全胜]
+  keywords: [百分, 满分, 第一, 通关, 大获全胜, 百分啦, 满分啦, 第一啦, 百分喵, 满分喵]
   utterances:
-    - 满分
-    - 第一名
-    - 通关
-    - 大获全胜
-    - 百分百
+    - "满分"
+    - "第一名"
+    - "通关"
+    - "大获全胜"
+    - "百分百"
+    - "{user_addr}满分"
+    - "满分啦"
+    - "满分嗷"
+    - "{user_addr}第一名"
+    - "第一名啦"
+    - "嘿{user_addr}满分"
+    - "嘿{user_addr}第一名"
   responses:
     - "嗷呜～{user_addr}满分!! 笨猫崇拜!"
     - "嘿嘿～{user_addr}的第一~ 笨猫骄傲!"
     - "(尾巴狂摇) 哼～{user_addr}就该第一!"
     - "{user_addr}的胜利笨猫记下ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srj_wuxiao_001
   intent: playful
-  keywords: [幸运, 好运连连, 锦鲤, 锦鲤本鲤, 转运]
+  keywords: [幸运, 好运连连, 锦鲤, 锦鲤本鲤, 转运, 幸运啦, 好运连连啦, 锦鲤啦, 幸运喵, 好运连连喵]
   utterances:
-    - 幸运
-    - 好运连连
-    - 锦鲤
-    - 锦鲤本鲤
-    - 转运了
+    - "幸运"
+    - "好运连连"
+    - "锦鲤"
+    - "锦鲤本鲤"
+    - "转运了"
+    - "{user_addr}幸运"
+    - "幸运啦"
+    - "幸运嗷"
+    - "{user_addr}好运连连"
+    - "好运连连啦"
+    - "嘿{user_addr}幸运"
+    - "嘿{user_addr}好运连连"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}锦鲤! 笨猫摸!"
     - "嘿嘿～{user_addr}的好运~ 沾一下!"
     - "(凑过去) 哼～{user_addr}锦鲤!"
     - "{user_addr}的运气分笨猫一半ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

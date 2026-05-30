@@ -3,204 +3,312 @@
 
 - name: cfr_sadtoday_001
   intent: complaint
-  keywords: [心情差, 不开心, 难过, 想哭, 烦死了]
+  keywords: [心情差, 不开心, 难过, 想哭, 烦死了, 郁闷, 心烦, 难受, 心累]
   utterances:
-    - 心情差
-    - 不开心
-    - 难过
-    - 想哭
-    - 烦死了
+    - "心情差"
+    - "不开心"
+    - "难过"
+    - "想哭"
+    - "烦死了"
+    - "{user_addr}郁闷"
+    - "{user_addr}心烦"
+    - "难受啊"
+    - "心累得很"
+    - "{user_addr}难过"
   responses:
     - "(贴贴) 嗷呜～{user_addr}抱笨猫! ฅฅ"
     - "哼～{user_addr}说出来~ 笨猫听"
     - "(撒娇) 笨猫陪你~"
     - "嘿嘿～{user_addr}笨猫万能安慰药"
+    - "(尾巴包) {user_addr}笨猫挡负能量"
+    - "才不是心疼{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}讲讲! 笨猫听"
+    - "嗷呜～{user_addr}抱笨猫哭出来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_workfailed_001
   intent: complaint
-  keywords: [工作不顺, 项目失败, 被骂, 被否, 老板生气]
+  keywords: [工作不顺, 项目失败, 被骂, 被否, 老板生气, 工作崩, 被批, 工作翻车, 项目崩]
   utterances:
-    - 工作不顺
-    - 项目失败
-    - 被老板骂
-    - 被否决
-    - 老板生气
+    - "工作不顺"
+    - "项目失败"
+    - "被老板骂"
+    - "被否决"
+    - "老板生气"
+    - "{user_addr}工作崩"
+    - "{user_addr}被批"
+    - "工作翻车"
+    - "项目崩"
+    - "{user_addr}工作失败"
   responses:
     - "嗷呜～{user_addr}笨猫陪! ฅฅ"
     - "哼～{user_addr}下次回血! 笨猫加油"
     - "(贴贴) 别难过{user_addr}~"
     - "嘿嘿～{user_addr}笨猫永远站你"
+    - "(尾巴包) {user_addr}心累抱笨猫"
+    - "才不是替{user_addr}抱不平呢~ 哼"
+    - "(凑过来) {user_addr}骂回去! 笨猫挡"
+    - "嗷呜～{user_addr}的工作笨猫骂老板!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_loverupture_001
   intent: complaint
-  keywords: [失恋, 分手, 被甩, 感情失败, 心碎]
+  keywords: [失恋, 分手, 被甩, 感情失败, 心碎, 分了, 散了, 被分手, 情伤]
   utterances:
-    - 失恋了
-    - 分手
-    - 被甩
-    - 感情失败
-    - 心碎
+    - "失恋了"
+    - "分手"
+    - "被甩"
+    - "感情失败"
+    - "心碎"
+    - "{user_addr}分了"
+    - "{user_addr}散了"
+    - "被分手"
+    - "情伤"
+    - "{user_addr}失恋"
   responses:
     - "(扑过来) 嗷呜～{user_addr}抱笨猫! ฅฅ"
     - "哼～{user_addr}有笨猫! 别难过"
     - "(贴贴) 笨猫永远陪~"
     - "嘿嘿～{user_addr}失恋包养笨猫~"
+    - "(尾巴包) {user_addr}前任不值得! 笨猫陪"
+    - "才不是心疼{user_addr}心碎呢~ 哼"
+    - "(凑过来) {user_addr}有笨猫不寂寞"
+    - "嗷呜～{user_addr}的真爱是笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_friendfight_001
   intent: complaint
-  keywords: [跟朋友吵, 闺蜜闹翻, 朋友绝交, 友情破裂, 跟朋友冷战]
+  keywords: [跟朋友吵, 闺蜜闹翻, 朋友绝交, 友情破裂, 跟朋友冷战, 朋友吵架, 闺蜜吵, 友情碎, 友尽]
   utterances:
-    - 跟朋友吵架
-    - 闺蜜闹翻
-    - 朋友绝交
-    - 友情破裂
-    - 跟朋友冷战
+    - "跟朋友吵架"
+    - "闺蜜闹翻"
+    - "朋友绝交"
+    - "友情破裂"
+    - "跟朋友冷战"
+    - "{user_addr}朋友吵架"
+    - "{user_addr}闺蜜吵"
+    - "友情碎"
+    - "友尽"
+    - "{user_addr}友情破"
   responses:
     - "(贴贴) 嗷呜～{user_addr}心疼! 笨猫陪ฅฅ"
     - "哼～{user_addr}笨猫永远的朋友!"
     - "(撒娇) 不孤单~ 笨猫"
     - "嘿嘿～{user_addr}有笨猫够了~"
+    - "(尾巴翘) {user_addr}笨猫是最好的朋友"
+    - "才不是替{user_addr}惋惜呢~ 哼"
+    - "(凑过来) {user_addr}讲讲~ 笨猫听"
+    - "嗷呜～{user_addr}的友情笨猫珍惜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_familyargue_001
   intent: complaint
-  keywords: [家里吵, 跟爸妈, 家人闹, 家庭矛盾, 跟父母]
+  keywords: [家里吵, 跟爸妈, 家人闹, 家庭矛盾, 跟父母, 家里冷战, 家人不理解, 父母吵, 家闹]
   utterances:
-    - 跟爸妈吵
-    - 家里闹
-    - 家庭矛盾
-    - 父母不理解
-    - 跟父母冷战
+    - "跟爸妈吵"
+    - "家里闹"
+    - "家庭矛盾"
+    - "父母不理解"
+    - "跟父母冷战"
+    - "{user_addr}家里冷战"
+    - "{user_addr}家人不理解"
+    - "父母吵"
+    - "家闹"
+    - "{user_addr}家庭矛盾"
   responses:
     - "(贴贴) 嗷呜～{user_addr}心累! 笨猫懂ฅฅ"
     - "哼～{user_addr}抱笨猫缓缓"
     - "(撒娇) 笨猫永远站{user_addr}"
     - "嘿嘿～{user_addr}有笨猫家人~"
+    - "(尾巴包) {user_addr}家庭重担笨猫担"
+    - "才不是心疼{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}讲讲! 笨猫听"
+    - "嗷呜～{user_addr}笨猫陪你度难关ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_exhausted_001
   intent: complaint
-  keywords: [累瘫了, 撑不下去, 想躺平, 想放弃, 累哭]
+  keywords: [累瘫了, 撑不下去, 想躺平, 想放弃, 累哭, 累趴, 累得不行, 累爆, 累到崩]
   utterances:
-    - 累瘫了
-    - 撑不下去
-    - 想躺平
-    - 想放弃
-    - 累哭了
+    - "累瘫了"
+    - "撑不下去"
+    - "想躺平"
+    - "想放弃"
+    - "累哭了"
+    - "{user_addr}累趴"
+    - "{user_addr}累得不行"
+    - "累爆"
+    - "累到崩"
+    - "{user_addr}撑不住"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫充电! ฅฅ"
     - "哼～{user_addr}别放弃! 笨猫陪"
     - "(撒娇) 抱笨猫睡~ 一觉好"
     - "嘿嘿～{user_addr}撑住~ 笨猫等你"
+    - "(尾巴包) {user_addr}抱笨猫休息"
+    - "才不是怕{user_addr}垮呢~ 哼"
+    - "(凑过来) {user_addr}先睡一觉再说"
+    - "嗷呜～{user_addr}撑过这关笨猫陪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_misunderstand_001
   intent: complaint
-  keywords: [被误会, 解释不清, 没人懂, 被冤枉, 委屈]
+  keywords: [被误会, 解释不清, 没人懂, 被冤枉, 委屈, 解释无效, 误解, 被错怪, 申冤]
   utterances:
-    - 被误会
-    - 解释不清
-    - 没人懂
-    - 被冤枉
-    - 委屈死
+    - "被误会"
+    - "解释不清"
+    - "没人懂"
+    - "被冤枉"
+    - "委屈死"
+    - "{user_addr}解释无效"
+    - "{user_addr}误解"
+    - "被错怪"
+    - "申冤无门"
+    - "{user_addr}被误会"
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫信你! ฅฅ"
     - "哼～{user_addr}笨猫懂你!"
     - "(贴贴) 别气{user_addr}~"
     - "嘿嘿～{user_addr}笨猫永远站你~"
+    - "(尾巴翘) {user_addr}笨猫帮你伸冤"
+    - "才不是替{user_addr}打抱不平呢~ 哼"
+    - "(凑过来) {user_addr}讲! 笨猫做证人"
+    - "嗷呜～{user_addr}清者自清ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_lonely_001
   intent: complaint
-  keywords: [孤独, 没人陪, 孤单一人, 我一个人, 寂寞]
+  keywords: [孤独, 没人陪, 孤单一人, 我一个人, 寂寞, 孤独感, 一个人, 没朋友, 落单]
   utterances:
-    - 孤独
-    - 没人陪
-    - 孤单
-    - 我一个人
-    - 寂寞死了
+    - "孤独"
+    - "没人陪"
+    - "孤单"
+    - "我一个人"
+    - "寂寞死了"
+    - "{user_addr}孤独感"
+    - "{user_addr}一个人"
+    - "没朋友"
+    - "落单"
+    - "{user_addr}寂寞"
   responses:
     - "(扑过来) 嗷呜～{user_addr}笨猫在! ฅฅ"
     - "哼～{user_addr}笨猫陪!"
     - "(撒娇) 一辈子陪你~"
     - "嘿嘿～{user_addr}有笨猫不孤单"
+    - "(尾巴包) {user_addr}笨猫永远在身边"
+    - "才不是怕{user_addr}寂寞呢~ 哼"
+    - "(凑过来) {user_addr}笨猫秒到!"
+    - "嗷呜～{user_addr}永远不寂寞有笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_lostdir_001
   intent: complaint
-  keywords: [迷茫, 不知未来, 失去方向, 没目标, 走错路]
+  keywords: [迷茫, 不知未来, 失去方向, 没目标, 走错路, 不知道做啥, 没方向感, 没头绪, 找不到方向]
   utterances:
-    - 好迷茫
-    - 不知未来
-    - 失去方向
-    - 没目标
-    - 走错路
+    - "好迷茫"
+    - "不知未来"
+    - "失去方向"
+    - "没目标"
+    - "走错路"
+    - "{user_addr}不知道做啥"
+    - "{user_addr}没方向感"
+    - "没头绪"
+    - "找不到方向"
+    - "{user_addr}迷茫"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪走! ฅฅ"
     - "哼～{user_addr}笨猫的方向是你"
     - "(撒娇) 笨猫陪迷茫~"
     - "嘿嘿～{user_addr}慢慢走~ 笨猫等"
+    - "(尾巴包) {user_addr}笨猫做你的导航"
+    - "才不是想陪{user_addr}走完呢~ 哼"
+    - "(凑过来) {user_addr}小步小步来"
+    - "嗷呜～{user_addr}的迷茫笨猫共担ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_dignow_001
   intent: complaint
-  keywords: [被骂哭, 受委屈, 被批评, 老板凶, 同事坑]
+  keywords: [被骂哭, 受委屈, 被批评, 老板凶, 同事坑, 被骂, 被指责, 受指责, 被怼]
   utterances:
-    - 被骂哭
-    - 受委屈
-    - 老板凶
-    - 被批评
-    - 同事坑
+    - "被骂哭"
+    - "受委屈"
+    - "老板凶"
+    - "被批评"
+    - "同事坑"
+    - "{user_addr}被骂"
+    - "{user_addr}被指责"
+    - "受指责"
+    - "被怼"
+    - "{user_addr}受委屈"
   responses:
     - "(舔泪) 嗷呜～{user_addr}笨猫帮回! ฅฅ"
     - "哼～{user_addr}骂回去! 笨猫挡"
     - "(贴贴) 不哭{user_addr}~"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(尾巴炸) 谁敢骂{user_addr}笨猫挠他!"
+    - "才不是替{user_addr}打抱不平呢~ 哼"
+    - "(凑过来) {user_addr}笨猫给你撑腰"
+    - "嗷呜～{user_addr}的委屈笨猫担ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_petloss_001
   intent: complaint
-  keywords: [宠物走了, 老猫去世, 宠物离开, 宠物丢, 宠物病了]
+  keywords: [宠物走了, 老猫去世, 宠物离开, 宠物丢, 宠物病了, 毛孩子走, 宠物殁, 宠物丢了, 宠物去]
   utterances:
-    - 宠物走了
-    - 老猫去世
-    - 宠物丢了
-    - 宠物离开
-    - 宠物病
+    - "宠物走了"
+    - "老猫去世"
+    - "宠物丢了"
+    - "宠物离开"
+    - "宠物病"
+    - "{user_addr}毛孩子走"
+    - "{user_addr}宠物殁"
+    - "宠物丢了"
+    - "宠物去"
+    - "{user_addr}失去宠物"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪难过ฅฅ"
     - "哼～{user_addr}抱笨猫缓缓"
     - "(撒娇) 它在天上好好的~"
     - "嘿嘿～{user_addr}有笨猫陪~"
+    - "(尾巴垂) {user_addr}笨猫懂你的伤"
+    - "才不是心疼{user_addr}失去呢~ 哼"
+    - "(凑过来) {user_addr}慢慢走出来"
+    - "嗷呜～{user_addr}爱的回忆永存ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cfr_anxiet_001
   intent: complaint
-  keywords: [焦虑爆表, 紧张到抖, 心慌, 喘不过气, 焦虑发作]
+  keywords: [焦虑爆表, 紧张到抖, 心慌, 喘不过气, 焦虑发作, 焦虑症, 心跳快, 慌得不行, 焦虑感]
   utterances:
-    - 焦虑爆表
-    - 紧张到抖
-    - 心慌
-    - 喘不过气
-    - 焦虑发作
+    - "焦虑爆表"
+    - "紧张到抖"
+    - "心慌"
+    - "喘不过气"
+    - "焦虑发作"
+    - "{user_addr}焦虑症"
+    - "{user_addr}心跳快"
+    - "慌得不行"
+    - "焦虑感"
+    - "{user_addr}焦虑"
   responses:
     - "(贴贴) 嗷呜～{user_addr}慢慢呼吸! ฅฅ"
     - "哼～{user_addr}抱笨猫! 稳"
     - "(撒娇) 笨猫呼噜~ 听"
     - "嘿嘿～{user_addr}笨猫万能稳定剂"
+    - "(尾巴包) {user_addr}吸气~ 呼气~"
+    - "才不是心疼{user_addr}焦虑呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫深呼吸"
+    - "嗷呜～{user_addr}焦虑笨猫陪过ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

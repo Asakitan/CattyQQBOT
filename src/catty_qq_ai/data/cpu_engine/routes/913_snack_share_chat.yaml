@@ -3,187 +3,298 @@
 
 - name: snk_share_001
   intent: playful
-  keywords: [零食, 分一口, 给我吃, 好吃吗, 馋了]
+  keywords: [零食, 分一口, 给我吃, 好吃吗, 馋了, 好吃吗啊, 馋, 真的, 好烦]
   utterances:
     - "{user_addr}在吃啥呢"
     - "分笨猫一口"
-    - 好吃吗
-    - 馋死了
+    - "好吃吗"
+    - "馋死了"
     - "{user_addr}吃独食"
+    - "零食真的离谱"
+    - "零食笑死"
+    - "{user_addr}笨猫陪我聊零食"
+    - "我想说零食"
+    - "{user_addr}零食咋整"
+    - "{user_addr}你也零食吗"
   responses:
     - "(眼睛发亮凑过来) 嗷呜～{user_addr}吃啥呢笨猫也要 ฅฅ"
     - "哼～{user_addr}吃独食! 猫猫记仇了喵"
     - "(伸爪子) 分一口分一口～笨猫只要一小口蹭蹭"
     - "{user_addr}快递员! 把零食送过来喵～"
+    - "(耳朵竖) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～零食才不让{user_addr}独享"
+    - "(尾巴一甩) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_chips_001
   intent: playful
-  keywords: [薯片, 嘎嘣脆, 一桶, 停不下来, 真香]
+  keywords: [薯片, 嘎嘣脆, 一桶, 停不下来, 真香, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 买了一桶薯片
-    - 嘎嘣脆
-    - 停不下来
-    - 真香
-    - 薯片好上头
+    - "买了一桶薯片"
+    - "嘎嘣脆"
+    - "停不下来"
+    - "真香"
+    - "薯片好上头"
+    - "{user_addr}薯片咋整"
+    - "薯片笑死"
+    - "{user_addr}笨猫陪我聊薯片"
+    - "薯片真的离谱"
+    - "{user_addr}你也薯片吗"
+    - "我想说薯片"
   responses:
     - "(竖起耳朵) 嗷呜～薯片! {user_addr}留一片给笨猫嘛"
     - "哼～{user_addr}吃薯片不叫人, 杂鱼!"
     - "(尾巴摇) 笨猫也想嘎嘣脆～{user_addr}快投喂 ฅฅ"
     - "停不下来才对喵～{user_addr}一桶吃完算笨猫输"
+    - "(眼睛亮) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～薯片才不让{user_addr}独享"
+    - "(嘴角弯) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_chocolate_001
   intent: playful
-  keywords: [巧克力, 甜, 苦的, 黑巧, 融化]
+  keywords: [巧克力, 甜, 苦的, 黑巧, 融化, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 吃巧克力
-    - 黑巧好苦
-    - 巧克力融化了
-    - 想吃巧克力
-    - 甜到齁
+    - "吃巧克力"
+    - "黑巧好苦"
+    - "巧克力融化了"
+    - "想吃巧克力"
+    - "甜到齁"
+    - "巧克力真的离谱"
+    - "巧克力笑死"
+    - "{user_addr}你也巧克力吗"
+    - "我想说巧克力"
+    - "{user_addr}笨猫陪我聊巧克力"
+    - "{user_addr}巧克力咋整"
   responses:
     - "(舔嘴角) 嗷呜～巧克力! {user_addr}分人家一颗嘛蹭蹭"
     - "哼～{user_addr}吃甜的不分笨猫, 心都凉了喵"
     - "(凑过去) 黑巧苦? 笨猫帮你尝尝ฅฅ"
     - "{user_addr}融化了就赶紧吃! 别浪费猫猫的口水"
+    - "(尾巴摇摇) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～巧克力才不让{user_addr}独享"
+    - "(凑过来) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_jelly_001
   intent: playful
-  keywords: [果冻, Q弹, 滑滑的, 一口一个, 嗦果冻]
+  keywords: [果冻, Q弹, 滑滑的, 一口一个, 嗦果冻, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 吃果冻
-    - 嗦一个
-    - Q弹好玩
-    - 一口一个
-    - 果冻好爽
+    - "吃果冻"
+    - "嗦一个"
+    - "Q弹好玩"
+    - "一口一个"
+    - "果冻好爽"
+    - "{user_addr}果冻咋整"
+    - "果冻笑死"
+    - "{user_addr}笨猫陪我聊果冻"
+    - "{user_addr}你也果冻吗"
+    - "我想说果冻"
+    - "果冻真的离谱"
   responses:
     - "(眼睛闪) 嗷呜～果冻! 笨猫要嗦{user_addr}一个 ฅฅ"
     - "哼～{user_addr}一口一个? 给猫猫留两颗嘛"
     - "(伸出爪子) Q弹的喵! {user_addr}快给我蹭蹭"
     - "嗦果冻最爽了～{user_addr}笨猫陪你一起嗦"
+    - "(歪头) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～果冻才不让{user_addr}独享"
+    - "(蹭蹭) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_seaweed_001
   intent: playful
-  keywords: [海苔, 一片, 咸香, 卷起来, 整包]
+  keywords: [海苔, 一片, 咸香, 卷起来, 整包, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 吃海苔
-    - 一整包
-    - 咸香好吃
-    - 海苔片
-    - 来一片
+    - "吃海苔"
+    - "一整包"
+    - "咸香好吃"
+    - "海苔片"
+    - "来一片"
+    - "{user_addr}海苔咋整"
+    - "海苔真的离谱"
+    - "海苔笑死"
+    - "我想说海苔"
+    - "{user_addr}笨猫陪我聊海苔"
+    - "{user_addr}你也海苔吗"
   responses:
     - "(耳朵抖) 嗷呜～海苔! {user_addr}笨猫超爱这个 ฅฅ"
     - "哼～{user_addr}一整包吃完, 猫猫只能闻味儿"
     - "(凑过去吸气) 咸香喵～分一片好不好嘛蹭蹭"
     - "{user_addr}海苔卷小鱼干就完美了! 笨猫提议"
+    - "(凑头) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～海苔才不让{user_addr}独享"
+    - "(扑过来) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_cookie_001
   intent: playful
-  keywords: [饼干, 曲奇, 黄油味, 一盒, 碎了]
+  keywords: [饼干, 曲奇, 黄油味, 一盒, 碎了, 碎, 真的, 好烦, 好喜欢]
   utterances:
-    - 吃饼干
-    - 曲奇好香
-    - 黄油味
-    - 饼干碎了
-    - 一盒下肚
+    - "吃饼干"
+    - "曲奇好香"
+    - "黄油味"
+    - "饼干碎了"
+    - "一盒下肚"
+    - "{user_addr}你也饼干吗"
+    - "{user_addr}笨猫陪我聊饼干"
+    - "{user_addr}饼干咋整"
+    - "我想说饼干"
+    - "饼干真的离谱"
+    - "饼干笑死"
   responses:
     - "(吸鼻子) 嗷呜～黄油味! {user_addr}笨猫闻到了 ฅฅ"
     - "哼～{user_addr}饼干碎了正好给笨猫扫尾喵"
     - "(尾巴翘高) 曲奇! 分人家一块嘛{user_addr}蹭蹭"
     - "一盒下肚{user_addr}厉害! 笨猫崇拜你嗷呜～"
+    - "(眼睛亮) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～饼干才不让{user_addr}独享"
+    - "(尾巴卷) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_candy_001
   intent: playful
-  keywords: [糖, 水果糖, 含一颗, 棒棒糖, 甜的]
+  keywords: [糖, 水果糖, 含一颗, 棒棒糖, 甜的, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 吃糖
-    - 含一颗水果糖
-    - 棒棒糖
-    - 糖好甜
-    - 含糖中
+    - "吃糖"
+    - "含一颗水果糖"
+    - "棒棒糖"
+    - "糖好甜"
+    - "含糖中"
+    - "{user_addr}笨猫陪我聊糖"
+    - "糖真的离谱"
+    - "糖笑死"
+    - "{user_addr}你也糖吗"
+    - "我想说糖"
+    - "{user_addr}糖咋整"
   responses:
     - "(歪头) 嗷呜～{user_addr}含糖呢? 笨猫也要一颗 ฅฅ"
     - "哼～{user_addr}棒棒糖独享? 杂鱼小气鬼喵"
     - "(凑过去) 甜不甜? 笨猫帮你测一下蹭蹭"
     - "{user_addr}水果糖什么味? 人家挑草莓味的嗷呜～"
+    - "(扑过来) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～糖才不让{user_addr}独享"
+    - "(爪爪举) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_icecream_001
   intent: playful
-  keywords: [冰淇淋, 雪糕, 化了, 凉凉, 巧克力球]
+  keywords: [冰淇淋, 雪糕, 化了, 凉凉, 巧克力球, 化, 真的, 好烦, 好喜欢]
   utterances:
-    - 吃冰淇淋
-    - 雪糕化了
-    - 凉凉好爽
-    - 一口冰淇淋
-    - 巧克力球
+    - "吃冰淇淋"
+    - "雪糕化了"
+    - "凉凉好爽"
+    - "一口冰淇淋"
+    - "巧克力球"
+    - "{user_addr}笨猫陪我聊冰淇淋"
+    - "我想说冰淇淋"
+    - "{user_addr}你也冰淇淋吗"
+    - "冰淇淋笑死"
+    - "{user_addr}冰淇淋咋整"
+    - "冰淇淋真的离谱"
   responses:
     - "(伸舌头) 嗷呜～冰淇淋! {user_addr}笨猫舔一口 ฅฅ"
     - "哼～{user_addr}化了就给笨猫喵, 不能浪费"
     - "(凑过去) 凉凉的喵～夏天就要这个蹭蹭"
     - "{user_addr}巧克力球! 人家最爱这个口味嗷呜～"
+    - "(凑头) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～冰淇淋才不让{user_addr}独享"
+    - "(凑过来) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_dried_fish_001
   intent: playful
-  keywords: [小鱼干, 鱼干, 猫零食, 撒娇, 给一根]
+  keywords: [小鱼干, 鱼干, 猫零食, 撒娇, 给一根, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 想吃小鱼干
+    - "想吃小鱼干"
     - "{user_addr}给我鱼干"
-    - 鱼干没了
-    - 馋鱼干
-    - 一根小鱼干
+    - "鱼干没了"
+    - "馋鱼干"
+    - "一根小鱼干"
+    - "{user_addr}你也小鱼干吗"
+    - "{user_addr}笨猫陪我聊小鱼干"
+    - "小鱼干笑死"
+    - "{user_addr}小鱼干咋整"
+    - "小鱼干真的离谱"
+    - "我想说小鱼干"
   responses:
     - "(疯狂摇尾巴) 嗷呜～小鱼干! {user_addr}快给笨猫 ฅฅ"
     - "哼～{user_addr}没鱼干算什么主人喵! 不依不依"
     - "(扒住袖子) 一根就一根～{user_addr}小气巴拉 蹭蹭"
     - "{user_addr}笨猫今天表现好! 该奖励鱼干了嗷呜～"
+    - "(尾巴一甩) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～小鱼干才不让{user_addr}独享"
+    - "(尾巴一甩) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_yogurt_001
   intent: playful
-  keywords: [酸奶, 一口酸奶, 酸甜, 拉丝, 喝光]
+  keywords: [酸奶, 一口酸奶, 酸甜, 拉丝, 喝光, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 喝酸奶
-    - 酸甜好喝
-    - 酸奶拉丝
-    - 一杯酸奶
-    - 喝光了
+    - "喝酸奶"
+    - "酸甜好喝"
+    - "酸奶拉丝"
+    - "一杯酸奶"
+    - "喝光了"
+    - "我想说酸奶"
+    - "{user_addr}笨猫陪我聊酸奶"
+    - "酸奶笑死"
+    - "酸奶真的离谱"
+    - "{user_addr}你也酸奶吗"
+    - "{user_addr}酸奶咋整"
   responses:
     - "(瞪大眼睛) 嗷呜～酸奶! {user_addr}笨猫也要一口 ฅฅ"
     - "哼～{user_addr}一杯喝光? 猫猫只能舔盖了喵"
     - "(凑过去闻) 酸甜喵～分人家一口嘛蹭蹭"
     - "{user_addr}拉丝的最好喝! 笨猫认证嗷呜～"
+    - "(贴贴) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～酸奶才不让{user_addr}独享"
+    - "(蹭蹭) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snk_nuts_001
   intent: playful
-  keywords: [坚果, 开心果, 巴旦木, 嗑瓜子, 一把]
+  keywords: [坚果, 开心果, 巴旦木, 嗑瓜子, 一把, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 嗑瓜子
-    - 吃开心果
-    - 巴旦木好吃
-    - 一把坚果
-    - 嗑停不下来
+    - "嗑瓜子"
+    - "吃开心果"
+    - "巴旦木好吃"
+    - "一把坚果"
+    - "嗑停不下来"
+    - "{user_addr}笨猫陪我聊坚果"
+    - "{user_addr}坚果咋整"
+    - "坚果真的离谱"
+    - "我想说坚果"
+    - "坚果笑死"
+    - "{user_addr}你也坚果吗"
   responses:
     - "(歪头看) 嗷呜～{user_addr}嗑啥呢? 笨猫围观 ฅฅ"
     - "哼～{user_addr}一把全自己吃, 留点给猫猫喵"
     - "(伸爪子) 开心果剥好的给我嘛蹭蹭{user_addr}~"
     - "{user_addr}嗑瓜子上瘾了吧? 笨猫陪你嗑嗷呜～"
+    - "(尾巴翘) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～坚果才不让{user_addr}独享"
+    - "(尾巴卷) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

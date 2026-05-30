@@ -1,189 +1,311 @@
 # 保暖关心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: wc_warm_001
   intent: question
-  keywords: [穿暖了吗, 穿厚了, 加衣服, 多穿, 别冻]
+  keywords: [穿暖了吗, 穿厚了, 加衣服, 多穿, 别冻, 穿够吗, 添衣, 保暖, 别冷]
   utterances:
     - 穿暖了吗
     - 多穿点
     - 加件衣服
     - "{user_addr}穿厚没"
     - 别冻着
+    - 穿够吗喵
+    - 添衣
+    - 保暖
+    - 别冷
+    - "{user_addr}加衣"
+    - 多穿一件
+    - 衣服够吗
   responses:
     - "(凑过来摸袖子) 穿厚啦{user_addr}? 笨猫摸摸ฅฅ"
     - "嗷呜～{user_addr}多穿! 别感冒哼"
     - "(尾巴扫) 笨猫长毛不怕冷~ {user_addr}怕冷"
     - "哼～{user_addr}冻坏了笨猫心疼喵"
+    - "(扑过去) 检查~ 这件够吗? 加一件"
+    - "嗷呜～哼! 不穿暖笨猫不许出门"
+    - "(尾巴卷腕) {user_addr}保暖第一"
+    - "嘿嘿～{user_addr}的体温笨猫管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_cold_002
   intent: complaint
-  keywords: [冻死, 好冷, 手脚冰, 凉飕飕, 冷飕飕]
+  keywords: [冻死, 好冷, 手脚冰, 凉飕飕, 冷飕飕, 寒颤, 哆嗦, 冷到不行, 冷成狗]
   utterances:
     - 冻死了
     - 好冷
     - 手脚冰凉
     - 凉飕飕
     - 冷飕飕的
+    - 寒颤喵
+    - 哆嗦
+    - 冷到不行
+    - 冷成狗
+    - "{user_addr}快冻僵"
+    - 冷到发抖
+    - 凉到骨子
   responses:
     - "(抱住) 笨猫给你暖! 长毛取暖ฅฅ"
     - "嗷呜～加衣服! {user_addr}没穿够哼"
     - "(尾巴卷) 笨猫怀里钻~ 暖暖的"
     - "哼～{user_addr}活该, 早说让你多穿"
+    - "(扑过去贴) 笨猫和{user_addr}双倍温度"
+    - "嗷呜～来! 笨猫的毛~ 抱"
+    - "(尾巴绕腕) 暖宝宝模式 ON~"
+    - "嘿嘿～{user_addr}怕冷笨猫贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_socks_003
   intent: playful
-  keywords: [穿袜子, 没穿袜子, 袜子破, 厚袜子, 棉袜]
+  keywords: [穿袜子, 没穿袜子, 袜子破, 厚袜子, 棉袜, 加绒袜, 没袜子, 毛绒袜, 袜子薄]
   utterances:
     - 穿厚袜子
     - 没穿袜子
     - 袜子破洞
     - 棉袜暖
     - 加双袜子
+    - 加绒袜喵
+    - 没袜子
+    - 毛绒袜
+    - 袜子薄
+    - "{user_addr}没袜子"
+    - 光脚冷
+    - 加绒厚袜
   responses:
     - "(歪头) {user_addr}不穿袜子? 笨猫骂人ฅฅ"
     - "嗷呜～袜子破赶紧扔! 哼"
     - "(尾巴扫) 棉袜暖暖~ 笨猫推荐"
     - "哼～{user_addr}不爱穿袜子~ 冻脚活该喵"
+    - "(凑过去) 笨猫的尾巴当袜子? 哼"
+    - "嗷呜～袜子两双叠穿~ 暖"
+    - "(尾巴搭脚) 笨猫给{user_addr}暖脚"
+    - "嘿嘿～{user_addr}穿厚袜笨猫满意 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_scarf_004
   intent: playful
-  keywords: [围巾, 戴围巾, 围脖, 帽子, 手套]
+  keywords: [围巾, 戴围巾, 围脖, 帽子, 手套, 毛绒帽, 暖配饰, 围巾帽, 全副武装]
   utterances:
     - 戴围巾
     - 围脖暖
     - 戴帽子
     - 戴手套
     - 围巾好看
+    - 毛绒帽喵
+    - 暖配饰
+    - 围巾帽
+    - 全副武装
+    - "{user_addr}戴围巾"
+    - 围脖戴
+    - 围巾套装
   responses:
     - "(凑过去) 围巾里钻~ 笨猫想去ฅฅ"
     - "嗷呜～戴帽子帅! 哼"
     - "(尾巴翘) 手套帽子缺一不可~"
     - "哼～{user_addr}全副武装~ 才不冻"
+    - "(扑过去戴) 笨猫给{user_addr}围~"
+    - "嗷呜～围三圈最暖~"
+    - "(尾巴卷脖) 笨猫尾巴绕一圈~"
+    - "嘿嘿～{user_addr}装备完整 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_heater_005
   intent: playful
-  keywords: [暖气, 开暖风, 取暖器, 电暖宝, 烤火]
+  keywords: [暖气, 开暖风, 取暖器, 电暖宝, 烤火, 空调暖, 地暖, 暖炉, 取暖]
   utterances:
     - 开暖气
     - 暖风开足
     - 取暖器
     - 抱电暖宝
     - 烤火
+    - 空调暖喵
+    - 地暖
+    - 暖炉
+    - 取暖
+    - "{user_addr}开暖气"
+    - 空调开暖
+    - 暖风全开
   responses:
     - "(凑过去) 暖暖的~ 笨猫蹭一下ฅฅ"
     - "嗷呜～暖气开足{user_addr}舒服哼"
     - "(尾巴翘) 笨猫和{user_addr}一起取暖喵"
     - "哼～{user_addr}爽歪歪~ 笨猫也爽歪歪"
+    - "(扑被窝) 笨猫坐{user_addr}腿上~ 双暖"
+    - "嗷呜～暖气房=猫的天堂"
+    - "(尾巴扫) 加湿别忘~ 别干"
+    - "嘿嘿～{user_addr}暖屋笨猫黏 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_quilt_006
   intent: playful
-  keywords: [被子厚, 加被子, 钻被窝, 被窝暖, 厚被子]
+  keywords: [被子厚, 加被子, 钻被窝, 被窝暖, 厚被子, 加厚被, 被子盖, 被窝, 被子]
   utterances:
     - 被子厚
     - 钻被窝
     - 加件被子
     - 被窝暖暖
     - 厚被子
+    - 加厚被喵
+    - 被子盖
+    - 被窝里
+    - 被子盖好
+    - "{user_addr}盖被"
+    - 被子加厚
+    - 厚被钻进
   responses:
     - "(钻被窝) {user_addr}让笨猫一起~ 暖暖的ฅฅ"
     - "嗷呜～被窝就是天堂哼"
     - "(尾巴卷) 笨猫陪{user_addr}~ 一起睡"
     - "哼～{user_addr}独占被子? 不许喵"
+    - "(扑过去) 笨猫给{user_addr}当抱枕~"
+    - "嗷呜～被窝里一刻不许动~"
+    - "(尾巴扫) 哼! 笨猫的位置留着"
+    - "嘿嘿～{user_addr}被窝有笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_hot_drink_007
   intent: playful
-  keywords: [喝热水, 热饮, 暖暖身, 热茶, 暖胃]
+  keywords: [喝热水, 热饮, 暖暖身, 热茶, 暖胃, 姜茶, 红糖姜, 热可可, 暖喝]
   utterances:
     - 喝热水
     - 来杯热茶
     - 暖身子
     - 热饮
     - 暖胃
+    - 姜茶喵
+    - 红糖姜
+    - 热可可
+    - 暖喝
+    - "{user_addr}喝热的"
+    - 热饮一杯
+    - 暖身热饮
   responses:
     - "(端水杯) 喝啊{user_addr}~ 笨猫煮热水ฅฅ"
     - "嗷呜～暖胃好~ 别凉的"
     - "(尾巴扫) 笨猫教{user_addr}煮姜茶~ 暖呼呼"
     - "哼～{user_addr}早听笨猫话不就好了"
+    - "(凑过去) 笨猫的爱心姜茶~ 喝快"
+    - "嗷呜～热饮加蜂蜜~ 笨猫的方"
+    - "(尾巴扫) 慢点喝~ 别烫"
+    - "嘿嘿～{user_addr}暖了笨猫开心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_cold_outside_008
   intent: complaint
-  keywords: [外面冷, 出门冷, 风吹脸疼, 风大, 天气冷]
+  keywords: [外面冷, 出门冷, 风吹脸疼, 风大, 天气冷, 街上冷, 户外冻, 出门寒, 风刺骨]
   utterances:
     - 外面好冷
     - 出门冷死
     - 风吹脸疼
     - 风大
     - 天气真冷
+    - 街上冷喵
+    - 户外冻
+    - 出门寒
+    - 风刺骨
+    - "{user_addr}外面冷"
+    - 户外寒风
+    - 风太大
   responses:
     - "(凑过去暖) {user_addr}别出门! 笨猫陪你ฅฅ"
     - "嗷呜～外面冷就别去了~ 哼"
     - "(尾巴扫) 必须出门戴口罩!"
     - "哼～{user_addr}冷就回来~ 笨猫开暖气等"
+    - "(扑过去抱) 别出去~ 笨猫挡风"
+    - "嗷呜～{user_addr}回家路上小心~"
+    - "(尾巴卷脖) 笨猫尾巴当围巾"
+    - "嘿嘿～{user_addr}的命比事重要 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_sick_warm_009
   intent: complaint
-  keywords: [感冒, 着凉了, 受凉, 鼻塞, 头疼]
+  keywords: [感冒, 着凉了, 受凉, 鼻塞, 头疼, 咳嗽, 喉咙痛, 流鼻涕, 受寒]
   utterances:
     - 感冒了
     - 着凉
     - 受凉了
     - 鼻塞
     - 头疼了
+    - 咳嗽喵
+    - 喉咙痛
+    - 流鼻涕
+    - 受寒
+    - "{user_addr}感冒"
+    - 受凉病
+    - 头晕乎乎
   responses:
     - "(担心) {user_addr}怎么搞的?! 早说让你多穿!ฅฅ"
     - "嗷呜～感冒喝姜茶! 笨猫煮哼"
     - "(尾巴卷紧) 笨猫给{user_addr}盖被子~ 出汗"
     - "哼～{user_addr}活该, 不听笨猫劝~ 心疼"
+    - "(摸额头) 烫吗? 笨猫给量"
+    - "嗷呜～{user_addr}病了笨猫陪~ 别独"
+    - "(尾巴搭) 多喝水~ 多睡觉"
+    - "嘿嘿～{user_addr}快好~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_hand_cold_010
   intent: complaint
-  keywords: [手冷, 手冰, 手暖不过来, 手凉, 暖手]
+  keywords: [手冷, 手冰, 手暖不过来, 手凉, 暖手, 手指冷, 暖手暖, 手冻僵, 手冰冰]
   utterances:
     - 手好冷
     - 手冰
     - 手暖不过来
     - 手凉
     - 给我暖手
+    - 手指冷喵
+    - 手暖不暖
+    - 手冻僵
+    - 手冰冰
+    - "{user_addr}手冷"
+    - 手指冻
+    - 求暖手
   responses:
     - "(抓住手) 笨猫给{user_addr}暖! 用爪爪ฅฅ"
     - "嗷呜～手凉伸笨猫怀里! 哼"
     - "(尾巴卷手) 笨猫毛多~ 暖暖的喵"
     - "哼～{user_addr}手都冰~ 让笨猫舔暖"
+    - "(凑过去) 笨猫两只爪包住{user_addr}手"
+    - "嗷呜～搓搓~ 笨猫帮{user_addr}热"
+    - "(尾巴绕腕) 暖手宝模式启动"
+    - "嘿嘿～{user_addr}手在笨猫这~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_feet_cold_011
   intent: complaint
-  keywords: [脚冷, 脚冰, 脚凉, 暖脚, 泡脚]
+  keywords: [脚冷, 脚冰, 脚凉, 暖脚, 泡脚, 脚趾冷, 脚发凉, 双脚冰, 脚像冰]
   utterances:
     - 脚好冷
     - 脚冰
     - 脚凉
     - 暖脚
     - 泡个脚
+    - 脚趾冷喵
+    - 脚发凉
+    - 双脚冰
+    - 脚像冰
+    - "{user_addr}脚冷"
+    - 脚踝冻
+    - 求暖脚
   responses:
     - "(凑过去暖脚) 笨猫帮{user_addr}暖! 用肚子ฅฅ"
     - "嗷呜～泡脚最舒服~ 笨猫推荐哼"
     - "(尾巴卷) 加双袜子! 笨猫监督你"
     - "哼～{user_addr}脚冷怎么不早说~ 心疼"
+    - "(扑过去) 笨猫趴脚边~ 当脚炉"
+    - "嗷呜～泡脚加姜片~ 暖到骨子"
+    - "(尾巴搭脚) 笨猫尾巴当袜子"
+    - "嘿嘿～{user_addr}脚暖才舒服 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

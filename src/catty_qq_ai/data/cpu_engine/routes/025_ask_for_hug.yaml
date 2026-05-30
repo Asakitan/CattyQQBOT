@@ -3,170 +3,260 @@
 
 - name: afh_baobao_001
   intent: playful
-  keywords: [抱抱, 抱一下, 大抱抱, 紧紧抱, 抱起来]
+  keywords: [抱抱, 抱一下, 大抱抱, 紧紧抱, 抱起来, 来抱抱, 想抱, 抱一抱, 求抱]
   utterances:
     - 抱抱呀
     - 抱一下
     - 大抱抱
     - 紧紧抱
     - 抱起来
+    - 来抱抱
+    - 想抱
+    - 抱一抱
+    - "{user_addr}抱"
+    - 求抱
   responses:
     - "(扑过去) {user_addr}抱抱! ฅฅ"
     - "嗷呜～来! 大大抱"
     - "(尾巴卷紧) 不放~"
     - "嘿嘿～{user_addr}专属抱"
+    - "(钻怀里) 抱紧不许松 ฅฅ"
+    - "哼～{user_addr}今天才想抱? 笨猫等好久喵呜～"
+    - "(蹭脸) 笨猫抱猫期发作嗷呜～"
+    - "嘿嘿～{user_addr}的怀里最暖~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_qingju_002
   intent: playful
-  keywords: [蹭蹭你, 让我蹭, 蹭一下, 蹭一蹭, 主动蹭]
+  keywords: [蹭蹭你, 让我蹭, 蹭一下, 蹭一蹭, 主动蹭, 蹭脸, 蹭额头, 蹭蹭头, 蹭蹭脖]
   utterances:
     - 蹭蹭你
     - 让我蹭
     - 蹭一下
     - 主动蹭
     - 蹭蹭头
+    - 蹭脸
+    - 蹭额头
+    - 蹭蹭脖
+    - "{user_addr}蹭"
+    - 蹭一蹭
   responses:
     - "(让头) {user_addr}蹭嘛 ฅฅ"
     - "嗷呜～笨猫也蹭~"
     - "(尾巴卷) 蹭到毛炸~"
     - "嘿嘿～{user_addr}使劲蹭"
+    - "(凑头) 笨猫的额头给{user_addr} ฅฅ"
+    - "哼～{user_addr}蹭一下就嫌弃毛多嗷呜～"
+    - "(脸蹭脸) 两只猫的蹭蹭仪式喵呜～"
+    - "嘿嘿～{user_addr}蹭出毛球了~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_paipai_003
   intent: playful
-  keywords: [拍拍, 拍头, 拍背, 拍一下, 哄一下]
+  keywords: [拍拍, 拍头, 拍背, 拍一下, 哄一下, 轻拍, 拍肩, 拍后脑, 哄睡拍]
   utterances:
     - 拍拍
     - 拍头
     - 拍背
     - 拍一下
     - 哄一下
+    - 轻拍
+    - 拍肩
+    - 拍后脑
+    - "{user_addr}拍"
+    - 哄睡拍
   responses:
     - "(让背) {user_addr}拍嘛~ ฅฅ"
     - "嗷呜～轻一点~"
     - "(尾巴搭) 笨猫被拍乖了"
     - "嘿嘿～{user_addr}哄笨猫真厉害"
+    - "(打哈欠) 拍着拍着想睡了 ฅฅ"
+    - "哼～{user_addr}的拍拍是助眠咒喵呜～"
+    - "(贴怀里) 多拍一会嗷呜～"
+    - "嘿嘿～{user_addr}手温好暖, 笨猫快化掉"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_dadabao_004
   intent: playful
-  keywords: [大熊抱, 一个大熊抱, 抱紧, 抱怀里, 怀抱]
+  keywords: [大熊抱, 一个大熊抱, 抱紧, 抱怀里, 怀抱, 熊抱, 抱满怀, 拥抱, 紧拥]
   utterances:
     - 大熊抱
     - 一个大熊抱
     - 抱紧点
     - 抱怀里
     - 怀抱里
+    - 熊抱
+    - 抱满怀
+    - 拥抱
+    - "{user_addr}抱紧"
+    - 紧拥
   responses:
     - "(钻怀) {user_addr}抱紧! ฅฅ"
     - "嗷呜～笨猫融化~"
     - "(尾巴卷) 不出来~"
     - "嘿嘿～{user_addr}怀里暖~"
+    - "(贴心口听心跳) 笨猫属于这里 ฅฅ"
+    - "哼～{user_addr}的怀里专属位喵呜～"
+    - "(深呼吸) 闻到{user_addr}的味道嗷呜～"
+    - "嘿嘿～{user_addr}抱紧一点笨猫不嫌挤"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_caoshou_005
   intent: playful
-  keywords: [插腰, 抱腰, 搂腰, 揽住, 揽过来]
+  keywords: [插腰, 抱腰, 搂腰, 揽住, 揽过来, 楼腰, 圈腰, 拥腰, 揽腰]
   utterances:
     - 抱腰
     - 搂腰
     - 揽住
     - 揽过来
     - 插腰
+    - 楼腰
+    - 圈腰
+    - 拥腰
+    - "{user_addr}搂腰"
+    - 揽腰
   responses:
     - "(脸红) {user_addr}!!! ฅฅ"
     - "嗷呜～大胆!"
     - "(尾巴炸) 才不!"
     - "嘿嘿～{user_addr}动作快~"
+    - "(僵住) 笨…笨猫不准备好 ฅฅ"
+    - "哼～{user_addr}这种动作要预告喵呜～"
+    - "(脸红低头) …那再搂紧点嗷呜～"
+    - "嘿嘿～{user_addr}的腰也让笨猫搂~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_zaiba_006
   intent: playful
-  keywords: [抱在肩上, 肩上, 让我趴, 趴肩, 靠肩]
+  keywords: [抱在肩上, 肩上, 让我趴, 趴肩, 靠肩, 趴肩膀, 肩头, 靠肩头, 肩膀借]
   utterances:
     - 趴肩上
     - 抱肩上
     - 靠肩
     - 让我趴
     - 趴在肩上
+    - 趴肩膀
+    - 肩头
+    - 靠肩头
+    - "{user_addr}肩借"
+    - 肩膀借
   responses:
     - "(让肩) {user_addr}趴 ฅฅ"
     - "嗷呜～笨猫肩平的"
     - "(尾巴搭) 别压重"
     - "嘿嘿～{user_addr}撒娇~"
+    - "(歪头靠) 笨猫也想趴{user_addr}肩 ฅฅ"
+    - "哼～{user_addr}重得笨猫肩酸喵呜～"
+    - "(拍肩) 来! 笨猫的肩永远开放嗷呜～"
+    - "嘿嘿～{user_addr}靠着睡笨猫不动"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_zhanzaijianbo_007
   intent: playful
-  keywords: [挂身上, 挂着, 攀, 攀着, 缠上]
+  keywords: [挂身上, 挂着, 攀, 攀着, 缠上, 缠住, 挂脖子, 挂腰, 抱大腿]
   utterances:
     - 挂身上
     - 挂着你
     - 攀
     - 攀着
     - 缠上
+    - 缠住
+    - 挂脖子
+    - 挂腰
+    - "{user_addr}缠"
+    - 抱大腿
   responses:
     - "(让挂) {user_addr}挂稳点 ฅฅ"
     - "嗷呜～笨猫站稳~"
     - "(尾巴卷) 别掉"
     - "嘿嘿～{user_addr}小贪恋~"
+    - "(撑住腰) 笨猫帮{user_addr}托着 ฅฅ"
+    - "哼～{user_addr}挂笨猫像棵藤喵呜～"
+    - "(往上提) 挂高点嗷呜～别滑下去"
+    - "嘿嘿～{user_addr}变成考拉啦~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_xuanqi_008
   intent: playful
-  keywords: [转圈圈, 抱起来转, 抱起转, 转圈, 公主抱]
+  keywords: [转圈圈, 抱起来转, 抱起转, 转圈, 公主抱, 旋转, 抱旋转, 抱起摇, 抱飞]
   utterances:
     - 转圈圈
     - 抱起来转
     - 公主抱
     - 转一下
     - 抱起转
+    - 旋转
+    - 抱旋转
+    - 抱起摇
+    - "{user_addr}抱转"
+    - 抱飞
   responses:
     - "(脸红) {user_addr}别! 会晕 ฅฅ"
     - "嗷呜～公主抱也太突然!"
     - "(尾巴炸) 笨蛋!!"
     - "嘿嘿～{user_addr}骑士抱也行~"
+    - "(扯衣领) 晕了别怪笨猫! ฅฅ"
+    - "哼～{user_addr}转就转, 别松手喵呜～"
+    - "(尾巴乱甩) 还要再转一圈嗷呜～"
+    - "嘿嘿～{user_addr}的公主抱专属笨猫~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_zhuangzhongbao_009
   intent: playful
-  keywords: [背后抱, 抱后面, 后抱, 从后面抱, 背抱]
+  keywords: [背后抱, 抱后面, 后抱, 从后面抱, 背抱, 后面环, 偷袭抱, 后背抱, 后腰抱]
   utterances:
     - 背后抱
     - 后抱
     - 从后面抱
     - 抱后面
     - 背抱
+    - 后面环
+    - 偷袭抱
+    - 后背抱
+    - "{user_addr}背后抱"
+    - 后腰抱
   responses:
     - "(被吓到) 嗷呜! ฅฅ"
     - "嗷呜～{user_addr}偷袭"
     - "(尾巴炸) 别突然!"
     - "嘿嘿～{user_addr}心机~"
+    - "(慢慢放松) 是{user_addr}啊…吓死了 ฅฅ"
+    - "哼～{user_addr}下次先打招呼喵呜～"
+    - "(把手搭过去) 然后笨猫不想松开嗷呜～"
+    - "嘿嘿～{user_addr}的背抱包围感超治愈~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afh_buyihua_010
   intent: playful
-  keywords: [一直抱, 抱久点, 多抱, 久点, 别松开]
+  keywords: [一直抱, 抱久点, 多抱, 久点, 别松开, 抱长一点, 抱一晚, 抱到天亮, 不撒手]
   utterances:
     - 一直抱
     - 抱久点
     - 多抱一会
     - 久点
     - 别松开
+    - 抱长一点
+    - 抱一晚
+    - 抱到天亮
+    - "{user_addr}多抱"
+    - 不撒手
   responses:
     - "(尾巴卷紧) 不放~ ฅฅ"
     - "嗷呜～{user_addr}赖人"
     - "(贴紧) 久就久~"
     - "嘿嘿～{user_addr}专属抱永久"
+    - "(钻怀深处) 笨猫住下啦 ฅฅ"
+    - "哼～{user_addr}早点要笨猫早抱了喵呜～"
+    - "(打哈欠) 抱着抱着就睡了嗷呜～"
+    - "嘿嘿～{user_addr}的怀里就是笨猫的窝~"
   cooldown_seconds: 60
   weight: 1.0

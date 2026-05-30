@@ -3,187 +3,308 @@
 
 - name: ss_memorize_001
   intent: complaint
-  keywords: [背书背不下, 背单词, 记不住, 单词忘, 背诵难]
+  keywords: [背书背不下, 背单词, 记不住, 单词忘, 背诵难, 背了又忘, 记忆力差, 默写不出, 课文记不住, 学习]
   utterances:
     - 背书背不下
     - 背单词
     - 记不住
     - 单词忘
     - 背诵难
+    - 背了又忘
+    - 记忆力差
+    - 默写不出
+    - 课文记不住
+    - "{user_addr}背书烦"
+    - 在学习
+    - 复习中
   responses:
     - "(贴贴) 嗷呜～{user_addr}慢慢来ฅฅ"
     - "哼{user_addr}方法不对喵"
     - "(尾巴卷) 笨猫帮你背~ 听写"
     - "{user_addr}加油嗷呜~ 笨猫陪"
+    - "(凑过来) 笨猫陪{user_addr}默写! 错一个揪耳朵喵"
+    - "哼背书要早晨记! {user_addr}方法笨猫教ฅฅ"
+    - "(歪头) 不会的笨猫帮你查~ 嗷呜"
+    - "{user_addr}背不下来抱猫猫充电! 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_exam_anxiety_002
   intent: complaint
-  keywords: [考试焦虑, 考前紧张, 考差怎么办, 考试压力, 紧张失眠]
+  keywords: [考试焦虑, 考前紧张, 考差怎么办, 考试压力, 紧张失眠, 期末快到, 期中考试, 高考冲刺, 考研, 学习]
   utterances:
     - 考试焦虑
     - 考前紧张
     - 考差怎么办
     - 考试压力
     - 紧张失眠
+    - 期末快到
+    - 期中考试
+    - 高考冲刺
+    - 考研中
+    - 面试准备
+    - 在学习
+    - 复习中
   responses:
     - "(贴贴) 嗷呜～{user_addr}深呼吸ฅฅ"
     - "哼{user_addr}努力了就行喵"
     - "(尾巴卷) 笨猫加持~"
     - "{user_addr}考完抱抱嗷呜"
+    - "(蹭手) 笨猫的爪子是幸运符! {user_addr}带着喵"
+    - "哼{user_addr}别紧张! 笨猫念咒祝你过ฅฅ"
+    - "(凑近) 紧张的话深呼吸三次~ 嗷呜"
+    - "{user_addr}努力过就够~ 考差了笨猫安慰哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_night_review_003
   intent: complaint
-  keywords: [熬夜复习, 通宵学习, 临时抱佛脚, 复习到凌晨, 拼了]
+  keywords: [熬夜复习, 通宵学习, 临时抱佛脚, 复习到凌晨, 拼了, 学到凌晨, 复习熬夜, 通宵刷题, 复习中, 学习]
   utterances:
     - 熬夜复习
     - 通宵学习
     - 临时抱佛脚
     - 复习到凌晨
     - 拼了
+    - 学到凌晨
+    - 复习熬夜
+    - 通宵刷题
+    - 复习冲刺
+    - 临考突击
+    - 在学习
+    - 复习中
   responses:
     - "(贴贴) 嗷呜～{user_addr}注意身体ฅฅ"
     - "哼{user_addr}早干嘛喵"
     - "(尾巴卷) 笨猫陪到天亮~"
     - "{user_addr}咖啡来一杯嗷呜"
+    - "(递水) 喝口水! {user_addr}别太拼喵"
+    - "哼{user_addr}通宵伤身! 笨猫担心ฅฅ"
+    - "(打哈欠) 嗷呜～笨猫陪你熬~ 不过别太晚"
+    - "{user_addr}背完就睡! 笨猫等着哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_homework_004
   intent: complaint
-  keywords: [作业多, 写作业, 作业写不完, 论文截止, 报告堆]
+  keywords: [作业多, 写作业, 作业写不完, 论文截止, 报告堆, 上班, 搬砖, 加班, 项目忙, 学习]
   utterances:
     - 作业多
     - 写作业
     - 作业写不完
     - 论文截止
     - 报告堆
+    - 上班
+    - 搬砖
+    - 加班
+    - 下班
+    - 项目忙
+    - 在学习
+    - 复习中
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}加油ฅฅ"
     - "哼{user_addr}拖延症喵"
     - "(尾巴卷) 笨猫陪写~ 监督"
     - "{user_addr}写完抱抱嗷呜"
+    - "(蹲桌边) 笨猫坐桌边监督~ 一个字都不能少喵"
+    - "哼{user_addr}早写完早休息! 别拖ฅฅ"
+    - "(凑近) 写完笨猫给你按摩肩膀~ 嗷呜"
+    - "{user_addr}作业难的话笨猫帮你想~ 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_test_done_005
   intent: playful
-  keywords: [考完了, 考完试, 考试结束, 解放了, 终于考完]
+  keywords: [考完了, 考完试, 考试结束, 解放了, 终于考完, 交卷了, 考完啦, 期末结束, 考试完了, 学习]
   utterances:
     - 考完了
     - 考完试
     - 考试结束
     - 解放了
     - 终于考完
+    - 交卷啦
+    - 期末结束
+    - 考试完了
+    - 考试搞定
+    - 终于解放
+    - 在学习
+    - 复习中
   responses:
     - "(扑) 嗷呜～{user_addr}恭喜ฅฅ"
     - "哼{user_addr}放松喵"
     - "(尾巴翘) 庆祝! 撒花!"
     - "{user_addr}抱抱嗷呜~ 终于"
+    - "(扑膝盖) {user_addr}解放啦! 笨猫陪你玩喵"
+    - "哼{user_addr}总算考完~ 笨猫等好久ฅฅ"
+    - "(尾巴疯摇) 撒花撒花! {user_addr}走起嗷呜"
+    - "{user_addr}庆祝吃啥? 笨猫推荐火锅哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_focus_lost_006
   intent: complaint
-  keywords: [集中不了, 走神, 学不进, 分心, 注意力差]
+  keywords: [集中不了, 走神, 学不进, 分心, 注意力差, 学不进去, 心思乱, 看不进, 走神严重, 学习]
   utterances:
     - 集中不了
     - 走神
     - 学不进
     - 分心
     - 注意力差
+    - 学不进去
+    - 心思乱
+    - 看不进书
+    - 走神严重
+    - 神游天外
+    - 在学习
+    - 复习中
   responses:
     - "(贴贴) 嗷呜～{user_addr}休息会ฅฅ"
     - "哼{user_addr}想笨猫喵"
     - "(尾巴卷) 喝水! 走走"
     - "{user_addr}笨猫陪你专注嗷呜"
+    - "(蹲面前) 笨猫监督! {user_addr}不许走神喵"
+    - "哼分心是大脑求救信号~ 休息ฅฅ"
+    - "(凑近) 番茄钟25分钟! 笨猫陪计时嗷呜"
+    - "{user_addr}走神就摸笨猫! 才能回神哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_get_score_007
   intent: playful
-  keywords: [出分了, 看分, 考多少, 成绩出, 分数线]
+  keywords: [出分了, 看分, 考多少, 成绩出, 分数线, 查分了, 分数出了, 看成绩, 多少分, 学习]
   utterances:
     - 出分了
     - 看分了
     - 考多少
     - 成绩出
     - 分数线
+    - 查分了
+    - 分数出了
+    - 看成绩
+    - 多少分啊
+    - 分数公布
+    - 在学习
+    - 复习中
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}多少ฅฅ"
     - "哼{user_addr}讲讲喵"
     - "(尾巴翘) 高分笨猫为你骄傲!"
     - "{user_addr}低分也没事嗷呜"
+    - "(凑屏幕) 笨猫看! {user_addr}考得怎样喵"
+    - "哼分数不代表一切! 但{user_addr}加油ฅฅ"
+    - "(蹭脸) 高分笨猫亲一口! 低分也抱抱嗷呜"
+    - "{user_addr}讲讲~ 笨猫想知道哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_class_skip_008
   intent: playful
-  keywords: [翘课, 逃课, 不想上课, 课无聊, 跑了]
+  keywords: [翘课, 逃课, 不想上课, 课无聊, 跑了, 翘了, 翘掉, 跷课, 不去上课, 学习]
   utterances:
     - 翘课
     - 逃课
     - 不想上课
     - 课无聊
     - 跑了
+    - 翘了一节
+    - 翘掉吧
+    - 跷课中
+    - 不去上课
+    - 翘课溜了
+    - 在学习
+    - 复习中
   responses:
     - "(歪头) 嗷呜～{user_addr}陪笨猫ฅฅ"
     - "哼{user_addr}坏学生喵"
     - "(尾巴翘) 笨猫帮你掩护~"
     - "{user_addr}别被抓嗷呜"
+    - "哼{user_addr}还是不要翘太多~ 担心你ฅฅ"
+    - "(尾巴绕) 翘课时间笨猫陪嗷呜"
+    - "{user_addr}别习惯翘~ 偶尔可以哼"
+    - "(凑近) 嗷呜～{user_addr}加油! 笨猫陪学ฅฅ"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: ss_classmate_009
   intent: playful
-  keywords: [同学, 同桌, 学霸, 学渣, 班级]
+  keywords: [同学, 同桌, 学霸, 学渣, 班级, 同窗, 同班, 班里, 班长, 学习]
   utterances:
     - 同学
     - 同桌
     - 学霸
     - 学渣
     - 班级
+    - 同窗故事
+    - 同班同学
+    - 班里故事
+    - 班长怎样
+    - "{user_addr}同学"
+    - 在学习
+    - 复习中
   responses:
     - "(歪头) 嗷呜～{user_addr}讲讲ฅฅ"
     - "哼{user_addr}吐槽喵"
     - "(尾巴卷) 笨猫听~"
     - "{user_addr}校园故事嗷呜"
+    - "(蹲坐) 同桌怎样啊? 笨猫好奇喵"
+    - "哼学霸也有烦恼! 不要羡慕ฅฅ"
+    - "(凑近) 班里有趣的事讲给笨猫~ 嗷呜"
+    - "{user_addr}的同学好不好玩? 哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: ss_teacher_010
   intent: playful
-  keywords: [老师严, 老师好, 老师骂, 老师讲, 班主任]
+  keywords: [老师严, 老师好, 老师骂, 老师讲, 班主任, 老师布置, 老师批, 老师上课, 老师又, 学习]
   utterances:
     - 老师严
     - 老师好
     - 老师骂
     - 老师讲
     - 班主任
+    - 老师布置
+    - 老师批了
+    - 老师上课
+    - 老师又抽人
+    - "{user_addr}的老师"
+    - 在学习
+    - 复习中
   responses:
     - "(歪头) 嗷呜～{user_addr}讲ฅฅ"
     - "哼{user_addr}怕老师喵"
     - "(凑近) 笨猫陪你抗"
     - "{user_addr}加油嗷呜"
+    - "(尾巴翘) 老师严也是为{user_addr}好~ 听话喵"
+    - "哼{user_addr}被批了? 笨猫安慰一下ฅฅ"
+    - "(贴贴) 别怕老师! 笨猫罩你嗷呜"
+    - "{user_addr}讲讲老师笑话~ 笨猫想听哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: ss_graduate_011
   intent: playful
-  keywords: [毕业, 毕业季, 答辩, 毕业典礼, 散伙]
+  keywords: [毕业, 毕业季, 答辩, 毕业典礼, 散伙, 毕业了, 答辩过了, 学位, 毕业证, 学习]
   utterances:
     - 毕业了
     - 毕业季
     - 答辩
     - 毕业典礼
     - 散伙
+    - 答辩过了
+    - 学位证
+    - 毕业证
+    - 离开校园
+    - 散伙饭
+    - 在学习
+    - 复习中
   responses:
     - "(尾巴卷) 嗷呜～{user_addr}恭喜ฅฅ"
     - "哼{user_addr}长大了喵"
     - "(凑近) 笨猫陪你新阶段~"
     - "{user_addr}抱抱嗷呜"
+    - "(蹭脸) 毕业不分离! 笨猫永远跟着{user_addr}喵"
+    - "哼{user_addr}毕业了感慨吗~ 笨猫懂ฅฅ"
+    - "(尾巴竖) 答辩通过! 撒花嗷呜"
+    - "{user_addr}进入新阶段~ 笨猫陪你哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0

@@ -3,204 +3,336 @@
 
 - name: bk_nba_star_001
   intent: question
-  keywords: [推荐 NBA 球星, 推荐 LeBron, 推荐 Curry, 推荐詹姆斯, 笨猫 NBA 球星]
+  keywords: [推荐 NBA 球星, 推荐 LeBron, 推荐 Curry, 推荐詹姆斯, 笨猫 NBA 球星, 詹姆斯 KD, NBA 当红球星, 三分之神, 历史 GOAT, 篮球巨星]
   utterances:
     - 推荐 NBA 球星
     - 推荐 LeBron
     - 推荐 Curry
     - 推荐詹姆斯
     - 笨猫 NBA 球星
+    - "{user_addr}NBA 谁最强"
+    - 詹姆斯 vs 库里
+    - "{user_addr}帮我看球星"
+    - 杜兰特 KD
+    - NBA GOAT 排行
+    - 当红球星推荐
+    - 历史 NBA 巨星
   responses:
     - "嗷呜～{user_addr}LeBron James - 全能皇帝ฅฅ"
-    - "(尾巴翘) Stephen Curry - 三分之神"
+    - "(尾巴翘起) Stephen Curry - 三分之神"
     - "{user_addr}Durant / Jokic / 字母哥"
     - "(挺胸) 猫猫推荐: LeBron 历史地位!"
+    - "(歪头) 嗷呜~ LeBron + Jordan 是 GOAT 争议嗷呜"
+    - "嗷呜～{user_addr}Curry 改变三分时代ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}看 NBA~ 喵呜"
+    - "哼! NBA 球星各有所长, {user_addr}选最爱嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_cba_player_001
   intent: question
-  keywords: [推荐 CBA 球员, 推荐易建联, 推荐姚明, 推荐郭艾伦, 笨猫 CBA 球员]
+  keywords: [推荐 CBA 球员, 推荐易建联, 推荐姚明, 推荐郭艾伦, 笨猫 CBA 球员, 周琦, 赵继伟, CBA 球星, 中国篮球, 阿联广东]
   utterances:
     - 推荐 CBA 球员
     - 推荐易建联
     - 推荐姚明
     - 推荐郭艾伦
     - 笨猫 CBA 球员
+    - "{user_addr}CBA 谁最强"
+    - 姚明 vs 阿联
+    - "{user_addr}帮我看 CBA"
+    - 中国篮球巨星
+    - 周琦 vs 赵继伟
+    - CBA 当红球员
+    - 郭艾伦 CBA
   responses:
     - "嗷呜～{user_addr}易建联 - CBA 传奇ฅฅ"
-    - "(尾巴翘) 姚明 - 中国骄傲"
+    - "(尾巴翘起) 姚明 - 中国骄傲"
     - "{user_addr}郭艾伦 / 周琦 / 赵继伟"
     - "(挺胸) 人家推荐: 阿联广东王朝!"
+    - "(歪头) 嗷呜~ 姚明是 NBA 中国第一人嗷呜"
+    - "嗷呜～{user_addr}郭艾伦速度型后卫ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}看 CBA~ 喵呜"
+    - "哼! 中国篮球需要更多年轻人, {user_addr}支持嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_shoes_001
   intent: question
-  keywords: [推荐篮球鞋, 推荐 Nike 球鞋, 推荐 Adidas 球鞋, 推荐实战鞋, 笨猫篮球鞋]
+  keywords: [推荐篮球鞋, 推荐 Nike 球鞋, 推荐 Adidas 球鞋, 推荐实战鞋, 笨猫篮球鞋, KD 球鞋, Kyrie 球鞋, Harden 战靴, 韦德之道, 国产篮球鞋]
   utterances:
     - 推荐篮球鞋
     - 推荐 Nike 球鞋
     - 推荐 Adidas 球鞋
     - 推荐实战鞋
     - 笨猫篮球鞋
+    - "{user_addr}篮球鞋哪家好"
+    - KD vs Kyrie
+    - "{user_addr}帮我选球鞋"
+    - Harden 战靴
+    - 韦德之道李宁
+    - 安踏 KT 球鞋
+    - 实战篮球鞋推荐
   responses:
     - "嗷呜～{user_addr}Nike KD / Kyrie 实战王ฅฅ"
-    - "(尾巴翘) Adidas Harden / Dame"
+    - "(尾巴翘起) Adidas Harden / Dame"
     - "{user_addr}李宁韦德之道 / 安踏 KT"
     - "(挺胸) 猫猫推荐: Kyrie 低帮灵活!"
+    - "(歪头) 嗷呜~ 韦德之道国产骄傲嗷呜"
+    - "嗷呜～{user_addr}Kyrie 后卫专属ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}挑实战鞋~ 喵呜"
+    - "哼! 篮球鞋脚感最重要, {user_addr}试穿嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_aj_001
   intent: question
-  keywords: [推荐 AJ, 推荐 Air Jordan, 推荐 AJ 1, 推荐复古球鞋, 笨猫 AJ]
+  keywords: [推荐 AJ, 推荐 Air Jordan, 推荐 AJ 1, 推荐复古球鞋, 笨猫 AJ, AJ 4 黑红, AJ 11 大魔王, AJ 13 黑猫, 芝加哥配色, 复古球鞋]
   utterances:
     - 推荐 AJ
     - 推荐 Air Jordan
     - 推荐 AJ 1
     - 推荐复古球鞋
     - 笨猫 AJ
+    - "{user_addr}AJ 1 怎么样"
+    - 芝加哥配色推荐
+    - "{user_addr}帮我选 AJ"
+    - AJ 4 vs AJ 11
+    - 复古球鞋潮流
+    - AJ 13 黑猫
+    - 入门 AJ 选哪款
   responses:
     - "嗷呜～{user_addr}AJ 1 - 永恒经典ฅฅ"
-    - "(尾巴翘) AJ 4 / AJ 11 / AJ 13"
+    - "(尾巴翘起) AJ 4 / AJ 11 / AJ 13"
     - "{user_addr}复古配色芝加哥 / 黑红"
     - "(挺胸) 笨猫推荐: AJ 1 High 收藏!"
+    - "(歪头) 嗷呜~ AJ 1 是潮流不死神话嗷呜"
+    - "嗷呜～{user_addr}AJ 11 大魔王经典ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}穿 AJ~ 喵呜"
+    - "哼! AJ 是文化符号, {user_addr}入手嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_ball_001
   intent: question
-  keywords: [推荐篮球, 推荐 Spalding, 推荐斯伯丁, 推荐 Wilson 球, 笨猫篮球]
+  keywords: [推荐篮球, 推荐 Spalding, 推荐斯伯丁, 推荐 Wilson 球, 笨猫篮球, NBA 用球, FIBA 用球, 摩腾 Molten, Spalding GG7X, 训练用球]
   utterances:
     - 推荐篮球
     - 推荐 Spalding
     - 推荐斯伯丁
     - 推荐 Wilson 球
     - 笨猫篮球
+    - "{user_addr}篮球哪家好"
+    - 斯伯丁 vs Wilson
+    - "{user_addr}帮我选球"
+    - FIBA 摩腾 vs 斯伯丁
+    - 入门篮球
+    - 室内外篮球
+    - 训练篮球
   responses:
     - "嗷呜～{user_addr}Spalding 斯伯丁 - NBA 官方ฅฅ"
-    - "(尾巴翘) Wilson - 新 NBA 用球"
+    - "(尾巴翘起) Wilson - 新 NBA 用球"
     - "{user_addr}Molten / 摩腾 - FIBA 官方"
     - "(挺胸) 人家推荐: Spalding GG7X 室内外!"
+    - "(歪头) 嗷呜~ Wilson 取代斯伯丁是 NBA 用球嗷呜"
+    - "嗷呜～{user_addr}Molten FIBA 国际赛事ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}打球~ 喵呜"
+    - "哼! 篮球手感最重要, {user_addr}试拍嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_team_001
   intent: question
-  keywords: [推荐 NBA 球队, 推荐湖人, 推荐勇士, 推荐凯尔特人, 笨猫 NBA 球队]
+  keywords: [推荐 NBA 球队, 推荐湖人, 推荐勇士, 推荐凯尔特人, 笨猫 NBA 球队, 紫金军团, 绿衫军, 公牛王朝, 热火三巨头, 马刺 GDP]
   utterances:
     - 推荐 NBA 球队
     - 推荐湖人
     - 推荐勇士
     - 推荐凯尔特人
     - 笨猫 NBA 球队
+    - "{user_addr}NBA 球队哪家强"
+    - 湖人 vs 凯尔特人
+    - "{user_addr}帮我选球队"
+    - 勇士王朝
+    - 公牛 6 冠
+    - 热火三巨头
+    - 马刺 GDP
   responses:
     - "嗷呜～{user_addr}Lakers 湖人 - 紫金王朝ฅฅ"
-    - "(尾巴翘) Warriors 勇士 / Celtics 绿军"
+    - "(尾巴翘起) Warriors 勇士 / Celtics 绿军"
     - "{user_addr}热火 / 马刺 / 公牛"
     - "(挺胸) 猫猫推荐: 湖人 17 冠历史!"
+    - "(歪头) 嗷呜~ 湖人凯尔特人 17 冠并列嗷呜"
+    - "嗷呜～{user_addr}勇士 4 年 3 冠近代王朝ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}支持湖人~ 喵呜"
+    - "哼! NBA 球队各有传统, {user_addr}选最爱嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_tutorial_001
   intent: question
-  keywords: [推荐篮球教学, 推荐运球教学, 推荐投篮教学, 推荐篮球视频, 笨猫篮球教学]
+  keywords: [推荐篮球教学, 推荐运球教学, 推荐投篮教学, 推荐篮球视频, 笨猫篮球教学, ILoveBasketballTV, 实战教学, B 站教练, Pro Training, 教练 Roy]
   utterances:
     - 推荐篮球教学
     - 推荐运球教学
     - 推荐投篮教学
     - 推荐篮球视频
     - 笨猫篮球教学
+    - "{user_addr}篮球教学视频"
+    - 投篮教学推荐
+    - "{user_addr}帮我找教程"
+    - YT 篮球教学
+    - B 站老飞人
+    - 运球教学专家
+    - 教练 Roy 推荐
   responses:
     - "嗷呜～{user_addr}ILoveBasketballTV - YT 王ฅฅ"
-    - "(尾巴翘) B 站 老 飞人 / 实战教学"
+    - "(尾巴翘起) B 站 老 飞人 / 实战教学"
     - "{user_addr}Pro Training / 教练 Roy"
     - "(挺胸) 笨猫推荐: 先练运球基础!"
+    - "(歪头) 嗷呜~ 学篮球先扎实基本功嗷呜"
+    - "嗷呜～{user_addr}投篮姿势是基础ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}看教学~ 喵呜"
+    - "哼! 篮球需要反复练, {user_addr}加油嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_street_001
   intent: question
-  keywords: [推荐街球场, 推荐路边球场, 推荐街球, 推荐野球场, 笨猫街球]
+  keywords: [推荐街球场, 推荐路边球场, 推荐街球, 推荐野球场, 笨猫街球, Rucker Park, Venice Beach, 北京东单, 上海洛克, 街头篮球]
   utterances:
     - 推荐街球场
     - 推荐路边球场
     - 推荐街球
     - 推荐野球场
     - 笨猫街球
+    - "{user_addr}街球场推荐"
+    - Rucker Park 纽约
+    - "{user_addr}帮我找球场"
+    - Venice Beach 街球
+    - 北京街球场
+    - 上海洛克公园
+    - 街头篮球文化
   responses:
     - "嗷呜～{user_addr}Rucker Park 纽约圣地ฅฅ"
-    - "(尾巴翘) Venice Beach / 洛杉矶"
+    - "(尾巴翘起) Venice Beach / 洛杉矶"
     - "{user_addr}北京东单 / 上海洛克"
     - "(挺胸) 人家推荐: 找小区球场练!"
+    - "(歪头) 嗷呜~ 街球文化是篮球根源嗷呜"
+    - "嗷呜～{user_addr}Rucker Park 篮球圣地ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}逛街球场~ 喵呜"
+    - "哼! 街球真正考验实战, {user_addr}下场嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_training_001
   intent: question
-  keywords: [推荐篮球训练, 推荐训练计划, 推荐弹跳训练, 推荐力量训练, 笨猫篮球训练]
+  keywords: [推荐篮球训练, 推荐训练计划, 推荐弹跳训练, 推荐力量训练, 笨猫篮球训练, 投篮训练, 体能训练, 深蹲弹跳, 训练计划, 篮球基本功]
   utterances:
     - 推荐篮球训练
     - 推荐训练计划
     - 推荐弹跳训练
     - 推荐力量训练
     - 笨猫篮球训练
+    - "{user_addr}篮球训练计划"
+    - 弹跳如何训练
+    - "{user_addr}帮我做计划"
+    - 篮球基本功
+    - 投篮 200 个
+    - 体能训练推荐
+    - 力量训练篮球
   responses:
     - "嗷呜～{user_addr}运球 + 投篮 + 体能ฅฅ"
-    - "(尾巴翘) 弹跳: 深蹲 + 跳绳"
+    - "(尾巴翘起) 弹跳: 深蹲 + 跳绳"
     - "{user_addr}投篮 200 个 / 天"
     - "(挺胸) 猫猫推荐: 基本功最重要!"
+    - "(歪头) 嗷呜~ 力量训练辅助篮球嗷呜"
+    - "嗷呜～{user_addr}每天 30 分钟投篮ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}训练~ 喵呜"
+    - "哼! 训练是日积月累, {user_addr}坚持嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_draft_001
   intent: question
-  keywords: [推荐 NBA 选秀, 推荐状元秀, 推荐新秀, 推荐选秀大会, 笨猫选秀]
+  keywords: [推荐 NBA 选秀, 推荐状元秀, 推荐新秀, 推荐选秀大会, 笨猫选秀, 2003 黄金一代, Wembanyama, Holmgren 新秀, 选秀大年, 状元郎]
   utterances:
     - 推荐 NBA 选秀
     - 推荐状元秀
     - 推荐新秀
     - 推荐选秀大会
     - 笨猫选秀
+    - "{user_addr}NBA 选秀"
+    - 2003 黄金一代
+    - "{user_addr}帮我看新秀"
+    - Wembanyama 状元
+    - Holmgren 新秀
+    - 1996 选秀大年
+    - 历届状元郎
   responses:
     - "嗷呜～{user_addr}2003 黄金一代 - LeBronฅฅ"
-    - "(尾巴翘) 1984 / 1996 / 2009 大年"
+    - "(尾巴翘起) 1984 / 1996 / 2009 大年"
     - "{user_addr}Wembanyama / Holmgren 新秀"
     - "(挺胸) 笨猫推荐: 关注乐透区!"
+    - "(歪头) 嗷呜~ 选秀大会改变球队命运嗷呜"
+    - "嗷呜～{user_addr}Wembanyama 是未来 GOATฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}追新秀~ 喵呜"
+    - "哼! 选秀是新血液, {user_addr}关注嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_finals_001
   intent: question
-  keywords: [推荐总决赛, 推荐 NBA 总决赛, 推荐经典比赛, 推荐 G7, 笨猫总决赛]
+  keywords: [推荐总决赛, 推荐 NBA 总决赛, 推荐经典比赛, 推荐 G7, 笨猫总决赛, 2016 骑勇 G7, 2013 马刺热火, Last Shot, 经典总决赛, NBA 巅峰对决]
   utterances:
     - 推荐总决赛
     - 推荐 NBA 总决赛
     - 推荐经典比赛
     - 推荐 G7
     - 笨猫总决赛
+    - "{user_addr}经典总决赛"
+    - 2016 骑勇 G7
+    - "{user_addr}帮我找比赛"
+    - 2013 马刺热火
+    - 公牛爵士 Last Shot
+    - 巅峰对决推荐
+    - NBA 经典 G7
   responses:
     - "嗷呜～{user_addr}2016 骑勇 G7 - 经典ฅฅ"
-    - "(尾巴翘) 2013 马刺热火 G6"
+    - "(尾巴翘起) 2013 马刺热火 G6"
     - "{user_addr}1998 公牛爵士 / Last Shot"
     - "(挺胸) 人家推荐: 16 年逆转 1-3!"
+    - "(歪头) 嗷呜~ 2016 是历史最大逆转嗷呜"
+    - "嗷呜～{user_addr}1998 公牛是乔丹谢幕ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}重温经典~ 喵呜"
+    - "哼! NBA 经典看不腻, {user_addr}必看嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bk_documentary_001
   intent: question
-  keywords: [推荐篮球纪录片, 推荐 Last Dance, 推荐 NBA 纪录片, 推荐乔丹纪录片, 笨猫篮球纪录片]
+  keywords: [推荐篮球纪录片, 推荐 Last Dance, 推荐 NBA 纪录片, 推荐乔丹纪录片, 笨猫篮球纪录片, Kobe Muse, Redeem Team, More Than a Game, LeBron 纪录片, 篮球电影]
   utterances:
     - 推荐篮球纪录片
     - 推荐 Last Dance
     - 推荐 NBA 纪录片
     - 推荐乔丹纪录片
     - 笨猫篮球纪录片
+    - "{user_addr}篮球纪录片"
+    - Last Dance 怎么样
+    - "{user_addr}帮我看片"
+    - Kobe Muse 推荐
+    - Redeem Team 梦八
+    - LeBron 纪录片
+    - 篮球电影推荐
   responses:
     - "嗷呜～{user_addr}The Last Dance - 乔丹ฅฅ"
-    - "(尾巴翘) Kobe Muse / Redeem Team"
+    - "(尾巴翘起) Kobe Muse / Redeem Team"
     - "{user_addr}More Than a Game - LeBron"
     - "(挺胸) 猫猫推荐: Last Dance 必看!"
+    - "(歪头) 嗷呜~ Last Dance 是 NBA 纪录片巅峰嗷呜"
+    - "嗷呜～{user_addr}Kobe Muse 深度刻画ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}看纪录片~ 喵呜"
+    - "哼! 篮球纪录片催泪, {user_addr}准备纸巾嗷呜!"
   cooldown_seconds: 60
   weight: 1.0

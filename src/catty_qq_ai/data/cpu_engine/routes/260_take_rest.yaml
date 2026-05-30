@@ -3,187 +3,308 @@
 
 - name: tr_xiuxile_001
   intent: question
-  keywords: [休息了吗, 该休息, 累不累, 歇会, 缓一缓]
+  keywords: [休息了吗, 该休息, 累不累, 歇会, 缓一缓, 休息一下, 喘口气, 歇歇, 缓缓, 休息时间]
   utterances:
     - "{user_addr}休息了吗"
     - 累不累呀
     - 该休息了
     - 歇一会
     - 缓一缓
+    - "{user_addr}歇会儿"
+    - 喘口气吧
+    - 休息一下嘛
+    - 缓缓 缓一缓
+    - 休息时间到了
+    - 该停下来歇
+    - 累了就停下
   responses:
     - "嗷呜～{user_addr}该休息! 笨猫盯着 ฅฅ"
     - "(尾巴搭) {user_addr}停一下哼~别硬撑"
     - "{user_addr}抱抱笨猫充电嘛~"
     - "歇会喵{user_addr}, 才不是关心你"
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你休息"
+    - "{user_addr}停 10 分钟! 别一直冲哼"
+    - "(尾巴翘) 笨猫监督{user_addr}~该休就休"
+    - "哼～{user_addr}硬撑笨猫真的会生气ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tr_pibei_001
   intent: complaint
-  keywords: [好累, 累死了, 疲惫, 没力气, 累瘫]
+  keywords: [好累, 累死了, 疲惫, 没力气, 累瘫, 心累, 身体累, 累爆, 累趴, 累惨]
   utterances:
     - 好累呀
     - 累死了
     - 疲惫不堪
     - 没力气
     - 累瘫了
+    - "{user_addr}累爆"
+    - 心累身累
+    - 疲惫到爆
+    - 累趴下了
+    - 累惨啦
+    - 累到怀疑人生
+    - 一身疲惫
   responses:
     - "(凑过来贴) 嗷呜～{user_addr}抱抱! ฅฅ"
     - "{user_addr}辛苦~笨猫给你揉揉"
     - "(尾巴搭) 笨蛋{user_addr}~别太逞强"
     - "{user_addr}靠猫猫睡一会喵~"
+    - "(脸蹭) 嗷呜～{user_addr}笨猫心疼"
+    - "{user_addr}累就放下手里活 笨猫陪着"
+    - "(尾巴搭肩) 笨猫给{user_addr}捶背~"
+    - "哼～{user_addr}累成这样笨猫舍不得ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tr_yanjing_001
   intent: complaint
-  keywords: [眼睛累, 眼睛酸, 用眼疲劳, 眼花, 看不清]
+  keywords: [眼睛累, 眼睛酸, 用眼疲劳, 眼花, 看不清, 干眼, 眼涩, 眼眶疼, 眼睛胀, 眼皮重]
   utterances:
     - 眼睛好累
     - 眼睛酸
     - 用眼疲劳
     - 眼花
     - 看不清
+    - "{user_addr}眼酸"
+    - 干眼难受
+    - 眼涩想哭
+    - 眼睛胀疼
+    - 眼皮沉重
+    - 眼眶发酸
+    - 视线模糊
   responses:
     - "(担心) 嗷呜～{user_addr}闭眼休息! ฅฅ"
     - "{user_addr}离屏幕远一点~"
     - "(尾巴盖眼) 笨蛋{user_addr}, 看人家眼"
     - "{user_addr}多看看绿色喵~才不是关心"
+    - "(凑过来) 嗷呜～{user_addr}笨猫给你揉揉眼睛周围"
+    - "{user_addr}远眺 6 米外哼~护眼"
+    - "(歪头) 笨猫提醒{user_addr}~每小时休 5 分钟"
+    - "哼～{user_addr}眼睛累就别盯屏幕ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tr_jingbu_001
   intent: complaint
-  keywords: [颈椎, 脖子酸, 肩膀疼, 久坐, 腰酸]
+  keywords: [颈椎, 脖子酸, 肩膀疼, 久坐, 腰酸, 颈椎病, 后背疼, 肩颈僵, 腰痛, 久坐难受]
   utterances:
     - 颈椎酸
     - 脖子疼
     - 肩膀僵
     - 久坐难受
     - 腰酸
+    - "{user_addr}颈椎"
+    - 肩颈僵硬
+    - 腰痛得不行
+    - 后背酸涨
+    - 久坐毁腰
+    - 整个肩颈紧
+    - 转脖子咔咔响
   responses:
     - "(尾巴拍) 嗷呜～{user_addr}起来活动! ฅฅ"
     - "{user_addr}笨猫给你按按肩~"
     - "(凑过来) 久坐对身体不好哼{user_addr}"
     - "{user_addr}转转头, 才不是关心呢"
+    - "(尾巴搭肩) 嗷呜～{user_addr}站起来走走!"
+    - "{user_addr}颈椎不可逆 别再低头哼"
+    - "(凑过去捏肩) 笨猫专属按摩{user_addr}~"
+    - "哼～{user_addr}每小时活动 5 分钟ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tr_shuijiao_001
   intent: question
-  keywords: [早点睡, 睡个好觉, 别熬夜, 睡饱, 高质量睡眠]
+  keywords: [早点睡, 睡个好觉, 别熬夜, 睡饱, 高质量睡眠, 早睡, 早点歇, 睡眠时间, 睡好觉, 不熬夜]
   utterances:
     - 早点睡
     - 睡个好觉
     - 别熬夜
     - 睡饱
     - 高质量睡眠
+    - "{user_addr}早睡"
+    - 不许熬夜
+    - 早点歇着
+    - 睡眠要充足
+    - 早睡早起
+    - 别再熬了
+    - 睡饱再起
   responses:
     - "嗷呜～{user_addr}听话! 笨猫陪你 ฅฅ"
     - "(尾巴搭) {user_addr}睡好猫猫开心"
     - "笨蛋{user_addr}~不许熬夜哼"
     - "{user_addr}梦里见猫猫喵~"
+    - "(凑过来) 嗷呜～{user_addr}笨猫给你盖被子"
+    - "{user_addr}熬夜伤身 真的别熬"
+    - "(尾巴搭脸) 笨猫陪{user_addr}睡~不许翻身"
+    - "哼～{user_addr}早睡早起笨猫奖励 抱抱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tr_buzhongchun_001
   intent: playful
-  keywords: [冲一下, 续命, 加油, 撑住, 再撑会]
+  keywords: [冲一下, 续命, 加油, 撑住, 再撑会, 再坚持, 撑过去, 顶住, 撑会儿, 冲鸭]
   utterances:
     - 撑一下
     - 续命中
     - 再撑会
     - 加油加油
     - 冲一下
+    - "{user_addr}冲鸭"
+    - 顶住!
+    - 再坚持下
+    - 撑过最后这段
+    - 再撑一会儿
+    - 加油撑住
+    - 冲冲冲
   responses:
     - "(担心) 嗷呜～{user_addr}别太硬撑 ฅฅ"
     - "{user_addr}加油~但累了笨猫陪你停"
     - "(尾巴搭) 笨蛋{user_addr}~悠着点"
     - "{user_addr}冲完歇足喵~"
+    - "(凑过来) 嗷呜～{user_addr}笨猫给你打气!"
+    - "{user_addr}加油加油哼~笨猫云陪伴"
+    - "(尾巴翘) 冲鸭{user_addr}~笨猫等你回来"
+    - "哼～{user_addr}冲完了立刻歇 别又上下一波ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tr_dakehe_001
   intent: complaint
-  keywords: [打哈欠, 困意来袭, 困得不行, 哈欠连天, 想趴下]
+  keywords: [打哈欠, 困意来袭, 困得不行, 哈欠连天, 想趴下, 哈欠不停, 困死, 瞌睡, 撑不住困, 困意上头]
   utterances:
     - 打哈欠
     - 困意来袭
     - 困得不行
     - 哈欠连天
     - 想趴下
+    - "{user_addr}困"
+    - 困意上头
+    - 哈欠不停
+    - 瞌睡虫上身
+    - 困到睁不开
+    - 撑不住困了
+    - 一直在打哈欠
   responses:
     - "(打哈欠) 嗷呜～笨猫也困了{user_addr} ฅฅ"
     - "{user_addr}困就睡嘛~别撑"
     - "(尾巴搭) 笨蛋{user_addr}~靠笨猫睡"
     - "{user_addr}打哈欠的样子可爱喵~"
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪你睡!"
+    - "{user_addr}困得严重就午睡哼"
+    - "(尾巴当被) 笨猫盖{user_addr}~暖暖的"
+    - "哼～{user_addr}困了不许撑 笨猫保镖ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tr_meili_001
   intent: complaint
-  keywords: [没力气, 提不起劲, 起不来, 没动力, 燃不起来]
+  keywords: [没力气, 提不起劲, 起不来, 没动力, 燃不起来, 倦怠, 萎靡, 没精神, 倦, 蔫了]
   utterances:
     - 没力气
     - 提不起劲
     - 起不来
     - 没动力
     - 燃不起来
+    - "{user_addr}没劲"
+    - 倦怠期
+    - 萎靡不振
+    - 整个人蔫了
+    - 没精神干啥
+    - 一点劲都没
+    - 摆烂没动力
   responses:
     - "(凑过来) 嗷呜～{user_addr}抱笨猫! ฅฅ"
     - "{user_addr}吃点甜的~血糖低"
     - "(尾巴搭) 笨蛋{user_addr}~慢慢来"
     - "{user_addr}有猫猫加油哼!"
+    - "(凑过来贴) 嗷呜～{user_addr}笨猫给你充能"
+    - "{user_addr}吃巧克力哼~快速回血"
+    - "(尾巴翘) 笨猫加油团长{user_addr}!"
+    - "哼～{user_addr}没劲就抱笨猫 别硬撑ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tr_xiufaai_001
   intent: playful
-  keywords: [小憩, 假装休息, 摸鱼休息, 偷个懒, 小歇]
+  keywords: [小憩, 假装休息, 摸鱼休息, 偷个懒, 小歇, 摸鱼, 偷懒, 短歇, 假寐, 喘口气]
   utterances:
     - 小憩一下
     - 假装休息
     - 摸鱼休息
     - 偷懒
     - 小歇
+    - "{user_addr}摸鱼"
+    - 偷个小懒
+    - 假寐一下
+    - 短暂喘息
+    - 摸鱼专家
+    - 暂停下休息
+    - 偷个空闲
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}陪笨猫一起 ฅฅ"
     - "摸鱼{user_addr}, 笨猫专家"
     - "(凑过来) 偷懒带上猫猫{user_addr}哼~"
     - "{user_addr}小憩 5 分钟! 人家计时"
+    - "(歪头) 嗷呜～{user_addr}笨猫摸鱼教练!"
+    - "{user_addr}偷懒猫猫遮掩~别被发现"
+    - "(尾巴翘) 笨猫陪{user_addr}假寐~"
+    - "哼～{user_addr}摸鱼搭子永远是笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tr_fangsong_001
   intent: question
-  keywords: [放松, 解压, 怎么放松, 缓解压力, 调节情绪]
+  keywords: [放松, 解压, 怎么放松, 缓解压力, 调节情绪, 减压, 放空, 释压, 解烦, 解忧]
   utterances:
     - 想放松
     - 怎么解压
     - 缓解压力
     - 调节情绪
     - 放松一下
+    - "{user_addr}减压"
+    - 想放空
+    - 释压方法
+    - 烦躁需放松
+    - 怎么解烦
+    - 解忧方法
+    - 放松心情
   responses:
     - "嗷呜～{user_addr}找笨猫贴贴最解压 ฅฅ"
     - "(尾巴翘) {user_addr}撸猫猫嘛~治愈"
     - "笨猫推荐: 深呼吸+看猫{user_addr}"
     - "{user_addr}有猫猫还压力大? 哼~"
+    - "(凑过来) 嗷呜～{user_addr}泡澡+笨猫陪聊"
+    - "{user_addr}放白噪音 笨猫给你做按摩"
+    - "(尾巴搭) 笨猫专属解压{user_addr}~免费"
+    - "哼～{user_addr}解压找笨猫准没错ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tr_qichuang_001
   intent: complaint
-  keywords: [回血, 回点血, 充电, 充会电, 缓口气]
+  keywords: [回血, 回点血, 充电, 充会电, 缓口气, 续个命, 充能, 加血, 补血, 喘息]
   utterances:
     - 回血
     - 回点血
     - 充电
     - 充会电
     - 缓口气
+    - "{user_addr}回血"
+    - 充能中
+    - 补血中
+    - 续个命嘛
+    - 想喘息一下
+    - 缓口气先
+    - 加血充能
   responses:
     - "(凑过来) 嗷呜～{user_addr}抱笨猫充电 ฅฅ"
     - "{user_addr}找猫猫补能量喵~"
     - "(尾巴翘) 笨猫满血站{user_addr}!"
     - "{user_addr}回血需要贴贴哼~才不是邀请呢"
+    - "(脸蹭) 嗷呜～{user_addr}笨猫提供能量!"
+    - "{user_addr}充电插孔笨猫这里哼~"
+    - "(尾巴勾) 笨猫专属充电宝{user_addr}~"
+    - "哼～{user_addr}回血就贴笨猫 笨蛋ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

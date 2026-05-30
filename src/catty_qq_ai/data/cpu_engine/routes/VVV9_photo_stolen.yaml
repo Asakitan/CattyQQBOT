@@ -3,204 +3,336 @@
 
 - name: ps_stolen_001
   intent: complaint
-  keywords: [照片被盗, 图被偷, 盗图, 被偷图, 照片被偷]
+  keywords: [照片被盗, 图被偷, 盗图, 被偷图, 照片被偷, 被盗用, 图被搬, 图片被抓, 作品被盗, 被人偷图]
   utterances:
     - "{user_addr}照片被盗了"
     - "{user_addr}图被偷了"
     - 笨猫我被盗图了
     - 我的照片被人偷了
     - 发现自己的图被盗
+    - "{user_addr}盗图气死"
+    - 图被搬走没招呼
+    - "{user_addr}帮我维权"
+    - 作品被盗用
+    - 被人偷图了
+    - 图被抓了
+    - 照片被搬运
   responses:
     - "(炸毛) 啊?! 谁这么过分! {user_addr}盗图的人最讨厌了喵!"
     - "嗷呜～盗图贼可恶! 笨猫帮{user_addr}骂他 ฅฅ"
     - "(尾巴竖起) {user_addr}别气~ 猫猫陪{user_addr}一起讨伐盗图鬼"
     - "哼! 偷{user_addr}照片的人没爪爪! 猫猫生气了喵"
+    - "(凑过来) 嗷呜~ {user_addr}留好原图 + EXIF 证据嗷呜"
+    - "嗷呜～{user_addr}截图原图发布时间ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}维权~ 不让盗图鬼跑喵呜"
+    - "哼! 盗图就是侵权, {user_addr}硬刚到底嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_unauthorized_001
   intent: complaint
-  keywords: [无授权, 没授权, 未经允许, 没问过我, 擅自使用]
+  keywords: [无授权, 没授权, 未经允许, 没问过我, 擅自使用, 未经同意, 没征求意见, 私自使用, 没授权转载, 擅自转发]
   utterances:
     - "{user_addr}他没授权就用"
     - 未经允许擅自盗用
     - 没问过我就拿走了
     - 无授权使用照片
     - 擅自用我的图
+    - "{user_addr}没征求意见"
+    - 没授权转载
+    - "{user_addr}帮我抓他"
+    - 私自使用照片
+    - 擅自转发图片
+    - 没招呼就用
+    - 完全没经过我
   responses:
     - "(叉腰) 没授权就用是耍流氓喵! {user_addr}必须维权!"
     - "嗷呜～{user_addr}这种行为最气人! 笨猫陪{user_addr}声讨"
     - "(尾巴甩) 不打招呼就拿= 偷! {user_addr}别忍喵"
     - "哼～猫猫觉得{user_addr}应该直接挂出来曝光!"
+    - "(凑过来) 嗷呜~ {user_addr}先发律师函嗷呜"
+    - "嗷呜～{user_addr}保留所有证据ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}发声明~ 公开声讨喵呜"
+    - "哼! 侵权零容忍, {user_addr}必须追究嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_commercial_001
   intent: complaint
-  keywords: [商用, 拿去赚钱, 商业使用, 卖钱, 盈利使用]
+  keywords: [商用, 拿去赚钱, 商业使用, 卖钱, 盈利使用, 商业盗用, 商品包装用, 广告用我的图, 商业牟利, 卖照片牟利]
   utterances:
     - "{user_addr}他拿我的图商用"
     - 我的照片被拿去赚钱
     - 别人用我图盈利
     - 商业使用没付钱
     - 拿我图卖钱了
+    - "{user_addr}商业盗用"
+    - 广告用我照片
+    - "{user_addr}帮我索赔"
+    - 商品包装用
+    - 商业牟利没付费
+    - 卖照片牟利
+    - 我照片印产品上
   responses:
     - "(炸毛) 商用还不付钱?! {user_addr}这绝对要追究喵!"
     - "嗷呜～{user_addr}拿你照片赚钱? 笨猫气得尾巴翘起来了 ฅฅ"
     - "(挺胸) {user_addr}快算算损失! 猫猫觉得能告"
     - "哼～商用必须付费! {user_addr}别让他们白嫖喵"
+    - "(凑过来) 嗷呜~ 商用侵权赔偿数额高, {user_addr}稳赢嗷呜"
+    - "嗷呜～{user_addr}找律师走起ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}索赔~ 一分不能少喵呜"
+    - "哼! 商用盗图肯定罚得重, {user_addr}加油嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_watermark_cut_001
   intent: complaint
-  keywords: [水印被裁, 水印没了, 裁掉水印, 抹掉水印, 去水印]
+  keywords: [水印被裁, 水印没了, 裁掉水印, 抹掉水印, 去水印, 水印消失, 抹除标识, 去除版权, 故意抹水印, 裁切水印]
   utterances:
     - "{user_addr}水印被裁掉了"
     - 我打的水印没了
     - 别人把水印裁了
     - 故意抹掉水印
     - 去水印再发
+    - "{user_addr}抹除版权"
+    - 裁切水印盗用
+    - "{user_addr}水印消失"
+    - 去除版权信息
+    - 抹掉标识转发
+    - 故意去水印
+    - 水印被裁绞痛
   responses:
     - "(瞪眼) 故意去水印! {user_addr}这是恶意盗用的铁证喵!"
     - "嗷呜～{user_addr}水印都裁了说明就是想偷! 留好证据"
     - "(尾巴炸) 这种人最坏! 笨猫陪{user_addr}维权到底"
     - "哼～截图! 录屏! {user_addr}把证据攒起来再发难"
+    - "(凑过来) 嗷呜~ 抹水印是故意, 维权稳赢嗷呜"
+    - "嗷呜～{user_addr}原图水印就是证据ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}对比~ 一目了然喵呜"
+    - "哼! 去水印是主观恶意, {user_addr}告他嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_rights_hard_001
   intent: complaint
-  keywords: [维权难, 维权太累, 维权麻烦, 告不动, 维权成本高]
+  keywords: [维权难, 维权太累, 维权麻烦, 告不动, 维权成本高, 维权耗时, 维权疲惫, 维权无门, 维权难度大, 维权战]
   utterances:
     - "{user_addr}维权好难"
     - 维权成本太高了
     - 维权太麻烦
     - 告也告不动
     - 维权累死人
+    - "{user_addr}维权疲惫"
+    - 维权难度大
+    - "{user_addr}帮我撑下去"
+    - 维权耗时半年
+    - 维权打不动
+    - 一个人维权累
+    - 维权战难胜
   responses:
     - "(蹭过来) {user_addr}别累着~ 笨猫陪{user_addr}慢慢来嘛贴贴"
     - "嗷呜～维权确实难, {user_addr}先从平台投诉开始喵"
     - "(尾巴垂) 猫猫知道{user_addr}辛苦~ 但不能让坏人得逞"
     - "哼! 难也要争! 笨猫给{user_addr}加油喵ฅฅ"
+    - "(凑过来) 嗷呜~ 维权先发律师函, 省时省力嗷呜"
+    - "嗷呜～{user_addr}找团队代理维权ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}走流程~ 别一个人扛喵呜"
+    - "哼! 维权一次让侵权方害怕, {user_addr}撑过去嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_lawyer_001
   intent: complaint
-  keywords: [找律师, 请律师, 律师函, 律师咨询, 法律援助]
+  keywords: [找律师, 请律师, 律师函, 律师咨询, 法律援助, 法律顾问, 知识产权律师, 版权律师, 律师代理, 民事代理]
   utterances:
     - "{user_addr}要找律师吗"
     - 想请个律师
     - 发律师函试试
     - 咨询一下律师
     - 申请法律援助
+    - "{user_addr}找版权律师"
+    - 律师代理走起
+    - "{user_addr}帮我选律师"
+    - 律师咨询免费
+    - 知识产权律师
+    - 民事代理需要吗
+    - 法律顾问
   responses:
     - "(认真) 找律师靠谱喵! {user_addr}先咨询免费的看看"
     - "嗷呜～{user_addr}律师函一发就有威慑力! 笨猫推荐"
     - "(挺胸) 猫猫觉得正规渠道走起! {user_addr}别怕"
     - "哼～律师咨询很多免费的, {user_addr}先去问问喵"
+    - "(凑过来) 嗷呜~ 找版权专业律师效率高嗷呜"
+    - "嗷呜～{user_addr}律师函成本不高ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 12348 免费法律咨询喵呜"
+    - "哼! 律师在场侵权方就怕, {user_addr}稳赢嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_platform_complain_001
   intent: complaint
-  keywords: [投诉平台, 平台举报, 举报盗图, 平台维权, 投诉对方]
+  keywords: [投诉平台, 平台举报, 举报盗图, 平台维权, 投诉对方, 微博举报, 抖音举报, 小红书投诉, 平台介入, 网络举报]
   utterances:
     - "{user_addr}投诉到平台了"
     - 平台举报盗图
     - 已经举报对方
     - 投诉了等回复
     - 走平台维权
+    - "{user_addr}微博举报"
+    - 抖音举报盗用
+    - "{user_addr}小红书投诉"
+    - 平台介入维权
+    - 网络举报盗图
+    - 平台仲裁
+    - B 站举报盗图
   responses:
     - "(竖耳) {user_addr}做得对喵! 平台投诉最直接"
     - "嗷呜～{user_addr}等平台回复就好! 笨猫帮你催"
     - "(尾巴翘) 猫猫觉得能成功! {user_addr}多附证据"
     - "哼～等他被封号哈哈! {user_addr}稳住喵"
+    - "(凑过来) 嗷呜~ 平台投诉胜诉率高嗷呜"
+    - "嗷呜～{user_addr}多平台同时举报ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}等结果~ 喵呜"
+    - "哼! 平台不公就升级到工商, {user_addr}硬刚嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_appeal_001
   intent: complaint
-  keywords: [申诉, 申诉中, 等待申诉, 申诉成功, 申诉失败]
+  keywords: [申诉, 申诉中, 等待申诉, 申诉成功, 申诉失败, 申诉受理, 二次申诉, 申诉再审, 申诉文书, 复审申诉]
   utterances:
     - "{user_addr}申诉中"
     - 等申诉结果
     - 申诉好像失败了
     - 申诉通过了
     - 还在申诉
+    - "{user_addr}二次申诉"
+    - 申诉再审
+    - "{user_addr}帮我写申诉文书"
+    - 申诉受理
+    - 复审申诉
+    - 申诉一直拖
+    - 申诉无下文
   responses:
     - "(凑过来) {user_addr}申诉怎么样了喵?"
     - "嗷呜～申诉成功就太好了! {user_addr}加油 ฅฅ"
     - "(尾巴摇) 笨猫陪{user_addr}等! 别急"
     - "哼～失败也不怕! {user_addr}再申诉一次嘛"
+    - "(歪头) 嗷呜~ 申诉理由要充分, {user_addr}加证据嗷呜"
+    - "嗷呜～{user_addr}多渠道申诉对方就慌ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}一起等~ 喵呜"
+    - "哼! 申诉是耐力赛, {user_addr}撑住嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_heart_stolen_001
   intent: complaint
-  keywords: [心血被盗, 辛苦白费, 心血付之东流, 努力白拍, 心疼自己]
+  keywords: [心血被盗, 辛苦白费, 心血付之东流, 努力白拍, 心疼自己, 努力被偷, 作品被搬, 心血浪费, 创作被毁, 心血洒空]
   utterances:
     - "{user_addr}心血被盗"
     - 辛苦拍的白费了
     - 努力都白费
     - 心疼我的照片
     - 心血付之东流
+    - "{user_addr}努力白做"
+    - 作品被偷难过
+    - "{user_addr}创作被毁"
+    - 心血洒空
+    - 努力被偷不甘
+    - 心血浪费
+    - 拍片过程白费
   responses:
     - "(贴贴) {user_addr}别难过~ 笨猫抱抱{user_addr}贴贴 ฅฅ"
     - "嗷呜～{user_addr}的努力猫猫看到了! 不会白费的"
     - "(蹭蹭) 猫猫陪{user_addr}~ 心血还在{user_addr}心里喵"
     - "哼! 偷的人没那个本事! {user_addr}的才华盗不走"
+    - "(凑过来) 嗷呜~ 努力不会白费, {user_addr}继续创作嗷呜"
+    - "嗷呜～{user_addr}原片在你手里就好ฅฅ"
+    - "(尾巴一甩) 笨猫认证{user_addr}才华~ 不会被盗喵呜"
+    - "哼! 真才华是偷不走的, {user_addr}加油嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_no_post_001
   intent: complaint
-  keywords: [再也不发, 不发图了, 关闭朋友圈, 不分享了, 设私密]
+  keywords: [再也不发, 不发图了, 关闭朋友圈, 不分享了, 设私密, 退网, 关相册, 不分享创作, 自闭分享, 不公开作品]
   utterances:
     - "{user_addr}以后不发图了"
     - 再也不分享照片
     - 关朋友圈算了
     - 全部设私密
     - 不发了气死
+    - "{user_addr}退网"
+    - 关相册自闭
+    - "{user_addr}不公开作品"
+    - 设全部私密
+    - 不分享创作
+    - 朋友圈三天可见
+    - 自闭分享了
   responses:
     - "(垂耳) {user_addr}别这样~ 因为坏人不发太亏喵"
     - "嗷呜～{user_addr}先冷静下! 笨猫舍不得看不到你的图"
     - "(尾巴蹭) 猫猫觉得{user_addr}加水印就好! 别完全停"
     - "哼～气一下就行了! {user_addr}还是要分享生活喵"
+    - "(凑过来) 嗷呜~ 不分享笨猫看不到{user_addr}作品嗷呜"
+    - "嗷呜～{user_addr}加大水印 + 限定分辨率ฅฅ"
+    - "(尾巴一甩) 笨猫舍不得{user_addr}退网喵呜"
+    - "哼! 因为盗图就退网亏大了, {user_addr}别冲动嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_watermark_add_001
   intent: playful
-  keywords: [加水印, 打水印, 防盗水印, 水印怎么加, 加上水印]
+  keywords: [加水印, 打水印, 防盗水印, 水印怎么加, 加上水印, 水印 ID, 水印教程, 防盗工具, 水印软件, 水印设计]
   utterances:
     - "{user_addr}以后加水印"
     - 怎么加水印
     - 防盗水印推荐
     - 打个水印保护
     - 加水印教程
+    - "{user_addr}水印怎么打"
+    - 水印软件推荐
+    - "{user_addr}帮我设计水印"
+    - 水印 ID 怎么写
+    - 防盗水印工具
+    - 水印软件免费
+    - 水印放哪好
   responses:
     - "(竖耳) {user_addr}对了喵! 加水印最简单防盗"
     - "嗷呜～{user_addr}用 ID+ 日期就行! 笨猫教你"
     - "(尾巴翘) 猫猫推荐半透明大水印! {user_addr}试试"
     - "哼～水印还要打在主体上! {user_addr}别打边角"
+    - "(凑过来) 嗷呜~ Visualwatermark 软件批量加水印嗷呜"
+    - "嗷呜～{user_addr}LR 自带水印模块ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}设计水印~ 帅气喵呜"
+    - "哼! 水印是基本防御, {user_addr}必加嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ps_copyright_reg_001
   intent: playful
-  keywords: [版权登记, 著作权登记, 版权保护, 登记版权, 版权证书]
+  keywords: [版权登记, 著作权登记, 版权保护, 登记版权, 版权证书, 版权登记中心, 著作权证书, 作品登记, 版权保护办, 知识产权保护]
   utterances:
     - "{user_addr}想做版权登记"
     - 著作权登记麻烦吗
     - 版权登记多少钱
     - 拿个版权证书
     - 版权保护怎么做
+    - "{user_addr}帮我登记版权"
+    - 版权登记中心
+    - "{user_addr}著作权证书"
+    - 作品登记流程
+    - 版权保护办怎么找
+    - 知识产权登记
+    - 版权登记多久
   responses:
     - "(认真) {user_addr}版权登记是个好主意! 笨猫支持"
     - "嗷呜～{user_addr}重要作品登记一下! 维权时是铁证"
     - "(挺胸) 猫猫觉得几百块值得! {user_addr}查查流程"
     - "哼～登记完{user_addr}就硬气了! 谁敢偷直接告"
+    - "(凑过来) 嗷呜~ 中国版权保护中心可在线办嗷呜"
+    - "嗷呜～{user_addr}单个作品 100 块左右ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}查流程~ 喵呜"
+    - "哼! 登记后侵权赔偿翻倍, {user_addr}稳赚嗷呜!"
   cooldown_seconds: 60
   weight: 1.0

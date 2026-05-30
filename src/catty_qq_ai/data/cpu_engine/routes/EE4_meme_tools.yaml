@@ -3,204 +3,312 @@
 
 - name: mt_tool_001
   intent: question
-  keywords: [推荐梗图工具, 推荐表情包工具, 推荐梗图 App, 推荐表情包 App, 笨猫梗图工具]
+  keywords: [推荐梗图工具, 推荐表情包工具, 推荐梗图 App, 推荐表情包 App, 笨猫梗图工具, 梗图工具求建议, 梗图工具想了解, 嗷呜梗图工具]
   utterances:
     - "{user_addr}推荐梗图工具"
     - "{user_addr}推荐表情包工具"
     - "{user_addr}推荐梗图 App"
     - "{user_addr}推荐表情包 App"
     - "{user_addr}笨猫梗图工具"
+    - 推荐梗图工具诶
+    - 推荐梗图工具嘛
+    - 推荐梗图工具啦
+    - 推荐梗图工具求建议
+    - 笨猫推荐梗图工具
   responses:
     - "嗷呜～{user_addr}梗图工坊 / 表情 GIF ฅฅ"
     - "(尾巴翘) Memeful / 一键 P 图"
     - "{user_addr}斗图大师 / 表情家园"
     - "(挺胸) 笨猫推荐: 梗图工坊够用!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_miniapp_001
   intent: question
-  keywords: [推荐表情包小程序, 推荐微信表情小程序, 推荐斗图小程序, 推荐梗图小程序, 笨猫表情包小程序]
+  keywords: [推荐表情包小程序, 推荐微信表情小程序, 推荐斗图小程序, 推荐梗图小程序, 笨猫表情包小程序, 表情包小程序求建议, 表情包小程序想了解, 嗷呜表情包小程序]
   utterances:
     - "{user_addr}推荐表情包小程序"
     - "{user_addr}推荐微信表情小程序"
     - "{user_addr}推荐斗图小程序"
     - "{user_addr}推荐梗图小程序"
     - "{user_addr}笨猫表情包小程序"
+    - 推荐表情包小程序诶
+    - 推荐表情包小程序嘛
+    - 推荐表情包小程序啦
+    - 推荐表情包小程序求建议
+    - 笨猫推荐表情包小程序
   responses:
     - "嗷呜～{user_addr}发表情 / 表情家园ฅฅ"
     - "(尾巴翘) 斗图表情包 / 梗图狂魔"
     - "{user_addr}微信搜「表情包」直接出"
     - "(挺胸) 笨猫推荐: 发表情, 不用下载!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_giphy_001
   intent: question
-  keywords: [推荐 GIF 制作, 推荐 GIPHY, 推荐 GIF 工具, 推荐动图制作, 笨猫 GIF 工具]
+  keywords: [推荐 GIF 制作, 推荐 GIPHY, 推荐 GIF 工具, 推荐动图制作, 笨猫 GIF 工具,  GIF 制作求建议,  GIF 制作想了解, 笨猫 GIF 制作]
   utterances:
     - "{user_addr}推荐 GIF 制作"
     - "{user_addr}推荐 GIPHY"
     - "{user_addr}推荐 GIF 工具"
     - "{user_addr}推荐动图制作"
     - "{user_addr}笨猫 GIF 工具"
+    - 推荐 GIF 制作诶
+    - 推荐 GIF 制作嘛
+    - 推荐 GIF 制作啦
+    - 推荐 GIF 制作求建议
+    - 笨猫推荐 GIF 制作
   responses:
     - "嗷呜～{user_addr}GIPHY - 全球最大 GIF 库ฅฅ"
     - "(尾巴翘) Tenor / Imgflip / ezgif"
     - "{user_addr}国内: SOOGIF / GIF 快手"
     - "(挺胸) 笨猫推荐: GIPHY 找图, ezgif 改!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_search_001
   intent: question
-  keywords: [推荐表情包搜索, 推荐斗图网站, 推荐表情包网站, 推荐斗图素材, 笨猫表情包搜索]
+  keywords: [推荐表情包搜索, 推荐斗图网站, 推荐表情包网站, 推荐斗图素材, 笨猫表情包搜索, 表情包搜索求建议, 表情包搜索想了解, 嗷呜表情包搜索]
   utterances:
     - "{user_addr}推荐表情包搜索"
     - "{user_addr}推荐斗图网站"
     - "{user_addr}推荐表情包网站"
     - "{user_addr}推荐斗图素材"
     - "{user_addr}笨猫表情包搜索"
+    - 推荐表情包搜索诶
+    - 推荐表情包搜索嘛
+    - 推荐表情包搜索啦
+    - 推荐表情包搜索求建议
+    - 笨猫推荐表情包搜索
   responses:
     - "嗷呜～{user_addr}发表情 fabiaoqing.comฅฅ"
     - "(尾巴翘) 斗图网 doutub / SOOGIF"
     - "{user_addr}知乎搜「表情包」也超多"
     - "(挺胸) 笨猫推荐: fabiaoqing 最全!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_native_001
   intent: question
-  keywords: [推荐手机自带表情, 推荐 iOS 表情, 推荐安卓表情, 推荐输入法表情, 笨猫系统表情]
+  keywords: [推荐手机自带表情, 推荐 iOS 表情, 推荐安卓表情, 推荐输入法表情, 笨猫系统表情, 手机自带表情求建议, 手机自带表情想了解, 笨猫手机自带表情]
   utterances:
     - "{user_addr}推荐手机自带表情"
     - "{user_addr}推荐 iOS 表情"
     - "{user_addr}推荐安卓表情"
     - "{user_addr}推荐输入法表情"
     - "{user_addr}笨猫系统表情"
+    - 推荐手机自带表情诶
+    - 推荐手机自带表情嘛
+    - 推荐手机自带表情啦
+    - 推荐手机自带表情求建议
+    - 笨猫推荐手机自带表情
   responses:
     - "嗷呜～{user_addr}iOS 自带 emoji / Memojiฅฅ"
     - "(尾巴翘) 搜狗 / 百度输入法表情库"
     - "{user_addr}微信自带「龇牙」「捂脸」"
     - "(挺胸) 笨猫推荐: Memoji 拟我表情萌!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_wechat_001
   intent: question
-  keywords: [推荐微信原创表情, 推荐微信表情商店, 推荐微信付费表情, 推荐微信表情包, 笨猫微信表情]
+  keywords: [推荐微信原创表情, 推荐微信表情商店, 推荐微信付费表情, 推荐微信表情包, 笨猫微信表情, 微信原创表情求建议, 微信原创表情想了解, 笨猫微信原创表情]
   utterances:
     - "{user_addr}推荐微信原创表情"
     - "{user_addr}推荐微信表情商店"
     - "{user_addr}推荐微信付费表情"
     - "{user_addr}推荐微信表情包"
     - "{user_addr}笨猫微信表情"
+    - 推荐微信原创表情诶
+    - 推荐微信原创表情嘛
+    - 推荐微信原创表情啦
+    - 推荐微信原创表情求建议
+    - 笨猫推荐微信原创表情
   responses:
     - "嗷呜～{user_addr}微信「表情商店」原创区ฅฅ"
     - "(尾巴翘) 长草颜文字 / 小刘鸭 / 罗小黑"
     - "{user_addr}打赏作者一两块支持原创"
     - "(挺胸) 笨猫推荐: 长草颜超可爱!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_soogif_001
   intent: question
-  keywords: [推荐 SOOGIF, 推荐表情管家, 推荐表情包管理, 推荐表情收藏, 笨猫表情管家]
+  keywords: [推荐 SOOGIF, 推荐表情管家, 推荐表情包管理, 推荐表情收藏, 笨猫表情管家,  SOOGIF求建议,  SOOGIF想了解, 笨猫 SOOGIF]
   utterances:
     - "{user_addr}推荐 SOOGIF"
     - "{user_addr}推荐表情管家"
     - "{user_addr}推荐表情包管理"
     - "{user_addr}推荐表情收藏"
     - "{user_addr}笨猫表情管家"
+    - 推荐 SOOGIF诶
+    - 推荐 SOOGIF嘛
+    - 推荐 SOOGIF啦
+    - 推荐 SOOGIF求建议
+    - 笨猫推荐 SOOGIF
   responses:
     - "嗷呜～{user_addr}SOOGIF - 国产 GIF 大站ฅฅ"
     - "(尾巴翘) 表情管家 / 闪萌"
     - "{user_addr}微信收藏 / Pinterest 备份"
     - "(挺胸) 笨猫推荐: SOOGIF 找 GIF 一把!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: mt_line_001
   intent: question
-  keywords: [推荐 LINE 贴纸, 推荐 Tencent 贴纸, 推荐 sticker, 推荐贴纸商店, 笨猫贴纸]
+  keywords: [推荐 LINE 贴纸, 推荐 Tencent 贴纸, 推荐 sticker, 推荐贴纸商店, 笨猫贴纸,  LINE 贴纸求建议,  LINE 贴纸想了解, 笨猫 LINE 贴纸]
   utterances:
     - "{user_addr}推荐 LINE 贴纸"
     - "{user_addr}推荐 Tencent 贴纸"
     - "{user_addr}推荐 sticker"
     - "{user_addr}推荐贴纸商店"
     - "{user_addr}笨猫贴纸"
+    - 推荐 LINE 贴纸诶
+    - 推荐 LINE 贴纸嘛
+    - 推荐 LINE 贴纸啦
+    - 推荐 LINE 贴纸求建议
+    - 笨猫推荐 LINE 贴纸
   responses:
     - "嗷呜～{user_addr}LINE Sticker Shop 日系顶级ฅฅ"
     - "(尾巴翘) Telegram Sticker / Whatsapp"
     - "{user_addr}熊本熊 / Brown / 兔斯基"
     - "(挺胸) 笨猫推荐: LINE 布朗熊 sticker!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: mt_emoji_001
   intent: question
-  keywords: [推荐 emoji, 推荐颜文字, 推荐 kaomoji, 推荐符号表情, 笨猫颜文字]
+  keywords: [推荐 emoji, 推荐颜文字, 推荐 kaomoji, 推荐符号表情, 笨猫颜文字,  emoji求建议,  emoji想了解, 笨猫 emoji]
   utterances:
     - "{user_addr}推荐 emoji"
     - "{user_addr}推荐颜文字"
     - "{user_addr}推荐 kaomoji"
     - "{user_addr}推荐符号表情"
     - "{user_addr}笨猫颜文字"
+    - 推荐 emoji诶
+    - 推荐 emoji嘛
+    - 推荐 emoji啦
+    - 推荐 emoji求建议
+    - 笨猫推荐 emoji
   responses:
     - "嗷呜～{user_addr}emojipedia.org 查 emojiฅฅ"
     - "(尾巴翘) 颜文字: kaomoji.ru / 日本颜文字"
     - "{user_addr}(>ω<) (≧∇≦) ฅ•ω•ฅ"
     - "(挺胸) 笨猫推荐: ฅ•ω•ฅ 猫爪超萌!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_diy_001
   intent: question
-  keywords: [推荐自制表情包, 推荐表情包 DIY, 推荐表情包模板, 推荐 P 表情包, 笨猫自制表情]
+  keywords: [推荐自制表情包, 推荐表情包 DIY, 推荐表情包模板, 推荐 P 表情包, 笨猫自制表情, 自制表情包求建议, 自制表情包想了解, 笨猫自制表情包]
   utterances:
     - "{user_addr}推荐自制表情包"
     - "{user_addr}推荐表情包 DIY"
     - "{user_addr}推荐表情包模板"
     - "{user_addr}推荐 P 表情包"
     - "{user_addr}笨猫自制表情"
+    - 推荐自制表情包诶
+    - 推荐自制表情包嘛
+    - 推荐自制表情包啦
+    - 推荐自制表情包求建议
+    - 笨猫推荐自制表情包
   responses:
     - "嗷呜～{user_addr}美图秀秀 / 醒图加字ฅฅ"
     - "(尾巴翘) Imgflip Meme Generator"
     - "{user_addr}稿定设计 / Canva 模板"
     - "(挺胸) 笨猫推荐: 醒图最快, 一分钟出!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_caption_001
   intent: question
-  keywords: [推荐梗图配字, 推荐表情包文字, 推荐梗图字体, 推荐表情包字幕, 笨猫梗图配字]
+  keywords: [推荐梗图配字, 推荐表情包文字, 推荐梗图字体, 推荐表情包字幕, 笨猫梗图配字, 梗图配字求建议, 梗图配字想了解, 嗷呜梗图配字]
   utterances:
     - "{user_addr}推荐梗图配字"
     - "{user_addr}推荐表情包文字"
     - "{user_addr}推荐梗图字体"
     - "{user_addr}推荐表情包字幕"
     - "{user_addr}笨猫梗图配字"
+    - 推荐梗图配字诶
+    - 推荐梗图配字嘛
+    - 推荐梗图配字啦
+    - 推荐梗图配字求建议
+    - 笨猫推荐梗图配字
   responses:
     - "嗷呜～{user_addr}方正胖头鱼 / 装甲明朝ฅฅ"
     - "(尾巴翘) 描边白 + 黑色描 = 经典梗图"
     - "{user_addr}文字别太长, 一行 10 字内"
     - "(挺胸) 笨猫推荐: 胖头鱼字体出片率高!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: mt_commerce_001
   intent: question
-  keywords: [推荐表情包卖货, 推荐表情包变现, 推荐表情包接单, 推荐表情包商业, 笨猫表情包变现]
+  keywords: [推荐表情包卖货, 推荐表情包变现, 推荐表情包接单, 推荐表情包商业, 笨猫表情包变现, 表情包卖货求建议, 表情包卖货想了解, 笨猫表情包卖货]
   utterances:
     - "{user_addr}推荐表情包卖货"
     - "{user_addr}推荐表情包变现"
     - "{user_addr}推荐表情包接单"
     - "{user_addr}推荐表情包商业"
     - "{user_addr}笨猫表情包变现"
+    - 推荐表情包卖货诶
+    - 推荐表情包卖货嘛
+    - 推荐表情包卖货啦
+    - 推荐表情包卖货求建议
+    - 笨猫推荐表情包卖货
   responses:
     - "嗷呜～{user_addr}微信表情开放平台分成ฅฅ"
     - "(尾巴翘) LINE Creator Market / Telegram"
     - "{user_addr}B 站 / 小红书涨粉接广告"
     - "(挺胸) 笨猫推荐: 微信原创打赏稳!"
+    - "(尾巴绕住) {user_addr}人家也想跟着试试嘛~ 蹭蹭 ฅฅ"
+    - "(歪头) 嗷呜~ {user_addr}选好后告诉笨猫感受嘛喵~"
+    - "哼! {user_addr}别忘了笨猫的推荐才是最准的喵~"
+    - "(贴贴) {user_addr}笨猫陪你一起研究~ 才不是想沾光呢哼!"
   cooldown_seconds: 60
   weight: 0.8

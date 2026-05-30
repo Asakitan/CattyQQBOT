@@ -4,204 +4,324 @@
 
 - name: is_star_001
   intent: question
-  keywords: [推荐面试技巧, 推荐 STAR 法, 推荐行为面试, 推荐面试套路, 笨猫面试技巧]
+  keywords: [推荐面试技巧, 推荐 STAR 法, 推荐行为面试, 推荐面试套路, 笨猫面试技巧, 笨猫 面试技巧, 面试技巧 怎么样, 面试技巧 推荐, 问 面试技巧]
   utterances:
     - 推荐面试技巧
     - 推荐 STAR 法
     - 推荐行为面试
     - 推荐面试套路
     - 笨猫面试技巧
+    - 面试技巧 推荐一下
+    - 面试技巧 怎么选嗷
+    - 笨猫聊聊 面试技巧
+    - 面试技巧 有什么好的
+    - 面试技巧 经验分享下
+    - 面试技巧 真的有用吗
   responses:
     - "嗷呜～{user_addr}STAR: Situation/Task/Action/Resultฅฅ"
     - "(尾巴翘) 数据量化 / 我做了什么"
     - "{user_addr}先听清问题 / 别跑题"
     - "(挺胸) 笨猫推荐: STAR 万能模板!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 面试技巧 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 面试技巧 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 面试技巧 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: is_self_intro_001
   intent: question
-  keywords: [推荐自我介绍, 推荐 1 分钟自介, 推荐 elevator pitch, 推荐自我介绍模板, 笨猫自我介绍]
+  keywords: [推荐自我介绍, 推荐 1 分钟自介, 推荐 elevator pitch, 推荐自我介绍模板, 笨猫自我介绍, 笨猫 自我介绍, 自我介绍 怎么样, 自我介绍 推荐, 问 自我介绍]
   utterances:
     - 推荐自我介绍
     - 推荐 1 分钟自介
     - 推荐 elevator pitch
     - 推荐自我介绍模板
     - 笨猫自我介绍
+    - 自我介绍 推荐一下
+    - 自我介绍 怎么选嗷
+    - 笨猫聊聊 自我介绍
+    - 自我介绍 有什么好的
+    - 自我介绍 经验分享下
+    - 自我介绍 真的有用吗
   responses:
     - "嗷呜～{user_addr}过去 + 现在 + 未来ฅฅ"
     - "(尾巴翘) 1 分钟 / 300 字 / 3 段"
     - "{user_addr}匹配 JD / 突出亮点"
     - "(挺胸) 笨猫推荐: 提前背 3 个版本!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 自我介绍 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 自我介绍 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 自我介绍 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: is_hr_classic_001
   intent: question
-  keywords: [推荐 HR 问题, 推荐 HR 经典题, 推荐缺点优点, 推荐职业规划, 笨猫 HR 问题]
+  keywords: [推荐 HR 问题, 推荐 HR 经典题, 推荐缺点优点, 推荐职业规划, 笨猫 HR 问题, HR 问题 怎么样, HR 问题 推荐, 问 HR 问题, HR 问题 好不好]
   utterances:
     - 推荐 HR 问题
     - 推荐 HR 经典题
     - 推荐缺点优点
     - 推荐职业规划
     - 笨猫 HR 问题
+    - HR 问题 推荐一下
+    - HR 问题 怎么选嗷
+    - 笨猫聊聊 HR 问题
+    - HR 问题 有什么好的
+    - HR 问题 经验分享下
+    - HR 问题 真的有用吗
   responses:
     - "嗷呜～{user_addr}缺点 / 离职原因 / 期望薪资ฅฅ"
     - "(尾巴翘) 5 年规划 / 为什么我们"
     - "{user_addr}缺点说可改进的 / 别真挖坑"
     - "(挺胸) 笨猫推荐: 提前准备 10 题!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: HR 问题 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 HR 问题 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 HR 问题 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: is_tech_leetcode_001
   intent: question
-  keywords: [推荐技术面试, 推荐 LeetCode, 推荐算法题, 推荐 coding interview, 笨猫技术面试]
+  keywords: [推荐技术面试, 推荐 LeetCode, 推荐算法题, 推荐 coding interview, 笨猫技术面试, 笨猫 技术面试, 技术面试 怎么样, 技术面试 推荐, 问 技术面试]
   utterances:
     - 推荐技术面试
     - 推荐 LeetCode
     - 推荐算法题
     - 推荐 coding interview
     - 笨猫技术面试
+    - 技术面试 推荐一下
+    - 技术面试 怎么选嗷
+    - 笨猫聊聊 技术面试
+    - 技术面试 有什么好的
+    - 技术面试 经验分享下
+    - 技术面试 真的有用吗
   responses:
     - "嗷呜～{user_addr}LeetCode Top 150 / 剑指 Offerฅฅ"
     - "(尾巴翘) 边想边说 / 别闷头写"
     - "{user_addr}先暴力 / 再优化 / 复杂度"
     - "(挺胸) 笨猫推荐: 每天 1-2 题坚持!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 技术面试 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 技术面试 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 技术面试 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: is_case_001
   intent: question
-  keywords: [推荐 case interview, 推荐咨询面试, 推荐 MBB, 推荐市场规模题, 笨猫 case interview]
+  keywords: [推荐 case interview, 推荐咨询面试, 推荐 MBB, 推荐市场规模题, 笨猫 case interview, case interview 怎么样, case interview 推荐, 问 case interview, case interview 好不好]
   utterances:
     - 推荐 case interview
     - 推荐咨询面试
     - 推荐 MBB
     - 推荐市场规模题
     - 笨猫 case interview
+    - case interview 推荐一下
+    - case interview 怎么选嗷
+    - 笨猫聊聊 case interview
+    - case interview 有什么好的
+    - case interview 经验分享下
+    - case interview 真的有用吗
   responses:
     - "嗷呜～{user_addr}Case in Point / Victor Chengฅฅ"
     - "(尾巴翘) MECE 框架 / 自上而下"
     - "{user_addr}市场规模 / 利润树 / 4P"
     - "(挺胸) 笨猫推荐: 多刷 100 题!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: case interview 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 case interview 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 case interview 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: is_fresh_001
   intent: question
-  keywords: [推荐应届生面试, 推荐校招面试, 推荐实习面试, 推荐校招 tips, 笨猫应届面试]
+  keywords: [推荐应届生面试, 推荐校招面试, 推荐实习面试, 推荐校招 tips, 笨猫应届面试, 笨猫 应届生面试, 应届生面试 怎么样, 应届生面试 推荐, 问 应届生面试]
   utterances:
     - 推荐应届生面试
     - 推荐校招面试
     - 推荐实习面试
     - 推荐校招 tips
     - 笨猫应届面试
+    - 应届生面试 推荐一下
+    - 应届生面试 怎么选嗷
+    - 笨猫聊聊 应届生面试
+    - 应届生面试 有什么好的
+    - 应届生面试 经验分享下
+    - 应届生面试 真的有用吗
   responses:
     - "嗷呜～{user_addr}项目经历 / 实习 / 竞赛ฅฅ"
     - "(尾巴翘) 学校成绩 / 课程项目"
     - "{user_addr}没经验讲学习能力 + 态度"
     - "(挺胸) 笨猫推荐: 真诚最重要!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 应届生面试 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 应届生面试 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 应届生面试 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: is_bigtech_001
   intent: question
-  keywords: [推荐大厂面试, 推荐 BAT 面试, 推荐字节面试, 推荐互联网面试, 笨猫大厂面试]
+  keywords: [推荐大厂面试, 推荐 BAT 面试, 推荐字节面试, 推荐互联网面试, 笨猫大厂面试, 笨猫 大厂面试, 大厂面试 怎么样, 大厂面试 推荐, 问 大厂面试]
   utterances:
     - 推荐大厂面试
     - 推荐 BAT 面试
     - 推荐字节面试
     - 推荐互联网面试
     - 笨猫大厂面试
+    - 大厂面试 推荐一下
+    - 大厂面试 怎么选嗷
+    - 笨猫聊聊 大厂面试
+    - 大厂面试 有什么好的
+    - 大厂面试 经验分享下
+    - 大厂面试 真的有用吗
   responses:
     - "嗷呜～{user_addr}算法 + 项目 + 系统设计ฅฅ"
     - "(尾巴翘) 3-5 轮 / 技术 + HR + 主管"
     - "{user_addr}牛客网 / 一亩三分地经验"
     - "(挺胸) 笨猫推荐: 八股文背熟!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 大厂面试 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 大厂面试 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 大厂面试 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: is_reverse_q_001
   intent: question
-  keywords: [推荐反向提问, 推荐面试官问什么, 推荐你有什么问题, 推荐反问 HR, 笨猫反向提问]
+  keywords: [推荐反向提问, 推荐面试官问什么, 推荐你有什么问题, 推荐反问 HR, 笨猫反向提问, 笨猫 反向提问, 反向提问 怎么样, 反向提问 推荐, 问 反向提问]
   utterances:
     - 推荐反向提问
     - 推荐面试官问什么
     - 推荐你有什么问题
     - 推荐反问 HR
     - 笨猫反向提问
+    - 反向提问 推荐一下
+    - 反向提问 怎么选嗷
+    - 笨猫聊聊 反向提问
+    - 反向提问 有什么好的
+    - 反向提问 经验分享下
+    - 反向提问 真的有用吗
   responses:
     - "嗷呜～{user_addr}团队 / 业务 / 成长路径ฅฅ"
     - "(尾巴翘) 别问薪资 / 别问加班"
     - "{user_addr}问技术栈 / 问项目挑战"
     - "(挺胸) 笨猫推荐: 准备 3 个好问题!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 反向提问 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 反向提问 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 反向提问 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: is_dress_001
   intent: question
-  keywords: [推荐面试着装, 推荐商务休闲, 推荐面试穿什么, 推荐面试西装, 笨猫面试着装]
+  keywords: [推荐面试着装, 推荐商务休闲, 推荐面试穿什么, 推荐面试西装, 笨猫面试着装, 笨猫 面试着装, 面试着装 怎么样, 面试着装 推荐, 问 面试着装]
   utterances:
     - 推荐面试着装
     - 推荐商务休闲
     - 推荐面试穿什么
     - 推荐面试西装
     - 笨猫面试着装
+    - 面试着装 推荐一下
+    - 面试着装 怎么选嗷
+    - 笨猫聊聊 面试着装
+    - 面试着装 有什么好的
+    - 面试着装 经验分享下
+    - 面试着装 真的有用吗
   responses:
     - "嗷呜～{user_addr}互联网: 商务休闲 / 衬衫ฅฅ"
     - "(尾巴翘) 金融 / 咨询: 正装西装"
     - "{user_addr}干净整洁 > 名牌"
     - "(挺胸) 笨猫推荐: 比公司高半档!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 面试着装 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 面试着装 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 面试着装 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: is_nervous_001
   intent: question
-  keywords: [推荐紧张缓解, 推荐面试紧张, 推荐面试焦虑, 推荐深呼吸, 笨猫面试紧张]
+  keywords: [推荐紧张缓解, 推荐面试紧张, 推荐面试焦虑, 推荐深呼吸, 笨猫面试紧张, 笨猫 紧张缓解, 紧张缓解 怎么样, 紧张缓解 推荐, 问 紧张缓解]
   utterances:
     - 推荐紧张缓解
     - 推荐面试紧张
     - 推荐面试焦虑
     - 推荐深呼吸
     - 笨猫面试紧张
+    - 紧张缓解 推荐一下
+    - 紧张缓解 怎么选嗷
+    - 笨猫聊聊 紧张缓解
+    - 紧张缓解 有什么好的
+    - 紧张缓解 经验分享下
+    - 紧张缓解 真的有用吗
   responses:
     - "嗷呜～{user_addr}深呼吸 4-7-8 / 提前到ฅฅ"
     - "(尾巴翘) 多模拟 / 当成聊天"
     - "{user_addr}紧张正常 / 面试官也是人"
     - "(挺胸) 笨猫推荐: 多面几次就好!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 紧张缓解 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 紧张缓解 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 紧张缓解 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: is_followup_001
   intent: question
-  keywords: [推荐跟进邮件, 推荐 thank you letter, 推荐面试后感谢, 推荐 follow up, 笨猫跟进邮件]
+  keywords: [推荐跟进邮件, 推荐 thank you letter, 推荐面试后感谢, 推荐 follow up, 笨猫跟进邮件, 笨猫 跟进邮件, 跟进邮件 怎么样, 跟进邮件 推荐, 问 跟进邮件]
   utterances:
     - 推荐跟进邮件
     - 推荐 thank you letter
     - 推荐面试后感谢
     - 推荐 follow up
     - 笨猫跟进邮件
+    - 跟进邮件 推荐一下
+    - 跟进邮件 怎么选嗷
+    - 笨猫聊聊 跟进邮件
+    - 跟进邮件 有什么好的
+    - 跟进邮件 经验分享下
+    - 跟进邮件 真的有用吗
   responses:
     - "嗷呜～{user_addr}24h 内发感谢信ฅฅ"
     - "(尾巴翘) 简短 / 重申兴趣 / 亮点"
     - "{user_addr}1 周没回再 follow up"
     - "(挺胸) 笨猫推荐: 加分项别忽略!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 跟进邮件 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 跟进邮件 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 跟进邮件 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: is_english_001
   intent: question
-  keywords: [推荐英文面试, 推荐外企面试, 推荐 English interview, 推荐外企 HR, 笨猫英文面试]
+  keywords: [推荐英文面试, 推荐外企面试, 推荐 English interview, 推荐外企 HR, 笨猫英文面试, 笨猫 英文面试, 英文面试 怎么样, 英文面试 推荐, 问 英文面试]
   utterances:
     - 推荐英文面试
     - 推荐外企面试
     - 推荐 English interview
     - 推荐外企 HR
     - 笨猫英文面试
+    - 英文面试 推荐一下
+    - 英文面试 怎么选嗷
+    - 笨猫聊聊 英文面试
+    - 英文面试 有什么好的
+    - 英文面试 经验分享下
+    - 英文面试 真的有用吗
   responses:
     - "嗷呜～{user_addr}Tell me about yourselfฅฅ"
     - "(尾巴翘) Why this company / Strengths"
     - "{user_addr}口语流畅 > 词汇高级"
     - "(挺胸) 笨猫推荐: 提前录音练习!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 英文面试 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 英文面试 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 英文面试 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9

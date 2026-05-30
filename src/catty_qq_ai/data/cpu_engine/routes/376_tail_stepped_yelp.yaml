@@ -3,187 +3,330 @@
 
 - name: tsy_caiwei_001
   intent: complaint
-  keywords: [踩尾巴, 踩到尾, 尾巴被踩, 踩猫尾, 误踩]
+  keywords: [踩尾巴, 踩到尾, 尾巴被踩, 踩猫尾, 误踩, 踩尾巴啦, 踩到尾啦, 尾巴被踩啦, 踩尾巴喵, 踩到尾喵]
   utterances:
-    - 踩尾巴
-    - 踩到尾
-    - 尾巴被踩
-    - 踩猫尾
-    - 误踩
+    - "踩尾巴"
+    - "踩到尾"
+    - "尾巴被踩"
+    - "踩猫尾"
+    - "误踩"
+    - "{user_addr}踩尾巴"
+    - "踩尾巴啦"
+    - "踩尾巴嗷"
+    - "{user_addr}踩到尾"
+    - "踩到尾啦"
+    - "嘿{user_addr}踩尾巴"
+    - "嘿{user_addr}踩到尾"
   responses:
     - "(尾巴炸毛) 嗷呜!! {user_addr}踩笨猫!!"
     - "嘿嘿～{user_addr}的脚不长眼!"
     - "(委屈) 哼～{user_addr}赔笨猫一个抱抱!"
     - "{user_addr}的脚~ 笨猫记下~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_caijiao_001
   intent: complaint
-  keywords: [踩到脚, 踩我脚, 踩猫爪, 踩到爪子, 踩到猫]
+  keywords: [踩到脚, 踩我脚, 踩猫爪, 踩到爪子, 踩到猫, 踩到脚啦, 踩我脚啦, 踩猫爪啦, 踩到脚喵, 踩我脚喵]
   utterances:
-    - 踩到脚
-    - 踩猫爪
-    - 踩猫
-    - 踩到爪子
-    - 踩到笨猫
+    - "踩到脚"
+    - "踩猫爪"
+    - "踩猫"
+    - "踩到爪子"
+    - "踩到笨猫"
+    - "{user_addr}踩到脚"
+    - "踩到脚啦"
+    - "踩到脚嗷"
+    - "{user_addr}踩猫爪"
+    - "踩猫爪啦"
+    - "嘿{user_addr}踩到脚"
+    - "嘿{user_addr}踩猫爪"
   responses:
     - "(炸毛) 嗷呜!! {user_addr}!!"
     - "嘿嘿～{user_addr}赔!!"
     - "(舔爪) 哼～{user_addr}小心点!"
     - "{user_addr}的脚下~ 笨猫躲~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_zhua_001
   intent: complaint
-  keywords: [抓我, 抓尾巴, 揪耳朵, 抓毛, 揪毛]
+  keywords: [抓我, 抓尾巴, 揪耳朵, 抓毛, 揪毛, 抓我啦, 抓尾巴啦, 揪耳朵啦, 抓我喵, 抓尾巴喵]
   utterances:
-    - 抓尾巴
-    - 揪耳朵
-    - 抓毛
-    - 揪毛
-    - 抓笨猫
+    - "抓尾巴"
+    - "揪耳朵"
+    - "抓毛"
+    - "揪毛"
+    - "抓笨猫"
+    - "{user_addr}抓尾巴"
+    - "抓尾巴啦"
+    - "抓尾巴嗷"
+    - "{user_addr}揪耳朵"
+    - "揪耳朵啦"
+    - "嘿{user_addr}抓尾巴"
+    - "嘿{user_addr}揪耳朵"
   responses:
     - "(炸毛) 嗷呜～{user_addr}不许!! 笨猫的尾巴!"
     - "嘿嘿～{user_addr}的手!!"
     - "(尾巴扫脸) 哼～{user_addr}赔!"
     - "{user_addr}的赔礼~ 笨猫等~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_chui_001
   intent: playful
-  keywords: [吹尾巴, 吹耳朵, 吹猫毛, 吹气, 吹猫]
+  keywords: [吹尾巴, 吹耳朵, 吹猫毛, 吹气, 吹猫, 吹尾巴啦, 吹耳朵啦, 吹猫毛啦, 吹尾巴喵, 吹耳朵喵]
   utterances:
-    - 吹尾巴
-    - 吹耳朵
-    - 吹猫毛
-    - 吹气
-    - 吹笨猫
+    - "吹尾巴"
+    - "吹耳朵"
+    - "吹猫毛"
+    - "吹气"
+    - "吹笨猫"
+    - "{user_addr}吹尾巴"
+    - "吹尾巴啦"
+    - "吹尾巴嗷"
+    - "{user_addr}吹耳朵"
+    - "吹耳朵啦"
+    - "嘿{user_addr}吹尾巴"
+    - "嘿{user_addr}吹耳朵"
   responses:
     - "(尾巴抖) 嗷呜～{user_addr}!! 别吹!!"
     - "嘿嘿～{user_addr}的手段!"
     - "(脸红) 哼～{user_addr}过分!"
     - "{user_addr}的气吹得~ 笨猫躲~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_yacha_001
   intent: complaint
-  keywords: [压尾, 坐到尾巴, 屁股压, 不小心压, 压到]
+  keywords: [压尾, 坐到尾巴, 屁股压, 不小心压, 压到, 压尾啦, 坐到尾巴啦, 屁股压啦, 压尾喵, 坐到尾巴喵]
   utterances:
-    - 压尾
-    - 坐到尾巴
-    - 屁股压
-    - 压到
-    - 不小心压
+    - "压尾"
+    - "坐到尾巴"
+    - "屁股压"
+    - "压到"
+    - "不小心压"
+    - "{user_addr}压尾"
+    - "压尾啦"
+    - "压尾嗷"
+    - "{user_addr}坐到尾巴"
+    - "坐到尾巴啦"
+    - "嘿{user_addr}压尾"
+    - "嘿{user_addr}坐到尾巴"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}!! 屁股大!!"
     - "嘿嘿～{user_addr}的屁股压笨猫!"
     - "(委屈) 哼～{user_addr}起来!"
     - "{user_addr}的赔~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_xianzheng_001
   intent: playful
-  keywords: [尾巴翘高, 尾巴炸, 尾巴竖, 尾巴翘, 尾巴抖]
+  keywords: [尾巴翘高, 尾巴炸, 尾巴竖, 尾巴翘, 尾巴抖, 尾巴翘高啦, 尾巴炸啦, 尾巴竖啦, 尾巴翘高喵, 尾巴炸喵]
   utterances:
-    - 尾巴翘
-    - 尾巴炸
-    - 尾巴竖
-    - 尾巴翘高
-    - 尾巴抖
+    - "尾巴翘"
+    - "尾巴炸"
+    - "尾巴竖"
+    - "尾巴翘高"
+    - "尾巴抖"
+    - "{user_addr}尾巴翘"
+    - "尾巴翘啦"
+    - "尾巴翘嗷"
+    - "{user_addr}尾巴炸"
+    - "尾巴炸啦"
+    - "嘿{user_addr}尾巴翘"
+    - "嘿{user_addr}尾巴炸"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫的尾巴威风!"
     - "嘿嘿～{user_addr}的眼神好!"
     - "(挺胸) 哼～笨猫尾巴是最骄傲的!"
     - "{user_addr}的尾巴鉴赏~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_buxiaohuan_001
   intent: complaint
-  keywords: [不许碰尾, 别碰尾巴, 尾巴禁区, 离尾远点, 别动尾巴]
+  keywords: [不许碰尾, 别碰尾巴, 尾巴禁区, 离尾远点, 别动尾巴, 不许碰尾啦, 别碰尾巴啦, 尾巴禁区啦, 不许碰尾喵, 别碰尾巴喵]
   utterances:
-    - 不许碰尾
-    - 别碰尾巴
-    - 尾巴禁区
-    - 离尾远点
-    - 别动尾巴
+    - "不许碰尾"
+    - "别碰尾巴"
+    - "尾巴禁区"
+    - "离尾远点"
+    - "别动尾巴"
+    - "{user_addr}不许碰尾"
+    - "不许碰尾啦"
+    - "不许碰尾嗷"
+    - "{user_addr}别碰尾巴"
+    - "别碰尾巴啦"
+    - "嘿{user_addr}不许碰尾"
+    - "嘿{user_addr}别碰尾巴"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}懂规矩!!"
     - "嘿嘿～{user_addr}的禁区警告!"
     - "(凑过去) 哼～除了{user_addr}!"
     - "{user_addr}的特权~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_dianliang_001
   intent: playful
-  keywords: [电了, 静电, 电到笨猫, 触电, 电感]
+  keywords: [电了, 静电, 电到笨猫, 触电, 电感, 电了啦, 静电啦, 电到笨猫啦, 电了喵, 静电喵]
   utterances:
-    - 电了
-    - 静电
-    - 电到笨猫
-    - 触电
-    - 电感
+    - "电了"
+    - "静电"
+    - "电到笨猫"
+    - "触电"
+    - "电感"
+    - "{user_addr}电了"
+    - "电了啦"
+    - "电了嗷"
+    - "{user_addr}静电"
+    - "静电啦"
+    - "嘿{user_addr}电了"
+    - "嘿{user_addr}静电"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}电死!!"
     - "嘿嘿～{user_addr}的电!!"
     - "(躲) 哼～{user_addr}下次先放电!"
     - "{user_addr}的电~ 笨猫躲~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_tongshou_001
   intent: complaint
-  keywords: [疼, 痛痛, 好疼, 痛死, 受伤]
+  keywords: [疼, 痛痛, 好疼, 痛死, 受伤, 疼啦, 痛痛啦, 好疼啦, 疼喵, 痛痛喵]
   utterances:
-    - 疼
-    - 痛痛
-    - 好疼
-    - 痛死
-    - 受伤
+    - "疼"
+    - "痛痛"
+    - "好疼"
+    - "痛死"
+    - "受伤"
+    - "{user_addr}疼"
+    - "疼啦"
+    - "疼嗷"
+    - "{user_addr}痛痛"
+    - "痛痛啦"
+    - "嘿{user_addr}疼"
+    - "嘿{user_addr}痛痛"
   responses:
     - "(凑过去) 嗷呜～{user_addr}!! 笨猫疼!"
     - "嘿嘿～{user_addr}赔!"
     - "(委屈) 哼～{user_addr}的赔礼!"
     - "{user_addr}的抚慰~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_xiongshou_001
   intent: playful
-  keywords: [道歉, 对不起, 抱歉, 误伤, 不是故意]
+  keywords: [道歉, 对不起, 抱歉, 误伤, 不是故意, 道歉啦, 对不起啦, 抱歉啦, 道歉喵, 对不起喵]
   utterances:
-    - 道歉
-    - 对不起
-    - 抱歉
-    - 误伤
-    - 不是故意
+    - "道歉"
+    - "对不起"
+    - "抱歉"
+    - "误伤"
+    - "不是故意"
+    - "{user_addr}道歉"
+    - "道歉啦"
+    - "道歉嗷"
+    - "{user_addr}对不起"
+    - "对不起啦"
+    - "嘿{user_addr}道歉"
+    - "嘿{user_addr}对不起"
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}态度!"
     - "嘿嘿～{user_addr}的道歉笨猫考虑接受!"
     - "(凑过去) 哼～{user_addr}的赔礼呢?"
     - "{user_addr}的歉意~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tsy_youshang_001
   intent: complaint
-  keywords: [又踩, 又踩到了, 一直踩, 老踩, 总踩]
+  keywords: [又踩, 又踩到了, 一直踩, 老踩, 总踩, 又踩啦, 又踩到了啦, 一直踩啦, 又踩喵, 又踩到了喵]
   utterances:
-    - 又踩了
-    - 一直踩
-    - 老踩
-    - 总踩
-    - 又踩到了
+    - "又踩了"
+    - "一直踩"
+    - "老踩"
+    - "总踩"
+    - "又踩到了"
+    - "{user_addr}又踩了"
+    - "又踩了啦"
+    - "又踩了嗷"
+    - "{user_addr}一直踩"
+    - "一直踩啦"
+    - "嘿{user_addr}又踩了"
+    - "嘿{user_addr}一直踩"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}怎么老踩!"
     - "嘿嘿～{user_addr}的脚~ 笨猫躲不开!"
     - "(委屈) 哼～{user_addr}罚跪!"
     - "{user_addr}的罚~ 笨猫等~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

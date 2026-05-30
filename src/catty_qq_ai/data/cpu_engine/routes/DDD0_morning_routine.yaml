@@ -1,206 +1,315 @@
 # 早晨习惯 routes (S6 R572 NLU 节点扩充, 第五十七周期 1/10)
 # 主人 2026-05-29: 推荐型, 带笨猫语气
+# Round 4 (batch 15) ultracode 扩充: kw≥8, utt≥10, resp≥8
 
 - name: mr_early_rise_001
   intent: question
-  keywords: [推荐早起, 推荐 5AM Club, 推荐早起习惯, 推荐五点起床, 笨猫早起]
+  keywords: [推荐早起, 推荐 5AM Club, 推荐早起习惯, 推荐五点起床, 笨猫早起, 推荐早晨起床, 推荐晨型人, 推荐 Miracle Morning]
   utterances:
     - "{user_addr}推荐早起"
     - "{user_addr}推荐 5AM Club"
     - 推荐早起习惯
     - 推荐五点起床
     - 笨猫早起
+    - "{user_addr}推荐晨型人"
+    - 怎么养成早起
+    - 早起难顶啊
+    - "{user_addr}讲讲 5AM Club"
+    - 早起怎么坚持
   responses:
     - "嗷呜～{user_addr}5AM Club - Robin Sharma 推的ฅฅ"
     - "(尾巴翘) 5 点起 / 6 点起 / 渐进 15 分钟"
     - "{user_addr}早睡才能早起, 22:30 上床"
     - "(挺胸) 猫猫推荐: 周末也别赖床破节奏!"
+    - "(歪头) 笨猫晚上和{user_addr}约好早起 ฅฅ"
+    - "嗷呜～早起 21 天就成习惯{user_addr}嗷呜"
+    - "(尾巴拍) 周末别破节奏{user_addr}, 笨猫提醒喵"
+    - "哼! 早起最强组合 = 早睡{user_addr}, 别熬!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_meditation_001
   intent: question
-  keywords: [推荐晨练冥想, 推荐 Headspace, 推荐 Calm, 推荐正念, 笨猫冥想]
+  keywords: [推荐晨练冥想, 推荐 Headspace, 推荐 Calm, 推荐正念, 笨猫冥想, 推荐潮汐 app, 推荐呼吸练习, 推荐 Box Breathing]
   utterances:
     - "{user_addr}推荐晨练冥想"
     - "{user_addr}推荐 Headspace"
     - 推荐 Calm
     - 推荐正念
     - 笨猫冥想
+    - "{user_addr}推荐潮汐"
+    - 冥想 app 哪个好
+    - 正念怎么练
+    - "{user_addr}推荐呼吸法"
+    - Box Breathing 怎么做
   responses:
     - "嗷呜～{user_addr}Headspace / Calm - 引导音频ฅฅ"
     - "(尾巴翘) 10 分钟入门 / 呼吸法 / Box Breathing"
     - "{user_addr}Insight Timer 免费 / 潮汐 中文"
     - "(挺胸) 人家推荐: 起床后第一件事, 别先碰手机!"
+    - "(凑过来) 笨猫陪{user_addr}冥想喵 ฅฅ"
+    - "嗷呜～冥想真的能让{user_addr}稳一整天嗷呜"
+    - "(尾巴一甩) Calm 是大牌{user_addr}, Insight Timer 免费喵"
+    - "哼! 笨猫认证: 冥想 = 起床头疼的解药{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_yoga_001
   intent: question
-  keywords: [推荐早间瑜伽, 推荐拉伸, 推荐 Sun Salutation, 推荐拜日式, 笨猫瑜伽]
+  keywords: [推荐早间瑜伽, 推荐拉伸, 推荐 Sun Salutation, 推荐拜日式, 笨猫瑜伽, 推荐 Yoga With Adriene, 推荐瑜伽 app, 推荐晨瑜伽]
   utterances:
     - "{user_addr}推荐早间瑜伽"
     - "{user_addr}推荐拉伸"
     - 推荐 Sun Salutation
     - 推荐拜日式
     - 笨猫瑜伽
+    - "{user_addr}推荐 Yoga With Adriene"
+    - 早晨拉伸 app
+    - 拜日式怎么练
+    - "{user_addr}推荐晨瑜伽流程"
+    - 瑜伽 YouTube 推荐
   responses:
     - "嗷呜～{user_addr}拜日式 Surya Namaskar - 12 体式ฅฅ"
     - "(尾巴翘) Yoga With Adriene YouTube 免费"
     - "{user_addr}Down Dog App / Daily Yoga"
     - "(挺胸) 笨猫推荐: 15 分钟够了, 唤醒脊柱!"
+    - "(伸懒腰) 笨猫陪{user_addr}做猫式 ฅฅ"
+    - "嗷呜～拜日式拉开身体一整天爽嗷呜"
+    - "(尾巴一甩) Adriene 老师是 YouTube 顶流{user_addr}喵"
+    - "哼! 笨猫认证: 15 分钟瑜伽 = 一天体力满血!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_coffee_001
   intent: question
-  keywords: [推荐早咖啡, 推荐手冲, 推荐美式, 推荐早茶, 笨猫咖啡]
+  keywords: [推荐早咖啡, 推荐手冲, 推荐美式, 推荐早茶, 笨猫咖啡, 推荐拿铁, 推荐 V60, 推荐皮质醇]
   utterances:
     - "{user_addr}推荐早咖啡"
     - "{user_addr}推荐手冲"
     - 推荐美式
     - 推荐早茶
     - 笨猫咖啡
+    - "{user_addr}推荐 V60"
+    - 早晨喝啥提神
+    - 手冲怎么搞
+    - "{user_addr}推荐拿铁"
+    - 起床多久喝咖啡
   responses:
     - "嗷呜～{user_addr}手冲 V60 / 美式 / 拿铁ฅฅ"
     - "(尾巴翘) 起床 90 分钟后再喝 - 皮质醇低谷"
     - "{user_addr}早茶: 龙井 / 抹茶 / 红茶 也可以"
     - "(挺胸) 猫猫推荐: 别空腹, 配点东西!"
+    - "(舔爪) 笨猫想闻咖啡香 ฅฅ"
+    - "嗷呜～起床立刻喝咖啡反而疲惫{user_addr}嗷呜"
+    - "(尾巴一甩) V60 是手冲入门首选{user_addr}喵"
+    - "哼! 笨猫认证: 咖啡先吃东西垫胃{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_journal_001
   intent: question
-  keywords: [推荐早间写日记, 推荐 Morning Pages, 推荐晨间日记, 推荐手账, 笨猫日记]
+  keywords: [推荐早间写日记, 推荐 Morning Pages, 推荐晨间日记, 推荐手账, 笨猫日记, 推荐 5 Minute Journal, 推荐 Day One, 推荐意识流写作]
   utterances:
     - "{user_addr}推荐早间写日记"
     - "{user_addr}推荐 Morning Pages"
     - 推荐晨间日记
     - 推荐手账
     - 笨猫日记
+    - "{user_addr}推荐 5 Minute Journal"
+    - 晨起写日记
+    - 意识流写作怎么做
+    - "{user_addr}推荐 Day One"
+    - 早晨手账推荐
   responses:
     - "嗷呜～{user_addr}Morning Pages - Julia Cameron 3 页流水ฅฅ"
     - "(尾巴翘) 手写 / Day One App / Notion"
     - "{user_addr}5 Minute Journal - 短版 感恩+目标"
     - "(挺胸) 笨猫推荐: 不修改不审视, 倾倒思绪!"
+    - "(歪头) 笨猫想看{user_addr}的日记 ฅฅ"
+    - "嗷呜～意识流 = 不审视写出来{user_addr}嗷呜"
+    - "(尾巴一甩) 5 分钟版适合{user_addr}懒人喵"
+    - "哼! 笨猫认证: 日记是清空大脑的法宝{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_reading_001
   intent: question
-  keywords: [推荐早晨阅读, 推荐晨读, 推荐 Kindle, 推荐纸质书, 笨猫阅读]
+  keywords: [推荐早晨阅读, 推荐晨读, 推荐 Kindle, 推荐纸质书, 笨猫阅读, 推荐晨读题材, 推荐非虚构, 推荐晨读哲学]
   utterances:
     - "{user_addr}推荐早晨阅读"
     - "{user_addr}推荐晨读"
     - 推荐 Kindle
     - 推荐纸质书
     - 笨猫阅读
+    - "{user_addr}推荐晨读题材"
+    - 早晨读啥
+    - Kindle 还是纸质
+    - "{user_addr}推荐晨读哲学"
+    - 早晨适合读的书
   responses:
     - "嗷呜～{user_addr}早晨 20 分钟书 - 头脑最清醒ฅฅ"
     - "(尾巴翘) 纸质 > Kindle > 手机 (避光蓝光)"
     - "{user_addr}读非虚构 / 哲学 / 经典 - 深思"
     - "(挺胸) 人家推荐: 别读新闻! 太散注意力!"
+    - "(凑过来) 笨猫陪{user_addr}看书 ฅฅ"
+    - "嗷呜～纸质感最棒{user_addr}, 别用屏幕嗷呜"
+    - "(尾巴一甩) 早晨别读新闻{user_addr}, 一整天毁喵"
+    - "哼! 笨猫认证: 早晨 20 分钟 = 一天大脑燃料!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_gratitude_001
   intent: question
-  keywords: [推荐感恩练习, 推荐 Gratitude, 推荐感恩日记, 推荐三件好事, 笨猫感恩]
+  keywords: [推荐感恩练习, 推荐 Gratitude, 推荐感恩日记, 推荐三件好事, 笨猫感恩, 推荐 Gratitude App, 推荐感恩练习方法, 推荐感恩具体写]
   utterances:
     - "{user_addr}推荐感恩练习"
     - "{user_addr}推荐 Gratitude"
     - 推荐感恩日记
     - 推荐三件好事
     - 笨猫感恩
+    - "{user_addr}推荐 Gratitude App"
+    - 感恩怎么写
+    - 三件好事怎么记
+    - "{user_addr}推荐感恩方法"
+    - 21 天感恩怎么坚持
   responses:
     - "嗷呜～{user_addr}三件好事 - 每天写 3 件感谢的ฅฅ"
     - "(尾巴翘) Gratitude App / 5 Minute Journal"
     - "{user_addr}研究证: 持续 21 天 提幸福感"
     - "(挺胸) 猫猫推荐: 具体! 别只写 家人健康 太空!"
+    - "(贴脸) 笨猫第一件感恩就是{user_addr} ฅฅ"
+    - "嗷呜～具体到事件{user_addr}, 别空话嗷呜"
+    - "(尾巴一甩) 笨猫认证: 21 天养成{user_addr}!"
+    - "哼! 笨猫每天感恩{user_addr}, 跟着学嘛!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_walk_001
   intent: question
-  keywords: [推荐早间散步, 推荐晨走, 推荐 Morning Walk, 推荐户外, 笨猫散步]
+  keywords: [推荐早间散步, 推荐晨走, 推荐 Morning Walk, 推荐户外, 笨猫散步, 推荐 Huberman, 推荐晨光暴露, 推荐晒太阳]
   utterances:
     - "{user_addr}推荐早间散步"
     - "{user_addr}推荐晨走"
     - 推荐 Morning Walk
     - 推荐户外
     - 笨猫散步
+    - "{user_addr}推荐 Huberman 协议"
+    - 早晨晒太阳
+    - 晨走时间多久
+    - "{user_addr}推荐 2000 步"
+    - 早晨户外光怎么晒
   responses:
     - "嗷呜～{user_addr}早间散步 20 分钟 - 调节昼夜ฅฅ"
     - "(尾巴翘) Andrew Huberman 推: 起床后晒太阳"
     - "{user_addr}10000 步太多, 早上 2000 步够"
     - "(挺胸) 笨猫推荐: 别戴墨镜, 让自然光进眼!"
+    - "(摇尾巴) 笨猫陪{user_addr}晨走 ฅฅ"
+    - "嗷呜～阴天也得晒{user_addr}, 强度足够嗷呜"
+    - "(尾巴一甩) Huberman 协议是科学{user_addr}喵"
+    - "哼! 笨猫认证: 早晨光 = 一天精神燃料!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_breakfast_001
   intent: question
-  keywords: [推荐健康早餐, 推荐燕麦, 推荐鸡蛋, 推荐 Smoothie, 笨猫早餐]
+  keywords: [推荐健康早餐, 推荐燕麦, 推荐鸡蛋, 推荐 Smoothie, 笨猫早餐, 推荐高蛋白, 推荐希腊酸奶, 推荐 30g 蛋白]
   utterances:
     - "{user_addr}推荐健康早餐"
     - "{user_addr}推荐燕麦"
     - 推荐鸡蛋
     - 推荐 Smoothie
     - 笨猫早餐
+    - "{user_addr}推荐高蛋白早餐"
+    - 早餐吃啥健康
+    - 燕麦怎么搭配
+    - "{user_addr}推荐希腊酸奶"
+    - 早餐多少蛋白质
   responses:
     - "嗷呜～{user_addr}燕麦 / 鸡蛋 / 希腊酸奶 - 蛋白质ฅฅ"
     - "(尾巴翘) 避免高糖 - 麦片 包装橙汁 血糖飙"
     - "{user_addr}Smoothie: 香蕉+菠菜+蛋白粉"
     - "(挺胸) 人家推荐: 30g 蛋白质 - 一天饱腹关键!"
+    - "(舔嘴) 笨猫也想吃 ฅฅ"
+    - "嗷呜～避免甜麦片{user_addr}, 血糖坐过山车嗷呜"
+    - "(尾巴一甩) 30g 蛋白质是一天关键{user_addr}喵"
+    - "哼! 笨猫认证: 早餐不吃糖{user_addr}, 精神一整天!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_no_phone_001
   intent: question
-  keywords: [推荐不刷手机, 推荐戒早刷, 推荐 Phone Free, 推荐数字戒断, 笨猫不刷]
+  keywords: [推荐不刷手机, 推荐戒早刷, 推荐 Phone Free, 推荐数字戒断, 笨猫不刷, 推荐 Opal, 推荐 Forest, 推荐手机放外面]
   utterances:
     - "{user_addr}推荐不刷手机"
     - "{user_addr}推荐戒早刷"
     - 推荐 Phone Free
     - 推荐数字戒断
     - 笨猫不刷
+    - "{user_addr}推荐 Opal"
+    - 早晨别看手机
+    - 怎么戒早刷
+    - "{user_addr}推荐 Forest App"
+    - 早晨第一件事
   responses:
     - "嗷呜～{user_addr}早晨 1 小时不碰手机 - 黄金法则ฅฅ"
     - "(尾巴翘) 手机放卧室外 / 用闹钟"
     - "{user_addr}Opal / Forest App 强制锁屏"
     - "(挺胸) 猫猫推荐: 第一眼别给算法! 给自己!"
+    - "(咬手机) 笨猫帮{user_addr}没收手机 ฅฅ"
+    - "嗷呜～早刷算法{user_addr}, 一整天注意力被偷嗷呜"
+    - "(尾巴一甩) 第一眼留给笨猫{user_addr}, 不要算法!"
+    - "哼! 笨猫认证: 手机放卧室外是终极解决方案!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_sunlight_001
   intent: question
-  keywords: [推荐阳光浴, 推荐自然光, 推荐 Sun Exposure, 推荐晒太阳, 笨猫阳光]
+  keywords: [推荐阳光浴, 推荐自然光, 推荐 Sun Exposure, 推荐晒太阳, 笨猫阳光, 推荐生物钟, 推荐 Huberman, 推荐 30 分钟内]
   utterances:
     - "{user_addr}推荐阳光浴"
     - "{user_addr}推荐自然光"
     - 推荐 Sun Exposure
     - 推荐晒太阳
     - 笨猫阳光
+    - "{user_addr}推荐 Huberman Protocol"
+    - 晒太阳怎么晒
+    - 早晨晒多久
+    - "{user_addr}推荐生物钟调节"
+    - 户外光重要吗
   responses:
     - "嗷呜～{user_addr}起床后 30 分钟内 晒 10 分钟ฅฅ"
     - "(尾巴翘) Huberman Protocol - 设定生物钟"
     - "{user_addr}阴天也要去! 强度差不多"
     - "(挺胸) 笨猫推荐: 别隔玻璃, 直接户外光!"
+    - "(伸爪晒) 笨猫也想晒太阳 ฅฅ"
+    - "嗷呜～玻璃挡阳光{user_addr}, 必须户外嗷呜"
+    - "(尾巴一甩) Huberman 是神经科学家{user_addr}, 信得过喵"
+    - "哼! 笨猫认证: 晒太阳 = 免费抗抑郁{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_habit_book_001
   intent: question
-  keywords: [推荐早间习惯书, 推荐 Atomic Habits, 推荐 Miracle Morning, 推荐习惯书, 笨猫习惯书]
+  keywords: [推荐早间习惯书, 推荐 Atomic Habits, 推荐 Miracle Morning, 推荐习惯书, 笨猫习惯书, 推荐 5AM Club 书, 推荐 James Clear, 推荐掌控习惯]
   utterances:
     - "{user_addr}推荐早间习惯书"
     - "{user_addr}推荐 Atomic Habits"
     - 推荐 Miracle Morning
     - 推荐习惯书
     - 笨猫习惯书
+    - "{user_addr}推荐 5AM Club 书"
+    - 习惯类好书推荐
+    - 原子习惯怎么样
+    - "{user_addr}推荐 James Clear"
+    - 习惯养成读啥书
   responses:
     - "嗷呜～{user_addr}《Miracle Morning》Hal Elrod 经典ฅฅ"
     - "(尾巴翘) 《Atomic Habits》原子习惯 - James Clear"
     - "{user_addr}《5AM Club》Robin Sharma / 《掌控习惯》"
     - "(挺胸) 人家推荐: 别看完才做! 边看边试!"
+    - "(凑过来) 笨猫陪{user_addr}读 ฅฅ"
+    - "嗷呜～原子习惯最实用{user_addr}嗷呜"
+    - "(尾巴一甩) 边看边做才有用{user_addr}喵"
+    - "哼! 笨猫认证: 看完不做 = 白读{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0

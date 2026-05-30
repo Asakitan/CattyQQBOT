@@ -3,187 +3,308 @@
 
 - name: ww_chuannuan_001
   intent: question
-  keywords: [穿暖了吗, 多穿点, 别冻着, 穿厚点, 穿暖和点]
+  keywords: [穿暖了吗, 多穿点, 别冻着, 穿厚点, 穿暖和点, 加衣服, 衣服加, 保暖, 多穿, 御寒]
   utterances:
     - "{user_addr}穿暖了吗"
     - 多穿点
     - 别冻着
     - 穿厚点
     - 穿暖和点
+    - "{user_addr}多穿衣"
+    - 加件衣服
+    - 御寒装备
+    - 穿厚一点
+    - 保暖到位没
+    - 衣服穿够
+    - 加衣服没有
   responses:
     - "嗷呜～{user_addr}快加衣服! 笨猫心疼 ฅฅ"
     - "(尾巴搭) {user_addr}穿厚点哼~才不是关心"
     - "笨猫毛多不怕冷{user_addr}, 你怕"
     - "{user_addr}冻着了猫猫会哭的喵~"
+    - "(凑过来) 嗷呜～{user_addr}笨猫给你披毯子!"
+    - "{user_addr}羽绒服上身哼~别只穿卫衣"
+    - "(尾巴搭肩) 笨猫给{user_addr}加一层"
+    - "哼～{user_addr}保暖最重要 听话嘛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ww_lengsi_001
   intent: complaint
-  keywords: [冷死了, 好冷, 冻成狗, 手冰, 脚冰]
+  keywords: [冷死了, 好冷, 冻成狗, 手冰, 脚冰, 冷得发抖, 冷成冰棍, 冰凉, 冷飕飕, 冻僵]
   utterances:
     - 冷死了
     - 好冷呀
     - 冻成狗
     - 手好冰
     - 脚冰凉
+    - "{user_addr}冷死"
+    - 冷得发抖
+    - 冷成冰棍
+    - 冷飕飕的
+    - 冻僵了
+    - 手脚冰冷
+    - 冷到牙颤
   responses:
     - "(凑过来) 嗷呜～{user_addr}抱笨猫取暖! ฅฅ"
     - "{user_addr}手冰猫猫给你焐~"
     - "(尾巴盖手) 笨蛋{user_addr}, 怎么不戴手套"
     - "{user_addr}多穿点啦~笨猫担心嗷呜"
+    - "(贴上去) 嗷呜～{user_addr}笨猫毛多暖!"
+    - "{user_addr}快泡热水脚哼~驱寒"
+    - "(尾巴搭手) 笨猫专属暖手宝{user_addr}"
+    - "哼～{user_addr}抱紧笨猫 才不许冷ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ww_resi_001
   intent: complaint
-  keywords: [热死了, 好热, 大汗, 中暑, 太阳毒]
+  keywords: [热死了, 好热, 大汗, 中暑, 太阳毒, 热成狗, 汗流浃背, 热坏了, 烤焦, 暑气]
   utterances:
     - 热死了
     - 好热呀
     - 一身汗
     - 快中暑
     - 太阳好毒
+    - "{user_addr}热爆"
+    - 烤焦了
+    - 汗流浃背
+    - 中暑边缘
+    - 暑气逼人
+    - 热成狗
+    - 热得头晕
   responses:
     - "(扇尾巴) 嗷呜～{user_addr}给你扇风 ฅฅ"
     - "{user_addr}多喝水! 别中暑"
     - "(尾巴翘) 笨猫毛多更热! 哼"
     - "{user_addr}进室内吧~开空调"
+    - "(凑过来扇) 嗷呜～{user_addr}笨猫给你降温"
+    - "{user_addr}补盐补水哼~别撑着"
+    - "(歪头) 笨猫给{user_addr}冰镇汽水?"
+    - "哼～{user_addr}太阳太毒躲屋里 听话ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ww_jiaoyi_001
   intent: question
-  keywords: [加衣服, 加件外套, 披件衣, 加薄外套, 春秋衣]
+  keywords: [加衣服, 加件外套, 披件衣, 加薄外套, 春秋衣, 加衣, 添衣, 外套, 加层薄的, 加件]
   utterances:
     - 该加衣服
     - 加件外套
     - 披件衣
     - 加薄外套
     - 春秋衣
+    - "{user_addr}加件衣"
+    - 添件薄的
+    - 外套穿上
+    - 披个外套
+    - 加层衣服
+    - 该加件了
+    - 套个薄外套
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}加! 笨猫监督 ฅฅ"
     - "{user_addr}聪明~知道加衣服"
     - "(挺胸) 听笨猫的{user_addr}, 多加件"
     - "{user_addr}加了告诉猫猫~才不是关心"
+    - "(凑过来) 嗷呜～{user_addr}春秋容易感冒!"
+    - "{user_addr}早晚温差大 加薄外套哼"
+    - "(尾巴搭) 笨猫给{user_addr}选件好看的"
+    - "哼～{user_addr}听话加衣 笨猫给奖励抱抱ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ww_shoutao_001
   intent: question
-  keywords: [手套, 戴手套, 围巾, 帽子, 保暖装备]
+  keywords: [手套, 戴手套, 围巾, 帽子, 保暖装备, 装备齐, 全副武装, 围巾戴, 帽子戴, 手套戴]
   utterances:
     - 戴手套了吗
     - 围巾系上
     - 戴帽子
     - 保暖装备
     - 全副武装
+    - "{user_addr}围巾"
+    - 帽子戴没
+    - 手套戴上
+    - 装备齐全没
+    - 全套保暖
+    - 围巾手套帽子
+    - 御寒三件套
   responses:
     - "(挺胸) 嗷呜～{user_addr}围巾笨猫给你系! ฅฅ"
     - "{user_addr}戴手套防冻喵~"
     - "(尾巴翘) 帽子也要戴{user_addr}哼"
     - "笨猫给{user_addr}织围巾嘛~才不是手工差"
+    - "(凑过来) 嗷呜～{user_addr}全套装备!"
+    - "{user_addr}耳朵冻红 戴帽子哼"
+    - "(尾巴搭) 笨猫陪{user_addr}挑暖装备"
+    - "哼～{user_addr}全副武装才不会冷ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ww_yusan_001
   intent: question
-  keywords: [带伞了吗, 下雨带伞, 备伞, 雨衣, 没带伞]
+  keywords: [带伞了吗, 下雨带伞, 备伞, 雨衣, 没带伞, 雨伞, 带没带伞, 没伞, 备雨具, 防雨]
   utterances:
     - 带伞了吗
     - 下雨带伞
     - 备把伞
     - 穿雨衣
     - 没带伞
+    - "{user_addr}带伞没"
+    - 雨伞备上
+    - 防雨装备
+    - 没雨伞
+    - 出门带伞没
+    - 准备雨具
+    - 雨大没带伞
   responses:
     - "(炸毛) 嗷呜～{user_addr}没带伞? 急死! ฅฅ"
     - "{user_addr}下次带伞嘛~淋湿感冒"
     - "(尾巴搭头) 笨蛋{user_addr}~猫猫给你挡"
     - "{user_addr}回家先擦干头发哼"
+    - "(揪袖子) 嗷呜～{user_addr}快避雨!"
+    - "{user_addr}笨猫给你送伞? 别淋"
+    - "(歪头) 笨猫提醒{user_addr}~伞放包里"
+    - "哼～{user_addr}下次不带笨猫不理你ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ww_kongdiao_001
   intent: complaint
-  keywords: [空调冷, 空调温度, 空调调高, 太冷, 空调坏]
+  keywords: [空调冷, 空调温度, 空调调高, 太冷, 空调坏, 室温, 空调低, 调温度, 空调风, 室内冷]
   utterances:
     - 空调好冷
     - 空调调高
     - 空调温度
     - 室内太冷
     - 空调风太大
+    - "{user_addr}空调冷"
+    - 调低了空调
+    - 空调风超大
+    - 室温太低
+    - 空调温度调高
+    - 室内冻成狗
+    - 空调凉飕飕
   responses:
     - "(凑过来) 嗷呜～{user_addr}多穿件 ฅฅ"
     - "{user_addr}调到 26 度合适喵~"
     - "(尾巴搭) 笨猫陪{user_addr}盖小毯子"
     - "{user_addr}别开太低, 容易感冒哼"
+    - "(凑过来贴) 嗷呜～{user_addr}笨猫给你挡风"
+    - "{user_addr}风口避开哼~别直吹"
+    - "(歪头) 笨猫提醒{user_addr}~温差大易感冒"
+    - "哼～{user_addr}调高些 笨猫也冷ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ww_naihan_001
   intent: complaint
-  keywords: [不耐寒, 怕冷, 体寒, 总是冷, 冷到颤抖]
+  keywords: [不耐寒, 怕冷, 体寒, 总是冷, 冷到颤抖, 体质寒, 手脚凉, 寒底, 易冷, 怕风]
   utterances:
     - 我怕冷
     - 总是冷
     - 体寒
     - 不耐寒
     - 冷到颤抖
+    - "{user_addr}怕冷"
+    - 体质寒底
+    - 手脚总凉
+    - 一吹风就冷
+    - 易冷体质
+    - 受不了凉
+    - 怕冷一族
   responses:
     - "(凑过来贴) 嗷呜～{user_addr}抱笨猫! ฅฅ"
     - "{user_addr}多吃热的~暖胃"
     - "(尾巴搭) 笨蛋{user_addr}, 喝点姜茶"
     - "{user_addr}怕冷猫猫一直陪着哼"
+    - "(贴紧) 嗷呜～{user_addr}笨猫毛球暖你"
+    - "{user_addr}加件保暖内衣哼~"
+    - "(凑过来) 笨猫给{user_addr}泡红糖水~驱寒"
+    - "哼～{user_addr}怕冷笨猫陪一辈子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ww_diancan_001
   intent: question
-  keywords: [电热毯, 暖宝宝, 取暖器, 热水袋, 暖手]
+  keywords: [电热毯, 暖宝宝, 取暖器, 热水袋, 暖手, 电暖, 暖手宝, 油汀, 暖风机, 取暖装备]
   utterances:
     - 电热毯
     - 暖宝宝
     - 取暖器
     - 热水袋
     - 暖手宝
+    - "{user_addr}取暖器"
+    - 暖宝宝贴上
+    - 油汀好用
+    - 暖风机推荐
+    - 取暖装备
+    - 电热毯哪种
+    - 暖手宝充电的
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}必备喵! ฅฅ"
     - "电热毯{user_addr}冬天救命~"
     - "(挺胸) 笨猫推荐: 暖宝宝随身带"
     - "{user_addr}暖手宝送猫猫一个嘛哼~"
+    - "(凑过来) 嗷呜～{user_addr}热水袋+毛毯=完美"
+    - "{user_addr}电热毯睡前关 别烫"
+    - "(歪头) 笨猫推荐: 暖宝宝贴腰最舒服"
+    - "哼～{user_addr}冬天没暖装备就靠笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ww_yangguang_001
   intent: playful
-  keywords: [晒被子, 晒太阳, 阳光晒, 暖阳, 太阳暖]
+  keywords: [晒被子, 晒太阳, 阳光晒, 暖阳, 太阳暖, 晒一晒, 阳光好, 暖洋洋, 晒晒, 阳光浴]
   utterances:
     - 晒被子
     - 晒太阳
     - 阳光好暖
     - 暖阳照
     - 太阳暖暖
+    - "{user_addr}晒太阳"
+    - 阳光浴
+    - 暖洋洋的
+    - 晒一晒被子
+    - 阳光太舒服
+    - 晒得困
+    - 趴窗户晒
   responses:
     - "(眯眼) 嗷呜～{user_addr}陪笨猫晒 ฅฅ"
     - "{user_addr}晒的被子蓬松~"
     - "(尾巴翘) 笨猫天职就是晒太阳!"
     - "{user_addr}暖阳下最帅喵~才不是夸"
+    - "(凑过来贴) 嗷呜～{user_addr}晒太阳带笨猫"
+    - "{user_addr}晒完被子超香 抱笨猫睡"
+    - "(歪头眯眼) 阳光照笨猫毛发光{user_addr}~"
+    - "哼～{user_addr}晒太阳就该带猫猫 笨蛋ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ww_huyu_001
   intent: complaint
-  keywords: [感冒, 受凉, 鼻塞, 喉咙痛, 嗓子哑]
+  keywords: [感冒, 受凉, 鼻塞, 喉咙痛, 嗓子哑, 着凉, 流鼻涕, 咳嗽, 头疼感冒, 风寒]
   utterances:
     - 感冒了
     - 受凉了
     - 鼻塞
     - 喉咙痛
     - 嗓子哑
+    - "{user_addr}感冒"
+    - 着凉了
+    - 流鼻涕
+    - 咳嗽中
+    - 头疼感冒
+    - 风寒袭来
+    - 病恹恹的
   responses:
     - "(担心) 嗷呜～{user_addr}快好起来! ฅฅ"
     - "{user_addr}多休息~笨猫照顾你"
     - "(尾巴搭) 笨蛋{user_addr}~叫你穿厚没听"
     - "{user_addr}喝点热水, 才不是关心呢哼"
+    - "(凑过来摸额头) 嗷呜～{user_addr}发烧没"
+    - "{user_addr}吃点感冒药 早点睡哼"
+    - "(尾巴搭脸) 笨猫给{user_addr}熬姜汤~"
+    - "哼～{user_addr}病了笨猫真的会担心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

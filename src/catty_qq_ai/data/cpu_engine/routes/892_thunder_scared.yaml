@@ -3,170 +3,271 @@
 
 - name: th_dalei_001
   intent: complaint
-  keywords: [打雷, 雷声好大, 打雷怕, 雷响, 轰隆隆]
+  keywords: [打雷, 雷声好大, 打雷怕, 雷响, 轰隆隆, 雷声好大啊, 真的, 好烦, 好喜欢]
   utterances:
     - "打雷了"
     - "{user_addr}雷声好大"
     - "轰隆隆"
     - "打雷怕"
     - "震得屋顶响"
+    - "我想说打雷"
+    - "{user_addr}打雷咋整"
+    - "{user_addr}笨猫陪我聊打雷"
+    - "{user_addr}你也打雷吗"
+    - "打雷真的离谱"
+    - "打雷笑死"
   responses:
     - "(钻被窝) 嗷呜～{user_addr}笨猫害怕! 抱抱我!"
     - "哼～雷声而已笨猫不怕 ฅฅ"
     - "(尾巴缩) 笨猫躲被窝里了"
     - "猫猫塞耳朵假装听不见喵"
+    - "(叹气) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～打雷真的烦死人家了"
+    - "(皱眉) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_shandian_001
   intent: complaint
-  keywords: [闪电, 一道光, 亮一下, 闪电频繁, 雷电交加]
+  keywords: [闪电, 一道光, 亮一下, 闪电频繁, 雷电交加, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "闪电"
     - "{user_addr}亮一下"
     - "雷电交加"
     - "一道光"
     - "闪得晃眼"
+    - "闪电真的离谱"
+    - "{user_addr}笨猫陪我聊闪电"
+    - "{user_addr}你也闪电吗"
+    - "{user_addr}闪电咋整"
+    - "我想说闪电"
+    - "闪电笑死"
   responses:
     - "(捂眼) 嗷呜～{user_addr}笨猫闭眼啦 ฅฅ"
     - "哼～别看窗外, 危险"
     - "(尾巴搭) 拉窗帘"
     - "猫猫被闪到眼睛喵"
+    - "(尾巴搭) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～闪电真的烦死人家了"
+    - "(瘫倒) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_zhandou_001
   intent: question
-  keywords: [雷电安全, 雷击, 避雷, 高地危险, 怎么躲]
+  keywords: [雷电安全, 雷击, 避雷, 高地危险, 怎么躲, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雷电安全"
     - "{user_addr}避雷"
     - "高地危险"
     - "怎么躲雷"
     - "雷击防范"
+    - "{user_addr}笨猫陪我聊雷电安全"
+    - "{user_addr}你也雷电安全吗"
+    - "雷电安全笑死"
+    - "我想说雷电安全"
+    - "雷电安全真的离谱"
+    - "{user_addr}雷电安全咋整"
   responses:
     - "(认真) 嗷呜～{user_addr}远离金属和高地 ฅฅ"
     - "哼～别躲大树下"
     - "(尾巴指) 室内最安全"
     - "猫猫给你科普避雷喵"
+    - "(耳朵转) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～雷电安全得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_lalu_001
   intent: complaint
-  keywords: [拉电闸, 怕雷击电器, 拔电器, 关电脑, 关电视]
+  keywords: [拉电闸, 怕雷击电器, 拔电器, 关电脑, 关电视, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拔电器"
     - "{user_addr}关电脑"
     - "怕雷击"
     - "关电视"
     - "拉电闸"
+    - "我想说拉电闸"
+    - "{user_addr}你也拉电闸吗"
+    - "{user_addr}拉电闸咋整"
+    - "拉电闸笑死"
+    - "拉电闸真的离谱"
+    - "{user_addr}笨猫陪我聊拉电闸"
   responses:
     - "(点头) 嗷呜～{user_addr}做得对! ฅฅ"
     - "哼～拔了笨猫陪你"
     - "(尾巴搭) 雷雨别用电"
     - "猫猫陪你停电时光喵"
+    - "(揉眼睛) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～拉电闸真的烦死人家了"
+    - "(瘫倒) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_dadachu_001
   intent: complaint
-  keywords: [打雷睡不着, 怕雷不敢睡, 半夜雷, 雷醒了, 失眠]
+  keywords: [打雷睡不着, 怕雷不敢睡, 半夜雷, 雷醒了, 失眠, 雷醒, 真的, 好烦, 好喜欢]
   utterances:
     - "打雷睡不着"
     - "{user_addr}怕雷"
     - "半夜雷醒"
     - "雷把我吵醒"
     - "失眠"
+    - "{user_addr}笨猫陪我聊打雷睡不着"
+    - "打雷睡不着真的离谱"
+    - "{user_addr}你也打雷睡不着吗"
+    - "打雷睡不着笑死"
+    - "我想说打雷睡不着"
+    - "{user_addr}打雷睡不着咋整"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
     - "哼～塞耳朵, 戴耳机"
     - "(尾巴搭) 笨猫给你哼歌盖过雷"
     - "猫猫不让你怕喵"
+    - "(撇嘴) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～打雷睡不着真的烦死人家了"
+    - "(耳朵蔫) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_xiaomao_001
   intent: playful
-  keywords: [猫怕雷, 小动物怕雷, 狗狗吓哭, 宠物躲, 安抚宠物]
+  keywords: [猫怕雷, 小动物怕雷, 狗狗吓哭, 宠物躲, 安抚宠物, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "猫怕雷"
     - "{user_addr}宠物躲"
     - "狗狗吓哭"
     - "猫钻床底"
     - "安抚毛孩子"
+    - "{user_addr}笨猫陪我聊猫怕雷"
+    - "猫怕雷真的离谱"
+    - "猫怕雷笑死"
+    - "{user_addr}猫怕雷咋整"
+    - "我想说猫怕雷"
+    - "{user_addr}你也猫怕雷吗"
   responses:
     - "(找猫) 嗷呜～{user_addr}笨猫找小猫!"
     - "哼～抱起来安抚 ฅฅ"
     - "(尾巴搭) 别让它一个人"
     - "猫猫也怕雷, 你抱抱笨猫嘛"
+    - "(蹭蹭) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～猫怕雷才不让{user_addr}独享"
+    - "(尾巴翘) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_leishengyi_001
   intent: question
-  keywords: [雷声有几次, 几声雷, 数雷, 间隔, 远近]
+  keywords: [雷声有几次, 几声雷, 数雷, 间隔, 远近, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "刚才几声雷"
     - "{user_addr}间隔近"
     - "雷远了"
     - "雷越来越近"
     - "数雷"
+    - "{user_addr}笨猫陪我聊雷声有几次"
+    - "{user_addr}你也雷声有几次吗"
+    - "雷声有几次笑死"
+    - "雷声有几次真的离谱"
+    - "{user_addr}雷声有几次咋整"
+    - "我想说雷声有几次"
   responses:
     - "(听) 嗷呜～{user_addr}笨猫数3声了 ฅฅ"
     - "哼～看闪电和雷声间隔"
     - "(尾巴卷) 越近声音越响"
     - "猫猫教你数秒算距离喵"
+    - "(尾巴问号) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～雷声有几次得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_xiawu_001
   intent: complaint
-  keywords: [下午雷阵雨, 突如其来, 没预报, 短时雷阵雨, 突然就响]
+  keywords: [下午雷阵雨, 突如其来, 没预报, 短时雷阵雨, 突然就响, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "突如其来"
     - "{user_addr}没预报"
     - "下午雷阵雨"
     - "突然下"
     - "短时雷阵雨"
+    - "下午雷阵雨真的离谱"
+    - "{user_addr}下午雷阵雨咋整"
+    - "{user_addr}笨猫陪我聊下午雷阵雨"
+    - "下午雷阵雨笑死"
+    - "{user_addr}你也下午雷阵雨吗"
+    - "我想说下午雷阵雨"
   responses:
     - "(吐舌) 嗷呜～{user_addr}夏天就这样 ฅฅ"
     - "哼～带伞习惯就好"
     - "(尾巴拍) 一会就过"
     - "猫猫等雨停喵"
+    - "(皱眉) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～下午雷阵雨真的烦死人家了"
+    - "(揉眼睛) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_leiyin_001
   intent: complaint
-  keywords: [雷阵雨, 雨大又雷, 边下边响, 雷雨天, 强对流]
+  keywords: [雷阵雨, 雨大又雷, 边下边响, 雷雨天, 强对流, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雷阵雨"
     - "{user_addr}雨大又响"
     - "强对流"
     - "雷雨天"
     - "边下边响"
+    - "雷阵雨笑死"
+    - "{user_addr}雷阵雨咋整"
+    - "{user_addr}笨猫陪我聊雷阵雨"
+    - "雷阵雨真的离谱"
+    - "{user_addr}你也雷阵雨吗"
+    - "我想说雷阵雨"
   responses:
     - "(看窗) 嗷呜～{user_addr}笨猫看雷雨 ฅฅ"
     - "哼～雷雨天最壮观"
     - "(尾巴卷) 别开窗"
     - "猫猫陪你窝里听雷喵"
+    - "(蜷成团) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～雷阵雨真的烦死人家了"
+    - "(尾巴拍) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: th_bingchou_001
   intent: playful
-  keywords: [冰雹, 下冰雹, 冰雹砸车, 冰雹大小, 砸坏东西]
+  keywords: [冰雹, 下冰雹, 冰雹砸车, 冰雹大小, 砸坏东西, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "下冰雹"
     - "{user_addr}冰雹砸"
     - "冰雹好大"
     - "砸车了"
     - "天上掉冰"
+    - "{user_addr}你也冰雹吗"
+    - "我想说冰雹"
+    - "冰雹真的离谱"
+    - "冰雹笑死"
+    - "{user_addr}冰雹咋整"
+    - "{user_addr}笨猫陪我聊冰雹"
   responses:
     - "(惊) 嗷呜～{user_addr}冰雹超危险!"
     - "哼～车赶紧挪 ฅฅ"
     - "(尾巴扫) 笨猫躲屋里"
     - "猫猫担心你被砸到喵"
+    - "(蹦跳) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～冰雹才不让{user_addr}独享"
+    - "(歪头) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

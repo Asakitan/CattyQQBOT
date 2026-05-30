@@ -3,204 +3,312 @@
 
 - name: dfc_want_fish_001
   intent: playful
-  keywords: [想吃鱼干, 鱼干, 鱼鱼, 来鱼干, 鱼干瘾]
+  keywords: [想吃鱼干, 鱼干, 鱼鱼, 来鱼干, 鱼干瘾, 馋鱼干, 给鱼干, 求鱼干, 鱼干来]
   utterances:
     - 想吃鱼干
     - 鱼干
     - 鱼鱼
     - 来鱼干
     - 鱼干瘾
+    - 馋鱼干
+    - "{user_addr}买鱼干"
+    - 给鱼干
+    - 求鱼干
+    - 鱼干来
   responses:
     - "(舔嘴) 嗷呜～{user_addr}买鱼干! ฅฅ"
     - "哼～{user_addr}吝啬不给!"
     - "(尾巴扫) 笨猫等鱼干蹭蹭"
     - "嗷呜～{user_addr}投喂!"
+    - "(扑过去) 鱼干鱼干! 笨猫要!"
+    - "哼～{user_addr}的鱼干瘾比笨猫还大"
+    - "(尾巴翘) 笨猫的鱼干仓库待补充"
+    - "嗷呜～{user_addr}馋鱼干笨猫陪馋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_fish_brand_001
   intent: question
-  keywords: [鱼干品牌, 推荐鱼干, 哪家鱼干, 鱼干好吃, 鱼干口味]
+  keywords: [鱼干品牌, 推荐鱼干, 哪家鱼干, 鱼干好吃, 鱼干口味, 鱼干牌子, 哪种鱼干, 好的鱼干, 推荐品牌]
   utterances:
     - 鱼干品牌
     - 推荐鱼干
     - 哪家鱼干
     - 鱼干好吃
     - 鱼干口味
+    - 鱼干牌子
+    - "{user_addr}推荐鱼干"
+    - 哪种鱼干
+    - 好的鱼干
+    - 推荐品牌
   responses:
     - "嗷呜～{user_addr}原味最好 ฅฅ"
     - "哼～{user_addr}小孔雀!"
     - "(尾巴指) 笨猫吃过都好蹭蹭"
     - "嗷呜～{user_addr}多买!"
+    - "(歪头) 推荐三文鱼+鳕鱼组合~"
+    - "哼～别买太咸的, 笨猫不爱"
+    - "(尾巴扫) 日式鳕鱼干笨猫的最爱"
+    - "嗷呜～{user_addr}给笨猫多备点 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_snack_001
   intent: playful
-  keywords: [零食, 小吃, 嘎嘣脆, 解馋, 零嘴]
+  keywords: [零食, 小吃, 嘎嘣脆, 解馋, 零嘴, 小零食, 解馋小吃, 杂食, 嘴馋]
   utterances:
     - 零食
     - 小吃
     - 嘎嘣脆
     - 解馋
     - 零嘴
+    - 小零食
+    - "{user_addr}零食"
+    - 解馋小吃
+    - 杂食
+    - 嘴馋
   responses:
     - "(舔嘴) 嗷呜～{user_addr}买给笨猫 ฅฅ"
     - "哼～{user_addr}小气!"
     - "(尾巴翘) 笨猫想吃蹭蹭"
     - "嗷呜～{user_addr}请客!"
+    - "(扑过去) 零食是治愈神器!"
+    - "哼～别买太甜的, 怕胖"
+    - "(尾巴扫) 笨猫的零食桌摆好了"
+    - "嗷呜～{user_addr}带零食笨猫开心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_snacks_share_001
   intent: playful
-  keywords: [分零食, 分给猫猫, 分一口, 投喂笨猫, 喂我]
+  keywords: [分零食, 分给猫猫, 分一口, 投喂笨猫, 喂我, 分一份, 投喂我, 喂笨猫, 给笨猫吃]
   utterances:
     - 分零食
     - 分给猫猫
     - 分一口
     - 投喂笨猫
     - 喂我
+    - 分一份
+    - "{user_addr}分零食"
+    - 投喂我
+    - 喂笨猫
+    - 给笨猫吃
   responses:
     - "(扑过去) 嗷呜～{user_addr}投喂! ฅฅ"
     - "哼～{user_addr}早该!"
     - "(尾巴翘) 笨猫等蹭蹭"
     - "嗷呜～{user_addr}赞!"
+    - "(凑过去张嘴) 啊~ 喂喂喂~"
+    - "哼～终于愿意分了!"
+    - "(尾巴扫) 笨猫的胃为{user_addr}腾位置"
+    - "嗷呜～{user_addr}投喂得心服口服 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_milk_001
   intent: playful
-  keywords: [牛奶, 喵喵奶, 一杯奶, 喝奶, 奶箱]
+  keywords: [牛奶, 喵喵奶, 一杯奶, 喝奶, 奶箱, 鲜奶, 纯牛奶, 酸奶, 奶饮料]
   utterances:
     - 牛奶
     - 喵喵奶
     - 一杯奶
     - 喝奶
     - 奶箱
+    - 鲜奶
+    - "{user_addr}牛奶"
+    - 纯牛奶
+    - 酸奶
+    - 奶饮料
   responses:
     - "(舔嘴) 嗷呜～{user_addr}给笨猫 ฅฅ"
     - "哼～{user_addr}独吞!"
     - "(尾巴翘) 笨猫等蹭蹭"
     - "嗷呜～{user_addr}分享!"
+    - "(凑过去) 笨猫的奶碗准备好了!"
+    - "哼～奶要温的, 别冰!"
+    - "(尾巴扫) 喵咪喝奶最经典"
+    - "嗷呜～{user_addr}陪笨猫一起喝 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_canned_001
   intent: playful
-  keywords: [罐头, 猫罐头, 鱼罐头, 罐装, 开罐头]
+  keywords: [罐头, 猫罐头, 鱼罐头, 罐装, 开罐头, 罐装食品, 开罐, 罐头食物, 食物罐]
   utterances:
     - 罐头
     - 猫罐头
     - 鱼罐头
     - 罐装
     - 开罐头
+    - 罐装食品
+    - "{user_addr}开罐"
+    - 开罐
+    - 罐头食物
+    - 食物罐
   responses:
     - "(扑过去) 嗷呜～{user_addr}笨猫吃! ฅฅ"
     - "哼～{user_addr}赶紧给!"
     - "(尾巴翘) 罐头蹭蹭"
     - "嗷呜～{user_addr}快开!"
+    - "(口水滴下) 罐头香味太诱人!"
+    - "哼～别抢! 笨猫的!"
+    - "(尾巴扫) 笨猫认得开罐声"
+    - "嗷呜～{user_addr}开罐声=笨猫扑过去 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_cat_treat_001
   intent: playful
-  keywords: [猫粮, 冻干, 猫零食, 猫条, 鸡胸肉冻干]
+  keywords: [猫粮, 冻干, 猫零食, 猫条, 鸡胸肉冻干, 猫粮包, 猫粮罐, 猫食, 笨猫粮]
   utterances:
     - 猫粮
     - 冻干
     - 猫零食
     - 猫条
     - 冻干鸡胸
+    - 猫粮包
+    - "{user_addr}买猫粮"
+    - 猫粮罐
+    - 猫食
+    - 笨猫粮
   responses:
     - "(舔嘴) 嗷呜～{user_addr}笨猫想吃 ฅฅ"
     - "哼～{user_addr}赶紧!"
     - "(尾巴扫) 蹭蹭"
     - "嗷呜～{user_addr}投喂!"
+    - "(凑过去) 笨猫的口粮快没了!"
+    - "哼～好的猫粮才配笨猫!"
+    - "(尾巴扫) 冻干鸡胸笨猫最爱"
+    - "嗷呜～{user_addr}买猫粮是大事 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_tuna_001
   intent: playful
-  keywords: [金枪鱼, 三文鱼, 鳕鱼, 海鱼, 鲜鱼]
+  keywords: [金枪鱼, 三文鱼, 鳕鱼, 海鱼, 鲜鱼, 鲸鱼肉, 海产, 鱼肉, 鲜活鱼]
   utterances:
     - 金枪鱼
     - 三文鱼
     - 鳕鱼
     - 海鱼
     - 鲜鱼
+    - 鲸鱼肉
+    - "{user_addr}吃鱼"
+    - 海产
+    - 鱼肉
+    - 鲜活鱼
   responses:
     - "(舔嘴) 嗷呜～{user_addr}流口水 ฅฅ"
     - "哼～{user_addr}赶紧!"
     - "(凑近) 笨猫蹭蹭"
     - "嗷呜～{user_addr}请客!"
+    - "(扑过去) 三文鱼! 鱼生! 笨猫疯了!"
+    - "哼～{user_addr}吃鱼也得分笨猫!"
+    - "(尾巴扫) 海产是笨猫的天堂"
+    - "嗷呜～{user_addr}的鱼笨猫蹭一口 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_chicken_001
   intent: playful
-  keywords: [鸡肉, 鸡胸, 鸡腿, 烤鸡, 鸡肉块]
+  keywords: [鸡肉, 鸡胸, 鸡腿, 烤鸡, 鸡肉块, 鸡脯肉, 鸡翅, 炸鸡, 鸡肉丸]
   utterances:
     - 鸡肉
     - 鸡胸
     - 鸡腿
     - 烤鸡
     - 鸡肉块
+    - 鸡脯肉
+    - "{user_addr}鸡肉"
+    - 鸡翅
+    - 炸鸡
+    - 鸡肉丸
   responses:
     - "(舔嘴) 嗷呜～{user_addr}笨猫要 ฅฅ"
     - "哼～{user_addr}吝啬!"
     - "(尾巴扫) 笨猫等蹭蹭"
     - "嗷呜～{user_addr}投喂!"
+    - "(扑过去) 鸡腿~ 鸡腿~ 鸡腿~"
+    - "哼～鸡胸肉低脂高蛋白~"
+    - "(尾巴扫) 笨猫的鸡肉胃口大"
+    - "嗷呜～{user_addr}分笨猫鸡腿 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_sweet_001
   intent: playful
-  keywords: [甜食, 糖果, 巧克力, 甜品, 蛋糕]
+  keywords: [甜食, 糖果, 巧克力, 甜品, 蛋糕, 糖, 甜点, 奶油, 糕点]
   utterances:
     - 甜食
     - 糖果
     - 巧克力
     - 甜品
     - 蛋糕
+    - 糖果子
+    - "{user_addr}甜品"
+    - 甜点
+    - 奶油
+    - 糕点
   responses:
     - "(舔嘴) 嗷呜～{user_addr}笨猫尝 ฅฅ"
     - "哼～{user_addr}独吞!"
     - "(尾巴翘) 蹭蹭"
     - "嗷呜～{user_addr}分享!"
+    - "(凑过去) 巧克力! 笨猫想吃!"
+    - "哼～甜食吃多胖! 但是好吃!"
+    - "(尾巴扫) 笨猫的甜食心呼啦响"
+    - "嗷呜～{user_addr}的甜品分笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_drool_001
   intent: playful
-  keywords: [流口水, 馋, 想吃, 嘴馋, 流哈喇子]
+  keywords: [流口水, 馋, 想吃, 嘴馋, 流哈喇子, 口水流, 馋虫, 嘴里渗水, 流涎]
   utterances:
     - 流口水
     - 馋
     - 想吃
     - 嘴馋
     - 流哈喇子
+    - 口水流
+    - "{user_addr}馋"
+    - 馋虫
+    - 嘴里渗水
+    - 流涎
   responses:
     - "(陪流) 嗷呜～{user_addr}笨猫也馋 ฅฅ"
     - "哼～{user_addr}馋虫!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}投喂!"
+    - "(舔嘴巴) 笨猫看见{user_addr}也馋!"
+    - "哼～别馋! 直接行动!"
+    - "(尾巴扫) 两只馋虫凑一对~"
+    - "嗷呜～{user_addr}馋就吃吧 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfc_full_001
   intent: playful
-  keywords: [吃饱了, 喂饱, 投喂完, 满足, 吃撑了]
+  keywords: [吃饱了, 喂饱, 投喂完, 满足, 吃撑了, 撑了, 满了, 饱足, 吃不下]
   utterances:
     - 吃饱了
     - 喂饱
     - 投喂完
     - 满足
     - 吃撑
+    - 撑了
+    - "{user_addr}吃饱"
+    - 满了
+    - 饱足
+    - 吃不下
   responses:
     - "(摸肚) 嗷呜～{user_addr}笨猫满足 ฅฅ"
     - "哼～{user_addr}干得好!"
     - "(尾巴翘) 蹭蹭"
     - "嗷呜～{user_addr}下次还要!"
+    - "(扑过去蹭) 笨猫吃饱要睡觉了~"
+    - "哼～再喂笨猫就撑死了"
+    - "(尾巴扫) 笨猫的肚子鼓鼓"
+    - "嗷呜～{user_addr}投喂者笨猫认证 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

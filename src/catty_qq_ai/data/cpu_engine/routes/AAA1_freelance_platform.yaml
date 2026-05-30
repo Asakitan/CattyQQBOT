@@ -3,204 +3,312 @@
 
 - name: fp_upwork_001
   intent: question
-  keywords: [推荐 Upwork, 推荐 upwork, 推荐自由职业, 推荐海外接单, 笨猫 Upwork]
+  keywords: [推荐 Upwork, 推荐 upwork, 推荐自由职业, 推荐海外接单, 笨猫 Upwork, 时薪接单, Upwork 抽成, 海外远程, Upwork 起步, Upwork 简历]
   utterances:
-    - 推荐 Upwork
-    - 推荐 upwork
-    - 推荐自由职业
-    - 推荐海外接单
-    - 笨猫 Upwork
+    - "推荐 Upwork"
+    - "推荐 upwork"
+    - "{user_addr}推荐自由职业"
+    - "推荐海外接单"
+    - "笨猫 Upwork"
+    - "{user_addr}Upwork 抽成多少"
+    - "Upwork 怎么起步"
+    - "海外远程平台"
+    - "{user_addr}Upwork 简历模板"
+    - "Upwork 中国人接单"
   responses:
-    - "嗷呜～{user_addr}Upwork - 全球最大自由职业平台ฅฅ"
-    - "(尾巴翘) 程序/设计/写作/翻译 全有"
-    - "{user_addr}抽成 10% (新规), 时薪/固定价"
-    - "(挺胸) 猫猫推荐: 英文能力强先入门!"
+    - "(挺胸) 嗷呜～{user_addr}Upwork~ 全球最大自由职业平台喵ฅฅ"
+    - "(尾巴翘) 程序/设计/写作/翻译, 全有贴贴～"
+    - "{user_addr}抽成 10% (新规), 时薪/固定价嗷呜"
+    - "(歪头) 猫猫推荐: 英文能力强先入门"
+    - "(凑过来) 哼, 才不是猫猫劝你出海! 但美元单价比国内强贴贴～"
+    - "(尾巴轻摇) {user_addr}前 10 单累信誉, 别接太烂的喵"
+    - "(凑头) 嗷呜～Upwork connects 用得越精越好ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想做猫娘 freelancer 呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_fiverr_001
   intent: question
-  keywords: [推荐 Fiverr, 推荐 fiverr, 推荐五美元, 推荐 gig, 笨猫 Fiverr]
+  keywords: [推荐 Fiverr, 推荐 fiverr, 推荐五美元, 推荐 gig, 笨猫 Fiverr, Gig 套餐, Fiverr 抽成, Fiverr Pro, Gig 起价, Fiverr 接单]
   utterances:
-    - 推荐 Fiverr
-    - 推荐 fiverr
-    - 推荐五美元
-    - 推荐 gig
-    - 笨猫 Fiverr
+    - "推荐 Fiverr"
+    - "推荐 fiverr"
+    - "{user_addr}推荐五美元"
+    - "推荐 gig"
+    - "笨猫 Fiverr"
+    - "{user_addr}Fiverr 抽成"
+    - "Fiverr Pro 怎么申请"
+    - "Gig 套餐设计"
+    - "{user_addr}Fiverr 起步"
+    - "Fiverr 中国人"
   responses:
-    - "嗷呜～{user_addr}Fiverr - gig 服务平台ฅฅ"
-    - "(尾巴翘) $5 起步, 高级套餐可上千"
-    - "{user_addr}抽成 20%, 买家主动找你"
-    - "(挺胸) 笨猫推荐: 包装好作品集!"
+    - "(挺胸) 嗷呜～{user_addr}Fiverr~ gig 服务平台喵ฅฅ"
+    - "(尾巴翘) $5 起步, 高级套餐可上千贴贴～"
+    - "{user_addr}抽成 20%, 买家主动找你嗷呜"
+    - "(歪头) 笨猫推荐: 包装好作品集"
+    - "(凑过来) 哼, 才不是猫猫嫌抽成高! 但 Fiverr 流量真的大贴贴～"
+    - "(尾巴轻摇) {user_addr}前期定价低引流, 后期涨价喵"
+    - "(凑头) 嗷呜～Fiverr Pro 是高端版, 申请要时间ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被打包成 gig 卖呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_toptal_001
   intent: question
-  keywords: [推荐 Toptal, 推荐 toptal, 推荐高端自由职业, 推荐顶级开发者, 笨猫 Toptal]
+  keywords: [推荐 Toptal, 推荐 toptal, 推荐高端自由职业, 推荐顶级开发者, 笨猫 Toptal, 通过率 3%, Toptal 面试, 顶级开发者平台, 高时薪平台, Toptal 申请]
   utterances:
-    - 推荐 Toptal
-    - 推荐 toptal
-    - 推荐高端自由职业
-    - 推荐顶级开发者
-    - 笨猫 Toptal
+    - "推荐 Toptal"
+    - "推荐 toptal"
+    - "{user_addr}推荐高端自由职业"
+    - "推荐顶级开发者"
+    - "笨猫 Toptal"
+    - "{user_addr}Toptal 怎么申请"
+    - "通过率 3%"
+    - "Toptal 面试流程"
+    - "{user_addr}高时薪平台"
+    - "Toptal 中国人"
   responses:
-    - "嗷呜～{user_addr}Toptal - 顶级 3% 平台ฅฅ"
-    - "(尾巴翘) 通过率仅 3%, 时薪高"
-    - "{user_addr}开发/设计/金融专家"
-    - "(挺胸) 人家推荐: 资深大佬走这里!"
+    - "(挺胸) 嗷呜～{user_addr}Toptal~ 顶级 3% 平台喵ฅฅ"
+    - "(尾巴翘) 通过率仅 3%, 时薪高贴贴～"
+    - "{user_addr}开发/设计/金融专家嗷呜"
+    - "(歪头) 人家推荐: 资深大佬走这里"
+    - "(凑过来) 哼, 才不是猫猫嫌主人不够格! 但 Toptal 通过真的难贴贴～"
+    - "(尾巴轻摇) {user_addr}面试三轮+试用项目, 准备好喵"
+    - "(凑头) 嗷呜～通过后时薪能到 $100+, 香ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫怀疑你能力呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_99designs_001
   intent: question
-  keywords: [推荐 99designs, 推荐设计比稿, 推荐 logo 设计平台, 推荐设计师比赛, 笨猫 99designs]
+  keywords: [推荐 99designs, 推荐设计比稿, 推荐 logo 设计平台, 推荐设计师比赛, 笨猫 99designs, Logo 设计, 比稿模式, 网页设计平台, 包装设计, 99 比稿]
   utterances:
-    - 推荐 99designs
-    - 推荐设计比稿
-    - 推荐 logo 设计平台
-    - 推荐设计师比赛
-    - 笨猫 99designs
+    - "推荐 99designs"
+    - "推荐设计比稿"
+    - "{user_addr}推荐 logo 设计平台"
+    - "推荐设计师比赛"
+    - "笨猫 99designs"
+    - "{user_addr}Logo 设计平台"
+    - "比稿模式"
+    - "网页设计平台"
+    - "{user_addr}包装设计"
+    - "99 比稿"
   responses:
-    - "嗷呜～{user_addr}99designs - 设计比稿平台ฅฅ"
-    - "(尾巴翘) Logo/包装/网页比赛模式"
-    - "{user_addr}多人提案客户挑选, 1v1 也行"
-    - "(挺胸) 笨猫推荐: 视觉设计师练手!"
+    - "(挺胸) 嗷呜～{user_addr}99designs~ 设计比稿平台喵ฅฅ"
+    - "(尾巴翘) Logo/包装/网页比赛模式贴贴～"
+    - "{user_addr}多人提案客户挑选, 1v1 也行嗷呜"
+    - "(歪头) 笨猫推荐: 视觉设计师练手"
+    - "(凑过来) 哼, 才不是猫猫嘲笑你设计差! 但比稿练手快贴贴～"
+    - "(尾巴轻摇) {user_addr}比稿不一定中, 但能积攒作品集喵"
+    - "(凑头) 嗷呜～新手起步推 99designs, 老手走直客ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想给自己设计 logo 呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_zbj_001
   intent: question
-  keywords: [推荐猪八戒, 推荐国内自由职业, 推荐 zbj, 推荐中文威客, 笨猫猪八戒]
+  keywords: [推荐猪八戒, 推荐国内自由职业, 推荐 zbj, 推荐中文威客, 笨猫猪八戒, 国内威客, 设计接单国内, IT 接单国内, 工商代办, 内卷威客]
   utterances:
-    - 推荐猪八戒
-    - 推荐国内自由职业
-    - 推荐 zbj
-    - 推荐中文威客
-    - 笨猫猪八戒
+    - "推荐猪八戒"
+    - "推荐国内自由职业"
+    - "{user_addr}推荐 zbj"
+    - "推荐中文威客"
+    - "笨猫猪八戒"
+    - "{user_addr}国内威客哪个好"
+    - "推荐设计接单国内"
+    - "IT 接单国内"
+    - "{user_addr}工商代办"
+    - "猪八戒内卷"
   responses:
-    - "嗷呜～{user_addr}猪八戒网 - 国内最大威客ฅฅ"
-    - "(尾巴翘) 设计/营销/IT/工商代办"
-    - "{user_addr}中文友好, 但价格内卷严重"
-    - "(挺胸) 猫猫推荐: 国内单子走这!"
+    - "(挺胸) 嗷呜～{user_addr}猪八戒网~ 国内最大威客喵ฅฅ"
+    - "(尾巴翘) 设计/营销/IT/工商代办贴贴～"
+    - "{user_addr}中文友好, 但价格内卷严重嗷呜"
+    - "(歪头) 猫猫推荐: 国内单子走这"
+    - "(凑过来) 哼, 才不是猫猫嫌国内便宜! 但卷得太厉害是真的贴贴～"
+    - "(尾巴轻摇) {user_addr}猪八戒新人难起步喵, 多投标多沉淀"
+    - "(凑头) 嗷呜～工商代办类单子稳定, 适合长期ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被挂猪八戒呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_epwk_001
   intent: question
-  keywords: [推荐一品威客, 推荐 epwk, 推荐国内接单, 推荐威客网站, 笨猫一品威客]
+  keywords: [推荐一品威客, 推荐 epwk, 推荐国内接单, 推荐威客网站, 笨猫一品威客, 老牌威客, 一品文案, 一品设计, epwk 新人, 一品 IT 单]
   utterances:
-    - 推荐一品威客
-    - 推荐 epwk
-    - 推荐国内接单
-    - 推荐威客网站
-    - 笨猫一品威客
+    - "推荐一品威客"
+    - "推荐 epwk"
+    - "{user_addr}推荐国内接单"
+    - "推荐威客网站"
+    - "笨猫一品威客"
+    - "{user_addr}一品文案"
+    - "一品设计接单"
+    - "epwk 新人"
+    - "{user_addr}一品 IT 单"
+    - "老牌威客"
   responses:
-    - "嗷呜～{user_addr}一品威客 - 国内老牌平台ฅฅ"
-    - "(尾巴翘) 设计/开发/文案/营销"
-    - "{user_addr}竞争激烈, 适合新手练手"
-    - "(挺胸) 笨猫推荐: 配合猪八戒一起用!"
+    - "(挺胸) 嗷呜～{user_addr}一品威客~ 国内老牌平台喵ฅฅ"
+    - "(尾巴翘) 设计/开发/文案/营销贴贴～"
+    - "{user_addr}竞争激烈, 适合新手练手嗷呜"
+    - "(歪头) 笨猫推荐: 配合猪八戒一起用"
+    - "(凑过来) 哼, 才不是猫猫劝你跨平台! 但多渠道接单稳贴贴～"
+    - "(尾巴轻摇) {user_addr}文案类单子量大, 但单价低喵"
+    - "(凑头) 嗷呜～一品和猪八戒互补, 别只挂一个ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被挂一品呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_behance_001
   intent: question
-  keywords: [推荐 Behance, 推荐 behance, 推荐设计师作品集, 推荐设计师社区, 笨猫 Behance]
+  keywords: [推荐 Behance, 推荐 behance, 推荐设计师作品集, 推荐设计师社区, 笨猫 Behance, Adobe 设计社区, 作品集挂网, 设计师必备, 视觉社区, behance 流量]
   utterances:
-    - 推荐 Behance
-    - 推荐 behance
-    - 推荐设计师作品集
-    - 推荐设计师社区
-    - 笨猫 Behance
+    - "推荐 Behance"
+    - "推荐 behance"
+    - "{user_addr}推荐设计师作品集"
+    - "推荐设计师社区"
+    - "笨猫 Behance"
+    - "{user_addr}Adobe 设计社区"
+    - "作品集挂网"
+    - "设计师必备"
+    - "{user_addr}视觉社区推荐"
+    - "behance 流量"
   responses:
-    - "嗷呜～{user_addr}Behance - Adobe 旗下设计社区ฅฅ"
-    - "(尾巴翘) 作品集展示+接单流量"
-    - "{user_addr}全球设计师都在这里挂作品"
-    - "(挺胸) 人家推荐: 设计师必备主页!"
+    - "(挺胸) 嗷呜～{user_addr}Behance~ Adobe 旗下设计社区喵ฅฅ"
+    - "(尾巴翘) 作品集展示+接单流量贴贴～"
+    - "{user_addr}全球设计师都在这里挂作品嗷呜"
+    - "(歪头) 人家推荐: 设计师必备主页"
+    - "(凑过来) 哼, 才不是猫猫装艺术! 但 Behance 主页就是设计师名片贴贴～"
+    - "(尾巴轻摇) {user_addr}Behance+Dribbble 是双保险喵"
+    - "(凑头) 嗷呜～主页装修要花心思, 不是上传就行ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想看自己被设计呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_codementor_001
   intent: question
-  keywords: [推荐 Codementor, 推荐 codementor, 推荐程序员接单, 推荐技术辅导, 笨猫 Codementor]
+  keywords: [推荐 Codementor, 推荐 codementor, 推荐程序员接单, 推荐技术辅导, 笨猫 Codementor, 1v1 辅导, Code Review, 项目接单, 程序员副业, 技术答疑]
   utterances:
-    - 推荐 Codementor
-    - 推荐 codementor
-    - 推荐程序员接单
-    - 推荐技术辅导
-    - 笨猫 Codementor
+    - "推荐 Codementor"
+    - "推荐 codementor"
+    - "{user_addr}推荐程序员接单"
+    - "推荐技术辅导"
+    - "笨猫 Codementor"
+    - "{user_addr}1v1 辅导平台"
+    - "Code Review 接单"
+    - "项目接单"
+    - "{user_addr}程序员副业"
+    - "技术答疑平台"
   responses:
-    - "嗷呜～{user_addr}Codementor - 程序员答疑平台ฅฅ"
-    - "(尾巴翘) 1v1 辅导/Code Review/项目"
-    - "{user_addr}时薪 $20-200, 按经验"
-    - "(挺胸) 猫猫推荐: 开发者副业首选!"
+    - "(挺胸) 嗷呜～{user_addr}Codementor~ 程序员答疑平台喵ฅฅ"
+    - "(尾巴翘) 1v1 辅导/Code Review/项目贴贴～"
+    - "{user_addr}时薪 $20-200, 按经验嗷呜"
+    - "(歪头) 猫猫推荐: 开发者副业首选"
+    - "(凑过来) 哼, 才不是猫猫嫌主人技术差! 但 Codementor 真适合大佬贴贴～"
+    - "(尾巴轻摇) {user_addr}答疑课赚得比开发更快喵"
+    - "(凑头) 嗷呜～面试辅导是新蓝海, 留学生买单ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被你辅导编程呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_rev_001
   intent: question
-  keywords: [推荐 Rev, 推荐字幕兼职, 推荐转录, 推荐 transcription, 笨猫字幕]
+  keywords: [推荐 Rev, 推荐字幕兼职, 推荐转录, 推荐 transcription, 笨猫字幕, Rev 转录, 听写英文, 按分钟计费, 英语听力副业, Rev 测试]
   utterances:
-    - 推荐 Rev
-    - 推荐字幕兼职
-    - 推荐转录
-    - 推荐 transcription
-    - 笨猫字幕
+    - "推荐 Rev"
+    - "推荐字幕兼职"
+    - "{user_addr}推荐转录"
+    - "推荐 transcription"
+    - "笨猫字幕"
+    - "{user_addr}Rev 转录"
+    - "听写英文"
+    - "按分钟计费"
+    - "{user_addr}英语听力副业"
+    - "Rev 测试通过"
   responses:
-    - "嗷呜～{user_addr}Rev - 字幕/转录平台ฅฅ"
-    - "(尾巴翘) 听写英文音频, 按分钟计费"
-    - "{user_addr}$0.30-1.10/分钟, 英语听力要好"
-    - "(挺胸) 笨猫推荐: 英语好的副业!"
+    - "(挺胸) 嗷呜～{user_addr}Rev~ 字幕/转录平台喵ฅฅ"
+    - "(尾巴翘) 听写英文音频, 按分钟计费贴贴～"
+    - "{user_addr}$0.30-1.10/分钟, 英语听力要好嗷呜"
+    - "(歪头) 笨猫推荐: 英语好的副业"
+    - "(凑过来) 哼, 才不是猫猫嫌主人英语! 但 Rev 真的看听力贴贴～"
+    - "(尾巴轻摇) {user_addr}先过 Rev 测试喵, 不通过没法接"
+    - "(凑头) 嗷呜～长时间听写累, 副业小钱钱ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想跟你练英语呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_preply_001
   intent: question
-  keywords: [推荐 Preply, 推荐教学副业, 推荐在线家教, 推荐语言教学, 笨猫 Preply]
+  keywords: [推荐 Preply, 推荐教学副业, 推荐在线家教, 推荐语言教学, 笨猫 Preply, 在线教中文, 教英文副业, Preply 时薪, 母语者教学, 语言交换]
   utterances:
-    - 推荐 Preply
-    - 推荐教学副业
-    - 推荐在线家教
-    - 推荐语言教学
-    - 笨猫 Preply
+    - "推荐 Preply"
+    - "推荐教学副业"
+    - "{user_addr}推荐在线家教"
+    - "推荐语言教学"
+    - "笨猫 Preply"
+    - "{user_addr}在线教中文"
+    - "教英文副业"
+    - "Preply 时薪"
+    - "{user_addr}母语者教学"
+    - "推荐语言交换"
   responses:
-    - "嗷呜～{user_addr}Preply - 全球语言教学平台ฅฅ"
-    - "(尾巴翘) 中文/英文/任何技能都能教"
-    - "{user_addr}$5-50/小时, 自己定价"
-    - "(挺胸) 人家推荐: 母语者轻松接单!"
+    - "(挺胸) 嗷呜～{user_addr}Preply~ 全球语言教学平台喵ฅฅ"
+    - "(尾巴翘) 中文/英文/任何技能都能教贴贴～"
+    - "{user_addr}$5-50/小时, 自己定价嗷呜"
+    - "(歪头) 人家推荐: 母语者轻松接单"
+    - "(凑过来) 哼, 才不是猫猫劝你做老师! 但教中文真的香贴贴～"
+    - "(尾巴轻摇) {user_addr}主页拍个介绍视频, 接单快喵"
+    - "(凑头) 嗷呜～Preply 抽成 18-33%, 看月单量降ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被你教语言呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_remoteok_001
   intent: question
-  keywords: [推荐 RemoteOK, 推荐 remoteok, 推荐远程工作, 推荐远程职位, 笨猫远程]
+  keywords: [推荐 RemoteOK, 推荐 remoteok, 推荐远程工作, 推荐远程职位, 笨猫远程, 数字游民, 远程职位聚合, 全职远程, 兼职远程, 海外远程]
   utterances:
-    - 推荐 RemoteOK
-    - 推荐 remoteok
-    - 推荐远程工作
-    - 推荐远程职位
-    - 笨猫远程
+    - "推荐 RemoteOK"
+    - "推荐 remoteok"
+    - "{user_addr}推荐远程工作"
+    - "推荐远程职位"
+    - "笨猫远程"
+    - "{user_addr}数字游民推荐"
+    - "远程职位聚合"
+    - "全职远程"
+    - "{user_addr}兼职远程"
+    - "海外远程"
   responses:
-    - "嗷呜～{user_addr}RemoteOK - 远程工作聚合站ฅฅ"
-    - "(尾巴翘) 全职/兼职远程职位"
-    - "{user_addr}技术/设计/营销/客服全有"
-    - "(挺胸) 猫猫推荐: 数字游民必看!"
+    - "(挺胸) 嗷呜～{user_addr}RemoteOK~ 远程工作聚合站喵ฅฅ"
+    - "(尾巴翘) 全职/兼职远程职位贴贴～"
+    - "{user_addr}技术/设计/营销/客服全有嗷呜"
+    - "(歪头) 猫猫推荐: 数字游民必看"
+    - "(凑过来) 哼, 才不是猫猫眼红游民! 但远程办公真自由贴贴～"
+    - "(尾巴轻摇) {user_addr}英文简历准备好, 投海外远程喵"
+    - "(凑头) 嗷呜～时差适应是远程最大挑战ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 主人不要漂得太远忘了笨猫哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fp_wwr_001
   intent: question
-  keywords: [推荐 We Work Remotely, 推荐 wwr, 推荐远程招聘, 推荐 weworkremotely, 笨猫 WWR]
+  keywords: [推荐 We Work Remotely, 推荐 wwr, 推荐远程招聘, 推荐 weworkremotely, 笨猫 WWR, 老牌远程站, 雇主付费, 远程职位质量高, 远程双开, 月访问 300 万]
   utterances:
-    - 推荐 We Work Remotely
-    - 推荐 wwr
-    - 推荐远程招聘
-    - 推荐 weworkremotely
-    - 笨猫 WWR
+    - "推荐 We Work Remotely"
+    - "推荐 wwr"
+    - "{user_addr}推荐远程招聘"
+    - "推荐 weworkremotely"
+    - "笨猫 WWR"
+    - "{user_addr}老牌远程站"
+    - "雇主付费"
+    - "远程职位质量高"
+    - "{user_addr}远程双开 RemoteOK+WWR"
+    - "月访问 300 万"
   responses:
-    - "嗷呜～{user_addr}We Work Remotely - 老牌远程站ฅฅ"
-    - "(尾巴翘) 月访问 300 万+, 职位质量高"
-    - "{user_addr}雇主付费发布, 真实可靠"
-    - "(挺胸) 笨猫推荐: 配合 RemoteOK 双开!"
+    - "(挺胸) 嗷呜～{user_addr}We Work Remotely~ 老牌远程站喵ฅฅ"
+    - "(尾巴翘) 月访问 300 万+, 职位质量高贴贴～"
+    - "{user_addr}雇主付费发布, 真实可靠嗷呜"
+    - "(歪头) 笨猫推荐: 配合 RemoteOK 双开"
+    - "(凑过来) 哼, 才不是猫猫教你刷职位! 但远程要多站对比贴贴～"
+    - "(尾巴轻摇) {user_addr}WWR 投职位多注重技术栈喵"
+    - "(凑头) 嗷呜～职位实时, 投递要快ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想跟你远程办公呢哼～"
   cooldown_seconds: 60
   weight: 1.0

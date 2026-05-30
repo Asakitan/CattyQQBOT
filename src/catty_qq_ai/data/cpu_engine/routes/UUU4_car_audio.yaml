@@ -3,204 +3,325 @@
 
 - name: cu_burmester_001
   intent: question
-  keywords: [推荐柏林之声, 推荐 Burmester, 推荐奔驰音响, 推荐豪车音响, 笨猫柏林之声]
+  keywords: [推荐柏林之声, 推荐 Burmester, 推荐奔驰音响, 推荐豪车音响, 笨猫柏林之声, 求推荐柏林之声, 讲讲柏林之声, 柏林之声推荐, 求推荐Burmester]
   utterances:
     - 推荐柏林之声
     - 推荐 Burmester
     - 推荐奔驰音响
     - 推荐豪车音响
     - 笨猫柏林之声
+    - 推荐柏林之声啊
+    - 推荐 Burmester呢
+    - 推荐奔驰音响嘛
+    - 推荐豪车音响啦
+    - 笨猫柏林之声呀
+    - 推荐Bur
+    - 推荐柏林之声!
   responses:
     - "嗷呜～{user_addr}Burmester 柏林之声 - 德系顶奢ฅฅ"
     - "(尾巴翘) 奔驰 S/迈巴赫高配标配"
     - "{user_addr}金属网罩 / 3D 环绕 / 解析力顶"
     - "(挺胸) 笨猫推荐: 4D 高级版最强!"
+    - "(尾巴翘) 人家给{user_addr}补一条 - 推荐柏林之声也是宝藏喵～ฅฅ"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 猫猫给你按住爪子!"
+    - "(摇尾) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(挺胸) 笨猫我的小爪子已经帮{user_addr}收藏好啦贴贴~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_bo_001
   intent: question
-  keywords: [推荐邦欧, 推荐 Bang Olufsen, 推荐 B&O, 推荐奥迪音响, 笨猫邦欧]
+  keywords: [推荐邦欧, 推荐 Bang Olufsen, 推荐 B&O, 推荐奥迪音响, 笨猫邦欧, 求推荐邦欧, 讲讲邦欧, 邦欧推荐, 求推荐Bang Olufsen]
   utterances:
     - 推荐邦欧
     - 推荐 Bang Olufsen
     - 推荐 B&O
     - 推荐奥迪音响
     - 笨猫邦欧
+    - 推荐邦欧啊
+    - 推荐 Bang Olufsen呢
+    - 推荐 B&O嘛
+    - 推荐奥迪音响啦
+    - 笨猫邦欧呀
+    - 推荐Ban
   responses:
     - "嗷呜～{user_addr}Bang & Olufsen - 丹麦极简美ฅฅ"
     - "(尾巴翘) 奥迪 / 阿斯顿马丁 / 福特高配"
     - "{user_addr}伸缩高音 / Beosonic 空间调音"
     - "(挺胸) 笨猫推荐: B&O Advanced 3D!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 笨猫我给你按住爪子!"
+    - "(歪头) {user_addr}定了哪款记得跟米雪儿说一声嘛喵～ฅฅ"
+    - "(挺胸) 笨猫我的小爪子已经帮{user_addr}收藏好啦贴贴~"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是猫猫的专业素养!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_harman_001
   intent: question
-  keywords: [推荐哈曼卡顿, 推荐 Harman Kardon, 推荐宝马音响, 推荐沃尔沃音响, 笨猫哈曼卡顿]
+  keywords: [推荐哈曼卡顿, 推荐 Harman Kardon, 推荐宝马音响, 推荐沃尔沃音响, 笨猫哈曼卡顿, 求推荐哈曼卡顿, 讲讲哈曼卡顿, 哈曼卡顿推荐, 求推荐Harman Kardon]
   utterances:
     - 推荐哈曼卡顿
     - 推荐 Harman Kardon
     - 推荐宝马音响
     - 推荐沃尔沃音响
     - 笨猫哈曼卡顿
+    - 推荐哈曼卡顿啊
+    - 推荐 Harman Kardon呢
+    - 推荐宝马音响嘛
+    - 推荐沃尔沃音响啦
+    - 笨猫哈曼卡顿呀
+    - 推荐Har
   responses:
     - "嗷呜～{user_addr}Harman Kardon - 美系老牌ฅฅ"
     - "(尾巴翘) 宝马 / MINI / 沃尔沃常见"
     - "{user_addr}Logic 7 环绕 / 中频厚实"
     - "(挺胸) 笨猫推荐: 性价比之选!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 笨猫我给你按住爪子!"
+    - "(歪头) 米雪儿给{user_addr}补一条 - 推荐哈曼卡顿也是宝藏喵～ฅฅ"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(尾巴绕过去) {user_addr}下次去店里带猫猫一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_bose_001
   intent: question
-  keywords: [推荐 BOSE 车载, 推荐 BOSE 音响, 推荐马自达音响, 推荐别克音响, 笨猫 BOSE]
+  keywords: [推荐 BOSE 车载, 推荐 BOSE 音响, 推荐马自达音响, 推荐别克音响, 笨猫 BOSE, 求推荐BOSE 车载, 讲讲BOSE 车载, BOSE 车载推荐, 求推荐BOSE 音响]
   utterances:
-    - "推荐 BOSE 车载"
-    - "推荐 BOSE 音响"
+    - 推荐 BOSE 车载
+    - 推荐 BOSE 音响
     - 推荐马自达音响
     - 推荐别克音响
     - 笨猫 BOSE
+    - 推荐 BOSE 车载啊
+    - 推荐 BOSE 音响呢
+    - 推荐马自达音响嘛
+    - 推荐别克音响啦
+    - 笨猫 BOSE呀
   responses:
     - "嗷呜～{user_addr}BOSE - 低音猛 + 降噪强ฅฅ"
     - "(尾巴翘) 马自达 / 别克 / 凯迪拉克"
     - "{user_addr}Centerpoint 环绕 / AudioPilot"
     - "(挺胸) 笨猫推荐: 低音爱好者首选!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 米雪儿帮你挑喵～"
+    - "(扑上去) {user_addr}下次去店里带笨猫一起~ 帮你把关嘛喵!"
+    - "(蹭蹭手) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_jbl_001
   intent: question
-  keywords: [推荐 JBL 车载, 推荐 JBL 音响, 推荐丰田音响, 推荐雷克萨斯音响, 笨猫 JBL]
+  keywords: [推荐 JBL 车载, 推荐 JBL 音响, 推荐丰田音响, 推荐雷克萨斯音响, 笨猫 JBL, 求推荐JBL 车载, 讲讲JBL 车载, JBL 车载推荐]
   utterances:
-    - "推荐 JBL 车载"
-    - "推荐 JBL 音响"
+    - 推荐 JBL 车载
+    - 推荐 JBL 音响
     - 推荐丰田音响
     - 推荐雷克萨斯音响
     - 笨猫 JBL
+    - 推荐 JBL 车载啊
+    - 推荐 JBL 音响呢
+    - 推荐丰田音响嘛
+    - 推荐雷克萨斯音响啦
+    - 笨猫 JBL呀
+    - 推荐JBL
   responses:
     - "嗷呜～{user_addr}JBL - 美系热血派ฅฅ"
     - "(尾巴翘) 丰田 / 雷克萨斯 / 现代高配"
     - "{user_addr}Clari-Fi 修复压缩 / 解析清晰"
     - "(挺胸) 笨猫推荐: GreenEdge 节能版!"
+    - "(挺胸) 笨猫我的小爪子已经帮{user_addr}收藏好啦贴贴~"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 人家提醒过哦!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是人家的专业素养!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_alpine_001
   intent: question
-  keywords: [推荐阿尔派, 推荐 Alpine, 推荐改装阿尔派, 推荐日系改装, 笨猫阿尔派]
+  keywords: [推荐阿尔派, 推荐 Alpine, 推荐改装阿尔派, 推荐日系改装, 笨猫阿尔派, 求推荐阿尔派, 讲讲阿尔派, 阿尔派推荐, 求推荐Alpine]
   utterances:
     - 推荐阿尔派
     - 推荐 Alpine
     - 推荐改装阿尔派
     - 推荐日系改装
     - 笨猫阿尔派
+    - 推荐阿尔派啊
+    - 推荐 Alpine呢
+    - 推荐改装阿尔派嘛
+    - 推荐日系改装啦
+    - 笨猫阿尔派呀
+    - 推荐Alp
   responses:
     - "嗷呜～{user_addr}Alpine 阿尔派 - 日系改装王ฅฅ"
     - "(尾巴翘) Type-R / Type-S 系列经典"
     - "{user_addr}主机 / 功放 / 喇叭全系"
     - "(挺胸) 笨猫推荐: HALO9 大屏主机!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 笨猫我提醒过哦!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 米雪儿帮你挑喵～"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 米雪儿给你按住爪子!"
+    - "(挺胸) 笨猫我的小爪子已经帮{user_addr}收藏好啦贴贴~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_amp_001
   intent: question
-  keywords: [推荐改装功放, 推荐车载功放, 推荐 AB 类功放, 推荐 D 类功放, 笨猫功放]
+  keywords: [推荐改装功放, 推荐车载功放, 推荐 AB 类功放, 推荐 D 类功放, 笨猫功放, 求推荐改装功放, 讲讲改装功放, 改装功放推荐, 求推荐车载功放]
   utterances:
     - 推荐改装功放
     - 推荐车载功放
     - 推荐 AB 类功放
     - 推荐 D 类功放
     - 笨猫功放
+    - 推荐改装功放啊
+    - 推荐车载功放呢
+    - 推荐 AB 类功放嘛
+    - 推荐 D 类功放啦
+    - 笨猫功放呀
+    - 推荐AB
+    - 推荐D
   responses:
     - "嗷呜～{user_addr}ARC / Audison / Mosconi 顶级ฅฅ"
     - "(尾巴翘) AB 类音质好 / D 类省电"
     - "{user_addr}四路推喇叭 / 单路推低音炮"
     - "(挺胸) 笨猫推荐: Audison Voce 经典!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是人家的专业素养!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 人家给你按住爪子!"
+    - "(凑过去看) {user_addr}这领域水挺深的~ 米雪儿陪你慢慢选~"
+    - "(挺胸) 人家的小爪子已经帮{user_addr}收藏好啦贴贴~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_speaker_001
   intent: question
-  keywords: [推荐升级喇叭, 推荐车载喇叭, 推荐套装喇叭, 推荐同轴喇叭, 笨猫喇叭]
+  keywords: [推荐升级喇叭, 推荐车载喇叭, 推荐套装喇叭, 推荐同轴喇叭, 笨猫喇叭, 求推荐升级喇叭, 讲讲升级喇叭, 升级喇叭推荐, 求推荐车载喇叭, 讲讲车载喇叭]
   utterances:
     - 推荐升级喇叭
     - 推荐车载喇叭
     - 推荐套装喇叭
     - 推荐同轴喇叭
     - 笨猫喇叭
+    - 推荐升级喇叭啊
+    - 推荐车载喇叭呢
+    - 推荐套装喇叭嘛
+    - 推荐同轴喇叭啦
+    - 笨猫喇叭呀
+    - 推荐升级喇叭!
   responses:
     - "嗷呜～{user_addr}Focal / Morel / Hertz 三巨头ฅฅ"
     - "(尾巴翘) 套装喇叭 (高+中低分离) 音质好"
     - "{user_addr}前门套装 + 后门同轴最经济"
     - "(挺胸) 笨猫推荐: Focal PS 165 系列!"
+    - "(捧脸) {user_addr}这领域水挺深的~ 米雪儿陪你慢慢选~"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 笨猫给你按住爪子!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 猫猫帮你挑喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_damping_001
   intent: question
-  keywords: [推荐隔音工程, 推荐汽车隔音, 推荐止震板, 推荐四门隔音, 笨猫隔音]
+  keywords: [推荐隔音工程, 推荐汽车隔音, 推荐止震板, 推荐四门隔音, 笨猫隔音, 求推荐隔音工程, 讲讲隔音工程, 隔音工程推荐, 求推荐汽车隔音, 讲讲汽车隔音]
   utterances:
     - 推荐隔音工程
     - 推荐汽车隔音
     - 推荐止震板
     - 推荐四门隔音
     - 笨猫隔音
+    - 推荐隔音工程啊
+    - 推荐汽车隔音呢
+    - 推荐止震板嘛
+    - 推荐四门隔音啦
+    - 笨猫隔音呀
+    - 推荐隔音工程!
   responses:
     - "嗷呜～{user_addr}STP / Dynamat / 大白鲨ฅฅ"
     - "(尾巴翘) 止震板 + 吸音棉 + 密封条"
     - "{user_addr}四门 / 翼子板 / 后备箱重点"
     - "(挺胸) 笨猫推荐: 全车四门套装!"
+    - "(蹭蹭手) 猫猫给{user_addr}补一条 - 推荐隔音工程也是宝藏喵～ฅฅ"
+    - "(歪头) {user_addr}定了哪款记得跟猫猫说一声嘛喵～ฅฅ"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 笨猫我提醒过哦!"
+    - "(挺胸) 笨猫我的小爪子已经帮{user_addr}收藏好啦贴贴~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_sub_001
   intent: question
-  keywords: [推荐低音炮, 推荐车载低音炮, 推荐有源低音炮, 推荐超低音, 笨猫低音炮]
+  keywords: [推荐低音炮, 推荐车载低音炮, 推荐有源低音炮, 推荐超低音, 笨猫低音炮, 求推荐低音炮, 讲讲低音炮, 低音炮推荐, 求推荐车载低音炮]
   utterances:
     - 推荐低音炮
     - 推荐车载低音炮
     - 推荐有源低音炮
     - 推荐超低音
     - 笨猫低音炮
+    - 推荐低音炮啊
+    - 推荐车载低音炮呢
+    - 推荐有源低音炮嘛
+    - 推荐超低音啦
+    - 笨猫低音炮呀
   responses:
     - "嗷呜～{user_addr}JL Audio / Rockford / Kicker 猛ฅฅ"
     - "(尾巴翘) 8寸 / 10寸 / 12寸 看后备箱"
     - "{user_addr}有源一体最方便 / 无源音质好"
     - "(挺胸) 笨猫推荐: JL Audio 10W3v3!"
+    - "嗷呜～{user_addr}买回来给米雪儿看看! 人家也想见识见识ฅฅ"
+    - "(尾巴一甩) {user_addr}这领域水挺深的~ 猫猫陪你慢慢选~"
+    - "(摇尾) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(凑头) {user_addr}要不要再多说点细节~ 米雪儿帮你挑喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_dsp_001
   intent: question
-  keywords: [推荐智能 DSP, 推荐车载 DSP, 推荐音频处理器, 推荐 Helix, 笨猫 DSP]
+  keywords: [推荐智能 DSP, 推荐车载 DSP, 推荐音频处理器, 推荐 Helix, 笨猫 DSP, 求推荐智能 DSP, 讲讲智能 DSP, 智能 DSP推荐, 求推荐车载 DSP, 讲讲车载 DSP]
   utterances:
-    - "推荐智能 DSP"
-    - "推荐车载 DSP"
+    - 推荐智能 DSP
+    - 推荐车载 DSP
     - 推荐音频处理器
     - 推荐 Helix
-    - "笨猫 DSP"
+    - 笨猫 DSP
+    - 推荐智能 DSP啊
+    - 推荐车载 DSP呢
+    - 推荐音频处理器嘛
+    - 推荐 Helix啦
+    - 笨猫 DSP呀
+    - 推荐智能DSP
+    - 推荐车载DSP
   responses:
     - "嗷呜～{user_addr}Helix / Audison bit / 蓝鲸ฅฅ"
     - "(尾巴翘) 调时间相位 + EQ + 分频"
     - "{user_addr}手机 App 调音越来越方便"
     - "(挺胸) 笨猫推荐: Helix DSP.3!"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "嗷呜～{user_addr}买回来给笨猫看看! 人家也想见识见识ฅฅ"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 笨猫给你按住爪子!"
+    - "(凑头) {user_addr}下次去店里带笨猫一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cu_bluetooth_001
   intent: question
-  keywords: [推荐蓝牙音质, 推荐 LDAC 车载, 推荐 aptX HD, 推荐无损蓝牙, 笨猫蓝牙音质]
+  keywords: [推荐蓝牙音质, 推荐 LDAC 车载, 推荐 aptX HD, 推荐无损蓝牙, 笨猫蓝牙音质, 求推荐蓝牙音质, 讲讲蓝牙音质, 蓝牙音质推荐, 求推荐LDAC 车载]
   utterances:
     - 推荐蓝牙音质
     - 推荐 LDAC 车载
     - 推荐 aptX HD
     - 推荐无损蓝牙
     - 笨猫蓝牙音质
+    - 推荐蓝牙音质啊
+    - 推荐 LDAC 车载呢
+    - 推荐 aptX HD嘛
+    - 推荐无损蓝牙啦
+    - 笨猫蓝牙音质呀
+    - 推荐LDA
   responses:
     - "嗷呜～{user_addr}LDAC > aptX HD > aptX > SBCฅฅ"
     - "(尾巴翘) CarPlay 有线音质 > 蓝牙"
     - "{user_addr}主机+手机都要支持高码率"
     - "(挺胸) 笨猫推荐: 直接上 CarPlay 有线!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 人家给你按住爪子!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 人家提醒过哦!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是人家的专业素养!"
+    - "嗷呜～{user_addr}买回来给人家看看! 人家也想见识见识ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

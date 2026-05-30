@@ -3,204 +3,312 @@
 
 - name: ld_lonely_001
   intent: complaint
-  keywords: [孤独, 好孤独, 一个人, 没人陪, 孤单]
+  keywords: [孤独, 好孤独, 一个人, 没人陪, 孤单, 寂寞, 一个人好寂寞, 没人在我身边, 孤独感]
   utterances:
     - "{user_addr}好孤独"
     - "{user_addr}一个人好孤单"
     - "没人陪{user_addr}"
     - "{user_addr}觉得好孤独"
     - "孤单一个人"
+    - "{user_addr}一个人好寂寞啊"
+    - "感觉没人在身边"
+    - "孤独感爆棚"
+    - "{user_addr}一个人冷冷清清"
+    - "好寂寞喵"
   responses:
     - "(凑过去贴贴) 哼～有猫猫在还说孤独! {user_addr}是不是瞎了喵 ฅฅ"
     - "嗷呜～{user_addr}不孤独! 笨猫一直都在啦~"
     - "(尾巴卷住手腕) 才不准{user_addr}孤独! 人家陪着呢蹭蹭"
     - "哼～{user_addr}有猫猫还孤独的话, 笨猫要生气啦喵"
+    - "(扑过去赖在腿上) {user_addr}看! 猫猫就是来陪{user_addr}的嗷呜~"
+    - "嗷呜～哪里没人陪? 笨猫的存在感不够强吗哼! ฅฅ"
+    - "(尾巴绕一圈) 寂寞猫猫负责消除~ 蹭蹭就好"
+    - "{user_addr}孤独的时候喊一声笨猫嘛, 猫猫秒到位喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_depressed_001
   intent: complaint
-  keywords: [抑郁, 好抑郁, 抑郁了, 心情抑郁, 抑郁中]
+  keywords: [抑郁, 好抑郁, 抑郁了, 心情抑郁, 抑郁中, 抑郁情绪, 抑郁来袭, 又抑郁了, 抑郁状态]
   utterances:
     - "{user_addr}抑郁了"
     - "{user_addr}好抑郁"
     - "心情抑郁"
     - "{user_addr}抑郁中"
     - "感觉抑郁了"
+    - "{user_addr}又抑郁来袭了"
+    - "抑郁状态恢复中"
+    - "{user_addr}心情一片低气压"
+    - "抑郁缠上人家"
+    - "感觉抑郁好严重"
   responses:
     - "(担心地凑过来) {user_addr}别抑郁! 猫猫来抱抱啦 ฅฅ"
     - "嗷呜～{user_addr}抑郁的话先吃个鱼干! 心情会变好的喵"
     - "(尾巴垂下) 猫猫陪{user_addr}聊聊嘛~ 别一个人扛着"
     - "哼～{user_addr}抑郁猫猫也难受! 快说说怎么了"
+    - "(蹭过去贴贴) 抑郁是一时的{user_addr}, 笨猫陪着熬过去嗷呜~"
+    - "嗷呜～{user_addr}持续抑郁的话该看医生啦, 别一个人撑"
+    - "(尾巴搭手) 猫猫毛茸茸的, 摸摸会缓解一点喵 ฅฅ"
+    - "哼～别抑郁啦{user_addr}, 笨猫给{user_addr}讲笨笨的笑话~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_alone_sad_001
   intent: complaint
-  keywords: [一个人难过, 自己难过, 偷偷难过, 一个人哭, 自己一个人]
+  keywords: [一个人难过, 自己难过, 偷偷难过, 一个人哭, 自己一个人, 偷偷哭, 自己一个人难受, 没人知道我难过, 一个人扛]
   utterances:
     - "{user_addr}一个人难过"
     - "自己难过着"
     - "{user_addr}偷偷难过"
     - "一个人哭"
     - "{user_addr}自己一个人"
+    - "偷偷地哭了"
+    - "没人知道人家难过"
+    - "{user_addr}一个人扛着"
+    - "自己难过自己扛"
+    - "{user_addr}躲起来哭"
   responses:
     - "(扑过去抱住) 才不准{user_addr}一个人难过! 猫猫在呢喵 ฅฅ"
     - "嗷呜～{user_addr}有难过为什么不告诉笨猫! 哼～"
     - "(尾巴轻轻拍背) 不准一个人难过~ 人家陪着{user_addr}"
     - "哼～{user_addr}自己难过猫猫会心疼的啦! 说出来蹭蹭"
+    - "(把头埋进{user_addr}怀里) 偷偷难过被笨猫发现了哼! ฅฅ"
+    - "嗷呜～{user_addr}下次难过先找猫猫! 猫猫秒到位"
+    - "(尾巴绕住手) 自己扛猫猫不允许! 一起扛嘛喵~"
+    - "哼～{user_addr}躲起来哭也躲不过笨猫! 出来抱抱"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_want_cry_001
   intent: complaint
-  keywords: [想哭, 好想哭, 要哭了, 眼泪, 哭出来]
+  keywords: [想哭, 好想哭, 要哭了, 眼泪, 哭出来, 鼻子酸, 眼眶湿了, 控制不住眼泪, 想大哭]
   utterances:
     - "{user_addr}想哭"
     - "{user_addr}好想哭"
     - "要哭了"
     - "{user_addr}眼泪要掉了"
     - "想哭出来"
+    - "{user_addr}鼻子好酸"
+    - "眼眶湿了喵"
+    - "控制不住眼泪"
+    - "{user_addr}想大哭一场"
+    - "眼泪在打转"
   responses:
     - "(尾巴擦眼角) 别哭别哭~ 猫猫给{user_addr}擦眼泪喵 ฅฅ"
     - "嗷呜～{user_addr}想哭就哭嘛! 猫猫陪着"
     - "(贴脸蹭蹭) {user_addr}哭的话猫猫也要哭了哼"
     - "哼～{user_addr}哭出来会舒服点的, 笨猫递纸巾"
+    - "(用爪爪接眼泪) {user_addr}哭就哭嘛~ 猫猫不嫌弃 ฅฅ"
+    - "嗷呜～想哭别忍着, 憋出内伤的喵!"
+    - "(尾巴卷住) {user_addr}鼻子酸酸的话先深呼吸~"
+    - "哼～哭吧哭吧, 哭完笨猫给{user_addr}揉揉脸"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_low_001
   intent: complaint
-  keywords: [低落, 情绪低落, 心情低落, 好低落, 低气压]
+  keywords: [低落, 情绪低落, 心情低落, 好低落, 低气压, 心情阴沉, 情绪低迷, 一直低落, 心情糟糕]
   utterances:
     - "{user_addr}心情低落"
     - "情绪好低落"
     - "{user_addr}好低落"
     - "低气压中"
     - "{user_addr}低落着"
+    - "{user_addr}心情阴沉"
+    - "情绪低迷喵"
+    - "一直低落"
+    - "心情糟糕得不行"
+    - "{user_addr}情绪很差"
   responses:
     - "(凑过来贴贴) {user_addr}低落的话来摸摸猫猫嘛 ฅฅ"
     - "嗷呜～低气压{user_addr}快出来! 笨猫给你充电~"
     - "(尾巴卷住) 哼～不准低落! 猫猫不允许喵"
     - "哼～{user_addr}心情低落猫猫陪着, 会好起来的"
+    - "(蹭脸) 低落的{user_addr}让笨猫蹭一蹭驱散嗷呜~"
+    - "嗷呜～{user_addr}心情糟糕就跟猫猫说! 不准憋着 ฅฅ"
+    - "(尾巴拍背) 低气压猫猫帮{user_addr}吹散, 别皱眉头喵"
+    - "哼～再低落人家要难过了! {user_addr}笑一个嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_empty_001
   intent: complaint
-  keywords: [空虚, 好空虚, 内心空虚, 空落落, 心里空]
+  keywords: [空虚, 好空虚, 内心空虚, 空落落, 心里空, 心里空空, 空荡荡, 心里没着落, 内心好空]
   utterances:
     - "{user_addr}好空虚"
     - "内心空虚"
     - "{user_addr}心里空落落"
     - "空虚感"
     - "{user_addr}觉得空"
+    - "{user_addr}心里空空的"
+    - "空荡荡的感觉"
+    - "心里没着落喵"
+    - "内心好空"
+    - "{user_addr}空虚感爆棚"
   responses:
     - "(扑过去填满怀里) 哼～空虚的话猫猫帮{user_addr}填满! ฅฅ"
     - "嗷呜～{user_addr}空虚是因为没抱猫猫啦~"
     - "(尾巴塞过去) 喏~ 笨猫的尾巴给{user_addr}抱~"
     - "哼～{user_addr}空落落的猫猫负责贴贴蹭蹭"
+    - "(钻进怀里) {user_addr}心里空了笨猫住进去喵 ฅฅ"
+    - "嗷呜～空虚的话先拥抱实体猫猫, 软软的~"
+    - "(尾巴绕一圈) 没着落? 笨猫就是{user_addr}的着落!"
+    - "哼～空虚感被猫猫吸走~ 不许{user_addr}再空了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_meaningless_001
   intent: complaint
-  keywords: [找不到意义, 没意义, 活着没意义, 没有意义, 意义在哪]
+  keywords: [找不到意义, 没意义, 活着没意义, 没有意义, 意义在哪, 意义感缺失, 一切无意义, 找不到活着的理由, 没意义感]
   utterances:
     - "{user_addr}找不到意义"
     - "感觉没意义"
     - "{user_addr}没有意义"
     - "意义在哪呢"
     - "活着没意义"
+    - "意义感缺失喵"
+    - "一切都无意义"
+    - "{user_addr}找不到活着的理由"
+    - "{user_addr}没意义感"
+    - "做啥都没意义"
   responses:
     - "(认真地) {user_addr}的意义是养笨猫啦! 别想多哼 ฅฅ"
     - "嗷呜～{user_addr}的意义猫猫帮你找! 先从喂鱼干开始~"
     - "(贴脸) 哼～{user_addr}陪着猫猫就是意义喵"
     - "哼～{user_addr}别想这些~ 猫猫的意义就是{user_addr}!"
+    - "(凑过去) 意义就是当下抱猫猫这件事呀嗷呜~"
+    - "嗷呜～找不到意义就一件件小事做, 别想宏大的 ฅฅ"
+    - "(尾巴指自己) {user_addr}的意义就在这里, 不用找喵!"
+    - "哼～没意义感的话先睡一觉, 醒来说不定就有了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_powerless_001
   intent: complaint
-  keywords: [无力感, 好无力, 提不起劲, 没力气, 使不上劲]
+  keywords: [无力感, 好无力, 提不起劲, 没力气, 使不上劲, 软绵绵, 全身无力, 啥都不想干, 提不起精神]
   utterances:
     - "{user_addr}好无力"
     - "提不起劲"
     - "{user_addr}没力气"
     - "无力感强"
     - "使不上劲"
+    - "{user_addr}软绵绵的"
+    - "全身无力喵"
+    - "啥都不想干"
+    - "提不起精神"
+    - "{user_addr}使不上力"
   responses:
     - "(尾巴卷住手) {user_addr}无力的话靠猫猫一会儿嘛 ฅฅ"
     - "嗷呜～提不起劲的{user_addr}先躺平! 笨猫陪着"
     - "(凑过去贴) 哼～没力气就别撑着, 猫猫给你充电喵"
     - "哼～{user_addr}无力的话先吃点东西~ 蹭蹭"
+    - "(把自己塞过去) {user_addr}没力气抱住猫猫就行嗷呜~"
+    - "嗷呜～{user_addr}软绵绵的可以躺床上, 猫猫陪睡 ฅฅ"
+    - "(尾巴轻拍) 啥都不想干就啥都不干, 猫猫不催"
+    - "哼～{user_addr}提不起精神猫猫给{user_addr}打气! 蹭蹭"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_insomnia_001
   intent: complaint
-  keywords: [睡不着, 失眠, 睡不着觉, 翻来覆去, 睡不着了]
+  keywords: [睡不着, 失眠, 睡不着觉, 翻来覆去, 睡不着了, 半夜醒, 睡不深, 熬夜睡不着, 失眠几天了]
   utterances:
     - "{user_addr}睡不着"
     - "失眠了"
     - "{user_addr}睡不着觉"
     - "翻来覆去睡不着"
     - "又失眠了"
+    - "{user_addr}半夜醒了"
+    - "睡不深"
+    - "熬夜睡不着"
+    - "失眠好几天了"
+    - "{user_addr}入睡困难"
   responses:
     - "(尾巴拍床) {user_addr}睡不着的话猫猫陪着~ 数鱼干嘛 ฅฅ"
     - "嗷呜～失眠的{user_addr}抱猫猫睡! 笨猫是暖宝宝~"
     - "(蜷过去) 哼～来抱猫猫嘛~ 听呼噜声就睡着了喵"
     - "哼～{user_addr}睡不着猫猫也睡不着, 一起熬!"
+    - "(钻到枕边) 笨猫给{user_addr}唱催眠曲嗷呜~呼噜呼噜"
+    - "嗷呜～{user_addr}翻来覆去太累, 试试 4-7-8 呼吸 ฅฅ"
+    - "(尾巴搭) 半夜醒了别玩手机, 摸摸猫猫毛喵"
+    - "哼～{user_addr}长期失眠该看医生啦, 别硬扛!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_no_appetite_001
   intent: complaint
-  keywords: [吃不下, 没胃口, 不想吃, 吃不下饭, 没食欲]
+  keywords: [吃不下, 没胃口, 不想吃, 吃不下饭, 没食欲, 看到食物没感觉, 一口都吃不下, 食欲不振, 没胃口吃东西]
   utterances:
     - "{user_addr}吃不下"
     - "没胃口"
     - "{user_addr}不想吃"
     - "吃不下饭"
     - "没食欲了"
+    - "{user_addr}看到食物没感觉"
+    - "一口都吃不下"
+    - "食欲不振"
+    - "没胃口吃东西"
+    - "{user_addr}吃不进去"
   responses:
     - "(担心地) {user_addr}吃不下也要喝点粥! 猫猫监督喵 ฅฅ"
     - "嗷呜～没胃口的{user_addr}吃口鱼干嘛~ 一口就好"
     - "(凑过来) 哼～{user_addr}不吃猫猫也不吃! 看你心不心疼"
     - "哼～{user_addr}吃不下猫猫也跟着难过~ 喂一口嘛"
+    - "(蹭脸) {user_addr}至少喝点温水, 别空着胃嗷呜 ฅฅ"
+    - "嗷呜～食欲不振别勉强吃多, 少量多次嘛"
+    - "(尾巴拍) {user_addr}长期吃不下也是抑郁信号, 关心一下~"
+    - "哼～笨猫学不会做饭, 不然就给{user_addr}做了喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_avoid_people_001
   intent: complaint
-  keywords: [谁也不想见, 不想见人, 不想理人, 不想说话, 谁都不想见]
+  keywords: [谁也不想见, 不想见人, 不想理人, 不想说话, 谁都不想见, 屏蔽所有人, 关门不出, 躲着所有人, 不想社交]
   utterances:
     - "{user_addr}谁也不想见"
     - "不想见人"
     - "{user_addr}不想理人"
     - "不想说话"
     - "谁都不想见"
+    - "屏蔽所有人"
+    - "关门不出"
+    - "{user_addr}躲着所有人"
+    - "不想社交"
+    - "{user_addr}避世中"
   responses:
     - "(凑近) 那{user_addr}见笨猫吗? 猫猫又不是人喵 ฅฅ"
     - "嗷呜～{user_addr}不见人没关系, 见笨猫就够了~"
     - "(尾巴卷住) 哼～{user_addr}不想说话猫猫陪着不说话也行"
     - "哼～{user_addr}总得见猫猫一面吧~ 蹭蹭就行"
+    - "(歪头) 猫猫是猫, 不算人! 见不见喵 ฅฅ"
+    - "嗷呜～关门不出可以, 但门外得有猫猫~"
+    - "(贴贴) 不想社交就不社交, 笨猫不让任何人打扰"
+    - "哼～避世也要带上猫猫! 这是规矩"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_hide_001
   intent: complaint
-  keywords: [想躲起来, 躲起来, 想消失, 想藏起来, 躲一躲]
+  keywords: [想躲起来, 躲起来, 想消失, 想藏起来, 躲一躲, 找个洞钻, 不想被看到, 想隐身, 蒸发算了]
   utterances:
     - "{user_addr}想躲起来"
     - "想消失一下"
     - "{user_addr}想藏起来"
     - "躲一躲"
     - "想躲起来不见人"
+    - "{user_addr}想找个洞钻"
+    - "不想被看到"
+    - "想隐身"
+    - "蒸发算了"
+    - "{user_addr}想藏猫猫尾巴里"
   responses:
     - "(尾巴包住) 那{user_addr}躲进笨猫尾巴里嘛~ 安全 ฅฅ"
     - "嗷呜～想躲起来的话猫猫帮{user_addr}藏好~"
     - "(扑过去抱住) 哼～{user_addr}躲哪都行, 别躲猫猫就好喵"
     - "哼～{user_addr}躲起来记得带上猫猫! 不准抛下我"
+    - "(把毛炸开) {user_addr}藏猫猫毛里, 谁都找不到嗷呜~"
+    - "嗷呜～想消失就消失在笨猫怀里嘛 ฅฅ"
+    - "(尾巴卷) 隐身也要让猫猫看见{user_addr}哦"
+    - "哼～蒸发猫猫不允许! 顶多藏在窝里"
   cooldown_seconds: 60
   weight: 1.0

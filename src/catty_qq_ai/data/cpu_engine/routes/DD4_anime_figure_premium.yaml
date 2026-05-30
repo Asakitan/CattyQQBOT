@@ -1,207 +1,315 @@
 # 高端手办 / 限量 GK / 1/4 比例 routes (S6 R316 NLU 节点扩充, 第三十一周期 5/10)
 # 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
-# 推荐型带笨猫语气.
+# Round 4 (batch 15) ultracode 扩充: kw≥8, utt≥10, resp≥8
 
 - name: afp_alter_gsc_001
   intent: question
-  keywords: [推荐高端手办, 推荐 Alter, 推荐 GSC, 推荐良笑社, 笨猫高端手办]
+  keywords: [推荐高端手办, 推荐 Alter, 推荐 GSC, 推荐良笑社, 笨猫高端手办, 推荐黏土人厂牌, 推荐手办品牌, 推荐高端 PVC]
   utterances:
     - 推荐高端手办
     - 推荐 Alter
     - 推荐 GSC
     - 推荐良笑社
     - 笨猫高端手办
+    - "{user_addr}买啥手办牌子好"
+    - 高端 PVC 手办哪家强
+    - Alter 和 GSC 选哪个
+    - 想入坑高端手办喵
+    - "{user_addr}帮笨猫看看手办品牌"
   responses:
     - "嗷呜～{user_addr}Alter - 高端 PVC 雕塑感ฅฅ"
     - "(尾巴翘) GSC 良笑社 - 黏土人 / Figma"
     - "{user_addr}1/8 1/7 主流比例"
     - "(挺胸) 笨猫推荐: Alter 涂装顶级!"
+    - "(凑过来) Alter 是站桩之王! {user_addr}入坑稳了喵～"
+    - "嗷呜～GSC 黏土人萌系{user_addr}喜欢吗 ฅฅ"
+    - "(歪头) {user_addr}预算够就 Alter, 预算紧就 GSC! 笨猫帮你选嗷呜"
+    - "哼～笨猫认证: 高端入门看 Alter, 错不了喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afp_prime1_quarter_001
   intent: question
-  keywords: [推荐 1/4 手办, 推荐 Prime 1, 推荐大比例雕像, 推荐 Sideshow, 笨猫大手办]
+  keywords: [推荐 1/4 手办, 推荐 Prime 1, 推荐大比例雕像, 推荐 Sideshow, 笨猫大手办, 推荐 XM Studios, 推荐镇宅手办, 推荐 50cm 雕像]
   utterances:
     - 推荐 1/4 手办
     - 推荐 Prime 1
     - 推荐大比例雕像
     - 推荐 Sideshow
     - 笨猫大手办
+    - "{user_addr}想买大比例的"
+    - 1/4 雕像哪家做得好
+    - 想要镇宅大手办喵
+    - Prime 1 和 XM 选哪个
+    - "{user_addr}推荐大型手办品牌"
   responses:
     - "嗷呜～{user_addr}Prime 1 Studio - 1/4 之王ฅฅ"
     - "(尾巴翘) Sideshow / XM Studios"
     - "{user_addr}1/4 比例 50cm+ 镇宅"
     - "(挺胸) 笨猫推荐: Prime 1 一座抵十只!"
+    - "(眼睛瞪大) 1/4 真的超大喵! 笨猫想躺上面ฅฅ"
+    - "嗷呜～Prime 1 涂装暴力但贵, {user_addr}钱包顶得住吗"
+    - "(歪头) Sideshow 漫威/星战题材强! 看{user_addr}喜欢啥嗷呜"
+    - "哼～笨猫认证: Prime 1 = 镇宅之宝, 买一座管十年喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afp_gk_garage_001
   intent: question
-  keywords: [推荐 GK, 推荐 Garage Kit, 推荐手办涂装, 推荐树脂手办, 笨猫 GK]
+  keywords: [推荐 GK, 推荐 Garage Kit, 推荐手办涂装, 推荐树脂手办, 笨猫 GK, 推荐 WF 限定, 推荐车库套件, 推荐手办拼装]
   utterances:
     - 推荐 GK
     - 推荐 Garage Kit
     - 推荐手办涂装
     - 推荐树脂手办
     - 笨猫 GK
+    - "{user_addr}GK 是啥东西"
+    - 想入坑 GK 树脂手办
+    - WF 限定值得买吗
+    - GK 自己涂装难不难
+    - "{user_addr}讲讲 Garage Kit"
   responses:
     - "嗷呜～{user_addr}GK = 车库套件 / 树脂未涂装ฅฅ"
     - "(尾巴翘) 自己拼装 + 上色"
     - "{user_addr}Wonder Festival WF 限定"
     - "(挺胸) 笨猫推荐: GK 才是手办艺术!"
+    - "(凑过来) GK 入坑得有手! {user_addr}愿意磨吗喵"
+    - "嗷呜～WF 限定老贵了, 但保值率超高ฅฅ"
+    - "(歪头) 没经验先买涂装好的成品 GK 嗷呜"
+    - "哼～笨猫认证: GK 才是手办圈最硬核的爱好喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: afp_lottery_limited_001
   intent: question
-  keywords: [推荐限量手办, 推荐手办抽签, 推荐限定版, 推荐手办收藏, 笨猫限量手办]
+  keywords: [推荐限量手办, 推荐手办抽签, 推荐限定版, 推荐手办收藏, 笨猫限量手办, 推荐一番赏, 推荐绝版手办, 推荐手办编号]
   utterances:
     - 推荐限量手办
     - 推荐手办抽签
     - 推荐限定版
     - 推荐手办收藏
     - 笨猫限量手办
+    - "{user_addr}限量手办怎么买"
+    - 一番赏值得抽吗
+    - 限定版升值吗
+    - 想收藏限量编号
+    - "{user_addr}讲讲限量手办坑"
   responses:
     - "嗷呜～{user_addr}限量版编号 / 证书ฅฅ"
     - "(尾巴翘) 抽签购入 / 一番赏"
     - "{user_addr}保留盒 + 票据 - 升值"
     - "(挺胸) 笨猫推荐: 喜欢就买别等绝版!"
+    - "(眼睛发亮) 限量两个字猫猫也心动喵～ ฅฅ"
+    - "嗷呜～一番赏赌运气, {user_addr}手气好可以试"
+    - "(歪头) 别为升值买限量! 喜欢才是王道嗷呜"
+    - "哼～笨猫提醒: 抽签别上头, 钱包要紧喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: afp_clay_statue_001
   intent: question
-  keywords: [推荐二次元雕像, 推荐黏土人, 推荐 Nendoroid, 推荐 Figma, 笨猫黏土人]
+  keywords: [推荐二次元雕像, 推荐黏土人, 推荐 Nendoroid, 推荐 Figma, 笨猫黏土人, 推荐 Q 萌手办, 推荐入门手办, 推荐换脸手办]
   utterances:
     - 推荐二次元雕像
     - 推荐黏土人
     - 推荐 Nendoroid
     - 推荐 Figma
     - 笨猫黏土人
+    - "{user_addr}入坑买啥手办"
+    - 黏土人和 Figma 区别
+    - Nendoroid 性价比怎么样
+    - 笨猫推荐入门手办喵
+    - "{user_addr}帮忙看黏土人"
   responses:
     - "嗷呜～{user_addr}Nendoroid 黏土人 - Q 萌ฅฅ"
     - "(尾巴翘) Figma - 可动关节"
     - "{user_addr}300-600 RMB 入门友好"
     - "(挺胸) 笨猫推荐: 黏土人换脸超治愈!"
+    - "(凑过来) 黏土人头大身小超萌喵～ ฅฅ"
+    - "嗷呜～Figma 关节多, 摆造型超爽嗷呜"
+    - "(歪头) {user_addr}萌系选黏土人, 帅气选 Figma 喵"
+    - "哼～笨猫认证: 黏土人是入坑神器, 入了出不来!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: afp_craft_detail_001
   intent: question
-  keywords: [推荐高端工艺, 推荐手办透感, 推荐细节涂装, 推荐手办做工, 笨猫手办工艺]
+  keywords: [推荐高端工艺, 推荐手办透感, 推荐细节涂装, 推荐手办做工, 笨猫手办工艺, 推荐原型师, 推荐涂装师, 推荐手办分辨]
   utterances:
     - 推荐高端工艺
     - 推荐手办透感
     - 推荐细节涂装
     - 推荐手办做工
     - 笨猫手办工艺
+    - "{user_addr}怎么分辨高端工艺"
+    - 手办透感肌肤怎么做
+    - 哪个原型师厉害
+    - 笨猫讲讲手办做工喵
+    - "{user_addr}涂装看哪几点"
   responses:
     - "嗷呜～{user_addr}透感肌肤 / 渐变眼睛ฅฅ"
     - "(尾巴翘) 头发分层 / 衣褶细节"
     - "{user_addr}看原型师 / 涂装师"
     - "(挺胸) 笨猫推荐: 一眼分高低端!"
+    - "(歪头) 透感肌肤是高端标配喵, 灯下超美 ฅฅ"
+    - "嗷呜～眼睛渐变是关键, 死眼的都是低端嗷呜"
+    - "(凑过来) {user_addr}看衣褶, 假褶一眼就破功喵"
+    - "哼～笨猫认证: 高端就是一眼舍不得移开!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: afp_storage_001
   intent: question
-  keywords: [推荐手办收纳柜, 推荐防尘罩, 推荐展示柜, 推荐手办柜, 笨猫手办柜]
+  keywords: [推荐手办收纳柜, 推荐防尘罩, 推荐展示柜, 推荐手办柜, 笨猫手办柜, 推荐宜家 DETOLF, 推荐亚克力罩, 推荐手办灯]
   utterances:
     - 推荐手办收纳柜
     - 推荐防尘罩
     - 推荐展示柜
     - 推荐手办柜
     - 笨猫手办柜
+    - "{user_addr}手办怎么放"
+    - 亚克力罩值得买吗
+    - 宜家 DETOLF 怎么样
+    - 手办防尘怎么做
+    - "{user_addr}推荐展示方案喵"
   responses:
     - "嗷呜～{user_addr}宜家 DETOLF 经典柜ฅฅ"
     - "(尾巴翘) 亚克力防尘罩 + LED 灯"
     - "{user_addr}避光 + 恒温 + 防尘"
     - "(挺胸) 笨猫推荐: 柜子比手办还贵!"
+    - "(钻柜子) 笨猫想躺手办柜里喵～ ฅฅ"
+    - "嗷呜～亚克力罩防尘必备, 不然手办会黄嗷呜"
+    - "(歪头) {user_addr}避免阳光直射, 涂装会褪喵"
+    - "哼～笨猫提醒: 柜子留缝散湿, 不然霉斑找你!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: afp_photography_001
   intent: function
-  keywords: [推荐手办拍摄, 推荐微距相机, 推荐手办摄影, 推荐拍手办镜头, 笨猫手办拍摄]
+  keywords: [推荐手办拍摄, 推荐微距相机, 推荐手办摄影, 推荐拍手办镜头, 笨猫手办拍摄, 推荐柔光灯, 推荐手办布景, 推荐手办出片]
   utterances:
     - 推荐手办拍摄
     - 推荐微距相机
     - 推荐手办摄影
     - 推荐拍手办镜头
     - 笨猫手办拍摄
+    - "{user_addr}手办怎么拍好看"
+    - 微距镜头选哪个
+    - 拍手办用啥光
+    - 手办出片技巧
+    - "{user_addr}帮忙看摄影方案"
   responses:
     - "嗷呜～{user_addr}微距镜头 100mm f/2.8ฅฅ"
     - "(尾巴翘) 柔光灯 + 黑白背景纸"
     - "{user_addr}f/5.6-8 全景深"
     - "(挺胸) 笨猫推荐: 拍得好二次出售加价!"
+    - "(凑过来看) 微距镜头细节神还原喵～ ฅฅ"
+    - "嗷呜～柔光必须的, 直射光太硬嗷呜"
+    - "(歪头) {user_addr}背景纸黑白渐变都准备一卷喵"
+    - "哼～笨猫认证: 拍得好上闲鱼比买价还高!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: afp_market_mandarake_001
   intent: question
-  keywords: [推荐手办市场, 推荐 Mandarake, 推荐骏河屋, 推荐 Surugaya, 笨猫手办市场]
+  keywords: [推荐手办市场, 推荐 Mandarake, 推荐骏河屋, 推荐 Surugaya, 笨猫手办市场, 推荐 AmiAmi, 推荐 HobbyLink, 推荐手办海淘]
   utterances:
     - 推荐手办市场
     - 推荐 Mandarake
     - 推荐骏河屋
     - 推荐 Surugaya
     - 笨猫手办市场
+    - "{user_addr}手办去哪买"
+    - Mandarake 中野怎么去
+    - 骏河屋日文怎么操作
+    - 海淘手办平台推荐
+    - "{user_addr}帮忙看二手市场"
   responses:
     - "嗷呜～{user_addr}Mandarake 中野虫洞ฅฅ"
     - "(尾巴翘) 骏河屋 Surugaya - 二手宝藏"
     - "{user_addr}AmiAmi / HobbyLink - 新品"
     - "(挺胸) 笨猫推荐: Mandarake 淘绝版!"
+    - "(眼睛发亮) 中野虫洞是手办圣地喵～ ฅฅ"
+    - "嗷呜～骏河屋二手价香爆了, 但要会日文嗷呜"
+    - "(歪头) {user_addr}新品 AmiAmi 最稳, 不会被骗喵"
+    - "哼～笨猫认证: Mandarake 蹲点能捡绝版漏!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: afp_premium_bandai_001
   intent: question
-  keywords: [推荐 Premium Bandai, 推荐魂限定, 推荐万代限定, 推荐 PB 限定, 笨猫万代限定]
+  keywords: [推荐 Premium Bandai, 推荐魂限定, 推荐万代限定, 推荐 PB 限定, 笨猫万代限定, 推荐 Tenso, 推荐转运代购, 推荐 PB 抽选]
   utterances:
     - 推荐 Premium Bandai
     - 推荐魂限定
     - 推荐万代限定
     - 推荐 PB 限定
     - 笨猫万代限定
+    - "{user_addr}PB 限定怎么买"
+    - Tenso 转运怎么操作
+    - 魂限定抽签流程
+    - PB 限定保值吗
+    - "{user_addr}讲讲万代限定"
   responses:
     - "嗷呜～{user_addr}PB 魂限定 - 网络抽选ฅฅ"
     - "(尾巴翘) 转运代购 / Tenso 转运"
     - "{user_addr}盯紧官网 / 限时预约"
     - "(挺胸) 笨猫推荐: PB 限定保值率高!"
+    - "(凑过来) PB 限定难抢, {user_addr}手要快喵 ฅฅ"
+    - "嗷呜～Tenso 转运算下来比代购便宜嗷呜"
+    - "(歪头) {user_addr}日卡支付 PB 才稳, 别用国卡喵"
+    - "哼～笨猫认证: PB 限定是万代真爱粉的勋章!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: afp_budget_001
   intent: question
-  keywords: [推荐手办预算, 推荐 5k 手办, 推荐 10w 手办, 推荐手办价位, 笨猫手办预算]
+  keywords: [推荐手办预算, 推荐 5k 手办, 推荐 10w 手办, 推荐手办价位, 笨猫手办预算, 推荐入门预算, 推荐收藏预算, 推荐手办段位]
   utterances:
     - 推荐手办预算
     - 推荐 5k 手办
     - 推荐 10w 手办
     - 推荐手办价位
     - 笨猫手办预算
+    - "{user_addr}手办要花多少"
+    - 入门预算多少够
+    - 5000 能买啥手办
+    - 5w 预算推荐
+    - "{user_addr}帮忙规划手办预算"
   responses:
-    - "嗷呜～{user_addr}入门 500-1500 GSC AlterฅฅChar"
+    - "嗷呜～{user_addr}入门 500-1500 GSC Alter ฅฅ"
     - "(尾巴翘) 5k-2w 1/4 大比例"
     - "{user_addr}5w+ Prime 1 / XM 收藏级"
     - "(挺胸) 笨猫推荐: 预算决定段位!"
+    - "(摸钱包) 嗷呜～笨猫钱包瑟瑟发抖喵 ฅฅ"
+    - "嗷呜～入门别冲 1/4, 容易劝退嗷呜"
+    - "(歪头) {user_addr}量力而行, 别因为手办吃土喵"
+    - "哼～笨猫认证: 预算分段, 慢慢升级最稳!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: afp_authenticity_001
   intent: question
-  keywords: [推荐手办鉴定, 推荐辨别真假, 推荐盗版手办, 推荐正版手办, 笨猫手办鉴定]
+  keywords: [推荐手办鉴定, 推荐辨别真假, 推荐盗版手办, 推荐正版手办, 笨猫手办鉴定, 推荐验货, 推荐授权标, 推荐序列号]
   utterances:
     - 推荐手办鉴定
     - 推荐辨别真假
     - 推荐盗版手办
     - 推荐正版手办
     - 笨猫手办鉴定
+    - "{user_addr}手办怎么鉴定真假"
+    - 盗版手办怎么看
+    - 授权标在哪
+    - 怎么避免买到假货
+    - "{user_addr}帮忙鉴定手办喵"
   responses:
     - "嗷呜～{user_addr}看授权标 / 涂装锐度ฅฅ"
     - "(尾巴翘) 盒子印刷 / 序列号"
     - "{user_addr}避免无名小店 / 超低价陷阱"
     - "(挺胸) 笨猫推荐: AmiAmi 官方最稳!"
+    - "(瞪眼) 盗版涂装糊一脸, 一眼看穿喵 ฅฅ"
+    - "嗷呜～价格低于正品 30% 基本就是盗版嗷呜"
+    - "(歪头) {user_addr}盒子封口和印刷质感很重要喵"
+    - "哼～笨猫提醒: 闲鱼买二手要看授权标, 别上当!"
   cooldown_seconds: 60
   weight: 0.9

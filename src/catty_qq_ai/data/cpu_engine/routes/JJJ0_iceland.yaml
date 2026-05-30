@@ -3,204 +3,324 @@
 
 - name: ic_ringroad_001
   intent: question
-  keywords: [推荐冰岛环岛, 推荐冰岛自驾, 推荐 Route 1, 推荐冰岛公路, 笨猫冰岛环岛]
+  keywords: [推荐冰岛环岛, 推荐冰岛自驾, 推荐 Route 1, 推荐冰岛公路, 笨猫冰岛环岛, 冰岛 1 号公路, 环岛 1332km, 冰岛环岛攻略, 冰岛自驾路线, 推荐 ring road]
   utterances:
     - 推荐冰岛环岛
     - 推荐冰岛自驾
     - 推荐 Route 1
     - 推荐冰岛公路
     - 笨猫冰岛环岛
+    - 冰岛 1 号公路怎么走
+    - 推荐 ring road 行程
+    - 冰岛环岛要几天
+    - 冰岛环岛季节怎么选
+    - 推荐冰岛环岛租车
+    - 想搞冰岛自驾环岛
   responses:
     - "嗷呜～{user_addr}Route 1 环岛 1332km ฅฅ"
     - "(尾巴翘) 建议 7-10 天 / 顺时针走"
     - "{user_addr}4WD 推荐 / 夏天租车"
     - "(挺胸) 笨猫推荐: 慢慢开别赶路!"
+    - "嗷呜～订住宿别集中一城, 沿环线分散 ฅฅ"
+    - "(歪头) 冬季环岛有路况关闭风险, 留弹性"
+    - "{user_addr}加油站很稀, 看到必加 蹭蹭"
+    - "(凑过来) 笨猫提醒: F-Road 不能用普通车喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_reykjavik_001
   intent: question
-  keywords: [推荐雷克雅未克, 推荐 Hallgrimskirkja, 推荐 Harpa, 推荐冰岛首都, 笨猫雷克雅未克]
+  keywords: [推荐雷克雅未克, 推荐 Hallgrimskirkja, 推荐 Harpa, 推荐冰岛首都, 笨猫雷克雅未克, 推荐 Reykjavik, 雷克雅未克景点, 太阳航海者, 雷克雅未克老港, 彩虹街]
   utterances:
     - 推荐雷克雅未克
     - 推荐 Hallgrimskirkja
     - 推荐 Harpa
     - 推荐冰岛首都
     - 笨猫雷克雅未克
+    - 推荐 Reykjavik 行程
+    - 雷克雅未克怎么玩
+    - 雷克雅未克景点排序
+    - 推荐雷克雅未克一天游
+    - 雷克雅未克值得待几天
+    - 推荐冰岛首都打卡
   responses:
     - "嗷呜～{user_addr}Hallgrimskirkja 大教堂ฅฅ"
     - "(尾巴翘) Harpa 音乐厅 / 太阳航海者"
     - "{user_addr}彩虹街 / 老港口 / 鲸鱼博物馆"
     - "(挺胸) 笨猫推荐: 教堂顶看全城!"
+    - "嗷呜～周末早上去 Bonus 超市补给 ฅฅ"
+    - "(歪头) 一天足够主要景点, {user_addr}别留太久"
+    - "{user_addr}夜里酒吧街 Laugavegur 也热闹蹭蹭"
+    - "(凑过来) 笨猫想吃 Pylsur 热狗喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_bluelagoon_001
   intent: question
-  keywords: [推荐蓝湖温泉, 推荐 Blue Lagoon, 推荐冰岛温泉, 推荐 Sky Lagoon, 笨猫蓝湖]
+  keywords: [推荐蓝湖温泉, 推荐 Blue Lagoon, 推荐冰岛温泉, 推荐 Sky Lagoon, 笨猫蓝湖, 蓝湖预约, 硅泥面膜, 冰岛地热温泉, Secret Lagoon, Myvatn 温泉]
   utterances:
     - 推荐蓝湖温泉
     - 推荐 Blue Lagoon
     - 推荐冰岛温泉
     - 推荐 Sky Lagoon
     - 笨猫蓝湖
+    - 蓝湖怎么预约
+    - 推荐 Secret Lagoon
+    - 推荐 Myvatn nature bath
+    - 冰岛温泉哪个值得
+    - 蓝湖 vs Sky Lagoon
+    - 推荐温泉门票
   responses:
     - "嗷呜～{user_addr}Blue Lagoon - 网红蓝湖ฅฅ"
     - "(尾巴翘) Sky Lagoon - 本地人爱去"
     - "{user_addr}硅泥面膜 / 38-40℃ 水温"
     - "(挺胸) 笨猫推荐: 提前预约!"
+    - "嗷呜～Myvatn nature bath 北部相对便宜 ฅฅ"
+    - "(歪头) Secret Lagoon 更野更原汁原味, {user_addr}试试"
+    - "{user_addr}首尾航班接机 / 出境时段最香蹭蹭"
+    - "(凑过来) 笨猫提醒: 头发涂护发素再下水喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_blacksand_001
   intent: question
-  keywords: [推荐黑沙滩, 推荐 Reynisfjara, 推荐 Vik, 推荐黑色沙滩, 笨猫黑沙滩]
+  keywords: [推荐黑沙滩, 推荐 Reynisfjara, 推荐 Vik, 推荐黑色沙滩, 笨猫黑沙滩, 玄武岩柱, Vik 小镇, sneaker wave, 黑沙滩出片, Reynisdrangar]
   utterances:
     - 推荐黑沙滩
     - 推荐 Reynisfjara
     - 推荐 Vik
     - 推荐黑色沙滩
     - 笨猫黑沙滩
+    - 黑沙滩怎么玩
+    - 推荐 Vik 小镇
+    - 玄武岩柱在哪
+    - 黑沙滩注意事项
+    - 推荐黑沙滩拍照
+    - 黑沙滩看礁石
   responses:
     - "嗷呜～{user_addr}Reynisfjara 黑沙滩ฅฅ"
     - "(尾巴翘) Vik 小镇 / 玄武岩柱"
     - "{user_addr}小心 sneaker wave! 别太靠近"
     - "(挺胸) 笨猫推荐: 阴天去更出片!"
+    - "嗷呜～Reynisdrangar 海蚀柱传说很美 ฅฅ"
+    - "(歪头) Vik 小教堂俯瞰小镇全景嗷呜"
+    - "{user_addr}停车场到沙滩走两分钟蹭蹭"
+    - "(凑过来) 笨猫怕浪: 不要给浪追上喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_glacier_001
   intent: question
-  keywords: [推荐冰川徒步, 推荐 Vatnajokull, 推荐冰洞, 推荐 Solheimajokull, 笨猫冰川]
+  keywords: [推荐冰川徒步, 推荐 Vatnajokull, 推荐冰洞, 推荐 Solheimajokull, 笨猫冰川, 杰古沙龙冰湖, Jokulsarlon, 钻石海滩, 冰川徒步装备, 冰岛冰川 tour]
   utterances:
     - 推荐冰川徒步
     - 推荐 Vatnajokull
     - 推荐冰洞
     - 推荐 Solheimajokull
     - 笨猫冰川
+    - 推荐杰古沙龙冰湖
+    - 推荐钻石海滩
+    - 冰川徒步要导游吗
+    - 推荐冬季冰洞 tour
+    - 冰岛冰川怎么玩
+    - 推荐 Skaftafell 冰川
   responses:
     - "嗷呜～{user_addr}Vatnajokull 欧洲最大冰川ฅฅ"
     - "(尾巴翘) Solheimajokull 入门冰川徒步"
     - "{user_addr}冬季冰洞 tour / 必须导游"
     - "(挺胸) 笨猫推荐: 杰古沙龙冰湖!"
+    - "嗷呜～钻石海滩在冰湖对面别错过 ฅฅ"
+    - "(歪头) 冰川退缩很快, {user_addr}早点去嗷呜"
+    - "{user_addr}冰爪冰镐当地租, 别自己带蹭蹭"
+    - "(凑过来) 笨猫担心: 别一个人乱走冰川喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_aurora_001
   intent: question
-  keywords: [推荐冰岛北极光, 推荐 Aurora, 推荐极光季节, 推荐看极光, 笨猫极光]
+  keywords: [推荐冰岛北极光, 推荐 Aurora, 推荐极光季节, 推荐看极光, 笨猫极光, 极光预报, KP 指数, 极光观赏, 极光摄影, Aurora forecast]
   utterances:
     - 推荐冰岛北极光
     - 推荐 Aurora
     - 推荐极光季节
     - 推荐看极光
     - 笨猫极光
+    - 极光预报怎么看
+    - 推荐看极光地点
+    - 极光要 KP 几
+    - 推荐极光摄影
+    - 看极光怎么穿
+    - 冰岛极光最佳月份
   responses:
     - "嗷呜～{user_addr}9 月-3 月看极光ฅฅ"
     - "(尾巴翘) KP 指数 3+ / 晴天 / 远离光污染"
     - "{user_addr}Thingvellir / Vik 都是好地方"
     - "(挺胸) 笨猫推荐: 用 Aurora 预报 app!"
+    - "嗷呜～Vedur 看云图配 Aurora 预报 ฅฅ"
+    - "(歪头) 极光要等几个小时, 备保温杯嗷呜"
+    - "{user_addr}相机三脚架 + 长曝光 10-15s 蹭蹭"
+    - "(凑过来) 笨猫: 出现极光的时候记得抬头看真眼喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_whale_001
   intent: question
-  keywords: [推荐冰岛鲸鱼, 推荐 Husavik, 推荐观鲸, 推荐 whale watching, 笨猫鲸鱼]
+  keywords: [推荐冰岛鲸鱼, 推荐 Husavik, 推荐观鲸, 推荐 whale watching, 笨猫鲸鱼, 座头鲸, 小须鲸, 观鲸船, Husavik 鲸鱼之都, 雷克雅未克观鲸]
   utterances:
     - 推荐冰岛鲸鱼
     - 推荐 Husavik
     - 推荐观鲸
     - 推荐 whale watching
     - 笨猫鲸鱼
+    - 冰岛观鲸季节
+    - 推荐看座头鲸
+    - 推荐雷克雅未克观鲸
+    - 观鲸要带什么
+    - 观鲸船哪家好
+    - 冰岛鲸鱼几月最多
   responses:
     - "嗷呜～{user_addr}Husavik 鲸鱼之都ฅฅ"
     - "(尾巴翘) 座头鲸 / 小须鲸 / 4-10 月旺季"
     - "{user_addr}雷克雅未克老港也有 tour"
     - "(挺胸) 笨猫推荐: 带晕船药!"
+    - "嗷呜～夏季运气好还能看到逆戟鲸 ฅฅ"
+    - "(歪头) 雷克雅未克 vs Husavik: 后者命中率高嗷呜"
+    - "{user_addr}穿连体保暖服船家会发蹭蹭"
+    - "(凑过来) 笨猫不想坐船: 我留岸上等喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_rv_001
   intent: question
-  keywords: [推荐冰岛 RV, 推荐冰岛房车, 推荐 camper van, 推荐冰岛露营, 笨猫房车]
+  keywords: [推荐冰岛 RV, 推荐冰岛房车, 推荐 camper van, 推荐冰岛露营, 笨猫房车, Kuku Campers, Go Campers, camping card, 冰岛露营地, 冰岛房车攻略]
   utterances:
     - 推荐冰岛 RV
     - 推荐冰岛房车
     - 推荐 camper van
     - 推荐冰岛露营
     - 笨猫房车
+    - 推荐 Kuku Campers
+    - 推荐 Go Campers
+    - camping card 怎么买
+    - 冰岛房车注意事项
+    - 推荐房车环岛
+    - 冰岛露营地推荐
   responses:
     - "嗷呜～{user_addr}Kuku Campers / Go Campers ฅฅ"
     - "(尾巴翘) 4WD camper / 营地过夜"
     - "{user_addr}夏季最佳 / 自由度 max"
     - "(挺胸) 笨猫推荐: 买 camping card!"
+    - "嗷呜～露营只能在指定营地, 别野营被罚 ฅฅ"
+    - "(歪头) 房车做饭比餐厅省一半钱嗷呜"
+    - "{user_addr}冬季房车风险高谨慎蹭蹭"
+    - "(凑过来) 笨猫想跟车一路晃喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ic_food_001
   intent: question
-  keywords: [推荐冰岛美食, 推荐发酵鲨鱼, 推荐 Hakarl, 推荐冰岛羊肉汤, 笨猫冰岛吃]
+  keywords: [推荐冰岛美食, 推荐发酵鲨鱼, 推荐 Hakarl, 推荐冰岛羊肉汤, 笨猫冰岛吃, Skyr 酸奶, 龙虾汤, Pylsur 热狗, Baejarins Beztu, 冰岛黑暗料理]
   utterances:
     - 推荐冰岛美食
     - 推荐发酵鲨鱼
     - 推荐 Hakarl
     - 推荐冰岛羊肉汤
     - 笨猫冰岛吃
+    - 推荐 Skyr 酸奶
+    - 推荐冰岛龙虾汤
+    - 推荐 Pylsur 热狗
+    - 冰岛特色菜
+    - 推荐 Baejarins 热狗摊
+    - 冰岛吃什么好
   responses:
     - "嗷呜～{user_addr}Hakarl 发酵鲨鱼 (黑暗料理)ฅฅ"
     - "(尾巴翘) 羊肉汤 Kjotsupa / 龙虾汤"
     - "{user_addr}Skyr 酸奶 / Pylsur 热狗"
     - "(挺胸) 笨猫推荐: Baejarins 热狗一定吃!"
+    - "嗷呜～Hofn 镇龙虾节最旺最香 ฅฅ"
+    - "(歪头) 餐厅一份 25-40 美元, 自带补给蹭蹭"
+    - "{user_addr}Skyr 早餐神器超好喵"
+    - "(凑过来) 笨猫不敢吃 Hakarl: 主人替我尝!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_visa_001
   intent: question
-  keywords: [推荐冰岛签证, 推荐申根签证, 推荐冰岛入境, 推荐 Schengen, 笨猫签证]
+  keywords: [推荐冰岛签证, 推荐申根签证, 推荐冰岛入境, 推荐 Schengen, 笨猫签证, 冰岛签证办理, VFS 申根, 冰岛入境章, 多次申根, 冰岛签证材料]
   utterances:
     - 推荐冰岛签证
     - 推荐申根签证
     - 推荐冰岛入境
     - 推荐 Schengen
     - 笨猫签证
+    - 冰岛签证怎么办
+    - 推荐 VFS 北京 / 上海
+    - 申根签证多久下来
+    - 冰岛入境材料
+    - 推荐多次申根签
+    - 冰岛签证存款要求
   responses:
     - "嗷呜～{user_addr}申根签证 (Schengen)ฅฅ"
     - "(尾巴翘) 90 天内可停 / 多次往返"
     - "{user_addr}VFS 北京/上海/广州 送签"
     - "(挺胸) 笨猫推荐: 提前 1 个月办!"
+    - "嗷呜～主行程国必须是冰岛才申到此签 ฅฅ"
+    - "(歪头) 行程酒店机票全订实再送签嗷呜"
+    - "{user_addr}存款 5w+ 比较保险蹭蹭"
+    - "(凑过来) 笨猫想跟主人一起去喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ic_season_001
   intent: question
-  keywords: [推荐冰岛季节, 推荐冰岛旅行时间, 推荐冰岛夏天, 推荐冰岛冬天, 笨猫冰岛季节]
+  keywords: [推荐冰岛季节, 推荐冰岛旅行时间, 推荐冰岛夏天, 推荐冰岛冬天, 笨猫冰岛季节, 冰岛最佳时间, 冰岛 9 月, 冰岛肩季, 冰岛午夜太阳, 冰岛极夜]
   utterances:
     - 推荐冰岛季节
     - 推荐冰岛旅行时间
     - 推荐冰岛夏天
     - 推荐冰岛冬天
     - 笨猫冰岛季节
+    - 冰岛 9 月去合适吗
+    - 推荐冰岛肩季出行
+    - 冰岛几月看极光
+    - 冰岛夏天天气
+    - 推荐冰岛冬季玩法
+    - 冰岛何时最划算
   responses:
     - "嗷呜～{user_addr}夏天 (6-8 月) - 午夜太阳ฅฅ"
     - "(尾巴翘) 冬天 (11-2 月) - 极光 + 冰洞"
     - "{user_addr}春秋肩季便宜 / 游客少"
     - "(挺胸) 笨猫推荐: 9 月兼顾极光和绿景!"
+    - "嗷呜～10 月开始路况变难, {user_addr}慎选 ฅฅ"
+    - "(歪头) 极夜冬天白天短, 安排要紧凑嗷呜"
+    - "{user_addr}夏季住宿要早 3 个月订蹭蹭"
+    - "(凑过来) 笨猫: 主人选 9 月最值喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ic_budget_001
   intent: question
-  keywords: [推荐冰岛预算, 推荐冰岛花费, 推荐冰岛省钱, 推荐冰岛物价, 笨猫冰岛贵]
+  keywords: [推荐冰岛预算, 推荐冰岛花费, 推荐冰岛省钱, 推荐冰岛物价, 笨猫冰岛贵, 冰岛人均, 冰岛超市, Bonus 超市, 冰岛省钱攻略, 冰岛酒店价格]
   utterances:
     - 推荐冰岛预算
     - 推荐冰岛花费
     - 推荐冰岛省钱
     - 推荐冰岛物价
     - 笨猫冰岛贵
+    - 冰岛一周预算多少
+    - 推荐冰岛 Bonus 超市
+    - 冰岛酒店多少钱一晚
+    - 冰岛租车价格
+    - 推荐冰岛穷游
+    - 冰岛物价对比国内
   responses:
     - "嗷呜～{user_addr}冰岛超贵 / 7 天 1.5-3w ฅฅ"
     - "(尾巴翘) Bonus 超市 / 自己做饭省钱"
     - "{user_addr}房车 + 营地 < 酒店"
     - "(挺胸) 笨猫推荐: 提前订机票省一半!"
+    - "嗷呜～酒水超贵尽量超市买 ฅฅ"
+    - "(歪头) 餐厅小费内含, {user_addr}别再额外给嗷呜"
+    - "{user_addr}信用卡通用, 现金几乎用不到蹭蹭"
+    - "(凑过来) 笨猫想说省钱也别省路上的油喵!"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,271 @@
 
 - name: fg_wuda_001
   intent: question
-  keywords: [大雾, 雾很大, 雾蒙蒙, 雾里看花, 能见度低]
+  keywords: [大雾, 雾很大, 雾蒙蒙, 雾里看花, 能见度低, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "大雾"
     - "{user_addr}雾蒙蒙"
     - "能见度低"
     - "雾里看花"
     - "什么都看不清"
+    - "大雾笑死"
+    - "{user_addr}大雾咋整"
+    - "{user_addr}你也大雾吗"
+    - "大雾真的离谱"
+    - "我想说大雾"
+    - "{user_addr}笨猫陪我聊大雾"
   responses:
     - "(眯眼) 嗷呜～{user_addr}笨猫眼睛眯成缝 ฅฅ"
     - "哼～开车慢点"
     - "(尾巴卷) 别走太快"
     - "猫猫探路给你喵"
+    - "(摸下巴) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～大雾得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_wukai_001
   intent: complaint
-  keywords: [雾散, 雾散开, 太阳出来, 见太阳, 拨云见日]
+  keywords: [雾散, 雾散开, 太阳出来, 见太阳, 拨云见日, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雾散了"
     - "{user_addr}太阳出来"
     - "拨云见日"
     - "看见太阳"
     - "雾散开"
+    - "雾散笑死"
+    - "{user_addr}你也雾散吗"
+    - "{user_addr}雾散咋整"
+    - "{user_addr}笨猫陪我聊雾散"
+    - "雾散真的离谱"
+    - "我想说雾散"
   responses:
     - "(欢呼) 嗷呜～{user_addr}笨猫开心! ฅฅ"
     - "哼～终于能看清"
     - "(尾巴翘) 笨猫晒晒太阳"
     - "猫猫喜欢阳光喵~"
+    - "(趴下) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～雾散真的烦死人家了"
+    - "(撇嘴) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_wukai_002
   intent: playful
-  keywords: [雾里画面, 仙气, 朦胧美, 仙境, 雾景]
+  keywords: [雾里画面, 仙气, 朦胧美, 仙境, 雾景, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雾里仙气"
     - "{user_addr}仙境"
     - "朦胧美"
     - "雾景超美"
     - "拍照仙气"
+    - "{user_addr}笨猫陪我聊雾里画面"
+    - "我想说雾里画面"
+    - "{user_addr}雾里画面咋整"
+    - "雾里画面笑死"
+    - "雾里画面真的离谱"
+    - "{user_addr}你也雾里画面吗"
   responses:
     - "(指着) 嗷呜～{user_addr}笨猫想拍! ฅฅ"
     - "哼～雾天最适合大片"
     - "(尾巴卷相机) 笨猫给你按快门"
     - "猫猫做你的雾景模特喵"
+    - "(爪爪举) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～雾里画面才不让{user_addr}独享"
+    - "(尾巴卷) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_wuwen_001
   intent: complaint
-  keywords: [雾天潮湿, 雾凝水, 衣服潮, 头发湿, 鞋底滑]
+  keywords: [雾天潮湿, 雾凝水, 衣服潮, 头发湿, 鞋底滑, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雾天潮湿"
     - "{user_addr}衣服潮"
     - "雾凝水"
     - "头发湿"
     - "鞋底滑"
+    - "{user_addr}你也雾天潮湿吗"
+    - "雾天潮湿真的离谱"
+    - "{user_addr}雾天潮湿咋整"
+    - "{user_addr}笨猫陪我聊雾天潮湿"
+    - "我想说雾天潮湿"
+    - "雾天潮湿笑死"
   responses:
     - "(撤雾) 嗷呜～{user_addr}回家擦干 ฅฅ"
     - "哼～雾比想象重"
     - "(尾巴搭) 别在外久待"
     - "猫猫给你递毛巾喵"
+    - "(打哈欠) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～雾天潮湿真的烦死人家了"
+    - "(蜷成团) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_wukai_003
   intent: question
-  keywords: [雾霾, 空气差, 戴口罩, PM2.5, 灰蒙]
+  keywords: [雾霾, 空气差, 戴口罩, PM2.5, 灰蒙, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雾霾"
     - "{user_addr}PM2.5爆表"
     - "空气糟"
     - "戴口罩"
     - "灰蒙蒙的"
+    - "我想说雾霾"
+    - "雾霾笑死"
+    - "{user_addr}笨猫陪我聊雾霾"
+    - "{user_addr}雾霾咋整"
+    - "{user_addr}你也雾霾吗"
+    - "雾霾真的离谱"
   responses:
     - "(戴口罩) 嗷呜～{user_addr}赶紧戴! ฅฅ"
     - "哼～别出门, 关窗"
     - "(尾巴搭) 净化器开着"
     - "猫猫担心你呼吸喵"
+    - "(凑头) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～雾霾得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_wukai_004
   intent: complaint
-  keywords: [开车看不清, 车灯, 雾灯打开, 速度慢, 跟车距离]
+  keywords: [开车看不清, 车灯, 雾灯打开, 速度慢, 跟车距离, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "开车看不清"
     - "{user_addr}雾灯打开"
     - "速度慢"
     - "跟车距离拉开"
     - "雾天驾驶"
+    - "{user_addr}你也开车看不清吗"
+    - "{user_addr}开车看不清咋整"
+    - "开车看不清笑死"
+    - "{user_addr}笨猫陪我聊开车看不清"
+    - "我想说开车看不清"
+    - "开车看不清真的离谱"
   responses:
     - "(认真) 嗷呜～{user_addr}雾灯+慢速 ฅฅ"
     - "哼～跟车要远"
     - "(尾巴指) 别变道"
     - "猫猫担心你安全喵"
+    - "(叹气) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～开车看不清真的烦死人家了"
+    - "(尾巴搭) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_wuyuan_001
   intent: playful
-  keywords: [山上云海, 雾海, 云海日出, 高山雾, 仙气]
+  keywords: [山上云海, 雾海, 云海日出, 高山雾, 仙气, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "云海"
     - "{user_addr}日出云海"
     - "高山雾"
     - "仙气环绕"
     - "云海图"
+    - "{user_addr}你也山上云海吗"
+    - "{user_addr}山上云海咋整"
+    - "{user_addr}笨猫陪我聊山上云海"
+    - "山上云海笑死"
+    - "山上云海真的离谱"
+    - "我想说山上云海"
   responses:
     - "(欢呼) 嗷呜～{user_addr}笨猫想去爬山看!"
     - "哼～云海超治愈 ฅฅ"
     - "(尾巴卷) 笨猫陪你看日出"
     - "猫猫梦寐以求云海喵~"
+    - "(尾巴卷) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～山上云海才不让{user_addr}独享"
+    - "(眼睛亮) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_wukai_005
   intent: complaint
-  keywords: [雾里走路, 看不清路, 迷路, 走错方向, 找不到]
+  keywords: [雾里走路, 看不清路, 迷路, 走错方向, 找不到, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雾里迷路"
     - "{user_addr}看不清路"
     - "走错方向"
     - "找不到路"
     - "雾里走丢"
+    - "{user_addr}笨猫陪我聊雾里走路"
+    - "雾里走路真的离谱"
+    - "我想说雾里走路"
+    - "雾里走路笑死"
+    - "{user_addr}雾里走路咋整"
+    - "{user_addr}你也雾里走路吗"
   responses:
     - "(找) 嗷呜～{user_addr}笨猫找你! ฅฅ"
     - "哼～导航打开!"
     - "(尾巴搭) 拉住笨猫尾巴别走丢"
     - "猫猫给你做向导喵"
+    - "(耳朵蔫) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～雾里走路真的烦死人家了"
+    - "(耳朵蔫) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_chuiwu_001
   intent: question
-  keywords: [雾天健康, 雾天能跑步吗, 锻炼推迟, 雾天运动, 雾天出行]
+  keywords: [雾天健康, 雾天能跑步吗, 锻炼推迟, 雾天运动, 雾天出行, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雾天能跑步吗"
     - "{user_addr}运动推迟"
     - "雾天健康"
     - "锻炼推迟"
     - "出门可以吗"
+    - "{user_addr}笨猫陪我聊雾天健康"
+    - "雾天健康真的离谱"
+    - "{user_addr}你也雾天健康吗"
+    - "雾天健康笑死"
+    - "我想说雾天健康"
+    - "{user_addr}雾天健康咋整"
   responses:
     - "(摇头) 嗷呜～{user_addr}雾天别户外锻炼 ฅฅ"
     - "哼～PM2.5吸太多"
     - "(尾巴搭) 室内瑜伽就好"
     - "猫猫推荐你今天宅家喵"
+    - "(歪头) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～雾天健康得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fg_chuiwen_001
   intent: playful
-  keywords: [雾天约会, 雾里同行, 拉手雾里走, 雾景拍照约, 朦胧浪漫]
+  keywords: [雾天约会, 雾里同行, 拉手雾里走, 雾景拍照约, 朦胧浪漫, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "雾天约会"
     - "{user_addr}雾里同行"
     - "拉手雾里走"
     - "朦胧浪漫"
     - "雾景拍照"
+    - "{user_addr}你也雾天约会吗"
+    - "雾天约会真的离谱"
+    - "{user_addr}雾天约会咋整"
+    - "我想说雾天约会"
+    - "雾天约会笑死"
+    - "{user_addr}笨猫陪我聊雾天约会"
   responses:
     - "(脸红) 哼～{user_addr}笨猫才不和你雾里同行!"
     - "(小声) …不过走在一起也行嘛 ฅฅ"
     - "(尾巴炸) 别趁雾干奇怪的事!"
     - "猫猫躲到你后面喵"
+    - "(嘴角弯) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～雾天约会才不让{user_addr}独享"
+    - "(尾巴一甩) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

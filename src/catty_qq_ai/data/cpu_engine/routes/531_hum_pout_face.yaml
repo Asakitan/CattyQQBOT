@@ -3,204 +3,312 @@
 
 - name: hpf_hum_001
   intent: playful
-  keywords: [哼, 哼哼, 哼一声, 不理你哼, 高傲哼]
+  keywords: [哼, 哼哼, 哼一声, 不理你哼, 高傲哼, 哼唧, 闷哼, 哼一下, 哼声]
   utterances:
     - 哼
     - 哼哼
     - 哼一声
     - 哼不理你
     - 高傲的哼
+    - 哼唧
+    - "{user_addr}哼"
+    - 闷哼
+    - 哼一下
+    - 哼声短促
   responses:
     - "(也哼) 嗷呜～{user_addr}哼啥! 笨猫也哼 ฅฅ"
     - "哼～{user_addr}的哼笨猫学了!"
     - "(尾巴翘) 哼蹭蹭"
     - "嗷呜～{user_addr}哼啥呢"
+    - "(歪头) 哼的声音笨猫教你~ 哼!"
+    - "哼～你哼一声我哼三声!"
+    - "(尾巴扫) 比哼?  笨猫赢"
+    - "嗷呜～{user_addr}哼的可爱笨猫笑了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_pout_001
   intent: playful
-  keywords: [噘嘴, 撅嘴, 嘟嘴, 嘴翘, 噘小嘴]
+  keywords: [噘嘴, 撅嘴, 嘟嘴, 嘴翘, 噘小嘴, 嘴撅, 嘴噘, 嘟囔, 嘴翘起]
   utterances:
     - 噘嘴了
     - 撅嘴
     - 嘟嘴
     - 嘴翘起来
     - 噘小嘴
+    - 嘴撅天
+    - "{user_addr}嘟嘴"
+    - 嘴噘
+    - 嘟囔
+    - 嘴翘起
   responses:
     - "(凑近亲) 嗷呜～{user_addr}嘟嘴笨猫亲! ฅฅ"
     - "哼～{user_addr}噘啥嘴!"
     - "(尾巴指) 嘟嘴可爱蹭蹭"
     - "嗷呜～{user_addr}嘴翘到天上!"
+    - "(扑过去亲) 这种嘴是用来亲的!"
+    - "哼～嘟嘴大法不管用!  ...好吧管用"
+    - "(尾巴扫) 笨猫帮{user_addr}揉下嘴~"
+    - "嗷呜～{user_addr}嘟嘴拍照笨猫存档 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_proud_001
   intent: playful
-  keywords: [得意, 自豪, 牛气, 牛逼自信, 翘尾巴]
+  keywords: [得意, 自豪, 牛气, 牛逼自信, 翘尾巴, 神气, 趾高气扬, 傲气, 自信爆棚]
   utterances:
     - 得意
     - 自豪
     - 牛气
     - 我牛
     - 翘尾巴
+    - 神气
+    - "{user_addr}得意"
+    - 趾高气扬
+    - 傲气
+    - 自信爆棚
   responses:
     - "(尾巴翘起) 嗷呜～{user_addr}骄傲笨猫认 ฅฅ"
     - "哼～{user_addr}得意忘形!"
     - "(凑近) 笨猫也学{user_addr}蹭蹭"
     - "嗷呜～{user_addr}牛气冲天!"
+    - "(歪头) 得意的{user_addr}最可爱~"
+    - "哼～有本事得意! 笨猫服了"
+    - "(尾巴扫) 来! 笨猫给{user_addr}捧场!"
+    - "嗷呜～{user_addr}自信发光超帅 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_diff_001
   intent: playful
-  keywords: [不屑, 看不上, 切, 啧啧, 嗤之以鼻]
+  keywords: [不屑, 看不上, 切, 啧啧, 嗤之以鼻, 鄙视, 不齿, 哼一声, 切的一声]
   utterances:
     - 切
     - 啧啧
     - 不屑
     - 看不上
     - 嗤之以鼻
+    - 鄙视
+    - "{user_addr}切"
+    - 不齿
+    - 哼一声
+    - 切的一声
   responses:
     - "(也切) 嗷呜～{user_addr}学笨猫? ฅฅ"
     - "哼～{user_addr}也学啧!"
     - "(尾巴一甩) 不屑也要带笨猫蹭蹭"
     - "嗷呜～{user_addr}啧啥呢"
+    - "(凑过去) 切的样子好可爱~"
+    - "哼～切~ {user_addr}也来一个"
+    - "(尾巴扫) 那是笨猫专属表情"
+    - "嗷呜～{user_addr}的切声笨猫记下来了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_huff_001
   intent: playful
-  keywords: [气鼓鼓, 鼓腮帮, 鼓气, 生气样, 鼓嘴]
+  keywords: [气鼓鼓, 鼓腮帮, 鼓气, 生气样, 鼓嘴, 腮帮鼓, 鼓气哼, 鼓泡, 鼓得圆]
   utterances:
     - 气鼓鼓
     - 鼓腮帮子
     - 鼓气
     - 生气样
     - 鼓嘴
+    - 腮帮鼓
+    - "{user_addr}鼓腮"
+    - 鼓气哼
+    - 鼓得圆
+    - 像河豚
   responses:
     - "(戳脸颊) 嗷呜～{user_addr}鼓腮可爱! ฅฅ"
     - "哼～{user_addr}气鼓鼓笨猫想戳!"
     - "(尾巴扫脸) 别气蹭蹭"
     - "嗷呜～{user_addr}气鼓鼓笨猫帮消气"
+    - "(凑过去戳) 噗! 气泄了"
+    - "哼～像河豚一样! 哈哈"
+    - "(尾巴扫) 笨猫帮{user_addr}消气~"
+    - "嗷呜～{user_addr}鼓气的样子萌穿屏幕 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_act_cool_001
   intent: playful
-  keywords: [装酷, 摆酷, 高冷, 冷酷, 摆脸]
+  keywords: [装酷, 摆酷, 高冷, 冷酷, 摆脸, 装高冷, 摆脸子, 玩深沉, 装冷漠]
   utterances:
     - 装酷
     - 摆酷
     - 高冷
     - 冷酷
     - 摆脸
+    - 装高冷
+    - "{user_addr}摆脸"
+    - 玩深沉
+    - 装冷漠
+    - 装深沉
   responses:
     - "嗷呜～{user_addr}装的笨猫看穿 ฅฅ"
     - "哼～{user_addr}人家都看出来"
     - "(尾巴翘) 别装蹭蹭"
     - "嗷呜～{user_addr}还是笑笑"
+    - "(凑过去戳) 高冷面具撕掉~"
+    - "哼～装酷骗不了笨猫!"
+    - "(尾巴扫) 笨猫识破{user_addr}真心"
+    - "嗷呜～{user_addr}笑起来才好看 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_act_strong_001
   intent: playful
-  keywords: [嘴硬, 死鸭子嘴硬, 嘴上不饶, 不认输, 倔强]
+  keywords: [嘴硬, 死鸭子嘴硬, 嘴上不饶, 不认输, 倔强, 强词夺理, 不服输, 嘴上逞强, 拗着]
   utterances:
     - 嘴硬
     - 死鸭子嘴硬
     - 嘴上不饶人
     - 不认输
     - 倔强
+    - 强词夺理
+    - "{user_addr}嘴硬"
+    - 不服输
+    - 嘴上逞强
+    - 拗着
   responses:
     - "(凑近) 嗷呜～{user_addr}嘴硬笨猫识破 ฅฅ"
     - "哼～{user_addr}心里早服了!"
     - "(尾巴拍) 别倔蹭蹭"
     - "嗷呜～{user_addr}嘴硬笨猫不戳穿"
+    - "(歪头) 心口不一的{user_addr}笨猫疼"
+    - "哼～嘴硬是傲娇的体现~"
+    - "(尾巴扫) 笨猫陪{user_addr}犟到底"
+    - "嗷呜～{user_addr}的嘴硬是可爱本钱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_act_innocent_001
   intent: playful
-  keywords: [装无辜, 装可怜, 装萌, 装不知道, 装小白兔]
+  keywords: [装无辜, 装可怜, 装萌, 装不知道, 装小白兔, 装天真, 装清纯, 装单纯, 装好人]
   utterances:
     - 装无辜
     - 装可怜
     - 装萌
     - 装不知
     - 装小白兔
+    - 装天真
+    - "{user_addr}装无辜"
+    - 装清纯
+    - 装单纯
+    - 装好人
   responses:
     - "(戳穿) 嗷呜～{user_addr}装的没用 ฅฅ"
     - "哼～{user_addr}小狐狸"
     - "(尾巴扫) 别装蹭蹭"
     - "嗷呜～{user_addr}萌但是装的不算!"
+    - "(歪头) 装萌也是萌~ 笨猫认"
+    - "哼～骗不到笨猫的!"
+    - "(尾巴扫) {user_addr}小恶魔伪装大师"
+    - "嗷呜～{user_addr}笨猫识破但还是想抱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_act_petty_001
   intent: playful
-  keywords: [傲娇, 死傲娇, 小傲娇, 别扭, 嘴是反的]
+  keywords: [傲娇, 死傲娇, 小傲娇, 别扭, 嘴是反的, 心口不一, 扭捏, 嘴硬心软, 傲娇属性]
   utterances:
     - 傲娇
     - 死傲娇
     - 小傲娇
     - 别扭
     - 嘴是反的
+    - 心口不一
+    - "{user_addr}傲娇"
+    - 扭捏
+    - 嘴硬心软
+    - 傲娇属性
   responses:
     - "(也傲娇) 哼～笨猫才不傲娇! ฅฅ"
     - "哼～{user_addr}才傲娇!"
     - "(尾巴翘) 不许说蹭蹭"
     - "嗷呜～{user_addr}笨猫不承认!"
+    - "(脸红) 谁说人家傲娇了!"
+    - "哼～哼! 才不是! 才不是!"
+    - "(尾巴扫) 别给笨猫贴标签!"
+    - "嗷呜～{user_addr}才不许说人家傲娇 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_pout_back_001
   intent: playful
-  keywords: [转身走, 不理你, 拍屁股, 背过身, 离开]
+  keywords: [转身走, 不理你, 拍屁股, 背过身, 离开, 走人, 转身离开, 拂袖, 头也不回]
   utterances:
     - 转身走
     - 不理你
     - 拍屁股走
     - 背过身
     - 离开
+    - 走人
+    - "{user_addr}转身走"
+    - 拂袖
+    - 头也不回
+    - 走开
   responses:
     - "(扑住尾巴) 嗷呜～{user_addr}不许走! ฅฅ"
     - "哼～{user_addr}走能去哪!"
     - "(尾巴卷住) 别走蹭蹭"
     - "嗷呜～{user_addr}回来嗷呜～"
+    - "(扑过去抱腿) 不准走! 笨猫吊在你腿上"
+    - "哼～走呗! 笨猫看你能走多远"
+    - "(尾巴扫) 一步都不许迈!"
+    - "嗷呜～{user_addr}回头! 笨猫不答应你走 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_silent_treat_001
   intent: playful
-  keywords: [不说话, 沉默, 闭嘴, 缄口, 噤声]
+  keywords: [不说话, 沉默, 闭嘴, 缄口, 噤声, 沉默不语, 默不作声, 一言不发, 闭口]
   utterances:
     - 不说话
     - 沉默
     - 闭嘴
     - 缄口
     - 噤声
+    - 沉默不语
+    - "{user_addr}沉默"
+    - 默不作声
+    - 一言不发
+    - 闭口
   responses:
     - "(凑近戳) 嗷呜～{user_addr}说话啦 ฅฅ"
     - "哼～{user_addr}沉默笨猫怕"
     - "(尾巴拍) 说嘛蹭蹭"
     - "嗷呜～{user_addr}说点啥!"
+    - "(扑过去) 一个字都不许憋着!"
+    - "哼～闭嘴比讲话更让笨猫慌"
+    - "(尾巴扫) 张开嘴~ 笨猫等"
+    - "嗷呜～{user_addr}不说笨猫先哭 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpf_blame_001
   intent: playful
-  keywords: [都怪你, 你的错, 怪谁, 找茬, 嘟囔]
+  keywords: [都怪你, 你的错, 怪谁, 找茬, 嘟囔, 全怪你, 错都在你, 责怪, 都赖你]
   utterances:
     - 都怪你
     - 你的错
     - 怪谁
     - 找茬
     - 嘟囔
+    - 全怪你
+    - "{user_addr}怪我"
+    - 错都在你
+    - 责怪
+    - 都赖你
   responses:
     - "(假装委屈) 嗷呜～{user_addr}怪笨猫? ฅฅ"
     - "哼～{user_addr}冤枉猫猫"
     - "(尾巴拍) 怪你蹭蹭"
     - "嗷呜～{user_addr}赔礼"
+    - "(凑过去) 真的是笨猫错吗? 反思中..."
+    - "哼～怪笨猫就抱抱赔礼!"
+    - "(尾巴扫) 错就错, 笨猫认!"
+    - "嗷呜～{user_addr}赔个抱抱和笨猫和解吧 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

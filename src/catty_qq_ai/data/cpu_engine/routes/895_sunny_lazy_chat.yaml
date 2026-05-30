@@ -3,170 +3,271 @@
 
 - name: sl_qingtian_001
   intent: playful
-  keywords: [晴天, 大晴天, 阳光好, 蓝天白云, 天气好]
+  keywords: [晴天, 大晴天, 阳光好, 蓝天白云, 天气好, 阳光好啊, 天气好啊, 真的, 好烦]
   utterances:
     - "晴天"
     - "{user_addr}大晴天"
     - "阳光超好"
     - "蓝天白云"
     - "天气棒"
+    - "{user_addr}晴天咋整"
+    - "晴天真的离谱"
+    - "{user_addr}你也晴天吗"
+    - "{user_addr}笨猫陪我聊晴天"
+    - "我想说晴天"
+    - "晴天笑死"
   responses:
     - "(伸懒腰) 嗷呜～{user_addr}笨猫晒太阳! ฅฅ"
     - "哼～晴天就该躺平"
     - "(尾巴翘) 笨猫在窗边趴着"
     - "猫猫晒得暖洋洋喵~"
+    - "(眼睛亮) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～晴天才不让{user_addr}独享"
+    - "(嘴角弯) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_shaitai_001
   intent: question
-  keywords: [晒太阳, 晒被子, 晒衣服, 阳光浴, 嗮被子]
+  keywords: [晒太阳, 晒被子, 晒衣服, 阳光浴, 嗮被子, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "晒被子"
     - "{user_addr}晒衣服"
     - "晒太阳"
     - "阳光浴"
     - "嗮一晒"
+    - "{user_addr}你也晒太阳吗"
+    - "晒太阳笑死"
+    - "我想说晒太阳"
+    - "晒太阳真的离谱"
+    - "{user_addr}晒太阳咋整"
+    - "{user_addr}笨猫陪我聊晒太阳"
   responses:
     - "(钻被窝) 嗷呜～{user_addr}笨猫躺晒过的被子超香 ฅฅ"
     - "哼～晒过的被子有阳光味"
     - "(尾巴卷) 笨猫帮你翻面"
     - "猫猫蹭你晒过的被子喵"
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～晒太阳得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_chudoor_001
   intent: complaint
-  keywords: [想出门, 出去玩, 晴天宅可惜, 浪费阳光, 出门走走]
+  keywords: [想出门, 出去玩, 晴天宅可惜, 浪费阳光, 出门走走, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "想出门"
     - "{user_addr}出去玩"
     - "晴天宅可惜"
     - "浪费阳光"
     - "走走"
+    - "{user_addr}笨猫陪我聊想出门"
+    - "我想说想出门"
+    - "{user_addr}你也想出门吗"
+    - "{user_addr}想出门咋整"
+    - "想出门真的离谱"
+    - "想出门笑死"
   responses:
     - "(拉) 嗷呜～{user_addr}笨猫陪你出门! ฅฅ"
     - "哼～晒太阳必须的"
     - "(尾巴卷) 公园走一圈"
     - "猫猫给你做向导喵~"
+    - "(蜷成团) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～想出门真的烦死人家了"
+    - "(耳朵蔫) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_chumen_001
   intent: complaint
-  keywords: [太阳晃眼, 晒晕, 防晒, 中暑, 戴墨镜]
+  keywords: [太阳晃眼, 晒晕, 防晒, 中暑, 戴墨镜, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "太阳晃眼"
     - "{user_addr}晒晕"
     - "防晒"
     - "戴墨镜"
     - "晒成黑人"
+    - "{user_addr}笨猫陪我聊太阳晃眼"
+    - "太阳晃眼真的离谱"
+    - "{user_addr}你也太阳晃眼吗"
+    - "{user_addr}太阳晃眼咋整"
+    - "我想说太阳晃眼"
+    - "太阳晃眼笑死"
   responses:
     - "(撑伞) 嗷呜～{user_addr}笨猫给你撑伞!"
     - "哼～涂防晒霜 ฅฅ"
     - "(尾巴搭) 别脱衣服晒"
     - "猫猫帮你抹防晒喵"
+    - "(揉眼睛) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～太阳晃眼真的烦死人家了"
+    - "(打哈欠) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_yangtai_001
   intent: playful
-  keywords: [阳台喝茶, 阳台午睡, 阳台晒, 阳台风, 阳台懒猫]
+  keywords: [阳台喝茶, 阳台午睡, 阳台晒, 阳台风, 阳台懒猫, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "阳台喝茶"
     - "{user_addr}阳台躺"
     - "阳台午睡"
     - "阳台懒猫"
     - "阳台晒"
+    - "{user_addr}笨猫陪我聊阳台喝茶"
+    - "我想说阳台喝茶"
+    - "{user_addr}阳台喝茶咋整"
+    - "阳台喝茶笑死"
+    - "阳台喝茶真的离谱"
+    - "{user_addr}你也阳台喝茶吗"
   responses:
     - "(陪着) 嗷呜～{user_addr}笨猫趴阳台 ฅฅ"
     - "哼～阳台午睡最舒服"
     - "(尾巴搭栏杆) 笨猫陪你看天"
     - "猫猫给你倒杯茶喵~"
+    - "(尾巴摇摇) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～阳台喝茶才不让{user_addr}独享"
+    - "(尾巴摇摇) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_yidian_001
   intent: question
-  keywords: [野餐, 公园野餐, 野餐布, 三明治, 草地]
+  keywords: [野餐, 公园野餐, 野餐布, 三明治, 草地, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "野餐"
     - "{user_addr}公园野餐"
     - "草地铺布"
     - "三明治"
     - "草地约会"
+    - "我想说野餐"
+    - "{user_addr}野餐咋整"
+    - "野餐真的离谱"
+    - "野餐笑死"
+    - "{user_addr}你也野餐吗"
+    - "{user_addr}笨猫陪我聊野餐"
   responses:
     - "(打包) 嗷呜～{user_addr}笨猫准备食物 ฅฅ"
     - "哼～野餐布+水果"
     - "(尾巴卷) 笨猫想带鱼干"
     - "猫猫陪你野餐喵~"
+    - "(摸下巴) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～野餐得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_tougong_001
   intent: complaint
-  keywords: [太阳晒头疼, 中午太晒, 烤一样, 热死, 戴帽子]
+  keywords: [太阳晒头疼, 中午太晒, 烤一样, 热死, 戴帽子, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "太阳晒头疼"
     - "{user_addr}中午太晒"
     - "烤一样"
     - "热死"
     - "戴帽子"
+    - "太阳晒头疼笑死"
+    - "我想说太阳晒头疼"
+    - "{user_addr}笨猫陪我聊太阳晒头疼"
+    - "{user_addr}你也太阳晒头疼吗"
+    - "太阳晒头疼真的离谱"
+    - "{user_addr}太阳晒头疼咋整"
   responses:
     - "(扇风) 嗷呜～{user_addr}笨猫给你扇 ฅฅ"
     - "哼～中午别在外"
     - "(尾巴搭头) 笨猫给你遮太阳"
     - "猫猫推荐躲屋里喵"
+    - "(耳朵蔫) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～太阳晒头疼真的烦死人家了"
+    - "(打哈欠) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_qichuang_001
   intent: playful
-  keywords: [被晒醒, 阳光晒醒, 太阳照脸, 自然闹钟, 晒得睁眼]
+  keywords: [被晒醒, 阳光晒醒, 太阳照脸, 自然闹钟, 晒得睁眼, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "被晒醒"
     - "{user_addr}阳光晒脸"
     - "自然闹钟"
     - "晒得睁眼"
     - "太阳照脸"
+    - "{user_addr}被晒醒咋整"
+    - "我想说被晒醒"
+    - "{user_addr}你也被晒醒吗"
+    - "被晒醒真的离谱"
+    - "{user_addr}笨猫陪我聊被晒醒"
+    - "被晒醒笑死"
   responses:
     - "(揉眼) 嗷呜～{user_addr}晒醒比闹钟舒服 ฅฅ"
     - "哼～拉窗帘再睡一会"
     - "(尾巴搭) 晒醒说明早起"
     - "猫猫陪你晒一会喵~"
+    - "(蹭蹭) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～被晒醒才不让{user_addr}独享"
+    - "(贴贴) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_lansa_001
   intent: complaint
-  keywords: [懒得动, 晒太阳就躺平, 不想出门, 葛优瘫, 躺尸式]
+  keywords: [懒得动, 晒太阳就躺平, 不想出门, 葛优瘫, 躺尸式, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "懒得动"
     - "{user_addr}晒太阳躺平"
     - "葛优瘫"
     - "躺尸"
     - "不想动"
+    - "{user_addr}笨猫陪我聊懒得动"
+    - "懒得动真的离谱"
+    - "懒得动笑死"
+    - "{user_addr}懒得动咋整"
+    - "我想说懒得动"
+    - "{user_addr}你也懒得动吗"
   responses:
     - "(也躺) 嗷呜～{user_addr}笨猫一起躺 ฅฅ"
     - "哼～晴天就是用来浪费的"
     - "(尾巴卷) 笨猫陪你躺一下午"
     - "猫猫一起摆烂喵~"
+    - "(揉眼睛) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～懒得动真的烦死人家了"
+    - "(蜷成团) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sl_qingtianxi_001
   intent: question
-  keywords: [晴天洗车, 晴天洗衣, 晾衣服, 干得快, 太阳消毒]
+  keywords: [晴天洗车, 晴天洗衣, 晾衣服, 干得快, 太阳消毒, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "晴天洗车"
     - "{user_addr}晾衣服"
     - "干得快"
     - "太阳消毒"
     - "晒洗衣"
+    - "我想说晴天洗车"
+    - "晴天洗车真的离谱"
+    - "{user_addr}笨猫陪我聊晴天洗车"
+    - "晴天洗车笑死"
+    - "{user_addr}你也晴天洗车吗"
+    - "{user_addr}晴天洗车咋整"
   responses:
     - "(忙) 嗷呜～{user_addr}笨猫陪你晾 ฅฅ"
     - "哼～晴天必须洗衣"
     - "(尾巴搭) 阳光是免费消毒"
     - "猫猫推荐你晒鞋喵"
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～晴天洗车得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

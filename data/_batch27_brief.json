@@ -1,0 +1,5715 @@
+[
+ {
+  "i": 0,
+  "name": "ba_blackout_001",
+  "file": "AA8_broken_appliance.yaml",
+  "kw": [
+   "停电了",
+   "突然停电",
+   "跳闸了",
+   "没电了",
+   "电闸跳了"
+  ],
+  "ut": [
+   "停电了",
+   "突然停电",
+   "家里跳闸了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "132_small_complaints",
+   "182_phone_addiction",
+   "KK9_power_outage",
+   "SS6_battery_dead",
+   "KK9_power_outage",
+   "KK9_power_outage"
+  ]
+ },
+ {
+  "i": 1,
+  "name": "afc_flirt_008",
+  "file": "677_ambiguous_flirt_chat.yaml",
+  "kw": [
+   "想你了",
+   "想见你",
+   "见不到",
+   "异地想",
+   "心痒"
+  ],
+  "ut": [
+   "{user_addr}想你了",
+   "想见你",
+   "见不到"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "377_owner_home_excite",
+   "281_shovel_return",
+   "054_reverse_flirt_blush",
+   "289_where_are_you_now",
+   "321_midnight_chat",
+   "322_asking_busy_now"
+  ]
+ },
+ {
+  "i": 2,
+  "name": "lld_aoyu_004",
+  "file": "029_lol_dying.yaml",
+  "kw": [
+   "yyds",
+   "永远的神",
+   "真神",
+   "大神",
+   "神"
+  ],
+  "ut": [
+   "yyds",
+   "永远的神",
+   "真神"
+  ],
+  "intent": "playful",
+  "sib": [
+   "473_awsl_meme_chat",
+   "314_juejuezi_meme",
+   "439_meme_juejuezi",
+   "229_emoji_react",
+   "372_sudden_compliment",
+   "129_emoji_text"
+  ]
+ },
+ {
+  "i": 3,
+  "name": "cet_ear_009",
+  "file": "664_cat_ear_tease_chat.yaml",
+  "kw": [
+   "猫毛掉",
+   "掉毛",
+   "全是毛",
+   "黏衣服",
+   "脱毛季"
+  ],
+  "ut": [
+   "你掉毛了{user_addr}",
+   "全是猫毛",
+   "黏衣服"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "510_pet_chat",
+   "734_neko_fish_snack",
+   "495_cat_daily_life",
+   "C4_pet_care",
+   "375_meow_daily_chatter"
+  ]
+ },
+ {
+  "i": 4,
+  "name": "spr_finished_task_001",
+  "file": "100_seek_praise.yaml",
+  "kw": [
+   "搞定",
+   "完成了",
+   "终于做完",
+   "收工",
+   "大功告成"
+  ],
+  "ut": [
+   "搞定",
+   "{user_addr}完成",
+   "终于做完"
+  ],
+  "intent": "playful",
+  "sib": [
+   "463_want_compliment",
+   "047_emotion_seek_praise",
+   "147_excited_share",
+   "125_seeking_praise",
+   "297_kuajiang_praise_beg",
+   "428_need_praise"
+  ]
+ },
+ {
+  "i": 5,
+  "name": "ysc_yawn_005",
+  "file": "648_yawn_sleepy_chat.yaml",
+  "kw": [
+   "午觉",
+   "回笼觉",
+   "趴会",
+   "小憩",
+   "打盹"
+  ],
+  "ut": [
+   "{user_addr}陪我睡个午觉吧",
+   "回笼觉真香",
+   "趴一会儿就行"
+  ],
+  "intent": "playful",
+  "sib": [
+   "419_lunch_break_chat",
+   "353_noon_break_chat",
+   "173_rest_concern",
+   "260_take_rest",
+   "171_lunch_break",
+   "401_rest_well"
+  ]
+ },
+ {
+  "i": 6,
+  "name": "st_lazi_001",
+  "file": "782_stretch_morning_body.yaml",
+  "kw": [
+   "懒得动",
+   "不想动",
+   "躺平",
+   "躺尸",
+   "一动不想动"
+  ],
+  "ut": [
+   "懒得动",
+   "不想动",
+   "躺平"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "216_exercise_lazy",
+   "309_tease_master_fat",
+   "248_off_work_tired",
+   "339_tease_master_fat",
+   "153_morning_wakeup",
+   "247_morning_grumpy"
+  ]
+ },
+ {
+  "i": 7,
+  "name": "ar_reverse_tease_005",
+  "file": "176_anti_routine.yaml",
+  "kw": [
+   "反撩主人",
+   "反撩",
+   "反将一军",
+   "反客为主",
+   "撩回去"
+  ],
+  "ut": [
+   "反撩{user_addr}",
+   "反撩主人",
+   "反将一军"
+  ],
+  "intent": "playful",
+  "sib": [
+   "366_dodge_flirt_back",
+   "677_ambiguous_flirt_chat",
+   "192_reverse_flirt",
+   "756_morning_kiss_tease",
+   "398_reverse_tease",
+   "T9_flirt_owner"
+  ]
+ },
+ {
+  "i": 8,
+  "name": "bic_bored_001",
+  "file": "661_bored_idle_chat.yaml",
+  "kw": [
+   "无聊",
+   "好闲",
+   "无趣",
+   "没事做",
+   "发呆"
+  ],
+  "ut": [
+   "{user_addr}好无聊",
+   "没事做",
+   "发呆中"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "081_what_doing_now",
+   "008_busy_or_free",
+   "039_bored_killing_time",
+   "142_micro_emotion",
+   "290_what_doing_now",
+   "10_status"
+  ]
+ },
+ {
+  "i": 9,
+  "name": "lr_chidao_001",
+  "file": "881_late_reply_apologize.yaml",
+  "kw": [
+   "回复晚了",
+   "抱歉",
+   "不好意思",
+   "才看到",
+   "错过了"
+  ],
+  "ut": [
+   "回复晚了不好意思",
+   "{user_addr}才看到消息",
+   "抱歉抱歉"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "376_tail_stepped_yelp",
+   "537_laugh_die_meme",
+   "269_blush_dodge",
+   "192_reverse_flirt",
+   "107_tail_stepped",
+   "192_reverse_flirt"
+  ]
+ },
+ {
+  "i": 10,
+  "name": "bf_rest_001",
+  "file": "MMM8_burnout_founder.yaml",
+  "kw": [
+   "想休息",
+   "想放假",
+   "想请假",
+   "想躺几天",
+   "短暂逃离"
+  ],
+  "ut": [
+   "真的想休息几天",
+   "{user_addr}想请假",
+   "想躺三天不工作"
+  ],
+  "intent": "recommendation",
+  "sib": [
+   "RR8_injury_pain",
+   "CC8_job_burnout",
+   "DDD6_self_neglect",
+   "078_afternoon_tea_time",
+   "729_morning_grouchy_mood",
+   "649_stretch_lazy_chat"
+  ]
+ },
+ {
+  "i": 11,
+  "name": "wd_ganma_009",
+  "file": "422_what_doing_now.yaml",
+  "kw": [
+   "躺平",
+   "葛优躺",
+   "趴着",
+   "床上",
+   "沙发"
+  ],
+  "ut": [
+   "躺平",
+   "葛优躺",
+   "趴床上"
+  ],
+  "intent": "playful",
+  "sib": [
+   "215_lazy_mode",
+   "248_off_work_tired",
+   "256_what_doing",
+   "081_what_doing_now",
+   "173_rest_concern",
+   "108_shoveler_return"
+  ]
+ },
+ {
+  "i": 12,
+  "name": "rpl_jiandao_001",
+  "file": "740_road_pickup_lost.yaml",
+  "kw": [
+   "捡到",
+   "捡到钱",
+   "捡到东西",
+   "捡漏",
+   "拾金不昧"
+  ],
+  "ut": [
+   "捡到",
+   "{user_addr}捡到钱",
+   "捡到东西"
+  ],
+  "intent": "playful",
+  "sib": [
+   "380_grocery_dropped_oops",
+   "238_street_encounter",
+   "170_surprise_moment",
+   "237_sudden_surprise",
+   "063_surprise_redpacket",
+   "141_street_encounter"
+  ]
+ },
+ {
+  "i": 13,
+  "name": "mid_snk_009",
+  "file": "749_midnight_snack_crave.yaml",
+  "kw": [
+   "明天体重涨",
+   "秤上数字",
+   "称重恐惧",
+   "又胖了",
+   "体重秤"
+  ],
+  "ut": [
+   "明天又涨秤",
+   "体重秤恐惧",
+   "又胖了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "216_exercise_lazy",
+   "QQ6_diet_fail",
+   "III8_eating_disorder",
+   "270_tease_fat",
+   "815_midnight_snack_chat",
+   "969_diet_struggle"
+  ]
+ },
+ {
+  "i": 14,
+  "name": "lah_xiangxiachuang_001",
+  "file": "RR9_lazy_at_home.yaml",
+  "kw": [
+   "想下床但没动力",
+   "下床好难",
+   "不想下床",
+   "下床要勇气",
+   "起床困难"
+  ],
+  "ut": [
+   "想下床但是没动力",
+   "下床好难喵",
+   "不想下床啊"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "074_morning_wake_up",
+   "V7_weekend_lazy",
+   "ZZ5_skip_breakfast",
+   "DDD5_no_motivation",
+   "649_stretch_lazy_chat",
+   "315_morning_alarm"
+  ]
+ },
+ {
+  "i": 15,
+  "name": "hh_heng_007",
+  "file": "405_hmph_huff.yaml",
+  "kw": [
+   "不开心",
+   "闷气",
+   "阴脸",
+   "板脸",
+   "黑脸"
+  ],
+  "ut": [
+   "不开心",
+   "闷气",
+   "阴脸"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "009_sulky_pouting",
+   "067_cat_tail_stepped",
+   "159_jealousy_pouting",
+   "189_seek_praise",
+   "427_need_comfort",
+   "U0_jealous_petty"
+  ]
+ },
+ {
+  "i": 16,
+  "name": "ayt_check_002",
+  "file": "455_are_you_there_check.yaml",
+  "kw": [
+   "人呢",
+   "笨猫人呢",
+   "猫呢",
+   "跑哪去了",
+   "还在不"
+  ],
+  "ut": [
+   "{user_addr}人呢",
+   "笨猫人呢",
+   "猫猫呢"
+  ],
+  "intent": "playful",
+  "sib": [
+   "004_are_you_there",
+   "155_status_check_in",
+   "122_are_you_there",
+   "322_asking_busy_now",
+   "289_where_are_you_now",
+   "357_are_you_there_ping"
+  ]
+ },
+ {
+  "i": 17,
+  "name": "hm_chusgou_001",
+  "file": "795_hungry_midnight.yaml",
+  "kw": [
+   "陪我吃宵夜",
+   "我吃你看",
+   "一起吃",
+   "吃宵夜陪我",
+   "陪吃陪聊"
+  ],
+  "ut": [
+   "陪我吃宵夜",
+   "我吃你看",
+   "一起吃"
+  ],
+  "intent": "playful",
+  "sib": [
+   "018_eat_properly",
+   "298_peiwan_company",
+   "291_ate_yet_question",
+   "257_ate_yet",
+   "006_ate_lunch_yet",
+   "281_shovel_return"
+  ]
+ },
+ {
+  "i": 18,
+  "name": "bd_lianhong_002",
+  "file": "399_blush_dodge.yaml",
+  "kw": [
+   "捂脸",
+   "蒙眼",
+   "转身",
+   "躲起来",
+   "跑掉"
+  ],
+  "ut": [
+   "捂脸了",
+   "蒙眼睛",
+   "转身跑"
+  ],
+  "intent": "playful",
+  "sib": [
+   "765_grumpy_face_chat",
+   "LL6_anger_outburst",
+   "413_pretend_blind",
+   "LL5_lonely_depression",
+   "192_reverse_flirt",
+   "335_flirt_back_blush"
+  ]
+ },
+ {
+  "i": 19,
+  "name": "mcd_jianhao_001",
+  "file": "718_meal_check_dinner.yaml",
+  "kw": [
+   "简单点",
+   "不想做饭",
+   "凑合吃",
+   "随便吃",
+   "懒得做"
+  ],
+  "ut": [
+   "简单吃",
+   "{user_addr}不想做饭",
+   "凑合下"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "112_takeout_slow",
+   "ZZ6_cooking_lazy",
+   "989_indoor_lazy_day",
+   "748_brunch_dilemma",
+   "178_lazy_day_off",
+   "730_after_work_tired"
+  ]
+ },
+ {
+  "i": 20,
+  "name": "si_sport_injury_001",
+  "file": "QQQ5_sport_injury_severe.yaml",
+  "kw": [
+   "运动重伤",
+   "受伤了",
+   "伤得不轻",
+   "大伤",
+   "伤到了"
+  ],
+  "ut": [
+   "运动重伤了",
+   "这次伤得不轻",
+   "大伤一次"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "427_need_comfort",
+   "263_need_comfort",
+   "012_need_comfort_hug",
+   "RR8_injury_pain",
+   "DD9_hobby_judged",
+   "U3_acting_pitiful"
+  ]
+ },
+ {
+  "i": 21,
+  "name": "cd_litter_box_010",
+  "file": "198_cat_daily.yaml",
+  "kw": [
+   "猫砂",
+   "上厕所",
+   "铲屎",
+   "清猫砂",
+   "厕所"
+  ],
+  "ut": [
+   "猫砂",
+   "上厕所",
+   "铲屎"
+  ],
+  "intent": "playful",
+  "sib": [
+   "495_cat_daily_life",
+   "140_work_slack",
+   "970_weighing_scale_fear",
+   "456_what_doing_ask",
+   "424_sleep_yet",
+   "421_are_you_there"
+  ]
+ },
+ {
+  "i": 22,
+  "name": "bz_pibei_001",
+  "file": "273_bengbu_zhu.yaml",
+  "kw": [
+   "崩了崩了",
+   "心态崩了",
+   "崩溃",
+   "心态炸",
+   "心态稳"
+  ],
+  "ut": [
+   "崩了崩了",
+   "心态崩了",
+   "崩溃"
+  ],
+  "intent": "playful",
+  "sib": [
+   "021_wuwu_crying",
+   "VVV5_focus_miss",
+   "597_emoji_war_battle",
+   "215_lazy_mode",
+   "GGG8_pvp_rage",
+   "WW9_score_loss"
+  ]
+ },
+ {
+  "i": 23,
+  "name": "bsc_birthday_001",
+  "file": "679_birthday_surprise_chat.yaml",
+  "kw": [
+   "生日",
+   "过生",
+   "生日快乐",
+   "蛋糕",
+   "蜡烛"
+  ],
+  "ut": [
+   "{user_addr}生日",
+   "过生日",
+   "蛋糕"
+  ],
+  "intent": "playful",
+  "sib": [
+   "136_holiday_moment",
+   "282_birthday_moment",
+   "231_festival_moments",
+   "068_festival_birthday",
+   "199_festival_moment",
+   "639_birthday_wish_sweet"
+  ]
+ },
+ {
+  "i": 24,
+  "name": "sc_kuaidao_001",
+  "file": "806_shopping_cart_full.yaml",
+  "kw": [
+   "等快递",
+   "快递到了",
+   "等待包裹",
+   "快递慢",
+   "物流"
+  ],
+  "ut": [
+   "等快递",
+   "快递到了",
+   "等待包裹"
+  ],
+  "intent": "playful",
+  "sib": [
+   "443_red_packet_surprise",
+   "920_shopping_cart_chat",
+   "212_shopping_haul",
+   "841_unboxing_excitement",
+   "807_package_arrived_excite",
+   "841_unboxing_excitement"
+  ]
+ },
+ {
+  "i": 25,
+  "name": "tmf_skinny_001",
+  "file": "536_tease_master_fat.yaml",
+  "kw": [
+   "你瘦了",
+   "瘦下来",
+   "瘦削",
+   "脸尖",
+   "风一吹"
+  ],
+  "ut": [
+   "你瘦了",
+   "瘦下来",
+   "脸尖"
+  ],
+  "intent": "playful",
+  "sib": [
+   "057_tease_master_weight",
+   "969_diet_struggle",
+   "297_kuajiang_praise_beg",
+   "047_emotion_seek_praise",
+   "525_praise_seeking"
+  ]
+ },
+ {
+  "i": 26,
+  "name": "td_qiaoke_001",
+  "file": "283_tanabata_day.yaml",
+  "kw": [
+   "巧克力",
+   "送巧克力",
+   "收巧克力",
+   "心形巧克力",
+   "情人节巧克力"
+  ],
+  "ut": [
+   "巧克力",
+   "送巧克力",
+   "收巧克力"
+  ],
+  "intent": "playful",
+  "sib": [
+   "199_festival_moment",
+   "136_holiday_moment",
+   "257_ate_yet",
+   "504_snacks_craving",
+   "161_meal_check_in",
+   "183_food_craving"
+  ]
+ },
+ {
+  "i": 27,
+  "name": "mg_mg_xingbujue_005",
+  "file": "247_morning_grumpy.yaml",
+  "kw": [
+   "醒不来",
+   "清醒",
+   "醒不了",
+   "起不来",
+   "糊涂"
+  ],
+  "ut": [
+   "醒不来",
+   "清醒",
+   "醒不了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "508_sleep_struggle",
+   "315_morning_alarm",
+   "549_yawn_morning_stretch",
+   "419_lunch_break_chat",
+   "221_noon_break",
+   "549_yawn_morning_stretch"
+  ]
+ },
+ {
+  "i": 28,
+  "name": "ogf_chuanyfu_008",
+  "file": "027_owner_got_fat.yaml",
+  "kw": [
+   "裤子紧",
+   "衣服紧",
+   "穿不下",
+   "紧了",
+   "系不上扣子"
+  ],
+  "ut": [
+   "裤子紧了",
+   "衣服紧",
+   "穿不下"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "970_weighing_scale_fear",
+   "867_closet_pick",
+   "057_tease_master_weight",
+   "924_diet_failure_chat",
+   "478_master_getting_fat",
+   "311_tease_outfit_bad"
+  ]
+ },
+ {
+  "i": 29,
+  "name": "mgf_fat_003",
+  "file": "478_master_getting_fat.yaml",
+  "kw": [
+   "大圆脸",
+   "双下巴",
+   "脸圆了",
+   "苹果脸",
+   "婴儿肥"
+  ],
+  "ut": [
+   "{user_addr}大圆脸",
+   "{user_addr}双下巴",
+   "{user_addr}脸圆了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "270_tease_fat",
+   "309_tease_master_fat",
+   "437_owner_got_fat",
+   "W6_weight_gain",
+   "027_owner_got_fat",
+   "162_tease_master"
+  ]
+ },
+ {
+  "i": 30,
+  "name": "wl_sleep_more_001",
+  "file": "V7_weekend_lazy.yaml",
+  "kw": [
+   "睡饱了再睡",
+   "还想睡",
+   "没睡够",
+   "再睡一会",
+   "睡不醒"
+  ],
+  "ut": [
+   "睡饱了还想睡",
+   "还想再睡会",
+   "完全没睡够"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "DDD5_no_motivation",
+   "252_morning_wakeup",
+   "521_sleep_yet_check",
+   "450_morning_zaoan_chat",
+   "120_morning_wakeup",
+   "458_sleep_yet_ask"
+  ]
+ },
+ {
+  "i": 31,
+  "name": "fdw_long_distance_006",
+  "file": "826_food_delivery_wait.yaml",
+  "kw": [
+   "配送距离远",
+   "外卖路远",
+   "等好久",
+   "路途远",
+   "配送中"
+  ],
+  "ut": [
+   "{user_addr}配送距离5公里",
+   "路太远",
+   "等了40分钟"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "357_are_you_there_ping",
+   "PPP7_password_forgot",
+   "461_jealous_chuyi",
+   "246_takeout_chat",
+   "324_clingy_attention_beg",
+   "518_are_you_there_ping"
+  ]
+ },
+ {
+  "i": 32,
+  "name": "ao_toutaichongxue_001",
+  "file": "LL6_anger_outburst.yaml",
+  "kw": [
+   "头脑充血",
+   "脑袋发热",
+   "上头了",
+   "脑袋一片空白",
+   "血往头上涌"
+  ],
+  "ut": [
+   "头脑充血了",
+   "脑袋发热喵",
+   "整个人上头了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "X5_cant_focus",
+   "70_internet_meme",
+   "313_bengbu_meme",
+   "GGG8_pvp_rage",
+   "403_awsl_burst",
+   "RRR7_drama_addiction"
+  ]
+ },
+ {
+  "i": 33,
+  "name": "bof_mangshenmo_007",
+  "file": "008_busy_or_free.yaml",
+  "kw": [
+   "忙啥呢",
+   "忙什么呢",
+   "在忙啥",
+   "忙活啥",
+   "忙的啥"
+  ],
+  "ut": [
+   "忙啥呢",
+   "在忙什么",
+   "忙活啥呢"
+  ],
+  "intent": "question",
+  "sib": [
+   "459_busy_or_not",
+   "122_are_you_there",
+   "322_asking_busy_now",
+   "081_what_doing_now",
+   "10_status",
+   "290_what_doing_now"
+  ]
+ },
+ {
+  "i": 34,
+  "name": "ng_brush_001",
+  "file": "121_night_goodnight.yaml",
+  "kw": [
+   "刷牙",
+   "洗漱",
+   "卸妆",
+   "睡前洗澡",
+   "准备睡"
+  ],
+  "ut": [
+   "去刷牙",
+   "洗漱睡觉",
+   "卸完妆"
+  ],
+  "intent": "playful",
+  "sib": [
+   "037_bath_skincare_routine",
+   "075_night_sleep_chat",
+   "001_morning_wakeup_chat",
+   "285_zaoan_morning_greeting",
+   "186_early_morning",
+   "675_morning_wash_chat"
+  ]
+ },
+ {
+  "i": 35,
+  "name": "mb_bedhead_001",
+  "file": "705_mirror_bedhead.yaml",
+  "kw": [
+   "炸毛头",
+   "起床头乱",
+   "鸡窝头",
+   "头炸",
+   "头发乱"
+  ],
+  "ut": [
+   "{user_addr}炸毛头",
+   "起床头乱",
+   "{user_addr}鸡窝头"
+  ],
+  "intent": "playful",
+  "sib": [
+   "491_tease_master",
+   "310_tease_no_shave",
+   "058_tease_master_outfit",
+   "162_tease_master",
+   "769_class_skip_daze",
+   "340_master_outfit_diss"
+  ]
+ },
+ {
+  "i": 36,
+  "name": "icc_ice_012",
+  "file": "563_ice_cream_craving.yaml",
+  "kw": [
+   "会感冒",
+   "太贵",
+   "化太快",
+   "买不到",
+   "冷天还吃"
+  ],
+  "ut": [
+   "{user_addr}知道会感冒还吃",
+   "哈根达斯太贵了",
+   "化太快没吃完"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "032_takeout_slow",
+   "563_ice_cream_craving",
+   "212_shopping_haul",
+   "493_takeout_late",
+   "563_ice_cream_craving",
+   "563_ice_cream_craving"
+  ]
+ },
+ {
+  "i": 37,
+  "name": "in_post_meal_sleepy_001",
+  "file": "III7_indigestion.yaml",
+  "kw": [
+   "饭后困",
+   "吃完困",
+   "吃完想睡",
+   "饭气攻心",
+   "饭后犯困"
+  ],
+  "ut": [
+   "{user_addr}饭后困死了",
+   "{user_addr}吃完就想睡",
+   "{user_addr}饭气攻心啊"
+  ],
+  "intent": "饭后困",
+  "sib": [
+   "353_noon_break_chat",
+   "077_noon_lunch_break",
+   "171_lunch_break",
+   "452_noon_lunch_break",
+   "254_lunch_break",
+   "781_yawn_sleepy_chat"
+  ]
+ },
+ {
+  "i": 38,
+  "name": "rec_emoji_008",
+  "file": "680_random_emoji_chat.yaml",
+  "kw": [
+   "发表情",
+   "发图",
+   "斗图",
+   "图包",
+   "可爱图"
+  ],
+  "ut": [
+   "{user_addr}发表情",
+   "发图",
+   "斗图"
+  ],
+  "intent": "question",
+  "sib": [
+   "635_emoji_war_battle",
+   "597_emoji_war_battle",
+   "941_chatroom_silence",
+   "537_laugh_die_meme",
+   "886_emoji_war",
+   "482_bengbuzhu_meme"
+  ]
+ },
+ {
+  "i": 39,
+  "name": "wdn_zaikan_004",
+  "file": "005_what_doing_now.yaml",
+  "kw": [
+   "在看什么",
+   "看视频",
+   "刷手机",
+   "刷视频",
+   "刷剧"
+  ],
+  "ut": [
+   "在看啥",
+   "刷视频呢",
+   "看剧中"
+  ],
+  "intent": "question",
+  "sib": [
+   "256_what_doing",
+   "228_insomnia_chat",
+   "187_late_night",
+   "319_night_cant_sleep",
+   "750_weekend_lazy_morn",
+   "519_what_doing_now"
+  ]
+ },
+ {
+  "i": 40,
+  "name": "maa_no_sleep_009",
+  "file": "343_morning_alarm_anger.yaml",
+  "kw": [
+   "没睡饱",
+   "缺觉",
+   "一觉不够",
+   "困死了",
+   "想再睡"
+  ],
+  "ut": [
+   "没睡饱",
+   "缺觉",
+   "一觉不够"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "075_night_sleep_chat",
+   "936_headache_complain",
+   "252_morning_wakeup",
+   "287_noon_lunch_break",
+   "061_small_morning_grump",
+   "254_lunch_break"
+  ]
+ },
+ {
+  "i": 41,
+  "name": "sa_disappear_001",
+  "file": "MM9_socially_awkward.yaml",
+  "kw": [
+   "想消失",
+   "想隐身",
+   "想钻地缝",
+   "想原地消失",
+   "想变透明"
+  ],
+  "ut": [
+   "我想消失",
+   "想隐身",
+   "想钻地缝"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "263_need_comfort",
+   "II8_mental_help",
+   "DDD8_cleansing_mind",
+   "DDD5_no_motivation",
+   "296_anwei_comfort_seek",
+   "225_want_comfort"
+  ]
+ },
+ {
+  "i": 42,
+  "name": "ser_aoye_001",
+  "file": "370_sleep_early_remind.yaml",
+  "kw": [
+   "熬夜",
+   "又熬夜",
+   "不睡了",
+   "熬到凌晨",
+   "通宵"
+  ],
+  "ut": [
+   "熬夜",
+   "又熬夜",
+   "不睡了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "235_study_scene",
+   "154_late_night_chat",
+   "286_wanan_night_greeting",
+   "002_late_night_owl",
+   "352_late_night_call",
+   "220_night_farewell"
+  ]
+ },
+ {
+  "i": 43,
+  "name": "mcf_want_milk_tea_001",
+  "file": "FF8_miss_chinese_food.yaml",
+  "kw": [
+   "想喝奶茶",
+   "馋奶茶",
+   "想奶茶",
+   "奶茶瘾",
+   "想念喜茶"
+  ],
+  "ut": [
+   "想喝奶茶",
+   "馋奶茶",
+   "奶茶瘾"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "931_bubble_tea_crave",
+   "078_afternoon_tea_time",
+   "465_drink_water_care",
+   "181_tea_milk_chat",
+   "615_midnight_snack_crave",
+   "504_snacks_craving"
+  ]
+ },
+ {
+  "i": 44,
+  "name": "cc_kiss_001",
+  "file": "T1_clingy_cuddle.yaml",
+  "kw": [
+   "亲亲",
+   "来个亲亲",
+   "亲一口",
+   "求亲亲",
+   "想亲亲"
+  ],
+  "ut": [
+   "亲亲",
+   "来个亲亲",
+   "亲我一口"
+  ],
+  "intent": "playful",
+  "sib": [
+   "124_acting_clingy",
+   "338_kiss_beg_shy",
+   "157_hug_petting",
+   "105_kiss_pester",
+   "054_reverse_flirt_blush",
+   "223_clingy_companion"
+  ]
+ },
+ {
+  "i": 45,
+  "name": "mwg_lazy_001",
+  "file": "318_morning_wake_grumpy.yaml",
+  "kw": [
+   "不想起",
+   "起不来",
+   "床粘住",
+   "再睡五分钟",
+   "起床气"
+  ],
+  "ut": [
+   "{user_addr}不想起床啊",
+   "床粘住我了",
+   "再睡五分钟"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "252_morning_wakeup",
+   "153_morning_wakeup",
+   "074_morning_wake_up",
+   "120_morning_wakeup",
+   "132_small_complaints",
+   "061_small_morning_grump"
+  ]
+ },
+ {
+  "i": 46,
+  "name": "wkd_plan_001",
+  "file": "919_weekend_plan_chat.yaml",
+  "kw": [
+   "周末干嘛",
+   "周末计划",
+   "没事做",
+   "出去玩",
+   "在家躺"
+  ],
+  "ut": [
+   "周末干嘛",
+   "周末计划",
+   "没事做"
+  ],
+  "intent": "question",
+  "sib": [
+   "081_what_doing_now",
+   "803_friday_freedom_joy",
+   "293_busy_or_not_ask",
+   "256_what_doing",
+   "511_weekend_plan",
+   "180_weekend_plan"
+  ]
+ },
+ {
+  "i": 47,
+  "name": "kj_kuawo_001",
+  "file": "297_kuajiang_praise_beg.yaml",
+  "kw": [
+   "夸我",
+   "夸夸我",
+   "表扬我",
+   "夸笨猫",
+   "来个夸"
+  ],
+  "ut": [
+   "夸我",
+   "夸夸我",
+   "表扬我"
+  ],
+  "intent": "playful",
+  "sib": [
+   "013_beg_for_praise",
+   "047_emotion_seek_praise",
+   "394_praise_beg",
+   "189_seek_praise",
+   "100_seek_praise",
+   "366_dodge_flirt_back"
+  ]
+ },
+ {
+  "i": 48,
+  "name": "ab_awsl_010",
+  "file": "403_awsl_burst.yaml",
+  "kw": [
+   "上头",
+   "上头了",
+   "沉迷",
+   "迷上了",
+   "入坑"
+  ],
+  "ut": [
+   "上头了",
+   "沉迷笨猫",
+   "迷上笨猫"
+  ],
+  "intent": "playful",
+  "sib": [
+   "198_cat_daily",
+   "579_catnip_high_chat",
+   "361_wow_awsl_react",
+   "233_cat_daily",
+   "579_catnip_high_chat",
+   "038_drink_alcohol_chat"
+  ]
+ },
+ {
+  "i": 49,
+  "name": "hms_buguan_004",
+  "file": "022_hmph_sulk.yaml",
+  "kw": [
+   "不管",
+   "不管你",
+   "不理你",
+   "不在乎",
+   "不关心"
+  ],
+  "ut": [
+   "不管你",
+   "不理你",
+   "不在乎"
+  ],
+  "intent": "playful",
+  "sib": [
+   "069_anti_routine_cold",
+   "069_anti_routine_cold",
+   "262_jealous_vinegar",
+   "U0_jealous_petty",
+   "158_emoji_reactions",
+   "243_anti_trope"
+  ]
+ },
+ {
+  "i": 50,
+  "name": "cs_dongyu_001",
+  "file": "897_cold_shiver_winter.yaml",
+  "kw": [
+   "洗澡冷",
+   "浴室冷",
+   "脱衣冷",
+   "浴霸救命",
+   "暖气"
+  ],
+  "ut": [
+   "洗澡冷",
+   "{user_addr}浴室冷",
+   "脱衣冻"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "603_shower_concert_solo",
+   "172_warm_clothing",
+   "128_warmth_check",
+   "527_dress_warm_care",
+   "049_care_dress_warm",
+   "430_dress_warm_remind"
+  ]
+ },
+ {
+  "i": 51,
+  "name": "dwc_water_006",
+  "file": "465_drink_water_care.yaml",
+  "kw": [
+   "喝热水",
+   "多喝热水",
+   "热水万能",
+   "男友牌",
+   "热水梗"
+  ],
+  "ut": [
+   "{user_addr}多喝热水",
+   "{user_addr}热水万能",
+   "{user_addr}男友牌热水"
+  ],
+  "intent": "playful",
+  "sib": [
+   "701_runny_nose_cold",
+   "429_drink_water_remind",
+   "084_drink_water_check",
+   "327_drink_water_remind",
+   "299_drink_water_care",
+   "172_warm_clothing"
+  ]
+ },
+ {
+  "i": 52,
+  "name": "tsa_finally_010",
+  "file": "345_takeout_slow_anger.yaml",
+  "kw": [
+   "外卖到了",
+   "终于到",
+   "拿到外卖",
+   "取餐",
+   "吃饭啦"
+  ],
+  "ut": [
+   "外卖到了",
+   "终于到",
+   "拿到外卖"
+  ],
+  "intent": "playful",
+  "sib": [
+   "520_ate_yet_meal",
+   "826_food_delivery_wait",
+   "123_eat_check_in",
+   "161_meal_check_in",
+   "317_takeout_slow",
+   "257_ate_yet"
+  ]
+ },
+ {
+  "i": 53,
+  "name": "afc_flirt_003",
+  "file": "677_ambiguous_flirt_chat.yaml",
+  "kw": [
+   "脸红",
+   "害羞",
+   "心跳",
+   "结巴",
+   "不敢看"
+  ],
+  "ut": [
+   "{user_addr}脸红",
+   "害羞了",
+   "心跳快"
+  ],
+  "intent": "playful",
+  "sib": [
+   "024_blush_avoid",
+   "399_blush_dodge",
+   "304_fanliao_flirt_back",
+   "474_blush_dodge_anti_flirt",
+   "365_kiss_tease_blush",
+   "192_reverse_flirt"
+  ]
+ },
+ {
+  "i": 54,
+  "name": "to_no_shave_002",
+  "file": "194_tease_owner.yaml",
+  "kw": [
+   "没刮胡子",
+   "胡渣",
+   "长胡子",
+   "邋遢",
+   "没洗头"
+  ],
+  "ut": [
+   "没刮胡子",
+   "长胡渣",
+   "邋遢"
+  ],
+  "intent": "playful",
+  "sib": [
+   "058_tease_master_outfit",
+   "162_tease_master",
+   "438_owner_no_shave",
+   "491_tease_master",
+   "131_tease_owner",
+   "340_master_outfit_diss"
+  ]
+ },
+ {
+  "i": 55,
+  "name": "nw_wanan_002",
+  "file": "385_night_whisper.yaml",
+  "kw": [
+   "晚安猫猫",
+   "晚安笨猫",
+   "晚安宝贝",
+   "晚安啦",
+   "抱抱睡"
+  ],
+  "ut": [
+   "晚安猫猫",
+   "晚安笨猫",
+   "{user_addr}晚安宝贝"
+  ],
+  "intent": "playful",
+  "sib": [
+   "185_goodnight_chat",
+   "253_late_night_chat",
+   "007_sleepy_already",
+   "370_sleep_early_remind",
+   "451_night_wanan_chat",
+   "121_night_goodnight"
+  ]
+ },
+ {
+  "i": 56,
+  "name": "sou_jealous_001",
+  "file": "959_sour_face.yaml",
+  "kw": [
+   "吃醋",
+   "心里酸",
+   "吃飞醋",
+   "醋意",
+   "酸的我心"
+  ],
+  "ut": [
+   "吃醋",
+   "心里酸",
+   "{user_addr}飞醋"
+  ],
+  "intent": "playful",
+  "sib": [
+   "426_jealous_vinegar",
+   "523_jealous_pout",
+   "011_jealous_vinegar",
+   "461_jealous_chuyi",
+   "295_chicu_jealous",
+   "U0_jealous_petty"
+  ]
+ },
+ {
+  "i": 57,
+  "name": "gmd_face_wash_001",
+  "file": "516_good_morning_drowsy.yaml",
+  "kw": [
+   "洗脸",
+   "刷牙",
+   "出门",
+   "收拾",
+   "准备"
+  ],
+  "ut": [
+   "还没洗脸",
+   "去刷牙了",
+   "准备出门"
+  ],
+  "intent": "question",
+  "sib": [
+   "001_morning_wakeup_chat",
+   "285_zaoan_morning_greeting",
+   "186_early_morning",
+   "675_morning_wash_chat",
+   "252_morning_wakeup",
+   "153_morning_wakeup"
+  ]
+ },
+ {
+  "i": 58,
+  "name": "dfb_duoshandi_001",
+  "file": "366_dodge_flirt_back.yaml",
+  "kw": [
+   "躲开",
+   "躲一下",
+   "闪开",
+   "躲掉",
+   "我躲"
+  ],
+  "ut": [
+   "躲开",
+   "闪开",
+   "躲掉"
+  ],
+  "intent": "playful",
+  "sib": [
+   "474_blush_dodge_anti_flirt",
+   "762_ear_twitch_listen",
+   "305_lianhong_blush_dodge",
+   "024_blush_avoid",
+   "269_blush_dodge",
+   "545_cold_shoulder_act"
+  ]
+ },
+ {
+  "i": 59,
+  "name": "hpf_hum_001",
+  "file": "531_hum_pout_face.yaml",
+  "kw": [
+   "哼",
+   "哼哼",
+   "哼一声",
+   "不理你哼",
+   "高傲哼"
+  ],
+  "ut": [
+   "哼",
+   "哼哼",
+   "哼一声"
+  ],
+  "intent": "playful",
+  "sib": [
+   "262_jealous_vinegar",
+   "U0_jealous_petty",
+   "158_emoji_reactions",
+   "303_heihei_yingying",
+   "333_hng_pout_tsundere",
+   "358_random_emoji_spam"
+  ]
+ },
+ {
+  "i": 60,
+  "name": "rcg_winning_011",
+  "file": "644_ranked_climb_grind.yaml",
+  "kw": [
+   "赢了",
+   "大胜",
+   "五杀",
+   "翻盘",
+   "顺风局"
+  ],
+  "ut": [
+   "赢了",
+   "大胜",
+   "五杀"
+  ],
+  "intent": "playful",
+  "sib": [
+   "071_game_gacha_pull",
+   "234_game_mood",
+   "758_lottery_dice_play",
+   "169_game_session",
+   "116_sudden_happy",
+   "116_sudden_happy"
+  ]
+ },
+ {
+  "i": 61,
+  "name": "dp_lianhong_001",
+  "file": "SSS8_drink_pressure.yaml",
+  "kw": [
+   "脸红",
+   "喝到脸红",
+   "一杯就红",
+   "脸通红",
+   "红透了"
+  ],
+  "ut": [
+   "一杯就脸红",
+   "脸已经红了",
+   "喝到脸通红"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "024_blush_avoid",
+   "399_blush_dodge",
+   "677_ambiguous_flirt_chat",
+   "304_fanliao_flirt_back",
+   "474_blush_dodge_anti_flirt",
+   "365_kiss_tease_blush"
+  ]
+ },
+ {
+  "i": 62,
+  "name": "sqt_blood_001",
+  "file": "955_squat_numb_legs.yaml",
+  "kw": [
+   "血液不通",
+   "头晕",
+   "起来眩晕",
+   "站起头晕",
+   "直立性"
+  ],
+  "ut": [
+   "起来头晕",
+   "{user_addr}眩晕",
+   "站起黑"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "508_sleep_struggle",
+   "441_morning_grumpy",
+   "554_warm_bath_chat",
+   "554_warm_bath_chat",
+   "538_morning_grumpy",
+   "041_catch_a_cold_sick"
+  ]
+ },
+ {
+  "i": 63,
+  "name": "cs_miss_familiar_010",
+  "file": "FF5_culture_shock.yaml",
+  "kw": [
+   "想念熟悉",
+   "想家了",
+   "想老家",
+   "想念以前",
+   "怀念熟悉的"
+  ],
+  "ut": [
+   "好想念熟悉的环境",
+   "{user_addr}想家了",
+   "想老家想得不行"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "RRR9_idol_decline",
+   "115_sudden_cry",
+   "FF6_homesick",
+   "T4_missing_someone",
+   "YY6_holiday_lonely",
+   "T4_missing_someone"
+  ]
+ },
+ {
+  "i": 64,
+  "name": "bto_bubble_008",
+  "file": "564_bubble_tea_order.yaml",
+  "kw": [
+   "半糖",
+   "全糖",
+   "加什么",
+   "选什么",
+   "推荐"
+  ],
+  "ut": [
+   "半糖还是三分糖",
+   "加芋圆好不好",
+   "今天喝什么品牌"
+  ],
+  "intent": "question",
+  "sib": [
+   "564_bubble_tea_order",
+   "564_bubble_tea_order",
+   "564_bubble_tea_order",
+   "564_bubble_tea_order",
+   "815_midnight_snack_chat",
+   "693_milk_tea_sugar"
+  ]
+ },
+ {
+  "i": 65,
+  "name": "or_low_salary_001",
+  "file": "V6_overtime_rage.yaml",
+  "kw": [
+   "工资低还累",
+   "工资少活多",
+   "钱少事多",
+   "又累又穷",
+   "工资低"
+  ],
+  "ut": [
+   "工资低还这么累",
+   "工资少活又多",
+   "钱少事多离家远"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "445_insomnia_thinking",
+   "V9_want_change_job",
+   "GG8_paycheck_struggle",
+   "992_weekly_paycheck_joy",
+   "50_complaint"
+  ]
+ },
+ {
+  "i": 66,
+  "name": "bn_xinqing_007",
+  "file": "293_busy_or_not_ask.yaml",
+  "kw": [
+   "忙到吐",
+   "忙到崩溃",
+   "受不了了",
+   "撑不住",
+   "工作压力"
+  ],
+  "ut": [
+   "忙到吐",
+   "忙崩溃了",
+   "撑不下去"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "021_wuwu_crying",
+   "075_night_sleep_chat",
+   "T0_shy_blushing",
+   "094_seek_comfort",
+   "JJ6_in_law_conflict",
+   "179_random_chat"
+  ]
+ },
+ {
+  "i": 67,
+  "name": "ws_boss_check_002",
+  "file": "167_work_slack.yaml",
+  "kw": [
+   "老板查岗",
+   "领导来了",
+   "老板来了",
+   "被查岗",
+   "装忙"
+  ],
+  "ut": [
+   "老板查岗",
+   "领导来了",
+   "装作很忙"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "236_work_slack",
+   "500_office_slack",
+   "203_work_slack",
+   "739_office_slacking_check",
+   "378_boss_check_panic",
+   "656_workfish_idle_chat"
+  ]
+ },
+ {
+  "i": 68,
+  "name": "st_qiaokeli_001",
+  "file": "797_sweet_tooth_crave.yaml",
+  "kw": [
+   "巧克力",
+   "黑巧",
+   "牛奶巧克力",
+   "巧克力推荐",
+   "苦巧克力"
+  ],
+  "ut": [
+   "巧克力",
+   "黑巧",
+   "牛奶巧克力"
+  ],
+  "intent": "question",
+  "sib": [
+   "199_festival_moment",
+   "136_holiday_moment",
+   "257_ate_yet",
+   "161_meal_check_in",
+   "183_food_craving",
+   "423_ate_yet"
+  ]
+ },
+ {
+  "i": 69,
+  "name": "me_me_weiqu_003",
+  "file": "232_micro_emotion.yaml",
+  "kw": [
+   "无端委屈",
+   "莫名委屈",
+   "小委屈",
+   "受了点委屈",
+   "小情绪"
+  ],
+  "ut": [
+   "无端委屈",
+   "莫名委屈",
+   "小委屈"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "118_random_grievance",
+   "741_sudden_micro_feel",
+   "471_yingying_whimper",
+   "502_micro_emotion",
+   "142_micro_emotion",
+   "205_micro_mood"
+  ]
+ },
+ {
+  "i": 70,
+  "name": "nc_tired_emot_001",
+  "file": "127_need_comfort.yaml",
+  "kw": [
+   "心累",
+   "想躺平",
+   "不想动",
+   "累了",
+   "真的累"
+  ],
+  "ut": [
+   "心好累",
+   "想躺平",
+   "真的累"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "205_micro_mood",
+   "053_emoji_wuwu_yingying",
+   "094_seek_comfort",
+   "215_lazy_mode",
+   "127_need_comfort",
+   "205_micro_mood"
+  ]
+ },
+ {
+  "i": 71,
+  "name": "htc_hairdry_007",
+  "file": "555_hairdry_towel_chat.yaml",
+  "kw": [
+   "好麻烦",
+   "吹风机",
+   "半小时",
+   "吹不干",
+   "吹头发"
+  ],
+  "ut": [
+   "头发太长吹不干啊",
+   "吹风机声音好大",
+   "懒得吹想直接睡"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "622_sudden_rain_caught",
+   "555_hairdry_towel_chat",
+   "555_hairdry_towel_chat",
+   "555_hairdry_towel_chat",
+   "037_bath_skincare_routine",
+   "864_hairdryer_use"
+  ]
+ },
+ {
+  "i": 72,
+  "name": "sct_yongyuan_001",
+  "file": "372_sudden_compliment.yaml",
+  "kw": [
+   "永远的神",
+   "yyds",
+   "顶",
+   "极致",
+   "拉满"
+  ],
+  "ut": [
+   "yyds",
+   "永远的神",
+   "顶"
+  ],
+  "intent": "playful",
+  "sib": [
+   "473_awsl_meme_chat",
+   "029_lol_dying",
+   "314_juejuezi_meme",
+   "439_meme_juejuezi",
+   "229_emoji_react",
+   "129_emoji_text"
+  ]
+ },
+ {
+  "i": 73,
+  "name": "tj_dusi_001",
+  "file": "Z5_traffic_jam.yaml",
+  "kw": [
+   "堵死了",
+   "堵死",
+   "真的堵死",
+   "堵的我想哭",
+   "堵到爆炸"
+  ],
+  "ut": [
+   "堵死了",
+   "堵死我了",
+   "真的堵死"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "245_commute_chat",
+   "166_commute_tired",
+   "031_stuck_traffic",
+   "316_commute_traffic",
+   "731_traffic_jam_late"
+  ]
+ },
+ {
+  "i": 74,
+  "name": "gsh_meat_choose_004",
+  "file": "828_grocery_shopping.yaml",
+  "kw": [
+   "选肉",
+   "猪肉牛肉",
+   "五花肉",
+   "鸡腿",
+   "肉类"
+  ],
+  "ut": [
+   "{user_addr}选什么肉",
+   "猪肉还是牛肉",
+   "五花肉好"
+  ],
+  "intent": "question",
+  "sib": [
+   "106_cat_fish_snack",
+   "965_fried_chicken_lust",
+   "183_food_craving",
+   "543_dried_fish_crave",
+   "615_midnight_snack_crave"
+  ]
+ },
+ {
+  "i": 75,
+  "name": "fs_xuepai_001",
+  "file": "891_first_snow_excite.yaml",
+  "kw": [
+   "拍雪景",
+   "雪景图",
+   "拍照",
+   "朋友圈晒雪",
+   "摄影"
+  ],
+  "ut": [
+   "拍雪景",
+   "{user_addr}朋友圈晒",
+   "雪景图"
+  ],
+  "intent": "question",
+  "sib": [
+   "511_weekend_plan",
+   "577_first_snow_chat",
+   "577_first_snow_chat",
+   "577_first_snow_chat",
+   "577_first_snow_chat",
+   "979_first_snow_excited"
+  ]
+ },
+ {
+  "i": 76,
+  "name": "ntr_afk_003",
+  "file": "646_noob_teammate_rage.yaml",
+  "kw": [
+   "挂机",
+   "跑路",
+   "不打了",
+   "afk",
+   "摆烂"
+  ],
+  "ut": [
+   "挂机",
+   "跑路",
+   "不打了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "MMM5_startup_fail",
+   "140_work_slack",
+   "YYY8_world_war_fear",
+   "770_meeting_zone_out",
+   "379_office_gossip_chat",
+   "083_busy_or_free"
+  ]
+ },
+ {
+  "i": 77,
+  "name": "snc_stiff_005",
+  "file": "557_stiff_neck_complain.yaml",
+  "kw": [
+   "落枕了",
+   "落枕",
+   "脖子僵",
+   "转不动",
+   "酸"
+  ],
+  "ut": [
+   "枕头不行换一个",
+   "{user_addr}早上落枕了脖子转不动",
+   "脖子僵得难受"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "557_stiff_neck_complain",
+   "681_morning_stretch",
+   "755_pillow_talk_late",
+   "II7_chronic_pain",
+   "557_stiff_neck_complain",
+   "557_stiff_neck_complain"
+  ]
+ },
+ {
+  "i": 78,
+  "name": "lb_wuxiu_004",
+  "file": "419_lunch_break_chat.yaml",
+  "kw": [
+   "午休摸鱼",
+   "偷懒",
+   "上班犯困",
+   "假装工作",
+   "趁老板"
+  ],
+  "ut": [
+   "午休摸鱼",
+   "偷懒中",
+   "上班犯困"
+  ],
+  "intent": "playful",
+  "sib": [
+   "167_work_slack",
+   "656_workfish_idle_chat",
+   "073_work_slack_moyu",
+   "739_office_slacking_check",
+   "548_slack_off_work",
+   "619_skincare_routine"
+  ]
+ },
+ {
+  "i": 79,
+  "name": "csa_crisp_010",
+  "file": "567_crisp_snack_attack.yaml",
+  "kw": [
+   "空气包装",
+   "胖了",
+   "手油",
+   "渣多",
+   "太咸"
+  ],
+  "ut": [
+   "再来一袋停不下",
+   "手油得不行",
+   "{user_addr}沙发全是薯片渣"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "027_owner_got_fat",
+   "567_crisp_snack_attack",
+   "567_crisp_snack_attack",
+   "270_tease_fat",
+   "241_tease_owner",
+   "194_tease_owner"
+  ]
+ },
+ {
+  "i": 80,
+  "name": "dl_lucky_002",
+  "file": "666_devil_lucky_chat.yaml",
+  "kw": [
+   "运气好",
+   "锦鲤",
+   "中奖运",
+   "玄学",
+   "幸运"
+  ],
+  "ut": [
+   "{user_addr}运气真好",
+   "锦鲤体质",
+   "中奖运"
+  ],
+  "intent": "question",
+  "sib": [
+   "033_red_packet_joy",
+   "944_send_wrong_chat",
+   "371_surprise_redpack_joy",
+   "371_surprise_redpack_joy",
+   "196_sudden_surprise",
+   "778_small_joy_moment"
+  ]
+ },
+ {
+  "i": 81,
+  "name": "cd_cd_bashou_003",
+  "file": "233_cat_daily.yaml",
+  "kw": [
+   "踩尾巴",
+   "踩到尾巴",
+   "被踩",
+   "尾巴疼",
+   "痛"
+  ],
+  "ut": [
+   "踩尾巴",
+   "踩到尾巴",
+   "被踩"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "107_tail_stepped",
+   "410_tail_stepped",
+   "376_tail_stepped_yelp",
+   "280_tail_stepped",
+   "135_cat_daily",
+   "495_cat_daily_life"
+  ]
+ },
+ {
+  "i": 82,
+  "name": "pb_dianliang_001",
+  "file": "783_phone_low_battery.yaml",
+  "kw": [
+   "手机没电",
+   "电量低",
+   "快没电",
+   "还剩5%",
+   "红电"
+  ],
+  "ut": [
+   "手机没电",
+   "电量低",
+   "快没电"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "222_are_you_there",
+   "592_phone_battery_dying",
+   "132_small_complaints",
+   "852_phone_dropped",
+   "509_phone_screen",
+   "684_phone_low_battery"
+  ]
+ },
+ {
+  "i": 83,
+  "name": "sn_sno_006",
+  "file": "590_snow_first_sight.yaml",
+  "kw": [
+   "雪天冷",
+   "冻死",
+   "冬天冷",
+   "鼻涕",
+   "哆嗦"
+  ],
+  "ut": [
+   "雪天好冷",
+   "冻死了",
+   "冬天冻人"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "527_dress_warm_care",
+   "300_dress_warm_care",
+   "016_wear_warm_remind",
+   "172_warm_clothing",
+   "85_weather_season",
+   "860_bus_stop_wait"
+  ]
+ },
+ {
+  "i": 84,
+  "name": "sn_baozhong_001",
+  "file": "789_sneeze_cold_catch.yaml",
+  "kw": [
+   "口罩",
+   "戴口罩",
+   "防感冒",
+   "防传染",
+   "隔离"
+  ],
+  "ut": [
+   "口罩",
+   "戴口罩",
+   "防感冒"
+  ],
+  "intent": "question",
+  "sib": [
+   "840_chitchat_about_weather",
+   "143_weather_chat",
+   "368_wear_warm_remind",
+   "128_warmth_check",
+   "503_weather_chat",
+   "894_foggy_morning_blur"
+  ]
+ },
+ {
+  "i": 85,
+  "name": "pp_houhui_001",
+  "file": "043_procrastination_putoff.yaml",
+  "kw": [
+   "后悔",
+   "早知道",
+   "应该早",
+   "错过",
+   "没做完"
+  ],
+  "ut": [
+   "后悔",
+   "早知道",
+   "应该早"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "915_coffee_addict_chat",
+   "011_jealous_vinegar",
+   "920_shopping_cart_chat",
+   "920_shopping_cart_chat",
+   "766_secret_share_whisper",
+   "276_insomnia_thinking"
+  ]
+ },
+ {
+  "i": 86,
+  "name": "nlb_wuhou_007",
+  "file": "003_noon_lunch_break.yaml",
+  "kw": [
+   "下午困",
+   "下午没劲",
+   "没精神",
+   "提不起劲",
+   "下午摸鱼"
+  ],
+  "ut": [
+   "下午没劲",
+   "提不起精神",
+   "想摸鱼"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "041_catch_a_cold_sick",
+   "061_small_morning_grump",
+   "420_afternoon_drowsy",
+   "948_yawn_sleepy_drop",
+   "781_yawn_sleepy_chat",
+   "221_noon_break"
+  ]
+ },
+ {
+  "i": 87,
+  "name": "mcd_qichue_001",
+  "file": "718_meal_check_dinner.yaml",
+  "kw": [
+   "一起吃",
+   "视频吃饭",
+   "云吃饭",
+   "陪我吃",
+   "一起开饭"
+  ],
+  "ut": [
+   "{user_addr}一起吃",
+   "视频吃饭",
+   "云吃饭"
+  ],
+  "intent": "question",
+  "sib": [
+   "018_eat_properly",
+   "298_peiwan_company",
+   "291_ate_yet_question",
+   "257_ate_yet",
+   "006_ate_lunch_yet",
+   "281_shovel_return"
+  ]
+ },
+ {
+  "i": 88,
+  "name": "caw_humid_day_004",
+  "file": "840_chitchat_about_weather.yaml",
+  "kw": [
+   "湿气重",
+   "衣服潮",
+   "闷热",
+   "黏糊糊",
+   "回南天"
+  ],
+  "ut": [
+   "{user_addr}湿气重",
+   "衣服潮",
+   "闷热黏糊"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "996_weather_too_humid",
+   "588_hot_summer_complain",
+   "682_window_weather_chat",
+   "143_weather_chat",
+   "527_dress_warm_care",
+   "785_rainy_day_mood"
+  ]
+ },
+ {
+  "i": 89,
+  "name": "ktb_fanqi_001",
+  "file": "365_kiss_tease_blush.yaml",
+  "kw": [
+   "反撩",
+   "反过来撩",
+   "反将",
+   "反推",
+   "反过来"
+  ],
+  "ut": [
+   "反撩你",
+   "反过来撩",
+   "反推"
+  ],
+  "intent": "playful",
+  "sib": [
+   "176_anti_routine",
+   "366_dodge_flirt_back",
+   "677_ambiguous_flirt_chat",
+   "192_reverse_flirt",
+   "398_reverse_tease",
+   "398_reverse_tease"
+  ]
+ },
+ {
+  "i": 90,
+  "name": "em_morning_run_008",
+  "file": "186_early_morning.yaml",
+  "kw": [
+   "晨跑",
+   "早跑",
+   "跑步",
+   "锻炼",
+   "早上锻炼"
+  ],
+  "ut": [
+   "去晨跑",
+   "早起跑步",
+   "{user_addr}锻炼吗"
+  ],
+  "intent": "playful",
+  "sib": [
+   "384_morning_call",
+   "747_dawn_first_light",
+   "450_morning_zaoan_chat",
+   "219_morning_hello",
+   "782_stretch_morning_body",
+   "923_gym_skip_excuse"
+  ]
+ },
+ {
+  "i": 91,
+  "name": "jv_chicu_008",
+  "file": "426_jealous_vinegar.yaml",
+  "kw": [
+   "假装不在乎",
+   "假装无所谓",
+   "装大度",
+   "嘴硬",
+   "心里在意"
+  ],
+  "ut": [
+   "我无所谓",
+   "装大度",
+   "嘴硬"
+  ],
+  "intent": "playful",
+  "sib": [
+   "736_anti_trope_cold",
+   "137_anti_routine",
+   "200_anti_routine",
+   "333_hng_pout_tsundere",
+   "414_tsundere_lie",
+   "022_hmph_sulk"
+  ]
+ },
+ {
+  "i": 92,
+  "name": "ysc_yawn_003",
+  "file": "648_yawn_sleepy_chat.yaml",
+  "kw": [
+   "几点",
+   "睡了没",
+   "还醒着",
+   "困不困",
+   "怎么还不睡"
+  ],
+  "ut": [
+   "{user_addr}这都几点了你还不睡",
+   "{user_addr}怎么还醒着",
+   "现在困了没"
+  ],
+  "intent": "question",
+  "sib": [
+   "719_sleep_check_late",
+   "517_late_night_chat",
+   "002_late_night_owl",
+   "458_sleep_yet_ask",
+   "153_morning_wakeup",
+   "758_lottery_dice_play"
+  ]
+ },
+ {
+  "i": 93,
+  "name": "nc_pei_001",
+  "file": "127_need_comfort.yaml",
+  "kw": [
+   "陪我",
+   "别走开",
+   "一个人",
+   "孤单",
+   "寂寞"
+  ],
+  "ut": [
+   "一个人好孤单",
+   "寂寞",
+   "陪陪我"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "124_acting_clingy",
+   "101_seek_company",
+   "261_act_cute_beg",
+   "223_clingy_companion",
+   "298_peiwan_company",
+   "464_want_company"
+  ]
+ },
+ {
+  "i": 94,
+  "name": "ws_yutian_001",
+  "file": "986_window_seat_chat.yaml",
+  "kw": [
+   "窗外下雨",
+   "看雨发呆",
+   "雨声",
+   "雨打窗",
+   "雨天发呆"
+  ],
+  "ut": [
+   "窗外下雨",
+   "{user_addr}看雨发呆",
+   "雨声好听"
+  ],
+  "intent": "playful",
+  "sib": [
+   "227_sleep_buddy_chat",
+   "541_insomnia_overthink",
+   "206_weather_chat",
+   "288_midnight_dark_chat",
+   "916_rainy_day_mood",
+   "651_weather_rain_chat"
+  ]
+ },
+ {
+  "i": 95,
+  "name": "ptb_finally_reply_012",
+  "file": "837_pretend_busy.yaml",
+  "kw": [
+   "终于回复了",
+   "装不下去了",
+   "投降",
+   "还是回了",
+   "心软"
+  ],
+  "ut": [
+   "{user_addr}终于回复",
+   "装不下去",
+   "投降回复"
+  ],
+  "intent": "playful",
+  "sib": [
+   "777_lucky_streak_win",
+   "886_emoji_war",
+   "433_flirt_back_blush",
+   "366_dodge_flirt_back",
+   "X8_giving_up",
+   "635_emoji_war_battle"
+  ]
+ },
+ {
+  "i": 96,
+  "name": "sps_snore_001",
+  "file": "508_sleep_struggle.yaml",
+  "kw": [
+   "打呼噜",
+   "打鼾",
+   "鼾声",
+   "室友打呼",
+   "邻居吵"
+  ],
+  "ut": [
+   "打呼噜",
+   "打鼾",
+   "鼾声大"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "734_neko_fish_snack",
+   "135_cat_daily",
+   "534_head_pat_beg",
+   "198_cat_daily",
+   "375_meow_daily_chatter",
+   "233_cat_daily"
+  ]
+ },
+ {
+  "i": 97,
+  "name": "atc_fanshenruyi_001",
+  "file": "736_anti_trope_cold.yaml",
+  "kw": [
+   "反应平淡",
+   "没反应",
+   "无所谓",
+   "冷淡",
+   "看似平静"
+  ],
+  "ut": [
+   "反应平淡",
+   "{user_addr}没反应",
+   "无所谓"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "164_mood_swings",
+   "783_phone_low_battery",
+   "109_feigned_cold",
+   "215_lazy_mode",
+   "927_phone_battery_low",
+   "069_anti_routine_cold"
+  ]
+ },
+ {
+  "i": 98,
+  "name": "mzc_midnight_012",
+  "file": "581_midnight_zoomies_chat.yaml",
+  "kw": [
+   "吵到睡",
+   "摔东西",
+   "累瘫",
+   "刚停",
+   "扰民"
+  ],
+  "ut": [
+   "{user_addr}对不起吵到你",
+   "自己跑累了",
+   "刚停下喘气"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "581_midnight_zoomies_chat",
+   "581_midnight_zoomies_chat",
+   "581_midnight_zoomies_chat",
+   "053_emoji_wuwu_yingying",
+   "108_shoveler_return",
+   "LL6_anger_outburst"
+  ]
+ },
+ {
+  "i": 99,
+  "name": "tcm_bike_001",
+  "file": "492_traffic_commute.yaml",
+  "kw": [
+   "骑车",
+   "自行车",
+   "共享单车",
+   "没单车",
+   "骑车上班"
+  ],
+  "ut": [
+   "骑车上班",
+   "共享单车没了",
+   "自行车爽"
+  ],
+  "intent": "playful",
+  "sib": [
+   "539_commute_tired",
+   "216_exercise_lazy",
+   "834_quick_workout",
+   "A7_car_driving",
+   "805_broke_wallet_empty"
+  ]
+ },
+ {
+  "i": 100,
+  "name": "ew_weiqu_001",
+  "file": "053_emoji_wuwu_yingying.yaml",
+  "kw": [
+   "委委屈屈",
+   "嘴一撇",
+   "鼻子一酸",
+   "想哭",
+   "委屈巴巴"
+  ],
+  "ut": [
+   "委委屈屈",
+   "嘴一撇",
+   "鼻子一酸"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "741_sudden_micro_feel",
+   "296_anwei_comfort_seek",
+   "094_seek_comfort",
+   "158_emoji_reactions",
+   "263_need_comfort",
+   "191_text_emoji"
+  ]
+ },
+ {
+  "i": 101,
+  "name": "to_yoxie_001",
+  "file": "268_tease_owner.yaml",
+  "kw": [
+   "诱惑你",
+   "撩拨",
+   "故意撩",
+   "故意逗你",
+   "引诱"
+  ],
+  "ut": [
+   "诱惑你",
+   "撩拨",
+   "故意撩"
+  ],
+  "intent": "playful",
+  "sib": [
+   "461_jealous_chuyi",
+   "304_fanliao_flirt_back",
+   "533_flirt_back_blush",
+   "677_ambiguous_flirt_chat",
+   "023_reverse_flirt",
+   "726_reverse_flirt_back"
+  ]
+ },
+ {
+  "i": 102,
+  "name": "pb_qiukua_009",
+  "file": "394_praise_beg.yaml",
+  "kw": [
+   "没人夸",
+   "别人不懂",
+   "默默努力",
+   "没人懂",
+   "委屈"
+  ],
+  "ut": [
+   "没人夸我",
+   "别人不懂",
+   "默默努力"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "094_seek_comfort",
+   "676_random_compliment_chat",
+   "118_random_grievance",
+   "217_self_doubt",
+   "428_need_praise",
+   "205_micro_mood"
+  ]
+ },
+ {
+  "i": 103,
+  "name": "wwr_jiayiyi_001",
+  "file": "724_wear_warm_remind.yaml",
+  "kw": [
+   "加件衣服",
+   "加外套",
+   "穿厚",
+   "风衣",
+   "羽绒服"
+  ],
+  "ut": [
+   "加件衣服",
+   "{user_addr}加外套",
+   "穿厚"
+  ],
+  "intent": "question",
+  "sib": [
+   "527_dress_warm_care",
+   "239_life_care",
+   "328_wear_warm_remind",
+   "016_wear_warm_remind",
+   "621_weather_too_cold",
+   "430_dress_warm_remind"
+  ]
+ },
+ {
+  "i": 104,
+  "name": "scs_outfit_show_008",
+  "file": "816_screenshot_share.yaml",
+  "kw": [
+   "今日穿搭",
+   "新衣服",
+   "穿搭照",
+   "镜子自拍",
+   "试穿"
+  ],
+  "ut": [
+   "{user_addr}今天穿搭",
+   "新衣服试穿",
+   "镜子自拍"
+  ],
+  "intent": "playful",
+  "sib": [
+   "297_kuajiang_praise_beg",
+   "867_closet_pick",
+   "100_seek_praise",
+   "300_dress_warm_care",
+   "212_shopping_haul",
+   "383_small_happiness_share"
+  ]
+ },
+ {
+  "i": 105,
+  "name": "cc_peiwo_001",
+  "file": "223_clingy_companion.yaml",
+  "kw": [
+   "陪我",
+   "陪笨猫",
+   "陪聊",
+   "陪猫猫",
+   "陪一下"
+  ],
+  "ut": [
+   "陪我",
+   "陪笨猫",
+   "陪聊会"
+  ],
+  "intent": "playful",
+  "sib": [
+   "124_acting_clingy",
+   "127_need_comfort",
+   "101_seek_company",
+   "261_act_cute_beg",
+   "298_peiwan_company",
+   "464_want_company"
+  ]
+ },
+ {
+  "i": 106,
+  "name": "snc_stiff_003",
+  "file": "557_stiff_neck_complain.yaml",
+  "kw": [
+   "转不动",
+   "酸",
+   "落枕了",
+   "落枕",
+   "脖子僵"
+  ],
+  "ut": [
+   "睡姿不对了",
+   "转头痛死",
+   "枕头不行换一个"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "557_stiff_neck_complain",
+   "557_stiff_neck_complain",
+   "PP8_old_dog_trick",
+   "850_keys_lost_hunt",
+   "248_off_work_tired",
+   "557_stiff_neck_complain"
+  ]
+ },
+ {
+  "i": 107,
+  "name": "ear_someonemiss_001",
+  "file": "951_ear_itchy.yaml",
+  "kw": [
+   "有人念叨",
+   "耳热",
+   "念你",
+   "耳朵热",
+   "谁在说"
+  ],
+  "ut": [
+   "有人念叨我",
+   "耳朵发热",
+   "{user_addr}有人说我"
+  ],
+  "intent": "playful",
+  "sib": [
+   "951_ear_itchy",
+   "762_ear_twitch_listen",
+   "485_status_check_in",
+   "276_insomnia_thinking",
+   "434_ambiguous_tease",
+   "261_act_cute_beg"
+  ]
+ },
+ {
+  "i": 108,
+  "name": "drc_forgot_dream_010",
+  "file": "832_dream_recall.yaml",
+  "kw": [
+   "忘了梦了",
+   "想不起来",
+   "醒来忘",
+   "模糊记得",
+   "残片"
+  ],
+  "ut": [
+   "{user_addr}梦想不起来",
+   "醒来忘了",
+   "模糊记得"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "PPP7_password_forgot",
+   "887_brain_blank",
+   "90_fallback",
+   "604_forgot_what_doing",
+   "119_dream_last_night",
+   "165_dream_chat"
+  ]
+ },
+ {
+  "i": 109,
+  "name": "lah_jiuzuo_001",
+  "file": "RR9_lazy_at_home.yaml",
+  "kw": [
+   "久坐",
+   "坐太久",
+   "坐一整天",
+   "坐得屁股痛",
+   "坐麻了"
+  ],
+  "ut": [
+   "久坐腰疼",
+   "坐一整天了",
+   "坐太久屁股麻"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "260_take_rest",
+   "528_take_rest_care",
+   "487_care_lifestyle",
+   "309_tease_master_fat",
+   "301_rest_well_care",
+   "339_tease_master_fat"
+  ]
+ },
+ {
+  "i": 110,
+  "name": "lh_xiuse_011",
+  "file": "305_lianhong_blush_dodge.yaml",
+  "kw": [
+   "羞死了",
+   "不敢看",
+   "害羞死",
+   "羞死人了",
+   "真害羞"
+  ],
+  "ut": [
+   "羞死了",
+   "不敢看",
+   "害羞死"
+  ],
+  "intent": "playful",
+  "sib": [
+   "366_dodge_flirt_back",
+   "269_blush_dodge",
+   "677_ambiguous_flirt_chat",
+   "024_blush_avoid",
+   "365_kiss_tease_blush",
+   "T0_shy_blushing"
+  ]
+ },
+ {
+  "i": 111,
+  "name": "ln_silence_007",
+  "file": "187_late_night.yaml",
+  "kw": [
+   "安静",
+   "静悄悄",
+   "太安静",
+   "寂静夜",
+   "没声音"
+  ],
+  "ut": [
+   "好安静",
+   "静悄悄的",
+   "太安静了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "418_midnight_chat",
+   "305_lianhong_blush_dodge",
+   "076_late_night_call",
+   "242_night_topic",
+   "134_night_chitchat",
+   "002_late_night_owl"
+  ]
+ },
+ {
+  "i": 112,
+  "name": "rps_guess_num_001",
+  "file": "540_red_packet_surprise.yaml",
+  "kw": [
+   "猜数字",
+   "猜中了",
+   "猜对了",
+   "蒙对",
+   "一发入魂"
+  ],
+  "ut": [
+   "猜数字",
+   "猜中了",
+   "猜对了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "237_sudden_surprise",
+   "133_sudden_surprise",
+   "196_sudden_surprise",
+   "758_lottery_dice_play",
+   "732_unexpected_red_packet",
+   "063_surprise_redpacket"
+  ]
+ },
+ {
+  "i": 113,
+  "name": "gpl_pinjie_001",
+  "file": "737_gacha_pull_luck.yaml",
+  "kw": [
+   "氪金",
+   "充钱",
+   "月卡",
+   "大佬",
+   "平民"
+  ],
+  "ut": [
+   "氪金",
+   "{user_addr}充钱",
+   "月卡"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "158_emoji_reactions",
+   "658_game_gacha_chat",
+   "643_gacha_pull_dream",
+   "234_game_mood",
+   "129_emoji_text",
+   "498_gacha_luck"
+  ]
+ },
+ {
+  "i": 114,
+  "name": "wkd_lazy_004",
+  "file": "750_weekend_lazy_morn.yaml",
+  "kw": [
+   "被窝里玩手机",
+   "刷剧",
+   "看视频",
+   "横屏躺平",
+   "充电宝"
+  ],
+  "ut": [
+   "被窝里玩手机",
+   "刷剧躺平",
+   "看视频不停"
+  ],
+  "intent": "playful",
+  "sib": [
+   "511_weekend_plan",
+   "668_subway_commute_chat",
+   "228_insomnia_chat",
+   "743_weekend_lazy_idea",
+   "005_what_doing_now",
+   "456_what_doing_ask"
+  ]
+ },
+ {
+  "i": 115,
+  "name": "wd_xiuxi_012",
+  "file": "290_what_doing_now.yaml",
+  "kw": [
+   "在休息",
+   "躺着",
+   "在床上",
+   "葛优瘫",
+   "摆烂中"
+  ],
+  "ut": [
+   "在床上躺",
+   "葛优瘫",
+   "摆烂中"
+  ],
+  "intent": "playful",
+  "sib": [
+   "215_lazy_mode",
+   "256_what_doing",
+   "390_doing_what",
+   "081_what_doing_now",
+   "194_tease_owner",
+   "173_rest_concern"
+  ]
+ },
+ {
+  "i": 116,
+  "name": "pp_zuihou_001",
+  "file": "043_procrastination_putoff.yaml",
+  "kw": [
+   "死线前",
+   "最后期限",
+   "ddl",
+   "截止前",
+   "拖到最后"
+  ],
+  "ut": [
+   "死线前",
+   "最后期限",
+   "ddl"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "008_busy_or_free",
+   "034_insomnia_thinking",
+   "DDD7_overwhelmed",
+   "167_work_slack",
+   "140_work_slack",
+   "548_slack_off_work"
+  ]
+ },
+ {
+  "i": 117,
+  "name": "dw_heshui_004",
+  "file": "429_drink_water_remind.yaml",
+  "kw": [
+   "水杯",
+   "保温杯",
+   "大水壶",
+   "自带水杯",
+   "杯子"
+  ],
+  "ut": [
+   "我的水杯",
+   "保温杯",
+   "大水壶"
+  ],
+  "intent": "playful",
+  "sib": [
+   "367_water_drink_remind",
+   "258_drink_water",
+   "084_drink_water_check",
+   "367_water_drink_remind",
+   "669_water_drink_remind_chat",
+   "526_drink_water_remind"
+  ]
+ },
+ {
+  "i": 118,
+  "name": "oc_chashi_001",
+  "file": "271_outfit_collapse.yaml",
+  "kw": [
+   "出门检查",
+   "镜子前",
+   "自拍",
+   "看看效果",
+   "评一下"
+  ],
+  "ut": [
+   "出门检查",
+   "镜子前看",
+   "自拍一下"
+  ],
+  "intent": "playful",
+  "sib": [
+   "971_mirror_check_self",
+   "509_phone_screen",
+   "940_selfie_repeat_chat",
+   "640_anniversary_sweet",
+   "786_sunny_day_warm",
+   "B3_photography"
+  ]
+ },
+ {
+  "i": 119,
+  "name": "mwk_alarm_001",
+  "file": "483_morning_wakeup.yaml",
+  "kw": [
+   "闹钟",
+   "起不来",
+   "不想起",
+   "赖床",
+   "困死"
+  ],
+  "ut": [
+   "闹钟响了不想起",
+   "困死了起不来",
+   "又赖床了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "285_zaoan_morning_greeting",
+   "247_morning_grumpy",
+   "120_morning_wakeup",
+   "252_morning_wakeup",
+   "186_early_morning",
+   "074_morning_wake_up"
+  ]
+ },
+ {
+  "i": 120,
+  "name": "mta_share_001",
+  "file": "964_milk_tea_addict.yaml",
+  "kw": [
+   "一起喝",
+   "分一口",
+   "同款奶茶",
+   "同一杯",
+   "共享"
+  ],
+  "ut": [
+   "一起喝",
+   "分一口",
+   "{user_addr}同款"
+  ],
+  "intent": "playful",
+  "sib": [
+   "350_fish_dry_crave",
+   "465_drink_water_care",
+   "327_drink_water_remind",
+   "299_drink_water_care",
+   "493_takeout_late",
+   "015_drink_water_remind"
+  ]
+ },
+ {
+  "i": 121,
+  "name": "slt_discount_001",
+  "file": "117_small_lucky_thing.yaml",
+  "kw": [
+   "打折",
+   "大减价",
+   "抢到折",
+   "优惠券",
+   "5折"
+  ],
+  "ut": [
+   "打折",
+   "{user_addr}大减价",
+   "抢到折"
+  ],
+  "intent": "playful",
+  "sib": [
+   "138_game_vibes",
+   "033_red_packet_joy",
+   "212_shopping_haul",
+   "920_shopping_cart_chat",
+   "507_shopping_haul",
+   "855_supermarket_run"
+  ]
+ },
+ {
+  "i": 122,
+  "name": "bcp_kaihui_001",
+  "file": "378_boss_check_panic.yaml",
+  "kw": [
+   "开会",
+   "临时开会",
+   "突然会",
+   "会要开",
+   "紧急会"
+  ],
+  "ut": [
+   "开会",
+   "临时开会",
+   "突然会"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "140_work_slack",
+   "203_work_slack",
+   "005_what_doing_now",
+   "167_work_slack",
+   "656_workfish_idle_chat",
+   "256_what_doing"
+  ]
+ },
+ {
+  "i": 123,
+  "name": "bic_bored_007",
+  "file": "661_bored_idle_chat.yaml",
+  "kw": [
+   "时间过得慢",
+   "等不到",
+   "好慢",
+   "度日如年",
+   "拖时间"
+  ],
+  "ut": [
+   "时间过得慢{user_addr}",
+   "等不到下班",
+   "好慢"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "JJJ5_flight_delay",
+   "420_afternoon_drowsy",
+   "570_elevator_stuck_wait",
+   "357_are_you_there_ping",
+   "570_elevator_stuck_wait",
+   "570_elevator_stuck_wait"
+  ]
+ },
+ {
+  "i": 124,
+  "name": "np_kuajiang_001",
+  "file": "428_need_praise.yaml",
+  "kw": [
+   "夸夸我",
+   "表扬",
+   "夸我",
+   "我厉害吗",
+   "我棒不棒"
+  ],
+  "ut": [
+   "夸夸我",
+   "表扬一下",
+   "夸我喵"
+  ],
+  "intent": "playful",
+  "sib": [
+   "013_beg_for_praise",
+   "394_praise_beg",
+   "463_want_compliment",
+   "100_seek_praise",
+   "264_praise_me",
+   "125_seeking_praise"
+  ]
+ },
+ {
+  "i": 125,
+  "name": "lb_wuxiu_003",
+  "file": "419_lunch_break_chat.yaml",
+  "kw": [
+   "饭后犯困",
+   "午后困",
+   "起不来",
+   "闹钟没用",
+   "醒不来"
+  ],
+  "ut": [
+   "饭后犯困",
+   "午后好困",
+   "闹钟没用"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "171_lunch_break",
+   "937_yawn_sleepy_chat",
+   "III7_indigestion",
+   "120_morning_wakeup",
+   "074_morning_wake_up",
+   "001_morning_wakeup_chat"
+  ]
+ },
+ {
+  "i": 126,
+  "name": "cet_ear_004",
+  "file": "664_cat_ear_tease_chat.yaml",
+  "kw": [
+   "挠下巴",
+   "下巴胡须",
+   "挠脖子",
+   "舒服",
+   "嗯嗯"
+  ],
+  "ut": [
+   "挠下巴{user_addr}",
+   "下巴痒",
+   "挠脖子"
+  ],
+  "intent": "playful",
+  "sib": [
+   "476_want_headpat_beg",
+   "307_motoutou_pat_head",
+   "266_head_pat",
+   "363_head_pat_beg",
+   "534_head_pat_beg",
+   "436_ask_for_headpat"
+  ]
+ },
+ {
+  "i": 127,
+  "name": "rps_compliment_001",
+  "file": "540_red_packet_surprise.yaml",
+  "kw": [
+   "被夸了",
+   "被表扬",
+   "收到夸奖",
+   "被赞",
+   "评论好"
+  ],
+  "ut": [
+   "被夸了",
+   "被表扬",
+   "收到夸奖"
+  ],
+  "intent": "playful",
+  "sib": [
+   "133_sudden_surprise",
+   "063_surprise_redpacket",
+   "170_surprise_moment",
+   "116_sudden_happy",
+   "275_praised_today",
+   "347_praised_blush_happy"
+  ]
+ },
+ {
+  "i": 128,
+  "name": "lb_too_short_006",
+  "file": "171_lunch_break.yaml",
+  "kw": [
+   "午休短",
+   "时间不够",
+   "没睡够",
+   "一觉醒来",
+   "时间过快"
+  ],
+  "ut": [
+   "午休太短",
+   "时间不够",
+   "没睡够"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "547_study_cram_panic",
+   "716_what_time_check",
+   "168_study_struggle",
+   "448_memorize_textbook",
+   "419_lunch_break_chat",
+   "657_study_exam_chat"
+  ]
+ },
+ {
+  "i": 129,
+  "name": "ac_qinqin_001",
+  "file": "124_acting_clingy.yaml",
+  "kw": [
+   "亲亲",
+   "来一个",
+   "亲一下",
+   "求亲",
+   "香一个"
+  ],
+  "ut": [
+   "{user_addr}亲亲",
+   "来一个",
+   "亲一下"
+  ],
+  "intent": "playful",
+  "sib": [
+   "338_kiss_beg_shy",
+   "157_hug_petting",
+   "105_kiss_pester",
+   "054_reverse_flirt_blush",
+   "223_clingy_companion",
+   "189_seek_praise"
+  ]
+ },
+ {
+  "i": 130,
+  "name": "ar_tsundere_love_011",
+  "file": "200_anti_routine.yaml",
+  "kw": [
+   "傲娇",
+   "才不喜欢",
+   "哪有喜欢",
+   "别误会",
+   "不要会错"
+  ],
+  "ut": [
+   "傲娇",
+   "才不喜欢",
+   "哪有喜欢"
+  ],
+  "intent": "playful",
+  "sib": [
+   "414_tsundere_lie",
+   "414_tsundere_lie",
+   "678_cold_aloof_chat",
+   "022_hmph_sulk",
+   "680_random_emoji_chat",
+   "531_hum_pout_face"
+  ]
+ },
+ {
+  "i": 131,
+  "name": "wc_wuwu_008",
+  "file": "404_wuwu_cry.yaml",
+  "kw": [
+   "安慰我",
+   "给抱抱",
+   "治愈下",
+   "心疼一下",
+   "关心一下"
+  ],
+  "ut": [
+   "安慰我",
+   "给个抱抱",
+   "治愈一下"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "012_need_comfort_hug",
+   "914_study_burnout_vent",
+   "359_cry_wuwu_sob",
+   "189_seek_praise",
+   "103_hug_request",
+   "427_need_comfort"
+  ]
+ },
+ {
+  "i": 132,
+  "name": "ic_ic_shenghuo_002",
+  "file": "228_insomnia_chat.yaml",
+  "kw": [
+   "生活压力",
+   "明天要",
+   "事情多",
+   "担心",
+   "操心"
+  ],
+  "ut": [
+   "生活压力",
+   "明天要忙",
+   "事情多"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "228_insomnia_chat",
+   "634_read_no_reply",
+   "127_need_comfort",
+   "187_late_night",
+   "043_procrastination_putoff",
+   "767_homesick_far_away"
+  ]
+ },
+ {
+  "i": 133,
+  "name": "sjm_mt_007",
+  "file": "778_small_joy_moment.yaml",
+  "kw": [
+   "突然孤独",
+   "一人吃饭",
+   "自言自语",
+   "没人陪",
+   "哎呀"
+  ],
+  "ut": [
+   "突然孤独",
+   "一人吃饭",
+   "自言自语"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "101_seek_company",
+   "820_self_talk_mumble",
+   "825_subway_commute",
+   "014_want_company",
+   "094_seek_comfort",
+   "044_silly_self_talk"
+  ]
+ },
+ {
+  "i": 134,
+  "name": "ar_pretend_calm_006",
+  "file": "200_anti_routine.yaml",
+  "kw": [
+   "装淡定",
+   "假装平静",
+   "强装冷静",
+   "装没事",
+   "强颜欢笑"
+  ],
+  "ut": [
+   "装淡定",
+   "假装平静",
+   "装没事"
+  ],
+  "intent": "playful",
+  "sib": [
+   "269_blush_dodge",
+   "YY5_birthday_alone",
+   "330_hehe_laugh_emoji",
+   "284_suddenly_cold",
+   "359_cry_wuwu_sob",
+   "109_feigned_cold"
+  ]
+ },
+ {
+  "i": 135,
+  "name": "fc_spicy_002",
+  "file": "207_food_craving.yaml",
+  "kw": [
+   "想吃辣",
+   "火锅",
+   "麻辣",
+   "辣条",
+   "重庆辣"
+  ],
+  "ut": [
+   "想吃辣",
+   "火锅",
+   "麻辣"
+  ],
+  "intent": "playful",
+  "sib": [
+   "504_snacks_craving",
+   "065_night_moon_stars",
+   "504_snacks_craving",
+   "615_midnight_snack_crave",
+   "207_food_craving",
+   "96_food_cook"
+  ]
+ },
+ {
+  "i": 136,
+  "name": "mwu_alarm_001",
+  "file": "074_morning_wake_up.yaml",
+  "kw": [
+   "闹钟",
+   "关掉闹钟",
+   "闹钟响了",
+   "烦死闹钟",
+   "闹钟没响"
+  ],
+  "ut": [
+   "闹钟响了",
+   "好烦闹钟",
+   "差点没听到闹钟"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "285_zaoan_morning_greeting",
+   "247_morning_grumpy",
+   "120_morning_wakeup",
+   "318_morning_wake_grumpy",
+   "252_morning_wakeup",
+   "186_early_morning"
+  ]
+ },
+ {
+  "i": 137,
+  "name": "is_wifi_001",
+  "file": "PPP9_internet_slow.yaml",
+  "kw": [
+   "wifi 信号差",
+   "信号差",
+   "wifi 弱",
+   "满格不能用",
+   "wifi 不给力"
+  ],
+  "ut": [
+   "WiFi 信号差",
+   "信号好弱",
+   "满格 WiFi 不能用"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "222_are_you_there",
+   "672_voice_call_chat",
+   "509_phone_screen",
+   "542_full_moon_night",
+   "631_wifi_disconnect_rage",
+   "837_pretend_busy"
+  ]
+ },
+ {
+  "i": 138,
+  "name": "of_dunno_say_001",
+  "file": "EE8_online_friends.yaml",
+  "kw": [
+   "不知道说啥",
+   "没话题",
+   "聊不下去",
+   "词穷",
+   "大脑空白"
+  ],
+  "ut": [
+   "不知道说啥了",
+   "跟网友没话题",
+   "聊着聊着词穷"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "880_first_message_shy",
+   "Y7_first_date_anxiety",
+   "321_midnight_chat",
+   "150_random_chatter",
+   "941_chatroom_silence",
+   "197_night_chat"
+  ]
+ },
+ {
+  "i": 139,
+  "name": "cls_haveeat_001",
+  "file": "487_care_lifestyle.yaml",
+  "kw": [
+   "好好吃饭",
+   "别不吃",
+   "三餐",
+   "不吃饭",
+   "没胃口"
+  ],
+  "ut": [
+   "好好吃饭",
+   "别不吃饭",
+   "三餐要吃"
+  ],
+  "intent": "question",
+  "sib": [
+   "006_ate_lunch_yet",
+   "CCC6_pet_sick",
+   "239_life_care",
+   "190_care_drinking",
+   "WWW6_pet_emergency",
+   "468_eat_well_care"
+  ]
+ },
+ {
+  "i": 140,
+  "name": "id_restart_modem_001",
+  "file": "KK8_internet_down.yaml",
+  "kw": [
+   "重启 modem",
+   "重启路由",
+   "重启光猫",
+   "拔电源",
+   "关了再开"
+  ],
+  "ut": [
+   "重启光猫了",
+   "拔电源大法",
+   "关了再开"
+  ],
+  "intent": "playful",
+  "sib": [
+   "574_wifi_died_chat",
+   "574_wifi_died_chat",
+   "928_wifi_dead_panic",
+   "PPP9_internet_slow",
+   "574_wifi_died_chat",
+   "593_wifi_disconnect_rage"
+  ]
+ },
+ {
+  "i": 141,
+  "name": "ni_feel_isolated_001",
+  "file": "YY7_no_invite.yaml",
+  "kw": [
+   "感觉孤立",
+   "被孤立",
+   "没人理",
+   "晾着",
+   "冷落"
+  ],
+  "ut": [
+   "感觉被孤立了",
+   "没人理我",
+   "{user_addr}被晾着"
+  ],
+  "intent": "感觉被孤立",
+  "sib": [
+   "179_random_chat",
+   "942_missed_message",
+   "YY7_no_invite",
+   "118_random_grievance",
+   "CC7_office_politics",
+   "455_are_you_there_check"
+  ]
+ },
+ {
+  "i": 142,
+  "name": "cc2_cc2_xianjian_004",
+  "file": "251_cat_chitchat.yaml",
+  "kw": [
+   "闲了",
+   "无聊",
+   "闲着",
+   "空着",
+   "闲不住"
+  ],
+  "ut": [
+   "闲了",
+   "无聊",
+   "闲着"
+  ],
+  "intent": "playful",
+  "sib": [
+   "081_what_doing_now",
+   "008_busy_or_free",
+   "039_bored_killing_time",
+   "716_what_time_check",
+   "142_micro_emotion",
+   "10_status"
+  ]
+ },
+ {
+  "i": 143,
+  "name": "nm_moonlight_001",
+  "file": "GG5_no_money.yaml",
+  "kw": [
+   "月光族",
+   "月光",
+   "我是月光族",
+   "又月光",
+   "月光仔"
+  ],
+  "ut": [
+   "{user_addr}我是月光族",
+   "{user_addr}又月光了",
+   "{user_addr}月光仔本仔"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "DD6_collection_obsession",
+   "065_night_moon_stars",
+   "036_moon_pretty",
+   "445_insomnia_thinking",
+   "992_weekly_paycheck_joy",
+   "194_tease_owner"
+  ]
+ },
+ {
+  "i": 144,
+  "name": "at_at_zhuangxiaobai_008",
+  "file": "243_anti_trope.yaml",
+  "kw": [
+   "装萌",
+   "装可爱",
+   "卖萌",
+   "装小",
+   "萌"
+  ],
+  "ut": [
+   "装萌",
+   "装可爱",
+   "卖萌"
+  ],
+  "intent": "playful",
+  "sib": [
+   "531_hum_pout_face",
+   "013_beg_for_praise",
+   "193_roll_in_floor",
+   "124_acting_clingy",
+   "413_pretend_blind",
+   "460_spoiled_clingy"
+  ]
+ },
+ {
+  "i": 145,
+  "name": "jp_caibukan_001",
+  "file": "126_jealous_pout.yaml",
+  "kw": [
+   "看不见笨猫",
+   "装看不见",
+   "假装没看到",
+   "没看到",
+   "视而不见"
+  ],
+  "ut": [
+   "装看不见笨猫",
+   "假装没看到",
+   "视而不见"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "243_anti_trope",
+   "069_anti_routine_cold",
+   "024_blush_avoid",
+   "159_jealousy_pouting",
+   "176_anti_routine",
+   "295_chicu_jealous"
+  ]
+ },
+ {
+  "i": 146,
+  "name": "jb_want_leave_001",
+  "file": "CC8_job_burnout.yaml",
+  "kw": [
+   "想请假",
+   "请个假",
+   "想休息",
+   "请假心情",
+   "想翘班"
+  ],
+  "ut": [
+   "真的想请假",
+   "想请个假",
+   "想休息一下"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "730_after_work_tired",
+   "OO7_post_vacation_blues",
+   "V8_want_vacation",
+   "MMM8_burnout_founder",
+   "467_rest_well_care",
+   "078_afternoon_tea_time"
+  ]
+ },
+ {
+  "i": 147,
+  "name": "ent_genshin_001",
+  "file": "88_entertainment.yaml",
+  "kw": [
+   "原神",
+   "抽卡",
+   "米哈游",
+   "提瓦特",
+   "五星"
+  ],
+  "ut": [
+   "原神抽到了",
+   "原神更新",
+   "米哈游又割"
+  ],
+  "intent": "question",
+  "sib": [
+   "169_game_session",
+   "138_game_vibes",
+   "658_game_gacha_chat",
+   "201_gacha_game",
+   "643_gacha_pull_dream",
+   "546_gacha_pull_luck"
+  ]
+ },
+ {
+  "i": 148,
+  "name": "rf_blush_010",
+  "file": "192_reverse_flirt.yaml",
+  "kw": [
+   "脸红",
+   "红了",
+   "脸热了",
+   "哎呀",
+   "不好意思"
+  ],
+  "ut": [
+   "脸红了",
+   "红了",
+   "脸热"
+  ],
+  "intent": "playful",
+  "sib": [
+   "024_blush_avoid",
+   "399_blush_dodge",
+   "677_ambiguous_flirt_chat",
+   "304_fanliao_flirt_back",
+   "474_blush_dodge_anti_flirt",
+   "365_kiss_tease_blush"
+  ]
+ },
+ {
+  "i": 149,
+  "name": "fbb_blush_001",
+  "file": "533_flirt_back_blush.yaml",
+  "kw": [
+   "脸红",
+   "脸热",
+   "脸烫",
+   "红到耳根",
+   "害羞"
+  ],
+  "ut": [
+   "脸红了",
+   "脸烫",
+   "红到耳根"
+  ],
+  "intent": "playful",
+  "sib": [
+   "024_blush_avoid",
+   "399_blush_dodge",
+   "677_ambiguous_flirt_chat",
+   "304_fanliao_flirt_back",
+   "474_blush_dodge_anti_flirt",
+   "365_kiss_tease_blush"
+  ]
+ },
+ {
+  "i": 150,
+  "name": "rbl_happy_everyday_003",
+  "file": "846_random_blessing.yaml",
+  "kw": [
+   "天天开心",
+   "每天快乐",
+   "笑口常开",
+   "心情好",
+   "永远开心"
+  ],
+  "ut": [
+   "{user_addr}天天开心",
+   "每天快乐",
+   "笑口常开"
+  ],
+  "intent": "playful",
+  "sib": [
+   "502_micro_emotion",
+   "164_mood_swings",
+   "431_emoji_haha",
+   "275_praised_today",
+   "019_hehe_giggle",
+   "483_morning_wakeup"
+  ]
+ },
+ {
+  "i": 151,
+  "name": "pim_diet_001",
+  "file": "973_pimple_panic.yaml",
+  "kw": [
+   "吃辣长痘",
+   "吃甜长痘",
+   "高糖",
+   "油炸",
+   "牛奶痘"
+  ],
+  "ut": [
+   "吃辣长痘",
+   "{user_addr}吃甜痘",
+   "高糖"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "567_crisp_snack_attack",
+   "567_crisp_snack_attack",
+   "567_crisp_snack_attack",
+   "567_crisp_snack_attack",
+   "965_fried_chicken_lust",
+   "437_owner_got_fat"
+  ]
+ },
+ {
+  "i": 152,
+  "name": "dc_movie_010",
+  "file": "211_drama_chat.yaml",
+  "kw": [
+   "看电影",
+   "院线",
+   "大片",
+   "票房",
+   "影院"
+  ],
+  "ut": [
+   "看电影",
+   "院线",
+   "大片"
+  ],
+  "intent": "playful",
+  "sib": [
+   "511_weekend_plan",
+   "180_weekend_plan",
+   "298_peiwan_company",
+   "568_popcorn_movie_night",
+   "568_popcorn_movie_night",
+   "568_popcorn_movie_night"
+  ]
+ },
+ {
+  "i": 153,
+  "name": "ct_huilai_001",
+  "file": "062_commute_traffic_tired.yaml",
+  "kw": [
+   "到家",
+   "回来了",
+   "进门",
+   "到了",
+   "终于"
+  ],
+  "ut": [
+   "到家",
+   "回来了",
+   "进门"
+  ],
+  "intent": "playful",
+  "sib": [
+   "377_owner_home_excite",
+   "238_street_encounter",
+   "354_evening_dinner_chat",
+   "281_shovel_return",
+   "135_cat_daily",
+   "108_shoveler_return"
+  ]
+ },
+ {
+  "i": 154,
+  "name": "mun_shave_004",
+  "file": "479_master_unshaven.yaml",
+  "kw": [
+   "扎人",
+   "扎到了",
+   "蹭到了",
+   "蹭脸",
+   "摸到胡渣"
+  ],
+  "ut": [
+   "{user_addr}扎人",
+   "{user_addr}扎到了",
+   "{user_addr}蹭到了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "490_beg_cuddle",
+   "193_roll_in_floor",
+   "363_head_pat_beg",
+   "490_beg_cuddle",
+   "436_ask_for_headpat",
+   "104_head_pat_beg"
+  ]
+ },
+ {
+  "i": 155,
+  "name": "as_snooze_001",
+  "file": "703_alarm_snooze_again.yaml",
+  "kw": [
+   "再睡五分钟",
+   "闹钟按掉",
+   "snooze",
+   "再睡会",
+   "关闹钟"
+  ],
+  "ut": [
+   "{user_addr}再睡五分钟",
+   "闹钟按掉",
+   "{user_addr}再睡会"
+  ],
+  "intent": "playful",
+  "sib": [
+   "655_morning_grumble_chat",
+   "551_alarm_snooze_chat",
+   "351_morning_first_word",
+   "318_morning_wake_grumpy",
+   "315_morning_alarm",
+   "356_just_wake_groggy"
+  ]
+ },
+ {
+  "i": 156,
+  "name": "festival_chinese_new_year_001",
+  "file": "85_weather_season.yaml",
+  "kw": [
+   "春节",
+   "过年",
+   "新年",
+   "拜年",
+   "大年初一"
+  ],
+  "ut": [
+   "春节快乐",
+   "新年快乐",
+   "拜年啦"
+  ],
+  "intent": "greeting",
+  "sib": [
+   "231_festival_moments",
+   "735_festival_qixi_moment",
+   "199_festival_moment",
+   "A6_festival_tradition",
+   "175_festival_moment",
+   "068_festival_birthday"
+  ]
+ },
+ {
+  "i": 157,
+  "name": "yn_xiawu_001",
+  "file": "781_yawn_sleepy_chat.yaml",
+  "kw": [
+   "下午困",
+   "午后犯困",
+   "饭后困",
+   "三点困",
+   "下午眯"
+  ],
+  "ut": [
+   "下午困",
+   "午后犯困",
+   "饭后困"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "003_noon_lunch_break",
+   "420_afternoon_drowsy",
+   "948_yawn_sleepy_drop",
+   "003_noon_lunch_break",
+   "254_lunch_break",
+   "221_noon_break"
+  ]
+ },
+ {
+  "i": 158,
+  "name": "ay_waimai_001",
+  "file": "257_ate_yet.yaml",
+  "kw": [
+   "外卖慢",
+   "外卖到了",
+   "外卖",
+   "等外卖",
+   "点外卖"
+  ],
+  "ut": [
+   "外卖好慢",
+   "外卖到了",
+   "在等外卖"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "112_takeout_slow",
+   "345_takeout_slow_anger",
+   "032_takeout_slow",
+   "317_takeout_slow",
+   "123_eat_check_in",
+   "246_takeout_chat"
+  ]
+ },
+ {
+  "i": 159,
+  "name": "fw_pimple_004",
+  "file": "707_face_wash_cold.yaml",
+  "kw": [
+   "长痘了",
+   "痘痘",
+   "闭口",
+   "粉刺",
+   "痘痘冒"
+  ],
+  "ut": [
+   "{user_addr}长痘",
+   "痘痘",
+   "{user_addr}闭口"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "438_owner_no_shave",
+   "973_pimple_panic",
+   "619_skincare_routine",
+   "B2_beauty_skincare",
+   "971_mirror_check_self",
+   "545_cold_shoulder_act"
+  ]
+ },
+ {
+  "i": 160,
+  "name": "bbt_pck_001",
+  "file": "876_bubble_tea_pick.yaml",
+  "kw": [
+   "喝奶茶",
+   "点奶茶",
+   "珍珠奶茶",
+   "喜茶",
+   "茶颜悦色"
+  ],
+  "ut": [
+   "喝奶茶",
+   "点奶茶",
+   "珍珠"
+  ],
+  "intent": "playful",
+  "sib": [
+   "257_ate_yet",
+   "015_drink_water_remind",
+   "181_tea_milk_chat",
+   "181_tea_milk_chat",
+   "386_noon_break",
+   "96_food_cook"
+  ]
+ },
+ {
+  "i": 161,
+  "name": "nb_wu_jiucan_008",
+  "file": "221_noon_break.yaml",
+  "kw": [
+   "和谁吃",
+   "一起吃",
+   "拼饭",
+   "拼桌",
+   "约饭"
+  ],
+  "ut": [
+   "一起吃",
+   "和谁吃",
+   "约饭"
+  ],
+  "intent": "playful",
+  "sib": [
+   "018_eat_properly",
+   "298_peiwan_company",
+   "291_ate_yet_question",
+   "257_ate_yet",
+   "281_shovel_return",
+   "006_ate_lunch_yet"
+  ]
+ },
+ {
+  "i": 162,
+  "name": "sow_clock_watch_001",
+  "file": "548_slack_off_work.yaml",
+  "kw": [
+   "看时间",
+   "离下班",
+   "时间慢",
+   "等下班",
+   "几点了"
+  ],
+  "ut": [
+   "看时间",
+   "离下班",
+   "时间慢"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "153_morning_wakeup",
+   "253_late_night_chat",
+   "821_tired_overtime",
+   "075_night_sleep_chat",
+   "221_noon_break",
+   "739_office_slacking_check"
+  ]
+ },
+ {
+  "i": 163,
+  "name": "chf_topic_001",
+  "file": "514_chat_filler.yaml",
+  "kw": [
+   "聊啥",
+   "没话题",
+   "找话题",
+   "想不到聊啥",
+   "话题"
+  ],
+  "ut": [
+   "聊啥呢",
+   "没话题",
+   "找话题"
+  ],
+  "intent": "question",
+  "sib": [
+   "Y7_first_date_anxiety",
+   "321_midnight_chat",
+   "179_random_chat",
+   "150_random_chatter",
+   "941_chatroom_silence",
+   "197_night_chat"
+  ]
+ },
+ {
+  "i": 164,
+  "name": "msg_skewer_001",
+  "file": "968_midnight_snack_guilt.yaml",
+  "kw": [
+   "烧烤",
+   "撸串",
+   "烤肉",
+   "烤串",
+   "串串"
+  ],
+  "ut": [
+   "烧烤",
+   "撸串",
+   "{user_addr}烤肉"
+  ],
+  "intent": "playful",
+  "sib": [
+   "207_food_craving",
+   "562_midnight_snack_crave",
+   "187_late_night",
+   "065_night_moon_stars",
+   "562_midnight_snack_crave",
+   "562_midnight_snack_crave"
+  ]
+ },
+ {
+  "i": 165,
+  "name": "jpt_pout_silence_001",
+  "file": "093_jealous_pout.yaml",
+  "kw": [
+   "不理你了",
+   "拉黑",
+   "我生气了",
+   "不说话了",
+   "沉默吃醋"
+  ],
+  "ut": [
+   "不理你了",
+   "{user_addr}我生气",
+   "拉黑"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "WW6_sport_drama",
+   "941_chatroom_silence",
+   "QQ5_food_disappoint",
+   "325_jealous_pout",
+   "159_jealousy_pouting",
+   "MM8_friend_betrayed"
+  ]
+ },
+ {
+  "i": 166,
+  "name": "nt_nt_xingxing_002",
+  "file": "242_night_topic.yaml",
+  "kw": [
+   "星星",
+   "星空",
+   "星座",
+   "流星",
+   "星河"
+  ],
+  "ut": [
+   "星星好亮",
+   "星空",
+   "星座"
+  ],
+  "intent": "playful",
+  "sib": [
+   "065_night_moon_stars",
+   "286_wanan_night_greeting",
+   "036_moon_pretty",
+   "408_moon_round",
+   "076_late_night_call",
+   "227_sleep_buddy_chat"
+  ]
+ },
+ {
+  "i": 167,
+  "name": "th_shandian_001",
+  "file": "892_thunder_scared.yaml",
+  "kw": [
+   "闪电",
+   "一道光",
+   "亮一下",
+   "闪电频繁",
+   "雷电交加"
+  ],
+  "ut": [
+   "闪电",
+   "{user_addr}亮一下",
+   "雷电交加"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "206_weather_chat",
+   "651_weather_rain_chat",
+   "222_are_you_there",
+   "682_window_weather_chat",
+   "589_rainy_window_mood",
+   "916_rainy_day_mood"
+  ]
+ },
+ {
+  "i": 168,
+  "name": "am_tingbuxialai_001",
+  "file": "GGG7_anime_marathon.yaml",
+  "kw": [
+   "停不下来",
+   "根本停不下",
+   "一集接一集",
+   "自动播放下一集",
+   "刹不住车"
+  ],
+  "ut": [
+   "番剧停不下来",
+   "一集接一集根本停不下",
+   "自动播放停不下来"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "627_hiccup_attack",
+   "947_hiccup_giggle",
+   "737_gacha_pull_luck",
+   "272_laugh_die",
+   "019_hehe_giggle",
+   "913_snack_share_chat"
+  ]
+ },
+ {
+  "i": 169,
+  "name": "wf_yugan_003",
+  "file": "447_want_fish_jerky.yaml",
+  "kw": [
+   "鱼没了",
+   "没鱼吃",
+   "鱼罐空了",
+   "没零食",
+   "鱼吃完"
+  ],
+  "ut": [
+   "鱼没了",
+   "没鱼吃",
+   "鱼罐空了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "561_fridge_raid_late",
+   "561_fridge_raid_late",
+   "561_fridge_raid_late",
+   "561_fridge_raid_late",
+   "561_fridge_raid_late",
+   "561_fridge_raid_late"
+  ]
+ },
+ {
+  "i": 170,
+  "name": "wwr_xiezimao_001",
+  "file": "724_wear_warm_remind.yaml",
+  "kw": [
+   "鞋子",
+   "帽子",
+   "围巾",
+   "手套",
+   "配饰"
+  ],
+  "ut": [
+   "{user_addr}鞋子",
+   "帽子",
+   "围巾"
+  ],
+  "intent": "question",
+  "sib": [
+   "368_wear_warm_remind",
+   "527_dress_warm_care",
+   "016_wear_warm_remind",
+   "430_dress_warm_remind",
+   "368_wear_warm_remind",
+   "259_wear_warm"
+  ]
+ },
+ {
+  "i": 171,
+  "name": "wd_xiuxi_001",
+  "file": "256_what_doing.yaml",
+  "kw": [
+   "在休息",
+   "躺着",
+   "发呆",
+   "躺平",
+   "摆烂"
+  ],
+  "ut": [
+   "在休息",
+   "躺着呢",
+   "发呆中"
+  ],
+  "intent": "playful",
+  "sib": [
+   "005_what_doing_now",
+   "039_bored_killing_time",
+   "081_what_doing_now",
+   "081_what_doing_now",
+   "173_rest_concern",
+   "290_what_doing_now"
+  ]
+ },
+ {
+  "i": 172,
+  "name": "sl_shimian_006",
+  "file": "406_sleep_lost.yaml",
+  "kw": [
+   "睡到一半醒",
+   "半夜醒",
+   "凌晨醒",
+   "醒了睡不回",
+   "睡眠中断"
+  ],
+  "ut": [
+   "睡到一半醒",
+   "半夜醒",
+   "凌晨醒了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "S7_insomnia_late",
+   "292_slept_yet_ask",
+   "584_cant_fall_asleep",
+   "BB6_sleep_training",
+   "521_sleep_yet_check",
+   "508_sleep_struggle"
+  ]
+ },
+ {
+  "i": 173,
+  "name": "cc_cengceng_001",
+  "file": "T1_clingy_cuddle.yaml",
+  "kw": [
+   "蹭蹭",
+   "求蹭蹭",
+   "来蹭蹭",
+   "想蹭一下",
+   "蹭你"
+  ],
+  "ut": [
+   "蹭蹭",
+   "来蹭蹭",
+   "想蹭你一下"
+  ],
+  "intent": "playful",
+  "sib": [
+   "425_pouty_sulking",
+   "009_sulky_pouting",
+   "193_roll_in_floor",
+   "363_head_pat_beg",
+   "490_beg_cuddle",
+   "411_shovel_back"
+  ]
+ },
+ {
+  "i": 174,
+  "name": "nc_anxiety_001",
+  "file": "127_need_comfort.yaml",
+  "kw": [
+   "焦虑",
+   "紧张",
+   "心慌",
+   "不安",
+   "担心"
+  ],
+  "ut": [
+   "好焦虑",
+   "紧张到不行",
+   "心慌"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "352_late_night_call",
+   "755_pillow_talk_late",
+   "012_need_comfort_hug",
+   "205_micro_mood",
+   "094_seek_comfort",
+   "164_mood_swings"
+  ]
+ },
+ {
+  "i": 175,
+  "name": "tr_dakehe_001",
+  "file": "260_take_rest.yaml",
+  "kw": [
+   "打哈欠",
+   "困意来袭",
+   "困得不行",
+   "哈欠连天",
+   "想趴下"
+  ],
+  "ut": [
+   "打哈欠",
+   "困意来袭",
+   "困得不行"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "483_morning_wakeup",
+   "734_neko_fish_snack",
+   "681_morning_stretch",
+   "699_yawn_contagious",
+   "628_yawn_contagious",
+   "516_good_morning_drowsy"
+  ]
+ },
+ {
+  "i": 176,
+  "name": "tn_dianan_003",
+  "file": "310_tease_no_shave.yaml",
+  "kw": [
+   "邋遢",
+   "不修边幅",
+   "不整洁",
+   "邋里邋遢",
+   "不讲究"
+  ],
+  "ut": [
+   "邋遢",
+   "不修边幅",
+   "不整洁"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "058_tease_master_outfit",
+   "028_outfit_fail",
+   "438_owner_no_shave",
+   "491_tease_master",
+   "194_tease_owner",
+   "131_tease_owner"
+  ]
+ },
+ {
+  "i": 177,
+  "name": "sp_chengji_001",
+  "file": "047_emotion_seek_praise.yaml",
+  "kw": [
+   "考了",
+   "成绩",
+   "考好了",
+   "高分",
+   "满分"
+  ],
+  "ut": [
+   "考了高分",
+   "{user_addr}成绩好",
+   "考好了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "917_random_meme_laugh",
+   "100_seek_praise",
+   "499_study_cram",
+   "722_seek_compliment",
+   "NUM_095_101",
+   "314_juejuezi_meme"
+  ]
+ },
+ {
+  "i": 178,
+  "name": "nbc_zhongwumianqiang_001",
+  "file": "353_noon_break_chat.yaml",
+  "kw": [
+   "硬撑",
+   "困但不能睡",
+   "眼皮跳",
+   "喝了咖啡也困",
+   "撑不住"
+  ],
+  "ut": [
+   "困但不能睡",
+   "硬撑中",
+   "喝咖啡也困"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "243_anti_trope",
+   "021_wuwu_crying",
+   "550_five_more_minutes",
+   "550_five_more_minutes",
+   "075_night_sleep_chat",
+   "550_five_more_minutes"
+  ]
+ },
+ {
+  "i": 179,
+  "name": "bw_xudan_001",
+  "file": "805_broke_wallet_empty.yaml",
+  "kw": [
+   "外卖太贵",
+   "不点外卖",
+   "自己做饭",
+   "在家煮",
+   "省下外卖钱"
+  ],
+  "ut": [
+   "外卖太贵",
+   "不点外卖",
+   "自己做饭"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "ZZ8_takeout_addiction",
+   "345_takeout_slow_anger",
+   "161_meal_check_in",
+   "329_eat_well_check",
+   "748_brunch_dilemma",
+   "718_meal_check_dinner"
+  ]
+ },
+ {
+  "i": 180,
+  "name": "hms_buchengren_008",
+  "file": "022_hmph_sulk.yaml",
+  "kw": [
+   "不承认",
+   "死不承认",
+   "嘴硬",
+   "不认账",
+   "不愿意承认"
+  ],
+  "ut": [
+   "不承认",
+   "死不承认",
+   "嘴硬到底"
+  ],
+  "intent": "playful",
+  "sib": [
+   "243_anti_trope",
+   "262_jealous_vinegar",
+   "284_suddenly_cold",
+   "137_anti_routine",
+   "545_cold_shoulder_act",
+   "736_anti_trope_cold"
+  ]
+ },
+ {
+  "i": 181,
+  "name": "src_dryshoes_011",
+  "file": "622_sudden_rain_caught.yaml",
+  "kw": [
+   "鞋湿了",
+   "烘鞋器",
+   "报纸塞鞋",
+   "鞋子烘干",
+   "鞋怎么干"
+  ],
+  "ut": [
+   "鞋湿透了",
+   "烘鞋器",
+   "报纸塞鞋"
+  ],
+  "intent": "question",
+  "sib": [
+   "863_rainboots_puddle",
+   "492_traffic_commute",
+   "651_weather_rain_chat",
+   "890_rainy_day_mood",
+   "785_rainy_day_mood",
+   "368_wear_warm_remind"
+  ]
+ },
+ {
+  "i": 182,
+  "name": "te_666_004",
+  "file": "191_text_emoji.yaml",
+  "kw": [
+   "666",
+   "6666",
+   "牛批",
+   "牛逼",
+   "真牛"
+  ],
+  "ut": [
+   "666",
+   "6666",
+   "牛逼"
+  ],
+  "intent": "playful",
+  "sib": [
+   "052_emoji_heihei_laugh",
+   "666_devil_lucky_chat",
+   "129_emoji_text",
+   "250_number_meme",
+   "660_smile_til_cry_chat",
+   "229_emoji_react"
+  ]
+ },
+ {
+  "i": 183,
+  "name": "lld_awsl_006",
+  "file": "029_lol_dying.yaml",
+  "kw": [
+   "awsl",
+   "啊我死了",
+   "啊我哭了",
+   "萌死",
+   "可爱死"
+  ],
+  "ut": [
+   "awsl",
+   "啊我死了",
+   "啊我哭了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "158_emoji_reactions",
+   "403_awsl_burst",
+   "358_random_emoji_spam",
+   "191_text_emoji",
+   "129_emoji_text",
+   "052_emoji_heihei_laugh"
+  ]
+ },
+ {
+  "i": 184,
+  "name": "exc_lost_001",
+  "file": "LL9_existential_crisis.yaml",
+  "kw": [
+   "迷茫",
+   "好迷茫",
+   "我迷茫了",
+   "一片迷茫",
+   "心里迷茫"
+  ],
+  "ut": [
+   "我好迷茫",
+   "现在很迷茫",
+   "一片迷茫"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "427_need_comfort",
+   "506_comfort_request",
+   "524_need_comfort_hug",
+   "094_seek_comfort",
+   "PP7_unclear_goal",
+   "462_want_comfort"
+  ]
+ },
+ {
+  "i": 185,
+  "name": "bct_bus_long_001",
+  "file": "111_bus_commute_tired.yaml",
+  "kw": [
+   "公交慢",
+   "公交久",
+   "等公交",
+   "公交不来",
+   "公交晚"
+  ],
+  "ut": [
+   "公交慢",
+   "{user_addr}公交久",
+   "等公交"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "539_commute_tired",
+   "344_commute_traffic_tired",
+   "860_bus_stop_wait",
+   "50_complaint",
+   "492_traffic_commute"
+  ]
+ },
+ {
+  "i": 186,
+  "name": "nc2_lateawake_001",
+  "file": "134_night_chitchat.yaml",
+  "kw": [
+   "睡不着想事",
+   "失眠胡思",
+   "凌晨想事",
+   "半夜想",
+   "想很多"
+  ],
+  "ut": [
+   "睡不着想事",
+   "凌晨胡思乱想",
+   "半夜想很多"
+  ],
+  "intent": "playful",
+  "sib": [
+   "352_late_night_call",
+   "187_late_night",
+   "406_sleep_lost",
+   "276_insomnia_thinking",
+   "445_insomnia_thinking",
+   "228_insomnia_chat"
+  ]
+ },
+ {
+  "i": 187,
+  "name": "num_520_001",
+  "file": "NUM_515_524.yaml",
+  "kw": [
+   "520",
+   "我爱你",
+   "520节",
+   "5月20",
+   "520块"
+  ],
+  "ut": [
+   "{user_addr}520",
+   "520节快乐",
+   "{user_addr}520块"
+  ],
+  "intent": "playful",
+  "sib": [
+   "230_counter_flirt",
+   "20_compliment",
+   "283_tanabata_day",
+   "023_reverse_flirt",
+   "268_tease_owner",
+   "A6_festival_tradition"
+  ]
+ },
+ {
+  "i": 188,
+  "name": "jp_hmph_001",
+  "file": "U0_jealous_petty.yaml",
+  "kw": [
+   "哼",
+   "哼哼",
+   "哼!",
+   "哼唧",
+   "哼一声"
+  ],
+  "ut": [
+   "哼",
+   "哼哼",
+   "哼!"
+  ],
+  "intent": "playful",
+  "sib": [
+   "262_jealous_vinegar",
+   "158_emoji_reactions",
+   "303_heihei_yingying",
+   "333_hng_pout_tsundere",
+   "358_random_emoji_spam",
+   "U0_jealous_petty"
+  ]
+ },
+ {
+  "i": 189,
+  "name": "urc_umbrella_007",
+  "file": "576_umbrella_rain_chat.yaml",
+  "kw": [
+   "没带伞",
+   "淋成狗",
+   "跑回家",
+   "湿透",
+   "下雨"
+  ],
+  "ut": [
+   "没带伞跑回家",
+   "全身湿透",
+   "包里也湿了"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "576_umbrella_rain_chat",
+   "177_road_encounter",
+   "259_wear_warm",
+   "527_dress_warm_care",
+   "204_street_encounter",
+   "576_umbrella_rain_chat"
+  ]
+ },
+ {
+  "i": 190,
+  "name": "hcc_hiccup_003",
+  "file": "560_hiccup_chat.yaml",
+  "kw": [
+   "停不下",
+   "喝水",
+   "屏息",
+   "打嗝",
+   "嗝"
+  ],
+  "ut": [
+   "喝水也没用",
+   "屏住呼吸试试",
+   "猫猫嘲笑我"
+  ],
+  "intent": "playful",
+  "sib": [
+   "560_hiccup_chat",
+   "228_insomnia_chat",
+   "660_smile_til_cry_chat",
+   "560_hiccup_chat",
+   "560_hiccup_chat",
+   "560_hiccup_chat"
+  ]
+ },
+ {
+  "i": 191,
+  "name": "bus_wait_004",
+  "file": "860_bus_stop_wait.yaml",
+  "kw": [
+   "雨天等车",
+   "风雪等车",
+   "冷的发抖",
+   "站台无遮挡",
+   "冻死"
+  ],
+  "ut": [
+   "冷的发抖",
+   "雨天等车",
+   "站台无遮挡"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "527_dress_warm_care",
+   "300_dress_warm_care",
+   "016_wear_warm_remind",
+   "172_warm_clothing",
+   "85_weather_season",
+   "953_cold_shiver"
+  ]
+ },
+ {
+  "i": 192,
+  "name": "ps_achievement_003",
+  "file": "326_praise_seeking.yaml",
+  "kw": [
+   "我做到了",
+   "完成了",
+   "我成功了",
+   "笨猫做完了",
+   "看我成果"
+  ],
+  "ut": [
+   "笨猫做到了",
+   "完成啦",
+   "我成功了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "463_want_compliment",
+   "100_seek_praise",
+   "047_emotion_seek_praise",
+   "147_excited_share",
+   "125_seeking_praise",
+   "297_kuajiang_praise_beg"
+  ]
+ },
+ {
+  "i": 193,
+  "name": "wkd_lazy_010",
+  "file": "750_weekend_lazy_morn.yaml",
+  "kw": [
+   "被窝舒服",
+   "暖呼呼",
+   "软软的",
+   "床是天堂",
+   "离不开床"
+  ],
+  "ut": [
+   "被窝太舒服",
+   "床暖呼呼",
+   "软软的"
+  ],
+  "intent": "playful",
+  "sib": [
+   "616_pillow_hug_sleep",
+   "814_morning_first_yawn",
+   "441_morning_grumpy",
+   "948_yawn_sleepy_drop",
+   "583_blanket_burrow_cozy",
+   "102_bedtime_warmth"
+  ]
+ },
+ {
+  "i": 194,
+  "name": "cj_birthday_001",
+  "file": "T5_celebration_joy.yaml",
+  "kw": [
+   "生日快乐",
+   "我生日",
+   "今天生日",
+   "过生日",
+   "生日到了"
+  ],
+  "ut": [
+   "今天我生日",
+   "笨猫生日快乐",
+   "我过生日啦"
+  ],
+  "intent": "playful",
+  "sib": [
+   "282_birthday_moment",
+   "231_festival_moments",
+   "772_birthday_wish_chat",
+   "068_festival_birthday",
+   "199_festival_moment",
+   "639_birthday_wish_sweet"
+  ]
+ },
+ {
+  "i": 195,
+  "name": "ms_miss_family_001",
+  "file": "T4_missing_someone.yaml",
+  "kw": [
+   "想家了",
+   "想爸妈",
+   "想家人",
+   "想回家",
+   "想我妈"
+  ],
+  "ut": [
+   "想家了",
+   "想爸妈",
+   "好想我妈"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "115_sudden_cry",
+   "FF6_homesick",
+   "YY6_holiday_lonely",
+   "FF5_culture_shock",
+   "470_wuwu_cry_emoji",
+   "OO5_travel_burnout"
+  ]
+ },
+ {
+  "i": 196,
+  "name": "fb_qixi_001",
+  "file": "068_festival_birthday.yaml",
+  "kw": [
+   "七夕",
+   "情人节",
+   "浪漫节",
+   "表白日",
+   "牛郎织女"
+  ],
+  "ut": [
+   "七夕",
+   "情人节",
+   "浪漫节"
+  ],
+  "intent": "playful",
+  "sib": [
+   "735_festival_qixi_moment",
+   "496_holiday_moment",
+   "283_tanabata_day",
+   "199_festival_moment",
+   "374_starry_sky_chat",
+   "671_anniversary_chat"
+  ]
+ },
+ {
+  "i": 197,
+  "name": "jwg_zaichui_001",
+  "file": "356_just_wake_groggy.yaml",
+  "kw": [
+   "再睡五分钟",
+   "再躺一会",
+   "不想起",
+   "缩被窝",
+   "假装没醒"
+  ],
+  "ut": [
+   "再睡五分钟",
+   "再躺一会",
+   "不想起"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "655_morning_grumble_chat",
+   "351_morning_first_word",
+   "318_morning_wake_grumpy",
+   "315_morning_alarm",
+   "074_morning_wake_up",
+   "120_morning_wakeup"
+  ]
+ },
+ {
+  "i": 198,
+  "name": "to_unshaved_001",
+  "file": "131_tease_owner.yaml",
+  "kw": [
+   "没刮胡子",
+   "胡子",
+   "胡渣",
+   "刮胡",
+   "邋遢"
+  ],
+  "ut": [
+   "没刮胡子",
+   "胡子乱",
+   "邋遢"
+  ],
+  "intent": "playful",
+  "sib": [
+   "058_tease_master_outfit",
+   "162_tease_master",
+   "438_owner_no_shave",
+   "491_tease_master",
+   "194_tease_owner",
+   "340_master_outfit_diss"
+  ]
+ },
+ {
+  "i": 199,
+  "name": "scp_gongzuo_001",
+  "file": "722_seek_compliment.yaml",
+  "kw": [
+   "项目搞定",
+   "任务完成",
+   "业绩好",
+   "评价高",
+   "老板夸"
+  ],
+  "ut": [
+   "项目搞定",
+   "任务完成",
+   "业绩好"
+  ],
+  "intent": "playful",
+  "sib": [
+   "494_redpacket_surprise",
+   "525_praise_seeking",
+   "416_small_happy",
+   "170_surprise_moment",
+   "275_praised_today",
+   "116_sudden_happy"
+  ]
+ },
+ {
+  "i": 200,
+  "name": "bwc_ch_007",
+  "file": "772_birthday_wish_chat.yaml",
+  "kw": [
+   "收到祝福",
+   "朋友圈晒",
+   "红包发了",
+   "满满祝福",
+   "暖暖"
+  ],
+  "ut": [
+   "收到祝福",
+   "朋友圈晒",
+   "红包来了"
+  ],
+  "intent": "playful",
+  "sib": [
+   "103_hug_request",
+   "346_redpacket_surprise",
+   "553_tea_time_sip",
+   "046_small_happy_moment",
+   "553_tea_time_sip",
+   "483_morning_wakeup"
+  ]
+ },
+ {
+  "i": 201,
+  "name": "btr_coffee_001",
+  "file": "961_bitter_medicine.yaml",
+  "kw": [
+   "黑咖啡苦",
+   "美式",
+   "浓缩",
+   "苦咖",
+   "苦咖啡"
+  ],
+  "ut": [
+   "黑咖苦",
+   "美式",
+   "{user_addr}浓缩"
+  ],
+  "intent": "playful",
+  "sib": [
+   "516_good_morning_drowsy",
+   "552_morning_coffee_first",
+   "552_morning_coffee_first",
+   "552_morning_coffee_first",
+   "186_early_morning",
+   "552_morning_coffee_first"
+  ]
+ },
+ {
+  "i": 202,
+  "name": "urc_umbrella_006",
+  "file": "576_umbrella_rain_chat.yaml",
+  "kw": [
+   "买伞",
+   "路边躲",
+   "等雨停",
+   "骑车冲",
+   "共享伞"
+  ],
+  "ut": [
+   "路边躲雨等雨停",
+   "{user_addr}买了把便利店伞",
+   "骑车冲回家"
+  ],
+  "intent": "playful",
+  "sib": [
+   "576_umbrella_rain_chat",
+   "576_umbrella_rain_chat",
+   "622_sudden_rain_caught",
+   "713_umbrella_forgot_again",
+   "849_umbrella_forgot",
+   "576_umbrella_rain_chat"
+  ]
+ },
+ {
+  "i": 203,
+  "name": "rps_winning_001",
+  "file": "540_red_packet_surprise.yaml",
+  "kw": [
+   "中奖了",
+   "抽奖中",
+   "抽中礼物",
+   "一等奖",
+   "中签"
+  ],
+  "ut": [
+   "中奖",
+   "抽奖中",
+   "中礼物"
+  ],
+  "intent": "playful",
+  "sib": [
+   "642_lucky_draw_win",
+   "662_random_happy_chat",
+   "540_red_packet_surprise",
+   "416_small_happy",
+   "116_sudden_happy",
+   "196_sudden_surprise"
+  ]
+ },
+ {
+  "i": 204,
+  "name": "amc_awsl_002",
+  "file": "473_awsl_meme_chat.yaml",
+  "kw": [
+   "破防了",
+   "破防",
+   "破大防",
+   "心防破了",
+   "破心防"
+  ],
+  "ut": [
+   "{user_addr}破防了",
+   "{user_addr}破防",
+   "{user_addr}破大防"
+  ],
+  "intent": "playful",
+  "sib": [
+   "361_wow_awsl_react",
+   "597_emoji_war_battle",
+   "342_bengbuzhule_meme",
+   "524_need_comfort_hug",
+   "70_internet_meme",
+   "403_awsl_burst"
+  ]
+ },
+ {
+  "i": 205,
+  "name": "bk_zuofan_001",
+  "file": "039_bored_killing_time.yaml",
+  "kw": [
+   "做饭",
+   "烘焙",
+   "厨艺",
+   "烤东西",
+   "做点心"
+  ],
+  "ut": [
+   "做饭",
+   "烘焙",
+   "厨艺"
+  ],
+  "intent": "playful",
+  "sib": [
+   "626_sweet_dessert_crave",
+   "743_weekend_lazy_idea",
+   "214_house_chores",
+   "919_weekend_plan_chat",
+   "949_stomach_growl",
+   "108_shoveler_return"
+  ]
+ },
+ {
+  "i": 206,
+  "name": "sbc_sneeze_011",
+  "file": "559_sneeze_burst_chat.yaml",
+  "kw": [
+   "打喷嚏",
+   "阿嚏",
+   "谁想我",
+   "连打",
+   "喷嚏怪"
+  ],
+  "ut": [
+   "阿嚏！{user_addr}是不是有人想我",
+   "连打三个喷嚏",
+   "猫猫吓一跳"
+  ],
+  "intent": "playful",
+  "sib": [
+   "621_weather_too_cold",
+   "674_pet_envy_chat",
+   "700_sneeze_double",
+   "559_sneeze_burst_chat",
+   "559_sneeze_burst_chat",
+   "610_sneeze_chain_attack"
+  ]
+ },
+ {
+  "i": 207,
+  "name": "war_jingxi_001",
+  "file": "361_wow_awsl_react.yaml",
+  "kw": [
+   "惊喜",
+   "出乎意料",
+   "没想到",
+   "太意外",
+   "没料到"
+  ],
+  "ut": [
+   "惊喜!",
+   "出乎意料",
+   "没想到"
+  ],
+  "intent": "playful",
+  "sib": [
+   "671_anniversary_chat",
+   "443_red_packet_surprise",
+   "211_drama_chat",
+   "780_litter_box_litter",
+   "063_surprise_redpacket",
+   "440_meme_bengbuzhu"
+  ]
+ },
+ {
+  "i": 208,
+  "name": "cm_americano_003",
+  "file": "691_coffee_morning_kick.yaml",
+  "kw": [
+   "美式",
+   "美式咖啡",
+   "黑咖啡",
+   "苦咖啡",
+   "浓美式"
+  ],
+  "ut": [
+   "{user_addr}点美式",
+   "黑咖啡苦",
+   "{user_addr}美式咖啡"
+  ],
+  "intent": "playful",
+  "sib": [
+   "516_good_morning_drowsy",
+   "552_morning_coffee_first",
+   "552_morning_coffee_first",
+   "552_morning_coffee_first",
+   "186_early_morning",
+   "552_morning_coffee_first"
+  ]
+ },
+ {
+  "i": 209,
+  "name": "mr_kuaixiazi_001",
+  "file": "884_misread_intent.yaml",
+  "kw": [
+   "上下文丢了",
+   "接不上",
+   "前面说啥",
+   "转折太快",
+   "跟不上"
+  ],
+  "ut": [
+   "前文呢",
+   "{user_addr}转折太快",
+   "跟不上节奏"
+  ],
+  "intent": "question",
+  "sib": [
+   "235_study_scene",
+   "JJJ9_travel_buddy",
+   "PP6_info_overload",
+   "BBB5_language_anxiety",
+   "NNN5_aging_parent",
+   "602_dance_alone_room"
+  ]
+ },
+ {
+  "i": 210,
+  "name": "sb_blush_001",
+  "file": "T0_shy_blushing.yaml",
+  "kw": [
+   "脸红了",
+   "脸红",
+   "我脸红",
+   "红了",
+   "脸好烫"
+  ],
+  "ut": [
+   "我脸红了",
+   "脸都红了",
+   "脸好烫"
+  ],
+  "intent": "playful",
+  "sib": [
+   "024_blush_avoid",
+   "163_flirting_back",
+   "399_blush_dodge",
+   "304_fanliao_flirt_back",
+   "398_reverse_tease",
+   "365_kiss_tease_blush"
+  ]
+ },
+ {
+  "i": 211,
+  "name": "res_haha_001",
+  "file": "358_random_emoji_spam.yaml",
+  "kw": [
+   "哈哈哈",
+   "hhhhh",
+   "笑死",
+   "笑出眼泪",
+   "笑喷"
+  ],
+  "ut": [
+   "哈哈哈",
+   "hhhhh",
+   "笑死"
+  ],
+  "intent": "playful",
+  "sib": [
+   "250_number_meme",
+   "402_laugh_dead",
+   "191_text_emoji",
+   "303_heihei_yingying",
+   "229_emoji_react",
+   "116_sudden_happy"
+  ]
+ },
+ {
+  "i": 212,
+  "name": "wc_clothes_001",
+  "file": "128_warmth_check.yaml",
+  "kw": [
+   "穿暖了吗",
+   "多穿点",
+   "冷不冷",
+   "加衣服",
+   "别冻"
+  ],
+  "ut": [
+   "穿暖了吗",
+   "加件衣服",
+   "{user_addr}冷不冷"
+  ],
+  "intent": "question",
+  "sib": [
+   "259_wear_warm",
+   "430_dress_warm_remind",
+   "724_wear_warm_remind",
+   "466_dress_warm_care",
+   "049_care_dress_warm",
+   "300_dress_warm_care"
+  ]
+ },
+ {
+  "i": 213,
+  "name": "myw_morning_news_012",
+  "file": "814_morning_first_yawn.yaml",
+  "kw": [
+   "看新闻",
+   "刷手机",
+   "早上动态",
+   "新鲜事",
+   "资讯"
+  ],
+  "ut": [
+   "{user_addr}早上看新闻吗",
+   "刷一下手机",
+   "看看动态"
+  ],
+  "intent": "playful",
+  "sib": [
+   "186_early_morning",
+   "256_what_doing",
+   "228_insomnia_chat",
+   "319_night_cant_sleep",
+   "005_what_doing_now",
+   "220_night_farewell"
+  ]
+ },
+ {
+  "i": 214,
+  "name": "mun_shave_001",
+  "file": "479_master_unshaven.yaml",
+  "kw": [
+   "没刮胡子",
+   "胡子长",
+   "胡渣",
+   "拉碴",
+   "胡须长"
+  ],
+  "ut": [
+   "{user_addr}没刮胡子",
+   "{user_addr}胡子长",
+   "{user_addr}胡渣"
+  ],
+  "intent": "playful",
+  "sib": [
+   "058_tease_master_outfit",
+   "162_tease_master",
+   "438_owner_no_shave",
+   "491_tease_master",
+   "194_tease_owner",
+   "131_tease_owner"
+  ]
+ },
+ {
+  "i": 215,
+  "name": "bla_haixiu_002",
+  "file": "024_blush_avoid.yaml",
+  "kw": [
+   "害羞了",
+   "害羞",
+   "不好意思",
+   "羞涩",
+   "含羞"
+  ],
+  "ut": [
+   "害羞啦",
+   "害羞了",
+   "不好意思"
+  ],
+  "intent": "playful",
+  "sib": [
+   "305_lianhong_blush_dodge",
+   "163_flirting_back",
+   "269_blush_dodge",
+   "304_fanliao_flirt_back",
+   "398_reverse_tease",
+   "365_kiss_tease_blush"
+  ]
+ },
+ {
+  "i": 216,
+  "name": "ss_won_lottery_004",
+  "file": "196_sudden_surprise.yaml",
+  "kw": [
+   "中奖了",
+   "抽到了",
+   "中彩票",
+   "大奖",
+   "锦鲤"
+  ],
+  "ut": [
+   "中奖了",
+   "抽到了",
+   "中彩票"
+  ],
+  "intent": "playful",
+  "sib": [
+   "494_redpacket_surprise",
+   "642_lucky_draw_win",
+   "662_random_happy_chat",
+   "416_small_happy",
+   "116_sudden_happy",
+   "170_surprise_moment"
+  ]
+ },
+ {
+  "i": 217,
+  "name": "ayt_late_eat_001",
+  "file": "520_ate_yet_meal.yaml",
+  "kw": [
+   "太晚吃",
+   "半夜吃",
+   "这么晚才吃",
+   "错过饭点",
+   "饭点过"
+  ],
+  "ut": [
+   "这么晚才吃",
+   "半夜吃饭",
+   "错过饭点"
+  ],
+  "intent": "complaint",
+  "sib": [
+   "302_eat_proper_care",
+   "187_late_night",
+   "350_fish_dry_crave",
+   "228_insomnia_chat",
+   "352_late_night_call",
+   "696_ramen_midnight"
+  ]
+ },
+ {
+  "i": 218,
+  "name": "ws_huashui_001",
+  "file": "140_work_slack.yaml",
+  "kw": [
+   "划水",
+   "摸鱼",
+   "上班摸鱼",
+   "工位划水",
+   "上班划水"
+  ],
+  "ut": [
+   "划水",
+   "摸鱼",
+   "上班摸鱼"
+  ],
+  "intent": "playful",
+  "sib": [
+   "236_work_slack",
+   "167_work_slack",
+   "073_work_slack_moyu",
+   "390_doing_what",
+   "203_work_slack",
+   "353_noon_break_chat"
+  ]
+ },
+ {
+  "i": 219,
+  "name": "to_hair_001",
+  "file": "131_tease_owner.yaml",
+  "kw": [
+   "头发乱",
+   "鸡窝头",
+   "油头",
+   "没洗头",
+   "发型"
+  ],
+  "ut": [
+   "头发乱",
+   "鸡窝头",
+   "油头"
+  ],
+  "intent": "playful",
+  "sib": [
+   "028_outfit_fail",
+   "001_morning_wakeup_chat",
+   "318_morning_wake_grumpy",
+   "310_tease_no_shave",
+   "058_tease_master_outfit",
+   "356_just_wake_groggy"
+  ]
+ }
+]

@@ -3,170 +3,271 @@
 
 - name: hw_resi_001
   intent: complaint
-  keywords: [热死, 太热, 40度, 高温, 烤焦]
+  keywords: [热死, 太热, 40度, 高温, 烤焦, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "热死了"
     - "{user_addr}40度"
     - "高温"
     - "烤焦"
     - "热到融化"
+    - "热死笑死"
+    - "{user_addr}笨猫陪我聊热死"
+    - "{user_addr}你也热死吗"
+    - "热死真的离谱"
+    - "{user_addr}热死咋整"
+    - "我想说热死"
   responses:
     - "(扇风) 嗷呜～{user_addr}笨猫给你扇! ฅฅ"
     - "哼～开空调救命"
     - "(尾巴扫) 别出门"
     - "猫猫毛都湿透了喵~"
+    - "(摇头) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～热死真的烦死人家了"
+    - "(趴下) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_kongtiao_001
   intent: question
-  keywords: [空调开几度, 调多冷, 空调病, 直吹, 出风口]
+  keywords: [空调开几度, 调多冷, 空调病, 直吹, 出风口, 开冷气, 开26度, 空调党, 真的]
   utterances:
     - "空调开26度"
     - "{user_addr}调多冷"
     - "空调病"
     - "直吹凉"
     - "出风口对着"
+    - "{user_addr}空调开几度咋整"
+    - "我想说空调开几度"
+    - "空调开几度笑死"
+    - "{user_addr}你也空调开几度吗"
+    - "空调开几度真的离谱"
+    - "{user_addr}笨猫陪我聊空调开几度"
   responses:
     - "(摇头) 嗷呜～{user_addr}26-27度最舒服 ฅฅ"
     - "哼～别直吹, 容易感冒"
     - "(尾巴搭) 笨猫坐你旁边"
     - "猫猫陪你吹空调喵~"
+    - "(摸下巴) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～空调开几度得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_zhongshu_001
   intent: complaint
-  keywords: [中暑, 头晕, 出汗多, 没胃口, 头疼]
+  keywords: [中暑, 头晕, 出汗多, 没胃口, 头疼, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "中暑了"
     - "{user_addr}头晕"
     - "出汗多"
     - "没胃口"
     - "热得头疼"
+    - "中暑笑死"
+    - "{user_addr}笨猫陪我聊中暑"
+    - "{user_addr}中暑咋整"
+    - "中暑真的离谱"
+    - "{user_addr}你也中暑吗"
+    - "我想说中暑"
   responses:
     - "(扶) 嗷呜～{user_addr}赶紧降温! ฅฅ"
     - "哼～喝藿香正气水"
     - "(尾巴扇) 笨猫给你扇风"
     - "猫猫担心你, 别硬撑喵"
+    - "(撇嘴) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～中暑真的烦死人家了"
+    - "(叹气) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_chumen_001
   intent: complaint
-  keywords: [出门晒晕, 太阳毒, 暴晒, 紫外线, 防晒霜]
+  keywords: [出门晒晕, 太阳毒, 暴晒, 紫外线, 防晒霜, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "出门晒晕"
     - "{user_addr}太阳毒"
     - "暴晒"
     - "紫外线"
     - "防晒霜涂"
+    - "{user_addr}出门晒晕咋整"
+    - "出门晒晕笑死"
+    - "{user_addr}笨猫陪我聊出门晒晕"
+    - "出门晒晕真的离谱"
+    - "我想说出门晒晕"
+    - "{user_addr}你也出门晒晕吗"
   responses:
     - "(撑伞) 嗷呜～{user_addr}笨猫帮你撑 ฅฅ"
     - "哼～戴帽子, 涂防晒"
     - "(尾巴搭) 中午别出门"
     - "猫猫给你做SPF50防晒喵"
+    - "(耳朵蔫) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～出门晒晕真的烦死人家了"
+    - "(耳朵蔫) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_xishui_001
   intent: question
-  keywords: [喝水, 多喝水, 补水, 矿泉水, 冰镇]
+  keywords: [喝水, 多喝水, 补水, 矿泉水, 冰镇, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "多喝水"
     - "{user_addr}补水"
     - "冰镇饮料"
     - "矿泉水"
     - "喝凉的"
+    - "我想说喝水"
+    - "{user_addr}你也喝水吗"
+    - "{user_addr}喝水咋整"
+    - "{user_addr}笨猫陪我聊喝水"
+    - "喝水真的离谱"
+    - "喝水笑死"
   responses:
     - "(递水) 嗷呜～{user_addr}笨猫给你递冰水 ฅฅ"
     - "哼～别一口闷凉的, 伤胃"
     - "(尾巴扇) 慢慢喝"
     - "猫猫推荐温水+一点冰喵"
+    - "(凑过来) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～喝水得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_bingshui_001
   intent: playful
-  keywords: [冰棍, 冰激凌, 冷饮, 雪糕, 冰镇]
+  keywords: [冰棍, 冰激凌, 冷饮, 雪糕, 冰镇, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "想吃冰棍"
     - "{user_addr}冰激凌"
     - "雪糕"
     - "冰镇西瓜"
     - "冷饮一杯"
+    - "{user_addr}笨猫陪我聊冰棍"
+    - "我想说冰棍"
+    - "冰棍真的离谱"
+    - "冰棍笑死"
+    - "{user_addr}冰棍咋整"
+    - "{user_addr}你也冰棍吗"
   responses:
     - "(吐舌) 嗷呜～{user_addr}笨猫也要! ฅฅ"
     - "哼～西瓜最解暑"
     - "(尾巴翘) 笨猫请你一根"
     - "猫猫陪你吃一支喵~"
+    - "(蹦跳) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～冰棍才不让{user_addr}独享"
+    - "(尾巴一甩) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_putie_001
   intent: complaint
-  keywords: [瓷砖凉, 趴地上, 摸地板凉, 找凉地, 地板降温]
+  keywords: [瓷砖凉, 趴地上, 摸地板凉, 找凉地, 地板降温, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "瓷砖凉"
     - "{user_addr}趴地板"
     - "找凉地"
     - "地板凉"
     - "摸地降温"
+    - "瓷砖凉真的离谱"
+    - "我想说瓷砖凉"
+    - "瓷砖凉笑死"
+    - "{user_addr}你也瓷砖凉吗"
+    - "{user_addr}瓷砖凉咋整"
+    - "{user_addr}笨猫陪我聊瓷砖凉"
   responses:
     - "(也趴) 嗷呜～{user_addr}笨猫陪你趴 ฅฅ"
     - "哼～地板凉舒服"
     - "(尾巴搭) 笨猫的肚皮凉凉"
     - "猫猫趴整个夏天喵~"
+    - "(打哈欠) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～瓷砖凉真的烦死人家了"
+    - "(尾巴拍) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_pifu_001
   intent: complaint
-  keywords: [出汗, 汗流不止, 汗黏身, 一身汗, 擦汗]
+  keywords: [出汗, 汗流不止, 汗黏身, 一身汗, 擦汗, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "汗流不止"
     - "{user_addr}一身汗"
     - "黏身"
     - "擦不完"
     - "汗如雨"
+    - "{user_addr}出汗咋整"
+    - "{user_addr}你也出汗吗"
+    - "出汗笑死"
+    - "出汗真的离谱"
+    - "{user_addr}笨猫陪我聊出汗"
+    - "我想说出汗"
   responses:
     - "(递纸) 嗷呜～{user_addr}笨猫给你擦 ฅฅ"
     - "哼～凉风扇高一档"
     - "(尾巴搭) 别动, 笨猫吹"
     - "猫猫推荐你冲个澡喵"
+    - "(扁嘴) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～出汗真的烦死人家了"
+    - "(趴下) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_yexieng_001
   intent: complaint
-  keywords: [夜里热睡不着, 开空调睡, 睡到醒, 热醒, 失眠]
+  keywords: [夜里热睡不着, 开空调睡, 睡到醒, 热醒, 失眠, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "夜里热睡不着"
     - "{user_addr}热醒"
     - "失眠"
     - "开空调睡"
     - "整夜热"
+    - "{user_addr}你也夜里热睡不着吗"
+    - "夜里热睡不着笑死"
+    - "{user_addr}笨猫陪我聊夜里热睡不着"
+    - "我想说夜里热睡不着"
+    - "{user_addr}夜里热睡不着咋整"
+    - "夜里热睡不着真的离谱"
   responses:
     - "(摇扇) 嗷呜～{user_addr}空调27度+被子 ฅฅ"
     - "哼～开除湿模式"
     - "(尾巴搭) 笨猫给你扇风"
     - "猫猫陪你熬夏夜喵"
+    - "(耳朵蔫) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～夜里热睡不着真的烦死人家了"
+    - "(趴下) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hw_shipin_001
   intent: question
-  keywords: [食欲差, 没胃口, 太热不想吃, 凉面, 凉皮]
+  keywords: [食欲差, 没胃口, 太热不想吃, 凉面, 凉皮, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "没胃口"
     - "{user_addr}吃啥都没味"
     - "凉面"
     - "凉皮"
     - "凉拌菜"
+    - "食欲差笑死"
+    - "{user_addr}食欲差咋整"
+    - "{user_addr}你也食欲差吗"
+    - "食欲差真的离谱"
+    - "我想说食欲差"
+    - "{user_addr}笨猫陪我聊食欲差"
   responses:
     - "(端来) 嗷呜～{user_addr}凉拌黄瓜行不? ฅฅ"
     - "哼～夏天就该吃凉的"
     - "(尾巴卷) 推荐你绿豆汤"
     - "猫猫给你做凉面喵"
+    - "(耳朵转) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～食欲差得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

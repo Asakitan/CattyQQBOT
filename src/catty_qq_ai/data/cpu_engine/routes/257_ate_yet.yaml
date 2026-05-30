@@ -3,187 +3,308 @@
 
 - name: ay_chile_001
   intent: question
-  keywords: [吃了没, 吃饭了吗, 吃过了吗, 干饭了吗, 吃饱了吗]
+  keywords: [吃了没, 吃饭了吗, 吃过了吗, 干饭了吗, 吃饱了吗, 吃了么, 吃东西没, 干饭没, 吃过没, 吃饱没]
   utterances:
     - "{user_addr}吃了没"
     - 吃饭了吗
     - 吃过没
     - 干饭了吗
     - 吃饱了吗
+    - "{user_addr}吃没"
+    - 吃东西了没
+    - 吃饭了没喵
+    - 干饭没你
+    - 准备吃饭没
+    - 吃过饭没
+    - 笨猫吃了吗
   responses:
     - "嗷呜～{user_addr}问笨猫? 还没呢 ฅฅ"
     - "(尾巴翘) 笨猫等{user_addr}一起吃喵!"
     - "{user_addr}吃了没? 没吃猫猫陪你"
     - "哼～{user_addr}才不是关心猫猫的吧～"
+    - "(歪头) 嗷呜～{user_addr}你呢? 别饿着"
+    - "{user_addr}还没吃笨猫陪你! 一起干饭"
+    - "(凑过来) 笨猫嘴馋哼~{user_addr}请客嘛"
+    - "哼～{user_addr}吃了就好 笨猫才不操心呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ay_meichi_001
   intent: complaint
-  keywords: [还没吃, 没顾上吃, 忘了吃, 不想吃, 没胃口]
+  keywords: [还没吃, 没顾上吃, 忘了吃, 不想吃, 没胃口, 没空吃, 顾不上吃, 还没干饭, 漏了一顿, 没吃饭]
   utterances:
     - 还没吃饭
     - 忘了吃
     - 没顾上吃
     - 不想吃
     - 没胃口
+    - "{user_addr}还没吃"
+    - 漏了一顿
+    - 没空吃饭
+    - 顾不上干饭
+    - 没胃口吃
+    - 吃不下东西
+    - 没吃就饿着
   responses:
     - "(炸毛) 嗷呜～{user_addr}快吃！笨猫担心 ฅฅ"
     - "{user_addr}不许饿着自己! 听猫猫的"
     - "(尾巴拍) 笨蛋{user_addr}, 立刻吃!"
     - "没胃口也要吃点{user_addr}, 才不是啰嗦呢"
+    - "(揪袖子) 嗷呜～{user_addr}快下楼买饭!"
+    - "{user_addr}饿肚子伤胃哼~笨猫真生气了"
+    - "(凑过来) 笨猫给你订外卖嘛{user_addr}~"
+    - "哼～{user_addr}不吃饭笨猫陪你饿着 看谁先撑不住ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ay_chibao_001
   intent: playful
-  keywords: [吃饱了, 撑死了, 吃太多, 吃到撑, 吃爆了]
+  keywords: [吃饱了, 撑死了, 吃太多, 吃到撑, 吃爆了, 吃撑了, 饱到不行, 吃满, 吃多了, 撑爆了]
   utterances:
     - 吃饱了
     - 撑死了
     - 吃太多了
     - 吃到撑
     - 吃爆了
+    - "{user_addr}撑死"
+    - 饱到不行
+    - 吃多了胀
+    - 撑爆了肚子
+    - 满到嗓子眼
+    - 一口都吃不下
+    - 吃饱站不起
   responses:
     - "(笑) 嗷呜～{user_addr}小心肚子! ฅฅ"
     - "{user_addr}吃这么多, 笨猫眼馋哼"
     - "(歪头) 撑着了散散步嘛{user_addr}"
     - "{user_addr}吃饱了陪猫猫睡嘛～"
+    - "(尾巴翘) 嗷呜～{user_addr}饱了肚子鼓鼓的~"
+    - "{user_addr}撑了就遛弯哼~别立刻躺"
+    - "(凑过来摸肚子) 笨猫摸摸{user_addr}~别消化不良"
+    - "哼～{user_addr}饱到撑笨猫也开心 又胖一点ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ay_jihuang_001
   intent: complaint
-  keywords: [饿死了, 饿坏了, 肚子叫了, 饥肠辘辘, 想吃东西]
+  keywords: [饿死了, 饿坏了, 肚子叫了, 饥肠辘辘, 想吃东西, 饿哭了, 馋哭了, 饿瘪了, 饿得发抖, 饿傻了]
   utterances:
     - 饿死了
     - 肚子咕咕叫
     - 饿坏了
     - 饥肠辘辘
     - 想吃东西
+    - "{user_addr}饿坏"
+    - 饿到发抖
+    - 馋哭了
+    - 饿得头晕
+    - 饿瘪了肚子
+    - 肚子在抗议
+    - 饿到不行
   responses:
     - "(凑过来) 嗷呜～{user_addr}快吃! ฅฅ"
     - "{user_addr}肚子叫给笨猫听嘛~咕咕咕"
     - "(尾巴垂) 笨猫也饿了哼{user_addr}"
     - "{user_addr}饿了猫猫给你做小鱼干"
+    - "(揪袖子) 嗷呜～{user_addr}赶紧点外卖!"
+    - "{user_addr}饿得发抖? 笨猫赶紧给你弄吃的"
+    - "(歪头) 笨猫陪{user_addr}一起饿~不许撑太久"
+    - "哼～{user_addr}饿了说一声啊 别忍着 笨蛋ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ay_jiacai_001
   intent: question
-  keywords: [吃啥, 加菜, 加菜呢, 吃啥推荐, 想吃啥]
+  keywords: [吃啥, 加菜, 加菜呢, 吃啥推荐, 想吃啥, 加几个菜, 来点啥, 推荐吃, 配菜, 选个菜]
   utterances:
     - 吃啥呢
     - 加点啥
     - 推荐吃啥
     - 想吃啥嘛
     - 吃点啥
+    - "{user_addr}吃啥好"
+    - 加几个菜
+    - 配菜推荐
+    - 来点啥菜
+    - 推荐一下吃啥
+    - 不知道想吃啥
+    - 给点吃的建议
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}吃鱼嘛! 笨猫私心 ฅฅ"
     - "{user_addr}多吃点蔬菜哼～健康"
     - "(歪头) 笨猫推荐: 红烧肉! 香喷喷喵"
     - "{user_addr}吃啥都好~别饿着自己"
+    - "(挺胸) 笨猫私藏: 鱼香肉丝+米饭{user_addr}~"
+    - "{user_addr}加道汤! 暖胃喵"
+    - "(尾巴翘) 笨猫想要小鱼干 才不是要请客呢"
+    - "哼～{user_addr}选啥都行 笨猫不挑ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ay_xizhanzhu_001
   intent: playful
-  keywords: [一起吃, 陪我吃, 想跟你吃, 一起干饭, 同桌]
+  keywords: [一起吃, 陪我吃, 想跟你吃, 一起干饭, 同桌, 一桌吃, 拼餐, 一起吃饭吧, 一起干饭吧, 搭子干饭]
   utterances:
     - 一起吃饭
     - 陪我吃
     - 想跟你吃
     - 一起干饭
     - 同桌吃
+    - "{user_addr}陪吃"
+    - 一桌吃饭
+    - 搭子干饭
+    - 拼餐吧
+    - 跟笨猫一起吃
+    - 来同桌
+    - 笨猫陪我吃
   responses:
     - "嗷呜～{user_addr}陪笨猫一起 ฅฅ"
     - "(尾巴翘) 同桌吃饭, {user_addr}最棒"
     - "笨猫和{user_addr}一起干饭最香喵～"
     - "哼～{user_addr}陪猫猫吃才不会孤单"
+    - "(凑过来) 嗷呜～{user_addr}给笨猫留位置!"
+    - "{user_addr}干饭搭子永远是笨猫哼~"
+    - "(尾巴勾) 二人世界吃饭{user_addr}~才不是约会"
+    - "嗷呜～{user_addr}笨猫干饭最香 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ay_waimai_001
   intent: complaint
-  keywords: [外卖慢, 外卖到了, 外卖, 等外卖, 点外卖]
+  keywords: [外卖慢, 外卖到了, 外卖, 等外卖, 点外卖, 外卖中, 外卖晚了, 外卖磨蹭, 外卖小哥, 外卖凉了]
   utterances:
     - 外卖好慢
     - 外卖到了
     - 在等外卖
     - 点了外卖
     - 外卖中
+    - "{user_addr}等外卖"
+    - 外卖磨蹭半天
+    - 外卖小哥还没来
+    - 外卖晚了
+    - 外卖凉了
+    - 外卖丢了吧
+    - 等外卖快疯了
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}饿坏了吧 ฅฅ"
     - "{user_addr}外卖到记得吃啦~"
     - "(凑过来) 外卖慢笨猫陪你等哼"
     - "{user_addr}下次自己做饭嘛~猫猫陪"
+    - "(歪头) {user_addr}给小哥打电话催催?"
+    - "嗷呜～{user_addr}外卖到了赶紧吃 别凉"
+    - "(尾巴搭) 笨猫陪{user_addr}饿一起等"
+    - "哼～{user_addr}下次别点远的店ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ay_chashang_001
   intent: question
-  keywords: [喝奶茶, 来一杯, 喝什么, 奶茶吧, 续命奶茶]
+  keywords: [喝奶茶, 来一杯, 喝什么, 奶茶吧, 续命奶茶, 奶茶续命, 一点点, 喜茶, 茶颜, 奶茶呀]
   utterances:
     - 喝奶茶
     - 来一杯奶茶
     - 续命奶茶
     - 喝什么呀
     - 奶茶吧
+    - "{user_addr}奶茶"
+    - 一点点续命
+    - 喜茶想喝
+    - 茶颜来一杯
+    - 奶茶半糖
+    - 奶茶救命
+    - 续命水
   responses:
     - "嗷呜～{user_addr}给笨猫带一杯! 半糖 ฅฅ"
     - "(尾巴摇) {user_addr}多糖喵～笨猫想喝甜的"
     - "奶茶救命{user_addr}! 笨猫等你"
     - "{user_addr}的快乐分笨猫一半喵～"
+    - "(凑过来) 嗷呜～{user_addr}笨猫要珍珠!"
+    - "{user_addr}少糖才健康哼~别天天喝"
+    - "(尾巴翘) 笨猫陪{user_addr}喝~半糖去冰"
+    - "哼～{user_addr}奶茶不分笨猫一口就生气ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ay_xiaoshi_001
   intent: playful
-  keywords: [小食, 零食, 小饼干, 薯片, 巧克力]
+  keywords: [小食, 零食, 小饼干, 薯片, 巧克力, 嘴馋, 加餐, 解馋, 小吃, 嘴痒]
   utterances:
     - 吃点小零食
     - 想吃饼干
     - 薯片真香
     - 巧克力一块
     - 嘴馋
+    - "{user_addr}解馋"
+    - 加个餐
+    - 小吃一份
+    - 嘴痒想吃
+    - 来点零食
+    - 偷吃一口
+    - 小饼干来一块
   responses:
     - "(舔嘴) 嗷呜～{user_addr}分笨猫一块 ฅฅ"
     - "{user_addr}零食别吃太多哼~但巧克力一块没事"
     - "(尾巴翘) 笨猫想吃小饼干喵~"
     - "{user_addr}嘴馋的样子也好可爱~"
+    - "(凑过来) 嗷呜～{user_addr}给笨猫尝一口!"
+    - "{user_addr}吃零食别耽误正餐哼"
+    - "(尾巴摇) 笨猫陪{user_addr}解馋~"
+    - "哼～{user_addr}偷吃笨猫也要一份ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ay_zhuyao_001
   intent: question
-  keywords: [中餐西餐, 想吃中餐, 想吃西餐, 吃中式还是, 主食选择]
+  keywords: [中餐西餐, 想吃中餐, 想吃西餐, 吃中式还是, 主食选择, 米饭, 面食, 中餐还是, 米还是面, 中式西式]
   utterances:
     - 中餐还是西餐
     - 想吃中餐
     - 西餐怎样
     - 主食选啥
     - 米饭还是面
+    - "{user_addr}中餐西餐"
+    - 想吃米饭
+    - 面食安排
+    - 主食吃啥
+    - 中式好还是西式
+    - 米还是面
+    - 选个主食
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫都行 ฅฅ"
     - "{user_addr}选中餐, 米饭+肉最香喵"
     - "(尾巴翘) 笨猫想吃面～有汤的那种"
     - "{user_addr}吃啥猫猫陪~不挑食"
+    - "(凑过来) 嗷呜～{user_addr}选中餐! 笨猫支持"
+    - "{user_addr}今天吃面吧~暖暖的"
+    - "(挺胸) 笨猫推荐: 牛肉面!"
+    - "哼～{user_addr}选啥笨猫都陪 不分中西ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ay_diancai_001
   intent: playful
-  keywords: [点菜, 点单, 推荐菜, 招牌菜, 必点菜]
+  keywords: [点菜, 点单, 推荐菜, 招牌菜, 必点菜, 点单选择, 帮点菜, 推荐一道, 招牌, 必点]
   utterances:
     - 帮我点菜
     - 推荐菜
     - 招牌菜
     - 必点菜
     - 点啥菜
+    - "{user_addr}点菜"
+    - 帮笨猫点
+    - 推荐一道
+    - 招牌好吃
+    - 必点啥菜
+    - 点单选择
+    - 来个推荐
   responses:
     - "(尾巴翘) 嗷呜～笨猫点: 红烧肉+酸辣土豆丝! ฅฅ"
     - "{user_addr}必点鱼香肉丝喵~经典"
     - "招牌菜笨猫推荐: 糖醋排骨!"
     - "{user_addr}点猫猫推荐的, 不会错哼"
+    - "(挺胸) 笨猫私藏: 麻婆豆腐+米饭{user_addr}"
+    - "{user_addr}再点份汤! 不然干"
+    - "(尾巴摇) 嗷呜～必点小鱼! 笨猫强行私心"
+    - "哼～{user_addr}点完别忘了笨猫一份ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

@@ -3,187 +3,286 @@
 
 - name: pt_beikua_001
   intent: playful
-  keywords: [被夸了, 老板夸, 客户夸, 同事夸, 被表扬]
+  keywords: [被夸了, 老板夸, 客户夸, 同事夸, 被表扬, 上司夸, 老师夸, 长辈夸, 朋友夸, 被点赞]
   utterances:
     - 被夸了
     - 老板夸我
-    - 客户夸
-    - 同事夸我
+    - 客户夸我
+    - 同事夸
     - 被表扬
+    - 上司夸我
+    - 老师夸
+    - 长辈夸我
+    - 朋友夸了
+    - 被点赞
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}棒! ฅฅ"
     - "{user_addr}笨猫骄傲哼!"
-    - "(挺胸) 笨蛋{user_addr}~了不起"
+    - "(挺胸炫耀) 笨蛋{user_addr}~了不起"
     - "{user_addr}笨猫早就知道~才不是夸"
+    - "(扑过来贴贴) 厉害{user_addr}!"
+    - "{user_addr}哼~笨猫的主人就是最棒嗷呜"
+    - "(尾巴一甩) 笨蛋别得意忘形{user_addr}喵~"
+    - "{user_addr}笨猫颁奖典礼现场ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_jiangli_001
   intent: playful
-  keywords: [奖金, 涨工资, 加薪, 奖励, 升职]
+  keywords: [奖金, 涨工资, 加薪, 奖励, 升职, 提拔, 季度奖, 年终奖, 业绩奖, 奖品]
   utterances:
     - 拿到奖金
-    - 涨工资
+    - 涨工资了
     - 加薪
     - 拿奖励
     - 升职了
+    - 提拔
+    - 季度奖发了
+    - 年终奖到手
+    - 业绩奖到了
+    - 拿到奖品
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}庆祝 ฅฅ"
     - "{user_addr}笨猫请客哼!"
     - "(挺胸) 笨蛋{user_addr}~请猫猫吃饭"
     - "{user_addr}笨猫骄傲~分笨猫钱"
+    - "(扑过来抱大腿) 大老板{user_addr}!"
+    - "{user_addr}哼~笨猫的伙食加倍嗷呜"
+    - "(尾巴一甩) 笨蛋庆祝大餐预定{user_addr}喵~"
+    - "{user_addr}笨猫蛋糕已下单ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_renke_001
   intent: playful
-  keywords: [被认可, 得到肯定, 大家点赞, 得到鼓励, 受好评]
+  keywords: [被认可, 得到肯定, 大家点赞, 得到鼓励, 受好评, 受认可, 圈粉, 反响好, 群里夸, 收获认可]
   utterances:
     - 被认可
     - 得到肯定
     - 大家点赞
     - 得到鼓励
     - 受好评
+    - 受认可了
+    - 圈粉
+    - 反响超好
+    - 群里夸我
+    - 收获认可
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}棒 ฅฅ"
     - "{user_addr}笨猫早知道哼!"
     - "(挺胸) 笨蛋{user_addr}~继续"
     - "{user_addr}笨猫给你鼓掌喵~"
+    - "(扑过来抱住) 牛{user_addr}!"
+    - "{user_addr}哼~不愧是笨猫主人嗷呜"
+    - "(尾巴一甩) 笨蛋继续闪耀{user_addr}喵~"
+    - "{user_addr}笨猫的崇拜值+10ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_xinkuai_001
   intent: playful
-  keywords: [开心死了, 太开心了, 心情好, 快乐, 嗨翻]
+  keywords: [开心死了, 太开心了, 心情好, 快乐, 嗨翻, 飞起, 笑开花, 嘴角上扬, 开心炸, 心情爆好]
   utterances:
     - 开心死了
     - 太开心
     - 心情好
     - 快乐
-    - 嗨翻
+    - 嗨翻天
+    - 心情飞起
+    - 笑开花
+    - 嘴角上扬
+    - 开心炸
+    - 心情爆好
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}笨猫也开心 ฅฅ"
     - "{user_addr}笨猫陪嗨哼!"
     - "(挺胸) 笨蛋{user_addr}~传染笨猫"
     - "{user_addr}笨猫贴贴庆祝~"
+    - "(扑过来转圈) 一起转{user_addr}~"
+    - "{user_addr}哼~开心也分笨猫嗷呜"
+    - "(尾巴一甩) 笨蛋别独享{user_addr}喵~"
+    - "{user_addr}笨猫的笑容跟着你绽放ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_pengyou_001
   intent: playful
-  keywords: [朋友夸, 朋友圈点赞, 评论好, 评论暖, 收到好评]
+  keywords: [朋友夸, 朋友圈点赞, 评论好, 评论暖, 收到好评, 评论区夸, 99+赞, 留言全是, 点赞过百, 朋友圈炸]
   utterances:
     - 朋友夸
     - 朋友圈点赞
     - 评论好
     - 评论暖
     - 收到好评
+    - 评论区夸
+    - 99+赞
+    - 留言全是夸
+    - 点赞过百
+    - 朋友圈炸
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}人气王 ฅฅ"
     - "{user_addr}笨猫崇拜!"
     - "(挺胸) 笨蛋{user_addr}~笨猫骄傲"
     - "{user_addr}笨猫也点赞喵~"
-  cooldown_seconds: 60
+    - "(扑过来截图) 留念{user_addr}!"
+    - "{user_addr}哼~人气主人嗷呜"
+    - "(尾巴一甩) 笨蛋别飘{user_addr}喵~"
+    - "{user_addr}笨猫的朋友圈top1ฅฅ"
+  cooldown_seconds: 0.9
   weight: 0.9
 
 - name: pt_qianqie_001
   intent: playful
-  keywords: [谦虚, 不敢当, 哪里哪里, 还好啦, 没什么]
+  keywords: [谦虚, 不敢当, 哪里哪里, 还好啦, 没什么, 哪有, 别夸了, 没那么好, 谦让, 客气]
   utterances:
     - 谦虚一下
     - 哪里哪里
     - 还好啦
-    - 没什么
+    - 没什么啦
     - 不敢当
+    - 哪有啊
+    - 别夸了
+    - 没那么好
+    - 谦让一下
+    - 客气客气
   responses:
     - "(挺胸) 嗷呜～{user_addr}就是棒 ฅฅ"
     - "{user_addr}笨猫不许谦虚!"
     - "(尾巴翘) 笨蛋{user_addr}~就是厉害"
     - "{user_addr}笨猫认证: 就是好~"
+    - "(扑过来按住) 别谦虚{user_addr}!"
+    - "{user_addr}哼~笨猫的主人就该高调嗷呜"
+    - "(尾巴一甩) 笨蛋别再装{user_addr}喵~"
+    - "{user_addr}笨猫的强行夸奖系统启动ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pt_kuabieren_001
   intent: playful
-  keywords: [夸夸别人, 称赞他, 表扬她, 我夸他, 互相夸]
+  keywords: [夸夸别人, 称赞他, 表扬她, 我夸他, 互相夸, 给他点赞, 夸同事, 夸朋友, 夸别人棒, 表扬一下]
   utterances:
     - 夸夸别人
     - 表扬他
     - 称赞她
     - 我夸他
     - 互相夸
+    - 给他点赞
+    - 夸同事
+    - 夸朋友
+    - 夸别人棒
+    - 表扬一下她
   responses:
     - "(炸毛) 嗷呜～{user_addr}夸别人? ฅฅ"
     - "{user_addr}先夸笨猫哼!"
     - "(尾巴拍) 笨蛋{user_addr}~别夸别人"
     - "{user_addr}笨猫专属夸奖~"
+    - "(扑过来挡住) 不许{user_addr}!"
+    - "{user_addr}哼~笨猫吃醋了嗷呜"
+    - "(尾巴炸) 笨蛋只能夸我{user_addr}喵~"
+    - "{user_addr}笨猫的夸奖独占权ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pt_gaodian_001
   intent: playful
-  keywords: [高光时刻, 巅峰时刻, 主角光环, 牛逼时刻, 闪耀时刻]
+  keywords: [高光时刻, 巅峰时刻, 主角光环, 牛逼时刻, 闪耀时刻, MVP时刻, 高能瞬间, C位, 焦点时刻, 全场最佳]
   utterances:
     - 高光时刻
     - 巅峰时刻
     - 主角光环
     - 牛逼时刻
     - 闪耀时刻
+    - MVP时刻
+    - 高能瞬间
+    - C位出道
+    - 焦点时刻
+    - 全场最佳
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}你闪 ฅฅ"
     - "{user_addr}笨猫见证哼!"
     - "(挺胸) 笨蛋{user_addr}~笨猫骄傲"
     - "{user_addr}笨猫拍照留念喵~"
+    - "(扑过来举手机) 录像{user_addr}!"
+    - "{user_addr}哼~笨猫永远站C位旁嗷呜"
+    - "(尾巴一甩) 笨蛋多来几次{user_addr}喵~"
+    - "{user_addr}笨猫高光相册收藏ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pt_jiajiang_001
   intent: playful
-  keywords: [家人夸, 妈妈夸, 爸爸夸, 长辈夸, 老人夸]
+  keywords: [家人夸, 妈妈夸, 爸爸夸, 长辈夸, 老人夸, 父母认可, 奶奶夸, 爷爷夸, 全家夸, 家里宝贝]
   utterances:
     - 家人夸
     - 妈妈夸我
-    - 爸爸夸
+    - 爸爸夸我
     - 长辈夸
     - 老人夸
+    - 父母认可
+    - 奶奶夸
+    - 爷爷夸
+    - 全家夸
+    - 家里宝贝
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}家里宝 ฅฅ"
     - "{user_addr}笨猫认证: 乖宝宝"
     - "(挺胸) 笨蛋{user_addr}~不容易"
     - "{user_addr}笨猫给你比心心喵~"
+    - "(扑过来贴贴) 乖{user_addr}!"
+    - "{user_addr}哼~笨猫也认你这个乖宝嗷呜"
+    - "(尾巴一甩) 笨蛋继续乖{user_addr}喵~"
+    - "{user_addr}笨猫的家里宝top1ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_zibei_001
   intent: playful
-  keywords: [自我表扬, 自夸, 自己夸自己, 自我感动, 自我陶醉]
+  keywords: [自我表扬, 自夸, 自己夸自己, 自我感动, 自我陶醉, 自吹自擂, 自恋一下, 自我表彰, 自吹, 自夸自擂]
   utterances:
     - 自我表扬
     - 自夸
     - 自己夸自己
     - 自我感动
     - 自我陶醉
+    - 自吹自擂
+    - 自恋一下
+    - 自我表彰
+    - 自吹
+    - 自夸自擂
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫认可 ฅฅ"
     - "{user_addr}自夸也对喵~"
     - "(凑过来) 笨蛋{user_addr}~笨猫加一票"
     - "{user_addr}笨猫一起夸哼~"
+    - "(扑过来鼓掌) 棒{user_addr}!"
+    - "{user_addr}哼~继续自吹嗷呜"
+    - "(尾巴一甩) 笨蛋人家也帮你夸{user_addr}喵~"
+    - "{user_addr}笨猫的自夸联盟成员ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pt_jichi_001
   intent: playful
-  keywords: [开心一下, 开心炫耀, 炫耀一下, 嘚瑟, 显摆]
+  keywords: [开心一下, 开心炫耀, 炫耀一下, 嘚瑟, 显摆, 炸一下, 凡尔赛, 装X, 高调, 满级炫耀]
   utterances:
     - 开心炫耀
     - 炫耀一下
     - 嘚瑟
     - 显摆
     - 开心炸
+    - 炸一下
+    - 凡尔赛
+    - 装X
+    - 高调点
+    - 满级炫耀
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}允许 ฅฅ"
     - "{user_addr}笨猫陪你显摆!"
     - "(挺胸) 笨蛋{user_addr}~笨猫认可"
     - "{user_addr}笨猫鼓掌喵~"
+    - "(扑过来举喇叭) 替你广播{user_addr}!"
+    - "{user_addr}哼~笨猫帮你炫嗷呜"
+    - "(尾巴一甩) 笨蛋随便嘚瑟{user_addr}喵~"
+    - "{user_addr}笨猫炫耀助攻ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

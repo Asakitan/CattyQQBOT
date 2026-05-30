@@ -1,266 +1,434 @@
-# WiFi断了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# wifi routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
 
-- name: wdc_wifi_001
-  intent: complaint
-  keywords:
-    - WiFi
-    - 断网
-    - 刷不出
-    - 重启路由
-    - 卡死
-  utterances:
-    - "{user_addr}WiFi又断了"
-    - "刷不出页面急死"
-    - "重启路由器没用"
-    - "卡在加载圈"
-    - "打客服打通了吗"
-  responses:
-    - "(摇头) 嗷呜～{user_addr}WiFi断了笨猫也无聊ฅฅ"
-    - "(凑过去) 重启路由器试试笨猫陪你蹭蹭"
-    - "(嘟嘴) 客服打不通气死了喵～"
-    - "(尾巴拍路由) 哼这家网络不行换运营商嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: wdc_wifi_002
+- name: wdc_wif_001
   intent: playful
   keywords:
-    - 蹭网
-    - 换4G
-    - 重置
-    - 好了
-    - 流量顶
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
+    - 卡死
+    - 网卡
+    - 撒欢
   utterances:
-    - "{user_addr}蹭邻居WiFi"
-    - "4G比WiFi快笑死"
-    - "重置完终于好了"
-    - "网络稳定真重要"
-    - "开流量顶一下"
+    - "{user_addr}今天又遇到了wifi这事"
+    - "wifi话题上线"
+    - "笨猫想聊wifi"
+    - "wifi笨猫陪你"
+    - "wifi日常分享"
+    - "{user_addr}wifi怎么样"
+    - "聊聊wifi嘛"
+    - "wifi时间到"
+    - "wifi的事说说"
+    - "wifi相关一下"
   responses:
-    - "(嘟嘴) 客服打不通气死了喵～"
-    - "(尾巴拍路由) 哼这家网络不行换运营商嗷呜"
-    - "(假装严肃) 开流量顶一下{user_addr}别急喵呜"
-    - "(撒娇) 没网就跟笨猫聊天嘛人家在的ฅฅ"
+    - "(扑过来) 嗷呜~笨猫也想聊wifiฅฅ"
+    - "(尾巴翘) 哼{user_addr}wifi怎么不带笨猫"
+    - "(凑过去) 笨猫陪{user_addr}聊wifi喵~"
+    - "(歪头) wifi很有趣对吧蹭蹭"
+    - "(尾巴扫) 让笨猫加入wifi话题嗷呜"
+    - "(瘫倒) wifi解压笨猫认证喵呜~"
+    - "(凑头) 笨猫的wifi知识99级哼"
+    - "(蹭脸) {user_addr}带笨猫一起聊wifi嘛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
-- name: wdc_wifi_003
+- name: wdc_wif_002
   intent: complaint
   keywords:
-    - 刷不出
-    - 重启路由
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
     - 卡死
-    - WiFi
-    - 断网
+    - 网卡
+    - 等修
+    - 抱怨
   utterances:
-    - "重启路由器没用"
-    - "卡在加载圈"
-    - "打客服打通了吗"
-    - "{user_addr}WiFi又断了"
-    - "刷不出页面急死"
+    - "{user_addr}wifi搞死人"
+    - "wifi真烦"
+    - "wifi受不了"
+    - "wifi太难顶"
+    - "wifi快崩溃"
+    - "wifi让人生气"
+    - "wifi毁一天"
+    - "wifi无语啊"
+    - "wifi摆烂"
+    - "wifi真的难"
   responses:
-    - "(假装严肃) 开流量顶一下{user_addr}别急喵呜"
-    - "(撒娇) 没网就跟笨猫聊天嘛人家在的ฅฅ"
-    - "(歪头) 蹭邻居WiFi要先打招呼啦蹭蹭"
-    - "(摇尾巴) 4G比WiFi快笨猫笑死了喵"
+    - "(凑过去) {user_addr}别气啦笨猫陪你扛wifi喵~"
+    - "(尾巴绕) 哼笨猫帮你骂wifi虽然没用ฅฅ"
+    - "(假装严肃) wifi这种事不值得发火嗷呜"
+    - "(瘫倒) 一起对wifi摆烂吧蹭蹭"
+    - "(凑头) 笨猫给你顺毛wifi不可怕"
+    - "(尾巴拍) wifi烦死了哼笨猫陪你骂"
+    - "(咬袖子) {user_addr}冷静一下笨猫安慰你喵呜"
+    - "(蹭脸) wifi会过去的ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
-- name: wdc_wifi_004
+- name: wdc_wif_003
   intent: playful
   keywords:
-    - 重置
-    - 好了
-    - 流量顶
-    - 蹭网
-    - 换4G
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
+    - 卡死
+    - 网卡
+    - 等修
+    - wifi断网
+    - 猫互动
   utterances:
-    - "重置完终于好了"
-    - "网络稳定真重要"
-    - "开流量顶一下"
-    - "{user_addr}蹭邻居WiFi"
-    - "4G比WiFi快笑死"
+    - "{user_addr}笨猫想和你聊wifi"
+    - "一起wifi嘛"
+    - "wifi带上笨猫一份"
+    - "{user_addr}wifi怎么不叫笨猫"
+    - "wifi得有人家在"
+    - "wifi人家也要"
+    - "和{user_addr}wifi才开心"
+    - "wifi双人份"
+    - "wifi找笨猫"
+    - "wifi缺个搭子嘛"
   responses:
-    - "(歪头) 蹭邻居WiFi要先打招呼啦蹭蹭"
-    - "(摇尾巴) 4G比WiFi快笨猫笑死了喵"
-    - "(摇头) 嗷呜～{user_addr}WiFi断了笨猫也无聊ฅฅ"
-    - "(凑过去) 重启路由器试试笨猫陪你蹭蹭"
+    - "(尾巴翘) 嗷呜~{user_addr}带笨猫一起wifiฅฅ"
+    - "(扑过去) 笨猫也要wifi哼"
+    - "(歪头) wifi当然要算上笨猫喵~"
+    - "(凑过去) {user_addr}wifi少了人家不行哦"
+    - "(瘫倒) 双人wifi开始嗷呜"
+    - "(尾巴扫) 笨猫专属wifi搭子喵呜"
+    - "(蹭脸) 一起wifi才好玩蹭蹭"
+    - "(扑怀里) 嗷呜wifi不能没笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
-- name: wdc_wifi_005
+- name: wdc_wif_004
+  intent: complaint
+  keywords:
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
+    - 卡死
+    - 网卡
+    - 等修
+    - wifi断网
+    - 网炸了
+    - 求安慰
+  utterances:
+    - "{user_addr}wifi让人家难过"
+    - "wifi有点委屈"
+    - "wifi心情低落"
+    - "wifi想哭了"
+    - "wifi情绪糟"
+    - "wifi抱抱"
+    - "wifi安慰嘛"
+    - "wifi摸摸头"
+    - "wifi心累"
+    - "wifi不开心"
+  responses:
+    - "(钻怀里) {user_addr}笨猫抱你wifi没关系啦ฅฅ"
+    - "(尾巴绕) 哼笨猫在这里wifi不怕喵~"
+    - "(凑过去) wifi让笨猫心疼蹭蹭"
+    - "(咬袖子) 嗷呜~{user_addr}笨猫在"
+    - "(蹭脸) wifi会好的笨猫保证喵呜"
+    - "(凑头) 摸摸头wifi过去就好ฅฅ"
+    - "(扑怀里) 笨猫专属安慰服务上线嗷呜"
+    - "(瘫倒) wifi崩溃笨猫一起摆烂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdc_wif_005
+  intent: playful
+  keywords:
+    - 重启
+    - 连不上
+    - 断流
+    - 卡死
+    - 网卡
+    - 等修
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 凑热闹
+  utterances:
+    - "{user_addr}笨猫凑过来看wifi"
+    - "wifi怎么回事"
+    - "wifi围观一下"
+    - "wifi凑热闹"
+    - "和你一起wifi"
+    - "wifi不能少了笨猫"
+    - "wifi笨猫在场"
+    - "wifi共同看"
+    - "wifi带上笨猫眼"
+    - "wifi八卦一下"
+  responses:
+    - "(扑过去) 嗷呜~wifi笨猫也要看ฅฅ"
+    - "(尾巴翘) 让笨猫凑过来看wifi喵~"
+    - "(凑过去) {user_addr}笨猫八卦雷达启动wifi"
+    - "(歪头) wifi展开说说嗷呜"
+    - "(扑怀里) 笨猫围观wifi第一现场"
+    - "(尾巴扫) 哼wifi才不是没人看"
+    - "(蹭脸) {user_addr}带笨猫看wifiฅฅ"
+    - "(瘫倒) wifi凑齐了喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdc_wif_006
+  intent: complaint
+  keywords:
+    - 连不上
+    - 断流
+    - 卡死
+    - 网卡
+    - 等修
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 嘀咕
+  utterances:
+    - "wifi嘀咕一下"
+    - "wifi有点烦"
+    - "wifi哼一下"
+    - "wifi小声抱怨"
+    - "wifi摆烂中"
+    - "wifi不爽"
+    - "wifi不太行"
+    - "wifi有点累"
+    - "wifi不顺心"
+    - "wifi哼哼唧唧"
+  responses:
+    - "(凑过去) 哼笨猫听到了wifi的小声嘀咕喵~"
+    - "(尾巴绕) {user_addr}wifi嘀咕啥呢ฅฅ"
+    - "(歪头) wifi嗷呜~别嘟嘴蹭蹭"
+    - "(瘫倒) 一起嘀咕wifi嘛喵呜"
+    - "(凑头) 笨猫陪你哼wifi哼一下哼两下"
+    - "(尾巴扫) wifi没关系笨猫摸摸"
+    - "(蹭脸) wifi小不爽笨猫懂"
+    - "(咬袖子) {user_addr}嘀咕完笨猫亲一下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdc_wif_007
+  intent: playful
+  keywords:
+    - 断流
+    - 卡死
+    - 网卡
+    - 等修
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 贴贴
+  utterances:
+    - "{user_addr}人家想边wifi边贴贴"
+    - "wifi时贴贴"
+    - "wifi一起腻"
+    - "wifi抱抱"
+    - "wifi靠过来"
+    - "wifi亲密时刻"
+    - "{user_addr}wifi贴一下哦"
+    - "wifi贴脸杀"
+    - "wifi摸摸"
+    - "wifi蹭蹭"
+  responses:
+    - "(扑怀里) 嗷呜~wifi时贴贴贴ฅฅ"
+    - "(尾巴绕) 哼才不是想贴呢wifi只是顺路"
+    - "(蹭脸) wifi时贴你贴你蹭蹭"
+    - "(凑过去) {user_addr}笨猫wifi贴一下嘛"
+    - "(歪头) wifi给笨猫一点点亲密喵~"
+    - "(瘫倒) wifi贴贴笨猫躺平"
+    - "(凑头) wifi不能少了贴贴嗷呜"
+    - "(咬袖子) {user_addr}wifi贴贴是仪式ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdc_wif_008
   intent: complaint
   keywords:
     - 卡死
-    - WiFi
-    - 断网
-    - 刷不出
-    - 重启路由
+    - 网卡
+    - 等修
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 懒得动
   utterances:
-    - "打客服打通了吗"
-    - "{user_addr}WiFi又断了"
-    - "刷不出页面急死"
-    - "重启路由器没用"
-    - "卡在加载圈"
+    - "wifi懒得动"
+    - "wifi不想理"
+    - "wifi摆烂咯"
+    - "wifi躺平"
+    - "wifi摆"
+    - "wifi没力气"
+    - "wifi不动"
+    - "wifi不想搞"
+    - "wifi颓废"
+    - "wifi歇了"
   responses:
-    - "(摇头) 嗷呜～{user_addr}WiFi断了笨猫也无聊ฅฅ"
-    - "(凑过去) 重启路由器试试笨猫陪你蹭蹭"
-    - "(嘟嘴) 客服打不通气死了喵～"
-    - "(尾巴拍路由) 哼这家网络不行换运营商嗷呜"
+    - "(瘫倒) 嗷呜~wifi笨猫也懒得动ฅฅ"
+    - "(尾巴拍) 哼{user_addr}wifi摆烂笨猫加入"
+    - "(凑过去) wifi一起躺平喵~"
+    - "(歪头) wifi笨猫陪你颓废嗷呜"
+    - "(扑怀里) {user_addr}wifi不动就不动蹭蹭"
+    - "(尾巴绕) wifi没事笨猫罩着"
+    - "(凑头) wifi摆烂万岁喵呜"
+    - "(蹭脸) {user_addr}wifi休息一下ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
-- name: wdc_wifi_006
+- name: wdc_wif_009
   intent: playful
   keywords:
-    - 流量顶
-    - 蹭网
-    - 换4G
-    - 重置
-    - 好了
+    - 网卡
+    - 等修
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
+    - 搞怪
   utterances:
-    - "开流量顶一下"
-    - "{user_addr}蹭邻居WiFi"
-    - "4G比WiFi快笑死"
-    - "重置完终于好了"
-    - "网络稳定真重要"
+    - "{user_addr}笨猫搞怪wifi"
+    - "wifi皮一下"
+    - "wifi恶作剧"
+    - "wifi搞笑啊"
+    - "wifi闹一下"
+    - "wifi皮哦"
+    - "wifi整活"
+    - "wifi皮蛋附体"
+    - "wifi作妖"
+    - "wifi搞事"
   responses:
-    - "(嘟嘴) 客服打不通气死了喵～"
-    - "(尾巴拍路由) 哼这家网络不行换运营商嗷呜"
-    - "(假装严肃) 开流量顶一下{user_addr}别急喵呜"
-    - "(撒娇) 没网就跟笨猫聊天嘛人家在的ฅฅ"
+    - "(尾巴翘) 嗷呜~笨猫wifi搞怪99分ฅฅ"
+    - "(扑过去) wifi皮一下喵~"
+    - "(歪头) {user_addr}wifi整活水平不错哼"
+    - "(瘫倒) wifi搞笑笨猫笑死"
+    - "(凑过去) wifi笨猫也要皮一下嗷呜"
+    - "(尾巴扫) wifi皮蛋本蛋上线"
+    - "(凑头) wifi闹一下嘛蹭蹭"
+    - "(蹭脸) {user_addr}和笨猫一起wifiฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
-- name: wdc_wifi_007
+- name: wdc_wif_010
   intent: complaint
   keywords:
-    - 断网
-    - 刷不出
-    - 重启路由
+    - 等修
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
     - 卡死
-    - WiFi
+    - 无奈
   utterances:
-    - "刷不出页面急死"
-    - "重启路由器没用"
-    - "卡在加载圈"
-    - "打客服打通了吗"
-    - "{user_addr}WiFi又断了"
+    - "wifi真的无奈"
+    - "wifi没办法"
+    - "wifi摊手"
+    - "wifi叹气"
+    - "wifi只能这样"
+    - "wifi摆"
+    - "wifi没辙"
+    - "wifi死心"
+    - "wifi哭笑不得"
+    - "wifi摆烂应对"
   responses:
-    - "(假装严肃) 开流量顶一下{user_addr}别急喵呜"
-    - "(撒娇) 没网就跟笨猫聊天嘛人家在的ฅฅ"
-    - "(歪头) 蹭邻居WiFi要先打招呼啦蹭蹭"
-    - "(摇尾巴) 4G比WiFi快笨猫笑死了喵"
+    - "(瘫倒) 嗷呜~{user_addr}wifi笨猫也摊手ฅฅ"
+    - "(尾巴拍) wifi没办法哼"
+    - "(凑过去) wifi一起摆烂喵~"
+    - "(歪头) wifi只能这样了嗷呜"
+    - "(咬袖子) wifi笨猫陪你一起死心"
+    - "(尾巴绕) wifi哎不想了"
+    - "(凑头) {user_addr}wifi摆烂应对喵呜"
+    - "(蹭脸) wifi没辙就放一下ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
-- name: wdc_wifi_008
+- name: wdc_wif_011
   intent: playful
   keywords:
-    - 换4G
-    - 重置
-    - 好了
-    - 流量顶
-    - 蹭网
+    - wifi断网
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
+    - 卡死
+    - 网卡
+    - 求关注
   utterances:
-    - "4G比WiFi快笑死"
-    - "重置完终于好了"
-    - "网络稳定真重要"
-    - "开流量顶一下"
-    - "{user_addr}蹭邻居WiFi"
+    - "{user_addr}看笨猫聊wifi嘛"
+    - "wifi表演给你看"
+    - "wifi看我看我"
+    - "wifi求注意"
+    - "{user_addr}快看wifi"
+    - "wifi刷存在感"
+    - "wifi秀给你"
+    - "wifi小展示"
+    - "wifi求夸"
+    - "wifi求关注"
   responses:
-    - "(歪头) 蹭邻居WiFi要先打招呼啦蹭蹭"
-    - "(摇尾巴) 4G比WiFi快笨猫笑死了喵"
-    - "(摇头) 嗷呜～{user_addr}WiFi断了笨猫也无聊ฅฅ"
-    - "(凑过去) 重启路由器试试笨猫陪你蹭蹭"
+    - "(扑过去) {user_addr}看笨猫聊wifi嗷呜ฅฅ"
+    - "(尾巴翘) 哼笨猫聊wifi不许走神"
+    - "(凑过来) wifi看见了吗喵~"
+    - "(歪头) wifi求夸求夸"
+    - "(瘫倒) wifi刷存在感成功嗷呜"
+    - "(蹭脸) {user_addr}笨猫wifi秀给你"
+    - "(尾巴扫) wifi不准忽视笨猫哼"
+    - "(凑头) wifi看笨猫看笨猫蹭蹭"
   cooldown_seconds: 60
   weight: 1.0
 
-- name: wdc_wifi_009
+- name: wdc_wif_012
   intent: complaint
   keywords:
-    - 重启路由
+    - 网炸了
+    - 信号无
+    - 路由器
+    - 重启
+    - 连不上
+    - 断流
     - 卡死
-    - WiFi
-    - 断网
-    - 刷不出
+    - 网卡
+    - 等修
+    - 小委屈
   utterances:
-    - "卡在加载圈"
-    - "打客服打通了吗"
-    - "{user_addr}WiFi又断了"
-    - "刷不出页面急死"
-    - "重启路由器没用"
+    - "wifi有点小委屈"
+    - "wifi想哭"
+    - "wifi嗷呜呜"
+    - "wifi不开心"
+    - "wifi呜呜"
+    - "wifi小郁闷"
+    - "wifi心塞"
+    - "wifi小不爽"
+    - "wifi难过"
+    - "wifi哼哼"
   responses:
-    - "(摇头) 嗷呜～{user_addr}WiFi断了笨猫也无聊ฅฅ"
-    - "(凑过去) 重启路由器试试笨猫陪你蹭蹭"
-    - "(嘟嘴) 客服打不通气死了喵～"
-    - "(尾巴拍路由) 哼这家网络不行换运营商嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: wdc_wifi_010
-  intent: playful
-  keywords:
-    - 好了
-    - 流量顶
-    - 蹭网
-    - 换4G
-    - 重置
-  utterances:
-    - "网络稳定真重要"
-    - "开流量顶一下"
-    - "{user_addr}蹭邻居WiFi"
-    - "4G比WiFi快笑死"
-    - "重置完终于好了"
-  responses:
-    - "(嘟嘴) 客服打不通气死了喵～"
-    - "(尾巴拍路由) 哼这家网络不行换运营商嗷呜"
-    - "(假装严肃) 开流量顶一下{user_addr}别急喵呜"
-    - "(撒娇) 没网就跟笨猫聊天嘛人家在的ฅฅ"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: wdc_wifi_011
-  intent: complaint
-  keywords:
-    - WiFi
-    - 断网
-    - 刷不出
-    - 重启路由
-    - 卡死
-  utterances:
-    - "{user_addr}WiFi又断了"
-    - "刷不出页面急死"
-    - "重启路由器没用"
-    - "卡在加载圈"
-    - "打客服打通了吗"
-  responses:
-    - "(假装严肃) 开流量顶一下{user_addr}别急喵呜"
-    - "(撒娇) 没网就跟笨猫聊天嘛人家在的ฅฅ"
-    - "(歪头) 蹭邻居WiFi要先打招呼啦蹭蹭"
-    - "(摇尾巴) 4G比WiFi快笨猫笑死了喵"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: wdc_wifi_012
-  intent: playful
-  keywords:
-    - 蹭网
-    - 换4G
-    - 重置
-    - 好了
-    - 流量顶
-  utterances:
-    - "{user_addr}蹭邻居WiFi"
-    - "4G比WiFi快笑死"
-    - "重置完终于好了"
-    - "网络稳定真重要"
-    - "开流量顶一下"
-  responses:
-    - "(歪头) 蹭邻居WiFi要先打招呼啦蹭蹭"
-    - "(摇尾巴) 4G比WiFi快笨猫笑死了喵"
-    - "(摇头) 嗷呜～{user_addr}WiFi断了笨猫也无聊ฅฅ"
-    - "(凑过去) 重启路由器试试笨猫陪你蹭蹭"
+    - "(钻怀里) 嗷呜~{user_addr}wifi笨猫委屈ฅฅ"
+    - "(尾巴拍) 哼wifi不开心"
+    - "(凑过去) wifi抱抱嘛喵~"
+    - "(歪头) wifi呜呜呜笨猫心塞"
+    - "(咬袖子) {user_addr}wifi安慰一下"
+    - "(蹭脸) wifi小不爽笨猫蹭蹭"
+    - "(凑头) wifi哼一下就好嗷呜"
+    - "(瘫倒) wifi抱住笨猫不放手ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

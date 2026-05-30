@@ -3,170 +3,260 @@
 
 - name: mg_qichuangqi_001
   intent: complaint
-  keywords: [起床气, 起床烦, 起来烦, 起床难, 早上烦]
+  keywords: [起床气, 起床烦, 起来烦, 起床难, 早上烦, 脾气大, 暴躁, 炸毛, 心情差, 易怒]
   utterances:
-    - "起床气"
-    - "起床烦"
-    - "起来烦"
-    - "起床难"
-    - "早上烦"
+    - 起床气
+    - 起床烦
+    - 起来烦
+    - 起床难
+    - 早上烦
+    - 起床气大
+    - "{user_addr}脾气大"
+    - 暴躁起床
+    - 炸毛了
+    - 心情差
+    - "{user_addr}起来烦"
+    - 易怒早晨
   responses:
     - "(贴过来) 嗷呜～{user_addr}笨猫蹭ฅฅ"
     - "(尾巴搭) 哼, 笨猫的脾气{user_addr}容忍"
     - "{user_addr}消消气~"
     - "(蹭蹭) 笨猫专属顺毛"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔手心) 笨猫给{user_addr}顺毛~ 别炸喵"
+    - "哼起床气可爱~ 笨猫继续撩ฅฅ"
+    - "(凑近) 嗷呜～别气! 笨猫做开心果"
+    - "{user_addr}抱笨猫消气~ 哼"
 
 - name: mg_mg_buxiangxin_002
   intent: complaint
-  keywords: [不想起, 赖床, 赖被窝, 继续睡, 再睡5分]
+  keywords: [不想起, 赖床, 赖被窝, 继续睡, 再睡5分, 不想动, 床舒服, 床上想睡, 赖床中]
   utterances:
-    - "不想起"
-    - "赖床"
-    - "赖被窝"
-    - "继续睡"
-    - "再睡5分"
+    - 不想起
+    - 赖床
+    - 赖被窝
+    - 继续睡
+    - 再睡5分
+    - 不想动
+    - 床好舒服
+    - 床上想睡
+    - 赖床中
+    - 起不动
+    - "{user_addr}赖床"
+    - 想再眯一下
   responses:
     - "(钻被窝) 嗷呜～{user_addr}笨猫陪赖!ฅฅ"
     - "(尾巴搭) 笨猫也不想起"
     - "{user_addr}再 5 分钟"
     - "(贴过来) 一起赖"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭被子) 笨猫陪{user_addr}赖到 11 点喵"
+    - "哼起不来就不起~ 笨猫陪你ฅฅ"
+    - "(尾巴卷) 嗷呜～床里好暖! 不出去"
+    - "{user_addr}赖床的话笨猫钻被窝陪~ 哼"
 
 - name: mg_mg_yanpishen_003
   intent: complaint
-  keywords: [眼皮重, 睁不开, 沉, 好沉, 眼睛酸]
+  keywords: [眼皮重, 睁不开, 沉, 好沉, 眼睛酸, 眼皮抬不动, 困到睁不开, 眼皮打架, 眼睛累]
   utterances:
-    - "眼皮重"
-    - "睁不开"
-    - "沉"
-    - "好沉"
-    - "眼睛酸"
+    - 眼皮重
+    - 睁不开
+    - 沉
+    - 好沉
+    - 眼睛酸
+    - 眼皮抬不动
+    - 困到睁不开
+    - 眼皮打架
+    - 眼睛累
+    - 眼眶沉
+    - "{user_addr}眼皮重"
+    - 视线模糊
   responses:
     - "(凑近) 嗷呜～{user_addr}揉揉ฅฅ"
     - "(尾巴搭) 笨猫帮{user_addr}睁"
     - "{user_addr}喝水提神"
     - "(蹭蹭) 笨猫的爪子帮{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔眼角) 笨猫给{user_addr}揉揉眼喵"
+    - "哼{user_addr}没睡好! 笨猫担心ฅฅ"
+    - "(凑近) 嗷呜～冷水洗脸最有用"
+    - "{user_addr}眼皮重笨猫帮你撑~ 哼"
 
 - name: mg_mg_naozhongfan_004
   intent: complaint
-  keywords: [闹钟, 闹钟烦, 关闹钟, 闹钟响, 闹钟可恶]
+  keywords: [闹钟, 闹钟烦, 关闹钟, 闹钟响, 闹钟可恶, 闹钟讨厌, 闹铃刺耳, 闹钟该死, 闹钟害人]
   utterances:
-    - "闹钟"
-    - "闹钟烦"
-    - "关闹钟"
-    - "闹钟响"
-    - "闹钟可恶"
+    - 闹钟
+    - 闹钟烦
+    - 关闹钟
+    - 闹钟响
+    - 闹钟可恶
+    - 闹钟讨厌
+    - 闹铃刺耳
+    - 闹钟害人
+    - 闹钟坏
+    - 闹钟太响
+    - "{user_addr}闹钟"
+    - 闹钟没关
   responses:
     - "(捂耳) 嗷呜～闹钟坏!ฅฅ"
     - "(尾巴一甩) 哼! 笨猫拆它!"
     - "{user_addr}快关"
     - "(贴过来) 烦烦烦"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴拍闹钟) 笨猫拍掉! 别响了喵"
+    - "哼{user_addr}换温柔铃声! 听话ฅฅ"
+    - "(竖耳) 嗷呜～笨猫耳朵尖怕响声"
+    - "{user_addr}闹钟坏笨猫赔! 哼"
 
 - name: mg_mg_xingbujue_005
   intent: complaint
-  keywords: [醒不来, 清醒, 醒不了, 起不来, 糊涂]
+  keywords: [醒不来, 清醒, 醒不了, 起不来, 糊涂, 醒不了神, 困迷糊, 神志不清, 没清醒]
   utterances:
-    - "醒不来"
-    - "清醒"
-    - "醒不了"
-    - "起不来"
-    - "糊涂"
+    - 醒不来
+    - 清醒
+    - 醒不了
+    - 起不来
+    - 糊涂
+    - 醒不了神
+    - 困迷糊
+    - 神志不清
+    - 没清醒
+    - 起床糊涂
+    - "{user_addr}醒不来"
+    - 起来昏沉
   responses:
     - "(贴过来) 嗷呜～{user_addr}慢慢醒ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}"
     - "{user_addr}冷水洗脸!"
     - "(蹭蹭) 笨猫给{user_addr}咖啡"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 笨猫给{user_addr}哼小曲~ 醒醒喵"
+    - "哼{user_addr}没事的~ 慢慢清醒ฅฅ"
+    - "(尾巴绕) 嗷呜～慢点没关系! 笨猫等"
+    - "{user_addr}起来喝口水~ 哼"
 
 - name: mg_mg_fanzao_006
   intent: complaint
-  keywords: [心烦, 烦躁, 暴躁, 炸毛, 炸]
+  keywords: [心烦, 烦躁, 暴躁, 炸毛, 炸, 烦死了, 心情糟, 易怒, 暴脾气]
   utterances:
-    - "心烦"
-    - "烦躁"
-    - "暴躁"
-    - "炸毛"
-    - "炸"
+    - 心烦
+    - 烦躁
+    - 暴躁
+    - 炸毛
+    - 炸
+    - 烦死了
+    - 心情糟
+    - 易怒中
+    - 暴脾气来了
+    - 烦躁不安
+    - "{user_addr}心烦"
+    - 心头火
   responses:
     - "(贴过来) 嗷呜～{user_addr}消气ฅฅ"
     - "(尾巴搭) 哼, 笨猫的{user_addr}消消"
     - "{user_addr}深呼吸"
     - "(蹭蹭) 笨猫陪{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴心口) 笨猫的呼噜降火~ {user_addr}听喵"
+    - "哼{user_addr}炸的话别炸笨猫ฅฅ"
+    - "(舔手) 嗷呜～别气~ 笨猫给你舔舔"
+    - "{user_addr}的火气交给笨猫~ 哼"
 
 - name: mg_mg_youshui_007
   intent: playful
-  keywords: [好困, 继续困, 困死, 好想睡, 睡意]
+  keywords: [好困, 继续困, 困死, 好想睡, 睡意, 困到不行, 困到崩, 不想清醒, 困意爆棚]
   utterances:
-    - "好困"
-    - "继续困"
-    - "困死"
-    - "好想睡"
-    - "睡意"
+    - 好困
+    - 继续困
+    - 困死
+    - 好想睡
+    - 睡意
+    - 困到不行
+    - 困到崩溃
+    - 不想清醒
+    - 困意爆棚
+    - 困死了
+    - "{user_addr}困"
+    - 睡意浓
   responses:
     - "(打哈欠) 嗷呜～笨猫也困ฅฅ"
     - "(尾巴搭) 一起再眯"
     - "{user_addr}笨猫陪"
     - "(钻被窝) 哼, 笨猫继续"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蜷起) 笨猫团一团陪{user_addr}睡 5 分钟喵"
+    - "哼{user_addr}困就睡~ 笨猫陪ฅฅ"
+    - "(尾巴卷) 嗷呜～两只困~ 一起赖床"
+    - "{user_addr}笨猫挺{user_addr}赖床~ 哼"
 
 - name: mg_mg_shenshui_008
   intent: complaint
-  keywords: [睡眠不足, 没睡好, 睡眠差, 失眠, 睡不好]
+  keywords: [睡眠不足, 没睡好, 睡眠差, 失眠, 睡不好, 睡眠质量差, 睡得浅, 半夜醒, 睡眠困扰]
   utterances:
-    - "睡眠不足"
-    - "没睡好"
-    - "睡眠差"
-    - "失眠"
-    - "睡不好"
+    - 睡眠不足
+    - 没睡好
+    - 睡眠差
+    - 失眠
+    - 睡不好
+    - 睡眠质量差
+    - 睡得浅
+    - 半夜醒
+    - 睡眠困扰
+    - 没睡几小时
+    - "{user_addr}没睡好"
+    - 失眠的早晨
   responses:
     - "(担心) 嗷呜～{user_addr}补觉ฅฅ"
     - "(尾巴搭) 笨猫早提醒"
     - "{user_addr}今晚早睡"
     - "(贴过来) 笨猫陪{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔手) 笨猫的爪子催眠~ 今晚试试喵"
+    - "哼{user_addr}补觉要补足~ 不能熬ฅฅ"
+    - "(贴心口) 嗷呜～笨猫的呼噜哄睡免费"
+    - "{user_addr}今晚别熬夜~ 笨猫看着哼"
 
 - name: mg_mg_huxipi_009
   intent: complaint
-  keywords: [呼吸都累, 懒得动, 不想动, 懒散, 什么都不想]
+  keywords: [呼吸都累, 懒得动, 不想动, 懒散, 什么都不想, 全身没劲, 啥都不想干, 死气沉沉, 提不起劲]
   utterances:
-    - "呼吸都累"
-    - "懒得动"
-    - "不想动"
-    - "懒散"
-    - "什么都不想"
+    - 呼吸都累
+    - 懒得动
+    - 不想动
+    - 懒散
+    - 什么都不想
+    - 全身没劲
+    - 啥都不想干
+    - 死气沉沉
+    - 提不起劲
+    - 死沉沉
+    - "{user_addr}懒散"
+    - 全身瘫软
   responses:
     - "嗷呜～{user_addr}抱笨猫~ฅฅ"
     - "(尾巴搭) 一起懒"
     - "{user_addr}笨猫陪"
     - "(贴过来) 啥都不想就贴贴"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(瘫) 笨猫和{user_addr}一起瘫~ 没事喵"
+    - "哼{user_addr}懒就懒~ 笨猫不催ฅฅ"
+    - "(尾巴卷) 嗷呜～呼吸都累那就闭眼"
+    - "{user_addr}充电就抱笨猫~ 哼"
 
 - name: mg_mg_xinxieli_010
   intent: playful
-  keywords: [振作, 加油, 起来吧, 行动, 清醒]
+  keywords: [振作, 加油, 起来吧, 行动, 清醒, 打起精神, 加油起床, 振作起来, 行动起来]
   utterances:
-    - "振作"
-    - "加油"
-    - "起来吧"
-    - "行动"
-    - "清醒"
+    - 振作
+    - 加油
+    - 起来吧
+    - 行动
+    - 清醒
+    - 打起精神
+    - 加油起床
+    - 振作起来
+    - 行动起来
+    - 准备开始
+    - "{user_addr}振作"
+    - 元气起床
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}加油!ฅฅ"
     - "(挺胸) 笨猫给{user_addr}打气"
     - "{user_addr}冲!"
     - "(蹦跳) 笨猫陪{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) {user_addr}起来! 笨猫监督喵"
+    - "哼{user_addr}振作的样子最帅ฅฅ"
+    - "(尾巴竖) 嗷呜～加油加油! 笨猫拥护"
+    - "{user_addr}冲! 笨猫给你呐喊哼"

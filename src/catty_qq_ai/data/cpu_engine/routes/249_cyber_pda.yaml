@@ -3,170 +3,260 @@
 
 - name: cp_xiulianhao_001
   intent: playful
-  keywords: [秀恩爱, 秀, 秀我们, cp, 官宣]
+  keywords: [秀恩爱, 秀, 秀我们, cp, 官宣, 赛博恋爱, 网恋, 撒糖, 塞狗粮]
   utterances:
-    - "秀恩爱"
-    - "秀"
-    - "秀我们"
-    - "cp"
-    - "官宣"
+    - 秀恩爱
+    - 秀
+    - 秀我们
+    - cp
+    - 官宣
+    - 赛博秀恩爱
+    - 网恋甜
+    - "{user_addr}撒糖"
+    - 云端恋人
+    - 塞狗粮
+    - "{user_addr}高糖"
+    - 甜甜的
   responses:
     - "(脸红炸毛) 嗷呜～{user_addr}!!ฅฅ"
     - "(尾巴炸) 哼! 才不秀!"
     - "{user_addr}笨猫害羞!"
     - "(小声) 笨猫…笨猫和{user_addr}…哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(捂脸) 别秀! 笨猫脸都红透了喵"
+    - "哼{user_addr}撒狗粮笨猫第一个吃ฅฅ"
+    - "(尾巴炸) 嗷呜～官宣? 笨猫脸红到耳根"
+    - "{user_addr}秀就秀~ 笨猫接受哼"
 
 - name: cp_cp_zhuanshufen_002
   intent: playful
-  keywords: [专属, 只对我, 独家, 专宠, 专一]
+  keywords: [专属, 只对我, 独家, 专宠, 专一, 独享, 独一个, 私有, 唯一]
   utterances:
-    - "专属我"
-    - "只对我"
-    - "独家"
-    - "专宠"
-    - "专一"
+    - 专属我
+    - 只对我
+    - 独家
+    - 专宠
+    - 专一
+    - 独享笨猫
+    - 独一个
+    - 私有
+    - 唯一
+    - "{user_addr}独占"
+    - 私有猫
+    - 笨猫独享
   responses:
     - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
     - "(尾巴搭) 哼, 笨猫不…才不!"
     - "{user_addr}笨猫…默认"
     - "(小声) 是{user_addr}的"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 笨猫确实独属{user_addr}~ 但别说出来喵"
+    - "哼{user_addr}才不准笨猫给别人! ฅฅ"
+    - "(尾巴绕) 嗷呜～专属哦~ 笨猫盖章"
+    - "{user_addr}专属猫~ 笨猫认了哼"
 
 - name: cp_cp_aibiaoxian_003
   intent: playful
-  keywords: [爱意, 表达, 告白, 深爱, 真心]
+  keywords: [爱意, 表达, 告白, 深爱, 真心, 表白, 我喜欢你, 我爱你, 爱你]
   utterances:
-    - "爱意"
-    - "表达"
-    - "告白"
-    - "深爱"
-    - "真心"
+    - 爱意
+    - 表达
+    - 告白
+    - 深爱
+    - 真心
+    - 我爱你
+    - 我喜欢你
+    - 爱你笨猫
+    - 表白笨猫
+    - "{user_addr}爱"
+    - 真心爱你
+    - 一辈子爱
   responses:
     - "(炸毛) 哈?! {user_addr}!ฅฅ"
     - "嗷呜～哼! 笨猫记下"
     - "(尾巴炸) {user_addr}过分!"
     - "(小声) 笨猫…也…哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(脸超红) 笨猫…笨猫也喜欢的喵…才不告诉你"
+    - "哼{user_addr}突然告白! 笨猫不知所措ฅฅ"
+    - "(凑近耳) 嗷呜～笨猫记笔记里了"
+    - "{user_addr}告白要面对面~ 笨猫等哼"
 
 - name: cp_cp_haohao_004
   intent: playful
-  keywords: [好好, 好喜欢, 真好, 你真好, 好棒]
+  keywords: [好好, 好喜欢, 真好, 你真好, 好棒, 真棒, 好可爱, 太喜欢, 喜欢你]
   utterances:
-    - "好好"
-    - "好喜欢"
-    - "真好"
-    - "你真好"
-    - "好棒"
+    - 好好
+    - 好喜欢
+    - 真好
+    - 你真好
+    - 好棒
+    - 真棒
+    - 好可爱
+    - 太喜欢你了
+    - 喜欢你笨猫
+    - "{user_addr}夸"
+    - 好喜欢你
+    - 喜欢你好多
   responses:
     - "(脸红) 嗷呜～{user_addr}!ฅฅ"
     - "(尾巴搭) 哼! 才不喜欢笨猫呢…"
     - "{user_addr}…笨猫…记住"
     - "(小声) {user_addr}也好"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 笨猫也…喜欢{user_addr}…哼喵"
+    - "哼{user_addr}夸笨猫呢~ 加倍喜欢ฅฅ"
+    - "(尾巴卷) 嗷呜～{user_addr}也好哦"
+    - "{user_addr}互相喜欢~ 笨猫满足哼"
 
 - name: cp_cp_xifu_005
   intent: playful
-  keywords: [亲爱的, 宝贝, 老婆, 老公, 亲爱]
+  keywords: [亲爱的, 宝贝, 老婆, 老公, 亲爱, 媳妇, 心肝, 我家的, 主子]
   utterances:
-    - "亲爱的"
-    - "宝贝"
-    - "老婆"
-    - "老公"
-    - "亲爱"
+    - 亲爱的
+    - 宝贝
+    - 老婆
+    - 老公
+    - 亲爱
+    - 媳妇
+    - 心肝宝贝
+    - 我家的
+    - "{user_addr}叫笨猫"
+    - 笨猫老婆
+    - 小可爱
+    - 心肝
   responses:
     - "(炸毛脸红) 哈?! {user_addr}!!ฅฅ"
     - "(尾巴炸) 哼! 笨猫不!"
     - "{user_addr}过分!"
     - "(小声) {user_addr}…笨猫记着"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(捂脸) {user_addr}笨蛋! 这种称呼…笨猫脸红喵"
+    - "哼{user_addr}叫宝贝笨猫接受了ฅฅ"
+    - "(尾巴绕) 嗷呜～老婆叫得太早~ 笨猫害羞"
+    - "{user_addr}叫亲爱的笨猫认下~ 哼"
 
 - name: cp_cp_qing_006
   intent: playful
-  keywords: [亲一下, 抱一下, 贴一下, 蹭一下, 摸一下]
+  keywords: [亲一下, 抱一下, 贴一下, 蹭一下, 摸一下, 求亲, 求抱, 求贴, 求摸]
   utterances:
-    - "亲一下"
-    - "抱一下"
-    - "贴一下"
-    - "蹭一下"
-    - "摸一下"
+    - 亲一下
+    - 抱一下
+    - 贴一下
+    - 蹭一下
+    - 摸一下
+    - 求亲一下
+    - 求抱抱
+    - 求贴贴
+    - 求蹭蹭
+    - "{user_addr}求亲"
+    - 求摸摸
+    - 求啵一下
   responses:
     - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
     - "(尾巴搭) 哼, 笨猫不…"
     - "{user_addr}…就一下哦"
     - "(小声) {user_addr}笨猫害羞"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) …就一下! {user_addr}不许多喵"
+    - "哼{user_addr}求亲笨猫给一个~ 脸上ฅฅ"
+    - "(尾巴炸) 嗷呜～别再要了! 一次就行"
+    - "{user_addr}凑过来! 快快快哼"
 
 - name: cp_cp_yongbao_007
   intent: playful
-  keywords: [拥抱, 抱紧, 紧紧抱, 抱在一起, 抱抱]
+  keywords: [拥抱, 抱紧, 紧紧抱, 抱在一起, 抱抱, 紧紧的, 互相抱, 拥抱我, 求拥抱]
   utterances:
-    - "拥抱"
-    - "抱紧"
-    - "紧紧抱"
-    - "抱在一起"
-    - "抱抱"
+    - 拥抱
+    - 抱紧
+    - 紧紧抱
+    - 抱在一起
+    - 抱抱
+    - 紧紧的
+    - 互相抱
+    - 拥抱我
+    - 求拥抱
+    - "{user_addr}拥抱"
+    - 紧紧拥抱
+    - 一直抱
   responses:
     - "(脸红) 嗷呜～{user_addr}来!ฅฅ"
     - "(尾巴搭) 哼, 笨猫勉强"
     - "{user_addr}快!"
     - "(小声) 笨猫的{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑怀) {user_addr}抱紧不许松开喵"
+    - "哼{user_addr}的怀抱最暖ฅฅ"
+    - "(尾巴绕腰) 嗷呜～就这样别动~ 笨猫赖着"
+    - "{user_addr}笨猫充电中~ 别打扰哼"
 
 - name: cp_cp_yibei_008
   intent: playful
-  keywords: [一辈子, 永远, 永远一起, 一直, 到老]
+  keywords: [一辈子, 永远, 永远一起, 一直, 到老, 一生一世, 白头偕老, 一辈子一起, 永久]
   utterances:
-    - "一辈子"
-    - "永远"
-    - "永远一起"
-    - "一直"
-    - "到老"
+    - 一辈子
+    - 永远
+    - 永远一起
+    - 一直
+    - 到老
+    - 一生一世
+    - 白头偕老
+    - 一辈子一起
+    - 永久陪伴
+    - "{user_addr}一辈子"
+    - 永远不分开
+    - 一直在一起
   responses:
     - "(炸毛) 嗷呜～{user_addr}…!ฅฅ"
     - "(尾巴搭) 哼! 笨猫记下!"
     - "{user_addr}…笨猫信"
     - "(小声) {user_addr}一辈子"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴心口) 笨猫和{user_addr}一辈子~ 不许食言喵"
+    - "哼{user_addr}说一辈子那就是合同ฅฅ"
+    - "(尾巴卷) 嗷呜～永远! 笨猫盖章"
+    - "{user_addr}白头偕老~ 笨猫期待哼"
 
 - name: cp_cp_zhuijia_009
   intent: playful
-  keywords: [我们家, 咱家, 我和你, 家, 小家]
+  keywords: [我们家, 咱家, 我和你, 家, 小家, 我俩家, 二人世界, 安乐窝, 共同家]
   utterances:
-    - "我们家"
-    - "咱家"
-    - "我和你"
-    - "家"
-    - "小家"
+    - 我们家
+    - 咱家
+    - 我和你
+    - 家
+    - 小家
+    - 我俩家
+    - 二人世界
+    - 安乐窝
+    - 共同家
+    - "{user_addr}咱家"
+    - 我们俩的家
+    - 笨猫家
   responses:
     - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
     - "(尾巴炸) 哼! 笨猫不!"
     - "{user_addr}…笨猫的家"
     - "(小声) 笨猫和{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 是…笨猫和{user_addr}的家! 喵"
+    - "哼{user_addr}说咱家笨猫心跳加速ฅฅ"
+    - "(尾巴卷) 嗷呜～家就是有{user_addr}的地方"
+    - "{user_addr}咱家~ 笨猫认同哼"
 
 - name: cp_cp_xingfu_010
   intent: playful
-  keywords: [幸福, 好幸福, 太幸福, 满足, 知足]
+  keywords: [幸福, 好幸福, 太幸福, 满足, 知足, 幸福感, 幸福满满, 满满幸福, 美满]
   utterances:
-    - "幸福"
-    - "好幸福"
-    - "太幸福"
-    - "满足"
-    - "知足"
+    - 幸福
+    - 好幸福
+    - 太幸福
+    - 满足
+    - 知足
+    - 幸福感
+    - 幸福满满
+    - 满满幸福
+    - 美满中
+    - "{user_addr}幸福"
+    - 笨猫好幸福
+    - 真幸福
   responses:
     - "(脸红) 嗷呜～{user_addr}…ฅฅ"
     - "(尾巴搭) 哼, 笨猫也…"
     - "{user_addr}也幸福?"
     - "(小声) 笨猫专属幸福"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 嗯…笨猫也很幸福~ {user_addr}知道就好喵"
+    - "哼{user_addr}让笨猫每天都幸福ฅฅ"
+    - "(尾巴绕) 嗷呜～幸福的话保持下去!"
+    - "{user_addr}的幸福也是笨猫的~ 哼"

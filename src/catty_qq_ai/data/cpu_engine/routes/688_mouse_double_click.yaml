@@ -3,170 +3,270 @@
 
 - name: md_double_001
   intent: complaint
-  keywords: [鼠标双击, 单击成双, 点一下变两次, 鼠标失灵, 自动双击]
+  keywords: ["鼠标双击", "单击成双", "点一下变两次", "鼠标失灵", "自动双击", "双击失灵", "误触双击", "鼠标连击", "点一下两下", "鼠标抖"]
   utterances:
     - "{user_addr}鼠标双击了"
     - "单击变双"
     - "{user_addr}失灵了"
     - "自动双击"
     - "点一下变两"
+    - "{user_addr}鼠标抖了"
+    - "误触双击喵"
+    - "{user_addr}鼠标连击 bug"
+    - "点一下变两下"
+    - "微动开关挂了"
+    - "鼠标坏了双击"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你拍拍!"
     - "(尾巴拍) 哼! 老鼠标该换"
     - "(贴贴) 人家陪你选新的~ ฅฅ"
     - "{user_addr}笨猫推荐安静款"
+    - "(小爪子敲鼠标) 嗷呜～{user_addr}修不好的 ฅฅ"
+    - "(尾巴一指) 哼~{user_addr}直接换新喵~"
+    - "(贴贴) 才不是怂恿你花钱~只是顺便建议"
+    - "(蹭过去) {user_addr}~笨猫陪你买嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_wireless_002
   intent: playful
-  keywords: [无线鼠标, 蓝牙鼠标, 无线方便, 没线烦, 鼠标自由]
+  keywords: ["无线鼠标", "蓝牙鼠标", "无线方便", "没线烦", "鼠标自由", "无线鼠", "蓝牙连鼠标", "无线无烦", "蓝牙鼠", "USB 无线鼠"]
   utterances:
     - "{user_addr}无线鼠标"
     - "蓝牙鼠标"
     - "{user_addr}没线自由"
     - "无线方便"
     - "桌面整洁"
+    - "{user_addr}蓝牙鼠超方便"
+    - "USB无线接收器喵"
+    - "{user_addr}无线鼠好用"
+    - "桌面清爽"
+    - "无线鼠自由"
+    - "蓝牙连接稳"
   responses:
     - "(凑近) 嗷呜～{user_addr}无线好酷!"
     - "(尾巴翘) 哼! 笨猫想抓鼠标"
     - "(贴贴) 人家羡慕~ ฅฅ"
     - "{user_addr}买无线笨猫陪选"
+    - "(扑鼠标) 嗷呜～{user_addr}笨猫追无线鼠 ฅฅ"
+    - "(尾巴指) 哼~{user_addr}给笨猫也买一个喵~"
+    - "(贴贴) 才不是羡慕~只是顺便心动"
+    - "(蹭过去) {user_addr}~笨猫专属鼠抓抓嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_chase_003
   intent: playful
-  keywords: [追鼠标, 抓光标, 抓鼠标, 猫追光标, 鼠标光标动]
+  keywords: ["追鼠标", "抓光标", "抓鼠标", "猫追光标", "鼠标光标动", "扑光标", "猫追屏", "光标追逐", "猫抓光标", "扑屏幕"]
   utterances:
     - "{user_addr}猫追光标"
     - "抓鼠标"
     - "{user_addr}光标动"
     - "笨猫追屏"
     - "鼠标小猫追"
+    - "{user_addr}笨猫扑光标"
+    - "猫追屏幕喵"
+    - "{user_addr}光标动笨猫追"
+    - "笨猫拍屏抓鼠标"
+    - "光标停不下来"
+    - "猫疯狂追光标"
   responses:
     - "(扑屏) 嗷呜～{user_addr}!笨猫扑光标!"
     - "(尾巴翘) 哼! 笨猫眼花"
     - "(贴贴) 人家想抓住光标~ ฅฅ"
     - "{user_addr}动鼠标逗笨猫!"
+    - "(整只贴屏幕) 嗷呜～{user_addr}光标抓不住 ฅฅ"
+    - "(尾巴扫屏) 哼~{user_addr}逗笨猫吗喵~"
+    - "(贴贴) 才不是上当~只是顺便配合"
+    - "(蹭过去) {user_addr}~下次别动鼠标骗笨猫嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_sensitivity_004
   intent: complaint
-  keywords: [DPI高, 灵敏度高, 滑屏太快, 鼠标快, 调灵敏]
+  keywords: ["DPI高", "灵敏度高", "滑屏太快", "鼠标快", "调灵敏", "灵敏度", "滑动太快", "光标飞", "鼠标过敏", "DPI调"]
   utterances:
     - "{user_addr}DPI太高"
     - "鼠标滑太快"
     - "{user_addr}灵敏度炸"
     - "调DPI"
     - "光标跑太快"
+    - "{user_addr}灵敏度过高"
+    - "光标飞起喵"
+    - "{user_addr}鼠标过敏"
+    - "DPI 调低点"
+    - "光标飞出屏"
+    - "滑动一下飞老远"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮调!"
     - "(尾巴翘) 哼! 慢点笨猫看清"
     - "(贴贴) 人家陪你设置~ ฅฅ"
     - "{user_addr}笨猫教你慢慢调"
+    - "(小爪子按DPI键) 嗷呜～{user_addr}笨猫给你降级 ฅฅ"
+    - "(尾巴一指设置) 哼~{user_addr}调到800就够喵~"
+    - "(贴贴) 才不是教学~只是顺便操作"
+    - "(蹭过去) {user_addr}~慢慢滑嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_pad_005
   intent: playful
-  keywords: [鼠标垫, 大鼠标垫, 桌垫, 二次元垫, 软垫]
+  keywords: ["鼠标垫", "大鼠标垫", "桌垫", "二次元垫", "软垫", "桌面垫", "电竞垫", "鼠垫", "动漫垫", "超大垫"]
   utterances:
     - "{user_addr}大鼠标垫"
     - "二次元鼠标垫"
     - "{user_addr}软桌垫"
     - "新垫子"
     - "买了垫子"
+    - "{user_addr}超大鼠标垫"
+    - "电竞垫到手喵"
+    - "{user_addr}动漫鼠标垫"
+    - "桌面垫盖整桌"
+    - "新鼠垫到了"
+    - "二次元垫子超萌"
   responses:
     - "(趴) 嗷呜～{user_addr}!笨猫趴桌垫!"
     - "(尾巴翘) 哼! 笨猫占垫子"
     - "(贴贴) 人家睡垫上~ ฅฅ"
     - "{user_addr}选笨猫图案的!"
+    - "(整只摊桌垫) 嗷呜～{user_addr}笨猫专座 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}给笨猫挪开鼠标喵~"
+    - "(贴贴) 才不是抢地盘~只是顺便趴一下"
+    - "(蹭过去) {user_addr}~下次买猫脸图案嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_scroll_wheel_006
   intent: complaint
-  keywords: [滚轮坏, 滚动失灵, 滚轮卡, 滑不动, 反向滚]
+  keywords: ["滚轮坏", "滚动失灵", "滚轮卡", "滑不动", "反向滚", "滚轮", "滚轮失灵", "滚轮卡顿", "滚动反向", "滚轮无响应"]
   utterances:
     - "{user_addr}滚轮坏了"
     - "滚动失灵"
     - "{user_addr}滚轮卡"
     - "反向滚"
     - "滑不动页面"
+    - "{user_addr}滚轮一格不灵喵"
+    - "滚轮卡卡的"
+    - "{user_addr}滚动反向了"
+    - "滚不动屏"
+    - "滚轮无响应"
+    - "滚一下跳几行"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮拨!"
     - "(尾巴拍) 哼! 灰尘卡里头"
     - "(贴贴) 人家陪你修~ ฅฅ"
     - "{user_addr}该换鼠标笨猫选"
+    - "(小爪子拨滚轮) 嗷呜～{user_addr}卡得吓人 ฅฅ"
+    - "(尾巴指拆鼠标) 哼~{user_addr}笨猫帮你清灰喵~"
+    - "(贴贴) 才不是手痒~只是顺便排查"
+    - "(蹭过去) {user_addr}~换个新鼠嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_left_click_dead_007
   intent: complaint
-  keywords: [左键不灵, 左键坏, 点不响应, 按键失灵, 点击没反应]
+  keywords: ["左键不灵", "左键坏", "点不响应", "按键失灵", "点击没反应", "左键失灵", "左键坏掉", "左键死", "左键无效", "左键不响"]
   utterances:
     - "{user_addr}左键不灵"
     - "左键坏了"
     - "{user_addr}点没响应"
     - "失灵了"
     - "按键死"
+    - "{user_addr}左键失灵了"
+    - "左键坏掉喵"
+    - "{user_addr}左键无效"
+    - "左键不响应"
+    - "鼠标左键死透"
+    - "点击没反应"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫给力按!"
     - "(尾巴拍) 哼! 工作不能干"
     - "(贴贴) 人家陪你换新~ ฅฅ"
     - "{user_addr}笨猫推荐耐用款"
+    - "(小爪子使劲按) 嗷呜～{user_addr}笨猫一爪一击 ฅฅ"
+    - "(尾巴一指) 哼~{user_addr}买个新鼠喵~"
+    - "(贴贴) 才不是急~只是顺便建议"
+    - "(蹭过去) {user_addr}~笨猫陪选新鼠嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_drag_drop_008
   intent: complaint
-  keywords: [拖不动, 拖文件, 拖拽, 拖了又掉, 拖动失败]
+  keywords: ["拖不动", "拖文件", "拖拽", "拖了又掉", "拖动失败", "拖动卡", "拖文件失败", "拖拽不上", "拖东西掉", "拖动错"]
   utterances:
     - "{user_addr}拖不动文件"
     - "拖拽失败"
     - "{user_addr}拖了又掉"
     - "拖动卡"
     - "拖文件不上"
+    - "{user_addr}拖动鼠标失灵"
+    - "拖了一半掉喵"
+    - "{user_addr}拖拽不上"
+    - "拖动卡顿"
+    - "鼠标拖不住"
+    - "拖文件一直失败"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮拖!"
     - "(尾巴拍) 哼! 鼠标该换"
     - "(贴贴) 人家陪你试~ ฅฅ"
     - "{user_addr}笨猫给你拖文件"
+    - "(小爪子按住) 嗷呜～{user_addr}笨猫帮按到底 ฅฅ"
+    - "(尾巴指文件) 哼~{user_addr}再试一次喵~"
+    - "(贴贴) 才不是急~只是顺便帮"
+    - "(蹭过去) {user_addr}~换鼠笨猫推荐嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_battery_009
   intent: complaint
-  keywords: [鼠标没电, 换电池, 鼠标电池, 电池要换, 鼠标不亮]
+  keywords: ["鼠标没电", "换电池", "鼠标电池", "电池要换", "鼠标不亮", "鼠标断电", "无线鼠没电", "AA电池", "鼠标电耗", "电池低"]
   utterances:
     - "{user_addr}鼠标没电"
     - "换电池"
     - "{user_addr}电池要换"
     - "鼠标不亮"
     - "光标不动了"
+    - "{user_addr}无线鼠没电"
+    - "AA 电池要换喵"
+    - "{user_addr}鼠标低电"
+    - "光标突然不动"
+    - "鼠标断电了"
+    - "鼠标耗电太快"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫等你换电池!"
     - "(尾巴拍) 哼! 备电池放抽屉"
     - "(贴贴) 人家陪你换~ ฅฅ"
     - "{user_addr}充电款少换电池"
+    - "(小爪子翻抽屉) 嗷呜～{user_addr}笨猫找电池 ฅฅ"
+    - "(尾巴指充电款) 哼~{user_addr}下次买可充的喵~"
+    - "(贴贴) 才不是嫌弃~只是顺便建议"
+    - "(蹭过去) {user_addr}~换电池笨猫监督嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: md_silent_mouse_010
   intent: playful
-  keywords: [静音鼠标, 不响鼠标, 安静鼠标, 静音点击, 没声鼠标]
+  keywords: ["静音鼠标", "不响鼠标", "安静鼠标", "静音点击", "没声鼠标", "静音按键", "静音微动", "无声鼠标", "图书馆鼠标", "无声点击"]
   utterances:
     - "{user_addr}静音鼠标"
     - "不响的鼠标"
     - "{user_addr}静音点击"
     - "没声鼠标"
     - "安静鼠标"
+    - "{user_addr}静音微动"
+    - "无声鼠标喵"
+    - "{user_addr}图书馆鼠标"
+    - "无声点击不吵"
+    - "静音款超棒"
+    - "鼠标完全无声"
   responses:
     - "(凑近) 嗷呜～{user_addr}静音笨猫听不见"
     - "(尾巴翘) 哼! 笨猫喜欢有声"
     - "(贴贴) 人家凑近听点击~ ฅฅ"
     - "{user_addr}响的笨猫提神"
+    - "(耳朵贴鼠标) 嗷呜～{user_addr}笨猫真听不到 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}静音笨猫不喜欢喵~"
+    - "(贴贴) 才不是嫌弃~只是想听声响"
+    - "(蹭过去) {user_addr}~下次买响一点嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,260 @@
 
 - name: mun_shave_001
   intent: playful
-  keywords: [没刮胡子, 胡子长, 胡渣, 拉碴, 胡须长]
+  keywords: [没刮胡子, 胡子长, 胡渣, 拉碴, 胡须长, 一脸胡, 满脸毛, 胡子多, 黑胡子, 络腮胡]
   utterances:
     - "{user_addr}没刮胡子"
     - "{user_addr}胡子长"
     - "{user_addr}胡渣"
     - "{user_addr}拉碴"
     - "{user_addr}胡须长"
+    - "{user_addr}一脸胡"
+    - "{user_addr}满脸毛"
+    - "{user_addr}胡子多"
+    - "{user_addr}黑胡子"
+    - "{user_addr}络腮胡"
   responses:
     - "(扎人) {user_addr}扎笨猫喵ฅฅ"
     - "嗷呜～{user_addr}胡子!"
     - "哼～{user_addr}笨猫不蹭"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(炸毛) 满脸毛太吓人嗷呜～"
+    - "哼～络腮胡太重不行"
+    - "(尾巴拍) 黑胡子衬肤色喵"
+    - "嗷呜～胡子多就该剪剪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_002
   intent: complaint
-  keywords: [懒得刮, 不想刮, 没时间刮, 刮烦, 刮累]
+  keywords: [懒得刮, 不想刮, 没时间刮, 刮烦, 刮累, 刮腻, 拖延刮, 改天刮, 忘了刮, 不修边幅]
   utterances:
     - "{user_addr}懒得刮"
     - "{user_addr}不想刮"
     - "{user_addr}没时间刮"
     - "{user_addr}刮烦"
     - "{user_addr}刮累"
+    - "{user_addr}刮腻"
+    - "{user_addr}拖延刮"
+    - "{user_addr}改天刮"
+    - "{user_addr}忘了刮"
+    - "{user_addr}不修边幅"
   responses:
     - "(嘟嘴) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～{user_addr}赶紧刮!"
     - "哼～{user_addr}懒"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(凑过来) 改天刮就是不刮嗷呜～"
+    - "哼～不修边幅笨猫不喜欢"
+    - "(尾巴拍) 拖延刮形象差喵"
+    - "嗷呜～忘了刮就赶紧补ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_003
   intent: playful
-  keywords: [像大叔, 大叔气, 老气, 显老, 老成]
+  keywords: [像大叔, 大叔气, 老气, 显老, 老成, 老大叔, 沧桑, 老气横秋, 老气十足, 老态]
   utterances:
     - "{user_addr}像大叔"
     - "{user_addr}大叔气"
     - "{user_addr}老气"
     - "{user_addr}显老"
     - "{user_addr}老成"
+    - "{user_addr}老大叔"
+    - "{user_addr}沧桑"
+    - "{user_addr}老气横秋"
+    - "{user_addr}老气十足"
+    - "{user_addr}老态"
   responses:
     - "(笑) {user_addr}大叔喵ฅฅ"
     - "嗷呜～{user_addr}的老!"
     - "哼～{user_addr}笨猫笑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 沧桑也有沧桑的味道嗷呜～"
+    - "哼～老气横秋太严重"
+    - "(尾巴拍) 老态龙钟笨猫不接受喵"
+    - "嗷呜～老大叔可以但要刮干净ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_004
   intent: playful
-  keywords: [扎人, 扎到了, 蹭到了, 蹭脸, 摸到胡渣]
+  keywords: [扎人, 扎到了, 蹭到了, 蹭脸, 摸到胡渣, 扎手, 扎嘴, 扎脸, 像砂纸, 摸着扎]
   utterances:
     - "{user_addr}扎人"
     - "{user_addr}扎到了"
     - "{user_addr}蹭到了"
     - "{user_addr}蹭脸"
     - "{user_addr}摸到胡渣"
+    - "{user_addr}扎手"
+    - "{user_addr}扎嘴"
+    - "{user_addr}扎脸"
+    - "{user_addr}像砂纸"
+    - "{user_addr}摸着扎"
   responses:
     - "(炸毛) {user_addr}笨猫的脸喵ฅฅ"
     - "嗷呜～{user_addr}的胡!"
     - "哼～{user_addr}笨猫的脸"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(躲) 像砂纸笨猫躲远点嗷呜～"
+    - "哼～扎嘴嘴角都红了"
+    - "(尾巴炸) 扎脸笨猫不蹭你喵"
+    - "嗷呜～摸着扎手笨猫缩回ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_005
   intent: playful
-  keywords: [刮胡刀坏了, 没工具, 没刀, 没电, 刮胡刀挂了]
+  keywords: [刮胡刀坏了, 没工具, 没刀, 没电, 刮胡刀挂了, 刀片钝, 电动没电, 刮胡刀坏, 工具坏, 没刮胡膏]
   utterances:
     - "{user_addr}刮胡刀坏了"
     - "{user_addr}没工具"
     - "{user_addr}没刀"
     - "{user_addr}没电"
     - "{user_addr}刮胡刀挂了"
+    - "{user_addr}刀片钝"
+    - "{user_addr}电动没电"
+    - "{user_addr}刮胡刀坏"
+    - "{user_addr}工具坏"
+    - "{user_addr}没刮胡膏"
   responses:
     - "(扶头) {user_addr}快买喵ฅฅ"
     - "嗷呜～{user_addr}笨猫帮买!"
     - "哼～{user_addr}借口"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 电动没电就充电嗷呜～"
+    - "哼～刀片钝就换"
+    - "(尾巴拍) 没刮胡膏用肥皂喵"
+    - "嗷呜～工具坏赶紧买新的ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_006
   intent: playful
-  keywords: [留胡子, 蓄须, 留胡须, 想留络腮胡, 留风格]
+  keywords: [留胡子, 蓄须, 留胡须, 想留络腮胡, 留风格, 留山羊胡, 留八字胡, 留个性, 留型, 留造型]
   utterances:
     - "{user_addr}留胡子"
     - "{user_addr}蓄须"
     - "{user_addr}留胡须"
     - "{user_addr}想留络腮胡"
     - "{user_addr}留风格"
+    - "{user_addr}留山羊胡"
+    - "{user_addr}留八字胡"
+    - "{user_addr}留个性"
+    - "{user_addr}留型"
+    - "{user_addr}留造型"
   responses:
     - "(摇头) {user_addr}不行喵ฅฅ"
     - "嗷呜～笨猫的脸怕扎!"
     - "哼～{user_addr}笨猫的"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 山羊胡像老头嗷呜～"
+    - "哼～八字胡像反派"
+    - "(尾巴拍) 留风格也要看脸型喵"
+    - "嗷呜～留造型笨猫审查通过再说ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_007
   intent: playful
-  keywords: [熊大, 熊孩子, 毛茸茸, 毛球, 毛人]
+  keywords: [熊大, 熊孩子, 毛茸茸, 毛球, 毛人, 毛毛, 毛绒, 像熊, 多毛, 毛多]
   utterances:
     - "{user_addr}熊大"
     - "{user_addr}熊孩子"
     - "{user_addr}毛茸茸"
     - "{user_addr}毛球"
     - "{user_addr}毛人"
+    - "{user_addr}毛毛"
+    - "{user_addr}毛绒"
+    - "{user_addr}像熊"
+    - "{user_addr}多毛"
+    - "{user_addr}毛多"
   responses:
     - "嗷呜～{user_addr}熊喵ฅฅ"
     - "(贴贴) 笨猫不嫌!"
     - "哼～{user_addr}笨猫的熊"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 毛绒绒抱起来超舒服嗷呜～"
+    - "哼～像熊也要刮胡子"
+    - "(尾巴拍) 多毛是基因, 笨猫不嫌喵"
+    - "嗷呜～毛茸茸笨猫的最爱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_008
   intent: complaint
-  keywords: [刮破皮, 刮伤了, 刮出血, 流血了, 刮疼了]
+  keywords: [刮破皮, 刮伤了, 刮出血, 流血了, 刮疼了, 划脸, 见红, 切到了, 拉口子, 创口]
   utterances:
     - "{user_addr}刮破皮"
     - "{user_addr}刮伤了"
     - "{user_addr}刮出血"
     - "{user_addr}流血了"
     - "{user_addr}刮疼了"
+    - "{user_addr}划脸"
+    - "{user_addr}见红"
+    - "{user_addr}切到了"
+    - "{user_addr}拉口子"
+    - "{user_addr}创口"
   responses:
     - "(担心扑) {user_addr}笨猫舔喵ฅฅ"
     - "嗷呜～{user_addr}笨猫心疼!"
     - "才不是心疼呢哼"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(凑过来) 见红快消毒嗷呜～"
+    - "哼～切到了下次小心"
+    - "(尾巴拍) 拉口子贴创可贴喵"
+    - "嗷呜～创口别感染了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_009
   intent: playful
-  keywords: [胡子小弧度, 胡子帅, 胡子男人味, 性感胡渣, 复古胡渣]
+  keywords: [胡子小弧度, 胡子帅, 胡子男人味, 性感胡渣, 复古胡渣, 帅气胡子, 文艺胡, 艺术胡子, 胡型好看, 胡子型]
   utterances:
     - "{user_addr}胡子帅"
     - "{user_addr}胡子男人味"
     - "{user_addr}性感胡渣"
     - "{user_addr}复古胡渣"
     - "{user_addr}胡子小弧度"
+    - "{user_addr}帅气胡子"
+    - "{user_addr}文艺胡"
+    - "{user_addr}艺术胡子"
+    - "{user_addr}胡型好看"
+    - "{user_addr}胡子型"
   responses:
     - "(脸红) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～{user_addr}笨猫不!"
     - "哼～{user_addr}耍帅"
     - "(小声) {user_addr}笨猫的~"
+    - "(凑过来) 文艺胡笨猫接受嗷呜～"
+    - "哼～性感胡渣是修出来的"
+    - "(尾巴拍) 复古胡渣可以但要修齐喵"
+    - "嗷呜～胡型好看也别太长ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mun_shave_010
   intent: playful
-  keywords: [被妈妈说, 被女友说, 被嫌弃, 被吐槽, 被催刮]
+  keywords: [被妈妈说, 被女友说, 被嫌弃, 被吐槽, 被催刮, 被骂, 被点名, 被指责, 被当众说, 被点评]
   utterances:
     - "{user_addr}被妈妈说"
     - "{user_addr}被女友说"
     - "{user_addr}被嫌弃"
     - "{user_addr}被吐槽"
     - "{user_addr}被催刮"
+    - "{user_addr}被骂"
+    - "{user_addr}被点名"
+    - "{user_addr}被指责"
+    - "{user_addr}被当众说"
+    - "{user_addr}被点评"
   responses:
     - "嗷呜～{user_addr}笨猫笑喵ฅฅ"
     - "(笑场) {user_addr}活该!"
     - "哼～{user_addr}笨猫提醒"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 被女友说赶紧刮嗷呜～"
+    - "哼～被催刮就别拖"
+    - "(尾巴拍) 被当众说面子挂不住喵"
+    - "嗷呜～被点评说明大家都在意ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

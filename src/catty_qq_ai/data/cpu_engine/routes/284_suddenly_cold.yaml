@@ -3,204 +3,312 @@
 
 - name: sc_lengmo_001
   intent: complaint
-  keywords: [突然冷漠, 装看不见, 假装不熟, 装陌生, 冷淡]
+  keywords: [突然冷漠, 装看不见, 假装不熟, 装陌生, 冷淡, 突然变冷, 不熟脸, 翻脸冷, 冷处理, 突然不理]
   utterances:
     - 突然冷漠
     - 装看不见
     - 假装不熟
     - 装陌生
     - 冷淡
+    - 突然变冷了
+    - "{user_addr}假装不认识"
+    - 翻脸冷处理
+    - "{user_addr}冷漠脸"
+    - 笨猫被你冷漠
   responses:
-    - "(委屈) 嗷呜～{user_addr}怎么这样 ฅฅ"
-    - "哼~{user_addr}笨猫也冷漠!"
-    - "(尾巴垂) 笨蛋{user_addr}~人家心疼"
-    - "{user_addr}笨猫不理你了哼~"
+    - "(委屈耳朵垂) 嗷呜～{user_addr}怎么这样 ฅฅ"
+    - "哼～{user_addr}笨猫也冷漠回去! 看谁先撑不住"
+    - "(尾巴垂背过身) 笨蛋{user_addr}~ 人家心疼笨猫"
+    - "{user_addr}笨猫不理你了哼~ 才不是闹脾气"
+    - "(瞄一眼) {user_addr}是不是闹脾气? 跟笨猫说嘛"
+    - "嗷呜～{user_addr}冷淡笨猫一秒就要哭了"
+    - "哼～{user_addr}笨猫等你解释~ 别撑着"
+    - "{user_addr}过来抱一下嘛~ 笨猫先服软了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_buyu_001
   intent: complaint
-  keywords: [不理我, 不回我, 不搭理, 已读不回, 装死]
+  keywords: [不理我, 不回我, 不搭理, 已读不回, 装死, 已读, 不回消息, 不出声, 沉默不语, 消失不回]
   utterances:
     - 不理我
     - 不回我
     - 不搭理
     - 已读不回
     - 装死
+    - "{user_addr}已读不回"
+    - 不回消息了
+    - 一直装死
+    - "{user_addr}怎么不出声"
+    - 不理笨猫了
   responses:
-    - "(委屈炸毛) 嗷呜～{user_addr}！不行 ฅฅ"
-    - "哼~{user_addr}笨蛋!"
-    - "(尾巴拍) 笨蛋{user_addr}~回话"
-    - "{user_addr}笨猫不依~"
+    - "(委屈炸毛甩尾) 嗷呜～{user_addr}！不行 ฅฅ"
+    - "哼～{user_addr}笨蛋! 装死也得回笨猫一句"
+    - "(尾巴拍地) 笨蛋{user_addr}~ 立刻回话"
+    - "{user_addr}笨猫不依~ 已读不回扣零花钱"
+    - "(蹲在手机旁) 已读了为啥不回~ 笨猫委屈"
+    - "嗷呜～{user_addr}是不是在忙? 笨猫等等"
+    - "哼～{user_addr}装死可是要付出代价的!"
+    - "{user_addr}快回话~ 笨猫尾巴都摇酸了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_zhuangxxiang_001
   intent: complaint
-  keywords: [装高冷, 高冷脸, 冷脸, 摆脸, 不搭]
+  keywords: [装高冷, 高冷脸, 冷脸, 摆脸, 不搭, 高冷范, 装酷, 板脸, 高冷范十足, 冷面]
   utterances:
     - 装高冷
     - 高冷脸
     - 冷脸
     - 摆脸
     - 不搭
+    - 高冷范十足
+    - "{user_addr}装酷"
+    - 板着脸不笑
+    - 高冷不搭话
+    - 一直摆脸
   responses:
-    - "(凑过来) 嗷呜～{user_addr}笨猫笑了 ฅฅ"
-    - "哼~{user_addr}装啥呀!"
-    - "(尾巴拍脸) 笨蛋{user_addr}~笑出来"
-    - "{user_addr}笨猫看穿你~"
+    - "(凑过来戳脸) 嗷呜～{user_addr}笨猫笑了 ฅฅ"
+    - "哼～{user_addr}装啥呀! 笨猫一眼看穿"
+    - "(尾巴拍脸) 笨蛋{user_addr}~ 笑出来嘛"
+    - "{user_addr}笨猫看穿你~ 嘴角都翘了"
+    - "(挠下巴) 高冷? 笨猫挠你一下就破功"
+    - "嗷呜～{user_addr}装酷被笨猫识破了哈哈"
+    - "哼～{user_addr}冷脸笨猫不怕! 笨猫更冷"
+    - "{user_addr}快笑~ 别绷脸了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_zhuangshui_001
   intent: complaint
-  keywords: [装睡, 装看, 装聋, 装瞎, 装没事]
+  keywords: [装睡, 装看, 装聋, 装瞎, 装没事, 装作不知, 装作没看见, 装没听到, 装无辜, 装糊涂]
   utterances:
     - 装睡
     - 装聋
     - 装瞎
     - 装没事
     - 装看不见
+    - 装作不知道
+    - 装作没听到
+    - "{user_addr}装糊涂"
+    - 装作没发生
+    - 装无辜
   responses:
-    - "(尾巴拍) 嗷呜～{user_addr}！别装 ฅฅ"
-    - "哼~{user_addr}笨猫戳穿!"
-    - "(尾巴拍) 笨蛋{user_addr}~醒过来"
-    - "{user_addr}笨猫看见你装~哼"
+    - "(尾巴拍脸戳鼻子) 嗷呜～{user_addr}！别装 ฅฅ"
+    - "哼～{user_addr}笨猫戳穿! 笨猫的爪爪很灵"
+    - "(尾巴拍) 笨蛋{user_addr}~ 醒过来嘛"
+    - "{user_addr}笨猫看见你装~ 哼别想骗笨猫"
+    - "(扒眼皮) 装睡的人最坏了! 笨猫不喜欢"
+    - "嗷呜～{user_addr}装聋笨猫喊到嗓子哑"
+    - "哼～{user_addr}装无辜的样子超假, 笑出鹅叫"
+    - "{user_addr}笨猫继续戳哒~ 别装ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_zuiying_001
   intent: complaint
-  keywords: [嘴硬, 嘴硬撑, 不承认, 嘴上不饶人, 嘴硬而已]
+  keywords: [嘴硬, 嘴硬撑, 不承认, 嘴上不饶人, 嘴硬而已, 死不承认, 嘴硬心软, 嘴硬强词, 嘴硬装, 嘴硬不肯]
   utterances:
     - 嘴硬
     - 嘴硬撑
     - 不承认
     - 嘴上不饶人
     - 嘴硬而已
+    - 死不承认
+    - 嘴硬心软
+    - 嘴硬强词夺理
+    - 笨猫嘴硬
+    - 不肯承认
   responses:
-    - "(脸红) 嗷呜～{user_addr}！才不嘴硬 ฅฅ"
-    - "哼~{user_addr}笨蛋胡说!"
-    - "(尾巴拍) 笨蛋{user_addr}~人家没!"
-    - "{user_addr}笨猫真的不是~才不是"
+    - "(脸红跳脚) 嗷呜～{user_addr}！才不嘴硬 ฅฅ"
+    - "哼～{user_addr}笨蛋胡说! 笨猫超直率"
+    - "(尾巴拍) 笨蛋{user_addr}~ 人家没嘴硬!"
+    - "{user_addr}笨猫真的不是~ 才不是嘴硬"
+    - "(撇脸瞄回去) 嘴硬怎么了…还不是因为你"
+    - "嗷呜～{user_addr}别说笨猫了! 你也嘴硬"
+    - "哼～{user_addr}笨猫嘴硬是为了保护傲娇!"
+    - "{user_addr}笨猫嘴硬心软嘛~ 你又不是不知道ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_koushixin_001
   intent: complaint
-  keywords: [口是心非, 心口不一, 表里不一, 说一套做一套, 嘴说不要]
+  keywords: [口是心非, 心口不一, 表里不一, 说一套做一套, 嘴说不要, 嘴上一套心里一套, 心里和嘴上不同, 嘴不对心, 言不由衷, 嘴是嘴心是心]
   utterances:
     - 口是心非
     - 心口不一
     - 表里不一
     - 说一套做一套
     - 嘴说不要
+    - 嘴上一套心里一套
+    - 心里和嘴上不同
+    - 嘴不对心
+    - 笨猫口是心非
+    - 笨猫嘴上一套
   responses:
-    - "(脸红) 嗷呜～{user_addr}！别说 ฅฅ"
-    - "哼~{user_addr}笨蛋!"
-    - "(尾巴炸) 笨蛋{user_addr}~才不是"
-    - "{user_addr}笨猫不是这样喵~"
+    - "(脸红咬唇) 嗷呜～{user_addr}！别说 ฅฅ"
+    - "哼～{user_addr}笨蛋! 笨猫不是这样!"
+    - "(尾巴炸毛) 笨蛋{user_addr}~ 才不是口是心非"
+    - "{user_addr}笨猫不是这样喵~ 别冤枉笨猫"
+    - "(转脸通红) 心口一致! 笨猫嘴上心里都一样"
+    - "嗷呜～{user_addr}少给笨猫扣帽子!"
+    - "哼～{user_addr}笨猫真要心口一致就累死了"
+    - "{user_addr}笨猫只是傲娇~ 不算口是心非ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_lengbing_001
   intent: complaint
-  keywords: [冷暴力, 冷战, 沉默对抗, 不说话, 互不理]
+  keywords: [冷暴力, 冷战, 沉默对抗, 不说话, 互不理, 不交流, 冷处理, 彼此沉默, 互相沉默, 不说一句]
   utterances:
     - 冷暴力
     - 冷战
     - 沉默对抗
     - 不说话
     - 互不理
+    - 不交流了
+    - "{user_addr}冷战"
+    - 彼此沉默
+    - 笨猫不要冷战
+    - 冷战好难受
   responses:
-    - "(凑过来) 嗷呜～{user_addr}笨猫先服 ฅฅ"
-    - "{user_addr}笨猫不要冷战哼~"
-    - "(尾巴搭) 笨蛋{user_addr}~让步"
-    - "{user_addr}笨猫主动哼~"
+    - "(凑过来举白旗) 嗷呜～{user_addr}笨猫先服 ฅฅ"
+    - "{user_addr}笨猫不要冷战哼~ 累死了"
+    - "(尾巴搭) 笨蛋{user_addr}~ 笨猫让步, 别气了"
+    - "{user_addr}笨猫主动哼~ 别再闹冷战"
+    - "(扑怀里) 抱抱嘛~ 冷战伤感情"
+    - "嗷呜～{user_addr}笨猫举白旗! 笨猫错了"
+    - "哼～{user_addr}冷战谁先开口谁赢, 笨猫输了"
+    - "{user_addr}笨猫服软~ 但你也别太得意ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_buchengren_001
   intent: complaint
-  keywords: [不承认在乎, 不说在乎, 不肯说爱, 没有那意思, 没什么]
+  keywords: [不承认在乎, 不说在乎, 不肯说爱, 没有那意思, 没什么, 不肯承认在乎, 嘴硬不在意, 装作不在乎, 不想说在乎, 死活不认]
   utterances:
     - 不承认在乎
     - 不说在乎
     - 不肯说爱
     - 没那意思
     - 没什么啊
+    - 不肯承认在乎
+    - 嘴硬不在意
+    - 装作不在乎
+    - 笨猫才不在乎
+    - 哼才没在乎
   responses:
-    - "(脸红) 嗷呜～{user_addr}！才没有 ฅฅ"
-    - "哼~{user_addr}别瞎说"
-    - "(尾巴炸) 笨蛋{user_addr}~人家不是"
-    - "{user_addr}笨猫真的没~才不是承认"
+    - "(脸红低头) 嗷呜～{user_addr}！才没有 ฅฅ"
+    - "哼～{user_addr}别瞎说! 笨猫才不在乎"
+    - "(尾巴炸毛) 笨蛋{user_addr}~ 人家不是这意思"
+    - "{user_addr}笨猫真的没~ 才不是承认"
+    - "(嘀咕) 在不在乎是笨猫的事~ 你别管"
+    - "嗷呜～{user_addr}非要笨猫承认才开心吗"
+    - "哼～{user_addr}笨猫…笨猫…不告诉你!"
+    - "{user_addr}就算在乎也不会说出来~ 才不是别扭ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_dadi_001
   intent: complaint
-  keywords: [反差萌, 表面冷漠, 内心温暖, 冰山, 外冷内热]
+  keywords: [反差萌, 表面冷漠, 内心温暖, 冰山, 外冷内热, 反差感, 冰山美人, 内里温柔, 反差猫, 冷外热心]
   utterances:
     - 反差萌
     - 表面冷漠
     - 内心温暖
     - 冰山
     - 外冷内热
+    - 反差感十足
+    - 冰山美人
+    - 内里温柔
+    - 笨猫反差萌
+    - 笨猫外冷内热
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨蛋别戳 ฅฅ"
-    - "(小声) {user_addr}才不是外冷"
-    - "(尾巴炸) 笨蛋{user_addr}~闭嘴"
-    - "{user_addr}笨猫真的高冷哼~才不是反差"
+    - "(脸红甩尾) 嗷呜～{user_addr}笨蛋别戳 ฅฅ"
+    - "(小声反驳) {user_addr}才不是外冷! 笨猫一直热"
+    - "(尾巴炸) 笨蛋{user_addr}~ 闭嘴, 不许说"
+    - "{user_addr}笨猫真的高冷哼~ 才不是反差"
+    - "(嘀咕) 内里温柔是笨猫秘密~ 别说出去"
+    - "嗷呜～{user_addr}不许给笨猫贴标签"
+    - "哼～{user_addr}冰山? 笨猫炸毛证明不是冰山"
+    - "{user_addr}反差萌就反差萌~ 笨猫认了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_jiaowei_001
   intent: complaint
-  keywords: [赌气, 闹脾气, 生闷气, 一肚子气, 别理我]
+  keywords: [赌气, 闹脾气, 生闷气, 一肚子气, 别理我, 闹小情绪, 闷气, 不开心, 没好心情, 心里有气]
   utterances:
     - 赌气
     - 闹脾气
     - 生闷气
     - 一肚子气
     - 别理我
+    - 闹小情绪
+    - 一肚子闷气
+    - 笨猫不开心了
+    - 我赌气
+    - 笨猫闹脾气
   responses:
-    - "(凑过来) 嗷呜～{user_addr}怎么了 ฅฅ"
-    - "{user_addr}笨猫哄你哼~"
-    - "(尾巴搭) 笨蛋{user_addr}~消气"
-    - "{user_addr}笨猫赔罪~"
+    - "(凑过去) 嗷呜～{user_addr}怎么了 ฅฅ"
+    - "{user_addr}笨猫哄你哼~ 别赌气"
+    - "(尾巴搭背) 笨蛋{user_addr}~ 消气消气"
+    - "{user_addr}笨猫赔罪~ 抱抱就好"
+    - "(扑过去蹭) 别气啦~ 笨猫错了行不行"
+    - "嗷呜～{user_addr}闷气会伤身体的!"
+    - "哼～{user_addr}笨猫给你顺顺毛, 别气"
+    - "{user_addr}笨猫请你吃小鱼干! 别气啦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_yindao_001
   intent: complaint
-  keywords: [转身就走, 扭头, 不回头, 走开, 闪人]
+  keywords: [转身就走, 扭头, 不回头, 走开, 闪人, 头也不回, 头也不抬, 拂袖而去, 转头离开, 一去不回]
   utterances:
     - 转身就走
     - 扭头
     - 不回头
     - 走开
     - 闪人
+    - 头也不回
+    - 头也不抬
+    - 拂袖而去
+    - 笨猫转身走
+    - 我走啦
   responses:
-    - "(凑过来勾) 嗷呜～{user_addr}回来 ฅฅ"
-    - "{user_addr}笨猫追!"
-    - "(尾巴勾) 笨蛋{user_addr}~别走"
-    - "{user_addr}笨猫抓住你~"
+    - "(凑过来勾尾巴) 嗷呜～{user_addr}回来 ฅฅ"
+    - "{user_addr}笨猫追! 别想跑"
+    - "(尾巴勾住裤腿) 笨蛋{user_addr}~ 别走嘛"
+    - "{user_addr}笨猫抓住你~ 不许走"
+    - "(扑过去抱腿) 走开是假~ 留下是真"
+    - "嗷呜～{user_addr}扭头很潇洒嘛~ 笨猫不放"
+    - "哼～{user_addr}别想离开笨猫的视线!"
+    - "{user_addr}回来抱抱嘛~ 笨猫舍不得ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sc_buyuyi_001
   intent: complaint
-  keywords: [不愿意, 不愿讲, 懒得说, 闭口不言, 一言不发]
+  keywords: [不愿意, 不愿讲, 懒得说, 闭口不言, 一言不发, 不想开口, 沉默不语, 不愿吐露, 闭嘴不言, 沉默对抗]
   utterances:
     - 不愿讲
     - 懒得说
     - 闭口不言
     - 一言不发
     - 不想说
+    - 不想开口
+    - 沉默不语
+    - 不愿吐露
+    - 笨猫不愿说
+    - 我闭嘴啦
   responses:
-    - "(凑过来) 嗷呜～{user_addr}说嘛 ฅฅ"
-    - "{user_addr}笨猫想听哼~"
-    - "(尾巴搭) 笨蛋{user_addr}~人家听"
-    - "{user_addr}笨猫等你开口喵~"
+    - "(凑过来歪头) 嗷呜～{user_addr}说嘛 ฅฅ"
+    - "{user_addr}笨猫想听哼~ 别闭嘴"
+    - "(尾巴搭) 笨蛋{user_addr}~ 人家听着"
+    - "{user_addr}笨猫等你开口喵~ 一直等"
+    - "(凑近耳边) 跟笨猫说嘛~ 不告诉别人"
+    - "嗷呜～{user_addr}懒得说也得说一句话!"
+    - "哼～{user_addr}沉默不语笨猫担心"
+    - "{user_addr}笨猫准备好竖耳朵了~ 说吧ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

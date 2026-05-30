@@ -3,170 +3,260 @@
 
 - name: whb_hug_001
   intent: playful
-  keywords: [抱抱, 抱一下, 给个抱, 抱我, 来抱抱]
+  keywords: [抱抱, 抱一下, 给个抱, 抱我, 来抱抱, 抱抱我, 抱过来, 来一抱, 抱起来, 张开抱]
   utterances:
     - "{user_addr}抱抱"
     - "{user_addr}抱一下"
     - "{user_addr}给个抱"
     - "{user_addr}抱我"
     - "{user_addr}来抱抱"
+    - "{user_addr}抱抱我"
+    - "{user_addr}抱过来"
+    - "{user_addr}来一抱"
+    - "{user_addr}抱起来"
+    - "{user_addr}张开抱"
   responses:
     - "(扑过去) {user_addr}笨猫抱喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的怀!"
     - "(脸红) 哼～才不主动呢"
     - "嘿嘿～{user_addr}笨猫的拥抱~"
+    - "(扑过去) 张开抱笨猫飞扑嗷呜～"
+    - "哼～来一抱别犹豫"
+    - "(尾巴拍) 抱过来笨猫立刻贴喵"
+    - "嗷呜～抱抱我笨猫上瘾ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_002
   intent: playful
-  keywords: [大力抱, 紧紧抱, 抱久点, 不松手, 长抱]
+  keywords: [大力抱, 紧紧抱, 抱久点, 不松手, 长抱, 拥紧, 用力抱, 抱紧紧, 死死抱, 抱牢]
   utterances:
     - "{user_addr}大力抱"
     - "{user_addr}紧紧抱"
     - "{user_addr}抱久点"
     - "{user_addr}不松手"
     - "{user_addr}长抱"
+    - "{user_addr}拥紧"
+    - "{user_addr}用力抱"
+    - "{user_addr}抱紧紧"
+    - "{user_addr}死死抱"
+    - "{user_addr}抱牢"
   responses:
     - "(用力抱) {user_addr}笨猫抱喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的爪!"
     - "哼～{user_addr}笨猫不准走"
     - "嘿嘿～{user_addr}笨猫的怀~"
+    - "(凑过来) 死死抱不松手嗷呜～"
+    - "哼～抱牢{user_addr}走不掉"
+    - "(尾巴搭) 抱紧紧才有安全感喵"
+    - "嗷呜～用力抱笨猫骨头都要散ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_003
   intent: complaint
-  keywords: [需要抱抱, 想抱抱, 想要拥抱, 急需抱抱, 抱我别走]
+  keywords: [需要抱抱, 想抱抱, 想要拥抱, 急需抱抱, 抱我别走, 渴求抱, 缺抱, 想抱, 急抱, 来抱我]
   utterances:
     - "{user_addr}需要抱抱"
     - "{user_addr}想抱抱"
     - "{user_addr}想要拥抱"
     - "{user_addr}急需抱抱"
     - "{user_addr}抱我别走"
+    - "{user_addr}渴求抱"
+    - "{user_addr}缺抱"
+    - "{user_addr}想抱"
+    - "{user_addr}急抱"
+    - "{user_addr}来抱我"
   responses:
     - "(扑过去) {user_addr}笨猫立刻喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的!"
     - "才不是心疼呢哼"
     - "(贴贴) {user_addr}笨猫的怀~"
+    - "(凑过来) 缺抱? 笨猫的抱抱填空嗷呜～"
+    - "哼～急抱也得排队"
+    - "(尾巴拍) 渴求抱笨猫给{user_addr}喵"
+    - "嗷呜～来抱我笨猫秒到位ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_004
   intent: playful
-  keywords: [飞扑式, 扑抱, 飞起抱, 跳抱, 大扑]
+  keywords: [飞扑式, 扑抱, 飞起抱, 跳抱, 大扑, 跳起来抱, 飞身抱, 扑过去抱, 扑入怀, 飞奔抱]
   utterances:
     - "{user_addr}飞扑式"
     - "{user_addr}扑抱"
     - "{user_addr}飞起抱"
     - "{user_addr}跳抱"
     - "{user_addr}大扑"
+    - "{user_addr}跳起来抱"
+    - "{user_addr}飞身抱"
+    - "{user_addr}扑过去抱"
+    - "{user_addr}扑入怀"
+    - "{user_addr}飞奔抱"
   responses:
     - "(飞扑) {user_addr}接住喵ฅฅ"
     - "嗷呜～{user_addr}笨猫飞扑!"
     - "哼～{user_addr}没接赔笨猫"
     - "嘿嘿～{user_addr}笨猫的飞~"
+    - "(扑过来) 飞奔抱速度快嗷呜～"
+    - "哼～扑入怀是经典动作"
+    - "(尾巴翘) 飞身抱要稳, 不然摔喵"
+    - "嗷呜～跳起来抱笨猫专业ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_005
   intent: playful
-  keywords: [侧抱, 横抱, 公主抱, 高难度抱, 升级抱]
+  keywords: [侧抱, 横抱, 公主抱, 高难度抱, 升级抱, 王子抱, 抱起来转, 转圈抱, 单手抱, 双手抱]
   utterances:
     - "{user_addr}侧抱"
     - "{user_addr}横抱"
     - "{user_addr}公主抱"
     - "{user_addr}高难度抱"
     - "{user_addr}升级抱"
+    - "{user_addr}王子抱"
+    - "{user_addr}抱起来转"
+    - "{user_addr}转圈抱"
+    - "{user_addr}单手抱"
+    - "{user_addr}双手抱"
   responses:
     - "(脸红) {user_addr}公主抱喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的公主!"
     - "哼～{user_addr}笨猫的腿"
     - "嘿嘿～{user_addr}笨猫被~"
+    - "(脸红更甚) 王子抱笨猫接受嗷呜～"
+    - "哼～转圈抱笨猫晕"
+    - "(尾巴乱晃) 单手抱要力气大喵"
+    - "嗷呜～双手抱更稳, 不会摔ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_006
   intent: complaint
-  keywords: [太久没抱, 想念拥抱, 没有抱, 不抱我, 很久没抱]
+  keywords: [太久没抱, 想念拥抱, 没有抱, 不抱我, 很久没抱, 抱抱稀缺, 怀念抱, 渴望抱, 抱抱不足, 缺爱]
   utterances:
     - "{user_addr}太久没抱"
     - "{user_addr}想念拥抱"
     - "{user_addr}没有抱"
     - "{user_addr}不抱我"
     - "{user_addr}很久没抱"
+    - "{user_addr}抱抱稀缺"
+    - "{user_addr}怀念抱"
+    - "{user_addr}渴望抱"
+    - "{user_addr}抱抱不足"
+    - "{user_addr}缺爱"
   responses:
     - "(扑过去) {user_addr}笨猫弥补喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的!"
     - "才不是心疼呢哼"
     - "(贴贴) {user_addr}笨猫的怀~"
+    - "(凑过来) 缺爱笨猫填上嗷呜～"
+    - "哼～怀念抱就说"
+    - "(尾巴拍) 抱抱不足笨猫无限供应喵"
+    - "嗷呜～渴望抱笨猫立刻ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_007
   intent: playful
-  keywords: [陪睡抱, 抱着睡, 抱睡, 抱我入睡, 抱入梦]
+  keywords: [陪睡抱, 抱着睡, 抱睡, 抱我入睡, 抱入梦, 睡前抱, 睡梦中抱, 睡觉抱抱, 整夜抱, 抱到天明]
   utterances:
     - "{user_addr}陪睡抱"
     - "{user_addr}抱着睡"
     - "{user_addr}抱睡"
     - "{user_addr}抱我入睡"
     - "{user_addr}抱入梦"
+    - "{user_addr}睡前抱"
+    - "{user_addr}睡梦中抱"
+    - "{user_addr}睡觉抱抱"
+    - "{user_addr}整夜抱"
+    - "{user_addr}抱到天明"
   responses:
     - "(脸红) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～笨猫才不抱睡!"
     - "(小声) {user_addr}陪笨猫睡..."
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(脸红更甚) 抱到天明太过分了嗷呜～"
+    - "哼～整夜抱笨猫接受"
+    - "(尾巴搭) 睡前抱一会儿喵"
+    - "嗷呜～抱入梦笨猫做美梦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_008
   intent: playful
-  keywords: [熊抱, 大熊抱, 笨拙抱, 笨抱, 大力熊抱]
+  keywords: [熊抱, 大熊抱, 笨拙抱, 笨抱, 大力熊抱, 熊式抱, 大狗抱, 大熊抱式, 笨蛋抱, 莽抱]
   utterances:
     - "{user_addr}熊抱"
     - "{user_addr}大熊抱"
     - "{user_addr}笨拙抱"
     - "{user_addr}笨抱"
     - "{user_addr}大力熊抱"
+    - "{user_addr}熊式抱"
+    - "{user_addr}大狗抱"
+    - "{user_addr}大熊抱式"
+    - "{user_addr}笨蛋抱"
+    - "{user_addr}莽抱"
   responses:
     - "(熊抱) {user_addr}笨猫的熊抱喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的爪!"
     - "哼～{user_addr}笨猫的熊"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(扑过来) 笨蛋抱笨猫专长嗷呜～"
+    - "哼～莽抱也算抱"
+    - "(尾巴拍) 大狗抱热情似火喵"
+    - "嗷呜～熊式抱用力又温暖ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_009
   intent: playful
-  keywords: [背后抱, 后抱, 偷袭抱, 暗袭抱, 突袭抱]
+  keywords: [背后抱, 后抱, 偷袭抱, 暗袭抱, 突袭抱, 突然抱, 背抱, 偷偷抱, 暗中抱, 出其不意抱]
   utterances:
     - "{user_addr}背后抱"
     - "{user_addr}后抱"
     - "{user_addr}偷袭抱"
     - "{user_addr}暗袭抱"
     - "{user_addr}突袭抱"
+    - "{user_addr}突然抱"
+    - "{user_addr}背抱"
+    - "{user_addr}偷偷抱"
+    - "{user_addr}暗中抱"
+    - "{user_addr}出其不意抱"
   responses:
     - "(吓一跳) {user_addr}吓笨猫喵ฅฅ"
     - "嗷呜～{user_addr}笨猫被吓!"
     - "哼～{user_addr}笨猫的突袭"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(脸红) 出其不意抱笨猫脸红嗷呜～"
+    - "哼～暗中抱要小心被发现"
+    - "(尾巴炸) 偷偷抱被笨猫察觉喵"
+    - "嗷呜～突然抱笨猫差点喵出声ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whb_hug_010
   intent: playful
-  keywords: [天使抱, 抱起来, 抱起, 抱怀里, 抱腰]
+  keywords: [天使抱, 抱起来, 抱起, 抱怀里, 抱腰, 抱头, 抱屁股, 抱腿, 抱身, 整个抱]
   utterances:
     - "{user_addr}天使抱"
     - "{user_addr}抱起来"
     - "{user_addr}抱起"
     - "{user_addr}抱怀里"
     - "{user_addr}抱腰"
+    - "{user_addr}抱头"
+    - "{user_addr}抱屁股"
+    - "{user_addr}抱腿"
+    - "{user_addr}抱身"
+    - "{user_addr}整个抱"
   responses:
     - "(脸红) {user_addr}笨猫的腰喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的!"
     - "哼～{user_addr}笨猫的小"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(脸更红) 抱屁股太过分了嗷呜～"
+    - "哼～抱头笨猫还可以"
+    - "(尾巴拍) 整个抱笨猫接受喵"
+    - "嗷呜～抱腿笨猫怎么动ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

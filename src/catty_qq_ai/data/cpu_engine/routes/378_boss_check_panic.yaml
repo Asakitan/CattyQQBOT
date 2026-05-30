@@ -3,187 +3,330 @@
 
 - name: bcp_laoban_001
   intent: complaint
-  keywords: [老板来了, 老板查岗, 老板巡, 老板巡视, 老板检查]
+  keywords: [老板来了, 老板查岗, 老板巡, 老板巡视, 老板检查, 老板来了啦, 老板查岗啦, 老板巡啦, 老板来了喵, 老板查岗喵]
   utterances:
-    - 老板来了
-    - 老板查岗
-    - 老板巡
-    - 老板巡视
-    - 老板检查
+    - "老板来了"
+    - "老板查岗"
+    - "老板巡"
+    - "老板巡视"
+    - "老板检查"
+    - "{user_addr}老板来了"
+    - "老板来了啦"
+    - "老板来了嗷"
+    - "{user_addr}老板查岗"
+    - "老板查岗啦"
+    - "嘿{user_addr}老板来了"
+    - "嘿{user_addr}老板查岗"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}快装忙!!"
     - "嘿嘿～{user_addr}的演技~ 笨猫教!"
     - "(凑过去) 哼～{user_addr}抱紧文件!"
     - "{user_addr}的装忙~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_zhuangmang_001
   intent: playful
-  keywords: [装忙, 假装忙, 装作工作, 假装认真, 假忙]
+  keywords: [装忙, 假装忙, 装作工作, 假装认真, 假忙, 装忙啦, 假装忙啦, 装作工作啦, 装忙喵, 假装忙喵]
   utterances:
-    - 装忙
-    - 假装忙
-    - 装作工作
-    - 假装认真
-    - 假忙
+    - "装忙"
+    - "假装忙"
+    - "装作工作"
+    - "假装认真"
+    - "假忙"
+    - "{user_addr}装忙"
+    - "装忙啦"
+    - "装忙嗷"
+    - "{user_addr}假装忙"
+    - "假装忙啦"
+    - "嘿{user_addr}装忙"
+    - "嘿{user_addr}假装忙"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}演技笨猫看!"
     - "嘿嘿～{user_addr}的装忙~ 笨猫鼓掌!"
     - "(尾巴扫) 哼～{user_addr}演技差!"
     - "{user_addr}的演技~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_lingdao_001
   intent: complaint
-  keywords: [领导来了, 领导发现, 被领导看到, 领导骂, 领导找]
+  keywords: [领导来了, 领导发现, 被领导看到, 领导骂, 领导找, 领导来了啦, 领导发现啦, 被领导看到啦, 领导来了喵, 领导发现喵]
   utterances:
-    - 领导来了
-    - 领导发现
-    - 被领导看到
-    - 领导骂
-    - 领导找
+    - "领导来了"
+    - "领导发现"
+    - "被领导看到"
+    - "领导骂"
+    - "领导找"
+    - "{user_addr}领导来了"
+    - "领导来了啦"
+    - "领导来了嗷"
+    - "{user_addr}领导发现"
+    - "领导发现啦"
+    - "嘿{user_addr}领导来了"
+    - "嘿{user_addr}领导发现"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}!! 跑!"
     - "嘿嘿～{user_addr}的领导~ 笨猫去咬!"
     - "(凑过去) 哼～{user_addr}!"
     - "{user_addr}的麻烦~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_kaihui_001
   intent: complaint
-  keywords: [开会, 临时开会, 突然会, 会要开, 紧急会]
+  keywords: [开会, 临时开会, 突然会, 会要开, 紧急会, 开会啦, 临时开会啦, 突然会啦, 开会喵, 临时开会喵]
   utterances:
-    - 开会
-    - 临时开会
-    - 突然会
-    - 紧急会
-    - 会要开
+    - "开会"
+    - "临时开会"
+    - "突然会"
+    - "紧急会"
+    - "会要开"
+    - "{user_addr}开会"
+    - "开会啦"
+    - "开会嗷"
+    - "{user_addr}临时开会"
+    - "临时开会啦"
+    - "嘿{user_addr}开会"
+    - "嘿{user_addr}临时开会"
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}!! 又开会!"
     - "嘿嘿～{user_addr}的会~ 笨猫陪!"
     - "(蹭过去) 哼～{user_addr}加油!"
     - "{user_addr}的开会~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_kpi_001
   intent: complaint
-  keywords: [KPI, OKR, 业绩压力, 完不成, 指标]
+  keywords: [KPI, OKR, 业绩压力, 完不成, 指标, KPI啦, OKR啦, 业绩压力啦, KPI喵, OKR喵]
   utterances:
-    - KPI
-    - OKR
-    - 业绩压力
-    - 完不成
-    - 指标
+    - "KPI"
+    - "OKR"
+    - "业绩压力"
+    - "完不成"
+    - "指标"
+    - "{user_addr}KPI"
+    - "KPI啦"
+    - "KPI嗷"
+    - "{user_addr}OKR"
+    - "OKR啦"
+    - "嘿{user_addr}KPI"
+    - "嘿{user_addr}OKR"
   responses:
     - "(扑过去) 嗷呜～{user_addr}加油!"
     - "嘿嘿～{user_addr}的指标~ 笨猫鼓劲!"
     - "(尾巴搭) 哼～{user_addr}的 KPI 老板太狠!"
     - "{user_addr}的压力~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_xinxi_001
   intent: complaint
-  keywords: [钉钉响, 微信响, 工作消息, 消息轰炸, 被消息淹没]
+  keywords: [钉钉响, 微信响, 工作消息, 消息轰炸, 被消息淹没, 钉钉响啦, 微信响啦, 工作消息啦, 钉钉响喵, 微信响喵]
   utterances:
-    - 钉钉响
-    - 微信响
-    - 工作消息
-    - 消息轰炸
-    - 被消息淹没
+    - "钉钉响"
+    - "微信响"
+    - "工作消息"
+    - "消息轰炸"
+    - "被消息淹没"
+    - "{user_addr}钉钉响"
+    - "钉钉响啦"
+    - "钉钉响嗷"
+    - "{user_addr}微信响"
+    - "微信响啦"
+    - "嘿{user_addr}钉钉响"
+    - "嘿{user_addr}微信响"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}讨厌!"
     - "嘿嘿～{user_addr}的消息~ 笨猫帮你回!"
     - "(凑过去) 哼～{user_addr}的钉钉!"
     - "{user_addr}的消息洪流~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_zaodian_001
   intent: complaint
-  keywords: [早会, 站会, 晨会, 一大早开会, 早上会]
+  keywords: [早会, 站会, 晨会, 一大早开会, 早上会, 早会啦, 站会啦, 晨会啦, 早会喵, 站会喵]
   utterances:
-    - 早会
-    - 站会
-    - 晨会
-    - 一大早开会
-    - 早上会
+    - "早会"
+    - "站会"
+    - "晨会"
+    - "一大早开会"
+    - "早上会"
+    - "{user_addr}早会"
+    - "早会啦"
+    - "早会嗷"
+    - "{user_addr}站会"
+    - "站会啦"
+    - "嘿{user_addr}早会"
+    - "嘿{user_addr}站会"
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}早会烦!"
     - "嘿嘿～{user_addr}的晨会~ 笨猫陪!"
     - "(凑过去) 哼～{user_addr}的早起!"
     - "{user_addr}的早会~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_xiaban_001
   intent: complaint
-  keywords: [下班被叫, 下班加班, 临时活, 临时任务, 加临时班]
+  keywords: [下班被叫, 下班加班, 临时活, 临时任务, 加临时班, 下班被叫啦, 下班加班啦, 临时活啦, 下班被叫喵, 下班加班喵]
   utterances:
-    - 下班被叫
-    - 下班加班
-    - 临时活
-    - 临时任务
-    - 加临时班
+    - "下班被叫"
+    - "下班加班"
+    - "临时活"
+    - "临时任务"
+    - "加临时班"
+    - "{user_addr}下班被叫"
+    - "下班被叫啦"
+    - "下班被叫嗷"
+    - "{user_addr}下班加班"
+    - "下班加班啦"
+    - "嘿{user_addr}下班被叫"
+    - "嘿{user_addr}下班加班"
   responses:
     - "(炸毛) 嗷呜～{user_addr}!! 不行!"
     - "嘿嘿～{user_addr}的老板可恶!"
     - "(尾巴叉腰) 哼～{user_addr}拒绝!"
     - "{user_addr}的加班~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_baogao_001
   intent: complaint
-  keywords: [写报告, 周报, 月报, 季度报, 年报]
+  keywords: [写报告, 周报, 月报, 季度报, 年报, 写报告啦, 周报啦, 月报啦, 写报告喵, 周报喵]
   utterances:
-    - 写报告
-    - 周报
-    - 月报
-    - 季度报
-    - 年报
+    - "写报告"
+    - "周报"
+    - "月报"
+    - "季度报"
+    - "年报"
+    - "{user_addr}写报告"
+    - "写报告啦"
+    - "写报告嗷"
+    - "{user_addr}周报"
+    - "周报啦"
+    - "嘿{user_addr}写报告"
+    - "嘿{user_addr}周报"
   responses:
     - "(尾巴搭) 嗷呜～{user_addr}写~笨猫陪!"
     - "嘿嘿～{user_addr}的周报~ 笨猫帮想!"
     - "(凑过去) 哼～{user_addr}加油!"
     - "{user_addr}的报告~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_tongshi_001
   intent: complaint
-  keywords: [同事甩锅, 同事坑, 同事告状, 被人陷害, 抢功]
+  keywords: [同事甩锅, 同事坑, 同事告状, 被人陷害, 抢功, 同事甩锅啦, 同事坑啦, 同事告状啦, 同事甩锅喵, 同事坑喵]
   utterances:
-    - 同事甩锅
-    - 同事坑
-    - 同事告状
-    - 被人陷害
-    - 抢功
+    - "同事甩锅"
+    - "同事坑"
+    - "同事告状"
+    - "被人陷害"
+    - "抢功"
+    - "{user_addr}同事甩锅"
+    - "同事甩锅啦"
+    - "同事甩锅嗷"
+    - "{user_addr}同事坑"
+    - "同事坑啦"
+    - "嘿{user_addr}同事甩锅"
+    - "嘿{user_addr}同事坑"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}!! 笨猫去咬!"
     - "嘿嘿～{user_addr}的同事可恶!"
     - "(凑过去) 哼～{user_addr}的事!"
     - "{user_addr}的委屈~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bcp_zhouyi_001
   intent: complaint
-  keywords: [周一, 周一综合, 蓝色周一, 周一恐惧, 上班恐惧]
+  keywords: [周一, 周一综合, 蓝色周一, 周一恐惧, 上班恐惧, 周一啦, 周一综合啦, 蓝色周一啦, 周一喵, 周一综合喵]
   utterances:
-    - 周一
-    - 周一综合症
-    - 蓝色周一
-    - 周一恐惧
-    - 上班恐惧
+    - "周一"
+    - "周一综合症"
+    - "蓝色周一"
+    - "周一恐惧"
+    - "上班恐惧"
+    - "{user_addr}周一"
+    - "周一啦"
+    - "周一嗷"
+    - "{user_addr}周一综合症"
+    - "周一综合症啦"
+    - "嘿{user_addr}周一"
+    - "嘿{user_addr}周一综合症"
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}!!周一烦!"
     - "嘿嘿～{user_addr}的周一~ 笨猫陪!"
     - "(凑过去) 哼～{user_addr}加油!"
     - "{user_addr}的周一~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

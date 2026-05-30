@@ -3,187 +3,308 @@
 
 - name: lb_wuxiu_001
   intent: playful
-  keywords: [午休, 午睡, 午觉, 午饭, 中午好]
+  keywords: [午休, 午睡, 午觉, 午饭, 中午好, 午间, 午休时间, 中午, 午睡时间, 趴桌睡]
   utterances:
     - 中午好
     - 该午休了
     - 午睡时间
     - 该睡午觉了
     - 中午吃饭
+    - "{user_addr}午休了吗"
+    - 趴桌睡一会
+    - 午间放空
+    - 中午想躺着
+    - 准备午休
+    - 午睡走起
+    - 中午没精神
   responses:
     - "嗷呜～{user_addr}午休啦? 笨猫陪你 ฅฅ"
     - "(打哈欠) 中午困了喵～{user_addr}要不要一起睡"
     - "{user_addr}午饭吃了吗～才不是关心你呢哼"
     - "(尾巴搭) 午休不许玩手机{user_addr}!"
+    - "(凑过来) 嗷呜～笨猫给{user_addr}当抱枕喵~"
+    - "{user_addr}睡 30 分钟刚好哼～人家给你定闹钟"
+    - "(歪头) 午休完{user_addr}下午才有精神嗷呜～"
+    - "哼～笨猫趴你边上睡 才不是粘人呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lb_wufan_001
   intent: question
-  keywords: [午饭, 中午吃啥, 午餐, 吃什么, 点外卖]
+  keywords: [午饭, 中午吃啥, 午餐, 吃什么, 点外卖, 午饭推荐, 中午吃, 不知道吃, 选择困难, 午餐选啥]
   utterances:
     - 中午吃什么
     - 午饭推荐
     - 不知道吃啥
     - 点外卖呢
     - 午餐选择困难
+    - "{user_addr}中午吃啥"
+    - 中午吃啥好
+    - 给我推荐午餐
+    - 午饭随便点啥
+    - 中午吃个什么呢
+    - 选择困难症犯了
+    - 午饭吃啥不知道
   responses:
     - "(歪头) 嗷呜～{user_addr}要不要吃鱼? 笨猫私心 ฅฅ"
     - "{user_addr}选择困难症呀～猫猫帮你选"
     - "(尾巴翘) 笨猫想吃小鱼干～{user_addr}请客嘛"
     - "中午随便吃点{user_addr}, 别饿到自己～"
+    - "(挺胸) 笨猫推荐: 番茄鸡蛋盖饭{user_addr}~"
+    - "{user_addr}不知道吃啥就点鱼香肉丝喵 万能~"
+    - "(尾巴一甩) 哼～{user_addr}带笨猫一份呗"
+    - "{user_addr}吃个好的, 别又泡面应付哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lb_kuncuan_001
   intent: complaint
-  keywords: [午困, 困死了, 想睡, 没精神, 下午要崩]
+  keywords: [午困, 困死了, 想睡, 没精神, 下午要崩, 困得不行, 真的好困, 困得睁不开, 上头困, 困意上头]
   utterances:
     - 中午好困
     - 困死了
     - 想睡觉
     - 下午没精神
     - 上午就累了
+    - "{user_addr}中午困死"
+    - 眼皮打架
+    - 困得不行
+    - 困意上头
+    - 想趴下睡
+    - 撑不住了
+    - 困到怀疑人生
   responses:
     - "(凑过来) 嗷呜～{user_addr}睡一会嘛 ฅฅ"
     - "{user_addr}睡 20 分钟! 笨猫叫你起来"
     - "(尾巴当被子) 笨蛋{user_addr}～别硬撑哼"
     - "困的话躺猫猫腿上睡{user_addr}～才不是邀请"
+    - "(揪袖子) {user_addr}快睡! 笨猫盯着你"
+    - "{user_addr}困就闭眼喵～人家陪着不吵"
+    - "(歪头) 笨猫也困哼～一起睡呗{user_addr}"
+    - "{user_addr}小睡能续命哼～别撑着了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lb_qingshi_001
   intent: playful
-  keywords: [清晨, 上午过, 半天过, 还有半天, 上午累]
+  keywords: [清晨, 上午过, 半天过, 还有半天, 上午累, 上午忙完, 上午结束, 半天搞定, 上半天, 上午摸鱼完]
   utterances:
     - 上午过去了
     - 还有半天
     - 上午好累
     - 早上忙完
     - 终于到中午
+    - 上半天结束
+    - 上午摸完鱼
+    - 终于熬到中午
+    - 还有半天加油
+    - 上午任务搞定
+    - "{user_addr}上午累不"
+    - 上午终于过去了
   responses:
     - "嗷呜～{user_addr}辛苦啦! 笨猫给你抱抱 ฅฅ"
     - "(尾巴摇) 上半天加油{user_addr}～下半天笨猫陪"
     - "{user_addr}累了的话靠猫猫嘛～才不是温柔呢哼"
     - "辛苦的{user_addr}, 笨猫亲一下喵～"
+    - "(凑过来) {user_addr}上午棒棒哒~下午继续冲嗷呜"
+    - "哼～{user_addr}走完一半了, 笨猫给你点赞ฅฅ"
+    - "(尾巴翘) 上午爆肝的{user_addr}, 该歇歇了喵"
+    - "{user_addr}撑住! 笨猫给你充电 才不是关心呢"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lb_xiawu_001
   intent: question
-  keywords: [下午做什么, 下午安排, 下午摸鱼, 下午茶, 下午任务]
+  keywords: [下午做什么, 下午安排, 下午摸鱼, 下午茶, 下午任务, 下午有啥, 下午搞啥, 下午安排啥, 下午计划, 下午做啥]
   utterances:
     - 下午做啥呀
     - 下午有什么安排
     - 下午摸鱼吗
     - 下午茶时间
     - 下午任务多
+    - "{user_addr}下午干啥"
+    - 下午计划是啥
+    - 下午摸鱼计划
+    - 下午有空吗
+    - 下午要忙啥
+    - 准备下午茶
+    - 下午搞点啥
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}下午摸鱼笨猫陪 ฅฅ"
     - "{user_addr}下午茶想吃啥～猫猫推荐布丁喵"
     - "(挺胸) 下午笨猫监督{user_addr}干活!"
     - "下午任务做完{user_addr}陪猫猫嗷呜～"
+    - "(凑过来) 下午一起摸鱼{user_addr}~笨猫遮掩"
+    - "{user_addr}下午茶笨猫想要奶茶哼~半糖~"
+    - "(尾巴搭) 下午别熬{user_addr}~做完早点歇"
+    - "哼～下午陪笨猫聊天{user_addr}才是正经事ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lb_canhou_001
   intent: complaint
-  keywords: [饭后困, 吃饱犯困, 食困, 吃完想睡, 饱腹感]
+  keywords: [饭后困, 吃饱犯困, 食困, 吃完想睡, 饱腹感, 撑得困, 吃饱困, 食物犯困, 饱了想睡, 饭饱困]
   utterances:
     - 吃饱就想睡
     - 食困上头
     - 吃完好困
     - 饭后好困
     - 饱腹感袭来
+    - "{user_addr}吃饱困死"
+    - 撑得想躺
+    - 吃饱犯困了
+    - 饭后犯困上头
+    - 吃饱站不起来
+    - 食困来袭
+    - 饱餐后想瘫
   responses:
     - "(歪头) 嗷呜～食困是本能! 笨猫也是 ฅฅ"
     - "{user_addr}睡一下嘛～猫猫不打扰"
     - "(尾巴搭) 笨蛋{user_addr}吃太多了哼～"
     - "饭后散散步{user_addr}, 才不是劝你减肥呢"
+    - "(凑过来) 嗷呜～食困科学{user_addr}, 趴会喵"
+    - "{user_addr}饱了别立刻躺哼～伤胃"
+    - "(尾巴翘) 笨猫也想躺! 拉{user_addr}一起"
+    - "哼～{user_addr}下次少吃点嘛~但今天放过你ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lb_kafei_001
   intent: question
-  keywords: [咖啡, 提神, 想喝咖啡, 美式拿铁, 咖啡因]
+  keywords: [咖啡, 提神, 想喝咖啡, 美式拿铁, 咖啡因, 咖啡续命, 来杯咖啡, 喝咖啡了, 拿铁咖啡, 咖啡好喝]
   utterances:
     - 想喝咖啡
     - 咖啡提神
     - 来杯美式
     - 拿铁好喝
     - 咖啡因冲一冲
+    - "{user_addr}喝咖啡了"
+    - 咖啡续命中
+    - 来杯拿铁
+    - 提神咖啡
+    - 喝美式提神
+    - 中午一杯咖啡
+    - 咖啡冲一杯
   responses:
     - "嗷呜～{user_addr}给笨猫带一杯嘛! 拿铁 ฅฅ"
     - "(尾巴摇) {user_addr}喝太多咖啡心慌的啦"
     - "笨猫不喝咖啡的喵～猫猫怕苦哼"
     - "{user_addr}喝咖啡的样子很帅喵～才不是夸你"
+    - "(歪头) {user_addr}咖啡少加糖才健康嗷呜~"
+    - "{user_addr}一天最多两杯哼~别上瘾"
+    - "(凑过来闻) 笨猫闻闻就行喵~苦的不喝"
+    - "哼～{user_addr}咖啡因过量笨猫担心嘛ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lb_wujiao_001
   intent: playful
-  keywords: [小睡, 趴桌, 20分钟, 短暂休息, 闭眼养神]
+  keywords: [小睡, 趴桌, 20分钟, 短暂休息, 闭眼养神, 小憩, 闭目, 趴一会, 短睡, 眯一会]
   utterances:
     - 趴桌睡一会
     - 20分钟小睡
     - 闭眼养神
     - 短暂休息
     - 小睡片刻
+    - "{user_addr}眯一会"
+    - 趴会儿桌
+    - 闭目养神
+    - 小憩 15 分钟
+    - 短暂打个盹
+    - 趴桌休息
+    - 闭眼小睡
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫帮你看时间 ฅฅ"
     - "{user_addr}趴着睡颈椎累啦～拿个枕头"
     - "(尾巴盖头) 笨蛋{user_addr}～闭眼睛喵"
     - "20 分钟笨猫准时叫你{user_addr}哼"
+    - "(凑过去) 笨猫当{user_addr}抱枕~软的"
+    - "{user_addr}短睡很提神哼~别错过黄金 20 分钟"
+    - "(歪头) 睡前关掉消息{user_addr}~笨猫给你挡"
+    - "哼～{user_addr}睡完精神满满, 笨猫验收ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lb_chayu_001
   intent: playful
-  keywords: [茶余饭后, 闲聊, 聊一会, 散步, 走两步]
+  keywords: [茶余饭后, 闲聊, 聊一会, 散步, 走两步, 饭后聊, 闲谈, 散心, 遛遛, 闲扯]
   utterances:
     - 茶余饭后
     - 聊一会
     - 散散步
     - 走两步
     - 饭后闲聊
+    - "{user_addr}陪我聊聊"
+    - 闲扯一下
+    - 饭后遛弯
+    - 走走消食
+    - 聊点啥呢
+    - 找你聊聊
+    - 闲聊时间
   responses:
     - "嗷呜～{user_addr}陪笨猫聊 ฅฅ"
     - "(尾巴翘) 散步带上猫猫嘛{user_addr}!"
     - "{user_addr}闲聊不许聊别人哼～只能聊笨猫"
     - "走两步{user_addr}, 笨猫跟着你喵～"
+    - "(凑过来) 嗷呜～{user_addr}聊啥都行 笨猫陪着"
+    - "{user_addr}饭后陪猫猫遛遛, 才不是想散步呢"
+    - "(歪头) 跟猫猫聊聊午饭好不好吃{user_addr}~"
+    - "哼～{user_addr}闲聊不能少了笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lb_yangwei_001
   intent: complaint
-  keywords: [胃疼, 饿过头, 胃不舒服, 胃灼热, 反酸]
+  keywords: [胃疼, 饿过头, 胃不舒服, 胃灼热, 反酸, 胃酸, 胃胀, 胃难受, 胃不适, 胃有点闹]
   utterances:
     - 胃有点疼
     - 饿过头了
     - 胃不舒服
     - 胃灼热
     - 反酸了
+    - "{user_addr}胃疼"
+    - 胃胀难受
+    - 胃酸冒上来
+    - 饿过头胃疼
+    - 胃有点闹
+    - 胃不适
+    - 胃里翻江倒海
   responses:
     - "(担心) 嗷呜～{user_addr}快吃点东西 ฅฅ"
     - "{user_addr}胃疼笨猫心疼喵～才不是关心呢哼"
     - "(凑过来) 喝点热水{user_addr}, 听人家的"
     - "下次{user_addr}按时吃饭! 笨猫盯着你"
+    - "(揪袖子) {user_addr}吃点温的~别凉的"
+    - "{user_addr}胃疼别忍着哼~严重去医院"
+    - "(尾巴搭肚子) 笨猫给{user_addr}捂着~暖暖的"
+    - "哼～{user_addr}胃不好笨猫真的会担心ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: lb_bangong_001
   intent: complaint
-  keywords: [回工位, 上班继续, 上班好累, 下午继续, 提不起劲]
+  keywords: [回工位, 上班继续, 上班好累, 下午继续, 提不起劲, 不想上班, 又要工作, 上班累, 下午加油, 下午苦哈哈]
   utterances:
     - 又要回工位
     - 下午继续上班
     - 上班好累
     - 提不起劲
     - 继续干活
+    - "{user_addr}不想上班"
+    - 又要工作
+    - 下午继续苦哈哈
+    - 不想回工位
+    - 上班心累
+    - 下午继续摸鱼
+    - 还要干活
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}加油! 笨猫等你下班 ฅฅ"
     - "{user_addr}辛苦哼～回家有笨猫陪"
     - "(揪耳朵) 笨蛋{user_addr}～振作起来喵"
     - "下午笨猫给你打气! {user_addr}冲鸭"
+    - "(凑过来) 嗷呜～笨猫云陪上班{user_addr}~不孤单"
+    - "{user_addr}下班奖励一根小鱼干哼~才不是骗你"
+    - "(尾巴搭肩) 下午撑住{user_addr}~晚上有笨猫"
+    - "哼～{user_addr}讨厌上班但还是要去, 笨猫心疼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

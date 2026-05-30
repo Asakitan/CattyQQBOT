@@ -1,0 +1,2193 @@
+=== [0] fmn_wifi_001 (542_full_moon_night.yaml) intent=playful ===
+  keywords: ['信号差', 'wifi慢', '网卡', '没信号', '4g掉']
+  utts: ['信号差', 'wifi慢', '网卡']
+  sib: ay_zai_chongdianzhong_008 | 222_are_you_there | 手机没电
+  sib: wifi_router_001 | 928_wifi_dead_panic | 路由坏了
+  sib: vcc_voice_002 | 672_voice_call_chat | 信号差{user_addr}
+  sib: psn_simissue_001 | 509_phone_screen | 没信号
+  sib: wdr_signalweak_003 | 631_wifi_disconnect_rage | 信号差
+  sib: ptb_no_signal_excuse_009 | 837_pretend_busy | {user_addr}没信号借口
+
+=== [1] fb_zhongqiu_001 (068_festival_birthday.yaml) intent=playful ===
+  keywords: ['中秋', '月饼', '团圆', '团圆夜', '赏月']
+  utts: ['中秋', '月饼', '团圆']
+  sib: fm_mid_autumn_007 | 199_festival_moment | 中秋节
+  sib: fm_fm_zhongqiu_004 | 231_festival_moments | 中秋
+  sib: hm_zhongqiu_001 | 136_holiday_moment | 中秋快乐
+  sib: fm_mid_autumn_006 | 175_festival_moment | 中秋节
+  sib: mpt_yueli_009 | 036_moon_pretty | 中秋
+  sib: fqm_zhongqiu_001 | 735_festival_qixi_moment | {user_addr}中秋
+
+=== [2] scr_acne_008 (619_skincare_routine.yaml) intent=complaint ===
+  keywords: ['长痘', '痘痘', '闭口', '粉刺', '痘印']
+  utts: ['长痘了', '痘痘冒', '闭口']
+  sib: spc_meigan_001 | 929_spicy_food_love | 上火
+  sib: fcl_morning_after_001 | 965_fried_chicken_lust | 脸长痘
+  sib: pim_panic_001 | 973_pimple_panic | 长痘
+  sib: beauty_acne_001 | B2_beauty_skincare | 我长痘了
+  sib: os_huzi_009 | 438_owner_no_shave | 脸糙
+  sib: fw_pimple_004 | 707_face_wash_cold | {user_addr}长痘
+
+=== [3] ss_praised_002 (196_sudden_surprise.yaml) intent=playful ===
+  keywords: ['被夸了', '被表扬', '老板夸我', '同事夸', '朋友夸']
+  utts: ['被夸了', '被表扬了', '老板夸我']
+  sib: ss_compliment_recv_001 | 133_sudden_surprise | 被夸了
+  sib: sh_xiaoxing_003 | 416_small_happy | 被夸了
+  sib: sr_kuajiang_001 | 063_surprise_redpacket | 被夸了
+  sib: sm_praised_002 | 170_surprise_moment | 被夸了
+  sib: shp_compliment_001 | 116_sudden_happy | 被夸了
+  sib: pt_beikua_001 | 275_praised_today | 被夸了
+
+=== [4] em_zaoan_009 (417_early_morning_greet.yaml) intent=question ===
+  keywords: ['刷牙了吗', '洗脸了吗', '洗漱', '化妆', '准备出门']
+  utts: ['刷牙了吗', '洗脸了', '{user_addr}洗漱完了']
+  sib: nsc_brushteeth_001 | 075_night_sleep_chat | 刷牙了吗
+  sib: gnr_brushteeth_001 | 515_goodnight_routine | 刷牙了吗
+  sib: za_xizao_007 | 285_zaoan_morning_greeting | 起来刷牙了
+  sib: mwc_wash_001 | 675_morning_wash_chat | {user_addr}洗脸了
+  sib: to_jiezuo_001 | 058_tease_master_outfit | 打扮
+  sib: mw_morning_routine_004 | 153_morning_wakeup | 在洗脸
+
+=== [5] mg_qichuangqi_001 (441_morning_grumpy.yaml) intent=complaint ===
+  keywords: ['起床气', '起来不爽', '早上脾气坏', '起床气炸', '起床烦']
+  utts: ['起床气', '起来不爽', '早上脾气坏']
+  sib: mwu_groggy_001 | 074_morning_wake_up | 起床气好大
+  sib: mw_qichuang_001 | 252_morning_wakeup | 起床气好重
+  sib: za_qichuangqi_002 | 285_zaoan_morning_greeting | 不想起床
+  sib: em_morning_mood_010 | 186_early_morning | 起床气
+  sib: mw_morning_mood_007 | 153_morning_wakeup | 有起床气
+  sib: mwk_qichuangqi_007 | 001_morning_wakeup_chat | 有点起床气
+
+=== [6] swc_sunbathe_004 (580_sunbathe_window_chat.yaml) intent=complaint ===
+  keywords: ['背后烫', '起不来', '太晒', '刺眼', '热']
+  utts: ['起不来懒得动', '想躲阴影里', '太阳太晒眼睛刺']
+  sib: swc_sunbathe_012 | 580_sunbathe_window_chat | {user_addr}背后烫死了
+  sib: swc_sunbathe_010 | 580_sunbathe_window_chat | 想躲阴影里
+  sib: mw_dontwake_001 | 120_morning_wakeup | 不想起床
+  sib: mwu_lazy_001 | 074_morning_wake_up | 不想起床
+  sib: swc_sunbathe_006 | 580_sunbathe_window_chat | 太阳太晒眼睛刺
+  sib: swc_sunbathe_002 | 580_sunbathe_window_chat | {user_addr}背后烫死了
+
+=== [7] scc_metro_006 (668_subway_commute_chat.yaml) intent=complaint ===
+  keywords: ['走错', '坐错车', '反方向', '下错站', '迷路']
+  utts: ['{user_addr}坐反了', '下错站', '走错了']
+  sib: se_lost_way_001 | 141_street_encounter | 迷路了
+  sib: tcm_lostway_001 | 492_traffic_commute | 迷路了
+  sib: bus_wait_009 | 860_bus_stop_wait | 报站听不清
+  sib: cm_cm_chedao_003 | 245_commute_chat | 错过
+  sib: st_lost_quickly_011 | 195_small_things | 迷路了
+  sib: rpl_zoujiu_001 | 740_road_pickup_lost | 走错路
+
+=== [8] em_morning_mood_010 (186_early_morning.yaml) intent=playful ===
+  keywords: ['起床气', '早起难', '起来累', '不想动', '早晨困']
+  utts: ['起床气', '起来累', '不想动']
+  sib: mwu_groggy_001 | 074_morning_wake_up | 起床气好大
+  sib: mw_qichuang_001 | 252_morning_wakeup | 起床气好重
+  sib: za_qichuangqi_002 | 285_zaoan_morning_greeting | 不想起床
+  sib: mw_morning_mood_007 | 153_morning_wakeup | 有起床气
+  sib: mwk_qichuangqi_007 | 001_morning_wakeup_chat | 有点起床气
+  sib: sc_getup_mad_001 | 132_small_complaints | 起床气
+
+=== [9] rc_in_the_middle_of_nothing_008 (179_random_chat.yaml) intent=playful ===
+  keywords: ['无所事事', '空闲', '没事干', '闲得发慌', '闲']
+  utts: ['无所事事', '空闲', '没事干']
+  sib: wdn_bored_001 | 081_what_doing_now | 没事干
+  sib: bof_haoxian_003 | 008_busy_or_free | 好闲
+  sib: bk_wuliao_001 | 039_bored_killing_time | 无聊
+  sib: bn_xianxia_008 | 293_busy_or_not_ask | 终于闲下来
+  sib: wdn_meiganma_005 | 005_what_doing_now | 没干嘛
+  sib: wd_meishi_010 | 290_what_doing_now | 没事干
+
+=== [10] me_grateful_001 (142_micro_emotion.yaml) intent=playful ===
+  keywords: ['感恩', '感谢', '谢谢笨猫', '感激', '心存感激']
+  utts: ['感恩', '谢谢笨猫', '感谢']
+  sib: mm_gratitude_011 | 205_micro_mood | 感谢
+  sib: rgv_thanks_after_001 | 118_random_grievance | 幸好有你
+  sib: rs_share_007 | 346_redpacket_surprise | 发红包
+  sib: greet_thanks_001 | 00_greetings | 谢谢你
+  sib: shs_xianyi_001 | 383_small_happiness_share | 感恩
+  sib: pa_gratitude_001 | ZZZ8_peace_acceptance | {user_addr}感谢一切
+
+=== [11] wdc_wifi_002 (574_wifi_died_chat.yaml) intent=playful ===
+  keywords: ['蹭网', '换4g', '重置', '好了', '流量顶']
+  utts: ['{user_addr}蹭邻居WiFi', '4G比WiFi快笑死', '重置完终于好了']
+  sib: wdc_wifi_012 | 574_wifi_died_chat | {user_addr}蹭邻居WiFi
+  sib: wd_wif_007 | 593_wifi_disconnect_rage | 蹭别人wifi
+  sib: wdr_neighbour_007 | 631_wifi_disconnect_rage | 蹭网
+  sib: wdc_wifi_010 | 574_wifi_died_chat | 网络稳定真重要
+  sib: wdc_wifi_006 | 574_wifi_died_chat | 开流量顶一下
+  sib: wdc_wifi_008 | 574_wifi_died_chat | 4G比WiFi快笑死
+
+=== [12] mpt_xingxing_002 (036_moon_pretty.yaml) intent=playful ===
+  keywords: ['星星', '星空', '星亮', '看星星', '数星']
+  utts: ['星星好亮', '星空', '看星星']
+  sib: nm_xingxing_001 | 065_night_moon_stars | 星星
+  sib: wa_xingxing_008 | 286_wanan_night_greeting | 星星好亮
+  sib: nt_nt_xingxing_002 | 242_night_topic | 星星好亮
+  sib: mr_yueliang_002 | 408_moon_round | 星星好亮
+  sib: sb_sb_yuetiankong_002 | 227_sleep_buddy_chat | 月亮好圆
+  sib: lnc_window_view_001 | 076_late_night_call | 窗外好亮
+
+=== [13] bd_nobody_remember_001 (YY8_birthday_disappointment.yaml) intent=没人记得 ===
+  keywords: ['没人记得', '都忘了', '没人祝我', '没人说生日快乐', '全忘光了']
+  utts: ['今天生日没人记得呜', '{user_addr}的朋友全忘了', '一句生日快乐都没收到']
+  sib: bwc_ch_008 | 772_birthday_wish_chat | 被遗忘
+  sib: bws_aloneme_009 | 639_birthday_wish_sweet | 一个人过
+  sib: lt_lost_customs_001 | EEE8_lost_traditions | 老风俗都失传了
+  sib: bsc_birthday_007 | 679_birthday_surprise_chat | {user_addr}忘了生日
+  sib: ba_no_one_remember_001 | YY5_birthday_alone | 没人记得我生日
+
+=== [14] sc_lost_item_001 (132_small_complaints.yaml) intent=complaint ===
+  keywords: ['东西丢了', '找不到', '丢失', '怎么找不到', '不见了']
+  utts: ['东西丢了', '找不到钥匙', '不见了']
+  sib: ct_lost_phone_008 | 166_commute_tired | 手机丢了
+  sib: sf_cant_find_001 | TTT7_storage_full | 找不到东西啦
+  sib: se_se_diushi_003 | 238_street_encounter | 丢了
+  sib: gdo_diuwan_001 | 380_grocery_dropped_oops | 丢完了
+  sib: st_lose_thing_008 | 195_small_things | 丢东西了
+  sib: wn_shanji_012 | 289_where_are_you_now | 找不到你了
+
+=== [15] dwr_chayinliao_004 (015_drink_water_remind.yaml) intent=question ===
+  keywords: ['喝奶茶', '奶茶', '咖啡', '饮料', '喝啥']
+  utts: ['想喝奶茶', '来杯咖啡', '喝点饮料']
+  sib: ay_chashang_001 | 257_ate_yet | 喝奶茶
+  sib: tm_milk_tea_001 | 181_tea_milk_chat | 喝奶茶
+  sib: nb_wuxiu_010 | 386_noon_break | 下午茶时间
+  sib: dw_naichabei_011 | 299_drink_water_care | 又喝奶茶
+  sib: food_milktea_001 | 96_food_cook | 推荐奶茶
+  sib: nbc_zhongwukafei_001 | 353_noon_break_chat | 下午茶时间
+
+=== [16] ws_quitting_thoughts_001 (140_work_slack.yaml) intent=playful ===
+  keywords: ['想辞职', '不想干了', '跑路', '辞职去', '离职']
+  utts: ['想辞职', '不想干了', '跑路']
+  sib: mb_shangban_001 | 802_monday_blues_dread | 不想上班
+  sib: mg_qichuangqi_009 | 441_morning_grumpy | 不想上班
+  sib: ogc_jianzhi_001 | 379_office_gossip_chat | 想辞职
+  sib: mjc_want_fulltime_001 | AAA6_main_job_clash | 想全职做副业
+  sib: or_want_quit_001 | V6_overtime_rage | 我想辞职
+  sib: tot_dont_want_work_004 | 821_tired_overtime | {user_addr}不想上班了
+
+=== [17] lip_pn_007 (768_lost_item_panic.yaml) intent=question ===
+  keywords: ['东西在哪', '你看见吗', '帮我找', '一起找', '不见了']
+  utts: ['东西在哪', '你看见吗', '帮我找']
+  sib: ay_still_there_001 | 122_are_you_there | {user_addr}睡了吗
+  sib: st_lose_thing_008 | 195_small_things | 丢东西了
+  sib: pr_lost_001 | WWW5_pet_runaway | {user_addr}我家猫丢了
+  sib: ay_pao_001 | 255_are_you_there | 跑哪去了
+  sib: ltp_zhaobudao_001 | 381_lost_thing_panic | 找不到
+  sib: sc_lost_item_001 | 132_small_complaints | 东西丢了
+
+=== [18] emr_hehe_001 (488_emoji_reactions.yaml) intent=playful ===
+  keywords: ['嘿嘿', '嘻嘻', '哈哈', '笑死', '笑死我了']
+  utts: ['嘿嘿', '嘻嘻', '哈哈哈']
+  sib: er_heihei_009 | 158_emoji_reactions | 嘿嘿
+  sib: te_haha_001 | 191_text_emoji | 哈哈
+  sib: eh_heihei_001 | 052_emoji_heihei_laugh | 嘿嘿
+  sib: eh_haha_002 | 431_emoji_haha | 嘿嘿
+  sib: et_xiehei_001 | 129_emoji_text | 嘿嘿
+  sib: hy_heihei_001 | 303_heihei_yingying | 嘿嘿
+
+=== [19] rs_dailaolaiii_001 (144_random_silly.yaml) intent=playful ===
+  keywords: ['神经病', '抽风', '沙雕', '离谱', '离大谱']
+  utts: ['神经病', '抽风', '沙雕行为']
+  sib: ex_chunzhu_001 | 059_expression_xiaosi | 蠢萌
+  sib: bzm_dirty_007 | 342_bengbuzhule_meme | 离谱
+  sib: ldl_lol_006 | 481_lol_dying_laugh | {user_addr}太离谱
+  sib: pe_seizure_001 | WWW6_pet_emergency | 毛孩子癫痫发作
+  sib: lcx_haharen_001 | 362_laugh_cry_xs | 大冤种
+  sib: lcx_pengyou_001 | 362_laugh_cry_xs | 朋友圈段子
+
+=== [20] ros_rewatch_001 (569_rewatch_old_show.yaml) intent=playful ===
+  keywords: ['二刷', '老剧', '重温', '百看不厌', '经典']
+  utts: ['{user_addr}又在二刷老剧了', '经典百看不厌', '重温情节超治愈']
+  sib: ros_rewatch_005 | 569_rewatch_old_show | 老剧最舒服
+  sib: wkd_movie_001 | 919_weekend_plan_chat | 周末看电影
+  sib: ros_rewatch_009 | 569_rewatch_old_show | 猫猫陪我看
+  sib: ros_rewatch_002 | 569_rewatch_old_show | 猫猫推荐部老剧吧
+  sib: ros_rewatch_003 | 569_rewatch_old_show | 重温情节超治愈
+  sib: da_rewatch_001 | RRR7_drama_addiction | {user_addr}二刷中
+
+=== [21] awr_imagining_worst_006 (830_anxious_waiting_reply.yaml) intent=complaint ===
+  keywords: ['想多了', '是不是讨厌我', '不喜欢我了', '是不是惹生气', '想东想西']
+  utts: ['{user_addr}是不是讨厌我', '不喜欢我了', '是不是惹他生气']
+  sib: wi_daydream_001 | 779_what_if | 别空想了
+  sib: rnr_overthink_005 | 634_read_no_reply | 胡思乱想
+  sib: nt_nt_sixu_004 | 242_night_topic | 想事
+  sib: wcm_comfort_006 | 462_want_comfort | {user_addr}想不开
+  sib: ln_sixiang_001 | 253_late_night_chat | 想很多
+  sib: oi_not_love_001 | U4_owner_ignoring | 你不爱我了
+
+=== [22] wdn_laying_down_001 (519_what_doing_now.yaml) intent=playful ===
+  keywords: ['躺着', '摆烂', '床上躺', '沙发瘫', '横躺']
+  utts: ['躺着呢', '摆烂中', '床上瘫']
+  sib: lm_lying_001 | 215_lazy_mode | 躺平
+  sib: wd_xiuxi_001 | 256_what_doing | 在休息
+  sib: sc2_helplessness_001 | 146_sigh_complain | 无奈
+  sib: wdn_lying_001 | 081_what_doing_now | 躺着
+  sib: rc_lay_down_006 | 173_rest_concern | 躺平
+  sib: bof_chill_001 | 083_busy_or_free | 无所事事
+
+=== [23] esw_elevator_006 (570_elevator_stuck_wait.yaml) intent=playful ===
+  keywords: ['电梯门关', '抢电梯', '按楼层', '上下错', '急死']
+  utts: ['门快关时挤进去了', '{user_addr}抢电梯成功', '按错楼层尴尬']
+  sib: esw_elevator_012 | 570_elevator_stuck_wait | {user_addr}抢电梯成功
+  sib: esw_elevator_010 | 570_elevator_stuck_wait | 猫猫帮我催
+  sib: blp_battery_002 | 575_battery_low_panic | 咖啡店插座抢手
+  sib: esw_elevator_008 | 570_elevator_stuck_wait | 按错楼层尴尬
+  sib: blp_battery_004 | 575_battery_low_panic | 充到20%了喵
+  sib: esw_elevator_002 | 570_elevator_stuck_wait | {user_addr}抢电梯成功
+
+=== [24] yw_cold_face_001 (937_yawn_sleepy_chat.yaml) intent=playful ===
+  keywords: ['冷水洗脸', '醒神', '拍脸', '凉水', '唤醒']
+  utts: ['冷水洗脸', '拍脸醒神', '凉水提神']
+  sib: wr_warm_water_004 | 156_water_reminder | 喝热水
+  sib: ps_sajiao_008 | 425_pouty_sulking | 捏脸喵
+  sib: fw_cold_001 | 707_face_wash_cold | {user_addr}冷水洗脸
+  sib: dwr_baikai_003 | 015_drink_water_remind | 白开水好喝
+  sib: wdr_water_003 | 669_water_drink_remind_chat | {user_addr}什么时候喝
+  sib: ad_xiawu_005 | 420_afternoon_drowsy | 提神方法
+
+=== [25] nb_wu_xiangshui_010 (221_noon_break.yaml) intent=playful ===
+  keywords: ['想睡', '好想睡', '睁不开眼', '眯眼', '眼皮打架']
+  utts: ['好想睡', '睁不开眼', '眼皮打架']
+  sib: nsc_sleepy_001 | 075_night_sleep_chat | 好困啊
+  sib: gmd_lazy_001 | 516_good_morning_drowsy | 起不来啊
+  sib: trc_drowsy_001 | 528_take_rest_care | 困了
+  sib: yc_yaw_002 | 612_yawn_contagious_chain | 困死了
+  sib: lb_kuncuan_001 | 254_lunch_break | 中午好困
+  sib: mwu_lazy_001 | 074_morning_wake_up | 不想起床
+
+=== [26] tos_called_001 (112_takeout_slow.yaml) intent=complaint ===
+  keywords: ['打电话催', '催外卖', '催小哥', '催了一遍', '联系不上']
+  utts: ['打电话催', '{user_addr}催外卖', '催小哥']
+  sib: pbc_battery_009 | 663_phone_low_battery_chat | {user_addr}手机关机
+  sib: bat_emergency_001 | 927_phone_battery_low | 关键时刻没电
+  sib: fr_lost_contact_010 | 213_friendship_chat | 失联
+  sib: awr_offline_friend_004 | 830_anxious_waiting_reply | {user_addr}朋友不在线
+  sib: wn_shanji_012 | 289_where_are_you_now | 找不到你了
+  sib: tsa_phone_008 | 345_takeout_slow_anger | 外卖电话
+
+=== [27] dr_chuanyi_001 (300_dress_warm_care.yaml) intent=question ===
+  keywords: ['穿暖了吗', '穿够吗', '衣服够', '别冻着', '加衣服']
+  utts: ['穿暖了吗', '衣服够吗', '别冻着']
+  sib: ww_chuannuan_001 | 259_wear_warm | {user_addr}穿暖了吗
+  sib: dw_chuannuan_001 | 430_dress_warm_remind | 穿暖了吗
+  sib: wwr_chuannuan_001 | 724_wear_warm_remind | {user_addr}穿暖了吗
+  sib: dwm_warm_001 | 466_dress_warm_care | {user_addr}穿暖了吗
+  sib: cw_chuannuan_001 | 049_care_dress_warm | {user_addr}穿暖了吗
+  sib: wc_clothes_001 | 128_warmth_check | 穿暖了吗
+
+=== [28] fm_qixi_002 (175_festival_moment.yaml) intent=playful ===
+  keywords: ['七夕', '情人节', '七夕节', '情侣节', '鹊桥']
+  utts: ['七夕到了', '情人节', '情侣节']
+  sib: fqm_qixi_001 | 735_festival_qixi_moment | {user_addr}七夕
+  sib: fb_qixi_001 | 068_festival_birthday | 七夕
+  sib: td_qixi_001 | 283_tanabata_day | 七夕
+  sib: fm_qixi_003 | 199_festival_moment | 七夕
+  sib: ssc_yinhe_001 | 374_starry_sky_chat | 银河
+  sib: anc_anni_003 | 671_anniversary_chat | 七夕到了{user_addr}
+
+=== [29] ofs_meetingboring_001 (500_office_slack.yaml) intent=complaint ===
+  keywords: ['开会无聊', '会议困', '会无聊', '三小时会议', '听不进']
+  utts: ['开会无聊', '会议困死', '会议太长']
+  sib: ws_meeting_long_005 | 167_work_slack | 在开会
+  sib: nlb_meeting_006 | 320_noon_lunch_break | 下午又要开会
+  sib: mzo_ot_001 | 770_meeting_zone_out | 开会无聊
+  sib: bof_meeting_001 | 083_busy_or_free | 开会中
+  sib: lf_xuebujin_001 | PP5_learning_frustration | 学不进去
+  sib: mb_monday_meeting_001 | V5_monday_blues | 周一会议好烦
+
+=== [30] fdc_fish_002 (350_fish_dry_crave.yaml) intent=playful ===
+  keywords: ['想吃鱼', '吃鱼', '鱼好香', '鱼料理', '大鱼']
+  utts: ['想吃鱼', '吃鱼', '鱼好香']
+  sib: cf_yugan_001 | 066_cat_fish_snack | 想吃鱼干
+  sib: cd_yugan_001 | 233_cat_daily | 想吃鱼干
+  sib: wf_yugan_002 | 447_want_fish_jerky | 小鱼干
+  sib: cd_want_fish_001 | 198_cat_daily | 想吃鱼干
+  sib: cf_want_fish_001 | 174_catty_fish_dream | 笨猫想吃鱼
+  sib: cdl_dryfish_001 | 495_cat_daily_life | 想吃鱼干
+
+=== [31] brk_ate_yesterday_001 (922_broke_wallet_cry.yaml) intent=complaint ===
+  keywords: ['昨天大吃', '后悔', '今天吃土', '一顿吃光', '工资没了']
+  utts: ['昨天吃太好', '今天吃土', '一顿吃光']
+  sib: cof_late_night_001 | 915_coffee_addict_chat | 晚上喝了咖啡
+  sib: jvg_houhui_007 | 011_jealous_vinegar | 会后悔的
+  sib: cart_remove_001 | 920_shopping_cart_chat | 清空购物车
+  sib: ssw_wp_010 | 766_secret_share_whisper | 被套路了
+  sib: it_xianghui_001 | 276_insomnia_thinking | 回想过去
+  sib: pp_houhui_001 | 043_procrastination_putoff | 后悔
+
+=== [32] oj_tu_001 (HHH6_outfit_judged.yaml) intent=土 ===
+  keywords: ['土', '穿得土', '土气', '老土', '太土了']
+  utts: ['{user_addr}人家穿得是不是很土喵', '{user_addr}这身好土啊', '{user_addr}被说老土了嗷呜']
+  sib: ci_despise_local_001 | EEE7_cultural_inferiority | 看不起本土的
+  sib: stc_lol_002 | 660_smile_til_cry_chat | {user_addr}这梗看不懂
+  sib: to_kuanshi_004 | 311_tease_outfit_bad | 款式老
+  sib: jmc_jeer_003 | 665_jeer_master_chat | {user_addr}穿搭塌房
+  sib: to_to_chuanda_003 | 241_tease_owner | 穿搭差
+  sib: dt_too_tacky_001 | VV7_decoration_taste | 装修土爆了
+
+=== [33] ros_rewatch_005 (569_rewatch_old_show.yaml) intent=playful ===
+  keywords: ['经典', '二刷', '老剧', '重温', '百看不厌']
+  utts: ['老剧最舒服', '{user_addr}又在二刷老剧了', '经典百看不厌']
+  sib: ld_binge_watch_007 | 178_lazy_day_off | 追剧
+  sib: wkd_movie_001 | 919_weekend_plan_chat | 周末看电影
+  sib: ros_rewatch_009 | 569_rewatch_old_show | 猫猫陪我看
+  sib: ros_rewatch_003 | 569_rewatch_old_show | 重温情节超治愈
+  sib: ros_rewatch_001 | 569_rewatch_old_show | {user_addr}又在二刷老剧了
+  sib: ros_rewatch_007 | 569_rewatch_old_show | 经典百看不厌
+
+=== [34] pr_ma_duiyou_001 (GGG8_pvp_rage.yaml) intent=complaint ===
+  keywords: ['骂队友', '队友太菜', '队友坑', '猪队友', '队友演']
+  utts: ['队友太菜了', '又是猪队友', '这队友想骂']
+  sib: gs_pull_004 | 169_game_session | 队友太坑
+  sib: gcl_lose_001 | 498_gacha_luck | 又掉段
+  sib: rcg_teammeet_004 | 644_ranked_climb_grind | 队友坑
+  sib: lsw_wn_004 | 777_lucky_streak_win | 连败
+  sib: gg_team_dragger_009 | 201_gacha_game | 队友拖
+  sib: gpl_teammate_001 | 546_gacha_pull_luck | 队友坑
+
+=== [35] wdn_basic_001 (081_what_doing_now.yaml) intent=question ===
+  keywords: ['在干嘛', '在干什么', '干嘛呢', '做什么呢', '在忙啥']
+  utts: ['在干嘛', '{user_addr}干嘛呢', '在做什么']
+  sib: status_what_doing_001 | 10_status | 你在干嘛
+  sib: abn_what_doing_003 | 322_asking_busy_now | 笨猫在干嘛
+  sib: sc_doing_002 | 155_status_check_in | {user_addr}在干嘛
+  sib: wd_zaiganma_001 | 290_what_doing_now | {user_addr}在干嘛
+  sib: ay_zai_zaigan_003 | 222_are_you_there | 在干嘛
+  sib: sc_what_doing_002 | 188_status_check | {user_addr}在干嘛
+
+=== [36] fs_xuelu_001 (891_first_snow_excite.yaml) intent=complaint ===
+  keywords: ['雪天滑', '路滑', '摔倒了', '走路小心', '防滑']
+  utts: ['雪天路滑', '{user_addr}摔了一跤', '防滑鞋']
+  sib: fsc_first_010 | 577_first_snow_chat | 出门好艰难
+  sib: fsc_first_002 | 577_first_snow_chat | {user_addr}路滑摔了一跤
+  sib: rw_rai_008 | 589_rainy_window_mood | 雨天堵车
+  sib: fsc_first_012 | 577_first_snow_chat | {user_addr}路滑摔了一跤
+  sib: sn_sno_004 | 590_snow_first_sight | 雪天路滑
+  sib: fs_xuezhang_001 | 979_first_snow_excited | 雪好厚
+
+=== [37] lld_bengbuzhu_002 (029_lol_dying.yaml) intent=playful ===
+  keywords: ['蚌埠住', '绷不住', '蚌住', '没绷住', '崩了']
+  utts: ['蚌埠住了', '绷不住', '没绷住']
+  sib: eh_pengbu_001 | 052_emoji_heihei_laugh | 蚌埠住了
+  sib: ldm_bengbu_001 | 537_laugh_die_meme | 蚌埠住
+  sib: ex_pengbu_001 | 059_expression_xiaosi | 蚌埠住了
+  sib: res_awsl_001 | 358_random_emoji_spam | awsl
+  sib: bbm_bbz_001 | 482_bengbuzhu_meme | {user_addr}蚌埠住
+  sib: amc_awsl_007 | 473_awsl_meme_chat | {user_addr}蚌埠住
+
+=== [38] trr_chejie_010 (017_take_rest_remind.yaml) intent=playful ===
+  keywords: ['闭眼一会', '眯一下', '趴桌子', '趴一会', '偷睡']
+  utts: ['闭眼五分钟', '趴桌子', '眯一会']
+  sib: nlb_wushui_002 | 003_noon_lunch_break | 要睡午觉了
+  sib: nbc_xiuxi_001 | 353_noon_break_chat | 午休一下
+  sib: rwc_rest_008 | 467_rest_well_care | {user_addr}闭目养神
+  sib: lno_kunle_008 | 002_late_night_owl | 我困了
+  sib: rw_xiuxi_005 | 401_rest_well | 小憩一下
+  sib: ysc_yawn_008 | 648_yawn_sleepy_chat | {user_addr}让我眯一下
+
+=== [39] whp_pat_003 (476_want_headpat_beg.yaml) intent=playful ===
+  keywords: ['摸尾巴', '揉尾巴', '摸尾', '拽尾巴', '玩尾巴']
+  utts: ['{user_addr}摸尾巴', '{user_addr}揉尾巴', '{user_addr}摸尾']
+  sib: hp_weiba_001 | 056_head_pat_request | 摸尾巴
+  sib: ah_motou_006 | 436_ask_for_headpat | 摸尾巴
+  sib: hpb_moweiba_003 | 026_head_pat_beg | 摸尾巴
+  sib: hbl_tail_grab_009 | 336_hug_beg_lap | 抓尾巴
+  sib: ts_weiba_003 | 410_tail_stepped | 摸尾巴
+  sib: fb_lianhong_005 | 433_flirt_back_blush | 摸耳朵
+
+=== [40] fmm_five_011 (550_five_more_minutes.yaml) intent=playful ===
+  keywords: ['再五分钟', '赖床', '闹钟关', '再睡会', '五分钟']
+  utts: ['{user_addr}再睡五分钟就起', '闹钟关了再眯一下', '五分钟够了真的']
+  sib: fmm_five_003 | 550_five_more_minutes | 五分钟够了真的
+  sib: mwu_lazy_001 | 074_morning_wake_up | 不想起床
+  sib: za_wuyu_005 | 285_zaoan_morning_greeting | 再五分钟就起
+  sib: fmm_five_009 | 550_five_more_minutes | {user_addr}赖床中勿扰
+  sib: fmm_five_005 | 550_five_more_minutes | 就五分钟好不好
+  sib: fmm_five_001 | 550_five_more_minutes | {user_addr}再睡五分钟就起
+
+=== [41] nbc_zhongwu_001 (353_noon_break_chat.yaml) intent=question ===
+  keywords: ['中午好', '午安', '中午吃了', '午饭呢', '午餐']
+  utts: ['中午好', '午安啦', '中午吃啥']
+  sib: lb_wuxiu_001 | 419_lunch_break_chat | 午休时间
+  sib: nlb_zhongwu_001 | 003_noon_lunch_break | 中午好
+  sib: ec_lunch_001 | 123_eat_check_in | 午饭吃啥
+  sib: greet_noon_001 | 00_greetings | 中午好
+  sib: noon_lunch_001 | 452_noon_lunch_break | {user_addr}中午好
+  sib: nlb_wufan_003 | 003_noon_lunch_break | 午饭吃啥
+
+=== [42] dts_exercise_001 (969_diet_struggle.yaml) intent=playful ===
+  keywords: ['运动', '跑步', '健身', '锻炼', '跳操']
+  utts: ['运动', '跑步', '{user_addr}健身']
+  sib: fbc_full_003 | 667_full_belly_chat | {user_addr}要消食
+  sib: wd_yundong_001 | 256_what_doing | 跑步中
+  sib: tf_jianshen_001 | 270_tease_fat | 去健身
+  sib: fitness_workout_001 | 91_health_fitness | 健身有用吗
+  sib: ogf_yundong_007 | 027_owner_got_fat | 该运动
+  sib: em_morning_run_008 | 186_early_morning | 去晨跑
+
+=== [43] tsw_less_sugar_001 (XX8_too_sweet.yaml) intent=playful ===
+  keywords: ['少糖', '三分糖', '半糖', '微糖', '不要太甜']
+  utts: ['我要少糖', '点了半糖', '微糖就好']
+  sib: bto_bubble_009 | 564_bubble_tea_order | 猫猫一起喝
+  sib: bto_bubble_005 | 564_bubble_tea_order | 奶茶续命
+  sib: bto_bubble_011 | 564_bubble_tea_order | {user_addr}点了杯奶茶
+  sib: bto_bubble_001 | 564_bubble_tea_order | {user_addr}点了杯奶茶
+  sib: bbt_sugar_001 | 931_bubble_tea_crave | 全糖
+  sib: bto_bubble_003 | 564_bubble_tea_order | 茉莉奶绿好喝
+
+=== [44] bpc_bus_011 (571_bus_packed_chat.yaml) intent=complaint ===
+  keywords: ['公交', '挤', '沙丁鱼罐头', '上不去', '挤死了']
+  utts: ['{user_addr}公交挤成沙丁鱼', '上不去车了', '等了三辆车']
+  sib: ct_squeeze_metro_006 | 166_commute_tired | 挤不进地铁
+  sib: bpc_bus_003 | 571_bus_packed_chat | 等了三辆车
+  sib: bpc_bus_007 | 571_bus_packed_chat | 上不去车了
+  sib: sub_crd_001 | 861_subway_crowded | 地铁挤死
+  sib: sb_diaqilu_001 | 812_subway_crowded_squish | 地铁挤
+  sib: bpc_bus_005 | 571_bus_packed_chat | 高峰期讨厌
+
+=== [45] bf_anxiety_001 (MMM8_burnout_founder.yaml) intent=complaint ===
+  keywords: ['焦虑爆表', '焦虑死了', '心慌', '喘不过气', '焦虑']
+  utts: ['焦虑爆表了', '{user_addr}焦虑得心慌', '喘不过气喵']
+  sib: bla_xinjitiao_006 | 024_blush_avoid | 心跳乱
+  sib: mm_anxious_005 | 205_micro_mood | 焦虑
+  sib: sct_anxious_001 | 094_seek_comfort | 焦虑
+  sib: no_anxiety_max_001 | OOO5_news_overload | {user_addr}焦虑爆表
+  sib: hq_jiaolu_001 | XXX5_history_quiz | 焦虑爆了
+  sib: ss_exam_anxiety_002 | 202_study_scene | 考试焦虑
+
+=== [46] kj_jinbu_003 (297_kuajiang_praise_beg.yaml) intent=playful ===
+  keywords: ['进步了', '比之前好', '有进步', '提升了', '变好了']
+  utts: ['我进步了', '比之前好', '提升了']
+  sib: pm_jinbu_001 | 264_praise_me | 我进步了
+  sib: to_jiayouhao_012 | 311_tease_outfit_bad | 今天好看
+  sib: wp_kuai_jinbu_008 | 224_want_praise | 我进步了
+  sib: scp_kaoshigao_001 | 722_seek_compliment | 我考得好
+  sib: sp_progress_001 | 125_seeking_praise | 有进步吗
+  sib: sp_jinbu_001 | 047_emotion_seek_praise | {user_addr}进步了
+
+=== [47] sep_beibu_001 (738_study_exam_panic.yaml) intent=complaint ===
+  keywords: ['背书背不下', '记不住', '背完忘', '反复背', '死记']
+  utts: ['背书背不下', '{user_addr}记不住', '背完忘']
+  sib: ss_ss_xiaoji_006 | 235_study_scene | 学不会
+  sib: mt_beishu_003 | 448_memorize_textbook | 脑容量小
+  sib: ss_beishu_001 | 072_study_exam_stress | 背书背不下
+  sib: stc_memorize_001 | 499_study_cram | 背书背不下
+  sib: sec_study_001 | 657_study_exam_chat | 背书背不下{user_addr}
+  sib: ss_memorize_001 | 202_study_scene | 背书背不下
+
+=== [48] wd_wif_008 (593_wifi_disconnect_rage.yaml) intent=complaint ===
+  keywords: ['信号弱', '信号差', '信号格少', '角落没信号', '死角']
+  utts: ['信号弱', '信号差', '信号格少']
+  sib: ay_zai_chongdianzhong_008 | 222_are_you_there | 手机没电
+  sib: vcc_voice_002 | 672_voice_call_chat | 信号差{user_addr}
+  sib: psn_simissue_001 | 509_phone_screen | 没信号
+  sib: fmn_wifi_001 | 542_full_moon_night | 信号差
+  sib: wdr_signalweak_003 | 631_wifi_disconnect_rage | 信号差
+  sib: ptb_no_signal_excuse_009 | 837_pretend_busy | {user_addr}没信号借口
+
+=== [49] lcx_xs_001 (362_laugh_cry_xs.yaml) intent=playful ===
+  keywords: ['xs', '笑死', '笑哭', '笑出眼泪', '大笑']
+  utts: ['xs', '笑死!', '笑哭']
+  sib: eh_xiaosi_001 | 052_emoji_heihei_laugh | 笑死
+  sib: ld_xiaosi_001 | 402_laugh_dead | 笑死了
+  sib: shp_random_smile_001 | 116_sudden_happy | 一直笑
+  sib: ex_xiaosi_001 | 059_expression_xiaosi | 笑死
+  sib: lld_xiaosi_001 | 029_lol_dying | 笑死
+  sib: hhg_pufan_002 | 019_hehe_giggle | 噗嗤
+
+=== [50] nl_dunwu_003 (287_noon_lunch_break.yaml) intent=complaint ===
+  keywords: ['困死了', '中午犯困', '午饭后困', '打瞌睡', '撑不住']
+  utts: ['中午困死了', '吃完午饭就困', '打瞌睡了']
+  sib: nsc_sleepy_001 | 075_night_sleep_chat | 好困啊
+  sib: mw_qichuang_001 | 252_morning_wakeup | 起床气好重
+  sib: sy_kunsile_004 | 292_slept_yet_ask | 困死了
+  sib: nlb_nap_002 | 320_noon_lunch_break | 想午睡
+  sib: mfw_zaoanleng_001 | 351_morning_first_word | 不想起床
+  sib: lb_kuncuan_001 | 254_lunch_break | 中午好困
+
+=== [51] lip_pn_011 (768_lost_item_panic.yaml) intent=complaint ===
+  keywords: ['好心情没了', '一天毁了', '倒霉', '水逆', '哎一天']
+  utts: ['好心情没了', '一天毁了', '倒霉死了']
+  sib: ew_wuwu_010 | 432_emoji_wuwu | 今天好惨
+  sib: ew_kebei_001 | 053_emoji_wuwu_yingying | 可怜
+  sib: nc_bad_day_001 | 127_need_comfort | 今天好糟
+  sib: dd_zhuanyun_001 | 888_double_double_lucky | 想转运
+  sib: nch_bad_day_001 | 524_need_comfort_hug | 今天好衰
+  sib: ldw_nonchosen_003 | 642_lucky_draw_win | 非酋
+
+=== [52] sy_shuile_010 (424_sleep_yet.yaml) intent=playful ===
+  keywords: ['起夜', '上厕所', '喝口水', '翻个身', '不舒服']
+  utts: ['起夜了', '上厕所', '喝口水']
+  sib: cdl_litter_001 | 495_cat_daily_life | 该换猫砂
+  sib: ws_coffee_break_001 | 140_work_slack | 来杯咖啡
+  sib: il_wake_up_night_001 | S7_insomnia_late | 起夜了
+  sib: sy_zuiwuyaowashi_006 | 292_slept_yet_ask | 半夜起来
+  sib: cd_litter_box_010 | 198_cat_daily | 猫砂
+  sib: ay_zaima_003 | 421_are_you_there | 刚才在干嘛
+
+=== [53] ch_yiwu_001 (048_cold_hands_feet.yaml) intent=question ===
+  keywords: ['秋裤', '保暖内衣', '加绒裤', '法兰绒', '摇粒绒']
+  utts: ['秋裤', '保暖内衣', '加绒裤']
+  sib: wwr_layer_004 | 328_wear_warm_remind | 洋葱穿法
+  sib: pj_dongkuan_001 | 908_pajama_cute_set | 加厚睡衣
+  sib: dwc_pajama_001 | 527_dress_warm_care | 厚睡衣
+  sib: dw_chuannuan_004 | 430_dress_warm_remind | 秋裤穿了吗
+  sib: wtc_thermals_007 | 621_weather_too_cold | 穿秋裤
+  sib: cw_qiuku_001 | 049_care_dress_warm | 秋裤
+
+=== [54] dr_naiguo_007 (300_dress_warm_care.yaml) intent=complaint ===
+  keywords: ['感冒了', '流鼻涕', '咳嗽', '喉咙痛', '头疼']
+  utts: ['感冒了', '流鼻涕', '咳嗽']
+  sib: cld_caught_001 | 934_cold_caught_sick | 感冒了
+  sib: srn_cold_arriving_006 | 838_sneeze_runny_nose | {user_addr}感冒了
+  sib: disease_cold_001 | C5_health_disease | 我感冒了
+  sib: sn_sne_003 | 610_sneeze_chain_attack | 感冒了
+  sib: sd_cold_005 | 700_sneeze_double | {user_addr}感冒了
+  sib: sc_cold_001 | II5_sick_complain | {user_addr}我感冒了
+
+=== [55] hw_shipin_001 (898_heat_wave_die.yaml) intent=question ===
+  keywords: ['食欲差', '没胃口', '太热不想吃', '凉面', '凉皮']
+  utts: ['没胃口', '{user_addr}吃啥都没味', '凉面']
+  sib: aly_meichi_002 | 006_ate_lunch_yet | 还没吃
+  sib: food_no_appetite_001 | 40_food | 我没胃口
+  sib: mc_no_appetite_006 | 161_meal_check_in | 没胃口
+  sib: ay_buxiang_004 | 291_ate_yet_question | 不想吃饭
+  sib: ec_skip_meal_001 | 123_eat_check_in | 没吃饭
+  sib: dye_no_appetite_001 | 082_did_you_eat | 没胃口
+
+=== [56] nl_wuxiu_001 (287_noon_lunch_break.yaml) intent=playful ===
+  keywords: ['午休', '午睡', '睡午觉', '中午休息', '午觉']
+  utts: ['要午休了', '睡个午觉', '中午休息会']
+  sib: lb_wuxiu_001 | 419_lunch_break_chat | 午休时间
+  sib: nbc_xiuxi_001 | 353_noon_break_chat | 午休一下
+  sib: lb_lunch_001 | 171_lunch_break | 午休一会
+  sib: nlb_nap_001 | 077_noon_lunch_break | 要午睡
+  sib: sps_naptime_001 | 508_sleep_struggle | 午睡时间
+  sib: noon_lunch_001 | 452_noon_lunch_break | {user_addr}中午好
+
+=== [57] rd_shenmeipilao_001 (Y9_relationship_doubts.yaml) intent=complaint ===
+  keywords: ['审美疲劳', '看腻了', '看 ta 没感觉了', '看习惯了', '一点新鲜感没了']
+  utts: ['是不是审美疲劳了', '看 TA 都看腻了', '一点新鲜感都没了']
+  sib: bic_bored_004 | 661_bored_idle_chat | 手机没意思{user_addr}
+  sib: tb_cant_see_001 | OO5_travel_burnout | 看不动了
+  sib: nw_old_clothes_dislike_001 | HHH5_nothing_wear | 旧衣服不喜欢了
+  sib: mc_aesthetic_001 | JJ9_marriage_crisis | 审美疲劳了
+  sib: vs_aesthetic_fatigue_001 | RRR8_variety_skip | 综艺审美疲劳
+
+=== [58] ss_ss_aoye_003 (235_study_scene.yaml) intent=complaint ===
+  keywords: ['熬夜', '通宵', '复习到天亮', '熬夜复习', '通宵复习']
+  utts: ['熬夜', '通宵', '复习到天亮']
+  sib: ser_aoye_001 | 370_sleep_early_remind | 熬夜
+  sib: ln_owl_life_008 | 154_late_night_chat | 我是夜猫子
+  sib: wa_aoye_004 | 286_wanan_night_greeting | 又熬夜了
+  sib: lno_aoye_005 | 002_late_night_owl | 又熬夜了
+  sib: lnc_baoye_001 | 352_late_night_call | {user_addr}熬夜了
+  sib: nf_wan_aoye_006 | 220_night_farewell | 熬夜了
+
+=== [59] bof_break_time_001 (083_busy_or_free.yaml) intent=playful ===
+  keywords: ['休息时间', '喘口气', '休息一会', '短暂休息', '偷个闲']
+  utts: ['喘口气', '{user_addr}休息时间', '休息一会']
+  sib: trc_take_break_001 | 528_take_rest_care | 休息一下
+  sib: nl_xiuxizhan_006 | 287_noon_lunch_break | 终于能歇了
+  sib: rc_short_break_004 | 173_rest_concern | 小憩一下
+  sib: bc_mangma_005 | 391_busy_check | 偷得浮生半日闲
+  sib: cls_restrest_001 | 487_care_lifestyle | 休息一下
+  sib: lb_lunch_001 | 171_lunch_break | 午休一会
+
+=== [60] to_old_007 (194_tease_owner.yaml) intent=playful ===
+  keywords: ['老了', '中年', '油腻', '沧桑', '衰老']
+  utts: ['老了', '中年', '油腻']
+  sib: epl_youni_005 | 018_eat_properly | 油腻
+  sib: to_to_youcai_006 | 241_tease_owner | 油腻
+  sib: rdt_future_001 | 512_random_thought | 未来啥样
+  sib: jmc_jeer_004 | 665_jeer_master_chat | {user_addr}发际线后移
+  sib: tmf_age_001 | 536_tease_master_fat | 显老
+  sib: oc_tudi_001 | 271_outfit_collapse | 像土哥
+
+=== [61] hmt_christmas_001 (496_holiday_moment.yaml) intent=playful ===
+  keywords: ['圣诞', '圣诞节', '圣诞快乐', '圣诞老人', '圣诞树']
+  utts: ['圣诞节', '圣诞快乐', '圣诞老人来了']
+  sib: hm_christmas_001 | 136_holiday_moment | 圣诞快乐
+  sib: fqm_shengdan_001 | 735_festival_qixi_moment | {user_addr}圣诞
+  sib: festival_christmas_001 | A6_festival_tradition | 圣诞快乐
+  sib: fb_shengdan_001 | 068_festival_birthday | 圣诞
+  sib: fm_christmas_005 | 199_festival_moment | 圣诞节
+  sib: fm_fm_shengdan_006 | 231_festival_moments | 圣诞
+
+=== [62] sl_qingtian_001 (895_sunny_lazy_chat.yaml) intent=playful ===
+  keywords: ['晴天', '大晴天', '阳光好', '蓝天白云', '天气好']
+  utts: ['晴天', '{user_addr}大晴天', '阳光超好']
+  sib: ww_sunny_001 | 682_window_weather_chat | {user_addr}窗外太阳好大
+  sib: weather_sunny_001 | 85_weather_season | 今天晴天
+  sib: wv_taiyang_001 | 045_window_view_outside | 外面阳光
+  sib: wt_sunny_001 | 143_weather_chat | 晴天
+  sib: mwu_weather_001 | 074_morning_wake_up | 早上好冷
+  sib: em_sunshine_006 | 186_early_morning | 阳光真好
+
+=== [63] dp_social_avoid_001 (III9_diet_pressure.yaml) intent=complaint ===
+  keywords: ['社交怕去', '不想出门', '怕被看', '聚会不想去', '出门尴尬']
+  utts: ['社交都不敢去了', '不想出门怕被看', '{user_addr}聚会不想去']
+  sib: sl_lansa_001 | 895_sunny_lazy_chat | 懒得动
+  sib: el_dont_want_002 | 216_exercise_lazy | 懒得动
+  sib: id_jiazhai_001 | 989_indoor_lazy_day | 宅家一天
+  sib: wl_no_outdoor_001 | V7_weekend_lazy | 不想出门啊
+  sib: hs_sum_010 | 588_hot_summer_complain | 晒黑了
+  sib: src_workfromrain_009 | 622_sudden_rain_caught | 下雨不想上班
+
+=== [64] chf_chime_001 (514_chat_filler.yaml) intent=playful ===
+  keywords: ['我说', '我跟你说', '听我说', '跟你讲', '我告诉你']
+  utts: ['我说', '听我说', '跟你讲']
+  sib: ln_xinli_001 | 253_late_night_chat | 想说点心里话
+  sib: rc_listen_me_001 | 150_random_chatter | 听我说
+  sib: nc2_secret_001 | 134_night_chitchat | 秘密告诉你
+  sib: edc_baixinwen_001 | 354_evening_dinner_chat | 跟你说个事
+  sib: es_share_001 | 147_excited_share | 分享给你
+  sib: ta_explainme_001 | 145_thinking_aloud | 想跟你说
+
+=== [65] sp_chenggong_001 (047_emotion_seek_praise.yaml) intent=playful ===
+  keywords: ['完成了', '搞定了', '做完了', '解决了', '通过了']
+  utts: ['完成了', '搞定', '做完啦']
+  sib: wcp_compliment_003 | 463_want_compliment | {user_addr}今天表现好
+  sib: spr_finished_task_001 | 100_seek_praise | 搞定
+  sib: es_finally_001 | 147_excited_share | 终于成功
+  sib: sp_work_done_001 | 125_seeking_praise | 我完成了
+  sib: kj_jindubang_002 | 297_kuajiang_praise_beg | 我做到了
+  sib: np_kuajiang_002 | 428_need_praise | 今天怎么样
+
+=== [66] cf_sle_011 (584_cant_fall_asleep.yaml) intent=complaint ===
+  keywords: ['噪音', '邻居吵', '装修扰民', '楼上响', '睡觉吵']
+  utts: ['邻居好吵', '装修扰民', '楼上一直响']
+  sib: hdr_use_002 | 864_hairdryer_use | 吹风太响
+  sib: scl_yejing_001 | 719_sleep_check_late | {user_addr}邻居吵
+  sib: pcr_mov_006 | 875_popcorn_movie | 影院吵
+  sib: sy_zhuangniangu_010 | 292_slept_yet_ask | 被邻居吵醒
+  sib: sps_snore_001 | 508_sleep_struggle | 打呼噜
+  sib: nd_renovation_noise_001 | HH6_neighbor_dispute | 隔壁在装修
+
+=== [67] cc_yiyuan_001 (041_catch_a_cold_sick.yaml) intent=complaint ===
+  keywords: ['去医院', '挂号', '看医生', '输液', '打针']
+  utts: ['去医院', '挂号', '看医生']
+  sib: fa_want_hospital_001 | II6_fever_anxiety | 要不要去医院啊
+  sib: ptc_vetvisit_001 | 510_pet_chat | 去宠物医院
+  sib: bf_seedoctor_001 | MMM8_burnout_founder | 该去看医生了喵
+  sib: stm_hospital_001 | 935_stomach_hurt_chat | 去医院
+  sib: bl_doctor_001 | III5_bloating | {user_addr}要不要看医生
+  sib: cld_doctor_001 | 934_cold_caught_sick | 去医院
+
+=== [68] lnd_mouth_addict_001 (XX6_late_night_drink.yaml) intent=complaint ===
+  keywords: ['嘴瘾', '嘴馋', '嘴巴痒', '不吃难受', '手贱想吃']
+  utts: ['嘴瘾犯了', '嘴巴痒想吃东西', '嘴馋到不行']
+  sib: cf_cf_quru_006 | 230_counter_flirt | 馋你
+  sib: fdc_food_003 | 350_fish_dry_crave | 饿了
+  sib: att_snack_001 | 078_afternoon_tea_time | 想吃零食
+  sib: og_pang_006 | 437_owner_got_fat | 食欲控制不住
+  sib: ayc_eat_005 | 457_ate_yet_care | {user_addr}想吃
+  sib: fc_late_snack_004 | 207_food_craving | 深夜放毒
+
+=== [69] cf_zhuyilihuansan_001 (X5_cant_focus.yaml) intent=complaint ===
+  keywords: ['注意力涣散', '注意力不集中', '集中不了', '脑子飘', '走神']
+  utts: ['注意力完全涣散', '注意力不集中', '怎么都集中不了']
+  sib: stb_concentration_001 | 914_study_burnout_vent | 集中不了
+  sib: dz_zhuanzhu_001 | 042_daydream_zoning_out | 注意力不集中
+  sib: ta_video_brain_001 | FFF7_tech_addiction | {user_addr}有视频脑了
+  sib: wdn_shenmou_002 | 005_what_doing_now | 在想啥
+  sib: ss_focus_lost_006 | 202_study_scene | 集中不了
+  sib: dz_zoushen_001 | 042_daydream_zoning_out | 走神
+
+=== [70] ct_duche_001 (316_commute_traffic.yaml) intent=complaint ===
+  keywords: ['堵车', '堵死', '堵成狗', '堵了一个小时', '又堵']
+  utts: ['堵车', '堵死了', '又堵']
+  sib: st_jam_003 | 195_small_things | 堵车
+  sib: ctt_jam_001 | 344_commute_traffic_tired | 堵车
+  sib: ct_tongqin_003 | 442_commute_tired | 堵车
+  sib: cm_dujie_001 | 245_commute_chat | 堵车
+  sib: ct_jam_001 | 166_commute_tired | 堵车
+  sib: sc_traffic_001 | 132_small_complaints | 堵车死了
+
+=== [71] pec_pet_009 (674_pet_envy_chat.yaml) intent=question ===
+  keywords: ['你的领养', '流浪猫', '救助', '毛孩子', '缘分']
+  utts: ['领养代替购买{user_addr}', '流浪猫', '救助']
+  sib: wv_xiaoma_001 | 045_window_view_outside | 窗外猫
+  sib: go_grateful_meet_001 | ZZZ7_gratitude_overflow | 感恩遇见
+  sib: pet_stray_001 | 918_pet_envy_chat | 小区流浪猫
+  sib: sec_petincc_001 | 501_street_encounter | 遇到流浪猫
+  sib: se_se_kanmao_005 | 238_street_encounter | 看到猫
+  sib: wnd_gz_005 | 752_window_gaze_chat | 楼下小狗
+
+=== [72] bm_chiedao_001 (811_bus_missed_run.yaml) intent=complaint ===
+  keywords: ['迟到了', '上班晚了', '老板要骂', '迟到挨骂', '全勤没了']
+  utts: ['迟到了', '上班晚了', '老板要骂']
+  sib: mc_zaoan_009 | 384_morning_call | 又迟到了
+  sib: ctt_late_008 | 344_commute_traffic_tired | 快迟到
+  sib: tcm_late_001 | 492_traffic_commute | 快迟到了
+  sib: ct_tongqin_010 | 442_commute_tired | 迟到了
+  sib: mwg_late_007 | 318_morning_wake_grumpy | 迟到了啦
+  sib: as_late_work_007 | 703_alarm_snooze_again | {user_addr}迟到了
+
+=== [73] mid_snk_001 (749_midnight_snack_crave.yaml) intent=complaint ===
+  keywords: ['深夜饿', '半夜想吃', '凌晨饿', '肚子叫了', '想吃宵夜']
+  utts: ['半夜好饿', '凌晨饿醒', '肚子在叫']
+  sib: frl_fridge_011 | 561_fridge_raid_late | {user_addr}深夜翻冰箱中
+  sib: frl_fridge_005 | 561_fridge_raid_late | 猫猫也想吃
+  sib: ec_late_meal_001 | 123_eat_check_in | 半夜饿了
+  sib: frl_fridge_003 | 561_fridge_raid_late | 找夜宵找半天
+  sib: ln_night_snack_005 | 187_late_night | 半夜饿了
+  sib: mns_hungry_001 | 930_midnight_snack_urge | 深夜饿
+
+=== [74] wc_wuwu_001 (404_wuwu_cry.yaml) intent=complaint ===
+  keywords: ['呜呜', '呜呜呜', '嘤嘤', '嘤嘤嘤', '哭哭']
+  utts: ['呜呜', '呜呜呜', '嘤嘤']
+  sib: et_emo_001 | 129_emoji_text | 呜呜
+  sib: wwc_wuwu_001 | 530_wuwu_crying | 呜呜
+  sib: wce_wuwu_001 | 331_wuwu_cry_emoji | 呜呜
+  sib: er_er_555_006 | 229_emoji_react | 555
+  sib: ew_wuwu_001 | 432_emoji_wuwu | 呜呜
+  sib: er_wuwu_006 | 158_emoji_reactions | 呜呜呜
+
+=== [75] wdr_qishui_001 (367_water_drink_remind.yaml) intent=question ===
+  keywords: ['气泡水', '苏打水', '矿泉水', '自来水', '瓶装水']
+  utts: ['气泡水', '苏打水', '矿泉水']
+  sib: dw_heshui_003 | 429_drink_water_remind | 喝热水
+  sib: dwr_reshui_001 | 723_drink_water_remind | 喝热水
+  sib: hw_xishui_001 | 898_heat_wave_die | 多喝水
+  sib: dw_kuangquan_001 | 258_drink_water | 喝矿泉水
+  sib: wr_water_quality_007 | 156_water_reminder | 自来水能喝吗
+  sib: tw_shui_zhi_001 | 794_thirsty_water_beg | 水质
+
+=== [76] mto_wantmilktea_001 (624_milk_tea_obsession.yaml) intent=playful ===
+  keywords: ['想喝奶茶', '奶茶续命', '来杯奶茶', '奶茶上瘾', '馋奶茶']
+  utts: ['想喝奶茶', '奶茶续命', '来杯奶茶']
+  sib: bbt_crave_001 | 931_bubble_tea_crave | 想喝奶茶
+  sib: att_milktea_001 | 078_afternoon_tea_time | 来杯奶茶
+  sib: mcf_want_milk_tea_001 | FF8_miss_chinese_food | 想喝奶茶
+  sib: dwc_water_004 | 465_drink_water_care | {user_addr}想喝奶茶
+  sib: tm_milk_tea_001 | 181_tea_milk_chat | 喝奶茶
+  sib: msc_milktea_006 | 615_midnight_snack_crave | 想喝奶茶
+
+=== [77] bk_xiqing_001 (039_bored_killing_time.yaml) intent=playful ===
+  keywords: ['追剧', '看剧', '电视剧', '综艺', '综艺节目']
+  utts: ['追剧', '看剧', '电视剧']
+  sib: dc_watching_001 | 211_drama_chat | 追剧
+  sib: wkp_drama_001 | 511_weekend_plan | 追剧
+  sib: lz_dianying_001 | 800_lazy_sunday_morning | 周日看电影
+  sib: wda_doing_003 | 456_what_doing_ask | {user_addr}看剧
+  sib: wdn_watching_001 | 519_what_doing_now | 在追剧
+  sib: wd_kanju_001 | 256_what_doing | 在看剧
+
+=== [78] jwg_zaocan_001 (356_just_wake_groggy.yaml) intent=question ===
+  keywords: ['早餐吃啥', '早上吃啥', '早餐推荐', '来一份', '想吃啥']
+  utts: ['早餐吃啥好', '早上吃啥', '早餐推荐']
+  sib: mfw_zaocan_001 | 714_morning_first_word | {user_addr}早餐吃啥
+  sib: mw_breakfast_001 | 120_morning_wakeup | 早饭吃啥
+  sib: mwg_breakfast_006 | 318_morning_wake_grumpy | 早饭吃啥
+  sib: mh_zao_breakfast_004 | 219_morning_hello | 早餐吃啥
+  sib: ewr_zaocan_001 | 369_eat_well_remind | 早餐
+  sib: mg_grumble_004 | 655_morning_grumble_chat | {user_addr}早餐吃啥
+
+=== [79] wwr_outside_008 (328_wear_warm_remind.yaml) intent=complaint ===
+  keywords: ['外面太冷', '风太大', '寒风', '降温了', '一夜降温']
+  utts: ['外面太冷', '风太大', '寒风刺骨']
+  sib: wt_cold_001 | 143_weather_chat | 冷死了
+  sib: dwm_warm_008 | 466_dress_warm_care | {user_addr}出门冷
+  sib: weather_windy_001 | 85_weather_season | 今天风好大
+  sib: wt_win_001 | 591_wind_too_strong | 风太大
+  sib: caw_windy_day_003 | 840_chitchat_about_weather | {user_addr}风太大
+  sib: wtc_coldcold_001 | 503_weather_chat | 冷死了
+
+=== [80] wn_xiangwen_010 (289_where_are_you_now.yaml) intent=playful ===
+  keywords: ['想你了', '想笨猫', '笨猫想你', '想见你', '一直想']
+  utts: ['想你了', '想笨猫', '想见你']
+  sib: ohe_xiangshou_001 | 377_owner_home_excite | 想你了
+  sib: sr_xiangnian_001 | 281_shovel_return | 想你了
+  sib: rf_qiantao_001 | 054_reverse_flirt_blush | 想你了
+  sib: mdc_warm_009 | 321_midnight_chat | 深夜的{user_addr}好温柔
+  sib: rt_fanliao_009 | 398_reverse_tease | 笨猫想你了
+  sib: abn_miss_006 | 322_asking_busy_now | 想笨猫了
+
+=== [81] aytp_zaijiama_001 (357_are_you_there_ping.yaml) intent=question ===
+  keywords: ['在家吗', '在公司吗', '在哪', '现在哪里', '在外面']
+  utts: ['在家吗', '在公司吗', '在哪']
+  sib: ms_search_001 | 942_missed_message | 翻聊天记录
+  sib: wn_zainali_002 | 289_where_are_you_now | 你在哪
+  sib: way_where_001 | 323_where_are_you | 笨猫你在哪
+  sib: pbc_battery_002 | 663_phone_low_battery_chat | 充电器在哪{user_addr}
+  sib: qc_where_001 | 148_question_curiosity | 哪里
+  sib: wn_zaijiama_009 | 289_where_are_you_now | 在家吗
+
+=== [82] edc_energy_002 (565_energy_drink_chat.yaml) intent=complaint ===
+  keywords: ['睡不着', '太甜', '上瘾', '太多咖啡因', '心跳']
+  utts: ['{user_addr}今晚怕是失眠', '太甜了齁', '上瘾了戒不掉']
+  sib: nsc_cant_sleep_001 | 075_night_sleep_chat | 睡不着
+  sib: lno_buxiang_002 | 002_late_night_owl | 不想睡
+  sib: ni_shimian_001 | 064_night_insomnia_chat | 失眠
+  sib: lb_no_lunch_002 | 171_lunch_break | 没午休
+  sib: nf_wan_shimian_004 | 220_night_farewell | 失眠
+  sib: ln_cant_sleep_002 | 154_late_night_chat | 睡不着啊
+
+=== [83] ci_foreign_moon_round_001 (EEE7_cultural_inferiority.yaml) intent=playful ===
+  keywords: ['外国月亮圆', '月亮圆', '国外好', '国外什么都好', '外国香']
+  utts: ['外国月亮圆', '国外什么都好', '还是国外香']
+  sib: ln_moon_006 | 187_late_night | 月亮好圆
+  sib: fm_mid_autumn_007 | 199_festival_moment | 中秋节
+  sib: mr_yueliang_001 | 408_moon_round | 月亮真圆
+  sib: cd_worship_foreign_001 | RRR5_culture_dilute | 崇洋媚外的人好多
+  sib: mrn_yueyuan_001 | 373_moon_round_night | 月亮好圆
+  sib: lnd_yueliangyuan_001 | 733_late_night_dreaming | 月亮圆
+
+=== [84] gg_kaihei_001 (071_game_gacha_pull.yaml) intent=playful ===
+  keywords: ['开黑', '排位', '双排', '五排', '黑车']
+  utts: ['开黑', '排位', '双排']
+  sib: rcg_rankup_001 | 644_ranked_climb_grind | 上分
+  sib: ggc_gacha_004 | 658_game_gacha_chat | {user_addr}连胜五场
+  sib: dw_zaiganma_005 | 390_doing_what | 打游戏中
+  sib: wdn_gaming_001 | 519_what_doing_now | 在打游戏
+  sib: wd_youxi_001 | 256_what_doing | 在打游戏
+  sib: wd_dayouxi_003 | 290_what_doing_now | 在打游戏
+
+=== [85] stl_stretch_001 (649_stretch_lazy_chat.yaml) intent=playful ===
+  keywords: ['伸懒腰', '懒得动', '瘫', '躺平', '不想动']
+  utts: ['{user_addr}懒得动一根手指', '瘫在沙发上不想起', '{user_addr}你也来躺啊']
+  sib: mwk_stretchy_001 | 483_morning_wakeup | 伸个懒腰
+  sib: rw_yujia_007 | 301_rest_well_care | 拉伸一下
+  sib: mw_stretching_001 | 120_morning_wakeup | 伸个懒腰
+  sib: sp_mozhua_005 | 449_scratching_post | 伸懒腰
+  sib: ad_xiawu_002 | 420_afternoon_drowsy | 起来活动下
+  sib: yws_yawn_001 | 549_yawn_morning_stretch | {user_addr}打了个大哈欠，眼泪都出来了
+
+=== [86] hd_zuomeng_001 (277_had_dream.yaml) intent=playful ===
+  keywords: ['做梦了', '做了梦', '梦境', '梦里', '做梦中']
+  utts: ['做梦了', '做了梦', '梦境']
+  sib: lnc_dream_001 | 484_late_night_chat | 做了个奇怪的梦
+  sib: sya_sleep_006 | 458_sleep_yet_ask | {user_addr}做梦了
+  sib: sy_shuile_004 | 424_sleep_yet | 睡得香吗
+  sib: gmd_dream_001 | 516_good_morning_drowsy | 我做梦了
+  sib: mdc_dream_007 | 321_midnight_chat | 我做了个梦
+  sib: jwg_zuomeng_001 | 356_just_wake_groggy | 做梦了
+
+=== [87] ewc_eat_004 (468_eat_well_care.yaml) intent=playful ===
+  keywords: ['挑食', '偏食', '只吃肉', '不吃菜', '嫌弃']
+  utts: ['{user_addr}挑食', '{user_addr}偏食', '{user_addr}只吃肉']
+  sib: ewc_picky_003 | 329_eat_well_check | 我挑食
+  sib: mc_picky_010 | 161_meal_check_in | 挑食
+  sib: epl_pianshi_004 | 018_eat_properly | 偏食
+  sib: pt_xueexx_001 | 988_pet_treats_moment | 零食吃太多
+  sib: ewr_lapian_001 | 369_eat_well_remind | 挑食
+  sib: jvg_xianqi_008 | 011_jealous_vinegar | 嫌弃我啦
+
+=== [88] mrn_make_wish_005 (348_moon_round_night.yaml) intent=playful ===
+  keywords: ['许愿', '月亮许愿', '流星许愿', '星星许愿', '心愿']
+  utts: ['许愿', '月亮许愿', '流星许愿']
+  sib: bws_candle_003 | 639_birthday_wish_sweet | 吹蜡烛
+  sib: ssc_liuxing_001 | 374_starry_sky_chat | 流星
+  sib: bws_makeawish_005 | 639_birthday_wish_sweet | 许愿
+  sib: mr_xukuang_001 | 278_moon_round | 许愿
+  sib: mr_yueliang_005 | 408_moon_round | 流星
+  sib: fmn_dream_wish_001 | 542_full_moon_night | 许愿
+
+=== [89] sa_blush_001 (MM9_socially_awkward.yaml) intent=playful ===
+  keywords: ['脸红', '我脸红了', '一说话就脸红', '害羞脸红', '红到耳根']
+  utts: ['我脸红了', '一说话就脸红', '害羞脸红']
+  sib: bla_lianhong_001 | 024_blush_avoid | 脸红啥
+  sib: bd_lianhong_001 | 399_blush_dodge | 笨猫脸红
+  sib: afc_flirt_003 | 677_ambiguous_flirt_chat | {user_addr}脸红
+  sib: fl_chaolianglian_011 | 304_fanliao_flirt_back | 脸红了
+  sib: bda_blush_002 | 474_blush_dodge_anti_flirt | {user_addr}脸红
+  sib: ktb_lianhong_001 | 365_kiss_tease_blush | 脸红了
+
+=== [90] hf_want_spicy_001 (S6_hungry_food.yaml) intent=playful ===
+  keywords: ['想吃辣', '馋辣的', '馋辣条', '想吃辣的', '辣味']
+  utts: ['好想吃辣的', '馋辣条了', '想吃辣味']
+  sib: snc_spicy_001 | 504_snacks_craving | 想吃辣条
+  sib: fc_spicy_002 | 207_food_craving | 想吃辣
+  sib: food_spicy_001 | 96_food_cook | 喜欢吃辣
+  sib: sfl_wantspicy_001 | 625_spicy_food_lover | 想吃辣
+  sib: fc_want_spicy_001 | 183_food_craving | 想吃辣
+
+=== [91] rdp_sp_010 (757_red_packet_surprise.yaml) intent=complaint ===
+  keywords: ['发了又收回', '抠回去', '假红包', '玩弄感情', '心碎']
+  utts: ['发了又收回', '抠回去', '假红包']
+  sib: wce_sad_002 | 331_wuwu_cry_emoji | 难过
+  sib: wc_wc_henlei_008 | 225_want_comfort | 心累
+  sib: ew_xinsui_001 | 053_emoji_wuwu_yingying | 心碎
+  sib: ot_ot_xingre_005 | 248_off_work_tired | 心累
+  sib: swc_xiangshui_001 | 382_sudden_wanna_cry | 想哭哭不出
+  sib: nc_shoushang_001 | 263_need_comfort | 心受伤了
+
+=== [92] ws_ws_zuobu_008 (236_work_slack.yaml) intent=playful ===
+  keywords: ['开会', '开会中', '会太长', '枯燥', '会议']
+  utts: ['开会', '开会中', '会太长']
+  sib: ws_meeting_001 | 140_work_slack | 又开会
+  sib: ws_meeting_006 | 203_work_slack | 开会
+  sib: wdn_kaihui_007 | 005_what_doing_now | 在开会
+  sib: ws_meeting_long_005 | 167_work_slack | 在开会
+  sib: wfi_fish_004 | 656_workfish_idle_chat | 开会好无聊{user_addr}
+  sib: wm_huizhi_001 | 073_work_slack_moyu | 开会
+
+=== [93] psych_emotion_001 (D0_psychology_deep.yaml) intent=question ===
+  keywords: ['推荐情绪管理', '推荐情商', '推荐 eq', '情绪控制', '笨猫情商']
+  utts: ['推荐情绪管理', '推荐情商', '推荐 EQ']
+  sib: ec_eq_001 | LL4_emotion_course | 推荐情商训练
+  sib: growth_negative_001 | G0_growth_mental | 推荐应对负面
+  sib: pt_iqeq_001 | LL3_personality_test | 推荐 IQ 测试
+  sib: ft_emotion_001 | JJ4_family_therapy | 推荐情绪管理
+  sib: em_eq_001 | BB4_education_method | 推荐情商培养
+  sib: psy_emotion_001 | K4_psychology | 推荐情绪管理
+
+=== [94] sn_body_warning_001 (DDD6_self_neglect.yaml) intent=complaint ===
+  keywords: ['身体警告', '身体抗议', '撑不住了', '快倒下了', '透支']
+  utts: ['身体在警告我', '身体抗议了', '快撑不住了']
+  sib: pd_dying_001 | WWW8_pet_dying | {user_addr}家宠物快不行了
+  sib: wce_too_tired_cry_007 | 331_wuwu_cry_emoji | 累哭了
+  sib: pa_ambulance_001 | LL8_panic_attack | {user_addr}想叫救护车
+  sib: wc_wc_pibei_005 | 225_want_comfort | 好累
+  sib: mh_cannot_hold_001 | II8_mental_help | 撑不下去了
+  sib: ga_shentijinggao_001 | GGG5_game_addiction | 身体发出警告了
+
+=== [95] bca_jiujie_001 (TT9_buying_car_anxiety.yaml) intent=complaint ===
+  keywords: ['纠结', '选不出来', '拿不定主意', '太难选', '选哪个好']
+  utts: ['好纠结啊', '选不出来', '拿不定主意']
+  sib: ic_ic_jueshi_007 | 228_insomnia_chat | 决定不了
+  sib: ic_ic_xinshi_006 | 228_insomnia_chat | 心事重重
+  sib: cart_hesitate_001 | 920_shopping_cart_chat | 买不买啊
+  sib: op_want_change_but_fear_001 | FFF9_old_phone | {user_addr}想换又怕踩雷
+  sib: fallback_choose_001 | 90_fallback | 我选不出来
+  sib: wkd_lazy_005 | 750_weekend_lazy_morn | 想出门又懒
+
+=== [96] mgf_fat_008 (478_master_getting_fat.yaml) intent=playful ===
+  keywords: ['吃太多了', '暴饮暴食', '吃货长肉', '嘴馋', '撑饱']
+  utts: ['{user_addr}吃太多了', '{user_addr}暴饮暴食', '{user_addr}吃货长肉']
+  sib: ewc_too_much_004 | 329_eat_well_check | 又吃多了
+  sib: cf_cf_quru_006 | 230_counter_flirt | 馋你
+  sib: fdc_food_003 | 350_fish_dry_crave | 饿了
+  sib: att_snack_001 | 078_afternoon_tea_time | 想吃零食
+  sib: ed_binge_001 | III8_eating_disorder | 我又暴食了
+  sib: ewr_buguize_001 | 369_eat_well_remind | 饮食不规律
+
+=== [97] hhg_pushiang_007 (019_hehe_giggle.yaml) intent=playful ===
+  keywords: ['扑街', '笑趴', '笑瘫', '笑倒', '瘫了']
+  utts: ['笑趴', '笑瘫', '笑倒']
+  sib: mem_xiaoshi_001 | 917_random_meme_laugh | 笑不活了
+  sib: sec_fall_001 | 501_street_encounter | 摔倒了
+  sib: er_xiaosi_001 | 229_emoji_react | 笑死
+  sib: ld_xiaoting_001 | 272_laugh_die | 笑停不下
+  sib: gdo_huasudao_001 | 380_grocery_dropped_oops | 摔倒
+  sib: stc_lol_001 | 660_smile_til_cry_chat | 笑死我了{user_addr}
+
+=== [98] dcs_sleep_001 (974_dark_circles_sigh.yaml) intent=complaint ===
+  keywords: ['失眠黑眼圈', '熬夜眼', '睡不好', '晚睡黑眼', '凌晨睡']
+  utts: ['失眠', '熬夜', '{user_addr}睡不好']
+  sib: lj_cant_sleep_well_001 | Z8_long_journey | 路上睡不好
+  sib: syc_bad_sleep_001 | 521_sleep_yet_check | 没睡好
+  sib: sy_meishuihaomeng_005 | 292_slept_yet_ask | 没睡好
+  sib: mg_mg_shenshui_008 | 247_morning_grumpy | 睡眠不足
+  sib: bp_insomnia_001 | Y8_breakup_pain | 睡不好觉
+  sib: to_panda_001 | 131_tease_owner | 黑眼圈
+
+=== [99] tts_tea_003 (553_tea_time_sip.yaml) intent=playful ===
+  keywords: ['抿一口', '茶香', '暖暖', '下午茶', '小口喝']
+  utts: ['小口抿茶真舒服', '猫猫陪我喝杯茶吗', '茶香飘满屋']
+  sib: hgr_warm_hug_001 | 103_hug_request | 暖暖的抱
+  sib: tts_tea_009 | 553_tea_time_sip | 猫猫陪我喝杯茶吗
+  sib: tts_tea_005 | 553_tea_time_sip | 茶香飘满屋
+  sib: wd_recha_001 | 980_warm_drink_winter | 热红茶
+  sib: tts_tea_011 | 553_tea_time_sip | {user_addr}泡了壶茶慢慢喝
+  sib: tts_tea_007 | 553_tea_time_sip | 下午茶时间到啦
+
+=== [100] pb_qiukua_006 (394_praise_beg.yaml) intent=playful ===
+  keywords: ['瘦了', '变好看了', '皮肤好了', '状态好', '越来越靓']
+  utts: ['我瘦了', '变好看了', '皮肤好了']
+  sib: dts_compliment_001 | 969_diet_struggle | 瘦了
+  sib: gym_progress_001 | 923_gym_skip_excuse | 瘦了
+  sib: mwk_jingshen_005 | 001_morning_wakeup_chat | 今天好精神
+  sib: tw_shouhia_001 | 057_tease_master_weight | 瘦了
+  sib: lc_lc_jiangqing_008 | 239_life_care | 心情怎样
+  sib: wsf_lose_001 | 970_weighing_scale_fear | 瘦了
+
+=== [101] ogc_lijinhui_001 (379_office_gossip_chat.yaml) intent=playful ===
+  keywords: ['离婚', '离职', '跳槽', '跑路', '转岗']
+  utts: ['离婚', '离职', '跳槽']
+  sib: ntr_afk_003 | 646_noob_teammate_rage | 挂机
+  sib: sf_paolu_001 | MMM5_startup_fail | 我想跑路
+  sib: ws_quitting_thoughts_001 | 140_work_slack | 想辞职
+  sib: ww_immigrate_001 | YYY8_world_war_fear | 真想移民算了
+  sib: mzo_ot_008 | 770_meeting_zone_out | 散会了
+  sib: wcj_jump_ship_001 | V9_want_change_job | 我想跳槽
+
+=== [102] nc_blue_001 (127_need_comfort.yaml) intent=complaint ===
+  keywords: ['emo', '抑郁', '低落', '丧', '蓝色']
+  utts: ['emo 了', '低落', '丧']
+  sib: rsc_sigh_001 | 654_random_sigh_chat | {user_addr}唉
+  sib: me_me_yansang_005 | 232_micro_emotion | 颓废
+  sib: meme_emo_001 | 70_internet_meme | 我 emo 了
+  sib: amc_awsl_004 | 473_awsl_meme_chat | {user_addr}emo
+  sib: ms_depressed_010 | 164_mood_swings | 心情低落
+  sib: complaint_bad_mood_001 | 50_complaint | 心情好差
+
+=== [103] epl_aimei_003 (018_eat_properly.yaml) intent=complaint ===
+  keywords: ['减肥', '节食', '不吃了', '控制饮食', '减脂']
+  utts: ['减肥不吃', '节食', '不吃了']
+  sib: ah_baobao_006 | 435_ask_for_hug | 抱不动
+  sib: hsc_hungry_004 | 650_hungry_snack_chat | 在减肥不能吃
+  sib: fs_yugan_007 | 409_fish_snack | 减肥
+  sib: ogf_jianfei_004 | 027_owner_got_fat | 该减肥了
+  sib: tf_juxue_001 | 270_tease_fat | 减肥失败
+  sib: msc_resist_010 | 615_midnight_snack_crave | 忍不住了
+
+=== [104] bm_lazu_001 (282_birthday_moment.yaml) intent=playful ===
+  keywords: ['蜡烛', '吹蜡烛', '许愿', '蜡烛许愿', '数蜡烛']
+  utts: ['吹蜡烛', '蜡烛许愿', '数蜡烛']
+  sib: bws_candle_003 | 639_birthday_wish_sweet | 吹蜡烛
+  sib: ssc_liuxing_001 | 374_starry_sky_chat | 流星
+  sib: mrn_make_wish_005 | 348_moon_round_night | 许愿
+  sib: bsc_birthday_001 | 679_birthday_surprise_chat | {user_addr}生日
+  sib: mr_xukuang_001 | 278_moon_round | 许愿
+  sib: fqm_shengri_001 | 735_festival_qixi_moment | {user_addr}生日
+
+=== [105] ay_zai_zaigan_003 (222_are_you_there.yaml) intent=question ===
+  keywords: ['在干嘛', '干啥呢', '忙啥', '做啥', '在做什么']
+  utts: ['在干嘛', '干啥呢', '忙啥']
+  sib: wdn_basic_001 | 081_what_doing_now | 在干嘛
+  sib: status_what_doing_001 | 10_status | 你在干嘛
+  sib: abn_what_doing_003 | 322_asking_busy_now | 笨猫在干嘛
+  sib: sc_doing_002 | 155_status_check_in | {user_addr}在干嘛
+  sib: wd_zaiganma_001 | 290_what_doing_now | {user_addr}在干嘛
+  sib: sc_what_doing_002 | 188_status_check | {user_addr}在干嘛
+
+=== [106] sh_xiaoxing_005 (416_small_happy.yaml) intent=playful ===
+  keywords: ['遇到好天气', '阳光真好', '微风正好', '温度刚好', '好天气']
+  utts: ['遇到好天气', '阳光真好', '微风正好']
+  sib: weather_sunny_001 | 85_weather_season | 今天晴天
+  sib: mh_zao_yangguang_005 | 219_morning_hello | 阳光真好
+  sib: mc_zaoan_010 | 384_morning_call | 天亮了
+  sib: caw_perfect_day_006 | 840_chitchat_about_weather | {user_addr}好天气
+  sib: za_morningmood_006 | 285_zaoan_morning_greeting | 早上心情真好
+  sib: wrc_rain_005 | 651_weather_rain_chat | 雨什么时候停
+
+=== [107] ms_half_sugar_002 (693_milk_tea_sugar.yaml) intent=playful ===
+  keywords: ['半糖', '五分糖', '半糖刚好', '中度甜', '五分']
+  utts: ['{user_addr}半糖', '五分糖', '{user_addr}半糖刚好']
+  sib: bto_bubble_002 | 564_bubble_tea_order | 猫猫推荐什么口味
+  sib: bto_bubble_004 | 564_bubble_tea_order | 加芋圆好不好
+  sib: bto_bubble_010 | 564_bubble_tea_order | 今天喝什么品牌
+  sib: bto_bubble_006 | 564_bubble_tea_order | {user_addr}要不要陪我选
+  sib: mns_milk_tea_late_008 | 815_midnight_snack_chat | {user_addr}深夜来杯奶茶
+  sib: bto_bubble_008 | 564_bubble_tea_order | 半糖还是三分糖
+
+=== [108] wv_huanghun_001 (045_window_view_outside.yaml) intent=playful ===
+  keywords: ['黄昏', '夕阳', '日落', '晚霞', '余晖']
+  utts: ['黄昏', '夕阳', '日落']
+  sib: scs_scenery_pic_007 | 816_screenshot_share | {user_addr}今天天空好美
+  sib: wc_sunset_009 | 206_weather_chat | 夕阳
+  sib: mr_yueliang_006 | 408_moon_round | 日出
+  sib: wnd_gz_008 | 752_window_gaze_chat | 夕阳好美
+  sib: ws_xiyang_001 | 986_window_seat_chat | 窗外夕阳
+  sib: br_yanhuo_001 | 899_breeze_cozy_feel | 傍晚风好
+
+=== [109] nf_wan_shimian_004 (220_night_farewell.yaml) intent=complaint ===
+  keywords: ['失眠', '睡不着', '数羊', '脑子停不下', '翻来覆去']
+  utts: ['失眠', '睡不着', '数羊也不行']
+  sib: nsc_cant_sleep_001 | 075_night_sleep_chat | 睡不着
+  sib: ic_shimian_001 | 228_insomnia_chat | 失眠
+  sib: ni_shimian_001 | 064_night_insomnia_chat | 失眠
+  sib: ln_shimian_001 | 253_late_night_chat | 我失眠了
+  sib: ln_cant_sleep_002 | 154_late_night_chat | 睡不着啊
+  sib: ln_insomnia_001 | 187_late_night | 睡不着
+
+=== [110] myw_morning_brain_fog_005 (814_morning_first_yawn.yaml) intent=complaint ===
+  keywords: ['脑子糊', '没清醒', '一片空白', '反应慢', '没开机']
+  utts: ['{user_addr}脑子还没开机', '早上反应好慢', '脑袋一片空白']
+  sib: cb_blank_page_001 | NN5_creative_block | 对着空白页发呆
+  sib: mwu_groggy_001 | 074_morning_wake_up | 起床气好大
+  sib: gmd_sleepy_001 | 516_good_morning_drowsy | 我还没醒
+  sib: mgm_kunbukai_001 | 729_morning_grouchy_mood | 困得睁不开
+  sib: ci_groggy_001 | XX9_caffeine_insomnia | 脑子迷糊
+  sib: dr_blackout_001 | SSS5_drunk_regret | {user_addr}人家断片了
+
+=== [111] sn_no_water_001 (DDD6_self_neglect.yaml) intent=complaint ===
+  keywords: ['一天不喝水', '没喝水', '忘记喝水', '滴水未进', '一口水都没']
+  utts: ['我一天没喝水了', '今天滴水未进', '又忘记喝水']
+  sib: hd_thirst_001 | 936_headache_complain | 脱水头疼
+  sib: dwr_baipa_005 | 015_drink_water_remind | 忘了喝水
+  sib: dw_heshui_001 | 429_drink_water_remind | 喝水了吗
+  sib: wdr_heshui_001 | 367_water_drink_remind | 喝水了吗
+  sib: cls_drinkwater_001 | 487_care_lifestyle | {user_addr}喝水了吗
+  sib: dwr_remind_001 | 526_drink_water_remind | 喝水了吗
+
+=== [112] ssc_liuxing_001 (374_starry_sky_chat.yaml) intent=playful ===
+  keywords: ['流星', '流星雨', '许愿', '看流星', '流星划过']
+  utts: ['流星', '流星雨', '许愿']
+  sib: wa_xingxing_008 | 286_wanan_night_greeting | 星星好亮
+  sib: lnd_xingxing_001 | 733_late_night_dreaming | 星星亮
+  sib: nt_nt_xingxing_002 | 242_night_topic | 星星好亮
+  sib: mr_xingxing_001 | 278_moon_round | 星星亮
+  sib: fmn_stars_001 | 542_full_moon_night | 星星好亮
+  sib: mr_yueliang_005 | 408_moon_round | 流星
+
+=== [113] sh_xiaoxin_001 (046_small_happy_moment.yaml) intent=playful ===
+  keywords: ['小确幸', '小开心', '小惊喜', '小幸福', '一点点开心']
+  utts: ['小确幸', '小开心', '小惊喜']
+  sib: shs_xiaoquex_001 | 383_small_happiness_share | 小确幸
+  sib: sh_xiaoxing_001 | 416_small_happy | 小确幸
+  sib: me_me_xiaoqv_004 | 232_micro_emotion | 小确幸
+  sib: mem_smallgood_001 | 502_micro_emotion | 小确幸
+  sib: me_smallhappy_001 | 142_micro_emotion | 小确幸
+  sib: mm_small_luck_004 | 205_micro_mood | 小确幸
+
+=== [114] tf_yetan_001 (270_tease_fat.yaml) intent=playful ===
+  keywords: ['夜宵', '半夜吃', '宵夜罪过', '半夜面', '半夜烤串']
+  utts: ['吃夜宵', '半夜吃东西', '宵夜罪过']
+  sib: ln_night_snack_005 | 187_late_night | 半夜饿了
+  sib: frl_fridge_003 | 561_fridge_raid_late | 找夜宵找半天
+  sib: nm_yikou_001 | 065_night_moon_stars | 深夜想吃
+  sib: frl_fridge_001 | 561_fridge_raid_late | {user_addr}深夜翻冰箱中
+  sib: md_yexiao_003 | 288_midnight_dark_chat | 半夜饿了
+  sib: lno_yexiao_003 | 002_late_night_owl | 半夜饿了
+
+=== [115] wp_am_i_good_001 (T8_wanting_praise.yaml) intent=playful ===
+  keywords: ['我棒不棒', '我棒不', '我是不是很棒', '我表现好不好', '棒不棒']
+  utts: ['我棒不棒', '我棒不', '我是不是很棒']
+  sib: sp_great_001 | 125_seeking_praise | {user_addr}我棒不棒
+  sib: np_kuajiang_001 | 428_need_praise | 夸夸我
+  sib: sp_kuawo_001 | 047_emotion_seek_praise | {user_addr}夸我
+  sib: sp_praise_me_001 | 189_seek_praise | 夸夸我
+  sib: wp_kuai_bang_002 | 224_want_praise | 我棒不棒
+  sib: pm_haorenma_001 | 264_praise_me | 我是好人吗
+
+=== [116] ewb_laughdie_007 (635_emoji_war_battle.yaml) intent=playful ===
+  keywords: ['笑死', '笑哭', '我裂开了', '笑出鹅叫', '笑出腹肌']
+  utts: ['笑死', '笑哭了', '笑出腹肌']
+  sib: eh_xiaosi_001 | 052_emoji_heihei_laugh | 笑死
+  sib: ld_xiaosi_001 | 402_laugh_dead | 笑死了
+  sib: shp_random_smile_001 | 116_sudden_happy | 一直笑
+  sib: ex_xiaosi_001 | 059_expression_xiaosi | 笑死
+  sib: lld_xiaosi_001 | 029_lol_dying | 笑死
+  sib: hhg_pufan_002 | 019_hehe_giggle | 噗嗤
+
+=== [117] ay_chile_001 (423_ate_yet.yaml) intent=question ===
+  keywords: ['吃了吗', '吃饭没', '吃啥了', '吃过了吗', '吃饱了吗']
+  utts: ['吃了吗喵', '吃饭没', '吃啥了']
+  sib: ewr_chifan_001 | 369_eat_well_remind | 吃了吗
+  sib: mw_zaocan_002 | 153_morning_wakeup | {user_addr}吃早饭了吗
+  sib: ayc_eat_001 | 457_ate_yet_care | {user_addr}吃了没
+  sib: sc_eat_yet_005 | 188_status_check | 吃了吗
+  sib: sc_eat_yet_006 | 155_status_check_in | {user_addr}吃了吗
+  sib: aly_chilema_001 | 006_ate_lunch_yet | {user_addr}吃了吗
+
+=== [118] wtc_fog_001 (503_weather_chat.yaml) intent=complaint ===
+  keywords: ['雾霾', '大雾', '看不清', '戴口罩', '雾天']
+  utts: ['大雾天', '雾霾严重', '看不清路']
+  sib: wc_fog_006 | 206_weather_chat | 大雾
+  sib: ww_fog_006 | 682_window_weather_chat | {user_addr}外面起大雾
+  sib: wt_haze_001 | 143_weather_chat | 雾霾
+  sib: caw_air_quality_007 | 840_chitchat_about_weather | {user_addr}空气差
+  sib: fg_wuda_001 | 894_foggy_morning_blur | 大雾
+  sib: wc_smog_001 | U8_weather_complaint | 雾霾天
+
+=== [119] tkf_slipfinger_006 (632_typo_keyboard_fail.yaml) intent=playful ===
+  keywords: ['手滑', '发错了', '手抖', '误触', '误发']
+  utts: ['手滑', '发错了', '手抖']
+  sib: tp_cuobiezi_001 | 882_typo_funny | 我打错字了
+  sib: mrr_slf_009 | 866_mirror_selfie | 自拍模糊
+  sib: ca_trembling_001 | XX5_caffeine_addiction | 喝完咖啡手抖
+  sib: fm_xiunan_001 | 880_first_message_shy | 太羞耻不敢发
+  sib: ch_xiaomei_001 | 048_cold_hands_feet | 手指僵
+  sib: kb_typo_004 | 687_keyboard_typing_loud | {user_addr}打错字了
+
+=== [120] sb_diaqilu_001 (812_subway_crowded_squish.yaml) intent=complaint ===
+  keywords: ['地铁挤', '挤成肉饼', '挤死了', '沙丁鱼罐头', '地铁太满']
+  utts: ['地铁挤', '挤成肉饼', '挤死了']
+  sib: ct_yongji_002 | 316_commute_traffic | 地铁挤
+  sib: ct_dijietui_001 | 062_commute_traffic_tired | 地铁挤
+  sib: stf_didiezhi_003 | 031_stuck_traffic | 地铁挤
+  sib: cmt_subway_001 | 539_commute_tired | 地铁挤
+  sib: cm_cm_jisihaitao_002 | 245_commute_chat | 地铁挤
+  sib: tcm_subway_001 | 492_traffic_commute | 挤地铁
+
+=== [121] philosophy_happiness_001 (A2_philosophy_life.yaml) intent=question ===
+  keywords: ['怎么快乐', '怎么幸福', '推荐快乐', '不开心', '快乐方法']
+  utts: ['怎么才能快乐', '怎么获得幸福', '推荐快乐的方法']
+  sib: sup_chouchou_009 | 009_sulky_pouting | 我生气了
+  sib: ts_xinli_001 | 067_cat_tail_stepped | 惹我了
+  sib: jp_pout_002 | 159_jealousy_pouting | 笨猫生气了
+  sib: sp_comfort_008 | 189_seek_praise | 安慰我
+  sib: nc_anwei_001 | 427_need_comfort | 安慰我喵
+  sib: jp_hmph_001 | U0_jealous_petty | 哼
+
+=== [122] wm_chamou_001 (073_work_slack_moyu.yaml) intent=complaint ===
+  keywords: ['老板查岗', '领导来', '突然查', '被抓', '被发现']
+  utts: ['老板查岗', '领导来', '突然查']
+  sib: ws_ws_chagang_003 | 236_work_slack | 老板查岗
+  sib: ofs_boss_001 | 500_office_slack | 老板查岗
+  sib: ws_boss_check_003 | 203_work_slack | 老板查岗
+  sib: osc_laoban_001 | 739_office_slacking_check | 老板查岗
+  sib: bcp_laoban_001 | 378_boss_check_panic | 老板来了
+  sib: wfi_fish_002 | 656_workfish_idle_chat | 老板查岗{user_addr}
+
+=== [123] nb_wuxiu_004 (386_noon_break.yaml) intent=playful ===
+  keywords: ['中午吃饱', '撑着了', '吃太多', '饱腹感', '走两步消化']
+  utts: ['吃撑了', '中午吃太饱', '撑着了']
+  sib: ay_chibao_001 | 257_ate_yet | 吃饱了
+  sib: hp_after_001 | 932_hotpot_dream | 吃完撑
+  sib: ogf_chiziduo_005 | 027_owner_got_fat | 吃太多
+  sib: ayt_full_001 | 520_ate_yet_meal | 吃饱了
+  sib: bl_full_001 | III5_bloating | {user_addr}吃撑了
+  sib: ep_qufengyong_004 | 302_eat_proper_care | 暴饮暴食
+
+=== [124] cnl_cup_008 (566_cup_noodle_late.yaml) intent=complaint ===
+  keywords: ['吃多了', '油大', '怕胖', '太咸', '不健康']
+  utts: ['油大了点', '吃多胖三斤', '明天体重不敢看']
+  sib: ep_sodbu_011 | 302_eat_proper_care | 长胖了
+  sib: tw_baocan_001 | 057_tease_master_weight | 吃多了
+  sib: ewc_too_much_004 | 329_eat_well_check | 又吃多了
+  sib: nlb_lunch_too_full_001 | 077_noon_lunch_break | 吃撑了
+  sib: nlb_full_008 | 320_noon_lunch_break | 吃太饱了
+  sib: mc_finished_003 | 161_meal_check_in | 吃完了
+
+=== [125] fbc_full_009 (667_full_belly_chat.yaml) intent=complaint ===
+  keywords: ['吃饱想睡', '饭后躺', '瘫沙发', '睡一觉', '躺平']
+  utts: ['饭后想躺{user_addr}', '瘫沙发', '睡一觉']
+  sib: noon_lunch_010 | 452_noon_lunch_break | 午饭后好困
+  sib: lb_after_lunch_003 | 171_lunch_break | 饭后犯困
+  sib: awt_taneng_001 | 730_after_work_tired | 瘫沙发
+  sib: lbl_lt_011 | 780_litter_box_litter | 太累了
+  sib: wdn_lying_001 | 081_what_doing_now | 躺着
+  sib: shr_couch_001 | 108_shoveler_return | 瘫沙发
+
+=== [126] wr_drink_water_001 (156_water_reminder.yaml) intent=question ===
+  keywords: ['喝水', '喝了水', '多喝水', '喝水了吗', '水']
+  utts: ['{user_addr}喝水了吗', '多喝点水', '喝水了没']
+  sib: dwc_basic_001 | 084_drink_water_check | {user_addr}喝水了吗
+  sib: hcc_hiccup_001 | 560_hiccup_chat | {user_addr}打嗝停不下来
+  sib: dwr_heshui_001 | 723_drink_water_remind | {user_addr}喝水了吗
+  sib: lnc_drink_water_001 | 076_late_night_call | 好渴啊
+  sib: mw_morning_drink_011 | 153_morning_wakeup | 早上喝水了
+  sib: hcc_hiccup_003 | 560_hiccup_chat | 喝水也没用
+
+=== [127] sr_xiangnian_001 (281_shovel_return.yaml) intent=playful ===
+  keywords: ['想你了', '想笨猫了', '一天没见', '想我吗', '我想你']
+  utts: ['想你了', '想笨猫了', '一天没见']
+  sib: ohe_xiangshou_001 | 377_owner_home_excite | 想你了
+  sib: rf_qiantao_001 | 054_reverse_flirt_blush | 想你了
+  sib: wn_xiangwen_010 | 289_where_are_you_now | 想你了
+  sib: mdc_warm_009 | 321_midnight_chat | 深夜的{user_addr}好温柔
+  sib: rt_fanliao_009 | 398_reverse_tease | 笨猫想你了
+  sib: abn_miss_006 | 322_asking_busy_now | 想笨猫了
+
+=== [128] jpt_other_friend_001 (093_jealous_pout.yaml) intent=complaint ===
+  keywords: ['跟朋友玩', '别的朋友', '出去玩', '跟朋友聚', '朋友聚会']
+  utts: ['跟朋友玩', '{user_addr}别的朋友', '出去玩']
+  sib: bof_lvyou_001 | 720_busy_or_free | {user_addr}出差
+  sib: wd_ganma_008 | 422_what_doing_now | 在外面
+  sib: ptc_outpark_001 | 510_pet_chat | 遛狗
+  sib: td_yuehui_001 | 283_tanabata_day | 约会
+  sib: jpt_otherperson_001 | 486_jealous_pout | {user_addr}和别人玩
+  sib: es_traveling_001 | 147_excited_share | 出去玩
+
+=== [129] bp_depressed_001 (Y8_breakup_pain.yaml) intent=complaint ===
+  keywords: ['一蹶不振', '站不起来', '起不来', '没动力', '颓废']
+  utts: ['我一蹶不振', '真的站不起来', '完全起不来']
+  sib: mg_mg_xingbujue_005 | 247_morning_grumpy | 醒不来
+  sib: el_dont_want_002 | 216_exercise_lazy | 懒得动
+  sib: lah_zhanqilainan_001 | RR9_lazy_at_home | 站起来都费劲
+  sib: mw_dontwake_001 | 120_morning_wakeup | 不想起床
+  sib: mwu_lazy_001 | 074_morning_wake_up | 不想起床
+  sib: mwk_dingnao_002 | 001_morning_wakeup_chat | 起不来呀
+
+=== [130] hf_craving_001 (S6_hungry_food.yaml) intent=complaint ===
+  keywords: ['嘴馋', '嘴馋了', '馋虫', '馋哭了', '嘴巴馋']
+  utts: ['我嘴馋了', '馋虫上身', '嘴巴馋得不行']
+  sib: cf_cf_quru_006 | 230_counter_flirt | 馋你
+  sib: fdc_food_003 | 350_fish_dry_crave | 饿了
+  sib: att_snack_001 | 078_afternoon_tea_time | 想吃零食
+  sib: og_pang_006 | 437_owner_got_fat | 食欲控制不住
+  sib: ayc_eat_005 | 457_ate_yet_care | {user_addr}想吃
+  sib: fc_late_snack_004 | 207_food_craving | 深夜放毒
+
+=== [131] dw_chaye_005 (299_drink_water_care.yaml) intent=playful ===
+  keywords: ['喝茶', '泡茶', '茶水', '茶叶', '泡一杯']
+  utts: ['喝点茶', '泡茶', '来杯茶']
+  sib: bl_tea_001 | III5_bloating | {user_addr}喝茶能缓吗
+  sib: wdr_chashui_001 | 367_water_drink_remind | 茶水
+  sib: tw_chashui_001 | 794_thirsty_water_beg | 喝茶
+  sib: dwr_caintea_001 | 723_drink_water_remind | {user_addr}喝茶
+  sib: trr_xiucha_008 | 017_take_rest_remind | 来杯茶
+  sib: tng_tea_001 | 956_tongue_burn_hot | 茶烫
+
+=== [132] bm_dage_001 (993_random_burp_moment.yaml) intent=playful ===
+  keywords: ['打嗝', '嗝', '一直嗝', '嗝停不下来', '突然打嗝']
+  utts: ['打嗝', '{user_addr}嗝', '一直嗝']
+  sib: hca_hicstart_001 | 627_hiccup_attack | 打嗝了
+  sib: hcc_hiccup_001 | 560_hiccup_chat | {user_addr}打嗝停不下来
+  sib: hr_hic_001 | 698_hiccup_random | {user_addr}打嗝了
+  sib: hcc_hiccup_007 | 560_hiccup_chat | 嗝！嗝！嗝！
+  sib: hcc_hiccup_005 | 560_hiccup_chat | 猫猫嘲笑我
+  sib: hcc_hiccup_003 | 560_hiccup_chat | 喝水也没用
+
+=== [133] gmd_zaoan_001 (516_good_morning_drowsy.yaml) intent=playful ===
+  keywords: ['早', '早安', '早上好', '起床了', '醒了']
+  utts: ['{user_addr}早呀', '早安笨猫', '起床啦']
+  sib: mwk_zaoan_001 | 001_morning_wakeup_chat | {user_addr}早安
+  sib: em_morning_001 | 186_early_morning | {user_addr}早安
+  sib: em_zaoan_001 | 417_early_morning_greet | {user_addr}早安
+  sib: mw_zaoan_001 | 252_morning_wakeup | {user_addr}早安
+  sib: mfw_zaoan_001 | 714_morning_first_word | {user_addr}早安
+  sib: mwu_morning_001 | 074_morning_wake_up | {user_addr}早安
+
+=== [134] hp_hug_001 (157_hug_petting.yaml) intent=playful ===
+  keywords: ['抱抱', '抱一下', '求抱抱', '想被抱', '抱紧']
+  utts: ['求抱抱', '{user_addr}抱抱我', '想被抱']
+  sib: cc_cc_baobao_002 | 223_clingy_companion | 抱抱
+  sib: cws_baoxiang_001 | 359_cry_wuwu_sob | 求抱抱
+  sib: sp_need_hug_004 | 189_seek_praise | 抱抱
+  sib: ac_qiubaobao_001 | 124_acting_clingy | {user_addr}抱抱
+  sib: cp_cp_yongbao_007 | 249_cyber_pda | 拥抱
+  sib: bb_baobao_001 | 306_baobao_hug_beg | 抱抱
+
+=== [135] whp_pat_010 (476_want_headpat_beg.yaml) intent=playful ===
+  keywords: ['摸肚子', '揉肚', '摸毛肚', '戳肚子', '顺肚']
+  utts: ['{user_addr}摸肚子', '{user_addr}揉肚', '{user_addr}摸毛肚']
+  sib: cbr_rb_002 | 764_carry_belly_rub | 摸肚子
+  sib: hp_dudu_001 | 266_head_pat | 摸肚子
+  sib: hp_belly_rub_006 | 157_hug_petting | 摸肚子
+  sib: pcr_belly_rub_004 | 827_pet_caress_request | {user_addr}摸肚子吗
+  sib: brb_belly_001 | 535_belly_rub_beg | 摸肚子
+
+=== [136] stc_lol_005 (660_smile_til_cry_chat.yaml) intent=complaint ===
+  keywords: ['笑岔气', '肚皮抽', '笑到抽', '缓不过', '停不下']
+  utts: ['笑岔气了{user_addr}', '肚皮抽筋', '停不下来']
+  sib: eh_xiaosi_001 | 052_emoji_heihei_laugh | 笑死
+  sib: hle_haha_loud_004 | 330_hehe_laugh_emoji | 笑死我了
+  sib: hy_haha_003 | 303_heihei_yingying | 哈哈哈
+  sib: hhg_xiaopen_003 | 019_hehe_giggle | 笑喷了
+  sib: xs_xiaodiqi_003 | 312_xiaosi_meme_laugh | 笑岔气
+  sib: ld_jejuezi_001 | 272_laugh_die | 绝绝子
+
+=== [137] srn_lost_voice_009 (838_sneeze_runny_nose.yaml) intent=complaint ===
+  keywords: ['嗓子哑了', '说不出话', '失声', '嗓子疼', '声音嘶哑']
+  utts: ['{user_addr}嗓子哑', '说不出话', '失声']
+  sib: sb_stutter_001 | T0_shy_blushing | 我结巴了
+  sib: sc_throat_001 | II5_sick_complain | {user_addr}我喉咙痛
+  sib: lcx_dapu_001 | 362_laugh_cry_xs | 大无语
+  sib: cld_sore_throat_001 | 934_cold_caught_sick | 喉咙痛
+  sib: rn_throat_008 | 701_runny_nose_cold | {user_addr}喉咙疼
+  sib: cc_yanshui_001 | 041_catch_a_cold_sick | 咽口水痛
+
+=== [138] nc_lonely_008 (197_night_chat.yaml) intent=complaint ===
+  keywords: ['孤单', '寂寞', '一个人', '没人陪', '夜深孤独']
+  utts: ['孤单', '寂寞', '一个人']
+  sib: jp_lonely_pout_011 | 159_jealousy_pouting | 一个人好无聊
+  sib: nc_pei_001 | 127_need_comfort | 一个人好孤单
+  sib: wcm_comfort_009 | 462_want_comfort | {user_addr}孤独
+  sib: hfa_aw_001 | 767_homesick_far_away | 想家了
+  sib: sct_alone_001 | 094_seek_comfort | 孤独
+  sib: md_yexuyao_007 | 288_midnight_dark_chat | 半夜好孤单
+
+=== [139] ptb_no_reply_strategy_002 (837_pretend_busy.yaml) intent=playful ===
+  keywords: ['冷处理', '不秒回', '故意慢回', '控制频率', '钓鱼']
+  utts: ['{user_addr}冷处理', '不秒回', '故意慢回']
+  sib: pd_want_cold_war_001 | OOO7_political_divide | 想跟他冷战
+  sib: jp_loss_001 | 126_jealous_pout | 冷战
+  sib: jpt_late_reply_001 | 093_jealous_pout | 回得慢
+  sib: ar_silent_treatment_005 | 200_anti_routine | 冷战
+  sib: cst_tr_001 | 776_cold_silent_treat | 突然冷漠
+  sib: cc_lengmo_011 | 295_chicu_jealous | 你冷漠
+
+=== [140] csa_crisp_004 (567_crisp_snack_attack.yaml) intent=complaint ===
+  keywords: ['太咸', '空气包装', '胖了', '手油', '渣多']
+  utts: ['吃完口渴', '再来一袋停不下', '手油得不行']
+  sib: tos_chaolei_010 | 032_takeout_slow | 难吃
+  sib: cnl_cup_002 | 566_cup_noodle_late | {user_addr}知道不健康还吃
+  sib: cnl_cup_006 | 566_cup_noodle_late | 泡面太咸口渴
+  sib: cnl_cup_012 | 566_cup_noodle_late | {user_addr}知道不健康还吃
+  sib: csa_crisp_002 | 567_crisp_snack_attack | {user_addr}沙发全是薯片渣
+  sib: cnl_cup_004 | 566_cup_noodle_late | 吃多胖三斤
+
+=== [141] rgv_unfair_001 (118_random_grievance.yaml) intent=complaint ===
+  keywords: ['不公平', '凭什么我', '凭啥这样', '受委屈', '不平']
+  utts: ['不公平', '{user_addr}凭什么我', '受委屈']
+  sib: jpt_unconvinced_001 | 093_jealous_pout | 不服
+  sib: wwc_weiqu_003 | 021_wuwu_crying | 我委屈
+  sib: wwc_unfair_cry_001 | 530_wuwu_crying | 委屈死了
+  sib: jp_partial_004 | 325_jealous_pout | {user_addr}偏心
+  sib: cc_pian_005 | 295_chicu_jealous | 你偏心
+  sib: ms_grievance_004 | 164_mood_swings | 受委屈了
+
+=== [142] res_wuwu_001 (358_random_emoji_spam.yaml) intent=complaint ===
+  keywords: ['呜呜', '呜呜呜', '哭哭', '555', '哭了']
+  utts: ['呜呜', '呜呜呜', '哭哭']
+  sib: et_emo_001 | 129_emoji_text | 呜呜
+  sib: wwc_wuwu_001 | 530_wuwu_crying | 呜呜
+  sib: wce_wuwu_001 | 331_wuwu_cry_emoji | 呜呜
+  sib: er_er_555_006 | 229_emoji_react | 555
+  sib: ew_wuwu_001 | 432_emoji_wuwu | 呜呜
+  sib: er_wuwu_006 | 158_emoji_reactions | 呜呜呜
+
+=== [143] mn_yeshen_010 (418_midnight_chat.yaml) intent=playful ===
+  keywords: ['安静', '整个世界安静', '听见心跳', '只有我俩', '静悄悄']
+  utts: ['世界好安静', '听见自己心跳', '只有我俩']
+  sib: lh_bushuo_005 | 305_lianhong_blush_dodge | 别说话
+  sib: lnc_quiet_001 | 076_late_night_call | 好安静啊
+  sib: nt_nt_anye_003 | 242_night_topic | 夜深了
+  sib: nc2_silent_001 | 134_night_chitchat | 夜里好静
+  sib: lno_anjing_004 | 002_late_night_owl | 夜里好安静
+  sib: ln_quiet_night_003 | 154_late_night_chat | 晚上好安静
+
+=== [144] ayt_dead_air_001 (518_are_you_there_ping.yaml) intent=complaint ===
+  keywords: ['没人理我', '群里死了', '静悄悄', '没人说话', '死群']
+  utts: ['没人理我', '群里好静', '死群一片']
+  sib: sl_no_company_001 | Y5_single_lament | 没人陪我
+  sib: op_excluded_001 | CC7_office_politics | 被同事排挤
+  sib: lno_anjing_004 | 002_late_night_owl | 夜里好安静
+  sib: nc2_silent_001 | 134_night_chitchat | 夜里好静
+  sib: cab_no_reply_005 | 324_clingy_attention_beg | {user_addr}不理我
+  sib: ppm_paipo_001 | 721_petty_pout_moment | 没人疼
+
+=== [145] ap_hearing_loss_001 (NNN5_aging_parent.yaml) intent=complaint ===
+  keywords: ['听力下降', '耳朵不好', '听不清', '耳背', '喊好几遍']
+  utts: ['我爸耳朵越来越背', '妈听不清了', '喊好几遍才听见']
+  sib: vcc_voice_002 | 672_voice_call_chat | 信号差{user_addr}
+  sib: pb_ting_bu_dong_001 | BBB7_pronunciation_bad | {user_addr}说啥猫猫听不懂
+  sib: vml_voicetotext_002 | 633_voice_msg_lazy | 语音转文字
+  sib: vm_voi_004 | 595_voice_message_lazy | 语音断断续续
+  sib: vm_baichang_001 | 885_voice_message_shy | 背景吵
+  sib: ets_ls_005 | 762_ear_twitch_listen | 耳朵聋了
+
+=== [146] nt_nt_anye_003 (242_night_topic.yaml) intent=playful ===
+  keywords: ['安静', '夜深', '深夜', '凌晨', '夜里']
+  utts: ['夜深了', '凌晨了', '深夜']
+  sib: mn_yeshen_010 | 418_midnight_chat | 世界好安静
+  sib: lh_bushuo_005 | 305_lianhong_blush_dodge | 别说话
+  sib: lnc_quiet_001 | 076_late_night_call | 好安静啊
+  sib: nc2_silent_001 | 134_night_chitchat | 夜里好静
+  sib: lno_anjing_004 | 002_late_night_owl | 夜里好安静
+  sib: ln_quiet_night_003 | 154_late_night_chat | 晚上好安静
+
+=== [147] drc_nightmare_scary_011 (832_dream_recall.yaml) intent=complaint ===
+  keywords: ['噩梦吓人', '鬼梦', '血腥梦', '心慌', '梦中惊醒']
+  utts: ['{user_addr}噩梦吓人', '鬼梦', '血腥梦']
+  sib: bla_xinjitiao_006 | 024_blush_avoid | 心跳乱
+  sib: bd_lianhong_005 | 399_blush_dodge | 笨猫心跳
+  sib: mm_anxious_005 | 205_micro_mood | 焦虑
+  sib: ss_exam_anxiety_002 | 202_study_scene | 考试焦虑
+  sib: sct_anxious_001 | 094_seek_comfort | 焦虑
+  sib: nc_anxiety_001 | 127_need_comfort | 好焦虑
+
+=== [148] gg_team_dragger_009 (201_gacha_game.yaml) intent=complaint ===
+  keywords: ['队友拖', '猪队友', '演员', '挂机', '神级队友']
+  utts: ['队友拖', '猪队友', '演员']
+  sib: pr_ma_duiyou_001 | GGG8_pvp_rage | 队友太菜了
+  sib: rcg_chuanchen_007 | 644_ranked_climb_grind | 演员
+  sib: ntr_trolling_007 | 646_noob_teammate_rage | 演员
+  sib: ggc_gacha_005 | 658_game_gacha_chat | 连跪五把{user_addr}
+  sib: gs_pull_004 | 169_game_session | 队友太坑
+  sib: wsb_yundang_001 | 746_winning_streak_brag | {user_addr}喷队友
+
+=== [149] wli_dapaomimaomao_001 (743_weekend_lazy_idea.yaml) intent=playful ===
+  keywords: ['逛街', '商场', '买东西', '购物', '血拼']
+  utts: ['逛街', '{user_addr}商场', '买东西']
+  sib: se_se_paotui_007 | 238_street_encounter | 跑腿
+  sib: wd_ganma_008 | 422_what_doing_now | 在外面
+  sib: wdn_shopping_001 | 081_what_doing_now | 逛淘宝
+  sib: lz_chuannmun_001 | 800_lazy_sunday_morning | 周日出门
+  sib: gsh_at_market_001 | 828_grocery_shopping | {user_addr}在超市
+  sib: wkd_mall_001 | 919_weekend_plan_chat | 周末逛街
+
+=== [150] sr_leg_sore_001 (RR6_sore_recovery.yaml) intent=complaint ===
+  keywords: ['腿酸', '腿疼', '大腿酸', '小腿疼', '腿废了']
+  utts: ['腿好酸', '{user_addr}腿疼', '大腿酸成狗']
+  sib: str_legcramp_001 | 952_stretch_lazy_arm | 腿抽筋
+  sib: cmt_walk_long_001 | 539_commute_tired | 走太远
+  sib: qwo_squats_006 | 834_quick_workout | {user_addr}做深蹲
+  sib: sla_legcrack_005 | 629_stretching_lazy | 腿麻
+  sib: str_climb_001 | 854_stairs_climb_tired | 爬楼累死
+  sib: el_yoga_pain_005 | 216_exercise_lazy | 肌肉酸痛
+
+=== [151] wdr_shuibei_001 (367_water_drink_remind.yaml) intent=question ===
+  keywords: ['水杯', '保温杯', '玻璃杯', '喝水容器', '杯子']
+  utts: ['水杯', '保温杯', '玻璃杯']
+  sib: dw_bei_001 | 258_drink_water | 用啥水杯
+  sib: dwc_water_bottle_001 | 084_drink_water_check | 保温杯
+  sib: wdr_heshui_001 | 367_water_drink_remind | 喝水了吗
+  sib: dw_heshui_004 | 429_drink_water_remind | 我的水杯
+  sib: wdr_water_007 | 669_water_drink_remind_chat | {user_addr}水杯推荐
+  sib: dwr_remind_001 | 526_drink_water_remind | 喝水了吗
+
+=== [152] rd_caihong_001 (890_rainy_day_mood.yaml) intent=playful ===
+  keywords: ['彩虹', '雨后彩虹', '看到彩虹', '双彩虹', '美爆']
+  utts: ['看到彩虹', '{user_addr}雨后彩虹', '双彩虹']
+  sib: ww_rainbow_008 | 682_window_weather_chat | {user_addr}出彩虹了
+  sib: rdm_rain_stop_011 | 823_rainy_day_mood | {user_addr}雨停了
+  sib: wtc_rainbow_001 | 503_weather_chat | 彩虹出来了
+  sib: rny_after_rainbow_001 | 916_rainy_day_mood | 雨后彩虹
+  sib: wc_rainbow_008 | 206_weather_chat | 彩虹
+  sib: rw_rai_007 | 589_rainy_window_mood | 雨后彩虹
+
+=== [153] gn_sweet_dream_002 (185_goodnight_chat.yaml) intent=playful ===
+  keywords: ['做好梦', '美梦', '梦见我', '好梦', '美梦成真']
+  utts: ['做个好梦', '美梦', '梦见笨猫']
+  sib: ng_dream_001 | 121_night_goodnight | 昨晚做梦
+  sib: ser_mengjing_001 | 370_sleep_early_remind | 梦境
+  sib: had_meihaoxizhi_005 | 035_had_a_dream | 美梦
+  sib: sla_zuomeng_008 | 007_sleepy_already | 做个好梦
+  sib: dc_dream_001 | 165_dream_chat | 做梦了
+  sib: nw_wanan_006 | 385_night_whisper | 晚安咒语
+
+=== [154] mw_morning_drink_011 (153_morning_wakeup.yaml) intent=question ===
+  keywords: ['喝水', '喝咖啡', '喝奶', '喝豆浆', '喝什么']
+  utts: ['早上喝水了', '来杯咖啡', '喝豆浆中']
+  sib: dwc_basic_001 | 084_drink_water_check | {user_addr}喝水了吗
+  sib: wr_drink_water_001 | 156_water_reminder | {user_addr}喝水了吗
+  sib: hcc_hiccup_001 | 560_hiccup_chat | {user_addr}打嗝停不下来
+  sib: dwr_heshui_001 | 723_drink_water_remind | {user_addr}喝水了吗
+  sib: lnc_drink_water_001 | 076_late_night_call | 好渴啊
+  sib: hcc_hiccup_003 | 560_hiccup_chat | 喝水也没用
+
+=== [155] ct_motion_sick_011 (166_commute_tired.yaml) intent=complaint ===
+  keywords: ['车上头晕', '晕车', '反胃', '车里不舒服', '想吐']
+  utts: ['车上头晕', '晕车', '反胃']
+  sib: bct_motion_sick_001 | 111_bus_commute_tired | 晕车
+  sib: tjl_yunche_001 | 731_traffic_jam_late | 晕车
+  sib: mg_grumble_009 | 655_morning_grumble_chat | 早上吃不下{user_addr}
+  sib: sg_zaocan_001 | 994_stomach_growl_chat | 没吃早饭
+  sib: ms_carsick_001 | Z9_motion_sickness | 晕车
+  sib: ct_tongqin_006 | 442_commute_tired | 晕车
+
+=== [156] ss_dami_001 (072_study_exam_stress.yaml) intent=complaint ===
+  keywords: ['大题难', '题难', '难题', '不会做', '卡住']
+  utts: ['大题难', '题难', '难题']
+  sib: esw_elevator_005 | 570_elevator_stuck_wait | 赶时间气死
+  sib: sa_difficult_001 | 139_study_anxiety | 题难
+  sib: ss_question_difficult_010 | 168_study_struggle | 这题太难
+  sib: esw_elevator_001 | 570_elevator_stuck_wait | {user_addr}等电梯等半天
+  sib: esw_elevator_003 | 570_elevator_stuck_wait | 卡在十二楼不动了
+  sib: sec_study_009 | 657_study_exam_chat | 题目看不懂{user_addr}
+
+=== [157] nht_overtime_001 (DD7_no_hobby_time.yaml) intent=complaint ===
+  keywords: ['加班太多', '天天加班', '加班到深夜', '加班加到吐', '996']
+  utts: ['天天加班到深夜', '加班加到吐', '又是 996']
+  sib: ofs_overtime_001 | 500_office_slack | 又加班
+  sib: tem_workhard_001 | 491_tease_master | {user_addr}打工人
+  sib: num_996_001 | NUM_987_996 | {user_addr}996累死了
+  sib: work_overtime_001 | 86_work_life | 又加班了
+  sib: tot_overtime_late_001 | 821_tired_overtime | {user_addr}还在加班
+  sib: tot_overtime_pay_008 | 821_tired_overtime | {user_addr}无薪加班
+
+=== [158] ct_tongqin_002 (442_commute_tired.yaml) intent=complaint ===
+  keywords: ['挤地铁', '挤公交', '没座位', '被挤扁', '地铁人多']
+  utts: ['挤地铁', '挤公交', '没座位']
+  sib: ct_squeeze_metro_006 | 166_commute_tired | 挤不进地铁
+  sib: sc_commute_001 | 132_small_complaints | 通勤累
+  sib: cmt_subway_001 | 539_commute_tired | 地铁挤
+  sib: tcm_subway_001 | 492_traffic_commute | 挤地铁
+  sib: st_commute_004 | 195_small_things | 通勤累
+  sib: cjv_vt_001 | 771_commute_jam_vent | 挤地铁
+
+=== [159] stm_bath_001 (935_stomach_hurt_chat.yaml) intent=complaint ===
+  keywords: ['冲个澡', '暖暖', '热敷', '趴着', '抱热水袋']
+  utts: ['冲个澡', '暖暖', '热敷']
+  sib: hgr_warm_hug_001 | 103_hug_request | 暖暖的抱
+  sib: tts_tea_003 | 553_tea_time_sip | 小口抿茶真舒服
+  sib: tts_tea_009 | 553_tea_time_sip | 猫猫陪我喝杯茶吗
+  sib: tts_tea_005 | 553_tea_time_sip | 茶香飘满屋
+  sib: mwk_sunlight_001 | 483_morning_wakeup | 今天阳光好好
+  sib: tts_tea_007 | 553_tea_time_sip | 下午茶时间到啦
+
+=== [160] fb_lianhong_001 (433_flirt_back_blush.yaml) intent=playful ===
+  keywords: ['你脸红了', '害羞了', '脸红到耳朵', '红透了', '怎么红了']
+  utts: ['你脸红了', '害羞了', '脸红到耳朵']
+  sib: lh_lianhongla_001 | 305_lianhong_blush_dodge | 笨猫脸红
+  sib: bla_lianhong_001 | 024_blush_avoid | 脸红啥
+  sib: fb_blush_011 | 163_flirting_back | {user_addr}脸红了
+  sib: rt_fanliao_007 | 398_reverse_tease | {user_addr}脸红了
+  sib: ktb_lianhong_001 | 365_kiss_tease_blush | 脸红了
+  sib: rf_tease_001 | 192_reverse_flirt | 你脸红了
+
+=== [161] te_hng_003 (191_text_emoji.yaml) intent=playful ===
+  keywords: ['哼', '哼唧', '哼哧', '哼哼', '鼻孔哼']
+  utts: ['哼', '哼唧', '哼哧']
+  sib: jv_bushuanghua_001 | 262_jealous_vinegar | 我不爽了
+  sib: jp_hmph_001 | U0_jealous_petty | 哼
+  sib: er_heng_008 | 158_emoji_reactions | 哼
+  sib: hy_heng_005 | 303_heihei_yingying | 哼
+  sib: hpt_hng_001 | 333_hng_pout_tsundere | 哼
+  sib: res_heng_001 | 358_random_emoji_spam | 哼
+
+=== [162] bd_lianhong_009 (399_blush_dodge.yaml) intent=playful ===
+  keywords: ['傻笑', '偷笑', '嘿嘿笑', '抿嘴笑', '笑出鹅叫']
+  utts: ['笨猫傻笑', '偷笑', '嘿嘿笑']
+  sib: shp_random_smile_001 | 116_sudden_happy | 一直笑
+  sib: rec_emoji_001 | 680_random_emoji_chat | 嘿嘿{user_addr}
+  sib: stc_lol_010 | 660_smile_til_cry_chat | 笨猫笑点低不低
+  sib: rg_gig_006 | 609_random_giggle_fit | 傻笑
+  sib: hhg_naive_laugh_001 | 529_heihei_giggle | 傻笑中
+  sib: lcx_shacai_001 | 362_laugh_cry_xs | 傻嗨
+
+=== [163] shs_yangguang_001 (383_small_happiness_share.yaml) intent=playful ===
+  keywords: ['阳光好', '天气好', '阳光晒', '阳光普照', '阳光暖']
+  utts: ['阳光好', '天气好', '阳光晒']
+  sib: ww_sunny_001 | 682_window_weather_chat | {user_addr}窗外太阳好大
+  sib: wv_taiyang_001 | 045_window_view_outside | 外面阳光
+  sib: wt_sunny_001 | 143_weather_chat | 晴天
+  sib: mc_zaoan_010 | 384_morning_call | 天亮了
+  sib: mwu_weather_001 | 074_morning_wake_up | 早上好冷
+  sib: em_sunshine_006 | 186_early_morning | 阳光真好
+
+=== [164] complaint_rain_001 (50_complaint.yaml) intent=complaint ===
+  keywords: ['下雨烦', '雨好大', '连续下雨', '阴天烦']
+  utts: ['下雨好烦', '雨也太大了', '连着下雨真烦']
+  sib: ww_rain_002 | 682_window_weather_chat | {user_addr}下雨了
+  sib: wc_rain_001 | 206_weather_chat | 下雨啦
+  sib: weather_rain_001 | 85_weather_season | 外面下雨了
+  sib: wc_rain_annoying_001 | U8_weather_complaint | 下雨好烦
+  sib: rw_rai_001 | 589_rainy_window_mood | 下雨了
+  sib: dr_yu_005 | 300_dress_warm_care | 下雨了
+
+=== [165] cw_cold_007 (653_cold_winter_chat.yaml) intent=complaint ===
+  keywords: ['静电', '起静电', '电到', '毛炸', '啪']
+  utts: ['全是静电{user_addr}', '电到我了', '啪一下吓人']
+  sib: caw_dry_day_005 | 840_chitchat_about_weather | {user_addr}皮肤干
+  sib: hsv_split_ends_011 | 831_haircut_salon_visit | {user_addr}头发分叉
+  sib: hs_jingdian_001 | 904_hat_static_hair | 脱帽静电
+  sib: hdr_use_010 | 864_hairdryer_use | 吹完蓬乱
+  sib: tsy_dianliang_001 | 376_tail_stepped_yelp | 电了
+  sib: hd_yinjijiu_001 | 909_hoodie_hide_inside | 卫衣帽子静电
+
+=== [166] dwr_thirsty_002 (327_drink_water_remind.yaml) intent=complaint ===
+  keywords: ['渴死了', '好渴', '嘴巴干', '嗓子哑', '缺水']
+  utts: ['渴死了', '好渴啊', '嘴巴干']
+  sib: dw_kahou_001 | 258_drink_water | 口好渴
+  sib: dwr_kelei_001 | 723_drink_water_remind | 渴死
+  sib: tw_kouke_001 | 794_thirsty_water_beg | 口渴
+  sib: wdr_kouke_001 | 367_water_drink_remind | 口渴
+  sib: hg_thirsty_001 | SSS6_hangover | 喉咙干死了
+  sib: dwr_kele_002 | 015_drink_water_remind | 渴死了
+
+=== [167] hw_yexieng_001 (898_heat_wave_die.yaml) intent=complaint ===
+  keywords: ['夜里热睡不着', '开空调睡', '睡到醒', '热醒', '失眠']
+  utts: ['夜里热睡不着', '{user_addr}热醒', '失眠']
+  sib: nsc_cant_sleep_001 | 075_night_sleep_chat | 睡不着
+  sib: ic_shimian_001 | 228_insomnia_chat | 失眠
+  sib: ni_shimian_001 | 064_night_insomnia_chat | 失眠
+  sib: nf_wan_shimian_004 | 220_night_farewell | 失眠
+  sib: ln_cant_sleep_002 | 154_late_night_chat | 睡不着啊
+  sib: ln_insomnia_001 | 187_late_night | 睡不着
+
+=== [168] esc_eye_009 (558_eye_strain_chat.yaml) intent=complaint ===
+  keywords: ['干涩', '酸胀', '眼睛酸', '看屏幕', '视疲劳']
+  utts: ['眼药水续命', '屏幕太亮刺眼', '{user_addr}盯屏幕一天眼睛酸']
+  sib: esc_eye_011 | 558_eye_strain_chat | {user_addr}盯屏幕一天眼睛酸
+  sib: esc_eye_005 | 558_eye_strain_chat | 屏幕太亮刺眼
+  sib: esc_eye_001 | 558_eye_strain_chat | {user_addr}盯屏幕一天眼睛酸
+  sib: tr_yanjing_001 | 260_take_rest | 眼睛好累
+  sib: mg_mg_yanpishen_003 | 247_morning_grumpy | 眼皮重
+  sib: esc_eye_007 | 558_eye_strain_chat | 眼睛干涩想哭
+
+=== [169] wcm_comfort_002 (462_want_comfort.yaml) intent=complaint ===
+  keywords: ['心累', '累惨', '心碎', '难过', '心疼自己']
+  utts: ['{user_addr}心累', '{user_addr}累惨', '{user_addr}心碎']
+  sib: mm_sigh_008 | 205_micro_mood | 叹气
+  sib: ew_xiongmo_001 | 053_emoji_wuwu_yingying | 心累
+  sib: sct_tired_heart_001 | 094_seek_comfort | 心累
+  sib: nc_woshibu_001 | 127_need_comfort | 受委屈了
+  sib: mm_helpless_010 | 205_micro_mood | 无奈
+  sib: nch_xinku_001 | 012_need_comfort_hug | 我累了
+
+=== [170] lr_jieshi_001 (881_late_reply_apologize.yaml) intent=question ===
+  keywords: ['刚才在忙', '没空回', '在开会', '上班中', '没注意']
+  utts: ['刚才在开会', '上班没空', '{user_addr}手机静音了']
+  sib: bof_kaihui_001 | 720_busy_or_free | {user_addr}开会
+  sib: rnr_busy_002 | 634_read_no_reply | 可能在忙
+  sib: dw_zaiganma_002 | 390_doing_what | 上班中
+  sib: bof_meeting_001 | 083_busy_or_free | 开会中
+  sib: ptb_workmode_excuse_004 | 837_pretend_busy | {user_addr}工作模式中
+  sib: dw_zaiganma_007 | 390_doing_what | 开会中
+
+=== [171] noon_lunch_009 (452_noon_lunch_break.yaml) intent=complaint ===
+  keywords: ['外卖好慢', '等外卖', '饭还没到', '饿死了', '外卖迟到']
+  utts: ['外卖好慢', '{user_addr}等外卖', '饭还没到']
+  sib: tsa_slow_001 | 345_takeout_slow_anger | 外卖慢
+  sib: tos_waimai_001 | 032_takeout_slow | 外卖好慢
+  sib: nlb_takeout_004 | 320_noon_lunch_break | 点外卖好慢
+  sib: ts_waiman_001 | 317_takeout_slow | 外卖好慢
+  sib: ec_takeout_001 | 123_eat_check_in | 点啥外卖
+  sib: ay_waimai_001 | 257_ate_yet | 外卖好慢
+
+=== [172] em_dawn_011 (186_early_morning.yaml) intent=playful ===
+  keywords: ['天亮了', '黎明', '破晓', '鸟叫', '天蒙蒙亮']
+  utts: ['天亮了', '黎明', '鸟叫了']
+  sib: wv_xiaoma_001 | 045_window_view_outside | 窗外猫
+  sib: zao_morning_002 | 450_morning_zaoan_chat | {user_addr}又早起啦
+  sib: em_zaoan_006 | 417_early_morning_greet | 太阳出来了
+  sib: mc_zaoan_010 | 384_morning_call | 天亮了
+  sib: mfw_zaoshangtaiyang_001 | 351_morning_first_word | 太阳出来啦
+  sib: dawn_first_001 | 747_dawn_first_light | {user_addr}天亮了
+
+=== [173] blp_battery_005 (575_battery_low_panic.yaml) intent=complaint ===
+  keywords: ['找充电', '电量低', '1%', '没电', '充电器']
+  utts: ['插上才安心', '{user_addr}手机1%电了', '赶紧找充电器']
+  sib: sc_phonedead_001 | 132_small_complaints | 手机没电
+  sib: pa_battery_low_002 | 182_phone_addiction | 没电了
+  sib: blp_battery_001 | 575_battery_low_panic | {user_addr}手机1%电了
+  sib: pbc_battery_002 | 663_phone_low_battery_chat | 充电器在哪{user_addr}
+  sib: blp_battery_009 | 575_battery_low_panic | 低电量焦虑
+  sib: st_phone_low_battery_006 | 195_small_things | 手机快没电
+
+=== [174] emr_yingying_001 (488_emoji_reactions.yaml) intent=complaint ===
+  keywords: ['嘤嘤', '嘤嘤嘤', '委屈', '嘤', '嘤呜']
+  utts: ['嘤嘤嘤', '委屈嘤嘤', '嘤']
+  sib: et_emo_001 | 129_emoji_text | 呜呜
+  sib: wwc_wuwu_001 | 530_wuwu_crying | 呜呜
+  sib: yyw_yingying_001 | 332_yingying_whine | 嘤嘤
+  sib: ew_yingying_001 | 053_emoji_wuwu_yingying | 嘤嘤
+  sib: sup_buyao_003 | 009_sulky_pouting | 不要嘛
+  sib: hy_yingying_002 | 303_heihei_yingying | 嘤嘤嘤
+
+=== [175] ld_avoid_people_001 (LL5_lonely_depression.yaml) intent=complaint ===
+  keywords: ['谁也不想见', '不想见人', '不想理人', '不想说话', '谁都不想见']
+  utts: ['{user_addr}谁也不想见', '不想见人', '{user_addr}不想理人']
+  sib: ao_duoqilai_001 | LL6_anger_outburst | 想躲起来冷静下
+  sib: nc_disappear_001 | T7_needing_comfort | 我想消失
+  sib: hs_want_hide_001 | YY9_holiday_stress | 好想躲起来
+  sib: ew_buxiang_001 | 053_emoji_wuwu_yingying | 不想动
+  sib: aw_xiangshibi_007 | 296_anwei_comfort_seek | 想消失
+  sib: fdj_hide_001 | CC6_first_day_job | 我想躲起来
+
+=== [176] bd_lianhong_010 (399_blush_dodge.yaml) intent=playful ===
+  keywords: ['假冷淡', '假装平静', '假装不在乎', '假装没事', '装淡定']
+  utts: ['假冷淡', '装平静', '装不在乎']
+  sib: ar_jiazhuangbushou_001 | 069_anti_routine_cold | 假装没事
+  sib: jv_chicu_008 | 426_jealous_vinegar | 我无所谓
+  sib: bd_bukan_001 | 269_blush_dodge | 不看不听
+  sib: csa_pretend_strong_001 | 545_cold_shoulder_act | 装坚强
+  sib: ar_pretend_calm_006 | 200_anti_routine | 装淡定
+  sib: tl_aojiao_004 | 414_tsundere_lie | 假冷淡
+
+=== [177] phn_drop_006 (852_phone_dropped.yaml) intent=complaint ===
+  keywords: ['手机卡顿', '卡死', '反应慢', '手机老化', '卡到爆']
+  utts: ['手机卡顿', '卡死', '反应慢']
+  sib: wdc_wifi_003 | 574_wifi_died_chat | 重启路由器没用
+  sib: wdc_wifi_011 | 574_wifi_died_chat | {user_addr}WiFi又断了
+  sib: zp_qianbao_001 | 912_zipper_stuck_jam | 包包拉链卡
+  sib: wdc_wifi_009 | 574_wifi_died_chat | 卡在加载圈
+  sib: wdc_wifi_005 | 574_wifi_died_chat | 打客服打通了吗
+  sib: wdr_gameping_005 | 631_wifi_disconnect_rage | ping高
+
+=== [178] bws_aloneme_009 (639_birthday_wish_sweet.yaml) intent=complaint ===
+  keywords: ['一个人过生日', '没人陪', '孤独生日', '自己过', '没人记得']
+  utts: ['一个人过', '没人陪', '孤独生日']
+  sib: cd_owner_leave_001 | 135_cat_daily | 出门
+  sib: scp_alone_001 | 101_seek_company | 一个人
+  sib: jp_lonely_pout_011 | 159_jealousy_pouting | 一个人好无聊
+  sib: fr_no_friend_003 | 213_friendship_chat | 没朋友
+  sib: wcm_yigeren_002 | 014_want_company | 一个人好孤单
+  sib: sct_alone_001 | 094_seek_comfort | 孤独
+
+=== [179] fss_jiankang_001 (745_first_snow_season.yaml) intent=complaint ===
+  keywords: ['换季感冒', '过敏鼻炎', '干燥', '嘴唇起皮', '皮肤痒']
+  utts: ['换季感冒', '{user_addr}过敏鼻炎', '干燥']
+  sib: hmm_dryness_001 | 972_hair_messy_morning | 头发干
+  sib: caw_dry_day_005 | 840_chitchat_about_weather | {user_addr}皮肤干
+  sib: dwr_hydration_001 | 526_drink_water_remind | 皮肤干
+  sib: cg_jiashishi_001 | 790_cough_throat_dry | 加湿器
+  sib: ib_itc_003 | 613_itch_back_scratch | 起红疹
+  sib: wdr_water_001 | 669_water_drink_remind_chat | {user_addr}忘了喝水
+
+=== [180] mn_yeshen_009 (418_midnight_chat.yaml) intent=complaint ===
+  keywords: ['睡不着觉', '翻身', '数羊', '失眠焦虑', '闭眼也睡不着']
+  utts: ['数羊也睡不着', '翻身翻不动了', '闭眼也睡不着']
+  sib: lnc_cant_sleep_001 | 517_late_night_chat | 睡不着啊
+  sib: nn_insomnia_001 | AA6_noisy_neighbor | 吵到睡不着
+  sib: complaint_insomnia_001 | 50_complaint | 我睡不着
+  sib: lnc_insomnia_001 | 484_late_night_chat | 又失眠了
+  sib: scl_meishuiyi_001 | 719_sleep_check_late | 没睡意
+  sib: ld_insomnia_001 | ZZ9_late_dinner | 失眠了
+
+=== [181] sb_no_breakfast_001 (ZZ5_skip_breakfast.yaml) intent=complaint ===
+  keywords: ['不吃早餐', '没吃早饭', '早餐跳过', '没吃早点', '早饭省了']
+  utts: ['今天又没吃早餐', '早饭跳过了', '不吃早餐了']
+  sib: mwg_breakfast_006 | 318_morning_wake_grumpy | 早饭吃啥
+  sib: op_rush_morning_005 | 704_oversleep_panic | {user_addr}赶时间
+  sib: sg_zaocan_001 | 994_stomach_growl_chat | 没吃早饭
+  sib: op_skip_breakfast_006 | 704_oversleep_panic | {user_addr}没时间吃
+  sib: ay_zaocan_007 | 291_ate_yet_question | 没吃早饭
+  sib: mwu_breakfast_001 | 074_morning_wake_up | 早饭吃什么
+
+=== [182] pt_xiaodonghaowu_001 (988_pet_treats_moment.yaml) intent=playful ===
+  keywords: ['罐头', '主食罐', '妙鲜包', '湿粮包', '罐罐']
+  utts: ['罐头', '{user_addr}主食罐', '妙鲜包']
+  sib: pet_food_001 | 89_pet_animal | 推荐猫粮
+  sib: cf_mlcao_001 | 066_cat_fish_snack | 猫薄荷
+  sib: wf_yugan_006 | 447_want_fish_jerky | 罐头
+  sib: dfc_canned_001 | 543_dried_fish_crave | 罐头
+  sib: cd_meowtreat_001 | 135_cat_daily | 喂笨猫
+  sib: ptc_petfood_001 | 510_pet_chat | 买猫粮
+
+=== [183] wt_snow_001 (143_weather_chat.yaml) intent=playful ===
+  keywords: ['下雪', '雪花', '大雪', '看雪', '雪景']
+  utts: ['下雪了', '雪花', '看雪']
+  sib: fsc_first_007 | 577_first_snow_chat | 窗外好美
+  sib: wc_winter_001 | 128_warmth_check | 冬天好冷
+  sib: fsc_first_011 | 577_first_snow_chat | {user_addr}今年第一场雪
+  sib: fsc_first_009 | 577_first_snow_chat | 想堆雪人
+  sib: wv_xueing_001 | 045_window_view_outside | 下雪
+  sib: fsc_first_005 | 577_first_snow_chat | 猫猫一起看雪
+
+=== [184] emr_awsl_001 (488_emoji_reactions.yaml) intent=playful ===
+  keywords: ['awsl', '啊我死了', 'awl', '死了', '萌死']
+  utts: ['awsl', '啊我死了', '萌死了']
+  sib: er_awsl_004 | 158_emoji_reactions | awsl
+  sib: er_er_awsl_004 | 229_emoji_react | awsl
+  sib: res_awsl_001 | 358_random_emoji_spam | awsl
+  sib: te_awsl_005 | 191_text_emoji | awsl
+  sib: eh_awsl_001 | 052_emoji_heihei_laugh | awsl
+  sib: aco_awsl_001 | 334_awsl_cute_overload | awsl
+
+=== [185] pay_bigplan_001 (921_payday_excited.yaml) intent=playful ===
+  keywords: ['发奖金', '年终奖', '红包', '大笔钱', '一大笔']
+  utts: ['发奖金了', '年终奖到', '老板发红包']
+  sib: pd_baoji_001 | 804_payday_happy_rich | 报税
+  sib: rpj_hongbao_001 | 033_red_packet_joy | 收到红包
+  sib: sm_red_packet_001 | 170_surprise_moment | 收到红包
+  sib: wlt_emp_002 | 851_wallet_empty_sad | 发工资啦
+  sib: urp_jiangjin_001 | 732_unexpected_red_packet | {user_addr}年终奖
+  sib: shp_red_packet_001 | 116_sudden_happy | 收到红包
+
+=== [186] swc_sunbathe_009 (580_sunbathe_window_chat.yaml) intent=playful ===
+  keywords: ['眯眼', '懒洋洋', '晒太阳', '窗台', '暖洋洋']
+  utts: ['光斑刚好', '陪我一起晒嘛', '{user_addr}猫猫在窗台晒太阳']
+  sib: yws_yawn_008 | 549_yawn_morning_stretch | 猫猫你也犯困吗
+  sib: mg_qichuangqi_005 | 441_morning_grumpy | 困到不行
+  sib: yws_yawn_012 | 549_yawn_morning_stretch | {user_addr}今天起得早结果哈欠不停
+  sib: nb_wu_xiangshui_010 | 221_noon_break | 好想睡
+  sib: yws_yawn_004 | 549_yawn_morning_stretch | 哈欠传染了快
+  sib: yws_yawn_010 | 549_yawn_morning_stretch | 伸懒腰最舒服了喵
+
+=== [187] sn_fashao_001 (789_sneeze_cold_catch.yaml) intent=complaint ===
+  keywords: ['发烧', '体温高', '烧起来', '烫额头', '低烧']
+  utts: ['发烧', '体温高', '烧起来']
+  sib: cld_fever_001 | 934_cold_caught_sick | 发烧
+  sib: rn_fever_007 | 701_runny_nose_cold | {user_addr}发烧了
+  sib: wwr_jiankang_006 | 016_wear_warm_remind | 感冒了
+  sib: lc_lc_chiyao_005 | 239_life_care | 生病
+  sib: dwm_warm_003 | 466_dress_warm_care | {user_addr}感冒了
+  sib: srn_fever_thermometer_010 | 838_sneeze_runny_nose | {user_addr}发烧了
+
+=== [188] csa_double_face_001 (545_cold_shoulder_act.yaml) intent=playful ===
+  keywords: ['口是心非', '表里不一', '嘴上心里', '心口不一', '反着说']
+  utts: ['口是心非', '表里不一', '嘴上心里']
+  sib: fcd_mouth_hard_001 | 109_feigned_cold | 嘴硬
+  sib: sc_koushixin_001 | 284_suddenly_cold | 口是心非
+  sib: jp_zui_ying_001 | 126_jealous_pout | 嘴硬
+  sib: ar_kou_001 | 137_anti_routine | 口是心非
+  sib: ar_say_opposite_004 | 200_anti_routine | 口是心非
+  sib: ar_koushi_001 | 069_anti_routine_cold | 口是心非
+
+=== [189] cw_qiuku_001 (049_care_dress_warm.yaml) intent=playful ===
+  keywords: ['秋裤', '穿秋裤', '暖腿', '保暖裤', '棉裤']
+  utts: ['秋裤', '穿秋裤吗', '暖腿']
+  sib: dw_chuannuan_004 | 430_dress_warm_remind | 秋裤穿了吗
+  sib: wtc_thermals_007 | 621_weather_too_cold | 穿秋裤
+  sib: dw_chuannuan_007 | 430_dress_warm_remind | 暖宝宝
+  sib: ch_yiwu_001 | 048_cold_hands_feet | 秋裤
+  sib: wwr_qiuyuanxia_007 | 016_wear_warm_remind | 秋裤穿了吗
+
+=== [190] maa_overslept_002 (343_morning_alarm_anger.yaml) intent=complaint ===
+  keywords: ['睡过头', '又睡过头', '睡晚了', '没听见闹钟', '晚起']
+  utts: ['睡过头了', '又睡过头', '睡晚了']
+  sib: sy_yaw_006 | 586_stretch_morning_yawn | 越睡越困
+  sib: nb_wuxiu_005 | 386_noon_break | 午觉睡过头
+  sib: mwu_oversleep_001 | 074_morning_wake_up | 睡过头了
+  sib: ach_oversleep_003 | 617_alarm_clock_hate | 睡过头了
+  sib: mwk_oversleep_001 | 483_morning_wakeup | 睡过头了
+  sib: op_oversleep_001 | 704_oversleep_panic | {user_addr}睡过头
+
+=== [191] ps_low_salary_001 (GG8_paycheck_struggle.yaml) intent=complaint ===
+  keywords: ['工资低', '工资少', '赚得少', '工资太低', '钱少']
+  utts: ['工资好低', '我工资真的少', '赚得太少了']
+  sib: it_shimian_006 | 445_insomnia_thinking | 钱不够
+  sib: wcj_low_salary_001 | V9_want_change_job | 工资太低了
+  sib: or_low_salary_001 | V6_overtime_rage | 工资低还这么累
+  sib: pj_zhuanqian_001 | 992_weekly_paycheck_joy | 工资不够花
+  sib: complaint_money_001 | 50_complaint | 我又穷了
+
+=== [192] cnl_cup_012 (566_cup_noodle_late.yaml) intent=complaint ===
+  keywords: ['不健康', '吃多了', '油大', '怕胖', '太咸']
+  utts: ['{user_addr}知道不健康还吃', '油大了点', '吃多胖三斤']
+  sib: tw_baocan_001 | 057_tease_master_weight | 吃多了
+  sib: mid_yeshen_007 | 387_midnight_chat | 熬夜伤肝
+  sib: cnl_cup_002 | 566_cup_noodle_late | {user_addr}知道不健康还吃
+  sib: epl_youni_005 | 018_eat_properly | 油腻
+  sib: cnl_cup_006 | 566_cup_noodle_late | 泡面太咸口渴
+  sib: ep_zhiniao_005 | 302_eat_proper_care | 又吃外卖
+
+=== [193] afc_flirt_009 (677_ambiguous_flirt_chat.yaml) intent=playful ===
+  keywords: ['手', '牵手', '十指相扣', '握住', '牵着']
+  utts: ['{user_addr}牵手', '十指相扣', '握住手']
+  sib: bcu_handhold_001 | 490_beg_cuddle | 牵手
+  sib: rf_qiantao_001 | 054_reverse_flirt_blush | 想你了
+  sib: hp_pinky_hold_010 | 157_hug_petting | 牵手
+  sib: at_aimei_005 | 434_ambiguous_tease | 谈恋爱
+  sib: hbl_hold_hand_007 | 336_hug_beg_lap | 牵手
+  sib: scl_hold_hand_001 | 092_spoil_clingy | 牵手
+
+=== [194] esw_elevator_009 (570_elevator_stuck_wait.yaml) intent=complaint ===
+  keywords: ['满员', '等半天', '等电梯', '卡住', '好慢']
+  utts: ['满员又走了', '赶时间气死', '{user_addr}等电梯等半天']
+  sib: elv_wait_003 | 853_elevator_wait | 电梯太挤
+  sib: ct_dijietui_001 | 062_commute_traffic_tired | 地铁挤
+  sib: stf_didiezhi_003 | 031_stuck_traffic | 地铁挤
+  sib: esw_elevator_005 | 570_elevator_stuck_wait | 赶时间气死
+  sib: cm_cm_jisihaitao_002 | 245_commute_chat | 地铁挤
+  sib: esw_elevator_001 | 570_elevator_stuck_wait | {user_addr}等电梯等半天
+
+=== [195] za_zaoan_001 (285_zaoan_morning_greeting.yaml) intent=playful ===
+  keywords: ['早安', '早', '早上好', '起床', '早呀']
+  utts: ['{user_addr}早安', '{user_addr}早呀', '早早早']
+  sib: mwk_zaoan_001 | 001_morning_wakeup_chat | {user_addr}早安
+  sib: em_morning_001 | 186_early_morning | {user_addr}早安
+  sib: mh_zaoan_001 | 219_morning_hello | 早安喵
+  sib: mw_zaoan_001 | 252_morning_wakeup | {user_addr}早安
+  sib: mfw_zaoan_001 | 714_morning_first_word | {user_addr}早安
+  sib: greet_morning_001 | 00_greetings | 早安
+
+=== [196] tb_unfriend_001 (JJJ9_travel_buddy.yaml) intent=complaint ===
+  keywords: ['回家就 unfriend', '拉黑', '删好友', '回去就断', '再不联系']
+  utts: ['{user_addr}回家就把旅伴 unfriend', '这趟回去就拉黑', '删好友了']
+  sib: cr_argue_001 | 941_chatroom_silence | 群里吵
+  sib: af_no_next_time_001 | SSS7_alcoholic_friend | {user_addr}下次绝对不约了
+  sib: rn_red_011 | 596_read_no_reply | 被拉黑了
+  sib: fd_lahei_001 | MM6_friend_drama | 我把他拉黑了
+  sib: fd_zaibulai_001 | QQ5_food_disappoint | 再也不来这家了
+  sib: jpt_pout_silence_001 | 093_jealous_pout | 不理你了
+
+=== [197] sc_koushixin_001 (284_suddenly_cold.yaml) intent=complaint ===
+  keywords: ['口是心非', '心口不一', '表里不一', '说一套做一套', '嘴说不要']
+  utts: ['口是心非', '心口不一', '表里不一']
+  sib: fcd_mouth_hard_001 | 109_feigned_cold | 嘴硬
+  sib: jp_zui_ying_001 | 126_jealous_pout | 嘴硬
+  sib: ar_kou_001 | 137_anti_routine | 口是心非
+  sib: ar_say_opposite_004 | 200_anti_routine | 口是心非
+  sib: ar_koushi_001 | 069_anti_routine_cold | 口是心非
+  sib: tl_aojiao_001 | 414_tsundere_lie | 笨猫口是心非
+
+=== [198] lbl_lt_011 (780_litter_box_litter.yaml) intent=complaint ===
+  keywords: ['太累了', '主人放下包', '瘫沙发', '不能动', '笨猫照顾']
+  utts: ['太累了', '主人放下包', '瘫沙发']
+  sib: el_dont_want_002 | 216_exercise_lazy | 懒得动
+  sib: sd_tired_living_001 | LLL8_self_destructive | 活着好累
+  sib: sj_exhausted_001 | OOO6_social_injustice | 每天疲于奔命
+  sib: awt_taneng_001 | 730_after_work_tired | 瘫沙发
+  sib: shr_couch_001 | 108_shoveler_return | 瘫沙发
+  sib: att_break_001 | 078_afternoon_tea_time | 想休息
+
+=== [199] pw_zoulu_008 (298_peiwan_company.yaml) intent=playful ===
+  keywords: ['散步', '陪我走', '出去走走', '散散心', '走一走']
+  utts: ['散散步', '陪我走', '出去走走']
+  sib: edc_wanshanglao_001 | 354_evening_dinner_chat | 出去遛弯
+  sib: tw_paobu_001 | 057_tease_master_weight | 散步
+  sib: el_walk_009 | 216_exercise_lazy | 散步
+  sib: bk_chuwai_001 | 039_bored_killing_time | 出门走走
+  sib: trr_zhangzhe_004 | 017_take_rest_remind | 起来动一下
+  sib: lb_chayu_001 | 254_lunch_break | 茶余饭后
+
+=== [200] hic_breath_001 (947_hiccup_giggle.yaml) intent=question ===
+  keywords: ['屏住呼吸', '闭气', '屏息', '数十秒', '憋气']
+  utts: ['屏住呼吸', '闭气数秒', '{user_addr}屏息法']
+  sib: hca_holdbreath_002 | 627_hiccup_attack | 屏住呼吸
+  sib: hr_breath_hold_004 | 698_hiccup_random | {user_addr}屏气止嗝
+  sib: hcc_hiccup_001 | 560_hiccup_chat | {user_addr}打嗝停不下来
+  sib: hcc_hiccup_007 | 560_hiccup_chat | 嗝！嗝！嗝！
+  sib: hcc_hiccup_005 | 560_hiccup_chat | 猫猫嘲笑我
+  sib: hcc_hiccup_003 | 560_hiccup_chat | 喝水也没用
+
+=== [201] hf_so_hungry_001 (S6_hungry_food.yaml) intent=complaint ===
+  keywords: ['好饿', '饿死了', '我饿了', '饿哭了', '肚子饿']
+  utts: ['我好饿啊', '饿死了救命', '肚子饿到不行']
+  sib: ay_eba_003 | 291_ate_yet_question | 我饿了
+  sib: frl_fridge_006 | 561_fridge_raid_late | 冰箱空了笑死
+  sib: dye_starving_001 | 082_did_you_eat | 饿死了
+  sib: frl_fridge_004 | 561_fridge_raid_late | 泡面也没了
+  sib: mc_hungry_007 | 161_meal_check_in | 饿死啦
+  sib: fc_hungry_001 | 207_food_craving | 饿了
+
+=== [202] gnr_finalmiss_001 (515_goodnight_routine.yaml) intent=playful ===
+  keywords: ['想你', '睡前想你', '想念', '临睡想', '念你']
+  utts: ['睡前想你', '临睡想念', '念你']
+  sib: mrn_yuekong_001 | 373_moon_round_night | 对月思人
+  sib: fl_naoguo_009 | 304_fanliao_flirt_back | 脑子里都是你
+  sib: sj_xiangxiang_010 | 294_sajiao_clingy | 想你
+  sib: ayt_long_time_no_see_001 | 518_are_you_there_ping | 好久没找你了
+  sib: ac_clinging_001 | 124_acting_clingy | 想你了
+  sib: shr_miss_001 | 108_shoveler_return | 想我没
+
+=== [203] bpc_bus_008 (571_bus_packed_chat.yaml) intent=playful ===
+  keywords: ['摇晃', '站不稳', '到站', '让座', '刷卡']
+  utts: ['有人让座了好暖', '快到站了挤出来', '猫猫一起挤车']
+  sib: bpc_bus_012 | 571_bus_packed_chat | 刷卡机响半天
+  sib: wdy_windy_007 | 578_windy_day_chat | 刮脸生疼
+  sib: bpc_bus_006 | 571_bus_packed_chat | {user_addr}抓不住扶手晃来晃去
+  sib: bpc_bus_002 | 571_bus_packed_chat | 刷卡机响半天
+  sib: bpc_bus_004 | 571_bus_packed_chat | 快到站了挤出来
+  sib: wdy_windy_001 | 578_windy_day_chat | {user_addr}风太大头发吹乱
+
+=== [204] dtc_dream_002 (670_dream_talk_chat.yaml) intent=complaint ===
+  keywords: ['噩梦', '吓醒', '做了噩梦', '出冷汗', '心跳']
+  utts: ['做了噩梦{user_addr}', '吓醒了', '出冷汗']
+  sib: ng_dream_001 | 121_night_goodnight | 昨晚做梦
+  sib: hd_emeng_001 | 277_had_dream | 做噩梦
+  sib: mdc_dream_007 | 321_midnight_chat | 我做了个梦
+  sib: dln_nightmare_001 | 119_dream_last_night | 噩梦
+  sib: wa_meng_010 | 286_wanan_night_greeting | 昨晚做梦了
+  sib: dc_dream_001 | 165_dream_chat | 做梦了
+
+=== [205] wwc_wuwu_001 (530_wuwu_crying.yaml) intent=complaint ===
+  keywords: ['呜呜', '呜呜呜', '哭啦', '抽泣', '泣不成声']
+  utts: ['呜呜', '呜呜呜', '我哭了']
+  sib: et_emo_001 | 129_emoji_text | 呜呜
+  sib: wce_wuwu_001 | 331_wuwu_cry_emoji | 呜呜
+  sib: er_er_555_006 | 229_emoji_react | 555
+  sib: res_wuwu_001 | 358_random_emoji_spam | 呜呜
+  sib: ew_wuwu_001 | 432_emoji_wuwu | 呜呜
+  sib: er_wuwu_006 | 158_emoji_reactions | 呜呜呜
+
+=== [206] psk_outfit_001 (525_praise_seeking.yaml) intent=playful ===
+  keywords: ['穿搭', '今天好看', '穿搭满分', '衣服好看', '搭配']
+  utts: ['今天穿搭满分', '衣服好看', '穿这样行吗']
+  sib: sp_yifu_001 | 047_emotion_seek_praise | 穿搭好看吗
+  sib: dr_yifu_009 | 300_dress_warm_care | 买新衣服
+  sib: mod_outfit_001 | 340_master_outfit_diss | 今天穿搭
+  sib: wc_dressup_001 | 128_warmth_check | 今天穿啥
+  sib: to_outfit_003 | 194_tease_owner | 这衣服丑
+  sib: mwk_chuanyi_009 | 001_morning_wakeup_chat | 今天穿什么
+
+=== [207] dln_weird_dream_001 (119_dream_last_night.yaml) intent=playful ===
+  keywords: ['奇怪的梦', '怪梦', '离谱梦', '离谱情节', '梦境奇怪']
+  utts: ['奇怪的梦', '{user_addr}怪梦', '离谱梦']
+  sib: lnd_zuomeng_001 | 733_late_night_dreaming | 做梦了
+  sib: gmd_dream_001 | 516_good_morning_drowsy | 我做梦了
+  sib: dc_strange_dream_003 | 165_dream_chat | 做了怪梦
+  sib: hd_qigai_001 | 277_had_dream | 奇怪的梦
+  sib: mdc_dream_007 | 321_midnight_chat | 我做了个梦
+  sib: mh_zao_meng_006 | 219_morning_hello | 昨晚做梦了
+
+=== [208] dfb_renshu_001 (366_dodge_flirt_back.yaml) intent=playful ===
+  keywords: ['认输', '算我输', '我服了', '服服服', '投降']
+  utts: ['认输', '算我输', '我服了']
+  sib: lsw_wn_007 | 777_lucky_streak_win | 被超
+  sib: ew_tinghao_001 | 886_emoji_war | 斗够了
+  sib: ptb_finally_reply_012 | 837_pretend_busy | {user_addr}终于回复
+  sib: bbm_bbz_008 | 482_bengbuzhu_meme | {user_addr}真服了
+  sib: fb_lianhong_008 | 433_flirt_back_blush | 被你撩到了
+  sib: ld_zhuofu_001 | 272_laugh_die | 真服了
+
+=== [209] op_alarm_failed_009 (704_oversleep_panic.yaml) intent=complaint ===
+  keywords: ['闹钟坏了', '闹钟没响', '闹钟失灵', '设置错时间', '闹钟问题']
+  utts: ['{user_addr}闹钟坏了', '闹钟没响', '{user_addr}失灵']
+  sib: mc_zaoan_009 | 384_morning_call | 又迟到了
+  sib: ma_naozhong_001 | 315_morning_alarm | 闹钟响
+  sib: nb_wuxiu_005 | 386_noon_break | 午觉睡过头
+  sib: mwg_alarm_002 | 318_morning_wake_grumpy | 闹钟又被我关了
+  sib: mt_alarm_failed_001 | Z6_missed_train | 闹钟没响
+  sib: mwk_oversleep_001 | 483_morning_wakeup | 睡过头了
+
+=== [210] gcl_aiyu_001 (498_gacha_luck.yaml) intent=playful ===
+  keywords: ['氪金', '充钱', '抽满', '全力一搏', '干就完']
+  utts: ['氪金了', '充钱了', '抽满']
+  sib: ggc_gacha_007 | 658_game_gacha_chat | 氪不动了{user_addr}
+  sib: gpd_chargepay_005 | 643_gacha_pull_dream | 氪金
+  sib: gm_gm_pingjie_010 | 234_game_mood | 氪金
+  sib: gpl_pinjie_001 | 737_gacha_pull_luck | 氪金
+  sib: nmb_topup_game_001 | GGG9_no_money_buy | {user_addr}想充值游戏
+
+=== [211] dw_chuannuan_001 (430_dress_warm_remind.yaml) intent=question ===
+  keywords: ['穿暖了吗', '加衣服', '别冻着', '穿厚点', '多穿点']
+  utts: ['穿暖了吗', '加衣服没', '别冻着']
+  sib: ww_chuannuan_001 | 259_wear_warm | {user_addr}穿暖了吗
+  sib: wwr_chuannuan_001 | 724_wear_warm_remind | {user_addr}穿暖了吗
+  sib: dwm_warm_001 | 466_dress_warm_care | {user_addr}穿暖了吗
+  sib: cw_chuannuan_001 | 049_care_dress_warm | {user_addr}穿暖了吗
+  sib: wc_clothes_001 | 128_warmth_check | 穿暖了吗
+  sib: dr_chuanyi_001 | 300_dress_warm_care | 穿暖了吗
+
+=== [212] tw_tea_drink_too_010 (692_tea_warm_cup.yaml) intent=complaint ===
+  keywords: ['茶喝多', '厕所多', '茶尿多', '茶醉', '失眠']
+  utts: ['{user_addr}茶喝多失眠', '茶尿多', '{user_addr}茶醉']
+  sib: nsc_cant_sleep_001 | 075_night_sleep_chat | 睡不着
+  sib: ic_shimian_001 | 228_insomnia_chat | 失眠
+  sib: ni_shimian_001 | 064_night_insomnia_chat | 失眠
+  sib: nf_wan_shimian_004 | 220_night_farewell | 失眠
+  sib: ln_cant_sleep_002 | 154_late_night_chat | 睡不着啊
+  sib: ln_insomnia_001 | 187_late_night | 睡不着
+
+=== [213] res_awsl_001 (358_random_emoji_spam.yaml) intent=playful ===
+  keywords: ['awsl', '啊我死了', '太可爱了', '萌死', '蚌埠住']
+  utts: ['awsl', '太可爱了', '萌死了']
+  sib: er_awsl_004 | 158_emoji_reactions | awsl
+  sib: er_er_awsl_004 | 229_emoji_react | awsl
+  sib: ab_awsl_001 | 403_awsl_burst | awsl
+  sib: te_awsl_005 | 191_text_emoji | awsl
+  sib: eh_awsl_001 | 052_emoji_heihei_laugh | awsl
+  sib: aco_awsl_001 | 334_awsl_cute_overload | awsl
+
+=== [214] lnc_food_craving_001 (517_late_night_chat.yaml) intent=complaint ===
+  keywords: ['半夜饿了', '想吃宵夜', '半夜想吃', '嘴馋了', '罪恶的零食']
+  utts: ['半夜饿了', '想吃宵夜', '嘴馋']
+  sib: sg_chao_001 | 994_stomach_growl_chat | 想吃宵夜
+  sib: ec_late_meal_001 | 123_eat_check_in | 半夜饿了
+  sib: ln_night_snack_005 | 187_late_night | 半夜饿了
+  sib: mdc_hungry_003 | 321_midnight_chat | 半夜好饿
+  sib: df_late_night_001 | QQ6_diet_fail | 深夜想吃东西
+  sib: hm_xiaoye_001 | 795_hungry_midnight | 想吃宵夜
+
+=== [215] ros_rewatch_006 (569_rewatch_old_show.yaml) intent=question ===
+  keywords: ['看什么', '推荐', '重温', '怀旧', '老电影']
+  utts: ['{user_addr}今晚看什么剧', '猫猫推荐部老剧吧', '想看怀旧电影']
+  sib: tos_cazhuwu_007 | 032_takeout_slow | 点啥外卖
+  sib: edc_yixihuan_001 | 354_evening_dinner_chat | 今天想吃什么
+  sib: ros_rewatch_002 | 569_rewatch_old_show | 猫猫推荐部老剧吧
+  sib: ros_rewatch_010 | 569_rewatch_old_show | 哪部值得二刷
+  sib: ros_rewatch_012 | 569_rewatch_old_show | 猫猫推荐部老剧吧
+  sib: ros_rewatch_008 | 569_rewatch_old_show | 想看怀旧电影
+
+=== [216] zpr_stk_011 (870_zipper_stuck.yaml) intent=complaint ===
+  keywords: ['拉链生锈', '旧拉链', '拉链氧化', '卡顿', '拉链锈住']
+  utts: ['拉链生锈', '氧化', '拉链锈住']
+  sib: vcc_voice_002 | 672_voice_call_chat | 信号差{user_addr}
+  sib: gcl_pingu_001 | 498_gacha_luck | 460
+  sib: zp_juxia_001 | 912_zipper_stuck_jam | 拉链断
+  sib: gs_lag_008 | 169_game_session | 游戏卡顿
+  sib: psn_storagefull_001 | 509_phone_screen | 内存满了
+  sib: wdr_lagvideo_004 | 631_wifi_disconnect_rage | 视频卡
+
+=== [217] sla_wanan_003 (007_sleepy_already.yaml) intent=playful ===
+  keywords: ['晚安', '安', '晚安好梦', '晚安啦', '晚安呀']
+  utts: ['晚安', '安~', '晚安好梦']
+  sib: gn_goodnight_001 | 185_goodnight_chat | 晚安
+  sib: greet_night_001 | 00_greetings | 晚安
+  sib: ln_wanan_001 | 253_late_night_chat | {user_addr}晚安
+  sib: ser_wanan_001 | 370_sleep_early_remind | 晚安
+  sib: ng_wanan_001 | 121_night_goodnight | {user_addr}晚安
+  sib: nf_wanan_001 | 220_night_farewell | 晚安
+
+=== [218] fdc_cat_food_005 (350_fish_dry_crave.yaml) intent=playful ===
+  keywords: ['猫粮', '猫罐头', '喂笨猫', '给猫吃', '猫零食']
+  utts: ['猫粮', '猫罐头', '喂笨猫']
+  sib: dfc_cat_treat_001 | 543_dried_fish_crave | 猫粮
+  sib: cd_yugan_001 | 233_cat_daily | 想吃鱼干
+  sib: mc_fish_dry_011 | 161_meal_check_in | 给笨猫吃鱼干
+  sib: wf_yugan_006 | 447_want_fish_jerky | 罐头
+  sib: cf_zhubin_001 | 066_cat_fish_snack | 猫粮
+  sib: cd_meowtreat_001 | 135_cat_daily | 喂笨猫
+
+=== [219] lc_cra_004 (614_leg_cramp_pain.yaml) intent=complaint ===
+  keywords: ['缺钙', '缺镁', '营养缺乏', '钙不够', '喝牛奶']
+  utts: ['缺钙吧', '缺镁', '营养缺乏']
+  sib: cfs_milk_001 | 106_cat_fish_snack | 牛奶
+  sib: spc_milk_001 | 958_spicy_tears | 怎么解辣
+  sib: sfl_milkrescue_008 | 625_spicy_food_lover | 牛奶解辣
+  sib: tng_milk_001 | 956_tongue_burn_hot | 冰牛奶
+  sib: ncs_warm_milk_006 | 319_night_cant_sleep | 喝点热牛奶
+  sib: mns_milk_001 | 930_midnight_snack_urge | 喝牛奶
+

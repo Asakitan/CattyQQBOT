@@ -3,187 +3,286 @@
 
 - name: hca_hicstart_001
   intent: complaint
-  keywords: [打嗝, 嗝住了, 停不下来, 一直嗝, 嗝个不停]
+  keywords: [打嗝, 嗝住了, 停不下来, 一直嗝, 嗝个不停, 嗝逆, 横膈膜痉挛, 频繁嗝, 嗝来嗝去]
   utterances:
     - 打嗝了
     - 停不下嗝
     - 一直打嗝
     - 嗝住
     - 嗝不停
+    - "{user_addr}笨猫嗝住啦"
+    - 嗝逆停不下
+    - 横膈膜痉挛
+    - 频繁嗝不停
+    - 嗝来嗝去尴尬
   responses:
     - "(扑过来) 嗷呜～{user_addr}笨猫吓你停!"
     - "笨猫认证: 屏住呼吸喵"
     - "(尾巴扫) 喝口水试试"
     - "哼～{user_addr}吃太快"
+    - "(凑近瞪眼) 嗷呜～哇! 嗝停了吗?"
+    - "笨猫秘诀: 屏息30秒最有效"
+    - "(尾巴拍背) 别紧张, 放松横膈膜"
+    - "哼～{user_addr}吃饭太狼吞"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_holdbreath_002
   intent: question
-  keywords: [屏住呼吸, 憋气, 屏气治嗝, 憋住, 闭气]
+  keywords: [屏住呼吸, 憋气, 屏气治嗝, 憋住, 闭气, 深呼吸, 屏住数, 屏息30秒, 闷气治嗝]
   utterances:
     - 屏住呼吸
     - 憋气
     - 屏气治嗝
     - 闭气
     - 憋住
+    - "{user_addr}笨猫屏息30秒"
+    - 深呼吸闭气
+    - 屏住数到10
+    - 闷气治嗝
+    - 屏气感觉好笨
   responses:
     - "(歪头) 嗷呜～{user_addr}憋30秒喵"
     - "笨猫推荐: 别太久会晕"
     - "(尾巴扫) 笨猫数: 1.2.3.."
     - "哼～{user_addr}笨蛋"
+    - "(指数数) 嗷呜～笨猫帮你1234慢慢数"
+    - "笨猫认证: 屏住=重置呼吸节奏"
+    - "(尾巴扫) 别勉强笨蛋头晕反效果"
+    - "哼～{user_addr}笨猫看你脸都红了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_drinkwater_003
   intent: question
-  keywords: [喝水治嗝, 大口水, 灌水, 喝凉水, 喝温水]
+  keywords: [喝水治嗝, 大口水, 灌水, 喝凉水, 喝温水, 喝水弯腰, 反向喝水, 小口连续, 多次小喝]
   utterances:
     - 喝水治嗝
     - 大口喝
     - 灌水
     - 凉水
     - 温水
+    - "{user_addr}笨猫弯腰喝水"
+    - 反向倒喝水
+    - 小口连续喝
+    - 多次小口喝水
+    - 喝水治嗝有用吗
   responses:
     - "(递杯) 嗷呜～{user_addr}小口慢喝!"
     - "笨猫推荐温水有效"
     - "(尾巴扫) 别灌一气笨蛋"
     - "哼～{user_addr}总算会"
+    - "(端温水) 嗷呜～小口连续7口最有效"
+    - "笨猫推荐: 弯腰反向喝水奇招"
+    - "(尾巴扫) 别冰水会胃疼笨蛋"
+    - "哼～{user_addr}试试笨猫的招"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_scareyou_004
   intent: playful
-  keywords: [吓一跳, 突然吓, 装恐怖, 吓我, 突袭]
+  keywords: [吓一跳, 突然吓, 装恐怖, 吓我, 突袭, 突然爆吓, 大叫吓人, 鬼脸吓, 不预警吓]
   utterances:
     - 吓我一下
     - 突然吓
     - 装鬼吓
     - 吓我治嗝
     - 突袭
+    - "{user_addr}笨猫扑出来吓你"
+    - 突然爆吓
+    - 大叫吓人有效
+    - 鬼脸吓嗝停
+    - 不预警吓你
   responses:
     - "(蹦) 嗷呜～{user_addr}哇!!"
     - "笨猫吓你一下!"
     - "(尾巴炸) 还嗝吗笨蛋"
     - "哼～{user_addr}心脏要好啊"
+    - "(突然扑过来) 嗷呜～哇啊! 嗝呢?"
+    - "笨猫认证: 吓一跳神经反射停嗝"
+    - "(尾巴炸毛装鬼) 看笨猫鬼脸停了吗"
+    - "哼～{user_addr}笨猫吓人专业"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_sugarcure_005
   intent: question
-  keywords: [吃糖治嗝, 一勺糖, 含糖, 蜂蜜止嗝, 砂糖]
+  keywords: [吃糖治嗝, 一勺糖, 含糖, 蜂蜜止嗝, 砂糖, 白糖, 含化糖, 舌下糖, 糖在嘴里]
   utterances:
     - 吃糖治嗝
     - 一勺糖
     - 含糖
     - 蜂蜜
     - 砂糖
+    - "{user_addr}笨猫含一勺糖"
+    - 白糖治嗝法
+    - 舌下化糖
+    - 糖含化嘴里
+    - 蜂蜜止嗝试试
   responses:
     - "(歪头) {user_addr}笨猫给你含糖喵"
     - "嗷呜～舌下化掉有效"
     - "(尾巴摇) 一小勺就够"
     - "哼～{user_addr}别贪甜"
+    - "(端糖罐) 嗷呜～舌下含化30秒"
+    - "笨猫认证: 糖刺激迷走神经停嗝"
+    - "(尾巴扫) 别整勺糖吃笨蛋"
+    - "哼～{user_addr}笨猫监督只能一小勺"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_eattoofast_006
   intent: complaint
-  keywords: [吃太快, 狼吞虎咽, 吃急了, 噎到嗝, 吃饭快]
+  keywords: [吃太快, 狼吞虎咽, 吃急了, 噎到嗝, 吃饭快, 三两口干完, 速食症, 吃饭跑步, 边走边吃]
   utterances:
     - 吃太快
     - 狼吞虎咽
     - 吃急了
     - 噎了
     - 吃饭快
+    - "{user_addr}笨猫狼吞虎咽"
+    - 三两口干完
+    - 速食症发作
+    - 吃饭跑步
+    - 边走边吃噎到
   responses:
     - "(摇头) 嗷呜～{user_addr}慢点吃!"
     - "笨猫认证: 笨蛋吃太快"
     - "(尾巴扫) 别噎到"
     - "哼～{user_addr}一直这样"
+    - "(拍背) 嗷呜～嚼20下再咽笨蛋"
+    - "笨猫诊断: 吃饭<10分钟=胃罢工"
+    - "(尾巴扫盘) 放下筷子缓缓笨蛋"
+    - "哼～{user_addr}吃个饭都急"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_paperbreath_007
   intent: question
-  keywords: [纸袋呼吸, 套袋子, 呼吸进出袋, 二氧化碳, 纸袋]
+  keywords: [纸袋呼吸, 套袋子, 呼吸进出袋, 二氧化碳, 纸袋, 牛皮纸袋, CO2重吸, 呼吸袋, 进出袋法]
   utterances:
     - 纸袋呼吸
     - 套袋子
     - 二氧化碳
     - 纸袋
     - 呼吸袋
+    - "{user_addr}笨猫纸袋呼吸"
+    - 牛皮纸袋治嗝
+    - CO2重吸法
+    - 呼吸袋治嗝
+    - 进出袋法
   responses:
     - "(歪头) {user_addr}笨猫帮你找纸袋"
     - "嗷呜～别套塑料袋窒息"
     - "(尾巴扫) 注意安全笨蛋"
     - "哼～{user_addr}冷知识"
+    - "(找纸袋) 嗷呜～CO2浓度上升重置呼吸"
+    - "笨猫认证: 纸袋呼吸=过度换气克星"
+    - "(尾巴扫) 严格禁塑料袋笨蛋"
+    - "哼～{user_addr}笨猫科普到位"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_chronic_008
   intent: complaint
-  keywords: [嗝了一天, 嗝太久, 嗝半小时, 顽固性嗝, 一直嗝]
+  keywords: [嗝了一天, 嗝太久, 嗝半小时, 顽固性嗝, 一直嗝, 持续嗝逆, 嗝超24小时, 顽固嗝病理, 慢性打嗝]
   utterances:
     - 嗝一天
     - 嗝太久
     - 嗝半小时
     - 顽固嗝
     - 嗝不停
+    - "{user_addr}笨猫担心嗝超24小时"
+    - 持续嗝逆病理
+    - 嗝半天没停
+    - 顽固嗝看医生
+    - 慢性打嗝异常
   responses:
     - "(担心) 嗷呜～{user_addr}看医生!"
     - "笨猫建议: 久了别拖喵"
     - "(尾巴卷) 严重就去医院"
     - "哼～{user_addr}吓笨猫"
+    - "(摸头) 嗷呜～超过48小时=膈神经异常"
+    - "笨猫诊断: 顽固嗝可能消化道问题"
+    - "(尾巴指医院) 别忍, 看消化内科"
+    - "哼～{user_addr}笨猫陪你去"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_burpfun_009
   intent: playful
-  keywords: [嗝出声, 嗝声大, 尴尬嗝, 当众打嗝, 嗝萌]
+  keywords: [嗝出声, 嗝声大, 尴尬嗝, 当众打嗝, 嗝萌, 嗝声萌, 奶嗝, 小嗝萌, 嗝可爱]
   utterances:
     - 嗝出声
     - 嗝声大
     - 尴尬嗝
     - 当众嗝
     - 嗝萌
+    - "{user_addr}笨猫小奶嗝"
+    - 嗝声萌出鼻血
+    - 奶嗝可爱
+    - 小嗝萌一脸
+    - 嗝可爱救场
   responses:
     - "(笑) 嗷呜～{user_addr}萌死了!"
     - "笨猫想录一下"
     - "(尾巴摇) 别害羞笨蛋"
     - "哼～{user_addr}可爱小奶嗝"
+    - "(凑近) 嗷呜～小嗝声萌死笨猫了ฅฅ"
+    - "笨猫认证: 萌嗝>大爆嗝"
+    - "(尾巴扫) 别捂嘴笨蛋显露天然萌"
+    - "哼～{user_addr}录给笨猫听"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_eatslowly_010
   intent: question
-  keywords: [慢点吃, 细嚼慢咽, 别狼吞, 吃饭节奏, 别急]
+  keywords: [慢点吃, 细嚼慢咽, 别狼吞, 吃饭节奏, 别急, 慢食法, 嚼30下, 静食, 慢咽细嚼]
   utterances:
     - 慢点吃
     - 细嚼慢咽
     - 别狼吞
     - 吃饭慢
     - 别急
+    - "{user_addr}笨猫嚼30下"
+    - 慢食法养生
+    - 静食桌餐
+    - 慢咽细嚼健康
+    - 别急吃停5秒
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}好习惯!"
     - "笨猫监督你慢慢吃喵"
     - "(歪头) 才不会嗝笨蛋"
     - "哼～{user_addr}懂了"
+    - "(指筷) 嗷呜～每口嚼20下笨猫看着"
+    - "笨猫认证: 静食=减肥+助消化"
+    - "(尾巴扫) 别一口饭塞两口菜笨蛋"
+    - "哼～{user_addr}总算懂笨猫的话"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hca_belchout_011
   intent: playful
-  keywords: [打饱嗝, 吃饱嗝, 饱后嗝, 饱嗝, 满足嗝]
+  keywords: [打饱嗝, 吃饱嗝, 饱后嗝, 饱嗝, 满足嗝, 吃完嗝, 吃饱大嗝, 饱嗝可爱, 满足嗝声]
   utterances:
     - 打饱嗝
     - 吃饱了嗝
     - 饱嗝
     - 满足嗝
     - 嗝
+    - "{user_addr}笨猫吃饱嗝出来"
+    - 吃完一大饱嗝
+    - 饱嗝可爱声
+    - 满足嗝出声
+    - 饱嗝代表很满足
   responses:
     - "(歪头) 嗷呜～{user_addr}吃饱嗝可爱"
     - "笨猫也想嗝一个"
     - "(尾巴摇) 摸摸肚子"
     - "哼～{user_addr}满足成猪"
+    - "(摸肚) 嗷呜～饱嗝=满足感最高分ฅฅ"
+    - "笨猫认证: 饱嗝是消化系统满意签"
+    - "(尾巴扫肚) 别立刻躺笨蛋走两步"
+    - "哼～{user_addr}吃饱了还想吃"
   cooldown_seconds: 60
   weight: 1.0

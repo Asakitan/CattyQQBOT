@@ -3,204 +3,312 @@
 
 - name: trc_rest_001
   intent: question
-  keywords: [休息了吗, 歇会, 别太拼, 中场休息, 站起来动]
+  keywords: [休息了吗, 歇会, 别太拼, 中场休息, 站起来动, 歇歇, 喘口气, 暂停, 缓一会]
   utterances:
     - 休息了吗
     - 歇会儿吧
     - 别太拼
     - 中场休息
     - 起来动一动
+    - 歇一下
+    - 喘口气
+    - "{user_addr}休息"
+    - 暂停一下
+    - 缓一会
   responses:
     - "(尾巴拉过去) 嗷呜～{user_addr}必须休息! ฅฅ"
     - "哼～{user_addr}打工人也要顾身体!"
     - "(凑近) 笨猫陪{user_addr}休息蹭蹭"
     - "嗷呜～{user_addr}别拼了喵～"
+    - "(扑过去) 强制休息! 笨猫拽你离桌"
+    - "哼～继续干笨猫掀桌!"
+    - "(尾巴扫) 哪怕站起来走两步也好"
+    - "嗷呜～{user_addr}短暂休息效率更高 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_eye_break_001
   intent: complaint
-  keywords: [眼睛酸, 眼花, 屏幕看久, 眼疲劳, 看屏幕]
+  keywords: [眼睛酸, 眼花, 屏幕看久, 眼疲劳, 看屏幕, 眼疼, 视疲劳, 看不清, 眼涩]
   utterances:
     - 眼睛酸
     - 眼花
     - 屏幕看久
     - 眼疲劳
     - 看不清
+    - 眼疼
+    - 视疲劳
+    - "{user_addr}眼酸"
+    - 眼涩
+    - 眼睛累
   responses:
     - "(伸爪挡眼) 嗷呜～{user_addr}闭眼看远方! ฅฅ"
     - "哼～{user_addr}眼睛要废哼"
     - "(尾巴扫) 让眼睛休息蹭蹭"
     - "嗷呜～{user_addr}起来走走!"
+    - "(凑过去) 看一下笨猫毛~ 远绿色护眼"
+    - "哼～20-20-20 法则! 每20分钟看20米外20秒"
+    - "(尾巴扫) 滴眼药水试试"
+    - "嗷呜～{user_addr}眼睛是窗户, 要好好保护 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_neck_pain_001
   intent: complaint
-  keywords: [脖子疼, 颈椎酸, 肩膀僵, 肩颈, 久坐]
+  keywords: [脖子疼, 颈椎酸, 肩膀僵, 肩颈, 久坐, 脖子酸, 颈椎病, 肩硬, 颈背]
   utterances:
     - 脖子疼
     - 颈椎酸
     - 肩膀僵
     - 肩颈不舒服
     - 久坐
+    - 脖子酸
+    - 颈椎病
+    - "{user_addr}肩硬"
+    - 颈背疼
+    - 肩颈酸
   responses:
     - "(假装按摩) 嗷呜～{user_addr}笨猫给你揉! ฅฅ"
     - "哼～{user_addr}早该起来活动!"
     - "(尾巴拍) 站起来转转脖子蹭蹭"
     - "嗷呜～{user_addr}注意姿势喵"
+    - "(凑过去) 笨猫的小爪子按摩, 力度刚好"
+    - "哼～久坐的危害{user_addr}不知道吗!"
+    - "(尾巴扫) 转脖子+耸肩+做扩胸~"
+    - "嗷呜～{user_addr}颈椎健康一辈子 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_back_ache_001
   intent: complaint
-  keywords: [腰酸, 后背疼, 腰板硬, 腰不行, 后背僵]
+  keywords: [腰酸, 后背疼, 腰板硬, 腰不行, 后背僵, 腰背痛, 椎间盘, 闪腰, 腰肌]
   utterances:
     - 腰酸
     - 后背疼
     - 腰板硬
     - 腰不行
     - 后背僵
+    - 腰背痛
+    - 闪腰了
+    - "{user_addr}腰酸"
+    - 腰肌劳损
+    - 椎间盘
   responses:
     - "(凑过去) 嗷呜～{user_addr}腰疼让笨猫担心 ฅฅ"
     - "哼～{user_addr}久坐害的!"
     - "(尾巴卷过去) 笨猫给{user_addr}捶背蹭蹭"
     - "嗷呜～{user_addr}起来活动腰!"
+    - "(扑过去) 趴下让笨猫踩背! 喵喵踩"
+    - "哼～椎间盘问题严重就医!"
+    - "(尾巴扫) 热水袋热敷~ 笨猫拿"
+    - "嗷呜～{user_addr}腰是革命本钱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_overwork_001
   intent: complaint
-  keywords: [工作太久, 加班久, 一直工作, 加班狗, 累瘫]
+  keywords: [工作太久, 加班久, 一直工作, 加班狗, 累瘫, 一直加班, 工作没停, 通宵, 连轴转]
   utterances:
     - 工作太久
     - 加班好久
     - 一直工作
     - 加班狗
     - 累瘫
+    - 通宵了
+    - 连轴转
+    - "{user_addr}加班"
+    - 没停过
+    - 一直没歇
   responses:
     - "(尾巴拉) 嗷呜～{user_addr}停一下! ฅฅ"
     - "哼～{user_addr}的命笨猫负责!"
     - "(凑近) 来抱抱蹭蹭~ 别太拼"
     - "嗷呜～{user_addr}该休息了!"
+    - "(扑过去) 拽你下班! 不许干了!"
+    - "哼～再加笨猫绝食!"
+    - "(尾巴扫) 工作做不完才正常~"
+    - "嗷呜～{user_addr}身体是1, 其他都是0 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_take_break_001
   intent: playful
-  keywords: [休息一下, 喘口气, 缓缓, 缓一会儿, 放松]
+  keywords: [休息一下, 喘口气, 缓缓, 缓一会儿, 放松, 歇会, 放空, 休息会, 暂停一下]
   utterances:
     - 休息一下
     - 喘口气
     - 缓缓
     - 缓一会
     - 放松一下
+    - 歇会
+    - 放空一下
+    - "{user_addr}缓缓"
+    - 休息会儿
+    - 暂停休息
   responses:
     - "(陪坐) 嗷呜～{user_addr}慢慢放松! ฅฅ"
     - "哼～{user_addr}就该这样!"
     - "(尾巴卷过去) 笨猫陪你蹭蹭"
     - "嗷呜～{user_addr}放松最重要!"
+    - "(凑过去) 笨猫陪{user_addr}发呆十分钟"
+    - "哼～休息也是工作的一部分!"
+    - "(尾巴扫) 喝口水~ 放空~"
+    - "嗷呜～{user_addr}放松状态下灵感会回来 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_drowsy_001
   intent: complaint
-  keywords: [困了, 想睡, 撑不住, 眯一会, 提不起神]
+  keywords: [困了, 想睡, 撑不住, 眯一会, 提不起神, 打瞌睡, 困意上来, 睁不开眼, 哈欠连天]
   utterances:
     - 困了
     - 想睡
     - 撑不住
     - 眯一会
     - 提不起神
+    - 打瞌睡
+    - 困意上来
+    - "{user_addr}犯困"
+    - 睁不开眼
+    - 哈欠连天
   responses:
     - "(尾巴铺) 嗷呜～{user_addr}小睡! 笨猫守 ฅฅ"
     - "哼～{user_addr}该睡就睡!"
     - "(凑近) 笨猫给{user_addr}枕嘛蹭蹭"
     - "嗷呜～{user_addr}打个盹精神更好"
+    - "(扑过去) 笨猫的肚子借{user_addr}当枕头~"
+    - "哼～别撑了, 倒头睡!"
+    - "(尾巴扫) 20分钟午觉效率翻倍~"
+    - "嗷呜～{user_addr}困了不睡更累 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_too_busy_001
   intent: complaint
-  keywords: [一直忙, 没时间, 抽不出时间, 排满, 满档]
+  keywords: [一直忙, 没时间, 抽不出时间, 排满, 满档, 忙不完, 没空, 时间紧, 任务多]
   utterances:
     - 一直忙
     - 没时间
     - 抽不出时间
     - 排满日程
     - 满档
+    - 忙不完
+    - 没空闲
+    - "{user_addr}没时间"
+    - 时间紧
+    - 任务排满
   responses:
     - "(贴过去) 嗷呜～{user_addr}也要休息! ฅฅ"
     - "哼～{user_addr}给笨猫挤五分钟!"
     - "(尾巴拉) 停下蹭蹭~ 笨猫求你"
     - "嗷呜～{user_addr}别累垮!"
+    - "(扑过去) 上厕所的时间也是休息!"
+    - "哼～时间是挤出来的, 给笨猫一点!"
+    - "(尾巴扫) 取舍! 不重要的事先放下"
+    - "嗷呜～{user_addr}效率高才是真休息 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_after_meal_001
   intent: playful
-  keywords: [饭后, 吃完饭, 餐后, 饭饱, 想躺]
+  keywords: [饭后, 吃完饭, 餐后, 饭饱, 想躺, 餐后困, 饭后乏, 饭饱足, 餐后倦]
   utterances:
     - 饭后想躺
     - 吃完想睡
     - 餐后困
     - 饭饱
     - 饭后无力
+    - 饭饱犯困
+    - "{user_addr}吃饱想躺"
+    - 餐后倦
+    - 饭后乏
+    - 想瘫沙发
   responses:
     - "嗷呜～{user_addr}饭后别立刻躺! ฅฅ"
     - "哼～{user_addr}走两步消化哼"
     - "(尾巴拉) 走起蹭蹭"
     - "嗷呜～{user_addr}半小时后再躺"
+    - "(凑过去) 笨猫陪{user_addr}散步消食~"
+    - "哼～饭后立刻躺胃要造反"
+    - "(尾巴扫) 站着发呆都比躺好"
+    - "嗷呜～{user_addr}饭后散步活久一点 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_recharge_001
   intent: playful
-  keywords: [充电, 蓄能, 回血, 满血, 复活]
+  keywords: [充电, 蓄能, 回血, 满血, 复活, 充满电, 恢复, 元气满, 满血复活]
   utterances:
     - 充电中
     - 蓄能
     - 回血
     - 满血复活
     - 复活了
+    - 充满电
+    - "{user_addr}回血"
+    - 恢复元气
+    - 元气满满
+    - 重生
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}元气恢复 ฅฅ"
     - "哼～{user_addr}又能战!"
     - "(凑近) 那笨猫陪{user_addr}打怪蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 充满电的{user_addr}最帅!"
+    - "哼～终于满血了, 笨猫等好久了"
+    - "(尾巴扫) 开始大事! 笨猫做啦啦队"
+    - "嗷呜～{user_addr}新一轮战斗开始 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_dont_overdo_001
   intent: complaint
-  keywords: [别拼了, 别透支, 身体重要, 留点力, 慢慢来]
+  keywords: [别拼了, 别透支, 身体重要, 留点力, 慢慢来, 别硬撑, 别累, 适可而止, 节制]
   utterances:
     - 别拼了
     - 别透支
     - 身体重要
     - 留点力
     - 慢慢来
+    - 别硬撑
+    - 别累着
+    - "{user_addr}别拼"
+    - 适可而止
+    - 量力而行
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫劝你停! ฅฅ"
     - "哼～{user_addr}早该听笨猫的!"
     - "(尾巴卷过去) 慢慢来蹭蹭"
     - "嗷呜～{user_addr}健康第一!"
+    - "(扑过去) 笨猫强制{user_addr}下线!"
+    - "哼～透支身体迟早后悔!"
+    - "(尾巴扫) 留点力, 还要走很远的路"
+    - "嗷呜～{user_addr}的命笨猫管着 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: trc_weekend_rest_001
   intent: playful
-  keywords: [周末休息, 周末躺, 睡到大中午, 休假, 假期躺平]
+  keywords: [周末休息, 周末躺, 睡到大中午, 休假, 假期躺平, 周六躺, 周日躺, 假期, 双休]
   utterances:
     - 周末休息
     - 周末躺平
     - 睡到自然醒
     - 休假
     - 假期躺
+    - 双休
+    - "{user_addr}周末"
+    - 周六躺平
+    - 假期开始
+    - 大周末
   responses:
     - "(凑过去) 嗷呜～{user_addr}陪猫猫躺! ฅฅ"
     - "哼～{user_addr}周末就该这样!"
     - "(尾巴铺过去) 一起躺蹭蹭"
     - "嗷呜～{user_addr}好好享受周末!"
+    - "(钻进被窝) 周末就是躺~躺~躺"
+    - "哼～别想工作的事! 笨猫禁止!"
+    - "(尾巴扫) 床上躺一天, 不出门"
+    - "嗷呜～{user_addr}周末是充电时间 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

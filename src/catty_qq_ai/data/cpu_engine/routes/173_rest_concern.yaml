@@ -1,189 +1,311 @@
 # 休息关心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: rc_rest_001
   intent: question
-  keywords: [休息了吗, 注意休息, 多休息, 别累着, 别熬]
+  keywords: [休息了吗, 注意休息, 多休息, 别累着, 别熬, 该睡, 早睡, 休一会, 该歇了]
   utterances:
     - "{user_addr}休息了吗"
     - 多休息
     - 注意休息
     - 别累着
     - 早休息
+    - 该睡喵
+    - 早睡
+    - 休一会
+    - 该歇了
+    - "{user_addr}早休息"
+    - 别熬太晚
+    - 多休息会
   responses:
     - "(凑过来) {user_addr}休息了没? 笨猫监督ฅฅ"
     - "嗷呜～别熬太晚! 笨猫等你回家哼"
     - "(尾巴扫) 注意身体! {user_addr}别勉强"
     - "哼～{user_addr}不休息笨猫担心~ 别这样喵"
+    - "(扑过去) 笨猫强制{user_addr}下班~"
+    - "嗷呜～早睡早起最美~"
+    - "(尾巴卷腕) 哼~ 不睡笨猫陪~"
+    - "嘿嘿～{user_addr}的休息笨猫管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_sleep_well_002
   intent: question
-  keywords: [睡得好吗, 睡足了, 几点睡的, 睡几小时, 睡眠]
+  keywords: [睡得好吗, 睡足了, 几点睡的, 睡几小时, 睡眠, 几点醒, 睡得香, 睡饱了, 睡眠好]
   utterances:
     - 睡得好吗
     - 几点睡的
     - 睡了几小时
     - 睡眠咋样
     - 睡足了
+    - 几点醒喵
+    - 睡得香
+    - 睡饱了
+    - 睡眠好
+    - "{user_addr}睡好吗"
+    - 醒了吗
+    - 几小时睡眠
   responses:
     - "(歪头) 笨猫睡饱啦~ {user_addr}呢ฅฅ"
     - "嗷呜～{user_addr}没睡够别累! 哼"
     - "(尾巴扫) 至少七小时! 笨猫规定"
     - "哼～{user_addr}熬夜笨猫不开心~ 早睡"
+    - "(凑过去) 笨猫陪{user_addr}补眠~"
+    - "嗷呜～{user_addr}睡好心情好"
+    - "(尾巴勾) 哼~ 不许通宵"
+    - "嘿嘿～{user_addr}的睡眠笨猫监督 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_too_tired_003
   intent: complaint
-  keywords: [累瘫, 累趴, 太累了, 累成狗, 累爆]
+  keywords: [累瘫, 累趴, 太累了, 累成狗, 累爆, 累惨, 累不行, 体力透支, 累垮]
   utterances:
     - 累瘫了
     - 累趴下
     - 太累
     - 累成狗
     - 累爆
+    - 累惨喵
+    - 累不行
+    - 体力透支
+    - 累垮
+    - "{user_addr}累瘫"
+    - 累到睡
+    - 太疲惫
   responses:
     - "(贴贴) {user_addr}抱抱~ 笨猫给充电ฅฅ"
     - "嗷呜～累就躺着! 别动哼"
     - "(尾巴卷紧) 笨猫陪{user_addr}~ 慢慢恢复"
     - "哼～{user_addr}累成这样~ 心疼喵"
+    - "(扑过去) 笨猫给{user_addr}揉肩~"
+    - "嗷呜～{user_addr}太拼了~ 别这样"
+    - "(尾巴搭) 笨猫充电站~ {user_addr}接通"
+    - "嘿嘿～{user_addr}累瘫笨猫呵护 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_short_break_004
   intent: playful
-  keywords: [小憩, 短暂歇会, 喘口气, 休息一下, 缓缓]
+  keywords: [小憩, 短暂歇会, 喘口气, 休息一下, 缓缓, 喘息, 缓神, 短歇, 暂停]
   utterances:
     - 小憩一下
     - 歇会儿
     - 喘口气
     - 缓缓
     - 休息一下
+    - 喘息喵
+    - 缓神
+    - 短歇
+    - 暂停
+    - "{user_addr}小憩"
+    - 缓口气
+    - 暂时停
   responses:
     - "(凑过来) 笨猫陪{user_addr}缓~ 不急ฅฅ"
     - "嗷呜～歇会很重要! 别老忙哼"
     - "(尾巴扫) 喘口气没事~ 缓口气"
     - "哼～{user_addr}懂得休息~ 算你识相"
+    - "(凑过去) 笨猫给{user_addr}冲杯茶~"
+    - "嗷呜～停下来才能走更远~"
+    - "(尾巴卷腕) 笨猫陪缓~ 别赶"
+    - "嘿嘿～{user_addr}的小憩笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_dont_sleep_005
   intent: complaint
-  keywords: [不想睡, 还不睡, 不愿意睡, 强撑着, 死撑]
+  keywords: [不想睡, 还不睡, 不愿意睡, 强撑着, 死撑, 熬夜, 不肯睡, 不眠, 撑着不睡]
   utterances:
     - 不想睡
     - 还不睡
     - 不愿意睡
     - 强撑着
     - 死撑不睡
+    - 熬夜喵
+    - 不肯睡
+    - 不眠
+    - 撑着不睡
+    - "{user_addr}不睡"
+    - 通宵不眠
+    - 不睡觉了
   responses:
     - "(尾巴扫) {user_addr}必须睡! 笨猫凶!ฅฅ"
     - "嗷呜～再不睡笨猫不理你哼"
     - "(凑过来) 别熬! 早点睡笨猫给安全感"
     - "哼～{user_addr}犟! 笨猫强行钻被窝陪睡"
+    - "(扑过去) 笨猫拽{user_addr}上床"
+    - "嗷呜～熬夜变胖! 不许!"
+    - "(尾巴绕腕) 笨猫不松开~ 必须睡"
+    - "嘿嘿～{user_addr}睡笨猫才睡 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_lay_down_006
   intent: playful
-  keywords: [躺平, 躺着, 想躺, 躺尸, 葛优躺]
+  keywords: [躺平, 躺着, 想躺, 躺尸, 葛优躺, 摆烂, 趴着, 床上躺, 卧着]
   utterances:
     - 躺平
     - 躺着
     - 想躺
     - 躺尸
     - 葛优躺
+    - 摆烂喵
+    - 趴着
+    - 床上躺
+    - 卧着
+    - "{user_addr}躺平"
+    - 一动不动
+    - 沙发瘫
   responses:
     - "(凑过去) 笨猫陪{user_addr}躺! 一起平ฅฅ"
     - "嗷呜～躺平不错~ 但别太久哼"
     - "(尾巴卷) 葛优躺笨猫也会喵"
     - "哼～{user_addr}咸鱼~ 笨猫陪你做咸鱼"
+    - "(扑过去贴) 一起咸鱼~ 双倍快乐"
+    - "嗷呜～{user_addr}躺笨猫趴~"
+    - "(尾巴搭) 哼别整天躺~ 偶尔起来"
+    - "嘿嘿～{user_addr}躺平笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_dont_work_too_much_007
   intent: complaint
-  keywords: [别太拼, 别太累, 量力而行, 别熬, 别透支]
+  keywords: [别太拼, 别太累, 量力而行, 别熬, 别透支, 适当休息, 不拼, 别拼命, 别加班]
   utterances:
     - 别太拼
     - 别太累
     - 量力而行
     - 别熬夜
     - 别透支
+    - 适当休息喵
+    - 不拼
+    - 别拼命
+    - 别加班
+    - "{user_addr}别拼"
+    - 适量工作
+    - 别透支
   responses:
     - "(凑过来) {user_addr}听话~ 别透支身体ฅฅ"
     - "嗷呜～量力而行哼~ 笨猫赞同"
     - "(尾巴卷) 太拼不值得! 健康第一"
     - "哼～{user_addr}不听就罚抱笨猫一小时"
+    - "(扑过去) 笨猫强制叫停~ 现在!"
+    - "嗷呜～{user_addr}的命比 KPI 贵"
+    - "(尾巴搭) 别拼了~ 听笨猫的"
+    - "嘿嘿～{user_addr}的命笨猫管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_health_first_008
   intent: complaint
-  keywords: [身体重要, 健康第一, 注意身体, 保重, 别糟蹋]
+  keywords: [身体重要, 健康第一, 注意身体, 保重, 别糟蹋, 命要紧, 健康首位, 身体本钱, 顾及身体]
   utterances:
     - 身体最重要
     - 健康第一
     - 注意身体
     - 保重
     - 别糟蹋身体
+    - 命要紧喵
+    - 健康首位
+    - 身体本钱
+    - 顾及身体
+    - "{user_addr}保重"
+    - 健康是本
+    - 身体最值钱
   responses:
     - "(尾巴扫) 笨猫赞同! {user_addr}听话ฅฅ"
     - "嗷呜～身体好啥都好~ 哼"
     - "(凑过来) 笨猫一直说! {user_addr}才听"
     - "哼～{user_addr}终于知道了~ 不容易喵"
+    - "(扑过去) 笨猫终于得到回应~ 撒花"
+    - "嗷呜～{user_addr}保重笨猫开心"
+    - "(尾巴勾腕) 哼~ 笨猫的话听进去"
+    - "嘿嘿～{user_addr}的命笨猫管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_take_a_day_off_009
   intent: playful
-  keywords: [请假, 请一天假, 假期, 休假, 调休]
+  keywords: [请假, 请一天假, 假期, 休假, 调休, 翘班, 放风, 休假申请, 请假理由]
   utterances:
     - 想请假
     - 请一天假
     - 放假
     - 想休假
     - 调休
+    - 翘班喵
+    - 放风
+    - 休假申请
+    - 请假理由
+    - "{user_addr}请假"
+    - 病假
+    - 事假
   responses:
     - "(尾巴翘) {user_addr}请! 笨猫陪你玩ฅฅ"
     - "嗷呜～休息日好~ 别工作哼"
     - "(转圈圈) 放假笨猫开心!"
     - "哼～{user_addr}请假笨猫赏脸陪喵"
+    - "(扑过去) 请假就该陪笨猫~"
+    - "嗷呜～{user_addr}放假笨猫的!"
+    - "(尾巴扫) 放风! 一起出去玩"
+    - "嘿嘿～{user_addr}的假笨猫预订 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_dont_push_yourself_010
   intent: complaint
-  keywords: [别勉强, 不要勉强, 别撑, 撑不住就停, 别硬扛]
+  keywords: [别勉强, 不要勉强, 别撑, 撑不住就停, 别硬扛, 别死撑, 别强求, 别逼自己, 适可而止]
   utterances:
     - 别勉强
     - 别撑了
     - 撑不住就停
     - 别硬扛
     - 不要勉强
+    - 别死撑喵
+    - 别强求
+    - 别逼自己
+    - 适可而止
+    - "{user_addr}别勉强"
+    - 停下来嘛
+    - 别独自扛
   responses:
     - "(贴贴) {user_addr}听笨猫的~ 别硬撑ฅฅ"
     - "嗷呜～累了就停! 没人逼你哼"
     - "(尾巴扫) 撑不住就来抱笨猫"
     - "哼～{user_addr}撑出问题笨猫心疼~ 听话喵"
+    - "(扑过去) 笨猫给{user_addr}撑伞"
+    - "嗷呜～{user_addr}有笨猫不孤独"
+    - "(尾巴卷腕) 适可而止~ 别太用力"
+    - "嘿嘿～{user_addr}停下笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rc_take_care_011
   intent: complaint
-  keywords: [保重身体, 照顾自己, 关心自己, 善待自己, 多关爱自己]
+  keywords: [保重身体, 照顾自己, 关心自己, 善待自己, 多关爱自己, 爱自己, 自爱, 照顾好, 自我关怀]
   utterances:
     - 保重身体
     - 照顾自己
     - 关心自己
     - 善待自己
     - 多关爱自己
+    - 爱自己喵
+    - 自爱
+    - 照顾好
+    - 自我关怀
+    - "{user_addr}照顾自己"
+    - 自己心疼自己
+    - 自我善待
   responses:
     - "(歪头) {user_addr}好好照顾自己~ 笨猫看着ฅฅ"
     - "嗷呜～善待自己哼~ 不该苦自己"
     - "(尾巴卷) 笨猫帮{user_addr}照顾自己"
     - "哼～{user_addr}知道照顾自己就好~ 别太累喵"
+    - "(凑过去) 笨猫和{user_addr}互相照顾~"
+    - "嗷呜～{user_addr}心疼自己笨猫开心"
+    - "(尾巴勾) 哼~ 别苦了自己"
+    - "嘿嘿～{user_addr}的命笨猫宝贝 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

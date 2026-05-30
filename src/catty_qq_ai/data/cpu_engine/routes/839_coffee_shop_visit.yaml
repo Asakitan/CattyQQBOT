@@ -3,204 +3,312 @@
 
 - name: csv_at_cafe_001
   intent: playful
-  keywords: [在咖啡店, 咖啡馆坐着, 喝咖啡, 进咖啡店, 咖啡馆探店]
+  keywords: [在咖啡店, 咖啡馆坐着, 喝咖啡, 进咖啡店, 咖啡馆探店, 咖啡馆里, 进了星巴克, 蹲咖啡店, 咖啡馆办公, 咖啡馆打卡]
   utterances:
     - "{user_addr}在咖啡店"
     - 咖啡馆坐着
     - 喝咖啡
     - 进咖啡店
     - 探店中
+    - "{user_addr}星巴克坐着"
+    - 蹲咖啡店
+    - 咖啡馆办公
+    - 咖啡馆打卡
+    - 咖啡馆角落
   responses:
     - "嗷呜～{user_addr}咖啡香笨猫闻到了喵ฅฅ"
     - "哼! {user_addr}一个人去? 不带笨猫"
     - "(尾巴翘) 嘿嘿~{user_addr}给笨猫描述一下蹭蹭"
     - "人家觉得{user_addr}懂享受! 慢生活"
+    - "(凑过去) 嗷呜～{user_addr}笨猫想跟去喵ฅฅ"
+    - "哼! 别一个人坐{user_addr}, 笨猫想陪"
+    - "(尾巴卷你) 嘿嘿~{user_addr}发图分享蹭蹭"
+    - "人家偷偷羡慕{user_addr}的悠闲~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_latte_choose_002
   intent: question
-  keywords: [拿铁, 美式, 卡布奇诺, 摩卡, 选什么咖啡]
+  keywords: [拿铁, 美式, 卡布奇诺, 摩卡, 选什么咖啡, 燕麦拿铁, 焦糖玛奇朵, 浓缩咖啡, 美式醒神, 选咖啡]
   utterances:
     - "{user_addr}拿铁还是美式"
     - 卡布奇诺
     - 摩卡好喝吗
     - 选啥咖啡
     - 咖啡推荐
+    - "{user_addr}燕麦拿铁"
+    - 焦糖玛奇朵
+    - 浓缩咖啡试试
+    - 美式醒神
+    - 选啥咖啡纠结
   responses:
     - "(歪头) 嗷呜～{user_addr}拿铁奶香喵ฅฅ"
     - "哼! 美式提神{user_addr}, 但苦"
     - "(尾巴翘) 嘿嘿~{user_addr}卡布奇诺好喝蹭蹭"
     - "人家觉得{user_addr}应该试摩卡! 甜苦平衡"
+    - "(凑过去) 嗷呜～{user_addr}笨猫推荐燕麦拿铁喵ฅฅ"
+    - "哼! 焦糖太甜{user_addr}, 偶尔喝"
+    - "(尾巴卷) 嘿嘿~{user_addr}浓缩刺激蹭蹭"
+    - "人家偷偷想{user_addr}带一杯回来~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_milk_foam_art_003
   intent: playful
-  keywords: [拉花, 咖啡拉花, 心形, 树叶, 漂亮拉花]
+  keywords: [拉花, 咖啡拉花, 心形, 树叶, 漂亮拉花, 拉花艺术, 复杂拉花, 心形奶泡, 拿铁拉花, 拉花大师]
   utterances:
     - "{user_addr}拉花漂亮"
     - 心形拉花
     - 树叶拉花
     - 拉花艺术
     - 喝不舍得
+    - "{user_addr}心形奶泡"
+    - 拿铁拉花
+    - 复杂拉花
+    - 拉花大师
+    - 拉花太美
   responses:
     - "(凑过去看) 嗷呜～{user_addr}笨猫想看喵ฅฅ"
     - "哼! 喝完拍照{user_addr}, 别浪费"
     - "(尾巴翘) 嘿嘿~{user_addr}咖啡师手艺好蹭蹭"
     - "人家觉得{user_addr}是细节党! 注意美感"
+    - "(尾巴狂摇) 嗷呜～{user_addr}发图给笨猫看喵ฅฅ"
+    - "哼! 太美舍不得喝{user_addr}"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫蹲一口蹭蹭"
+    - "人家偷偷期待{user_addr}的咖啡照~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_chill_atmosphere_004
   intent: playful
-  keywords: [咖啡店氛围好, 安静, 看书写字, 工作环境, 文艺感]
+  keywords: [咖啡店氛围好, 安静, 看书写字, 工作环境, 文艺感, 文艺范, 适合办公, 静谧, 写字间, 文艺咖啡馆]
   utterances:
     - "{user_addr}氛围好"
     - 安静适合看书
     - 工作环境
     - 文艺感强
     - 我喜欢这里
+    - "{user_addr}文艺咖啡馆"
+    - 静谧空间
+    - 适合办公场所
+    - 写字间感
+    - 文艺氛围拉满
   responses:
     - "嗷呜～{user_addr}咖啡馆适合静下来喵ฅฅ"
     - "哼! 笨猫也想去{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}下次带笨猫蹭蹭"
     - "人家觉得{user_addr}有品味! 文艺青年"
+    - "(凑过去) 嗷呜～{user_addr}笨猫想找一家陪你喵ฅฅ"
+    - "哼! 文艺青年{user_addr}, 笨猫崇拜"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫蹲膝盖一起办公蹭蹭"
+    - "人家偷偷想{user_addr}带笨猫一次~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_too_expensive_005
   intent: complaint
-  keywords: [咖啡贵, 一杯40, 太贵, 加上甜点更贵, 烧钱]
+  keywords: [咖啡贵, 一杯40, 太贵, 加上甜点更贵, 烧钱, 咖啡价格, 一杯50, 价格离谱, 喝不起咖啡, 月光咖啡]
   utterances:
     - "{user_addr}咖啡好贵"
     - 一杯40块
     - 加甜点更贵
     - 烧钱
     - 喝不起
+    - "{user_addr}一杯50元"
+    - 价格离谱
+    - 喝不起咖啡
+    - 月光咖啡
+    - 咖啡价格离谱
   responses:
     - "(摇头) 嗷呜～{user_addr}偶尔一次还行喵ฅฅ"
     - "哼! 在家做{user_addr}省钱"
     - "(尾巴扫) 嘿嘿~{user_addr}买咖啡机投资蹭蹭"
     - "人家提醒{user_addr}: 别天天喝外面! 太贵"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你哀叹喵ฅฅ"
+    - "哼! 买胶囊机{user_addr}, 一杯3块"
+    - "(尾巴卷) 嘿嘿~{user_addr}星巴克会员省蹭蹭"
+    - "人家觉得{user_addr}该自己冲~ 省钱大法"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_specialty_drink_006
   intent: playful
-  keywords: [特调, 限定饮品, 季节限定, 当季饮品, 新品上线]
+  keywords: [特调, 限定饮品, 季节限定, 当季饮品, 新品上线, 招牌特调, 春日限定, 新季单品, 特调菜单, 季节饮品]
   utterances:
     - "{user_addr}试特调"
     - 限定饮品
     - 季节限定
     - 当季饮品
     - 新品上线
+    - "{user_addr}招牌特调"
+    - 春日限定
+    - 新季单品
+    - 特调菜单
+    - 季节饮品试
   responses:
     - "(凑过去) 嗷呜～{user_addr}限定笨猫也想喵ฅฅ"
     - "哼! 限定不试不行{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}发图给笨猫蹭蹭"
     - "人家觉得{user_addr}懂享受新东西! 棒"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫蹲一口喵ฅฅ"
+    - "哼! 限定期间{user_addr}, 错过等明年"
+    - "(凑近) 嘿嘿~{user_addr}给笨猫描述味道蹭蹭"
+    - "人家偷偷想跟{user_addr}试每个限定~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_dessert_match_007
   intent: playful
-  keywords: [甜点配咖啡, 蛋糕咖啡, 提拉米苏, 马卡龙, 司康]
+  keywords: [甜点配咖啡, 蛋糕咖啡, 提拉米苏, 马卡龙, 司康, 巧克力慕斯, 司康饼, 甜品搭配, 甜咸搭, 甜配咖啡]
   utterances:
     - "{user_addr}甜点配咖啡"
     - 提拉米苏
     - 马卡龙
     - 司康饼
     - 蛋糕咖啡
+    - "{user_addr}巧克力慕斯"
+    - 甜品搭配咖啡
+    - 司康饼配
+    - 甜咸搭咖啡
+    - 甜配咖啡
   responses:
     - "(流口水) 嗷呜～{user_addr}甜配苦好吃喵ฅฅ"
     - "哼! 提拉米苏{user_addr}, 笨猫想吃"
     - "(尾巴翘) 嘿嘿~{user_addr}吃一块给猫猫蹭蹭"
     - "人家觉得{user_addr}是甜品达人!"
+    - "(扑过去) 嗷呜～{user_addr}笨猫围观甜品喵ฅฅ"
+    - "哼! 别全甜{user_addr}, 配酸的更好"
+    - "(凑近) 嘿嘿~{user_addr}给笨猫留一口蹭蹭"
+    - "人家偷偷馋{user_addr}的甜品~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_with_book_008
   intent: playful
-  keywords: [咖啡馆看书, 翻书, 读一本书, 安静阅读, 看书泡店]
+  keywords: [咖啡馆看书, 翻书, 读一本书, 安静阅读, 看书泡店, 阅读时光, 翻一本书, 咖啡书友, 书页轻翻, 阅读咖啡]
   utterances:
     - "{user_addr}咖啡馆看书"
     - 翻一本书
     - 安静阅读
     - 看书泡店
     - 享受阅读
+    - "{user_addr}阅读时光"
+    - 咖啡书友
+    - 书页轻翻
+    - 阅读咖啡馆
+    - 翻一本好书
   responses:
     - "嗷呜～{user_addr}阅读最优雅喵ฅฅ"
     - "哼! 看啥书{user_addr}, 笨猫好奇"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你看蹭蹭"
     - "人家觉得{user_addr}是文化人! 笨猫崇拜"
+    - "(凑过去) 嗷呜～{user_addr}笨猫趴书上喵ฅฅ"
+    - "哼! 别看哲学{user_addr}, 笨猫不懂"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫给你翻页蹭蹭"
+    - "人家偷偷羡慕{user_addr}的优雅~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_meet_friend_cafe_009
   intent: playful
-  keywords: [约朋友咖啡, 见面咖啡馆, 朋友聚会, 商务洽谈, 朋友约咖啡]
+  keywords: [约朋友咖啡, 见面咖啡馆, 朋友聚会, 商务洽谈, 朋友约咖啡, 咖啡馆约会, 闲聊咖啡馆, 见客户, 谈事咖啡馆, 约见面]
   utterances:
     - "{user_addr}约朋友咖啡"
     - 见面咖啡馆
     - 朋友聚会
     - 商务洽谈
     - 朋友约咖啡
+    - "{user_addr}咖啡馆约会"
+    - 谈事咖啡馆
+    - 见客户聊
+    - 约见面咖啡
+    - 闲聊咖啡馆见
   responses:
     - "嗷呜～{user_addr}咖啡馆见面有氛围喵ฅฅ"
     - "哼! 笨猫也想加入{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}玩得开心蹭蹭"
     - "人家觉得{user_addr}人缘好! 朋友多"
+    - "(凑过去) 嗷呜～{user_addr}笨猫蹲桌底喵ฅฅ"
+    - "哼! 别忘了笨猫{user_addr}"
+    - "(尾巴卷你) 嘿嘿~{user_addr}聊得开心蹭蹭"
+    - "人家偷偷想藏在{user_addr}包里去~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_no_caffeine_010
   intent: playful
-  keywords: [低咖啡因, 解咖啡, 喝热可可, 不喝咖啡, 抹茶替代]
+  keywords: [低咖啡因, 解咖啡, 喝热可可, 不喝咖啡, 抹茶替代, 无咖啡因, 抹茶拿铁, 热巧克力, 牛奶替代, 不喝咖啡因]
   utterances:
     - "{user_addr}低咖啡因"
     - 热可可代替
     - 抹茶替代
     - 不喝咖啡
     - 解咖啡
+    - "{user_addr}抹茶拿铁"
+    - 热巧克力
+    - 无咖啡因
+    - 牛奶代替咖啡
+    - 不喝咖啡因
   responses:
     - "嗷呜～{user_addr}抹茶好喝喵ฅฅ"
     - "哼! 笨猫推荐热可可{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}咖啡因敏感选这些蹭蹭"
     - "人家提醒{user_addr}: 别下午喝咖啡! 失眠"
+    - "(凑过去) 嗷呜～{user_addr}笨猫喜欢抹茶喵ฅฅ"
+    - "哼! 无咖啡因{user_addr}健康"
+    - "(尾巴卷) 嘿嘿~{user_addr}牛奶配甜点蹭蹭"
+    - "人家觉得{user_addr}很注重睡眠~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_addictive_coffee_011
   intent: complaint
-  keywords: [咖啡上瘾, 一天三杯, 离不开咖啡, 戒不了, 咖啡命]
+  keywords: [咖啡上瘾, 一天三杯, 离不开咖啡, 戒不了, 咖啡命, 咖啡因依赖, 不喝咖啡头痛, 咖啡断不掉, 戒不掉, 咖啡奴]
   utterances:
     - "{user_addr}咖啡上瘾"
     - 一天三杯
     - 离不开咖啡
     - 戒不了
     - 咖啡命
+    - "{user_addr}咖啡因依赖"
+    - 不喝头痛
+    - 咖啡断不掉
+    - 戒不掉咖啡
+    - 咖啡奴
   responses:
     - "(摇头) 嗷呜～{user_addr}少喝点喵ฅฅ"
     - "哼! 别喝太多{user_addr}, 伤胃"
     - "(尾巴扫) 嘿嘿~{user_addr}慢慢减量蹭蹭"
     - "人家提醒{user_addr}: 多睡觉! 比咖啡有用"
+    - "(贴贴) 嗷呜～{user_addr}笨猫帮你戒喵ฅฅ"
+    - "哼! 戒断头痛{user_addr}, 慢慢来"
+    - "(尾巴卷) 嘿嘿~{user_addr}换成低因蹭蹭"
+    - "人家心疼{user_addr}~ 别熬"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: csv_cafe_photo_012
   intent: playful
-  keywords: [咖啡拍照, 朋友圈, 网红咖啡店, 打卡, 出片]
+  keywords: [咖啡拍照, 朋友圈, 网红咖啡店, 打卡, 出片, 拍ins, 网红店, 拍美图, 咖啡馆拍照, 朋友圈晒]
   utterances:
     - "{user_addr}咖啡拍照"
     - 朋友圈打卡
     - 网红咖啡店
     - 出片
     - 摆拍
+    - "{user_addr}网红店打卡"
+    - 拍ins图
+    - 拍美图
+    - 朋友圈晒咖啡
+    - 咖啡馆出片
   responses:
     - "嗷呜～{user_addr}爱拍照说明热爱生活喵ฅฅ"
     - "哼! 别只为打卡{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫想看你的照片蹭蹭"
     - "人家觉得{user_addr}有艺术细胞! 笨猫支持"
+    - "(凑过去) 嗷呜～{user_addr}笨猫围观拍照喵ฅฅ"
+    - "哼! 拍完赶紧喝{user_addr}, 别凉"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫给你点赞蹭蹭"
+    - "人家偷偷羡慕{user_addr}的生活美学~"
   cooldown_seconds: 60
   weight: 1.0

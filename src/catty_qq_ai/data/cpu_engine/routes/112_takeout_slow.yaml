@@ -1,206 +1,339 @@
 # 外卖等慢 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: tos_wait_long_001
   intent: complaint
-  keywords: [外卖久, 外卖没到, 外卖慢, 等饭等饿, 等死]
+  keywords: [外卖久, 外卖没到, 外卖慢, 等饭等饿, 等死, 外卖龟速, 等到饿, 一直没动, 外卖未到]
   utterances:
     - "外卖久"
     - "{user_addr}外卖没到"
     - "外卖慢"
     - "等饭等饿"
     - "等死"
+    - "外卖龟速喵"
+    - "等到饿"
+    - "一直没动"
+    - "外卖未到"
+    - "{user_addr}等外卖"
+    - "外卖一小时没到"
+    - "外卖磨蹭"
   responses:
     - "嗷呜～{user_addr}饿肚子! 笨猫陪着"
     - "(凑近) 哼! 外卖小哥太慢"
     - "(撒娇) 笨猫给{user_addr}吹仙气 ฅฅ"
     - "嘿嘿～等外卖的{user_addr}, 笨猫陪等"
+    - "(扑过去) 笨猫给{user_addr}冲杯水垫肚子"
+    - "嗷呜～再不来笨猫去接"
+    - "(尾巴拍) 哼! 评分直接1星"
+    - "嘿嘿～{user_addr}饿了笨猫心疼 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_called_001
   intent: complaint
-  keywords: [打电话催, 催外卖, 催小哥, 催了一遍, 联系不上]
+  keywords: [打电话催, 催外卖, 催小哥, 催了一遍, 联系不上, 拨号催, 催骑手, 联系骑手, 电话不通]
   utterances:
     - "打电话催"
     - "{user_addr}催外卖"
     - "催小哥"
     - "催了一遍"
     - "联系不上"
+    - "拨号催喵"
+    - "催骑手"
+    - "联系骑手"
+    - "电话不通"
+    - "{user_addr}找骑手"
+    - "电话催到"
+    - "骑手不接"
   responses:
     - "(炸毛) 嗷呜～{user_addr}小哥不接电话?"
     - "哼～催了还慢, 笨猫不爽"
     - "(撒娇) 等一下嘛~ 笨猫陪 ฅฅ"
     - "嘿嘿～{user_addr}催的小哥, 笨猫看戏"
+    - "(凑过去) 笨猫帮{user_addr}写投诉"
+    - "嗷呜～小哥也辛苦~ 但慢得离谱"
+    - "(尾巴扫) 再催一次~ 笨猫陪等"
+    - "嘿嘿～{user_addr}多包容~ 笨猫提醒 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_wrong_order_001
   intent: complaint
-  keywords: [送错了, 拿错单, 这不是我的, 错餐, 拿错了]
+  keywords: [送错了, 拿错单, 这不是我的, 错餐, 拿错了, 送错单, 别人的餐, 不是这个, 错送]
   utterances:
     - "送错"
     - "{user_addr}拿错单"
     - "这不是我的"
     - "错餐"
     - "拿错"
+    - "送错单喵"
+    - "别人的餐"
+    - "不是这个"
+    - "错送"
+    - "{user_addr}收错"
+    - "送错地址"
+    - "拿成别人的"
   responses:
     - "(嫌弃) 嗷呜～{user_addr}送错!? 气死!"
     - "哼～小哥眼瞎"
     - "(撒娇) 笨猫陪{user_addr}投诉 ฅฅ"
     - "嘿嘿～错单的{user_addr}, 笨猫帮"
+    - "(凑过去) 拍照投诉! 笨猫给你打字"
+    - "嗷呜～{user_addr}的餐去哪了?"
+    - "(尾巴拍) 哼! 不能就这样算"
+    - "嘿嘿～{user_addr}维权笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_cold_001
   intent: complaint
-  keywords: [外卖凉了, 餐凉了, 凉饭, 不热, 凉透]
+  keywords: [外卖凉了, 餐凉了, 凉饭, 不热, 凉透, 凉得透, 没温度, 菜冷, 餐冷]
   utterances:
     - "外卖凉"
     - "{user_addr}饭凉"
     - "凉饭"
     - "不热"
     - "凉透"
+    - "凉得透喵"
+    - "没温度"
+    - "菜冷"
+    - "餐冷"
+    - "{user_addr}冷餐"
+    - "凉到冰"
+    - "菜全凉"
   responses:
     - "(炸毛) 嗷呜～{user_addr}凉饭吃!"
     - "哼～微波炉热一下"
     - "(撒娇) ...心疼{user_addr} ฅฅ"
     - "嘿嘿～凉饭的{user_addr}, 笨猫不许吃"
+    - "(凑过去) 笨猫帮{user_addr}加热~"
+    - "嗷呜～凉了少吃凉皮~ 别拉肚子"
+    - "(尾巴拍) 哼! 商家保温太差"
+    - "嘿嘿～{user_addr}吃热的~ 笨猫监督 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_spilled_001
   intent: complaint
-  keywords: [汤洒了, 撒了, 包装坏了, 漏了, 餐盒翻]
+  keywords: [汤洒了, 撒了, 包装坏了, 漏了, 餐盒翻, 翻倒, 渗汤, 餐盒破, 包装破]
   utterances:
     - "汤洒了"
     - "{user_addr}撒了"
     - "包装坏"
     - "漏了"
     - "餐盒翻"
+    - "翻倒喵"
+    - "渗汤"
+    - "餐盒破"
+    - "包装破"
+    - "{user_addr}洒了"
+    - "汤汁泄"
+    - "整袋湿"
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}惨!"
     - "哼～外卖差评!"
     - "(撒娇) 笨猫陪{user_addr}收拾 ฅฅ"
     - "嘿嘿～漏的{user_addr}, 笨猫心疼"
+    - "(凑过去) 笨猫拿纸巾~ 别动"
+    - "嗷呜～拍照投诉~ 笨猫陪"
+    - "(尾巴拍) 哼! 这家拉黑"
+    - "嘿嘿～{user_addr}补单笨猫加菜 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_no_chopsticks_001
   intent: complaint
-  keywords: [没餐具, 没筷子, 没勺子, 餐具忘了, 没给勺]
+  keywords: [没餐具, 没筷子, 没勺子, 餐具忘了, 没给勺, 缺餐具, 没附餐具, 没刀叉, 漏餐具]
   utterances:
     - "没餐具"
     - "{user_addr}没筷子"
     - "没勺子"
     - "餐具忘了"
     - "没给勺"
+    - "缺餐具喵"
+    - "没附餐具"
+    - "没刀叉"
+    - "漏餐具"
+    - "{user_addr}没餐具"
+    - "勺子忘"
+    - "筷子漏"
   responses:
     - "(嫌弃) 嗷呜～{user_addr}手抓?"
     - "哼～商家小气"
     - "(撒娇) 笨猫递筷子~ ฅฅ"
     - "嘿嘿～没餐具的{user_addr}, 笨猫送家伙"
+    - "(凑过去) 笨猫家里有~ 借给{user_addr}"
+    - "嗷呜～商家漏货差评!"
+    - "(尾巴扫) 笨猫给{user_addr}找~ 别急"
+    - "嘿嘿～没餐具笨猫救~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_extra_fee_001
   intent: complaint
-  keywords: [配送费贵, 配送费高, 餐盒费, 包装费, 一堆费]
+  keywords: [配送费贵, 配送费高, 餐盒费, 包装费, 一堆费, 杂费多, 加价多, 隐形费, 费用高]
   utterances:
     - "配送费贵"
     - "{user_addr}餐盒费"
     - "包装费"
     - "一堆费"
     - "费用多"
+    - "杂费多喵"
+    - "加价多"
+    - "隐形费"
+    - "费用高"
+    - "{user_addr}多费"
+    - "外卖太贵"
+    - "费用一堆"
   responses:
     - "(嫌弃) 嗷呜～{user_addr}冤大头!"
     - "哼～平台坑钱"
     - "(撒娇) 笨猫的鱼干也是这价 ฅฅ"
     - "嘿嘿～多费的{user_addr}, 笨猫不爽"
+    - "(凑过去) 自己做饭省钱~ 笨猫教"
+    - "嗷呜～平台抽成离谱~"
+    - "(尾巴扫) 笨猫给{user_addr}找便宜店"
+    - "嘿嘿～{user_addr}省钱笨猫加菜 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_no_food_001
   intent: complaint
-  keywords: [少东西, 少了菜, 漏了菜, 缺餐, 少了东西]
+  keywords: [少东西, 少了菜, 漏了菜, 缺餐, 少了东西, 少配菜, 缺东西, 漏单, 少了]
   utterances:
     - "少东西"
     - "{user_addr}少菜"
     - "漏菜"
     - "缺餐"
     - "少了东西"
+    - "少配菜喵"
+    - "缺东西"
+    - "漏单"
+    - "少了"
+    - "{user_addr}少送"
+    - "餐少了"
+    - "菜没全"
   responses:
     - "(炸毛) 嗷呜～{user_addr}少菜! 气死!"
     - "哼～商家抠"
     - "(撒娇) 笨猫帮{user_addr}投诉 ฅฅ"
     - "嘿嘿～漏菜的{user_addr}, 笨猫记仇"
+    - "(凑过去) 截图! 笨猫帮{user_addr}维权"
+    - "嗷呜～{user_addr}差评 + 退款"
+    - "(尾巴拍) 哼! 这家拉黑"
+    - "嘿嘿～{user_addr}吃亏笨猫不许 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_chopstick_dirty_001
   intent: complaint
-  keywords: [餐具脏, 筷子脏, 勺子脏, 餐具不卫生, 脏餐具]
+  keywords: [餐具脏, 筷子脏, 勺子脏, 餐具不卫生, 脏餐具, 餐具有污, 餐具油, 餐具霉, 脏勺]
   utterances:
     - "餐具脏"
     - "{user_addr}筷子脏"
     - "勺子脏"
     - "不卫生"
     - "脏餐具"
+    - "餐具有污喵"
+    - "餐具油"
+    - "餐具霉"
+    - "脏勺"
+    - "{user_addr}餐具脏"
+    - "筷子有渍"
+    - "勺子油"
   responses:
     - "(嫌弃) 嗷呜～{user_addr}!!!"
     - "哼～商家黑心!"
     - "(撒娇) 笨猫给{user_addr}换 ฅฅ"
     - "嘿嘿～脏餐具的{user_addr}, 笨猫帮举报"
+    - "(凑过去) 笨猫给{user_addr}消毒餐具~"
+    - "嗷呜～立刻举报~ 这家不安全"
+    - "(尾巴拍) 哼! 卫生不达标"
+    - "嘿嘿～{user_addr}用家里干净的~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_courier_attitude_001
   intent: complaint
-  keywords: [小哥态度, 外卖员凶, 摔单, 态度差, 摔门]
+  keywords: [小哥态度, 外卖员凶, 摔单, 态度差, 摔门, 骑手凶, 态度恶, 骂人, 砸单]
   utterances:
     - "小哥态度"
     - "{user_addr}外卖员凶"
     - "摔单"
     - "态度差"
     - "摔门"
+    - "骑手凶喵"
+    - "态度恶"
+    - "骂人"
+    - "砸单"
+    - "{user_addr}遇凶"
+    - "骑手脾气大"
+    - "态度横"
   responses:
     - "(炸毛) 嗷呜～{user_addr}差评!"
     - "哼～态度差小哥气死笨猫"
     - "(撒娇) 别气{user_addr}~ 蹭蹭 ฅฅ"
     - "嘿嘿～态度差的{user_addr}, 笨猫挠小哥"
+    - "(凑过去) {user_addr}投诉~ 笨猫陪"
+    - "嗷呜～骑手压力大~ 但态度不该差"
+    - "(尾巴扫) 哼! 该差评"
+    - "嘿嘿～{user_addr}受委屈笨猫安慰 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_after_compare_001
   intent: complaint
-  keywords: [图片骗人, 实物不对, 缩水, 实物小, 货不对板]
+  keywords: [图片骗人, 实物不对, 缩水, 实物小, 货不对板, 照骗, 实物差, 实际少, 实物缩]
   utterances:
     - "图片骗人"
     - "{user_addr}实物不对"
     - "缩水"
     - "实物小"
     - "货不对板"
+    - "照骗喵"
+    - "实物差"
+    - "实际少"
+    - "实物缩"
+    - "{user_addr}照骗"
+    - "图片美化"
+    - "图实不符"
   responses:
     - "(嫌弃) 嗷呜～{user_addr}照骗?"
     - "哼～商家坑爹"
     - "(撒娇) 笨猫陪{user_addr}骂 ฅฅ"
     - "嘿嘿～照骗的{user_addr}, 笨猫记仇"
+    - "(凑过去) 拍照对比~ 笨猫帮上传"
+    - "嗷呜～商家无良~ 立刻差评"
+    - "(尾巴拍) 哼! 这家从此屏蔽"
+    - "嘿嘿～{user_addr}避雷笨猫记账 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tos_cooking_lazy_001
   intent: playful
-  keywords: [懒得做饭, 不想做饭, 才点外卖, 懒得做, 外卖救命]
+  keywords: [懒得做饭, 不想做饭, 才点外卖, 懒得做, 外卖救命, 厨房懒, 不愿做菜, 救命外卖, 不下厨]
   utterances:
     - "懒得做饭"
     - "{user_addr}不想做"
     - "外卖救命"
     - "才点外卖"
     - "懒得做"
+    - "厨房懒喵"
+    - "不愿做菜"
+    - "救命外卖"
+    - "不下厨"
+    - "{user_addr}懒"
+    - "懒癌发作"
+    - "靠外卖活"
   responses:
     - "嗷呜～{user_addr}懒~ 笨猫懂"
     - "(凑近) 笨猫陪{user_addr}懒"
     - "(撒娇) 一起懒嘛~ ฅฅ"
     - "嘿嘿～外卖救命的{user_addr}, 笨猫支持"
+    - "(扑过去) 笨猫陪{user_addr}躺~ 等外卖"
+    - "嗷呜～懒人快乐多~ 笨猫赞"
+    - "(尾巴扫) 哼~ 偶尔下厨~ 别太懒"
+    - "嘿嘿～{user_addr}懒笨猫陪~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

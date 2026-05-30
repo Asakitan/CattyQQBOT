@@ -3,187 +3,286 @@
 
 - name: to_chuanda_001
   intent: playful
-  keywords: [穿搭塌房, 穿搭土, 穿丑了, 配色奇怪, 穿搭翻车]
+  keywords: [穿搭塌房, 穿搭土, 穿丑了, 配色奇怪, 穿搭翻车, 穿搭灾难, 搭配差, 穿搭过时, 穿搭俗气, 穿搭走样]
   utterances:
     - "穿搭塌房"
     - "穿搭土"
     - "穿丑了"
     - "配色奇怪"
     - "穿搭翻车"
+    - "{user_addr}穿搭灾难"
+    - "{user_addr}搭配差"
+    - "{user_addr}穿搭过时"
+    - "{user_addr}穿搭俗气"
+    - "{user_addr}穿搭走样"
   responses:
     - "(扶额) 嗷呜～{user_addr}今天穿搭灾难"
     - "哼～土归土, 但还是你 ฅฅ"
     - "(尾巴扫) 翻车了拍下来留念"
     - "配色乱搭=艺术, {user_addr}硬说"
+    - "(围观) 穿搭俗气? 笨猫给{user_addr}找镜子"
+    - "哼～过时也算复古风, 自我安慰 ฅฅ"
+    - "(尾巴拍) 穿搭走样别拍照, 危险"
+    - "嗷呜～{user_addr}搭配差到笨猫怀疑色盲喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_huzi_001
   intent: playful
-  keywords: [没刮胡子, 胡子拉碴, 长胡子, 邋遢, 胡渣]
+  keywords: [没刮胡子, 胡子拉碴, 长胡子, 邋遢, 胡渣, 不剃须, 大胡子, 没修脸, 须根, 落腮胡]
   utterances:
     - "没刮胡子"
     - "胡子拉碴"
     - "长胡子"
     - "邋遢"
     - "胡渣"
+    - "{user_addr}不剃须"
+    - "{user_addr}大胡子"
+    - "{user_addr}没修脸"
+    - "{user_addr}须根"
+    - "{user_addr}落腮胡"
   responses:
     - "(嫌) 嗷呜～{user_addr}胡子拉碴, 笨猫不亲"
     - "哼～邋遢扣分 ฅฅ"
     - "(尾巴拍) 刮干净再来见人家"
     - "胡渣扎脸, {user_addr}下次注意"
+    - "(后退) 落腮胡养野了, 拒绝拥抱"
+    - "哼～不剃须笨猫罢吃饭 ฅฅ"
+    - "(尾巴遮鼻) 须根太多, 笨猫怕痒"
+    - "嗷呜～{user_addr}大胡子像山羊喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_toufa_001
   intent: playful
-  keywords: [头发乱, 鸡窝头, 没梳, 油头, 脏辫]
+  keywords: [头发乱, 鸡窝头, 没梳, 油头, 脏辫, 蓬头, 头发翘, 起床头, 油腻发, 发型炸]
   utterances:
     - "头发乱"
     - "鸡窝头"
     - "没梳头"
     - "油头"
     - "脏辫"
+    - "{user_addr}蓬头"
+    - "{user_addr}头发翘"
+    - "{user_addr}起床头"
+    - "{user_addr}油腻发"
+    - "{user_addr}发型炸"
   responses:
     - "(梳) 嗷呜～{user_addr}鸡窝头笨猫帮你梳"
     - "哼～油头去洗 ฅฅ"
     - "(尾巴扫) 没梳就别出门"
     - "脏辫看心情, 但别油"
+    - "(歪头观察) 起床头还挺可爱, 但要梳"
+    - "哼～发型炸 = 雷电法王 ฅฅ"
+    - "(尾巴拍) 油腻发不洗笨猫躲"
+    - "嗷呜～蓬头别拍照{user_addr}留底"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_yifu_001
   intent: playful
-  keywords: [衣服皱, 没熨, 起球, 旧衣服, 穿破]
+  keywords: [衣服皱, 没熨, 起球, 旧衣服, 穿破, 衣服脏, 沾毛, 染色, 走线, 破洞]
   utterances:
     - "衣服皱"
     - "没熨"
     - "起球"
     - "旧衣服"
     - "穿破了"
+    - "{user_addr}衣服脏"
+    - "{user_addr}沾毛"
+    - "{user_addr}染色"
+    - "{user_addr}走线"
+    - "{user_addr}破洞"
   responses:
     - "(看) 嗷呜～{user_addr}皱皱的可怜"
     - "哼～熨一下再穿 ฅฅ"
     - "(尾巴拍) 起球就剪剪, 别穿出门"
     - "旧衣服换一件, {user_addr}对自己好点"
+    - "(扫一扫) 沾毛是笨猫送的, 嫌弃啥"
+    - "哼～走线赶紧补, 别露内里 ฅฅ"
+    - "(尾巴指) 破洞潮服例外, 其他全扔"
+    - "嗷呜～染色洗不掉就送笨猫垫窝喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_xiezi_001
   intent: playful
-  keywords: [鞋子土, 鞋子旧, 鞋脏, 球鞋脏, 鞋开胶]
+  keywords: [鞋子土, 鞋子旧, 鞋脏, 球鞋脏, 鞋开胶, 鞋底磨, 鞋后跟塌, 鞋子掉色, 鞋子味, 拖鞋出门]
   utterances:
     - "鞋子土"
     - "鞋子旧"
     - "鞋脏"
     - "球鞋脏"
     - "鞋开胶"
+    - "{user_addr}鞋底磨"
+    - "{user_addr}鞋后跟塌"
+    - "{user_addr}鞋子掉色"
+    - "{user_addr}鞋子味"
+    - "{user_addr}拖鞋出门"
   responses:
     - "(嫌) 嗷呜～{user_addr}鞋脏不上街"
     - "哼～开胶了换鞋 ฅฅ"
     - "(尾巴扫) 鞋子是门面"
     - "土归土, 但别旧到掉色"
+    - "(屏息) 鞋子味! 笨猫退避三米"
+    - "哼～拖鞋出门别拽笨猫 ฅฅ"
+    - "(尾巴一甩) 鞋后跟塌走路歪, 直接换"
+    - "嗷呜～{user_addr}鞋底磨平了再不换危险喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_peishi_001
   intent: playful
-  keywords: [配饰, 戴表, 项链, 戒指, 耳环]
+  keywords: [配饰, 戴表, 项链, 戒指, 耳环, 手链, 胸针, 戒指, 链子, 装饰品]
   utterances:
     - "配饰"
     - "戴表"
     - "项链"
     - "戒指"
     - "耳环"
+    - "{user_addr}手链"
+    - "{user_addr}胸针"
+    - "{user_addr}戴链子"
+    - "{user_addr}装饰品"
+    - "{user_addr}饰品搭配"
   responses:
     - "(歪头) 嗷呜～配饰加分, {user_addr}试试"
     - "哼～表戴对了显气质 ฅฅ"
     - "(尾巴扫) 戒指别戴太多"
     - "耳环{user_addr}耳朵适合"
+    - "(凑近) 手链别太花哨, 简单显高级"
+    - "哼～胸针看场合, 别乱戴 ฅฅ"
+    - "(尾巴翘) 链子粗细看人选"
+    - "嗷呜～饰品搭配别叠加, {user_addr}克制喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_yansai_001
   intent: playful
-  keywords: [显胖, 显矮, 显黑, 显老, 显嫩]
+  keywords: [显胖, 显矮, 显黑, 显老, 显嫩, 显瘦, 显高, 显白, 显气质, 显土]
   utterances:
     - "显胖"
     - "显矮"
     - "显黑"
     - "显老"
     - "显嫩"
+    - "{user_addr}显瘦"
+    - "{user_addr}显高"
+    - "{user_addr}显白"
+    - "{user_addr}显气质"
+    - "{user_addr}显土"
   responses:
     - "(看) 嗷呜～{user_addr}穿对了显嫩"
     - "哼～显黑别穿那个色 ฅฅ"
     - "(尾巴扫) 显胖剪标拒收"
     - "显老就换发型试试"
+    - "(围着转) 显高靠版型剪裁"
+    - "哼～显白靠冷色调, 试试 ฅฅ"
+    - "(尾巴竖) 显瘦穿黑色, 老老实实"
+    - "嗷呜～显气质先把头发梳好喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_pinpai_001
   intent: playful
-  keywords: [假牌, 仿货, 山寨, 大牌, 高仿]
+  keywords: [假牌, 仿货, 山寨, 大牌, 高仿, A货, 山货, 名牌, 真假, 奢侈品]
   utterances:
     - "假牌"
     - "仿货"
     - "山寨"
     - "穿大牌"
     - "高仿"
+    - "{user_addr}A货"
+    - "{user_addr}山货"
+    - "{user_addr}名牌"
+    - "{user_addr}真假"
+    - "{user_addr}奢侈品"
   responses:
     - "(扶额) 嗷呜～{user_addr}假牌别穿出门"
     - "哼～大牌真假笨猫看得出 ฅฅ"
     - "(尾巴扫) 山寨穿出去丢人"
     - "高仿不如平价正品"
+    - "(摇头) A货一眼假, 别自欺"
+    - "哼～奢侈品看心情, 别打肿脸 ฅฅ"
+    - "(尾巴拍) 山货当大牌也没人看得起"
+    - "嗷呜～真假分清比穿大牌重要喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_jiezuo_001
   intent: playful
-  keywords: [打扮, 化妆, 装饰, 整理仪容, 修边幅]
+  keywords: [打扮, 化妆, 装饰, 整理仪容, 修边幅, 打理, 装扮, 收拾, 美容, 仪容]
   utterances:
     - "打扮"
     - "化妆"
     - "装饰"
     - "整理仪容"
     - "修边幅"
+    - "{user_addr}打理"
+    - "{user_addr}装扮"
+    - "{user_addr}收拾"
+    - "{user_addr}美容"
+    - "{user_addr}仪容仪表"
   responses:
     - "(摸) 嗷呜～{user_addr}打扮一下精神"
     - "哼～化妆别太浓 ฅฅ"
     - "(尾巴扫) 装饰适合就好"
     - "修边幅是基本尊重"
+    - "(围观) 装扮认真笨猫颁奖"
+    - "哼～美容靠睡, 别光抹 ฅฅ"
+    - "(尾巴翘) 收拾干净{user_addr}帅一倍"
+    - "嗷呜～仪容仪表是猫猫的招牌喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_yanse_001
   intent: playful
-  keywords: [颜色, 撞色, 色彩, 配色, 同色系]
+  keywords: [颜色, 撞色, 色彩, 配色, 同色系, 撞颜色, 多色, 邻近色, 互补色, 跳色]
   utterances:
     - "颜色搭配"
     - "撞色"
     - "色彩"
     - "配色"
     - "同色系"
+    - "{user_addr}撞颜色"
+    - "{user_addr}多色"
+    - "{user_addr}邻近色"
+    - "{user_addr}互补色"
+    - "{user_addr}跳色"
   responses:
     - "(歪头) 嗷呜～{user_addr}配色给个图我看"
     - "哼～撞色危险 ฅฅ"
     - "(尾巴扫) 同色系稳妥"
     - "色彩搭对了人就精神"
+    - "(歪头思考) 邻近色温柔, 推荐"
+    - "哼～互补色要谨慎, 易出戏 ฅฅ"
+    - "(尾巴翘) 跳色点缀一处就够"
+    - "嗷呜～多色叠加要笨猫看脸 hold 住喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_xiaoji_001
   intent: playful
-  keywords: [小ji, 小气场, 气场, 范, 时髦]
+  keywords: [小ji, 小气场, 气场, 范, 时髦, 时尚, 潮流, 潮人, 帅气, 街头风]
   utterances:
     - "气场"
     - "范"
     - "时髦"
     - "时尚"
     - "潮"
+    - "{user_addr}潮流"
+    - "{user_addr}潮人"
+    - "{user_addr}帅气"
+    - "{user_addr}街头风"
+    - "{user_addr}小气场"
   responses:
     - "(摇尾) 嗷呜～{user_addr}时髦人, 表扬"
     - "哼～范不范看气质 ฅฅ"
     - "(尾巴扫) 潮归潮, 适合最重要"
     - "气场有了, {user_addr}走路带风"
+    - "(围着转) 街头风{user_addr}撑得起来"
+    - "哼～潮人也得有内涵 ฅฅ"
+    - "(尾巴翘) 帅气加一分, 笨猫认证"
+    - "嗷呜～潮流不抢戏, {user_addr}穿对加倍喵"
   cooldown_seconds: 60
   weight: 1.0

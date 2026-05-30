@@ -3,187 +3,298 @@
 
 - name: gym_skip_001
   intent: complaint
-  keywords: [不想去健身房, 健身懒, 又请假, 跳过训练, 翘课]
+  keywords: [不想去健身房, 健身懒, 又请假, 跳过训练, 翘课, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 不想去健身
-    - 健身房懒得去
-    - 又请假
-    - 跳过今天
-    - 翘了
+    - "不想去健身"
+    - "健身房懒得去"
+    - "又请假"
+    - "跳过今天"
+    - "翘了"
+    - "{user_addr}笨猫陪我聊不想去健身房"
+    - "{user_addr}不想去健身房咋整"
+    - "{user_addr}你也不想去健身房吗"
+    - "不想去健身房笑死"
+    - "不想去健身房真的离谱"
+    - "我想说不想去健身房"
   responses:
     - "(歪头) 嗷呜～{user_addr}又躲懒 ฅฅ"
     - "哼～{user_addr}今天必须去喵"
     - "(尾巴拍) 笨猫陪你出门蹭蹭{user_addr}"
     - "{user_addr}不去笨猫罚你嗷呜～"
+    - "(扁嘴) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～不想去健身房真的烦死人家了"
+    - "(揉眼睛) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_sore_001
   intent: complaint
-  keywords: [肌肉酸, 浑身酸, 肌肉痛, 起不来, 抬不起]
+  keywords: [肌肉酸, 浑身酸, 肌肉痛, 起不来, 抬不起, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 肌肉酸
-    - 浑身痛
-    - 肌肉酸痛
-    - 抬不起手
-    - 起不来床
+    - "肌肉酸"
+    - "浑身痛"
+    - "肌肉酸痛"
+    - "抬不起手"
+    - "起不来床"
+    - "我想说肌肉酸"
+    - "肌肉酸笑死"
+    - "{user_addr}你也肌肉酸吗"
+    - "肌肉酸真的离谱"
+    - "{user_addr}肌肉酸咋整"
+    - "{user_addr}笨猫陪我聊肌肉酸"
   responses:
     - "(摸头) 嗷呜～{user_addr}揉揉 ฅฅ"
     - "哼～{user_addr}练太狠喵, 下次量力"
     - "(尾巴卷) 笨猫陪你拉伸蹭蹭{user_addr}"
     - "{user_addr}泡热水缓解嗷呜～"
+    - "(瘫倒) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～肌肉酸真的烦死人家了"
+    - "(皱眉) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_lazy_001
   intent: complaint
-  keywords: [今天累, 工作累, 没力气, 提不起劲, 加班完]
+  keywords: [今天累, 工作累, 没力气, 提不起劲, 加班完, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 今天太累
-    - 工作累炸
-    - 没力气
-    - 提不起劲
-    - 加班回来了
+    - "今天太累"
+    - "工作累炸"
+    - "没力气"
+    - "提不起劲"
+    - "加班回来了"
+    - "今天累笑死"
+    - "我想说今天累"
+    - "{user_addr}今天累咋整"
+    - "今天累真的离谱"
+    - "{user_addr}笨猫陪我聊今天累"
+    - "{user_addr}你也今天累吗"
   responses:
     - "(贴脸) 嗷呜～{user_addr}歇歇吧 ฅฅ"
     - "哼～{user_addr}累了别硬来喵"
     - "(尾巴绕过) 一天不练OK蹭蹭{user_addr}"
     - "{user_addr}明天加油嗷呜～"
+    - "(叹气) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～今天累真的烦死人家了"
+    - "(皱眉) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_excuse_001
   intent: complaint
-  keywords: [借口, 太忙, 没时间, 下雨, 出门麻烦]
+  keywords: [借口, 太忙, 没时间, 下雨, 出门麻烦, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 太忙没时间
-    - 下雨不去
-    - 出门麻烦
-    - 借口多
-    - 没空
+    - "太忙没时间"
+    - "下雨不去"
+    - "出门麻烦"
+    - "借口多"
+    - "没空"
+    - "{user_addr}笨猫陪我聊借口"
+    - "{user_addr}你也借口吗"
+    - "{user_addr}借口咋整"
+    - "借口笑死"
+    - "借口真的离谱"
+    - "我想说借口"
   responses:
     - "(扯袖子) 嗷呜～{user_addr}找借口 ฅฅ"
     - "哼～{user_addr}笨猫识破你喵"
     - "(尾巴拍) 找借口的小废物蹭蹭{user_addr}"
     - "{user_addr}下次别说了嗷呜～"
+    - "(叹气) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～借口真的烦死人家了"
+    - "(蜷成团) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_diet_break_001
   intent: complaint
-  keywords: [偷吃了, 破戒, 减脂破功, 嘴馋, 一吃就完]
+  keywords: [偷吃了, 破戒, 减脂破功, 嘴馋, 一吃就完, 偷吃, 真的, 好烦, 好喜欢]
   utterances:
-    - 偷吃了
-    - 破戒
-    - 减脂破功
-    - 嘴馋
-    - 一吃就完
+    - "偷吃了"
+    - "破戒"
+    - "减脂破功"
+    - "嘴馋"
+    - "一吃就完"
+    - "偷吃了笑死"
+    - "{user_addr}偷吃了咋整"
+    - "{user_addr}笨猫陪我聊偷吃了"
+    - "偷吃了真的离谱"
+    - "{user_addr}你也偷吃了吗"
+    - "我想说偷吃了"
   responses:
     - "(摸头) 嗷呜～{user_addr}承认就好 ฅฅ"
     - "哼～{user_addr}下次别破戒喵"
     - "(尾巴卷) 破一次没事蹭蹭{user_addr}"
     - "{user_addr}明天补回来嗷呜～"
+    - "(尾巴搭) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～偷吃了真的烦死人家了"
+    - "(扁嘴) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_yoga_001
   intent: playful
-  keywords: [瑜伽, 拉伸, 普拉提, 柔韧, 体态]
+  keywords: [瑜伽, 拉伸, 普拉提, 柔韧, 体态, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 想练瑜伽
-    - 拉伸放松
-    - 普拉提
-    - 改善体态
-    - 增加柔韧
+    - "想练瑜伽"
+    - "拉伸放松"
+    - "普拉提"
+    - "改善体态"
+    - "增加柔韧"
+    - "{user_addr}瑜伽咋整"
+    - "{user_addr}你也瑜伽吗"
+    - "{user_addr}笨猫陪我聊瑜伽"
+    - "瑜伽真的离谱"
+    - "我想说瑜伽"
+    - "瑜伽笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}舒展 ฅฅ"
     - "哼～{user_addr}瑜伽好选择喵"
     - "(尾巴卷) 笨猫一起练蹭蹭{user_addr}"
     - "{user_addr}笨猫天生柔软嗷呜～"
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～瑜伽才不让{user_addr}独享"
+    - "(凑头) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_running_001
   intent: playful
-  keywords: [跑步, 晨跑, 夜跑, 公园跑步, 跑5公里]
+  keywords: [跑步, 晨跑, 夜跑, 公园跑步, 跑5公里, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 跑步
-    - 晨跑去
-    - 夜跑
-    - 公园跑
-    - 跑5公里
+    - "跑步"
+    - "晨跑去"
+    - "夜跑"
+    - "公园跑"
+    - "跑5公里"
+    - "我想说跑步"
+    - "跑步笑死"
+    - "{user_addr}笨猫陪我聊跑步"
+    - "{user_addr}跑步咋整"
+    - "{user_addr}你也跑步吗"
+    - "跑步真的离谱"
   responses:
     - "(蹦) 嗷呜～{user_addr}加油 ฅฅ"
     - "哼～{user_addr}慢慢来喵"
     - "(尾巴翘) 笨猫云监督蹭蹭{user_addr}"
     - "{user_addr}注意膝盖嗷呜～"
+    - "(贴贴) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～跑步才不让{user_addr}独享"
+    - "(尾巴摇摇) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_weight_001
   intent: complaint
-  keywords: [体重涨了, 称重, 长了2斤, 体脂率, 不敢上秤]
+  keywords: [体重涨了, 称重, 长了2斤, 体脂率, 不敢上秤, 体重涨, 真的, 好烦, 好喜欢]
   utterances:
-    - 体重涨了
-    - 长了2斤
-    - 称重
-    - 体脂率高
-    - 不敢上秤
+    - "体重涨了"
+    - "长了2斤"
+    - "称重"
+    - "体脂率高"
+    - "不敢上秤"
+    - "我想说体重涨了"
+    - "{user_addr}你也体重涨了吗"
+    - "体重涨了真的离谱"
+    - "体重涨了笑死"
+    - "{user_addr}笨猫陪我聊体重涨了"
+    - "{user_addr}体重涨了咋整"
   responses:
     - "(摸头) 嗷呜～{user_addr}没事的 ฅฅ"
     - "哼～{user_addr}水分喵, 别慌"
     - "(尾巴卷) 一斤而已蹭蹭{user_addr}"
     - "{user_addr}笨猫不嫌弃你嗷呜～"
+    - "(瘫倒) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～体重涨了真的烦死人家了"
+    - "(瘫倒) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_gear_001
   intent: playful
-  keywords: [瑜伽垫, 哑铃, 健身服, 装备, 弹力带]
+  keywords: [瑜伽垫, 哑铃, 健身服, 装备, 弹力带, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 买瑜伽垫
-    - 入了哑铃
-    - 健身服
-    - 装备齐全
-    - 弹力带
+    - "买瑜伽垫"
+    - "入了哑铃"
+    - "健身服"
+    - "装备齐全"
+    - "弹力带"
+    - "瑜伽垫真的离谱"
+    - "{user_addr}瑜伽垫咋整"
+    - "{user_addr}你也瑜伽垫吗"
+    - "我想说瑜伽垫"
+    - "{user_addr}笨猫陪我聊瑜伽垫"
+    - "瑜伽垫笑死"
   responses:
     - "(凑过去) 嗷呜～{user_addr}装备党 ฅฅ"
     - "哼～{user_addr}买完用得勤喵"
     - "(尾巴卷) 笨猫监督你蹭蹭{user_addr}"
     - "{user_addr}别只买不练嗷呜～"
+    - "(蹭蹭) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～瑜伽垫才不让{user_addr}独享"
+    - "(眼睛亮) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_partner_001
   intent: playful
-  keywords: [搭子, 健身搭子, 一起练, 互相监督, 找伴]
+  keywords: [搭子, 健身搭子, 一起练, 互相监督, 找伴, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 找健身搭子
-    - 互相监督
-    - 一起练
-    - 我陪你
-    - 招搭子
+    - "找健身搭子"
+    - "互相监督"
+    - "一起练"
+    - "我陪你"
+    - "招搭子"
+    - "搭子笑死"
+    - "搭子真的离谱"
+    - "{user_addr}你也搭子吗"
+    - "{user_addr}笨猫陪我聊搭子"
+    - "{user_addr}搭子咋整"
+    - "我想说搭子"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫当搭子 ฅฅ"
     - "哼～{user_addr}人家督促你喵"
     - "(凑过去) 笨猫24小时在线蹭蹭{user_addr}"
     - "{user_addr}打卡找笨猫嗷呜～"
+    - "(蹭蹭) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～搭子才不让{user_addr}独享"
+    - "(眼睛亮) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gym_progress_001
   intent: playful
-  keywords: [练出腹肌, 瘦了, 体型变了, 看到变化, 坚持有效]
+  keywords: [练出腹肌, 瘦了, 体型变了, 看到变化, 坚持有效, 瘦, 体型变, 真的, 好烦]
   utterances:
-    - 瘦了
-    - 体型变了
-    - 看到效果
-    - 练出腹肌
-    - 坚持有效
+    - "瘦了"
+    - "体型变了"
+    - "看到效果"
+    - "练出腹肌"
+    - "坚持有效"
+    - "{user_addr}你也练出腹肌吗"
+    - "练出腹肌笑死"
+    - "我想说练出腹肌"
+    - "{user_addr}笨猫陪我聊练出腹肌"
+    - "练出腹肌真的离谱"
+    - "{user_addr}练出腹肌咋整"
   responses:
     - "(蹦) 嗷呜～{user_addr}好棒 ฅฅ"
     - "哼～{user_addr}笨猫崇拜你喵"
     - "(尾巴翘) 笨猫鼓掌蹭蹭{user_addr}"
     - "{user_addr}坚持就是赢家嗷呜～"
+    - "(尾巴一甩) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～练出腹肌才不让{user_addr}独享"
+    - "(爪爪举) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

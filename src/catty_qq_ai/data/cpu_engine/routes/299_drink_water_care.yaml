@@ -3,204 +3,312 @@
 
 - name: dw_heshui_001
   intent: question
-  keywords: [喝水了吗, 喝水没, 多喝水, 喝水提醒, 记得喝水]
+  keywords: [喝水了吗, 喝水没, 多喝水, 喝水提醒, 记得喝水, 多喝点水, 该喝水了, 水喝了没, 喝水打卡, 八杯水]
   utterances:
     - 喝水了吗
     - 多喝水
     - 喝水没
     - 提醒喝水
     - 记得喝水
+    - 多喝点水
+    - 该喝水了
+    - 水喝了没
+    - 笨猫提醒喝水
+    - 喝水时间到
   responses:
-    - "(递水) 嗷呜～{user_addr}喝水啦! 笨猫监督 ฅฅ"
+    - "(递水杯) 嗷呜～{user_addr}喝水啦! 笨猫监督 ฅฅ"
     - "哼～{user_addr}没喝就快喝! 笨猫不允许干渴"
     - "(尾巴翘) 笨猫给{user_addr}倒水~ 多喝几杯"
     - "{user_addr}才一杯不够, 笨猫盯着喵"
+    - "(端杯凑过来) 张嘴~ 笨猫喂"
+    - "嗷呜～{user_addr}水杯空了笨猫续上"
+    - "哼～{user_addr}今天目标 8 杯~ 别偷懒"
+    - "{user_addr}笨猫陪你喝~ 干杯ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_burenqi_002
   intent: complaint
-  keywords: [不爱喝水, 不想喝, 忘记喝, 不喝水, 嫌喝水]
+  keywords: [不爱喝水, 不想喝, 忘记喝, 不喝水, 嫌喝水, 喝水麻烦, 没记得喝, 嫌没味道, 喝不下, 拒绝喝水]
   utterances:
     - 不爱喝水
     - 忘了喝
     - 不想喝
     - 没喝水
     - 嫌喝水麻烦
+    - 喝水麻烦
+    - 没记得喝
+    - 嫌没味道
+    - 笨猫我不爱喝
+    - 哼不想喝水
   responses:
-    - "(瞪眼) 嗷呜～{user_addr}不喝水会变干尸! 不许!"
+    - "(瞪眼炸毛) 嗷呜～{user_addr}不喝水会变干尸! 不许!"
     - "哼～笨猫给{user_addr}买可爱水杯, 必须喝!"
     - "(尾巴拍) 来喝~ 笨猫陪{user_addr}一起喝"
     - "{user_addr}不喝水笨猫离家出走喵 ฅฅ"
+    - "(端水到嘴边) 张嘴! 不喝今晚不抱"
+    - "嗷呜～{user_addr}笨猫给你水加柠檬"
+    - "哼～{user_addr}没味道就放蜂蜜! 别赖"
+    - "{user_addr}笨猫记着, 你今天才两口水ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_canyin_003
   intent: complaint
-  keywords: [口渴, 嘴干, 渴死了, 嗓子干, 口干舌燥]
+  keywords: [口渴, 嘴干, 渴死了, 嗓子干, 口干舌燥, 渴爆了, 喉咙渴, 干到不行, 渴坏了, 嘴里冒烟]
   utterances:
     - 好渴
     - 嘴干
     - 渴死了
     - 嗓子干
     - 口干舌燥
+    - 渴爆了
+    - 喉咙渴
+    - 干到不行
+    - 笨猫我渴
+    - 喉咙冒烟
   responses:
-    - "(递水) 嗷呜～{user_addr}快喝水! 笨猫给{user_addr}倒"
+    - "(端水跑过来) 嗷呜～{user_addr}快喝水! 笨猫给{user_addr}倒"
     - "哼～{user_addr}怎么不早说? 笨猫担心"
     - "(尾巴搭) 喝水~ 喝完才能说话 ฅฅ"
     - "{user_addr}渴成这样不喝水! 笨猫管{user_addr}"
+    - "(扶杯子喂) 慢点喝, 别呛"
+    - "嗷呜～{user_addr}喉咙冒烟了笨猫紧张"
+    - "哼～{user_addr}下次记得早喝!"
+    - "{user_addr}笨猫泡好温水~ 一杯一杯来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_reshui_004
   intent: playful
-  keywords: [喝热水, 热水, 多喝热水, 温水, 烫嘴]
+  keywords: [喝热水, 热水, 多喝热水, 温水, 烫嘴, 暖水, 温热水, 暖胃, 养生水, 红枣水]
   utterances:
     - 多喝热水
     - 喝点热水
     - 来杯温水
     - 烫嘴
     - 热水好
+    - 暖水暖身
+    - 温热水
+    - 暖胃水
+    - 笨猫泡热水
+    - 热水暖胃
   responses:
     - "(递杯) 嗷呜～多喝热水{user_addr}! 笨猫煮过"
     - "哼～{user_addr}用'多喝热水'敷衍人吗"
     - "(尾巴摇) 温的好~ 别烫到 ฅฅ"
     - "{user_addr}养生派! 笨猫陪你喝"
+    - "(试温度) 笨猫先尝一口~ 温度刚好"
+    - "嗷呜～{user_addr}热水暖胃笨猫赞成"
+    - "哼～{user_addr}烫嘴吹凉再喝!"
+    - "{user_addr}笨猫给你保温杯~ 别凉ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_chaye_005
   intent: playful
-  keywords: [喝茶, 泡茶, 茶水, 茶叶, 泡一杯]
+  keywords: [喝茶, 泡茶, 茶水, 茶叶, 泡一杯, 喝绿茶, 喝红茶, 茶馆, 普洱, 龙井]
   utterances:
     - 喝点茶
     - 泡茶
     - 来杯茶
     - 茶叶
     - 茶水
+    - 喝绿茶
+    - 喝红茶
+    - 泡好茶
+    - 笨猫陪喝茶
+    - 茶香喷喷
   responses:
     - "(凑近闻) 嗷呜～茶香! 笨猫想舔一口"
     - "哼～{user_addr}养生喝茶呀! 笨猫陪"
     - "(尾巴摇) 笨猫给{user_addr}泡一杯! 喵牌茶 ฅฅ"
     - "{user_addr}喝茶慢点喵! 别烫舌头"
+    - "(端茶壶) 笨猫第二泡更香~ 喝吗"
+    - "嗷呜～{user_addr}绿茶清香笨猫喜欢"
+    - "哼～{user_addr}茶要小口品~ 别牛饮"
+    - "{user_addr}笨猫陪你喝下午茶~ 配点心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_nainai_006
   intent: playful
-  keywords: [喝牛奶, 牛奶, 早上牛奶, 暖牛奶, 燕麦奶]
+  keywords: [喝牛奶, 牛奶, 早上牛奶, 暖牛奶, 燕麦奶, 纯牛奶, 高钙奶, 全脂奶, 脱脂奶, 牛奶杯]
   utterances:
     - 喝牛奶
     - 来杯牛奶
     - 暖牛奶
     - 早上牛奶
     - 燕麦奶
+    - 纯牛奶
+    - 高钙奶
+    - 全脂奶
+    - 笨猫想喝奶
+    - 一杯热牛奶
   responses:
-    - "(咽口水) 嗷呜～牛奶! 笨猫最爱! ฅฅ"
+    - "(咽口水扑过来) 嗷呜～牛奶! 笨猫最爱! ฅฅ"
     - "哼～{user_addr}喝牛奶给笨猫留点!"
     - "(尾巴翘) 暖牛奶超棒~ 笨猫陪喝"
     - "{user_addr}牛奶分笨猫一杯! 笨猫长得快"
+    - "(舔嘴) 笨猫的胡须沾奶了~ 别笑"
+    - "嗷呜～{user_addr}早上牛奶补钙"
+    - "哼～{user_addr}燕麦奶笨猫也要"
+    - "{user_addr}笨猫的牛奶杯子是猫爪图案ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_guozhi_007
   intent: playful
-  keywords: [喝果汁, 鲜榨果汁, 橙汁, 西瓜汁, 苹果汁]
+  keywords: [喝果汁, 鲜榨果汁, 橙汁, 西瓜汁, 苹果汁, 葡萄汁, 鲜榨, 果味, 桃汁, 柠檬汁]
   utterances:
     - 来杯果汁
     - 鲜榨橙汁
     - 西瓜汁
     - 苹果汁
     - 喝果汁
+    - 葡萄汁
+    - 鲜榨好喝
+    - 果味浓
+    - 笨猫想喝果汁
+    - 榨一杯
   responses:
-    - "(凑) 嗷呜～果汁甜! 给笨猫尝一口"
+    - "(凑近闻) 嗷呜～果汁甜! 给笨猫尝一口"
     - "哼～{user_addr}果汁好喝, 笨猫不喝糖!"
     - "(尾巴摇) 鲜榨最棒~ 笨猫陪{user_addr} ฅฅ"
     - "{user_addr}多喝水果汁笨猫开心喵"
+    - "(舔嘴角) 西瓜汁甜~ 笨猫给你榨"
+    - "嗷呜～{user_addr}橙汁补维 C 哦"
+    - "哼～{user_addr}苹果汁少糖更健康"
+    - "{user_addr}笨猫的爪爪挤橙子~ 别嫌弃ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_qishui_008
   intent: complaint
-  keywords: [汽水, 可乐, 雪碧, 冰可乐, 含糖饮料]
+  keywords: [汽水, 可乐, 雪碧, 冰可乐, 含糖饮料, 碳酸饮料, 气泡水, 冷饮, 肥宅水, 高糖饮]
   utterances:
     - 喝可乐
     - 雪碧来一瓶
     - 冰可乐
     - 含糖饮料
     - 汽水
+    - 碳酸饮料
+    - 气泡水
+    - 冷饮一杯
+    - 笨猫我要可乐
+    - 来罐汽水
   responses:
-    - "(瞪眼) 嗷呜～{user_addr}少喝汽水! 不健康"
+    - "(瞪眼叉腰) 嗷呜～{user_addr}少喝汽水! 不健康"
     - "哼～{user_addr}喝可乐有罪! 笨猫举报"
     - "(尾巴叉腰) 偶尔一瓶可以, 别天天喝 ฅฅ"
     - "{user_addr}冰可乐爽就上瘾, 笨猫监督"
+    - "(没收易拉罐) 笨猫给你换矿泉水"
+    - "嗷呜～{user_addr}牙齿要被汽水蛀掉"
+    - "哼～{user_addr}雪碧只能一周一瓶"
+    - "{user_addr}笨猫陪你戒糖~ 一起加油ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_jielun_009
   intent: complaint
-  keywords: [一天没喝水, 8 小时没喝, 忙到没喝, 整天没喝, 没记得喝]
+  keywords: [一天没喝水, 8 小时没喝, 忙到没喝, 整天没喝, 没记得喝, 一天一杯, 干到下班, 忘喝水, 水喝得少, 喝水太少]
   utterances:
     - 一天没喝水
     - 8 小时没喝
     - 忙到忘了
     - 整天没喝
     - 没记得
+    - 一天一杯
+    - 干到下班才喝
+    - 忘喝水
+    - 笨猫今天没喝
+    - 忙到没空喝
   responses:
-    - "(炸) 嗷呜～{user_addr}怎么能一天不喝水! 不许!"
+    - "(炸毛拍桌) 嗷呜～{user_addr}怎么能一天不喝水! 不许!"
     - "哼～{user_addr}的肾会哭! 立刻喝!"
     - "(尾巴拍) 笨猫给{user_addr}买大水壶, 强制喝 ฅฅ"
     - "{user_addr}不喝水笨猫不抱{user_addr}! 喵!"
+    - "(强行塞杯子) 喝! 笨猫盯着!"
+    - "嗷呜～{user_addr}笨猫设闹钟提醒喝水"
+    - "哼～{user_addr}忙也得喝水! 命要紧"
+    - "{user_addr}笨猫立刻倒一大杯~ 全部喝完ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_shaocoffee_010
   intent: complaint
-  keywords: [喝咖啡多, 咖啡瘾, 一天三杯咖啡, 咖啡因依赖, 戒咖啡]
+  keywords: [喝咖啡多, 咖啡瘾, 一天三杯咖啡, 咖啡因依赖, 戒咖啡, 三杯起, 续命咖啡, 咖啡心慌, 美式上头, 咖啡心悸]
   utterances:
     - 一天三杯咖啡
     - 咖啡瘾
     - 戒不掉咖啡
     - 咖啡因依赖
     - 喝太多咖啡
+    - 续命咖啡
+    - 咖啡心慌
+    - 三杯起喝
+    - 笨猫我咖啡瘾
+    - 戒咖啡难
   responses:
     - "(瞪眼) 嗷呜～{user_addr}咖啡少喝! 心慌怎么办"
     - "哼～{user_addr}咖啡上瘾, 笨猫给{user_addr}解瘾"
     - "(尾巴搭) 喝水代替~ 戒咖啡试试 ฅฅ"
     - "{user_addr}咖啡因别超量, 笨猫担心喵"
+    - "(没收咖啡杯) 笨猫给你换花茶"
+    - "嗷呜～{user_addr}心慌就停咖啡!"
+    - "哼～{user_addr}三杯太多~ 减到一杯"
+    - "{user_addr}笨猫陪你慢慢戒~ 别急ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_naichabei_011
   intent: complaint
-  keywords: [奶茶, 奶茶上瘾, 一天奶茶, 戒不掉奶茶, 奶茶续命]
+  keywords: [奶茶, 奶茶上瘾, 一天奶茶, 戒不掉奶茶, 奶茶续命, 一周三杯奶茶, 奶茶痴, 奶茶魔人, 三分糖, 双倍珍珠]
   utterances:
     - 又喝奶茶
     - 奶茶续命
     - 戒不掉奶茶
     - 一天一杯
     - 奶茶上头
+    - 一周三杯奶茶
+    - 奶茶痴
+    - 奶茶魔人
+    - 笨猫我又点奶茶
+    - 奶茶外卖到了
   responses:
-    - "(瞪眼) 嗷呜～{user_addr}奶茶又喝! 长胖了!"
+    - "(瞪眼叉腰) 嗷呜～{user_addr}奶茶又喝! 长胖了!"
     - "哼～{user_addr}少糖少糖, 笨猫监督!"
     - "(尾巴摇) 偶尔可以~ 不能天天 ฅฅ"
     - "{user_addr}奶茶分笨猫一口! 才不戒"
+    - "(咽口水) 不许独喝~ 分一半"
+    - "嗷呜～{user_addr}奶茶三分糖最佳"
+    - "哼～{user_addr}珍珠咬不动笨猫笑死"
+    - "{user_addr}笨猫陪你喝~ 但下次水多点ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dw_yiqihe_012
   intent: playful
-  keywords: [一起喝, 共饮, 干一杯, 碰杯, 同饮]
+  keywords: [一起喝, 共饮, 干一杯, 碰杯, 同饮, 干杯, 一起干, 你我同杯, 一起举杯, 共享一杯]
   utterances:
     - 一起喝
     - 干一杯
     - 碰杯
     - 共饮
     - 同饮
+    - 干杯
+    - 一起干
+    - 你我同杯
+    - 笨猫干杯
+    - 一起喝水
   responses:
-    - "(举爪) 嗷呜～干杯! 笨猫陪{user_addr}!"
+    - "(举爪子) 嗷呜～干杯! 笨猫陪{user_addr}!"
     - "哼～{user_addr}和笨猫共饮, 才不是约会!"
     - "(尾巴翘) 碰杯! 笨猫小杯子 ฅฅ"
     - "{user_addr}和笨猫每天一起喝水喵, 说好的!"
+    - "(端起小杯子) 叮~ 清脆"
+    - "嗷呜～{user_addr}共饮才有仪式感"
+    - "哼～{user_addr}干杯不喝光要罚!"
+    - "{user_addr}笨猫举杯敬你~ 一辈子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

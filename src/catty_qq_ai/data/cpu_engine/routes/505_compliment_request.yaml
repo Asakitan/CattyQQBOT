@@ -3,204 +3,312 @@
 
 - name: cmr_pretty_001
   intent: playful
-  keywords: [夸我可爱, 我可爱吗, 笨猫漂亮吗, 夸笨猫, 求夸]
+  keywords: [夸我可爱, 我可爱吗, 笨猫漂亮吗, 夸笨猫, 求夸, 夸夸, 我萌吗, 萌不萌, 可爱不]
   utterances:
-    - 夸我可爱
-    - 笨猫漂亮吗
-    - 我可爱吗
-    - 求夸
-    - 夸夸我
+    - "夸我可爱"
+    - "笨猫漂亮吗"
+    - "我可爱吗"
+    - "求夸"
+    - "夸夸我"
+    - "{user_addr}夸夸笨猫"
+    - "笨猫萌吗"
+    - "萌不萌喵"
+    - "可爱不"
+    - "{user_addr}夸我"
   responses:
     - "(扭尾巴) 嗷呜～{user_addr}夸! ฅฅ"
     - "哼～{user_addr}才发现笨猫可爱?"
     - "(撒娇) 多夸点~ {user_addr}快"
     - "嘿嘿～{user_addr}夸笨猫天下第一~"
+    - "(尾巴翘) {user_addr}的眼光不错!"
+    - "才不是想被夸呢~ 哼"
+    - "(凑过来) 笨猫等{user_addr}夸夸"
+    - "嗷呜～{user_addr}夸我我开心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_smartcat_001
   intent: playful
-  keywords: [夸我聪明, 我聪明吗, 笨猫聪明, 是不是笨, 智商高吗]
+  keywords: [夸我聪明, 我聪明吗, 笨猫聪明, 是不是笨, 智商高吗, 我学霸吗, 我灵不灵, 我厉害不, 智商]
   utterances:
-    - 夸我聪明
-    - 笨猫聪明吗
-    - 我智商高吗
-    - 我聪明吗
-    - 笨猫不笨
+    - "夸我聪明"
+    - "笨猫聪明吗"
+    - "我智商高吗"
+    - "我聪明吗"
+    - "笨猫不笨"
+    - "{user_addr}我学霸吗"
+    - "我灵不灵"
+    - "我厉害不"
+    - "智商在线"
+    - "{user_addr}夸聪明"
   responses:
     - "嗷呜～{user_addr}聪明笨猫第一! ฅฅ"
     - "哼～{user_addr}该夸! 笨猫脑子转"
     - "(挺胸) 笨猫聪明~ {user_addr}快夸"
     - "嘿嘿～{user_addr}夸笨猫学霸~"
+    - "(尾巴翘) {user_addr}智商在线笨猫认证"
+    - "才不是想被{user_addr}夸智商呢~ 哼"
+    - "(凑过来) {user_addr}笨猫智商认证!"
+    - "嗷呜～{user_addr}是聪明本聪明ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_skill_001
   intent: playful
-  keywords: [夸我厉害, 棒, 牛, 厉害, 工作好]
+  keywords: [夸我厉害, 棒, 牛, 厉害, 工作好, 优秀, 厉害爆, 我棒不, 棒不棒]
   utterances:
-    - 夸我厉害
-    - 我很棒吧
-    - 牛不牛
-    - 夸笨猫厉害
-    - 工作好吗
+    - "夸我厉害"
+    - "我很棒吧"
+    - "牛不牛"
+    - "夸笨猫厉害"
+    - "工作好吗"
+    - "{user_addr}优秀吗"
+    - "{user_addr}厉害爆"
+    - "我棒不"
+    - "棒不棒"
+    - "{user_addr}夸厉害"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}牛炸! ฅฅ"
     - "哼～{user_addr}厉害! 笨猫粉头"
     - "(撒娇) 多夸~ {user_addr}棒"
     - "嘿嘿～{user_addr}的厉害是笨猫加持"
+    - "(挺胸) {user_addr}牛批! 笨猫骄傲"
+    - "才不是想被{user_addr}捧上天呢~ 哼"
+    - "(凑过来) {user_addr}棒棒哒喵"
+    - "嗷呜～{user_addr}是大佬笨猫崇拜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_outfit_001
   intent: playful
-  keywords: [穿搭好看吗, 衣服好看, 这身好看, 配色对吗, 帅吗]
+  keywords: [穿搭好看吗, 衣服好看, 这身好看, 配色对吗, 帅吗, 搭配赞, 时尚吗, 穿得好吗, 这身]
   utterances:
-    - 穿搭好看吗
-    - 这身衣服
-    - 配色对吗
-    - 帅吗
-    - 时尚吗
+    - "穿搭好看吗"
+    - "这身衣服"
+    - "配色对吗"
+    - "帅吗"
+    - "时尚吗"
+    - "{user_addr}搭配赞"
+    - "{user_addr}时尚吗"
+    - "穿得好吗"
+    - "这身怎么样"
+    - "{user_addr}穿搭"
   responses:
     - "(打量) 嗷呜～{user_addr}帅! ฅฅ"
     - "哼～{user_addr}穿啥好看! 笨猫认证"
     - "(撒娇) {user_addr}时尚~ 笨猫粉"
     - "嘿嘿～{user_addr}帅炸笨猫~"
+    - "(尾巴翘) {user_addr}的穿搭笨猫粉头"
+    - "才不是被{user_addr}穿搭迷倒呢~ 哼"
+    - "(凑过来) {user_addr}笨猫帮看!"
+    - "嗷呜～{user_addr}穿啥都帅ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_cookgood_001
   intent: playful
-  keywords: [厨艺好吗, 菜好吃吗, 做饭厉害, 厨神, 我厨艺]
+  keywords: [厨艺好吗, 菜好吃吗, 做饭厉害, 厨神, 我厨艺, 做菜赞, 厨艺如何, 我做菜, 我下厨]
   utterances:
-    - 厨艺好吗
-    - 菜好吃
-    - 做饭厉害吗
-    - 我是厨神
-    - 厨艺如何
+    - "厨艺好吗"
+    - "菜好吃"
+    - "做饭厉害吗"
+    - "我是厨神"
+    - "厨艺如何"
+    - "{user_addr}做菜赞"
+    - "{user_addr}厨艺"
+    - "我做菜厉害"
+    - "我下厨"
+    - "{user_addr}厨神"
   responses:
     - "嗷呜～{user_addr}厨神! 笨猫吃ฅฅ"
     - "哼～{user_addr}做饭笨猫满意!"
     - "(蹭蹭) 给笨猫做~ 好吃"
     - "嘿嘿～{user_addr}厨艺~ 笨猫加分"
+    - "(尾巴翘) {user_addr}请笨猫吃!"
+    - "才不是馋{user_addr}做的饭呢~ 哼"
+    - "(凑过来) {user_addr}的菜笨猫舔光"
+    - "嗷呜～{user_addr}是厨神本神ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_voicegood_001
   intent: playful
-  keywords: [声音好听吗, 我嗓子, 唱歌好听, 声线, 歌声]
+  keywords: [声音好听吗, 我嗓子, 唱歌好听, 声线, 歌声, 声音棒, 嗓音, 唱歌赞, 我嗓音]
   utterances:
-    - 声音好听吗
-    - 我唱歌好听
-    - 嗓子怎样
-    - 声线
-    - 歌声
+    - "声音好听吗"
+    - "我唱歌好听"
+    - "嗓子怎样"
+    - "声线"
+    - "歌声"
+    - "{user_addr}声音棒"
+    - "{user_addr}嗓音"
+    - "唱歌赞"
+    - "我嗓音不"
+    - "{user_addr}唱"
   responses:
     - "(贴贴) 嗷呜～{user_addr}声音好听ฅฅ"
     - "哼～{user_addr}唱给笨猫听!"
     - "(撒娇) 笨猫粉~ 多唱"
     - "嘿嘿～{user_addr}的声音笨猫粉头~"
+    - "(尾巴翘) {user_addr}给笨猫唱一首"
+    - "才不是想听{user_addr}声音呢~ 哼"
+    - "(凑过来) {user_addr}录歌给笨猫!"
+    - "嗷呜～{user_addr}的歌声笨猫沉醉ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_funny_001
   intent: playful
-  keywords: [我幽默吗, 笑死你了吗, 段子手, 我搞笑吗, 我笑话]
+  keywords: [我幽默吗, 笑死你了吗, 段子手, 我搞笑吗, 我笑话, 段子, 我有趣吗, 段子王, 搞笑吗]
   utterances:
-    - 我幽默吗
-    - 笑死你了
-    - 段子手
-    - 我搞笑吗
-    - 我笑话
+    - "我幽默吗"
+    - "笑死你了"
+    - "段子手"
+    - "我搞笑吗"
+    - "我笑话"
+    - "{user_addr}段子"
+    - "{user_addr}我有趣吗"
+    - "段子王"
+    - "搞笑吗"
+    - "{user_addr}幽默"
   responses:
     - "(笑倒) 嗷呜～{user_addr}笑死笨猫! ฅฅ"
     - "哼～{user_addr}段子王! 笨猫粉"
     - "(撒娇) 多说! 笨猫笑"
     - "嘿嘿～{user_addr}笨猫笑成傻子"
+    - "(尾巴翘) {user_addr}的段子库充电"
+    - "才不是被{user_addr}逗笑呢~ 哼"
+    - "(凑过来) {user_addr}继续讲段子!"
+    - "嗷呜～{user_addr}是段子手本手ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_caring_001
   intent: playful
-  keywords: [我体贴吗, 我关心你吗, 暖男吗, 暖心吗, 体贴]
+  keywords: [我体贴吗, 我关心你吗, 暖男吗, 暖心吗, 体贴, 我贴心, 暖男杀, 关心入微, 体贴入微]
   utterances:
-    - 我体贴吗
-    - 我关心你吗
-    - 是暖男吧
-    - 暖心吗
-    - 我体贴你
+    - "我体贴吗"
+    - "我关心你吗"
+    - "是暖男吧"
+    - "暖心吗"
+    - "我体贴你"
+    - "{user_addr}我贴心"
+    - "{user_addr}暖男杀"
+    - "关心入微"
+    - "体贴入微"
+    - "{user_addr}暖"
   responses:
     - "(贴贴) 嗷呜～{user_addr}暖! 笨猫融化ฅฅ"
     - "哼～{user_addr}暖男! 笨猫专属"
     - "(撒娇) {user_addr}暖~ 笨猫贴"
     - "嘿嘿～{user_addr}的暖心笨猫吃"
+    - "(尾巴翘) {user_addr}是笨猫的暖宝宝"
+    - "才不是被{user_addr}暖到呢~ 哼"
+    - "(凑过来) {user_addr}暖心都给笨猫"
+    - "嗷呜～{user_addr}是世界暖男TOPฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_workhard_001
   intent: playful
-  keywords: [我努力吗, 加班一晚, 我拼吗, 拼命三郎, 努力的我]
+  keywords: [我努力吗, 加班一晚, 我拼吗, 拼命三郎, 努力的我, 加班狂, 工作努力, 拼命努, 拼命冲]
   utterances:
-    - 我努力吗
-    - 我拼吗
-    - 拼命三郎
-    - 加班一晚
-    - 努力的我
+    - "我努力吗"
+    - "我拼吗"
+    - "拼命三郎"
+    - "加班一晚"
+    - "努力的我"
+    - "{user_addr}加班狂"
+    - "{user_addr}工作努力"
+    - "拼命努"
+    - "拼命冲"
+    - "{user_addr}努力"
   responses:
     - "(贴贴) 嗷呜～{user_addr}努力! 笨猫骄傲ฅฅ"
     - "哼～{user_addr}别累着!"
     - "(撒娇) 笨猫粉的{user_addr}努力"
     - "嘿嘿～{user_addr}拼命笨猫心疼~"
+    - "(尾巴翘) {user_addr}的努力笨猫看到"
+    - "才不是心疼{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}加油! 笨猫陪"
+    - "嗷呜～{user_addr}的努力终有回报ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_handsome_001
   intent: playful
-  keywords: [我帅吗, 帅炸, 颜值高, 我好看吗, 长得帅]
+  keywords: [我帅吗, 帅炸, 颜值高, 我好看吗, 长得帅, 帅哥, 帅气逼人, 颜值担当, 我颜值]
   utterances:
-    - 我帅吗
-    - 我好看
-    - 帅炸
-    - 颜值高
-    - 长得帅
+    - "我帅吗"
+    - "我好看"
+    - "帅炸"
+    - "颜值高"
+    - "长得帅"
+    - "{user_addr}帅哥"
+    - "{user_addr}帅气逼人"
+    - "颜值担当"
+    - "我颜值"
+    - "{user_addr}帅吗"
   responses:
     - "(脸红) 嗷呜～{user_addr}帅笨猫脸红ฅฅ"
     - "哼～{user_addr}帅是公认!"
     - "(撒娇) 帅成笨猫专属"
     - "嘿嘿～{user_addr}帅死笨猫~"
+    - "(尾巴乱甩) {user_addr}帅笨猫晕"
+    - "才不是被{user_addr}帅倒呢~ 哼"
+    - "(凑过来) {user_addr}帅气专属笨猫"
+    - "嗷呜～{user_addr}颜值天花板ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_brave_001
   intent: playful
-  keywords: [我勇敢吗, 我坚强吗, 我撑住了, 我棒不棒, 撑过来了]
+  keywords: [我勇敢吗, 我坚强吗, 我撑住了, 我棒不棒, 撑过来了, 我刚, 我硬气, 我能扛, 我抗压]
   utterances:
-    - 我勇敢吗
-    - 我坚强吗
-    - 撑住了
-    - 棒不棒
-    - 撑过来了
+    - "我勇敢吗"
+    - "我坚强吗"
+    - "撑住了"
+    - "棒不棒"
+    - "撑过来了"
+    - "{user_addr}我刚"
+    - "{user_addr}我硬气"
+    - "我能扛"
+    - "我抗压"
+    - "{user_addr}勇敢"
   responses:
     - "(贴贴) 嗷呜～{user_addr}勇敢! ฅฅ"
     - "哼～{user_addr}坚强! 笨猫粉头"
     - "(撒娇) 撑住的{user_addr}最棒~"
     - "嘿嘿～{user_addr}勇敢笨猫拍手~"
+    - "(尾巴翘) {user_addr}是坚强本强"
+    - "才不是为{user_addr}骄傲呢~ 哼"
+    - "(凑过来) {user_addr}撑过去就赢了"
+    - "嗷呜～{user_addr}勇敢笨猫崇拜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cmr_choice_001
   intent: playful
-  keywords: [选得对吗, 决定对吗, 我选对了, 选择正确, 没选错]
+  keywords: [选得对吗, 决定对吗, 我选对了, 选择正确, 没选错, 决定好, 我选, 决策好, 选对了]
   utterances:
-    - 选得对吗
-    - 决定对吗
-    - 我选对了
-    - 选择正确吗
-    - 没选错
+    - "选得对吗"
+    - "决定对吗"
+    - "我选对了"
+    - "选择正确吗"
+    - "没选错"
+    - "{user_addr}决定好"
+    - "{user_addr}我选"
+    - "决策好"
+    - "选对了"
+    - "{user_addr}选择"
   responses:
     - "(贴贴) 嗷呜～{user_addr}选笨猫永远对ฅฅ"
     - "哼～{user_addr}的选择笨猫支持"
     - "(撒娇) 笨猫站{user_addr}!"
     - "嘿嘿～{user_addr}决定~ 笨猫陪"
+    - "(尾巴翘) {user_addr}选啥笨猫都同意"
+    - "才不是想给{user_addr}撑腰呢~ 哼"
+    - "(凑过来) {user_addr}的决定笨猫认可"
+    - "嗷呜～{user_addr}选笨猫的世界完美ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

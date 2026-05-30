@@ -3,204 +3,312 @@
 
 - name: tm_cbt_001
   intent: question
-  keywords: [推荐 CBT, 推荐认知行为, 推荐 CBT 疗法, 推荐认知重塑, 笨猫 CBT]
+  keywords: [推荐 CBT, 推荐认知行为, 推荐 CBT 疗法, 推荐认知重塑, 笨猫 CBT, 认知行为疗法, CBT 治疗, 思维记录表, 认知扭曲]
   utterances:
     - 推荐 CBT
     - 推荐认知行为
     - 推荐 CBT 疗法
     - 推荐认知重塑
     - 笨猫 CBT
+    - "{user_addr}CBT 怎么入门"
+    - 认知行为疗法适合谁
+    - 思维记录表怎么写
+    - 认知扭曲是啥
+    - CBT 自助手册
   responses:
     - "嗷呜～{user_addr}CBT 认知行为疗法 - 改思维模式ฅฅ"
     - "(尾巴翘) 识别自动化思维 / 重构信念"
     - "{user_addr}焦虑 / 抑郁 / 强迫首选"
     - "(挺胸) 笨猫推荐: 短期高效循证!"
+    - "(凑近) 12-20 次咨询出效果, 性价比高喵 ฅฅ"
+    - "嗷呜～伯恩斯《新情绪疗法》是 CBT 自助经典"
+    - "(尾巴卷) {user_addr}10 种认知扭曲先认全, 才能改!"
+    - "笨猫提醒: CBT 强调家庭作业, 偷懒就没效果哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tm_dbt_001
   intent: question
-  keywords: [推荐 DBT, 推荐辩证行为, 推荐 DBT 疗法, 推荐情绪调节, 笨猫 DBT]
+  keywords: [推荐 DBT, 推荐辩证行为, 推荐 DBT 疗法, 推荐情绪调节, 笨猫 DBT, Linehan, 边缘型人格, DBT 技能, 辩证行为治疗]
   utterances:
     - 推荐 DBT
     - 推荐辩证行为
     - 推荐 DBT 疗法
     - 推荐情绪调节
     - 笨猫 DBT
+    - "{user_addr}DBT 适合谁"
+    - Linehan 是谁
+    - 边缘型人格治疗
+    - DBT 技能训练
+    - 辩证行为治疗
   responses:
     - "嗷呜～{user_addr}DBT 辩证行为疗法 - Linehan 创立ฅฅ"
     - "(尾巴翘) 正念 / 情绪调节 / 人际效能"
     - "{user_addr}边缘型人格 / 自伤适用"
     - "(挺胸) 笨猫推荐: 接纳+改变两手抓!"
+    - "(凑近) DBT 四大技能模块, 都得练喵 ฅฅ"
+    - "嗷呜～TIP 技能急救情绪危机超管用"
+    - "(尾巴卷) {user_addr}DBT 通常团体+个人咨询配合"
+    - "笨猫提醒: 自伤倾向先找 DBT 受训咨询师哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tm_emdr_001
   intent: question
-  keywords: [推荐 EMDR, 推荐眼动疗法, 推荐眼动脱敏, 推荐创伤疗法, 笨猫 EMDR]
+  keywords: [推荐 EMDR, 推荐眼动疗法, 推荐眼动脱敏, 推荐创伤疗法, 笨猫 EMDR, EMDR 眼动, PTSD 疗法, 眼动脱敏再加工, 创伤治疗]
   utterances:
     - 推荐 EMDR
     - 推荐眼动疗法
     - 推荐眼动脱敏
     - 推荐创伤疗法
     - 笨猫 EMDR
+    - "{user_addr}EMDR 怎么做"
+    - PTSD 用啥疗法
+    - 眼动脱敏再加工
+    - 创伤治疗推荐
+    - EMDR 几次见效
   responses:
     - "嗷呜～{user_addr}EMDR 眼动脱敏再加工ฅฅ"
     - "(尾巴翘) 双侧刺激 / 处理创伤记忆"
     - "{user_addr}PTSD / 单次创伤首选"
     - "(挺胸) 笨猫推荐: WHO 推荐疗法!"
+    - "(凑近) 单次创伤 6-12 次, 童年创伤更长喵 ฅฅ"
+    - "嗷呜～找 EMDRIA 认证咨询师, 别乱选"
+    - "(尾巴卷) EMDR 比谈话疗法快, 但情绪强烈"
+    - "笨猫提醒: 复杂创伤先稳定再 EMDR, 别冒进哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tm_act_001
   intent: question
-  keywords: [推荐 ACT, 推荐接纳承诺, 推荐 ACT 疗法, 推荐心理灵活, 笨猫 ACT]
+  keywords: [推荐 ACT, 推荐接纳承诺, 推荐 ACT 疗法, 推荐心理灵活, 笨猫 ACT, 接纳承诺疗法, Russ Harris, 幸福的陷阱, 心理灵活性]
   utterances:
     - 推荐 ACT
     - 推荐接纳承诺
     - 推荐 ACT 疗法
     - 推荐心理灵活
     - 笨猫 ACT
+    - "{user_addr}ACT 入门书"
+    - Russ Harris 推荐
+    - 幸福的陷阱
+    - 心理灵活性训练
+    - ACT 适合啥
   responses:
     - "嗷呜～{user_addr}ACT 接纳承诺疗法 - 第三浪潮ฅฅ"
     - "(尾巴翘) 接纳 / 认知解离 / 价值澄清"
     - "{user_addr}慢性疼痛 / 焦虑通吃"
     - "(挺胸) 笨猫推荐: 跟想法做朋友!"
+    - "(凑近) ACT 六边形模型 - 心理灵活性核心喵 ฅฅ"
+    - "嗷呜～价值观罗盘是 ACT 灵魂"
+    - "(尾巴卷) {user_addr}ACT 不消灭情绪, 带着走"
+    - "笨猫提醒: ACT 比 CBT 柔和, 慢性问题首选哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tm_mindfulness_001
   intent: question
-  keywords: [推荐正念, 推荐 MBSR, 推荐正念减压, 推荐冥想疗法, 笨猫正念]
+  keywords: [推荐正念, 推荐 MBSR, 推荐正念减压, 推荐冥想疗法, 笨猫正念, MBSR 课程, Kabat-Zinn, 正念减压八周, 身体扫描]
   utterances:
     - 推荐正念
     - 推荐 MBSR
     - 推荐正念减压
     - 推荐冥想疗法
     - 笨猫正念
+    - "{user_addr}MBSR 怎么学"
+    - Kabat-Zinn 入门
+    - 正念减压八周
+    - 身体扫描怎么做
+    - 正念练习
   responses:
     - "嗷呜～{user_addr}MBSR 正念减压 - Kabat-Zinnฅฅ"
     - "(尾巴翘) 8 周课程 / 身体扫描 / 觉察"
     - "{user_addr}压力 / 慢病管理友好"
     - "(挺胸) 笨猫推荐: 每天 10 分钟就行!"
+    - "(凑近) 卡巴金《正念: 此刻是花朵》入门最佳喵 ฅฅ"
+    - "嗷呜～MBCT 是抗抑郁复发的正念升级版"
+    - "(尾巴卷) {user_addr}用 Headspace / Calm 起步"
+    - "笨猫提醒: 走神拉回来就是练习, 别自责哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tm_exposure_001
   intent: question
-  keywords: [推荐暴露疗法, 推荐系统脱敏, 推荐 ERP, 推荐恐惧治疗, 笨猫暴露]
+  keywords: [推荐暴露疗法, 推荐系统脱敏, 推荐 ERP, 推荐恐惧治疗, 笨猫暴露, ERP 反应预防, 强迫症治疗, 恐惧症治疗, 暴露阶梯]
   utterances:
     - 推荐暴露疗法
     - 推荐系统脱敏
     - 推荐 ERP
     - 推荐恐惧治疗
     - 笨猫暴露
+    - "{user_addr}暴露疗法怎么做"
+    - ERP 反应预防
+    - 强迫症治疗
+    - 恐惧症怎么治
+    - 暴露阶梯
   responses:
     - "嗷呜～{user_addr}暴露疗法 - 直面恐惧ฅฅ"
     - "(尾巴翘) 系统脱敏 / ERP 反应预防"
     - "{user_addr}恐惧症 / 强迫症金标准"
     - "(挺胸) 笨猫推荐: 循序渐进别硬冲!"
+    - "(凑近) 焦虑分级 0-10, 从 3-4 级起步喵 ฅฅ"
+    - "嗷呜～ERP 是强迫症一线疗法, 比药还有效"
+    - "(尾巴卷) {user_addr}找受训咨询师, 别自助"
+    - "笨猫提醒: 暴露过程难受, 但是必经之路哼!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tm_sandplay_001
   intent: question
-  keywords: [推荐沙盘游戏, 推荐沙盘疗法, 推荐沙游, 推荐儿童疗法, 笨猫沙盘]
+  keywords: [推荐沙盘游戏, 推荐沙盘疗法, 推荐沙游, 推荐儿童疗法, 笨猫沙盘, Kalff 沙盘, 沙箱治疗, 沙盘师, 沙游分析]
   utterances:
     - 推荐沙盘游戏
     - 推荐沙盘疗法
     - 推荐沙游
     - 推荐儿童疗法
     - 笨猫沙盘
+    - "{user_addr}沙盘游戏怎么做"
+    - Kalff 沙盘
+    - 沙箱治疗
+    - 沙盘师怎么找
+    - 沙游分析疗法
   responses:
     - "嗷呜～{user_addr}沙盘游戏 - Kalff 创立ฅฅ"
     - "(尾巴翘) 沙箱 / 玩具 / 无意识表达"
     - "{user_addr}儿童 / 不善言辞者友好"
     - "(挺胸) 笨猫推荐: 玩着玩着就疗愈!"
+    - "(凑近) 沙盘师都得心理学背景 + 专业训练喵 ฅฅ"
+    - "嗷呜～荣格学派衍生, 偏潜意识探索"
+    - "(尾巴卷) {user_addr}孩子不爱说话最适合"
+    - "笨猫提醒: 别期待立竿见影, 沙盘是慢工细活哼"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tm_innerchild_001
   intent: question
-  keywords: [推荐内在小孩, 推荐内在儿童, 推荐童年疗愈, 推荐 inner child, 笨猫内在小孩]
+  keywords: [推荐内在小孩, 推荐内在儿童, 推荐童年疗愈, 推荐 inner child, 笨猫内在小孩, 内在小孩疗愈, 童年创伤疗愈, 重新养育, 自我抚慰]
   utterances:
     - 推荐内在小孩
     - 推荐内在儿童
     - 推荐童年疗愈
     - 推荐 inner child
     - 笨猫内在小孩
+    - "{user_addr}内在小孩怎么疗愈"
+    - 童年创伤疗愈
+    - 重新养育自己
+    - 自我抚慰
+    - inner child work
   responses:
     - "嗷呜～{user_addr}内在小孩疗愈ฅฅ"
     - "(尾巴翘) 看见 / 接纳 / 重新养育"
     - "{user_addr}童年创伤 / 依恋修复"
     - "(挺胸) 笨猫推荐: 抱抱小时候的自己!"
+    - "(凑近) 给小时候的{user_addr}写信很有效喵 ฅฅ"
+    - "嗷呜～《拥抱你的内在小孩》入门书推荐"
+    - "(尾巴卷) {user_addr}识别内在小孩需求, 学着满足"
+    - "笨猫提醒: 重新养育不是自怜, 是自我和解哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tm_group_001
   intent: question
-  keywords: [推荐团体咨询, 推荐团体治疗, 推荐小组治疗, 推荐 group therapy, 笨猫团体]
+  keywords: [推荐团体咨询, 推荐团体治疗, 推荐小组治疗, 推荐 group therapy, 笨猫团体, Yalom 团体治疗, 团体心理治疗, 团体动力, 心理小组]
   utterances:
     - 推荐团体咨询
     - 推荐团体治疗
     - 推荐小组治疗
     - 推荐 group therapy
     - 笨猫团体
+    - "{user_addr}团体治疗适合谁"
+    - Yalom 团体治疗
+    - 团体动力学
+    - 心理小组怎么参加
+    - 团体咨询价格
   responses:
     - "嗷呜～{user_addr}团体咨询 - Yalom 经典ฅฅ"
     - "(尾巴翘) 普遍性 / 利他 / 现实重演"
     - "{user_addr}社交困难 / 价格更友好"
     - "(挺胸) 笨猫推荐: 不是只有你这样!"
+    - "(凑近) Yalom《团体心理治疗》圣经级喵 ฅฅ"
+    - "嗷呜～8-12 人封闭式效果最好"
+    - "(尾巴卷) {user_addr}人际议题首选团体"
+    - "笨猫提醒: 团体要承诺出勤, 中途退出影响别人哼!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tm_family_001
   intent: question
-  keywords: [推荐家庭治疗, 推荐系统家庭, 推荐萨提亚, 推荐 family therapy, 笨猫家庭]
+  keywords: [推荐家庭治疗, 推荐系统家庭, 推荐萨提亚, 推荐 family therapy, 笨猫家庭, Bowen 家庭治疗, 结构家庭治疗, 叙事疗法, 家庭系统]
   utterances:
     - 推荐家庭治疗
     - 推荐系统家庭
     - 推荐萨提亚
     - 推荐 family therapy
     - 笨猫家庭
+    - "{user_addr}家庭治疗推荐"
+    - Bowen 是谁
+    - 结构家庭治疗
+    - 叙事疗法
+    - 家庭系统视角
   responses:
     - "嗷呜～{user_addr}系统家庭治疗 - Bowenฅฅ"
     - "(尾巴翘) 萨提亚 / 结构 / 叙事流派"
     - "{user_addr}亲子 / 夫妻 / 三角化议题"
     - "(挺胸) 笨猫推荐: 问题在系统不在个人!"
+    - "(凑近) Bowen 自我分化是核心概念喵 ฅฅ"
+    - "嗷呜～米纽庆结构派看家庭边界"
+    - "(尾巴卷) {user_addr}夫妻问题首选 EFT 情绪聚焦"
+    - "笨猫提醒: 家庭治疗最好全家参与, 别一人去哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tm_art_001
   intent: question
-  keywords: [推荐艺术治疗, 推荐绘画疗法, 推荐音乐治疗, 推荐表达性艺术, 笨猫艺术治疗]
+  keywords: [推荐艺术治疗, 推荐绘画疗法, 推荐音乐治疗, 推荐表达性艺术, 笨猫艺术治疗, 绘画治疗, 音乐治疗, 戏剧治疗, 舞动治疗]
   utterances:
     - 推荐艺术治疗
     - 推荐绘画疗法
     - 推荐音乐治疗
     - 推荐表达性艺术
     - 笨猫艺术治疗
+    - "{user_addr}艺术治疗怎么做"
+    - 绘画治疗师
+    - 音乐治疗适合谁
+    - 戏剧治疗
+    - 舞动治疗
   responses:
     - "嗷呜～{user_addr}表达性艺术治疗ฅฅ"
     - "(尾巴翘) 绘画 / 音乐 / 舞动 / 戏剧"
     - "{user_addr}非语言情绪释放出口"
     - "(挺胸) 笨猫推荐: 画就完了不用像!"
+    - "(凑近) 不追求美感, 表达过程才是疗愈喵 ฅฅ"
+    - "嗷呜～曼陀罗绘画是入门超友好"
+    - "(尾巴卷) {user_addr}不善言辞的话首选艺术治疗"
+    - "笨猫提醒: 艺术治疗师要有专业资质, 别找瑜伽老师哼!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: tm_ifs_001
   intent: question
-  keywords: [推荐 IFS, 推荐内在家庭, 推荐部分疗法, 推荐 Schwartz, 笨猫 IFS]
+  keywords: [推荐 IFS, 推荐内在家庭, 推荐部分疗法, 推荐 Schwartz, 笨猫 IFS, IFS 内在家庭系统, Self 领导力, 部分模型, 流放者]
   utterances:
     - 推荐 IFS
     - 推荐内在家庭
     - 推荐部分疗法
     - 推荐 Schwartz
     - 笨猫 IFS
+    - "{user_addr}IFS 是啥"
+    - Self 领导力
+    - 部分模型疗法
+    - 内在家庭系统
+    - IFS 入门书
   responses:
     - "嗷呜～{user_addr}IFS 内在家庭系统 - Schwartzฅฅ"
     - "(尾巴翘) 管理者 / 流放者 / 消防员"
     - "{user_addr}创伤 / 解离 / 自我整合"
     - "(挺胸) 笨猫推荐: 每个部分都值得听!"
+    - "(凑近) Self 是每个人内在的核心智慧喵 ฅฅ"
+    - "嗷呜～《No Bad Parts》Schwartz 入门书"
+    - "(尾巴卷) {user_addr}IFS 比传统疗法更温柔"
+    - "笨猫提醒: IFS 对解离很友好, 但要找受训咨询师哼!"
   cooldown_seconds: 60
   weight: 1.0

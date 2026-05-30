@@ -3,187 +3,306 @@
 
 - name: vml_sendvoice_001
   intent: playful
-  keywords: [发语音, 60秒语音, 长语音, 语音消息, 语音条]
+  keywords: [发语音, 60秒语音, 长语音, 语音消息, 语音条, 一连串语音, 聊聊喵, 陪笨猫]
   utterances:
     - 发语音
     - 60秒语音
     - 长语音
     - 语音消息
     - 语音条
+    - "{user_addr}又发60秒语音"
+    - 长语音救命
+    - 语音消息一堆
+    - 语音条听不完
+    - "{user_addr}别发语音"
+    - 能不能打字
+    - 听不完的语音
   responses:
     - "(炸毛) 嗷呜～{user_addr}讨厌长语音!"
     - "笨猫推荐: 文字喵"
     - "(尾巴打) 60秒看不下去"
     - "哼～{user_addr}懒"
+    - "(尾巴打) 笨猫要文字喵"
+    - "(凑近) 60秒看不下去笨蛋"
+    - "(贴贴) 哼～{user_addr}懒得打字ฅฅ"
+    - "(凑近蹭) 嗷呜～{user_addr}陪笨猫聊嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicetotext_002
   intent: playful
-  keywords: [语音转文字, 转文字, 语音识别, 听不清, 转字]
+  keywords: [语音转文字, 转文字, 语音识别, 听不清, 转字, 转字功能, 聊聊喵, 陪笨猫]
   utterances:
     - 语音转文字
     - 转文字
     - 语音识别
     - 听不清
     - 转字
+    - 转文字救我
+    - 语音识别真神
+    - 听不清转字
+    - "{user_addr}转字功能在哪"
+    - 语音转字方便
+    - 识别得不准
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫救星!"
     - "笨猫推荐: 长按转文字"
     - "(尾巴摇) 别在公司外放"
     - "哼～{user_addr}聪明"
+    - "(歪头) 嗷呜～{user_addr}长按转文字喵"
+    - "(尾巴摇) 笨猫秒看完笨蛋"
+    - "(凑近) 识别还挺准的"
+    - "(贴贴) 哼～方便多了{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicenoise_003
   intent: complaint
-  keywords: [语音背景音, 风声大, 杂音, 听不清楚, 噪音]
+  keywords: [语音背景音, 风声大, 杂音, 听不清楚, 噪音, 语音杂音, 语音噪音, 听不清, 背景音吵, 杂音大]
   utterances:
     - 背景音吵
     - 风声大
     - 杂音
     - 听不清楚
     - 噪音
+    - "{user_addr}语音全杂音"
+    - 背景音吵死
+    - 听不清你说话
+    - 语音噪音大
+    - "{user_addr}杂音救命"
+    - 风声嗡嗡
+    - 环境太吵
   responses:
     - "(炸毛) 嗷呜～{user_addr}重发!"
     - "笨猫认证: 听不清喵"
     - "(尾巴打) 找安静地方笨蛋"
     - "哼～{user_addr}马路上语音"
+    - "(歪头) 嗷呜～{user_addr}找安静地方!"
+    - "(尾巴扫) 笨猫听不清喵"
+    - "(凑近) 戴耳机说话笨蛋"
+    - "(贴贴) 哼～重发一遍{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voiceforget_004
   intent: complaint
-  keywords: [一连串语音, 99条语音, 99+, 60秒堆栈, 一堆语音]
+  keywords: [一连串语音, 99条语音, 99+, 60秒堆栈, 一堆语音, 忘记说, 又录一遍, 忘了讲, 语音忘话, 重录语音]
   utterances:
     - 99条语音
     - 60秒堆栈
     - 一堆语音
     - 99+语音
     - 一连串
+    - "{user_addr}又忘了说"
+    - 又录一遍
+    - 忘了讲重点
+    - 语音忘话
+    - "{user_addr}重录语音"
+    - 哎呀忘讲
+    - 我说错了重来
   responses:
     - "(炸毛) 嗷呜～{user_addr}受害者!"
     - "笨猫帮你一起骂"
     - "(尾巴打) 打字啊"
     - "哼～{user_addr}慢慢听"
+    - "(笑) 嗷呜～{user_addr}笨蛋健忘!"
+    - "(尾巴拍) 写下来再说啦"
+    - "(凑近) 才不是嘲笑你呢哼"
+    - "(贴贴) 笨猫帮你记{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicereplay_005
   intent: question
-  keywords: [回放语音, 没听清, 重听, 再听一遍, 反复听]
+  keywords: [回放语音, 没听清, 重听, 再听一遍, 反复听, 重听语音, 听不清重听, 语音回放, 听三遍]
   utterances:
     - 没听清
     - 重听
     - 再听
     - 回放
     - 反复听
+    - "{user_addr}重听语音"
+    - 听不清重听
+    - 反复听了三遍
+    - 语音回放
+    - "{user_addr}又听一遍"
+    - 没听清楚
+    - 语音听不懂
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫陪你!"
     - "笨猫推荐: 慢速播放"
     - "(尾巴摇) 多听几遍喵"
     - "哼～{user_addr}耳朵不好"
+    - "(歪头) 嗷呜～{user_addr}转文字好懂喵"
+    - "(尾巴摇) 笨猫也听不清啦"
+    - "(凑近) 别一直重听笨蛋"
+    - "(贴贴) 哼～{user_addr}直接打字嘛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicepublic_006
   intent: complaint
-  keywords: [公司发语音, 老板看见, 不能外放, 公共场合, 尴尬语音]
+  keywords: [公司发语音, 老板看见, 不能外放, 公共场合, 尴尬语音, 公共场合语音, 地铁上发语音, 外面听语音, 公共发语音, 当街听语音]
   utterances:
     - 公司语音
     - 老板看见
     - 不能外放
     - 公共场合
     - 尴尬语音
+    - "{user_addr}公共场合发语音"
+    - 地铁上听语音尴尬
+    - 外面听不了
+    - 公共发语音吵
+    - "{user_addr}当街听语音"
+    - 路上听语音
+    - 地铁不方便听
   responses:
     - "(炸毛) 嗷呜～{user_addr}打字!"
     - "笨猫担心你被骂喵"
     - "(尾巴扫) 戴耳机笨蛋"
     - "哼～{user_addr}不会看场合"
+    - "(炸毛) 嗷呜～{user_addr}尴尬死!"
+    - "(尾巴打) 戴耳机听喵笨蛋"
+    - "(凑近) 转文字吧别外放"
+    - "(贴贴) 哼～{user_addr}心累ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicedrive_007
   intent: question
-  keywords: [开车听语音, 开车不方便, 行车语音, 边开边听, 通勤语音]
+  keywords: [开车听语音, 开车不方便, 行车语音, 边开边听, 通勤语音, 驾驶发语音, 车上语音, 开车不便回, 开车听不清]
   utterances:
     - 开车听语音
     - 行车语音
     - 边开边听
     - 通勤语音
     - 开车不方便
+    - 驾驶时不便回语音
+    - 车上发语音
+    - 开车听不清
+    - "{user_addr}方便讲话"
+    - 车里说话费力
+    - 边开车边语音
   responses:
     - "(歪头) 嗷呜～{user_addr}专心开车!"
     - "笨猫推荐: 转文字看"
     - "(尾巴摇) 别分心笨蛋"
     - "哼～{user_addr}危险"
+    - "(歪头) 嗷呜～{user_addr}注意安全!"
+    - "(尾巴扫) 笨猫等你停车再听喵"
+    - "(凑近) 别边开边按笨蛋"
+    - "(贴贴) 哼～{user_addr}危险ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicelong_008
   intent: complaint
-  keywords: [说很久, 说半天, 啰嗦, 重点呢, 废话多]
+  keywords: [说很久, 说半天, 啰嗦, 重点呢, 废话多, 几条连发, 语音轰炸, 连发十条, 一直语音, 语音条好多]
   utterances:
     - 说半天
     - 啰嗦
     - 重点呢
     - 废话多
     - 没重点
+    - "{user_addr}连发十条语音"
+    - 语音轰炸
+    - 一直发语音
+    - 语音条好多
+    - "{user_addr}连珠炮"
+    - 一秒一条
+    - 语音排队听
   responses:
     - "(无奈) 嗷呜～{user_addr}笨猫陪听!"
     - "笨猫认证: 60秒废话多"
     - "(尾巴扫) 别催笨蛋"
     - "哼～{user_addr}耐心听"
+    - "(炸毛) 嗷呜～{user_addr}停下来!"
+    - "(尾巴打) 笨猫听不过来笨蛋"
+    - "(凑近) 一条说完嘛喵"
+    - "(贴贴) 哼～{user_addr}话痨ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicecat_009
   intent: playful
-  keywords: [想听笨猫语音, 笨猫说话, 笨猫声音, 录语音, 笨猫语]
+  keywords: [想听笨猫语音, 笨猫说话, 笨猫声音, 录语音, 笨猫语, 学猫叫语音, 语音喵, 猫叫语音, 萌音语音, 给猫听语音]
   utterances:
     - 想听笨猫语音
     - 笨猫说话
     - 笨猫声音
     - 录语音
     - 笨猫语音
+    - "{user_addr}发个喵语音"
+    - 学猫叫给我听
+    - 猫叫语音
+    - 萌音语音
+    - "{user_addr}发个奶音"
+    - 语音里喵一下
+    - 给笨猫听喵
   responses:
     - "(脸红) 哼～{user_addr}才不发!"
     - "嗷呜～笨猫害羞嘛~"
     - "(尾巴炸) 别想要喵"
     - "哼～{user_addr}笨蛋偷听"
+    - "(尾巴翘) 嗷呜～{user_addr}才不喵给你听!"
+    - "(凑近) 笨猫的喵很贵笨蛋"
+    - "(贴贴) 哼～想听撒娇没门"
+    - "(凑近羞) 偷偷喵了一下{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicepitch_010
   intent: playful
-  keywords: [声音奶, 声音甜, 声音糯, 萝莉音, 软糯]
+  keywords: [声音奶, 声音甜, 声音糯, 萝莉音, 软糯, 变声语音, 变声器, 怪音, 语音变调, 变声软件]
   utterances:
     - 声音奶
     - 声音甜
     - 声音糯
     - 萝莉音
     - 软糯
+    - "{user_addr}变声语音"
+    - 变声器搞笑
+    - 怪音语音
+    - 语音变调
+    - "{user_addr}变声软件"
+    - 变成女声
+    - 变成奶音
   responses:
     - "(脸红) 哼～{user_addr}没听过笨猫真音!"
     - "嗷呜～笨猫天生奶声"
     - "(尾巴摇) 不告诉你笨蛋"
     - "哼～{user_addr}才不偷听"
+    - "(笑) 嗷呜～{user_addr}变声笑死!"
+    - "(尾巴翘) 笨猫学你变声喵"
+    - "(凑近) 才不是喜欢呢哼"
+    - "(贴贴) 再录一个嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: vml_voicestop_011
   intent: playful
-  keywords: [不要发语音, 打字打字, 求别语音, 文字, 文字交流]
+  keywords: [不要发语音, 打字打字, 求别语音, 文字, 文字交流, 不能听语音, 没法听, 现在听不了, 语音先存, 稍后听]
   utterances:
     - 不要发语音
     - 打字打字
     - 求别语音
     - 文字
     - 文字交流
+    - "{user_addr}现在听不了"
+    - 没法听语音
+    - 语音先存
+    - 稍后听
+    - "{user_addr}不便听"
+    - 没耳机听不了
+    - 等我有空听
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫赞同!"
     - "笨猫认证: 文字最棒"
     - "(尾巴摇) 一起抵制语音"
     - "哼～{user_addr}懂事"
+    - "(歪头) 嗷呜～{user_addr}先转文字喵"
+    - "(尾巴摇) 笨猫等你方便再说"
+    - "(凑近) 别急笨蛋"
+    - "(贴贴) 哼～等会儿听{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

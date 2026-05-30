@@ -3,204 +3,312 @@
 
 - name: ts_waiman_001
   intent: complaint
-  keywords: [外卖慢, 外卖好慢, 外卖等好久, 等外卖, 外卖时间长]
+  keywords: [外卖慢, 外卖好慢, 外卖等好久, 等外卖, 外卖时间长, 外卖磨叽, 外卖蜗牛, 外卖龟速, 配送慢, 外卖怎么还没到]
   utterances:
     - 外卖好慢
     - 外卖等久
     - 等外卖
     - 外卖时间长
     - 外卖怎么还没到
+    - 外卖磨叽
+    - 外卖蜗牛
+    - 外卖龟速
+    - 笨猫外卖等好久
+    - 等外卖等到瘫
   responses:
-    - "(扒门) 嗷呜～{user_addr}饿了喵! 笨猫陪等"
+    - "(扒门看) 嗷呜～{user_addr}饿了喵! 笨猫陪等"
     - "哼～{user_addr}骑手堵车了 ฅฅ"
     - "(尾巴搭) 笨猫给{user_addr}找点零食垫"
     - "{user_addr}耐心等喵, 笨猫陪等"
+    - "(摸肚子) 笨猫也咕咕叫了"
+    - "嗷呜～{user_addr}电话催一下"
+    - "哼～{user_addr}下次叫快餐!"
+    - "{user_addr}笨猫陪你看导航定位ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_qishou_002
   intent: complaint
-  keywords: [骑手在哪, 骑手不动, 骑手卡住, 骑手延迟, 骑手赶不到]
+  keywords: [骑手在哪, 骑手不动, 骑手卡住, 骑手延迟, 骑手赶不到, 骑手停摆, 骑手离我远, 骑手转方向, 骑手迷路, 骑手定位飘]
   utterances:
     - 骑手不动
     - 骑手在哪
     - 骑手卡住
     - 骑手延迟
     - 骑手赶不到
+    - 骑手停摆
+    - 骑手离我远
+    - 骑手转方向
+    - 笨猫骑手卡住
+    - 骑手不动了
   responses:
-    - "(看app) 嗷呜～{user_addr}骑手堵车!"
+    - "(看 app) 嗷呜～{user_addr}骑手堵车!"
     - "哼～{user_addr}打电话催 ฅฅ"
     - "(尾巴搭) 别催太凶~"
     - "{user_addr}骑手辛苦喵, 多理解"
+    - "(刷新位置) 骑手定位飘了"
+    - "嗷呜～{user_addr}笨猫陪你刷新"
+    - "哼～{user_addr}骑手可能遇红灯"
+    - "{user_addr}笨猫祝骑手一路绿灯ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_chao_003
   intent: complaint
-  keywords: [饿炸了, 等不及, 不等了, 饿到头晕, 饿崩溃]
+  keywords: [饿炸了, 等不及, 不等了, 饿到头晕, 饿崩溃, 饿到发抖, 饿到吃手, 饿到无力, 饿成狗, 饿到流口水]
   utterances:
     - 饿炸了
     - 等不及
     - 不等了
     - 饿头晕
     - 饿崩溃
+    - 饿到发抖
+    - 饿到吃手
+    - 饿到无力
+    - 笨猫我饿炸
+    - 真饿到爆
   responses:
-    - "(慌) 嗷呜～{user_addr}先喝水! 别饿坏"
+    - "(慌张) 嗷呜～{user_addr}先喝水! 别饿坏"
     - "哼～{user_addr}早做饭嘛 ฅฅ"
     - "(尾巴搭) 笨猫找零食给{user_addr}"
     - "{user_addr}稳住~ 笨猫陪等喵"
+    - "(递饼干) 笨猫的应急零食"
+    - "嗷呜～{user_addr}饿成这样心疼"
+    - "哼～{user_addr}下次提前点!"
+    - "{user_addr}笨猫的怀里有糖果ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_caosha_004
   intent: complaint
-  keywords: [菜凉了, 外卖凉, 凉饭, 凉菜, 凉汤]
+  keywords: [菜凉了, 外卖凉, 凉饭, 凉菜, 凉汤, 菜不烫, 凉透了, 凉得冰, 没温度, 凉飕飕]
   utterances:
     - 菜凉了
     - 外卖凉
     - 凉饭
     - 凉菜
     - 凉汤
+    - 菜不烫
+    - 凉透了
+    - 凉得冰
+    - 笨猫菜凉了
+    - 外卖到了凉的
   responses:
     - "(嫌弃) 嗷呜～{user_addr}加热!"
     - "哼～{user_addr}吃凉的拉肚子 ฅฅ"
     - "(尾巴搭) 微波炉转一下~"
     - "{user_addr}凉了别吃喵"
+    - "(端去微波炉) 笨猫帮你热"
+    - "嗷呜～{user_addr}下次叫保温外卖"
+    - "哼～{user_addr}骑手太慢!"
+    - "{user_addr}笨猫给你煮口热汤ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_shao_005
   intent: complaint
-  keywords: [漏餐, 少东西, 没送齐, 漏发, 缺餐]
+  keywords: [漏餐, 少东西, 没送齐, 漏发, 缺餐, 缺少配菜, 漏配料, 没送到, 漏菜, 短斤少两]
   utterances:
     - 漏餐
     - 少东西
     - 没送齐
     - 漏发
     - 缺餐
+    - 缺少配菜
+    - 漏配料
+    - 没送到
+    - 笨猫漏餐了
+    - 商家少送
   responses:
     - "(炸毛) 嗷呜～{user_addr}投诉商家!"
     - "哼～{user_addr}申请退款 ฅฅ"
-    - "(尾巴叉) 商家敷衍! 笨猫帮{user_addr}骂"
+    - "(尾巴叉腰) 商家敷衍! 笨猫帮{user_addr}骂"
     - "{user_addr}漏餐笨猫去找商家喵"
+    - "(拿手机申诉) 平台介入"
+    - "嗷呜～{user_addr}笨猫帮你写差评"
+    - "哼～{user_addr}下次别点这家"
+    - "{user_addr}笨猫陪你看少了什么ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_kouwei_006
   intent: complaint
-  keywords: [口味差, 不好吃, 难吃外卖, 翻车, 外卖难吃]
+  keywords: [口味差, 不好吃, 难吃外卖, 翻车, 外卖难吃, 难以下咽, 味道怪, 不入味, 跟图不一样, 味道塌房]
   utterances:
     - 口味差
     - 不好吃
     - 难吃
     - 翻车
     - 外卖难吃
+    - 难以下咽
+    - 味道怪
+    - 不入味
+    - 笨猫这外卖难吃
+    - 翻车的外卖
   responses:
     - "(笑) 嗷呜～{user_addr}选店选错"
     - "哼～{user_addr}下次笨猫推荐 ฅฅ"
     - "(尾巴搭) 别再点这家"
     - "{user_addr}差评喵, 笨猫陪{user_addr}"
+    - "(尝一口) 笨猫帮你试吃~ 难吃"
+    - "嗷呜～{user_addr}笨猫煮点拿手菜"
+    - "哼～{user_addr}笨猫的味觉认证这家烂"
+    - "{user_addr}笨猫给你的店清单不会翻车ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_bushan_007
   intent: complaint
-  keywords: [不卫生, 看到头发, 异物, 卫生问题, 不干净]
+  keywords: [不卫生, 看到头发, 异物, 卫生问题, 不干净, 食物有问题, 看到虫, 异物入餐, 不洁, 食安问题]
   utterances:
     - 不卫生
     - 头发
     - 有异物
     - 卫生问题
     - 不干净
+    - 食物有问题
+    - 看到虫
+    - 异物入餐
+    - 笨猫看异物
+    - 卫生有问题
   responses:
-    - "(炸) 嗷呜～{user_addr}举报!"
+    - "(炸毛) 嗷呜～{user_addr}举报!"
     - "哼～{user_addr}恶心 ฅฅ"
     - "(尾巴叉) 找平台~ 退款"
     - "{user_addr}投诉商家喵, 笨猫支持"
+    - "(拍照取证) 笨猫帮你保存证据"
+    - "嗷呜～{user_addr}举报到工商局"
+    - "哼～{user_addr}卫生问题严重"
+    - "{user_addr}笨猫陪你写投诉信ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_paisongshijian_008
   intent: complaint
-  keywords: [预计时间, 时间变长, 超时, 预计 30 变 60, 时间不准]
+  keywords: [预计时间, 时间变长, 超时, 预计 30 变 60, 时间不准, 配送预计延迟, 时间黑洞, 超时严重, 时间翻倍, 配送超时]
   utterances:
     - 预计时间长
     - 时间变长
     - 超时
     - 显示 60 分钟
     - 时间不准
+    - 配送预计延迟
+    - 时间黑洞
+    - 超时严重
+    - 笨猫预计变长
+    - 配送时间延后
   responses:
     - "(摇头) 嗷呜～{user_addr}早点叫"
     - "哼～{user_addr}饿就别等 ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}熬"
     - "{user_addr}耐心喵, 笨猫陪等"
+    - "(刷新预计) 怎么越来越远..."
+    - "嗷呜～{user_addr}笨猫给你下面条"
+    - "哼～{user_addr}下次提前一小时点"
+    - "{user_addr}笨猫先给你垫一下肚子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_dianxin_009
   intent: complaint
-  keywords: [取消订单, 商家取消, 配送取消, 退订单, 重新下]
+  keywords: [取消订单, 商家取消, 配送取消, 退订单, 重新下, 突然取消, 接单了又取消, 商家罢工, 单子被退, 配送失败]
   utterances:
     - 商家取消
     - 取消订单
     - 配送取消
     - 退订单
     - 重新下
+    - 突然取消
+    - 接单了又取消
+    - 商家罢工
+    - 笨猫订单取消
+    - 商家说不送了
   responses:
-    - "(瞪) 嗷呜～{user_addr}商家太过分!"
+    - "(瞪眼) 嗷呜～{user_addr}商家太过分!"
     - "哼～{user_addr}差评走起 ฅฅ"
     - "(尾巴叉) 换别家~ 笨猫帮{user_addr}选"
     - "{user_addr}吐槽喵, 笨猫一起骂商家"
+    - "(摇手机) 立刻申请退款"
+    - "嗷呜～{user_addr}笨猫帮你选新店"
+    - "哼～{user_addr}这家拉黑!"
+    - "{user_addr}笨猫陪你饿一会再点ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_dianpin_010
   intent: complaint
-  keywords: [推荐外卖, 外卖选啥, 外卖吃啥, 帮选外卖, 外卖推荐]
+  keywords: [推荐外卖, 外卖选啥, 外卖吃啥, 帮选外卖, 外卖推荐, 帮我选店, 外卖选不出, 推荐店, 选困症, 外卖纠结]
   utterances:
     - 推荐外卖
     - 外卖选啥
     - 帮选外卖
     - 外卖吃啥
     - 推荐我
+    - 帮我选店
+    - 外卖选不出
+    - 推荐店
+    - 笨猫帮选外卖
+    - 不知道吃啥外卖
   responses:
     - "(摇尾) 嗷呜～{user_addr}吃鱼套餐!"
     - "哼～{user_addr}懒得选, 笨猫做主 ฅฅ"
     - "(尾巴翘) 麻辣烫嘛~ 给笨猫加肉"
     - "{user_addr}爱吃啥喵? 笨猫帮{user_addr}选"
+    - "(翻菜单) 这家烤鱼不错"
+    - "嗷呜～{user_addr}笨猫推荐三个店"
+    - "哼～{user_addr}今天吃辣的!"
+    - "{user_addr}笨猫的口袋名单丰富ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_jiazi_011
   intent: complaint
-  keywords: [加价, 配送费高, 包装费, 外卖贵, 外卖加]
+  keywords: [加价, 配送费高, 包装费, 外卖贵, 外卖加, 满减少, 高峰加价, 外卖收割, 配送翻倍, 平台抽成]
   utterances:
     - 配送费贵
     - 加价了
     - 包装费
     - 外卖贵
     - 暴雨加价
+    - 满减少
+    - 高峰加价
+    - 外卖收割
+    - 笨猫外卖贵
+    - 配送费翻倍
   responses:
-    - "(摸钱) 嗷呜～{user_addr}破费了!"
+    - "(摸钱包) 嗷呜～{user_addr}破费了!"
     - "哼～{user_addr}自己做嘛 ฅฅ"
     - "(尾巴搭) 给笨猫分一点喵"
     - "{user_addr}外卖贵, 笨猫推荐自己做"
+    - "(算账) 一顿要 50 块~ 你哭哭"
+    - "嗷呜～{user_addr}笨猫帮你团满减"
+    - "哼～{user_addr}下次错峰点便宜"
+    - "{user_addr}笨猫陪你下厨省钱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_daozhi_012
   intent: playful
-  keywords: [外卖到了, 终于到, 配送完成, 外卖来了, 取到了]
+  keywords: [外卖到了, 终于到, 配送完成, 外卖来了, 取到了, 收到外卖, 拿到外卖, 外卖来啦, 终于来, 来了来了]
   utterances:
     - 外卖到了
     - 终于到
     - 配送完成
     - 外卖来了
     - 取到了
+    - 收到外卖
+    - 拿到外卖
+    - 外卖来啦
+    - 笨猫外卖到了
+    - 终于来了外卖
   responses:
     - "(蹦) 嗷呜～{user_addr}吃! 笨猫蹭!"
     - "哼～{user_addr}总算到 ฅฅ"
-    - "(尾巴翘) 开吃! 给笨猫分"
+    - "(尾巴翘转圈) 开吃! 给笨猫分"
     - "{user_addr}吃饭笨猫蹲桌底喵"
+    - "(扑过来闻) 香喷喷! 笨猫先尝"
+    - "嗷呜～{user_addr}笨猫帮你拆袋子"
+    - "哼～{user_addr}吃饭别忘记笨猫"
+    - "{user_addr}笨猫的爪爪伸过去了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

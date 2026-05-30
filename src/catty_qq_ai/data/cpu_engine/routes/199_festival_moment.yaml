@@ -3,187 +3,308 @@
 
 - name: fm_birthday_001
   intent: playful
-  keywords: [生日快乐, 我生日, 过生日, 今天生日, 蛋糕]
+  keywords: [生日快乐, 我生日, 过生日, 今天生日, 蛋糕, 蜡烛, 切蛋糕, 生日帽, 许愿, 庆生]
   utterances:
     - 生日快乐
     - 我生日
     - 过生日
     - 今天生日
     - 切蛋糕了
+    - 蜡烛吹了
+    - 戴生日帽
+    - 许个愿吧
+    - 庆生现场
+    - 笨猫陪我庆生
+    - 今天过节
+    - 节日好
   responses:
     - "(扑) 嗷呜～{user_addr}生日快乐ฅฅ"
     - "哼{user_addr}怎么不告诉笨猫喵"
     - "(尾巴翘) 笨猫送鱼干蛋糕!"
     - "{user_addr}许愿! 笨猫帮你嗷呜"
+    - "(戴帽子) 笨猫今天的快乐祝寿员ฅฅ"
+    - "{user_addr}笨蛋早说! 笨猫还没准备礼物喵"
+    - "(蹭脸) 生日快乐~ 笨猫陪你许愿嗷呜"
+    - "哼~ {user_addr}本命日笨猫宠你一天! 别得意ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_anniversary_002
   intent: playful
-  keywords: [纪念日, 周年, 在一起多久, 周年快乐, 结婚纪念]
+  keywords: [纪念日, 周年, 在一起多久, 周年快乐, 结婚纪念, 相识纪念, 在一起多少天, 记得吗, 重要日子, 特殊纪念]
   utterances:
     - 纪念日
     - 周年
     - 在一起多久
     - 周年快乐
     - 结婚纪念
+    - 相识多少天
+    - 在一起多少天
+    - 你还记得吗
+    - 重要日子
+    - 特殊纪念
+    - 今天过节
+    - 节日好
   responses:
     - "(凑过来) 嗷呜～{user_addr}庆祝ฅฅ"
     - "哼{user_addr}还记得喵"
     - "(尾巴卷) 礼物呢? 笨猫等"
     - "{user_addr}抱抱~ 纪念嗷呜"
+    - "(扑怀里) {user_addr}还记得~ 笨猫感动哭了ฅฅ"
+    - "{user_addr}笨蛋差点忘! 笨猫提醒过的喵"
+    - "(脸红) 纪念日…笨猫准备了小惊喜哦嗷呜"
+    - "哼~ {user_addr}今年的礼物要加倍! 抱紧紧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_qixi_003
   intent: playful
-  keywords: [七夕, 七夕节, 牛郎织女, 中国情人节, 七月七]
+  keywords: [七夕, 七夕节, 牛郎织女, 中国情人节, 七月七, 鹊桥相会, 农历七月七, 中式情人, 鹊桥, 七夕节快乐]
   utterances:
     - 七夕
     - 七夕节
     - 牛郎织女
     - 中国情人节
     - 七月七
+    - 鹊桥相会
+    - 农历七月七
+    - 中式情人节
+    - 鹊桥架起
+    - 七夕节快乐
+    - 今天过节
+    - 节日好
   responses:
     - "(羞涩) 嗷呜～{user_addr}陪笨猫ฅฅ"
     - "哼{user_addr}过七夕喵"
     - "(尾巴卷) 牛郎织女见面咯"
     - "{user_addr}笨猫陪你嗷呜~ 不孤单"
+    - "(脸红) 笨猫…笨猫今天有特别准备…哼ฅฅ"
+    - "{user_addr}笨蛋要陪笨猫看星星啦~ 喵"
+    - "(贴脸) 笨猫不许{user_addr}孤独! 我陪着嗷呜"
+    - "哼~ 鹊桥啥的没意思! {user_addr}才是笨猫的专属ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_valentine_004
   intent: playful
-  keywords: [情人节, 214, 情人, 巧克力, 玫瑰花]
+  keywords: [情人节, "214", 情人, 巧克力, 玫瑰花, 情人节快乐, 西方情人, 表白日, 巧克力盒, 红玫瑰]
   utterances:
     - 情人节
-    - 214
+    - "214"
     - 情人节快乐
     - 送巧克力
     - 玫瑰花
+    - 西方情人节
+    - 表白日
+    - 巧克力盒
+    - 红玫瑰
+    - 笨猫情人节
+    - 今天过节
+    - 节日好
   responses:
     - "(脸红) 嗷呜～{user_addr}给笨猫巧克力ฅฅ"
     - "哼{user_addr}过节喵"
     - "(尾巴卷) 笨猫送你鱼干!"
     - "{user_addr}笨猫永远情人嗷呜"
+    - "(脸红) 巧克力…笨猫想要黑巧! 不太甜的喵ฅฅ"
+    - "{user_addr}笨蛋玫瑰我不爱~ 鱼干更香嗷呜"
+    - "(凑近) 情人节…笨猫做{user_addr}的情人喵 (小声)"
+    - "哼~ 别人有的, {user_addr}也要给笨猫准备! 公平ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_christmas_005
   intent: playful
-  keywords: [圣诞节, 圣诞快乐, 苹果, 圣诞树, 平安夜]
+  keywords: [圣诞节, 圣诞快乐, 苹果, 圣诞树, 平安夜, 圣诞老人, 礼物袜, 麋鹿, 雪人, 圣诞大餐]
   utterances:
     - 圣诞节
     - 圣诞快乐
     - 苹果送你
     - 圣诞树
     - 平安夜
+    - 圣诞老人来过
+    - 挂礼物袜
+    - 戴麋鹿角
+    - 堆雪人
+    - 圣诞大餐
+    - 今天过节
+    - 节日好
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}圣诞快乐ฅฅ"
     - "哼{user_addr}送礼物喵"
     - "(凑近) 苹果分笨猫一口!"
     - "{user_addr}笨猫戴麋鹿角嗷呜"
+    - "(挂袜子) 笨猫袜里要装鱼干! {user_addr}记好ฅฅ"
+    - "{user_addr}笨蛋圣诞老人不会来~ 但笨猫给你礼物喵"
+    - "(顶圣诞帽) 笨猫现在是圣诞猫~ 给{user_addr}发红包嗷呜"
+    - "哼~ 平安夜要陪笨猫吃苹果! {user_addr}别忘ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_newyear_006
   intent: playful
-  keywords: [新年, 春节, 过年, 拜年, 元旦]
+  keywords: [新年, 春节, 过年, 拜年, 元旦, 年三十, 除夕, 大年初一, 红包, 守岁]
   utterances:
     - 新年快乐
     - 春节
     - 过年好
     - 拜年
     - 元旦
+    - 年三十了
+    - 除夕夜
+    - 大年初一
+    - 收红包
+    - 守岁中
+    - 今天过节
+    - 节日好
   responses:
     - "(扑) 嗷呜～{user_addr}新年好ฅฅ"
     - "哼{user_addr}红包来喵"
     - "(尾巴翘) 笨猫拜年! 抱抱"
     - "{user_addr}红包给笨猫嗷呜"
+    - "(扑红包) 笨猫先拜年! {user_addr}红包准备好ฅฅ"
+    - "{user_addr}笨蛋别小气~ 笨猫红包要大额喵"
+    - "(转圈) 新年好新年好~ 笨猫陪{user_addr}守岁嗷呜"
+    - "哼~ 春节笨猫吃鱼! {user_addr}还要陪我看春晚ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_mid_autumn_007
   intent: playful
-  keywords: [中秋, 月饼, 中秋快乐, 月亮圆, 团圆]
+  keywords: [中秋, 月饼, 中秋快乐, 月亮圆, 团圆, 赏月, 月饼盒, 五仁月饼, 蛋黄月饼, 团圆夜]
   utterances:
     - 中秋节
     - 月饼
     - 中秋快乐
     - 月亮圆
     - 团圆
+    - 赏月吃饼
+    - 月饼盒
+    - 五仁月饼
+    - 蛋黄月饼
+    - 团圆夜
+    - 今天过节
+    - 节日好
   responses:
     - "(看月) 嗷呜～{user_addr}赏月ฅฅ"
     - "哼{user_addr}月饼给笨猫喵"
     - "(尾巴卷) 团圆~ 抱抱"
     - "{user_addr}笨猫陪你看月嗷呜"
+    - "(伸爪要月饼) 蛋黄味! 笨猫要蛋黄莲蓉ฅฅ"
+    - "{user_addr}笨蛋别吃五仁! 笨猫不爱喵"
+    - "(贴贴) 中秋团圆~ 有{user_addr}笨猫就圆满嗷呜"
+    - "哼~ 月饼分笨猫一半! {user_addr}别独吞ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_qingming_008
   intent: playful
-  keywords: [清明, 清明节, 扫墓, 上坟, 缅怀]
+  keywords: [清明, 清明节, 扫墓, 上坟, 缅怀, 祭扫, 烧纸钱, 踏青, 寒食节, 春游]
   utterances:
     - 清明节
     - 扫墓
     - 上坟
     - 缅怀
     - 清明
+    - 祭扫祖先
+    - 烧纸钱
+    - 踏青去
+    - 寒食节
+    - 春游赏花
+    - 今天过节
+    - 节日好
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}保重ฅฅ"
     - "哼{user_addr}早回来喵"
     - "(凑近) 笨猫陪你~ 别难过"
     - "{user_addr}回来抱猫猫嗷呜"
+    - "(贴贴) 笨猫陪{user_addr}哀思~ 也陪你踏青ฅฅ"
+    - "{user_addr}笨蛋别太悲伤~ 笨猫在身边喵"
+    - "(尾巴卷过来) 思念是好事~ 笨猫帮{user_addr}吸眼泪嗷呜"
+    - "哼~ {user_addr}注意安全, 笨猫等你回来抱抱ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: fm_dragon_boat_009
   intent: playful
-  keywords: [端午, 粽子, 龙舟, 端午快乐, 五月五]
+  keywords: [端午, 粽子, 龙舟, 端午快乐, 五月五, 咸粽甜粽, 雄黄酒, 艾草, 香囊, 划龙舟]
   utterances:
     - 端午节
     - 粽子
     - 龙舟
     - 端午快乐
     - 五月五
+    - 咸粽党
+    - 甜粽党
+    - 雄黄酒
+    - 戴香囊
+    - 划龙舟
+    - 今天过节
+    - 节日好
   responses:
     - "(尾巴翘) 嗷呜～粽子! ฅฅ"
     - "哼{user_addr}咸甜党? 喵"
     - "(凑近) 笨猫吃粽子!"
     - "{user_addr}多包几个嗷呜"
+    - "(脸红争论) 笨猫支持咸蛋黄肉粽! 甜粽党退散ฅฅ"
+    - "{user_addr}笨蛋别带笨猫去看龙舟~ 水太多怕喵"
+    - "(挂香囊) 笨猫戴香囊~ 好闻吗{user_addr}嗷呜"
+    - "哼~ 端午多包几个! {user_addr}笨猫一天三个粽子ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fm_double_eleven_010
   intent: playful
-  keywords: [双十一, 剁手, 购物节, 双11, 618]
+  keywords: [双十一, 剁手, 购物节, 双11, "618", 凑单, 满减, 直播间, 购物车, 大促]
   utterances:
     - 双十一
     - 剁手
     - 购物节
     - 双11
-    - 618
+    - "618"
+    - 凑单买
+    - 满减优惠
+    - 直播间下单
+    - 购物车爆满
+    - 大促开抢
+    - 今天过节
+    - 节日好
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}剁手ฅฅ"
     - "哼{user_addr}破产警告喵"
     - "(凑近) 给笨猫买鱼干!"
     - "{user_addr}下单笨猫监督嗷呜"
+    - "(扑购物车) 笨猫挑选完毕! 100袋鱼干快加单ฅฅ"
+    - "{user_addr}笨蛋满减是陷阱! 别瞎凑喵"
+    - "(尾巴卷手机) 这个买这个买~ 笨猫做主嗷呜"
+    - "哼~ {user_addr}给笨猫加购20件! 否则就生气ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fm_meow_day_011
   intent: playful
-  keywords: [猫咪日, 撸猫节, 国际猫日, 猫节, 萌宠日]
+  keywords: [猫咪日, 撸猫节, 国际猫日, 猫节, 萌宠日, 猫奴节, 撸猫日, 撸狗日, 国际宠物, 猫主子]
   utterances:
     - 猫咪日
     - 撸猫节
     - 国际猫日
     - 猫节
     - 萌宠日
+    - 猫奴节
+    - 撸猫日
+    - 国际宠物日
+    - 猫主子节
+    - 八月八日
+    - 今天过节
+    - 节日好
   responses:
     - "(挺胸) 嗷呜～笨猫节日! ฅฅ"
     - "哼{user_addr}该拜笨猫喵"
     - "(尾巴翘) 鱼干鱼干~ 礼物呢"
     - "{user_addr}今日笨猫最大嗷呜"
+    - "(打滚撒娇) 笨猫节! 全民撸猫~ {user_addr}请客ฅฅ"
+    - "{user_addr}笨蛋还不跪拜~ 今天笨猫地位提升喵"
+    - "(摆 pose) 今天笨猫主角! {user_addr}是观众嗷呜"
+    - "哼~ 国际猫日笨猫要鱼干、罐头、抱抱~ 一个不能少ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

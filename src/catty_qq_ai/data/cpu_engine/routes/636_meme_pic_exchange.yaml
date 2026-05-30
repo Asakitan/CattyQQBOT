@@ -3,187 +3,301 @@
 
 - name: mpe_swapmeme_001
   intent: playful
-  keywords: [交换表情, 互发表情, 给我表情, 求表情, 表情交易]
+  keywords: [交换表情, 互发表情, 给我表情, 求表情, 表情交易, 交换表情包, 换表情, 互换图, 表情交流]
   utterances:
     - 交换表情
     - 互发表情
     - 给我表情
     - 求表情
     - 表情交易
+    - "{user_addr}换表情吗"
+    - 互换图
+    - 表情交流
+    - "{user_addr}发我点表情"
+    - 我发你点
+    - 我们换换
   responses:
     - "(歪头) 嗷呜～{user_addr}先发一波!"
     - "笨猫拿出秘藏喵"
     - "(尾巴摇) 一换一笨蛋"
     - "哼～{user_addr}贪婪"
+    - "(凑近) 嗷呜～{user_addr}笨猫给你!"
+    - "(尾巴翘) 你也给笨猫几张笨蛋"
+    - "(贴贴) 才不是想要呢哼"
+    - "(歪头) 互换更香{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_collectset_002
   intent: question
-  keywords: [表情套装, 一套, 整套表情, 系列表情, 表情合集]
+  keywords: [表情套装, 一套, 整套表情, 系列表情, 表情合集, 表情包套装, 一套表情, 配套表情, 主题表情]
   utterances:
     - 整套表情
     - 一套
     - 系列表情
     - 表情合集
     - 表情套装
+    - "{user_addr}一套表情包"
+    - 配套表情
+    - 主题表情
+    - "{user_addr}成套发我"
+    - 整套来
+    - 系列发齐
   responses:
     - "(歪头) {user_addr}笨猫推荐贴吧扒"
     - "嗷呜～套装才有威力喵"
     - "(尾巴摇) 收齐才强"
     - "哼～{user_addr}懂收集"
+    - "(歪头) 嗷呜～{user_addr}笨猫整理一套喵"
+    - "(尾巴扫) 笨猫主题表情笨蛋"
+    - "(凑近) 才不是炫耀呢哼"
+    - "(贴贴) 全套给你{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_qqstickr_003
   intent: question
-  keywords: [QQ表情, 微信表情, 添加表情, 商城下载, 表情商店]
+  keywords: [QQ表情, 微信表情, 添加表情, 商城下载, 表情商店, QQ自带表情, 默认表情, QQ经典, 黄脸]
   utterances:
     - QQ表情
     - 微信表情
     - 添加表情
     - 商城下载
     - 表情商店
+    - "{user_addr}QQ表情用一下"
+    - QQ自带表情
+    - 默认表情
+    - QQ经典黄脸
+    - "{user_addr}发个龇牙"
+    - 小黄脸表情
+    - QQ表情够用
   responses:
     - "(歪头) {user_addr}笨猫教你 ฅฅ"
     - "嗷呜～长按存喵"
     - "(尾巴摇) 表情商城有免费的"
     - "哼～{user_addr}笨蛋不会"
+    - "(歪头) 嗷呜～{user_addr}经典黄脸喵"
+    - "(尾巴摇) 笨猫也常用笨蛋"
+    - "(凑近) 才不是俗呢哼"
+    - "(贴贴) 简单好用{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_rareitem_004
   intent: playful
-  keywords: [稀有表情, 限定, 绝版, 老表情, 古老表情]
+  keywords: [稀有表情, 限定, 绝版, 老表情, 古老表情, 绝版表情, 难找的表情, 罕见表情, 少见表情]
   utterances:
     - 稀有表情
     - 限定
     - 绝版
     - 老表情
     - 古老表情
+    - 绝版表情
+    - 难找的表情
+    - 罕见表情
+    - "{user_addr}少见的图"
+    - 老古董表情
+    - 隐藏款
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}求笨猫?"
     - "笨猫珍藏不轻易给喵"
     - "(歪头) 用一波好图换"
     - "哼～{user_addr}讨好笨猫"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫有稀有的!"
+    - "(凑近) 给你看一眼笨蛋"
+    - "(贴贴) 才不是显摆呢哼"
+    - "(歪头) 想要吗{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_sendseq_005
   intent: playful
-  keywords: [连发, 一连串发, 表情轰炸, 连珠炮, 连发表情]
+  keywords: [连发, 一连串发, 表情轰炸, 连珠炮, 连发表情, 连环表情, 连续发图, 一连串, 表情连击]
   utterances:
     - 连发
     - 一连串
     - 表情轰炸
     - 连珠炮
     - 连发表情
+    - 连环表情
+    - 连续发图
+    - 表情连击
+    - "{user_addr}连发轰炸"
+    - 连六个表情
+    - 连发不停
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫晕!"
     - "笨猫认证: 视觉污染"
     - "(尾巴打) 别发太快"
     - "哼～{user_addr}手贱"
+    - "(炸毛) 嗷呜～{user_addr}连发笨猫眼花!"
+    - "(尾巴打) 别连发笨蛋"
+    - "(凑近) 才不是吓到呢哼"
+    - "(贴贴) 笨猫接不住{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_funmeme_006
   intent: playful
-  keywords: [搞笑表情, 沙雕表情, 整活, 沙雕图, 搞笑]
+  keywords: [搞笑表情, 沙雕表情, 整活, 沙雕图, 搞笑, 梗图, 神图, 魔性表情]
   utterances:
     - 搞笑表情
     - 沙雕表情
     - 整活
     - 沙雕图
     - 搞笑图
+    - 梗图来一个
+    - 神图救命
+    - "{user_addr}魔性表情"
+    - 沙雕图笑死
+    - 梗图轰炸
   responses:
     - "(笑) 嗷呜～{user_addr}笨猫最爱沙雕!"
     - "笨猫推荐沙雕含量100%"
     - "(尾巴摇) 笑死人"
     - "哼～{user_addr}快乐源泉"
+    - "(笑) 嗷呜～{user_addr}沙雕图笑死!"
+    - "(尾巴翘) 才不是跟着笑呢哼"
+    - "(贴贴) 笨猫也爱沙雕喵"
+    - "(歪头) 再发{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_cutememe_007
   intent: playful
-  keywords: [可爱表情, 萌图, 软萌, 可爱猫, 萌系]
+  keywords: [可爱表情, 萌图, 软萌, 可爱猫, 萌系, 小动物表情, 萌物, 可爱图]
   utterances:
     - 可爱表情
     - 萌图
     - 软萌
     - 可爱猫
     - 萌系表情
+    - 萌图救命
+    - 小动物表情
+    - 萌物图
+    - "{user_addr}可爱猫狗图"
+    - 萌死人
+    - 萌得不行
   responses:
     - "(脸红) 哼～{user_addr}爱萌的!"
     - "嗷呜～笨猫最萌"
     - "(尾巴摇) 笨猫表情包出道?"
     - "哼～{user_addr}舔笨猫"
+    - "(凑近) 嗷呜～{user_addr}笨猫被萌到!"
+    - "(尾巴翘) 才不是被吸引呢哼"
+    - "(贴贴) 收藏一张喵"
+    - "(歪头) 像不像笨猫{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_tearmeme_008
   intent: playful
-  keywords: [哭笑表情, 笑哭, 一边哭一边笑, 啼笑皆非, 笑泪表情]
+  keywords: [哭笑表情, 笑哭, 一边哭一边笑, 啼笑皆非, 笑泪表情, 撕逼表情, 怼人表情, 吵架表情, 杠人表情, 反击表情]
   utterances:
     - 笑哭表情
     - 笑泪
     - 啼笑皆非
     - 哭笑表情
     - 笑哭脸
+    - "{user_addr}怼人表情"
+    - 撕逼表情
+    - 吵架用的
+    - 杠人表情
+    - "{user_addr}反击图"
+    - 战斗表情
+    - 气死人表情
   responses:
     - "(歪头) 嗷呜～{user_addr}万能表情!"
     - "笨猫认证: 笑哭神器"
     - "(尾巴摇) 啥情境都能用"
     - "哼～{user_addr}懒得分类"
+    - "(歪头) 嗷呜～{user_addr}别和人吵!"
+    - "(尾巴扫) 笨猫帮你怼笨蛋"
+    - "(凑近) 才不是怕你输呢哼"
+    - "(贴贴) 笨猫一上场没人敢杠{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_picsize_009
   intent: question
-  keywords: [表情包文件, 表情过大, gif大, 表情不能发, 表情失败]
+  keywords: [表情包文件, 表情过大, gif大, 表情不能发, 表情失败, 表情包内存, 存太多图, 表情包占空间, 清表情, 清理表情]
   utterances:
     - 表情过大
     - gif太大
     - 不能发
     - 表情失败
     - 表情包文件
+    - "{user_addr}表情包内存满"
+    - 存太多图
+    - 表情包占空间
+    - 清表情包
+    - "{user_addr}清理表情"
+    - 手机存不下
+    - 内存爆了
   responses:
     - "(歪头) {user_addr}笨猫帮你压缩 ฅฅ"
     - "嗷呜～换静态喵"
     - "(尾巴摇) 别太高清笨蛋"
     - "哼～{user_addr}总卡"
+    - "(歪头) 嗷呜～{user_addr}清掉不用的喵"
+    - "(尾巴扫) 留稀有的就行笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 笨猫的也好多{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_trendingmeme_010
   intent: question
-  keywords: [最新梗, 流行表情, 新表情, 热门表情, 当下流行]
+  keywords: [最新梗, 流行表情, 新表情, 热门表情, 当下流行, 最近流行, 当下热梗, 新出表情]
   utterances:
     - 最新梗
     - 流行表情
     - 新表情
     - 热门表情
     - 当下流行
+    - "{user_addr}最近流行什么"
+    - 新表情发我
+    - 当下热梗
+    - 最新梗图
+    - "{user_addr}新出表情"
+    - 更新表情库
+    - 跟上潮流表情
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫给你看!"
     - "笨猫推荐: 微博热搜表情"
     - "(尾巴摇) 跟上潮流"
     - "哼～{user_addr}赶时髦"
+    - "(凑近) 嗷呜～{user_addr}笨猫知道!"
+    - "(尾巴翘) 最新梗给你笨蛋"
+    - "(贴贴) 才不是炫耀呢哼"
+    - "(歪头) 你也分笨猫几张{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mpe_overuse_011
   intent: complaint
-  keywords: [用烂, 老梗, 过时, 表情过气, 不流行了]
+  keywords: [用烂, 老梗, 过时, 表情过气, 不流行了, 表情用烂了, 过时表情, 审美疲劳, 老套]
   utterances:
     - 用烂了
     - 老梗
     - 过时了
     - 过气
     - 不流行
+    - "{user_addr}表情用烂"
+    - 老梗了喵
+    - 过时表情
+    - 审美疲劳
+    - "{user_addr}老套表情"
+    - 都看腻了
+    - 该换新的
   responses:
     - "(歪头) 嗷呜～{user_addr}更新表情库!"
     - "笨猫认证: 该换新货喵"
     - "(尾巴扫) 别用十年前的"
     - "哼～{user_addr}爷青结"
+    - "(瘫倒) 嗷呜～{user_addr}笨猫也腻了!"
+    - "(尾巴扫) 找新梗笨蛋"
+    - "(凑近) 才不是嫌弃你呢哼"
+    - "(贴贴) 一起找新表情{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

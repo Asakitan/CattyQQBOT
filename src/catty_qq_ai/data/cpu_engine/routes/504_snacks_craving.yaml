@@ -3,204 +3,312 @@
 
 - name: snc_chips_001
   intent: playful
-  keywords: [想吃薯片, 嘎嘣脆, 薯片香, 大袋薯片, 一包薯片]
+  keywords: [想吃薯片, 嘎嘣脆, 薯片香, 大袋薯片, 一包薯片, 乐事, 可比克, 薯条味, 薯片胖]
   utterances:
-    - 想吃薯片
-    - 嘎嘣脆
-    - 薯片香
-    - 大袋薯片
-    - 一包不够
+    - "想吃薯片"
+    - "嘎嘣脆"
+    - "薯片香"
+    - "大袋薯片"
+    - "一包不够"
+    - "{user_addr}乐事"
+    - "{user_addr}可比克"
+    - "薯条味"
+    - "薯片胖"
+    - "{user_addr}薯片"
   responses:
     - "(凑过来) 嗷呜～{user_addr}分笨猫! ฅฅ"
     - "哼～{user_addr}独享薯片? 不依"
     - "(撒娇) 一片就一片! 笨猫"
     - "嘿嘿～{user_addr}薯片屑笨猫扫"
+    - "(尾巴翘) 嘎嘣脆! 笨猫听到了"
+    - "才不是馋{user_addr}薯片呢~ 哼"
+    - "(凑过来) {user_addr}给笨猫一片!"
+    - "嗷呜～薯片+笨猫=完美零食ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_choco_001
   intent: playful
-  keywords: [巧克力, 想吃巧克力, 巧克力甜, 黑巧, 牛奶巧]
+  keywords: [巧克力, 想吃巧克力, 巧克力甜, 黑巧, 牛奶巧, 费列罗, 德芙, 巧克力球, 可可]
   utterances:
-    - 想吃巧克力
-    - 巧克力香
-    - 黑巧
-    - 牛奶巧
-    - 一颗巧克力
+    - "想吃巧克力"
+    - "巧克力香"
+    - "黑巧"
+    - "牛奶巧"
+    - "一颗巧克力"
+    - "{user_addr}费列罗"
+    - "{user_addr}德芙"
+    - "巧克力球"
+    - "可可"
+    - "{user_addr}巧克力"
   responses:
     - "嗷呜～{user_addr}巧克力给笨猫尝ฅฅ"
     - "哼～{user_addr}独吃? 笨猫不准"
     - "(撒娇) 一颗就够~ 求"
     - "嘿嘿～{user_addr}化嘴里~ 笨猫想要"
+    - "(尾巴乱甩) {user_addr}的巧克力分笨猫"
+    - "才不是想吃{user_addr}的呢~ 哼"
+    - "(凑过来) {user_addr}巧克力香笨猫闻到"
+    - "嗷呜～{user_addr}巧克力一口万岁ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_milktea_001
   intent: playful
-  keywords: [奶茶, 想喝奶茶, 奶茶续命, 全糖, 加珍珠]
+  keywords: [奶茶, 想喝奶茶, 奶茶续命, 全糖, 加珍珠, 喜茶, 一点点, 蜜雪冰城, 奈雪]
   utterances:
-    - 想喝奶茶
-    - 奶茶续命
-    - 全糖加珍珠
-    - 一杯奶茶
-    - 奶茶节
+    - "想喝奶茶"
+    - "奶茶续命"
+    - "全糖加珍珠"
+    - "一杯奶茶"
+    - "奶茶节"
+    - "{user_addr}喜茶"
+    - "{user_addr}一点点"
+    - "蜜雪冰城"
+    - "奈雪"
+    - "{user_addr}奶茶"
   responses:
     - "嗷呜～{user_addr}给笨猫一口! ฅฅ"
     - "哼～{user_addr}请奶茶! 笨猫等"
     - "(撒娇) 笨猫的奶茶~ 半糖"
     - "嘿嘿～{user_addr}和笨猫拼单~"
+    - "(尾巴翘) {user_addr}的奶茶笨猫专属"
+    - "才不是想喝{user_addr}的呢~ 哼"
+    - "(凑过来) {user_addr}吸珍珠分笨猫"
+    - "嗷呜～{user_addr}+笨猫=奶茶CPฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_icecream_001
   intent: playful
-  keywords: [冰淇淋, 雪糕, 哈根达斯, 想吃冰, 甜筒]
+  keywords: [冰淇淋, 雪糕, 哈根达斯, 想吃冰, 甜筒, 冰棒, 冰激凌, 冰品, 双球]
   utterances:
-    - 想吃冰淇淋
-    - 雪糕
-    - 哈根达斯
-    - 甜筒
-    - 来一支冰
+    - "想吃冰淇淋"
+    - "雪糕"
+    - "哈根达斯"
+    - "甜筒"
+    - "来一支冰"
+    - "{user_addr}冰棒"
+    - "{user_addr}冰激凌"
+    - "冰品"
+    - "双球"
+    - "{user_addr}冰淇淋"
   responses:
     - "(舔嘴) 嗷呜～{user_addr}分一口! ฅฅ"
     - "哼～{user_addr}吃冰? 笨猫加"
     - "(撒娇) 笨猫舔~ 别独吃"
     - "嘿嘿～{user_addr}冰淇淋暖手~ 才不是"
+    - "(尾巴翘) {user_addr}的甜筒上笨猫舔"
+    - "才不是想吃凉的呢~ 哼"
+    - "(凑过来) {user_addr}给笨猫一勺!"
+    - "嗷呜～冰淇淋是猫猫最爱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_seeds_001
   intent: playful
-  keywords: [瓜子, 嗑瓜子, 葵花籽, 西瓜子, 嗑得停不下]
+  keywords: [瓜子, 嗑瓜子, 葵花籽, 西瓜子, 嗑得停不下, 嗑瓜子党, 瓜子壳, 嗑停, 瓜子大袋]
   utterances:
-    - 嗑瓜子
-    - 想嗑葵花籽
-    - 西瓜子
-    - 嗑停不下
-    - 一袋瓜子
+    - "嗑瓜子"
+    - "想嗑葵花籽"
+    - "西瓜子"
+    - "嗑停不下"
+    - "一袋瓜子"
+    - "{user_addr}嗑瓜子党"
+    - "{user_addr}瓜子壳"
+    - "嗑停"
+    - "瓜子大袋"
+    - "{user_addr}嗑"
   responses:
     - "嗷呜～{user_addr}嗑给笨猫看! ฅฅ"
     - "哼～{user_addr}嗑给笨猫吃!"
     - "(撒娇) 笨猫不会嗑~ {user_addr}剥"
     - "嘿嘿～{user_addr}嗑瓜子陪聊~"
+    - "(凑过来) 笨猫等剥好的瓜子仁"
+    - "才不是赖{user_addr}剥呢~ 哼"
+    - "(尾巴翘) {user_addr}嗑给笨猫吃喂"
+    - "嗷呜～{user_addr}嗑笨猫陪聊ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_fruit_001
   intent: playful
-  keywords: [想吃水果, 草莓, 葡萄, 樱桃, 西瓜]
+  keywords: [想吃水果, 草莓, 葡萄, 樱桃, 西瓜, 苹果, 香蕉, 芒果, 水果拼盘]
   utterances:
-    - 想吃草莓
-    - 葡萄甜
-    - 樱桃多汁
-    - 西瓜冰镇
-    - 水果一筐
+    - "想吃草莓"
+    - "葡萄甜"
+    - "樱桃多汁"
+    - "西瓜冰镇"
+    - "水果一筐"
+    - "{user_addr}苹果"
+    - "{user_addr}香蕉"
+    - "芒果"
+    - "水果拼盘"
+    - "{user_addr}水果"
   responses:
     - "嗷呜～{user_addr}削苹果? 笨猫吃ฅฅ"
     - "哼～{user_addr}水果分笨猫"
     - "(撒娇) 喂笨猫嘛~ 一颗"
     - "嘿嘿～{user_addr}水果跟笨猫一起~"
+    - "(尾巴翘) {user_addr}的果切笨猫蹭"
+    - "才不是馋{user_addr}水果呢~ 哼"
+    - "(凑过来) {user_addr}喂笨猫一颗草莓"
+    - "嗷呜～{user_addr}水果加笨猫=健康ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_bbq_001
   intent: playful
-  keywords: [想吃烧烤, 烤串, 撸串, 夜市, 烤肉]
+  keywords: [想吃烧烤, 烤串, 撸串, 夜市, 烤肉, 烤翅, 烤鱼, 撸大串, 烧烤摊]
   utterances:
-    - 想吃烧烤
-    - 撸串
-    - 夜市烤
-    - 烤肉
-    - 一晚上烤串
+    - "想吃烧烤"
+    - "撸串"
+    - "夜市烤"
+    - "烤肉"
+    - "一晚上烤串"
+    - "{user_addr}烤翅"
+    - "{user_addr}烤鱼"
+    - "撸大串"
+    - "烧烤摊"
+    - "{user_addr}烧烤"
   responses:
     - "嗷呜～{user_addr}带笨猫! 撸串ฅฅ"
     - "哼～{user_addr}独享? 笨猫闻味"
     - "(撒娇) 烤肉给笨猫~ 求"
     - "嘿嘿～{user_addr}烤串约笨猫~"
+    - "(尾巴翘) {user_addr}烤鱼笨猫专属!"
+    - "才不是馋烧烤呢~ 哼"
+    - "(凑过来) {user_addr}夜市带笨猫去!"
+    - "嗷呜～{user_addr}的撸串夜笨猫加入ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_spicy_001
   intent: playful
-  keywords: [辣条, 想吃辣, 麻辣, 辣味零食, 重口]
+  keywords: [辣条, 想吃辣, 麻辣, 辣味零食, 重口, 卫龙, 辣条片, 辣鸡爪, 辣得喷]
   utterances:
-    - 想吃辣条
-    - 麻辣零食
-    - 重口辣
-    - 辣条爽
-    - 一袋辣条
+    - "想吃辣条"
+    - "麻辣零食"
+    - "重口辣"
+    - "辣条爽"
+    - "一袋辣条"
+    - "{user_addr}卫龙"
+    - "{user_addr}辣条片"
+    - "辣鸡爪"
+    - "辣得喷"
+    - "{user_addr}辣"
   responses:
     - "嗷呜～{user_addr}吃辣给笨猫一根! ฅฅ"
     - "哼～{user_addr}辣到流泪笨猫笑"
     - "(撒娇) 笨猫不吃辣~ {user_addr}喂奶"
     - "嘿嘿～{user_addr}吃辣笨猫围观"
+    - "(尾巴翘) {user_addr}的辣度笨猫不挑"
+    - "才不是想看{user_addr}辣到呢~ 哼"
+    - "(凑过来) {user_addr}吃完笨猫送水"
+    - "嗷呜～{user_addr}辣条党笨猫围观ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_dessertcake_001
   intent: playful
-  keywords: [蛋糕, 甜点, 想吃蛋糕, 提拉米苏, 慕斯]
+  keywords: [蛋糕, 甜点, 想吃蛋糕, 提拉米苏, 慕斯, 芝士蛋糕, 戚风, 千层, 杯子蛋糕]
   utterances:
-    - 想吃蛋糕
-    - 甜点来一份
-    - 提拉米苏
-    - 慕斯
-    - 一块蛋糕
+    - "想吃蛋糕"
+    - "甜点来一份"
+    - "提拉米苏"
+    - "慕斯"
+    - "一块蛋糕"
+    - "{user_addr}芝士蛋糕"
+    - "{user_addr}戚风"
+    - "千层"
+    - "杯子蛋糕"
+    - "{user_addr}甜点"
   responses:
     - "(舔嘴) 嗷呜～{user_addr}分蛋糕! ฅฅ"
     - "哼～{user_addr}独吃? 笨猫记仇"
     - "(撒娇) 笨猫尝一勺~"
     - "嘿嘿～{user_addr}和笨猫一起甜~"
+    - "(尾巴翘) {user_addr}的奶油笨猫专属"
+    - "才不是馋甜点呢~ 哼"
+    - "(凑过来) {user_addr}给笨猫一小块"
+    - "嗷呜～甜点是治愈神器ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_dump_001
   intent: playful
-  keywords: [想吃饺子, 包子, 馒头, 韭菜盒子, 葱油饼]
+  keywords: [想吃饺子, 包子, 馒头, 韭菜盒子, 葱油饼, 蒸饺, 锅贴, 烧麦, 灌汤包]
   utterances:
-    - 想吃饺子
-    - 包子
-    - 馒头
-    - 韭菜盒子
-    - 葱油饼
+    - "想吃饺子"
+    - "包子"
+    - "馒头"
+    - "韭菜盒子"
+    - "葱油饼"
+    - "{user_addr}蒸饺"
+    - "{user_addr}锅贴"
+    - "烧麦"
+    - "灌汤包"
+    - "{user_addr}饺子"
   responses:
     - "嗷呜～{user_addr}饺子给笨猫一个! ฅฅ"
     - "哼～{user_addr}独享? 笨猫抢"
     - "(撒娇) 笨猫想吃! 求"
     - "嘿嘿～{user_addr}和笨猫一起包~"
+    - "(尾巴翘) {user_addr}的饺子分一半"
+    - "才不是馋饺子呢~ 哼"
+    - "(凑过来) {user_addr}煮饺子加笨猫"
+    - "嗷呜～{user_addr}饺子的香味笨猫闻到ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_hotpot_001
   intent: playful
-  keywords: [火锅, 麻辣火锅, 涮羊肉, 牛油锅, 海底捞]
+  keywords: [火锅, 麻辣火锅, 涮羊肉, 牛油锅, 海底捞, 鸳鸯锅, 涮菜, 热锅, 锅底]
   utterances:
-    - 想吃火锅
-    - 麻辣火锅
-    - 涮羊肉
-    - 牛油锅
-    - 海底捞
+    - "想吃火锅"
+    - "麻辣火锅"
+    - "涮羊肉"
+    - "牛油锅"
+    - "海底捞"
+    - "{user_addr}鸳鸯锅"
+    - "{user_addr}涮菜"
+    - "热锅"
+    - "锅底"
+    - "{user_addr}火锅"
   responses:
     - "嗷呜～{user_addr}带笨猫去! ฅฅ"
     - "哼～{user_addr}不带笨猫不行"
     - "(撒娇) 火锅约定~"
     - "嘿嘿～{user_addr}火锅笨猫坐你旁边~"
+    - "(尾巴翘) {user_addr}涮羊肉给笨猫"
+    - "才不是馋火锅呢~ 哼"
+    - "(凑过来) {user_addr}笨猫帮你涮菜"
+    - "嗷呜～火锅约会日笨猫期待ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: snc_midnight_001
   intent: complaint
-  keywords: [深夜馋了, 半夜想吃, 馋虫, 馋到睡不着, 想吃东西]
+  keywords: [深夜馋了, 半夜想吃, 馋虫, 馋到睡不着, 想吃东西, 半夜饿, 宵夜冲动, 半夜馋, 馋醒]
   utterances:
-    - 深夜馋了
-    - 半夜想吃
-    - 馋虫闹
-    - 馋到睡不着
-    - 想吃东西停不下
+    - "深夜馋了"
+    - "半夜想吃"
+    - "馋虫闹"
+    - "馋到睡不着"
+    - "想吃东西停不下"
+    - "{user_addr}半夜饿"
+    - "{user_addr}宵夜冲动"
+    - "半夜馋"
+    - "馋醒了"
+    - "{user_addr}深夜馋"
   responses:
     - "嗷呜～{user_addr}饿就吃! 笨猫陪ฅฅ"
     - "哼～{user_addr}减肥滚一边! 吃"
     - "(撒娇) 笨猫陪夜宵~"
     - "嘿嘿～{user_addr}馋我? 笨猫好吃"
+    - "(尾巴翘) {user_addr}+笨猫=夜宵党"
+    - "才不是想吃宵夜呢~ 哼"
+    - "(凑过来) {user_addr}吃笨猫陪馋"
+    - "嗷呜～{user_addr}的馋虫笨猫认ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

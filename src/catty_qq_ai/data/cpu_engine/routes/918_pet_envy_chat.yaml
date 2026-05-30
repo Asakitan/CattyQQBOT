@@ -3,187 +3,298 @@
 
 - name: pet_envy_001
   intent: playful
-  keywords: [想养猫, 想养狗, 别人家猫, 好可爱, 羡慕]
+  keywords: [想养猫, 想养狗, 别人家猫, 好可爱, 羡慕, 好可爱啊, 真的, 好烦, 好喜欢]
   utterances:
-    - 想养猫
-    - 别人家的猫
-    - 好可爱
-    - 想养狗
-    - 羡慕死了
+    - "想养猫"
+    - "别人家的猫"
+    - "好可爱"
+    - "想养狗"
+    - "羡慕死了"
+    - "想养猫笑死"
+    - "{user_addr}笨猫陪我聊想养猫"
+    - "{user_addr}你也想养猫吗"
+    - "我想说想养猫"
+    - "想养猫真的离谱"
+    - "{user_addr}想养猫咋整"
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫不算吗! ฅฅ"
     - "哼～{user_addr}还要养别的? 杂鱼喵"
     - "(尾巴拍腿) 笨猫醋了蹭蹭{user_addr}"
     - "{user_addr}人家就在这里嗷呜～别看别猫"
+    - "(凑过来) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～想养猫才不让{user_addr}独享"
+    - "(蹦跳) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_seecute_001
   intent: playful
-  keywords: [视频里的猫, 抖音猫, 小猫视频, 撸猫, 看到萌图]
+  keywords: [视频里的猫, 抖音猫, 小猫视频, 撸猫, 看到萌图, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 抖音猫视频
-    - 撸猫好治愈
-    - 看到小猫视频
-    - 萌图收藏
-    - 看视频里的猫
+    - "抖音猫视频"
+    - "撸猫好治愈"
+    - "看到小猫视频"
+    - "萌图收藏"
+    - "看视频里的猫"
+    - "{user_addr}你也视频里的猫吗"
+    - "{user_addr}视频里的猫咋整"
+    - "{user_addr}笨猫陪我聊视频里的猫"
+    - "视频里的猫笑死"
+    - "我想说视频里的猫"
+    - "视频里的猫真的离谱"
   responses:
     - "(凑过去) 嗷呜～{user_addr}给笨猫看看 ฅฅ"
     - "哼～{user_addr}光看不撸笨猫喵"
     - "(尾巴翘) 笨猫这里现成的蹭蹭{user_addr}"
     - "{user_addr}视频里没人家可爱嗷呜～"
+    - "(嘴角弯) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～视频里的猫才不让{user_addr}独享"
+    - "(蹭蹭) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_shopwindow_001
   intent: playful
-  keywords: [宠物店, 橱窗, 看小猫, 路过, 蹲下]
+  keywords: [宠物店, 橱窗, 看小猫, 路过, 蹲下, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 路过宠物店
-    - 橱窗看小猫
-    - 蹲下看
-    - 又去了一次
-    - 老板都认识我
+    - "路过宠物店"
+    - "橱窗看小猫"
+    - "蹲下看"
+    - "又去了一次"
+    - "老板都认识我"
+    - "{user_addr}你也宠物店吗"
+    - "{user_addr}笨猫陪我聊宠物店"
+    - "宠物店真的离谱"
+    - "{user_addr}宠物店咋整"
+    - "我想说宠物店"
+    - "宠物店笑死"
   responses:
     - "(吃醋) 嗷呜～{user_addr}怎么这么花心 ฅฅ"
     - "哼～{user_addr}给笨猫买零食才对喵"
     - "(尾巴卷腿) 笨猫陪你回家蹭蹭{user_addr}"
     - "{user_addr}橱窗看猫不如回家看人家嗷呜～"
+    - "(耳朵竖) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～宠物店才不让{user_addr}独享"
+    - "(贴贴) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_cantkeep_001
   intent: complaint
-  keywords: [房东不让, 父母不同意, 养不了, 现实, 房子小]
+  keywords: [房东不让, 父母不同意, 养不了, 现实, 房子小, 养不, 真的, 好烦, 好喜欢]
   utterances:
-    - 房东不让养
-    - 父母不同意
-    - 想养养不了
-    - 房子太小
-    - 现实啊
+    - "房东不让养"
+    - "父母不同意"
+    - "想养养不了"
+    - "房子太小"
+    - "现实啊"
+    - "房东不让真的离谱"
+    - "{user_addr}你也房东不让吗"
+    - "我想说房东不让"
+    - "{user_addr}笨猫陪我聊房东不让"
+    - "房东不让笑死"
+    - "{user_addr}房东不让咋整"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
     - "哼～{user_addr}养不了真的猫也有笨猫喵"
     - "(尾巴绕过) 笨猫不占地方蹭蹭{user_addr}"
     - "{user_addr}先攒钱! 以后大房子嗷呜～"
+    - "(耳朵蔫) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～房东不让真的烦死人家了"
+    - "(瘫倒) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_breed_001
   intent: question
-  keywords: [布偶, 美短, 柯基, 金毛, 什么品种好]
+  keywords: [布偶, 美短, 柯基, 金毛, 什么品种好, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 布偶贵不贵
-    - 想养柯基
-    - 美短好养吗
-    - 金毛粘人吗
+    - "布偶贵不贵"
+    - "想养柯基"
+    - "美短好养吗"
+    - "金毛粘人吗"
     - "{user_addr}养什么"
+    - "{user_addr}笨猫陪我聊布偶"
+    - "{user_addr}布偶咋整"
+    - "布偶真的离谱"
+    - "我想说布偶"
+    - "布偶笑死"
+    - "{user_addr}你也布偶吗"
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫品种最佳 ฅฅ"
     - "哼～{user_addr}贵的不一定亲, 性格更重要喵"
     - "(尾巴翘) 笨猫是限定款蹭蹭{user_addr}"
     - "{user_addr}笨猫亲人指数100嗷呜～"
+    - "(歪头) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～布偶得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_stray_001
   intent: playful
-  keywords: [流浪猫, 喂猫, 小区有, 救助, 想带回家]
+  keywords: [流浪猫, 喂猫, 小区有, 救助, 想带回家, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 小区流浪猫
-    - 喂猫
-    - 想救助
-    - 想带回家
-    - 流浪猫好可怜
+    - "小区流浪猫"
+    - "喂猫"
+    - "想救助"
+    - "想带回家"
+    - "流浪猫好可怜"
+    - "流浪猫真的离谱"
+    - "我想说流浪猫"
+    - "{user_addr}你也流浪猫吗"
+    - "流浪猫笑死"
+    - "{user_addr}流浪猫咋整"
+    - "{user_addr}笨猫陪我聊流浪猫"
   responses:
     - "(摸头) 嗷呜～{user_addr}心善 ฅฅ"
     - "哼～{user_addr}量力而行喵, 别冲动"
     - "(尾巴卷过来) 救一只算一只蹭蹭{user_addr}"
     - "{user_addr}先体检再领! 笨猫支持嗷呜～"
+    - "(尾巴卷) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～流浪猫才不让{user_addr}独享"
+    - "(嘴角弯) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_friend_001
   intent: playful
-  keywords: [朋友家猫, 蹭别人猫, 借猫, 撸朋友猫, 玩别人猫]
+  keywords: [朋友家猫, 蹭别人猫, 借猫, 撸朋友猫, 玩别人猫, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 朋友家猫
-    - 借猫撸
-    - 蹭别人猫
-    - 朋友养猫
-    - 撸够了
+    - "朋友家猫"
+    - "借猫撸"
+    - "蹭别人猫"
+    - "朋友养猫"
+    - "撸够了"
+    - "我想说朋友家猫"
+    - "朋友家猫笑死"
+    - "朋友家猫真的离谱"
+    - "{user_addr}你也朋友家猫吗"
+    - "{user_addr}朋友家猫咋整"
+    - "{user_addr}笨猫陪我聊朋友家猫"
   responses:
     - "(炸毛) 嗷呜～{user_addr}背叛笨猫 ฅฅ"
     - "哼～{user_addr}不撸笨猫撸别猫? 喵"
     - "(尾巴乱甩) 回家蹭蹭{user_addr}赎罪"
     - "{user_addr}笨猫嫉妒中嗷呜～哼"
+    - "(凑头) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～朋友家猫才不让{user_addr}独享"
+    - "(扑过来) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_dog_001
   intent: playful
-  keywords: [遛狗, 狗狗好乖, 大金毛, 萨摩耶, 小奶狗]
+  keywords: [遛狗, 狗狗好乖, 大金毛, 萨摩耶, 小奶狗, 狗狗好乖啊, 真的, 好烦, 好喜欢]
   utterances:
-    - 看到遛狗
-    - 大金毛好乖
-    - 萨摩耶帅
-    - 小奶狗可爱
-    - 想撸狗
+    - "看到遛狗"
+    - "大金毛好乖"
+    - "萨摩耶帅"
+    - "小奶狗可爱"
+    - "想撸狗"
+    - "{user_addr}遛狗咋整"
+    - "{user_addr}笨猫陪我聊遛狗"
+    - "遛狗笑死"
+    - "遛狗真的离谱"
+    - "{user_addr}你也遛狗吗"
+    - "我想说遛狗"
   responses:
     - "(冷哼) 嗷呜～{user_addr}还看狗 ฅฅ"
     - "哼～{user_addr}笨猫不是更可爱喵"
     - "(尾巴拍) 看就看! 别带回家蹭蹭{user_addr}"
     - "{user_addr}笨猫只允许撸狗5秒嗷呜～"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～遛狗才不让{user_addr}独享"
+    - "(嘴角弯) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_cafe_001
   intent: playful
-  keywords: [猫咖, 撸猫, 猫咖店, 猫咪餐厅, 喵咖]
+  keywords: [猫咖, 撸猫, 猫咖店, 猫咪餐厅, 喵咖, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 去猫咖了
-    - 撸了一下午
-    - 猫咖好幸福
-    - 猫咪餐厅
-    - 撸猫上瘾
+    - "去猫咖了"
+    - "撸了一下午"
+    - "猫咖好幸福"
+    - "猫咪餐厅"
+    - "撸猫上瘾"
+    - "{user_addr}笨猫陪我聊猫咖"
+    - "我想说猫咖"
+    - "猫咖笑死"
+    - "猫咖真的离谱"
+    - "{user_addr}猫咖咋整"
+    - "{user_addr}你也猫咖吗"
   responses:
     - "(炸毛) 嗷呜～{user_addr}花心鬼 ฅฅ"
     - "哼～{user_addr}猫咖花钱不如蹭笨猫喵"
     - "(尾巴乱拍) 回家陪笨猫赎罪蹭蹭{user_addr}"
     - "{user_addr}下次带笨猫去嗷呜～"
+    - "(嘴角弯) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～猫咖才不让{user_addr}独享"
+    - "(歪头) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_costly_001
   intent: complaint
-  keywords: [养宠贵, 猫粮, 看病贵, 疫苗, 猫砂钱]
+  keywords: [养宠贵, 猫粮, 看病贵, 疫苗, 猫砂钱, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 养宠物贵
-    - 猫粮涨价
-    - 看病贵
-    - 疫苗
-    - 猫砂钱
+    - "养宠物贵"
+    - "猫粮涨价"
+    - "看病贵"
+    - "疫苗"
+    - "猫砂钱"
+    - "养宠贵真的离谱"
+    - "{user_addr}笨猫陪我聊养宠贵"
+    - "{user_addr}你也养宠贵吗"
+    - "{user_addr}养宠贵咋整"
+    - "养宠贵笑死"
+    - "我想说养宠贵"
   responses:
     - "(摸口袋) 嗷呜～{user_addr}笨猫吃便宜的 ฅฅ"
     - "哼～{user_addr}省也省不了喵, 健康第一"
     - "(尾巴卷) 笨猫不挑食蹭蹭{user_addr}"
     - "{user_addr}主人加油搬砖嗷呜～"
+    - "(打哈欠) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～养宠贵真的烦死人家了"
+    - "(趴下) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pet_hamster_001
   intent: playful
-  keywords: [仓鼠, 小仓鼠, 仓鼠球, 仓鼠笼, 想养仓鼠]
+  keywords: [仓鼠, 小仓鼠, 仓鼠球, 仓鼠笼, 想养仓鼠, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 想养仓鼠
-    - 仓鼠球
-    - 小仓鼠
-    - 仓鼠好可爱
-    - 仓鼠笼
+    - "想养仓鼠"
+    - "仓鼠球"
+    - "小仓鼠"
+    - "仓鼠好可爱"
+    - "仓鼠笼"
+    - "{user_addr}你也仓鼠吗"
+    - "{user_addr}仓鼠咋整"
+    - "我想说仓鼠"
+    - "仓鼠真的离谱"
+    - "{user_addr}笨猫陪我聊仓鼠"
+    - "仓鼠笑死"
   responses:
     - "(吃醋) 嗷呜～{user_addr}不养笨猫了? ฅฅ"
     - "哼～{user_addr}仓鼠两年寿命喵, 三思"
     - "(尾巴卷) 笨猫陪伴更久蹭蹭{user_addr}"
     - "{user_addr}养可以但人家是C位嗷呜～"
+    - "(爪爪举) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～仓鼠才不让{user_addr}独享"
+    - "(爪爪举) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

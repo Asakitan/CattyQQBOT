@@ -36,3 +36,7 @@ Miao/
 diagnostics/
 .github/
 .tmp_diag/
+.mcp.json
+
+# ssh-mcp 代理凭据
+scripts/.ssh_mcp_secret.json

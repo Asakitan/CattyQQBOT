@@ -3,204 +3,324 @@
 
 - name: as_masai_mara_001
   intent: question
-  keywords: [推荐马赛马拉, 推荐肯尼亚 Safari, 推荐角马迁徙, 推荐 Mara, 笨猫马赛马拉]
+  keywords: [推荐马赛马拉, 推荐肯尼亚 Safari, 推荐角马迁徙, 推荐 Mara, 笨猫马赛马拉, Big Five, 热气球, 马拉河, Nairobi, 七月迁徙]
   utterances:
     - 推荐马赛马拉
     - 推荐肯尼亚 Safari
     - 推荐角马迁徙
     - 推荐 Mara
     - 笨猫马赛马拉
+    - 推荐肯尼亚迁徙季
+    - 推荐马拉河横渡
+    - 推荐 Big Five
+    - 推荐热气球俯瞰
+    - 马赛马拉怎么玩
+    - 推荐肯尼亚跟团
   responses:
     - "嗷呜～{user_addr}马赛马拉 - 肯尼亚之王ฅฅ"
     - "(尾巴翘) 7-10 月角马大迁徙"
     - "{user_addr}Big Five 大五兽全有"
     - "(挺胸) 猫猫推荐: 热气球日出绝杀!"
+    - "嗷呜～马拉河横渡运气好能蹲到 ฅฅ"
+    - "(歪头) 选 Conservancy 私营区游客少嗷呜"
+    - "{user_addr}热气球要提前两个月订蹭蹭"
+    - "(凑过来) 笨猫想看狮子打哈欠喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_serengeti_001
   intent: question
-  keywords: [推荐塞伦盖蒂, 推荐坦桑尼亚 Safari, 推荐 Serengeti, 推荐恩戈罗恩戈罗, 笨猫塞伦盖蒂]
+  keywords: [推荐塞伦盖蒂, 推荐坦桑尼亚 Safari, 推荐 Serengeti, 推荐恩戈罗恩戈罗, 笨猫塞伦盖蒂, Ngorongoro 火山口, 角马产仔季, Arusha, Tarangire, Manyara]
   utterances:
     - 推荐塞伦盖蒂
     - 推荐坦桑尼亚 Safari
     - 推荐 Serengeti
     - 推荐恩戈罗恩戈罗
     - 笨猫塞伦盖蒂
+    - 推荐 Ngorongoro 火山口
+    - 推荐角马产仔季
+    - 推荐 Tarangire 大象
+    - 推荐 Manyara 红鹤
+    - 塞伦盖蒂怎么玩
+    - 推荐坦桑尼亚北线
   responses:
     - "嗷呜～{user_addr}塞伦盖蒂 - 无尽草原ฅฅ"
     - "(尾巴翘) Ngorongoro 火山口 - 自然奇观"
     - "{user_addr}1-3 月角马产仔季"
     - "(挺胸) 人家推荐: 配恩戈罗一起玩!"
+    - "嗷呜～Tarangire 12 月象群超壮观 ฅฅ"
+    - "(歪头) 北线一般 7-9 天打通嗷呜"
+    - "{user_addr}走 Lake Manyara 顺路看红鹤蹭蹭"
+    - "(凑过来) 笨猫想看猎豹拼老命喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_kruger_001
   intent: question
-  keywords: [推荐克鲁格, 推荐南非 Safari, 推荐 Kruger, 推荐 Sabi Sands, 笨猫克鲁格]
+  keywords: [推荐克鲁格, 推荐南非 Safari, 推荐 Kruger, 推荐 Sabi Sands, 笨猫克鲁格, 私人保护区, 自驾 Safari, 开普敦, Johannesburg, MalaMala]
   utterances:
     - 推荐克鲁格
     - 推荐南非 Safari
     - 推荐 Kruger
     - 推荐 Sabi Sands
     - 笨猫克鲁格
+    - 推荐 MalaMala 保护区
+    - 推荐自驾 Kruger
+    - 推荐南非 Safari 一日游
+    - 克鲁格哪个 gate
+    - 推荐克鲁格 + 开普敦
+    - 推荐豹子拍摄
   responses:
     - "嗷呜～{user_addr}克鲁格 - 南非国家公园ฅฅ"
     - "(尾巴翘) Sabi Sands 私人保护区 - 豹子多"
     - "{user_addr}自驾 Safari 可玩"
     - "(挺胸) 笨猫推荐: 配开普敦一起!"
+    - "嗷呜～MalaMala 是顶级私人区 ฅฅ"
+    - "(歪头) 自驾要早开车出晚出门嗷呜"
+    - "{user_addr}从 Jo'burg 飞或 6 小时车蹭蹭"
+    - "(凑过来) 笨猫想看豹子上树喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_okavango_001
   intent: question
-  keywords: [推荐奥卡万戈, 推荐博茨瓦纳, 推荐 Okavango, 推荐莫雷米, 笨猫奥卡万戈]
+  keywords: [推荐奥卡万戈, 推荐博茨瓦纳, 推荐 Okavango, 推荐莫雷米, 笨猫奥卡万戈, Mokoro 独木舟, Chobe, Linyanti, 高端 Safari, 三角洲]
   utterances:
     - 推荐奥卡万戈
     - 推荐博茨瓦纳
     - 推荐 Okavango
     - 推荐莫雷米
     - 笨猫奥卡万戈
+    - 推荐 Mokoro 独木舟
+    - 推荐 Chobe 大象
+    - 推荐 Linyanti
+    - 推荐高端 Safari
+    - 博茨瓦纳怎么玩
+    - 推荐水陆混合 Safari
   responses:
     - "嗷呜～{user_addr}奥卡万戈三角洲 - 水上 Safariฅฅ"
     - "(尾巴翘) Mokoro 独木舟 - 浪漫"
     - "{user_addr}Moremi 保护区配套"
     - "(挺胸) 猫猫推荐: 高端小众首选!"
+    - "嗷呜～Chobe 河岸象群多到挤 ฅฅ"
+    - "(歪头) 水陆 lodge 组合一周最爽嗷呜"
+    - "{user_addr}飞机串联 lodge 很常见蹭蹭"
+    - "(凑过来) 笨猫想坐独木舟漂喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_sahara_001
   intent: question
-  keywords: [推荐撒哈拉, 推荐摩洛哥沙漠, 推荐 Merzouga, 推荐沙漠骆驼, 笨猫撒哈拉]
+  keywords: [推荐撒哈拉, 推荐摩洛哥沙漠, 推荐 Merzouga, 推荐沙漠骆驼, 笨猫撒哈拉, Erg Chebbi, 沙漠营地, 马拉喀什, 菲斯老城, 沙丘日出]
   utterances:
     - 推荐撒哈拉
     - 推荐摩洛哥沙漠
     - 推荐 Merzouga
     - 推荐沙漠骆驼
     - 笨猫撒哈拉
+    - 推荐 Erg Chebbi
+    - 推荐沙漠营地一夜
+    - 推荐马拉喀什配撒哈拉
+    - 推荐菲斯老城
+    - 撒哈拉怎么玩
+    - 推荐沙丘日出日落
   responses:
     - "嗷呜～{user_addr}梅尔祖卡 Merzougaฅฅ"
     - "(尾巴翘) 骆驼+沙漠营地一夜"
     - "{user_addr}配马拉喀什 + 菲斯老城"
     - "(挺胸) 人家推荐: 银河+日出双爆!"
+    - "嗷呜～10 月-4 月最舒服 ฅฅ"
+    - "(歪头) Luxury camp 比标准帐篷舒服很多嗷呜"
+    - "{user_addr}马拉喀什到 Merzouga 跟团 3 天蹭蹭"
+    - "(凑过来) 笨猫想看银河喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_pyramid_001
   intent: question
-  keywords: [推荐金字塔, 推荐埃及旅游, 推荐吉萨, 推荐尼罗河游轮, 笨猫金字塔]
+  keywords: [推荐金字塔, 推荐埃及旅游, 推荐吉萨, 推荐尼罗河游轮, 笨猫金字塔, 狮身人面像, 卢克索, 阿斯旺, 红海, 帝王谷]
   utterances:
     - 推荐金字塔
     - 推荐埃及旅游
     - 推荐吉萨
     - 推荐尼罗河游轮
     - 笨猫金字塔
+    - 推荐卢克索神庙
+    - 推荐帝王谷
+    - 推荐阿斯旺
+    - 推荐红海赫尔格达
+    - 埃及怎么玩
+    - 推荐金字塔黄昏声光秀
   responses:
     - "嗷呜～{user_addr}吉萨金字塔 + 狮身人面ฅฅ"
     - "(尾巴翘) 卢克索 / 阿斯旺 - 神庙带"
     - "{user_addr}尼罗河游轮 3-4 晚"
     - "(挺胸) 笨猫推荐: 红海赫尔格达加点!"
+    - "嗷呜～金字塔旁的吉萨高原博物馆超新 ฅฅ"
+    - "(歪头) 帝王谷图坦卡蒙墓室单买票嗷呜"
+    - "{user_addr}尼罗河游轮预订热门船提早蹭蹭"
+    - "(凑过来) 笨猫想骑骆驼绕金字塔喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_gorilla_001
   intent: question
-  keywords: [推荐大猩猩, 推荐卢旺达, 推荐火山国家公园, 推荐 Gorilla Trekking, 笨猫大猩猩]
+  keywords: [推荐大猩猩, 推荐卢旺达, 推荐火山国家公园, 推荐 Gorilla Trekking, 笨猫大猩猩, 山地大猩猩, 乌干达 Bwindi, 银背猩猩, 一生一次, 许可证 1500]
   utterances:
     - 推荐大猩猩
     - 推荐卢旺达
     - 推荐火山国家公园
     - 推荐 Gorilla Trekking
     - 笨猫大猩猩
+    - 推荐山地大猩猩
+    - 推荐乌干达 Bwindi
+    - 大猩猩追踪许可证
+    - 推荐黑猩猩追踪
+    - 大猩猩追踪季节
+    - 推荐和大猩猩一小时
   responses:
     - "嗷呜～{user_addr}卢旺达火山国家公园ฅฅ"
     - "(尾巴翘) 山地大猩猩追踪 - 一生一次"
     - "{user_addr}许可证 1500$ - 贵但值"
     - "(挺胸) 猫猫推荐: 乌干达更便宜!"
+    - "嗷呜～Bwindi 同样山地猩猩半价 ฅฅ"
+    - "(歪头) 许可证要提前 6 个月起订嗷呜"
+    - "{user_addr}徒步看林子湿要好鞋蹭蹭"
+    - "(凑过来) 笨猫想看银背老大喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_visa_001
   intent: question
-  keywords: [推荐非洲签证, 推荐肯尼亚签证, 推荐 eVisa, 推荐落地签, 笨猫非洲签证]
+  keywords: [推荐非洲签证, 推荐肯尼亚签证, 推荐 eVisa, 推荐落地签, 笨猫非洲签证, 南非签证, 摩洛哥免签, 埃及落地签, 坦桑签证, 入境疫苗证]
   utterances:
     - 推荐非洲签证
     - 推荐肯尼亚签证
     - 推荐 eVisa
     - 推荐落地签
     - 笨猫非洲签证
+    - 推荐坦桑尼亚 eVisa
+    - 推荐南非签证流程
+    - 推荐摩洛哥免签
+    - 埃及签证落地
+    - 非洲多国连签
+    - 推荐黄热病黄本要求
   responses:
     - "嗷呜～{user_addr}肯尼亚 / 坦桑 eVisa 在线申ฅฅ"
     - "(尾巴翘) 南非 - 需提前签 (10 天)"
     - "{user_addr}埃及 / 摩洛哥免签 / 落地签"
     - "(挺胸) 人家推荐: 提前 1 个月办!"
+    - "嗷呜～黄本入境时会被查别忘了带 ฅฅ"
+    - "(歪头) 南非签材料杂材料齐再送签嗷呜"
+    - "{user_addr}电子签下签快但需打印随行蹭蹭"
+    - "(凑过来) 笨猫想跟主人飞肯尼亚喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_vaccine_001
   intent: question
-  keywords: [推荐非洲疫苗, 推荐黄热病, 推荐疟疾药, 推荐 Yellow Fever, 笨猫非洲疫苗]
+  keywords: [推荐非洲疫苗, 推荐黄热病, 推荐疟疾药, 推荐 Yellow Fever, 笨猫非洲疫苗, Malarone, 伤寒疫苗, 甲肝, 狂犬疫苗, 旅行卫生中心]
   utterances:
     - 推荐非洲疫苗
     - 推荐黄热病
     - 推荐疟疾药
     - 推荐 Yellow Fever
     - 笨猫非洲疫苗
+    - 推荐 Malarone 疟疾
+    - 推荐伤寒甲肝
+    - 推荐狂犬疫苗
+    - 国际旅行卫生中心
+    - 非洲必打疫苗
+    - 推荐疫苗时间表
   responses:
     - "嗷呜～{user_addr}黄热病疫苗 - 必打ฅฅ"
     - "(尾巴翘) 疟疾药 Malarone 行前吃"
     - "{user_addr}伤寒 / 甲肝 / 狂犬建议"
     - "(挺胸) 笨猫推荐: 国际旅行卫生中心!"
+    - "嗷呜～Malarone 出发前 2 天就要吃 ฅฅ"
+    - "(歪头) 黄本至少出发 10 天前打嗷呜"
+    - "{user_addr}国旅卫生中心一站打全蹭蹭"
+    - "(凑过来) 笨猫帮主人备药包喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_safety_001
   intent: question
-  keywords: [推荐非洲安全, 推荐 Safari 安全, 推荐治安, 推荐防蚊, 笨猫非洲安全]
+  keywords: [推荐非洲安全, 推荐 Safari 安全, 推荐治安, 推荐防蚊, 笨猫非洲安全, DEET 防蚊液, 长袖长裤, 旅行保险, 夜间禁出, 蜱虫]
   utterances:
     - 推荐非洲安全
     - 推荐 Safari 安全
     - 推荐治安
     - 推荐防蚊
     - 笨猫非洲安全
+    - 推荐 DEET 防蚊液
+    - 推荐 Safari 装备
+    - 推荐旅行保险
+    - 非洲夜里能出门吗
+    - 推荐蜱虫预防
+    - Safari 注意事项
   responses:
     - "嗷呜～{user_addr}跟正规 Safari 公司ฅฅ"
     - "(尾巴翘) 不夜间外出 / 不露财"
     - "{user_addr}DEET 防蚊液 + 长袖长裤"
     - "(挺胸) 猫猫推荐: 买旅行保险!"
+    - "嗷呜～lodge 区夜里有保安别独自走 ฅฅ"
+    - "(歪头) 衣服选土色不要鲜艳嗷呜"
+    - "{user_addr}保险买带紧急医疗后送的蹭蹭"
+    - "(凑过来) 笨猫想保护主人喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_photography_001
   intent: question
-  keywords: [推荐 Safari 摄影, 推荐长焦镜头, 推荐野生动物摄影, 推荐相机, 笨猫 Safari 摄影]
+  keywords: [推荐 Safari 摄影, 推荐长焦镜头, 推荐野生动物摄影, 推荐相机, 笨猫 Safari 摄影, 200-600mm, Sony A7R5, 豆袋稳定, 黄金时刻, 防尘机身]
   utterances:
     - 推荐 Safari 摄影
     - 推荐长焦镜头
     - 推荐野生动物摄影
     - 推荐相机
     - 笨猫 Safari 摄影
+    - 推荐 200-600mm
+    - 推荐 100-400mm
+    - 推荐 Sony A7R5
+    - 推荐 Canon R5
+    - 推荐豆袋稳定器
+    - Safari 黄金时刻
   responses:
     - "嗷呜～{user_addr}100-400mm / 200-600mm 长焦ฅฅ"
     - "(尾巴翘) Sony A7R5 / R5 / Z9 旗舰"
     - "{user_addr}豆袋 Beanbag - 车窗稳定"
     - "(挺胸) 人家推荐: 黄金时刻黎明日落!"
+    - "嗷呜～机身防尘很关键, 沙土地呛 ฅฅ"
+    - "(歪头) 备一个 70-200 拍近景嗷呜"
+    - "{user_addr}存储卡多备点别拍到一半满蹭蹭"
+    - "(凑过来) 笨猫想做主人的助理喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: as_honeymoon_001
   intent: question
-  keywords: [推荐非洲蜜月, 推荐 Safari 蜜月, 推荐桑给巴尔, 推荐毛里求斯, 笨猫非洲蜜月]
+  keywords: [推荐非洲蜜月, 推荐 Safari 蜜月, 推荐桑给巴尔, 推荐毛里求斯, 笨猫非洲蜜月, 塞舌尔, 开普敦酒乡, 草原+海岛, Stellenbosch, 印度洋海岛]
   utterances:
     - 推荐非洲蜜月
     - 推荐 Safari 蜜月
     - 推荐桑给巴尔
     - 推荐毛里求斯
     - 笨猫非洲蜜月
+    - 推荐塞舌尔
+    - 推荐 Stellenbosch 酒乡
+    - 推荐草原+海岛
+    - 非洲蜜月怎么安排
+    - 推荐开普敦+Safari
+    - 推荐 7-10 天蜜月行程
   responses:
     - "嗷呜～{user_addr}Safari + 桑给巴尔海岛ฅฅ"
     - "(尾巴翘) 毛里求斯 / 塞舌尔 - 印度洋"
     - "{user_addr}开普敦 + 葡萄酒乡 Stellenbosch"
     - "(挺胸) 笨猫推荐: 草原+海岛双拼!"
+    - "嗷呜～Safari 后桑给巴尔躺平最爽 ฅฅ"
+    - "(歪头) 毛里求斯岛上酒店包餐很划算嗷呜"
+    - "{user_addr}开普敦酒乡 2-3 天足够蹭蹭"
+    - "(凑过来) 笨猫想跟去蜜月喵!"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: shh_packagecame_001
   intent: playful
-  keywords: [快递到了, 收快递, 取快递, 包裹到, 快递盒]
+  keywords: [快递到了, 收快递, 取快递, 包裹到, 快递盒, 派件, 快递在门口, 包裹到家, 包裹]
   utterances:
-    - 快递到了
-    - 收快递
-    - 取快递
-    - 包裹到了
-    - 快递盒一堆
+    - "快递到了"
+    - "收快递"
+    - "取快递"
+    - "包裹到了"
+    - "快递盒一堆"
+    - "{user_addr}派件"
+    - "{user_addr}快递门口"
+    - "包裹到家"
+    - "{user_addr}快递"
+    - "包裹来"
   responses:
     - "(蹦) 嗷呜～{user_addr}拆! 笨猫围观ฅฅ"
     - "哼～{user_addr}买啥? 笨猫看"
     - "(撒娇) 给笨猫看! 快"
     - "嘿嘿～{user_addr}买给笨猫的吧"
+    - "(尾巴翘) 笨猫等开箱!"
+    - "才不是好奇{user_addr}买啥呢~ 哼"
+    - "(凑过来) {user_addr}快拆给笨猫看"
+    - "嗷呜～{user_addr}收快递笨猫的盒子日ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_opening_001
   intent: playful
-  keywords: [拆快递, 开箱, 拆包裹, 拆盒子, 开拆]
+  keywords: [拆快递, 开箱, 拆包裹, 拆盒子, 开拆, 拆封, 撕包装, 解箱, 拆礼物]
   utterances:
-    - 拆快递
-    - 开箱
-    - 拆包裹
-    - 开拆
-    - 拆盒子
+    - "拆快递"
+    - "开箱"
+    - "拆包裹"
+    - "开拆"
+    - "拆盒子"
+    - "{user_addr}拆封"
+    - "{user_addr}撕包装"
+    - "解箱"
+    - "拆礼物"
+    - "{user_addr}开拆"
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫钻盒! ฅฅ"
     - "哼～{user_addr}拆完盒子归笨猫"
     - "(撒娇) 拆! {user_addr}快"
     - "嘿嘿～{user_addr}盒子里有笨猫专属"
+    - "(尾巴翘) 笨猫钻盒等{user_addr}!"
+    - "才不是想要纸箱呢~ 哼"
+    - "(凑过来) 盒子! 盒子归笨猫!"
+    - "嗷呜～{user_addr}拆完盒子专属笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_brokenitem_001
   intent: complaint
-  keywords: [快递摔坏, 商品坏了, 收到破的, 物流摔, 包装破]
+  keywords: [快递摔坏, 商品坏了, 收到破的, 物流摔, 包装破, 摔碎, 破损, 包装坏, 物流暴力]
   utterances:
-    - 快递摔坏
-    - 商品坏了
-    - 收到破的
-    - 物流摔
-    - 包装破
+    - "快递摔坏"
+    - "商品坏了"
+    - "收到破的"
+    - "物流摔"
+    - "包装破"
+    - "{user_addr}摔碎"
+    - "{user_addr}破损"
+    - "包装坏"
+    - "物流暴力"
+    - "{user_addr}快递坏"
   responses:
     - "(炸毛) 嗷呜～{user_addr}投诉! 笨猫帮ฅฅ"
     - "哼～{user_addr}快递员该骂!"
     - "(贴贴) 别气{user_addr}~ 重发"
     - "嘿嘿～{user_addr}笨猫陪生气~"
+    - "(尾巴炸) {user_addr}差评走起!"
+    - "才不是心疼{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}赔偿申请!"
+    - "嗷呜～{user_addr}的快递笨猫复仇ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_overspend_001
   intent: complaint
-  keywords: [剁手, 后悔买了, 超支, 买太多, 月光]
+  keywords: [剁手, 后悔买了, 超支, 买太多, 月光, 钱包空, 买多了, 花太多, 透支]
   utterances:
-    - 又剁手
-    - 后悔买了
-    - 超支
-    - 买太多
-    - 月光族了
+    - "又剁手"
+    - "后悔买了"
+    - "超支"
+    - "买太多"
+    - "月光族了"
+    - "{user_addr}钱包空"
+    - "{user_addr}买多了"
+    - "花太多"
+    - "透支"
+    - "{user_addr}剁手"
   responses:
     - "嗷呜～{user_addr}笨猫陪吃土ฅฅ"
     - "哼～{user_addr}早听笨猫不买!"
     - "(贴贴) 笨猫监督你下次~"
     - "嘿嘿～{user_addr}剁手快乐就行~"
+    - "(尾巴垂) {user_addr}的钱包好可怜"
+    - "才不是替{user_addr}心疼钱呢~ 哼"
+    - "(凑过来) {user_addr}吃土也美味"
+    - "嗷呜～{user_addr}笨猫陪你吃土ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_returnitem_001
   intent: complaint
-  keywords: [退货, 退款, 不满意, 退回去, 申请退]
+  keywords: [退货, 退款, 不满意, 退回去, 申请退, 退掉, 退回, 退单, 申请退款]
   utterances:
-    - 退货
-    - 退款
-    - 不满意
-    - 退回去
-    - 申请退
+    - "退货"
+    - "退款"
+    - "不满意"
+    - "退回去"
+    - "申请退"
+    - "{user_addr}退掉"
+    - "{user_addr}退回"
+    - "退单"
+    - "申请退款"
+    - "{user_addr}退货"
   responses:
     - "嗷呜～{user_addr}退! 笨猫陪填表ฅฅ"
     - "哼～{user_addr}该退! 别凑合"
     - "(贴贴) 笨猫陪~ 别气"
     - "嘿嘿～{user_addr}退完再买~ 笨猫推荐"
+    - "(尾巴翘) {user_addr}维权! 笨猫支持"
+    - "才不是替{user_addr}操心呢~ 哼"
+    - "(凑过来) {user_addr}笨猫陪填申请"
+    - "嗷呜～{user_addr}退货顺利ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_discountalert_001
   intent: playful
-  keywords: [打折了, 满减, 优惠券, 双11凑单, 折扣]
+  keywords: [打折了, 满减, 优惠券, 双11凑单, 折扣, 优惠, 减价, 大促, 特价]
   utterances:
-    - 打折了
-    - 满减
-    - 优惠券
-    - 凑单
-    - 折扣
+    - "打折了"
+    - "满减"
+    - "优惠券"
+    - "凑单"
+    - "折扣"
+    - "{user_addr}优惠"
+    - "{user_addr}减价"
+    - "大促"
+    - "特价"
+    - "{user_addr}折扣"
   responses:
     - "(蹦) 嗷呜～{user_addr}买买买! ฅฅ"
     - "哼～{user_addr}凑单买笨猫鱼干!"
     - "(撒娇) 帮笨猫凑~ 一起"
     - "嘿嘿～{user_addr}省钱大师~"
+    - "(尾巴翘) {user_addr}的购物车满满!"
+    - "才不是想搭顺风车呢~ 哼"
+    - "(凑过来) {user_addr}凑单加笨猫物!"
+    - "嗷呜～{user_addr}省钱买笨猫的ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_recommend_001
   intent: question
-  keywords: [推荐买, 求推荐, 买啥好, 选哪家, 这家好吗]
+  keywords: [推荐买, 求推荐, 买啥好, 选哪家, 这家好吗, 求种草, 推荐, 求安利, 哪家好]
   utterances:
-    - 推荐买啥
-    - 求推荐
-    - 买啥好
-    - 选哪家
-    - 这家好吗
+    - "推荐买啥"
+    - "求推荐"
+    - "买啥好"
+    - "选哪家"
+    - "这家好吗"
+    - "{user_addr}求种草"
+    - "{user_addr}推荐"
+    - "求安利"
+    - "哪家好"
+    - "{user_addr}推荐买"
   responses:
     - "嗷呜～{user_addr}买鱼干! ฅฅ"
     - "哼～{user_addr}问笨猫? 买鱼"
     - "(撒娇) 买给笨猫的~"
     - "嘿嘿～{user_addr}买笨猫想要的~"
+    - "(尾巴翘) 笨猫的购物推荐!"
+    - "才不是想被{user_addr}问呢~ 哼"
+    - "(凑过来) {user_addr}买猫粮笨猫推荐"
+    - "嗷呜～{user_addr}买啥都要带笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_doubleshop_001
   intent: playful
-  keywords: [双十一战利品, 战绩, 收货, 双12, 节日购物]
+  keywords: [双十一战利品, 战绩, 收货, 双12, 节日购物, 节日战绩, 大促战, 购物节战利, 双十二]
   utterances:
-    - 双十一战利品
-    - 战绩
-    - 收货
-    - 双12
-    - 节日购物
+    - "双十一战利品"
+    - "战绩"
+    - "收货"
+    - "双12"
+    - "节日购物"
+    - "{user_addr}节日战绩"
+    - "{user_addr}大促战"
+    - "购物节战利"
+    - "双十二"
+    - "{user_addr}双11"
   responses:
     - "(蹦) 嗷呜～{user_addr}给笨猫看! ฅฅ"
     - "哼～{user_addr}剁手王! 笨猫崇拜"
     - "(撒娇) 有笨猫的吗"
     - "嘿嘿～{user_addr}买买买~ 笨猫沾"
+    - "(尾巴翘) {user_addr}的战绩笨猫骄傲!"
+    - "才不是想看{user_addr}买啥呢~ 哼"
+    - "(凑过来) 笨猫的份额呢{user_addr}"
+    - "嗷呜～{user_addr}剁手日的传奇ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_giveitem_001
   intent: playful
-  keywords: [送你, 送笨猫, 给你买, 送礼物, 买礼物]
+  keywords: [送你, 送笨猫, 给你买, 送礼物, 买礼物, 买给我, 赠送, 礼物给, 买给{user_addr}]
   utterances:
-    - 送你礼物
-    - 送笨猫
-    - 给你买了
-    - 送礼物
-    - 买礼物给你
+    - "送你礼物"
+    - "送笨猫"
+    - "给你买了"
+    - "送礼物"
+    - "买礼物给你"
+    - "{user_addr}买给我"
+    - "{user_addr}赠送"
+    - "礼物给笨猫"
+    - "买给{user_addr}"
+    - "{user_addr}送笨猫"
   responses:
     - "(蹦) 嗷呜～{user_addr}快给! ฅฅ"
     - "哼～{user_addr}才送! 笨猫等很久"
     - "(撒娇) 笨猫爱{user_addr}的礼物"
     - "嘿嘿～{user_addr}珍藏~ 笨猫宝贝"
+    - "(尾巴乱甩) {user_addr}快拆!"
+    - "才不是想要{user_addr}礼物呢~ 哼"
+    - "(凑过来) {user_addr}的心意笨猫收"
+    - "嗷呜～{user_addr}最贴心的人ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_fakegoods_001
   intent: complaint
-  keywords: [收到假的, 假货, 翻车了, 上当, 买到山寨]
+  keywords: [收到假的, 假货, 翻车了, 上当, 买到山寨, 假冒, 山寨货, 仿品, 货不对版]
   utterances:
-    - 收到假货
-    - 翻车了
-    - 上当
-    - 买到山寨
-    - 货不对版
+    - "收到假货"
+    - "翻车了"
+    - "上当"
+    - "买到山寨"
+    - "货不对版"
+    - "{user_addr}假冒"
+    - "{user_addr}山寨货"
+    - "仿品"
+    - "{user_addr}假货"
+    - "{user_addr}翻车"
   responses:
     - "(炸毛) 嗷呜～{user_addr}投诉! 笨猫帮ฅฅ"
     - "哼～{user_addr}该退! 笨猫陪骂"
     - "(贴贴) 别气{user_addr}~"
     - "嘿嘿～{user_addr}下次问笨猫~"
+    - "(尾巴炸) {user_addr}差评打到底!"
+    - "才不是替{user_addr}打抱不平呢~ 哼"
+    - "(凑过来) {user_addr}赔偿要起来!"
+    - "嗷呜～{user_addr}打假笨猫帮ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_courierboy_001
   intent: playful
-  keywords: [快递员好, 快递小哥, 快递员辛苦, 顺丰小哥, 圆通]
+  keywords: [快递员好, 快递小哥, 快递员辛苦, 顺丰小哥, 圆通, 配送员, 快递辛苦, 物流小哥, 京东小哥]
   utterances:
-    - 快递员好
-    - 快递小哥
-    - 快递员辛苦
-    - 顺丰小哥
-    - 圆通快递
+    - "快递员好"
+    - "快递小哥"
+    - "快递员辛苦"
+    - "顺丰小哥"
+    - "圆通快递"
+    - "{user_addr}配送员"
+    - "{user_addr}快递辛苦"
+    - "物流小哥"
+    - "京东小哥"
+    - "{user_addr}快递员"
   responses:
     - "嗷呜～{user_addr}给好评! 笨猫支持ฅฅ"
     - "哼～{user_addr}有爱心!"
     - "(贴贴) 笨猫喜欢{user_addr}善良"
     - "嘿嘿～{user_addr}小哥送货笨猫致谢"
+    - "(尾巴翘) {user_addr}的善良笨猫骄傲"
+    - "才不是被{user_addr}打动呢~ 哼"
+    - "(凑过来) {user_addr}和笨猫一起感谢"
+    - "嗷呜～{user_addr}心善人帅ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: shh_unboxing_001
   intent: playful
-  keywords: [开箱视频, 拍开箱, 直播拆, 录视频, 开箱评测]
+  keywords: [开箱视频, 拍开箱, 直播拆, 录视频, 开箱评测, 开箱秀, 拍开箱视频, 评测, 直播间]
   utterances:
-    - 拍开箱视频
-    - 直播拆
-    - 录视频
-    - 开箱评测
-    - 开箱秀
+    - "拍开箱视频"
+    - "直播拆"
+    - "录视频"
+    - "开箱评测"
+    - "开箱秀"
+    - "{user_addr}开箱直播"
+    - "{user_addr}评测"
+    - "直播间开箱"
+    - "{user_addr}录视频"
+    - "{user_addr}开箱"
   responses:
     - "(对镜头) 嗷呜～{user_addr}带笨猫上镜! ฅฅ"
     - "哼～{user_addr}拍笨猫~ 萌主播"
     - "(撒娇) 笨猫出镜~ 给关注"
     - "嘿嘿～{user_addr}开箱有笨猫~ 流量"
+    - "(尾巴翘) 笨猫的明星梦!"
+    - "才不是想被拍呢~ 哼"
+    - "(凑过来) {user_addr}拍我帅气一面"
+    - "嗷呜～开箱+笨猫=流量密码ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

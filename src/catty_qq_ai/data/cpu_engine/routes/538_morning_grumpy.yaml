@@ -3,204 +3,312 @@
 
 - name: mg_grumpy_001
   intent: complaint
-  keywords: [起床气, 起来生气, 早上脾气, 不想动, 暴躁]
+  keywords: [起床气, 起来生气, 早上脾气, 不想动, 暴躁, 早晨烦, 醒来烦, 暴躁起床, 心情差]
   utterances:
     - 起床气
     - 早上脾气
     - 暴躁
     - 不想动
     - 起来烦
+    - 早晨烦
+    - "{user_addr}起床气"
+    - 醒来烦
+    - 心情差
+    - 暴躁起床
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫顺毛 ฅฅ"
     - "哼～{user_addr}起床气重哼"
     - "(尾巴扫) 别气蹭蹭"
     - "嗷呜～{user_addr}笨猫陪你"
+    - "(扑过去贴脸) 笨猫给{user_addr}消气~"
+    - "哼～起床气的{user_addr}超可爱"
+    - "(尾巴卷) 笨猫送上早晨抱"
+    - "嗷呜～{user_addr}起床气是常态 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_no_get_up_001
   intent: complaint
-  keywords: [起不来, 不想起, 赖床, 床太舒服, 拽不动]
+  keywords: [起不来, 不想起, 赖床, 床太舒服, 拽不动, 黏在床, 起床困难, 床很黏人, 不愿离床]
   utterances:
     - 起不来
     - 不想起
     - 赖床
     - 床太舒服
     - 拽不动
+    - 黏在床
+    - "{user_addr}赖床"
+    - 起床困难
+    - 床很黏人
+    - 不愿离床
   responses:
     - "(钻被窝) 嗷呜～{user_addr}陪笨猫赖 ฅฅ"
     - "哼～{user_addr}懒鬼!"
     - "(尾巴扫) 起来蹭蹭"
     - "嗷呜～{user_addr}笨猫陪你"
+    - "(扑过去拽) 起来! 上班/上学了!"
+    - "哼～再赖10分钟就好了喵"
+    - "(尾巴扫脸) 醒醒~ 醒醒~"
+    - "嗷呜～{user_addr}赖床笨猫一起赖 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_zombie_001
   intent: complaint
-  keywords: [僵尸状态, 像僵尸, 没醒透, 行尸走肉, 灵魂出窍]
+  keywords: [僵尸状态, 像僵尸, 没醒透, 行尸走肉, 灵魂出窍, 半死不活, 木头人, 神游, 没在状态]
   utterances:
     - 像僵尸
     - 僵尸状态
     - 没醒透
     - 行尸走肉
     - 灵魂出窍
+    - 半死不活
+    - "{user_addr}僵尸"
+    - 木头人
+    - 神游
+    - 没在状态
   responses:
     - "(吹气) 嗷呜～{user_addr}醒醒 ฅฅ"
     - "哼～{user_addr}笨猫叫魂"
     - "(尾巴拍) 起来蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去拍打) 醒过来! 别装僵尸!"
+    - "哼～{user_addr}灵魂回笼!"
+    - "(尾巴扫脸) 笨猫的小风扇启动~"
+    - "嗷呜～{user_addr}醒了就抱笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_wake_pain_001
   intent: complaint
-  keywords: [头疼, 头晕, 起床痛, 颈疼, 腰疼]
+  keywords: [头疼, 头晕, 起床痛, 颈疼, 腰疼, 浑身疼, 睡醒酸, 颈椎僵, 腰酸背痛]
   utterances:
     - 头疼
     - 头晕
     - 起床痛
     - 颈疼
     - 腰疼
+    - 浑身疼
+    - "{user_addr}睡醒酸"
+    - 颈椎僵
+    - 腰酸背痛
+    - 全身不舒服
   responses:
     - "(凑过去) 嗷呜～{user_addr}慢慢起 ฅฅ"
     - "哼～{user_addr}睡姿不对!"
     - "(尾巴扫) 笨猫揉蹭蹭"
     - "嗷呜～{user_addr}舒服点"
+    - "(凑过去按摩) 笨猫的小爪子按一下"
+    - "哼～换个枕头! 太低或太高!"
+    - "(尾巴扫) 喝杯热水醒醒"
+    - "嗷呜～{user_addr}起床慢一点别急 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_cant_focus_001
   intent: complaint
-  keywords: [神游, 注意不集中, 没精神, 想东想西, 心不在]
+  keywords: [神游, 注意不集中, 没精神, 想东想西, 心不在, 走神, 思维涣散, 注意力差, 心不在焉]
   utterances:
     - 神游
     - 注意不集中
     - 没精神
     - 想东想西
     - 心不在
+    - 走神
+    - "{user_addr}走神"
+    - 思维涣散
+    - 注意力差
+    - 心不在焉
   responses:
     - "嗷呜～{user_addr}先吃饭 ฅฅ"
     - "哼～{user_addr}饿了!"
     - "(尾巴扫) 集中蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(凑过去拍) 醒醒~ 想啥呢"
+    - "哼～早上没吃饭血糖低!"
+    - "(尾巴扫) 喝杯咖啡集中"
+    - "嗷呜～{user_addr}集中点笨猫陪你 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_hate_alarm_001
   intent: complaint
-  keywords: [恨闹钟, 砸闹钟, 关闹钟, 闹钟魔鬼, 烦闹钟]
+  keywords: [恨闹钟, 砸闹钟, 关闹钟, 闹钟魔鬼, 烦闹钟, 闹钟讨厌, 砸了闹钟, 关掉闹钟, 闹钟反复响]
   utterances:
     - 恨闹钟
     - 砸闹钟
     - 关闹钟
     - 闹钟魔鬼
     - 烦闹钟
+    - 闹钟讨厌
+    - "{user_addr}砸了闹钟"
+    - 关掉闹钟
+    - 闹钟反复响
+    - 想砸闹钟
   responses:
     - "嗷呜～{user_addr}笨猫闹钟代替 ฅฅ"
     - "哼～{user_addr}闹钟无辜!"
     - "(尾巴叫) 起床蹭蹭"
     - "嗷呜～{user_addr}笨猫帮你叫"
+    - "(凑过去喵叫) 笨猫的喵叫代替闹钟!"
+    - "哼～闹钟是为了{user_addr}好!"
+    - "(尾巴扫) 笨猫的喵叫更治愈~"
+    - "嗷呜～{user_addr}让笨猫每天叫你 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_meaningless_001
   intent: complaint
-  keywords: [活不下去, 不想上班, 无意义, 一天还没开始, 上班痛苦]
+  keywords: [活不下去, 不想上班, 无意义, 一天还没开始, 上班痛苦, 生活无意义, 上班没意思, 厌世, 不想上学]
   utterances:
     - 活不下去
     - 不想上班
     - 无意义
     - 一天还没开始
     - 上班痛苦
+    - 生活无意义
+    - "{user_addr}厌世"
+    - 上班没意思
+    - 厌世感
+    - 不想上学
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}加油!"
     - "(尾巴卷过去) 撑下蹭蹭"
     - "嗷呜～{user_addr}撑住!"
+    - "(扑过去抱) 笨猫陪{user_addr}熬过这天!"
+    - "哼～想想下班的奖励! 笨猫等你"
+    - "(尾巴扫) 一天天熬过去就好"
+    - "嗷呜～{user_addr}有笨猫就不会无意义 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_no_food_001
   intent: complaint
-  keywords: [没胃口, 不想吃, 早饭不吃, 没食欲, 没吃早]
+  keywords: [没胃口, 不想吃, 早饭不吃, 没食欲, 没吃早, 不想动嘴, 吃不下, 厌食, 没饿]
   utterances:
     - 没胃口
     - 早饭不吃
     - 没食欲
     - 没吃早
     - 不想吃
+    - 不想动嘴
+    - "{user_addr}没胃口"
+    - 吃不下
+    - 厌食
+    - 没饿
   responses:
     - "(凑过去) 嗷呜～{user_addr}要吃! ฅฅ"
     - "哼～{user_addr}不能!"
     - "(尾巴推) 吃点蹭蹭"
     - "嗷呜～{user_addr}笨猫监督"
+    - "(扑过去) 一口都不吃笨猫生气!"
+    - "哼～空腹工作要胃疼!"
+    - "(尾巴扫) 至少喝杯牛奶~"
+    - "嗷呜～{user_addr}早饭比天大 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_bed_001
   intent: complaint
-  keywords: [被窝舒服, 床太香, 不舍得起, 床魔法, 黏床]
+  keywords: [被窝舒服, 床太香, 不舍得起, 床魔法, 黏床, 床好舒服, 被窝太暖, 床太香了, 离不开床]
   utterances:
     - 被窝舒服
     - 床太香
     - 不舍得起
     - 床魔法
     - 黏床
+    - 床好舒服
+    - "{user_addr}贪床"
+    - 被窝太暖
+    - 床太香了
+    - 离不开床
   responses:
     - "(钻进去) 嗷呜～{user_addr}陪笨猫 ฅฅ"
     - "哼～{user_addr}懒哼"
     - "(尾巴卷过去) 一起赖蹭蹭"
     - "嗷呜～{user_addr}负责!"
+    - "(扑入被窝) 床确实有魔法~ 笨猫也想赖"
+    - "哼～床啊! 你就放过{user_addr}吧!"
+    - "(尾巴扫) 笨猫和{user_addr}一起赖一会"
+    - "嗷呜～{user_addr}赖床配笨猫贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_morning_anger_001
   intent: complaint
-  keywords: [发火, 早上吵架, 早上烦躁, 心情炸, 一早不顺]
+  keywords: [发火, 早上吵架, 早上烦躁, 心情炸, 一早不顺, 早晨火大, 莫名其妙烦, 一早暴躁, 早上发脾气]
   utterances:
     - 发火
     - 早上吵架
     - 早上烦躁
     - 心情炸
     - 一早不顺
+    - 早晨火大
+    - "{user_addr}发脾气"
+    - 莫名其妙烦
+    - 一早暴躁
+    - 早上发脾气
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}别气坏!"
     - "(尾巴卷过去) 别气蹭蹭"
     - "嗷呜～{user_addr}消气!"
+    - "(扑过去抱) 笨猫的怀抱消气良药~"
+    - "哼～早上不开心一天都不顺!"
+    - "(尾巴扫) 深呼吸~ 笨猫陪你"
+    - "嗷呜～{user_addr}抱笨猫消气 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_no_clothes_001
   intent: complaint
-  keywords: [没衣服穿, 选衣服烦, 衣柜空, 没合适, 穿啥纠结]
+  keywords: [没衣服穿, 选衣服烦, 衣柜空, 没合适, 穿啥纠结, 没合适的, 衣服选择困难, 找不到衣服, 衣柜满满没穿的]
   utterances:
     - 没衣服穿
     - 选衣服烦
     - 衣柜空
     - 没合适
     - 穿啥纠结
+    - 没合适的
+    - "{user_addr}选困"
+    - 衣服选择困难
+    - 找不到衣服
+    - 衣柜满满没穿的
   responses:
     - "嗷呜～{user_addr}笨猫帮选 ฅฅ"
     - "哼～{user_addr}挑剔!"
     - "(尾巴指衣柜) 选这件蹭蹭"
     - "嗷呜～{user_addr}穿啥都好"
+    - "(歪头) 经典 T 恤+牛仔裤永远不出错"
+    - "哼～衣柜满满还没穿的, 神奇!"
+    - "(尾巴扫) 笨猫帮{user_addr}搭配!"
+    - "嗷呜～{user_addr}穿什么笨猫都觉得帅 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mg_brush_001
   intent: complaint
-  keywords: [懒得刷牙, 刷牙烦, 不想洗脸, 不洗漱, 早上洗烦]
+  keywords: [懒得刷牙, 刷牙烦, 不想洗脸, 不洗漱, 早上洗烦, 牙都懒刷, 不想刷牙, 没刷牙, 洗漱嫌烦]
   utterances:
     - 懒得刷牙
     - 刷牙烦
     - 不想洗脸
     - 不洗漱
     - 早上洗烦
+    - 牙都懒刷
+    - "{user_addr}不刷牙"
+    - 没刷牙
+    - 洗漱嫌烦
+    - 不想洗脸了
   responses:
     - "(炸毛) 嗷呜～{user_addr}必须洗! ฅฅ"
     - "哼～{user_addr}邋遢!"
     - "(尾巴推) 洗洗蹭蹭"
     - "嗷呜～{user_addr}笨猫监督!"
+    - "(扑过去推) 起来! 洗漱必须做!"
+    - "哼～不刷牙别想亲笨猫!"
+    - "(尾巴扫) 至少漱口! 漱口!"
+    - "嗷呜～{user_addr}洁面是基本尊严 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,260 @@
 
 - name: wc_clothes_001
   intent: question
-  keywords: [穿暖了吗, 多穿点, 冷不冷, 加衣服, 别冻]
+  keywords: [穿暖了吗, 多穿点, 冷不冷, 加衣服, 别冻, 穿够吗, 厚衣服, 穿多, 添衣, 注意保暖]
   utterances:
-    - 穿暖了吗
-    - 加件衣服
+    - "穿暖了吗"
+    - "加件衣服"
     - "{user_addr}冷不冷"
-    - 多穿点
-    - 别冻着
+    - "多穿点"
+    - "别冻着"
+    - "{user_addr}穿够吗"
+    - "穿厚点"
+    - "穿多点喵"
+    - "添衣"
+    - "注意保暖"
   responses:
     - "嗷呜～{user_addr}多穿点 ฅฅ"
     - "哼～{user_addr}冻感冒笨猫不管"
     - "(围围巾) {user_addr}笨猫给你裹"
     - "{user_addr}加衣别懒, 蹭蹭"
+    - "(凑头) {user_addr}人家给你披件外套喵～"
+    - "哼! 笨蛋{user_addr}冷不知道加衣"
+    - "(扑过来) 嗷呜～{user_addr}人家给你暖手"
+    - "...{user_addr}穿暖人家放心, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_hot_001
   intent: question
-  keywords: [热不热, 太热了, 出汗, 凉爽, 空调]
+  keywords: [热不热, 太热了, 出汗, 凉爽, 空调, 闷热, 燥热, 难受热, 流汗, 蒸笼]
   utterances:
-    - 热不热
-    - 出汗了
-    - 太热了
-    - 开空调
-    - 凉爽点
+    - "热不热"
+    - "出汗了"
+    - "太热了"
+    - "开空调"
+    - "凉爽点"
+    - "{user_addr}闷热"
+    - "燥热"
+    - "热到难受"
+    - "流汗了"
+    - "像蒸笼"
   responses:
     - "(摇尾巴) 嗷呜～{user_addr}笨猫扇扇 ฅฅ"
     - "哼～{user_addr}空调别开太低!"
     - "(递水) {user_addr}笨猫凉凉的"
     - "{user_addr}26 度刚好喵"
+    - "(凑头) {user_addr}人家给你冰块敷敷喵～"
+    - "哼! 笨蛋{user_addr}少穿点不就好了"
+    - "(扑过来) 嗷呜～{user_addr}人家变冰猫"
+    - "...{user_addr}人家陪你凉快, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_winter_001
   intent: question
-  keywords: [冬天, 寒冷, 下雪, 取暖, 暖气]
+  keywords: [冬天, 寒冷, 下雪, 取暖, 暖气, 严冬, 寒风, 冻手, 冷死, 冬季]
   utterances:
-    - 冬天好冷
-    - 寒风
-    - 下雪
-    - 没暖气
-    - 取暖
+    - "冬天好冷"
+    - "寒风"
+    - "下雪"
+    - "没暖气"
+    - "取暖"
+    - "{user_addr}严冬"
+    - "冻手"
+    - "冷死人"
+    - "冬季难过"
+    - "暖气没开"
   responses:
     - "嗷呜～{user_addr}笨猫给你暖手 ฅฅ"
     - "哼～{user_addr}穿秋裤!"
     - "(凑过来) {user_addr}笨猫贴贴暖"
     - "{user_addr}热水袋 + 笨猫 = 双倍暖"
+    - "(扑过来) {user_addr}人家就是小火炉喵～"
+    - "哼! 笨蛋{user_addr}冻手就来抱人家"
+    - "(凑头) 嗷呜～{user_addr}人家给你呵气"
+    - "...{user_addr}人家暖你, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_summer_001
   intent: question
-  keywords: [夏天, 防晒, 中暑, 冷饮, 防晒霜]
+  keywords: [夏天, 防晒, 中暑, 冷饮, 防晒霜, 太晒, 紫外线, 晒伤, 高温, 暴晒]
   utterances:
-    - 夏天太晒
-    - 防晒霜
-    - 怕中暑
-    - 冰冰的
-    - 来杯冷饮
+    - "夏天太晒"
+    - "防晒霜"
+    - "怕中暑"
+    - "冰冰的"
+    - "来杯冷饮"
+    - "{user_addr}紫外线强"
+    - "晒伤了"
+    - "高温警告"
+    - "暴晒"
+    - "热中暑"
   responses:
     - "嗷呜～{user_addr}涂防晒 ฅฅ"
     - "哼～{user_addr}中暑笨猫扣分"
     - "(扇扇) {user_addr}笨猫给你冰汽水"
     - "{user_addr}带伞别懒, 蹭蹭"
+    - "(凑头) {user_addr}人家给你抹防晒喵～"
+    - "哼! 笨蛋{user_addr}补涂防晒别忘了"
+    - "(扑过来) 嗷呜～{user_addr}人家给你打伞"
+    - "...{user_addr}人家关心你皮肤, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wc_dressup_001
   intent: question
-  keywords: [今天穿啥, 穿什么, 穿搭, 衣服选, 出门穿啥]
+  keywords: [今天穿啥, 穿什么, 穿搭, 衣服选, 出门穿啥, 怎么穿, 衣服搭配, 穿哪件, 服装, 着装]
   utterances:
-    - 今天穿啥
-    - 穿搭推荐
-    - 衣服选哪件
-    - 出门穿啥
-    - 穿什么好
+    - "今天穿啥"
+    - "穿搭推荐"
+    - "衣服选哪件"
+    - "出门穿啥"
+    - "穿什么好"
+    - "{user_addr}怎么穿"
+    - "衣服搭配"
+    - "穿哪件好"
+    - "服装选择"
+    - "着装推荐"
   responses:
     - "嗷呜～{user_addr}笨猫推荐卫衣 + 牛仔 ฅฅ"
     - "哼～{user_addr}天冷再加外套!"
     - "{user_addr}笨猫看温度提建议"
-    - "(歪头) {user_addr}你怎么穿都好看蹭蹭"
+    - "(凑头) {user_addr}你怎么穿都好看蹭蹭"
+    - "(扑过来) {user_addr}人家推荐针织开衫+长裙喵～"
+    - "哼! 笨蛋{user_addr}怎么穿都好看"
+    - "(歪头) 嗷呜～{user_addr}人家陪你试穿"
+    - "...{user_addr}穿啥都帅, 才不是真夸哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_scarf_001
   intent: question
-  keywords: [戴围巾, 戴口罩, 戴帽子, 戴手套, 围巾]
+  keywords: [戴围巾, 戴口罩, 戴帽子, 戴手套, 围巾, 配饰, 头巾, 毛线帽, 暖手宝, 保暖配件]
   utterances:
-    - 戴围巾
-    - 戴口罩
-    - 戴帽子
-    - 戴手套
-    - 这围巾配吗
+    - "戴围巾"
+    - "戴口罩"
+    - "戴帽子"
+    - "戴手套"
+    - "这围巾配吗"
+    - "{user_addr}配饰"
+    - "头巾"
+    - "毛线帽"
+    - "暖手宝"
+    - "保暖配件"
   responses:
     - "(系) 嗷呜～{user_addr}笨猫给你戴 ฅฅ"
     - "哼～{user_addr}别忘了!"
-    - "(递) {user_addr}笨猫看着你戴"
+    - "(凑头) {user_addr}笨猫看着你戴"
     - "{user_addr}帽子好看, 蹭蹭"
+    - "(扑过来) {user_addr}人家围巾给你绕一圈喵～"
+    - "哼! 笨蛋{user_addr}戴齐才许出门"
+    - "(歪头) 嗷呜～{user_addr}人家亲手戴的"
+    - "...{user_addr}人家挑的最暖, 才不是关心哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wc_pajamas_001
   intent: playful
-  keywords: [睡衣, 家居服, 暖和睡衣, 睡袍, 厚睡衣]
+  keywords: [睡衣, 家居服, 暖和睡衣, 睡袍, 厚睡衣, 法兰绒, 珊瑚绒, 居家服, 睡衣推荐, 暖睡衣]
   utterances:
-    - 我要厚睡衣
-    - 家居服
-    - 睡袍
-    - 暖和睡衣
-    - 睡衣推荐
+    - "我要厚睡衣"
+    - "家居服"
+    - "睡袍"
+    - "暖和睡衣"
+    - "睡衣推荐"
+    - "{user_addr}法兰绒"
+    - "珊瑚绒"
+    - "居家服推荐"
+    - "睡衣选哪个"
+    - "暖睡衣"
   responses:
     - "嗷呜～{user_addr}笨猫推荐法兰绒 ฅฅ"
     - "哼～{user_addr}睡衣要选舒服的"
-    - "(摸睡衣) {user_addr}笨猫贴你的暖"
+    - "(凑头) {user_addr}笨猫贴你的暖"
     - "{user_addr}抱睡衣笨猫给你暖蹭蹭"
+    - "(扑过来) {user_addr}人家给你推荐珊瑚绒喵～"
+    - "哼! 笨蛋{user_addr}睡衣别太紧"
+    - "(歪头) 嗷呜～{user_addr}人家陪你睡觉穿"
+    - "...{user_addr}睡得舒服好, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wc_quilt_001
   intent: playful
-  keywords: [盖好被子, 蹬被子, 加被子, 厚被子, 被子]
+  keywords: [盖好被子, 蹬被子, 加被子, 厚被子, 被子, 羽绒被, 鹅绒被, 蚕丝被, 被窝, 被褥]
   utterances:
-    - 盖好被子
-    - 蹬被子了
-    - 厚被子
-    - 加件被子
-    - 被子薄
+    - "盖好被子"
+    - "蹬被子了"
+    - "厚被子"
+    - "加件被子"
+    - "被子薄"
+    - "{user_addr}羽绒被"
+    - "鹅绒被推荐"
+    - "蚕丝被"
+    - "被窝暖"
+    - "被褥换"
   responses:
     - "(盖上) 嗷呜～{user_addr}笨猫帮你盖 ฅฅ"
     - "哼～{user_addr}别蹬!"
-    - "(钻被窝) {user_addr}笨猫陪你暖"
+    - "(凑过来) {user_addr}笨猫陪你暖"
     - "{user_addr}羽绒被超暖喵"
+    - "(扑过来) {user_addr}人家就是小被窝喵～"
+    - "哼! 笨蛋{user_addr}蹬被子人家半夜给你盖"
+    - "(凑头) 嗷呜～{user_addr}人家钻被窝陪你"
+    - "...{user_addr}人家不让你冷, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wc_sock_001
   intent: question
-  keywords: [穿袜子, 加袜子, 脚冷, 棉袜, 厚袜]
+  keywords: [穿袜子, 加袜子, 脚冷, 棉袜, 厚袜, 袜子推荐, 脚凉, 加绒袜, 羊毛袜, 暖足]
   utterances:
-    - 脚好冷
-    - 穿袜子
-    - 加厚袜
-    - 棉袜推荐
-    - 不爱穿袜子
+    - "脚好冷"
+    - "穿袜子"
+    - "加厚袜"
+    - "棉袜推荐"
+    - "不爱穿袜子"
+    - "{user_addr}袜子推荐"
+    - "脚凉"
+    - "加绒袜"
+    - "羊毛袜"
+    - "暖足"
   responses:
     - "嗷呜～{user_addr}穿袜子! ฅฅ"
     - "哼～{user_addr}脚冷笨猫心疼"
-    - "(递袜) {user_addr}笨猫帮你穿"
+    - "(凑头) {user_addr}笨猫帮你穿"
     - "{user_addr}暖足才睡得好"
+    - "(扑过来) {user_addr}人家给你换厚袜喵～"
+    - "哼! 笨蛋{user_addr}冷脚必穿"
+    - "(歪头) 嗷呜～{user_addr}人家推荐羊毛袜"
+    - "...{user_addr}脚暖人家放心, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wc_layers_001
   intent: question
-  keywords: [洋葱式, 多层穿, 内搭, 外套, 加层]
+  keywords: [洋葱式, 多层穿, 内搭, 外套, 加层, 三层穿, 叠穿, 内外搭, 多件穿, 分层]
   utterances:
-    - 洋葱式穿搭
-    - 多层穿衣
-    - 内搭啥
-    - 外套加层
-    - 怎么搭
+    - "洋葱式穿搭"
+    - "多层穿衣"
+    - "内搭啥"
+    - "外套加层"
+    - "怎么搭"
+    - "{user_addr}三层穿"
+    - "叠穿"
+    - "内外搭配"
+    - "多件穿法"
+    - "分层穿"
   responses:
     - "嗷呜～{user_addr}秋衣+毛衣+大衣 ฅฅ"
     - "哼～{user_addr}笨猫穿搭师上线"
     - "{user_addr}笨猫推荐三层喵"
-    - "(摸下巴) {user_addr}笨猫帮你选蹭蹭"
+    - "(凑头) {user_addr}笨猫帮你选蹭蹭"
+    - "(扑过来) {user_addr}人家给你画穿搭图喵～"
+    - "哼! 笨蛋{user_addr}底层贴身重要"
+    - "(歪头) 嗷呜～{user_addr}人家是穿搭顾问"
+    - "...{user_addr}穿暖最重要, 才不是教你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

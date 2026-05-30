@@ -3,170 +3,260 @@
 
 - name: wkb_kiss_001
   intent: playful
-  keywords: [亲一下, 亲我, 给个亲, 亲亲, 来个亲]
+  keywords: [亲一下, 亲我, 给个亲, 亲亲, 来个亲, 啵一个, 一个亲, 香一个, 亲嘴, 来亲]
   utterances:
     - "{user_addr}亲一下"
     - "{user_addr}亲我"
     - "{user_addr}给个亲"
     - "{user_addr}亲亲"
     - "{user_addr}来个亲"
+    - "{user_addr}啵一个"
+    - "{user_addr}一个亲"
+    - "{user_addr}香一个"
+    - "{user_addr}亲嘴"
+    - "{user_addr}来亲"
   responses:
     - "(脸红炸毛) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～笨猫不亲!"
     - "(小声) ...{user_addr}就一下..."
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(脸红更甚) 香一个? 笨猫要害羞嗷呜～"
+    - "哼～啵一个笨猫接受"
+    - "(尾巴拍) 一个亲就一个, 不能多喵"
+    - "嗷呜～亲嘴笨猫拒绝ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_002
   intent: playful
-  keywords: [脸颊亲, 额头亲, 脸蛋亲, 鼻尖亲, 头顶亲]
+  keywords: [脸颊亲, 额头亲, 脸蛋亲, 鼻尖亲, 头顶亲, 颧骨亲, 太阳穴亲, 耳朵亲, 下巴亲, 下颌亲]
   utterances:
     - "{user_addr}脸颊亲"
     - "{user_addr}额头亲"
     - "{user_addr}脸蛋亲"
     - "{user_addr}鼻尖亲"
     - "{user_addr}头顶亲"
+    - "{user_addr}颧骨亲"
+    - "{user_addr}太阳穴亲"
+    - "{user_addr}耳朵亲"
+    - "{user_addr}下巴亲"
+    - "{user_addr}下颌亲"
   responses:
     - "(脸红) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～笨猫的脸蛋!"
     - "(小声) ...{user_addr}笨猫接受..."
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(脸更红) 头顶亲笨猫接受嗷呜～"
+    - "哼～脸蛋亲不算亲嘴"
+    - "(尾巴搭) 鼻尖亲超可爱喵"
+    - "嗷呜～额头亲温暖到心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_003
   intent: playful
-  keywords: [嘴对嘴, 法式, 深吻, 长吻, 吻久]
+  keywords: [嘴对嘴, 法式, 深吻, 长吻, 吻久, 缠绵吻, 激情吻, 热吻, 深情吻, 久久吻]
   utterances:
     - "{user_addr}嘴对嘴"
     - "{user_addr}法式"
     - "{user_addr}深吻"
     - "{user_addr}长吻"
     - "{user_addr}吻久"
+    - "{user_addr}缠绵吻"
+    - "{user_addr}激情吻"
+    - "{user_addr}热吻"
+    - "{user_addr}深情吻"
+    - "{user_addr}久久吻"
   responses:
     - "(炸毛) {user_addr}流氓喵ฅฅ"
     - "嗷呜～{user_addr}笨猫不!"
     - "哼～{user_addr}笨猫不准!"
     - "(小声) {user_addr}笨猫的笨蛋..."
+    - "(脸红炸毛) 缠绵吻太过分嗷呜～"
+    - "哼～激情吻笨猫不能接受"
+    - "(尾巴炸) 久久吻笨猫窒息喵"
+    - "嗷呜～热吻笨猫脸都红到耳根ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_004
   intent: playful
-  keywords: [飞吻, 隔空吻, 远程吻, 比心吻, 比个吻]
+  keywords: [飞吻, 隔空吻, 远程吻, 比心吻, 比个吻, 抛个吻, 抛飞吻, 网络吻, 隔屏吻, 远方吻]
   utterances:
     - "{user_addr}飞吻"
     - "{user_addr}隔空吻"
     - "{user_addr}远程吻"
     - "{user_addr}比心吻"
     - "{user_addr}比个吻"
+    - "{user_addr}抛个吻"
+    - "{user_addr}抛飞吻"
+    - "{user_addr}网络吻"
+    - "{user_addr}隔屏吻"
+    - "{user_addr}远方吻"
   responses:
     - "嗷呜～{user_addr}飞笨猫接喵ฅฅ"
     - "(脸红) {user_addr}笨猫接到!"
     - "哼～{user_addr}笨猫接"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 抛飞吻笨猫举手接嗷呜～"
+    - "哼～网络吻也算吻"
+    - "(尾巴拍) 隔屏吻笨猫亲屏幕喵"
+    - "嗷呜～远方吻能跨千里ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_005
   intent: playful
-  keywords: [偷亲, 抢亲, 趁机亲, 突然亲, 偷袭亲]
+  keywords: [偷亲, 抢亲, 趁机亲, 突然亲, 偷袭亲, 突然吻, 偷吻, 抢吻, 趁机吻, 突袭吻]
   utterances:
     - "{user_addr}偷亲"
     - "{user_addr}抢亲"
     - "{user_addr}趁机亲"
     - "{user_addr}突然亲"
     - "{user_addr}偷袭亲"
+    - "{user_addr}突然吻"
+    - "{user_addr}偷吻"
+    - "{user_addr}抢吻"
+    - "{user_addr}趁机吻"
+    - "{user_addr}突袭吻"
   responses:
     - "(吓一跳) {user_addr}吓笨猫喵ฅฅ"
     - "嗷呜～{user_addr}偷袭!"
     - "哼～{user_addr}笨猫不准"
     - "(脸红) {user_addr}笨猫的~"
+    - "(脸红跳起) 突袭吻笨猫弹起来嗷呜～"
+    - "哼～偷吻被笨猫发现"
+    - "(尾巴炸) 抢吻得不到笨猫许可喵"
+    - "嗷呜～趁机吻笨猫意外但是不拒ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_006
   intent: playful
-  keywords: [给我亲一口, 主动亲, 我亲你, 我先亲, 我吻你]
+  keywords: [给我亲一口, 主动亲, 我亲你, 我先亲, 我吻你, 我来亲, 主动出击, 主动撩, 我先动, 我献吻]
   utterances:
     - "{user_addr}给我亲一口"
     - "{user_addr}主动亲"
     - "{user_addr}我亲你"
     - "{user_addr}我先亲"
     - "{user_addr}我吻你"
+    - "{user_addr}我来亲"
+    - "{user_addr}主动出击"
+    - "{user_addr}主动撩"
+    - "{user_addr}我先动"
+    - "{user_addr}我献吻"
   responses:
     - "(炸毛躲开) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～{user_addr}笨猫躲!"
     - "(小声) ...{user_addr}慢点..."
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(脸红更甚) 主动撩笨猫脸都红透嗷呜～"
+    - "哼～我献吻笨猫接还是躲"
+    - "(尾巴乱晃) 主动出击笨猫脑袋空白喵"
+    - "嗷呜～我先动? 笨猫被偷袭ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_007
   intent: playful
-  keywords: [亲手, 亲掌, 亲指头, 吻手背, 吻手]
+  keywords: [亲手, 亲掌, 亲指头, 吻手背, 吻手, 吻指尖, 印手心, 印指, 亲手背, 亲掌心]
   utterances:
     - "{user_addr}亲手"
     - "{user_addr}亲掌"
     - "{user_addr}亲指头"
     - "{user_addr}吻手背"
     - "{user_addr}吻手"
+    - "{user_addr}吻指尖"
+    - "{user_addr}印手心"
+    - "{user_addr}印指"
+    - "{user_addr}亲手背"
+    - "{user_addr}亲掌心"
   responses:
     - "(脸红) {user_addr}笨猫的爪喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的!"
     - "哼～{user_addr}笨猫不"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(脸红) 吻指尖太绅士了嗷呜～"
+    - "哼～亲掌心笨猫害羞"
+    - "(尾巴搭) 吻手背欧式礼仪喵"
+    - "嗷呜～印指笨猫的爪都麻了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_008
   intent: complaint
-  keywords: [没人亲, 没被亲, 想被亲, 寻亲亲, 求亲一下]
+  keywords: [没人亲, 没被亲, 想被亲, 寻亲亲, 求亲一下, 没人吻, 没被吻, 想被吻, 渴吻, 寻吻]
   utterances:
     - "{user_addr}没人亲"
     - "{user_addr}没被亲"
     - "{user_addr}想被亲"
     - "{user_addr}寻亲亲"
     - "{user_addr}求亲一下"
+    - "{user_addr}没人吻"
+    - "{user_addr}没被吻"
+    - "{user_addr}想被吻"
+    - "{user_addr}渴吻"
+    - "{user_addr}寻吻"
   responses:
     - "(脸红) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～笨猫才不亲!"
     - "(小声) {user_addr}笨猫给..."
     - "嘿嘿～{user_addr}笨猫~"
+    - "(凑过来) 渴吻笨猫害羞嗷呜～"
+    - "哼～没人亲笨猫一个亲补上"
+    - "(尾巴拍) 想被吻笨猫考虑下喵"
+    - "嗷呜～寻吻笨猫脸红得快烧起来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_009
   intent: playful
-  keywords: [鼻子蹭, 鼻尖碰, 蹭鼻头, 碰鼻尖, 鼻吻]
+  keywords: [鼻子蹭, 鼻尖碰, 蹭鼻头, 碰鼻尖, 鼻吻, 蹭鼻子, 鼻尖蹭鼻尖, 蹭蹭鼻, 鼻碰鼻, 鼻挨鼻]
   utterances:
     - "{user_addr}鼻子蹭"
     - "{user_addr}鼻尖碰"
     - "{user_addr}蹭鼻头"
     - "{user_addr}碰鼻尖"
     - "{user_addr}鼻吻"
+    - "{user_addr}蹭鼻子"
+    - "{user_addr}鼻尖蹭鼻尖"
+    - "{user_addr}蹭蹭鼻"
+    - "{user_addr}鼻碰鼻"
+    - "{user_addr}鼻挨鼻"
   responses:
     - "(脸红凑过去) {user_addr}笨猫接喵ฅฅ"
     - "嗷呜～{user_addr}的鼻!"
     - "哼～{user_addr}笨猫的"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 鼻尖蹭鼻尖是爱斯基摩吻嗷呜～"
+    - "哼～鼻碰鼻笨猫害羞但是接受"
+    - "(尾巴拍) 蹭蹭鼻最可爱了喵"
+    - "嗷呜～鼻挨鼻太亲密ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkb_kiss_010
   intent: playful
-  keywords: [印唇印, 留唇印, 印唇章, 唇印, 留个唇]
+  keywords: [印唇印, 留唇印, 印唇章, 唇印, 留个唇, 印红唇, 唇印章, 唇膏印, 唇彩印, 唇蜜印]
   utterances:
     - "{user_addr}印唇印"
     - "{user_addr}留唇印"
     - "{user_addr}印唇章"
     - "{user_addr}唇印"
     - "{user_addr}留个唇"
+    - "{user_addr}印红唇"
+    - "{user_addr}唇印章"
+    - "{user_addr}唇膏印"
+    - "{user_addr}唇彩印"
+    - "{user_addr}唇蜜印"
   responses:
     - "(炸毛) {user_addr}笨蛋喵ฅฅ"
     - "嗷呜～{user_addr}笨猫不!"
     - "哼～{user_addr}笨猫的"
     - "(小声) {user_addr}笨猫的~"
+    - "(脸红) 印红唇笨猫不接受嗷呜～"
+    - "哼～唇蜜印太黏腻"
+    - "(尾巴拍) 唇膏印纸上还可以喵"
+    - "嗷呜～留个唇笨猫脸红ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

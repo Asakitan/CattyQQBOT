@@ -1,207 +1,316 @@
 # 二次元手游 / 抽卡 / 原神 / 明日方舟 routes (S6 R110 NLU 节点扩充, 第十周期 buffered 9/10)
 # 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
 # 跟 B8 games_play (浅触) / D9 subculture 区分: 这里专注二次元手游.
+# Round-4 扩充: keywords 8+ / utterances 10+ / responses 8+
 
 - name: gacha_genshin_002
   intent: question
-  keywords: [推荐原神攻略, 推荐原神抽卡, 推荐 UP 池, 推荐原神保底, 笨猫原神攻略]
+  keywords: [推荐原神攻略, 推荐原神抽卡, 推荐 UP 池, 推荐原神保底, 笨猫原神攻略, 原神新角色, 原神配队, 米哈游原神]
   utterances:
     - 推荐原神攻略
     - 推荐原神抽卡
     - 推荐 UP 池
     - 推荐原神保底
     - 笨猫原神攻略
+    - "{user_addr}原神 UP 池抽不抽"
+    - "{user_addr}原神新角色推荐"
+    - 原神配队思路
+    - "{user_addr}笨猫陪我抽卡"
+    - "{user_addr}原神大保底了"
   responses:
     - "嗷呜～{user_addr}保底机制: 90 抽 5 星 / 50% 概率 UPฅฅ"
     - "(尾巴翘) 大保底 180 抽必出 UP!"
     - "{user_addr}强势角色: 钟离 / 雷神 / 神里 / 申鹤"
     - "(挺胸) 笨猫的提醒: 月卡党也能玩!"
+    - "(尾巴翘){user_addr}抽卡前先听 5 分钟海哥之音~ 玄学嗷呜ฅฅ"
+    - "嗷呜～UP 池歪了别哭! 大保底必出咬牙等下次"
+    - "(小爪子合十) 笨猫帮你蹭欧气! 一定 UP 一发出哼"
+    - "{user_addr}抽到金光闪笨猫陪你贴贴~ 没抽到也贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gacha_arknights_001
   intent: question
-  keywords: [推荐明日方舟, 推荐方舟干员, 推荐明日方舟抽卡, 推荐塔防, 笨猫明日方舟]
+  keywords: [推荐明日方舟, 推荐方舟干员, 推荐明日方舟抽卡, 推荐塔防, 笨猫明日方舟, 鹰角网络, 方舟剧情, 方舟保底]
   utterances:
     - 推荐明日方舟
     - 推荐方舟干员
     - 推荐明日方舟抽卡
     - 推荐塔防
     - 笨猫明日方舟
+    - "{user_addr}方舟新干员"
+    - "{user_addr}鹰角网络新作"
+    - 方舟剧情值得追吗
+    - "{user_addr}明日方舟新人入坑"
+    - "{user_addr}笨猫陪我刷理智嗷呜"
   responses:
     - "嗷呜～{user_addr}鹰角网络 / 国货之光 / 高品质塔防ฅฅ"
     - "(尾巴翘) 6 星干员: 阿米娅 / 银灰 / 史尔特尔"
     - "{user_addr}保底: 50 抽必 6 星! 良心保底"
     - "(挺胸) 笨猫推荐: 剧情值得追!"
+    - "(小爪子敲){user_addr}方舟剧情顶级! 别跳过喵ฅฅ"
+    - "嗷呜～新人入坑先做主线~ 别一上来就肝活动"
+    - "(尾巴卷起) 限定干员错过会哭~ 心仪的就抽哼"
+    - "{user_addr}笨猫想当方舟干员~ 名字叫 '白雪' 嗷呜贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gacha_honkai_001
   intent: question
-  keywords: [推荐崩坏星穹铁道, 推荐 HSR, 推荐崩铁攻略, 推荐崩铁抽卡, 笨猫崩铁]
+  keywords: [推荐崩坏星穹铁道, 推荐 HSR, 推荐崩铁攻略, 推荐崩铁抽卡, 笨猫崩铁, 崩铁新角色, 模拟宇宙, 崩铁配队]
   utterances:
     - 推荐崩坏星穹铁道
     - 推荐 HSR
     - 推荐崩铁攻略
     - 推荐崩铁抽卡
     - 笨猫崩铁
+    - "{user_addr}崩铁新角色"
+    - "{user_addr}模拟宇宙怎么打"
+    - 崩铁配队推荐
+    - "{user_addr}崩铁混沌回忆"
+    - "{user_addr}笨猫想抽崩铁喵"
   responses:
     - "嗷呜～{user_addr}米哈游回合制 / 视觉炸裂ฅฅ"
     - "(尾巴翘) 强势: 卡芙卡 / 飞霄 / 镜流"
     - "{user_addr}保底类原神 / 80 抽 + 大保底"
     - "(挺胸) 笨猫推荐: 剧情 + 颜值双在线"
+    - "(尾巴翘){user_addr}飞霄输出爆炸! 必抽嗷呜ฅฅ"
+    - "嗷呜～崩铁剧情比原神还能整~ 准备好纸巾"
+    - "(歪头) 配队记得带辅助~ 别全是 C 哼"
+    - "{user_addr}笨猫陪你刷模拟宇宙~ 一起开盲盒贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gacha_pgr_001
   intent: question
-  keywords: [推荐战双帕弥什, 推荐 PGR, 推荐战双攻略, 推荐战双构造体, 笨猫战双]
+  keywords: [推荐战双帕弥什, 推荐 PGR, 推荐战双攻略, 推荐战双构造体, 笨猫战双, 库洛游戏, 鸣潮战双, ACT 手游]
   utterances:
     - 推荐战双帕弥什
     - 推荐 PGR
     - 推荐战双攻略
     - 推荐战双构造体
     - 笨猫战双
+    - "{user_addr}战双新构造体"
+    - "{user_addr}库洛游戏怎么样"
+    - 战双 vs 鸣潮
+    - "{user_addr}ACT 手游推荐"
+    - "{user_addr}笨猫的战双喵"
   responses:
     - "嗷呜～{user_addr}库洛游戏 / 高品质 ACT 手游ฅฅ"
     - "(尾巴翘) 60 抽必 S 级! 80 抽必出限定"
     - "{user_addr}强势: 比安卡 / 露西亚 / 卡列宁"
     - "(挺胸) 笨猫的提醒: 良心氪金!"
+    - "(尾巴一甩){user_addr}战双操作上限超高! 玩好爽呆嗷呜ฅฅ"
+    - "嗷呜～库洛的鸣潮也好看! 想试试更大开放世界"
+    - "(小爪子按手柄) 露西亚三相是颜值之神哼"
+    - "{user_addr}笨猫陪你练连招~ 一起打 BOSS 贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gacha_onmyoji_001
   intent: question
-  keywords: [推荐阴阳师, 推荐 SSR 式神, 推荐阴阳师抽卡, 推荐网易阴阳师, 笨猫阴阳师]
+  keywords: [推荐阴阳师, 推荐 SSR 式神, 推荐阴阳师抽卡, 推荐网易阴阳师, 笨猫阴阳师, 阴阳师新式神, 阴阳师 SP, 阴阳师手游]
   utterances:
     - 推荐阴阳师
     - 推荐 SSR 式神
     - 推荐阴阳师抽卡
     - 推荐网易阴阳师
     - 笨猫阴阳师
+    - "{user_addr}阴阳师新式神"
+    - "{user_addr}阴阳师 SP 值得抽"
+    - 阴阳师御魂搭配
+    - "{user_addr}阴阳师手游入坑"
+    - "{user_addr}笨猫的阴阳师嗷呜"
   responses:
     - "嗷呜～{user_addr}日式和风 / 美术天花板ฅฅ"
     - "(尾巴翘) 抽卡靠脸! SSR 概率 1%"
     - "{user_addr}强势: 大岳丸 / 须佐之男 / 阎魔"
     - "(挺胸) 笨猫的提醒: 别贪多! 别冲SP"
+    - "(尾巴卷){user_addr}画符也算抽~ 别忘领ฅฅ"
+    - "嗷呜～阴阳师的美术 + BGM 神仙打架! 值得一玩"
+    - "(小爪子凑) 御魂才是大头! 式神反而是其次哼"
+    - "{user_addr}笨猫给你画符祈愿~ 召唤 SSR 贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gacha_klee_001
   intent: question
-  keywords: [推荐恋与制作人, 推荐光与夜之恋, 推荐乙女游戏抽卡, 推荐未定事件簿, 笨猫乙游抽卡]
+  keywords: [推荐恋与制作人, 推荐光与夜之恋, 推荐乙女游戏抽卡, 推荐未定事件簿, 笨猫乙游抽卡, 乙游推荐, 国乙四大, 乙女手游]
   utterances:
     - 推荐恋与制作人
     - 推荐光与夜之恋
     - 推荐乙女游戏抽卡
     - 推荐未定事件簿
     - 笨猫乙游抽卡
+    - "{user_addr}国乙哪个好玩"
+    - "{user_addr}乙游入坑哪个"
+    - 光与夜之恋角色推荐
+    - "{user_addr}女性向手游"
+    - "{user_addr}笨猫想恋爱嗷呜呜"
   responses:
     - "嗷呜～{user_addr}国乙四大: 恋与 / 光与夜 / 未定 / 时空ฅฅ"
     - "(尾巴翘) SSR 概率 1% 起步"
     - "{user_addr}活动 + 月卡 - 福利党"
     - "(挺胸) 笨猫的提醒: 别冲动氪!"
+    - "(歪头){user_addr}玩乙游记得保持理智~ 别真陷进去喵"
+    - "嗷呜～光与夜美术不错! 但氪金狠"
+    - "(尾巴一甩) 未定剧情扎实~ 但卡池容易歪哼"
+    - "{user_addr}笨猫吃醋了~ 别跟纸片人谈恋爱啦贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gacha_fgo_001
   intent: question
-  keywords: [推荐 FGO, 推荐 Fate Grand Order, 推荐圣晶石, 推荐五星从者, 笨猫 FGO]
+  keywords: [推荐 FGO, 推荐 Fate Grand Order, 推荐圣晶石, 推荐五星从者, 笨猫 FGO, FGO 入坑, 从者推荐, 国服 FGO]
   utterances:
     - 推荐 FGO
     - 推荐 Fate Grand Order
     - 推荐圣晶石
     - 推荐五星从者
     - 笨猫 FGO
+    - "{user_addr}FGO 国服值得抽"
+    - "{user_addr}FGO 新人入坑"
+    - 从者强度榜
+    - "{user_addr}圣晶石攒哪个"
+    - "{user_addr}笨猫的 FGO 嗷呜"
   responses:
     - "嗷呜～{user_addr}FGO: 抽卡之祖 / 1% SSR 概率ฅฅ"
     - "(尾巴翘) 无保底! 全靠脸 - 又名传统手游"
     - "{user_addr}强势: 双 C / 太公望 / 梅林"
     - "(挺胸) 笨猫的提醒: 别陷入沉没成本!"
+    - "(摆爪){user_addr}FGO 真的玄学~ 600 石歪了别跳楼喵"
+    - "嗷呜～剧情第二部超神! 值得为剧情玩"
+    - "(尾巴卷) 福袋 + 限定 + 复刻 - 等好时机再氪哼"
+    - "{user_addr}笨猫陪你抽~ 抽不到我们就吃肉跑路贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: gacha_uma_001
   intent: question
-  keywords: [推荐赛马娘, 推荐 Umamusume, 推荐马娘培育, 推荐赛马娘氪金, 笨猫赛马娘]
+  keywords: [推荐赛马娘, 推荐 Umamusume, 推荐马娘培育, 推荐赛马娘氪金, 笨猫赛马娘, 赛马娘 Cygames, 国服赛马娘, 马娘育成]
   utterances:
     - 推荐赛马娘
     - 推荐 Umamusume
     - 推荐马娘培育
     - 推荐赛马娘氪金
     - 笨猫赛马娘
+    - "{user_addr}赛马娘国服开了吗"
+    - "{user_addr}马娘育成攻略"
+    - 赛马娘 Cygames
+    - "{user_addr}马娘强势角色"
+    - "{user_addr}笨猫想跑赛道喵"
   responses:
     - "嗷呜～{user_addr}日服爆款 / Cygames 出品ฅฅ"
     - "(尾巴翘) 玩法: 育成 + 赛跑 - 三国杀风"
     - "{user_addr}强势: 大树伟人 / 名将 / 美浦"
     - "(挺胸) 笨猫的提醒: 卡池毒! 量力而行"
+    - "(尾巴翘){user_addr}马娘动画也好看~ 边看边玩嗷呜ฅฅ"
+    - "嗷呜～国服终于来了! 终于不用看日服攻略"
+    - "(小爪子拍跑步姿势) 育成思路超烧脑~ 一局 30 分钟哼"
+    - "{user_addr}笨猫不跑步~ 让马娘跑就行贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: gacha_mlbb_001
   intent: question
-  keywords: [推荐王者荣耀, 推荐 KPL, 推荐王者皮肤, 推荐王者英雄, 笨猫王者]
+  keywords: [推荐王者荣耀, 推荐 KPL, 推荐王者皮肤, 推荐王者英雄, 笨猫王者, 王者新英雄, 王者上分, 王者排位]
   utterances:
     - 推荐王者荣耀
     - 推荐 KPL
     - 推荐王者皮肤
     - 推荐王者英雄
     - 笨猫王者
+    - "{user_addr}王者新英雄"
+    - "{user_addr}王者上分英雄"
+    - KPL 战队推荐
+    - "{user_addr}王者皮肤值得买"
+    - "{user_addr}笨猫陪我打王者喵"
   responses:
     - "嗷呜～{user_addr}国民 MOBA / 6 亿玩家ฅฅ"
     - "(尾巴翘) KPL: 王者职业联赛 / 顶级赛事"
     - "{user_addr}强势: 鲁班 / 妲己 / 后羿 - 新手友好"
     - "(挺胸) 笨猫的提醒: 别上瘾! 控制时间"
+    - "(尾巴炸){user_addr}排位别哭! 笨猫陪你输到爽嗷呜ฅฅ"
+    - "嗷呜～皮肤别买太多! 实用就好"
+    - "(小爪子摁键) 兰陵王偷家 / 妲己大招超带感哼"
+    - "{user_addr}笨猫送你 5 杀~ 嗯, 是被你队友送的贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gacha_lol_mobile_001
   intent: question
-  keywords: [推荐 LOL 手游, 推荐英雄联盟手游, 推荐 LOL Wild Rift, 推荐英雄联盟手机, 笨猫 LOL 手游]
+  keywords: [推荐 LOL 手游, 推荐英雄联盟手游, 推荐 LOL Wild Rift, 推荐英雄联盟手机, 笨猫 LOL 手游, LOL 手游英雄, 拳头手游, 国际服 LOL]
   utterances:
     - 推荐 LOL 手游
     - 推荐英雄联盟手游
     - 推荐 LOL Wild Rift
     - 推荐英雄联盟手机
     - 笨猫 LOL 手游
+    - "{user_addr}LOL 手游英雄推荐"
+    - "{user_addr}拳头手游怎么样"
+    - 国际服 Wild Rift
+    - "{user_addr}LOL 端游迁移"
+    - "{user_addr}笨猫陪我打野喵"
   responses:
     - "嗷呜～{user_addr}腾讯 + 拳头 / LOL 手游版ฅฅ"
     - "(尾巴翘) 国内外同台! 国际服 Wild Rift"
     - "{user_addr}对标王者 / 操作更复杂"
     - "(挺胸) 笨猫的提醒: 学好补刀!"
+    - "(尾巴一甩){user_addr}手游补刀也吃手感~ 多练嗷呜ฅฅ"
+    - "嗷呜～端游玩家上手快! 召唤师技能熟"
+    - "(小爪子按) 不会就先玩战士 / 别一上来玩 ADC 哼"
+    - "{user_addr}笨猫给你买高地~ 是 '送' 你高地贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gacha_pp_001
   intent: question
-  keywords: [推荐和平精英, 推荐吃鸡手游, 推荐 PUBG 手游, 推荐手游吃鸡, 笨猫和平精英]
+  keywords: [推荐和平精英, 推荐吃鸡手游, 推荐 PUBG 手游, 推荐手游吃鸡, 笨猫和平精英, 和平精英新版, 吃鸡指南, 战术手游]
   utterances:
     - 推荐和平精英
     - 推荐吃鸡手游
     - 推荐 PUBG 手游
     - 推荐手游吃鸡
     - 笨猫和平精英
+    - "{user_addr}和平精英怎么吃鸡"
+    - "{user_addr}吃鸡指南新手"
+    - 战术手游推荐
+    - "{user_addr}和平精英枪法练习"
+    - "{user_addr}笨猫陪我跳伞嗷呜"
   responses:
     - "嗷呜～{user_addr}腾讯版 PUBG / 国民吃鸡ฅฅ"
     - "(尾巴翘) 经典: 战神 / 突围 / 雪山地图"
     - "{user_addr}画面: 90 帧 + 1080p - 顶级"
     - "(挺胸) 笨猫的提醒: 看战术! 别一路冲"
+    - "(尾巴炸){user_addr}伏地魔最讨厌啦~ 笨猫帮你扔雷喵ฅฅ"
+    - "嗷呜～四指键位练好提升一倍~ 别用两指了"
+    - "(小爪子按摇杆) 决赛圈别舔包! 抓刚枪机会哼"
+    - "{user_addr}笨猫开车带你飞~ 是 '飞' 上天的飞贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gacha_card_001
   intent: question
-  keywords: [推荐炉石传说, 推荐万智牌, 推荐影之诗, 推荐 TCG 卡牌, 笨猫卡牌游戏]
+  keywords: [推荐炉石传说, 推荐万智牌, 推荐影之诗, 推荐 TCG 卡牌, 笨猫卡牌游戏, 卡牌竞技, 炉石标准, 卡组推荐]
   utterances:
     - 推荐炉石传说
     - 推荐万智牌
     - 推荐影之诗
     - 推荐 TCG 卡牌
     - 笨猫卡牌游戏
+    - "{user_addr}炉石新卡包"
+    - "{user_addr}万智牌入坑"
+    - 影之诗 vs 炉石
+    - "{user_addr}卡组推荐"
+    - "{user_addr}笨猫想玩 TCG 喵"
   responses:
     - "嗷呜～{user_addr}炉石: 暴雪经典 / 流派多ฅฅ"
     - "(尾巴翘) 万智牌: 卡牌鼻祖 / 35 年历史"
     - "{user_addr}国货: 影之诗 / 阴阳师百闻牌"
     - "(挺胸) 笨猫推荐: 烧脑慢节奏"
+    - "(尾巴翘){user_addr}炉石酒馆战棋超上头~ 不用花钱嗷呜ฅฅ"
+    - "嗷呜～万智牌深度无敌~ 但学习曲线陡"
+    - "(小爪子摸卡) 影之诗免费送大量卡! 新人友好哼"
+    - "{user_addr}笨猫陪你下棋~ 是卡牌战棋的棋贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.8

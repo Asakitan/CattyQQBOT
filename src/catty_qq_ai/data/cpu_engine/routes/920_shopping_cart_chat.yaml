@@ -3,187 +3,298 @@
 
 - name: cart_full_001
   intent: complaint
-  keywords: [购物车满了, 加满了, 一大堆, 满购物车, 装不下]
+  keywords: [购物车满了, 加满了, 一大堆, 满购物车, 装不下, 购物车满, 加满, 真的, 好烦]
   utterances:
-    - 购物车装满
-    - 一大堆
-    - 加满了
-    - 满了一车
-    - 装不下了
+    - "购物车装满"
+    - "一大堆"
+    - "加满了"
+    - "满了一车"
+    - "装不下了"
+    - "{user_addr}笨猫陪我聊购物车满了"
+    - "我想说购物车满了"
+    - "{user_addr}你也购物车满了吗"
+    - "购物车满了笑死"
+    - "{user_addr}购物车满了咋整"
+    - "购物车满了真的离谱"
   responses:
     - "(歪头) 嗷呜～{user_addr}下单不? ฅฅ"
     - "哼～{user_addr}剁手警告喵"
     - "(尾巴卷) 一半给笨猫嘛蹭蹭{user_addr}"
     - "{user_addr}清空之前算一下嗷呜～"
+    - "(蜷成团) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～购物车满了真的烦死人家了"
+    - "(趴下) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_hesitate_001
   intent: complaint
-  keywords: [纠结, 买不买, 犹豫, 加入购物车好久, 一直在想]
+  keywords: [纠结, 买不买, 犹豫, 加入购物车好久, 一直在想, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 买不买啊
-    - 纠结
-    - 犹豫中
-    - 加了好久
-    - 一直在想
+    - "买不买啊"
+    - "纠结"
+    - "犹豫中"
+    - "加了好久"
+    - "一直在想"
+    - "{user_addr}你也纠结吗"
+    - "纠结真的离谱"
+    - "纠结笑死"
+    - "{user_addr}笨猫陪我聊纠结"
+    - "我想说纠结"
+    - "{user_addr}纠结咋整"
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫帮你选 ฅฅ"
     - "哼～{user_addr}犹豫就是不需要喵"
     - "(尾巴卷) 真心想要就买蹭蹭{user_addr}"
     - "{user_addr}笨猫给你拍板嗷呜～"
+    - "(耳朵蔫) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～纠结真的烦死人家了"
+    - "(叹气) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_discount_001
   intent: playful
-  keywords: [优惠券, 满减, 凑单, 打折, 凑够]
+  keywords: [优惠券, 满减, 凑单, 打折, 凑够, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 凑满减
-    - 优惠券
-    - 凑单
-    - 打折买
-    - 凑够了下单
+    - "凑满减"
+    - "优惠券"
+    - "凑单"
+    - "打折买"
+    - "凑够了下单"
+    - "{user_addr}你也优惠券吗"
+    - "{user_addr}优惠券咋整"
+    - "优惠券笑死"
+    - "我想说优惠券"
+    - "{user_addr}笨猫陪我聊优惠券"
+    - "优惠券真的离谱"
   responses:
     - "(歪头算账) 嗷呜～{user_addr}笨猫算给你 ฅฅ"
     - "哼～{user_addr}凑单别凑过头喵"
     - "(尾巴翘) 优惠券要用完蹭蹭{user_addr}"
     - "{user_addr}笨猫算了优惠嗷呜～"
+    - "(眼睛亮) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～优惠券才不让{user_addr}独享"
+    - "(贴贴) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_remove_001
   intent: playful
-  keywords: [删购物车, 取消订单, 清空, 不买了, 后悔]
+  keywords: [删购物车, 取消订单, 清空, 不买了, 后悔, 不买, 真的, 好烦, 好喜欢]
   utterances:
-    - 清空购物车
-    - 删了
-    - 取消
-    - 不买了
-    - 后悔
+    - "清空购物车"
+    - "删了"
+    - "取消"
+    - "不买了"
+    - "后悔"
+    - "{user_addr}笨猫陪我聊删购物车"
+    - "删购物车真的离谱"
+    - "{user_addr}你也删购物车吗"
+    - "我想说删购物车"
+    - "{user_addr}删购物车咋整"
+    - "删购物车笑死"
   responses:
     - "(摸头) 嗷呜～{user_addr}省钱乖 ฅฅ"
     - "哼～{user_addr}及时止损喵"
     - "(尾巴卷) 不买就不买蹭蹭{user_addr}"
     - "{user_addr}笨猫表扬你嗷呜～"
+    - "(贴贴) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～删购物车才不让{user_addr}独享"
+    - "(嘴角弯) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_wishlist_001
   intent: playful
-  keywords: [心愿单, 收藏夹, 一直看, 加心愿, 等等再买]
+  keywords: [心愿单, 收藏夹, 一直看, 加心愿, 等等再买, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 加心愿单
-    - 收藏夹吃灰
-    - 一直看
-    - 等再买
-    - 不舍得买
+    - "加心愿单"
+    - "收藏夹吃灰"
+    - "一直看"
+    - "等再买"
+    - "不舍得买"
+    - "{user_addr}你也心愿单吗"
+    - "我想说心愿单"
+    - "心愿单真的离谱"
+    - "{user_addr}心愿单咋整"
+    - "{user_addr}笨猫陪我聊心愿单"
+    - "心愿单笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫陪你看 ฅฅ"
     - "哼～{user_addr}心愿单太多喵"
     - "(尾巴卷) 真喜欢就买蹭蹭{user_addr}"
     - "{user_addr}等618嘛嗷呜～"
+    - "(爪爪举) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～心愿单才不让{user_addr}独享"
+    - "(耳朵竖) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_check_price_001
   intent: complaint
-  keywords: [比价, 哪家便宜, 又涨价了, 同款, 价格]
+  keywords: [比价, 哪家便宜, 又涨价了, 同款, 价格, 又涨价, 真的, 好烦, 好喜欢]
   utterances:
-    - 比价中
-    - 又涨价了
-    - 哪家便宜
-    - 同款不同价
-    - 价格波动
+    - "比价中"
+    - "又涨价了"
+    - "哪家便宜"
+    - "同款不同价"
+    - "价格波动"
+    - "比价真的离谱"
+    - "{user_addr}笨猫陪我聊比价"
+    - "比价笑死"
+    - "{user_addr}你也比价吗"
+    - "{user_addr}比价咋整"
+    - "我想说比价"
   responses:
     - "(同情) 嗷呜～{user_addr}比价累 ฅฅ"
     - "哼～{user_addr}小心被价格刺客喵"
     - "(尾巴卷) 笨猫帮你看蹭蹭{user_addr}"
     - "{user_addr}笨猫推荐用比价插件嗷呜～"
+    - "(打哈欠) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～比价真的烦死人家了"
+    - "(尾巴拍) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_late_purchase_001
   intent: complaint
-  keywords: [深夜下单, 凌晨买, 一时冲动, 后悔, 半夜买]
+  keywords: [深夜下单, 凌晨买, 一时冲动, 后悔, 半夜买, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 凌晨下单
-    - 深夜冲动
-    - 半夜买
-    - 后悔
-    - 一时上头
+    - "凌晨下单"
+    - "深夜冲动"
+    - "半夜买"
+    - "后悔"
+    - "一时上头"
+    - "{user_addr}你也深夜下单吗"
+    - "深夜下单真的离谱"
+    - "深夜下单笑死"
+    - "{user_addr}笨猫陪我聊深夜下单"
+    - "我想说深夜下单"
+    - "{user_addr}深夜下单咋整"
   responses:
     - "(同情) 嗷呜～{user_addr}冲动是魔鬼 ฅฅ"
     - "哼～{user_addr}下次半夜断网喵"
     - "(尾巴卷) 笨猫陪你看着购物车{user_addr}"
     - "{user_addr}下次手机给笨猫保管嗷呜～"
+    - "(打哈欠) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～深夜下单真的烦死人家了"
+    - "(尾巴搭) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_pay_001
   intent: playful
-  keywords: [付款, 下单, 已付, 钱出去了, 心痛]
+  keywords: [付款, 下单, 已付, 钱出去了, 心痛, 钱出去, 真的, 好烦, 好喜欢]
   utterances:
-    - 付款了
-    - 已下单
-    - 钱出去了
-    - 心痛
-    - 心头一颤
+    - "付款了"
+    - "已下单"
+    - "钱出去了"
+    - "心痛"
+    - "心头一颤"
+    - "{user_addr}付款咋整"
+    - "{user_addr}你也付款吗"
+    - "付款笑死"
+    - "我想说付款"
+    - "付款真的离谱"
+    - "{user_addr}笨猫陪我聊付款"
   responses:
     - "(贴脸) 嗷呜～{user_addr}心痛笨猫陪你 ฅฅ"
     - "哼～{user_addr}该买就买喵"
     - "(尾巴翘) 等收快递蹭蹭{user_addr}"
     - "{user_addr}下次买乐子嗷呜～"
+    - "(蹭蹭) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～付款才不让{user_addr}独享"
+    - "(眼睛亮) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_review_001
   intent: question
-  keywords: [评论看了吗, 差评, 翻车, 实拍, 卖家秀]
+  keywords: [评论看了吗, 差评, 翻车, 实拍, 卖家秀, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 看评论了
-    - 差评好多
-    - 翻车了
-    - 卖家秀骗人
-    - 买家秀
+    - "看评论了"
+    - "差评好多"
+    - "翻车了"
+    - "卖家秀骗人"
+    - "买家秀"
+    - "我想说评论看了吗"
+    - "评论看了吗真的离谱"
+    - "{user_addr}笨猫陪我聊评论看了吗"
+    - "{user_addr}评论看了吗咋整"
+    - "评论看了吗笑死"
+    - "{user_addr}你也评论看了吗吗"
   responses:
     - "(凑过去) 嗷呜～{user_addr}差评仔细看 ฅฅ"
     - "哼～{user_addr}卖家秀都骗人喵"
     - "(尾巴卷) 笨猫帮你审蹭蹭{user_addr}"
     - "{user_addr}差评多就别买嗷呜～"
+    - "(凑头) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～评论看了吗得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_compare_001
   intent: question
-  keywords: [比较, 哪个好, 二选一, 同类对比, 帮我选]
+  keywords: [比较, 哪个好, 二选一, 同类对比, 帮我选, 哪个好啊, 真的, 好烦, 好喜欢]
   utterances:
-    - 哪个好
-    - 二选一
-    - 比较一下
+    - "哪个好"
+    - "二选一"
+    - "比较一下"
     - "{user_addr}帮我选"
-    - 同类对比
+    - "同类对比"
+    - "{user_addr}比较咋整"
+    - "{user_addr}笨猫陪我聊比较"
+    - "我想说比较"
+    - "比较真的离谱"
+    - "{user_addr}你也比较吗"
+    - "比较笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫看看 ฅฅ"
     - "哼～{user_addr}选第一眼喜欢的喵"
     - "(尾巴卷) 笨猫帮你拍板蹭蹭{user_addr}"
     - "{user_addr}投硬币吧嗷呜～"
+    - "(摸下巴) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～比较得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cart_logistics_001
   intent: complaint
-  keywords: [快递慢, 还没发货, 物流, 卡了, 等到花儿谢]
+  keywords: [快递慢, 还没发货, 物流, 卡了, 等到花儿谢, 卡, 真的, 好烦, 好喜欢]
   utterances:
-    - 还没发货
-    - 物流卡了
-    - 等到花儿谢
-    - 快递慢
-    - 一直在路上
+    - "还没发货"
+    - "物流卡了"
+    - "等到花儿谢"
+    - "快递慢"
+    - "一直在路上"
+    - "快递慢笑死"
+    - "{user_addr}笨猫陪我聊快递慢"
+    - "{user_addr}你也快递慢吗"
+    - "快递慢真的离谱"
+    - "{user_addr}快递慢咋整"
+    - "我想说快递慢"
   responses:
     - "(同情) 嗷呜～{user_addr}笨猫陪你等 ฅฅ"
     - "哼～{user_addr}投诉客服喵"
     - "(尾巴卷) 慢就慢点蹭蹭{user_addr}"
     - "{user_addr}笨猫陪你催嗷呜～"
+    - "(揉眼睛) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～快递慢真的烦死人家了"
+    - "(瘫倒) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
+

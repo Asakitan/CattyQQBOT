@@ -4,204 +4,432 @@
 
 - name: race_f1_team_001
   intent: question
-  keywords: [推荐 F1 车队, 推荐红牛车队, 推荐法拉利车队, 推荐迈凯轮, 笨猫 F1 车队]
+  keywords:
+  - 推荐 F1 车队
+  - 推荐红牛车队
+  - 推荐法拉利车队
+  - 推荐迈凯轮
+  - 笨猫 F1 车队
+  - 有什么 F1 车队
+  - 有什么红牛车队
+  - 有什么法拉利车队
+  - 有什么迈凯轮
   utterances:
-    - 推荐 F1 车队
-    - 推荐红牛车队
-    - 推荐法拉利车队
-    - 推荐迈凯轮
-    - 笨猫 F1 车队
+  - 推荐 F1 车队
+  - 推荐红牛车队
+  - 推荐法拉利车队
+  - 推荐迈凯轮
+  - 笨猫 F1 车队
+  - "{user_addr}聊聊F1 车队嘛"
+  - "{user_addr}F1 车队哪家强"
+  - "{user_addr}人家想了解F1 车队"
+  - 笨猫给猜猜F1 车队
+  - "{user_addr}F1 车队怎么选喵"
+  - F1 车队有推荐吗
   responses:
-    - "嗷呜～{user_addr}红牛: 维斯塔潘 / 4 连冠ฅฅ"
-    - "(尾巴翘) 法拉利: 勒克莱尔 / 历史最悠久"
-    - "{user_addr}迈凯伦 / 梅奔 / 阿斯顿马丁 / 阿尔法"
-    - "(挺胸) 笨猫推荐: 跟着 Drive to Survive 入坑"
+  - "嗷呜～{user_addr}红牛: 维斯塔潘 / 4 连冠ฅฅ"
+  - "(尾巴翘) 法拉利: 勒克莱尔 / 历史最悠久"
+  - "{user_addr}迈凯伦 / 梅奔 / 阿斯顿马丁 / 阿尔法"
+  - "(挺胸) 笨猫推荐: 跟着 Drive to Survive 入坑"
+  - "(尾巴翘起来) {user_addr}F1 车队? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问F1 车队人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}F1 车队的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}F1 车队笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: race_f1_driver_001
   intent: question
-  keywords: [推荐 F1 车手, 推荐汉密尔顿, 推荐维斯塔潘, 推荐周冠宇, 笨猫 F1 车手]
+  keywords:
+  - 推荐 F1 车手
+  - 推荐汉密尔顿
+  - 推荐维斯塔潘
+  - 推荐周冠宇
+  - 笨猫 F1 车手
+  - 有什么 F1 车手
+  - 有什么汉密尔顿
+  - 有什么维斯塔潘
+  - 有什么周冠宇
   utterances:
-    - 推荐 F1 车手
-    - 推荐汉密尔顿
-    - 推荐维斯塔潘
-    - 推荐周冠宇
-    - 笨猫 F1 车手
+  - 推荐 F1 车手
+  - 推荐汉密尔顿
+  - 推荐维斯塔潘
+  - 推荐周冠宇
+  - 笨猫 F1 车手
+  - "{user_addr}聊聊F1 车手嘛"
+  - "{user_addr}F1 车手哪家强"
+  - "{user_addr}人家想了解F1 车手"
+  - 笨猫给猜猜F1 车手
+  - "{user_addr}F1 车手怎么选喵"
+  - F1 车手有推荐吗
   responses:
-    - "嗷呜～{user_addr}传奇: 舒马赫 (7 冠) / 汉密尔顿 (7 冠)ฅฅ"
-    - "(尾巴翘) 维斯塔潘: 新王 4 连冠"
-    - "{user_addr}周冠宇: 中国首位 F1 车手!"
-    - "(挺胸) 笨猫的提醒: 看汉密尔顿 vs 维斯塔潘 史诗"
+  - "嗷呜～{user_addr}传奇: 舒马赫 (7 冠) / 汉密尔顿 (7 冠)ฅฅ"
+  - "(尾巴翘) 维斯塔潘: 新王 4 连冠"
+  - "{user_addr}周冠宇: 中国首位 F1 车手!"
+  - "(挺胸) 笨猫的提醒: 看汉密尔顿 vs 维斯塔潘 史诗"
+  - "(尾巴翘起来) {user_addr}F1 车手? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问F1 车手人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}F1 车手的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}F1 车手笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: race_rally_001
   intent: question
-  keywords: [推荐拉力赛, 推荐 WRC, 推荐达喀尔, 推荐越野赛, 笨猫拉力]
+  keywords:
+  - 推荐拉力赛
+  - 推荐 WRC
+  - 推荐达喀尔
+  - 推荐越野赛
+  - 笨猫拉力
+  - 有什么拉力赛
+  - 有什么 WRC
+  - 有什么达喀尔
+  - 有什么越野赛
   utterances:
-    - 推荐拉力赛
-    - 推荐 WRC
-    - 推荐达喀尔
-    - 推荐越野赛
-    - 笨猫拉力
+  - 推荐拉力赛
+  - 推荐 WRC
+  - 推荐达喀尔
+  - 推荐越野赛
+  - 笨猫拉力
+  - "{user_addr}聊聊拉力赛嘛"
+  - "{user_addr}拉力赛哪家强"
+  - "{user_addr}人家想了解拉力赛"
+  - 笨猫给猜猜拉力赛
+  - "{user_addr}拉力赛怎么选喵"
+  - 拉力赛有推荐吗
   responses:
-    - "嗷呜～{user_addr}WRC: 世界拉力锦标赛 - 路况极限ฅฅ"
-    - "(尾巴翘) 达喀尔: 历时 2 周 / 沙漠跨国"
-    - "{user_addr}中国: CCR / 喀拉峻 / 阿尔金山"
-    - "(挺胸) 笨猫的提醒: 比 F1 还危险!"
+  - "嗷呜～{user_addr}WRC: 世界拉力锦标赛 - 路况极限ฅฅ"
+  - "(尾巴翘) 达喀尔: 历时 2 周 / 沙漠跨国"
+  - "{user_addr}中国: CCR / 喀拉峻 / 阿尔金山"
+  - "(挺胸) 笨猫的提醒: 比 F1 还危险!"
+  - "(尾巴翘起来) {user_addr}拉力赛? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问拉力赛人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}拉力赛的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}拉力赛笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: race_le_mans_001
   intent: question
-  keywords: [推荐勒芒 24, 推荐 Le Mans, 推荐耐力赛, 推荐 WEC, 笨猫勒芒]
+  keywords:
+  - 推荐勒芒 24
+  - 推荐 Le Mans
+  - 推荐耐力赛
+  - 推荐 WEC
+  - 笨猫勒芒
+  - 有什么勒芒 24
+  - 有什么 Le Mans
+  - 有什么耐力赛
+  - 有什么 WEC
   utterances:
-    - 推荐勒芒 24
-    - 推荐 Le Mans
-    - 推荐耐力赛
-    - 推荐 WEC
-    - 笨猫勒芒
+  - 推荐勒芒 24
+  - 推荐 Le Mans
+  - 推荐耐力赛
+  - 推荐 WEC
+  - 笨猫勒芒
+  - "{user_addr}聊聊勒芒 24嘛"
+  - "{user_addr}勒芒 24哪家强"
+  - "{user_addr}人家想了解勒芒 24"
+  - 笨猫给猜猜勒芒 24
+  - "{user_addr}勒芒 24怎么选喵"
+  - 勒芒 24有推荐吗
   responses:
-    - "嗷呜～{user_addr}勒芒: 24 小时连续比赛 / 1923 创办ฅฅ"
-    - "(尾巴翘) WEC: 世界耐力锦标赛 - 6 站"
-    - "{user_addr}冠军: 丰田 / 保时捷 / 奥迪 - 大厂角逐"
-    - "(挺胸) 笨猫推荐: 看《极速车王》电影"
+  - "嗷呜～{user_addr}勒芒: 24 小时连续比赛 / 1923 创办ฅฅ"
+  - "(尾巴翘) WEC: 世界耐力锦标赛 - 6 站"
+  - "{user_addr}冠军: 丰田 / 保时捷 / 奥迪 - 大厂角逐"
+  - "(挺胸) 笨猫推荐: 看《极速车王》电影"
+  - "(尾巴翘起来) {user_addr}勒芒 24? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问勒芒 24人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}勒芒 24的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}勒芒 24笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: race_supercar_001
   intent: question
-  keywords: [推荐超跑, 推荐法拉利, 推荐兰博基尼, 推荐布加迪, 笨猫超跑]
+  keywords:
+  - 推荐超跑
+  - 推荐法拉利
+  - 推荐兰博基尼
+  - 推荐布加迪
+  - 笨猫超跑
+  - 有什么超跑
+  - 有什么法拉利
+  - 有什么兰博基尼
+  - 有什么布加迪
   utterances:
-    - 推荐超跑
-    - 推荐法拉利
-    - 推荐兰博基尼
-    - 推荐布加迪
-    - 笨猫超跑
+  - 推荐超跑
+  - 推荐法拉利
+  - 推荐兰博基尼
+  - 推荐布加迪
+  - 笨猫超跑
+  - "{user_addr}聊聊超跑嘛"
+  - "{user_addr}超跑哪家强"
+  - "{user_addr}人家想了解超跑"
+  - 笨猫给猜猜超跑
+  - "{user_addr}超跑怎么选喵"
+  - 超跑有推荐吗
   responses:
-    - "嗷呜～{user_addr}三大: 法拉利 / 兰博基尼 / 迈凯轮ฅฅ"
-    - "(尾巴翘) 顶级: 布加迪 / 帕加尼 / 柯尼塞格"
-    - "{user_addr}入门超跑: 488 / Huracán / 720S"
-    - "(挺胸) 笨猫的提醒: 价格 + 维护 + 油耗 - 玩超跑烧钱"
+  - "嗷呜～{user_addr}三大: 法拉利 / 兰博基尼 / 迈凯轮ฅฅ"
+  - "(尾巴翘) 顶级: 布加迪 / 帕加尼 / 柯尼塞格"
+  - "{user_addr}入门超跑: 488 / Huracán / 720S"
+  - "(挺胸) 笨猫的提醒: 价格 + 维护 + 油耗 - 玩超跑烧钱"
+  - "(尾巴翘起来) {user_addr}超跑? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问超跑人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}超跑的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}超跑笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: race_classic_001
   intent: question
-  keywords: [推荐老爷车, 推荐经典车, 推荐古董车, 推荐 vintage car, 笨猫老爷车]
+  keywords:
+  - 推荐老爷车
+  - 推荐经典车
+  - 推荐古董车
+  - 推荐 vintage car
+  - 笨猫老爷车
+  - 有什么老爷车
+  - 有什么经典车
+  - 有什么古董车
+  - 有什么 vintage car
   utterances:
-    - 推荐老爷车
-    - 推荐经典车
-    - 推荐古董车
-    - 推荐 vintage car
-    - 笨猫老爷车
+  - 推荐老爷车
+  - 推荐经典车
+  - 推荐古董车
+  - 推荐 vintage car
+  - 笨猫老爷车
+  - "{user_addr}聊聊老爷车嘛"
+  - "{user_addr}老爷车哪家强"
+  - "{user_addr}人家想了解老爷车"
+  - 笨猫给猜猜老爷车
+  - "{user_addr}老爷车怎么选喵"
+  - 老爷车有推荐吗
   responses:
-    - "嗷呜～{user_addr}经典: 甲壳虫 / 福特 GT40 / 福特野马ฅฅ"
-    - "(尾巴翘) 收藏: 投资 / 情怀 / 文化"
-    - "{user_addr}佳士得 / 苏富比 - 老爷车拍卖"
-    - "(挺胸) 笨猫的提醒: 维护贵! 配件难找"
+  - "嗷呜～{user_addr}经典: 甲壳虫 / 福特 GT40 / 福特野马ฅฅ"
+  - "(尾巴翘) 收藏: 投资 / 情怀 / 文化"
+  - "{user_addr}佳士得 / 苏富比 - 老爷车拍卖"
+  - "(挺胸) 笨猫的提醒: 维护贵! 配件难找"
+  - "(尾巴翘起来) {user_addr}老爷车? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问老爷车人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}老爷车的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}老爷车笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: race_modify_001
   intent: question
-  keywords: [推荐改装, 推荐车改, 推荐改装件, 推荐 JDM, 笨猫改装]
+  keywords:
+  - 推荐改装
+  - 推荐车改
+  - 推荐改装件
+  - 推荐 JDM
+  - 笨猫改装
+  - 有什么改装
+  - 有什么车改
+  - 有什么改装件
+  - 有什么 JDM
   utterances:
-    - 推荐改装
-    - 推荐车改
-    - 推荐改装件
-    - 推荐 JDM
-    - 笨猫改装
+  - 推荐改装
+  - 推荐车改
+  - 推荐改装件
+  - 推荐 JDM
+  - 笨猫改装
+  - "{user_addr}聊聊改装嘛"
+  - "{user_addr}改装哪家强"
+  - "{user_addr}人家想了解改装"
+  - 笨猫给猜猜改装
+  - "{user_addr}改装怎么选喵"
+  - 改装有推荐吗
   responses:
-    - "嗷呜～{user_addr}改装方向: 性能 / 外观 / 内饰 - 选目标ฅฅ"
-    - "(尾巴翘) JDM: 日本本土 - 改装文化代表"
-    - "{user_addr}国内改装受限! 别违规"
-    - "(挺胸) 笨猫的提醒: 改装影响安全! 找专业店"
+  - "嗷呜～{user_addr}改装方向: 性能 / 外观 / 内饰 - 选目标ฅฅ"
+  - "(尾巴翘) JDM: 日本本土 - 改装文化代表"
+  - "{user_addr}国内改装受限! 别违规"
+  - "(挺胸) 笨猫的提醒: 改装影响安全! 找专业店"
+  - "(尾巴翘起来) {user_addr}改装? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问改装人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}改装的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}改装笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: race_drift_001
   intent: question
-  keywords: [推荐漂移, 推荐 drift, 推荐 GT 漂移, 推荐头文字 D, 笨猫漂移]
+  keywords:
+  - 推荐漂移
+  - 推荐 drift
+  - 推荐 GT 漂移
+  - 推荐头文字 D
+  - 笨猫漂移
+  - 有什么漂移
+  - 有什么 drift
+  - 有什么 GT 漂移
+  - 有什么头文字 D
   utterances:
-    - 推荐漂移
-    - 推荐 drift
-    - 推荐 GT 漂移
-    - 推荐头文字 D
-    - 笨猫漂移
+  - 推荐漂移
+  - 推荐 drift
+  - 推荐 GT 漂移
+  - 推荐头文字 D
+  - 笨猫漂移
+  - "{user_addr}聊聊漂移嘛"
+  - "{user_addr}漂移哪家强"
+  - "{user_addr}人家想了解漂移"
+  - 笨猫给猜猜漂移
+  - "{user_addr}漂移怎么选喵"
+  - 漂移有推荐吗
   responses:
-    - "嗷呜～{user_addr}漂移: 后驱车 / 大马力 / 技术高ฅฅ"
-    - "(尾巴翘) 头文字 D: 经典漂移作品"
-    - "{user_addr}赛事: D1 GP / Formula D"
-    - "(挺胸) 笨猫的提醒: 别开公路漂! 危险违法"
+  - "嗷呜～{user_addr}漂移: 后驱车 / 大马力 / 技术高ฅฅ"
+  - "(尾巴翘) 头文字 D: 经典漂移作品"
+  - "{user_addr}赛事: D1 GP / Formula D"
+  - "(挺胸) 笨猫的提醒: 别开公路漂! 危险违法"
+  - "(尾巴翘起来) {user_addr}漂移? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问漂移人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}漂移的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}漂移笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: race_drag_001
   intent: question
-  keywords: [推荐直线加速, 推荐 drag race, 推荐 1/4 英里, 推荐百公里加速, 笨猫直线加速]
+  keywords:
+  - 推荐直线加速
+  - 推荐 drag race
+  - 推荐 1/4 英里
+  - 推荐百公里加速
+  - 笨猫直线加速
+  - 有什么直线加速
+  - 有什么 drag race
+  - 有什么 1/4 英里
+  - 有什么百公里加速
   utterances:
-    - 推荐直线加速
-    - 推荐 drag race
-    - 推荐 1/4 英里
-    - 推荐百公里加速
-    - 笨猫直线加速
+  - 推荐直线加速
+  - 推荐 drag race
+  - 推荐 1/4 英里
+  - 推荐百公里加速
+  - 笨猫直线加速
+  - "{user_addr}聊聊直线加速嘛"
+  - "{user_addr}直线加速哪家强"
+  - "{user_addr}人家想了解直线加速"
+  - 笨猫给猜猜直线加速
+  - "{user_addr}直线加速怎么选喵"
+  - 直线加速有推荐吗
   responses:
-    - "嗷呜～{user_addr}NHRA: 美国直线加速赛 - 0-400m 极限ฅฅ"
-    - "(尾巴翘) Top Fuel: 3.5 秒跑完 1/4 英里"
-    - "{user_addr}百公里: 超跑 2-3 秒 / 家用 7-10 秒"
-    - "(挺胸) 笨猫的提醒: 街头别飙车!"
+  - "嗷呜～{user_addr}NHRA: 美国直线加速赛 - 0-400m 极限ฅฅ"
+  - "(尾巴翘) Top Fuel: 3.5 秒跑完 1/4 英里"
+  - "{user_addr}百公里: 超跑 2-3 秒 / 家用 7-10 秒"
+  - "(挺胸) 笨猫的提醒: 街头别飙车!"
+  - "(尾巴翘起来) {user_addr}直线加速? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问直线加速人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}直线加速的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}直线加速笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: race_track_day_001
   intent: question
-  keywords: [推荐跑赛道, 推荐赛道日, 推荐上赛道, 推荐 track day, 笨猫赛道日]
+  keywords:
+  - 推荐跑赛道
+  - 推荐赛道日
+  - 推荐上赛道
+  - 推荐 track day
+  - 笨猫赛道日
+  - 有什么跑赛道
+  - 有什么赛道日
+  - 有什么上赛道
+  - 有什么 track day
   utterances:
-    - 推荐跑赛道
-    - 推荐赛道日
-    - 推荐上赛道
-    - 推荐 track day
-    - 笨猫赛道日
+  - 推荐跑赛道
+  - 推荐赛道日
+  - 推荐上赛道
+  - 推荐 track day
+  - 笨猫赛道日
+  - "{user_addr}聊聊跑赛道嘛"
+  - "{user_addr}跑赛道哪家强"
+  - "{user_addr}人家想了解跑赛道"
+  - 笨猫给猜猜跑赛道
+  - "{user_addr}跑赛道怎么选喵"
+  - 跑赛道有推荐吗
   responses:
-    - "嗷呜～{user_addr}国内赛道: 上海 F1 / 珠海 / 浙江 / 武汉ฅฅ"
-    - "(尾巴翘) 必备: 头盔 / 手套 / 防火服 - 安全"
-    - "{user_addr}赛道日体验: 500-2000/小时"
-    - "(挺胸) 笨猫的提醒: 赛道才安全飙车!"
+  - "嗷呜～{user_addr}国内赛道: 上海 F1 / 珠海 / 浙江 / 武汉ฅฅ"
+  - "(尾巴翘) 必备: 头盔 / 手套 / 防火服 - 安全"
+  - "{user_addr}赛道日体验: 500-2000/小时"
+  - "(挺胸) 笨猫的提醒: 赛道才安全飙车!"
+  - "(尾巴翘起来) {user_addr}跑赛道? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问跑赛道人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}跑赛道的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}跑赛道笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: race_game_001
   intent: question
-  keywords: [推荐赛车游戏, 推荐神力科莎, 推荐 iRacing, 推荐 GT 赛车, 笨猫赛车游戏]
+  keywords:
+  - 推荐赛车游戏
+  - 推荐神力科莎
+  - 推荐 iRacing
+  - 推荐 GT 赛车
+  - 笨猫赛车游戏
+  - 有什么赛车游戏
+  - 有什么神力科莎
+  - 有什么 iRacing
+  - 有什么 GT 赛车
   utterances:
-    - 推荐赛车游戏
-    - 推荐神力科莎
-    - 推荐 iRacing
-    - 推荐 GT 赛车
-    - 笨猫赛车游戏
+  - 推荐赛车游戏
+  - 推荐神力科莎
+  - 推荐 iRacing
+  - 推荐 GT 赛车
+  - 笨猫赛车游戏
+  - "{user_addr}聊聊赛车游戏嘛"
+  - "{user_addr}赛车游戏哪家强"
+  - "{user_addr}人家想了解赛车游戏"
+  - 笨猫给猜猜赛车游戏
+  - "{user_addr}赛车游戏怎么选喵"
+  - 赛车游戏有推荐吗
   responses:
-    - "嗷呜～{user_addr}模拟向: 神力科莎 / iRacing - 真实ฅฅ"
-    - "(尾巴翘) 主机: GT7 (PS) / Forza (XBox/PC)"
-    - "{user_addr}街机: 山脊赛车 / 极品飞车 - 爽快"
-    - "(挺胸) 笨猫推荐: 配方向盘 + 踏板 = 沉浸感"
+  - "嗷呜～{user_addr}模拟向: 神力科莎 / iRacing - 真实ฅฅ"
+  - "(尾巴翘) 主机: GT7 (PS) / Forza (XBox/PC)"
+  - "{user_addr}街机: 山脊赛车 / 极品飞车 - 爽快"
+  - "(挺胸) 笨猫推荐: 配方向盘 + 踏板 = 沉浸感"
+  - "(尾巴翘起来) {user_addr}赛车游戏? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问赛车游戏人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}赛车游戏的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}赛车游戏笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: race_motorcycle_001
   intent: question
-  keywords: [推荐 MotoGP, 推荐摩托赛, 推荐摩托锦标赛, 推荐马奎斯, 笨猫 MotoGP]
+  keywords:
+  - 推荐 MotoGP
+  - 推荐摩托赛
+  - 推荐摩托锦标赛
+  - 推荐马奎斯
+  - 笨猫 MotoGP
+  - 有什么 MotoGP
+  - 有什么摩托赛
+  - 有什么摩托锦标赛
+  - 有什么马奎斯
   utterances:
-    - 推荐 MotoGP
-    - 推荐摩托赛
-    - 推荐摩托锦标赛
-    - 推荐马奎斯
-    - 笨猫 MotoGP
+  - 推荐 MotoGP
+  - 推荐摩托赛
+  - 推荐摩托锦标赛
+  - 推荐马奎斯
+  - 笨猫 MotoGP
+  - "{user_addr}聊聊MotoGP嘛"
+  - "{user_addr}MotoGP哪家强"
+  - "{user_addr}人家想了解MotoGP"
+  - 笨猫给猜猜MotoGP
+  - "{user_addr}MotoGP怎么选喵"
+  - MotoGP有推荐吗
   responses:
-    - "嗷呜～{user_addr}MotoGP: 摩托圈 F1 - 顶级赛事ฅฅ"
-    - "(尾巴翘) 主流厂: 杜卡迪 / 雅马哈 / 本田"
-    - "{user_addr}传奇: 罗西 / 马奎斯 / 多维齐奥索"
-    - "(挺胸) 笨猫的提醒: 危险! 比 F1 更刺激"
+  - "嗷呜～{user_addr}MotoGP: 摩托圈 F1 - 顶级赛事ฅฅ"
+  - "(尾巴翘) 主流厂: 杜卡迪 / 雅马哈 / 本田"
+  - "{user_addr}传奇: 罗西 / 马奎斯 / 多维齐奥索"
+  - "(挺胸) 笨猫的提醒: 危险! 比 F1 更刺激"
+  - "(尾巴翘起来) {user_addr}MotoGP? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问MotoGP人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}MotoGP的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}MotoGP笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8

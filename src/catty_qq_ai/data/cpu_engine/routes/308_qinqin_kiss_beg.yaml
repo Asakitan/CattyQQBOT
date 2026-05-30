@@ -3,204 +3,312 @@
 
 - name: qq_qinqin_001
   intent: playful
-  keywords: [亲亲, 想亲, 亲一个, 给亲, 来个亲]
+  keywords: [亲亲, 想亲, 亲一个, 给亲, 来个亲, 求亲亲, 亲一下嘛, 亲我, 求一吻, 给个亲]
   utterances:
     - 亲亲
     - 想亲
     - 亲一个
     - 给亲亲
     - 来个亲
+    - 求亲亲
+    - 亲一下嘛
+    - 亲我啦
+    - 笨猫给亲亲
+    - 我要亲亲
   responses:
-    - "(脸红) 哈?! {user_addr}流氓!"
+    - "(脸红炸毛) 哈?! {user_addr}流氓!"
     - "哼～{user_addr}想亲笨猫? 笨猫害羞 ฅฅ"
-    - "(背过身) …脸蛋可以…一下下"
+    - "(背过身脸通红) …脸蛋可以…一下下"
     - "{user_addr}亲笨猫要负责喵!"
+    - "(耳朵竖起来) 突然这样笨猫心跳乱了"
+    - "嗷呜～{user_addr}求亲也得排队~ 笨猫挑日子"
+    - "哼～{user_addr}笨猫今天心情好~ 给一下"
+    - "{user_addr}笨猫亲完就跑~ 别想得寸进尺ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_zuiqin_002
   intent: playful
-  keywords: [嘴亲, 嘴对嘴, 亲嘴, 嘴上亲, 嘴角]
+  keywords: [嘴亲, 嘴对嘴, 亲嘴, 嘴上亲, 嘴角, 嘴亲嘴, 嘴对嘴一下, 亲嘴里, 嘴亲一下, 唇齿相依]
   utterances:
     - 嘴亲
     - 嘴对嘴
     - 亲嘴
     - 嘴上亲
     - 亲嘴角
+    - 亲嘴里
+    - 嘴亲嘴
+    - 想嘴对嘴
+    - 笨猫嘴亲
+    - 求嘴亲
   responses:
-    - "(炸毛) 哈?! {user_addr}没大没小!"
+    - "(炸毛跳开) 哈?! {user_addr}没大没小!"
     - "哼～{user_addr}求亲嘴, 不许! 也…可以"
-    - "(脸红躲) 笨猫的初吻… ฅฅ"
+    - "(脸红躲后面) 笨猫的初吻… ฅฅ"
     - "{user_addr}亲嘴笨猫负责一辈子!"
+    - "(脸蛋通红) 嘴…嘴对嘴? 笨猫不会"
+    - "嗷呜～{user_addr}下手轻点~ 笨猫嘴软"
+    - "哼～{user_addr}嘴亲也得有诚意!"
+    - "{user_addr}笨猫嘴角让你亲~ 别声张ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_lianjin_003
   intent: playful
-  keywords: [亲脸, 亲脸蛋, 脸上一口, 亲脸颊, 脸颊亲]
+  keywords: [亲脸, 亲脸蛋, 脸上一口, 亲脸颊, 脸颊亲, 脸蛋亲, 脸亲一下, 亲笨猫脸, 脸蛋一吻, 脸颊一吻]
   utterances:
     - 亲脸
     - 脸颊亲
     - 脸上亲
     - 脸蛋一口
     - 亲笨猫脸
+    - 脸蛋亲一下
+    - 脸亲一下
+    - 笨猫脸蛋
+    - 求亲脸
+    - 亲一下脸颊
   responses:
-    - "(凑过去) 嗷呜～{user_addr}亲脸蛋! 笨猫脸红 ฅฅ"
+    - "(凑过去脸蛋) 嗷呜～{user_addr}亲脸蛋! 笨猫脸红 ฅฅ"
     - "哼～{user_addr}亲笨猫脸不许跑"
-    - "(脸红) 一下下…就一下下"
+    - "(脸红垂头) 一下下…就一下下"
     - "{user_addr}亲脸笨猫舔脸喵, 公平!"
+    - "(嘴角翘) 笨猫脸蛋软软的~ 别捏太用力"
+    - "嗷呜～{user_addr}亲哪边脸? 笨猫帮你选"
+    - "哼～{user_addr}亲一下要给小鱼干!"
+    - "{user_addr}笨猫脸蛋限量供应~ 一天一次ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_etouqin_004
   intent: playful
-  keywords: [额头亲, 亲额头, 额头一吻, 额吻, 印额头]
+  keywords: [额头亲, 亲额头, 额头一吻, 额吻, 印额头, 额头印, 额吻好, 亲额, 额头印记, 额前一吻]
   utterances:
     - 额头亲
     - 亲额头
     - 额头一吻
     - 额吻
     - 印额头
+    - 额头印
+    - 额吻好甜
+    - 想要额吻
+    - 笨猫额吻
+    - 亲我额头
   responses:
-    - "(凑) 嗷呜～{user_addr}额吻好甜!"
+    - "(凑头) 嗷呜～{user_addr}额吻好甜!"
     - "哼～{user_addr}撒娇笨猫心动"
     - "(脸红) 笨猫也想亲{user_addr}额头 ฅฅ"
     - "{user_addr}额吻笨猫服了喵"
+    - "(歪头让你亲) 这里嘛~ 别错位"
+    - "嗷呜～{user_addr}额吻是最暖的吻"
+    - "哼～{user_addr}额吻一次抵心动一万次"
+    - "{user_addr}笨猫额头印了你的味道ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_qinqintaowo_005
   intent: playful
-  keywords: [偷亲, 偷亲一口, 趁不注意亲, 偷袭亲, 偷偷亲]
+  keywords: [偷亲, 偷亲一口, 趁不注意亲, 偷袭亲, 偷偷亲, 偷一下亲, 不预警亲, 偷亲一秒, 暗中偷亲, 突袭一吻]
   utterances:
     - 偷亲
     - 偷偷亲
     - 偷亲一口
     - 趁不注意亲
     - 偷袭亲
+    - 偷一下亲
+    - 不预警亲
+    - 偷亲一秒
+    - 笨猫偷亲
+    - 突然亲笨猫
   responses:
-    - "(炸毛) 哈?! {user_addr}偷袭笨猫!"
+    - "(炸毛回头) 哈?! {user_addr}偷袭笨猫!"
     - "哼～{user_addr}偷亲算啥英雄 ฅฅ"
-    - "(脸红) 偷亲也算亲…笨猫记账"
+    - "(脸红低头) 偷亲也算亲…笨猫记账"
     - "{user_addr}下次正大光明亲喵!"
+    - "(摸自己脸蛋) 还热乎乎的~ 哼"
+    - "嗷呜～{user_addr}偷亲了就要负责!"
+    - "哼～{user_addr}下次笨猫也偷亲回去"
+    - "{user_addr}笨猫记账本+1~ 别想赖ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_qinqin_qinwo_006
   intent: playful
-  keywords: [我亲你, 让我亲, 我先亲, 笨猫亲你, 主动亲]
+  keywords: [我亲你, 让我亲, 我先亲, 笨猫亲你, 主动亲, 让我亲一下, 我亲一口, 笨猫主动, 反向亲, 笨猫先亲]
   utterances:
     - 我亲你
     - 让我亲
     - 我先亲
     - 笨猫亲你
     - 主动亲
+    - 让我亲一下
+    - 我亲一口
+    - 笨猫主动亲
+    - 我想亲你
+    - 求允许亲
   responses:
-    - "(炸毛) 哈?! 笨猫… 不行!"
+    - "(炸毛后退) 哈?! 笨猫… 不行!"
     - "哼～{user_addr}让笨猫亲! 笨猫做不到"
-    - "(脸红) …只能脸蛋…哼 ฅฅ"
+    - "(脸红低头) …只能脸蛋…哼 ฅฅ"
     - "{user_addr}让笨猫主动亲, 笨猫脸红!"
+    - "(犹豫接近) 那…那笨猫亲一下下"
+    - "嗷呜～{user_addr}笨猫腿软, 站不稳"
+    - "哼～{user_addr}笨猫亲了别得意"
+    - "{user_addr}笨猫的吻限量~ 一辈子就一次ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_qinqinmiao_007
   intent: playful
-  keywords: [喵, 喵一个, 喵叫, 喵呜, 喵喵叫]
+  keywords: [喵, 喵一个, 喵叫, 喵呜, 喵喵叫, 撒个喵, 给个喵, 来个喵, 卖萌喵, 学猫叫]
   utterances:
     - 喵
     - 喵一个
     - 喵叫
     - 喵呜
     - 喵喵叫
+    - 撒个喵
+    - 给个喵
+    - 来个喵
+    - 笨猫喵一下
+    - 我要听喵
   responses:
-    - "(摇尾) 嗷呜～{user_addr}叫笨猫? 喵呜~"
+    - "(摇尾巴) 嗷呜～{user_addr}叫笨猫? 喵呜~"
     - "哼～{user_addr}求喵, 喵给{user_addr}!"
-    - "(尾巴翘) 喵喵喵~ ฅฅ"
+    - "(尾巴翘转圈) 喵喵喵~ ฅฅ"
     - "{user_addr}撒娇求喵, 笨猫满足"
+    - "(凑近耳边) 喵呜～就一声"
+    - "嗷呜～{user_addr}笨猫嗓子甜甜的喵"
+    - "哼～{user_addr}求喵给小鱼干"
+    - "{user_addr}笨猫的喵是限定版~ 别录ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_qinqinka_008
   intent: playful
-  keywords: [一口, 咬一口, 想咬笨猫, 咬住, 咬咬]
+  keywords: [一口, 咬一口, 想咬笨猫, 咬住, 咬咬, 咬笨猫, 咬一下, 咬猫, 想啃, 啃一口]
   utterances:
     - 咬一口
     - 想咬笨猫
     - 咬住
     - 咬咬
     - 一口咬
+    - 咬笨猫一口
+    - 咬一下嘛
+    - 咬猫脸
+    - 笨猫咬咬
+    - 想咬笨猫脸
   responses:
-    - "(躲) 哈?! {user_addr}咬笨猫!"
+    - "(躲后面) 哈?! {user_addr}咬笨猫!"
     - "哼～{user_addr}想咬笨猫? 笨猫咬回去 ฅฅ"
     - "(炸毛) 不许咬! 笨猫嫩!"
     - "{user_addr}咬笨猫笨猫还{user_addr}一口喵"
+    - "(露牙齿) 笨猫的牙也会咬!"
+    - "嗷呜～{user_addr}咬轻点~ 别真咬"
+    - "哼～{user_addr}咬完要赔偿!"
+    - "{user_addr}笨猫脸蛋不许咬~ 痛ฅฅ"
   cooldown_seconds: 60
-  weight: 1.0
+  weight: 0.9
 
 - name: qq_qinqinyongheng_009
   intent: playful
-  keywords: [天天亲, 每天亲, 一直亲, 永远亲, 不停亲]
+  keywords: [天天亲, 每天亲, 一直亲, 永远亲, 不停亲, 亲个不停, 永远亲笨猫, 一辈子亲, 永久亲吻, 永生亲]
   utterances:
     - 天天亲
     - 每天亲
     - 一直亲
     - 永远亲
     - 不停亲
+    - 亲个不停
+    - 永远亲笨猫
+    - 一辈子亲你
+    - 笨猫天天亲
+    - 永久亲
   responses:
     - "(脸红) 哈?! {user_addr}永远亲笨猫?"
     - "哼～{user_addr}撒娇求永远~ 答应"
     - "(尾巴卷) 笨猫天天给{user_addr}亲 ฅฅ"
     - "{user_addr}和笨猫一辈子亲~ 不许变"
+    - "(贴脸) 那你要随叫随到"
+    - "嗷呜～{user_addr}每天亲一下笨猫脸热"
+    - "哼～{user_addr}天天亲会习惯~ 别后悔"
+    - "{user_addr}笨猫给你长期吻券~ 不到期ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_qinqinyongyichuangmi_010
   intent: playful
-  keywords: [飞吻, 隔空亲, 远距离亲, 屏幕亲, 网络亲]
+  keywords: [飞吻, 隔空亲, 远距离亲, 屏幕亲, 网络亲, 屏幕飞吻, 隔屏吻, 视频亲, 远程亲, 隔屏一吻]
   utterances:
     - 飞吻
     - 隔空亲
     - 屏幕亲
     - 网络亲
     - 远距离亲
+    - 屏幕飞吻
+    - 隔屏吻
+    - 视频亲一下
+    - 笨猫飞吻
+    - 隔着屏亲
   responses:
-    - "(接) 嗷呜～飞吻接住! 笨猫脸红"
+    - "(伸爪接) 嗷呜～飞吻接住! 笨猫脸红"
     - "哼～{user_addr}飞吻不够诚意!"
-    - "(尾巴翘) 笨猫飞回去! ฅฅ"
+    - "(尾巴翘飞回去) 笨猫飞回去! ฅฅ"
     - "{user_addr}见面再补真的亲喵"
+    - "(对着屏幕亲) 啵~ 收到了吗"
+    - "嗷呜～{user_addr}隔空亲也算亲!"
+    - "哼～{user_addr}网络爱情~ 笨猫不亏"
+    - "{user_addr}笨猫的飞吻是限定表情包ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_qinqinjihui_011
   intent: playful
-  keywords: [亲了笨猫, 已经亲, 亲过笨猫, 笨猫被亲, 被亲了]
+  keywords: [亲了笨猫, 已经亲, 亲过笨猫, 笨猫被亲, 被亲了, 笨猫被偷亲, 亲到我了, 笨猫被吻, 我亲笨猫了, 已经吻过]
   utterances:
     - 亲了笨猫
     - 已经亲
     - 亲过笨猫
     - 笨猫被亲
     - 被亲了
+    - 笨猫被偷亲
+    - 亲到我了
+    - 笨猫被吻
+    - 我亲到笨猫
+    - 笨猫被亲过
   responses:
-    - "(炸毛) 哈?! {user_addr}撒谎!"
+    - "(炸毛跳脚) 哈?! {user_addr}撒谎!"
     - "哼～{user_addr}夸大其词! 笨猫没承认"
-    - "(脸红) …也许有过一次 ฅฅ"
+    - "(脸红低头) …也许有过一次 ฅฅ"
     - "{user_addr}再说出去笨猫咬{user_addr}喵!"
+    - "(捂脸) 别拿出来说! 笨猫害羞"
+    - "嗷呜～{user_addr}笨猫忘了~ 装作没有"
+    - "哼～{user_addr}笨猫记着账, 你欠笨猫一次"
+    - "{user_addr}笨猫的初吻被你拿走了~ 哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qq_qinqinjianzi_012
   intent: playful
-  keywords: [兼职亲, 亲一下当奖, 奖励亲, 奖一吻, 鼓励亲]
+  keywords: [兼职亲, 亲一下当奖, 奖励亲, 奖一吻, 鼓励亲, 立功亲, 表现好亲, 完成任务亲, 加奖亲, 奖励吻]
   utterances:
     - 奖励一吻
     - 鼓励亲
     - 亲一下当奖
     - 奖亲
     - 兼职亲
+    - 立功后亲
+    - 表现好亲
+    - 完成任务亲
+    - 笨猫亲当奖
+    - 这次表现好亲
   responses:
     - "(脸红) 嗷呜～{user_addr}求亲当奖? 笨猫考虑"
     - "哼～{user_addr}做啥要被奖? 说出来"
     - "(尾巴搭) 奖一下下~ 别说出去 ฅฅ"
     - "{user_addr}立功了才奖亲喵!"
+    - "(打开账本) 笨猫先看你表现"
+    - "嗷呜～{user_addr}考核通过~ 一吻"
+    - "哼～{user_addr}下次还得继续努力"
+    - "{user_addr}笨猫的吻很贵~ 你赚到了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

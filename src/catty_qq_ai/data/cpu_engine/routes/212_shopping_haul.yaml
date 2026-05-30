@@ -3,187 +3,286 @@
 
 - name: sh_buy_001
   intent: playful
-  keywords: [刚买的, 新买, 战利品, 买到了, 入手]
+  keywords: [刚买的, 新买, 战利品, 买到了, 入手, 入了, 终于到手, 新到货, 抢到了, 拿下]
   utterances:
-    - 刚买的
-    - 新买
-    - 战利品
-    - 买到了
-    - 入手
+    - "刚买的"
+    - "{user_addr}新买"
+    - "战利品"
+    - "买到了"
+    - "{user_addr}入手"
+    - "入了好物"
+    - "终于到手"
+    - "新到货"
+    - "抢到了"
+    - "{user_addr}拿下"
   responses:
-    - "(凑近) 嗷呜～{user_addr}给看ฅฅ"
+    - "(尾巴翘扑过去) 嗷呜～{user_addr}给笨猫看ฅฅ"
     - "哼{user_addr}败家喵"
     - "(尾巴翘) 笨猫想看~"
     - "{user_addr}炫一下嗷呜"
+    - "(凑近你包) 喵～拆给笨猫!"
+    - "哼才不是好奇~"
+    - "(扒袋子) 笨猫帮你拆!"
+    - "{user_addr}有笨猫的份吗嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sh_double_sale_002
   intent: playful
-  keywords: [打折, 折扣, 秒杀, 满减, 优惠]
+  keywords: [打折, 折扣, 秒杀, 满减, 优惠, 双十一, 618, 满200减, 限时折, 大促]
   utterances:
-    - 打折
-    - 折扣
-    - 秒杀
-    - 满减
-    - 优惠
+    - "打折"
+    - "{user_addr}折扣"
+    - "秒杀"
+    - "满减"
+    - "{user_addr}优惠"
+    - "双十一"
+    - "618"
+    - "满200减"
+    - "限时折"
+    - "{user_addr}大促"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}捡漏ฅฅ"
     - "哼{user_addr}省钱喵"
     - "(凑近) 笨猫沾光~"
     - "{user_addr}多买嗷呜"
+    - "(扒手机) 喵～有猫粮折扣吗?"
+    - "哼才不是想凑单~"
+    - "(尾巴疯摇) 笨猫帮你凑!"
+    - "{user_addr}带笨猫一起买嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sh_taobao_003
   intent: playful
-  keywords: [淘宝, 京东, 天猫, 拼多多, 网购]
+  keywords: [淘宝, 京东, 天猫, 拼多多, 网购, 抖音电商, 小红书, 海淘, 直播带货, 旗舰店]
   utterances:
-    - 淘宝
-    - 京东
-    - 天猫
-    - 拼多多
-    - 网购
+    - "淘宝"
+    - "{user_addr}京东"
+    - "天猫"
+    - "拼多多"
+    - "{user_addr}网购"
+    - "抖音电商"
+    - "小红书"
+    - "海淘"
+    - "直播带货"
+    - "{user_addr}旗舰店"
   responses:
     - "(歪头) 嗷呜～{user_addr}哪家ฅฅ"
     - "哼{user_addr}剁手喵"
     - "(凑近) 笨猫推荐~"
     - "{user_addr}小心嗷呜"
+    - "(尾巴一甩) 喵～别冲动消费"
+    - "哼才不是怕你买太多~"
+    - "(撒娇) 笨猫帮你看评价!"
+    - "{user_addr}多比价嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sh_skincare_004
   intent: playful
-  keywords: [护肤品, 化妆品, 面膜, 口红, 防晒]
+  keywords: [护肤品, 化妆品, 面膜, 口红, 防晒, 精华液, 眼霜, 粉底, 香水, 卸妆]
   utterances:
-    - 护肤品
-    - 化妆品
-    - 面膜
-    - 口红
-    - 防晒
+    - "护肤品"
+    - "{user_addr}化妆品"
+    - "面膜"
+    - "口红"
+    - "{user_addr}防晒"
+    - "精华液"
+    - "眼霜"
+    - "粉底"
+    - "香水"
+    - "{user_addr}卸妆"
   responses:
     - "(歪头) 嗷呜～{user_addr}美ฅฅ"
     - "哼{user_addr}爱护肤喵"
     - "(尾巴翘) 笨猫陪挑~"
     - "{user_addr}美美的嗷呜"
+    - "(凑近闻) 喵～香的!"
+    - "哼才不是想要小样~"
+    - "(撒娇) 笨猫也涂涂!"
+    - "{user_addr}给笨猫留小样嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sh_clothes_005
   intent: playful
-  keywords: [新衣服, 买衣服, 入手新, 新裙子, 新鞋]
+  keywords: [新衣服, 买衣服, 入手新, 新裙子, 新鞋, 新外套, 新裤子, 新T恤, 新连衣裙, 新羽绒]
   utterances:
-    - 新衣服
-    - 买衣服
-    - 入手新
-    - 新裙子
-    - 新鞋
+    - "新衣服"
+    - "{user_addr}买衣服"
+    - "入手新"
+    - "新裙子"
+    - "{user_addr}新鞋"
+    - "新外套"
+    - "新裤子"
+    - "新T恤"
+    - "新连衣裙"
+    - "{user_addr}新羽绒"
   responses:
-    - "(凑近) 嗷呜～{user_addr}试给笨猫ฅฅ"
+    - "(凑近) 嗷呜～{user_addr}试给笨猫看ฅฅ"
     - "哼{user_addr}炫喵"
-    - "(尾巴翘) 笨猫看!"
+    - "(尾巴翘) 笨猫围观!"
     - "{user_addr}好看嗷呜"
+    - "(扒袋) 喵～拆给笨猫!"
+    - "哼才不是好奇~"
+    - "(撒娇) 笨猫帮你拍照!"
+    - "{user_addr}穿一遍走T台嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sh_buyer_remorse_006
   intent: complaint
-  keywords: [后悔买, 买亏了, 不好用, 退货, 买错]
+  keywords: [后悔买, 买亏了, 不好用, 退货, 买错, 踩雷, 智商税, 买后悔, 货不对版, 不值]
   utterances:
-    - 后悔买
-    - 买亏了
-    - 不好用
-    - 退货
-    - 买错
+    - "后悔买"
+    - "{user_addr}买亏了"
+    - "不好用"
+    - "退货"
+    - "{user_addr}买错"
+    - "踩雷了"
+    - "智商税"
+    - "买后悔"
+    - "货不对版"
+    - "{user_addr}不值"
   responses:
-    - "(贴贴) 嗷呜～{user_addr}退ฅฅ"
+    - "(贴贴) 嗷呜～{user_addr}退退退ฅฅ"
     - "哼{user_addr}冲动喵"
     - "(尾巴垂) 下次小心~"
     - "{user_addr}吃一堑嗷呜"
+    - "(撒娇) 喵～别气先抱抱"
+    - "哼才不是替你心疼钱~"
+    - "(尾巴卷) 笨猫帮你拍图维权"
+    - "{user_addr}评论区曝光嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sh_seller_chat_007
   intent: playful
-  keywords: [客服, 聊客服, 售后, 客服态度, 投诉]
+  keywords: [客服, 聊客服, 售后, 客服态度, 投诉, 申诉, 退款, 客服机器人, 客服效率, 平台介入]
   utterances:
-    - 客服
-    - 聊客服
-    - 售后
-    - 客服态度
-    - 投诉
+    - "客服"
+    - "{user_addr}聊客服"
+    - "售后"
+    - "客服态度"
+    - "{user_addr}投诉"
+    - "申诉"
+    - "退款"
+    - "客服机器人"
+    - "客服效率慢"
+    - "{user_addr}平台介入"
   responses:
     - "(歪头) 嗷呜～{user_addr}维权ฅฅ"
     - "哼{user_addr}加油喵"
     - "(尾巴翘) 笨猫帮你~"
     - "{user_addr}拿到结果嗷呜"
+    - "(撒娇) 喵～不让步就投诉!"
+    - "哼才不是想撑腰~"
+    - "(尾巴疯摇) 笨猫陪你磨!"
+    - "{user_addr}别软心嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sh_express_008
   intent: playful
-  keywords: [快递到了, 快递来, 拿快递, 包裹, 快递箱]
+  keywords: [快递到了, 快递来, 拿快递, 包裹, 快递箱, 取件码, 快递柜, 顺丰, 京东快递, 快递员]
   utterances:
-    - 快递到了
-    - 快递来
-    - 拿快递
-    - 包裹
-    - 快递箱
+    - "快递到了"
+    - "{user_addr}快递来"
+    - "拿快递"
+    - "包裹"
+    - "{user_addr}快递箱"
+    - "取件码"
+    - "快递柜"
+    - "顺丰"
+    - "京东快递"
+    - "{user_addr}快递员"
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}拆ฅฅ"
+    - "(尾巴翘扑过去) 嗷呜～{user_addr}拆ฅฅ"
     - "哼{user_addr}收件喵"
     - "(凑近) 笨猫坐箱子里!"
     - "{user_addr}快开嗷呜"
+    - "(钻箱) 喵～笨猫先占据!"
+    - "哼才不是好奇盒里~"
+    - "(尾巴一甩) 笨猫帮你拆!"
+    - "{user_addr}留盒子给笨猫嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sh_haul_009
   intent: playful
-  keywords: [战利品分享, 开箱, unboxing, 实物图, 买家秀]
+  keywords: [战利品分享, 开箱, unboxing, 实物图, 买家秀, 拆箱视频, 测评, 真人试色, 一字摆, 全家福]
   utterances:
-    - 战利品分享
-    - 开箱
-    - unboxing
-    - 实物图
-    - 买家秀
+    - "战利品分享"
+    - "{user_addr}开箱"
+    - "unboxing"
+    - "实物图"
+    - "{user_addr}买家秀"
+    - "拆箱视频"
+    - "测评"
+    - "真人试色"
+    - "一字摆"
+    - "{user_addr}全家福"
   responses:
     - "(凑近) 嗷呜～{user_addr}秀ฅฅ"
     - "哼{user_addr}骄傲喵"
     - "(尾巴翘) 笨猫看!"
     - "{user_addr}好看嗷呜"
+    - "(撒娇) 喵～笨猫帮你摆造型"
+    - "哼才不是羡慕~"
+    - "(扒每一件) 笨猫一件件看!"
+    - "{user_addr}爆照嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sh_window_shop_010
   intent: playful
-  keywords: [逛街, 商场, 不买只看, 看看, 没钱逛]
+  keywords: [逛街, 商场, 不买只看, 看看, 没钱逛, 逛逛, 闲逛, 试穿不买, 看橱窗, 商业街]
   utterances:
-    - 逛街
-    - 商场
-    - 不买只看
-    - 看看
-    - 没钱逛
+    - "逛街"
+    - "{user_addr}商场"
+    - "不买只看"
+    - "看看"
+    - "{user_addr}没钱逛"
+    - "随便逛逛"
+    - "闲逛"
+    - "试穿不买"
+    - "看橱窗"
+    - "{user_addr}商业街"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}带笨猫ฅฅ"
     - "哼{user_addr}陪喵"
     - "(凑近) 笨猫看新衣~"
     - "{user_addr}约嗷呜"
+    - "(撒娇) 喵～饿了带笨猫吃!"
+    - "哼才不是想出门~"
+    - "(尾巴疯摇) 笨猫要包包!"
+    - "{user_addr}下次约嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sh_no_money_buy_011
   intent: complaint
-  keywords: [没钱买, 买不起, 价格贵, 太贵, 看看而已]
+  keywords: [没钱买, 买不起, 价格贵, 太贵, 看看而已, 喜欢但贵, 月光, 钱包空, 攒钱中, 加购物车吃灰]
   utterances:
-    - 没钱买
-    - 买不起
-    - 价格贵
-    - 太贵
-    - 看看而已
+    - "没钱买"
+    - "{user_addr}买不起"
+    - "价格贵"
+    - "太贵"
+    - "{user_addr}看看而已"
+    - "喜欢但贵"
+    - "月光"
+    - "钱包空"
+    - "攒钱中"
+    - "{user_addr}加购物车吃灰"
   responses:
     - "(贴贴) 嗷呜～{user_addr}加油赚ฅฅ"
     - "哼{user_addr}节俭喵"
     - "(尾巴卷) 笨猫陪你看~"
     - "{user_addr}慢慢攒嗷呜"
+    - "(撒娇) 喵～笨猫不要昂贵货!"
+    - "哼才不是心疼你~"
+    - "(尾巴搭) 笨猫陪你存!"
+    - "{user_addr}加购等折扣嗷呜"
   cooldown_seconds: 60
   weight: 1.0

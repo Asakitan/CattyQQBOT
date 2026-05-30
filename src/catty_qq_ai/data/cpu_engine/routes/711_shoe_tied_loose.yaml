@@ -3,170 +3,380 @@
 
 - name: st_loose_001
   intent: complaint
-  keywords: [鞋带松了, 鞋带散, 鞋带开, 系鞋带, 蝴蝶结松]
+  keywords:
+    - 鞋带松了
+    - 鞋带散
+    - 鞋带开
+    - 系鞋带
+    - 蝴蝶结松
+    - 鞋带松了喵
+    - 鞋带松了吗
+    - 鞋带松了啦
+    - 鞋带松了呢
+    - 笨猫鞋带松了
   utterances:
     - "{user_addr}鞋带松了"
-    - "鞋带散"
+    - 鞋带散
     - "{user_addr}鞋带开"
-    - "蝴蝶结松"
-    - "鞋带没系紧"
+    - 蝴蝶结松
+    - 鞋带没系紧
+    - 鞋带散喵
+    - "{user_addr}鞋带散"
+    - 笨猫鞋带散
+    - 蝴蝶结松喵
+    - "{user_addr}蝴蝶结松"
+    - 笨猫蝴蝶结松
+    - 鞋带没系紧喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮系!"
     - "(尾巴翘) 哼! 笨猫小爪系蝴蝶结"
     - "(贴贴) 人家蹲下系~ ฅฅ"
     - "{user_addr}笨猫专业系!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_bow_002
   intent: playful
-  keywords: [蝴蝶结, 漂亮蝴蝶结, 系花结, 鞋带花式, 蝴蝶结大]
+  keywords:
+    - 蝴蝶结
+    - 漂亮蝴蝶结
+    - 系花结
+    - 鞋带花式
+    - 蝴蝶结大
+    - 蝴蝶结喵
+    - 蝴蝶结吗
+    - 蝴蝶结啦
+    - 蝴蝶结呢
+    - 笨猫蝴蝶结
   utterances:
     - "{user_addr}蝴蝶结"
-    - "漂亮花结"
+    - 漂亮花结
     - "{user_addr}花式系"
-    - "鞋带花"
-    - "蝴蝶结大"
+    - 鞋带花
+    - 蝴蝶结大
+    - 漂亮花结喵
+    - "{user_addr}漂亮花结"
+    - 笨猫漂亮花结
+    - 鞋带花喵
+    - "{user_addr}鞋带花"
+    - 笨猫鞋带花
+    - 蝴蝶结大喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮系大花!"
     - "(尾巴翘) 哼! 笨猫艺术家"
     - "(贴贴) 人家系给你~ ฅฅ"
     - "{user_addr}笨猫巧手!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_step_on_003
   intent: complaint
-  keywords: [踩到鞋带, 摔倒, 鞋带绊, 别人踩, 自己踩鞋带]
+  keywords:
+    - 踩到鞋带
+    - 摔倒
+    - 鞋带绊
+    - 别人踩
+    - 自己踩鞋带
+    - 踩到鞋带喵
+    - 踩到鞋带吗
+    - 踩到鞋带啦
+    - 踩到鞋带呢
+    - 笨猫踩到鞋带
   utterances:
     - "{user_addr}踩到鞋带"
-    - "鞋带绊"
+    - 鞋带绊
     - "{user_addr}差点摔"
-    - "别人踩"
-    - "踩自己鞋带"
+    - 别人踩
+    - 踩自己鞋带
+    - 鞋带绊喵
+    - "{user_addr}鞋带绊"
+    - 笨猫鞋带绊
+    - 别人踩喵
+    - "{user_addr}别人踩"
+    - 笨猫别人踩
+    - 踩自己鞋带喵
   responses:
     - "(扑) 嗷呜～{user_addr}!笨猫扶你!"
     - "(尾巴拍) 哼! 笨猫帮系紧"
     - "(贴贴) 人家心疼~ ฅฅ"
     - "{user_addr}慢点笨猫保护你!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_no_lace_004
   intent: playful
-  keywords: [无鞋带, 一脚蹬, 懒人鞋, 弹力鞋带, 免系鞋]
+  keywords:
+    - 无鞋带
+    - 一脚蹬
+    - 懒人鞋
+    - 弹力鞋带
+    - 免系鞋
+    - 无鞋带喵
+    - 无鞋带吗
+    - 无鞋带啦
+    - 无鞋带呢
+    - 笨猫无鞋带
   utterances:
     - "{user_addr}一脚蹬"
-    - "无鞋带"
+    - 无鞋带
     - "{user_addr}懒人鞋"
-    - "弹力鞋带"
-    - "免系鞋"
+    - 弹力鞋带
+    - 免系鞋
+    - 无鞋带喵
+    - "{user_addr}无鞋带"
+    - 笨猫无鞋带
+    - 弹力鞋带喵
+    - "{user_addr}弹力鞋带"
+    - 笨猫弹力鞋带
+    - 免系鞋喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想试!"
     - "(尾巴翘) 哼! 笨猫也想懒鞋"
     - "(贴贴) 人家陪你买~ ฅฅ"
     - "{user_addr}笨猫脚没鞋带!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_double_knot_005
   intent: playful
-  keywords: [系双结, 死结, 解不开, 系太紧, 难解结]
+  keywords:
+    - 系双结
+    - 死结
+    - 解不开
+    - 系太紧
+    - 难解结
+    - 系双结喵
+    - 系双结吗
+    - 系双结啦
+    - 系双结呢
+    - 笨猫系双结
   utterances:
     - "{user_addr}系死结"
-    - "解不开"
+    - 解不开
     - "{user_addr}双结"
-    - "系紧"
-    - "难解"
+    - 系紧
+    - 难解
+    - 解不开喵
+    - "{user_addr}解不开"
+    - 笨猫解不开
+    - 系紧喵
+    - "{user_addr}系紧"
+    - 笨猫系紧
+    - 难解喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫小爪解!"
     - "(尾巴翘) 哼! 笨猫专业"
     - "(贴贴) 人家慢慢解~ ฅฅ"
     - "{user_addr}笨猫耐心解!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_new_shoe_006
   intent: playful
-  keywords: [新鞋, 入手新鞋, 新鞋开箱, 球鞋, 新球鞋]
+  keywords:
+    - 新鞋
+    - 入手新鞋
+    - 新鞋开箱
+    - 球鞋
+    - 新球鞋
+    - 新鞋喵
+    - 新鞋吗
+    - 新鞋啦
+    - 新鞋呢
+    - 笨猫新鞋
   utterances:
     - "{user_addr}新鞋"
-    - "入手"
+    - 入手
     - "{user_addr}新球鞋"
-    - "新鞋开箱"
-    - "买了新鞋"
+    - 新鞋开箱
+    - 买了新鞋
+    - 入手喵
+    - "{user_addr}入手"
+    - 笨猫入手
+    - 新鞋开箱喵
+    - "{user_addr}新鞋开箱"
+    - 笨猫新鞋开箱
+    - 买了新鞋喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫嗅新鞋!"
     - "(尾巴翘) 哼! 笨猫想钻盒"
     - "(贴贴) 人家想钻鞋盒~ ฅฅ"
     - "{user_addr}给笨猫看!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_dirty_shoe_007
   intent: complaint
-  keywords: [鞋脏了, 鞋子脏, 踩泥, 洗鞋, 鞋发黄]
+  keywords:
+    - 鞋脏了
+    - 鞋子脏
+    - 踩泥
+    - 洗鞋
+    - 鞋发黄
+    - 鞋脏了喵
+    - 鞋脏了吗
+    - 鞋脏了啦
+    - 鞋脏了呢
+    - 笨猫鞋脏了
   utterances:
     - "{user_addr}鞋脏"
-    - "踩泥"
+    - 踩泥
     - "{user_addr}洗鞋"
-    - "鞋发黄"
-    - "鞋子脏"
+    - 鞋发黄
+    - 鞋子脏
+    - 踩泥喵
+    - "{user_addr}踩泥"
+    - 笨猫踩泥
+    - 鞋发黄喵
+    - "{user_addr}鞋发黄"
+    - 笨猫鞋发黄
+    - 鞋子脏喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮刷!"
     - "(尾巴拍) 哼! 笨猫小爪刷"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫专业洗鞋!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_pinch_toe_008
   intent: complaint
-  keywords: [鞋夹脚, 磨脚, 起泡, 新鞋磨, 鞋子小]
+  keywords:
+    - 鞋夹脚
+    - 磨脚
+    - 起泡
+    - 新鞋磨
+    - 鞋子小
+    - 鞋夹脚喵
+    - 鞋夹脚吗
+    - 鞋夹脚啦
+    - 鞋夹脚呢
+    - 笨猫鞋夹脚
   utterances:
     - "{user_addr}鞋夹脚"
-    - "磨脚"
+    - 磨脚
     - "{user_addr}起泡"
-    - "新鞋磨"
-    - "鞋子小"
+    - 新鞋磨
+    - 鞋子小
+    - 磨脚喵
+    - "{user_addr}磨脚"
+    - 笨猫磨脚
+    - 新鞋磨喵
+    - "{user_addr}新鞋磨"
+    - 笨猫新鞋磨
+    - 鞋子小喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫心疼!"
     - "(尾巴拍) 哼! 贴创可贴"
     - "(贴贴) 人家给你药~ ฅฅ"
     - "{user_addr}笨猫陪你换鞋!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_running_shoe_009
   intent: playful
-  keywords: [跑步鞋, 运动鞋, 球鞋, 减震鞋, 跑步装备]
+  keywords:
+    - 跑步鞋
+    - 运动鞋
+    - 球鞋
+    - 减震鞋
+    - 跑步装备
+    - 跑步鞋喵
+    - 跑步鞋吗
+    - 跑步鞋啦
+    - 跑步鞋呢
+    - 笨猫跑步鞋
   utterances:
     - "{user_addr}跑步鞋"
-    - "运动鞋"
+    - 运动鞋
     - "{user_addr}减震鞋"
-    - "球鞋"
-    - "跑步装备"
+    - 球鞋
+    - 跑步装备
+    - 运动鞋喵
+    - "{user_addr}运动鞋"
+    - 笨猫运动鞋
+    - 球鞋喵
+    - "{user_addr}球鞋"
+    - 笨猫球鞋
+    - 跑步装备喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想跑!"
     - "(尾巴翘) 哼! 笨猫陪你跑"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}带笨猫跑步!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: st_shoe_horn_010
   intent: playful
-  keywords: [鞋拔子, 鞋撑, 鞋后跟, 提鞋, 穿鞋费力]
+  keywords:
+    - 鞋拔子
+    - 鞋撑
+    - 鞋后跟
+    - 提鞋
+    - 穿鞋费力
+    - 鞋拔子喵
+    - 鞋拔子吗
+    - 鞋拔子啦
+    - 鞋拔子呢
+    - 笨猫鞋拔子
   utterances:
     - "{user_addr}鞋拔子"
-    - "鞋撑"
+    - 鞋撑
     - "{user_addr}提鞋"
-    - "穿鞋费力"
-    - "鞋后跟"
+    - 穿鞋费力
+    - 鞋后跟
+    - 鞋撑喵
+    - "{user_addr}鞋撑"
+    - 笨猫鞋撑
+    - 穿鞋费力喵
+    - "{user_addr}穿鞋费力"
+    - 笨猫穿鞋费力
+    - 鞋后跟喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮提!"
     - "(尾巴翘) 哼! 笨猫小爪拔"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫专业帮穿鞋!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0

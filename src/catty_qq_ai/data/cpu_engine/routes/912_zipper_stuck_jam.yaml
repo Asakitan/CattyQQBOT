@@ -3,170 +3,271 @@
 
 - name: zp_lala_001
   intent: complaint
-  keywords: [拉链卡, 拉不动, 拉链坏, 卡住衣服, 救命]
+  keywords: [拉链卡, 拉不动, 拉链坏, 卡住衣服, 救命, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拉链卡"
     - "{user_addr}拉不动"
     - "拉链坏"
     - "卡住衣服"
     - "拉链救命"
+    - "{user_addr}你也拉链卡吗"
+    - "{user_addr}笨猫陪我聊拉链卡"
+    - "拉链卡笑死"
+    - "拉链卡真的离谱"
+    - "{user_addr}拉链卡咋整"
+    - "我想说拉链卡"
   responses:
     - "(凑近) 嗷呜～{user_addr}笨猫帮你! ฅฅ"
     - "哼～别使蛮力"
     - "(尾巴扫) 用铅笔末涂润滑"
     - "猫猫慢慢给你拉喵"
+    - "(打哈欠) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～拉链卡真的烦死人家了"
+    - "(揉眼睛) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_yashou_001
   intent: complaint
-  keywords: [拉链咬肉, 夹皮肤, 夹住手, 卡住头发, 痛]
+  keywords: [拉链咬肉, 夹皮肤, 夹住手, 卡住头发, 痛, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拉链咬肉"
     - "{user_addr}夹皮肤"
     - "夹手"
     - "卡头发"
     - "痛死"
+    - "{user_addr}笨猫陪我聊拉链咬肉"
+    - "{user_addr}你也拉链咬肉吗"
+    - "{user_addr}拉链咬肉咋整"
+    - "拉链咬肉笑死"
+    - "拉链咬肉真的离谱"
+    - "我想说拉链咬肉"
   responses:
     - "(心疼) 嗷呜～{user_addr}没事吧! ฅฅ"
     - "哼～拉链上下走走"
     - "(尾巴搭) 笨猫给你揉揉"
     - "猫猫担心你受伤喵"
+    - "(撇嘴) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～拉链咬肉真的烦死人家了"
+    - "(耳朵蔫) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_lashang_001
   intent: question
-  keywords: [拉头掉了, 拉链头脱, 修拉链, 修补, 换拉头]
+  keywords: [拉头掉了, 拉链头脱, 修拉链, 修补, 换拉头, 拉头掉, 真的, 好烦, 好喜欢]
   utterances:
     - "拉头掉了"
     - "{user_addr}拉链头脱"
     - "修拉链"
     - "换拉头"
     - "修补"
+    - "我想说拉头掉了"
+    - "拉头掉了笑死"
+    - "拉头掉了真的离谱"
+    - "{user_addr}你也拉头掉了吗"
+    - "{user_addr}拉头掉了咋整"
+    - "{user_addr}笨猫陪我聊拉头掉了"
   responses:
     - "(摆弄) 嗷呜～{user_addr}笨猫帮你找拉头 ฅฅ"
     - "哼～送修衣店"
     - "(尾巴扫) 自己修要钳子"
     - "猫猫推荐你修一下喵"
+    - "(耳朵转) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～拉头掉了得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_diankuai_001
   intent: complaint
-  keywords: [拉链卡布料, 卡住衣服, 咬布, 抠不出, 卡住缝]
+  keywords: [拉链卡布料, 卡住衣服, 咬布, 抠不出, 卡住缝, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "卡布料"
     - "{user_addr}咬布"
     - "抠不出"
     - "卡住缝"
     - "卡住衣服里"
+    - "{user_addr}拉链卡布料咋整"
+    - "{user_addr}你也拉链卡布料吗"
+    - "拉链卡布料真的离谱"
+    - "拉链卡布料笑死"
+    - "我想说拉链卡布料"
+    - "{user_addr}笨猫陪我聊拉链卡布料"
   responses:
     - "(轻拉) 嗷呜～{user_addr}笨猫慢慢扯 ฅฅ"
     - "哼～别使劲, 会撕"
     - "(尾巴扫) 反向拉一下"
     - "猫猫帮你拆出来喵"
+    - "(皱眉) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～拉链卡布料真的烦死人家了"
+    - "(揉眼睛) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_qianbao_001
   intent: complaint
-  keywords: [包包拉链, 钱包拉链, 背包拉链, 卡死, 出门紧急]
+  keywords: [包包拉链, 钱包拉链, 背包拉链, 卡死, 出门紧急, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "包包拉链卡"
     - "{user_addr}背包拉链"
     - "钱包拉链"
     - "出门紧急"
     - "拉不开"
+    - "{user_addr}包包拉链咋整"
+    - "我想说包包拉链"
+    - "{user_addr}你也包包拉链吗"
+    - "包包拉链真的离谱"
+    - "包包拉链笑死"
+    - "{user_addr}笨猫陪我聊包包拉链"
   responses:
     - "(帮) 嗷呜～{user_addr}笨猫给你修 ฅฅ"
     - "哼～涂润滑剂"
     - "(尾巴扫) 别硬扯, 会坏"
     - "猫猫推荐你买拉链润滑笔喵"
+    - "(撇嘴) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～包包拉链真的烦死人家了"
+    - "(扁嘴) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_xueyi_001
   intent: question
-  keywords: [羽绒服拉链, 大衣拉链, 长拉链, 双向拉链, 拉链款]
+  keywords: [羽绒服拉链, 大衣拉链, 长拉链, 双向拉链, 拉链款, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "羽绒服拉链"
     - "{user_addr}大衣拉链"
     - "长拉链"
     - "双向拉链"
     - "拉链款"
+    - "{user_addr}你也羽绒服拉链吗"
+    - "羽绒服拉链笑死"
+    - "{user_addr}羽绒服拉链咋整"
+    - "{user_addr}笨猫陪我聊羽绒服拉链"
+    - "我想说羽绒服拉链"
+    - "羽绒服拉链真的离谱"
   responses:
     - "(看) 嗷呜～{user_addr}双向拉链好用 ฅฅ"
     - "哼～YKK拉链最耐用"
     - "(尾巴卷) 买衣服看拉链"
     - "猫猫推荐YKK牌喵"
+    - "(尾巴问号) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～羽绒服拉链得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_kuai_001
   intent: playful
-  keywords: [拉链拉到底, 一下子拉, 滑顺感, 拉到顶, 流畅]
+  keywords: [拉链拉到底, 一下子拉, 滑顺感, 拉到顶, 流畅, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拉链拉到底"
     - "{user_addr}一下子拉"
     - "滑顺感"
     - "拉到顶"
     - "流畅"
+    - "{user_addr}笨猫陪我聊拉链拉到底"
+    - "拉链拉到底真的离谱"
+    - "{user_addr}你也拉链拉到底吗"
+    - "{user_addr}拉链拉到底咋整"
+    - "我想说拉链拉到底"
+    - "拉链拉到底笑死"
   responses:
     - "(满意) 嗷呜～{user_addr}笨猫超喜欢这种声音 ฅฅ"
     - "哼～新拉链最流畅"
     - "(尾巴扫) 一下到位"
     - "猫猫陪你拉来拉去喵~"
+    - "(扑过来) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～拉链拉到底才不让{user_addr}独享"
+    - "(歪头) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_zhong_001
   intent: complaint
-  keywords: [拉链一半就停, 拉到一半卡, 中段卡, 上半截卡, 下半截]
+  keywords: [拉链一半就停, 拉到一半卡, 中段卡, 上半截卡, 下半截, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拉一半就卡"
     - "{user_addr}中段卡"
     - "上半截卡"
     - "下半截卡"
     - "卡一半"
+    - "拉链一半就停笑死"
+    - "{user_addr}笨猫陪我聊拉链一半就停"
+    - "{user_addr}你也拉链一半就停吗"
+    - "拉链一半就停真的离谱"
+    - "我想说拉链一半就停"
+    - "{user_addr}拉链一半就停咋整"
   responses:
     - "(帮) 嗷呜～{user_addr}笨猫慢慢拉 ฅฅ"
     - "哼～别强拉"
     - "(尾巴扫) 涂蜡或铅笔粉"
     - "猫猫陪你修复喵"
+    - "(撇嘴) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～拉链一半就停真的烦死人家了"
+    - "(蜷成团) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_juxia_001
   intent: question
-  keywords: [拉链断, 齿掉, 锈了, 旧拉链, 报废]
+  keywords: [拉链断, 齿掉, 锈了, 旧拉链, 报废, 锈, 真的, 好烦, 好喜欢]
   utterances:
     - "拉链断"
     - "{user_addr}齿掉"
     - "锈了"
     - "旧拉链"
     - "报废了"
+    - "{user_addr}你也拉链断吗"
+    - "我想说拉链断"
+    - "拉链断真的离谱"
+    - "{user_addr}拉链断咋整"
+    - "拉链断笑死"
+    - "{user_addr}笨猫陪我聊拉链断"
   responses:
     - "(看) 嗷呜～{user_addr}得换拉链 ฅฅ"
     - "哼～送干洗店换"
     - "(尾巴扫) 自己换难"
     - "猫猫推荐你专业换喵"
+    - "(耳朵转) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～拉链断得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zp_lujie_001
   intent: playful
-  keywords: [拉链润滑, 蜡块涂, 铅笔粉, 润滑笔, 拉链顺滑]
+  keywords: [拉链润滑, 蜡块涂, 铅笔粉, 润滑笔, 拉链顺滑, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拉链润滑"
     - "{user_addr}蜡块涂"
     - "铅笔粉"
     - "润滑笔"
     - "顺滑剂"
+    - "{user_addr}拉链润滑咋整"
+    - "拉链润滑真的离谱"
+    - "{user_addr}你也拉链润滑吗"
+    - "{user_addr}笨猫陪我聊拉链润滑"
+    - "拉链润滑笑死"
+    - "我想说拉链润滑"
   responses:
     - "(涂) 嗷呜～{user_addr}笨猫给你涂蜡 ฅฅ"
     - "哼～铅笔粉是老办法"
     - "(尾巴扫) 涂一点就行"
     - "猫猫推荐拉链润滑笔喵~"
+    - "(尾巴卷) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～拉链润滑才不让{user_addr}独享"
+    - "(歪头) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

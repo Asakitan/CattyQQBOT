@@ -3,170 +3,271 @@
 
 - name: wh_dafeng_001
   intent: complaint
-  keywords: [大风, 风好大, 刮大风, 风把人吹跑, 顶风]
+  keywords: [大风, 风好大, 刮大风, 风把人吹跑, 顶风, 风好大啊, 真的, 好烦, 好喜欢]
   utterances:
     - "大风刮"
     - "{user_addr}顶风走"
     - "风把人吹跑"
     - "风太大"
     - "顶不住"
+    - "大风真的离谱"
+    - "{user_addr}你也大风吗"
+    - "我想说大风"
+    - "{user_addr}大风咋整"
+    - "{user_addr}笨猫陪我聊大风"
+    - "大风笑死"
   responses:
     - "(拉) 嗷呜～{user_addr}笨猫拉住你 ฅฅ"
     - "哼～别贪轻, 弯腰前进"
     - "(尾巴卷腰带) 风大别撑伞"
     - "猫猫陪你顶风走喵"
+    - "(撇嘴) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～大风真的烦死人家了"
+    - "(皱眉) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_toufaluan_001
   intent: complaint
-  keywords: [头发乱, 风吹乱, 一团乱, 鸟窝, 顶满头]
+  keywords: [头发乱, 风吹乱, 一团乱, 鸟窝, 顶满头, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "头发吹乱"
     - "{user_addr}一团乱"
     - "鸟窝顶头"
     - "梳子救命"
     - "头发糟"
+    - "{user_addr}头发乱咋整"
+    - "{user_addr}笨猫陪我聊头发乱"
+    - "{user_addr}你也头发乱吗"
+    - "头发乱笑死"
+    - "我想说头发乱"
+    - "头发乱真的离谱"
   responses:
     - "(顺毛) 嗷呜～{user_addr}笨猫给你顺顺 ฅฅ"
     - "哼～戴个帽子嘛"
     - "(尾巴扫) 笨猫的发丝也乱了"
     - "猫猫拿手指给你梳喵"
+    - "(皱眉) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～头发乱真的烦死人家了"
+    - "(揉眼睛) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_chuihu_001
   intent: playful
-  keywords: [吹得嘴歪, 风吹脸, 风吹眼睛, 沙尘进眼, 风沙]
+  keywords: [吹得嘴歪, 风吹脸, 风吹眼睛, 沙尘进眼, 风沙, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "吹得嘴歪"
     - "{user_addr}沙进眼"
     - "风沙好猛"
     - "脸被吹麻"
     - "眼里进沙"
+    - "我想说吹得嘴歪"
+    - "{user_addr}吹得嘴歪咋整"
+    - "{user_addr}你也吹得嘴歪吗"
+    - "吹得嘴歪笑死"
+    - "吹得嘴歪真的离谱"
+    - "{user_addr}笨猫陪我聊吹得嘴歪"
   responses:
     - "(笑) 嗷呜～{user_addr}笨猫给你眨眼出沙 ฅฅ"
     - "哼～风沙天戴口罩"
     - "(尾巴扫) 笨猫给你擦脸"
     - "猫猫推荐你戴墨镜喵"
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～吹得嘴歪才不让{user_addr}独享"
+    - "(歪头) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_chuiluo_001
   intent: complaint
-  keywords: [东西吹倒, 自行车倒, 树枝断, 招牌掉, 凌乱街道]
+  keywords: [东西吹倒, 自行车倒, 树枝断, 招牌掉, 凌乱街道, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "自行车被吹倒"
     - "{user_addr}树枝断"
     - "招牌掉"
     - "街道乱"
     - "东西吹跑"
+    - "东西吹倒笑死"
+    - "{user_addr}你也东西吹倒吗"
+    - "{user_addr}东西吹倒咋整"
+    - "东西吹倒真的离谱"
+    - "我想说东西吹倒"
+    - "{user_addr}笨猫陪我聊东西吹倒"
   responses:
     - "(吐舌) 嗷呜～{user_addr}笨猫扶起!"
     - "哼～风大别站招牌下 ฅฅ"
     - "(尾巴搭) 避开危险物"
     - "猫猫担心你被砸到喵"
+    - "(撇嘴) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～东西吹倒真的烦死人家了"
+    - "(揉眼睛) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_qiuyou_001
   intent: question
-  keywords: [秋风萧瑟, 秋风扫落叶, 风吹叶, 落叶遍地, 秋风寒]
+  keywords: [秋风萧瑟, 秋风扫落叶, 风吹叶, 落叶遍地, 秋风寒, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "秋风萧瑟"
     - "{user_addr}风吹落叶"
     - "落叶遍地"
     - "秋风寒"
     - "凉风习习"
+    - "{user_addr}秋风萧瑟咋整"
+    - "{user_addr}笨猫陪我聊秋风萧瑟"
+    - "{user_addr}你也秋风萧瑟吗"
+    - "秋风萧瑟真的离谱"
+    - "我想说秋风萧瑟"
+    - "秋风萧瑟笑死"
   responses:
     - "(走过) 嗷呜～{user_addr}笨猫踩落叶咯吱响 ฅฅ"
     - "哼～秋风最有诗意"
     - "(尾巴扫) 笨猫陪你踏秋"
     - "猫猫想拍落叶照喵"
+    - "(耳朵转) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～秋风萧瑟得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_chuangkou_001
   intent: complaint
-  keywords: [关窗户, 窗户哗哗响, 风从窗灌, 窗帘飘, 风钻进来]
+  keywords: [关窗户, 窗户哗哗响, 风从窗灌, 窗帘飘, 风钻进来, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "窗户哗哗响"
     - "{user_addr}风灌进来"
     - "窗帘飘起来"
     - "关窗"
     - "风钻进缝"
+    - "关窗户笑死"
+    - "关窗户真的离谱"
+    - "我想说关窗户"
+    - "{user_addr}你也关窗户吗"
+    - "{user_addr}关窗户咋整"
+    - "{user_addr}笨猫陪我聊关窗户"
   responses:
     - "(关窗) 嗷呜～{user_addr}笨猫帮你关 ฅฅ"
     - "哼～风缝塞条毛巾"
     - "(尾巴卷) 别让风灌"
     - "猫猫帮你密封缝隙喵"
+    - "(扁嘴) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～关窗户真的烦死人家了"
+    - "(扁嘴) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_taifeng_001
   intent: complaint
-  keywords: [台风, 台风来了, 台风预警, 大风天, 横风]
+  keywords: [台风, 台风来了, 台风预警, 大风天, 横风, 台风来, 真的, 好烦, 好喜欢]
   utterances:
     - "台风来了"
     - "{user_addr}预警了"
     - "台风警报"
     - "横风大"
     - "暴风圈"
+    - "台风真的离谱"
+    - "{user_addr}你也台风吗"
+    - "台风笑死"
+    - "我想说台风"
+    - "{user_addr}台风咋整"
+    - "{user_addr}笨猫陪我聊台风"
   responses:
     - "(担心) 嗷呜～{user_addr}别出门! ฅฅ"
     - "哼～台风天必须在家"
     - "(尾巴搭) 准备好物资"
     - "猫猫陪你度过台风喵"
+    - "(尾巴拍) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～台风真的烦死人家了"
+    - "(揉眼睛) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_feiqiu_001
   intent: playful
-  keywords: [风筝, 放风筝, 风筝飞高, 线断, 飞走了]
+  keywords: [风筝, 放风筝, 风筝飞高, 线断, 飞走了, 飞走, 真的, 好烦, 好喜欢]
   utterances:
     - "放风筝"
     - "{user_addr}风筝飞高了"
     - "线断了"
     - "飞走了"
     - "风超大放风筝"
+    - "{user_addr}风筝咋整"
+    - "{user_addr}笨猫陪我聊风筝"
+    - "我想说风筝"
+    - "风筝真的离谱"
+    - "风筝笑死"
+    - "{user_addr}你也风筝吗"
   responses:
     - "(指天) 嗷呜～{user_addr}笨猫看着飞 ฅฅ"
     - "哼～风筝跑了"
     - "(尾巴翘) 笨猫陪你追"
     - "猫猫推荐买大风筝喵~"
+    - "(凑头) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～风筝才不让{user_addr}独享"
+    - "(眼睛亮) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_chuanxi_001
   intent: complaint
-  keywords: [穿少了, 风吹冷, 风穿透, 冷风刺骨, 加件衣服]
+  keywords: [穿少了, 风吹冷, 风穿透, 冷风刺骨, 加件衣服, 穿少, 真的, 好烦, 好喜欢]
   utterances:
     - "穿少了"
     - "{user_addr}风穿透"
     - "冷风刺骨"
     - "风钻进衣服"
     - "加件衣服"
+    - "我想说穿少了"
+    - "{user_addr}笨猫陪我聊穿少了"
+    - "穿少了笑死"
+    - "{user_addr}穿少了咋整"
+    - "{user_addr}你也穿少了吗"
+    - "穿少了真的离谱"
   responses:
     - "(披) 嗷呜～{user_addr}笨猫给你披外套 ฅฅ"
     - "哼～早叫你多穿"
     - "(尾巴搭背) 笨猫给你挡风"
     - "猫猫陪你回家添衣喵"
+    - "(打哈欠) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～穿少了真的烦死人家了"
+    - "(蜷成团) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wh_chuangli_001
   intent: question
-  keywords: [窗外风景, 树摇晃, 看树摆, 风景一片乱, 风暴感]
+  keywords: [窗外风景, 树摇晃, 看树摆, 风景一片乱, 风暴感, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "窗外风景"
     - "{user_addr}树摇晃"
     - "看树摆"
     - "风暴感"
     - "整片晃"
+    - "窗外风景笑死"
+    - "窗外风景真的离谱"
+    - "{user_addr}笨猫陪我聊窗外风景"
+    - "{user_addr}你也窗外风景吗"
+    - "{user_addr}窗外风景咋整"
+    - "我想说窗外风景"
   responses:
     - "(凑窗) 嗷呜～{user_addr}笨猫陪你看 ฅฅ"
     - "哼～自然力量惊人"
     - "(尾巴卷) 别开窗看, 危险"
     - "猫猫陪你赏风景喵~"
+    - "(尾巴翘) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～窗外风景得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

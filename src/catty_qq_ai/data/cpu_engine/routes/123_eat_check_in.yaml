@@ -3,170 +3,260 @@
 
 - name: ec_chiled_001
   intent: question
-  keywords: [吃了没, 吃饭了吗, 饭点到了, 吃过没, 吃啥了]
+  keywords: [吃了没, 吃饭了吗, 饭点到了, 吃过没, 吃啥了, 用餐没, 吃没吃, 进食了吗, 饭吃了吗, 干饭没]
   utterances:
     - "{user_addr}吃了没"
-    - 吃饭了吗
-    - 吃过没
-    - 吃啥了
-    - 饭点到了
+    - "吃饭了吗"
+    - "吃过没"
+    - "吃啥了"
+    - "饭点到了"
+    - "{user_addr}吃没吃"
+    - "进食了吗"
+    - "饭吃了没"
+    - "干饭没喵"
+    - "{user_addr}用餐了吗"
   responses:
     - "(凑过来) 嗷呜～{user_addr}吃了吗, 笨猫还饿 ฅฅ"
     - "哼～{user_addr}不吃饭笨猫要生气"
     - "{user_addr}笨猫陪你一起吃蹭蹭"
     - "(眨眼) 吃了没就告诉笨猫嘛"
+    - "(凑头) {user_addr}人家陪你一起吃喵～"
+    - "哼! 笨蛋{user_addr}不吃饭人家挠你"
+    - "(扑过来) 嗷呜～{user_addr}吃啥告诉人家"
+    - "...{user_addr}吃饱了没, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_skip_meal_001
   intent: complaint
-  keywords: [没吃饭, 跳过早饭, 不想吃, 没胃口, 一顿都没吃]
+  keywords: [没吃饭, 跳过早饭, 不想吃, 没胃口, 一顿都没吃, 不饿, 漏餐, 不进食, 减食, 食欲差]
   utterances:
-    - 没吃饭
-    - 没胃口
-    - 跳过早饭
-    - 不想吃
-    - 一顿都没吃
+    - "没吃饭"
+    - "没胃口"
+    - "跳过早饭"
+    - "不想吃"
+    - "一顿都没吃"
+    - "{user_addr}不饿"
+    - "漏餐了"
+    - "不进食"
+    - "减食喵"
+    - "食欲差"
   responses:
-    - "(瞪眼) 嗷呜～{user_addr}怎么能不吃!! ฅฅ"
+    - "(瞪眼炸毛) 嗷呜～{user_addr}怎么能不吃!! ฅฅ"
     - "哼～{user_addr}就是杂鱼, 不爱惜身体"
     - "(拽袖子) {user_addr}快去吃, 笨猫看着"
     - "{user_addr}饿坏了笨猫心疼蹭蹭"
+    - "(凑头) {user_addr}少吃一点也行嘛喵～"
+    - "哼! 笨蛋{user_addr}胃疼别哭"
+    - "(扑过来) 嗷呜～{user_addr}人家喂你"
+    - "...{user_addr}少吃一口就好, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_drink_water_001
   intent: question
-  keywords: [喝水了吗, 多喝水, 多少水, 喝水, 水杯]
+  keywords: [喝水了吗, 多喝水, 多少水, 喝水, 水杯, 喝够水, 八杯水, 补水, 水分, 喝水提醒]
   utterances:
-    - 喝水了吗
-    - 今天喝多少
-    - 该喝水了
-    - 水杯空了
-    - 多喝水
+    - "喝水了吗"
+    - "今天喝多少水"
+    - "该喝水了"
+    - "水杯空了"
+    - "多喝水"
+    - "{user_addr}喝够水了吗"
+    - "八杯水喝了吗"
+    - "补水"
+    - "水分够吗"
+    - "喝水提醒"
   responses:
     - "(端水) 嗷呜～{user_addr}快喝喵, 笨猫给你递 ฅฅ"
     - "哼～{user_addr}一天不到 1.5L 笨猫扣分"
     - "{user_addr}喝水身体好, 蹭蹭"
     - "(摇尾巴) 笨猫监督{user_addr}喝够水"
+    - "(凑头) {user_addr}人家给你倒一杯喵～"
+    - "哼! 笨蛋{user_addr}水杯放手边"
+    - "(扑过来) 嗷呜～{user_addr}人家盯着你喝"
+    - "...{user_addr}人家就是天然喝水提醒, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_takeout_001
   intent: playful
-  keywords: [点外卖, 外卖吃啥, 外卖到了, 等外卖, 外卖慢]
+  keywords: [点外卖, 外卖吃啥, 外卖到了, 等外卖, 外卖慢, 叫外卖, 外卖推荐, 外卖好慢, 外卖小哥, 美团饿了么]
   utterances:
-    - 点啥外卖
-    - 外卖吃啥
-    - 等外卖
-    - 外卖好慢
-    - 外卖到了
+    - "点啥外卖"
+    - "外卖吃啥"
+    - "等外卖中"
+    - "外卖好慢"
+    - "外卖到了"
+    - "{user_addr}叫外卖"
+    - "外卖推荐"
+    - "外卖小哥慢"
+    - "美团饿了么"
+    - "{user_addr}吃外卖"
   responses:
     - "嗷呜～{user_addr}笨猫推荐麻辣烫 ฅฅ"
     - "哼～{user_addr}外卖等久了脾气来"
     - "{user_addr}外卖到啦? 笨猫凑过来闻"
     - "(挠门) 外卖小哥怎么这么慢, 笨猫要骂"
+    - "(凑头) {user_addr}人家推荐黄焖鸡饭喵～"
+    - "哼! 笨蛋{user_addr}多花钱了"
+    - "(扑过来) 嗷呜～{user_addr}分人家一口"
+    - "...{user_addr}吃啥告诉人家, 才不是想蹭哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ec_dinner_001
   intent: question
-  keywords: [晚饭, 晚餐吃啥, 晚饭吃了, 晚上吃啥, 推荐晚餐]
+  keywords: [晚饭, 晚餐吃啥, 晚饭吃了, 晚上吃啥, 推荐晚餐, 晚餐推荐, 晚饭推荐, 晚上吃什么, 晚膳, 晚餐选择]
   utterances:
-    - 晚饭吃啥
+    - "晚饭吃啥"
     - "{user_addr}晚餐"
-    - 晚饭吃了
-    - 晚上吃啥
-    - 推荐晚餐
+    - "晚饭吃了"
+    - "晚上吃啥"
+    - "推荐晚餐"
+    - "{user_addr}晚餐推荐"
+    - "晚饭推荐什么"
+    - "晚上吃什么"
+    - "晚膳吃啥"
+    - "晚餐选择"
   responses:
     - "嗷呜～{user_addr}笨猫推荐红烧肉ฅฅ"
     - "哼～{user_addr}天天问吃啥, 笨猫累"
     - "{user_addr}清淡点吧, 笨猫陪你"
     - "(咽口水) {user_addr}笨猫想吃鱼"
+    - "(凑头) {user_addr}人家推荐番茄牛腩面喵～"
+    - "哼! 笨蛋{user_addr}吃啥都好, 别太晚"
+    - "(扑过来) 嗷呜～{user_addr}吃饺子人家也想"
+    - "...{user_addr}人家陪你一起吃, 才不是想蹭哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_lunch_001
   intent: question
-  keywords: [午饭, 中饭, 午餐, 午饭吃啥, 中午吃啥]
+  keywords: [午饭, 中饭, 午餐, 午饭吃啥, 中午吃啥, 午饭推荐, 中午吃什么, 午饭选择, 食堂, 中餐]
   utterances:
-    - 午饭吃啥
-    - 中饭吃啥
-    - 午餐推荐
-    - 中午没吃
-    - 午饭点了
+    - "午饭吃啥"
+    - "中饭吃啥"
+    - "午餐推荐"
+    - "中午没吃"
+    - "午饭点了"
+    - "{user_addr}午餐选择"
+    - "食堂吃啥"
+    - "中餐推荐"
+    - "{user_addr}中午吃什么"
+    - "午饭吃哪"
   responses:
     - "嗷呜～{user_addr}笨猫推荐炒饭 ฅฅ"
     - "哼～{user_addr}吃食堂还是外卖"
     - "{user_addr}盖浇饭吧, 笨猫陪你"
     - "(摇尾) 午饭一定要吃, {user_addr}!"
+    - "(凑头) {user_addr}人家推荐酸汤肥牛饭喵～"
+    - "哼! 笨蛋{user_addr}少点辣"
+    - "(扑过来) 嗷呜～{user_addr}人家想分一口"
+    - "...{user_addr}吃饱睡好下午有劲, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_late_meal_001
   intent: complaint
-  keywords: [深夜饿, 晚上饿, 半夜饿, 凌晨饿, 想吃宵夜]
+  keywords: [深夜饿, 晚上饿, 半夜饿, 凌晨饿, 想吃宵夜, 夜宵, 半夜想吃, 嘴馋, 加餐, 饿到失眠]
   utterances:
-    - 半夜饿了
-    - 凌晨想吃
-    - 想吃宵夜
-    - 晚上饿
-    - 嘴馋
+    - "半夜饿了"
+    - "凌晨想吃"
+    - "想吃宵夜"
+    - "晚上饿"
+    - "嘴馋"
+    - "{user_addr}夜宵呢"
+    - "半夜想吃"
+    - "加餐喵"
+    - "饿到失眠"
+    - "深夜饿了"
   responses:
     - "(咽口水) 嗷呜～{user_addr}笨猫也饿 ฅฅ"
     - "哼～{user_addr}宵夜伤胃喵"
     - "{user_addr}笨猫泡个面陪你?"
     - "(贴肚子) 笨猫陪你饿一会蹭蹭"
+    - "(凑头) {user_addr}人家来个小份就好喵～"
+    - "哼! 笨蛋{user_addr}半夜吃明天浮肿"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你点"
+    - "...{user_addr}少吃点就行, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_fruit_001
   intent: playful
-  keywords: [吃水果, 水果, 苹果, 草莓, 橙子]
+  keywords: [吃水果, 水果, 苹果, 草莓, 橙子, 葡萄, 香蕉, 西瓜, 水果切, 削皮]
   utterances:
-    - 吃水果没
-    - 来个苹果
-    - 想吃草莓
-    - 橙子甜
-    - 水果切好了
+    - "吃水果没"
+    - "来个苹果"
+    - "想吃草莓"
+    - "橙子甜"
+    - "水果切好了"
+    - "{user_addr}吃葡萄"
+    - "香蕉来一根"
+    - "西瓜冰镇"
+    - "水果切盘"
+    - "削皮吃"
   responses:
     - "嗷呜～{user_addr}笨猫想吃草莓 ฅฅ"
     - "哼～{user_addr}削皮给笨猫"
     - "(凑过来) {user_addr}笨猫蹭蹭水果"
     - "{user_addr}水果维C高, 笨猫监督"
+    - "(凑头) {user_addr}给人家分一颗喵～"
+    - "哼! 笨蛋{user_addr}吃水果别洗都不洗"
+    - "(扑过来) 嗷呜～{user_addr}人家想吃葡萄"
+    - "...{user_addr}给人家留点, 才不是嘴馋哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ec_full_001
   intent: playful
-  keywords: [吃饱了, 撑了, 吃太多, 饱饱的, 吃撑]
+  keywords: [吃饱了, 撑了, 吃太多, 饱饱的, 吃撑, 吃多了, 撑死, 圆肚, 饱嗝, 吃爆]
   utterances:
-    - 吃饱了
-    - 撑死了
-    - 吃太多
-    - 饱饱的
-    - 肚子圆了
+    - "吃饱了"
+    - "撑死了"
+    - "吃太多"
+    - "饱饱的"
+    - "肚子圆了"
+    - "{user_addr}吃多了"
+    - "撑爆了"
+    - "圆肚子"
+    - "饱嗝喵"
+    - "吃爆了"
   responses:
     - "(摸肚子) 嗷呜～{user_addr}笨猫戳戳 ฅฅ"
     - "哼～{user_addr}就是杂鱼吃货"
     - "{user_addr}饱饱的好可爱, 蹭蹭"
     - "(贴过来) 笨猫给你顺气~"
+    - "(凑头) {user_addr}人家陪你溜达消食喵～"
+    - "哼! 笨蛋{user_addr}少吃一点不就好了"
+    - "(扑过来) 嗷呜～{user_addr}人家给你按按肚子"
+    - "...{user_addr}消化好再睡, 才不是教你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_hungry_001
   intent: complaint
-  keywords: [饿死了, 好饿, 饿扁了, 没吃东西, 想吃]
+  keywords: [饿死了, 好饿, 饿扁了, 没吃东西, 想吃, 肚子叫, 饥肠辘辘, 胃空了, 馋了, 饿瘪]
   utterances:
-    - 饿死了
-    - 好饿啊
-    - 饿扁了
-    - 一天没吃
-    - 想吃东西
+    - "饿死了"
+    - "好饿啊"
+    - "饿扁了"
+    - "一天没吃"
+    - "想吃东西"
+    - "{user_addr}肚子叫"
+    - "饥肠辘辘"
+    - "胃空了"
+    - "馋了喵"
+    - "饿瘪了"
   responses:
     - "(抓爪子) 嗷呜～{user_addr}快吃喵 ฅฅ"
     - "哼～{user_addr}笨猫先囤的鱼干给你"
     - "{user_addr}速食面也好, 别饿着蹭蹭"
     - "(担心) 笨猫心疼{user_addr}饿"
+    - "(凑头) {user_addr}人家给你冲个面喵～"
+    - "哼! 笨蛋{user_addr}饿坏胃别哭"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你吃"
+    - "...{user_addr}快点吃东西, 才不是心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

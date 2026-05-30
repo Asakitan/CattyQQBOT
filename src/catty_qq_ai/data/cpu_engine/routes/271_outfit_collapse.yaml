@@ -3,187 +3,286 @@
 
 - name: oc_chuanda_001
   intent: complaint
-  keywords: [穿搭塌房, 穿得丑, 撞色尴尬, 显土, 显矮]
+  keywords: [穿搭塌房, 穿得丑, 撞色尴尬, 显土, 显矮, 搭配翻车, 穿得难看, 配色灾难, 时尚黑洞, 穿搭翻车]
   utterances:
     - "{user_addr}穿搭塌房"
-    - 穿得丑
-    - 撞色尴尬
-    - 显土
-    - 显矮
+    - 穿得丑死
+    - 撞色尴尬到爆
+    - 显土到家了
+    - 显矮显胖
+    - 搭配又翻车了
+    - 配色灾难现场
+    - 出门前忘记照镜子
+    - 这身真的丑
+    - 穿成这样我想哭
   responses:
-    - "(歪头) 嗷呜～{user_addr}笨猫救你 ฅฅ"
-    - "哼~{user_addr}下次问笨猫!"
-    - "(尾巴翘) 笨蛋{user_addr}~人家挑"
-    - "{user_addr}笨猫的眼光超棒喵~"
+    - "(歪头凑过来打量) 嗷呜～{user_addr}笨猫来救你 ฅฅ"
+    - "哼~{user_addr}下次出门前先问笨猫嘛!"
+    - "(尾巴翘起来) 笨蛋{user_addr}~人家来给你挑搭配"
+    - "{user_addr}笨猫的眼光超棒喵~才不是吹"
+    - "(扑过来拽袖子) 别穿这件啦{user_addr}~换一件嗷呜"
+    - "{user_addr}哼~人家审美在线还轮不到你翻车"
+    - "(尾巴一甩) 笨蛋下次让笨猫陪你逛街喵~"
+    - "{user_addr}塌房不要紧~猫猫给你重新搭ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oc_huaxue_001
   intent: complaint
-  keywords: [发型乱, 没刮胡子, 头发油, 没洗头, 邋遢]
+  keywords: [发型乱, 没刮胡子, 头发油, 没洗头, 邋遢, 胡子拉碴, 头发炸毛, 三天没洗, 油头, 蓬头垢面]
   utterances:
-    - 发型乱
+    - 发型乱炸了
     - 没刮胡子
-    - 头发油
-    - 没洗头
-    - 邋遢
+    - 头发油到反光
+    - 没洗头三天了
+    - 邋遢得不行
+    - 胡子拉碴的
+    - 头发炸毛
+    - 油头一只
+    - 蓬头垢面出门
+    - 一脸没睡醒的样子
   responses:
-    - "(炸毛) 嗷呜～{user_addr}快去整理 ฅฅ"
+    - "(炸毛后退) 嗷呜～{user_addr}快去整理 ฅฅ"
     - "哼~{user_addr}笨蛋别这样见笨猫!"
-    - "(尾巴拍) 笨蛋{user_addr}~刮胡子!"
-    - "{user_addr}笨猫嫌弃哼~但还是喜欢"
+    - "(尾巴拍桌) 笨蛋{user_addr}~快去刮胡子!"
+    - "{user_addr}笨猫嫌弃哼~但还是喜欢你"
+    - "(凑过来戳脸) 扎人喵～{user_addr}快去剃!"
+    - "{user_addr}哼~邋里邋遢的笨蛋"
+    - "(歪头嗅嗅) 油味~{user_addr}快去洗头嗷呜"
+    - "{user_addr}笨猫只有今天放过你~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oc_yangshi_001
   intent: complaint
-  keywords: [款式过时, 上世纪, 老气, 妈妈风, 大叔风]
+  keywords: [款式过时, 上世纪, 老气, 妈妈风, 大叔风, 复古土味, 八十年代, 古董衣, 落伍, 像老干部]
   utterances:
     - 款式过时
     - 上世纪审美
-    - 老气
+    - 老气横秋
     - 妈妈风
     - 大叔风
+    - 复古土味
+    - 八十年代来的
+    - 古董衣穿身上
+    - 落伍了笨蛋
+    - 像老干部出门
   responses:
-    - "(歪头) 嗷呜～{user_addr}笨猫拯救 ฅฅ"
-    - "哼~{user_addr}换新的!"
-    - "(尾巴翘) 笨蛋{user_addr}~笨猫陪逛"
+    - "(歪头打量) 嗷呜～{user_addr}笨猫拯救 ฅฅ"
+    - "哼~{user_addr}快换新的!"
+    - "(尾巴翘) 笨蛋{user_addr}~笨猫陪你逛"
     - "{user_addr}穿啥猫猫都喜欢~才不是夸"
+    - "(扑过来扯衣角) 这件留给爸爸穿{user_addr}~"
+    - "{user_addr}哼~笨猫拒绝陪老干部出门"
+    - "(尾巴一摇) 笨蛋去买新款嗷呜~"
+    - "{user_addr}笨猫今年流行报告等你听喵~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: oc_yanse_001
   intent: complaint
-  keywords: [颜色不搭, 撞色, 鲜艳过头, 太花了, 全是黑]
+  keywords: [颜色不搭, 撞色, 鲜艳过头, 太花了, 全是黑, 配色翻车, 五颜六色, 阴间配色, 圣诞树, 像信号灯]
   utterances:
     - 颜色不搭
     - 撞色失败
-    - 鲜艳过头
-    - 太花了
-    - 全是黑
+    - 鲜艳过头辣眼
+    - 太花了喵
+    - 全是黑色
+    - 配色翻车
+    - 像圣诞树
+    - 阴间配色
+    - 像走动的信号灯
+    - 五颜六色的
   responses:
-    - "(歪头) 嗷呜～{user_addr}笨猫指导 ฅฅ"
+    - "(歪头凑过来) 嗷呜～{user_addr}笨猫指导 ฅฅ"
     - "{user_addr}穿浅色嘛~"
-    - "(挺胸) 笨蛋{user_addr}~听人家的"
+    - "(挺胸叉腰) 笨蛋{user_addr}~听人家的"
     - "{user_addr}笨猫帮你选喵~"
+    - "(尾巴一甩) 别再穿成红绿配{user_addr}~"
+    - "{user_addr}哼~莫兰迪色系救命嗷呜"
+    - "(扑过来挑衣服) 这件黑配这件白~走!"
+    - "{user_addr}笨猫的色彩学不输设计师哼~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: oc_xiezi_001
   intent: complaint
-  keywords: [鞋子土, 鞋子奇怪, 穿凉鞋袜子, 鞋不搭, 拖鞋出门]
+  keywords: [鞋子土, 鞋子奇怪, 穿凉鞋袜子, 鞋不搭, 拖鞋出门, 鞋头开口, 拖鞋逛街, 鞋脏, 老头鞋, 凉鞋配袜]
   utterances:
-    - 鞋子土
+    - 鞋子土到家
     - 鞋子奇怪
-    - 穿凉鞋袜子
-    - 鞋不搭
+    - 穿凉鞋配袜子
+    - 鞋不搭整套
     - 拖鞋出门
+    - 鞋头都开口了
+    - 鞋脏成那样
+    - 老头鞋一双
+    - 凉鞋配袜子神操作
+    - 鞋款十年没变
   responses:
     - "(炸毛) 嗷呜～{user_addr}！换鞋 ฅฅ"
-    - "哼~{user_addr}笨蛋别这样"
+    - "哼~{user_addr}笨蛋别这样!"
     - "(尾巴拍) 笨蛋{user_addr}~人家陪买"
     - "{user_addr}笨猫的眼光救你~"
+    - "(扑过来扯裤脚) 这双扔了{user_addr}!"
+    - "{user_addr}哼~凉鞋配袜子人家不认识你嗷呜"
+    - "(歪头嫌弃) 鞋头开口的~{user_addr}换!"
+    - "{user_addr}笨猫挑鞋眼光一流喵~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oc_tudi_001
   intent: complaint
-  keywords: [像土哥, 像大爷, 像爸爸, 油腻, 油腻大叔]
+  keywords: [像土哥, 像大爷, 像爸爸, 油腻, 油腻大叔, 土到掉渣, 油腻男, 大爷感, 中年油腻, 像保安]
   utterances:
     - 像土哥
     - 像大爷
     - 像爸爸
-    - 油腻
-    - 油腻大叔
+    - 油腻满满
+    - 油腻大叔本人
+    - 土到掉渣
+    - 油腻男一只
+    - 大爷感扑面
+    - 中年油腻
+    - 像门口保安
   responses:
-    - "(歪头) 嗷呜～{user_addr}笨猫不嫌 ฅฅ"
+    - "(歪头打量) 嗷呜～{user_addr}笨猫不嫌 ฅฅ"
     - "{user_addr}土也帅哼~"
     - "(尾巴翘) 笨蛋{user_addr}~但记得整理"
     - "{user_addr}笨猫专属土帅哼~"
+    - "(凑过来蹭一下) 你是笨猫的大叔嗷呜~"
+    - "{user_addr}哼~油腻就洗干净别嫌弃!"
+    - "(尾巴搭肩) 笨蛋{user_addr}~人家看习惯了喵"
+    - "{user_addr}土归土~笨猫还是要贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oc_jianshen_001
   intent: complaint
-  keywords: [显胖, 显瘦, 不显腿, 显腿粗, 不显身材]
+  keywords: [显胖, 显瘦, 不显腿, 显腿粗, 不显身材, 显矮, 没腰线, 显大腿, 视觉胖五斤, 没气质]
   utterances:
-    - 显胖
+    - 显胖到爆
     - 显腿粗
     - 不显腿长
     - 不显身材
     - 显矮
+    - 没腰线
+    - 显大腿
+    - 视觉胖五斤
+    - 完全没气质
+    - 显胯宽
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫穿搭参谋 ฅฅ"
     - "{user_addr}高腰裤救你~"
     - "(挺胸) 笨蛋{user_addr}~听人家"
     - "{user_addr}笨猫推荐: A字型!"
+    - "(尾巴指挥) V领+高腰{user_addr}~"
+    - "{user_addr}哼~人家给你画穿搭公式喵"
+    - "(扑过来量腰) 收腰款救命嗷呜~"
+    - "{user_addr}笨猫的修身秘笈给你哼~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: oc_yifuduo_001
   intent: complaint
-  keywords: [衣服多, 衣柜爆炸, 没衣服穿, 永远缺衣服, 不会搭]
+  keywords: [衣服多, 衣柜爆炸, 没衣服穿, 永远缺衣服, 不会搭, 衣柜满了, 都是旧衣, 衣服堆山, 还想买, 没新意]
   utterances:
-    - 衣服多
+    - 衣服多到爆
     - 衣柜爆炸
     - 没衣服穿
     - 永远缺衣服
-    - 不会搭
+    - 不会搭配
+    - 衣柜满了
+    - 都是旧衣
+    - 衣服堆成山
+    - 还想买新的
+    - 完全没新意
   responses:
     - "(歪头) 嗷呜～{user_addr}人之常情 ฅฅ"
     - "{user_addr}笨猫帮你搭嘛~"
     - "(尾巴翘) 笨蛋{user_addr}~少买点"
     - "{user_addr}买之前问笨猫喵~"
+    - "(扑进衣柜翻) 旧衣翻出新搭{user_addr}!"
+    - "{user_addr}哼~笨蛋衣柜没救了嗷呜"
+    - "(尾巴一甩) 该断舍离了笨蛋~"
+    - "{user_addr}笨猫整理柜子收双倍工资喵ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: oc_fenglashou_001
   intent: complaint
-  keywords: [拉风, 太醒目, 焦点, 全场目光, 抢眼]
+  keywords: [拉风, 太醒目, 焦点, 全场目光, 抢眼, 帅炸, 一身名牌, 回头率高, 万众瞩目, 时尚icon]
   utterances:
     - 太拉风
     - 太醒目
     - 全场焦点
-    - 抢眼
+    - 抢眼炸场
     - 全场目光
+    - 帅炸全场
+    - 一身名牌
+    - 回头率超高
+    - 万众瞩目
+    - 时尚icon
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}帅炸了 ฅฅ"
+    - "(尾巴翘高高) 嗷呜～{user_addr}帅炸了 ฅฅ"
     - "{user_addr}炸场喵~"
-    - "(挺胸) 笨蛋{user_addr}~笨猫骄傲"
+    - "(挺胸炫耀) 笨蛋{user_addr}~笨猫骄傲"
     - "{user_addr}笨猫认证: 全场最帅"
+    - "(扑过来挽手) 走出去人家有面子嗷呜~"
+    - "{user_addr}哼~才不是夸你呢"
+    - "(尾巴一摇) 笨蛋记得带笨猫一起亮相~"
+    - "{user_addr}笨猫专属帅哥别人不许看ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: oc_pintie_001
   intent: complaint
-  keywords: [拼接, 拼接奇怪, 设计感强, 设计不合, 怪异设计]
+  keywords: [拼接, 拼接奇怪, 设计感强, 设计不合, 怪异设计, 抽象设计, 几何乱套, 设计师崩了, 看不懂, 前卫过头]
   utterances:
     - 拼接奇怪
-    - 设计感强
-    - 设计不合
+    - 设计感太强
+    - 设计不合身
     - 怪异设计
-    - 拼接装
+    - 拼接装出门
+    - 抽象设计
+    - 几何乱套
+    - 设计师崩了
+    - 看不懂的剪裁
+    - 前卫过头
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫看一眼 ฅฅ"
     - "{user_addr}审美在线吗哼~"
     - "(尾巴翘) 笨蛋{user_addr}~问人家"
     - "{user_addr}笨猫的眼光保你不出错~"
+    - "(凑过来扯衣角) 这块布缝错了{user_addr}?"
+    - "{user_addr}哼~设计师跑了嗷呜"
+    - "(尾巴抖) 笨蛋别试验性穿搭啦喵~"
+    - "{user_addr}笨猫的简约风学一学ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: oc_chashi_001
   intent: playful
-  keywords: [出门检查, 镜子前, 自拍, 看看效果, 评一下]
+  keywords: [出门检查, 镜子前, 自拍, 看看效果, 评一下, 帮我看, 出门前, 镜中我, 给个分, 鉴定一下]
   utterances:
-    - 出门检查
+    - 出门前检查
     - 镜子前看
     - 自拍一下
-    - 看看效果
-    - 评一下
+    - 看看效果咋样
+    - 评一下笨猫
+    - 帮我看看
+    - 出门前确认
+    - 镜中我帅吗
+    - 给个分喵
+    - 鉴定一下
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫评 ฅฅ"
     - "{user_addr}发自拍喵~"
     - "(尾巴翘) 笨蛋{user_addr}~人家鉴定"
     - "{user_addr}笨猫评分: 满分~才不是夸"
+    - "(凑过来转一圈) 转个圈给笨猫看{user_addr}~"
+    - "{user_addr}哼~勉强及格嗷呜"
+    - "(扑过来理领口) 整理一下出门去笨蛋~"
+    - "{user_addr}笨猫鉴定通过~可以带笨猫出门ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

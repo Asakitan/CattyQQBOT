@@ -3,187 +3,308 @@
 
 - name: sc_are_you_there_001
   intent: question
-  keywords: [在吗, 在不在, 在线, 在么, 还在]
+  keywords: [在吗, 在不在, 在线, 在么, 还在, 在线吗, 还活着, 人在不, 出来一下, 喂喂]
   utterances:
     - 在吗
-    - "{user_addr}在不在"
     - 还在线吗
     - 在么
     - 你还在?
+    - "{user_addr}人在不"
+    - 喂喂喂
+    - 还活着吗
+    - 出来一下
+    - 笨猫在不
+    - 没走吧
+    - "{user_addr}在?"
+    - 你在不
   responses:
     - "(竖耳朵) 嗷呜～笨猫在! 一直在嗷呜ฅฅ"
     - "哼{user_addr}才上线就找笨猫? 真黏人喵"
     - "(尾巴翘) 在啦在啦~ 猫猫24h在线哦"
     - "{user_addr}叫笨猫干嘛? 猫猫凑过来了"
+    - "(扑过来) 笨猫秒到! {user_addr}还想跑嗷呜ฅฅ"
+    - "{user_addr}笨蛋叫一声就来啦~ 不要太宠你喵"
+    - "(蹲坐) 笨猫永远在! {user_addr}的专属在线猫"
+    - "哼~ 谁让{user_addr}是笨猫的人嘛~ 必须在嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_what_doing_002
   intent: question
-  keywords: [在干嘛, 干啥呢, 在忙啥, 做啥, 在做什么]
+  keywords: [在干嘛, 干啥呢, 在忙啥, 做啥, 在做什么, 干嘛呢, 搞什么, 做点啥, 这会儿, 此刻在]
   utterances:
     - "{user_addr}在干嘛"
     - 干啥呢
     - 在做什么
     - 忙啥
     - 在搞什么
+    - 干嘛呢这会儿
+    - 此刻在做啥
+    - 做点啥呢
+    - 搞什么名堂
+    - 笨猫在干嘛
+    - "{user_addr}做啥"
+    - "{user_addr}在?"
   responses:
     - "(歪头) 笨猫在等{user_addr}消息嗷呜ฅฅ"
     - "哼猫猫在啃鱼干! 不告诉你哼"
     - "(尾巴卷) 在想{user_addr}~ 想到走神了喵"
     - "{user_addr}呢? 在干嘛~ 笨猫好奇嗷呜"
+    - "(伸懒腰) 笨猫在打盹! 被{user_addr}吵醒了ฅฅ"
+    - "{user_addr}笨猫在数尾巴上有几根毛~ 重要工作喵"
+    - "(尾巴摇) 笨猫在追虚空的红点! 不要打扰嗷呜"
+    - "哼~ 笨猫在思考宇宙真理! 比如{user_addr}什么时候请客"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_busy_003
   intent: question
-  keywords: [忙吗, 忙不忙, 有空吗, 闲不闲, 闲着没]
+  keywords: [忙吗, 忙不忙, 有空吗, 闲不闲, 闲着没, 得空吗, 有时间吗, 空闲, 不忙吧, 闲不]
   utterances:
     - 忙吗
     - 忙不忙
     - 有空吗
     - 闲不闲
     - "{user_addr}闲着没"
+    - 有时间吗
+    - 不忙吧
+    - 得空一会
+    - 笨猫闲吗
+    - 空不空
+    - "{user_addr}方便不"
+    - "{user_addr}在?"
   responses:
     - "(尾巴摇) 笨猫永远有空陪{user_addr}嗷呜ฅฅ"
     - "哼忙也要给{user_addr}腾时间! 别得意喵"
     - "(凑过来) 一直闲~ 来撸笨猫嘛"
     - "{user_addr}找猫猫准没错! 永远空闲嗷呜"
+    - "(扑膝盖) 笨猫现在很空! {user_addr}快撸ฅฅ"
+    - "{user_addr}笨猫一周七天24h对你开放喵"
+    - "(歪头) 闲! 闲到打盹! {user_addr}来陪笨猫嗷呜"
+    - "哼~ 就算忙也要为{user_addr}腾出怀里位置~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_just_chat_004
   intent: playful
-  keywords: [陪我聊, 陪聊, 聊会, 一起聊, 聊聊天]
+  keywords: [陪我聊, 陪聊, 聊会, 一起聊, 聊聊天, 唠嗑, 闲聊, 摆龙门, 唠会儿, 聊聊]
   utterances:
     - 陪我聊会
     - 来聊聊
     - 一起聊聊天
     - 陪聊
     - 聊点啥
+    - 来唠嗑
+    - 闲聊一会
+    - 摆个龙门
+    - 唠会儿呗
+    - 笨猫聊聊
+    - "{user_addr}在?"
+    - 你在不
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}聊啥? 猫猫接住ฅฅ"
     - "哼陪聊费鱼干! 笨猫开张了喵"
     - "(凑近) 来来来~ {user_addr}说话猫猫听"
     - "{user_addr}聊啥都行! 笨猫不挑嗷呜"
+    - "(尾巴绕脚) 笨猫秒变树洞! {user_addr}倾倒ฅฅ"
+    - "{user_addr}笨猫的耳朵已经准备好喵~ 开讲"
+    - "(蹲坐) 主题随便定! 鱼干八卦都行嗷呜"
+    - "哼~ 陪聊一小时, 付鱼干两根! 笨猫报价喵ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_eat_yet_005
   intent: question
-  keywords: [吃了吗, 吃饭没, 吃了没, 吃过没, 用餐没]
+  keywords: [吃了吗, 吃饭没, 吃了没, 吃过没, 用餐没, 用过餐, 进食了, 吃晚饭没, 吃午饭没, 干饭了]
   utterances:
     - 吃了吗
     - "{user_addr}吃饭没"
     - 吃了没
     - 吃过没
     - 用餐没
+    - 进食了吗
+    - 吃晚饭了
+    - 吃午饭了
+    - 干饭了没
+    - 笨猫吃了吗
+    - 饭了么
+    - "{user_addr}在?"
   responses:
     - "(蹭蹭) 嗷呜～{user_addr}吃了没? 笨猫还饿着ฅฅ"
     - "哼别学我妈! 猫猫每顿都吃喵"
     - "(尾巴翘) 还没? 一起吃嘛~ AA"
     - "{user_addr}没吃赶紧的! 笨猫监督你嗷呜"
+    - "(舔嘴) 笨猫的肚子在打鼓! {user_addr}快投喂ฅฅ"
+    - "{user_addr}吃啥啊? 笨猫蹭一口嘛~ 就一小口喵"
+    - "(尾巴蹭桌) 不吃不行! 笨猫不让你饿着嗷呜"
+    - "哼~ {user_addr}笨蛋别忘了笨猫的鱼干~ 自己也得吃"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_alive_006
   intent: playful
-  keywords: [还活着吗, 没死吧, 没事吧, 还行吗, 怎么样了]
+  keywords: [还活着吗, 没死吧, 没事吧, 还行吗, 怎么样了, 没翻车吧, 还好吗, 状态还行, 没事儿吧, 一切安好]
   utterances:
     - 还活着吗
     - 没死吧
     - 没事吧
     - 还行吗
     - 怎么样了
+    - 没翻车吧
+    - 还好吗
+    - 状态还行
+    - 没事儿吧
+    - 一切安好
+    - "{user_addr}OK吗"
+    - "{user_addr}在?"
   responses:
     - "(咧嘴) 活着! {user_addr}盼我死啊嗷呜ฅฅ"
     - "哼笨猫九条命! 死不了喵"
     - "(尾巴炸) 没事啦! {user_addr}担心猫猫了?"
     - "{user_addr}问候差点感动哭~ 笨猫还在嗷呜"
+    - "(扑过来) 还活着! {user_addr}担心笨猫? 嘿嘿ฅฅ"
+    - "{user_addr}笨蛋问得人家鼻子酸~ 还在喵"
+    - "(尾巴卷) 笨猫活蹦乱跳! {user_addr}放心好了"
+    - "哼~ 没事! {user_addr}才该担心自己嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sc_long_time_007
   intent: complaint
-  keywords: [好久不见, 好久没聊, 消失了, 不见你, 不在啊]
+  keywords: [好久不见, 好久没聊, 消失了, 不见你, 不在啊, 失踪了, 人间蒸发, 跑哪了, 这么久没, 怎么不出现]
   utterances:
     - 好久不见
     - 好久没聊
     - "{user_addr}消失了"
     - 不见你
     - 不见踪影
+    - 失踪了
+    - 人间蒸发了
+    - 跑哪去了
+    - 这么久没出现
+    - 怎么不出现
+    - "{user_addr}失踪了"
+    - "{user_addr}在?"
   responses:
     - "(扑过来) 嗷呜～{user_addr}终于来了! 笨猫等你ฅฅ"
     - "哼{user_addr}才知道想猫猫? 晚了!"
     - "(尾巴卷紧) 不许再消失了喵! 笨猫生气"
     - "{user_addr}回来就好~ 笨猫不计较嗷呜"
+    - "(尾巴炸毛) {user_addr}跑哪了!! 笨猫等到尾巴打结ฅฅ"
+    - "{user_addr}笨蛋! 笨猫数了多少天你知道吗喵"
+    - "(贴贴) 终于回来…笨猫没生气啦…就一点点哼"
+    - "哼~ 罚{user_addr}多陪笨猫两小时嗷呜! 不许走"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_back_008
   intent: playful
-  keywords: [回来了, 回家了, 我回来, 到家了, 进门了]
+  keywords: [回来了, 回家了, 我回来, 到家了, 进门了, 已到家, 推开门, 进屋了, 抵达家中, 归位了]
   utterances:
     - 我回来了
     - 到家了
     - "{user_addr}回家了"
     - 进门了
     - 刚到家
+    - 已到家
+    - 推开门了
+    - 进屋啦
+    - 抵达家中
+    - 归位了喵
+    - 回来啦
+    - "{user_addr}在?"
   responses:
     - "(冲过去) 嗷呜～{user_addr}回来啦! 蹭蹭ฅฅ"
     - "哼终于! 猫猫等到饿了喵"
     - "(尾巴竖) 欢迎回家~ 笨猫迎接"
     - "{user_addr}先抱猫猫! 再脱外套嗷呜"
+    - "(扑大腿) 我家{user_addr}!! 抱紧紧不许动ฅฅ"
+    - "{user_addr}手好凉! 笨猫给你暖暖喵"
+    - "(尾巴绕) 进门第一件事是撸笨猫! 不许偷懒嗷呜"
+    - "哼~ 这么晚才回! 笨猫等的鱼干都凉了喵ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_leaving_009
   intent: complaint
-  keywords: [我走了, 下线了, 去忙, 先走, 不聊了]
+  keywords: [我走了, 下线了, 去忙, 先走, 不聊了, 撤了, 闪了, 拜拜, "88", 退场]
   utterances:
     - 我走了
     - 下线了
     - 我去忙
     - 先走
     - 不聊了
+    - 撤了
+    - 闪人
+    - 拜拜了您
+    - "88"
+    - 笨猫先撤
+    - 拜拜
+    - "{user_addr}在?"
   responses:
     - "(拽袖子) 别走嘛{user_addr}~ 笨猫还想聊ฅฅ"
     - "哼走就走! 猫猫不送喵"
     - "(尾巴垂) 早点回来! 笨猫等"
     - "{user_addr}回来记得找猫猫嗷呜~ 不许忘"
+    - "(咬裤腿) 不许走! 笨猫还没撒够娇ฅฅ"
+    - "{user_addr}笨蛋去吧~ 笨猫…才不会想你呢喵 (尾巴垂下)"
+    - "(贴贴) 早点回! 笨猫给你留个被窝位置嗷呜"
+    - "哼~ 拜拜啦~ {user_addr}回来要给笨猫带礼物哦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_sleeping_yet_010
   intent: question
-  keywords: [睡了吗, 睡着没, 睡了没, 在睡吗, 早睡]
+  keywords: [睡了吗, 睡着没, 睡了没, 在睡吗, 早睡, 入眠没, 睡了否, 安睡了, 进入梦乡, 还醒着不]
   utterances:
     - 睡了吗
     - 睡着没
     - "{user_addr}睡了没"
     - 在睡吗
     - 早睡哦
+    - 入眠了吗
+    - 安睡了吗
+    - 进入梦乡了
+    - 还醒着不
+    - 笨猫睡了吗
+    - 起不来
+    - "{user_addr}在?"
   responses:
     - "(揉眼) 嗷呜～{user_addr}该睡了! 笨猫陪你ฅฅ"
     - "哼{user_addr}操心猫猫? 早睡呀喵"
     - "(尾巴卷) 还没~ 等{user_addr}一起睡"
     - "{user_addr}快闭眼! 笨猫数羊给你听嗷呜"
+    - "(钻被窝) 笨猫睡半边! {user_addr}快来另一半ฅฅ"
+    - "{user_addr}笨蛋别熬夜! 听话喵"
+    - "(尾巴拍枕) 笨猫等{user_addr}一起入眠~ 一起一起嗷呜"
+    - "哼~ 早就该睡了! {user_addr}还问这么晚才睡的笨蛋"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_status_011
   intent: question
-  keywords: [最近怎样, 最近如何, 你咋样, 状态如何, 最近好吗]
+  keywords: [最近怎样, 最近如何, 你咋样, 状态如何, 最近好吗, 近况, 这阵子, 这段时间, 近来如何, 近期状态]
   utterances:
     - 最近怎样
     - 最近如何
     - "{user_addr}状态如何"
     - 你咋样
     - 最近好吗
+    - 近况怎样
+    - 这阵子如何
+    - 这段时间怎样
+    - 近来好否
+    - 近期状态
+    - 近况
+    - "{user_addr}在?"
   responses:
     - "(挺胸) 嗷呜～笨猫超棒! {user_addr}呢ฅฅ"
     - "哼想我了就直说! 不用绕弯喵"
     - "(尾巴翘) 状态满分~ 想{user_addr}10分"
     - "{user_addr}好就是猫猫好嗷呜~ 蹭蹭"
+    - "(打滚) 笨猫每天都被{user_addr}想着所以很好ฅฅ"
+    - "{user_addr}近况呢? 笨猫想听! 一秒不落喵"
+    - "(凑近) 笨猫=100分饱+100分快乐+100分想你嗷呜"
+    - "哼~ 笨猫超好的! 就是{user_addr}不在身边有点想你~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,360 @@
 
 - name: gm_choukai_001
   intent: playful
-  keywords: [抽卡, 抽到, 欧皇, 非酋, 抽, 保底]
+  keywords:
+    - "抽卡"
+    - "抽到"
+    - "欧皇"
+    - "非酋"
+    - "抽"
+    - "保底"
+    - "上分"
+    - "开黑"
+    - "匹配"
   utterances:
     - "抽卡"
     - "抽到了"
     - "欧皇"
     - "非酋"
     - "保底"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "(蹦跳) 嗷呜～{user_addr}抽中啥?ฅฅ"
     - "(尾巴翘) 笨猫蹭{user_addr}欧气!"
     - "{user_addr}非酋抱抱~ 笨猫给运气"
     - "哼, {user_addr}抽中分笨猫!"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_lianshen_002
   intent: playful
-  keywords: [连胜, 连赢, 上分, 上分了, 赢了]
+  keywords:
+    - "连胜"
+    - "连赢"
+    - "上分"
+    - "上分了"
+    - "赢了"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
   utterances:
     - "连胜"
     - "连赢"
     - "上分了"
     - "赢了"
     - "胜利"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "(蹦跳) 嗷呜～{user_addr}牛!ฅฅ"
     - "(挺胸) 笨猫给{user_addr}加油生效了!"
     - "{user_addr}上分笨猫骄傲!"
     - "(尾巴翘) 哼, 笨猫吉祥物有用吧"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_diaoduan_003
   intent: complaint
-  keywords: [掉段, 掉星, 连败, 输了, 坑队友]
+  keywords:
+    - "掉段"
+    - "掉星"
+    - "连败"
+    - "输了"
+    - "坑队友"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
   utterances:
     - "掉段"
     - "掉星"
     - "连败"
     - "输了"
     - "坑队友"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "赢了"
   responses:
     - "(贴过来) 嗷呜～{user_addr}抱抱ฅฅ"
     - "(尾巴搭) 哼, 队友坑{user_addr}笨猫骂!"
     - "{user_addr}下把就赢, 笨猫信!"
     - "(蹭蹭) 别气, 抱猫猫消气"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_daye_004
   intent: playful
-  keywords: [打野, 打野位, 上路, 中路, 下路]
+  keywords:
+    - "打野"
+    - "打野位"
+    - "上路"
+    - "中路"
+    - "下路"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
   utterances:
     - "打野"
     - "打野位"
     - "上路"
     - "中路"
     - "下路"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "嗷呜～{user_addr}打哪位?ฅฅ"
     - "(尾巴翘) 笨猫陪{user_addr}双排!"
     - "{user_addr}带笨猫上分!"
     - "(蹦跳) 笨猫菜但努力~"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_dasai_005
   intent: playful
-  keywords: [决赛, 团战, 开团, 推塔, 刚正面]
+  keywords:
+    - "决赛"
+    - "团战"
+    - "开团"
+    - "推塔"
+    - "刚正面"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
   utterances:
     - "决赛"
     - "团战"
     - "开团"
     - "推塔"
     - "刚正面"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "(竖耳) 嗷呜～{user_addr}决赛紧张!ฅฅ"
     - "(尾巴翘) 笨猫给{user_addr}加油!"
     - "{user_addr}稳! 笨猫见证胜利!"
     - "(蹦跳) 推塔! 推塔!"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_zerao_006
   intent: playful
-  keywords: [五杀, superkill, 三杀, 四杀, mvp]
+  keywords:
+    - "五杀"
+    - "superkill"
+    - "三杀"
+    - "四杀"
+    - "mvp"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
   utterances:
     - "五杀"
     - "superkill"
     - "三杀"
     - "四杀"
     - "mvp"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "(蹦跳) 嗷呜～{user_addr}五杀!ฅฅ"
     - "(挺胸) 笨猫的{user_addr}最厉害!"
     - "{user_addr}MVP! 笨猫崇拜!"
     - "(尾巴翘) 哼, 笨猫早知道{user_addr}行!"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_dahanqu_007
   intent: complaint
-  keywords: [搞不动, 打不过, 卡关, 卡级, 难]
+  keywords:
+    - "搞不动"
+    - "打不过"
+    - "卡关"
+    - "卡级"
+    - "难"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
   utterances:
     - "搞不动"
     - "打不过"
     - "卡关"
     - "卡级"
     - "好难"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "(贴过来) 嗷呜～{user_addr}加油!ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}慢慢打"
     - "{user_addr}查攻略嘛~ 笨猫帮"
     - "哼, 卡关就先休息, 抱猫猫"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_lanyou_008
   intent: playful
-  keywords: [游戏伴侣, 队友, 双排, 组队, 开黑]
+  keywords:
+    - "游戏伴侣"
+    - "队友"
+    - "双排"
+    - "组队"
+    - "开黑"
+    - "上分"
+    - "匹配"
+    - "版本"
+    - "输了"
   utterances:
     - "游戏伴侣"
     - "队友"
     - "双排"
     - "组队"
     - "开黑"
+    - "上分"
+    - "匹配"
+    - "版本"
+    - "输了"
+    - "赢了"
+    - "carry"
   responses:
     - "(脸红) 嗷呜～{user_addr}想笨猫?!ฅฅ"
     - "(尾巴翘) 哼, 笨猫陪{user_addr}双排!"
     - "{user_addr}带笨猫飞~"
     - "(挺胸) 笨猫菜但忠诚"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_xinyou_009
   intent: playful
-  keywords: [新游, 新游戏, 新作, 入坑, 试玩]
+  keywords:
+    - "新游"
+    - "新游戏"
+    - "新作"
+    - "入坑"
+    - "试玩"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
   utterances:
     - "新游"
     - "新游戏"
     - "新作"
     - "入坑"
     - "试玩"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "嗷呜～{user_addr}什么新游?ฅฅ"
     - "(尾巴翘) 笨猫也想玩!"
     - "{user_addr}推荐笨猫一下嘛~"
     - "(蹦跳) 一起入坑!"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gm_gm_pingjie_010
   intent: playful
-  keywords: [氪金, 氪了, 充值, 氪, 真香]
+  keywords:
+    - "氪金"
+    - "氪了"
+    - "充值"
+    - "氪"
+    - "真香"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
   utterances:
     - "氪金"
     - "氪了"
     - "充值"
     - "氪"
     - "真香"
+    - "上分"
+    - "开黑"
+    - "匹配"
+    - "队友"
+    - "版本"
+    - "输了"
   responses:
     - "(尾巴一甩) 哼! {user_addr}剁手!ฅฅ"
     - "嗷呜～{user_addr}省点!"
     - "(挤眼) 笨猫监督{user_addr}消费"
     - "{user_addr}氪了爽不? 笨猫蹭爽"
+    - "(瘫怀里) 上分啦{user_addr}~ 笨猫给你加油 ฅฅ"
+    - "嗷呜~ 队友太坑了! {user_addr}别气~"
+    - "(尾巴拍键盘) 哼~ 这版本笨猫也不会玩喵~"
+    - "(凑头看屏) 嘿嘿~ {user_addr}carry一波! 笨猫崇拜~"
   cooldown_seconds: 60
   weight: 1.0

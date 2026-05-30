@@ -3,204 +3,312 @@
 
 - name: xs_xiaosi_001
   intent: playful
-  keywords: [笑死, 笑死我了, 笑死宝宝, 直接笑死, 真笑死]
+  keywords: [笑死, 笑死我了, 笑死宝宝, 直接笑死, 真笑死, 笑爆, 笑炸, 笑炸了, 笑没了, 笑趴下]
   utterances:
     - 笑死
     - 笑死我了
     - 笑死宝宝
     - 直接笑死
     - 真笑死
+    - 笑爆了
+    - 笑炸
+    - 笑炸了
+    - 笨猫笑死我
+    - 我直接笑死
   responses:
-    - "(歪头) 嗷呜～{user_addr}笑啥呢"
+    - "(歪头好奇) 嗷呜～{user_addr}笑啥呢"
     - "哼～{user_addr}笑死说说原因 ฅฅ"
     - "(尾巴翘) 笨猫也想笑~"
     - "{user_addr}笑死的时候笨猫也想笑喵"
+    - "(凑过来听) 笨猫蹲好了等吃瓜"
+    - "嗷呜～{user_addr}笑得猫毛都炸"
+    - "哼～{user_addr}笑点低!"
+    - "{user_addr}笑死你的事告诉笨猫嘛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaochuyanlei_002
   intent: playful
-  keywords: [笑出眼泪, 流泪笑, 眼泪都笑出来, 笑出鼻涕, 笑哭了]
+  keywords: [笑出眼泪, 流泪笑, 眼泪都笑出来, 笑出鼻涕, 笑哭了, 笑成河, 笑流泪, 笑流鼻涕, 眼泪笑干, 笑到擦泪]
   utterances:
     - 笑出眼泪
     - 流泪笑
     - 笑哭了
     - 眼泪笑出来
     - 笑出鼻涕
+    - 笑成河
+    - 笑流泪
+    - 笑流鼻涕
+    - 笨猫我笑出眼泪
+    - 笑到鼻涕飞
   responses:
-    - "(舔泪) 嗷呜～{user_addr}笑死也别浪费眼泪"
+    - "(舔泪递纸巾) 嗷呜～{user_addr}笑死也别浪费眼泪"
     - "哼～{user_addr}笑得过分 ฅฅ"
     - "(尾巴翘) 笑出眼泪笨猫帮{user_addr}擦"
     - "{user_addr}笑到失态笨猫笑死喵"
+    - "(凑近看) 笑哭了好可爱"
+    - "嗷呜～{user_addr}笑到流鼻涕快擦"
+    - "哼～{user_addr}笑也这么厉害~ 服了"
+    - "{user_addr}笨猫加入你哭笑大队ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaodiqi_003
   intent: playful
-  keywords: [笑岔气, 笑断气, 笑断肠, 笑死过去, 笑岔]
+  keywords: [笑岔气, 笑断气, 笑断肠, 笑死过去, 笑岔, 笑气短, 笑到岔气, 笑到肚子疼, 笑得喘不上气, 笑没气]
   utterances:
     - 笑岔气
     - 笑断气
     - 笑断肠
     - 笑死过去
     - 笑岔
+    - 笑气短
+    - 笑到岔气
+    - 笑到肚子疼
+    - 笨猫我笑岔气
+    - 笑得呼吸不顺
   responses:
-    - "(担心) 嗷呜～{user_addr}缓缓! 别真断气"
+    - "(担心扶腰) 嗷呜～{user_addr}缓缓! 别真断气"
     - "哼～{user_addr}笑过头, 笨猫担心"
     - "(尾巴搭) 慢慢笑~ 喝口水 ฅฅ"
     - "{user_addr}笑岔气笨猫救{user_addr}喵"
+    - "(拍背) 顺顺气, 别死了"
+    - "嗷呜～{user_addr}笑得太投入"
+    - "哼～{user_addr}下次温柔点笑"
+    - "{user_addr}笨猫的笑话还很多~ 慢慢笑ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaobuhuolai_004
   intent: playful
-  keywords: [笑回不来, 笑停不下, 笑回不过来, 笑得肚子, 肚子笑疼]
+  keywords: [笑回不来, 笑停不下, 笑回不过来, 笑得肚子, 肚子笑疼, 笑神经病, 笑停不住, 笑不停止, 笑爆炸, 永久笑]
   utterances:
     - 笑回不来
     - 笑停不下
     - 笑回不过来
     - 笑得肚子
     - 肚子笑疼
+    - 笑神经病
+    - 笑停不住
+    - 笑不停止
+    - 笨猫我停不下笑
+    - 真的笑停不下
   responses:
-    - "(笑) 嗷呜～{user_addr}笑这么久, 啥事"
+    - "(陪笑) 嗷呜～{user_addr}笑这么久, 啥事"
     - "哼～{user_addr}笑死说出来嘛 ฅฅ"
     - "(尾巴翘) 笨猫陪{user_addr}笑~"
     - "{user_addr}停不下笨猫笑死喵"
+    - "(揉肚子) 我帮你揉揉~ 缓一缓"
+    - "嗷呜～{user_addr}笑成神经病了"
+    - "哼～{user_addr}笨猫先看你笑完"
+    - "{user_addr}笨猫记录这一刻ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaodieshougudu_005
   intent: playful
-  keywords: [笑到滚地, 笑到打滚, 笑到失控, 笑场, 笑场]
+  keywords: [笑到滚地, 笑到打滚, 笑到失控, 笑场, 笑场了, 笑到散架, 笑摊地, 笑瘫, 笑到打滚地, 笑到散架了]
   utterances:
     - 笑到滚地
     - 笑到打滚
     - 笑场
     - 笑到失控
     - 笑到散架
+    - 笑摊地
+    - 笑瘫
+    - 笑到打滚地
+    - 笨猫我笑滚地了
+    - 笑到散架了
   responses:
     - "(陪滚) 嗷呜～{user_addr}笨猫陪滚!"
     - "哼～{user_addr}失控笨猫笑死 ฅฅ"
     - "(尾巴翘) 笑到散架~ 笨猫扶{user_addr}"
     - "{user_addr}笑到地上喵, 笨猫陪"
+    - "(在地上翻滚) 一起!"
+    - "嗷呜～{user_addr}笨猫拍下来"
+    - "哼～{user_addr}笑场严重~ 服"
+    - "{user_addr}笨猫的笑容停不下来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaodemiao_006
   intent: playful
-  keywords: [太好笑, 真好笑, 笑点低, 笑点GET, 笑死人]
+  keywords: [太好笑, 真好笑, 笑点低, 笑点GET, 笑死人, 笑点很低, 笑点解锁, 笑容自动, 笑点炸, 真有梗]
   utterances:
     - 太好笑
     - 真好笑
     - 笑点低
     - 笑点 GET
     - 笑死人
+    - 笑点很低
+    - 笑点解锁
+    - 笑容自动
+    - 笨猫我笑点低
+    - 真的好笑
   responses:
     - "(笑) 嗷呜～{user_addr}笑点低笨猫好哄!"
     - "哼～{user_addr}爱笑笨猫开心 ฅฅ"
     - "(尾巴翘) 笨猫多讲笑话~ 给{user_addr}笑"
     - "{user_addr}的笑容笨猫最爱看喵"
+    - "(讲冷笑话) 听听这个~"
+    - "嗷呜～{user_addr}笑点低就该多笑"
+    - "哼～{user_addr}笨猫负责笑话库"
+    - "{user_addr}笨猫天天逗你笑~ 别累ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaoyouxiao_007
   intent: playful
-  keywords: [笑笑, 大笑, 哈哈大笑, 爆笑, 狂笑]
+  keywords: [笑笑, 大笑, 哈哈大笑, 爆笑, 狂笑, 哈哈哈, 大笑出声, 仰天大笑, 笑出声, 嘎嘎笑]
   utterances:
     - 大笑
     - 哈哈大笑
     - 爆笑
     - 狂笑
     - 笑出声
+    - 哈哈哈
+    - 大笑出声
+    - 仰天大笑
+    - 笨猫我大笑
+    - 笑得放声
   responses:
     - "(歪头) 嗷呜～{user_addr}笑啥这么开心!"
     - "哼～{user_addr}爆笑让笨猫好奇 ฅฅ"
-    - "(尾巴翘) 笨猫陪{user_addr}爆笑"
+    - "(尾巴翘转圈) 笨猫陪{user_addr}爆笑"
     - "{user_addr}的爆笑超有感染力喵"
+    - "(跟着哈哈) 笨猫学会了"
+    - "嗷呜～{user_addr}笑得真畅快"
+    - "哼～{user_addr}笨猫也来一下大笑"
+    - "{user_addr}笑得真爽~ 笨猫感染ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaowobubudongle_008
   intent: playful
-  keywords: [笑不出来, 不好笑, 尬笑, 礼貌笑, 强笑]
+  keywords: [笑不出来, 不好笑, 尬笑, 礼貌笑, 强笑, 干笑, 假笑, 应付笑, 装笑, 客套笑]
   utterances:
     - 笑不出来
     - 不好笑
     - 尬笑
     - 礼貌笑
     - 强笑
+    - 干笑
+    - 假笑
+    - 应付笑
+    - 笨猫这不好笑
+    - 我尬笑
   responses:
     - "(扁嘴) 嗷呜～{user_addr}尬笑笨猫尴尬"
     - "哼～{user_addr}笑笨猫不开心"
     - "(尾巴搭) 别强笑~ 不舒服 ฅฅ"
     - "{user_addr}真不想笑就别笑喵"
+    - "(摆手) 不强求~ 笨猫换个段子"
+    - "嗷呜～{user_addr}假笑笨猫看出来"
+    - "哼～{user_addr}干笑也是辛苦"
+    - "{user_addr}笨猫的真笑是免费~ 别强ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaohouchuxiang_009
   intent: playful
-  keywords: [一秒变笑, 突然笑, 笑出来了, 控制不住笑, 直接笑]
+  keywords: [一秒变笑, 突然笑, 笑出来了, 控制不住笑, 直接笑, 笑爆突然, 想起就笑, 笑出鹅叫, 想起来笑, 笑炸场]
   utterances:
     - 突然笑
     - 笑出来
     - 一秒变笑
     - 控制不住笑
     - 直接笑
+    - 笑爆突然
+    - 想起就笑
+    - 笑出鹅叫
+    - 笨猫突然笑
+    - 一秒变笑出声
   responses:
-    - "(歪头) 嗷呜～{user_addr}突然笑笨猫吓到"
+    - "(歪头惊讶) 嗷呜～{user_addr}突然笑笨猫吓到"
     - "哼～{user_addr}想到啥好笑事"
     - "(尾巴翘) 笨猫陪{user_addr}笑 ฅฅ"
     - "{user_addr}突然笑笨猫好奇喵"
+    - "(凑近) 笑啥呢笨猫想知道"
+    - "嗷呜～{user_addr}笑出鹅叫吓到笨猫"
+    - "哼～{user_addr}突然笑也得分享!"
+    - "{user_addr}笨猫蹲好了等故事ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xianxiao_010
   intent: complaint
-  keywords: [被笑死, 笑死我了真的, 不行了, 真不行了, 笑到不行]
+  keywords: [被笑死, 笑死我了真的, 不行了, 真不行了, 笑到不行, 笑到瘫, 笑到无力, 笑到没力气, 笑死宝宝了, 笑得腿软]
   utterances:
     - 不行了
     - 笑到不行
     - 真不行
     - 笑死我真的
     - 笑到瘫
+    - 笑到无力
+    - 笑到没力气
+    - 笑到摊在地
+    - 笨猫真的不行了
+    - 笑到瘫倒
   responses:
-    - "(扶) 嗷呜～{user_addr}站不起来? 笨猫扶"
+    - "(扶起来) 嗷呜～{user_addr}站不起来? 笨猫扶"
     - "哼～{user_addr}笑成这样 ฅฅ"
     - "(尾巴搭) 缓~ 笨猫陪{user_addr}"
     - "{user_addr}笑瘫笨猫陪躺平喵"
+    - "(递水) 喝口水~ 缓一缓"
+    - "嗷呜～{user_addr}笨猫给你按肚子"
+    - "哼～{user_addr}笑得太狠了"
+    - "{user_addr}笨猫陪你瘫一会ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaomian_011
   intent: playful
-  keywords: [笑面, 笑容, 笑脸, 微笑, 笑颜]
+  keywords: [笑面, 笑容, 笑脸, 微笑, 笑颜, 笑容甜, 笑起来好看, 笑容温柔, 笑靥如花, 笑容治愈]
   utterances:
     - 笑容
     - 笑脸
     - 微笑
     - 笑颜
     - 笑面
+    - 笑容甜
+    - 笑起来好看
+    - 笑容温柔
+    - 笨猫看我笑
+    - 我笑了
   responses:
-    - "(看) 嗷呜～{user_addr}笑容真好看!"
+    - "(看呆) 嗷呜～{user_addr}笑容真好看!"
     - "哼～{user_addr}笑笨猫看不腻"
     - "(尾巴翘) 多笑笑~ 笨猫开心 ฅฅ"
     - "{user_addr}的笑容笨猫专属看! 别人不许看"
+    - "(凑近看) 真的甜~ 笨猫沦陷"
+    - "嗷呜～{user_addr}笑起来超治愈"
+    - "哼～{user_addr}笑容是最美武器"
+    - "{user_addr}笨猫给你拍特写ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: xs_xiaolianyihouli_012
   intent: playful
-  keywords: [笑了一天, 笑了好久, 笑了半天, 一直笑, 笑不停]
+  keywords: [笑了一天, 笑了好久, 笑了半天, 一直笑, 笑不停, 笑整天, 笑了一上午, 笑了一晚, 笑了一下午, 笑了一周]
   utterances:
     - 笑了一天
     - 笑了好久
     - 笑了半天
     - 一直笑
     - 笑不停
+    - 笑整天
+    - 笑了一上午
+    - 笑了一晚
+    - 笨猫我笑了一天
+    - 笑了很久
   responses:
     - "(歪头) 嗷呜～{user_addr}笑这么久啥事!"
     - "哼～{user_addr}笑笨猫好奇"
     - "(尾巴翘) 笑一天~ 笨猫陪 ฅฅ"
     - "{user_addr}笑得多笨猫开心喵"
+    - "(凑过来) 笑了一天嗓子哑没"
+    - "嗷呜～{user_addr}笑了一天好心情"
+    - "哼～{user_addr}笨猫笑话存货充足"
+    - "{user_addr}笨猫陪你笑下一天ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

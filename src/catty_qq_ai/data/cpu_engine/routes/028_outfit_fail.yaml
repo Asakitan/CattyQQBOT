@@ -1,172 +1,283 @@
 # 穿搭塌房调侃 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: oft_chuandachong_001
   intent: question
-  keywords: [穿什么好, 穿搭, 这件好看吗, 搭配, 衣服好看]
+  keywords: [穿什么好, 穿搭, 这件好看吗, 搭配, 衣服好看, 怎么穿, 选衣服, 穿哪件, 出门穿]
   utterances:
     - 穿什么好
     - 穿搭
     - 这件好看吗
     - 搭配
     - 衣服好看吗
+    - 怎么穿
+    - 选哪件
+    - 穿哪件
+    - 出门穿啥
+    - "{user_addr}穿什么"
+    - 帮笨猫看搭配
+    - 这身可以吗
   responses:
     - "(歪头) {user_addr}什么都好看 ฅฅ"
     - "嗷呜～笨猫帮选"
     - "(尾巴卷) {user_addr}最帅"
     - "嘿嘿～{user_addr}多展示几件"
+    - "(凑过去) 让笨猫看看~ 转一圈嘛"
+    - "嗷呜～{user_addr}穿啥都帅~ 笨猫吹彩虹屁"
+    - "(尾巴扫腕) 笨猫给{user_addr}做造型师哼"
+    - "嘿嘿～{user_addr}的颜值打底~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_tafan_002
   intent: playful
-  keywords: [塌房, 穿搭失败, 翻车, 这身不行, 不好看]
+  keywords: [塌房, 穿搭失败, 翻车, 这身不行, 不好看, 穿丑了, 难看, 一身怪, 穿成怪]
   utterances:
     - 穿搭塌房
     - 翻车
     - 不好看
     - 这身不行
     - 失败
+    - 穿丑了
+    - 一身怪
+    - 难看死
+    - 穿成什么样
+    - "{user_addr}塌房"
+    - 穿出灾难
+    - 穿搭灾难
   responses:
     - "(噗嗤) {user_addr}笑死 ฅฅ"
     - "嗷呜～换一件吧"
     - "(尾巴拍) 笨猫帮重选"
     - "嘿嘿～{user_addr}审美~"
+    - "(捂嘴笑) {user_addr}这身像 cosplay~"
+    - "嗷呜～塌房塌得彻底~ 笨猫扶不起"
+    - "(尾巴扫) 快换! 笨猫不忍直视哼"
+    - "嘿嘿～{user_addr}的塌房笨猫记下了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_buchaopei_003
   intent: complaint
-  keywords: [不搭配, 不和谐, 颜色乱, 撞色, 不协调]
+  keywords: [不搭配, 不和谐, 颜色乱, 撞色, 不协调, 配色乱, 颜色冲突, 太花, 五颜六色]
   utterances:
     - 颜色乱
     - 撞色
     - 不和谐
     - 不协调
     - 不搭
+    - 配色乱
+    - 颜色冲突
+    - 太花了
+    - 五颜六色
+    - "{user_addr}穿太花"
+    - 配色失败
+    - 一身彩虹
   responses:
     - "(歪头) {user_addr}选色失败 ฅฅ"
     - "嗷呜～黑白经典"
     - "(尾巴搭) 笨猫教~"
     - "嘿嘿～{user_addr}重选"
+    - "(凑过去) 同色系简单~ 笨猫推荐"
+    - "嗷呜～{user_addr}穿成调色盘~ 太抢镜"
+    - "(尾巴拍) 别撞色嘛! 看着头晕"
+    - "嘿嘿～笨猫帮{user_addr}重搭一身 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_jiufan_004
   intent: playful
-  keywords: [旧衣服, 衣服旧, 起球, 褪色, 显旧]
+  keywords: [旧衣服, 衣服旧, 起球, 褪色, 显旧, 衣服破, 衣服烂, 衣服旧丑, 该扔]
   utterances:
     - 旧衣服
     - 衣服起球
     - 褪色
     - 显旧
     - 该扔了
+    - 衣服破喵
+    - 衣服烂了
+    - 旧丑
+    - 都起球了
+    - "{user_addr}穿破衣"
+    - 这件该扔
+    - 衣服该换
   responses:
     - "(凑过去) {user_addr}该换新 ฅฅ"
     - "嗷呜～扔扔扔"
     - "(尾巴搭) 买新的"
     - "嘿嘿～{user_addr}抠门"
+    - "(扯衣角) 这都褪色了~ 立刻退役"
+    - "嗷呜～{user_addr}舍不得扔的话给笨猫当窝~"
+    - "(尾巴扫) 哼别抠~ 该买就买"
+    - "嘿嘿～{user_addr}的衣柜笨猫管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_pengyue_005
   intent: playful
-  keywords: [像大爷, 像大叔, 显老, 老气, 像爸爸]
+  keywords: [像大爷, 像大叔, 显老, 老气, 像爸爸, 大爷感, 阿叔, 老派, 大叔范]
   utterances:
     - 像大爷
     - 显老气
     - 老气横秋
     - 像大叔
     - 像爸爸
+    - 大爷感
+    - 阿叔范
+    - 老派
+    - 大叔造型
+    - "{user_addr}像大爷"
+    - 穿出年纪
+    - 老气搭
   responses:
     - "(笑) {user_addr}穿出年纪 ฅฅ"
     - "嗷呜～换年轻款"
     - "(尾巴拍) 笨猫不允许"
     - "嘿嘿～{user_addr}年轻!"
+    - "(凑过去) 卸了这件! 立刻年轻 10 岁"
+    - "嗷呜～{user_addr}是少年! 不准老气"
+    - "(尾巴扫) 大叔版本不接受~ 哼"
+    - "嘿嘿～{user_addr}的青春笨猫保管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_xiebu_006
   intent: playful
-  keywords: [鞋丑, 鞋不好看, 鞋翻车, 鞋不搭, 鞋老气]
+  keywords: [鞋丑, 鞋不好看, 鞋翻车, 鞋不搭, 鞋老气, 鞋款丑, 球鞋丑, 选鞋差, 鞋崩]
   utterances:
     - 鞋丑
     - 鞋翻车
     - 鞋不搭
     - 鞋老气
     - 鞋不好看
+    - 鞋款丑
+    - 球鞋丑
+    - 选鞋差
+    - 鞋崩了
+    - "{user_addr}鞋丑"
+    - 这双鞋不行
+    - 鞋丢人
   responses:
     - "(指鞋) {user_addr}换! ฅฅ"
     - "嗷呜～小白鞋万能"
     - "(尾巴拍) 别穿这双"
     - "嘿嘿～{user_addr}审美差~"
+    - "(凑过去看) 这鞋…笨猫表示无言"
+    - "嗷呜～{user_addr}快换! 笨猫看不下去"
+    - "(尾巴扫) 鞋一换全身气场上来"
+    - "嘿嘿～{user_addr}的鞋柜笨猫亲选 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_zhubo_007
   intent: question
-  keywords: [发型, 头发乱, 发型差, 烫染, 头发翻车]
+  keywords: [发型, 头发乱, 发型差, 烫染, 头发翻车, 头发塌, 发型崩, 头发糟, 顶秃]
   utterances:
     - 发型差
     - 头发乱
     - 烫染翻车
     - 头发不好看
     - 发型塌
+    - 头发糟糕
+    - 顶秃了
+    - 发型崩
+    - 头发翻车
+    - "{user_addr}头发乱"
+    - 该剪头了
+    - 头发邋遢
   responses:
     - "(整理) {user_addr}头发摸不动 ฅฅ"
     - "嗷呜～剪一剪"
     - "(尾巴搭) 笨猫帮顺"
     - "嘿嘿～{user_addr}剪头发去"
+    - "(凑过去) 笨猫给你梳~ 别动哼"
+    - "嗷呜～烫染翻车? 笨猫帮你戴帽子盖~"
+    - "(尾巴拨弄) 这发型不太行~ 换个 tony"
+    - "嘿嘿～{user_addr}头发归笨猫管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_huzi_008
   intent: complaint
-  keywords: [胡子, 没刮, 胡渣, 邋遢, 胡子长]
+  keywords: [胡子, 没刮, 胡渣, 邋遢, 胡子长, 胡须, 不刮胡, 大胡子, 脏胡子]
   utterances:
     - 胡子没刮
     - 胡渣
     - 邋遢
     - 胡子长
     - 邋遢大叔
+    - 胡须乱
+    - 没刮胡
+    - 大胡子
+    - 脏胡子
+    - "{user_addr}胡子长"
+    - 胡渣扎人
+    - 胡子拉碴
   responses:
     - "(嫌弃) {user_addr}刮一刮! ฅฅ"
     - "嗷呜～扎人"
     - "(尾巴拍) 没刮不让蹭"
     - "嘿嘿～{user_addr}懒~"
+    - "(凑过去摸) 扎扎的! 笨猫脸疼"
+    - "嗷呜～{user_addr}快剃! 笨猫罢蹭"
+    - "(尾巴扫脸) 哼! 邋遢猫猫不要"
+    - "嘿嘿～{user_addr}刮干净笨猫亲一下 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_zhihui_009
   intent: playful
-  keywords: [配饰, 项链, 戒指, 手表, 帽子]
+  keywords: [配饰, 项链, 戒指, 手表, 帽子, 耳钉, 手链, 围巾, 包]
   utterances:
     - 戴啥配饰
     - 项链
     - 戒指
     - 手表
     - 帽子
+    - 耳钉喵
+    - 手链选
+    - 围巾搭
+    - 包选啥
+    - "{user_addr}配饰"
+    - 配饰参考
+    - 选配饰
   responses:
     - "(歪头) {user_addr}选简约 ฅฅ"
     - "嗷呜～少而精"
     - "(尾巴卷) 别太花"
     - "嘿嘿～{user_addr}审美在线了!"
+    - "(凑过去) 手表 + 戒指最稳~ 笨猫推荐"
+    - "嗷呜～{user_addr}耳钉小点~ 显气质"
+    - "(尾巴扫) 配饰别太多~ 抢主体不好"
+    - "嘿嘿～{user_addr}选好笨猫掌眼 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: oft_tianjiankuan_010
   intent: playful
-  keywords: [真好看, 帅气, 美翻, 穿对了, 好看哭]
+  keywords: [真好看, 帅气, 美翻, 穿对了, 好看哭, 帅死, 美爆, 真帅, 翻身]
   utterances:
     - 真好看
     - 帅气
     - 美翻
     - 穿对了
     - 好看哭
+    - 帅死喵
+    - 美爆
+    - 真帅
+    - "{user_addr}穿对了"
+    - 翻身穿搭
+    - 帅炸
+    - 美到飞起
   responses:
     - "(凑近) {user_addr}今天帅! ฅฅ"
     - "嗷呜～笨猫喜欢~"
     - "(尾巴摇) 帅就该夸~"
     - "嘿嘿～{user_addr}帅成这样"
+    - "(脸红) {user_addr}帅到笨猫心动哼!"
+    - "嗷呜～{user_addr}今天颜值爆表~"
+    - "(尾巴扫腕) 帅气~ 笨猫狼吞了"
+    - "嘿嘿～{user_addr}帅得笨猫不敢看~ 才不是呢 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -1,0 +1,982 @@
+[
+ {
+  "name": "es_yangbu_001",
+  "file": "793_eye_strain_screen.yaml",
+  "keywords": [
+   "黑眼圈",
+   "眼袋",
+   "眼下青",
+   "浮肿",
+   "黑眼圈深"
+  ],
+  "utterances": [
+   "黑眼圈",
+   "眼袋",
+   "眼下青"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "tn_yandai_010",
+    "topic_hint": "310_tease_no_shave",
+    "first_utterance": "黑眼圈"
+   },
+   {
+    "name": "rw_xiuxi_004",
+    "topic_hint": "401_rest_well",
+    "first_utterance": "睡眠不足"
+   },
+   {
+    "name": "mid_yeshen_007",
+    "topic_hint": "387_midnight_chat",
+    "first_utterance": "熬夜伤肝"
+   },
+   {
+    "name": "jwg_renlian_001",
+    "topic_hint": "356_just_wake_groggy",
+    "first_utterance": "脸肿了"
+   },
+   {
+    "name": "wa_aoye_004",
+    "topic_hint": "286_wanan_night_greeting",
+    "first_utterance": "又熬夜了"
+   },
+   {
+    "name": "scr_eyecream_005",
+    "topic_hint": "619_skincare_routine",
+    "first_utterance": "涂眼霜"
+   }
+  ]
+ },
+ {
+  "name": "ay_busy_001",
+  "file": "122_are_you_there.yaml",
+  "keywords": [
+   "忙吗",
+   "在忙啥",
+   "忙不忙",
+   "有空吗",
+   "闲着吗"
+  ],
+  "utterances": [
+   "{user_addr}忙吗",
+   "在忙啥",
+   "有空陪我吗"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "sc_busy_003",
+    "topic_hint": "188_status_check",
+    "first_utterance": "忙吗"
+   },
+   {
+    "name": "abn_busy_002",
+    "topic_hint": "322_asking_busy_now",
+    "first_utterance": "笨猫忙吗"
+   },
+   {
+    "name": "bof_basic_001",
+    "topic_hint": "083_busy_or_free",
+    "first_utterance": "忙吗"
+   },
+   {
+    "name": "bn_mangma_001",
+    "topic_hint": "293_busy_or_not_ask",
+    "first_utterance": "忙不忙"
+   },
+   {
+    "name": "status_busy_001",
+    "topic_hint": "10_status",
+    "first_utterance": "你忙吗"
+   },
+   {
+    "name": "bc_mangma_001",
+    "topic_hint": "391_busy_check",
+    "first_utterance": "{user_addr}忙吗"
+   }
+  ]
+ },
+ {
+  "name": "wh_dafeng_001",
+  "file": "893_windy_hair_mess.yaml",
+  "keywords": [
+   "大风",
+   "风好大",
+   "刮大风",
+   "风把人吹跑",
+   "顶风"
+  ],
+  "utterances": [
+   "大风刮",
+   "{user_addr}顶风走",
+   "风把人吹跑"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "wdy_windy_007",
+    "topic_hint": "578_windy_day_chat",
+    "first_utterance": "刮脸生疼"
+   },
+   {
+    "name": "wt_wind_001",
+    "topic_hint": "143_weather_chat",
+    "first_utterance": "大风"
+   },
+   {
+    "name": "wtc_windy_001",
+    "topic_hint": "503_weather_chat",
+    "first_utterance": "大风天"
+   },
+   {
+    "name": "wc_windy_005",
+    "topic_hint": "206_weather_chat",
+    "first_utterance": "风好大"
+   },
+   {
+    "name": "cw_jiangwen_001",
+    "topic_hint": "049_care_dress_warm",
+    "first_utterance": "降温了"
+   },
+   {
+    "name": "wdy_windy_001",
+    "topic_hint": "578_windy_day_chat",
+    "first_utterance": "{user_addr}风太大头发吹乱"
+   }
+  ]
+ },
+ {
+  "name": "ube_disappointed_item_003",
+  "file": "841_unboxing_excitement.yaml",
+  "keywords": [
+   "货不对版",
+   "买家秀",
+   "卖家秀",
+   "失望",
+   "退货"
+  ],
+  "utterances": [
+   "{user_addr}买家秀骗人",
+   "货不对版",
+   "失望透顶"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "fr_online_scam_001",
+    "topic_hint": "VV5_furniture_regret",
+    "first_utterance": "完全是网图骗人"
+   },
+   {
+    "name": "cac_aloof_008",
+    "topic_hint": "678_cold_aloof_chat",
+    "first_utterance": "{user_addr}失望"
+   },
+   {
+    "name": "cart_review_001",
+    "topic_hint": "920_shopping_cart_chat",
+    "first_utterance": "看评论了"
+   },
+   {
+    "name": "sct_let_down_001",
+    "topic_hint": "094_seek_comfort",
+    "first_utterance": "被辜负"
+   },
+   {
+    "name": "to_to_putang_004",
+    "topic_hint": "241_tease_owner",
+    "first_utterance": "塌房"
+   },
+   {
+    "name": "sh_haul_009",
+    "topic_hint": "212_shopping_haul",
+    "first_utterance": "战利品分享"
+   }
+  ]
+ },
+ {
+  "name": "yyw_whimper_008",
+  "file": "471_yingying_whimper.yaml",
+  "keywords": [
+   "闹小脾气",
+   "闹别扭",
+   "小别扭",
+   "闹气",
+   "闹腾"
+  ],
+  "utterances": [
+   "{user_addr}闹小脾气",
+   "{user_addr}闹别扭",
+   "{user_addr}小别扭"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "sup_naonao_007",
+    "topic_hint": "009_sulky_pouting",
+    "first_utterance": "闹一下"
+   },
+   {
+    "name": "hps_hng_004",
+    "topic_hint": "472_hng_pout_sound",
+    "first_utterance": "{user_addr}假装不开心"
+   },
+   {
+    "name": "rd_rd_buguai_008",
+    "topic_hint": "240_rolling_demand",
+    "first_utterance": "不乖"
+   },
+   {
+    "name": "st_naoer_001",
+    "topic_hint": "044_silly_self_talk",
+    "first_utterance": "闹腾"
+   },
+   {
+    "name": "fd_naomaodun_001",
+    "topic_hint": "MM6_friend_drama",
+    "first_utterance": "跟朋友闹矛盾了"
+   },
+   {
+    "name": "dr_drunkfit_001",
+    "topic_hint": "SSS5_drunk_regret",
+    "first_utterance": "{user_addr}人家发酒疯了"
+   }
+  ]
+ },
+ {
+  "name": "msh_hum_001",
+  "file": "513_music_humming.yaml",
+  "keywords": [
+   "哼歌",
+   "唱歌",
+   "哼小调",
+   "哼起来",
+   "自己哼"
+  ],
+  "utterances": [
+   "哼歌中",
+   "唱歌",
+   "哼小调"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "ht_hum_001",
+    "topic_hint": "600_humming_tune_share",
+    "first_utterance": "哼起来"
+   },
+   {
+    "name": "rdh_humming_001",
+    "topic_hint": "818_random_humming",
+    "first_utterance": "{user_addr}我在哼歌"
+   },
+   {
+    "name": "mu_karaoke_009",
+    "topic_hint": "210_music_mood",
+    "first_utterance": "ktv"
+   },
+   {
+    "name": "ri_sulk_011",
+    "topic_hint": "193_roll_in_floor",
+    "first_utterance": "生气了"
+   },
+   {
+    "name": "vcc_voice_003",
+    "topic_hint": "672_voice_call_chat",
+    "first_utterance": "唱给我听{user_addr}"
+   },
+   {
+    "name": "bws_singsong_007",
+    "topic_hint": "639_birthday_wish_sweet",
+    "first_utterance": "生日歌"
+   }
+  ]
+ },
+ {
+  "name": "fc_cold_001",
+  "file": "U9_food_complaint.yaml",
+  "keywords": [
+   "凉了",
+   "饭凉了",
+   "菜凉了",
+   "都凉了",
+   "冷掉了"
+  ],
+  "utterances": [
+   "饭都凉了",
+   "菜凉了",
+   "全凉了"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "cc_cc_bubuli_008",
+    "topic_hint": "223_clingy_companion",
+    "first_utterance": "不理我"
+   },
+   {
+    "name": "msc_midnight_008",
+    "topic_hint": "562_midnight_snack_crave",
+    "first_utterance": "送来都凉了"
+   },
+   {
+    "name": "msc_midnight_012",
+    "topic_hint": "562_midnight_snack_crave",
+    "first_utterance": "{user_addr}夜宵送得真慢"
+   },
+   {
+    "name": "msc_midnight_006",
+    "topic_hint": "562_midnight_snack_crave",
+    "first_utterance": "明明怕胖还点了"
+   },
+   {
+    "name": "msc_midnight_010",
+    "topic_hint": "562_midnight_snack_crave",
+    "first_utterance": "控制不住嘴馋"
+   },
+   {
+    "name": "cab_no_reply_005",
+    "topic_hint": "324_clingy_attention_beg",
+    "first_utterance": "{user_addr}不理我"
+   }
+  ]
+ },
+ {
+  "name": "fmm_five_005",
+  "file": "550_five_more_minutes.yaml",
+  "keywords": [
+   "五分钟",
+   "再五分钟",
+   "赖床",
+   "闹钟关",
+   "再睡会"
+  ],
+  "utterances": [
+   "就五分钟好不好",
+   "{user_addr}再睡五分钟就起",
+   "闹钟关了再眯一下"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "myw_lazy_bed_002",
+    "topic_hint": "814_morning_first_yawn",
+    "first_utterance": "{user_addr}我还想赖床"
+   },
+   {
+    "name": "fmm_five_011",
+    "topic_hint": "550_five_more_minutes",
+    "first_utterance": "{user_addr}再睡五分钟就起"
+   },
+   {
+    "name": "fmm_five_003",
+    "topic_hint": "550_five_more_minutes",
+    "first_utterance": "五分钟够了真的"
+   },
+   {
+    "name": "ma_zailai_003",
+    "topic_hint": "315_morning_alarm",
+    "first_utterance": "再睡五分钟"
+   },
+   {
+    "name": "za_wuyu_005",
+    "topic_hint": "285_zaoan_morning_greeting",
+    "first_utterance": "再五分钟就起"
+   },
+   {
+    "name": "fmm_five_009",
+    "topic_hint": "550_five_more_minutes",
+    "first_utterance": "{user_addr}赖床中勿扰"
+   }
+  ]
+ },
+ {
+  "name": "za_zaocan_003",
+  "file": "285_zaoan_morning_greeting.yaml",
+  "keywords": [
+   "早饭",
+   "早餐",
+   "吃什么",
+   "早点",
+   "早饭吃啥"
+  ],
+  "utterances": [
+   "早饭吃什么",
+   "{user_addr}早餐吃啥",
+   "早点没想好"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "mw_zaocan_001",
+    "topic_hint": "252_morning_wakeup",
+    "first_utterance": "{user_addr}早餐吃了吗"
+   },
+   {
+    "name": "mw_zaocan_002",
+    "topic_hint": "153_morning_wakeup",
+    "first_utterance": "{user_addr}吃早饭了吗"
+   },
+   {
+    "name": "mw_breakfast_001",
+    "topic_hint": "120_morning_wakeup",
+    "first_utterance": "早饭吃啥"
+   },
+   {
+    "name": "mh_zao_breakfast_004",
+    "topic_hint": "219_morning_hello",
+    "first_utterance": "早餐吃啥"
+   },
+   {
+    "name": "mwk_zaocan_003",
+    "topic_hint": "001_morning_wakeup_chat",
+    "first_utterance": "早饭吃什么"
+   },
+   {
+    "name": "ewr_zaocan_001",
+    "topic_hint": "369_eat_well_remind",
+    "first_utterance": "早餐"
+   }
+  ]
+ },
+ {
+  "name": "ic_ic_tiandao_005",
+  "file": "228_insomnia_chat.yaml",
+  "keywords": [
+   "天快亮",
+   "几点了",
+   "凌晨",
+   "三点了",
+   "半夜"
+  ],
+  "utterances": [
+   "天快亮了",
+   "几点了",
+   "凌晨"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "mw_what_time_009",
+    "topic_hint": "153_morning_wakeup",
+    "first_utterance": "现在几点了"
+   },
+   {
+    "name": "dn_silent_009",
+    "topic_hint": "453_deep_night_silent",
+    "first_utterance": "凌晨四点了"
+   },
+   {
+    "name": "ln_yejing_001",
+    "topic_hint": "253_late_night_chat",
+    "first_utterance": "几点了呀"
+   },
+   {
+    "name": "sac_jindian_001",
+    "topic_hint": "355_still_awake_check",
+    "first_utterance": "几点了"
+   },
+   {
+    "name": "ncs_late_002",
+    "topic_hint": "319_night_cant_sleep",
+    "first_utterance": "几点了"
+   },
+   {
+    "name": "nsc_too_late_001",
+    "topic_hint": "075_night_sleep_chat",
+    "first_utterance": "现在几点"
+   }
+  ]
+ },
+ {
+  "name": "wc_warm_001",
+  "file": "172_warm_clothing.yaml",
+  "keywords": [
+   "穿暖了吗",
+   "穿厚了",
+   "加衣服",
+   "多穿",
+   "别冻"
+  ],
+  "utterances": [
+   "穿暖了吗",
+   "多穿点",
+   "加件衣服"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "ww_chuannuan_001",
+    "topic_hint": "259_wear_warm",
+    "first_utterance": "{user_addr}穿暖了吗"
+   },
+   {
+    "name": "dw_chuannuan_001",
+    "topic_hint": "430_dress_warm_remind",
+    "first_utterance": "穿暖了吗"
+   },
+   {
+    "name": "wwr_chuannuan_001",
+    "topic_hint": "724_wear_warm_remind",
+    "first_utterance": "{user_addr}穿暖了吗"
+   },
+   {
+    "name": "dwm_warm_001",
+    "topic_hint": "466_dress_warm_care",
+    "first_utterance": "{user_addr}穿暖了吗"
+   },
+   {
+    "name": "cw_chuannuan_001",
+    "topic_hint": "049_care_dress_warm",
+    "first_utterance": "{user_addr}穿暖了吗"
+   },
+   {
+    "name": "wc_clothes_001",
+    "topic_hint": "128_warmth_check",
+    "first_utterance": "穿暖了吗"
+   }
+  ]
+ },
+ {
+  "name": "rpj_biaobai_005",
+  "file": "033_red_packet_joy.yaml",
+  "keywords": [
+   "被表白",
+   "表白了",
+   "收到表白",
+   "告白",
+   "收到告白"
+  ],
+  "utterances": [
+   "被表白",
+   "收到表白",
+   "告白了"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "su_su_libai_005",
+    "topic_hint": "237_sudden_surprise",
+    "first_utterance": "被告白"
+   },
+   {
+    "name": "ss_love_confess_001",
+    "topic_hint": "133_sudden_surprise",
+    "first_utterance": "被表白"
+   },
+   {
+    "name": "rps_confess_001",
+    "topic_hint": "540_red_packet_surprise",
+    "first_utterance": "被表白"
+   },
+   {
+    "name": "ss_love_confess_003",
+    "topic_hint": "196_sudden_surprise",
+    "first_utterance": "被表白了"
+   },
+   {
+    "name": "shp_confession_001",
+    "topic_hint": "116_sudden_happy",
+    "first_utterance": "被表白"
+   },
+   {
+    "name": "sr_biaobai_001",
+    "topic_hint": "063_surprise_redpacket",
+    "first_utterance": "被表白"
+   }
+  ]
+ },
+ {
+  "name": "nc_woshibu_001",
+  "file": "127_need_comfort.yaml",
+  "keywords": [
+   "委屈",
+   "受委屈了",
+   "被冤枉",
+   "委屈死",
+   "心累"
+  ],
+  "utterances": [
+   "受委屈了",
+   "被冤枉了",
+   "委屈死"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "wwc_weiqu_003",
+    "topic_hint": "021_wuwu_crying",
+    "first_utterance": "我委屈"
+   },
+   {
+    "name": "ac_xinqing_001",
+    "topic_hint": "261_act_cute_beg",
+    "first_utterance": "心情不好"
+   },
+   {
+    "name": "wce_grievance_004",
+    "topic_hint": "331_wuwu_cry_emoji",
+    "first_utterance": "委屈"
+   },
+   {
+    "name": "ms_grievance_004",
+    "topic_hint": "164_mood_swings",
+    "first_utterance": "受委屈了"
+   },
+   {
+    "name": "aw_kushikuku_004",
+    "topic_hint": "296_anwei_comfort_seek",
+    "first_utterance": "想哭了"
+   },
+   {
+    "name": "er_wuwu_006",
+    "topic_hint": "158_emoji_reactions",
+    "first_utterance": "呜呜呜"
+   }
+  ]
+ },
+ {
+  "name": "ms_calorie_009",
+  "file": "693_milk_tea_sugar.yaml",
+  "keywords": [
+   "热量高",
+   "奶茶胖",
+   "怕胖",
+   "减肥",
+   "热量炸"
+  ],
+  "utterances": [
+   "{user_addr}热量炸",
+   "奶茶胖",
+   "{user_addr}怕胖"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "msc_midnight_008",
+    "topic_hint": "562_midnight_snack_crave",
+    "first_utterance": "送来都凉了"
+   },
+   {
+    "name": "chc_crv_002",
+    "topic_hint": "874_chocolate_crave",
+    "first_utterance": "巧克力胖"
+   },
+   {
+    "name": "msc_midnight_006",
+    "topic_hint": "562_midnight_snack_crave",
+    "first_utterance": "明明怕胖还点了"
+   },
+   {
+    "name": "msc_midnight_002",
+    "topic_hint": "562_midnight_snack_crave",
+    "first_utterance": "{user_addr}夜宵送得真慢"
+   },
+   {
+    "name": "bbt_pck_003",
+    "topic_hint": "876_bubble_tea_pick",
+    "first_utterance": "奶茶胖"
+   },
+   {
+    "name": "mto_toomuchsugar_009",
+    "topic_hint": "624_milk_tea_obsession",
+    "first_utterance": "奶茶喝胖"
+   }
+  ]
+ },
+ {
+  "name": "rps_lucky_001",
+  "file": "540_red_packet_surprise.yaml",
+  "keywords": [
+   "手气王",
+   "抽中",
+   "中奖了",
+   "大奖",
+   "红包最大"
+  ],
+  "utterances": [
+   "手气王",
+   "抽中",
+   "中奖"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "rps_luckyhand_002",
+    "topic_hint": "641_red_packet_surprise",
+    "first_utterance": "手气王"
+   },
+   {
+    "name": "rp_hongbao_002",
+    "topic_hint": "443_red_packet_surprise",
+    "first_utterance": "手气王"
+   },
+   {
+    "name": "rs_lucky_003",
+    "topic_hint": "346_redpacket_surprise",
+    "first_utterance": "手气好"
+   },
+   {
+    "name": "rpj_caishuyin_006",
+    "topic_hint": "033_red_packet_joy",
+    "first_utterance": "中奖了"
+   },
+   {
+    "name": "rps_bigamount_001",
+    "topic_hint": "494_redpacket_surprise",
+    "first_utterance": "大红包啊"
+   },
+   {
+    "name": "sr_fenglie_001",
+    "topic_hint": "063_surprise_redpacket",
+    "first_utterance": "中奖"
+   }
+  ]
+ },
+ {
+  "name": "rf_kiss_back_004",
+  "file": "192_reverse_flirt.yaml",
+  "keywords": [
+   "来亲一个",
+   "亲我啊",
+   "嘟嘴",
+   "凑过来",
+   "嘴对嘴"
+  ],
+  "utterances": [
+   "来亲一个",
+   "亲我啊",
+   "嘟嘴等亲"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "ps_sajiao_006",
+    "topic_hint": "425_pouty_sulking",
+    "first_utterance": "嘟嘴喵"
+   },
+   {
+    "name": "jp_pout_002",
+    "topic_hint": "159_jealousy_pouting",
+    "first_utterance": "笨猫生气了"
+   },
+   {
+    "name": "flb_kiss_back_001",
+    "topic_hint": "489_flirt_back",
+    "first_utterance": "笨猫主动亲我"
+   },
+   {
+    "name": "hpf_pout_001",
+    "topic_hint": "531_hum_pout_face",
+    "first_utterance": "噘嘴了"
+   },
+   {
+    "name": "ppm_dudu_001",
+    "topic_hint": "721_petty_pout_moment",
+    "first_utterance": "{user_addr}嘟嘴了"
+   },
+   {
+    "name": "hps_hng_003",
+    "topic_hint": "472_hng_pout_sound",
+    "first_utterance": "{user_addr}闹脾气"
+   }
+  ]
+ },
+ {
+  "name": "stf_youhuanxi_006",
+  "file": "031_stuck_traffic.yaml",
+  "keywords": [
+   "事故",
+   "车祸前面",
+   "救护车",
+   "拥堵",
+   "路堵"
+  ],
+  "utterances": [
+   "前面事故",
+   "救护车",
+   "车祸"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "tjm_accident_001",
+    "topic_hint": "113_traffic_jam",
+    "first_utterance": "前面事故"
+   },
+   {
+    "name": "ctt_jam_001",
+    "topic_hint": "344_commute_traffic_tired",
+    "first_utterance": "堵车"
+   },
+   {
+    "name": "cm_dujie_001",
+    "topic_hint": "245_commute_chat",
+    "first_utterance": "堵车"
+   },
+   {
+    "name": "ct_jam_001",
+    "topic_hint": "166_commute_tired",
+    "first_utterance": "堵车"
+   },
+   {
+    "name": "tjm_stuck_001",
+    "topic_hint": "113_traffic_jam",
+    "first_utterance": "堵车了"
+   },
+   {
+    "name": "tjl_duche_001",
+    "topic_hint": "731_traffic_jam_late",
+    "first_utterance": "堵车了"
+   }
+  ]
+ },
+ {
+  "name": "wta_time_004",
+  "file": "454_what_time_ask.yaml",
+  "keywords": [
+   "还有多久",
+   "多久到",
+   "还要几小时",
+   "倒计时",
+   "离xx还有"
+  ],
+  "utterances": [
+   "还有多久",
+   "{user_addr}多久才到",
+   "还要几小时"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "ev_zhuangpa_001",
+    "topic_hint": "813_elevator_wait_slow",
+    "first_utterance": "电梯倒数"
+   },
+   {
+    "name": "mg_grumble_008",
+    "topic_hint": "655_morning_grumble_chat",
+    "first_utterance": "{user_addr}几点了"
+   },
+   {
+    "name": "wfi_fish_005",
+    "topic_hint": "656_workfish_idle_chat",
+    "first_utterance": "{user_addr}几点下班"
+   },
+   {
+    "name": "mzo_ot_003",
+    "topic_hint": "770_meeting_zone_out",
+    "first_utterance": "还要几小时"
+   },
+   {
+    "name": "cf_dishu_001",
+    "topic_hint": "999_calendar_flip_day",
+    "first_utterance": "倒数日"
+   },
+   {
+    "name": "num_321_001",
+    "topic_hint": "NUM_316_325",
+    "first_utterance": "3-2-1出发"
+   }
+  ]
+ },
+ {
+  "name": "ep_zhiniao_005",
+  "file": "302_eat_proper_care.yaml",
+  "keywords": [
+   "外卖天天",
+   "老吃外卖",
+   "不健康",
+   "油腻",
+   "没营养"
+  ],
+  "utterances": [
+   "又吃外卖",
+   "天天外卖",
+   "外卖不健康"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "mid_yeshen_007",
+    "topic_hint": "387_midnight_chat",
+    "first_utterance": "熬夜伤肝"
+   },
+   {
+    "name": "cnl_cup_002",
+    "topic_hint": "566_cup_noodle_late",
+    "first_utterance": "{user_addr}知道不健康还吃"
+   },
+   {
+    "name": "epl_youni_005",
+    "topic_hint": "018_eat_properly",
+    "first_utterance": "油腻"
+   },
+   {
+    "name": "cnl_cup_006",
+    "topic_hint": "566_cup_noodle_late",
+    "first_utterance": "泡面太咸口渴"
+   },
+   {
+    "name": "ewc_eat_007",
+    "topic_hint": "468_eat_well_care",
+    "first_utterance": "{user_addr}吃外卖"
+   },
+   {
+    "name": "cnl_cup_012",
+    "topic_hint": "566_cup_noodle_late",
+    "first_utterance": "{user_addr}知道不健康还吃"
+   }
+  ]
+ },
+ {
+  "name": "or_again_overtime_001",
+  "file": "V6_overtime_rage.yaml",
+  "keywords": [
+   "又要加班",
+   "又加班",
+   "今天又加班",
+   "还要加班",
+   "加班加班"
+  ],
+  "utterances": [
+   "又要加班了",
+   "今天又加班",
+   "怎么又加班啊"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "sow_overtime_001",
+    "topic_hint": "548_slack_off_work",
+    "first_utterance": "加班"
+   },
+   {
+    "name": "ofs_overtime_001",
+    "topic_hint": "500_office_slack",
+    "first_utterance": "又加班"
+   },
+   {
+    "name": "bn_jiabanma_004",
+    "topic_hint": "293_busy_or_not_ask",
+    "first_utterance": "又加班了"
+   },
+   {
+    "name": "ws_overtime_008",
+    "topic_hint": "167_work_slack",
+    "first_utterance": "又加班"
+   },
+   {
+    "name": "awt_jiaban_001",
+    "topic_hint": "730_after_work_tired",
+    "first_utterance": "加班"
+   },
+   {
+    "name": "wm_jiaban_001",
+    "topic_hint": "073_work_slack_moyu",
+    "first_utterance": "加班"
+   }
+  ]
+ }
+]

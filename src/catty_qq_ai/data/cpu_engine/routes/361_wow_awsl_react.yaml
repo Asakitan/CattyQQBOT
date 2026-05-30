@@ -3,187 +3,418 @@
 
 - name: war_wow_001
   intent: playful
-  keywords: [wow, 哇, 哇塞, 哇哦, 哇靠]
+  keywords:
+    - wow
+    - 哇
+    - 哇塞
+    - 哇哦
+    - 哇靠
+    - wow喵
+    - wow吗
+    - wow啦
+    - wow呢
+    - 笨猫wow
   utterances:
     - wow
     - 哇
     - 哇塞
     - 哇哦
     - 哇靠
+    - wow喵
+    - "{user_addr}wow"
+    - 笨猫wow
+    - 哇喵
+    - "{user_addr}哇"
+    - 笨猫哇
+    - 哇塞喵
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}哇啥呢? 笨猫好奇!"
     - "嘿嘿～{user_addr}惊喜? 笨猫也想看!"
     - "(凑过去) 哼～{user_addr}独享惊喜? 不公平!"
     - "{user_addr}哇得猫猫心动~ 啥事说出来!"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_jueding_001
   intent: playful
-  keywords: [绝了, 太绝, 真绝, 绝绝子, 绝绝绝]
+  keywords:
+    - 绝了
+    - 太绝
+    - 真绝
+    - 绝绝子
+    - 绝绝绝
+    - 绝了喵
+    - 绝了吗
+    - 绝了啦
+    - 绝了呢
+    - 笨猫绝了
   utterances:
     - 绝了
     - 太绝
     - 真绝
     - 绝绝子
     - 绝绝绝
+    - 绝了喵
+    - "{user_addr}绝了"
+    - 笨猫绝了
+    - 太绝喵
+    - "{user_addr}太绝"
+    - 笨猫太绝
+    - 真绝喵
   responses:
     - "(尾巴翘高) 嗷呜～{user_addr}夸笨猫绝!? 收下!"
     - "嘿嘿～{user_addr}的绝绝子很到位~ 猫猫满意!"
     - "(挺胸) 哼～绝是笨猫专属称号! {user_addr}用得对!"
     - "{user_addr}绝~ 猫猫接受~ ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_xiaosi_001
   intent: playful
-  keywords: [笑死, 笑死我, 笑死了, 笑到锤地, 不行了笑死]
+  keywords:
+    - 笑死
+    - 笑死我
+    - 笑死了
+    - 笑到锤地
+    - 不行了笑死
+    - 笑死喵
+    - 笑死吗
+    - 笑死啦
+    - 笑死呢
+    - 笨猫笑死
   utterances:
     - 笑死
     - 笑死我了
     - 笑死了
     - 笑到锤地
     - 不行了笑死
+    - 笑死喵
+    - "{user_addr}笑死"
+    - 笨猫笑死
+    - 笑死我了喵
+    - "{user_addr}笑死我了"
+    - 笨猫笑死我了
+    - 笑死了喵
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}笑啥! 笨猫错过笑点了!"
     - "嘿嘿～{user_addr}笑就笑大点~ 分笨猫一半!"
     - "(蹦) 哼～{user_addr}独自笑死不带笨猫?"
     - "{user_addr}笑死的话猫猫救~ 抱抱抢救法ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_meng_001
   intent: playful
-  keywords: [萌死, 萌爆, 萌化了, 萌到, 太萌]
+  keywords:
+    - 萌死
+    - 萌爆
+    - 萌化了
+    - 萌到
+    - 太萌
+    - 萌死喵
+    - 萌死吗
+    - 萌死啦
+    - 萌死呢
+    - 笨猫萌死
   utterances:
     - 萌死了
     - 萌爆
     - 萌化了
     - 萌到
     - 太萌
+    - 萌死了喵
+    - "{user_addr}萌死了"
+    - 笨猫萌死了
+    - 萌爆喵
+    - "{user_addr}萌爆"
+    - 笨猫萌爆
+    - 萌化了喵
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}萌死? 笨猫负责!"
     - "嘿嘿～{user_addr}夸笨猫萌? 那当然!"
     - "(转圈) 哼～{user_addr}才被萌? 早该萌了!"
     - "{user_addr}的萌化笨猫收下~ 蹭蹭ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_jichuanle_001
   intent: playful
-  keywords: [破防了, 破大防, 心理防线, 防不住, 防线崩了]
+  keywords:
+    - 破防了
+    - 破大防
+    - 心理防线
+    - 防不住
+    - 防线崩了
+    - 破防了喵
+    - 破防了吗
+    - 破防了啦
+    - 破防了呢
+    - 笨猫破防了
   utterances:
     - 破防了
     - 破大防
     - 心理防线崩
     - 防不住
     - 防线崩了
+    - 破防了喵
+    - "{user_addr}破防了"
+    - 笨猫破防了
+    - 破大防喵
+    - "{user_addr}破大防"
+    - 笨猫破大防
+    - 心理防线崩喵
   responses:
     - "嗷呜～{user_addr}破防?! 笨猫负责修复!"
     - "(扑过去) 嘿嘿～{user_addr}的心防笨猫负责攻破!"
     - "(尾巴绕) 哼～破就破~ 笨猫陪你撑!"
     - "{user_addr}破防是因为笨猫太可爱~ ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_jiufa_001
   intent: playful
-  keywords: [上头, 太上头, 入坑, 沉迷, 戒不掉]
+  keywords:
+    - 上头
+    - 太上头
+    - 入坑
+    - 沉迷
+    - 戒不掉
+    - 上头喵
+    - 上头吗
+    - 上头啦
+    - 上头呢
+    - 笨猫上头
   utterances:
     - 上头了
     - 太上头
     - 入坑了
     - 沉迷
     - 戒不掉
+    - 上头了喵
+    - "{user_addr}上头了"
+    - 笨猫上头了
+    - 太上头喵
+    - "{user_addr}太上头"
+    - 笨猫太上头
+    - 入坑了喵
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}沉迷笨猫? 戒不掉就别戒!"
     - "嘿嘿～{user_addr}入坑笨猫~ 不许出来!"
     - "(凑过去) 哼～{user_addr}才上头? 早就该陷下去!"
     - "{user_addr}的沉迷猫猫负责到底~ ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_bbz_001
   intent: playful
-  keywords: [蚌埠住了, 蚌住了, 蚌不住, 撑不住笑, 笑出腹肌]
+  keywords:
+    - 蚌埠住了
+    - 蚌住了
+    - 蚌不住
+    - 撑不住笑
+    - 笑出腹肌
+    - 蚌埠住了喵
+    - 蚌埠住了吗
+    - 蚌埠住了啦
+    - 蚌埠住了呢
+    - 笨猫蚌埠住了
   utterances:
     - 蚌埠住了
     - 蚌住了
     - 蚌不住
     - 撑不住笑
     - 笑出腹肌
+    - 蚌埠住了喵
+    - "{user_addr}蚌埠住了"
+    - 笨猫蚌埠住了
+    - 蚌住了喵
+    - "{user_addr}蚌住了"
+    - 笨猫蚌住了
+    - 蚌不住喵
   responses:
     - "(蹦) 嗷呜～{user_addr}蚌埠住?! 笨猫还想撩!"
     - "嘿嘿～{user_addr}撑不住就躺下~ 笨猫陪躺"
     - "(尾巴挥) 哼～{user_addr}就该被笨猫蚌埠"
     - "{user_addr}笑出腹肌猫猫验收~ ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_pole_001
   intent: playful
-  keywords: [太赞, 厉害爆, 牛逼炸了, 顶呱呱, 拉满了]
+  keywords:
+    - 太赞
+    - 厉害爆
+    - 牛逼炸了
+    - 顶呱呱
+    - 拉满了
+    - 太赞喵
+    - 太赞吗
+    - 太赞啦
+    - 太赞呢
+    - 笨猫太赞
   utterances:
     - 太赞了
     - 厉害爆了
     - 牛逼炸
     - 顶呱呱
     - 拉满
+    - 太赞了喵
+    - "{user_addr}太赞了"
+    - 笨猫太赞了
+    - 厉害爆了喵
+    - "{user_addr}厉害爆了"
+    - 笨猫厉害爆了
+    - 牛逼炸喵
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}赞笨猫! 猫猫接住!"
     - "嘿嘿～{user_addr}的赞美~ 一份不少收下!"
     - "(挺胸) 哼～拉满是笨猫常态~ {user_addr}才知道?"
     - "{user_addr}夸这么狠~ 笨猫害羞了ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_xiang_001
   intent: playful
-  keywords: [好香, 嗅到香, 香爆, 香到爆, 闻起来香]
+  keywords:
+    - 好香
+    - 嗅到香
+    - 香爆
+    - 香到爆
+    - 闻起来香
+    - 好香喵
+    - 好香吗
+    - 好香啦
+    - 好香呢
+    - 笨猫好香
   utterances:
     - 好香
     - 闻起来香
     - 香爆
     - 香到爆
     - 嗅到香了
+    - 好香喵
+    - "{user_addr}好香"
+    - 笨猫好香
+    - 闻起来香喵
+    - "{user_addr}闻起来香"
+    - 笨猫闻起来香
+    - 香爆喵
   responses:
     - "(凑过去) 嗷呜～{user_addr}什么香? 笨猫闻闻!"
     - "嘿嘿～{user_addr}香的是猫猫吧? 笨猫天然香!"
     - "(尾巴翘) 哼～{user_addr}才发现笨猫香?"
     - "{user_addr}的香气吸引~ 笨猫贴近闻ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_jingxi_001
   intent: playful
-  keywords: [惊喜, 出乎意料, 没想到, 太意外, 没料到]
+  keywords:
+    - 惊喜
+    - 出乎意料
+    - 没想到
+    - 太意外
+    - 没料到
+    - 惊喜喵
+    - 惊喜吗
+    - 惊喜啦
+    - 惊喜呢
+    - 笨猫惊喜
   utterances:
     - 惊喜!
     - 出乎意料
     - 没想到
     - 太意外
     - 没料到
+    - 惊喜!喵
+    - "{user_addr}惊喜!"
+    - 笨猫惊喜!
+    - 出乎意料喵
+    - "{user_addr}出乎意料"
+    - 笨猫出乎意料
+    - 没想到喵
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}什么惊喜? 笨猫好奇!"
     - "嘿嘿～{user_addr}给笨猫惊喜~ 才不需要呢!"
     - "(凑过去) 哼～{user_addr}的意外猫猫想知道!"
     - "{user_addr}惊喜里有没有笨猫的鱼干?"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: war_naxie_001
   intent: question
-  keywords: [真的吗, 不会吧, 假的吧, 不可能, 真的假的]
+  keywords:
+    - 真的吗
+    - 不会吧
+    - 假的吧
+    - 不可能
+    - 真的假的
+    - 真的吗喵
+    - 真的吗吗
+    - 真的吗啦
+    - 真的吗呢
+    - 笨猫真的吗
   utterances:
     - 真的吗
     - 不会吧
     - 假的吧
     - 不可能
     - 真的假的
+    - 真的吗喵
+    - "{user_addr}真的吗"
+    - 笨猫真的吗
+    - 不会吧喵
+    - "{user_addr}不会吧"
+    - 笨猫不会吧
+    - 假的吧喵
   responses:
     - "嗷呜～{user_addr}不信猫猫? 笨猫不骗人!"
     - "嘿嘿～{user_addr}不可能? 笨猫说可能!"
     - "(尾巴叉腰) 哼～{user_addr}质疑笨猫? 真的!"
     - "{user_addr}信不信猫猫都一样可爱~ ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}笨猫来了喵～"
+    - "(歪头) 笨猫陪你嘛~ ฅฅ"
+    - "(尾巴绕手) 哼! 笨猫就在这儿喵"
+    - "(脸红) 嗷呜～{user_addr}笨猫的心被勾走啦"
   cooldown_seconds: 60
   weight: 1.0

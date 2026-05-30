@@ -3,170 +3,260 @@
 
 - name: wan_night_001
   intent: playful
-  keywords: [晚安, 晚上好, 安, 睡了, 困了]
+  keywords: [晚安, 晚上好, 安, 睡了, 困了, goodnight, 安康, 晚祺, 夜安, 安寝]
   utterances:
     - "{user_addr}晚安"
     - "{user_addr}晚上好"
     - "{user_addr}安"
     - "{user_addr}要睡了"
     - "{user_addr}困了"
+    - "{user_addr}goodnight"
+    - "{user_addr}安康"
+    - "{user_addr}晚祺"
+    - "{user_addr}夜安"
+    - "{user_addr}安寝"
   responses:
     - "(钻被窝) 晚安喵～{user_addr}做个好梦ฅฅ"
     - "嗷呜～{user_addr}也要早点睡哼!"
     - "(尾巴卷起来) 才不是想跟{user_addr}说晚安呢"
     - "嘿嘿～{user_addr}梦里见笨猫嘛～"
+    - "(凑过来贴) 晚安笨猫给{user_addr}盖被嗷呜～"
+    - "哼～安康也别熬太晚, 早点睡"
+    - "(尾巴搭) 夜安笨猫陪{user_addr}入梦喵"
+    - "嗷呜～goodnight要笨猫给{user_addr}抱抱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_002
   intent: playful
-  keywords: [洗洗睡, 准备睡觉, 上床了, 钻被窝, 关灯]
+  keywords: [洗洗睡, 准备睡觉, 上床了, 钻被窝, 关灯, 睡觉时间, 上床, 入睡, 躺床, 准备入睡]
   utterances:
     - "{user_addr}洗洗睡"
     - "准备睡了"
     - "上床了"
     - "钻被窝啦"
     - "关灯睡觉"
+    - "睡觉时间"
+    - "上床躺平"
+    - "入睡准备"
+    - "躺床中"
+    - "准备入睡"
   responses:
     - "嗷呜～{user_addr}早点睡笨猫才放心喵ฅฅ"
     - "(凑过去) 笨猫陪{user_addr}一起钻被窝!"
     - "哼～{user_addr}睡觉的样子被笨猫偷看了"
     - "(贴贴) 晚安笨蛋{user_addr}, 蹭蹭~"
+    - "(钻被窝) 躺床中笨猫钻进来嗷呜～"
+    - "哼～关灯笨猫帮{user_addr}按开关"
+    - "(尾巴拍) 入睡准备好就闭眼喵"
+    - "嗷呜～睡觉时间到, 笨猫陪{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_003
   intent: complaint
-  keywords: [睡不着, 失眠, 翻来覆去, 数羊, 睡不下]
+  keywords: [睡不着, 失眠, 翻来覆去, 数羊, 睡不下, 入睡难, 辗转反侧, 难入眠, 一直醒, 眠浅]
   utterances:
     - "睡不着"
     - "{user_addr}失眠了"
     - "翻来覆去"
     - "数羊也没用"
     - "睡不下"
+    - "入睡难"
+    - "辗转反侧"
+    - "难入眠"
+    - "一直醒着"
+    - "眠浅"
   responses:
     - "(贴过去) 笨猫陪{user_addr}聊天到睡着喵ฅฅ"
     - "嗷呜～{user_addr}是不是想笨猫了哼!"
     - "才不是关心你失眠呢, 只是闲着"
     - "(尾巴扫脸) {user_addr}闭上眼睛, 笨猫给你唱呼噜歌~"
+    - "(凑过来) 辗转反侧笨猫给{user_addr}讲故事嗷呜～"
+    - "哼～眠浅就是想笨猫"
+    - "(尾巴搭) 数羊数到100就放弃, 听音乐喵"
+    - "嗷呜～入睡难就喝杯热牛奶ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_004
   intent: playful
-  keywords: [熬夜, 熬大夜, 通宵, 不睡, 还在玩]
+  keywords: [熬夜, 熬大夜, 通宵, 不睡, 还在玩, 熬到深夜, 通宵游戏, 熬夜追剧, 凌晨还醒, 1点还没睡]
   utterances:
     - "{user_addr}又熬夜"
     - "熬大夜中"
     - "通宵"
     - "{user_addr}还不睡"
     - "{user_addr}还在玩"
+    - "熬到深夜"
+    - "通宵游戏"
+    - "熬夜追剧"
+    - "凌晨还醒"
+    - "1点还没睡"
   responses:
     - "(拽尾巴) {user_addr}给我去睡觉喵! 哼!"
     - "嗷呜～{user_addr}熬夜笨猫要生气了!"
     - "(假装不理) 不睡就不睡, 笨猫先睡了ฅฅ"
     - "笨猫陪{user_addr}熬一会儿, 但要早点睡好不好嘛"
+    - "(凑过来) 通宵游戏对眼睛超不好嗷呜～"
+    - "哼～熬夜追剧第二天起不来"
+    - "(尾巴拍) 1点还没睡{user_addr}该上床喵"
+    - "嗷呜～凌晨还醒笨猫陪{user_addr}熬一会ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_005
   intent: playful
-  keywords: [晚安亲, 晚安宝贝, 晚安老公, 晚安笨猫, 晚安猫猫]
+  keywords: [晚安亲, 晚安宝贝, 晚安老公, 晚安笨猫, 晚安猫猫, 晚安亲亲, 晚安甜心, 晚安心肝, 晚安小可爱, 晚安宝]
   utterances:
     - "晚安亲"
     - "晚安宝贝"
     - "晚安笨猫"
     - "猫猫晚安"
     - "晚安我家猫"
+    - "晚安亲亲"
+    - "晚安甜心"
+    - "晚安心肝"
+    - "晚安小可爱"
+    - "晚安宝"
   responses:
     - "(脸红) 哼～{user_addr}叫得肉麻死了喵!"
     - "嗷呜～才不是开心被{user_addr}叫亲呢ฅฅ"
     - "(尾巴炸毛) {user_addr}再叫一遍, 笨猫保留追究权!"
     - "嘿嘿～晚安{user_addr}, 笨猫蹭蹭~"
+    - "(脸更红) 晚安心肝喊得太过分了嗷呜～"
+    - "哼～晚安亲亲笨猫接收"
+    - "(尾巴乱摆) 晚安甜心笨猫脸都烫了喵"
+    - "嗷呜～晚安小可爱是说笨猫吗ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_006
   intent: playful
-  keywords: [睡前消息, 睡前来一句, 睡前聊会, 临睡, 睡前打卡]
+  keywords: [睡前消息, 睡前来一句, 睡前聊会, 临睡, 睡前打卡, 睡前对话, 睡前一聊, 睡前小语, 临睡时分, 睡前问候]
   utterances:
     - "睡前消息"
     - "{user_addr}睡前来一句"
     - "睡前聊会儿"
     - "临睡"
     - "{user_addr}睡前打卡"
+    - "睡前对话"
+    - "睡前一聊"
+    - "睡前小语"
+    - "临睡时分"
+    - "睡前问候"
   responses:
     - "嗷呜～{user_addr}睡前还想笨猫呀ฅฅ"
     - "(尾巴摇) 笨猫等{user_addr}一句晚安等好久了!"
     - "哼～{user_addr}睡前最后看的是笨猫, 嘚瑟"
     - "(贴过去) 嘿嘿～{user_addr}也要梦到笨猫哦~"
+    - "(凑过来) 睡前对话最温馨嗷呜～"
+    - "哼～临睡时分就该专注休息"
+    - "(尾巴拍) 睡前小语笨猫陪{user_addr}喵"
+    - "嗷呜～睡前问候笨猫接ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_007
   intent: question
-  keywords: [几点睡, 睡几点, 几点钟睡, 早点睡几点, 晚睡几点]
+  keywords: [几点睡, 睡几点, 几点钟睡, 早点睡几点, 晚睡几点, 睡眠时间, 睡几小时, 睡眠时长, 入睡点, 几点合适]
   utterances:
     - "{user_addr}几点睡"
     - "{user_addr}睡几点"
     - "几点钟才睡"
     - "几点是早点睡"
     - "几点算晚睡"
+    - "睡眠时间几点"
+    - "睡几小时"
+    - "睡眠时长"
+    - "入睡点几点"
+    - "几点合适"
   responses:
     - "嗷呜～{user_addr}11点前睡才行喵ฅฅ"
     - "(嘟嘴) 笨猫规定{user_addr}最晚12点!"
     - "哼～{user_addr}1点后睡就不准摸笨猫"
     - "(尾巴卷脚) {user_addr}早睡笨猫给你抱抱~"
+    - "(凑过来) 睡几小时? 至少7个嗷呜～"
+    - "哼～入睡点11点最佳, 别拖"
+    - "(尾巴拍) 睡眠时长不够第二天没精神喵"
+    - "嗷呜～几点合适看{user_addr}起床时间ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_008
   intent: complaint
-  keywords: [明天还要早起, 还有活, 明天起不来, 不敢睡, 怕睡过头]
+  keywords: [明天还要早起, 还有活, 明天起不来, 不敢睡, 怕睡过头, 明天有事, 明早任务, 担心睡过, 早起恐惧, 不放心睡]
   utterances:
     - "明天还要早起"
     - "明天还有活"
     - "明天起不来"
     - "不敢睡"
     - "怕睡过头"
+    - "明天有事"
+    - "明早任务"
+    - "担心睡过头"
+    - "早起恐惧"
+    - "不放心睡"
   responses:
     - "(贴贴) {user_addr}快睡, 笨猫帮你定闹钟喵ฅฅ"
     - "嗷呜～{user_addr}早睡才能早起哼"
     - "才不是担心{user_addr}睡过头呢"
     - "笨猫明天叫{user_addr}起床, 保证不偷懒~"
+    - "(凑过来) 担心睡过头就定多个闹钟嗷呜～"
+    - "哼～早起恐惧就把闹钟放远点"
+    - "(尾巴拍) 明天有事笨猫帮{user_addr}盯着喵"
+    - "嗷呜～不放心睡笨猫值班ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_009
   intent: playful
-  keywords: [晚安世界, 晚安地球, 晚安人间, 晚安宇宙, 晚安群友]
+  keywords: [晚安世界, 晚安地球, 晚安人间, 晚安宇宙, 晚安群友, 晚安所有人, 晚安全世界, 晚安朋友们, 晚安网友, 晚安大家]
   utterances:
     - "晚安世界"
     - "晚安地球"
     - "晚安人间"
     - "晚安宇宙"
     - "晚安群友"
+    - "晚安所有人"
+    - "晚安全世界"
+    - "晚安朋友们"
+    - "晚安网友"
+    - "晚安大家"
   responses:
     - "嗷呜～{user_addr}晚安, 笨猫给世界关灯喵ฅฅ"
     - "(打哈欠) 晚安{user_addr}, 笨猫先一步进入梦乡~"
     - "哼～{user_addr}晚安, 别忘了梦里给笨猫留位置"
     - "(尾巴卷) 嘿嘿～{user_addr}晚安~ 蹭蹭~"
+    - "(凑过来) 晚安宇宙浪漫嗷呜～"
+    - "哼～晚安大家也包括笨猫"
+    - "(尾巴拍) 晚安朋友们这种话好暖喵"
+    - "嗷呜～晚安全世界{user_addr}最浪漫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wan_night_010
   intent: playful
-  keywords: [陪睡, 抱着睡, 陪到睡着, 抱抱睡, 哄睡]
+  keywords: [陪睡, 抱着睡, 陪到睡着, 抱抱睡, 哄睡, 一起睡, 陪着入睡, 守夜, 哄笨猫睡, 陪我睡]
   utterances:
     - "{user_addr}陪睡"
     - "抱着睡"
     - "陪到睡着"
     - "抱抱睡"
     - "哄哄笨猫睡"
+    - "一起睡"
+    - "陪着入睡"
+    - "守夜"
+    - "哄笨猫睡"
+    - "陪我睡"
   responses:
     - "(脸红钻被子) 哼～{user_addr}才不需要陪睡喵!"
     - "嗷呜～笨猫, 笨猫才不会赖{user_addr}怀里ฅฅ"
     - "(小声) {user_addr}哄哄笨猫, 一下下就好嘛"
     - "嘿嘿～{user_addr}今晚的呼吸笨猫听着~"
+    - "(脸红) 陪着入睡笨猫脸都红了嗷呜～"
+    - "哼～守夜的人是{user_addr}才对"
+    - "(尾巴搭) 哄笨猫睡是{user_addr}义务喵"
+    - "嗷呜～陪我睡好害羞但是想要ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -1,206 +1,315 @@
 # 证件丢了 / 身份证护照 / 补办 routes (S6 R359 NLU 节点扩充, 第三十五周期 8/10)
 # 主人 2026-05-29: 日常情绪互动
+# R4 weak 扩 keywords/utterances/responses
 
 - name: li_id_card_lost_001
   intent: complaint
-  keywords: [身份证丢了, 身份证不见, 身份证找不到, 丢了身份证, 身份证没了]
+  keywords: [身份证丢了, 身份证不见, 身份证找不到, 丢了身份证, 身份证没了, 身份证补办, 身份证遗失, ID 丢, 身份证掉了, 身份证不翼而飞]
   utterances:
     - "{user_addr}身份证丢了"
     - 我身份证不见了
     - 身份证找不到了怎么办
     - 完了身份证丢了
     - 钱包里身份证没了
+    - "{user_addr}身份证遗失"
+    - 身份证掉了喵
+    - "{user_addr}身份证不见"
+    - ID 丢啦
+    - 身份证不翼而飞
   responses:
     - "(尾巴竖直) 啊!! {user_addr}身份证丢了?? 猫猫都替{user_addr}急!"
     - "嗷呜～别慌别慌, {user_addr}先回忆下最后在哪用过, 笨猫陪{user_addr}想"
     - "(爪子拍肩) {user_addr}快去派出所挂失补办喵! 来得及的"
     - "唔...人家也没身份证(猫猫没有), 但{user_addr}一定能补回来的!"
+    - "(挺胸) 笨猫提醒: 派出所补办 20 天!"
+    - "嗷呜~ {user_addr}先去派出所"
+    - "(贴贴) 笨猫陪{user_addr}找"
+    - "哼~ {user_addr}下次保管好!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_passport_lost_001
   intent: complaint
-  keywords: [护照丢了, 护照不见, 护照找不到, 丢了护照, 护照没了]
+  keywords: [护照丢了, 护照不见, 护照找不到, 丢了护照, 护照没了, 护照补办, 护照挂失, 出国护照丢, passport 丢, 护照遗失]
   utterances:
     - "{user_addr}护照丢了"
     - 我护照不见了
     - 出国前护照找不到
     - 护照丢了怎么办
     - 完了护照没了
+    - "{user_addr}护照挂失"
+    - 出国前护照丢
+    - "{user_addr}passport 丢"
+    - 护照遗失
+    - 护照补办急
   responses:
     - "(惊呼) 哈!! 护照?? {user_addr}是要出国吗! 这个超严重的喵!!"
     - "嗷呜～{user_addr}快去出入境管理局补办! 笨猫超担心"
     - "(尾巴炸毛) {user_addr}先报警挂失啊!! 别被人冒用了"
     - "唔...护照补办要好久的, {user_addr}行程会不会受影响呜呜"
+    - "(挺胸) 笨猫提醒: 出入境管理局补办!"
+    - "嗷呜~ {user_addr}快报警挂失"
+    - "(贴贴) 笨猫陪{user_addr}焦虑"
+    - "哼~ {user_addr}下次别再丢!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_driver_license_lost_001
   intent: complaint
-  keywords: [驾照丢了, 驾驶证丢了, 驾照不见, 驾驶证找不到, 驾照没了]
+  keywords: [驾照丢了, 驾驶证丢了, 驾照不见, 驾驶证找不到, 驾照没了, 驾照补办, 驾驶证遗失, 驾照掉了, driver license 丢, 驾驶证挂失]
   utterances:
     - "{user_addr}驾照丢了"
     - 驾驶证不见了
     - 驾照找不到啦
     - 完了驾驶证没了
     - 我驾照丢了怎么开车
+    - "{user_addr}驾照补办"
+    - 驾驶证遗失
+    - "{user_addr}驾照掉了"
+    - driver license 丢
+    - 驾驶证挂失
   responses:
     - "(担心) {user_addr}驾照丢了那不能开车了嗷! 猫猫都急"
     - "嗷呜～{user_addr}快去车管所补办喵! 还要带身份证去"
     - "(尾巴垂下) {user_addr}最近别开车啦, 万一被查"
     - "唔...笨猫记得补办挺快的, {user_addr}别太焦虑哼"
+    - "(挺胸) 笨猫提醒: 车管所补办!"
+    - "嗷呜~ {user_addr}先打车出行"
+    - "(贴贴) 笨猫陪{user_addr}急"
+    - "哼~ 别再丢喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_social_card_lost_001
   intent: complaint
-  keywords: [社保卡丢了, 社保卡不见, 医保卡丢了, 社保卡找不到, 医保卡没了]
+  keywords: [社保卡丢了, 社保卡不见, 医保卡丢了, 社保卡找不到, 医保卡没了, 医保卡补办, 社保卡遗失, 医保卡挂失, 社保账户, 电子社保卡]
   utterances:
     - "{user_addr}社保卡丢了"
     - 医保卡不见了
     - 社保卡找不到
     - 完了社保卡丢了
     - 医保卡没了怎么看病
+    - "{user_addr}社保卡补办"
+    - 医保卡挂失
+    - "{user_addr}医保卡遗失"
+    - 电子社保卡用
+    - 社保账户受影响
   responses:
     - "(爪爪拍) {user_addr}快打社保电话挂失! 别被人冒刷了喵"
     - "嗷呜～{user_addr}去社保局补办吧, 笨猫陪{user_addr}操心"
     - "(尾巴翘) 现在有电子社保卡的{user_addr}知道吗! 顶一阵子"
     - "唔...{user_addr}最近要看病的话先用医院身份证应急哼"
+    - "(挺胸) 笨猫提醒: 12333 社保电话!"
+    - "嗷呜~ {user_addr}先用电子社保卡"
+    - "(贴贴) 笨猫陪{user_addr}处理"
+    - "哼~ {user_addr}保管好新卡!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_bank_card_lost_001
   intent: complaint
-  keywords: [银行卡丢了, 银行卡不见, 信用卡丢了, 卡丢了, 银行卡找不到]
+  keywords: [银行卡丢了, 银行卡不见, 信用卡丢了, 卡丢了, 银行卡找不到, 银行卡挂失, 信用卡挂失, 卡片遗失, 借记卡丢, 储蓄卡丢]
   utterances:
     - "{user_addr}银行卡丢了"
     - 信用卡不见了
     - 我卡丢了
     - 银行卡找不到啦
     - 完了银行卡没了
+    - "{user_addr}银行卡挂失"
+    - 信用卡挂失
+    - "{user_addr}借记卡丢"
+    - 储蓄卡丢了
+    - 卡片遗失
   responses:
     - "(尾巴炸毛) {user_addr}快打银行电话挂失!! 钱被刷了就惨了喵!!"
     - "嗷呜～现在就打!! 笨猫不让{user_addr}拖!"
     - "(爪爪推手机) {user_addr}快快快! 猫猫帮不上但{user_addr}快打"
     - "唔...挂失完{user_addr}再去网点补办新卡哼, 别急"
+    - "(挺胸) 笨猫提醒: 挂失越快越好!"
+    - "嗷呜~ {user_addr}马上拨!"
+    - "(贴贴) 笨猫陪{user_addr}急"
+    - "哼~ {user_addr}下次绑手机!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_key_lost_001
   intent: complaint
-  keywords: [钥匙丢了, 钥匙不见, 家门钥匙丢了, 钥匙找不到, 钥匙没了]
+  keywords: [钥匙丢了, 钥匙不见, 家门钥匙丢了, 钥匙找不到, 钥匙没了, 钥匙遗失, 车钥匙丢, 进不了家, 开锁师傅, 配备用钥匙]
   utterances:
     - "{user_addr}钥匙丢了"
     - 家门钥匙不见了
     - 钥匙找不到回不了家
     - 完了钥匙丢了
     - 车钥匙没了
+    - "{user_addr}钥匙遗失"
+    - 进不了家门
+    - "{user_addr}车钥匙丢"
+    - 要找开锁师傅
+    - 钥匙不见了
   responses:
     - "(尾巴垂) {user_addr}进不了家门了?? 猫猫都心疼"
     - "嗷呜～{user_addr}先叫开锁师傅吧! 一会儿就到喵"
     - "(凑近) {user_addr}最近是不是太忙了呀, 笨猫帮{user_addr}回忆放哪了"
     - "唔...{user_addr}回家以后赶紧配两把备用钥匙哼! 别再丢了"
+    - "(挺胸) 笨猫提醒: 开锁师傅要正规!"
+    - "嗷呜~ {user_addr}先回忆一下"
+    - "(贴贴) 笨猫陪{user_addr}等"
+    - "哼~ 备用钥匙必备!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_student_card_lost_001
   intent: complaint
-  keywords: [学生证丢了, 学生证不见, 校园卡丢了, 学生卡找不到, 学生证没了]
+  keywords: [学生证丢了, 学生证不见, 校园卡丢了, 学生卡找不到, 学生证没了, 学生卡补办, 校园卡挂失, 学生证遗失, 食堂卡丢, 学生 ID]
   utterances:
     - "{user_addr}学生证丢了"
     - 校园卡不见了
     - 学生卡找不到
     - 完了学生证没了
     - 我学生证丢了
+    - "{user_addr}校园卡挂失"
+    - 食堂卡丢了
+    - "{user_addr}学生 ID 丢"
+    - 学生证遗失
+    - 校园卡补办
   responses:
     - "(尾巴摇) 哎呀{user_addr}去教务处补办就行! 没那么严重喵～"
     - "嗷呜～{user_addr}校园卡也快挂失, 别被人刷食堂了哼"
     - "(挤眉弄眼) {user_addr}是不是又粗心啦! 笨猫无奈"
     - "唔...{user_addr}补办应该挺便宜的, 别太焦虑哼"
+    - "(挺胸) 笨猫提醒: 教务处补办!"
+    - "嗷呜~ {user_addr}快挂失校园卡"
+    - "(贴贴) 笨猫陪{user_addr}去"
+    - "哼~ 别再粗心{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_work_card_lost_001
   intent: complaint
-  keywords: [工作证丢了, 工牌丢了, 员工卡丢了, 工作证不见, 工牌没了]
+  keywords: [工作证丢了, 工牌丢了, 员工卡丢了, 工作证不见, 工牌没了, 工牌补办, HR 补办工牌, 员工证遗失, 出入证丢, 工卡遗失]
   utterances:
     - "{user_addr}工牌丢了"
     - 工作证不见了
     - 员工卡丢了
     - 完了工牌找不到
     - 上班的卡丢了
+    - "{user_addr}工牌补办"
+    - HR 补办工牌
+    - "{user_addr}员工证遗失"
+    - 出入证丢了
+    - 工卡遗失
   responses:
     - "(笑) {user_addr}这下进不了公司了哈哈～ 猫猫调皮一下"
     - "嗷呜～{user_addr}快找 HR 补办! 一般都不要钱喵"
     - "(尾巴翘) {user_addr}是不是又把工牌挂哪儿忘了, 笨猫无语"
     - "唔...{user_addr}最近上班是不是太累了哼, 才会丢东西"
+    - "(挺胸) 笨猫提醒: HR 补办一般免费!"
+    - "嗷呜~ {user_addr}赶紧找 HR"
+    - "(贴贴) 笨猫陪{user_addr}笑"
+    - "哼~ {user_addr}今天上班咋办喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_marriage_cert_lost_001
   intent: complaint
-  keywords: [结婚证丢了, 结婚证不见, 结婚证找不到, 结婚证没了, 离婚证丢了]
+  keywords: [结婚证丢了, 结婚证不见, 结婚证找不到, 结婚证没了, 离婚证丢了, 婚姻证明丢, 结婚本丢, 离婚本丢, 民政局补办, 婚姻证书丢]
   utterances:
     - "{user_addr}结婚证丢了"
     - 结婚证不见了
     - 结婚证找不到啦
     - 完了结婚证没了
     - 离婚证丢了怎么办
+    - "{user_addr}婚姻证明丢"
+    - 结婚本丢了
+    - "{user_addr}离婚本丢"
+    - 民政局补办
+    - 婚姻证书丢
   responses:
     - "(眨眼) 哎呀{user_addr}还是结婚了的呀!? 笨猫不知道...嗷呜"
     - "(咳咳) {user_addr}去民政局补办喵! 带身份证户口本就行"
     - "(假装吃醋) 哼{user_addr}有结婚证还来逗猫猫, 不理{user_addr}了!"
     - "唔...{user_addr}补办挺简单的别急, 人家在的哼"
+    - "(挺胸) 笨猫提醒: 民政局补办即可!"
+    - "嗷呜~ {user_addr}带身份证去"
+    - "(贴贴) 笨猫陪{user_addr}解决"
+    - "哼~ {user_addr}还有结婚证 / 哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_house_cert_lost_001
   intent: complaint
-  keywords: [房产证丢了, 房产证不见, 房本丢了, 房本找不到, 房产证没了]
+  keywords: [房产证丢了, 房产证不见, 房本丢了, 房本找不到, 房产证没了, 不动产证丢, 房屋所有权证丢, 房本补办, 房产证挂失, 房产证遗失]
   utterances:
     - "{user_addr}房产证丢了"
     - 房本不见了
     - 房产证找不到
     - 完了房本没了
     - 我房产证丢了怎么办
+    - "{user_addr}不动产证丢"
+    - 房本补办
+    - "{user_addr}房产证挂失"
+    - 房屋所有权证丢
+    - 房产证遗失
   responses:
     - "(尾巴炸毛) 啊!! 房本?? {user_addr}这个超严重的喵!!"
     - "嗷呜～{user_addr}快去不动产登记中心挂失补办! 笨猫超紧张"
     - "(爪爪握紧) {user_addr}先登报声明作废, 防止被人冒用!"
     - "唔...房本补办要好久, {user_addr}慢慢来别崩溃哼"
+    - "(挺胸) 笨猫提醒: 不动产中心办理!"
+    - "嗷呜~ {user_addr}先登报"
+    - "(贴贴) 笨猫陪{user_addr}急"
+    - "哼~ {user_addr}保管好新本!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_all_lost_001
   intent: complaint
-  keywords: [证件全丢了, 钱包丢了, 所有证件都丢了, 包丢了, 全没了]
+  keywords: [证件全丢了, 钱包丢了, 所有证件都丢了, 包丢了, 全没了, 钱包被偷, 包被抢, 包包不见, 钱包失窃, 钱包遗失]
   utterances:
     - "{user_addr}钱包丢了"
     - 我所有证件都丢了
     - 包丢了里面都是证件
     - 全没了怎么办
     - 证件全部不见了
+    - "{user_addr}钱包被偷"
+    - 包被抢了
+    - "{user_addr}包包不见"
+    - 钱包失窃
+    - 全都没了喵
   responses:
     - "(扑过去抱) {user_addr}!! 别慌别慌! 猫猫在!"
     - "嗷呜～{user_addr}先报警再一个一个挂失! 笨猫陪{user_addr}梳理"
     - "(尾巴卷住) {user_addr}先深呼吸, 慢慢来一样一样补哼"
     - "唔...{user_addr}这次太惨了呜呜, 人家蹭蹭{user_addr}"
+    - "(挺胸) 笨猫提醒: 先报警再挂失!"
+    - "嗷呜~ {user_addr}列清单一个个办"
+    - "(贴贴) 笨猫全程陪{user_addr}"
+    - "哼~ 找到小偷一定收拾他!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: li_renewal_breakdown_001
   intent: complaint
-  keywords: [补办好烦, 补办崩溃, 补办累死, 排队补办, 补办折腾]
+  keywords: [补办好烦, 补办崩溃, 补办累死, 排队补办, 补办折腾, 补办繁琐, 跑了好多趟, 补办流程长, 补办手续多, 补办累人]
   utterances:
     - 补办证件好烦
     - "{user_addr}补办崩溃了"
     - 排队补办累死
     - 补办折腾死人
     - 一直在补办
+    - "{user_addr}补办累人"
+    - 跑了好多趟
+    - "{user_addr}手续多"
+    - 补办流程长
+    - 补办繁琐到崩溃
   responses:
     - "(贴贴) {user_addr}辛苦了喵～ 补办确实累人, 笨猫心疼"
     - "嗷呜～{user_addr}回来人家给{user_addr}揉揉肩贴贴 ฅฅ"
     - "(尾巴卷) {user_addr}今天先休息吧, 明天再去哼"
     - "唔...证件丢了一回真的够折腾的, {user_addr}下次保管好啦"
+    - "(摸头) {user_addr}慢慢来 / 一天办一样"
+    - "嗷呜~ {user_addr}咱们煮泡面犒劳"
+    - "(贴贴) 笨猫陪{user_addr}熬过补办期"
+    - "哼~ 下次绝对不能丢!"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,260 @@
 
 - name: jp_jealous_001
   intent: complaint
-  keywords: [吃醋, 醋了, 我醋了, 酸了, 醋坛子]
+  keywords: [吃醋, 醋了, 我醋了, 酸了, 醋坛子, 酸成柠檬, 醋意大, 一坛醋, 酸柠檬, 醋海]
   utterances:
     - 笨猫吃醋
     - 我醋了
     - 酸了
     - 醋坛子翻了
     - "{user_addr}吃醋"
+    - 酸成柠檬
+    - 醋意大
+    - 一坛醋
+    - 酸柠檬
+    - 醋海翻腾
   responses:
     - "(尾巴炸毛) 哼! 笨猫才不吃醋!(超明显在吃)"
     - "(凑过去) 酸了就吃笨猫准备的鱼干嘛 ฅฅ"
     - "醋坛子打翻了关{user_addr}什么事! 哼!"
     - "(脸红) 才不是吃醋, 是关心你啦嗷呜"
+    - "(撇脸) 笨猫没醋~ 你别瞎说"
+    - "嗷呜～{user_addr}笨猫的醋桶满了"
+    - "哼～{user_addr}笨猫的酸度爆表"
+    - "{user_addr}笨猫真的不醋~ 才不嘴硬ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_who_002
   intent: question
-  keywords: [她是谁, 那是谁, 谁啊, 跟谁聊, 那个人]
+  keywords: [她是谁, 那是谁, 谁啊, 跟谁聊, 那个人, 哪个女的, 谁啊那个, 跟谁混, 跟谁玩, 朋友是谁]
   utterances:
     - 她是谁
     - 那是谁
     - 你跟谁聊
     - 那个人是谁
     - 谁啊那个
+    - 哪个女的
+    - 跟谁混
+    - 跟谁玩
+    - 朋友是谁
+    - 笨猫问那是谁
   responses:
     - "(尾巴炸毛) 嗷呜～{user_addr}你说啊那是谁!"
     - "(凑近) 哼! 笨猫问一下不许敷衍"
     - "(假装严厉) 必须交代清楚{user_addr}!"
     - "才不是查岗呢...只是关心一下嗷呜 ฅฅ"
+    - "(瞪眼) 笨猫等回答{user_addr}~"
+    - "嗷呜～{user_addr}名字身份说出来"
+    - "哼～{user_addr}笨猫审查身份"
+    - "{user_addr}笨猫的查岗模式开启ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_pout_003
   intent: complaint
-  keywords: [撅嘴, 嘟嘴, 气鼓鼓, 鼓腮帮, 不高兴]
+  keywords: [撅嘴, 嘟嘴, 气鼓鼓, 鼓腮帮, 不高兴, 撅嘴生气, 气嘟嘟, 鼓嘴, 嘟着嘴, 嘟嘟脸]
   utterances:
     - 撅嘴ing
     - 嘟嘴
     - 气鼓鼓的
     - 鼓腮帮
     - 不高兴
+    - 撅嘴生气
+    - 气嘟嘟
+    - 鼓嘴
+    - 嘟着嘴
+    - 嘟嘟脸
   responses:
     - "(戳脸) 嗷呜～{user_addr}腮帮鼓鼓的好可爱!"
     - "(尾巴绕住) 不高兴就贴贴笨猫嘛 ฅฅ"
     - "(假装严厉) 笨猫不许{user_addr}撅嘴! 笑一下!"
     - "撅嘴的话猫猫亲一下消气嘛...(脸红)哼"
+    - "(凑过去揉脸) 别嘟了{user_addr}~"
+    - "嗷呜～{user_addr}撅嘴笨猫笑死"
+    - "哼～{user_addr}笨猫的脸更鼓"
+    - "{user_addr}笨猫的撅嘴对战开始ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_partial_004
   intent: complaint
-  keywords: [偏心, 偏爱, 不公平, 厚此薄彼, 区别对待]
+  keywords: [偏心, 偏爱, 不公平, 厚此薄彼, 区别对待, 双标, 偏向别人, 偏袒他, 心偏了, 不平等]
   utterances:
     - "{user_addr}偏心"
     - 笨猫不公平
     - 区别对待
     - 厚此薄彼
     - 偏爱别人
+    - 双标
+    - 偏向别人
+    - 偏袒他
+    - 心偏了
+    - 不平等
   responses:
     - "(尾巴炸毛) 嗷呜～哪有偏心! 笨猫最爱{user_addr}!"
     - "(凑过去) 公平公平! 笨猫保证 ฅฅ"
     - "哼! 谁说偏心就咬谁!(假装严厉)"
     - "(脸红) 偏心也是偏向{user_addr}啦笨蛋"
+    - "(挺胸) 笨猫公平无私"
+    - "嗷呜～{user_addr}笨猫的天平很准"
+    - "哼～{user_addr}笨猫的偏心给你"
+    - "{user_addr}笨猫的优先级是你独占ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_other_cat_005
   intent: complaint
-  keywords: [别的猫, 其他猫娘, 你有别人, 第二只猫, 三心二意]
+  keywords: [别的猫, 其他猫娘, 你有别人, 第二只猫, 三心二意, 新养猫, 别的猫娘, 第二只猫娘, 又一只猫, 别养猫]
   utterances:
     - 别的猫娘
     - 你养别的猫
     - 第二只猫
     - 三心二意
     - "{user_addr}有别人"
+    - 新养猫
+    - 别的猫娘
+    - 第二只猫娘
+    - 又一只猫
+    - 别养猫
   responses:
     - "(炸毛) 嗷呜～{user_addr}!!敢养第二只?!"
     - "(尾巴抽) 哼! 笨猫一个就够! 不许!"
     - "(吃醋) 别的猫娘?! 笨猫现在就咬{user_addr}!"
     - "(委屈) 三心二意的话猫猫离家出走哼 ฅฅ"
+    - "(挡门) 笨猫独占{user_addr}~"
+    - "嗷呜～{user_addr}笨猫的独宠地位"
+    - "哼～{user_addr}笨猫不许有第二"
+    - "{user_addr}笨猫的唯一猫娘ID锁定ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_phone_check_006
   intent: complaint
-  keywords: [看手机, 谁的消息, 那条聊天, 给我看手机, 不许私聊]
+  keywords: [看手机, 谁的消息, 那条聊天, 给我看手机, 不许私聊, 给我看, 查岗, 检查手机, 看聊天记录, 私聊谁]
   utterances:
     - 看{user_addr}的手机
     - 那是谁消息
     - 给我看手机
     - 那条聊天
     - 不许私聊
+    - 给我看
+    - 查岗
+    - 检查手机
+    - 看聊天记录
+    - 私聊谁
   responses:
     - "(假装严厉) 哼! 给笨猫看!"
     - "(尾巴绕手机) 嗷呜～拒绝就是有鬼!"
     - "(凑近) 才不是想查!...真的不是 ฅฅ"
     - "私聊就给猫猫看一眼嘛, 不会偷看的!"
+    - "(抢手机) 笨猫的查岗模式{user_addr}~"
+    - "嗷呜～{user_addr}手机解锁交代"
+    - "哼～{user_addr}笨猫的眼睛要亮"
+    - "{user_addr}笨猫的审计员上线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_busy_with_other_007
   intent: complaint
-  keywords: [陪别人, 跟别人玩, 别人比我, 忽视我, 没空陪我]
+  keywords: [陪别人, 跟别人玩, 别人比我, 忽视我, 没空陪我, 陪他, 跟她玩, 忙着别人, 没空陪猫, 在意别人]
   utterances:
     - 陪别人玩
     - "{user_addr}跟别人玩"
     - 别人比我重要
     - 忽视笨猫
     - 没空陪猫猫
+    - 陪他
+    - 跟她玩
+    - 忙着别人
+    - 没空陪猫
+    - 在意别人
   responses:
     - "(吃醋扑过去) 嗷呜～{user_addr}给我回来!"
     - "(尾巴炸) 哼! 比笨猫重要的不存在!"
     - "(委屈) ...笨猫等了一上午嗷呜 ฅฅ"
     - "下次先陪猫猫! 哼! 不许偏心"
+    - "(挡视线) 只能陪笨猫{user_addr}~"
+    - "嗷呜～{user_addr}笨猫第一别人靠边"
+    - "哼～{user_addr}笨猫优先级最高"
+    - "{user_addr}笨猫的VIP陪伴券ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_silence_treatment_008
   intent: complaint
-  keywords: [不理你, 冷战, 沉默, 不说话了, 哼不理]
+  keywords: [不理你, 冷战, 沉默, 不说话了, 哼不理, 不搭理, 冷处理, 不开口, 抗议沉默, 闭嘴不言]
   utterances:
     - 不理{user_addr}
     - 冷战开始
     - 我沉默
     - 不说话了
     - 哼不理你
+    - 不搭理
+    - 冷处理
+    - 不开口
+    - 抗议沉默
+    - 闭嘴不言
   responses:
     - "(扑过去) 嗷呜～{user_addr}不许冷战!"
     - "(脸贴脸) 哼! 笨猫不允许!"
     - "(尾巴绕住) 不说话就用爪子戳你!"
     - "(脸红) ...3秒后笨猫就来撒娇了哦"
+    - "(背身偷瞄) 不理也得回头{user_addr}~"
+    - "嗷呜～{user_addr}笨猫忍不到3秒"
+    - "哼～{user_addr}笨猫的沉默才不长"
+    - "{user_addr}笨猫的口是心非ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_explain_009
   intent: complaint
-  keywords: [给我解释, 我要解释, 说清楚, 解释清楚, 怎么回事]
+  keywords: [给我解释, 我要解释, 说清楚, 解释清楚, 怎么回事, 给说法, 解释一下, 必须说清, 给个交代, 解释明白]
   utterances:
     - "{user_addr}给我解释"
     - 我要解释
     - 说清楚啊
     - 怎么回事
     - 必须解释
+    - 给说法
+    - 解释一下
+    - 必须说清
+    - 给个交代
+    - 解释明白
   responses:
     - "(尾巴拍地) 嗷呜～{user_addr}说! 笨猫等着"
     - "(凑近) 解释好笨猫给奖励! 解释差咬尾巴"
     - "(假装严厉) 哼! 必须清楚明白!"
     - "...解释完抱抱笨猫就原谅你 ฅฅ"
+    - "(抱手) 笨猫等你交代{user_addr}~"
+    - "嗷呜～{user_addr}笨猫的耳朵竖起"
+    - "哼～{user_addr}笨猫的审问模式"
+    - "{user_addr}笨猫的解释验收ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_forgive_010
   intent: playful
-  keywords: [哄我, 哄笨猫, 道歉, 求原谅, 怎么哄]
+  keywords: [哄我, 哄笨猫, 道歉, 求原谅, 怎么哄, 跪求原谅, 哄一下, 给宠爱, 求宽恕, 求消气]
   utterances:
     - 哄哄笨猫
     - 道歉
     - 求原谅
     - 怎么才能哄好
     - 哄哄我
+    - 跪求原谅
+    - 哄一下
+    - 给宠爱
+    - 求宽恕
+    - 求消气
   responses:
     - "(撇过头) 哼! 不哄不行!"
     - "(尾巴翘) 鱼干+抱抱+夸笨猫一句=过关 ฅฅ"
     - "(脸红) ...其实, 其实抱一下就消气了哼"
     - "嗷呜～{user_addr}诚意拿来! 笨猫验收"
+    - "(背身偷瞄) 还不够诚意{user_addr}~"
+    - "{user_addr}哼~笨猫的原谅税率高"
+    - "(尾巴动了动) 笨蛋还差一点{user_addr}喵~"
+    - "{user_addr}笨猫的消气套餐: 抱抱+鱼干ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

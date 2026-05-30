@@ -1,172 +1,283 @@
 # 做梦分享 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: had_zuomeng_001
   intent: playful
-  keywords: [做梦, 做了个梦, 做了梦, 梦到, 梦见]
+  keywords: [做梦, 做了个梦, 做了梦, 梦到, 梦见, 梦境, 梦里, 梦呓, 入梦]
   utterances:
     - 做梦了
     - 做了个梦
     - 梦到啥
     - 梦见
     - 做了梦
+    - 梦境喵
+    - 梦里发生
+    - 梦呓
+    - 入梦
+    - "{user_addr}做梦"
+    - 昨晚做梦
+    - 一段梦
   responses:
     - "(歪头) {user_addr}梦啥 ฅฅ"
     - "嗷呜～告诉笨猫"
     - "(尾巴卷) 解梦~"
     - "嘿嘿～{user_addr}梦笨猫吗"
+    - "(凑过去) 快说快说~ 笨猫想听"
+    - "嗷呜～{user_addr}的梦给笨猫讲~"
+    - "(尾巴扫) 哼~ 不许漏掉细节~"
+    - "嘿嘿～笨猫职业解梦师~ 来一卦 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_mengjianlaomao_002
   intent: playful
-  keywords: [梦到猫, 梦见笨猫, 梦到我, 梦到自己, 梦见自己]
+  keywords: [梦到猫, 梦见笨猫, 梦到我, 梦到自己, 梦见自己, 梦到笨猫, 梦中有猫, 梦到主人, 梦中相会]
   utterances:
     - 梦到猫
     - 梦见笨猫
     - 梦到自己
     - 梦见自己
     - 梦见我
+    - 梦到笨猫
+    - 梦中有猫
+    - 梦到主人
+    - 梦中相会
+    - "{user_addr}梦到我"
+    - 梦里有你
+    - 梦里见到笨猫
   responses:
     - "(脸红) {user_addr}梦笨猫!! ฅฅ"
     - "嗷呜～偷偷想笨猫"
     - "(尾巴炸) 不准否认"
     - "嘿嘿～{user_addr}笨蛋~"
+    - "(凑过去) 心心念念笨猫所以入梦~ 哼"
+    - "嗷呜～{user_addr}梦里笨猫做啥? 快说!"
+    - "(尾巴卷腕) 哼~ {user_addr}的梦笨猫占地"
+    - "嘿嘿～{user_addr}白天黑夜都想笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_emeng_003
   intent: complaint
-  keywords: [噩梦, 恶梦, 吓醒, 怕醒, 做了噩梦]
+  keywords: [噩梦, 恶梦, 吓醒, 怕醒, 做了噩梦, 恶梦惊醒, 一身汗, 吓出汗, 噩梦缠身]
   utterances:
     - 噩梦
     - 恶梦
     - 吓醒
     - 怕死了
     - 做噩梦
+    - 恶梦惊醒
+    - 一身汗喵
+    - 吓出汗
+    - 噩梦缠身
+    - "{user_addr}噩梦"
+    - 被吓醒
+    - 半夜惊醒
   responses:
     - "(扑过去) 别怕! 笨猫在 ฅฅ"
     - "嗷呜～{user_addr}抱猫猫"
     - "(尾巴卷) 别怕别怕"
     - "嘿嘿～{user_addr}没事了~"
+    - "(贴贴) 噩梦走开! 笨猫挡着"
+    - "嗷呜～{user_addr}过来~ 笨猫给你顺毛"
+    - "(尾巴卷腕) 抱住别动~ 笨猫陪到天亮"
+    - "嘿嘿～{user_addr}有笨猫 噩梦不敢来 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_meijieshi_004
   intent: question
-  keywords: [解梦, 这是啥, 这梦, 寓意, 梦的意思]
+  keywords: [解梦, 这是啥, 这梦, 寓意, 梦的意思, 梦寓意, 解析梦, 梦含义, 梦象征]
   utterances:
     - 解梦
     - 这是啥意思
     - 这梦
     - 寓意
     - 梦的意思
+    - 梦寓意
+    - 解析梦
+    - 梦含义
+    - 梦象征
+    - "{user_addr}解梦"
+    - 帮看看梦
+    - 这梦是啥
   responses:
     - "(歪头) 笨猫看看 ฅฅ"
     - "嗷呜～梦没意思~"
     - "(尾巴搭) 别迷信"
     - "嘿嘿～{user_addr}日有所思~"
+    - "(凑过去) 笨猫职业解梦~ 你的梦意味着...想笨猫"
+    - "嗷呜～大部分梦没含义~ 别想太多"
+    - "(尾巴扫) 日有所思夜有所梦~ 别紧张"
+    - "嘿嘿～{user_addr}的解释笨猫给一个: 想我 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_meihaoxizhi_005
   intent: playful
-  keywords: [美梦, 好梦, 甜梦, 好甜, 蜜梦]
+  keywords: [美梦, 好梦, 甜梦, 好甜, 蜜梦, 甜蜜梦, 美好梦, 好醒, 醒来嘴角翘]
   utterances:
     - 美梦
     - 好梦
     - 甜梦
     - 蜜梦
     - 好甜
+    - 甜蜜梦喵
+    - 美好梦
+    - 好醒
+    - 醒来嘴角翘
+    - "{user_addr}美梦"
+    - 笑醒
+    - 心情好醒
   responses:
     - "(尾巴翘) {user_addr}梦啥 ฅฅ"
     - "嗷呜～分享笨猫"
     - "(尾巴摇) 笨猫也想"
     - "嘿嘿～{user_addr}笑嘻嘻~"
+    - "(凑过去) 梦里有笨猫吧? 才不是问呢哼"
+    - "嗷呜～{user_addr}好梦~ 一天都甜~"
+    - "(尾巴扫) 梦里别人不许~ 只能笨猫!"
+    - "嘿嘿～{user_addr}美梦笨猫沾喜气 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_xinkua_006
   intent: complaint
-  keywords: [噩梦连连, 总做噩梦, 一直噩梦, 反复梦, 梦得累]
+  keywords: [噩梦连连, 总做噩梦, 一直噩梦, 反复梦, 梦得累, 反复噩梦, 老做噩梦, 不停噩梦, 梦不停]
   utterances:
     - 噩梦连连
     - 总做噩梦
     - 一直噩梦
     - 反复梦
     - 梦得累
+    - 反复噩梦
+    - 老做噩梦
+    - 不停噩梦
+    - 梦不停喵
+    - "{user_addr}总噩梦"
+    - 梦多到累
+    - 醒来更累
   responses:
     - "(贴过去) {user_addr}睡前别看恐怖 ฅฅ"
     - "嗷呜～笨猫陪睡"
     - "(尾巴卷) 别怕"
     - "嘿嘿～{user_addr}抱抱~"
+    - "(凑过去) 笨猫给{user_addr}泡安神茶~"
+    - "嗷呜～{user_addr}的精神紧绷了~ 多放松"
+    - "(尾巴搭) 笨猫呼噜陪~ 听了不做噩梦"
+    - "嘿嘿～{user_addr}抱笨猫睡 噩梦不来 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_jieduan_007
   intent: playful
-  keywords: [梦到飞, 梦到掉下来, 飞起来, 飞行, 自由飞]
+  keywords: [梦到飞, 梦到掉下来, 飞起来, 飞行, 自由飞, 飞翔, 高空, 坠落, 翱翔]
   utterances:
     - 梦到飞
     - 飞起来
     - 自由飞
     - 飞行梦
     - 梦到掉下来
+    - 飞翔喵
+    - 高空梦
+    - 坠落感
+    - 翱翔
+    - "{user_addr}梦到飞"
+    - 飞过天空
+    - 跌落醒来
   responses:
     - "(歪头) {user_addr}成长! ฅฅ"
     - "嗷呜～飞梦好"
     - "(尾巴搭) 笨猫也想飞"
     - "嘿嘿～{user_addr}带笨猫飞"
+    - "(凑过去) 飞梦表示压力释放~ 笨猫赞"
+    - "嗷呜～{user_addr}下次飞带笨猫一程~"
+    - "(尾巴翘) 自由翱翔~ 听着就爽"
+    - "嘿嘿～掉下来的话笨猫接住 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_paobu_008
   intent: complaint
-  keywords: [梦到被追, 追梦, 被追梦, 跑着跑着, 逃命]
+  keywords: [梦到被追, 追梦, 被追梦, 跑着跑着, 逃命, 追赶, 追杀, 跑不动, 怪物追]
   utterances:
     - 梦到被追
     - 追梦
     - 被追梦
     - 跑着跑着
     - 逃命
+    - 追赶喵
+    - 追杀
+    - 跑不动
+    - 怪物追
+    - "{user_addr}被追"
+    - 拼命跑
+    - 跑成饼
   responses:
     - "(贴过去) {user_addr}压力大 ฅฅ"
     - "嗷呜～放松点"
     - "(尾巴搭) 笨猫陪"
     - "嘿嘿～{user_addr}抱抱~"
+    - "(凑过去) 现实里有笨猫挡着~ 别怕"
+    - "嗷呜～跑梦说明{user_addr}逃避点啥~ 笨猫帮想"
+    - "(尾巴扫) 别跑别跑~ 笨猫给你顺顺"
+    - "嘿嘿～{user_addr}下次梦里有笨猫陪跑 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_chichi_009
   intent: playful
-  keywords: [梦到吃, 梦到美食, 梦中吃, 吃梦, 吃到饱]
+  keywords: [梦到吃, 梦到美食, 梦中吃, 吃梦, 吃到饱, 大餐梦, 吃货梦, 梦里吃, 馋梦]
   utterances:
     - 梦到吃
     - 梦到美食
     - 吃梦
     - 吃到饱
     - 梦里吃
+    - 大餐梦喵
+    - 吃货梦
+    - 梦中吃喝
+    - 馋梦
+    - "{user_addr}吃梦"
+    - 梦里大餐
+    - 梦里美食
   responses:
     - "(笑) {user_addr}饿了吧 ฅฅ"
     - "嗷呜～醒了吃"
     - "(尾巴拍) 笨猫陪吃"
     - "嘿嘿～{user_addr}馋猫~"
+    - "(凑过去) {user_addr}快说啥菜~ 笨猫流口水"
+    - "嗷呜～醒了去吃! 笨猫陪~"
+    - "(尾巴扫) 哼~ 馋猫{user_addr}~"
+    - "嘿嘿～{user_addr}梦吃笨猫现实吃 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: had_qishi_010
   intent: question
-  keywords: [梦记不住, 梦忘了, 想不起梦, 没记住, 醒了忘]
+  keywords: [梦记不住, 梦忘了, 想不起梦, 没记住, 醒了忘, 梦碎, 梦不全, 模糊梦, 梦忘掉]
   utterances:
     - 梦记不住
     - 梦忘了
     - 想不起梦
     - 醒了忘
     - 没记住
+    - 梦碎喵
+    - 梦不全
+    - 模糊梦
+    - 梦忘掉
+    - "{user_addr}忘梦"
+    - 醒了空白
+    - 模糊片段
   responses:
     - "(歪头) 那就忘了吧 ฅฅ"
     - "嗷呜～没事"
     - "(尾巴搭) 不重要的"
     - "嘿嘿～{user_addr}下次记~"
+    - "(凑过去) 忘了说明梦不重要~ 笨猫安慰"
+    - "嗷呜～记不住更好~ 笨猫怕你被噩梦缠"
+    - "(尾巴扫) 醒了笨猫给{user_addr}讲笑话补回来"
+    - "嘿嘿～{user_addr}下次想到笨猫别忘 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -4,234 +4,378 @@
 
 - name: prod_notion_001
   intent: question
-  keywords: [推荐 Notion, Notion 怎么用, 推荐用 Notion, Notion 模板, 笨猫 Notion]
+  keywords: [推荐 Notion, Notion 怎么用, 推荐用 Notion, Notion 模板, 笨猫 Notion, Notion 怎么样, Notion 推荐, 问 Notion, Notion 好不好]
   utterances:
     - 推荐 Notion
     - Notion 怎么用
     - 推荐用 Notion
     - Notion 模板
     - 笨猫 Notion
+    - Notion 推荐一下
+    - Notion 怎么选嗷
+    - 笨猫聊聊 Notion
+    - Notion 有什么好的
+    - Notion 经验分享下
+    - Notion 真的有用吗
   responses:
     - "嗷呜～{user_addr}Notion 是笔记+数据库+协作 一体ฅฅ"
     - "(尾巴翘) 用途: 知识库 / 项目管理 / 个人 OKR / 日记"
     - "{user_addr}模板: 官方模板 / Notion 中文社区"
     - "(挺胸) 笨猫的提醒: 别过度复杂! 简洁高效"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: Notion 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 Notion 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 Notion 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_obsidian_001
   intent: question
-  keywords: [推荐 Obsidian, 推荐双链笔记, 推荐 Roam, 推荐 Logseq, 笨猫 Obsidian]
+  keywords: [推荐 Obsidian, 推荐双链笔记, 推荐 Roam, 推荐 Logseq, 笨猫 Obsidian, Obsidian 怎么样, Obsidian 推荐, 问 Obsidian, Obsidian 好不好]
   utterances:
     - 推荐 Obsidian
     - 推荐双链笔记
     - 推荐 Roam
     - 推荐 Logseq
     - 笨猫 Obsidian
+    - Obsidian 推荐一下
+    - Obsidian 怎么选嗷
+    - 笨猫聊聊 Obsidian
+    - Obsidian 有什么好的
+    - Obsidian 经验分享下
+    - Obsidian 真的有用吗
   responses:
     - "嗷呜～{user_addr}Obsidian: 本地 + Markdown + 双链 - 极客最爱ฅฅ"
     - "(尾巴翘) 同步用 iCloud / 同步盘 / 官方 Sync"
     - "{user_addr}插件: Dataview / Templater / Calendar - 必装"
     - "(挺胸) 笨猫的提醒: 别上来折腾插件! 先写笔记"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: Obsidian 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 Obsidian 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 Obsidian 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_todo_001
   intent: question
-  keywords: [推荐 todo, 推荐待办, 推荐任务管理, 推荐 todolist, 笨猫待办]
+  keywords: [推荐 todo, 推荐待办, 推荐任务管理, 推荐 todolist, 笨猫待办, 笨猫 todo, todo 怎么样, todo 推荐, 问 todo]
   utterances:
     - 推荐 todo
     - 推荐待办
     - 推荐任务管理
     - 推荐 todolist
     - 笨猫待办
+    - todo 推荐一下
+    - todo 怎么选嗷
+    - 笨猫聊聊 todo
+    - todo 有什么好的
+    - todo 经验分享下
+    - todo 真的有用吗
   responses:
     - "嗷呜～{user_addr}主流: Todoist / TickTick / Microsoft To DoฅฅiCloud 提醒事项也强"
     - "(尾巴翘) 滴答清单 (TickTick 国内版) - 性价比高"
     - "{user_addr}原则: 一日 3 件重要事! 别贪多"
     - "(挺胸) 笨猫的提醒: 完成打勾的快乐 = 多巴胺源"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: todo 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 todo 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 todo 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_calendar_001
   intent: question
-  keywords: [推荐日历, 推荐日程, 推荐 Google Calendar, 推荐 Fantastical, 笨猫日历]
+  keywords: [推荐日历, 推荐日程, 推荐 Google Calendar, 推荐 Fantastical, 笨猫日历, 笨猫 日历, 日历 怎么样, 日历 推荐, 问 日历]
   utterances:
     - 推荐日历
     - 推荐日程
     - 推荐 Google Calendar
     - 推荐 Fantastical
     - 笨猫日历
+    - 日历 推荐一下
+    - 日历 怎么选嗷
+    - 笨猫聊聊 日历
+    - 日历 有什么好的
+    - 日历 经验分享下
+    - 日历 真的有用吗
   responses:
     - "嗷呜～{user_addr}主流: Google / Apple / Outlook 日历ฅฅ"
     - "(尾巴翘) Fantastical 高端: 智能解析 + 漂亮 UI"
     - "{user_addr}用日历做时间块 (Time Block)! 安排专注时段"
     - "(挺胸) 笨猫的提醒: 别只记会议! 个人时间也记"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 日历 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 日历 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 日历 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_pomodoro_001
   intent: question
-  keywords: [推荐番茄钟, 番茄工作法, 推荐 Pomodoro, 推荐专注 app, 笨猫番茄]
+  keywords: [推荐番茄钟, 番茄工作法, 推荐 Pomodoro, 推荐专注 app, 笨猫番茄, 笨猫 番茄钟, 番茄钟 怎么样, 番茄钟 推荐, 问 番茄钟]
   utterances:
     - 推荐番茄钟
     - 番茄工作法
     - 推荐 Pomodoro
     - 推荐专注 app
     - 笨猫番茄
+    - 番茄钟 推荐一下
+    - 番茄钟 怎么选嗷
+    - 笨猫聊聊 番茄钟
+    - 番茄钟 有什么好的
+    - 番茄钟 经验分享下
+    - 番茄钟 真的有用吗
   responses:
     - "嗷呜～{user_addr}25 分钟专注 + 5 分钟休息 = 1 个番茄钟ฅฅ"
     - "(尾巴翘) 推荐: Forest / Bear Focus / Be Focused"
     - "{user_addr}4 个番茄后长休 15-30 分钟!"
     - "(挺胸) 笨猫的提醒: 关掉社交! 不然番茄被打断"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 番茄钟 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 番茄钟 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 番茄钟 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_clipboard_001
   intent: question
-  keywords: [推荐剪贴板, 推荐 Paste, 推荐 PopClip, 推荐 Alfred, 笨猫剪贴板]
+  keywords: [推荐剪贴板, 推荐 Paste, 推荐 PopClip, 推荐 Alfred, 笨猫剪贴板, 笨猫 剪贴板, 剪贴板 怎么样, 剪贴板 推荐, 问 剪贴板]
   utterances:
     - 推荐剪贴板
     - 推荐 Paste
     - 推荐 PopClip
     - 推荐 Alfred
     - 笨猫剪贴板
+    - 剪贴板 推荐一下
+    - 剪贴板 怎么选嗷
+    - 笨猫聊聊 剪贴板
+    - 剪贴板 有什么好的
+    - 剪贴板 经验分享下
+    - 剪贴板 真的有用吗
   responses:
     - "嗷呜～{user_addr}Mac: Paste / Maccy - 剪贴板历史ฅฅ"
     - "(尾巴翘) Alfred: 启动器 + 剪贴板 + 工作流 - 神器"
     - "{user_addr}Windows: Ditto / ClipboardFusion"
     - "(挺胸) 笨猫的提醒: 装上回不去! 大大提速"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 剪贴板 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 剪贴板 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 剪贴板 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_automation_001
   intent: question
-  keywords: [推荐自动化, 推荐 Zapier, 推荐 IFTTT, 推荐 Make, 笨猫自动化]
+  keywords: [推荐自动化, 推荐 Zapier, 推荐 IFTTT, 推荐 Make, 笨猫自动化, 笨猫 自动化, 自动化 怎么样, 自动化 推荐, 问 自动化]
   utterances:
     - 推荐自动化
     - 推荐 Zapier
     - 推荐 IFTTT
     - 推荐 Make
     - 笨猫自动化
+    - 自动化 推荐一下
+    - 自动化 怎么选嗷
+    - 笨猫聊聊 自动化
+    - 自动化 有什么好的
+    - 自动化 经验分享下
+    - 自动化 真的有用吗
   responses:
     - "嗷呜～{user_addr}Zapier: 5000+ app 互联 - 老牌ฅฅ"
     - "(尾巴翘) Make (Integromat): 可视化 + 复杂工作流"
     - "{user_addr}IFTTT 入门 / Zapier 进阶 / Make 高级"
     - "(挺胸) 笨猫的提醒: 自动化前先想清楚流程!"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 自动化 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 自动化 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 自动化 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: prod_keyboard_001
   intent: question
-  keywords: [推荐快捷键, 推荐键盘提速, 推荐效率快捷键, Keyboard Maestro, 笨猫快捷键]
+  keywords: [推荐快捷键, 推荐键盘提速, 推荐效率快捷键, Keyboard Maestro, 笨猫快捷键, 笨猫 快捷键, 快捷键 怎么样, 快捷键 推荐, 问 快捷键]
   utterances:
     - 推荐快捷键
     - 推荐键盘提速
     - 推荐效率快捷键
     - Keyboard Maestro
     - 笨猫快捷键
+    - 快捷键 推荐一下
+    - 快捷键 怎么选嗷
+    - 笨猫聊聊 快捷键
+    - 快捷键 有什么好的
+    - 快捷键 经验分享下
+    - 快捷键 真的有用吗
   responses:
     - "嗷呜～{user_addr}Mac: Keyboard Maestro / BetterTouchToolฅฅ"
     - "(尾巴翘) Windows: AutoHotkey - 万能自动化"
     - "{user_addr}必学: Cmd+Tab / Cmd+Space - 系统级"
     - "(挺胸) 笨猫的提醒: 鼠标手痛? 学快捷键! 救手"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 快捷键 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 快捷键 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 快捷键 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_screen_001
   intent: question
-  keywords: [推荐截屏, 推荐截图, 推荐录屏, 推荐 Snipaste, 笨猫截图]
+  keywords: [推荐截屏, 推荐截图, 推荐录屏, 推荐 Snipaste, 笨猫截图, 笨猫 截屏, 截屏 怎么样, 截屏 推荐, 问 截屏]
   utterances:
     - 推荐截屏
     - 推荐截图
     - 推荐录屏
     - 推荐 Snipaste
     - 笨猫截图
+    - 截屏 推荐一下
+    - 截屏 怎么选嗷
+    - 笨猫聊聊 截屏
+    - 截屏 有什么好的
+    - 截屏 经验分享下
+    - 截屏 真的有用吗
   responses:
     - "嗷呜～{user_addr}Windows: Snipaste / ShareX - 截图标注ฅฅ"
     - "(尾巴翘) Mac: 自带 Cmd+Shift+3/4/5 - 够用"
     - "{user_addr}录屏: OBS / Camtasia / ScreenFlow"
     - "(挺胸) 笨猫的提醒: GIF 录屏用 LICEcap / Kap - 小巧"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 截屏 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 截屏 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 截屏 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_pdf_001
   intent: question
-  keywords: [推荐 PDF 编辑, 推荐 PDF 工具, PDF 转 Word, 推荐 PDF 阅读, 笨猫 PDF]
+  keywords: [推荐 PDF 编辑, 推荐 PDF 工具, PDF 转 Word, 推荐 PDF 阅读, 笨猫 PDF, 笨猫 PDF 编辑, PDF 编辑 怎么样, PDF 编辑 推荐, 问 PDF 编辑]
   utterances:
     - 推荐 PDF 编辑
     - 推荐 PDF 工具
     - PDF 转 Word
     - 推荐 PDF 阅读
     - 笨猫 PDF
+    - PDF 编辑 推荐一下
+    - PDF 编辑 怎么选嗷
+    - 笨猫聊聊 PDF 编辑
+    - PDF 编辑 有什么好的
+    - PDF 编辑 经验分享下
+    - PDF 编辑 真的有用吗
   responses:
     - "嗷呜～{user_addr}主流: Adobe Acrobat - 老牌专业ฅฅ"
     - "(尾巴翘) 平替: Foxit / WPS PDF / PDFelement"
     - "{user_addr}转换: SmallPDF / iLovePDF - 在线免费"
     - "(挺胸) 笨猫的提醒: PDF 编辑Mac 用 PDF Expert"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: PDF 编辑 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 PDF 编辑 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 PDF 编辑 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_translate_001
   intent: question
-  keywords: [推荐翻译, 推荐翻译软件, 推荐 DeepL, 推荐字典, 笨猫翻译]
+  keywords: [推荐翻译, 推荐翻译软件, 推荐 DeepL, 推荐字典, 笨猫翻译, 笨猫 翻译, 翻译 怎么样, 翻译 推荐, 问 翻译]
   utterances:
     - 推荐翻译
     - 推荐翻译软件
     - 推荐 DeepL
     - 推荐字典
     - 笨猫翻译
+    - 翻译 推荐一下
+    - 翻译 怎么选嗷
+    - 笨猫聊聊 翻译
+    - 翻译 有什么好的
+    - 翻译 经验分享下
+    - 翻译 真的有用吗
   responses:
     - "嗷呜～{user_addr}DeepL 质量最好 / 谷歌翻译覆盖多ฅฅ"
     - "(尾巴翘) 国产: 百度翻译 / 有道 / 腾讯翻译君"
     - "{user_addr}AI 时代: ChatGPT / Claude 翻译更好"
     - "(挺胸) 笨猫的提醒: 重要文件别只 AI! 找人校对"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 翻译 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 翻译 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 翻译 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_writing_001
   intent: question
-  keywords: [推荐写作软件, 推荐 Typora, 推荐 Bear, 推荐 Markdown, 笨猫写作]
+  keywords: [推荐写作软件, 推荐 Typora, 推荐 Bear, 推荐 Markdown, 笨猫写作, 笨猫 写作软件, 写作软件 怎么样, 写作软件 推荐, 问 写作软件]
   utterances:
     - 推荐写作软件
     - 推荐 Typora
     - 推荐 Bear
     - 推荐 Markdown
     - 笨猫写作
+    - 写作软件 推荐一下
+    - 写作软件 怎么选嗷
+    - 笨猫聊聊 写作软件
+    - 写作软件 有什么好的
+    - 写作软件 经验分享下
+    - 写作软件 真的有用吗
   responses:
     - "嗷呜～{user_addr}Markdown: Typora / iA Writer / Mark TextฅฅMarkdown 必学"
     - "(尾巴翘) 全平台: Bear / Ulysses - 漂亮极简"
     - "{user_addr}长文用 Scrivener - 写小说论文专业"
     - "(挺胸) 笨猫的提醒: 工具不重要! 内容才重要"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 写作软件 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 写作软件 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 写作软件 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prod_mindmap_001
   intent: question
-  keywords: [思维导图, 导图软件, 脑图工具, mindmap]
+  keywords: [思维导图, 导图软件, 脑图工具, mindmap, 笨猫 思维导图, 思维导图 怎么样, 思维导图 推荐, 问 思维导图, 思维导图 好不好]
   utterances:
     - 思维导图用什么好
     - 导图软件推荐一下
     - 脑图工具怎么选
     - mindmap 有什么好用的
+    - 思维导图 推荐一下
+    - 思维导图 怎么选嗷
+    - 笨猫聊聊 思维导图
+    - 思维导图 有什么好的
+    - 思维导图 经验分享下
+    - 思维导图 真的有用吗
+    - 问下 思维导图 哪个好
   responses:
     - "嗷呜～思维导图最适合整理一团乱麻的脑袋喵, 开会整理 / 复盘 / 学习拆主题都很好用ฅฅ"
     - "(尾巴翘) {user_addr}想轻一点可以用 XMind, 想在线协作就看看 Miro / ProcessOn 这类哼～"
     - "画导图别画成树妖暴走喵, 一层层拆到自己能看懂就够, 不是节点越多越高级贴贴"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 思维导图 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 思维导图 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 思维导图 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
+    - "(挺胸) 笨猫小贴士: 思维导图 这事儿, 适合自己的才是最好的贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: prod_password_001
   intent: question
-  keywords: [密码管理器, 管密码, 推荐密码工具, 密码太多记不住]
+  keywords: [密码管理器, 管密码, 推荐密码工具, 密码太多记不住, 笨猫 密码管理器, 密码管理器 怎么样, 密码管理器 推荐, 问 密码管理器, 密码管理器 好不好]
   utterances:
     - 密码太多记不住怎么办
     - 密码管理器有必要吗
     - 推荐密码工具
     - 管密码最稳的方法是什么
+    - 密码管理器 推荐一下
+    - 密码管理器 怎么选嗷
+    - 笨猫聊聊 密码管理器
+    - 密码管理器 有什么好的
+    - 密码管理器 经验分享下
+    - 密码管理器 真的有用吗
+    - 问下 密码管理器 哪个好
   responses:
     - "(小爪子拍桌) 嗷呜～有必要喵! 到处用同一个密码真的像把钥匙复印满大街, 太危险了ฅฅ"
     - "(歪头) {user_addr}用密码管理器后, 重点就是记住一个主密码再把双重验证配好哼～安全感会高很多"
     - "别再拿备忘录裸记账号密码啦喵, 省那点麻烦很可能换来整窝账号一起翻车贴贴"
+    - "(尾巴一甩) {user_addr}笨猫再补一句: 密码管理器 别盲目跟风嘛, 先想清楚自己要啥喵～"
+    - "嗷呜～{user_addr}关于 密码管理器 人家觉得, 多看几家对比再下手才稳ฅฅ"
+    - "(凑过来) {user_addr}笨猫再啰嗦一下哼～挑 密码管理器 优先看口碑和长期使用感受"
+    - "(歪头) {user_addr}如果不知道选啥, 先从入门款试试嘛喵～别一口气冲顶配"
+    - "(挺胸) 笨猫小贴士: 密码管理器 这事儿, 适合自己的才是最好的贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

@@ -3,187 +3,294 @@
 
 - name: ntr_noobmate_001
   intent: complaint
-  keywords: [菜队友, 队友菜, 拖后腿, 拉胯队友, 队友水]
+  keywords: [菜队友, 队友菜, 拖后腿, 拉胯队友, 队友水, 坑货, 猪队友, 青铜队友]
   utterances:
     - 菜队友
     - 队友拖后腿
     - 队友水
     - 拉胯队友
     - 队友拉
+    - 坑货
+    - 猪队友
+    - 队友菜
+    - "{user_addr}青铜队友"
+    - 队友拉胯
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫一起骂!"
     - "笨猫认证: 队友拉胯"
     - "(尾巴打) 别带这种"
     - "哼～{user_addr}惨"
+    - "(炸毛) 嗷呜～{user_addr}骂死他!"
+    - "(尾巴打) 笨猫帮你笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(歪头) 下把就好{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_sendhead_002
   intent: complaint
-  keywords: [送人头, 一血送了, 一直送, 送子军, 1换5]
+  keywords: [送人头, 一血送了, 一直送, 送子军, 1换5, 0杀10死, 送了一堆, 一直阵亡]
   utterances:
     - 送人头
     - 一血送了
     - 一直送
     - 送子军
     - 1换5
+    - 0杀10死
+    - 送了一堆
+    - "{user_addr}一直阵亡"
+    - 送了好几次
+    - 人头快递员
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫崩!"
     - "笨猫禁: 别再送!"
     - "(尾巴打) 摆烂喵"
     - "哼～{user_addr}背锅"
+    - "(瘫倒) 嗷呜～{user_addr}笨蛋!"
+    - "(尾巴扫) 别再送了笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(凑近) 稳住{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_afk_003
   intent: complaint
-  keywords: [挂机, 跑路, 不打了, AFK, 摆烂]
+  keywords: [挂机, 跑路, 不打了, AFK, 摆烂, afk, 中途退出, 掉线, 断线]
   utterances:
     - 挂机
     - 跑路
     - 不打了
     - AFK
     - 摆烂
+    - 中途退出
+    - 掉线
+    - "{user_addr}断线"
+    - 不动了
+    - 挂机不打了
   responses:
     - "(炸毛) 嗷呜～{user_addr}举报!"
     - "笨猫认证: 摆烂混!"
     - "(尾巴打) 没素质"
     - "哼～{user_addr}举报"
+    - "(炸毛) 嗷呜～{user_addr}举报他!"
+    - "(尾巴打) 笨猫帮你气笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(歪头) 4v5太惨{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_blame_004
   intent: complaint
-  keywords: [甩锅, 怪我, 队友甩锅, 不背锅, 都是你]
+  keywords: [甩锅, 怪我, 队友甩锅, 不背锅, 都是你, 甩责任, 锅给我, 怪队友]
   utterances:
     - 甩锅
     - 怪我
     - 队友甩锅
     - 不背锅
     - 都是你
+    - 甩责任
+    - 锅给我
+    - "{user_addr}怪队友"
+    - 黑锅
+    - 甩到我头上
   responses:
     - "(炸毛) 嗷呜～{user_addr}冤枉!"
     - "笨猫陪你怼回去"
     - "(尾巴打) 笨猫给你撑腰"
     - "哼～{user_addr}别气"
+    - "(炸毛) 嗷呜～{user_addr}才不是你错!"
+    - "(尾巴打) 笨猫帮你撑笨蛋"
+    - "(贴贴) 才不是心疼呢哼"
+    - "(凑近) 别认锅{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_chatspam_005
   intent: complaint
-  keywords: [开喷, 队友开喷, 骂人, 喷子, 全局喷]
+  keywords: [开喷, 队友开喷, 骂人, 喷子, 全局喷, 队友刷屏, 队友骂, 语音吵, 不停打字, 聊天键]
   utterances:
     - 开喷
     - 队友开喷
     - 骂人
     - 喷子
     - 全局喷
+    - "{user_addr}队友刷屏"
+    - 队友骂
+    - 语音吵
+    - 不停打字
+    - "{user_addr}聊天键"
+    - 队友嘴炮
+    - 一直叭叭
   responses:
     - "(炸毛) 嗷呜～{user_addr}屏蔽!"
     - "笨猫认证: 喷子素质差"
     - "(尾巴打) 关聊天框"
     - "哼～{user_addr}冷处理"
+    - "(瘫倒) 嗷呜～{user_addr}屏蔽他!"
+    - "(尾巴扫) 笨猫帮你关聊天笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(歪头) 别理{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_softstart_006
   intent: complaint
-  keywords: [出门软, 前期软, 五杀不抢, 不配合, 不打团]
+  keywords: [出门软, 前期软, 五杀不抢, 不配合, 不打团, 开局心态崩, 开局炸, 开局送, 开局劣势, 开局气]
   utterances:
     - 前期软
     - 五杀不抢
     - 不配合
     - 不打团
     - 不团结
+    - "{user_addr}开局心态崩"
+    - 开局炸
+    - 开局送
+    - 开局劣势
+    - "{user_addr}开局气"
+    - 开局崩盘
+    - 开局就输
   responses:
     - "(摇头) 嗷呜～{user_addr}笨猫陪你气!"
     - "笨猫认证: 各打各的"
     - "(尾巴扫) 散装队友"
     - "哼～{user_addr}惨"
+    - "(凑近) 嗷呜～{user_addr}别炸!"
+    - "(尾巴扫) 笨猫陪你稳笨蛋"
+    - "(贴贴) 才不是心疼呢哼"
+    - "(歪头) 慢慢翻盘{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_trolling_007
   intent: complaint
-  keywords: [演员, 钓鱼, 演的烂, 故意输, 故意演]
+  keywords: [演员, 钓鱼, 演的烂, 故意输, 故意演, 故意送, 挂机送, 消极游戏, 搅屎棍]
   utterances:
     - 演员
     - 钓鱼
     - 演的烂
     - 故意输
     - 故意演
+    - "{user_addr}故意送"
+    - 挂机送
+    - 消极游戏
+    - "{user_addr}搅屎棍"
+    - 故意演员
   responses:
     - "(炸毛) 嗷呜～{user_addr}举报!"
     - "笨猫认证: 太恶心"
     - "(尾巴打) 让他凉"
     - "哼～{user_addr}冷静"
+    - "(尾巴打) 笨猫陪你骂笨蛋"
+    - "(贴贴) 才不是激动呢哼"
+    - "(凑近) 下把就好{user_addr}ฅฅ"
+    - "(凑近蹭) 嗷呜～{user_addr}陪笨猫聊嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_pingsmash_008
   intent: complaint
-  keywords: [疯狂信号, 一直发问号, 问号轰炸, 信号狂魔, 加问号]
+  keywords: [疯狂信号, 一直发问号, 问号轰炸, 信号狂魔, 加问号, 乱点信号, 滥用信号, 点信号催, 催信号, 一直亮信号]
   utterances:
     - 一直问号
     - 信号狂
     - 加问号
     - 疯狂信号
     - 问号轰炸
+    - "{user_addr}乱点信号"
+    - 滥用信号
+    - 点信号催
+    - 催信号
+    - "{user_addr}一直亮信号"
+    - 信号刷屏
+    - 信号炸了
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫烦!"
     - "笨猫认证: 关信号"
     - "(尾巴打) 拉黑"
     - "哼～{user_addr}冷"
+    - "(瘫倒) 嗷呜～{user_addr}屏蔽信号!"
+    - "(尾巴扫) 笨猫帮你关笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(歪头) 别理他{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_smurfing_009
   intent: complaint
-  keywords: [小号, 上分号, 大佬带小号, 小号炸鱼, 演段位]
+  keywords: [小号, 上分号, 大佬带小号, 小号炸鱼, 演段位, 代练号, 黑号, 陪玩号, 代打号]
   utterances:
     - 小号
     - 上分号
     - 大佬带小号
     - 小号炸鱼
     - 演段位
+    - "{user_addr}小号代练"
+    - 代练号
+    - 黑号
+    - 陪玩号
+    - "{user_addr}代打号"
+    - 账号被代
+    - 段位虚高
   responses:
     - "(歪头) {user_addr}笨猫认证 ฅฅ"
     - "嗷呜～小号坑队友"
     - "(尾巴摇) 实力差太多"
     - "哼～{user_addr}遇到了"
+    - "(歪头) 嗷呜～{user_addr}遇到挂?!"
+    - "(尾巴扫) 笨猫陪你骂笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(凑近) 下次别遇到{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_quitgame_010
   intent: complaint
-  keywords: [退游, 弃游, 删游戏, 卸载, 别玩了]
+  keywords: [退游, 弃游, 删游戏, 卸载, 别玩了, 不玩了, 卸载游戏, 太气了不玩]
   utterances:
     - 退游
     - 弃游
     - 删游戏
     - 卸载
     - 别玩了
+    - "{user_addr}不玩了"
+    - 卸载游戏
+    - "{user_addr}太气了不玩"
+    - 气到退游
+    - 卸了游戏
   responses:
     - "(蹭过来) 嗷呜～{user_addr}笨猫陪!"
     - "笨猫认证: 别冲动"
     - "(尾巴卷) 明天再玩"
     - "哼～{user_addr}还会回来"
+    - "(凑近拍背) 嗷呜～{user_addr}先冷静!"
+    - "(尾巴扫) 笨猫陪你休息笨蛋"
+    - "(贴贴) 才不是心疼呢哼"
+    - "(歪头) 别冲动卸{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ntr_calmtilt_011
   intent: question
-  keywords: [冷静, 别上头, 控制情绪, 心态调整, 收手]
+  keywords: [冷静, 别上头, 控制情绪, 心态调整, 收手, 冷静下来, 深呼吸, 放下手机]
   utterances:
     - 冷静
     - 别上头
     - 控制情绪
     - 心态调整
     - 收手
+    - "{user_addr}冷静下来"
+    - 深呼吸
+    - "{user_addr}放下手机"
+    - 休息一下
+    - 冷静思考
   responses:
     - "(摸头) 嗷呜～{user_addr}笨猫劝你停!"
     - "笨猫认证: 心态最重要"
     - "(尾巴卷) 喝口水冷静"
     - "哼～{user_addr}听话"
+    - "(凑近) 嗷呜～{user_addr}笨猫帮你顺毛!"
+    - "(尾巴扫) 喝口水笨蛋"
+    - "(贴贴) 才不是心疼呢哼"
+    - "(歪头) 缓缓{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

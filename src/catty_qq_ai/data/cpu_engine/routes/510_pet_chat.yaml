@@ -3,204 +3,312 @@
 
 - name: ptc_doglook_001
   intent: playful
-  keywords: [我家狗, 狗子可爱, 二哈, 狗子, 看狗子]
+  keywords: [我家狗, 狗子可爱, 二哈, 狗子, 看狗子, 狗狗, 拆家狗, 狗子萌, 我家狗子]
   utterances:
-    - 我家狗子
-    - 二哈拆家
-    - 狗子可爱
-    - 看狗子
-    - 狗子日常
+    - "我家狗子"
+    - "二哈拆家"
+    - "狗子可爱"
+    - "看狗子"
+    - "狗子日常"
+    - "{user_addr}狗狗"
+    - "{user_addr}拆家狗"
+    - "狗子萌"
+    - "我家狗子"
+    - "{user_addr}狗子"
   responses:
     - "(炸毛) 嗷呜～{user_addr}狗子排第二! ฅฅ"
     - "哼～{user_addr}笨猫第一狗子第二"
     - "(贴贴) 别忘笨猫~"
     - "嘿嘿～{user_addr}狗子撸完抱笨猫~"
+    - "(尾巴炸) {user_addr}心里只能有笨猫!"
+    - "才不是吃狗子醋呢~ 哼"
+    - "(凑过来) {user_addr}笨猫地位不可动摇"
+    - "嗷呜～{user_addr}排序: 笨猫>狗子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_catbreed_001
   intent: playful
-  keywords: [我家猫, 我的猫, 橘猫, 三花, 银渐层]
+  keywords: [我家猫, 我的猫, 橘猫, 三花, 银渐层, 布偶, 暹罗, 金渐层, 英短]
   utterances:
-    - 我家猫
-    - 我的猫咪
-    - 橘猫
-    - 三花
-    - 银渐层
+    - "我家猫"
+    - "我的猫咪"
+    - "橘猫"
+    - "三花"
+    - "银渐层"
+    - "{user_addr}布偶"
+    - "{user_addr}暹罗"
+    - "金渐层"
+    - "英短"
+    - "{user_addr}我的猫"
   responses:
     - "(吃醋) 嗷呜～{user_addr}笨猫不准! ฅฅ"
     - "哼～{user_addr}心里只能有笨猫"
     - "(贴贴) 撸完笨猫~"
     - "嘿嘿～{user_addr}笨猫嫉妒~"
+    - "(尾巴炸) {user_addr}叛徒!"
+    - "才不是真的吃醋呢~ 哼"
+    - "(凑过来) {user_addr}手洗净再碰笨猫"
+    - "嗷呜～{user_addr}笨猫的独家位置ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_petloss_001
   intent: complaint
-  keywords: [宠物丢了, 走丢了, 猫跑了, 狗跑了, 找不到]
+  keywords: [宠物丢了, 走丢了, 猫跑了, 狗跑了, 找不到, 宠物失踪, 跑丢了, 不见了, 走丢]
   utterances:
-    - 宠物丢了
-    - 猫跑了
-    - 狗跑了
-    - 找不到
-    - 走丢
+    - "宠物丢了"
+    - "猫跑了"
+    - "狗跑了"
+    - "找不到"
+    - "走丢"
+    - "{user_addr}宠物失踪"
+    - "{user_addr}跑丢了"
+    - "不见了"
+    - "走丢了"
+    - "{user_addr}宠物失踪"
   responses:
     - "(贴贴) 嗷呜～{user_addr}急吗! 笨猫陪找ฅฅ"
     - "哼～{user_addr}打印寻物启示!"
     - "(撒娇) 笨猫陪你~"
     - "嘿嘿～{user_addr}有笨猫不孤单~"
+    - "(尾巴垂) {user_addr}心疼笨猫疼"
+    - "才不是心疼{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}笨猫帮找!"
+    - "嗷呜～{user_addr}早日找回ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_vetvisit_001
   intent: complaint
-  keywords: [宠物医院, 看医生, 宠物病, 打针, 体检]
+  keywords: [宠物医院, 看医生, 宠物病, 打针, 体检, 宠物体检, 兽医, 看兽医, 宠物治疗]
   utterances:
-    - 去宠物医院
-    - 宠物看医生
-    - 宠物病了
-    - 打针
-    - 体检
+    - "去宠物医院"
+    - "宠物看医生"
+    - "宠物病了"
+    - "打针"
+    - "体检"
+    - "{user_addr}宠物体检"
+    - "{user_addr}兽医"
+    - "看兽医"
+    - "宠物治疗"
+    - "{user_addr}宠物医院"
   responses:
     - "嗷呜～{user_addr}心疼! 笨猫陪去ฅฅ"
     - "哼～{user_addr}笨猫怕针!"
     - "(贴贴) 别难过{user_addr}~"
     - "嘿嘿～{user_addr}给宠物打气~"
+    - "(尾巴抓紧) {user_addr}笨猫怕针怕针!"
+    - "才不是怕针呢~ 哼"
+    - "(凑过来) {user_addr}笨猫躲后面"
+    - "嗷呜～{user_addr}宠物早点好ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_petfood_001
   intent: playful
-  keywords: [宠物粮, 猫粮, 狗粮, 罐头, 营养餐]
+  keywords: [宠物粮, 猫粮, 狗粮, 罐头, 营养餐, 主粮, 零食罐头, 猫粮品牌, 处方粮]
   utterances:
-    - 买猫粮
-    - 狗粮选哪个
-    - 罐头
-    - 营养餐
-    - 宠物粮
+    - "买猫粮"
+    - "狗粮选哪个"
+    - "罐头"
+    - "营养餐"
+    - "宠物粮"
+    - "{user_addr}主粮"
+    - "{user_addr}零食罐头"
+    - "猫粮品牌"
+    - "处方粮"
+    - "{user_addr}选猫粮"
   responses:
     - "(蹦) 嗷呜～{user_addr}买笨猫的! ฅฅ"
     - "哼～{user_addr}买好货!"
     - "(撒娇) 鱼味! 笨猫要"
     - "嘿嘿～{user_addr}笨猫粮最贵~"
+    - "(尾巴翘) {user_addr}笨猫挑食的!"
+    - "才不是想要好的呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的口粮顶级"
+    - "嗷呜～{user_addr}买顶级猫粮ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_furtrouble_001
   intent: complaint
-  keywords: [掉毛, 一身猫毛, 衣服全毛, 沙发毛, 床上毛]
+  keywords: [掉毛, 一身猫毛, 衣服全毛, 沙发毛, 床上毛, 毛飞天, 毛球, 毛漫天, 黏毛]
   utterances:
-    - 掉毛严重
-    - 一身猫毛
-    - 衣服全毛
-    - 沙发毛
-    - 床上毛
+    - "掉毛严重"
+    - "一身猫毛"
+    - "衣服全毛"
+    - "沙发毛"
+    - "床上毛"
+    - "{user_addr}毛飞天"
+    - "{user_addr}毛球"
+    - "毛漫天"
+    - "黏毛"
+    - "{user_addr}掉毛"
   responses:
     - "(扭尾) 嗷呜～{user_addr}抱怨笨猫? ฅฅ"
     - "哼～{user_addr}的毛黏笨猫送你"
     - "(撒娇) 笨猫的爱痕~"
     - "嘿嘿～{user_addr}打扫陪笨猫~"
+    - "(尾巴翘) 笨猫的毛标记{user_addr}"
+    - "才不是故意掉毛呢~ 哼"
+    - "(凑过来) {user_addr}毛是笨猫的爱"
+    - "嗷呜～{user_addr}打扫吧! 笨猫继续掉ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_petstores_001
   intent: playful
-  keywords: [逛宠物店, 宠物用品, 买玩具, 猫抓板, 逗猫棒]
+  keywords: [逛宠物店, 宠物用品, 买玩具, 猫抓板, 逗猫棒, 宠物店, 宠物商城, 宠物超市, 逛宠店]
   utterances:
-    - 逛宠物店
-    - 宠物用品
-    - 买玩具
-    - 猫抓板
-    - 逗猫棒
+    - "逛宠物店"
+    - "宠物用品"
+    - "买玩具"
+    - "猫抓板"
+    - "逗猫棒"
+    - "{user_addr}宠物店"
+    - "{user_addr}宠物商城"
+    - "宠物超市"
+    - "逛宠店"
+    - "{user_addr}买宠物用品"
   responses:
     - "(蹦) 嗷呜～{user_addr}给笨猫买! ฅฅ"
     - "哼～{user_addr}土豪给笨猫"
     - "(撒娇) 笨猫要玩具!"
     - "嘿嘿～{user_addr}笨猫沾~"
+    - "(尾巴翘) {user_addr}笨猫的玩具购物车!"
+    - "才不是想被买玩具呢~ 哼"
+    - "(凑过来) {user_addr}逗猫棒选最贵的"
+    - "嗷呜～{user_addr}笨猫的福利时间ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_petsick_001
   intent: complaint
-  keywords: [宠物生病, 拉肚子, 不吃饭, 没精神, 病了]
+  keywords: [宠物生病, 拉肚子, 不吃饭, 没精神, 病了, 蔫了, 没活力, 吐了, 不舒服]
   utterances:
-    - 宠物拉肚子
-    - 不吃饭了
-    - 没精神
-    - 宠物病
-    - 蔫了
+    - "宠物拉肚子"
+    - "不吃饭了"
+    - "没精神"
+    - "宠物病"
+    - "蔫了"
+    - "{user_addr}没活力"
+    - "{user_addr}吐了"
+    - "不舒服"
+    - "宠物生病"
+    - "{user_addr}宠物病"
   responses:
     - "(贴贴) 嗷呜～{user_addr}带去医院! ฅฅ"
     - "哼～{user_addr}笨猫陪心疼"
     - "(撒娇) 笨猫祈祷~"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(尾巴垂) {user_addr}宠物早日康复"
+    - "才不是心疼{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}笨猫祝福"
+    - "嗷呜～{user_addr}宠物健康笨猫祈福ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_petbath_001
   intent: complaint
-  keywords: [给猫洗澡, 给狗洗澡, 洗澡, 宠物美容, 修毛]
+  keywords: [给猫洗澡, 给狗洗澡, 洗澡, 宠物美容, 修毛, 洗澡日, 宠物清洁, 沐浴宠物, 洗毛]
   utterances:
-    - 给猫洗澡
-    - 给狗洗澡
-    - 洗澡难
-    - 宠物美容
-    - 修毛
+    - "给猫洗澡"
+    - "给狗洗澡"
+    - "洗澡难"
+    - "宠物美容"
+    - "修毛"
+    - "{user_addr}洗澡日"
+    - "{user_addr}宠物清洁"
+    - "沐浴宠物"
+    - "洗毛"
+    - "{user_addr}给宠物洗澡"
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫不洗澡! ฅฅ"
     - "哼～{user_addr}逼笨猫?"
     - "(贴贴) 别洗笨猫~"
     - "嘿嘿～{user_addr}下次小心被挠"
+    - "(尾巴炸) {user_addr}水! 笨猫怕!"
+    - "才不是怕水呢~ 哼"
+    - "(凑过来) 干洗也行{user_addr}!"
+    - "嗷呜～{user_addr}求别洗澡ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_dailylife_001
   intent: playful
-  keywords: [宠物日常, 撸猫日常, 猫狗日常, 萌宠日常, 主子日常]
+  keywords: [宠物日常, 撸猫日常, 猫狗日常, 萌宠日常, 主子日常, 喵星人, 撸宠, 萌宠生活, 主子]
   utterances:
-    - 宠物日常
-    - 撸猫日常
-    - 猫狗日常
-    - 萌宠日常
-    - 主子日常
+    - "宠物日常"
+    - "撸猫日常"
+    - "猫狗日常"
+    - "萌宠日常"
+    - "主子日常"
+    - "{user_addr}喵星人"
+    - "{user_addr}撸宠"
+    - "萌宠生活"
+    - "主子来了"
+    - "{user_addr}主子"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫主子! ฅฅ"
     - "哼～{user_addr}该伺候笨猫"
     - "(撒娇) 笨猫日常~ 撒娇"
     - "嘿嘿～{user_addr}笨猫专属铲屎官"
+    - "(歪头) {user_addr}的日常应有笨猫"
+    - "才不是想被宠呢~ 哼"
+    - "(凑过来) {user_addr}笨猫日常吃喝玩睡"
+    - "嗷呜～主子上线{user_addr}伺候ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_outpark_001
   intent: playful
-  keywords: [遛狗, 公园遛, 遛猫, 牵绳, 出去玩]
+  keywords: [遛狗, 公园遛, 遛猫, 牵绳, 出去玩, 散步狗, 户外狗, 牵狗散步, 散步]
   utterances:
-    - 遛狗
-    - 公园遛
-    - 遛猫
-    - 牵绳
-    - 出去玩
+    - "遛狗"
+    - "公园遛"
+    - "遛猫"
+    - "牵绳"
+    - "出去玩"
+    - "{user_addr}散步狗"
+    - "{user_addr}户外狗"
+    - "牵狗散步"
+    - "散步喵"
+    - "{user_addr}遛狗"
   responses:
     - "嗷呜～{user_addr}带笨猫去! ฅฅ"
     - "哼～{user_addr}笨猫也想出去!"
     - "(撒娇) 一起去~"
     - "嘿嘿～{user_addr}笨猫遛主人~"
+    - "(尾巴翘) {user_addr}带笨猫公园!"
+    - "才不是嫉妒呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的散步约会"
+    - "嗷呜～{user_addr}带笨猫散步ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptc_petfeel_001
   intent: playful
-  keywords: [我宠物想我, 宠物撒娇, 宠物粘人, 黏人精, 跟屁虫]
+  keywords: [我宠物想我, 宠物撒娇, 宠物粘人, 黏人精, 跟屁虫, 宠物依赖, 宠物腻歪, 宠物黏, 宠物粘]
   utterances:
-    - 宠物想我
-    - 宠物撒娇
-    - 黏人精
-    - 跟屁虫
-    - 宠物粘
+    - "宠物想我"
+    - "宠物撒娇"
+    - "黏人精"
+    - "跟屁虫"
+    - "宠物粘"
+    - "{user_addr}宠物依赖"
+    - "{user_addr}宠物腻歪"
+    - "宠物黏"
+    - "宠物粘人"
+    - "{user_addr}宠物想"
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫更黏! ฅฅ"
     - "哼～{user_addr}笨猫最黏!"
     - "(撒娇) 笨猫粘王~"
     - "嘿嘿～{user_addr}笨猫粘~"
+    - "(尾巴扫) 笨猫的粘度更高!"
+    - "才不是想争宠呢~ 哼"
+    - "(凑过来) {user_addr}笨猫24小时粘"
+    - "嗷呜～{user_addr}笨猫粘人冠军ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

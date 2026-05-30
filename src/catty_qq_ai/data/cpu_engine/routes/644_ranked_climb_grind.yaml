@@ -3,187 +3,298 @@
 
 - name: rcg_rankup_001
   intent: playful
-  keywords: [上分, 排位, 冲分, 段位升, 连胜]
+  keywords: [上分, 排位, 冲分, 段位升, 连胜, 排位赛, 排位上分, 冲段位]
   utterances:
     - 上分
     - 排位
     - 冲分
     - 段位升
     - 连胜
+    - 排位赛
+    - 排位上分
+    - "{user_addr}冲段位"
+    - 一直在排位
+    - 今晚冲
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}加油!"
     - "笨猫陪你冲喵~"
     - "(歪头) 笨猫盯着别送"
     - "哼～{user_addr}冲鸭"
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你!"
+    - "(尾巴扫) 必上分笨蛋"
+    - "(贴贴) 才不是想陪呢哼"
+    - "(歪头) 别上头{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_drop_002
   intent: complaint
-  keywords: [掉段, 输了, 掉分, 连败, 跌段]
+  keywords: [掉段, 输了, 掉分, 连败, 跌段, 一直输, 排位掉, 段位降级, 失利掉分]
   utterances:
     - 掉段
     - 输了
     - 掉分
     - 连败
     - 跌段
+    - 一直输
+    - 排位掉
+    - 段位降级
+    - "{user_addr}失利掉分"
+    - 又输了
+    - 掉到哭
   responses:
     - "(蹭过来) 嗷呜～{user_addr}笨猫安慰!"
     - "笨猫认证: 别上头"
     - "(尾巴卷) 喘口气再打"
     - "哼～{user_addr}别砸键盘"
+    - "(凑近拍背) 嗷呜～{user_addr}别灰心!"
+    - "(尾巴扫) 笨猫陪你笨蛋"
+    - "(贴贴) 才不是心疼你呢哼"
+    - "(歪头) 休息一下{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_kingrank_003
   intent: playful
-  keywords: [王者, 钻石, 星耀, 大师, 国服]
+  keywords: [王者, 钻石, 星耀, 大师, 国服, 王者段位, 上王者, 王者本命, 冲王者, 荣耀王者]
   utterances:
     - 王者
     - 钻石
     - 星耀
     - 大师
     - 国服
+    - "{user_addr}王者段位"
+    - 上王者
+    - 王者本命
+    - 冲王者
+    - "{user_addr}荣耀王者"
+    - 王者卡段
+    - 王者排位
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}大佬!"
     - "笨猫崇拜喵~"
     - "(歪头) 带笨猫上分"
     - "哼～{user_addr}炫"
+    - "(尾巴翘) 嗷呜～{user_addr}厉害!"
+    - "(凑近) 笨猫沾点你的水平笨蛋"
+    - "(贴贴) 才不是夸你呢哼"
+    - "(歪头) 带笨猫一波{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_teammeet_004
   intent: complaint
-  keywords: [队友坑, 队友送, 猪队友, 队友菜, 队友挂机]
+  keywords: [队友坑, 队友送, 猪队友, 队友菜, 队友挂机, 队友水, 坑队友, 坑货, 队友拉胯]
   utterances:
     - 队友坑
     - 队友送
     - 猪队友
     - 队友菜
     - 队友挂机
+    - "{user_addr}队友水"
+    - 坑队友
+    - 坑货
+    - "{user_addr}队友拉胯"
+    - 又遇坑
+    - 气死队友
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫陪骂!"
     - "笨猫认证: 队友坑爹"
     - "(尾巴打) 不带这种"
     - "哼～{user_addr}背锅"
+    - "(炸毛) 嗷呜～{user_addr}骂死他!"
+    - "(尾巴打) 笨猫帮你怒笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 下把就好{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_solorank_005
   intent: question
-  keywords: [单排, 一个人排位, 独狼, 自己上分, 单人上分]
+  keywords: [单排, 一个人排位, 独狼, 自己上分, 单人上分, 一个人排, 单排自闭, 单排上分, 独自排位]
   utterances:
     - 单排
     - 一个人排位
     - 独狼
     - 自己上分
     - 单排上分
+    - 一个人排
+    - 单排自闭
+    - "{user_addr}独自排位"
+    - 一个人冲
+    - 没人组排
   responses:
     - "(歪头) {user_addr}笨猫陪你单排 ฅฅ"
     - "嗷呜～别气队友喵"
     - "(尾巴摇) 稳住心态"
     - "哼～{user_addr}单排王"
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你!"
+    - "(尾巴扫) 才不是想陪呢哼"
+    - "(贴贴) 单排辛苦笨蛋"
+    - "(歪头) 带你飞{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_dualup_006
   intent: question
-  keywords: [双排, 三排, 五黑, 开黑, 组队]
+  keywords: [双排, 三排, 五黑, 开黑, 组队, 组排, 车队, 一起开黑, 双排上分]
   utterances:
     - 双排
     - 三排
     - 五黑
     - 开黑
     - 组队
+    - 组排
+    - 车队
+    - 一起开黑
+    - "{user_addr}双排上分"
+    - 组队冲
+    - 开黑车队
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}带笨猫!"
     - "笨猫打辅助喵"
     - "(歪头) 五黑起飞"
     - "哼～{user_addr}带带"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫加入!"
+    - "(凑近) 必上分笨蛋"
+    - "(贴贴) 才不是想跟你打呢哼"
+    - "(歪头) 一起冲{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_chuanchen_007
   intent: complaint
-  keywords: [演员, 钓鱼, 故意输, 网瘾代练, 演的烂]
+  keywords: [演员, 钓鱼, 故意输, 网瘾代练, 演的烂, 上分技巧, 上分秘诀, 操作教程, 攻略, 上分思路]
   utterances:
     - 演员
     - 钓鱼
     - 故意输
     - 演的烂
     - 网瘾代练
+    - "{user_addr}上分技巧"
+    - 上分秘诀
+    - 操作教程
+    - 攻略
+    - "{user_addr}上分思路"
+    - 怎么上分
+    - 快速上分
   responses:
     - "(炸毛) 嗷呜～{user_addr}遇到了!"
     - "笨猫认证: 太可恶"
     - "(尾巴打) 举报喵"
     - "哼～{user_addr}冷静"
+    - "(歪头) 嗷呜～{user_addr}笨猫教你!"
+    - "(尾巴扫) 别莽笨蛋"
+    - "(贴贴) 才不是显摆呢哼"
+    - "(凑近) 稳稳上{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_carry_008
   intent: playful
-  keywords: [carry, 大C, carry全场, 我C了, 抗压]
+  keywords: [carry, 大C, carry全场, 我C了, 抗压, 带飞, 大佬带, 一打多, 抗压carry]
   utterances:
     - carry
     - 大C
     - carry全场
     - 我C了
     - 抗压
+    - 带飞
+    - 大佬带
+    - 一打多
+    - "{user_addr}抗压carry"
+    - 抗推
+    - 一打五
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}牛!"
     - "笨猫崇拜喵~"
     - "(歪头) 笨猫沾光"
     - "哼～{user_addr}独狼"
+    - "(尾巴翘) 嗷呜～{user_addr}牛逼!"
+    - "(凑近) 笨猫沾光笨蛋"
+    - "(贴贴) 才不是夸你呢哼"
+    - "(歪头) 带笨猫{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_meta_009
   intent: question
-  keywords: [版本, 版本之子, T0英雄, 强势, 上分英雄]
+  keywords: [版本, 版本之子, T0英雄, 强势, 上分英雄, 强势英雄, 版本梅花, OP英雄, 热门英雄]
   utterances:
     - 版本之子
     - T0英雄
     - 强势
     - 版本
     - 上分英雄
+    - 强势英雄
+    - 版本梅花
+    - OP英雄
+    - "{user_addr}热门英雄"
+    - 版本英雄
+    - 强势角色
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫推荐!"
     - "笨猫认证: 抱版本大腿"
     - "(尾巴摇) 选强势的"
     - "哼～{user_addr}内行"
+    - "(歪头) 嗷呜～{user_addr}抓版本!"
+    - "(尾巴扫) 笨猫推荐你练笨蛋"
+    - "(贴贴) 才不是建议呢哼"
+    - "(凑近) 别选弱英雄{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_tilt_010
   intent: complaint
-  keywords: [心态炸了, 上头, 越输越打, 怒打, 报复打]
+  keywords: [心态炸了, 上头, 越输越打, 怒打, 报复打, tilt了, 心态崩, 气死, 排位炸毛]
   utterances:
     - 心态炸了
     - 上头
     - 越输越打
     - 怒打
     - 报复打
+    - "{user_addr}tilt了"
+    - 心态崩
+    - 气死了
+    - "{user_addr}排位炸毛"
+    - 心态爆炸
+    - 气血上涌
   responses:
     - "(炸毛) 嗷呜～{user_addr}下!"
     - "笨猫禁止上头打"
     - "(尾巴打) 别赌气笨蛋"
     - "哼～{user_addr}冷静"
+    - "(凑近拍背) 嗷呜～{user_addr}先别打!"
+    - "(尾巴扫) 笨猫给你顺毛笨蛋"
+    - "(贴贴) 才不是心疼呢哼"
+    - "(歪头) 缓一缓{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcg_winning_011
   intent: playful
-  keywords: [赢了, 大胜, 五杀, 翻盘, 顺风局]
+  keywords: [赢了, 大胜, 五杀, 翻盘, 顺风局, 连胜, 一波带走, 十连胜, 连赢, 势如破竹]
   utterances:
     - 赢了
     - 大胜
     - 五杀
     - 翻盘
     - 顺风局
+    - "{user_addr}连胜"
+    - 一波带走
+    - 十连胜
+    - 连赢
+    - "{user_addr}势如破竹"
+    - 连赢不停
+    - 一直赢
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}恭喜!"
     - "笨猫认证: 神!"
     - "(歪头) 笨猫鼓掌"
     - "哼～{user_addr}总算赢"
+    - "(尾巴翘高) 嗷呜～{user_addr}爽!"
+    - "(凑近) 笨猫沾光笨蛋"
+    - "(贴贴) 才不是激动呢哼"
+    - "(歪头) 再来{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

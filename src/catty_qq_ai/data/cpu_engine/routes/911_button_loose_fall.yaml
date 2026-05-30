@@ -3,170 +3,271 @@
 
 - name: bt_kouzi_001
   intent: complaint
-  keywords: [扣子掉了, 纽扣松, 纽扣丢, 衣服扣脱, 找扣子]
+  keywords: [扣子掉了, 纽扣松, 纽扣丢, 衣服扣脱, 找扣子, 扣子掉, 真的, 好烦, 好喜欢]
   utterances:
     - "扣子掉了"
     - "{user_addr}纽扣松"
     - "纽扣丢了"
     - "衣服扣脱"
     - "找扣子"
+    - "{user_addr}扣子掉了咋整"
+    - "扣子掉了笑死"
+    - "我想说扣子掉了"
+    - "扣子掉了真的离谱"
+    - "{user_addr}你也扣子掉了吗"
+    - "{user_addr}笨猫陪我聊扣子掉了"
   responses:
     - "(找) 嗷呜～{user_addr}笨猫帮你找! ฅฅ"
     - "哼～扣子掉地肯定弹远"
     - "(尾巴扫) 蹲下找一找"
     - "猫猫帮你缝回去喵"
+    - "(摇头) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～扣子掉了真的烦死人家了"
+    - "(打哈欠) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_fengkou_001
   intent: question
-  keywords: [缝扣子, 不会缝, 教我缝, 缝扣针法, 手缝]
+  keywords: [缝扣子, 不会缝, 教我缝, 缝扣针法, 手缝, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "缝扣子"
     - "{user_addr}不会缝"
     - "教我缝"
     - "缝扣针法"
     - "手缝"
+    - "我想说缝扣子"
+    - "缝扣子真的离谱"
+    - "{user_addr}笨猫陪我聊缝扣子"
+    - "{user_addr}缝扣子咋整"
+    - "缝扣子笑死"
+    - "{user_addr}你也缝扣子吗"
   responses:
     - "(教学) 嗷呜～{user_addr}笨猫教你 ฅฅ"
     - "哼～十字针法最稳"
     - "(尾巴卷) 留点松度"
     - "猫猫给你示范喵~"
+    - "(摸下巴) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～缝扣子得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_houkou_001
   intent: complaint
-  keywords: [扣得太紧, 扣不上, 长胖了, 衣服小了, 紧绷]
+  keywords: [扣得太紧, 扣不上, 长胖了, 衣服小了, 紧绷, 长胖, 衣服小, 真的, 好烦]
   utterances:
     - "扣不上"
     - "{user_addr}长胖了"
     - "衣服小了"
     - "紧绷"
     - "扣得吃力"
+    - "{user_addr}你也扣得太紧吗"
+    - "{user_addr}笨猫陪我聊扣得太紧"
+    - "扣得太紧真的离谱"
+    - "扣得太紧笑死"
+    - "{user_addr}扣得太紧咋整"
+    - "我想说扣得太紧"
   responses:
     - "(笑) 嗷呜～{user_addr}笨猫看到肚子鼓 ฅฅ"
     - "哼～换件大码"
     - "(尾巴扫) 别硬扣, 会崩"
     - "猫猫推荐你换衣服喵"
+    - "(瘫倒) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～扣得太紧真的烦死人家了"
+    - "(打哈欠) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_chongkou_001
   intent: question
-  keywords: [备用扣, 衣服带备用, 备件, 多余扣子, 衣摆里]
+  keywords: [备用扣, 衣服带备用, 备件, 多余扣子, 衣摆里, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "备用扣"
     - "{user_addr}衣服带备件"
     - "多余扣子"
     - "衣摆里"
     - "备用纽扣"
+    - "{user_addr}备用扣咋整"
+    - "备用扣笑死"
+    - "我想说备用扣"
+    - "{user_addr}你也备用扣吗"
+    - "{user_addr}笨猫陪我聊备用扣"
+    - "备用扣真的离谱"
   responses:
     - "(找) 嗷呜～{user_addr}笨猫看到衣摆有! ฅฅ"
     - "哼～扣子在内侧"
     - "(尾巴扫) 备件最贴心"
     - "猫猫给你换上喵"
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～备用扣得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_zhouzhou_001
   intent: complaint
-  keywords: [扣子松动, 一拉就掉, 老旧扣, 摇摇欲坠, 加固]
+  keywords: [扣子松动, 一拉就掉, 老旧扣, 摇摇欲坠, 加固, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "扣子松动"
     - "{user_addr}一拉就掉"
     - "老旧扣"
     - "摇摇欲坠"
     - "加固"
+    - "我想说扣子松动"
+    - "扣子松动真的离谱"
+    - "扣子松动笑死"
+    - "{user_addr}你也扣子松动吗"
+    - "{user_addr}扣子松动咋整"
+    - "{user_addr}笨猫陪我聊扣子松动"
   responses:
     - "(看) 嗷呜～{user_addr}赶紧加固 ฅฅ"
     - "哼～再不缝要掉"
     - "(尾巴扫) 笨猫给你加针"
     - "猫猫帮你加固喵"
+    - "(趴下) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～扣子松动真的烦死人家了"
+    - "(皱眉) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_zihaoji_001
   intent: playful
-  keywords: [扣子卡装饰, 装饰扣, 复古扣, 珍珠扣, 异形扣]
+  keywords: [扣子卡装饰, 装饰扣, 复古扣, 珍珠扣, 异形扣, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "装饰扣"
     - "{user_addr}复古扣"
     - "珍珠扣"
     - "异形扣"
     - "扣子精致"
+    - "{user_addr}你也扣子卡装饰吗"
+    - "扣子卡装饰真的离谱"
+    - "扣子卡装饰笑死"
+    - "我想说扣子卡装饰"
+    - "{user_addr}扣子卡装饰咋整"
+    - "{user_addr}笨猫陪我聊扣子卡装饰"
   responses:
     - "(看) 嗷呜～{user_addr}珍珠扣超优雅 ฅฅ"
     - "哼～复古扣高级"
     - "(尾巴卷) 笨猫想要金属扣"
     - "猫猫推荐你买不同扣搭配喵"
+    - "(贴贴) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～扣子卡装饰才不让{user_addr}独享"
+    - "(眼睛亮) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_jianggou_001
   intent: complaint
-  keywords: [钩子, 暗扣, 隐形扣, 子母扣, 暗藏扣]
+  keywords: [钩子, 暗扣, 隐形扣, 子母扣, 暗藏扣, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "暗扣"
     - "{user_addr}隐形扣"
     - "子母扣"
     - "钩子扣"
     - "藏起来的扣"
+    - "{user_addr}笨猫陪我聊钩子"
+    - "钩子真的离谱"
+    - "{user_addr}你也钩子吗"
+    - "我想说钩子"
+    - "钩子笑死"
+    - "{user_addr}钩子咋整"
   responses:
     - "(找) 嗷呜～{user_addr}笨猫帮你找位置 ฅฅ"
     - "哼～暗扣最难发现"
     - "(尾巴扫) 隐形扣方便"
     - "猫猫推荐你用磁扣喵"
+    - "(揉眼睛) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～钩子真的烦死人家了"
+    - "(打哈欠) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_caizhi_001
   intent: question
-  keywords: [扣子掉色, 塑料扣, 木扣, 金属扣, 贝壳扣]
+  keywords: [扣子掉色, 塑料扣, 木扣, 金属扣, 贝壳扣, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "塑料扣掉色"
     - "{user_addr}木扣"
     - "金属扣"
     - "贝壳扣"
     - "扣子材质"
+    - "我想说扣子掉色"
+    - "扣子掉色笑死"
+    - "{user_addr}扣子掉色咋整"
+    - "{user_addr}你也扣子掉色吗"
+    - "扣子掉色真的离谱"
+    - "{user_addr}笨猫陪我聊扣子掉色"
   responses:
     - "(摸) 嗷呜～{user_addr}木扣文艺 ฅฅ"
     - "哼～贝壳扣高级"
     - "(尾巴卷) 金属扣耐用"
     - "猫猫推荐你买好材质喵"
+    - "(眨眼) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～扣子掉色得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_lala_001
   intent: complaint
-  keywords: [扣眼变大, 扣眼松, 扣不住, 扣眼松, 缝紧扣眼]
+  keywords: [扣眼变大, 扣眼松, 扣不住, 扣眼松, 缝紧扣眼, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "扣眼变大"
     - "{user_addr}扣不住"
     - "缝紧扣眼"
     - "扣眼松"
     - "需要修"
+    - "{user_addr}笨猫陪我聊扣眼变大"
+    - "{user_addr}你也扣眼变大吗"
+    - "我想说扣眼变大"
+    - "扣眼变大真的离谱"
+    - "扣眼变大笑死"
+    - "{user_addr}扣眼变大咋整"
   responses:
     - "(看) 嗷呜～{user_addr}笨猫帮你缝紧 ฅฅ"
     - "哼～扣眼松了不好看"
     - "(尾巴扫) 重新锁边"
     - "猫猫给你修一下喵"
+    - "(尾巴拍) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～扣眼变大真的烦死人家了"
+    - "(耳朵蔫) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bt_zhenshou_001
   intent: question
-  keywords: [针线包, 出门带针, 应急针线, 针线小盒, 修补包]
+  keywords: [针线包, 出门带针, 应急针线, 针线小盒, 修补包, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "针线包"
     - "{user_addr}应急针线"
     - "针线小盒"
     - "修补包"
     - "出门带"
+    - "{user_addr}你也针线包吗"
+    - "我想说针线包"
+    - "{user_addr}针线包咋整"
+    - "针线包真的离谱"
+    - "针线包笑死"
+    - "{user_addr}笨猫陪我聊针线包"
   responses:
     - "(掏) 嗷呜～{user_addr}笨猫推荐随身带 ฅฅ"
     - "哼～关键时刻救命"
     - "(尾巴卷) 笨猫给你一个迷你款"
     - "猫猫推荐你买便携针线喵"
+    - "(尾巴问号) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～针线包得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

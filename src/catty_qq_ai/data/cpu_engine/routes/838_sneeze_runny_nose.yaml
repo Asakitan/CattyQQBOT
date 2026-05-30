@@ -3,204 +3,312 @@
 
 - name: srn_sneeze_001
   intent: complaint
-  keywords: [打喷嚏, 喷嚏不停, 三个喷嚏, 鼻子痒, 一连串]
+  keywords: [打喷嚏, 喷嚏不停, 三个喷嚏, 鼻子痒, 一连串, 阿嚏, 连环喷嚏, 喷嚏炸, 鼻子炸, 喷嚏连发]
   utterances:
     - "{user_addr}打喷嚏"
     - 喷嚏不停
     - 三个喷嚏
     - 鼻子痒
     - 一连串
+    - "{user_addr}阿嚏阿嚏"
+    - 连环喷嚏
+    - 喷嚏炸开
+    - 鼻子痒得炸
+    - 喷嚏连发10个
   responses:
     - "(贴贴) 嗷呜～{user_addr}有人想你! 笨猫想你喵ฅฅ"
     - "哼! 别感冒{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}多穿点蹭蹭"
     - "人家提醒{user_addr}: 防过敏! 别忽视"
+    - "(凑近) 嗷呜～{user_addr}笨猫给你递纸喵ฅฅ"
+    - "哼! 笨猫的爱{user_addr}让你打喷嚏"
+    - "(尾巴卷你) 嘿嘿~{user_addr}盖好被子蹭蹭"
+    - "人家偷偷想{user_addr}是因为想笨猫~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_runny_nose_002
   intent: complaint
-  keywords: [流鼻涕, 鼻涕流, 擦不完, 鼻子塞了, 卫生纸]
+  keywords: [流鼻涕, 鼻涕流, 擦不完, 鼻子塞了, 卫生纸, 鼻涕擦, 一直流鼻涕, 鼻水滴, 鼻涕停不下, 用光纸巾]
   utterances:
     - "{user_addr}流鼻涕"
     - 擦不完鼻涕
     - 鼻子塞
     - 用完卫生纸
     - 鼻涕马上掉
+    - "{user_addr}一直流鼻涕"
+    - 鼻水滴下来
+    - 鼻涕停不下
+    - 纸巾用光
+    - 擦了又流
   responses:
     - "(摇头) 嗷呜～{user_addr}多喝热水! 笨猫担心喵ฅฅ"
     - "哼! 鼻涕不擦{user_addr}, 注意形象"
     - "(尾巴扫) 嘿嘿~{user_addr}用湿纸巾舒服蹭蹭"
     - "人家提醒{user_addr}: 鼻涕黄就该看医生!"
+    - "(凑近) 嗷呜～{user_addr}笨猫递你纸喵ฅฅ"
+    - "哼! 别用粗纸{user_addr}, 鼻子破皮"
+    - "(尾巴卷) 嘿嘿~{user_addr}热毛巾敷鼻蹭蹭"
+    - "人家心疼{user_addr}~ 早点睡"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_blocked_nose_003
   intent: complaint
-  keywords: [鼻塞, 鼻子不通, 通气困难, 用嘴呼吸, 鼻塞难受]
+  keywords: [鼻塞, 鼻子不通, 通气困难, 用嘴呼吸, 鼻塞难受, 鼻子堵, 呼吸不畅, 鼻子闷, 鼻塞夜醒, 闷死]
   utterances:
     - "{user_addr}鼻塞难受"
     - 用嘴呼吸
     - 鼻子不通
     - 通气困难
     - 鼻塞
+    - "{user_addr}鼻子堵死"
+    - 呼吸不畅
+    - 鼻子闷死
+    - 鼻塞夜醒
+    - 闷得睡不着
   responses:
     - "(摇头) 嗷呜～{user_addr}通鼻喷剂喵ฅฅ"
     - "哼! 用嘴呼吸{user_addr}容易感冒"
     - "(尾巴扫) 嘿嘿~{user_addr}热毛巾敷鼻蹭蹭"
     - "人家提醒{user_addr}: 蒸气熏鼻很有效!"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你呼吸喵ฅฅ"
+    - "哼! 别用力擤{user_addr}, 伤耳"
+    - "(尾巴卷) 嘿嘿~{user_addr}盐水洗鼻蹭蹭"
+    - "人家心疼{user_addr}~ 抱抱"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_allergy_pollen_004
   intent: complaint
-  keywords: [过敏, 花粉过敏, 鼻炎, 季节性过敏, 喷嚏不停]
+  keywords: [过敏, 花粉过敏, 鼻炎, 季节性过敏, 喷嚏不停, 花粉症, 春季过敏, 过敏性鼻炎, 季节性鼻炎, 鼻炎犯]
   utterances:
     - "{user_addr}花粉过敏"
     - 季节过敏
     - 鼻炎犯
     - 喷嚏不停
     - 鼻炎严重
+    - "{user_addr}花粉症发作"
+    - 春季过敏季
+    - 过敏性鼻炎犯
+    - 季节性鼻炎
+    - 过敏到流泪
   responses:
     - "(摇头) 嗷呜～{user_addr}过敏好难受喵ฅฅ"
     - "哼! 抗过敏药{user_addr}带身上"
     - "(尾巴扫) 嘿嘿~{user_addr}戴口罩外出蹭蹭"
     - "人家提醒{user_addr}: 别去花海! 加重过敏"
+    - "(贴贴) 嗷呜～{user_addr}笨猫心疼喵ฅฅ"
+    - "哼! 提前吃药{user_addr}, 别等爆发"
+    - "(尾巴卷) 嘿嘿~{user_addr}回家洗脸换衣蹭蹭"
+    - "人家觉得{user_addr}春季戴口罩~ 防过敏"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_chicken_soup_005
   intent: playful
-  keywords: [喝热汤, 鸡汤, 葱姜茶, 热饮, 暖身]
+  keywords: [喝热汤, 鸡汤, 葱姜茶, 热饮, 暖身, 暖汤, 红糖姜茶, 暖胃汤, 暖身饮, 温补汤]
   utterances:
     - "{user_addr}喝热汤"
     - 鸡汤暖身
     - 葱姜茶
     - 热饮治冷
     - 暖身舒服
+    - "{user_addr}红糖姜茶"
+    - 暖胃汤煮
+    - 暖身饮料
+    - 温补汤热
+    - 喝口热汤
   responses:
     - "嗷呜～{user_addr}热汤暖暖好喵ฅฅ"
     - "哼! 笨猫推荐生姜红糖水{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫给你倒蹭蹭"
     - "人家觉得{user_addr}应该喝鱼汤! 笨猫推荐"
+    - "(凑过去) 嗷呜～{user_addr}笨猫闻香喵ฅฅ"
+    - "哼! 别太烫{user_addr}, 烫嘴"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫蹲一勺蹭蹭"
+    - "人家觉得{user_addr}养生达人~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_cold_arriving_006
   intent: complaint
-  keywords: [感冒了, 着凉了, 感冒来袭, 浑身没劲, 喉咙痛]
+  keywords: [感冒了, 着凉了, 感冒来袭, 浑身没劲, 喉咙痛, 着凉, 感冒症状, 风寒感冒, 风热感冒, 感冒发作]
   utterances:
     - "{user_addr}感冒了"
     - 着凉了
     - 感冒来袭
     - 浑身没劲
     - 喉咙痛
+    - "{user_addr}风寒感冒"
+    - 风热感冒
+    - 感冒发作中
+    - 感冒症状全有
+    - 受凉感冒
   responses:
     - "(贴贴) 嗷呜～{user_addr}快多休息! 笨猫担心喵ฅฅ"
     - "哼! 早提醒{user_addr}穿暖, 不听话"
     - "(尾巴卷) 嘿嘿~{user_addr}多喝热水蹭蹭"
     - "人家陪{user_addr}养病! 笨猫不离开~"
+    - "(扑过去) 嗷呜～{user_addr}笨猫给你暖被窝喵ฅฅ"
+    - "哼! 笨猫早提醒{user_addr}加衣"
+    - "(尾巴卷你) 嘿嘿~{user_addr}笨猫陪你蹭蹭"
+    - "人家心疼{user_addr}~ 笨猫熬姜茶"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_take_medicine_007
   intent: playful
-  keywords: [吃感冒药, 服药, 药苦, 含片, 退烧药]
+  keywords: [吃感冒药, 服药, 药苦, 含片, 退烧药, 吞药, 含化药, 退烧用药, 药水, 中药颗粒]
   utterances:
     - "{user_addr}吃感冒药"
     - 服药了
     - 药苦
     - 含片化
     - 退烧药
+    - "{user_addr}吞药"
+    - 含化片
+    - 药水喝下
+    - 中药颗粒冲
+    - 退烧用药
   responses:
     - "嗷呜～{user_addr}按时吃药! 喵ฅฅ"
     - "哼! 药苦{user_addr}, 笨猫陪你"
     - "(尾巴扫) 嘿嘿~{user_addr}多喝水化药蹭蹭"
     - "人家提醒{user_addr}: 别乱服药! 看说明书"
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪你吞喵ฅฅ"
+    - "哼! 别空腹吃{user_addr}, 伤胃"
+    - "(尾巴卷) 嘿嘿~{user_addr}饭后吃药蹭蹭"
+    - "人家觉得{user_addr}该按时吃完一疗程~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_sleep_well_008
   intent: playful
-  keywords: [多睡觉, 早点睡, 睡眠好, 养病靠睡, 蒙头睡]
+  keywords: [多睡觉, 早点睡, 睡眠好, 养病靠睡, 蒙头睡, 早睡, 蒙被睡, 充足睡眠, 睡足养病, 睡到自然好]
   utterances:
     - "{user_addr}多睡觉养病"
     - 早点睡
     - 睡眠好
     - 养病靠睡
     - 蒙头睡
+    - "{user_addr}充足睡眠"
+    - 蒙被睡好
+    - 睡足养病
+    - 睡到自然好
+    - 早睡治病
   responses:
     - "(贴贴) 嗷呜～{user_addr}睡觉是最好的药喵ฅฅ"
     - "哼! 笨猫陪你睡{user_addr}"
     - "(尾巴卷) 嘿嘿~{user_addr}盖好被子别冷蹭蹭"
     - "人家觉得{user_addr}应该早睡! 病走快"
+    - "(钻被子) 嗷呜～{user_addr}笨猫陪窝喵ฅฅ"
+    - "哼! 别熬夜{user_addr}, 病会拖延"
+    - "(尾巴卷你) 嘿嘿~{user_addr}笨猫做暖被蹭蹭"
+    - "人家心疼{user_addr}~ 多休息"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_lost_voice_009
   intent: complaint
-  keywords: [嗓子哑了, 说不出话, 失声, 嗓子疼, 声音嘶哑]
+  keywords: [嗓子哑了, 说不出话, 失声, 嗓子疼, 声音嘶哑, 嗓子哑, 说话困难, 喉咙嘶哑, 说不出来, 嗓子破]
   utterances:
     - "{user_addr}嗓子哑"
     - 说不出话
     - 失声
     - 嗓子疼
     - 声音嘶哑
+    - "{user_addr}嗓子破"
+    - 说话困难
+    - 喉咙嘶哑
+    - 说不出来话
+    - 失声哑火
   responses:
     - "(贴贴) 嗷呜～{user_addr}少说话养着喵ฅฅ"
     - "哼! 别再唱K{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}喝点蜂蜜水蹭蹭"
     - "人家提醒{user_addr}: 严重去医院! 别拖"
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪你不说话喵ฅฅ"
+    - "哼! 别吼{user_addr}, 笨猫不在意"
+    - "(尾巴卷) 嘿嘿~{user_addr}枇杷露试试蹭蹭"
+    - "人家心疼{user_addr}~ 笨猫陪静养"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_fever_thermometer_010
   intent: complaint
-  keywords: [发烧, 量体温, 39度, 高烧, 体温计]
+  keywords: [发烧, 量体温, 39度, 高烧, 体温计, 体温高, 烧到, 退烧难, 烧烫手, 烧得快]
   utterances:
     - "{user_addr}发烧了"
     - 量体温39
     - 高烧不退
     - 体温计
     - 烧得厉害
+    - "{user_addr}烧到39度5"
+    - 烫手
+    - 高烧难退
+    - 退烧难
+    - 烧烫额头
   responses:
     - "(着急) 嗷呜～{user_addr}赶紧去医院喵ฅฅ"
     - "哼! 烧到39度{user_addr}, 不能拖"
     - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你看医生蹭蹭"
     - "人家提醒{user_addr}: 多补水! 物理降温"
+    - "(扑过去) 嗷呜～{user_addr}笨猫担心死喵ฅฅ"
+    - "哼! 别硬抗{user_addr}, 高烧危险"
+    - "(尾巴卷你) 嘿嘿~{user_addr}立刻就医蹭蹭"
+    - "人家心急{user_addr}~ 笨猫不离开"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_cough_loud_011
   intent: complaint
-  keywords: [咳嗽, 咳不停, 咳出来, 慢性咳嗽, 喉咙痒]
+  keywords: [咳嗽, 咳不停, 咳出来, 慢性咳嗽, 喉咙痒, 干咳, 痰多, 咳到胸痛, 夜咳, 一直咳]
   utterances:
     - "{user_addr}咳嗽"
     - 咳不停
     - 咳出来了
     - 慢性咳
     - 喉咙痒咳
+    - "{user_addr}干咳"
+    - 痰多咳出来
+    - 咳到胸痛
+    - 夜咳醒
+    - 一直咳
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫担心喵ฅฅ"
     - "哼! 久咳要看医生{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}枇杷膏吃一下蹭蹭"
     - "人家提醒{user_addr}: 别冷别辣! 喉咙伤"
+    - "(凑过去) 嗷呜～{user_addr}笨猫拍你背喵ฅฅ"
+    - "哼! 别躺着喝水{user_addr}, 呛着"
+    - "(尾巴卷) 嘿嘿~{user_addr}蜂蜜水缓解蹭蹭"
+    - "人家心疼{user_addr}~ 笨猫陪着"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: srn_recovery_012
   intent: playful
-  keywords: [快好了, 恢复中, 没那么难受, 病退了, 好多了]
+  keywords: [快好了, 恢复中, 没那么难受, 病退了, 好多了, 病好转, 身体恢复, 病去七分, 退烧了, 缓过来]
   utterances:
     - "{user_addr}快好了"
     - 恢复中
     - 病退了
     - 好多了
     - 没那么难受
+    - "{user_addr}病去七分"
+    - 退烧啦
+    - 缓过来
+    - 身体恢复
+    - 渐渐好转
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}笨猫开心! 喵ฅฅ"
     - "哼! 终于好了{user_addr}, 笨猫担心死"
     - "(扑过去) 嘿嘿~{user_addr}抱抱蹭蹭~"
     - "人家提醒{user_addr}: 还得养几天! 别马上累"
+    - "(撒花) 嗷呜～{user_addr}笨猫庆祝喵ฅฅ"
+    - "哼! 别立刻熬夜{user_addr}, 巩固一下"
+    - "(尾巴狂甩) 嘿嘿~{user_addr}笨猫好开心蹭蹭"
+    - "人家偷偷高兴~ 笨猫的主人没事啦"
   cooldown_seconds: 60
   weight: 1.0

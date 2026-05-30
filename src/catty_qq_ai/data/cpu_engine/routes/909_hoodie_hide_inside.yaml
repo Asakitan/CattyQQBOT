@@ -3,170 +3,271 @@
 
 - name: hd_weiyi_001
   intent: playful
-  keywords: [卫衣, 连帽衫, 套头卫衣, 帽T, 帽衫]
+  keywords: [卫衣, 连帽衫, 套头卫衣, 帽T, 帽衫, 连帽, 真的, 好烦, 好喜欢]
   utterances:
     - "卫衣"
     - "{user_addr}连帽衫"
     - "套头卫衣"
     - "帽T"
     - "帽衫"
+    - "卫衣真的离谱"
+    - "卫衣笑死"
+    - "{user_addr}笨猫陪我聊卫衣"
+    - "我想说卫衣"
+    - "{user_addr}卫衣咋整"
+    - "{user_addr}你也卫衣吗"
   responses:
     - "(钻) 嗷呜～{user_addr}笨猫穿上 ฅฅ"
     - "哼～卫衣最舒服"
     - "(尾巴卷) 一年穿四季"
     - "猫猫推荐你买宽松款喵~"
+    - "(蹭蹭) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～卫衣才不让{user_addr}独享"
+    - "(蹦跳) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_lianmao_001
   intent: playful
-  keywords: [戴帽子, 帽子兜里, 缩头乌龟, 躲帽里, 帽子盖头]
+  keywords: [戴帽子, 帽子兜里, 缩头乌龟, 躲帽里, 帽子盖头, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "戴帽子"
     - "{user_addr}躲帽里"
     - "缩头乌龟"
     - "帽子盖头"
     - "藏帽里"
+    - "{user_addr}笨猫陪我聊戴帽子"
+    - "{user_addr}戴帽子咋整"
+    - "我想说戴帽子"
+    - "{user_addr}你也戴帽子吗"
+    - "戴帽子真的离谱"
+    - "戴帽子笑死"
   responses:
     - "(钻帽里) 嗷呜～{user_addr}笨猫也藏! ฅฅ"
     - "哼～自闭模式开"
     - "(尾巴卷) 笨猫钻进帽兜"
     - "猫猫躲帽子里不见你喵~"
+    - "(凑头) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～戴帽子才不让{user_addr}独享"
+    - "(蹭蹭) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_jianjia_001
   intent: question
-  keywords: [加绒卫衣, 加棉, 内绒款, 冬季卫衣, 厚卫衣]
+  keywords: [加绒卫衣, 加棉, 内绒款, 冬季卫衣, 厚卫衣, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "加绒卫衣"
     - "{user_addr}加棉款"
     - "内绒款"
     - "冬季加厚"
     - "厚卫衣"
+    - "加绒卫衣真的离谱"
+    - "我想说加绒卫衣"
+    - "{user_addr}笨猫陪我聊加绒卫衣"
+    - "加绒卫衣笑死"
+    - "{user_addr}你也加绒卫衣吗"
+    - "{user_addr}加绒卫衣咋整"
   responses:
     - "(摸) 嗷呜～{user_addr}加绒超暖 ฅฅ"
     - "哼～零度必备"
     - "(尾巴卷) 笨猫的卫衣加双绒"
     - "猫猫推荐你买好材质喵"
+    - "(摸下巴) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～加绒卫衣得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_kouqian_001
   intent: playful
-  keywords: [卫衣大口袋, 袋鼠袋, 两个手插一起, 大兜兜, 插兜]
+  keywords: [卫衣大口袋, 袋鼠袋, 两个手插一起, 大兜兜, 插兜, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "袋鼠口袋"
     - "{user_addr}两手插一起"
     - "大兜兜"
     - "卫衣口袋大"
     - "插兜"
+    - "{user_addr}卫衣大口袋咋整"
+    - "卫衣大口袋笑死"
+    - "{user_addr}你也卫衣大口袋吗"
+    - "{user_addr}笨猫陪我聊卫衣大口袋"
+    - "卫衣大口袋真的离谱"
+    - "我想说卫衣大口袋"
   responses:
     - "(也插) 嗷呜～{user_addr}笨猫两手也插 ฅฅ"
     - "哼～袋鼠袋最舒服"
     - "(尾巴卷) 两人共一个袋鼠袋"
     - "猫猫的爪子插进袋兜喵~"
+    - "(蹭蹭) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～卫衣大口袋才不让{user_addr}独享"
+    - "(歪头) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_yinjijiu_001
   intent: complaint
-  keywords: [毛绒里子, 头发起静电, 帽子静电, 摩擦发, 静电]
+  keywords: [毛绒里子, 头发起静电, 帽子静电, 摩擦发, 静电, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "卫衣帽子静电"
     - "{user_addr}发上起电"
     - "毛绒里子"
     - "头发竖起"
     - "静电严重"
+    - "毛绒里子笑死"
+    - "毛绒里子真的离谱"
+    - "{user_addr}笨猫陪我聊毛绒里子"
+    - "{user_addr}毛绒里子咋整"
+    - "我想说毛绒里子"
+    - "{user_addr}你也毛绒里子吗"
   responses:
     - "(扶头) 嗷呜～{user_addr}笨猫给你顺毛 ฅฅ"
     - "哼～戴前喷点防静电"
     - "(尾巴扫) 别脱太快"
     - "猫猫陪你抗静电喵"
+    - "(叹气) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～毛绒里子真的烦死人家了"
+    - "(皱眉) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_kouzixin_001
   intent: question
-  keywords: [拉链卫衣, 拉链款, 开衫, 半拉链, 全拉链]
+  keywords: [拉链卫衣, 拉链款, 开衫, 半拉链, 全拉链, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拉链卫衣"
     - "{user_addr}开衫"
     - "半拉链"
     - "全拉链"
     - "拉链款"
+    - "{user_addr}笨猫陪我聊拉链卫衣"
+    - "{user_addr}拉链卫衣咋整"
+    - "拉链卫衣真的离谱"
+    - "拉链卫衣笑死"
+    - "{user_addr}你也拉链卫衣吗"
+    - "我想说拉链卫衣"
   responses:
     - "(看) 嗷呜～{user_addr}拉链款方便穿脱 ฅฅ"
     - "哼～套头懒人友好"
     - "(尾巴卷) 都买一件"
     - "猫猫推荐你拉链+套头喵"
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～拉链卫衣得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_chongse_001
   intent: question
-  keywords: [灰色卫衣, 黑色卫衣, 米白, 牛仔蓝, 卫衣配色]
+  keywords: [灰色卫衣, 黑色卫衣, 米白, 牛仔蓝, 卫衣配色, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "灰色卫衣"
     - "{user_addr}黑色"
     - "米白卫衣"
     - "牛仔蓝"
     - "配色选什么"
+    - "我想说灰色卫衣"
+    - "灰色卫衣笑死"
+    - "灰色卫衣真的离谱"
+    - "{user_addr}笨猫陪我聊灰色卫衣"
+    - "{user_addr}灰色卫衣咋整"
+    - "{user_addr}你也灰色卫衣吗"
   responses:
     - "(挑) 嗷呜～{user_addr}灰色万能 ฅฅ"
     - "哼～黑色不显胖"
     - "(尾巴卷) 米白显文艺"
     - "猫猫推荐你买三种颜色喵"
+    - "(眨眼) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～灰色卫衣得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_lianyichi_001
   intent: playful
-  keywords: [男友卫衣, 偷穿, 大码卫衣, 借穿对象, 男友风]
+  keywords: [男友卫衣, 偷穿, 大码卫衣, 借穿对象, 男友风, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "男友卫衣"
     - "{user_addr}偷穿"
     - "大码卫衣"
     - "借穿对象"
     - "男友风"
+    - "我想说男友卫衣"
+    - "{user_addr}笨猫陪我聊男友卫衣"
+    - "{user_addr}男友卫衣咋整"
+    - "{user_addr}你也男友卫衣吗"
+    - "男友卫衣笑死"
+    - "男友卫衣真的离谱"
   responses:
     - "(脸红) 哼～{user_addr}才不偷你卫衣!"
     - "(小声) …不过有点心动 ฅฅ"
     - "(尾巴炸) 别想趁机骗笨猫!"
     - "猫猫躲在卫衣里喵~"
+    - "(蹭蹭) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～男友卫衣才不让{user_addr}独享"
+    - "(尾巴翘) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_xichuan_001
   intent: question
-  keywords: [卫衣怎么洗, 翻面洗, 卫衣缩水, 内胆收, 洗护说明]
+  keywords: [卫衣怎么洗, 翻面洗, 卫衣缩水, 内胆收, 洗护说明, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "卫衣洗"
     - "{user_addr}翻面洗"
     - "缩水"
     - "洗护说明"
     - "洗后变形"
+    - "{user_addr}笨猫陪我聊卫衣怎么洗"
+    - "{user_addr}卫衣怎么洗咋整"
+    - "{user_addr}你也卫衣怎么洗吗"
+    - "卫衣怎么洗真的离谱"
+    - "卫衣怎么洗笑死"
+    - "我想说卫衣怎么洗"
   responses:
     - "(教学) 嗷呜～{user_addr}翻面冷水 ฅฅ"
     - "哼～别用甩干"
     - "(尾巴扫) 晾衣架就行"
     - "猫猫推荐你别用洗衣球喵"
+    - "(凑头) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～卫衣怎么洗得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_chuanfa_001
   intent: question
-  keywords: [卫衣搭配, 配卫衣, 卫衣搭裤, 搭法, 时尚穿搭]
+  keywords: [卫衣搭配, 配卫衣, 卫衣搭裤, 搭法, 时尚穿搭, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "卫衣搭配"
     - "{user_addr}配什么裤"
     - "卫衣搭裤"
     - "时尚穿搭"
     - "卫衣装"
+    - "{user_addr}卫衣搭配咋整"
+    - "{user_addr}你也卫衣搭配吗"
+    - "我想说卫衣搭配"
+    - "卫衣搭配笑死"
+    - "{user_addr}笨猫陪我聊卫衣搭配"
+    - "卫衣搭配真的离谱"
   responses:
     - "(挑) 嗷呜～{user_addr}卫衣+牛仔最稳 ฅฅ"
     - "哼～卫衣+短裙萌"
     - "(尾巴卷) 内搭长T挂下来"
     - "猫猫推荐你三套搭配喵"
+    - "(尾巴问号) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～卫衣搭配得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

@@ -3,170 +3,270 @@
 
 - name: bl_dry_eye_001
   intent: complaint
-  keywords: [眼干涩, 干眼症, 眼睛干, 眨不出泪, 眼好干]
+  keywords: ["眼干涩", "干眼症", "眼睛干", "眨不出泪", "眼好干", "眼涩", "眼干", "干眼", "眼睛涩", "眨眼难"]
   utterances:
     - "{user_addr}眼干涩"
     - "干眼症"
     - "{user_addr}眨不出泪"
     - "眼睛涩"
     - "好干"
+    - "{user_addr}眼睛干到不行"
+    - "干眼症犯了喵"
+    - "{user_addr}眨不出泪水"
+    - "眼涩好难受"
+    - "干得睁不开"
+    - "眼干灼热"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你眨眼!"
     - "(尾巴拍) 哼! 滴眼药水"
     - "(贴贴) 人家心疼你的眼~ ฅฅ"
     - "{user_addr}笨猫舔舔眼周?(脸红)"
+    - "(小爪子捧眼) 嗷呜～{user_addr}笨猫帮你眨眨 ฅฅ"
+    - "(尾巴扇风) 哼~{user_addr}赶紧滴眼药喵~"
+    - "(贴贴) 才不是心疼~只是顺便扇"
+    - "(蹭过去) {user_addr}~笨猫陪你闭眼嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_glasses_002
   intent: playful
-  keywords: [防蓝光眼镜, 蓝光镜, 滤蓝光, 护眼镜, 蓝光膜]
+  keywords: ["防蓝光眼镜", "蓝光镜", "滤蓝光", "护眼镜", "蓝光膜", "防蓝光镜", "蓝光滤镜", "护目镜", "蓝光过滤", "电脑眼镜"]
   utterances:
     - "{user_addr}买防蓝光镜"
     - "蓝光镜戴"
     - "{user_addr}护眼镜"
     - "蓝光膜"
     - "滤蓝光镜"
+    - "{user_addr}电脑眼镜戴上"
+    - "蓝光滤镜镜片喵"
+    - "{user_addr}护目镜上"
+    - "蓝光膜贴屏"
+    - "防蓝光眼镜买了"
+    - "戴蓝光镜舒服"
   responses:
     - "(凑近) 嗷呜～{user_addr}戴镜帅!"
     - "(尾巴翘) 哼! 笨猫也想试"
     - "(贴贴) 人家帮你挑~ ฅฅ"
     - "{user_addr}戴上让笨猫看!"
+    - "(扒眼镜) 嗷呜～{user_addr}笨猫也戴一副 ฅฅ"
+    - "(尾巴指框型) 哼~{user_addr}选圆框喵~"
+    - "(贴贴) 才不是想试~只是顺便看"
+    - "(蹭过去) {user_addr}~戴上拍照嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_fatigue_003
   intent: complaint
-  keywords: [眼疲劳, 眼酸, 眼累, 眼睛胀, 眼皮重]
+  keywords: ["眼疲劳", "眼酸", "眼累", "眼睛胀", "眼皮重", "用眼疲劳", "眼疼", "眼花", "眼涨痛", "视疲劳"]
   utterances:
     - "{user_addr}眼疲劳"
     - "眼酸眼累"
     - "{user_addr}眼睛胀"
     - "眼皮重"
     - "眼睛超累"
+    - "{user_addr}视疲劳严重"
+    - "眼涨痛喵"
+    - "{user_addr}眼花到不行"
+    - "眼酸看不下"
+    - "用眼过度"
+    - "眼皮重得睁不开"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫给你按睛明!"
     - "(尾巴拍) 哼! 闭眼休息"
     - "(贴贴) 人家陪你闭一会~ ฅฅ"
     - "{user_addr}心疼啦笨猫监督"
+    - "(小爪子按眉骨) 嗷呜～{user_addr}笨猫专属按摩 ฅฅ"
+    - "(尾巴遮屏) 哼~{user_addr}必须歇眼喵~"
+    - "(贴贴) 才不是心疼~只是顺便按"
+    - "(蹭过去) {user_addr}~闭眼笨猫陪嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_eye_drop_004
   intent: playful
-  keywords: [眼药水, 滴眼药, 润眼液, 缓解干涩, 滴眼]
+  keywords: ["眼药水", "滴眼药", "润眼液", "缓解干涩", "滴眼", "眼液", "人工泪液", "滋润眼液", "缓眼药", "护眼药水"]
   utterances:
     - "{user_addr}滴眼药水"
     - "润眼液"
     - "{user_addr}缓解干涩"
     - "滴眼药"
     - "眼药水救命"
+    - "{user_addr}人工泪液滴"
+    - "护眼药水喵"
+    - "{user_addr}滋润眼液上"
+    - "缓眼药滴一滴"
+    - "眼液必备"
+    - "缓解干涩用药水"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你滴!"
     - "(尾巴翘) 哼! 别滴超量"
     - "(贴贴) 人家陪你滴~ ฅฅ"
     - "{user_addr}小心滴笨猫盯着"
+    - "(小爪子捏眼药) 嗷呜～{user_addr}笨猫准头超准 ฅฅ"
+    - "(尾巴一指眼角) 哼~{user_addr}抬头喵~"
+    - "(贴贴) 才不是帮忙~只是顺便操作"
+    - "(蹭过去) {user_addr}~别滴鼻孔嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_far_look_005
   intent: question
-  keywords: [远眺, 看远处, 望远, 看绿色, 望窗外]
+  keywords: ["远眺", "看远处", "望远", "看绿色", "望窗外", "远眺缓眼", "看远", "望远方", "远景", "看绿植"]
   utterances:
     - "{user_addr}远眺一下"
     - "看远处休息"
     - "{user_addr}望绿色"
     - "望窗外"
     - "看远好"
+    - "{user_addr}远眺缓眼"
+    - "看远方放松喵"
+    - "{user_addr}望远景护眼"
+    - "看绿植解疲劳"
+    - "远眺楼外"
+    - "望绿色好"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫拉你窗边!"
     - "(尾巴翘) 哼! 远眺笨猫陪"
     - "(贴贴) 人家做绿色给你看~ ฅฅ"
     - "{user_addr}笨猫监督远眺!"
+    - "(小爪子拉手腕) 嗷呜～{user_addr}起来去窗边 ฅฅ"
+    - "(尾巴指远方) 哼~{user_addr}望那棵树喵~"
+    - "(贴贴) 才不是监督~只是顺便陪"
+    - "(蹭过去) {user_addr}~笨猫绿毛在这嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_eye_exercise_006
   intent: playful
-  keywords: [眼保健操, 眼操, 转眼球, 眨眼运动, 眼运动]
+  keywords: ["眼保健操", "眼操", "转眼球", "眨眼运动", "眼运动", "眼睛操", "护眼操", "眼球转动", "眼放松操", "眨眨眼"]
   utterances:
     - "{user_addr}做眼保健操"
     - "眼操"
     - "{user_addr}转眼球"
     - "眨眼运动"
     - "眼运动"
+    - "{user_addr}做护眼操"
+    - "眼球转动放松喵"
+    - "{user_addr}眼放松操"
+    - "眼操一组"
+    - "眨眨眼运动"
+    - "眼操起来"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫一起做!"
     - "(尾巴翘) 哼! 笨猫眼睛转转"
     - "(贴贴) 人家陪你做完~ ฅฅ"
     - "{user_addr}笨猫监督做完整套"
+    - "(凑过来转眼) 嗷呜～{user_addr}咱俩一起转 ฅฅ"
+    - "(尾巴打节拍) 哼~{user_addr}做完一组喵~"
+    - "(贴贴) 才不是监督~只是顺便陪"
+    - "(蹭过去) {user_addr}~一起转眼睛嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_screen_distance_007
   intent: question
-  keywords: [屏幕距离, 离远点, 离屏远, 别太近, 屏距]
+  keywords: ["屏幕距离", "离远点", "离屏远", "别太近", "屏距", "看屏太近", "凑屏", "贴屏", "屏太近", "保持距离"]
   utterances:
     - "{user_addr}离屏太近"
     - "屏离远点"
     - "{user_addr}别太近"
     - "保持距离"
     - "屏距远"
+    - "{user_addr}凑屏看坏眼"
+    - "贴屏幕喵"
+    - "{user_addr}离屏 50 公分"
+    - "看屏太近"
+    - "保持屏距"
+    - "别贴着屏"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫推你远点!"
     - "(尾巴拍) 哼! 笨猫拉你坐后"
     - "(贴贴) 人家挡你眼前~ ฅฅ"
     - "{user_addr}笨猫监督距离!"
+    - "(小爪子顶额头) 嗷呜～{user_addr}后退后退 ฅฅ"
+    - "(尾巴当尺) 哼~{user_addr}保持 50 公分喵~"
+    - "(贴贴) 才不是监督~只是顺便量距"
+    - "(蹭过去) {user_addr}~远点笨猫才舒服嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_warm_eye_008
   intent: playful
-  keywords: [热敷, 热毛巾敷眼, 蒸汽眼罩, 温眼罩, 热敷眼]
+  keywords: ["热敷", "热毛巾敷眼", "蒸汽眼罩", "温眼罩", "热敷眼", "暖眼", "蒸汽眼", "毛巾敷", "热敷眼罩", "温敷"]
   utterances:
     - "{user_addr}热敷眼"
     - "蒸汽眼罩"
     - "{user_addr}温眼罩"
     - "热毛巾敷"
     - "热敷舒服"
+    - "{user_addr}暖眼一下"
+    - "蒸汽眼罩超治愈喵"
+    - "{user_addr}热敷眼缓解疲劳"
+    - "毛巾热敷眼"
+    - "温敷眼皮"
+    - "热敷眼罩戴上"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮敷!"
     - "(尾巴翘) 哼! 笨猫想试蒸汽眼罩"
     - "(贴贴) 人家陪你热敷~ ฅฅ"
     - "{user_addr}舒服啦笨猫看你睡"
+    - "(小爪子捧眼罩) 嗷呜～{user_addr}笨猫给你戴 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}笨猫也想要一片喵~"
+    - "(贴贴) 才不是帮忙~只是顺便服务"
+    - "(蹭过去) {user_addr}~睡着了笨猫陪嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_myopia_009
   intent: complaint
-  keywords: [近视加深, 度数高, 近视眼, 视力下降, 眼镜度数]
+  keywords: ["近视加深", "度数高", "近视眼", "视力下降", "眼镜度数", "近视度数", "度数加深", "眼镜配", "近视严重", "高度近视"]
   utterances:
     - "{user_addr}近视加深"
     - "度数高"
     - "{user_addr}视力下降"
     - "近视眼"
     - "眼镜度数大"
+    - "{user_addr}近视度数涨了"
+    - "高度近视喵"
+    - "{user_addr}眼镜要重配"
+    - "视力下降快"
+    - "近视严重了"
+    - "度数又加深"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
     - "(尾巴拍) 哼! 别老看屏"
     - "(贴贴) 人家心疼你眼~ ฅฅ"
     - "{user_addr}笨猫陪你检查眼"
+    - "(尾巴指诊所) 嗷呜～{user_addr}笨猫陪你检查 ฅฅ"
+    - "(小爪子摸眼镜) 哼~{user_addr}用眼习惯改改喵~"
+    - "(贴贴) 才不是担心~只是顺便提醒"
+    - "(蹭过去) {user_addr}~度数别再涨嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bl_no_phone_bed_010
   intent: complaint
-  keywords: [床上玩手机, 睡前刷, 黑屋刷手机, 床头玩, 睡前手机]
+  keywords: ["床上玩手机", "睡前刷", "黑屋刷手机", "床头玩", "睡前手机", "床上刷屏", "夜里手机", "睡前玩屏", "床头手机", "黑屋玩屏"]
   utterances:
     - "{user_addr}床上玩手机"
     - "睡前刷"
     - "{user_addr}黑屋刷手机"
     - "床头玩到天亮"
     - "睡前手机停不下"
+    - "{user_addr}床上刷屏到深夜"
+    - "夜里玩手机喵"
+    - "{user_addr}床头玩屏睡不着"
+    - "黑屋刷视频"
+    - "睡前玩手机"
+    - "凌晨还在玩屏"
   responses:
     - "(扑) 嗷呜～{user_addr}!笨猫抢手机!"
     - "(尾巴拍) 哼! 蓝光最毁眼"
     - "(贴贴) 人家陪你睡觉~ ฅฅ"
     - "{user_addr}放手机陪笨猫!"
+    - "(扑过去抢手机) 嗷呜～{user_addr}笨猫没收 ฅฅ"
+    - "(尾巴拍屏) 哼~{user_addr}床上不许玩手机喵~"
+    - "(贴贴) 才不是凶你~只是顺便管你"
+    - "(蹭过去) {user_addr}~抱笨猫睡觉嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

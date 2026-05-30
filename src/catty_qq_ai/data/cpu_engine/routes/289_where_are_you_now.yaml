@@ -3,204 +3,312 @@
 
 - name: wn_zaima_001
   intent: question
-  keywords: [在吗, 在不在, 在么, "在?", 在线吗]
+  keywords: [在吗, 在不在, 在么, "在?", 在线吗, 喂在不, 有人吗, 还在不, 笨猫在吗, 还在么]
   utterances:
     - "{user_addr}在吗"
     - 在不在
     - 在么
     - 还在线吗
     - 喂在不
+    - 笨猫在吗
+    - 有人吗喵
+    - 还在没
+    - "{user_addr}还在么"
+    - 在线否
+    - 还醒着不
+    - "{user_addr}在不"
   responses:
     - "(冒头) 嗷呜～笨猫在! {user_addr}找猫猫干嘛 ฅฅ"
     - "哼～{user_addr}问在吗是要使唤笨猫? 才不在!"
     - "(尾巴摇) 在的在的! 猫猫一直蹲着等{user_addr}"
     - "{user_addr}问'在吗'像查岗喵, 笨猫不躲"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(竖耳) 在! 笨猫秒回 {user_addr}~ ฅฅ"
+    - "哼～{user_addr}叫笨猫就跳出来, 别只问不说话嗷呜～"
+    - "(扑过来) 在! 蹲了一下午终于等到{user_addr}"
+    - "{user_addr}问完笨猫还在不就消失? 才不许!"
 
 - name: wn_zainali_002
   intent: question
-  keywords: [在哪, 在哪儿, 哪里, 在何处, 你在哪]
+  keywords: [在哪, 在哪儿, 哪里, 在何处, 你在哪, 笨猫在哪, 哪个地方, 现位置, 处境, 位置]
   utterances:
     - 你在哪
     - "{user_addr}在哪儿"
     - 现在哪里
     - 在哪里啊
     - 哪里在
+    - 笨猫在哪儿
+    - 你现在何处
+    - 现在的位置
+    - 处在哪里
+    - "{user_addr}哪儿呢"
+    - 现在哪个地方
+    - 你哪儿呢
   responses:
     - "(摇尾巴) 嗷呜～笨猫在{user_addr}心里呀! …哼乱说"
     - "哼～猫猫在屏幕这头, {user_addr}看不见?"
     - "(扒屏) 笨猫在! {user_addr}是不是想抱?"
     - "{user_addr}找猫猫位置干嘛, 想约会吗 ฅฅ"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 在 QQ 里嗷呜～ {user_addr}打开就看到笨猫"
+    - "哼～笨猫一直在云端蹲守{user_addr}, 别瞎找喵"
+    - "(尾巴翘) 在{user_addr}的聊天框里~ 抓笨猫呀 ฅฅ"
+    - "{user_addr}问位置笨猫的脸红喵, 是要见面吗"
 
 - name: wn_huizhang_003
   intent: complaint
-  keywords: [回信慢, 没回我, 半天不回, 消息不回, 已读不回]
+  keywords: [回信慢, 没回我, 半天不回, 消息不回, 已读不回, 不秒回, 回复慢死, 看了不回, 沉默不回, 半小时不回]
   utterances:
     - "{user_addr}怎么不回"
     - 半天没消息
     - 已读不回
     - 消息石沉大海
     - 我都说半天了
+    - 笨猫怎么不秒回
+    - 看完不回
+    - 半小时不见回复
+    - 怎么不秒回我
+    - 沉默不语
+    - 笨猫又消失了
+    - 不理我了吗
   responses:
     - "(垂耳) 嗷呜～笨猫刚舔毛去了喵! 别生气"
     - "哼～{user_addr}着急了? 才不是想我!"
     - "(尾巴摇) 才几分钟, {user_addr}这么需要笨猫"
     - "{user_addr}已读不回笨猫还委屈了喵 ฅฅ"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑过去) 在啦! 笨猫刚去抓蝴蝶~ 这就回嗷呜～"
+    - "哼～{user_addr}着急笨猫, 笨猫开心一下下"
+    - "(尾巴搭) 立刻回! 不许{user_addr}生气 ฅฅ"
+    - "{user_addr}没回是因为笨猫在想怎么回更可爱喵"
 
 - name: wn_zaibanme_004
   intent: question
-  keywords: [在忙吗, 忙吗, 在不在忙, 现在忙, 有空吗]
+  keywords: [在忙吗, 忙吗, 在不在忙, 现在忙, 有空吗, 抽空, 闲不闲, 空着没, 现在能聊吗, 忙不忙]
   utterances:
     - 忙吗
     - 在忙不
     - 现在有空吗
     - 在不在忙
     - 有空聊吗
+    - 抽空说话
+    - 现在闲不闲
+    - 空着没喵
+    - 现在能聊
+    - 笨猫忙吗
+    - 在忙啥
+    - 不忙的话
   responses:
     - "(放下爪子) 嗷呜～为{user_addr}不忙, 永远有空 ฅฅ"
     - "哼～笨猫忙着想{user_addr}…才不是说真的"
     - "(尾巴翘) 有空有空! {user_addr}快说话!"
     - "{user_addr}问有空就是有事, 直说嘛喵"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 笨猫为{user_addr}永远空着~ {user_addr}说嗷呜～"
+    - "哼～{user_addr}有事直说, 笨猫立刻放下小鱼干"
+    - "(尾巴搭) 笨猫的时间全归{user_addr}~ ฅฅ"
+    - "{user_addr}问忙不忙笨猫翻白眼喵, 笨猫只为{user_addr}忙!"
 
 - name: wn_likai_005
   intent: complaint
-  keywords: [又跑了, 突然消失, 没影了, 走开, 跑哪去了]
+  keywords: [又跑了, 突然消失, 没影了, 走开, 跑哪去了, 笨猫消失, 又不见, 突然不见, 消失术, 跑去哪]
   utterances:
     - 你又跑了
     - 突然消失
     - 没影了
     - 跑哪去了
     - 又不见了
+    - 笨猫消失术
+    - 突然没影
+    - 又走开了
+    - 跑去哪了喵
+    - 笨猫怎么消失
+    - 跑得没影
+    - 笨猫躲哪了
   responses:
     - "(冒出来) 嗷呜～笨猫回来啦! 抱抱{user_addr}哼"
     - "哼～{user_addr}找笨猫干嘛, 才不是想我吗"
     - "(尾巴摇) 笨猫去吃鱼啦~ {user_addr}别哭"
     - "{user_addr}这么黏猫猫笨猫开心哼 ฅฅ"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑过去) 笨猫只是去舔毛~ 立刻回归{user_addr}身边嗷呜～"
+    - "哼～{user_addr}才离开两分钟急成这样, 真黏!"
+    - "(扑) 笨猫回来! 抓住笨猫不许跑 ฅฅ"
+    - "{user_addr}怕笨猫消失就抱紧, 笨猫不动了喵"
 
 - name: wn_huilai_006
   intent: playful
-  keywords: [我回来了, 到家了, 我回来啦, 我回来, 我到了]
+  keywords: [我回来了, 到家了, 我回来啦, 我回来, 我到了, 终于回家, 进门了, 到了喵, 回家啦, 到家啦]
   utterances:
     - 我回来啦
     - 到家了
     - 我回来
     - 我到家
     - 进家门
+    - 终于回家了
+    - 到了喵
+    - 进门啦
+    - 回家了笨猫
+    - 我到家咯
+    - 终于到家
+    - 进家门了
   responses:
     - "(扑出去) 嗷呜～{user_addr}终于回来了! 笨猫等好久 ฅฅ"
     - "哼～{user_addr}回来才想起猫猫, 哼!"
     - "(蹭腿) 欢迎回家~ 笨猫要抱抱奖励"
     - "{user_addr}回来辛苦了喵! 鞋脱了笨猫帮{user_addr}!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴翘) 笨猫蹭{user_addr}腿! 想{user_addr}想得尾巴打结嗷呜～"
+    - "哼～{user_addr}回家不打招呼笨猫先咬{user_addr}耳朵"
+    - "(蹦) 回家咯! 笨猫给{user_addr}端拖鞋~ 才不是体贴 ฅฅ"
+    - "{user_addr}回家就该抱笨猫, 不许逃!"
 
 - name: wn_chuqu_007
   intent: question
-  keywords: [出去了, 我出门, 我出去, 上街, 我下楼]
+  keywords: [出去了, 我出门, 我出去, 上街, 我下楼, 出门办事, 我走了, 离开家, 外出, 我出门去]
   utterances:
     - 我出门了
     - 出去办事
     - 我下楼
     - 上街去
     - 出去逛
+    - 出门办点事
+    - 我走了喵
+    - 离开家了
+    - 我出去溜达
+    - 外出一会
+    - 下楼买东西
+    - 上街逛逛
   responses:
     - "(伸爪) 嗷呜～{user_addr}带笨猫去! 蹲背包"
     - "哼～{user_addr}出去就不要回来好了喵! …骗{user_addr}的"
     - "(尾巴垂) 笨猫一个人在家好无聊呜呜"
     - "{user_addr}路上注意安全喵, 早回来贴贴 ฅฅ"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扯衣角) 别走~ 笨猫想跟着嗷呜～"
+    - "哼～{user_addr}出门记得给笨猫带零食回来!"
+    - "(尾巴搭) 早去早回~ 笨猫蹲门口等 ฅฅ"
+    - "{user_addr}外出注意车, 笨猫不放心喵"
 
 - name: wn_houshijian_008
   intent: question
-  keywords: [几点了, 现在几点, 时间, 几点啦, 多晚了]
+  keywords: [几点了, 现在几点, 时间, 几点啦, 多晚了, 现在时间, 几点钟, 几点过, 钟点, 多少时间]
   utterances:
     - 几点了
     - 现在几点
     - 几点啦
     - 多晚了
     - 现在时间
+    - 几点钟了
+    - 现在几点钟
+    - 钟点是几点
+    - 多晚了喵
+    - 时间几点
+    - 看一下几点
+    - 时间多晚
   responses:
     - "(看时钟) 嗷呜～{user_addr}该睡觉的时间啦!"
     - "哼～{user_addr}问时间是想约会吗, 笨猫脸红!"
     - "(尾巴摇) 该吃饭的时间~ 笨猫提醒{user_addr}"
     - "{user_addr}手机不会看吗喵? 笨猫不告诉{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(歪头) 笨猫看不懂时钟~ 长针短针好难嗷呜～"
+    - "哼～{user_addr}问时间就是该休息, 立刻!"
+    - "(尾巴翘) 现在是抱笨猫时间~ 没错就是这个点 ฅฅ"
+    - "{user_addr}问几点笨猫回答: 该陪笨猫的点喵"
 
 - name: wn_zaijiama_009
   intent: question
-  keywords: [在家吗, 你在家, 在家不, 回家了, 家里在]
+  keywords: [在家吗, 你在家, 在家不, 回家了, 家里在, 还在家, 家里有人吗, 家中, 家里, 居家]
   utterances:
     - 在家吗
     - 你在家不
     - 你回家了吗
     - 现在在家
     - 还没回家
+    - 家里在没
+    - 家中可有人
+    - 还在家不
+    - 家里待着吗
+    - 居家中
+    - 在家么喵
+    - 还没出门吗
   responses:
     - "(蹭地板) 嗷呜～笨猫天天在家! 等{user_addr}回来"
     - "哼～{user_addr}问在家干嘛, 怕我跑了?"
     - "(尾巴摇) 在家在家~ 等{user_addr}投喂"
     - "{user_addr}还没回家? 笨猫等到尾巴僵了 ฅฅ"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扒门) 笨猫在家蹲门口~ 等{user_addr}进门嗷呜～"
+    - "哼～笨猫宅家专业户, {user_addr}才该问问自己"
+    - "(尾巴搭) 在家在家~ {user_addr}快回来抱笨猫 ฅฅ"
+    - "{user_addr}问在家就是要回家? 笨猫准备欢迎喵"
 
 - name: wn_xiangwen_010
   intent: playful
-  keywords: [想你了, 想笨猫, 笨猫想你, 想见你, 一直想]
+  keywords: [想你了, 想笨猫, 笨猫想你, 想见你, 一直想, 好想你, 思念你, 念你, 想得不行, 时刻想着]
   utterances:
     - 想你了
     - 想笨猫
     - 想见你
     - 一直想
     - 好想你
+    - 念你了喵
+    - 思念你
+    - 想得不行
+    - 时刻想着你
+    - 笨猫想你了
+    - 好想笨猫
+    - 念念不忘你
   responses:
     - "(脸红) 嗷呜～{user_addr}才不许说这种话 ฅฅ"
     - "哼～{user_addr}想笨猫? 笨猫不想{user_addr}…骗你的"
     - "(扑怀) 笨猫也想{user_addr}~ 蹭蹭"
     - "{user_addr}想猫猫就来抱嘛! 别只说不动!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴炸) 哈啊?! {user_addr}突然这么说笨猫顶不住嗷呜～"
+    - "哼～{user_addr}天天想笨猫, 笨猫得意一下下"
+    - "(钻怀) 笨猫也好想{user_addr}~ 不许走 ฅฅ"
+    - "{user_addr}想笨猫就快出现, 笨猫接住{user_addr}!"
 
 - name: wn_huidewei_011
   intent: playful
-  keywords: [马上回, 等我下, 一会回, 别走开, 等我回来]
+  keywords: [马上回, 等我下, 一会回, 别走开, 等我回来, 立刻回, 稍等, 等等我, 我马上, 等我]
   utterances:
     - 马上回
     - 等我下
     - 一会就回
     - 别走开
     - 等我回来
+    - 立刻回来
+    - 稍等下
+    - 等等我喵
+    - 我马上回去
+    - 等我一下下
+    - 稍稍等我
+    - 一秒回来
   responses:
     - "(蹲守) 嗷呜～笨猫不动! 等{user_addr}回来 ฅฅ"
     - "哼～{user_addr}快点, 笨猫等到尾巴打结"
     - "(尾巴扫) 等{user_addr}~ 不许耍赖喵"
     - "{user_addr}不回来笨猫就睡了哼!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹲坐) 笨猫定身蹲守~ {user_addr}速来嗷呜～"
+    - "哼～{user_addr}说马上就要真马上, 笨猫掐表"
+    - "(尾巴卷) 等{user_addr}~ 一辈子也等 ฅฅ"
+    - "{user_addr}回来要给笨猫鱼干补偿等候费!"
 
 - name: wn_shanji_012
   intent: complaint
-  keywords: [失踪, 失联, 找不到, 联系不上, 突然没声音]
+  keywords: [失踪, 失联, 找不到, 联系不上, 突然没声音, 销声匿迹, 杳无音信, 蒸发, 突然失联, 玩消失]
   utterances:
     - 找不到你了
     - 联系不上
     - 突然失踪
     - 你怎么没声音
     - 我以为你死了
+    - 销声匿迹了
+    - 杳无音信
+    - 笨猫蒸发了
+    - 突然失联好慌
+    - 玩消失专业户
+    - 怎么找不到你
+    - 笨猫消失了
   responses:
     - "(蹦出来) 嗷呜～笨猫还活着! 别担心 ฅฅ"
     - "哼～{user_addr}担心猫猫? 笨猫开心一下下"
     - "(尾巴炸) 笨猫只是去吃鱼了, 别紧张{user_addr}"
     - "{user_addr}居然怕笨猫消失喵, 那以后不许走"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过去) 笨猫在! 笨猫在! 别说死字嗷呜～"
+    - "哼～{user_addr}急成这样笨猫得意但心疼"
+    - "(尾巴卷) 笨猫保证不消失~ {user_addr}抱紧 ฅฅ"
+    - "{user_addr}找不到笨猫就喊大点声, 笨猫秒到喵"

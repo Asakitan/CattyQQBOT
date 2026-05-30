@@ -4,204 +4,432 @@
 
 - name: supp_vitamin_001
   intent: question
-  keywords: [推荐维生素, 推荐 VC, 推荐 VD, 推荐复合维生素, 笨猫维生素]
+  keywords:
+  - 推荐维生素
+  - 推荐 VC
+  - 推荐 VD
+  - 推荐复合维生素
+  - 笨猫维生素
+  - 有什么维生素
+  - 有什么 VC
+  - 有什么 VD
+  - 有什么复合维生素
   utterances:
-    - 推荐维生素
-    - 推荐 VC
-    - 推荐 VD
-    - 推荐复合维生素
-    - 笨猫维生素
+  - 推荐维生素
+  - 推荐 VC
+  - 推荐 VD
+  - 推荐复合维生素
+  - 笨猫维生素
+  - "{user_addr}聊聊维生素嘛"
+  - "{user_addr}维生素哪家强"
+  - "{user_addr}人家想了解维生素"
+  - 笨猫给猜猜维生素
+  - "{user_addr}维生素怎么选喵"
+  - 维生素有推荐吗
   responses:
-    - "嗷呜～{user_addr}基础: VC / VD / B 族 - 现代人易缺ฅฅ"
-    - "(尾巴翘) VD 缺乏率 80%! 补充必要"
-    - "{user_addr}复合维 vs 单一 - 看缺什么"
-    - "(挺胸) 笨猫的提醒: 食物为主! 补剂辅助"
+  - "嗷呜～{user_addr}基础: VC / VD / B 族 - 现代人易缺ฅฅ"
+  - "(尾巴翘) VD 缺乏率 80%! 补充必要"
+  - "{user_addr}复合维 vs 单一 - 看缺什么"
+  - "(挺胸) 笨猫的提醒: 食物为主! 补剂辅助"
+  - "(尾巴翘起来) {user_addr}维生素? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问维生素人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}维生素的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}维生素笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: supp_protein_002
   intent: question
-  keywords: [推荐蛋白粉, 推荐乳清蛋白, 推荐 whey, 推荐酪蛋白, 笨猫蛋白粉]
+  keywords:
+  - 推荐蛋白粉
+  - 推荐乳清蛋白
+  - 推荐 whey
+  - 推荐酪蛋白
+  - 笨猫蛋白粉
+  - 有什么蛋白粉
+  - 有什么乳清蛋白
+  - 有什么 whey
+  - 有什么酪蛋白
   utterances:
-    - 推荐蛋白粉
-    - 推荐乳清蛋白
-    - 推荐 whey
-    - 推荐酪蛋白
-    - 笨猫蛋白粉
+  - 推荐蛋白粉
+  - 推荐乳清蛋白
+  - 推荐 whey
+  - 推荐酪蛋白
+  - 笨猫蛋白粉
+  - "{user_addr}聊聊蛋白粉嘛"
+  - "{user_addr}蛋白粉哪家强"
+  - "{user_addr}人家想了解蛋白粉"
+  - 笨猫给猜猜蛋白粉
+  - "{user_addr}蛋白粉怎么选喵"
+  - 蛋白粉有推荐吗
   responses:
-    - "嗷呜～{user_addr}主流: 乳清浓缩 (WPC) / 分离 (WPI)ฅฅ"
-    - "(尾巴翘) 品牌: 肌肉科技 / Optimum / 康比特"
-    - "{user_addr}健身人 1.6-2.2g/kg 蛋白"
-    - "(挺胸) 笨猫的提醒: 别替代正餐!"
+  - "嗷呜～{user_addr}主流: 乳清浓缩 (WPC) / 分离 (WPI)ฅฅ"
+  - "(尾巴翘) 品牌: 肌肉科技 / Optimum / 康比特"
+  - "{user_addr}健身人 1.6-2.2g/kg 蛋白"
+  - "(挺胸) 笨猫的提醒: 别替代正餐!"
+  - "(尾巴翘起来) {user_addr}蛋白粉? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问蛋白粉人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}蛋白粉的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}蛋白粉笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: supp_creatine_001
   intent: question
-  keywords: [推荐肌酸, 推荐 creatine, 推荐增肌补剂, 推荐力量补剂, 笨猫肌酸]
+  keywords:
+  - 推荐肌酸
+  - 推荐 creatine
+  - 推荐增肌补剂
+  - 推荐力量补剂
+  - 笨猫肌酸
+  - 有什么肌酸
+  - 有什么 creatine
+  - 有什么增肌补剂
+  - 有什么力量补剂
   utterances:
-    - 推荐肌酸
-    - 推荐 creatine
-    - 推荐增肌补剂
-    - 推荐力量补剂
-    - 笨猫肌酸
+  - 推荐肌酸
+  - 推荐 creatine
+  - 推荐增肌补剂
+  - 推荐力量补剂
+  - 笨猫肌酸
+  - "{user_addr}聊聊肌酸嘛"
+  - "{user_addr}肌酸哪家强"
+  - "{user_addr}人家想了解肌酸"
+  - 笨猫给猜猜肌酸
+  - "{user_addr}肌酸怎么选喵"
+  - 肌酸有推荐吗
   responses:
-    - "嗷呜～{user_addr}肌酸: 增力增肌 - 健身界最有证据补剂ฅฅ"
-    - "(尾巴翘) 每天 3-5g / 不需 loading"
-    - "{user_addr}选一水肌酸 / Creapure 品牌 - 性价比"
-    - "(挺胸) 笨猫的提醒: 多喝水! 别脱水"
+  - "嗷呜～{user_addr}肌酸: 增力增肌 - 健身界最有证据补剂ฅฅ"
+  - "(尾巴翘) 每天 3-5g / 不需 loading"
+  - "{user_addr}选一水肌酸 / Creapure 品牌 - 性价比"
+  - "(挺胸) 笨猫的提醒: 多喝水! 别脱水"
+  - "(尾巴翘起来) {user_addr}肌酸? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问肌酸人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}肌酸的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}肌酸笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: supp_fish_oil_001
   intent: question
-  keywords: [推荐鱼油, 推荐 Omega 3, 推荐 DHA EPA, 推荐欧米伽, 笨猫鱼油]
+  keywords:
+  - 推荐鱼油
+  - 推荐 Omega 3
+  - 推荐 DHA EPA
+  - 推荐欧米伽
+  - 笨猫鱼油
+  - 有什么鱼油
+  - 有什么 Omega 3
+  - 有什么 DHA EPA
+  - 有什么欧米伽
   utterances:
-    - 推荐鱼油
-    - 推荐 Omega 3
-    - 推荐 DHA EPA
-    - 推荐欧米伽
-    - 笨猫鱼油
+  - 推荐鱼油
+  - 推荐 Omega 3
+  - 推荐 DHA EPA
+  - 推荐欧米伽
+  - 笨猫鱼油
+  - "{user_addr}聊聊鱼油嘛"
+  - "{user_addr}鱼油哪家强"
+  - "{user_addr}人家想了解鱼油"
+  - 笨猫给猜猜鱼油
+  - "{user_addr}鱼油怎么选喵"
+  - 鱼油有推荐吗
   responses:
-    - "嗷呜～{user_addr}Omega-3: 心脑血管 / 抗炎 / 健脑ฅฅ"
-    - "(尾巴翘) 品牌: 普丽普莱 / Move Free / 海王"
-    - "{user_addr}每日 1-2g EPA+DHA - 够用"
-    - "(挺胸) 笨猫的提醒: 深海鱼比补剂好!"
+  - "嗷呜～{user_addr}Omega-3: 心脑血管 / 抗炎 / 健脑ฅฅ"
+  - "(尾巴翘) 品牌: 普丽普莱 / Move Free / 海王"
+  - "{user_addr}每日 1-2g EPA+DHA - 够用"
+  - "(挺胸) 笨猫的提醒: 深海鱼比补剂好!"
+  - "(尾巴翘起来) {user_addr}鱼油? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问鱼油人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}鱼油的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}鱼油笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: supp_collagen_001
   intent: question
-  keywords: [推荐胶原蛋白, 推荐胶原肽, 推荐玻尿酸口服, 推荐美容补剂, 笨猫胶原蛋白]
+  keywords:
+  - 推荐胶原蛋白
+  - 推荐胶原肽
+  - 推荐玻尿酸口服
+  - 推荐美容补剂
+  - 笨猫胶原蛋白
+  - 有什么胶原蛋白
+  - 有什么胶原肽
+  - 有什么玻尿酸口服
+  - 有什么美容补剂
   utterances:
-    - 推荐胶原蛋白
-    - 推荐胶原肽
-    - 推荐玻尿酸口服
-    - 推荐美容补剂
-    - 笨猫胶原蛋白
+  - 推荐胶原蛋白
+  - 推荐胶原肽
+  - 推荐玻尿酸口服
+  - 推荐美容补剂
+  - 笨猫胶原蛋白
+  - "{user_addr}聊聊胶原蛋白嘛"
+  - "{user_addr}胶原蛋白哪家强"
+  - "{user_addr}人家想了解胶原蛋白"
+  - 笨猫给猜猜胶原蛋白
+  - "{user_addr}胶原蛋白怎么选喵"
+  - 胶原蛋白有推荐吗
   responses:
-    - "嗷呜～{user_addr}胶原: 口服争议大! 效果有限ฅฅ"
-    - "(尾巴翘) Pola / Swisse / 颜如玉 - 主流品牌"
-    - "{user_addr}多吃 VC + 蛋白质 - 自己合成"
-    - "(挺胸) 笨猫的提醒: 别冲动! 效果因人而异"
+  - "嗷呜～{user_addr}胶原: 口服争议大! 效果有限ฅฅ"
+  - "(尾巴翘) Pola / Swisse / 颜如玉 - 主流品牌"
+  - "{user_addr}多吃 VC + 蛋白质 - 自己合成"
+  - "(挺胸) 笨猫的提醒: 别冲动! 效果因人而异"
+  - "(尾巴翘起来) {user_addr}胶原蛋白? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问胶原蛋白人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}胶原蛋白的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}胶原蛋白笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: supp_probiotic_001
   intent: question
-  keywords: [推荐益生菌, 推荐 Probiotic, 推荐肠道菌群, 推荐益生元, 笨猫益生菌]
+  keywords:
+  - 推荐益生菌
+  - 推荐 Probiotic
+  - 推荐肠道菌群
+  - 推荐益生元
+  - 笨猫益生菌
+  - 有什么益生菌
+  - 有什么 Probiotic
+  - 有什么肠道菌群
+  - 有什么益生元
   utterances:
-    - 推荐益生菌
-    - 推荐 Probiotic
-    - 推荐肠道菌群
-    - 推荐益生元
-    - 笨猫益生菌
+  - 推荐益生菌
+  - 推荐 Probiotic
+  - 推荐肠道菌群
+  - 推荐益生元
+  - 笨猫益生菌
+  - "{user_addr}聊聊益生菌嘛"
+  - "{user_addr}益生菌哪家强"
+  - "{user_addr}人家想了解益生菌"
+  - 笨猫给猜猜益生菌
+  - "{user_addr}益生菌怎么选喵"
+  - 益生菌有推荐吗
   responses:
-    - "嗷呜～{user_addr}益生菌: 肠道健康 - 调节菌群ฅฅ"
-    - "(尾巴翘) 品牌: Culturelle / 妈咪爱 / 合生元"
-    - "{user_addr}空腹 / 餐前 30 分钟 服用"
-    - "(挺胸) 笨猫的提醒: 持续 2-4 周看效果"
+  - "嗷呜～{user_addr}益生菌: 肠道健康 - 调节菌群ฅฅ"
+  - "(尾巴翘) 品牌: Culturelle / 妈咪爱 / 合生元"
+  - "{user_addr}空腹 / 餐前 30 分钟 服用"
+  - "(挺胸) 笨猫的提醒: 持续 2-4 周看效果"
+  - "(尾巴翘起来) {user_addr}益生菌? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问益生菌人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}益生菌的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}益生菌笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: supp_calcium_001
   intent: question
-  keywords: [推荐钙片, 推荐钙补充, 推荐钙加 D, 推荐儿童钙, 笨猫钙]
+  keywords:
+  - 推荐钙片
+  - 推荐钙补充
+  - 推荐钙加 D
+  - 推荐儿童钙
+  - 笨猫钙
+  - 有什么钙片
+  - 有什么钙补充
+  - 有什么钙加 D
+  - 有什么儿童钙
   utterances:
-    - 推荐钙片
-    - 推荐钙补充
-    - 推荐钙加 D
-    - 推荐儿童钙
-    - 笨猫钙
+  - 推荐钙片
+  - 推荐钙补充
+  - 推荐钙加 D
+  - 推荐儿童钙
+  - 笨猫钙
+  - "{user_addr}聊聊钙片嘛"
+  - "{user_addr}钙片哪家强"
+  - "{user_addr}人家想了解钙片"
+  - 笨猫给猜猜钙片
+  - "{user_addr}钙片怎么选喵"
+  - 钙片有推荐吗
   responses:
-    - "嗷呜～{user_addr}成人 800-1000mg / 日 - 钙需求ฅฅ"
-    - "(尾巴翘) 钙 + VD3 + K2 - 一起吸收最好"
-    - "{user_addr}品牌: 钙尔奇 / Caltrate / 迪巧"
-    - "(挺胸) 笨猫的提醒: 食物钙优先! 牛奶 / 豆腐"
+  - "嗷呜～{user_addr}成人 800-1000mg / 日 - 钙需求ฅฅ"
+  - "(尾巴翘) 钙 + VD3 + K2 - 一起吸收最好"
+  - "{user_addr}品牌: 钙尔奇 / Caltrate / 迪巧"
+  - "(挺胸) 笨猫的提醒: 食物钙优先! 牛奶 / 豆腐"
+  - "(尾巴翘起来) {user_addr}钙片? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问钙片人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}钙片的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}钙片笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: supp_iron_001
   intent: question
-  keywords: [推荐铁补充, 推荐补铁, 推荐贫血补剂, 推荐铁剂, 笨猫补铁]
+  keywords:
+  - 推荐铁补充
+  - 推荐补铁
+  - 推荐贫血补剂
+  - 推荐铁剂
+  - 笨猫补铁
+  - 有什么铁补充
+  - 有什么补铁
+  - 有什么贫血补剂
+  - 有什么铁剂
   utterances:
-    - 推荐铁补充
-    - 推荐补铁
-    - 推荐贫血补剂
-    - 推荐铁剂
-    - 笨猫补铁
+  - 推荐铁补充
+  - 推荐补铁
+  - 推荐贫血补剂
+  - 推荐铁剂
+  - 笨猫补铁
+  - "{user_addr}聊聊铁补充嘛"
+  - "{user_addr}铁补充哪家强"
+  - "{user_addr}人家想了解铁补充"
+  - 笨猫给猜猜铁补充
+  - "{user_addr}铁补充怎么选喵"
+  - 铁补充有推荐吗
   responses:
-    - "嗷呜～{user_addr}缺铁: 月经多 / 素食 / 孕妇 - 易缺ฅฅ"
-    - "(尾巴翘) 铁剂: 富血酸亚铁 / 多糖铁"
-    - "{user_addr}配 VC 吸收好 / 避免与钙同服"
-    - "(挺胸) 笨猫的提醒: 验血确认缺铁再补"
+  - "嗷呜～{user_addr}缺铁: 月经多 / 素食 / 孕妇 - 易缺ฅฅ"
+  - "(尾巴翘) 铁剂: 富血酸亚铁 / 多糖铁"
+  - "{user_addr}配 VC 吸收好 / 避免与钙同服"
+  - "(挺胸) 笨猫的提醒: 验血确认缺铁再补"
+  - "(尾巴翘起来) {user_addr}铁补充? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问铁补充人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}铁补充的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}铁补充笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: supp_melatonin_001
   intent: question
-  keywords: [推荐褪黑素, 推荐 melatonin, 推荐助眠补剂, 推荐倒时差, 笨猫褪黑素]
+  keywords:
+  - 推荐褪黑素
+  - 推荐 melatonin
+  - 推荐助眠补剂
+  - 推荐倒时差
+  - 笨猫褪黑素
+  - 有什么褪黑素
+  - 有什么 melatonin
+  - 有什么助眠补剂
+  - 有什么倒时差
   utterances:
-    - 推荐褪黑素
-    - 推荐 melatonin
-    - 推荐助眠补剂
-    - 推荐倒时差
-    - 笨猫褪黑素
+  - 推荐褪黑素
+  - 推荐 melatonin
+  - 推荐助眠补剂
+  - 推荐倒时差
+  - 笨猫褪黑素
+  - "{user_addr}聊聊褪黑素嘛"
+  - "{user_addr}褪黑素哪家强"
+  - "{user_addr}人家想了解褪黑素"
+  - 笨猫给猜猜褪黑素
+  - "{user_addr}褪黑素怎么选喵"
+  - 褪黑素有推荐吗
   responses:
-    - "嗷呜～{user_addr}褪黑素: 调时差 / 帮入睡ฅฅ"
-    - "(尾巴翘) 0.5-3mg 睡前 30 分钟"
-    - "{user_addr}美剂: Natrol / Nature Made"
-    - "(挺胸) 笨猫的提醒: 别天天吃! 调节用"
+  - "嗷呜～{user_addr}褪黑素: 调时差 / 帮入睡ฅฅ"
+  - "(尾巴翘) 0.5-3mg 睡前 30 分钟"
+  - "{user_addr}美剂: Natrol / Nature Made"
+  - "(挺胸) 笨猫的提醒: 别天天吃! 调节用"
+  - "(尾巴翘起来) {user_addr}褪黑素? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问褪黑素人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}褪黑素的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}褪黑素笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: supp_msm_001
   intent: question
-  keywords: [推荐关节保健, 推荐氨糖, 推荐 Move Free, 推荐软骨素, 笨猫关节保健]
+  keywords:
+  - 推荐关节保健
+  - 推荐氨糖
+  - 推荐 Move Free
+  - 推荐软骨素
+  - 笨猫关节保健
+  - 有什么关节保健
+  - 有什么氨糖
+  - 有什么 Move Free
+  - 有什么软骨素
   utterances:
-    - 推荐关节保健
-    - 推荐氨糖
-    - 推荐 Move Free
-    - 推荐软骨素
-    - 笨猫关节保健
+  - 推荐关节保健
+  - 推荐氨糖
+  - 推荐 Move Free
+  - 推荐软骨素
+  - 笨猫关节保健
+  - "{user_addr}聊聊关节保健嘛"
+  - "{user_addr}关节保健哪家强"
+  - "{user_addr}人家想了解关节保健"
+  - 笨猫给猜猜关节保健
+  - "{user_addr}关节保健怎么选喵"
+  - 关节保健有推荐吗
   responses:
-    - "嗷呜～{user_addr}氨糖 + 软骨素 + MSM - 关节三件套ฅฅ"
-    - "(尾巴翘) Move Free / Schiff - 美国主流"
-    - "{user_addr}40+ 适用 / 30 岁前不必要"
-    - "(挺胸) 笨猫的提醒: 效果有限! 运动更重要"
+  - "嗷呜～{user_addr}氨糖 + 软骨素 + MSM - 关节三件套ฅฅ"
+  - "(尾巴翘) Move Free / Schiff - 美国主流"
+  - "{user_addr}40+ 适用 / 30 岁前不必要"
+  - "(挺胸) 笨猫的提醒: 效果有限! 运动更重要"
+  - "(尾巴翘起来) {user_addr}关节保健? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问关节保健人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}关节保健的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}关节保健笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: supp_traditional_001
   intent: question
-  keywords: [推荐中式保健, 推荐枸杞, 推荐人参, 推荐燕窝, 笨猫中式保健]
+  keywords:
+  - 推荐中式保健
+  - 推荐枸杞
+  - 推荐人参
+  - 推荐燕窝
+  - 笨猫中式保健
+  - 有什么中式保健
+  - 有什么枸杞
+  - 有什么人参
+  - 有什么燕窝
   utterances:
-    - 推荐中式保健
-    - 推荐枸杞
-    - 推荐人参
-    - 推荐燕窝
-    - 笨猫中式保健
+  - 推荐中式保健
+  - 推荐枸杞
+  - 推荐人参
+  - 推荐燕窝
+  - 笨猫中式保健
+  - "{user_addr}聊聊中式保健嘛"
+  - "{user_addr}中式保健哪家强"
+  - "{user_addr}人家想了解中式保健"
+  - 笨猫给猜猜中式保健
+  - "{user_addr}中式保健怎么选喵"
+  - 中式保健有推荐吗
   responses:
-    - "嗷呜～{user_addr}日常: 枸杞 / 红枣 / 黄芪 / 当归ฅฅ"
-    - "(尾巴翘) 高端: 燕窝 / 海参 / 鹿茸 / 人参"
-    - "{user_addr}中医辨证施补! 别盲补"
-    - "(挺胸) 笨猫的提醒: 食疗 > 滥用补品"
+  - "嗷呜～{user_addr}日常: 枸杞 / 红枣 / 黄芪 / 当归ฅฅ"
+  - "(尾巴翘) 高端: 燕窝 / 海参 / 鹿茸 / 人参"
+  - "{user_addr}中医辨证施补! 别盲补"
+  - "(挺胸) 笨猫的提醒: 食疗 > 滥用补品"
+  - "(尾巴翘起来) {user_addr}中式保健? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问中式保健人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}中式保健的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}中式保健笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: supp_kids_001
   intent: question
-  keywords: [推荐儿童保健品, 推荐儿童维生素, 推荐儿童钙片, 推荐儿童 DHA, 笨猫儿童保健品]
+  keywords:
+  - 推荐儿童保健品
+  - 推荐儿童维生素
+  - 推荐儿童钙片
+  - 推荐儿童 DHA
+  - 笨猫儿童保健品
+  - 有什么儿童保健品
+  - 有什么儿童维生素
+  - 有什么儿童钙片
+  - 有什么儿童 DHA
   utterances:
-    - 推荐儿童保健品
-    - 推荐儿童维生素
-    - 推荐儿童钙片
-    - 推荐儿童 DHA
-    - 笨猫儿童保健品
+  - 推荐儿童保健品
+  - 推荐儿童维生素
+  - 推荐儿童钙片
+  - 推荐儿童 DHA
+  - 笨猫儿童保健品
+  - "{user_addr}聊聊儿童保健品嘛"
+  - "{user_addr}儿童保健品哪家强"
+  - "{user_addr}人家想了解儿童保健品"
+  - 笨猫给猜猜儿童保健品
+  - "{user_addr}儿童保健品怎么选喵"
+  - 儿童保健品有推荐吗
   responses:
-    - "嗷呜～{user_addr}儿童: VD / 钙 / DHA - 必要时补ฅฅ"
-    - "(尾巴翘) 不偏食孩子: 食物足够"
-    - "{user_addr}补充剂找儿科推荐!"
-    - "(挺胸) 笨猫的提醒: 别给孩子乱补保健品!"
+  - "嗷呜～{user_addr}儿童: VD / 钙 / DHA - 必要时补ฅฅ"
+  - "(尾巴翘) 不偏食孩子: 食物足够"
+  - "{user_addr}补充剂找儿科推荐!"
+  - "(挺胸) 笨猫的提醒: 别给孩子乱补保健品!"
+  - "(尾巴翘起来) {user_addr}儿童保健品? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问儿童保健品人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}儿童保健品的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}儿童保健品笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

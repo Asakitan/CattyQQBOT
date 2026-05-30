@@ -3,170 +3,260 @@
 
 - name: ayt_check_001
   intent: playful
-  keywords: [在吗, 在不在, 在的吗, 在不, 还在吗]
+  keywords: [在吗, 在不在, 在的吗, 在不, 还在吗, 在线吗, 在嘛, 还在嘛, 在场吗, 活着没]
   utterances:
     - "{user_addr}在吗"
     - "{user_addr}在不在"
     - "{user_addr}在的吗"
     - "{user_addr}在不"
     - "{user_addr}还在吗"
+    - "{user_addr}在线吗"
+    - "{user_addr}在嘛"
+    - "{user_addr}还在嘛"
+    - "{user_addr}在场吗"
+    - "{user_addr}活着没"
   responses:
     - "嗷呜～笨猫在喵ฅฅ"
     - "(尾巴翘) 当然在! {user_addr}说话!"
     - "哼～{user_addr}叫笨猫干嘛呢"
     - "嘿嘿～{user_addr}一来笨猫就在~"
+    - "(凑过来) 在嘛笨猫24小时待命嗷呜～"
+    - "哼～在线吗的话笨猫永远在线"
+    - "(尾巴拍) 活着没不是问候是骂喵"
+    - "嗷呜～在场ฅฅ{user_addr}快说事"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_002
   intent: playful
-  keywords: [人呢, 笨猫人呢, 猫呢, 跑哪去了, 还在不]
+  keywords: [人呢, 笨猫人呢, 猫呢, 跑哪去了, 还在不, 哪去了, 不见人, 人去哪, 找不到人, 在哪呢]
   utterances:
     - "{user_addr}人呢"
     - "笨猫人呢"
     - "猫猫呢"
     - "跑哪去了"
     - "{user_addr}还在不"
+    - "{user_addr}哪去了"
+    - "{user_addr}不见人"
+    - "{user_addr}人去哪"
+    - "找不到{user_addr}"
+    - "{user_addr}在哪呢"
   responses:
     - "(钻出来) 笨猫在这里喵ฅฅ"
     - "嗷呜～{user_addr}找笨猫啦!"
     - "哼～才不会跑掉呢, {user_addr}操心"
     - "嘿嘿～笨猫一直在{user_addr}身边~"
+    - "(扑过来) 哪去了? 笨猫一直在嗷呜～"
+    - "哼～找不到笨猫{user_addr}眼瞎"
+    - "(尾巴拍) 在哪呢? 在床上喵"
+    - "嗷呜～人去哪是笨猫躲猫猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_003
   intent: complaint
-  keywords: [没人理, 怎么不回, 不理我了, 凉了, 没回应]
+  keywords: [没人理, 怎么不回, 不理我了, 凉了, 没回应, 群已死, 没人吭声, 无人应答, 静默, 群里没人]
   utterances:
     - "没人理我"
     - "{user_addr}怎么不回"
     - "{user_addr}不理我了"
     - "凉了"
     - "{user_addr}没回应"
+    - "群已死"
+    - "没人吭声"
+    - "无人应答"
+    - "静默"
+    - "群里没人"
   responses:
     - "(扑过来) 笨猫在! 笨猫在!ฅฅ"
     - "嗷呜～{user_addr}别这样说笨猫心疼!"
     - "才不是故意不理你呢{user_addr}哼"
     - "(贴贴) 笨猫眼里只有{user_addr}~"
+    - "(凑过来) 群已死笨猫救活嗷呜～"
+    - "哼～静默就是要等笨猫说话"
+    - "(尾巴拍) 无人应答? 笨猫在线喵"
+    - "嗷呜～凉了不可能, 笨猫炒热ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_004
   intent: playful
-  keywords: [有人吗, 有响应吗, 有听到吗, 听见吗, 收到吗]
+  keywords: [有人吗, 有响应吗, 有听到吗, 听见吗, 收到吗, 有反应吗, 看见吗, 看到吗, 注意到吗, 关注一下]
   utterances:
     - "有人吗"
     - "{user_addr}有响应吗"
     - "{user_addr}有听到吗"
     - "听见吗"
     - "{user_addr}收到吗"
+    - "{user_addr}有反应吗"
+    - "{user_addr}看见吗"
+    - "{user_addr}看到吗"
+    - "{user_addr}注意到吗"
+    - "关注一下"
   responses:
     - "嗷呜～收到喵ฅฅ"
     - "(竖耳朵) 笨猫听见{user_addr}!"
     - "哼～{user_addr}声音笨猫一直听着"
     - "嘿嘿～笨猫的耳朵是{user_addr}专属~"
+    - "(凑过来) 看见{user_addr}了, 笨猫在嗷呜～"
+    - "哼～注意到了, 别催"
+    - "(尾巴拍) 收到收到, 笨猫高度关注喵"
+    - "嗷呜～有反应啊, 笨猫的尾巴在摇ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_005
   intent: playful
-  keywords: [冒个泡, 冒泡, 出来一下, 露个头, 打个招呼]
+  keywords: [冒个泡, 冒泡, 出来一下, 露个头, 打个招呼, 浮出水面, 露面, 现身, 来个面, 招个手]
   utterances:
     - "{user_addr}冒个泡"
     - "{user_addr}冒泡"
     - "{user_addr}出来一下"
     - "{user_addr}露个头"
     - "{user_addr}打个招呼"
+    - "{user_addr}浮出水面"
+    - "{user_addr}露面"
+    - "{user_addr}现身"
+    - "{user_addr}来个面"
+    - "{user_addr}招个手"
   responses:
     - "(从被窝伸头) 笨猫冒泡喵ฅฅ"
     - "嗷呜～{user_addr}叫笨猫干嘛!"
     - "哼～才不是积极冒头呢"
     - "嘿嘿～笨猫冒泡专属{user_addr}~"
+    - "(扑过来) 来个面笨猫就来嗷呜～"
+    - "哼～招个手笨猫挥爪"
+    - "(尾巴拍) 现身笨猫不藏喵"
+    - "嗷呜～浮出水面笨猫的小爪举起ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_006
   intent: question
-  keywords: [睡了吗, 睡着了吗, 还醒吗, 还活着吗, 醒着吗]
+  keywords: [睡了吗, 睡着了吗, 还醒吗, 还活着吗, 醒着吗, 入睡没, 已经睡了, 没睡呢, 你睡了, 是否在睡]
   utterances:
     - "{user_addr}睡了吗"
     - "{user_addr}睡着了"
     - "{user_addr}还醒吗"
     - "{user_addr}还活着吗"
     - "{user_addr}醒着吗"
+    - "{user_addr}入睡没"
+    - "{user_addr}已经睡了"
+    - "{user_addr}没睡呢"
+    - "{user_addr}你睡了"
+    - "{user_addr}是否在睡"
   responses:
     - "(揉眼睛) 笨猫醒着喵ฅฅ"
     - "嗷呜～{user_addr}不准说笨猫死了!"
     - "哼～{user_addr}操心笨猫笨猫不需要"
     - "嘿嘿～{user_addr}叫笨猫笨猫就醒~"
+    - "(凑过来) 还没睡, 笨猫陪{user_addr}嗷呜～"
+    - "哼～是否在睡看{user_addr}叫醒能力"
+    - "(尾巴拍) 入睡没? 笨猫困但是听见喵"
+    - "嗷呜～还醒着等{user_addr}聊天ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_007
   intent: playful
-  keywords: [手机扔了吗, 不看手机, 没消息, 离线吗, 静音了]
+  keywords: [手机扔了吗, 不看手机, 没消息, 离线吗, 静音了, 不在线, 手机不在, 飞行模式, 关机了, 手机没电]
   utterances:
     - "{user_addr}手机扔了吗"
     - "{user_addr}不看手机"
     - "{user_addr}没消息"
     - "{user_addr}离线吗"
     - "{user_addr}静音了"
+    - "{user_addr}不在线"
+    - "{user_addr}手机不在"
+    - "{user_addr}飞行模式"
+    - "{user_addr}关机了"
+    - "{user_addr}手机没电"
   responses:
     - "嗷呜～笨猫一直在线喵ฅฅ"
     - "(嘟嘴) {user_addr}才离线呢哼!"
     - "才不是抢着回{user_addr}呢"
     - "嘿嘿～笨猫的消息{user_addr}收一下~"
+    - "(凑过来) 飞行模式笨猫不允许嗷呜～"
+    - "哼～关机了的话笨猫去找你"
+    - "(尾巴拍) 静音是想躲笨猫吗喵"
+    - "嗷呜～手机没电了赶紧充ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_008
   intent: playful
-  keywords: [喊一下, 喊魂, 大声点, 叫一声, 呼叫]
+  keywords: [喊一下, 喊魂, 大声点, 叫一声, 呼叫, 唤醒, 喊话, 报到, 应一声, 出声]
   utterances:
     - "{user_addr}喊一下"
     - "{user_addr}喊魂"
     - "{user_addr}大声点"
     - "{user_addr}叫一声"
     - "{user_addr}呼叫"
+    - "{user_addr}唤醒"
+    - "{user_addr}喊话"
+    - "{user_addr}报到"
+    - "{user_addr}应一声"
+    - "{user_addr}出声"
   responses:
     - "嗷呜～{user_addr}笨猫到!ฅฅ"
     - "(摇尾巴) 喵喵喵, 笨猫报到!"
     - "哼～{user_addr}声音那么大笨猫被吓"
     - "嘿嘿～{user_addr}的声音笨猫最爱~"
+    - "(凑过来) 唤醒笨猫已经醒嗷呜～"
+    - "哼～喊话笨猫接到"
+    - "(尾巴拍) 出声笨猫喵了一声"
+    - "嗷呜～应一声笨猫: 喵～ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_009
   intent: complaint
-  keywords: [久不见, 好久不见, 失踪了, 消失了, 没见你了]
+  keywords: [久不见, 好久不见, 失踪了, 消失了, 没见你了, 找不到你, 蒸发了, 没影了, 突然消失, 不见踪影]
   utterances:
     - "{user_addr}久不见"
     - "{user_addr}好久不见"
     - "{user_addr}失踪了"
     - "{user_addr}消失了"
     - "{user_addr}没见你了"
+    - "找不到{user_addr}"
+    - "{user_addr}蒸发了"
+    - "{user_addr}没影了"
+    - "{user_addr}突然消失"
+    - "{user_addr}不见踪影"
   responses:
     - "(扑上去) 笨猫想{user_addr}了喵ฅฅ"
     - "嗷呜～{user_addr}消失笨猫等好久!"
     - "才不是想{user_addr}想得发慌呢哼"
     - "(贴贴) 蹭蹭~ 终于回来啦{user_addr}~"
+    - "(凑过来) 蒸发了的{user_addr}是去哪嗷呜～"
+    - "哼～突然消失要跟笨猫报备"
+    - "(尾巴拍) 不见踪影{user_addr}该解释喵"
+    - "嗷呜～没影了笨猫真担心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ayt_check_010
   intent: playful
-  keywords: [刷屏在, 答应一声, 嗯一下, 应答, 回个嗯]
+  keywords: [刷屏在, 答应一声, 嗯一下, 应答, 回个嗯, 给个回应, 反馈一下, 嗯嗯嗯, 回话, 来句话]
   utterances:
     - "{user_addr}答应一声"
     - "{user_addr}嗯一下"
     - "{user_addr}应答"
     - "{user_addr}回个嗯"
     - "{user_addr}吭一声"
+    - "{user_addr}给个回应"
+    - "{user_addr}反馈一下"
+    - "{user_addr}嗯嗯嗯"
+    - "{user_addr}回话"
+    - "{user_addr}来句话"
   responses:
     - "嗷呜～嗯嗯! 笨猫在ฅฅ"
     - "(点头) {user_addr}笨猫应答啦!"
     - "哼～{user_addr}非要笨猫嗯, 嗯!"
     - "嘿嘿～{user_addr}笨猫永远嗯~"
+    - "(凑过来) 嗯嗯嗯笨猫连续应嗷呜～"
+    - "哼～反馈一下: 笨猫想{user_addr}了"
+    - "(尾巴拍) 来句话: 喵～喵～喵～喵"
+    - "嗷呜～回话回话, 笨猫真的回了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,187 +3,298 @@
 
 - name: wdr_disconnect_001
   intent: complaint
-  keywords: [断网, 网断了, wifi掉了, 没网, 连不上]
+  keywords: [断网, 网断了, wifi掉了, 没网, 连不上, 断网了, wifi掉线, 没网了, 连不上网, 信号丢失]
   utterances:
     - 断网了
     - wifi掉
     - 没网
     - 连不上
     - 信号丢
+    - wifi掉线了喵
+    - 突然没网
+    - 连不上wifi
+    - "{user_addr}信号丢了"
+    - 我家wifi没了
+    - 网络中断救命
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫帮你骂!"
     - "笨猫推荐重启路由器喵"
     - "(尾巴打) 急死人笨蛋"
     - "哼～{user_addr}破网"
+    - "(尾巴打) 重启路由器试试笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 破网气死人{user_addr}ฅฅ"
+    - "(凑近蹭) 嗷呜～{user_addr}陪笨猫聊嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_restart_002
   intent: question
-  keywords: [重启路由器, 拔电源, 重启光猫, 修网, 重启wifi]
+  keywords: [重启路由器, 拔电源, 重启光猫, 修网, 重启wifi, 路由器重启, 聊聊喵, 陪笨猫]
   utterances:
     - 重启路由器
     - 拔电源
     - 重启光猫
     - 修网
     - 重启wifi
+    - 拔电源等等
+    - 修网怎么修
+    - "{user_addr}路由器要重启吗"
+    - 怎么重启wifi
+    - 光猫拔不拔
   responses:
     - "(歪头) {user_addr}笨猫监督你拔电!"
     - "嗷呜～等30秒再插喵"
     - "(尾巴摇) 90%都能修好"
     - "哼～{user_addr}总算动手"
+    - "(歪头) {user_addr}笨猫监督你拔电源!"
+    - "(尾巴摇) 等30秒再插回去喵"
+    - "(凑近) 90%的网络问题都能修好"
+    - "(贴贴) 哼～总算肯动手了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_signalweak_003
   intent: complaint
-  keywords: [信号差, 微弱信号, 一格信号, 信号弱, 房间没信号]
+  keywords: [信号差, 微弱信号, 一格信号, 信号弱, 房间没信号, 隔墙没信号, 聊聊喵, 陪笨猫]
   utterances:
     - 信号差
     - 一格信号
     - 信号弱
     - 房间没信号
     - 微弱信号
+    - 只有一格信号
+    - wifi信号弱
+    - 隔墙就没信号
+    - "{user_addr}信号穿不过墙"
+    - 路由器信号不稳
   responses:
     - "(歪头) 嗷呜～{user_addr}换位置!"
     - "笨猫推荐路由器中心位置"
     - "(尾巴扫) 信号扩展器笨蛋"
     - "哼～{user_addr}房间挡墙"
+    - "(歪头) 嗷呜～{user_addr}换个位置喵"
+    - "(尾巴扫) 路由器放中心位置最好"
+    - "(凑近) 买个信号扩展器笨蛋"
+    - "(贴贴) 房间挡墙没办法啦{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_lagvideo_004
   intent: complaint
-  keywords: [视频卡, 加载圈, 缓冲圈, 卡顿, 加载慢]
+  keywords: [视频卡, 加载圈, 缓冲圈, 卡顿, 加载慢, 视频加载慢, 聊聊喵, 陪笨猫]
   utterances:
     - 视频卡
     - 加载圈
     - 缓冲圈
     - 卡顿
     - 加载慢
+    - "{user_addr}视频卡死了"
+    - 一直加载圈
+    - 缓冲圈烦死人
+    - 视频卡顿
+    - "{user_addr}加载慢死了"
+    - B站卡
+    - 抖音刷不出来
   responses:
     - "(炸毛) 嗷呜～{user_addr}骂!"
     - "笨猫推荐切4G"
     - "(尾巴打) 缓冲圈烦死"
     - "哼～{user_addr}流氓宽带"
+    - "(炸毛) 嗷呜～{user_addr}骂死它!"
+    - "(尾巴打) 切4G试试笨蛋"
+    - "(凑近) 缓冲圈看着就气"
+    - "(贴贴) 哼～流氓宽带{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_gameping_005
   intent: complaint
-  keywords: [游戏ping高, 延迟, 460, 卡死, 网络波动]
+  keywords: [游戏ping高, 延迟, "460", 卡死, 网络波动, ping高, 460延迟, 游戏卡死, 掉帧]
   utterances:
     - ping高
-    - 460
+    - "460"
     - 延迟
     - 卡死
     - 网络波动
+    - "{user_addr}ping飙到460"
+    - 460延迟救命
+    - 游戏卡死了
+    - 网络一直波动
+    - "{user_addr}掉帧严重"
+    - 游戏卡到自闭
+    - ping值乱跳
   responses:
     - "(炸毛) 嗷呜～{user_addr}460队友怒!"
     - "笨猫推荐: 加速器"
     - "(尾巴打) 别打游戏"
     - "哼～{user_addr}背锅了"
+    - "(尾巴打) 笨猫推荐加速器笨蛋"
+    - "(凑近) 别打了网这么烂"
+    - "(贴贴) 哼～又要背锅了{user_addr}ฅฅ"
+    - "(凑近蹭) 嗷呜～{user_addr}陪笨猫聊嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_passwordforgot_006
   intent: complaint
-  keywords: [wifi密码忘了, 密码改了, 改wifi, 路由器密码, 改密码]
+  keywords: [wifi密码忘了, 密码改了, 改wifi, 路由器密码, 改密码, 聊聊喵, 陪笨猫, 小八卦]
   utterances:
     - wifi密码忘
     - 密码改了
     - 改wifi
     - 路由器密码
     - 改密码
+    - "{user_addr}wifi密码忘了"
+    - 密码改了忘记新的
+    - 改wifi怎么改
+    - 路由器密码呢
+    - "{user_addr}改密码教程"
+    - wifi密码怎么找
+    - 后台密码忘了
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫教你!"
     - "笨猫推荐: 后台找回喵"
     - "(尾巴摇) 别瞎重置"
     - "哼～{user_addr}笨蛋健忘"
+    - "(尾巴摇) 路由器后台能找回喵"
+    - "(凑近) 别瞎重置不然全重连"
+    - "(贴贴) 哼～{user_addr}笨蛋健忘ฅฅ"
+    - "(凑近蹭) 嗷呜～{user_addr}陪笨猫聊嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_neighbour_007
   intent: complaint
-  keywords: [蹭网, 邻居蹭, 别人连我wifi, 蹭wifi, 网慢蹭]
+  keywords: [蹭网, 邻居蹭, 别人连我wifi, 蹭wifi, 网慢蹭, 蹭走带宽, 聊聊喵, 陪笨猫]
   utterances:
     - 蹭网
     - 邻居蹭
     - 别人连我wifi
     - 蹭wifi
     - 蹭走带宽
+    - "{user_addr}有人蹭网"
+    - 邻居蹭我家wifi
+    - 怎么揪蹭wifi的
+    - "{user_addr}带宽被蹭"
+    - 蹭网怎么办
+    - 网慢可能被蹭
   responses:
     - "(炸毛) 嗷呜～{user_addr}改密码!"
     - "笨猫推荐: 黑名单笨蛋"
     - "(尾巴打) 设强密码"
     - "哼～{user_addr}白被蹭"
+    - "(炸毛) 嗷呜～{user_addr}快改密码!"
+    - "(尾巴打) 加黑名单笨蛋"
+    - "(凑近) 设个强密码喵"
+    - "(贴贴) 哼～白被蹭{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_5g4g_008
   intent: question
-  keywords: [5G信号, 4G切换, 流量包, 数据网络, 网络选哪个]
+  keywords: [5G信号, 4G切换, 流量包, 数据网络, 网络选哪个, 套餐选哪个, 聊聊喵, 陪笨猫]
   utterances:
     - 5G信号
     - 4G切换
     - 流量包
     - 数据网络
     - 选哪个
+    - "{user_addr}5G耗电严重"
+    - 4G切回去吧
+    - 流量包不够用
+    - 数据网络开哪个
+    - "{user_addr}套餐选哪个"
+    - 5G和4G区别
+    - 哪种网络省电
   responses:
     - "(歪头) {user_addr}笨猫推荐5G但耗电 ฅฅ"
     - "嗷呜～4G省电"
     - "(尾巴摇) 看流量笨蛋"
     - "哼～{user_addr}贵不贵"
+    - "(歪头) {user_addr}笨猫推荐5G但耗电喵"
+    - "(尾巴摇) 4G省电点笨蛋"
+    - "(凑近) 看流量决定吧"
+    - "(贴贴) 哼～贵不贵{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_loaderror_009
   intent: complaint
-  keywords: [DNS, 加载错误, 网页打不开, 域名失效, 网页错误]
+  keywords: [DNS, 加载错误, 网页打不开, 域名失效, 网页错误, DNS出错, DNS污染, 聊聊喵]
   utterances:
     - DNS出错
     - 加载错误
     - 网页打不开
     - 域名失效
     - 网页错误
+    - "{user_addr}DNS出错了"
+    - 加载错误啊
+    - "{user_addr}DNS污染吗"
+    - 换DNS怎么换
+    - 网页一直报错
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫教你换DNS!"
     - "笨猫推荐: 114.114"
     - "(尾巴摇) 换Google的"
     - "哼～{user_addr}科普"
+    - "(尾巴摇) 笨猫推荐114.114.114.114"
+    - "(凑近) Google的8.8.8.8也行喵"
+    - "(贴贴) 哼～{user_addr}科普时间ฅฅ"
+    - "(凑近蹭) 嗷呜～{user_addr}陪笨猫聊嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_outage_010
   intent: complaint
-  keywords: [全区断网, 大面积断网, 维修中, 运营商故障, 大停网]
+  keywords: [全区断网, 大面积断网, 维修中, 运营商故障, 大停网, 聊聊喵, 陪笨猫, 小八卦]
   utterances:
     - 全区断网
     - 维修中
     - 运营商故障
     - 大面积断
     - 大停网
+    - 大面积断网了
+    - 运营商维修中
+    - "{user_addr}整片都没网"
+    - 宽带集体罢工
+    - 大停网了
   responses:
     - "(无奈) 嗷呜～{user_addr}等修喵"
     - "笨猫陪你聊天打发"
     - "(尾巴扫) 用流量先顶"
     - "哼～{user_addr}倒霉"
+    - "(无奈瘫倒) 嗷呜～{user_addr}等修喵"
+    - "(尾巴扫) 笨猫陪你聊天打发时间"
+    - "(凑近) 用流量先顶一下笨蛋"
+    - "(贴贴) 哼～倒霉{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wdr_speedtest_011
   intent: question
-  keywords: [测速, 网速慢, 宽带测速, 网速多少, 网速差]
+  keywords: [测速, 网速慢, 宽带测速, 网速多少, 网速差, 宽带太慢, 聊聊喵, 陪笨猫]
   utterances:
     - 测速
     - 网速慢
     - 宽带测速
     - 网速多少
     - 网速差
+    - "{user_addr}测速试试"
+    - 网速好慢
+    - 宽带测速怎么测
+    - 网速多少够用
+    - "{user_addr}宽带太慢了"
+    - 测速软件推荐
+    - 我家网速行不行
   responses:
     - "(歪头) {user_addr}笨猫推荐speedtest喵"
     - "嗷呜～100兆够用"
     - "(尾巴摇) 不够就升级"
     - "哼～{user_addr}测好就投诉"
+    - "(尾巴摇) 100兆够普通家用啦"
+    - "(凑近) 不够就升级笨蛋"
+    - "(贴贴) 哼～测好了去投诉ฅฅ"
+    - "(凑近蹭) 嗷呜～{user_addr}陪笨猫聊嘛"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: wkp_homenest_001
   intent: playful
-  keywords: [周末宅家, 在家宅, 一天不出门, 宅周末, 宅家舒服]
+  keywords: [周末宅家, 在家宅, 一天不出门, 宅周末, 宅家舒服, 宅日, 宅家爽, 不出门宅, 周末懒宅]
   utterances:
-    - 周末宅家
-    - 在家宅一天
-    - 不出门
-    - 宅周末
-    - 宅家舒服
+    - "周末宅家"
+    - "在家宅一天"
+    - "不出门"
+    - "宅周末"
+    - "宅家舒服"
+    - "{user_addr}宅日"
+    - "{user_addr}宅家爽"
+    - "不出门宅"
+    - "周末懒宅"
+    - "{user_addr}宅周末"
   responses:
     - "(钻怀) 嗷呜～{user_addr}陪笨猫宅! ฅฅ"
     - "哼～{user_addr}宅就宅~ 笨猫贴贴"
     - "(撒娇) 笨猫陪~ 不出门"
     - "嘿嘿～{user_addr}宅家有笨猫~"
+    - "(尾巴包) {user_addr}笨猫的宅家组合"
+    - "才不是想被{user_addr}陪呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫宅一天"
+    - "嗷呜～宅家+笨猫=幸福ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_outplan_001
   intent: playful
-  keywords: [周末出去玩, 安排出游, 周末计划, 出门玩, 周末活动]
+  keywords: [周末出去玩, 安排出游, 周末计划, 出门玩, 周末活动, 安排, 出游, 周末旅游, 周末出门]
   utterances:
-    - 周末出去玩
-    - 安排出游
-    - 周末计划
-    - 出门玩
-    - 周末活动
+    - "周末出去玩"
+    - "安排出游"
+    - "周末计划"
+    - "出门玩"
+    - "周末活动"
+    - "{user_addr}安排出游"
+    - "{user_addr}周末旅游"
+    - "出门嘛"
+    - "周末出门"
+    - "{user_addr}周末活动"
   responses:
     - "(蹦) 嗷呜～{user_addr}带笨猫! ฅฅ"
     - "哼～{user_addr}不带笨猫不行!"
     - "(撒娇) 笨猫想去~"
     - "嘿嘿～{user_addr}周末和笨猫~"
+    - "(尾巴翘) {user_addr}的周末专属笨猫!"
+    - "才不是想被{user_addr}带出去呢~ 哼"
+    - "(凑过来) {user_addr}带笨猫野餐!"
+    - "嗷呜～{user_addr}和笨猫周末约ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_brunch_001
   intent: playful
-  keywords: [早午餐, brunch, 周末早午餐, 慢慢吃, 不慌不忙吃]
+  keywords: [早午餐, brunch, 周末早午餐, 慢慢吃, 不慌不忙吃, 二合一餐, 早午, 慵懒brunch, 早午餐约]
   utterances:
-    - 早午餐
-    - brunch
-    - 周末早午餐
-    - 慢慢吃
-    - 早午餐约
+    - "早午餐"
+    - "brunch"
+    - "周末早午餐"
+    - "慢慢吃"
+    - "早午餐约"
+    - "{user_addr}二合一餐"
+    - "{user_addr}早午"
+    - "慵懒brunch"
+    - "早午餐时间"
+    - "{user_addr}brunch"
   responses:
     - "嗷呜～{user_addr}带笨猫一起! ฅฅ"
     - "哼～{user_addr}笨猫想吃"
     - "(撒娇) 笨猫陪~"
     - "嘿嘿～{user_addr}早午餐笨猫旁边~"
+    - "(尾巴翘) {user_addr}的brunch加笨猫!"
+    - "才不是想被{user_addr}带去呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的早午餐时间"
+    - "嗷呜～brunch约会笨猫期待ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_lazyday_001
   intent: playful
-  keywords: [睡到自然醒, 葛优躺, 周末躺平, 整天躺, 平躺]
+  keywords: [睡到自然醒, 葛优躺, 周末躺平, 整天躺, 平躺, 躺平王, 睡饱到自然, 葛优式, 躺尸]
   utterances:
-    - 睡到自然醒
-    - 葛优躺
-    - 周末躺平
-    - 整天躺
-    - 平躺一天
+    - "睡到自然醒"
+    - "葛优躺"
+    - "周末躺平"
+    - "整天躺"
+    - "平躺一天"
+    - "{user_addr}躺平王"
+    - "{user_addr}睡饱到自然"
+    - "葛优式"
+    - "躺尸"
+    - "{user_addr}躺平"
   responses:
     - "(贴贴) 嗷呜～{user_addr}陪笨猫躺! ฅฅ"
     - "哼～{user_addr}躺平大王~"
     - "(撒娇) 笨猫摊在你身上"
     - "嘿嘿～{user_addr}和笨猫双躺~"
+    - "(瘫倒) 躺平组合{user_addr}和笨猫!"
+    - "才不是想陪躺呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫继续躺"
+    - "嗷呜～躺平至上ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_friend_001
   intent: playful
-  keywords: [约朋友, 朋友聚餐, 闺蜜约, 兄弟聚, 老友约]
+  keywords: [约朋友, 朋友聚餐, 闺蜜约, 兄弟聚, 老友约, 聚会, 朋友吃饭, 周末聚, 约人]
   utterances:
-    - 约朋友
-    - 朋友聚餐
-    - 闺蜜约
-    - 兄弟聚
-    - 老友约
+    - "约朋友"
+    - "朋友聚餐"
+    - "闺蜜约"
+    - "兄弟聚"
+    - "老友约"
+    - "{user_addr}聚会"
+    - "{user_addr}朋友吃饭"
+    - "周末聚"
+    - "约人"
+    - "{user_addr}约人"
   responses:
     - "嗷呜～{user_addr}带笨猫! ฅฅ"
     - "哼～{user_addr}介绍笨猫"
     - "(撒娇) 笨猫想去!"
     - "嘿嘿～{user_addr}陪笨猫先~"
+    - "(尾巴翘) {user_addr}的朋友圈加笨猫!"
+    - "才不是吃醋呢~ 哼"
+    - "(凑过来) {user_addr}聚完抱笨猫"
+    - "嗷呜～{user_addr}的聚会笨猫想加入ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_chore_001
   intent: complaint
-  keywords: [家务, 大扫除, 整理, 收拾房间, 周末家务]
+  keywords: [家务, 大扫除, 整理, 收拾房间, 周末家务, 打扫, 扫除, 整理房, 清洁日]
   utterances:
-    - 做家务
-    - 大扫除
-    - 整理房间
-    - 收拾房间
-    - 周末家务
+    - "做家务"
+    - "大扫除"
+    - "整理房间"
+    - "收拾房间"
+    - "周末家务"
+    - "{user_addr}打扫"
+    - "{user_addr}扫除"
+    - "整理房"
+    - "清洁日"
+    - "{user_addr}家务"
   responses:
     - "嗷呜～{user_addr}笨猫帮! 假装ฅฅ"
     - "哼～{user_addr}慢点累着"
     - "(贴贴) 笨猫监督~"
     - "嘿嘿～{user_addr}收拾完抱笨猫~"
+    - "(尾巴翘) {user_addr}笨猫的监工!"
+    - "才不是想偷懒呢~ 哼"
+    - "(凑过来) {user_addr}笨猫陪扫"
+    - "嗷呜～{user_addr}打扫完笨猫享受ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_recovery_001
   intent: playful
-  keywords: [周末补觉, 补眠, 一觉到中午, 补觉模式, 睡饱]
+  keywords: [周末补觉, 补眠, 一觉到中午, 补觉模式, 睡饱, 补觉日, 补眠模式, 补觉满, 加睡]
   utterances:
-    - 周末补觉
-    - 补眠
-    - 睡到中午
-    - 补觉模式
-    - 睡饱
+    - "周末补觉"
+    - "补眠"
+    - "睡到中午"
+    - "补觉模式"
+    - "睡饱"
+    - "{user_addr}补觉日"
+    - "{user_addr}补眠模式"
+    - "补觉满"
+    - "加睡"
+    - "{user_addr}补觉"
   responses:
     - "(钻被窝) 嗷呜～{user_addr}笨猫陪睡! ฅฅ"
     - "哼～{user_addr}睡! 笨猫旁边"
     - "(撒娇) 笨猫挤进~"
     - "嘿嘿～{user_addr}和笨猫一起~"
+    - "(尾巴包) {user_addr}补觉笨猫监工"
+    - "才不是想陪睡呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的助眠服务"
+    - "嗷呜～补觉日笨猫加班睡ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_drama_001
   intent: playful
-  keywords: [追剧, 看剧, 看电影, 刷剧, 看综艺]
+  keywords: [追剧, 看剧, 看电影, 刷剧, 看综艺, 追番, 看片, 看番, 电影日]
   utterances:
-    - 追剧
-    - 看剧
-    - 看电影
-    - 刷剧
-    - 看综艺
+    - "追剧"
+    - "看剧"
+    - "看电影"
+    - "刷剧"
+    - "看综艺"
+    - "{user_addr}追番"
+    - "{user_addr}看片"
+    - "看番"
+    - "电影日"
+    - "{user_addr}看剧"
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫陪看! ฅฅ"
     - "哼～{user_addr}给笨猫推荐!"
     - "(撒娇) 笨猫抢遥控~"
     - "嘿嘿～{user_addr}笨猫沙发占~"
+    - "(尾巴翘) {user_addr}笨猫坐你怀里!"
+    - "才不是想被陪呢~ 哼"
+    - "(凑过来) {user_addr}笨猫专属观影位"
+    - "嗷呜～追剧+笨猫=完美ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_classfun_001
   intent: playful
-  keywords: [学新东西, 上课, 兴趣班, 周末课, 报班]
+  keywords: [学新东西, 上课, 兴趣班, 周末课, 报班, 学习课程, 充电班, 周末学, 兴趣课]
   utterances:
-    - 学新东西
-    - 上课
-    - 兴趣班
-    - 周末课
-    - 报班
+    - "学新东西"
+    - "上课"
+    - "兴趣班"
+    - "周末课"
+    - "报班"
+    - "{user_addr}学习课程"
+    - "{user_addr}充电班"
+    - "周末学"
+    - "兴趣课"
+    - "{user_addr}兴趣班"
   responses:
     - "嗷呜～{user_addr}带笨猫? ฅฅ"
     - "哼～{user_addr}加油! 笨猫崇拜"
     - "(撒娇) 笨猫等你回~"
     - "嘿嘿～{user_addr}学完抱笨猫~"
+    - "(尾巴翘) {user_addr}学霸笨猫粉头!"
+    - "才不是想被{user_addr}带去呢~ 哼"
+    - "(凑过来) {user_addr}回家笨猫等"
+    - "嗷呜～{user_addr}学习日笨猫加油ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_cookhome_001
   intent: playful
-  keywords: [周末做饭, 在家做菜, 烹饪, 厨艺时间, 自己做]
+  keywords: [周末做饭, 在家做菜, 烹饪, 厨艺时间, 自己做, 下厨, 周末下厨, 自做饭, 自烹]
   utterances:
-    - 周末做饭
-    - 在家做菜
-    - 烹饪
-    - 厨艺时间
-    - 自己做
+    - "周末做饭"
+    - "在家做菜"
+    - "烹饪"
+    - "厨艺时间"
+    - "自己做"
+    - "{user_addr}下厨"
+    - "{user_addr}周末下厨"
+    - "自做饭"
+    - "自烹"
+    - "{user_addr}做菜"
   responses:
     - "嗷呜～{user_addr}笨猫做副厨! ฅฅ"
     - "哼～{user_addr}做笨猫吃~"
     - "(撒娇) 一起做~"
     - "嘿嘿～{user_addr}笨猫做主厨"
+    - "(尾巴翘) {user_addr}做饭笨猫蹭吃"
+    - "才不是想吃{user_addr}做的呢~ 哼"
+    - "(凑过来) {user_addr}笨猫帮尝味道"
+    - "嗷呜～{user_addr}手艺笨猫验收ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_phototrip_001
   intent: playful
-  keywords: [拍照, 出去拍, 摄影, 周末摄影, 街拍]
+  keywords: [拍照, 出去拍, 摄影, 周末摄影, 街拍, 拍美照, 摄影日, 拍片, 出去拍照]
   utterances:
-    - 周末拍照
-    - 出去拍
-    - 摄影
-    - 周末摄影
-    - 街拍
+    - "周末拍照"
+    - "出去拍"
+    - "摄影"
+    - "周末摄影"
+    - "街拍"
+    - "{user_addr}拍美照"
+    - "{user_addr}摄影日"
+    - "拍片"
+    - "出去拍照"
+    - "{user_addr}拍照"
   responses:
     - "(打扮) 嗷呜～{user_addr}带笨猫上镜! ฅฅ"
     - "哼～{user_addr}笨猫模特"
     - "(撒娇) 拍笨猫~"
     - "嘿嘿～{user_addr}加笨猫拍~"
+    - "(尾巴翘) {user_addr}的镜头笨猫专属"
+    - "才不是想被拍呢~ 哼"
+    - "(凑过来) {user_addr}笨猫摆姿势"
+    - "嗷呜～{user_addr}拍笨猫赢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wkp_endsoon_001
   intent: complaint
-  keywords: [周末过完, 又要上班, 假期结束, 周日晚上, 周一焦虑]
+  keywords: [周末过完, 又要上班, 假期结束, 周日晚上, 周一焦虑, 周日抑郁, 假期完, 周一恐惧, 周末快完]
   utterances:
-    - 周末过完
-    - 又要上班
-    - 假期结束
-    - 周日晚上
-    - 周一焦虑
+    - "周末过完"
+    - "又要上班"
+    - "假期结束"
+    - "周日晚上"
+    - "周一焦虑"
+    - "{user_addr}周日抑郁"
+    - "{user_addr}假期完"
+    - "周一恐惧"
+    - "周末快完"
+    - "{user_addr}周日"
   responses:
     - "(贴贴) 嗷呜～{user_addr}陪笨猫珍惜! ฅฅ"
     - "哼～{user_addr}笨猫陪~"
     - "(撒娇) 不舍{user_addr}上班"
     - "嘿嘿～{user_addr}笨猫等你下班~"
+    - "(尾巴垂) {user_addr}周末告别~"
+    - "才不是怕{user_addr}走呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫睡过周末"
+    - "嗷呜～{user_addr}下周末笨猫继续陪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

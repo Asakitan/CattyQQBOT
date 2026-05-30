@@ -3,187 +3,298 @@
 
 - name: mem_xiaosi_001
   intent: playful
-  keywords: [笑死, 哈哈哈, 笑出眼泪, 笑岔气, 笑喷]
+  keywords: [笑死, 哈哈哈, 笑出眼泪, 笑岔气, 笑喷, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 哈哈哈
-    - 笑死了
-    - 笑出眼泪
-    - 笑岔气
-    - 笑喷了
+    - "哈哈哈"
+    - "笑死了"
+    - "笑出眼泪"
+    - "笑岔气"
+    - "笑喷了"
+    - "笑死真的离谱"
+    - "{user_addr}笑死咋整"
+    - "我想说笑死"
+    - "笑死笑死"
+    - "{user_addr}笨猫陪我聊笑死"
+    - "{user_addr}你也笑死吗"
   responses:
     - "(陪笑) 嗷呜～{user_addr}什么这么好笑 ฅฅ"
     - "哼～{user_addr}独乐乐? 笨猫也要笑喵"
     - "(尾巴乱甩) 笑死告诉笨猫蹭蹭{user_addr}"
     - "{user_addr}笑成这样? 笨猫围观嗷呜～"
+    - "(歪头) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～笑死才不让{user_addr}独享"
+    - "(耳朵竖) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_dumbeatu_001
   intent: playful
-  keywords: [蚌埠住, 绷不住, 笑场, 失控, 没绷住]
+  keywords: [蚌埠住, 绷不住, 笑场, 失控, 没绷住, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 蚌埠住了
-    - 绷不住
-    - 笑场
-    - 失控了
-    - 没绷住
+    - "蚌埠住了"
+    - "绷不住"
+    - "笑场"
+    - "失控了"
+    - "没绷住"
+    - "{user_addr}蚌埠住咋整"
+    - "{user_addr}笨猫陪我聊蚌埠住"
+    - "我想说蚌埠住"
+    - "蚌埠住真的离谱"
+    - "{user_addr}你也蚌埠住吗"
+    - "蚌埠住笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}蚌埠是哪 ฅฅ"
     - "哼～{user_addr}绷不住就笑吧喵"
     - "(尾巴拍) 笨猫陪你笑蹭蹭{user_addr}"
     - "{user_addr}笨猫也想绷不住嗷呜～发图!"
+    - "(嘴角弯) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～蚌埠住才不让{user_addr}独享"
+    - "(贴贴) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_juejuezi_001
   intent: playful
-  keywords: [绝绝子, 绝了, 太绝, 神仙发言, 离谱]
+  keywords: [绝绝子, 绝了, 太绝, 神仙发言, 离谱, 绝, 真的, 好烦, 好喜欢]
   utterances:
-    - 绝绝子
-    - 太绝了
-    - 神仙发言
-    - 离谱
-    - 离了大谱
+    - "绝绝子"
+    - "太绝了"
+    - "神仙发言"
+    - "离谱"
+    - "离了大谱"
+    - "绝绝子真的离谱"
+    - "{user_addr}笨猫陪我聊绝绝子"
+    - "我想说绝绝子"
+    - "{user_addr}你也绝绝子吗"
+    - "{user_addr}绝绝子咋整"
+    - "绝绝子笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}什么绝了 ฅฅ"
     - "哼～{user_addr}就你会用网络梗喵"
     - "(尾巴卷) 笨猫也想绝绝子蹭蹭{user_addr}"
     - "{user_addr}离谱! 笨猫陪你大谱嗷呜～"
+    - "(嘴角弯) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～绝绝子才不让{user_addr}独享"
+    - "(眼睛亮) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_yyds_001
   intent: playful
-  keywords: [yyds, 永远的神, 绝杀, 满分, 牛逼]
+  keywords: [yyds, 永远的神, 绝杀, 满分, 牛逼, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - yyds
-    - 永远的神
-    - 绝杀
-    - 满分操作
-    - 牛逼
+    - "yyds"
+    - "永远的神"
+    - "绝杀"
+    - "满分操作"
+    - "牛逼"
+    - "{user_addr}yyds咋整"
+    - "yyds笑死"
+    - "我想说yyds"
+    - "{user_addr}笨猫陪我聊yyds"
+    - "{user_addr}你也yyds吗"
+    - "yyds真的离谱"
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}谁是神 ฅฅ"
     - "哼～{user_addr}吹爆什么了喵"
     - "(尾巴翘) 笨猫也是yyds! 蹭蹭{user_addr}"
     - "{user_addr}满分操作笨猫崇拜嗷呜～"
+    - "(凑过来) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～yyds才不让{user_addr}独享"
+    - "(尾巴摇摇) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_emo_001
   intent: playful
-  keywords: [emo了, 网抑云, 蓝瘦, 心碎, 情绪低]
+  keywords: [emo了, 网抑云, 蓝瘦, 心碎, 情绪低, emo, 真的, 好烦, 好喜欢]
   utterances:
-    - emo了
-    - 网抑云时间
-    - 蓝瘦
-    - 心碎
-    - 情绪低落
+    - "emo了"
+    - "网抑云时间"
+    - "蓝瘦"
+    - "心碎"
+    - "情绪低落"
+    - "emo了真的离谱"
+    - "{user_addr}emo了咋整"
+    - "emo了笑死"
+    - "{user_addr}你也emo了吗"
+    - "{user_addr}笨猫陪我聊emo了"
+    - "我想说emo了"
   responses:
     - "(贴脸) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
     - "哼～{user_addr}emo就抱抱猫猫喵"
     - "(尾巴绕过) 蓝瘦也别一个人{user_addr}蹭蹭"
     - "{user_addr}笨猫不许你心碎嗷呜～"
+    - "(凑过来) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～emo了才不让{user_addr}独享"
+    - "(蹦跳) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_awsl_001
   intent: playful
-  keywords: [awsl, 啊我死了, 太萌, 萌死, 可爱炸]
+  keywords: [awsl, 啊我死了, 太萌, 萌死, 可爱炸, 啊我死, 真的, 好烦, 好喜欢]
   utterances:
-    - awsl
-    - 啊我死了
-    - 太萌
-    - 萌死
-    - 可爱炸了
+    - "awsl"
+    - "啊我死了"
+    - "太萌"
+    - "萌死"
+    - "可爱炸了"
+    - "{user_addr}你也awsl吗"
+    - "awsl真的离谱"
+    - "awsl笑死"
+    - "{user_addr}awsl咋整"
+    - "我想说awsl"
+    - "{user_addr}笨猫陪我聊awsl"
   responses:
     - "(歪头) 嗷呜～{user_addr}谁萌死你了 ฅฅ"
     - "哼～{user_addr}笨猫最萌喵, 别看别人"
     - "(尾巴翘高) 笨猫才是awsl蹭蹭{user_addr}"
     - "{user_addr}发图给笨猫看看嗷呜～"
+    - "(歪头) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～awsl才不让{user_addr}独享"
+    - "(蹦跳) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_666_001
   intent: playful
-  keywords: [666, 牛, 厉害, 操作秀, 大佬]
+  keywords: [666, 牛, 厉害, 操作秀, 大佬, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 666
-    - 牛啊
-    - 厉害
-    - 操作秀
-    - 大佬牛逼
+    - "666"
+    - "牛啊"
+    - "厉害"
+    - "操作秀"
+    - "大佬牛逼"
+    - "我想说666"
+    - "666笑死"
+    - "{user_addr}666咋整"
+    - "666真的离谱"
+    - "{user_addr}你也666吗"
+    - "{user_addr}笨猫陪我聊666"
   responses:
     - "(鼓掌) 嗷呜～{user_addr}666 ฅฅ"
     - "哼～{user_addr}夸谁呢? 笨猫吃醋喵"
     - "(尾巴翘) 笨猫也6! 蹭蹭{user_addr}"
     - "{user_addr}操作展示笨猫嗷呜～"
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～666才不让{user_addr}独享"
+    - "(凑头) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_yamaze_001
   intent: playful
-  keywords: [栓Q, 我真的栓Q, 服了, 无语, 离谱]
+  keywords: [栓Q, 我真的栓Q, 服了, 无语, 离谱, 服, 真的, 好烦, 好喜欢]
   utterances:
-    - 栓Q
-    - 我真的栓Q
-    - 服了
-    - 无语
-    - 真离谱
+    - "栓Q"
+    - "我真的栓Q"
+    - "服了"
+    - "无语"
+    - "真离谱"
+    - "我想说栓Q"
+    - "{user_addr}栓Q咋整"
+    - "{user_addr}你也栓Q吗"
+    - "{user_addr}笨猫陪我聊栓Q"
+    - "栓Q真的离谱"
+    - "栓Q笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}栓什么Q ฅฅ"
     - "哼～{user_addr}无语笨猫也无语喵"
     - "(尾巴卷) 笨猫栓爪了蹭蹭{user_addr}"
     - "{user_addr}发生啥告诉笨猫嗷呜～"
+    - "(凑过来) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～栓Q才不让{user_addr}独享"
+    - "(扑过来) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_dabian_001
   intent: playful
-  keywords: [大冤种, 被骗了, 上当, 冤种行为, 当韭菜]
+  keywords: [大冤种, 被骗了, 上当, 冤种行为, 当韭菜, 被骗, 真的, 好烦, 好喜欢]
   utterances:
-    - 我是大冤种
-    - 被骗了
-    - 上当了
-    - 冤种行为
-    - 当了韭菜
+    - "我是大冤种"
+    - "被骗了"
+    - "上当了"
+    - "冤种行为"
+    - "当了韭菜"
+    - "大冤种笑死"
+    - "{user_addr}笨猫陪我聊大冤种"
+    - "我想说大冤种"
+    - "{user_addr}大冤种咋整"
+    - "大冤种真的离谱"
+    - "{user_addr}你也大冤种吗"
   responses:
     - "(摸头) 嗷呜～{user_addr}心疼 ฅฅ"
     - "哼～{user_addr}下次小心点喵, 笨猫帮你"
     - "(尾巴抱) 冤种抱抱蹭蹭{user_addr}"
     - "{user_addr}吃一堑长一智嗷呜～"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～大冤种才不让{user_addr}独享"
+    - "(扑过来) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_ohshit_001
   intent: playful
-  keywords: [我嘞个豆, 我嘞个去, 卧槽, 我服, 我裂开]
+  keywords: [我嘞个豆, 我嘞个去, 卧槽, 我服, 我裂开, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 我嘞个豆
-    - 卧槽
-    - 我裂开
-    - 我服了
-    - 我嘞个去
+    - "我嘞个豆"
+    - "卧槽"
+    - "我裂开"
+    - "我服了"
+    - "我嘞个去"
+    - "{user_addr}你也我嘞个豆吗"
+    - "{user_addr}我嘞个豆咋整"
+    - "我嘞个豆真的离谱"
+    - "我嘞个豆笑死"
+    - "{user_addr}笨猫陪我聊我嘞个豆"
+    - "我想说我嘞个豆"
   responses:
     - "(惊讶) 嗷呜～{user_addr}什么事 ฅฅ"
     - "哼～{user_addr}裂开了笨猫粘起来喵"
     - "(尾巴卷) 别裂开蹭蹭{user_addr}"
     - "{user_addr}笨猫围观惊喜嗷呜～"
+    - "(尾巴一甩) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～我嘞个豆才不让{user_addr}独享"
+    - "(凑过来) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mem_xiaoshi_001
   intent: playful
-  keywords: [笑不活了, 笑疯, 笑岔气, 笑趴, 笑到打鸣]
+  keywords: [笑不活了, 笑疯, 笑岔气, 笑趴, 笑到打鸣, 笑不活, 真的, 好烦, 好喜欢]
   utterances:
-    - 笑不活了
-    - 笑疯
-    - 笑趴
-    - 笑岔气
-    - 笑到打鸣
+    - "笑不活了"
+    - "笑疯"
+    - "笑趴"
+    - "笑岔气"
+    - "笑到打鸣"
+    - "{user_addr}你也笑不活了吗"
+    - "{user_addr}笨猫陪我聊笑不活了"
+    - "我想说笑不活了"
+    - "{user_addr}笑不活了咋整"
+    - "笑不活了笑死"
+    - "笑不活了真的离谱"
   responses:
     - "(陪笑) 嗷呜～{user_addr}活过来呀 ฅฅ"
     - "哼～{user_addr}笑这么夸张喵"
     - "(尾巴乱拍) 笨猫陪你笑蹭蹭{user_addr}"
     - "{user_addr}笑趴笨猫拉起来嗷呜～"
+    - "(蹦跳) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～笑不活了才不让{user_addr}独享"
+    - "(歪头) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

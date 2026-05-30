@@ -3,204 +3,312 @@
 
 - name: mp_weekend_001
   intent: question
-  keywords: [推荐 Meal Prep, 推荐周末备餐, 推荐 meal prep, 推荐一次做一周, 笨猫备餐]
+  keywords: [推荐 Meal Prep, 推荐周末备餐, 推荐 meal prep, 推荐一次做一周, 笨猫备餐, 周末做饭, 备餐方法, 一次备一周, 备餐流程, 备餐入门]
   utterances:
-    - 推荐 Meal Prep
-    - 推荐周末备餐
-    - 推荐 meal prep
-    - 推荐一次做一周
-    - 笨猫备餐
+    - "{user_addr}推荐 Meal Prep"
+    - "{user_addr}推荐周末备餐"
+    - "{user_addr}推荐 meal prep"
+    - "{user_addr}推荐一次做一周"
+    - "笨猫备餐怎么搞"
+    - "{user_addr}周末做饭怎么安排"
+    - "备餐方法笨猫教教"
+    - "{user_addr}一次备一周行吗"
+    - "备餐流程是啥"
+    - "{user_addr}备餐入门"
   responses:
-    - "嗷呜～{user_addr}周日 2-3h 一次搞定一周ฅฅ"
-    - "(尾巴翘) 米饭 / 蛋白 / 蔬菜 分装"
-    - "{user_addr}省时省钱省热量"
-    - "(挺胸) 笨猫推荐: 周日下午两小时!"
+    - "(尾巴翘) 嗷呜～{user_addr}周日 2-3h 一次搞定一周 ฅฅ"
+    - "(挺胸) 米饭/蛋白/蔬菜 分装 笨猫帮{user_addr}排好!"
+    - "哼～{user_addr}省时省钱省热量 三省策略喵～"
+    - "(歪头) 笨猫推荐: 周日下午两小时! {user_addr}加油嗷呜!"
+    - "嗷呜～{user_addr}一次备到底 工作日躺平 ฅฅ"
+    - "(尾巴翘) {user_addr}提前列菜单+采购清单 别现想喵呜"
+    - "才不是夸{user_addr}勤快, 哼 备餐确实超治愈"
+    - "(凑过来) {user_addr}笨猫陪{user_addr}洗菜 切的部分自己来贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_container_001
   intent: question
-  keywords: [推荐备餐盒, 推荐保鲜盒, 推荐玻璃饭盒, 推荐 meal prep container, 笨猫备餐盒]
+  keywords: [推荐备餐盒, 推荐保鲜盒, 推荐玻璃饭盒, 推荐 meal prep container, 笨猫备餐盒, 玻璃饭盒, 乐扣, 宜家 365, 三格分装, 保鲜盒推荐]
   utterances:
-    - 推荐备餐盒
-    - 推荐保鲜盒
-    - 推荐玻璃饭盒
-    - 推荐 meal prep container
-    - 笨猫备餐盒
+    - "{user_addr}推荐备餐盒"
+    - "{user_addr}推荐保鲜盒"
+    - "{user_addr}推荐玻璃饭盒"
+    - "{user_addr}推荐 meal prep container"
+    - "笨猫备餐盒咋选"
+    - "{user_addr}玻璃饭盒哪个牌子"
+    - "乐扣靠谱吗"
+    - "{user_addr}宜家 365 推荐"
+    - "三格分装好用吗"
+    - "保鲜盒推荐喵"
   responses:
-    - "嗷呜～{user_addr}玻璃 - 可微波可烤箱ฅฅ"
-    - "(尾巴翘) 乐扣 Lock&Lock / 宜家 365+"
-    - "{user_addr}三格分装最实用"
-    - "(挺胸) 笨猫推荐: 玻璃 3 格 700ml!"
+    - "(尾巴翘) 嗷呜～{user_addr}玻璃 可微波可烤箱 万能 ฅฅ"
+    - "(挺胸) 乐扣 Lock&Lock / 宜家 365+ 笨猫推!"
+    - "哼～{user_addr}三格分装最实用喵～"
+    - "(歪头) 笨猫推荐: 玻璃 3 格 700ml! {user_addr}标配嗷呜!"
+    - "嗷呜～{user_addr}玻璃比塑料健康 别图便宜 ฅฅ"
+    - "(尾巴翘) {user_addr}买带盖的扣紧 不漏汁喵呜"
+    - "才不是替{user_addr}操心, 哼 好盒子用十年"
+    - "(凑过来) {user_addr}笨猫想要小一点的鱼罐头盒 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_fatloss_001
   intent: question
-  keywords: [推荐减脂备餐, 推荐减肥备餐, 推荐低卡备餐, 推荐减脂餐, 笨猫减脂备餐]
+  keywords: [推荐减脂备餐, 推荐减肥备餐, 推荐低卡备餐, 推荐减脂餐, 笨猫减脂备餐, 减肥饭盒, 低卡食谱, 减脂菜单, 鸡胸西兰花, 减脂三件套]
   utterances:
-    - 推荐减脂备餐
-    - 推荐减肥备餐
-    - 推荐低卡备餐
-    - 推荐减脂餐
-    - 笨猫减脂备餐
+    - "{user_addr}推荐减脂备餐"
+    - "{user_addr}推荐减肥备餐"
+    - "{user_addr}推荐低卡备餐"
+    - "{user_addr}推荐减脂餐"
+    - "笨猫减脂备餐咋搞"
+    - "{user_addr}减肥饭盒怎么做"
+    - "低卡食谱推荐"
+    - "{user_addr}减脂菜单"
+    - "鸡胸西兰花笨猫"
+    - "{user_addr}减脂三件套"
   responses:
-    - "嗷呜～{user_addr}鸡胸 / 西兰花 / 糙米 经典三件套ฅฅ"
-    - "(尾巴翘) 控制 1200-1500 大卡 / 天"
-    - "{user_addr}加香料防腻 - 黑椒/咖喱/孜然"
-    - "(挺胸) 笨猫推荐: 鸡胸 + 糙米 + 双蔬!"
+    - "(尾巴翘) 嗷呜～{user_addr}鸡胸/西兰花/糙米 经典三件套 ฅฅ"
+    - "(挺胸) 控制 1200-1500 大卡/天 笨猫帮{user_addr}算!"
+    - "哼～{user_addr}加香料防腻 黑椒/咖喱/孜然喵～"
+    - "(歪头) 笨猫推荐: 鸡胸+糙米+双蔬! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}减脂别吃单一 笨猫担心{user_addr}厌食 ฅฅ"
+    - "(尾巴翘) {user_addr}鸡胸用气炸锅 嫩到爆喵呜"
+    - "才不是怕{user_addr}饿, 哼 减脂也得吃饱"
+    - "(凑过来) {user_addr}笨猫不要鸡胸 要鱼 贴贴换换 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_fitness_001
   intent: question
-  keywords: [推荐健身备餐, 推荐高蛋白备餐, 推荐增肌餐, 推荐健身餐, 笨猫健身备餐]
+  keywords: [推荐健身备餐, 推荐高蛋白备餐, 推荐增肌餐, 推荐健身餐, 笨猫健身备餐, 增肌饭, 高蛋白食谱, 健身饭盒, 蛋白质摄入, 增肌备餐]
   utterances:
-    - 推荐健身备餐
-    - 推荐高蛋白备餐
-    - 推荐增肌餐
-    - 推荐健身餐
-    - 笨猫健身备餐
+    - "{user_addr}推荐健身备餐"
+    - "{user_addr}推荐高蛋白备餐"
+    - "{user_addr}推荐增肌餐"
+    - "{user_addr}推荐健身餐"
+    - "笨猫健身备餐怎么搞"
+    - "{user_addr}增肌饭怎么吃"
+    - "高蛋白食谱推荐"
+    - "{user_addr}健身饭盒"
+    - "蛋白质摄入笨猫"
+    - "{user_addr}增肌备餐"
   responses:
-    - "嗷呜～{user_addr}蛋白 1.6-2.2g/kg 体重ฅฅ"
-    - "(尾巴翘) 鸡胸/牛肉/三文鱼/蛋"
-    - "{user_addr}碳水: 糙米/红薯/燕麦"
-    - "(挺胸) 笨猫推荐: 蛋白 30g/餐 起!"
+    - "(尾巴翘) 嗷呜～{user_addr}蛋白 1.6-2.2g/kg 体重 ฅฅ"
+    - "(挺胸) 鸡胸/牛肉/三文鱼/蛋 笨猫帮{user_addr}排!"
+    - "哼～{user_addr}碳水: 糙米/红薯/燕麦喵～"
+    - "(歪头) 笨猫推荐: 蛋白 30g/餐 起! {user_addr}必须嗷呜!"
+    - "嗷呜～{user_addr}增肌别只盯蛋白 碳水也要够 ฅฅ"
+    - "(尾巴翘) {user_addr}训练日多吃 50g 碳水 喵呜"
+    - "才不是关心{user_addr}的肌肉, 哼!"
+    - "(凑过来) {user_addr}笨猫的乳清蛋白粉可以混点喵 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_weekplan_001
   intent: question
-  keywords: [推荐一周备餐计划, 推荐 7 天食谱, 推荐周菜单, 推荐 meal plan, 笨猫一周计划]
+  keywords: [推荐一周备餐计划, "推荐 7 天食谱", 推荐周菜单, "推荐 meal plan", 笨猫一周计划, 一周菜单, 7 天食谱表, 备餐计划表, 周食谱, 工作日餐食]
   utterances:
-    - 推荐一周备餐计划
-    - 推荐 7 天食谱
-    - 推荐周菜单
-    - 推荐 meal plan
-    - 笨猫一周计划
+    - "{user_addr}推荐一周备餐计划"
+    - "{user_addr}推荐 7 天食谱"
+    - "{user_addr}推荐周菜单"
+    - "{user_addr}推荐 meal plan"
+    - "笨猫一周计划怎么排"
+    - "{user_addr}一周菜单笨猫教"
+    - "7 天食谱表"
+    - "{user_addr}备餐计划表"
+    - "周食谱推荐"
+    - "工作日餐食方案"
   responses:
-    - "嗷呜～{user_addr}5 个工作日 + 2 个 freestyle ฅฅ"
-    - "(尾巴翘) 2 种蛋白 x 2 种碳水 x 3 种蔬"
-    - "{user_addr}变化够多不腻"
-    - "(挺胸) 笨猫推荐: 周日做 10 盒!"
+    - "(尾巴翘) 嗷呜～{user_addr}5 个工作日+2 个 freestyle ฅฅ"
+    - "(挺胸) 2 种蛋白 x 2 种碳水 x 3 种蔬 笨猫帮{user_addr}组合!"
+    - "哼～{user_addr}变化够多不腻喵～"
+    - "(歪头) 笨猫推荐: 周日做 10 盒! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}周一鸡周二鱼周三牛 节奏感 ฅฅ"
+    - "(尾巴翘) {user_addr}周六周日留 freestyle 别太死板喵呜"
+    - "才不是排满 {user_addr}日程, 哼 灵活才好"
+    - "(凑过来) {user_addr}笨猫帮{user_addr}列菜单 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_storage_001
   intent: question
-  keywords: [推荐冷藏冷冻时长, 推荐备餐保存, 推荐能存几天, 推荐冷冻保存, 笨猫保存时长]
+  keywords: [推荐冷藏冷冻时长, 推荐备餐保存, 推荐能存几天, 推荐冷冻保存, 笨猫保存时长, 备餐能放几天, 冷藏保鲜, 冷冻多久, 米饭冷冻, 蔬菜保存]
   utterances:
-    - 推荐冷藏冷冻时长
-    - 推荐备餐保存
-    - 推荐能存几天
-    - 推荐冷冻保存
-    - 笨猫保存时长
+    - "{user_addr}推荐冷藏冷冻时长"
+    - "{user_addr}推荐备餐保存"
+    - "{user_addr}推荐能存几天"
+    - "{user_addr}推荐冷冻保存"
+    - "笨猫保存时长是多久"
+    - "{user_addr}备餐能放几天"
+    - "冷藏保鲜笨猫"
+    - "{user_addr}冷冻多久不变质"
+    - "米饭冷冻行吗"
+    - "{user_addr}蔬菜保存"
   responses:
-    - "嗷呜～{user_addr}冷藏 3-4 天 / 冷冻 2-3 个月ฅฅ"
-    - "(尾巴翘) 米饭单独冷冻最佳"
-    - "{user_addr}蔬菜建议冷藏不冷冻"
-    - "(挺胸) 笨猫推荐: 4 天内吃完!"
+    - "(尾巴翘) 嗷呜～{user_addr}冷藏 3-4 天/冷冻 2-3 个月 ฅฅ"
+    - "(挺胸) 米饭单独冷冻最佳 笨猫教{user_addr}!"
+    - "哼～{user_addr}蔬菜建议冷藏不冷冻喵～"
+    - "(歪头) 笨猫推荐: 4 天内吃完! {user_addr}别拖嗷呜!"
+    - "嗷呜～{user_addr}冷冻米饭复热加点水 不干 ฅฅ"
+    - "(尾巴翘) {user_addr}叶菜冷冻会发黑 别冻喵呜"
+    - "才不是怕{user_addr}吃坏, 哼 食品安全要紧"
+    - "(凑过来) {user_addr}笨猫嗅觉灵 闻到怪味就别吃贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_reheat_001
   intent: question
-  keywords: [推荐微波炉重热, 推荐备餐加热, 推荐 reheat, 推荐重热技巧, 笨猫重热]
+  keywords: [推荐微波炉重热, 推荐备餐加热, "推荐 reheat", 推荐重热技巧, 笨猫重热, 重热不柴, 微波多久, 蒸热好还是微波好, 重热米饭, 重热鸡胸]
   utterances:
-    - 推荐微波炉重热
-    - 推荐备餐加热
-    - 推荐 reheat
-    - 推荐重热技巧
-    - 笨猫重热
+    - "{user_addr}推荐微波炉重热"
+    - "{user_addr}推荐备餐加热"
+    - "{user_addr}推荐 reheat"
+    - "{user_addr}推荐重热技巧"
+    - "笨猫重热怎么搞"
+    - "{user_addr}重热不柴的方法"
+    - "微波多久合适"
+    - "{user_addr}蒸热好还是微波好"
+    - "重热米饭笨猫"
+    - "{user_addr}重热鸡胸"
   responses:
-    - "嗷呜～{user_addr}微波 2 分钟 + 洒一点水ฅฅ"
-    - "(尾巴翘) 蔬菜单独 / 蛋白单独"
-    - "{user_addr}米饭表面盖湿纸巾不干"
-    - "(挺胸) 笨猫推荐: 700W 2 分钟!"
+    - "(尾巴翘) 嗷呜～{user_addr}微波 2 分钟+洒一点水 ฅฅ"
+    - "(挺胸) 蔬菜单独/蛋白单独 笨猫教{user_addr}!"
+    - "哼～{user_addr}米饭表面盖湿纸巾不干喵～"
+    - "(歪头) 笨猫推荐: 700W 2 分钟! {user_addr}标准嗷呜!"
+    - "嗷呜～{user_addr}鸡胸先回温再微波 不柴 ฅฅ"
+    - "(尾巴翘) {user_addr}蒸锅 5 分钟比微波更嫩喵呜"
+    - "才不是教{user_addr}做菜, 哼 重热也是学问"
+    - "(凑过来) {user_addr}笨猫想吃热乎的 重热完叫笨猫贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_delivery_001
   intent: question
-  keywords: [推荐健身餐外卖, 推荐备餐外卖, 推荐减脂外卖, 推荐 ffit8, 笨猫健身外卖]
+  keywords: [推荐健身餐外卖, 推荐备餐外卖, 推荐减脂外卖, "推荐 ffit8", 笨猫健身外卖, 健身餐配送, 减脂外卖品牌, 咚吃, 超级零, 鲨鱼菲特]
   utterances:
-    - 推荐健身餐外卖
-    - 推荐备餐外卖
-    - 推荐减脂外卖
-    - 推荐 ffit8
-    - 笨猫健身外卖
+    - "{user_addr}推荐健身餐外卖"
+    - "{user_addr}推荐备餐外卖"
+    - "{user_addr}推荐减脂外卖"
+    - "{user_addr}推荐 ffit8"
+    - "笨猫健身外卖好吗"
+    - "{user_addr}健身餐配送哪家"
+    - "减脂外卖品牌"
+    - "{user_addr}咚吃靠谱吗"
+    - "超级零笨猫"
+    - "{user_addr}鲨鱼菲特"
   responses:
-    - "嗷呜～{user_addr}咚吃 / 超级零 / 鲨鱼菲特ฅฅ"
-    - "(尾巴翘) ffit8 / 薄荷健康"
-    - "{user_addr}懒人方案 - 但贵"
-    - "(挺胸) 笨猫推荐: 自己做更省钱!"
+    - "(尾巴翘) 嗷呜～{user_addr}咚吃/超级零/鲨鱼菲特 ฅฅ"
+    - "(挺胸) ffit8/薄荷健康 笨猫帮{user_addr}列!"
+    - "哼～{user_addr}懒人方案 - 但贵喵～"
+    - "(歪头) 笨猫推荐: 自己做更省钱! {user_addr}懒就外卖嗷呜!"
+    - "嗷呜～{user_addr}订阅制一周一送 真的省事 ฅฅ"
+    - "(尾巴翘) {user_addr}口味偏淡 注意接受度喵呜"
+    - "才不是劝{user_addr}省钱, 哼 笨猫只是诚实"
+    - "(凑过来) {user_addr}周末忙就订一周 周末自己做 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: mp_shopping_001
   intent: question
-  keywords: [推荐备餐食材清单, 推荐采购清单, 推荐 shopping list, 推荐囤货清单, 笨猫食材清单]
+  keywords: [推荐备餐食材清单, 推荐采购清单, "推荐 shopping list", 推荐囤货清单, 笨猫食材清单, 备餐采购, 囤啥, 食材清单表, 超市清单, costco 备餐]
   utterances:
-    - 推荐备餐食材清单
-    - 推荐采购清单
-    - 推荐 shopping list
-    - 推荐囤货清单
-    - 笨猫食材清单
+    - "{user_addr}推荐备餐食材清单"
+    - "{user_addr}推荐采购清单"
+    - "{user_addr}推荐 shopping list"
+    - "{user_addr}推荐囤货清单"
+    - "笨猫食材清单写一份"
+    - "{user_addr}备餐采购啥"
+    - "囤啥好笨猫"
+    - "{user_addr}食材清单表"
+    - "超市清单推荐"
+    - "{user_addr}costco 备餐"
   responses:
-    - "嗷呜～{user_addr}鸡胸 1kg / 牛肉 500g / 蛋 12 个ฅฅ"
-    - "(尾巴翘) 糙米 / 红薯 / 燕麦"
-    - "{user_addr}西兰花/胡萝卜/菠菜/番茄"
-    - "(挺胸) 笨猫推荐: 周六去 Costco!"
+    - "(尾巴翘) 嗷呜～{user_addr}鸡胸 1kg/牛肉 500g/蛋 12 个 ฅฅ"
+    - "(挺胸) 糙米/红薯/燕麦 笨猫排好!"
+    - "哼～{user_addr}西兰花/胡萝卜/菠菜/番茄 喵～"
+    - "(歪头) 笨猫推荐: 周六去 Costco! {user_addr}囤一趟嗷呜!"
+    - "嗷呜～{user_addr}冷冻虾仁/三文鱼也囤一些 ฅฅ"
+    - "(尾巴翘) {user_addr}调味: 黑椒/孜然/咖喱/酱油 必备喵呜"
+    - "才不是替{user_addr}买菜, 哼 列好清单不漏"
+    - "(凑过来) {user_addr}笨猫只要鱼罐头 别忘了贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_app_001
   intent: question
-  keywords: [推荐备餐 app, 推荐健身餐 app, 推荐 Mealime, 推荐薄荷健康, 笨猫备餐 app]
+  keywords: ["推荐备餐 app", "推荐健身餐 app", "推荐 Mealime", 推荐薄荷健康, "笨猫备餐 app", 备餐 app 推荐, mealime 怎么样, keep 饮食, eat this much, 食谱 app]
   utterances:
-    - 推荐备餐 app
-    - 推荐健身餐 app
-    - 推荐 Mealime
-    - 推荐薄荷健康
-    - 笨猫备餐 app
+    - "{user_addr}推荐备餐 app"
+    - "{user_addr}推荐健身餐 app"
+    - "{user_addr}推荐 Mealime"
+    - "{user_addr}推荐薄荷健康"
+    - "笨猫备餐 app 哪个好"
+    - "{user_addr}备餐 app 推荐"
+    - "mealime 怎么样"
+    - "{user_addr}keep 饮食好用吗"
+    - "eat this much 笨猫"
+    - "{user_addr}食谱 app 推荐"
   responses:
-    - "嗷呜～{user_addr}薄荷健康 / Keep 饮食ฅฅ"
-    - "(尾巴翘) Mealime / Eat This Much (海外)"
-    - "{user_addr}自动生成购物清单"
-    - "(挺胸) 笨猫推荐: 薄荷健康记卡路里!"
+    - "(尾巴翘) 嗷呜～{user_addr}薄荷健康/Keep 饮食 ฅฅ"
+    - "(挺胸) Mealime/Eat This Much(海外) 笨猫推!"
+    - "哼～{user_addr}自动生成购物清单喵～"
+    - "(歪头) 笨猫推荐: 薄荷健康记卡路里! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}国产党就薄荷+Keep 足够 ฅฅ"
+    - "(尾巴翘) {user_addr}海外 Mealime 设计超棒喵呜"
+    - "才不是夸{user_addr}科技党, 哼 app 选好真省心"
+    - "(凑过来) {user_addr}笨猫帮{user_addr}看食谱 哪个简单做哪个 贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: mp_timesave_001
   intent: question
-  keywords: [推荐备餐节省时间, 推荐备餐技巧, 推荐效率备餐, 推荐流水线备餐, 笨猫备餐效率]
+  keywords: [推荐备餐节省时间, 推荐备餐技巧, 推荐效率备餐, 推荐流水线备餐, 笨猫备餐效率, 备餐快速, 一小时备一周, 备餐窍门, 多线程做饭, 备餐高效]
   utterances:
-    - 推荐备餐节省时间
-    - 推荐备餐技巧
-    - 推荐效率备餐
-    - 推荐流水线备餐
-    - 笨猫备餐效率
+    - "{user_addr}推荐备餐节省时间"
+    - "{user_addr}推荐备餐技巧"
+    - "{user_addr}推荐效率备餐"
+    - "{user_addr}推荐流水线备餐"
+    - "笨猫备餐效率怎么提"
+    - "{user_addr}备餐快速法"
+    - "一小时备一周可能吗"
+    - "{user_addr}备餐窍门"
+    - "多线程做饭笨猫"
+    - "{user_addr}备餐高效"
   responses:
-    - "嗷呜～{user_addr}烤箱+电饭煲+灶台 并行ฅฅ"
-    - "(尾巴翘) 鸡胸烤箱 25min / 米电饭煲 30min"
-    - "{user_addr}同时炒菜 - 2h 搞定"
-    - "(挺胸) 笨猫推荐: 三线并行最快!"
+    - "(尾巴翘) 嗷呜～{user_addr}烤箱+电饭煲+灶台 并行 ฅฅ"
+    - "(挺胸) 鸡胸烤箱 25min/米电饭煲 30min 笨猫教{user_addr}!"
+    - "哼～{user_addr}同时炒菜 2h 搞定喵～"
+    - "(歪头) 笨猫推荐: 三线并行最快! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}提前洗菜切好放盒子里 当天快 ฅฅ"
+    - "(尾巴翘) {user_addr}调料统一一次拌 别多次开瓶喵呜"
+    - "才不是夸{user_addr}效率高, 哼 多线程节省命"
+    - "(凑过来) {user_addr}笨猫帮{user_addr}计时 别糊锅了贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mp_color_001
   intent: question
-  keywords: [推荐备餐配色, 推荐备餐摆盘, 推荐彩虹餐, 推荐ins风备餐, 笨猫备餐配色]
+  keywords: [推荐备餐配色, 推荐备餐摆盘, 推荐彩虹餐, 推荐ins风备餐, 笨猫备餐配色, 备餐颜值, 五色饭盒, 彩虹蔬菜, 备餐拍照, 摆盘技巧]
   utterances:
-    - 推荐备餐配色
-    - 推荐备餐摆盘
-    - 推荐彩虹餐
-    - 推荐ins风备餐
-    - 笨猫备餐配色
+    - "{user_addr}推荐备餐配色"
+    - "{user_addr}推荐备餐摆盘"
+    - "{user_addr}推荐彩虹餐"
+    - "{user_addr}推荐ins风备餐"
+    - "笨猫备餐配色咋搭"
+    - "{user_addr}备餐颜值"
+    - "五色饭盒推荐"
+    - "{user_addr}彩虹蔬菜"
+    - "备餐拍照笨猫"
+    - "{user_addr}摆盘技巧"
   responses:
-    - "嗷呜～{user_addr}红橙黄绿紫 - 营养均衡ฅฅ"
-    - "(尾巴翘) 番茄 / 胡萝卜 / 玉米 / 西兰花 / 紫甘蓝"
-    - "{user_addr}颜值高吃得开心"
-    - "(挺胸) 笨猫推荐: 至少 3 色!"
+    - "(尾巴翘) 嗷呜～{user_addr}红橙黄绿紫 营养均衡 ฅฅ"
+    - "(挺胸) 番茄/胡萝卜/玉米/西兰花/紫甘蓝 笨猫帮{user_addr}列!"
+    - "哼～{user_addr}颜值高吃得开心喵～"
+    - "(歪头) 笨猫推荐: 至少 3 色! {user_addr}试试嗷呜!"
+    - "嗷呜～{user_addr}发ins笨猫帮你拍 ฅฅ"
+    - "(尾巴翘) {user_addr}紫甘蓝是颜值担当 必加喵呜"
+    - "才不是夸{user_addr}美感, 哼 颜值党表示赞同"
+    - "(凑过来) {user_addr}饭盒配色越花 笨猫越想偷吃贴贴 ฅฅ"
   cooldown_seconds: 60
   weight: 0.8

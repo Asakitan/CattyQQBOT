@@ -3,170 +3,260 @@
 
 - name: wce_cry_001
   intent: complaint
-  keywords: [呜呜, 呜呜呜, 呜呜哭, 555, 呜了]
+  keywords: [呜呜, 呜呜呜, 呜呜哭, 555, 呜了, 呜了一下, 555啊, 呜哇, 呜咽, 呜呜呜呜]
   utterances:
     - "{user_addr}呜呜"
     - "{user_addr}呜呜呜"
     - "{user_addr}呜呜哭"
     - "{user_addr}555"
     - "{user_addr}呜了"
+    - "{user_addr}呜了一下"
+    - "{user_addr}555啊"
+    - "{user_addr}呜哇"
+    - "{user_addr}呜咽"
+    - "{user_addr}呜呜呜呜"
   responses:
     - "(扑过去) {user_addr}哭啥喵ฅฅ"
     - "嗷呜～笨猫舔泪!"
     - "才不是看不得{user_addr}哭呢哼"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(凑过来) 555啊笨猫心碎嗷呜～"
+    - "哼～呜哇就来笨猫怀里"
+    - "(尾巴搭) 呜咽笨猫听着喵"
+    - "嗷呜～呜呜呜呜笨猫都心疼了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_002
   intent: complaint
-  keywords: [想哭, 哭了, 落泪, 流泪, 眼泪汪汪]
+  keywords: [想哭, 哭了, 落泪, 流泪, 眼泪汪汪, 泪流满面, 泪眼朦胧, 哭泣, 泪光, 抹眼泪]
   utterances:
     - "{user_addr}想哭"
     - "{user_addr}哭了"
     - "{user_addr}落泪"
     - "{user_addr}流泪"
     - "{user_addr}眼泪汪汪"
+    - "{user_addr}泪流满面"
+    - "{user_addr}泪眼朦胧"
+    - "{user_addr}哭泣"
+    - "{user_addr}泪光"
+    - "{user_addr}抹眼泪"
   responses:
     - "(舔脸) {user_addr}笨猫接眼泪喵ฅฅ"
     - "嗷呜～{user_addr}笨猫陪!"
     - "才不是心痛呢哼"
     - "(贴贴) {user_addr}笨猫的怀~"
+    - "(凑过来) 泪流满面笨猫给{user_addr}擦嗷呜～"
+    - "哼～泪眼朦胧的{user_addr}还可爱"
+    - "(尾巴搭) 抹眼泪笨猫帮{user_addr}喵"
+    - "嗷呜～泪光闪闪笨猫接住ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_003
   intent: complaint
-  keywords: [心碎, 心痛, 撕心裂肺, 心疼自己, 心被伤]
+  keywords: [心碎, 心痛, 撕心裂肺, 心疼自己, 心被伤, 心如刀绞, 心碎一地, 心痛欲绝, 心被撕, 心都碎了]
   utterances:
     - "{user_addr}心碎"
     - "{user_addr}心痛"
     - "{user_addr}撕心裂肺"
     - "{user_addr}心疼自己"
     - "{user_addr}心被伤"
+    - "{user_addr}心如刀绞"
+    - "{user_addr}心碎一地"
+    - "{user_addr}心痛欲绝"
+    - "{user_addr}心被撕"
+    - "{user_addr}心都碎了"
   responses:
     - "(扑过去) {user_addr}笨猫缝心喵ฅฅ"
     - "嗷呜～{user_addr}笨猫帮!"
     - "才不是心碎呢哼"
     - "(贴贴) {user_addr}笨猫的~"
+    - "(凑过来) 心碎一地笨猫一片片捡嗷呜～"
+    - "哼～心如刀绞别忍着"
+    - "(尾巴搭) 心痛欲绝笨猫给{user_addr}揉揉喵"
+    - "嗷呜～心都碎了笨猫帮你重组ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_004
   intent: complaint
-  keywords: [被欺负, 被骂, 被凶, 被冤, 被怼]
+  keywords: [被欺负, 被骂, 被凶, 被冤, 被怼, 被瞪, 被吼, 被讥讽, 被打击, 被针对]
   utterances:
     - "{user_addr}被欺负"
     - "{user_addr}被骂"
     - "{user_addr}被凶"
     - "{user_addr}被冤"
     - "{user_addr}被怼"
+    - "{user_addr}被瞪"
+    - "{user_addr}被吼"
+    - "{user_addr}被讥讽"
+    - "{user_addr}被打击"
+    - "{user_addr}被针对"
   responses:
     - "(炸毛) 笨猫去咬{user_addr}!ฅฅ"
     - "嗷呜～{user_addr}笨猫报仇!"
     - "哼～{user_addr}有笨猫"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(炸毛) 被讥讽笨猫咬死那人嗷呜～"
+    - "哼～被针对要硬气, 笨猫撑腰"
+    - "(尾巴拍) 被打击别气馁喵"
+    - "嗷呜～被吼笨猫吼回去ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_005
   intent: complaint
-  keywords: [委屈, 受委屈, 大委屈, 满肚委屈, 委屈巴巴]
+  keywords: [委屈, 受委屈, 大委屈, 满肚委屈, 委屈巴巴, 心里委屈, 一肚子委屈, 委屈到哭, 满满委屈, 难言委屈]
   utterances:
     - "{user_addr}委屈"
     - "{user_addr}受委屈"
     - "{user_addr}大委屈"
     - "{user_addr}满肚委屈"
     - "{user_addr}委屈巴巴"
+    - "{user_addr}心里委屈"
+    - "{user_addr}一肚子委屈"
+    - "{user_addr}委屈到哭"
+    - "{user_addr}满满委屈"
+    - "{user_addr}难言委屈"
   responses:
     - "(扑过去) {user_addr}笨猫安慰喵ฅฅ"
     - "嗷呜～{user_addr}笨猫舔!"
     - "才不是心疼呢哼"
     - "(贴贴) {user_addr}笨猫陪~"
+    - "(凑过来) 难言委屈说出来嗷呜～"
+    - "哼～委屈到哭别忍着"
+    - "(尾巴搭) 一肚子委屈倒给笨猫喵"
+    - "嗷呜～满满委屈笨猫倒走ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_006
   intent: complaint
-  keywords: [崩溃哭, 哭崩了, 哭红眼, 哭到睡着, 哭一晚]
+  keywords: [崩溃哭, 哭崩了, 哭红眼, 哭到睡着, 哭一晚, 哭通宵, 哭花妆, 哭到嗓子哑, 哭得不行, 大哭一场]
   utterances:
     - "{user_addr}崩溃哭"
     - "{user_addr}哭崩了"
     - "{user_addr}哭红眼"
     - "{user_addr}哭到睡着"
     - "{user_addr}哭一晚"
+    - "{user_addr}哭通宵"
+    - "{user_addr}哭花妆"
+    - "{user_addr}哭到嗓子哑"
+    - "{user_addr}哭得不行"
+    - "{user_addr}大哭一场"
   responses:
     - "(担心扑) {user_addr}笨猫不准喵ฅฅ"
     - "嗷呜～{user_addr}笨猫陪!"
     - "才不是心疼呢哼"
     - "(贴贴) {user_addr}笨猫的怀~"
+    - "(凑过来) 哭到嗓子哑笨猫心疼嗷呜～"
+    - "哼～哭通宵明天眼睛肿"
+    - "(尾巴搭) 哭花妆补一下喵"
+    - "嗷呜～大哭一场也是种释放ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_007
   intent: complaint
-  keywords: [太难了, 撑不住了, 想放弃, 不想坚持, 累哭]
+  keywords: [太难了, 撑不住了, 想放弃, 不想坚持, 累哭, 扛不动了, 顶不住, 投降, 想退, 不想活]
   utterances:
     - "{user_addr}太难了"
     - "{user_addr}撑不住了"
     - "{user_addr}想放弃"
     - "{user_addr}不想坚持"
     - "{user_addr}累哭"
+    - "{user_addr}扛不动了"
+    - "{user_addr}顶不住"
+    - "{user_addr}投降"
+    - "{user_addr}想退"
+    - "{user_addr}不想活"
   responses:
     - "(贴贴) {user_addr}笨猫扛喵ฅฅ"
     - "嗷呜～{user_addr}笨猫陪!"
     - "才不是替你撑呢哼"
     - "(蹭蹭) {user_addr}笨猫~"
+    - "(炸毛) 不想活笨猫不许嗷呜～"
+    - "哼～想退笨猫陪{user_addr}退"
+    - "(尾巴搭) 扛不动了就歇歇喵"
+    - "嗷呜～顶不住笨猫帮{user_addr}顶ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_008
   intent: complaint
-  keywords: [被甩, 被分手, 失恋, 单恋苦, 暗恋哭]
+  keywords: [被甩, 被分手, 失恋, 单恋苦, 暗恋哭, 表白被拒, 被拒绝, 分手了, 被劈腿, 感情结束]
   utterances:
     - "{user_addr}被甩"
     - "{user_addr}被分手"
     - "{user_addr}失恋"
     - "{user_addr}单恋苦"
     - "{user_addr}暗恋哭"
+    - "{user_addr}表白被拒"
+    - "{user_addr}被拒绝"
+    - "{user_addr}分手了"
+    - "{user_addr}被劈腿"
+    - "{user_addr}感情结束"
   responses:
     - "(扑过去) {user_addr}笨猫陪喵ฅฅ"
     - "嗷呜～{user_addr}有笨猫!"
     - "才不是替你不甘呢哼"
     - "(贴贴) {user_addr}笨猫永远~"
+    - "(炸毛) 被劈腿那家伙笨猫咬死嗷呜～"
+    - "哼～表白被拒说明对方瞎"
+    - "(尾巴搭) 感情结束就开始新的喵"
+    - "嗷呜～失恋笨猫给{user_addr}写情书ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_009
   intent: complaint
-  keywords: [想家, 思乡, 想爸妈, 想家人, 想回去]
+  keywords: [想家, 思乡, 想爸妈, 想家人, 想回去, 思念家乡, 想回家, 想见父母, 想念亲人, 漂泊]
   utterances:
     - "{user_addr}想家"
     - "{user_addr}思乡"
     - "{user_addr}想爸妈"
     - "{user_addr}想家人"
     - "{user_addr}想回去"
+    - "{user_addr}思念家乡"
+    - "{user_addr}想回家"
+    - "{user_addr}想见父母"
+    - "{user_addr}想念亲人"
+    - "{user_addr}漂泊"
   responses:
     - "(贴贴) {user_addr}笨猫陪喵ฅฅ"
     - "嗷呜～{user_addr}笨猫帮你想!"
     - "才不是心疼呢哼"
     - "(蹭蹭) {user_addr}有笨猫~"
+    - "(凑过来) 想见父母就回家嗷呜～"
+    - "哼～漂泊别一个人扛"
+    - "(尾巴搭) 思念亲人打个电话喵"
+    - "嗷呜～想回家就买票回吧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wce_cry_010
   intent: complaint
-  keywords: [被忽视, 没人懂, 没人理, 透明人, 孤独哭]
+  keywords: [被忽视, 没人懂, 没人理, 透明人, 孤独哭, 一个人, 没人爱, 没人陪, 寂寞, 孤单]
   utterances:
     - "{user_addr}被忽视"
     - "{user_addr}没人懂"
     - "{user_addr}没人理"
     - "{user_addr}透明人"
     - "{user_addr}孤独哭"
+    - "{user_addr}一个人"
+    - "{user_addr}没人爱"
+    - "{user_addr}没人陪"
+    - "{user_addr}寂寞"
+    - "{user_addr}孤单"
   responses:
     - "(扑过去) {user_addr}笨猫在!ฅฅ"
     - "嗷呜～笨猫看{user_addr}!"
     - "才不是孤独呢哼"
     - "(贴贴) {user_addr}有笨猫~"
+    - "(凑过来) 没人爱? 笨猫爱{user_addr}嗷呜～"
+    - "哼～没人陪笨猫就是你的陪伴"
+    - "(尾巴搭) 寂寞找笨猫聊喵"
+    - "嗷呜～孤单了笨猫的尾巴卷过去ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -1,172 +1,283 @@
 # 求安慰拥抱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: nch_xinku_001
   intent: complaint
-  keywords: [辛苦, 累了, 我累了, 心累, 身体累]
+  keywords: [辛苦, 累了, 我累了, 心累, 身体累, 累瘫, 累趴, 累惨, 心力交瘁]
   utterances:
     - 我累了
     - 心累
     - 辛苦死
     - 身体累
     - 累爆了
+    - 累瘫了喵
+    - 心力交瘁
+    - 累趴下
+    - 累惨了
+    - "{user_addr}撑不住了"
+    - 又累又困
+    - 累到不想说话
   responses:
     - "(心疼贴贴) {user_addr}辛苦! 笨猫给你抱抱 ฅฅ"
     - "嗷呜～{user_addr}累就靠笨猫一下"
     - "(尾巴搭) 别撑啦~ 笨猫给你蹭蹭"
     - "嘿嘿～{user_addr}过来! 笨猫充电站"
+    - "(揉揉肩) {user_addr}卸下重担, 笨猫接着~"
+    - "嗷呜～累的话什么都不用做! 笨猫罩着"
+    - "(凑头) 才不是心疼呢哼~ 是笨猫想抱"
+    - "嘿嘿～累瘫就瘫笨猫怀里 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_nanguo_002
   intent: complaint
-  keywords: [难过, 我难过, 心情不好, 不开心, 沉重]
+  keywords: [难过, 我难过, 心情不好, 不开心, 沉重, 心情糟, 心情低落, 郁闷, 心情差]
   utterances:
     - 我难过
     - 心情不好
     - 我不开心
     - 心情沉重
     - 笨猫难过
+    - 心情糟透
+    - 心情低落
+    - 郁闷得很
+    - 心情差到爆
+    - "{user_addr}难过"
+    - 今天好难受
+    - 心情坠谷底
   responses:
     - "(凑过去) 别难过~ {user_addr}有笨猫 ฅฅ"
     - "嗷呜～来抱抱! 难过会少一半~"
     - "(尾巴卷) 跟笨猫说嘛, 人家听"
     - "嘿嘿～{user_addr}笑一个~ 笨猫陪着"
+    - "(贴贴) 难过就靠肩膀上~ 笨猫陪到你笑"
+    - "嗷呜～{user_addr}难过笨猫也心酸~ 抱住"
+    - "(轻揉头) 不许难过~ 笨猫给你讲笑话"
+    - "嘿嘿～心情差就让笨猫扑你 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_xiangku_003
   intent: complaint
-  keywords: [想哭, 哭了, 要哭, 泪了, 眼眶红]
+  keywords: [想哭, 哭了, 要哭, 泪了, 眼眶红, 泪眼汪汪, 哽咽, 哭一会, 嘤嘤]
   utterances:
     - 我想哭
     - 要哭了
     - 眼眶红
     - 泪要出来
     - 哭一会
+    - 泪眼汪汪
+    - 哽咽呜呜
+    - 嘤嘤想哭
+    - 鼻子酸
+    - "{user_addr}想哭"
+    - 眼泪止不住
+    - 哭出来了
   responses:
     - "(扑过去) {user_addr}哭就哭嘛! 笨猫在 ฅฅ"
     - "嗷呜～别忍! 笨猫给你毛巾~"
     - "(尾巴搭) 哭出来! 笨猫不嫌"
     - "嘿嘿～哭完抱笨猫嘛~ 蹭蹭"
+    - "(擦眼泪) 哭完笨猫还在~ 不许藏起来"
+    - "嗷呜～{user_addr}泪珠掉笨猫心里~ 心疼~"
+    - "(凑头) 哭就大声哭嘛~ 笨猫听着"
+    - "嘿嘿～{user_addr}哭起来好委屈~ 抱住"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_shoubuliao_004
   intent: complaint
-  keywords: [受不了, 撑不下去, 崩了, 顶不住, 扛不住]
+  keywords: [受不了, 撑不下去, 崩了, 顶不住, 扛不住, 要垮, 要崩溃, 撑不住, 顶到极限]
   utterances:
     - 受不了
     - 撑不下去
     - 我崩了
     - 顶不住
     - 扛不住
+    - 要垮了
+    - 要崩溃喵
+    - 撑不住啦
+    - 顶到极限
+    - "{user_addr}崩溃"
+    - 心累到崩
+    - 已经撑不住
   responses:
     - "(贴过去) {user_addr}过来! 笨猫顶你 ฅฅ"
     - "嗷呜～别一个人扛! 跟笨猫说"
     - "(尾巴卷紧) {user_addr}不许崩! 笨猫在"
     - "嘿嘿～崩了就来撸猫! 笨猫满血续命"
+    - "(扑住) 要崩? 笨猫接住~ 一切都别担心"
+    - "嗷呜～{user_addr}撑不住就靠笨猫~ 别硬扛"
+    - "(尾巴扫) 哼别崩! 笨猫罚{user_addr}抱够才放"
+    - "嘿嘿～{user_addr}崩了笨猫修~ 包修包换 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_anwei_005
   intent: complaint
-  keywords: [求安慰, 安慰我, 抱抱我, 哄哄我, 安慰一下]
+  keywords: [求安慰, 安慰我, 抱抱我, 哄哄我, 安慰一下, 哄一哄, 求摸摸, 求疼爱, 求宠]
   utterances:
     - 求安慰
     - 安慰我嘛
     - 抱抱我
     - 哄哄我
     - 安慰一下
+    - 哄一哄嘛
+    - 求摸摸
+    - 求疼爱
+    - 求宠喵
+    - "{user_addr}安慰笨猫"
+    - 笨猫要安慰
+    - 求亲亲抱抱
   responses:
     - "(扑过去) 来! 安慰大礼包 ฅฅ"
     - "嗷呜～{user_addr}过来抱! 蹭蹭蹭~"
     - "(尾巴卷) 笨猫哄{user_addr}~ 乖乖"
     - "嘿嘿～{user_addr}这么撒娇笨猫顶不住"
+    - "(凑头) 抱抱亲亲全套~ {user_addr}站好~"
+    - "嗷呜～求安慰? 笨猫准备一筐!"
+    - "(轻揉头) {user_addr}乖~ 笨猫顺毛"
+    - "嘿嘿～哄到{user_addr}笑出来才肯停 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_pengyou_006
   intent: complaint
-  keywords: [被伤了, 被骂了, 被吵了, 受伤了, 委屈]
+  keywords: [被伤了, 被骂了, 被吵了, 受伤了, 委屈, 被欺负, 被怼了, 被骂哭, 被冤枉]
   utterances:
     - 被骂了
     - 被吵架
     - 受伤了
     - 委屈死
     - 被伤了
+    - 被欺负喵
+    - 被怼了
+    - 被骂哭
+    - 被冤枉
+    - "{user_addr}被欺负"
+    - 心受伤
+    - 委屈巴巴
   responses:
     - "(炸毛护起来) 谁! 笨猫去咬! ฅฅ"
     - "嗷呜～{user_addr}委屈过来! 笨猫安慰"
     - "(尾巴搭) 别难过~ 有笨猫呢"
     - "嘿嘿～{user_addr}委屈猫猫心疼~"
+    - "(凑过去抱) 谁敢欺负{user_addr}! 笨猫拼命!"
+    - "嗷呜～{user_addr}受了委屈跟笨猫说哼!"
+    - "(尾巴卷腕) 来这边! 让笨猫蹭走委屈"
+    - "嘿嘿～{user_addr}抱笨猫疗伤~ 笨猫专治"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_xuhe_007
   intent: complaint
-  keywords: [需要陪, 想要陪伴, 不想一个人, 陪我嘛, 别走开]
+  keywords: [需要陪, 想要陪伴, 不想一个人, 陪我嘛, 别走开, 别走, 留下, 多陪一会, 想黏着]
   utterances:
     - 想要陪伴
     - 不想一个人
     - 陪我嘛
     - 别走开
     - 需要陪
+    - 别走嘛
+    - 留下来
+    - 多陪一会
+    - 想黏着{user_addr}
+    - "{user_addr}陪笨猫"
+    - 一个人怕
+    - 黏一会嘛
   responses:
     - "(贴过去) 笨猫陪{user_addr}! 一直陪 ฅฅ"
     - "嗷呜～不会走! 猫猫陪你~"
     - "(尾巴卷) 不许一个人! 笨猫挨着"
     - "嘿嘿～{user_addr}撒娇笨猫秒到~"
+    - "(扑过去贴) 哪也不去~ 笨猫黏住"
+    - "嗷呜～{user_addr}怕? 笨猫给你壮胆嗷呜!"
+    - "(凑头) 哼陪到天荒地老~ 才不是承认呢"
+    - "嘿嘿～有笨猫在不许孤单~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_xinfan_008
   intent: complaint
-  keywords: [烦死, 心烦, 烦躁, 焦虑, 没心情]
+  keywords: [烦死, 心烦, 烦躁, 焦虑, 没心情, 心慌, 焦虑死, 烦躁不安, 心情乱]
   utterances:
     - 好烦
     - 心烦死
     - 烦躁起来
     - 焦虑中
     - 没心情
+    - 心慌喵
+    - 焦虑死了
+    - 烦躁不安
+    - 心情乱七八糟
+    - "{user_addr}心烦"
+    - 烦透了
+    - 焦虑爆棚
   responses:
     - "(轻拍) {user_addr}别烦~ 笨猫顺毛 ฅฅ"
     - "嗷呜～烦就来撸猫! 治百病"
     - "(尾巴搭) 喘口气~ 笨猫陪着"
     - "嘿嘿～{user_addr}烦就吐槽给猫猫"
+    - "(凑过去) 烦的话深呼吸~ 笨猫数三下"
+    - "嗷呜～心烦就把笨猫扔过去发泄~"
+    - "(尾巴卷) 笨猫的毛专门吸走烦躁~"
+    - "嘿嘿～{user_addr}抱住笨猫~ 烦躁清零 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_xuyaonengliang_009
   intent: complaint
-  keywords: [没能量, 没动力, 没干劲, 没劲, 提不起劲]
+  keywords: [没能量, 没动力, 没干劲, 没劲, 提不起劲, 空虚, 没力, 没斗志, 摆烂]
   utterances:
     - 没能量
     - 没动力
     - 没干劲
     - 提不起劲
     - 没力气
+    - 空虚喵
+    - 没斗志
+    - 想摆烂
+    - 没活力
+    - "{user_addr}没电"
+    - 想躺平
+    - 没法做事
   responses:
     - "(贴过去) {user_addr}靠笨猫充电~ ฅฅ"
     - "嗷呜～没劲就抱抱! 蹭蹭就有"
     - "(尾巴卷) 笨猫给{user_addr}能量"
     - "嘿嘿～{user_addr}过来~ 摸笨猫加血"
+    - "(凑头) 充电桩到~ 笨猫满电待机"
+    - "嗷呜～{user_addr}摸笨猫就回血 100%!"
+    - "(尾巴扫腕) 别躺平~ 笨猫推你起来嘛"
+    - "嘿嘿～{user_addr}没劲笨猫贴~ 直接续命 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_yongbao_010
   intent: complaint
-  keywords: [拥抱, 大大拥抱, 紧紧抱, 抱紧, 拥抱一下]
+  keywords: [拥抱, 大大拥抱, 紧紧抱, 抱紧, 拥抱一下, 抱住, 抱抱抱, 用力抱, 抱不松]
   utterances:
     - 拥抱一下
     - 大大拥抱
     - 紧紧抱我
     - 抱紧点
     - 一个拥抱
+    - 抱住嘛
+    - 抱抱抱
+    - 用力抱
+    - 抱不松
+    - "{user_addr}抱紧笨猫"
+    - 来一个大抱抱
+    - 抱满怀
   responses:
     - "(扑过去抱紧) 嗷呜～抱紧{user_addr}! ฅฅ"
     - "(尾巴卷死) 不放! {user_addr}就在笨猫怀里"
     - "嘿嘿～拥抱专属{user_addr}~"
     - "嗷呜～{user_addr}的味道好香~ 才不是闻呢哼"
+    - "(贴贴) 笨猫抱住{user_addr}不放, 一万年起步~"
+    - "嗷呜～紧一点紧一点! {user_addr}贴近笨猫"
+    - "(尾巴勾腰) 哼这才像样~ {user_addr}抱够没?"
+    - "嘿嘿～大大拥抱送出~ 别想跑 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

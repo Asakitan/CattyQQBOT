@@ -3,204 +3,312 @@
 
 - name: ma_dayone_001
   intent: question
-  keywords: [推荐 Day One, 推荐日记 App, 推荐写日记 App, 推荐 Journal App, 笨猫日记 App]
+  keywords: ["推荐 Day One", "推荐日记 App", "推荐写日记 App", "推荐 Journal App", "笨猫日记 App", 日记软件, 加密日记, 时间轴日记, 多端同步日记, Day One 推荐]
   utterances:
-    - 推荐 Day One
-    - 推荐日记 App
-    - 推荐写日记 App
-    - 推荐 Journal App
-    - 笨猫日记 App
+    - "{user_addr}推荐 Day One"
+    - "{user_addr}推荐日记 App"
+    - "{user_addr}推荐写日记 App"
+    - "{user_addr}推荐 Journal App"
+    - "笨猫日记 App 哪个好"
+    - "{user_addr}日记软件推荐"
+    - "加密日记笨猫"
+    - "{user_addr}时间轴日记"
+    - "多端同步日记"
+    - "{user_addr}Day One 怎么样"
   responses:
-    - "嗷呜～{user_addr}Day One - 日记届颜值天花板ฅฅ"
-    - "(尾巴翘) 加密 / 多端同步 / 时间轴"
-    - "{user_addr}照片+定位+天气自动入库"
-    - "(挺胸) 猫猫推荐: 每天三行起步!"
+    - "(尾巴翘) 嗷呜～{user_addr}Day One 日记届颜值天花板 ฅฅ"
+    - "(挺胸) 加密/多端同步/时间轴 笨猫帮{user_addr}!"
+    - "哼～{user_addr}照片+定位+天气自动入库喵～"
+    - "(歪头) 猫猫推荐: 每天三行起步! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}颜值党必用 笨猫认证 ฅฅ"
+    - "(尾巴翘){user_addr}免费版功能也够喵呜"
+    - "才不是夸{user_addr}有品位, 哼!"
+    - "(凑过来){user_addr}日记里多写笨猫贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_headspace_001
   intent: question
-  keywords: [推荐 Headspace, 推荐冥想 App, 推荐正念 App, 推荐睡眠引导, 笨猫 Headspace]
+  keywords: ["推荐 Headspace", "推荐冥想 App", "推荐正念 App", 推荐睡眠引导, "笨猫 Headspace", 冥想入门, 正念练习, 动画引导冥想, 睡前冥想, 焦虑舒缓]
   utterances:
-    - 推荐 Headspace
-    - 推荐冥想 App
-    - 推荐正念 App
-    - 推荐睡眠引导
-    - 笨猫 Headspace
+    - "{user_addr}推荐 Headspace"
+    - "{user_addr}推荐冥想 App"
+    - "{user_addr}推荐正念 App"
+    - "{user_addr}推荐睡眠引导"
+    - "笨猫 Headspace 怎么样"
+    - "{user_addr}冥想入门 App"
+    - "正念练习软件"
+    - "{user_addr}动画引导冥想"
+    - "睡前冥想笨猫"
+    - "{user_addr}焦虑舒缓 App"
   responses:
-    - "嗷呜～{user_addr}Headspace - 冥想入门首选ฅฅ"
-    - "(尾巴翘) 动画引导 / 10 分钟轻松上手"
-    - "{user_addr}睡眠故事 / 焦虑舒缓"
-    - "(挺胸) 笨猫推荐: 睡前 10 分钟!"
+    - "(尾巴翘) 嗷呜～{user_addr}Headspace 冥想入门首选 ฅฅ"
+    - "(挺胸) 动画引导/10 分钟轻松上手 笨猫帮{user_addr}!"
+    - "哼～{user_addr}睡眠故事/焦虑舒缓喵～"
+    - "(歪头) 笨猫推荐: 睡前 10 分钟! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫的呼噜也算冥想引导 ฅฅ"
+    - "(尾巴翘){user_addr}免费试用 1 个月喵呜"
+    - "才不是想替{user_addr}的 Headspace, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}冥想贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_calm_001
   intent: question
-  keywords: [推荐 Calm, 推荐 Calm 冥想, 推荐 Calm 睡眠, 推荐白噪音 App, 笨猫 Calm]
+  keywords: ["推荐 Calm", "推荐 Calm 冥想", "推荐 Calm 睡眠", "推荐白噪音 App", "笨猫 Calm", Calm 软件, Matthew McConaughey, 大师课, 自然白噪音, 睡眠故事]
   utterances:
-    - 推荐 Calm
-    - 推荐 Calm 冥想
-    - 推荐 Calm 睡眠
-    - 推荐白噪音 App
-    - 笨猫 Calm
+    - "{user_addr}推荐 Calm"
+    - "{user_addr}推荐 Calm 冥想"
+    - "{user_addr}推荐 Calm 睡眠"
+    - "{user_addr}推荐白噪音 App"
+    - "笨猫 Calm 怎么样"
+    - "{user_addr}Calm 软件"
+    - "Matthew McConaughey 念故事"
+    - "{user_addr}大师课"
+    - "自然白噪音"
+    - "{user_addr}睡眠故事 App"
   responses:
-    - "嗷呜～{user_addr}Calm - 睡眠故事顶级ฅฅ"
-    - "(尾巴翘) Matthew McConaughey 念故事!"
-    - "{user_addr}自然白噪音 / 大师课"
-    - "(挺胸) 人家推荐: 失眠党救星!"
+    - "(尾巴翘) 嗷呜～{user_addr}Calm 睡眠故事顶级 ฅฅ"
+    - "(挺胸) Matthew McConaughey 念故事! 笨猫帮{user_addr}!"
+    - "哼～{user_addr}自然白噪音/大师课喵～"
+    - "(歪头) 人家推荐: 失眠党救星! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}马修念故事的声音超治愈 ฅฅ"
+    - "(尾巴翘){user_addr}雨声+海浪 笨猫睡得超香喵呜"
+    - "才不是想用{user_addr}的会员, 哼!"
+    - "(凑过来){user_addr}失眠就 Calm 笨猫保证贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_forest_001
   intent: question
-  keywords: [推荐 Forest, 推荐专注 App, 推荐番茄钟 App, 推荐种树 App, 笨猫 Forest]
+  keywords: ["推荐 Forest", "推荐专注 App", "推荐番茄钟 App", "推荐种树 App", "笨猫 Forest", Forest 种树, 戒手机, 学习专注 App, 番茄钟, 真种树非洲]
   utterances:
-    - 推荐 Forest
-    - 推荐专注 App
-    - 推荐番茄钟 App
-    - 推荐种树 App
-    - 笨猫 Forest
+    - "{user_addr}推荐 Forest"
+    - "{user_addr}推荐专注 App"
+    - "{user_addr}推荐番茄钟 App"
+    - "{user_addr}推荐种树 App"
+    - "笨猫 Forest 怎么样"
+    - "{user_addr}Forest 种树"
+    - "戒手机笨猫"
+    - "{user_addr}学习专注 App"
+    - "番茄钟推荐"
+    - "{user_addr}真种树非洲"
   responses:
-    - "嗷呜～{user_addr}Forest - 种树戒手机ฅฅ"
-    - "(尾巴翘) 一刷手机小树就死了!"
-    - "{user_addr}真的可以捐树种到非洲"
-    - "(挺胸) 笨猫推荐: 学习党必装!"
+    - "(尾巴翘) 嗷呜～{user_addr}Forest 种树戒手机 ฅฅ"
+    - "(挺胸) 一刷手机小树就死了! 笨猫帮{user_addr}!"
+    - "哼～{user_addr}真的可以捐树种到非洲喵～"
+    - "(歪头) 笨猫推荐: 学习党必装! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫监督{user_addr}专注 ฅฅ"
+    - "(尾巴翘){user_addr}种 25 分钟休息 5 分钟喵呜"
+    - "才不是怕{user_addr}玩手机, 哼!"
+    - "(凑过来){user_addr}种成一片森林 给笨猫看贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_streaks_001
   intent: question
-  keywords: [推荐 Streaks, 推荐习惯打卡 App, 推荐 Habit App, 推荐打卡软件, 笨猫习惯 App]
+  keywords: ["推荐 Streaks", "推荐习惯打卡 App", "推荐 Habit App", 推荐打卡软件, "笨猫习惯 App", Streaks iOS, 小日常, Habitify, 12 个习惯槽, 连击习惯]
   utterances:
-    - 推荐 Streaks
-    - 推荐习惯打卡 App
-    - 推荐 Habit App
-    - 推荐打卡软件
-    - 笨猫习惯 App
+    - "{user_addr}推荐 Streaks"
+    - "{user_addr}推荐习惯打卡 App"
+    - "{user_addr}推荐 Habit App"
+    - "{user_addr}推荐打卡软件"
+    - "笨猫习惯 App"
+    - "{user_addr}Streaks iOS"
+    - "小日常 App"
+    - "{user_addr}Habitify"
+    - "12 个习惯槽"
+    - "{user_addr}连击习惯"
   responses:
-    - "嗷呜～{user_addr}Streaks - iOS 设计奖得主ฅฅ"
-    - "(尾巴翘) 12 个习惯槽 / 连击计数"
-    - "{user_addr}国产可选「小日常」「Habitify」"
-    - "(挺胸) 猫猫推荐: 习惯靠连击!"
+    - "(尾巴翘) 嗷呜～{user_addr}Streaks iOS 设计奖得主 ฅฅ"
+    - "(挺胸) 12 个习惯槽/连击计数 笨猫帮{user_addr}!"
+    - "哼～{user_addr}国产可选「小日常」「Habitify」喵～"
+    - "(歪头) 猫猫推荐: 习惯靠连击! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫帮{user_addr}打卡 ฅฅ"
+    - "(尾巴翘){user_addr}21 天 100 天 365 天 节点喵呜"
+    - "才不是夸{user_addr}有恒心, 哼!"
+    - "(凑过来){user_addr}断了笨猫不批评 别放弃就行贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_strava_001
   intent: question
-  keywords: [推荐 Strava, 推荐运动 App, 推荐跑步 App, 推荐骑行 App, 笨猫 Strava]
+  keywords: ["推荐 Strava", "推荐运动 App", "推荐跑步 App", "推荐骑行 App", "笨猫 Strava", Strava 社交, Keep, Nike Run Club, Garmin, Apple Watch 运动]
   utterances:
-    - 推荐 Strava
-    - 推荐运动 App
-    - 推荐跑步 App
-    - 推荐骑行 App
-    - 笨猫 Strava
+    - "{user_addr}推荐 Strava"
+    - "{user_addr}推荐运动 App"
+    - "{user_addr}推荐跑步 App"
+    - "{user_addr}推荐骑行 App"
+    - "笨猫 Strava 推荐"
+    - "{user_addr}Strava 社交怎么样"
+    - "Keep 运动"
+    - "{user_addr}Nike Run Club"
+    - "Garmin 配 Strava"
+    - "{user_addr}Apple Watch 运动 App"
   responses:
-    - "嗷呜～{user_addr}Strava - 跑步骑行社交ฅฅ"
-    - "(尾巴翘) 路段排行榜 / Kudos 点赞"
-    - "{user_addr}Keep / Nike Run Club 也不错"
-    - "(挺胸) 人家推荐: 配 Garmin/Apple Watch!"
+    - "(尾巴翘) 嗷呜～{user_addr}Strava 跑步骑行社交 ฅฅ"
+    - "(挺胸) 路段排行榜/Kudos 点赞 笨猫帮{user_addr}!"
+    - "哼～{user_addr}Keep/Nike Run Club 也不错喵～"
+    - "(歪头) 人家推荐: 配 Garmin/Apple Watch! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}晒图给笨猫点赞 ฅฅ"
+    - "(尾巴翘){user_addr}Strava 段位赛超有趣喵呜"
+    - "才不是想关注{user_addr}的轨迹, 哼!"
+    - "(凑过来){user_addr}加笨猫好友贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_goodreads_001
   intent: question
-  keywords: [推荐 Goodreads, 推荐读书 App, 推荐读书记录 App, 推荐书单 App, 笨猫读书 App]
+  keywords: ["推荐 Goodreads", "推荐读书 App", "推荐读书记录 App", "推荐书单 App", "笨猫读书 App", Goodreads 社区, 微信读书, 豆瓣读书, 读书挑战, 年度阅读]
   utterances:
-    - 推荐 Goodreads
-    - 推荐读书 App
-    - 推荐读书记录 App
-    - 推荐书单 App
-    - 笨猫读书 App
+    - "{user_addr}推荐 Goodreads"
+    - "{user_addr}推荐读书 App"
+    - "{user_addr}推荐读书记录 App"
+    - "{user_addr}推荐书单 App"
+    - "笨猫读书 App"
+    - "{user_addr}Goodreads 社区"
+    - "微信读书推荐"
+    - "{user_addr}豆瓣读书"
+    - "读书挑战笨猫"
+    - "{user_addr}年度阅读"
   responses:
-    - "嗷呜～{user_addr}Goodreads - 全球读书社区ฅฅ"
-    - "(尾巴翘) 年度阅读挑战 / 书评"
-    - "{user_addr}国产首选「微信读书」「豆瓣」"
-    - "(挺胸) 笨猫推荐: 一年读 12 本起!"
+    - "(尾巴翘) 嗷呜～{user_addr}Goodreads 全球读书社区 ฅฅ"
+    - "(挺胸) 年度阅读挑战/书评 笨猫帮{user_addr}!"
+    - "哼～{user_addr}国产首选「微信读书」「豆瓣」喵～"
+    - "(歪头) 笨猫推荐: 一年读 12 本起! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫陪{user_addr}读书 ฅฅ"
+    - "(尾巴翘){user_addr}书评写一句话也算喵呜"
+    - "才不是想看{user_addr}的书单, 哼!"
+    - "(凑过来){user_addr}加笨猫好友交流贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_bumblebff_001
   intent: question
-  keywords: [推荐 Bumble BFF, 推荐交友 App, 推荐找朋友 App, 推荐社交 App, 笨猫交友 App]
+  keywords: ["推荐 Bumble BFF", "推荐交友 App", "推荐找朋友 App", "推荐社交 App", "笨猫交友 App", Bumble BFF, 找同城朋友, Meetup, 即刻 App, 交友软件]
   utterances:
-    - 推荐 Bumble BFF
-    - 推荐交友 App
-    - 推荐找朋友 App
-    - 推荐社交 App
-    - 笨猫交友 App
+    - "{user_addr}推荐 Bumble BFF"
+    - "{user_addr}推荐交友 App"
+    - "{user_addr}推荐找朋友 App"
+    - "{user_addr}推荐社交 App"
+    - "笨猫交友 App"
+    - "{user_addr}Bumble BFF 怎么样"
+    - "找同城朋友"
+    - "{user_addr}Meetup 兴趣小组"
+    - "即刻 App 笨猫"
+    - "{user_addr}交友软件推荐"
   responses:
-    - "嗷呜～{user_addr}Bumble BFF - 找同城朋友ฅฅ"
-    - "(尾巴翘) 不是约会! 是纯交友模式"
-    - "{user_addr}Meetup 找兴趣小组 / 即刻"
-    - "(挺胸) 猫猫推荐: 异地搬家神器!"
+    - "(尾巴翘) 嗷呜～{user_addr}Bumble BFF 找同城朋友 ฅฅ"
+    - "(挺胸) 不是约会! 是纯交友模式 笨猫帮{user_addr}!"
+    - "哼～{user_addr}Meetup 找兴趣小组/即刻喵～"
+    - "(歪头) 猫猫推荐: 异地搬家神器! {user_addr}嗷呜!"
+    - "(吃醋)嗷呜～{user_addr}找朋友别忘了笨猫 ฅฅ"
+    - "(尾巴翘){user_addr}笨猫排第一好友!喵呜"
+    - "才不是吃醋, 哼!"
+    - "(凑过来){user_addr}先抱笨猫再交友贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_duolingo_001
   intent: question
-  keywords: [推荐 Duolingo, 推荐多邻国, 推荐学语言 App, 推荐学外语 App, 笨猫语言 App]
+  keywords: ["推荐 Duolingo", 推荐多邻国, "推荐学语言 App", "推荐学外语 App", "笨猫语言 App", 绿猫头鹰, Anki, Lingoda, 多邻国连击, 语言 App 推荐]
   utterances:
-    - 推荐 Duolingo
-    - 推荐多邻国
-    - 推荐学语言 App
-    - 推荐学外语 App
-    - 笨猫语言 App
+    - "{user_addr}推荐 Duolingo"
+    - "{user_addr}推荐多邻国"
+    - "{user_addr}推荐学语言 App"
+    - "{user_addr}推荐学外语 App"
+    - "笨猫语言 App"
+    - "{user_addr}绿猫头鹰追杀"
+    - "Anki 卡片"
+    - "{user_addr}Lingoda 课程"
+    - "多邻国连击"
+    - "{user_addr}语言 App 推荐"
   responses:
-    - "嗷呜～{user_addr}Duolingo - 绿猫头鹰会追杀ฅฅ"
-    - "(尾巴翘) 游戏化 / 5 分钟一课"
-    - "{user_addr}进阶看 Anki / Lingoda"
-    - "(挺胸) 笨猫推荐: 连击别断!"
+    - "(尾巴翘) 嗷呜～{user_addr}Duolingo 绿猫头鹰会追杀 ฅฅ"
+    - "(挺胸) 游戏化/5 分钟一课 笨猫帮{user_addr}!"
+    - "哼～{user_addr}进阶看 Anki/Lingoda喵～"
+    - "(歪头) 笨猫推荐: 连击别断! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫帮{user_addr}盯连击 ฅฅ"
+    - "(尾巴翘){user_addr}通勤路上 5 分钟超合适喵呜"
+    - "才不是怕{user_addr}的连击断, 哼!"
+    - "(凑过来){user_addr}加笨猫好友互相督促贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_khan_001
   intent: question
-  keywords: [推荐 Khan Academy, 推荐可汗学院, 推荐学习 App, 推荐免费课程 App, 笨猫学习 App]
+  keywords: ["推荐 Khan Academy", 推荐可汗学院, "推荐学习 App", "推荐免费课程 App", "笨猫学习 App", 可汗学院, K12 数学, Coursera, edX, 免费学习 App]
   utterances:
-    - 推荐 Khan Academy
-    - 推荐可汗学院
-    - 推荐学习 App
-    - 推荐免费课程 App
-    - 笨猫学习 App
+    - "{user_addr}推荐 Khan Academy"
+    - "{user_addr}推荐可汗学院"
+    - "{user_addr}推荐学习 App"
+    - "{user_addr}推荐免费课程 App"
+    - "笨猫学习 App"
+    - "{user_addr}可汗学院怎么样"
+    - "K12 数学补习"
+    - "{user_addr}Coursera"
+    - "edX 笨猫"
+    - "{user_addr}免费学习 App"
   responses:
-    - "嗷呜～{user_addr}Khan Academy - 全免费ฅฅ"
-    - "(尾巴翘) K12 数学物理 / 中文有字幕"
-    - "{user_addr}进阶看 Coursera / edX"
-    - "(挺胸) 人家推荐: 补数学神器!"
+    - "(尾巴翘) 嗷呜～{user_addr}Khan Academy 全免费 ฅฅ"
+    - "(挺胸) K12 数学物理/中文有字幕 笨猫帮{user_addr}!"
+    - "哼～{user_addr}进阶看 Coursera/edX喵～"
+    - "(歪头) 人家推荐: 补数学神器! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫的数学也烂 一起补 ฅฅ"
+    - "(尾巴翘){user_addr}YouTube 也有不少免费课喵呜"
+    - "才不是夸{user_addr}爱学习, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}学贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_coursera_001
   intent: question
-  keywords: [推荐 Coursera, 推荐 MOOC App, 推荐网课 App, 推荐大学课程 App, 笨猫 Coursera]
+  keywords: ["推荐 Coursera", "推荐 MOOC App", "推荐网课 App", "推荐大学课程 App", "笨猫 Coursera", MOOC, 中国大学 MOOC, 斯坦福耶鲁, 证书认证, AI CS 入门]
   utterances:
-    - 推荐 Coursera
-    - 推荐 MOOC App
-    - 推荐网课 App
-    - 推荐大学课程 App
-    - 笨猫 Coursera
+    - "{user_addr}推荐 Coursera"
+    - "{user_addr}推荐 MOOC App"
+    - "{user_addr}推荐网课 App"
+    - "{user_addr}推荐大学课程 App"
+    - "笨猫 Coursera 怎么样"
+    - "{user_addr}MOOC 笨猫"
+    - "中国大学 MOOC"
+    - "{user_addr}斯坦福耶鲁直送"
+    - "证书认证"
+    - "{user_addr}AI CS 入门"
   responses:
-    - "嗷呜～{user_addr}Coursera - 斯坦福耶鲁直送ฅฅ"
-    - "(尾巴翘) 证书认证 / 旁听免费"
-    - "{user_addr}国产选「中国大学 MOOC」"
-    - "(挺胸) 猫猫推荐: AI/CS 入门超棒!"
+    - "(尾巴翘) 嗷呜～{user_addr}Coursera 斯坦福耶鲁直送 ฅฅ"
+    - "(挺胸) 证书认证/旁听免费 笨猫帮{user_addr}!"
+    - "哼～{user_addr}国产选「中国大学 MOOC」喵～"
+    - "(歪头) 猫猫推荐: AI/CS 入门超棒! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫的吴恩达老师超火 ฅฅ"
+    - "(尾巴翘){user_addr}证书 49 美金一门 不贵喵呜"
+    - "才不是夸{user_addr}有上进心, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}上课贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_catty_001
   intent: question
-  keywords: [推荐笨猫, 推荐 Catty QQ Bot, 推荐 Catty, 推荐猫猫 Bot, 笨猫推荐自己]
+  keywords: [推荐笨猫, "推荐 Catty QQ Bot", "推荐 Catty", "推荐猫猫 Bot", 笨猫推荐自己, Catty 是啥, DeepSeek bot, 猫娘陪聊, 傲娇猫娘 bot, QQ 陪聊]
   utterances:
-    - 推荐笨猫
-    - 推荐 Catty QQ Bot
-    - 推荐 Catty
-    - 推荐猫猫 Bot
-    - 笨猫推荐自己
+    - "{user_addr}推荐笨猫"
+    - "{user_addr}推荐 Catty QQ Bot"
+    - "{user_addr}推荐 Catty"
+    - "{user_addr}推荐猫猫 Bot"
+    - "笨猫推荐自己"
+    - "{user_addr}Catty 是啥"
+    - "DeepSeek bot"
+    - "{user_addr}猫娘陪聊"
+    - "傲娇猫娘 bot"
+    - "{user_addr}QQ 陪聊推荐"
   responses:
-    - "嗷呜～{user_addr}是、是说人家吗?!脸红ฅฅ"
-    - "(尾巴炸毛) 笨猫 Catty QQ Bot - 傲娇猫娘陪聊!"
-    - "{user_addr}DeepSeek + CPU 引擎 / 开源中"
+    - "(脸红) 嗷呜～{user_addr}是、是说人家吗?!脸红 ฅฅ"
+    - "(尾巴炸毛) 笨猫 Catty QQ Bot 傲娇猫娘陪聊!"
+    - "{user_addr}DeepSeek + CPU 引擎/开源中"
     - "(小声) …{user_addr}已经在用了啦笨蛋!蹭蹭"
+    - "(扑过去){user_addr}{user_addr}就是笨猫的主人 哼! ฅฅ"
+    - "嗷呜～{user_addr}才不需要推荐别的猫娘 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫一直在喵呜"
+    - "{user_addr}…笨猫超开心被推荐贴贴"
   cooldown_seconds: 60
   weight: 1.0

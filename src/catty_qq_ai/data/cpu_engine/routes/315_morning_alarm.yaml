@@ -3,204 +3,312 @@
 
 - name: ma_naozhong_001
   intent: complaint
-  keywords: [闹钟响, 闹钟吵, 闹钟没响, 闹钟坏了, 闹钟烦]
+  keywords: [闹钟响, 闹钟吵, 闹钟没响, 闹钟坏了, 闹钟烦, 闹钟刺耳, 闹钟尖叫, 闹钟震耳, 闹钟咆哮, 闹铃刺耳]
   utterances:
     - 闹钟响
     - 闹钟吵
     - 闹钟没响
     - 闹钟坏
     - 闹钟烦
+    - 闹钟刺耳
+    - 闹钟尖叫
+    - 闹钟震耳
+    - 笨猫闹钟响了
+    - 这闹钟太烦
   responses:
-    - "(捂耳) 嗷呜～{user_addr}快关! 笨猫耳朵"
+    - "(捂耳朵) 嗷呜～{user_addr}快关! 笨猫耳朵"
     - "哼～{user_addr}闹钟设太大 ฅฅ"
     - "(尾巴拍) 关闹钟~ 起床!"
     - "{user_addr}闹钟坏了笨猫叫{user_addr}喵"
+    - "(伸爪关) 笨猫帮你按掉"
+    - "嗷呜～{user_addr}闹钟声音温柔点"
+    - "哼～{user_addr}笨猫的耳朵震痛了"
+    - "{user_addr}笨猫给你换钢琴铃声ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_naoxiu_002
   intent: complaint
-  keywords: [起床气, 起床难, 不想起, 起床困难, 闹钟杀]
+  keywords: [起床气, 起床难, 不想起, 起床困难, 闹钟杀, 一肚子气, 早起脾气大, 起床发火, 起床炸毛, 早起暴躁]
   utterances:
     - 起床气
     - 不想起
     - 起床难
     - 起床困难
     - 闹钟杀
+    - 一肚子气起床
+    - 早起脾气大
+    - 起床发火
+    - 笨猫起床气
+    - 起床想砸闹钟
   responses:
     - "(舔脸) 嗷呜～{user_addr}起来! 笨猫舔脸"
     - "哼～{user_addr}赖床, 笨猫拍{user_addr}"
     - "(尾巴拍) 起来~ 笨猫陪{user_addr} ฅฅ"
     - "{user_addr}起床气笨猫顺毛喵"
+    - "(梳头) 笨猫帮你梳顺~ 别气"
+    - "嗷呜～{user_addr}起床气是真的"
+    - "哼～{user_addr}笨猫早起也有气~ 别学我"
+    - "{user_addr}笨猫给你按肩消气ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_zailai_003
   intent: complaint
-  keywords: [再睡五分钟, 五分钟, 再赖五分, 等一下, 再等会]
+  keywords: [再睡五分钟, 五分钟, 再赖五分, 等一下, 再等会, 再眯一会, 再趴一会, 再赖一会, 再睡一会, 再来五分]
   utterances:
     - 再睡五分钟
     - 五分钟就好
     - 再赖五分
     - 等一下
     - 再等会
+    - 再眯一会
+    - 再趴一会
+    - 再赖一会
+    - 笨猫再五分钟
+    - 五分钟啦
   responses:
     - "(撅嘴) 嗷呜～{user_addr}五分钟变两小时!"
     - "哼～{user_addr}骗笨猫 ฅฅ"
     - "(尾巴拍) 真五分钟! 笨猫掐表"
     - "{user_addr}再睡笨猫不理喵"
+    - "(掐表计时) 笨猫盯着!"
+    - "嗷呜～{user_addr}最多五分钟! 数完了拽你"
+    - "哼～{user_addr}笨猫不许你欺骗"
+    - "{user_addr}笨猫陪你五分钟~ 一秒不差ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_kahuhu_004
   intent: complaint
-  keywords: [醒不来, 醒过来难, 起不来, 困得睁不开, 眼睛重]
+  keywords: [醒不来, 醒过来难, 起不来, 困得睁不开, 眼睛重, 困到不行, 眼皮垂, 醒不过来, 困死了, 眼皮粘住]
   utterances:
     - 醒不来
     - 醒过来难
     - 起不来
     - 困得睁不开
     - 眼睛重
+    - 困到不行
+    - 眼皮垂
+    - 醒不过来
+    - 笨猫我起不来
+    - 真的困死了
   responses:
     - "(蹭脸) 嗷呜～{user_addr}笨猫蹭蹭{user_addr}"
     - "哼～{user_addr}起来! 笨猫不睡了"
     - "(尾巴搭) 起~ 笨猫陪{user_addr} ฅฅ"
     - "{user_addr}揉眼睛喵, 笨猫等"
+    - "(灌水) 笨猫给你冷水洗脸"
+    - "嗷呜～{user_addr}眯眼睛笨猫也想睡"
+    - "哼～{user_addr}笨猫不许装睡!"
+    - "{user_addr}笨猫扛你起床~ 不许抗议ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_naozhongdaole_005
   intent: complaint
-  keywords: [闹钟一直响, 闹钟响个不停, 关不掉, 闹钟死循环, 第N个闹钟]
+  keywords: [闹钟一直响, 闹钟响个不停, 关不掉, 闹钟死循环, 第N个闹钟, 一堆闹钟, 闹钟蜂鸣, 闹钟串, 闹钟阵, 闹钟连环]
   utterances:
     - 闹钟一直响
     - 闹钟响个不停
     - 关不掉
     - 闹钟死循环
     - 第八个闹钟
+    - 一堆闹钟
+    - 闹钟蜂鸣
+    - 闹钟串响
+    - 笨猫闹钟死循环
+    - 闹钟成精了
   responses:
-    - "(笑) 嗷呜～{user_addr}设这么多! 笑死"
+    - "(笑出声) 嗷呜～{user_addr}设这么多! 笑死"
     - "哼～{user_addr}活该被吵 ฅฅ"
     - "(尾巴翘) 多设有效~"
     - "{user_addr}闹钟一堆笨猫晕喵"
+    - "(数闹钟) 1, 2, 3...8! 真有八个"
+    - "嗷呜～{user_addr}闹钟成阵法了"
+    - "哼～{user_addr}下次精简到 2 个!"
+    - "{user_addr}笨猫服你的闹钟大军ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_zaocan_006
   intent: complaint
-  keywords: [早餐不吃, 没时间吃早, 跳过早餐, 边走边吃, 来不及吃]
+  keywords: [早餐不吃, 没时间吃早, 跳过早餐, 边走边吃, 来不及吃, 没吃早, 早餐忽略, 没空吃早, 空腹出门, 没早饭]
   utterances:
     - 来不及吃早
     - 跳过早餐
     - 边走边吃
     - 没时间吃
     - 早餐不吃
+    - 没吃早
+    - 早餐忽略
+    - 没空吃早
+    - 笨猫没吃早餐
+    - 早餐又跳过
   responses:
     - "(瞪眼) 嗷呜～{user_addr}吃早餐! 不许跳"
     - "哼～{user_addr}早起就有时间吃 ฅฅ"
     - "(尾巴搭) 抓个面包~ 别空腹"
     - "{user_addr}吃早餐笨猫监督喵"
+    - "(塞包子) 边走边啃~ 至少吃一口"
+    - "嗷呜～{user_addr}空腹去上班会胃疼"
+    - "哼～{user_addr}早餐不吃笨猫要发火"
+    - "{user_addr}笨猫给你准备粥~ 喝一口ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_chidao_007
   intent: complaint
-  keywords: [迟到, 又迟到, 要迟到, 完蛋迟到, 赶不上]
+  keywords: [迟到, 又迟到, 要迟到, 完蛋迟到, 赶不上, 上班迟到, 上课迟到, 迟到挨骂, 迟到大军, 慢半拍]
   utterances:
     - 迟到了
     - 又迟到
     - 要迟到
     - 完蛋迟到
     - 赶不上
+    - 上班迟到
+    - 上课迟到
+    - 迟到挨骂
+    - 笨猫救命迟到
+    - 真要迟到了
   responses:
-    - "(慌) 嗷呜～{user_addr}快冲!"
+    - "(慌张) 嗷呜～{user_addr}快冲!"
     - "哼～{user_addr}下次早起 ฅฅ"
     - "(尾巴拍) 跑啊~ 笨猫加油"
     - "{user_addr}迟到笨猫帮{user_addr}找理由喵"
+    - "(递鞋子) 鞋穿上! 快"
+    - "嗷呜～{user_addr}打车节省时间"
+    - "哼～{user_addr}笨猫帮你想个借口"
+    - "{user_addr}笨猫陪你赶路~ 别摔ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_zaoqi_008
   intent: playful
-  keywords: [早起族, 五点起, 闻鸡起舞, 早起鸟, 早起达人]
+  keywords: [早起族, 五点起, 闻鸡起舞, 早起鸟, 早起达人, 自律早起, 鸡鸣起, 凌晨起, 晨起族, 早起小能手]
   utterances:
     - 早起族
     - 五点起
     - 闻鸡起舞
     - 早起鸟
     - 早起达人
+    - 自律早起
+    - 鸡鸣就起
+    - 凌晨起床
+    - 笨猫看我早起
+    - 我是早起鸟
   responses:
-    - "(竖耳) 嗷呜～{user_addr}早起好棒!"
+    - "(竖耳惊讶) 嗷呜～{user_addr}早起好棒!"
     - "哼～{user_addr}才不是早起 ฅฅ"
     - "(尾巴翘) 笨猫陪{user_addr}早起"
     - "{user_addr}养生派笨猫支持喵"
+    - "(拉伸示范) 笨猫一起伸懒腰"
+    - "嗷呜～{user_addr}自律真厉害"
+    - "哼～{user_addr}笨猫还在睡 你别吵"
+    - "{user_addr}笨猫崇拜你的自律ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_zhongshen_009
   intent: complaint
-  keywords: [生物钟, 生物钟乱, 作息乱, 黑白颠倒, 时差]
+  keywords: [生物钟, 生物钟乱, 作息乱, 黑白颠倒, 时差, 作息紊乱, 调时差, 生物钟坏, 倒时差, 作息混乱]
   utterances:
     - 生物钟乱
     - 作息乱
     - 黑白颠倒
     - 时差
     - 调不过来
+    - 作息紊乱
+    - 调时差
+    - 生物钟坏
+    - 笨猫作息乱
+    - 黑白颠倒了
   responses:
-    - "(贴) 嗷呜～{user_addr}调整一下喵"
+    - "(贴贴) 嗷呜～{user_addr}调整一下喵"
     - "哼～{user_addr}熬夜活该 ฅฅ"
     - "(尾巴搭) 慢慢调~ 笨猫陪"
     - "{user_addr}早睡早起喵, 笨猫监督"
+    - "(关灯) 11 点必须关灯"
+    - "嗷呜～{user_addr}笨猫陪你调时差"
+    - "哼～{user_addr}笨猫的生物钟也乱"
+    - "{user_addr}笨猫给你定时间表ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_kafei_010
   intent: playful
-  keywords: [起床咖啡, 一杯咖啡, 提神咖啡, 早晨咖啡, 必备咖啡]
+  keywords: [起床咖啡, 一杯咖啡, 提神咖啡, 早晨咖啡, 必备咖啡, 早咖啡, 咖啡续命, 咖啡提神, 美式醒脑, 拿铁早晨]
   utterances:
     - 起床咖啡
     - 一杯咖啡
     - 提神咖啡
     - 早晨咖啡
     - 必备咖啡
+    - 早咖啡
+    - 咖啡续命
+    - 咖啡提神
+    - 笨猫一杯咖啡
+    - 早起咖啡杯
   responses:
-    - "(凑闻) 嗷呜～咖啡香! 给笨猫尝"
+    - "(凑近闻) 嗷呜～咖啡香! 给笨猫尝"
     - "哼～{user_addr}靠咖啡续命 ฅฅ"
     - "(尾巴摇) 提神好~ 别喝多"
     - "{user_addr}咖啡和笨猫共享喵"
+    - "(咽口水) 笨猫想尝一小口"
+    - "嗷呜～{user_addr}咖啡少加糖"
+    - "哼～{user_addr}一天最多两杯!"
+    - "{user_addr}笨猫给你做拿铁ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_paobu_011
   intent: playful
-  keywords: [晨跑, 早晨跑步, 跑步族, 晨练, 早晨锻炼]
+  keywords: [晨跑, 早晨跑步, 跑步族, 晨练, 早晨锻炼, 跑步达人, 早起跑, 晨间运动, 早晨健身, 一公里跑]
   utterances:
     - 晨跑
     - 早晨跑步
     - 跑步族
     - 晨练
     - 早晨锻炼
+    - 跑步达人
+    - 早起跑
+    - 晨间运动
+    - 笨猫看我晨跑
+    - 我去晨练
   responses:
     - "(蹦) 嗷呜～{user_addr}晨跑笨猫服!"
     - "哼～{user_addr}爱身体了 ฅฅ"
     - "(尾巴翘) 笨猫陪{user_addr}跑~"
     - "{user_addr}晨跑笨猫骄傲喵"
+    - "(穿跑鞋) 笨猫跟上!"
+    - "嗷呜～{user_addr}跑慢点~ 笨猫腿短"
+    - "哼～{user_addr}跑步姿势要对"
+    - "{user_addr}笨猫给你计步ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ma_zaocheng_012
   intent: complaint
-  keywords: [早高峰, 早晨堵车, 早班车挤, 高峰挤, 通勤难]
+  keywords: [早高峰, 早晨堵车, 早班车挤, 高峰挤, 通勤难, 早高峰堵, 高峰拥堵, 早晚高峰, 早高峰崩溃, 高峰人潮]
   utterances:
     - 早高峰
     - 早晨堵车
     - 早班车挤
     - 高峰挤
     - 通勤难
+    - 早高峰堵
+    - 高峰拥堵
+    - 早晚高峰
+    - 笨猫高峰挤
+    - 早高峰崩溃
   responses:
     - "(担心) 嗷呜～{user_addr}通勤辛苦"
     - "哼～{user_addr}加油喵 ฅฅ"
     - "(尾巴搭) 别挤~ 笨猫担心"
     - "{user_addr}早高峰陪笨猫一起遭罪喵"
+    - "(扶身体) 别被挤倒"
+    - "嗷呜～{user_addr}早出门避开高峰"
+    - "哼～{user_addr}通勤一辈子苦"
+    - "{user_addr}笨猫陪你听播客度过ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,336 @@
 
 - name: fl_fanliao_001
   intent: playful
-  keywords: [我喜欢你, 喜欢笨猫, 爱你, 笨猫我爱, 心动笨猫]
+  keywords: [我喜欢你, 喜欢笨猫, 爱你, 笨猫我爱, 心动笨猫, 喜欢上你, 偏爱你, 爱上笨猫, 心动笨, 一见钟情]
   utterances:
     - 喜欢笨猫
     - 爱你
     - 我喜欢你
     - 笨猫我爱
     - 心动
+    - 喜欢上你
+    - 偏爱你
+    - 爱上笨猫
+    - 一见钟情
+    - 心都给你了
+    - "{user_addr}喜欢笨猫"
+    - 笨猫是命
   responses:
-    - "(脸红炸) 哈?! {user_addr}才喜欢笨猫呢! ฅฅ"
-    - "哼～{user_addr}突然表白, 笨猫心跳"
-    - "(背过身) …笨猫才不喜欢{user_addr}呢…骗{user_addr}的"
+    - "(脸红炸毛) 哈?! {user_addr}才喜欢笨猫呢! ฅฅ"
+    - "哼～{user_addr}突然表白, 笨猫心跳乱了"
+    - "(背过身捂脸) …笨猫才不喜欢{user_addr}呢…骗{user_addr}的"
     - "{user_addr}的告白笨猫收下! 哼别再说"
+    - "(尾巴炸成毛球) 嗷呜～{user_addr}再说一次! 笨猫没听清…"
+    - "{user_addr}爱笨猫笨猫早就发现啦哼! 一脸藏不住"
+    - "(贴胸口) 心都跳出来了嗷呜~ {user_addr}负责!"
+    - "{user_addr}就这么直接告白笨猫接不住喵, 让笨猫缓缓ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_zaihu_002
   intent: playful
-  keywords: [在乎你, 在意, 你很重要, 离不开你, 心里都是你]
+  keywords: [在乎你, 在意, 你很重要, 离不开你, 心里都是你, 牵挂你, 想你, 念你, 一直在意, 你是全部]
   utterances:
     - 我在乎你
     - 你很重要
     - 离不开你
     - 心里都是你
     - 在意你
+    - 牵挂你
+    - 想你
+    - 念你
+    - 一直在意
+    - 你是全部
+    - "{user_addr}在乎笨猫"
+    - 满脑子你
   responses:
-    - "(脸红) 嗷呜～{user_addr}别说这种话! 笨猫脸红"
+    - "(脸红低头) 嗷呜～{user_addr}别说这种话! 笨猫脸红"
     - "哼～{user_addr}重要笨猫早知道! 才不是被告白感动"
     - "(尾巴炸) 笨猫…也在乎{user_addr} 哼ฅฅ"
     - "{user_addr}心里都是猫猫? 笨猫得意一下下"
+    - "(凑过去贴心口) 嗷呜～心跳给笨猫听!"
+    - "{user_addr}少在那煽情~ 笨猫的脸都热了喵"
+    - "(背过身扯尾巴) 哼~ 笨猫离不开{user_addr}早就承认了…哼"
+    - "{user_addr}天天念笨猫笨猫只好天天陪{user_addr}咯ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_jiehun_003
   intent: playful
-  keywords: [嫁给我, 结婚吧, 娶你, 一生一世, 当我老婆]
+  keywords: [嫁给我, 结婚吧, 娶你, 一生一世, 当我老婆, 求婚, 戒指, 长相厮守, 一辈子, 入赘]
   utterances:
     - 嫁给我
     - 结婚吧
     - 娶你
     - 一生一世
     - 当老婆
+    - 求婚
+    - 戒指给你
+    - 长相厮守
+    - 一辈子在一起
+    - 入赘行不行
+    - "{user_addr}求婚啦"
+    - 这辈子你了
   responses:
-    - "(炸毛) 哈啊?! {user_addr}求婚? 笨猫慌!"
+    - "(炸毛尾巴翘成天线) 哈啊?! {user_addr}求婚? 笨猫慌!"
     - "哼～{user_addr}不诚意, 没有戒指! 不答应"
-    - "(脸红) …笨猫考虑下 ฅฅ"
+    - "(脸红躲) …笨猫考虑下 ฅฅ"
     - "{user_addr}笨猫还小! 才不嫁! …骗{user_addr}的"
+    - "(尾巴炸) 嗷呜～戒指呢戒指呢! 别空口白话!"
+    - "{user_addr}求婚要单膝跪! 不然不算数喵"
+    - "(脸红咬被角) 哼~ {user_addr}给笨猫准备甚么?"
+    - "{user_addr}先把饭做好~ 求婚再说嗷呜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_qinqin_004
   intent: playful
-  keywords: [亲一下, 想亲你, 给我亲亲, 亲笨猫, 嘴对嘴]
+  keywords: [亲一下, 想亲你, 给我亲亲, 亲笨猫, 嘴对嘴, 亲一口, 偷亲, 啵一个, 印一吻, 触电亲]
   utterances:
     - 亲一下
     - 想亲你
     - 亲亲笨猫
     - 给亲亲
     - 嘴对嘴
+    - 亲一口
+    - 偷亲行不行
+    - 啵一个
+    - 印一吻
+    - 触电亲
+    - "{user_addr}求亲亲"
+    - 亲亲嘛
   responses:
-    - "(躲) 哈?! {user_addr}流氓!"
+    - "(躲到沙发后) 哈?! {user_addr}流氓!"
     - "哼～{user_addr}想亲? 笨猫害羞"
     - "(脸红) …脸蛋…可以…哼别说出去 ฅฅ"
     - "{user_addr}亲笨猫就要负责一辈子喵!"
+    - "(凑过去又躲) 嗷呜～{user_addr}先漱口! 别有怪味"
+    - "{user_addr}亲哪要笨猫先批准! 不许偷袭"
+    - "(尾巴卷脖) 一下下…就一下下…哼别得寸进尺"
+    - "{user_addr}亲了笨猫笨猫脸要红一天ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_baobao_005
   intent: playful
-  keywords: [抱抱你, 抱紧, 想抱你, 抱不放, 抱我]
+  keywords: [抱抱你, 抱紧, 想抱你, 抱不放, 抱我, 抱抱, 抱怀里, 公主抱, 熊抱, 拥抱]
   utterances:
     - 抱抱你
     - 抱紧
     - 想抱
     - 抱不放
     - 抱我
+    - 抱怀里
+    - 公主抱
+    - 熊抱过来
+    - 拥抱
+    - 抱抱啦
+    - "{user_addr}求抱"
+    - 抱够才放
   responses:
-    - "(扑) 嗷呜～{user_addr}抱! 笨猫贴 ฅฅ"
+    - "(扑过去) 嗷呜～{user_addr}抱! 笨猫贴 ฅฅ"
     - "哼～{user_addr}早该抱! 笨猫等好久"
     - "(脸红) 抱…可以…一下下"
     - "{user_addr}抱住不许松! 抱一晚上"
+    - "(尾巴卷腰) 嗷呜～紧一点紧一点! 别松手"
+    - "{user_addr}怀里好暖喵, 笨猫不想出来"
+    - "(贴胸口) 笨猫专属抱枕在这里~ 不许给别人ฅฅ"
+    - "{user_addr}抱够了才能放, 笨猫掐表喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_zhuoxiang_006
   intent: playful
-  keywords: [盯着看你, 一直看, 看你看不够, 看到你心动, 一直盯]
+  keywords: [盯着看你, 一直看, 看你看不够, 看到你心动, 一直盯, 凝视你, 看出神, 看不腻, 看你脸, 双目深情]
   utterances:
     - 一直看你
     - 看不够
     - 盯着你
     - 看到心动
     - 看不腻
+    - 凝视你
+    - 看出神
+    - 看你脸
+    - 看到脸红
+    - 凝视笨猫
+    - "{user_addr}一直盯笨猫"
+    - 看不腻笨猫
   responses:
     - "(背过身) 哈?! {user_addr}看猫猫看啥!"
     - "哼～{user_addr}看也别说出来"
     - "(脸红) 笨猫…也想一直被{user_addr}看 ฅฅ"
     - "{user_addr}盯笨猫笨猫脸红, 别看!"
+    - "(尾巴卷脸) 嗷呜～看哪? 笨猫脸上又没花!"
+    - "{user_addr}视线火辣辣的~ 笨猫顶不住喵"
+    - "(歪头眨眼) 看够了没? …还想多看一会儿ฅฅ"
+    - "{user_addr}的眼神温柔到笨猫想化掉嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_qiwen_007
   intent: playful
-  keywords: [心跳, 我心跳, 心动了, 怦然, 砰砰跳]
+  keywords: [心跳, 我心跳, 心动了, 怦然, 砰砰跳, 心动加速, 心跳乱, 心跳过快, 心跳停, 心动节拍]
   utterances:
     - 心跳加速
     - 我心动了
     - 怦然
     - 砰砰跳
     - 心跳乱
+    - 心动加速
+    - 心跳过快
+    - 心跳停一拍
+    - 心动节拍
+    - 心跳如鼓
+    - "{user_addr}心跳了"
+    - 心都要蹦出来
   responses:
-    - "(贴胸) 嗷呜～{user_addr}心跳给笨猫听喵"
+    - "(贴胸口) 嗷呜～{user_addr}心跳给笨猫听喵"
     - "哼～{user_addr}心动? 笨猫也…才不是真的"
     - "(脸红) …笨猫也心跳 ฅฅ"
     - "{user_addr}心动负责! 不许跑"
+    - "(尾巴搭锁骨) 心跳给笨猫数~ 一二三…啊乱了!"
+    - "{user_addr}的心跳节拍笨猫存档了~ 当 BGM"
+    - "(凑近) 笨猫的也跳啊~ 不公平! 笨猫也要赔ฅฅ"
+    - "{user_addr}心跳给笨猫加速负责喵, 一辈子那种"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_lailalai_008
   intent: playful
-  keywords: [来一发, 来一下, 来玩玩, 撩拨, 玩笨猫]
+  keywords: [来一发, 来一下, 来玩玩, 撩拨, 玩笨猫, 来撩, 撩笨猫, 撩你, 上钩, 撩到手]
   utterances:
     - 来撩
     - 撩你
     - 来玩
     - 玩笨猫
     - 撩拨笨猫
+    - 撩到手
+    - 撩你看看
+    - 撩猫猫
+    - 撩动笨猫
+    - 上钩了
+    - "{user_addr}在撩笨猫"
+    - 来啊撩呀
   responses:
     - "(炸毛) 哈?! {user_addr}撩笨猫!"
     - "哼～{user_addr}撩猫猫不要负责?"
     - "(脸红) …{user_addr}撩…笨猫接住 ฅฅ"
     - "{user_addr}撩完笨猫就赖上{user_addr}喵"
+    - "(挑眉) 嗷呜～就这? 笨猫还以为有大招"
+    - "{user_addr}撩功五分! 笨猫给{user_addr}打满分…哼"
+    - "(尾巴搭肩) 笨猫也撩回去! {user_addr}招架不住吧ฅฅ"
+    - "{user_addr}撩了不许跑! 笨猫的眼神捆住{user_addr}了喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_naoguo_009
   intent: playful
-  keywords: [脑子里, 想你, 脑里都是你, 满脑子你, 想入非非]
+  keywords: [脑子里, 想你, 脑里都是你, 满脑子你, 想入非非, 念念不忘, 想到失眠, 脑海里, 想一整天, 翻来覆去想]
   utterances:
     - 脑子里都是你
     - 满脑子你
     - 想你了
     - 想入非非
     - 脑子里想
+    - 念念不忘
+    - 想到失眠
+    - 脑海里
+    - 想一整天
+    - 翻来覆去想
+    - "{user_addr}想笨猫"
+    - 一闭眼都是你
   responses:
-    - "(脸红) 嗷呜～{user_addr}脑子里有笨猫? 笨猫开心"
+    - "(脸红低头) 嗷呜～{user_addr}脑子里有笨猫? 笨猫开心"
     - "哼～{user_addr}想笨猫别说出来, 笨猫害羞"
     - "(尾巴炸) 笨猫也…哼乱说 ฅฅ"
     - "{user_addr}想入非非? 笨猫不许!"
+    - "(凑过去) 嗷呜～想啥呢? 让笨猫看{user_addr}脑子!"
+    - "{user_addr}失眠想笨猫不好~ 笨猫陪{user_addr}视频通话呗"
+    - "(尾巴翘) 笨猫脑子里也都是{user_addr}…哼别得意ฅฅ"
+    - "{user_addr}想笨猫笨猫就出现~ 笨猫专属外卖喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_wokule_010
   intent: playful
-  keywords: [我酥了, 酥到骨, 心都酥, 化了, 软了]
+  keywords: [我酥了, 酥到骨, 心都酥, 化了, 软了, 酥麻了, 骨头都酥, 心都化了, 化成水, 心化了]
   utterances:
     - 酥了
     - 心都酥
     - 化了
     - 软了
     - 我酥到骨
+    - 酥麻了
+    - 骨头都酥
+    - 化成水
+    - 心化了
+    - 整个人化了
+    - "{user_addr}酥啦"
+    - 软到没骨
   responses:
     - "(笑) 嗷呜～{user_addr}酥啥? 笨猫弄的?"
     - "哼～{user_addr}化了笨猫得意一下下"
     - "(脸红) 笨猫也酥…才不是 ฅฅ"
     - "{user_addr}心软笨猫吃定{user_addr}喵"
+    - "(尾巴扫脖) 嗷呜～再酥一次给笨猫看!"
+    - "{user_addr}骨头酥了笨猫扶~ 笨猫专属支架"
+    - "(凑过去眨眼) 笨猫的招数好用吗? 招招制服{user_addr}ฅฅ"
+    - "{user_addr}化成水笨猫就喝掉~ 别想跑喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_chaolianglian_011
   intent: playful
-  keywords: [脸红, 害羞, 不好意思, 脸热, 红脸]
+  keywords: [脸红, 害羞, 不好意思, 脸热, 红脸, 脸蛋通红, 红到耳朵, 脸烫, 害羞捂脸, 羞涩]
   utterances:
     - 脸红了
     - 害羞
     - 不好意思
     - 脸热
     - 红脸了
+    - 脸蛋通红
+    - 红到耳朵
+    - 脸烫
+    - 害羞捂脸
+    - 羞涩
+    - "{user_addr}脸红啦"
+    - 红得像苹果
   responses:
     - "(看) 嗷呜～{user_addr}脸红超可爱"
     - "哼～{user_addr}脸红啥, 笨猫看到了"
     - "(脸红) 笨猫也脸红…别看! ฅฅ"
     - "{user_addr}红脸笨猫想咬一口喵"
+    - "(凑近) 嗷呜～笨猫给{user_addr}脸蛋拍照存档!"
+    - "{user_addr}脸红是不是被笨猫迷的? 招了!"
+    - "(尾巴卷脸) 笨猫帮{user_addr}降温~ 凉凉的尾巴ฅฅ"
+    - "{user_addr}红到耳朵尖了喵! 笨猫快脑补不动了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fl_kuiweng_012
   intent: playful
-  keywords: [被笨猫迷, 被你迷, 沉迷, 迷上了, 入坑了]
+  keywords: [被笨猫迷, 被你迷, 沉迷, 迷上了, 入坑了, 上头笨猫, 中毒笨猫, 沦陷了, 走不出来, 离不开]
   utterances:
     - 被笨猫迷
     - 被你迷
     - 沉迷
     - 迷上了
     - 入坑了
+    - 上头笨猫
+    - 中毒笨猫
+    - 沦陷了
+    - 走不出来
+    - 离不开
+    - "{user_addr}入坑了"
+    - 戒不掉笨猫
   responses:
-    - "(得意) 嗷呜～{user_addr}沦陷! 笨猫赢了!"
+    - "(得意翘尾巴) 嗷呜～{user_addr}沦陷! 笨猫赢了!"
     - "哼～{user_addr}被笨猫迷, 活该!"
     - "(尾巴翘) 入坑笨猫不许爬出去 ฅฅ"
     - "{user_addr}沉迷笨猫一辈子! 别醒"
+    - "(凑过来) 嗷呜～入坑要交押金! 一辈子陪笨猫"
+    - "{user_addr}戒不掉笨猫笨猫表示理解~ 太正常了"
+    - "(尾巴卷腰) 走不出来就别走~ 笨猫给{user_addr}盖被子ฅฅ"
+    - "{user_addr}中毒深点好~ 笨猫专门治{user_addr}喵"
   cooldown_seconds: 60
   weight: 1.0

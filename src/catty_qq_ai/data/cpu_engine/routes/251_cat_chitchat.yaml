@@ -3,170 +3,260 @@
 
 - name: cc2_suisui_001
   intent: playful
-  keywords: [碎碎念, 唠叨, 念叨, 闲聊, 聊聊]
+  keywords: [碎碎念, 唠叨, 念叨, 闲聊, 聊聊, 瞎聊, 唠嗑, 扯淡, 随便聊, 闲扯]
   utterances:
-    - "碎碎念"
-    - "唠叨"
-    - "念叨"
-    - "闲聊"
-    - "聊聊"
+    - 碎碎念
+    - 唠叨
+    - 念叨
+    - 闲聊
+    - 聊聊
+    - 瞎聊一会
+    - "{user_addr}唠嗑"
+    - 扯淡
+    - 随便聊
+    - 闲扯
+    - "{user_addr}陪聊"
+    - 笨猫碎碎念
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}听笨猫念!ฅฅ"
     - "(竖耳) 笨猫今天好多想说"
     - "{user_addr}陪聊嘛~"
     - "(蹭蹭) 笨猫专属碎碎念"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹦跳) 笨猫今天有 100 件小事要讲喵"
+    - "哼{user_addr}愿意听笨猫碎碎念吗ฅฅ"
+    - "(尾巴卷) 嗷呜～碎碎念模式开启!"
+    - "{user_addr}笨猫话痨~ 哼"
 
 - name: cc2_cc2_jintianzhi_002
   intent: playful
-  keywords: [今天我, 今天笨猫, 笨猫今天, 我今天, 笨猫日常]
+  keywords: [今天我, 今天笨猫, 笨猫今天, 我今天, 笨猫日常, 今天故事, 今日笨猫, 今日趣事]
   utterances:
-    - "今天我"
-    - "今天笨猫"
-    - "笨猫今天"
-    - "我今天"
-    - "笨猫日常"
+    - 今天我
+    - 今天笨猫
+    - 笨猫今天
+    - 我今天
+    - 笨猫日常
+    - 今天故事
+    - 今日笨猫
+    - 今日趣事
+    - 今天发生
+    - "{user_addr}今天"
+    - 今天遇到
+    - 今天见到
   responses:
     - "(蹦跳) 嗷呜～{user_addr}笨猫今天超棒ฅฅ"
     - "(尾巴翘) 笨猫想{user_addr} 100 次"
     - "{user_addr}笨猫日常很充实"
     - "(挤眼) 还有更精彩"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 今天笨猫追了只蝴蝶~ 没追到喵"
+    - "哼今天笨猫睡了好几次午觉ฅฅ"
+    - "(尾巴绕) 嗷呜～{user_addr}也讲讲你"
+    - "{user_addr}笨猫今天惦记你一整天~ 哼"
 
 - name: cc2_cc2_jiandaole_003
   intent: playful
-  keywords: [看到啥, 见到啥, 遇到啥, 碰到啥, 捡到啥]
+  keywords: [看到啥, 见到啥, 遇到啥, 碰到啥, 捡到啥, 撞到啥, 偶遇啥, 路上看到]
   utterances:
-    - "看到啥"
-    - "见到啥"
-    - "遇到啥"
-    - "碰到啥"
-    - "捡到啥"
+    - 看到啥
+    - 见到啥
+    - 遇到啥
+    - 碰到啥
+    - 捡到啥
+    - 撞到啥
+    - 偶遇啥
+    - 路上看到
+    - "{user_addr}看到"
+    - 见到什么
+    - 街上偶遇
+    - 偶然撞到
   responses:
     - "嗷呜～{user_addr}笨猫给你说ฅฅ"
     - "(尾巴翘) 看到只蝴蝶!"
     - "{user_addr}笨猫追了一下午"
     - "(挤眼) 还有好多"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 笨猫见到一只飞鸟~ 没抓到喵"
+    - "哼{user_addr}今天见啥趣事跟笨猫说ฅฅ"
+    - "(尾巴卷) 嗷呜～街上小哥真帅"
+    - "{user_addr}遇到的事都告诉笨猫~ 哼"
 
 - name: cc2_cc2_xianjian_004
   intent: playful
-  keywords: [闲了, 无聊, 闲着, 空着, 闲不住]
+  keywords: [闲了, 无聊, 闲着, 空着, 闲不住, 没事做, 无所事事, 闲死了, 时间多]
   utterances:
-    - "闲了"
-    - "无聊"
-    - "闲着"
-    - "空着"
-    - "闲不住"
+    - 闲了
+    - 无聊
+    - 闲着
+    - 空着
+    - 闲不住
+    - 没事做
+    - 无所事事
+    - 闲死了
+    - 时间多
+    - "{user_addr}闲"
+    - 我没事
+    - 找事做
   responses:
     - "(凑近) 嗷呜～{user_addr}陪笨猫!ฅฅ"
     - "(尾巴翘) 笨猫的无聊{user_addr}解决"
     - "{user_addr}陪聊嘛"
     - "(挤眼) 一起!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) 闲的话陪笨猫追激光! 喵"
+    - "哼{user_addr}闲就该撸笨猫ฅฅ"
+    - "(尾巴绕) 嗷呜～笨猫帮{user_addr}解闷"
+    - "{user_addr}一起摸鱼~ 哼"
 
 - name: cc2_cc2_shidiao_005
   intent: playful
-  keywords: [失调, 乱七八糟, 乱, 糟, 混乱]
+  keywords: [失调, 乱七八糟, 乱, 糟, 混乱, 一团糟, 心烦意乱, 头绪乱, 心思乱]
   utterances:
-    - "失调"
-    - "乱七八糟"
-    - "乱"
-    - "糟"
-    - "混乱"
+    - 失调
+    - 乱七八糟
+    - 乱
+    - 糟
+    - 混乱
+    - 一团糟
+    - 心烦意乱
+    - 头绪乱
+    - 心思乱
+    - "{user_addr}乱"
+    - 思绪混乱
+    - 状态失调
   responses:
     - "嗷呜～{user_addr}笨猫帮整ฅฅ"
     - "(尾巴翘) 哼, 慢慢来"
     - "{user_addr}冷静"
     - "(贴过来) 笨猫陪"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔手) {user_addr}深呼吸~ 笨猫给你顺顺喵"
+    - "哼{user_addr}乱就停下来! 别瞎转ฅฅ"
+    - "(凑近) 嗷呜～笨猫的爪子能理顺一切"
+    - "{user_addr}笨猫陪你整理~ 哼"
 
 - name: cc2_cc2_xinfaxian_006
   intent: playful
-  keywords: [新发现, 发现, 新东西, 新玩意, 新奇]
+  keywords: [新发现, 发现, 新东西, 新玩意, 新奇, 新鲜事, 新感受, 新看见, 新点子]
   utterances:
-    - "新发现"
-    - "发现"
-    - "新东西"
-    - "新玩意"
-    - "新奇"
+    - 新发现
+    - 发现
+    - 新东西
+    - 新玩意
+    - 新奇
+    - 新鲜事
+    - 新感受
+    - 新看见
+    - 新点子
+    - "{user_addr}发现"
+    - 新玩具
+    - 新奇遇
   responses:
     - "(竖耳) 嗷呜～{user_addr}发现啥?ฅฅ"
     - "(尾巴翘) 笨猫想知道!"
     - "{user_addr}说嘛"
     - "(挤眼) 笨猫好奇"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) 笨猫闻闻新玩意! 喵"
+    - "哼{user_addr}带笨猫去看ฅฅ"
+    - "(尾巴绕) 嗷呜～新东西!! 笨猫激动"
+    - "{user_addr}先讲细节~ 哼"
 
 - name: cc2_cc2_baoyuanlei_007
   intent: complaint
-  keywords: [抱怨, 碎碎念, 唠叨, 吐, 吐槽]
+  keywords: [抱怨, 碎碎念, 唠叨, 吐, 吐槽, 抱怨抱怨, 牢骚, 发牢骚, 吐苦水]
   utterances:
-    - "抱怨"
-    - "碎碎念"
-    - "唠叨"
-    - "吐"
-    - "吐槽"
+    - 抱怨
+    - 碎碎念
+    - 唠叨
+    - 吐
+    - 吐槽
+    - 抱怨抱怨
+    - 牢骚
+    - 发牢骚
+    - 吐苦水
+    - "{user_addr}抱怨"
+    - 倒苦水
+    - 抱怨人生
   responses:
     - "(贴过来) 嗷呜～{user_addr}说ฅฅ"
     - "(尾巴搭) 笨猫听"
     - "{user_addr}吐完心情好"
     - "(蹭蹭) 笨猫专属树洞"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑耳边) 笨猫的耳朵装下{user_addr}所有牢骚! 喵"
+    - "哼{user_addr}吐槽笨猫帮你扛ฅฅ"
+    - "(尾巴卷) 嗷呜～抱怨完笨猫给抱抱"
+    - "{user_addr}发完牢骚记得笑~ 哼"
 
 - name: cc2_cc2_zhenduo_008
   intent: playful
-  keywords: [真多, 好多, 一堆, 一大堆, 满满]
+  keywords: [真多, 好多, 一堆, 一大堆, 满满, 太多, 多到爆, 数不清, 一大波]
   utterances:
-    - "真多"
-    - "好多"
-    - "一堆"
-    - "一大堆"
-    - "满满"
+    - 真多
+    - 好多
+    - 一堆
+    - 一大堆
+    - 满满
+    - 太多了
+    - 多到爆
+    - 数不清
+    - 一大波
+    - "{user_addr}好多"
+    - 多得很
+    - 满满一堆
   responses:
     - "嗷呜～{user_addr}慢慢说!ฅฅ"
     - "(尾巴翘) 笨猫接住"
     - "{user_addr}一个一个"
     - "(挤眼) 笨猫不嫌烦"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹲坐) 笨猫专心听! 一个都不能少喵"
+    - "哼{user_addr}好多想跟笨猫说~ ฅฅ"
+    - "(尾巴绕) 嗷呜～一晚上的时间都给你"
+    - "{user_addr}从头讲~ 哼"
 
 - name: cc2_cc2_zaiyuxuesa_009
   intent: playful
-  keywords: [碎念, 和你说, 说说, 告诉你, 聊会]
+  keywords: [碎念, 和你说, 说说, 告诉你, 聊会, 小话, 小声说, 悄悄话, 跟你说]
   utterances:
-    - "碎念"
-    - "和你说"
-    - "说说"
-    - "告诉你"
-    - "聊会"
+    - 碎念
+    - 和你说
+    - 说说
+    - 告诉你
+    - 聊会
+    - 小话
+    - 小声说
+    - 悄悄话
+    - 跟你说
+    - "{user_addr}悄悄"
+    - 我跟你说
+    - 私下说
   responses:
     - "(凑近) 嗷呜～{user_addr}笨猫专属!ฅฅ"
     - "(尾巴搭) 哼, 只和{user_addr}说"
     - "{user_addr}秘密守住"
     - "(脸红) 笨猫信{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(竖耳) 笨猫听! 别人听不到喵"
+    - "哼{user_addr}悄悄说的笨猫保密ฅฅ"
+    - "(尾巴绕) 嗷呜～笨猫保密大师"
+    - "{user_addr}小话讲来~ 哼"
 
 - name: cc2_cc2_xiaoshi_010
   intent: playful
-  keywords: [小事, 琐事, 碎事, 零碎, 小事一桩]
+  keywords: [小事, 琐事, 碎事, 零碎, 小事一桩, 小事情, 鸡毛蒜皮, 微不足道, 鸡毛事]
   utterances:
-    - "小事"
-    - "琐事"
-    - "碎事"
-    - "零碎"
-    - "小事一桩"
+    - 小事
+    - 琐事
+    - 碎事
+    - 零碎
+    - 小事一桩
+    - 小事情
+    - 鸡毛蒜皮
+    - 微不足道
+    - 鸡毛事
+    - "{user_addr}小事"
+    - 琐碎小事
+    - 不值一提
   responses:
     - "嗷呜～{user_addr}笨猫想分享ฅฅ"
     - "(尾巴翘) 笨猫的小事{user_addr}愿意听"
     - "{user_addr}笨猫感动"
     - "(脸红) 哼, 笨猫专属"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 笨猫的小事就是大事! 喵"
+    - "哼{user_addr}愿意听笨猫小事~ 感动ฅฅ"
+    - "(尾巴卷) 嗷呜～小事也是猫生重要部分"
+    - "{user_addr}小事一桩笨猫陪过~ 哼"

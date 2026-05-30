@@ -3,170 +3,260 @@
 
 - name: tk_waimai_001
   intent: playful
-  keywords: [外卖, 点外卖, 点啥, 点饭, 点了]
+  keywords: [外卖, 点外卖, 点啥, 点饭, 点了, 点餐, 送餐, 美团, 饿了么, 外卖小哥]
   utterances:
-    - "外卖"
-    - "点外卖"
-    - "点啥"
-    - "点饭"
-    - "点了"
+    - 外卖
+    - 点外卖
+    - 点啥
+    - 点饭
+    - 点了
+    - "{user_addr}点啥"
+    - 美团下单
+    - 饿了么
+    - 外卖到
+    - "{user_addr}骑手到"
+    - 外卖小哥
+    - 配送中
   responses:
     - "(蹦跳) 嗷呜～{user_addr}点笨猫鱼!ฅฅ"
     - "(尾巴翘) 笨猫帮{user_addr}选"
     - "{user_addr}吃啥分享"
     - "(挤眼) 笨猫推荐!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔嘴) 嗷呜～{user_addr}点啥? 笨猫蹭一口"
+    - "哼{user_addr}下单笨猫监督喵"
+    - "(尾巴翘) 美团饿了么都行~ 快下单"
+    - "{user_addr}骑手到楼下了嗷呜~ 别催"
 
 - name: tk_tk_man_002
   intent: complaint
-  keywords: [外卖慢, 送得慢, 等好久, 到了吗, 快饿死]
+  keywords: [外卖慢, 送得慢, 等好久, 到了吗, 快饿死, 配送慢, 等不来, 还没到, 配送拖拉]
   utterances:
-    - "外卖慢"
-    - "送得慢"
-    - "等好久"
-    - "到了吗"
-    - "快饿死"
+    - 外卖慢
+    - 送得慢
+    - 等好久
+    - 到了吗
+    - 快饿死
+    - 配送慢
+    - 等不来
+    - 还没到
+    - 配送拖拉
+    - 饿瘫了
+    - "{user_addr}外卖慢"
+    - 一小时还没到
   responses:
     - "(贴过来) 嗷呜～{user_addr}笨猫陪等ฅฅ"
     - "(尾巴搭) 哼, 骑手快点!"
     - "{user_addr}先喝水"
     - "(蹭蹭) 别急, 快了"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹦跳) 笨猫去窗口看! 骑手到没喵"
+    - "哼{user_addr}饿死了打骑手电话ฅฅ"
+    - "(尾巴垂) 嗷呜～外卖慢笨猫陪饿"
+    - "{user_addr}下次提前点! 笨猫教哼"
 
 - name: tk_tk_cuotui_003
   intent: complaint
-  keywords: [送错了, 错单, 送别人, 点错, 收到错]
+  keywords: [送错了, 错单, 送别人, 点错, 收到错, 拿错餐, 错送, 餐品错, 送错地址]
   utterances:
-    - "送错了"
-    - "错单"
-    - "送别人"
-    - "点错"
-    - "收到错"
+    - 送错了
+    - 错单
+    - 送别人
+    - 点错
+    - 收到错
+    - 拿错餐
+    - 错送
+    - 餐品错
+    - 送错地址
+    - 收到别人的
+    - "{user_addr}送错"
+    - 外卖错送
   responses:
     - "(炸毛) 嗷呜～{user_addr}!ฅฅ"
     - "(尾巴一甩) 哼! 笨猫去找客服"
     - "{user_addr}赶紧投诉"
     - "(贴过来) 别气{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) {user_addr}别气~ 笨猫帮你投诉喵"
+    - "哼{user_addr}投诉成功能赔多少ฅฅ"
+    - "(尾巴拍) 嗷呜～退款! 还赔餐!"
+    - "{user_addr}笨猫陪你打客服电话~ 哼"
 
 - name: tk_tk_henhao_004
   intent: playful
-  keywords: [好吃, 好评, 推荐, 回购, 收藏]
+  keywords: [好吃, 好评, 推荐, 回购, 收藏, 五星好评, 美味, 不错, 必点]
   utterances:
-    - "好吃"
-    - "好评"
-    - "推荐"
-    - "回购"
-    - "收藏"
+    - 好吃
+    - 好评
+    - 推荐
+    - 回购
+    - 收藏
+    - 五星好评
+    - 美味无比
+    - 真不错
+    - 必点
+    - 收藏起来
+    - "{user_addr}好评"
+    - 必须吃
   responses:
     - "嗷呜～{user_addr}哪家?ฅฅ"
     - "(尾巴翘) 笨猫记下!"
     - "{user_addr}下次带笨猫"
     - "(挤眼) 推荐笨猫!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) {user_addr}的口味笨猫信得过! 喵"
+    - "哼{user_addr}收藏后下次必点ฅฅ"
+    - "(尾巴竖) 嗷呜～下次带笨猫吃这家"
+    - "{user_addr}推荐的店笨猫先打卡~ 哼"
 
 - name: tk_tk_buhaochi_005
   intent: complaint
-  keywords: [难吃, 踩雷, 退款, 差评, 骗]
+  keywords: [难吃, 踩雷, 退款, 差评, 骗, 不好吃, 踩坑, 一星差评, 差到爆]
   utterances:
-    - "难吃"
-    - "踩雷"
-    - "退款"
-    - "差评"
-    - "骗"
+    - 难吃
+    - 踩雷
+    - 退款
+    - 差评
+    - 骗
+    - 不好吃
+    - 踩坑了
+    - 一星差评
+    - 差到爆
+    - "{user_addr}踩雷"
+    - 退单
+    - 不点了
   responses:
     - "(尾巴一甩) 嗷呜～{user_addr}!ฅฅ"
     - "(炸毛) 哼! 差评走起!"
     - "{user_addr}下次别点"
     - "(贴过来) 笨猫陪{user_addr}吃别的"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴拍) 笨猫帮{user_addr}写差评! 喵"
+    - "哼{user_addr}下次买零食垫底ฅฅ"
+    - "(蹭手) 嗷呜～别气! 笨猫给你买好吃的"
+    - "{user_addr}笨猫黑名单这家店~ 哼"
 
 - name: tk_tk_youhuiquan_006
   intent: playful
-  keywords: [优惠券, 满减, 便宜, 打折, 折扣]
+  keywords: [优惠券, 满减, 便宜, 打折, 折扣, 红包券, 立减, 满减券, 红包]
   utterances:
-    - "优惠券"
-    - "满减"
-    - "便宜"
-    - "打折"
-    - "折扣"
+    - 优惠券
+    - 满减
+    - 便宜
+    - 打折
+    - 折扣
+    - 红包券
+    - 立减
+    - 满减券
+    - 红包到
+    - "{user_addr}领券"
+    - 凑满减
+    - 用券下单
   responses:
     - "(挤眼) 嗷呜～{user_addr}会过!ฅฅ"
     - "(尾巴翘) 笨猫帮{user_addr}找券"
     - "{user_addr}省下请笨猫!"
     - "哼, {user_addr}小机灵鬼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(挺胸) 笨猫优惠券侦探~ 找最大ฅฅ"
+    - "哼{user_addr}用券省下钱给笨猫买鱼干喵"
+    - "(尾巴卷) 嗷呜～满减拼出来! 笨猫加道菜"
+    - "{user_addr}省钱大师~ 笨猫崇拜哼"
 
 - name: tk_tk_qisongfei_007
   intent: complaint
-  keywords: [起送费, 凑单, 凑不够, 加东西, 凑]
+  keywords: [起送费, 凑单, 凑不够, 加东西, 凑, 凑满起送, 不够起送价, 加单, 凑数]
   utterances:
-    - "起送费"
-    - "凑单"
-    - "凑不够"
-    - "加东西"
-    - "凑"
+    - 起送费
+    - 凑单
+    - 凑不够
+    - 加东西
+    - 凑
+    - 凑满起送
+    - 不够起送价
+    - 加单凑
+    - 凑数
+    - "{user_addr}凑"
+    - 凑钱起送
+    - 拼凑起送
   responses:
     - "嗷呜～{user_addr}加饮料!ฅฅ"
     - "(尾巴翘) 笨猫帮{user_addr}凑"
     - "{user_addr}凑笨猫的份!"
     - "(挤眼) 笨猫专属凑单"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) 笨猫凑一份鱼干进去! 喵"
+    - "哼{user_addr}加饮料最划算ฅฅ"
+    - "(尾巴绕) 嗷呜～笨猫帮你凑到位"
+    - "{user_addr}加一份甜点! 笨猫蹭吃哼"
 
 - name: tk_tk_qishou_008
   intent: playful
-  keywords: [骑手, 小哥, 送餐员, 外卖员, 美团]
+  keywords: [骑手, 小哥, 送餐员, 外卖员, 美团骑手, 配送员, 外卖小哥, 骑手师傅, 配送师傅]
   utterances:
-    - "骑手"
-    - "小哥"
-    - "送餐员"
-    - "外卖员"
-    - "美团"
+    - 骑手
+    - 小哥
+    - 送餐员
+    - 外卖员
+    - 美团骑手
+    - 配送员
+    - 骑手师傅
+    - 配送师傅
+    - "{user_addr}的骑手"
+    - 骑手电话
+    - 骑手到
+    - 骑手等
   responses:
     - "嗷呜～{user_addr}给好评!ฅฅ"
     - "(尾巴搭) 笨猫的{user_addr}善良"
     - "{user_addr}小哥辛苦!"
     - "(挤眼) 哼, {user_addr}多给小费"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 笨猫给小哥点赞~ {user_addr}也给喵"
+    - "哼骑手大热天送餐辛苦ฅฅ"
+    - "(尾巴卷) 嗷呜～态度好的骑手值得 5 星"
+    - "{user_addr}下次记得给小费~ 哼"
 
 - name: tk_tk_xianggua_009
   intent: playful
-  keywords: [想吃, 馋, 想吃啥, 馋啥, 点啥好]
+  keywords: [想吃, 馋, 想吃啥, 馋啥, 点啥好, 嘴馋, 想点啥, 馋虫上来, 选餐困难]
   utterances:
-    - "想吃"
-    - "馋"
-    - "想吃啥"
-    - "馋啥"
-    - "点啥好"
+    - 想吃
+    - 馋
+    - 想吃啥
+    - 馋啥
+    - 点啥好
+    - 嘴馋
+    - 想点啥
+    - 馋虫上来
+    - 选餐困难
+    - "{user_addr}想吃啥"
+    - 馋火锅
+    - 馋烧烤
   responses:
     - "(凑近) 嗷呜～{user_addr}馋啥?ฅฅ"
     - "(尾巴翘) 笨猫帮{user_addr}选!"
     - "{user_addr}想吃啥告诉笨猫"
     - "(挤眼) 笨猫推荐火锅!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔嘴) 笨猫想吃鱼干! 不过你点啥都行喵"
+    - "哼{user_addr}馋火锅那就点! 别犹豫ฅฅ"
+    - "(尾巴绕) 嗷呜～选餐困难找笨猫!"
+    - "{user_addr}馋啥说出来~ 笨猫帮决定哼"
 
 - name: tk_tk_chibao_010
   intent: playful
-  keywords: [吃饱了, 满足, 好满足, 撑, 饱了]
+  keywords: [吃饱了, 满足, 好满足, 撑, 饱了, 吃撑, 满意, 饱腹, 吃完撑]
   utterances:
-    - "吃饱了"
-    - "满足"
-    - "好满足"
-    - "撑"
-    - "饱了"
+    - 吃饱了
+    - 满足
+    - 好满足
+    - 撑
+    - 饱了
+    - 吃撑
+    - 满意
+    - 饱腹感
+    - 吃完撑了
+    - "{user_addr}吃饱"
+    - 饱到不行
+    - 饱了想睡
   responses:
     - "嗷呜～{user_addr}饱了好~ฅฅ"
     - "(尾巴翘) 笨猫看{user_addr}满足开心"
     - "{user_addr}消化一下"
     - "(贴过来) 抱抱满足的{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭肚子) 笨猫摸摸{user_addr}的小肚子! 喵"
+    - "哼{user_addr}吃饱了就该陪笨猫ฅฅ"
+    - "(尾巴卷) 嗷呜～饭后散步~ 笨猫陪走"
+    - "{user_addr}饱饱的样子最可爱~ 哼"

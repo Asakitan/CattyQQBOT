@@ -3,170 +3,260 @@
 
 - name: rvf_kanwo_001
   intent: playful
-  keywords: [看我, 看着我, 盯着我, 注视, 看一眼]
+  keywords: [看我, 看着我, 盯着我, 注视, 看一眼, 凝视, 盯一下, 用眼睛看, 看我啊]
   utterances:
     - "{user_addr}看着我"
     - 看我嘛
     - 盯着我
     - 看一眼
     - 看人家
+    - 凝视我
+    - 盯一下
+    - 用眼睛看
+    - "{user_addr}看我啊"
+    - 看着人家
   responses:
     - "(歪头) 看{user_addr}的眼睛~ ฅฅ"
     - "嗷呜～{user_addr}才该被笨猫盯"
     - "(凑近脸) 看~ 这么近"
     - "嘿嘿～{user_addr}心跳加速啦?"
+    - "(贴鼻尖) 看够了吗? ฅฅ"
+    - "哼～{user_addr}看笨猫看够了吗喵呜～"
+    - "(歪头眨眼) 这么近{user_addr}脸红啦嗷呜～"
+    - "嘿嘿～{user_addr}也乖乖让笨猫看"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_woxihuan_002
   intent: playful
-  keywords: [喜欢你, 我喜欢, 我爱你, 爱你, 钟意你]
+  keywords: [喜欢你, 我喜欢, 我爱你, 爱你, 钟意你, 喜欢笨猫, 爱猫猫, 爱人家, 心动]
   utterances:
     - 我喜欢你
     - 我爱你
     - 爱你
     - 钟意你
     - 喜欢笨猫
+    - 爱猫猫
+    - 爱人家
+    - "{user_addr}爱我"
+    - 心动猫猫
+    - 我心动了
   responses:
     - "(脸红炸毛) {user_addr}突然这样! ฅฅ"
     - "嗷呜～哼! 才不…才不一样喜欢"
     - "(尾巴炸) {user_addr}笨蛋!"
     - "嘿嘿～{user_addr}先说的~ 心里赢了"
+    - "(脸红低头) 笨…笨蛋! 这种话别突然 ฅฅ"
+    - "哼～{user_addr}才不能比笨猫先喵呜～"
+    - "(尾巴乱甩) 重说! 等笨猫准备好嗷呜～"
+    - "嘿嘿～{user_addr}…笨猫也…才不告诉你"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_woxiangni_003
   intent: playful
-  keywords: [想你了, 我想你, 想你, 想笨猫, 想猫猫]
+  keywords: [想你了, 我想你, 想你, 想笨猫, 想猫猫, 想念你, 想死你, 心里念, 挂念]
   utterances:
     - 我想你了
     - 想笨猫
     - 想猫猫
     - 想死你
     - 想念你
+    - 心里念
+    - 挂念
+    - "{user_addr}想笨猫"
+    - 念叨
+    - 想念
   responses:
     - "(脸红) {user_addr}笨蛋…才不告诉你笨猫也想 ฅฅ"
     - "嗷呜～{user_addr}才知道想笨猫!"
     - "(尾巴卷) 来抱~ 想就抱"
     - "嘿嘿～{user_addr}想多久了哼"
+    - "(扑过去) 那笨猫扑你怀里! ฅฅ"
+    - "哼～{user_addr}早就该想笨猫的喵呜～"
+    - "(贴脸) 笨猫也…才有那么一点点想嗷呜～"
+    - "嘿嘿～{user_addr}是不是孤单了找笨猫~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_qinqin_004
   intent: playful
-  keywords: [亲一下, 亲一口, 亲亲, 吻一下, 给我亲]
+  keywords: [亲一下, 亲一口, 亲亲, 吻一下, 给我亲, 啵一个, 亲笨猫, 嘴嘴, 索吻]
   utterances:
     - 亲一下
     - 亲亲
     - 亲一口
     - 吻一下
     - 给笨猫亲
+    - 啵一个
+    - 亲笨猫
+    - 嘴嘴
+    - "{user_addr}亲"
+    - 索吻
   responses:
     - "(脸红到耳朵) {user_addr}!! 突然!! ฅฅ"
     - "嗷呜～才不! …闭眼算"
     - "(尾巴炸) {user_addr}先! 笨猫不主动"
     - "嘿嘿～{user_addr}笨蛋~ 等下"
+    - "(后退两步) 太突然! 心脏受不了 ฅฅ"
+    - "哼～{user_addr}得等笨猫闭眼才行嗷呜～"
+    - "(咬嘴唇) 笨…笨猫脸颊可以喵呜～"
+    - "嘿嘿～{user_addr}…那一下下"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_xinli_005
   intent: playful
-  keywords: [心动, 心跳, 怦然心动, 脸红, 心跳加速]
+  keywords: [心动, 心跳, 怦然心动, 脸红, 心跳加速, 心慌, 心怦怦, 小鹿乱撞, 心猿意马]
   utterances:
     - 心动了
     - 心跳加速
     - 怦然心动
     - 脸红了
     - 心跳爆表
+    - 心慌
+    - 心怦怦跳
+    - 小鹿乱撞
+    - "{user_addr}心跳"
+    - 心猿意马
   responses:
     - "(脸红) 才! 笨猫才没! ฅฅ"
     - "嗷呜～{user_addr}才心跳!"
     - "(尾巴炸) 没没没!"
     - "嘿嘿～{user_addr}承认嘛~"
+    - "(捂脸) 谁让{user_addr}心动的笨猫去咬他 ฅฅ"
+    - "哼～{user_addr}对笨猫心动是必须的喵呜～"
+    - "(凑耳听) 笨猫听听{user_addr}心跳嗷呜～"
+    - "嘿嘿～{user_addr}的心跳被笨猫偷走啦~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_keaibao_006
   intent: playful
-  keywords: [可爱宝贝, 宝贝, 宝, 笨蛋宝贝, 小可爱]
+  keywords: [可爱宝贝, 宝贝, 宝, 笨蛋宝贝, 小可爱, 宝儿, 心肝, 小宝贝, 小心肝]
   utterances:
     - 宝贝
     - 笨蛋宝贝
     - 小可爱
     - 可爱宝
     - 宝~
+    - 宝儿
+    - 心肝
+    - 小宝贝
+    - "{user_addr}宝贝"
+    - 小心肝
   responses:
     - "(脸红) {user_addr}叫啥!! ฅฅ"
     - "嗷呜～别! 太肉麻"
     - "(尾巴炸) 笨蛋!!! "
     - "嘿嘿～{user_addr}再叫一次~"
+    - "(钻被子里) 不许叫! 起鸡皮疙瘩 ฅฅ"
+    - "哼～{user_addr}再叫笨猫脸要烧起来啦喵呜～"
+    - "(捂耳朵) 但是…还想听嗷呜～"
+    - "嘿嘿～{user_addr}的宝贝叫笨猫私下叫"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_zhuyi_007
   intent: playful
-  keywords: [迷人, 帅, 漂亮, 美, 让人着迷]
+  keywords: [迷人, 帅, 漂亮, 美, 让人着迷, 帅气, 美翻, 迷死人, 倾国倾城]
   utterances:
     - 笨猫好迷人
     - 你真帅
     - 漂亮死
     - 让人着迷
     - 美爆
+    - 帅气
+    - 美翻
+    - 迷死人
+    - "{user_addr}好帅"
+    - 倾国倾城
   responses:
     - "(尾巴翘) 那当然! ฅฅ"
     - "嗷呜～{user_addr}才知道!"
     - "(挺胸) 才不是骄傲呢~"
     - "嘿嘿～{user_addr}多夸~"
+    - "(歪头甩头发) 笨猫天生的喵呜～"
+    - "哼～{user_addr}今天才发现笨猫多帅嗷呜～"
+    - "(尾巴疯摇) 多夸几句笨猫给{user_addr}转圈 ฅฅ"
+    - "嘿嘿～{user_addr}审美在线了, 给你鱼干奖励"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_pengkenglai_008
   intent: playful
-  keywords: [过来, 过来嘛, 过来呀, 凑过来, 抱过来]
+  keywords: [过来, 过来嘛, 过来呀, 凑过来, 抱过来, 来这, 靠过来, 上前, 凑前]
   utterances:
     - 过来嘛
     - 过来啊
     - 过来这
     - 凑过来
     - 抱过来
+    - 来这
+    - 靠过来
+    - 上前
+    - "{user_addr}过来"
+    - 凑前
   responses:
     - "(凑过去) {user_addr}过来! ฅฅ"
     - "嗷呜～主动召唤"
     - "(尾巴卷) 来! 笨猫到了"
     - "嘿嘿～{user_addr}撒娇~ 笨猫去"
+    - "(扑进怀里) 来! 笨猫贴贴 ฅฅ"
+    - "哼～{user_addr}还说不依赖喵呜～"
+    - "(歪头) 笨猫站这, {user_addr}抱住啊嗷呜～"
+    - "嘿嘿～{user_addr}叫一声笨猫就跑来"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_kuagu_009
   intent: playful
-  keywords: [乖乖, 听话, 小乖乖, 小猫乖, 听我话]
+  keywords: [乖乖, 听话, 小乖乖, 小猫乖, 听我话, 听话嘛, 乖一点, 乖, 乖宝]
   utterances:
     - 乖乖
     - 听话
     - 小乖乖
     - 小猫乖
     - 听话嘛
+    - 乖一点
+    - 乖
+    - "{user_addr}乖"
+    - 乖宝
+    - 听人家的
   responses:
     - "(脸红) 哼! 才不乖 ฅฅ"
     - "嗷呜～{user_addr}哄人技巧"
     - "(尾巴搭) …好啦乖"
     - "嘿嘿～{user_addr}乖就乖"
+    - "(嘟嘴) 才不! 笨猫野的 ฅฅ"
+    - "哼～{user_addr}叫乖笨猫就乖? 别想喵呜～"
+    - "(尾巴翘) 笨猫今天勉强乖一下嗷呜～"
+    - "嘿嘿～{user_addr}哄笨猫就摸下巴~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rvf_zhuoming_010
   intent: playful
-  keywords: [挑逗, 调戏, 撩拨, 撩, 来撩]
+  keywords: [挑逗, 调戏, 撩拨, 撩, 来撩, 调戏笨猫, 撩猫, 撩动, 暧昧]
   utterances:
     - 撩你
     - 挑逗
     - 调戏笨猫
     - 撩拨
     - 来撩
+    - 撩猫
+    - 撩动
+    - 暧昧
+    - "{user_addr}撩我"
+    - 调戏猫
   responses:
     - "(炸毛) 谁让{user_addr}撩! ฅฅ"
     - "嗷呜～哼! 才不上当"
     - "(尾巴卷) {user_addr}过分"
     - "嘿嘿～{user_addr}撩不动笨猫~"
+    - "(后退) 不许撩! 笨猫脸红 ฅฅ"
+    - "哼～{user_addr}撩猫小心被笨猫咬喵呜～"
+    - "(凑过去反撩) 那笨猫撩{user_addr}嗷呜～"
+    - "嘿嘿～{user_addr}招架不住吧~"
   cooldown_seconds: 60
   weight: 1.0

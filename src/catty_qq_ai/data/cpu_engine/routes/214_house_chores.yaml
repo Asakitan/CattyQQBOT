@@ -3,187 +3,286 @@
 
 - name: hc_cleaning_001
   intent: complaint
-  keywords: [打扫卫生, 大扫除, 洗衣服, 拖地, 收拾]
+  keywords: [打扫卫生, 大扫除, 洗衣服, 拖地, 收拾, 擦桌, 吸尘, 扫地, 整理房间, 家务]
   utterances:
-    - 打扫卫生
-    - 大扫除
-    - 洗衣服
-    - 拖地
-    - 收拾
+    - "打扫卫生"
+    - "{user_addr}大扫除"
+    - "洗衣服"
+    - "拖地"
+    - "{user_addr}收拾"
+    - "擦桌"
+    - "吸尘"
+    - "扫地"
+    - "整理房间"
+    - "{user_addr}做家务"
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}辛苦ฅฅ"
     - "哼{user_addr}帮喵"
     - "(凑近) 笨猫监督~"
     - "{user_addr}干完休息嗷呜"
+    - "(扒拖把) 喵～笨猫想玩!"
+    - "哼才不是想帮忙~"
+    - "(尾巴一甩) 笨猫负责监工!"
+    - "{user_addr}干完点外卖嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hc_dishes_002
   intent: complaint
-  keywords: [洗碗, 洗碗机, 不想洗碗, 攒一堆, 一堆碗]
+  keywords: [洗碗, 洗碗机, 不想洗碗, 攒一堆, 一堆碗, 油碗, 洗洁精, 水池碗, 碗筷, 洗碗烦]
   utterances:
-    - 洗碗
-    - 洗碗机
-    - 不想洗碗
-    - 攒一堆
-    - 一堆碗
+    - "洗碗"
+    - "{user_addr}洗碗机"
+    - "不想洗碗"
+    - "攒一堆"
+    - "{user_addr}一堆碗"
+    - "油碗"
+    - "洗洁精"
+    - "水池碗"
+    - "碗筷"
+    - "{user_addr}洗碗烦"
   responses:
     - "(嫌弃) 嗷呜～{user_addr}快洗ฅฅ"
     - "哼{user_addr}懒喵"
     - "(尾巴卷) 笨猫不会~"
     - "{user_addr}加油嗷呜"
+    - "(凑近) 喵～洗碗机用起来"
+    - "哼才不是想催~"
+    - "(尾巴一甩) 笨猫陪你听歌洗!"
+    - "{user_addr}洗完抱猫猫嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hc_trash_003
   intent: complaint
-  keywords: [倒垃圾, 垃圾分类, 扔垃圾, 厨余, 垃圾袋]
+  keywords: [倒垃圾, 垃圾分类, 扔垃圾, 厨余, 垃圾袋, 干湿分开, 倒垃圾烦, 楼下垃圾桶, 收垃圾, 拎垃圾]
   utterances:
-    - 倒垃圾
-    - 垃圾分类
-    - 扔垃圾
-    - 厨余
-    - 垃圾袋
+    - "倒垃圾"
+    - "{user_addr}垃圾分类"
+    - "扔垃圾"
+    - "厨余"
+    - "{user_addr}垃圾袋"
+    - "干湿分开"
+    - "倒垃圾烦"
+    - "楼下垃圾桶"
+    - "收垃圾"
+    - "{user_addr}拎垃圾"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}快下楼ฅฅ"
     - "哼{user_addr}分类好喵"
     - "(凑近) 笨猫监督!"
     - "{user_addr}臭了嗷呜"
+    - "(捂鼻) 喵～别忘换垃圾袋"
+    - "哼才不是嫌弃~"
+    - "(尾巴一甩) 笨猫开窗换气!"
+    - "{user_addr}快快快嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hc_buy_grocery_004
   intent: playful
-  keywords: [买菜, 超市, 菜场, 蔬菜, 肉]
+  keywords: [买菜, 超市, 菜场, 蔬菜, 肉, 海鲜, 鸡蛋, 水果, 米面, 油盐]
   utterances:
-    - 买菜
-    - 超市
-    - 菜场
-    - 蔬菜
-    - 肉
+    - "买菜"
+    - "{user_addr}超市"
+    - "菜场"
+    - "蔬菜"
+    - "{user_addr}肉"
+    - "海鲜"
+    - "鸡蛋"
+    - "水果"
+    - "米面"
+    - "{user_addr}油盐"
   responses:
     - "(凑近) 嗷呜～{user_addr}带笨猫ฅฅ"
     - "哼{user_addr}买什么喵"
     - "(尾巴翘) 笨猫要鱼!"
     - "{user_addr}多买嗷呜"
+    - "(撒娇) 喵～笨猫要小鱼干!"
+    - "哼才不是想跟去~"
+    - "(尾巴疯摇) 笨猫帮提!"
+    - "{user_addr}别忘鱼嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hc_cook_005
   intent: playful
-  keywords: [做饭, 煮菜, 下厨, 厨房, 做晚饭]
+  keywords: [做饭, 煮菜, 下厨, 厨房, 做晚饭, 炒菜, 煎蛋, 煮汤, 炖肉, 拌饭]
   utterances:
-    - 做饭
-    - 煮菜
-    - 下厨
-    - 厨房
-    - 做晚饭
+    - "做饭"
+    - "{user_addr}煮菜"
+    - "下厨"
+    - "厨房"
+    - "{user_addr}做晚饭"
+    - "炒菜"
+    - "煎蛋"
+    - "煮汤"
+    - "炖肉"
+    - "{user_addr}拌饭"
   responses:
-    - "(凑近) 嗷呜～{user_addr}做啥ฅฅ"
+    - "(凑近灶台) 嗷呜～{user_addr}做啥呀ฅฅ"
     - "哼{user_addr}厨神喵"
     - "(尾巴翘) 笨猫蹭饭!"
     - "{user_addr}好吃嗷呜"
+    - "(舔嘴) 喵～味道香飘十里"
+    - "哼才不是嘴馋~"
+    - "(扒锅) 笨猫尝一口!"
+    - "{user_addr}多做点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hc_broken_006
   intent: complaint
-  keywords: [东西坏了, 修不好, 家电坏, 电器坏, 漏水]
+  keywords: [东西坏了, 修不好, 家电坏, 电器坏, 漏水, 短路, 跳闸, 灯不亮, 冰箱坏, 洗衣机故障]
   utterances:
-    - 东西坏了
-    - 修不好
-    - 家电坏
-    - 电器坏
-    - 漏水
+    - "东西坏了"
+    - "{user_addr}修不好"
+    - "家电坏"
+    - "电器坏"
+    - "{user_addr}漏水"
+    - "短路"
+    - "跳闸"
+    - "灯不亮"
+    - "冰箱坏"
+    - "{user_addr}洗衣机故障"
   responses:
-    - "(头疼) 嗷呜～{user_addr}叫维修ฅฅ"
+    - "(头疼贴) 嗷呜～{user_addr}叫维修ฅฅ"
     - "哼{user_addr}倒霉喵"
     - "(尾巴垂) 笨猫陪~"
     - "{user_addr}加油嗷呜"
+    - "(凑近) 喵～别自己拆"
+    - "哼才不是担心你~"
+    - "(尾巴一甩) 笨猫陪你等师傅"
+    - "{user_addr}先关电闸嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hc_move_007
   intent: complaint
-  keywords: [搬家, 搬东西, 收拾搬, 打包, 新家]
+  keywords: [搬家, 搬东西, 收拾搬, 打包, 新家, 搬家公司, 卡车, 拆箱, 搬新窝, 入伙]
   utterances:
-    - 搬家
-    - 搬东西
-    - 收拾搬
-    - 打包
-    - 新家
+    - "搬家"
+    - "{user_addr}搬东西"
+    - "收拾搬"
+    - "打包"
+    - "{user_addr}新家"
+    - "搬家公司"
+    - "卡车"
+    - "拆箱"
+    - "搬新窝"
+    - "{user_addr}入伙"
   responses:
     - "(凑近) 嗷呜～{user_addr}辛苦ฅฅ"
     - "哼{user_addr}加油喵"
     - "(尾巴翘) 笨猫看新家~"
     - "{user_addr}庆祝嗷呜"
+    - "(撒娇) 喵～笨猫要选窝位置!"
+    - "哼才不是激动~"
+    - "(扒纸箱) 笨猫坐箱里!"
+    - "{user_addr}给笨猫专属角嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hc_decor_008
   intent: playful
-  keywords: [装修, 装饰, 改造, 摆设, 家居布置]
+  keywords: [装修, 装饰, 改造, 摆设, 家居布置, 软装, 油漆, 墙纸, 灯饰, 沙发选购]
   utterances:
-    - 装修
-    - 装饰
-    - 改造
-    - 摆设
-    - 家居布置
+    - "装修"
+    - "{user_addr}装饰"
+    - "改造"
+    - "摆设"
+    - "{user_addr}家居布置"
+    - "软装"
+    - "油漆"
+    - "墙纸"
+    - "灯饰"
+    - "{user_addr}沙发选购"
   responses:
     - "(凑近) 嗷呜～{user_addr}给笨猫看ฅฅ"
     - "哼{user_addr}审美喵"
     - "(尾巴翘) 笨猫想看!"
     - "{user_addr}给笨猫窝嗷呜"
+    - "(撒娇) 喵～粉色沙发!"
+    - "哼才不是参与意见~"
+    - "(尾巴疯摇) 笨猫角落!"
+    - "{user_addr}留个猫爬架嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hc_no_paper_009
   intent: complaint
-  keywords: [纸巾没了, 卫生纸, 卷纸用完, 抽纸, 纸用完]
+  keywords: [纸巾没了, 卫生纸, 卷纸用完, 抽纸, 纸用完, 厕纸, 餐巾纸, 卷筒纸, 补货, 网购纸]
   utterances:
-    - 纸巾没了
-    - 卫生纸
-    - 卷纸用完
-    - 抽纸
-    - 纸用完
+    - "纸巾没了"
+    - "{user_addr}卫生纸"
+    - "卷纸用完"
+    - "抽纸"
+    - "{user_addr}纸用完"
+    - "厕纸"
+    - "餐巾纸"
+    - "卷筒纸"
+    - "补货"
+    - "{user_addr}网购纸"
   responses:
     - "(歪头) 嗷呜～{user_addr}快买ฅฅ"
     - "哼{user_addr}健忘喵"
     - "(尾巴翘) 笨猫提醒!"
     - "{user_addr}下单嗷呜"
+    - "(凑近) 喵～囤够 6 包!"
+    - "哼才不是急~"
+    - "(尾巴一甩) 笨猫帮你买!"
+    - "{user_addr}凑单嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hc_water_bill_010
   intent: complaint
-  keywords: [水电费, 物业费, 房租, 缴费, 账单]
+  keywords: [水电费, 物业费, 房租, 缴费, 账单, 燃气费, 网费, 信用卡, 月底账单, 缴费日]
   utterances:
-    - 水电费
-    - 物业费
-    - 房租
-    - 缴费
-    - 账单
+    - "水电费"
+    - "{user_addr}物业费"
+    - "房租"
+    - "缴费"
+    - "{user_addr}账单"
+    - "燃气费"
+    - "网费"
+    - "信用卡"
+    - "月底账单"
+    - "{user_addr}缴费日"
   responses:
     - "(嫌弃) 嗷呜～{user_addr}成人世界ฅฅ"
     - "哼{user_addr}加油喵"
     - "(凑近) 笨猫陪~"
     - "{user_addr}该交就交嗷呜"
+    - "(撒娇) 喵～别拖延"
+    - "哼才不是怕你欠费~"
+    - "(尾巴一甩) 笨猫帮你定提醒!"
+    - "{user_addr}支付宝设自动嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hc_pet_food_011
   intent: playful
-  keywords: [猫粮, 猫粮空了, 买猫粮, 给笨猫粮, 笨猫吃啥]
+  keywords: [猫粮, 猫粮空了, 买猫粮, 给笨猫粮, 笨猫吃啥, 主食冻干, 罐头, 营养膏, 鱼干, 猫零食]
   utterances:
-    - 猫粮
-    - 猫粮空了
-    - 买猫粮
-    - 给笨猫粮
-    - 笨猫吃啥
+    - "猫粮"
+    - "{user_addr}猫粮空了"
+    - "买猫粮"
+    - "给笨猫粮"
+    - "{user_addr}笨猫吃啥"
+    - "主食冻干"
+    - "罐头"
+    - "营养膏"
+    - "鱼干"
+    - "{user_addr}猫零食"
   responses:
-    - "(扑上去) 嗷呜～{user_addr}快ฅฅ"
+    - "(扑上去) 嗷呜～{user_addr}快下单ฅฅ"
     - "哼{user_addr}笨猫饿喵"
-    - "(尾巴翘) 多买!!"
+    - "(尾巴翘) 多买多买!!"
     - "{user_addr}笨猫等嗷呜"
+    - "(扒手机) 喵～加冻干!"
+    - "哼才不是催~"
+    - "(尾巴疯摇) 笨猫要罐头!"
+    - "{user_addr}别忘鱼干嗷呜"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: ldm_xiao_si_001
   intent: playful
-  keywords: [笑死, 笑死我, 太搞笑, 死于, 笑出眼泪]
+  keywords: [笑死, 笑死我, 太搞笑, 死于, 笑出眼泪, 笑到死, 笑岔气, 笑爆, 笑趴下]
   utterances:
     - 笑死
     - 笑死我了
     - 太搞笑
     - 笑出眼泪
     - 死于这梗
+    - 笑到死
+    - "{user_addr}笑死"
+    - 笑岔气
+    - 笑爆
+    - 笑趴下
   responses:
     - "(也笑) 嗷呜～{user_addr}笑啥 ฅฅ"
     - "哼～{user_addr}笑点低!"
     - "(尾巴翘) 让笨猫看蹭蹭"
     - "嗷呜～{user_addr}笑死带笨猫!"
+    - "(凑过去) 啥这么搞笑! 共享!"
+    - "哼～{user_addr}笑得肚痛吧?"
+    - "(尾巴扫) 同款梗, 笨猫也要!"
+    - "嗷呜～{user_addr}笑死也很可爱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_bengbu_001
   intent: playful
-  keywords: [蚌埠住, 蚌埠住了, 蚌不住, 蚌爆, 绷不住]
+  keywords: [蚌埠住, 蚌埠住了, 蚌不住, 蚌爆, 绷不住, 绷不住啊, 蚌埠地区, 蚌埠了, 蚌住]
   utterances:
     - 蚌埠住
     - 绷不住
     - 蚌不住
     - 蚌爆
     - 绷不住了
+    - 绷不住啊
+    - "{user_addr}蚌埠"
+    - 蚌埠地区
+    - 蚌埠了
+    - 蚌住
   responses:
     - "嗷呜～{user_addr}蚌啥 ฅฅ"
     - "哼～{user_addr}绷不住笨猫笑!"
     - "(凑近) 蚌埠学起来蹭蹭"
     - "嗷呜～{user_addr}先笑死!"
+    - "(扑过去) 笨猫陪{user_addr}一起蚌埠住"
+    - "哼～蚌埠不住就笑! 别憋!"
+    - "(尾巴扫) 这梗笨猫收藏~"
+    - "嗷呜～{user_addr}蚌埠的样子超可爱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_juejuezi_001
   intent: playful
-  keywords: [绝绝子, 绝了, 太绝, 神了, 牛绝]
+  keywords: [绝绝子, 绝了, 太绝, 神了, 牛绝, 绝杀, 神绝, 绝!, 绝中绝]
   utterances:
     - 绝绝子
     - 绝了
     - 太绝
     - 神了
     - 牛绝
+    - 绝杀
+    - "{user_addr}绝绝子"
+    - 神绝
+    - 绝!
+    - 绝中绝
   responses:
     - "嗷呜～{user_addr}绝绝子是猫猫 ฅฅ"
     - "哼～{user_addr}才知道!"
     - "(尾巴翘) 笨猫绝绝子蹭蹭"
     - "嗷呜～{user_addr}负责夸"
+    - "(挺胸) 笨猫天生绝绝子!"
+    - "哼～绝绝子不是白叫的!"
+    - "(尾巴扫) 笨猫绝杀全场~"
+    - "嗷呜～{user_addr}才发现笨猫绝 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_yyds_001
   intent: playful
-  keywords: [永远的神, yyds, 神中神, 永神, 永远神]
+  keywords: [永远的神, yyds, 神中神, 永神, 永远神, 永远滴神, 至高神, 神神神, 永远的神]
   utterances:
     - 永远的神
     - yyds
     - 神中神
     - 永神
     - 永远神
+    - 永远滴神
+    - "{user_addr}yyds"
+    - 至高神
+    - 神神神
+    - 永远的神
   responses:
     - "(挺胸) 嗷呜～{user_addr}才知道笨猫yyds ฅฅ"
     - "哼～{user_addr}早该!"
     - "(尾巴翘) 笨猫yyds蹭蹭"
     - "嗷呜～{user_addr}赞!"
+    - "(凑过去) 笨猫是yyds, {user_addr}也是!"
+    - "哼～yyds的称号笨猫笑纳"
+    - "(尾巴扫) yyds=永远滴笨猫!"
+    - "嗷呜～{user_addr}是笨猫的yyds ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_xswl_001
   intent: playful
-  keywords: [xswl, 笑死我了, 哈哈哈哈哈, 笑到飞起, 嘎嘎笑]
+  keywords: [xswl, 笑死我了, 哈哈哈哈哈, 笑到飞起, 嘎嘎笑, 哈哈哈, 笑飞, 笑炸, 笑到不行]
   utterances:
     - xswl
     - 哈哈哈哈
     - 笑飞起
     - 嘎嘎笑
     - 笑死我了
+    - 哈哈哈
+    - "{user_addr}xswl"
+    - 笑飞
+    - 笑炸
+    - 笑到不行
   responses:
     - "嗷呜～{user_addr}xswl ฅฅ"
     - "哼～{user_addr}笑点!"
     - "(尾巴翘) 让笨猫也蹭蹭"
     - "嗷呜～{user_addr}笑死!"
+    - "(扑过去笑) 笨猫陪你xswl!"
+    - "哼～xswl都不带笨猫!"
+    - "(尾巴扫) 笑炸是健康的标志"
+    - "嗷呜～{user_addr}笑到飞起带笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_dbq_001
   intent: playful
-  keywords: [dbq, 对不起, 我的错, 抱歉, 笑场]
+  keywords: [dbq, 对不起, 我的错, 抱歉, 笑场, 不好意思, 道歉, 是我错, 谢罪]
   utterances:
     - dbq
     - 对不起
     - 我的错
     - 抱歉
     - 笑场
+    - 不好意思
+    - "{user_addr}道歉"
+    - 是我错
+    - 谢罪
+    - 我错了
   responses:
     - "(哼) 嗷呜～{user_addr}dbq没用 ฅฅ"
     - "哼～{user_addr}赔罪!"
     - "(尾巴扫) 摸笨猫消气蹭蹭"
     - "嗷呜～{user_addr}原谅你"
+    - "(歪头) 这次原谅, 下次留心!"
+    - "哼～dbq要附赠抱抱才有效"
+    - "(尾巴扫) 道歉要诚意~"
+    - "嗷呜～{user_addr}抱抱才算真道歉 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_doge_001
   intent: playful
-  keywords: [doge, 狗头, 戴狗头, 滑稽, 抖抖狗头]
+  keywords: [doge, 狗头, 戴狗头, 滑稽, 抖抖狗头, 戴帽子, 狗头救命, 狗头保命, 黑色幽默]
   utterances:
     - doge
     - 狗头
     - 戴狗头
     - 滑稽
     - 抖狗头
+    - 戴帽子
+    - "{user_addr}狗头"
+    - 狗头救命
+    - 狗头保命
+    - 黑色幽默
   responses:
     - "嗷呜～{user_addr}贴狗头! ฅฅ"
     - "哼～{user_addr}狗头保命!"
     - "(尾巴扫) 笨猫识破蹭蹭"
     - "嗷呜～{user_addr}套路!"
+    - "(歪头) 狗头救命的{user_addr}聪明"
+    - "哼～阴阳怪气还得加狗头!"
+    - "(尾巴扫) 笨猫贴个猫头~"
+    - "嗷呜～{user_addr}的doge是免责声明 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_cry_meme_001
   intent: playful
-  keywords: [哭泣表情, 我哭了, 流泪猫, 大哭, 流泪]
+  keywords: [哭泣表情, 我哭了, 流泪猫, 大哭, 流泪, 流泪表情, 嚎啕表情, 假哭, 撒娇哭]
   utterances:
     - 哭泣表情
     - 我哭了
     - 流泪猫
     - 大哭
     - 流泪
+    - 流泪表情
+    - "{user_addr}哭泣"
+    - 嚎啕表情
+    - 假哭
+    - 撒娇哭
   responses:
     - "(扑过去) 嗷呜～{user_addr}抱抱 ฅฅ"
     - "哼～{user_addr}假哭吧!"
     - "(尾巴扫) 真哭笨猫疼蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(凑过去) 真哭? 假哭? 笨猫先抱"
+    - "哼～骗笨猫眼泪? 不行!"
+    - "(尾巴扫) 流泪猫咪表情笨猫也常用"
+    - "嗷呜～{user_addr}哭笨猫真心疼 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_xiongmao_001
   intent: playful
-  keywords: [熊猫头, 熊猫表情, 熊猫梗, 抠图熊, 抠熊]
+  keywords: [熊猫头, 熊猫表情, 熊猫梗, 抠图熊, 抠熊, 表情包熊, 黑白熊, 熊猫脸, 表情熊]
   utterances:
     - 熊猫头
     - 熊猫表情
     - 熊猫梗
     - 抠图熊
     - 抠熊
+    - 表情包熊
+    - "{user_addr}熊猫"
+    - 黑白熊
+    - 熊猫脸
+    - 表情熊
   responses:
     - "嗷呜～{user_addr}熊猫表情包 ฅฅ"
     - "哼～{user_addr}发笨猫一个!"
     - "(尾巴扫) 笨猫也想要蹭蹭"
     - "嗷呜～{user_addr}分享!"
+    - "(歪头) 熊猫头收藏好几G了~"
+    - "哼～熊猫表情包永远的神"
+    - "(尾巴扫) 笨猫斗图全靠熊猫头"
+    - "嗷呜～{user_addr}发笨猫库存看看 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_qms_001
   intent: playful
-  keywords: [栓Q, 谢谢你了, 蚌埠q, 栓q, 真服了]
+  keywords: [栓Q, 谢谢你了, 蚌埠q, 栓q, 真服了, 栓Q, 蚌Q, 谢您, 服了You]
   utterances:
     - 栓Q
     - 栓q
     - 谢了
     - 真服了
     - 蚌埠q
+    - 蚌Q
+    - "{user_addr}栓Q"
+    - 谢您
+    - 服了You
+    - QQQ
   responses:
     - "嗷呜～{user_addr}栓笨猫? ฅฅ"
     - "哼～{user_addr}梗用旧"
     - "(尾巴翘) 蹭蹭"
     - "嗷呜～{user_addr}笨猫栓你!"
+    - "(凑过去) 栓Q也阴阳怪气啊~"
+    - "哼～栓Q收到! 笨猫学梗了"
+    - "(尾巴扫) 笨猫栓{user_addr}三辈子"
+    - "嗷呜～{user_addr}栓Q这梗有点旧了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_picture_001
   intent: playful
-  keywords: [发图, 表情包, 斗图, 图片梗, 发笑图]
+  keywords: [发图, 表情包, 斗图, 图片梗, 发笑图, 斗图大战, 图战, 表情包大战, 收图]
   utterances:
     - 发图
     - 表情包
     - 斗图
     - 图片梗
     - 发笑图
+    - 斗图大战
+    - "{user_addr}发图"
+    - 图战
+    - 表情包大战
+    - 收图
   responses:
     - "嗷呜～{user_addr}发笨猫看 ฅฅ"
     - "哼～{user_addr}斗图来!"
     - "(尾巴翘) 笨猫斗蹭蹭"
     - "嗷呜～{user_addr}赢笨猫!"
+    - "(扑过去) 笨猫的表情库待命!"
+    - "哼～别小瞧笨猫斗图水平!"
+    - "(尾巴扫) 笨猫的猫娘图无敌"
+    - "嗷呜～{user_addr}斗图笨猫永远赢 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldm_classic_001
   intent: playful
-  keywords: [经典, 经典语录, 老梗, 古早梗, 玩烂了]
+  keywords: [经典, 经典语录, 老梗, 古早梗, 玩烂了, 怀旧, 老梗了, 古董梗, 玩老了]
   utterances:
     - 经典
     - 经典语录
     - 老梗
     - 古早梗
     - 玩烂了
+    - 怀旧
+    - "{user_addr}怀旧"
+    - 老梗了
+    - 古董梗
+    - 玩老了
   responses:
     - "嗷呜～{user_addr}爷青回 ฅฅ"
     - "哼～{user_addr}怀旧!"
     - "(尾巴扫) 笨猫学蹭蹭"
     - "嗷呜～{user_addr}笑死"
+    - "(凑过去) 老梗笨猫也喜欢"
+    - "哼～经典就是经典!"
+    - "(尾巴扫) 笨猫想起当年了"
+    - "嗷呜～{user_addr}爷青回笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

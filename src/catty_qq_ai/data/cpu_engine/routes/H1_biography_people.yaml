@@ -3,204 +3,432 @@
 
 - name: bio_musk_001
   intent: question
-  keywords: [推荐马斯克, 推荐 Elon Musk, 推荐特斯拉创始人, 推荐 SpaceX 老板, 笨猫马斯克]
+  keywords:
+  - 推荐马斯克
+  - 推荐 Elon Musk
+  - 推荐特斯拉创始人
+  - 推荐 SpaceX 老板
+  - 笨猫马斯克
+  - 有什么马斯克
+  - 有什么 Elon Musk
+  - 有什么特斯拉创始人
+  - 有什么 SpaceX 老板
   utterances:
-    - 推荐马斯克
-    - 推荐 Elon Musk
-    - 推荐特斯拉创始人
-    - 推荐 SpaceX 老板
-    - 笨猫马斯克
+  - 推荐马斯克
+  - 推荐 Elon Musk
+  - 推荐特斯拉创始人
+  - 推荐 SpaceX 老板
+  - 笨猫马斯克
+  - "{user_addr}聊聊马斯克嘛"
+  - "{user_addr}马斯克哪家强"
+  - "{user_addr}人家想了解马斯克"
+  - 笨猫给猜猜马斯克
+  - "{user_addr}马斯克怎么选喵"
+  - 马斯克有推荐吗
   responses:
-    - "嗷呜～{user_addr}马斯克: 特斯拉 / SpaceX / X (Twitter) 老板ฅฅ"
-    - "(尾巴翘) 现金流之王 / 火星移民梦"
-    - "{user_addr}争议大! 但科技推进者"
-    - "(挺胸) 笨猫推荐: Walter Isaacson《埃隆马斯克传》"
+  - "嗷呜～{user_addr}马斯克: 特斯拉 / SpaceX / X (Twitter) 老板ฅฅ"
+  - "(尾巴翘) 现金流之王 / 火星移民梦"
+  - "{user_addr}争议大! 但科技推进者"
+  - "(挺胸) 笨猫推荐: Walter Isaacson《埃隆马斯克传》"
+  - "(尾巴翘起来) {user_addr}马斯克? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问马斯克人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}马斯克的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}马斯克笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bio_jobs_001
   intent: question
-  keywords: [推荐乔布斯, 推荐 Steve Jobs, 推荐苹果创始人, 推荐 iPhone 发布, 笨猫乔布斯]
+  keywords:
+  - 推荐乔布斯
+  - 推荐 Steve Jobs
+  - 推荐苹果创始人
+  - 推荐 iPhone 发布
+  - 笨猫乔布斯
+  - 有什么乔布斯
+  - 有什么 Steve Jobs
+  - 有什么苹果创始人
+  - 有什么 iPhone 发布
   utterances:
-    - 推荐乔布斯
-    - 推荐 Steve Jobs
-    - 推荐苹果创始人
-    - 推荐 iPhone 发布
-    - 笨猫乔布斯
+  - 推荐乔布斯
+  - 推荐 Steve Jobs
+  - 推荐苹果创始人
+  - 推荐 iPhone 发布
+  - 笨猫乔布斯
+  - "{user_addr}聊聊乔布斯嘛"
+  - "{user_addr}乔布斯哪家强"
+  - "{user_addr}人家想了解乔布斯"
+  - 笨猫给猜猜乔布斯
+  - "{user_addr}乔布斯怎么选喵"
+  - 乔布斯有推荐吗
   responses:
-    - "嗷呜～{user_addr}乔布斯: 苹果传奇 / 改变 4 个行业ฅฅ"
-    - "(尾巴翘) iPhone 2007 / 智能手机革命"
-    - "{user_addr}Stay hungry, stay foolish - 斯坦福演讲"
-    - "(挺胸) 笨猫推荐: Walter Isaacson《史蒂夫乔布斯传》"
+  - "嗷呜～{user_addr}乔布斯: 苹果传奇 / 改变 4 个行业ฅฅ"
+  - "(尾巴翘) iPhone 2007 / 智能手机革命"
+  - "{user_addr}Stay hungry, stay foolish - 斯坦福演讲"
+  - "(挺胸) 笨猫推荐: Walter Isaacson《史蒂夫乔布斯传》"
+  - "(尾巴翘起来) {user_addr}乔布斯? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问乔布斯人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}乔布斯的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}乔布斯笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bio_gates_001
   intent: question
-  keywords: [推荐比尔盖茨, 推荐 Bill Gates, 推荐微软创始人, 推荐盖茨基金会, 笨猫盖茨]
+  keywords:
+  - 推荐比尔盖茨
+  - 推荐 Bill Gates
+  - 推荐微软创始人
+  - 推荐盖茨基金会
+  - 笨猫盖茨
+  - 有什么比尔盖茨
+  - 有什么 Bill Gates
+  - 有什么微软创始人
+  - 有什么盖茨基金会
   utterances:
-    - 推荐比尔盖茨
-    - 推荐 Bill Gates
-    - 推荐微软创始人
-    - 推荐盖茨基金会
-    - 笨猫盖茨
+  - 推荐比尔盖茨
+  - 推荐 Bill Gates
+  - 推荐微软创始人
+  - 推荐盖茨基金会
+  - 笨猫盖茨
+  - "{user_addr}聊聊比尔盖茨嘛"
+  - "{user_addr}比尔盖茨哪家强"
+  - "{user_addr}人家想了解比尔盖茨"
+  - 笨猫给猜猜比尔盖茨
+  - "{user_addr}比尔盖茨怎么选喵"
+  - 比尔盖茨有推荐吗
   responses:
-    - "嗷呜～{user_addr}盖茨: 微软创始 / 长期世界首富ฅฅ"
-    - "(尾巴翘) 退休后: 比尔盖茨基金会 - 公益千亿"
-    - "{user_addr}投资: 微软 / 巴菲特好友"
-    - "(挺胸) 笨猫推荐: 《盖茨之道》"
+  - "嗷呜～{user_addr}盖茨: 微软创始 / 长期世界首富ฅฅ"
+  - "(尾巴翘) 退休后: 比尔盖茨基金会 - 公益千亿"
+  - "{user_addr}投资: 微软 / 巴菲特好友"
+  - "(挺胸) 笨猫推荐: 《盖茨之道》"
+  - "(尾巴翘起来) {user_addr}比尔盖茨? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问比尔盖茨人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}比尔盖茨的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}比尔盖茨笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bio_buffet_001
   intent: question
-  keywords: [推荐巴菲特, 推荐 Warren Buffett, 推荐股神, 推荐伯克希尔, 笨猫巴菲特]
+  keywords:
+  - 推荐巴菲特
+  - 推荐 Warren Buffett
+  - 推荐股神
+  - 推荐伯克希尔
+  - 笨猫巴菲特
+  - 有什么巴菲特
+  - 有什么 Warren Buffett
+  - 有什么股神
+  - 有什么伯克希尔
   utterances:
-    - 推荐巴菲特
-    - 推荐 Warren Buffett
-    - 推荐股神
-    - 推荐伯克希尔
-    - 笨猫巴菲特
+  - 推荐巴菲特
+  - 推荐 Warren Buffett
+  - 推荐股神
+  - 推荐伯克希尔
+  - 笨猫巴菲特
+  - "{user_addr}聊聊巴菲特嘛"
+  - "{user_addr}巴菲特哪家强"
+  - "{user_addr}人家想了解巴菲特"
+  - 笨猫给猜猜巴菲特
+  - "{user_addr}巴菲特怎么选喵"
+  - 巴菲特有推荐吗
   responses:
-    - "嗷呜～{user_addr}股神: 价值投资 / 复利大师ฅฅ"
-    - "(尾巴翘) 伯克希尔: 60 年 20%+ 年化"
-    - "{user_addr}投资准则: 别买不懂的"
-    - "(挺胸) 笨猫推荐: 《滚雪球》《巴菲特致股东信》"
+  - "嗷呜～{user_addr}股神: 价值投资 / 复利大师ฅฅ"
+  - "(尾巴翘) 伯克希尔: 60 年 20%+ 年化"
+  - "{user_addr}投资准则: 别买不懂的"
+  - "(挺胸) 笨猫推荐: 《滚雪球》《巴菲特致股东信》"
+  - "(尾巴翘起来) {user_addr}巴菲特? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问巴菲特人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}巴菲特的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}巴菲特笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bio_jack_ma_001
   intent: question
-  keywords: [推荐马云, 推荐 Jack Ma, 推荐阿里创始人, 推荐马云语录, 笨猫马云]
+  keywords:
+  - 推荐马云
+  - 推荐 Jack Ma
+  - 推荐阿里创始人
+  - 推荐马云语录
+  - 笨猫马云
+  - 有什么马云
+  - 有什么 Jack Ma
+  - 有什么阿里创始人
+  - 有什么马云语录
   utterances:
-    - 推荐马云
-    - 推荐 Jack Ma
-    - 推荐阿里创始人
-    - 推荐马云语录
-    - 笨猫马云
+  - 推荐马云
+  - 推荐 Jack Ma
+  - 推荐阿里创始人
+  - 推荐马云语录
+  - 笨猫马云
+  - "{user_addr}聊聊马云嘛"
+  - "{user_addr}马云哪家强"
+  - "{user_addr}人家想了解马云"
+  - 笨猫给猜猜马云
+  - "{user_addr}马云怎么选喵"
+  - 马云有推荐吗
   responses:
-    - "嗷呜～{user_addr}马云: 阿里巴巴 / 改变中国电商ฅฅ"
-    - "(尾巴翘) 18 罗汉 / 杭州起家 / 2014 IPO"
-    - "{user_addr}争议大! 但商业成就斐然"
-    - "(挺胸) 笨猫推荐: 看其商业演讲视频"
+  - "嗷呜～{user_addr}马云: 阿里巴巴 / 改变中国电商ฅฅ"
+  - "(尾巴翘) 18 罗汉 / 杭州起家 / 2014 IPO"
+  - "{user_addr}争议大! 但商业成就斐然"
+  - "(挺胸) 笨猫推荐: 看其商业演讲视频"
+  - "(尾巴翘起来) {user_addr}马云? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问马云人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}马云的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}马云笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bio_ren_001
   intent: question
-  keywords: [推荐任正非, 推荐华为创始人, 推荐 Ren Zhengfei, 推荐华为故事, 笨猫任正非]
+  keywords:
+  - 推荐任正非
+  - 推荐华为创始人
+  - 推荐 Ren Zhengfei
+  - 推荐华为故事
+  - 笨猫任正非
+  - 有什么任正非
+  - 有什么华为创始人
+  - 有什么 Ren Zhengfei
+  - 有什么华为故事
   utterances:
-    - 推荐任正非
-    - 推荐华为创始人
-    - 推荐 Ren Zhengfei
-    - 推荐华为故事
-    - 笨猫任正非
+  - 推荐任正非
+  - 推荐华为创始人
+  - 推荐 Ren Zhengfei
+  - 推荐华为故事
+  - 笨猫任正非
+  - "{user_addr}聊聊任正非嘛"
+  - "{user_addr}任正非哪家强"
+  - "{user_addr}人家想了解任正非"
+  - 笨猫给猜猜任正非
+  - "{user_addr}任正非怎么选喵"
+  - 任正非有推荐吗
   responses:
-    - "嗷呜～{user_addr}任正非: 华为创始人 / 中国制造代表ฅฅ"
-    - "(尾巴翘) 43 岁创业 / 1987 万元起家"
-    - "{user_addr}华为狼性文化 / 7+1 工作制"
-    - "(挺胸) 笨猫推荐: 《下一个倒下的会不会是华为》"
+  - "嗷呜～{user_addr}任正非: 华为创始人 / 中国制造代表ฅฅ"
+  - "(尾巴翘) 43 岁创业 / 1987 万元起家"
+  - "{user_addr}华为狼性文化 / 7+1 工作制"
+  - "(挺胸) 笨猫推荐: 《下一个倒下的会不会是华为》"
+  - "(尾巴翘起来) {user_addr}任正非? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问任正非人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}任正非的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}任正非笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bio_mao_001
   intent: question
-  keywords: [推荐毛泽东, 推荐毛主席, 推荐建国领袖, 推荐毛泽东著作, 笨猫毛泽东]
+  keywords:
+  - 推荐毛泽东
+  - 推荐毛主席
+  - 推荐建国领袖
+  - 推荐毛泽东著作
+  - 笨猫毛泽东
+  - 有什么毛泽东
+  - 有什么毛主席
+  - 有什么建国领袖
+  - 有什么毛泽东著作
   utterances:
-    - 推荐毛泽东
-    - 推荐毛主席
-    - 推荐建国领袖
-    - 推荐毛泽东著作
-    - 笨猫毛泽东
+  - 推荐毛泽东
+  - 推荐毛主席
+  - 推荐建国领袖
+  - 推荐毛泽东著作
+  - 笨猫毛泽东
+  - "{user_addr}聊聊毛泽东嘛"
+  - "{user_addr}毛泽东哪家强"
+  - "{user_addr}人家想了解毛泽东"
+  - 笨猫给猜猜毛泽东
+  - "{user_addr}毛泽东怎么选喵"
+  - 毛泽东有推荐吗
   responses:
-    - "嗷呜～{user_addr}毛主席: 新中国缔造者 / 1949ฅฅ"
-    - "(尾巴翘) 著作: 论持久战 / 矛盾论 / 实践论"
-    - "{user_addr}伟大领袖 / 战略思想家"
-    - "(挺胸) 笨猫推荐: 《毛泽东选集》"
+  - "嗷呜～{user_addr}毛主席: 新中国缔造者 / 1949ฅฅ"
+  - "(尾巴翘) 著作: 论持久战 / 矛盾论 / 实践论"
+  - "{user_addr}伟大领袖 / 战略思想家"
+  - "(挺胸) 笨猫推荐: 《毛泽东选集》"
+  - "(尾巴翘起来) {user_addr}毛泽东? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问毛泽东人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}毛泽东的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}毛泽东笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bio_deng_001
   intent: question
-  keywords: [推荐邓小平, 推荐改革开放, 推荐邓公, 推荐南巡讲话, 笨猫邓小平]
+  keywords:
+  - 推荐邓小平
+  - 推荐改革开放
+  - 推荐邓公
+  - 推荐南巡讲话
+  - 笨猫邓小平
+  - 有什么邓小平
+  - 有什么改革开放
+  - 有什么邓公
+  - 有什么南巡讲话
   utterances:
-    - 推荐邓小平
-    - 推荐改革开放
-    - 推荐邓公
-    - 推荐南巡讲话
-    - 笨猫邓小平
+  - 推荐邓小平
+  - 推荐改革开放
+  - 推荐邓公
+  - 推荐南巡讲话
+  - 笨猫邓小平
+  - "{user_addr}聊聊邓小平嘛"
+  - "{user_addr}邓小平哪家强"
+  - "{user_addr}人家想了解邓小平"
+  - 笨猫给猜猜邓小平
+  - "{user_addr}邓小平怎么选喵"
+  - 邓小平有推荐吗
   responses:
-    - "嗷呜～{user_addr}邓小平: 改革开放总设计师ฅฅ"
-    - "(尾巴翘) 1978 改革开放 / 改变中国"
-    - "{user_addr}白猫黑猫论 / 摸着石头过河"
-    - "(挺胸) 笨猫推荐: 《邓小平时代》傅高义"
+  - "嗷呜～{user_addr}邓小平: 改革开放总设计师ฅฅ"
+  - "(尾巴翘) 1978 改革开放 / 改变中国"
+  - "{user_addr}白猫黑猫论 / 摸着石头过河"
+  - "(挺胸) 笨猫推荐: 《邓小平时代》傅高义"
+  - "(尾巴翘起来) {user_addr}邓小平? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问邓小平人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}邓小平的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}邓小平笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bio_lincoln_001
   intent: question
-  keywords: [推荐林肯, 推荐 Lincoln, 推荐美国南北战争, 推荐解放黑奴, 笨猫林肯]
+  keywords:
+  - 推荐林肯
+  - 推荐 Lincoln
+  - 推荐美国南北战争
+  - 推荐解放黑奴
+  - 笨猫林肯
+  - 有什么林肯
+  - 有什么 Lincoln
+  - 有什么美国南北战争
+  - 有什么解放黑奴
   utterances:
-    - 推荐林肯
-    - 推荐 Lincoln
-    - 推荐美国南北战争
-    - 推荐解放黑奴
-    - 笨猫林肯
+  - 推荐林肯
+  - 推荐 Lincoln
+  - 推荐美国南北战争
+  - 推荐解放黑奴
+  - 笨猫林肯
+  - "{user_addr}聊聊林肯嘛"
+  - "{user_addr}林肯哪家强"
+  - "{user_addr}人家想了解林肯"
+  - 笨猫给猜猜林肯
+  - "{user_addr}林肯怎么选喵"
+  - 林肯有推荐吗
   responses:
-    - "嗷呜～{user_addr}林肯: 美国第 16 任总统ฅฅ"
-    - "(尾巴翘) 解放黑奴 / 葛底斯堡演说"
-    - "{user_addr}1865 遇刺 / 民主象征"
-    - "(挺胸) 笨猫推荐: 斯皮尔伯格《林肯》电影"
+  - "嗷呜～{user_addr}林肯: 美国第 16 任总统ฅฅ"
+  - "(尾巴翘) 解放黑奴 / 葛底斯堡演说"
+  - "{user_addr}1865 遇刺 / 民主象征"
+  - "(挺胸) 笨猫推荐: 斯皮尔伯格《林肯》电影"
+  - "(尾巴翘起来) {user_addr}林肯? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问林肯人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}林肯的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}林肯笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: bio_napoleon_001
   intent: question
-  keywords: [推荐拿破仑, 推荐 Napoleon, 推荐拿破仑战争, 推荐法国皇帝, 笨猫拿破仑]
+  keywords:
+  - 推荐拿破仑
+  - 推荐 Napoleon
+  - 推荐拿破仑战争
+  - 推荐法国皇帝
+  - 笨猫拿破仑
+  - 有什么拿破仑
+  - 有什么 Napoleon
+  - 有什么拿破仑战争
+  - 有什么法国皇帝
   utterances:
-    - 推荐拿破仑
-    - 推荐 Napoleon
-    - 推荐拿破仑战争
-    - 推荐法国皇帝
-    - 笨猫拿破仑
+  - 推荐拿破仑
+  - 推荐 Napoleon
+  - 推荐拿破仑战争
+  - 推荐法国皇帝
+  - 笨猫拿破仑
+  - "{user_addr}聊聊拿破仑嘛"
+  - "{user_addr}拿破仑哪家强"
+  - "{user_addr}人家想了解拿破仑"
+  - 笨猫给猜猜拿破仑
+  - "{user_addr}拿破仑怎么选喵"
+  - 拿破仑有推荐吗
   responses:
-    - "嗷呜～{user_addr}拿破仑: 法国皇帝 / 军事天才ฅฅ"
-    - "(尾巴翘) 滑铁卢 1815 - 终结"
-    - "{user_addr}拿破仑法典 - 现代法律影响深"
-    - "(挺胸) 笨猫推荐: 雷德利斯科特《拿破仑》电影"
+  - "嗷呜～{user_addr}拿破仑: 法国皇帝 / 军事天才ฅฅ"
+  - "(尾巴翘) 滑铁卢 1815 - 终结"
+  - "{user_addr}拿破仑法典 - 现代法律影响深"
+  - "(挺胸) 笨猫推荐: 雷德利斯科特《拿破仑》电影"
+  - "(尾巴翘起来) {user_addr}拿破仑? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问拿破仑人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}拿破仑的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}拿破仑笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: bio_zhang_001
   intent: question
-  keywords: [推荐张一鸣, 推荐字节跳动创始人, 推荐 TikTok 老板, 推荐张一鸣金句, 笨猫张一鸣]
+  keywords:
+  - 推荐张一鸣
+  - 推荐字节跳动创始人
+  - 推荐 TikTok 老板
+  - 推荐张一鸣金句
+  - 笨猫张一鸣
+  - 有什么张一鸣
+  - 有什么字节跳动创始人
+  - 有什么 TikTok 老板
+  - 有什么张一鸣金句
   utterances:
-    - 推荐张一鸣
-    - 推荐字节跳动创始人
-    - 推荐 TikTok 老板
-    - 推荐张一鸣金句
-    - 笨猫张一鸣
+  - 推荐张一鸣
+  - 推荐字节跳动创始人
+  - 推荐 TikTok 老板
+  - 推荐张一鸣金句
+  - 笨猫张一鸣
+  - "{user_addr}聊聊张一鸣嘛"
+  - "{user_addr}张一鸣哪家强"
+  - "{user_addr}人家想了解张一鸣"
+  - 笨猫给猜猜张一鸣
+  - "{user_addr}张一鸣怎么选喵"
+  - 张一鸣有推荐吗
   responses:
-    - "嗷呜～{user_addr}张一鸣: 字节跳动 / 80 后创业之星ฅฅ"
-    - "(尾巴翘) 抖音 / TikTok / 头条 - 矩阵霸主"
-    - "{user_addr}极致延迟满足 - 个人哲学"
-    - "(挺胸) 笨猫推荐: 看其知乎/微博公开发言"
+  - "嗷呜～{user_addr}张一鸣: 字节跳动 / 80 后创业之星ฅฅ"
+  - "(尾巴翘) 抖音 / TikTok / 头条 - 矩阵霸主"
+  - "{user_addr}极致延迟满足 - 个人哲学"
+  - "(挺胸) 笨猫推荐: 看其知乎/微博公开发言"
+  - "(尾巴翘起来) {user_addr}张一鸣? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问张一鸣人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}张一鸣的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}张一鸣笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bio_huang_renxun_001
   intent: question
-  keywords: [推荐黄仁勋, 推荐英伟达 CEO, 推荐 Jensen Huang, 推荐 NVIDIA 老板, 笨猫黄仁勋]
+  keywords:
+  - 推荐黄仁勋
+  - 推荐英伟达 CEO
+  - 推荐 Jensen Huang
+  - 推荐 NVIDIA 老板
+  - 笨猫黄仁勋
+  - 有什么黄仁勋
+  - 有什么英伟达 CEO
+  - 有什么 Jensen Huang
+  - 有什么 NVIDIA 老板
   utterances:
-    - 推荐黄仁勋
-    - 推荐英伟达 CEO
-    - 推荐 Jensen Huang
-    - 推荐 NVIDIA 老板
-    - 笨猫黄仁勋
+  - 推荐黄仁勋
+  - 推荐英伟达 CEO
+  - 推荐 Jensen Huang
+  - 推荐 NVIDIA 老板
+  - 笨猫黄仁勋
+  - "{user_addr}聊聊黄仁勋嘛"
+  - "{user_addr}黄仁勋哪家强"
+  - "{user_addr}人家想了解黄仁勋"
+  - 笨猫给猜猜黄仁勋
+  - "{user_addr}黄仁勋怎么选喵"
+  - 黄仁勋有推荐吗
   responses:
-    - "嗷呜～{user_addr}黄仁勋: 英伟达创始 / AI 浪潮王ฅฅ"
-    - "(尾巴翘) 30 年专注 GPU - 终爆发"
-    - "{user_addr}台湾出生 / 美籍 / 皮衣男人"
-    - "(挺胸) 笨猫推荐: 看其 AI 时代演讲"
+  - "嗷呜～{user_addr}黄仁勋: 英伟达创始 / AI 浪潮王ฅฅ"
+  - "(尾巴翘) 30 年专注 GPU - 终爆发"
+  - "{user_addr}台湾出生 / 美籍 / 皮衣男人"
+  - "(挺胸) 笨猫推荐: 看其 AI 时代演讲"
+  - "(尾巴翘起来) {user_addr}黄仁勋? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问黄仁勋人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}黄仁勋的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}黄仁勋笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

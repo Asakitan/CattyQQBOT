@@ -11785,11 +11785,13 @@ async def _mount_dev_sim_chat_endpoint() -> None:
         history_replace = bool(body.get("history_replace", False))
         include_messages = bool(body.get("include_messages", True))
         persist = bool(body.get("persist", False))
+        with_tools = bool(body.get("with_tools", True))  # dev: with_tools=False 走 chat_completion(无 tools), 测 tools 对 cache 的影响
         try:
             from .catty_sim_chat import sim_chat
             result = await sim_chat(
                 text=text, user_id=user_id, group_id=group_id,
                 live=live, history_replace=history_replace, persist=persist,
+                with_tools=with_tools,
             )
         except Exception as exc:  # noqa: BLE001
             import traceback

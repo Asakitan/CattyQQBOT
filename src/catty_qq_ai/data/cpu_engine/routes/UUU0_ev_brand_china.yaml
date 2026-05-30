@@ -3,204 +3,323 @@
 
 - name: ec_byd_han_001
   intent: question
-  keywords: [推荐比亚迪汉, 推荐汉EV, 推荐汉DMi, 推荐比亚迪轿车, 笨猫比亚迪汉]
+  keywords: [推荐比亚迪汉, 推荐汉EV, 推荐汉DMi, 推荐比亚迪轿车, 笨猫比亚迪汉, 求推荐比亚迪汉, 讲讲比亚迪汉, 比亚迪汉推荐, 求推荐汉EV, 讲讲汉EV]
   utterances:
     - 推荐比亚迪汉
     - 推荐汉EV
     - 推荐汉DMi
     - 推荐比亚迪轿车
     - 笨猫比亚迪汉
+    - 推荐比亚迪汉啊
+    - 推荐汉EV呢
+    - 推荐汉DMi嘛
+    - 推荐比亚迪轿车啦
+    - 笨猫比亚迪汉呀
+    - 推荐比亚迪汉!
   responses:
     - "嗷呜～{user_addr}比亚迪汉 - 国产C级旗舰ฅฅ"
     - "(尾巴翘) 刀片电池 / DMi混动 / EV纯电"
     - "{user_addr}20w起 / 续航 715km / 龙颜设计"
     - "(挺胸) 猫猫推荐: 汉EV 四驱版!"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(钻怀里) {user_addr}下次去店里带米雪儿一起~ 帮你把关嘛喵!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫我的专业素养!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 人家给你按住爪子!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_byd_seal_001
   intent: question
-  keywords: [推荐比亚迪海豹, 推荐海豹EV, 推荐海豹DMi, 推荐海洋系列, 笨猫海豹]
+  keywords: [推荐比亚迪海豹, 推荐海豹EV, 推荐海豹DMi, 推荐海洋系列, 笨猫海豹, 求推荐比亚迪海豹, 讲讲比亚迪海豹, 比亚迪海豹推荐, 求推荐海豹EV, 讲讲海豹EV]
   utterances:
     - 推荐比亚迪海豹
     - 推荐海豹EV
     - 推荐海豹DMi
     - 推荐海洋系列
     - 笨猫海豹
+    - 推荐比亚迪海豹啊
+    - 推荐海豹EV呢
+    - 推荐海豹DMi嘛
+    - 推荐海洋系列啦
+    - 笨猫海豹呀
+    - 推荐比亚迪海豹!
+    - 推荐海豹EV!
   responses:
     - "嗷呜～{user_addr}比亚迪海豹 - 运动猎装ฅฅ"
     - "(尾巴翘) CTB电池车身一体 / 后驱后驱猫猫爱"
     - "{user_addr}18w起 / 百公里3.8s / 海洋美学"
     - "(挺胸) 笨猫推荐: 海豹四驱性能版!"
+    - "(摇尾) {user_addr}下次去店里带笨猫我一起~ 帮你把关嘛喵!"
+    - "(歪头) {user_addr}定了哪款记得跟人家说一声嘛喵～ฅฅ"
+    - "嗷呜～{user_addr}买回来给笨猫我看看! 人家也想见识见识ฅฅ"
+    - "(歪头) 人家给{user_addr}补一条 - 推荐比亚迪海豹也是宝藏喵～ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_li_l9_001
   intent: question
-  keywords: [推荐理想L9, 推荐理想旗舰, 推荐六座SUV, 推荐理想增程, 笨猫理想L9]
+  keywords: [推荐理想L9, 推荐理想旗舰, 推荐六座SUV, 推荐理想增程, 笨猫理想L9, 求推荐理想L9, 讲讲理想L9, 理想L9推荐, 求推荐理想旗舰]
   utterances:
     - 推荐理想L9
     - 推荐理想旗舰
     - 推荐六座SUV
     - 推荐理想增程
     - 笨猫理想L9
+    - 推荐理想L9啊
+    - 推荐理想旗舰呢
+    - 推荐六座SUV嘛
+    - 推荐理想增程啦
+    - 笨猫理想L9呀
   responses:
     - "嗷呜～{user_addr}理想L9 - 奶爸车王ฅฅ"
     - "(尾巴翘) 六座大空间 / 增程 / 冰箱彩电大沙发"
     - "{user_addr}45w档 / CLTC 1100km / 全家出游绝配"
     - "(挺胸) 人家推荐: L9 Max 全配!"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫我说一声嘛喵～ฅฅ"
+    - "(歪头) {user_addr}这领域水挺深的~ 笨猫我陪你慢慢选~"
+    - "(爪子搭上去) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 猫猫提醒过哦!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_li_mega_001
   intent: question
-  keywords: [推荐理想MEGA, 推荐MPV电动, 推荐理想MPV, 推荐7座MPV, 笨猫MEGA]
+  keywords: [推荐理想MEGA, 推荐MPV电动, 推荐理想MPV, 推荐7座MPV, 笨猫MEGA, 求推荐理想MEGA, 讲讲理想MEGA, 理想MEGA推荐, 求推荐MPV电动, 讲讲MPV电动]
   utterances:
     - 推荐理想MEGA
     - 推荐MPV电动
     - 推荐理想MPV
     - 推荐7座MPV
     - 笨猫MEGA
+    - 推荐理想MEGA啊
+    - 推荐MPV电动呢
+    - 推荐理想MPV嘛
+    - 推荐7座MPV啦
+    - 笨猫MEGA呀
+    - 推荐理想M
   responses:
     - "嗷呜～{user_addr}理想MEGA - 纯电MPV首旗ฅฅ"
     - "(尾巴翘) 5C超充 / 12分钟 500km"
     - "{user_addr}55w档 / 子弹头造型 / 七座商务"
     - "(挺胸) 笨猫推荐: 商务接待首选!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是米雪儿的专业素养!"
+    - "(歪头) {user_addr}定了哪款记得跟人家说一声嘛喵～ฅฅ"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 猫猫提醒过哦!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 人家给你按住爪子!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ec_nio_et7_001
   intent: question
-  keywords: [推荐蔚来ET7, 推荐蔚来轿车, 推荐换电轿车, 推荐ET7, 笨猫ET7]
+  keywords: [推荐蔚来ET7, 推荐蔚来轿车, 推荐换电轿车, 推荐ET7, 笨猫ET7, 求推荐蔚来ET7, 讲讲蔚来ET7, 蔚来ET7推荐, 求推荐蔚来轿车]
   utterances:
     - 推荐蔚来ET7
     - 推荐蔚来轿车
     - 推荐换电轿车
     - 推荐ET7
     - 笨猫ET7
+    - 推荐蔚来ET7啊
+    - 推荐蔚来轿车呢
+    - 推荐换电轿车嘛
+    - 推荐ET7啦
+    - 笨猫ET7呀
   responses:
     - "嗷呜～{user_addr}蔚来ET7 - 行政旗舰轿车ฅฅ"
     - "(尾巴翘) 150kWh电池 / 续航 1000km+"
     - "{user_addr}45w档 / 换电服务 / Nappa真皮"
     - "(挺胸) 猫猫推荐: 长途党换电香!"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(爪子搭上去) {user_addr}下次去店里带人家一起~ 帮你把关嘛喵!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 猫猫帮你挑喵～"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫说一声嘛喵～ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_nio_es8_001
   intent: question
-  keywords: [推荐蔚来ES8, 推荐蔚来SUV, 推荐七座蔚来, 推荐ES8, 笨猫ES8]
+  keywords: [推荐蔚来ES8, 推荐蔚来SUV, 推荐七座蔚来, 推荐ES8, 笨猫ES8, 求推荐蔚来ES8, 讲讲蔚来ES8, 蔚来ES8推荐, 求推荐蔚来SUV, 讲讲蔚来SUV]
   utterances:
     - 推荐蔚来ES8
     - 推荐蔚来SUV
     - 推荐七座蔚来
     - 推荐ES8
     - 笨猫ES8
+    - 推荐蔚来ES8啊
+    - 推荐蔚来SUV呢
+    - 推荐七座蔚来嘛
+    - 推荐ES8啦
+    - 笨猫ES8呀
+    - 推荐蔚来ES8!
+    - 推荐蔚来SUV!
   responses:
     - "嗷呜～{user_addr}蔚来ES8 - 大型SUV旗舰ฅฅ"
     - "(尾巴翘) 六/七座 / 第二排零重力座椅"
     - "{user_addr}50w档 / NIO House / 服务无双"
     - "(挺胸) 笨猫推荐: 家用商务两用!"
+    - "嗷呜～{user_addr}买回来给笨猫我看看! 人家也想见识见识ฅฅ"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 猫猫提醒过哦!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫的专业素养!"
+    - "(尾巴翘) {user_addr}下次去店里带猫猫一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_xpeng_p7_001
   intent: question
-  keywords: [推荐小鹏P7, 推荐P7i, 推荐运动轿跑, 推荐小鹏轿车, 笨猫P7]
+  keywords: [推荐小鹏P7, 推荐P7i, 推荐运动轿跑, 推荐小鹏轿车, 笨猫P7, 求推荐小鹏P7, 讲讲小鹏P7, 小鹏P7推荐]
   utterances:
     - 推荐小鹏P7
     - 推荐P7i
     - 推荐运动轿跑
     - 推荐小鹏轿车
     - 笨猫P7
+    - 推荐小鹏P7啊
+    - 推荐P7i呢
+    - 推荐运动轿跑嘛
+    - 推荐小鹏轿车啦
+    - 笨猫P7呀
+    - 推荐小鹏P7!
   responses:
     - "嗷呜～{user_addr}小鹏P7 - 智能轿跑ฅฅ"
     - "(尾巴翘) XNGP高阶辅助驾驶 / 颜值在线"
     - "{user_addr}24w起 / 续航 706km / 鹏翼门 P7i"
     - "(挺胸) 猫猫推荐: 智驾党闭眼入!"
+    - "(尾巴扫脸) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 人家提醒过哦!"
+    - "(蹭蹭手) {user_addr}下次去店里带米雪儿一起~ 帮你把关嘛喵!"
+    - "(爪子托腮) {user_addr}这领域水挺深的~ 米雪儿陪你慢慢选~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_xpeng_g9_001
   intent: question
-  keywords: [推荐小鹏G9, 推荐G9, 推荐中大型SUV, 推荐小鹏SUV, 笨猫G9]
+  keywords: [推荐小鹏G9, 推荐G9, 推荐中大型SUV, 推荐小鹏SUV, 笨猫G9, 求推荐小鹏G9, 讲讲小鹏G9, 小鹏G9推荐]
   utterances:
     - 推荐小鹏G9
     - 推荐G9
     - 推荐中大型SUV
     - 推荐小鹏SUV
     - 笨猫G9
+    - 推荐小鹏G9啊
+    - 推荐G9呢
+    - 推荐中大型SUV嘛
+    - 推荐小鹏SUV啦
+    - 笨猫G9呀
   responses:
     - "嗷呜～{user_addr}小鹏G9 - 800V高压旗舰SUVฅฅ"
     - "(尾巴翘) 5分钟 200km 超充"
     - "{user_addr}26w档 / XNGP / 5座大空间"
     - "(挺胸) 笨猫推荐: 性价比智驾SUV!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 人家提醒过哦!"
+    - "(挺胸) 猫猫的小爪子已经帮{user_addr}收藏好啦贴贴~"
+    - "(歪头) 笨猫给{user_addr}补一条 - 推荐小鹏G9也是宝藏喵～ฅฅ"
+    - "嗷呜～{user_addr}买回来给猫猫看看! 人家也想见识见识ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_xiaomi_su7_001
   intent: question
-  keywords: [推荐小米SU7, 推荐SU7, 推荐小米汽车, 推荐SU7Ultra, 笨猫SU7]
+  keywords: [推荐小米SU7, 推荐SU7, 推荐小米汽车, 推荐SU7Ultra, 笨猫SU7, 求推荐小米SU7, 讲讲小米SU7, 小米SU7推荐, 求推荐SU7, 讲讲SU7]
   utterances:
     - 推荐小米SU7
     - 推荐SU7
     - 推荐小米汽车
     - 推荐SU7Ultra
     - 笨猫SU7
+    - 推荐小米SU7啊
+    - 推荐SU7呢
+    - 推荐小米汽车嘛
+    - 推荐SU7Ultra啦
+    - 笨猫SU7呀
+    - 推荐SU7U
   responses:
     - "嗷呜～{user_addr}小米SU7 - 米粉狂欢ฅฅ"
     - "(尾巴翘) 颜值天花板 / 雷总亲自盯"
     - "{user_addr}22w起 / 续航 800km / Ultra 1548马力"
     - "(挺胸) 人家推荐: SU7 Max 性价比之王!"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫我说一声嘛喵～ฅฅ"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(尾巴绕过去) 米雪儿给{user_addr}补一条 - 推荐小米SU7也是宝藏喵～ฅฅ"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是米雪儿的专业素养!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_zeekr_001_001
   intent: question
-  keywords: [推荐极氪001, 推荐ZEEKR001, 推荐极氪猎装, 推荐极氪轿车, 笨猫极氪001]
+  keywords: [推荐极氪001, 推荐ZEEKR001, 推荐极氪猎装, 推荐极氪轿车, 笨猫极氪001, 求推荐极氪001, 讲讲极氪001, 极氪001推荐]
   utterances:
     - 推荐极氪001
     - 推荐ZEEKR001
     - 推荐极氪猎装
     - 推荐极氪轿车
     - 笨猫极氪001
+    - 推荐极氪001啊
+    - 推荐ZEEKR001呢
+    - 推荐极氪猎装嘛
+    - 推荐极氪轿车啦
+    - 笨猫极氪001呀
+    - 推荐ZEEK
   responses:
     - "嗷呜～{user_addr}极氪001 - 猎装轿跑ฅฅ"
     - "(尾巴翘) 吉利浩瀚架构 / 双电机四驱"
     - "{user_addr}27w档 / 续航 1032km / FR后驱"
     - "(挺胸) 笨猫推荐: 颜值动力双在线!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 猫猫给你按住爪子!"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 米雪儿提醒过哦!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫的专业素养!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ec_yangwang_u8_001
   intent: question
-  keywords: [推荐仰望U8, 推荐U8, 推荐百万国产, 推荐易四方, 笨猫仰望U8]
+  keywords: [推荐仰望U8, 推荐U8, 推荐百万国产, 推荐易四方, 笨猫仰望U8, 求推荐仰望U8, 讲讲仰望U8, 仰望U8推荐, 求推荐U8]
   utterances:
     - 推荐仰望U8
     - 推荐U8
     - 推荐百万国产
     - 推荐易四方
     - 笨猫仰望U8
+    - 推荐仰望U8啊
+    - 推荐U8呢
+    - 推荐百万国产嘛
+    - 推荐易四方啦
+    - 笨猫仰望U8呀
+    - 推荐仰望U8!
+    - 推荐U8!
   responses:
     - "嗷呜～{user_addr}仰望U8 - 国产百万硬派ฅฅ"
     - "(尾巴翘) 易四方四电机 / 原地掉头 / 应急浮水"
     - "{user_addr}108w / 比亚迪天花板 / 越野怪兽"
     - "(挺胸) 猫猫推荐: 富哥越野收藏级!"
+    - "(尾巴绕过去) 笨猫给{user_addr}补一条 - 推荐仰望U8也是宝藏喵～ฅฅ"
+    - "(尾巴摇) {user_addr}这领域水挺深的~ 笨猫我陪你慢慢选~"
+    - "(歪头) {user_addr}定了哪款记得跟人家说一声嘛喵～ฅฅ"
+    - "(贴脸) {user_addr}下次去店里带猫猫一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: ec_aito_m7_001
   intent: question
-  keywords: [推荐问界M7, 推荐问界M7Max, 推荐华为问界, 推荐增程SUV, 笨猫问界M7]
+  keywords: [推荐问界M7, 推荐问界M7Max, 推荐华为问界, 推荐增程SUV, 笨猫问界M7, 求推荐问界M7, 讲讲问界M7, 问界M7推荐, 求推荐问界M7Max]
   utterances:
     - 推荐问界M7
     - 推荐问界M7Max
     - 推荐华为问界
     - 推荐增程SUV
     - 笨猫问界M7
+    - 推荐问界M7啊
+    - 推荐问界M7Max呢
+    - 推荐华为问界嘛
+    - 推荐增程SUV啦
+    - 笨猫问界M7呀
   responses:
     - "嗷呜～{user_addr}问界M7 - 华为加持热销王ฅฅ"
     - "(尾巴翘) ADS 2.0 / 鸿蒙座舱 / 增程长续航"
     - "{user_addr}25w档 / 五/六座可选 / 余总站台"
     - "(挺胸) 笨猫推荐: 智驾鸿蒙双buff!"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(歪头) {user_addr}定了哪款记得跟米雪儿说一声嘛喵～ฅฅ"
+    - "(钻怀里) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(挺胸) 人家的小爪子已经帮{user_addr}收藏好啦贴贴~"
   cooldown_seconds: 60
   weight: 1.0

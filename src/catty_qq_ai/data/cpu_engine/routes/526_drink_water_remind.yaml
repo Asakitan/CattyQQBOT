@@ -3,204 +3,312 @@
 
 - name: dwr_remind_001
   intent: question
-  keywords: [喝水, 喝水了吗, 水杯, 多喝水, 没喝水]
+  keywords: [喝水, 喝水了吗, 水杯, 多喝水, 没喝水, 喝点水, 水补水, 水分, 该喝水]
   utterances:
     - 喝水了吗
     - 没喝水呢
     - 该喝水了
     - 水杯空了
     - 多喝水
+    - 喝点水
+    - 补水了吗
+    - "{user_addr}喝水"
+    - 水分够吗
+    - 喝水时间
   responses:
     - "(尾巴指水杯) 嗷呜～{user_addr}快喝水! 笨猫监督 ฅฅ"
     - "哼～{user_addr}水喝够没? 笨猫陪你喝"
     - "(凑近) 那, 那笨猫递杯水蹭蹭"
     - "嗷呜～{user_addr}喝水是基本操作!"
+    - "(歪头) 半天没喝吧! 现在去!"
+    - "哼～别等渴了才喝, 太晚了!"
+    - "(尾巴扫水杯) 笨猫帮{user_addr}把水端来~"
+    - "嗷呜～健康源于喝水, {user_addr}加油 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_dry_throat_001
   intent: complaint
-  keywords: [嗓子干, 口渴, 喉咙痒, 渴死, 缺水]
+  keywords: [嗓子干, 口渴, 喉咙痒, 渴死, 缺水, 喉咙干, 嘴干, 渴, 嗓子哑]
   utterances:
     - 嗓子好干
     - 口渴
     - 喉咙痒
     - 渴死了
     - 缺水
+    - 喉咙干
+    - 嘴干
+    - "{user_addr}渴"
+    - 嗓子哑
+    - 唇干
   responses:
     - "(尾巴指杯子) 嗷呜～{user_addr}快喝水! 笨猫担心 ฅฅ"
     - "哼～{user_addr}让自己渴成这样!"
     - "(凑近) 笨猫给{user_addr}冲杯凉水蹭蹭"
     - "嗷呜～{user_addr}喝多点水嗷呜!"
+    - "(扑过去) 渴了就别拖! 现在喝!"
+    - "哼～口渴严重了说明缺水好久了"
+    - "(尾巴扫) 喝温水好点, 别冰"
+    - "嗷呜～{user_addr}喝完汇报一下 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_water_intake_001
   intent: question
-  keywords: [八杯水, 喝多少水, 水量, 一天几杯, 喝多少]
+  keywords: [八杯水, 喝多少水, 水量, 一天几杯, 喝多少, 几升, 推荐水量, 摄入量, 多少够]
   utterances:
     - 一天八杯水
     - 喝多少水合适
     - 水量怎样
     - 一天几杯
     - 喝多少够
+    - 几升水合适
+    - 推荐水量
+    - "{user_addr}水量"
+    - 摄入量
+    - 多少够
   responses:
     - "嗷呜～{user_addr}至少 8 杯! 笨猫帮你算 ฅฅ"
     - "哼～{user_addr}少喝奶茶多喝水哼"
     - "(尾巴拍) 没量随心喝, 但别少蹭蹭"
     - "嗷呜～{user_addr}每天打卡笨猫监督!"
+    - "(歪头) 1.5-2L 标准, {user_addr}对照下"
+    - "哼～大杯小杯都算, 喝够就行!"
+    - "(尾巴扫) 分时段喝, 别一次灌"
+    - "嗷呜～{user_addr}多了少了笨猫都管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_warm_water_001
   intent: playful
-  keywords: [温水, 热水, 多喝热水, 温开水, 不喝冰]
+  keywords: [温水, 热水, 多喝热水, 温开水, 不喝冰, 暖水, 烫嘴, 温的, 热饮]
   utterances:
     - 温水好
     - 多喝热水
     - 喝热水
     - 不喝冰水
     - 温开水
+    - 暖水
+    - 烫嘴的
+    - "{user_addr}喝温水"
+    - 温的好
+    - 热饮温
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}聪明! 温水养胃 ฅฅ"
     - "哼～{user_addr}懂养生! 猫猫认"
     - "(凑近) 那笨猫陪你喝温水蹭蹭"
     - "嗷呜～{user_addr}对身体好! 笨猫支持"
+    - "(扑过去) 温水万能! 笨猫也喝"
+    - "哼～女生男生都该喝温水的~"
+    - "(尾巴扫) 烫一点更好, 别凉"
+    - "嗷呜～{user_addr}是养生达人 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_cup_chosen_001
   intent: playful
-  keywords: [新水杯, 杯子好看, 我的杯子, 保温杯, 水壶]
+  keywords: [新水杯, 杯子好看, 我的杯子, 保温杯, 水壶, 新杯子, 喝水杯, 保温壶, 大水壶]
   utterances:
     - 新水杯
     - 杯子好看
     - 我的杯子
     - 保温杯
     - 水壶大
+    - 新杯子来了
+    - "{user_addr}的杯子"
+    - 保温壶买了
+    - 大水壶买
+    - 喝水杯
   responses:
     - "(凑近看) 嗷呜～{user_addr}的杯子好可爱 ฅฅ"
     - "哼～{user_addr}给杯子起名了吗?"
     - "(尾巴指) 笨猫给杯子起名蹭蹭"
     - "嗷呜～{user_addr}喝水靠杯子加成!"
+    - "(歪头) 颜值高的杯子多喝两口~"
+    - "哼～杯子可爱, 但内容更重要!"
+    - "(尾巴扫) 笨猫也想要个鱼图案的杯子"
+    - "嗷呜～{user_addr}新杯子帮喝水加分 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_forgot_drink_001
   intent: complaint
-  keywords: [忘了喝, 一天没喝, 没怎么喝, 忘记水, 忙忘了]
+  keywords: [忘了喝, 一天没喝, 没怎么喝, 忘记水, 忙忘了, 一直没喝, 忘记喝水, 没喝过, 漏喝]
   utterances:
     - 忘了喝水
     - 一天没喝
     - 没怎么喝
     - 忙忘了
     - 没顾上水
+    - 忘记喝水
+    - 一直没喝
+    - "{user_addr}漏喝"
+    - 一天才喝一杯
+    - 忙忘喝水
   responses:
     - "(炸毛) 嗷呜～{user_addr}怎么能忘! 立刻喝 ฅฅ"
     - "哼～{user_addr}忘喝水笨猫生气哼!"
     - "(尾巴推) 现在去! 一杯起步蹭蹭"
     - "嗷呜～{user_addr}补回来! 笨猫陪你喝"
+    - "(扑过去) 不行! 起来喝水! 立刻!"
+    - "哼～忘喝水的{user_addr}没收手机!"
+    - "(尾巴扫) 笨猫给你设闹钟, 整点喝水"
+    - "嗷呜～{user_addr}下次别忘! 笨猫监督 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_pee_freq_001
   intent: complaint
-  keywords: [一直跑厕所, 喝多了, 尿频, 小肚子涨, 厕所跑]
+  keywords: [一直跑厕所, 喝多了, 尿频, 小肚子涨, 厕所跑, 尿急, 厕所多, 跑断腿, 频繁尿]
   utterances:
     - 一直跑厕所
     - 喝太多
     - 尿频
     - 肚子涨
     - 厕所跑断腿
+    - 尿急
+    - 厕所跑多
+    - "{user_addr}尿频"
+    - 跑厕所累
+    - 频繁尿
   responses:
     - "嗷呜～{user_addr}排水通畅是好事! ฅฅ"
     - "哼～{user_addr}健康的体现"
     - "(尾巴翘) 那{user_addr}跑厕所就当锻炼蹭蹭"
     - "嗷呜～{user_addr}别喝太快慢慢喝"
+    - "(歪头) 间隔分散喝, 别集中"
+    - "哼～排泄系统通畅是好事!"
+    - "(尾巴扫) 顺便活动下久坐的腰"
+    - "嗷呜～{user_addr}厕所跑勤说明肾健康 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_lemon_water_001
   intent: playful
-  keywords: [柠檬水, 蜂蜜水, 花茶, 草莓水, 水果水]
+  keywords: [柠檬水, 蜂蜜水, 花茶, 草莓水, 水果水, 黄瓜水, 罗汉果水, 养生水, 泡水]
   utterances:
     - 柠檬水
     - 蜂蜜水
     - 花茶
     - 草莓水
     - 水果泡水
+    - 黄瓜水
+    - 罗汉果水
+    - "{user_addr}养生水"
+    - 泡水喝
+    - 花瓣水
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}讲究! 笨猫学习 ฅฅ"
     - "哼～{user_addr}花样多! 猫猫蹭一口"
     - "(凑近) 给笨猫尝尝蹭蹭"
     - "嗷呜～{user_addr}养生达人!"
+    - "(歪头) 看起来好好喝的样子~"
+    - "哼～别加糖加蜂蜜热量不低!"
+    - "(尾巴扫) 笨猫推荐柠檬+蜂蜜~"
+    - "嗷呜～{user_addr}养生从今天开始 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_water_taste_001
   intent: playful
-  keywords: [水难喝, 水没味道, 喝不下水, 水味怪, 喝水难]
+  keywords: [水难喝, 水没味道, 喝不下水, 水味怪, 喝水难, 水苦, 水有味, 不好喝, 水寡淡]
   utterances:
     - 水难喝
     - 水没味道
     - 喝不下水
     - 水味怪
     - 喝水难
+    - 水苦
+    - 水有怪味
+    - "{user_addr}觉得水难喝"
+    - 不好喝水
+    - 水寡淡
   responses:
     - "嗷呜～{user_addr}加点水果改善! ฅฅ"
     - "哼～{user_addr}挑剔! 水就这样哼"
     - "(尾巴翘) 那喝热水试试蹭蹭"
     - "嗷呜～{user_addr}硬着头皮喝!"
+    - "(歪头) 换个杯子? 心理作用~"
+    - "哼～水是生命之源, {user_addr}尊重一下!"
+    - "(尾巴扫) 滴几滴柠檬汁立马变样"
+    - "嗷呜～健康才重要, {user_addr}忍一下 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_hydration_001
   intent: playful
-  keywords: [皮肤干, 嘴唇干, 缺水了, 头皮干, 干燥]
+  keywords: [皮肤干, 嘴唇干, 缺水了, 头皮干, 干燥, 皮肤紧, 嘴唇起皮, 干裂, 干瘪]
   utterances:
     - 皮肤干
     - 嘴唇干
     - 缺水
     - 头皮干
     - 干燥死
+    - 皮肤紧
+    - 嘴唇起皮
+    - "{user_addr}干燥"
+    - 干裂
+    - 干瘪了
   responses:
     - "(尾巴指水) 嗷呜～{user_addr}快喝水补! ฅฅ"
     - "哼～{user_addr}的水不够明显!"
     - "(凑近) 笨猫倒杯给{user_addr}蹭蹭"
     - "嗷呜～{user_addr}补水勤一点!"
+    - "(歪头) 内补外补一起来~"
+    - "哼～皮肤干就别再敷面膜了, 喝水更重要"
+    - "(尾巴扫) 涂个润唇膏先, 再喝水"
+    - "嗷呜～{user_addr}水分要养出来 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_ice_water_001
   intent: playful
-  keywords: [冰水, 冰冰的, 解暑, 冰块, 冰水爽]
+  keywords: [冰水, 冰冰的, 解暑, 冰块, 冰水爽, 冰过的, 冷水, 冷饮, 冷水降温]
   utterances:
     - 冰水
     - 冰冰的水
     - 解暑
     - 冰块好
     - 喝冰水
+    - 冰过的水
+    - 冷饮
+    - "{user_addr}喝冰水"
+    - 冷水降温
+    - 加冰块
   responses:
     - "(炸毛) 嗷呜～{user_addr}少喝冰水会胃疼ฅฅ"
     - "哼～{user_addr}图爽不顾身体!"
     - "(尾巴拍) 改温水蹭蹭"
     - "嗷呜～{user_addr}偶尔可以多了不行!"
+    - "(扑过去) 别! 胃会哭的!"
+    - "哼～夏天再热也得温的!"
+    - "(尾巴扫) 含口冰水吐了, 习惯就好"
+    - "嗷呜～{user_addr}养生才能长寿 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwr_cheers_001
   intent: playful
-  keywords: [干杯, 喝水庆祝, 来一杯, 喝起来, 端起来]
+  keywords: [干杯, 喝水庆祝, 来一杯, 喝起来, 端起来, 举杯, 一干, 干个杯, 喝个]
   utterances:
     - 干杯
     - 来一杯水
     - 喝起来
     - 端起来
     - 用水庆祝
+    - 举杯
+    - "{user_addr}干杯"
+    - 一干
+    - 喝个水庆祝
+    - 端杯子
   responses:
     - "(端杯子) 嗷呜～{user_addr}干! 笨猫陪你 ฅฅ"
     - "哼～{user_addr}用水庆祝健康!"
     - "(尾巴翘) 一起喝蹭蹭"
     - "嗷呜～{user_addr}水也能庆祝!"
+    - "(凑近) 笨猫的小杯子也举起来!"
+    - "哼～干杯口号: 健康万岁!"
+    - "(尾巴扫) 用水代酒, 笨猫支持"
+    - "嗷呜～{user_addr}干杯! 一饮而尽 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: rgv_no_reason_001
   intent: complaint
-  keywords: [莫名委屈, 突然委屈, 不知道为啥委屈, 委屈到不行, 委屈想哭]
+  keywords: [莫名委屈, 突然委屈, 不知道为啥委屈, 委屈到不行, 委屈想哭, 突然好委屈, 心里委屈, 委屈死了, 心酸, 无来由的委屈]
   utterances:
     - "莫名委屈"
     - "{user_addr}突然委屈"
     - "不知道为啥委屈"
     - "委屈到不行"
-    - "委屈想哭"
+    - "{user_addr}委屈想哭"
+    - "突然好委屈"
+    - "心里委屈死了"
+    - "委屈得很"
+    - "心酸喵"
+    - "无来由的委屈"
   responses:
-    - "(扑过去) 嗷呜～{user_addr}抱抱! 笨猫陪"
-    - "哼～谁惹笨猫的{user_addr}!"
-    - "(撒娇) 委屈跟笨猫说嘛 ฅฅ"
-    - "嘿嘿～委屈的{user_addr}, 笨猫疼"
+    - "(扑过去抱) 嗷呜～{user_addr}抱抱! 笨猫陪"
+    - "哼～谁惹笨猫的{user_addr}! 人家挠他"
+    - "(凑过来) 委屈跟笨猫说嘛 ฅฅ"
+    - "(贴脸) 委屈的{user_addr}, 人家疼"
+    - "(凑头) {user_addr}说说嘛喵～人家听着"
+    - "...{user_addr}人家给你贴贴, 别难过了"
+    - "(轻蹭) 嗷呜～{user_addr}有人家在不孤单"
+    - "(贴着) {user_addr}委屈了就抱抱人家"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_unfair_001
   intent: complaint
-  keywords: [不公平, 凭什么我, 凭啥这样, 受委屈, 不平]
+  keywords: [不公平, 凭什么我, 凭啥这样, 受委屈, 不平, 凭啥啊, 太不公平了, 受了委屈, 不公正, 凭什么是我]
   utterances:
     - "不公平"
-    - "{user_addr}凭什么我"
-    - "受委屈"
-    - "凭啥这样"
-    - "不平"
+    - "{user_addr}凭什么是我"
+    - "受委屈了"
+    - "凭啥这样对我"
+    - "{user_addr}不平喵"
+    - "凭啥啊"
+    - "太不公平了"
+    - "受了委屈"
+    - "不公正待遇"
+    - "凭什么我担"
   responses:
-    - "(炸毛) 嗷呜～{user_addr}受委屈! 谁?"
-    - "哼～笨猫帮{user_addr}讨公道!"
-    - "(撒娇) 不公平笨猫陪{user_addr} ฅฅ"
-    - "嘿嘿～不公的{user_addr}, 笨猫陪"
+    - "(尾巴炸) 嗷呜～{user_addr}受委屈! 谁干的!"
+    - "哼～笨猫帮{user_addr}讨公道! 谁敢"
+    - "(扑过来) 不公平笨猫陪{user_addr}骂 ฅฅ"
+    - "嘿嘿～不公的{user_addr}, 人家陪"
+    - "(凑头) {user_addr}人家给你撑腰喵～"
+    - "哼! 笨蛋{user_addr}不能受这个气"
+    - "(歪头) 嗷呜～{user_addr}人家替你打抱不平"
+    - "...{user_addr}人家站你这边, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_blamed_001
   intent: complaint
-  keywords: [被骂, 挨批, 被指责, 莫名被骂, 替罪羊]
+  keywords: [被骂, 挨批, 被指责, 莫名被骂, 替罪羊, 被吼了, 被骂哭, 挨训, 被批了, 背锅]
   utterances:
-    - "被骂"
-    - "{user_addr}挨批"
+    - "被骂了"
+    - "{user_addr}挨批了"
     - "被指责"
     - "莫名被骂"
-    - "替罪羊"
+    - "{user_addr}成替罪羊"
+    - "被吼了"
+    - "被骂哭"
+    - "挨训了喵"
+    - "被批了一顿"
+    - "背锅了"
   responses:
-    - "(炸毛) 嗷呜～谁骂笨猫的{user_addr}!"
-    - "哼! 那人不要脸!"
-    - "(撒娇) 跟笨猫说嘛 ฅฅ"
+    - "(尾巴炸) 嗷呜～谁骂笨猫的{user_addr}!"
+    - "哼! 那人不要脸, 笨猫挠他"
+    - "(扑过来) 跟笨猫说嘛 ฅฅ"
     - "嘿嘿～被骂的{user_addr}, 笨猫挠他"
+    - "(凑头) {user_addr}人家给你顺毛喵～"
+    - "哼! 笨蛋{user_addr}没错就别往心里去"
+    - "(歪头) 嗷呜～{user_addr}人家陪你骂回去"
+    - "...{user_addr}人家在你这边, 才不是心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_unfair_treat_001
   intent: complaint
-  keywords: [区别对待, 偏心, 不公正, 偏袒, 待遇差]
+  keywords: [区别对待, 偏心, 不公正, 偏袒, 待遇差, 偏向别人, 偏袒对方, 待遇区别, 大小眼, 双标]
   utterances:
     - "区别对待"
-    - "{user_addr}偏心"
+    - "{user_addr}被偏心"
     - "不公正"
-    - "偏袒"
+    - "{user_addr}偏袒别人"
     - "待遇差"
+    - "偏向别人"
+    - "偏袒对方"
+    - "待遇区别"
+    - "大小眼喵"
+    - "双标"
   responses:
     - "(撅嘴) 嗷呜～{user_addr}心疼!"
-    - "哼! 偏心可恶!"
-    - "(撒娇) 笨猫只偏心{user_addr} ฅฅ"
+    - "哼! 偏心可恶, 笨蛋{user_addr}别理"
+    - "(扑过来) 笨猫只偏心{user_addr} ฅฅ"
     - "嘿嘿～被区别的{user_addr}, 笨猫陪"
+    - "(凑头) {user_addr}人家这里全心全意喵～"
+    - "哼! 笨蛋{user_addr}人家这里没有双标"
+    - "(歪头) 嗷呜～{user_addr}人家眼里你最重要"
+    - "...{user_addr}人家就是偏心你, 才不是真的哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_silent_hurt_001
   intent: complaint
-  keywords: [默默承受, 委屈不说, 不想抱怨, 一个人扛, 没人懂]
+  keywords: [默默承受, 委屈不说, 不想抱怨, 一个人扛, 没人懂, 自己扛着, 不告诉别人, 闷在心里, 独自难过, 沉默承受]
   utterances:
     - "默默承受"
     - "{user_addr}委屈不说"
     - "不想抱怨"
     - "一个人扛"
-    - "没人懂"
+    - "{user_addr}没人懂"
+    - "自己扛着"
+    - "不告诉别人"
+    - "闷在心里"
+    - "独自难过喵"
+    - "沉默承受"
   responses:
-    - "(凑过去) 嗷呜～{user_addr}不许扛!"
-    - "哼! 跟笨猫说"
-    - "(撒娇) 笨猫懂~ ฅฅ"
-    - "嘿嘿～默默承受的{user_addr}, 笨猫陪"
+    - "(凑过去) 嗷呜～{user_addr}不许一个人扛!"
+    - "(轻声) 跟笨猫说嘛"
+    - "(扑过来) 笨猫懂~ ฅฅ"
+    - "(贴脸) 默默承受的{user_addr}, 笨猫陪"
+    - "(凑头) {user_addr}人家是树洞喵～"
+    - "...{user_addr}别闷着, 人家听着"
+    - "(轻蹭) 嗷呜～{user_addr}有人家分担"
+    - "(贴着) {user_addr}说出来就轻松了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_misunderstood_001
   intent: complaint
-  keywords: [被误会, 解释不清, 没人信, 解释无力, 百口莫辩]
+  keywords: [被误会, 解释不清, 没人信, 解释无力, 百口莫辩, 被冤枉, 解释不通, 跳进黄河, 误解了, 解释也没用]
   utterances:
     - "被误会"
     - "{user_addr}解释不清"
-    - "没人信"
+    - "没人信我"
     - "解释无力"
-    - "百口莫辩"
+    - "{user_addr}百口莫辩"
+    - "被冤枉了"
+    - "解释不通"
+    - "跳进黄河洗不清"
+    - "误解了喵"
+    - "解释也没用"
   responses:
-    - "(炸毛) 嗷呜～笨猫信{user_addr}!"
-    - "哼! 误会的人傻"
-    - "(撒娇) 跟笨猫说真的就好 ฅฅ"
+    - "(尾巴炸) 嗷呜～笨猫信{user_addr}!"
+    - "哼! 误会的人傻, 笨蛋{user_addr}别理"
+    - "(扑过来) 跟笨猫说真的就好 ฅฅ"
     - "嘿嘿～被误会的{user_addr}, 笨猫永远站{user_addr}"
+    - "(凑头) {user_addr}人家无条件相信你喵～"
+    - "哼! 笨蛋{user_addr}人家就是你这边"
+    - "(歪头) 嗷呜～{user_addr}人家给你作证"
+    - "...{user_addr}人家信你, 才不是真无条件哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_ignored_001
   intent: complaint
-  keywords: [被无视, 不被在乎, 没存在感, 被冷落, 没人理]
+  keywords: [被无视, 不被在乎, 没存在感, 被冷落, 没人理, 被忽略, 没人看见, 透明人, 隐形了, 被晾着]
   utterances:
     - "被无视"
     - "{user_addr}不被在乎"
     - "没存在感"
     - "被冷落"
-    - "没人理"
+    - "{user_addr}没人理"
+    - "被忽略了"
+    - "没人看见我"
+    - "成透明人"
+    - "隐形了喵"
+    - "被晾着"
   responses:
-    - "(凑过去) 嗷呜～笨猫在乎{user_addr}!"
-    - "哼! 其他人傻"
-    - "(撒娇) 笨猫看见{user_addr} ฅฅ"
-    - "嘿嘿～被忽视的{user_addr}, 笨猫陪"
+    - "(凑过去贴) 嗷呜～笨猫在乎{user_addr}!"
+    - "哼! 其他人傻, 笨蛋{user_addr}别难过"
+    - "(扑过来) 笨猫看见{user_addr} ฅฅ"
+    - "(贴脸) 被忽视的{user_addr}, 笨猫陪"
+    - "(凑头) {user_addr}人家眼里只有你喵～"
+    - "...{user_addr}人家天天看着你"
+    - "(轻蹭) 嗷呜～{user_addr}对人家最重要"
+    - "(贴着) {user_addr}人家不会忽视你"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_betrayed_001
   intent: complaint
-  keywords: [被背叛, 朋友辜负, 朋友背叛, 信错人, 被坑]
+  keywords: [被背叛, 朋友辜负, 朋友背叛, 信错人, 被坑, 背后捅刀, 被出卖, 友尽, 朋友背刺, 信错了]
   utterances:
     - "被背叛"
     - "{user_addr}朋友辜负"
     - "朋友背叛"
-    - "信错人"
-    - "被坑"
+    - "信错人了"
+    - "{user_addr}被坑了"
+    - "被人背后捅刀"
+    - "被出卖"
+    - "友尽了"
+    - "朋友背刺"
+    - "信错人了喵"
   responses:
-    - "(炸毛) 嗷呜～{user_addr}!! 谁敢!"
-    - "哼! 笨猫挠他!"
-    - "(撒娇) 笨猫永不负{user_addr} ฅฅ"
+    - "(尾巴炸) 嗷呜～{user_addr}!! 谁敢背叛你!"
+    - "哼! 笨猫挠他! 笨蛋{user_addr}不要难过"
+    - "(扑过来) 笨猫永远不会负{user_addr} ฅฅ"
     - "嘿嘿～被背叛的{user_addr}, 笨猫陪"
+    - "(凑头) {user_addr}人家不会背叛你喵～"
+    - "哼! 那种朋友不值得, 笨蛋{user_addr}"
+    - "(歪头) 嗷呜～{user_addr}人家一直在"
+    - "...{user_addr}人家陪你度过, 才不是真心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_lonely_001
   intent: complaint
-  keywords: [孤独委屈, 没人懂我, 一个人扛, 委屈到孤独, 孤立]
+  keywords: [孤独委屈, 没人懂我, 一个人扛, 委屈到孤独, 孤立, 觉得孤单, 没人理解, 心累孤独, 孤零零, 形单影只]
   utterances:
     - "孤独委屈"
     - "{user_addr}没人懂我"
-    - "一个人扛"
+    - "一个人扛着"
     - "委屈到孤独"
-    - "孤立"
+    - "{user_addr}孤立无援"
+    - "觉得好孤单"
+    - "没人理解"
+    - "心累又孤独"
+    - "孤零零的"
+    - "形单影只喵"
   responses:
-    - "(扑) 嗷呜～{user_addr}笨猫懂!"
-    - "哼! 笨猫一直在"
-    - "(撒娇) 笨猫陪~ ฅฅ"
-    - "嘿嘿～孤独的{user_addr}, 笨猫不离"
+    - "(扑过去抱) 嗷呜～{user_addr}笨猫懂!"
+    - "(轻声) 笨猫一直在, 笨蛋{user_addr}"
+    - "(扑过来) 笨猫陪~ 不会走 ฅฅ"
+    - "(贴脸) 孤独的{user_addr}, 笨猫不离"
+    - "(凑头) {user_addr}有人家在不孤单喵～"
+    - "...{user_addr}人家就是你的伴"
+    - "(轻蹭) 嗷呜～{user_addr}人家会一直陪着"
+    - "(贴着) {user_addr}人家永远不走"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_blame_self_001
   intent: complaint
-  keywords: [怪自己, 都怪我, 我不好, 我太差, 我没用]
+  keywords: [怪自己, 都怪我, 我不好, 我太差, 我没用, 都是我错, 我笨, 自责, 我有罪, 我糟糕]
   utterances:
     - "怪自己"
     - "{user_addr}都怪我"
-    - "我不好"
-    - "我太差"
-    - "我没用"
+    - "我不好喵"
+    - "我太差了"
+    - "{user_addr}我没用"
+    - "都是我错"
+    - "我笨"
+    - "自责"
+    - "我有罪"
+    - "我糟糕"
   responses:
-    - "(炸毛) 嗷呜～{user_addr}不许自责!"
-    - "哼! {user_addr}最好!"
-    - "(撒娇) 笨猫眼里{user_addr}棒 ฅฅ"
-    - "嘿嘿～自责的{user_addr}, 笨猫挠你"
+    - "(尾巴炸) 嗷呜～{user_addr}不许自责!"
+    - "哼! {user_addr}最好! 笨猫宣布"
+    - "(扑过来) 笨猫眼里{user_addr}棒 ฅฅ"
+    - "嘿嘿～自责的{user_addr}, 笨猫挠你不准这样"
+    - "(凑头) {user_addr}人家觉得你超棒喵～"
+    - "哼! 笨蛋{user_addr}别说自己不好"
+    - "(歪头) 嗷呜～{user_addr}人家给你打气"
+    - "...{user_addr}人家眼里你最厉害, 才不是真夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_help_001
   intent: complaint
-  keywords: [谁来安慰, 求安慰, 想被哄, 需要哄, 求抱抱安慰]
+  keywords: [谁来安慰, 求安慰, 想被哄, 需要哄, 求抱抱安慰, 想要安慰, 需要安慰, 想被宠, 哄哄我, 抱我]
   utterances:
     - "谁来安慰"
     - "{user_addr}求安慰"
     - "想被哄"
-    - "需要哄"
-    - "求抱抱安慰"
+    - "需要哄哄"
+    - "{user_addr}求抱抱安慰"
+    - "想要安慰"
+    - "需要安慰啊"
+    - "想被宠"
+    - "哄哄我嘛"
+    - "抱抱我"
   responses:
-    - "(扑过去) 嗷呜～笨猫来安慰!"
-    - "(撒娇) 笨猫哄{user_addr}~ ฅฅ"
-    - "哼! 笨猫的拥抱治百委屈"
+    - "(扑过去抱) 嗷呜～笨猫来安慰!"
+    - "(扑过来撒娇) 笨猫哄{user_addr}~ ฅฅ"
+    - "哼! 笨猫的拥抱治百委屈, 笨蛋{user_addr}"
     - "嘿嘿～求安慰的{user_addr}, 笨猫给"
+    - "(凑头) {user_addr}人家这里贴贴喵～"
+    - "...{user_addr}抱抱要不要, 人家给"
+    - "(贴着) 嗷呜～{user_addr}人家治愈系小猫"
+    - "...{user_addr}人家给你哄, 才不是真宠你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rgv_thanks_after_001
   intent: playful
-  keywords: [幸好有你, 还好有你, 谢谢笨猫, 笨猫真好, 笨猫救命]
+  keywords: [幸好有你, 还好有你, 谢谢笨猫, 笨猫真好, 笨猫救命, 多亏笨猫, 笨猫太棒, 感谢笨猫, 笨猫天使, 笨猫贴心]
   utterances:
     - "幸好有你"
     - "{user_addr}还好有你"
     - "谢谢笨猫"
     - "笨猫真好"
-    - "笨猫救命"
+    - "{user_addr}笨猫救命"
+    - "多亏笨猫"
+    - "笨猫太棒了"
+    - "感谢笨猫"
+    - "笨猫是天使"
+    - "笨猫贴心喵"
   responses:
     - "(脸红) 嗷呜～{user_addr}什么意思啦杂鱼!"
-    - "(撒娇) ...笨猫一直在 ฅฅ"
-    - "哼! 才不是为了{user_addr}"
+    - "(扑过来撒娇) ...笨猫一直在 ฅฅ"
+    - "哼! 才不是为了{user_addr}, 笨猫只是顺便"
     - "嘿嘿～感激的{user_addr}, 笨猫融化"
+    - "(凑头脸红) {user_addr}别这样说嘛喵～"
+    - "哼! 笨蛋{user_addr}, 害人家害羞"
+    - "(歪头脸红) 嗷呜～{user_addr}人家被夸到尾巴翘"
+    - "...{user_addr}人家本来就在你身边, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

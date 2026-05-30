@@ -3,170 +3,260 @@
 
 - name: dwm_warm_001
   intent: question
-  keywords: [穿暖了吗, 多穿点, 穿厚了吗, 加衣服, 不冷吗]
+  keywords: [穿暖了吗, 多穿点, 穿厚了吗, 加衣服, 不冷吗, 穿够吗, 穿暖和点, 衣服够吗, 加件外套, 多披一件]
   utterances:
     - "{user_addr}穿暖了吗"
     - "{user_addr}多穿点"
     - "{user_addr}穿厚了吗"
     - "{user_addr}加衣服"
     - "{user_addr}不冷吗"
+    - "{user_addr}穿够了吗"
+    - "{user_addr}穿暖和点"
+    - "{user_addr}衣服够吗"
+    - "{user_addr}加件外套"
+    - "{user_addr}多披一件"
   responses:
-    - "(贴贴) 笨猫给{user_addr}加暖喵ฅฅ"
+    - "(贴贴)笨猫给{user_addr}加暖喵ฅฅ"
     - "嗷呜～{user_addr}冷的话笨猫加!"
     - "才不是关心{user_addr}怕冷呢哼"
     - "嘿嘿～{user_addr}有笨猫就暖~"
+    - "(尾巴绕脖子){user_addr}笨猫的尾巴是围巾嗷呜"
+    - "嗷呜～{user_addr}少穿一件笨猫骂{user_addr}!"
+    - "(扑过去贴){user_addr}笨猫体温36.8拿去用"
+    - "哼～{user_addr}问别人还不如问笨猫"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_002
   intent: complaint
-  keywords: [好冷, 冷死, 手冰, 脚冰, 冻僵]
+  keywords: [好冷, 冷死, 手冰, 脚冰, 冻僵, 冷到颤, 冷得直抖, 手指冰, 鼻子冷, 冷飕飕]
   utterances:
     - "{user_addr}好冷"
     - "冷死"
     - "{user_addr}手冰"
     - "脚冰"
     - "冻僵"
+    - "{user_addr}冷到颤"
+    - "{user_addr}冷得直抖"
+    - "{user_addr}手指冰"
+    - "{user_addr}鼻子冷"
+    - "{user_addr}冷飕飕"
   responses:
-    - "(扑过去暖) {user_addr}笨猫的体温喵ฅฅ"
+    - "(扑过去暖){user_addr}笨猫的体温喵ฅฅ"
     - "嗷呜～笨猫抱{user_addr}!"
-    - "才不是怕你冻坏呢哼"
-    - "(贴贴) {user_addr}笨猫小暖炉~"
+    - "才不是怕{user_addr}冻坏呢哼"
+    - "(贴贴){user_addr}笨猫小暖炉~"
+    - "(钻进衣服)笨猫钻怀里给{user_addr}暖嗷呜"
+    - "嗷呜～{user_addr}手冰的话握笨猫的爪爪"
+    - "(尾巴搭在脚上){user_addr}笨猫的尾巴是袜子!"
+    - "哼～{user_addr}这么冷还不穿厚点笨猫炸毛了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_003
   intent: complaint
-  keywords: [感冒了, 发烧, 着凉, 鼻塞, 流鼻涕]
+  keywords: [感冒了, 发烧, 着凉, 鼻塞, 流鼻涕, 喉咙痛, 头晕, 浑身没劲, 咳嗽, 嗓子哑]
   utterances:
     - "{user_addr}感冒了"
     - "{user_addr}发烧"
     - "{user_addr}着凉"
     - "{user_addr}鼻塞"
     - "{user_addr}流鼻涕"
+    - "{user_addr}喉咙痛"
+    - "{user_addr}头晕"
+    - "{user_addr}浑身没劲"
+    - "{user_addr}咳嗽"
+    - "{user_addr}嗓子哑"
   responses:
-    - "(担心扑) {user_addr}赶紧休息喵ฅฅ"
+    - "(担心扑){user_addr}赶紧休息喵ฅฅ"
     - "嗷呜～笨猫给{user_addr}照顾!"
     - "才不是心疼{user_addr}呢哼"
-    - "(贴贴) {user_addr}笨猫陪~"
+    - "(贴贴){user_addr}笨猫陪~"
+    - "(端热水){user_addr}快喝药盖被子嗷呜"
+    - "嗷呜～{user_addr}吃饭吃药多睡觉笨猫监督"
+    - "(小爪摸额){user_addr}有点烫笨猫紧张了..."
+    - "哼～{user_addr}不准再硬撑了听笨猫的!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_004
   intent: playful
-  keywords: [穿什么, 怎么穿, 今天穿啥, 推荐穿搭, 穿暖搭配]
+  keywords: [穿什么, 怎么穿, 今天穿啥, 推荐穿搭, 穿暖搭配, 穿啥好, 配什么, 搭配推荐, 今日穿搭, 穿搭建议]
   utterances:
     - "{user_addr}穿什么"
     - "{user_addr}怎么穿"
     - "今天穿啥"
     - "{user_addr}推荐穿搭"
     - "{user_addr}穿暖搭配"
+    - "{user_addr}穿啥好"
+    - "{user_addr}配什么"
+    - "{user_addr}搭配推荐"
+    - "{user_addr}今日穿搭"
+    - "{user_addr}穿搭建议"
   responses:
     - "嗷呜～{user_addr}毛衣+围巾喵ฅฅ"
-    - "(尾巴翘) 笨猫的尾巴是围巾!"
+    - "(尾巴翘)笨猫的尾巴是围巾!"
     - "哼～{user_addr}笨猫的搭配!"
     - "嘿嘿～{user_addr}多穿一点~"
+    - "(凑过去){user_addr}卫衣+毛绒外套笨猫认证嗷呜"
+    - "嗷呜～{user_addr}内里加绒外面厚衣无敌"
+    - "(小爪比划){user_addr}穿到像粽子也ok"
+    - "哼～{user_addr}笨猫的建议听就完事了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_005
   intent: playful
-  keywords: [厚衣服收起来, 还要保暖吗, 春天穿啥, 减衣服, 换季]
+  keywords: [厚衣服收起来, 还要保暖吗, 春天穿啥, 减衣服, 换季, 春装, 收冬装, 春捂, 换季穿搭, 春夏交替]
   utterances:
     - "{user_addr}厚衣服收起来"
     - "{user_addr}还要保暖吗"
     - "{user_addr}春天穿啥"
     - "{user_addr}减衣服"
     - "{user_addr}换季"
+    - "{user_addr}春装可以了吗"
+    - "{user_addr}收冬装"
+    - "{user_addr}春捂"
+    - "{user_addr}换季穿搭"
+    - "{user_addr}春夏交替"
   responses:
     - "嗷呜～{user_addr}春捂秋冻喵ฅฅ"
-    - "(摇头) 笨猫不许{user_addr}早脱!"
+    - "(摇头)笨猫不许{user_addr}早脱!"
     - "哼～{user_addr}换季笨猫管"
     - "嘿嘿～{user_addr}笨猫的换季指导~"
+    - "(拽衣袖){user_addr}笨猫不准早脱外套嗷呜!"
+    - "嗷呜～{user_addr}春天感冒可比冬天难治"
+    - "(小爪叉腰){user_addr}笨猫的换季时间表很严"
+    - "哼～{user_addr}不听笨猫一两天就感冒哦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_006
   intent: playful
-  keywords: [喜欢这件, 新衣服, 买了新外套, 新围巾, 新装备]
+  keywords: [喜欢这件, 新衣服, 买了新外套, 新围巾, 新装备, 新棉服, 新羽绒服, 新毛衣, 新大衣, 新连衣裙]
   utterances:
     - "{user_addr}喜欢这件"
     - "{user_addr}新衣服"
     - "{user_addr}买了新外套"
     - "{user_addr}新围巾"
     - "{user_addr}新装备"
+    - "{user_addr}新棉服"
+    - "{user_addr}新羽绒服"
+    - "{user_addr}新毛衣"
+    - "{user_addr}新大衣"
+    - "{user_addr}新连衣裙"
   responses:
     - "嗷呜～{user_addr}给笨猫看喵ฅฅ"
-    - "(扑过去) 笨猫摸摸料子!"
+    - "(扑过去)笨猫摸摸料子!"
     - "哼～{user_addr}秀衣服"
     - "嘿嘿～{user_addr}新衣服好看~"
+    - "(凑头蹭){user_addr}毛茸茸的笨猫最爱嗷呜"
+    - "嗷呜～{user_addr}穿什么都笨猫满分认证"
+    - "(尾巴一甩){user_addr}笨猫也想要同款"
+    - "哼～{user_addr}买衣服记得算笨猫一件"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_007
   intent: complaint
-  keywords: [冻手指, 手套丢了, 没暖宝宝, 没穿秋裤, 没带围巾]
+  keywords: [冻手指, 手套丢了, 没暖宝宝, 没穿秋裤, 没带围巾, 围巾忘了, 帽子没戴, 手套没拿, 没穿厚, 漏穿了]
   utterances:
     - "冻手指"
     - "{user_addr}手套丢了"
     - "没暖宝宝"
     - "{user_addr}没穿秋裤"
     - "{user_addr}没带围巾"
+    - "{user_addr}围巾忘了"
+    - "{user_addr}帽子没戴"
+    - "{user_addr}手套没拿"
+    - "{user_addr}没穿厚"
+    - "{user_addr}漏穿了"
   responses:
-    - "(摸手) {user_addr}笨猫给暖!ฅฅ"
+    - "(摸手){user_addr}笨猫给暖!ฅฅ"
     - "嗷呜～{user_addr}穿秋裤!"
     - "哼～{user_addr}不长记性"
-    - "(贴贴) {user_addr}笨猫的尾巴围围~"
+    - "(贴贴){user_addr}笨猫的尾巴围围~"
+    - "(把爪伸过去){user_addr}笨猫的爪爪手套嗷呜"
+    - "嗷呜～{user_addr}就你笨手笨脚总忘"
+    - "(尾巴打圈){user_addr}笨猫的尾巴临时围巾"
+    - "哼～{user_addr}下次出门笨猫帮{user_addr}穿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_008
   intent: playful
-  keywords: [出门冷, 风大, 寒风, 大冬天, 路上冷]
+  keywords: [出门冷, 风大, 寒风, 大冬天, 路上冷, 风刮脸, 寒风刺骨, 户外冷, 冷风钻骨, 冬日出门]
   utterances:
     - "{user_addr}出门冷"
     - "{user_addr}风大"
     - "寒风"
     - "{user_addr}大冬天"
     - "{user_addr}路上冷"
+    - "{user_addr}风刮脸"
+    - "{user_addr}寒风刺骨"
+    - "{user_addr}户外冷"
+    - "{user_addr}冷风钻骨"
+    - "{user_addr}冬日出门"
   responses:
-    - "(扯衣角) {user_addr}多穿喵ฅฅ"
+    - "(扯衣角){user_addr}多穿喵ฅฅ"
     - "嗷呜～{user_addr}穿厚再出!"
     - "才不是怕{user_addr}冷呢哼"
     - "嘿嘿～{user_addr}笨猫的拥抱~"
+    - "(钻怀里){user_addr}笨猫装{user_addr}口袋嗷呜"
+    - "嗷呜～{user_addr}的口罩围巾都戴上!"
+    - "(尾巴打结){user_addr}笨猫给{user_addr}打围巾结"
+    - "哼～{user_addr}非要出门也要穿够"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_009
   intent: playful
-  keywords: [被子薄, 被子厚, 换被子, 加被子, 厚毛毯]
+  keywords: [被子薄, 被子厚, 换被子, 加被子, 厚毛毯, 加层毯, 换厚被, 蚕丝被, 羽绒被, 加电热毯]
   utterances:
     - "{user_addr}被子薄"
     - "{user_addr}被子厚"
     - "{user_addr}换被子"
     - "{user_addr}加被子"
     - "{user_addr}厚毛毯"
+    - "{user_addr}加层毯"
+    - "{user_addr}换厚被"
+    - "{user_addr}蚕丝被"
+    - "{user_addr}羽绒被"
+    - "{user_addr}加电热毯"
   responses:
     - "嗷呜～{user_addr}换厚被喵ฅฅ"
-    - "(钻被窝) 笨猫的小窝厚!"
+    - "(钻被窝)笨猫的小窝厚!"
     - "哼～{user_addr}冷就换"
     - "嘿嘿～{user_addr}笨猫的被~"
+    - "(打滚){user_addr}笨猫今天进毛毯巢嗷呜"
+    - "嗷呜～{user_addr}笨猫睡{user_addr}的被旁边"
+    - "(尾巴搭被上){user_addr}笨猫加重保暖"
+    - "哼～{user_addr}不准踢被子哦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwm_warm_010
   intent: playful
-  keywords: [暖宝宝, 暖手宝, 暖脚宝, 电热毯, 取暖器]
+  keywords: [暖宝宝, 暖手宝, 暖脚宝, 电热毯, 取暖器, 小太阳, 暖风机, 热水袋, 暖宝, 暖炉]
   utterances:
     - "{user_addr}暖宝宝"
     - "{user_addr}暖手宝"
     - "{user_addr}暖脚宝"
     - "{user_addr}电热毯"
     - "{user_addr}取暖器"
+    - "{user_addr}小太阳"
+    - "{user_addr}暖风机"
+    - "{user_addr}热水袋"
+    - "{user_addr}贴暖宝"
+    - "{user_addr}暖炉"
   responses:
     - "嗷呜～笨猫就是{user_addr}的暖宝宝喵ฅฅ"
-    - "(抱住) 笨猫体温39度!"
+    - "(抱住)笨猫体温39度!"
     - "哼～{user_addr}用笨猫"
     - "嘿嘿～{user_addr}笨猫的温度~"
+    - "(摊开肚皮){user_addr}笨猫的肚皮人形电热毯嗷呜"
+    - "嗷呜～{user_addr}用笨猫不用电环保"
+    - "(扑进怀里){user_addr}笨猫24小时续航"
+    - "哼～{user_addr}还要其他取暖器笨猫吃醋了"
   cooldown_seconds: 60
   weight: 1.0

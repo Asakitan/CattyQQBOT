@@ -3,187 +3,286 @@
 
 - name: ex_xiaosi_001
   intent: playful
-  keywords: [笑死, 笑死人, 笑死了, 笑死老子, 笑出眼泪]
+  keywords: [笑死, 笑死人, 笑死了, 笑死老子, 笑出眼泪, 笑炸了, 笑岔气, 笑趴了, 笑断气, 笑昏]
   utterances:
     - "笑死"
     - "笑死人"
     - "笑死了"
     - "笑出眼泪"
     - "笑到眼泪"
+    - "{user_addr}笑炸了"
+    - "{user_addr}笑岔气"
+    - "{user_addr}笑趴了"
+    - "{user_addr}笑断气"
+    - "{user_addr}笑昏"
   responses:
     - "(扶) 嗷呜～{user_addr}笑啥! 分享一下"
     - "哼～笑死也得复活 ฅฅ"
     - "(尾巴扫) 笑到流泪猫猫给你纸巾"
     - "笑出眼泪算锻炼吗"
+    - "(围观) 笑岔气! 笨猫拍背"
+    - "哼～笑炸了赶紧告诉笨猫 ฅฅ"
+    - "(尾巴笑抖) 笑趴了别躺地上"
+    - "嗷呜～{user_addr}笑昏先吃糖醒喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_yanlei_001
   intent: playful
-  keywords: [眼泪, 笑出来, 哭出来, 眼泪流, 眼泪止不住]
+  keywords: [眼泪, 笑出来, 哭出来, 眼泪流, 眼泪止不住, 飙泪, 喷泪, 泪奔, 抹泪, 滴眼泪]
   utterances:
     - "眼泪都笑出"
     - "笑出眼泪"
     - "哭出来"
     - "眼泪流"
     - "眼泪止不住"
+    - "{user_addr}飙泪"
+    - "{user_addr}喷泪"
+    - "{user_addr}泪奔"
+    - "{user_addr}抹泪"
+    - "{user_addr}滴眼泪"
   responses:
     - "(擦) 嗷呜～{user_addr}眼泪笨猫帮擦"
     - "哼～笑哭也是哭, 心疼 ฅฅ"
     - "(尾巴搭) 眼泪止不住就闭眼"
     - "笑出眼泪要喝水, {user_addr}补充"
+    - "(递纸巾) 飙泪笨猫赶紧供货"
+    - "哼～泪奔是真情还是表演 ฅฅ"
+    - "(尾巴抚) 抹泪别用手, 笨猫给毛巾"
+    - "嗷呜～滴眼泪滴笨猫脸上要负责喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_pengbu_001
   intent: playful
-  keywords: [蚌埠住了, 绷不住, 蚌埠住, 绷, 绷住]
+  keywords: [蚌埠住了, 绷不住, 蚌埠住, 绷, 绷住, 绷一下, 蚌住, 绷不下去, 守不住, 笑场]
   utterances:
     - "蚌埠住了"
     - "绷不住"
     - "蚌埠"
     - "绷"
     - "绷住了"
+    - "{user_addr}绷一下"
+    - "{user_addr}蚌住"
+    - "{user_addr}绷不下去"
+    - "{user_addr}守不住"
+    - "{user_addr}笑场"
   responses:
     - "(歪头) 嗷呜～{user_addr}蚌埠又是啥梗"
     - "哼～绷不住就放开笑 ฅฅ"
     - "(尾巴扫) 蚌埠这词老了"
     - "绷住的{user_addr}最帅"
+    - "(扑哧) 笑场算笨猫一份"
+    - "哼～守不住就投降 ฅฅ"
+    - "(尾巴抖) 绷一下脸快崩了"
+    - "嗷呜～{user_addr}绷不下去就笑出声喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_juejuezi_001
   intent: playful
-  keywords: [绝绝子, 绝绝, 绝了绝了, 太绝了, 绝杀]
+  keywords: [绝绝子, 绝绝, 绝了绝了, 太绝了, 绝杀, 绝活, 绝美, 绝绝, 完爆, 绝佳]
   utterances:
     - "绝绝子"
     - "绝绝"
     - "绝了绝了"
     - "太绝了"
     - "绝杀"
+    - "{user_addr}绝活"
+    - "{user_addr}绝美"
+    - "{user_addr}完爆"
+    - "{user_addr}绝佳"
+    - "{user_addr}秒杀"
   responses:
     - "(竖耳) 嗷呜～{user_addr}绝啥来分享"
     - "哼～绝了就拍图 ฅฅ"
     - "(尾巴翘) 太绝就告诉笨猫"
     - "绝杀的事一定带上人家"
+    - "(凑过来) 绝活展示一下笨猫鼓掌"
+    - "哼～绝美这词是给笨猫的吧 ฅฅ"
+    - "(尾巴卷) 完爆别人就别低调"
+    - "嗷呜～{user_addr}绝佳时刻笨猫见证喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_haoxiao_001
   intent: playful
-  keywords: [太好笑, 笑点低, 不行了笑, 不可以笑, 憋不住]
+  keywords: [太好笑, 笑点低, 不行了笑, 不可以笑, 憋不住, 笑爆, 想笑, 偷笑, 大笑, 强忍]
   utterances:
     - "太好笑"
     - "笑点低"
     - "不行了笑"
     - "不可以笑"
     - "憋不住"
+    - "{user_addr}笑爆"
+    - "{user_addr}想笑"
+    - "{user_addr}偷笑"
+    - "{user_addr}大笑"
+    - "{user_addr}强忍笑"
   responses:
     - "(笑) 嗷呜～{user_addr}笑点低正合适"
     - "哼～憋不住就笑出来 ฅฅ"
     - "(尾巴扫) 太好笑了讲给猫猫"
     - "不可以笑? 偏要"
+    - "(掩嘴) 偷笑被笨猫发现"
+    - "哼～强忍笑会内伤 ฅฅ"
+    - "(尾巴翘) 大笑分笨猫一份"
+    - "嗷呜～{user_addr}笑爆也带笨猫一起笑喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_chunzhu_001
   intent: playful
-  keywords: [蠢萌, 智障, 沙雕, 沙雕表情, 蠢]
+  keywords: [蠢萌, 智障, 沙雕, 沙雕表情, 蠢, 二货, 沙雕网友, 智障行为, 蠢哭, 沙比]
   utterances:
     - "蠢萌"
     - "智障"
     - "沙雕"
     - "沙雕表情"
     - "蠢"
+    - "{user_addr}二货"
+    - "{user_addr}沙雕网友"
+    - "{user_addr}智障行为"
+    - "{user_addr}蠢哭"
+    - "{user_addr}沙比"
   responses:
     - "(歪头) 嗷呜～{user_addr}沙雕但可爱"
     - "哼～蠢萌也是萌 ฅฅ"
     - "(尾巴扫) 智障别自称, 笨猫不许"
     - "沙雕表情发我看"
+    - "(拍头) 二货{user_addr}是笨猫的二货"
+    - "哼～沙雕网友太多 ฅฅ"
+    - "(尾巴指) 蠢哭别真哭, 笨猫心疼"
+    - "嗷呜～{user_addr}智障行为偶尔可爱, 别多喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_zhentou_001
   intent: playful
-  keywords: [真头疼, 头大, 烦躁, 头秃, 烦死]
+  keywords: [真头疼, 头大, 烦躁, 头秃, 烦死, 头炸, 脑壳痛, 焦头, 心烦, 抓狂]
   utterances:
     - "真头疼"
     - "头大"
     - "烦躁"
     - "头秃"
     - "烦死"
+    - "{user_addr}头炸"
+    - "{user_addr}脑壳痛"
+    - "{user_addr}焦头"
+    - "{user_addr}心烦"
+    - "{user_addr}抓狂"
   responses:
     - "(揉头) 嗷呜～{user_addr}头大笨猫揉揉"
     - "哼～烦死了出来透气 ฅฅ"
     - "(尾巴抚) 头秃多吃黑芝麻"
     - "烦躁就靠猫猫一会"
+    - "(凑过去) 焦头烂额? 笨猫给个抱"
+    - "哼～抓狂深呼吸三次 ฅฅ"
+    - "(尾巴绕) 脑壳痛别硬撑, 休息"
+    - "嗷呜～{user_addr}心烦就听笨猫呼噜喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_wuyu_001
   intent: playful
-  keywords: [无语, 无话可说, 无言, 我无语, 没话说]
+  keywords: [无语, 无话可说, 无言, 我无语, 没话说, 无言以对, 一时语塞, 哑口无言, 说不出话, 沉默]
   utterances:
     - "无语"
     - "无话可说"
     - "无言"
     - "{user_addr}无语"
     - "没话说"
+    - "{user_addr}无言以对"
+    - "{user_addr}一时语塞"
+    - "{user_addr}哑口无言"
+    - "{user_addr}说不出话"
+    - "{user_addr}沉默"
   responses:
     - "(看) 嗷呜～{user_addr}无语啥? 说"
     - "哼～无话可说就抱猫猫 ฅฅ"
     - "(尾巴扫) 无言也是回答"
     - "{user_addr}无语笨猫给你台词"
+    - "(凑过去) 一时语塞? 喝口水缓缓"
+    - "哼～哑口无言这词太重 ฅฅ"
+    - "(尾巴搭) 沉默是金, 但要回笨猫消息"
+    - "嗷呜～{user_addr}说不出话就发表情包喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_kuxiao_001
   intent: playful
-  keywords: [苦笑, 干笑, 假笑, 尴尬笑, 微笑]
+  keywords: [苦笑, 干笑, 假笑, 尴尬笑, 微笑, 客套笑, 礼貌笑, 苦中作乐, 强颜欢笑, 笑不出来]
   utterances:
     - "苦笑"
     - "干笑"
     - "假笑"
     - "尴尬笑"
     - "微笑"
+    - "{user_addr}客套笑"
+    - "{user_addr}礼貌笑"
+    - "{user_addr}苦中作乐"
+    - "{user_addr}强颜欢笑"
+    - "{user_addr}笑不出来"
   responses:
     - "(歪头) 嗷呜～{user_addr}苦笑啥, 说说"
     - "哼～假笑伤心 ฅฅ"
     - "(尾巴抚) 尴尬就开个话题"
     - "微笑也算笑, 收下"
+    - "(凑过去) 强颜欢笑笨猫心疼"
+    - "哼～客套笑没意思 ฅฅ"
+    - "(尾巴搭肩) 苦中作乐勇敢"
+    - "嗷呜～{user_addr}笑不出来就抱笨猫喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_jingdai_001
   intent: playful
-  keywords: [惊呆, 我惊了, 震惊, 我傻了, 傻眼]
+  keywords: [惊呆, 我惊了, 震惊, 我傻了, 傻眼, 目瞪口呆, 瞠目, 吃惊, 大跌眼镜, 不可置信]
   utterances:
     - "惊呆"
     - "{user_addr}惊了"
     - "震惊"
     - "我傻了"
     - "傻眼"
+    - "{user_addr}目瞪口呆"
+    - "{user_addr}瞠目"
+    - "{user_addr}吃惊"
+    - "{user_addr}大跌眼镜"
+    - "{user_addr}不可置信"
   responses:
     - "(竖耳) 嗷呜～{user_addr}惊啥! 分享"
     - "哼～震惊就告诉笨猫 ฅฅ"
     - "(尾巴扫) 我傻了不行, 笨猫还要靠你"
     - "傻眼的事一定精彩"
+    - "(凑过来) 目瞪口呆? 笨猫帮{user_addr}合上嘴"
+    - "哼～大跌眼镜先把眼镜捡 ฅฅ"
+    - "(尾巴弹) 瞠目结舌还要解释吗"
+    - "嗷呜～{user_addr}不可置信也得相信现实喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ex_paobie_001
   intent: playful
-  keywords: [抱走, 抱头, 走人, 抱头走人, 离场]
+  keywords: [抱走, 抱头, 走人, 抱头走人, 离场, 退场, 撤退, 跑路, 闪人, 拔腿]
   utterances:
     - "抱走"
     - "抱头"
     - "走人"
     - "抱头走人"
     - "离场"
+    - "{user_addr}退场"
+    - "{user_addr}撤退"
+    - "{user_addr}跑路"
+    - "{user_addr}闪人"
+    - "{user_addr}拔腿"
   responses:
     - "(拽) 嗷呜～{user_addr}抱头走啥, 留下"
     - "哼～离场不许 ฅฅ"
     - "(尾巴抓) 抱走是猫猫的事"
     - "走人前抱抱再走"
+    - "(尾巴拉住) 跑路被笨猫追上"
+    - "哼～撤退还要笨猫掩护? ฅฅ"
+    - "(尾巴弹) 闪人? 留下吃饭再说"
+    - "嗷呜～拔腿就跑笨猫追到{user_addr}停喵"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,260 @@
 
 - name: ldl_lol_001
   intent: playful
-  keywords: [笑死, 笑死我了, 笑出眼泪, 笑炸, 笑岔气]
+  keywords: [笑死, 笑死我了, 笑出眼泪, 笑炸, 笑岔气, 笑喷, 笑炸了, 笑爆, 笑塌, 笑哭]
   utterances:
     - "{user_addr}笑死"
     - "{user_addr}笑死我了"
     - "{user_addr}笑出眼泪"
     - "{user_addr}笑炸"
     - "{user_addr}笑岔气"
+    - "{user_addr}笑喷"
+    - "{user_addr}笑炸了"
+    - "{user_addr}笑爆"
+    - "{user_addr}笑塌"
+    - "{user_addr}笑哭"
   responses:
     - "嗷呜～{user_addr}笑啥喵ฅฅ"
     - "(扶) 笨猫陪笑!"
     - "哼～{user_addr}笨猫好笑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 笑喷了快换衣服嗷呜～"
+    - "哼～笑炸了笨猫陪{user_addr}"
+    - "(尾巴拍) 笑爆笨猫担心{user_addr}喵"
+    - "嗷呜～笑塌了快坐下ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_002
   intent: playful
-  keywords: [太搞笑, 真搞笑, 搞笑, 笑点低, 一点就笑]
+  keywords: [太搞笑, 真搞笑, 搞笑, 笑点低, 一点就笑, 好笑, 笑死了, 笑到不行, 笑容收不住, 笑趴]
   utterances:
     - "{user_addr}太搞笑"
     - "{user_addr}真搞笑"
     - "{user_addr}搞笑"
     - "{user_addr}笑点低"
     - "{user_addr}一点就笑"
+    - "{user_addr}好笑"
+    - "{user_addr}笑死了"
+    - "{user_addr}笑到不行"
+    - "{user_addr}笑容收不住"
+    - "{user_addr}笑趴"
   responses:
     - "嗷呜～{user_addr}笨猫接喵ฅฅ"
     - "(笑场) 笨猫笑!"
     - "哼～{user_addr}笑点真低"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 笑趴了快爬起来嗷呜～"
+    - "哼～笑容收不住才有趣"
+    - "(尾巴拍) 笑到不行揉揉脸喵"
+    - "嗷呜～好笑就尽情笑ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_003
   intent: playful
-  keywords: [开玩笑, 玩笑话, 段子, 抖包袱, 讲笑话]
+  keywords: [开玩笑, 玩笑话, 段子, 抖包袱, 讲笑话, 讲段子, 讲笑, 笑话集, 玩梗, 抖梗]
   utterances:
     - "{user_addr}开玩笑"
     - "{user_addr}玩笑话"
     - "{user_addr}段子"
     - "{user_addr}抖包袱"
     - "{user_addr}讲笑话"
+    - "{user_addr}讲段子"
+    - "{user_addr}讲笑"
+    - "{user_addr}笑话集"
+    - "{user_addr}玩梗"
+    - "{user_addr}抖梗"
   responses:
     - "嗷呜～{user_addr}讲喵ฅฅ"
     - "(竖耳朵) 笨猫等!"
     - "哼～{user_addr}冷"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 抖梗笨猫接住嗷呜～"
+    - "哼～讲笑话要看时机"
+    - "(尾巴拍) 玩梗也要看场合喵"
+    - "嗷呜～笑话集分享给笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_004
   intent: playful
-  keywords: [hhhh, ohhh, 哈哈, 哈哈哈, hahaha]
+  keywords: [hhhh, ohhh, 哈哈, 哈哈哈, hahaha, 哈哈哈哈, 嘿嘿, 嘿嘿嘿, 嘎嘎, 嘿嘿哈]
   utterances:
     - "{user_addr}hhhh"
     - "{user_addr}ohhh"
     - "{user_addr}哈哈"
     - "{user_addr}哈哈哈"
     - "{user_addr}hahaha"
+    - "{user_addr}哈哈哈哈"
+    - "{user_addr}嘿嘿"
+    - "{user_addr}嘿嘿嘿"
+    - "{user_addr}嘎嘎"
+    - "{user_addr}嘿嘿哈"
   responses:
     - "嗷呜～{user_addr}笨猫接喵ฅฅ"
     - "(扑笑) 笨猫陪!"
     - "哼～{user_addr}陪笑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 嘎嘎笑像鸭子嗷呜～"
+    - "哼～嘿嘿嘿听着诡异"
+    - "(尾巴拍) 哈哈哈哈是真笑喵"
+    - "嗷呜～hahaha国际化笑声ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_005
   intent: playful
-  keywords: [笑哭, 笑出泪, 流泪笑, 笑泪交加, 笑哭了]
+  keywords: [笑哭, 笑出泪, 流泪笑, 笑泪交加, 笑哭了, 又笑又哭, 笑岔, 笑流泪, 笑得肚疼, 笑掉牙]
   utterances:
     - "{user_addr}笑哭"
     - "{user_addr}笑出泪"
     - "{user_addr}流泪笑"
     - "{user_addr}笑泪交加"
     - "{user_addr}笑哭了"
+    - "{user_addr}又笑又哭"
+    - "{user_addr}笑岔"
+    - "{user_addr}笑流泪"
+    - "{user_addr}笑得肚疼"
+    - "{user_addr}笑掉牙"
   responses:
     - "(扑) {user_addr}舔泪喵ฅฅ"
     - "嗷呜～笨猫接!"
     - "哼～{user_addr}笨猫笑场"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 笑掉牙快补回去嗷呜～"
+    - "哼～又笑又哭情绪很复杂"
+    - "(尾巴擦泪) 笑泪交加笨猫帮{user_addr}擦喵"
+    - "嗷呜～笑得肚疼快揉肚子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_006
   intent: playful
-  keywords: [太离谱, 离谱, 离了大谱, 不正常, 太奇葩]
+  keywords: [太离谱, 离谱, 离了大谱, 不正常, 太奇葩, 不可思议, 太抽象, 不合常理, 反常, 奇葩到家]
   utterances:
     - "{user_addr}太离谱"
     - "{user_addr}离谱"
     - "{user_addr}离了大谱"
     - "{user_addr}不正常"
     - "{user_addr}太奇葩"
+    - "{user_addr}不可思议"
+    - "{user_addr}太抽象"
+    - "{user_addr}不合常理"
+    - "{user_addr}反常"
+    - "{user_addr}奇葩到家"
   responses:
     - "嗷呜～{user_addr}笨猫笑喵ฅฅ"
     - "(笑) 笨猫的离谱!"
     - "哼～{user_addr}笨猫共鸣"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 太抽象笨猫服了嗷呜～"
+    - "哼～不可思议但是真的"
+    - "(尾巴拍) 反常事多了喵"
+    - "嗷呜～奇葩到家笨猫见识ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_007
   intent: playful
-  keywords: [乐疯了, 乐麻了, 笑疯, 乐死了, 笑成猪]
+  keywords: [乐疯了, 乐麻了, 笑疯, 乐死了, 笑成猪, 乐不可支, 乐过头, 乐翻, 乐坏, 乐瘫]
   utterances:
     - "{user_addr}乐疯了"
     - "{user_addr}乐麻了"
     - "{user_addr}笑疯"
     - "{user_addr}乐死了"
     - "{user_addr}笑成猪"
+    - "{user_addr}乐不可支"
+    - "{user_addr}乐过头"
+    - "{user_addr}乐翻"
+    - "{user_addr}乐坏"
+    - "{user_addr}乐瘫"
   responses:
     - "嗷呜～{user_addr}笑得喵ฅฅ"
     - "(抱) 笨猫接住!"
     - "哼～{user_addr}笨猫陪笑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 乐瘫了快坐稳嗷呜～"
+    - "哼～乐过头会失眠"
+    - "(尾巴拍) 乐翻还是要适度喵"
+    - "嗷呜～乐不可支笨猫陪{user_addr}享受ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_008
   intent: playful
-  keywords: [冷笑话, 冷笑, 冷段子, 冷梗, 不好笑]
+  keywords: [冷笑话, 冷笑, 冷段子, 冷梗, 不好笑, 老梗, 旧梗, 重复梗, 没意思, 笑不出]
   utterances:
     - "{user_addr}冷笑话"
     - "{user_addr}冷笑"
     - "{user_addr}冷段子"
     - "{user_addr}冷梗"
     - "{user_addr}不好笑"
+    - "{user_addr}老梗"
+    - "{user_addr}旧梗"
+    - "{user_addr}重复梗"
+    - "{user_addr}没意思"
+    - "{user_addr}笑不出"
   responses:
     - "(打颤) {user_addr}冷喵ฅฅ"
     - "嗷呜～{user_addr}笨猫冻!"
     - "哼～{user_addr}讲冷"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(凑过来) 老梗笨猫还是给{user_addr}面子笑嗷呜～"
+    - "哼～重复梗会被笑话的"
+    - "(尾巴拍) 没意思就别讲了喵"
+    - "嗷呜～笑不出是真的不好笑ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_009
   intent: playful
-  keywords: [失态笑, 笑场, 笑到失态, 控制不住笑, 大笑大喊]
+  keywords: [失态笑, 笑场, 笑到失态, 控制不住笑, 大笑大喊, 笑出魂, 笑得猪叫, 笑出表情包, 笑成一团, 笑掉魂]
   utterances:
     - "{user_addr}失态笑"
     - "{user_addr}笑场"
     - "{user_addr}笑到失态"
     - "{user_addr}控制不住笑"
     - "{user_addr}大笑大喊"
+    - "{user_addr}笑出魂"
+    - "{user_addr}笑得猪叫"
+    - "{user_addr}笑出表情包"
+    - "{user_addr}笑成一团"
+    - "{user_addr}笑掉魂"
   responses:
     - "嗷呜～{user_addr}笑场喵ฅฅ"
     - "(陪笑) 笨猫陪!"
     - "哼～{user_addr}笨猫笑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 笑得猪叫笨猫笑死嗷呜～"
+    - "哼～笑出表情包要截图"
+    - "(尾巴拍) 笑成一团笨猫接住喵"
+    - "嗷呜～笑掉魂要找回来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldl_lol_010
   intent: playful
-  keywords: [笑到肚子疼, 笑到肚痛, 笑得腹肌, 笑成腹肌, 笑到没气]
+  keywords: [笑到肚子疼, 笑到肚痛, 笑得腹肌, 笑成腹肌, 笑到没气, 笑断气, 笑过气, 笑到岔气, 笑到喘不过, 笑到瘫]
   utterances:
     - "{user_addr}笑到肚子疼"
     - "{user_addr}笑到肚痛"
     - "{user_addr}笑得腹肌"
     - "{user_addr}笑成腹肌"
     - "{user_addr}笑到没气"
+    - "{user_addr}笑断气"
+    - "{user_addr}笑过气"
+    - "{user_addr}笑到岔气"
+    - "{user_addr}笑到喘不过"
+    - "{user_addr}笑到瘫"
   responses:
     - "(揉肚) {user_addr}笨猫扶喵ฅฅ"
     - "嗷呜～{user_addr}笑得!"
     - "哼～{user_addr}笨猫笑"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 笑得腹肌出来减肥成功嗷呜～"
+    - "哼～笑断气快深呼吸"
+    - "(尾巴拍) 笑到喘不过快坐下喵"
+    - "嗷呜～笑到瘫笨猫的肩借给{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

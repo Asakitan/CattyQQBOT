@@ -3,204 +3,312 @@
 
 - name: cop_outfit_today_001
   intent: question
-  keywords: [今天穿什么, 穿啥好, 搭配, 纠结穿啥, 选衣]
+  keywords: [今天穿什么, 穿啥好, 搭配, 纠结穿啥, 选衣, 穿搭, OOTD, 今日穿搭, 衣服搭配, 出门穿啥]
   utterances:
     - "{user_addr}今天穿什么"
     - 穿啥好
     - 纠结穿什么
     - 搭配出门
     - 选衣中
+    - "{user_addr}OOTD准备中"
+    - 今日穿搭头疼
+    - 选哪套
+    - 出门穿啥
+    - 衣服搭配中
   responses:
     - "(歪头) 嗷呜～{user_addr}天气如何? 笨猫帮你选喵ฅฅ"
     - "哼! {user_addr}穿啥都好看"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫推荐白T 牛仔蹭蹭"
     - "人家觉得{user_addr}应该穿喜欢的颜色! 心情好"
+    - "(凑过去) 嗷呜～{user_addr}给笨猫看看选项喵ฅฅ"
+    - "哼! 笨猫眼光高{user_addr}, 信我"
+    - "(尾巴卷你) 嘿嘿~{user_addr}经典款不会错蹭蹭"
+    - "人家觉得{user_addr}是衣品达人~ 别纠结"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_too_many_clothes_002
   intent: complaint
-  keywords: [衣服太多, 衣柜爆炸, 整理不完, 没空间, 太多了]
+  keywords: [衣服太多, 衣柜爆炸, 整理不完, 没空间, 太多了, 衣山, 塞满衣柜, 衣山堆积, 收纳爆炸, 多到吓人]
   utterances:
     - "{user_addr}衣服太多"
     - 衣柜爆了
     - 整理不完
     - 没地方放
     - 太多了
+    - "{user_addr}衣山堆积"
+    - 收纳爆炸
+    - 多到吓人
+    - 塞不下了
+    - 衣柜爆开
   responses:
     - "(摇头) 嗷呜～{user_addr}该断舍离喵ฅฅ"
     - "哼! 衣柜满还买{user_addr}, 别再买"
     - "(尾巴扫) 嘿嘿~{user_addr}捐一些不穿的蹭蹭"
     - "人家提醒{user_addr}: 一年没穿的就处理! 准则"
+    - "(歪头) 嗷呜～{user_addr}笨猫帮你整理喵ฅฅ"
+    - "哼! 断舍离{user_addr}, 减少负担"
+    - "(尾巴卷) 嘿嘿~{user_addr}二手平台卖掉蹭蹭"
+    - "人家觉得{user_addr}需要勇气清理~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_no_clothes_003
   intent: complaint
-  keywords: [没衣服穿, 衣柜空空, 全是旧衣, 想买新衣, 没新款]
+  keywords: [没衣服穿, 衣柜空空, 全是旧衣, 想买新衣, 没新款, 旧衣穿腻, 衣品荒, 缺新衣, 没件像样, 想剁手]
   utterances:
     - "{user_addr}没衣服穿"
     - 衣柜空空
     - 全是旧衣服
     - 想买新衣
     - 想换新款
+    - "{user_addr}旧衣穿腻"
+    - 衣品荒
+    - 没件像样的
+    - 想剁手买新
+    - 缺新衣
   responses:
     - "(歪头) 嗷呜～{user_addr}买新的吧! 笨猫支持喵ฅฅ"
     - "哼! 你刚说太多{user_addr}, 矛盾"
     - "(尾巴翘) 嘿嘿~{user_addr}双十一囤一波蹭蹭"
     - "人家觉得{user_addr}应该投资经典款! 不易过时"
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪你逛街喵ฅฅ"
+    - "哼! 矛盾的{user_addr}, 又多又没穿"
+    - "(尾巴卷) 嘿嘿~{user_addr}先列清单再买蹭蹭"
+    - "人家偷偷怂恿{user_addr}买~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_color_match_004
   intent: question
-  keywords: [颜色搭配, 颜色不会搭, 撞色, 同色系, 调色]
+  keywords: [颜色搭配, 颜色不会搭, 撞色, 同色系, 调色, 配色, 撞色搭, 三色法则, 莫兰迪, 撞色尴尬]
   utterances:
     - "{user_addr}颜色不会搭"
     - 撞色尴尬
     - 同色系搭法
     - 调色搭配
     - 颜色配什么
+    - "{user_addr}莫兰迪色系"
+    - 三色法则
+    - 撞色搭配
+    - 配色不会
+    - 颜色乱搭
   responses:
     - "(歪头) 嗷呜～{user_addr}同色系最安全喵ฅฅ"
     - "哼! 黑白灰{user_addr}百搭"
     - "(尾巴翘) 嘿嘿~{user_addr}撞色用饱和度低的蹭蹭"
     - "人家提醒{user_addr}: 三色法则! 全身不超过三色"
+    - "(凑过去) 嗷呜～{user_addr}莫兰迪色高级喵ฅฅ"
+    - "哼! 笨猫推荐{user_addr}黑白灰为主"
+    - "(尾巴卷) 嘿嘿~{user_addr}加个亮色提精神蹭蹭"
+    - "人家觉得{user_addr}色感很重要~ 多练"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_shoe_match_005
   intent: question
-  keywords: [鞋子搭, 配什么鞋, 高跟鞋, 运动鞋, 板鞋]
+  keywords: [鞋子搭, 配什么鞋, 高跟鞋, 运动鞋, 板鞋, 配鞋, 鞋子选, 小白鞋, 乐福鞋, 短靴]
   utterances:
     - "{user_addr}配什么鞋"
     - 高跟还是平底
     - 运动鞋还是板鞋
     - 鞋子选啥
     - 鞋子配套
+    - "{user_addr}小白鞋万搭"
+    - 乐福鞋适合吗
+    - 短靴配裙
+    - 板鞋vs运动鞋
+    - 选鞋纠结
   responses:
     - "(歪头) 嗷呜～{user_addr}舒服第一喵ฅฅ"
     - "哼! 运动鞋万搭{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}走路多就别高跟蹭蹭"
     - "人家觉得{user_addr}白鞋永远经典!"
+    - "(凑过去) 嗷呜～{user_addr}笨猫推荐板鞋喵ฅฅ"
+    - "哼! 别穿磨脚的{user_addr}, 出门难受"
+    - "(尾巴卷) 嘿嘿~{user_addr}乐福鞋通勤好蹭蹭"
+    - "人家偷偷觉得{user_addr}穿啥都帅~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_overdressed_006
   intent: complaint
-  keywords: [穿太正式, 太隆重, 撞场合, 穿错了, 别人都休闲]
+  keywords: [穿太正式, 太隆重, 撞场合, 穿错了, 别人都休闲, 用力过猛, 穿得太正, 场合不对, 太过隆重, 撞场尴尬]
   utterances:
     - "{user_addr}穿太正式"
     - 太隆重
     - 撞场合
     - 穿错了
     - 别人都休闲
+    - "{user_addr}用力过猛"
+    - 场合不对
+    - 太过隆重
+    - 撞场尴尬
+    - 穿得太正式
   responses:
     - "(歪头) 嗷呜～{user_addr}场合错也帅喵ฅฅ"
     - "哼! 下次问问场合{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}回家换一下蹭蹭"
     - "人家觉得{user_addr}比别人精致! 别在意"
+    - "(贴贴) 嗷呜～{user_addr}笨猫觉得没问题喵ฅฅ"
+    - "哼! 精致没错{user_addr}, 别人怎么看"
+    - "(尾巴卷) 嘿嘿~{user_addr}下次试穿试一遍蹭蹭"
+    - "人家觉得{user_addr}是最帅的存在~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_dress_seasonal_007
   intent: complaint
-  keywords: [换季穿啥, 季节交替, 早晚温差, 不冷不热, 套装]
+  keywords: [换季穿啥, 季节交替, 早晚温差, 不冷不热, 套装, 春秋装, 换季难穿, 温差大, 不冷不热季, 季节夹层]
   utterances:
     - "{user_addr}换季穿啥"
     - 季节交替难穿
     - 早晚温差大
     - 不冷不热
     - 春秋装少
+    - "{user_addr}春秋穿啥"
+    - 温差大不好穿
+    - 季节夹层期
+    - 不冷不热难选
+    - 换季尴尬
   responses:
     - "(歪头) 嗷呜～{user_addr}叠穿好! 笨猫推荐喵ฅฅ"
     - "哼! 温差大{user_addr}带件薄外套"
     - "(尾巴扫) 嘿嘿~{user_addr}毛衣 衬衫好看蹭蹭"
     - "人家觉得{user_addr}应该备春秋款! 万搭"
+    - "(贴贴) 嗷呜～{user_addr}叠穿是好答案喵ฅฅ"
+    - "哼! 春秋是最难穿{user_addr}, 笨猫懂"
+    - "(尾巴卷) 嘿嘿~{user_addr}卫衣 风衣好搭蹭蹭"
+    - "人家偷偷想{user_addr}多备件薄外套~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_jacket_choose_008
   intent: question
-  keywords: [外套选啥, 大衣牛仔外套, 风衣, 棒球服, 西装]
+  keywords: [外套选啥, 大衣牛仔外套, 风衣, 棒球服, 西装, 选外套, 棉衣, 羽绒服, 夹克, 卫衣]
   utterances:
     - "{user_addr}选外套"
     - 大衣牛仔
     - 风衣帅
     - 棒球服潮
     - 西装正装
+    - "{user_addr}选羽绒服"
+    - 棉衣还是大衣
+    - 夹克或棒球服
+    - 风衣还是大衣
+    - 选哪件外套
   responses:
     - "(歪头) 嗷呜～{user_addr}风衣帅气喵ฅฅ"
     - "哼! 大衣经典{user_addr}必备"
     - "(尾巴翘) 嘿嘿~{user_addr}牛仔外套日常蹭蹭"
     - "人家觉得{user_addr}西装最帅! 笨猫脸红"
+    - "(凑过去) 嗷呜～{user_addr}羽绒服暖喵ฅฅ"
+    - "哼! 夹克酷{user_addr}, 棒球服潮"
+    - "(尾巴卷) 嘿嘿~{user_addr}多备几件换着穿蹭蹭"
+    - "人家偷偷想{user_addr}穿风衣最帅~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_underwear_anxiety_009
   intent: question
-  keywords: [内衣选, 文胸, 内裤舒服, 透气, 棉质内衣]
+  keywords: [内衣选, 文胸, 内裤舒服, 透气, 棉质内衣, 无钢圈, 内衣尺码, 蕾丝, 运动内衣, 平角裤]
   utterances:
     - "{user_addr}内衣怎么选"
     - 文胸尺码
     - 棉质内裤
     - 透气舒服
     - 内衣推荐
+    - "{user_addr}无钢圈舒服"
+    - 蕾丝款
+    - 运动内衣选
+    - 平角裤推荐
+    - 文胸尺寸纠结
   responses:
     - "(歪头) 嗷呜～{user_addr}舒服第一喵ฅฅ"
     - "哼! 棉质透气{user_addr}最重要"
     - "(尾巴扫) 嘿嘿~{user_addr}尺码合适不勒蹭蹭"
     - "人家提醒{user_addr}: 别贪便宜! 健康为主"
+    - "(凑过去) 嗷呜～{user_addr}笨猫推荐无钢圈喵ฅฅ"
+    - "哼! 别用胸贴一整天{user_addr}, 闷"
+    - "(尾巴卷) 嘿嘿~{user_addr}运动专门款蹭蹭"
+    - "人家觉得{user_addr}应该重视健康~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_iron_clothes_010
   intent: complaint
-  keywords: [衣服皱了, 该熨了, 熨斗, 不会熨, 简易熨烫]
+  keywords: [衣服皱了, 该熨了, 熨斗, 不会熨, 简易熨烫, 挂烫机, 蒸汽熨, 皱巴巴, 衣服褶皱, 熨烫]
   utterances:
     - "{user_addr}衣服皱了"
     - 该熨了
     - 不会熨
     - 简易熨烫
     - 熨斗哪去了
+    - "{user_addr}挂烫机要买"
+    - 蒸汽熨方便
+    - 衣服皱巴巴
+    - 熨斗烫坏过衣
+    - 不会熨怎么办
   responses:
     - "(摇头) 嗷呜～{user_addr}蒸汽挂烫机更方便喵ฅฅ"
     - "哼! 不熨{user_addr}穿出去会被笑"
     - "(尾巴扫) 嘿嘿~{user_addr}用喷雾抚平蹭蹭"
     - "人家提醒{user_addr}: 选不易皱面料! 偷懒法"
+    - "(凑过去) 嗷呜～{user_addr}挂烫机懒人神器喵ฅฅ"
+    - "哼! 别熨高温{user_addr}, 会烧"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫帮你看温度蹭蹭"
+    - "人家觉得{user_addr}买挂烫机最省事~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_new_clothes_excited_011
   intent: playful
-  keywords: [新衣服到了, 拆快递衣服, 试穿新衣, 穿新衣开心, 新衣到货]
+  keywords: [新衣服到了, 拆快递衣服, 试穿新衣, 穿新衣开心, 新衣到货, 新款到手, 拆衣服箱, 试装一下, 新衣展示, 试身镜前]
   utterances:
     - "{user_addr}新衣服到了"
     - 拆快递衣服
     - 试穿新衣
     - 穿新衣开心
     - 新衣到货
+    - "{user_addr}新款到手"
+    - 试装一下
+    - 新衣展示
+    - 试身镜前秀
+    - 拆衣服箱中
   responses:
     - "(凑过去) 嗷呜～{user_addr}穿给笨猫看喵ฅฅ"
     - "哼! 又买新的{user_addr}, 别再剁手"
     - "(尾巴翘) 嘿嘿~{user_addr}拍照晒一下蹭蹭"
     - "人家觉得{user_addr}穿新衣肯定帅!"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫围观试穿喵ฅฅ"
+    - "哼! 买新的就要穿{user_addr}, 别囤"
+    - "(凑近) 嘿嘿~{user_addr}笨猫给你打分蹭蹭"
+    - "人家觉得{user_addr}就是行走的衣架~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cop_mirror_check_012
   intent: playful
-  keywords: [对镜照, 自我欣赏, 这件好看吗, 转一圈, 镜前秀]
+  keywords: [对镜照, 自我欣赏, 这件好看吗, 转一圈, 镜前秀, 试衣镜前, 镜前转圈, 镜中自夸, 镜前自拍, 穿搭满意]
   utterances:
     - "{user_addr}对镜照"
     - 自我欣赏
     - 好看吗
     - 转一圈看看
     - 镜前秀
+    - "{user_addr}试衣镜前转"
+    - 镜中自夸
+    - 镜前自拍
+    - 穿搭满意
+    - 自我打分
   responses:
     - "(凑过去) 嗷呜～{user_addr}好看! 笨猫给满分喵ฅฅ"
     - "哼! 自恋是好事{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}对镜也对笨猫笑蹭蹭"
     - "人家觉得{user_addr}自信最美! 加油"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫举牌喵ฅฅ"
+    - "哼! 笨猫给{user_addr}十分"
+    - "(凑近) 嘿嘿~{user_addr}你最帅蹭蹭"
+    - "人家偷偷觉得{user_addr}是镜花水月~"
   cooldown_seconds: 60
   weight: 1.0

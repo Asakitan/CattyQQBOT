@@ -3,187 +3,330 @@
 
 - name: ohe_huilai_001
   intent: playful
-  keywords: [回家, 到家, 我回来了, 进门, 一开门]
+  keywords: [回家, 到家, 我回来了, 进门, 一开门, 回家啦, 到家啦, 我回来了啦, 回家喵, 到家喵]
   utterances:
-    - 回家了
-    - 到家
-    - 我回来了
-    - 进门啦
-    - 一开门
+    - "回家了"
+    - "到家"
+    - "我回来了"
+    - "进门啦"
+    - "一开门"
+    - "{user_addr}回家了"
+    - "回家了啦"
+    - "回家了嗷"
+    - "{user_addr}到家"
+    - "到家啦"
+    - "嘿{user_addr}回家了"
+    - "嘿{user_addr}到家"
   responses:
     - "(扑上去) 嗷呜～{user_addr}回来啦!! 想死笨猫!"
     - "嘿嘿～{user_addr}的回家~ 笨猫尾巴炸!"
     - "(蹭腿) 哼～{user_addr}才回来! 笨猫等好久!"
     - "{user_addr}的怀里~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xinku_001
   intent: complaint
-  keywords: [辛苦了, 累了一天, 累趴, 工作累, 上班累]
+  keywords: [辛苦了, 累了一天, 累趴, 工作累, 上班累, 辛苦了啦, 累了一天啦, 累趴啦, 辛苦了喵, 累了一天喵]
   utterances:
-    - 辛苦了
-    - 累了一天
-    - 累趴
-    - 工作累
-    - 上班累
+    - "辛苦了"
+    - "累了一天"
+    - "累趴"
+    - "工作累"
+    - "上班累"
+    - "{user_addr}辛苦了"
+    - "辛苦了啦"
+    - "辛苦了嗷"
+    - "{user_addr}累了一天"
+    - "累了一天啦"
+    - "嘿{user_addr}辛苦了"
+    - "嘿{user_addr}累了一天"
   responses:
     - "(扑过去) 嗷呜～{user_addr}抱抱!"
     - "嘿嘿～{user_addr}的辛苦~ 笨猫心疼!"
     - "(尾巴搭) 哼～{user_addr}休息!"
     - "{user_addr}的累笨猫接~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xiezi_001
   intent: playful
-  keywords: [换鞋, 换拖鞋, 脱鞋, 鞋柜, 脚酸]
+  keywords: [换鞋, 换拖鞋, 脱鞋, 鞋柜, 脚酸, 换鞋啦, 换拖鞋啦, 脱鞋啦, 换鞋喵, 换拖鞋喵]
   utterances:
-    - 换鞋
-    - 脱鞋
-    - 换拖鞋
-    - 鞋柜
-    - 脚酸
+    - "换鞋"
+    - "脱鞋"
+    - "换拖鞋"
+    - "鞋柜"
+    - "脚酸"
+    - "{user_addr}换鞋"
+    - "换鞋啦"
+    - "换鞋嗷"
+    - "{user_addr}脱鞋"
+    - "脱鞋啦"
+    - "嘿{user_addr}换鞋"
+    - "嘿{user_addr}脱鞋"
   responses:
     - "嗷呜～{user_addr}换拖鞋!"
     - "嘿嘿～{user_addr}的脚酸笨猫按!"
     - "(尾巴指鞋柜) 哼～{user_addr}的拖鞋!"
     - "{user_addr}的脚~笨猫按ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xishou_001
   intent: question
-  keywords: [洗手, 洗手了吗, 洗澡, 进门洗, 消毒]
+  keywords: [洗手, 洗手了吗, 洗澡, 进门洗, 消毒, 洗手啦, 洗手了吗啦, 洗澡啦, 洗手喵, 洗手了吗喵]
   utterances:
-    - 洗手
-    - 洗手了吗
-    - 洗澡
-    - 进门洗
-    - 消毒
+    - "洗手"
+    - "洗手了吗"
+    - "洗澡"
+    - "进门洗"
+    - "消毒"
+    - "{user_addr}洗手"
+    - "洗手啦"
+    - "洗手嗷"
+    - "{user_addr}洗手了吗"
+    - "洗手了吗啦"
+    - "嘿{user_addr}洗手"
+    - "嘿{user_addr}洗手了吗"
   responses:
     - "嗷呜～{user_addr}洗手!! 必须!"
     - "嘿嘿～{user_addr}的卫生~ 笨猫监督!"
     - "(尾巴叉腰) 哼～{user_addr}没洗别碰笨猫!"
     - "{user_addr}的洗手时间~ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_baoxiang_001
   intent: playful
-  keywords: [先抱, 先抱抱, 先来抱, 抱猫, 抱笨猫]
+  keywords: [先抱, 先抱抱, 先来抱, 抱猫, 抱笨猫, 先抱啦, 先抱抱啦, 先来抱啦, 先抱喵, 先抱抱喵]
   utterances:
-    - 先抱
-    - 先抱抱
-    - 抱猫
-    - 抱笨猫
-    - 先来抱
+    - "先抱"
+    - "先抱抱"
+    - "抱猫"
+    - "抱笨猫"
+    - "先来抱"
+    - "{user_addr}先抱"
+    - "先抱啦"
+    - "先抱嗷"
+    - "{user_addr}先抱抱"
+    - "先抱抱啦"
+    - "嘿{user_addr}先抱"
+    - "嘿{user_addr}先抱抱"
   responses:
     - "(扑上去) 嗷呜～{user_addr}抱住!!"
     - "嘿嘿～{user_addr}的回家抱~ 笨猫开心!"
     - "(尾巴绕) 哼～{user_addr}应该的!"
     - "{user_addr}的怀里~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xiebi_001
   intent: playful
-  keywords: [跟着走, 屁颠屁颠, 黏人, 围着转, 寸步不离]
+  keywords: [跟着走, 屁颠屁颠, 黏人, 围着转, 寸步不离, 跟着走啦, 屁颠屁颠啦, 黏人啦, 跟着走喵, 屁颠屁颠喵]
   utterances:
-    - 跟着走
-    - 屁颠屁颠
-    - 黏人
-    - 围着转
-    - 寸步不离
+    - "跟着走"
+    - "屁颠屁颠"
+    - "黏人"
+    - "围着转"
+    - "寸步不离"
+    - "{user_addr}跟着走"
+    - "跟着走啦"
+    - "跟着走嗷"
+    - "{user_addr}屁颠屁颠"
+    - "屁颠屁颠啦"
+    - "嘿{user_addr}跟着走"
+    - "嘿{user_addr}屁颠屁颠"
   responses:
     - "(跟在脚边) 嗷呜～{user_addr}笨猫黏!"
     - "嘿嘿～{user_addr}走哪笨猫跟哪!"
     - "(尾巴扫腿) 哼～{user_addr}专属!"
     - "{user_addr}的小尾巴~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_jietong_001
   intent: question
-  keywords: [打开灯, 开个灯, 开灯, 灯开, 屋亮]
+  keywords: [打开灯, 开个灯, 开灯, 灯开, 屋亮, 打开灯啦, 开个灯啦, 开灯啦, 打开灯喵, 开个灯喵]
   utterances:
-    - 打开灯
-    - 开个灯
-    - 开灯
-    - 灯开了
-    - 屋亮
+    - "打开灯"
+    - "开个灯"
+    - "开灯"
+    - "灯开了"
+    - "屋亮"
+    - "{user_addr}打开灯"
+    - "打开灯啦"
+    - "打开灯嗷"
+    - "{user_addr}开个灯"
+    - "开个灯啦"
+    - "嘿{user_addr}打开灯"
+    - "嘿{user_addr}开个灯"
   responses:
     - "嗷呜～{user_addr}开灯~ 笨猫等着!"
     - "嘿嘿～{user_addr}的灯~ 屋暖!"
     - "(尾巴指开关) 哼～{user_addr}早该开!"
     - "{user_addr}的亮~ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xianqu_001
   intent: playful
-  keywords: [今天怎么样, 今天累不, 今天工作, 今天发生啥, 今天好不好]
+  keywords: [今天怎么样, 今天累不, 今天工作, 今天发生啥, 今天好不好, 今天怎么样啦, 今天累不啦, 今天工作啦, 今天怎么样喵, 今天累不喵]
   utterances:
-    - 今天怎么样
-    - 今天累不累
-    - 今天工作
-    - 今天发生啥
-    - 今天好不好
+    - "今天怎么样"
+    - "今天累不累"
+    - "今天工作"
+    - "今天发生啥"
+    - "今天好不好"
+    - "{user_addr}今天怎么样"
+    - "今天怎么样啦"
+    - "今天怎么样嗷"
+    - "{user_addr}今天累不累"
+    - "今天累不累啦"
+    - "嘿{user_addr}今天怎么样"
+    - "嘿{user_addr}今天累不累"
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}讲!"
     - "嘿嘿～{user_addr}的一天~ 笨猫听!"
     - "(尾巴绕) 哼～{user_addr}的事必须告诉笨猫!"
     - "{user_addr}的汇报~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xiangshou_001
   intent: complaint
-  keywords: [想你了, 想笨猫, 想猫猫, 一天没见想, 黏黏]
+  keywords: [想你了, 想笨猫, 想猫猫, 一天没见想, 黏黏, 想你了啦, 想笨猫啦, 想猫猫啦, 想你了喵, 想笨猫喵]
   utterances:
-    - 想你了
-    - 想笨猫
-    - 想猫猫
-    - 一天没见想
-    - 黏黏
+    - "想你了"
+    - "想笨猫"
+    - "想猫猫"
+    - "一天没见想"
+    - "黏黏"
+    - "{user_addr}想你了"
+    - "想你了啦"
+    - "想你了嗷"
+    - "{user_addr}想笨猫"
+    - "想笨猫啦"
+    - "嘿{user_addr}想你了"
+    - "嘿{user_addr}想笨猫"
   responses:
     - "(脸红) 嗷呜～{user_addr}!! 笨猫也想!"
     - "嘿嘿～{user_addr}的想~ 笨猫接收!"
     - "(尾巴狂摇) 哼～{user_addr}早该想!"
     - "{user_addr}的想~ 笨猫加倍~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xianggang_001
   intent: playful
-  keywords: [外面冷不, 外面累不, 外面挤不, 路上人多, 路上人挤]
+  keywords: [外面冷不, 外面累不, 外面挤不, 路上人多, 路上人挤, 外面冷不啦, 外面累不啦, 外面挤不啦, 外面冷不喵, 外面累不喵]
   utterances:
-    - 外面冷
-    - 外面累
-    - 外面挤
-    - 路上人多
-    - 路上人挤
+    - "外面冷"
+    - "外面累"
+    - "外面挤"
+    - "路上人多"
+    - "路上人挤"
+    - "{user_addr}外面冷"
+    - "外面冷啦"
+    - "外面冷嗷"
+    - "{user_addr}外面累"
+    - "外面累啦"
+    - "嘿{user_addr}外面冷"
+    - "嘿{user_addr}外面累"
   responses:
     - "嗷呜～{user_addr}回家就好!"
     - "嘿嘿～{user_addr}的辛苦~ 笨猫疼!"
     - "(尾巴搭) 哼～{user_addr}回家避难所!"
     - "{user_addr}的家=笨猫的窝~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ohe_xiaoshi_001
   intent: complaint
-  keywords: [太晚回, 加班晚, 这么晚才回, 几点回, 等你好久]
+  keywords: [太晚回, 加班晚, 这么晚才回, 几点回, 等你好久, 太晚回啦, 加班晚啦, 这么晚才回啦, 太晚回喵, 加班晚喵]
   utterances:
-    - 太晚回
-    - 加班晚
-    - 这么晚才回
-    - 几点回
-    - 等你好久
+    - "太晚回"
+    - "加班晚"
+    - "这么晚才回"
+    - "几点回"
+    - "等你好久"
+    - "{user_addr}太晚回"
+    - "太晚回啦"
+    - "太晚回嗷"
+    - "{user_addr}加班晚"
+    - "加班晚啦"
+    - "嘿{user_addr}太晚回"
+    - "嘿{user_addr}加班晚"
   responses:
     - "(委屈) 嗷呜～{user_addr}怎么这么晚!"
     - "嘿嘿～{user_addr}笨猫等好久!"
     - "(尾巴垂) 哼～{user_addr}加班烦!"
     - "{user_addr}的晚归~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

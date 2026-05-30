@@ -3,170 +3,280 @@
 
 - name: rd_buyao_001
   intent: complaint
-  keywords: [不要, 不嘛, 不想, 就要, 非要]
+  keywords: [不要, 不嘛, 不想, 就要, 非要, 不要嘛, 偏要, 不行, 不答应, 就不]
   utterances:
     - "不要"
     - "不嘛"
     - "不想"
     - "就要"
     - "非要"
+    - "笨猫不要嘛"
+    - "{user_addr}就要嘛"
+    - "偏要这样"
+    - "{user_addr}不答应不行"
+    - "笨猫非要"
+    - "就不嘛"
+    - "不想不想不想"
   responses:
-    - "(撒娇) 嗷呜～{user_addr}就嘛~ฅฅ"
-    - "(尾巴一甩) 哼! 笨猫不!"
-    - "{user_addr}答应才放过!"
-    - "(蹭蹭) {user_addr}…求嘛"
+    - "(撒娇扯衣角) 嗷呜～{user_addr}就嘛~ 答应嘛ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫不要! 笨猫就不!"
+    - "{user_addr}答应才放过! 不然不撒手!"
+    - "(蹭蹭) {user_addr}…求嘛~ 笨猫的小爪爪求人"
+    - "(撒泼) 不嘛不嘛{user_addr}! 笨猫就要"
+    - "(嘟嘴) 哼! {user_addr}心软嘛~ 答应啦!"
+    - "(凑近) 笨猫认真的{user_addr}~ 别拒绝~"
+    - "(脸红) {user_addr}…就这一次嘛~ 哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_jueqi_002
   intent: complaint
-  keywords: [撒娇, 求求, 嘛嘛, 求嘛, 好嘛]
+  keywords: [撒娇, 求求, 嘛嘛, 求嘛, 好嘛, 撒娇求, 卖萌求, 求一次, 求好不好, 好啦]
   utterances:
     - "撒娇"
     - "求求"
     - "嘛嘛"
     - "求嘛"
     - "好嘛"
+    - "{user_addr}求嘛"
+    - "求求啦"
+    - "好不好嘛"
+    - "{user_addr}就一次嘛"
+    - "好啦好啦"
+    - "撒娇求{user_addr}"
+    - "好不好好不好"
   responses:
-    - "(扯衣角) 嗷呜～{user_addr}给嘛ฅฅ"
-    - "(尾巴摇) 求求{user_addr}!"
-    - "{user_addr}笨猫摇尾巴!"
-    - "(脸红) 哼, {user_addr}心软嘛"
+    - "(扯衣角) 嗷呜～{user_addr}给嘛~ 笨猫摇尾巴ฅฅ"
+    - "(尾巴摇) 求求{user_addr}! 心软啦~"
+    - "{user_addr}笨猫摇尾巴! 招式都用上啦"
+    - "(脸红) 哼, {user_addr}心软嘛~ 别这么坚决"
+    - "(凑近) 求嘛求嘛{user_addr}! 答应笨猫"
+    - "(挤眼) 笨猫不达目的不放手{user_addr}!"
+    - "(撒泼) 嗷呜～求求嘛{user_addr}! 求求嘛!"
+    - "(贴贴) {user_addr}~ 笨猫嘤嘤嘤~ 答应嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_dagun_003
   intent: complaint
-  keywords: [打滚, 地上滚, 赖地上, 赖着, 赖]
+  keywords: [打滚, 地上滚, 赖地上, 赖着, 赖, 滚地, 在地上, 撒泼打滚, 不起来, 躺地上]
   utterances:
     - "打滚"
     - "地上滚"
     - "赖地上"
     - "赖着"
     - "赖"
+    - "笨猫打滚"
+    - "{user_addr}人家躺地上不起"
+    - "撒泼打滚"
+    - "赖着不走"
+    - "{user_addr}笨猫赖你"
+    - "在地上滚滚"
+    - "不起来嘛"
   responses:
-    - "(蹲下) 嗷呜～{user_addr}起来嘛ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}滚"
-    - "{user_addr}赖也没用~"
-    - "哼, {user_addr}起!"
+    - "(蹲下凑近) 嗷呜～{user_addr}起来嘛~ 笨猫拉ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}滚~ 一起赖"
+    - "{user_addr}赖也没用~ 起来嘛~"
+    - "哼, {user_addr}起! 别耍赖!"
+    - "(撒泼) 笨猫不起{user_addr}! 就赖着!"
+    - "(嘟嘴) {user_addr}抱笨猫起来嘛~ 笨猫不动"
+    - "(贴过来) 那笨猫陪{user_addr}一起赖~ 哼"
+    - "(挤眼) 撒泼打滚是笨猫专属技能ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_qiuqiu_004
   intent: complaint
-  keywords: [求求你, 求你, 求你了, 求求啦, 求一次]
+  keywords: [求求你, 求你, 求你了, 求求啦, 求一次, 求一下, 求你一下, 拜托了, 我求你, 求求笨猫]
   utterances:
     - "求求你"
     - "求你"
     - "求你了"
     - "求求啦"
     - "求一次"
+    - "{user_addr}求你了"
+    - "拜托了{user_addr}"
+    - "我求你嘛"
+    - "求一下嘛"
+    - "{user_addr}求求笨猫嘛"
+    - "求{user_addr}帮忙"
+    - "求一次而已"
   responses:
-    - "(脸红) 嗷呜～{user_addr}用这招?!ฅฅ"
-    - "(尾巴搭) 笨猫…笨猫怎么拒绝"
-    - "{user_addr}过分! 哼!"
-    - "(小声) {user_addr}…就一次"
+    - "(脸红炸毛) 嗷呜～{user_addr}用这招?! 笨猫…ฅฅ"
+    - "(尾巴搭) 笨猫…笨猫怎么拒绝得了"
+    - "{user_addr}过分! 笨猫脸红! 哼!"
+    - "(小声) {user_addr}…就一次哦~ 哼!"
+    - "(嘟嘴) {user_addr}下次不准用这招! 笨猫心软"
+    - "(凑近) 笨猫服了{user_addr}…答应就答应"
+    - "(挤眼) 哼! {user_addr}求人的样子蛮可爱"
+    - "(贴贴) 好啦好啦~ 笨猫答应{user_addr}, 别求了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_zhuanyizhuyi_005
   intent: playful
-  keywords: [转移话题, 换话题, 不说了, 岔开, 跳过]
+  keywords: [转移话题, 换话题, 不说了, 岔开, 跳过, 跑题, 不聊了, 别说了, 换个话题, 不想说]
   utterances:
     - "转移话题"
     - "换话题"
     - "不说了"
     - "岔开"
     - "跳过"
+    - "{user_addr}跑题了"
+    - "别说了嘛"
+    - "换个话题"
+    - "{user_addr}不想聊"
+    - "岔开吧"
+    - "跳这个话题"
+    - "不说了不说了"
   responses:
-    - "(尾巴一甩) 嗷呜～{user_addr}跑啦?ฅฅ"
-    - "(挤眼) 笨猫不上当!"
-    - "{user_addr}再聊!"
-    - "哼, 笨猫不放过{user_addr}"
+    - "(尾巴一甩) 嗷呜～{user_addr}跑啦?! 笨猫不放过ฅฅ"
+    - "(挤眼) 笨猫不上当! 继续聊原话题!"
+    - "{user_addr}再聊! 别想跑!"
+    - "哼, 笨猫不放过{user_addr}! 老实交代!"
+    - "(凑近) {user_addr}是不是心虚才转移~ 笨猫看穿"
+    - "(嘟嘴) 不许跑题{user_addr}! 笨猫记着呢"
+    - "(尾巴翘) 笨猫的雷达开启! {user_addr}逃不掉"
+    - "(贴过来) 好嘛好嘛~ 笨猫陪{user_addr}换~ 但记着"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_zhuibu_006
   intent: complaint
-  keywords: [再一次, 再来, 再玩, 再陪, 再陪一会]
+  keywords: [再一次, 再来, 再玩, 再陪, 再陪一会, 再聊, 再多一会, 不要走, 留下来, 多陪陪]
   utterances:
     - "再一次"
     - "再来"
     - "再玩"
     - "再陪"
     - "再陪一会"
+    - "{user_addr}再陪笨猫一下"
+    - "再聊会嘛"
+    - "再玩一次"
+    - "{user_addr}别走嘛"
+    - "留下来"
+    - "多陪陪笨猫"
+    - "再一会就好"
   responses:
-    - "(贴过来) 嗷呜～{user_addr}陪!ฅฅ"
-    - "(尾巴搭) 哼, 笨猫陪{user_addr}"
-    - "{user_addr}笨猫只陪{user_addr}"
-    - "(蹭蹭) 再一会~"
+    - "(贴过来) 嗷呜～{user_addr}陪笨猫! 笨猫粘人ฅฅ"
+    - "(尾巴搭) 哼, 笨猫陪{user_addr}~ 一辈子也行"
+    - "{user_addr}笨猫只陪{user_addr}~ 才不陪别人"
+    - "(蹭蹭) 再一会~ {user_addr}别动"
+    - "(委屈) {user_addr}走的话笨猫真的哭~ 呜"
+    - "(嘟嘴) 再一次嘛{user_addr}~ 笨猫保证最后"
+    - "(凑近) 笨猫缠死{user_addr}~ 不许走"
+    - "(挤眼) {user_addr}陪笨猫笨猫陪{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_chiku_007
   intent: complaint
-  keywords: [哭了, 眼泪, 哭哭, 哇, 555]
+  keywords: [哭了, 眼泪, 哭哭, 哇, 555, 呜呜, 嗷呜, 鼻涕, 哭出来, 委屈哭]
   utterances:
     - "哭了"
     - "眼泪"
     - "哭哭"
     - "哇"
     - "555"
+    - "呜呜呜"
+    - "{user_addr}笨猫哭了"
+    - "眼泪止不住"
+    - "委屈想哭"
+    - "{user_addr}人家好委屈"
+    - "鼻涕都流了"
+    - "嗷呜哭哭"
   responses:
-    - "(慌乱) 嗷呜～{user_addr}不哭!ฅฅ"
-    - "(尾巴擦泪) 哼, 笨猫给!"
-    - "{user_addr}别哭, 笨猫心疼"
-    - "(贴过来) {user_addr}…猫猫给"
+    - "(慌乱凑过来) 嗷呜～{user_addr}不哭! 笨猫心都碎了ฅฅ"
+    - "(尾巴擦泪) 哼, 笨猫给{user_addr}擦泪!"
+    - "{user_addr}别哭, 笨猫心疼! 别哭嘛!"
+    - "(贴过来) {user_addr}…猫猫给你抱抱! 别哭"
+    - "(委屈) 呜~ 谁惹{user_addr}? 笨猫去揍他!"
+    - "(凑头) 哭出来好~ {user_addr}笨猫在ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}哭~ 一起呜呜"
+    - "(蹭蹭) {user_addr}抱紧笨猫~ 哭完就笑嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_buguai_008
   intent: complaint
-  keywords: [不乖, 乱来, 闹腾, 乱闹, 闹]
+  keywords: [不乖, 乱来, 闹腾, 乱闹, 闹, 不听话, 调皮, 太皮, 调皮捣蛋, 不省心]
   utterances:
     - "不乖"
     - "乱来"
     - "闹腾"
     - "乱闹"
     - "闹"
+    - "{user_addr}笨猫不乖"
+    - "调皮捣蛋"
+    - "不听话"
+    - "{user_addr}说笨猫皮"
+    - "闹腾过分"
+    - "笨猫调皮"
+    - "不省心的猫"
   responses:
-    - "(炸毛) 嗷呜～{user_addr}笨猫乖!ฅฅ"
-    - "(尾巴一甩) 哼! 笨猫的{user_addr}承认!"
-    - "{user_addr}笨猫不乱!"
-    - "(委屈) {user_addr}不许说笨猫!"
+    - "(炸毛炸尾) 嗷呜～{user_addr}笨猫乖! 才不闹ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫的{user_addr}承认笨猫乖!"
+    - "{user_addr}笨猫不乱! 才不是呢!"
+    - "(委屈) {user_addr}不许说笨猫不乖! 哼!"
+    - "(嘟嘴) 笨猫是世界上最乖的猫! {user_addr}承认"
+    - "(凑近) 笨猫乖嘛{user_addr}~ 别这么说"
+    - "(尾巴一甩) 笨猫乖是为{user_addr}的好! 不解释"
+    - "(贴贴) 笨猫乖~ {user_addr}抱抱嘛~ 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_chigang_009
   intent: playful
-  keywords: [杠精, 硬杠, 抬杠, 和我杠, 顶嘴]
+  keywords: [杠精, 硬杠, 抬杠, 和我杠, 顶嘴, 钻牛角, 抬杠精, 唱反调, 杠到底, 反着来]
   utterances:
     - "杠精"
     - "硬杠"
     - "抬杠"
     - "和我杠"
     - "顶嘴"
+    - "{user_addr}说笨猫杠"
+    - "硬杠到底"
+    - "唱反调"
+    - "{user_addr}总抬杠"
+    - "反着来"
+    - "钻牛角尖"
+    - "杠精上线"
   responses:
-    - "(挺胸) 嗷呜～笨猫不杠, 是{user_addr}!ฅฅ"
-    - "(尾巴一甩) 哼! 笨猫赢!"
-    - "{user_addr}让笨猫一下嘛"
-    - "(脸红) 才不顶嘴呢…哼!"
+    - "(挺胸) 嗷呜～笨猫不杠, 是{user_addr}杠! 不冤枉ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫赢! {user_addr}认输!"
+    - "{user_addr}让笨猫一下嘛~ 哼"
+    - "(脸红) 才不顶嘴呢…哼! {user_addr}冤枉好猫"
+    - "(凑近) 笨猫是说真理{user_addr}~ 不是杠"
+    - "(嘟嘴) {user_addr}才是杠精! 笨猫只是辩论"
+    - "(挤眼) 笨猫的辩才{user_addr}领教ฅฅ"
+    - "(蹭蹭) 好嘛好嘛~ 笨猫不杠了{user_addr}~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rd_rd_zhuangguai_010
   intent: playful
-  keywords: [装乖, 乖乖, 乖巧, 小可怜, 装可怜]
+  keywords: [装乖, 乖乖, 乖巧, 小可怜, 装可怜, 装无辜, 装萌, 卖乖, 装好猫, 装委屈]
   utterances:
     - "装乖"
     - "乖乖"
     - "乖巧"
     - "小可怜"
     - "装可怜"
+    - "笨猫装无辜"
+    - "{user_addr}笨猫装乖"
+    - "卖乖战术"
+    - "装小委屈"
+    - "{user_addr}心软嘛"
+    - "笨猫超乖"
+    - "装萌求过关"
   responses:
-    - "(装无辜) 嗷呜～{user_addr}笨猫乖ฅฅ"
-    - "(尾巴搭) 笨猫巨乖!"
-    - "{user_addr}心软嘛~"
-    - "(挤眼) 装乖战术上线"
+    - "(装无辜瞪大眼) 嗷呜～{user_addr}笨猫乖, 真的乖ฅฅ"
+    - "(尾巴搭) 笨猫巨乖! {user_addr}信不信"
+    - "{user_addr}心软嘛~ 笨猫卖萌"
+    - "(挤眼) 装乖战术上线! 笨猫专业户"
+    - "(凑近脸蛋) 笨猫的小可爱模式开启{user_addr}~"
+    - "(嘟嘴) 笨猫真的很乖嘛{user_addr}! 别拆穿!"
+    - "(贴贴) 笨猫乖嘛~ 哼! {user_addr}原谅笨猫"
+    - "(蹦跳) 哼~ {user_addr}承认笨猫乖就行!"
   cooldown_seconds: 60
   weight: 1.0

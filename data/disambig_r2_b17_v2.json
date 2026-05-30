@@ -1,0 +1,4522 @@
+[
+  {
+    "name": "ayc_eat_004",
+    "ctx": [
+      "没吃",
+      "撑着",
+      "胃疼",
+      "反胃",
+      "吃太多",
+      "油腻"
+    ],
+    "_file": "457_ate_yet_care.yaml",
+    "_hit": true,
+    "_kw": [
+      "吃不下",
+      "没胃口",
+      "吃了不舒服",
+      "吃饱了",
+      "吃撑了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "pcr_groom_request_009",
+    "ctx": [
+      "摸头",
+      "rua",
+      "揉揉",
+      "头顶",
+      "耳朵",
+      "顺毛"
+    ],
+    "_file": "827_pet_caress_request.yaml",
+    "_hit": true,
+    "_kw": [
+      "梳毛",
+      "帮我梳",
+      "顺毛梳",
+      "打理毛发",
+      "梳子"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "hh_heng_001",
+    "ctx": [
+      "撅嘴",
+      "别理",
+      "炸毛",
+      "傲娇",
+      "气鼓鼓"
+    ],
+    "_file": "405_hmph_huff.yaml",
+    "_hit": true,
+    "_kw": [
+      "哼",
+      "哼哼",
+      "哼唧",
+      "哼一下",
+      "哼起来"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "oj_ganga_001",
+    "ctx": [
+      "穿搭",
+      "审美",
+      "土味",
+      "配色",
+      "搭配",
+      "造型"
+    ],
+    "_file": "HHH6_outfit_judged.yaml",
+    "_hit": true,
+    "_kw": [
+      "尴尬",
+      "好尴尬",
+      "穿这样尴尬",
+      "当场尴尬",
+      "社死了"
+    ],
+    "_int": "尴尬"
+  },
+  {
+    "name": "mg_mg_naozhongfan_004",
+    "ctx": [
+      "起床气",
+      "赖床",
+      "烦躁",
+      "撅嘴",
+      "闹脾气",
+      "别叫我"
+    ],
+    "_file": "247_morning_grumpy.yaml",
+    "_hit": true,
+    "_kw": [
+      "闹钟",
+      "闹钟烦",
+      "关闹钟",
+      "闹钟响",
+      "闹钟可恶"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "nbc_waimai_001",
+    "ctx": [
+      "午饭",
+      "午休",
+      "打盹",
+      "午睡",
+      "下午",
+      "工间"
+    ],
+    "_file": "353_noon_break_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "外卖",
+      "点啥",
+      "选择困难",
+      "没胃口",
+      "不知道吃啥"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "ms_stomach_001",
+    "ctx": [
+      "晕车",
+      "晕船",
+      "头晕",
+      "想吐",
+      "开窗",
+      "晕乎"
+    ],
+    "_file": "Z9_motion_sickness.yaml",
+    "_hit": true,
+    "_kw": [
+      "胃不舒服",
+      "胃难受",
+      "胃翻江倒海",
+      "胃里翻",
+      "胃酸涌上来"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "lnc_zaima_001",
+    "ctx": [
+      "深夜",
+      "凌晨",
+      "别睡",
+      "陪我",
+      "失眠",
+      "黑夜"
+    ],
+    "_file": "352_late_night_call.yaml",
+    "_hit": true,
+    "_kw": [
+      "在吗",
+      "在不在",
+      "在?",
+      "笨猫还在吗",
+      "没睡吧"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "sn_sne_002",
+    "ctx": [
+      "打喷嚏",
+      "阿嚏",
+      "鼻涕",
+      "着凉",
+      "纸巾",
+      "咳嗽"
+    ],
+    "_file": "610_sneeze_chain_attack.yaml",
+    "_hit": true,
+    "_kw": [
+      "被人念叨",
+      "谁想我",
+      "喷嚏念叨",
+      "念叨我",
+      "想我了"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "np_alone_tired_001",
+    "ctx": [
+      "单身",
+      "没对象",
+      "光棍",
+      "谈恋爱",
+      "找对象",
+      "空窗"
+    ],
+    "_file": "WW7_no_partner.yaml",
+    "_hit": true,
+    "_kw": [
+      "一个人打球",
+      "自己打累",
+      "颠球累",
+      "对墙练",
+      "没人陪"
+    ],
+    "_int": "一个人打球累"
+  },
+  {
+    "name": "cm_zibi_001",
+    "ctx": [
+      "净化",
+      "清醒",
+      "洗脑",
+      "治愈",
+      "冷静",
+      "脑子"
+    ],
+    "_file": "DDD8_cleansing_mind.yaml",
+    "_hit": true,
+    "_kw": [
+      "想自闭",
+      "自闭一下",
+      "想关起来",
+      "不想说话",
+      "想独处"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "it_huoqiang_001",
+    "ctx": [
+      "失眠",
+      "睡不着",
+      "胡思乱想",
+      "翻来覆去",
+      "心事",
+      "凌晨"
+    ],
+    "_file": "276_insomnia_thinking.yaml",
+    "_hit": true,
+    "_kw": [
+      "想笨猫睡不着",
+      "念笨猫",
+      "想猫猫",
+      "念你",
+      "念笨猫念到"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "nr_shutdown_001",
+    "ctx": [
+      "没收入",
+      "破产",
+      "吃土",
+      "工资",
+      "余额"
+    ],
+    "_file": "MMM7_no_revenue.yaml",
+    "_hit": true,
+    "_kw": [
+      "要不要关张",
+      "关店",
+      "关门",
+      "结业",
+      "不干了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "rs_sin_004",
+    "ctx": [
+      "唱歌",
+      "哼歌",
+      "五音",
+      "跑调",
+      "歌词",
+      "旋律"
+    ],
+    "_file": "599_random_singing_burst.yaml",
+    "_hit": true,
+    "_kw": [
+      "嗓子哑",
+      "唱破音",
+      "唱不上去",
+      "高音不行",
+      "嗓子累"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "nc_baoyuan_001",
+    "ctx": [
+      "抱抱",
+      "蹭蹭",
+      "安慰",
+      "撒娇",
+      "委屈",
+      "想哭"
+    ],
+    "_file": "263_need_comfort.yaml",
+    "_hit": true,
+    "_kw": [
+      "想抱怨",
+      "吐槽一下",
+      "一肚子苦水",
+      "太累了",
+      "委屈大"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "mem_nostalgia_001",
+    "ctx": [
+      "情绪",
+      "小心思",
+      "闹别扭",
+      "憋着",
+      "心里",
+      "别扭"
+    ],
+    "_file": "502_micro_emotion.yaml",
+    "_hit": true,
+    "_kw": [
+      "想起以前",
+      "怀念过去",
+      "旧事重提",
+      "回忆杀",
+      "老照片"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "maa_jolt_005",
+    "ctx": [
+      "闹钟",
+      "按掉",
+      "响了",
+      "吵醒",
+      "起床气"
+    ],
+    "_file": "343_morning_alarm_anger.yaml",
+    "_hit": true,
+    "_kw": [
+      "被吓醒",
+      "闹钟惊醒",
+      "心脏砰砰",
+      "突然惊醒",
+      "吓醒"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "rd_rd_zhuanyizhuyi_005",
+    "ctx": [
+      "打滚",
+      "耍赖",
+      "要求",
+      "撒泼",
+      "非要",
+      "嘤嘤"
+    ],
+    "_file": "240_rolling_demand.yaml",
+    "_hit": true,
+    "_kw": [
+      "转移话题",
+      "换话题",
+      "不说了",
+      "岔开",
+      "跳过"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "sb_zuoxia_001",
+    "ctx": [
+      "地铁",
+      "早高峰",
+      "换乘",
+      "贴贴",
+      "站票"
+    ],
+    "_file": "812_subway_crowded_squish.yaml",
+    "_hit": true,
+    "_kw": [
+      "没座位",
+      "一路站",
+      "站到腿酸",
+      "没空位",
+      "想坐"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ds_mood_low_001",
+    "ctx": [
+      "刷手机",
+      "停不下来",
+      "刷信息",
+      "坏消息",
+      "焦虑",
+      "成瘾"
+    ],
+    "_file": "EE7_doomscrolling.yaml",
+    "_hit": true,
+    "_kw": [
+      "心情低落",
+      "心情好低落",
+      "心情坠落",
+      "心情谷底",
+      "心情阴天"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ts_zhuawei_001",
+    "ctx": [
+      "踩尾巴",
+      "呜呜",
+      "踩到",
+      "炸毛",
+      "瞪你"
+    ],
+    "_file": "067_cat_tail_stepped.yaml",
+    "_hit": true,
+    "_kw": [
+      "拽尾巴",
+      "抓尾巴",
+      "拉尾巴",
+      "拽过去",
+      "揪尾巴"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "festival_spring_001",
+    "ctx": [
+      "传统",
+      "节俗",
+      "灯笼",
+      "烟花",
+      "贴春联",
+      "糖瓜"
+    ],
+    "_file": "A6_festival_tradition.yaml",
+    "_hit": true,
+    "_kw": [
+      "过年",
+      "春节快乐",
+      "春节准备",
+      "春节回家",
+      "拜年话"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "nm_nm_995_005",
+    "ctx": [
+      "数字梗",
+      "521",
+      "233",
+      "886",
+      "数字暗号"
+    ],
+    "_file": "250_number_meme.yaml",
+    "_hit": true,
+    "_kw": [
+      "995",
+      "求救",
+      "救我",
+      "救命",
+      "紧急"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "lnc_drink_water_001",
+    "ctx": [
+      "深夜",
+      "凌晨",
+      "别睡",
+      "陪我",
+      "失眠",
+      "黑夜"
+    ],
+    "_file": "076_late_night_call.yaml",
+    "_hit": true,
+    "_kw": [
+      "口渴",
+      "起来喝水",
+      "半夜口渴",
+      "喝水",
+      "渴醒了"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "sc_jiaowei_001",
+    "ctx": [
+      "突然冷",
+      "降温",
+      "冷风",
+      "哆嗦",
+      "寒流",
+      "骤降"
+    ],
+    "_file": "284_suddenly_cold.yaml",
+    "_hit": true,
+    "_kw": [
+      "赌气",
+      "闹脾气",
+      "生闷气",
+      "一肚子气",
+      "别理我"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "pb_charge_002",
+    "ctx": [
+      "手机没电",
+      "充电",
+      "低电",
+      "断电",
+      "插头"
+    ],
+    "_file": "684_phone_low_battery.yaml",
+    "_hit": true,
+    "_kw": [
+      "充电中",
+      "插着充",
+      "在充电",
+      "充上了",
+      "充满"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "sep_kaoshijinzhang_001",
+    "ctx": [
+      "考试",
+      "复习",
+      "刷题",
+      "挂科",
+      "卷子",
+      "焦虑"
+    ],
+    "_file": "738_study_exam_panic.yaml",
+    "_hit": true,
+    "_kw": [
+      "考试焦虑",
+      "考前紧张",
+      "怕考砸",
+      "怕挂科",
+      "怕没考好"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "wc_too_hot_001",
+    "ctx": [
+      "天气",
+      "糟糕",
+      "闷热",
+      "灰蒙蒙",
+      "糟心"
+    ],
+    "_file": "U8_weather_complaint.yaml",
+    "_hit": true,
+    "_kw": [
+      "太热了",
+      "好热啊",
+      "热爆了",
+      "热得不行",
+      "这天气太热"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "csv_latte_choose_002",
+    "ctx": [
+      "咖啡店",
+      "一杯",
+      "店员",
+      "点单"
+    ],
+    "_file": "839_coffee_shop_visit.yaml",
+    "_hit": true,
+    "_kw": [
+      "拿铁",
+      "美式",
+      "卡布奇诺",
+      "摩卡",
+      "选什么咖啡"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "ssw_wp_010",
+    "ctx": [
+      "秘密",
+      "悄悄话",
+      "耳语",
+      "别告诉",
+      "咬耳"
+    ],
+    "_file": "766_secret_share_whisper.yaml",
+    "_hit": true,
+    "_kw": [
+      "被套路",
+      "嘴滑说出",
+      "不小心",
+      "后悔",
+      "想收回"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "rny_mood_009",
+    "ctx": [
+      "下雨",
+      "听雨",
+      "灰蒙蒙",
+      "打伞"
+    ],
+    "_file": "751_rainy_day_mood.yaml",
+    "_hit": true,
+    "_kw": [
+      "彩虹",
+      "雨后彩虹",
+      "双彩虹",
+      "美景",
+      "拍照"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bd_jiehua_001",
+    "ctx": [
+      "脸红",
+      "低头",
+      "躲开",
+      "遮脸",
+      "害羞",
+      "别看"
+    ],
+    "_file": "269_blush_dodge.yaml",
+    "_hit": true,
+    "_kw": [
+      "转移话题",
+      "换个话题",
+      "别说了",
+      "不要再说",
+      "停下"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "cp_jingzhui_001",
+    "ctx": [
+      "慢性",
+      "长期",
+      "酸痛",
+      "按摩",
+      "贴膏",
+      "理疗"
+    ],
+    "_file": "II7_chronic_pain.yaml",
+    "_hit": true,
+    "_kw": [
+      "颈椎痛",
+      "脖子痛",
+      "颈椎病",
+      "脖子僵",
+      "落枕"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "sec_findlost_001",
+    "ctx": [
+      "偶遇",
+      "撞见",
+      "街上",
+      "路上",
+      "迎面",
+      "擦肩"
+    ],
+    "_file": "501_street_encounter.yaml",
+    "_hit": true,
+    "_kw": [
+      "捡到",
+      "路边捡到",
+      "捡到钱",
+      "拾到",
+      "捡了"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "fmn_moon_round_001",
+    "ctx": [
+      "月亮",
+      "月光",
+      "望月",
+      "嫦娥"
+    ],
+    "_file": "542_full_moon_night.yaml",
+    "_hit": true,
+    "_kw": [
+      "月亮圆",
+      "满月",
+      "月圆",
+      "看月亮",
+      "月光美"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "mr_yingyu_001",
+    "ctx": [
+      "歧义",
+      "听岔",
+      "误会",
+      "理解错"
+    ],
+    "_file": "884_misread_intent.yaml",
+    "_hit": true,
+    "_kw": [
+      "语义歧义",
+      "多义词",
+      "两种意思",
+      "怎么理解",
+      "听不懂"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "aw_meirenliao_009",
+    "ctx": [
+      "求安慰",
+      "抱抱",
+      "蹭蹭",
+      "别难过",
+      "陪我",
+      "撑住"
+    ],
+    "_file": "296_anwei_comfort_seek.yaml",
+    "_hit": true,
+    "_kw": [
+      "没人陪",
+      "没人懂我",
+      "孤独",
+      "没人懂",
+      "没倾诉"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "blp_battery_003",
+    "ctx": [
+      "电量",
+      "低电",
+      "充电",
+      "断电",
+      "插头"
+    ],
+    "_file": "575_battery_low_panic.yaml",
+    "_hit": true,
+    "_kw": [
+      "没电",
+      "充电器",
+      "找充电",
+      "电量低",
+      "1%"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "wdy_windy_008",
+    "ctx": [
+      "大风",
+      "刮风",
+      "吹乱",
+      "凉风",
+      "呼呼",
+      "沙子"
+    ],
+    "_file": "578_windy_day_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "刘海",
+      "风口",
+      "凉爽",
+      "逆风",
+      "披风"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "gmd_dream_001",
+    "ctx": [
+      "迷糊",
+      "睁眼",
+      "迷瞪",
+      "咖啡",
+      "续命",
+      "发呆"
+    ],
+    "_file": "516_good_morning_drowsy.yaml",
+    "_hit": true,
+    "_kw": [
+      "做梦了",
+      "梦到",
+      "奇怪的梦",
+      "梦里",
+      "噩梦"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "meme_jasi_001",
+    "ctx": [
+      "热梗",
+      "网络梗",
+      "蹭热度",
+      "热搜",
+      "整活"
+    ],
+    "_file": "70_internet_meme.yaml",
+    "_hit": true,
+    "_kw": [
+      "笑死",
+      "笑死我了",
+      "哈哈哈",
+      "哈哈哈哈",
+      "lol",
+      "笑岔气"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "bbm_bbz_001",
+    "ctx": [
+      "笑死",
+      "笑场",
+      "破防",
+      "憋不住",
+      "喷了"
+    ],
+    "_file": "482_bengbuzhu_meme.yaml",
+    "_hit": true,
+    "_kw": [
+      "蚌埠住",
+      "蚌住",
+      "蚌不住",
+      "绷不住",
+      "蚌埠居然"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "tm_milk_tea_001",
+    "ctx": [
+      "奶茶",
+      "喝啥",
+      "珍珠",
+      "吸管",
+      "冰沙",
+      "糖度"
+    ],
+    "_file": "181_tea_milk_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "喝奶茶",
+      "来杯奶茶",
+      "想喝奶茶",
+      "奶茶续命",
+      "奶茶上瘾"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "rc_norealtopic_001",
+    "ctx": [
+      "闲聊",
+      "瞎扯",
+      "叨叨",
+      "废话",
+      "凑数",
+      "闲话"
+    ],
+    "_file": "150_random_chatter.yaml",
+    "_hit": true,
+    "_kw": [
+      "说啥呢",
+      "没话题",
+      "没啥说",
+      "不知道说啥",
+      "找话题"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ets_ls_004",
+    "ctx": [
+      "耳朵动",
+      "竖耳",
+      "听声",
+      "警觉",
+      "转向",
+      "摇耳"
+    ],
+    "_file": "762_ear_twitch_listen.yaml",
+    "_hit": true,
+    "_kw": [
+      "摸耳朵",
+      "揉一下",
+      "三角耳",
+      "耳尖",
+      "软毛"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "sr_huilai_001",
+    "ctx": [
+      "铲屎",
+      "下班",
+      "回家",
+      "给我",
+      "迎接",
+      "拍腿"
+    ],
+    "_file": "281_shovel_return.yaml",
+    "_hit": true,
+    "_kw": [
+      "回家了",
+      "回来啦",
+      "到家",
+      "进门",
+      "铲屎官回家"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "syc_nap_001",
+    "ctx": [
+      "睡了吗",
+      "晚安",
+      "洗漱",
+      "床上",
+      "准备睡",
+      "报备"
+    ],
+    "_file": "521_sleep_yet_check.yaml",
+    "_hit": true,
+    "_kw": [
+      "午睡",
+      "小憩",
+      "打盹",
+      "眯一会",
+      "趴下睡"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ar_fake_disinterest_001",
+    "ctx": [
+      "口是心非",
+      "反话",
+      "装高冷",
+      "口嫌",
+      "心非",
+      "别扭"
+    ],
+    "_file": "137_anti_routine.yaml",
+    "_hit": true,
+    "_kw": [
+      "装不感兴趣",
+      "装无视",
+      "假装路过",
+      "装作没事",
+      "故意忽略"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "cc_cc_shuobuwan_007",
+    "ctx": [
+      "黏人",
+      "陪着",
+      "贴贴",
+      "蹭蹭",
+      "跟着"
+    ],
+    "_file": "223_clingy_companion.yaml",
+    "_hit": true,
+    "_kw": [
+      "不要走",
+      "别走",
+      "留下",
+      "别离开",
+      "不准走"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ach_oversleep_003",
+    "ctx": [
+      "闹钟",
+      "响了",
+      "按掉",
+      "吵醒",
+      "烦躁"
+    ],
+    "_file": "617_alarm_clock_hate.yaml",
+    "_hit": true,
+    "_kw": [
+      "睡过头",
+      "起晚了",
+      "迟到",
+      "没听见闹钟",
+      "完蛋"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "stm_midnight_001",
+    "ctx": [
+      "咕咕",
+      "腹鸣",
+      "空腹",
+      "早饭",
+      "低血糖"
+    ],
+    "_file": "949_stomach_growl.yaml",
+    "_hit": true,
+    "_kw": [
+      "半夜饿",
+      "半夜肚子叫",
+      "夜宵",
+      "凌晨饿",
+      "夜里饿"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "csa_crisp_001",
+    "ctx": [
+      "零食",
+      "咔嚓",
+      "嘎嘣",
+      "嘴馋",
+      "咸香"
+    ],
+    "_file": "567_crisp_snack_attack.yaml",
+    "_hit": true,
+    "_kw": [
+      "薯片",
+      "咔嚓咔嚓",
+      "一袋光",
+      "乐事",
+      "油炸"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "mwc_wash_006",
+    "ctx": [
+      "洗脸",
+      "刷牙",
+      "洗漱",
+      "洁面",
+      "水温",
+      "镜子"
+    ],
+    "_file": "675_morning_wash_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "洗头",
+      "头发湿",
+      "吹干",
+      "毛巾",
+      "护发"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ln_three_am_011",
+    "ctx": [
+      "熬夜",
+      "凌晨",
+      "别睡",
+      "黑眼圈",
+      "失眠",
+      "深夜"
+    ],
+    "_file": "187_late_night.yaml",
+    "_hit": true,
+    "_kw": [
+      "三点了",
+      "凌晨三点",
+      "还没睡",
+      "熬到凌晨",
+      "通宵"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "wtc_blanket_003",
+    "ctx": [
+      "冻死",
+      "寒流",
+      "降温",
+      "穿厚",
+      "哆嗦",
+      "瑟瑟"
+    ],
+    "_file": "621_weather_too_cold.yaml",
+    "_hit": true,
+    "_kw": [
+      "电热毯",
+      "厚被子",
+      "加被子",
+      "毯子",
+      "暖被窝"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "tea_cm_002",
+    "ctx": [
+      "泡茶",
+      "茶香",
+      "静心",
+      "安神",
+      "茶杯",
+      "回甘"
+    ],
+    "_file": "754_tea_calm_moment.yaml",
+    "_hit": true,
+    "_kw": [
+      "喝啥茶",
+      "推荐",
+      "助眠",
+      "提神",
+      "养胃"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "dt_too_tacky_001",
+    "ctx": [
+      "装饰",
+      "审美",
+      "摆件",
+      "配色",
+      "摆设",
+      "软装"
+    ],
+    "_file": "VV7_decoration_taste.yaml",
+    "_hit": true,
+    "_kw": [
+      "土",
+      "土爆了",
+      "土到家了",
+      "土死了",
+      "太土了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "nc_anwei_001",
+    "ctx": [
+      "抱抱",
+      "蹭蹭",
+      "安慰",
+      "撒娇",
+      "委屈"
+    ],
+    "_file": "427_need_comfort.yaml",
+    "_hit": true,
+    "_kw": [
+      "安慰我",
+      "抱抱我",
+      "心情不好",
+      "难过",
+      "想哭"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "bb_wangle_001",
+    "ctx": [
+      "脑子空",
+      "宕机",
+      "短路",
+      "发懵",
+      "断电"
+    ],
+    "_file": "887_brain_blank.yaml",
+    "_hit": true,
+    "_kw": [
+      "忘了想说啥",
+      "话到嘴边",
+      "突然忘",
+      "想不起来",
+      "卡壳"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "chh_catnip_004",
+    "ctx": [
+      "发疯",
+      "磨爪",
+      "上头",
+      "推荐",
+      "怎么"
+    ],
+    "_file": "579_catnip_high_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "哪个香",
+      "试一下",
+      "猫薄荷",
+      "木天蓼",
+      "区别"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "nch_comfort_001",
+    "ctx": [
+      "抱抱",
+      "蹭蹭",
+      "别哭",
+      "别难过",
+      "贴贴",
+      "哄哄"
+    ],
+    "_file": "524_need_comfort_hug.yaml",
+    "_hit": true,
+    "_kw": [
+      "安慰我",
+      "心情不好",
+      "难过",
+      "心累",
+      "想抱抱"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "bs_xifa_001",
+    "ctx": [
+      "洗澡",
+      "护肤",
+      "面膜",
+      "水温",
+      "沐浴"
+    ],
+    "_file": "037_bath_skincare_routine.yaml",
+    "_hit": true,
+    "_kw": [
+      "洗头",
+      "洗发水",
+      "护发素",
+      "吹头",
+      "吹风机"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "frl_fridge_004",
+    "ctx": [
+      "翻冰箱",
+      "深夜",
+      "找吃",
+      "剩饭"
+    ],
+    "_file": "561_fridge_raid_late.yaml",
+    "_hit": true,
+    "_kw": [
+      "好饿",
+      "泡面也没",
+      "空冰箱",
+      "只有剩饭",
+      "没零食"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "rdm_lazy_rainy_005",
+    "ctx": [
+      "下雨",
+      "听雨",
+      "灰蒙蒙",
+      "打伞"
+    ],
+    "_file": "823_rainy_day_mood.yaml",
+    "_hit": true,
+    "_kw": [
+      "雨天懒",
+      "不想动",
+      "床上躺一天",
+      "雨天睡",
+      "不出门"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bl_fatigue_003",
+    "ctx": [
+      "屏幕",
+      "蓝光",
+      "酸眼",
+      "护眼",
+      "干涩",
+      "疲劳"
+    ],
+    "_file": "690_blue_light_eyes.yaml",
+    "_hit": true,
+    "_kw": [
+      "眼疲劳",
+      "眼酸",
+      "眼累",
+      "眼睛胀",
+      "眼皮重"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ug_learn_useless_001",
+    "ctx": [
+      "目标",
+      "迷茫",
+      "方向",
+      "人生",
+      "规划",
+      "找不到"
+    ],
+    "_file": "PP7_unclear_goal.yaml",
+    "_hit": true,
+    "_kw": [
+      "学了没用",
+      "学了也白学",
+      "没用",
+      "白学",
+      "学这干嘛"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "fs_yugan_007",
+    "ctx": [
+      "小鱼干",
+      "鱼干",
+      "零嘴",
+      "咸香",
+      "吧唧"
+    ],
+    "_file": "409_fish_snack.yaml",
+    "_hit": true,
+    "_kw": [
+      "减肥",
+      "戒口",
+      "不能吃",
+      "吃了胖",
+      "节食"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ac_clinging_001",
+    "ctx": [
+      "黏人",
+      "别走",
+      "贴贴",
+      "腿上",
+      "蹭蹭"
+    ],
+    "_file": "124_acting_clingy.yaml",
+    "_hit": true,
+    "_kw": [
+      "想你",
+      "笨猫想",
+      "黏黏",
+      "跟着",
+      "不离开"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "gsh_fish_choose_005",
+    "ctx": [
+      "买菜",
+      "超市",
+      "购物车",
+      "清单",
+      "结账",
+      "满减"
+    ],
+    "_file": "828_grocery_shopping.yaml",
+    "_hit": true,
+    "_kw": [
+      "选鱼",
+      "鲈鱼",
+      "三文鱼",
+      "鲫鱼",
+      "海鱼"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "fc_want_chicken_008",
+    "ctx": [
+      "嘴馋",
+      "想吃",
+      "流口水",
+      "馋虫",
+      "口水"
+    ],
+    "_file": "183_food_craving.yaml",
+    "_hit": true,
+    "_kw": [
+      "想吃鸡",
+      "炸鸡",
+      "鸡腿",
+      "鸡翅",
+      "烤鸡"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "td_yuehui_001",
+    "ctx": [
+      "七夕",
+      "情人节",
+      "礼物",
+      "牛郎",
+      "约会服"
+    ],
+    "_file": "283_tanabata_day.yaml",
+    "_hit": true,
+    "_kw": [
+      "约会",
+      "浪漫约会",
+      "一起约",
+      "情人节约会",
+      "出去玩"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "fm_qixi_003",
+    "ctx": [
+      "节日",
+      "过节",
+      "春节",
+      "节气",
+      "气氛",
+      "灯笼"
+    ],
+    "_file": "199_festival_moment.yaml",
+    "_hit": true,
+    "_kw": [
+      "七夕",
+      "七夕节",
+      "牛郎织女",
+      "中国情人节",
+      "七月七"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "hg_headache_001",
+    "ctx": [
+      "宿醉",
+      "喝多了",
+      "解酒",
+      "吐了",
+      "蜂蜜水"
+    ],
+    "_file": "SSS6_hangover.yaml",
+    "_hit": true,
+    "_kw": [
+      "头疼",
+      "头炸了",
+      "太阳穴疼",
+      "脑袋疼",
+      "头要裂"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "wwt_cat_outside_007",
+    "ctx": [
+      "看窗外",
+      "发呆",
+      "窗台",
+      "远处",
+      "发愣"
+    ],
+    "_file": "819_window_watching.yaml",
+    "_hit": true,
+    "_kw": [
+      "窗外有猫",
+      "流浪猫",
+      "邻居家猫",
+      "喵叫",
+      "看见猫"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "dby_sweet_dream_002",
+    "ctx": [
+      "梦见",
+      "梦到",
+      "梦里",
+      "做梦",
+      "清晨醒",
+      "回味"
+    ],
+    "_file": "349_dreamed_about_you.yaml",
+    "_hit": true,
+    "_kw": [
+      "好梦",
+      "甜美梦",
+      "美梦",
+      "甜的梦",
+      "梦境美"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "wbc_warm_006",
+    "ctx": [
+      "泡澡",
+      "热水",
+      "沐浴",
+      "放松",
+      "浴缸",
+      "水温"
+    ],
+    "_file": "554_warm_bath_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "水太烫",
+      "泡太久",
+      "头晕",
+      "泡皱",
+      "水变凉"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "sya_sleep_001",
+    "ctx": [
+      "晚安",
+      "洗漱",
+      "床上",
+      "准备睡",
+      "报备"
+    ],
+    "_file": "458_sleep_yet_ask.yaml",
+    "_hit": true,
+    "_kw": [
+      "睡了没",
+      "睡了吗",
+      "睡着了吗",
+      "上床了吗",
+      "进被窝了吗"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "bcu_rollover_001",
+    "ctx": [
+      "抱抱",
+      "贴贴",
+      "搂着",
+      "怀里",
+      "蹭蹭",
+      "想抱"
+    ],
+    "_file": "490_beg_cuddle.yaml",
+    "_hit": true,
+    "_kw": [
+      "打滚",
+      "撒娇打滚",
+      "在地上滚",
+      "翻肚皮",
+      "撒泼"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "fmm_five_001",
+    "ctx": [
+      "按掉",
+      "别叫",
+      "迷糊",
+      "睁不开"
+    ],
+    "_file": "550_five_more_minutes.yaml",
+    "_hit": true,
+    "_kw": [
+      "再五分钟",
+      "赖床",
+      "闹钟关",
+      "再睡会",
+      "五分钟"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "hh_heng_006",
+    "ctx": [
+      "撅嘴",
+      "别理",
+      "炸毛",
+      "傲娇",
+      "气鼓鼓"
+    ],
+    "_file": "405_hmph_huff.yaml",
+    "_hit": true,
+    "_kw": [
+      "赌气",
+      "闹脾气",
+      "故意",
+      "不让步",
+      "倔强"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ah_baobao_006",
+    "ctx": [
+      "抱抱",
+      "贴贴",
+      "蹭蹭",
+      "搂着",
+      "怀里",
+      "想抱"
+    ],
+    "_file": "435_ask_for_hug.yaml",
+    "_hit": true,
+    "_kw": [
+      "抱不动",
+      "沉死了",
+      "你太重",
+      "减肥",
+      "抱我费力气"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "swc_sunbathe_003",
+    "ctx": [
+      "日光浴",
+      "暖阳",
+      "发呆",
+      "嘿嘿",
+      "逗"
+    ],
+    "_file": "580_sunbathe_window_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "暖洋洋",
+      "眯眼",
+      "懒洋洋",
+      "晒太阳",
+      "窗台"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "smf_xinli_001",
+    "ctx": [
+      "突然",
+      "小情绪",
+      "一瞬间",
+      "闪过",
+      "小心思",
+      "涌上"
+    ],
+    "_file": "741_sudden_micro_feel.yaml",
+    "_hit": true,
+    "_kw": [
+      "心累",
+      "疲惫感",
+      "心理累",
+      "灵魂累",
+      "想躺平"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "er_er_yyds_009",
+    "ctx": [
+      "表情",
+      "贴纸",
+      "斗图",
+      "颜文字",
+      "meme",
+      "表情包"
+    ],
+    "_file": "229_emoji_react.yaml",
+    "_hit": true,
+    "_kw": [
+      "yyds",
+      "永远的神",
+      "拉满",
+      "顶呱呱",
+      "神"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ewr_buguize_001",
+    "ctx": [
+      "好好吃",
+      "三餐",
+      "规律",
+      "营养",
+      "别凑合",
+      "顿顿"
+    ],
+    "_file": "369_eat_well_remind.yaml",
+    "_hit": true,
+    "_kw": [
+      "饮食不规律",
+      "一顿没一顿",
+      "跳餐",
+      "暴饮暴食",
+      "时饥时饱"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "scn_eatyet_001",
+    "ctx": [
+      "在干嘛",
+      "忙啥",
+      "近况",
+      "怎么样",
+      "最近",
+      "报告"
+    ],
+    "_file": "485_status_check_in.yaml",
+    "_hit": true,
+    "_kw": [
+      "吃了吗",
+      "吃饭没",
+      "吃了没",
+      "吃啥了",
+      "中午吃"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "tf_jainfei_003",
+    "ctx": [
+      "胖了",
+      "长肉",
+      "腹肌",
+      "肚腩",
+      "腰围"
+    ],
+    "_file": "309_tease_master_fat.yaml",
+    "_hit": true,
+    "_kw": [
+      "减肥",
+      "想减肥",
+      "该减肥",
+      "减脂",
+      "减不下来"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "rn_quarantine_009",
+    "ctx": [
+      "流鼻涕",
+      "感冒",
+      "纸巾",
+      "鼻塞",
+      "喷嚏",
+      "体温"
+    ],
+    "_file": "701_runny_nose_cold.yaml",
+    "_hit": true,
+    "_kw": [
+      "传染人",
+      "戴口罩",
+      "隔离",
+      "不要靠近",
+      "怕传染"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "er_er_jiele_010",
+    "ctx": [
+      "表情",
+      "贴纸",
+      "斗图",
+      "颜文字",
+      "meme",
+      "表情包"
+    ],
+    "_file": "229_emoji_react.yaml",
+    "_hit": true,
+    "_kw": [
+      "绷",
+      "绷不住",
+      "笑不活",
+      "笑趴",
+      "笑场"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "psych_counselor_001",
+    "ctx": [
+      "心理",
+      "深度",
+      "潜意识",
+      "自我",
+      "疗愈",
+      "分析"
+    ],
+    "_file": "D0_psychology_deep.yaml",
+    "_hit": true,
+    "_kw": [
+      "推荐心理咨询",
+      "推荐心理医生",
+      "怎么找心理咨询",
+      "推荐心理咨询师",
+      "笨猫心理咨询"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "cc_bushuohua_008",
+    "ctx": [
+      "吃醋",
+      "嫉妒",
+      "撅嘴",
+      "别理"
+    ],
+    "_file": "295_chicu_jealous.yaml",
+    "_hit": true,
+    "_kw": [
+      "我不说",
+      "不说话",
+      "不理你",
+      "沉默",
+      "装哑"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ww_lengsi_001",
+    "ctx": [
+      "加衣",
+      "保暖",
+      "穿厚",
+      "降温",
+      "感冒",
+      "围巾"
+    ],
+    "_file": "259_wear_warm.yaml",
+    "_hit": true,
+    "_kw": [
+      "冷死了",
+      "好冷",
+      "冻成狗",
+      "手冰",
+      "脚冰"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ay_chilema_001",
+    "ctx": [
+      "点啥",
+      "想吃",
+      "报备",
+      "顿顿"
+    ],
+    "_file": "291_ate_yet_question.yaml",
+    "_hit": true,
+    "_kw": [
+      "吃了吗",
+      "吃了没",
+      "吃饭了",
+      "吃没吃",
+      "吃了么"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "bb_yu_002",
+    "ctx": [
+      "绷不住",
+      "笑死",
+      "笑场",
+      "破防",
+      "憋不住",
+      "喷了"
+    ],
+    "_file": "313_bengbu_meme.yaml",
+    "_hit": true,
+    "_kw": [
+      "遭不住",
+      "顶不住",
+      "受不了",
+      "撑不住",
+      "扛不住"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "aym_mm_003",
+    "ctx": [
+      "纪念日",
+      "回忆",
+      "满月",
+      "一起",
+      "想当年",
+      "旧事"
+    ],
+    "_file": "773_anniversary_memory.yaml",
+    "_hit": true,
+    "_kw": [
+      "忘了纪念日",
+      "失忆",
+      "忙忘",
+      "抱歉",
+      "主人不开心"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ch_jiangcha_001",
+    "ctx": [
+      "手凉",
+      "冰手",
+      "取暖",
+      "哈气",
+      "搓手",
+      "暖手"
+    ],
+    "_file": "787_cold_hands_warm.yaml",
+    "_hit": true,
+    "_kw": [
+      "姜茶",
+      "红糖姜茶",
+      "暖身茶",
+      "喝热的",
+      "暖身饮"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "whp_pat_002",
+    "ctx": [
+      "摸头",
+      "rua",
+      "顺毛",
+      "头顶",
+      "耳朵",
+      "摸摸"
+    ],
+    "_file": "476_want_headpat_beg.yaml",
+    "_hit": true,
+    "_kw": [
+      "摸耳朵",
+      "揉耳朵",
+      "摸猫耳",
+      "摸耳",
+      "揉小耳"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "pa_ambulance_001",
+    "ctx": [
+      "惊恐",
+      "心慌",
+      "喘不过",
+      "发抖",
+      "无力",
+      "吓到"
+    ],
+    "_file": "LL8_panic_attack.yaml",
+    "_hit": true,
+    "_kw": [
+      "想叫救护车",
+      "要不要打120",
+      "是不是该叫120",
+      "要去急诊",
+      "撑不住了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "wa_haomeng_002",
+    "ctx": [
+      "晚安",
+      "洗漱",
+      "床上",
+      "睡吧",
+      "闭眼"
+    ],
+    "_file": "286_wanan_night_greeting.yaml",
+    "_hit": true,
+    "_kw": [
+      "好梦",
+      "做好梦",
+      "梦里见",
+      "美梦",
+      "晚安好梦"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "at_at_kanbujian_002",
+    "ctx": [
+      "反套路",
+      "不按",
+      "偏不",
+      "反着",
+      "反向",
+      "拐弯"
+    ],
+    "_file": "243_anti_trope.yaml",
+    "_hit": true,
+    "_kw": [
+      "装看不见",
+      "看不见",
+      "视而不见",
+      "无视",
+      "当透明"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "nm_eat_dirt_001",
+    "ctx": [
+      "没钱",
+      "破产",
+      "余额",
+      "累",
+      "呜"
+    ],
+    "_file": "GG5_no_money.yaml",
+    "_hit": true,
+    "_kw": [
+      "吃土",
+      "我要吃土",
+      "吃土了",
+      "月底吃土",
+      "又要吃土"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "rdh_karaoke_song_004",
+    "ctx": [
+      "哼歌",
+      "小调",
+      "哼唱",
+      "跑调",
+      "节奏",
+      "嘴边"
+    ],
+    "_file": "818_random_humming.yaml",
+    "_hit": true,
+    "_kw": [
+      "k歌",
+      "唱k",
+      "经典老歌",
+      "ktv",
+      "喊麦"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ml_jianqian_001",
+    "ctx": [
+      "小确幸",
+      "小惊喜",
+      "顺利",
+      "开运",
+      "锦鲤",
+      "美事"
+    ],
+    "_file": "983_minor_lucky_event.yaml",
+    "_hit": true,
+    "_kw": [
+      "捡到钱",
+      "路上捡到",
+      "地上钱",
+      "捡到一块",
+      "捡到红包"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "cart_full_001",
+    "ctx": [
+      "购物车",
+      "结算",
+      "满减",
+      "下单",
+      "凑单",
+      "清空"
+    ],
+    "_file": "920_shopping_cart_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "购物车满了",
+      "加满了",
+      "一大堆",
+      "满购物车",
+      "装不下"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "fb_carry_princess_008",
+    "ctx": [
+      "反撩",
+      "回撩",
+      "调戏回",
+      "脸红",
+      "回怼",
+      "心跳"
+    ],
+    "_file": "163_flirting_back.yaml",
+    "_hit": true,
+    "_kw": [
+      "公主抱",
+      "抱起来",
+      "横抱",
+      "抱到床",
+      "抱起"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "rf_baobei_001",
+    "ctx": [
+      "脸红",
+      "害羞",
+      "调戏",
+      "心动",
+      "怦怦",
+      "偷瞄"
+    ],
+    "_file": "054_reverse_flirt_blush.yaml",
+    "_hit": true,
+    "_kw": [
+      "宝贝",
+      "亲爱的",
+      "老婆",
+      "公主",
+      "心肝"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "co_tingbuxialai_001",
+    "ctx": [
+      "收藏",
+      "囤货",
+      "癖好",
+      "集齐",
+      "满柜",
+      "痴迷"
+    ],
+    "_file": "DD6_collection_obsession.yaml",
+    "_hit": true,
+    "_kw": [
+      "停不下来",
+      "停不了",
+      "控制不住",
+      "收不住手",
+      "一发不可收拾"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "bs_juewang_001",
+    "ctx": [
+      "被骗",
+      "诈骗",
+      "上当",
+      "报警",
+      "骗子",
+      "损失"
+    ],
+    "_file": "HH5_being_scammed.yaml",
+    "_hit": true,
+    "_kw": [
+      "心情绝望",
+      "活不下去",
+      "没希望了",
+      "崩溃了",
+      "撑不住了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "wh_toufaluan_001",
+    "ctx": [
+      "吹乱",
+      "撩开",
+      "梳不顺",
+      "累",
+      "呜"
+    ],
+    "_file": "893_windy_hair_mess.yaml",
+    "_hit": true,
+    "_kw": [
+      "头发乱",
+      "风吹乱",
+      "一团乱",
+      "鸟窝",
+      "顶满头"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "se_meet_friend_004",
+    "ctx": [
+      "撞见",
+      "街上",
+      "路上",
+      "迎面",
+      "擦肩"
+    ],
+    "_file": "204_street_encounter.yaml",
+    "_hit": true,
+    "_kw": [
+      "偶遇朋友",
+      "撞到老同学",
+      "路上遇见",
+      "偶遇",
+      "遇到熟人"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "st_jianfeg_001",
+    "ctx": [
+      "甜的",
+      "嘴馋",
+      "甜品",
+      "蛋糕",
+      "奶油"
+    ],
+    "_file": "797_sweet_tooth_crave.yaml",
+    "_hit": true,
+    "_kw": [
+      "减肥不能吃",
+      "戒糖",
+      "戒甜",
+      "控糖",
+      "馋甜的痛苦"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "scs_scenery_pic_007",
+    "ctx": [
+      "截图",
+      "分享",
+      "发图",
+      "看这个",
+      "贴一下",
+      "晒图"
+    ],
+    "_file": "816_screenshot_share.yaml",
+    "_hit": true,
+    "_kw": [
+      "风景照",
+      "拍天空",
+      "晚霞",
+      "夕阳",
+      "美景"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "afh_dadabao_004",
+    "ctx": [
+      "抱抱",
+      "贴贴",
+      "蹭蹭",
+      "搂着",
+      "怀里",
+      "想抱"
+    ],
+    "_file": "025_ask_for_hug.yaml",
+    "_hit": true,
+    "_kw": [
+      "大熊抱",
+      "一个大熊抱",
+      "抱紧",
+      "抱怀里",
+      "怀抱"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "sya_sleep_009",
+    "ctx": [
+      "睡了吗",
+      "晚安",
+      "洗漱",
+      "床上",
+      "准备睡",
+      "报备"
+    ],
+    "_file": "458_sleep_yet_ask.yaml",
+    "_hit": true,
+    "_kw": [
+      "打瞌睡",
+      "困到不行",
+      "撑不住",
+      "想倒下",
+      "想躺平"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ww_jiaoyi_001",
+    "ctx": [
+      "加衣",
+      "保暖",
+      "穿厚",
+      "降温",
+      "感冒",
+      "围巾"
+    ],
+    "_file": "259_wear_warm.yaml",
+    "_hit": true,
+    "_kw": [
+      "加衣服",
+      "加件外套",
+      "披件衣",
+      "加薄外套",
+      "春秋衣"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "hmt_qixi_001",
+    "ctx": [
+      "假期",
+      "节假日",
+      "放假",
+      "调休",
+      "旅游",
+      "宅家"
+    ],
+    "_file": "496_holiday_moment.yaml",
+    "_hit": true,
+    "_kw": [
+      "七夕",
+      "牛郎织女",
+      "七夕节",
+      "中国情人节",
+      "七夕约会"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "wrc_rain_006",
+    "ctx": [
+      "下雨",
+      "雨声",
+      "打伞",
+      "雨季",
+      "听雨"
+    ],
+    "_file": "651_weather_rain_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "听雨声",
+      "雨好听",
+      "白噪音",
+      "助眠",
+      "舒服"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "wwr_chukai_005",
+    "ctx": [
+      "多穿点",
+      "保暖",
+      "加衣",
+      "别冻着",
+      "降温",
+      "秋裤"
+    ],
+    "_file": "016_wear_warm_remind.yaml",
+    "_hit": true,
+    "_kw": [
+      "出汗",
+      "热",
+      "热死",
+      "太热",
+      "出汗了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "bus_wait_010",
+    "ctx": [
+      "等车",
+      "公交",
+      "车站",
+      "晚点",
+      "站牌",
+      "迟来"
+    ],
+    "_file": "860_bus_stop_wait.yaml",
+    "_hit": true,
+    "_kw": [
+      "让座",
+      "给老人让",
+      "让孕妇",
+      "让座小学生",
+      "让出座位"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "dw_chuannuan_008",
+    "ctx": [
+      "多穿点",
+      "保暖",
+      "加衣",
+      "别冻着",
+      "降温",
+      "秋裤"
+    ],
+    "_file": "430_dress_warm_remind.yaml",
+    "_hit": true,
+    "_kw": [
+      "暖气不热",
+      "空调不热",
+      "屋里冷",
+      "没暖气",
+      "空调坏"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ri_sulk_011",
+    "ctx": [
+      "打滚",
+      "地板",
+      "撒泼",
+      "耍赖",
+      "滚来滚去",
+      "撒娇"
+    ],
+    "_file": "193_roll_in_floor.yaml",
+    "_hit": true,
+    "_kw": [
+      "生气了",
+      "不理你",
+      "哼起来",
+      "翻白眼",
+      "不开心了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "it_zhumeng_001",
+    "ctx": [
+      "失眠",
+      "睡不着",
+      "胡思乱想",
+      "翻来覆去",
+      "心事",
+      "凌晨"
+    ],
+    "_file": "276_insomnia_thinking.yaml",
+    "_hit": true,
+    "_kw": [
+      "睡梦想事",
+      "梦见",
+      "又梦到",
+      "怪梦",
+      "噩梦"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "kb_qinqin_002",
+    "ctx": [
+      "亲亲",
+      "要亲",
+      "嘴对嘴",
+      "么么",
+      "嘟嘴"
+    ],
+    "_file": "397_kiss_beg.yaml",
+    "_hit": true,
+    "_kw": [
+      "脸上亲",
+      "脸蛋亲",
+      "亲脸",
+      "蹭脸",
+      "贴脸"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ct_dijietui_001",
+    "ctx": [
+      "通勤累",
+      "早高峰",
+      "晚高峰",
+      "换乘",
+      "站票"
+    ],
+    "_file": "062_commute_traffic_tired.yaml",
+    "_hit": true,
+    "_kw": [
+      "地铁挤",
+      "公交挤",
+      "没座位",
+      "站着",
+      "满员"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "nc_buwen_001",
+    "ctx": [
+      "抱抱",
+      "蹭蹭",
+      "安慰",
+      "撒娇",
+      "委屈",
+      "想哭"
+    ],
+    "_file": "263_need_comfort.yaml",
+    "_hit": true,
+    "_kw": [
+      "不温暖",
+      "冷漠",
+      "没有温度",
+      "周围冷",
+      "没人懂"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ss_coach_expensive_001",
+    "ctx": [
+      "学不会",
+      "瓶颈",
+      "卡住",
+      "进步慢",
+      "放弃",
+      "挫败"
+    ],
+    "_file": "WW8_skill_stuck.yaml",
+    "_hit": true,
+    "_kw": [
+      "私教贵",
+      "教练贵",
+      "课费贵",
+      "学费贵",
+      "太贵了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "cnl_cup_004",
+    "ctx": [
+      "泡面",
+      "深夜",
+      "宵夜",
+      "加蛋",
+      "汤底",
+      "热水"
+    ],
+    "_file": "566_cup_noodle_late.yaml",
+    "_hit": true,
+    "_kw": [
+      "油大",
+      "怕胖",
+      "太咸",
+      "不健康",
+      "吃多了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "mh_zao_sleepy_003",
+    "ctx": [
+      "早安",
+      "早上好",
+      "起床",
+      "清晨",
+      "上线",
+      "报到"
+    ],
+    "_file": "219_morning_hello.yaml",
+    "_hit": true,
+    "_kw": [
+      "还困",
+      "好困",
+      "不想起",
+      "赖床",
+      "起不来"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "mwk_busmiss_001",
+    "ctx": [
+      "醒了",
+      "起床",
+      "睁眼",
+      "早安",
+      "清晨",
+      "迷糊"
+    ],
+    "_file": "483_morning_wakeup.yaml",
+    "_hit": true,
+    "_kw": [
+      "赶车",
+      "迟到",
+      "错过班车",
+      "跑步",
+      "打车"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "lsw_wn_002",
+    "ctx": [
+      "连赢",
+      "手气",
+      "欧皇",
+      "幸运",
+      "开挂",
+      "顺风"
+    ],
+    "_file": "777_lucky_streak_win.yaml",
+    "_hit": true,
+    "_kw": [
+      "非洲人",
+      "没出",
+      "抽空",
+      "歪了",
+      "心碎"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "jp_xidu_001",
+    "ctx": [
+      "吃醋",
+      "嫉妒",
+      "别理",
+      "撅嘴"
+    ],
+    "_file": "126_jealous_pout.yaml",
+    "_hit": true,
+    "_kw": [
+      "独占",
+      "笨猫是我的",
+      "别抢",
+      "我的",
+      "别碰"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "paa_no_words_001",
+    "ctx": [
+      "社交",
+      "聚会",
+      "拘谨",
+      "尴尬",
+      "人多",
+      "逃跑"
+    ],
+    "_file": "MM7_party_anxiety.yaml",
+    "_hit": true,
+    "_kw": [
+      "怕不知道说啥",
+      "不知道说什么",
+      "没话题",
+      "不会聊天",
+      "怕没话讲"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "sup_buli_004",
+    "ctx": [
+      "撅嘴",
+      "别理",
+      "炸毛",
+      "板脸",
+      "闹脾气"
+    ],
+    "_file": "009_sulky_pouting.yaml",
+    "_hit": true,
+    "_kw": [
+      "不理我",
+      "别不理",
+      "别走",
+      "看我嘛",
+      "别忽视"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "gcl_ssr_001",
+    "ctx": [
+      "抽卡",
+      "十连",
+      "保底",
+      "欧皇",
+      "非酋",
+      "歪了"
+    ],
+    "_file": "498_gacha_luck.yaml",
+    "_hit": true,
+    "_kw": [
+      "出货",
+      "抽到了",
+      "抽中了ssr",
+      "大欧皇",
+      "出了"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ch_nuanshoubao_001",
+    "ctx": [
+      "手凉",
+      "冰手",
+      "取暖",
+      "哈气",
+      "搓手",
+      "暖手"
+    ],
+    "_file": "787_cold_hands_warm.yaml",
+    "_hit": true,
+    "_kw": [
+      "暖手宝",
+      "暖宝宝",
+      "暖手蛋",
+      "充电暖手",
+      "暖手贴"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "ctt_late_008",
+    "ctx": [
+      "通勤累",
+      "早高峰",
+      "晚高峰",
+      "换乘",
+      "站票"
+    ],
+    "_file": "344_commute_traffic_tired.yaml",
+    "_hit": true,
+    "_kw": [
+      "快迟到",
+      "路上迟到",
+      "来不及",
+      "通勤晚",
+      "迟到了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "nc_bad_day_001",
+    "ctx": [
+      "抱抱",
+      "蹭蹭",
+      "安慰",
+      "撒娇",
+      "委屈",
+      "想哭"
+    ],
+    "_file": "127_need_comfort.yaml",
+    "_hit": true,
+    "_kw": [
+      "今天很糟",
+      "倒霉",
+      "很烂",
+      "一团糟",
+      "心情糟"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "cc_cc_qinqin_004",
+    "ctx": [
+      "黏人",
+      "陪着",
+      "别走",
+      "贴贴",
+      "蹭蹭",
+      "跟着"
+    ],
+    "_file": "223_clingy_companion.yaml",
+    "_hit": true,
+    "_kw": [
+      "亲亲",
+      "亲一下",
+      "啵啵",
+      "亲笨猫",
+      "脸亲一下"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "tf_back_pain_001",
+    "ctx": [
+      "疲惫",
+      "撑不住",
+      "缓缓",
+      "歇会"
+    ],
+    "_file": "S5_tired_fatigue.yaml",
+    "_hit": true,
+    "_kw": [
+      "腰酸背痛",
+      "腰疼",
+      "背好酸",
+      "腰好累",
+      "肩颈酸"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ewc_eat_002",
+    "ctx": [
+      "好好吃",
+      "三餐",
+      "营养",
+      "胃口",
+      "规律",
+      "别饿"
+    ],
+    "_file": "468_eat_well_care.yaml",
+    "_hit": true,
+    "_kw": [
+      "不想吃",
+      "没胃口",
+      "食欲差",
+      "吃不下",
+      "厌食"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "mg_mg_youshui_007",
+    "ctx": [
+      "起床气",
+      "赖床",
+      "烦躁",
+      "撅嘴",
+      "闹脾气",
+      "别叫我"
+    ],
+    "_file": "247_morning_grumpy.yaml",
+    "_hit": true,
+    "_kw": [
+      "好困",
+      "继续困",
+      "困死",
+      "好想睡",
+      "睡意"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ap_helpless_001",
+    "ctx": [
+      "父母",
+      "老去",
+      "白发",
+      "皱纹",
+      "陪伴",
+      "感慨"
+    ],
+    "_file": "NNN5_aging_parent.yaml",
+    "_hit": true,
+    "_kw": [
+      "无奈",
+      "没办法",
+      "阻止不了",
+      "没辙",
+      "衰老挡不住"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "epl_renmao_010",
+    "ctx": [
+      "好好吃",
+      "三餐",
+      "规律",
+      "别凑合",
+      "营养",
+      "别饿"
+    ],
+    "_file": "018_eat_properly.yaml",
+    "_hit": true,
+    "_kw": [
+      "一起吃",
+      "等我吃完",
+      "你也吃",
+      "同步吃",
+      "干饭"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bic_bored_004",
+    "ctx": [
+      "无聊",
+      "发呆",
+      "打哈欠",
+      "消磨",
+      "空虚"
+    ],
+    "_file": "661_bored_idle_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "手机没意思",
+      "刷不动",
+      "看腻了",
+      "界面无趣",
+      "应用无"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "msc_ramen_002",
+    "ctx": [
+      "宵夜",
+      "半夜饿",
+      "深夜",
+      "夜宵",
+      "腹鸣"
+    ],
+    "_file": "615_midnight_snack_crave.yaml",
+    "_hit": true,
+    "_kw": [
+      "泡面",
+      "方便面",
+      "煮面",
+      "半夜面",
+      "来碗面"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "pw_xiaowo_005",
+    "ctx": [
+      "陪我",
+      "陪着",
+      "别走",
+      "陪伴",
+      "一起"
+    ],
+    "_file": "298_peiwan_company.yaml",
+    "_hit": true,
+    "_kw": [
+      "陪聊",
+      "陪聊天",
+      "聊聊",
+      "唠唠",
+      "跟我聊"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "rw_xiuxi_009",
+    "ctx": [
+      "歇歇",
+      "别熬夜",
+      "早点睡",
+      "缓缓",
+      "放松",
+      "慢点"
+    ],
+    "_file": "401_rest_well.yaml",
+    "_hit": true,
+    "_kw": [
+      "睡个长觉",
+      "一觉到天亮",
+      "沉睡",
+      "深度睡眠",
+      "补觉"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ch_jiaobing_001",
+    "ctx": [
+      "手脚冰",
+      "冰凉",
+      "哆嗦",
+      "搓手",
+      "暖手",
+      "取暖"
+    ],
+    "_file": "048_cold_hands_feet.yaml",
+    "_hit": true,
+    "_kw": [
+      "脚冰",
+      "脚冷",
+      "脚踩到冰",
+      "脚趾冷",
+      "脚发凉"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ino_no_solution_001",
+    "ctx": [
+      "失眠",
+      "胡思乱想",
+      "翻来覆去",
+      "心事",
+      "凌晨",
+      "睡不着"
+    ],
+    "_file": "541_insomnia_overthink.yaml",
+    "_hit": true,
+    "_kw": [
+      "没办法",
+      "无解",
+      "想不通",
+      "解不开",
+      "困局"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "sm_red_packet_001",
+    "ctx": [
+      "惊喜",
+      "wow",
+      "意外",
+      "没想到",
+      "惊吓"
+    ],
+    "_file": "170_surprise_moment.yaml",
+    "_hit": true,
+    "_kw": [
+      "收到红包",
+      "红包",
+      "抢到红包",
+      "红包雨",
+      "大红包"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "qwo_sore_after_012",
+    "ctx": [
+      "运动",
+      "锻炼",
+      "撸铁",
+      "跳操",
+      "拉伸",
+      "流汗"
+    ],
+    "_file": "834_quick_workout.yaml",
+    "_hit": true,
+    "_kw": [
+      "运动后酸痛",
+      "肌肉疼",
+      "浑身疼",
+      "第二天酸",
+      "起不来"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "gg_diaoduan_001",
+    "ctx": [
+      "抽卡",
+      "十连",
+      "保底",
+      "非酋",
+      "欧皇",
+      "歪了"
+    ],
+    "_file": "071_game_gacha_pull.yaml",
+    "_hit": true,
+    "_kw": [
+      "掉段",
+      "掉分",
+      "输了",
+      "连败",
+      "逆风"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "mw_zaocan_001",
+    "ctx": [
+      "醒了",
+      "起床",
+      "睁眼",
+      "早安",
+      "清晨",
+      "迷糊"
+    ],
+    "_file": "252_morning_wakeup.yaml",
+    "_hit": true,
+    "_kw": [
+      "早餐",
+      "吃了早餐",
+      "早饭",
+      "吃啥早餐",
+      "早餐吃什么"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "op_want_change_but_fear_001",
+    "ctx": [
+      "旧手机",
+      "卡顿",
+      "换机",
+      "老款",
+      "流畅",
+      "怀念"
+    ],
+    "_file": "FFF9_old_phone.yaml",
+    "_hit": true,
+    "_kw": [
+      "想换又怕",
+      "又想又怕",
+      "纠结",
+      "心动",
+      "矛盾"
+    ],
+    "_int": "想换又怕"
+  },
+  {
+    "name": "dfb_kuajiang_001",
+    "ctx": [
+      "彩虹屁",
+      "吹捧",
+      "点赞",
+      "奖励"
+    ],
+    "_file": "366_dodge_flirt_back.yaml",
+    "_hit": true,
+    "_kw": [
+      "夸夸",
+      "夸笨猫",
+      "夸我",
+      "表扬",
+      "鼓励"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "tcm_subway_001",
+    "ctx": [
+      "通勤",
+      "晚高峰",
+      "换乘",
+      "打卡"
+    ],
+    "_file": "492_traffic_commute.yaml",
+    "_hit": true,
+    "_kw": [
+      "挤地铁",
+      "早高峰",
+      "沙丁鱼",
+      "地铁挤",
+      "上班挤"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "shp_yiqitao_001",
+    "ctx": [
+      "撅嘴",
+      "别理",
+      "炸毛",
+      "傲娇",
+      "板脸"
+    ],
+    "_file": "360_sulky_hmph_pout.yaml",
+    "_hit": true,
+    "_kw": [
+      "都不哄",
+      "你不哄我",
+      "求哄",
+      "哄一下",
+      "不哄"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "cmt_off_work_001",
+    "ctx": [
+      "通勤累",
+      "早高峰",
+      "晚高峰",
+      "换乘",
+      "站票"
+    ],
+    "_file": "539_commute_tired.yaml",
+    "_hit": true,
+    "_kw": [
+      "下班路上",
+      "准备回家",
+      "终于下班",
+      "解放",
+      "回家路"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "sj_paocan_012",
+    "ctx": [
+      "撒娇",
+      "嘤嘤",
+      "贴贴",
+      "黏人"
+    ],
+    "_file": "294_sajiao_clingy.yaml",
+    "_hit": true,
+    "_kw": [
+      "抱大腿",
+      "笨猫抱",
+      "我抱你大腿",
+      "大腿好粗",
+      "抱腿"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bbm_bbz_005",
+    "ctx": [
+      "绷不住",
+      "笑死",
+      "笑场",
+      "破防",
+      "憋不住",
+      "喷了"
+    ],
+    "_file": "482_bengbuzhu_meme.yaml",
+    "_hit": true,
+    "_kw": [
+      "表情包",
+      "表情",
+      "老表情",
+      "经典表情",
+      "抽象表情"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "gm_gm_lanyou_008",
+    "ctx": [
+      "打游戏",
+      "上分",
+      "版本",
+      "匹配"
+    ],
+    "_file": "234_game_mood.yaml",
+    "_hit": true,
+    "_kw": [
+      "游戏伴侣",
+      "队友",
+      "双排",
+      "组队",
+      "开黑"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "fitness_workout_001",
+    "ctx": [
+      "健康",
+      "体能",
+      "拉伸",
+      "作息"
+    ],
+    "_file": "91_health_fitness.yaml",
+    "_hit": true,
+    "_kw": [
+      "健身",
+      "锻炼",
+      "撸铁",
+      "健身房",
+      "运动"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "greet_morning_001",
+    "ctx": [
+      "你好",
+      "打招呼",
+      "上线",
+      "报到",
+      "在线"
+    ],
+    "_file": "00_greetings.yaml",
+    "_hit": true,
+    "_kw": [
+      "早安",
+      "早上好",
+      "早呀",
+      "起床",
+      "醒了"
+    ],
+    "_int": "greeting"
+  },
+  {
+    "name": "ps_want_hospital_001",
+    "ctx": [
+      "宠物病",
+      "体温",
+      "打针",
+      "日常",
+      "聊聊"
+    ],
+    "_file": "CCC6_pet_sick.yaml",
+    "_hit": true,
+    "_kw": [
+      "想去医院",
+      "送医院",
+      "宠物医院",
+      "看医生",
+      "兽医"
+    ],
+    "_int": "想去医院"
+  },
+  {
+    "name": "fs_xueren_001",
+    "ctx": [
+      "初雪",
+      "下雪",
+      "雪花",
+      "激动",
+      "拍照"
+    ],
+    "_file": "979_first_snow_excited.yaml",
+    "_hit": true,
+    "_kw": [
+      "堆雪人",
+      "滚雪球",
+      "雪人塌了",
+      "想堆雪人",
+      "一起堆雪人"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "mw_yangguang_001",
+    "ctx": [
+      "醒了",
+      "起床",
+      "睁眼",
+      "早安",
+      "清晨",
+      "迷糊"
+    ],
+    "_file": "252_morning_wakeup.yaml",
+    "_hit": true,
+    "_kw": [
+      "太阳",
+      "阳光",
+      "晒太阳",
+      "阳光好",
+      "天气真好"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "spc_meigan_001",
+    "ctx": [
+      "吃辣",
+      "麻辣",
+      "喷火",
+      "辣条"
+    ],
+    "_file": "929_spicy_food_love.yaml",
+    "_hit": true,
+    "_kw": [
+      "辣得拉肚子",
+      "火力旺",
+      "上火",
+      "长痘",
+      "上火爆痘"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ayt_zaima_001",
+    "ctx": [
+      "人呢",
+      "出来",
+      "别躲",
+      "推荐",
+      "怎么"
+    ],
+    "_file": "518_are_you_there_ping.yaml",
+    "_hit": true,
+    "_kw": [
+      "在吗",
+      "在不在",
+      "还在吗",
+      "在的吧",
+      "在线吗"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "cd_yugan_001",
+    "ctx": [
+      "日常",
+      "猫生活",
+      "猫咪",
+      "晒太阳",
+      "打盹",
+      "理毛"
+    ],
+    "_file": "233_cat_daily.yaml",
+    "_hit": true,
+    "_kw": [
+      "鱼干",
+      "小鱼干",
+      "想吃鱼",
+      "鱼罐头",
+      "猫粮"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "mwg_late_007",
+    "ctx": [
+      "起床气",
+      "烦躁",
+      "撅嘴",
+      "别叫",
+      "赖床"
+    ],
+    "_file": "318_morning_wake_grumpy.yaml",
+    "_hit": true,
+    "_kw": [
+      "迟到了",
+      "要迟到了",
+      "来不及了",
+      "赶不上了",
+      "又迟到"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ln_late_001",
+    "ctx": [
+      "聊几句",
+      "别睡",
+      "失眠",
+      "黑夜"
+    ],
+    "_file": "154_late_night_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "深夜",
+      "半夜",
+      "凌晨",
+      "几点睡",
+      "还没睡"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ph_kuajiang_009",
+    "ctx": [
+      "被夸",
+      "开心",
+      "嘿嘿",
+      "得意",
+      "尾巴翘"
+    ],
+    "_file": "444_praised_happy.yaml",
+    "_hit": true,
+    "_kw": [
+      "幸福满满",
+      "暖到哭",
+      "心化了",
+      "暖洋洋",
+      "春天来了"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "fm_valentine_004",
+    "ctx": [
+      "节日",
+      "过节",
+      "春节",
+      "节气",
+      "气氛",
+      "灯笼"
+    ],
+    "_file": "199_festival_moment.yaml",
+    "_hit": true,
+    "_kw": [
+      "情人节",
+      "214",
+      "情人",
+      "巧克力",
+      "玫瑰花"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ms_apologize_001",
+    "ctx": [
+      "漏回",
+      "晚回",
+      "失礼",
+      "sry",
+      "忘了",
+      "补回"
+    ],
+    "_file": "942_missed_message.yaml",
+    "_hit": true,
+    "_kw": [
+      "抱歉迟回",
+      "不好意思晚回",
+      "对不起没看",
+      "失礼了",
+      "道歉"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "hw_pifu_001",
+    "ctx": [
+      "热死",
+      "酷暑",
+      "汗流",
+      "空调",
+      "热浪",
+      "蒸笼"
+    ],
+    "_file": "898_heat_wave_die.yaml",
+    "_hit": true,
+    "_kw": [
+      "出汗",
+      "汗流不止",
+      "汗黏身",
+      "一身汗",
+      "擦汗"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "hpb_moweiba_003",
+    "ctx": [
+      "摸头",
+      "rua",
+      "顺毛",
+      "头顶",
+      "摸摸",
+      "耳朵"
+    ],
+    "_file": "026_head_pat_beg.yaml",
+    "_hit": true,
+    "_kw": [
+      "摸尾巴",
+      "摸毛",
+      "顺尾巴",
+      "尾巴摸",
+      "让我摸毛"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "uf_dache_001",
+    "ctx": [
+      "没带伞",
+      "淋湿",
+      "躲雨",
+      "跑回家",
+      "雨衣",
+      "打湿"
+    ],
+    "_file": "810_umbrella_forgot_wet.yaml",
+    "_hit": true,
+    "_kw": [
+      "打车",
+      "滴滴",
+      "叫车",
+      "打个车回",
+      "雨天打车"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "sc_sleeping_yet_010",
+    "ctx": [
+      "在干嘛",
+      "忙啥",
+      "怎么样",
+      "近况",
+      "最近",
+      "状态"
+    ],
+    "_file": "188_status_check.yaml",
+    "_hit": true,
+    "_kw": [
+      "睡了吗",
+      "睡着没",
+      "睡了没",
+      "在睡吗",
+      "早睡"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "bsc_birthday_006",
+    "ctx": [
+      "生日",
+      "蛋糕",
+      "蜡烛",
+      "许愿",
+      "惊喜",
+      "礼物"
+    ],
+    "_file": "679_birthday_surprise_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "生日吃啥",
+      "餐厅",
+      "外卖",
+      "家做",
+      "庆祝餐"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "kps_cheek_001",
+    "ctx": [
+      "亲亲",
+      "么么",
+      "嘴对嘴",
+      "贴脸",
+      "要亲",
+      "撅嘴"
+    ],
+    "_file": "105_kiss_pester.yaml",
+    "_hit": true,
+    "_kw": [
+      "亲脸",
+      "亲脸蛋",
+      "脸亲一下",
+      "在脸上亲",
+      "亲脸颊"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "cdl_steptail_001",
+    "ctx": [
+      "日常",
+      "猫生活",
+      "晒太阳",
+      "打盹",
+      "理毛",
+      "蹦跶"
+    ],
+    "_file": "495_cat_daily_life.yaml",
+    "_hit": true,
+    "_kw": [
+      "踩尾巴",
+      "踩到我",
+      "不小心",
+      "尾巴疼",
+      "踩到尾巴"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "mdc_warm_009",
+    "ctx": [
+      "深夜聊",
+      "凌晨",
+      "别睡",
+      "失眠",
+      "黑夜",
+      "陪聊"
+    ],
+    "_file": "321_midnight_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "深夜温柔",
+      "凌晨笨猫",
+      "笨猫晚安一下",
+      "凌晨抱抱",
+      "想你了"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bk_youxi_001",
+    "ctx": [
+      "无聊",
+      "发呆",
+      "打哈欠",
+      "打发",
+      "消磨"
+    ],
+    "_file": "039_bored_killing_time.yaml",
+    "_hit": true,
+    "_kw": [
+      "打游戏",
+      "玩游戏",
+      "手游",
+      "单机",
+      "主机"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bof_meeting_001",
+    "ctx": [
+      "忙吗",
+      "有空",
+      "开会",
+      "分身乏术",
+      "空档"
+    ],
+    "_file": "083_busy_or_free.yaml",
+    "_hit": true,
+    "_kw": [
+      "开会中",
+      "在开会",
+      "会议中",
+      "一直开会",
+      "开会无聊"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ayt_lunch_001",
+    "ctx": [
+      "吃了吗",
+      "点啥",
+      "报备",
+      "饭点",
+      "顿顿",
+      "三餐"
+    ],
+    "_file": "520_ate_yet_meal.yaml",
+    "_hit": true,
+    "_kw": [
+      "午饭",
+      "中午吃",
+      "午餐",
+      "中午吃啥",
+      "工作餐"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "src_workfromrain_009",
+    "ctx": [
+      "突然下雨",
+      "淋湿",
+      "没带伞",
+      "躲雨",
+      "跑回家",
+      "雨水"
+    ],
+    "_file": "622_sudden_rain_caught.yaml",
+    "_hit": true,
+    "_kw": [
+      "下雨不想上班",
+      "雨天好困",
+      "雨天迟到",
+      "雨天通勤",
+      "不想出门"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ayt_quiet_001",
+    "ctx": [
+      "在吗",
+      "在不在",
+      "人呢",
+      "出来",
+      "别躲"
+    ],
+    "_file": "079_are_you_there.yaml",
+    "_hit": true,
+    "_kw": [
+      "你怎么不说话",
+      "怎么不理我",
+      "没回我",
+      "不说话了",
+      "沉默"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "oft_chuandachong_001",
+    "ctx": [
+      "丑爆",
+      "撞色",
+      "土到",
+      "看不下去",
+      "洗洗眼",
+      "黑历史"
+    ],
+    "_file": "028_outfit_fail.yaml",
+    "_hit": true,
+    "_kw": [
+      "穿什么好",
+      "穿搭",
+      "这件好看吗",
+      "搭配",
+      "衣服好看"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "rf_qiantao_001",
+    "ctx": [
+      "脸红",
+      "害羞",
+      "调戏",
+      "心动",
+      "怦怦",
+      "偷瞄"
+    ],
+    "_file": "054_reverse_flirt_blush.yaml",
+    "_hit": true,
+    "_kw": [
+      "想你了",
+      "牵手",
+      "手心",
+      "拉手",
+      "牵着"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "jwg_kafeishijian_001",
+    "ctx": [
+      "刚醒",
+      "迷糊",
+      "发呆",
+      "咖啡续命",
+      "迷瞪",
+      "睁眼难"
+    ],
+    "_file": "356_just_wake_groggy.yaml",
+    "_hit": true,
+    "_kw": [
+      "来杯咖啡",
+      "续命咖啡",
+      "提神",
+      "咖啡机",
+      "美式"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "hu_cold_001",
+    "ctx": [
+      "家里",
+      "难受",
+      "别扭",
+      "憋闷",
+      "回家",
+      "逃离"
+    ],
+    "_file": "AA9_home_uncomfortable.yaml",
+    "_hit": true,
+    "_kw": [
+      "天气冷",
+      "好冷",
+      "冷死了",
+      "冻死",
+      "太冷了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "mt_beishu_003",
+    "ctx": [
+      "背书",
+      "背诵",
+      "课文",
+      "单词",
+      "背不下",
+      "复习"
+    ],
+    "_file": "448_memorize_textbook.yaml",
+    "_hit": true,
+    "_kw": [
+      "脑容量小",
+      "记性差",
+      "记不住",
+      "一秒就忘",
+      "大脑过载"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "jp_other_cat_001",
+    "ctx": [
+      "吃醋",
+      "小气",
+      "嫉妒",
+      "别理",
+      "撅嘴"
+    ],
+    "_file": "U0_jealous_petty.yaml",
+    "_hit": true,
+    "_kw": [
+      "别的猫",
+      "别人家猫",
+      "你家猫",
+      "那只猫",
+      "隔壁的猫"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "hg_nowork_001",
+    "ctx": [
+      "宿醉",
+      "头疼",
+      "喝多了",
+      "解酒",
+      "吐了",
+      "蜂蜜水"
+    ],
+    "_file": "SSS6_hangover.yaml",
+    "_hit": true,
+    "_kw": [
+      "工作没法做",
+      "做不了事",
+      "脑子转不动",
+      "干不了活",
+      "报废了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "tmf_belly_002",
+    "ctx": [
+      "胖了",
+      "长肉",
+      "腹肌",
+      "腰围"
+    ],
+    "_file": "339_tease_master_fat.yaml",
+    "_hit": true,
+    "_kw": [
+      "小肚子",
+      "啤酒肚",
+      "鼓鼓的肚",
+      "大肚",
+      "肚腩"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "stf_yaoshangban_002",
+    "ctx": [
+      "堵车",
+      "红灯",
+      "挪不动",
+      "尾气",
+      "喇叭",
+      "寸步"
+    ],
+    "_file": "031_stuck_traffic.yaml",
+    "_hit": true,
+    "_kw": [
+      "迟到",
+      "要迟到",
+      "来不及",
+      "错过",
+      "赶时间"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "cws_pingfu_001",
+    "ctx": [
+      "呜呜",
+      "眼泪",
+      "哽咽",
+      "抽噎",
+      "纸巾"
+    ],
+    "_file": "359_cry_wuwu_sob.yaml",
+    "_hit": true,
+    "_kw": [
+      "平复一下",
+      "慢慢来",
+      "缓一缓",
+      "喘口气",
+      "静一静"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "lnc_cant_sleep_001",
+    "ctx": [
+      "深夜",
+      "凌晨",
+      "聊几句",
+      "别睡",
+      "失眠",
+      "黑夜"
+    ],
+    "_file": "517_late_night_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "睡不着",
+      "翻来覆去",
+      "闭眼没用",
+      "数羊",
+      "睡不着觉"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "anc_anni_004",
+    "ctx": [
+      "纪念日",
+      "满月",
+      "周年",
+      "一起",
+      "回忆",
+      "蛋糕"
+    ],
+    "_file": "671_anniversary_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "忘了",
+      "忘记纪念日",
+      "粗心",
+      "你忘了",
+      "不记得"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "hpr_shouwa_001",
+    "ctx": [
+      "摸头",
+      "rua",
+      "顺毛",
+      "头顶",
+      "耳朵",
+      "摸摸"
+    ],
+    "_file": "727_head_pat_request.yaml",
+    "_hit": true,
+    "_kw": [
+      "手抓尾巴",
+      "抓爪爪",
+      "摸肉垫",
+      "挠下巴",
+      "帮我顺"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bat_powerbank_001",
+    "ctx": [
+      "手机没电",
+      "充电",
+      "断电",
+      "插头",
+      "低电"
+    ],
+    "_file": "927_phone_battery_low.yaml",
+    "_hit": true,
+    "_kw": [
+      "充电宝",
+      "没带充电宝",
+      "共享充电宝",
+      "借",
+      "充电宝坏"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "pay_pay_rent_001",
+    "ctx": [
+      "发工资",
+      "到账",
+      "发薪",
+      "发钱",
+      "奖金",
+      "激动"
+    ],
+    "_file": "921_payday_excited.yaml",
+    "_hit": true,
+    "_kw": [
+      "交房租",
+      "还信用卡",
+      "还花呗",
+      "还贷",
+      "月光"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "nch_nanguo_002",
+    "ctx": [
+      "抱抱",
+      "蹭蹭",
+      "别哭",
+      "别难过",
+      "贴贴",
+      "哄哄"
+    ],
+    "_file": "012_need_comfort_hug.yaml",
+    "_hit": true,
+    "_kw": [
+      "难过",
+      "我难过",
+      "心情不好",
+      "不开心",
+      "沉重"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "dye_no_appetite_001",
+    "ctx": [
+      "吃了吗",
+      "吃啥",
+      "点啥",
+      "报备",
+      "饭点",
+      "顿顿"
+    ],
+    "_file": "082_did_you_eat.yaml",
+    "_hit": true,
+    "_kw": [
+      "没胃口",
+      "吃不下",
+      "不想吃",
+      "没食欲",
+      "不饿"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "csa_crisp_002",
+    "ctx": [
+      "零食",
+      "薯片",
+      "咔嚓",
+      "嘎嘣",
+      "嘴馋",
+      "咸香"
+    ],
+    "_file": "567_crisp_snack_attack.yaml",
+    "_hit": true,
+    "_kw": [
+      "手油",
+      "渣多",
+      "太咸",
+      "空气包装",
+      "胖了"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ayt_busy_check_001",
+    "ctx": [
+      "在吗",
+      "在不在",
+      "人呢",
+      "出来",
+      "别躲"
+    ],
+    "_file": "518_are_you_there_ping.yaml",
+    "_hit": true,
+    "_kw": [
+      "忙不忙",
+      "在忙吗",
+      "有空吗",
+      "方便吗",
+      "打扰了"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "mn_yeshen_004",
+    "ctx": [
+      "深夜聊",
+      "凌晨",
+      "别睡",
+      "失眠",
+      "黑夜",
+      "陪聊"
+    ],
+    "_file": "418_midnight_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "月亮",
+      "月亮好圆",
+      "看月亮",
+      "月光",
+      "星星"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "lsr_pick_up_001",
+    "ctx": [
+      "捡到",
+      "路上",
+      "遗落",
+      "失主",
+      "钱包"
+    ],
+    "_file": "114_lost_something_road.yaml",
+    "_hit": true,
+    "_kw": [
+      "捡到东西",
+      "路上捡",
+      "拾到",
+      "捡了",
+      "捡到钱"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "tj_duche_001",
+    "ctx": [
+      "寸步",
+      "挪不动",
+      "尾气",
+      "红灯",
+      "喇叭"
+    ],
+    "_file": "Z5_traffic_jam.yaml",
+    "_hit": true,
+    "_kw": [
+      "堵车",
+      "又堵车",
+      "路上堵",
+      "这路真堵",
+      "堵的不行"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "tjl_dipai_001",
+    "ctx": [
+      "堵车",
+      "迟到",
+      "挪不动",
+      "寸步",
+      "尾气",
+      "红灯"
+    ],
+    "_file": "731_traffic_jam_late.yaml",
+    "_hit": true,
+    "_kw": [
+      "地铁挤",
+      "公交挤",
+      "挤死",
+      "没座",
+      "抢座"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "ay_zaima_005",
+    "ctx": [
+      "在吗",
+      "在不在",
+      "人呢",
+      "出来",
+      "别躲"
+    ],
+    "_file": "421_are_you_there.yaml",
+    "_hit": true,
+    "_kw": [
+      "一直找不到你",
+      "永远不在",
+      "跟你说话没人理",
+      "哼我走了",
+      "不理我"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "cab_jealous_attention_010",
+    "ctx": [
+      "看我",
+      "别走",
+      "陪我",
+      "贴贴",
+      "理我",
+      "关注"
+    ],
+    "_file": "324_clingy_attention_beg.yaml",
+    "_hit": true,
+    "_kw": [
+      "都不关注我",
+      "关注别人",
+      "我吃醋",
+      "看着别人",
+      "偏心"
+    ],
+    "_int": "complaint"
+  },
+  {
+    "name": "cac_aloof_005",
+    "ctx": [
+      "高冷",
+      "装酷",
+      "冷淡",
+      "不理",
+      "面瘫"
+    ],
+    "_file": "678_cold_aloof_chat.yaml",
+    "_hit": true,
+    "_kw": [
+      "假冷漠",
+      "演戏",
+      "装的",
+      "假装",
+      "演技"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bbt_brand_001",
+    "ctx": [
+      "奶茶",
+      "珍珠",
+      "吸管",
+      "糖度",
+      "冰沙",
+      "点单"
+    ],
+    "_file": "931_bubble_tea_crave.yaml",
+    "_hit": true,
+    "_kw": [
+      "喜茶",
+      "奈雪",
+      "一点点",
+      "茶颜",
+      "哪家好"
+    ],
+    "_int": "question"
+  },
+  {
+    "name": "ln_dark_003",
+    "ctx": [
+      "熬夜",
+      "凌晨",
+      "别睡",
+      "黑眼圈",
+      "失眠",
+      "深夜"
+    ],
+    "_file": "187_late_night.yaml",
+    "_hit": true,
+    "_kw": [
+      "天黑了",
+      "夜深了",
+      "凌晨了",
+      "半夜",
+      "黑漆漆"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "nlb_coffee_001",
+    "ctx": [
+      "午饭",
+      "午休",
+      "工间",
+      "打盹",
+      "下午",
+      "回笼"
+    ],
+    "_file": "077_noon_lunch_break.yaml",
+    "_hit": true,
+    "_kw": [
+      "来一杯咖啡",
+      "咖啡续命",
+      "喝咖啡提神",
+      "困得喝咖啡",
+      "美式拯救"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "ar_koushi_001",
+    "ctx": [
+      "冷淡",
+      "不理",
+      "装高冷",
+      "嫌弃",
+      "假装",
+      "别热脸"
+    ],
+    "_file": "069_anti_routine_cold.yaml",
+    "_hit": true,
+    "_kw": [
+      "口是心非",
+      "反话",
+      "说反话",
+      "反着说",
+      "心里相反"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "et_payday_001",
+    "ctx": [
+      "激动",
+      "心跳",
+      "兴奋",
+      "蹦跶",
+      "尖叫",
+      "嘿嘿"
+    ],
+    "_file": "S8_excited_thrill.yaml",
+    "_hit": true,
+    "_kw": [
+      "发工资啦",
+      "发钱了",
+      "工资到账",
+      "发饷",
+      "工资来了"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "bfp_zuihao_003",
+    "ctx": [
+      "夸我",
+      "彩虹屁",
+      "表扬",
+      "棒不棒",
+      "乖不乖",
+      "奖励"
+    ],
+    "_file": "013_beg_for_praise.yaml",
+    "_hit": true,
+    "_kw": [
+      "最棒",
+      "真棒",
+      "厉害",
+      "牛",
+      "棒呆"
+    ],
+    "_int": "playful"
+  },
+  {
+    "name": "mg_mg_xinxieli_010",
+    "ctx": [
+      "起床气",
+      "赖床",
+      "烦躁",
+      "撅嘴",
+      "闹脾气",
+      "别叫我"
+    ],
+    "_file": "247_morning_grumpy.yaml",
+    "_hit": true,
+    "_kw": [
+      "振作",
+      "加油",
+      "起来吧",
+      "行动",
+      "清醒"
+    ],
+    "_int": "playful"
+  }
+]

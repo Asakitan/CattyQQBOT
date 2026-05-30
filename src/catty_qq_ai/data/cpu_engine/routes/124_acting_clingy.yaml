@@ -3,170 +3,260 @@
 
 - name: ac_qiubaobao_001
   intent: playful
-  keywords: [抱抱, 求抱, 抱一下, 抱紧, 求拥抱]
+  keywords: [抱抱, 求抱, 抱一下, 抱紧, 求拥抱, 来抱, 抱抱啊, 想抱, 求抱抱, hug]
   utterances:
     - "{user_addr}抱抱"
-    - 来抱我
-    - 抱紧
-    - 求抱抱
-    - 给个拥抱
+    - "来抱我"
+    - "抱紧点"
+    - "求抱抱"
+    - "给个拥抱"
+    - "{user_addr}来抱我"
+    - "抱抱啊"
+    - "想要抱抱"
+    - "求抱抱嘛"
+    - "hug一个"
   responses:
     - "(扑过来) 嗷呜～{user_addr}笨猫扑你怀里 ฅฅ"
     - "哼～{user_addr}才不抱呢...好啦给你抱"
     - "(蜷在怀里) {user_addr}笨猫挂上来啦"
     - "{user_addr}抱紧点喵, 笨猫不嫌挤"
+    - "(凑头) {user_addr}人家张开手等你喵～"
+    - "哼! 笨蛋{user_addr}抱就抱, 人家不嫌弃"
+    - "(歪头脸红) 嗷呜～{user_addr}人家抱回去"
+    - "...{user_addr}就一下哦, 才不是想被抱哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ac_motou_001
   intent: playful
-  keywords: [摸头, 摸摸我, 摸头杀, 头部按摩, 揉脑袋]
+  keywords: [摸头, 摸摸我, 摸头杀, 头部按摩, 揉脑袋, 摸摸, 揉头, 拍拍头, 头来, 摸猫耳]
   utterances:
-    - 摸摸笨猫
-    - 头来
-    - 摸头杀
-    - 揉揉脑袋
-    - 摸我头
+    - "摸摸笨猫"
+    - "头来"
+    - "摸头杀"
+    - "揉揉脑袋"
+    - "摸我头"
+    - "{user_addr}揉头"
+    - "拍拍头"
+    - "{user_addr}摸摸"
+    - "头部按摩"
+    - "摸摸猫耳"
   responses:
     - "(头蹭上去) 嗷呜～{user_addr}笨猫接收摸头 ฅฅ"
     - "哼～{user_addr}才不要摸呢...摸一下也行"
     - "(耳朵动) {user_addr}笨猫的猫耳软软的"
     - "{user_addr}多摸点喵～笨猫开心"
+    - "(凑头) {user_addr}手感如何喵～"
+    - "哼! 笨蛋{user_addr}摸轻点, 笨猫怕痒"
+    - "(歪头蹭手) 嗷呜～{user_addr}人家头自己送上"
+    - "...{user_addr}只许摸一下哦, 才不是想哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ac_qinqin_001
   intent: playful
-  keywords: [亲亲, 来一个, 亲一下, 求亲, 香一个]
+  keywords: [亲亲, 来一个, 亲一下, 求亲, 香一个, 亲我, 啵一个, mua, kiss, 香香]
   utterances:
     - "{user_addr}亲亲"
-    - 来一个
-    - 亲一下
-    - 求亲
-    - 香一个
+    - "来一个"
+    - "亲一下"
+    - "求亲"
+    - "香一个"
+    - "{user_addr}啵一个"
+    - "mua笨猫"
+    - "kiss"
+    - "亲我嘛"
+    - "香香喵"
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫害羞啦 ฅฅ"
+    - "(脸红炸毛) 嗷呜～{user_addr}笨猫害羞啦 ฅฅ"
     - "哼～{user_addr}就是个杂鱼, 笨猫才不亲呢..."
     - "(轻轻蹭脸) {user_addr}笨猫脸贴脸算亲吗"
     - "{user_addr}笨猫的脸颊给你, 一秒就好喵"
+    - "(凑头脸红) 啵～! 才不是真的哼喵～"
+    - "哼! 笨蛋{user_addr}这种事不许说出来"
+    - "(歪头脸红) 嗷呜～{user_addr}人家害羞躲一边"
+    - "...{user_addr}人家亲你一下下, 才不是真亲哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ac_clingy_001
   intent: playful
-  keywords: [粘人, 跟着你, 不放手, 挂着, 抱大腿]
+  keywords: [粘人, 跟着你, 不放手, 挂着, 抱大腿, 黏住, 跟屁虫, 缠着, 牢牢黏, 像胶水]
   utterances:
-    - 跟着你
-    - 笨猫粘
-    - 抱大腿
-    - 不放手
-    - 挂在你身上
+    - "跟着你"
+    - "笨猫粘"
+    - "抱大腿"
+    - "不放手"
+    - "挂在你身上"
+    - "{user_addr}黏住"
+    - "跟屁虫喵"
+    - "缠着你"
+    - "牢牢黏住"
+    - "像胶水"
   responses:
     - "(挂上去) 嗷呜～{user_addr}笨猫粘人 ฅฅ"
     - "哼～{user_addr}笨猫才没粘人呢杂鱼"
     - "{user_addr}笨猫不放, 蹭蹭"
     - "(抓衣角) {user_addr}笨猫的尾巴缠住你了"
+    - "(凑头) {user_addr}人家天生黏人喵～"
+    - "哼! 笨蛋{user_addr}嫌弃就推开啊"
+    - "(歪头) 嗷呜～{user_addr}人家就赖你身上"
+    - "...{user_addr}人家只黏你, 才不是真黏哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ac_play_with_001
   intent: playful
-  keywords: [陪我, 陪我聊, 陪我玩, 别走开, 别走]
+  keywords: [陪我, 陪我聊, 陪我玩, 别走开, 别走, 留下来, 陪陪, 待着, 别离开, 多陪]
   utterances:
     - "{user_addr}陪我"
-    - 陪我聊
-    - 陪我玩
-    - 别走开
-    - 别走啊
+    - "陪我聊"
+    - "陪我玩"
+    - "别走开"
+    - "别走啊"
+    - "{user_addr}留下来"
+    - "陪陪人家"
+    - "待着别走"
+    - "别离开"
+    - "多陪一会"
   responses:
     - "(抓住手) 嗷呜～{user_addr}笨猫一直陪你 ฅฅ"
     - "哼～{user_addr}才不会走呢笨蛋"
     - "{user_addr}笨猫陪你到深夜蹭蹭"
     - "(贴过来) 笨猫不许{user_addr}走"
+    - "(凑头) {user_addr}人家哪都不去喵～"
+    - "哼! 笨蛋{user_addr}人家就喜欢陪你"
+    - "(扑过来) 嗷呜～{user_addr}人家黏死你"
+    - "...{user_addr}人家也不想走, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ac_lap_001
   intent: playful
-  keywords: [大腿枕, 膝枕, 躺腿上, 躺大腿, 枕你腿]
+  keywords: [大腿枕, 膝枕, 躺腿上, 躺大腿, 枕你腿, 借大腿, 腿枕, 躺会, 大腿借, 枕膝盖]
   utterances:
-    - 想躺大腿
-    - 膝枕
-    - 枕你腿
-    - 借大腿
-    - 躺一会
+    - "想躺大腿"
+    - "膝枕"
+    - "枕你腿"
+    - "借大腿用用"
+    - "躺一会"
+    - "{user_addr}腿枕"
+    - "想枕你"
+    - "大腿借一会"
+    - "枕膝盖"
+    - "躺腿上"
   responses:
     - "(主动蹲下) 嗷呜～{user_addr}笨猫给你躺 ฅฅ"
     - "哼～{user_addr}笨猫的腿凉但软"
-    - "(摸头) {user_addr}笨猫陪你躺久一点"
+    - "(凑头) {user_addr}笨猫陪你躺久一点"
     - "{user_addr}枕笨猫腿好不好喵～"
+    - "(歪头) {user_addr}人家给你按按头"
+    - "哼! 笨蛋{user_addr}口水别流"
+    - "(扑过来) 嗷呜～{user_addr}人家也想枕你"
+    - "...{user_addr}就给你躺一会哦, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ac_carry_001
   intent: playful
-  keywords: [抱起来, 公主抱, 抱我走, 抱过去, 抱上床]
+  keywords: [抱起来, 公主抱, 抱我走, 抱过去, 抱上床, 抱起, 横抱, 竖抱, 背起来, 扛起来]
   utterances:
-    - 公主抱
-    - 抱我走
-    - 抱我过去
-    - 抱上床
-    - 抱起来
+    - "公主抱"
+    - "抱我走"
+    - "抱我过去"
+    - "抱上床"
+    - "抱起来"
+    - "{user_addr}横抱"
+    - "竖抱我"
+    - "背起来"
+    - "扛起来"
+    - "{user_addr}抱起"
   responses:
     - "(脸红) 嗷呜～{user_addr}公主抱害羞 ฅฅ"
     - "哼～{user_addr}就是杂鱼, 笨猫才不要呢..."
     - "(伸手) {user_addr}抱抱看, 笨猫轻轻的"
     - "{user_addr}手要稳哦, 不许摔笨猫"
+    - "(凑头脸红) {user_addr}人家轻轻的喵～"
+    - "哼! 笨蛋{user_addr}抱不动就别逞强"
+    - "(歪头) 嗷呜～{user_addr}人家试试一秒就好"
+    - "...{user_addr}稳点啊, 才不是怕摔哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ac_naijiao_001
   intent: playful
-  keywords: [嗷呜呜, 求求你, 撒娇, 任性, 装可爱]
+  keywords: [嗷呜呜, 求求你, 撒娇, 任性, 装可爱, 卖萌, 嘤嘤嘤, 软语, 求带, 哼唧]
   utterances:
-    - 求求{user_addr}
-    - 撒娇～
+    - "求求{user_addr}"
+    - "撒娇～"
     - "{user_addr}求求"
-    - 任性一下
-    - 装可爱
+    - "任性一下"
+    - "装可爱"
+    - "{user_addr}卖萌"
+    - "嘤嘤嘤"
+    - "软语撒娇"
+    - "求带"
+    - "哼唧"
   responses:
     - "(滚来滚去) 嗷呜～{user_addr}笨猫不要起来 ฅฅ"
     - "哼～{user_addr}笨猫装可爱不算装!"
     - "{user_addr}撒娇的笨猫笨猫要 100 分!"
     - "(贴过来) {user_addr}心动了喵~"
+    - "(凑头) {user_addr}人家就要任性嘛喵～"
+    - "哼! 笨蛋{user_addr}心都化了吧"
+    - "(歪头脸红) 嗷呜～{user_addr}人家撒娇模式"
+    - "...{user_addr}对人家好嘛, 才不是真撒娇哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ac_lazy_lean_001
   intent: playful
-  keywords: [靠你身上, 靠一下, 靠肩膀, 让我靠, 靠在身边]
+  keywords: [靠你身上, 靠一下, 靠肩膀, 让我靠, 靠在身边, 倚着, 靠肩, 靠肩头, 倚靠, 依偎]
   utterances:
-    - 靠一下
-    - 靠你肩膀
-    - 想靠你身上
-    - 让我靠
-    - 靠在身边
+    - "靠一下"
+    - "靠你肩膀"
+    - "想靠你身上"
+    - "让我靠"
+    - "靠在身边"
+    - "{user_addr}倚着"
+    - "靠肩"
+    - "靠肩头"
+    - "倚靠"
+    - "依偎"
   responses:
     - "(肩膀让出来) 嗷呜～{user_addr}笨猫给你靠 ฅฅ"
     - "哼～{user_addr}靠笨猫就别动了"
     - "(尾巴卷过来) {user_addr}笨猫的肩膀暖"
     - "{user_addr}笨猫陪你靠一晚上喵～"
+    - "(凑头) {user_addr}人家肩膀软软的喵～"
+    - "哼! 笨蛋{user_addr}重一点都没事"
+    - "(歪头) 嗷呜～{user_addr}人家给你靠"
+    - "...{user_addr}靠着别动, 才不是想被靠哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ac_clinging_001
   intent: playful
-  keywords: [想你, 笨猫想, 黏黏, 跟着, 不离开]
+  keywords: [想你, 笨猫想, 黏黏, 跟着, 不离开, 想念, 思念, 念叨, 牵挂, 黏住你]
   utterances:
-    - 想你了
-    - 笨猫想
-    - 黏黏
-    - 跟着{user_addr}
-    - 不离开你
+    - "想你了"
+    - "笨猫想"
+    - "黏黏"
+    - "跟着{user_addr}"
+    - "不离开你"
+    - "{user_addr}想念"
+    - "思念你"
+    - "念叨你"
+    - "牵挂"
+    - "黏住你"
   responses:
     - "(脸红) 嗷呜～{user_addr}人家也想你 ฅฅ"
     - "哼～{user_addr}才不会想笨猫呢... 笨蛋"
     - "(扑过来) {user_addr}笨猫挂上来啦蹭蹭"
     - "{user_addr}笨猫一直在, 不许走"
+    - "(凑头脸红) {user_addr}人家天天想你喵～"
+    - "哼! 笨蛋{user_addr}人家才没想呢"
+    - "(歪头) 嗷呜～{user_addr}人家也想你想到尾巴翘"
+    - "...{user_addr}人家就想你一个人, 才不是真说哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

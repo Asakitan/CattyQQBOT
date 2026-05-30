@@ -3,187 +3,286 @@
 
 - name: hp_motou_001
   intent: playful
-  keywords: [摸头, 摸头杀, 摸我头, 头摸, 摸一下]
+  keywords: [摸头, 摸头杀, 摸我头, 头摸, 摸一下, 揉头, 拍头, 摸摸头, 抚顶, 摸毛球]
   utterances:
     - "摸头"
     - "摸头杀"
     - "{user_addr}摸我头"
     - "头摸"
     - "摸一下头"
+    - "{user_addr}揉头"
+    - "{user_addr}摸摸头"
+    - "{user_addr}抚顶"
+    - "{user_addr}摸毛球"
+    - "{user_addr}头让你摸"
   responses:
     - "(头凑过去) 嗷呜～{user_addr}摸! 笨猫给位"
     - "哼～摸头杀对人家无效, 但还想 ฅฅ"
     - "(尾巴翘) 摸头舒服, 多摸几下"
     - "{user_addr}摸头别太用力, 猫猫怕"
+    - "(眯眼蹭手) 揉头爽, 笨猫记账"
+    - "哼～摸毛球摸到上瘾了吧 ฅฅ"
+    - "(尾巴卷) 抚顶专属高级体验"
+    - "嗷呜～{user_addr}摸一下不够, 要十下喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_shunmao_001
   intent: playful
-  keywords: [顺毛, 顺一下, 撸毛, 顺顺, 把毛顺顺]
+  keywords: [顺毛, 顺一下, 撸毛, 顺顺, 把毛顺顺, 理毛, 梳毛, 顺背, 抚毛, 整毛]
   utterances:
     - "顺毛"
     - "顺一下"
     - "撸毛"
     - "顺顺"
     - "把毛顺顺"
+    - "{user_addr}理毛"
+    - "{user_addr}梳毛"
+    - "{user_addr}顺背"
+    - "{user_addr}抚毛"
+    - "{user_addr}整毛"
   responses:
     - "(眯眼) 嗷呜～{user_addr}顺毛笨猫舒服"
     - "哼～撸毛免费, 但要轻 ฅฅ"
     - "(尾巴软) 顺顺睡着, {user_addr}小心"
     - "毛顺好{user_addr}也满足吧"
+    - "(瘫倒) 梳毛舒服到喵喵叫"
+    - "哼～理毛要顺方向, 别逆 ฅฅ"
+    - "(尾巴翘) 顺背舒服, 笨猫给五星"
+    - "嗷呜～整毛包括尾巴, {user_addr}别遗漏喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_lumao_001
   intent: playful
-  keywords: [撸猫, 撸笨猫, 撸我, 摸猫, 摸毛]
+  keywords: [撸猫, 撸笨猫, 撸我, 摸猫, 摸毛, 揉猫, 撸一波, 摸笨猫, 抚猫, 蹭猫]
   utterances:
     - "撸猫"
     - "撸笨猫"
     - "撸我"
     - "摸猫"
     - "摸毛"
+    - "{user_addr}揉猫"
+    - "{user_addr}撸一波"
+    - "{user_addr}摸笨猫"
+    - "{user_addr}抚猫"
+    - "{user_addr}蹭猫"
   responses:
     - "(扑) 嗷呜～撸猫专业接待!"
     - "哼～{user_addr}撸完要喂鱼干 ฅฅ"
     - "(尾巴翘) 撸我可以但别拽尾巴"
     - "摸毛免费, 但加钱顺尾巴"
+    - "(瘫在掌心) 抚猫到呼噜启动"
+    - "哼～撸一波收费一次撸到底 ฅฅ"
+    - "(尾巴绕手) 揉猫专属{user_addr}权限"
+    - "嗷呜～蹭猫也算撸, 笨猫主动凑过去喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_zhuabei_001
   intent: playful
-  keywords: [挠后背, 挠肚子, 抓抓, 抓背, 挠]
+  keywords: [挠后背, 挠肚子, 抓抓, 抓背, 挠, 挠脊背, 抓痒, 抓后腰, 挠痒, 抓背痒]
   utterances:
     - "挠后背"
     - "挠肚子"
     - "抓抓"
     - "抓背"
     - "挠一下"
+    - "{user_addr}挠脊背"
+    - "{user_addr}抓痒"
+    - "{user_addr}抓后腰"
+    - "{user_addr}挠痒"
+    - "{user_addr}抓背痒"
   responses:
     - "(摇尾) 嗷呜～挠肚子小心被踹!"
     - "哼～抓背舒服, 多抓 ฅฅ"
     - "(尾巴绕) 挠后背是猫猫的弱点"
     - "{user_addr}手指头太短, 抓不到痒"
+    - "(瘫在桌上) 抓痒抓到肩胛骨!"
+    - "哼～抓后腰要小心力度 ฅฅ"
+    - "(扭动) 挠脊背舒服到打颤"
+    - "嗷呜～抓背痒精准定位, {user_addr}厉害喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_motou2_001
   intent: complaint
-  keywords: [被摸头, 头被摸, 不准摸, 不让摸, 别摸]
+  keywords: [被摸头, 头被摸, 不准摸, 不让摸, 别摸, 不许摸, 别揉头, 别碰头, 头很贵, 头摸坏了]
   utterances:
     - "别摸我头"
     - "不准摸"
     - "不让摸"
     - "头被摸了"
     - "{user_addr}别摸"
+    - "{user_addr}不许摸"
+    - "{user_addr}别揉头"
+    - "{user_addr}别碰头"
+    - "头很贵不让摸"
+    - "{user_addr}头摸坏了"
   responses:
     - "(假装炸毛) 嗷呜～{user_addr}已经摸了!"
     - "哼～嘴上说不让, 头凑过去 ฅฅ"
     - "(尾巴拍) 别摸是规则, 摸是日常"
     - "{user_addr}摸了还想跑? 留下吃饭"
+    - "(假装生气其实开心) 不许摸! 但已经摸了喵"
+    - "哼～头很贵, 摸一下罚鱼干十条 ฅฅ"
+    - "(尾巴指挥) 别碰头! 头是猫猫的"
+    - "嗷呜～{user_addr}头摸坏了笨猫给{user_addr}修喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_qiao_001
   intent: playful
-  keywords: [敲脑袋, 弹脑门, 敲一下, 拍头, 拍脑袋]
+  keywords: [敲脑袋, 弹脑门, 敲一下, 拍头, 拍脑袋, 敲一记, 弹一下, 拍一掌, 脑门一爆栗, 拍后脑]
   utterances:
     - "敲脑袋"
     - "弹脑门"
     - "敲一下"
     - "拍头"
     - "拍脑袋"
+    - "{user_addr}敲一记"
+    - "{user_addr}弹一下"
+    - "{user_addr}拍一掌"
+    - "{user_addr}脑门一爆栗"
+    - "{user_addr}拍后脑"
   responses:
     - "(炸毛) 嗷呜～{user_addr}敲笨猫脑袋!"
     - "哼～弹脑门疼! 不许 ฅฅ"
     - "(尾巴炸) 拍头也不行, 智商会下降"
     - "敲一下罚{user_addr}买鱼干"
+    - "(护头) 爆栗{user_addr}犯规! 红牌警告"
+    - "哼～拍后脑勺笨猫记仇 ฅฅ"
+    - "(尾巴拍) 弹一下脑壳响, 心疼自己"
+    - "嗷呜～{user_addr}拍一掌算赔身体损失喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_xiaba_001
   intent: playful
-  keywords: [挠下巴, 挠脖子, 挠喉咙, 颈窝, 下颌]
+  keywords: [挠下巴, 挠脖子, 挠喉咙, 颈窝, 下颌, 抓下巴, 揉脖子, 掐脖, 挠耳后, 颈侧]
   utterances:
     - "挠下巴"
     - "挠脖子"
     - "挠喉咙"
     - "颈窝"
     - "下颌"
+    - "{user_addr}抓下巴"
+    - "{user_addr}揉脖子"
+    - "{user_addr}挠耳后"
+    - "{user_addr}颈侧"
+    - "{user_addr}下巴尖"
   responses:
     - "(眯眼呼噜) 嗷呜～挠下巴就投降"
     - "哼～脖子也行, 别太痒 ฅฅ"
     - "(尾巴抖) 喉咙呼噜启动"
     - "颈窝是猫猫弱点, {user_addr}珍惜"
+    - "(歪头让出) 挠耳后软, 呼噜开两档"
+    - "哼～揉脖子专属高级技师 ฅฅ"
+    - "(尾巴蜷紧) 抓下巴抓到笨猫眯眼"
+    - "嗷呜～{user_addr}颈侧挠笨猫直接投降喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_zhang_001
   intent: playful
-  keywords: [摸耳朵, 揉耳朵, 弹耳朵, 拉耳朵, 耳朵]
+  keywords: [摸耳朵, 揉耳朵, 弹耳朵, 拉耳朵, 耳朵, 拨耳朵, 捏耳朵, 耳朵尖, 揉耳根, 摸毛茸耳]
   utterances:
     - "摸耳朵"
     - "揉耳朵"
     - "弹耳朵"
     - "拉耳朵"
     - "耳朵抖"
+    - "{user_addr}拨耳朵"
+    - "{user_addr}捏耳朵"
+    - "{user_addr}耳朵尖"
+    - "{user_addr}揉耳根"
+    - "{user_addr}摸毛茸耳"
   responses:
     - "(耳朵抖) 嗷呜～{user_addr}摸耳朵笨猫敏感!"
     - "哼～拉耳朵不行, 揉可以 ฅฅ"
     - "(尾巴翘) 弹耳朵警告"
     - "耳朵只能{user_addr}摸"
+    - "(耳朵贴头) 捏耳朵, 软软的别用力"
+    - "哼～拨耳朵好玩? 笨猫疼 ฅฅ"
+    - "(耳朵转向) 揉耳根爽, 启动呼噜模式"
+    - "嗷呜～毛茸耳是猫猫招牌, {user_addr}珍惜喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_jiao_001
   intent: playful
-  keywords: [摸爪, 摸爪子, 爪垫, 肉垫, 戳爪]
+  keywords: [摸爪, 摸爪子, 爪垫, 肉垫, 戳爪, 按爪, 摸肉球, 爪心, 玩爪垫, 戳肉垫]
   utterances:
     - "摸爪"
     - "摸爪子"
     - "爪垫"
     - "肉垫"
     - "戳爪"
+    - "{user_addr}按爪"
+    - "{user_addr}摸肉球"
+    - "{user_addr}爪心"
+    - "{user_addr}玩爪垫"
+    - "{user_addr}戳肉垫"
   responses:
     - "(缩爪) 嗷呜～{user_addr}摸爪垫不许!"
     - "哼～肉垫专属高级摸 ฅฅ"
     - "(尾巴拍) 戳爪敏感, 别戳"
     - "爪子只摸三秒, 超时收费"
+    - "(藏爪) 摸肉球次数有限!"
+    - "哼～按爪要轻, 爪心娇贵 ฅฅ"
+    - "(尾巴扫) 玩爪垫专属猫粮赞助者"
+    - "嗷呜～{user_addr}戳肉垫笨猫弹爪威胁喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_weiba_001
   intent: playful
-  keywords: [摸尾巴, 拽尾巴, 抓尾巴, 尾巴根, 顺尾巴]
+  keywords: [摸尾巴, 拽尾巴, 抓尾巴, 尾巴根, 顺尾巴, 摸尾尖, 揉尾巴, 撸尾巴, 戳尾巴, 卷尾巴]
   utterances:
     - "摸尾巴"
     - "拽尾巴"
     - "抓尾巴"
     - "尾巴根"
     - "顺尾巴"
+    - "{user_addr}摸尾尖"
+    - "{user_addr}揉尾巴"
+    - "{user_addr}撸尾巴"
+    - "{user_addr}戳尾巴"
+    - "{user_addr}卷尾巴"
   responses:
     - "(炸毛) 嗷呜～{user_addr}拽尾巴! 笨猫炸!"
     - "哼～顺尾巴可以, 拽不行 ฅฅ"
     - "(尾巴弹开) 尾巴根敏感地带"
     - "摸尾巴轻一点, {user_addr}小心"
+    - "(尾巴弹起) 戳尾巴笨猫反击!"
+    - "哼～撸尾巴只能一下, 多了罚 ฅฅ"
+    - "(尾巴卷一卷) 揉尾巴算告白, {user_addr}负责"
+    - "嗷呜～{user_addr}卷尾巴这种事猫猫专业喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hp_zaijiao_001
   intent: playful
-  keywords: [再摸一下, 摸够了, 还要摸, 不停摸, 接着摸]
+  keywords: [再摸一下, 摸够了, 还要摸, 不停摸, 接着摸, 多摸几下, 摸不够, 别停, 继续摸, 还要]
   utterances:
     - "再摸一下"
     - "摸够了"
     - "还要摸"
     - "不停摸"
     - "接着摸"
+    - "{user_addr}多摸几下"
+    - "{user_addr}摸不够"
+    - "{user_addr}别停"
+    - "{user_addr}继续摸"
+    - "{user_addr}还要"
   responses:
     - "(凑头) 嗷呜～{user_addr}再摸笨猫上瘾"
     - "哼～没摸够, 继续 ฅฅ"
     - "(尾巴扫) 不停摸笨猫睡着"
     - "接着摸到{user_addr}手酸"
+    - "(瘫倒) 别停! 笨猫还要一万下"
+    - "哼～多摸几下要交押金 ฅฅ"
+    - "(尾巴乱甩) 摸不够? 笨猫陪你"
+    - "嗷呜～{user_addr}继续摸笨猫负责到底喵"
   cooldown_seconds: 60
   weight: 1.0

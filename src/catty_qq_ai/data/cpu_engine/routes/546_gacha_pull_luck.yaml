@@ -3,204 +3,312 @@
 
 - name: gpl_pull_001
   intent: playful
-  keywords: [抽卡, 抽到了, 十连, 抽一抽, 抽起来]
+  keywords: [抽卡, 抽到了, 十连, 抽一抽, 抽起来, 单抽, 抽奖, 抽角色, 一发抽]
   utterances:
     - 抽卡
     - 抽到了
     - 十连
     - 抽一抽
     - 抽起来
+    - 单抽
+    - "{user_addr}抽卡"
+    - 抽奖
+    - 抽角色
+    - 一发抽
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}手气! ฅฅ"
     - "哼～{user_addr}什么角!"
     - "(凑近) 笨猫看蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 笨猫沾点{user_addr}的运气!"
+    - "哼～别只抽不出货!"
+    - "(尾巴扫) 笨猫想知道抽什么!"
+    - "嗷呜～{user_addr}晒图给笨猫看 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_ssr_001
   intent: playful
-  keywords: [SSR, 金色, 出货, 大保底, 不歪]
+  keywords: [SSR, 金色, 出货, 大保底, 不歪, 金光, 神光, 紫闪, 金色光]
   utterances:
     - SSR
     - 金色出
     - 出货
     - 大保底
     - 不歪
+    - 金光
+    - "{user_addr}出货"
+    - 神光
+    - 紫闪
+    - 金色光
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}欧! ฅฅ"
     - "哼～{user_addr}非洲人变欧!"
     - "(凑近) 笨猫沾光蹭蹭"
     - "嗷呜～{user_addr}赞!"
+    - "(扑过去) 欧皇上线! 笨猫崇拜!"
+    - "哼～{user_addr}的手气逆天!"
+    - "(尾巴扫) SSR请客大餐~"
+    - "嗷呜～{user_addr}今天财神光顾 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_eat_egg_001
   intent: complaint
-  keywords: [一个金没出, 全黑, 歪了, 非酋, 自闭]
+  keywords: [一个金没出, 全黑, 歪了, 非酋, 自闭, 抽空, 全紫, 没金, 抽不出]
   utterances:
     - 全黑
     - 歪了
     - 非酋
     - 自闭
     - 没出金
+    - 抽空
+    - "{user_addr}非酋"
+    - 全紫
+    - 没金
+    - 抽不出
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}惨!"
     - "(尾巴扫) 安慰蹭蹭"
     - "嗷呜～{user_addr}下次!"
+    - "(扑过去抱) 笨猫给{user_addr}EUP光环"
+    - "哼～非洲人也有春天!"
+    - "(尾巴扫) 下次再战!"
+    - "嗷呜～{user_addr}的笑笨猫陪着 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_win_streak_001
   intent: playful
-  keywords: [连胜, 连赢, 连胜冠, 一波带走, 莫名连胜]
+  keywords: [连胜, 连赢, 连胜冠, 一波带走, 莫名连胜, 顺风局, 连续胜, 一连串赢, 大佬]
   utterances:
     - 连胜
     - 连赢
     - 连胜冠
     - 一波带走
     - 莫名连胜
+    - 顺风局
+    - "{user_addr}连胜"
+    - 连续胜
+    - 一连串赢
+    - 大佬
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}神! ฅฅ"
     - "哼～{user_addr}手气!"
     - "(凑近) 笨猫加油蹭蹭"
     - "嗷呜～{user_addr}赞!"
+    - "(扑过去) 大佬带笨猫上分!"
+    - "哼～乘胜追击!"
+    - "(尾巴扫) 笨猫的崇拜值max"
+    - "嗷呜～{user_addr}今天势不可挡 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_lose_streak_001
   intent: complaint
-  keywords: [连败, 连输, 连跪, 一直输, 输得惨]
+  keywords: [连败, 连输, 连跪, 一直输, 输得惨, 一直跪, 持续输, 一连串输, 黑色]
   utterances:
     - 连败
     - 连输
     - 连跪
     - 一直输
     - 输得惨
+    - 一直跪
+    - "{user_addr}连败"
+    - 持续输
+    - 一连串输
+    - 黑色一日
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}别气!"
     - "(尾巴扫) 重整蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 笨猫给{user_addr}充能"
+    - "哼～休息一下! 重新出发"
+    - "(尾巴扫) 别气! 下盘必胜"
+    - "嗷呜～{user_addr}笨猫陪打 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_rank_up_001
   intent: playful
-  keywords: [上分, 上王者, 段位升, 升一段, 上钻石]
+  keywords: [上分, 上王者, 段位升, 升一段, 上钻石, 升段, 上巅峰, 高段位, 上荣耀]
   utterances:
     - 上分
     - 上王者
     - 段位升
     - 升一段
     - 上钻石
+    - 升段
+    - "{user_addr}上王者"
+    - 上巅峰
+    - 高段位
+    - 上荣耀
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}厉害 ฅฅ"
     - "哼～{user_addr}早该!"
     - "(凑近) 蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 王者{user_addr}, 笨猫的偶像!"
+    - "哼～上分大佬带笨猫!"
+    - "(尾巴扫) 段位牌笨猫帮挂"
+    - "嗷呜～{user_addr}的实力笨猫服 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_rank_down_001
   intent: complaint
-  keywords: [掉段, 掉星, 退步, 段位降, 掉分]
+  keywords: [掉段, 掉星, 退步, 段位降, 掉分, 落段, 降级, 输段位, 掉到]
   utterances:
     - 掉段
     - 掉星
     - 退步
     - 段位降
     - 掉分
+    - 落段
+    - "{user_addr}掉分"
+    - 降级
+    - 输段位
+    - 掉到
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}重打!"
     - "(尾巴扫) 加油蹭蹭"
     - "嗷呜～{user_addr}不哭!"
+    - "(扑过去) 段位算啥, 笨猫给{user_addr}抱抱"
+    - "哼～换个时间状态再来!"
+    - "(尾巴扫) 笨猫陪{user_addr}慢慢爬"
+    - "嗷呜～{user_addr}下次再爬上去 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_jungle_001
   intent: playful
-  keywords: [打野, 抓人, 抓上, gank, 节奏猛]
+  keywords: [打野, 抓人, 抓上, gank, 节奏猛, 抢野, 反野, 打野位, 抓中]
   utterances:
     - 打野
     - 抓人
     - 抓上
     - gank
     - 节奏猛
+    - 抢野
+    - "{user_addr}打野"
+    - 反野
+    - 打野位
+    - 抓中
   responses:
     - "嗷呜～{user_addr}猛 ฅฅ"
     - "哼～{user_addr}厉害!"
     - "(凑近) 蹭蹭"
     - "嗷呜～{user_addr}带笨猫!"
+    - "(扑过去) 笨猫挂大腿!"
+    - "哼～{user_addr}gank流大佬!"
+    - "(尾巴扫) 笨猫的节奏笛子吹好"
+    - "嗷呜～{user_addr}打野神 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_carry_001
   intent: playful
-  keywords: [带飞, carry, 大腿, 单杀, 五杀]
+  keywords: [带飞, carry, 大腿, 单杀, 五杀, 一打多, mvp, 上分大腿, 团战carry]
   utterances:
     - 带飞
     - carry
     - 大腿
     - 单杀
     - 五杀
+    - 一打多
+    - "{user_addr}carry"
+    - mvp
+    - 上分大腿
+    - 团战carry
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}神 ฅฅ"
     - "哼～{user_addr}牛!"
     - "(凑近) 蹭蹭"
     - "嗷呜～{user_addr}带笨猫!"
+    - "(扑过去) 笨猫舔大腿!"
+    - "哼～MVP大佬, 我的大腿"
+    - "(尾巴扫) 笨猫给{user_addr}加buff"
+    - "嗷呜～{user_addr}带飞笨猫上天 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_teammate_001
   intent: complaint
-  keywords: [队友坑, 猪队友, 坑队, 神队友, 一打四]
+  keywords: [队友坑, 猪队友, 坑队, 神队友, 一打四, 队友卷, 神队, 坑大佬, 烂队友]
   utterances:
     - 队友坑
     - 猪队友
     - 坑队
     - 神队友
     - 一打四
+    - 队友卷
+    - "{user_addr}队友"
+    - 神队
+    - 坑大佬
+    - 烂队友
   responses:
     - "(贴过去) 嗷呜～{user_addr}辛苦 ฅฅ"
     - "哼～{user_addr}加油!"
     - "(尾巴扫) 蹭蹭"
     - "嗷呜～{user_addr}笨猫帮!"
+    - "(扑过去) 笨猫陪{user_addr}骂烂队友"
+    - "哼～靠自己, 队友只是装饰"
+    - "(尾巴扫) 笨猫无忧无虑的鼓掌啦啦队"
+    - "嗷呜～{user_addr}独力扛起一场胜 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_open_box_001
   intent: playful
-  keywords: [开箱, 开宝箱, 开礼包, 开盒, 抽箱]
+  keywords: [开箱, 开宝箱, 开礼包, 开盒, 抽箱, 拆礼包, 开盲盒, 取奖箱, 开宝]
   utterances:
     - 开箱
     - 开宝箱
     - 开礼包
     - 开盒
     - 抽箱
+    - 拆礼包
+    - "{user_addr}开箱"
+    - 开盲盒
+    - 取奖箱
+    - 开宝
   responses:
     - "嗷呜～{user_addr}笨猫看 ฅฅ"
     - "哼～{user_addr}手气好!"
     - "(凑近) 蹭蹭"
     - "嗷呜～{user_addr}赞!"
+    - "(凑过去) 笨猫等开盖!"
+    - "哼～开了好东西分笨猫!"
+    - "(尾巴扫) 盲盒开心瞬间~"
+    - "嗷呜～{user_addr}手气快显灵 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_event_end_001
   intent: complaint
-  keywords: [活动结束, 没赶上, 错过抽, 截止了, 活动过]
+  keywords: [活动结束, 没赶上, 错过抽, 截止了, 活动过, 活动停, 来不及, 错过活动, 已截止]
   utterances:
     - 活动结束
     - 没赶上
     - 错过抽
     - 截止了
     - 活动过
+    - 活动停
+    - "{user_addr}错过"
+    - 来不及
+    - 错过活动
+    - 已截止
   responses:
     - "(贴过去) 嗷呜～{user_addr}下次 ฅฅ"
     - "哼～{user_addr}下次!"
     - "(尾巴扫) 等下次蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(扑过去) 笨猫帮{user_addr}盯下次活动!"
+    - "哼～看公告! 提前准备!"
+    - "(尾巴扫) 下次会有更好的!"
+    - "嗷呜～{user_addr}错过这次还有下次 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

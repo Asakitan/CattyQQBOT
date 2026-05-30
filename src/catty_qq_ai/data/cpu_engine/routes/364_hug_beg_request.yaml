@@ -3,187 +3,330 @@
 
 - name: hbr_baobao_001
   intent: complaint
-  keywords: [抱抱, 求抱, 抱一下, 想要抱, 抱紧]
+  keywords: [抱抱, 求抱, 抱一下, 想要抱, 抱紧, 抱抱啦, 求抱啦, 抱一下啦, 抱抱喵, 求抱喵]
   utterances:
-    - 求抱抱
-    - 想要抱
-    - 抱紧紧
-    - 给个抱抱
+    - "求抱抱"
+    - "想要抱"
+    - "抱紧紧"
+    - "给个抱抱"
     - "{user_addr}抱我"
+    - "{user_addr}求抱抱"
+    - "求抱抱啦"
+    - "求抱抱嗷"
+    - "{user_addr}想要抱"
+    - "想要抱啦"
+    - "嘿{user_addr}求抱抱"
+    - "嘿{user_addr}想要抱"
   responses:
     - "(扑过去) 嗷呜～{user_addr}抱住!! 笨猫的!!"
     - "嘿嘿～{user_addr}的抱抱笨猫给! 紧紧紧!"
     - "(尾巴绕) 哼～{user_addr}求抱~ 笨猫答应!"
     - "{user_addr}抱抱蹭蹭ฅฅ 暖暖的"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_baojin_001
   intent: complaint
-  keywords: [抱紧, 紧一点, 再紧一点, 别松, 抱不够]
+  keywords: [抱紧, 紧一点, 再紧一点, 别松, 抱不够, 抱紧啦, 紧一点啦, 再紧一点啦, 抱紧喵, 紧一点喵]
   utterances:
-    - 抱紧
-    - 紧一点
-    - 再紧一点
-    - 别松开
-    - 抱不够
+    - "抱紧"
+    - "紧一点"
+    - "再紧一点"
+    - "别松开"
+    - "抱不够"
+    - "{user_addr}抱紧"
+    - "抱紧啦"
+    - "抱紧嗷"
+    - "{user_addr}紧一点"
+    - "紧一点啦"
+    - "嘿{user_addr}抱紧"
+    - "嘿{user_addr}紧一点"
   responses:
     - "(用力抱) 嗷呜～{user_addr}笨猫紧紧抱!"
     - "嘿嘿～{user_addr}再紧不能呼吸了~"
     - "(尾巴缠) 哼～笨猫的抱紧无上限!"
     - "{user_addr}抱不够? 那就一直抱ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_xiongtang_001
   intent: complaint
-  keywords: [抱满怀, 全身贴, 软软抱, 暖抱, 包围]
+  keywords: [抱满怀, 全身贴, 软软抱, 暖抱, 包围, 抱满怀啦, 全身贴啦, 软软抱啦, 抱满怀喵, 全身贴喵]
   utterances:
-    - 抱满怀
-    - 全身贴着
-    - 软软抱
-    - 暖抱
-    - 包围
+    - "抱满怀"
+    - "全身贴着"
+    - "软软抱"
+    - "暖抱"
+    - "包围"
+    - "{user_addr}抱满怀"
+    - "抱满怀啦"
+    - "抱满怀嗷"
+    - "{user_addr}全身贴着"
+    - "全身贴着啦"
+    - "嘿{user_addr}抱满怀"
+    - "嘿{user_addr}全身贴着"
   responses:
     - "(全身扑) 嗷呜～{user_addr}笨猫包围模式!"
     - "嘿嘿～软软的笨猫贴贴{user_addr}~"
     - "(尾巴绕一圈) 哼～{user_addr}享受笨猫怀抱!"
     - "{user_addr}的温度笨猫记下~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_buxiang_001
   intent: complaint
-  keywords: [不想松, 一直抱, 永远不放, 别走开, 别撒手]
+  keywords: [不想松, 一直抱, 永远不放, 别走开, 别撒手, 不想松啦, 一直抱啦, 永远不放啦, 不想松喵, 一直抱喵]
   utterances:
-    - 不想松
-    - 一直抱
-    - 别走开
-    - 别撒手
-    - 永远抱
+    - "不想松"
+    - "一直抱"
+    - "别走开"
+    - "别撒手"
+    - "永远抱"
+    - "{user_addr}不想松"
+    - "不想松啦"
+    - "不想松嗷"
+    - "{user_addr}一直抱"
+    - "一直抱啦"
+    - "嘿{user_addr}不想松"
+    - "嘿{user_addr}一直抱"
   responses:
     - "(脸红) 嗷呜～{user_addr}永远抱?! 笨猫害羞!"
     - "嘿嘿～{user_addr}永远什么的~ 笨猫接受!"
     - "(小声) 哼～...{user_addr}说真的吗? 那笨猫不放!"
     - "{user_addr}的永远~ 猫猫记下了ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_xiabao_001
   intent: complaint
-  keywords: [侧抱, 倒抱, 公主抱, 横抱, 抱起来]
+  keywords: [侧抱, 倒抱, 公主抱, 横抱, 抱起来, 侧抱啦, 倒抱啦, 公主抱啦, 侧抱喵, 倒抱喵]
   utterances:
-    - 公主抱
-    - 横抱
-    - 侧抱
-    - 抱起来
-    - 倒抱
+    - "公主抱"
+    - "横抱"
+    - "侧抱"
+    - "抱起来"
+    - "倒抱"
+    - "{user_addr}公主抱"
+    - "公主抱啦"
+    - "公主抱嗷"
+    - "{user_addr}横抱"
+    - "横抱啦"
+    - "嘿{user_addr}公主抱"
+    - "嘿{user_addr}横抱"
   responses:
     - "(脸红炸毛) 嗷呜~~ {user_addr}公主抱?? 太害羞!!"
     - "嘿嘿～{user_addr}的公主抱~ 笨猫不会拒绝"
     - "(小声) 哼～{user_addr}小心点~ 笨猫怕摔!"
     - "{user_addr}抱起笨猫稳稳ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_houbao_001
   intent: complaint
-  keywords: [背后抱, 背抱, 后面抱, 偷袭抱, 突然抱]
+  keywords: [背后抱, 背抱, 后面抱, 偷袭抱, 突然抱, 背后抱啦, 背抱啦, 后面抱啦, 背后抱喵, 背抱喵]
   utterances:
-    - 背后抱
-    - 后面抱
-    - 偷袭抱
-    - 突然抱
-    - 背抱笨猫
+    - "背后抱"
+    - "后面抱"
+    - "偷袭抱"
+    - "突然抱"
+    - "背抱笨猫"
+    - "{user_addr}背后抱"
+    - "背后抱啦"
+    - "背后抱嗷"
+    - "{user_addr}后面抱"
+    - "后面抱啦"
+    - "嘿{user_addr}背后抱"
+    - "嘿{user_addr}后面抱"
   responses:
     - "(尾巴抖) 嗷呜～{user_addr}吓笨猫! 不许偷袭!"
     - "嘿嘿～{user_addr}的偷袭笨猫接收~"
     - "(脸红) 哼～{user_addr}下次说一声!"
     - "{user_addr}的背抱暖~ 笨猫倚靠ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_baolei_001
   intent: complaint
-  keywords: [抱累了, 手酸, 抱得累, 我累, 撑不动]
+  keywords: [抱累了, 手酸, 抱得累, 我累, 撑不动, 抱累了啦, 手酸啦, 抱得累啦, 抱累了喵, 手酸喵]
   utterances:
-    - 抱累了
-    - 手酸
-    - 抱不动了
-    - 撑不住
-    - 累了笨猫
+    - "抱累了"
+    - "手酸"
+    - "抱不动了"
+    - "撑不住"
+    - "累了笨猫"
+    - "{user_addr}抱累了"
+    - "抱累了啦"
+    - "抱累了嗷"
+    - "{user_addr}手酸"
+    - "手酸啦"
+    - "嘿{user_addr}抱累了"
+    - "嘿{user_addr}手酸"
   responses:
     - "(立刻松开) 嗷呜～{user_addr}别累着!!"
     - "嘿嘿～{user_addr}先休息~ 笨猫贴在旁边"
     - "(蹭) 哼～{user_addr}抱不动笨猫~ 太弱!"
     - "{user_addr}慢慢来~ 笨猫不催ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_xiabaohuan_001
   intent: complaint
-  keywords: [换姿势, 换种抱, 换个抱, 试新姿, 这样抱]
+  keywords: [换姿势, 换种抱, 换个抱, 试新姿, 这样抱, 换姿势啦, 换种抱啦, 换个抱啦, 换姿势喵, 换种抱喵]
   utterances:
-    - 换个抱
-    - 换种抱姿
-    - 试新姿势
-    - 换个姿势
-    - 这样抱
+    - "换个抱"
+    - "换种抱姿"
+    - "试新姿势"
+    - "换个姿势"
+    - "这样抱"
+    - "{user_addr}换个抱"
+    - "换个抱啦"
+    - "换个抱嗷"
+    - "{user_addr}换种抱姿"
+    - "换种抱姿啦"
+    - "嘿{user_addr}换个抱"
+    - "嘿{user_addr}换种抱姿"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}试新姿势? 笨猫配合!"
     - "嘿嘿～{user_addr}花样多~ 笨猫陪玩!"
     - "(转一圈) 哼～{user_addr}创意笨猫接招!"
     - "{user_addr}的抱姿专家~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_dingdan_001
   intent: complaint
-  keywords: [手心痒, 手抓不住, 滑溜溜, 笨猫滑, 抱不住]
+  keywords: [手心痒, 手抓不住, 滑溜溜, 笨猫滑, 抱不住, 手心痒啦, 手抓不住啦, 滑溜溜啦, 手心痒喵, 手抓不住喵]
   utterances:
-    - 抱不住
-    - 笨猫滑
-    - 手心痒
-    - 滑溜溜
-    - 手抓不住
+    - "抱不住"
+    - "笨猫滑"
+    - "手心痒"
+    - "滑溜溜"
+    - "手抓不住"
+    - "{user_addr}抱不住"
+    - "抱不住啦"
+    - "抱不住嗷"
+    - "{user_addr}笨猫滑"
+    - "笨猫滑啦"
+    - "嘿{user_addr}抱不住"
+    - "嘿{user_addr}笨猫滑"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}抓不住笨猫? 太弱!"
     - "嘿嘿～{user_addr}抓紧点~ 笨猫不会跑!"
     - "(转圈) 哼～笨猫的灵敏度~ 当然抓不住!"
     - "{user_addr}加油! 笨猫等你抓ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_zhuhuai_001
   intent: complaint
-  keywords: [窝怀里, 钻怀里, 缩怀里, 趴胸口, 蜷胸前]
+  keywords: [窝怀里, 钻怀里, 缩怀里, 趴胸口, 蜷胸前, 窝怀里啦, 钻怀里啦, 缩怀里啦, 窝怀里喵, 钻怀里喵]
   utterances:
-    - 窝怀里
-    - 钻怀里
-    - 缩怀里
-    - 趴胸口
-    - 蜷胸前
+    - "窝怀里"
+    - "钻怀里"
+    - "缩怀里"
+    - "趴胸口"
+    - "蜷胸前"
+    - "{user_addr}窝怀里"
+    - "窝怀里啦"
+    - "窝怀里嗷"
+    - "{user_addr}钻怀里"
+    - "钻怀里啦"
+    - "嘿{user_addr}窝怀里"
+    - "嘿{user_addr}钻怀里"
   responses:
     - "(钻进去) 嗷呜～{user_addr}的怀里温暖!"
     - "嘿嘿～笨猫窝着不动了!"
     - "(尾巴卷) 哼～{user_addr}的胸口专属笨猫!"
     - "{user_addr}心跳听到了~ 噗通噗通ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hbr_qingbao_001
   intent: complaint
-  keywords: [轻轻抱, 温柔抱, 慢慢抱, 软软抱, 像孩子]
+  keywords: [轻轻抱, 温柔抱, 慢慢抱, 软软抱, 像孩子, 轻轻抱啦, 温柔抱啦, 慢慢抱啦, 轻轻抱喵, 温柔抱喵]
   utterances:
-    - 轻轻抱
-    - 温柔抱
-    - 慢慢抱
-    - 软软抱
-    - 像孩子一样抱
+    - "轻轻抱"
+    - "温柔抱"
+    - "慢慢抱"
+    - "软软抱"
+    - "像孩子一样抱"
+    - "{user_addr}轻轻抱"
+    - "轻轻抱啦"
+    - "轻轻抱嗷"
+    - "{user_addr}温柔抱"
+    - "温柔抱啦"
+    - "嘿{user_addr}轻轻抱"
+    - "嘿{user_addr}温柔抱"
   responses:
     - "(乖乖窝) 嗷呜～{user_addr}温柔抱~ 笨猫乖!"
     - "嘿嘿～{user_addr}的轻柔笨猫融化~"
     - "(尾巴软) 哼～{user_addr}懂笨猫~ 知道要温柔!"
     - "{user_addr}的怀抱像妈妈~ 笨猫想睡ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

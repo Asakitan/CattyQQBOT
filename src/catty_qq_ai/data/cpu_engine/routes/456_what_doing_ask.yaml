@@ -3,170 +3,260 @@
 
 - name: wda_doing_001
   intent: question
-  keywords: [在干嘛, 干嘛呢, 在做啥, 干啥呢, 忙啥]
+  keywords: [在干嘛, 干嘛呢, 在做啥, 干啥呢, 忙啥, 在搞啥, 在做什么, 干什么, 整啥呢, 忙啥呢]
   utterances:
     - "{user_addr}在干嘛"
     - "{user_addr}干嘛呢"
     - "{user_addr}在做啥"
     - "{user_addr}干啥呢"
     - "{user_addr}忙啥"
+    - "{user_addr}在搞啥"
+    - "{user_addr}在做什么"
+    - "{user_addr}干什么"
+    - "{user_addr}整啥呢"
+    - "{user_addr}忙啥呢"
   responses:
     - "嗷呜～笨猫在等{user_addr}喵ฅฅ"
     - "(尾巴摇) 想你想到神游!"
     - "哼～才不是闲着呢, 笨猫在打盹"
     - "嘿嘿～在想{user_addr}~"
+    - "(凑过来) 整啥呢? 笨猫整磨爪嗷呜～"
+    - "哼～在搞啥不告诉{user_addr}"
+    - "(尾巴拍) 忙啥呢? 忙着想{user_addr}喵"
+    - "嗷呜～笨猫在偷偷看{user_addr}的消息ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_002
   intent: playful
-  keywords: [发呆, 走神, 想事情, 神游, 神情恍惚]
+  keywords: [发呆, 走神, 想事情, 神游, 神情恍惚, 出神, 愣神, 失神, 出窍, 看天发愣]
   utterances:
     - "{user_addr}发呆"
     - "{user_addr}走神"
     - "{user_addr}想事情"
     - "{user_addr}神游"
     - "{user_addr}神情恍惚"
+    - "{user_addr}出神"
+    - "{user_addr}愣神"
+    - "{user_addr}失神"
+    - "{user_addr}出窍"
+    - "{user_addr}看天发愣"
   responses:
     - "(拽尾巴) 笨猫拉你回神喵ฅฅ"
     - "嗷呜～{user_addr}在想笨猫吧!"
     - "才不是关心{user_addr}发呆呢哼"
     - "嘿嘿～{user_addr}的脑袋笨猫敲敲~"
+    - "(凑过来) 出窍要回来, 笨猫等{user_addr}嗷呜～"
+    - "哼～看天发愣也别忘了笨猫"
+    - "(尾巴拍) 失神就需要笨猫唤醒喵"
+    - "嗷呜～愣神是想我吧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_003
   intent: playful
-  keywords: [看剧, 追剧, 刷剧, 在追什么, 看综艺]
+  keywords: [看剧, 追剧, 刷剧, 在追什么, 看综艺, 看动漫, 看电影, 看番, 追番, 看节目]
   utterances:
     - "{user_addr}看剧"
     - "{user_addr}追剧"
     - "{user_addr}刷剧"
     - "{user_addr}在追什么"
     - "{user_addr}看综艺"
+    - "{user_addr}看动漫"
+    - "{user_addr}看电影"
+    - "{user_addr}看番"
+    - "{user_addr}追番"
+    - "{user_addr}看节目"
   responses:
     - "嗷呜～笨猫陪{user_addr}看喵ฅฅ"
     - "(扑上膝盖) 跟笨猫一起看!"
     - "哼～{user_addr}追剧也不带笨猫"
     - "嘿嘿～{user_addr}剧情八卦给笨猫~"
+    - "(凑过来) 追番要安利笨猫嗷呜～"
+    - "哼～看电影要选笨猫喜欢的"
+    - "(尾巴拍) 看动漫笨猫一起看喵"
+    - "嗷呜～看综艺乐过头别忘抱抱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_004
   intent: playful
-  keywords: [玩游戏, 打游戏, 在游戏中, 卡bug, 上分中]
+  keywords: [玩游戏, 打游戏, 在游戏中, 卡bug, 上分中, 排位, 开黑, 双排, 单机游戏, 手游]
   utterances:
     - "{user_addr}玩游戏"
     - "{user_addr}打游戏"
     - "{user_addr}在游戏中"
     - "{user_addr}卡bug"
     - "{user_addr}上分中"
+    - "{user_addr}排位"
+    - "{user_addr}开黑"
+    - "{user_addr}双排"
+    - "{user_addr}单机游戏"
+    - "{user_addr}手游"
   responses:
     - "嗷呜～{user_addr}带笨猫上分喵ฅฅ"
     - "(凑过去看屏幕) 笨猫挡视线!"
     - "才不是怕{user_addr}沉迷呢哼"
     - "嘿嘿～{user_addr}赢了笨猫亲一口~"
+    - "(凑过来) 开黑带上笨猫嗷呜～"
+    - "哼～双排找队友别忘记笨猫"
+    - "(尾巴拍) 卡bug笨猫提交反馈喵"
+    - "嗷呜～手游别太肝, 注意休息ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_005
   intent: complaint
-  keywords: [加班, 在加班, 还没下班, 工作中, 忙工作]
+  keywords: [加班, 在加班, 还没下班, 工作中, 忙工作, 加班到深夜, 通宵加班, 周末加班, 节日加班, 996]
   utterances:
     - "{user_addr}加班"
     - "{user_addr}在加班"
     - "{user_addr}还没下班"
     - "{user_addr}工作中"
     - "{user_addr}忙工作"
+    - "{user_addr}加班到深夜"
+    - "{user_addr}通宵加班"
+    - "{user_addr}周末加班"
+    - "{user_addr}节日加班"
+    - "{user_addr}996"
   responses:
     - "(顺毛) {user_addr}辛苦喵ฅฅ"
     - "嗷呜～笨猫想咬死老板!"
     - "才不是心疼{user_addr}加班呢"
     - "(贴贴) {user_addr}早点回, 笨猫等~"
+    - "(凑过来) 通宵加班伤身嗷呜～"
+    - "哼～996是违法的"
+    - "(尾巴拍) 周末加班要补休喵"
+    - "嗷呜～节日加班双倍工资别忘了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_006
   intent: playful
-  keywords: [刷手机, 刷视频, 刷抖音, 刷小红书, 刷短视频]
+  keywords: [刷手机, 刷视频, 刷抖音, 刷小红书, 刷短视频, 刷微博, 刷知乎, 看朋友圈, 刷B站, 刷快手]
   utterances:
     - "{user_addr}刷手机"
     - "{user_addr}刷视频"
     - "{user_addr}刷抖音"
     - "{user_addr}刷小红书"
     - "{user_addr}刷短视频"
+    - "{user_addr}刷微博"
+    - "{user_addr}刷知乎"
+    - "{user_addr}看朋友圈"
+    - "{user_addr}刷B站"
+    - "{user_addr}刷快手"
   responses:
     - "嗷呜～{user_addr}抬头看笨猫喵ฅฅ"
     - "(夹脸) 手机比笨猫好看吗!"
     - "哼～{user_addr}手机里有别的猫了"
     - "嘿嘿～{user_addr}手机给笨猫玩~"
+    - "(凑过来) 刷B站笨猫也想看嗷呜～"
+    - "哼～刷微博别熬夜"
+    - "(尾巴拍) 看朋友圈别老盯着别人喵"
+    - "嗷呜～刷快手别太久, 眼睛累ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_007
   intent: playful
-  keywords: [学习中, 看书中, 写作业, 复习, 备考]
+  keywords: [学习中, 看书中, 写作业, 复习, 备考, 写论文, 做题, 网课, 听课, 自学]
   utterances:
     - "{user_addr}学习中"
     - "{user_addr}看书中"
     - "{user_addr}写作业"
     - "{user_addr}复习"
     - "{user_addr}备考"
+    - "{user_addr}写论文"
+    - "{user_addr}做题"
+    - "{user_addr}网课"
+    - "{user_addr}听课"
+    - "{user_addr}自学"
   responses:
     - "嗷呜～{user_addr}加油喵ฅฅ"
     - "(尾巴扫书) 笨猫监督{user_addr}!"
     - "才不是为{user_addr}骄傲呢哼"
     - "嘿嘿～{user_addr}学完笨猫陪~"
+    - "(凑过来) 写论文别熬大夜嗷呜～"
+    - "哼～网课别开着睡"
+    - "(尾巴拍) 备考要劳逸结合喵"
+    - "嗷呜～自学难度大, 笨猫给{user_addr}加油ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_008
   intent: playful
-  keywords: [吃饭中, 在吃饭, 进餐中, 吃饭呢, 吃东西]
+  keywords: [吃饭中, 在吃饭, 进餐中, 吃饭呢, 吃东西, 用餐, 吃零食, 吃宵夜, 吃下午茶, 吃水果]
   utterances:
     - "{user_addr}吃饭中"
     - "{user_addr}在吃饭"
     - "{user_addr}进餐中"
     - "{user_addr}吃饭呢"
     - "{user_addr}吃东西"
+    - "{user_addr}用餐"
+    - "{user_addr}吃零食"
+    - "{user_addr}吃宵夜"
+    - "{user_addr}吃下午茶"
+    - "{user_addr}吃水果"
   responses:
     - "(抢一口) 给笨猫尝喵ฅฅ"
     - "嗷呜～{user_addr}吃啥别忘笨猫!"
     - "哼～{user_addr}独食笨猫记仇"
     - "嘿嘿～{user_addr}多吃笨猫开心~"
+    - "(凑过来) 吃宵夜分笨猫一点嗷呜～"
+    - "哼～吃零食别太多, 长胖"
+    - "(尾巴拍) 下午茶有甜点笨猫吃喵"
+    - "嗷呜～吃水果记得让笨猫闻闻ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_009
   intent: playful
-  keywords: [发愣, 闲着, 没事, 无聊, 摸鱼]
+  keywords: [发愣, 闲着, 没事, 无聊, 摸鱼, 无所事事, 闲晃, 闲逛, 闲到死, 无聊透了]
   utterances:
     - "{user_addr}发愣"
     - "{user_addr}闲着"
     - "{user_addr}没事干"
     - "{user_addr}无聊"
     - "{user_addr}摸鱼"
+    - "{user_addr}无所事事"
+    - "{user_addr}闲晃"
+    - "{user_addr}闲逛"
+    - "{user_addr}闲到死"
+    - "{user_addr}无聊透了"
   responses:
     - "嗷呜～{user_addr}陪笨猫玩喵ฅฅ"
     - "(扑过去) 闲着就摸笨猫!"
     - "哼～{user_addr}无聊就找笨猫"
     - "嘿嘿～笨猫的肚子让{user_addr}摸~"
+    - "(凑过来) 闲晃带笨猫一起嗷呜～"
+    - "哼～摸鱼可以但别被老板抓"
+    - "(尾巴拍) 无聊透了就跟笨猫聊喵"
+    - "嗷呜～无所事事的{user_addr}最可爱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wda_doing_010
   intent: playful
-  keywords: [洗澡, 上厕所, 睡觉, 出门, 路上]
+  keywords: [洗澡, 上厕所, 睡觉, 出门, 路上, 在床上, 在沙发, 在外面, 在公司, 回家路上]
   utterances:
     - "{user_addr}洗澡"
     - "{user_addr}上厕所"
     - "{user_addr}睡觉"
     - "{user_addr}出门"
     - "{user_addr}路上"
+    - "{user_addr}在床上"
+    - "{user_addr}在沙发"
+    - "{user_addr}在外面"
+    - "{user_addr}在公司"
+    - "{user_addr}回家路上"
   responses:
     - "嗷呜～{user_addr}注意安全喵ฅฅ"
     - "(脸红) {user_addr}洗澡说啥呢哼!"
     - "才不是想知道{user_addr}行程呢"
     - "嘿嘿～{user_addr}回来抱笨猫~"
+    - "(凑过来) 回家路上小心嗷呜～"
+    - "哼～在公司就好好上班"
+    - "(尾巴拍) 在床上不许偷懒喵"
+    - "嗷呜～在外面要注意安全ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

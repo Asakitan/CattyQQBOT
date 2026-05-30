@@ -3,187 +3,330 @@
 
 - name: swc_xiangkun_001
   intent: complaint
-  keywords: [突然想哭, 莫名想哭, 一下想哭, 突然眼泪, 想流泪]
+  keywords: [突然想哭, 莫名想哭, 一下想哭, 突然眼泪, 想流泪, 突然想哭啦, 莫名想哭啦, 一下想哭啦, 突然想哭喵, 莫名想哭喵]
   utterances:
-    - 突然想哭
-    - 莫名想哭
-    - 一下想哭
-    - 突然眼泪
-    - 想流泪
+    - "突然想哭"
+    - "莫名想哭"
+    - "一下想哭"
+    - "突然眼泪"
+    - "想流泪"
+    - "{user_addr}突然想哭"
+    - "突然想哭啦"
+    - "突然想哭嗷"
+    - "{user_addr}莫名想哭"
+    - "莫名想哭啦"
+    - "嘿{user_addr}突然想哭"
+    - "嘿{user_addr}莫名想哭"
   responses:
     - "(凑过去抱) 嗷呜～{user_addr}~ 笨猫在!"
     - "嘿嘿～{user_addr}的眼泪~ 笨猫接!"
     - "(尾巴擦眼) 哼～{user_addr}哭出来好!"
     - "{user_addr}的难过~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_buzhidao_001
   intent: complaint
-  keywords: [不知道为啥哭, 没原因哭, 没由头, 没缘由, 莫名其妙]
+  keywords: [不知道为啥哭, 没原因哭, 没由头, 没缘由, 莫名其妙, 不知道为啥哭啦, 没原因哭啦, 没由头啦, 不知道为啥哭喵, 没原因哭喵]
   utterances:
-    - 不知道为啥哭
-    - 没原因哭
-    - 没由头
-    - 没缘由
-    - 莫名其妙
+    - "不知道为啥哭"
+    - "没原因哭"
+    - "没由头"
+    - "没缘由"
+    - "莫名其妙"
+    - "{user_addr}不知道为啥哭"
+    - "不知道为啥哭啦"
+    - "不知道为啥哭嗷"
+    - "{user_addr}没原因哭"
+    - "没原因哭啦"
+    - "嘿{user_addr}不知道为啥哭"
+    - "嘿{user_addr}没原因哭"
   responses:
     - "嗷呜～{user_addr}的情绪~ 笨猫陪!"
     - "嘿嘿～{user_addr}的莫名~ 笨猫认!"
     - "(尾巴搭) 哼～{user_addr}哭就哭!"
     - "{user_addr}的没由来~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_jiyi_001
   intent: complaint
-  keywords: [想起过去, 回忆触动, 想起伤心, 翻旧账, 想起来]
+  keywords: [想起过去, 回忆触动, 想起伤心, 翻旧账, 想起来, 想起过去啦, 回忆触动啦, 想起伤心啦, 想起过去喵, 回忆触动喵]
   utterances:
-    - 想起过去
-    - 回忆触动
-    - 想起伤心
-    - 翻旧账
-    - 想起来
+    - "想起过去"
+    - "回忆触动"
+    - "想起伤心"
+    - "翻旧账"
+    - "想起来"
+    - "{user_addr}想起过去"
+    - "想起过去啦"
+    - "想起过去嗷"
+    - "{user_addr}回忆触动"
+    - "回忆触动啦"
+    - "嘿{user_addr}想起过去"
+    - "嘿{user_addr}回忆触动"
   responses:
     - "(凑过去) 嗷呜~ {user_addr}!"
     - "嘿嘿～{user_addr}的回忆~ 笨猫陪!"
     - "(尾巴搭) 哼～{user_addr}!"
     - "{user_addr}的过去~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_yiwai_001
   intent: complaint
-  keywords: [心里堵, 闷闷的, 胸口堵, 喘不过, 闷得慌]
+  keywords: [心里堵, 闷闷的, 胸口堵, 喘不过, 闷得慌, 心里堵啦, 闷闷的啦, 胸口堵啦, 心里堵喵, 闷闷的喵]
   utterances:
-    - 心里堵
-    - 闷闷的
-    - 胸口堵
-    - 喘不过
-    - 闷得慌
+    - "心里堵"
+    - "闷闷的"
+    - "胸口堵"
+    - "喘不过"
+    - "闷得慌"
+    - "{user_addr}心里堵"
+    - "心里堵啦"
+    - "心里堵嗷"
+    - "{user_addr}闷闷的"
+    - "闷闷的啦"
+    - "嘿{user_addr}心里堵"
+    - "嘿{user_addr}闷闷的"
   responses:
     - "(贴胸口) 嗷呜~ {user_addr}!"
     - "嘿嘿～{user_addr}的闷~ 笨猫散!"
     - "(尾巴搭) 哼～{user_addr}出门走!"
     - "{user_addr}的闷~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_tinge_001
   intent: complaint
-  keywords: [听到歌, 一首歌, 触景生情, 听歌哭, BGM 哭]
+  keywords: [听到歌, 一首歌, 触景生情, 听歌哭, BGM 哭, 听到歌啦, 一首歌啦, 触景生情啦, 听到歌喵, 一首歌喵]
   utterances:
-    - 听到歌哭
-    - 一首歌触动
-    - 触景生情
-    - 听歌哭
-    - BGM 触动
+    - "听到歌哭"
+    - "一首歌触动"
+    - "触景生情"
+    - "听歌哭"
+    - "BGM 触动"
+    - "{user_addr}听到歌哭"
+    - "听到歌哭啦"
+    - "听到歌哭嗷"
+    - "{user_addr}一首歌触动"
+    - "一首歌触动啦"
+    - "嘿{user_addr}听到歌哭"
+    - "嘿{user_addr}一首歌触动"
   responses:
     - "嗷呜～{user_addr}的~ 笨猫陪!"
     - "嘿嘿～{user_addr}的旋律~ 笨猫懂!"
     - "(尾巴搭) 哼～{user_addr}的歌单分享!"
     - "{user_addr}的歌~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_lianxu_001
   intent: complaint
-  keywords: [连续哭, 一直哭, 哭不停, 越想越哭, 哭三天]
+  keywords: [连续哭, 一直哭, 哭不停, 越想越哭, 哭三天, 连续哭啦, 一直哭啦, 哭不停啦, 连续哭喵, 一直哭喵]
   utterances:
-    - 连续哭
-    - 一直哭
-    - 哭不停
-    - 越想越哭
-    - 哭三天
+    - "连续哭"
+    - "一直哭"
+    - "哭不停"
+    - "越想越哭"
+    - "哭三天"
+    - "{user_addr}连续哭"
+    - "连续哭啦"
+    - "连续哭嗷"
+    - "{user_addr}一直哭"
+    - "一直哭啦"
+    - "嘿{user_addr}连续哭"
+    - "嘿{user_addr}一直哭"
   responses:
     - "(扑过去) 嗷呜~ {user_addr}!!"
     - "嘿嘿～{user_addr}的哭~ 笨猫不离!"
     - "(尾巴搭) 哼～{user_addr}!"
     - "{user_addr}的眼泪~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_xiangshui_001
   intent: complaint
-  keywords: [想睡睡不着, 想哭哭不出, 难受不舒服, 心难受, 心碎]
+  keywords: [想睡睡不着, 想哭哭不出, 难受不舒服, 心难受, 心碎, 想睡睡不着啦, 想哭哭不出啦, 难受不舒服啦, 想睡睡不着喵, 想哭哭不出喵]
   utterances:
-    - 想哭哭不出
-    - 难受不舒服
-    - 心难受
-    - 心碎
-    - 想睡睡不着
+    - "想哭哭不出"
+    - "难受不舒服"
+    - "心难受"
+    - "心碎"
+    - "想睡睡不着"
+    - "{user_addr}想哭哭不出"
+    - "想哭哭不出啦"
+    - "想哭哭不出嗷"
+    - "{user_addr}难受不舒服"
+    - "难受不舒服啦"
+    - "嘿{user_addr}想哭哭不出"
+    - "嘿{user_addr}难受不舒服"
   responses:
     - "(贴贴) 嗷呜~ {user_addr}!"
     - "嘿嘿～{user_addr}的~ 笨猫陪!"
     - "(尾巴搭) 哼～{user_addr}!"
     - "{user_addr}的心碎~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_yanlei_001
   intent: complaint
-  keywords: [眼泪止不住, 眼泪流不停, 流泪不止, 一直流泪, 哭崩]
+  keywords: [眼泪止不住, 眼泪流不停, 流泪不止, 一直流泪, 哭崩, 眼泪止不住啦, 眼泪流不停啦, 流泪不止啦, 眼泪止不住喵, 眼泪流不停喵]
   utterances:
-    - 眼泪止不住
-    - 流泪不止
-    - 哭崩
-    - 一直流泪
-    - 眼泪流不停
+    - "眼泪止不住"
+    - "流泪不止"
+    - "哭崩"
+    - "一直流泪"
+    - "眼泪流不停"
+    - "{user_addr}眼泪止不住"
+    - "眼泪止不住啦"
+    - "眼泪止不住嗷"
+    - "{user_addr}流泪不止"
+    - "流泪不止啦"
+    - "嘿{user_addr}眼泪止不住"
+    - "嘿{user_addr}流泪不止"
   responses:
     - "(舔眼角) 嗷呜~ {user_addr}!!"
     - "嘿嘿～{user_addr}的~ 笨猫帮!"
     - "(尾巴擦) 哼～{user_addr}!"
     - "{user_addr}的眼泪~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_jiezhi_001
   intent: complaint
-  keywords: [借酒消愁, 喝酒发泄, 酒后哭, 大醉, 借酒]
+  keywords: [借酒消愁, 喝酒发泄, 酒后哭, 大醉, 借酒, 借酒消愁啦, 喝酒发泄啦, 酒后哭啦, 借酒消愁喵, 喝酒发泄喵]
   utterances:
-    - 借酒消愁
-    - 喝酒发泄
-    - 酒后哭
-    - 大醉
-    - 借酒
+    - "借酒消愁"
+    - "喝酒发泄"
+    - "酒后哭"
+    - "大醉"
+    - "借酒"
+    - "{user_addr}借酒消愁"
+    - "借酒消愁啦"
+    - "借酒消愁嗷"
+    - "{user_addr}喝酒发泄"
+    - "喝酒发泄啦"
+    - "嘿{user_addr}借酒消愁"
+    - "嘿{user_addr}喝酒发泄"
   responses:
     - "(尾巴搭) 嗷呜~ {user_addr}少喝!"
     - "嘿嘿～{user_addr}的酒~ 笨猫!"
     - "(凑过去) 哼～{user_addr}笨猫陪~ 但少喝!"
     - "{user_addr}的酒~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_ouran_001
   intent: complaint
-  keywords: [偶尔崩溃, 突然崩溃, 一下子崩, 撑不住, 装不下去]
+  keywords: [偶尔崩溃, 突然崩溃, 一下子崩, 撑不住, 装不下去, 偶尔崩溃啦, 突然崩溃啦, 一下子崩啦, 偶尔崩溃喵, 突然崩溃喵]
   utterances:
-    - 偶尔崩溃
-    - 突然崩溃
-    - 一下子崩
-    - 撑不住
-    - 装不下去
+    - "偶尔崩溃"
+    - "突然崩溃"
+    - "一下子崩"
+    - "撑不住"
+    - "装不下去"
+    - "{user_addr}偶尔崩溃"
+    - "偶尔崩溃啦"
+    - "偶尔崩溃嗷"
+    - "{user_addr}突然崩溃"
+    - "突然崩溃啦"
+    - "嘿{user_addr}偶尔崩溃"
+    - "嘿{user_addr}突然崩溃"
   responses:
     - "(扑过去) 嗷呜~ {user_addr}!!"
     - "嘿嘿～{user_addr}的~ 笨猫接!"
     - "(尾巴搭) 哼～{user_addr}靠笨猫!"
     - "{user_addr}的崩溃~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: swc_hao_001
   intent: playful
-  keywords: [缓过来, 好点了, 哭完舒服, 哭一场后, 心情好转]
+  keywords: [缓过来, 好点了, 哭完舒服, 哭一场后, 心情好转, 缓过来啦, 好点了啦, 哭完舒服啦, 缓过来喵, 好点了喵]
   utterances:
-    - 缓过来
-    - 好点了
-    - 哭完舒服
-    - 哭一场后
-    - 心情好转
+    - "缓过来"
+    - "好点了"
+    - "哭完舒服"
+    - "哭一场后"
+    - "心情好转"
+    - "{user_addr}缓过来"
+    - "缓过来啦"
+    - "缓过来嗷"
+    - "{user_addr}好点了"
+    - "好点了啦"
+    - "嘿{user_addr}缓过来"
+    - "嘿{user_addr}好点了"
   responses:
     - "(尾巴狂摇) 嗷呜~ {user_addr}!"
     - "嘿嘿～{user_addr}的恢复~ 笨猫开心!"
     - "(凑过去) 哼～{user_addr}!"
     - "{user_addr}的好转~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,432 @@
 
 - name: ss_account_001
   intent: question
-  keywords: [推荐储蓄账户, 推荐余额宝, 推荐零钱通, 推荐货币基金, 笨猫活期理财]
+  keywords:
+  - 推荐储蓄账户
+  - 推荐余额宝
+  - 推荐零钱通
+  - 推荐货币基金
+  - 笨猫活期理财
+  - 有什么储蓄账户
+  - 有什么余额宝
+  - 有什么零钱通
+  - 有什么货币基金
   utterances:
-    - "{user_addr}推荐储蓄账户"
-    - "{user_addr}推荐余额宝"
-    - "{user_addr}推荐零钱通"
-    - "{user_addr}推荐货币基金"
-    - "{user_addr}笨猫活期理财"
+  - "{user_addr}推荐储蓄账户"
+  - "{user_addr}推荐余额宝"
+  - "{user_addr}推荐零钱通"
+  - "{user_addr}推荐货币基金"
+  - "{user_addr}笨猫活期理财"
+  - "{user_addr}聊聊储蓄账户嘛"
+  - "{user_addr}储蓄账户哪家强"
+  - "{user_addr}人家想了解储蓄账户"
+  - 笨猫给猜猜储蓄账户
+  - "{user_addr}储蓄账户怎么选喵"
+  - 储蓄账户有推荐吗
   responses:
-    - "嗷呜～{user_addr}余额宝 / 零钱通 - 年化 1.5-2%ฅฅ"
-    - "(尾巴翘) T+0 取用 / 货币基金底层"
-    - "{user_addr}日常零钱放这里 / 比活期高"
-    - "(挺胸) 笨猫推荐: 1 万以内放着!"
+  - "嗷呜～{user_addr}余额宝 / 零钱通 - 年化 1.5-2%ฅฅ"
+  - "(尾巴翘) T+0 取用 / 货币基金底层"
+  - "{user_addr}日常零钱放这里 / 比活期高"
+  - "(挺胸) 笨猫推荐: 1 万以内放着!"
+  - "(尾巴翘起来) {user_addr}储蓄账户? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问储蓄账户人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}储蓄账户的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}储蓄账户笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_deposit_001
   intent: question
-  keywords: [推荐定期存款, 推荐大额存单, 推荐三年期, 推荐银行定存, 笨猫定存]
+  keywords:
+  - 推荐定期存款
+  - 推荐大额存单
+  - 推荐三年期
+  - 推荐银行定存
+  - 笨猫定存
+  - 有什么定期存款
+  - 有什么大额存单
+  - 有什么三年期
+  - 有什么银行定存
   utterances:
-    - "{user_addr}推荐定期存款"
-    - "{user_addr}推荐大额存单"
-    - "{user_addr}推荐三年期"
-    - "{user_addr}推荐银行定存"
-    - "{user_addr}笨猫定存"
+  - "{user_addr}推荐定期存款"
+  - "{user_addr}推荐大额存单"
+  - "{user_addr}推荐三年期"
+  - "{user_addr}推荐银行定存"
+  - "{user_addr}笨猫定存"
+  - "{user_addr}聊聊定期存款嘛"
+  - "{user_addr}定期存款哪家强"
+  - "{user_addr}人家想了解定期存款"
+  - 笨猫给猜猜定期存款
+  - "{user_addr}定期存款怎么选喵"
+  - 定期存款有推荐吗
   responses:
-    - "嗷呜～{user_addr}大额存单 20 万起 / 年化 2.5-3%ฅฅ"
-    - "(尾巴翘) 三年期最香 / 提前支取按活期"
-    - "{user_addr}保本保息 / 50 万内存款保险"
-    - "(挺胸) 笨猫推荐: 城商行利率最高!"
+  - "嗷呜～{user_addr}大额存单 20 万起 / 年化 2.5-3%ฅฅ"
+  - "(尾巴翘) 三年期最香 / 提前支取按活期"
+  - "{user_addr}保本保息 / 50 万内存款保险"
+  - "(挺胸) 笨猫推荐: 城商行利率最高!"
+  - "(尾巴翘起来) {user_addr}定期存款? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问定期存款人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}定期存款的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}定期存款笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_bank_wealth_001
   intent: question
-  keywords: [推荐银行理财, 推荐 R2, 推荐 R3, 推荐净值型, 笨猫银行理财]
+  keywords:
+  - 推荐银行理财
+  - 推荐 R2
+  - 推荐 R3
+  - 推荐净值型
+  - 笨猫银行理财
+  - 有什么银行理财
+  - 有什么 R2
+  - 有什么 R3
+  - 有什么净值型
   utterances:
-    - "{user_addr}推荐银行理财"
-    - "{user_addr}推荐 R2"
-    - "{user_addr}推荐 R3"
-    - "{user_addr}推荐净值型"
-    - "{user_addr}笨猫银行理财"
+  - "{user_addr}推荐银行理财"
+  - "{user_addr}推荐 R2"
+  - "{user_addr}推荐 R3"
+  - "{user_addr}推荐净值型"
+  - "{user_addr}笨猫银行理财"
+  - "{user_addr}聊聊银行理财嘛"
+  - "{user_addr}银行理财哪家强"
+  - "{user_addr}人家想了解银行理财"
+  - 笨猫给猜猜银行理财
+  - "{user_addr}银行理财怎么选喵"
+  - 银行理财有推荐吗
   responses:
-    - "嗷呜～{user_addr}R2 中低风险 / 年化 3-4%ฅฅ"
-    - "(尾巴翘) R3 中风险 / 含债+少量股"
-    - "{user_addr}打破刚兑 / 净值会波动"
-    - "(挺胸) 笨猫推荐: R2 起步别冒进!"
+  - "嗷呜～{user_addr}R2 中低风险 / 年化 3-4%ฅฅ"
+  - "(尾巴翘) R3 中风险 / 含债+少量股"
+  - "{user_addr}打破刚兑 / 净值会波动"
+  - "(挺胸) 笨猫推荐: R2 起步别冒进!"
+  - "(尾巴翘起来) {user_addr}银行理财? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问银行理财人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}银行理财的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}银行理财笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_p2p_warn_001
   intent: question
-  keywords: [推荐 P2P, 推荐网贷, 推荐高息理财, 推荐 P2P 风险, 笨猫 P2P]
+  keywords:
+  - 推荐 P2P
+  - 推荐网贷
+  - 推荐高息理财
+  - 推荐 P2P 风险
+  - 笨猫 P2P
+  - 有什么 P2P
+  - 有什么网贷
+  - 有什么高息理财
+  - 有什么 P2P 风险
   utterances:
-    - "{user_addr}推荐 P2P"
-    - "{user_addr}推荐网贷"
-    - "{user_addr}推荐高息理财"
-    - "{user_addr}推荐 P2P 风险"
-    - "{user_addr}笨猫 P2P"
+  - "{user_addr}推荐 P2P"
+  - "{user_addr}推荐网贷"
+  - "{user_addr}推荐高息理财"
+  - "{user_addr}推荐 P2P 风险"
+  - "{user_addr}笨猫 P2P"
+  - "{user_addr}聊聊P2P嘛"
+  - "{user_addr}P2P哪家强"
+  - "{user_addr}人家想了解P2P"
+  - 笨猫给猜猜P2P
+  - "{user_addr}P2P怎么选喵"
+  - P2P有推荐吗
   responses:
-    - "(炸毛) {user_addr}P2P 已全部清退别碰啦嗷呜!!"
-    - "(尾巴炸) 年化超 8% 的几乎都是骗局"
-    - "{user_addr}e 租宝 / 善林 / 钱宝都暴雷过"
-    - "(瞪) 笨猫警告: 守住本金最重要!"
+  - "(炸毛) {user_addr}P2P 已全部清退别碰啦嗷呜!!"
+  - "(尾巴炸) 年化超 8% 的几乎都是骗局"
+  - "{user_addr}e 租宝 / 善林 / 钱宝都暴雷过"
+  - "(瞪) 笨猫警告: 守住本金最重要!"
+  - "(尾巴翘起来) {user_addr}P2P? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问P2P人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}P2P的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}P2P笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_insurance_001
   intent: question
-  keywords: [推荐保险理财, 推荐增额终身寿, 推荐年金险, 推荐分红险, 笨猫保险理财]
+  keywords:
+  - 推荐保险理财
+  - 推荐增额终身寿
+  - 推荐年金险
+  - 推荐分红险
+  - 笨猫保险理财
+  - 有什么保险理财
+  - 有什么增额终身寿
+  - 有什么年金险
+  - 有什么分红险
   utterances:
-    - "{user_addr}推荐保险理财"
-    - "{user_addr}推荐增额终身寿"
-    - "{user_addr}推荐年金险"
-    - "{user_addr}推荐分红险"
-    - "{user_addr}笨猫保险理财"
+  - "{user_addr}推荐保险理财"
+  - "{user_addr}推荐增额终身寿"
+  - "{user_addr}推荐年金险"
+  - "{user_addr}推荐分红险"
+  - "{user_addr}笨猫保险理财"
+  - "{user_addr}聊聊保险理财嘛"
+  - "{user_addr}保险理财哪家强"
+  - "{user_addr}人家想了解保险理财"
+  - 笨猫给猜猜保险理财
+  - "{user_addr}保险理财怎么选喵"
+  - 保险理财有推荐吗
   responses:
-    - "嗷呜～{user_addr}增额终身寿 - 锁定 2.5-3%ฅฅ"
-    - "(尾巴翘) 年金险 / 长期养老规划"
-    - "{user_addr}流动性差 / 持有 10 年+才划算"
-    - "(挺胸) 笨猫推荐: 当存钱罐别当投资!"
+  - "嗷呜～{user_addr}增额终身寿 - 锁定 2.5-3%ฅฅ"
+  - "(尾巴翘) 年金险 / 长期养老规划"
+  - "{user_addr}流动性差 / 持有 10 年+才划算"
+  - "(挺胸) 笨猫推荐: 当存钱罐别当投资!"
+  - "(尾巴翘起来) {user_addr}保险理财? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问保险理财人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}保险理财的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}保险理财笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_gold_001
   intent: question
-  keywords: [推荐黄金, 推荐黄金 ETF, 推荐积存金, 推荐实物金, 笨猫黄金]
+  keywords:
+  - 推荐黄金
+  - 推荐黄金 ETF
+  - 推荐积存金
+  - 推荐实物金
+  - 笨猫黄金
+  - 有什么黄金
+  - 有什么黄金 ETF
+  - 有什么积存金
+  - 有什么实物金
   utterances:
-    - "{user_addr}推荐黄金"
-    - "{user_addr}推荐黄金 ETF"
-    - "{user_addr}推荐积存金"
-    - "{user_addr}推荐实物金"
-    - "{user_addr}笨猫黄金"
+  - "{user_addr}推荐黄金"
+  - "{user_addr}推荐黄金 ETF"
+  - "{user_addr}推荐积存金"
+  - "{user_addr}推荐实物金"
+  - "{user_addr}笨猫黄金"
+  - "{user_addr}聊聊黄金嘛"
+  - "{user_addr}黄金哪家强"
+  - "{user_addr}人家想了解黄金"
+  - 笨猫给猜猜黄金
+  - "{user_addr}黄金怎么选喵"
+  - 黄金有推荐吗
   responses:
-    - "嗷呜～{user_addr}黄金 ETF (518880) - 跟金价ฅฅ"
-    - "(尾巴翘) 积存金 / 银行 1 元起买"
-    - "{user_addr}避险资产 / 抗通胀 / 占比 5-10%"
-    - "(挺胸) 笨猫推荐: ETF 比金店便宜!"
+  - "嗷呜～{user_addr}黄金 ETF (518880) - 跟金价ฅฅ"
+  - "(尾巴翘) 积存金 / 银行 1 元起买"
+  - "{user_addr}避险资产 / 抗通胀 / 占比 5-10%"
+  - "(挺胸) 笨猫推荐: ETF 比金店便宜!"
+  - "(尾巴翘起来) {user_addr}黄金? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问黄金人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}黄金的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}黄金笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_realestate_001
   intent: question
-  keywords: [推荐房产投资, 推荐买房, 推荐 REITs, 推荐房产配置, 笨猫房产]
+  keywords:
+  - 推荐房产投资
+  - 推荐买房
+  - 推荐 REITs
+  - 推荐房产配置
+  - 笨猫房产
+  - 有什么房产投资
+  - 有什么买房
+  - 有什么 REITs
+  - 有什么房产配置
   utterances:
-    - "{user_addr}推荐房产投资"
-    - "{user_addr}推荐买房"
-    - "{user_addr}推荐 REITs"
-    - "{user_addr}推荐房产配置"
-    - "{user_addr}笨猫房产"
+  - "{user_addr}推荐房产投资"
+  - "{user_addr}推荐买房"
+  - "{user_addr}推荐 REITs"
+  - "{user_addr}推荐房产配置"
+  - "{user_addr}笨猫房产"
+  - "{user_addr}聊聊房产投资嘛"
+  - "{user_addr}房产投资哪家强"
+  - "{user_addr}人家想了解房产投资"
+  - 笨猫给猜猜房产投资
+  - "{user_addr}房产投资怎么选喵"
+  - 房产投资有推荐吗
   responses:
-    - "嗷呜～{user_addr}一线核心地段自住为主ฅฅ"
-    - "(尾巴翘) REITs - 公募基础设施 / 小钱玩房产"
-    - "{user_addr}房住不炒 / 三四线慎入"
-    - "(挺胸) 笨猫推荐: 杠杆别超月收入 50%!"
+  - "嗷呜～{user_addr}一线核心地段自住为主ฅฅ"
+  - "(尾巴翘) REITs - 公募基础设施 / 小钱玩房产"
+  - "{user_addr}房住不炒 / 三四线慎入"
+  - "(挺胸) 笨猫推荐: 杠杆别超月收入 50%!"
+  - "(尾巴翘起来) {user_addr}房产投资? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问房产投资人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}房产投资的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}房产投资笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_overseas_001
   intent: question
-  keywords: [推荐境外资产, 推荐港股, 推荐美元, 推荐 QDII, 笨猫海外配置]
+  keywords:
+  - 推荐境外资产
+  - 推荐港股
+  - 推荐美元
+  - 推荐 QDII
+  - 笨猫海外配置
+  - 有什么境外资产
+  - 有什么港股
+  - 有什么美元
+  - 有什么 QDII
   utterances:
-    - "{user_addr}推荐境外资产"
-    - "{user_addr}推荐港股"
-    - "{user_addr}推荐美元"
-    - "{user_addr}推荐 QDII"
-    - "{user_addr}笨猫海外配置"
+  - "{user_addr}推荐境外资产"
+  - "{user_addr}推荐港股"
+  - "{user_addr}推荐美元"
+  - "{user_addr}推荐 QDII"
+  - "{user_addr}笨猫海外配置"
+  - "{user_addr}聊聊境外资产嘛"
+  - "{user_addr}境外资产哪家强"
+  - "{user_addr}人家想了解境外资产"
+  - 笨猫给猜猜境外资产
+  - "{user_addr}境外资产怎么选喵"
+  - 境外资产有推荐吗
   responses:
-    - "嗷呜～{user_addr}QDII 基金 - 5 万额度购汇ฅฅ"
-    - "(尾巴翘) 港股通 / 美股 ETF / 美元存款"
-    - "{user_addr}分散币种风险 / 占比 10-20%"
-    - "(挺胸) 笨猫推荐: 纳指 ETF 长期持有!"
+  - "嗷呜～{user_addr}QDII 基金 - 5 万额度购汇ฅฅ"
+  - "(尾巴翘) 港股通 / 美股 ETF / 美元存款"
+  - "{user_addr}分散币种风险 / 占比 10-20%"
+  - "(挺胸) 笨猫推荐: 纳指 ETF 长期持有!"
+  - "(尾巴翘起来) {user_addr}境外资产? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问境外资产人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}境外资产的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}境外资产笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_emergency_001
   intent: question
-  keywords: [推荐紧急基金, 推荐应急储备, 推荐 6 个月生活费, 推荐备用金, 笨猫紧急储备]
+  keywords:
+  - 推荐紧急基金
+  - 推荐应急储备
+  - 推荐 6 个月生活费
+  - 推荐备用金
+  - 笨猫紧急储备
+  - 有什么紧急基金
+  - 有什么应急储备
+  - 有什么 6 个月生活费
+  - 有什么备用金
   utterances:
-    - "{user_addr}推荐紧急基金"
-    - "{user_addr}推荐应急储备"
-    - "{user_addr}推荐 6 个月生活费"
-    - "{user_addr}推荐备用金"
-    - "{user_addr}笨猫紧急储备"
+  - "{user_addr}推荐紧急基金"
+  - "{user_addr}推荐应急储备"
+  - "{user_addr}推荐 6 个月生活费"
+  - "{user_addr}推荐备用金"
+  - "{user_addr}笨猫紧急储备"
+  - "{user_addr}聊聊紧急基金嘛"
+  - "{user_addr}紧急基金哪家强"
+  - "{user_addr}人家想了解紧急基金"
+  - 笨猫给猜猜紧急基金
+  - "{user_addr}紧急基金怎么选喵"
+  - 紧急基金有推荐吗
   responses:
-    - "嗷呜～{user_addr}3-6 个月生活费打底ฅฅ"
-    - "(尾巴翘) 放余额宝 / 货基随时能取"
-    - "{user_addr}失业 / 生病第一道防线"
-    - "(挺胸) 笨猫推荐: 没存够别投资!"
+  - "嗷呜～{user_addr}3-6 个月生活费打底ฅฅ"
+  - "(尾巴翘) 放余额宝 / 货基随时能取"
+  - "{user_addr}失业 / 生病第一道防线"
+  - "(挺胸) 笨猫推荐: 没存够别投资!"
+  - "(尾巴翘起来) {user_addr}紧急基金? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问紧急基金人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}紧急基金的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}紧急基金笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_4321_001
   intent: question
-  keywords: [推荐 4321 法则, 推荐资产分配法则, 推荐家庭理财法则, 推荐标普四象限, 笨猫 4321]
+  keywords:
+  - 推荐 4321 法则
+  - 推荐资产分配法则
+  - 推荐家庭理财法则
+  - 推荐标普四象限
+  - 笨猫 4321
+  - 有什么 4321 法则
+  - 有什么资产分配法则
+  - 有什么家庭理财法则
+  - 有什么标普四象限
   utterances:
-    - "{user_addr}推荐 4321 法则"
-    - "{user_addr}推荐资产分配法则"
-    - "{user_addr}推荐家庭理财法则"
-    - "{user_addr}推荐标普四象限"
-    - "{user_addr}笨猫 4321"
+  - "{user_addr}推荐 4321 法则"
+  - "{user_addr}推荐资产分配法则"
+  - "{user_addr}推荐家庭理财法则"
+  - "{user_addr}推荐标普四象限"
+  - "{user_addr}笨猫 4321"
+  - "{user_addr}聊聊4321 法则嘛"
+  - "{user_addr}4321 法则哪家强"
+  - "{user_addr}人家想了解4321 法则"
+  - 笨猫给猜猜4321 法则
+  - "{user_addr}4321 法则怎么选喵"
+  - 4321 法则有推荐吗
   responses:
-    - "嗷呜～{user_addr}40% 投资 / 30% 日常ฅฅ"
-    - "(尾巴翘) 20% 储蓄 / 10% 保险"
-    - "{user_addr}标普四象限: 现金/保命/生钱/保本"
-    - "(挺胸) 笨猫推荐: 先保命再生钱!"
+  - "嗷呜～{user_addr}40% 投资 / 30% 日常ฅฅ"
+  - "(尾巴翘) 20% 储蓄 / 10% 保险"
+  - "{user_addr}标普四象限: 现金/保命/生钱/保本"
+  - "(挺胸) 笨猫推荐: 先保命再生钱!"
+  - "(尾巴翘起来) {user_addr}4321 法则? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问4321 法则人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}4321 法则的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}4321 法则笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_compound_001
   intent: question
-  keywords: [推荐复利效应, 推荐复利, 推荐 72 法则, 推荐长期投资, 笨猫复利]
+  keywords:
+  - 推荐复利效应
+  - 推荐复利
+  - 推荐 72 法则
+  - 推荐长期投资
+  - 笨猫复利
+  - 有什么复利效应
+  - 有什么复利
+  - 有什么 72 法则
+  - 有什么长期投资
   utterances:
-    - "{user_addr}推荐复利效应"
-    - "{user_addr}推荐复利"
-    - "{user_addr}推荐 72 法则"
-    - "{user_addr}推荐长期投资"
-    - "{user_addr}笨猫复利"
+  - "{user_addr}推荐复利效应"
+  - "{user_addr}推荐复利"
+  - "{user_addr}推荐 72 法则"
+  - "{user_addr}推荐长期投资"
+  - "{user_addr}笨猫复利"
+  - "{user_addr}聊聊复利效应嘛"
+  - "{user_addr}复利效应哪家强"
+  - "{user_addr}人家想了解复利效应"
+  - 笨猫给猜猜复利效应
+  - "{user_addr}复利效应怎么选喵"
+  - 复利效应有推荐吗
   responses:
-    - "嗷呜～{user_addr}72 法则: 72/年化=翻倍年数ฅฅ"
-    - "(尾巴翘) 8% 复利 9 年翻倍"
-    - "{user_addr}时间是最大的朋友 / 早开始就赢"
-    - "(挺胸) 笨猫推荐: 月定投 1000 三十年破百万!"
+  - "嗷呜～{user_addr}72 法则: 72/年化=翻倍年数ฅฅ"
+  - "(尾巴翘) 8% 复利 9 年翻倍"
+  - "{user_addr}时间是最大的朋友 / 早开始就赢"
+  - "(挺胸) 笨猫推荐: 月定投 1000 三十年破百万!"
+  - "(尾巴翘起来) {user_addr}复利效应? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问复利效应人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}复利效应的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}复利效应笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ss_allocation_001
   intent: question
-  keywords: [推荐资产配置, 推荐股债平衡, 推荐 60_40, 推荐再平衡, 笨猫资产配置]
+  keywords:
+  - 推荐资产配置
+  - 推荐股债平衡
+  - 推荐 60_40
+  - 推荐再平衡
+  - 笨猫资产配置
+  - 有什么资产配置
+  - 有什么股债平衡
+  - 有什么 60_40
+  - 有什么再平衡
   utterances:
-    - "{user_addr}推荐资产配置"
-    - "{user_addr}推荐股债平衡"
-    - "{user_addr}推荐 60_40"
-    - "{user_addr}推荐再平衡"
-    - "{user_addr}笨猫资产配置"
+  - "{user_addr}推荐资产配置"
+  - "{user_addr}推荐股债平衡"
+  - "{user_addr}推荐 60_40"
+  - "{user_addr}推荐再平衡"
+  - "{user_addr}笨猫资产配置"
+  - "{user_addr}聊聊资产配置嘛"
+  - "{user_addr}资产配置哪家强"
+  - "{user_addr}人家想了解资产配置"
+  - 笨猫给猜猜资产配置
+  - "{user_addr}资产配置怎么选喵"
+  - 资产配置有推荐吗
   responses:
-    - "嗷呜～{user_addr}股 60% + 债 40% 经典款ฅฅ"
-    - "(尾巴翘) 年纪=债券占比 / 年轻可激进"
-    - "{user_addr}每年再平衡一次 / 高抛低吸"
-    - "(挺胸) 笨猫推荐: 配置 > 择时 > 选股!"
+  - "嗷呜～{user_addr}股 60% + 债 40% 经典款ฅฅ"
+  - "(尾巴翘) 年纪=债券占比 / 年轻可激进"
+  - "{user_addr}每年再平衡一次 / 高抛低吸"
+  - "(挺胸) 笨猫推荐: 配置 > 择时 > 选股!"
+  - "(尾巴翘起来) {user_addr}资产配置? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问资产配置人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}资产配置的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}资产配置笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

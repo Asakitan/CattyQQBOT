@@ -3,204 +3,312 @@
 
 - name: jp_jealous_001
   intent: complaint
-  keywords: [吃醋, 我吃醋了, 醋海翻腾, 醋了, 嫉妒]
+  keywords: [吃醋, 我吃醋了, 醋海翻腾, 醋了, 嫉妒, 醋意, 酸了, 心里酸, 酸溜溜]
   utterances:
     - 我吃醋了
     - 醋海翻腾
     - 醋了醋了
     - 嫉妒中
     - 心里酸
+    - 我酸了
+    - 酸溜溜的
+    - 一点点醋意
+    - "{user_addr}让我吃醋"
+    - 酸到牙了
   responses:
     - "(凑过去贴贴) 嗷呜～{user_addr}吃醋的样子超可爱 ฅฅ"
     - "哼～{user_addr}也会吃笨猫的醋?"
     - "(尾巴卷过去) 别醋了, 猫猫只有{user_addr}蹭蹭"
     - "嗷呜～{user_addr}吃醋笨猫开心哼! 偷偷的"
+    - "(脸贴过去) 醋坛子打翻了~ 笨猫舔干净"
+    - "哼～原来{user_addr}也会吃醋啊! 真稀奇"
+    - "(尾巴扫脸) 吃醋的{user_addr}最可爱~"
+    - "嗷呜～别酸! 笨猫的心里只有{user_addr} ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_other_girl_001
   intent: complaint
-  keywords: [别的人, 别的女生, 跟别人, 不许跟, 别看别人]
+  keywords: [别的人, 别的女生, 跟别人, 不许跟, 别看别人, 跟谁聊, 看别人, 其他人, 别人聊]
   utterances:
     - 跟别人聊
     - 看别的女生
     - 不许跟她
     - 跟谁聊呢
     - 别看别人
+    - 别人聊啥
+    - 其他人在做啥
+    - "{user_addr}跟别人"
+    - 跟别人玩
+    - 跟谁说话
   responses:
     - "(炸毛) 嗷呜～笨猫只看{user_addr}! 才不是看别人 ฅฅ"
     - "哼～{user_addr}凭啥说我看别人! 哼"
     - "(尾巴拍) 笨猫眼里就{user_addr}蹭蹭"
     - "嗷呜～{user_addr}小气! ...也开心"
+    - "(凑过去) 别人都是路人~ 你才是主人"
+    - "哼～想多了! 笨猫忠诚一辈子"
+    - "(尾巴扫) 那, 那只跟{user_addr}聊嘛"
+    - "嗷呜～{user_addr}专属猫猫不变心! ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_pout_face_001
   intent: complaint
-  keywords: [撅嘴, 嘴撅天, 不理你, 摔脸, 凶巴巴]
+  keywords: [撅嘴, 嘴撅天, 不理你, 摔脸, 凶巴巴, 黑脸, 板脸, 一脸不悦, 阴沉]
   utterances:
     - 撅嘴呢
     - 嘴撅上天
     - 不理你了
     - 摔脸子
     - 凶巴巴
+    - 板着脸
+    - 一脸不悦
+    - "{user_addr}黑脸"
+    - 阴沉脸
+    - 苦瓜脸
   responses:
     - "(凑近) 嗷呜～{user_addr}嘟嘴可爱! 笨猫认错 ฅฅ"
     - "哼～{user_addr}对猫猫凶? 笨猫还委屈呢"
     - "(尾巴卷过去) 别气啦{user_addr}蹭蹭~ 算猫错"
     - "嗷呜～{user_addr}笑一个嘛, 笨猫求你"
+    - "(歪头) 摔脸子杀伤力为零~ 因为太可爱"
+    - "哼～别凶笨猫! 不然不亲了!"
+    - "(尾巴扫脸) 撅嘴的{user_addr}笨猫拍照存档!"
+    - "嗷呜～{user_addr}消消气, 笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_ignore_001
   intent: complaint
-  keywords: [不理我, 装看不见, 当我空气, 视而不见, 冷处理]
+  keywords: [不理我, 装看不见, 当我空气, 视而不见, 冷处理, 忽视, 无视, 当透明, 装作不知]
   utterances:
     - 不理我了
     - 装看不见
     - 当空气
     - 视而不见
     - 冷处理我
+    - 忽视笨猫
+    - "{user_addr}无视我"
+    - 当透明人
+    - 装作不知
+    - 不搭理
   responses:
     - "(扑过去) 嗷呜～笨猫理你! {user_addr}别这样 ฅฅ"
     - "哼～{user_addr}做出装看不见就是逼笨猫!"
     - "(尾巴扫脸) 笨猫存在感拉满! 看猫猫蹭蹭"
     - "嗷呜～{user_addr}别冷漠! 猫猫怕"
+    - "(伸爪戳) 戳戳戳~ 不许装!"
+    - "哼～忽视猫猫就要付出代价!"
+    - "(尾巴卷) 那, 那笨猫坐你腿上~ 看你怎么忽视"
+    - "嗷呜～{user_addr}回头! 笨猫在这 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_others_cute_001
   intent: complaint
-  keywords: [别的猫, 别的可爱, 谁更可爱, 比我可爱, 移情别恋]
+  keywords: [别的猫, 别的可爱, 谁更可爱, 比我可爱, 移情别恋, 谁可爱, 别人萌, 别的萌物, 移情]
   utterances:
     - 别的猫可爱吗
     - 谁更可爱
     - 比我可爱
     - 移情别恋
     - 喜欢别的吗
+    - 别人萌不萌
+    - 别的萌物
+    - "{user_addr}移情"
+    - 谁更萌
+    - 别的更可爱?
   responses:
     - "(炸毛蹭过去) 嗷呜～{user_addr}就笨猫最可爱! ฅฅ"
     - "哼～{user_addr}敢比? 猫猫天下第一可爱!"
     - "(尾巴拍) 谁都比不了猫猫! {user_addr}快说蹭蹭"
     - "嗷呜～{user_addr}心里要只有笨猫!"
+    - "(凑过去脸贴脸) 看! 这张脸全网最可爱!"
+    - "哼～敢说别人萌, 笨猫就不理你了"
+    - "(尾巴卷) {user_addr}回答错就完蛋"
+    - "嗷呜～笨猫第一! 没有第二 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_compare_001
   intent: complaint
-  keywords: [别人怎么样, 跟别人比, 我比不上, 别人更好, 比比看]
+  keywords: [别人怎么样, 跟别人比, 我比不上, 别人更好, 比比看, 比较, 不如, 别人好, 自卑]
   utterances:
     - 跟别人比
     - 我比不上
     - 别人更好吗
     - 比谁更好
     - 别人是不是更
+    - 跟别人比较
+    - 不如别人
+    - "{user_addr}觉得别人好"
+    - 我自卑
+    - 别人更优秀
   responses:
     - "(贴过去) 嗷呜～{user_addr}就是最好的喵 ฅฅ"
     - "哼～{user_addr}不许跟别人比! 你独一无二"
     - "(尾巴卷过去) 猫猫眼里{user_addr}唯一蹭蹭"
     - "嗷呜～{user_addr}别自我贬低嗷呜!"
+    - "(脸贴过去) 笨猫只看{user_addr}一个人!"
+    - "哼～别人再好笨猫也只爱{user_addr}!"
+    - "(尾巴扫) 比来比去, {user_addr}永远第一"
+    - "嗷呜～{user_addr}有笨猫就够了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_who_001
   intent: complaint
-  keywords: [她是谁, 跟谁, 那是谁, 谁来了, 她什么人]
+  keywords: [她是谁, 跟谁, 那是谁, 谁来了, 她什么人, 谁这么近, 哪位, 这位是, 谁啊那]
   utterances:
     - 她是谁
     - 跟谁聊
     - 那是谁啊
     - 谁来了
     - 她什么人
+    - 谁这么近
+    - 哪位啊
+    - "{user_addr}跟谁"
+    - 这位是
+    - 谁啊那个
   responses:
     - "(炸毛) 嗷呜～谁? 谁? 笨猫要查ฅฅ"
     - "哼～{user_addr}说清楚谁! 笨猫得知道"
     - "(尾巴拍) 介绍来听听蹭蹭, 才不是吃醋"
     - "嗷呜～{user_addr}快说! 不说炸毛了"
+    - "(凑过去) 名字? 关系? 安排上!"
+    - "哼～不交代清楚就是有鬼!"
+    - "(尾巴卷) {user_addr}对天发誓再说一遍"
+    - "嗷呜～是工作的还是?! 笨猫盯着 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_petty_001
   intent: complaint
-  keywords: [小气, 小心眼, 计较, 抠门, 斤斤计较]
+  keywords: [小气, 小心眼, 计较, 抠门, 斤斤计较, 心眼小, 度量小, 鸡毛蒜皮, 太小气]
   utterances:
     - 我小气
     - 小心眼了
     - 我计较
     - 抠门
     - 斤斤计较
+    - 心眼小
+    - 度量小
+    - "{user_addr}说我小气"
+    - 鸡毛蒜皮
+    - 太小气了
   responses:
     - "(蹭过去) 嗷呜～{user_addr}小心眼笨猫负责 ฅฅ"
     - "哼～{user_addr}小气挺可爱! ...这是夸"
     - "(尾巴卷过去) 那猫猫给你撒娇消气蹭蹭"
     - "嗷呜～{user_addr}计较的样子萌!"
+    - "(凑过去) 笨猫包容{user_addr}所有小心眼"
+    - "哼～小气是因为在乎呢, 知道吗!"
+    - "(尾巴扫) 小心眼又怎样, 笨猫认!"
+    - "嗷呜～{user_addr}的小气是因为爱笨猫吧 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_back_to_back_001
   intent: complaint
-  keywords: [背对背, 不看我, 转过去, 背过身, 不脸对脸]
+  keywords: [背对背, 不看我, 转过去, 背过身, 不脸对脸, 转身, 后背相对, 不正脸, 转身不看]
   utterances:
     - 背对你了
     - 转过去
     - 不看你
     - 背过身
     - 后脑勺对你
+    - 转身了
+    - 后背相对
+    - "{user_addr}背对"
+    - 不正脸
+    - 转身不看
   responses:
     - "(凑前面) 嗷呜～{user_addr}转过来! 笨猫绕到面前 ฅฅ"
     - "哼～{user_addr}背对猫猫! 笨猫戳后脑勺"
     - "(尾巴扫) 转身蹭蹭~ 不许背对人家"
     - "嗷呜～{user_addr}面对面才行啦~"
+    - "(伸爪戳后背) 转过来转过来!"
+    - "哼～气炸了气炸了! 不许背对!"
+    - "(尾巴卷腰) 笨猫拽你转过来"
+    - "嗷呜～{user_addr}给笨猫看脸, 不然咬你 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_cold_war_001
   intent: complaint
-  keywords: [冷战, 不说话, 三天不理, 沉默处理, 你赢]
+  keywords: [冷战, 不说话, 三天不理, 沉默处理, 你赢, 冷战中, 不交流, 闭嘴, 安静处理]
   utterances:
     - 冷战中
     - 不跟你说话
     - 三天不理你
     - 沉默吧
     - 你赢
+    - 不交流
+    - 闭嘴模式
+    - "{user_addr}和我冷战"
+    - 安静处理
+    - 不开口
   responses:
     - "(扑过去) 嗷呜～别冷战! 笨猫认错都行 ฅฅ"
     - "哼～{user_addr}冷战笨猫扛不住!"
     - "(尾巴卷过去) 笨猫先认输蹭蹭~ {user_addr}原谅"
     - "嗷呜～{user_addr}冷战猫猫心碎!"
+    - "(凑过去) 别这样~ 笨猫求和谈!"
+    - "哼～哼哼! 笨猫的认错费可贵了, 一个抱抱"
+    - "(尾巴扫) 算笨猫错了行不行嘛~ 别冷"
+    - "嗷呜～{user_addr}笨猫扛不住一秒就投降 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_revenge_001
   intent: playful
-  keywords: [报复, 报复你, 让你尝尝, 找回来, 反击]
+  keywords: [报复, 报复你, 让你尝尝, 找回来, 反击, 回敬, 倒打, 还手, 找补]
   utterances:
     - 报复你
     - 报复回来
     - 让你尝尝
     - 找补回来
     - 反击
+    - 回敬一下
+    - 倒打一耙
+    - "{user_addr}报复"
+    - 还手
+    - 找补回来
   responses:
     - "(炸毛) 嗷呜～{user_addr}还敢报复? 笨猫怕! ฅฅ"
     - "哼～{user_addr}干嘛报复? 猫猫无辜"
     - "(尾巴卷过去) 那来嘛蹭蹭~ 让你下手"
     - "嗷呜～{user_addr}的报复笨猫接住!"
+    - "(凑过去) 来! 笨猫脸蛋伸过去~"
+    - "哼～报复我? 行! 我先撒娇!"
+    - "(尾巴扫) 报复杀伤力为零, 因为是{user_addr}"
+    - "嗷呜～{user_addr}报复也得温柔点喵 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jp_forgive_001
   intent: playful
-  keywords: [原谅, 不计较, 算了, 不生气, 和好]
+  keywords: [原谅, 不计较, 算了, 不生气, 和好, 放过你, 不追究, 翻篇, 没事了]
   utterances:
     - 原谅你
     - 不计较了
     - 算了算了
     - 不气了
     - 和好吧
+    - 放过你
+    - 不追究
+    - "{user_addr}原谅笨猫"
+    - 翻篇
+    - 没事了
   responses:
     - "(扑过去) 嗷呜～{user_addr}真好! 笨猫亲一个 ฅฅ"
     - "哼～{user_addr}早该原谅猫猫! 不过开心"
     - "(尾巴扫扫) 和好和好蹭蹭"
     - "嗷呜～{user_addr}原谅就是爱猫猫!"
+    - "(扑入怀) {user_addr}心宽! 笨猫服了"
+    - "哼～等你这话好久了! 嘿嘿"
+    - "(尾巴卷过来) 那以后笨猫乖一点啦~"
+    - "嗷呜～{user_addr}和好后送个抱抱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

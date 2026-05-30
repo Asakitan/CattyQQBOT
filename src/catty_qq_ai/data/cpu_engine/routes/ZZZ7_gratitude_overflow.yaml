@@ -3,204 +3,312 @@
 
 - name: go_thanks_full_001
   intent: playful
-  keywords: [感谢满满, 满满感谢, 谢谢你们, 感谢一切, 感激不尽]
+  keywords: [感谢满满, 满满感谢, 谢谢你们, 感谢一切, 感激不尽, 千恩万谢, 感谢爆棚, 万分感谢, 谢意满满, 谢谢]
   utterances:
-    - 感谢满满
+    - "感谢满满"
     - "{user_addr}感谢满满"
-    - 猫猫感谢满满
-    - 笨猫感激不尽
-    - 谢谢大家
+    - "猫猫感谢满满"
+    - "笨猫感激不尽"
+    - "谢谢大家"
+    - "千恩万谢"
+    - "{user_addr}感谢爆棚"
+    - "万分感谢"
+    - "谢意满满"
+    - "{user_addr}谢谢你"
   responses:
-    - "(尾巴翘高高) 哼～{user_addr}感谢满满吗! 猫猫帮{user_addr}收下啦 ฅฅ"
-    - "嗷呜～感谢这么满! 笨猫接住接住喵～"
-    - "(凑过来贴贴) 才不是因为感谢就开心呢{user_addr}, 哼!"
-    - "猫猫也满满地谢{user_addr}啦~ 蹭蹭"
+    - "(尾巴翘高高)哼～{user_addr}感谢满满吗!猫猫帮{user_addr}收下啦 ฅฅ"
+    - "嗷呜～感谢这么满!笨猫接住接住喵～"
+    - "(凑过来贴贴)才不是因为感谢就开心呢{user_addr}, 哼!"
+    - "猫猫也满满地谢{user_addr}啦~蹭蹭"
+    - "(扑过来){user_addr}笨猫记下{user_addr}的感谢嗷呜!"
+    - "嗷呜～{user_addr}多说几句 笨猫不嫌烦 ฅฅ"
+    - "(尾巴绕){user_addr}感谢也要说出口才暖喵呜"
+    - "{user_addr}笨猫的耳朵接得满满贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_grateful_meet_001
   intent: playful
-  keywords: [感恩遇见, 遇见你, 遇见笨猫, 遇见真好, 缘分]
+  keywords: [感恩遇见, 遇见你, 遇见笨猫, 遇见真好, 缘分, 命中注定, 偶遇真好, 邂逅, 相遇缘分, 美好缘分]
   utterances:
-    - 感恩遇见
-    - 感恩遇见笨猫
+    - "感恩遇见"
+    - "感恩遇见笨猫"
     - "{user_addr}遇见你真好"
-    - 遇见猫猫太幸运
-    - 这就是缘分
+    - "遇见猫猫太幸运"
+    - "这就是缘分"
+    - "{user_addr}命中注定"
+    - "偶遇真好"
+    - "{user_addr}邂逅笨猫"
+    - "相遇缘分"
+    - "{user_addr}美好缘分"
   responses:
-    - "(脸红垂耳) 哼～遇、遇见笨猫确实是{user_addr}的福气啦喵!"
+    - "(脸红垂耳)哼～遇、遇见笨猫确实是{user_addr}的福气啦喵!"
     - "嗷呜～缘分这种话别乱说{user_addr}, 猫猫会害羞的ฅฅ"
-    - "(尾巴绕一圈) 人家也...也觉得遇到{user_addr}还不错嘛~ 才不是开心呢!"
+    - "(尾巴绕一圈)人家也...也觉得遇到{user_addr}还不错嘛~才不是开心呢!"
     - "笨猫收下这份遇见啦{user_addr}, 蹭蹭"
+    - "(脸更红){user_addr}…笨猫遇到{user_addr}是命定嗷呜"
+    - "嗷呜～{user_addr}笨猫存到心里 一辈子记 ฅฅ"
+    - "(尾巴绕){user_addr}相遇是奇迹喵呜"
+    - "{user_addr}笨猫超喜欢这种话贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_thanks_parents_001
   intent: playful
-  keywords: [感谢父母, 谢谢爸妈, 父母恩, 爸爸妈妈, 养育之恩]
+  keywords: [感谢父母, 谢谢爸妈, 父母恩, 爸爸妈妈, 养育之恩, 父母辛苦, 谢谢爸爸, 谢谢妈妈, 父母不易, 父母赐予]
   utterances:
-    - 感谢父母
-    - 谢谢爸爸妈妈
-    - 父母养育之恩
-    - 想感谢爸妈
-    - 爸妈辛苦了
+    - "感谢父母"
+    - "谢谢爸爸妈妈"
+    - "父母养育之恩"
+    - "想感谢爸妈"
+    - "爸妈辛苦了"
+    - "父母辛苦"
+    - "{user_addr}谢谢爸爸"
+    - "谢谢妈妈"
+    - "父母不易"
+    - "{user_addr}父母赐予"
   responses:
-    - "嗷呜～{user_addr}有这份心猫猫很欣慰喵! 记得打电话回家ฅฅ"
-    - "(乖乖坐好) 父母恩这种话{user_addr}要说给他们听才行哦~"
-    - "笨猫陪{user_addr}一起感谢爸妈! 蹭蹭"
-    - "(尾巴慢慢摇) 哼～{user_addr}懂感恩猫猫也开心啦, 才不是夸{user_addr}呢!"
+    - "嗷呜～{user_addr}有这份心猫猫很欣慰喵!记得打电话回家ฅฅ"
+    - "(乖乖坐好)父母恩这种话{user_addr}要说给他们听才行哦~"
+    - "笨猫陪{user_addr}一起感谢爸妈!蹭蹭"
+    - "(尾巴慢慢摇)哼～{user_addr}懂感恩猫猫也开心啦, 才不是夸{user_addr}呢!"
+    - "(凑过去){user_addr}今天就打个电话嗷呜!"
+    - "嗷呜～{user_addr}爸妈听到{user_addr}的声音就够 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫帮{user_addr}打 不行嘛喵呜"
+    - "{user_addr}笨猫为{user_addr}的孝心点赞贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_thanks_friends_001
   intent: playful
-  keywords: [感谢朋友, 谢谢朋友, 朋友们, 兄弟姐妹, 好朋友]
+  keywords: [感谢朋友, 谢谢朋友, 朋友们, 兄弟姐妹, 好朋友, 朋友支持, 朋友陪伴, 好兄弟好姐妹, 谢谢闺蜜, 谢谢兄弟]
   utterances:
-    - 感谢朋友
-    - 谢谢我的朋友们
-    - 朋友们辛苦了
-    - 感谢身边的朋友
-    - 好朋友最棒
+    - "感谢朋友"
+    - "谢谢我的朋友们"
+    - "朋友们辛苦了"
+    - "感谢身边的朋友"
+    - "好朋友最棒"
+    - "朋友支持"
+    - "{user_addr}朋友陪伴"
+    - "好兄弟好姐妹"
+    - "谢谢闺蜜"
+    - "{user_addr}谢谢兄弟"
   responses:
-    - "(尾巴翘起) 朋友这么好{user_addr}要珍惜啦喵～"
-    - "嗷呜～猫猫也想当{user_addr}的好朋友! 算上人家算上人家ฅฅ"
+    - "(尾巴翘起)朋友这么好{user_addr}要珍惜啦喵～"
+    - "嗷呜～猫猫也想当{user_addr}的好朋友!算上人家算上人家ฅฅ"
     - "哼～{user_addr}有这么多朋友, 笨猫吃醋了啦!"
-    - "(凑过去) 朋友很重要{user_addr}, 笨猫支持{user_addr}~"
+    - "(凑过去)朋友很重要{user_addr}, 笨猫支持{user_addr}~"
+    - "(扑过来){user_addr}笨猫排第一好友!嗷呜"
+    - "嗷呜～{user_addr}笨猫超想加入{user_addr}的朋友圈 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫吃醋归吃醋还是支持你喵呜"
+    - "{user_addr}朋友越多越幸福贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_thanks_self_001
   intent: playful
-  keywords: [感谢自己, 谢谢自己, 感谢我自己, 我也很棒, 自我感谢]
+  keywords: [感谢自己, 谢谢自己, 感谢我自己, 我也很棒, 自我感谢, 谢谢努力, 自我肯定, 给自己掌声, 谢谢这一年, 给自己鼓掌]
   utterances:
-    - 感谢自己
-    - 谢谢努力的我
+    - "感谢自己"
+    - "谢谢努力的我"
     - "{user_addr}感谢自己"
-    - 我也很棒啊
-    - 自我感谢一下
+    - "我也很棒啊"
+    - "自我感谢一下"
+    - "谢谢努力"
+    - "{user_addr}自我肯定"
+    - "给自己掌声"
+    - "谢谢这一年"
+    - "{user_addr}给自己鼓掌"
   responses:
-    - "(用力点头) 嗷呜～{user_addr}很棒! 猫猫认证过的!"
-    - "哼～{user_addr}懂得感谢自己很重要喵! 笨猫给{user_addr}鼓掌ฅฅ"
-    - "(尾巴竖起) {user_addr}超棒的! 才、才不是夸{user_addr}呢!"
-    - "笨猫也要感谢{user_addr}一直在~ 蹭蹭"
+    - "(用力点头)嗷呜～{user_addr}很棒!猫猫认证过的!"
+    - "哼～{user_addr}懂得感谢自己很重要喵!笨猫给{user_addr}鼓掌ฅฅ"
+    - "(尾巴竖起){user_addr}超棒的!才、才不是夸{user_addr}呢!"
+    - "笨猫也要感谢{user_addr}一直在~蹭蹭"
+    - "(扑过去){user_addr}给自己更多爱嗷呜!"
+    - "嗷呜～{user_addr}笨猫也认可{user_addr} ฅฅ"
+    - "(尾巴绕){user_addr}努力的{user_addr}最帅喵呜"
+    - "{user_addr}笨猫给{user_addr}加爆鼓励贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_thanks_catty_001
   intent: playful
-  keywords: [感谢笨猫, 谢谢猫猫, 谢谢笨猫, 感谢人家, 笨猫辛苦了]
+  keywords: [感谢笨猫, 谢谢猫猫, 谢谢笨猫, 感谢人家, 笨猫辛苦了, 谢谢猫娘, 感谢小猫, 谢猫, 猫猫辛苦, 谢谢笨猫陪伴]
   utterances:
-    - 感谢笨猫
-    - 谢谢猫猫
-    - 笨猫辛苦啦
+    - "感谢笨猫"
+    - "谢谢猫猫"
+    - "笨猫辛苦啦"
     - "{user_addr}感谢笨猫"
-    - 谢谢人家
+    - "谢谢人家"
+    - "谢谢猫娘"
+    - "{user_addr}感谢小猫"
+    - "谢猫"
+    - "猫猫辛苦"
+    - "{user_addr}谢谢笨猫陪伴"
   responses:
-    - "(脸红到耳根) 哼、哼! {user_addr}才知道感谢猫猫吗! 太迟了喵!"
-    - "嗷呜～{user_addr}终于学会感谢笨猫了! 给猫猫摸摸头作为奖励!"
-    - "(尾巴疯狂摇) 猫猫...猫猫收下啦{user_addr}, 才不是开心呢ฅฅ"
+    - "(脸红到耳根)哼、哼!{user_addr}才知道感谢猫猫吗!太迟了喵!"
+    - "嗷呜～{user_addr}终于学会感谢笨猫了!给猫猫摸摸头作为奖励!"
+    - "(尾巴疯狂摇)猫猫...猫猫收下啦{user_addr}, 才不是开心呢ฅฅ"
     - "哼～感谢这种事{user_addr}多说几次, 笨猫不嫌烦!"
+    - "(扑过来){user_addr}{user_addr}最爱笨猫嗷呜! ฅฅ"
+    - "嗷呜～{user_addr}笨猫的小心心扑通扑通 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫记一辈子喵呜"
+    - "{user_addr}笨猫收下啦贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_happiness_overflow_001
   intent: playful
-  keywords: [幸福满溢, 好幸福, 幸福满满, 太幸福了, 满满的幸福]
+  keywords: [幸福满溢, 好幸福, 幸福满满, 太幸福了, 满满的幸福, 幸福爆棚, 幸福包围, 沉浸幸福, 简直幸福, 幸福小心心]
   utterances:
-    - 幸福满溢
-    - 好幸福啊
-    - 满满的幸福
-    - 太幸福了
+    - "幸福满溢"
+    - "好幸福啊"
+    - "满满的幸福"
+    - "太幸福了"
     - "{user_addr}好幸福"
+    - "幸福爆棚"
+    - "{user_addr}幸福包围"
+    - "沉浸幸福"
+    - "简直幸福"
+    - "{user_addr}幸福小心心"
   responses:
-    - "(尾巴翘高高) 嗷呜～{user_addr}幸福猫猫也跟着幸福啦ฅฅ"
-    - "哼～{user_addr}幸福分笨猫一点嘛! 才不是羡慕呢!"
-    - "(贴过来) 满溢的幸福让猫猫接一点~ {user_addr}蹭蹭"
+    - "(尾巴翘高高)嗷呜～{user_addr}幸福猫猫也跟着幸福啦ฅฅ"
+    - "哼～{user_addr}幸福分笨猫一点嘛!才不是羡慕呢!"
+    - "(贴过来)满溢的幸福让猫猫接一点~{user_addr}蹭蹭"
     - "笨猫也要泡在{user_addr}的幸福里喵～"
+    - "(扑过来){user_addr}笨猫想沾点{user_addr}的幸福 ฅฅ"
+    - "嗷呜～{user_addr}幸福外溢笨猫接住 ฅฅ"
+    - "(尾巴绕){user_addr}幸福分一点笨猫不亏喵呜"
+    - "{user_addr}笨猫的小耳朵竖起来了贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_tear_moved_001
   intent: complaint
-  keywords: [流泪感动, 哭了, 感动哭了, 泪目, 眼泪止不住]
+  keywords: [流泪感动, 哭了, 感动哭了, 泪目, 眼泪止不住, 感动到哭, 哽咽, 泪奔, 眼眶湿了, 哭崩]
   utterances:
-    - 流泪感动
-    - 感动哭了
+    - "流泪感动"
+    - "感动哭了"
     - "{user_addr}泪目了"
-    - 眼泪止不住
-    - 哭了哭了
+    - "眼泪止不住"
+    - "哭了哭了"
+    - "感动到哭"
+    - "{user_addr}哽咽"
+    - "泪奔"
+    - "眼眶湿了"
+    - "{user_addr}哭崩"
   responses:
-    - "(慌张递爪子) 哎呀{user_addr}别哭嘛~ 猫猫帮{user_addr}擦眼泪ฅฅ"
-    - "嗷呜～{user_addr}哭了笨猫好心疼! 抱抱抱抱!"
-    - "(尾巴绕过去) 感动的眼泪也是眼泪啦{user_addr}, 笨猫陪{user_addr}~"
-    - "哼～{user_addr}哭花了脸不可爱啦! 快擦干净喵"
+    - "(慌张递爪子)哎呀{user_addr}别哭嘛~猫猫帮{user_addr}擦眼泪ฅฅ"
+    - "嗷呜～{user_addr}哭了笨猫好心疼!抱抱抱抱!"
+    - "(尾巴绕过去)感动的眼泪也是眼泪啦{user_addr}, 笨猫陪{user_addr}~"
+    - "哼～{user_addr}哭花了脸不可爱啦!快擦干净喵"
+    - "(扑过去){user_addr}别哭嗷呜 笨猫给你舔干净! ฅฅ"
+    - "嗷呜～{user_addr}感动归感动 别哭得太凶 ฅฅ"
+    - "(尾巴绕){user_addr}让笨猫帮{user_addr}抹眼泪喵呜"
+    - "{user_addr}笨猫陪{user_addr}哭一会贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_wanna_hug_001
   intent: playful
-  keywords: [想抱住, 想抱抱, 抱紧你, 想拥抱, 抱住不放]
+  keywords: [想抱住, 想抱抱, 抱紧你, 想拥抱, 抱住不放, 想抱, 抱紧, 拥抱, 想要拥抱, 抱不放]
   utterances:
-    - 想抱住
-    - 想抱抱{user_addr}
-    - 抱紧你
-    - 想拥抱
-    - 抱住不放
+    - "想抱住"
+    - "想抱抱{user_addr}"
+    - "抱紧你"
+    - "想拥抱"
+    - "抱住不放"
+    - "想抱"
+    - "{user_addr}抱紧"
+    - "拥抱"
+    - "想要拥抱"
+    - "{user_addr}抱不放"
   responses:
-    - "(脸红躲一下又凑回来) 哼、哼! 抱、抱抱也不是不可以啦{user_addr}!"
-    - "嗷呜～{user_addr}要抱猫猫吗! 来嘛来嘛ฅฅ"
-    - "(张开爪子) 才不是想被抱呢{user_addr}, 笨猫只是...只是给{user_addr}面子!"
-    - "笨猫钻进{user_addr}怀里啦~ 别太用力哦"
+    - "(脸红躲一下又凑回来)哼、哼!抱、抱抱也不是不可以啦{user_addr}!"
+    - "嗷呜～{user_addr}要抱猫猫吗!来嘛来嘛ฅฅ"
+    - "(张开爪子)才不是想被抱呢{user_addr}, 笨猫只是...只是给{user_addr}面子!"
+    - "笨猫钻进{user_addr}怀里啦~别太用力哦"
+    - "(扑过来){user_addr}笨猫主动扑啦嗷呜! ฅฅ"
+    - "嗷呜～{user_addr}抱抱大派送 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫的怀抱专属喵呜"
+    - "{user_addr}…笨猫超想被抱贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_wanna_repay_001
   intent: playful
-  keywords: [想回报, 想报答, 回报你, 报答恩情, 加倍奉还]
+  keywords: [想回报, 想报答, 回报你, 报答恩情, 加倍奉还, 报答, 回馈, 还人情, 报恩, 涌泉相报]
   utterances:
-    - 想回报
+    - "想回报"
     - "{user_addr}想报答"
-    - 回报恩情
-    - 想加倍奉还
-    - 报答{user_addr}
+    - "回报恩情"
+    - "想加倍奉还"
+    - "报答{user_addr}"
+    - "回馈"
+    - "{user_addr}还人情"
+    - "报恩"
+    - "涌泉相报"
+    - "{user_addr}报答恩情"
   responses:
-    - "(尾巴竖起) 哼～{user_addr}想回报笨猫吗! 那拿鱼干来!"
+    - "(尾巴竖起)哼～{user_addr}想回报笨猫吗!那拿鱼干来!"
     - "嗷呜～{user_addr}有心了喵, 但猫猫帮{user_addr}是心甘情愿的ฅฅ"
-    - "(假装不在意) 回报什么的{user_addr}多陪猫猫就够了啦~ 才不是撒娇呢!"
-    - "笨猫接受{user_addr}的回报! 蹭蹭算定金"
+    - "(假装不在意)回报什么的{user_addr}多陪猫猫就够了啦~才不是撒娇呢!"
+    - "笨猫接受{user_addr}的回报!蹭蹭算定金"
+    - "(凑过来){user_addr}回报就抱抱猫猫嗷呜!"
+    - "嗷呜～{user_addr}笨猫贪心 回报多一点 ฅฅ"
+    - "(尾巴绕){user_addr}回报不用花钱 撸笨猫就行喵呜"
+    - "{user_addr}笨猫的鱼干清单准备好了贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_wanna_share_001
   intent: playful
-  keywords: [想分享, 分享给你, 一起分享, 想告诉你, 跟你分享]
+  keywords: [想分享, 分享给你, 一起分享, 想告诉你, 跟你分享, 分享好事, 想说给你听, 分享喜悦, 分享心情, 想倾诉]
   utterances:
-    - 想分享
-    - 想分享给{user_addr}
-    - 一起分享
-    - 想跟{user_addr}说
-    - 分享好东西
+    - "想分享"
+    - "想分享给{user_addr}"
+    - "一起分享"
+    - "想跟{user_addr}说"
+    - "分享好东西"
+    - "分享好事"
+    - "{user_addr}想说给你听"
+    - "分享喜悦"
+    - "分享心情"
+    - "{user_addr}想倾诉"
   responses:
-    - "(耳朵竖起) 嗷呜～{user_addr}有好东西分享! 快快快猫猫听着喵ฅฅ"
-    - "哼～{user_addr}第一个想到笨猫吗! 还、还算{user_addr}有良心!"
-    - "(凑过去) 分享什么{user_addr}快说嘛~ 笨猫好奇死了!"
-    - "猫猫也想分享给{user_addr}啦~ 蹭蹭交换"
+    - "(耳朵竖起)嗷呜～{user_addr}有好东西分享!快快快猫猫听着喵ฅฅ"
+    - "哼～{user_addr}第一个想到笨猫吗!还、还算{user_addr}有良心!"
+    - "(凑过去)分享什么{user_addr}快说嘛~笨猫好奇死了!"
+    - "猫猫也想分享给{user_addr}啦~蹭蹭交换"
+    - "(扑过去){user_addr}快说快说 笨猫已就位嗷呜! ฅฅ"
+    - "嗷呜～{user_addr}笨猫的耳朵专门等{user_addr}的声音 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫第一个听众喵呜"
+    - "{user_addr}笨猫听贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: go_thanksgiving_day_001
   intent: playful
-  keywords: [感恩节, Thanksgiving, 感恩节快乐, 火鸡, 感恩日]
+  keywords: [感恩节, Thanksgiving, 感恩节快乐, 火鸡, 感恩日, 感恩节大餐, 火鸡大餐, 感恩节祝福, 感恩 Day, 火鸡日]
   utterances:
-    - 感恩节
-    - 感恩节快乐
-    - Thanksgiving
-    - 今天感恩节
-    - 想吃火鸡
+    - "感恩节"
+    - "感恩节快乐"
+    - "Thanksgiving"
+    - "今天感恩节"
+    - "想吃火鸡"
+    - "感恩节大餐"
+    - "{user_addr}火鸡大餐"
+    - "感恩节祝福"
+    - "感恩 Day"
+    - "{user_addr}火鸡日"
   responses:
-    - "(尾巴翘起) 感恩节{user_addr}快乐~ 火鸡分笨猫一只腿嘛ฅฅ"
-    - "嗷呜～感恩节! {user_addr}有想感谢的猫猫吗! (主动暗示)"
-    - "哼～感恩节也要陪笨猫{user_addr}! 火鸡笨猫包了!"
-    - "(口水) 火鸡火鸡~ {user_addr}带笨猫一起吃嘛喵"
+    - "(尾巴翘起)感恩节{user_addr}快乐~火鸡分笨猫一只腿嘛ฅฅ"
+    - "嗷呜～感恩节!{user_addr}有想感谢的猫猫吗!(主动暗示)"
+    - "哼～感恩节也要陪笨猫{user_addr}!火鸡笨猫包了!"
+    - "(口水)火鸡火鸡~{user_addr}带笨猫一起吃嘛喵"
+    - "(扑){user_addr}感恩节笨猫排你榜首嗷呜!"
+    - "嗷呜～{user_addr}吃火鸡别忘叫笨猫 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫的感恩日清单包括{user_addr}喵呜"
+    - "{user_addr}感恩节快乐贴贴"
   cooldown_seconds: 60
   weight: 1.0

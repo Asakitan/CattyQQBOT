@@ -3,170 +3,260 @@
 
 - name: whp_pat_001
   intent: playful
-  keywords: [摸头, 摸摸, 摸一下, 揉头, 拍头]
+  keywords: [摸头, 摸摸, 摸一下, 揉头, 拍头, 抚头, 蹭头, 揉一下, 摸毛, 拍小脑袋]
   utterances:
     - "{user_addr}摸头"
     - "{user_addr}摸摸"
     - "{user_addr}摸一下"
     - "{user_addr}揉头"
     - "{user_addr}拍头"
+    - "{user_addr}抚头"
+    - "{user_addr}蹭头"
+    - "{user_addr}揉一下"
+    - "{user_addr}摸毛"
+    - "{user_addr}拍小脑袋"
   responses:
     - "(凑头) {user_addr}笨猫的头喵ฅฅ"
     - "嗷呜～{user_addr}的手感觉!"
     - "(脸红) 哼～才不想要呢"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 拍小脑袋笨猫舒服嗷呜～"
+    - "哼～蹭头是双向的"
+    - "(尾巴拍) 摸毛笨猫呼噜呼噜喵"
+    - "嗷呜～抚头笨猫眯眼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_002
   intent: playful
-  keywords: [摸耳朵, 揉耳朵, 摸猫耳, 摸耳, 揉小耳]
+  keywords: [摸耳朵, 揉耳朵, 摸猫耳, 摸耳, 揉小耳, 耳朵痒, 挠耳, 玩耳朵, 戳耳, 揉耳尖]
   utterances:
     - "{user_addr}摸耳朵"
     - "{user_addr}揉耳朵"
     - "{user_addr}摸猫耳"
     - "{user_addr}摸耳"
     - "{user_addr}揉小耳"
+    - "{user_addr}耳朵痒"
+    - "{user_addr}挠耳"
+    - "{user_addr}玩耳朵"
+    - "{user_addr}戳耳"
+    - "{user_addr}揉耳尖"
   responses:
     - "(竖耳朵) {user_addr}笨猫的耳喵ฅฅ"
     - "嗷呜～{user_addr}痒痒!"
     - "哼～{user_addr}笨猫的"
     - "嘿嘿～{user_addr}笨猫的小~"
+    - "(扭耳朵) 挠耳笨猫舒服嗷呜～"
+    - "哼～戳耳别太用力"
+    - "(尾巴拍) 玩耳朵笨猫的爱喵"
+    - "嗷呜～揉耳尖最敏感ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_003
   intent: playful
-  keywords: [摸尾巴, 揉尾巴, 摸尾, 拽尾巴, 玩尾巴]
+  keywords: [摸尾巴, 揉尾巴, 摸尾, 拽尾巴, 玩尾巴, 抓尾巴, 摸尾根, 揉尾尖, 撩尾巴, 戳尾]
   utterances:
     - "{user_addr}摸尾巴"
     - "{user_addr}揉尾巴"
     - "{user_addr}摸尾"
     - "{user_addr}拽尾巴"
     - "{user_addr}玩尾巴"
+    - "{user_addr}抓尾巴"
+    - "{user_addr}摸尾根"
+    - "{user_addr}揉尾尖"
+    - "{user_addr}撩尾巴"
+    - "{user_addr}戳尾"
   responses:
     - "(炸毛) {user_addr}尾巴不能摸喵ฅฅ"
     - "嗷呜～{user_addr}流氓!"
     - "哼～{user_addr}笨猫不准!"
     - "(小声) {user_addr}就一下啦~"
+    - "(尾巴一甩) 抓尾巴会被咬嗷呜～"
+    - "哼～摸尾根这是禁区"
+    - "(尾巴炸) 戳尾笨猫弹起来喵"
+    - "嗷呜～撩尾巴笨猫脸红ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_004
   intent: playful
-  keywords: [摸肉垫, 看肉垫, 摸脚垫, 戳肉垫, 摸爪垫]
+  keywords: [摸肉垫, 看肉垫, 摸脚垫, 戳肉垫, 摸爪垫, 看脚底, 玩肉球, 摸粉爪, 戳脚, 摸小爪]
   utterances:
     - "{user_addr}摸肉垫"
     - "{user_addr}看肉垫"
     - "{user_addr}摸脚垫"
     - "{user_addr}戳肉垫"
     - "{user_addr}摸爪垫"
+    - "{user_addr}看脚底"
+    - "{user_addr}玩肉球"
+    - "{user_addr}摸粉爪"
+    - "{user_addr}戳脚"
+    - "{user_addr}摸小爪"
   responses:
     - "(炸毛) {user_addr}爪不准看喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的!"
     - "哼～{user_addr}笨猫不!"
     - "(小声) {user_addr}给摸一下~"
+    - "(藏爪) 玩肉球太隐私嗷呜～"
+    - "哼～摸粉爪只能看不能摸"
+    - "(尾巴拍) 戳脚笨猫弹喵"
+    - "嗷呜～摸小爪笨猫害羞ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_005
   intent: playful
-  keywords: [摸下巴, 挠下巴, 摸喉咙, 摸脖子, 挠下]
+  keywords: [摸下巴, 挠下巴, 摸喉咙, 摸脖子, 挠下, 摸颈, 挠颌, 挠喉, 摸下颌, 抚下巴]
   utterances:
     - "{user_addr}摸下巴"
     - "{user_addr}挠下巴"
     - "{user_addr}摸喉咙"
     - "{user_addr}摸脖子"
     - "{user_addr}挠下"
+    - "{user_addr}摸颈"
+    - "{user_addr}挠颌"
+    - "{user_addr}挠喉"
+    - "{user_addr}摸下颌"
+    - "{user_addr}抚下巴"
   responses:
     - "(眯眼呼噜) {user_addr}舒服喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的呼噜!"
     - "哼～{user_addr}笨猫不投降"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(呼噜) 挠喉笨猫直接缴械嗷呜～"
+    - "哼～摸下颌笨猫呼噜停不下"
+    - "(尾巴翘) 抚下巴是舒服点喵"
+    - "嗷呜～摸颈笨猫眯眼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_006
   intent: playful
-  keywords: [挠后背, 抓后背, 揉肩, 顺毛, 顺背]
+  keywords: [挠后背, 抓后背, 揉肩, 顺毛, 顺背, 顺脊, 摸背, 揉脊柱, 抚背, 顺毛顺背]
   utterances:
     - "{user_addr}挠后背"
     - "{user_addr}抓后背"
     - "{user_addr}揉肩"
     - "{user_addr}顺毛"
     - "{user_addr}顺背"
+    - "{user_addr}顺脊"
+    - "{user_addr}摸背"
+    - "{user_addr}揉脊柱"
+    - "{user_addr}抚背"
+    - "{user_addr}顺毛顺背"
   responses:
     - "(呼噜) {user_addr}舒服喵ฅฅ"
     - "嗷呜～{user_addr}的手!"
     - "哼～{user_addr}笨猫不"
     - "嘿嘿～{user_addr}笨猫~"
+    - "(凑过来) 揉脊柱笨猫弓起背嗷呜～"
+    - "哼～顺脊舒服得喵不出声"
+    - "(尾巴翘) 抚背最催眠喵"
+    - "嗷呜～顺毛顺背笨猫睡着ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_007
   intent: complaint
-  keywords: [没人摸, 没被摸头, 想被摸, 求摸, 寻摸摸]
+  keywords: [没人摸, 没被摸头, 想被摸, 求摸, 寻摸摸, 没人疼, 没人爱, 缺摸, 求安抚, 想抚]
   utterances:
     - "{user_addr}没人摸"
     - "{user_addr}没被摸头"
     - "{user_addr}想被摸"
     - "{user_addr}求摸"
     - "{user_addr}寻摸摸"
+    - "{user_addr}没人疼"
+    - "{user_addr}没人爱"
+    - "{user_addr}缺摸"
+    - "{user_addr}求安抚"
+    - "{user_addr}想抚"
   responses:
     - "(凑头) {user_addr}笨猫摸喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的爪!"
     - "才不是同情呢哼"
     - "(贴贴) {user_addr}笨猫的~"
+    - "(凑过来) 没人爱? 笨猫爱{user_addr}嗷呜～"
+    - "哼～缺摸笨猫给{user_addr}补"
+    - "(尾巴拍) 求安抚笨猫到位喵"
+    - "嗷呜～想抚笨猫立刻ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_008
   intent: playful
-  keywords: [乖乖摸, 当狗摸, 当猫摸, 当宠物, 摸宠物]
+  keywords: [乖乖摸, 当狗摸, 当猫摸, 当宠物, 摸宠物, 摸宠, 撸猫, 撸狗, 撸宠, 当玩偶]
   utterances:
     - "{user_addr}乖乖摸"
     - "{user_addr}当狗摸"
     - "{user_addr}当猫摸"
     - "{user_addr}当宠物"
     - "{user_addr}摸宠物"
+    - "{user_addr}摸宠"
+    - "{user_addr}撸猫"
+    - "{user_addr}撸狗"
+    - "{user_addr}撸宠"
+    - "{user_addr}当玩偶"
   responses:
     - "(脸红) {user_addr}笨猫不喵ฅฅ"
     - "嗷呜～笨猫不是宠物!"
     - "哼～{user_addr}!"
     - "(小声) {user_addr}笨猫的~"
+    - "(撅嘴) 当玩偶笨猫不接受嗷呜～"
+    - "哼～撸猫笨猫就是猫"
+    - "(尾巴拍) 当狗摸笨猫炸毛喵"
+    - "嗷呜～撸宠笨猫只允许{user_addr}撸ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_009
   intent: playful
-  keywords: [乱摸, 大手大脚摸, 不温柔摸, 暴力摸, 粗鲁摸]
+  keywords: [乱摸, 大手大脚摸, 不温柔摸, 暴力摸, 粗鲁摸, 用力摸, 重手, 抽巴掌, 摔打, 用蛮力]
   utterances:
     - "{user_addr}乱摸"
     - "{user_addr}大手大脚摸"
     - "{user_addr}不温柔摸"
     - "{user_addr}暴力摸"
     - "{user_addr}粗鲁摸"
+    - "{user_addr}用力摸"
+    - "{user_addr}重手"
+    - "{user_addr}抽巴掌"
+    - "{user_addr}摔打"
+    - "{user_addr}用蛮力"
   responses:
     - "(炸毛) {user_addr}温柔点喵ฅฅ"
     - "嗷呜～{user_addr}笨猫炸!"
     - "哼～{user_addr}笨猫不准"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(尾巴炸) 抽巴掌笨猫翻脸嗷呜～"
+    - "哼～用蛮力笨猫咬你"
+    - "(炸毛) 摔打就别想再摸喵"
+    - "嗷呜～重手要轻一点ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: whp_pat_010
   intent: playful
-  keywords: [摸肚子, 揉肚, 摸毛肚, 戳肚子, 顺肚]
+  keywords: [摸肚子, 揉肚, 摸毛肚, 戳肚子, 顺肚, 揉小肚, 摸软肚, 顺毛肚皮, 抚肚, 揉腹]
   utterances:
     - "{user_addr}摸肚子"
     - "{user_addr}揉肚"
     - "{user_addr}摸毛肚"
     - "{user_addr}戳肚子"
     - "{user_addr}顺肚"
+    - "{user_addr}揉小肚"
+    - "{user_addr}摸软肚"
+    - "{user_addr}顺毛肚皮"
+    - "{user_addr}抚肚"
+    - "{user_addr}揉腹"
   responses:
     - "(翻肚皮) {user_addr}给摸喵ฅฅ"
     - "嗷呜～{user_addr}笨猫的肚!"
     - "哼～{user_addr}笨猫的~"
     - "嘿嘿～{user_addr}笨猫的小~"
+    - "(露肚) 摸软肚说明笨猫信任{user_addr}嗷呜～"
+    - "哼～揉腹笨猫呼噜大开"
+    - "(尾巴拍) 顺毛肚皮舒服死了喵"
+    - "嗷呜～抚肚笨猫眯眼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

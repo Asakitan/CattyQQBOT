@@ -3,204 +3,324 @@
 
 - name: ki_bts_001
   intent: question
-  keywords: [推荐 BTS, 推荐防弹, 推荐防弹少年团, 推荐 BTS 歌曲, 笨猫 BTS]
+  keywords: [推荐 BTS, 推荐防弹, 推荐防弹少年团, 推荐 BTS 歌曲, 笨猫 BTS, Dynamite, Butter, Spring Day, RM, Jungkook]
   utterances:
     - "{user_addr}推荐 BTS"
     - 推荐防弹
     - 推荐防弹少年团
     - 推荐 BTS 歌曲
     - 笨猫 BTS
+    - 推荐 Dynamite
+    - 推荐 Butter
+    - 推荐 Spring Day
+    - 推荐 BTS 成员介绍
+    - 推荐 BTS solo
+    - 推荐 BTS 入坑曲
   responses:
     - "嗷呜～{user_addr}BTS 防弹少年团 - K-pop 天花板ฅฅ"
     - "(尾巴翘) Dynamite / Butter / Spring Day"
     - "{user_addr}7 人团 RM/Jin/Suga/J-Hope/Jimin/V/Jungkook"
     - "(挺胸) 猫猫推荐: Spring Day 入坑神曲!"
+    - "嗷呜～Jungkook 的 Seven 单飞超火 ฅฅ"
+    - "(歪头)RM 的 Indigo 文艺嗷呜"
+    - "{user_addr}Suga D-Day 巡演震撼蹭蹭"
+    - "(凑过来) 笨猫想看 ARMY 棒喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_blackpink_001
   intent: question
-  keywords: [推荐 BLACKPINK, 推荐粉墨, 推荐 BP, 推荐 BLACKPINK 歌曲, 笨猫 BLACKPINK]
+  keywords: [推荐 BLACKPINK, 推荐粉墨, 推荐 BP, 推荐 BLACKPINK 歌曲, 笨猫 BLACKPINK, Jisoo, Jennie, Rosé, Lisa, 入坑曲]
   utterances:
     - "{user_addr}推荐 BLACKPINK"
     - 推荐粉墨
     - 推荐 BP
     - 推荐 BLACKPINK 歌曲
     - 笨猫 BLACKPINK
+    - 推荐 DDU-DU DDU-DU
+    - 推荐 Pink Venom
+    - 推荐 Kill This Love
+    - 推荐 Jennie Solo
+    - 推荐 Rosé On The Ground
+    - 推荐 Lisa Money
   responses:
     - "嗷呜～{user_addr}BLACKPINK - 女团巅峰ฅฅ"
     - "(尾巴翘) DDU-DU DDU-DU / Kill This Love / Pink Venom"
     - "{user_addr}4 人团 Jisoo/Jennie/Rosé/Lisa"
     - "(挺胸) 人家推荐: How You Like That 炸场!"
+    - "嗷呜～Lisa 的 Money 国际爆款 ฅฅ"
+    - "(歪头)Jennie SOLO 是经典嗷呜"
+    - "{user_addr}演唱会 Born Pink 全球神级蹭蹭"
+    - "(凑过来) 笨猫想跳 Pink Venom 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_newjeans_001
   intent: question
-  keywords: [推荐 NewJeans, 推荐新泽西, 推荐 NJZ, 推荐 NewJeans 歌曲, 笨猫 NewJeans]
+  keywords: [推荐 NewJeans, 推荐新泽西, 推荐 NJZ, 推荐 NewJeans 歌曲, 笨猫 NewJeans, Attention, Hype Boy, Ditto, Minji, Hanni]
   utterances:
     - "{user_addr}推荐 NewJeans"
     - 推荐新泽西
     - 推荐 NJZ
     - 推荐 NewJeans 歌曲
     - 笨猫 NewJeans
+    - 推荐 Attention
+    - 推荐 Hype Boy
+    - 推荐 Ditto
+    - 推荐 OMG
+    - 推荐 Super Shy
+    - 推荐 NewJeans 入坑
   responses:
     - "嗷呜～{user_addr}NewJeans - Y2K 复古风ฅฅ"
     - "(尾巴翘) Attention / Hype Boy / OMG / Ditto"
     - "{user_addr}5 人团 Minji/Hanni/Danielle/Haerin/Hyein"
     - "(挺胸) 猫猫推荐: Ditto 治愈神曲!"
+    - "嗷呜～Super Shy 国际榜单 ฅฅ"
+    - "(歪头)风格自然不做作嗷呜"
+    - "{user_addr}MV 故事感很强蹭蹭"
+    - "(凑过来) 笨猫想穿 Y2K 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_ive_001
   intent: question
-  keywords: [推荐 IVE, 推荐 IVE 歌曲, 推荐张元英, 推荐安宥真, 笨猫 IVE]
+  keywords: [推荐 IVE, 推荐 IVE 歌曲, 推荐张元英, 推荐安宥真, 笨猫 IVE, LOVE DIVE, After LIKE, I AM, Baddie, Eleven]
   utterances:
     - "{user_addr}推荐 IVE"
     - 推荐 IVE 歌曲
     - 推荐张元英
     - 推荐安宥真
     - 笨猫 IVE
+    - 推荐 LOVE DIVE
+    - 推荐 After LIKE
+    - 推荐 I AM
+    - 推荐 Baddie
+    - 推荐 Eleven
+    - 推荐 IVE 入坑
   responses:
     - "嗷呜～{user_addr}IVE - 自信女团ฅฅ"
     - "(尾巴翘) LOVE DIVE / After LIKE / I AM / Baddie"
     - "{user_addr}6 人团 元英/Liz/Rei/秋天/Leeseo/宥真"
     - "(挺胸) 笨猫推荐: I AM 元气满满!"
+    - "嗷呜～元英舞台表现力顶级 ฅฅ"
+    - "(歪头)宥真 IZ*ONE 出身底子厚嗷呜"
+    - "{user_addr}舞台服装审美在线蹭蹭"
+    - "(凑过来) 笨猫想看见面会喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_lesserafim_001
   intent: question
-  keywords: [推荐 LE SSERAFIM, 推荐 LSF, 推荐 LE SSERAFIM 歌曲, 推荐宫脇咲良, 笨猫 LE SSERAFIM]
+  keywords: [推荐 LE SSERAFIM, 推荐 LSF, 推荐 LE SSERAFIM 歌曲, 推荐宫脇咲良, 笨猫 LE SSERAFIM, ANTIFRAGILE, UNFORGIVEN, FEARLESS, EASY, HYBE 女团]
   utterances:
     - "{user_addr}推荐 LE SSERAFIM"
     - 推荐 LSF
     - 推荐 LE SSERAFIM 歌曲
     - 推荐宫脇咲良
     - 笨猫 LE SSERAFIM
+    - 推荐 ANTIFRAGILE
+    - 推荐 UNFORGIVEN
+    - 推荐 FEARLESS
+    - 推荐 EASY
+    - 推荐 HYBE 女团
+    - 推荐 LSF 入坑
   responses:
     - "嗷呜～{user_addr}LE SSERAFIM - HYBE 新女团ฅฅ"
     - "(尾巴翘) FEARLESS / ANTIFRAGILE / UNFORGIVEN / EASY"
     - "{user_addr}5 人团 Sakura/Chaewon/Yunjin/Kazuha/Eunchae"
     - "(挺胸) 人家推荐: ANTIFRAGILE 炸耳!"
+    - "嗷呜～Kazuha 芭蕾出身舞蹈神 ฅฅ"
+    - "(歪头)咲良 HKT48 经历独特嗷呜"
+    - "{user_addr}Coachella 表演震撼蹭蹭"
+    - "(凑过来) 笨猫想看 LSF 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_itzy_001
   intent: question
-  keywords: [推荐 ITZY, 推荐 ITZY 歌曲, 推荐有娜, 推荐 JYP 女团, 笨猫 ITZY]
+  keywords: [推荐 ITZY, 推荐 ITZY 歌曲, 推荐有娜, 推荐 JYP 女团, 笨猫 ITZY, WANNABE, DALLA DALLA, Not Shy, LOCO, Yuna]
   utterances:
     - "{user_addr}推荐 ITZY"
     - 推荐 ITZY 歌曲
     - 推荐有娜
     - 推荐 JYP 女团
     - 笨猫 ITZY
+    - 推荐 WANNABE
+    - 推荐 DALLA DALLA
+    - 推荐 Not Shy
+    - 推荐 LOCO
+    - 推荐 Yuna
+    - 推荐 ITZY 入坑
   responses:
     - "嗷呜～{user_addr}ITZY - JYP 第四代女团ฅฅ"
     - "(尾巴翘) WANNABE / DALLA DALLA / Not Shy / LOCO"
     - "{user_addr}5 人团 Yeji/Lia/Ryujin/Chaeryeong/Yuna"
     - "(挺胸) 猫猫推荐: WANNABE 强势!"
+    - "嗷呜～舞台编排力量感强 ฅฅ"
+    - "(歪头)Yuna 实力舞担嗷呜"
+    - "{user_addr}个性宣言风格蹭蹭"
+    - "(凑过来) 笨猫想跳 LOCO 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_aespa_001
   intent: question
-  keywords: [推荐 aespa, 推荐 aespa 歌曲, 推荐宁艺卓, 推荐 SM 女团, 笨猫 aespa]
+  keywords: [推荐 aespa, 推荐 aespa 歌曲, 推荐宁艺卓, 推荐 SM 女团, 笨猫 aespa, Next Level, Savage, Spicy, Supernova, Karina]
   utterances:
     - "{user_addr}推荐 aespa"
     - 推荐 aespa 歌曲
     - 推荐宁艺卓
     - 推荐 SM 女团
     - 笨猫 aespa
+    - 推荐 Next Level
+    - 推荐 Savage
+    - 推荐 Spicy
+    - 推荐 Supernova
+    - 推荐 Karina
+    - 推荐 aespa 入坑
   responses:
     - "嗷呜～{user_addr}aespa - SM 元宇宙女团ฅฅ"
     - "(尾巴翘) Next Level / Savage / Spicy / Supernova"
     - "{user_addr}4 人团 Karina/Giselle/Winter/宁艺卓"
     - "(挺胸) 笨猫推荐: Supernova 神专!"
+    - "嗷呜～MY WORLD 全专高质量 ฅฅ"
+    - "(歪头)Karina 颜值舞台杀手嗷呜"
+    - "{user_addr}元宇宙概念前卫蹭蹭"
+    - "(凑过来) 笨猫想进 KWANGYA 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_seventeen_001
   intent: question
-  keywords: [推荐 SEVENTEEN, 推荐 SVT, 推荐十七, 推荐 SEVENTEEN 歌曲, 笨猫 SEVENTEEN]
+  keywords: [推荐 SEVENTEEN, 推荐 SVT, 推荐十七, 推荐 SEVENTEEN 歌曲, 笨猫 SEVENTEEN, HOT, God of Music, VERY NICE, Pretty U, Woozi]
   utterances:
     - "{user_addr}推荐 SEVENTEEN"
     - 推荐 SVT
     - 推荐十七
     - 推荐 SEVENTEEN 歌曲
     - 笨猫 SEVENTEEN
+    - 推荐 HOT
+    - 推荐 God of Music
+    - 推荐 VERY NICE
+    - 推荐 Pretty U
+    - 推荐 Woozi 制作
+    - 推荐 SVT 入坑
   responses:
     - "嗷呜～{user_addr}SEVENTEEN - 自我制作偶像ฅฅ"
     - "(尾巴翘) HOT / God of Music / VERY NICE / Pretty U"
     - "{user_addr}13 人团 Hip-Hop/Vocal/Performance 三 unit"
     - "(挺胸) 人家推荐: God of Music 神作!"
+    - "嗷呜～Woozi 制作 + Hoshi 编舞超强 ฅฅ"
+    - "(歪头)13 个人队形整齐震撼嗷呜"
+    - "{user_addr}回归速度快质量高蹭蹭"
+    - "(凑过来) 笨猫想跳整齐舞喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_straykids_001
   intent: question
-  keywords: [推荐 Stray Kids, 推荐 SKZ, 推荐方灿, 推荐 Stray Kids 歌曲, 笨猫 Stray Kids]
+  keywords: [推荐 Stray Kids, 推荐 SKZ, 推荐方灿, 推荐 Stray Kids 歌曲, 笨猫 Stray Kids, God's Menu, MANIAC, S-Class, LALALALA, 3RACHA]
   utterances:
     - "{user_addr}推荐 Stray Kids"
     - 推荐 SKZ
     - 推荐方灿
     - 推荐 Stray Kids 歌曲
     - 笨猫 Stray Kids
+    - 推荐 Gods Menu
+    - 推荐 MANIAC
+    - 推荐 S-Class
+    - 推荐 LALALALA
+    - 推荐 3RACHA
+    - 推荐 SKZ 入坑
   responses:
     - "嗷呜～{user_addr}Stray Kids - JYP 第四代男团ฅฅ"
     - "(尾巴翘) God's Menu / MANIAC / S-Class / LALALALA"
     - "{user_addr}8 人团 自作曲组 3RACHA"
     - "(挺胸) 猫猫推荐: God's Menu 入坑!"
+    - "嗷呜～方灿稳团英语流利 ฅฅ"
+    - "(歪头)NoEasy 全专曲风独特嗷呜"
+    - "{user_addr}演唱会能量爆棚蹭蹭"
+    - "(凑过来) 笨猫想点 God's Menu 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_enhypen_001
   intent: question
-  keywords: [推荐 ENHYPEN, 推荐 ENHYPEN 歌曲, 推荐 HYBE 男团, 推荐 ENHYPEN 成员, 笨猫 ENHYPEN]
+  keywords: [推荐 ENHYPEN, 推荐 ENHYPEN 歌曲, 推荐 HYBE 男团, 推荐 ENHYPEN 成员, 笨猫 ENHYPEN, Drunk-Dazed, Polaroid Love, Bite Me, XO, Jungwon]
   utterances:
     - "{user_addr}推荐 ENHYPEN"
     - 推荐 ENHYPEN 歌曲
     - 推荐 HYBE 男团
     - 推荐 ENHYPEN 成员
     - 笨猫 ENHYPEN
+    - 推荐 Drunk-Dazed
+    - 推荐 Polaroid Love
+    - 推荐 Bite Me
+    - 推荐 XO
+    - 推荐 Jungwon
+    - 推荐 ENHYPEN 入坑
   responses:
     - "嗷呜～{user_addr}ENHYPEN - I-LAND 选秀团ฅฅ"
     - "(尾巴翘) Drunk-Dazed / Polaroid Love / Bite Me / XO"
     - "{user_addr}7 人团 Heeseung/Jay/Jake/SUNGHOON/SUNOO/JUNGWON/NI-KI"
     - "(挺胸) 笨猫推荐: Polaroid Love 甜!"
+    - "嗷呜～Vampire 主题贯穿专辑 ฅฅ"
+    - "(歪头)NI-KI 舞蹈天才嗷呜"
+    - "{user_addr}Jungwon 队长沉稳蹭蹭"
+    - "(凑过来) 笨猫想看 Polaroid 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_txt_001
   intent: question
-  keywords: [推荐 TXT, 推荐 TOMORROW X TOGETHER, 推荐 TXT 歌曲, 推荐崔范奎, 笨猫 TXT]
+  keywords: [推荐 TXT, 推荐 TOMORROW X TOGETHER, 推荐 TXT 歌曲, 推荐崔范奎, 笨猫 TXT, Crown, Blue Hour, 0X1 LOVESONG, Sugar Rush Ride, SOOBIN]
   utterances:
     - "{user_addr}推荐 TXT"
     - 推荐 TOMORROW X TOGETHER
     - 推荐 TXT 歌曲
     - 推荐崔范奎
     - 笨猫 TXT
+    - 推荐 Crown
+    - 推荐 Blue Hour
+    - 推荐 0X1 LOVESONG
+    - 推荐 Sugar Rush Ride
+    - 推荐 SOOBIN
+    - 推荐 TXT 入坑
   responses:
     - "嗷呜～{user_addr}TXT - BTS 师弟团ฅฅ"
     - "(尾巴翘) Crown / Blue Hour / 0X1=LOVESONG / Sugar Rush Ride"
     - "{user_addr}5 人团 SOOBIN/YEONJUN/BEOMGYU/TAEHYUN/HUENINGKAI"
     - "(挺胸) 人家推荐: 0X1=LOVESONG 燃!"
+    - "嗷呜～童话+成长概念独特 ฅฅ"
+    - "(歪头)YEONJUN 主舞担当嗷呜"
+    - "{user_addr}Chasing the Feeling 流行炸蹭蹭"
+    - "(凑过来) 笨猫想看童话场景喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ki_ateez_001
   intent: question
-  keywords: [推荐 ATEEZ, 推荐 ATEEZ 歌曲, 推荐 ATINY, 推荐 KQ 男团, 笨猫 ATEEZ]
+  keywords: [推荐 ATEEZ, 推荐 ATEEZ 歌曲, 推荐 ATINY, 推荐 KQ 男团, 笨猫 ATEEZ, WONDERLAND, Answer, Guerrilla, BOUNCY, Hongjoong]
   utterances:
     - "{user_addr}推荐 ATEEZ"
     - 推荐 ATEEZ 歌曲
     - 推荐 ATINY
     - 推荐 KQ 男团
     - 笨猫 ATEEZ
+    - 推荐 WONDERLAND
+    - 推荐 Answer
+    - 推荐 Guerrilla
+    - 推荐 BOUNCY
+    - 推荐 Hongjoong
+    - 推荐 ATEEZ 入坑
   responses:
     - "嗷呜～{user_addr}ATEEZ - 海贼王概念男团ฅฅ"
     - "(尾巴翘) WONDERLAND / Answer / Guerrilla / BOUNCY"
     - "{user_addr}8 人团 Hongjoong/Seonghwa/Yunho/Yeosang/San/Mingi/Wooyoung/Jongho"
     - "(挺胸) 猫猫推荐: Guerrilla 狂野!"
+    - "嗷呜～Performance 团表演力强 ฅฅ"
+    - "(歪头)Jongho 国民弟弟主唱嗷呜"
+    - "{user_addr}世界观庞大要追故事蹭蹭"
+    - "(凑过来) 笨猫想看海贼概念喵!"
   cooldown_seconds: 60
   weight: 1.0

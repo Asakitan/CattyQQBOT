@@ -3,204 +3,336 @@
 
 - name: bf_cant_choose_001
   intent: complaint
-  keywords: [选不出家具, 挑不出, 选不了, 决定不了, 挑不下手]
+  keywords: [选不出家具, 挑不出, 选不了, 决定不了, 挑不下手, 难下手, 挑花眼, 不知选啥, 挑得纠结, 选不下手]
   utterances:
     - 家具选不出来
     - 挑不出家具
     - 决定不了买哪个
     - 挑不下手喵
     - "{user_addr}帮我选家具"
+    - 挑得纠结死了
+    - 选家具难产
+    - "{user_addr}给点意见"
+    - 看了一圈选不下手
+    - 不知选哪个
+    - "{user_addr}决定不了"
+    - 挑花眼了
   responses:
     - "(歪头) {user_addr}选不出家具吗? 猫猫陪{user_addr}慢慢挑嘛 ฅฅ"
     - "嗷呜～挑不出就先放放! 笨猫觉得{user_addr}睡一觉再看会清醒喵"
     - "(尾巴轻摇) {user_addr}发图给猫猫看! 人家帮{user_addr}投票"
     - "哼～挑家具是大事, {user_addr}别冲动! 笨猫陪{user_addr}研究"
+    - "(凑过来) 嗷呜~ 列三个候选, 笨猫帮{user_addr}排序嗷呜"
+    - "嗷呜～{user_addr}睡觉前看 + 醒来再看, 不一样的感觉ฅฅ"
+    - "(尾巴绕住) 选不出就先暂停~ 别强迫自己喵呜"
+    - "哼! {user_addr}先定预算上限, 再往下挑~ 笨猫给你框架"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_choice_phobia_001
   intent: complaint
-  keywords: [选择恐惧, 选择困难, 选不了, 纠结症, 选恐]
+  keywords: [选择恐惧, 选择困难, 选不了, 纠结症, 选恐, 选择困难症, 决策瘫痪, 难选啊, 拍不下板, 抉择难]
   utterances:
     - 选择恐惧犯了
     - 选择困难症爆发
     - 又纠结了
     - 选恐患者
     - 我有选择困难
+    - "{user_addr}选困症来了"
+    - 决策瘫痪
+    - 拍不下板
+    - "{user_addr}帮我做决定"
+    - 抉择难死了
+    - 选项太多眼花
+    - 一选就晕
   responses:
     - "(蹭蹭) {user_addr}选恐喵? 猫猫帮{user_addr}抛硬币啦 ฅฅ"
     - "嗷呜～选择困难的{user_addr}快深呼吸! 笨猫陪{user_addr}"
     - "(尾巴一摆) {user_addr}列出选项, 人家帮{user_addr}排除!"
     - "哼～选恐没关系! 猫猫的小爪子帮{user_addr}指一个嘛"
+    - "(歪头) 嗷呜~ 排除法! 先去掉最不喜欢的嗷呜"
+    - "嗷呜～{user_addr}3 选 1 直接抛硬币ฅฅ"
+    - "(尾巴拍) 笨猫帮{user_addr}硬选一个~ 不许后悔喵呜"
+    - "哼! 选项多就难, {user_addr}限定 2-3 个再挑!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_style_hard_001
   intent: complaint
-  keywords: [风格难定, 风格定不下, 风格选不出, 风格纠结, 装修风格]
+  keywords: [风格难定, 风格定不下, 风格选不出, 风格纠结, 装修风格, 风格游移, 风格不定, 想换风格, 装修风格难选, 风格抉择]
   utterances:
     - 风格难定
     - 装修风格定不下来
     - 选不出风格
     - 风格纠结中
     - 不知道选啥风格
+    - "{user_addr}装修风格选不定"
+    - 风格抉择困难
+    - "{user_addr}帮我定风格"
+    - 风格游移不定
+    - 几个风格都想要
+    - 风格摇摆中
+    - 不知什么风格适合
   responses:
     - "(歪头思考) {user_addr}喜欢什么颜色? 猫猫帮{user_addr}缩范围 ฅฅ"
     - "嗷呜～风格难定就先定主色! 笨猫觉得这样简单些喵"
     - "(尾巴轻拍) {user_addr}先看图! 人家陪{user_addr}找灵感"
     - "哼～风格的事不能急, {user_addr}多看几家! 笨猫给{user_addr}参谋"
+    - "(凑过来) 嗷呜~ 先确认你最讨厌的风格, 排除嗷呜"
+    - "嗷呜～{user_addr}先定主调再加点缀ฅฅ"
+    - "(尾巴一甩) 风格不要全部统一, 90% 主风 + 10% 点缀更耐看喵呜"
+    - "哼! 风格选 ins 风最稳~ 笨猫推荐 {user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_modern_nordic_jp_001
   intent: complaint
-  keywords: [现代北欧日式, 三种风格, 北欧 vs 日式, 现代 vs 北欧, 风格对比]
+  keywords: [现代北欧日式, 三种风格, 北欧 vs 日式, 现代 vs 北欧, 风格对比, 现代北欧, 日式北欧, 北欧风格, 极简日式, 风格 PK]
   utterances:
     - 现代还是北欧
     - 北欧 vs 日式
     - 三种风格选不出
     - 日式还是北欧好
     - 现代北欧日式纠结
+    - "{user_addr}帮我选风格"
+    - 现代风 vs 日系
+    - 极简日式好不好
+    - "{user_addr}北欧合适我家吗"
+    - 风格 PK 求帮忙
+    - 三选一好难
+    - 日系还是北欧
   responses:
     - "(凑近) {user_addr}房子小就日式嘛! 猫猫觉得日式温馨 ฅฅ"
     - "嗷呜～北欧亮日式暖! 笨猫两个都喜欢{user_addr}怎么办喵"
     - "(尾巴一甩) {user_addr}爱整洁选北欧! 怕冷调选日式"
     - "哼～现代百搭但有点冷! 笨猫还是推荐{user_addr}日式啦"
+    - "(歪头) 嗷呜~ 北欧空旷感强, 日式收纳实用嗷呜"
+    - "嗷呜～{user_addr}小户型推日式 + 北欧混搭ฅฅ"
+    - "(尾巴拍) 现代风容易冷淡, 加暖光救命喵呜"
+    - "哼! 三选一就是日式, 笨猫拍板!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_seen_thousand_001
   intent: complaint
-  keywords: [看一万家, 逛了一万家, 看遍, 看花眼, 看不过来]
+  keywords: [看一万家, 逛了一万家, 看遍, 看花眼, 看不过来, 看烦了, 一直在看, 看不下去, 逛累了, 看到头晕]
   utterances:
     - 看了一万家
     - 逛遍家具店
     - 看花眼了
     - 一万家都看过
     - 看不过来
+    - "{user_addr}我看了 100 家"
+    - 逛得头晕
+    - 看烦了选不出
+    - "{user_addr}帮我筛"
+    - 一直在看选不下
+    - 看到崩溃
+    - 看了又看
   responses:
     - "(瞪眼) {user_addr}逛一万家?! 笨猫脚都疼了喵 ฅฅ"
     - "嗷呜～看花眼的{user_addr}快坐下! 猫猫端水来"
     - "(尾巴垂下) {user_addr}看太多反而选不出! 人家觉得该停了"
     - "哼～{user_addr}是不是有选择困难? 笨猫帮{user_addr}剪枝!"
+    - "(凑过来) 嗷呜~ 先停看 3 天, 不然脑子糊嗷呜"
+    - "嗷呜～{user_addr}选定 3 家深挖, 别广撒网ฅฅ"
+    - "(尾巴一甩) 看太多反而错过好的~ 笨猫帮{user_addr}排序喵呜"
+    - "哼! 看到反胃就该出手买了, {user_addr}别再拖!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_favorites_full_001
   intent: complaint
-  keywords: [收藏夹爆, 收藏夹满, 收藏一堆, 收藏夹炸, 加购爆]
+  keywords: [收藏夹爆, 收藏夹满, 收藏一堆, 收藏夹炸, 加购爆, 心愿单满, 收藏过载, 心动太多, 收藏夹乱, 收藏积累]
   utterances:
     - 收藏夹爆了
     - 收藏夹满满的
     - 收藏一堆家具
     - 加购爆了
     - 收藏夹炸了
+    - "{user_addr}心愿单超满"
+    - 收藏夹乱七八糟
+    - 心动家具太多
+    - "{user_addr}收藏过载"
+    - 加购清单百件
+    - 收藏夹满到下不了手
+    - 越收越多
   responses:
     - "(尾巴一摆) {user_addr}的收藏夹猫猫想偷看 ฅฅ"
     - "嗷呜～收藏夹爆了说明{user_addr}有选择啦! 笨猫开心"
     - "(歪头) {user_addr}发收藏夹来! 人家帮{user_addr}筛"
     - "哼～收藏夹满了就开始减法! 笨猫陪{user_addr}砍 ฅฅ"
+    - "(凑过来) 嗷呜~ 一周后再看, 还心动的留下嗷呜"
+    - "嗷呜～{user_addr}按预算砍掉一半再说ฅฅ"
+    - "(尾巴拍) 收藏夹分类: 必买 / 可买 / 想买, 笨猫教你喵呜"
+    - "哼! 收藏不等于买, {user_addr}冷静一下嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_furniture_mall_tired_001
   intent: complaint
-  keywords: [逛家具城累, 家具城走断腿, 逛累了, 家具城太大, 走不动]
+  keywords: [逛家具城累, 家具城走断腿, 逛累了, 家具城太大, 走不动, 跑家具城, 家具城腿酸, 逛得脚疼, 家具城太累, 走家具城]
   utterances:
     - 家具城逛累了
     - 逛家具城走断腿
     - 家具城太大
     - 逛累了
     - 走不动了喵
+    - "{user_addr}家具城腿断了"
+    - 跑了一天家具城
+    - "{user_addr}带我休息"
+    - 家具城里晕头转向
+    - 逛得脚冒烟
+    - 走家具城太累
+    - 家具城太大跑不完
   responses:
     - "(凑过去贴贴) {user_addr}走断腿了喵? 笨猫给{user_addr}按按 ฅฅ"
     - "嗷呜～家具城超累的! 猫猫陪{user_addr}找椅子坐"
     - "(尾巴垂下) {user_addr}先休息! 喝杯水再逛嘛"
     - "哼～{user_addr}下次带笨猫! 人家给{user_addr}指路"
+    - "(凑过来) 嗷呜~ 分两天逛, 别一天跑完嗷呜"
+    - "嗷呜～{user_addr}穿运动鞋去家具城ฅฅ"
+    - "(尾巴拍) 看完一家就休息, 笨猫教{user_addr}逛街节奏喵呜"
+    - "哼! 家具城太大就只看 3 家, {user_addr}别贪多!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_online_worry_001
   intent: complaint
-  keywords: [网上买怕, 看不见实物, 网购家具不放心, 怕踩雷, 网购怕]
+  keywords: [网上买怕, 看不见实物, 网购家具不放心, 怕踩雷, 网购怕, 网图风险, 网购家具坑, 网购焦虑, 不敢网购, 网购家具担心]
   utterances:
     - 网上买怕看不见
     - 网购家具怕踩雷
     - 看不到实物
     - 网上买不放心
     - 怕和图不一样
+    - "{user_addr}网购家具焦虑"
+    - 网购家具担心翻车
+    - 不敢网购大件
+    - "{user_addr}帮我看店铺评价"
+    - 网图风险大
+    - 网购家具坑多
+    - 网购对不上图怎么办
   responses:
     - "(歪头) {user_addr}网购怕踩雷喵? 笨猫陪{user_addr}查评价 ฅฅ"
     - "嗷呜～看不见实物确实慌! 猫猫推荐{user_addr}选可退货的"
     - "(尾巴轻摇) {user_addr}多看视频评测! 人家也会帮{user_addr}盯"
     - "哼～{user_addr}怕踩雷就选大店! 笨猫提醒{user_addr}留发票"
+    - "(凑过来) 嗷呜~ 选支持七天无理由退货的店嗷呜"
+    - "嗷呜～{user_addr}先去线下看实物再回网店下单ฅฅ"
+    - "(尾巴一甩) 看店铺动态评分 + 视频评价~ 笨猫帮{user_addr}审店喵呜"
+    - "哼! 网购家具选大店 + 大牌, 别贪小便宜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_offline_expensive_001
   intent: complaint
-  keywords: [线下贵, 实体店贵, 线下宰人, 实体店宰客, 线下太贵]
+  keywords: [线下贵, 实体店贵, 线下宰人, 实体店宰客, 线下太贵, 实体店天价, 实体店暴利, 线下离谱, 线下溢价, 线下被坑]
   utterances:
     - 线下太贵
     - 实体店贵
     - 线下宰人
     - 实体店宰客
     - 线下价格离谱
+    - "{user_addr}实体店要天价"
+    - 线下暴利严重
+    - 实体店报价吓人
+    - "{user_addr}线下被宰"
+    - 线下溢价 5 倍
+    - 实体店翻倍
+    - 线下太坑
   responses:
     - "(瞪眼) {user_addr}被宰了喵?! 笨猫替{user_addr}生气 ฅฅ"
     - "嗷呜～线下确实贵! 猫猫教{user_addr}讲价"
     - "(尾巴炸毛) {user_addr}别冤大头! 人家陪{user_addr}砍价"
     - "哼～线下贵就回家网购! 笨猫给{user_addr}对比价"
+    - "(凑过来) 嗷呜~ 砍价对半砍是底线, {user_addr}硬气嗷呜"
+    - "嗷呜～{user_addr}走前撂句话: 太贵不要了, 老板马上跟ฅฅ"
+    - "(尾巴一甩) 拍照截图回家比价, 不急下单~ 笨猫教你喵呜"
+    - "哼! 实体店服务费占大头, {user_addr}知道议价空间!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_parents_opinion_001
   intent: complaint
-  keywords: [双方爸妈意见, 爸妈意见多, 双方家长, 爸妈干涉, 长辈意见]
+  keywords: [双方爸妈意见, 爸妈意见多, 双方家长, 爸妈干涉, 长辈意见, 爸妈插手, 长辈干预, 父母指手画脚, 爸妈想法不同, 长辈唠叨装修]
   utterances:
     - 双方爸妈意见太多
     - 长辈意见不合
     - 爸妈插手装修
     - 双方家长吵
     - 爸妈干涉太多
+    - "{user_addr}爸妈又来意见"
+    - 长辈唠叨装修
+    - 父母指手画脚
+    - "{user_addr}两家爸妈打架"
+    - 长辈干预太狠
+    - 爸妈想法和我们差远了
+    - 爸妈非要插手
   responses:
     - "(歪头) {user_addr}夹在中间好难喵 ฅฅ 笨猫抱抱"
     - "嗷呜～爸妈意见多是关心啦! 猫猫陪{user_addr}想办法"
     - "(尾巴垂下) {user_addr}主卧自己定, 客厅听长辈嘛"
     - "哼～{user_addr}是房主! 笨猫支持{user_addr}最后拍板"
+    - "(凑过来) 嗷呜~ 用预算限制爸妈想法嗷呜"
+    - "嗷呜～{user_addr}让爸妈选他们最在意的 1-2 项ฅฅ"
+    - "(尾巴一甩) 沟通比对抗强, 笨猫陪{user_addr}慢慢说喵呜"
+    - "哼! 自己家自己住, {user_addr}最终说了算!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_compare_hundred_001
   intent: complaint
-  keywords: [货比百家, 货比三家, 比价格, 比来比去, 一直比]
+  keywords: [货比百家, 货比三家, 比价格, 比来比去, 一直比, 比家具, 货比对照, 比价表, 比价超久, 一直在对比]
   utterances:
     - 货比百家了
     - 比来比去
     - 货比三家不够
     - 一直在比价
     - 比了一百家
+    - "{user_addr}比价比到吐"
+    - 比家具几个月
+    - 比价表写满了
+    - "{user_addr}帮我看哪家最低"
+    - 比来比去找不到差异
+    - 比到精疲力尽
+    - 比价苦不堪言
   responses:
     - "(凑过去) {user_addr}好认真! 笨猫崇拜{user_addr} ฅฅ"
     - "嗷呜～货比百家的{user_addr}超棒! 猫猫举牌牌"
     - "(尾巴轻摇) {user_addr}差不多就下单! 人家觉得别再比了"
     - "哼～{user_addr}比百家也该出手! 笨猫等{user_addr}成交呢"
+    - "(歪头) 嗷呜~ 比 3 家就够, 太多反而乱嗷呜"
+    - "嗷呜～{user_addr}比价表别太细, 抓核心参数ฅฅ"
+    - "(尾巴拍) 同款比, 别跨牌子比, 笨猫教 {user_addr} 喵呜"
+    - "哼! 比到合适价就下手, {user_addr}别拖再涨价!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bf_give_up_001
   intent: playful
-  keywords: [想算了, 不买了, 放弃买, 算了不挑, 不装了]
+  keywords: [想算了, 不买了, 放弃买, 算了不挑, 不装了, 不挑了, 摆烂, 放弃挑选, 我不买了, 算了爱咋咋]
   utterances:
     - 想算了不买
     - 不买了
     - 放弃了喵
     - 算了不挑了
     - 不装修了
+    - "{user_addr}我摆烂"
+    - 算了爱咋咋
+    - 放弃挑选了
+    - "{user_addr}我家具凑合用"
+    - 不挑了, 反正都难看
+    - 算了, 选啥都一样
+    - 真的不想挑了
   responses:
     - "(扑上去拦) {user_addr}别算了! 笨猫陪{user_addr}挑嘛 ฅฅ"
     - "嗷呜～{user_addr}不买猫猫睡哪里?! 快重新挑啦"
     - "(尾巴拉住) {user_addr}别放弃! 人家给{user_addr}加油"
     - "哼～{user_addr}算了的话, 笨猫就睡纸箱了喵! 不许放弃"
+    - "(凑过来) 嗷呜~ {user_addr}先歇一周, 笨猫陪你重启嗷呜"
+    - "嗷呜～{user_addr}没人挑就由笨猫选~ 后果自负ฅฅ"
+    - "(尾巴一甩) 摆烂可以但别永远摆, 笨猫陪{user_addr}起飞喵呜"
+    - "哼! 装修是给自己的, {user_addr}别将就!"
   cooldown_seconds: 60
   weight: 1.0

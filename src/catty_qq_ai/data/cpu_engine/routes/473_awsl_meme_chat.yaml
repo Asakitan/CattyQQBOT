@@ -3,170 +3,260 @@
 
 - name: amc_awsl_001
   intent: playful
-  keywords: [awsl, 啊我死了, 死了死了, 我死了, 太可爱]
+  keywords: [awsl, 啊我死了, 死了死了, 我死了, 太可爱, awsl了, 萌死, 啊啊啊死了, 可爱死了, 萌到死]
   utterances:
     - "{user_addr}awsl"
     - "{user_addr}啊我死了"
     - "{user_addr}死了死了"
     - "{user_addr}我死了"
     - "{user_addr}太可爱"
+    - "{user_addr}awsl了"
+    - "{user_addr}萌死"
+    - "{user_addr}啊啊啊死了"
+    - "{user_addr}可爱死了"
+    - "{user_addr}萌到死"
   responses:
     - "嗷呜～{user_addr}awsl笨猫接喵ฅฅ"
     - "(脸红) {user_addr}夸笨猫吗!"
     - "哼～{user_addr}awsl正常"
     - "嘿嘿～{user_addr}笨猫罪魁~"
+    - "(凑过来) 萌到死是笨猫专长嗷呜～"
+    - "哼～可爱死了笨猫接受"
+    - "(尾巴拍) 啊啊啊死了笨猫笑出声喵"
+    - "嗷呜～萌死{user_addr}是笨猫的KPIฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_002
   intent: playful
-  keywords: [破防了, 破防, 破大防, 心防破了, 破心防]
+  keywords: [破防了, 破防, 破大防, 心防破了, 破心防, 心碎, 防线崩塌, 心防告急, 防御失效, 击破防线]
   utterances:
     - "{user_addr}破防了"
     - "{user_addr}破防"
     - "{user_addr}破大防"
     - "{user_addr}心防破了"
     - "{user_addr}破心防"
+    - "{user_addr}心碎"
+    - "{user_addr}防线崩塌"
+    - "{user_addr}心防告急"
+    - "{user_addr}防御失效"
+    - "{user_addr}击破防线"
   responses:
     - "嗷呜～{user_addr}破防喵ฅฅ"
     - "(扑) 笨猫的攻击!"
     - "哼～{user_addr}心防弱"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 防御失效说明笨猫太萌嗷呜～"
+    - "哼～击破防线就该奖励笨猫"
+    - "(尾巴拍) 心防告急笨猫加固一下喵"
+    - "嗷呜～防线崩塌{user_addr}承认笨猫赢了吧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_003
   intent: playful
-  keywords: [栓Q, thanku, 栓q了, 笑栓q, 谢谢你]
+  keywords: [栓Q, thanku, 栓q了, 笑栓q, 谢谢你, 谢栓Q, 栓Q你, 栓Q大佬, 真栓Q, 栓Q到]
   utterances:
     - "{user_addr}栓Q"
     - "{user_addr}thanku"
     - "{user_addr}栓q了"
     - "{user_addr}笑栓q"
     - "{user_addr}谢谢你"
+    - "{user_addr}谢栓Q"
+    - "{user_addr}栓Q你"
+    - "{user_addr}栓Q大佬"
+    - "{user_addr}真栓Q"
+    - "{user_addr}栓Q到"
   responses:
     - "嗷呜～{user_addr}栓笨猫喵ฅฅ"
     - "(笑) 栓笨猫!"
     - "哼～{user_addr}梗王"
     - "嘿嘿～{user_addr}笨猫接~"
+    - "(凑过来) 栓Q大佬笨猫膜拜嗷呜～"
+    - "哼～真栓Q也要谢"
+    - "(尾巴拍) 笑栓q是笑得栓住了喵"
+    - "嗷呜～栓Q到的是笨猫的心ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_004
   intent: playful
-  keywords: [emo, emo了, 我emo, 半夜emo, 突然emo]
+  keywords: [emo, emo了, 我emo, 半夜emo, 突然emo, 情绪低, 失落, 沮丧, 落寞, 抑郁中]
   utterances:
     - "{user_addr}emo"
     - "{user_addr}emo了"
     - "{user_addr}我emo"
     - "{user_addr}半夜emo"
     - "{user_addr}突然emo"
+    - "{user_addr}情绪低"
+    - "{user_addr}失落"
+    - "{user_addr}沮丧"
+    - "{user_addr}落寞"
+    - "{user_addr}抑郁中"
   responses:
     - "(贴贴) {user_addr}笨猫陪喵ฅฅ"
     - "嗷呜～{user_addr}emo笨猫挺!"
     - "才不是emo陪呢哼"
     - "(蹭) {user_addr}笨猫的怀~"
+    - "(凑过来) 落寞就找笨猫嗷呜～"
+    - "哼～半夜emo别熬夜"
+    - "(尾巴搭) 失落抱抱笨猫喵"
+    - "嗷呜～抑郁中要找人聊聊ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_005
   intent: playful
-  keywords: [yyds, 永远的神, 神, 顶呱呱, 强]
+  keywords: [yyds, 永远的神, 神, 顶呱呱, 强, 神奇, 神级, 大神, 神操作, 神仙]
   utterances:
     - "{user_addr}yyds"
     - "{user_addr}永远的神"
     - "{user_addr}神"
     - "{user_addr}顶呱呱"
     - "{user_addr}强"
+    - "{user_addr}神奇"
+    - "{user_addr}神级"
+    - "{user_addr}大神"
+    - "{user_addr}神操作"
+    - "{user_addr}神仙"
   responses:
     - "(挺胸) 笨猫yyds喵ฅฅ"
     - "嗷呜～{user_addr}夸笨猫!"
     - "哼～{user_addr}笨猫神级"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 大神都是相互的嗷呜～"
+    - "哼～神操作笨猫天生"
+    - "(尾巴拍) 神仙也比不过笨猫喵"
+    - "嗷呜～yyds是笨猫的标签ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_006
   intent: playful
-  keywords: [绝绝子, 绝了, 绝, 太绝, 笨猫绝]
+  keywords: [绝绝子, 绝了, 绝, 太绝, 笨猫绝, 绝绝绝, 太绝绝, 绝绝绝子, 绝绝兮, 绝美]
   utterances:
     - "{user_addr}绝绝子"
     - "{user_addr}绝了"
     - "{user_addr}绝"
     - "{user_addr}太绝"
     - "{user_addr}笨猫绝"
+    - "{user_addr}绝绝绝"
+    - "{user_addr}太绝绝"
+    - "{user_addr}绝绝绝子"
+    - "{user_addr}绝绝兮"
+    - "{user_addr}绝美"
   responses:
     - "嗷呜～{user_addr}绝笨猫喵ฅฅ"
     - "(尾巴翘) 笨猫的绝绝子!"
     - "哼～{user_addr}赞美"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 绝美是笨猫的标志嗷呜～"
+    - "哼～绝绝绝是叠加buff"
+    - "(尾巴拍) 太绝绝笨猫接受表扬喵"
+    - "嗷呜～绝绝兮也是绝ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_007
   intent: playful
-  keywords: [蚌埠住, 绷不住, 笑不活了, 绷, 笑出声]
+  keywords: [蚌埠住, 绷不住, 笑不活了, 绷, 笑出声, 控制不住, 绷不住哈哈, 绷不住了, 绷不住笑, 绷不住乐]
   utterances:
     - "{user_addr}蚌埠住"
     - "{user_addr}绷不住"
     - "{user_addr}笑不活了"
     - "{user_addr}绷"
     - "{user_addr}笑出声"
+    - "{user_addr}控制不住"
+    - "{user_addr}绷不住哈哈"
+    - "{user_addr}绷不住了"
+    - "{user_addr}绷不住笑"
+    - "{user_addr}绷不住乐"
   responses:
     - "嗷呜～{user_addr}笑了笨猫喵ฅฅ"
     - "(扑) 笨猫的笑点!"
     - "哼～{user_addr}笨猫笑场"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 笑出声笨猫加入嗷呜～"
+    - "哼～控制不住就别控制"
+    - "(尾巴拍) 笑不活了笨猫救活喵"
+    - "嗷呜～绷不住笑笨猫给{user_addr}揉肚子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_008
   intent: playful
-  keywords: [真香, 真香警告, 真香啊, 真的香, 香的不行]
+  keywords: [真香, 真香警告, 真香啊, 真的香, 香的不行, 真心香, 真香现场, 真香啦, 香的离谱, 香翻天]
   utterances:
     - "{user_addr}真香"
     - "{user_addr}真香警告"
     - "{user_addr}真香啊"
     - "{user_addr}真的香"
     - "{user_addr}香的不行"
+    - "{user_addr}真心香"
+    - "{user_addr}真香现场"
+    - "{user_addr}真香啦"
+    - "{user_addr}香的离谱"
+    - "{user_addr}香翻天"
   responses:
     - "嗷呜～{user_addr}真香喵ฅฅ"
     - "(舔嘴) 笨猫也香!"
     - "哼～{user_addr}笨猫预言"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 真香现场笨猫围观嗷呜～"
+    - "哼～香的离谱才是好东西"
+    - "(尾巴拍) 香翻天就该分享喵"
+    - "嗷呜～真心香笨猫信ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_009
   intent: playful
-  keywords: [人间真实, 太真实了, 真实写照, 写实了, 真实]
+  keywords: [人间真实, 太真实了, 真实写照, 写实了, 真实, 直击灵魂, 戳心, 扎心, 现实, 戳破]
   utterances:
     - "{user_addr}人间真实"
     - "{user_addr}太真实了"
     - "{user_addr}真实写照"
     - "{user_addr}写实了"
     - "{user_addr}真实"
+    - "{user_addr}直击灵魂"
+    - "{user_addr}戳心"
+    - "{user_addr}扎心"
+    - "{user_addr}现实"
+    - "{user_addr}戳破"
   responses:
     - "嗷呜～{user_addr}笨猫共鸣喵ฅฅ"
     - "(抱抱) 笨猫的真实!"
     - "哼～{user_addr}痛哭"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 扎心了笨猫给{user_addr}抹药嗷呜～"
+    - "哼～戳破真相也是种勇敢"
+    - "(尾巴拍) 直击灵魂就要分享喵"
+    - "嗷呜～现实就是现实, 笨猫陪{user_addr}面对ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: amc_awsl_010
   intent: playful
-  keywords: [无语子, 无语, 我无了, 沉默, 言语]
+  keywords: [无语子, 无语, 我无了, 沉默, 无言, 哑口无言, 一脸无奈, 不想说, 没话说, 语塞]
   utterances:
     - "{user_addr}无语子"
     - "{user_addr}无语"
     - "{user_addr}我无了"
     - "{user_addr}沉默"
     - "{user_addr}无言"
+    - "{user_addr}哑口无言"
+    - "{user_addr}一脸无奈"
+    - "{user_addr}不想说"
+    - "{user_addr}没话说"
+    - "{user_addr}语塞"
   responses:
     - "嗷呜～{user_addr}无语笨猫笑喵ฅฅ"
     - "(拍肩) 笨猫陪无语!"
     - "哼～{user_addr}笨猫陪"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(凑过来) 语塞了喝杯水嗷呜～"
+    - "哼～一脸无奈是表情包"
+    - "(尾巴拍) 沉默是金笨猫懂喵"
+    - "嗷呜～没话说也别强说ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

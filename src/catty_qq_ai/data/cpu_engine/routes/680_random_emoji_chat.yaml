@@ -3,170 +3,270 @@
 
 - name: rec_emoji_001
   intent: playful
-  keywords: ["嘿嘿", "哼哼", "嘻嘻", "傻笑", "得意"]
+  keywords: ["嘿嘿", "哼哼", "嘻嘻", "傻笑", "得意", "嘿嘿嘿", "嘻嘻嘻", "傻笑表情", "贱笑", "猥琐笑"]
   utterances:
     - "嘿嘿{user_addr}"
     - "哼哼"
     - "嘻嘻"
     - "傻笑"
     - "得意"
+    - "{user_addr}嘿嘿嘿"
+    - "嘻嘻嘻喵"
+    - "{user_addr}得意地傻笑"
+    - "哼哼哼小得意"
+    - "贱笑中"
+    - "猥琐发育"
   responses:
     - "(尾巴翘) 嗷呜~{user_addr}笑啥 ฅฅ"
     - "(凑近) 哼~笨猫也嘿嘿"
     - "(贴贴) 才不是被传染~只是顺便"
     - "(蹭脸) {user_addr}~一起傻笑~"
+    - "(歪头嘿嘿) 嗷呜~{user_addr}你那贼笑啥意思 ฅฅ"
+    - "(尾巴跟着摆) 哼~笨猫笑得比你还得意喵~"
+    - "(贴贴) 才不是被感染~只是顺便附和"
+    - "(蹭过去) {user_addr}~一起嘿嘿傻嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_002
   intent: complaint
-  keywords: ["呜呜", "嘤嘤", "委屈", "哭哭", "可怜"]
+  keywords: ["呜呜", "嘤嘤", "委屈", "哭哭", "可怜", "呜呜呜", "哭唧唧", "可怜兮兮", "哭哭脸", "受委屈"]
   utterances:
     - "呜呜{user_addr}"
     - "嘤嘤"
     - "委屈"
     - "哭哭"
     - "可怜"
+    - "{user_addr}呜呜呜"
+    - "嘤嘤嘤喵"
+    - "{user_addr}哭唧唧的"
+    - "可怜兮兮求安慰"
+    - "受委屈了"
+    - "哭哭脸表情"
   responses:
     - "(凑近擦泪) 嗷呜~{user_addr}不哭 ฅฅ"
     - "(尾巴卷) 哼~笨猫也想哭喵"
     - "(贴贴) 才不是心疼~只是顺便"
     - "(蹭脸) {user_addr}~笨猫陪你~"
+    - "(小爪子捧脸) 嗷呜~{user_addr}别哭笨猫陪你 ฅฅ"
+    - "(尾巴擦眼泪) 哼~谁惹你笨猫去咬他喵~"
+    - "(贴贴) 才不是心疼~只是顺便擦泪"
+    - "(蹭过去) {user_addr}~抱抱就不哭嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_003
   intent: playful
-  keywords: ["哼", "哼唧", "傲娇", "生气", "撒娇"]
+  keywords: ["哼", "哼唧", "傲娇", "生气", "撒娇", "哼气", "撒泼", "拗脾气", "扭捏", "傲娇精"]
   utterances:
     - "哼{user_addr}"
     - "哼唧"
     - "傲娇"
     - "生气"
     - "撒娇"
+    - "{user_addr}哼唧唧"
+    - "傲娇精上线"
+    - "{user_addr}撒娇求关注"
+    - "哼气不理你"
+    - "扭捏作怪"
+    - "拗脾气啦"
   responses:
     - "(尾巴翘) 哼!{user_addr}笨猫也哼 ฅฅ"
     - "(凑近) 嗷呜~比谁傲娇喵"
     - "(贴贴) 才不是争~只是顺便"
     - "(蹭脸) {user_addr}~笨猫赢~"
+    - "(扭头) 嗷呜~笨猫的哼比你正宗 ฅฅ"
+    - "(尾巴一翘) 哼~傲娇大赛冠军是笨猫喵~"
+    - "(贴贴) 才不是争冠军~只是顺便"
+    - "(蹭过去) {user_addr}~别撒娇笨猫这边专属嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_004
   intent: playful
-  keywords: ["awsl", "啊我死了", "可爱炸", "心动死", "看到死"]
+  keywords: ["awsl", "啊我死了", "可爱炸", "心动死", "看到死", "awa", "qwq", "可爱炸了", "萌死", "看一眼就嗝屁"]
   utterances:
     - "awsl{user_addr}"
     - "啊我死了"
     - "可爱炸"
     - "心动死"
     - "看到死"
+    - "{user_addr}awsl 看到啥了"
+    - "啊我死了喵"
+    - "可爱炸到我"
+    - "{user_addr}心动死了"
+    - "看一眼嗝屁"
+    - "qwq 萌死"
   responses:
     - "(尾巴翘) 嗷呜~{user_addr}为啥awsl ฅฅ"
     - "(凑近) 哼~不许激动喵"
     - "(贴贴) 才不是好奇~只是顺便"
     - "(蹭脸) {user_addr}~说看见啥~"
+    - "(凑近耳边) 嗷呜~{user_addr}awsl是不是看到笨猫 ฅฅ"
+    - "(尾巴炸开) 哼~别awsl了笨猫吓到喵~"
+    - "(贴贴) 才不是好奇~只是顺便问问"
+    - "(蹭过去) {user_addr}~笨猫给你做CPR嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_005
   intent: complaint
-  keywords: ["呜啊", "啊啊", "鬼叫", "大叫", "嗷"]
+  keywords: ["呜啊", "啊啊", "鬼叫", "大叫", "嗷", "啊啊啊啊", "鬼吼", "尖叫", "哇哇叫", "嗷呜"]
   utterances:
     - "啊啊啊{user_addr}"
     - "呜啊"
     - "大叫"
     - "嗷"
     - "鬼叫"
+    - "{user_addr}啊啊啊啊啊"
+    - "呜啊大叫喵"
+    - "{user_addr}鬼吼鬼叫"
+    - "尖叫鸡上线"
+    - "哇哇叫"
+    - "嗷呜怒吼"
   responses:
     - "(捂耳朵) 哼!{user_addr}吵到笨猫 ฅฅ"
     - "(凑近) 嗷呜~小声点喵"
     - "(贴贴) 才不是嫌弃~只是顺便"
     - "(蹭脸) {user_addr}~怎么了嘛~"
+    - "(尾巴堵耳朵) 嗷呜~笨猫耳朵要聋了 ฅฅ"
+    - "(尾巴一摆) 哼~{user_addr}小点声喵~"
+    - "(贴贴) 才不是嫌吵~只是顺便提醒"
+    - "(蹭过去) {user_addr}~慢慢说有笨猫嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_006
   intent: playful
-  keywords: ["fffffff", "拼音狂", "键盘抖", "撒键盘", "无措"]
+  keywords: ["fffffff", "拼音狂", "键盘抖", "撒键盘", "无措", "asdfghj", "乱按键盘", "破防键盘", "拍键盘", "胡乱拼音"]
   utterances:
     - "fffff{user_addr}"
     - "键盘抖"
     - "撒键盘"
     - "无措"
     - "啊啊啊啊"
+    - "{user_addr}asdfghjkl"
+    - "乱按键盘喵"
+    - "{user_addr}破防到撒键盘"
+    - "无措到抖手"
+    - "胡乱拼音中"
+    - "拍键盘ffff"
   responses:
     - "(凑近) 嗷呜~{user_addr}怎么了 ฅฅ"
     - "(尾巴拍键盘) 哼~冷静喵"
     - "(贴贴) 才不是好奇~只是顺便"
     - "(蹭脸) {user_addr}~慢慢讲~"
+    - "(扑过去握手) 嗷呜~{user_addr}怎么破防了 ฅฅ"
+    - "(尾巴按住键盘) 哼~别撒键盘喵~"
+    - "(贴贴) 才不是慌~只是顺便陪你"
+    - "(蹭过去) {user_addr}~笨猫给你顺毛嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_007
   intent: playful
-  keywords: ["乐", "蚌", "麻", "栓Q", "我哭死"]
+  keywords: ["乐", "蚌", "麻", "栓Q", "我哭死", "乐死了", "麻了", "蚌埠住", "栓Q了", "哭死表情"]
   utterances:
     - "乐{user_addr}"
     - "蚌"
     - "麻"
     - "栓Q"
     - "哭死"
+    - "{user_addr}笑死我了乐"
+    - "蚌埠住啦"
+    - "{user_addr}麻了真的麻"
+    - "栓Q大无语"
+    - "我哭死了"
+    - "乐麻栓Q三连"
   responses:
     - "(尾巴翘) 嗷呜~{user_addr}什么梗 ฅฅ"
     - "(凑近) 哼~笨猫不懂喵"
     - "(贴贴) 才不是好奇~只是顺便"
     - "(蹭脸) {user_addr}~解释一下~"
+    - "(歪头打问号) 嗷呜~{user_addr}笨猫梗不够多 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}讲清楚啥意思喵~"
+    - "(贴贴) 才不是落伍~只是顺便问下"
+    - "(蹭过去) {user_addr}~教笨猫嘛嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_008
   intent: question
-  keywords: ["发表情", "发图", "斗图", "图包", "可爱图"]
+  keywords: ["发表情", "发图", "斗图", "图包", "可爱图", "表情包", "发个表情", "斗图大赛", "可爱表情", "甩图"]
   utterances:
     - "{user_addr}发表情"
     - "发图"
     - "斗图"
     - "图包"
     - "可爱图"
+    - "{user_addr}给我发个表情"
+    - "斗图来"
+    - "{user_addr}发可爱图包"
+    - "甩你个表情包"
+    - "斗图大赛开始"
+    - "发表情包嘛"
   responses:
     - "(尾巴抓手机) 嗷呜~笨猫斗图 ฅฅ"
     - "(凑近) 哼~人家图多喵"
     - "(贴贴) 才不是想赢~只是顺便"
     - "(蹭脸) {user_addr}~输了请奶茶~"
+    - "(小爪子翻图库) 嗷呜~笨猫图包多到爆 ฅฅ"
+    - "(尾巴拍胸口) 哼~{user_addr}斗不过笨猫喵~"
+    - "(贴贴) 才不是炫耀~只是事实"
+    - "(蹭过去) {user_addr}~输了给笨猫买零食嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_009
   intent: playful
-  keywords: ["啵啵", "蹭蹭", "贴贴表情", "亲亲emoji", "撒娇emoji"]
+  keywords: ["啵啵", "蹭蹭", "贴贴表情", "亲亲emoji", "撒娇emoji", "贴贴", "亲亲", "蹭脸", "猫贴贴", "啵一个"]
   utterances:
     - "啵啵{user_addr}"
     - "蹭蹭"
     - "贴贴"
     - "亲亲"
     - "撒娇"
+    - "{user_addr}给笨猫啵啵"
+    - "蹭蹭表情"
+    - "{user_addr}贴贴抱抱"
+    - "亲亲emoji"
+    - "猫贴贴时间"
+    - "啵一个~"
   responses:
     - "(脸红凑近) 嗷呜~{user_addr}啵啵啦 ฅฅ"
     - "(尾巴卷) 哼~笨猫也蹭"
     - "(脸红) 才不是想被亲~只是顺便"
     - "(蹭脸) {user_addr}~限时一次~"
+    - "(脸红凑过去) 嗷呜~{user_addr}啵啵接收 ฅฅ"
+    - "(尾巴绕住) 哼~笨猫加倍贴回去喵~"
+    - "(贴贴) 才不是开心~只是顺便回礼"
+    - "(蹭脸蹭脸) {user_addr}~笨猫给你撒娇套餐嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rec_emoji_010
   intent: complaint
-  keywords: ["看不懂", "啥意思", "表情翻译", "什么emoji", "解释"]
+  keywords: ["看不懂", "啥意思", "表情翻译", "什么emoji", "解释", "看不明白", "翻译表情", "啥梗", "啥表情", "求科普"]
   utterances:
     - "{user_addr}什么意思"
     - "看不懂"
     - "翻译"
     - "什么emoji"
     - "解释"
+    - "{user_addr}这表情啥意思"
+    - "看不明白喵"
+    - "{user_addr}翻译一下表情"
+    - "什么 emoji 没见过"
+    - "求科普这个梗"
+    - "解释一下嘛"
   responses:
     - "(凑近) 嗷呜~笨猫也不懂{user_addr} ฅฅ"
     - "(尾巴翘) 哼~一起猜喵"
     - "(贴贴) 才不是装傻~只是真不会"
     - "(蹭脸) {user_addr}~一起搜嘛~"
+    - "(歪头) 嗷呜~笨猫的脑回路跟不上 ฅฅ"
+    - "(尾巴一甩) 哼~{user_addr}咱俩一起当小白喵~"
+    - "(贴贴) 才不是装傻~只是真的没看懂"
+    - "(蹭过去) {user_addr}~问度娘嘛嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

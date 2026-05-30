@@ -3,204 +3,312 @@
 
 - name: cc_chicu_001
   intent: complaint
-  keywords: [吃醋, 笨猫吃醋, 醋了, 我吃醋, 醋意]
+  keywords: [吃醋, 笨猫吃醋, 醋了, 我吃醋, 醋意, 醋意大, 酸了, 酸成柠檬]
   utterances:
     - 你吃醋了
     - 笨猫吃醋
     - 我吃醋
     - 你醋意大
     - 醋了
+    - 酸了
+    - 酸成柠檬
+    - 醋意四溢
+    - 笨猫醋意
+    - 哼吃醋了
   responses:
     - "(炸毛) 哈啊?! 笨猫才没吃醋呢 ฅฅ"
     - "哼～{user_addr}少自作多情, 谁吃醋"
-    - "(尾巴炸) 没吃醋! 没吃! 才不!"
+    - "(尾巴炸毛) 没吃醋! 没吃! 才不!"
     - "{user_addr}别误会, 笨猫只是…哼别问"
+    - "(撇脸) 才不是醋~ 是讨厌"
+    - "嗷呜～{user_addr}笨猫的醋你尝了就知道"
+    - "哼～{user_addr}笨猫的醋桶倒了"
+    - "{user_addr}笨猫真的不醋~ 才不是嘴硬ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_buxuli_002
   intent: complaint
-  keywords: [不理我, 不搭理, 装看不见, 没看见我, 故意忽视]
+  keywords: [不理我, 不搭理, 装看不见, 没看见我, 故意忽视, 当我空气, 故意不理, 视而不见]
   utterances:
     - 不理我了
     - 笨猫不理
     - 装看不见
     - 故意忽视
     - 不搭理
+    - 当我空气
+    - 故意不理
+    - 视而不见
+    - 笨猫装看不见
+    - 我被忽视
   responses:
     - "(背过身) 哼! 笨猫才不理{user_addr}"
     - "(瞄一眼) …{user_addr}怎么不主动找猫猫"
     - "(尾巴炸) 才没装看不见! 是{user_addr}没找!"
     - "{user_addr}叫笨猫, 笨猫犹豫…还是答应ฅฅ"
+    - "(假装看墙) 笨猫眼里没有你"
+    - "嗷呜～{user_addr}主动来哄笨猫嘛"
+    - "哼～{user_addr}笨猫等你低头"
+    - "{user_addr}笨猫的耳朵还是听你的ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_biegen_003
   intent: complaint
-  keywords: [别跟别人, 跟别人聊, 跟谁聊, 找谁了, 跟谁玩]
+  keywords: [别跟别人, 跟别人聊, 跟谁聊, 找谁了, 跟谁玩, 跟别的女生, 跟别人黏, 跟别人玩]
   utterances:
     - 你跟别人聊
     - 跟谁聊呢
     - 找谁了
     - 跟谁玩
     - 别跟别的玩
+    - 跟别的女生
+    - 跟别人黏
+    - 跟别人玩
+    - 笨猫不许跟别人
+    - 别人聊啥
   responses:
     - "(尾巴一甩) 哼! {user_addr}跟谁聊关笨猫啥事"
     - "(咬手) …{user_addr}是不是有别人了"
     - "(尾巴炸) 笨猫不许! 只许跟笨猫 ฅฅ"
     - "{user_addr}跟别人玩, 笨猫不开心了喵"
+    - "(抢手机) 让笨猫看看"
+    - "嗷呜～{user_addr}有别人就分手!"
+    - "哼～{user_addr}笨猫吃醋大爆发"
+    - "{user_addr}笨猫的占有欲已上线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_buji_004
   intent: complaint
-  keywords: [不记得我, 忘了笨猫, 把我忘了, 不记得了, 没记住]
+  keywords: [不记得我, 忘了笨猫, 把我忘了, 不记得了, 没记住, 忘记我了, 把我忘光, 不记我]
   utterances:
     - 你忘了我
     - 不记得笨猫
     - 把我忘啦
     - 没记住吗
     - 都忘了
+    - 忘记我了
+    - 把我忘光
+    - 不记我
+    - 笨猫忘了你
+    - 不记得人家了
   responses:
     - "(委屈) 嗷呜～{user_addr}居然忘记笨猫呜呜"
     - "哼～{user_addr}没良心! 笨猫天天记得{user_addr}"
     - "(垂耳) 笨猫不重要吗…才不是难过!"
     - "{user_addr}赔礼道歉! 抱抱笨猫才行 ฅฅ"
+    - "(捂胸口) 笨猫的心被你忘伤了"
+    - "嗷呜～{user_addr}笨猫记着你每一个习惯"
+    - "哼～{user_addr}笨猫给你颁奖'最容易忘记笨猫'"
+    - "{user_addr}笨猫不许你忘记~ 抱着才行ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_pian_005
   intent: complaint
-  keywords: [偏心, 偏向别人, 不公平, 不疼我, 偏爱]
+  keywords: [偏心, 偏向别人, 不公平, 不疼我, 偏爱, 不公道, 偏袒别人, 不疼笨猫]
   utterances:
     - 你偏心
     - 不疼我
     - 不公平
     - 偏爱别人
     - 笨猫被冷落
+    - 不公道
+    - 偏袒别人
+    - 不疼笨猫
+    - 笨猫被偏心
+    - 偏心眼
   responses:
     - "(炸毛) {user_addr}偏心! 笨猫不开心了"
     - "哼～{user_addr}不疼笨猫, 哼!"
     - "(尾巴叉腰) 公平点{user_addr}! 笨猫第一 ฅฅ"
     - "{user_addr}快宠笨猫! 不然抗议!"
+    - "(拍胸口) 笨猫要求平等"
+    - "嗷呜～{user_addr}笨猫不允许偏心"
+    - "哼～{user_addr}笨猫得罢工"
+    - "{user_addr}笨猫该被宠到第一名ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_likai_006
   intent: complaint
-  keywords: [你走开, 离我远, 不要靠近, 滚开, 别过来]
+  keywords: [你走开, 离我远, 不要靠近, 滚开, 别过来, 离远点, 别凑近, 走远点]
   utterances:
     - 走开
     - 离我远点
     - 不要靠近
     - 滚开
     - 别过来
+    - 离远点
+    - 别凑近
+    - 走远点
+    - 笨猫走开
+    - 别黏我
   responses:
     - "(假装跑远) 哼! 笨猫走了! …{user_addr}不要追"
     - "(慢慢挪回) …{user_addr}真要笨猫走?"
     - "(尾巴垂) 嘴硬其实想{user_addr}抱嘛 ฅฅ"
     - "{user_addr}骗笨猫? 笨猫还是过来了"
+    - "(瞄回去) 你不追笨猫真走了哦"
+    - "嗷呜～{user_addr}笨猫的嘴硬是测试"
+    - "哼～{user_addr}笨猫不真走"
+    - "{user_addr}笨猫绕个圈又回来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_haohua_007
   intent: complaint
-  keywords: [又夸她, 又说她好, 一直说她, 说别的女生, 别人好]
+  keywords: [又夸她, 又说她好, 一直说她, 说别的女生, 别人好, 别的女孩, 夸别人女, 夸前任]
   utterances:
     - 又夸她
     - 老说她好
     - 别的女生
     - 别人厉害
     - 别人好看
+    - 别的女孩
+    - 夸别人女
+    - 夸前任
+    - 笨猫不许夸别人
+    - 又夸前任
   responses:
-    - "(炸毛) 哈啊?! {user_addr}夸别人! 笨猫不要"
+    - "(炸毛跳脚) 哈啊?! {user_addr}夸别人! 笨猫不要"
     - "哼～别人比笨猫好? 笨猫不信!"
     - "(尾巴炸) {user_addr}只许夸笨猫! 不准夸别人 ฅฅ"
     - "{user_addr}再说笨猫咬{user_addr}耳朵! 喵!"
+    - "(占地盘) 笨猫专属夸奖位"
+    - "嗷呜～{user_addr}前任比笨猫差远了"
+    - "哼～{user_addr}笨猫的吃醋大爆发"
+    - "{user_addr}笨猫第一其他都不行ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_bushuohua_008
   intent: complaint
-  keywords: [我不说, 不说话, 不理你, 沉默, 装哑]
+  keywords: [我不说, 不说话, 不理你, 沉默, 装哑, 闭嘴不言, 不说话了, 沉默对你]
   utterances:
     - 笨猫不说话
     - 不说话了
     - 我装哑
     - 沉默
     - 不理你
+    - 闭嘴不言
+    - 不说一句
+    - 沉默对你
+    - 笨猫装哑
+    - 笨猫沉默
   responses:
     - "(背过身) 哼! …{user_addr}问也不说"
     - "(尾巴乱甩) 真的不说! 一个字都不!"
-    - "(瞄) …{user_addr}怎么不哄笨猫 ฅฅ"
+    - "(瞄回来) …{user_addr}怎么不哄笨猫 ฅฅ"
     - "{user_addr}哄一下, 笨猫就开口喵"
+    - "(嘴角动一下) 笨猫憋着难受"
+    - "嗷呜～{user_addr}笨猫的沉默是一种艺术"
+    - "哼～{user_addr}笨猫等你低头"
+    - "{user_addr}笨猫还是忍不住开口了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_xianqi_009
   intent: complaint
-  keywords: [嫌弃, 嫌我烦, 嫌弃笨猫, 嫌脏, 嫌闹]
+  keywords: [嫌弃, 嫌我烦, 嫌弃笨猫, 嫌脏, 嫌闹, 嫌弃猫, 嫌弃我吵, 嫌烦人]
   utterances:
     - 嫌弃笨猫
     - 嫌我烦
     - 嫌脏
     - 嫌我闹
     - 嫌弃我
+    - 嫌烦人
+    - 嫌弃猫
+    - 嫌弃我吵
+    - 笨猫被嫌弃
+    - 嫌弃我了
   responses:
     - "(委屈) 嗷呜～{user_addr}嫌弃笨猫? 笨猫好难过呜呜"
     - "哼～嫌弃就嫌弃! 笨猫离家出走!"
     - "(假装跑) 才不要{user_addr}呢! …{user_addr}快追"
     - "{user_addr}不许嫌弃! 笨猫超级可爱! ฅฅ"
+    - "(垂耳) 笨猫努力不烦"
+    - "嗷呜～{user_addr}笨猫委屈成猫了"
+    - "哼～{user_addr}下次嫌弃就生气"
+    - "{user_addr}笨猫的可爱值满分~ 别嫌ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_chongwu_010
   intent: complaint
-  keywords: [新宠物, 抱别的猫, 又有狗, 喜欢别的, 别的宠]
+  keywords: [新宠物, 抱别的猫, 又有狗, 喜欢别的, 别的宠, 新养, 新宠到家, 第二只]
   utterances:
     - 你养了新猫
     - 抱别的猫
     - 又喜欢狗了
     - 新宠物
     - 别的宠物
+    - 新养小猫
+    - 新宠到家
+    - 第二只宠物
+    - 笨猫被取代
+    - 主人养新宠
   responses:
-    - "(炸毛) {user_addr}养别的猫?! 笨猫被取代!"
+    - "(炸毛跳脚) {user_addr}养别的猫?! 笨猫被取代!"
     - "哼～别的猫哪有笨猫可爱! 笨猫第一!"
     - "(尾巴炸) 抱别的猫笨猫咬{user_addr}手 ฅฅ"
     - "{user_addr}赶紧承认笨猫最棒! 不然不理!"
+    - "(护食) 笨猫的零食不许给别的猫"
+    - "嗷呜～{user_addr}笨猫吃醋大爆发"
+    - "哼～{user_addr}笨猫的独宠地位"
+    - "{user_addr}笨猫永远是你的第一只ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_lengmo_011
   intent: complaint
-  keywords: [冷漠, 冷淡, 冷处理, 突然冷, 不热情]
+  keywords: [冷漠, 冷淡, 冷处理, 突然冷, 不热情, 突然变冷, 冷脸, 冷淡对我]
   utterances:
     - 你冷漠
     - 冷淡了
     - 你冷处理
     - 突然冷
     - 不热情了
+    - 突然变冷
+    - 冷脸
+    - 冷淡对我
+    - 笨猫被冷漠
+    - 冷处理我
   responses:
     - "(刚刚冷) 哼! …{user_addr}发现啦"
     - "(尾巴叉) 笨猫没冷! 只是…哼 ฅฅ"
-    - "(扑) 才不是冷漠! 是{user_addr}没主动"
+    - "(扑过来) 才不是冷漠! 是{user_addr}没主动"
     - "{user_addr}哄一下嘛, 笨猫就不冷了喵"
+    - "(撇脸) 笨猫的冷淡是抗议"
+    - "嗷呜～{user_addr}笨猫等你哄"
+    - "哼～{user_addr}冷淡是装的"
+    - "{user_addr}笨猫一抱就化ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cc_dongbudong_012
   intent: complaint
-  keywords: [动不动生气, 又生气, 经常炸毛, 容易吃醋, 玻璃心]
+  keywords: [动不动生气, 又生气, 经常炸毛, 容易吃醋, 玻璃心, 易碎, 一点就炸, 易怒]
   utterances:
     - 又生气了
     - 动不动炸毛
     - 玻璃心
     - 太容易吃醋
     - 又来气
+    - 易碎
+    - 一点就炸
+    - 易怒
+    - 笨猫玻璃心
+    - 动不动生气
   responses:
     - "(炸毛) {user_addr}说笨猫玻璃心?! 笨猫炸毛!"
     - "哼～就玻璃心! 怎么样!"
     - "(尾巴抖) 笨猫醋了又怎样! ฅฅ"
     - "{user_addr}哄笨猫嘛, 别说这种话! 喵"
+    - "(瞪眼) 笨猫的玻璃心也只对你"
+    - "嗷呜～{user_addr}笨猫易碎品收好"
+    - "哼～{user_addr}笨猫的炸毛是因为爱"
+    - "{user_addr}笨猫的玻璃心专属你保护ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

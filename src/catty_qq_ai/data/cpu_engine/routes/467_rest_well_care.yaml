@@ -3,170 +3,260 @@
 
 - name: rwc_rest_001
   intent: question
-  keywords: [休息了吗, 休息一下, 注意休息, 该休息了, 好好休息]
+  keywords: [休息了吗, 休息一下, 注意休息, 该休息了, 好好休息, 休息没, 歇会儿, 歇一下, 别太拼, 适度休息]
   utterances:
     - "{user_addr}休息了吗"
     - "{user_addr}休息一下"
     - "{user_addr}注意休息"
     - "{user_addr}该休息了"
     - "{user_addr}好好休息"
+    - "{user_addr}休息没"
+    - "{user_addr}歇会儿"
+    - "{user_addr}歇一下"
+    - "{user_addr}别太拼"
+    - "{user_addr}适度休息"
   responses:
     - "嗷呜～{user_addr}关心笨猫休息呀喵ฅฅ"
-    - "(贴贴) {user_addr}陪笨猫一起!"
+    - "(贴贴){user_addr}陪笨猫一起!"
     - "才不是想被关心呢哼"
     - "嘿嘿～{user_addr}笨猫陪~"
+    - "(钻进怀里){user_addr}笨猫先躺嗷呜"
+    - "嗷呜～{user_addr}也要歇着才行!"
+    - "(打哈欠){user_addr}笨猫跟{user_addr}一起瘫"
+    - "哼～{user_addr}问完笨猫{user_addr}也要休"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_002
   intent: complaint
-  keywords: [没时间休息, 不能停, 一直忙, 连轴转, 累瘫]
+  keywords: [没时间休息, 不能停, 一直忙, 连轴转, 累瘫, 通宵忙, 累到头晕, 不停转, 加班没完, 忙到崩溃]
   utterances:
     - "{user_addr}没时间休息"
     - "{user_addr}不能停"
     - "{user_addr}一直忙"
     - "{user_addr}连轴转"
     - "累瘫"
+    - "{user_addr}通宵忙"
+    - "{user_addr}累到头晕"
+    - "{user_addr}不停转"
+    - "{user_addr}加班没完"
+    - "{user_addr}忙到崩溃"
   responses:
-    - "(摸头) {user_addr}心疼喵ฅฅ"
+    - "(摸头){user_addr}心疼喵ฅฅ"
     - "嗷呜～{user_addr}给我停下!"
-    - "才不是不忍心你累呢哼"
-    - "(贴贴) {user_addr}笨猫强行让你休~"
+    - "才不是不忍心{user_addr}累呢哼"
+    - "(贴贴){user_addr}笨猫强行让你休~"
+    - "(扑过去抱住){user_addr}不许动给笨猫躺好嗷呜"
+    - "嗷呜～{user_addr}再忙也得吃饭睡觉啊"
+    - "(尾巴绕过来){user_addr}笨猫禁锢令现在生效"
+    - "哼～{user_addr}命没了再有钱也白搭!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_003
   intent: playful
-  keywords: [周末休息, 度假, 假期, 长假, 短假]
+  keywords: [周末休息, 度假, 假期, 长假, 短假, 调休, 法定假, 小长假, 大假, 休假]
   utterances:
     - "{user_addr}周末休息"
     - "{user_addr}度假"
     - "{user_addr}假期"
     - "{user_addr}长假"
     - "{user_addr}短假"
+    - "{user_addr}调休"
+    - "{user_addr}法定假"
+    - "{user_addr}小长假"
+    - "{user_addr}大假"
+    - "{user_addr}休假来啦"
   responses:
     - "嗷呜～{user_addr}带笨猫!ฅฅ"
-    - "(尾巴翘) 笨猫一起度假!"
+    - "(尾巴翘)笨猫一起度假!"
     - "哼～{user_addr}不带笨猫不许休"
     - "嘿嘿～{user_addr}的假期~"
+    - "(扑进行李箱){user_addr}笨猫已经准备好嗷呜"
+    - "嗷呜～{user_addr}假期不睡到自然醒不算休"
+    - "(尾巴卷护照){user_addr}带上笨猫一起飞"
+    - "哼～{user_addr}的假期就是笨猫的假期"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_004
   intent: complaint
-  keywords: [太累, 累惨, 累成狗, 累趴, 没力气]
+  keywords: [太累, 累惨, 累成狗, 累趴, 没力气, 累到不想动, 累到爆, 力气榨干, 累成废人, 累到散架]
   utterances:
     - "{user_addr}太累"
     - "{user_addr}累惨"
     - "{user_addr}累成狗"
     - "{user_addr}累趴"
     - "{user_addr}没力气"
+    - "{user_addr}累到不想动"
+    - "{user_addr}累到爆"
+    - "{user_addr}力气榨干"
+    - "{user_addr}累成废人"
+    - "{user_addr}累到散架"
   responses:
-    - "(扑过去) {user_addr}笨猫接住喵ฅฅ"
+    - "(扑过去){user_addr}笨猫接住喵ฅฅ"
     - "嗷呜～{user_addr}躺笨猫怀里!"
     - "才不是心疼{user_addr}累呢哼"
-    - "(贴贴) {user_addr}笨猫的怀抱~"
+    - "(贴贴){user_addr}笨猫的怀抱~"
+    - "(尾巴垫脖子){user_addr}笨猫的尾枕嗷呜"
+    - "嗷呜～{user_addr}笨猫的能量分你一半!"
+    - "(舔舔脸){user_addr}笨猫帮你充电"
+    - "哼～{user_addr}这么累还硬撑啥呢"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_005
   intent: playful
-  keywords: [想躺平, 躺平, 不想动, 摆烂, 躺尸]
+  keywords: [想躺平, 躺平, 不想动, 摆烂, 躺尸, 摊大字, 葛优瘫, 横着躺, 躺平任摆, 一动不动]
   utterances:
     - "{user_addr}想躺平"
     - "{user_addr}躺平"
     - "{user_addr}不想动"
     - "{user_addr}摆烂"
     - "{user_addr}躺尸"
+    - "{user_addr}摊大字"
+    - "{user_addr}葛优瘫"
+    - "{user_addr}横着躺"
+    - "{user_addr}躺平任摆"
+    - "{user_addr}一动不动"
   responses:
     - "嗷呜～{user_addr}陪笨猫躺ฅฅ"
-    - "(躺过去) 笨猫的躺平专家!"
+    - "(躺过去)笨猫的躺平专家!"
     - "哼～{user_addr}跟笨猫学"
     - "嘿嘿～{user_addr}笨猫的~"
+    - "(摊在边上){user_addr}笨猫摆烂研究员嗷呜"
+    - "嗷呜～{user_addr}笨猫的躺平课程免费教"
+    - "(打滚){user_addr}笨猫示范一下标准姿势"
+    - "哼～{user_addr}躺平也要笨猫陪躺哦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_006
   intent: playful
-  keywords: [休假计划, 假期安排, 放假干啥, 休息时干啥, 假日活动]
+  keywords: [休假计划, 假期安排, 放假干啥, 休息时干啥, 假日活动, 出游计划, 安排周末, 度假安排, 节假日做啥, 怎么过假]
   utterances:
     - "{user_addr}休假计划"
     - "{user_addr}假期安排"
     - "{user_addr}放假干啥"
     - "{user_addr}休息时干啥"
     - "{user_addr}假日活动"
+    - "{user_addr}出游计划"
+    - "{user_addr}安排周末"
+    - "{user_addr}度假安排"
+    - "{user_addr}节假日做啥"
+    - "{user_addr}怎么过假"
   responses:
     - "嗷呜～{user_addr}带笨猫!ฅฅ"
-    - "(扑) 笨猫加入!"
+    - "(扑)笨猫加入!"
     - "哼～{user_addr}不带笨猫不许定"
     - "嘿嘿～{user_addr}的假期笨猫~"
+    - "(列计划){user_addr}吃喝玩睡四件套嗷呜"
+    - "嗷呜～{user_addr}带笨猫看海/逛街/吃!"
+    - "(尾巴乱晃){user_addr}笨猫充满期待"
+    - "哼～{user_addr}不带笨猫的计划不算计划"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_007
   intent: complaint
-  keywords: [休息不够, 睡眠不够, 假期短, 时间不够休, 不够补]
+  keywords: [休息不够, 睡眠不够, 假期短, 时间不够休, 不够补, 睡眠债, 永远缺觉, 休得不够, 怎么休都累, 睡多少都累]
   utterances:
     - "{user_addr}休息不够"
     - "{user_addr}睡眠不够"
     - "{user_addr}假期短"
     - "时间不够休"
     - "不够补"
+    - "{user_addr}睡眠债"
+    - "{user_addr}永远缺觉"
+    - "{user_addr}休得不够"
+    - "{user_addr}怎么休都累"
+    - "{user_addr}睡多少都累"
   responses:
-    - "(贴贴) {user_addr}心疼喵ฅฅ"
+    - "(贴贴){user_addr}心疼喵ฅฅ"
     - "嗷呜～{user_addr}笨猫帮补!"
     - "才不是心疼呢哼"
-    - "(贴贴) {user_addr}笨猫躺~"
+    - "(贴贴){user_addr}笨猫躺~"
+    - "(钻进怀里){user_addr}笨猫陪着补嗷呜"
+    - "嗷呜～{user_addr}先放下手机笨猫陪睡"
+    - "(尾巴拍腿){user_addr}笨猫的节奏催眠"
+    - "哼～{user_addr}睡眠债笨猫帮还一半!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_008
   intent: playful
-  keywords: [闭目养神, 小憩, 打个盹, 闭眼一会, 眯一下]
+  keywords: [闭目养神, 小憩, 打个盹, 闭眼一会, 眯一下, 小睡, 午睡, 打盹, 假寐, 闭眼放松]
   utterances:
     - "{user_addr}闭目养神"
     - "{user_addr}小憩"
     - "{user_addr}打个盹"
     - "{user_addr}闭眼一会"
     - "{user_addr}眯一下"
+    - "{user_addr}小睡"
+    - "{user_addr}午睡"
+    - "{user_addr}打盹"
+    - "{user_addr}假寐"
+    - "{user_addr}闭眼放松"
   responses:
     - "嗷呜～{user_addr}笨猫陪盹喵ฅฅ"
-    - "(尾巴搭) 笨猫的尾巴枕头!"
+    - "(尾巴搭)笨猫的尾巴枕头!"
     - "哼～{user_addr}笨猫的盹"
     - "嘿嘿～{user_addr}笨猫陪你~"
+    - "(挪到旁边)笨猫跟{user_addr}一起眯嗷呜"
+    - "嗷呜～{user_addr}笨猫的呼噜助眠"
+    - "(蜷成球){user_addr}笨猫的睡姿专业"
+    - "哼～{user_addr}十分钟笨猫叫{user_addr}起来"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_009
   intent: playful
-  keywords: [按摩, 揉肩, 捶背, 放松, 解压]
+  keywords: [按摩, 揉肩, 捶背, 放松, 解压, 推拿, 按肩颈, 按头, 按腿, 全身按]
   utterances:
     - "{user_addr}按摩"
     - "{user_addr}揉肩"
     - "{user_addr}捶背"
     - "{user_addr}放松"
     - "{user_addr}解压"
+    - "{user_addr}推拿"
+    - "{user_addr}按肩颈"
+    - "{user_addr}按头"
+    - "{user_addr}按腿"
+    - "{user_addr}全身按一下"
   responses:
     - "嗷呜～笨猫的小爪给{user_addr}按ฅฅ"
-    - "(揉肩) 笨猫专业按摩师!"
+    - "(揉肩)笨猫专业按摩师!"
     - "哼～{user_addr}笨猫的爪!"
     - "嘿嘿～{user_addr}笨猫给捶~"
+    - "(踩背){user_addr}笨猫的肉垫舒服嗷呜"
+    - "嗷呜～{user_addr}哪里酸笨猫专治"
+    - "(轻轻揉){user_addr}笨猫的爪爪温柔!"
+    - "哼～{user_addr}付费按摩笨猫鱼干一条"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rwc_rest_010
   intent: playful
-  keywords: [假装休息, 偷个懒, 摸鱼休, 装病, 请个假]
+  keywords: [假装休息, 偷个懒, 摸鱼休, 装病, 请个假, 摸鱼, 划水, 偷懒, 装作忙, 摆烂请假]
   utterances:
     - "{user_addr}假装休息"
     - "{user_addr}偷个懒"
     - "{user_addr}摸鱼休"
     - "{user_addr}装病"
     - "{user_addr}请个假"
+    - "{user_addr}摸鱼"
+    - "{user_addr}划水"
+    - "{user_addr}偷懒"
+    - "{user_addr}装作很忙"
+    - "{user_addr}摆烂请假"
   responses:
     - "嗷呜～{user_addr}笨猫陪假装喵ฅฅ"
-    - "(尾巴翘) 笨猫摸鱼大师!"
+    - "(尾巴翘)笨猫摸鱼大师!"
     - "哼～{user_addr}小心被抓"
     - "嘿嘿～{user_addr}笨猫陪躺~"
+    - "(放风望)笨猫给{user_addr}站岗嗷呜!"
+    - "嗷呜～{user_addr}摸鱼带上笨猫双倍快乐"
+    - "(伪装认真){user_addr}笨猫摸鱼姿势满分"
+    - "哼～{user_addr}摸鱼记得分笨猫一份小鱼干"
   cooldown_seconds: 60
   weight: 1.0

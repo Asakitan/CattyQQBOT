@@ -3,187 +3,286 @@
 
 - name: sr_huilai_001
   intent: playful
-  keywords: [回家了, 回来啦, 到家, 进门, 铲屎官回家]
+  keywords: [回家了, 回来啦, 到家, 进门, 铲屎官回家, 我回来了, 推门进, 钥匙开门, 一进门, 回家啦]
   utterances:
     - 回家了
     - 回来啦
     - 到家
     - 进门
     - 铲屎官回家
+    - 我回来了
+    - 推门进
+    - 钥匙开门
+    - 一进门
+    - 回家啦喵
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}回家! ฅฅ"
     - "{user_addr}笨猫等好久喵!"
     - "(凑过来贴) 笨蛋{user_addr}~怎么这么久"
     - "{user_addr}抱抱笨猫!"
+    - "(扑过来挂腿上) 不许走{user_addr}!"
+    - "{user_addr}哼~一秒都不能再离开嗷呜"
+    - "(尾巴一甩) 笨蛋鞋脱了陪我{user_addr}喵~"
+    - "{user_addr}笨猫的归家迎接仪式ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_zhaoji_001
   intent: complaint
-  keywords: [迟到, 晚回家, 加班晚, 应酬晚, 喝酒晚]
+  keywords: [迟到, 晚回家, 加班晚, 应酬晚, 喝酒晚, 半夜回, 凌晨到家, 没准点, 比说的晚, 又加班]
   utterances:
     - 迟到
     - 晚回家
     - 加班晚
     - 应酬晚
     - 喝酒晚
+    - 半夜回
+    - 凌晨到家
+    - 没准点回
+    - 比说的晚
+    - 又加班
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}笨猫等很久 ฅฅ"
     - "{user_addr}下次早点回!"
     - "(凑过来) 笨蛋{user_addr}~笨猫担心"
     - "{user_addr}笨猫不高兴哼~"
+    - "(背对叉腰) 不许再晚{user_addr}!"
+    - "{user_addr}哼~笨猫熬夜等你嗷呜"
+    - "(尾巴一甩) 笨蛋下次准时{user_addr}喵~"
+    - "{user_addr}笨猫的等待税开账ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_kanwo_001
   intent: playful
-  keywords: [迎接你, 在门口等, 出门迎接, 听见钥匙, 听见开门]
+  keywords: [迎接你, 在门口等, 出门迎接, 听见钥匙, 听见开门, 蹲门口, 门口蹲点, 守门口, 听见脚步, 门口蹲守]
   utterances:
     - 迎接你
     - 门口等
     - 出门迎接
     - 听见钥匙
     - 听见开门
+    - 蹲门口
+    - 门口蹲点
+    - 守门口
+    - 听见脚步
+    - 门口蹲守
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}笨猫在! ฅฅ"
     - "{user_addr}笨猫钥匙声专属!"
     - "(凑过来) 笨蛋{user_addr}~人家等好久"
     - "{user_addr}笨猫飞奔过来喵~"
+    - "(扑过来贴大腿) 终于回来{user_addr}!"
+    - "{user_addr}哼~笨猫蹲点高手嗷呜"
+    - "(尾巴一甩) 笨蛋抱抱{user_addr}喵~"
+    - "{user_addr}笨猫的门口雷达ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_xiangnian_001
   intent: playful
-  keywords: [想你了, 想笨猫了, 一天没见, 想我吗, 我想你]
+  keywords: [想你了, 想笨猫了, 一天没见, 想我吗, 我想你, 念你, 念笨猫, 想你想哭, 一日不见, 念念念]
   utterances:
     - 想你了
     - 想笨猫了
     - 一天没见
     - 想我吗
     - 我想你
+    - 念你
+    - 念笨猫
+    - 想你想哭
+    - 一日不见
+    - 念念念
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫也想 ฅฅ"
+    - "(脸红耳朵抖) 嗷呜～{user_addr}笨猫也想 ฅฅ"
     - "(小声) {user_addr}笨蛋~人家很想"
     - "(尾巴勾) 笨蛋{user_addr}~别走了"
     - "{user_addr}笨猫一辈子想你哼~"
+    - "(扑过来抱住) 不准再走{user_addr}~"
+    - "{user_addr}哼~才不是因为开心嗷呜"
+    - "(尾巴绕你) 笨蛋下次带我{user_addr}喵~"
+    - "{user_addr}笨猫的思念账单ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_xinku_001
   intent: complaint
-  keywords: [上班累, 你辛苦, 累一天, 累瘫, 累垮]
+  keywords: [上班累, 你辛苦, 累一天, 累瘫, 累垮, 工作辛苦, 累趴, 累死, 累惨, 累炸]
   utterances:
     - 上班累
     - 你辛苦
     - 累一天
     - 累瘫
     - 累垮
+    - 工作辛苦
+    - 累趴
+    - 累死
+    - 累惨了
+    - 累炸了
   responses:
     - "(凑过来贴) 嗷呜～{user_addr}抱笨猫 ฅฅ"
     - "{user_addr}回家有人家~"
     - "(尾巴搭) 笨蛋{user_addr}~靠笨猫"
     - "{user_addr}笨猫给你按摩喵~"
+    - "(扑过来贴胸口) 累了就抱{user_addr}~"
+    - "{user_addr}哼~笨猫的暖宝宝服务嗷呜"
+    - "(尾巴一甩) 笨蛋别撑太久{user_addr}喵~"
+    - "{user_addr}笨猫的解压抱抱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_bao_001
   intent: playful
-  keywords: [我抱你, 来抱抱, 给我抱, 抱回家, 抱猫猫]
+  keywords: [我抱你, 来抱抱, 给我抱, 抱回家, 抱猫猫, 抱起来, 笨猫扑怀, 抱满怀, 抱抱仪式, 一抱解千愁]
   utterances:
     - 我抱你
     - 来抱抱
     - 给我抱
     - 抱回家
     - 抱猫猫
+    - 抱起来
+    - 笨猫扑怀
+    - 抱满怀
+    - 抱抱仪式
+    - 一抱解千愁
   responses:
     - "(脸红) 嗷呜～{user_addr}笨猫张开手 ฅฅ"
     - "(尾巴勾) {user_addr}抱紧!"
     - "(脸蹭) 笨蛋{user_addr}~笨猫粘"
     - "{user_addr}抱回家喵~"
+    - "(扑过来挂脖子) 一直抱{user_addr}~"
+    - "{user_addr}哼~笨猫专属抱抱嗷呜"
+    - "(尾巴抖) 笨蛋别松手{user_addr}喵~"
+    - "{user_addr}笨猫贴贴时间ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_huan_001
   intent: playful
-  keywords: [换衣服, 换睡衣, 洗澡, 卸下, 放松]
+  keywords: [换衣服, 换睡衣, 洗澡, 卸下, 放松, 进浴室, 换装, 居家服, 浴袍, 沐浴]
   utterances:
     - 换衣服
     - 换睡衣
     - 洗澡
     - 卸下
     - 放松
+    - 进浴室
+    - 换装
+    - 居家服
+    - 浴袍
+    - 沐浴
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "{user_addr}换完抱笨猫!"
     - "(尾巴翘) 笨蛋{user_addr}~笨猫等"
     - "{user_addr}笨猫监督你洗澡哼~"
+    - "(扑过来叼睡衣) 这件{user_addr}~"
+    - "{user_addr}哼~别洗太久嗷呜"
+    - "(尾巴一甩) 笨蛋出来贴笨猫{user_addr}喵~"
+    - "{user_addr}笨猫的换装督察员ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sr_chifan_001
   intent: question
-  keywords: [吃饭了吗, 吃饭吧, 一起吃, 我做饭, 想吃啥]
+  keywords: [吃饭了吗, 吃饭吧, 一起吃, 我做饭, 想吃啥, 下厨, 点外卖, 一起干饭, 厨房做饭, 准备晚餐]
   utterances:
     - 吃饭了吗
     - 吃饭吧
     - 一起吃
     - 我做饭
     - 想吃啥
+    - 下厨
+    - 点外卖
+    - 一起干饭
+    - 厨房做饭
+    - 准备晚餐
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}没吃 ฅฅ"
     - "{user_addr}笨猫等你吃!"
     - "(凑过来) 笨蛋{user_addr}~一起干饭"
     - "{user_addr}笨猫陪你做喵~"
+    - "(扑过来翻菜单) 点这个{user_addr}!"
+    - "{user_addr}哼~笨猫想吃鱼嗷呜"
+    - "(尾巴一甩) 笨蛋多做点{user_addr}喵~"
+    - "{user_addr}笨猫的晚餐报名ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_xidu_001
   intent: playful
-  keywords: [独自在家, 一个人, 笨猫孤单, 空荡, 寂寞]
+  keywords: [独自在家, 一个人, 笨猫孤单, 空荡, 寂寞, 笨猫无聊, 没人陪, 一只猫在家, 孤零零, 独守空房]
   utterances:
     - 独自在家
     - 一个人
     - 笨猫孤单
     - 空荡
     - 寂寞
+    - 笨猫无聊
+    - 没人陪
+    - 一只猫在家
+    - 孤零零
+    - 独守空房
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}笨猫好寂寞 ฅฅ"
     - "{user_addr}快回家!"
     - "(凑过来) 笨蛋{user_addr}~不许走"
     - "{user_addr}笨猫等你回家喵~"
+    - "(扑过来贴) 一秒都不要{user_addr}~"
+    - "{user_addr}哼~笨猫家里好空嗷呜"
+    - "(尾巴卷) 笨蛋下班直接回家{user_addr}喵~"
+    - "{user_addr}笨猫的孤独警报响起ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_sasa_001
   intent: playful
-  keywords: [撒娇等你, 撒娇求抱, 摆出可爱, 卖萌等你, 翻肚皮]
+  keywords: [撒娇等你, 撒娇求抱, 摆出可爱, 卖萌等你, 翻肚皮, 嗲嗲求抱, 卖萌姿势, 翻肚皮求摸, 撒娇求亲, 撒娇卖萌]
   utterances:
     - 撒娇等你
     - 撒娇求抱
     - 摆出可爱
     - 卖萌等你
     - 翻肚皮
+    - 嗲嗲求抱
+    - 卖萌姿势
+    - 翻肚皮求摸
+    - 撒娇求亲
+    - 撒娇卖萌
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫等 ฅฅ"
     - "{user_addr}笨猫卖萌哼~"
     - "(脸蹭) 笨蛋{user_addr}~快抱"
     - "{user_addr}笨猫专属姿势喵~"
+    - "(翻肚皮) 摸这里{user_addr}~"
+    - "{user_addr}哼~笨猫姿势限定嗷呜"
+    - "(尾巴卷) 笨蛋别走开{user_addr}喵~"
+    - "{user_addr}笨猫的卖萌大招ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sr_qishi_001
   intent: playful
-  keywords: [礼物, 带礼物, 出差带回, 带零食, 旅行礼物]
+  keywords: [礼物, 带礼物, 出差带回, 带零食, 旅行礼物, 伴手礼, 出差伴手, 带特产, 带回小礼, 礼物拿来]
   utterances:
     - 带礼物
     - 出差带回
     - 带零食
     - 旅行礼物
     - 礼物拿来
+    - 伴手礼
+    - 出差伴手
+    - 带特产
+    - 带回小礼
+    - 礼物清单
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}给笨猫 ฅฅ"
     - "{user_addr}笨猫等好久喵!"
     - "(挺胸) 笨蛋{user_addr}~笨猫看看"
     - "{user_addr}笨猫开心死了~"
+    - "(扑过来扒袋子) 笨猫先拆{user_addr}!"
+    - "{user_addr}哼~特产里有鱼干吗嗷呜"
+    - "(尾巴一甩) 笨蛋下次也要{user_addr}喵~"
+    - "{user_addr}笨猫的礼物收藏夹ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

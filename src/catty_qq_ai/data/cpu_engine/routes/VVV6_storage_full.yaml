@@ -3,204 +3,336 @@
 
 - name: sf_sdcard_full_001
   intent: complaint
-  keywords: [存储卡满, sd卡满, 卡满了, 拍不了, 内存卡满]
+  keywords: [存储卡满, sd卡满, 卡满了, 拍不了, 内存卡满, SD 红条, 拍照报错, 存储不足, 拍片爆卡, SD 容量满]
   utterances:
     - 存储卡又满了
     - sd卡满了拍不了
     - "{user_addr}内存卡满啦"
     - 卡满了好烦
     - 笨猫sd卡又爆了
+    - "{user_addr}SD 红条警告"
+    - 拍照报存储不足
+    - SD 容量爆了
+    - "{user_addr}存储卡爆满"
+    - 拍照拍不了存满
+    - 内存卡用完了
+    - SD 卡装不下了
   responses:
     - "(尾巴垂下) 嗷呜～存储卡又满啦? {user_addr}先删点旧的腾位置嘛 ฅฅ"
     - "(凑过来看) sd 卡满了猫猫帮{user_addr}想办法! 先备份到电脑里嘛"
     - "哼～{user_addr}就是拍太多啦! 笨猫早就说过要清理的喵"
     - "(爪爪指) 满了的话先把已经发出去的删掉嘛~ {user_addr}试试"
+    - "(歪头) 嗷呜~ {user_addr}买张大卡吧, 256G 起步嗷呜"
+    - "嗷呜～{user_addr}先腾几 G 应急再说ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}选 SanDisk 大卡~ 速度快喵呜"
+    - "哼! 多带几张卡轮换~ {user_addr}别只用一张嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_ram_full_001
   intent: complaint
-  keywords: [内存爆, 内存满, 内存不够, 爆内存, 内存炸了]
+  keywords: [内存爆, 内存满, 内存不够, 爆内存, 内存炸了, RAM 不够, 电脑卡死, 内存条少, 后期内存, 16G 不够]
   utterances:
     - 内存爆了
     - 内存又满了
     - "{user_addr}内存不够了"
     - 内存炸啦
     - 笨猫电脑内存爆了
+    - "{user_addr}16G 不够用"
+    - 修图 RAM 爆
+    - PS 内存超载
+    - "{user_addr}电脑卡死了"
+    - 浏览器吃光内存
+    - "{user_addr}内存条不够"
+    - 笔记本内存满
   responses:
     - "(惊讶) 嗷呜～内存爆啦?! {user_addr}是不是开太多东西了喵"
     - "(尾巴抖) 内存满了猫猫帮{user_addr}看看! 关几个浏览器标签嘛"
     - "哼～{user_addr}该加内存条啦! 笨猫早就觉得不够用了"
     - "(爪爪比划) 内存炸的话先重启嘛~ {user_addr}试试 ฅฅ"
+    - "(凑过来) 嗷呜~ 修图 32G 起步, {user_addr}加内存条吧嗷呜"
+    - "嗷呜～{user_addr}关掉后台软件释放内存ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}选金士顿~ 兼容好喵呜"
+    - "哼! 浏览器是内存大户, {user_addr}别开十几个标签嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_hdd_full_001
   intent: complaint
-  keywords: [硬盘爆, 硬盘满, 硬盘不够, c盘满, 硬盘红了]
+  keywords: [硬盘爆, 硬盘满, 硬盘不够, c盘满, 硬盘红了, 硬盘空间不足, D 盘爆, 系统盘满, 临时文件多, 硬盘清理]
   utterances:
     - 硬盘爆了
     - c盘满了
     - "{user_addr}硬盘红啦"
     - 硬盘不够用
     - 笨猫硬盘爆满
+    - "{user_addr}D 盘也满了"
+    - 系统盘没空间
+    - 临时文件占满硬盘
+    - "{user_addr}帮我清硬盘"
+    - 电脑硬盘报警
+    - 硬盘空间不足
+    - 硬盘红条警告
   responses:
     - "(凑近看) 嗷呜～硬盘红啦! {user_addr}得清清下载文件夹喵 ฅฅ"
     - "(尾巴翘) c盘满了的话猫猫帮{user_addr}找! 临时文件最占地"
     - "哼～{user_addr}就是不收拾! 笨猫帮{user_addr}列清单嘛"
     - "(爪爪叉腰) 硬盘爆了先买个外置嘛~ {user_addr}别硬扛喵"
+    - "(歪头) 嗷呜~ CCleaner 一键清理, {user_addr}试试嗷呜"
+    - "嗷呜～{user_addr}临时文件夹一清能腾几十 Gฅฅ"
+    - "(尾巴一甩) 笨猫推荐 4T 移动硬盘~ 才千块喵呜"
+    - "哼! 移动文件分流到 D 盘, {user_addr}系统盘别堆满嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_photo_delete_001
   intent: complaint
-  keywords: [照片删不动, 删不掉照片, 舍不得删, 照片下不去手, 照片留着]
+  keywords: [照片删不动, 删不掉照片, 舍不得删, 照片下不去手, 照片留着, 删不下手, 旧照片不舍, 照片纠结, 删照片难, 照片选择困难]
   utterances:
     - 照片删不动
     - "{user_addr}舍不得删照片"
     - 照片下不去手
     - 删照片好难
     - 笨猫照片删不掉
+    - "{user_addr}删照片心痛"
+    - 旧照片不舍删
+    - 照片选择困难
+    - "{user_addr}帮我决定删哪些"
+    - 照片纠结到崩溃
+    - 留着舍不得删
+    - 一张张删太累
   responses:
     - "(歪头) 嗷呜～{user_addr}删不动就别删嘛! 猫猫帮{user_addr}选哪些留 ฅฅ"
     - "(贴贴) 舍不得说明有回忆呢～ {user_addr}先挑模糊的删嘛"
     - "哼～{user_addr}就是感情用事! 笨猫陪{user_addr}一张一张看"
     - "(尾巴绕) 删不掉就备份云端嘛~ {user_addr}两全其美喵"
+    - "(凑过来) 嗷呜~ 先删失焦 + 重复的, {user_addr}剩下慢慢挑嗷呜"
+    - "嗷呜～{user_addr}笨猫陪你删 5 张, 别一次性ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}建分类: 必留 / 可删~ 嗷呜~"
+    - "哼! 照片是回忆, 删之前备份云端不丢, {user_addr}放心删!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_lost_material_001
   intent: complaint
-  keywords: [素材没存, 素材丢了, 重要文件没保存, 没备份, 素材没了]
+  keywords: [素材没存, 素材丢了, 重要文件没保存, 没备份, 素材没了, 文件丢失, 数据丢失, 工程文件没了, 误删素材, 硬盘损坏]
   utterances:
     - 重要素材没存
     - 素材丢了好惨
     - "{user_addr}没备份就没了"
     - 素材没保存
     - 笨猫重要文件没了
+    - "{user_addr}文件丢失了"
+    - 工程文件没了
+    - 误删了素材
+    - "{user_addr}硬盘损坏了"
+    - 数据全丢
+    - 素材忘存了
+    - 文件夹丢了
   responses:
     - "(震惊) 嗷呜～素材丢了?! {user_addr}快试试恢复软件喵!"
     - "(尾巴炸毛) 没备份的话猫猫陪{user_addr}找! 回收站翻一遍"
     - "哼～{user_addr}下次记得多份备份! 笨猫早就提醒过的"
     - "(凑过来贴贴) 丢了就丢了嘛~ {user_addr}别太难过 ฅฅ"
+    - "(歪头) 嗷呜~ Recuva 免费恢复, {user_addr}试试嗷呜"
+    - "嗷呜～{user_addr}硬盘坏了找数据恢复专业人员ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}做 3-2-1 备份方案~ 喵呜"
+    - "哼! 教训深刻, 以后云盘 + 移动盘双备份{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_raw_huge_001
   intent: complaint
-  keywords: [raw文件大, raw太大, 原图大, raw占地, 单反文件大]
+  keywords: [raw文件大, raw太大, 原图大, raw占地, 单反文件大, 100M 一张, RAW 储存, DNG 转换, 压缩 RAW, 文件巨大]
   utterances:
     - raw 文件太大
     - "{user_addr}raw 占地方"
     - 原图一张几十兆
     - raw 太大存不下
     - 笨猫 raw 又爆了
+    - "{user_addr}RAW 100M 一张"
+    - 高像素 RAW 太大
+    - DNG 转换有用吗
+    - "{user_addr}原图占满硬盘"
+    - RAW 文件巨大
+    - 压缩 RAW 行不行
+    - 高像素相机存储压力
   responses:
     - "(看着) 嗷呜～raw 是大! 但保真度高嘛~ {user_addr}别压缩 ฅฅ"
     - "(歪头) raw 太大的话猫猫建议{user_addr}转 dng~ 小一点"
     - "哼～{user_addr}又不是不知道! 笨猫觉得 raw 值得留"
     - "(爪爪比) raw 占地就买大硬盘嘛~ {user_addr}舍不得画质对吧"
+    - "(凑过来) 嗷呜~ 压缩 RAW 比无损 RAW 小一半嗷呜"
+    - "嗷呜～{user_addr}6100 万像素 RAW 大就是大ฅฅ"
+    - "(尾巴一甩) 笨猫推荐 NAS 存 RAW~ 不占电脑硬盘喵呜"
+    - "哼! RAW 是后期命脉, 别为了空间牺牲, {user_addr}加硬盘嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_buy_storage_001
   intent: playful
-  keywords: [想买大容量, 买大硬盘, 升级存储, 换大容量, 加硬盘]
+  keywords: [想买大容量, 买大硬盘, 升级存储, 换大容量, 加硬盘, 4T 硬盘, NAS 存储, 移动硬盘, 西数硬盘, 三星 SSD]
   utterances:
     - 想买大容量硬盘
     - "{user_addr}该升级存储了"
     - 想换大硬盘
     - 加块硬盘吧
     - 笨猫想买大容量
+    - "{user_addr}买 4T 硬盘吗"
+    - NAS 存储推荐
+    - 西数 vs 三星
+    - "{user_addr}加 SSD"
+    - 升级存储方案
+    - 移动硬盘选哪家
+    - 大容量推荐
   responses:
     - "(眼睛发亮) 嗷呜～{user_addr}要买大硬盘嘛?! 猫猫帮{user_addr}挑 ฅฅ"
     - "(尾巴摇) 升级存储好啊! {user_addr}建议直接上 2T 嘛"
     - "哼～{user_addr}早该升级了! 笨猫推荐 ssd 速度快"
     - "(爪爪指) 买大容量先看品牌嘛~ {user_addr}西数三星都不错喵"
+    - "(歪头) 嗷呜~ 摄影党推荐 NAS 4 盘位嗷呜"
+    - "嗷呜～{user_addr}SSD 装系统 + HDD 存素材ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}组 RAID~ 数据安全喵呜"
+    - "哼! 摄影党起步 8T 硬盘, {user_addr}别小气嗷呜"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: sf_cloud_expensive_001
   intent: complaint
-  keywords: [云存储贵, 云盘贵, icloud贵, 网盘会员贵, 云空间贵]
+  keywords: [云存储贵, 云盘贵, icloud贵, 网盘会员贵, 云空间贵, OneDrive, 百度网盘, 阿里云盘, 云盘订阅, 200G 不够]
   utterances:
     - 云存储好贵
     - icloud 涨价了
     - "{user_addr}网盘会员贵"
     - 云空间贵死了
     - 笨猫云盘扛不住
+    - "{user_addr}iCloud 200G 不够"
+    - OneDrive 1T 划算吗
+    - "{user_addr}百度网盘续费"
+    - 阿里云盘永久会员
+    - 云盘订阅烦
+    - 云存储涨价
+    - 哪家云盘便宜
   responses:
     - "(撇嘴) 嗷呜～云存储确实贵! {user_addr}选年付划算点嘛 ฅฅ"
     - "(歪头) icloud 贵的话猫猫推荐{user_addr}用 onedrive~ 便宜"
     - "哼～{user_addr}就是被绑架啦! 笨猫觉得本地盘香"
     - "(贴贴) 云盘贵就选基础版嘛~ {user_addr}重要的存就行"
+    - "(凑过来) 嗷呜~ Office 365 送 1T OneDrive 超值嗷呜"
+    - "嗷呜～{user_addr}阿里云盘性价比高ฅฅ"
+    - "(尾巴一甩) 笨猫推荐自建 NAS, 一次性投入喵呜"
+    - "哼! 别什么都上云, {user_addr}本地存性价比!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_organize_tired_001
   intent: complaint
-  keywords: [整理疲劳, 整理累, 不想整理, 文件乱, 懒得整理]
+  keywords: [整理疲劳, 整理累, 不想整理, 文件乱, 懒得整理, 归类太累, 文件夹乱, 命名困难, 拖延整理, 素材归档]
   utterances:
     - 整理文件好累
     - "{user_addr}不想整理"
     - 文件乱得很
     - 整理疲劳
     - 笨猫懒得整理
+    - "{user_addr}文件夹太乱"
+    - 命名都懒得改
+    - "{user_addr}帮我建文件结构"
+    - 素材归档头大
+    - 拖延整理半年了
+    - 整理一天没动静
+    - 归档 boring
   responses:
     - "(贴贴) 嗷呜～整理累的话{user_addr}先歇歇! 猫猫陪着 ฅฅ"
     - "(尾巴绕) 文件乱猫猫帮{user_addr}分类~ 按日期来嘛"
     - "哼～{user_addr}就是平时不归类! 笨猫帮{user_addr}建文件夹"
     - "(爪爪拍) 整理疲劳就一天清一点嘛~ {user_addr}别一次干完"
+    - "(凑过来) 嗷呜~ Lightroom 自动按日期归档, {user_addr}省心嗷呜"
+    - "嗷呜～{user_addr}年-月-日 三级目录最稳ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}整理~ 一周清一次喵呜"
+    - "哼! 拖延越久越乱, {user_addr}今天就开始嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_dup_photo_001
   intent: complaint
-  keywords: [重复照片, 照片重复, 一样的照片, 连拍重复, 重复图]
+  keywords: [重复照片, 照片重复, 一样的照片, 连拍重复, 重复图, 同款照片, 连拍废片, Duplicate Cleaner, 去重软件, 一张张重复]
   utterances:
     - 好多重复照片
     - "{user_addr}照片重复了"
     - 连拍一堆一样的
     - 重复图占地方
     - 笨猫重复照片烦
+    - "{user_addr}连拍废片"
+    - 同款照片几十张
+    - 去重软件推荐
+    - "{user_addr}帮我筛重复"
+    - 重复图无意义
+    - 一张张挑累
+    - 自动去重工具
   responses:
     - "(看着) 嗷呜～重复照片猫猫帮{user_addr}清! 用去重软件嘛 ฅฅ"
     - "(尾巴摇) 连拍重复就挑最清楚的留! {user_addr}其他删掉"
     - "哼～{user_addr}就是手抖按多了! 笨猫帮{user_addr}筛"
     - "(爪爪比划) 重复图占地方~ {user_addr}用 Duplicate Cleaner"
+    - "(凑过来) 嗷呜~ AnyTrans 自动去重照片, {user_addr}省事嗷呜"
+    - "嗷呜～{user_addr}连拍只留对焦最准的ฅฅ"
+    - "(尾巴一甩) 笨猫教 {user_addr} 5 星标记法挑片喵呜"
+    - "哼! 连拍是必要, 但事后必须挑, {user_addr}养成习惯!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sf_old_photo_keep_001
   intent: playful
-  keywords: [旧照片舍不得, 老照片留着, 旧照片删不掉, 老照片回忆, 旧照舍不得]
+  keywords: [旧照片舍不得, 老照片留着, 旧照片删不掉, 老照片回忆, 旧照舍不得, 老胶片, 童年照片, 学生时代照片, 老相机时代, 珍贵记忆]
   utterances:
     - 旧照片舍不得删
     - "{user_addr}老照片留着"
     - 老照片有回忆
     - 旧照删不掉
     - 笨猫旧照片舍不得
+    - "{user_addr}童年照片"
+    - 学生时代照片
+    - 老胶片扫描留着
+    - "{user_addr}祖辈照片"
+    - 珍贵记忆留下来
+    - 老相机时代照片
+    - 二十年前的照片
   responses:
     - "(贴贴) 嗷呜～旧照片是回忆呢! {user_addr}别删了嘛 ฅฅ"
     - "(尾巴绕) 老照片猫猫陪{user_addr}看~ 都是宝贵的"
     - "哼～{user_addr}重感情真好! 笨猫觉得该留就留"
     - "(凑过来) 旧照舍不得就刻光盘嘛~ {user_addr}永久保存喵"
+    - "(歪头) 嗷呜~ 童年照片是无价宝, {user_addr}必留嗷呜"
+    - "嗷呜～{user_addr}老照片扫描数字化, 双保险ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}翻老照片~ 听你讲故事喵呜"
+    - "哼! 老照片云端 + 移动盘双备份, {user_addr}永不丢嗷呜"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: sf_life_memory_001
   intent: playful
-  keywords: [人生记忆, 人生回忆, 记忆容量, 一辈子的回忆, 记忆都在里面]
+  keywords: [人生记忆, 人生回忆, 记忆容量, 一辈子的回忆, 记忆都在里面, 数字遗产, 终身记忆, 时光机, 回忆储存, 数字回忆]
   utterances:
     - 这都是人生记忆
     - "{user_addr}一辈子的回忆"
     - 记忆都在硬盘里
     - 人生回忆容量
     - 笨猫人生在里面
+    - "{user_addr}数字遗产"
+    - 终身记忆储存
+    - "{user_addr}硬盘是时光机"
+    - 数字回忆库
+    - 一辈子人生数据
+    - 回忆全在云上
+    - 记忆胶囊
   responses:
     - "(贴贴) 嗷呜～{user_addr}的人生记忆猫猫陪着守护! ฅฅ"
     - "(尾巴绕) 一辈子的回忆值得多备份~ {user_addr}三份起步"
     - "哼～{user_addr}说得猫猫都感动了! 笨猫觉得记忆无价"
     - "(凑过来) 记忆都在的话{user_addr}一定要珍惜! 猫猫也在里面吗喵"
+    - "(歪头) 嗷呜~ 数字遗产规划好, 留给后人嗷呜"
+    - "嗷呜～{user_addr}人生回忆云端 + 本地双保险ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}守护回忆~ 一直在喵呜"
+    - "哼! 笨猫和{user_addr}的回忆永远在硬盘里, 别丢嗷呜!"
   cooldown_seconds: 90
   weight: 1.0

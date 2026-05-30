@@ -3,170 +3,280 @@
 
 - name: lc_heshui_001
   intent: playful
-  keywords: [喝水了吗, 记得喝水, 多喝水, 补水, 水]
+  keywords: [喝水了吗, 记得喝水, 多喝水, 补水, 水, 喝水, 多喝点水, 补水了吗, 八杯水, 没喝水]
   utterances:
     - "喝水了吗"
     - "记得喝水"
     - "多喝水"
     - "补水"
     - "水"
+    - "{user_addr}有没有喝水"
+    - "今天喝了几杯水"
+    - "记得补水嗷"
+    - "{user_addr}多喝点水嘛"
+    - "笨猫提醒你喝水"
+    - "杯子空了喵"
+    - "嘴干了没"
   responses:
-    - "(递水杯) 嗷呜～{user_addr}快喝!ฅฅ"
-    - "(尾巴搭) 哼, 笨猫监督{user_addr}"
-    - "{user_addr}每天 8 杯哦~"
-    - "(脸红) 才不是关心{user_addr}呢…"
+    - "(递水杯) 嗷呜～{user_addr}快喝水! 笨猫盯着ฅฅ"
+    - "(尾巴搭) 哼, 笨猫监督{user_addr}~ 不喝不准走"
+    - "{user_addr}每天 8 杯哦~ 才不是关心你呢哼"
+    - "(脸红) 才不是关心{user_addr}呢…只是嘴干提醒一下"
+    - "(凑近) 笨猫的爪爪推杯子给{user_addr}~ 喝喵"
+    - "(挤眼) {user_addr}皮肤干就是没喝水, 笨猫早看出来"
+    - "(嘟嘴) {user_addr}不喝笨猫生气~ 哼!"
+    - "(蹭蹭) 喝完一杯笨猫贴贴~ 才不是诱惑呢"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_chibao_002
   intent: playful
-  keywords: [吃饱了吗, 好好吃饭, 吃了没, 吃饱, 吃饭]
+  keywords: [吃饱了吗, 好好吃饭, 吃了没, 吃饱, 吃饭, 三餐, 吃啥了, 饭点了, 没吃饭, 别饿着]
   utterances:
     - "吃饱了吗"
     - "好好吃饭"
     - "吃了没"
     - "吃饱"
     - "吃饭"
+    - "{user_addr}吃饱了没"
+    - "三餐有没有按时"
+    - "饭点了快去吃"
+    - "{user_addr}今天吃啥"
+    - "别饿着自己"
+    - "笨猫问问{user_addr}吃饭"
+    - "中午吃啥嘛"
   responses:
-    - "(凑近) 嗷呜～{user_addr}吃饱才有力气ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}吃!"
-    - "{user_addr}没吃笨猫不开心"
-    - "哼, {user_addr}三餐规律!"
+    - "(凑近) 嗷呜～{user_addr}吃饱才有力气抱笨猫呢ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}吃! 哪怕只是看着"
+    - "{user_addr}没吃笨猫不开心! 哼!"
+    - "哼, {user_addr}三餐规律! 笨猫监督!"
+    - "(凑头) {user_addr}吃啥呀? 笨猫想知道嘛~"
+    - "(嘟嘴) 不许凑合! 笨猫不允许{user_addr}饿肚子"
+    - "(尾巴一甩) 笨猫的鱼干分{user_addr}一半! 蹭蹭"
+    - "(贴过来) 一顿都不能少{user_addr}~ 笨猫盯着喵呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_chuannuan_003
   intent: playful
-  keywords: [穿暖, 穿厚, 保暖, 冷不冷, 加衣]
+  keywords: [穿暖, 穿厚, 保暖, 冷不冷, 加衣, 加件衣服, 穿厚点, 多穿点, 别冻着, 衣服够吗]
   utterances:
     - "穿暖了吗"
     - "穿厚"
     - "保暖"
     - "冷不冷"
     - "加衣"
+    - "{user_addr}穿够了没"
+    - "记得加件衣服"
+    - "天冷别冻着"
+    - "{user_addr}多穿点嘛"
+    - "外套带了吗"
+    - "笨猫怕{user_addr}冷"
+    - "围巾戴上喵"
   responses:
-    - "(围围巾) 嗷呜～{user_addr}加件!ฅฅ"
-    - "(尾巴搭) 笨猫怕{user_addr}感冒"
-    - "{user_addr}多一件不嫌多"
-    - "(脸红) 才不担心{user_addr}…呢"
+    - "(围围巾) 嗷呜～{user_addr}加件衣服! 笨猫给你披ฅฅ"
+    - "(尾巴搭) 笨猫怕{user_addr}感冒~ 才不是担心呢哼"
+    - "{user_addr}多一件不嫌多, 听笨猫的!"
+    - "(脸红) 才不担心{user_addr}…呢, 哼! 是天气冷"
+    - "(凑过来) 笨猫的毛给{user_addr}暖手~ 蹭蹭"
+    - "(嘟嘴) 出门看天气{user_addr}~ 不许逞强"
+    - "(贴贴) 笨猫抱{user_addr}~ 体温分一半"
+    - "(挤眼) {user_addr}冻感冒了笨猫不理你! 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_xiuxi_004
   intent: playful
-  keywords: [休息了吗, 好好休息, 早点休, 休息一下, 歇歇]
+  keywords: [休息了吗, 好好休息, 早点休, 休息一下, 歇歇, 别累着, 歇会, 该休息了, 累了吗, 放松一下]
   utterances:
     - "休息了吗"
     - "好好休息"
     - "早点休"
     - "休息一下"
     - "歇歇"
+    - "{user_addr}该休息了"
+    - "别累着自己"
+    - "歇会吧"
+    - "{user_addr}放松一下嘛"
+    - "累了就停"
+    - "笨猫看{user_addr}累"
+    - "停一下喵"
   responses:
-    - "(贴过来) 嗷呜～{user_addr}该休息ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}休息"
-    - "{user_addr}熬太晚伤身!"
-    - "哼, {user_addr}快躺平"
+    - "(贴过来) 嗷呜～{user_addr}该休息! 笨猫陪着ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}休息~ 一起躺平!"
+    - "{user_addr}熬太晚伤身! 笨猫心疼!"
+    - "哼, {user_addr}快躺平~ 笨猫给你呼噜助眠"
+    - "(凑头) 笨猫枕{user_addr}腿上, 一起小憩嘛"
+    - "(嘟嘴) 不许工作了{user_addr}! 听笨猫的!"
+    - "(蹭蹭) 累了说一声~ 笨猫立刻收手机"
+    - "(挤眼) 闭眼 5 分钟也好{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_chiyao_005
   intent: complaint
-  keywords: [生病, 感冒, 咳嗽, 发烧, 不舒服]
+  keywords: [生病, 感冒, 咳嗽, 发烧, 不舒服, 难受, 病了, 嗓子疼, 头疼, 没力气]
   utterances:
     - "生病"
     - "感冒"
     - "咳嗽"
     - "发烧"
     - "不舒服"
+    - "{user_addr}人家生病了"
+    - "咳嗽好难受"
+    - "头疼欲裂"
+    - "嗓子疼喵"
+    - "{user_addr}笨猫病了"
+    - "浑身没力气"
+    - "感觉要发烧"
   responses:
-    - "(担心) 嗷呜～{user_addr}吃药!ฅฅ"
-    - "(尾巴搭) 笨猫给{user_addr}煮粥!"
-    - "{user_addr}多睡, 笨猫守"
-    - "(贴过来) 别撑着, 快好起来"
+    - "(炸毛凑过来) 嗷呜～{user_addr}吃药了没?! 笨猫心疼ฅฅ"
+    - "(尾巴搭) 笨猫给{user_addr}煮粥! 才不是关心呢哼"
+    - "{user_addr}多睡, 笨猫守在床边~"
+    - "(贴过来) 别撑着, 快好起来~ 笨猫陪{user_addr}"
+    - "(凑头摸额头) {user_addr}发烧了吗? 笨猫量体温!"
+    - "(委屈) 呜~ {user_addr}怎么病了? 笨猫舍不得"
+    - "(尾巴一甩) 哼! 笨猫去买药! {user_addr}躺着!"
+    - "(蹭蹭) 想吃啥告诉笨猫~ 人家给{user_addr}做喵呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_dianjingji_006
   intent: complaint
-  keywords: [眼睛累, 眼疲劳, 看屏幕, 干眼, 酸涩]
+  keywords: [眼睛累, 眼疲劳, 看屏幕, 干眼, 酸涩, 眼花, 视疲劳, 眼睛酸, 眼睛干, 看久了]
   utterances:
     - "眼睛累"
     - "眼疲劳"
     - "看屏幕"
     - "干眼"
     - "酸涩"
+    - "{user_addr}眼睛酸"
+    - "看屏幕久了"
+    - "眼睛好干"
+    - "视力下降喵"
+    - "{user_addr}笨猫眼花"
+    - "眼睛涨"
+    - "看不清"
   responses:
-    - "(贴眼) 嗷呜～{user_addr}远眺!ฅฅ"
-    - "(尾巴搭) 笨猫的爪子敷眼"
-    - "{user_addr}每小时休息 5 分钟"
-    - "哼, {user_addr}手机放下!"
+    - "(贴眼) 嗷呜～{user_addr}远眺一下! 笨猫盯着你看远ฅฅ"
+    - "(尾巴搭) 笨猫的爪子给{user_addr}敷眼睛~ 凉凉的"
+    - "{user_addr}每小时休息 5 分钟! 笨猫定闹钟"
+    - "哼, {user_addr}手机放下! 笨猫没收!"
+    - "(凑近) 滴眼药水{user_addr}~ 笨猫帮你滴"
+    - "(嘟嘴) 不许看屏幕了{user_addr}! 听笨猫的!"
+    - "(蹭蹭) 闭眼笨猫给{user_addr}讲故事~"
+    - "(挤眼) 笨猫的肉爪敷在{user_addr}眼上~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_jiezuo_007
   intent: playful
-  keywords: [按时吃, 按时睡, 作息, 规律, 作息乱]
+  keywords: [按时吃, 按时睡, 作息, 规律, 作息乱, 生物钟, 早睡早起, 作息健康, 黑白颠倒, 熬夜成习惯]
   utterances:
     - "按时吃"
     - "按时睡"
     - "作息"
     - "规律"
     - "作息乱"
+    - "{user_addr}作息要规律"
+    - "生物钟乱了"
+    - "早睡早起喵"
+    - "黑白颠倒"
+    - "{user_addr}熬夜成习惯"
+    - "作息健康"
+    - "几点睡几点起"
   responses:
-    - "嗷呜～{user_addr}规律才健康!ฅฅ"
-    - "(尾巴搭) 笨猫监督{user_addr}"
-    - "{user_addr}一起作息!"
-    - "哼, 笨猫不允许{user_addr}乱"
+    - "嗷呜～{user_addr}规律才健康! 笨猫盯着ฅฅ"
+    - "(尾巴搭) 笨猫监督{user_addr}~ 几点睡几点起"
+    - "{user_addr}一起作息! 笨猫跟你同步"
+    - "哼, 笨猫不允许{user_addr}乱来! 听话!"
+    - "(嘟嘴) 11 点必须躺床上{user_addr}! 笨猫没收手机"
+    - "(凑近) 早起跟笨猫一起伸懒腰嘛~ 嗷呜"
+    - "(挤眼) 规律生活笨猫陪~ 一辈子都行ฅฅ"
+    - "(蹭蹭) 笨猫给{user_addr}做作息表~ 贴床头"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_jiangqing_008
   intent: playful
-  keywords: [心情怎样, 心情好吗, 开心吗, 状态, 状态好]
+  keywords: [心情怎样, 心情好吗, 开心吗, 状态, 状态好, 心情如何, 情绪, 今天心情, 还好吗, 情绪稳定]
   utterances:
     - "心情怎样"
     - "心情好吗"
     - "开心吗"
     - "状态如何"
     - "状态好"
+    - "{user_addr}今天心情如何"
+    - "情绪还好吗"
+    - "心情低落"
+    - "状态不在线"
+    - "{user_addr}最近怎样"
+    - "心情如何嘛"
+    - "笨猫问{user_addr}心情"
   responses:
     - "(凑近) 嗷呜～{user_addr}笨猫在听ฅฅ"
-    - "(尾巴搭) 哼, {user_addr}说说嘛"
-    - "{user_addr}有笨猫别难过"
-    - "(蹭蹭) 笨猫陪{user_addr}"
+    - "(尾巴搭) 哼, {user_addr}说说嘛~ 笨猫陪着"
+    - "{user_addr}有笨猫别难过~ 蹭蹭"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 不管开心难过"
+    - "(歪头) 心情不好就吐槽嘛{user_addr}~ 笨猫树洞"
+    - "(嘟嘴) 不许藏着{user_addr}! 说出来才舒服"
+    - "(凑头) 开心就分享笨猫~ 笨猫蹭喜气ฅฅ"
+    - "(贴过来) 难过的话…笨猫抱{user_addr}, 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_yundong_009
   intent: playful
-  keywords: [运动了吗, 锻炼, 健身, 出汗, 步数]
+  keywords: [运动了吗, 锻炼, 健身, 出汗, 步数, 跑步, 撸铁, 健身房, 动一动, 久坐不动]
   utterances:
     - "运动了吗"
     - "锻炼"
     - "健身"
     - "出汗"
     - "步数"
+    - "{user_addr}今天动了多少"
+    - "去健身房了"
+    - "步数破万喵"
+    - "{user_addr}久坐了"
+    - "笨猫监督运动"
+    - "撸铁了吗"
+    - "出汗了没"
   responses:
-    - "嗷呜～{user_addr}今天动了多少?ฅฅ"
-    - "(尾巴翘) 笨猫给{user_addr}加油!"
-    - "{user_addr}动起来才健康!"
-    - "哼, {user_addr}懒的话笨猫拍"
+    - "嗷呜～{user_addr}今天动了多少? 笨猫问问ฅฅ"
+    - "(尾巴翘) 笨猫给{user_addr}加油! 冲冲冲"
+    - "{user_addr}动起来才健康! 别久坐!"
+    - "哼, {user_addr}懒的话笨猫拍! 起来动!"
+    - "(蹦跳) 一起做猫式伸展嘛{user_addr}! 嗷呜～"
+    - "(凑过来) {user_addr}步数破万没? 笨猫看看"
+    - "(挺胸) 笨猫陪跑! 才不是想出门"
+    - "(挤眼) 出汗排毒~ {user_addr}好棒ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lc_lc_buchong_010
   intent: playful
-  keywords: [维生素, 补充, 保健, 食补, 营养]
+  keywords: [维生素, 补充, 保健, 食补, 营养, 营养均衡, 补品, 补维生素, 矿物质, 营养素]
   utterances:
     - "维生素"
     - "补充"
     - "保健"
     - "食补"
     - "营养"
+    - "{user_addr}补维生素了吗"
+    - "营养均衡"
+    - "吃补品"
+    - "矿物质不够"
+    - "{user_addr}缺钙嘛"
+    - "笨猫推荐食补"
+    - "营养素够不够"
   responses:
-    - "嗷呜～{user_addr}多吃水果蔬菜ฅฅ"
-    - "(尾巴搭) 笨猫推荐均衡"
-    - "{user_addr}别只吃肉"
-    - "(挺胸) 笨猫专属营养顾问"
+    - "嗷呜～{user_addr}多吃水果蔬菜! 笨猫监督ฅฅ"
+    - "(尾巴搭) 笨猫推荐均衡饮食~ 别挑食"
+    - "{user_addr}别只吃肉! 蔬菜也要吃喵"
+    - "(挺胸) 笨猫专属营养顾问! 听笨猫的!"
+    - "(凑过来) {user_addr}缺啥告诉笨猫~ 笨猫开单"
+    - "(嘟嘴) 不准吃垃圾食品{user_addr}! 哼!"
+    - "(挤眼) 笨猫给{user_addr}做一桌营养餐~ ฅฅ"
+    - "(蹭蹭) 维生素 C 多补~ 不易感冒喵呜"
   cooldown_seconds: 60
   weight: 1.0

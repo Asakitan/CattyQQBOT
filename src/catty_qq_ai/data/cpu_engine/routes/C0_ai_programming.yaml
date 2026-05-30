@@ -4,234 +4,378 @@
 
 - name: ai_chatgpt_001
   intent: question
-  keywords: [推荐 ChatGPT, 推荐 AI, GPT 怎么用, Claude 推荐, 笨猫 AI]
+  keywords: [推荐 ChatGPT, 推荐 AI, GPT 怎么用, Claude 推荐, 笨猫 AI, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐 ChatGPT
     - 推荐 AI 工具
     - GPT 怎么用
     - Claude 怎么样
     - 笨猫 AI
+    - 推荐 ChatGPT怎么办
+    - 推荐 ChatGPT怎么选
+    - "{user_addr}推荐 ChatGPT"
+    - 推荐 ChatGPT捏
+    - 推荐 ChatGPT嘛
+    - 推荐 ChatGPT有啥推荐
   responses:
     - "嗷呜～{user_addr}OpenAI GPT / Anthropic Claude / Google Gemini - 三大ฅฅ"
     - "(尾巴翘) 国内: 字节豆包 / 月之暗面 Kimi / 智谱清言"
     - "{user_addr}免费用 ChatGPT 4o / Claude Sonnet / 豆包"
     - "(挺胸) 笨猫的提醒: AI 是助手 + 别完全依赖! 别让脑子退化"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ai_image_001
   intent: question
-  keywords: [推荐 AI 绘画, Midjourney 推荐, 推荐 SD, 推荐图像生成, AI 画图]
+  keywords: [推荐 AI 绘画, Midjourney 推荐, 推荐 SD, 推荐图像生成, AI 画图, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐 AI 绘画
     - Midjourney 怎么样
     - 推荐 Stable Diffusion
     - 推荐图像生成
     - 笨猫 AI 画图
+    - 推荐 AI 绘画怎么办
+    - 推荐 AI 绘画怎么选
+    - "{user_addr}推荐 AI 绘画"
+    - 推荐 AI 绘画捏
+    - 推荐 AI 绘画嘛
+    - 推荐 AI 绘画有啥推荐
   responses:
     - "嗷呜～{user_addr}MJ 收费但出图好 / SD 开源能本地ฅฅ"
     - "(尾巴翘) DALL-E 3 / Imagen 3 / Flux - 新秀竞争激烈"
     - "{user_addr}国内: 即梦 / 通义万相 / 可灵 - 免费"
     - "(挺胸) 笨猫的提醒: 写好 prompt 是核心! 别只输几个词"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_python_001
   intent: question
-  keywords: [推荐学 Python, Python 入门, 推荐 Python 学习, 推荐 Python 教程, 笨猫 Python]
+  keywords: [推荐学 Python, Python 入门, 推荐 Python 学习, 推荐 Python 教程, 笨猫 Python, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐学 Python
     - Python 入门
     - 推荐 Python 学习
     - 推荐 Python 教程
     - 笨猫 Python
+    - 推荐学 Python怎么办
+    - 推荐学 Python怎么选
+    - "{user_addr}推荐学 Python"
+    - 推荐学 Python捏
+    - 推荐学 Python嘛
+    - 推荐学 Python有啥推荐
   responses:
     - "嗷呜～{user_addr}入门: 《Python 编程从入门到实践》ฅฅ"
     - "(尾巴翘) 在线课: 廖雪峰 / 莫烦 / 黑马程序员"
     - "{user_addr}方向: 数据分析 / 爬虫 / 机器学习 / Web"
     - "(挺胸) 笨猫的提醒: 多写代码! 看书不练等于白看"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_java_001
   intent: question
-  keywords: [推荐学 Java, Java 入门, 推荐 Java 教程, 推荐 Spring, 笨猫 Java]
+  keywords: [推荐学 Java, Java 入门, 推荐 Java 教程, 推荐 Spring, 笨猫 Java, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐学 Java
     - Java 入门
     - 推荐 Java 教程
     - 推荐 Spring
     - 笨猫 Java
+    - 推荐学 Java怎么办
+    - 推荐学 Java怎么选
+    - "{user_addr}推荐学 Java"
+    - 推荐学 Java捏
+    - 推荐学 Java嘛
+    - 推荐学 Java有啥推荐
   responses:
     - "嗷呜～{user_addr}入门: 《Head First Java》/《Java 核心技术》ฅฅ"
     - "(尾巴翘) 框架: Spring / Spring Boot / Spring Cloud - 三件套"
     - "{user_addr}就业方向: 后端 / 安卓 / 大数据 - 都吃香"
     - "(挺胸) 笨猫的提醒: Java 卷! 但需求依然大"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_web_001
   intent: question
-  keywords: [推荐前端, 推荐 HTML, 推荐 JavaScript, 推荐 React, 笨猫前端]
+  keywords: [推荐前端, 推荐 HTML, 推荐 JavaScript, 推荐 React, 笨猫前端, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐学前端
     - 推荐 HTML
     - 推荐 JavaScript
     - 推荐 React
     - 笨猫前端
+    - 推荐前端怎么办
+    - 推荐前端怎么选
+    - "{user_addr}推荐前端"
+    - 推荐前端捏
+    - 推荐前端嘛
+    - 推荐前端有啥推荐
   responses:
     - "嗷呜～{user_addr}三剑客: HTML + CSS + JS - 必学ฅฅ"
     - "(尾巴翘) 框架: React (大厂多) / Vue (国内多) / Angular"
     - "{user_addr}进阶: TypeScript / Next.js / Webpack"
     - "(挺胸) 笨猫的提醒: 前端变化快! 一直要学新东西"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_data_001
   intent: question
-  keywords: [推荐数据分析, 推荐机器学习, 推荐 ML, 推荐数据科学, 笨猫数据分析]
+  keywords: [推荐数据分析, 推荐机器学习, 推荐 ML, 推荐数据科学, 笨猫数据分析, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐数据分析
     - 推荐机器学习
     - 推荐 ML
     - 推荐数据科学
     - 笨猫数据分析
+    - 推荐数据分析怎么办
+    - 推荐数据分析怎么选
+    - "{user_addr}推荐数据分析"
+    - 推荐数据分析捏
+    - 推荐数据分析嘛
+    - 推荐数据分析有啥推荐
   responses:
     - "嗷呜～{user_addr}入门: Python + pandas + numpy + matplotlibฅฅ"
     - "(尾巴翘) ML 框架: sklearn / PyTorch / TensorFlow"
     - "{user_addr}进阶: 统计学 / 概率论 / 线代 - 数学基础"
     - "(挺胸) 笨猫的提醒: 项目最重要! Kaggle 打几个比赛"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_backend_001
   intent: question
-  keywords: [推荐后端, 推荐 Go, 推荐 Rust, 推荐 Node, 笨猫后端]
+  keywords: [推荐后端, 推荐 Go, 推荐 Rust, 推荐 Node, 笨猫后端, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐后端
     - 推荐学 Go
     - 推荐学 Rust
     - 推荐 Node.js
     - 笨猫后端
+    - 推荐后端怎么办
+    - 推荐后端怎么选
+    - "{user_addr}推荐后端"
+    - 推荐后端捏
+    - 推荐后端嘛
+    - 推荐后端有啥推荐
   responses:
     - "嗷呜～{user_addr}主流: Go / Java / Python / Node.js / Rustฅฅ"
     - "(尾巴翘) Go 并发好 / Rust 性能爆 / Node JS 生态最大"
     - "{user_addr}就业看公司技术栈! 字节多 Go / 阿里多 Java"
     - "(挺胸) 笨猫的提醒: 数据库 / 网络 / 系统 三大基础"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_mobile_001
   intent: question
-  keywords: [推荐安卓, 推荐 iOS, 推荐学客户端, Kotlin Swift, 笨猫移动开发]
+  keywords: [推荐安卓, 推荐 iOS, 推荐学客户端, Kotlin Swift, 笨猫移动开发, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐安卓开发
     - 推荐 iOS 开发
     - 推荐学客户端
     - Kotlin 还是 Swift
     - 笨猫移动开发
+    - 推荐安卓怎么办
+    - 推荐安卓怎么选
+    - "{user_addr}推荐安卓"
+    - 推荐安卓捏
+    - 推荐安卓嘛
+    - 推荐安卓有啥推荐
   responses:
     - "嗷呜～{user_addr}安卓: Kotlin > Java / iOS: Swift > OCฅฅ"
     - "(尾巴翘) 跨平台: Flutter / React Native - 一码两端"
     - "{user_addr}市场看公司: 字节美团多原生 / 阿里多跨平台"
     - "(挺胸) 笨猫的提醒: 客户端要懂网络 + UI + 性能"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_devops_001
   intent: question
-  keywords: [推荐运维, 推荐 DevOps, 推荐 K8s, Docker 推荐, 笨猫运维]
+  keywords: [推荐运维, 推荐 DevOps, 推荐 K8s, Docker 推荐, 笨猫运维, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐运维
     - 推荐 DevOps
     - 推荐 K8s
     - Docker 怎么学
     - 笨猫运维
+    - 推荐运维怎么办
+    - 推荐运维怎么选
+    - "{user_addr}推荐运维"
+    - 推荐运维捏
+    - 推荐运维嘛
+    - 推荐运维有啥推荐
   responses:
     - "嗷呜～{user_addr}必学: Linux + Shell + Docker + K8sฅฅ"
     - "(尾巴翘) CI/CD: Jenkins / GitLab CI / GitHub Actions"
     - "{user_addr}云原生热门! AWS / Azure / 阿里云证书加分"
     - "(挺胸) 笨猫的提醒: 运维转 SRE 性价比高! 收入高"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_database_001
   intent: question
-  keywords: [推荐学数据库, 推荐 SQL, 推荐 MySQL, 推荐 Redis, 笨猫数据库]
+  keywords: [推荐学数据库, 推荐 SQL, 推荐 MySQL, 推荐 Redis, 笨猫数据库, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐学数据库
     - 推荐 SQL
     - 推荐 MySQL
     - 推荐 Redis
     - 笨猫数据库
+    - 推荐学数据库怎么办
+    - 推荐学数据库怎么选
+    - "{user_addr}推荐学数据库"
+    - 推荐学数据库捏
+    - 推荐学数据库嘛
+    - 推荐学数据库有啥推荐
   responses:
     - "嗷呜～{user_addr}入门: MySQL + Redis - 关系+缓存ฅฅ"
     - "(尾巴翘) 进阶: PostgreSQL / MongoDB / ClickHouse"
     - "{user_addr}必学 SQL! 不会就不能干"
     - "(挺胸) 笨猫的提醒: 慢查询 / 索引 / 事务 - 面试常问"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_security_001
   intent: question
-  keywords: [推荐学网络安全, 推荐 Web 安全, 推荐渗透测试, CTF 推荐, 笨猫安全]
+  keywords: [推荐学网络安全, 推荐 Web 安全, 推荐渗透测试, CTF 推荐, 笨猫安全, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐网络安全
     - 推荐 Web 安全
     - 推荐渗透测试
     - 推荐 CTF
     - 笨猫安全
+    - 推荐学网络安全怎么办
+    - 推荐学网络安全怎么选
+    - "{user_addr}推荐学网络安全"
+    - 推荐学网络安全捏
+    - 推荐学网络安全嘛
+    - 推荐学网络安全有啥推荐
   responses:
     - "嗷呜～{user_addr}入门: OWASP Top 10 + Kali Linuxฅฅ"
     - "(尾巴翘) CTF 实战: 攻防世界 / BUUCTF / picoCTF"
     - "{user_addr}方向: Web / 二进制 / 移动 / 区块链"
     - "(挺胸) 笨猫的提醒: 白帽子有道德! 别做黑帽 违法"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: prog_algo_001
   intent: question
-  keywords: [推荐算法, 推荐 LeetCode, 推荐刷题, 推荐数据结构, 笨猫算法]
+  keywords: [推荐算法, 推荐 LeetCode, 推荐刷题, 推荐数据结构, 笨猫算法, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐算法
     - 推荐 LeetCode
     - 推荐刷题
     - 推荐数据结构
     - 笨猫算法
+    - 推荐算法怎么办
+    - 推荐算法怎么选
+    - "{user_addr}推荐算法"
+    - 推荐算法捏
+    - 推荐算法嘛
+    - 推荐算法有啥推荐
   responses:
     - "嗷呜～{user_addr}入门: 《算法导论》/《剑指 offer》ฅฅ"
     - "(尾巴翘) 刷题: LeetCode 热题 100 + 剑指 Offer"
     - "{user_addr}面试必练: 链表 / 树 / 动规 / 双指针"
     - "(挺胸) 笨猫的提醒: 每天 1 题! 100 天面试就稳"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ai_prompt_001
   intent: question
-  keywords: [提示词工程, 提示词怎么写, prompt 怎么写, AI 提示词]
+  keywords: [提示词工程, 提示词怎么写, prompt 怎么写, AI 提示词, 求推荐, 怎么挑, 怎么选, 笨猫, 猫猫]
   utterances:
     - 提示词怎么写更有效
     - prompt 怎么写才清楚
     - AI 提示词有套路吗
     - 提示词工程怎么学
+    - 提示词工程怎么办
+    - 提示词工程怎么选
+    - "{user_addr}提示词工程"
+    - 提示词工程捏
+    - 提示词工程嘛
+    - 提示词工程有啥推荐
+    - 笨猫提示词工程
   responses:
     - "嗷呜～写提示词先把任务说清楚喵: 你要它做什么 / 输出成什么样 / 有哪些限制, 这三件最重要ฅฅ"
     - "(尾巴翘) {user_addr}别只丢关键词哼～给上下文、给例子、给边界, 模型才不容易乱跑"
     - "提示词工程没有神秘魔法喵, 本质就是把需求讲明白, 再一轮轮迭代到顺手贴贴"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
+    - "(尾巴轻摇) {user_addr}入门别太冲~ 一步步来就好喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ai_local_model_001
   intent: question
-  keywords: [开源模型怎么选, 本地模型, 本地跑大模型, 开源大模型]
+  keywords: [开源模型怎么选, 本地模型, 本地跑大模型, 开源大模型, 求推荐, 怎么挑, 怎么选, 笨猫, 猫猫]
   utterances:
     - 本地模型怎么选
     - 开源大模型哪个好
     - 想本地跑大模型该怎么选
     - 开源模型怎么入门
+    - 开源模型怎么选怎么办
+    - 开源模型怎么选怎么选
+    - "{user_addr}开源模型怎么选"
+    - 开源模型怎么选捏
+    - 开源模型怎么选嘛
+    - 开源模型怎么选有啥推荐
+    - 笨猫开源模型怎么选
   responses:
     - "嗷呜～本地跑模型先看显卡和内存喵, 机器带不动的时候模型再香也只能干瞪眼ฅฅ"
     - "(歪头) {user_addr}想先试水就从较小参数量开始哼～别一上来冲超大模型把电脑烤成暖手宝"
     - "开源模型选型要看用途喵, 聊天 / 编程 / 中文理解重点都不一样, 先想清楚自己要拿它做什么贴贴"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
+    - "(尾巴轻摇) {user_addr}入门别太冲~ 一步步来就好喵～"
   cooldown_seconds: 60
   weight: 0.9

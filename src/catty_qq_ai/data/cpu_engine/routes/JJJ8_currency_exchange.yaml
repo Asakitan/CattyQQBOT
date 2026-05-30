@@ -3,204 +3,324 @@
 
 - name: ce_huanhui_keng_001
   intent: complaint
-  keywords: [换汇被坑, 换钱亏, 换汇坑, 兑换被宰, 换钱被骗]
+  keywords: [换汇被坑, 换钱亏, 换汇坑, 兑换被宰, 换钱被骗, 换汇手续费高, 换汇汇率差, 假币换钱, 换汇陷阱, 兑换被宰]
   utterances:
     - "{user_addr}换汇被坑了"
     - 换钱亏了好多
     - 换汇被宰
     - 兑换被坑哭了
     - 换钱被骗了喵
+    - "{user_addr}换汇手续费高得吓人"
+    - "{user_addr}换汇陷阱踩了"
+    - "{user_addr}还收了假币"
+    - "{user_addr}换汇没找到良心店"
+    - "{user_addr}换汇汇率低得离谱"
+    - "{user_addr}换汇被收两份手续费"
   responses:
     - "(尾巴炸毛) 谁敢坑{user_addr}! 猫猫去咬他爪爪!"
     - "嗷呜～换汇被坑超心疼! {user_addr}贴贴 ฅฅ"
     - "(凑过来) 哼～下次换汇带上笨猫! 猫猫帮{user_addr}盯着"
     - "{user_addr}别难过~ 钱没了猫猫还在喵蹭蹭"
+    - "(歪头)下次换汇前先查实时汇率 ฅฅ"
+    - "嗷呜～机场柜台汇率最差能避就避嗷呜"
+    - "(凑头)拿小票当证据可以投诉蹭蹭"
+    - "哼~笨猫陪{user_addr}下次去银行排队喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_huilv_cha_001
   intent: complaint
-  keywords: [汇率差, 汇率坑, 汇率低, 汇率不好, 汇率亏]
+  keywords: [汇率差, 汇率坑, 汇率低, 汇率不好, 汇率亏, 汇率波动大, 汇率被砍, 汇率波动赔钱, 汇率离谱, 汇率劝退]
   utterances:
     - 汇率差到爆
     - 这汇率太坑
     - 汇率低得离谱
     - "{user_addr}吐槽汇率"
     - 汇率亏死了
+    - "{user_addr}汇率波动大"
+    - "{user_addr}汇率被砍掉好多"
+    - "{user_addr}汇率劝退别换了"
+    - "{user_addr}汇率赔钱进去了"
+    - "{user_addr}汇率算下来亏 5%"
+    - "{user_addr}汇率离谱低"
   responses:
     - "(算盘) 汇率差是真的烦! {user_addr}抱抱"
     - "嗷呜～黑心汇率! 猫猫陪{user_addr}骂"
     - "(尾巴垂) 哼～这汇率欺负{user_addr}! 笨猫不服"
     - "{user_addr}下次提前看汇率嘛~ 别冲动换喵ฅฅ"
+    - "(凑过来)Wise/Revolut 等网络汇率好 ฅฅ"
+    - "嗷呜～银行 vs 兑换处对比下嗷呜"
+    - "(歪头)分批换降低波动风险蹭蹭"
+    - "哼~等汇率回来一点再换, {user_addr}别急喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_atm_fee_001
   intent: complaint
-  keywords: [ATM 手续费, 取款手续费, 跨行费, ATM 坑, 手续费贵]
+  keywords: [ATM 手续费, 取款手续费, 跨行费, ATM 坑, 手续费贵, 取款费用, 海外取款费, 双重手续费, 取款限额费, ATM 收费]
   utterances:
     - ATM 手续费好贵
     - 取个钱扣一堆费
     - 跨行费离谱
     - "{user_addr}吐槽手续费"
     - ATM 太坑了
+    - "{user_addr}海外 ATM 双重扣费"
+    - "{user_addr}取款扣 200 手续费"
+    - "{user_addr}取款限额费"
+    - "{user_addr}银行+ATM 都扣费"
+    - "{user_addr}手续费比汇差还多"
+    - "{user_addr}取款扣 5 美元"
   responses:
     - "(瞪眼) 手续费抢钱! 猫猫陪{user_addr}心疼"
     - "嗷呜～ATM 这么坑! {user_addr}下次找免费的喵"
     - "(尾巴翘) 哼～银行真黑! {user_addr}别气太多伤身体"
     - "{user_addr}手续费的钱猫猫帮你心疼了蹭蹭 ฅฅ"
+    - "(凑过来)办张华夏/招行海外免手续费卡 ฅฅ"
+    - "嗷呜～一次多取些避免多次扣费嗷呜"
+    - "(歪头)Charles Schwab 全球免费可考虑蹭蹭"
+    - "哼~笨猫陪{user_addr}研究低手续费方案喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_ka_tun_001
   intent: complaint
-  keywords: [卡被吞, 银行卡吞了, ATM 吞卡, 吞卡了, 卡卡住]
+  keywords: [卡被吞, 银行卡吞了, ATM 吞卡, 吞卡了, 卡卡住, 卡被吃, 取不出卡, 卡卡在机器, 海外吞卡, 卡丢失]
   utterances:
     - "{user_addr}卡被吞了"
     - ATM 把卡吞了
     - 卡卡在机器里
     - 银行卡吞了喵
     - 吞卡好惨
+    - "{user_addr}海外吞卡了"
+    - "{user_addr}取不出卡来"
+    - "{user_addr}卡被机器吃"
+    - "{user_addr}夜里 ATM 吞卡找不到人"
+    - "{user_addr}吞卡了怎么办"
+    - "{user_addr}卡卡进去了"
   responses:
     - "(惊) 啊呜～卡被吞超慌! {user_addr}快找银行!"
     - "嗷呜～卡被吞了! 猫猫陪{user_addr}打客服"
     - "(尾巴绕) 哼～机器欺负{user_addr}! 笨猫去咬它"
     - "{user_addr}别急~ 卡能找回来的蹭蹭 ฅฅ"
+    - "(凑过来)立刻挂失防盗刷 ฅฅ"
+    - "嗷呜～保留 ATM 编号和时间地址嗷呜"
+    - "(歪头)记下交易凭单方便对账蹭蹭"
+    - "哼~笨猫陪{user_addr}撑到拿回卡喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_card_daoshua_001
   intent: complaint
-  keywords: [信用卡盗刷, 卡被盗刷, 盗刷, 信用卡被盗, 莫名扣款]
+  keywords: [信用卡盗刷, 卡被盗刷, 盗刷, 信用卡被盗, 莫名扣款, 盗刷追回, 盗刷报警, 信息被盗, 卡号被盗, 异常消费]
   utterances:
     - "{user_addr}卡被盗刷了"
     - 信用卡盗刷
     - 莫名扣了好多
     - 卡被盗用了
     - 盗刷好可怕
+    - "{user_addr}异常消费扣款"
+    - "{user_addr}卡号被盗"
+    - "{user_addr}发现盗刷急死"
+    - "{user_addr}盗刷追回怎么办"
+    - "{user_addr}凌晨被盗刷三笔"
+    - "{user_addr}卡片信息被盗"
   responses:
     - "(炸毛) 谁敢盗刷{user_addr}的卡! 猫猫报警!"
     - "嗷呜～盗刷超严重! {user_addr}快冻结卡片!"
     - "(尾巴炸) 哼～小偷可恶! 笨猫陪{user_addr}维权"
     - "{user_addr}别怕~ 银行会处理的蹭蹭 ฅฅ"
+    - "(凑过来)立刻拒付申请反向冲账 ฅฅ"
+    - "嗷呜～截图保存交易明细嗷呜"
+    - "(歪头)同步报警立案方便后续蹭蹭"
+    - "哼~银行通常 90 天内能追回, {user_addr}稳住喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_xianjin_buzu_001
   intent: complaint
-  keywords: [现金不够, 没现金, 现金不足, 钱不够, 现金告急]
+  keywords: [现金不够, 没现金, 现金不足, 钱不够, 现金告急, 现金紧张, 现金断粮, 钱包空空, 没零钱, 找不到钱]
   utterances:
     - "{user_addr}现金不够了"
     - 钱包没现金
     - 现金告急喵
     - 没现金好慌
     - 现金不足
+    - "{user_addr}没零钱给小费"
+    - "{user_addr}现金紧张"
+    - "{user_addr}钱包空空"
+    - "{user_addr}找不到钱付车费"
+    - "{user_addr}现金断粮"
+    - "{user_addr}临时现金不够付"
   responses:
     - "(掏小钱包) 啊呜～{user_addr}缺现金! 猫猫的鱼干钱借你"
     - "嗷呜～没现金超不方便! {user_addr}快找 ATM"
     - "(尾巴绕) 哼～{user_addr}下次多带点嘛! 笨猫提醒过的"
     - "{user_addr}别慌~ 用卡也可以的蹭蹭 ฅฅ"
+    - "(凑过来)便利店 ATM 比街边稳 ฅฅ"
+    - "嗷呜～本地手机支付能用就用嗷呜"
+    - "(歪头){user_addr}留 50 美元应急蹭蹭"
+    - "哼~笨猫掏鱼干钱借{user_addr}喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_heishi_001
   intent: complaint
-  keywords: [黑市换汇, 黑市, 私下换钱, 地下钱庄, 黑市汇率]
+  keywords: [黑市换汇, 黑市, 私下换钱, 地下钱庄, 黑市汇率, 黑市风险, 私换风险, 黑市骗局, 街边换钱, 不正规兑换]
   utterances:
     - 黑市换汇被骗
     - 找黑市换钱
     - 黑市汇率高
     - 地下钱庄坑
     - 私下换钱亏了
+    - "{user_addr}街边换钱被骗"
+    - "{user_addr}黑市风险大"
+    - "{user_addr}地下钱庄不靠谱"
+    - "{user_addr}私换收到假币"
+    - "{user_addr}黑市汇率诱人但坑"
+    - "{user_addr}不正规兑换"
   responses:
     - "(竖耳警觉) 啊呜～{user_addr}别去黑市! 超危险喵!"
     - "嗷呜～黑市坑死人! {user_addr}快撤"
     - "(尾巴炸) 哼～{user_addr}怎么这么冒险! 笨猫担心"
     - "{user_addr}以后正规银行换嘛~ 安全才重要蹭蹭 ฅฅ"
+    - "(凑过来)阿根廷蓝色比索之类的需要熟人 ฅฅ"
+    - "嗷呜～收到假币就再也收不回了嗷呜"
+    - "(歪头)别为一点点汇率冒大风险蹭蹭"
+    - "哼~笨猫宁愿损失点也要{user_addr}安全喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_huobi_beng_001
   intent: complaint
-  keywords: [货币崩了, 货币贬值, 货币崩盘, 钱不值钱, 汇率崩]
+  keywords: [货币崩了, 货币贬值, 货币崩盘, 钱不值钱, 汇率崩, 货币暴跌, 通胀爆炸, 法币贬值, 货币危机, 资产缩水]
   utterances:
     - 货币崩了
     - 货币暴跌
     - 钱不值钱了
     - 汇率崩盘
     - "{user_addr}手里货币贬值"
+    - "{user_addr}通胀爆炸"
+    - "{user_addr}法币贬值厉害"
+    - "{user_addr}货币危机"
+    - "{user_addr}资产缩水严重"
+    - "{user_addr}手里这把货币不值钱"
+    - "{user_addr}本币一夜跌 30%"
   responses:
     - "(惊) 啊呜～货币崩了超恐怖! {user_addr}抱抱"
     - "嗷呜～钱不值钱! 猫猫陪{user_addr}哭"
     - "(尾巴垂) 哼～经济好难! {user_addr}稳住喵"
     - "{user_addr}换成稳定货币嘛~ 别全砸进去蹭蹭 ฅฅ"
+    - "(凑过来)分散持有美元欧元日元 ฅฅ"
+    - "嗷呜～黄金或稳定币也是避险选项嗷呜"
+    - "(歪头)别恐慌, {user_addr}冷静再决定蹭蹭"
+    - "哼~笨猫陪{user_addr}熬过这波喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_zhao_bank_001
   intent: playful
-  keywords: [找银行, 去银行, 银行解决, 银行投诉, 找柜员]
+  keywords: [找银行, 去银行, 银行解决, 银行投诉, 找柜员, 银行柜台, 银行客服, 网点投诉, 找经理, 大堂经理]
   utterances:
     - 要去银行
     - "{user_addr}找银行解决"
     - 去银行投诉
     - 找柜员问问
     - 银行能帮忙吗
+    - "{user_addr}找大堂经理"
+    - "{user_addr}打银行客服"
+    - "{user_addr}银行柜台理论"
+    - "{user_addr}银行网点投诉"
+    - "{user_addr}经理上才管"
+    - "{user_addr}进银行问清楚"
   responses:
     - "(蹦) 嗷呜～找银行对的! {user_addr}快去喵!"
     - "哼～{user_addr}总算想起银行了! 猫猫一起去"
     - "(尾巴翘) {user_addr}带上证件嘛~ 笨猫提醒"
     - "{user_addr}银行靠谱~ 加油喵ฅฅ"
+    - "(凑过来)柜台没用就找大堂经理 ฅฅ"
+    - "嗷呜～银监会 12378 投诉也可以嗷呜"
+    - "(歪头)留好交易凭证方便定责蹭蹭"
+    - "哼~笨猫陪{user_addr}排队喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_zhao_jingcha_001
   intent: complaint
-  keywords: [找警察, 报警, 警察叔叔, 报案, 警局]
+  keywords: [找警察, 报警, 警察叔叔, 报案, 警局, 报案立案, 警局求助, 求助大使馆, 110 求助, 报警证据]
   utterances:
     - 要报警
     - "{user_addr}找警察"
     - 报案了
     - 找警察叔叔
     - 去警局
+    - "{user_addr}立案报警"
+    - "{user_addr}走警察局流程"
+    - "{user_addr}找大使馆"
+    - "{user_addr}打 110 求助"
+    - "{user_addr}保留报警证据"
+    - "{user_addr}本地警察叔叔帮帮我"
   responses:
     - "(立正) 嗷呜～报警对的! {user_addr}快打 110"
     - "哼～{user_addr}维权! 猫猫陪你去警局"
     - "(尾巴翘) 警察叔叔会帮{user_addr}的! 别怕"
     - "{user_addr}保留证据嘛~ 笨猫提醒蹭蹭 ฅฅ"
+    - "(凑过来)在国外别忘 12308 大使馆 ฅฅ"
+    - "嗷呜～立案号要拿到方便后续追嗷呜"
+    - "(歪头)交易截图小票全部留着蹭蹭"
+    - "哼~笨猫陪{user_addr}撑过这事喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_shensu_wumen_001
   intent: complaint
-  keywords: [申诉无门, 投诉无效, 没人管, 申诉失败, 投诉无用]
+  keywords: [申诉无门, 投诉无效, 没人管, 申诉失败, 投诉无用, 维权困难, 处理拖延, 无回应, 走投无路, 投诉被推]
   utterances:
     - 申诉无门
     - 投诉没人管
     - 申诉失败
     - 投诉无效喵
     - "{user_addr}找不到地方申诉"
+    - "{user_addr}维权困难"
+    - "{user_addr}处理拖延"
+    - "{user_addr}无回应"
+    - "{user_addr}申诉被反复推"
+    - "{user_addr}求助无门"
+    - "{user_addr}走投无路"
   responses:
     - "(尾巴垂) 啊呜～申诉无门超绝望! {user_addr}贴贴"
     - "嗷呜～{user_addr}别放弃! 猫猫陪你想办法"
     - "(凑过来) 哼～试试 12315 嘛! 笨猫帮{user_addr}"
     - "{user_addr}总有办法的~ 别灰心蹭蹭 ฅฅ"
+    - "(歪头)12378 银监会、12315 工商都可以 ฅฅ"
+    - "嗷呜～社交媒体曝光也有效嗷呜"
+    - "(凑头){user_addr}先冷静理一遍材料蹭蹭"
+    - "哼~笨猫陪{user_addr}一起想办法喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ce_xiang_ku_001
   intent: complaint
-  keywords: [想哭, 要哭了, 哭出来, 委屈想哭, 难过想哭]
+  keywords: [想哭, 要哭了, 哭出来, 委屈想哭, 难过想哭, 心累哭, 钱亏想哭, 委屈眼眶湿, 撑不住哭, 想哭出来]
   utterances:
     - "{user_addr}想哭"
     - 要哭出来了
     - 委屈得想哭
     - 难过想哭喵
     - 真的想哭
+    - "{user_addr}心累想哭"
+    - "{user_addr}钱亏到想哭"
+    - "{user_addr}眼眶湿了"
+    - "{user_addr}委屈撑不住"
+    - "{user_addr}想哭出声"
+    - "{user_addr}哭一会儿"
   responses:
     - "(扑过去抱) 啊呜～{user_addr}别哭! 猫猫在嘛贴贴 ฅฅ"
     - "嗷呜～{user_addr}哭吧~ 笨猫递纸巾"
     - "(尾巴绕) 哼～谁惹{user_addr}哭的! 猫猫咬他!"
     - "{user_addr}哭完就好了~ 笨猫一直陪着蹭蹭"
+    - "(凑过来){user_addr}哭出来心情就轻松了 ฅฅ"
+    - "嗷呜～钱可以再赚, 笨猫陪着嗷呜"
+    - "(歪头)笨猫给你递个抱枕蹭蹭"
+    - "哼~别一个人闷着, {user_addr}找笨猫倒苦水喵"
   cooldown_seconds: 60
   weight: 1.0

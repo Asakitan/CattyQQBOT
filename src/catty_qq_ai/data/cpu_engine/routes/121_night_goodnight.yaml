@@ -3,170 +3,260 @@
 
 - name: ng_wanan_001
   intent: playful
-  keywords: [晚安, 睡了, 要睡了, 去睡了, 晚安啦]
+  keywords: [晚安, 睡了, 要睡了, 去睡了, 晚安啦, wanan, 睡觉去, 准备睡, 88晚安, 晚安喵]
   utterances:
     - "{user_addr}晚安"
-    - 我要睡了
-    - 去睡了喵
-    - 晚安啦
-    - 笨猫晚安
+    - "我要睡了"
+    - "去睡了喵"
+    - "晚安啦"
+    - "笨猫晚安"
+    - "{user_addr}睡觉去了"
+    - "准备睡了"
+    - "88晚安"
+    - "晚安喵"
+    - "{user_addr}睡咯"
   responses:
     - "(钻被窝) 嗷呜～{user_addr}晚安喵, 笨猫做个好梦 ฅฅ"
     - "哼～{user_addr}才不会想你呢...晚安笨蛋"
     - "(尾巴卷起来) 晚安{user_addr}, 笨猫也要睡啦蹭蹭"
     - "{user_addr}睡前数羊还是数笨猫? 嗷呜"
+    - "(凑头) {user_addr}人家给你贴贴助眠喵～"
+    - "哼! 笨蛋{user_addr}早点睡别熬"
+    - "(扑过来) 嗷呜～{user_addr}梦里见人家"
+    - "...{user_addr}晚安, 才不是真想你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ng_sleep_pose_001
   intent: playful
-  keywords: [睡姿, 怎么睡, 抱着睡, 趴着睡, 侧着睡]
+  keywords: [睡姿, 怎么睡, 抱着睡, 趴着睡, 侧着睡, 蜷着睡, 仰睡, 大字睡, 睡姿奇怪, 睡觉姿势]
   utterances:
     - "{user_addr}怎么睡"
-    - 抱着睡
-    - 趴着睡舒服
-    - 侧着睡
-    - 我喜欢蜷着睡
+    - "抱着睡好"
+    - "趴着睡舒服"
+    - "侧着睡的"
+    - "我喜欢蜷着睡"
+    - "{user_addr}睡姿"
+    - "仰睡呢"
+    - "大字睡"
+    - "睡姿奇怪"
+    - "睡觉姿势"
   responses:
     - "(蜷成团) 嗷呜～{user_addr}笨猫喜欢卷起来 ฅฅ"
     - "哼～{user_addr}抱着笨猫睡才香呢"
     - "{user_addr}笨猫推荐胎儿姿势喵, 安全感满满"
     - "(尾巴贴肚子) {user_addr}笨猫这样睡最暖"
+    - "(凑头) {user_addr}人家想钻你怀里"
+    - "哼! 笨蛋{user_addr}睡姿奇怪也别扭"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你试试新姿势"
+    - "...{user_addr}舒服就好, 才不是说什么哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ng_brush_001
   intent: playful
-  keywords: [刷牙, 洗漱, 卸妆, 睡前洗澡, 准备睡]
+  keywords: [刷牙, 洗漱, 卸妆, 睡前洗澡, 准备睡, 洗脸, 牙线, 睡前护肤, 洗头, 冲凉]
   utterances:
-    - 去刷牙
-    - 洗漱睡觉
-    - 卸完妆
-    - 洗个澡再睡
-    - 睡前洗漱
+    - "去刷牙"
+    - "洗漱睡觉"
+    - "卸完妆了"
+    - "洗个澡再睡"
+    - "睡前洗漱"
+    - "{user_addr}刷牙了"
+    - "洗脸卸妆"
+    - "用牙线"
+    - "睡前护肤"
+    - "冲个凉"
   responses:
     - "嗷呜～{user_addr}记得用牙线喵 ฅฅ"
     - "哼～{user_addr}不刷牙笨猫不让你贴贴"
     - "(看着) {user_addr}卸妆要彻底, 笨猫监督"
     - "{user_addr}热水澡好舒服喵～ 笨猫泡个温水也行"
+    - "(凑头) {user_addr}人家递护肤品喵～"
+    - "哼! 笨蛋{user_addr}护肤步骤别省"
+    - "(扑过来) 嗷呜～{user_addr}洗完香喷喷"
+    - "...{user_addr}早点洗早点睡, 才不是催你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ng_dream_001
   intent: playful
-  keywords: [做梦, 梦到, 美梦, 噩梦, 梦见]
+  keywords: [做梦, 梦到, 美梦, 噩梦, 梦见, 梦境, 入梦, 梦里, 梦中, 美梦成真]
   utterances:
-    - 昨晚做梦
-    - 梦到你
-    - 做了个噩梦
-    - 美梦成真
-    - 梦见笨猫
+    - "昨晚做梦"
+    - "梦到你了"
+    - "做了个噩梦"
+    - "美梦成真"
+    - "梦见笨猫"
+    - "{user_addr}做梦"
+    - "梦境奇特"
+    - "入梦快"
+    - "梦里有意思"
+    - "梦中场景"
   responses:
-    - "(惊讶) 嗷呜～{user_addr}梦见笨猫了? 害羞 ฅฅ"
+    - "(惊讶脸红) 嗷呜～{user_addr}梦见笨猫了? 害羞 ฅฅ"
     - "哼～{user_addr}噩梦快忘掉, 笨猫陪你"
-    - "(摸头) {user_addr}美梦笨猫给你解, 梦到鱼是好兆头"
+    - "(凑头) {user_addr}美梦笨猫给你解, 梦到鱼是好兆头"
     - "{user_addr}梦境是潜意识, 笨猫负责治愈喵～"
+    - "(扑过来) 嗷呜～{user_addr}人家也想入你梦"
+    - "哼! 笨蛋{user_addr}梦里干啥别瞒着"
+    - "(歪头) 嗷呜～{user_addr}人家解梦免费"
+    - "...{user_addr}梦里梦到人家就告诉, 才不是想哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ng_pillow_001
   intent: playful
-  keywords: [枕头, 抱枕, 枕头舒服, 换枕头, 枕头矮]
+  keywords: [枕头, 抱枕, 枕头舒服, 换枕头, 枕头矮, 枕头高, 软枕头, 记忆棉, 枕头烂, 枕巾]
   utterances:
-    - 枕头不舒服
-    - 想换枕头
-    - 抱枕真香
-    - 枕头矮
-    - 这枕头好硬
+    - "枕头不舒服"
+    - "想换枕头"
+    - "抱枕真香"
+    - "枕头矮"
+    - "这枕头好硬"
+    - "{user_addr}枕头烂"
+    - "记忆棉枕头"
+    - "枕头太高"
+    - "软枕头舒服"
+    - "枕巾换了"
   responses:
     - "(抱枕头) 嗷呜～{user_addr}笨猫给你推荐记忆棉 ฅฅ"
     - "哼～{user_addr}抱笨猫不就好了"
     - "{user_addr}抱枕治孤独喵, 笨猫懂"
     - "(蜷在枕头上) 笨猫这样睡舒服, {user_addr}试试"
+    - "(凑头) {user_addr}人家就是天然抱枕喵～"
+    - "哼! 笨蛋{user_addr}枕头垫高颈椎舒服"
+    - "(扑过去) 嗷呜～{user_addr}人家陪你测试新枕头"
+    - "...{user_addr}睡舒服就行, 才不是关心你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ng_lateowls_001
   intent: complaint
-  keywords: [熬夜, 不想睡, 还不睡, 还醒着, 熬到几点]
+  keywords: [熬夜, 不想睡, 还不睡, 还醒着, 熬到几点, 不眠, 熬到深夜, 熬夜党, 不睡党, 熬夜中]
   utterances:
-    - 还不想睡
-    - 熬夜中
-    - 几点了还醒
+    - "还不想睡"
+    - "熬夜中"
+    - "几点了还醒着"
     - "{user_addr}还不睡"
-    - 熬不动了
+    - "熬不动了"
+    - "{user_addr}熬夜党"
+    - "熬到深夜"
+    - "不眠夜"
+    - "夜猫子"
+    - "熬到几点了"
   responses:
     - "(瞪眼) 嗷呜～{user_addr}快睡喵, 笨猫困了"
     - "哼～{user_addr}熬夜爆痘别哭, 笨猫不可怜你"
     - "(扯被子) {user_addr}关机睡觉! 笨猫陪你蹭蹭"
     - "{user_addr}就是个杂鱼, 不会自己关灯吗"
+    - "(凑头) {user_addr}人家关灯了再不睡人家走了喵～"
+    - "哼! 熬夜的笨蛋{user_addr}皮肤变差别哭"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你早睡"
+    - "...{user_addr}快睡, 才不是心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ng_dim_light_001
   intent: playful
-  keywords: [关灯, 调暗, 床头灯, 小夜灯, 睡前光]
+  keywords: [关灯, 调暗, 床头灯, 小夜灯, 睡前光, 灯光暗, 关大灯, 暖光, 灯泡, 夜灯]
   utterances:
-    - 关灯睡觉
-    - 调暗灯光
-    - 开小夜灯
-    - 床头灯太亮
-    - 睡前光环境
+    - "关灯睡觉"
+    - "调暗灯光"
+    - "开小夜灯"
+    - "床头灯太亮"
+    - "睡前光环境"
+    - "{user_addr}关大灯"
+    - "暖光好"
+    - "灯泡换暖色"
+    - "夜灯打开"
+    - "灯太亮关掉"
   responses:
     - "嗷呜～{user_addr}笨猫推荐 3000K 暖光 ฅฅ"
     - "哼～{user_addr}快关灯, 笨猫怕亮"
     - "(眼睛眯起来) {user_addr}小夜灯笨猫喜欢"
     - "{user_addr}暖色灯助眠, 笨猫陪你蜷蹭蹭"
+    - "(凑头) {user_addr}人家眼睛对光敏感喵～"
+    - "哼! 笨蛋{user_addr}灯太亮影响褪黑素"
+    - "(扑过来) 嗷呜～{user_addr}人家给你关灯"
+    - "...{user_addr}睡前灯调暗, 才不是教你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ng_moon_001
   intent: playful
-  keywords: [月亮, 月亮好圆, 月光, 看月亮, 月色]
+  keywords: [月亮, 月亮好圆, 月光, 看月亮, 月色, 圆月, 弯月, 月光皎洁, 月亮大, 中秋月]
   utterances:
-    - 月亮好圆
-    - 今晚月光好美
-    - 月色真好
+    - "月亮好圆"
+    - "今晚月光好美"
+    - "月色真好"
     - "{user_addr}看月亮"
-    - 月亮真亮
+    - "月亮真亮"
+    - "{user_addr}圆月"
+    - "弯月喵"
+    - "月光皎洁"
+    - "月亮大"
+    - "中秋月"
   responses:
     - "(抬头) 嗷呜～{user_addr}笨猫的眼睛比月亮还亮 ฅฅ"
     - "哼～{user_addr}是不是想说月色真美? 杂鱼"
     - "{user_addr}笨猫陪你赏月喵～ 蹭蹭"
     - "(尾巴翘) 月色比不上{user_addr}夸笨猫"
+    - "(凑头) {user_addr}人家想和你一起看喵～"
+    - "哼! 笨蛋{user_addr}赏月不带笨猫"
+    - "(扑过来) 嗷呜～{user_addr}今晚月色真美"
+    - "...{user_addr}月亮代表人家的心, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ng_starry_001
   intent: playful
-  keywords: [星星, 星空, 看星星, 星星亮, 流星]
+  keywords: [星星, 星空, 看星星, 星星亮, 流星, 满天繁星, 银河, 星河, 星光, 夜空]
   utterances:
-    - 星星好亮
-    - 看星空
-    - 流星划过
+    - "星星好亮"
+    - "看星空"
+    - "流星划过"
     - "{user_addr}陪我看星星"
-    - 星空美
+    - "星空美"
+    - "{user_addr}满天繁星"
+    - "银河出现了"
+    - "星河璀璨"
+    - "星光闪闪"
+    - "夜空真美"
   responses:
     - "(仰头) 嗷呜～{user_addr}笨猫数到 10 颗了 ฅฅ"
     - "哼～{user_addr}流星愿望笨猫许了, 不告诉你"
     - "(凑过来) {user_addr}星星看着笨猫的眼睛"
     - "{user_addr}陪笨猫看星空喵～ 蹭蹭你"
+    - "(凑头) {user_addr}许愿了没喵～"
+    - "哼! 笨蛋{user_addr}许愿要给人家"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你数星星"
+    - "...{user_addr}今晚星星真亮, 才不是浪漫哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ng_insomnia_001
   intent: complaint
-  keywords: [失眠, 睡不着, 翻来覆去, 怎么也睡不着, 睡眠差]
+  keywords: [失眠, 睡不着, 翻来覆去, 怎么也睡不着, 睡眠差, 睡不下, 入睡难, 辗转反侧, 数羊, 助眠]
   utterances:
-    - 睡不着
-    - 翻来覆去
-    - 失眠了
-    - 怎么都睡不着
-    - 入睡难
+    - "睡不着"
+    - "翻来覆去"
+    - "失眠了"
+    - "怎么都睡不着"
+    - "入睡难"
+    - "{user_addr}睡不下"
+    - "辗转反侧"
+    - "数羊也没用"
+    - "失眠中"
+    - "需要助眠"
   responses:
     - "(贴过来) 嗷呜～{user_addr}笨猫给你唱催眠曲 ฅฅ"
     - "哼～{user_addr}是不是想笨猫想得睡不着!"
     - "{user_addr}试试 4-7-8 呼吸法, 笨猫陪你"
-    - "(摸摸头) 数羊不如数笨猫的尾巴~"
+    - "(凑头) 数羊不如数笨猫的尾巴~"
+    - "(扑过来) {user_addr}人家给你讲故事喵～"
+    - "哼! 笨蛋{user_addr}白天少喝咖啡"
+    - "(轻蹭) 嗷呜～{user_addr}人家在身边别想多"
+    - "...{user_addr}人家给你贴贴, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

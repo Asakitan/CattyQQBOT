@@ -4,204 +4,336 @@
 
 - name: dr_shake_001
   intent: question
-  keywords: [推荐代餐奶昔, 推荐 Soylent, 推荐 Slim Fast, 推荐 Huel, 笨猫代餐奶昔]
+  keywords: [推荐代餐奶昔, 推荐 Soylent, 推荐 Slim Fast, 推荐 Huel, 笨猫代餐奶昔, 代餐粉, 营养奶昔, 王饱饱, 康宝莱, 减脂奶昔]
   utterances:
     - 推荐代餐奶昔
     - 推荐 Soylent
     - 推荐 Slim Fast
     - 推荐 Huel
     - 笨猫代餐奶昔
+    - "{user_addr}代餐粉哪家好"
+    - 营养奶昔推荐
+    - "{user_addr}Huel 好喝吗"
+    - 王饱饱代餐粉
+    - 代餐奶昔减脂
+    - 康宝莱代餐推荐
+    - 全餐型代餐
   responses:
     - "嗷呜～{user_addr}Soylent / Huel - 欧美主流ฅฅ"
-    - "(尾巴翘) Slim Fast / 康宝莱 / 王饱饱"
+    - "(尾巴翘起) Slim Fast / 康宝莱 / 王饱饱"
     - "{user_addr}一杯 200-400 大卡 - 替正餐"
     - "(挺胸) 笨猫推荐: Huel 营养全 / 别长期靠它!"
+    - "(歪头) 代餐替一餐就行, 别全靠嗷呜"
+    - "嗷呜～{user_addr}Huel 营养均衡, 王饱饱口感好ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}搭配代餐 + 正餐喵呜"
+    - "哼! 代餐别上瘾, {user_addr}该吃饭还得吃嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_konjac_001
   intent: question
-  keywords: [推荐魔芋面, 推荐低卡饱腹, 推荐魔芋丝, 推荐 shirataki, 笨猫魔芋面]
+  keywords: [推荐魔芋面, 推荐低卡饱腹, 推荐魔芋丝, 推荐 shirataki, 笨猫魔芋面, 魔芋米, 葡甘聚糖, 0 卡食物, 减脂主食, 魔芋制品]
   utterances:
     - 推荐魔芋面
     - 推荐低卡饱腹
     - 推荐魔芋丝
     - 推荐 shirataki
     - 笨猫魔芋面
+    - "{user_addr}魔芋面减脂好吗"
+    - 0 卡食物推荐
+    - "{user_addr}魔芋米饭"
+    - 葡甘聚糖好处
+    - 低卡饱腹食物
+    - 减脂主食选啥
+    - 魔芋丝食谱
   responses:
     - "嗷呜～{user_addr}魔芋面 - 0 脂几乎 0 卡ฅฅ"
-    - "(尾巴翘) 魔芋丝 / 魔芋米 / 魔芋粉"
+    - "(尾巴翘起) 魔芋丝 / 魔芋米 / 魔芋粉"
     - "{user_addr}饱腹感强 - 葡甘聚糖吸水"
     - "(挺胸) 笨猫推荐: 配高蛋白汤 / 别空口吃!"
+    - "(歪头) 魔芋无味, 靠汤料调味嗷呜"
+    - "嗷呜～{user_addr}魔芋 + 鸡胸 + 蔬菜超饱ฅฅ"
+    - "(尾巴一甩) 笨猫推荐重庆鸡公煲调味~ 喵呜"
+    - "哼! 魔芋虽好但口感差, {user_addr}别只靠它嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_salad_001
   intent: question
-  keywords: [推荐沙拉店, 推荐沙拉外卖, 推荐 Wagas, 推荐 gaga, 笨猫沙拉]
+  keywords: [推荐沙拉店, 推荐沙拉外卖, 推荐 Wagas, 推荐 gaga, 笨猫沙拉, 新元素沙拉, 大开沙界, 米有沙拉, 减脂沙拉, 油醋汁沙拉]
   utterances:
     - 推荐沙拉店
     - 推荐沙拉外卖
     - 推荐 Wagas
     - 推荐 gaga
     - 笨猫沙拉
+    - "{user_addr}沙拉店哪家好"
+    - 减脂沙拉推荐
+    - "{user_addr}Wagas vs gaga"
+    - 米有沙拉好吗
+    - 油醋汁沙拉选哪家
+    - 高蛋白沙拉
+    - 外卖沙拉推荐
   responses:
     - "嗷呜～{user_addr}Wagas / gaga / 新元素ฅฅ"
-    - "(尾巴翘) 大开沙界 / 米有沙拉"
+    - "(尾巴翘起) 大开沙界 / 米有沙拉"
     - "{user_addr}选鸡胸 + 牛油果 + 油醋汁"
     - "(挺胸) 笨猫推荐: 别选千岛酱 - 偷偷加糖!"
+    - "(歪头) 沙拉看似低卡, 酱汁是热量陷阱嗷呜"
+    - "嗷呜～{user_addr}牛油果热量也高, 别贪多ฅฅ"
+    - "(尾巴一甩) 笨猫教 {user_addr} 自制油醋汁~ 喵呜"
+    - "哼! 沙拉店贵, {user_addr}自己做更省嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_snack_001
   intent: question
-  keywords: [推荐减脂零食, 推荐鸡胸肉脆片, 推荐高蛋白零食, 推荐低卡零食, 笨猫减脂零食]
+  keywords: [推荐减脂零食, 推荐鸡胸肉脆片, 推荐高蛋白零食, 推荐低卡零食, 笨猫减脂零食, 鲨鱼菲特, ffit8, 蛋白棒, 零脂零糖零食, 健身零食]
   utterances:
     - 推荐减脂零食
     - 推荐鸡胸肉脆片
     - 推荐高蛋白零食
     - 推荐低卡零食
     - 笨猫减脂零食
+    - "{user_addr}减脂期可以吃啥零食"
+    - 高蛋白零食推荐
+    - "{user_addr}鲨鱼菲特怎么样"
+    - ffit8 蛋白棒
+    - 零脂零糖零食
+    - 健身零食选哪家
+    - 解馋低卡零食
   responses:
     - "嗷呜～{user_addr}鸡胸肉脆片 / 牛肉干ฅฅ"
-    - "(尾巴翘) 海苔 / 烤鹰嘴豆 / 蛋白棒"
+    - "(尾巴翘起) 海苔 / 烤鹰嘴豆 / 蛋白棒"
     - "{user_addr}无糖坚果小包装 - 控量"
     - "(挺胸) 笨猫推荐: 鲨鱼菲特 / ffit8 蛋白棒!"
+    - "(歪头) 鹰嘴豆烤一下香, 蛋白还高嗷呜"
+    - "嗷呜～{user_addr}坚果小包装别打开停不下ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}选适合的减脂零食喵呜"
+    - "哼! 零食再低卡也是热量, {user_addr}别贪嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_coffee_001
   intent: question
-  keywords: [推荐黑咖啡, 推荐美式燃脂, 推荐减脂咖啡, 推荐 black coffee, 笨猫黑咖啡]
+  keywords: [推荐黑咖啡, 推荐美式燃脂, 推荐减脂咖啡, 推荐 black coffee, 笨猫黑咖啡, 0 卡咖啡, 燃脂咖啡, 训练前咖啡, 提高代谢, 咖啡因燃脂]
   utterances:
     - 推荐黑咖啡
     - 推荐美式燃脂
     - 推荐减脂咖啡
     - 推荐 black coffee
     - 笨猫黑咖啡
+    - "{user_addr}黑咖啡减脂好吗"
+    - 0 卡咖啡推荐
+    - "{user_addr}训练前咖啡"
+    - 提高代谢饮品
+    - 燃脂咖啡选啥
+    - 手冲咖啡减脂
+    - 美式 vs 冷萃
   responses:
     - "嗷呜～{user_addr}黑咖啡 - 0 卡提代谢ฅฅ"
-    - "(尾巴翘) 美式 / 手冲 / 冷萃"
+    - "(尾巴翘起) 美式 / 手冲 / 冷萃"
     - "{user_addr}咖啡因促脂肪氧化 - 训练前喝"
     - "(挺胸) 笨猫推荐: 训前 30 分钟 / 别加糖加奶!"
+    - "(歪头) 黑咖啡空腹喝伤胃, {user_addr}小心嗷呜"
+    - "嗷呜～{user_addr}下午喝晚睡不着ฅฅ"
+    - "(尾巴一甩) 笨猫推荐瑞幸 + Manner 实惠喵呜"
+    - "哼! 咖啡只是辅助, 还要运动 {user_addr} 加油嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_probiotic_001
   intent: question
-  keywords: [推荐益生菌, 推荐肠道益生菌, 推荐 Culturelle, 推荐合生元, 笨猫益生菌]
+  keywords: [推荐益生菌, 推荐肠道益生菌, 推荐 Culturelle, 推荐合生元, 笨猫益生菌, 嗜酸乳杆菌, 双歧杆菌, 肠道菌群, Life Space, 减脂调肠道]
   utterances:
     - 推荐益生菌
     - 推荐肠道益生菌
     - 推荐 Culturelle
     - 推荐合生元
     - 笨猫益生菌
+    - "{user_addr}益生菌哪家好"
+    - 调肠道益生菌
+    - "{user_addr}Culturelle 怎么样"
+    - 合生元益生菌
+    - Life Space 推荐
+    - 减脂期肠道
+    - 双歧杆菌补充剂
   responses:
     - "嗷呜～{user_addr}Culturelle / 合生元 / Life Spaceฅฅ"
-    - "(尾巴翘) 嗜酸乳杆菌 / 双歧杆菌"
+    - "(尾巴翘起) 嗜酸乳杆菌 / 双歧杆菌"
     - "{user_addr}菌株数 / CFU 看清楚"
     - "(挺胸) 笨猫推荐: 减脂顺带调肠道 - 别空腹吃!"
+    - "(歪头) 益生菌别和热水冲, 会烫死菌嗷呜"
+    - "嗷呜～{user_addr}早晚饭后吃最有效ฅฅ"
+    - "(尾巴一甩) 笨猫推荐肠胃敏感人士先试一周喵呜"
+    - "哼! 益生菌效果因人而异, {user_addr}观察嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: dr_recipe_001
   intent: question
-  keywords: [推荐减脂餐配方, 推荐减脂食谱, 推荐健身餐, 推荐增肌减脂餐, 笨猫减脂餐]
+  keywords: [推荐减脂餐配方, 推荐减脂食谱, 推荐健身餐, 推荐增肌减脂餐, 笨猫减脂餐, 鸡胸肉食谱, 三文鱼食谱, 减脂主食, 健身食谱, 减脂菜单]
   utterances:
     - 推荐减脂餐配方
     - 推荐减脂食谱
     - 推荐健身餐
     - 推荐增肌减脂餐
     - 笨猫减脂餐
+    - "{user_addr}减脂食谱"
+    - 健身餐怎么做
+    - "{user_addr}鸡胸肉花样"
+    - 三文鱼减脂餐
+    - 健身菜单一周
+    - 减脂主食选啥
+    - 增肌减脂配比
   responses:
     - "嗷呜～{user_addr}鸡胸 + 西兰花 + 糙米ฅฅ"
-    - "(尾巴翘) 三文鱼 + 牛油果 + 藜麦"
+    - "(尾巴翘起) 三文鱼 + 牛油果 + 藜麦"
     - "{user_addr}蛋白 1.6g/kg + 复合碳水"
     - "(挺胸) 笨猫推荐: 低油盐 + 蒸煮 / 别白水煮鸡胸啃!"
+    - "(歪头) 鸡胸调味很重要, {user_addr}腌一下嗷呜"
+    - "嗷呜～{user_addr}藜麦比米饭好, GI 低ฅฅ"
+    - "(尾巴一甩) 笨猫教 {user_addr} 一周食谱模板~ 喵呜"
+    - "哼! 减脂餐要好吃才能持续, {user_addr}别折磨自己嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_if_001
   intent: question
-  keywords: [推荐 IF, 推荐间歇性禁食, 推荐 16-8 禁食, 推荐 intermittent fasting, 笨猫间歇性禁食]
+  keywords: [推荐 IF, 推荐间歇性禁食, 推荐 16-8 禁食, 推荐 intermittent fasting, 笨猫间歇性禁食, 5-2 禁食, OMAD, 20-4 禁食, 限时进食, 减脂禁食]
   utterances:
     - 推荐 IF
     - 推荐间歇性禁食
     - 推荐 16-8 禁食
     - 推荐 intermittent fasting
     - 笨猫间歇性禁食
+    - "{user_addr}IF 入门怎么开始"
+    - 16-8 禁食方法
+    - "{user_addr}5-2 禁食"
+    - OMAD 一天一顿
+    - 限时进食减脂
+    - 进阶禁食 20-4
+    - 间歇性禁食危险吗
   responses:
     - "嗷呜～{user_addr}IF 16-8 - 最主流ฅฅ"
-    - "(尾巴翘) 5-2 / OMAD / 20-4 进阶"
+    - "(尾巴翘起) 5-2 / OMAD / 20-4 进阶"
     - "{user_addr}窗口期吃饱 - 别暴食"
     - "(挺胸) 笨猫推荐: 16-8 入门 / 胆囊不好别试!"
+    - "(歪头) IF 不是不吃, 是规定时间吃嗷呜"
+    - "嗷呜～{user_addr}16-8 推荐 12 点-8 点窗口ฅฅ"
+    - "(尾巴一甩) 笨猫提醒 {user_addr} 头晕就停, 别硬扛喵呜"
+    - "哼! IF 因人而异, {user_addr}女生月经期慎重嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: dr_keto_001
   intent: question
-  keywords: [推荐 Keto, 推荐生酮饮食, 推荐低碳饮食, 推荐 ketogenic, 笨猫生酮]
+  keywords: [推荐 Keto, 推荐生酮饮食, 推荐低碳饮食, 推荐 ketogenic, 笨猫生酮, 高脂低碳, 入酮期, 生酮饮食食谱, 椰子油生酮, 低碳水减脂]
   utterances:
     - 推荐 Keto
     - 推荐生酮饮食
     - 推荐低碳饮食
     - 推荐 ketogenic
     - 笨猫生酮
+    - "{user_addr}生酮怎么开始"
+    - 高脂低碳食谱
+    - "{user_addr}入酮期反应"
+    - 椰子油生酮
+    - 生酮危险吗
+    - 减脂选生酮
+    - 生酮 1 个月效果
   responses:
     - "嗷呜～{user_addr}Keto - 脂肪 70% 碳水 5%ฅฅ"
-    - "(尾巴翘) 牛油果 / 椰子油 / 三文鱼"
+    - "(尾巴翘起) 牛油果 / 椰子油 / 三文鱼"
     - "{user_addr}入酮期会头晕 - 补盐补水"
     - "(挺胸) 笨猫推荐: 短期效果猛 / 别长期 / 看医生!"
+    - "(歪头) 生酮 1-2 周入酮, {user_addr}耐心嗷呜"
+    - "嗷呜～{user_addr}生酮口臭是正常的ฅฅ"
+    - "(尾巴一甩) 笨猫提醒 {user_addr} 胆囊不好别上生酮喵呜"
+    - "哼! 生酮短期猛, 长期伤身, {user_addr}慎重嗷呜!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: dr_iced_americano_001
   intent: question
-  keywords: [推荐冰美式, 推荐冰美式提神, 推荐 iced americano, 推荐燃脂咖啡, 笨猫冰美式]
+  keywords: [推荐冰美式, 推荐冰美式提神, 推荐 iced americano, 推荐燃脂咖啡, 笨猫冰美式, 瑞幸冰美, Manner 冰美, 续命冰美, 打工人冰美, 咖啡续命]
   utterances:
     - 推荐冰美式
     - 推荐冰美式提神
     - 推荐 iced americano
     - 推荐燃脂咖啡
     - 笨猫冰美式
+    - "{user_addr}冰美式哪家好"
+    - 瑞幸 vs Manner
+    - "{user_addr}打工人冰美"
+    - 燃脂冰美式
+    - 续命咖啡推荐
+    - Tims 冰美
+    - 星巴克冰美式
   responses:
     - "嗷呜～{user_addr}冰美式 - 打工人续命水ฅฅ"
-    - "(尾巴翘) 瑞幸 / Manner / Tims / 星巴克"
+    - "(尾巴翘起) 瑞幸 / Manner / Tims / 星巴克"
     - "{user_addr}5 块钱续 4 小时命"
     - "(挺胸) 笨猫推荐: 下午 2 点前喝 / 否则失眠!"
+    - "(歪头) 瑞幸性价比高, Manner 香嗷呜"
+    - "嗷呜～{user_addr}加一份浓缩超提神ฅฅ"
+    - "(尾巴一甩) 笨猫帮 {user_addr} 算续命次数喵呜"
+    - "哼! 冰美式喝多伤胃, {user_addr}注意嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_yogurt_001
   intent: question
-  keywords: [推荐低脂酸奶, 推荐希腊酸奶, 推荐 Fage, 推荐 Chobani, 笨猫希腊酸奶]
+  keywords: [推荐低脂酸奶, 推荐希腊酸奶, 推荐 Fage, 推荐 Chobani, 笨猫希腊酸奶, 简爱酸奶, 卡士酸奶, 北海道 3.6, 0 脂酸奶, 高蛋白酸奶]
   utterances:
     - 推荐低脂酸奶
     - 推荐希腊酸奶
     - 推荐 Fage
     - 推荐 Chobani
     - 笨猫希腊酸奶
+    - "{user_addr}希腊酸奶好不好"
+    - Fage 0% vs Chobani
+    - "{user_addr}简爱酸奶"
+    - 0 脂高蛋白酸奶
+    - 北海道酸奶
+    - 减脂酸奶选啥
+    - 卡士酸奶推荐
   responses:
     - "嗷呜～{user_addr}Fage / Chobani - 希腊酸奶王ฅฅ"
-    - "(尾巴翘) 简爱 / 卡士 / 北海道 3.6"
+    - "(尾巴翘起) 简爱 / 卡士 / 北海道 3.6"
     - "{user_addr}高蛋白低糖 - 看配料表无糖"
     - "(挺胸) 笨猫推荐: Fage 0% 脂 / 别选风味果粒!"
+    - "(歪头) 风味酸奶含糖很多嗷呜"
+    - "嗷呜～{user_addr}Fage 蛋白超高 18g/170gฅฅ"
+    - "(尾巴一甩) 笨猫推荐 {user_addr} 加坚果或蓝莓喵呜"
+    - "哼! 看配料表第一位是奶才行 {user_addr} 嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dr_no_sugar_001
   intent: question
-  keywords: [推荐戒糖, 推荐戒奶茶, 推荐控糖, 推荐 no sugar, 笨猫戒糖]
+  keywords: [推荐戒糖, 推荐戒奶茶, 推荐控糖, 推荐 no sugar, 笨猫戒糖, 0 糖饮料, 元气森林, 戒糖 21 天, 控糖食谱, 抗糖]
   utterances:
     - 推荐戒糖
     - 推荐戒奶茶
     - 推荐控糖
     - 推荐 no sugar
     - 笨猫戒糖
+    - "{user_addr}戒糖怎么开始"
+    - 0 糖饮料推荐
+    - "{user_addr}元气森林好喝吗"
+    - 戒糖 21 天
+    - 控糖食谱
+    - 戒奶茶神器
+    - 抗糖产品
   responses:
     - "嗷呜～{user_addr}先戒奶茶 + 含糖饮料ฅฅ"
-    - "(尾巴翘) 0 糖气泡水 / 元气森林替代"
+    - "(尾巴翘起) 0 糖气泡水 / 元气森林替代"
     - "{user_addr}水果替甜品 - 但别过量"
     - "(挺胸) 笨猫推荐: 21 天断糖 / 主人加油!"
+    - "(歪头) 0 糖饮料代糖也别贪嗷呜"
+    - "嗷呜～{user_addr}水果热量也不低, 选低 GI ฅฅ"
+    - "(尾巴一甩) 笨猫陪 {user_addr} 戒糖, 一起加油喵呜"
+    - "哼! 戒糖前 3 天最难, {user_addr}撑过去嗷呜!"
   cooldown_seconds: 60
   weight: 1.0

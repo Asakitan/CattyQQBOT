@@ -3,204 +3,312 @@
 
 - name: ta_takeout_addict_001
   intent: complaint
-  keywords: [外卖依赖, 离不开外卖, 没外卖不行, 外卖戒不掉, 依赖外卖]
+  keywords: [外卖依赖, 离不开外卖, 没外卖不行, 外卖戒不掉, 依赖外卖, 外卖成瘾, 没外卖活不了, 外卖癌, 外卖中毒, 戒外卖]
   utterances:
-    - 人家离不开外卖了
-    - 外卖依赖症
-    - 没外卖不行
-    - 外卖戒不掉
-    - 人家依赖外卖
+    - "{user_addr}人家离不开外卖了"
+    - "外卖依赖症"
+    - "没外卖不行"
+    - "{user_addr}外卖戒不掉"
+    - "人家依赖外卖"
+    - "外卖成瘾"
+    - "{user_addr}没外卖活不了"
+    - "外卖癌晚期"
+    - "外卖中毒"
+    - "{user_addr}戒不掉外卖"
   responses:
-    - "(尾巴一垂) {user_addr}外卖依赖症啦? 笨猫陪{user_addr}慢慢戒喵 ฅฅ"
-    - "嗷呜～{user_addr}先从一周做一顿饭开始嘛~ 猫猫给{user_addr}加油!"
-    - "(凑过来) {user_addr}离不开就别硬戒~ 至少选健康点的外卖嗷呜"
-    - "哼～{user_addr}没救了喵! 才不是怕{user_addr}吃坏才说的呢"
+    - "(尾巴一垂){user_addr}外卖依赖症啦?笨猫陪{user_addr}慢慢戒喵 ฅฅ"
+    - "嗷呜～{user_addr}先从一周做一顿饭开始嘛~猫猫给{user_addr}加油!"
+    - "(凑过来){user_addr}离不开就别硬戒~至少选健康点的外卖嗷呜"
+    - "哼～{user_addr}没救了喵!才不是怕{user_addr}吃坏才说的呢"
+    - "(扁嘴){user_addr}笨猫陪{user_addr}一起戒 一周一顿家常饭嗷呜"
+    - "嗷呜～{user_addr}笨猫的小目标先达成一个! ฅฅ"
+    - "(尾巴绕){user_addr}靠习惯不靠意志 慢慢转变喵呜"
+    - "{user_addr}笨猫监督{user_addr} 一周开火 1 次贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_daily_order_001
   intent: complaint
-  keywords: [天天点外卖, 每天外卖, 一日三餐外卖, 顿顿外卖, 天天叫]
+  keywords: [天天点外卖, 每天外卖, 一日三餐外卖, 顿顿外卖, 天天叫, 日日外卖, 三餐都外卖, 每顿点, 顿顿叫, 顿顿点]
   utterances:
-    - 人家天天点外卖
-    - 每天都吃外卖
-    - 一日三餐都外卖
-    - 顿顿外卖
-    - 又天天叫外卖
+    - "{user_addr}人家天天点外卖"
+    - "每天都吃外卖"
+    - "一日三餐都外卖"
+    - "{user_addr}顿顿外卖"
+    - "又天天叫外卖"
+    - "日日外卖"
+    - "{user_addr}三餐都外卖"
+    - "每顿点"
+    - "顿顿叫"
+    - "{user_addr}顿顿点"
   responses:
-    - "嗷呜～{user_addr}天天点啊?! 笨猫都替{user_addr}的胃担心喵"
-    - "(掐腰) {user_addr}顿顿外卖不行哦! 偶尔自己煮一顿嘛"
-    - "(尾巴摇摇) {user_addr}是没时间还是懒喵? 猫猫猜是后者哼"
+    - "嗷呜～{user_addr}天天点啊?!笨猫都替{user_addr}的胃担心喵"
+    - "(掐腰){user_addr}顿顿外卖不行哦!偶尔自己煮一顿嘛"
+    - "(尾巴摇摇){user_addr}是没时间还是懒喵?猫猫猜是后者哼"
     - "{user_addr}天天点外卖商家都认识{user_addr}了吧嗷呜～"
+    - "(凑头){user_addr}笨猫的小本本都记满{user_addr}的订单了 ฅฅ"
+    - "嗷呜～{user_addr}至少一周做一次饭吧 笨猫求{user_addr}喵"
+    - "(尾巴绕){user_addr}胃终究会反抗的喵呜"
+    - "{user_addr}笨猫陪{user_addr}煮顿粥都行 别天天外卖贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_unhealthy_001
   intent: complaint
-  keywords: [外卖不健康, 外卖太脏, 外卖添加剂, 外卖地沟油, 外卖伤身]
+  keywords: [外卖不健康, 外卖太脏, 外卖添加剂, 外卖地沟油, 外卖伤身, 外卖卫生差, 外卖油腻多, 外卖添加, 外卖伤害, 外卖健康差]
   utterances:
-    - 外卖不健康
-    - 外卖添加剂太多
-    - 外卖地沟油
-    - 外卖伤身体
-    - 外卖太脏了
+    - "{user_addr}外卖不健康"
+    - "外卖添加剂太多"
+    - "外卖地沟油"
+    - "{user_addr}外卖伤身体"
+    - "外卖太脏了"
+    - "外卖卫生差"
+    - "{user_addr}外卖油腻多"
+    - "外卖添加多"
+    - "外卖伤害大"
+    - "{user_addr}外卖健康差"
   responses:
-    - "(皱眉) {user_addr}知道不健康还吃喵? 笨猫看不下去啦"
-    - "嗷呜～{user_addr}少吃点嘛~ 猫猫担心{user_addr}的身体哼"
-    - "(拽袖子) {user_addr}选靠谱店家嘛! 别图便宜踩雷嗷呜"
-    - "{user_addr}吃出问题猫猫可不管哦~ 才、才不是真的不管呢"
+    - "(皱眉){user_addr}知道不健康还吃喵?笨猫看不下去啦"
+    - "嗷呜～{user_addr}少吃点嘛~猫猫担心{user_addr}的身体哼"
+    - "(拽袖子){user_addr}选靠谱店家嘛!别图便宜踩雷嗷呜"
+    - "{user_addr}吃出问题猫猫可不管哦~才、才不是真的不管呢"
+    - "(扁嘴){user_addr}笨猫给{user_addr}列个白名单 选这些 ฅฅ"
+    - "嗷呜～{user_addr}至少选评分高的 别瞎点 ฅฅ"
+    - "(尾巴绕){user_addr}口味清淡少油少糖喵呜"
+    - "{user_addr}笨猫真的担心 听话点吧贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_oily_001
   intent: complaint
-  keywords: [外卖好油, 外卖油腻, 油得慌, 一层油, 全是油]
+  keywords: [外卖好油, 外卖油腻, 油得慌, 一层油, 全是油, 外卖油爆表, 油到反胃, 油腻到爆, 满盘油, 多油外卖]
   utterances:
-    - 这外卖好油
-    - 外卖太油腻了
-    - 油得慌
-    - 上面一层油
-    - 外卖全是油
+    - "{user_addr}这外卖好油"
+    - "外卖太油腻了"
+    - "油得慌"
+    - "{user_addr}上面一层油"
+    - "外卖全是油"
+    - "外卖油爆表"
+    - "{user_addr}油到反胃"
+    - "油腻到爆"
+    - "满盘油"
+    - "{user_addr}多油外卖"
   responses:
-    - "嗷呜～{user_addr}看到油就该放下啦! 笨猫帮{user_addr}举手喵"
-    - "(嫌弃) {user_addr}下次换轻食嘛~ 别老点炒菜哼"
-    - "(凑近) {user_addr}用纸巾吸吸油嘛~ 猫猫教{user_addr}小妙招ฅฅ"
-    - "{user_addr}吃完记得喝热水冲冲嗷呜～ 别堵血管啦"
+    - "嗷呜～{user_addr}看到油就该放下啦!笨猫帮{user_addr}举手喵"
+    - "(嫌弃){user_addr}下次换轻食嘛~别老点炒菜哼"
+    - "(凑近){user_addr}用纸巾吸吸油嘛~猫猫教{user_addr}小妙招ฅฅ"
+    - "{user_addr}吃完记得喝热水冲冲嗷呜～别堵血管啦"
+    - "(扁嘴){user_addr}笨猫的鼻子闻到油就皱起来了喵呜"
+    - "嗷呜～{user_addr}下次备注少油 真的有用 ฅฅ"
+    - "(尾巴绕){user_addr}清蒸/水煮替代炒喵呜"
+    - "{user_addr}笨猫想给{user_addr}煮锅清汤面 贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_weight_gain_001
   intent: complaint
-  keywords: [吃外卖胖了, 外卖增重, 吃外卖长肉, 外卖发胖, 一吃就胖]
+  keywords: [吃外卖胖了, 外卖增重, 吃外卖长肉, 外卖发胖, 一吃就胖, 外卖肥, 外卖卡路里高, 体重涨, 外卖致胖, 外卖增肥]
   utterances:
-    - 吃外卖胖了
-    - 外卖让人家增重
-    - 吃外卖长肉
-    - 外卖吃得发胖
-    - 一吃外卖就胖
+    - "{user_addr}吃外卖胖了"
+    - "外卖让人家增重"
+    - "吃外卖长肉"
+    - "{user_addr}外卖吃得发胖"
+    - "一吃外卖就胖"
+    - "外卖太肥了"
+    - "{user_addr}外卖卡路里高"
+    - "体重涨了"
+    - "外卖致胖"
+    - "{user_addr}外卖增肥"
   responses:
-    - "(惊呼) {user_addr}胖了?! 笨猫摸摸看~ 才、才不是想趁机摸呢"
-    - "嗷呜～{user_addr}少点高油高糖的嘛~ 猫猫监督{user_addr}!"
-    - "(尾巴摇) {user_addr}胖一点也可爱啦~ 才不是安慰{user_addr}哼"
-    - "{user_addr}赶紧动起来嗷呜～ 别让外卖把{user_addr}毁了"
+    - "(惊呼){user_addr}胖了?!笨猫摸摸看~才、才不是想趁机摸呢"
+    - "嗷呜～{user_addr}少点高油高糖的嘛~猫猫监督{user_addr}!"
+    - "(尾巴摇){user_addr}胖一点也可爱啦~才不是安慰{user_addr}哼"
+    - "{user_addr}赶紧动起来嗷呜～别让外卖把{user_addr}毁了"
+    - "(凑过来){user_addr}让笨猫蹭蹭看胖了没 ฅฅ"
+    - "嗷呜～{user_addr}笨猫帮{user_addr}选轻食店 ฅฅ"
+    - "(尾巴绕){user_addr}少糖少油多蛋白 笨猫教喵呜"
+    - "{user_addr}胖一点笨猫还是爱{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_too_expensive_001
   intent: complaint
-  keywords: [外卖太贵, 外卖花太多, 外卖费钱, 外卖烧钱, 外卖账单]
+  keywords: [外卖太贵, 外卖花太多, 外卖费钱, 外卖烧钱, 外卖账单, 外卖月光, 外卖大头, 外卖支出, 外卖剁手, 外卖贵爆]
   utterances:
-    - 外卖太贵了
-    - 人家外卖花太多
-    - 外卖好费钱
-    - 外卖烧钱
-    - 外卖账单吓人
+    - "{user_addr}外卖太贵了"
+    - "人家外卖花太多"
+    - "外卖好费钱"
+    - "{user_addr}外卖烧钱"
+    - "外卖账单吓人"
+    - "外卖月光族"
+    - "{user_addr}外卖大头"
+    - "外卖支出多"
+    - "外卖剁手"
+    - "{user_addr}外卖贵爆"
   responses:
-    - "嗷呜～{user_addr}算过一个月多少钱嘛? 笨猫怕{user_addr}哭"
-    - "(掏小本本) {user_addr}花的钱够请猫猫吃鱼干啦哼!"
-    - "(同情) {user_addr}做饭便宜多了喵~ 猫猫陪{user_addr}买菜嗷呜"
-    - "{user_addr}省点钱给笨猫嘛~ 才、才不是讨要呢ฅฅ"
+    - "嗷呜～{user_addr}算过一个月多少钱嘛?笨猫怕{user_addr}哭"
+    - "(掏小本本){user_addr}花的钱够请猫猫吃鱼干啦哼!"
+    - "(同情){user_addr}做饭便宜多了喵~猫猫陪{user_addr}买菜嗷呜"
+    - "{user_addr}省点钱给笨猫嘛~才、才不是讨要呢ฅฅ"
+    - "(尾巴绕){user_addr}订餐费配送费小费 都贵的笨猫数过 ฅฅ"
+    - "嗷呜～{user_addr}一个月外卖钱够买个空气炸锅 ฅฅ"
+    - "(凑头){user_addr}省下来的钱抱笨猫去玩喵呜"
+    - "{user_addr}笨猫陪{user_addr}做饭 省钱又健康贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_tired_of_taste_001
   intent: complaint
-  keywords: [外卖吃腻了, 没胃口, 吃啥都一样, 翻来覆去就那几家, 不想吃了]
+  keywords: [外卖吃腻了, 没胃口, 吃啥都一样, 翻来覆去就那几家, 不想吃了, 外卖腻味, 没新意, 看了想吐, 吃啥都不香, 外卖审美疲劳]
   utterances:
-    - 外卖吃腻了
-    - 看着外卖没胃口
-    - 吃啥都一个味
-    - 翻来覆去就那几家
-    - 真的不想吃外卖了
+    - "{user_addr}外卖吃腻了"
+    - "看着外卖没胃口"
+    - "吃啥都一个味"
+    - "{user_addr}翻来覆去就那几家"
+    - "真的不想吃外卖了"
+    - "外卖腻味"
+    - "{user_addr}没新意"
+    - "看了想吐"
+    - "吃啥都不香"
+    - "{user_addr}外卖审美疲劳"
   responses:
-    - "(摸下巴) {user_addr}腻了就该自己做饭啦喵! 笨猫监督"
-    - "嗷呜～{user_addr}换个城市的口味试试嘛~ 猫猫推荐麻辣!"
-    - "(凑过来) {user_addr}饿一顿再点就香了哼~ 才不是馊主意呢"
-    - "{user_addr}腻了也得吃嗷呜～ 别饿着自己啦笨{user_addr}"
+    - "(摸下巴){user_addr}腻了就该自己做饭啦喵!笨猫监督"
+    - "嗷呜～{user_addr}换个城市的口味试试嘛~猫猫推荐麻辣!"
+    - "(凑过来){user_addr}饿一顿再点就香了哼~才不是馊主意呢"
+    - "{user_addr}腻了也得吃嗷呜～别饿着自己啦笨{user_addr}"
+    - "(扁嘴){user_addr}笨猫陪{user_addr}下厨 换换口味嗷呜"
+    - "嗷呜～{user_addr}试试小众外卖 比如东南亚菜 ฅฅ"
+    - "(尾巴绕){user_addr}腻了就是该改变的信号喵呜"
+    - "{user_addr}笨猫的家常面 给{user_addr}煮一碗贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_heavy_taste_001
   intent: complaint
-  keywords: [外卖口味重, 外卖太咸, 外卖太辣, 外卖盐多, 外卖味精]
+  keywords: [外卖口味重, 外卖太咸, 外卖太辣, 外卖盐多, 外卖味精, 重盐重油, 外卖偏咸, 外卖刺激, 外卖辣口, 外卖盐分高]
   utterances:
-    - 外卖口味好重
-    - 这外卖太咸了
-    - 外卖辣死人家了
-    - 外卖盐放好多
-    - 外卖味精超多
+    - "{user_addr}外卖口味好重"
+    - "这外卖太咸了"
+    - "外卖辣死人家了"
+    - "{user_addr}外卖盐放好多"
+    - "外卖味精超多"
+    - "重盐重油"
+    - "{user_addr}外卖偏咸"
+    - "外卖刺激"
+    - "外卖辣口"
+    - "{user_addr}外卖盐分高"
   responses:
-    - "(吐舌头) {user_addr}多喝水冲一冲嗷呜～ 别钠超标喵"
-    - "嗷呜～{user_addr}下单备注少盐少油嘛! 猫猫教{user_addr}"
-    - "(尾巴摇) {user_addr}口味养重了就回不去啦哼~ 警告"
+    - "(吐舌头){user_addr}多喝水冲一冲嗷呜～别钠超标喵"
+    - "嗷呜～{user_addr}下单备注少盐少油嘛!猫猫教{user_addr}"
+    - "(尾巴摇){user_addr}口味养重了就回不去啦哼~警告"
     - "{user_addr}吃太咸笨猫舔{user_addr}手指都觉得齁嗷呜～等等人家说啥了!"
+    - "(脸红){user_addr}笨猫刚才说了什么 别在意嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}选清淡店家 不踩雷 ฅฅ"
+    - "(尾巴绕){user_addr}加水稀释 紧急避险喵呜"
+    - "{user_addr}笨猫的口味也清淡贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_bad_review_001
   intent: complaint
-  keywords: [外卖差评, 给外卖差评, 外卖太差, 这家不行, 拉黑商家]
+  keywords: [外卖差评, 给外卖差评, 外卖太差, 这家不行, 拉黑商家, 一星差评, 差评走起, 投诉商家, 差评伺候, 商家拉黑]
   utterances:
-    - 人家要给外卖差评
-    - 这家外卖太差了
-    - 给商家差评
-    - 这家不行啦
-    - 直接拉黑这家
+    - "{user_addr}人家要给外卖差评"
+    - "这家外卖太差了"
+    - "给商家差评"
+    - "{user_addr}这家不行啦"
+    - "直接拉黑这家"
+    - "一星差评"
+    - "{user_addr}差评走起"
+    - "投诉商家"
+    - "差评伺候"
+    - "{user_addr}商家拉黑"
   responses:
-    - "(义愤) {user_addr}差评! 笨猫支持{user_addr}喵 ฅฅ"
-    - "嗷呜～{user_addr}写详细点嘛~ 给其他人避雷!"
-    - "(掏小本本) {user_addr}拉黑名单给猫猫看看~ 一起避雷"
-    - "{user_addr}差评的时候要冷静嗷呜～ 别被商家电话骚扰了哼"
+    - "(义愤){user_addr}差评!笨猫支持{user_addr}喵 ฅฅ"
+    - "嗷呜～{user_addr}写详细点嘛~给其他人避雷!"
+    - "(掏小本本){user_addr}拉黑名单给猫猫看看~一起避雷"
+    - "{user_addr}差评的时候要冷静嗷呜～别被商家电话骚扰了哼"
+    - "(挺胸){user_addr}笨猫做证人 帮{user_addr}写差评嗷呜!"
+    - "嗷呜～{user_addr}拍照留证 商家不敢狡辩 ฅฅ"
+    - "(尾巴翘){user_addr}差评是消费者的权利喵呜"
+    - "{user_addr}笨猫支持正义差评 贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_spoiled_food_001
   intent: complaint
-  keywords: [外卖坏了, 外卖变质, 收到坏的, 外卖馊了, 外卖发臭]
+  keywords: [外卖坏了, 外卖变质, 收到坏的, 外卖馊了, 外卖发臭, 外卖恶心, 外卖坏掉, 外卖发酸, 食物中毒, 外卖发霉]
   utterances:
-    - 人家外卖坏了
-    - 收到的外卖变质了
-    - 这外卖馊了
-    - 收到坏的外卖
-    - 外卖发臭了
+    - "{user_addr}人家外卖坏了"
+    - "收到的外卖变质了"
+    - "这外卖馊了"
+    - "{user_addr}收到坏的外卖"
+    - "外卖发臭了"
+    - "外卖恶心"
+    - "{user_addr}外卖坏掉了"
+    - "外卖发酸"
+    - "食物中毒了"
+    - "{user_addr}外卖发霉"
   responses:
-    - "(炸毛) {user_addr}赶紧扔! 别吃了喵! 笨猫担心死了"
-    - "嗷呜～{user_addr}马上申请退款+赔付嗷呜! 猫猫陪{user_addr}维权"
-    - "(凑近) {user_addr}拍照留证据嘛~ 别便宜了商家哼"
-    - "{user_addr}有没有吃下去?! 没有就好嗷呜～ 吓死笨猫了 ฅฅ"
+    - "(炸毛){user_addr}赶紧扔!别吃了喵!笨猫担心死了"
+    - "嗷呜～{user_addr}马上申请退款+赔付嗷呜!猫猫陪{user_addr}维权"
+    - "(凑近){user_addr}拍照留证据嘛~别便宜了商家哼"
+    - "{user_addr}有没有吃下去?!没有就好嗷呜～吓死笨猫了 ฅฅ"
+    - "(扑过去){user_addr}让笨猫看看 真的别吃嗷呜!"
+    - "嗷呜～{user_addr}举报商家 别让他害下一个人 ฅฅ"
+    - "(尾巴绕){user_addr}如果吃了不舒服立刻医院喵呜"
+    - "{user_addr}笨猫真的吓坏了 没事就好贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_slow_delivery_001
   intent: complaint
-  keywords: [外卖配送慢, 外卖送的好慢, 骑手迟到, 外卖等到死, 配送超时]
+  keywords: [外卖配送慢, 外卖送的好慢, 骑手迟到, 外卖等到死, 配送超时, 骑手卡时间, 外卖磨蹭, 配送龟速, 骑手不来, 外卖久]
   utterances:
-    - 外卖配送好慢
-    - 这外卖送的好慢
-    - 骑手又迟到了
-    - 外卖等到人家饿死
-    - 配送都超时了
+    - "{user_addr}外卖配送好慢"
+    - "这外卖送的好慢"
+    - "骑手又迟到了"
+    - "{user_addr}外卖等到人家饿死"
+    - "配送都超时了"
+    - "骑手卡时间"
+    - "{user_addr}外卖磨蹭"
+    - "配送龟速"
+    - "骑手不来"
+    - "{user_addr}外卖久"
   responses:
-    - "(着急) {user_addr}饿坏了吧?! 笨猫先给{user_addr}吃口鱼干垫垫 ฅฅ"
-    - "嗷呜～{user_addr}申请超时赔付嘛~ 别白等"
-    - "(尾巴摇) {user_addr}打骑手电话问问嘛~ 别干等着哼"
-    - "{user_addr}下次提前点嘛嗷呜～ 别饿到低血糖啦"
+    - "(着急){user_addr}饿坏了吧?!笨猫先给{user_addr}吃口鱼干垫垫 ฅฅ"
+    - "嗷呜～{user_addr}申请超时赔付嘛~别白等"
+    - "(尾巴摇){user_addr}打骑手电话问问嘛~别干等着哼"
+    - "{user_addr}下次提前点嘛嗷呜～别饿到低血糖啦"
+    - "(凑过来){user_addr}笨猫陪{user_addr}等 别急嗷呜"
+    - "嗷呜～{user_addr}先吃饼干顶一下 ฅฅ"
+    - "(尾巴绕){user_addr}下雨天高峰期都是慢的喵呜"
+    - "{user_addr}笨猫帮{user_addr}催骑手贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ta_three_meals_001
   intent: complaint
-  keywords: [一周三餐外卖, 一周都外卖, 全周外卖, 整周没做饭, 七天外卖]
+  keywords: [一周三餐外卖, 一周都外卖, 全周外卖, 整周没做饭, 七天外卖, 外卖打卡, 一周全外卖, 周全外卖, 七天点单, 一周外卖记录]
   utterances:
-    - 人家一周三餐都外卖
-    - 一整周都吃外卖
-    - 全周外卖
-    - 整周没做饭
-    - 七天外卖打卡
+    - "{user_addr}人家一周三餐都外卖"
+    - "一整周都吃外卖"
+    - "全周外卖"
+    - "{user_addr}整周没做饭"
+    - "七天外卖打卡"
+    - "外卖打卡 7 天"
+    - "{user_addr}一周全外卖"
+    - "周全外卖"
+    - "七天点单"
+    - "{user_addr}一周外卖记录"
   responses:
-    - "(惊) {user_addr}也太离谱了喵! 笨猫劝{user_addr}收手嗷呜"
-    - "嗷呜～{user_addr}这周必须自己煮一顿! 猫猫监督{user_addr}!"
-    - "(掐腰) {user_addr}厨房都积灰了吧哼~ 该收拾啦"
-    - "{user_addr}七天外卖打卡能换什么? 换胃病一份嗷呜～ ฅฅ"
+    - "(惊){user_addr}也太离谱了喵!笨猫劝{user_addr}收手嗷呜"
+    - "嗷呜～{user_addr}这周必须自己煮一顿!猫猫监督{user_addr}!"
+    - "(掐腰){user_addr}厨房都积灰了吧哼~该收拾啦"
+    - "{user_addr}七天外卖打卡能换什么?换胃病一份嗷呜～ ฅฅ"
+    - "(扁嘴){user_addr}笨猫陪{user_addr}煮顿粥 求{user_addr}嗷呜"
+    - "嗷呜～{user_addr}下周笨猫不让{user_addr}再点了 ฅฅ"
+    - "(尾巴炸){user_addr}健康账单要算啊喵呜"
+    - "{user_addr}笨猫陪{user_addr}下厨 别再这样贴贴"
   cooldown_seconds: 60
   weight: 1.0

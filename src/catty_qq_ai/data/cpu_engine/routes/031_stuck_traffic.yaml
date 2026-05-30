@@ -1,172 +1,283 @@
 # 堵车通勤烦躁 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: stf_duche_001
   intent: complaint
-  keywords: [堵车, 堵爆, 堵死, 大堵车, 堵到怀疑人生]
+  keywords: [堵车, 堵爆, 堵死, 大堵车, 堵到怀疑人生, 堵成停车场, 龟速, 拥堵, 堵到飞起]
   utterances:
     - 堵车
     - 堵爆
     - 堵死
     - 大堵车
     - 堵到怀疑人生
+    - 堵成停车场
+    - 龟速喵
+    - 拥堵不动
+    - 堵到飞起
+    - "{user_addr}堵车"
+    - 堵成一锅粥
+    - 一动不动
   responses:
     - "(凑过去) {user_addr}耐心点 ฅฅ"
     - "嗷呜～笨猫陪你堵"
     - "(尾巴搭) 听歌吧~"
     - "嘿嘿～{user_addr}回家路漫漫"
+    - "(扑过去) 堵在路上笨猫陪聊~ 不孤单"
+    - "嗷呜～{user_addr}深呼吸~ 别气坏~"
+    - "(尾巴卷腕) 慢慢走~ 笨猫等"
+    - "嘿嘿～{user_addr}到家笨猫扑你 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_yaoshangban_002
   intent: complaint
-  keywords: [迟到, 要迟到, 来不及, 错过, 赶时间]
+  keywords: [迟到, 要迟到, 来不及, 错过, 赶时间, 赶不上, 晚了, 急急, 迟到啦]
   utterances:
     - 迟到了
     - 要迟到
     - 来不及
     - 错过班车
     - 赶时间
+    - 赶不上喵
+    - 晚了晚了
+    - 急急忙忙
+    - 时间不够
+    - "{user_addr}迟到"
+    - 上班赶
+    - 来不及啦
   responses:
     - "(着急) {user_addr}加油 ฅฅ"
     - "嗷呜～别急生意外"
     - "(尾巴搭) 安全第一"
     - "嘿嘿～{user_addr}慢点~"
+    - "(凑过去) 迟到也别撞~ 笨猫求慢点"
+    - "嗷呜～{user_addr}先发邮件请罪~"
+    - "(尾巴扫) 该来就来~ 急也没用"
+    - "嘿嘿～{user_addr}迟到笨猫给你抱抱压惊 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_didiezhi_003
   intent: complaint
-  keywords: [地铁挤, 公交挤, 满员, 挤死, 没地方站]
+  keywords: [地铁挤, 公交挤, 满员, 挤死, 没地方站, 沙丁鱼, 挤爆, 挤成饼, 上不去]
   utterances:
     - 地铁挤
     - 公交挤
     - 满员
     - 挤死
     - 没地方站
+    - 沙丁鱼罐头
+    - 挤爆喵
+    - 挤成饼
+    - 上不去车
+    - "{user_addr}挤"
+    - 一身汗
+    - 站不稳
   responses:
     - "(心疼) {user_addr}保护自己 ฅฅ"
     - "嗷呜～通勤好辛苦"
     - "(尾巴搭) 笨猫等你"
     - "嘿嘿～{user_addr}早点出发~"
+    - "(凑过去) 挤到{user_addr}? 笨猫心疼"
+    - "嗷呜～小心包包~ 别被挤丢"
+    - "(尾巴卷腕) 笨猫给你按摩~ 等你到家"
+    - "嘿嘿～{user_addr}通勤完抱笨猫满血 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_lukou_004
   intent: complaint
-  keywords: [红灯, 红绿灯, 红灯多, 一路红灯, 等红灯]
+  keywords: [红灯, 红绿灯, 红灯多, 一路红灯, 等红灯, 红灯运, 红灯漫长, 又红灯, 路口堵]
   utterances:
     - 红灯
     - 一路红灯
     - 等红灯
     - 红灯多
     - 红灯长
+    - 红灯运
+    - 红灯漫长
+    - 又红灯
+    - 路口堵
+    - "{user_addr}红灯多"
+    - 红灯死循环
+    - 红灯不结束
   responses:
     - "(歪头) {user_addr}运气差? ฅฅ"
     - "嗷呜～慢慢等吧"
     - "(尾巴搭) 笨猫陪等"
     - "嘿嘿～{user_addr}人品守恒"
+    - "(凑过去) 红灯多说明今晚必中大奖喵~"
+    - "嗷呜～等红灯就当休息~ 别气"
+    - "(尾巴扫腕) 一起数红灯~ 笨猫陪"
+    - "嘿嘿～{user_addr}红灯长笨猫话长 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_yujian_005
   intent: complaint
-  keywords: [打车, 打不到车, 打车失败, 没车, 司机不接]
+  keywords: [打车, 打不到车, 打车失败, 没车, 司机不接, 等车, 滴滴排队, 打车难, 接单慢]
   utterances:
     - 打不到车
     - 打车失败
     - 没车
     - 司机不接
     - 打车难
+    - 等车太久
+    - 滴滴排队
+    - 接单慢喵
+    - 打不到滴
+    - "{user_addr}没车"
+    - 排到怀疑人生
+    - 司机不来
   responses:
     - "(心疼) {user_addr}加价试试 ฅฅ"
     - "嗷呜～等等吧"
     - "(尾巴搭) 笨猫陪等"
     - "嘿嘿～{user_addr}耐心~"
+    - "(凑过去) 加点钱~ 笨猫赞助~"
+    - "嗷呜～排队就排~ 笨猫和你聊不无聊"
+    - "(尾巴扫) 步行 10 分钟也行~ 锻炼"
+    - "嘿嘿～{user_addr}等车笨猫等你 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_youhuanxi_006
   intent: complaint
-  keywords: [事故, 车祸前面, 救护车, 拥堵, 路堵]
+  keywords: [事故, 车祸前面, 救护车, 拥堵, 路堵, 事故现场, 撞车, 大事故, 救援]
   utterances:
     - 前面事故
     - 救护车
     - 车祸
     - 路堵
     - 拥堵不动
+    - 事故现场
+    - 撞车了
+    - 大事故喵
+    - 救援
+    - "{user_addr}遇事故"
+    - 警车在
+    - 完全堵死
   responses:
     - "(担心) {user_addr}注意安全 ฅฅ"
     - "嗷呜～绕路吧"
     - "(尾巴搭) 别急别急"
     - "嘿嘿～{user_addr}慢慢来"
+    - "(凑过去) 看到救护车~ 给救援让路"
+    - "嗷呜～{user_addr}人没事吧? 笨猫担心死~"
+    - "(尾巴搭) 安全第一~ 早点到家就好"
+    - "嘿嘿～{user_addr}回来抱抱压压惊 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_zaolui_007
   intent: complaint
-  keywords: [路上耗时长, 通勤累, 路上累, 通勤时间, 浪费时间]
+  keywords: [路上耗时长, 通勤累, 路上累, 通勤时间, 浪费时间, 通勤地狱, 几小时通勤, 通勤折磨, 路上久]
   utterances:
     - 通勤太长
     - 路上耗
     - 通勤累
     - 路上累
     - 浪费时间
+    - 通勤地狱
+    - 几小时通勤
+    - 通勤折磨
+    - 路上久
+    - "{user_addr}通勤"
+    - 上下班远
+    - 路上两小时
   responses:
     - "(心疼) {user_addr}辛苦了 ฅฅ"
     - "嗷呜～通勤是世纪难题"
     - "(尾巴搭) 笨猫等家里"
     - "嘿嘿～{user_addr}快回来~"
+    - "(凑过去) 通勤听播客~ 笨猫推荐"
+    - "嗷呜～{user_addr}考虑搬近点~ 笨猫提议"
+    - "(尾巴卷腕) 笨猫每天等~ 才不嫌呢哼"
+    - "嘿嘿～{user_addr}到家笨猫秒扑 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_kainei_008
   intent: complaint
-  keywords: [开车, 开车累, 开了, 自驾, 开车困]
+  keywords: [开车, 开车累, 开了, 自驾, 开车困, 开车走神, 开累, 长途开, 驾驶疲劳]
   utterances:
     - 开车累
     - 开车呢
     - 自驾累
     - 开车困
     - 开了一天
+    - 开车走神
+    - 开累喵
+    - 长途开
+    - 驾驶疲劳
+    - "{user_addr}开车"
+    - 一天方向盘
+    - 自驾远
   responses:
     - "(心疼) {user_addr}慢点开 ฅฅ"
     - "嗷呜～累就停下休息"
     - "(尾巴搭) 安全第一"
     - "嘿嘿～{user_addr}小心~"
+    - "(凑过去) 困了就服务区休息~ 别硬撑"
+    - "嗷呜～开车走神超危险! {user_addr}停车眯一会"
+    - "(尾巴卷) 笨猫陪{user_addr}~ 远程聊天"
+    - "嘿嘿～{user_addr}安全到家笨猫给抱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_xinkangang_009
   intent: complaint
-  keywords: [天气差, 下雨堵, 雪天堵, 雾天堵, 雨夹雪]
+  keywords: [天气差, 下雨堵, 雪天堵, 雾天堵, 雨夹雪, 暴雨堵, 大雪天, 大雾, 路面湿滑]
   utterances:
     - 下雨堵
     - 雪天堵
     - 雾天堵
     - 雨夹雪
     - 天气差
+    - 暴雨堵
+    - 大雪天
+    - 大雾喵
+    - 路面湿滑
+    - "{user_addr}雨天堵"
+    - 能见度低
+    - 路滑慢行
   responses:
     - "(担心) {user_addr}慢开 ฅฅ"
     - "嗷呜～开慢一点"
     - "(尾巴搭) 笨猫担心"
     - "嘿嘿～{user_addr}安全~"
+    - "(凑过去) 雾大开雾灯! 别忘了"
+    - "嗷呜～雪天最危险~ 早点出发~"
+    - "(尾巴扫) 雨天笨猫送你毛巾~ 进门擦干"
+    - "嘿嘿～{user_addr}慢点回 笨猫等 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: stf_huijia_010
   intent: playful
-  keywords: [终于到了, 到家了, 到地铁站, 到公司, 终于下车]
+  keywords: [终于到了, 到家了, 到地铁站, 到公司, 终于下车, 抵达, 终于落地, 总算到, 到啦]
   utterances:
     - 终于到家
     - 到地铁
     - 到公司
     - 终于下车
     - 到了
+    - 抵达喵
+    - 终于落地
+    - 总算到
+    - 到啦
+    - "{user_addr}到家"
+    - 安全到达
+    - 落地了
   responses:
     - "(扑过去) {user_addr}辛苦! ฅฅ"
     - "嗷呜～回来抱抱"
     - "(尾巴摇) 终于到了~"
     - "嘿嘿～{user_addr}歇会~"
+    - "(蹦) {user_addr}回来啦! 笨猫扑过去!"
+    - "嗷呜～到家就属于笨猫了~ 不许出去"
+    - "(尾巴勾腕) 累了吧~ 笨猫给{user_addr}按摩"
+    - "嘿嘿～{user_addr}安全到达笨猫满血 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

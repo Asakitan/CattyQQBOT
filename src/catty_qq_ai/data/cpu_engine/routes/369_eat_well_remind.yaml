@@ -3,187 +3,330 @@
 
 - name: ewr_chifan_001
   intent: question
-  keywords: [吃饭了, 吃了吗, 吃饭了没, 吃没吃, 吃饭呢]
+  keywords: [吃饭了, 吃了吗, 吃饭了没, 吃没吃, 吃饭呢, 吃饭了啦, 吃了吗啦, 吃饭了没啦, 吃饭了喵, 吃了吗喵]
   utterances:
-    - 吃了吗
-    - 吃饭了没
+    - "吃了吗"
+    - "吃饭了没"
     - "{user_addr}吃没吃"
-    - 吃饭呢
-    - 饭吃了吗
+    - "吃饭呢"
+    - "饭吃了吗"
+    - "{user_addr}吃了吗"
+    - "吃了吗啦"
+    - "吃了吗嗷"
+    - "{user_addr}吃饭了没"
+    - "吃饭了没啦"
+    - "嘿{user_addr}吃了吗"
+    - "嘿{user_addr}吃饭了没"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}吃没?? 老实说!"
     - "嘿嘿～{user_addr}没吃笨猫不开心!"
     - "(凑过去) 哼～没吃赶紧的! 笨猫监督!"
     - "{user_addr}吃饭照片~ 笨猫验收ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_nochi_001
   intent: complaint
-  keywords: [不想吃, 没胃口, 没食欲, 吃不下, 跳过餐]
+  keywords: [不想吃, 没胃口, 没食欲, 吃不下, 跳过餐, 不想吃啦, 没胃口啦, 没食欲啦, 不想吃喵, 没胃口喵]
   utterances:
-    - 不想吃
-    - 没胃口
-    - 没食欲
-    - 吃不下
-    - 不吃了
+    - "不想吃"
+    - "没胃口"
+    - "没食欲"
+    - "吃不下"
+    - "不吃了"
+    - "{user_addr}不想吃"
+    - "不想吃啦"
+    - "不想吃嗷"
+    - "{user_addr}没胃口"
+    - "没胃口啦"
+    - "嘿{user_addr}不想吃"
+    - "嘿{user_addr}没胃口"
   responses:
     - "(扑过去) 嗷呜～{user_addr}必须吃!! 不许跳!"
     - "嘿嘿～{user_addr}没胃口吃一口也行!"
     - "(尾巴叉腰) 哼～{user_addr}不吃笨猫陪饿!"
     - "{user_addr}少吃一口对身体不好~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_zaocan_001
   intent: question
-  keywords: [早餐, 早餐吃啥, 早饭, 早餐推荐, 早上吃]
+  keywords: [早餐, 早餐吃啥, 早饭, 早餐推荐, 早上吃, 早餐啦, 早餐吃啥啦, 早饭啦, 早餐喵, 早餐吃啥喵]
   utterances:
-    - 早餐
-    - 早餐吃啥
-    - 早饭
-    - 早上吃啥
-    - 早餐推荐
+    - "早餐"
+    - "早餐吃啥"
+    - "早饭"
+    - "早上吃啥"
+    - "早餐推荐"
+    - "{user_addr}早餐"
+    - "早餐啦"
+    - "早餐嗷"
+    - "{user_addr}早餐吃啥"
+    - "早餐吃啥啦"
+    - "嘿{user_addr}早餐"
+    - "嘿{user_addr}早餐吃啥"
   responses:
     - "嗷呜～{user_addr}早餐: 蛋+奶+水果!"
     - "嘿嘿～{user_addr}的早餐笨猫推荐 包子!"
     - "(尾巴指) 哼～早餐必吃! 不许跳!"
     - "{user_addr}的早餐发给笨猫验收ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_wanfan_001
   intent: question
-  keywords: [晚餐吃啥, 晚饭吃, 晚饭推荐, 晚饭呢, 吃啥]
+  keywords: [晚餐吃啥, 晚饭吃, 晚饭推荐, 晚饭呢, 吃啥, 晚餐吃啥啦, 晚饭吃啦, 晚饭推荐啦, 晚餐吃啥喵, 晚饭吃喵]
   utterances:
-    - 晚餐吃啥
-    - 晚饭吃啥
-    - 晚饭呢
-    - 晚饭推荐
-    - 吃啥晚饭
+    - "晚餐吃啥"
+    - "晚饭吃啥"
+    - "晚饭呢"
+    - "晚饭推荐"
+    - "吃啥晚饭"
+    - "{user_addr}晚餐吃啥"
+    - "晚餐吃啥啦"
+    - "晚餐吃啥嗷"
+    - "{user_addr}晚饭吃啥"
+    - "晚饭吃啥啦"
+    - "嘿{user_addr}晚餐吃啥"
+    - "嘿{user_addr}晚饭吃啥"
   responses:
     - "嗷呜～{user_addr}晚饭吃鱼!!"
     - "嘿嘿～{user_addr}清淡点~ 别太油"
     - "(尾巴凑) 哼～晚饭别太晚吃!"
     - "{user_addr}的晚餐~ 笨猫验收ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_jiangkang_001
   intent: question
-  keywords: [健康吃, 营养, 均衡, 蔬菜, 多吃菜]
+  keywords: [健康吃, 营养, 均衡, 蔬菜, 多吃菜, 健康吃啦, 营养啦, 均衡啦, 健康吃喵, 营养喵]
   utterances:
-    - 吃健康点
-    - 营养均衡
-    - 多吃蔬菜
-    - 蔬菜
-    - 均衡饮食
+    - "吃健康点"
+    - "营养均衡"
+    - "多吃蔬菜"
+    - "蔬菜"
+    - "均衡饮食"
+    - "{user_addr}吃健康点"
+    - "吃健康点啦"
+    - "吃健康点嗷"
+    - "{user_addr}营养均衡"
+    - "营养均衡啦"
+    - "嘿{user_addr}吃健康点"
+    - "嘿{user_addr}营养均衡"
   responses:
     - "嗷呜～{user_addr}吃菜! 笨猫监督!"
     - "嘿嘿～{user_addr}的健康猫猫负责!"
     - "(尾巴叉腰) 哼～{user_addr}吃肉也得吃菜!"
     - "{user_addr}的均衡饮食~ ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_taiyou_001
   intent: complaint
-  keywords: [太油, 太辣, 太咸, 太甜, 重口]
+  keywords: [太油, 太辣, 太咸, 太甜, 重口, 太油啦, 太辣啦, 太咸啦, 太油喵, 太辣喵]
   utterances:
-    - 太油
-    - 太辣
-    - 太咸
-    - 太甜
-    - 重口味
+    - "太油"
+    - "太辣"
+    - "太咸"
+    - "太甜"
+    - "重口味"
+    - "{user_addr}太油"
+    - "太油啦"
+    - "太油嗷"
+    - "{user_addr}太辣"
+    - "太辣啦"
+    - "嘿{user_addr}太油"
+    - "嘿{user_addr}太辣"
   responses:
     - "嗷呜～{user_addr}少吃重口! 胃疼!"
     - "嘿嘿～{user_addr}的口味笨猫担心"
     - "(尾巴扫) 哼～清淡点!"
     - "{user_addr}的肠胃笨猫疼~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_buguize_001
   intent: complaint
-  keywords: [饮食不规律, 一顿没一顿, 跳餐, 暴饮暴食, 时饥时饱]
+  keywords: [饮食不规律, 一顿没一顿, 跳餐, 暴饮暴食, 时饥时饱, 饮食不规律啦, 一顿没一顿啦, 跳餐啦, 饮食不规律喵, 一顿没一顿喵]
   utterances:
-    - 饮食不规律
-    - 跳餐
-    - 暴饮暴食
-    - 时饥时饱
-    - 不按时吃
+    - "饮食不规律"
+    - "跳餐"
+    - "暴饮暴食"
+    - "时饥时饱"
+    - "不按时吃"
+    - "{user_addr}饮食不规律"
+    - "饮食不规律啦"
+    - "饮食不规律嗷"
+    - "{user_addr}跳餐"
+    - "跳餐啦"
+    - "嘿{user_addr}饮食不规律"
+    - "嘿{user_addr}跳餐"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}规律点!"
     - "嘿嘿～{user_addr}的胃哭了!"
     - "(凑过去) 哼～{user_addr}按时吃! 笨猫不答应!"
     - "{user_addr}的不规律猫猫担心ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_waimai_001
   intent: question
-  keywords: [外卖, 点外卖, 不知道吃啥, 选择困难, 外卖推荐]
+  keywords: [外卖, 点外卖, 不知道吃啥, 选择困难, 外卖推荐, 外卖啦, 点外卖啦, 不知道吃啥啦, 外卖喵, 点外卖喵]
   utterances:
-    - 点外卖
-    - 不知道吃啥
-    - 选择困难
-    - 外卖推荐
-    - 来个外卖
+    - "点外卖"
+    - "不知道吃啥"
+    - "选择困难"
+    - "外卖推荐"
+    - "来个外卖"
+    - "{user_addr}点外卖"
+    - "点外卖啦"
+    - "点外卖嗷"
+    - "{user_addr}不知道吃啥"
+    - "不知道吃啥啦"
+    - "嘿{user_addr}点外卖"
+    - "嘿{user_addr}不知道吃啥"
   responses:
     - "嗷呜～{user_addr}外卖选个鱼吧!"
     - "嘿嘿～{user_addr}选不出~ 笨猫帮抛硬币!"
     - "(尾巴指) 哼～{user_addr}少点油的!"
     - "{user_addr}的外卖快到~ ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_kuaichi_001
   intent: complaint
-  keywords: [吃太快, 狼吞虎咽, 噎到, 吃急了, 没嚼烂]
+  keywords: [吃太快, 狼吞虎咽, 噎到, 吃急了, 没嚼烂, 吃太快啦, 狼吞虎咽啦, 噎到啦, 吃太快喵, 狼吞虎咽喵]
   utterances:
-    - 吃太快
-    - 狼吞虎咽
-    - 噎到了
-    - 吃急了
-    - 没嚼
+    - "吃太快"
+    - "狼吞虎咽"
+    - "噎到了"
+    - "吃急了"
+    - "没嚼"
+    - "{user_addr}吃太快"
+    - "吃太快啦"
+    - "吃太快嗷"
+    - "{user_addr}狼吞虎咽"
+    - "狼吞虎咽啦"
+    - "嘿{user_addr}吃太快"
+    - "嘿{user_addr}狼吞虎咽"
   responses:
     - "(尾巴扫) 嗷呜～{user_addr}慢点吃!!"
     - "嘿嘿～{user_addr}噎到笨猫拍背!"
     - "(凑过去) 哼～{user_addr}的胃!"
     - "{user_addr}细嚼慢咽~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_bushuhou_001
   intent: question
-  keywords: [饭后, 饭后散步, 饭后水果, 饭后茶, 饭后困]
+  keywords: [饭后, 饭后散步, 饭后水果, 饭后茶, 饭后困, 饭后啦, 饭后散步啦, 饭后水果啦, 饭后喵, 饭后散步喵]
   utterances:
-    - 饭后散步
-    - 饭后水果
-    - 饭后茶
-    - 饭后困
-    - 饭后做什么
+    - "饭后散步"
+    - "饭后水果"
+    - "饭后茶"
+    - "饭后困"
+    - "饭后做什么"
+    - "{user_addr}饭后散步"
+    - "饭后散步啦"
+    - "饭后散步嗷"
+    - "{user_addr}饭后水果"
+    - "饭后水果啦"
+    - "嘿{user_addr}饭后散步"
+    - "嘿{user_addr}饭后水果"
   responses:
     - "嗷呜～{user_addr}饭后散步! 笨猫陪!"
     - "嘿嘿～{user_addr}吃个水果~ 健康!"
     - "(尾巴叉腰) 哼～饭后别躺! 容易胖!"
     - "{user_addr}的饭后放松笨猫陪ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ewr_lapian_001
   intent: complaint
-  keywords: [挑食, 不爱吃这, 挑挑拣拣, 不喜欢这道, 不肯吃]
+  keywords: [挑食, 不爱吃这, 挑挑拣拣, 不喜欢这道, 不肯吃, 挑食啦, 不爱吃这啦, 挑挑拣拣啦, 挑食喵, 不爱吃这喵]
   utterances:
-    - 挑食
-    - 不爱吃
-    - 挑挑拣拣
-    - 不喜欢
-    - 不肯吃
+    - "挑食"
+    - "不爱吃"
+    - "挑挑拣拣"
+    - "不喜欢"
+    - "不肯吃"
+    - "{user_addr}挑食"
+    - "挑食啦"
+    - "挑食嗷"
+    - "{user_addr}不爱吃"
+    - "不爱吃啦"
+    - "嘿{user_addr}挑食"
+    - "嘿{user_addr}不爱吃"
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}不许挑食!"
     - "嘿嘿～{user_addr}的挑食~ 笨猫批评!"
     - "(凑过去) 哼～试一口! 笨猫监督!"
     - "{user_addr}尝试新口味~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

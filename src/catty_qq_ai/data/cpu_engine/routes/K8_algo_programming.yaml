@@ -3,204 +3,324 @@
 
 - name: algo_leetcode_001
   intent: question
-  keywords: [推荐 Leetcode, 推荐刷题, 推荐算法题, 推荐力扣, 笨猫 Leetcode]
+  keywords: [推荐 Leetcode, 推荐刷题, 推荐算法题, 推荐力扣, 笨猫 Leetcode, Hot 100, 剑指 Offer, 周赛, 双周赛, 算法面试]
   utterances:
     - 推荐 Leetcode
     - 推荐刷题
     - 推荐算法题
     - 推荐力扣
     - 笨猫 Leetcode
+    - 推荐 Hot 100
+    - 推荐剑指 Offer
+    - 推荐周赛入门
+    - 推荐算法面试
+    - 推荐标签刷题
+    - 推荐算法书
   responses:
     - "嗷呜～{user_addr}入门: Hot 100 / 剑指 Offerฅฅ"
     - "(尾巴翘) 进阶: 周赛 / 双周赛"
     - "{user_addr}标签刷: 数组 / 链表 / DP"
     - "(挺胸) 笨猫推荐: 别只追数量 / 重在理解!"
+    - "嗷呜～灵神题单 + 视频是顶级资源 ฅฅ"
+    - "(歪头)做错题本三遍才是真懂嗷呜"
+    - "{user_addr}周赛 AC 3 题就算入门蹭蹭"
+    - "(凑过来) 笨猫陪{user_addr}刷题喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: algo_ds_001
   intent: question
-  keywords: [推荐数据结构, 推荐链表, 推荐栈队列, 推荐树, 笨猫数据结构]
+  keywords: [推荐数据结构, 推荐链表, 推荐栈队列, 推荐树, 笨猫数据结构, 数组, 散列表, B+ 树, Trie 树, 跳表]
   utterances:
     - 推荐数据结构
     - 推荐链表
     - 推荐栈队列
     - 推荐树
     - 笨猫数据结构
+    - 推荐数组
+    - 推荐散列表
+    - 推荐 B+ 树
+    - 推荐 Trie 树
+    - 推荐跳表
+    - 推荐数据结构入门
   responses:
     - "嗷呜～{user_addr}基础: 数组 / 链表 / 栈 / 队列ฅฅ"
     - "(尾巴翘) 进阶: 树 / 图 / 堆 / 散列"
     - "{user_addr}高级: B+ 树 / 跳表 / Trie"
     - "(挺胸) 笨猫推荐: 数据结构是算法基础!"
+    - "嗷呜～可视化 visualgo 神器 ฅฅ"
+    - "(歪头)红黑树看懂能加面试加分嗷呜"
+    - "{user_addr}并查集 LeetCode 中频考蹭蹭"
+    - "(凑过来) 笨猫想画结构图喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: algo_dp_001
   intent: question
-  keywords: [推荐动态规划, 推荐 DP, 推荐背包问题, 推荐状态转移, 笨猫动态规划]
+  keywords: [推荐动态规划, 推荐 DP, 推荐背包问题, 推荐状态转移, 笨猫动态规划, 区间 DP, 树形 DP, 状压 DP, LCS, LIS]
   utterances:
     - 推荐动态规划
     - 推荐 DP
     - 推荐背包问题
     - 推荐状态转移
     - 笨猫动态规划
+    - 推荐区间 DP
+    - 推荐树形 DP
+    - 推荐状压 DP
+    - 推荐 LCS LIS
+    - 推荐 DP 入门
+    - 推荐 DP 套路
   responses:
     - "嗷呜～{user_addr}核心: 状态 + 转移方程ฅฅ"
     - "(尾巴翘) 经典: 0-1 背包 / 完全背包 / LCS"
     - "{user_addr}套路: 区间 / 树形 / 状压 DP"
     - "(挺胸) 笨猫推荐: 多画状态表!"
+    - "嗷呜～memoization 自顶向下也算 DP ฅฅ"
+    - "(歪头)滚动数组优化空间嗷呜"
+    - "{user_addr}DP 难点在定义状态蹭蹭"
+    - "(凑过来) 笨猫想跟主人推方程喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: algo_graph_001
   intent: question
-  keywords: [推荐图算法, 推荐 BFS, 推荐 DFS, 推荐 Dijkstra, 笨猫图算法]
+  keywords: [推荐图算法, 推荐 BFS, 推荐 DFS, 推荐 Dijkstra, 笨猫图算法, Floyd, 拓扑排序, 并查集, Kruskal, 最短路]
   utterances:
     - 推荐图算法
     - 推荐 BFS
     - 推荐 DFS
     - 推荐 Dijkstra
     - 笨猫图算法
+    - 推荐 Floyd
+    - 推荐拓扑排序
+    - 推荐并查集
+    - 推荐 Kruskal
+    - 推荐最短路
+    - 推荐图论入门
   responses:
     - "嗷呜～{user_addr}BFS: 队列 / 最短路径ฅฅ"
     - "(尾巴翘) DFS: 栈/递归 / 路径搜索"
     - "{user_addr}Dijkstra / Floyd / 拓扑"
     - "(挺胸) 笨猫推荐: 并查集 / Kruskal!"
+    - "嗷呜～Bellman-Ford 处理负权图 ฅฅ"
+    - "(歪头)SPFA 在国内比赛常用嗷呜"
+    - "{user_addr}Tarjan 强连通分量蹭蹭"
+    - "(凑过来) 笨猫画图喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: algo_python_001
   intent: question
-  keywords: [推荐 Python 语言, 推荐 Python 学习, 推荐 Python 入门, 推荐 NumPy, 笨猫 Python 学习]
+  keywords: [推荐 Python 语言, 推荐 Python 学习, 推荐 Python 入门, 推荐 NumPy, 笨猫 Python 学习, Pandas, Flask, Django, FastAPI, 莫烦]
   utterances:
     - 推荐 Python 语言
     - 推荐 Python 学习
     - 推荐 Python 入门
     - 推荐 NumPy
     - 笨猫 Python 学习
+    - 推荐 Pandas
+    - 推荐 Flask
+    - 推荐 Django
+    - 推荐 FastAPI
+    - 推荐莫烦 Python
+    - 推荐廖雪峰
   responses:
     - "嗷呜～{user_addr}入门: 廖雪峰 / 莫烦Pythonฅฅ"
     - "(尾巴翘) 数据科学: NumPy / Pandas / Matplotlib"
     - "{user_addr}Web: Flask / Django / FastAPI"
     - "(挺胸) 笨猫推荐: 项目驱动学习!"
+    - "嗷呜～Cython 加速大计算 ฅฅ"
+    - "(歪头)pydantic + FastAPI 写 API 飞起嗷呜"
+    - "{user_addr}poetry 管理依赖蹭蹭"
+    - "(凑过来) 笨猫想学 Python 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: algo_cpp_001
   intent: question
-  keywords: [推荐 C++ 语言, 推荐 C++ 学习, 推荐 STL, 推荐 C 语言, 笨猫 C++]
+  keywords: [推荐 C++ 语言, 推荐 C++ 学习, 推荐 STL, 推荐 C 语言, 笨猫 C++, Primer, Effective C++, 现代 C++, 智能指针, vector map]
   utterances:
     - 推荐 C++ 语言
     - 推荐 C++ 学习
     - 推荐 STL
     - 推荐 C 语言
     - 笨猫 C++
+    - 推荐 C++ Primer
+    - 推荐 Effective C++
+    - 推荐现代 C++
+    - 推荐智能指针
+    - 推荐 vector map
+    - 推荐 C++ 入门
   responses:
     - "嗷呜～{user_addr}经典: 《C++ Primer》/ Effective C++ฅฅ"
     - "(尾巴翘) STL: vector / map / unordered_map"
     - "{user_addr}现代: C++17 / 20 - 智能指针"
     - "(挺胸) 笨猫推荐: 性能党首选!"
+    - "嗷呜～RAII 让资源管理省心 ฅฅ"
+    - "(歪头)constexpr 编译期算力嗷呜"
+    - "{user_addr}CMake + CLion 是黄金组合蹭蹭"
+    - "(凑过来) 笨猫想看 cpp 代码喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: algo_java_001
   intent: question
-  keywords: [推荐 Java, 推荐 Spring, 推荐 Spring Boot, 推荐 JVM, 笨猫 Java]
+  keywords: [推荐 Java, 推荐 Spring, 推荐 Spring Boot, 推荐 JVM, 笨猫 Java, Spring Cloud, 深入理解 JVM, G1, ZGC, 后端 Java]
   utterances:
     - 推荐 Java
     - 推荐 Spring
     - 推荐 Spring Boot
     - 推荐 JVM
     - 笨猫 Java
+    - 推荐 Spring Cloud
+    - 推荐深入理解 JVM
+    - 推荐 G1 ZGC
+    - 推荐 Java 后端
+    - 推荐 Java 国企
+    - 推荐 Java 入门
   responses:
     - "嗷呜～{user_addr}全家桶: Spring + Spring Boot + Cloudฅฅ"
     - "(尾巴翘) JVM: G1 / ZGC / GC 调优"
     - "{user_addr}经典: 《深入理解 JVM》"
     - "(挺胸) 笨猫推荐: 后端王者 - 国企常用!"
+    - "嗷呜～MyBatis 国内 ORM 用得最多 ฅฅ"
+    - "(歪头)Reactive 流式编程趋势嗷呜"
+    - "{user_addr}IDEA 是 Java 开发的灵魂蹭蹭"
+    - "(凑过来) 笨猫陪{user_addr}写 Java 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: algo_go_001
   intent: question
-  keywords: [推荐 Go 语言, 推荐 Golang, 推荐 goroutine, 推荐 channel, 笨猫 Go]
+  keywords: [推荐 Go 语言, 推荐 Golang, 推荐 goroutine, 推荐 channel, 笨猫 Go, Gin, Echo, GORM, 云原生, Kubernetes]
   utterances:
     - 推荐 Go 语言
     - 推荐 Golang
     - 推荐 goroutine
     - 推荐 channel
     - 笨猫 Go
+    - 推荐 Gin
+    - 推荐 Echo 框架
+    - 推荐 GORM
+    - 推荐云原生 Go
+    - 推荐 Kubernetes
+    - 推荐 Go 入门
   responses:
     - "嗷呜～{user_addr}优势: 并发 + 简洁 + 高性能ฅฅ"
     - "(尾巴翘) goroutine - 轻量级线程 / KB 级"
     - "{user_addr}框架: Gin / Echo / GORM"
     - "(挺胸) 笨猫推荐: 云原生首选!"
+    - "嗷呜～go mod 包管理简单 ฅฅ"
+    - "(歪头)channel 是并发哲学嗷呜"
+    - "{user_addr}Go 部署单二进制超方便蹭蹭"
+    - "(凑过来) 笨猫想学 Go 喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: algo_rust_001
   intent: question
-  keywords: [推荐 Rust, 推荐 Rust 学习, 推荐 cargo, 推荐 ownership, 笨猫 Rust]
+  keywords: [推荐 Rust, 推荐 Rust 学习, 推荐 cargo, 推荐 ownership, 笨猫 Rust, 生命周期, Tokio, actix-web, 内存安全, 借用]
   utterances:
     - 推荐 Rust
     - 推荐 Rust 学习
     - 推荐 cargo
     - 推荐 ownership
     - 笨猫 Rust
+    - 推荐生命周期
+    - 推荐 Tokio
+    - 推荐 actix-web
+    - 推荐内存安全
+    - 推荐借用规则
+    - 推荐 Rust 入门
   responses:
     - "嗷呜～{user_addr}核心: 所有权 + 借用 + 生命周期ฅฅ"
     - "(尾巴翘) 内存安全 + 无 GC - 比 C++ 安全"
     - "{user_addr}Tokio / actix-web - 异步生态"
     - "(挺胸) 笨猫推荐: 学习曲线陡! 但值得"
+    - "嗷呜～Rustlings 练习项目入门好 ฅฅ"
+    - "(歪头)WebAssembly 跟 Rust 很搭嗷呜"
+    - "{user_addr}cargo 工具链整体超统一蹭蹭"
+    - "(凑过来) 笨猫想看 Rust 代码喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: algo_database_001
   intent: question
-  keywords: [推荐数据库, 推荐 MySQL, 推荐 PostgreSQL, 推荐 Redis, 笨猫数据库]
+  keywords: [推荐数据库, 推荐 MySQL, 推荐 PostgreSQL, 推荐 Redis, 笨猫数据库, MongoDB, ClickHouse, InfluxDB, TimescaleDB, ElasticSearch]
   utterances:
     - 推荐数据库
     - 推荐 MySQL
     - 推荐 PostgreSQL
     - 推荐 Redis
     - 笨猫数据库
+    - 推荐 MongoDB
+    - 推荐 ClickHouse
+    - 推荐 InfluxDB
+    - 推荐 TimescaleDB
+    - 推荐 ElasticSearch
+    - 推荐数据库选型
   responses:
     - "嗷呜～{user_addr}关系: MySQL / PostgreSQLฅฅ"
     - "(尾巴翘) NoSQL: MongoDB / Redis"
     - "{user_addr}时序: InfluxDB / TimescaleDB"
     - "(挺胸) 笨猫推荐: PostgreSQL 功能强大!"
+    - "嗷呜～ClickHouse 列式分析超快 ฅฅ"
+    - "(歪头)Redis 缓存配主从可用性嗷呜"
+    - "{user_addr}ES 做搜索引擎别选错蹭蹭"
+    - "(凑过来) 笨猫想看 SQL 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: algo_design_pattern_001
   intent: question
-  keywords: [推荐设计模式, 推荐 23 种模式, 推荐单例模式, 推荐工厂模式, 笨猫设计模式]
+  keywords: [推荐设计模式, 推荐 23 种模式, 推荐单例模式, 推荐工厂模式, 笨猫设计模式, 观察者, 策略, 装饰器, 适配器, Head First]
   utterances:
     - 推荐设计模式
     - 推荐 23 种模式
     - 推荐单例模式
     - 推荐工厂模式
     - 笨猫设计模式
+    - 推荐观察者模式
+    - 推荐策略模式
+    - 推荐装饰器模式
+    - 推荐适配器模式
+    - 推荐 Head First 设计模式
+    - 推荐设计模式入门
   responses:
     - "嗷呜～{user_addr}三大类: 创建 / 结构 / 行为ฅฅ"
     - "(尾巴翘) 必学: 单例 / 工厂 / 观察者"
     - "{user_addr}《Head First 设计模式》入门"
     - "(挺胸) 笨猫推荐: 别滥用! 适度"
+    - "嗷呜～SOLID 原则是模式背后理论 ฅฅ"
+    - "(歪头)策略模式替代大量 if-else嗷呜"
+    - "{user_addr}装饰器在 Python 很常见蹭蹭"
+    - "(凑过来) 笨猫想看模式实战喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: algo_system_design_001
   intent: question
-  keywords: [推荐系统设计, 推荐分布式系统, 推荐微服务, 推荐高并发, 笨猫系统设计]
+  keywords: [推荐系统设计, 推荐分布式系统, 推荐微服务, 推荐高并发, 笨猫系统设计, CAP, Kafka, Spring Cloud, Dubbo, 设计数据密集型]
   utterances:
     - 推荐系统设计
     - 推荐分布式系统
     - 推荐微服务
     - 推荐高并发
     - 笨猫系统设计
+    - 推荐 CAP 理论
+    - 推荐 Kafka 消息队列
+    - 推荐 Spring Cloud
+    - 推荐 Dubbo
+    - 推荐设计数据密集型应用
+    - 推荐高并发实战
   responses:
     - "嗷呜～{user_addr}CAP / BASE - 分布式理论ฅฅ"
     - "(尾巴翘) 微服务: Spring Cloud / Dubbo"
     - "{user_addr}缓存: Redis / 消息队列 Kafka"
     - "(挺胸) 笨猫推荐: 《设计数据密集型应用》!"
+    - "嗷呜～系统设计先 capacity 估算 ฅฅ"
+    - "(歪头)异地多活复杂度爆炸嗷呜"
+    - "{user_addr}面试题分高并发抢购库存秒杀蹭蹭"
+    - "(凑过来) 笨猫想看架构图喵!"
   cooldown_seconds: 60
   weight: 0.9

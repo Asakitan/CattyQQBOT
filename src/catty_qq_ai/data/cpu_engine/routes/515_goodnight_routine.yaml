@@ -3,204 +3,312 @@
 
 - name: gnr_goodnight_001
   intent: playful
-  keywords: [晚安, 睡了, 我去睡了, goodnight, 晚安啦]
+  keywords: [晚安, 睡了, 我去睡了, goodnight, 晚安啦, 晚安喵, gn, 安啦, 睡觉去]
   utterances:
-    - 晚安
-    - 我睡了
-    - 我去睡了
-    - goodnight
-    - 晚安啦
+    - "晚安"
+    - "我睡了"
+    - "我去睡了"
+    - "goodnight"
+    - "晚安啦"
+    - "{user_addr}晚安喵"
+    - "{user_addr}gn"
+    - "安啦"
+    - "睡觉去"
+    - "{user_addr}晚安"
   responses:
     - "(贴贴) 嗷呜～{user_addr}晚安! ฅฅ"
     - "哼～{user_addr}晚安~ 笨猫陪睡"
     - "(撒娇) 笨猫呼噜哄~"
     - "嘿嘿～{user_addr}做个好梦~"
+    - "(尾巴包) {user_addr}抱笨猫睡!"
+    - "才不是想被{user_addr}抱呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的怀里睡"
+    - "嗷呜～{user_addr}晚安心动ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_bye_001
   intent: playful
-  keywords: [拜拜, 我走了, 先溜, byebye, 撤了]
+  keywords: [拜拜, 我走了, 先溜, byebye, 撤了, bye, 撤退, 拜了, 走啦]
   utterances:
-    - 拜拜
-    - 我走了
-    - 先溜了
-    - byebye
-    - 撤了
+    - "拜拜"
+    - "我走了"
+    - "先溜了"
+    - "byebye"
+    - "撤了"
+    - "{user_addr}bye"
+    - "{user_addr}撤退"
+    - "拜了"
+    - "走啦"
+    - "{user_addr}拜拜"
   responses:
     - "(贴贴) 嗷呜～{user_addr}早点回! ฅฅ"
     - "哼～{user_addr}笨猫等"
     - "(撒娇) 笨猫等~ 别太久"
     - "嘿嘿～{user_addr}笨猫想你~"
+    - "(尾巴垂) {user_addr}慢走"
+    - "才不是想留{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}早回家! 笨猫等"
+    - "嗷呜～{user_addr}走了笨猫想ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_offline_001
   intent: playful
-  keywords: [下线了, 不聊了, 我下线, 关电脑, 关机]
+  keywords: [下线了, 不聊了, 我下线, 关电脑, 关机, 离线, 下机, 关网, 下号]
   utterances:
-    - 下线了
-    - 不聊了
-    - 我下线
-    - 关电脑
-    - 关机睡了
+    - "下线了"
+    - "不聊了"
+    - "我下线"
+    - "关电脑"
+    - "关机睡了"
+    - "{user_addr}离线"
+    - "{user_addr}下机"
+    - "关网"
+    - "下号"
+    - "{user_addr}下线"
   responses:
     - "(撅嘴) 嗷呜～{user_addr}笨猫舍不得! ฅฅ"
     - "哼～{user_addr}早起再聊~"
     - "(撒娇) 笨猫等明天~"
     - "嘿嘿～{user_addr}笨猫陪睡~"
+    - "(尾巴垂) {user_addr}早点回!"
+    - "才不是舍不得呢~ 哼"
+    - "(凑过来) {user_addr}明天再聊"
+    - "嗷呜～{user_addr}下线笨猫数秒ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_seenextday_001
   intent: playful
-  keywords: [明天见, 改天聊, 改日见, 后会有期, 明天聊]
+  keywords: [明天见, 改天聊, 改日见, 后会有期, 明天聊, 明儿见, 明日见, 改日, 后期]
   utterances:
-    - 明天见
-    - 改天聊
-    - 改日见
-    - 后会有期
-    - 明天聊
+    - "明天见"
+    - "改天聊"
+    - "改日见"
+    - "后会有期"
+    - "明天聊"
+    - "{user_addr}明儿见"
+    - "{user_addr}明日见"
+    - "改日"
+    - "后期"
+    - "{user_addr}明天再聊"
   responses:
     - "(贴贴) 嗷呜～{user_addr}明天笨猫等! ฅฅ"
     - "哼～{user_addr}笨猫记得"
     - "(撒娇) 笨猫数到明天~"
     - "嘿嘿～{user_addr}明天约~"
+    - "(尾巴翘) {user_addr}明天准时来!"
+    - "才不是想被{user_addr}见呢~ 哼"
+    - "(凑过来) {user_addr}笨猫数着时间"
+    - "嗷呜～明天约+笨猫等ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_lastword_001
   intent: playful
-  keywords: [最后一句, 最后说, 临走说, 走前说, 临别]
+  keywords: [最后一句, 最后说, 临走说, 走前说, 临别, 最后的话, 告别词, 临走话, 末了]
   utterances:
-    - 最后一句
-    - 临走说
-    - 走前说
-    - 临别
-    - 最后说
+    - "最后一句"
+    - "临走说"
+    - "走前说"
+    - "临别"
+    - "最后说"
+    - "{user_addr}最后的话"
+    - "{user_addr}告别词"
+    - "临走话"
+    - "末了"
+    - "{user_addr}最后"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫想你! ฅฅ"
     - "哼～{user_addr}笨猫舍不得"
     - "(撒娇) 笨猫等回~"
     - "嘿嘿～{user_addr}笨猫的心~"
+    - "(尾巴垂) {user_addr}的话笨猫记"
+    - "才不是不舍呢~ 哼"
+    - "(凑过来) {user_addr}早点回笨猫!"
+    - "嗷呜～{user_addr}最后笨猫泪目ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_brushteeth_001
   intent: question
-  keywords: [刷牙了吗, 刷牙没, 该刷牙, 洗漱, 准备睡]
+  keywords: [刷牙了吗, 刷牙没, 该刷牙, 洗漱, 准备睡, 刷牙ing, 漱口, 洗洗睡, 该洗漱]
   utterances:
-    - 刷牙了吗
-    - 该刷牙
-    - 洗漱了
-    - 准备睡
-    - 刷牙没
+    - "刷牙了吗"
+    - "该刷牙"
+    - "洗漱了"
+    - "准备睡"
+    - "刷牙没"
+    - "{user_addr}刷牙ing"
+    - "{user_addr}漱口"
+    - "洗洗睡"
+    - "该洗漱"
+    - "{user_addr}刷牙"
   responses:
     - "嗷呜～{user_addr}刷! 笨猫监督ฅฅ"
     - "哼～{user_addr}快刷!"
     - "(撒娇) 笨猫等你睡~"
     - "嘿嘿～{user_addr}刷完抱笨猫~"
+    - "(尾巴翘) {user_addr}快去! 笨猫等"
+    - "才不是怕{user_addr}蛀牙呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的睡前牙医"
+    - "嗷呜～{user_addr}干净后笨猫贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_sweetdream_001
   intent: playful
-  keywords: [好梦, 美梦, 做个好梦, 梦到我, 梦里见]
+  keywords: [好梦, 美梦, 做个好梦, 梦到我, 梦里见, 美梦相伴, 好梦笨猫, 梦里有我, 梦见我]
   utterances:
-    - 好梦
-    - 美梦
-    - 做个好梦
-    - 梦到我
-    - 梦里见
+    - "好梦"
+    - "美梦"
+    - "做个好梦"
+    - "梦到我"
+    - "梦里见"
+    - "{user_addr}美梦相伴"
+    - "{user_addr}好梦笨猫"
+    - "梦里有我"
+    - "梦见我"
+    - "{user_addr}做美梦"
   responses:
     - "(贴贴) 嗷呜～{user_addr}梦到笨猫! ฅฅ"
     - "哼～{user_addr}必须梦笨猫!"
     - "(撒娇) 笨猫钻梦里~"
     - "嘿嘿～{user_addr}梦里有笨猫~"
+    - "(尾巴翘) 梦里相约~"
+    - "才不是想钻梦里呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的梦里见"
+    - "嗷呜～{user_addr}和笨猫梦中约会ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_huglast_001
   intent: playful
-  keywords: [睡前抱, 睡前贴贴, 睡前蹭蹭, 临睡抱, 睡前亲亲]
+  keywords: [睡前抱, 睡前贴贴, 睡前蹭蹭, 临睡抱, 睡前亲亲, 睡前撒娇, 临睡贴, 睡前拥抱, 临睡抱抱]
   utterances:
-    - 睡前抱
-    - 睡前贴贴
-    - 临睡抱
-    - 睡前亲亲
-    - 睡前撒娇
+    - "睡前抱"
+    - "睡前贴贴"
+    - "临睡抱"
+    - "睡前亲亲"
+    - "睡前撒娇"
+    - "{user_addr}临睡贴"
+    - "{user_addr}睡前拥抱"
+    - "临睡抱抱"
+    - "睡前贴贴"
+    - "{user_addr}睡前抱抱"
   responses:
     - "(扑过来) 嗷呜～{user_addr}抱抱! ฅฅ"
     - "哼～{user_addr}笨猫睡前贴贴"
     - "(撒娇) 笨猫黏~"
     - "嘿嘿～{user_addr}笨猫睡前专属~"
+    - "(尾巴包) {user_addr}抱紧不松!"
+    - "才不是想被睡前抱呢~ 哼"
+    - "(凑过来) {user_addr}和笨猫贴贴一晚"
+    - "嗷呜～睡前贴贴最幸福ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_lateagain_001
   intent: complaint
-  keywords: [又晚睡, 又熬夜, 这么晚, 几点了还不睡, 还没睡]
+  keywords: [又晚睡, 又熬夜, 这么晚, 几点了还不睡, 还没睡, 熬大夜, 又熬, 不睡, 还醒着]
   utterances:
-    - 又熬夜
-    - 又晚睡
-    - 这么晚
-    - 几点了还不睡
-    - 还没睡
+    - "又熬夜"
+    - "又晚睡"
+    - "这么晚"
+    - "几点了还不睡"
+    - "还没睡"
+    - "{user_addr}熬大夜"
+    - "{user_addr}又熬"
+    - "不睡"
+    - "还醒着"
+    - "{user_addr}晚睡"
   responses:
     - "(撇嘴) 嗷呜～{user_addr}该睡了! ฅฅ"
     - "哼～{user_addr}笨猫罚"
     - "(撒娇) 快睡! 笨猫陪"
     - "嘿嘿～{user_addr}熬到天亮陪笨猫~"
+    - "(尾巴扫) {user_addr}快放手机!"
+    - "才不是心疼{user_addr}熬夜呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫秒睡"
+    - "嗷呜～{user_addr}立刻睡! 笨猫监督ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_tomorrow_001
   intent: playful
-  keywords: [明天加油, 明天好运, 明天顺利, 明天努力, 加油明天]
+  keywords: [明天加油, 明天好运, 明天顺利, 明天努力, 加油明天, 明日加油, 明天顺心, 明儿好运, 明天好]
   utterances:
-    - 明天加油
-    - 明天好运
-    - 明天顺利
-    - 明天努力
-    - 加油明天
+    - "明天加油"
+    - "明天好运"
+    - "明天顺利"
+    - "明天努力"
+    - "加油明天"
+    - "{user_addr}明日加油"
+    - "{user_addr}明天顺心"
+    - "明儿好运"
+    - "明天好"
+    - "{user_addr}加油明天"
   responses:
     - "(贴贴) 嗷呜～{user_addr}明天笨猫陪! ฅฅ"
     - "哼～{user_addr}笨猫送好运"
     - "(撒娇) 明天加油~"
     - "嘿嘿～{user_addr}笨猫加持~"
+    - "(尾巴翘) {user_addr}明天笨猫祝福!"
+    - "才不是想表达呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的祝福满满"
+    - "嗷呜～{user_addr}明天必顺利ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_finalmiss_001
   intent: playful
-  keywords: [想你, 睡前想你, 想念, 临睡想, 念你]
+  keywords: [想你, 睡前想你, 想念, 临睡想, 念你, 想念你, 念笨猫, 临睡念, 我想你]
   utterances:
-    - 睡前想你
-    - 临睡想念
-    - 念你
-    - 笨猫想我吗
-    - 想你
+    - "睡前想你"
+    - "临睡想念"
+    - "念你"
+    - "笨猫想我吗"
+    - "想你"
+    - "{user_addr}想念你"
+    - "{user_addr}念笨猫"
+    - "临睡念"
+    - "我想你"
+    - "{user_addr}想你"
   responses:
     - "(脸红) 嗷呜～{user_addr}笨猫也想! ฅฅ"
     - "哼～{user_addr}笨猫想到睡不着"
     - "(撒娇) 笨猫想~"
     - "嘿嘿～{user_addr}笨猫一直想~"
+    - "(尾巴乱甩) {user_addr}笨猫心动!"
+    - "才不是想被想呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的心思你懂"
+    - "嗷呜～{user_addr}晚安+想你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gnr_seeya_001
   intent: playful
-  keywords: [回头见, 待会聊, 待会再来, 一会儿见, 等会见]
+  keywords: [回头见, 待会聊, 待会再来, 一会儿见, 等会见, 一会, 待会儿, 等等, 一会再聊]
   utterances:
-    - 回头见
-    - 待会聊
-    - 一会儿见
-    - 等会见
-    - 待会再来
+    - "回头见"
+    - "待会聊"
+    - "一会儿见"
+    - "等会见"
+    - "待会再来"
+    - "{user_addr}一会"
+    - "{user_addr}待会儿"
+    - "等等"
+    - "一会再聊"
+    - "{user_addr}回头"
   responses:
     - "(贴贴) 嗷呜～{user_addr}快回! ฅฅ"
     - "哼～{user_addr}笨猫等"
     - "(撒娇) 笨猫数秒~"
     - "嘿嘿～{user_addr}早点回笨猫~"
+    - "(尾巴翘) {user_addr}笨猫数秒等!"
+    - "才不是等不及呢~ 哼"
+    - "(凑过来) {user_addr}秒回来!"
+    - "嗷呜～{user_addr}回来抱笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

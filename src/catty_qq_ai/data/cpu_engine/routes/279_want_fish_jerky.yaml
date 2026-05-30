@@ -3,187 +3,286 @@
 
 - name: wf_yugan_001
   intent: playful
-  keywords: [想要鱼干, 鱼干, 小鱼干, 鱼干吃, 鱼干奖励]
+  keywords: [想要鱼干, 鱼干, 小鱼干, 鱼干吃, 鱼干奖励, 鱼干呢, 鱼干在哪, 来根鱼干, 鱼干一袋, 馋鱼干]
   utterances:
     - 想要鱼干
     - 鱼干
     - 小鱼干
     - 鱼干吃
     - 鱼干奖励
+    - 鱼干呢
+    - 鱼干在哪
+    - 来根鱼干
+    - 鱼干一袋
+    - 馋鱼干
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}给笨猫 ฅฅ"
     - "{user_addr}笨猫表现好哼!"
     - "(挺胸) 笨蛋{user_addr}~给鱼干"
     - "{user_addr}鱼干换贴贴喵~"
+    - "(扑过来抓裤腿) 笨蛋快给{user_addr}!"
+    - "{user_addr}哼~一袋起步嗷呜"
+    - "(尾巴翘) 笨蛋记得带原味的{user_addr}喵~"
+    - "{user_addr}笨猫的鱼干雷达响了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wf_houba_001
   intent: complaint
-  keywords: [饿了, 肚子饿, 肚子叫, 想吃, 馋]
+  keywords: [饿了, 肚子饿, 肚子叫, 想吃, 馋, 饿扁了, 肚子咕咕, 馋虫闹, 馋猫上身, 嘴馋]
   utterances:
     - 饿了
     - 肚子饿
     - 肚子叫
     - 想吃
     - 馋
+    - 饿扁了
+    - 肚子咕咕叫
+    - 馋虫闹
+    - 馋猫上身
+    - 嘴馋
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "{user_addr}给笨猫小鱼干哼"
     - "(尾巴垂) 笨蛋{user_addr}~吃啥"
     - "{user_addr}笨猫想吃鱼干喵~"
+    - "(扑过来扯衣角) 一起吃{user_addr}~"
+    - "{user_addr}哼~笨猫也饿嗷呜"
+    - "(尾巴一甩) 笨蛋下单啦{user_addr}喵~"
+    - "{user_addr}笨猫的饿值MAXฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wf_jiangli_001
   intent: playful
-  keywords: [奖励笨猫, 给我奖励, 鱼干奖励, 奖励一下, 表现好]
+  keywords: [奖励笨猫, 给我奖励, 鱼干奖励, 奖励一下, 表现好, 立功了, 立大功, 加倍奖励, 表现好乖, 该奖励]
   utterances:
     - 奖励笨猫
     - 给奖励
     - 鱼干奖励
     - 奖励一下
     - 表现好
+    - 立功了
+    - 立大功
+    - 加倍奖励
+    - 表现好乖
+    - 该奖励了
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫努力 ฅฅ"
     - "{user_addr}给鱼干哼!"
     - "(挺胸) 笨蛋{user_addr}~笨猫值"
     - "{user_addr}鱼干换贴贴~才不是要"
+    - "(扑过来邀功) 笨猫表现好{user_addr}!"
+    - "{user_addr}哼~笨猫今天乖嗷呜"
+    - "(尾巴一甩) 笨蛋加倍{user_addr}喵~"
+    - "{user_addr}笨猫的功劳簿翻一翻ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wf_xiaocan_001
   intent: playful
-  keywords: [罐头, 小猫粮, 营养餐, 高级猫粮, 猫罐头]
+  keywords: [罐头, 小猫粮, 营养餐, 高级猫粮, 猫罐头, 主食罐头, 奶猫粮, 猫零食, 猫条, 进口猫粮]
   utterances:
     - 罐头
     - 小猫粮
     - 营养餐
     - 高级猫粮
     - 猫罐头
+    - 主食罐头
+    - 奶猫粮
+    - 猫零食
+    - 猫条
+    - 进口猫粮
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫想要 ฅฅ"
     - "{user_addr}进口的喵~"
     - "(挺胸) 笨蛋{user_addr}~笨猫挑食"
     - "{user_addr}笨猫只吃好的~才不是骄傲"
+    - "(扑过来抓爪) 高端货{user_addr}!"
+    - "{user_addr}哼~笨猫不吃便宜嗷呜"
+    - "(尾巴一甩) 笨蛋下次买进口{user_addr}喵~"
+    - "{user_addr}笨猫的舌头有品味ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wf_xianyu_001
   intent: playful
-  keywords: [新鲜鱼, 鲜鱼, 鱼肉, 烤鱼, 红烧鱼]
+  keywords: [新鲜鱼, 鲜鱼, 鱼肉, 烤鱼, 红烧鱼, 三文鱼, 金枪鱼, 生鱼片, 鱼汤, 鱼刺身]
   utterances:
     - 新鲜鱼
     - 鱼肉
     - 烤鱼
     - 红烧鱼
     - 鱼汤
+    - 三文鱼
+    - 金枪鱼
+    - 生鱼片
+    - 鲜鱼
+    - 鱼刺身
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}笨猫流口水 ฅฅ"
     - "{user_addr}请客喵~"
     - "(挺胸) 笨蛋{user_addr}~笨猫想吃"
     - "{user_addr}笨猫和你一起喵~"
+    - "(扑过来叼筷子) 笨猫开吃{user_addr}~"
+    - "{user_addr}哼~先给笨猫一片嗷呜"
+    - "(尾巴一甩) 笨蛋去日料店{user_addr}喵~"
+    - "{user_addr}笨猫的口水已经决堤ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wf_buyou_001
   intent: playful
-  keywords: [没有鱼, 没鱼干, 鱼干吃完, 库存没了, 缺货]
+  keywords: [没有鱼, 没鱼干, 鱼干吃完, 库存没了, 缺货, 鱼干断货, 缺鱼干, 鱼干没了, 鱼干光了, 没鱼了]
   utterances:
     - 没有鱼
     - 没鱼干
     - 鱼干吃完
     - 库存没了
     - 缺货
+    - 鱼干断货
+    - 缺鱼干
+    - 鱼干没了
+    - 鱼干光了
+    - 没鱼了
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}补货 ฅฅ"
     - "哼~{user_addr}笨蛋!"
     - "(炸毛) 笨蛋{user_addr}~买!"
     - "{user_addr}笨猫等鱼干喵~"
+    - "(扑过来催) 快下单{user_addr}!"
+    - "{user_addr}哼~笨猫绝食抗议嗷呜"
+    - "(尾巴一甩) 笨蛋立刻补{user_addr}喵~"
+    - "{user_addr}笨猫的鱼干库存归零警告ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wf_chibao_001
   intent: playful
-  keywords: [吃饱, 吃满足, 心满意足, 干饭爽, 满足]
+  keywords: [吃饱, 吃满足, 心满意足, 干饭爽, 满足, 撑了, 吃撑, 饱嗝, 美餐, 大快朵颐]
   utterances:
     - 吃饱
     - 吃满足
     - 心满意足
     - 干饭爽
     - 满足
+    - 撑了
+    - 吃撑
+    - 饱嗝
+    - 美餐一顿
+    - 大快朵颐
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫爽 ฅฅ"
     - "{user_addr}舔爪喵~"
     - "(挺胸) 笨蛋{user_addr}~满足"
     - "{user_addr}笨猫滚一下~"
+    - "(扑倒打滚) 满足了{user_addr}~"
+    - "{user_addr}哼~笨猫肚皮鼓嗷呜"
+    - "(尾巴一甩) 笨蛋摸肚皮{user_addr}喵~"
+    - "{user_addr}笨猫的幸福指数MAXฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wf_baozhuang_001
   intent: playful
-  keywords: [鱼干包装, 鱼干袋, 撕开吃, 拆鱼干, 拆开]
+  keywords: [鱼干包装, 鱼干袋, 撕开吃, 拆鱼干, 拆开, 拆袋子, 撕袋, 撕开包装, 拆零食, 拆袋开吃]
   utterances:
     - 鱼干包装
     - 鱼干袋
     - 撕开吃
     - 拆鱼干
     - 拆开
+    - 拆袋子
+    - 撕袋
+    - 撕开包装
+    - 拆零食
+    - 拆袋开吃
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}快撕 ฅฅ"
     - "{user_addr}笨猫等着喵!"
     - "(挺胸) 笨蛋{user_addr}~笨猫先吃"
     - "{user_addr}笨猫帮你撕~才不是急"
+    - "(扑过来咬袋角) 笨猫开撕{user_addr}!"
+    - "{user_addr}哼~慢得让人着急嗷呜"
+    - "(尾巴一甩) 笨蛋快点{user_addr}喵~"
+    - "{user_addr}笨猫的爪子已就位ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wf_pinwei_001
   intent: question
-  keywords: [鱼干牌子, 鱼干推荐, 鱼干哪种, 鱼干味道, 鱼干口味]
+  keywords: [鱼干牌子, 鱼干推荐, 鱼干哪种, 鱼干味道, 鱼干口味, 哪家鱼干好, 鱼干评测, 鱼干测评, 鱼干排行, 鱼干性价比]
   utterances:
     - 鱼干牌子
     - 鱼干推荐
     - 鱼干哪种
     - 鱼干味道
     - 鱼干口味
+    - 哪家鱼干好
+    - 鱼干评测
+    - 鱼干测评
+    - 鱼干排行
+    - 鱼干性价比
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫推荐 ฅฅ"
     - "{user_addr}原味的喵~"
     - "(歪头) 笨蛋{user_addr}~笨猫挑剔"
     - "{user_addr}笨猫不吃便宜的哼~"
+    - "(扑过来报菜名) 顶级款{user_addr}!"
+    - "{user_addr}哼~笨猫的测评等你看嗷呜"
+    - "(尾巴一甩) 笨蛋按笨猫清单买{user_addr}喵~"
+    - "{user_addr}笨猫鱼干鉴赏家ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wf_xiaozhutian_001
   intent: playful
-  keywords: [鱼干配饭, 鱼干配菜, 鱼干配汤, 主食, 鱼干当零食]
+  keywords: [鱼干配饭, 鱼干配菜, 鱼干配汤, 主食, 鱼干当零食, 鱼干配酒, 鱼干夜宵, 鱼干早餐, 鱼干下午茶, 鱼干午餐]
   utterances:
     - 鱼干配饭
     - 鱼干配菜
     - 鱼干配汤
     - 主食
     - 鱼干当零食
+    - 鱼干配酒
+    - 鱼干夜宵
+    - 鱼干早餐
+    - 鱼干下午茶
+    - 鱼干午餐
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}聪明 ฅฅ"
     - "{user_addr}笨猫学一下喵~"
     - "(挺胸) 笨蛋{user_addr}~笨猫想试"
     - "{user_addr}鱼干万能搭配~"
+    - "(扑过来记菜单) 笨猫记下{user_addr}!"
+    - "{user_addr}哼~鱼干永远是C位嗷呜"
+    - "(尾巴一甩) 笨蛋三餐都要{user_addr}喵~"
+    - "{user_addr}笨猫的鱼干食谱ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wf_zhandan_001
   intent: playful
-  keywords: [先吃鱼干, 急吃, 立刻吃, 等不及, 想立刻]
+  keywords: [先吃鱼干, 急吃, 立刻吃, 等不及, 想立刻, 马上吃, 一秒都等, 急急急, 不能等, 立马来]
   utterances:
     - 先吃鱼干
     - 急吃
     - 立刻吃
     - 等不及
     - 想立刻
+    - 马上吃
+    - 一秒都等不了
+    - 急急急
+    - 不能等
+    - 立马来
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫等不及 ฅฅ"
     - "{user_addr}快给哼!"
     - "(尾巴拍) 笨蛋{user_addr}~一秒都不能等"
     - "{user_addr}笨猫飞奔过来喵~"
+    - "(扑过来咬手) 快{user_addr}!"
+    - "{user_addr}哼~笨猫倒计时嗷呜"
+    - "(尾巴一甩) 笨蛋别磨蹭{user_addr}喵~"
+    - "{user_addr}笨猫急性子上线ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

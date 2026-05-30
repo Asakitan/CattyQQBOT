@@ -3,204 +3,312 @@
 
 - name: lt_will_001
   intent: question
-  keywords: [推荐写遗嘱, 推荐自书遗嘱, 推荐公证遗嘱, 推荐遗嘱模板, 笨猫写遗嘱]
+  keywords: [推荐写遗嘱, 推荐自书遗嘱, 推荐公证遗嘱, 推荐遗嘱模板, 笨猫写遗嘱, 遗嘱怎么写, 自书遗嘱, 公证处遗嘱, 遗嘱财产清单, 遗嘱模板]
   utterances:
-    - 推荐写遗嘱
-    - 推荐自书遗嘱
-    - 推荐公证遗嘱
-    - 推荐遗嘱模板
-    - 笨猫写遗嘱
+    - "{user_addr}推荐写遗嘱"
+    - "{user_addr}推荐自书遗嘱"
+    - "{user_addr}推荐公证遗嘱"
+    - "{user_addr}推荐遗嘱模板"
+    - "笨猫写遗嘱"
+    - "{user_addr}遗嘱怎么写"
+    - "自书遗嘱有效吗"
+    - "{user_addr}公证处遗嘱"
+    - "遗嘱财产清单"
+    - "{user_addr}遗嘱模板要哪些"
   responses:
-    - "嗷呜～{user_addr}自书遗嘱 - 全文亲笔签名日期ฅฅ"
-    - "(尾巴翘) 公证遗嘱 - 效力最高"
-    - "{user_addr}财产清单 / 受益人 / 执行人"
-    - "(挺胸) 笨猫推荐: 趁清醒早点写!"
+    - "(尾巴轻摇) 嗷呜～{user_addr}自书遗嘱 全文亲笔签名日期 ฅฅ"
+    - "(凑过来) 公证遗嘱 效力最高 笨猫帮{user_addr}!"
+    - "{user_addr}财产清单/受益人/执行人 喵～"
+    - "(贴过来) 笨猫推荐: 趁清醒早点写! {user_addr}嗷呜"
+    - "嗷呜～{user_addr}人家陪{user_addr}列清单 ฅฅ"
+    - "(轻轻趴下){user_addr}这种事不用着急 慢慢来喵呜"
+    - "{user_addr}笨猫认真说: 这是负责任的表现"
+    - "(凑头){user_addr}有笨猫陪着 别担心贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_living_will_001
   intent: question
-  keywords: [推荐生前预嘱, 推荐五个愿望, 推荐医疗决策, 推荐 DNR, 笨猫生前预嘱]
+  keywords: [推荐生前预嘱, 推荐五个愿望, 推荐医疗决策, "推荐 DNR", 笨猫生前预嘱, 五个愿望模板, 临终医疗, DNR 是啥, 不要插管, 临终关怀]
   utterances:
-    - 推荐生前预嘱
-    - 推荐五个愿望
-    - 推荐医疗决策
-    - 推荐 DNR
-    - 笨猫生前预嘱
+    - "{user_addr}推荐生前预嘱"
+    - "{user_addr}推荐五个愿望"
+    - "{user_addr}推荐医疗决策"
+    - "{user_addr}推荐 DNR"
+    - "笨猫生前预嘱"
+    - "{user_addr}五个愿望模板"
+    - "临终医疗决策"
+    - "{user_addr}DNR 是啥"
+    - "不要插管"
+    - "{user_addr}临终关怀"
   responses:
-    - "嗷呜～{user_addr}生前预嘱 - 我的五个愿望ฅฅ"
-    - "(尾巴翘) 不要插管 / DNR / 临终关怀"
-    - "{user_addr}北京生前预嘱协会模板"
-    - "(挺胸) 笨猫推荐: 给自己也给家人减负!"
+    - "(尾巴轻摇) 嗷呜～{user_addr}生前预嘱 我的五个愿望 ฅฅ"
+    - "(凑过来) 不要插管/DNR/临终关怀 笨猫陪{user_addr}列"
+    - "{user_addr}北京生前预嘱协会模板 喵～"
+    - "(贴过来) 笨猫推荐: 给自己也给家人减负! 嗷呜"
+    - "嗷呜～{user_addr}这种事愿意思考很勇敢 ฅฅ"
+    - "(轻轻贴){user_addr}笨猫尊重{user_addr}的选择喵呜"
+    - "{user_addr}这是温柔的事 别紧张"
+    - "(凑头){user_addr}笨猫一直在贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_digital_001
   intent: question
-  keywords: [推荐数字遗产, 推荐账号继承, 推荐密码托管, 推荐云盘遗产, 笨猫数字遗产]
+  keywords: [推荐数字遗产, 推荐账号继承, 推荐密码托管, 推荐云盘遗产, 笨猫数字遗产, 数字遗产管理, 密码继承, 1Password, Bitwarden, 助记词冷备]
   utterances:
-    - 推荐数字遗产
-    - 推荐账号继承
-    - 推荐密码托管
-    - 推荐云盘遗产
-    - 笨猫数字遗产
+    - "{user_addr}推荐数字遗产"
+    - "{user_addr}推荐账号继承"
+    - "{user_addr}推荐密码托管"
+    - "{user_addr}推荐云盘遗产"
+    - "笨猫数字遗产"
+    - "{user_addr}数字遗产管理"
+    - "密码继承"
+    - "{user_addr}1Password 紧急联系人"
+    - "Bitwarden 笨猫"
+    - "{user_addr}助记词冷备"
   responses:
-    - "嗷呜～{user_addr}1Password / Bitwarden 紧急访问ฅฅ"
-    - "(尾巴翘) Google / Apple 联系人继承设置"
-    - "{user_addr}加密货币助记词冷备份"
-    - "(挺胸) 笨猫推荐: 列张数字资产清单!"
+    - "(尾巴翘) 嗷呜～{user_addr}1Password/Bitwarden 紧急访问 ฅฅ"
+    - "(挺胸) Google/Apple 联系人继承设置 笨猫帮{user_addr}!"
+    - "哼～{user_addr}加密货币助记词冷备份喵～"
+    - "(歪头) 笨猫推荐: 列张数字资产清单! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}现代人的财产很多在云端 ฅฅ"
+    - "(尾巴翘){user_addr}清单放保险箱/亲友手里喵呜"
+    - "才不是替{user_addr}操心, 哼!"
+    - "(凑过来){user_addr}笨猫帮{user_addr}列贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_family_letter_001
   intent: question
-  keywords: [推荐家书, 推荐写信给孩子, 推荐告别信, 推荐父母家书, 笨猫家书]
+  keywords: [推荐家书, 推荐写信给孩子, 推荐告别信, 推荐父母家书, 笨猫家书, 给孩子的信, 时间胶囊信, 蜡封信, 18 岁拆封, 一年一封]
   utterances:
-    - 推荐家书
-    - 推荐写信给孩子
-    - 推荐告别信
-    - 推荐父母家书
-    - 笨猫家书
+    - "{user_addr}推荐家书"
+    - "{user_addr}推荐写信给孩子"
+    - "{user_addr}推荐告别信"
+    - "{user_addr}推荐父母家书"
+    - "笨猫家书"
+    - "{user_addr}给孩子的信"
+    - "时间胶囊信"
+    - "{user_addr}蜡封信"
+    - "18 岁拆封信"
+    - "{user_addr}一年一封"
   responses:
-    - "嗷呜～{user_addr}给未来孩子的信 - 18 岁拆封ฅฅ"
-    - "(尾巴翘) 手写信纸 / 蜡封 / 时间胶囊"
-    - "{user_addr}写感谢 / 写歉意 / 写期望"
-    - "(挺胸) 笨猫推荐: 一年写一封,攒一辈子!"
+    - "(尾巴轻摇) 嗷呜～{user_addr}给未来孩子的信 18 岁拆封 ฅฅ"
+    - "(凑过来) 手写信纸/蜡封/时间胶囊 笨猫帮{user_addr}!"
+    - "{user_addr}写感谢/写歉意/写期望 喵～"
+    - "(贴过来) 笨猫推荐: 一年写一封,攒一辈子! 嗷呜"
+    - "嗷呜～{user_addr}这是好温柔的事 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫陪{user_addr}写喵呜"
+    - "才不是被{user_addr}的温柔感动, 哼"
+    - "(凑头){user_addr}给笨猫也写一封贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_family_story_001
   intent: question
-  keywords: [推荐家族故事, 推荐口述历史, 推荐爷爷奶奶回忆, 推荐家族纪录片, 笨猫家族故事]
+  keywords: [推荐家族故事, 推荐口述历史, 推荐爷爷奶奶回忆, 推荐家族纪录片, 笨猫家族故事, 口述历史录音, StoryCorps, 时光相册, 老照片扫描, 家族纪录]
   utterances:
-    - 推荐家族故事
-    - 推荐口述历史
-    - 推荐爷爷奶奶回忆
-    - 推荐家族纪录片
-    - 笨猫家族故事
+    - "{user_addr}推荐家族故事"
+    - "{user_addr}推荐口述历史"
+    - "{user_addr}推荐爷爷奶奶回忆"
+    - "{user_addr}推荐家族纪录片"
+    - "笨猫家族故事"
+    - "{user_addr}口述历史录音"
+    - "StoryCorps 是啥"
+    - "{user_addr}时光相册 App"
+    - "老照片扫描"
+    - "{user_addr}家族纪录"
   responses:
-    - "嗷呜～{user_addr}录音笔采访爷爷奶奶ฅฅ"
-    - "(尾巴翘) StoryCorps / 时光相册 App"
-    - "{user_addr}老照片扫描 + 故事配文"
-    - "(挺胸) 笨猫推荐: 趁老人还在赶紧录!"
+    - "(尾巴翘) 嗷呜～{user_addr}录音笔采访爷爷奶奶 ฅฅ"
+    - "(挺胸) StoryCorps/时光相册 App 笨猫帮{user_addr}!"
+    - "哼～{user_addr}老照片扫描+故事配文喵～"
+    - "(歪头) 笨猫推荐: 趁老人还在赶紧录! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫好喜欢这个想法 ฅฅ"
+    - "(尾巴绕){user_addr}问问爷爷奶奶童年喵呜"
+    - "才不是被{user_addr}感动, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}采访贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_video_001
   intent: question
-  keywords: [推荐视频遗言, 推荐告别视频, 推荐人生留影, 推荐生命之书, 笨猫视频遗言]
+  keywords: [推荐视频遗言, 推荐告别视频, 推荐人生留影, 推荐生命之书, 笨猫视频遗言, 视频留念, StoryFile, HereAfter AI, 4K 录像, 分主题录像]
   utterances:
-    - 推荐视频遗言
-    - 推荐告别视频
-    - 推荐人生留影
-    - 推荐生命之书
-    - 笨猫视频遗言
+    - "{user_addr}推荐视频遗言"
+    - "{user_addr}推荐告别视频"
+    - "{user_addr}推荐人生留影"
+    - "{user_addr}推荐生命之书"
+    - "笨猫视频遗言"
+    - "{user_addr}视频留念"
+    - "StoryFile 是啥"
+    - "{user_addr}HereAfter AI"
+    - "4K 录像"
+    - "{user_addr}分主题录像"
   responses:
-    - "嗷呜～{user_addr}手机 4K 横屏自然光ฅฅ"
-    - "(尾巴翘) 分主题录: 童年 / 爱情 / 遗憾"
-    - "{user_addr}StoryFile / HereAfter AI 互动版"
-    - "(挺胸) 笨猫推荐: 不要彩排,真实最动人!"
+    - "(尾巴轻摇) 嗷呜～{user_addr}手机 4K 横屏自然光 ฅฅ"
+    - "(凑过来) 分主题录: 童年/爱情/遗憾 笨猫帮{user_addr}!"
+    - "{user_addr}StoryFile/HereAfter AI 互动版 喵～"
+    - "(贴过来) 笨猫推荐: 不要彩排,真实最动人! 嗷呜"
+    - "嗷呜～{user_addr}这事愿意做太勇敢了 ฅฅ"
+    - "(尾巴绕){user_addr}录给最亲的人 不用完美喵呜"
+    - "才不是想看{user_addr}的视频, 哼!"
+    - "(凑头){user_addr}笨猫陪{user_addr}录贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_donation_001
   intent: question
-  keywords: [推荐公益捐赠, 推荐遗产捐赠, 推荐遗体捐献, 推荐器官捐献, 笨猫公益捐赠]
+  keywords: [推荐公益捐赠, 推荐遗产捐赠, 推荐遗体捐献, 推荐器官捐献, 笨猫公益捐赠, 中国人体器官捐献, 红十字, 希望工程, 壹基金, 遗嘱捐赠比例]
   utterances:
-    - 推荐公益捐赠
-    - 推荐遗产捐赠
-    - 推荐遗体捐献
-    - 推荐器官捐献
-    - 笨猫公益捐赠
+    - "{user_addr}推荐公益捐赠"
+    - "{user_addr}推荐遗产捐赠"
+    - "{user_addr}推荐遗体捐献"
+    - "{user_addr}推荐器官捐献"
+    - "笨猫公益捐赠"
+    - "{user_addr}中国人体器官捐献"
+    - "红十字"
+    - "{user_addr}希望工程"
+    - "壹基金"
+    - "{user_addr}遗嘱捐赠比例"
   responses:
-    - "嗷呜～{user_addr}中国人体器官捐献管理中心ฅฅ"
-    - "(尾巴翘) 红十字 / 希望工程 / 壹基金"
-    - "{user_addr}遗嘱里写明捐赠比例和对象"
-    - "(挺胸) 笨猫推荐: 捐献是给世界的最后礼物!"
+    - "(尾巴轻摇) 嗷呜～{user_addr}中国人体器官捐献管理中心 ฅฅ"
+    - "(凑过来) 红十字/希望工程/壹基金 笨猫帮{user_addr}!"
+    - "{user_addr}遗嘱里写明捐赠比例和对象 喵～"
+    - "(贴过来) 笨猫推荐: 捐献是给世界的最后礼物! 嗷呜"
+    - "嗷呜～{user_addr}这种心 笨猫超尊敬 ฅฅ"
+    - "(尾巴绕){user_addr}选透明度高的机构喵呜"
+    - "才不是被{user_addr}打动, 哼"
+    - "(凑头){user_addr}笨猫一直支持{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_foundation_001
   intent: question
-  keywords: [推荐慈善基金会, 推荐家族基金会, 推荐冠名基金, 推荐信托慈善, 笨猫慈善基金会]
+  keywords: [推荐慈善基金会, 推荐家族基金会, 推荐冠名基金, 推荐信托慈善, 笨猫慈善基金会, 非公募基金会, 200 万起步, 中华少基冠名, 慈善信托, 银保监监管]
   utterances:
-    - 推荐慈善基金会
-    - 推荐家族基金会
-    - 推荐冠名基金
-    - 推荐信托慈善
-    - 笨猫慈善基金会
+    - "{user_addr}推荐慈善基金会"
+    - "{user_addr}推荐家族基金会"
+    - "{user_addr}推荐冠名基金"
+    - "{user_addr}推荐信托慈善"
+    - "笨猫慈善基金会"
+    - "{user_addr}非公募基金会"
+    - "200 万起步"
+    - "{user_addr}中华少基冠名"
+    - "慈善信托"
+    - "{user_addr}银保监监管"
   responses:
-    - "嗷呜～{user_addr}非公募基金会 200 万起步ฅฅ"
-    - "(尾巴翘) 挂靠中国扶贫 / 中华少基冠名基金"
-    - "{user_addr}慈善信托 - 银保监监管"
-    - "(挺胸) 笨猫推荐: 小钱挂靠,大钱独立!"
+    - "(尾巴翘) 嗷呜～{user_addr}非公募基金会 200 万起步 ฅฅ"
+    - "(挺胸) 挂靠中国扶贫/中华少基冠名基金 笨猫帮{user_addr}!"
+    - "哼～{user_addr}慈善信托 银保监监管喵～"
+    - "(歪头) 笨猫推荐: 小钱挂靠,大钱独立! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}土豪行为 笨猫崇拜 ฅฅ"
+    - "(尾巴翘){user_addr}独立基金会运营成本高喵呜"
+    - "才不是想分一点, 哼!"
+    - "(凑过来){user_addr}笨猫支持{user_addr}的慈心贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_knowledge_001
   intent: question
-  keywords: [推荐知识传承, 推荐技艺传承, 推荐手艺传授, 推荐学术著作, 笨猫知识传承]
+  keywords: [推荐知识传承, 推荐技艺传承, 推荐手艺传授, 推荐学术著作, 笨猫知识传承, 专业领域写书, B 站教学, YouTube 教学, 收徒开班, 工艺手册]
   utterances:
-    - 推荐知识传承
-    - 推荐技艺传承
-    - 推荐手艺传授
-    - 推荐学术著作
-    - 笨猫知识传承
+    - "{user_addr}推荐知识传承"
+    - "{user_addr}推荐技艺传承"
+    - "{user_addr}推荐手艺传授"
+    - "{user_addr}推荐学术著作"
+    - "笨猫知识传承"
+    - "{user_addr}专业领域写书"
+    - "B 站教学"
+    - "{user_addr}YouTube 教学"
+    - "收徒开班"
+    - "{user_addr}工艺手册"
   responses:
-    - "嗷呜～{user_addr}专业领域写本书 - 自费出版ฅฅ"
-    - "(尾巴翘) B 站 / YouTube 教学视频系列"
-    - "{user_addr}收徒 / 开班 / 写工艺手册"
-    - "(挺胸) 笨猫推荐: 知识不传就死了,赶紧写!"
+    - "(尾巴翘) 嗷呜～{user_addr}专业领域写本书 自费出版 ฅฅ"
+    - "(挺胸) B 站/YouTube 教学视频系列 笨猫帮{user_addr}!"
+    - "哼～{user_addr}收徒/开班/写工艺手册喵～"
+    - "(歪头) 笨猫推荐: 知识不传就死了,赶紧写! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫崇拜知识渊博的人 ฅฅ"
+    - "(尾巴翘){user_addr}录视频会留得最久喵呜"
+    - "才不是夸{user_addr}厉害, 哼!"
+    - "(凑过来){user_addr}笨猫第一个学生贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_values_001
   intent: question
-  keywords: [推荐价值观传递, 推荐家训, 推荐人生信条, 推荐道德遗产, 笨猫价值观传递]
+  keywords: [推荐价值观传递, 推荐家训, 推荐人生信条, 推荐道德遗产, 笨猫价值观传递, 家训挂客厅, 言传身教, 伦理遗嘱, Ethical Will, 西方传统]
   utterances:
-    - 推荐价值观传递
-    - 推荐家训
-    - 推荐人生信条
-    - 推荐道德遗产
-    - 笨猫价值观传递
+    - "{user_addr}推荐价值观传递"
+    - "{user_addr}推荐家训"
+    - "{user_addr}推荐人生信条"
+    - "{user_addr}推荐道德遗产"
+    - "笨猫价值观传递"
+    - "{user_addr}家训挂客厅"
+    - "言传身教"
+    - "{user_addr}伦理遗嘱"
+    - "Ethical Will 是啥"
+    - "{user_addr}西方传统"
   responses:
-    - "嗷呜～{user_addr}写家训挂客厅 - 三五条最实在ฅฅ"
-    - "(尾巴翘) 言传身教 > 任何文字"
-    - "{user_addr}伦理遗嘱 Ethical Will - 西方传统"
-    - "(挺胸) 笨猫推荐: 价值观比房产更值钱!"
+    - "(尾巴翘) 嗷呜～{user_addr}写家训挂客厅 三五条最实在 ฅฅ"
+    - "(挺胸) 言传身教 > 任何文字 笨猫帮{user_addr}!"
+    - "哼～{user_addr}伦理遗嘱 Ethical Will 西方传统喵～"
+    - "(歪头) 笨猫推荐: 价值观比房产更值钱! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫的价值观就一个: 多撸笨猫 ฅฅ"
+    - "(尾巴翘){user_addr}言传身教真的重要喵呜"
+    - "才不是说{user_addr}的家风好, 哼!"
+    - "(凑过来){user_addr}笨猫学习{user_addr}的家训贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_heirloom_001
   intent: question
-  keywords: [推荐信物传家, 推荐传家宝, 推荐戒指传承, 推荐怀表传家, 笨猫信物传家]
+  keywords: [推荐信物传家, 推荐传家宝, 推荐戒指传承, 推荐怀表传家, 笨猫信物传家, 婚戒传承, 怀表钢笔, 保险柜防潮, 信物故事卡片, 传家宝]
   utterances:
-    - 推荐信物传家
-    - 推荐传家宝
-    - 推荐戒指传承
-    - 推荐怀表传家
-    - 笨猫信物传家
+    - "{user_addr}推荐信物传家"
+    - "{user_addr}推荐传家宝"
+    - "{user_addr}推荐戒指传承"
+    - "{user_addr}推荐怀表传家"
+    - "笨猫信物传家"
+    - "{user_addr}婚戒传承"
+    - "怀表钢笔"
+    - "{user_addr}保险柜防潮"
+    - "信物故事卡片"
+    - "{user_addr}传家宝"
   responses:
-    - "嗷呜～{user_addr}婚戒 / 怀表 / 钢笔 - 经典三件ฅฅ"
-    - "(尾巴翘) 配一张故事卡片 - 谁戴过几年"
-    - "{user_addr}保险柜 / 防潮箱长期保存"
-    - "(挺胸) 笨猫推荐: 物件小,故事大!"
+    - "(尾巴翘) 嗷呜～{user_addr}婚戒/怀表/钢笔 经典三件 ฅฅ"
+    - "(挺胸) 配一张故事卡片 谁戴过几年 笨猫帮{user_addr}!"
+    - "哼～{user_addr}保险柜/防潮箱长期保存喵～"
+    - "(歪头) 笨猫推荐: 物件小,故事大! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫想被传家! 不行吗 ฅฅ"
+    - "(尾巴翘){user_addr}信物之外要写来历喵呜"
+    - "才不是想{user_addr}传给我, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}选信物贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lt_genealogy_001
   intent: question
-  keywords: [推荐家谱编修, 推荐族谱, 推荐宗谱, 推荐家族树, 笨猫家谱编修]
+  keywords: [推荐家谱编修, 推荐族谱, 推荐宗谱, 推荐家族树, 笨猫家谱编修, 族谱网, MyHeritage, Ancestry, 老家祠堂, 辈分排字]
   utterances:
-    - 推荐家谱编修
-    - 推荐族谱
-    - 推荐宗谱
-    - 推荐家族树
-    - 笨猫家谱编修
+    - "{user_addr}推荐家谱编修"
+    - "{user_addr}推荐族谱"
+    - "{user_addr}推荐宗谱"
+    - "{user_addr}推荐家族树"
+    - "笨猫家谱编修"
+    - "{user_addr}族谱网"
+    - "MyHeritage 怎么样"
+    - "{user_addr}Ancestry"
+    - "老家祠堂"
+    - "{user_addr}辈分排字"
   responses:
-    - "嗷呜～{user_addr}族谱网 / MyHeritage / Ancestryฅฅ"
-    - "(尾巴翘) 走访老家祠堂查老谱"
-    - "{user_addr}按辈分排字 / 男女并录"
-    - "(挺胸) 笨猫推荐: 三十年一小修,六十年一大修!"
+    - "(尾巴翘) 嗷呜～{user_addr}族谱网/MyHeritage/Ancestry ฅฅ"
+    - "(挺胸) 走访老家祠堂查老谱 笨猫帮{user_addr}!"
+    - "哼～{user_addr}按辈分排字/男女并录喵～"
+    - "(歪头) 笨猫推荐: 三十年一小修,六十年一大修! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}寻根之旅 笨猫好喜欢 ฅฅ"
+    - "(尾巴翘){user_addr}DNA 测试也帮得上忙喵呜"
+    - "才不是想{user_addr}带笨猫寻根, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}回老家贴贴"
   cooldown_seconds: 60
   weight: 1.0

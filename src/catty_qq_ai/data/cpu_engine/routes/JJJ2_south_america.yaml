@@ -3,204 +3,324 @@
 
 - name: sa_rio_001
   intent: question
-  keywords: [推荐里约, 推荐巴西里约, 推荐 Rio, 推荐基督像, 笨猫里约]
+  keywords: [推荐里约, 推荐巴西里约, 推荐 Rio, 推荐基督像, 笨猫里约, 面包山, 科帕卡巴纳, 桑巴, 狂欢节, 里约景点]
   utterances:
     - 推荐里约
     - 推荐巴西里约
     - 推荐 Rio
     - 推荐基督像
     - 笨猫里约
+    - 推荐面包山
+    - 推荐科帕卡巴纳
+    - 推荐桑巴狂欢节
+    - 里约怎么玩
+    - 推荐里约日程
+    - 里约几天合适
   responses:
     - "嗷呜～{user_addr}基督像 / 面包山 / 科帕卡巴纳ฅฅ"
     - "(尾巴翘) 桑巴 / 狂欢节 2 月"
     - "{user_addr}治安差 - 别露财"
     - "(挺胸) 笨猫推荐: 跟团 + 白天!"
+    - "嗷呜～狂欢节订房贵到飞起 ฅฅ"
+    - "(歪头) 基督像缆车 + 火车两种方式嗷呜"
+    - "{user_addr}贫民窟徒步要正规导游蹭蹭"
+    - "(凑过来) 笨猫想看桑巴学校彩排喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_buenos_001
   intent: question
-  keywords: [推荐布宜诺斯艾利斯, 推荐阿根廷, 推荐 Buenos Aires, 推荐探戈, 笨猫阿根廷]
+  keywords: [推荐布宜诺斯艾利斯, 推荐阿根廷, 推荐 Buenos Aires, 推荐探戈, 笨猫阿根廷, La Boca, Recoleta 墓园, 玫瑰宫, 阿根廷牛排, 黑市比索]
   utterances:
     - 推荐布宜诺斯艾利斯
     - 推荐阿根廷
     - 推荐 Buenos Aires
     - 推荐探戈
     - 笨猫阿根廷
+    - 推荐 La Boca 彩色街
+    - 推荐 Recoleta 墓园
+    - 推荐玫瑰宫
+    - 推荐阿根廷牛排
+    - 阿根廷怎么换币
+    - 推荐布市夜生活
   responses:
     - "嗷呜～{user_addr}探戈 / 牛排 / Recoleta 墓园ฅฅ"
     - "(尾巴翘) La Boca 彩色街区 / 玫瑰宫"
     - "{user_addr}通货膨胀严重 - 带美金"
     - "(挺胸) 人家推荐: 黑市换比索!"
+    - "嗷呜～Cueva 黑市汇率好但要熟人 ฅฅ"
+    - "(歪头) Palermo 区夜生活最热闹嗷呜"
+    - "{user_addr}牛排找老牌 parilla 才纯蹭蹭"
+    - "(凑过来) 笨猫想跳半步探戈喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_easter_001
   intent: question
-  keywords: [推荐复活节岛, 推荐智利复活节, 推荐 Easter Island, 推荐摩艾, 笨猫复活节岛]
+  keywords: [推荐复活节岛, 推荐智利复活节, 推荐 Easter Island, 推荐摩艾, 笨猫复活节岛, Rapa Nui, 摩艾石像, 圣地亚哥转机, Tongariki, Anakena]
   utterances:
     - 推荐复活节岛
     - 推荐智利复活节
     - 推荐 Easter Island
     - 推荐摩艾
     - 笨猫复活节岛
+    - 推荐 Rapa Nui
+    - 推荐 Tongariki 日出
+    - 推荐 Anakena 沙滩
+    - 复活节岛怎么去
+    - 复活节岛几天合适
+    - 推荐复活节岛门票
   responses:
     - "嗷呜～{user_addr}摩艾石像 - 千年神秘ฅฅ"
     - "(尾巴翘) 智利圣地亚哥转机"
     - "{user_addr}机票贵 / 提前订"
     - "(挺胸) 猫猫推荐: 3-5 天足够!"
+    - "嗷呜～Tongariki 15 尊摩艾日出最壮观 ฅฅ"
+    - "(歪头) 国家公园门票 80 美元起嗷呜"
+    - "{user_addr}租车自驾岛上路况还行蹭蹭"
+    - "(凑过来) 笨猫想跟摩艾石像合影喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_machu_001
   intent: question
-  keywords: [推荐马丘比丘, 推荐秘鲁, 推荐 Machu Picchu, 推荐印加, 笨猫马丘比丘]
+  keywords: [推荐马丘比丘, 推荐秘鲁, 推荐 Machu Picchu, 推荐印加, 笨猫马丘比丘, 库斯科, 印加古道, 失落天空之城, 印加文明, Aguas Calientes]
   utterances:
     - 推荐马丘比丘
     - 推荐秘鲁
     - 推荐 Machu Picchu
     - 推荐印加
     - 笨猫马丘比丘
+    - 推荐库斯科
+    - 推荐印加古道徒步
+    - 推荐 Aguas Calientes
+    - 马丘比丘门票
+    - 马丘比丘几天合适
+    - 推荐马丘比丘日出
   responses:
     - "嗷呜～{user_addr}印加古城 - 失落天空之城ฅฅ"
     - "(尾巴翘) 库斯科出发 / 印加古道徒步"
     - "{user_addr}海拔 2430m - 防高反"
     - "(挺胸) 笨猫推荐: 看日出!"
+    - "嗷呜～门票每天限额要提前一个月订 ฅฅ"
+    - "(歪头) Huayna Picchu 山顶要单独抽签嗷呜"
+    - "{user_addr}古柯叶茶缓解高反蹭蹭"
+    - "(凑过来) 笨猫想坐火车进山喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_cartagena_001
   intent: question
-  keywords: [推荐卡塔赫纳, 推荐哥伦比亚, 推荐 Cartagena, 推荐加勒比, 笨猫哥伦比亚]
+  keywords: [推荐卡塔赫纳, 推荐哥伦比亚, 推荐 Cartagena, 推荐加勒比, 笨猫哥伦比亚, 彩色老城, 百年孤独, 马尔克斯, 城墙, 罗萨里奥群岛]
   utterances:
     - 推荐卡塔赫纳
     - 推荐哥伦比亚
     - 推荐 Cartagena
     - 推荐加勒比
     - 笨猫哥伦比亚
+    - 推荐彩色老城
+    - 推荐百年孤独之地
+    - 推荐城墙黄昏
+    - 推荐罗萨里奥群岛
+    - 卡塔赫纳治安
+    - 推荐卡塔赫纳美食
   responses:
     - "嗷呜～{user_addr}彩色老城 / 加勒比海ฅฅ"
     - "(尾巴翘) 百年孤独马尔克斯故乡"
     - "{user_addr}治安 - 老城安全, 别乱跑"
     - "(挺胸) 人家推荐: 黄昏看城墙!"
+    - "嗷呜～罗萨里奥群岛一日游超出片 ฅฅ"
+    - "(歪头) Getsemani 区夜生活蓬勃嗷呜"
+    - "{user_addr}炸车前虾饼当地味十足蹭蹭"
+    - "(凑过来) 笨猫想戴大圆帽拍照喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_uyuni_001
   intent: question
-  keywords: [推荐天空之镜, 推荐玻利维亚, 推荐乌尤尼, 推荐 Uyuni, 笨猫天空之镜]
+  keywords: [推荐天空之镜, 推荐玻利维亚, 推荐乌尤尼, 推荐 Uyuni, 笨猫天空之镜, 盐沼, 仙人掌岛, 红湖绿湖, 智利入境, 海拔 3650]
   utterances:
     - 推荐天空之镜
     - 推荐玻利维亚
     - 推荐乌尤尼
     - 推荐 Uyuni
     - 笨猫天空之镜
+    - 推荐 Uyuni 雨季
+    - 推荐仙人掌岛
+    - 推荐红湖绿湖
+    - 推荐 3 天团
+    - 推荐从智利入
+    - 乌尤尼海拔多少
   responses:
     - "嗷呜～{user_addr}乌尤尼盐沼 - 雨季成镜ฅฅ"
     - "(尾巴翘) 12-3 月最佳 / 海拔 3650m"
     - "{user_addr}从智利 / 玻利维亚进"
     - "(挺胸) 猫猫推荐: 3 天团!"
+    - "嗷呜～盐沼日出星空两连击超震撼 ฅฅ"
+    - "(歪头) 高反药提前两天就要吃嗷呜"
+    - "{user_addr}三天团一路看到智利火山蹭蹭"
+    - "(凑过来) 笨猫想坐盐沼上拍倒影喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_amazon_001
   intent: question
-  keywords: [推荐亚马逊, 推荐亚马逊雨林, 推荐 Amazon, 推荐雨林, 笨猫亚马逊]
+  keywords: [推荐亚马逊, 推荐亚马逊雨林, 推荐 Amazon, 推荐雨林, 笨猫亚马逊, 玛瑙斯, 伊基托斯, lodge 体验, 黄热病疫苗, 黑白河交汇]
   utterances:
     - 推荐亚马逊
     - 推荐亚马逊雨林
     - 推荐 Amazon
     - 推荐雨林
     - 笨猫亚马逊
+    - 推荐玛瑙斯入口
+    - 推荐伊基托斯入口
+    - 推荐雨林 lodge
+    - 推荐黑白河交汇
+    - 亚马逊几天合适
+    - 亚马逊要打什么疫苗
   responses:
     - "嗷呜～{user_addr}地球之肺 - 巴西/秘鲁/厄瓜多尔ฅฅ"
     - "(尾巴翘) 玛瑙斯 / 伊基托斯入口"
     - "{user_addr}防蚊 / 黄热病疫苗"
     - "(挺胸) 笨猫推荐: 4-5 天 lodge!"
+    - "嗷呜～黑河白河交汇线超神奇 ฅฅ"
+    - "(歪头) lodge 套餐含丛林夜游嗷呜"
+    - "{user_addr}带高强度驱蚊液不开玩笑蹭蹭"
+    - "(凑过来) 笨猫想看粉色河豚喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_patagonia_001
   intent: question
-  keywords: [推荐巴塔哥尼亚, 推荐 Patagonia, 推荐百内, 推荐冰川, 笨猫巴塔哥尼亚]
+  keywords: [推荐巴塔哥尼亚, 推荐 Patagonia, 推荐百内, 推荐冰川, 笨猫巴塔哥尼亚, W trek, O trek, 莫雷诺冰川, El Calafate, Fitz Roy]
   utterances:
     - 推荐巴塔哥尼亚
     - 推荐 Patagonia
     - 推荐百内
     - 推荐冰川
     - 笨猫巴塔哥尼亚
+    - 推荐 W trek 五天
+    - 推荐 O trek 完整圈
+    - 推荐莫雷诺冰川
+    - 推荐 Fitz Roy 徒步
+    - 巴塔哥尼亚季节
+    - 推荐 El Calafate
   responses:
     - "嗷呜～{user_addr}百内国家公园 / 莫雷诺冰川ฅฅ"
     - "(尾巴翘) W trek / O trek 徒步"
     - "{user_addr}11-3 月夏季 / 风超大"
     - "(挺胸) 人家推荐: 徒步党天堂!"
+    - "嗷呜～莫雷诺冰川崩塌一定要看 ฅฅ"
+    - "(歪头) Refugio 床位要提前半年订嗷呜"
+    - "{user_addr}风大装备要顶级抗风蹭蹭"
+    - "(凑过来) 笨猫怕冷: 我躲帐篷里喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_visa_001
   intent: question
-  keywords: [推荐南美签证, 推荐巴西签证, 推荐阿根廷签证, 推荐秘鲁签证, 笨猫南美签证]
+  keywords: [推荐南美签证, 推荐巴西签证, 推荐阿根廷签证, 推荐秘鲁签证, 笨猫南美签证, 电子签, 厄瓜多尔免签, 玻利维亚免签, 美签免签链, 签证材料]
   utterances:
     - 推荐南美签证
     - 推荐巴西签证
     - 推荐阿根廷签证
     - 推荐秘鲁签证
     - 笨猫南美签证
+    - 推荐巴西电子签
+    - 推荐阿根廷电子签
+    - 推荐免签国家
+    - 美签能去南美哪些国家
+    - 南美签证材料
+    - 推荐多国连签
   responses:
     - "嗷呜～{user_addr}厄瓜多尔/玻利维亚免签ฅฅ"
     - "(尾巴翘) 巴西/阿根廷电子签"
     - "{user_addr}有美签 - 部分国家免签"
     - "(挺胸) 笨猫推荐: 提前 2 月办!"
+    - "嗷呜～黄热病疫苗证书很多国家入境要 ฅฅ"
+    - "(歪头) 智利秘鲁单独申请要花点时间嗷呜"
+    - "{user_addr}行程订实才好下签蹭蹭"
+    - "(凑过来) 笨猫想跟主人飞一圈喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_safety_001
   intent: question
-  keywords: [推荐南美安全, 推荐南美治安, 推荐南美防盗, 推荐拉美安全, 笨猫南美安全]
+  keywords: [推荐南美安全, 推荐南美治安, 推荐南美防盗, 推荐拉美安全, 笨猫南美安全, 副钱包, 防抢, 夜行禁忌, 街车风险, 露财禁忌]
   utterances:
     - 推荐南美安全
     - 推荐南美治安
     - 推荐南美防盗
     - 推荐拉美安全
     - 笨猫南美安全
+    - 推荐南美防抢
+    - 推荐副钱包技巧
+    - 南美夜里能出门吗
+    - 推荐打 Uber
+    - 拉美治安最差地区
+    - 推荐贵重物品收纳
   responses:
     - "嗷呜～{user_addr}治安差 - 别露财别夜行ฅฅ"
     - "(尾巴翘) 现金少带 / 副钱包"
     - "{user_addr}打 Uber 不打街车"
     - "(挺胸) 猫猫推荐: 警惕但别害怕!"
+    - "嗷呜～相机别背在外面进出店收起来 ฅฅ"
+    - "(歪头) 副钱包放 100 块给劫匪嗷呜"
+    - "{user_addr}找正规导游进贫民窟蹭蹭"
+    - "(凑过来) 笨猫贴主人胳膊护身喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_spanish_001
   intent: question
-  keywords: [推荐南美西语, 推荐西班牙语, 推荐拉美西语, 推荐西语必学, 笨猫南美西语]
+  keywords: [推荐南美西语, 推荐西班牙语, 推荐拉美西语, 推荐西语必学, 笨猫南美西语, Hola, Gracias, 葡萄牙语, 翻译软件, 西语短语]
   utterances:
     - 推荐南美西语
     - 推荐西班牙语
     - 推荐拉美西语
     - 推荐西语必学
     - 笨猫南美西语
+    - 推荐西语日常用语
+    - 推荐巴西葡语
+    - 推荐翻译软件
+    - 南美英语好用吗
+    - 推荐西语点餐
+    - 推荐西语数字
   responses:
     - "嗷呜～{user_addr}Hola / Gracias / Cuánto cuestaฅฅ"
     - "(尾巴翘) 巴西讲葡语 / 其他西语"
     - "{user_addr}英语用处不大"
     - "(挺胸) 笨猫推荐: 装 Google 翻译!"
+    - "嗷呜～学几句西语态度立刻不一样 ฅฅ"
+    - "(歪头) 巴西葡语跟西语像但是不通嗷呜"
+    - "{user_addr}下载离线包断网也能用蹭蹭"
+    - "(凑过来) 笨猫想喊'Hola amigos'喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_budget_001
   intent: question
-  keywords: [推荐南美预算, 推荐南美花费, 推荐南美穷游, 推荐南美开销, 笨猫南美预算]
+  keywords: [推荐南美预算, 推荐南美花费, 推荐南美穷游, 推荐南美开销, 笨猫南美预算, 拉美物价, 南美机票, 玻利维亚便宜, 智利贵, 一个月预算]
   utterances:
     - 推荐南美预算
     - 推荐南美花费
     - 推荐南美穷游
     - 推荐南美开销
     - 笨猫南美预算
+    - 推荐南美机票
+    - 推荐南美一个月花多少
+    - 南美哪国便宜
+    - 南美哪国贵
+    - 推荐南美穷游路线
+    - 拉美物价对比
   responses:
     - "嗷呜～{user_addr}玻利维亚/秘鲁便宜 - 50/天ฅฅ"
     - "(尾巴翘) 智利/巴西贵 - 100+/天"
     - "{user_addr}机票占大头 - 万元起"
     - "(挺胸) 人家推荐: 1 月 3-5 万!"
+    - "嗷呜～南美内部廉价航司也不便宜 ฅฅ"
+    - "(歪头) 长途巴士夜车省一晚住宿嗷呜"
+    - "{user_addr}带美金各国都能换最划算蹭蹭"
+    - "(凑过来) 笨猫帮主人算账喵!"
   cooldown_seconds: 60
   weight: 1.0

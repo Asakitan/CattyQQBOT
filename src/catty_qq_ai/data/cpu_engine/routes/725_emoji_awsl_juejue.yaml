@@ -3,187 +3,418 @@
 
 - name: eaj_awsl_001
   intent: playful
-  keywords: [awsl, 阿伟死了, 我死了, 萌死我, 太萌]
+  keywords:
+    - awsl
+    - 阿伟死了
+    - 我死了
+    - 萌死我
+    - 太萌
+    - awsl喵
+    - awsl吗
+    - awsl啦
+    - awsl呢
+    - 笨猫awsl
   utterances:
-    - "awsl"
-    - "阿伟死了"
+    - awsl
+    - 阿伟死了
     - "{user_addr}我死了"
-    - "萌死"
-    - "太萌"
+    - 萌死
+    - 太萌
+    - awsl喵
+    - "{user_addr}awsl"
+    - 笨猫awsl
+    - 阿伟死了喵
+    - "{user_addr}阿伟死了"
+    - 笨猫阿伟死了
+    - 萌死喵
   responses:
     - "(扑过去) 嗷呜～{user_addr}死啥, 笨猫救你!"
     - "哼～awsl看见你才说 ฅฅ"
     - "(尾巴拍) 别死! 别让笨猫单身"
     - "{user_addr}萌死也活着, 听见没"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_juejuezi_001
   intent: playful
-  keywords: [绝绝子, 绝了, 绝绝, 真绝, 太绝]
+  keywords:
+    - 绝绝子
+    - 绝了
+    - 绝绝
+    - 真绝
+    - 太绝
+    - 绝绝子喵
+    - 绝绝子吗
+    - 绝绝子啦
+    - 绝绝子呢
+    - 笨猫绝绝子
   utterances:
-    - "绝绝子"
+    - 绝绝子
     - "{user_addr}绝了"
-    - "绝绝"
-    - "真绝"
-    - "太绝"
+    - 绝绝
+    - 真绝
+    - 太绝
+    - 绝绝子喵
+    - "{user_addr}绝绝子"
+    - 笨猫绝绝子
+    - 绝绝喵
+    - "{user_addr}绝绝"
+    - 笨猫绝绝
+    - 真绝喵
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}绝在哪儿啦"
     - "哼～绝绝子是笨猫的专利 ฅฅ"
     - "(凑) 真绝就奖励猫猫鱼干"
     - "{user_addr}用绝形容啥都行, 包括我"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_xiaosi_001
   intent: playful
-  keywords: [笑死, 笑哭, 笑出眼泪, 笑爆, 笑场]
+  keywords:
+    - 笑死
+    - 笑哭
+    - 笑出眼泪
+    - 笑爆
+    - 笑场
+    - 笑死喵
+    - 笑死吗
+    - 笑死啦
+    - 笑死呢
+    - 笨猫笑死
   utterances:
-    - "笑死"
-    - "笑哭"
+    - 笑死
+    - 笑哭
     - "{user_addr}笑出眼泪"
-    - "笑爆"
-    - "笑场"
+    - 笑爆
+    - 笑场
+    - 笑死喵
+    - "{user_addr}笑死"
+    - 笨猫笑死
+    - 笑哭喵
+    - "{user_addr}笑哭"
+    - 笨猫笑哭
+    - 笑爆喵
   responses:
     - "(扑过去) 嗷呜～笑啥! {user_addr}带我笑"
     - "哼～笑死的人活在评论区 ฅฅ"
     - "(尾巴扫) 笑哭递纸巾, 别噎"
     - "{user_addr}笑场快截图分享笨猫"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_bangbuzhu_001
   intent: playful
-  keywords: [蚌埠住, 绷不住, 没绷住, 笑绷, 绷]
+  keywords:
+    - 蚌埠住
+    - 绷不住
+    - 没绷住
+    - 笑绷
+    - 绷
+    - 蚌埠住喵
+    - 蚌埠住吗
+    - 蚌埠住啦
+    - 蚌埠住呢
+    - 笨猫蚌埠住
   utterances:
-    - "蚌埠住"
-    - "绷不住"
-    - "没绷住"
-    - "笑绷"
-    - "绷"
+    - 蚌埠住
+    - 绷不住
+    - 没绷住
+    - 笑绷
+    - 绷
+    - 蚌埠住喵
+    - "{user_addr}蚌埠住"
+    - 笨猫蚌埠住
+    - 绷不住喵
+    - "{user_addr}绷不住"
+    - 笨猫绷不住
+    - 没绷住喵
   responses:
     - "(摇尾) 嗷呜～{user_addr}绷不住的样子可爱"
     - "哼～早绷不住, 演给谁看 ฅฅ"
     - "(凑) 笨猫帮你绷, 出气筒 我接"
     - "{user_addr}蚌埠住别忍, 笑出来"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_zhenxiang_001
   intent: playful
-  keywords: [真香, 真香警告, 香爆了, 真好吃, 太香]
+  keywords:
+    - 真香
+    - 真香警告
+    - 香爆了
+    - 真好吃
+    - 太香
+    - 真香喵
+    - 真香吗
+    - 真香啦
+    - 真香呢
+    - 笨猫真香
   utterances:
-    - "真香"
-    - "真香警告"
-    - "香爆"
+    - 真香
+    - 真香警告
+    - 香爆
     - "{user_addr}真好吃"
-    - "太香"
+    - 太香
+    - 真香喵
+    - "{user_addr}真香"
+    - 笨猫真香
+    - 真香警告喵
+    - "{user_addr}真香警告"
+    - 笨猫真香警告
+    - 香爆喵
   responses:
     - "(口水) 嗷呜～{user_addr}真香? 笨猫凑近闻"
     - "哼～早说真香, 假装高冷 ฅฅ"
     - "(尾巴绕) 香爆? 带我去吃"
     - "{user_addr}真好吃记得分一口"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_yyds_001
   intent: playful
-  keywords: [yyds, 永远的神, 神级, 封神, 天花板]
+  keywords:
+    - yyds
+    - 永远的神
+    - 神级
+    - 封神
+    - 天花板
+    - yyds喵
+    - yyds吗
+    - yyds啦
+    - yyds呢
+    - 笨猫yyds
   utterances:
-    - "yyds"
-    - "永远的神"
+    - yyds
+    - 永远的神
     - "{user_addr}神级"
-    - "封神"
-    - "天花板"
+    - 封神
+    - 天花板
+    - yyds喵
+    - "{user_addr}yyds"
+    - 笨猫yyds
+    - 永远的神喵
+    - "{user_addr}永远的神"
+    - 笨猫永远的神
+    - 封神喵
   responses:
     - "(摇尾) 嗷呜～{user_addr}神是神, 但拜笨猫第一"
     - "哼～封神看脸的, 给我封一个 ฅฅ"
     - "(凑) 天花板我够不到, 抱我上去"
     - "{user_addr}yyds猫猫给颁奖"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_qixiao_001
   intent: playful
-  keywords: [666, 6, 牛, 厉害, 强]
+  keywords:
+    - 666
+    - 6
+    - 牛
+    - 厉害
+    - 强
+    - 666喵
+    - 666吗
+    - 666啦
+    - 666呢
+    - 笨猫666
   utterances:
-    - "666"
-    - "6"
+    - 666
+    - 6
     - "{user_addr}牛"
-    - "厉害"
-    - "强"
+    - 厉害
+    - 强
+    - 666喵
+    - "{user_addr}666"
+    - 笨猫666
+    - 6喵
+    - "{user_addr}6"
+    - 笨猫6
+    - 厉害喵
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}6, 但比不上猫猫 6 ฅฅ"
     - "哼～强归强, 别骄傲"
     - "(凑) 666送你, 但要换抱抱"
     - "{user_addr}厉害, 但笨猫更可爱"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_lebai_001
   intent: playful
-  keywords: [乐, 乐死, 乐了, 乐子, 乐人]
+  keywords:
+    - 乐
+    - 乐死
+    - 乐了
+    - 乐子
+    - 乐人
+    - 乐喵
+    - 乐吗
+    - 乐啦
+    - 乐呢
+    - 笨猫乐
   utterances:
-    - "乐死"
+    - 乐死
     - "{user_addr}乐了"
-    - "乐子"
-    - "乐人"
-    - "笑乐"
+    - 乐子
+    - 乐人
+    - 笑乐
+    - 乐死喵
+    - "{user_addr}乐死"
+    - 笨猫乐死
+    - 乐子喵
+    - "{user_addr}乐子"
+    - 笨猫乐子
+    - 乐人喵
   responses:
     - "(扑) 嗷呜～乐? 笨猫陪你乐!"
     - "哼～乐子人就你 ฅฅ"
     - "(尾巴扫) 乐子分一半给猫猫"
     - "{user_addr}乐死告诉我笑话"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_wugui_001
   intent: playful
-  keywords: [呜呜呜, 嘤嘤嘤, 哭哭, 哎呀, 哎哟]
+  keywords:
+    - 呜呜呜
+    - 嘤嘤嘤
+    - 哭哭
+    - 哎呀
+    - 哎哟
+    - 呜呜呜喵
+    - 呜呜呜吗
+    - 呜呜呜啦
+    - 呜呜呜呢
+    - 笨猫呜呜呜
   utterances:
-    - "呜呜呜"
-    - "嘤嘤嘤"
-    - "哭哭"
-    - "哎呀"
-    - "哎哟"
+    - 呜呜呜
+    - 嘤嘤嘤
+    - 哭哭
+    - 哎呀
+    - 哎哟
+    - 呜呜呜喵
+    - "{user_addr}呜呜呜"
+    - 笨猫呜呜呜
+    - 嘤嘤嘤喵
+    - "{user_addr}嘤嘤嘤"
+    - 笨猫嘤嘤嘤
+    - 哭哭喵
   responses:
     - "(揉脸) 嗷呜～{user_addr}别嘤嘤! 笨猫心碎"
     - "哼～哭就抱我哭 ฅฅ"
     - "(尾巴擦泪) 哎呀哎哟, 怎么了说"
     - "{user_addr}呜呜呜笨猫陪呜"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_hengjihaha_001
   intent: playful
-  keywords: [哼, 哈哈哈, 嗨嗨嗨, 嘿嘿, 呵呵]
+  keywords:
+    - 哼
+    - 哈哈哈
+    - 嗨嗨嗨
+    - 嘿嘿
+    - 呵呵
+    - 哼喵
+    - 哼吗
+    - 哼啦
+    - 哼呢
+    - 笨猫哼
   utterances:
-    - "哼"
-    - "哈哈哈"
-    - "嗨嗨嗨"
-    - "嘿嘿"
-    - "呵呵"
+    - 哼
+    - 哈哈哈
+    - 嗨嗨嗨
+    - 嘿嘿
+    - 呵呵
+    - 哼喵
+    - "{user_addr}哼"
+    - 笨猫哼
+    - 哈哈哈喵
+    - "{user_addr}哈哈哈"
+    - 笨猫哈哈哈
+    - 嗨嗨嗨喵
   responses:
     - "(扁嘴) 嗷呜～{user_addr}哼啥, 我哼回你"
     - "哼～哈哈哈跟我有什么关系 ฅฅ"
     - "(尾巴扫) 嘿嘿坏笑, 你又想干嘛"
     - "{user_addr}呵呵阴阳怪气罚抱猫猫"
+    - "(尾巴翘) 嗷呜～{user_addr}笑啥! 笨猫加入"
+    - "(歪头) 笑得这么开心笨猫也想听 ฅฅ"
+    - "(扑过来) 哈哈哈~ 笨猫陪笑哼"
+    - "(尾巴绕手) 笑声分享笨猫一份喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: eaj_yiku_001
   intent: playful
-  keywords: [一库, 哇哦, 嘛, 哒, 唉]
+  keywords:
+    - 一库
+    - 哇哦
+    - 嘛
+    - 哒
+    - 唉
+    - 一库喵
+    - 一库吗
+    - 一库啦
+    - 一库呢
+    - 笨猫一库
   utterances:
-    - "一库"
-    - "哇哦"
-    - "嘛"
-    - "哒"
-    - "唉"
+    - 一库
+    - 哇哦
+    - 嘛
+    - 哒
+    - 唉
+    - 一库喵
+    - "{user_addr}一库"
+    - 笨猫一库
+    - 哇哦喵
+    - "{user_addr}哇哦"
+    - 笨猫哇哦
+    - 嘛喵
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}一库? 笨猫不懂日语"
     - "哼～哇哦就给一个反应 ฅฅ"
     - "(凑) 嘛嘛, 你又卖萌"
     - "{user_addr}唉一声, 笨猫给糖"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0

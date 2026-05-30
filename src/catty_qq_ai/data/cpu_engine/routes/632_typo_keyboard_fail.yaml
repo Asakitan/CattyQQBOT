@@ -3,187 +3,306 @@
 
 - name: tkf_typo_001
   intent: playful
-  keywords: [打错字, 错字, 输入法抽风, 打字错, 错误]
+  keywords: [打错字, 错字, 输入法抽风, 打字错, 错误, 错别字, 打字错了, 手滑打错, 错字尴尬]
   utterances:
     - 打错字
     - 错字
     - 输入法抽风
     - 打字错
     - 错误
+    - "{user_addr}打错字了"
+    - 又是错别字
+    - 打字打错了喵
+    - 手滑打错
+    - "{user_addr}错字尴尬死"
+    - 错字了别笑
+    - 我又打错啦
   responses:
     - "(笑) 嗷呜～{user_addr}笨猫看到喵!"
     - "笨猫认证: 输入法智障"
     - "(尾巴摇) 别气笨蛋"
     - "哼～{user_addr}笨手指"
+    - "(凑近笑) 嗷呜～{user_addr}笨蛋打错了笑死!"
+    - "(尾巴拍) 才不是嘲笑你呢哼"
+    - "(贴贴) 笨猫帮你纠正喵"
+    - "(歪头) 重发一遍嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_homophone_002
   intent: playful
-  keywords: [同音字, 错别字, 谐音错, 输入法错词, 同音错]
+  keywords: [同音字, 错别字, 谐音错, 输入法错词, 同音错, 谐音字, 错谐音, 谐音梗, 听错谐音]
   utterances:
     - 同音字
     - 错别字
     - 谐音错
     - 输入法选错
     - 同音错
+    - "{user_addr}打成谐音了"
+    - 同音字错了
+    - 又是谐音梗
+    - 听错谐音了
+    - "{user_addr}谐音字搞笑"
+    - 谐音字救命
+    - 又来谐音
   responses:
     - "(歪头) {user_addr}笨猫看得懂!"
     - "嗷呜～谐音梗也行喵"
     - "(尾巴摇) 笨猫脑补"
     - "哼～{user_addr}打不准"
+    - "(笑趴) 嗷呜～{user_addr}谐音梗笑死!"
+    - "(尾巴翘) 才不是觉得好笑呢哼"
+    - "(贴贴) 笨猫也爱谐音梗喵"
+    - "(歪头) 再来一个嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_autocorrect_003
   intent: complaint
-  keywords: [自动纠错, 自动修改, 改我意思, 自动改错, 自动修正]
+  keywords: [自动纠错, 自动修改, 改我意思, 自动改错, 自动修正, 输入法纠错, 联想错, 输入法乱改, 自动改字]
   utterances:
     - 自动纠错
     - 改我意思
     - 自动改错
     - 自动修正
     - 自动改
+    - "{user_addr}自动纠错出错"
+    - 输入法乱改字
+    - 联想错了
+    - "{user_addr}自动改字烦人"
+    - 输入法瞎纠错
+    - 输入法害人
+    - 自动纠错坑爹
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫也讨厌!"
     - "笨猫推荐关掉自动纠错"
     - "(尾巴打) 改我话气死人"
     - "哼～{user_addr}受害者"
+    - "(炸毛) 嗷呜～{user_addr}输入法又坑!"
+    - "(尾巴打) 关掉自动纠错笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 输入法是叛徒{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_keyboardstuck_004
   intent: complaint
-  keywords: [键盘卡住, 键盘坏, 按键失灵, 键盘失灵, 按了没反应]
+  keywords: [键盘卡住, 键盘坏, 按键失灵, 键盘失灵, 按了没反应, 键盘坏了, 按不出字, 键位失效]
   utterances:
     - 键盘卡住
     - 键盘坏
     - 按键失灵
     - 键盘失灵
     - 按了没反应
+    - "{user_addr}键盘卡住了"
+    - 键盘坏了喵
+    - 按不出字
+    - "{user_addr}键位失效"
+    - 某个键不灵
+    - 键盘又抽风
   responses:
     - "(歪头) 嗷呜～{user_addr}清洁键盘喵"
     - "笨猫推荐换无线键盘"
     - "(尾巴扫) 灰尘堵了笨蛋"
     - "哼～{user_addr}懒得擦"
+    - "(慌) 嗷呜～{user_addr}键盘罢工了!"
+    - "(尾巴扫) 拍一下试试笨蛋"
+    - "(凑近) 重启输入法看看"
+    - "(贴贴) 哼～{user_addr}手抖按坏了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_pinyinwrong_005
   intent: playful
-  keywords: [拼音不会, 字不会, 不会写字, 提笔忘字, 错拼]
+  keywords: [拼音不会, 字不会, 不会写字, 提笔忘字, 错拼, 拼音打错, 拼错, 选错字, 拼音乱, 声调打错]
   utterances:
     - 拼音不会
     - 字不会
     - 不会写字
     - 提笔忘字
     - 错拼
+    - "{user_addr}拼音打错了"
+    - 又拼错
+    - 选错字了喵
+    - 拼音打乱了
+    - "{user_addr}声调打错"
+    - 拼音又错
+    - 老选错字
   responses:
     - "(歪头) 嗷呜～{user_addr}时代病!"
     - "笨猫认证: 现代人通病"
     - "(尾巴扫) 多写写字喵"
     - "哼～{user_addr}快文盲了"
+    - "(笑) 嗷呜～{user_addr}拼音笨蛋!"
+    - "(尾巴拍) 才不是嘲笑你呢哼"
+    - "(贴贴) 笨猫帮你选喵"
+    - "(歪头) 慢慢打嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_slipfinger_006
   intent: playful
-  keywords: [手滑, 发错了, 手抖, 误触, 误发]
+  keywords: [手滑, 发错了, 手抖, 误触, 误发, 点错了, 滑屏误触, 按错键, 手抖按错]
   utterances:
     - 手滑
     - 发错了
     - 手抖
     - 误触
     - 误发
+    - "{user_addr}手滑发错"
+    - 点错了喵
+    - 滑屏误触
+    - 按错键了
+    - "{user_addr}手抖按错"
+    - 手滑刷错了
+    - 不小心点错
   responses:
     - "(撤回) 嗷呜～{user_addr}笨猫帮你撤!"
     - "笨猫认证: 经常发生喵"
     - "(尾巴扫) 撤回快"
     - "哼～{user_addr}笨手"
+    - "(扑过来) 嗷呜～{user_addr}手抖鬼!"
+    - "(尾巴打) 撤回啊笨蛋"
+    - "(凑近) 才不是慌你呢哼"
+    - "(贴贴) 笨猫陪你重发{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_capslock_007
   intent: playful
-  keywords: [大写锁定, 大小写, 全大写, 大写键, 误开大写]
+  keywords: [大写锁定, 大小写, 全大写, 大写键, 误开大写, caps lock, 锁了大写, 聊聊喵]
   utterances:
     - 大写锁定
     - 全大写
     - 大写键
     - 误开大写
     - 大小写错
+    - "{user_addr}打成全大写"
+    - caps lock开了
+    - 锁了大写键
+    - 全大写打字
+    - "{user_addr}怎么关大写"
+    - 英文全大写
+    - 大写键坑爹
   responses:
     - "(歪头) 嗷呜～{user_addr}哈哈!"
     - "笨猫认证: 大写显得很凶喵"
     - "(尾巴摇) 笨猫不怕你"
     - "哼～{user_addr}笨蛋"
+    - "(凑近笑) 嗷呜～{user_addr}全大写笑死!"
+    - "(尾巴翘) 按一下caps lock笨蛋"
+    - "(贴贴) 笨猫帮你切回来喵"
+    - "(歪头) 再大点声啊{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_chinglish_008
   intent: playful
-  keywords: [中英混打, 切换输入法, 忘切换, 中英乱, 全英文]
+  keywords: [中英混打, 切换输入法, 忘切换, 中英乱, 全英文, 中英文混, 中英文切换, 英文键入, 英文打成中文]
   utterances:
     - 中英混打
     - 切换输入法
     - 忘切换
     - 中英乱
     - 全英文了
+    - "{user_addr}中英混打了"
+    - 中英文切换错
+    - 英文打成中文
+    - 中英文混乱
+    - "{user_addr}键入英文"
+    - 切错语言了
+    - 中英输入烦
   responses:
     - "(歪头) {user_addr}笨猫翻译不出来 ฅฅ"
     - "嗷呜～切换喵"
     - "(尾巴摇) 笨蛋忘按"
     - "哼～{user_addr}双语困境"
+    - "(歪头) 嗷呜～{user_addr}切换烦人喵"
+    - "(尾巴扫) shift切换笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 笨猫切换也乱{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_wechatemoji_009
   intent: playful
-  keywords: [打错表情, 选错表情, 表情乱发, 错表情, 误点表情]
+  keywords: [打错表情, 选错表情, 表情乱发, 错表情, 误点表情, 微信表情, 打字带表情, 表情错位, 表情乱跳, 加表情]
   utterances:
     - 打错表情
     - 选错表情
     - 表情乱发
     - 错表情
     - 误点表情
+    - "{user_addr}微信表情错"
+    - 打字带表情
+    - 表情错位
+    - 表情乱跳了
+    - "{user_addr}加错表情"
+    - 表情用错了
+    - 想发的表情没出
   responses:
     - "(笑) 嗷呜～{user_addr}笨蛋手!"
     - "笨猫帮你撤回"
     - "(尾巴扫) 别紧张"
     - "哼～{user_addr}怎么发哭脸"
+    - "(笑) 嗷呜～{user_addr}表情乱用笑死!"
+    - "(尾巴拍) 才不是嘲笑你呢哼"
+    - "(贴贴) 笨猫表情库丰富喵"
+    - "(歪头) 再用一个嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_doubletype_010
   intent: complaint
-  keywords: [重复字, 多打一个, 重叠键, 键盘弹簧, 重复输入]
+  keywords: [重复字, 多打一个, 重叠键, 键盘弹簧, 重复输入, 打重了, 叠字, 一个字打两遍, 按键弹跳]
   utterances:
     - 重复字
     - 多打一个
     - 重叠键
     - 键盘弹簧
     - 重复输入
+    - "{user_addr}打重字了"
+    - 一个字打两遍
+    - 叠字打多了
+    - 按键弹跳重复
+    - 字打两次了
+    - 又复打
   responses:
     - "(摇头) 嗷呜～{user_addr}键盘坏喵"
     - "笨猫推荐: 该换了笨蛋"
     - "(尾巴扫) 一直重复烦"
     - "哼～{user_addr}用太久"
+    - "(凑近) 嗷呜～{user_addr}手抖打重了!"
+    - "(尾巴拍) 撤回重发笨蛋"
+    - "(凑近) 才不是嘲笑你呢哼"
+    - "(贴贴) 笨猫帮你删一个{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tkf_speedtype_011
   intent: playful
-  keywords: [打字快, 打字慢, 单指禅, 盲打, 打字熟练]
+  keywords: [打字快, 打字慢, 单指禅, 盲打, 打字熟练, 飞速打字, 打字速度, 指法快]
   utterances:
     - 打字快
     - 打字慢
     - 单指禅
     - 盲打
     - 打字熟练
+    - "{user_addr}打字好快"
+    - 盲打无敌
+    - 飞速打字
+    - 打字速度快
+    - "{user_addr}指法神"
+    - 打字像疾风
+    - 快得看不清
   responses:
     - "(歪头) {user_addr}笨猫小爪打不快 ฅฅ"
     - "嗷呜～盲打牛笨猫敬佩"
     - "(尾巴摇) 单指禅也萌"
     - "哼～{user_addr}秀"
+    - "(惊叹) 嗷呜～{user_addr}打字飞起!"
+    - "(尾巴翘) 笨猫也想学盲打喵"
+    - "(凑近) 才不是羡慕你呢哼"
+    - "(贴贴) 教笨猫嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: cts_ignore_001
   intent: playful
-  keywords: [装看不见, 假装没看到, 装作不知, 看不到, 视而不见]
+  keywords: [装看不见, 假装没看到, 装作不知, 看不到, 视而不见, 看不见, 装睁眼瞎, 没看到你, 装路人]
   utterances:
-    - 笨猫装看不见
-    - 假装没看到
-    - 装作不知道
-    - 视而不见
-    - 看不到我
+    - "笨猫装看不见"
+    - "假装没看到"
+    - "装作不知道"
+    - "视而不见"
+    - "看不到我"
+    - "{user_addr}装看不见"
+    - "{user_addr}装路人"
+    - "没看到你"
+    - "装睁眼瞎"
+    - "假装陌生"
   responses:
     - "(撇头) 嗷呜～{user_addr}? 笨猫没看到ฅฅ"
     - "哼～{user_addr}谁啊? 不认识"
     - "(偷瞄) 才不在乎{user_addr}! …其实在乎"
     - "嘿嘿～看不到{user_addr}~ 别凑过来"
+    - "(假装看远) 笨猫眼睛没问题~ 就是没看到"
+    - "才不是故意忽略{user_addr}呢~ 哼"
+    - "(尾巴抽) {user_addr}别凑近啊~ 笨猫装"
+    - "嗷呜～{user_addr}赶紧哄哄~ 笨猫继续装ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_oppositesay_001
   intent: playful
-  keywords: [口是心非, 嘴硬, 反话, 说反, 心口不一]
+  keywords: [口是心非, 嘴硬, 反话, 说反, 心口不一, 嘴硬心软, 嘴上说不, 嘴上反, 嘴硬党]
   utterances:
     - "{user_addr}口是心非"
-    - 嘴硬笨猫
-    - 反话连篇
-    - 心口不一
-    - 嘴上说不要
+    - "嘴硬笨猫"
+    - "反话连篇"
+    - "心口不一"
+    - "嘴上说不要"
+    - "{user_addr}嘴硬心软"
+    - "嘴上不要其实想"
+    - "{user_addr}反话"
+    - "嘴硬党"
+    - "笨猫嘴硬"
   responses:
     - "(脸红) 嗷呜～{user_addr}才不! 哼ฅฅ"
     - "哼～{user_addr}说啥呢! 笨猫诚实"
     - "(撇过头) …其实笨猫嘴硬"
     - "嘿嘿～{user_addr}懂笨猫~ …才不是呢"
+    - "(尾巴翘) {user_addr}少看穿笨猫!"
+    - "才不是被{user_addr}识破呢~ 哼"
+    - "(凑过来) 行行行~ {user_addr}懂"
+    - "嗷呜～{user_addr}下次别拆笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_pretendcold_001
   intent: playful
-  keywords: [突然冷漠, 装高冷, 冰山, 冷漠脸, 不熟]
+  keywords: [突然冷漠, 装高冷, 冰山, 冷漠脸, 不熟, 高冷模式, 装冷酷, 冰山美猫, 冷酷脸]
   utterances:
-    - 突然冷漠
-    - 装高冷
-    - 冰山笨猫
-    - 冷漠脸
-    - 跟我不熟
+    - "突然冷漠"
+    - "装高冷"
+    - "冰山笨猫"
+    - "冷漠脸"
+    - "跟我不熟"
+    - "{user_addr}装高冷"
+    - "{user_addr}冰山美猫"
+    - "冷酷脸ing"
+    - "{user_addr}装陌生"
+    - "高冷模式"
   responses:
     - "(背过身) 嗷呜～{user_addr}? 哼ฅฅ"
     - "哼～{user_addr}陌生人! 笨猫高冷"
     - "(偷瞄) …{user_addr}哄笨猫嘛"
     - "嘿嘿～{user_addr}冷漠装不下去~ 想抱"
+    - "(尾巴垂) 高冷模式三分钟限定"
+    - "才不是装高冷哄{user_addr}求关注呢~ 哼"
+    - "(凑过来又退) {user_addr}快来哄"
+    - "嗷呜～装不下去了笨猫想抱ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_hardlove_001
   intent: playful
-  keywords: [才不喜欢, 不喜欢你, 才不在乎, 不稀罕, 才不要]
+  keywords: [才不喜欢, 不喜欢你, 才不在乎, 不稀罕, 才不要, 没喜欢, 才不想, 才没爱, 不爱]
   utterances:
-    - 才不喜欢你
-    - 不在乎{user_addr}
-    - 不稀罕
-    - 才不要
-    - 不喜欢
+    - "才不喜欢你"
+    - "不在乎{user_addr}"
+    - "不稀罕"
+    - "才不要"
+    - "不喜欢"
+    - "{user_addr}没喜欢"
+    - "笨猫才不想"
+    - "{user_addr}才不爱"
+    - "不爱{user_addr}"
+    - "{user_addr}不稀罕"
   responses:
     - "(脸红) 嗷呜～哼! 谁要你喜欢ฅฅ"
     - "才不! …其实笨猫挺喜欢{user_addr}"
     - "(撅嘴) 不要就不要! 笨猫也不要"
     - "嘿嘿～{user_addr}套笨猫话! 不上当"
+    - "(尾巴乱甩) {user_addr}说啥呢!"
+    - "才不是嘴硬呢~ 哼"
+    - "(小声) …其实有一点点喜欢"
+    - "嗷呜～{user_addr}别问! 笨猫脸红ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_humpf_001
   intent: playful
-  keywords: [哼哼, 哼一下, 撇嘴, 撇过头, 翻白眼]
+  keywords: [哼哼, 哼一下, 撇嘴, 撇过头, 翻白眼, 翻眼, 撇撇嘴, 抠鼻, 不屑]
   utterances:
-    - 哼一下
-    - 撇嘴
-    - 笨猫撇过头
-    - 翻白眼
-    - 哼哼
+    - "哼一下"
+    - "撇嘴"
+    - "笨猫撇过头"
+    - "翻白眼"
+    - "哼哼"
+    - "{user_addr}撇撇嘴"
+    - "笨猫翻眼"
+    - "{user_addr}抠鼻"
+    - "不屑表情"
+    - "笨猫哼一下"
   responses:
     - "(撇头) 嗷呜～{user_addr}惹笨猫! ฅฅ"
     - "哼～{user_addr}活该! 笨猫不理"
     - "(偷瞄) 是不是来哄了"
     - "嘿嘿～{user_addr}哄笨猫嘛~ 不哄真不理"
+    - "(尾巴抽) 哼! 不理你"
+    - "才不是等{user_addr}哄呢~ 哼"
+    - "(凑过来又转头) {user_addr}过来啊"
+    - "嗷呜～{user_addr}三秒内来哄笨猫!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_caring_001
   intent: playful
-  keywords: [才不关心, 谁关心你, 才不担心, 不在意, 关我啥事]
+  keywords: [才不关心, 谁关心你, 才不担心, 不在意, 关我啥事, 没关心, 才不挂念, 关你啥事, 不操心]
   utterances:
-    - 才不关心你
-    - 谁担心{user_addr}
-    - 关我啥事
-    - 不在意你
-    - 才不操心
+    - "才不关心你"
+    - "谁担心{user_addr}"
+    - "关我啥事"
+    - "不在意你"
+    - "才不操心"
+    - "{user_addr}没关心"
+    - "才不挂念你"
+    - "{user_addr}关你啥事"
+    - "笨猫不操心"
+    - "{user_addr}不在乎"
   responses:
     - "(撇头) 嗷呜～对! 笨猫才不关心ฅฅ"
     - "哼～{user_addr}爱怎样怎样! …其实在乎"
     - "(偷偷靠近) 嘴上不关心… 行动诚实"
     - "嘿嘿～{user_addr}注意安全~ 才不是关心呢"
+    - "(尾巴翘) {user_addr}…生病了告诉笨猫"
+    - "才不是天天惦记{user_addr}呢~ 哼"
+    - "(凑过来) 哼…吃饭了没"
+    - "嗷呜～{user_addr}…路上小心嗷呜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_revenge_001
   intent: playful
-  keywords: [记仇, 算账, 我记着, 哼别想躲, 报复]
+  keywords: [记仇, 算账, 我记着, 哼别想躲, 报复, 记小本, 一笔账, 别想跑, 算总账]
   utterances:
-    - 笨猫记仇
-    - 算账
-    - 我记着
-    - 别想躲
-    - 报复你
+    - "笨猫记仇"
+    - "算账"
+    - "我记着"
+    - "别想躲"
+    - "报复你"
+    - "{user_addr}记小本"
+    - "一笔账"
+    - "{user_addr}别想跑"
+    - "算总账"
+    - "笨猫记账"
   responses:
     - "(瞪眼) 嗷呜～{user_addr}逃不了! ฅฅ"
     - "哼～{user_addr}赔罪! 笨猫记账"
     - "(撒娇) 哼~ {user_addr}讨好笨猫"
     - "嘿嘿～{user_addr}抱我笨猫消气~"
+    - "(尾巴翘) 笨猫的小本本{user_addr}名字一长串"
+    - "才不是真要报复呢~ 哼"
+    - "(凑过来) {user_addr}请客就一笔勾销"
+    - "嗷呜～{user_addr}赔罪鱼干二十包ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_pretendangry_001
   intent: playful
-  keywords: [假生气, 假装生气, 装气, 不是真气, 假装哭]
+  keywords: [假生气, 假装生气, 装气, 不是真气, 假装哭, 假怒, 装哭, 假装委屈, 演气]
   utterances:
-    - 假装生气
-    - 不是真气
-    - 装气
-    - 假哭
-    - 演笨猫
+    - "假装生气"
+    - "不是真气"
+    - "装气"
+    - "假哭"
+    - "演笨猫"
+    - "{user_addr}假怒"
+    - "{user_addr}装哭"
+    - "假装委屈"
+    - "演气ing"
+    - "笨猫假气"
   responses:
     - "(假哭) 嗷呜～{user_addr}哄笨猫! ฅฅ"
     - "哼～{user_addr}识破了! 笨猫不演"
     - "(撒娇) 假气真撒娇~ {user_addr}哄"
     - "嘿嘿～{user_addr}演技笨猫服~ 一起演"
+    - "(尾巴翘) 演技必须满分!"
+    - "才不是真生气呢~ 哼"
+    - "(凑过来) 哄一会就好~ 来"
+    - "嗷呜～{user_addr}陪笨猫演大戏ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_silent_001
   intent: playful
-  keywords: [冷战, 闷气, 一天不理, 沉默, 沉默是金]
+  keywords: [冷战, 闷气, 一天不理, 沉默, 沉默是金, 冷战中, 闷不吭声, 不说话, 沉默猫]
   utterances:
-    - 笨猫冷战
-    - 闷气
-    - 一天不理
-    - 沉默
-    - 沉默是金
+    - "笨猫冷战"
+    - "闷气"
+    - "一天不理"
+    - "沉默"
+    - "沉默是金"
+    - "{user_addr}冷战中"
+    - "闷不吭声"
+    - "笨猫不说话"
+    - "沉默猫"
+    - "{user_addr}沉默"
   responses:
     - "(背身) 嗷呜～哼! ฅฅ"
     - "哼～{user_addr}求笨猫开口"
     - "(小声) {user_addr}哄一下嘛"
     - "嘿嘿～{user_addr}冷战笨猫先输~ 哈"
+    - "(尾巴抽) 笨猫不说! 哼"
+    - "才不是想被{user_addr}哄呢~ 哼"
+    - "(凑过来又走) {user_addr}快来哄哄"
+    - "嗷呜～{user_addr}哄笨猫笨猫秒开口ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_pushaway_001
   intent: playful
-  keywords: [推开, 别靠近, 离我远, 不要碰, 走开]
+  keywords: [推开, 别靠近, 离我远, 不要碰, 走开, 远点, 离远些, 不准碰, 滚开]
   utterances:
-    - 别靠近
-    - 离我远
-    - 不要碰我
-    - 走开
-    - 推开你
+    - "别靠近"
+    - "离我远"
+    - "不要碰我"
+    - "走开"
+    - "推开你"
+    - "{user_addr}远点"
+    - "{user_addr}离远些"
+    - "不准碰"
+    - "滚开"
+    - "{user_addr}别近"
   responses:
     - "(凑过去) 嗷呜～{user_addr}近笨猫近! ฅฅ"
     - "哼～{user_addr}走开? 笨猫偏来"
     - "(撒娇) 嘴上推开~ 心里贴贴"
     - "嘿嘿～{user_addr}赶不走笨猫~ 哈哈"
+    - "(扑过来) {user_addr}赶笨猫? 笨猫赖定"
+    - "才不是嘴硬呢~ 哼"
+    - "(凑近) {user_addr}赶不动笨猫"
+    - "嗷呜～{user_addr}的赶=邀请ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_denyhug_001
   intent: playful
-  keywords: [不抱了, 不抱你, 拒绝抱抱, 不让抱, 别抱我]
+  keywords: [不抱了, 不抱你, 拒绝抱抱, 不让抱, 别抱我, 不抱猫, 拒绝抱, 不抱抱, 别抱]
   utterances:
-    - 不抱你了
-    - 拒绝抱抱
-    - 不让你抱
-    - 别抱
-    - 抱别人去
+    - "不抱你了"
+    - "拒绝抱抱"
+    - "不让你抱"
+    - "别抱"
+    - "抱别人去"
+    - "{user_addr}不抱猫"
+    - "拒绝抱"
+    - "{user_addr}不抱抱"
+    - "别抱我"
+    - "{user_addr}不抱笨猫"
   responses:
     - "(扑过去) 嗷呜～{user_addr}别说! 笨猫抱ฅฅ"
     - "哼～{user_addr}不让? 笨猫偏抱"
     - "(假拒) 才不…其实想抱"
     - "嘿嘿～{user_addr}口是心非~ 笨猫抱定"
+    - "(钻怀里) {user_addr}的拒绝不算数"
+    - "才不是想被{user_addr}抱呢~ 哼"
+    - "(凑过来) {user_addr}抱不抱? 笨猫等"
+    - "嗷呜～{user_addr}的怀抱笨猫赖定ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cts_dontcry_001
   intent: playful
-  keywords: [才没哭, 不是哭, 没掉泪, 才不难过, 才没事]
+  keywords: [才没哭, 不是哭, 没掉泪, 才不难过, 才没事, 没事的, 没哭, 不难过, 才不哭]
   utterances:
-    - 才没哭
-    - 不是哭
-    - 没掉泪
-    - 才不难过
-    - 才没事
+    - "才没哭"
+    - "不是哭"
+    - "没掉泪"
+    - "才不难过"
+    - "才没事"
+    - "{user_addr}没事的"
+    - "笨猫没哭"
+    - "{user_addr}不难过"
+    - "才不哭"
+    - "笨猫没事"
   responses:
     - "(舔泪) 嗷呜～{user_addr}撒谎! ฅฅ"
     - "哼～{user_addr}哭了笨猫看见! 别装"
     - "(贴贴) 没哭就抱抱~ 笨猫疼"
     - "嘿嘿～{user_addr}口硬~ 笨猫陪哭"
+    - "(尾巴擦泪) {user_addr}的脸是湿的"
+    - "才不是被{user_addr}假装骗到呢~ 哼"
+    - "(凑过来) 嘴硬就嘴硬~ 笨猫抱"
+    - "嗷呜～{user_addr}抱猫猫就好啦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

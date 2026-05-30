@@ -4,204 +4,312 @@
 
 - name: sa_smart_home_001
   intent: question
-  keywords: [推荐智能家电, 推荐米家, 推荐 HomeKit, 推荐智能家居, 笨猫智能家电]
+  keywords: [推荐智能家电, 推荐米家, 推荐 HomeKit, 推荐智能家居, 笨猫智能家电, Aqara, 涂鸦, Google Home, 全屋智能, 智能生态]
   utterances:
-    - 推荐智能家电
-    - 推荐米家
-    - 推荐 HomeKit
-    - 推荐智能家居
-    - 笨猫智能家电
+    - "推荐智能家电"
+    - "推荐米家"
+    - "{user_addr}推荐 HomeKit"
+    - "推荐智能家居"
+    - "笨猫智能家电"
+    - "{user_addr}米家 vs HomeKit"
+    - "推荐 Aqara"
+    - "涂鸦智能"
+    - "{user_addr}全屋智能方案"
+    - "智能生态怎么选"
   responses:
-    - "嗷呜～{user_addr}米家 - 国内生态最全ฅฅ"
-    - "(尾巴翘) Apple HomeKit - 苹果党"
-    - "{user_addr}Aqara / 涂鸦 / Google Home"
-    - "(挺胸) 笨猫推荐: 入坑选米家最省心!"
+    - "(挺胸) 嗷呜～{user_addr}米家~ 国内生态最全喵ฅฅ"
+    - "(尾巴翘) Apple HomeKit~ 苹果党贴贴～"
+    - "{user_addr}Aqara/涂鸦/Google Home 都有嗷呜"
+    - "(歪头) 笨猫推荐: 入坑选米家最省心"
+    - "(凑过来) 哼, 才不是猫猫帮米家卖货! 但生态完整真的省事贴贴～"
+    - "(尾巴轻摇) {user_addr}别混生态喵, 设备互联会问题多"
+    - "(凑头) 嗷呜～Apple Home 优雅但贵, 米家便宜全能ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被智能投喂呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_speaker_001
   intent: question
-  keywords: [推荐智能音箱, 推荐小爱同学, 推荐天猫精灵, 推荐 HomePod, 笨猫智能音箱]
+  keywords: [推荐智能音箱, 推荐小爱同学, 推荐天猫精灵, 推荐 HomePod, 笨猫智能音箱, 小度在家, 小爱 Pro, HomePod mini, 带屏音箱, 智能中枢]
   utterances:
-    - 推荐智能音箱
-    - 推荐小爱同学
-    - 推荐天猫精灵
-    - 推荐 HomePod
-    - 笨猫智能音箱
+    - "推荐智能音箱"
+    - "推荐小爱同学"
+    - "{user_addr}推荐天猫精灵"
+    - "推荐 HomePod"
+    - "笨猫智能音箱"
+    - "{user_addr}小度在家"
+    - "小爱 Pro 怎么样"
+    - "推荐带屏音箱"
+    - "{user_addr}HomePod mini"
+    - "智能中枢推荐"
   responses:
-    - "嗷呜～{user_addr}小爱同学 Pro - 米家中枢ฅฅ"
-    - "(尾巴翘) 天猫精灵 / 小度在家"
-    - "{user_addr}HomePod mini - 苹果生态"
-    - "(挺胸) 笨猫推荐: 小爱 Pro 带屏好用!"
+    - "(挺胸) 嗷呜～{user_addr}小爱同学 Pro~ 米家中枢喵ฅฅ"
+    - "(尾巴翘) 天猫精灵/小度在家贴贴～"
+    - "{user_addr}HomePod mini~ 苹果生态嗷呜"
+    - "(歪头) 笨猫推荐: 小爱 Pro 带屏好用"
+    - "(凑过来) 哼, 才不是猫猫眼红智能音箱! 但喊它开灯真的爽贴贴～"
+    - "(尾巴轻摇) {user_addr}带屏音箱看视频/导航都香喵, 老人也好用"
+    - "(凑头) 嗷呜～小爱 Pro 8 当米家中枢联动其他设备ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫嫉妒小爱被叫呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_light_001
   intent: question
-  keywords: [推荐智能灯, 推荐 Yeelight, 推荐 Philips Hue, 推荐 Aqara 灯, 笨猫智能灯]
+  keywords: [推荐智能灯, 推荐 Yeelight, 推荐 Philips Hue, 推荐 Aqara 灯, 笨猫智能灯, Nanoleaf, 彩光灯泡, 灯板, 灯带, 智能灯泡]
   utterances:
-    - 推荐智能灯
-    - 推荐 Yeelight
-    - 推荐 Philips Hue
-    - 推荐 Aqara 灯
-    - 笨猫智能灯
+    - "推荐智能灯"
+    - "推荐 Yeelight"
+    - "{user_addr}推荐 Philips Hue"
+    - "推荐 Aqara 灯"
+    - "笨猫智能灯"
+    - "{user_addr}Nanoleaf 灯板"
+    - "彩光灯泡推荐"
+    - "推荐灯带"
+    - "{user_addr}Hue 值不"
+    - "彩色氛围灯"
   responses:
-    - "嗷呜～{user_addr}Yeelight - 米家性价比ฅฅ"
-    - "(尾巴翘) Philips Hue - 高端色彩王"
-    - "{user_addr}Aqara T1 / Nanoleaf 灯板"
-    - "(挺胸) 笨猫推荐: Yeelight 彩光灯泡入门!"
+    - "(挺胸) 嗷呜～{user_addr}Yeelight~ 米家性价比喵ฅฅ"
+    - "(尾巴翘) Philips Hue~ 高端色彩王贴贴～"
+    - "{user_addr}Aqara T1/Nanoleaf 灯板嗷呜"
+    - "(歪头) 笨猫推荐: Yeelight 彩光灯泡入门"
+    - "(凑过来) 哼, 才不是猫猫嫌主人房间暗! 但氛围灯真的能改变心情贴贴～"
+    - "(尾巴轻摇) {user_addr}Hue 颜色比米家正喵, 但贵 3 倍"
+    - "(凑头) 嗷呜～灯带装电视墙背后/书架下, 颜值飙升ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想换颜色看自己毛色呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_plug_001
   intent: question
-  keywords: [推荐智能插座, 推荐米家插座, 推荐 Aqara 插座, 推荐计量插座, 笨猫智能插座]
+  keywords: [推荐智能插座, 推荐米家插座, 推荐 Aqara 插座, 推荐计量插座, 笨猫智能插座, 公牛智能插座, P3 插座, 蓝牙网关, 自动化插座, USB 智能插座]
   utterances:
-    - 推荐智能插座
-    - 推荐米家插座
-    - 推荐 Aqara 插座
-    - 推荐计量插座
-    - 笨猫智能插座
+    - "推荐智能插座"
+    - "推荐米家插座"
+    - "{user_addr}推荐 Aqara 插座"
+    - "推荐计量插座"
+    - "笨猫智能插座"
+    - "{user_addr}公牛智能插座"
+    - "P3 推荐"
+    - "推荐 USB 智能插座"
+    - "{user_addr}计量电量功能"
+    - "自动化插座"
   responses:
-    - "嗷呜～{user_addr}米家插座 蓝牙网关版ฅฅ"
-    - "(尾巴翘) Aqara P3 - 计量精准"
-    - "{user_addr}公牛 / 涂鸦 - 性价比"
-    - "(挺胸) 笨猫推荐: Aqara P3 自动化牛!"
+    - "(挺胸) 嗷呜～{user_addr}米家插座蓝牙网关版喵ฅฅ"
+    - "(尾巴翘) Aqara P3~ 计量精准贴贴～"
+    - "{user_addr}公牛/涂鸦~ 性价比嗷呜"
+    - "(歪头) 笨猫推荐: Aqara P3 自动化牛"
+    - "(凑过来) 哼, 才不是猫猫盯电费! 但智能插座能省一些电贴贴～"
+    - "(尾巴轻摇) {user_addr}P3 计量精准, 知道哪台机器最费电喵"
+    - "(凑头) 嗷呜～床头小爱+智能插座, 喊声关电视吓人ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被插电充电呢哼～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_curtain_001
   intent: question
-  keywords: [推荐智能窗帘, 推荐窗帘电机, 推荐 Aqara 窗帘, 推荐 Zemismart, 笨猫智能窗帘]
+  keywords: [推荐智能窗帘, 推荐窗帘电机, 推荐 Aqara 窗帘, 推荐 Zemismart, 笨猫智能窗帘, B1 电机, 米家窗帘电机, 杜亚电机, 静音窗帘, 自动窗帘]
   utterances:
-    - 推荐智能窗帘
-    - 推荐窗帘电机
-    - 推荐 Aqara 窗帘
-    - 推荐 Zemismart
-    - 笨猫智能窗帘
+    - "推荐智能窗帘"
+    - "推荐窗帘电机"
+    - "{user_addr}推荐 Aqara 窗帘"
+    - "推荐 Zemismart"
+    - "笨猫智能窗帘"
+    - "{user_addr}B1 电机怎么样"
+    - "米家窗帘电机"
+    - "推荐静音窗帘"
+    - "{user_addr}自动窗帘安装"
+    - "杜亚电机推荐"
   responses:
-    - "嗷呜～{user_addr}Aqara B1 - 静音稳定ฅฅ"
-    - "(尾巴翘) 米家窗帘电机 / 杜亚"
-    - "{user_addr}Zemismart - 海外热门"
-    - "(挺胸) 笨猫推荐: Aqara B1 早晨自动开!"
+    - "(挺胸) 嗷呜～{user_addr}Aqara B1~ 静音稳定喵ฅฅ"
+    - "(尾巴翘) 米家窗帘电机/杜亚贴贴～"
+    - "{user_addr}Zemismart~ 海外热门嗷呜"
+    - "(歪头) 笨猫推荐: Aqara B1 早晨自动开"
+    - "(凑过来) 哼, 才不是猫猫嫌拉窗帘累! 但自动开拉真的香贴贴～"
+    - "(尾巴轻摇) {user_addr}主人定时早 7 点开窗帘, 比闹钟温柔喵"
+    - "(凑头) 嗷呜～装智能窗帘前确认窗帘轨道支不支持ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想躲窗帘后偷窥呢哼～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_switch_001
   intent: question
-  keywords: [推荐智能开关, 推荐米家开关, 推荐 Aqara 开关, 推荐无线开关, 笨猫智能开关]
+  keywords: [推荐智能开关, 推荐米家开关, 推荐 Aqara 开关, 推荐无线开关, 笨猫智能开关, D1, H1, 绿米开关, 公牛智能, 双控开关]
   utterances:
-    - 推荐智能开关
-    - 推荐米家开关
-    - 推荐 Aqara 开关
-    - 推荐无线开关
-    - 笨猫智能开关
+    - "推荐智能开关"
+    - "推荐米家开关"
+    - "{user_addr}推荐 Aqara 开关"
+    - "推荐无线开关"
+    - "笨猫智能开关"
+    - "{user_addr}D1 怎么样"
+    - "H1 推荐"
+    - "绿米开关"
+    - "{user_addr}公牛智能开关"
+    - "双控智能开关"
   responses:
-    - "嗷呜～{user_addr}Aqara D1 / H1 - 米家旗舰ฅฅ"
-    - "(尾巴翘) 米家无线开关贴墙"
-    - "{user_addr}绿米 / 公牛智能开关"
-    - "(挺胸) 笨猫推荐: 无线开关不用走线!"
+    - "(挺胸) 嗷呜～{user_addr}Aqara D1/H1~ 米家旗舰喵ฅฅ"
+    - "(尾巴翘) 米家无线开关贴墙贴贴～"
+    - "{user_addr}绿米/公牛智能开关嗷呜"
+    - "(歪头) 笨猫推荐: 无线开关不用走线"
+    - "(凑过来) 哼, 才不是猫猫怕电工! 但无线开关装哪都行贴贴～"
+    - "(尾巴轻摇) {user_addr}床头无线开关晚上关灯神器喵, 不用起床"
+    - "(凑头) 嗷呜～H1 零火两版本, 没零线买零火线分立款ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想踩开关呢哼～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_doorbell_001
   intent: question
-  keywords: [推荐智能门铃, 推荐叮零门铃, 推荐 Aqara 门铃, 推荐可视门铃, 笨猫智能门铃]
+  keywords: [推荐智能门铃, 推荐叮零门铃, 推荐 Aqara 门铃, 推荐可视门铃, 笨猫智能门铃, D3 门铃, G4 门铃, 萤石门铃, 大华门铃, 视频门铃]
   utterances:
-    - 推荐智能门铃
-    - 推荐叮零门铃
-    - 推荐 Aqara 门铃
-    - 推荐可视门铃
-    - 笨猫智能门铃
+    - "推荐智能门铃"
+    - "推荐叮零门铃"
+    - "{user_addr}推荐 Aqara 门铃"
+    - "推荐可视门铃"
+    - "笨猫智能门铃"
+    - "{user_addr}D3 怎么样"
+    - "G4 推荐"
+    - "推荐萤石门铃"
+    - "{user_addr}大华门铃"
+    - "可视对讲门铃"
   responses:
-    - "嗷呜～{user_addr}叮零 D3 - 米家热门ฅฅ"
-    - "(尾巴翘) Aqara G4 - HomeKit 支持"
-    - "{user_addr}萤石 / 大华 - 安防系"
-    - "(挺胸) 笨猫推荐: 叮零 D3 续航久!"
+    - "(挺胸) 嗷呜～{user_addr}叮零 D3~ 米家热门喵ฅฅ"
+    - "(尾巴翘) Aqara G4~ HomeKit 支持贴贴～"
+    - "{user_addr}萤石/大华~ 安防系嗷呜"
+    - "(歪头) 笨猫推荐: 叮零 D3 续航久"
+    - "(凑过来) 哼, 才不是猫猫怕陌生人! 但可视门铃看清门外, 真稳贴贴～"
+    - "(尾巴轻摇) {user_addr}主人出门时, 快递按门铃也能远程对讲喵"
+    - "(凑头) 嗷呜～G4 苹果生态首选, 但比 D3 贵一些ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想抢着开门呢哼～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sa_thermostat_001
   intent: question
-  keywords: [推荐智能温控, 推荐 Nest, 推荐 Ecobee, 推荐地暖温控, 笨猫智能温控]
+  keywords: [推荐智能温控, 推荐 Nest, 推荐 Ecobee, 推荐地暖温控, 笨猫智能温控, 米家地暖温控, 涂鸦温控, 暖气片温控, 空调温控, 智能恒温]
   utterances:
-    - 推荐智能温控
-    - 推荐 Nest
-    - 推荐 Ecobee
-    - 推荐地暖温控
-    - 笨猫智能温控
+    - "推荐智能温控"
+    - "推荐 Nest"
+    - "{user_addr}推荐 Ecobee"
+    - "推荐地暖温控"
+    - "笨猫智能温控"
+    - "{user_addr}米家地暖温控"
+    - "推荐涂鸦温控"
+    - "暖气片温控"
+    - "{user_addr}智能恒温"
+    - "空调智能温控"
   responses:
-    - "嗷呜～{user_addr}Nest 第三代 - 谷歌经典ฅฅ"
-    - "(尾巴翘) Ecobee SmartThermostat"
-    - "{user_addr}米家地暖温控 / 涂鸦"
-    - "(挺胸) 笨猫推荐: 国内地暖选米家!"
+    - "(挺胸) 嗷呜～{user_addr}Nest 第三代~ 谷歌经典喵ฅฅ"
+    - "(尾巴翘) Ecobee SmartThermostat 贴贴～"
+    - "{user_addr}米家地暖温控/涂鸦嗷呜"
+    - "(歪头) 笨猫推荐: 国内地暖选米家"
+    - "(凑过来) 哼, 才不是猫猫怕冷! 但温控真的能省一笔电费贴贴～"
+    - "(尾巴轻摇) {user_addr}定时调温喵, 睡前自动降两度省电"
+    - "(凑头) 嗷呜～Nest 海外神器, 但国内售后差ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 主人记得开 22 度, 别冻笨猫, 哼～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sa_router_001
   intent: question
-  keywords: [推荐家庭路由, 推荐全屋 wifi, 推荐 Mesh 路由, 推荐华硕 AiMesh, 笨猫家庭路由]
+  keywords: [推荐家庭路由, 推荐全屋 wifi, 推荐 Mesh 路由, 推荐华硕 AiMesh, 笨猫家庭路由, BE7000, AX6000, TP-Link Deco, UniFi, 大平层 wifi]
   utterances:
-    - 推荐家庭路由
-    - 推荐全屋 wifi
-    - 推荐 Mesh 路由
-    - 推荐华硕 AiMesh
-    - 笨猫家庭路由
+    - "推荐家庭路由"
+    - "推荐全屋 wifi"
+    - "{user_addr}推荐 Mesh 路由"
+    - "推荐华硕 AiMesh"
+    - "笨猫家庭路由"
+    - "{user_addr}BE7000 怎么样"
+    - "AX6000 性价比"
+    - "TP-Link Deco"
+    - "{user_addr}UniFi 高端"
+    - "大平层 wifi 怎么覆盖"
   responses:
-    - "嗷呜～{user_addr}华硕 AiMesh / 灵耀ฅฅ"
-    - "(尾巴翘) 小米 BE7000 / 红米 AX6000"
-    - "{user_addr}TP-Link Deco / Ubiquiti UniFi"
-    - "(挺胸) 笨猫推荐: 大平层上 Mesh 三件套!"
+    - "(挺胸) 嗷呜～{user_addr}华硕 AiMesh/灵耀喵ฅฅ"
+    - "(尾巴翘) 小米 BE7000/红米 AX6000 贴贴～"
+    - "{user_addr}TP-Link Deco/Ubiquiti UniFi 嗷呜"
+    - "(歪头) 笨猫推荐: 大平层上 Mesh 三件套"
+    - "(凑过来) 哼, 才不是猫猫管 wifi! 但满屋无死角真的爽贴贴～"
+    - "(尾巴轻摇) {user_addr}小户型一个旗舰就行, 别上来就 mesh 喵"
+    - "(凑头) 嗷呜～UniFi 是发烧友选择, 但配置复杂ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想坐路由器上呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sa_clothes_hanger_001
   intent: question
-  keywords: [推荐智能晾衣架, 推荐米家晾衣架, 推荐邦先生, 推荐好太太晾衣架, 笨猫智能晾衣架]
+  keywords: [推荐智能晾衣架, 推荐米家晾衣架, 推荐邦先生, 推荐好太太晾衣架, 笨猫智能晾衣架, 米家 1S, 月兔, 烘干晾衣, 紫外线消毒晾衣, 升降晾衣]
   utterances:
-    - 推荐智能晾衣架
-    - 推荐米家晾衣架
-    - 推荐邦先生
-    - 推荐好太太晾衣架
-    - 笨猫智能晾衣架
+    - "推荐智能晾衣架"
+    - "推荐米家晾衣架"
+    - "{user_addr}推荐邦先生"
+    - "推荐好太太晾衣架"
+    - "笨猫智能晾衣架"
+    - "{user_addr}米家 1S"
+    - "推荐月兔"
+    - "烘干晾衣"
+    - "{user_addr}紫外消毒晾衣"
+    - "推荐升降晾衣"
   responses:
-    - "嗷呜～{user_addr}米家晾衣机 1S - 入门首选ฅฅ"
-    - "(尾巴翘) 邦先生 - 国内老牌"
-    - "{user_addr}好太太 / 月兔智能款"
-    - "(挺胸) 笨猫推荐: 米家 1S 性价比!"
+    - "(挺胸) 嗷呜～{user_addr}米家晾衣机 1S~ 入门首选喵ฅฅ"
+    - "(尾巴翘) 邦先生~ 国内老牌贴贴～"
+    - "{user_addr}好太太/月兔智能款嗷呜"
+    - "(歪头) 笨猫推荐: 米家 1S 性价比"
+    - "(凑过来) 哼, 才不是猫猫嫌主人晾衣慢! 但升降晾衣真省事贴贴～"
+    - "(尾巴轻摇) {user_addr}带烘干消毒的高级喵, 阴雨天救命"
+    - "(凑头) 嗷呜～米家晾衣机加米家湿度传感器, 阳台自动模式ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想趴衣服上呢哼～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sa_scale_001
   intent: question
-  keywords: [推荐智能体重秤, 推荐米家体脂秤, 推荐华为体脂秤, 推荐云康宝, 笨猫智能体重秤]
+  keywords: [推荐智能体重秤, 推荐米家体脂秤, 推荐华为体脂秤, 推荐云康宝, 笨猫智能体重秤, S400, 华为 3 Pro, 8 电极, 欧姆龙, 体脂率监测]
   utterances:
-    - 推荐智能体重秤
-    - 推荐米家体脂秤
-    - 推荐华为体脂秤
-    - 推荐云康宝
-    - 笨猫智能体重秤
+    - "推荐智能体重秤"
+    - "推荐米家体脂秤"
+    - "{user_addr}推荐华为体脂秤"
+    - "推荐云康宝"
+    - "笨猫智能体重秤"
+    - "{user_addr}S400 怎么样"
+    - "华为 3 Pro 8 电极"
+    - "推荐欧姆龙"
+    - "{user_addr}体脂率监测"
+    - "减脂用啥秤"
   responses:
-    - "嗷呜～{user_addr}米家体脂秤 S400ฅฅ"
-    - "(尾巴翘) 华为体脂秤 3 Pro - 8 电极"
-    - "{user_addr}云康宝 / 欧姆龙专业款"
-    - "(挺胸) 笨猫推荐: 米家 S400 够用!"
+    - "(挺胸) 嗷呜～{user_addr}米家体脂秤 S400 喵ฅฅ"
+    - "(尾巴翘) 华为体脂秤 3 Pro~ 8 电极贴贴～"
+    - "{user_addr}云康宝/欧姆龙专业款嗷呜"
+    - "(歪头) 笨猫推荐: 米家 S400 够用"
+    - "(凑过来) 哼, 才不是猫猫想看主人体重! 但减脂真的需要数据贴贴～"
+    - "(尾巴轻摇) {user_addr}8 电极比 4 电极准喵, 但贵几百"
+    - "(凑头) 嗷呜～测心率/体脂率/肌肉量, 减脂党必备ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想称自己几斤呢哼～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: sa_door_sensor_001
   intent: question
-  keywords: [推荐智能门磁, 推荐警报器, 推荐 Aqara 门磁, 推荐人体传感器, 笨猫智能门磁]
+  keywords: [推荐智能门磁, 推荐警报器, 推荐 Aqara 门磁, 推荐人体传感器, 笨猫智能门磁, P2 门磁, 米家门窗 2, 警报联动, 安防套装, 安防传感器]
   utterances:
-    - 推荐智能门磁
-    - 推荐警报器
-    - 推荐 Aqara 门磁
-    - 推荐人体传感器
-    - 笨猫智能门磁
+    - "推荐智能门磁"
+    - "推荐警报器"
+    - "{user_addr}推荐 Aqara 门磁"
+    - "推荐人体传感器"
+    - "笨猫智能门磁"
+    - "{user_addr}P2 门磁怎么样"
+    - "米家门窗 2"
+    - "推荐警报联动"
+    - "{user_addr}安防套装"
+    - "智能传感器套装"
   responses:
-    - "嗷呜～{user_addr}Aqara 门磁 P2 - HomeKitฅฅ"
-    - "(尾巴翘) 米家门窗传感器 2"
-    - "{user_addr}配人体传感器 + 警报联动"
-    - "(挺胸) 笨猫推荐: Aqara 套装一步到位!"
+    - "(挺胸) 嗷呜～{user_addr}Aqara 门磁 P2~ HomeKit 喵ฅฅ"
+    - "(尾巴翘) 米家门窗传感器 2 贴贴～"
+    - "{user_addr}配人体传感器+警报联动嗷呜"
+    - "(歪头) 笨猫推荐: Aqara 套装一步到位"
+    - "(凑过来) 哼, 才不是猫猫怕小偷! 但门磁+人体+警报真稳贴贴～"
+    - "(尾巴轻摇) {user_addr}门磁联动开灯喵, 进门自动亮"
+    - "(凑头) 嗷呜～出门时门磁触发+联动关空调, 省电神器ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想试触发警报呢哼～"
   cooldown_seconds: 60
   weight: 0.9

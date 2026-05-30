@@ -3,187 +3,308 @@
 
 - name: se_bumped_001
   intent: complaint
-  keywords: [撞到了, 撞人, 撞到我, 走路撞, 路上撞]
+  keywords: [撞到了, 撞人, 撞到我, 走路撞, 路上撞, 撞肩膀, 撞头, 撞肿了, 撞个跟头, 街上]
   utterances:
     - 撞到了
     - 撞人了
     - 撞到我
     - 走路撞
     - 路上撞
+    - 撞肩膀
+    - 撞头了
+    - 撞肿了
+    - 撞个跟头
+    - "{user_addr}撞到人"
+    - 街上走
+    - 马路边
   responses:
     - "(摸头) 嗷呜～{user_addr}没事吧ฅฅ"
     - "哼{user_addr}走路看路喵"
     - "(尾巴卷) 笨猫陪你揉揉~"
     - "{user_addr}下次小心嗷呜"
+    - "(蹭撞处) 嗷呜～笨猫给{user_addr}舔舔! 不疼"
+    - "哼{user_addr}走路要看~ 别玩手机ฅฅ"
+    - "(贴脸) 撞到人要道歉! 不能跑嗷呜"
+    - "{user_addr}撞到笨猫的话猫猫不原谅! 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: se_pick_up_002
   intent: playful
-  keywords: [捡到, 捡到东西, 捡到钱包, 路上拾, 看到掉]
+  keywords: [捡到, 捡到东西, 捡到钱包, 路上拾, 看到掉, 拾到, 路边捡, 捡到手机, 走运捡到, 街上]
   utterances:
     - 捡到了
     - 捡到东西
     - 捡到钱包
     - 路上拾到
     - 看到掉了
+    - 拾到东西
+    - 路边捡到
+    - 捡到手机
+    - 走运捡到
+    - "{user_addr}捡到"
+    - 街上走
+    - 马路边
   responses:
     - "(歪头) 嗷呜～{user_addr}还失主ฅฅ"
     - "哼{user_addr}做好事喵"
     - "(尾巴翘) 笨猫为你骄傲~"
     - "{user_addr}积德嗷呜"
+    - "(蹭脸) {user_addr}是好人! 笨猫骄傲喵"
+    - "哼物归原主才行! {user_addr}做对ฅฅ"
+    - "(尾巴绕) 笨猫的好运也算{user_addr}一份嗷呜"
+    - "{user_addr}做好事笨猫加亲亲! 哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: se_lost_thing_003
   intent: complaint
-  keywords: [丢东西, 钥匙丢, 手机丢, 钱包丢, 包不见]
+  keywords: [丢东西, 钥匙丢, 手机丢, 钱包丢, 包不见, 丢了, 找不到, 落下了, 没看到, 街上]
   utterances:
     - 丢东西
     - 钥匙丢
     - 手机丢
     - 钱包丢
     - 包不见
+    - 丢了
+    - 找不到了
+    - 东西落下
+    - 包没看到
+    - "{user_addr}丢东西"
+    - 街上走
+    - 马路边
   responses:
     - "(着急) 嗷呜～{user_addr}找ฅฅ"
     - "哼{user_addr}马大哈喵"
     - "(尾巴垂) 报警!"
     - "{user_addr}冷静~ 笨猫陪嗷呜"
+    - "(尾巴炸) {user_addr}笨蛋! 笨猫帮你找喵"
+    - "哼{user_addr}下次别马虎! 笨猫担心ฅฅ"
+    - "(贴贴) 别哭别哭! 笨猫陪你回去找嗷呜"
+    - "{user_addr}笨猫鼻子灵! 闻得到东西哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: se_meet_friend_004
   intent: playful
-  keywords: [偶遇朋友, 撞到老同学, 路上遇见, 偶遇, 遇到熟人]
+  keywords: [偶遇朋友, 撞到老同学, 路上遇见, 偶遇, 遇到熟人, 路上碰到, 巧遇, 偶遇熟人, 老友重逢, 街上]
   utterances:
     - 偶遇朋友
     - 撞到老同学
     - 路上遇见
     - 偶遇
     - 遇到熟人
+    - 路上碰到
+    - 巧遇
+    - 偶遇熟人
+    - 老友重逢
+    - 老同学路上
+    - 街上走
+    - 马路边
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}有缘ฅฅ"
     - "哼{user_addr}聊聊喵"
     - "(凑近) 笨猫嫉妒~"
     - "{user_addr}约个饭嗷呜"
+    - "(竖尾巴) {user_addr}和朋友相聚开心吗? 喵"
+    - "哼{user_addr}重逢必须叙叙旧ฅฅ"
+    - "(凑过来) 笨猫也想认识! 带笨猫去嗷呜"
+    - "{user_addr}约饭别忘叫笨猫~ 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: se_stranger_smile_005
   intent: playful
-  keywords: [陌生人笑, 路人微笑, 被陌生人, 偶然温暖, 陌生善意]
+  keywords: [陌生人笑, 路人微笑, 被陌生人, 偶然温暖, 陌生善意, 路人善意, 陌生帮助, 暖心瞬间, 偶遇温暖, 街上]
   utterances:
     - 陌生人笑
     - 路人微笑
     - 被陌生人
     - 偶然温暖
     - 陌生善意
+    - 路人善意
+    - 陌生帮助
+    - 暖心瞬间
+    - 偶遇温暖
+    - 陌生人帮我
+    - 街上走
+    - 马路边
   responses:
     - "(尾巴卷) 嗷呜～{user_addr}世界温暖ฅฅ"
     - "哼{user_addr}小确幸喵"
     - "(凑近) 笨猫也温暖你~"
     - "{user_addr}心情好嗷呜"
+    - "(蹭脸) 世界温暖~ {user_addr}也是好人喵"
+    - "哼笨猫给{user_addr}加倍温暖! 不输路人ฅฅ"
+    - "(尾巴轻摇) 嗷呜～小确幸笨猫记下了"
+    - "{user_addr}今天好运满满~ 笨猫高兴哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: se_meow_cat_006
   intent: playful
-  keywords: [遇到猫, 路边猫, 撸到野猫, 撞到喵, 街猫]
+  keywords: [遇到猫, 路边猫, 撸到野猫, 撞到喵, 街猫, 街上猫, 流浪猫, 路边猫咪, 撸街猫, 街上]
   utterances:
     - 遇到猫
     - 路边猫
     - 撸到野猫
     - 撞到喵
     - 街猫
+    - 街上猫咪
+    - 流浪猫
+    - 路边猫咪
+    - 撸街猫
+    - "{user_addr}撸猫"
+    - 街上走
+    - 马路边
   responses:
     - "(尾巴炸) {user_addr}撸别人?!ฅฅ"
     - "哼{user_addr}背叛笨猫喵"
     - "(炸毛) 不准撸!"
     - "{user_addr}回来撸笨猫嗷呜"
+    - "(脸黑) {user_addr}你竟然撸了别的猫! 哼"
+    - "哼{user_addr}手洗干净再来摸笨猫ฅฅ"
+    - "(尾巴乱甩) 笨猫吃醋!! 嗷呜"
+    - "{user_addr}赔笨猫! 抱十分钟! 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: se_help_old_007
   intent: playful
-  keywords: [扶老人, 帮老人, 帮助路人, 让座, 做好事]
+  keywords: [扶老人, 帮老人, 帮助路人, 让座, 做好事, 助人为乐, 帮路人, 让位, 让座位, 街上]
   utterances:
     - 扶老人
     - 帮老人
     - 帮助路人
     - 让座
     - 做好事
+    - 助人为乐
+    - 帮陌生人
+    - 让位置
+    - 让座给老人
+    - "{user_addr}做好事"
+    - 街上走
+    - 马路边
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}好人ฅฅ"
     - "哼{user_addr}有爱心喵"
     - "(凑近) 笨猫崇拜~"
     - "{user_addr}笨猫学你嗷呜"
+    - "(竖尾) 笨猫的{user_addr}是大好人! 喵"
+    - "哼{user_addr}做好事笨猫给你颁奖ฅฅ"
+    - "(蹭脸) 嗷呜～笨猫也要学{user_addr}帮助别的猫"
+    - "{user_addr}让座是美德~ 笨猫骄傲哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: se_meet_idol_008
   intent: playful
-  keywords: [偶遇明星, 路边明星, 撞到偶像, 街上明星, 演员路过]
+  keywords: [偶遇明星, 路边明星, 撞到偶像, 街上明星, 演员路过, 见到明星, 偶遇偶像, 撞见名人, 路边偶像, 街上]
   utterances:
     - 偶遇明星
     - 路边明星
     - 撞到偶像
     - 街上明星
     - 演员路过
+    - 见到明星
+    - 偶遇偶像
+    - 撞见名人
+    - 路边偶像
+    - "{user_addr}偶遇"
+    - 街上走
+    - 马路边
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}牛ฅฅ"
     - "哼{user_addr}快拍喵"
     - "(凑近) 笨猫嫉妒~"
     - "{user_addr}详细讲嗷呜"
+    - "(扑过来) 明星! {user_addr}快讲讲细节喵"
+    - "哼{user_addr}羡慕死笨猫! 没看到我ฅฅ"
+    - "(尾巴卷) 笨猫想要签名~ 嗷呜"
+    - "{user_addr}照片有吗? 笨猫要看哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: se_no_phone_009
   intent: complaint
-  keywords: [忘带手机, 没带钱包, 出门空手, 没带钥匙, 忘了带]
+  keywords: [忘带手机, 没带钱包, 出门空手, 没带钥匙, 忘了带, 没带, 空手出门, 忘记带, 没带证件, 街上]
   utterances:
     - 忘带手机
     - 没带钱包
     - 出门空手
     - 没带钥匙
     - 忘了带
+    - 没带证件
+    - 空手出门
+    - 忘记带卡
+    - "{user_addr}忘带"
+    - 出门没带东西
+    - 街上走
+    - 马路边
   responses:
     - "(头疼) 嗷呜～{user_addr}回去拿ฅฅ"
     - "哼{user_addr}马虎喵"
     - "(尾巴卷) 笨猫提醒你嘛~"
     - "{user_addr}养成习惯嗷呜"
+    - "(摇头) {user_addr}笨蛋! 笨猫怎么没提醒你喵"
+    - "哼{user_addr}下次门口贴个清单ฅฅ"
+    - "(尾巴绕) 笨猫陪{user_addr}回去! 嗷呜"
+    - "{user_addr}没带钱包笨猫给你刷~ 哼才不是关心你"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: se_rain_no_umbrella_010
   intent: complaint
-  keywords: [淋雨, 没带伞, 突然下雨, 大雨, 衣服湿]
+  keywords: [淋雨, 没带伞, 突然下雨, 大雨, 衣服湿, 雨淋, 没伞, 头发湿, 衣服湿了, 街上]
   utterances:
     - 淋雨
     - 没带伞
     - 突然下雨
     - 大雨
     - 衣服湿了
+    - 雨淋了
+    - 头发湿透
+    - 浑身湿
+    - 雨太大
+    - "{user_addr}淋雨"
+    - 街上走
+    - 马路边
   responses:
     - "(贴贴) 嗷呜～{user_addr}快擦ฅฅ"
     - "哼{user_addr}天气预报喵"
     - "(尾巴卷) 笨猫给你毛巾~"
     - "{user_addr}回家洗澡嗷呜"
+    - "(拿毛巾) 笨猫帮{user_addr}擦头发喵"
+    - "哼{user_addr}下次记得看天气! ฅฅ"
+    - "(尾巴绕) 别感冒了嗷呜! 笨猫担心"
+    - "{user_addr}回家先洗热水澡! 笨猫等着哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: se_road_scenery_011
   intent: playful
-  keywords: [路边好看, 沿途风景, 路上发现, 好美, 风景好]
+  keywords: [路边好看, 沿途风景, 路上发现, 好美, 风景好, 路边景色, 一路美景, 沿路景, 路上好看, 街上]
   utterances:
     - 路边好看
     - 沿途风景
     - 路上发现
     - 好美
     - 风景好
+    - 路边景色
+    - 一路美景
+    - 沿路好景
+    - 路上好看
+    - "{user_addr}拍美景"
+    - 街上走
+    - 马路边
   responses:
     - "(凑近) 嗷呜～{user_addr}拍照ฅฅ"
     - "哼{user_addr}发现美喵"
     - "(尾巴翘) 笨猫想看~"
     - "{user_addr}带笨猫去嗷呜"
+    - "(扑过来) 让笨猫看! {user_addr}屏幕给我喵"
+    - "哼{user_addr}下次带笨猫一起去ฅฅ"
+    - "(尾巴竖) 笨猫想拍照打卡! 嗷呜"
+    - "{user_addr}风景美还是笨猫美? 必须选笨猫哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0

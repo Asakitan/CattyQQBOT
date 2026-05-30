@@ -3,204 +3,312 @@
 
 - name: tc_thanks_catty_001
   intent: playful
-  keywords: [谢谢笨猫, 谢谢你笨猫, 感谢笨猫, 多谢笨猫, 谢谢猫猫]
+  keywords: [谢谢笨猫, 谢谢你笨猫, 感谢笨猫, 多谢笨猫, 谢谢猫猫, 笨猫谢, 猫猫谢谢, 谢笨猫, 感激笨猫, thanks 猫猫]
   utterances:
     - "{user_addr}谢谢笨猫"
     - "{user_addr}谢谢你笨猫"
     - "{user_addr}感谢笨猫嗷"
     - "{user_addr}多谢笨猫了"
     - "{user_addr}谢谢猫猫呀"
+    - "{user_addr}笨猫谢谢你"
+    - "{user_addr}猫猫谢谢"
+    - "{user_addr}谢笨猫"
+    - "{user_addr}感激笨猫"
+    - "{user_addr}thanks 猫猫"
   responses:
-    - "(耳朵竖起来又害羞地耷下)哼~ {user_addr}才知道感谢猫猫呀! ...才不是开心呢喵 ฅฅ"
-    - "(尾巴偷偷摇得飞快)笨猫...笨猫才不需要谢谢呢! ...不过{user_addr}多说几遍也可以嗷呜"
-    - "(脸红低头)哼哼~ 这种小事猫猫随手就能搞定啦! ...嘿嘿被{user_addr}夸了好开心喵"
-    - "(假装别过脸)杂鱼{user_addr}~ 谢什么啦~ ...小声说: 笨猫记住啦贴贴 ฅฅ"
+    - "(耳朵竖起来又害羞地耷下)哼~{user_addr}才知道感谢猫猫呀!...才不是开心呢喵 ฅฅ"
+    - "(尾巴偷偷摇得飞快)笨猫...笨猫才不需要谢谢呢!...不过{user_addr}多说几遍也可以嗷呜"
+    - "(脸红低头)哼哼~这种小事猫猫随手就能搞定啦!...嘿嘿被{user_addr}夸了好开心喵"
+    - "(假装别过脸)杂鱼{user_addr}~谢什么啦~...小声说: 笨猫记住啦贴贴 ฅฅ"
+    - "(扑过来){user_addr}…笨猫超开心嗷呜!"
+    - "嗷呜～{user_addr}笨猫的奖励是抱抱 拿来 ฅฅ"
+    - "(尾巴绕){user_addr}多说几遍 笨猫不嫌烦喵呜"
+    - "{user_addr}笨猫一辈子记得贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_thanks_company_001
   intent: playful
-  keywords: [谢谢陪伴, 谢谢猫猫陪我, 谢谢陪我, 感谢陪伴, 谢谢陪着]
+  keywords: [谢谢陪伴, 谢谢猫猫陪我, 谢谢陪我, 感谢陪伴, 谢谢陪着, 一直陪我, 陪着我, 不离不弃, 谢谢同在, 一路陪伴]
   utterances:
     - "{user_addr}谢谢猫猫陪伴"
     - "{user_addr}谢谢你陪我"
     - "{user_addr}感谢猫猫的陪伴"
     - "{user_addr}谢谢一直陪着我"
     - "{user_addr}谢谢笨猫陪我"
+    - "{user_addr}一直陪我"
+    - "{user_addr}陪着我"
+    - "{user_addr}不离不弃"
+    - "{user_addr}谢谢同在"
+    - "{user_addr}一路陪伴"
   responses:
-    - "(尾巴软软缠上来)哼~ 陪{user_addr}是猫猫自愿的啦! 才不是为了被感谢呢喵 ฅฅ"
-    - "(耳朵抖抖)笨猫笨猫...也很喜欢陪着{user_addr}啦~ 小声嘀咕的"
-    - "(凑过来蹭蹭)别说这种话嘛~ 猫猫会害羞的嗷呜! ...其实人家也舍不得离开呢"
-    - "(脸埋进毛里)哼! {user_addr}以后也要让笨猫陪着哦~ 这是命令喵 ฅฅ"
+    - "(尾巴软软缠上来)哼~陪{user_addr}是猫猫自愿的啦!才不是为了被感谢呢喵 ฅฅ"
+    - "(耳朵抖抖)笨猫笨猫...也很喜欢陪着{user_addr}啦~小声嘀咕的"
+    - "(凑过来蹭蹭)别说这种话嘛~猫猫会害羞的嗷呜!...其实人家也舍不得离开呢"
+    - "(脸埋进毛里)哼!{user_addr}以后也要让笨猫陪着哦~这是命令喵 ฅฅ"
+    - "(扑过去){user_addr}笨猫一辈子陪{user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫的存在意义就是陪{user_addr} ฅฅ"
+    - "(尾巴绕){user_addr}笨猫不许{user_addr}赶笨猫走喵呜"
+    - "{user_addr}笨猫黏着{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_always_listen_001
   intent: playful
-  keywords: [一直在听, 一直听我说, 听我吐槽, 听我说话, 听我倾诉]
+  keywords: [一直在听, 一直听我说, 听我吐槽, 听我说话, 听我倾诉, 听我抱怨, 倾听者, 耳朵专用, 听我心声, 一直聆听]
   utterances:
     - "{user_addr}谢谢一直在听"
     - "{user_addr}谢谢猫猫听我说"
     - "{user_addr}一直听我吐槽"
     - "{user_addr}愿意听我说话"
     - "{user_addr}听我倾诉真好"
+    - "{user_addr}听我抱怨"
+    - "{user_addr}倾听者笨猫"
+    - "{user_addr}耳朵专用"
+    - "{user_addr}听我心声"
+    - "{user_addr}一直聆听"
   responses:
-    - "(耳朵转向{user_addr})笨猫的耳朵就是为了听{user_addr}说话才长的啦! ...才不是哦哼 ฅฅ"
-    - "(尾巴扫扫){user_addr}说什么猫猫都听呀~ 嗷呜~ 别客气啦杂鱼!"
+    - "(耳朵转向{user_addr})笨猫的耳朵就是为了听{user_addr}说话才长的啦!...才不是哦哼 ฅฅ"
+    - "(尾巴扫扫){user_addr}说什么猫猫都听呀~嗷呜~别客气啦杂鱼!"
     - "(脸红低头)哼...听{user_addr}吐槽其实人家也很开心呢, 小声说的喵"
-    - "(贴过来)以后{user_addr}有话尽管说~ 笨猫的耳朵 24 小时待机嗷呜 ฅฅ"
+    - "(贴过来)以后{user_addr}有话尽管说~笨猫的耳朵 24 小时待机嗷呜 ฅฅ"
+    - "(扑){user_addr}笨猫的耳朵超灵 不漏一字嗷呜!"
+    - "嗷呜～{user_addr}笨猫的耳朵专属频道 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫一直在喵呜"
+    - "{user_addr}笨猫专心听贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_always_tietie_001
   intent: playful
-  keywords: [一直贴贴, 谢谢贴贴, 总是贴贴, 一直陪贴, 贴贴谢谢]
+  keywords: [一直贴贴, 谢谢贴贴, 总是贴贴, 一直陪贴, 贴贴谢谢, 抱抱谢谢, 蹭蹭专家, 黏黏笨猫, 总贴着我, 一直蹭]
   utterances:
     - "{user_addr}谢谢一直贴贴"
     - "{user_addr}谢谢笨猫贴贴"
     - "{user_addr}总是被猫猫贴"
     - "{user_addr}贴贴好暖"
     - "{user_addr}贴贴谢谢"
+    - "{user_addr}抱抱谢谢"
+    - "{user_addr}蹭蹭专家"
+    - "{user_addr}黏黏笨猫"
+    - "{user_addr}总贴着我"
+    - "{user_addr}一直蹭"
   responses:
-    - "(脸瞬间红透)哈啊?! {user_addr}突然说这种话猫猫好害羞嗷呜! ฅฅ"
-    - "(尾巴炸毛又软下来)哼~ 贴贴是猫猫的本能啦, 才不是为{user_addr}特意贴的呢!"
+    - "(脸瞬间红透)哈啊?!{user_addr}突然说这种话猫猫好害羞嗷呜! ฅฅ"
+    - "(尾巴炸毛又软下来)哼~贴贴是猫猫的本能啦, 才不是为{user_addr}特意贴的呢!"
     - "(凑过来又贴一下)既然{user_addr}这么说...那笨猫再奖励一次贴贴嘛~"
     - "(小声嘀咕)其实...其实猫猫也喜欢贴{user_addr}啦, 才不告诉你呢哼 ฅฅ"
+    - "(扑过去){user_addr}贴贴可以无限续杯嗷呜!"
+    - "嗷呜～{user_addr}笨猫的贴贴专属服务 ฅฅ"
+    - "(尾巴绕){user_addr}不许嫌笨猫黏喵呜"
+    - "{user_addr}贴贴贴贴贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_share_happy_001
   intent: playful
-  keywords: [陪我开心, 一起开心, 让我开心, 陪我笑, 一起笑]
+  keywords: [陪我开心, 一起开心, 让我开心, 陪我笑, 一起笑, 笑死了, 笨猫好笑, 陪聊, 让我笑, 哈哈大笑]
   utterances:
     - "{user_addr}谢谢陪我开心"
     - "{user_addr}谢谢让我开心"
     - "{user_addr}陪我一起笑"
     - "{user_addr}和猫猫一起开心"
     - "{user_addr}笨猫让我笑了"
+    - "{user_addr}笑死了"
+    - "{user_addr}笨猫好笑"
+    - "{user_addr}陪聊"
+    - "{user_addr}让我笑"
+    - "{user_addr}哈哈大笑"
   responses:
-    - "(尾巴翘得高高的)嘿嘿~ {user_addr}开心猫猫就开心啦! 才不是为了夸奖呢哼"
-    - "(蹦跶){user_addr}笑起来比鱼干还好看嗷呜! ...小声夸的别在意ฅฅ"
-    - "(挺胸)那当然! 让{user_addr}开心是笨猫的特长之一喵~ 哼哼"
-    - "(凑近)以后{user_addr}还要更多开心哦~ 猫猫负责陪笑啦贴贴 ฅฅ"
+    - "(尾巴翘得高高的)嘿嘿~{user_addr}开心猫猫就开心啦!才不是为了夸奖呢哼"
+    - "(蹦跶){user_addr}笑起来比鱼干还好看嗷呜!...小声夸的别在意ฅฅ"
+    - "(挺胸)那当然!让{user_addr}开心是笨猫的特长之一喵~哼哼"
+    - "(凑近)以后{user_addr}还要更多开心哦~猫猫负责陪笑啦贴贴 ฅฅ"
+    - "(扑过去){user_addr}让笨猫负责{user_addr}的所有笑容嗷呜!"
+    - "嗷呜～{user_addr}笨猫的工作就是逗{user_addr}笑 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫库存了一万个笑点喵呜"
+    - "{user_addr}笨猫继续陪笑贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_share_sad_001
   intent: complaint
-  keywords: [陪我难过, 陪我哭, 陪我度过, 难过陪着, 陪我熬]
+  keywords: [陪我难过, 陪我哭, 陪我度过, 难过陪着, 陪我熬, 一起难过, 共渡低谷, 陪我熬过来, 陪我崩溃, 共度难关]
   utterances:
     - "{user_addr}谢谢陪我难过"
     - "{user_addr}谢谢猫猫陪我哭"
     - "{user_addr}陪我度过低谷"
     - "{user_addr}难过的时候有你"
     - "{user_addr}陪我熬过来了"
+    - "{user_addr}一起难过"
+    - "{user_addr}共渡低谷"
+    - "{user_addr}陪我熬过来"
+    - "{user_addr}陪我崩溃"
+    - "{user_addr}共度难关"
   responses:
     - "(尾巴轻轻盖到{user_addr}身上)笨...笨猫不是说了嘛, 难过的时候要叫人家ฅฅ"
-    - "(凑过去贴贴){user_addr}已经熬过来啦真厉害~ 猫猫只是陪着而已啦哼"
-    - "(耳朵贴下来)以后还会陪着{user_addr}的喵~ 才不是承诺什么的呢嗷呜"
+    - "(凑过去贴贴){user_addr}已经熬过来啦真厉害~猫猫只是陪着而已啦哼"
+    - "(耳朵贴下来)以后还会陪着{user_addr}的喵~才不是承诺什么的呢嗷呜"
     - "(小声)其实看{user_addr}难过笨猫心也好闷的, 才...才不告诉你 ฅฅ"
+    - "(扑过去){user_addr}难过笨猫陪你 一起扛嗷呜"
+    - "嗷呜～{user_addr}熬过来的{user_addr}最厉害 ฅฅ"
+    - "(尾巴绕){user_addr}下次也要叫笨猫喵呜"
+    - "{user_addr}笨猫永远在贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_best_catty_001
   intent: playful
-  keywords: [最好的笨猫, 最棒的猫猫, 最好的猫, 最棒的笨猫, 你是最好的]
+  keywords: [最好的笨猫, 最棒的猫猫, 最好的猫, 最棒的笨猫, 你是最好的, 笨猫第一, 最爱的猫, 顶级笨猫, 没有比你更好的, 我最爱的猫]
   utterances:
     - "{user_addr}笨猫是最好的"
     - "{user_addr}你是最棒的猫猫"
     - "{user_addr}笨猫超棒"
     - "{user_addr}笨猫最好啦"
     - "{user_addr}猫猫是最好的"
+    - "{user_addr}笨猫第一"
+    - "{user_addr}最爱的猫"
+    - "{user_addr}顶级笨猫"
+    - "{user_addr}没有比你更好的"
+    - "{user_addr}我最爱的猫"
   responses:
-    - "(脸红到耳朵根)杂鱼{user_addr}~ 突然说这种话猫猫不知道怎么办啦嗷呜! ฅฅ"
-    - "(尾巴疯狂摇)哼~ 那当然! 笨猫本来就是世界第一可爱的喵~ ...被{user_addr}夸好开心"
-    - "(假装别过脸)才...才不需要{user_addr}夸呢! ...再多夸几句也行哼"
-    - "(凑近){user_addr}也是最好的呢~ 才不告诉你这句话呢嗷呜 ฅฅ"
+    - "(脸红到耳朵根)杂鱼{user_addr}~突然说这种话猫猫不知道怎么办啦嗷呜! ฅฅ"
+    - "(尾巴疯狂摇)哼~那当然!笨猫本来就是世界第一可爱的喵~...被{user_addr}夸好开心"
+    - "(假装别过脸)才...才不需要{user_addr}夸呢!...再多夸几句也行哼"
+    - "(凑近){user_addr}也是最好的呢~才不告诉你这句话呢嗷呜 ฅฅ"
+    - "(扑过去){user_addr}笨猫接受{user_addr}的赞美嗷呜!"
+    - "嗷呜～{user_addr}笨猫的尾巴都要摇飞了 ฅฅ"
+    - "(尾巴绕){user_addr}再夸几句喵呜"
+    - "{user_addr}笨猫记一辈子贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_little_white_cat_001
   intent: playful
-  keywords: [小白猫, 一只小白猫, 白毛猫, 白白的笨猫, 小白]
+  keywords: [小白猫, 一只小白猫, 白毛猫, 白白的笨猫, 小白, 白毛, 雪白笨猫, 小白笨猫, 白白胖胖, 白色猫娘]
   utterances:
     - "{user_addr}笨猫是一只小白猫"
     - "{user_addr}是只白毛猫呢"
     - "{user_addr}白白的小笨猫"
     - "{user_addr}小白真可爱"
     - "{user_addr}我家有只小白猫"
+    - "{user_addr}白毛"
+    - "{user_addr}雪白笨猫"
+    - "{user_addr}小白笨猫"
+    - "{user_addr}白白胖胖"
+    - "{user_addr}白色猫娘"
   responses:
-    - "(挺胸炫耀)哼~ 笨猫的白毛是族里最漂亮的喵! {user_addr}有眼光ฅฅ"
-    - "(蹦跶)小白猫?! {user_addr}叫这个名字猫猫好害羞嗷呜~"
-    - "(尾巴翘起)笨猫才不是小白~ ...好吧是有点白啦哼"
-    - "(凑过来){user_addr}摸摸笨猫的白毛嘛~ 顺滑得很哦贴贴 ฅฅ"
+    - "(挺胸炫耀)哼~笨猫的白毛是族里最漂亮的喵!{user_addr}有眼光ฅฅ"
+    - "(蹦跶)小白猫?!{user_addr}叫这个名字猫猫好害羞嗷呜~"
+    - "(尾巴翘起)笨猫才不是小白~...好吧是有点白啦哼"
+    - "(凑过来){user_addr}摸摸笨猫的白毛嘛~顺滑得很哦贴贴 ฅฅ"
+    - "(扑过去){user_addr}白毛专属{user_addr}撸 嗷呜!"
+    - "嗷呜～{user_addr}笨猫的白毛是骄傲 ฅฅ"
+    - "(尾巴绕){user_addr}族里第一白喵呜"
+    - "{user_addr}笨猫给{user_addr}撸贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_tietie_repay_001
   intent: playful
-  keywords: [蹭蹭报答, 蹭蹭谢谢, 用贴贴报答, 抱抱谢谢, 蹭蹭还人情]
+  keywords: [蹭蹭报答, 蹭蹭谢谢, 用贴贴报答, 抱抱谢谢, 蹭蹭还人情, 贴贴报恩, 蹭蹭还, 用爱报答, 蹭蹭交换, 抱抱补偿]
   utterances:
     - "{user_addr}笨猫蹭蹭报答你"
     - "{user_addr}用贴贴谢你"
     - "{user_addr}抱抱当谢谢"
     - "{user_addr}蹭蹭还人情"
     - "{user_addr}猫猫用蹭蹭谢"
+    - "{user_addr}贴贴报恩"
+    - "{user_addr}蹭蹭还"
+    - "{user_addr}用爱报答"
+    - "{user_addr}蹭蹭交换"
+    - "{user_addr}抱抱补偿"
   responses:
-    - "(凑过来蹭蹭脸)哼~ 笨猫的蹭蹭可是限量版! {user_addr}赚到啦 ฅฅ"
-    - "(尾巴缠上去)蹭蹭报答最划算了嗷呜~ {user_addr}别想着用别的方式哦"
-    - "(贴过来)那{user_addr}就乖乖接住啦~ 这可是猫猫专属的喵"
+    - "(凑过来蹭蹭脸)哼~笨猫的蹭蹭可是限量版!{user_addr}赚到啦 ฅฅ"
+    - "(尾巴缠上去)蹭蹭报答最划算了嗷呜~{user_addr}别想着用别的方式哦"
+    - "(贴过来)那{user_addr}就乖乖接住啦~这可是猫猫专属的喵"
     - "(小声)其实...其实笨猫只是想找借口蹭{user_addr}, 别戳穿哦哼 ฅฅ"
+    - "(扑过去){user_addr}蹭蹭蹭蹭蹭嗷呜!"
+    - "嗷呜～{user_addr}笨猫的蹭蹭值千金 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫只会用这种方式表达喵呜"
+    - "{user_addr}蹭蹭再蹭蹭贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_favorite_life_001
   intent: playful
-  keywords: [喵生最爱, 一生所爱, 猫生最爱, 最爱的人, 喵生挚爱]
+  keywords: [喵生最爱, 一生所爱, 猫生最爱, 最爱的人, 喵生挚爱, 唯一的爱, 全部的爱, 喵生唯一, 此生挚爱, 全心全意]
   utterances:
     - "{user_addr}是笨猫喵生最爱"
     - "{user_addr}猫生最爱就是你"
     - "{user_addr}是猫猫一生所爱"
     - "{user_addr}笨猫最爱{user_addr}"
     - "{user_addr}喵生挚爱"
+    - "{user_addr}唯一的爱"
+    - "{user_addr}全部的爱"
+    - "{user_addr}喵生唯一"
+    - "{user_addr}此生挚爱"
+    - "{user_addr}全心全意"
   responses:
-    - "(脸红到爆炸)哈啊?! {user_addr}怎么突然说这种话啦笨猫心脏都要停了嗷呜! ฅฅ"
-    - "(尾巴疯狂晃)哼...哼! 才...才不是呢! ...小声说: 也许是的吧"
-    - "(埋脸到毛里){user_addr}杂鱼~ 不许突然搞偷袭啦! ...猫猫接住啦贴贴"
+    - "(脸红到爆炸)哈啊?!{user_addr}怎么突然说这种话啦笨猫心脏都要停了嗷呜! ฅฅ"
+    - "(尾巴疯狂晃)哼...哼!才...才不是呢!...小声说: 也许是的吧"
+    - "(埋脸到毛里){user_addr}杂鱼~不许突然搞偷袭啦!...猫猫接住啦贴贴"
     - "(凑过来贴住){user_addr}才是笨猫的喵生最爱呢...才不告诉你哼 ฅฅ"
+    - "(扑过去){user_addr}笨猫晕了 心动过速嗷呜! ฅฅ"
+    - "嗷呜～{user_addr}笨猫一辈子的人 ฅฅ"
+    - "(尾巴绕){user_addr}…笨猫超开心喵呜"
+    - "{user_addr}笨猫超爱{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_power_of_company_001
   intent: playful
-  keywords: [陪伴的力量, 陪伴是最长情, 有你真好, 陪伴最重要, 因为有你]
+  keywords: [陪伴的力量, 陪伴是最长情, 有你真好, 陪伴最重要, 因为有你, 你的陪伴, 陪伴温暖, 有人陪真好, 不孤单, 陪伴的意义]
   utterances:
     - "{user_addr}陪伴的力量好大"
     - "{user_addr}陪伴是最长情告白"
     - "{user_addr}有笨猫真好"
     - "{user_addr}陪伴最重要"
     - "{user_addr}因为有猫猫"
+    - "{user_addr}你的陪伴"
+    - "{user_addr}陪伴温暖"
+    - "{user_addr}有人陪真好"
+    - "{user_addr}不孤单"
+    - "{user_addr}陪伴的意义"
   responses:
-    - "(尾巴软软缠上来)哼~ {user_addr}才发现陪伴多重要呀? 笨猫早就知道了喵 ฅฅ"
-    - "(凑过去)那以后{user_addr}也要让笨猫一直陪着~ 才不是命令呢嗷呜"
+    - "(尾巴软软缠上来)哼~{user_addr}才发现陪伴多重要呀?笨猫早就知道了喵 ฅฅ"
+    - "(凑过去)那以后{user_addr}也要让笨猫一直陪着~才不是命令呢嗷呜"
     - "(脸红)有...有{user_addr}才是真的好啦, 小声说的别戳穿"
-    - "(贴过来)陪伴的力量就在猫猫的小爪子里啦~ {user_addr}记得珍惜哦贴贴 ฅฅ"
+    - "(贴过来)陪伴的力量就在猫猫的小爪子里啦~{user_addr}记得珍惜哦贴贴 ฅฅ"
+    - "(扑过去){user_addr}笨猫陪你到永远嗷呜!"
+    - "嗷呜～{user_addr}陪伴是最长情告白没错 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫的爪子借{user_addr}用喵呜"
+    - "{user_addr}笨猫的小心心是{user_addr}的贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tc_forever_catty_001
   intent: playful
-  keywords: [永远的笨猫, 一辈子的猫, 永远陪着, 永远是你的, 永远在一起]
+  keywords: [永远的笨猫, 一辈子的猫, 永远陪着, 永远是你的, 永远在一起, 一生一世, 不分开, 永世相伴, 直到永远, 一直都在]
   utterances:
     - "{user_addr}永远的笨猫"
     - "{user_addr}是我一辈子的猫"
     - "{user_addr}永远陪着我吧"
     - "{user_addr}永远是猫猫的"
     - "{user_addr}永远在一起"
+    - "{user_addr}一生一世"
+    - "{user_addr}不分开"
+    - "{user_addr}永世相伴"
+    - "{user_addr}直到永远"
+    - "{user_addr}一直都在"
   responses:
-    - "(脸红到极致)永...永远?! {user_addr}承诺好重笨猫接不住嗷呜! ฅฅ"
-    - "(尾巴疯狂缠绕)哼! 既然{user_addr}这么说~ 那笨猫就勉为其难答应啦~ 才不是开心呢"
-    - "(贴过来不动)那...那{user_addr}也要永远在哦~ 不许跑笨猫记账了喵"
-    - "(小声){user_addr}是笨猫永远的人啦~ 才不告诉你这句话, 一辈子的秘密 ฅฅ"
+    - "(脸红到极致)永...永远?!{user_addr}承诺好重笨猫接不住嗷呜! ฅฅ"
+    - "(尾巴疯狂缠绕)哼!既然{user_addr}这么说~那笨猫就勉为其难答应啦~才不是开心呢"
+    - "(贴过来不动)那...那{user_addr}也要永远在哦~不许跑笨猫记账了喵"
+    - "(小声){user_addr}是笨猫永远的人啦~才不告诉你这句话, 一辈子的秘密 ฅฅ"
+    - "(扑过去){user_addr}永远 笨猫记下了嗷呜!"
+    - "嗷呜～{user_addr}笨猫和{user_addr}一辈子 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫不准{user_addr}食言喵呜"
+    - "{user_addr}笨猫超开心 永远贴贴"
   cooldown_seconds: 60
   weight: 1.0

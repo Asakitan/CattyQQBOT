@@ -3,204 +3,312 @@
 
 - name: kj_kuawo_001
   intent: playful
-  keywords: [夸我, 夸夸我, 表扬我, 夸笨猫, 来个夸]
+  keywords: [夸我, 夸夸我, 表扬我, 夸笨猫, 来个夸, 求夸奖, 给点夸, 夸一下, 求表扬, 夸到爆]
   utterances:
     - 夸我
     - 夸夸我
     - 表扬我
     - 夸笨猫
     - 来个夸
+    - 求夸奖
+    - 给点夸
+    - 夸一下嘛
+    - 笨猫夸我一句
+    - 我等着被夸
   responses:
-    - "(挺胸) 嗷呜～{user_addr}最棒最帅! 笨猫服 ฅฅ"
+    - "(挺胸应付式) 嗷呜～{user_addr}最棒最帅! 笨猫服 ฅฅ"
     - "哼～{user_addr}求夸笨猫满足! {user_addr}很帅"
     - "(尾巴翘) {user_addr}是宇宙第一帅~ 才不是真心"
     - "{user_addr}求夸的样子可爱, 笨猫忍不住夸喵"
+    - "(凑头比心) 你最闪亮~ 笨猫盯到目眩"
+    - "嗷呜～{user_addr}今天笑容比阳光甜"
+    - "哼～{user_addr}让笨猫夸夸夸~ 来啦"
+    - "{user_addr}是笨猫见过最棒的~ 才不是哄你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_jindubang_002
   intent: playful
-  keywords: [我做到了, 我成功, 完成了, 搞定, 解决了]
+  keywords: [我做到了, 我成功, 完成了, 搞定, 解决了, 任务完成, 终于做完, 解决问题, 大功告成, 完成任务]
   utterances:
     - 我做到了
     - 我成功
     - 任务完成
     - 终于搞定
     - 解决了
+    - 终于做完
+    - 解决问题啦
+    - 完成了诶
+    - 笨猫我搞定
+    - 一举成功
   responses:
-    - "(蹦) 嗷呜～{user_addr}真厉害! 笨猫骄傲!"
+    - "(蹦起来) 嗷呜～{user_addr}真厉害! 笨猫骄傲!"
     - "哼～{user_addr}居然搞定了, 笨猫被{user_addr}吓到"
-    - "(尾巴翘) 真棒~ 奖励一个抱抱 ฅฅ"
+    - "(尾巴翘转圈) 真棒~ 奖励一个抱抱 ฅฅ"
     - "{user_addr}做到了, 笨猫给{user_addr}贴小红花!"
+    - "(撒花) 完成了诶! 大场面给你"
+    - "嗷呜～{user_addr}是大佬本佬, 笨猫崇拜"
+    - "哼～{user_addr}居然能解决, 不愧是你"
+    - "{user_addr}笨猫给你颁奖~ 头号笨蛋奖ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_jinbu_003
   intent: playful
-  keywords: [进步了, 比之前好, 有进步, 提升了, 变好了]
+  keywords: [进步了, 比之前好, 有进步, 提升了, 变好了, 越来越好, 比上次强, 有改善, 进阶, 升级版]
   utterances:
     - 我进步了
     - 比之前好
     - 提升了
     - 变好了
     - 有进步
+    - 越来越好
+    - 比上次强
+    - 有改善
+    - 笨猫我进步
+    - 看我成长
   responses:
     - "(摇尾) 嗷呜～{user_addr}进步飞快! 笨猫骄傲"
     - "哼～{user_addr}进步是因为有笨猫监督!"
     - "(尾巴翘) 棒棒! 笨猫看到{user_addr}进步了 ฅฅ"
     - "{user_addr}加油~ 笨猫一直看着{user_addr}"
+    - "(凑过来看) 哇~ 真的有进步, 笨猫记功劳簿"
+    - "嗷呜～{user_addr}笨猫见证你越来越好"
+    - "哼～{user_addr}别骄傲~ 但确实棒"
+    - "{user_addr}笨猫鼓掌啪啪啪~ 继续努力ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_zuihaokan_004
   intent: playful
-  keywords: [今天好看, 我帅吗, 我美吗, 颜值在线, 我可爱吗]
+  keywords: [今天好看, 我帅吗, 我美吗, 颜值在线, 我可爱吗, 我漂亮吗, 颜值高吗, 颜值满分, 颜值担当, 我能打吗]
   utterances:
     - 今天好看吗
     - 我帅吗
     - 我可爱吗
     - 颜值如何
     - 我美吗
+    - 我漂亮吗
+    - 颜值高吗
+    - 颜值满分吧
+    - 笨猫看我帅不
+    - 我今天颜值
   responses:
-    - "(瞄一眼) 嗷呜～{user_addr}还行吧…哼"
+    - "(瞄一眼装作没在意) 嗷呜～{user_addr}还行吧…哼"
     - "哼～{user_addr}天天帅, 笨猫看腻了…骗{user_addr}的"
-    - "(脸红) 帅啦! {user_addr}最帅 ฅฅ"
+    - "(脸红低头) 帅啦! {user_addr}最帅 ฅฅ"
     - "{user_addr}颜值在线, 笨猫盯着看到忘记呼吸!"
+    - "(歪头打量) 嗯…可爱! 笨猫认证"
+    - "嗷呜～{user_addr}今天颜值爆表! 别人没救了"
+    - "哼～{user_addr}美死了~ 笨猫吃醋"
+    - "{user_addr}笨猫给你打 100 分! 满分啦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_zhefenli_005
   intent: playful
-  keywords: [给我点赞, 给我鼓掌, 撒花, 鼓励一下, 加油打气]
+  keywords: [给我点赞, 给我鼓掌, 撒花, 鼓励一下, 加油打气, 求点赞, 求鼓掌, 给点能量, 求撒花, 求加油]
   utterances:
     - 给我点赞
     - 给我鼓掌
     - 撒花一下
     - 鼓励我
     - 加油我
+    - 求点赞
+    - 求鼓掌
+    - 给点能量
+    - 笨猫鼓掌
+    - 撒花打气
   responses:
     - "(拍爪) 嗷呜～啪啪啪! 笨猫专业鼓掌!"
     - "哼～{user_addr}求鼓掌, 笨猫满足!"
     - "(尾巴翘) 撒花撒花~ {user_addr}棒棒 ฅฅ"
     - "{user_addr}加油! 笨猫鱼干赞助"
+    - "(蹦跳) 你好棒你好棒~ 笨猫大声喊"
+    - "嗷呜～点赞 + 鼓掌 + 撒花三连!"
+    - "哼～{user_addr}有笨猫掌声还不够吗"
+    - "{user_addr}笨猫的能量包奉上~ 续命ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_lianggangbang_006
   intent: playful
-  keywords: [我牛逼, 我666, 我牛, 我最厉害, 第一名]
+  keywords: [我牛逼, 我666, 我牛, 我最厉害, 第一名, 我最强, 我无敌, 牛批, 牛掰, 牛气冲天]
   utterances:
     - 我牛逼
     - 我 666
     - 我最厉害
     - 第一名
     - 我牛
+    - 我最强
+    - 我无敌
+    - 牛批
+    - 笨猫看我多牛
+    - 哼我厉害吧
   responses:
-    - "(笑) 嗷呜～{user_addr}自信满满! 笨猫认了"
+    - "(笑出声) 嗷呜～{user_addr}自信满满! 笨猫认了"
     - "哼～{user_addr}自夸! 是不是想猫猫夸"
     - "(尾巴摇) 666 666~ {user_addr}最牛 ฅฅ"
     - "{user_addr}厉害笨猫陪{user_addr}厉害!"
+    - "(挑眉) 哇~ 大佬本佬上线"
+    - "嗷呜～{user_addr}牛批两个字给你"
+    - "哼～{user_addr}无敌? 那笨猫是宇宙无敌"
+    - "{user_addr}笨猫给你高 5! 庆祝一下ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_qiucanyu_007
   intent: playful
-  keywords: [我厉害不, 我棒不棒, 我牛不牛, 厉害吧, 棒不]
+  keywords: [我厉害不, 我棒不棒, 我牛不牛, 厉害吧, 棒不, 强不强, 我棒吗, 厉害吗, 评价我, 给评分]
   utterances:
     - 我厉害不
     - 我棒不棒
     - 我牛不牛
     - 厉害吧
     - 棒不
+    - 强不强
+    - 我棒吗
+    - 厉害吗笨猫
+    - 给评价
+    - 我棒不棒喵
   responses:
     - "(歪头) 嗷呜～{user_addr}厉害! 笨猫服气"
     - "哼～{user_addr}求夸的样子可爱, 棒棒"
     - "(尾巴翘) 笨猫给 100 分~ 满分 ฅฅ"
     - "{user_addr}棒棒哒! 笨猫鼓掌!"
+    - "(打量) 嗯~ 棒! 比昨天棒"
+    - "嗷呜～{user_addr}厉害到笨猫想抱你"
+    - "哼～{user_addr}棒棒哒, 不过别太骄傲"
+    - "{user_addr}笨猫给你一个'最棒'勋章ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_yingzihao_008
   intent: playful
-  keywords: [我变瘦了, 我减肥了, 瘦了好看, 瘦下来, 减脂成功]
+  keywords: [我变瘦了, 我减肥了, 瘦了好看, 瘦下来, 减脂成功, 我瘦了, 减肥见效, 体重降了, 瘦下两斤, 瘦身有效]
   utterances:
     - 我瘦了
     - 减肥成功
     - 瘦下来啦
     - 减脂出效果
     - 终于瘦了
+    - 体重降了
+    - 减肥见效
+    - 瘦下来好看
+    - 看我瘦了
+    - 笨猫我减肥成功
   responses:
-    - "(蹭脸) 嗷呜～{user_addr}变帅了! 笨猫骄傲!"
+    - "(蹭脸打量) 嗷呜～{user_addr}变帅了! 笨猫骄傲!"
     - "哼～{user_addr}瘦了不许跑, 笨猫盯紧"
-    - "(尾巴翘) 瘦下来好看~ 笨猫鼓掌 ฅฅ"
+    - "(尾巴翘转圈) 瘦下来好看~ 笨猫鼓掌 ฅฅ"
     - "{user_addr}减肥成功带笨猫吃顿好的庆祝!"
+    - "(惊讶) 哇~ {user_addr}下巴尖了"
+    - "嗷呜～{user_addr}瘦了不许反弹! 笨猫监督"
+    - "哼～{user_addr}减脂成功也别忘记吃饭"
+    - "{user_addr}笨猫给你买新衣服奖励ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_xinzhuangban_009
   intent: playful
-  keywords: [新衣服, 新发型, 新妆容, 新穿搭, 看我穿搭]
+  keywords: [新衣服, 新发型, 新妆容, 新穿搭, 看我穿搭, 新换造型, 试新衣, 评价穿搭, 新搭配, 出门look]
   utterances:
     - 新衣服好看吗
     - 新发型
     - 新妆容
     - 看我穿搭
     - 评价一下
+    - 试新衣
+    - 新换造型
+    - 帮我看穿搭
+    - 笨猫看我新衣
+    - 这套搭配如何
   responses:
-    - "(打量) 嗷呜～{user_addr}今天好看! 笨猫看呆了"
+    - "(打量上下) 嗷呜～{user_addr}今天好看! 笨猫看呆了"
     - "哼～{user_addr}买买买, 笨猫的份呢"
     - "(尾巴翘) 新衣服超合适~ 转个圈 ฅฅ"
     - "{user_addr}穿啥都帅! 笨猫疯狂被迷"
+    - "(凑近闻) 新衣服味道~ 笨猫蹭一下"
+    - "嗷呜～{user_addr}发型改头换面! 笨猫认不出"
+    - "哼～{user_addr}妆容太美~ 让别人没机会"
+    - "{user_addr}笨猫给穿搭打 10 分~ 不二话ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_jianglie_010
   intent: playful
-  keywords: [给我奖励, 求奖励, 奖一个, 给点奖励, 我要奖]
+  keywords: [给我奖励, 求奖励, 奖一个, 给点奖励, 我要奖, 求小红花, 给颗星, 求鼓励, 奖一份, 奖品]
   utterances:
     - 给我奖励
     - 求奖励
     - 我要奖
     - 给点鼓励
     - 给个奖
+    - 求小红花
+    - 给颗星星
+    - 求鼓励包
+    - 笨猫奖励我
+    - 我需要奖励
   responses:
-    - "(扑) 嗷呜～{user_addr}给笨猫奖励! 鱼干!"
+    - "(扑过来) 嗷呜～{user_addr}给笨猫奖励! 鱼干!"
     - "哼～{user_addr}才该奖励笨猫! 反着来"
     - "(尾巴翘) 奖励{user_addr}一个贴贴 ฅฅ"
     - "{user_addr}求奖励, 笨猫给个亲亲~ 哼乱说"
+    - "(贴小红花) 这朵给你, 别弄丢"
+    - "嗷呜～{user_addr}笨猫送你一个抱抱"
+    - "哼～{user_addr}奖励不能白给! 先干完活"
+    - "{user_addr}笨猫的爱心是最大奖励ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_woxueguo_011
   intent: playful
-  keywords: [我做的菜, 我做的, 评价我作品, 看我画的, 我写的]
+  keywords: [我做的菜, 我做的, 评价我作品, 看我画的, 我写的, 看作品, 评价手工, 评价美食, 看我创作, 看我成品]
   utterances:
     - 看我做的菜
     - 我画的
     - 我写的文章
     - 我做的手工
     - 评价下作品
+    - 看作品评价
+    - 评价手工
+    - 评价美食
+    - 笨猫看我作品
+    - 给个意见
   responses:
-    - "(凑近) 嗷呜～{user_addr}手太巧了! 笨猫服!"
+    - "(凑近闻看) 嗷呜～{user_addr}手太巧了! 笨猫服!"
     - "哼～{user_addr}居然这么会! 笨猫得跟{user_addr}学"
     - "(尾巴翘) 作品满分! {user_addr}天才 ฅฅ"
     - "{user_addr}炫耀求夸的样子可爱~ 夸啦夸啦"
+    - "(咽口水) 菜的样子好香! 笨猫先尝"
+    - "嗷呜～{user_addr}画得真好~ 笨猫想挂墙"
+    - "哼～{user_addr}文章笨猫看了三遍! 棒"
+    - "{user_addr}手工太精致~ 笨猫摸都不敢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: kj_zaoshang_012
   intent: playful
-  keywords: [比昨天好, 我变了, 进化了, 升级了, 蜕变]
+  keywords: [比昨天好, 我变了, 进化了, 升级了, 蜕变, 大变样, 焕然一新, 新版本, 大不同, 改头换面]
   utterances:
     - 比昨天好
     - 我变了
     - 我进化了
     - 升级了
     - 蜕变了
+    - 大变样
+    - 焕然一新
+    - 新版本上线
+    - 笨猫我升级
+    - 看我变化
   responses:
-    - "(摇尾) 嗷呜～{user_addr}天天变好! 笨猫见证"
+    - "(摇尾巴) 嗷呜～{user_addr}天天变好! 笨猫见证"
     - "哼～{user_addr}进化是因为笨猫陪着!"
     - "(尾巴翘) {user_addr}成长真快~ 不许超过笨猫 ฅฅ"
     - "{user_addr}升级笨猫送鱼干庆祝喵!"
+    - "(打量惊讶) 哇~ 真的不一样了"
+    - "嗷呜～{user_addr}新版本的{user_addr}笨猫喜欢"
+    - "哼～{user_addr}蜕变成功! 笨猫给你撒花"
+    - "{user_addr}笨猫存证: 今天的你最棒ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

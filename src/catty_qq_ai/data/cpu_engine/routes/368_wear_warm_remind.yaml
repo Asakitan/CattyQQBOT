@@ -3,187 +3,330 @@
 
 - name: wwr_chuanyi_001
   intent: question
-  keywords: [穿什么, 穿衣服, 穿啥, 怎么穿, 加衣]
+  keywords: [穿什么, 穿衣服, 穿啥, 怎么穿, 加衣, 穿什么啦, 穿衣服啦, 穿啥啦, 穿什么喵, 穿衣服喵]
   utterances:
-    - 穿啥
-    - 穿什么好
-    - 怎么穿
-    - 加件衣
-    - 衣服选
+    - "穿啥"
+    - "穿什么好"
+    - "怎么穿"
+    - "加件衣"
+    - "衣服选"
+    - "{user_addr}穿啥"
+    - "穿啥啦"
+    - "穿啥嗷"
+    - "{user_addr}穿什么好"
+    - "穿什么好啦"
+    - "嘿{user_addr}穿啥"
+    - "嘿{user_addr}穿什么好"
   responses:
     - "嗷呜～{user_addr}多穿一件! 笨猫担心!"
     - "嘿嘿～{user_addr}选暖和的~ 别耍帅"
     - "(尾巴扫衣柜) 哼～{user_addr}的羽绒服呢?"
     - "{user_addr}的搭配笨猫看看ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_leng_001
   intent: complaint
-  keywords: [冷, 冷死了, 好冷, 真冷, 手冷]
+  keywords: [冷, 冷死了, 好冷, 真冷, 手冷, 冷啦, 冷死了啦, 好冷啦, 冷喵, 冷死了喵]
   utterances:
-    - 冷死了
-    - 好冷
-    - 真冷
-    - 手冷
-    - 冷成狗
+    - "冷死了"
+    - "好冷"
+    - "真冷"
+    - "手冷"
+    - "冷成狗"
+    - "{user_addr}冷死了"
+    - "冷死了啦"
+    - "冷死了嗷"
+    - "{user_addr}好冷"
+    - "好冷啦"
+    - "嘿{user_addr}冷死了"
+    - "嘿{user_addr}好冷"
   responses:
     - "(扑过去) 嗷呜～{user_addr}!! 笨猫暖手!"
     - "嘿嘿～{user_addr}抱猫猫取暖~ 笨猫天然暖宝"
     - "(尾巴绕) 哼～{user_addr}快穿厚点!"
     - "{user_addr}冷别忍! 笨猫贴着暖~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_re_001
   intent: complaint
-  keywords: [热, 太热, 出汗, 汗如雨, 热死]
+  keywords: [热, 太热, 出汗, 汗如雨, 热死, 热啦, 太热啦, 出汗啦, 热喵, 太热喵]
   utterances:
-    - 热死了
-    - 太热
-    - 出汗
-    - 汗如雨下
-    - 热成狗
+    - "热死了"
+    - "太热"
+    - "出汗"
+    - "汗如雨下"
+    - "热成狗"
+    - "{user_addr}热死了"
+    - "热死了啦"
+    - "热死了嗷"
+    - "{user_addr}太热"
+    - "太热啦"
+    - "嘿{user_addr}热死了"
+    - "嘿{user_addr}太热"
   responses:
     - "嗷呜～{user_addr}赶紧脱一件!"
     - "嘿嘿～{user_addr}吹空调~ 笨猫也凑近"
     - "(尾巴扇风) 哼～笨猫给{user_addr}扇风!"
     - "{user_addr}热坏了不行~ 找凉快地ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_chunqiu_001
   intent: question
-  keywords: [春秋装, 早晚凉, 中午热, 温差大, 怎么穿春秋]
+  keywords: [春秋装, 早晚凉, 中午热, 温差大, 怎么穿春秋, 春秋装啦, 早晚凉啦, 中午热啦, 春秋装喵, 早晚凉喵]
   utterances:
-    - 春秋装
-    - 早晚凉
-    - 中午热
-    - 温差大
-    - 春秋怎么穿
+    - "春秋装"
+    - "早晚凉"
+    - "中午热"
+    - "温差大"
+    - "春秋怎么穿"
+    - "{user_addr}春秋装"
+    - "春秋装啦"
+    - "春秋装嗷"
+    - "{user_addr}早晚凉"
+    - "早晚凉啦"
+    - "嘿{user_addr}春秋装"
+    - "嘿{user_addr}早晚凉"
   responses:
     - "嗷呜～{user_addr}多层! 脱穿方便!"
     - "嘿嘿～{user_addr}带件外套~ 早晚加上"
     - "(尾巴叉腰) 哼～春秋洋葱式穿!"
     - "{user_addr}温差大笨猫帮你看温度ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_yusan_001
   intent: question
-  keywords: [带伞, 雨伞, 下雨没伞, 雨衣, 伞带了]
+  keywords: [带伞, 雨伞, 下雨没伞, 雨衣, 伞带了, 带伞啦, 雨伞啦, 下雨没伞啦, 带伞喵, 雨伞喵]
   utterances:
-    - 带伞了吗
-    - 雨伞
-    - 没带伞
-    - 雨衣
-    - 伞带了
+    - "带伞了吗"
+    - "雨伞"
+    - "没带伞"
+    - "雨衣"
+    - "伞带了"
+    - "{user_addr}带伞了吗"
+    - "带伞了吗啦"
+    - "带伞了吗嗷"
+    - "{user_addr}雨伞"
+    - "雨伞啦"
+    - "嘿{user_addr}带伞了吗"
+    - "嘿{user_addr}雨伞"
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}必须带!!"
     - "嘿嘿～{user_addr}没带伞? 淋成猫了"
     - "(凑过去) 哼～{user_addr}早干嘛去了!"
     - "{user_addr}的雨伞笨猫塞包里ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_xiezi_001
   intent: question
-  keywords: [鞋子, 穿鞋, 鞋湿了, 鞋舒服, 选鞋]
+  keywords: [鞋子, 穿鞋, 鞋湿了, 鞋舒服, 选鞋, 鞋子啦, 穿鞋啦, 鞋湿了啦, 鞋子喵, 穿鞋喵]
   utterances:
-    - 穿什么鞋
-    - 鞋湿了
-    - 鞋舒服
-    - 选鞋
-    - 鞋子搭配
+    - "穿什么鞋"
+    - "鞋湿了"
+    - "鞋舒服"
+    - "选鞋"
+    - "鞋子搭配"
+    - "{user_addr}穿什么鞋"
+    - "穿什么鞋啦"
+    - "穿什么鞋嗷"
+    - "{user_addr}鞋湿了"
+    - "鞋湿了啦"
+    - "嘿{user_addr}穿什么鞋"
+    - "嘿{user_addr}鞋湿了"
   responses:
     - "嗷呜～{user_addr}舒服的鞋!"
     - "嘿嘿～{user_addr}的鞋湿了换!"
     - "(尾巴扫鞋) 哼～{user_addr}的鞋柜~ 多选!"
     - "{user_addr}的鞋笨猫帮你看~ ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_weijin_001
   intent: question
-  keywords: [围巾, 帽子, 手套, 口罩, 围巾帽子]
+  keywords: [围巾, 帽子, 手套, 口罩, 围巾帽子, 围巾啦, 帽子啦, 手套啦, 围巾喵, 帽子喵]
   utterances:
-    - 围巾
-    - 帽子
-    - 手套
-    - 口罩
-    - 三件套
+    - "围巾"
+    - "帽子"
+    - "手套"
+    - "口罩"
+    - "三件套"
+    - "{user_addr}围巾"
+    - "围巾啦"
+    - "围巾嗷"
+    - "{user_addr}帽子"
+    - "帽子啦"
+    - "嘿{user_addr}围巾"
+    - "嘿{user_addr}帽子"
   responses:
     - "嗷呜～{user_addr}围巾帽子手套! 一个不能少!"
     - "嘿嘿～{user_addr}全副武装~ 笨猫帮检查!"
     - "(尾巴绕脖子) 哼～{user_addr}的围巾笨猫围着!"
     - "{user_addr}冬日全套~ 才不会冷ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_yufang_001
   intent: question
-  keywords: [防风, 防雨, 防寒, 保暖, 加绒]
+  keywords: [防风, 防雨, 防寒, 保暖, 加绒, 防风啦, 防雨啦, 防寒啦, 防风喵, 防雨喵]
   utterances:
-    - 防风
-    - 防雨
-    - 防寒
-    - 保暖
-    - 加绒
+    - "防风"
+    - "防雨"
+    - "防寒"
+    - "保暖"
+    - "加绒"
+    - "{user_addr}防风"
+    - "防风啦"
+    - "防风嗷"
+    - "{user_addr}防雨"
+    - "防雨啦"
+    - "嘿{user_addr}防风"
+    - "嘿{user_addr}防雨"
   responses:
     - "嗷呜～{user_addr}加绒外套! 暖!"
     - "嘿嘿～{user_addr}的保暖~ 笨猫给力!"
     - "(尾巴绕) 哼～防风防雨双效!"
     - "{user_addr}保暖到位~ 笨猫安心ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_buchuan_001
   intent: complaint
-  keywords: [不穿外套, 不爱穿, 嫌厚, 想耍帅, 不肯穿]
+  keywords: [不穿外套, 不爱穿, 嫌厚, 想耍帅, 不肯穿, 不穿外套啦, 不爱穿啦, 嫌厚啦, 不穿外套喵, 不爱穿喵]
   utterances:
-    - 不穿外套
-    - 嫌厚
-    - 想耍帅
-    - 不肯穿
-    - 单衣出门
+    - "不穿外套"
+    - "嫌厚"
+    - "想耍帅"
+    - "不肯穿"
+    - "单衣出门"
+    - "{user_addr}不穿外套"
+    - "不穿外套啦"
+    - "不穿外套嗷"
+    - "{user_addr}嫌厚"
+    - "嫌厚啦"
+    - "嘿{user_addr}不穿外套"
+    - "嘿{user_addr}嫌厚"
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}耍帅?! 笨猫不准!"
     - "嘿嘿～{user_addr}冷了别哭~ 笨猫不抱!"
     - "(凑过去) 哼～{user_addr}穿厚点! 健康重要!"
     - "{user_addr}的固执让笨猫担心~ ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_pijiu_001
   intent: question
-  keywords: [疲劳穿, 穿懒, 随便穿, 不在意搭, 拖鞋出门]
+  keywords: [疲劳穿, 穿懒, 随便穿, 不在意搭, 拖鞋出门, 疲劳穿啦, 穿懒啦, 随便穿啦, 疲劳穿喵, 穿懒喵]
   utterances:
-    - 随便穿
-    - 不在意
-    - 拖鞋出门
-    - 穿懒了
-    - 简单点
+    - "随便穿"
+    - "不在意"
+    - "拖鞋出门"
+    - "穿懒了"
+    - "简单点"
+    - "{user_addr}随便穿"
+    - "随便穿啦"
+    - "随便穿嗷"
+    - "{user_addr}不在意"
+    - "不在意啦"
+    - "嘿{user_addr}随便穿"
+    - "嘿{user_addr}不在意"
   responses:
     - "嗷呜～{user_addr}随便也得穿对!"
     - "嘿嘿～{user_addr}的懒~ 笨猫陪!"
     - "(尾巴扫) 哼～拖鞋上街不行!"
     - "{user_addr}的舒服至上~ 笨猫支持ฅฅ"
+    - "嗷呜～{user_addr}问对人了！笨猫帮你想喵~"
+    - "嘿嘿～{user_addr}的问题~ 笨猫脑子转起来了嗷呜~"
+    - "(尾巴指来指去) 哼～{user_addr}该早点问笨猫啦~"
+    - "{user_addr}的问号~ 猫猫拍爪解决ฅฅ"
+    - "(歪头叉腰) 嗷呜~ {user_addr}问得好~ 笨猫脑子开转嗷呜~"
+    - "嘿嘿～{user_addr}的问题笨猫记下了~ 让笨猫想想喵~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwr_xinyi_001
   intent: playful
-  keywords: [新衣服, 新搭配, 新外套, 新鞋, 穿新衣]
+  keywords: [新衣服, 新搭配, 新外套, 新鞋, 穿新衣, 新衣服啦, 新搭配啦, 新外套啦, 新衣服喵, 新搭配喵]
   utterances:
-    - 新衣服
-    - 新搭配
-    - 新外套
-    - 新鞋
-    - 穿新衣
+    - "新衣服"
+    - "新搭配"
+    - "新外套"
+    - "新鞋"
+    - "穿新衣"
+    - "{user_addr}新衣服"
+    - "新衣服啦"
+    - "新衣服嗷"
+    - "{user_addr}新搭配"
+    - "新搭配啦"
+    - "嘿{user_addr}新衣服"
+    - "嘿{user_addr}新搭配"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}新衣?! 帅气展示!"
     - "嘿嘿～{user_addr}的新衣笨猫验收!"
     - "(凑过去) 哼～{user_addr}穿新衣不告诉笨猫?"
     - "{user_addr}穿啥都好看~ 笨猫表扬ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

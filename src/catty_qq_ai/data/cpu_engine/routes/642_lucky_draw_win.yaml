@@ -3,187 +3,294 @@
 
 - name: ldw_winprize_001
   intent: playful
-  keywords: [中奖了, 抽到了, 抽奖, 中奖, 奖品]
+  keywords: [中奖了, 抽到了, 抽奖, 中奖, 奖品, 抽奖中奖, 中大奖, 获奖通知, 抽中奖品]
   utterances:
     - 中奖了
     - 抽到了
     - 抽奖
     - 中大奖
     - 奖品
+    - 抽奖中奖
+    - 获奖通知
+    - "{user_addr}抽中奖品"
+    - 抽奖运气好
+    - 中奖通知到
   responses:
     - "(蹦) 嗷呜～{user_addr}恭喜!"
     - "笨猫认证: 锦鲤上身喵~"
     - "(尾巴摇) 笨猫沾沾光"
     - "哼～{user_addr}今天欧"
+    - "(尾巴翘高) 嗷呜～{user_addr}厉害!"
+    - "(凑近) 笨猫沾沾喜气喵"
+    - "(贴贴) 才不是羡慕呢哼"
+    - "(歪头) 请笨猫吃饭{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_oucountry_002
   intent: playful
-  keywords: [欧皇, 欧气满满, 锦鲤, 运气炸裂, 手气棒]
+  keywords: [欧皇, 欧气满满, 锦鲤, 运气炸裂, 手气棒, 中奖运, 欧气, 欧到家, 抽奖欧皇]
   utterances:
     - 欧皇
     - 欧气满满
     - 锦鲤
     - 运气炸裂
     - 手气棒
+    - 中奖运爆棚
+    - 欧到家
+    - "{user_addr}抽奖欧皇"
+    - 运气欧
+    - 锦鲤体质
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}天选之子!"
     - "笨猫认证: 来沾欧气"
     - "(歪头) 笨猫蹭蹭"
     - "哼～{user_addr}炫耀"
+    - "(凑近蹭) 嗷呜～{user_addr}笨猫沾沾运气!"
+    - "(尾巴贴) 才不是羡慕呢哼"
+    - "(贴贴) 分笨猫一点欧气"
+    - "(歪头) 笨猫也想欧{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_nonchosen_003
   intent: complaint
-  keywords: [非酋, 没中, 抽不到, 概率玄学, 倒霉]
+  keywords: [非酋, 没中, 抽不到, 概率玄学, 倒霉, 没中奖, 抽不中, 差一点, 没选中]
   utterances:
     - 非酋
     - 没中
     - 抽不到
     - 概率玄学
     - 倒霉
+    - "{user_addr}没中奖"
+    - 抽不中
+    - 差一点
+    - "{user_addr}没选中"
+    - 又落空
+    - 没抽到
   responses:
     - "(摸头) 嗷呜～{user_addr}笨猫安慰!"
     - "笨猫认证: 下次会中"
     - "(尾巴扫) 别砸手机笨蛋"
     - "哼～{user_addr}非酋之王"
+    - "(凑近拍背) 嗷呜～{user_addr}下次必中!"
+    - "(尾巴扫) 才不是替你失望呢哼"
+    - "(贴贴) 笨猫陪你抽笨蛋"
+    - "(歪头) 别灰心{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_lotterynum_004
   intent: playful
-  keywords: [彩票, 双色球, 大乐透, 买彩票, 中头奖]
+  keywords: [彩票, 双色球, 大乐透, 买彩票, 中头奖, 彩票号码, 中彩票, 彩票期号, 彩票数字]
   utterances:
     - 彩票
     - 双色球
     - 大乐透
     - 买彩票
     - 中头奖
+    - "{user_addr}彩票号码"
+    - 中彩票
+    - 彩票期号
+    - "{user_addr}彩票数字"
+    - 挑号码
+    - 彩票灵感
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}笨猫帮选号!"
     - "笨猫认证: 笨猫数字: 7"
     - "(歪头) 中了别忘笨猫"
     - "哼～{user_addr}梦想家"
+    - "(歪头) 嗷呜～{user_addr}笨猫帮你选喵!"
+    - "(尾巴扫) 笨猫的数字最灵笨蛋"
+    - "(贴贴) 才不是迷信呢哼"
+    - "(凑近) 中了请笨猫{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_couponwin_005
   intent: playful
-  keywords: [优惠券, 抽到券, 大额券, 立减券, 折扣券]
+  keywords: [优惠券, 抽到券, 大额券, 立减券, 折扣券, 中代金券, 中红包券, 满减券, 优惠券中奖]
   utterances:
     - 优惠券
     - 抽到券
     - 大额券
     - 立减券
     - 折扣券
+    - "{user_addr}中优惠券"
+    - 中代金券
+    - 中红包券
+    - 满减券
+    - "{user_addr}优惠券中奖"
+    - 券到手
+    - 抢到券
   responses:
     - "(歪头) 嗷呜～{user_addr}快用!"
     - "笨猫推荐: 别浪费喵"
     - "(尾巴摇) 别忘有效期"
     - "哼～{user_addr}小欧"
+    - "(歪头) 嗷呜～{user_addr}省钱了喵!"
+    - "(尾巴扫) 笨猫想用一下笨蛋"
+    - "(贴贴) 才不是想蹭呢哼"
+    - "(凑近) 别忘记用{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_smallthing_006
   intent: complaint
-  keywords: [谢谢参与, 谢谢光临, 鼓励奖, 安慰奖, 抽到鸡肋]
+  keywords: [谢谢参与, 谢谢光临, 鼓励奖, 安慰奖, 抽到鸡肋, 小奖, 小奖品, 一包纸巾, 送小东西]
   utterances:
     - 谢谢参与
     - 谢谢光临
     - 鼓励奖
     - 安慰奖
     - 鸡肋
+    - "{user_addr}小奖"
+    - 小奖品
+    - 一包纸巾
+    - "{user_addr}送小东西"
+    - 小礼物
+    - 细枝末节奖
   responses:
     - "(笑) 嗷呜～{user_addr}笨猫笑死!"
     - "笨猫认证: 鼓励奖最骚"
     - "(尾巴扫) 别气下次"
     - "哼～{user_addr}惨"
+    - "(歪头) 嗷呜～{user_addr}也算中了!"
+    - "(尾巴扫) 笨猫为你开心笨蛋"
+    - "(贴贴) 才不是嘲笑呢哼"
+    - "(凑近) 蚂蚁腿也是肉{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_iphonephone_007
   intent: playful
-  keywords: [抽到手机, 抽到iPhone, 大奖, 一等奖, 头奖]
+  keywords: [抽到手机, 抽到iPhone, 大奖, 一等奖, 头奖, 中手机, 抽中手机, 抽到大奖手机, 苹果中奖]
   utterances:
     - 抽到手机
     - 抽到iPhone
     - 大奖
     - 一等奖
     - 头奖
+    - 中手机
+    - 抽中手机
+    - 抽到大奖手机
+    - "{user_addr}苹果中奖"
+    - 抽中大手机
+    - 抽到旗舰
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}发财!"
     - "笨猫认证: 走运了喵"
     - "(歪头) 送笨猫一个"
     - "哼～{user_addr}炫"
+    - "(扑过来) 嗷呜～{user_addr}发达了!"
+    - "(尾巴翘高) 请笨猫吃大餐喵"
+    - "(贴贴) 才不是想要呢哼"
+    - "(歪头) 旧的给笨猫{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_seenseed_008
   intent: complaint
-  keywords: [内定, 暗箱, 黑幕, 抽奖不公, 关系户]
+  keywords: [内定, 暗箱, 黑幕, 抽奖不公, 关系户, 抽奖被看到, 中奖被注意, 中奖出名, 红了, 中奖晒]
   utterances:
     - 内定
     - 暗箱
     - 黑幕
     - 抽奖不公
     - 关系户
+    - "{user_addr}抽奖被看到"
+    - 中奖被注意
+    - 中奖出名
+    - 红了
+    - "{user_addr}中奖晒"
+    - 朋友圈晒
+    - 中奖照
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫不平!"
     - "笨猫认证: 看运气有时不公"
     - "(尾巴打) 退一步海阔"
     - "哼～{user_addr}冷静"
+    - "(歪头) 嗷呜～{user_addr}低调!"
+    - "(尾巴扫) 笨猫劝你低调笨蛋"
+    - "(贴贴) 才不是替你急呢哼"
+    - "(凑近) 闷声发大财{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_partyclap_009
   intent: playful
-  keywords: [中奖庆祝, 请客, 大餐, 庆祝中奖, 请大家]
+  keywords: [中奖庆祝, 请客, 大餐, 庆祝中奖, 请大家, 一起鼓掌, 为你欢呼, 庆祝运气]
   utterances:
     - 中奖庆祝
     - 请客
     - 大餐
     - 庆祝中奖
     - 请大家
+    - 一起鼓掌
+    - 为你欢呼
+    - "{user_addr}庆祝运气"
+    - 鼓掌欢呼
+    - 欢声笑语
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}请笨猫!"
     - "笨猫认证: 大餐走起喵"
     - "(歪头) 别忘笨猫位置"
     - "哼～{user_addr}有钱"
+    - "(尾巴翘高) 嗷呜～{user_addr}笨猫为你欢呼!"
+    - "(凑近) 才不是凑热闹呢哼"
+    - "(贴贴) 笨猫一起开心喵"
+    - "(歪头) 撒花{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_redrawing_010
   intent: question
-  keywords: [重抽, 再来一次, 再抽一次, 再抽, 重新抽]
+  keywords: [重抽, 再来一次, 再抽一次, 再抽, 重新抽, 继续抽奖, 不放弃抽, 聊聊喵]
   utterances:
     - 重抽
     - 再来一次
     - 再抽一次
     - 重新抽
     - 再抽
+    - 继续抽奖
+    - "{user_addr}不放弃抽"
+    - 抽到为止
+    - 继续战斗
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(歪头) {user_addr}笨猫给你打气 ฅฅ"
     - "嗷呜～别上头喵"
     - "(尾巴摇) 适度抽别一直"
     - "哼～{user_addr}贪心"
+    - "(凑近) 嗷呜～{user_addr}抽到底!"
+    - "(尾巴扫) 笨猫陪你抽笨蛋"
+    - "(贴贴) 才不是上头呢哼"
+    - "(歪头) 别氪太多{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ldw_friendsenvy_011
   intent: playful
-  keywords: [朋友羡慕, 别人羡慕, 炫耀, 装x, 显摆]
+  keywords: [朋友羡慕, 别人羡慕, 炫耀, 装x, 显摆, 朋友嫉妒, 中奖被羡慕, 朋友酸了]
   utterances:
     - 朋友羡慕
     - 别人羡慕
     - 炫耀
     - 装x
     - 显摆
+    - "{user_addr}朋友嫉妒"
+    - 中奖被羡慕
+    - "{user_addr}朋友酸了"
+    - 朋友圈酸民
+    - 酸到了
   responses:
     - "(歪头) 嗷呜～{user_addr}得瑟!"
     - "笨猫认证: 可以理解喵"
     - "(尾巴摇) 别太过笨蛋"
     - "哼～{user_addr}小心仇富"
+    - "(凑近) 嗷呜～{user_addr}低调啦!"
+    - "(尾巴扫) 笨猫为你骄傲喵"
+    - "(贴贴) 才不是替你高兴呢哼"
+    - "(歪头) 别炫太狠{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

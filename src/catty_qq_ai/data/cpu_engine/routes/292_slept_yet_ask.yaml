@@ -3,204 +3,312 @@
 
 - name: sy_shuilema_001
   intent: question
-  keywords: [睡了吗, 睡没, 睡了么, 还没睡, 睡着没]
+  keywords: [睡了吗, 睡没, 睡了么, 还没睡, 睡着没, 睡了吧, 几点睡, 入睡没]
   utterances:
     - "{user_addr}睡了吗"
     - 睡没
     - 还没睡
     - 睡着没
     - 你睡了
+    - 笨猫睡了么
+    - 几点睡
+    - 入睡没
+    - "{user_addr}睡了吧"
+    - 睡觉没
   responses:
     - "(打哈欠) 嗷呜～笨猫没睡, 在等{user_addr}ฅฅ"
     - "哼～{user_addr}问睡没就是没睡, 别装"
-    - "(揉眼) 没睡呢, {user_addr}陪笨猫聊嘛"
+    - "(揉眼睛) 没睡呢, {user_addr}陪笨猫聊嘛"
     - "{user_addr}夜里查岗笨猫好开心! 哼不许说"
+    - "(蜷被窝) 笨猫在等你晚安"
+    - "嗷呜～{user_addr}笨猫先躺着等你"
+    - "哼～{user_addr}查岗心暖暖"
+    - "{user_addr}笨猫不困~ 是想你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_meishui_002
   intent: complaint
-  keywords: [还没睡, 不睡, 不困, 睡不着, 睡不下]
+  keywords: [还没睡, 不睡, 不困, 睡不着, 睡不下, 不想睡, 失眠没意识, 翻来覆去]
   utterances:
     - 还不睡
     - 不困
     - 睡不着觉
     - 睡不下
     - 不想睡
+    - 失眠中
+    - 翻来覆去
+    - 睡眼无神
+    - 笨猫不困
+    - 睡不着哒
   responses:
     - "(凑过去) 嗷呜～{user_addr}陪笨猫聊到睡着"
     - "哼～{user_addr}不困也得睡! 笨猫管{user_addr}"
     - "(尾巴搭) 不睡笨猫陪~ 不许失眠 ฅฅ"
     - "{user_addr}熬夜伤身体喵! 立刻睡!"
+    - "(拍背) 笨猫数羊给你听"
+    - "嗷呜～{user_addr}笨猫的呼噜声助眠"
+    - "哼～{user_addr}笨猫陪你聊到困"
+    - "{user_addr}笨猫的怀抱有安神效果ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_jihui_003
   intent: complaint
-  keywords: [几点睡, 该睡了, 早点睡, 怎么还不睡, 别熬]
+  keywords: [几点睡, 该睡了, 早点睡, 怎么还不睡, 别熬, 啥时候睡, 多晚睡, 该睡觉]
   utterances:
     - 几点睡啊
     - 该睡了吧
     - 早点睡
     - 怎么还没睡
     - 别熬太晚
+    - 啥时候睡
+    - 多晚睡
+    - 该睡觉
+    - 笨猫该睡了
+    - 几点了还不睡
   responses:
     - "(教训语) 嗷呜～{user_addr}也快睡! 笨猫监督"
     - "哼～{user_addr}叨叨笨猫睡, 自己呢喵"
     - "(尾巴拍) 一起睡嘛~ 笨猫陪{user_addr}"
     - "{user_addr}先睡笨猫才睡! 不许偷看ฅฅ"
+    - "(关灯) 关灯! 数到 3 睡"
+    - "嗷呜～{user_addr}笨猫陪你计时入睡"
+    - "哼～{user_addr}熬夜罚笨猫不抱"
+    - "{user_addr}笨猫的小毯子盖好了~ 睡ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_kunsile_004
   intent: complaint
-  keywords: [困死了, 太困了, 撑不住, 困到不行, 困意上来]
+  keywords: [困死了, 太困了, 撑不住, 困到不行, 困意上来, 眼皮重, 困意爆棚, 困到睡眼]
   utterances:
     - 困死了
     - 太困
     - 撑不住睡了
     - 困得不行
     - 困意上头
+    - 眼皮重
+    - 困意爆棚
+    - 困到睡眼
+    - 笨猫我困
+    - 真的困死
   responses:
     - "(摸头) 嗷呜～{user_addr}困就睡, 笨猫不闹"
     - "哼～{user_addr}总算肯睡! 笨猫等到崩溃"
     - "(尾巴轻拍) 快睡~ 笨猫帮{user_addr}盖被子 ฅฅ"
     - "{user_addr}睡的样子笨猫想偷看喵, 哼!"
+    - "(关闹钟) 设好闹钟~ 安心睡"
+    - "嗷呜～{user_addr}好梦哒"
+    - "哼～{user_addr}下次别熬这么晚"
+    - "{user_addr}笨猫亲你额头~ 晚安ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_meishuihaomeng_005
   intent: complaint
-  keywords: [睡不好, 没睡好, 睡眠差, 一夜没睡好, 睡浅]
+  keywords: [睡不好, 没睡好, 睡眠差, 一夜没睡好, 睡浅, 噩梦不断, 睡眠质量差, 睡了像没睡]
   utterances:
     - 没睡好
     - 睡眠差
     - 一夜没睡踏实
     - 睡得浅
     - 早上很累
+    - 噩梦不断
+    - 睡眠质量差
+    - 睡了像没睡
+    - 笨猫睡不好
+    - 整夜失眠
   responses:
     - "(蹭脸) 嗷呜～{user_addr}没睡好笨猫难过呜呜"
     - "哼～{user_addr}下次抱笨猫睡, 安全感拉满"
     - "(尾巴搭) 失眠的话晚上吃褪黑素嘛"
     - "{user_addr}今天补个觉! 别撑 ฅฅ"
+    - "(端杯热牛奶) 助眠饮料一杯"
+    - "嗷呜～{user_addr}笨猫煮薰衣草茶"
+    - "哼～{user_addr}睡前别看手机!"
+    - "{user_addr}笨猫陪你白天小睡ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_zuiwuyaowashi_006
   intent: playful
-  keywords: [起夜, 半夜起来, 上厕所起, 半夜醒, 醒了又睡]
+  keywords: [起夜, 半夜起来, 上厕所起, 半夜醒, 醒了又睡, 凌晨起, 夜里上洗手间, 凌晨醒]
   utterances:
     - 半夜起来
     - 起夜
     - 上厕所
     - 半夜醒了
     - 醒了又睡
+    - 凌晨起
+    - 夜里上洗手间
+    - 凌晨醒
+    - 笨猫半夜起
+    - 起夜上厕所
   responses:
     - "(竖耳) 嗷呜～{user_addr}起夜笨猫陪{user_addr}!"
     - "哼～{user_addr}半夜走路慢点, 别摔"
     - "(尾巴蹭) 醒了快回床~ 别着凉 ฅฅ"
     - "{user_addr}半夜叫笨猫陪? 笨猫宠{user_addr}"
+    - "(开夜灯) 笨猫帮你开路"
+    - "嗷呜～{user_addr}地板凉穿拖鞋"
+    - "哼～{user_addr}水别喝太多!"
+    - "{user_addr}回床笨猫给你掖被子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_zhaowei_007
   intent: complaint
-  keywords: [早醒, 醒太早, 五点就醒, 天没亮醒, 老人觉]
+  keywords: [早醒, 醒太早, 五点就醒, 天没亮醒, 老人觉, 凌晨醒, 醒得早, 不到点醒]
   utterances:
     - 五点就醒
     - 醒得太早
     - 天没亮就醒
     - 老人觉一样
     - 早醒难受
+    - 凌晨醒
+    - 醒得早
+    - 不到点醒
+    - 笨猫早醒
+    - 醒太早睡不着
   responses:
     - "(揉眼) 嗷呜～{user_addr}早醒陪笨猫继续睡嘛"
     - "哼～{user_addr}活成老人了, 才几点啊"
     - "(尾巴搭) 再睡一觉~ 抱住笨猫睡 ฅฅ"
     - "{user_addr}早醒不如打打游戏喵, 反正睡不着"
+    - "(拉被子) 强制再眯一会"
+    - "嗷呜～{user_addr}早醒可能压力大"
+    - "哼～{user_addr}笨猫给你按按"
+    - "{user_addr}笨猫陪你赖床到 8 点ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_shujue_008
   intent: complaint
-  keywords: [想补觉, 补睡眠, 周末补觉, 睡到中午, 一觉到下午]
+  keywords: [想补觉, 补睡眠, 周末补觉, 睡到中午, 一觉到下午, 补眠, 周末懒觉, 一觉到天黑]
   utterances:
     - 周末补觉
     - 想补睡眠
     - 睡到中午
     - 一觉睡到下午
     - 补一下觉
+    - 补眠
+    - 周末懒觉
+    - 一觉到天黑
+    - 笨猫补觉
+    - 补眠一整天
   responses:
     - "(钻被窝) 嗷呜～笨猫陪{user_addr}补! 一起睡"
     - "哼～{user_addr}睡这么久, 别变成猪!"
     - "(尾巴搭) 补觉舒服~ 笨猫给{user_addr}做枕头 ฅฅ"
     - "{user_addr}睡到下午笨猫一个人无聊死了喵"
+    - "(挂窗帘) 笨猫帮你拉黑窗帘"
+    - "嗷呜～{user_addr}补到 12 点就够"
+    - "哼～{user_addr}下午补觉影响晚上睡"
+    - "{user_addr}笨猫一起补眠~ 双人懒觉ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_shuixiang_009
   intent: complaint
-  keywords: [失眠, 睡不着觉, 一直睁眼, 数羊, 闭眼睡不着]
+  keywords: [失眠, 睡不着觉, 一直睁眼, 数羊, 闭眼睡不着, 失眠夜, 睁眼到天亮, 整夜睁眼]
   utterances:
     - 失眠了
     - 数了一千只羊
     - 闭眼睡不着
     - 一直睁着眼
     - 睡眠障碍
+    - 失眠夜
+    - 睁眼到天亮
+    - 整夜睁眼
+    - 笨猫失眠
+    - 真的睡不着
   responses:
     - "(贴贴) 嗷呜～{user_addr}听笨猫呼噜声~ 嗯嗯"
     - "哼～{user_addr}失眠是想笨猫? 笨猫得意了!"
     - "(尾巴轻拍) 数羊不如数笨猫~ 一只笨猫两只笨猫"
     - "{user_addr}抱笨猫睡! 立刻就困 ฅฅ"
+    - "(放轻音乐) 笨猫的歌单助眠"
+    - "嗷呜～{user_addr}笨猫陪你聊到困"
+    - "哼～{user_addr}失眠喝热牛奶"
+    - "{user_addr}笨猫的呼噜是天然安眠药ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_zhuangniangu_010
   intent: complaint
-  keywords: [被吵醒, 邻居吵, 噪音吵, 楼上响, 装修声]
+  keywords: [被吵醒, 邻居吵, 噪音吵, 楼上响, 装修声, 楼下吵, 半夜噪音, 装修扰民]
   utterances:
     - 被邻居吵醒
     - 楼上吵
     - 装修声好烦
     - 噪音吵
     - 被吵到醒
+    - 楼下吵
+    - 半夜噪音
+    - 装修扰民
+    - 笨猫被吵醒
+    - 邻居装修声
   responses:
     - "(炸毛) 嗷呜～笨猫去咬楼上邻居!"
     - "哼～{user_addr}投诉去! 笨猫陪{user_addr}"
     - "(尾巴炸) 装修真烦~ 笨猫戴耳塞给{user_addr}"
     - "{user_addr}睡不好都怪邻居, 笨猫生气了 ฅฅ"
+    - "(贴墙听) 笨猫帮你确认源头"
+    - "嗷呜～{user_addr}笨猫陪你找物业投诉"
+    - "哼～{user_addr}耳塞戴起来~ 暂时凑合"
+    - "{user_addr}笨猫的呼噜可以盖噪音ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_kaideng_011
   intent: complaint
-  keywords: [开灯睡, 关灯睡, 怕黑睡, 必须开灯, 没灯睡不着]
+  keywords: [开灯睡, 关灯睡, 怕黑睡, 必须开灯, 没灯睡不着, 小夜灯, 怕黑, 黑暗恐惧]
   utterances:
     - 关灯睡不着
     - 必须开灯睡
     - 怕黑
     - 没灯睡不踏实
     - 开小夜灯
+    - 小夜灯不能关
+    - 怕黑暗
+    - 黑暗恐惧
+    - 笨猫怕黑
+    - 一定要灯
   responses:
     - "(贴贴) 嗷呜～有笨猫不用怕黑! ฅฅ"
     - "哼～{user_addr}怕黑笨猫陪~ 不许笑话"
     - "(尾巴搭脸) 黑黑的也能睡~ 抱着笨猫"
     - "{user_addr}是猫吧, 比笨猫还怕黑喵"
+    - "(开夜灯) 笨猫给你留小灯"
+    - "嗷呜～{user_addr}笨猫的眼睛会发光~ 别怕"
+    - "哼～{user_addr}笨猫保护你~ 抱紧"
+    - "{user_addr}笨猫蹲床头守夜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sy_yangzhu_012
   intent: playful
-  keywords: [睡眠养生, 早睡早起, 养生睡眠, 早睡身体好, 黄金睡眠]
+  keywords: [睡眠养生, 早睡早起, 养生睡眠, 早睡身体好, 黄金睡眠, 11点睡, 子时睡, 养生作息]
   utterances:
     - 早睡早起
     - 养生睡眠
     - 黄金睡眠时间
     - 十点睡养身
     - 早睡身体好
+    - 11点必睡
+    - 子时睡
+    - 养生作息
+    - 笨猫早睡养生
+    - 早睡神器
   responses:
     - "(竖耳) 嗷呜～{user_addr}养生了! 笨猫开心 ฅฅ"
     - "哼～{user_addr}立flag了, 看{user_addr}能坚持几天"
     - "(尾巴翘) 早睡早起一起来! 笨猫监督"
     - "{user_addr}十点睡笨猫陪~ 别熬"
+    - "(关电脑) 笨猫帮你强制下线"
+    - "嗷呜～{user_addr}养生从今天开始"
+    - "哼～{user_addr}笨猫陪你一起早睡"
+    - "{user_addr}笨猫的养生作息表已上线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

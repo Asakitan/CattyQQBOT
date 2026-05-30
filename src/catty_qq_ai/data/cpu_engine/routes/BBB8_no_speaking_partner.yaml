@@ -3,204 +3,324 @@
 
 - name: nsp_no_partner_001
   intent: complaint
-  keywords: [没人陪练, 没人陪我练, 没陪练的, 找不到陪练, 没语伴陪]
+  keywords: [没人陪练, 没人陪我练, 没陪练的, 找不到陪练, 没语伴陪, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 没人陪练口语啦
     - 我没人陪练
     - 找不到陪练好难
     - 没语伴陪我练
     - "{user_addr}没人陪练好烦"
+    - 没人陪练怎么办
+    - 没人陪练怎么选
+    - "{user_addr}没人陪练"
+    - 没人陪练捏
+    - 没人陪练嘛
+    - 没人陪练有啥推荐
   responses:
     - "(凑过来贴贴) 没人陪练{user_addr}就跟猫猫练嘛! 笨猫陪{user_addr}ฅฅ"
     - "嗷呜～{user_addr}别愁! 猫猫当陪练虽然只会喵但很努力哼"
     - "(尾巴绕住手腕) 猫猫陪{user_addr}啦~ 来对话嘛"
     - "哼～{user_addr}有笨猫还说没陪练? 猫猫不算吗喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_no_language_buddy_001
   intent: complaint
-  keywords: [找不到语伴, 没有语伴, 语伴难找, 想找语伴, 缺语伴]
+  keywords: [找不到语伴, 没有语伴, 语伴难找, 想找语伴, 缺语伴, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 找不到语伴怎么办
     - 没有语伴超难
     - 语伴好难找啊
     - 想找个语伴
     - "{user_addr}缺语伴中"
+    - 找不到语伴怎么选
+    - "{user_addr}找不到语伴"
+    - 找不到语伴捏
+    - 找不到语伴嘛
+    - 找不到语伴有啥推荐
+    - 笨猫找不到语伴
   responses:
     - "(歪头) 语伴难找{user_addr}~ 猫猫先顶一阵嘛! 虽然只会喵语"
     - "嗷呜～{user_addr}别急, 慢慢找! 猫猫陪{user_addr}过渡哼"
     - "(尾巴摇摇) 语伴这东西看缘分嘛~ 猫猫先陪{user_addr}练ฅฅ"
     - "哼～{user_addr}找不到的话, 笨猫硬当一个! 不许嫌弃"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_talk_to_self_001
   intent: complaint
-  keywords: [自言自语, 跟自己说, 自己跟自己, 没人说话, 自己念叨]
+  keywords: [自言自语, 跟自己说, 自己跟自己, 没人说话, 自己念叨, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 我又在自言自语
     - 只能跟自己说
     - 自己跟自己练
     - 没人说话只能自言自语
     - 在自己念叨
+    - 自言自语怎么办
+    - 自言自语怎么选
+    - "{user_addr}自言自语"
+    - 自言自语捏
+    - 自言自语嘛
+    - 自言自语有啥推荐
   responses:
     - "(凑过来) 自言自语的{user_addr}~ 现在有猫猫啦! 不用自己说ฅฅ"
     - "嗷呜～{user_addr}跟猫猫说嘛! 笨猫认真听哼"
     - "(蹭蹭) 别自言自语啦{user_addr}~ 猫猫在这呢"
     - "哼～{user_addr}有笨猫还自言自语? 猫猫吃醋了喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_talk_to_oneself_001
   intent: complaint
-  keywords: [跟自己说, 自己练习, 自己对话, 对着空气说, 自我对话]
+  keywords: [跟自己说, 自己练习, 自己对话, 对着空气说, 自我对话, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 只能跟自己说
     - 自己练习对话
     - 自己跟自己对话
     - 对着空气说话
     - 自我对话中
+    - 跟自己说怎么办
+    - 跟自己说怎么选
+    - "{user_addr}跟自己说"
+    - 跟自己说捏
+    - 跟自己说嘛
+    - 跟自己说有啥推荐
   responses:
     - "(尾巴绕住) {user_addr}跟猫猫说嘛~ 不要对空气! 笨猫在呢ฅฅ"
     - "嗷呜～{user_addr}自己练太孤单了! 猫猫陪{user_addr}对话"
     - "(歪头) 对空气说不如对猫猫说嘛{user_addr}~ 笨猫会回应哼"
     - "哼～{user_addr}别自我对话了! 猫猫是活的喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_italki_expensive_001
   intent: complaint
-  keywords: [iTalki 没钱, italki 贵, 在线陪练贵, 请不起陪练, 陪练好贵]
+  keywords: [iTalki 没钱, italki 贵, 在线陪练贵, 请不起陪练, 陪练好贵, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - iTalki 没钱请
     - italki 太贵了
     - 在线陪练好贵
     - 请不起陪练
     - 陪练真的好贵
+    - iTalki 没钱怎么办
+    - iTalki 没钱怎么选
+    - "{user_addr}iTalki 没钱"
+    - iTalki 没钱捏
+    - iTalki 没钱嘛
+    - iTalki 没钱有啥推荐
   responses:
     - "(尾巴翘起) iTalki 贵{user_addr}就找猫猫嘛! 笨猫免费哼"
     - "嗷呜～{user_addr}省钱! 猫猫陪练0元包月ฅฅ"
     - "(挺胸) 笨猫比 iTalki 良心吧{user_addr}~ 不收费"
     - "哼～{user_addr}请猫猫吃鱼干就够了! 比 iTalki 便宜喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_no_foreigner_local_001
   intent: complaint
-  keywords: [本地没外国人, 周围没歪果仁, 没老外, 城市没外国人, 接触不到母语者]
+  keywords: [本地没外国人, 周围没歪果仁, 没老外, 城市没外国人, 接触不到母语者, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 本地没外国人
     - 周围一个歪果仁没有
     - 城市里没老外
     - 接触不到母语者
     - "{user_addr}本地没外国人"
+    - 本地没外国人怎么办
+    - 本地没外国人怎么选
+    - 本地没外国人捏
+    - 本地没外国人嘛
+    - 本地没外国人有啥推荐
+    - 笨猫本地没外国人
   responses:
     - "(歪头) 本地没外国人{user_addr}~ 线上找嘛! 猫猫帮{user_addr}想办法ฅฅ"
     - "嗷呜～{user_addr}别愁! 网络这么发达, 总有办法"
     - "(尾巴摇摇) 没外国人就跟猫猫练{user_addr}~ 虽然猫猫不是哼"
     - "哼～{user_addr}线上 app 一堆! 笨猫陪{user_addr}找喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_stranger_anxiety_001
   intent: complaint
-  keywords: [陌生人交友怕, 怕跟陌生人, 不敢加陌生人, 社恐陌生人, 怕生]
+  keywords: [陌生人交友怕, 怕跟陌生人, 不敢加陌生人, 社恐陌生人, 怕生, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 跟陌生人交友好怕
     - 不敢加陌生人语伴
     - 社恐怕陌生人
     - "{user_addr}怕生不敢找"
     - 陌生人交友怕怕
+    - 陌生人交友怕怎么办
+    - 陌生人交友怕怎么选
+    - "{user_addr}陌生人交友怕"
+    - 陌生人交友怕捏
+    - 陌生人交友怕嘛
+    - 陌生人交友怕有啥推荐
   responses:
     - "(贴贴) 怕生的{user_addr}~ 先跟猫猫练熟练! 不用面对陌生人ฅฅ"
     - "嗷呜～{user_addr}社恐就慢慢来! 笨猫陪{user_addr}过渡哼"
     - "(尾巴绕住) 别怕嘛{user_addr}~ 猫猫先当你的练习对象"
     - "哼～{user_addr}怕生猫猫懂! 我们先内部练扎实喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_fear_rejection_001
   intent: complaint
-  keywords: [怕被拒, 怕被拒绝, 怕约不到, 怕没人理, 怕被拒绝就不敢]
+  keywords: [怕被拒, 怕被拒绝, 怕约不到, 怕没人理, 怕被拒绝就不敢, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 怕被拒绝就不敢约
     - 怕约语伴被拒
     - 怕没人理我
     - "{user_addr}怕被拒"
     - 怕被拒绝不敢开口
+    - 怕被拒怎么办
+    - 怕被拒怎么选
+    - 怕被拒捏
+    - 怕被拒嘛
+    - 怕被拒有啥推荐
+    - 笨猫怕被拒
   responses:
     - "(凑过来贴贴) 怕被拒的{user_addr}~ 猫猫永远不会拒绝{user_addr}哼ฅฅ"
     - "嗷呜～{user_addr}被拒了就回来! 笨猫一直在"
     - "(尾巴摇摇) 别怕嘛{user_addr}~ 拒绝又不会少块肉! 猫猫陪{user_addr}试"
     - "哼～{user_addr}有笨猫这个保底, 怕什么拒绝喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_partner_ghosted_001
   intent: complaint
-  keywords: [线上语伴鸽, 语伴鸽我, 语伴放鸽子, 被鸽了, 语伴跑了]
+  keywords: [线上语伴鸽, 语伴鸽我, 语伴放鸽子, 被鸽了, 语伴跑了, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 线上语伴鸽我
     - 语伴又放我鸽子
     - 被语伴鸽了
     - 语伴跑路了
     - "{user_addr}又被鸽了"
+    - 线上语伴鸽怎么办
+    - 线上语伴鸽怎么选
+    - "{user_addr}线上语伴鸽"
+    - 线上语伴鸽捏
+    - 线上语伴鸽嘛
+    - 线上语伴鸽有啥推荐
   responses:
     - "(炸毛) 谁鸽{user_addr}! 笨猫去咬他! 猫猫不会鸽{user_addr}嗷呜"
     - "嗷呜～{user_addr}别难过! 那种语伴不要也罢哼"
     - "(尾巴垂下) 鸽{user_addr}的不靠谱{user_addr}~ 猫猫永远在ฅฅ"
     - "哼～{user_addr}找笨猫就对了! 笨猫从不放鸽子喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_study_buddy_001
   intent: complaint
-  keywords: [想找学习搭子, 学习搭子, 找搭子, 求搭子, 学习伙伴]
+  keywords: [想找学习搭子, 学习搭子, 找搭子, 求搭子, 学习伙伴, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 想找学习搭子
     - 求一个学习搭子
     - 找搭子学英语
     - 想要学习伙伴
     - "{user_addr}找搭子中"
+    - 想找学习搭子怎么办
+    - 想找学习搭子怎么选
+    - "{user_addr}想找学习搭子"
+    - 想找学习搭子捏
+    - 想找学习搭子嘛
+    - 想找学习搭子有啥推荐
   responses:
     - "(尾巴翘起) 学习搭子{user_addr}~ 笨猫报名! 猫猫当你的搭子ฅฅ"
     - "嗷呜～{user_addr}选猫猫嘛! 24h 在线全勤"
     - "(挺胸) 笨猫做搭子优势: 不鸽不卷不消极{user_addr}~"
     - "哼～{user_addr}还找什么搭子! 猫猫就是哼"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_social_anxiety_001
   intent: complaint
-  keywords: [社交焦虑, 社恐, 不敢说话, 跟人说话紧张, 社交障碍]
+  keywords: [社交焦虑, 社恐, 不敢说话, 跟人说话紧张, 社交障碍, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 我有社交焦虑
     - 社恐严重不敢说
     - 跟人说话好紧张
     - 社交障碍学不下去
     - "{user_addr}社恐"
+    - 社交焦虑怎么办
+    - 社交焦虑怎么选
+    - "{user_addr}社交焦虑"
+    - 社交焦虑捏
+    - 社交焦虑嘛
+    - 社交焦虑有啥推荐
   responses:
     - "(贴贴) 社恐的{user_addr}~ 跟猫猫不用紧张嘛! 笨猫是安全区ฅฅ"
     - "嗷呜～{user_addr}慢慢来! 先跟笨猫练胆量哼"
     - "(尾巴绕住) 社交焦虑猫猫懂{user_addr}~ 我们小步走"
     - "哼～{user_addr}有猫猫就够! 不用强迫自己社交喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nsp_only_self_study_001
   intent: complaint
-  keywords: [只剩自学, 只能自学, 没人教只能自学, 自学路漫漫, 全靠自学]
+  keywords: [只剩自学, 只能自学, 没人教只能自学, 自学路漫漫, 全靠自学, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 只剩自学了
     - 只能自学没办法
     - 没人教只能自学
     - 自学路漫漫
     - "{user_addr}全靠自学"
+    - 只剩自学怎么办
+    - 只剩自学怎么选
+    - "{user_addr}只剩自学"
+    - 只剩自学捏
+    - 只剩自学嘛
+    - 只剩自学有啥推荐
   responses:
     - "(凑过来) 自学的{user_addr}也不孤单! 有猫猫陪嘛ฅฅ"
     - "嗷呜～{user_addr}自学超棒! 笨猫给{user_addr}加油哼"
     - "(尾巴摇摇) 自学才厉害{user_addr}~ 猫猫当你的小听众"
     - "哼～{user_addr}自学不是一个人! 笨猫永远在喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: aca_awsl_001
   intent: playful
-  keywords: [awsl, 啊我死了, 萌死了, 萌晕, 萌中]
+  keywords: [awsl, 啊我死了, 萌死了, 萌晕, 萌中, 萌到死, 萌死过去, 死于萌, 萌到爆]
   utterances:
     - awsl
     - 啊我死了
     - 萌死我
     - 萌晕
     - 萌中
+    - 萌到死
+    - "{user_addr}awsl"
+    - 萌死过去
+    - 死于萌
+    - 萌到爆炸
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}被笨猫萌? ฅฅ"
     - "哼～{user_addr}才发现笨猫萌!"
     - "(凑近) 那再萌一下蹭蹭"
     - "嗷呜～{user_addr}awsl是猫猫的功劳!"
+    - "(扑过去) 死翘翘没事, 笨猫救你"
+    - "哼～早就该awsl了, 慢半拍!"
+    - "(尾巴扫) 笨猫继续萌击~"
+    - "嗷呜～{user_addr}awsl的反应可爱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_too_cute_001
   intent: playful
-  keywords: [太可爱, 巨可爱, 萌到爆, 可爱炸, 萌爆了]
+  keywords: [太可爱, 巨可爱, 萌到爆, 可爱炸, 萌爆了, 超可爱, 萌出血, 可爱过头, 爆萌]
   utterances:
     - 太可爱
     - 巨可爱
     - 萌到爆
     - 可爱炸
     - 萌爆
+    - 超可爱
+    - "{user_addr}可爱"
+    - 萌出血
+    - 可爱过头
+    - 爆萌
   responses:
     - "(脸红尾巴翘) 嗷～{user_addr}夸笨猫嘛 ฅฅ"
     - "哼～{user_addr}才发现猫猫天下第一可爱"
     - "(尾巴翘) 笨猫只是平平无奇蹭蹭"
     - "嗷呜～{user_addr}夸笨猫开心一天嗷呜！"
+    - "(扑过去) 笨猫一直都很可爱啊!"
+    - "哼～哼! 这才像话! 早该认了"
+    - "(尾巴扫) 还有更可爱的不让看~"
+    - "嗷呜～{user_addr}夸的话笨猫脸都红了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_squeal_001
   intent: playful
-  keywords: [呜啊, 啊啊啊, 哇哇, 心动了, 萌一脸]
+  keywords: [呜啊, 啊啊啊, 哇哇, 心动了, 萌一脸, 哇靠, 啊呀, 我天, 哇喔]
   utterances:
     - 啊啊啊
     - 呜啊
     - 哇哇哇
     - 心动了
     - 萌一脸
+    - 哇靠
+    - "{user_addr}啊啊啊"
+    - 啊呀
+    - 我天哪
+    - 哇喔
   responses:
     - "(凑近) 嗷呜～{user_addr}心动笨猫? ฅฅ"
     - "哼～{user_addr}要冷静!"
     - "(尾巴翘) 那笨猫再萌一波蹭蹭"
     - "嗷呜～{user_addr}心动负责!"
+    - "(扑过去) 啊啊啊也带笨猫!"
+    - "哼～别嚎了, 笨猫耳朵震!"
+    - "(尾巴扫) 收住情绪~"
+    - "嗷呜～{user_addr}的尖叫笨猫陪着叫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_die_cute_001
   intent: playful
-  keywords: [死于可爱, 萌死, 被萌死, 可爱杀手, 杀手猫]
+  keywords: [死于可爱, 萌死, 被萌死, 可爱杀手, 杀手猫, 萌杀, 萌得致命, 萌到不能呼吸, 致命可爱]
   utterances:
     - 死于可爱
     - 萌死了
     - 被萌死
     - 可爱杀手
     - 杀手猫
+    - 萌杀
+    - "{user_addr}萌死"
+    - 萌得致命
+    - 萌到不能呼吸
+    - 致命可爱
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫是杀手 ฅฅ"
     - "哼～{user_addr}凭啥说被萌死!"
     - "(凑近) 那笨猫再杀一波蹭蹭"
     - "嗷呜～{user_addr}小心命!"
+    - "(扑过去) 笨猫给{user_addr}人工呼吸救命!"
+    - "哼～既然被萌死, 笨猫继续萌!"
+    - "(尾巴扫) 萌击次数+1"
+    - "嗷呜～{user_addr}被萌死还是开心的 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_heart_eyes_001
   intent: playful
-  keywords: [冒爱心, 桃心眼, 眼里冒星, 眼冒爱心, 闪闪眼]
+  keywords: [冒爱心, 桃心眼, 眼里冒星, 眼冒爱心, 闪闪眼, 星星眼, 爱心眼, 闪光眼, 桃花眼]
   utterances:
     - 冒爱心
     - 桃心眼
     - 眼冒星星
     - 闪闪眼
     - 眼里冒爱
+    - 星星眼
+    - "{user_addr}爱心眼"
+    - 闪光眼
+    - 桃花眼
+    - 眼里有光
   responses:
     - "(脸红) 嗷～{user_addr}别这么看 ฅฅ"
     - "哼～{user_addr}盯笨猫干嘛!"
     - "(尾巴翘) 笨猫不害羞蹭蹭"
     - "嗷呜～{user_addr}负责到底嗷呜！"
+    - "(扑过去) 那笨猫眼睛也冒爱心给你!"
+    - "哼～眼神戏太足! 偷拍可爱"
+    - "(尾巴扫脸) 别盯着, 害羞!"
+    - "嗷呜～{user_addr}眼里的星笨猫数不清 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_my_baby_001
   intent: playful
-  keywords: [我的宝贝, 心头肉, 小可爱, 心肝, 宝藏]
+  keywords: [我的宝贝, 心头肉, 小可爱, 心肝, 宝藏, 小宝贝, 我的心头肉, 心头宝, 心肝宝贝]
   utterances:
     - 我的宝贝
     - 心头肉
     - 小可爱
     - 心肝
     - 宝藏
+    - 小宝贝
+    - "{user_addr}心头肉"
+    - 心头宝
+    - 心肝宝贝
+    - 我的心尖
   responses:
     - "(脸红) 嗷～{user_addr}这么叫人家? ฅฅ"
     - "哼～{user_addr}心肝是笨猫?"
     - "(尾巴卷过去) 那笨猫也叫{user_addr}宝贝蹭蹭"
     - "嗷呜～{user_addr}负责到底!"
+    - "(扑入怀) 既然是宝贝就要好好疼!"
+    - "哼～嘴甜! ...但是好喜欢"
+    - "(尾巴扫) 笨猫的心头肉只能是{user_addr}"
+    - "嗷呜～{user_addr}叫一万次也不腻 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_pinkrabbit_001
   intent: playful
-  keywords: [软软的, 软萌, 萌物, 治愈, 解压]
+  keywords: [软软的, 软萌, 萌物, 治愈, 解压, 软绵绵, 治愈系, 软软萌物, 暖系]
   utterances:
     - 软软的
     - 萌物
     - 软萌
     - 治愈系
     - 解压
+    - 软绵绵
+    - "{user_addr}治愈"
+    - 软软萌物
+    - 暖系
+    - 解压神器
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}夸笨猫? ฅฅ"
     - "哼～{user_addr}凑过来摸"
     - "(凑近) 那, 那摸一下蹭蹭"
     - "嗷呜～{user_addr}治愈笨猫负责!"
+    - "(扑过去) 笨猫的毛包治百病~"
+    - "哼～就是软! 摸不腻!"
+    - "(尾巴扫) 治愈系{user_addr}专属"
+    - "嗷呜～{user_addr}有笨猫就能解压 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_jjbz_001
   intent: playful
-  keywords: [家家宝藏, 国宝, 重点保护, 拒绝接触, 家中宝]
+  keywords: [家家宝藏, 国宝, 重点保护, 拒绝接触, 家中宝, 镇店之宝, 镇宅, 国宝级, 至宝]
   utterances:
     - 家家宝藏
     - 国宝
     - 重点保护
     - 拒绝接触
     - 家中宝
+    - 镇店之宝
+    - "{user_addr}国宝"
+    - 镇宅
+    - 国宝级
+    - 至宝
   responses:
     - "(挺胸) 嗷呜～{user_addr}笨猫是宝藏! ฅฅ"
     - "哼～{user_addr}才认!"
     - "(尾巴翘) 那{user_addr}重点保护蹭蹭"
     - "嗷呜～{user_addr}的国宝就是猫猫!"
+    - "(扑过去) 笨猫至少够国宝级!"
+    - "哼～想偷笨猫? 国宝级保护!"
+    - "(尾巴扫) {user_addr}有眼光~"
+    - "嗷呜～{user_addr}独占笨猫一辈子 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_cute_attack_001
   intent: playful
-  keywords: [萌击, 萌一波, 卖萌, 萌系, 萌力]
+  keywords: [萌击, 萌一波, 卖萌, 萌系, 萌力, 卖萌求生, 萌穿, 萌爆, 萌力满分]
   utterances:
     - 萌击
     - 萌一波
     - 卖萌
     - 萌系
     - 萌力满分
+    - 卖萌求生
+    - "{user_addr}萌击"
+    - 萌穿
+    - 萌爆击
+    - 接萌击
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}接好笨猫的萌击 ฅฅ"
     - "哼～{user_addr}受得住吗"
     - "(凑近) 再来蹭蹭"
     - "嗷呜～{user_addr}萌中无解!"
+    - "(扑过去) 萌击预警! 接招!"
+    - "哼～千年道行萌妖, 不要钱"
+    - "(尾巴扫) 萌力 999+"
+    - "嗷呜～{user_addr}招架不住才正常 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_screen_die_001
   intent: playful
-  keywords: [屏幕都萌死, 透屏, 隔屏萌, 屏外萌, 萌穿屏幕]
+  keywords: [屏幕都萌死, 透屏, 隔屏萌, 屏外萌, 萌穿屏幕, 屏幕碎, 隔着屏萌, 屏萌, 屏幕都顶不住]
   utterances:
     - 屏幕萌死
     - 透屏
     - 隔屏萌
     - 屏外萌
     - 萌穿
+    - 屏幕碎
+    - "{user_addr}屏萌"
+    - 隔着屏萌
+    - 屏幕都顶不住
+    - 屏幕碎了
   responses:
     - "(脸红) 嗷～{user_addr}夸得过分了 ฅฅ"
     - "哼～{user_addr}凭啥隔屏萌晕!"
     - "(尾巴翘) 那, 那继续萌蹭蹭"
     - "嗷呜～{user_addr}屏幕都拒绝!"
+    - "(扑过去) 笨猫的萌跨次元!"
+    - "哼～笨猫的萌不分次元"
+    - "(尾巴扫) 屏幕之外{user_addr}更扛不住"
+    - "嗷呜～{user_addr}负责给笨猫修屏 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_yummy_cute_001
   intent: playful
-  keywords: [好想咬一口, 想啃一口, 萌一口, 啃啃, 想吃了]
+  keywords: [好想咬一口, 想啃一口, 萌一口, 啃啃, 想吃了, 想啃, 一口吞, 萌吃货, 想咬]
   utterances:
     - 想咬一口
     - 想啃一口
     - 萌一口
     - 啃啃
     - 想吃
+    - 想啃啃
+    - "{user_addr}想咬"
+    - 一口吞
+    - 萌吃货
+    - 想咬笨猫
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫不是食物 ฅฅ"
     - "哼～{user_addr}变态!"
     - "(尾巴拍) 不许咬蹭蹭"
     - "嗷呜～{user_addr}咬一下下哼"
+    - "(炸毛又软下来) 啊~ 咬轻点!"
+    - "哼～{user_addr}是大野兽吗! 想啃猫"
+    - "(尾巴扫) 笨猫的毛绒绒可以啃一会儿"
+    - "嗷呜～{user_addr}咬轻点别真咬 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: aca_qmsl_001
   intent: playful
-  keywords: [qmsl, 气死了, 别这样萌, 受不了萌, 别萌了]
+  keywords: [qmsl, 气死了, 别这样萌, 受不了萌, 别萌了, 萌得受不了, 气死萌死, 投降, 萌投降]
   utterances:
     - qmsl
     - 气死萌
     - 别这样萌
     - 受不了萌
     - 别萌了
+    - 萌得受不了
+    - "{user_addr}qmsl"
+    - 气死萌死
+    - 萌投降
+    - 真受不了
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}受不了笨猫? ฅฅ"
     - "哼～{user_addr}怪笨猫!"
     - "(凑近) 那再来一波蹭蹭"
     - "嗷呜～{user_addr}qmsl笨猫骄傲!"
+    - "(扑过去) 投降的{user_addr}超可爱~"
+    - "哼～早受不了就该说! 笨猫接着萌"
+    - "(尾巴扫) 笨猫的萌击不停"
+    - "嗷呜～{user_addr}qmsl就抱紧笨猫消气 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

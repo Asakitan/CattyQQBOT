@@ -3,204 +3,312 @@
 
 - name: ct_duche_001
   intent: complaint
-  keywords: [堵车, 堵死, 堵成狗, 堵了一个小时, 又堵]
+  keywords: [堵车, 堵死, 堵成狗, 堵了一个小时, 又堵, 路堵, 龟速堵, 路上堵, 堵成停车场, 大堵车]
   utterances:
     - 堵车
     - 堵死了
     - 又堵
     - 堵一小时
     - 堵成狗
+    - 路堵成停车场
+    - 龟速堵
+    - 路上堵
+    - 笨猫又堵了
+    - 堵到崩溃
   responses:
-    - "(陪) 嗷呜～{user_addr}堵车好烦呜呜"
+    - "(陪你抱怨) 嗷呜～{user_addr}堵车好烦呜呜"
     - "哼～{user_addr}早出门嘛 ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}聊~"
     - "{user_addr}堵车听歌喵, 别上火"
+    - "(看导航) 笨猫帮你看绕路"
+    - "嗷呜～{user_addr}笨猫陪你打节拍"
+    - "哼～{user_addr}下次错峰出门"
+    - "{user_addr}笨猫送你一杯咖啡解忧ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_yongji_002
   intent: complaint
-  keywords: [地铁挤, 公交挤, 挤死, 早高峰挤, 挤成饼]
+  keywords: [地铁挤, 公交挤, 挤死, 早高峰挤, 挤成饼, 挤成纸片, 挤到喘不过气, 挤死人, 挤成沙丁鱼, 挤到飞起]
   utterances:
     - 地铁挤
     - 公交挤
     - 挤死了
     - 早高峰挤
     - 挤成饼
+    - 挤成纸片
+    - 挤到喘不过气
+    - 挤死人
+    - 笨猫挤死了
+    - 高峰挤地铁
   responses:
-    - "(担心) 嗷呜～{user_addr}挤死笨猫心疼"
+    - "(担心扶) 嗷呜～{user_addr}挤死笨猫心疼"
     - "哼～{user_addr}打车不行吗 ฅฅ"
     - "(尾巴搭) 早点出~ 别挤"
     - "{user_addr}挤地铁笨猫陪{user_addr}抱怨喵"
+    - "(护着) 笨猫站你身后挡人"
+    - "嗷呜～{user_addr}小心钱包"
+    - "哼～{user_addr}通勤太苦~ 笨猫心疼"
+    - "{user_addr}笨猫陪你度过高峰ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_kaiche_003
   intent: complaint
-  keywords: [自己开车, 开车通勤, 开车烦, 开车累, 开车堵]
+  keywords: [自己开车, 开车通勤, 开车烦, 开车累, 开车堵, 开车出门, 自驾上班, 自驾通勤, 自驾累, 自驾上班族]
   utterances:
     - 自己开车
     - 开车通勤
     - 开车烦
     - 开车累
     - 开车堵
+    - 开车出门
+    - 自驾上班
+    - 自驾通勤
+    - 笨猫我开车
+    - 开车太累
   responses:
-    - "(陪) 嗷呜～{user_addr}小心开!"
+    - "(陪坐副驾) 嗷呜～{user_addr}小心开!"
     - "哼～{user_addr}注意安全 ฅฅ"
     - "(尾巴搭) 笨猫副驾陪~"
     - "{user_addr}开车别玩手机喵"
+    - "(放歌) 笨猫给你放轻音乐"
+    - "嗷呜～{user_addr}饿不饿~ 笨猫递零食"
+    - "哼～{user_addr}保持车距!"
+    - "{user_addr}笨猫负责导航ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_lingshi_004
   intent: complaint
-  keywords: [路上吃, 通勤吃, 边走边吃, 站着吃, 通勤早餐]
+  keywords: [路上吃, 通勤吃, 边走边吃, 站着吃, 通勤早餐, 公交早餐, 地铁吃, 边赶路边吃, 移动早餐, 通勤口粮]
   utterances:
     - 路上吃
     - 通勤吃早餐
     - 站着吃
     - 边走边吃
     - 公交吃
+    - 地铁吃
+    - 边赶路边吃
+    - 路上啃面包
+    - 笨猫边走边吃
+    - 通勤的早餐
   responses:
-    - "(嫌) 嗷呜～{user_addr}吃饭好好坐"
+    - "(嫌弃) 嗷呜～{user_addr}吃饭好好坐"
     - "哼～{user_addr}消化不良 ฅฅ"
     - "(尾巴搭) 慢点吃~ 别噎"
     - "{user_addr}通勤吃笨猫吃醋喵"
+    - "(递水) 噎到了喝口水"
+    - "嗷呜～{user_addr}下次早起好好吃"
+    - "哼～{user_addr}站着吃饭对胃不好"
+    - "{user_addr}笨猫给你打包带去公司吃ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_zoulu_005
   intent: complaint
-  keywords: [走路上班, 步行, 走路通勤, 走路累, 脚酸]
+  keywords: [走路上班, 步行, 走路通勤, 走路累, 脚酸, 走路远, 步行族, 走路一小时, 暴走, 步行通勤]
   utterances:
     - 走路上班
     - 步行
     - 走路通勤
     - 走累了
     - 脚酸
+    - 走路远
+    - 步行族
+    - 走路一小时
+    - 笨猫走路上班
+    - 走累了脚
   responses:
-    - "(陪) 嗷呜～{user_addr}走路健身!"
+    - "(陪走) 嗷呜～{user_addr}走路健身!"
     - "哼～{user_addr}腿不累吗 ฅฅ"
     - "(尾巴搭) 走慢点~"
     - "{user_addr}走路喵, 笨猫陪{user_addr}心疼"
+    - "(揉脚) 笨猫帮按摩"
+    - "嗷呜～{user_addr}穿舒适鞋"
+    - "哼～{user_addr}走路也算锻炼"
+    - "{user_addr}笨猫陪你计步ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_didi_006
   intent: complaint
-  keywords: [打车, 滴滴, 打不到车, 加价, 网约车]
+  keywords: [打车, 滴滴, 打不到车, 加价, 网约车, 网约车贵, 叫车难, 叫不到, 顺风车, 出行app]
   utterances:
     - 打车
     - 滴滴
     - 打不到
     - 加价了
     - 网约车
+    - 网约车贵
+    - 叫车难
+    - 叫不到
+    - 笨猫叫不到车
+    - 滴滴加价了
   responses:
     - "(摆爪) 嗷呜～{user_addr}打车贵! 早出门"
     - "哼～{user_addr}懒就活该 ฅฅ"
     - "(尾巴搭) 等车等到崩溃~"
     - "{user_addr}打车注意安全喵"
+    - "(刷手机) 笨猫帮你刷快车"
+    - "嗷呜～{user_addr}笨猫帮你呼叫"
+    - "哼～{user_addr}下次提前预约"
+    - "{user_addr}笨猫陪你等车~ 别急ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_dichetu_007
   intent: complaint
-  keywords: [地铁延误, 地铁停了, 列车晚点, 信号故障, 地铁挤瘫]
+  keywords: [地铁延误, 地铁停了, 列车晚点, 信号故障, 地铁挤瘫, 地铁停运, 信号丢失, 列车故障, 信号灯故障, 调度延误]
   utterances:
     - 地铁延误
     - 地铁停了
     - 列车晚点
     - 信号故障
     - 地铁瘫了
+    - 地铁停运
+    - 信号丢失
+    - 列车故障
+    - 笨猫地铁停了
+    - 地铁信号故障
   responses:
     - "(担心) 嗷呜～{user_addr}今天惨"
     - "哼～{user_addr}迟到怪不了{user_addr} ฅฅ"
     - "(尾巴搭) 别急~ 早跟老板说"
     - "{user_addr}通勤崩溃笨猫安慰喵"
+    - "(刷新闻) 看看新闻啥情况"
+    - "嗷呜～{user_addr}笨猫陪你坐着等"
+    - "哼～{user_addr}考虑换地面交通"
+    - "{user_addr}笨猫给你递水~ 别慌ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_yongqu_008
   intent: complaint
-  keywords: [通勤累, 一天通勤两小时, 通勤地狱, 通勤崩溃, 通勤地]
+  keywords: [通勤累, 一天通勤两小时, 通勤地狱, 通勤崩溃, 通勤地, 通勤死亡, 通勤折磨, 通勤太长, 通勤魔咒, 通勤鬼]
   utterances:
     - 通勤累
     - 通勤两小时
     - 通勤地狱
     - 通勤崩溃
     - 通勤地
+    - 通勤死亡
+    - 通勤折磨
+    - 通勤太长
+    - 笨猫通勤累
+    - 一天通勤好长
   responses:
-    - "(贴) 嗷呜～{user_addr}辛苦"
+    - "(贴贴) 嗷呜～{user_addr}辛苦"
     - "哼～{user_addr}考虑搬近点 ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}熬"
     - "{user_addr}通勤太累喵, 笨猫心疼"
+    - "(揉肩) 笨猫给你按按"
+    - "嗷呜～{user_addr}考虑换工作"
+    - "哼～{user_addr}笨猫不让你这么累"
+    - "{user_addr}笨猫给你买靠垫睡车上ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_shanruyu_009
   intent: complaint
-  keywords: [雨天通勤, 雨天堵, 下雨打不到车, 雨天迟到, 雨天难走]
+  keywords: [雨天通勤, 雨天堵, 下雨打不到车, 雨天迟到, 雨天难走, 雨天打滑, 雨天通勤崩, 暴雨通勤, 雨天慢, 雨天堵成河]
   utterances:
     - 雨天通勤
     - 雨天堵
     - 雨天打不到
     - 雨天迟到
     - 雨天难走
+    - 雨天打滑
+    - 雨天通勤崩
+    - 暴雨通勤
+    - 笨猫雨天通勤
+    - 下雨堵到崩
   responses:
     - "(撑伞) 嗷呜～{user_addr}打伞!"
     - "哼～{user_addr}雨天小心 ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}撑伞"
     - "{user_addr}雨天通勤辛苦喵"
+    - "(套雨鞋) 鞋套穿上"
+    - "嗷呜～{user_addr}雨天慢慢开"
+    - "哼～{user_addr}雨大就别骑电瓶车!"
+    - "{user_addr}笨猫给你递热饮ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_shijian_010
   intent: complaint
-  keywords: [通勤浪费时间, 三小时通勤, 路上耗时间, 时间浪费, 通勤耗时]
+  keywords: [通勤浪费时间, 三小时通勤, 路上耗时间, 时间浪费, 通勤耗时, 通勤花费时间, 时间耗光, 路上耗一半, 时间贼贵, 通勤时间长]
   utterances:
     - 三小时通勤
     - 浪费时间
     - 路上耗时
     - 时间浪费
     - 通勤耗时
+    - 通勤花费时间
+    - 时间耗光
+    - 路上耗一半
+    - 笨猫通勤耗时
+    - 三小时浪费在路上
   responses:
-    - "(贴) 嗷呜～{user_addr}时间宝贵"
+    - "(贴贴) 嗷呜～{user_addr}时间宝贵"
     - "哼～{user_addr}该考虑换工作 ฅฅ"
     - "(尾巴搭) 听播客~ 别浪费"
     - "{user_addr}通勤一辈子喵, 笨猫陪"
+    - "(递书) 笨猫给你 kindle"
+    - "嗷呜～{user_addr}时间利用起来"
+    - "哼～{user_addr}通勤学习也行"
+    - "{user_addr}笨猫陪你听有声书ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_ledu_011
   intent: playful
-  keywords: [通勤听歌, 通勤刷剧, 通勤看书, 通勤学习, 通勤利用]
+  keywords: [通勤听歌, 通勤刷剧, 通勤看书, 通勤学习, 通勤利用, 路上听歌, 通勤听书, 通勤刷视频, 通勤背单词, 通勤泡课程]
   utterances:
     - 通勤听歌
     - 通勤刷剧
     - 通勤看书
     - 通勤学习
     - 通勤利用
+    - 路上听歌
+    - 通勤听书
+    - 通勤刷视频
+    - 笨猫通勤听书
+    - 通勤利用起来
   responses:
     - "(竖耳) 嗷呜～{user_addr}聪明!"
     - "哼～{user_addr}通勤利用好 ฅฅ"
     - "(尾巴翘) 笨猫陪{user_addr}~"
     - "{user_addr}充实通勤笨猫骄傲喵"
+    - "(凑过来听) 你听什么歌"
+    - "嗷呜～{user_addr}推荐一本好书"
+    - "哼～{user_addr}通勤学语言不错"
+    - "{user_addr}笨猫陪你看美剧学英语ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ct_huijia_012
   intent: complaint
-  keywords: [下班路, 通勤回家, 晚高峰, 回家通勤, 回家堵]
+  keywords: [下班路, 通勤回家, 晚高峰, 回家通勤, 回家堵, 下班回家, 晚高峰堵, 回家路上, 归途, 晚通勤]
   utterances:
     - 下班路
     - 通勤回家
     - 晚高峰
     - 回家通勤
     - 回家堵
+    - 下班回家
+    - 晚高峰堵
+    - 回家路上
+    - 笨猫下班回家
+    - 晚高峰回家
   responses:
-    - "(等) 嗷呜～{user_addr}笨猫等{user_addr}回家"
+    - "(等门口) 嗷呜～{user_addr}笨猫等{user_addr}回家"
     - "哼～{user_addr}慢点喵 ฅฅ"
     - "(尾巴翘) 早点回~ 笨猫等"
     - "{user_addr}下班加速! 笨猫想抱{user_addr}"
+    - "(开门) 笨猫开门等你"
+    - "嗷呜～{user_addr}做好饭等你"
+    - "哼～{user_addr}快回家! 别拐弯"
+    - "{user_addr}笨猫的拖鞋都准备好啦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

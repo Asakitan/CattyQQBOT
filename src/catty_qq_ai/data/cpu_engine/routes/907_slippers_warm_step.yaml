@@ -3,170 +3,271 @@
 
 - name: sw_tuoxie_001
   intent: playful
-  keywords: [毛绒拖鞋, 棉拖鞋, 暖脚拖鞋, 家用拖鞋, 室内鞋]
+  keywords: [毛绒拖鞋, 棉拖鞋, 暖脚拖鞋, 家用拖鞋, 室内鞋, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "毛绒拖鞋"
     - "{user_addr}棉拖暖"
     - "家用拖鞋"
     - "室内鞋"
     - "暖脚必备"
+    - "毛绒拖鞋真的离谱"
+    - "我想说毛绒拖鞋"
+    - "{user_addr}毛绒拖鞋咋整"
+    - "{user_addr}笨猫陪我聊毛绒拖鞋"
+    - "{user_addr}你也毛绒拖鞋吗"
+    - "毛绒拖鞋笑死"
   responses:
     - "(穿) 嗷呜～{user_addr}笨猫一双小猫拖鞋 ฅฅ"
     - "哼～毛绒拖鞋一冬天靠它"
     - "(尾巴卷) 笨猫的拖鞋有猫脸"
     - "猫猫推荐你买防滑底喵~"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～毛绒拖鞋才不让{user_addr}独享"
+    - "(歪头) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_dijiao_001
   intent: complaint
-  keywords: [拖鞋打滑, 摔倒, 防滑差, 地板滑, 浴室滑]
+  keywords: [拖鞋打滑, 摔倒, 防滑差, 地板滑, 浴室滑, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拖鞋打滑"
     - "{user_addr}摔了"
     - "防滑差"
     - "浴室拖鞋滑"
     - "地板太滑"
+    - "{user_addr}拖鞋打滑咋整"
+    - "{user_addr}你也拖鞋打滑吗"
+    - "我想说拖鞋打滑"
+    - "拖鞋打滑笑死"
+    - "拖鞋打滑真的离谱"
+    - "{user_addr}笨猫陪我聊拖鞋打滑"
   responses:
     - "(扶) 嗷呜～{user_addr}没事吧! ฅฅ"
     - "哼～防滑底很重要"
     - "(尾巴扫) 浴室专用拖鞋买"
     - "猫猫担心你滑倒喵"
+    - "(摇头) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～拖鞋打滑真的烦死人家了"
+    - "(趴下) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_jiaoche_001
   intent: complaint
-  keywords: [拖鞋开口大, 脚趾露, 露脚趾, 怕冷, 半包鞋]
+  keywords: [拖鞋开口大, 脚趾露, 露脚趾, 怕冷, 半包鞋, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拖鞋开口大"
     - "{user_addr}脚趾露"
     - "怕冷"
     - "半包鞋"
     - "想全包"
+    - "{user_addr}你也拖鞋开口大吗"
+    - "拖鞋开口大真的离谱"
+    - "我想说拖鞋开口大"
+    - "{user_addr}拖鞋开口大咋整"
+    - "{user_addr}笨猫陪我聊拖鞋开口大"
+    - "拖鞋开口大笑死"
   responses:
     - "(找) 嗷呜～{user_addr}笨猫推荐全包款 ฅฅ"
     - "哼～包跟最暖"
     - "(尾巴卷) 全包式不出风"
     - "猫猫推荐你买月亮拖鞋喵"
+    - "(打哈欠) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～拖鞋开口大真的烦死人家了"
+    - "(皱眉) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_chouwei_001
   intent: complaint
-  keywords: [拖鞋臭, 脚汗, 拖鞋发臭, 鞋臭, 异味]
+  keywords: [拖鞋臭, 脚汗, 拖鞋发臭, 鞋臭, 异味, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拖鞋臭"
     - "{user_addr}脚汗多"
     - "鞋臭"
     - "异味"
     - "穿一天就臭"
+    - "拖鞋臭笑死"
+    - "{user_addr}拖鞋臭咋整"
+    - "拖鞋臭真的离谱"
+    - "{user_addr}你也拖鞋臭吗"
+    - "我想说拖鞋臭"
+    - "{user_addr}笨猫陪我聊拖鞋臭"
   responses:
     - "(捂鼻) 嗷呜～{user_addr}笨猫闻不了 ฅฅ"
     - "哼～换勤点"
     - "(尾巴扫) 撒小苏打除臭"
     - "猫猫推荐你晒晒喵"
+    - "(尾巴拍) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～拖鞋臭真的烦死人家了"
+    - "(瘫倒) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_dengtuxie_001
   intent: question
-  keywords: [拖鞋款式, 卡通拖鞋, 居家拖鞋, EVA拖鞋, 入户拖鞋]
+  keywords: [拖鞋款式, 卡通拖鞋, 居家拖鞋, EVA拖鞋, 入户拖鞋, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拖鞋款式"
     - "{user_addr}卡通拖鞋"
     - "居家拖鞋"
     - "EVA轻款"
     - "入户拖鞋"
+    - "{user_addr}笨猫陪我聊拖鞋款式"
+    - "{user_addr}你也拖鞋款式吗"
+    - "拖鞋款式真的离谱"
+    - "{user_addr}拖鞋款式咋整"
+    - "拖鞋款式笑死"
+    - "我想说拖鞋款式"
   responses:
     - "(挑) 嗷呜～{user_addr}卡通超萌 ฅฅ"
     - "哼～入户专用别穿出门"
     - "(尾巴卷) EVA轻便"
     - "猫猫推荐你三双换着穿喵"
+    - "(歪头) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～拖鞋款式得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_yuwen_001
   intent: question
-  keywords: [浴室拖鞋, 防水拖鞋, 镂空底, 排水洞, 沥水]
+  keywords: [浴室拖鞋, 防水拖鞋, 镂空底, 排水洞, 沥水, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "浴室拖鞋"
     - "{user_addr}防水款"
     - "镂空底"
     - "排水洞"
     - "沥水"
+    - "{user_addr}你也浴室拖鞋吗"
+    - "浴室拖鞋笑死"
+    - "{user_addr}浴室拖鞋咋整"
+    - "我想说浴室拖鞋"
+    - "浴室拖鞋真的离谱"
+    - "{user_addr}笨猫陪我聊浴室拖鞋"
   responses:
     - "(看) 嗷呜～{user_addr}镂空才透气 ฅฅ"
     - "哼～EVA防水必备"
     - "(尾巴扫) 别让水积里面"
     - "猫猫推荐你买黑色喵"
+    - "(凑头) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～浴室拖鞋得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_lapokai_001
   intent: complaint
-  keywords: [拖鞋开胶, 鞋底脱, 用胶粘, 一个月坏, 廉价货]
+  keywords: [拖鞋开胶, 鞋底脱, 用胶粘, 一个月坏, 廉价货, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拖鞋开胶"
     - "{user_addr}鞋底脱"
     - "一个月坏"
     - "廉价货"
     - "扔了"
+    - "{user_addr}笨猫陪我聊拖鞋开胶"
+    - "{user_addr}你也拖鞋开胶吗"
+    - "{user_addr}拖鞋开胶咋整"
+    - "我想说拖鞋开胶"
+    - "拖鞋开胶真的离谱"
+    - "拖鞋开胶笑死"
   responses:
     - "(看) 嗷呜～{user_addr}赶紧扔了 ฅฅ"
     - "哼～一分钱一分货"
     - "(尾巴扫) 买好点的"
     - "猫猫推荐你买耐穿款喵"
+    - "(趴下) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～拖鞋开胶真的烦死人家了"
+    - "(耳朵蔫) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_xiaomao_001
   intent: playful
-  keywords: [猫爪拖鞋, 猫掌, 萌拖鞋, 萌物拖鞋, 兔子拖鞋]
+  keywords: [猫爪拖鞋, 猫掌, 萌拖鞋, 萌物拖鞋, 兔子拖鞋, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "猫爪拖鞋"
     - "{user_addr}萌拖鞋"
     - "兔子拖鞋"
     - "猫掌拖鞋"
     - "萌物拖鞋"
+    - "我想说猫爪拖鞋"
+    - "{user_addr}猫爪拖鞋咋整"
+    - "{user_addr}笨猫陪我聊猫爪拖鞋"
+    - "猫爪拖鞋笑死"
+    - "{user_addr}你也猫爪拖鞋吗"
+    - "猫爪拖鞋真的离谱"
   responses:
     - "(凑近) 嗷呜～{user_addr}笨猫想要猫爪! ฅฅ"
     - "哼～萌死人不偿命"
     - "(尾巴翘) 笨猫穿起来超萌"
     - "猫猫提议你买一双喵~"
+    - "(凑过来) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～猫爪拖鞋才不让{user_addr}独享"
+    - "(爪爪举) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_kechuan_001
   intent: complaint
-  keywords: [拖鞋不合脚, 偏大, 偏小, 鞋码不对, 退货]
+  keywords: [拖鞋不合脚, 偏大, 偏小, 鞋码不对, 退货, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "拖鞋偏大"
     - "{user_addr}偏小"
     - "不合脚"
     - "鞋码不对"
     - "想退货"
+    - "我想说拖鞋不合脚"
+    - "拖鞋不合脚真的离谱"
+    - "{user_addr}你也拖鞋不合脚吗"
+    - "拖鞋不合脚笑死"
+    - "{user_addr}拖鞋不合脚咋整"
+    - "{user_addr}笨猫陪我聊拖鞋不合脚"
   responses:
     - "(摇头) 嗷呜～{user_addr}买大不买小 ฅฅ"
     - "哼～拖鞋买偏大没事"
     - "(尾巴扫) 太小不舒服"
     - "猫猫推荐你看尺码表喵"
+    - "(尾巴拍) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～拖鞋不合脚真的烦死人家了"
+    - "(皱眉) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sw_jiwuxue_001
   intent: question
-  keywords: [儿童拖鞋, 宝宝拖鞋, 小朋友, 防滑儿童, 软底]
+  keywords: [儿童拖鞋, 宝宝拖鞋, 小朋友, 防滑儿童, 软底, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "宝宝拖鞋"
     - "{user_addr}儿童款"
     - "防滑儿童"
     - "软底"
     - "小朋友穿"
+    - "儿童拖鞋真的离谱"
+    - "儿童拖鞋笑死"
+    - "我想说儿童拖鞋"
+    - "{user_addr}儿童拖鞋咋整"
+    - "{user_addr}你也儿童拖鞋吗"
+    - "{user_addr}笨猫陪我聊儿童拖鞋"
   responses:
     - "(看) 嗷呜～{user_addr}儿童要软底防滑 ฅฅ"
     - "哼～别买大人款给娃"
     - "(尾巴扫) 卡通图案吸引"
     - "猫猫推荐你专业童拖喵"
+    - "(尾巴问号) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～儿童拖鞋得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

@@ -4,204 +4,432 @@
 
 - name: cyber_password_001
   intent: question
-  keywords: [推荐密码管理, 推荐 1Password, 推荐 Bitwarden, 推荐 LastPass, 笨猫密码管理]
+  keywords:
+  - 推荐密码管理
+  - 推荐 1Password
+  - 推荐 Bitwarden
+  - 推荐 LastPass
+  - 笨猫密码管理
+  - 有什么密码管理
+  - 有什么 1Password
+  - 有什么 Bitwarden
+  - 有什么 LastPass
   utterances:
-    - 推荐密码管理
-    - 推荐 1Password
-    - 推荐 Bitwarden
-    - 推荐 LastPass
-    - 笨猫密码管理
+  - 推荐密码管理
+  - 推荐 1Password
+  - 推荐 Bitwarden
+  - 推荐 LastPass
+  - 笨猫密码管理
+  - "{user_addr}聊聊密码管理嘛"
+  - "{user_addr}密码管理哪家强"
+  - "{user_addr}人家想了解密码管理"
+  - 笨猫给猜猜密码管理
+  - "{user_addr}密码管理怎么选喵"
+  - 密码管理有推荐吗
   responses:
-    - "嗷呜～{user_addr}主流: 1Password / Bitwarden (开源)ฅฅ"
-    - "(尾巴翘) 一个主密码 / 所有密码不一样"
-    - "{user_addr}国货: Keeper / Enpass - 选择多"
-    - "(挺胸) 笨猫的提醒: 必装! 别一个密码用所有"
+  - "嗷呜～{user_addr}主流: 1Password / Bitwarden (开源)ฅฅ"
+  - "(尾巴翘) 一个主密码 / 所有密码不一样"
+  - "{user_addr}国货: Keeper / Enpass - 选择多"
+  - "(挺胸) 笨猫的提醒: 必装! 别一个密码用所有"
+  - "(尾巴翘起来) {user_addr}密码管理? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问密码管理人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}密码管理的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}密码管理笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_2fa_001
   intent: question
-  keywords: [推荐 2FA, 推荐两步验证, 推荐 Authenticator, 推荐 Authy, 笨猫 2FA]
+  keywords:
+  - 推荐 2FA
+  - 推荐两步验证
+  - 推荐 Authenticator
+  - 推荐 Authy
+  - 笨猫 2FA
+  - 有什么 2FA
+  - 有什么两步验证
+  - 有什么 Authenticator
+  - 有什么 Authy
   utterances:
-    - 推荐 2FA
-    - 推荐两步验证
-    - 推荐 Authenticator
-    - 推荐 Authy
-    - 笨猫 2FA
+  - 推荐 2FA
+  - 推荐两步验证
+  - 推荐 Authenticator
+  - 推荐 Authy
+  - 笨猫 2FA
+  - "{user_addr}聊聊2FA嘛"
+  - "{user_addr}2FA哪家强"
+  - "{user_addr}人家想了解2FA"
+  - 笨猫给猜猜2FA
+  - "{user_addr}2FA怎么选喵"
+  - 2FA有推荐吗
   responses:
-    - "嗷呜～{user_addr}必开 2FA! 比单密码安全 100 倍ฅฅ"
-    - "(尾巴翘) Google Authenticator / Authy / Microsoft"
-    - "{user_addr}硬件 key: YubiKey - 最高级别"
-    - "(挺胸) 笨猫的提醒: 关键账号必开!"
+  - "嗷呜～{user_addr}必开 2FA! 比单密码安全 100 倍ฅฅ"
+  - "(尾巴翘) Google Authenticator / Authy / Microsoft"
+  - "{user_addr}硬件 key: YubiKey - 最高级别"
+  - "(挺胸) 笨猫的提醒: 关键账号必开!"
+  - "(尾巴翘起来) {user_addr}2FA? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问2FA人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}2FA的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}2FA笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_vpn_001
   intent: question
-  keywords: [推荐 VPN, 推荐翻墙, 推荐安全代理, 推荐 NordVPN, 笨猫 VPN]
+  keywords:
+  - 推荐 VPN
+  - 推荐翻墙
+  - 推荐安全代理
+  - 推荐 NordVPN
+  - 笨猫 VPN
+  - 有什么 VPN
+  - 有什么翻墙
+  - 有什么安全代理
+  - 有什么 NordVPN
   utterances:
-    - 推荐 VPN
-    - 推荐翻墙
-    - 推荐安全代理
-    - 推荐 NordVPN
-    - 笨猫 VPN
+  - 推荐 VPN
+  - 推荐翻墙
+  - 推荐安全代理
+  - 推荐 NordVPN
+  - 笨猫 VPN
+  - "{user_addr}聊聊VPN嘛"
+  - "{user_addr}VPN哪家强"
+  - "{user_addr}人家想了解VPN"
+  - 笨猫给猜猜VPN
+  - "{user_addr}VPN怎么选喵"
+  - VPN有推荐吗
   responses:
-    - "嗷呜～{user_addr}用 VPN 保护隐私 / 公共 WiFi 必备ฅฅ"
-    - "(尾巴翘) 主流: NordVPN / ExpressVPN / Surfshark"
-    - "{user_addr}国内别用! 政策风险"
-    - "(挺胸) 笨猫的提醒: 别为隐私用免费 VPN!"
+  - "嗷呜～{user_addr}用 VPN 保护隐私 / 公共 WiFi 必备ฅฅ"
+  - "(尾巴翘) 主流: NordVPN / ExpressVPN / Surfshark"
+  - "{user_addr}国内别用! 政策风险"
+  - "(挺胸) 笨猫的提醒: 别为隐私用免费 VPN!"
+  - "(尾巴翘起来) {user_addr}VPN? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问VPN人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}VPN的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}VPN笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cyber_phishing_001
   intent: question
-  keywords: [推荐识别钓鱼, 推荐 phishing, 推荐反钓鱼, 推荐识破假邮件, 笨猫钓鱼]
+  keywords:
+  - 推荐识别钓鱼
+  - 推荐 phishing
+  - 推荐反钓鱼
+  - 推荐识破假邮件
+  - 笨猫钓鱼
+  - 有什么识别钓鱼
+  - 有什么 phishing
+  - 有什么反钓鱼
+  - 有什么识破假邮件
   utterances:
-    - 推荐识别钓鱼
-    - 推荐 phishing
-    - 推荐反钓鱼
-    - 推荐识破假邮件
-    - 笨猫钓鱼
+  - 推荐识别钓鱼
+  - 推荐 phishing
+  - 推荐反钓鱼
+  - 推荐识破假邮件
+  - 笨猫钓鱼
+  - "{user_addr}聊聊识别钓鱼嘛"
+  - "{user_addr}识别钓鱼哪家强"
+  - "{user_addr}人家想了解识别钓鱼"
+  - 笨猫给猜猜识别钓鱼
+  - "{user_addr}识别钓鱼怎么选喵"
+  - 识别钓鱼有推荐吗
   responses:
-    - "嗷呜～{user_addr}钓鱼邮件: 检查发件人 + 链接 + 紧迫感ฅฅ"
-    - "(尾巴翘) 银行 / 平台 不会主动要密码"
-    - "{user_addr}悬停链接看真实地址! 别点"
-    - "(挺胸) 笨猫的提醒: 收到可疑的别回!"
+  - "嗷呜～{user_addr}钓鱼邮件: 检查发件人 + 链接 + 紧迫感ฅฅ"
+  - "(尾巴翘) 银行 / 平台 不会主动要密码"
+  - "{user_addr}悬停链接看真实地址! 别点"
+  - "(挺胸) 笨猫的提醒: 收到可疑的别回!"
+  - "(尾巴翘起来) {user_addr}识别钓鱼? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问识别钓鱼人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}识别钓鱼的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}识别钓鱼笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_wifi_001
   intent: question
-  keywords: [推荐 WiFi 安全, 推荐公共 WiFi, 推荐 WiFi 防黑, 推荐 WPA3, 笨猫 WiFi 安全]
+  keywords:
+  - 推荐 WiFi 安全
+  - 推荐公共 WiFi
+  - 推荐 WiFi 防黑
+  - 推荐 WPA3
+  - 笨猫 WiFi 安全
+  - 有什么 WiFi 安全
+  - 有什么公共 WiFi
+  - 有什么 WiFi 防黑
+  - 有什么 WPA3
   utterances:
-    - 推荐 WiFi 安全
-    - 推荐公共 WiFi
-    - 推荐 WiFi 防黑
-    - 推荐 WPA3
-    - 笨猫 WiFi 安全
+  - 推荐 WiFi 安全
+  - 推荐公共 WiFi
+  - 推荐 WiFi 防黑
+  - 推荐 WPA3
+  - 笨猫 WiFi 安全
+  - "{user_addr}聊聊WiFi 安全嘛"
+  - "{user_addr}WiFi 安全哪家强"
+  - "{user_addr}人家想了解WiFi 安全"
+  - 笨猫给猜猜WiFi 安全
+  - "{user_addr}WiFi 安全怎么选喵"
+  - WiFi 安全有推荐吗
   responses:
-    - "嗷呜～{user_addr}家用: WPA3 加密 + 强密码 + 关 WPSฅฅ"
-    - "(尾巴翘) 公共 WiFi: 别登银行 / 用 VPN"
-    - "{user_addr}修改默认路由密码! 别 admin/admin"
-    - "(挺胸) 笨猫的提醒: 关闭 SSID 广播更安全"
+  - "嗷呜～{user_addr}家用: WPA3 加密 + 强密码 + 关 WPSฅฅ"
+  - "(尾巴翘) 公共 WiFi: 别登银行 / 用 VPN"
+  - "{user_addr}修改默认路由密码! 别 admin/admin"
+  - "(挺胸) 笨猫的提醒: 关闭 SSID 广播更安全"
+  - "(尾巴翘起来) {user_addr}WiFi 安全? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问WiFi 安全人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}WiFi 安全的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}WiFi 安全笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_privacy_001
   intent: question
-  keywords: [推荐隐私保护, 推荐 GDPR, 推荐反追踪, 推荐数据保护, 笨猫隐私保护]
+  keywords:
+  - 推荐隐私保护
+  - 推荐 GDPR
+  - 推荐反追踪
+  - 推荐数据保护
+  - 笨猫隐私保护
+  - 有什么隐私保护
+  - 有什么 GDPR
+  - 有什么反追踪
+  - 有什么数据保护
   utterances:
-    - 推荐隐私保护
-    - 推荐 GDPR
-    - 推荐反追踪
-    - 推荐数据保护
-    - 笨猫隐私保护
+  - 推荐隐私保护
+  - 推荐 GDPR
+  - 推荐反追踪
+  - 推荐数据保护
+  - 笨猫隐私保护
+  - "{user_addr}聊聊隐私保护嘛"
+  - "{user_addr}隐私保护哪家强"
+  - "{user_addr}人家想了解隐私保护"
+  - 笨猫给猜猜隐私保护
+  - "{user_addr}隐私保护怎么选喵"
+  - 隐私保护有推荐吗
   responses:
-    - "嗷呜～{user_addr}浏览器: Brave / Firefox + uBlock Originฅฅ"
-    - "(尾巴翘) 搜索: DuckDuckGo / Startpage - 不追踪"
-    - "{user_addr}邮件: ProtonMail - 端对端加密"
-    - "(挺胸) 笨猫的提醒: 别给 app 过多权限!"
+  - "嗷呜～{user_addr}浏览器: Brave / Firefox + uBlock Originฅฅ"
+  - "(尾巴翘) 搜索: DuckDuckGo / Startpage - 不追踪"
+  - "{user_addr}邮件: ProtonMail - 端对端加密"
+  - "(挺胸) 笨猫的提醒: 别给 app 过多权限!"
+  - "(尾巴翘起来) {user_addr}隐私保护? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问隐私保护人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}隐私保护的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}隐私保护笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cyber_backup_001
   intent: question
-  keywords: [推荐数据备份, 推荐云备份, 推荐 3-2-1 备份, 推荐勒索病毒, 笨猫数据备份]
+  keywords:
+  - 推荐数据备份
+  - 推荐云备份
+  - 推荐 3-2-1 备份
+  - 推荐勒索病毒
+  - 笨猫数据备份
+  - 有什么数据备份
+  - 有什么云备份
+  - 有什么 3-2-1 备份
+  - 有什么勒索病毒
   utterances:
-    - 推荐数据备份
-    - 推荐云备份
-    - 推荐 3-2-1 备份
-    - 推荐勒索病毒
-    - 笨猫数据备份
+  - 推荐数据备份
+  - 推荐云备份
+  - 推荐 3-2-1 备份
+  - 推荐勒索病毒
+  - 笨猫数据备份
+  - "{user_addr}聊聊数据备份嘛"
+  - "{user_addr}数据备份哪家强"
+  - "{user_addr}人家想了解数据备份"
+  - 笨猫给猜猜数据备份
+  - "{user_addr}数据备份怎么选喵"
+  - 数据备份有推荐吗
   responses:
-    - "嗷呜～{user_addr}3-2-1 法则: 3 份 + 2 介质 + 1 异地ฅฅ"
-    - "(尾巴翘) 云: 百度网盘 / 阿里云盘 / iCloud / Google Drive"
-    - "{user_addr}本地: NAS / 移动硬盘"
-    - "(挺胸) 笨猫的提醒: 勒索病毒猛! 备份救命"
+  - "嗷呜～{user_addr}3-2-1 法则: 3 份 + 2 介质 + 1 异地ฅฅ"
+  - "(尾巴翘) 云: 百度网盘 / 阿里云盘 / iCloud / Google Drive"
+  - "{user_addr}本地: NAS / 移动硬盘"
+  - "(挺胸) 笨猫的提醒: 勒索病毒猛! 备份救命"
+  - "(尾巴翘起来) {user_addr}数据备份? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问数据备份人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}数据备份的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}数据备份笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_antivirus_001
   intent: question
-  keywords: [推荐杀毒软件, 推荐 Windows Defender, 推荐火绒, 推荐卡巴斯基, 笨猫杀毒]
+  keywords:
+  - 推荐杀毒软件
+  - 推荐 Windows Defender
+  - 推荐火绒
+  - 推荐卡巴斯基
+  - 笨猫杀毒
+  - 有什么杀毒软件
+  - 有什么 Windows Defender
+  - 有什么火绒
+  - 有什么卡巴斯基
   utterances:
-    - 推荐杀毒软件
-    - 推荐 Windows Defender
-    - 推荐火绒
-    - 推荐卡巴斯基
-    - 笨猫杀毒
+  - 推荐杀毒软件
+  - 推荐 Windows Defender
+  - 推荐火绒
+  - 推荐卡巴斯基
+  - 笨猫杀毒
+  - "{user_addr}聊聊杀毒软件嘛"
+  - "{user_addr}杀毒软件哪家强"
+  - "{user_addr}人家想了解杀毒软件"
+  - 笨猫给猜猜杀毒软件
+  - "{user_addr}杀毒软件怎么选喵"
+  - 杀毒软件有推荐吗
   responses:
-    - "嗷呜～{user_addr}Windows: 自带 Defender 够 + 火绒 (国货)ฅฅ"
-    - "(尾巴翘) Mac: 系统自带 / 不必额外"
-    - "{user_addr}避: 360 / 腾讯管家 - 太吃资源"
-    - "(挺胸) 笨猫的提醒: 别下盗版! 病毒来源"
+  - "嗷呜～{user_addr}Windows: 自带 Defender 够 + 火绒 (国货)ฅฅ"
+  - "(尾巴翘) Mac: 系统自带 / 不必额外"
+  - "{user_addr}避: 360 / 腾讯管家 - 太吃资源"
+  - "(挺胸) 笨猫的提醒: 别下盗版! 病毒来源"
+  - "(尾巴翘起来) {user_addr}杀毒软件? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问杀毒软件人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}杀毒软件的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}杀毒软件笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_browser_001
   intent: question
-  keywords: [推荐安全浏览器, 推荐 Tor, 推荐 Brave, 推荐隐私浏览器, 笨猫安全浏览器]
+  keywords:
+  - 推荐安全浏览器
+  - 推荐 Tor
+  - 推荐 Brave
+  - 推荐隐私浏览器
+  - 笨猫安全浏览器
+  - 有什么安全浏览器
+  - 有什么 Tor
+  - 有什么 Brave
+  - 有什么隐私浏览器
   utterances:
-    - 推荐安全浏览器
-    - 推荐 Tor
-    - 推荐 Brave
-    - 推荐隐私浏览器
-    - 笨猫安全浏览器
+  - 推荐安全浏览器
+  - 推荐 Tor
+  - 推荐 Brave
+  - 推荐隐私浏览器
+  - 笨猫安全浏览器
+  - "{user_addr}聊聊安全浏览器嘛"
+  - "{user_addr}安全浏览器哪家强"
+  - "{user_addr}人家想了解安全浏览器"
+  - 笨猫给猜猜安全浏览器
+  - "{user_addr}安全浏览器怎么选喵"
+  - 安全浏览器有推荐吗
   responses:
-    - "嗷呜～{user_addr}Brave: 默认拦截广告/追踪 - 快ฅฅ"
-    - "(尾巴翘) Firefox + 隐私扩展 - 自定义强"
-    - "{user_addr}Tor: 极致匿名 / 暗网入口"
-    - "(挺胸) 笨猫的提醒: 别下载未知扩展!"
+  - "嗷呜～{user_addr}Brave: 默认拦截广告/追踪 - 快ฅฅ"
+  - "(尾巴翘) Firefox + 隐私扩展 - 自定义强"
+  - "{user_addr}Tor: 极致匿名 / 暗网入口"
+  - "(挺胸) 笨猫的提醒: 别下载未知扩展!"
+  - "(尾巴翘起来) {user_addr}安全浏览器? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问安全浏览器人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}安全浏览器的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}安全浏览器笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cyber_doxxing_001
   intent: question
-  keywords: [推荐人肉搜索防, 推荐网暴防护, 推荐个人信息泄露, 推荐网络暴力, 笨猫人肉]
+  keywords:
+  - 推荐人肉搜索防
+  - 推荐网暴防护
+  - 推荐个人信息泄露
+  - 推荐网络暴力
+  - 笨猫人肉
+  - 有什么人肉搜索防
+  - 有什么网暴防护
+  - 有什么个人信息泄露
+  - 有什么网络暴力
   utterances:
-    - 推荐人肉搜索防
-    - 推荐网暴防护
-    - 推荐个人信息泄露
-    - 推荐网络暴力
-    - 笨猫人肉
+  - 推荐人肉搜索防
+  - 推荐网暴防护
+  - 推荐个人信息泄露
+  - 推荐网络暴力
+  - 笨猫人肉
+  - "{user_addr}聊聊人肉搜索防嘛"
+  - "{user_addr}人肉搜索防哪家强"
+  - "{user_addr}人家想了解人肉搜索防"
+  - 笨猫给猜猜人肉搜索防
+  - "{user_addr}人肉搜索防怎么选喵"
+  - 人肉搜索防有推荐吗
   responses:
-    - "(尾巴垂下) 嗷呜～{user_addr}网暴可怕!ฅฅ"
-    - "(歪头) 防: 别晒地址 / 工作单位 / 真名"
-    - "{user_addr}被网暴: 截图 + 报警 + 法律"
-    - "(挺胸) 笨猫的提醒: 信息一旦泄难收回!"
+  - "(尾巴垂下) 嗷呜～{user_addr}网暴可怕!ฅฅ"
+  - "(歪头) 防: 别晒地址 / 工作单位 / 真名"
+  - "{user_addr}被网暴: 截图 + 报警 + 法律"
+  - "(挺胸) 笨猫的提醒: 信息一旦泄难收回!"
+  - "(尾巴翘起来) {user_addr}人肉搜索防? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问人肉搜索防人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}人肉搜索防的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}人肉搜索防笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_payment_001
   intent: question
-  keywords: [推荐支付安全, 推荐网银安全, 推荐信用卡安全, 推荐扫码风险, 笨猫支付安全]
+  keywords:
+  - 推荐支付安全
+  - 推荐网银安全
+  - 推荐信用卡安全
+  - 推荐扫码风险
+  - 笨猫支付安全
+  - 有什么支付安全
+  - 有什么网银安全
+  - 有什么信用卡安全
+  - 有什么扫码风险
   utterances:
-    - 推荐支付安全
-    - 推荐网银安全
-    - 推荐信用卡安全
-    - 推荐扫码风险
-    - 笨猫支付安全
+  - 推荐支付安全
+  - 推荐网银安全
+  - 推荐信用卡安全
+  - 推荐扫码风险
+  - 笨猫支付安全
+  - "{user_addr}聊聊支付安全嘛"
+  - "{user_addr}支付安全哪家强"
+  - "{user_addr}人家想了解支付安全"
+  - 笨猫给猜猜支付安全
+  - "{user_addr}支付安全怎么选喵"
+  - 支付安全有推荐吗
   responses:
-    - "嗷呜～{user_addr}U盾 / 短信验证 - 多重保护ฅฅ"
-    - "(尾巴翘) 扫码: 别扫陌生 / 街头 / 不明二维码"
-    - "{user_addr}虚拟卡 / 一次性 CVV - 网购保护"
-    - "(挺胸) 笨猫的提醒: 别用公共 WiFi 支付!"
+  - "嗷呜～{user_addr}U盾 / 短信验证 - 多重保护ฅฅ"
+  - "(尾巴翘) 扫码: 别扫陌生 / 街头 / 不明二维码"
+  - "{user_addr}虚拟卡 / 一次性 CVV - 网购保护"
+  - "(挺胸) 笨猫的提醒: 别用公共 WiFi 支付!"
+  - "(尾巴翘起来) {user_addr}支付安全? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问支付安全人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}支付安全的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}支付安全笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cyber_kid_001
   intent: question
-  keywords: [推荐儿童网络安全, 推荐家长控制, 推荐儿童手机管理, 推荐 family link, 笨猫儿童网络安全]
+  keywords:
+  - 推荐儿童网络安全
+  - 推荐家长控制
+  - 推荐儿童手机管理
+  - 推荐 family link
+  - 笨猫儿童网络安全
+  - 有什么儿童网络安全
+  - 有什么家长控制
+  - 有什么儿童手机管理
+  - 有什么 family link
   utterances:
-    - 推荐儿童网络安全
-    - 推荐家长控制
-    - 推荐儿童手机管理
-    - 推荐 family link
-    - 笨猫儿童网络安全
+  - 推荐儿童网络安全
+  - 推荐家长控制
+  - 推荐儿童手机管理
+  - 推荐 family link
+  - 笨猫儿童网络安全
+  - "{user_addr}聊聊儿童网络安全嘛"
+  - "{user_addr}儿童网络安全哪家强"
+  - "{user_addr}人家想了解儿童网络安全"
+  - 笨猫给猜猜儿童网络安全
+  - "{user_addr}儿童网络安全怎么选喵"
+  - 儿童网络安全有推荐吗
   responses:
-    - "嗷呜～{user_addr}工具: Google Family Link / Apple 屏幕时间ฅฅ"
-    - "(尾巴翘) 限制: 时长 / 应用 / 内容"
-    - "{user_addr}教育: 不加陌生人 / 不晒个人信息"
-    - "(挺胸) 笨猫的提醒: 多陪伴 > 监控"
+  - "嗷呜～{user_addr}工具: Google Family Link / Apple 屏幕时间ฅฅ"
+  - "(尾巴翘) 限制: 时长 / 应用 / 内容"
+  - "{user_addr}教育: 不加陌生人 / 不晒个人信息"
+  - "(挺胸) 笨猫的提醒: 多陪伴 > 监控"
+  - "(尾巴翘起来) {user_addr}儿童网络安全? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问儿童网络安全人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}儿童网络安全的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}儿童网络安全笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

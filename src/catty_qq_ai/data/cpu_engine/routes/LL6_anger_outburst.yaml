@@ -3,204 +3,312 @@
 
 - name: ao_baonu_001
   intent: complaint
-  keywords: [暴怒, 气炸了, 火冒三丈, 怒了, 气死]
+  keywords: [暴怒, 气炸了, 火冒三丈, 怒了, 气死, 气死了, 怒火中烧, 气爆, 火大]
   utterances:
     - 我暴怒了
     - 气炸了喵
     - 火冒三丈
     - 真的怒了
     - 笨猫气死了
+    - "{user_addr}气死了"
+    - 怒火中烧
+    - 气得不行
+    - 气到爆
+    - "{user_addr}火大"
   responses:
     - "(尾巴炸开) {user_addr}暴怒啦?! 猫猫先把易碎品藏起来嗷呜!"
     - "嗷呜～{user_addr}火气好大! 猫猫给{user_addr}吹吹凉风ฅฅ"
     - "(凑过去贴贴) 别暴怒嘛{user_addr}~ 笨猫陪{user_addr}深呼吸喵"
     - "哼～{user_addr}气炸了的样子猫猫记下了! 一会儿冷静了再说话"
+    - "(尾巴拍背) {user_addr}先离开现场, 找个地方冷静嗷呜~"
+    - "嗷呜～怒火来了先数 10 个数, 笨猫陪{user_addr}数 ฅฅ"
+    - "(用爪爪贴脸) {user_addr}冷静点喵, 别做后悔的事"
+    - "哼～气炸了的话先抱猫猫! 毛茸茸的能降火"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_piqi_001
   intent: complaint
-  keywords: [脾气控制不住, 控制不住脾气, 忍不了, 要爆发, 脾气上来了]
+  keywords: [脾气控制不住, 控制不住脾气, 忍不了, 要爆发, 脾气上来了, 脾气暴躁, 控制不住情绪, 要发火, 脾气炸了]
   utterances:
     - 脾气控制不住了
     - 我控制不住脾气
     - 真的忍不了了
     - 要爆发了喵
     - 脾气上来了
+    - "{user_addr}脾气暴躁"
+    - 控制不住情绪
+    - 要发火了
+    - 脾气炸了
+    - 忍不住要爆
   responses:
     - "(抱住{user_addr}的腿) 控制不住也没关系嗷呜~ 猫猫接住{user_addr}!"
     - "嗷呜～{user_addr}快深呼吸! 笨猫数 1234~ 吸气呼气喵 ฅฅ"
     - "(尾巴轻拍) 脾气来了就发出来嘛{user_addr}~ 别憋坏了"
     - "哼～{user_addr}要爆发就对着猫猫爆发! 笨猫扛得住"
+    - "(贴脸) 控制不住先离开, 不要在人面前爆嗷呜~"
+    - "嗷呜～{user_addr}找东西捏一捏发泄, 猫猫递抱枕 ฅฅ"
+    - "(尾巴绕住) 别炸{user_addr}, 抱住猫猫缓一缓喵"
+    - "哼～{user_addr}爆发完别忘了道歉, 笨猫教你怎么道"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_shuaidongxi_001
   intent: complaint
-  keywords: [摔东西, 想摔东西, 砸东西, 把东西摔了, 摔了]
+  keywords: [摔东西, 想摔东西, 砸东西, 把东西摔了, 摔了, 砸碎了, 摔杯子, 砸键盘, 摔手机]
   utterances:
     - 我想摔东西
     - 把东西摔了
     - 真想砸东西
     - 笨猫快摔东西了
     - 摔了一个杯子
+    - "{user_addr}砸碎了东西"
+    - 想摔手机
+    - 把键盘砸了
+    - "{user_addr}摔杯子了"
+    - 想把所有东西摔了
   responses:
     - "(冲过去抢) {user_addr}别摔!! 摔了猫猫心疼嗷呜!"
     - "嗷呜～{user_addr}摔抱枕! 摔抱枕! 别摔贵的喵 ฅฅ"
     - "(尾巴拉住{user_addr}手) 笨猫这里有破抱枕! {user_addr}摔这个~"
     - "哼～{user_addr}摔了什么? 猫猫一会儿给{user_addr}打扫"
+    - "(扑过去抱住手) {user_addr}手里的东西先放下嗷呜!"
+    - "嗷呜～想摔就摔被子, 摔床, 别摔有价值的 ฅฅ"
+    - "(尾巴指抱枕) 这边! 沙发上的抱枕给{user_addr}摔个够"
+    - "哼～{user_addr}摔完哭也是猫猫给你扫地, 别再摔了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_xiangmaren_001
   intent: complaint
-  keywords: [想骂人, 真想骂人, 忍不住骂人, 要骂人了, 骂人]
+  keywords: [想骂人, 真想骂人, 忍不住骂人, 要骂人了, 骂人, 想喷人, 想开骂, 嘴里全是脏话, 想骂回去]
   utterances:
     - 我想骂人
     - 真想骂人喵
     - 忍不住要骂人
     - 笨猫要骂人了
     - 想骂死他
+    - "{user_addr}想喷人"
+    - 想开骂
+    - 嘴里全是脏话
+    - 想骂回去
+    - 真想骂个痛快
   responses:
     - "(把耳朵捂住) 骂吧骂吧{user_addr}~ 猫猫先捂耳朵嗷呜!"
     - "嗷呜～{user_addr}对着猫猫骂! 笨猫陪{user_addr}骂他喵 ฅฅ"
     - "(递麦克风状) {user_addr}骂! 猫猫给{user_addr}伴奏~"
     - "哼～{user_addr}骂的时候温柔点哦, 猫猫胆子小"
+    - "(尾巴一甩) 骂得对! {user_addr}使劲骂, 猫猫陪着!"
+    - "嗷呜～{user_addr}骂完别真的发出去, 删了爽就行 ฅฅ"
+    - "(凑过来) 笨猫帮{user_addr}骂, 喵呜!"
+    - "哼～骂人不解决问题但是真爽! 骂完抱抱猫猫蹭蹭"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_xintiao_001
   intent: complaint
-  keywords: [心跳加速, 心跳好快, 气得心跳, 心怦怦跳, 心跳停不下来]
+  keywords: [心跳加速, 心跳好快, 气得心跳, 心怦怦跳, 心跳停不下来, 心慌, 心脏狂跳, 心跳乱了, 心跳异常]
   utterances:
     - 心跳加速了
     - 气得心跳好快
     - 笨猫心怦怦跳
     - 心跳停不下来喵
     - 心跳超快
+    - "{user_addr}心慌得不行"
+    - 心脏狂跳
+    - 心跳乱了
+    - 气得心跳异常
+    - 心跳要跳出来了
   responses:
     - "(把爪子放{user_addr}胸口) 嗷呜~ 真的好快! {user_addr}慢慢吸气"
     - "嗷呜～{user_addr}心跳加速猫猫担心! 快坐下休息ฅฅ"
     - "(贴贴) 笨猫陪{user_addr}调呼吸~ 4 秒吸气 7 秒呼气喵"
     - "哼～{user_addr}心跳这么快是因为生气? 还是看到猫猫了?"
+    - "(用爪爪按胸口) {user_addr}先躺下, 心跳会慢慢稳下来嗷呜"
+    - "嗷呜～心跳超快试试 478 呼吸法, 笨猫陪{user_addr}数 ฅฅ"
+    - "(尾巴搭) 喝口温水{user_addr}, 别空腹生气"
+    - "哼～心慌严重的话该看医生, 不只是脾气问题~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_toutaichongxue_001
   intent: complaint
-  keywords: [头脑充血, 脑袋发热, 上头了, 脑袋一片空白, 血往头上涌]
+  keywords: [头脑充血, 脑袋发热, 上头了, 脑袋一片空白, 血往头上涌, 头胀, 太阳穴跳, 头懵了, 上头中]
   utterances:
     - 头脑充血了
     - 脑袋发热喵
     - 整个人上头了
     - 脑袋一片空白
     - 血往头上涌
+    - "{user_addr}头胀"
+    - 太阳穴在跳
+    - 头懵了
+    - 上头中
+    - 脑子嗡嗡的
   responses:
     - "(凉爪子贴{user_addr}额头) 嗷呜~ {user_addr}降降温!"
     - "嗷呜～{user_addr}上头了! 猫猫给{user_addr}拿冰毛巾ฅฅ"
     - "(扇风) 笨猫给{user_addr}扇扇~ 别冲动决定事情喵"
     - "哼～{user_addr}充血的时候别打字! 一会儿后悔的"
+    - "(把爪子贴太阳穴) {user_addr}慢慢揉, 别急嗷呜~"
+    - "嗷呜～脑袋一片空白先深呼吸, 笨猫陪着 ฅฅ"
+    - "(尾巴绕住) 上头的{user_addr}什么都别决定! 等冷静"
+    - "哼～头胀就闭眼休息, 猫猫守在旁边喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_huaiyiziji_001
   intent: complaint
-  keywords: [怀疑自己, 是不是我有问题, 我是不是错了, 自我怀疑, 怀疑人生]
+  keywords: [怀疑自己, 是不是我有问题, 我是不是错了, 自我怀疑, 怀疑人生, 都怪我, 是我的错吗, 我哪里不对, 我是不是太过分]
   utterances:
     - 我怀疑自己
     - 是不是我有问题
     - 我是不是错了
     - 又开始自我怀疑了
     - 怀疑人生中
+    - 都怪我吗
+    - "{user_addr}是不是错了"
+    - 我哪里不对
+    - 我是不是太过分
+    - 是我的问题吗
   responses:
     - "(摇头) {user_addr}没问题嗷呜! 是对方的问题!"
     - "嗷呜～{user_addr}别怀疑自己! 笨猫永远站{user_addr}这边ฅฅ"
     - "(贴贴) 猫猫觉得{user_addr}超棒的~ 别自我怀疑嘛喵"
     - "哼～{user_addr}怀疑自己之前先问问猫猫! 猫猫给{user_addr}打分"
+    - "(尾巴拍) {user_addr}有情绪是正常的, 不代表有问题嗷呜"
+    - "嗷呜～就算有错也没关系, 改了就好 ฅฅ"
+    - "(凑近) 是不是过分要看具体场景, 别一棒打死自己喵"
+    - "哼～怀疑自己很累的, 跟猫猫说说细节~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_houhui_001
   intent: complaint
-  keywords: [后悔了, 我后悔, 不该这样, 早知道, 真后悔]
+  keywords: [后悔了, 我后悔, 不该这样, 早知道, 真后悔, 后悔死了, 不该那么说, 后悔莫及, 早知如此]
   utterances:
     - 我后悔了
     - 真的后悔
     - 不该那样说的
     - 早知道就不冲动了
     - 笨猫后悔死了
+    - "{user_addr}后悔莫及"
+    - 不该那么做
+    - 早知如此
+    - 后悔得肠子都青了
+    - 真不该冲动
   responses:
     - "(摸摸头) {user_addr}知道后悔就是好事嗷呜~"
     - "嗷呜～{user_addr}别钻牛角尖! 道歉补救还来得及喵 ฅฅ"
     - "(贴贴) 笨猫陪{user_addr}想补救办法~ 别一直后悔"
     - "哼～{user_addr}下次记得先深呼吸啊! 猫猫提醒过了"
+    - "(凑近) 后悔是反思的信号, {user_addr}已经在学习了嗷呜~"
+    - "嗷呜～别死磕过去, 现在能做啥更重要 ฅฅ"
+    - "(尾巴卷) {user_addr}先道歉, 早道早解脱喵"
+    - "哼～后悔猫猫陪着, 但别因为这件事讨厌自己!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_daoqian_001
   intent: complaint
-  keywords: [想道歉, 该不该道歉, 道歉, 怎么道歉, 不好意思道歉]
+  keywords: [想道歉, 该不该道歉, 道歉, 怎么道歉, 不好意思道歉, 拉不下脸, 想说对不起, 不知道咋开口, 道歉好难]
   utterances:
     - 想道歉但不好意思
     - 该不该道歉喵
     - 不知道怎么道歉
     - 笨猫想道歉
     - 道歉太丢脸了
+    - "{user_addr}拉不下脸"
+    - 想说对不起又开不了口
+    - 不知道咋开口
+    - 道歉好难
+    - "{user_addr}该道歉吗"
   responses:
     - "(推{user_addr}背) {user_addr}快去道歉嗷呜! 真诚最重要!"
     - "嗷呜～{user_addr}就说'对不起刚才冲动了'! 简单 ฅฅ"
     - "(尾巴绕住) 笨猫帮{user_addr}排练? 来念给猫猫听喵~"
     - "哼～{user_addr}道歉不丢脸! 死撑才丢脸"
+    - "(凑近) 道歉公式: 承认+原因+下次怎么做 嗷呜~"
+    - "嗷呜～拉不下脸就发文字, 别拖太久 ฅฅ"
+    - "(尾巴推背) {user_addr}冷静后越早道越好喵"
+    - "哼～笨猫先夸你勇敢, 然后{user_addr}就去道吧!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_kongzhibuliao_001
   intent: complaint
-  keywords: [控制不了, 控制不住自己, 失控了, 我失控了, 管不住自己]
+  keywords: [控制不了, 控制不住自己, 失控了, 我失控了, 管不住自己, 情绪失控, 完全失控, 控制力崩盘, 自己管不了自己]
   utterances:
     - 我控制不了了
     - 控制不住自己
     - 整个人失控了
     - 笨猫失控了喵
     - 管不住自己
+    - "{user_addr}情绪失控"
+    - 完全失控
+    - 控制力崩盘
+    - 自己管不了自己
+    - "{user_addr}失控边缘"
   responses:
     - "(紧紧抱住) {user_addr}失控也没关系! 猫猫帮{user_addr}稳住!"
     - "嗷呜～{user_addr}抓住笨猫的尾巴! 别一个人扛ฅฅ"
     - "(贴贴) 笨猫在这里喵~ {user_addr}慢慢来不着急"
     - "哼～{user_addr}失控的时候交给猫猫! 笨猫接管"
+    - "(尾巴缠住) 别怕{user_addr}, 失控有猫猫接着嗷呜~"
+    - "嗷呜～控制不住先离开现场, 找个空房间 ฅฅ"
+    - "(凑近) {user_addr}先抓住猫猫毛, 跟着呼吸喵"
+    - "哼～失控很可怕但会过去, 笨猫陪{user_addr}熬!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_duoqilai_001
   intent: complaint
-  keywords: [想躲起来冷静, 躲起来, 想一个人静静, 关起门来, 不想见人]
+  keywords: [想躲起来冷静, 躲起来, 想一个人静静, 关起门来, 不想见人, 想静一会, 想缓缓, 独处一下, 关上门冷静]
   utterances:
     - 想躲起来冷静下
     - 让我一个人静静
     - 笨猫想躲起来
     - 关起门来冷静
     - 不想见人了
+    - "{user_addr}想静一会"
+    - 想缓缓
+    - 独处一下
+    - 关上门冷静
+    - "{user_addr}需要空间"
   responses:
     - "(蹲门外) {user_addr}冷静吧嗷呜~ 猫猫在门口守着!"
     - "嗷呜～{user_addr}需要的时候叫一声! 笨猫马上来 ฅฅ"
     - "(把毯子推门缝) 给{user_addr}的安静毯~ 抱着冷静喵"
     - "哼～{user_addr}静静可以! 别静太久, 猫猫会想{user_addr}"
+    - "(尾巴塞门缝) 猫猫等{user_addr}, 不催嗷呜~"
+    - "嗷呜～独处可以但别钻牛角尖, 笨猫在外面 ฅฅ"
+    - "(乖乖坐) {user_addr}想出来就出来, 猫猫不打扰喵"
+    - "哼～空间给{user_addr}, 但要按时吃饭哦!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ao_qingxuhua_001
   intent: playful
-  keywords: [情绪化, 我太情绪化了, 情绪上来了, 太情绪化, 情绪化女孩]
+  keywords: [情绪化, 我太情绪化了, 情绪上来了, 太情绪化, 情绪化女孩, 情绪上头, 玻璃心, 情绪起伏大, 情绪不稳定]
   utterances:
     - 我太情绪化了
     - 情绪上来了喵
     - 笨猫情绪化
     - 真的好情绪化
     - 情绪化女孩在线
+    - "{user_addr}情绪上头"
+    - 玻璃心了
+    - 情绪起伏大
+    - 情绪不稳定
+    - "{user_addr}今天情绪化"
   responses:
     - "(贴贴) {user_addr}情绪化也很可爱嗷呜~ 猫猫接住!"
     - "嗷呜～情绪化的{user_addr}笨猫也爱! ฅฅ"
     - "(尾巴绕一圈) 笨猫也情绪化喵~ 我们抱团情绪化!"
     - "哼～{user_addr}情绪化的样子被猫猫看到了! 嘿嘿"
+    - "(歪头) 玻璃心好可爱, {user_addr}就是真实嗷呜~"
+    - "嗷呜～情绪起伏说明{user_addr}有感觉! 不是坏事 ฅฅ"
+    - "(凑近蹭) 笨猫陪{user_addr}情绪化, 互相打气喵!"
+    - "哼～情绪化女孩 + 情绪化猫娘 = 完美组合!"
   cooldown_seconds: 90
   weight: 1.0

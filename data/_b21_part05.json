@@ -1,0 +1,982 @@
+[
+ {
+  "name": "hs_chaoshi_001",
+  "file": "896_humid_sticky_day.yaml",
+  "keywords": [
+   "潮湿",
+   "空气黏",
+   "湿度高",
+   "闷热",
+   "黏糊"
+  ],
+  "utterances": [
+   "潮湿",
+   "{user_addr}空气黏糊",
+   "湿度80%"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "rny_dampness_001",
+    "topic_hint": "916_rainy_day_mood",
+    "first_utterance": "太潮湿"
+   },
+   {
+    "name": "hm_chaoshi_001",
+    "topic_hint": "996_weather_too_humid",
+    "first_utterance": "天气潮湿"
+   },
+   {
+    "name": "wtc_humid_001",
+    "topic_hint": "503_weather_chat",
+    "first_utterance": "回南天"
+   },
+   {
+    "name": "wt_humid_001",
+    "topic_hint": "143_weather_chat",
+    "first_utterance": "回南天"
+   },
+   {
+    "name": "dwc_hot_001",
+    "topic_hint": "527_dress_warm_care",
+    "first_utterance": "热死了"
+   },
+   {
+    "name": "wrc_rain_001",
+    "topic_hint": "651_weather_rain_chat",
+    "first_utterance": "{user_addr}外面下大雨"
+   }
+  ]
+ },
+ {
+  "name": "bsc_birthday_003",
+  "file": "679_birthday_surprise_chat.yaml",
+  "keywords": [
+   "生日礼物",
+   "送什么",
+   "惊喜",
+   "包装",
+   "盒子"
+  ],
+  "utterances": [
+   "生日礼物{user_addr}",
+   "送什么",
+   "惊喜"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "rp_hongbao_010",
+    "topic_hint": "443_red_packet_surprise",
+    "first_utterance": "收到礼物"
+   },
+   {
+    "name": "bm_liwu_001",
+    "topic_hint": "282_birthday_moment",
+    "first_utterance": "生日礼物"
+   },
+   {
+    "name": "bws_gift_004",
+    "topic_hint": "639_birthday_wish_sweet",
+    "first_utterance": "生日礼物"
+   },
+   {
+    "name": "sm_birthday_present_007",
+    "topic_hint": "170_surprise_moment",
+    "first_utterance": "收到礼物"
+   },
+   {
+    "name": "rp_hongbao_009",
+    "topic_hint": "443_red_packet_surprise",
+    "first_utterance": "惊喜"
+   },
+   {
+    "name": "anc_anni_002",
+    "topic_hint": "671_anniversary_chat",
+    "first_utterance": "{user_addr}送什么"
+   }
+  ]
+ },
+ {
+  "name": "sdc_sugarhigh_009",
+  "file": "626_sweet_dessert_crave.yaml",
+  "keywords": [
+   "甜过头",
+   "齁甜",
+   "太甜",
+   "甜到腻",
+   "想喝水"
+  ],
+  "utterances": [
+   "甜过头",
+   "齁甜",
+   "太甜"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "pcr_mov_004",
+    "topic_hint": "875_popcorn_movie",
+    "first_utterance": "太咸"
+   },
+   {
+    "name": "edc_energy_004",
+    "topic_hint": "565_energy_drink_chat",
+    "first_utterance": "上瘾了戒不掉"
+   },
+   {
+    "name": "tm_too_sweet_004",
+    "topic_hint": "181_tea_milk_chat",
+    "first_utterance": "太甜了"
+   },
+   {
+    "name": "edc_energy_006",
+    "topic_hint": "565_energy_drink_chat",
+    "first_utterance": "喝完心跳加快"
+   },
+   {
+    "name": "edc_energy_002",
+    "topic_hint": "565_energy_drink_chat",
+    "first_utterance": "{user_addr}今晚怕是失眠"
+   },
+   {
+    "name": "edc_energy_012",
+    "topic_hint": "565_energy_drink_chat",
+    "first_utterance": "{user_addr}今晚怕是失眠"
+   }
+  ]
+ },
+ {
+  "name": "afc_flirt_005",
+  "file": "677_ambiguous_flirt_chat.yaml",
+  "keywords": [
+   "亲一下",
+   "亲亲",
+   "啵啵",
+   "拥吻",
+   "kiss"
+  ],
+  "utterances": [
+   "{user_addr}亲一下",
+   "啵啵",
+   "亲亲"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "ac_qinqin_001",
+    "topic_hint": "124_acting_clingy",
+    "first_utterance": "{user_addr}亲亲"
+   },
+   {
+    "name": "hp_kiss_003",
+    "topic_hint": "157_hug_petting",
+    "first_utterance": "求亲亲"
+   },
+   {
+    "name": "kps_basic_001",
+    "topic_hint": "105_kiss_pester",
+    "first_utterance": "亲一下"
+   },
+   {
+    "name": "kr_qinqin_001",
+    "topic_hint": "267_kiss_request",
+    "first_utterance": "求亲亲"
+   },
+   {
+    "name": "rf_qinqin_001",
+    "topic_hint": "054_reverse_flirt_blush",
+    "first_utterance": "亲一下"
+   },
+   {
+    "name": "cc_cc_qinqin_004",
+    "topic_hint": "223_clingy_companion",
+    "first_utterance": "亲亲"
+   }
+  ]
+ },
+ {
+  "name": "nlb_walk_009",
+  "file": "320_noon_lunch_break.yaml",
+  "keywords": [
+   "饭后散步",
+   "出去走走",
+   "转一圈",
+   "消消食",
+   "走走路"
+  ],
+  "utterances": [
+   "饭后散步",
+   "出去走走",
+   "转一圈"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "wp_outing_004",
+    "topic_hint": "180_weekend_plan",
+    "first_utterance": "出门玩"
+   },
+   {
+    "name": "hu_want_out_001",
+    "topic_hint": "AA9_home_uncomfortable",
+    "first_utterance": "我想出门"
+   },
+   {
+    "name": "sd_chuxin_001",
+    "topic_hint": "786_sunny_day_warm",
+    "first_utterance": "出去玩"
+   },
+   {
+    "name": "pw_zoulu_008",
+    "topic_hint": "298_peiwan_company",
+    "first_utterance": "散散步"
+   },
+   {
+    "name": "nl_change_place_001",
+    "topic_hint": "VVV7_no_inspiration_long",
+    "first_utterance": "想换个地方拍"
+   },
+   {
+    "name": "scp_walk_with_001",
+    "topic_hint": "101_seek_company",
+    "first_utterance": "陪散步"
+   }
+  ]
+ },
+ {
+  "name": "bat_charge_slow_001",
+  "file": "927_phone_battery_low.yaml",
+  "keywords": [
+   "充电慢",
+   "涓流",
+   "不快充",
+   "老充电器",
+   "半小时10%"
+  ],
+  "utterances": [
+   "充电慢",
+   "涓流",
+   "不快充"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "pb_chongbushang_001",
+    "topic_hint": "783_phone_low_battery",
+    "first_utterance": "充不上电"
+   },
+   {
+    "name": "pb_bat_003",
+    "topic_hint": "592_phone_battery_dying",
+    "first_utterance": "充电好慢"
+   },
+   {
+    "name": "pbc_battery_007",
+    "topic_hint": "663_phone_low_battery_chat",
+    "first_utterance": "充电真慢{user_addr}"
+   },
+   {
+    "name": "psn_chargingslow_001",
+    "topic_hint": "509_phone_screen",
+    "first_utterance": "充电慢"
+   },
+   {
+    "name": "pb_charge_slow_008",
+    "topic_hint": "684_phone_low_battery",
+    "first_utterance": "{user_addr}充电慢死"
+   },
+   {
+    "name": "bd_fast_charge_001",
+    "topic_hint": "SS6_battery_dead",
+    "first_utterance": "快充好慢啊"
+   }
+  ]
+ },
+ {
+  "name": "sy_shuile_001",
+  "file": "424_sleep_yet.yaml",
+  "keywords": [
+   "睡了吗",
+   "睡没",
+   "还没睡",
+   "上床了吗",
+   "几点睡"
+  ],
+  "utterances": [
+   "睡了吗喵",
+   "睡没",
+   "还没睡"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "ay_still_there_001",
+    "topic_hint": "122_are_you_there",
+    "first_utterance": "{user_addr}睡了吗"
+   },
+   {
+    "name": "sya_sleep_001",
+    "topic_hint": "458_sleep_yet_ask",
+    "first_utterance": "{user_addr}睡了没"
+   },
+   {
+    "name": "sy_shuilema_001",
+    "topic_hint": "292_slept_yet_ask",
+    "first_utterance": "{user_addr}睡了吗"
+   },
+   {
+    "name": "ayt_check_006",
+    "topic_hint": "455_are_you_there_check",
+    "first_utterance": "{user_addr}睡了吗"
+   },
+   {
+    "name": "ay_zaima_007",
+    "topic_hint": "421_are_you_there",
+    "first_utterance": "你醒着吗"
+   },
+   {
+    "name": "sc_sleeping_yet_010",
+    "topic_hint": "188_status_check",
+    "first_utterance": "睡了吗"
+   }
+  ]
+ },
+ {
+  "name": "trc_overwork_001",
+  "file": "528_take_rest_care.yaml",
+  "keywords": [
+   "工作太久",
+   "加班久",
+   "一直工作",
+   "加班狗",
+   "累瘫"
+  ],
+  "utterances": [
+   "工作太久",
+   "加班好久",
+   "一直工作"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "sow_overtime_001",
+    "topic_hint": "548_slack_off_work",
+    "first_utterance": "加班"
+   },
+   {
+    "name": "ws_overtime_008",
+    "topic_hint": "167_work_slack",
+    "first_utterance": "又加班"
+   },
+   {
+    "name": "nlb_no_rest_001",
+    "topic_hint": "077_noon_lunch_break",
+    "first_utterance": "没午休"
+   },
+   {
+    "name": "tem_workhard_001",
+    "topic_hint": "491_tease_master",
+    "first_utterance": "{user_addr}打工人"
+   },
+   {
+    "name": "edc_yike_001",
+    "topic_hint": "354_evening_dinner_chat",
+    "first_utterance": "还没下班"
+   },
+   {
+    "name": "wm_jiaban_001",
+    "topic_hint": "073_work_slack_moyu",
+    "first_utterance": "加班"
+   }
+  ]
+ },
+ {
+  "name": "jch_jeal_004",
+  "file": "461_jealous_chuyi.yaml",
+  "keywords": [
+   "冷落我",
+   "不理我了",
+   "偏心",
+   "不爱我了",
+   "移情别恋"
+  ],
+  "utterances": [
+   "{user_addr}冷落我",
+   "{user_addr}不理我了",
+   "{user_addr}偏心"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "rgv_unfair_treat_001",
+    "topic_hint": "118_random_grievance",
+    "first_utterance": "区别对待"
+   },
+   {
+    "name": "cjm_houhuiyi_001",
+    "topic_hint": "742_couple_jealous_mini",
+    "first_utterance": "{user_addr}冷我"
+   },
+   {
+    "name": "jp_partial_004",
+    "topic_hint": "325_jealous_pout",
+    "first_utterance": "{user_addr}偏心"
+   },
+   {
+    "name": "jv_yili_001",
+    "topic_hint": "262_jealous_vinegar",
+    "first_utterance": "冷落我了"
+   },
+   {
+    "name": "cc_pian_005",
+    "topic_hint": "295_chicu_jealous",
+    "first_utterance": "你偏心"
+   },
+   {
+    "name": "hp_motou_005",
+    "topic_hint": "396_head_pat_beg",
+    "first_utterance": "不摸我"
+   }
+  ]
+ },
+ {
+  "name": "hs_xiangzhongcan_001",
+  "file": "FF6_homesick.yaml",
+  "keywords": [
+   "想中餐",
+   "想吃中餐",
+   "想念中餐",
+   "想吃米饭",
+   "想吃火锅"
+  ],
+  "utterances": [
+   "好想吃中餐",
+   "想念中餐",
+   "想吃米饭啊"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "mcf_want_chinese_food_001",
+    "topic_hint": "FF8_miss_chinese_food",
+    "first_utterance": "想吃中餐"
+   },
+   {
+    "name": "hp_want_001",
+    "topic_hint": "932_hotpot_dream",
+    "first_utterance": "想吃火锅"
+   },
+   {
+    "name": "food_rice_001",
+    "topic_hint": "40_food",
+    "first_utterance": "想吃米饭"
+   },
+   {
+    "name": "ay_zhuyao_001",
+    "topic_hint": "257_ate_yet",
+    "first_utterance": "中餐还是西餐"
+   },
+   {
+    "name": "fc_want_rice_006",
+    "topic_hint": "183_food_craving",
+    "first_utterance": "想吃饭"
+   },
+   {
+    "name": "mcf_want_rice_001",
+    "topic_hint": "FF8_miss_chinese_food",
+    "first_utterance": "想吃米饭"
+   }
+  ]
+ },
+ {
+  "name": "bd_lianhong_004",
+  "file": "399_blush_dodge.yaml",
+  "keywords": [
+   "话题岔开",
+   "转移话题",
+   "不说了",
+   "别说了",
+   "换话题"
+  ],
+  "utterances": [
+   "话题转一下",
+   "转移话题",
+   "不说这个"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "rd_rd_zhuanyizhuyi_005",
+    "topic_hint": "240_rolling_demand",
+    "first_utterance": "转移话题"
+   },
+   {
+    "name": "bd_jiehua_001",
+    "topic_hint": "269_blush_dodge",
+    "first_utterance": "转移话题"
+   },
+   {
+    "name": "rc_topic_change_007",
+    "topic_hint": "179_random_chat",
+    "first_utterance": "换个话题"
+   },
+   {
+    "name": "fcd_avoid_topic_001",
+    "topic_hint": "109_feigned_cold",
+    "first_utterance": "换话题"
+   },
+   {
+    "name": "dfb_yanjuan_001",
+    "topic_hint": "366_dodge_flirt_back",
+    "first_utterance": "转移话题"
+   },
+   {
+    "name": "hms_zhibu_009",
+    "topic_hint": "022_hmph_sulk",
+    "first_utterance": "不告诉你"
+   }
+  ]
+ },
+ {
+  "name": "nch_xuhe_007",
+  "file": "012_need_comfort_hug.yaml",
+  "keywords": [
+   "需要陪",
+   "想要陪伴",
+   "不想一个人",
+   "陪我嘛",
+   "别走开"
+  ],
+  "utterances": [
+   "想要陪伴",
+   "不想一个人",
+   "陪我嘛"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "ac_play_with_001",
+    "topic_hint": "124_acting_clingy",
+    "first_utterance": "{user_addr}陪我"
+   },
+   {
+    "name": "nc_pei_001",
+    "topic_hint": "127_need_comfort",
+    "first_utterance": "一个人好孤单"
+   },
+   {
+    "name": "wn_huidewei_011",
+    "topic_hint": "289_where_are_you_now",
+    "first_utterance": "马上回"
+   },
+   {
+    "name": "cc_company_001",
+    "topic_hint": "T1_clingy_cuddle",
+    "first_utterance": "陪陪我"
+   },
+   {
+    "name": "sp_clingy_007",
+    "topic_hint": "189_seek_praise",
+    "first_utterance": "陪陪我"
+   },
+   {
+    "name": "wcy_company_005",
+    "topic_hint": "464_want_company",
+    "first_utterance": "{user_addr}需要陪伴"
+   }
+  ]
+ },
+ {
+  "name": "ldm_tear_005",
+  "file": "341_laugh_die_meme.yaml",
+  "keywords": [
+   "笑出眼泪",
+   "笑到流泪",
+   "哭笑",
+   "笑哭",
+   "笑哭了"
+  ],
+  "utterances": [
+   "笑出眼泪",
+   "笑到流泪",
+   "哭笑"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "ld_xiaosi_001",
+    "topic_hint": "402_laugh_dead",
+    "first_utterance": "笑死了"
+   },
+   {
+    "name": "ex_xiaosi_001",
+    "topic_hint": "059_expression_xiaosi",
+    "first_utterance": "笑死"
+   },
+   {
+    "name": "hle_haha_loud_004",
+    "topic_hint": "330_hehe_laugh_emoji",
+    "first_utterance": "笑死我了"
+   },
+   {
+    "name": "hy_haha_003",
+    "topic_hint": "303_heihei_yingying",
+    "first_utterance": "哈哈哈"
+   },
+   {
+    "name": "te_xswl_010",
+    "topic_hint": "191_text_emoji",
+    "first_utterance": "笑死"
+   },
+   {
+    "name": "xs_xiaochuyanlei_002",
+    "topic_hint": "312_xiaosi_meme_laugh",
+    "first_utterance": "笑出眼泪"
+   }
+  ]
+ },
+ {
+  "name": "nlb_lunchwhat_001",
+  "file": "077_noon_lunch_break.yaml",
+  "keywords": [
+   "中午吃啥",
+   "吃啥呢",
+   "午饭推荐",
+   "中午随便",
+   "吃啥犹豫"
+  ],
+  "utterances": [
+   "中午吃啥",
+   "{user_addr}午饭吃啥",
+   "吃啥犹豫"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "aly_zhongchi_009",
+    "topic_hint": "006_ate_lunch_yet",
+    "first_utterance": "中午吃啥"
+   },
+   {
+    "name": "lb_wufan_001",
+    "topic_hint": "254_lunch_break",
+    "first_utterance": "中午吃什么"
+   },
+   {
+    "name": "nl_zhongwucan_002",
+    "topic_hint": "287_noon_lunch_break",
+    "first_utterance": "中午吃啥"
+   },
+   {
+    "name": "nb_wuxiu_002",
+    "topic_hint": "386_noon_break",
+    "first_utterance": "午饭吃啥"
+   },
+   {
+    "name": "ec_lunch_001",
+    "topic_hint": "123_eat_check_in",
+    "first_utterance": "午饭吃啥"
+   },
+   {
+    "name": "noon_lunch_002",
+    "topic_hint": "452_noon_lunch_break",
+    "first_utterance": "{user_addr}午饭吃啥"
+   }
+  ]
+ },
+ {
+  "name": "tl_unfair_001",
+  "file": "WW5_team_lost.yaml",
+  "keywords": [
+   "不公平",
+   "太不公平",
+   "不公正",
+   "黑哨",
+   "暗箱"
+  ],
+  "utterances": [
+   "这比赛太不公平",
+   "完全不公正",
+   "全是黑哨啊"
+  ],
+  "intent": "complaint",
+  "siblings": [
+   {
+    "name": "jpt_unconvinced_001",
+    "topic_hint": "093_jealous_pout",
+    "first_utterance": "不服"
+   },
+   {
+    "name": "wwc_weiqu_003",
+    "topic_hint": "021_wuwu_crying",
+    "first_utterance": "我委屈"
+   },
+   {
+    "name": "rgv_unfair_001",
+    "topic_hint": "118_random_grievance",
+    "first_utterance": "不公平"
+   },
+   {
+    "name": "wwc_unfair_cry_001",
+    "topic_hint": "530_wuwu_crying",
+    "first_utterance": "委屈死了"
+   },
+   {
+    "name": "jp_partial_004",
+    "topic_hint": "325_jealous_pout",
+    "first_utterance": "{user_addr}偏心"
+   },
+   {
+    "name": "cc_pian_005",
+    "topic_hint": "295_chicu_jealous",
+    "first_utterance": "你偏心"
+   }
+  ]
+ },
+ {
+  "name": "cdl_kneading_001",
+  "file": "495_cat_daily_life.yaml",
+  "keywords": [
+   "踩奶",
+   "揉肚子",
+   "踩肚",
+   "笨猫踩",
+   "踩奶动作"
+  ],
+  "utterances": [
+   "笨猫踩奶",
+   "揉肚子上",
+   "笨猫在踩"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "sp_mozhua_007",
+    "topic_hint": "449_scratching_post",
+    "first_utterance": "踩奶"
+   },
+   {
+    "name": "hp_dudu_001",
+    "topic_hint": "266_head_pat",
+    "first_utterance": "摸肚子"
+   },
+   {
+    "name": "hp_belly_rub_006",
+    "topic_hint": "157_hug_petting",
+    "first_utterance": "摸肚子"
+   },
+   {
+    "name": "hpb_jiaohu_001",
+    "topic_hint": "363_head_pat_beg",
+    "first_utterance": "挠肚子"
+   },
+   {
+    "name": "bl_massage_001",
+    "topic_hint": "III5_bloating",
+    "first_utterance": "{user_addr}按摩肚子有用吗"
+   },
+   {
+    "name": "hpr_xunmao_001",
+    "topic_hint": "727_head_pat_request",
+    "first_utterance": "撸猫"
+   }
+  ]
+ },
+ {
+  "name": "wr_heshui_003",
+  "file": "392_water_remind.yaml",
+  "keywords": [
+   "喝水打卡",
+   "八杯水",
+   "多喝水",
+   "喝水挑战",
+   "健康喝水"
+  ],
+  "utterances": [
+   "喝水打卡",
+   "八杯水挑战",
+   "多喝水"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "wdr_baxiebei_001",
+    "topic_hint": "367_water_drink_remind",
+    "first_utterance": "八杯水"
+   },
+   {
+    "name": "wr_eight_cups_005",
+    "topic_hint": "156_water_reminder",
+    "first_utterance": "八杯水太多了"
+   },
+   {
+    "name": "dw_heshui_009",
+    "topic_hint": "429_drink_water_remind",
+    "first_utterance": "喝水提醒"
+   },
+   {
+    "name": "hwr_amountday_007",
+    "topic_hint": "618_hot_water_remind",
+    "first_utterance": "一天多少"
+   },
+   {
+    "name": "wr_water_alarm_008",
+    "topic_hint": "156_water_reminder",
+    "first_utterance": "设个喝水提醒"
+   },
+   {
+    "name": "dwc_8cups_001",
+    "topic_hint": "084_drink_water_check",
+    "first_utterance": "八杯水"
+   }
+  ]
+ },
+ {
+  "name": "myw_stretch_morning_003",
+  "file": "814_morning_first_yawn.yaml",
+  "keywords": [
+   "伸懒腰",
+   "拉筋",
+   "骨头响",
+   "醒醒",
+   "活动一下"
+  ],
+  "utterances": [
+   "{user_addr}伸个懒腰",
+   "早上拉一下筋",
+   "骨头都响了"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "mwk_stretchy_001",
+    "topic_hint": "483_morning_wakeup",
+    "first_utterance": "伸个懒腰"
+   },
+   {
+    "name": "rw_yujia_007",
+    "topic_hint": "301_rest_well_care",
+    "first_utterance": "拉伸一下"
+   },
+   {
+    "name": "mw_stretching_001",
+    "topic_hint": "120_morning_wakeup",
+    "first_utterance": "伸个懒腰"
+   },
+   {
+    "name": "sp_mozhua_005",
+    "topic_hint": "449_scratching_post",
+    "first_utterance": "伸懒腰"
+   },
+   {
+    "name": "ad_xiawu_002",
+    "topic_hint": "420_afternoon_drowsy",
+    "first_utterance": "起来活动下"
+   },
+   {
+    "name": "yws_yawn_001",
+    "topic_hint": "549_yawn_morning_stretch",
+    "first_utterance": "{user_addr}打了个大哈欠，眼泪都出来了"
+   }
+  ]
+ },
+ {
+  "name": "pcr_belly_rub_004",
+  "file": "827_pet_caress_request.yaml",
+  "keywords": [
+   "摸肚子",
+   "摸肚",
+   "肚皮",
+   "揉小腹",
+   "肚子摸"
+  ],
+  "utterances": [
+   "{user_addr}摸肚子吗",
+   "摸肚皮",
+   "揉小腹"
+  ],
+  "intent": "playful",
+  "siblings": [
+   {
+    "name": "cbr_rb_002",
+    "topic_hint": "764_carry_belly_rub",
+    "first_utterance": "摸肚子"
+   },
+   {
+    "name": "hp_dudu_001",
+    "topic_hint": "266_head_pat",
+    "first_utterance": "摸肚子"
+   },
+   {
+    "name": "hp_belly_rub_006",
+    "topic_hint": "157_hug_petting",
+    "first_utterance": "摸肚子"
+   },
+   {
+    "name": "whp_pat_010",
+    "topic_hint": "476_want_headpat_beg",
+    "first_utterance": "{user_addr}摸肚子"
+   },
+   {
+    "name": "cet_ear_005",
+    "topic_hint": "664_cat_ear_tease_chat",
+    "first_utterance": "翻肚皮露出来{user_addr}"
+   },
+   {
+    "name": "brb_belly_001",
+    "topic_hint": "535_belly_rub_beg",
+    "first_utterance": "摸肚子"
+   }
+  ]
+ },
+ {
+  "name": "mns_supper_takeout_005",
+  "file": "815_midnight_snack_chat.yaml",
+  "keywords": [
+   "深夜外卖",
+   "夜宵",
+   "点外卖",
+   "还有营业",
+   "24小时"
+  ],
+  "utterances": [
+   "{user_addr}点个夜宵",
+   "深夜外卖",
+   "还有店开吗"
+  ],
+  "intent": "question",
+  "siblings": [
+   {
+    "name": "ln_night_snack_005",
+    "topic_hint": "187_late_night",
+    "first_utterance": "半夜饿了"
+   },
+   {
+    "name": "nm_yikou_001",
+    "topic_hint": "065_night_moon_stars",
+    "first_utterance": "深夜想吃"
+   },
+   {
+    "name": "md_yexiao_003",
+    "topic_hint": "288_midnight_dark_chat",
+    "first_utterance": "半夜饿了"
+   },
+   {
+    "name": "tf_yetan_001",
+    "topic_hint": "270_tease_fat",
+    "first_utterance": "吃夜宵"
+   },
+   {
+    "name": "lno_yexiao_003",
+    "topic_hint": "002_late_night_owl",
+    "first_utterance": "半夜饿了"
+   },
+   {
+    "name": "ot_ot_yexiao_008",
+    "topic_hint": "248_off_work_tired",
+    "first_utterance": "夜宵"
+   }
+  ]
+ }
+]

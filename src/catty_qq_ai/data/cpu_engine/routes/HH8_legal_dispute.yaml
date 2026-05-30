@@ -1,206 +1,315 @@
 # 法律纠纷 / 合同纠纷 / 被起诉 routes (S6 R360 NLU 节点扩充, 第三十五周期 9/10)
 # 主人 2026-05-29: 日常情绪互动
+# R4 weak 扩 keywords/utterances/responses
 
 - name: ld_hetongjiufen_001
   intent: complaint
-  keywords: [合同纠纷, 合同有问题, 合同闹掰, 合同扯皮, 合同打架]
+  keywords: [合同纠纷, 合同有问题, 合同闹掰, 合同扯皮, 合同打架, 合同争议, 合同瑕疵, 合同失效, 合同违约, 合同陷阱]
   utterances:
     - "{user_addr}遇到合同纠纷了"
     - 合同闹掰了好烦
     - 合同有问题扯皮中
     - 跟人合同打架
     - 合同纠纷头大
+    - "{user_addr}合同违约"
+    - 合同有陷阱
+    - "{user_addr}合同争议"
+    - 合同瑕疵中
+    - 合同闹翻了
   responses:
     - "(尾巴一抖) 合同纠纷? {user_addr}先把合同条款抠清楚喵! 笨猫陪{user_addr}捋"
     - "嗷呜～合同扯皮最烦了! {user_addr}留着证据啊 ฅฅ"
     - "(凑过来) {user_addr}别急, 猫猫陪{user_addr}一条一条看! 总能扯清的"
     - "哼～合同纠纷最考验耐心了! {user_addr}加油喵, 笨猫支持"
+    - "(挺胸) 笨猫提醒: 找律师看条款!"
+    - "嗷呜~ {user_addr}留好聊天记录"
+    - "(贴贴) 笨猫陪{user_addr}抠条款"
+    - "哼~ 合同必须公平!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_beigaole_001
   intent: complaint
-  keywords: [被告了, 被人告了, 收到传票, 法院传票, 被起诉了]
+  keywords: [被告了, 被人告了, 收到传票, 法院传票, 被起诉了, 被告上法庭, 收到诉状, 被人状告, 法院来传票, 被告通知]
   utterances:
     - "{user_addr}被告了"
     - 收到法院传票了
     - 被人起诉了好慌
     - 被告了不知道怎么办
     - 突然被告了
+    - "{user_addr}被告上法庭"
+    - 收到诉状了
+    - "{user_addr}被人状告"
+    - 法院来传票
+    - 被告通知到了
   responses:
     - "(尾巴炸毛) 被告了?! {user_addr}先别慌喵, 笨猫陪{user_addr}!"
     - "嗷呜～{user_addr}赶紧找律师啊! 别一个人扛 ฅฅ"
     - "(贴过来) {user_addr}别怕, 猫猫在! 先看清楚诉状内容嗷呜～"
     - "哼～被告了也别慌! {user_addr}冷静应对喵, 猫猫挺{user_addr}"
+    - "(挺胸) 笨猫提醒: 15 天内提交答辩!"
+    - "嗷呜~ {user_addr}找律师朋友"
+    - "(贴贴) 笨猫陪{user_addr}应对"
+    - "哼~ 被告不代表输!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_beiqisu_001
   intent: complaint
-  keywords: [被起诉, 起诉我了, 把我告了, 告上法院, 状告我]
+  keywords: [被起诉, 起诉我了, 把我告了, 告上法院, 状告我, 起诉到我, 受到起诉, 被告状, 法庭见, 被人起诉]
   utterances:
     - "{user_addr}被起诉了"
     - 有人把{user_addr}告了
     - 被告上法院了
     - 被状告了好烦
     - 起诉书到了
+    - "{user_addr}起诉到了"
+    - 受到起诉
+    - "{user_addr}被告状"
+    - 法庭见喵
+    - 起诉来了
   responses:
     - "(凑过来贴贴) 被起诉了? {user_addr}先看诉状再说喵!"
     - "嗷呜～{user_addr}找个律师朋友问问啊! 笨猫陪{user_addr} ฅฅ"
     - "(尾巴一甩) {user_addr}别一个人扛! 猫猫陪{user_addr}应对嗷呜～"
     - "哼～{user_addr}沉住气! 起诉不代表输, 笨猫支持{user_addr}喵"
+    - "(挺胸) 笨猫提醒: 找律师比自己上有用!"
+    - "嗷呜~ {user_addr}留好证据"
+    - "(贴贴) 笨猫陪{user_addr}熬"
+    - "哼~ {user_addr}有理就赢!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_laodongzhongcai_001
   intent: complaint
-  keywords: [劳动仲裁, 申请仲裁, 仲裁劳动, 找劳动局, 仲裁老板]
+  keywords: [劳动仲裁, 申请仲裁, 仲裁劳动, 找劳动局, 仲裁老板, 劳动仲裁委, 仲裁劳动局, 仲裁老板, 劳动维权, 仲裁庭]
   utterances:
     - "{user_addr}申请劳动仲裁了"
     - 准备劳动仲裁老板
     - 走劳动仲裁了
     - 仲裁前流程好烦
     - 劳动仲裁难
+    - "{user_addr}走仲裁"
+    - 找劳动局仲裁
+    - "{user_addr}劳动维权"
+    - 仲裁庭走起
+    - 仲裁老板了
   responses:
     - "(尾巴一翘) 劳动仲裁? {user_addr}留好工资条考勤啊喵!"
     - "嗷呜～{user_addr}维权加油! 笨猫站{user_addr}这边 ฅฅ"
     - "(挺胸) {user_addr}该仲裁就仲裁! 别怂嗷呜～"
     - "哼～老板敢欠{user_addr}的就该告! 猫猫支持{user_addr}喵"
+    - "(摸头) {user_addr}劳动仲裁免费!"
+    - "嗷呜~ {user_addr}收集所有工作记录"
+    - "(贴贴) 笨猫陪{user_addr}维权"
+    - "哼~ 黑老板必须赔!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_guansichanshen_001
   intent: complaint
-  keywords: [官司缠身, 一堆官司, 官司接连不断, 官司缠着, 缠诉中]
+  keywords: [官司缠身, 一堆官司, 官司接连不断, 官司缠着, 缠诉中, 多场官司, 官司不断, 诉讼接连, 法院常客, 官司堆积]
   utterances:
     - "{user_addr}官司缠身"
     - 一堆官司打不完
     - 官司接连不断好累
     - 官司缠着烦
     - 缠诉中焦头烂额
+    - "{user_addr}多场官司"
+    - 官司不断喵
+    - "{user_addr}诉讼接连"
+    - 法院常客了
+    - 官司堆积
   responses:
     - "(尾巴垂下) 官司缠身? {user_addr}辛苦了喵, 笨猫心疼"
     - "嗷呜～一堆官司谁顶得住! {user_addr}抽空休息啊 ฅฅ"
     - "(蹭蹭) {user_addr}别硬扛, 一件一件来! 猫猫陪{user_addr}"
     - "哼～官司再多也得理出头绪! {user_addr}加油喵, 笨猫支持"
+    - "(摸头) {user_addr}分轻重缓急"
+    - "嗷呜~ {user_addr}劳逸结合"
+    - "(贴贴) 笨猫陪{user_addr}熬"
+    - "哼~ {user_addr}一定能挺过去!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_lvshigui_001
   intent: complaint
-  keywords: [律师贵, 律师费贵, 请律师贵, 律师费心疼, 律师太贵]
+  keywords: [律师贵, 律师费贵, 请律师贵, 律师费心疼, 律师太贵, 律师收费高, 律师天价, 律师费翻倍, 律师费打折, 律师收钱多]
   utterances:
     - 律师真的好贵
     - 请律师贵到肉疼
     - 律师费太高了
     - "{user_addr}请不起律师"
     - 律师费心疼
+    - "{user_addr}律师天价"
+    - 律师收钱多
+    - "{user_addr}律师费翻倍"
+    - 律师收费高
+    - 律师费打折要不
   responses:
     - "(尾巴一垂) 律师贵?{user_addr}问问法律援助有没有喵"
     - "嗷呜～律师费心疼但官司不能不打! {user_addr}咬咬牙 ฅฅ"
     - "(凑过来) {user_addr}找便宜点的律师比较! 货比三家嗷呜～"
     - "哼～律师贵也没办法! {user_addr}该花就花, 别拖延喵"
+    - "(挺胸) 笨猫提醒: 法律援助免费!"
+    - "嗷呜~ {user_addr}找熟人朋友的律师"
+    - "(贴贴) 笨猫陪{user_addr}省着花"
+    - "哼~ 钱花了官司赢就值!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_tiaojieshibai_001
   intent: complaint
-  keywords: [调解失败, 调解不成, 调解破裂, 调解谈崩, 调不下来]
+  keywords: [调解失败, 调解不成, 调解破裂, 调解谈崩, 调不下来, 调解未成, 谈判失败, 调解破灭, 调解无果, 调解走不通]
   utterances:
     - 调解失败了
     - "{user_addr}调解不成"
     - 调解破裂只能开庭
     - 调解谈崩了
     - 调不下来好累
+    - "{user_addr}调解未成"
+    - 谈判失败
+    - "{user_addr}调解破灭"
+    - 调解无果
+    - 走不通调解
   responses:
     - "(尾巴一垂) 调解失败? {user_addr}那就走诉讼喵, 猫猫陪着"
     - "嗷呜～调不下来就开庭呗! {user_addr}该硬就硬 ฅฅ"
     - "(凑过来) {user_addr}别灰心, 调解只是一步! 后面还有路嗷呜～"
     - "哼～调解破裂也正常! {user_addr}做好开庭准备喵"
+    - "(挺胸) 笨猫提醒: 准备好诉讼证据!"
+    - "嗷呜~ {user_addr}向前看"
+    - "(贴贴) 笨猫陪{user_addr}打官司"
+    - "哼~ 不调就庭见!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_daguansilei_001
   intent: complaint
-  keywords: [打官司累, 打官司心累, 打官司折腾, 诉讼累, 打官司耗精力]
+  keywords: [打官司累, 打官司心累, 打官司折腾, 诉讼累, 打官司耗精力, 诉讼疲惫, 官司劳神, 官司心力交瘁, 打官司难熬, 打官司燃身体]
   utterances:
     - 打官司真的好累
     - "{user_addr}打官司心累"
     - 打官司折腾死了
     - 诉讼太耗精力
     - 打官司一身疲惫
+    - "{user_addr}诉讼疲惫"
+    - 官司劳神
+    - "{user_addr}心力交瘁"
+    - 打官司难熬
+    - 官司燃身体
   responses:
     - "(蹭蹭) 打官司累? {user_addr}辛苦了喵, 来抱猫猫"
     - "嗷呜～诉讼最磨人了! {user_addr}抽空休息啊 ฅฅ"
     - "(凑过来) 笨猫陪{user_addr}聊聊嘛~ 别一个人扛着"
     - "哼～打官司就是累! {user_addr}撑住, 总会过去的喵"
+    - "(摸头) {user_addr}睡个好觉"
+    - "嗷呜~ 笨猫给{user_addr}煮汤"
+    - "(贴贴) 笨猫赖着{user_addr}"
+    - "哼~ 撑下去就赢了!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_shengsunan_001
   intent: complaint
-  keywords: [胜诉难, 赢官司难, 胜诉概率低, 难赢官司, 胜诉没把握]
+  keywords: [胜诉难, 赢官司难, 胜诉概率低, 难赢官司, 胜诉没把握, 难胜诉, 官司难赢, 胜算小, 胜诉机率小, 赢面小]
   utterances:
     - 胜诉好难
     - 赢这官司没把握
     - "{user_addr}胜诉概率低"
     - 难赢的官司心累
     - 胜诉希望不大
+    - "{user_addr}胜算小"
+    - 官司难赢
+    - "{user_addr}胜诉机率小"
+    - 赢面小
+    - 难胜诉
   responses:
     - "(尾巴垂下) 胜诉难? {user_addr}尽力就好喵, 笨猫不怪{user_addr}"
     - "嗷呜～再难也得试! {user_addr}别放弃 ฅฅ"
     - "(凑过来) {user_addr}把证据准备充分点! 总有一线机会嗷呜～"
     - "哼～胜诉难也得拼! {user_addr}加油, 猫猫支持"
+    - "(挺胸) 笨猫提醒: 证据是关键!"
+    - "嗷呜~ {user_addr}尽力就好"
+    - "(贴贴) 笨猫信{user_addr}"
+    - "哼~ 不到最后不知道!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_baisule_001
   intent: complaint
-  keywords: [败诉了, 输官司了, 官司输了, 败诉好惨, 没赢官司]
+  keywords: [败诉了, 输官司了, 官司输了, 败诉好惨, 没赢官司, 输了诉讼, 败诉打击, 一审败诉, 官司输惨, 败诉心痛]
   utterances:
     - "{user_addr}败诉了"
     - 这官司输了好惨
     - 官司输了不甘心
     - 败诉了心好痛
     - 没赢官司
+    - "{user_addr}一审败诉"
+    - 输了诉讼
+    - "{user_addr}败诉打击大"
+    - 官司输惨
+    - 败诉心痛
   responses:
     - "(尾巴垂下贴过来) 败诉了? {user_addr}别难过喵, 笨猫陪{user_addr}"
     - "嗷呜～输了也别太自责! {user_addr}已经尽力了 ฅฅ"
     - "(蹭蹭) {user_addr}考虑上诉吗? 猫猫陪{user_addr}研究嗷呜～"
     - "哼～败诉也不是世界末日! {user_addr}抬头喵, 还有机会"
+    - "(挺胸) 笨猫提醒: 15 天内上诉!"
+    - "嗷呜~ {user_addr}哭一场不丢人"
+    - "(贴贴) 笨猫陪{user_addr}舔伤口"
+    - "哼~ 二审反败为胜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_zhixingnan_001
   intent: complaint
-  keywords: [执行难, 判了执行不下来, 强制执行难, 执行不到位, 老赖跑了]
+  keywords: [执行难, 判了执行不下来, 强制执行难, 执行不到位, 老赖跑了, 失信被执行, 执行难题, 强执难, 老赖, 执行庭]
   utterances:
     - 执行真的难
     - 判了也执行不下来
     - "{user_addr}强制执行难"
     - 老赖跑了执行不到
     - 执行不到位心累
+    - "{user_addr}失信名单"
+    - 执行难题
+    - "{user_addr}强执难"
+    - 找老赖要钱
+    - 执行庭跑断腿
   responses:
     - "(尾巴炸毛) 执行难? 老赖最讨厌了! {user_addr}申请失信名单啊喵"
     - "嗷呜～判赢了拿不到钱才最气! {user_addr}找执行庭催 ฅฅ"
     - "(凑过来) {user_addr}盯紧执行流程! 别让老赖跑了嗷呜～"
     - "哼～执行难也得追! {user_addr}咬紧, 猫猫支持喵"
+    - "(挺胸) 笨猫提醒: 申请限高令!"
+    - "嗷呜~ {user_addr}盯紧老赖"
+    - "(贴贴) 笨猫陪{user_addr}骂老赖"
+    - "哼~ 老赖必须被制裁!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ld_paofayuanfan_001
   intent: complaint
-  keywords: [跑法院烦, 跑法院累, 法院来回跑, 法院折腾, 法院耗时间]
+  keywords: [跑法院烦, 跑法院累, 法院来回跑, 法院折腾, 法院耗时间, 法院排长队, 法院程序久, 法院太繁琐, 法院打卡, 法院多趟]
   utterances:
     - 跑法院好烦
     - "{user_addr}法院来回跑"
     - 跑法院累死了
     - 法院折腾人
     - 法院耗时间
+    - "{user_addr}法院排长队"
+    - 法院程序久
+    - "{user_addr}法院太繁琐"
+    - 法院打卡
+    - 法院多趟
   responses:
     - "(尾巴一垂) 跑法院烦? {user_addr}辛苦了喵, 来贴贴"
     - "嗷呜～法院流程慢吞吞最磨人! {user_addr}耐心点 ฅฅ"
     - "(凑过来) {user_addr}带瓶水多带点零食! 别空着肚子等嗷呜～"
     - "哼～跑法院虽然累但不能少! {user_addr}撑住喵, 笨猫陪{user_addr}"
+    - "(挺胸) 笨猫提醒: 提前预约节约时间!"
+    - "嗷呜~ {user_addr}带笔记记进展"
+    - "(贴贴) 笨猫陪{user_addr}守候"
+    - "哼~ 跑完就解脱了!"
   cooldown_seconds: 60
   weight: 1.0

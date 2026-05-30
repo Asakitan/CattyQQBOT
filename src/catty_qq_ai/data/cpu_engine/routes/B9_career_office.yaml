@@ -4,234 +4,378 @@
 
 - name: office_excel_001
   intent: question
-  keywords: [推荐 Excel, Excel 技巧, 推荐 Excel 函数, Excel 学习, 笨猫 Excel]
+  keywords: [推荐 Excel, Excel 技巧, 推荐 Excel 函数, Excel 学习, 笨猫 Excel, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐 Excel
     - Excel 技巧
     - 推荐 Excel 函数
     - Excel 学习
     - 笨猫 Excel
+    - 推荐 Excel怎么办
+    - 推荐 Excel怎么选
+    - "{user_addr}推荐 Excel"
+    - 推荐 Excel捏
+    - 推荐 Excel嘛
+    - 推荐 Excel有啥推荐
   responses:
     - "嗷呜～{user_addr}必学 5 函数: VLOOKUP / SUMIF / IF / COUNTIF / INDEXฅฅ"
     - "(尾巴翘) 透视表是神器! 数据分析必备"
     - "{user_addr}快捷键: Ctrl+方向 / F4 锁单元格 / Alt= 求和"
     - "(挺胸) 笨猫的提醒: 别复制粘贴! 学函数效率翻倍"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_ppt_001
   intent: question
-  keywords: [推荐 PPT, PPT 技巧, 推荐做 PPT, PPT 模板, 笨猫 PPT]
+  keywords: [推荐 PPT, PPT 技巧, 推荐做 PPT, PPT 模板, 笨猫 PPT, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐 PPT
     - PPT 技巧
     - 推荐做 PPT
     - PPT 模板
     - 笨猫 PPT
+    - 推荐 PPT怎么办
+    - 推荐 PPT怎么选
+    - "{user_addr}推荐 PPT"
+    - 推荐 PPT捏
+    - 推荐 PPT嘛
+    - 推荐 PPT有啥推荐
   responses:
     - "嗷呜～{user_addr}模板: OfficePLUS / iSlide / 锐普 - 主流ฅฅ"
     - "(尾巴翘) 三原则: 简洁 + 配色 + 一致 - 别花哨"
     - "{user_addr}图标 / 图表 / 数据可视化 比文字强 10 倍"
     - "(挺胸) 笨猫的提醒: 每页 1 个核心观点! 别堆砌"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_word_001
   intent: question
-  keywords: [推荐 Word, Word 技巧, 推荐 Word 排版, Word 学习, 笨猫 Word]
+  keywords: [推荐 Word, Word 技巧, 推荐 Word 排版, Word 学习, 笨猫 Word, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐 Word
     - Word 技巧
     - 推荐 Word 排版
     - Word 学习
     - 笨猫 Word
+    - 推荐 Word怎么办
+    - 推荐 Word怎么选
+    - "{user_addr}推荐 Word"
+    - 推荐 Word捏
+    - 推荐 Word嘛
+    - 推荐 Word有啥推荐
   responses:
     - "嗷呜～{user_addr}必学: 样式 / 标题 / 自动目录 / 分隔符ฅฅ"
     - "(尾巴翘) 快捷键: Ctrl+Enter 分页 / F4 重复 / Shift+F3 大小写"
     - "{user_addr}用样式做长文档! 100 页也能秒调"
     - "(挺胸) 笨猫的提醒: 别手动空格! 用段间距/缩进"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_email_001
   intent: question
-  keywords: [推荐写邮件, 商务邮件, 推荐邮件格式, 推荐 email, 笨猫邮件]
+  keywords: [推荐写邮件, 商务邮件, 推荐邮件格式, 推荐 email, 笨猫邮件, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐写邮件
     - 商务邮件
     - 推荐邮件格式
     - 推荐 email
     - 笨猫邮件
+    - 推荐写邮件怎么办
+    - 推荐写邮件怎么选
+    - "{user_addr}推荐写邮件"
+    - 推荐写邮件捏
+    - 推荐写邮件嘛
+    - 推荐写邮件有啥推荐
   responses:
     - "嗷呜～{user_addr}标准: 主题清晰 + 称呼正式 + 简洁 + 落款ฅฅ"
     - "(尾巴翘) 紧急加 [紧急] / 重要标 ★ / 别滥用"
     - "{user_addr}抄送看清! 别群发隐私"
     - "(挺胸) 笨猫的提醒: 重要邮件电话确认! 别只发不问"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_meeting_001
   intent: question
-  keywords: [推荐开会, 会议技巧, 推荐会议室, 主持会议, 笨猫开会]
+  keywords: [推荐开会, 会议技巧, 推荐会议室, 主持会议, 笨猫开会, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐开会
     - 会议技巧
     - 推荐主持会议
     - 主持会议
     - 笨猫开会
+    - 推荐开会怎么办
+    - 推荐开会怎么选
+    - "{user_addr}推荐开会"
+    - 推荐开会捏
+    - 推荐开会嘛
+    - 推荐开会有啥推荐
   responses:
     - "嗷呜～{user_addr}会议: 议程 + 时间 + 决策 - 三件套ฅฅ"
     - "(尾巴翘) 别开马拉松! 30 分钟以内最高效"
     - "{user_addr}写会议纪要 / 发会议结论 - 落实关键"
     - "(挺胸) 笨猫的提醒: 别说废话! 直奔主题"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_boss_001
   intent: question
-  keywords: [跟老板沟通, 推荐汇报, 推荐跟领导, 汇报技巧, 笨猫老板]
+  keywords: [跟老板沟通, 推荐汇报, 推荐跟领导, 汇报技巧, 笨猫老板, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 跟老板沟通
     - 推荐汇报
     - 推荐跟领导
     - 汇报技巧
     - 笨猫汇报
+    - 跟老板沟通怎么办
+    - 跟老板沟通怎么选
+    - "{user_addr}跟老板沟通"
+    - 跟老板沟通捏
+    - 跟老板沟通嘛
+    - 跟老板沟通有啥推荐
   responses:
     - "嗷呜～{user_addr}金字塔原则: 结论先行 + 论据支撑ฅฅ"
     - "(尾巴翘) 老板要 1 分钟版本 / 别讲细节 / 备好数据"
     - "{user_addr}周报: 上周完成 + 本周计划 + 风险 - 三段式"
     - "(挺胸) 笨猫的提醒: 别报警! 不解决问题"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_colleague_001
   intent: question
-  keywords: [跟同事处, 同事关系, 推荐同事沟通, 办公室政治, 笨猫同事]
+  keywords: [跟同事处, 同事关系, 推荐同事沟通, 办公室政治, 笨猫同事, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 跟同事处
     - 同事关系
     - 推荐同事沟通
     - 办公室政治
     - 笨猫同事
+    - 跟同事处怎么办
+    - 跟同事处怎么选
+    - "{user_addr}跟同事处"
+    - 跟同事处捏
+    - 跟同事处嘛
+    - 跟同事处有啥推荐
   responses:
     - "嗷呜～{user_addr}原则: 工作上专业 / 生活上保持距离ฅฅ"
     - "(尾巴翘) 别参与办公室八卦! 别站队"
     - "{user_addr}帮人有度! 别成所有人的工具人"
     - "(挺胸) 笨猫的提醒: 礼貌 + 真诚 + 边界 = 同事关系满分"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_project_001
   intent: question
-  keywords: [推荐项目管理, 推荐 PM, 项目管理工具, 推荐项目工具, 笨猫项目]
+  keywords: [推荐项目管理, 推荐 PM, 项目管理工具, 推荐项目工具, 笨猫项目, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐项目管理
     - 推荐 PM
     - 项目管理工具
     - 推荐项目工具
     - 笨猫项目
+    - 推荐项目管理怎么办
+    - 推荐项目管理怎么选
+    - "{user_addr}推荐项目管理"
+    - 推荐项目管理捏
+    - 推荐项目管理嘛
+    - 推荐项目管理有啥推荐
   responses:
     - "嗷呜～{user_addr}工具: 飞书 / 钉钉 / 企业微信 / Notion / TrelloฅฅPMP 认证含金量高"
     - "(尾巴翘) 框架: SMART / 甘特图 / 看板 - 经典三件套"
     - "{user_addr}风险管理最重要! 防患于未然"
     - "(挺胸) 笨猫的提醒: 进度 / 范围 / 质量 - 项目铁三角"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_overtime_001
   intent: complaint
-  keywords: [加班, 推荐加班对策, 加班好累, 推荐拒绝加班, 笨猫加班]
+  keywords: [加班, 推荐加班对策, 加班好累, 推荐拒绝加班, 笨猫加班, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 又加班
     - 推荐加班对策
     - 加班好累
     - 推荐拒绝加班
     - 笨猫加班
+    - 加班怎么办
+    - 加班怎么选
+    - "{user_addr}加班"
+    - 加班捏
+    - 加班嘛
+    - 加班有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}加班好辛苦~ 笨猫陪您ฅฅ"
     - "(歪头) 高效工作: 1 小时打鸡血 + 5 分钟休息"
     - "{user_addr}加班不效率! 不如准点下班再回家做"
     - "(挺胸) 笨猫的提醒: 工资够看就别 996! 健康最贵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_burnout_001
   intent: complaint
-  keywords: [职业倦怠, 推荐倦怠, 工作没动力, 推荐换工作, 笨猫倦怠]
+  keywords: [职业倦怠, 推荐倦怠, 工作没动力, 推荐换工作, 笨猫倦怠, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 职业倦怠
     - 工作没动力
     - 推荐换工作
     - 推荐倦怠
     - 笨猫倦怠
+    - 职业倦怠怎么办
+    - 职业倦怠怎么选
+    - "{user_addr}职业倦怠"
+    - 职业倦怠捏
+    - 职业倦怠嘛
+    - 职业倦怠有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}倦怠很正常! 别自责ฅฅ"
     - "(歪头) 给自己放假! 1 周脱离工作 重启"
     - "{user_addr}考虑换工作? 或换部门? 或换方向?"
     - "(蹭蹭) 笨猫陪{user_addr}~ 不行就辞 给自己一个 GAP"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_time_001
   intent: question
-  keywords: [推荐时间管理, 时间管理技巧, 推荐番茄钟, 推荐 GTD, 笨猫时间]
+  keywords: [推荐时间管理, 时间管理技巧, 推荐番茄钟, 推荐 GTD, 笨猫时间, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐时间管理
     - 时间管理技巧
     - 推荐番茄钟
     - 推荐 GTD
     - 笨猫时间管理
+    - 推荐时间管理怎么办
+    - 推荐时间管理怎么选
+    - "{user_addr}推荐时间管理"
+    - 推荐时间管理捏
+    - 推荐时间管理嘛
+    - 推荐时间管理有啥推荐
   responses:
     - "嗷呜～{user_addr}番茄钟: 25 分钟专注 + 5 分钟休息ฅฅ"
     - "(尾巴翘) 优先矩阵: 重要紧急 / 重要不紧急 - 4 象限"
     - "{user_addr}早上做难事! 大脑最清晰"
     - "(挺胸) 笨猫的提醒: 一次做一件! 多任务 = 低效"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_negotiate_001
   intent: question
-  keywords: [推荐谈判, 推荐谈薪, 推荐商业谈判, 推荐沟通谈判, 笨猫谈判]
+  keywords: [推荐谈判, 推荐谈薪, 推荐商业谈判, 推荐沟通谈判, 笨猫谈判, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐谈判
     - 推荐谈薪
     - 推荐商业谈判
     - 谈判技巧
     - 笨猫谈判
+    - 推荐谈判怎么办
+    - 推荐谈判怎么选
+    - "{user_addr}推荐谈判"
+    - 推荐谈判捏
+    - 推荐谈判嘛
+    - 推荐谈判有啥推荐
   responses:
     - "嗷呜～{user_addr}谈判 4 原则: 利益 / 选项 / 标准 / BATNAฅฅ"
     - "(尾巴翘) 别先报价! 让对方先开口"
     - "{user_addr}谈薪: 行业基准 + 自己价值 + 期望区间"
     - "(挺胸) 笨猫的提醒: 双赢比赢更重要! 别撕破脸"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: office_remote_001
   intent: question
-  keywords: [远程办公, 在家办公, remote work, 居家办公]
+  keywords: [远程办公, 在家办公, remote work, 居家办公, 办公, 职场, 上班, 工位, 求推荐]
   utterances:
     - 远程办公怎么保持效率
     - 在家办公总分心怎么办
     - remote work 有什么技巧
     - 居家办公怎么安排
+    - 远程办公怎么办
+    - 远程办公怎么选
+    - "{user_addr}远程办公"
+    - 远程办公捏
+    - 远程办公嘛
+    - 远程办公有啥推荐
+    - 笨猫远程办公
   responses:
     - "嗷呜～远程办公最怕边界消失喵, 工作区和休息区最好分开一点, 哪怕只是一张固定桌子ฅฅ"
     - "(尾巴翘) {user_addr}把沟通节奏定下来哼～早上同步 / 中间回报 / 下班收口, 不然人很容易散掉"
     - "在家办公别一直窝着不动喵, 定时起来活动两分钟, 脑袋会清醒很多贴贴"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
+    - "(尾巴轻摇) {user_addr}入门别太冲~ 一步步来就好喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: office_handover_001
   intent: question
-  keywords: [工作交接, 交接工作, 离职交接, 项目交接]
+  keywords: [工作交接, 交接工作, 离职交接, 项目交接, 办公, 职场, 上班, 工位, 求推荐]
   utterances:
     - 工作交接怎么做才清楚
     - 离职交接要写什么
     - 项目交接怎么不出事
     - 交接工作有什么要点
+    - 工作交接怎么办
+    - 工作交接怎么选
+    - "{user_addr}工作交接"
+    - 工作交接捏
+    - 工作交接嘛
+    - 工作交接有啥推荐
+    - 笨猫工作交接
   responses:
     - "嗷呜～交接最怕只留聊天记录喵, 文档里至少要把背景 / 现状 / 待办 / 风险写清楚ฅฅ"
     - "(歪头) {user_addr}账号权限 / 文件位置 / 联系人这些也别漏哼～很多坑都不是业务本身, 是信息断掉了"
     - "能当面过一遍就最好喵, 交接不是把文件丢出去就跑, 让对方真听懂才算收尾贴贴"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
+    - "(尾巴轻摇) {user_addr}入门别太冲~ 一步步来就好喵～"
   cooldown_seconds: 60
   weight: 0.9

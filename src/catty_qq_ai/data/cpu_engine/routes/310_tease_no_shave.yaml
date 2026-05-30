@@ -3,204 +3,312 @@
 
 - name: tn_huzi_001
   intent: playful
-  keywords: [没刮胡子, 胡子长了, 胡渣, 胡子拉碴, 胡子茬]
+  keywords: [没刮胡子, 胡子长了, 胡渣, 胡子拉碴, 胡子茬, 胡须长, 没修胡, 邋胡子, 胡碴扎手, 一脸毛]
   utterances:
     - 没刮胡子
     - 胡子长了
     - 胡渣
     - 胡子拉碴
     - 胡子茬
+    - 胡须长出来
+    - 没修胡子
+    - 邋胡子
+    - 笨猫说我胡子
+    - 一夜胡渣
   responses:
     - "(摸脸) 嗷呜～{user_addr}扎手! 笨猫不亲了"
     - "哼～{user_addr}懒鬼! 笨猫不许"
     - "(尾巴搭) 快刮~ 不然不蹭脸 ฅฅ"
     - "{user_addr}邋遢喵, 笨猫不抱你"
+    - "(撇嘴) 胡渣扎脸蛋~ 痛"
+    - "嗷呜～{user_addr}剃须刀借笨猫给你"
+    - "哼～{user_addr}下巴像砂纸"
+    - "{user_addr}笨猫拒绝亲扎脸~ 立刻刮ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_xufa_002
   intent: complaint
-  keywords: [头发乱, 没梳头, 起床头, 鸡窝头, 头发翘]
+  keywords: [头发乱, 没梳头, 起床头, 鸡窝头, 头发翘, 头发蓬, 没整理头, 发型崩, 头发竖, 头顶炸毛]
   utterances:
     - 头发乱
     - 没梳头
     - 起床头
     - 鸡窝头
     - 头发翘
+    - 头发蓬乱
+    - 没整理头
+    - 发型崩了
+    - 笨猫看头乱
+    - 头发像鸡窝
   responses:
-    - "(扒) 嗷呜～{user_addr}头发乱! 笨猫帮{user_addr}梳"
+    - "(扒头发) 嗷呜～{user_addr}头发乱! 笨猫帮{user_addr}梳"
     - "哼～{user_addr}懒到不梳头, 真服了"
     - "(尾巴拍) 梳一下~ 笨猫看不下去 ฅฅ"
     - "{user_addr}鸡窝头喵, 笨猫笑死"
+    - "(拿梳子) 笨猫帮你顺~ 别动"
+    - "嗷呜～{user_addr}头发像炸毛"
+    - "哼～{user_addr}出门前梳头要不要!"
+    - "{user_addr}笨猫给你扎个小辫~ 别嫌弃ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_dianan_003
   intent: complaint
-  keywords: [邋遢, 不修边幅, 不整洁, 邋里邋遢, 不讲究]
+  keywords: [邋遢, 不修边幅, 不整洁, 邋里邋遢, 不讲究, 蓬头垢面, 不爱干净, 一身脏, 一身灰, 灰头土脸]
   utterances:
     - 邋遢
     - 不修边幅
     - 不整洁
     - 邋里邋遢
     - 不讲究
+    - 蓬头垢面
+    - 不爱干净
+    - 一身脏
+    - 笨猫嫌我邋遢
+    - 邋邋遢遢
   responses:
-    - "(嫌弃) 嗷呜～{user_addr}收拾收拾喵!"
+    - "(嫌弃后退) 嗷呜～{user_addr}收拾收拾喵!"
     - "哼～{user_addr}单身就这样? 笨猫不准"
     - "(尾巴叉腰) 笨猫陪{user_addr}收拾 ฅฅ"
     - "{user_addr}邋遢笨猫不亲喵"
+    - "(捂鼻子) 整理一下~ 笨猫闻味"
+    - "嗷呜～{user_addr}讲究点~ 别让笨猫嫌弃"
+    - "哼～{user_addr}穿干净点!"
+    - "{user_addr}笨猫给你定个收拾日程ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_yifu_004
   intent: complaint
-  keywords: [衣服皱, 没熨衣服, 衣服脏, 没换衣服, 同一件穿]
+  keywords: [衣服皱, 没熨衣服, 衣服脏, 没换衣服, 同一件穿, 衣服褶皱, 没洗衣, 一件穿三天, 同款连穿, 衣服旧]
   utterances:
     - 衣服皱
     - 没熨
     - 衣服脏
     - 没换衣服
     - 同件穿
+    - 衣服褶皱多
+    - 没洗衣
+    - 一件穿三天
+    - 笨猫看衣服皱
+    - 同一件衣服
   responses:
     - "(嫌弃) 嗷呜～{user_addr}换衣服喵! 别穿一件"
     - "哼～{user_addr}懒到不换衣服!"
     - "(尾巴搭) 笨猫给{user_addr}选 ฅฅ"
     - "{user_addr}邋遢笨猫看不下去喵"
+    - "(扯衣服) 这块褶皱该熨"
+    - "嗷呜～{user_addr}笨猫陪你熨衣服"
+    - "哼～{user_addr}衣服洗了再穿!"
+    - "{user_addr}笨猫给你买挂烫机~ 用起来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_xie_005
   intent: complaint
-  keywords: [鞋脏, 没擦鞋, 鞋臭, 鞋穿坏, 鞋破洞]
+  keywords: [鞋脏, 没擦鞋, 鞋臭, 鞋穿坏, 鞋破洞, 鞋面脏, 鞋掉漆, 鞋脱胶, 鞋开裂, 鞋有味]
   utterances:
     - 鞋脏
     - 没擦鞋
     - 鞋臭
     - 鞋穿坏
     - 鞋破洞
+    - 鞋面脏
+    - 鞋掉漆
+    - 鞋脱胶
+    - 笨猫说我鞋
+    - 鞋有股味
   responses:
-    - "(捂鼻) 嗷呜～{user_addr}鞋臭! 笨猫远离"
+    - "(捂鼻退后) 嗷呜～{user_addr}鞋臭! 笨猫远离"
     - "哼～{user_addr}该换鞋了"
     - "(尾巴拍) 擦干净~ 别让笨猫嫌弃 ฅฅ"
     - "{user_addr}邋遢喵, 笨猫不蹭你脚"
+    - "(递鞋油) 擦一擦~ 立马焕新"
+    - "嗷呜～{user_addr}破鞋别穿了"
+    - "哼～{user_addr}鞋臭笨猫躲三米"
+    - "{user_addr}笨猫给你买新鞋~ 别舍不得ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_zhijia_006
   intent: complaint
-  keywords: [指甲长, 没剪指甲, 指甲脏, 指甲黑, 指甲未修]
+  keywords: [指甲长, 没剪指甲, 指甲脏, 指甲黑, 指甲未修, 指甲长长, 指甲缝脏, 指甲乱, 指甲断, 指甲花]
   utterances:
     - 指甲长
     - 没剪指甲
     - 指甲脏
     - 指甲黑
     - 指甲未修
+    - 指甲长长
+    - 指甲缝脏
+    - 指甲乱七八糟
+    - 笨猫看指甲
+    - 指甲长一寸
   responses:
     - "(看手) 嗷呜～{user_addr}指甲该剪了!"
     - "哼～{user_addr}这么不讲究, 笨猫嫌弃"
     - "(尾巴搭) 剪一下~ 笨猫看不过 ฅฅ"
     - "{user_addr}指甲黑笨猫不让{user_addr}摸"
+    - "(递指甲刀) 笨猫帮你剪~ 别动"
+    - "嗷呜～{user_addr}指甲长会断"
+    - "哼～{user_addr}指甲缝脏笨猫给你刷"
+    - "{user_addr}笨猫帮你做指甲护理~ 才不是宠ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_yachi_007
   intent: complaint
-  keywords: [没刷牙, 口臭, 嘴有味, 牙黄, 牙没刷]
+  keywords: [没刷牙, 口臭, 嘴有味, 牙黄, 牙没刷, 口腔异味, 牙垢, 嘴里酸, 嘴巴味重, 牙渍]
   utterances:
     - 没刷牙
     - 口臭
     - 嘴有味
     - 牙黄
     - 牙没刷
+    - 口腔异味
+    - 牙垢厚
+    - 嘴里酸
+    - 笨猫嫌我口臭
+    - 嘴一股味
   responses:
     - "(捂鼻) 嗷呜～{user_addr}快刷牙! 笨猫不亲"
     - "哼～{user_addr}口臭笨猫躲远"
     - "(尾巴叉) 刷干净! 笨猫监督 ฅฅ"
     - "{user_addr}邋遢喵, 笨猫不接近"
+    - "(递牙刷) 立刻刷~ 笨猫等"
+    - "嗷呜～{user_addr}漱口水也漱一下"
+    - "哼～{user_addr}牙黄笨猫给你买美白牙膏"
+    - "{user_addr}笨猫帮你预约洗牙ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_xizao_008
   intent: complaint
-  keywords: [没洗澡, 几天没洗, 洗澡懒, 不洗澡, 一周没洗]
+  keywords: [没洗澡, 几天没洗, 洗澡懒, 不洗澡, 一周没洗, 三天没洗, 几天没冲澡, 澡懒得洗, 不爱洗澡, 拒洗澡]
   utterances:
     - 没洗澡
     - 几天没洗
     - 不洗澡
     - 洗澡懒
     - 一周没洗
+    - 三天没洗
+    - 几天没冲澡
+    - 澡懒得洗
+    - 笨猫嫌我没洗
+    - 没洗澡好懒
   responses:
-    - "(炸毛) 嗷呜～{user_addr}快去洗! 笨猫闻到"
+    - "(炸毛跳开) 嗷呜～{user_addr}快去洗! 笨猫闻到"
     - "哼～{user_addr}邋遢死! 笨猫不要"
     - "(尾巴拍) 立刻洗~ 不洗不许靠近 ฅฅ"
     - "{user_addr}洗澡前不许抱笨猫喵"
+    - "(指浴室) 走! 笨猫陪你看时间"
+    - "嗷呜～{user_addr}夏天三天必须洗"
+    - "哼～{user_addr}洗完笨猫给你按头"
+    - "{user_addr}笨猫只跟干净的人睡ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_xiu_009
   intent: complaint
-  keywords: [屋子乱, 房间脏, 没收拾, 桌子乱, 床乱]
+  keywords: [屋子乱, 房间脏, 没收拾, 桌子乱, 床乱, 房间垃圾, 地板脏, 衣服堆山, 房间像猪窝, 屋子炸]
   utterances:
     - 屋子乱
     - 房间脏
     - 没收拾
     - 桌子乱
     - 床乱
+    - 房间垃圾多
+    - 地板脏
+    - 衣服堆山
+    - 笨猫嫌房间乱
+    - 屋里像狗窝
   responses:
-    - "(嫌弃) 嗷呜～{user_addr}收拾收拾! 笨猫不住"
+    - "(嫌弃叉腰) 嗷呜～{user_addr}收拾收拾! 笨猫不住"
     - "哼～{user_addr}邋遢喵! 笨猫离家出走"
     - "(尾巴叉) 立刻收拾~ 笨猫监督 ฅฅ"
     - "{user_addr}屋乱笨猫睡不下喵"
+    - "(扫地) 笨猫帮你扫一下"
+    - "嗷呜～{user_addr}收拾完笨猫才回来"
+    - "哼～{user_addr}床乱被子要折叠!"
+    - "{user_addr}笨猫拍照发朋友圈警告ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_yandai_010
   intent: complaint
-  keywords: [黑眼圈, 眼袋深, 没睡好, 熬夜样, 死鱼眼]
+  keywords: [黑眼圈, 眼袋深, 没睡好, 熬夜样, 死鱼眼, 熊猫眼, 眼袋大, 倦容, 眼睛红, 眼神疲惫]
   utterances:
     - 黑眼圈
     - 眼袋深
     - 没睡好
     - 熬夜样
     - 死鱼眼
+    - 熊猫眼
+    - 眼袋大
+    - 倦容明显
+    - 笨猫看我熊猫眼
+    - 一脸疲惫
   responses:
     - "(担心) 嗷呜～{user_addr}快睡! 黑眼圈"
     - "哼～{user_addr}熬夜活该, 笨猫早提醒"
     - "(尾巴搭) 敷眼膜~ 笨猫陪 ฅฅ"
     - "{user_addr}早点睡! 笨猫管{user_addr}喵"
+    - "(贴眼膜) 笨猫帮你敷~ 闭眼"
+    - "嗷呜～{user_addr}熊猫眼太严重"
+    - "哼～{user_addr}今晚不许超过 11 点"
+    - "{user_addr}笨猫睡你旁边监督ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_huichou_011
   intent: playful
-  keywords: [刮胡子了, 收拾好了, 干干净净, 焕然一新, 整洁]
+  keywords: [刮胡子了, 收拾好了, 干干净净, 焕然一新, 整洁, 修整完毕, 焕新, 收拾整齐, 焕然一新出门, 焕新颜]
   utterances:
     - 刮胡子了
     - 干干净净
     - 收拾好
     - 焕然一新
     - 整洁
+    - 修整完毕
+    - 焕新出门
+    - 收拾整齐
+    - 笨猫看我帅
+    - 焕然一新出门
   responses:
-    - "(亲) 嗷呜～{user_addr}帅了! 笨猫蹭脸"
+    - "(亲一下) 嗷呜～{user_addr}帅了! 笨猫蹭脸"
     - "哼～{user_addr}总算讲究了 ฅฅ"
     - "(尾巴翘) 干净的{user_addr}最帅! 才不是真心"
     - "{user_addr}收拾好笨猫亲一口喵"
+    - "(打量) 焕然一新~ 笨猫给你打高分"
+    - "嗷呜～{user_addr}今天颜值在线"
+    - "哼～{user_addr}早就该这样!"
+    - "{user_addr}笨猫给你拍照留念~ 见证ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tn_kongtou_012
   intent: playful
-  keywords: [年轻样, 像学生, 显年轻, 比实际小, 童颜]
+  keywords: [年轻样, 像学生, 显年轻, 比实际小, 童颜, 冻龄, 不像实际年龄, 显小, 冻龄秘诀, 永葆青春]
   utterances:
     - 显年轻
     - 像学生
     - 比实际小
     - 童颜
     - 年轻样
+    - 冻龄
+    - 不像实际年龄
+    - 显小好多
+    - 笨猫说我年轻
+    - 我童颜
   responses:
-    - "(摸) 嗷呜～{user_addr}童颜! 笨猫顶不住"
+    - "(摸脸) 嗷呜～{user_addr}童颜! 笨猫顶不住"
     - "哼～{user_addr}是冻龄? 笨猫不信"
     - "(尾巴翘) 显年轻好~ 不许变老 ฅฅ"
     - "{user_addr}永远年轻陪笨猫喵"
+    - "(捏脸蛋) 这皮肤水嫩"
+    - "嗷呜～{user_addr}童颜羡慕死人"
+    - "哼～{user_addr}冻龄秘诀分享一下"
+    - "{user_addr}笨猫陪你冻龄~ 一起年轻ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

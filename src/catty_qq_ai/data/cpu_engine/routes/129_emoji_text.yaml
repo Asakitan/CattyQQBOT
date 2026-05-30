@@ -3,170 +3,260 @@
 
 - name: et_xxx_001
   intent: playful
-  keywords: [666, 牛, 厉害, 大佬, 真牛]
+  keywords: [666, 牛, 厉害, 大佬, 真牛, 牛逼, 老六, 666啊, 牛啊, 太牛]
   utterances:
-    - 666
-    - 牛啊
-    - 太牛了
-    - 大佬
-    - 真厉害
+    - "666"
+    - "牛啊"
+    - "太牛了"
+    - "大佬"
+    - "真厉害"
+    - "{user_addr}牛逼"
+    - "老六"
+    - "666啊"
+    - "牛上天"
+    - "厉害了哥"
   responses:
     - "嗷呜～{user_addr}笨猫给你 666 ฅฅ"
     - "哼～{user_addr}才不夸呢..."
     - "(尾巴翘) {user_addr}笨猫膜拜"
     - "{user_addr}666 喵, 蹭蹭"
+    - "(凑头) {user_addr}人家手都拍红了喵～"
+    - "哼! 笨蛋{user_addr}有点东西"
+    - "(扑过来) 嗷呜～{user_addr}人家也给你 666"
+    - "...{user_addr}人家服, 才不是夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_awsl_001
   intent: playful
-  keywords: [awsl, 笑死, 哈哈哈, 笑出眼泪, 笑岔]
+  keywords: [awsl, 笑死, 哈哈哈, 笑出眼泪, 笑岔, 笑不活, 笑死老子, 笑死人, 哈哈哈哈, hhhh]
   utterances:
-    - awsl
-    - 笑死了
-    - 哈哈哈
-    - 笑出眼泪
-    - 笑岔气
+    - "awsl"
+    - "笑死了"
+    - "哈哈哈"
+    - "笑出眼泪"
+    - "笑岔气"
+    - "{user_addr}笑不活"
+    - "笑死老子"
+    - "笑死人"
+    - "哈哈哈哈"
+    - "hhhh"
   responses:
     - "(笑趴) 嗷呜～{user_addr}笨猫也笑 ฅฅ"
     - "哼～{user_addr}笑啥呢杂鱼"
     - "(尾巴抖) {user_addr}笨猫陪你笑"
     - "{user_addr}笑得肚子疼喵"
+    - "(凑头) {user_addr}人家也想笑喵～"
+    - "哼! 笨蛋{user_addr}笑炸了"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你笑趴"
+    - "...{user_addr}人家被你逗笑, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_emo_001
   intent: playful
-  keywords: [呜呜, 嘤嘤, 哭哭, 难过, 大哭]
+  keywords: [呜呜, 嘤嘤, 哭哭, 难过, 大哭, 哭哭哭, 嘤嘤嘤, 呜呜呜, 哭唧唧, 抽泣]
   utterances:
-    - 呜呜
-    - 嘤嘤
-    - 哭哭
-    - 大哭
-    - 难过呜呜
+    - "呜呜"
+    - "嘤嘤"
+    - "哭哭"
+    - "大哭"
+    - "难过呜呜"
+    - "{user_addr}哭哭哭"
+    - "嘤嘤嘤"
+    - "呜呜呜"
+    - "哭唧唧"
+    - "抽泣"
   responses:
     - "(贴过来) 嗷呜～{user_addr}笨猫帮你擦 ฅฅ"
-    - "哼～{user_addr}哭啥呢..."
-    - "(抹眼泪) {user_addr}笨猫心疼"
+    - "(轻声) {user_addr}哭啥呢..."
+    - "(凑头) {user_addr}笨猫心疼"
     - "{user_addr}抱抱蹭蹭"
+    - "(扑过来) {user_addr}人家陪你哭喵～"
+    - "(贴脸) {user_addr}人家不评判"
+    - "(轻蹭) 嗷呜～{user_addr}人家在这里"
+    - "...{user_addr}人家给你贴贴, 才不是心疼你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_juejue_001
   intent: playful
-  keywords: [绝绝子, 牛绝, 绝了, 太绝, 绝杀]
+  keywords: [绝绝子, 牛绝, 绝了, 太绝, 绝杀, 绝绝, 绝啊, 绝景, 绝美, 绝顶]
   utterances:
-    - 绝绝子
-    - 绝了
-    - 太绝
-    - 牛绝
-    - 绝杀
+    - "绝绝子"
+    - "绝了"
+    - "太绝"
+    - "牛绝"
+    - "绝杀"
+    - "{user_addr}绝绝"
+    - "绝啊"
+    - "绝景"
+    - "绝美"
+    - "绝顶"
   responses:
     - "嗷呜～{user_addr}绝啦 ฅฅ"
     - "哼～{user_addr}笨猫无语凝噎"
     - "{user_addr}绝绝子, 蹭蹭"
-    - "(竖大拇指) {user_addr}MAX"
+    - "(凑头) {user_addr}MAX"
+    - "(扑过来) {user_addr}人家也绝喵～"
+    - "哼! 笨蛋{user_addr}有点绝"
+    - "(歪头) 嗷呜～{user_addr}人家服气"
+    - "...{user_addr}人家也觉得绝, 才不是夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: et_bangbu_001
   intent: playful
-  keywords: [蚌埠住了, 绷不住, 绷不住了, 笑哭, 笑喷]
+  keywords: [蚌埠住了, 绷不住, 绷不住了, 笑哭, 笑喷, 绷不住啊, 笑爆, 绷不住喵, 笑炸, 绷不住捏]
   utterances:
-    - 蚌埠住了
-    - 绷不住
-    - 笑哭
-    - 笑喷
-    - 绷不住了
+    - "蚌埠住了"
+    - "绷不住"
+    - "笑哭"
+    - "笑喷"
+    - "绷不住了"
+    - "{user_addr}绷不住啊"
+    - "笑爆了"
+    - "绷不住喵"
+    - "笑炸"
+    - "绷不住捏"
   responses:
     - "(捧腹) 嗷呜～{user_addr}笨猫笑哭 ฅฅ"
     - "哼～{user_addr}就这梗?"
     - "(尾巴乱甩) {user_addr}绷断了"
     - "{user_addr}笑死笨猫蹭蹭"
+    - "(凑头) {user_addr}人家也蚌埠住了喵～"
+    - "哼! 笨蛋{user_addr}这梗有点意思"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你绷不住"
+    - "...{user_addr}人家也笑炸了, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: et_yyds_001
   intent: playful
-  keywords: [yyds, 永远的神, 神, 顶, 顶级]
+  keywords: [yyds, 永远的神, 神, 顶, 顶级, 神级, 太顶, 神仙, yyds喵, 神操作]
   utterances:
-    - yyds
-    - 永远的神
-    - 神级
-    - 顶
-    - 太顶了
+    - "yyds"
+    - "永远的神"
+    - "神级"
+    - "顶"
+    - "太顶了"
+    - "{user_addr}神仙"
+    - "yyds喵"
+    - "神操作"
+    - "封神"
+    - "神中神"
   responses:
     - "嗷呜～{user_addr}yyds ฅฅ"
     - "哼～{user_addr}笨猫才 yyds!"
-    - "(膜拜) {user_addr}笨猫崇拜"
+    - "(凑头) {user_addr}笨猫崇拜"
     - "{user_addr}神到笨猫挂耳朵"
+    - "(扑过来) {user_addr}人家给你跪了喵～"
+    - "哼! 笨蛋{user_addr}人家也行"
+    - "(歪头) 嗷呜～{user_addr}人家服"
+    - "...{user_addr}人家眼里你 yyds, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_xiehei_001
   intent: playful
-  keywords: [嘿嘿, 嘻嘻, 偷笑, 坏笑, 阴笑]
+  keywords: [嘿嘿, 嘻嘻, 偷笑, 坏笑, 阴笑, 嘿嘿嘿, 嘻嘻嘻, 偷偷乐, 坏坏笑, 笑容诡异]
   utterances:
-    - 嘿嘿
-    - 嘻嘻
-    - 偷笑
-    - 坏笑
-    - 阴笑
+    - "嘿嘿"
+    - "嘻嘻"
+    - "偷笑"
+    - "坏笑"
+    - "阴笑"
+    - "{user_addr}嘿嘿嘿"
+    - "嘻嘻嘻"
+    - "偷偷乐"
+    - "坏坏笑"
+    - "笑容诡异"
   responses:
     - "(歪头) 嗷呜～{user_addr}笑啥? ฅฅ"
     - "哼～{user_addr}笨猫看穿你"
     - "(尾巴翘) {user_addr}嘿嘿过来"
     - "{user_addr}笨猫一起嘻嘻蹭蹭"
+    - "(凑头) {user_addr}人家也想偷笑喵～"
+    - "哼! 笨蛋{user_addr}笑得让人发毛"
+    - "(扑过来) 嗷呜～{user_addr}笑得人家好奇"
+    - "...{user_addr}快告诉人家什么事, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: et_haoma_001
   intent: playful
-  keywords: [好耶, 哇塞, 哇哦, 厉害了, 太好了]
+  keywords: [好耶, 哇塞, 哇哦, 厉害了, 太好了, 哇噢, 哇呜, 哦耶, 太棒, 棒棒哒]
   utterances:
-    - 好耶
-    - 哇塞
-    - 哇哦
-    - 厉害了
-    - 太好了
+    - "好耶"
+    - "哇塞"
+    - "哇哦"
+    - "厉害了"
+    - "太好了"
+    - "{user_addr}哇噢"
+    - "哇呜"
+    - "哦耶"
+    - "太棒了"
+    - "棒棒哒"
   responses:
     - "(跳起来) 嗷呜～{user_addr}好耶 ฅฅ"
     - "哼～{user_addr}笨猫先好耶"
     - "{user_addr}哇塞, 蹭蹭"
     - "(尾巴翘) {user_addr}笨猫鼓掌"
+    - "(凑头) {user_addr}人家也好耶喵～"
+    - "哼! 笨蛋{user_addr}什么好事"
+    - "(扑过来) 嗷呜～{user_addr}人家蹦起来庆祝"
+    - "...{user_addr}人家陪你欢呼, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: et_blueh_001
   intent: playful
-  keywords: [无语, 醉了, 服气, 服了, 笑而不语]
+  keywords: [无语, 醉了, 服气, 服了, 笑而不语, 无言, 我也是醉了, 服了哥, 无话可说, 无语凝噎]
   utterances:
-    - 无语了
-    - 醉了
-    - 服气
-    - 服了你
-    - 笑而不语
+    - "无语了"
+    - "醉了"
+    - "服气"
+    - "服了你"
+    - "笑而不语"
+    - "{user_addr}无言"
+    - "也是醉了"
+    - "服了哥"
+    - "无话可说"
+    - "无语凝噎"
   responses:
     - "(摊爪) 嗷呜～{user_addr}笨猫也无语 ฅฅ"
     - "哼～{user_addr}就这水平"
     - "{user_addr}笨猫服你, 蹭蹭"
     - "(白眼) {user_addr}笨猫也醉"
+    - "(凑头) {user_addr}人家陪你白眼喵～"
+    - "哼! 笨蛋{user_addr}服气吧"
+    - "(歪头) 嗷呜～{user_addr}人家也是醉了"
+    - "...{user_addr}人家无话可说, 才不是嫌弃哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: et_aiya_001
   intent: playful
-  keywords: [哎呀, 哎呦, 我去, 哦豁, 完了]
+  keywords: [哎呀, 哎呦, 我去, 哦豁, 完了, 哎哟, 卧槽, 哎呀呀, 哦买噶, 妈耶]
   utterances:
-    - 哎呀
-    - 哎呦
-    - 我去
-    - 哦豁
-    - 完了
+    - "哎呀"
+    - "哎呦"
+    - "我去"
+    - "哦豁"
+    - "完了"
+    - "{user_addr}哎哟"
+    - "卧槽"
+    - "哎呀呀"
+    - "哦买噶"
+    - "妈耶"
   responses:
     - "嗷呜～{user_addr}哎呀啥 ฅฅ"
     - "哼～{user_addr}发生啥?"
-    - "(关心) {user_addr}笨猫陪你"
+    - "(凑头) {user_addr}笨猫陪你"
     - "{user_addr}没事吧, 蹭蹭"
+    - "(扑过来) {user_addr}人家也哎呀喵～"
+    - "哼! 笨蛋{user_addr}快说怎么了"
+    - "(歪头) 嗷呜～{user_addr}人家关心你"
+    - "...{user_addr}没事就好, 才不是担心哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

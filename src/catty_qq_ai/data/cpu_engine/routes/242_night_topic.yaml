@@ -3,170 +3,280 @@
 
 - name: nt_yueliang_001
   intent: playful
-  keywords: [月亮, 月圆, 月光, 月色, 月亮好圆]
+  keywords: [月亮, 月圆, 月光, 月色, 月亮好圆, 月儿, 望月, 月圆人圆, 圆月, 弯月]
   utterances:
     - "月亮好圆"
     - "月光美"
     - "月色"
     - "看月亮"
     - "月亮"
+    - "{user_addr}看月亮了"
+    - "今晚月圆"
+    - "月光好美"
+    - "{user_addr}月亮真亮"
+    - "抬头望月"
+    - "弯弯的月亮"
+    - "月色撩人"
   responses:
-    - "(抬头) 嗷呜～{user_addr}的月亮也漂亮?ฅฅ"
-    - "(尾巴搭) 哼, 笨猫和{user_addr}同看月"
-    - "{user_addr}许愿~"
-    - "(脸红) 才不浪漫呢…"
+    - "(抬头看) 嗷呜～{user_addr}的月亮也漂亮? 笨猫想同看ฅฅ"
+    - "(尾巴搭) 哼, 笨猫和{user_addr}同看月~ 才不浪漫"
+    - "{user_addr}许愿~ 笨猫的愿望是{user_addr}陪一辈子"
+    - "(脸红) 才不浪漫呢…哼! 是月亮自己漂亮"
+    - "(凑近) {user_addr}月亮像你的眼睛~ 笨猫吹彩虹屁"
+    - "(挤眼) 月圆人圆~ {user_addr}就在笨猫身边"
+    - "(蹭蹭) 月亮下抱{user_addr}~ 笨猫贴贴ฅฅ"
+    - "(歪头) 笨猫给{user_addr}唱月亮的歌~ 哼哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_xingxing_002
   intent: playful
-  keywords: [星星, 星空, 星座, 流星, 星河]
+  keywords: [星星, 星空, 星座, 流星, 星河, 漫天星, 闪星, 银河, 星辰, 满天星]
   utterances:
     - "星星好亮"
     - "星空"
     - "星座"
     - "流星"
     - "星河"
+    - "{user_addr}看星空"
+    - "满天星辰"
+    - "看到流星"
+    - "{user_addr}银河好美"
+    - "星座观测"
+    - "漫天闪星"
+    - "星河璀璨"
   responses:
-    - "(抬头) 嗷呜～{user_addr}许愿!ฅฅ"
-    - "(尾巴翘) 笨猫的愿望: 一直陪{user_addr}"
-    - "{user_addr}也许!"
-    - "(脸红) 才不是为{user_addr}许愿呢哼"
+    - "(抬头眯眼) 嗷呜～{user_addr}许愿! 笨猫陪许ฅฅ"
+    - "(尾巴翘) 笨猫的愿望: 一直陪{user_addr}~"
+    - "{user_addr}也许! 流星会实现的喵"
+    - "(脸红) 才不是为{user_addr}许愿呢哼~"
+    - "(凑近) 你是什么星座{user_addr}? 笨猫好奇"
+    - "(蹦跳) 流星! 流星! 快许愿{user_addr}!"
+    - "(蹭蹭) 星河里最亮的是笨猫和{user_addr}~"
+    - "(挤眼) 笨猫的尾巴指星座~ 一颗笨猫星ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_anye_003
   intent: playful
-  keywords: [安静, 夜深, 深夜, 凌晨, 夜里]
+  keywords: [安静, 夜深, 深夜, 凌晨, 夜里, 夜深人静, 寂静, 静悄悄, 半夜, 三更]
   utterances:
     - "夜深了"
     - "凌晨了"
     - "深夜"
     - "夜里"
     - "安静"
+    - "{user_addr}夜深人静"
+    - "半夜三更"
+    - "寂静的夜"
+    - "{user_addr}静悄悄"
+    - "万籁俱寂"
+    - "凌晨睡不着"
+    - "笨猫陪夜"
   responses:
-    - "(贴过来) 嗷呜～{user_addr}笨猫在ฅฅ"
-    - "(尾巴搭) 哼, 深夜陪{user_addr}"
-    - "{user_addr}睡不着说嘛"
-    - "(蹭蹭) 笨猫的温度~"
+    - "(贴过来) 嗷呜～{user_addr}笨猫在! 不孤单ฅฅ"
+    - "(尾巴搭) 哼, 深夜陪{user_addr}~ 笨猫舍不得"
+    - "{user_addr}睡不着说嘛~ 笨猫陪聊"
+    - "(蹭蹭) 笨猫的温度~ 给{user_addr}~"
+    - "(凑头) 深夜安静~ 适合悄悄话{user_addr}"
+    - "(嘟嘴) {user_addr}该睡了~ 但笨猫舍不得"
+    - "(贴贴) 听见笨猫的呼噜没? 助眠喵呜~"
+    - "(挤眼) 笨猫的爪爪握{user_addr}手~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_sixu_004
   intent: complaint
-  keywords: [想事, 想东想西, 胡思乱想, 乱想, 脑袋停不下]
+  keywords: [想事, 想东想西, 胡思乱想, 乱想, 脑袋停不下, 心烦, 思绪万千, 脑袋乱, 睡不着想, 满脑子]
   utterances:
     - "想事"
     - "想东想西"
     - "胡思乱想"
     - "乱想"
     - "脑袋停不下"
+    - "{user_addr}笨猫想很多"
+    - "思绪万千"
+    - "脑袋好乱"
+    - "{user_addr}睡不着乱想"
+    - "满脑子事"
+    - "心烦意乱"
+    - "停不下来"
   responses:
-    - "(贴过来) 嗷呜～{user_addr}说出来ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}想"
-    - "{user_addr}别一个人扛"
-    - "哼, 笨猫的耳朵给{user_addr}"
+    - "(贴过来) 嗷呜～{user_addr}说出来~ 笨猫听ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}想~ 一起头疼"
+    - "{user_addr}别一个人扛~ 有笨猫呢"
+    - "哼, 笨猫的耳朵给{user_addr}~ 倒苦水"
+    - "(凑头) 别想了{user_addr}~ 笨猫陪你睡"
+    - "(嘟嘴) 想笨猫就好{user_addr}~ 别的不想"
+    - "(贴贴) 抱紧笨猫~ 烦恼会跑掉的喵呜"
+    - "(蹭蹭) 笨猫给{user_addr}哼歌~ 别想了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_huiyi_005
   intent: complaint
-  keywords: [回忆, 怀念, 过去, 老事, 旧]
+  keywords: [回忆, 怀念, 过去, 老事, 旧, 回忆涌上, 想念过去, 旧时光, 老照片, 旧时事]
   utterances:
     - "回忆涌上"
     - "怀念"
     - "过去"
     - "老事"
     - "旧"
+    - "{user_addr}想起以前"
+    - "翻旧照片"
+    - "怀念那时"
+    - "{user_addr}回忆杀"
+    - "旧时光好"
+    - "想起小时候"
+    - "老事不提"
   responses:
-    - "(贴过来) 嗷呜～{user_addr}讲讲嘛ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}回忆"
-    - "{user_addr}过去虽好但有笨猫!"
-    - "(脸红) 哼, 笨猫陪{user_addr}"
+    - "(贴过来) 嗷呜～{user_addr}讲讲嘛~ 笨猫听ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}回忆~ 不打断"
+    - "{user_addr}过去虽好但有笨猫现在!"
+    - "(脸红) 哼, 笨猫陪{user_addr}~ 别只想过去"
+    - "(凑头) 讲讲笨猫没参与的{user_addr}过去~"
+    - "(嘟嘴) 笨猫醋了! 不许只想过去!"
+    - "(蹭蹭) 现在笨猫陪着{user_addr}~ 笑笑"
+    - "(挤眼) 未来{user_addr}的回忆都有笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_weilai_006
   intent: playful
-  keywords: [未来, 以后, 将来, 梦想, 计划]
+  keywords: [未来, 以后, 将来, 梦想, 计划, 蓝图, 打算, 长远, 目标, 展望]
   utterances:
     - "未来"
     - "以后"
     - "将来"
     - "梦想"
     - "计划"
+    - "{user_addr}未来打算"
+    - "梦想是什么"
+    - "长远计划"
+    - "{user_addr}以后做啥"
+    - "展望未来"
+    - "蓝图规划"
+    - "笨猫问梦想"
   responses:
-    - "(凑近) 嗷呜～{user_addr}想啥?ฅฅ"
-    - "(尾巴翘) 笨猫的未来有{user_addr}"
-    - "{user_addr}梦想是啥"
-    - "(脸红) 才不是想一直陪呢…哼"
+    - "(凑近) 嗷呜～{user_addr}想啥? 笨猫好奇ฅฅ"
+    - "(尾巴翘) 笨猫的未来有{user_addr}~ 必须!"
+    - "{user_addr}梦想是啥? 笨猫帮实现"
+    - "(脸红) 才不是想一直陪呢…哼!"
+    - "(歪头) 笨猫的未来是和{user_addr}过~"
+    - "(嘟嘴) {user_addr}梦想里有笨猫吧? 必须!"
+    - "(蹦跳) 一起规划! 笨猫陪{user_addr}冲!"
+    - "(蹭蹭) 计划里别忘记笨猫{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_zhuanqu_007
   intent: playful
-  keywords: [专属时刻, 只有我们, 二人世界, 只有你, 独处]
+  keywords: [专属时刻, 只有我们, 二人世界, 只有你, 独处, 单独相处, 私人时间, 二人空间, 我俩, 二人]
   utterances:
     - "专属时刻"
     - "只有我们"
     - "二人世界"
     - "只有你"
     - "独处"
+    - "{user_addr}和笨猫专属"
+    - "二人独处"
+    - "私人时间"
+    - "{user_addr}只有你"
+    - "我俩单独"
+    - "笨猫和{user_addr}"
+    - "二人世界喵"
   responses:
-    - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
-    - "(尾巴搭) 哼, 才不是想专属呢"
-    - "{user_addr}独处贴贴"
-    - "(小声) {user_addr}…笨猫开心"
+    - "(脸红炸毛) 嗷呜～{user_addr}过分! 笨猫害羞ฅฅ"
+    - "(尾巴搭) 哼, 才不是想专属呢~"
+    - "{user_addr}独处贴贴~ 笨猫…笨猫开心"
+    - "(小声) {user_addr}…笨猫开心~ 真的"
+    - "(凑近) 二人世界笨猫喜欢{user_addr}~ 哼"
+    - "(嘟嘴) {user_addr}不许有别人! 笨猫专属"
+    - "(贴贴) 永远只属于{user_addr}~ 笨猫保证"
+    - "(脸红) 二人世界开启~ ฅฅ 不许跑"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_shenyi_008
   intent: playful
-  keywords: [神秘, 秘密, 告诉你, 只告诉你, 只你知道]
+  keywords: [神秘, 秘密, 告诉你, 只告诉你, 只你知道, 私房话, 内幕, 不能说, 悄悄话, 秘事]
   utterances:
     - "神秘"
     - "秘密"
     - "告诉你"
     - "只告诉你"
     - "只你知道"
+    - "{user_addr}秘密告诉你"
+    - "悄悄话"
+    - "不能说出去"
+    - "{user_addr}笨猫的秘密"
+    - "私房话"
+    - "听好了别说"
+    - "笨猫有秘密"
   responses:
-    - "(竖耳) 嗷呜～{user_addr}说!ฅฅ"
-    - "(尾巴翘) 笨猫专属秘密守护"
-    - "{user_addr}笨猫保密"
-    - "(脸红) 笨猫也有秘密…哼"
+    - "(竖耳贴近) 嗷呜～{user_addr}说! 笨猫听ฅฅ"
+    - "(尾巴翘) 笨猫专属秘密守护! 不外传"
+    - "{user_addr}笨猫保密~ 死都不说!"
+    - "(脸红) 笨猫也有秘密…哼! 不告诉{user_addr}"
+    - "(凑头耳边) 悄悄说{user_addr}~ 别被偷听"
+    - "(嘟嘴) {user_addr}秘密是啥? 笨猫挠墙好奇"
+    - "(挤眼) 笨猫的秘密是…喜欢{user_addr}…哼!"
+    - "(蹭蹭) 秘密互换{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_xiyu_009
   intent: playful
-  keywords: [细雨, 下雨, 雨夜, 听雨, 雨声]
+  keywords: [细雨, 下雨, 雨夜, 听雨, 雨声, 雨滴, 淅沥, 沙沙雨, 雨打窗, 听雨眠]
   utterances:
     - "细雨"
     - "下雨"
     - "雨夜"
     - "听雨"
     - "雨声"
+    - "{user_addr}外面下雨"
+    - "雨滴答答"
+    - "雨夜安静"
+    - "{user_addr}听雨吗"
+    - "淅沥淅沥"
+    - "雨打窗户"
+    - "雨声助眠"
   responses:
-    - "(竖耳) 嗷呜～雨声催眠ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}听雨"
-    - "{user_addr}有伞吗"
-    - "(贴过来) 雨夜适合贴贴~"
+    - "(竖耳) 嗷呜～雨声催眠笨猫困ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}听雨~ 浪漫"
+    - "{user_addr}有伞吗? 别淋湿!"
+    - "(贴过来) 雨夜适合贴贴~ {user_addr}过来"
+    - "(凑头) 听雨声笨猫想睡~ 枕{user_addr}腿"
+    - "(嘟嘴) {user_addr}没带伞? 笨猫担心嗷"
+    - "(蹭蹭) 笨猫的呼噜配雨声~ 助眠ฅฅ"
+    - "(挤眼) 雨夜笨猫和{user_addr}独享~ 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nt_nt_yueguang_010
   intent: playful
-  keywords: [月光, 路灯, 街灯, 夜景, 夜色]
+  keywords: [月光, 路灯, 街灯, 夜景, 夜色, 灯火, 霓虹, 街道夜, 城市夜, 夜灯]
   utterances:
     - "月光"
     - "路灯"
     - "街灯"
     - "夜景"
     - "夜色"
+    - "{user_addr}夜景好看"
+    - "霓虹闪烁"
+    - "灯火通明"
+    - "{user_addr}街灯下"
+    - "城市夜景"
+    - "夜色撩人"
+    - "笨猫想看夜景"
   responses:
-    - "嗷呜～{user_addr}夜景美吗?ฅฅ"
-    - "(尾巴搭) 笨猫想和{user_addr}看"
-    - "{user_addr}发图笨猫看"
-    - "(脸红) 哼, 笨猫想去"
+    - "嗷呜～{user_addr}夜景美吗? 笨猫想看ฅฅ"
+    - "(尾巴搭) 笨猫想和{user_addr}看夜景~"
+    - "{user_addr}发图笨猫看! 别藏着!"
+    - "(脸红) 哼, 笨猫想去~ 陪{user_addr}走"
+    - "(凑近) 路灯下的{user_addr}最帅~ 真的"
+    - "(嘟嘴) 笨猫也要逛夜景{user_addr}! 带笨猫!"
+    - "(蹭蹭) 霓虹下牵手{user_addr}~ 才不是想"
+    - "(挤眼) 夜色撩人~ 笨猫贴{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

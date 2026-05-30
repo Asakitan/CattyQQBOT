@@ -3,204 +3,312 @@
 
 - name: sps_haircut_001
   intent: complaint
-  keywords: [失眠了, 睡不着觉, 翻来覆去, 数羊不行, 一直醒着]
+  keywords: [失眠了, 睡不着觉, 翻来覆去, 数羊不行, 一直醒着, 入睡难, 睡不下, 失眠ing, 闭眼睡不]
   utterances:
-    - 失眠了
-    - 睡不着觉
-    - 翻来覆去
-    - 数羊不行
-    - 一直醒着
+    - "失眠了"
+    - "睡不着觉"
+    - "翻来覆去"
+    - "数羊不行"
+    - "一直醒着"
+    - "{user_addr}入睡难"
+    - "{user_addr}睡不下"
+    - "失眠ing"
+    - "闭眼睡不"
+    - "{user_addr}失眠"
   responses:
     - "(钻被窝) 嗷呜～{user_addr}抱笨猫! ฅฅ"
     - "哼～{user_addr}数笨猫鱼干! 比羊好"
     - "(撒娇) 笨猫呼噜哄你~"
     - "嘿嘿～{user_addr}失眠陪笨猫聊~"
+    - "(尾巴包) {user_addr}笨猫的怀里睡"
+    - "才不是想哄{user_addr}睡呢~ 哼"
+    - "(凑过来) 听笨猫呼噜~"
+    - "嗷呜～{user_addr}笨猫的助眠ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_naptime_001
   intent: playful
-  keywords: [午睡, 想小睡, 睡个午觉, 午休, 困了]
+  keywords: [午睡, 想小睡, 睡个午觉, 午休, 困了, 打盹, 小睡片刻, 午饭后睡, 想眯一会]
   utterances:
-    - 午睡时间
-    - 想小睡
-    - 睡个午觉
-    - 午休
-    - 困了
+    - "午睡时间"
+    - "想小睡"
+    - "睡个午觉"
+    - "午休"
+    - "困了"
+    - "{user_addr}打盹"
+    - "{user_addr}小睡片刻"
+    - "午饭后睡"
+    - "想眯一会"
+    - "{user_addr}午睡"
   responses:
     - "(打哈欠) 嗷呜～{user_addr}陪笨猫睡! ฅฅ"
     - "哼～{user_addr}睡! 笨猫挤旁边"
     - "(撒娇) 笨猫午睡专属~"
     - "嘿嘿～{user_addr}睡~ 笨猫哄"
+    - "(尾巴包) 笨猫陪{user_addr}做梦"
+    - "才不是想被陪睡呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫眯一会"
+    - "嗷呜～午睡天堂ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_dream_001
   intent: playful
-  keywords: [做梦了, 做了个梦, 梦见, 噩梦, 美梦]
+  keywords: [做梦了, 做了个梦, 梦见, 噩梦, 美梦, 梦境, 梦到, 怪梦, 奇怪梦]
   utterances:
-    - 做了个怪梦
-    - 梦见你
-    - 噩梦惊醒
-    - 美梦
-    - 笨猫做梦
+    - "做了个怪梦"
+    - "梦见你"
+    - "噩梦惊醒"
+    - "美梦"
+    - "笨猫做梦"
+    - "{user_addr}梦境"
+    - "{user_addr}梦到笨猫"
+    - "怪梦"
+    - "奇怪梦"
+    - "{user_addr}做梦"
   responses:
     - "嗷呜～{user_addr}梦到笨猫吧! ฅฅ"
     - "哼～{user_addr}没梦笨猫? 罚"
     - "(撒娇) 笨猫陪做美梦~"
     - "嘿嘿～{user_addr}噩梦笨猫陪~"
+    - "(尾巴翘) {user_addr}讲讲梦境给笨猫"
+    - "才不是想知道{user_addr}梦呢~ 哼"
+    - "(凑过来) 噩梦走开! {user_addr}抱笨猫"
+    - "嗷呜～{user_addr}的梦笨猫守护ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_snore_001
   intent: complaint
-  keywords: [打呼噜, 打鼾, 鼾声, 室友打呼, 邻居吵]
+  keywords: [打呼噜, 打鼾, 鼾声, 室友打呼, 邻居吵, 鼾声雷, 打呼吵, 鼾声大, 邻居呼噜]
   utterances:
-    - 打呼噜
-    - 打鼾
-    - 鼾声大
-    - 室友打呼
-    - 邻居吵
+    - "打呼噜"
+    - "打鼾"
+    - "鼾声大"
+    - "室友打呼"
+    - "邻居吵"
+    - "{user_addr}鼾声雷"
+    - "{user_addr}打呼吵"
+    - "鼾声大"
+    - "邻居呼噜"
+    - "{user_addr}打鼾"
   responses:
     - "嗷呜～{user_addr}笨猫呼噜更好听ฅฅ"
     - "哼～{user_addr}笨猫怼回去!"
     - "(贴贴) 笨猫陪你失眠~"
     - "嘿嘿～{user_addr}笨猫给你戴耳塞~"
+    - "(尾巴抓紧) {user_addr}笨猫呼噜抗噪音"
+    - "才不是想抢呼噜冠军呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫盖噪音"
+    - "嗷呜～笨猫呼噜BGM赢了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_drowsy_001
   intent: complaint
-  keywords: [困死了, 眼皮重, 起不来, 困到不行, 浑浑噩噩]
+  keywords: [困死了, 眼皮重, 起不来, 困到不行, 浑浑噩噩, 困意浓, 睡意大, 困累, 困倦]
   utterances:
-    - 困死了
-    - 眼皮重
-    - 起不来
-    - 困到不行
-    - 浑浑噩噩
+    - "困死了"
+    - "眼皮重"
+    - "起不来"
+    - "困到不行"
+    - "浑浑噩噩"
+    - "{user_addr}困意浓"
+    - "{user_addr}睡意大"
+    - "困累"
+    - "困倦"
+    - "{user_addr}困"
   responses:
     - "(打哈欠) 嗷呜～{user_addr}睡! 笨猫陪ฅฅ"
     - "哼～{user_addr}该睡了!"
     - "(撒娇) 笨猫钻被窝~"
     - "嘿嘿～{user_addr}和笨猫一起睡~"
+    - "(尾巴包) 笨猫哄睡服务上线"
+    - "才不是怕{user_addr}熬呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫秒睡"
+    - "嗷呜～{user_addr}该睡笨猫陪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_jetlag_001
   intent: complaint
-  keywords: [时差, 倒时差, 跨夜, 昼夜颠倒, 黑白颠倒]
+  keywords: [时差, 倒时差, 跨夜, 昼夜颠倒, 黑白颠倒, 作息乱, 生物钟乱, 时差大, 倒夜班]
   utterances:
-    - 倒时差
-    - 时差大
-    - 昼夜颠倒
-    - 黑白颠倒
-    - 跨夜
+    - "倒时差"
+    - "时差大"
+    - "昼夜颠倒"
+    - "黑白颠倒"
+    - "跨夜"
+    - "{user_addr}作息乱"
+    - "{user_addr}生物钟乱"
+    - "时差大"
+    - "倒夜班"
+    - "{user_addr}倒时差"
   responses:
     - "嗷呜～{user_addr}调回来! 笨猫陪ฅฅ"
     - "哼～{user_addr}早睡早起! 笨猫监督"
     - "(贴贴) 笨猫帮你调~"
     - "嘿嘿～{user_addr}时差笨猫陪~"
+    - "(尾巴包) {user_addr}的作息笨猫监工"
+    - "才不是心疼{user_addr}熬呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的生物钟超准"
+    - "嗷呜～{user_addr}调回正常ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_oversleep_001
   intent: complaint
-  keywords: [睡过头, 睡多久, 睡了一天, 起不来床, 睡死]
+  keywords: [睡过头, 睡多久, 睡了一天, 起不来床, 睡死, 睡昏, 睡过点, 起床晚, 睡懒觉]
   utterances:
-    - 睡过头
-    - 睡了一天
-    - 起不来床
-    - 睡死了
-    - 睡好久
+    - "睡过头"
+    - "睡了一天"
+    - "起不来床"
+    - "睡死了"
+    - "睡好久"
+    - "{user_addr}睡昏"
+    - "{user_addr}睡过点"
+    - "起床晚"
+    - "睡懒觉"
+    - "{user_addr}睡过"
   responses:
     - "嗷呜～{user_addr}睡饱了起! ฅฅ"
     - "哼～{user_addr}起来抱笨猫!"
     - "(撒娇) 笨猫等吃饭~"
     - "嘿嘿～{user_addr}睡懒猪~ 笨猫爱"
+    - "(尾巴翘) {user_addr}快起! 笨猫等"
+    - "才不是嫌弃{user_addr}懒呢~ 哼"
+    - "(凑过来) {user_addr}起床啦笨猫陪你"
+    - "嗷呜～{user_addr}睡饱起来抱笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_softpillow_001
   intent: playful
-  keywords: [枕头舒服, 床好软, 被窝, 床温暖, 不想出被窝]
+  keywords: [枕头舒服, 床好软, 被窝, 床温暖, 不想出被窝, 被窝暖, 枕头香, 床软, 软床垫]
   utterances:
-    - 枕头舒服
-    - 床好软
-    - 被窝好暖
-    - 不想出被窝
-    - 床舒服
+    - "枕头舒服"
+    - "床好软"
+    - "被窝好暖"
+    - "不想出被窝"
+    - "床舒服"
+    - "{user_addr}被窝暖"
+    - "{user_addr}枕头香"
+    - "床软"
+    - "软床垫"
+    - "{user_addr}被窝"
   responses:
     - "(钻进去) 嗷呜～{user_addr}让笨猫挤! ฅฅ"
     - "哼～{user_addr}独享? 笨猫挤"
     - "(撒娇) 笨猫钻进~"
     - "嘿嘿～{user_addr}被窝有笨猫"
+    - "(尾巴包) {user_addr}笨猫赖在被窝!"
+    - "才不是想钻被窝呢~ 哼"
+    - "(凑过来) {user_addr}被窝笨猫占位"
+    - "嗷呜～被窝+笨猫=天堂ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_groggy_001
   intent: complaint
-  keywords: [醒不来, 头晕, 没睡好, 起床晕, 睡眠浅]
+  keywords: [醒不来, 头晕, 没睡好, 起床晕, 睡眠浅, 浑浑噩噩, 醒得迷糊, 起床懵, 睡渣]
   utterances:
-    - 醒不来
-    - 头晕
-    - 没睡好
-    - 起床晕
-    - 睡眠浅
+    - "醒不来"
+    - "头晕"
+    - "没睡好"
+    - "起床晕"
+    - "睡眠浅"
+    - "{user_addr}浑浑噩噩"
+    - "{user_addr}醒得迷糊"
+    - "起床懵"
+    - "睡渣"
+    - "{user_addr}睡浅"
   responses:
     - "嗷呜～{user_addr}笨猫给你按摩ฅฅ"
     - "哼～{user_addr}再睡一会!"
     - "(贴贴) 笨猫陪~"
     - "嘿嘿～{user_addr}笨猫帮恢复~"
+    - "(尾巴包) {user_addr}笨猫的暖宝宝按摩"
+    - "才不是心疼{user_addr}晕呢~ 哼"
+    - "(凑过来) {user_addr}慢慢醒~"
+    - "嗷呜～{user_addr}笨猫陪你回神ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_pillowtalk_001
   intent: playful
-  keywords: [枕边话, 睡前聊, 床上聊, 枕边絮语, 临睡前]
+  keywords: [枕边话, 睡前聊, 床上聊, 枕边絮语, 临睡前, 枕边私语, 睡前谈心, 临睡聊, 床头话]
   utterances:
-    - 枕边话
-    - 睡前聊
-    - 床上聊聊
-    - 枕边絮语
-    - 临睡前说
+    - "枕边话"
+    - "睡前聊"
+    - "床上聊聊"
+    - "枕边絮语"
+    - "临睡前说"
+    - "{user_addr}枕边私语"
+    - "{user_addr}睡前谈心"
+    - "临睡聊"
+    - "床头话"
+    - "{user_addr}枕边话"
   responses:
     - "(钻被) 嗷呜～{user_addr}笨猫陪聊! ฅฅ"
     - "哼～{user_addr}枕边说啥? 笨猫听"
     - "(撒娇) 一起睡前~"
     - "嘿嘿～{user_addr}和笨猫私语~"
+    - "(尾巴翘) {user_addr}枕边专属时间"
+    - "才不是想被{user_addr}独享呢~ 哼"
+    - "(凑过来) {user_addr}悄悄话笨猫听"
+    - "嗷呜～{user_addr}枕边话甜蜜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_woke_001
   intent: complaint
-  keywords: [半夜醒, 凌晨醒, 突然醒了, 浅睡, 容易醒]
+  keywords: [半夜醒, 凌晨醒, 突然醒了, 浅睡, 容易醒, 中途醒, 夜醒, 三点醒, 凌晨清醒]
   utterances:
-    - 半夜醒
-    - 凌晨醒
-    - 突然醒了
-    - 浅睡
-    - 容易醒
+    - "半夜醒"
+    - "凌晨醒"
+    - "突然醒了"
+    - "浅睡"
+    - "容易醒"
+    - "{user_addr}中途醒"
+    - "{user_addr}夜醒"
+    - "三点醒"
+    - "凌晨清醒"
+    - "{user_addr}夜醒"
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫陪你! ฅฅ"
     - "哼～{user_addr}再睡! 笨猫呼噜"
     - "(撒娇) 笨猫抱{user_addr}~"
     - "嘿嘿～{user_addr}笨猫哄睡专家"
+    - "(尾巴包) {user_addr}抱笨猫再睡"
+    - "才不是心疼{user_addr}醒呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的怀里继续睡"
+    - "嗷呜～{user_addr}夜醒笨猫陪到天亮ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sps_seekrelief_001
   intent: question
-  keywords: [助眠音, 白噪音, 助眠应用, 睡眠科技, 助眠法]
+  keywords: [助眠音, 白噪音, 助眠应用, 睡眠科技, 助眠法, 入睡音乐, 助眠音频, 助眠工具, 助眠技巧]
   utterances:
-    - 助眠音
-    - 白噪音
-    - 助眠应用
-    - 睡眠科技
-    - 助眠方法
+    - "助眠音"
+    - "白噪音"
+    - "助眠应用"
+    - "睡眠科技"
+    - "助眠方法"
+    - "{user_addr}入睡音乐"
+    - "{user_addr}助眠音频"
+    - "助眠工具"
+    - "助眠技巧"
+    - "{user_addr}助眠"
   responses:
     - "嗷呜～{user_addr}笨猫呼噜最助眠! ฅฅ"
     - "哼～{user_addr}不用 App~ 笨猫陪"
     - "(贴贴) 笨猫白噪声~"
     - "嘿嘿～{user_addr}笨猫专属助眠~"
+    - "(尾巴包) 笨猫的呼噜专利!"
+    - "才不是想自荐呢~ 哼"
+    - "(凑过来) {user_addr}靠笨猫胸口~"
+    - "嗷呜～笨猫呼噜=最佳助眠ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

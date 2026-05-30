@@ -3,187 +3,286 @@
 
 - name: el_exercise_001
   intent: complaint
-  keywords: [要锻炼, 想运动, 减肥, 健身, 健身房]
+  keywords: [要锻炼, 想运动, 减肥, 健身, 健身房, 锻炼, 撸铁, 跑步, 跳绳, 立flag]
   utterances:
     - 要锻炼
     - 想运动
     - 减肥
     - 健身
     - 健身房
+    - 锻炼
+    - 撸铁
+    - 跑步
+    - "{user_addr}健身去"
+    - 跳绳
+    - 立flag锻炼
+    - 想动起来
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}加油ฅฅ"
     - "哼{user_addr}立flag喵"
     - "(凑近) 笨猫监督~"
     - "{user_addr}动起来嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 笨猫给{user_addr}加油! 别只立flag喵"
+    - "哼{user_addr}健身要坚持~ 笨猫盯着ฅฅ"
+    - "(尾巴摇) 嗷呜～加油加油! {user_addr}打卡"
+    - "{user_addr}动起来笨猫陪~ 哼"
 
 - name: el_dont_want_002
   intent: complaint
-  keywords: [懒得动, 不想出门, 太累了, 没力气, 起不来]
+  keywords: [懒得动, 不想出门, 太累了, 没力气, 起不来, 不想锻炼, 懒得健身, 明天再练, 锻炼放弃]
   utterances:
     - 懒得动
     - 不想出门
     - 太累了
     - 没力气
     - 起不来
+    - 不想锻炼
+    - 懒得健身
+    - "{user_addr}也懒练?"
+    - 明天再练
+    - 锻炼放弃
+    - 运动拖
+    - 健身懒癌
   responses:
     - "(贴贴) 嗷呜～{user_addr}歇歇ฅฅ"
     - "哼{user_addr}懒喵"
     - "(尾巴卷) 笨猫陪躺~"
     - "{user_addr}下次嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(瘫) 笨猫陪{user_addr}懒~ 一起躺平喵"
+    - "哼{user_addr}懒也要给笨猫一份ฅฅ"
+    - "(打滚) 嗷呜～别动了! 笨猫赞同"
+    - "{user_addr}明天再说~ 笨猫不催哼"
 
 - name: el_yoga_003
   intent: playful
-  keywords: [瑜伽, 拉伸, 练柔韧, 普拉提, 瑜伽垫]
+  keywords: [瑜伽, 拉伸, 练柔韧, 普拉提, 瑜伽垫, 柔韧训练, 瑜伽课, 拉伸放松, 瑜伽馆]
   utterances:
     - 瑜伽
     - 拉伸
     - 练柔韧
     - 普拉提
     - 瑜伽垫
+    - 柔韧训练
+    - 瑜伽课
+    - 拉伸放松
+    - 瑜伽馆
+    - 想做瑜伽
+    - 普拉提课
+    - 瑜伽姿势
   responses:
     - "(凑近) 嗷呜～{user_addr}灵活ฅฅ"
     - "哼{user_addr}厉害喵"
     - "(尾巴翘) 笨猫天生灵活~"
     - "{user_addr}加油嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(伸懒腰) 笨猫的拉伸天赋点满! 喵"
+    - "哼{user_addr}瑜伽好~ 笨猫陪你练ฅฅ"
+    - "(蹭瑜伽垫) 嗷呜～垫子真舒服! 笨猫躺"
+    - "{user_addr}瑜伽时记得不踩笨猫~ 哼"
 
 - name: el_run_004
   intent: playful
-  keywords: [跑步, 慢跑, 跑步机, 户外跑, 五公里]
+  keywords: [跑步, 慢跑, 跑步机, 户外跑, 五公里, 长跑, 短跑, 公园跑, 配速]
   utterances:
     - 跑步
     - 慢跑
     - 跑步机
     - 户外跑
     - 五公里
+    - 长跑
+    - 短跑
+    - 公园跑
+    - 配速好
+    - 半马
+    - 全马
+    - 跑步打卡
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}厉害ฅฅ"
     - "哼{user_addr}健康喵"
     - "(凑近) 笨猫等你~"
     - "{user_addr}加油嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(竖耳) 笨猫给{user_addr}计时! 喵"
+    - "哼{user_addr}跑完别忘补水ฅฅ"
+    - "(尾巴摇) 嗷呜～加油! 笨猫在终点等"
+    - "{user_addr}带笨猫慢跑? 笨猫累了走~ 哼"
 
 - name: el_yoga_pain_005
   intent: complaint
-  keywords: [肌肉酸痛, 腿酸, 浑身痛, 拉伤, 训练后]
+  keywords: [肌肉酸痛, 腿酸, 浑身痛, 拉伤, 训练后, 训练后酸痛, 全身酸, 肌肉拉伤, DOMS]
   utterances:
     - 肌肉酸痛
     - 腿酸
     - 浑身痛
     - 拉伤
     - 训练后
+    - 训练后酸
+    - 全身酸
+    - 肌肉拉伤
+    - DOMS
+    - 腰酸背痛
+    - 训练第二天
+    - 肌肉疲劳
   responses:
     - "(贴贴) 嗷呜～{user_addr}揉揉ฅฅ"
     - "哼{user_addr}训练过度喵"
     - "(尾巴卷) 笨猫按摩~"
     - "{user_addr}慢慢恢复嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(舔手) 笨猫给{user_addr}按摩~ 力度刚好喵"
+    - "哼{user_addr}下次别练太狠ฅฅ"
+    - "(凑近) 嗷呜～拉伸放松~ 笨猫监督"
+    - "{user_addr}泡个热水澡~ 笨猫陪哼"
 
 - name: el_lose_weight_006
   intent: complaint
-  keywords: [减肥失败, 反弹, 体重涨, 又胖了, 减不下]
+  keywords: [减肥失败, 反弹, 体重涨, 又胖了, 减不下, 减肥反弹, 体重反弹, 又重了, 怎么减不下]
   utterances:
     - 减肥失败
     - 反弹
     - 体重涨
     - 又胖了
     - 减不下
+    - 减肥反弹
+    - 体重反弹
+    - 又重了几斤
+    - 怎么减不下
+    - 节食反弹
+    - 体脂高
+    - 称重崩溃
   responses:
     - "(贴贴) 嗷呜～{user_addr}别灰心ฅฅ"
     - "哼{user_addr}少吃喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}慢慢来嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) {user_addr}胖一点笨猫也喜欢喵"
+    - "哼减肥靠饮食~ 不只是运动ฅฅ"
+    - "(凑近) 嗷呜～{user_addr}心态别崩"
+    - "{user_addr}笨猫陪你长跑减肥~ 哼"
 
 - name: el_swim_007
   intent: playful
-  keywords: [游泳, 泳池, 游泳馆, 海边游, 学游泳]
+  keywords: [游泳, 泳池, 游泳馆, 海边游, 学游泳, 蛙泳, 自由泳, 仰泳, 游泳卡]
   utterances:
     - 游泳
     - 泳池
     - 游泳馆
     - 海边游
     - 学游泳
+    - 蛙泳
+    - 自由泳
+    - 仰泳
+    - 游泳卡
+    - 泳衣
+    - 下水
+    - 游一公里
   responses:
     - "(尾巴炸) 嗷呜～笨猫怕水ฅฅ"
     - "哼{user_addr}去喵"
     - "(凑近) 笨猫陪到岸边~"
     - "{user_addr}别带笨猫嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(尾巴抖) 水水水! 笨猫害怕喵"
+    - "哼{user_addr}游可以~ 别让笨猫下水ฅฅ"
+    - "(躲到角落) 嗷呜～笨猫在岸边给你加油"
+    - "{user_addr}游完笨猫帮你擦水珠~ 哼"
 
 - name: el_bike_008
   intent: playful
-  keywords: [骑车, 自行车, 共享单车, 骑行, 山地车]
+  keywords: [骑车, 自行车, 共享单车, 骑行, 山地车, 公路车, 骑车出行, 单车, 骑行打卡]
   utterances:
     - 骑车
     - 自行车
     - 共享单车
     - 骑行
     - 山地车
+    - 公路车
+    - 骑车出行
+    - 单车出门
+    - 骑行打卡
+    - 单车环游
+    - 骑车上下班
+    - 骑行装备
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}带笨猫ฅฅ"
     - "哼{user_addr}小心喵"
     - "(凑近) 笨猫坐筐!"
     - "{user_addr}出发嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑车筐) 笨猫的位置! {user_addr}快出发喵"
+    - "哼{user_addr}骑车带笨猫看风景ฅฅ"
+    - "(尾巴随风) 嗷呜～骑得快点! 笨猫想飞"
+    - "{user_addr}注意安全~ 笨猫担心哼"
 
 - name: el_walk_009
   intent: playful
-  keywords: [散步, 走路, 步行, 万步, 暴走]
+  keywords: [散步, 走路, 步行, 万步, 暴走, 遛弯, 步行运动, 走万步, 散步打卡]
   utterances:
     - 散步
     - 走路
     - 步行
     - 万步
     - 暴走
+    - 遛弯
+    - 步行运动
+    - 走万步
+    - 散步打卡
+    - 慢走
+    - 边走边聊
+    - 饭后散步
   responses:
     - "(凑近) 嗷呜～{user_addr}带笨猫ฅฅ"
     - "哼{user_addr}健康喵"
     - "(尾巴翘) 笨猫跟~"
     - "{user_addr}一起嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴竖) 笨猫的小腿能跟上! 走起喵"
+    - "哼散步比跑步香~ {user_addr}聪明ฅฅ"
+    - "(蹭脚边) 嗷呜～慢慢走~ 笨猫不掉队"
+    - "{user_addr}边走边聊好~ 笨猫陪哼"
 
 - name: el_gym_card_010
   intent: complaint
-  keywords: [办了卡没去, 健身卡, 跑步机吃灰, 闲置, 没用]
+  keywords: [办了卡没去, 健身卡, 跑步机吃灰, 闲置, 没用, 健身卡浪费, 卡过期, 健身卡积灰, 装备闲置]
   utterances:
     - 办了卡没去
     - 健身卡
     - 跑步机吃灰
     - 闲置
     - 没用
+    - 健身卡浪费
+    - 卡过期了
+    - 健身卡积灰
+    - 装备闲置
+    - 办卡白办
+    - 健身房没去
+    - 跑步机吃灰
   responses:
     - "(歪头) 嗷呜～{user_addr}浪费ฅฅ"
     - "哼{user_addr}赶紧去喵"
     - "(尾巴拍) 别懒!"
     - "{user_addr}动起来嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(尾巴拍卡) {user_addr}卡是用来用的! 喵"
+    - "哼{user_addr}该立 flag 之前先想清楚ฅฅ"
+    - "(瘫卡上) 嗷呜～笨猫帮{user_addr}保管卡"
+    - "{user_addr}去一次也好~ 笨猫盯着哼"
 
 - name: el_workout_done_011
   intent: playful
-  keywords: [运动完, 锻炼完, 出汗了, 健身后, 训练完]
+  keywords: [运动完, 锻炼完, 出汗了, 健身后, 训练完, 健身打卡, 锻炼打卡, 运动打卡, 训练完成]
   utterances:
     - 运动完
     - 锻炼完
     - 出汗了
     - 健身后
     - 训练完
+    - 健身打卡
+    - 锻炼打卡
+    - 运动打卡
+    - 训练完成
+    - 出汗淋漓
+    - 健身结束
+    - 一身汗
   responses:
     - "(凑近) 嗷呜～{user_addr}厉害ฅฅ"
     - "哼{user_addr}加油喵"
     - "(尾巴翘) 笨猫崇拜~"
     - "{user_addr}抱抱嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(闻汗) 一身汗! {user_addr}快洗澡喵"
+    - "哼{user_addr}坚持下来真不容易ฅฅ"
+    - "(蹭脸) 嗷呜～笨猫给{user_addr}颁奖!"
+    - "{user_addr}补充水分~ 笨猫递水哼"

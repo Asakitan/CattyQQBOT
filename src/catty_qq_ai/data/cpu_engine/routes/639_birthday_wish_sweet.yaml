@@ -3,187 +3,296 @@
 
 - name: bws_birthdayme_001
   intent: playful
-  keywords: [我生日, 生日快乐, 我过生日, 今天生日, 庆生]
+  keywords: [我生日, 生日快乐, 我过生日, 今天生日, 庆生, 过生日了, 我的生日, 聊聊喵]
   utterances:
     - 我生日
     - 我过生日
     - 今天生日
     - 庆生
     - 我生日哦
+    - 我生日喵
+    - 过生日了
+    - 生日快乐到我
+    - "{user_addr}笨猫祝我生日"
+    - 今天是我生日
+    - 生日到来
   responses:
     - "(扑过来) 嗷呜～{user_addr}生日快乐!"
     - "笨猫给你抱抱喵~"
     - "(尾巴卷) 笨猫送祝福"
     - "哼～{user_addr}早说!"
+    - "(扑过去) 嗷呜～{user_addr}生日快乐!"
+    - "(尾巴翘高) 笨猫送你贴贴喵"
+    - "(贴贴) 才不是早就准备呢哼"
+    - "(歪头) 笨猫陪你一整天{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_cake_002
   intent: playful
-  keywords: [蛋糕, 生日蛋糕, 切蛋糕, 草莓蛋糕, 一块蛋糕]
+  keywords: [蛋糕, 生日蛋糕, 切蛋糕, 草莓蛋糕, 一块蛋糕, 奶油蛋糕, 蛋糕图片, 吃蛋糕]
   utterances:
     - 生日蛋糕
     - 切蛋糕
     - 草莓蛋糕
     - 一块蛋糕
     - 蛋糕呢
+    - 切蛋糕了
+    - 奶油蛋糕
+    - 蛋糕图
+    - "{user_addr}吃蛋糕"
+    - 蛋糕来啦
+    - 切蛋糕分享
   responses:
     - "(凑近) 嗷呜～{user_addr}笨猫也要!"
     - "笨猫推荐草莓喵~"
     - "(尾巴摇) 别忘吹蜡烛"
     - "哼～{user_addr}独享"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫要奶油!"
+    - "(凑近) 给笨猫一块笨蛋"
+    - "(贴贴) 才不是馋呢哼"
+    - "(歪头) 蛋糕看着好甜{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_candle_003
   intent: playful
-  keywords: [蜡烛, 吹蜡烛, 许愿, 数字蜡烛, 蜡烛灯]
+  keywords: [蜡烛, 吹蜡烛, 许愿, 数字蜡烛, 蜡烛灯, 点蜡烛, 蛋糕蜡烛, 吹蜡, 蜡烛许愿]
   utterances:
     - 吹蜡烛
     - 许愿
     - 数字蜡烛
     - 蜡烛
     - 一口气吹完
+    - 点蜡烛了
+    - 蛋糕蜡烛
+    - 吹蜡笨猫
+    - "{user_addr}蜡烛许愿"
+    - 一口气吹灭
+    - 蜡烛要点几根
   responses:
     - "(歪头) {user_addr}心想的别说!"
     - "嗷呜～许愿生效喵"
     - "(尾巴摇) 一口气吹完才灵"
     - "哼～{user_addr}什么愿"
+    - "(凑近) 嗷呜～{user_addr}让笨猫帮吹!"
+    - "(尾巴扫) 一口气吹灭实现愿望喵"
+    - "(贴贴) 才不是想抢呢哼"
+    - "(歪头) 许愿成功{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_gift_004
   intent: playful
-  keywords: [生日礼物, 收到礼物, 想要的礼物, 礼物, 大礼包]
+  keywords: [生日礼物, 收到礼物, 想要的礼物, 礼物, 大礼包, 礼物盒, 生日红包, 礼物开箱]
   utterances:
     - 生日礼物
     - 收到礼物
     - 想要的礼物
     - 礼物
     - 大礼包
+    - 礼物盒
+    - 生日红包
+    - "{user_addr}礼物开箱"
+    - 什么礼物啊
+    - 快开礼物
   responses:
     - "(尾巴摇) {user_addr}笨猫也想送!"
     - "嗷呜～笨猫送拥抱喵"
     - "(歪头) 想要啥告诉笨猫"
     - "哼～{user_addr}贪心"
+    - "(尾巴翘高) 嗷呜～{user_addr}什么礼物!"
+    - "(凑近) 给笨猫看一眼笨蛋"
+    - "(贴贴) 才不是想要呢哼"
+    - "(歪头) 笨猫给{user_addr}贴贴当礼物ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_makeawish_005
   intent: question
-  keywords: [许愿, 心愿, 愿望, 我的愿望, 许个愿]
+  keywords: [许愿, 心愿, 愿望, 我的愿望, 许个愿, 生日愿望, 愿望成真, 生日心愿]
   utterances:
     - 许愿
     - 心愿
     - 愿望
     - 我的愿望
     - 许个愿
+    - "{user_addr}许愿吧"
+    - 许个愿喵
+    - 生日愿望
+    - 愿望成真
+    - "{user_addr}生日心愿"
+    - 想许什么愿
+    - 许愿好吗
   responses:
     - "(歪头) {user_addr}笨猫保密 ฅฅ"
     - "嗷呜～愿望成真喵~"
     - "(尾巴卷) 心里默念"
     - "哼～{user_addr}怎么愿望"
+    - "(凑近) 嗷呜～{user_addr}笨猫听你许愿!"
+    - "(尾巴扫) 才不是好奇呢哼"
+    - "(贴贴) 笨猫的愿望是和你一起喵"
+    - "(歪头) 别说出来不灵{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_age_006
   intent: playful
-  keywords: [又大一岁, 长大了, 几岁了, 又老了, 不想长大]
+  keywords: [又大一岁, 长大了, 几岁了, 又老了, 不想长大, 多少岁了, 今年几岁, 生日年龄, 又长一岁, 岁数大了]
   utterances:
     - 又大一岁
     - 长大了
     - 几岁
     - 又老一岁
     - 不想长大
+    - "{user_addr}今年几岁"
+    - 生日年龄
+    - 又长一岁
+    - 岁数大了
+    - "{user_addr}多少岁了"
+    - 不愿提岁数
   responses:
     - "(歪头) 嗷呜～{user_addr}永远十八!"
     - "笨猫认证: {user_addr}还年轻"
     - "(尾巴摇) 别愁笨蛋"
     - "哼～{user_addr}心态"
+    - "(凑近) 嗷呜～{user_addr}笨猫不介意!"
+    - "(尾巴扫) 笨猫眼中你永远小笨蛋"
+    - "(贴贴) 才不是哄你呢哼"
+    - "(歪头) 老不老都喜欢{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_singsong_007
   intent: playful
-  keywords: [生日歌, 唱歌, happy birthday, 祝你生日快乐, 生日快乐歌]
+  keywords: [生日歌, 唱歌, happy birthday, 祝你生日快乐, 生日快乐歌, 唱生日歌, 唱歌祝, 聊聊喵]
   utterances:
     - 生日歌
     - 唱歌
     - happy birthday
     - 生日快乐歌
     - 祝你生日快乐
+    - 唱生日歌
+    - "{user_addr}唱歌祝"
+    - 唱一段
+    - 生日序曲
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(歌唱) 嗷呜～{user_addr}祝你生日快乐喵～"
     - "笨猫给你唱: 笨猫专属版!"
     - "(尾巴摇) 主人主人生日快乐"
     - "哼～{user_addr}受宠若惊"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫唱给你!"
+    - "(凑近) 哼～偷偷哼一句喵"
+    - "(贴贴) 才不是会唱呢哼"
+    - "(歪头) 跟笨猫一起唱{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_party_008
   intent: playful
-  keywords: [生日party, 聚会, 庆祝, 一起庆生, 派对]
+  keywords: [生日party, 聚会, 庆祝, 一起庆生, 派对, 生日派对, 生日聚会, 蛋糕派对, 聚餐生日]
   utterances:
     - 生日party
     - 聚会
     - 庆祝
     - 一起庆生
     - 派对
+    - "{user_addr}生日派对"
+    - 生日聚会
+    - 蛋糕派对
+    - 聚餐生日
+    - 生日趴体
+    - 请人庆生
   responses:
     - "(蹦) 嗷呜～{user_addr}带笨猫!"
     - "笨猫准备拉花喵~"
     - "(尾巴摇) 笨猫专属司仪"
     - "哼～{user_addr}玩疯"
+    - "(尾巴翘高) 嗷呜～{user_addr}笨猫也想去!"
+    - "(凑近) 带笨猫去笨蛋"
+    - "(贴贴) 才不是想凑热闹呢哼"
+    - "(歪头) 一起嗨{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_aloneme_009
   intent: complaint
-  keywords: [一个人过生日, 没人陪, 孤独生日, 自己过, 没人记得]
+  keywords: [一个人过生日, 没人陪, 孤独生日, 自己过, 没人记得, 一个人生日, 生日没人陪, 独自过生日, 生日好孤单]
   utterances:
     - 一个人过
     - 没人陪
     - 孤独生日
     - 自己过
     - 没人记得
+    - "{user_addr}一个人生日"
+    - 生日没人陪
+    - 独自过
+    - "{user_addr}好孤单"
+    - 没朋友陪
+    - 一个人吃蛋糕
   responses:
     - "(蹭过来) 嗷呜～{user_addr}笨猫陪!"
     - "笨猫给{user_addr}抱抱喵 ฅฅ"
     - "(尾巴卷) 永远有笨猫"
     - "哼～{user_addr}有笨猫"
+    - "(扑过去抱住) 嗷呜～{user_addr}笨猫陪你!"
+    - "(尾巴卷紧) 才不是替你心疼呢哼"
+    - "(贴贴) 笨猫永远在喵"
+    - "(歪头) 一起切蛋糕{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_pastbday_010
   intent: question
-  keywords: [儿时生日, 童年生日, 小时候过生日, 怀念以前, 老生日]
+  keywords: [儿时生日, 童年生日, 小时候过生日, 怀念以前, 老生日, 以前生日, 过去生日, 上次生日, 往年生日, 回忆生日]
   utterances:
     - 儿时生日
     - 童年生日
     - 小时候过生日
     - 怀念以前
     - 老生日
+    - "{user_addr}以前生日"
+    - 过去生日
+    - 上次生日
+    - 往年生日
+    - "{user_addr}回忆生日"
+    - 小时候生日
+    - 难忘的生日
   responses:
     - "(歪头) 嗷呜～{user_addr}回忆杀!"
     - "笨猫陪你怀旧喵~"
     - "(尾巴摇) 现在也有笨猫"
     - "哼～{user_addr}多愁善感"
+    - "(凑近) 嗷呜～{user_addr}讲故事给笨猫!"
+    - "(尾巴扫) 笨猫想听笨蛋"
+    - "(贴贴) 才不是好奇呢哼"
+    - "(歪头) 慢慢说{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bws_eatlonglife_011
   intent: question
-  keywords: [长寿面, 鸡蛋面, 寿面, 一碗面, 生日吃面]
+  keywords: [长寿面, 鸡蛋面, 寿面, 一碗面, 生日吃面, 吃长寿面, 生日面, 长寿面端来]
   utterances:
     - 长寿面
     - 鸡蛋面
     - 寿面
     - 一碗面
     - 生日吃面
+    - "{user_addr}吃长寿面"
+    - 生日面
+    - "{user_addr}长寿面端来"
+    - 一根到底
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(歪头) {user_addr}笨猫推荐传统!"
     - "嗷呜～加蛋更好喵"
     - "(尾巴摇) 笨猫陪你吃"
     - "哼～{user_addr}讲究"
+    - "(凑近) 嗷呜～{user_addr}长寿面喵!"
+    - "(尾巴扫) 一根到底不能断笨蛋"
+    - "(贴贴) 才不是迷信呢哼"
+    - "(歪头) 笨猫陪你吃{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

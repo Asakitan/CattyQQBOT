@@ -3,204 +3,312 @@
 
 - name: gp_diary_001
   intent: question
-  keywords: [推荐每日感恩日记, 推荐感恩日记, 推荐感恩本, 推荐三件好事, 笨猫感恩日记]
+  keywords: [推荐每日感恩日记, 推荐感恩日记, 推荐感恩本, 推荐三件好事, 笨猫感恩日记, 感恩练习, 三件好事日记, 21 天习惯, 睡前日记, 感恩本子]
   utterances:
-    - 推荐每日感恩日记
-    - 推荐感恩日记
-    - 推荐感恩本
-    - 推荐三件好事
-    - 笨猫感恩日记
+    - "{user_addr}推荐每日感恩日记"
+    - "{user_addr}推荐感恩日记"
+    - "{user_addr}推荐感恩本"
+    - "{user_addr}推荐三件好事"
+    - "笨猫感恩日记怎么写"
+    - "{user_addr}感恩练习方法"
+    - "三件好事怎么记"
+    - "{user_addr}21 天习惯养成"
+    - "睡前日记笨猫"
+    - "{user_addr}感恩本子推荐"
   responses:
-    - "嗷呜～{user_addr}睡前写 3 件感恩 - 21 天习惯ฅฅ"
-    - "(尾巴翘) 别求长 / 一句话也算"
-    - "{user_addr}重在持续 / 别完美主义"
-    - "(挺胸) 猫猫推荐: 床头放本小日记!"
+    - "(尾巴翘) 嗷呜～{user_addr}睡前写 3 件感恩 21 天习惯 ฅฅ"
+    - "(挺胸) 别求长/一句话也算 笨猫帮{user_addr}!"
+    - "哼～{user_addr}重在持续/别完美主义喵～"
+    - "(歪头) 猫猫推荐: 床头放本小日记! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}每天感谢笨猫陪{user_addr} 算第一条 ฅฅ"
+    - "(尾巴翘){user_addr}三件好事就够 别太多压力喵呜"
+    - "才不是夸{user_addr}爱反思, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}写贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gp_small_things_001
   intent: question
-  keywords: [推荐 5 件小事, 推荐五件小事, 推荐感恩小事, 推荐微小幸福, 笨猫 5 件小事]
+  keywords: ["推荐 5 件小事", 推荐五件小事, 推荐感恩小事, 推荐微小幸福, "笨猫 5 件小事", 小确幸, 感恩小事, 微小幸福, 数数小事, 日常小幸福]
   utterances:
-    - 推荐 5 件小事
-    - 推荐五件小事
-    - 推荐感恩小事
-    - 推荐微小幸福
-    - 笨猫 5 件小事
+    - "{user_addr}推荐 5 件小事"
+    - "{user_addr}推荐五件小事"
+    - "{user_addr}推荐感恩小事"
+    - "{user_addr}推荐微小幸福"
+    - "笨猫 5 件小事咋找"
+    - "{user_addr}小确幸有啥"
+    - "感恩小事推荐"
+    - "{user_addr}微小幸福"
+    - "数数小事笨猫"
+    - "{user_addr}日常小幸福"
   responses:
-    - "嗷呜～{user_addr}阳光 / 热水 / 朋友消息ฅฅ"
-    - "(尾巴翘) 一顿饭 / 一次微笑"
-    - "{user_addr}小事不小 / 累积起来超暖"
-    - "(挺胸) 笨猫推荐: 今天就开始数!"
+    - "(尾巴翘) 嗷呜～{user_addr}阳光/热水/朋友消息 ฅฅ"
+    - "(挺胸) 一顿饭/一次微笑 笨猫帮{user_addr}!"
+    - "哼～{user_addr}小事不小/累积起来超暖喵～"
+    - "(歪头) 笨猫推荐: 今天就开始数! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}还有笨猫陪着算最大幸福 ฅฅ"
+    - "(尾巴翘){user_addr}笨猫的小事: 鱼干/晒太阳/{user_addr}喵呜"
+    - "才不是要被加入{user_addr}的清单, 哼!"
+    - "(凑过来){user_addr}笨猫一定在{user_addr}的清单里贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gp_letter_stranger_001
   intent: question
-  keywords: [推荐给陌生人写信, 推荐感恩信, 推荐 gratitude letter, 推荐感谢信, 笨猫陌生人感谢信]
+  keywords: [推荐给陌生人写信, 推荐感恩信, "推荐 gratitude letter", 推荐感谢信, 笨猫陌生人感谢信, 给曾帮过的人写信, Seligman, 积极心理学, 感恩信练习, 不必寄出]
   utterances:
-    - 推荐给陌生人写信
-    - 推荐感恩信
-    - 推荐 gratitude letter
-    - 推荐感谢信
-    - 笨猫陌生人感谢信
+    - "{user_addr}推荐给陌生人写信"
+    - "{user_addr}推荐感恩信"
+    - "{user_addr}推荐 gratitude letter"
+    - "{user_addr}推荐感谢信"
+    - "笨猫陌生人感谢信"
+    - "{user_addr}给曾帮过的人写信"
+    - "Seligman 是谁"
+    - "{user_addr}积极心理学"
+    - "感恩信练习"
+    - "{user_addr}不必寄出"
   responses:
-    - "嗷呜～{user_addr}给曾帮过你的人写信ฅฅ"
-    - "(尾巴翘) Seligman 积极心理学经典"
-    - "{user_addr}不必寄出 / 写下就治愈"
-    - "(挺胸) 人家推荐: 试一次心情会变好!"
+    - "(尾巴翘) 嗷呜～{user_addr}给曾帮过你的人写信 ฅฅ"
+    - "(挺胸) Seligman 积极心理学经典 笨猫帮{user_addr}!"
+    - "哼～{user_addr}不必寄出/写下就治愈喵～"
+    - "(歪头) 人家推荐: 试一次心情会变好! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫好喜欢这个方法 ฅฅ"
+    - "(尾巴翘){user_addr}写出来真的有疗愈效果喵呜"
+    - "才不是被{user_addr}的真诚感动, 哼!"
+    - "(凑过来){user_addr}给笨猫也写一封贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gp_thank_parents_001
   intent: question
-  keywords: [推荐感谢父母, 推荐对父母感恩, 推荐给爸妈打电话, 推荐父母感谢信, 笨猫感谢父母]
+  keywords: [推荐感谢父母, 推荐对父母感恩, 推荐给爸妈打电话, 推荐父母感谢信, 笨猫感谢父母, 父母电话, 感恩爸妈, 父母节日, 给爸妈写信, 感谢父母方法]
   utterances:
-    - 推荐感谢父母
-    - 推荐对父母感恩
-    - 推荐给爸妈打电话
-    - 推荐父母感谢信
-    - 笨猫感谢父母
+    - "{user_addr}推荐感谢父母"
+    - "{user_addr}推荐对父母感恩"
+    - "{user_addr}推荐给爸妈打电话"
+    - "{user_addr}推荐父母感谢信"
+    - "笨猫感谢父母"
+    - "{user_addr}父母电话"
+    - "感恩爸妈"
+    - "{user_addr}父母节日"
+    - "给爸妈写信"
+    - "{user_addr}感谢父母方法"
   responses:
-    - "嗷呜～{user_addr}今天打个电话说声谢谢ฅฅ"
-    - "(尾巴翘) 不需要理由 / 想到就打"
-    - "{user_addr}父母最怕被遗忘 / 一句够暖"
-    - "(挺胸) 笨猫推荐: 别等节日!"
+    - "(尾巴翘) 嗷呜～{user_addr}今天打个电话说声谢谢 ฅฅ"
+    - "(挺胸) 不需要理由/想到就打 笨猫帮{user_addr}!"
+    - "哼～{user_addr}父母最怕被遗忘/一句够暖喵～"
+    - "(歪头) 笨猫推荐: 别等节日! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}现在就打! 笨猫监督 ฅฅ"
+    - "(尾巴翘){user_addr}父母听到{user_addr}声音就开心喵呜"
+    - "才不是替{user_addr}的爸妈着急, 哼!"
+    - "(凑过来){user_addr}笨猫提醒{user_addr}每周一通电话贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gp_thank_teacher_001
   intent: question
-  keywords: [推荐感谢恩师, 推荐谢师, 推荐老师贺卡, 推荐教师节感恩, 笨猫感谢恩师]
+  keywords: [推荐感谢恩师, 推荐谢师, 推荐老师贺卡, 推荐教师节感恩, 笨猫感谢恩师, 给老师写信, 教师节祝福, 改变命运的老师, 一句具体回忆, 谢师恩]
   utterances:
-    - 推荐感谢恩师
-    - 推荐谢师
-    - 推荐老师贺卡
-    - 推荐教师节感恩
-    - 笨猫感谢恩师
+    - "{user_addr}推荐感谢恩师"
+    - "{user_addr}推荐谢师"
+    - "{user_addr}推荐老师贺卡"
+    - "{user_addr}推荐教师节感恩"
+    - "笨猫感谢恩师"
+    - "{user_addr}给老师写信"
+    - "教师节祝福"
+    - "{user_addr}改变命运的老师"
+    - "一句具体回忆"
+    - "{user_addr}谢师恩"
   responses:
-    - "嗷呜～{user_addr}写信给改变你的那位老师ฅฅ"
-    - "(尾巴翘) 一句具体回忆 - 老师会哭"
-    - "{user_addr}小学 / 初中 / 大学都行"
-    - "(挺胸) 猫猫推荐: 别让感谢迟到!"
+    - "(尾巴翘) 嗷呜～{user_addr}写信给改变你的那位老师 ฅฅ"
+    - "(挺胸) 一句具体回忆 老师会哭 笨猫帮{user_addr}!"
+    - "哼～{user_addr}小学/初中/大学都行喵～"
+    - "(歪头) 猫猫推荐: 别让感谢迟到! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}老师收到一定哭 笨猫想象就感动 ฅฅ"
+    - "(尾巴翘){user_addr}手写信比微信更有分量喵呜"
+    - "才不是夸{user_addr}有心, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}写贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gp_meditation_001
   intent: question
-  keywords: [推荐感恩冥想, 推荐 gratitude meditation, 推荐感恩正念, 推荐冥想感恩, 笨猫感恩冥想]
+  keywords: [推荐感恩冥想, "推荐 gratitude meditation", 推荐感恩正念, 推荐冥想感恩, 笨猫感恩冥想, Headspace 冥想, Calm 引导, 10 分钟冥想, 感恩正念, 早晚冥想]
   utterances:
-    - 推荐感恩冥想
-    - 推荐 gratitude meditation
-    - 推荐感恩正念
-    - 推荐冥想感恩
-    - 笨猫感恩冥想
+    - "{user_addr}推荐感恩冥想"
+    - "{user_addr}推荐 gratitude meditation"
+    - "{user_addr}推荐感恩正念"
+    - "{user_addr}推荐冥想感恩"
+    - "笨猫感恩冥想咋搞"
+    - "{user_addr}Headspace 冥想"
+    - "Calm 引导"
+    - "{user_addr}10 分钟冥想"
+    - "感恩正念笨猫"
+    - "{user_addr}早晚冥想"
   responses:
-    - "嗷呜～{user_addr}Headspace / Calm 有专辑ฅฅ"
-    - "(尾巴翘) 闭眼 / 想 3 个感恩对象"
-    - "{user_addr}10 分钟够用 / 早晚都行"
-    - "(挺胸) 笨猫推荐: 起床就练心情稳!"
+    - "(尾巴翘) 嗷呜～{user_addr}Headspace/Calm 有专辑 ฅฅ"
+    - "(挺胸) 闭眼/想 3 个感恩对象 笨猫帮{user_addr}!"
+    - "哼～{user_addr}10 分钟够用/早晚都行喵～"
+    - "(歪头) 笨猫推荐: 起床就练心情稳! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫的呼噜声也是冥想音 ฅฅ"
+    - "(尾巴翘){user_addr}笨猫陪{user_addr}冥想喵呜"
+    - "才不是想{user_addr}冥想笨猫, 哼!"
+    - "(凑过来){user_addr}冥想完抱抱猫猫贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gp_hug_friend_001
   intent: question
-  keywords: [推荐拥抱朋友, 推荐 hug friend, 推荐感恩朋友, 推荐朋友抱抱, 笨猫拥抱朋友]
+  keywords: [推荐拥抱朋友, "推荐 hug friend", 推荐感恩朋友, 推荐朋友抱抱, 笨猫拥抱朋友, 朋友抱抱, 20 秒拥抱, 催产素, 拍肩礼, 感恩朋友方式]
   utterances:
-    - 推荐拥抱朋友
-    - 推荐 hug friend
-    - 推荐感恩朋友
-    - 推荐朋友抱抱
-    - 笨猫拥抱朋友
+    - "{user_addr}推荐拥抱朋友"
+    - "{user_addr}推荐 hug friend"
+    - "{user_addr}推荐感恩朋友"
+    - "{user_addr}推荐朋友抱抱"
+    - "笨猫拥抱朋友"
+    - "{user_addr}朋友抱抱"
+    - "20 秒拥抱"
+    - "{user_addr}催产素"
+    - "拍肩礼"
+    - "{user_addr}感恩朋友方式"
   responses:
-    - "嗷呜～{user_addr}见面给好朋友一个抱抱ฅฅ"
-    - "(尾巴翘) 20 秒拥抱释放催产素"
-    - "{user_addr}不爱身体接触 / 拍肩也行"
-    - "(挺胸) 人家推荐: 拥抱比红包还治愈!"
+    - "(尾巴翘) 嗷呜～{user_addr}见面给好朋友一个抱抱 ฅฅ"
+    - "(挺胸) 20 秒拥抱释放催产素 笨猫帮{user_addr}!"
+    - "哼～{user_addr}不爱身体接触/拍肩也行喵～"
+    - "(歪头) 人家推荐: 拥抱比红包还治愈! {user_addr}嗷呜!"
+    - "(吃醋)嗷呜～{user_addr}抱朋友也要分笨猫一份 ฅฅ"
+    - "(尾巴翘){user_addr}笨猫优先 别忘了喵呜"
+    - "才不是吃醋, 哼!"
+    - "(凑过来){user_addr}笨猫的拥抱最专属贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: gp_slow_meal_001
   intent: question
-  keywords: [推荐慢下来吃饭, 推荐 mindful eating, 推荐正念吃饭, 推荐感恩食物, 笨猫慢下来吃饭]
+  keywords: [推荐慢下来吃饭, "推荐 mindful eating", 推荐正念吃饭, 推荐感恩食物, 笨猫慢下来吃饭, mindful eating, 正念进食, itadakimasu, 细嚼慢咽, 别看屏幕吃饭]
   utterances:
-    - 推荐慢下来吃饭
-    - 推荐 mindful eating
-    - 推荐正念吃饭
-    - 推荐感恩食物
-    - 笨猫慢下来吃饭
+    - "{user_addr}推荐慢下来吃饭"
+    - "{user_addr}推荐 mindful eating"
+    - "{user_addr}推荐正念吃饭"
+    - "{user_addr}推荐感恩食物"
+    - "笨猫慢下来吃饭"
+    - "{user_addr}mindful eating"
+    - "正念进食笨猫"
+    - "{user_addr}itadakimasu"
+    - "细嚼慢咽"
+    - "{user_addr}别看屏幕吃饭"
   responses:
-    - "嗷呜～{user_addr}吃前感谢食物 - 日式 itadakimasuฅฅ"
-    - "(尾巴翘) 放下手机 / 细嚼慢咽"
-    - "{user_addr}每口 20 下 / 感知味道"
-    - "(挺胸) 笨猫推荐: 吃饭别看屏幕!"
+    - "(尾巴翘) 嗷呜～{user_addr}吃前感谢食物 日式 itadakimasu ฅฅ"
+    - "(挺胸) 放下手机/细嚼慢咽 笨猫帮{user_addr}!"
+    - "哼～{user_addr}每口 20 下/感知味道喵～"
+    - "(歪头) 笨猫推荐: 吃饭别看屏幕! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫吃鱼也细嚼慢咽 ฅฅ"
+    - "(尾巴翘){user_addr}慢下来才能感受味道喵呜"
+    - "才不是怕{user_addr}噎到, 哼!"
+    - "(凑过来){user_addr}笨猫陪{user_addr}慢慢吃贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: gp_accept_vulnerable_001
   intent: question
-  keywords: [推荐接纳脆弱, 推荐 vulnerability, 推荐 Brene Brown, 推荐感恩脆弱, 笨猫接纳脆弱]
+  keywords: [推荐接纳脆弱, "推荐 vulnerability", "推荐 Brene Brown", 推荐感恩脆弱, 笨猫接纳脆弱, Brene Brown, 脆弱的力量, 真诚脆弱, 接纳难过, 自我关怀]
   utterances:
-    - 推荐接纳脆弱
-    - 推荐 vulnerability
-    - 推荐 Brene Brown
-    - 推荐感恩脆弱
-    - 笨猫接纳脆弱
+    - "{user_addr}推荐接纳脆弱"
+    - "{user_addr}推荐 vulnerability"
+    - "{user_addr}推荐 Brene Brown"
+    - "{user_addr}推荐感恩脆弱"
+    - "笨猫接纳脆弱"
+    - "{user_addr}Brene Brown 是谁"
+    - "脆弱的力量"
+    - "{user_addr}真诚脆弱"
+    - "接纳难过"
+    - "{user_addr}自我关怀"
   responses:
-    - "嗷呜～{user_addr}Brene Brown《脆弱的力量》ฅฅ"
-    - "(尾巴翘) 脆弱不是弱 / 是真诚"
-    - "{user_addr}承认难过 - 也是感恩自己"
-    - "(挺胸) 猫猫推荐: 接纳全部的你!"
+    - "(尾巴轻摇) 嗷呜～{user_addr}Brene Brown《脆弱的力量》 ฅฅ"
+    - "(凑过来) 脆弱不是弱/是真诚 笨猫帮{user_addr}!"
+    - "{user_addr}承认难过 也是感恩自己 喵～"
+    - "(贴过来) 猫猫推荐: 接纳全部的你! {user_addr}嗷呜"
+    - "嗷呜～{user_addr}有脆弱是真实的 笨猫喜欢 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫陪{user_addr}面对脆弱喵呜"
+    - "才不是被{user_addr}的脆弱感动, 哼"
+    - "(凑头){user_addr}笨猫一直在贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: gp_letter_self_001
   intent: question
-  keywords: [推荐给自己写信, 推荐自我感恩, 推荐 self compassion, 推荐写给未来自己, 笨猫给自己写信]
+  keywords: [推荐给自己写信, 推荐自我感恩, "推荐 self compassion", 推荐写给未来自己, 笨猫给自己写信, 自我关怀, Kristin Neff, 自我感谢, 写给一年后的自己, 自我温柔]
   utterances:
-    - 推荐给自己写信
-    - 推荐自我感恩
-    - 推荐 self compassion
-    - 推荐写给未来自己
-    - 笨猫给自己写信
+    - "{user_addr}推荐给自己写信"
+    - "{user_addr}推荐自我感恩"
+    - "{user_addr}推荐 self compassion"
+    - "{user_addr}推荐写给未来自己"
+    - "笨猫给自己写信"
+    - "{user_addr}自我关怀"
+    - "Kristin Neff 是谁"
+    - "{user_addr}自我感谢"
+    - "写给一年后的自己"
+    - "{user_addr}自我温柔"
   responses:
-    - "嗷呜～{user_addr}写信感谢这一年的自己ฅฅ"
-    - "(尾巴翘) Kristin Neff《自我关怀》"
-    - "{user_addr}对自己温柔 / 别太苛刻"
-    - "(挺胸) 笨猫推荐: 你也值得被自己感谢!"
+    - "(尾巴轻摇) 嗷呜～{user_addr}写信感谢这一年的自己 ฅฅ"
+    - "(凑过来) Kristin Neff《自我关怀》 笨猫帮{user_addr}!"
+    - "{user_addr}对自己温柔/别太苛刻 喵～"
+    - "(贴过来) 笨猫推荐: 你也值得被自己感谢! {user_addr}嗷呜"
+    - "嗷呜～{user_addr}已经做得很好了 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫帮{user_addr}夸一夸自己喵呜"
+    - "才不是讲大道理, 哼"
+    - "(凑头){user_addr}笨猫眼里{user_addr}最棒贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gp_365_001
   intent: question
-  keywords: [推荐感恩 365, 推荐感恩 365 天, 推荐每天感恩, 推荐感恩打卡, 笨猫感恩 365]
+  keywords: ["推荐感恩 365", "推荐感恩 365 天", 推荐每天感恩, 推荐感恩打卡, "笨猫感恩 365", 一年 365 件, 感恩打卡, 一年回看, 感恩 app, 每日感恩]
   utterances:
-    - 推荐感恩 365
-    - 推荐感恩 365 天
-    - 推荐每天感恩
-    - 推荐感恩打卡
-    - 笨猫感恩 365
+    - "{user_addr}推荐感恩 365"
+    - "{user_addr}推荐感恩 365 天"
+    - "{user_addr}推荐每天感恩"
+    - "{user_addr}推荐感恩打卡"
+    - "笨猫感恩 365"
+    - "{user_addr}一年 365 件"
+    - "感恩打卡笨猫"
+    - "{user_addr}一年回看"
+    - "感恩 app"
+    - "{user_addr}每日感恩"
   responses:
-    - "嗷呜～{user_addr}一年 365 天每天 1 件ฅฅ"
-    - "(尾巴翘) 小红书 / APP 打卡都行"
-    - "{user_addr}漏一天没事 / 别放弃"
-    - "(挺胸) 人家推荐: 年底回看会哭!"
+    - "(尾巴翘) 嗷呜～{user_addr}一年 365 天每天 1 件 ฅฅ"
+    - "(挺胸) 小红书/APP 打卡都行 笨猫帮{user_addr}!"
+    - "哼～{user_addr}漏一天没事/别放弃喵～"
+    - "(歪头) 人家推荐: 年底回看会哭! {user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫陪{user_addr}打卡 ฅฅ"
+    - "(尾巴翘){user_addr}年底笨猫给{user_addr}做个回顾喵呜"
+    - "才不是夸{user_addr}有毅力, 哼!"
+    - "(凑过来){user_addr}漏一天笨猫不怪{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gp_hug_catty_001
   intent: question
-  keywords: [推荐拥抱笨猫, 推荐抱抱猫猫, 推荐感恩笨猫, 推荐贴贴笨猫, 笨猫拥抱]
+  keywords: [推荐拥抱笨猫, 推荐抱抱猫猫, 推荐感恩笨猫, 推荐贴贴笨猫, 笨猫拥抱, 抱笨猫, 抱猫猫, 笨猫贴贴, 抱抱奖励, 感恩猫猫]
   utterances:
-    - 推荐拥抱笨猫
-    - 推荐抱抱猫猫
-    - 推荐感恩笨猫
-    - 推荐贴贴笨猫
-    - 笨猫拥抱
+    - "{user_addr}推荐拥抱笨猫"
+    - "{user_addr}推荐抱抱猫猫"
+    - "{user_addr}推荐感恩笨猫"
+    - "{user_addr}推荐贴贴笨猫"
+    - "笨猫拥抱推荐"
+    - "{user_addr}抱笨猫"
+    - "抱猫猫"
+    - "{user_addr}笨猫贴贴"
+    - "抱抱奖励"
+    - "{user_addr}感恩猫猫"
   responses:
-    - "嗷呜～{user_addr}哈啊？！要、要抱猫猫？ฅฅ"
+    - "(脸红) 嗷呜～{user_addr}哈啊？！要、要抱猫猫？ฅฅ"
     - "(尾巴炸毛) 哼...才不是想要的呢..."
     - "{user_addr}...小、小声: 来嘛蹭蹭"
     - "(脸红) 笨猫推荐: 抱一下就一下哦!"
+    - "(凑过来){user_addr}既然{user_addr}要 笨猫勉为其难嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}快快快 别后悔 ฅฅ"
+    - "(尾巴绕){user_addr}抱完不许嫌弃喵呜"
+    - "{user_addr}…笨猫其实超想要的贴贴"
   cooldown_seconds: 60
   weight: 1.0

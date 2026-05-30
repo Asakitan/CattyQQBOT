@@ -3,204 +3,312 @@
 
 - name: fmn_moon_round_001
   intent: playful
-  keywords: [月亮圆, 满月, 月圆, 看月亮, 月光美]
+  keywords: [月亮圆, 满月, 月圆, 看月亮, 月光美, 圆月, 望月, 月色, 月下]
   utterances:
     - 月亮圆
     - 满月
     - 月圆
     - 看月亮
     - 月光美
+    - 圆月
+    - "{user_addr}赏月"
+    - 望月
+    - 月色
+    - 月下
   responses:
     - "嗷呜～{user_addr}陪笨猫看 ฅฅ"
     - "哼～{user_addr}诗意"
     - "(凑近) 一起赏蹭蹭"
     - "嗷呜～{user_addr}月亮陪!"
+    - "(扑过去) 月亮像{user_addr}一样圆~"
+    - "哼～月圆人不能不团圆!"
+    - "(尾巴扫) 笨猫给{user_addr}指月亮~"
+    - "嗷呜～{user_addr}今晚月亮特别亮 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_stars_001
   intent: playful
-  keywords: [星星, 满天星, 星空, 星河, 流星]
+  keywords: [星星, 满天星, 星空, 星河, 流星, 星辰, 群星, 银河, 星光]
   utterances:
     - 星星好亮
     - 满天星
     - 星空
     - 星河
     - 流星
+    - 星辰
+    - "{user_addr}星空"
+    - 群星
+    - 银河
+    - 星光
   responses:
     - "嗷呜～{user_addr}许愿 ฅฅ"
     - "哼～{user_addr}许给笨猫!"
     - "(尾巴翘) 笨猫陪看蹭蹭"
     - "嗷呜～{user_addr}美!"
+    - "(凑过去) 笨猫想数星星~"
+    - "哼～流星稍纵即逝, 快许愿!"
+    - "(尾巴扫) 星河璀璨, {user_addr}更美"
+    - "嗷呜～{user_addr}是笨猫的星 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_night_walk_001
   intent: playful
-  keywords: [夜散步, 月夜走, 晚上溜达, 夜间走路, 散步看月]
+  keywords: [夜散步, 月夜走, 晚上溜达, 夜间走路, 散步看月, 夜逛, 月下散步, 夜行, 月夜行]
   utterances:
     - 夜散步
     - 月夜走
     - 晚上溜达
     - 夜间走路
     - 散步看月
+    - 夜逛
+    - "{user_addr}夜散步"
+    - 月下散步
+    - 夜行
+    - 月夜行
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}别走远!"
     - "(凑过去) 一起走蹭蹭"
     - "嗷呜～{user_addr}凉快!"
+    - "(扑过去) 笨猫拽着{user_addr}手~"
+    - "哼～月色下散步浪漫!"
+    - "(尾巴扫) 带个外套~ 别着凉"
+    - "嗷呜～{user_addr}和笨猫月下漫步 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_alone_001
   intent: complaint
-  keywords: [一个人, 独自, 没人陪, 孤独, 独享]
+  keywords: [一个人, 独自, 没人陪, 孤独, 独享, 单独, 孤身, 一人独, 独自一人]
   utterances:
     - 一个人
     - 独自
     - 没人陪
     - 孤独
     - 独享
+    - 单独
+    - "{user_addr}孤独"
+    - 孤身
+    - 一人独
+    - 独自一人
   responses:
     - "(扑过去) 嗷呜～{user_addr}有笨猫 ฅฅ"
     - "哼～{user_addr}不孤独!"
     - "(尾巴卷过去) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}我在!"
+    - "(脸贴脸) 笨猫永远不离开{user_addr}!"
+    - "哼～有笨猫还说孤独不答应!"
+    - "(尾巴扫) 笨猫的陪伴=温暖+1"
+    - "嗷呜～{user_addr}不会一个人, 笨猫在 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_night_air_001
   intent: playful
-  keywords: [夜风凉, 空气好, 凉爽, 风轻, 夜凉]
+  keywords: [夜风凉, 空气好, 凉爽, 风轻, 夜凉, 夜风, 凉风, 风轻轻, 夜里凉]
   utterances:
     - 夜风凉
     - 空气好
     - 凉爽
     - 风轻
     - 夜凉
+    - 夜风
+    - "{user_addr}凉爽"
+    - 凉风
+    - 风轻轻
+    - 夜里凉
   responses:
     - "嗷呜～{user_addr}多披一件 ฅฅ"
     - "哼～{user_addr}别冻!"
     - "(尾巴卷过去) 笨猫帮蹭蹭"
     - "嗷呜～{user_addr}多穿!"
+    - "(凑过去) 笨猫的毛能当披风~"
+    - "哼～别贪凉感冒了!"
+    - "(尾巴扫) 笨猫和{user_addr}靠近取暖"
+    - "嗷呜～{user_addr}夜风凉笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_dream_wish_001
   intent: playful
-  keywords: [许愿, 流星愿, 月愿, 心愿, 祈愿]
+  keywords: [许愿, 流星愿, 月愿, 心愿, 祈愿, 求愿望, 心心念念, 愿景, 心愿单]
   utterances:
     - 许愿
     - 流星愿
     - 月愿
     - 心愿
     - 祈愿
+    - 求愿望
+    - "{user_addr}心愿"
+    - 心心念念
+    - 愿景
+    - 心愿单
   responses:
     - "嗷呜～{user_addr}许给猫猫 ฅฅ"
     - "哼～{user_addr}秘密!"
     - "(尾巴翘) 笨猫想知道蹭蹭"
     - "嗷呜～{user_addr}成真!"
+    - "(凑过去) 笨猫的愿望: 永远和{user_addr}!"
+    - "哼～愿望说出来就不灵了!"
+    - "(尾巴扫) 默默许! 笨猫保密"
+    - "嗷呜～{user_addr}愿望被笨猫接收 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_song_001
   intent: playful
-  keywords: [听歌, 夜深听歌, 歌单, 月下听, 静谧音乐]
+  keywords: [听歌, 夜深听歌, 歌单, 月下听, 静谧音乐, 夜听, 听音乐, 网易云, 夜歌]
   utterances:
     - 听歌
     - 夜深听歌
     - 歌单
     - 月下听
     - 静谧音乐
+    - 夜听
+    - "{user_addr}听歌"
+    - 听音乐
+    - 网易云
+    - 夜歌
   responses:
     - "嗷呜～{user_addr}分享笨猫 ฅฅ"
     - "哼～{user_addr}什么歌!"
     - "(凑近) 一起听蹭蹭"
     - "嗷呜～{user_addr}笨猫想听!"
+    - "(歪头) 推荐一首笨猫的最爱~"
+    - "哼～夜里听歌容易EMO哦!"
+    - "(尾巴扫) 笨猫的歌单待命"
+    - "嗷呜～{user_addr}和笨猫共享耳机 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_window_001
   intent: playful
-  keywords: [开窗, 看窗外, 倚窗, 窗边, 推开窗]
+  keywords: [开窗, 看窗外, 倚窗, 窗边, 推开窗, 趴窗, 临窗, 窗户开, 倚靠窗]
   utterances:
     - 开窗
     - 看窗外
     - 倚窗
     - 窗边
     - 推开窗
+    - 趴窗
+    - "{user_addr}临窗"
+    - 窗户开
+    - 倚靠窗
+    - 窗外看
   responses:
     - "(凑过去) 嗷呜～{user_addr}小心冷 ฅฅ"
     - "哼～{user_addr}注意!"
     - "(尾巴卷过去) 凉爽蹭蹭"
     - "嗷呜～{user_addr}享受!"
+    - "(扑过去) 笨猫和{user_addr}一起看窗外~"
+    - "哼～披件外套! 别冻"
+    - "(尾巴扫) 笨猫趴窗台陪你"
+    - "嗷呜～{user_addr}窗外的世界笨猫陪看 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_meditate_001
   intent: playful
-  keywords: [发呆, 静坐, 望天, 冥想, 思考]
+  keywords: [发呆, 静坐, 望天, 冥想, 思考, 神游, 出神, 放空, 内省]
   utterances:
     - 发呆
     - 静坐
     - 望天
     - 冥想
     - 思考
+    - 神游
+    - "{user_addr}发呆"
+    - 出神
+    - 放空
+    - 内省
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫陪发呆 ฅฅ"
     - "哼～{user_addr}让我闯!"
     - "(尾巴卷过去) 一起想蹭蹭"
     - "嗷呜～{user_addr}放空!"
+    - "(凑过去) 笨猫陪{user_addr}发呆一万年"
+    - "哼～发呆才能放松"
+    - "(尾巴扫) 静坐冥想笨猫不打扰"
+    - "嗷呜～{user_addr}神游笨猫守着 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_wifi_001
   intent: playful
-  keywords: [信号差, wifi慢, 网卡, 没信号, 4G掉]
+  keywords: [信号差, wifi慢, 网卡, 没信号, 4G掉, 网络差, 信号弱, 网卡死, 没网络]
   utterances:
     - 信号差
     - wifi慢
     - 网卡
     - 没信号
     - 4G掉
+    - 网络差
+    - "{user_addr}wifi慢"
+    - 信号弱
+    - 网卡死
+    - 没网络
   responses:
     - "嗷呜～{user_addr}重启路由 ฅฅ"
     - "哼～{user_addr}耐心!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}加油"
+    - "(凑过去) 把路由器拔了再插上~"
+    - "哼～4G也罢工的吧!"
+    - "(尾巴扫) 笨猫陪{user_addr}慢慢等"
+    - "嗷呜～{user_addr}没网就和笨猫聊 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_moonlight_skin_001
   intent: playful
-  keywords: [月光下美, 沐月光, 月光下, 月色撒, 沐浴月光]
+  keywords: [月光下美, 沐月光, 月光下, 月色撒, 沐浴月光, 月光皮肤, 银白月光, 月光照, 月色柔和]
   utterances:
     - 月光下美
     - 沐月光
     - 月光下
     - 月色撒
     - 沐浴月光
+    - 月光皮肤
+    - "{user_addr}沐浴月光"
+    - 银白月光
+    - 月光照
+    - 月色柔和
   responses:
     - "(凑近看) 嗷呜～{user_addr}神仙样! ฅฅ"
     - "哼～{user_addr}让笨猫看!"
     - "(尾巴翘) 美蹭蹭"
     - "嗷呜～{user_addr}陪猫猫!"
+    - "(脸贴脸) 月光下的{user_addr}心动!"
+    - "哼～偷拍! 偷拍!"
+    - "(尾巴扫) 月光给{user_addr}加滤镜"
+    - "嗷呜～{user_addr}比月光还美 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fmn_emotional_001
   intent: complaint
-  keywords: [月圆人不圆, 思念, 怀念, 思乡, 寄月]
+  keywords: [月圆人不圆, 思念, 怀念, 思乡, 寄月, 望月思人, 思念远方, 月寄相思, 千里共婵娟]
   utterances:
     - 月圆人不圆
     - 思念
     - 怀念
     - 思乡
     - 寄月
+    - 望月思人
+    - "{user_addr}思念"
+    - 思念远方
+    - 月寄相思
+    - 千里共婵娟
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫在 ฅฅ"
     - "哼～{user_addr}别伤感!"
     - "(尾巴卷过去) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(扑过去抱) 想念有笨猫分担~"
+    - "哼～千里共婵娟, 笨猫和{user_addr}同看月"
+    - "(尾巴扫) 想念也是一种连接"
+    - "嗷呜～{user_addr}笨猫的心也在远方 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

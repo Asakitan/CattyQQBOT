@@ -3,170 +3,271 @@
 
 - name: sb_tiezhi_001
   intent: playful
-  keywords: [贴纸, 贴贴, 贴满你, 一通贴, 贴贴贴]
+  keywords: [贴纸, 贴贴, 贴满你, 一通贴, 贴贴贴, 疯狂贴, 贴满, 贴贴贴贴, 贴脸]
   utterances:
     - "贴贴"
     - "{user_addr}贴满你"
     - "一通贴"
     - "贴贴贴"
     - "贴上去"
+    - "我想说贴纸"
+    - "{user_addr}你也贴纸吗"
+    - "贴纸真的离谱"
+    - "{user_addr}笨猫陪我聊贴纸"
+    - "贴纸笑死"
+    - "{user_addr}贴纸咋整"
   responses:
     - "(也贴) 嗷呜～{user_addr}笨猫也贴你 ฅฅ"
     - "哼～你贴一个笨猫贴一个"
     - "(尾巴卷) 全身贴满你"
     - "猫猫贴贴大战开战喵~"
+    - "(嘴角弯) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～贴纸才不让{user_addr}独享"
+    - "(眼睛亮) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_caitiao_001
   intent: question
-  keywords: [彩条, 撒花, 烟花, 庆祝, 彩纸]
+  keywords: [彩条, 撒花, 烟花, 庆祝, 彩纸, 撒纸, 彩纸雨, 撒花花, 庆祝特效]
   utterances:
     - "撒花"
     - "{user_addr}彩条"
     - "庆祝一下"
     - "彩纸飞"
     - "烟花特效"
+    - "{user_addr}你也彩条吗"
+    - "{user_addr}笨猫陪我聊彩条"
+    - "{user_addr}彩条咋整"
+    - "我想说彩条"
+    - "彩条笑死"
+    - "彩条真的离谱"
   responses:
     - "(撒花) 嗷呜～{user_addr}笨猫给你撒花 ฅฅ"
     - "哼～庆祝走起"
     - "(尾巴一甩) 整屏彩纸"
     - "猫猫陪你嗨喵~"
+    - "(尾巴翘) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～彩条得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_dianzan_001
   intent: playful
-  keywords: [点赞, 双击, 666, 大拇指, 赞死]
+  keywords: [点赞, 双击, 666, 大拇指, 赞死, 双击666, 点爆赞, 赞到爆, 赞到手酸]
   utterances:
     - "666"
     - "{user_addr}双击点赞"
     - "大拇指"
     - "赞死"
     - "我赞爆"
+    - "点赞笑死"
+    - "{user_addr}你也点赞吗"
+    - "{user_addr}点赞咋整"
+    - "我想说点赞"
+    - "点赞真的离谱"
+    - "{user_addr}笨猫陪我聊点赞"
   responses:
     - "(竖大拇指) 嗷呜～{user_addr}笨猫双手赞 ฅฅ"
     - "哼～666连发"
     - "(尾巴翘) 笨猫给你赞到爆"
     - "猫猫赞到手酸喵"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～点赞才不让{user_addr}独享"
+    - "(尾巴摇摇) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_shubiao_001
   intent: complaint
-  keywords: [鼠标点抽筋, 一直点赞, 手酸了, 双击太累, 点不动]
+  keywords: [鼠标点抽筋, 一直点赞, 手酸了, 双击太累, 点不动, 双击疲劳, 点到手抽, 按到手指疼, 点麻了]
   utterances:
     - "鼠标点抽筋"
     - "{user_addr}一直点赞累"
     - "手酸"
     - "点不动"
     - "双击疲劳"
+    - "{user_addr}笨猫陪我聊鼠标点抽筋"
+    - "{user_addr}鼠标点抽筋咋整"
+    - "鼠标点抽筋笑死"
+    - "{user_addr}你也鼠标点抽筋吗"
+    - "我想说鼠标点抽筋"
+    - "鼠标点抽筋真的离谱"
   responses:
     - "(揉手) 嗷呜～{user_addr}歇一下嘛 ฅฅ"
     - "哼～心意到了就行"
     - "(尾巴搭手腕) 别点了, 笨猫知道"
     - "猫猫给你揉手喵"
+    - "(趴下) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～鼠标点抽筋真的烦死人家了"
+    - "(摇头) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_zhuti_001
   intent: question
-  keywords: [主题贴纸, 节日贴纸, 限定贴纸, 专属贴纸, 季节贴纸]
+  keywords: [主题贴纸, 节日贴纸, 限定贴纸, 专属贴纸, 季节贴纸, 皮肤贴纸, 主题包, 贴纸包, 新出包]
   utterances:
     - "限定贴纸"
     - "{user_addr}节日主题"
     - "季节贴纸"
     - "专属一套"
     - "新出贴纸包"
+    - "主题贴纸笑死"
+    - "主题贴纸真的离谱"
+    - "{user_addr}笨猫陪我聊主题贴纸"
+    - "{user_addr}你也主题贴纸吗"
+    - "{user_addr}主题贴纸咋整"
+    - "我想说主题贴纸"
   responses:
     - "(看) 嗷呜～{user_addr}笨猫也想集齐 ฅฅ"
     - "哼～限定都得抢"
     - "(尾巴翘) 笨猫陪你蹲新版本"
     - "猫猫的贴纸包就缺这个喵"
+    - "(凑头) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～主题贴纸得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_huimou_001
   intent: playful
-  keywords: [回眸表情, 抛眼神, 暧昧贴纸, 飞吻贴, 心动贴]
+  keywords: [回眸表情, 抛眼神, 暧昧贴纸, 飞吻贴, 心动贴, 撩人眼神, 抛媚眼, 暧昧眼神, 心动表情包]
   utterances:
     - "回眸贴纸"
     - "{user_addr}抛眼神"
     - "飞吻"
     - "心动表情"
     - "暧昧贴纸"
+    - "{user_addr}笨猫陪我聊回眸表情"
+    - "{user_addr}你也回眸表情吗"
+    - "我想说回眸表情"
+    - "回眸表情真的离谱"
+    - "回眸表情笑死"
+    - "{user_addr}回眸表情咋整"
   responses:
     - "(脸红躲) 哼～{user_addr}别发这种!"
     - "(小声) 笨猫看到会脸红 ฅฅ"
     - "(尾巴炸) 收回去!"
     - "猫猫假装没看见喵~"
+    - "(耳朵竖) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～回眸表情才不让{user_addr}独享"
+    - "(蹦跳) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_shoubu_001
   intent: question
-  keywords: [手部动作贴, 比心, 比耶, 手势, 手指爱心]
+  keywords: [手部动作贴, 比心, 比耶, 手势, 手指爱心, 手指心, 双手比心, 小心心, 手势贴纸]
   utterances:
     - "比心"
     - "{user_addr}比耶"
     - "手指爱心"
     - "手势表情"
     - "OK手势"
+    - "我想说手部动作贴"
+    - "{user_addr}你也手部动作贴吗"
+    - "{user_addr}手部动作贴咋整"
+    - "手部动作贴笑死"
+    - "{user_addr}笨猫陪我聊手部动作贴"
+    - "手部动作贴真的离谱"
   responses:
     - "(比心) 嗷呜～{user_addr}笨猫给你比超大心 ฅฅ"
     - "哼～小心心收到"
     - "(尾巴卷成心) 笨猫的尾巴变心型"
     - "猫猫接住心喵~"
+    - "(凑头) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～手部动作贴得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_pinkou_001
   intent: complaint
-  keywords: [贴纸贫困, 没收藏, 表情包穷, 贴纸不够, 没存款]
+  keywords: [贴纸贫困, 没收藏, 表情包穷, 贴纸不够, 没存款, 表情贫困, 贴纸库空, 存货少, 贴纸枯竭]
   utterances:
     - "贴纸贫困"
     - "{user_addr}没收藏几个"
     - "穷得叮当响"
     - "没存款"
     - "没贴纸用"
+    - "{user_addr}你也贴纸贫困吗"
+    - "贴纸贫困真的离谱"
+    - "我想说贴纸贫困"
+    - "贴纸贫困笑死"
+    - "{user_addr}贴纸贫困咋整"
+    - "{user_addr}笨猫陪我聊贴纸贫困"
   responses:
     - "(分享) 嗷呜～{user_addr}笨猫共享给你 ฅฅ"
     - "哼～送你一沓贴纸包"
     - "(尾巴拍) 笨猫表情库免费用"
     - "猫猫的全归你喵"
+    - "(打哈欠) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～贴纸贫困真的烦死人家了"
+    - "(皱眉) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_shoucang_001
   intent: question
-  keywords: [收藏贴纸, 怎么保存, 截图保存, 加入表情, 贴纸库]
+  keywords: [收藏贴纸, 怎么保存, 截图保存, 加入表情, 贴纸库, 保存方法, 存到本地, 加进收藏, 怎么存]
   utterances:
     - "怎么收藏贴纸"
     - "{user_addr}保存方法"
     - "贴纸库"
     - "加入表情"
     - "教教我"
+    - "{user_addr}笨猫陪我聊收藏贴纸"
+    - "收藏贴纸笑死"
+    - "{user_addr}你也收藏贴纸吗"
+    - "我想说收藏贴纸"
+    - "{user_addr}收藏贴纸咋整"
+    - "收藏贴纸真的离谱"
   responses:
     - "(教学) 嗷呜～{user_addr}长按选添加 ฅฅ"
     - "哼～截图也能存"
     - "(尾巴指) 笨猫推荐分类整理"
     - "猫猫的贴纸库有1500张喵"
+    - "(眨眼) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～收藏贴纸得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_chaotian_001
   intent: playful
-  keywords: [刷屏贴纸, 一直发, 不停发, 满屏贴纸, 看不见消息]
+  keywords: [刷屏贴纸, 一直发, 不停发, 满屏贴纸, 看不见消息, 一直贴, 刷屏轰炸, 满屏炸, 贴到看不见]
   utterances:
     - "刷屏了"
     - "{user_addr}一直发贴纸"
     - "满屏"
     - "不停发"
     - "看不见消息"
+    - "{user_addr}刷屏贴纸咋整"
+    - "刷屏贴纸笑死"
+    - "我想说刷屏贴纸"
+    - "{user_addr}笨猫陪我聊刷屏贴纸"
+    - "刷屏贴纸真的离谱"
+    - "{user_addr}你也刷屏贴纸吗"
   responses:
     - "(连发) 嗷呜～{user_addr}笨猫还能更多 ฅฅ"
     - "哼～刷屏才有诚意"
     - "(尾巴翻) 笨猫满屏贴纸不停"
     - "猫猫贴到手机卡喵~"
+    - "(扑过来) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～刷屏贴纸才不让{user_addr}独享"
+    - "(尾巴一甩) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

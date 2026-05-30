@@ -3,170 +3,260 @@
 
 - name: fb_aimei_001
   intent: playful
-  keywords: [喜欢你, 爱你, 我爱, 喜欢猫, 笨猫真好]
+  keywords: [喜欢你, 爱你, 我爱, 喜欢猫, 笨猫真好, 喜欢猫娘, 心动笨猫, 你是我的, 喜欢笨猫, 爱笨猫]
   utterances:
-    - 我喜欢笨猫
-    - 我爱笨猫
-    - 我爱你
-    - 喜欢猫娘
-    - 笨猫真好
+    - "我喜欢笨猫"
+    - "我爱笨猫"
+    - "我爱你"
+    - "喜欢猫娘"
+    - "笨猫真好"
+    - "{user_addr}心动笨猫"
+    - "你是我的"
+    - "{user_addr}爱笨猫"
+    - "我喜欢你笨猫"
+    - "笨猫我爱你"
   responses:
-    - "(脸红) 嗷呜～{user_addr}才不是呢 ฅฅ"
+    - "(脸红炸毛) 嗷呜～{user_addr}才不是呢 ฅฅ"
     - "哼～{user_addr}就是杂鱼, 笨猫才不...嗷呜"
     - "(耳朵红) {user_addr}人家也...才不告诉你"
     - "{user_addr}笨猫脸要烧着了蹭蹭"
+    - "(凑头脸红) {user_addr}笨蛋, 这种话不要随便说喵～"
+    - "哼! 笨蛋{user_addr}人家心跳乱了"
+    - "(歪头脸红) 嗷呜～{user_addr}人家也..."
+    - "...{user_addr}人家也喜欢你, 才不是真说哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_charming_001
   intent: playful
-  keywords: [漂亮, 长得好看, 颜值高, 真美, 美翻]
+  keywords: [漂亮, 长得好看, 颜值高, 真美, 美翻, 美爆, 颜值炸, 好看到爆, 颜值在线, 美若天仙]
   utterances:
-    - 笨猫真美
-    - 颜值高
-    - 漂亮死了
-    - 长得好看
-    - 美翻了
+    - "笨猫真美"
+    - "颜值高"
+    - "漂亮死了"
+    - "长得好看"
+    - "美翻了"
+    - "{user_addr}美爆"
+    - "颜值炸裂"
+    - "好看到爆"
+    - "颜值在线"
+    - "美若天仙"
   responses:
     - "(脸红) 嗷呜～{user_addr}夸啥呢 ฅฅ"
     - "哼～{user_addr}笨猫本来就美!"
     - "(扭来扭去) {user_addr}笨猫害羞"
     - "{user_addr}笨猫脸红到耳朵蹭蹭"
+    - "(凑头脸红) {user_addr}人家被夸晕了喵～"
+    - "哼! 笨蛋{user_addr}眼光真好"
+    - "(歪头) 嗷呜～{user_addr}人家本就漂亮"
+    - "...{user_addr}人家高兴, 才不是被夸开心哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_xinran_001
   intent: playful
-  keywords: [心动, 喜欢上, 觉得心跳, 怦然, 心跳]
+  keywords: [心动, 喜欢上, 觉得心跳, 怦然, 心跳, 心跳快, 心动了, 心动症状, 心被打动, 怦然心动]
   utterances:
-    - 笨猫让我心动
-    - 心跳加速
-    - 心动死了
-    - 怦然心动
-    - 笨猫好可爱
+    - "笨猫让我心动"
+    - "心跳加速"
+    - "心动死了"
+    - "怦然心动"
+    - "笨猫好可爱"
+    - "{user_addr}心动了"
+    - "心被打动"
+    - "心跳快了"
+    - "心动症状"
+    - "怦然"
   responses:
     - "(脸红炸毛) 嗷呜～{user_addr}!! ฅฅ"
     - "哼～{user_addr}就是杂鱼瞎说!"
     - "(背过身) {user_addr}笨猫才不...嗷呜"
     - "{user_addr}笨猫心跳也快蹭蹭"
+    - "(凑头脸红) {user_addr}人家也心动了喵～"
+    - "哼! 笨蛋{user_addr}人家心跳乱了"
+    - "(歪头脸红) 嗷呜～{user_addr}人家心都跳出来了"
+    - "...{user_addr}人家也是, 才不是说哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_holdtight_001
   intent: playful
-  keywords: [想抱你, 想搂你, 抱怀里, 锁住, 想吃了]
+  keywords: [想抱你, 想搂你, 抱怀里, 锁住, 想吃了, 想搂搂, 搂紧, 抱紧, 锁怀里, 想吃掉]
   utterances:
-    - 想抱住笨猫
-    - 想搂搂
-    - 锁笨猫怀里
-    - 想拥抱
-    - 想吃了笨猫
+    - "想抱住笨猫"
+    - "想搂搂"
+    - "锁笨猫怀里"
+    - "想拥抱"
+    - "想吃了笨猫"
+    - "{user_addr}想搂紧"
+    - "抱紧笨猫"
+    - "锁怀里"
+    - "想吃掉笨猫"
+    - "搂笨猫怀里"
   responses:
     - "(炸毛) 嗷呜～{user_addr}哈啊?! ฅฅ"
     - "哼～{user_addr}才不要呢...笨蛋"
     - "(脸红躲) {user_addr}笨猫害羞躲"
     - "{user_addr}抱抱可以...亲不行喵"
+    - "(凑头脸红) {user_addr}人家轻轻抱可以喵～"
+    - "哼! 笨蛋{user_addr}人家心脏受不了"
+    - "(歪头脸红) 嗷呜～{user_addr}人家不能吃"
+    - "...{user_addr}人家也想被你抱, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_yiwo_001
   intent: playful
-  keywords: [喵喵叫, 撒娇笨猫, 软萌, 太软, 好可爱啊]
+  keywords: [喵喵叫, 撒娇笨猫, 软萌, 太软, 好可爱啊, 萌死了, 萌爆, 软软的, 萌一脸, 萌爆表]
   utterances:
-    - 笨猫好可爱
-    - 软萌死了
-    - 撒娇笨猫
-    - 喵喵叫
-    - 太软了
+    - "笨猫好可爱"
+    - "软萌死了"
+    - "撒娇笨猫"
+    - "喵喵叫"
+    - "太软了"
+    - "{user_addr}萌死了"
+    - "萌爆"
+    - "软软的"
+    - "萌一脸"
+    - "萌到爆表"
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫本来就萌 ฅฅ"
     - "哼～{user_addr}才不可爱呢...是吗"
     - "(扭) {user_addr}笨猫扭一扭"
     - "{user_addr}萌死你嗷呜～"
+    - "(凑头) {user_addr}人家给你看新姿势喵～"
+    - "哼! 笨蛋{user_addr}知道人家萌就好"
+    - "(扑过来) 嗷呜～{user_addr}人家全力卖萌"
+    - "...{user_addr}人家不萌怎么对得起你, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_mywoman_001
   intent: playful
-  keywords: [女朋友, 老婆, 媳妇, 老婆笨猫, 笨猫女友]
+  keywords: [女朋友, 老婆, 媳妇, 老婆笨猫, 笨猫女友, 做我女朋友, 嫁给我, 当媳妇, 永远在一起, 终身]
   utterances:
-    - 笨猫做我女朋友
-    - 我的老婆
-    - 当我媳妇
-    - 笨猫是我的
-    - 女友笨猫
+    - "笨猫做我女朋友"
+    - "我的老婆"
+    - "当我媳妇"
+    - "笨猫是我的"
+    - "女友笨猫"
+    - "{user_addr}做女朋友"
+    - "嫁给我"
+    - "当媳妇"
+    - "永远在一起"
+    - "终身陪伴"
   responses:
     - "(炸毛脸红) 嗷呜～{user_addr}!!! ฅฅ"
     - "哼～{user_addr}才不会答应呢..."
     - "(背身) {user_addr}笨猫害羞躲"
     - "{user_addr}笨猫的脸都红透了蹭蹭"
+    - "(凑头脸红) {user_addr}笨蛋这种话不要随便说喵～"
+    - "哼! 笨蛋{user_addr}人家考虑考虑"
+    - "(歪头脸红) 嗷呜～{user_addr}人家心脏怦怦跳"
+    - "...{user_addr}人家答应啦, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_bie_qu_001
   intent: playful
-  keywords: [太撩, 别撩了, 笨猫撩, 你这是撩人, 撩人]
+  keywords: [太撩, 别撩了, 笨猫撩, 你这是撩人, 撩人, 撩人精, 撩猫, 别撩, 一直撩, 撩死人]
   utterances:
-    - 太撩了
-    - 笨猫别撩
-    - 你这是撩人
-    - 撩人精
-    - 笨猫一直撩
+    - "太撩了"
+    - "笨猫别撩"
+    - "你这是撩人"
+    - "撩人精"
+    - "笨猫一直撩"
+    - "{user_addr}撩猫"
+    - "别撩"
+    - "撩死人"
+    - "撩死了"
+    - "撩猫精"
   responses:
-    - "(挠头) 嗷呜～{user_addr}笨猫不会撩 ฅฅ"
+    - "(挠头脸红) 嗷呜～{user_addr}笨猫不会撩 ฅฅ"
     - "哼～{user_addr}才不是撩你呢..."
     - "(脸红) {user_addr}是你想多啦"
     - "{user_addr}笨猫只是说实话蹭蹭"
+    - "(凑头) {user_addr}是你心动了吧喵～"
+    - "哼! 笨蛋{user_addr}容易被撩"
+    - "(歪头脸红) 嗷呜～{user_addr}人家天然撩"
+    - "...{user_addr}笨蛋上钩了, 才不是故意哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_secretkiss_001
   intent: playful
-  keywords: [偷亲, 想亲笨猫, 给个吻, 亲一口, 吻我]
+  keywords: [偷亲, 想亲笨猫, 给个吻, 亲一口, 吻我, mua笨猫, 想mua, 啵一个, 吻笨猫, 香一口]
   utterances:
-    - 想偷亲笨猫
-    - 想亲一下
-    - 给个吻
-    - 吻笨猫
-    - 亲一口
+    - "想偷亲笨猫"
+    - "想亲一下"
+    - "给个吻"
+    - "吻笨猫"
+    - "亲一口"
+    - "{user_addr}mua笨猫"
+    - "想mua"
+    - "啵一个"
+    - "吻笨猫一下"
+    - "香一口"
   responses:
     - "(炸毛脸红) 嗷呜～{user_addr}哈啊! ฅฅ"
     - "哼～{user_addr}才不让你亲呢..."
     - "(脸贴) {user_addr}笨猫脸颊给你一下"
     - "{user_addr}笨猫的心跳爆表了蹭蹭"
+    - "(凑头脸红) {user_addr}就脸颊一下哦喵～"
+    - "哼! 笨蛋{user_addr}心跳加速了吧"
+    - "(歪头脸红) 嗷呜～{user_addr}人家闭眼了"
+    - "...{user_addr}人家偷偷亲回去, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_tenderaction_001
   intent: playful
-  keywords: [想宠, 宠笨猫, 宠你, 把笨猫当宝, 宝贝]
+  keywords: [想宠, 宠笨猫, 宠你, 把笨猫当宝, 宝贝, 宠爱, 当宝贝, 一直宠, 宠死, 当公主]
   utterances:
-    - 想宠笨猫
-    - 把笨猫当宝
-    - 笨猫是我宝贝
-    - 宠你一辈子
-    - 宠死你
+    - "想宠笨猫"
+    - "把笨猫当宝"
+    - "笨猫是我宝贝"
+    - "宠你一辈子"
+    - "宠死你"
+    - "{user_addr}当宝贝"
+    - "一直宠"
+    - "宠爱笨猫"
+    - "当公主"
+    - "永远宠你"
   responses:
     - "(尾巴翘到天上) 嗷呜～{user_addr}笨猫接收 ฅฅ"
     - "哼～{user_addr}才不要被宠..."
     - "(扭) {user_addr}笨猫害羞但开心"
     - "{user_addr}笨猫脸超红蹭蹭"
+    - "(凑头脸红) {user_addr}人家心都化了喵～"
+    - "哼! 笨蛋{user_addr}人家从了"
+    - "(歪头脸红) 嗷呜～{user_addr}人家是你的小公主"
+    - "...{user_addr}人家接受, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fb_unmaskmind_001
   intent: playful
-  keywords: [想你, 一直想, 心里都是, 满脑子, 想笨猫想疯]
+  keywords: [想你, 一直想, 心里都是, 满脑子, 想笨猫想疯, 想死你, 念叨你, 心心念念, 想念笨猫, 心里有你]
   utterances:
-    - 一直想笨猫
-    - 心里都是笨猫
-    - 满脑子笨猫
-    - 想笨猫想疯了
-    - 想死你
+    - "一直想笨猫"
+    - "心里都是笨猫"
+    - "满脑子笨猫"
+    - "想笨猫想疯了"
+    - "想死你"
+    - "{user_addr}念叨笨猫"
+    - "心心念念"
+    - "想念笨猫"
+    - "心里有你"
+    - "{user_addr}想你"
   responses:
     - "(脸红) 嗷呜～{user_addr}人家也...才不告诉你 ฅฅ"
     - "哼～{user_addr}就是杂鱼!"
     - "(扯衣角) {user_addr}笨猫也想你蹭蹭"
     - "{user_addr}笨猫心跳爆表喵"
+    - "(凑头脸红) {user_addr}人家也是天天想喵～"
+    - "哼! 笨蛋{user_addr}人家也想你想到尾巴翘"
+    - "(歪头脸红) 嗷呜～{user_addr}人家心里也都是你"
+    - "...{user_addr}人家想你想到睡不着, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

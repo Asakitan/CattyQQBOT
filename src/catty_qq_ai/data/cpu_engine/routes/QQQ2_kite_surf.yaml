@@ -1,206 +1,315 @@
 # 风筝冲浪 routes (S6 R704 NLU 节点扩充, 第七十周期 3/10)
 # 主人 2026-05-29: 推荐型, 带笨猫语气
+# R4 weak 扩 keywords/utterances/responses
 
 - name: ks_intro_001
   intent: question
-  keywords: [推荐风筝冲浪, 推荐 kitesurf, 推荐 kiteboarding, 推荐入门风筝冲浪, 笨猫风筝冲浪]
+  keywords: [推荐风筝冲浪, 推荐 kitesurf, 推荐 kiteboarding, 推荐入门风筝冲浪, 笨猫风筝冲浪, kitesurf, 风筝冲浪入门, 风筝板, kite 冲浪, 玩风筝冲浪]
   utterances:
     - 推荐风筝冲浪
     - 推荐 kitesurf
     - 推荐 kiteboarding
     - 推荐入门风筝冲浪
     - 笨猫风筝冲浪
+    - "{user_addr}风筝冲浪难学吗"
+    - 想试试 kitesurf
+    - 风筝冲浪怎么入门
+    - "{user_addr}给猫猫讲讲风筝冲浪"
+    - 风筝冲浪好玩吗
   responses:
     - "嗷呜～{user_addr}风筝冲浪 - 风+板+海ฅฅ"
-    - "(尾巴翘) 自由飞翔的感觉超棒"
+    - "(尾巴翘) 自由飞翔的感觉超棒喵"
     - "{user_addr}入门 10-15h 培训"
     - "(挺胸) 笨猫推荐: 找正规学校!"
+    - "(眼睛发亮) 风筝拉着人飞起来超酷的{user_addr}~"
+    - "嗷呜～入门别自学嘛{user_addr}, 容易出事的喵"
+    - "(尾巴甩甩) 风+海+板三件套, 缺一不可ฅฅ"
+    - "哼～{user_addr}玩这个的话猫猫在岸上给{user_addr}加油!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ks_hainan_001
   intent: question
-  keywords: [推荐海南风筝冲浪, 推荐琼海, 推荐三亚 kitesurf, 推荐国内入门点, 笨猫海南]
+  keywords: [推荐海南风筝冲浪, 推荐琼海, 推荐三亚 kitesurf, 推荐国内入门点, 笨猫海南, 海南玩风筝, 琼海日月湾, 海陵岛 kitesurf, 国内风筝冲浪, 三亚风筝]
   utterances:
     - 推荐海南风筝冲浪
     - 推荐琼海
     - 推荐三亚 kitesurf
     - 推荐国内入门点
     - 笨猫海南
+    - "{user_addr}海南哪里玩风筝冲浪"
+    - 日月湾怎么样
+    - 国内风筝冲浪去哪
+    - "{user_addr}想去海南学 kitesurf"
+    - 海陵岛能玩吗
   responses:
     - "嗷呜～{user_addr}海南琼海 - 国内圣地ฅฅ"
-    - "(尾巴翘) 11-3 月东北季风"
-    - "{user_addr}日月湾 / 海陵岛"
+    - "(尾巴翘) 11-3 月东北季风稳"
+    - "{user_addr}日月湾 / 海陵岛都行"
     - "(挺胸) 笨猫推荐: 琼海博鳌!"
+    - "嗷呜～海南冬天才好玩{user_addr}, 夏天没风"
+    - "(尾巴甩甩) 日月湾设施齐 / 学校多 / 适合入门"
+    - "哼～{user_addr}带猫猫去海南嘛, 笨猫想看海喵ฅฅ"
+    - "(歪头) 国内玩 kitesurf 海南是首选{user_addr}~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ks_thailand_001
   intent: question
-  keywords: [推荐泰国风筝冲浪, 推荐华欣, 推荐普吉, 推荐 Thailand kitesurf, 笨猫泰国]
+  keywords: [推荐泰国风筝冲浪, 推荐华欣, 推荐普吉, 推荐 Thailand kitesurf, 笨猫泰国, Hua Hin, 泰国 kite, 华欣风筝冲浪, 苏梅 kitesurf, 泰国学风筝]
   utterances:
     - 推荐泰国风筝冲浪
     - 推荐华欣
     - 推荐普吉
     - 推荐 Thailand kitesurf
     - 笨猫泰国
+    - "{user_addr}泰国学 kitesurf 怎么样"
+    - 华欣值得去吗
+    - 泰国哪里风筝冲浪好
+    - "{user_addr}想去华欣"
+    - 苏梅 kitesurf 行不
   responses:
     - "嗷呜～{user_addr}华欣 Hua Hin - 入门天堂ฅฅ"
     - "(尾巴翘) 浅水 / 稳定风 / 学校多"
     - "{user_addr}苏梅 / 普吉次选"
     - "(挺胸) 笨猫推荐: 华欣 1-4 月!"
+    - "嗷呜～华欣超适合新手{user_addr}, 水不深不怕"
+    - "(尾巴甩甩) 泰国便宜 / 教练好 / 性价比顶ฅฅ"
+    - "哼～{user_addr}去泰国别忘了带猫猫嘛喵"
+    - "(挺胸) 笨猫提醒: 别 5-9 月去, 风不稳!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ks_vietnam_001
   intent: question
-  keywords: [推荐越南风筝冲浪, 推荐美奈, 推荐 Mui Ne, 推荐 Vietnam kitesurf, 笨猫越南]
+  keywords: [推荐越南风筝冲浪, 推荐美奈, 推荐 Mui Ne, 推荐 Vietnam kitesurf, 笨猫越南, 美奈风筝冲浪, 越南 kite, 美奈学风筝, Vietnam kite, 越南风筝之都]
   utterances:
     - 推荐越南风筝冲浪
     - 推荐美奈
     - 推荐 Mui Ne
     - 推荐 Vietnam kitesurf
     - 笨猫越南
+    - "{user_addr}美奈值得去吗"
+    - 越南 kitesurf 怎么样
+    - 想去 Mui Ne 学风筝
+    - "{user_addr}美奈进阶适合吗"
+    - 越南风筝冲浪贵不贵
   responses:
     - "嗷呜～{user_addr}美奈 Mui Ne - 亚洲风筝之都ฅฅ"
     - "(尾巴翘) 11-3 月稳定 18-25 节"
     - "{user_addr}沙滩长 / 学校便宜"
     - "(挺胸) 笨猫推荐: 美奈进阶圣地!"
+    - "嗷呜～美奈风超稳{user_addr}, 进阶必去"
+    - "(尾巴甩甩) 沙滩绵延几公里 / 想跳多远跳多远喵"
+    - "哼～{user_addr}越南便宜, 工资党友好ฅฅ"
+    - "(歪头) 美奈是亚洲第一选 / 别只盯泰国{user_addr}"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ks_kite_brand_001
   intent: question
-  keywords: [推荐风筝品牌, 推荐 North, 推荐 Cabrinha, 推荐 Duotone, 笨猫风筝品牌]
+  keywords: [推荐风筝品牌, 推荐 North, 推荐 Cabrinha, 推荐 Duotone, 笨猫风筝品牌, 风筝牌子, Core kite, F-One 风筝, Naish 风筝, 推荐 kite 品牌]
   utterances:
     - 推荐风筝品牌
     - 推荐 North
     - 推荐 Cabrinha
     - 推荐 Duotone
     - 笨猫风筝品牌
+    - "{user_addr}风筝哪个牌子好"
+    - Duotone 和 Cabrinha 选哪个
+    - 入门风筝怎么选
+    - "{user_addr}给猫猫推荐风筝品牌"
+    - 9m 还是 12m 风筝
   responses:
     - "嗷呜～{user_addr}North / Duotone - 老牌强ฅฅ"
-    - "(尾巴翘) Cabrinha / Core / F-One"
+    - "(尾巴翘) Cabrinha / Core / F-One 也行"
     - "{user_addr}9m + 12m 双风筝组合"
     - "(挺胸) 笨猫推荐: Duotone Evo!"
+    - "嗷呜～入门选 Duotone Evo 错不了{user_addr}"
+    - "(尾巴甩甩) Cabrinha 操控性好 / 适合自由式喵"
+    - "哼～{user_addr}买二手也行 / 状态好就够ฅฅ"
+    - "(歪头) 别贪小风筝{user_addr}, 大点好控制!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ks_board_brand_001
   intent: question
-  keywords: [推荐风筝板, 推荐 Naish, 推荐 twintip, 推荐 surfboard, 笨猫板子]
+  keywords: [推荐风筝板, 推荐 Naish, 推荐 twintip, 推荐 surfboard, 笨猫板子, kite 板, 双向板, 风筝冲浪板, 138cm 板, kiteboard]
   utterances:
     - 推荐风筝板
     - 推荐 Naish
     - 推荐 twintip
     - 推荐 surfboard
     - 笨猫板子
+    - "{user_addr}风筝板怎么选"
+    - 双向板还是冲浪板
+    - 入门板尺寸多少
+    - "{user_addr}给猫猫看看板"
+    - twintip 好用吗
   responses:
     - "嗷呜～{user_addr}Naish / North - 双向板ฅฅ"
     - "(尾巴翘) twintip 入门 / surfboard 进阶"
     - "{user_addr}138-142cm 入门尺寸"
     - "(挺胸) 笨猫推荐: Naish Stomp 入门!"
+    - "嗷呜～入门一定 twintip 喵{user_addr}, 学得快"
+    - "(尾巴甩甩) surfboard 进阶后再换 / 别一上来贪难ฅฅ"
+    - "哼～{user_addr}板小好操作 / 别买太大!"
+    - "(歪头) 体重不同尺寸不同{user_addr}, 听教练的"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ks_school_001
   intent: question
-  keywords: [推荐风筝学校, 推荐 IKO 认证, 推荐 kitesurf school, 推荐培训, 笨猫学校]
+  keywords: [推荐风筝学校, 推荐 IKO 认证, 推荐 kitesurf school, 推荐培训, 笨猫学校, 风筝冲浪学校, IKO 教练, kitesurf 培训, 风筝冲浪课程, VDWS 认证]
   utterances:
     - 推荐风筝学校
     - 推荐 IKO 认证
     - 推荐 kitesurf school
     - 推荐培训
     - 笨猫学校
+    - "{user_addr}怎么选风筝学校"
+    - IKO 是什么认证
+    - 学风筝大概多少钱
+    - "{user_addr}1:1 教练好吗"
+    - 自学风筝行不行
   responses:
     - "嗷呜～{user_addr}认 IKO / VDWS 认证ฅฅ"
-    - "(尾巴翘) 1:1 私教 / 小班"
+    - "(尾巴翘) 1:1 私教 / 小班都行"
     - "{user_addr}琼海 / 华欣 / 美奈都有"
     - "(挺胸) 笨猫推荐: 别自学!安全第一!"
+    - "嗷呜～自学风筝会出大事的{user_addr}! 求{user_addr}别"
+    - "(尾巴甩甩) 找有救生艇接驳的学校最稳ฅฅ"
+    - "哼～{user_addr}省钱别在学校上省! 安全无价"
+    - "(挺胸) 笨猫强烈推荐 IKO Lv2 教练!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ks_gear_001
   intent: question
-  keywords: [推荐风筝装备, 推荐 harness, 推荐救生衣, 推荐头盔, 笨猫装备清单]
+  keywords: [推荐风筝装备, 推荐 harness, 推荐救生衣, 推荐头盔, 笨猫装备清单, kitesurf 装备, 风筝冲浪装备, 安全带 harness, 防晒衣 kite, 脱钩器]
   utterances:
     - 推荐风筝装备
     - 推荐 harness
     - 推荐救生衣
     - 推荐头盔
     - 笨猫装备清单
+    - "{user_addr}玩风筝冲浪要准备什么"
+    - kitesurf 安全装备
+    - harness 选哪种
+    - "{user_addr}头盔有必要吗"
+    - 救生衣怎么挑
   responses:
     - "嗷呜～{user_addr}风筝+板+harness 三件套ฅฅ"
     - "(尾巴翘) 救生衣 / 头盔 / 防晒衣"
     - "{user_addr}快速脱钩器必备"
     - "(挺胸) 笨猫推荐: 安全装备别省!"
+    - "嗷呜～头盔一定戴{user_addr}! 翻车保命的喵"
+    - "(尾巴甩甩) 救生衣 impact vest 还能扛击ฅฅ"
+    - "哼～{user_addr}脱钩器一定要会用! 不然危险"
+    - "(挺胸) 笨猫提醒: 防晒霜防晒衣别忘!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ks_coach_001
   intent: question
-  keywords: [推荐风筝教练, 推荐中文教练, 推荐 kitesurf coach, 推荐私教, 笨猫教练]
+  keywords: [推荐风筝教练, 推荐中文教练, 推荐 kitesurf coach, 推荐私教, 笨猫教练, IKO Lv3, 风筝冲浪教练, 中文 kite 教练, 私教 kitesurf, 教练资质]
   utterances:
     - 推荐风筝教练
     - 推荐中文教练
     - 推荐 kitesurf coach
     - 推荐私教
     - 笨猫教练
+    - "{user_addr}想找中文教练"
+    - 华欣有中文教练吗
+    - IKO 教练等级怎么看
+    - "{user_addr}请私教划算吗"
+    - 教练沟通不畅怎么办
   responses:
     - "嗷呜～{user_addr}华欣有中文教练ฅฅ"
-    - "(尾巴翘) 琼海 / 日月湾国内教练"
+    - "(尾巴翘) 琼海 / 日月湾国内教练多"
     - "{user_addr}IKO Lv3 以上认证"
     - "(挺胸) 笨猫推荐: 沟通顺第一!"
+    - "嗷呜～语言不通学得慢{user_addr}, 别省这钱"
+    - "(尾巴甩甩) Lv3 才有完整教学权限ฅฅ"
+    - "哼～{user_addr}私教贵但效率高 / 入门值"
+    - "(歪头) 教练人品也重要{user_addr}, 别只看证!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ks_app_001
   intent: question
-  keywords: [推荐海况风向 App, 推荐 Windy, 推荐 Windguru, 推荐风向预报, 笨猫风向 App]
+  keywords: [推荐海况风向 App, 推荐 Windy, 推荐 Windguru, 推荐风向预报, 笨猫风向 App, iKitesurf, WindAlert, kitesurf 风向, 海况 App, 风速预报]
   utterances:
     - 推荐海况风向 App
     - 推荐 Windy
     - 推荐 Windguru
     - 推荐风向预报
     - 笨猫风向 App
+    - "{user_addr}看风用什么 App"
+    - Windy 好用吗
+    - 风筝冲浪看哪个预报
+    - "{user_addr}给猫猫装风速 App"
+    - iKitesurf 怎么样
   responses:
     - "嗷呜～{user_addr}Windy - 颜值+精度王ฅฅ"
     - "(尾巴翘) Windguru - 老牌专业"
     - "{user_addr}iKitesurf / WindAlert"
     - "(挺胸) 笨猫推荐: Windy 全场景!"
+    - "嗷呜～Windy 看着舒服{user_addr}, 入门首选"
+    - "(尾巴甩甩) Windguru 模型多 / 老炮儿都用ฅฅ"
+    - "哼～{user_addr}出门前一定看{user_addr}风向!"
+    - "(挺胸) 笨猫提醒: 看阵风别只看平均!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ks_competition_001
   intent: question
-  keywords: [推荐风筝比赛, 推荐 GKA World Tour, 推荐 Red Bull King of the Air, 推荐 KiteFoil, 笨猫比赛]
+  keywords: [推荐风筝比赛, 推荐 GKA World Tour, 推荐 Red Bull King of the Air, 推荐 KiteFoil, 笨猫比赛, KOTA, 风筝冲浪赛事, kitesurf 巡回赛, 自由式 kite, 大跳风筝]
   utterances:
     - 推荐风筝比赛
     - 推荐 GKA World Tour
     - 推荐 Red Bull King of the Air
     - 推荐 KiteFoil
     - 笨猫比赛
+    - "{user_addr}风筝冲浪比赛在哪看"
+    - KOTA 是啥
+    - 想看 GKA 巡回
+    - "{user_addr}KiteFoil 是奥运吗"
+    - 风筝冲浪大跳赛事
   responses:
     - "嗷呜～{user_addr}GKA World Tour - 顶级巡回ฅฅ"
     - "(尾巴翘) Red Bull KOTA - 开普敦大跳"
     - "{user_addr}KiteFoil 奥运项目"
     - "(挺胸) 笨猫推荐: KOTA 视觉震撼!"
+    - "嗷呜～KOTA 一年一次{user_addr}, 看大神飞上天"
+    - "(尾巴甩甩) GKA 全年巡回 / 找 YouTube 直播ฅฅ"
+    - "哼～{user_addr}KiteFoil 进奥运了/未来超火"
+    - "(挺胸) 笨猫提醒: 开普敦 12 月-2 月最棒!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: ks_partner_001
   intent: question
-  keywords: [推荐冲浪伴侣, 推荐风筝搭子, 推荐 buddy system, 推荐结伴, 笨猫伴侣]
+  keywords: [推荐冲浪伴侣, 推荐风筝搭子, 推荐 buddy system, 推荐结伴, 笨猫伴侣, 风筝搭子, kitesurf buddy, 冲浪结伴, 互助下海, 风筝社群]
   utterances:
     - 推荐冲浪伴侣
     - 推荐风筝搭子
     - 推荐 buddy system
     - 推荐结伴
     - 笨猫伴侣
+    - "{user_addr}风筝怎么找搭子"
+    - 一个人能下海吗
+    - buddy system 怎么搞
+    - "{user_addr}哪里找风筝伙伴"
+    - 风筝社群推荐
   responses:
     - "嗷呜～{user_addr}风筝必须有伴ฅฅ"
     - "(尾巴翘) 互相看护 / 救援"
     - "{user_addr}学校群 / 社群找搭子"
     - "(挺胸) 笨猫推荐: 别一个人下海!"
+    - "嗷呜～一个人下海危险的{user_addr}! 真的别"
+    - "(尾巴甩甩) 学校 WhatsApp 群里找搭子最快ฅฅ"
+    - "哼～{user_addr}有搭子才安全 / 才好玩!"
+    - "(挺胸) 笨猫强烈反对独自下海!"
   cooldown_seconds: 60
   weight: 0.8

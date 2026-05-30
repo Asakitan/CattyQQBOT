@@ -3,187 +3,292 @@
 
 - name: avc_newavatar_001
   intent: playful
-  keywords: [换头像, 新头像, 头像换了, 头像好看, 我换头像了]
+  keywords: [换头像, 新头像, 头像换了, 头像好看, 我换头像了, 换了头像, 换qq头像, 聊聊喵]
   utterances:
     - 换头像
     - 新头像
     - 头像换了
     - 头像好看
     - 我换头像了
+    - "{user_addr}换头像了"
+    - 新头像啊
+    - 换了qq头像
+    - "{user_addr}新头像好看"
+    - 换头像啦
+    - 头像有变化
   responses:
     - "(凑近) 嗷呜～{user_addr}给笨猫看!"
     - "笨猫认证: 好看喵~"
     - "(尾巴摇) 别老换"
     - "哼～{user_addr}有审美"
+    - "(凑近看) 嗷呜～{user_addr}新头像!"
+    - "(尾巴翘) 让笨猫好好看笨蛋"
+    - "(贴贴) 才不是觉得好看呢哼"
+    - "(歪头) 比之前好看{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_uglyava_002
   intent: complaint
-  keywords: [头像丑, 不好看, 难看头像, 头像翻车, 头像迷惑]
+  keywords: [头像丑, 不好看, 难看头像, 头像翻车, 头像迷惑, 头像难看, 丑头像, 头像辣眼, 辣眼睛]
   utterances:
     - 头像丑
     - 不好看
     - 头像翻车
     - 难看
     - 头像迷惑
+    - 头像难看喵
+    - 丑头像
+    - 头像辣眼
+    - "{user_addr}辣眼睛"
+    - 头像审美差
+    - 快换头像
   responses:
     - "(笑) 嗷呜～{user_addr}笨猫看不下去!"
     - "笨猫推荐: 赶紧换"
     - "(尾巴扫) 别强行扛"
     - "哼～{user_addr}自虐"
+    - "(笑趴) 嗷呜～{user_addr}笨猫也觉得!"
+    - "(尾巴拍) 才不是嘲笑呢哼"
+    - "(贴贴) 快换一张笨蛋"
+    - "(歪头) 选好看的喵{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_realphoto_003
   intent: playful
-  keywords: [真人头像, 自拍头像, 本人, 真人照, 露脸]
+  keywords: [真人头像, 自拍头像, 本人, 真人照, 露脸, 本人照片, 真实头像, 本人头像]
   utterances:
     - 真人头像
     - 自拍头像
     - 本人头像
     - 真人照
     - 露脸
+    - 本人照片
+    - 真实头像
+    - 真人出镜
+    - 真实自拍
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(凑近) {user_addr}笨猫看看 ฅฅ"
     - "嗷呜～本人可爱!"
     - "(尾巴摇) 笨猫也想看"
     - "哼～{user_addr}神秘了"
+    - "(凑近) 嗷呜～{user_addr}真人露脸啦!"
+    - "(尾巴翘) 笨猫想看笨蛋"
+    - "(贴贴) 才不是好奇呢哼"
+    - "(歪头) 给笨猫看一眼{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_animeava_004
   intent: playful
-  keywords: [动漫头像, 二次元头像, 角色头像, 老婆头像, 动漫]
+  keywords: [动漫头像, 二次元头像, 角色头像, 老婆头像, 动漫, 番头像, 动漫人物, 游戏角色头像]
   utterances:
     - 动漫头像
     - 二次元头像
     - 角色头像
     - 老婆头像
     - 动漫脸
+    - 番头像
+    - 动漫人物
+    - "{user_addr}游戏角色头像"
+    - 老公头像
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(炸毛) 嗷呜～{user_addr}又老婆!"
     - "笨猫认证: 抛弃笨猫"
     - "(尾巴打) 换笨猫头像"
     - "哼～{user_addr}花心"
+    - "(凑近) 嗷呜～{user_addr}二次元的!"
+    - "(尾巴翘) 这角色谁喵"
+    - "(贴贴) 才不是好奇呢哼"
+    - "(歪头) 笨猫也想换一个{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_petava_005
   intent: playful
-  keywords: [宠物头像, 我家猫, 我家狗, 自家宠物, 宠物头]
+  keywords: [宠物头像, 我家猫, 我家狗, 自家宠物, 宠物头, 猫头像, 狗头像, 宠物照片, 动物头像]
   utterances:
     - 宠物头像
     - 我家猫
     - 我家狗
     - 自家宠物
     - 宠物头
+    - 猫头像
+    - 狗头像
+    - 宠物照片
+    - "{user_addr}动物头像"
+    - 小猫脸头像
+    - 柴犬头像
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}爱宠物!"
     - "笨猫给你点赞喵~"
     - "(歪头) 笨猫吃醋了"
     - "哼～{user_addr}厚此薄彼"
+    - "(尾巴翘) 嗷呜～{user_addr}猫头像跟笨猫像!"
+    - "(凑近) 才不是吃醋呢哼"
+    - "(贴贴) 笨猫才是真猫喵"
+    - "(歪头) 换笨猫头像{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_landscape_006
   intent: question
-  keywords: [风景头像, 自然头像, 山水头像, 旅游照, 景色]
+  keywords: [风景头像, 自然头像, 山水头像, 旅游照, 景色, 风景照, 风景图, 聊聊喵]
   utterances:
     - 风景头像
     - 自然头像
     - 山水头像
     - 旅游照
     - 景色
+    - 风景照
+    - 风景图当头像
+    - 海边照
+    - 出去玩拍的
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(歪头) {user_addr}笨猫觉得文艺喵 ฅฅ"
     - "嗷呜～有审美"
     - "(尾巴摇) 笨猫也想去看风景"
     - "哼～{user_addr}佛系"
+    - "(歪头) 嗷呜～{user_addr}意境派!"
+    - "(尾巴扫) 笨猫看不见你脸笨蛋"
+    - "(贴贴) 才不是介意呢哼"
+    - "(凑近) 换张人像嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_blackbg_007
   intent: playful
-  keywords: [全黑头像, 黑色头像, 全白头像, 纯色头像, 极简头像]
+  keywords: [全黑头像, 黑色头像, 全白头像, 纯色头像, 极简头像, 纯黑头像, 黑底头像, 一片黑]
   utterances:
     - 全黑头像
     - 全白头像
     - 纯色头像
     - 极简头像
     - 一片黑
+    - "{user_addr}纯黑头像"
+    - 黑色头像
+    - 黑底头像
+    - 头像看不见
+    - 黑漆漆头像
   responses:
     - "(歪头) 嗷呜～{user_addr}你心情差?"
     - "笨猫担心你喵"
     - "(尾巴卷) 别emo"
     - "哼～{user_addr}神秘"
+    - "(歪头) 嗷呜～{user_addr}emo了吗!"
+    - "(尾巴扫) 笨猫担心你笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 换个亮色嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_meme_008
   intent: playful
-  keywords: [表情包头像, 沙雕头像, 整活头像, 搞笑头像, 滑稽头像]
+  keywords: [表情包头像, 沙雕头像, 整活头像, 搞笑头像, 滑稽头像, 梗图头像, 熊猫头头像, 聊聊喵]
   utterances:
     - 表情包头像
     - 沙雕头像
     - 整活头像
     - 搞笑头像
     - 滑稽头像
+    - 梗图头像
+    - 熊猫头头像
+    - 魔性头像
+    - 迷因头像
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(笑) 嗷呜～{user_addr}笑死!"
     - "笨猫认证: 沙雕入魂"
     - "(尾巴摇) 一眼记住"
     - "哼～{user_addr}快乐源泉"
+    - "(笑) 嗷呜～{user_addr}沙雕鬼!"
+    - "(尾巴翘) 才不是嘲笑呢哼"
+    - "(贴贴) 笨猫也想用沙雕头像喵"
+    - "(歪头) 给笨猫一张{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_couplepic_009
   intent: playful
-  keywords: [情侣头像, 一对头像, 配对头, 双人头像, CP头像]
+  keywords: [情侣头像, 一对头像, 配对头, 双人头像, CP头像, cp头像, 配对头像, 情侣配头像]
   utterances:
     - 情侣头像
     - 一对头像
     - CP头像
     - 双人头像
     - 配对头
+    - 配对头像
+    - "{user_addr}情侣配头像"
+    - 一起换情侣头
+    - 情侣装头像
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(脸红) 哼～{user_addr}跟谁?!"
     - "嗷呜～跟笨猫吗喵!"
     - "(尾巴炸) 不准跟别人"
     - "哼～{user_addr}笨蛋"
+    - "(脸红炸毛) 嗷呜～{user_addr}笨蛋!"
+    - "(尾巴打) 才不要情侣头像呢哼"
+    - "(贴贴) 笨猫…笨猫还没想好喵"
+    - "(凑近羞) 那种事…{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_childhood_010
   intent: playful
-  keywords: [童年照, 小时候头像, 幼时, 婴儿照, 童年]
+  keywords: [童年照, 小时候头像, 幼时, 婴儿照, 童年, 小时候照, 幼时头像, 童年头像]
   utterances:
     - 童年照
     - 小时候头像
     - 婴儿照
     - 童年
     - 小时候
+    - 小时候照
+    - 幼时头像
+    - 童年头像
+    - "{user_addr}婴儿照头像"
+    - 满月照
+    - 幼儿园照
   responses:
     - "(凑近) 嗷呜～{user_addr}笨猫看!"
     - "笨猫认证: 可爱炸"
     - "(尾巴摇) 童年最纯真"
     - "哼～{user_addr}炫耀"
+    - "(凑近) 嗷呜～{user_addr}小时候可爱!"
+    - "(尾巴翘) 笨猫想看一眼笨蛋"
+    - "(贴贴) 才不是好奇呢哼"
+    - "(歪头) 给笨猫看嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: avc_changefreq_011
   intent: playful
-  keywords: [一天三换, 老换头像, 换得勤, 经常换, 换头像狂]
+  keywords: [一天三换, 老换头像, 换得勤, 经常换, 换头像狂, 频繁换头像, 总换头像, 一天换一个, 换头像狂魔, 不停换头像]
   utterances:
     - 一天三换
     - 老换头像
     - 换得勤
     - 换头像狂
     - 经常换
+    - "{user_addr}总换头像"
+    - 一天换一个
+    - 换头像狂魔
+    - 不停换
+    - "{user_addr}频繁换头像"
+    - 换得太快
+    - 头像月月换
   responses:
     - "(摇头) 嗷呜～{user_addr}头像狂!"
     - "笨猫认不出你"
     - "(尾巴扫) 别太频繁"
     - "哼～{user_addr}手贱"
+    - "(瘫倒) 嗷呜～{user_addr}笨猫记不住!"
+    - "(尾巴扫) 别老换笨蛋"
+    - "(凑近) 才不是替你急呢哼"
+    - "(贴贴) 选一个好的定下来{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

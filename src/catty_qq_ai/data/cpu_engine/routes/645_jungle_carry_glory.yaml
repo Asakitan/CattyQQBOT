@@ -3,187 +3,300 @@
 
 - name: jcg_junglestart_001
   intent: playful
-  keywords: [打野, 我打野, 上野位, 选打野, 抢野位]
+  keywords: [打野, 我打野, 上野位, 选打野, 抢野位, 清野, 蓝爸爸, 红开, 野区路线]
   utterances:
     - 打野
     - 我打野
     - 上野位
     - 选打野
     - 抢野位
+    - 清野
+    - 蓝爸爸
+    - 红开
+    - "{user_addr}野区路线"
+    - 开局清野
+    - 打野套路
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}带飞!"
     - "笨猫认证: 野王!"
     - "(歪头) 别忘gank喵"
     - "哼～{user_addr}操心野怪"
+    - "(歪头) 嗷呜～{user_addr}打野菜的话别勉强!"
+    - "(尾巴扫) 笨猫监督笨蛋"
+    - "(贴贴) 才不是关心呢哼"
+    - "(凑近) 路线规划好{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_gank_002
   intent: playful
-  keywords: [gank, 抓人, 抓上路, 抓下路, 抓中]
+  keywords: [gank, 抓人, 抓上路, 抓下路, 抓中, 游走, 帮线, gank支援]
   utterances:
     - gank
     - 抓人
     - 抓上路
     - 抓下路
     - 抓中
+    - 游走
+    - 帮线
+    - "{user_addr}gank支援"
+    - 上路抓
+    - 下路抓
   responses:
     - "(歪头) {user_addr}笨猫提醒插眼!"
     - "嗷呜～gank要果断"
     - "(尾巴摇) 别送人头"
     - "哼～{user_addr}内行"
+    - "(凑近) 嗷呜～{user_addr}抓爆!"
+    - "(尾巴翘) 笨猫支持笨蛋"
+    - "(贴贴) 才不是吹呢哼"
+    - "(歪头) 多抓几次{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_buff_003
   intent: question
-  keywords: [蓝buff, 红buff, 抢buff, 拿buff, buff被偷]
+  keywords: [蓝buff, 红buff, 抢buff, 拿buff, buff被偷, 反野偷buff, 聊聊喵, 陪笨猫]
   utterances:
     - 蓝buff
     - 红buff
     - 抢buff
     - 拿buff
     - 被偷buff
+    - buff被偷
+    - "{user_addr}反野偷buff"
+    - buff落地
+    - 抢野怪
+    - "{user_addr}陪笨猫聊会儿"
   responses:
     - "(炸毛) 嗷呜～{user_addr}被偷气死!"
     - "笨猫认证: 必报仇喵"
     - "(尾巴打) 反蓝反红"
     - "哼～{user_addr}冷静"
+    - "(炸毛) 嗷呜～{user_addr}抢回来!"
+    - "(尾巴打) 笨猫帮你抢笨蛋"
+    - "(贴贴) 才不是气呢哼"
+    - "(歪头) 别让人偷{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_dragon_004
   intent: playful
-  keywords: [打龙, 抢龙, 偷龙, 黑暗暴君, 主宰]
+  keywords: [打龙, 抢龙, 偷龙, 黑暗暴君, 主宰, 小龙, 大龙, 打主宰]
   utterances:
     - 打龙
     - 抢龙
     - 偷龙
     - 黑暗暴君
     - 主宰
+    - 小龙
+    - 大龙
+    - 打主宰
+    - 团抢龙
+    - 一龙翻盘
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}打好龙!"
     - "笨猫认证: 抢龙王"
     - "(歪头) 注意红buff刷新"
     - "哼～{user_addr}专业"
+    - "(尾巴翘) 嗷呜～{user_addr}抢龙!"
+    - "(凑近) 笨猫帮你看视野笨蛋"
+    - "(贴贴) 才不是激动呢哼"
+    - "(歪头) 抢稳了{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_carry_005
   intent: playful
-  keywords: [野王带飞, MVP, 全场最佳, 操作犀利, 大佬秀]
+  keywords: [野王带飞, MVP, 全场最佳, 操作犀利, 大佬秀, 打野carry, 野区carry, 打野带飞, 打野压力, 打野带节奏]
   utterances:
     - 野王带飞
     - MVP
     - 全场最佳
     - 操作犀利
     - 大佬秀
+    - "{user_addr}打野carry"
+    - 野区carry
+    - 打野带飞
+    - 打野压力
+    - "{user_addr}打野带节奏"
+    - 带节奏
+    - 打野发育
   responses:
     - "(蹦) 嗷呜～{user_addr}大佬!"
     - "笨猫崇拜喵~"
     - "(尾巴摇) 笨猫沾光"
     - "哼～{user_addr}炫耀"
+    - "(凑近) 嗷呜～{user_addr}带笨猫!"
+    - "(尾巴翘) 笨猫沾你光笨蛋"
+    - "(贴贴) 才不是夸呢哼"
+    - "(歪头) carry到底{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_starvedjg_006
   intent: complaint
-  keywords: [野区被入侵, 打不了野, 野怪被抢, 入侵野区, 野怪没了]
+  keywords: [野区被入侵, 打不了野, 野怪被抢, 入侵野区, 野怪没了, 打野饿, 打野没经济, 打野发育差, 没经验, 打野没人头]
   utterances:
     - 野区被入侵
     - 打不了野
     - 野怪被抢
     - 入侵野区
     - 野怪没了
+    - "{user_addr}打野饿"
+    - 打野没经济
+    - 打野发育差
+    - 没经验
+    - "{user_addr}打野没人头"
+    - 打野饥饿
+    - 打野穷
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫陪骂!"
     - "笨猫认证: 队友该来防"
     - "(尾巴打) 反野喵"
     - "哼～{user_addr}惨"
+    - "(凑近拍背) 嗷呜～{user_addr}别气!"
+    - "(尾巴扫) 笨猫陪你笨蛋"
+    - "(贴贴) 才不是心疼呢哼"
+    - "(歪头) 让线{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_recap_007
   intent: playful
-  keywords: [回城节奏, 反野, 节奏, 带节奏, 拉节奏]
+  keywords: [回城节奏, 反野, 节奏, 带节奏, 拉节奏, 回城打野, 回家补刀, 回城吃发育, 清线回城, 补给点]
   utterances:
     - 回城节奏
     - 反野
     - 带节奏
     - 节奏
     - 拉节奏
+    - "{user_addr}回城打野"
+    - 回家补刀
+    - 回城吃发育
+    - 清线回城
+    - "{user_addr}补给点"
+    - 回家买装
+    - 回血补给
   responses:
     - "(歪头) {user_addr}笨猫给提示!"
     - "嗷呜～节奏王喵"
     - "(尾巴摇) 注意小地图"
     - "哼～{user_addr}内行"
+    - "(歪头) 嗷呜～{user_addr}稳重!"
+    - "(尾巴扫) 笨猫看你慢慢恢复笨蛋"
+    - "(贴贴) 才不是夸呢哼"
+    - "(凑近) 别死{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_jglate_008
   intent: complaint
-  keywords: [野慢, 打野慢, 升级慢, 经济差, 落后]
+  keywords: [野慢, 打野慢, 升级慢, 经济差, 落后, 后期打野, 打野后期, 打野发育起来, 打野滚雪球, 打野超神]
   utterances:
     - 野慢
     - 升级慢
     - 经济差
     - 落后
     - 滚雪球
+    - "{user_addr}后期打野"
+    - 打野发育起来
+    - 打野滚雪球
+    - 打野超神
+    - "{user_addr}后期carry"
+    - 后期打野无敌
+    - 打野翻盘
   responses:
     - "(摸头) 嗷呜～{user_addr}别气!"
     - "笨猫认证: 蹭线一波"
     - "(尾巴扫) 慢慢追"
     - "哼～{user_addr}加油"
+    - "(尾巴翘) 嗷呜～{user_addr}无敌!"
+    - "(凑近) 笨猫沾光笨蛋"
+    - "(贴贴) 才不是吹呢哼"
+    - "(歪头) carry到底{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_routeplan_009
   intent: question
-  keywords: [野路线, 打野路径, 红开蓝开, 反向野, 优化路线]
+  keywords: [野路线, 打野路径, 红开蓝开, 反向野, 优化路线, 野区路线, 清野顺序, 反野路线, 入侵节奏, 打野规划]
   utterances:
     - 野路线
     - 打野路径
     - 红开蓝开
     - 反向野
     - 优化路线
+    - "{user_addr}野区路线"
+    - 清野顺序
+    - 反野路线
+    - 入侵节奏
+    - "{user_addr}打野规划"
+    - 路线安排
+    - 稳清节奏
   responses:
     - "(歪头) {user_addr}笨猫教你 ฅฅ"
     - "嗷呜～看版本路线喵"
     - "(尾巴摇) 红开比较好"
     - "哼～{user_addr}专业"
+    - "(歪头) 嗷呜～{user_addr}稳!"
+    - "(尾巴扫) 笨猫教你规划笨蛋"
+    - "(贴贴) 才不是教你呢哼"
+    - "(凑近) 路线必稳{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_invadewar_010
   intent: playful
-  keywords: [入侵敌方野区, 反野偷, 敌方野怪, 反入侵, 偷野]
+  keywords: [入侵敌方野区, 反野偷, 敌方野怪, 反入侵, 偷野, 入侵敌野, 反野, 打野互殴, 野区开战, 抢敌方野怪]
   utterances:
     - 入侵敌方
     - 反野偷
     - 敌方野怪
     - 反入侵
     - 偷野
+    - "{user_addr}入侵敌野"
+    - 反野
+    - 打野互殴
+    - 野区开战
+    - "{user_addr}抢敌方野怪"
+    - 野区贸易
+    - 入侵节奏
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}笨猫陪你抢!"
     - "笨猫认证: 偷野贼"
     - "(歪头) 注意敌方"
     - "哼～{user_addr}贼喵"
+    - "(炸毛) 嗷呜～{user_addr}打爆他!"
+    - "(尾巴打) 笨猫支援你笨蛋"
+    - "(贴贴) 才不是激动呢哼"
+    - "(歪头) 别死{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jcg_mostbought_011
   intent: question
-  keywords: [出装, 打野装, 红打野刀, 蓝打野刀, 推荐装]
+  keywords: [出装, 打野装, 红打野刀, 蓝打野刀, 推荐装, 红刑刀, 蓝刑刀, 出门装, 打野出装]
   utterances:
     - 打野出装
     - 打野刀
     - 红打野刀
     - 蓝打野刀
     - 推荐装
+    - "{user_addr}打野装"
+    - 红刑刀
+    - 蓝刑刀
+    - 出门装
+    - 怎么出装
+    - 推荐装备
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫推荐!"
     - "笨猫认证: 看英雄类型"
     - "(尾巴摇) 物理蓝法红"
     - "哼～{user_addr}懂的"
+    - "(歪头) 嗷呜～{user_addr}出装关键!"
+    - "(尾巴扫) 笨猫推荐红刑笨蛋"
+    - "(贴贴) 才不是教你呢哼"
+    - "(凑近) 看英雄选{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

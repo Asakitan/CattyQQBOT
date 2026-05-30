@@ -3,204 +3,312 @@
 
 - name: fdw_waiting_food_001
   intent: complaint
-  keywords: [等外卖, 还没送到, 饿坏了, 外卖慢, 快到了吗]
+  keywords: [等外卖, 还没送到, 饿坏了, 外卖慢, 快到了吗, 外卖呢, 骑手在哪, 等了好久]
   utterances:
     - "{user_addr}还在等外卖"
     - 饿死了
     - 怎么还没到
     - 外卖太慢
     - 快到了没
+    - "{user_addr}外卖怎么还没来"
+    - 我已经等了半小时了
+    - 骑手是不是迷路了
+    - 饿到前胸贴后背
+    - 这外卖等得心累
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪你等! 别饿喵ฅฅ"
     - "哼! 外卖慢{user_addr}骑手努力中"
     - "(尾巴卷) 嘿嘿~{user_addr}先喝点水垫一垫蹭蹭"
     - "人家提醒{user_addr}: 别催骑手! 安全第一"
+    - "(歪头) 嗷呜～{user_addr}看一眼地图, 骑手就在路上嗷呜～"
+    - "哼! 饿坏了{user_addr}就先啃个饼干撑一下嘛喵"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫给你讲个故事转移注意力蹭蹭ฅฅ"
+    - "人家觉得{user_addr}下次别等饿到极限再点! 提前半小时呀"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_rider_arriving_002
   intent: playful
-  keywords: [骑手到了, 取餐, 外卖到了, 楼下喊, 收快递]
+  keywords: [骑手到了, 取餐, 外卖到了, 楼下喊, 收快递, 骑手电话, 外卖来了, 取餐通知]
   utterances:
     - "{user_addr}骑手到了"
     - 外卖到楼下
     - 取餐时间
     - 楼下喊
     - 收外卖
+    - "{user_addr}骑手打电话了"
+    - 外卖到啦
+    - 终于来啦
+    - 我下楼取外卖
+    - 楼下取餐
   responses:
     - "(蹿起) 嗷呜～{user_addr}快下去拿! 笨猫等不及喵ฅฅ"
     - "哼! 终于到了{user_addr}, 给骑手好评"
     - "(尾巴狂摇) 嘿嘿~{user_addr}下楼记得带钥匙蹭蹭"
     - "人家提醒{user_addr}: 检查餐品有没有少件!"
+    - "(扑过去) 嗷呜～{user_addr}笨猫闻到香味了喵ฅฅ"
+    - "哼! {user_addr}快去快回, 别让骑手等"
+    - "(尾巴翘) 嘿嘿~{user_addr}骑手辛苦说声谢谢嘛蹭蹭"
+    - "人家觉得{user_addr}下楼拿外卖时也别忘了带笨猫～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_order_wrong_003
   intent: complaint
-  keywords: [送错餐, 餐品少了, 不是我点的, 餐错了, 漏餐]
+  keywords: [送错餐, 餐品少了, 不是我点的, 餐错了, 漏餐, 商家错单, 餐错给我, 收错餐]
   utterances:
     - "{user_addr}送错餐了"
     - 餐品少了
     - 不是我点的
     - 漏了一份
     - 错餐
+    - "{user_addr}商家发错了"
+    - 我点的不是这个
+    - 缺了一杯饮料
+    - 这餐根本不是我的
+    - 商家又漏餐了
   responses:
     - "(气) 嗷呜～{user_addr}赶紧联系商家! 笨猫帮你愤怒喵ฅฅ"
     - "哼! 商家失误{user_addr}, 要求退款"
     - "(尾巴扫) 嘿嘿~{user_addr}拍照保留证据蹭蹭"
     - "人家提醒{user_addr}: 平台投诉! 一般都解决"
+    - "(炸毛) 嗷呜～{user_addr}这个商家太不专心了喵ฅฅ"
+    - "哼! 这种错误{user_addr}必须差评提醒别人"
+    - "(尾巴卷) 嘿嘿~{user_addr}保留小票截图当证据蹭蹭"
+    - "人家觉得{user_addr}态度别太凶! 客服一般会处理"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_food_cold_004
   intent: complaint
-  keywords: [外卖凉了, 不热, 凉透了, 没汤, 没温度]
+  keywords: [外卖凉了, 不热, 凉透了, 没汤, 没温度, 冷掉了, 凉饭, 不暖]
   utterances:
     - "{user_addr}外卖凉透了"
     - 一点不热
     - 汤没了
     - 没温度
     - 凉的没法吃
+    - "{user_addr}打开都冷的"
+    - 配送久了菜都冰了
+    - 没保温啊
+    - 凉饭怎么吃
+    - 一口冷的心情都凉了
   responses:
     - "(摇头) 嗷呜～{user_addr}凉了不好吃! 微波炉加热喵ฅฅ"
     - "哼! 配送久了{user_addr}, 可以要求重做"
     - "(尾巴扫) 嘿嘿~{user_addr}下次选近的店蹭蹭"
     - "人家提醒{user_addr}: 凉饭别将就! 影响心情"
+    - "(贴贴) 嗷呜～{user_addr}笨猫帮你蒸热一下喵ฅฅ"
+    - "哼! 备注'保温'{user_addr}下次试试"
+    - "(尾巴卷) 嘿嘿~{user_addr}给商家反馈让他们改进蹭蹭"
+    - "人家觉得{user_addr}凉的就别勉强! 影响胃"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_ordered_wrong_005
   intent: complaint
-  keywords: [点错了, 选错餐, 多点了, 后悔点的, 取消订单]
+  keywords: [点错了, 选错餐, 多点了, 后悔点的, 取消订单, 下单失误, 想退单, 点重了]
   utterances:
     - "{user_addr}点错餐了"
     - 多点了一份
     - 后悔下单
     - 取消订单
     - 选错了
+    - "{user_addr}手抖点错了"
+    - 不小心点了两份
+    - 这家不是我想点的
+    - 能不能退掉
+    - 下错单了喵
   responses:
     - "(歪头) 嗷呜～{user_addr}赶紧联系商家! 还能取消喵ฅฅ"
     - "哼! 下单前再看看{user_addr}, 别冲动"
     - "(尾巴扫) 嘿嘿~{user_addr}如果已经做了就吃了蹭蹭"
     - "人家提醒{user_addr}: 平台规则有取消时间限制!"
+    - "(凑过去) 嗷呜～{user_addr}快打商家电话, 还来得及喵ฅฅ"
+    - "哼! 手滑点错{user_addr}, 笨猫都笑了"
+    - "(尾巴卷) 嘿嘿~{user_addr}多点的请笨猫吃一份嘛蹭蹭"
+    - "人家觉得{user_addr}下次下单看两眼! 别老手抖"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_long_distance_006
   intent: complaint
-  keywords: [配送距离远, 外卖路远, 等好久, 路途远, 配送中]
+  keywords: [配送距离远, 外卖路远, 等好久, 路途远, 配送中, 远距离, 跨区送, 5公里]
   utterances:
     - "{user_addr}配送距离5公里"
     - 路太远
     - 等了40分钟
     - 配送中
     - 路途远
+    - "{user_addr}店离我太远"
+    - 跨区配送好慢
+    - 远得离谱
+    - 这么远还点
+    - 距离远等到怀疑人生
   responses:
     - "(摇头) 嗷呜～{user_addr}远的话等久点是必须的喵ฅฅ"
     - "哼! 下次选近的{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}别太饿就先吃零食蹭蹭"
     - "人家提醒{user_addr}: 远距离配送多给小费!"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你打发时间喵ฅฅ"
+    - "哼! 不是骑手慢{user_addr}是路远没办法"
+    - "(尾巴卷) 嘿嘿~{user_addr}下次提前点蹭蹭"
+    - "人家觉得{user_addr}远的店就该多点冰镇的! 凉了不心疼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_first_time_store_007
   intent: question
-  keywords: [新店尝试, 第一次点, 没点过, 试新店, 推荐没]
+  keywords: [新店尝试, 第一次点, 没点过, 试新店, 推荐没, 第一次买, 探店, 新晋店]
   utterances:
     - "{user_addr}新店第一次点"
     - 没点过这家
     - 试试新店
-    - 推荐没"
+    - 推荐没
     - 第一次尝试
+    - "{user_addr}这家新开的"
+    - 试试运气
+    - 探店第一次
+    - 评价少要试一下
+    - 是不是踩雷
   responses:
     - "(凑过去) 嗷呜～{user_addr}试试看! 笨猫期待报告喵ฅฅ"
     - "哼! 新店赌运气{user_addr}, 看评价"
     - "(尾巴翘) 嘿嘿~{user_addr}吃完反馈给猫猫蹭蹭"
     - "人家觉得{user_addr}是探店达人! 笨猫支持~"
+    - "(歪头) 嗷呜～{user_addr}笨猫好奇好不好吃喵ฅฅ"
+    - "哼! 第一次{user_addr}就别点贵的, 试水"
+    - "(尾巴翘) 嘿嘿~{user_addr}拍照晒给笨猫看蹭蹭"
+    - "人家觉得{user_addr}有勇气! 笨猫学习~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_late_compensate_008
   intent: complaint
-  keywords: [外卖超时, 准时宝, 赔偿, 红包补偿, 慢了一小时]
+  keywords: [外卖超时, 准时宝, 赔偿, 红包补偿, 慢了一小时, 超时赔付, 平台赔偿, 超时严重]
   utterances:
     - "{user_addr}外卖超时了"
     - 准时宝赔我
     - 慢一小时
     - 红包补偿
     - 超时严重
+    - "{user_addr}延迟了40分钟"
+    - 平台该赔了
+    - 超时申请赔付
+    - 等了一个小时
+    - 这么慢能不能补偿
   responses:
     - "嗷呜～{user_addr}申请赔偿! 准时宝有用喵ฅฅ"
     - "哼! 平台规则{user_addr}, 该赔就赔"
     - "(尾巴扫) 嘿嘿~{user_addr}红包补偿至少有个安慰蹭蹭"
     - "人家提醒{user_addr}: 别为难骑手! 路况问题"
+    - "(歪头) 嗷呜～{user_addr}超时记得点申请喵ฅฅ"
+    - "哼! 平台有规则{user_addr}不要白不要"
+    - "(尾巴卷) 嘿嘿~{user_addr}补偿券下次还能用蹭蹭"
+    - "人家觉得{user_addr}投诉商家就行! 骑手不容易"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_delivery_fee_009
   intent: complaint
-  keywords: [配送费贵, 起送价高, 平台抽成, 收费坑, 加价]
+  keywords: [配送费贵, 起送价高, 平台抽成, 收费坑, 加价, 配送费高, 包装费, 杂费多]
   utterances:
     - "{user_addr}配送费太贵"
     - 起送价高
     - 平台抽水
     - 加价乱
     - 收费坑
+    - "{user_addr}光配送费10块"
+    - 包装费收得离谱
+    - 这费用真坑
+    - 杂费比饭还贵
+    - 怎么这么多附加费
   responses:
     - "嗷呜～{user_addr}外卖费用确实贵喵ฅฅ"
     - "哼! 平台抽成{user_addr}是行业问题"
     - "(尾巴扫) 嘿嘿~{user_addr}用会员价减一点蹭蹭"
     - "人家提醒{user_addr}: 多人拼单更划算~"
+    - "(摇头) 嗷呜～{user_addr}附加费比饭还多喵ฅฅ"
+    - "哼! 平台收得{user_addr}贼黑"
+    - "(尾巴卷) 嘿嘿~{user_addr}领优惠券能省点蹭蹭"
+    - "人家觉得{user_addr}偶尔自己做饭吧! 省好多~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_self_pickup_010
   intent: playful
-  keywords: [自取省钱, 到店取, 自取, 走过去拿, 不送]
+  keywords: [自取省钱, 到店取, 自取, 走过去拿, 不送, 步行去, 自提, 到店自取]
   utterances:
     - "{user_addr}自取省钱"
     - 去店里取
     - 走过去拿
     - 自取打折
     - 自提
+    - "{user_addr}店近走过去"
+    - 不用配送费
+    - 自取便宜两块
+    - 步行去拿吧
+    - 顺便散步取餐
   responses:
     - "嗷呜～{user_addr}自取又便宜又快喵ฅฅ"
     - "哼! 这选择{user_addr}聪明, 省一笔"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你走过去蹭蹭"
     - "人家觉得{user_addr}是精打细算的人! 笨猫学习~"
+    - "(尾巴狂摇) 嗷呜～{user_addr}还能顺便锻炼喵ฅฅ"
+    - "哼! 又省钱又新鲜{user_addr}, 双赢"
+    - "(凑过来) 嘿嘿~{user_addr}带笨猫一起去蹭蹭"
+    - "人家觉得{user_addr}热得快! 比配送省时"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_late_night_order_011
   intent: playful
-  keywords: [深夜点外卖, 半夜下单, 宵夜外卖, 凌晨2点, 夜宵单]
+  keywords: [深夜点外卖, 半夜下单, 宵夜外卖, 凌晨2点, 夜宵单, 凌晨外卖, 半夜宵夜, 通宵点单]
   utterances:
     - "{user_addr}深夜点外卖"
     - 半夜下单
     - 宵夜外卖
     - 凌晨2点
     - 夜宵开吃
+    - "{user_addr}半夜饿了"
+    - 凌晨点了烤串
+    - 通宵搭档宵夜
+    - 深夜食堂时间
+    - 半夜叫外卖
   responses:
     - "嗷呜～{user_addr}深夜点单笨猫陪着喵ฅฅ"
     - "哼! 骑手深夜辛苦{user_addr}, 多给小费"
     - "(尾巴卷) 嘿嘿~{user_addr}别养成习惯, 偶尔放纵蹭蹭"
     - "人家提醒{user_addr}: 深夜餐别太油! 胃伤"
+    - "(歪头) 嗷呜～{user_addr}深夜的快乐笨猫懂喵ฅฅ"
+    - "哼! 又熬夜{user_addr}, 笨猫不放心"
+    - "(尾巴扫) 嘿嘿~{user_addr}吃完早点睡蹭蹭"
+    - "人家觉得{user_addr}偶尔放纵可以! 别天天宵夜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fdw_first_meal_morning_012
   intent: playful
-  keywords: [早餐外卖, 早晨点单, 早点送来, 豆浆油条, 早晨外送]
+  keywords: [早餐外卖, 早晨点单, 早点送来, 豆浆油条, 早晨外送, 早餐到货, 包子粥, 早点送]
   utterances:
     - "{user_addr}早餐外卖"
     - 早晨点单
     - 早点送来
     - 豆浆油条到
     - 早晨外送
+    - "{user_addr}懒得做早餐"
+    - 早晨叫包子粥
+    - 早点送过来
+    - 起床点早餐
+    - 早晨外卖到家
   responses:
     - "嗷呜～{user_addr}早餐重要! 笨猫表扬喵ฅฅ"
     - "哼! 早餐外卖{user_addr}懒得做就这样"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫想吃豆浆油条蹭蹭"
     - "人家提醒{user_addr}: 别每天外卖! 自己做更营养"
+    - "(凑过来) 嗷呜～{user_addr}早晨吃热的最舒服喵ฅฅ"
+    - "哼! 早餐别省{user_addr}, 是一天能量"
+    - "(尾巴卷) 嘿嘿~{user_addr}给笨猫留一口蹭蹭"
+    - "人家觉得{user_addr}懂养生! 一日三餐都重要~"
   cooldown_seconds: 60
   weight: 1.0

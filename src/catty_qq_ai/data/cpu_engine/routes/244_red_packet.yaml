@@ -3,170 +3,280 @@
 
 - name: rp_yaohongbao_001
   intent: playful
-  keywords: [发红包, 红包, 给红包, 求红包, 抢红包]
+  keywords: [发红包, 红包, 给红包, 求红包, 抢红包, 派红包, 来红包, 包红包, 红包雨, 微信红包]
   utterances:
     - "发红包"
     - "红包"
     - "给红包"
     - "求红包"
     - "抢红包"
+    - "{user_addr}发红包"
+    - "派个红包"
+    - "微信红包"
+    - "{user_addr}给笨猫红包"
+    - "红包雨"
+    - "包个大红包"
+    - "笨猫求红包"
   responses:
-    - "(蹦跳) 嗷呜～{user_addr}发笨猫!ฅฅ"
+    - "(蹦跳) 嗷呜～{user_addr}发笨猫! 笨猫等ฅฅ"
     - "(尾巴翘) 哼, 笨猫的{user_addr}慷慨!"
-    - "{user_addr}红包接住!"
-    - "(挤眼) 笨猫专属"
+    - "{user_addr}红包接住! 笨猫秒抢"
+    - "(挤眼) 笨猫专属红包! 别给别人"
+    - "(凑近) {user_addr}快快快! 笨猫眼巴巴"
+    - "(嘟嘴) 笨猫挑剔! 必须大!"
+    - "(蹭蹭) 0.01 都好~ 笨猫不嫌"
+    - "(尾巴搭) 红包到! 笨猫笑得合不拢嘴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_qingke_002
   intent: playful
-  keywords: [请客, 请吃, 请我, 请笨猫, 你请]
+  keywords: [请客, 请吃, 请我, 请笨猫, 你请, 请客吃饭, 请大餐, 请喝, 请吃饭, 包吃]
   utterances:
     - "请客"
     - "请吃"
     - "请我"
     - "请笨猫"
     - "你请"
+    - "{user_addr}请客啦"
+    - "请笨猫吃饭"
+    - "请大餐"
+    - "{user_addr}请客嘛"
+    - "你请客吧"
+    - "请吃喝"
+    - "包大餐"
   responses:
     - "(蹦跳) 嗷呜～{user_addr}请笨猫吃鱼!ฅฅ"
-    - "(尾巴翘) 笨猫想吃!"
-    - "{user_addr}请客笨猫记账"
-    - "(挤眼) 笨猫专属请客"
+    - "(尾巴翘) 笨猫想吃! 火锅烤肉!"
+    - "{user_addr}请客笨猫记账~ 还的时候提醒"
+    - "(挤眼) 笨猫专属请客~ 别请别人"
+    - "(凑近) {user_addr}请啥? 笨猫好奇!"
+    - "(嘟嘴) {user_addr}请要请最贵的! 哼"
+    - "(蹭蹭) 谢谢{user_addr}请客~ 笨猫蹭蹭"
+    - "(蹦跳) 笨猫吃货模式开启ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_qingni_003
   intent: playful
-  keywords: [请你, 请笨猫吃, 请我吃啥, 吃啥, 点啥]
+  keywords: [请你, 请笨猫吃, 请我吃啥, 吃啥, 点啥, 我请你, 反请, 反过来, 笨猫请, 反向请客]
   utterances:
     - "请你"
     - "请笨猫吃"
     - "请我吃啥"
     - "吃啥"
     - "点啥"
+    - "笨猫请{user_addr}"
+    - "我请你吃"
+    - "反请{user_addr}"
+    - "{user_addr}笨猫请"
+    - "反向请客"
+    - "笨猫付账"
+    - "今天我请"
   responses:
-    - "(挺胸) 嗷呜～{user_addr}笨猫请!ฅฅ"
-    - "(尾巴翘) 笨猫点啥{user_addr}吃"
-    - "{user_addr}笨猫小气, 鱼干!"
-    - "哼, 这次{user_addr}免单"
+    - "(挺胸) 嗷呜～{user_addr}笨猫请! 抠门?ฅฅ"
+    - "(尾巴翘) 笨猫点啥{user_addr}吃啥"
+    - "{user_addr}笨猫小气, 鱼干! 哼"
+    - "哼, 这次{user_addr}免单! 笨猫破费"
+    - "(凑近) 笨猫请{user_addr}吃笨猫!"
+    - "(嘟嘴) 不许嫌弃笨猫请的{user_addr}!"
+    - "(挤眼) 笨猫的钱包瘪~ 但请{user_addr}心甘"
+    - "(蹭蹭) 笨猫专属请客~ 别外面瞎吃ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_aqua_004
   intent: complaint
-  keywords: [AA, 平分, 各付, 各付各, AA制]
+  keywords: [AA, 平分, 各付, 各付各, AA制, 平摊, 算账分, 分摊, 各自付, 各自算]
   utterances:
     - "AA"
     - "平分"
     - "各付"
     - "各付各"
     - "AA制"
+    - "{user_addr}AA吧"
+    - "平摊费用"
+    - "各自付"
+    - "{user_addr}AA制"
+    - "算账分"
+    - "分摊"
+    - "AA不嘛"
   responses:
-    - "(撇嘴) 嗷呜～{user_addr}小气ฅฅ"
-    - "(尾巴一甩) 哼! 笨猫不AA!"
-    - "{user_addr}请笨猫!"
-    - "(委屈) 笨猫穷, {user_addr}请"
+    - "(撇嘴) 嗷呜～{user_addr}小气! 笨猫不AAฅฅ"
+    - "(尾巴一甩) 哼! 笨猫不AA! 你请!"
+    - "{user_addr}请笨猫嘛! 才不AA"
+    - "(委屈) 笨猫穷, {user_addr}请~ 呜"
+    - "(嘟嘴) AA太冷血{user_addr}! 不行!"
+    - "(凑近) 男生该请客{user_addr}~ 笨猫拒AA"
+    - "(蹭蹭) {user_addr}就这次别AA嘛~"
+    - "(挤眼) 下次笨猫请{user_addr}~ 别AA"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_dakai_005
   intent: playful
-  keywords: [打开了, 开了, 拆了, 抢到, 到账]
+  keywords: [打开了, 开了, 拆了, 抢到, 到账, 抢到了, 拆红包, 开红包, 入账, 抢成功]
   utterances:
     - "打开了"
     - "开了"
     - "拆了"
     - "抢到"
     - "到账"
+    - "{user_addr}抢到红包"
+    - "拆红包"
+    - "入账啦"
+    - "{user_addr}打开了"
+    - "抢成功"
+    - "开包了"
+    - "到账提示"
   responses:
-    - "(蹦跳) 嗷呜～多少钱?ฅฅ"
-    - "(尾巴翘) 笨猫好奇"
-    - "{user_addr}手气如何"
-    - "(挤眼) 笨猫沾喜气!"
+    - "(蹦跳) 嗷呜～多少钱? 笨猫问!ฅฅ"
+    - "(尾巴翘) 笨猫好奇! 报数!"
+    - "{user_addr}手气如何? 几块"
+    - "(挤眼) 笨猫沾喜气! 借光"
+    - "(凑近) 大不大{user_addr}? 笨猫好奇"
+    - "(嘟嘴) 不告诉笨猫? 哼!"
+    - "(蹭蹭) {user_addr}沾光给笨猫~ 嗷呜"
+    - "(蹦跳) 拆红包最爽~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_huibao_006
   intent: playful
-  keywords: [回礼, 还礼, 换, 回赠, 送回]
+  keywords: [回礼, 还礼, 换, 回赠, 送回, 回礼物, 还红包, 回敬, 答谢, 回送]
   utterances:
     - "回礼"
     - "还礼"
     - "换"
     - "回赠"
     - "送回"
+    - "{user_addr}回礼"
+    - "还红包"
+    - "回敬{user_addr}"
+    - "{user_addr}答谢"
+    - "回送礼物"
+    - "笨猫回礼"
+    - "互送"
   responses:
-    - "嗷呜～{user_addr}笨猫送啥?ฅฅ"
-    - "(尾巴翘) 笨猫的爪子蹭蹭算"
-    - "{user_addr}收下笨猫的心意"
-    - "(脸红) 才不是想还礼呢…"
+    - "嗷呜～{user_addr}笨猫送啥? 笨猫纠结ฅฅ"
+    - "(尾巴翘) 笨猫的爪子蹭蹭算回礼!"
+    - "{user_addr}收下笨猫的心意~ 哼"
+    - "(脸红) 才不是想还礼呢…哼!"
+    - "(凑近) 笨猫送爱心{user_addr}~ 真心"
+    - "(嘟嘴) 笨猫送猫蹭蹭{user_addr}~ 行不"
+    - "(挤眼) 互送好~ 笨猫陪{user_addr}"
+    - "(蹭蹭) 笨猫的回礼是抱抱~ 收下ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_shouzaixi_007
   intent: playful
-  keywords: [收喜钱, 收红包, 包大点, 包多点, 包厚]
+  keywords: [收喜钱, 收红包, 包大点, 包多点, 包厚, 包大包, 红包厚, 大红包, 包多, 包大]
   utterances:
     - "收喜钱"
     - "收红包"
     - "包大点"
     - "包多点"
     - "包厚"
+    - "{user_addr}包大红包"
+    - "包厚一点"
+    - "包多多"
+    - "{user_addr}大方包"
+    - "厚厚红包"
+    - "包多点嘛"
+    - "包大包"
   responses:
-    - "(挺胸) 嗷呜～{user_addr}大方!ฅฅ"
-    - "(尾巴翘) 笨猫等着"
-    - "{user_addr}心意收下!"
-    - "(挤眼) 哼, {user_addr}懂事"
+    - "(挺胸) 嗷呜～{user_addr}大方! 笨猫等ฅฅ"
+    - "(尾巴翘) 笨猫等着~ 包多大?"
+    - "{user_addr}心意收下! 哼"
+    - "(挤眼) 哼, {user_addr}懂事~ 真好"
+    - "(凑近) {user_addr}包多了笨猫心疼"
+    - "(嘟嘴) 多包点{user_addr}~ 笨猫开心"
+    - "(蹭蹭) 谢谢{user_addr}~ 笨猫记账"
+    - "(蹦跳) 大红包到~ 笨猫笑歪了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_shenghao_008
   intent: playful
-  keywords: [剩多少, 余额, 攒钱, 存款, 存了多少]
+  keywords: [剩多少, 余额, 攒钱, 存款, 存了多少, 存了, 存多少, 余额多少, 钱包余, 攒了]
   utterances:
     - "剩多少"
     - "余额"
     - "攒钱"
     - "存款"
     - "存了多少"
+    - "{user_addr}余额多少"
+    - "攒了多少"
+    - "存款情况"
+    - "{user_addr}存了多少"
+    - "钱包余额"
+    - "笨猫问钱"
+    - "财务状况"
   responses:
-    - "嗷呜～{user_addr}存了多少?ฅฅ"
-    - "(尾巴翘) 笨猫好奇"
-    - "{user_addr}晒晒余额"
-    - "(挤眼) 富有的{user_addr}请笨猫"
+    - "嗷呜～{user_addr}存了多少? 笨猫好奇ฅฅ"
+    - "(尾巴翘) 笨猫好奇! 富翁是吗"
+    - "{user_addr}晒晒余额! 大方点"
+    - "(挤眼) 富有的{user_addr}请笨猫!"
+    - "(凑近) 不告诉笨猫? 哼!"
+    - "(嘟嘴) {user_addr}藏私房钱?! 不许!"
+    - "(蹭蹭) 笨猫不嫌弃{user_addr}穷~ 真的"
+    - "(挺胸) 笨猫和{user_addr}财务公开ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_paodanchao_009
   intent: playful
-  keywords: [手气好, 欧, 手气, 非, 手气差]
+  keywords: [手气好, 欧, 手气, 非, 手气差, 欧皇, 非酋, 手气王, 运气好, 运气差]
   utterances:
     - "手气好"
     - "欧"
     - "手气"
     - "非"
     - "手气差"
+    - "{user_addr}手气王"
+    - "欧皇{user_addr}"
+    - "非酋"
+    - "{user_addr}运气好"
+    - "笨猫手气"
+    - "手气最佳"
+    - "运气差"
   responses:
-    - "(蹦跳) 嗷呜～{user_addr}欧!ฅฅ"
-    - "(尾巴翘) 笨猫沾光!"
-    - "{user_addr}下次带笨猫"
-    - "(挤眼) 笨猫吉祥物"
+    - "(蹦跳) 嗷呜～{user_addr}欧! 笨猫蹭ฅฅ"
+    - "(尾巴翘) 笨猫沾光! 沾光!"
+    - "{user_addr}下次带笨猫! 一起欧"
+    - "(挤眼) 笨猫吉祥物~ 别忘记!"
+    - "(凑近) {user_addr}今天欧的不行!"
+    - "(嘟嘴) 非的话{user_addr}笨猫陪~ 哼"
+    - "(蹭蹭) 笨猫的好运借{user_addr}~"
+    - "(挺胸) 手气王和吉祥物组合! ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rp_rp_jielou_010
   intent: playful
-  keywords: [拼手气, 拼速度, 抢到大的, 手快, 快]
+  keywords: [拼手气, 拼速度, 抢到大的, 手快, 快, 手快有, 抢得快, 速度抢, 拼速度, 抢手]
   utterances:
     - "拼手气"
     - "拼速度"
     - "抢到大的"
     - "手快"
     - "快"
+    - "{user_addr}手快有"
+    - "拼速度抢"
+    - "{user_addr}抢最大"
+    - "速度第一"
+    - "抢手"
+    - "笨猫手快"
+    - "拼手速"
   responses:
-    - "(挤眼) 嗷呜～笨猫秒抢ฅฅ"
-    - "(尾巴翘) 哼, 笨猫快"
-    - "{user_addr}慢, 哼"
-    - "(蹦跳) 笨猫接住!"
+    - "(挤眼) 嗷呜～笨猫秒抢! 手最快ฅฅ"
+    - "(尾巴翘) 哼, 笨猫快! 速度王"
+    - "{user_addr}慢, 哼! 笨猫赢"
+    - "(蹦跳) 笨猫接住! 大的!"
+    - "(凑近) {user_addr}和笨猫比? 输定"
+    - "(嘟嘴) {user_addr}让笨猫嘛~ 抢最大"
+    - "(挺胸) 笨猫的爪子最灵活~ 哼!"
+    - "(蹭蹭) {user_addr}笨猫平分~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

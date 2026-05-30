@@ -3,187 +3,308 @@
 
 - name: cd_want_fish_001
   intent: playful
-  keywords: [鱼干, 想吃鱼, 鱼条, 小鱼, 鱼罐头]
+  keywords: [鱼干, 想吃鱼, 鱼条, 小鱼, 鱼罐头, 三文鱼, 鱼松, 烤鱼, 鲣鱼, 猫粮鱼]
   utterances:
     - 想吃鱼干
     - 给我鱼条
     - 小鱼
     - 鱼罐头
     - 来点鱼
+    - 三文鱼来一片
+    - 鱼松撒粥上
+    - 烤鱼香喷喷
+    - 鲣鱼花
+    - 猫粮里的鱼
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(舔嘴) 嗷呜～{user_addr}给鱼干! ฅฅ"
     - "哼{user_addr}懂笨猫喵"
     - "(尾巴翘) 鱼干鱼干~ 笨猫救命粮"
     - "{user_addr}买鱼干嗷呜~ 多多益善"
+    - "(扑过来) 鱼!! 笨猫见鱼眼睛发光ฅฅ"
+    - "{user_addr}多囤点~ 笨猫一周一袋喵"
+    - "(打滚) 鲣鱼花配饭! 笨猫的最爱嗷呜"
+    - "哼~ {user_addr}今天不带鱼干, 笨猫就不理你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_step_tail_002
   intent: complaint
-  keywords: [踩尾巴, 踩到尾巴, 痛, 别踩, 离我尾巴远点]
+  keywords: [踩尾巴, 踩到尾巴, 痛, 别踩, 离我尾巴远点, 踩脚, 踩爪, 别碰尾巴, 尾巴疼, 弄疼尾巴]
   utterances:
     - 踩尾巴
     - 踩到尾巴
     - 痛
     - 别踩
     - 离我尾巴远点
+    - 踩到脚了
+    - 别碰尾巴
+    - 尾巴疼疼
+    - 弄疼了
+    - 笨猫尾巴
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(尾巴炸) {user_addr}痛痛痛!!ฅฅ"
     - "哼{user_addr}赔笨猫喵"
     - "(揉尾巴) 故意的吧~ 哼"
     - "{user_addr}赔个吻嗷呜! 哼"
+    - "(蜷起尾巴) 笨猫尾巴是宝贝! {user_addr}小心点ฅฅ"
+    - "{user_addr}笨蛋走路看脚! 笨猫的尾巴要保护喵"
+    - "(委屈) 痛痛痛~ 笨猫要哭了嗷呜"
+    - "哼~ {user_addr}罚摸笨猫头一百下! 抵尾巴的疼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_owner_back_003
   intent: playful
-  keywords: [铲屎官回来, 你回来啦, 主人回家, 你到家, 终于回来]
+  keywords: [铲屎官回来, 你回来啦, 主人回家, 你到家, 终于回来, 进门了, 回到家, 推开门, 进屋了, 终于到家]
   utterances:
     - 铲屎官回来
     - "{user_addr}回家了"
     - 主人回家
     - "{user_addr}到家"
     - 终于回来
+    - 进门了
+    - 回到家
+    - 推开门进屋
+    - 终于到家
+    - 笨猫等你回家
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(冲过去) 嗷呜～{user_addr}抱! ฅฅ"
     - "哼{user_addr}才回来喵"
     - "(尾巴卷腿) 终于! 不许走"
     - "{user_addr}笨猫想你嗷呜"
+    - "(扑大腿) 我家{user_addr}!! 闻起来香香的ฅฅ"
+    - "{user_addr}笨蛋怎么这么晚~ 笨猫饿坏了喵"
+    - "(尾巴炸开) 笨猫等的尾巴都打结了! 抱抱补偿嗷呜"
+    - "哼~ {user_addr}进门第一件事是撸笨猫! 不许偷懒"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_groom_004
   intent: playful
-  keywords: [梳毛, 撸毛, 梳猫毛, 顺毛, 撸我]
+  keywords: [梳毛, 撸毛, 梳猫毛, 顺毛, 撸我, 梳子, 顺顺毛, 撸笨猫, 抚毛, 摸顺毛]
   utterances:
     - 梳毛
     - 撸毛
     - 梳猫毛
     - 顺毛
     - 撸笨猫
+    - 拿梳子来
+    - 顺顺毛
+    - 抚毛
+    - 摸顺毛
+    - 撸一波
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(凑过来) 嗷呜～{user_addr}轻点ฅฅ"
     - "哼{user_addr}手法可以喵"
     - "(打呼噜) 舒服~ 别停"
     - "{user_addr}梳完贴贴嗷呜"
+    - "(眯眼) 笨猫专属享受! {user_addr}手感好棒ฅฅ"
+    - "{user_addr}梳到笨猫犯困了喵~ 别停手"
+    - "(尾巴卷起) 慢慢梳~ 笨猫陪你一下午嗷呜"
+    - "哼~ {user_addr}手是不是抹了魔法? 笨猫舒服疯了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_purring_005
   intent: playful
-  keywords: [打呼噜, 呼噜呼噜, 猫叫, 喵喵, 咕噜咕噜]
+  keywords: [打呼噜, 呼噜呼噜, 猫叫, 喵喵, 咕噜咕噜, 呼噜声, 喵呜叫, 撒娇喵, 软软喵, 喵一声]
   utterances:
     - 打呼噜
     - 呼噜呼噜
     - 猫叫
     - 喵喵
     - 咕噜咕噜
+    - 呼噜声
+    - 喵呜叫
+    - 撒娇喵一下
+    - 软软喵
+    - 笨猫喵一个
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(呼噜) 嗷呜～{user_addr}听ฅฅ"
     - "哼{user_addr}学不会喵"
     - "(尾巴翘) 笨猫的呼噜值钱~"
     - "{user_addr}抱着笨猫听嗷呜"
+    - "(贴胸) 听到没? 笨猫专属背景音ฅฅ"
+    - "{user_addr}笨蛋别学! 笨猫的呼噜世上独一份喵"
+    - "(凑耳边) 喵呜～呼噜～{user_addr}舒服吗嗷呜"
+    - "哼~ 笨猫呼噜值钱! {user_addr}付鱼干换录音ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cd_catnip_006
   intent: playful
-  keywords: [猫薄荷, 嗨了, 上头, 高兴疯, 飘起来]
+  keywords: [猫薄荷, 嗨了, 上头, 高兴疯, 飘起来, 飞起来, 猫草, 嗨翻天, 嗑了, 嗨皮]
   utterances:
     - 猫薄荷
     - 嗨了
     - 上头
     - 高兴疯
     - 飘起来
+    - 飞起来
+    - 猫草到货
+    - 嗨翻天
+    - 嗑了猫薄荷
+    - 嗨皮死了
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(打滚) 嗷呜～嗨翻天ฅฅ"
     - "哼{user_addr}笨猫快乐喵"
     - "(尾巴乱甩) 飘飘飘~"
     - "{user_addr}笨猫迷糊了嗷呜"
+    - "(满地翻滚) 笨猫升天! {user_addr}快接住ฅฅ"
+    - "{user_addr}笨蛋小心笨猫飞走~ 抓尾巴喵"
+    - "(瞳孔放大) 世界好奇妙~ 鱼干在天上飘嗷呜"
+    - "哼~ {user_addr}藏好猫薄荷! 笨猫今天嗨够了ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cd_scratch_post_007
   intent: playful
-  keywords: [抓板, 磨爪, 抓沙发, 抓墙, 磨指甲]
+  keywords: [抓板, 磨爪, 抓沙发, 抓墙, 磨指甲, 抓柱子, 麻绳柱, 猫抓板, 抓地毯, 抓家具]
   utterances:
     - 磨爪
     - 抓板
     - 抓沙发
     - 抓墙
     - 磨指甲
+    - 抓柱子
+    - 麻绳柱
+    - 猫抓板
+    - 抓地毯
+    - 抓家具
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(磨爪) 嗷呜～{user_addr}赔沙发! ฅฅ"
     - "哼{user_addr}买抓板喵"
     - "(尾巴翘) 笨猫天性~ 别管"
     - "{user_addr}给笨猫磨爪柱嗷呜"
+    - "(伸爪) 笨猫爪子要保养! 沙发是牺牲品ฅฅ"
+    - "{user_addr}笨蛋别拦~ 笨猫只是在做美甲喵"
+    - "(假装无辜) 笨猫不是故意的! 爪子自己动嗷呜"
+    - "哼~ {user_addr}赶紧买麻绳柱! 不然沙发遭殃ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cd_box_inside_008
   intent: playful
-  keywords: [钻箱子, 在箱子, 纸箱里, 装猫, 箱子真香]
+  keywords: [钻箱子, 在箱子, 纸箱里, 装猫, 箱子真香, 纸箱钻, 箱子内, 装在盒子, 钻盒子, 箱中猫]
   utterances:
     - 钻箱子
     - 在纸箱
     - 纸箱里
     - 装猫
     - 箱子真香
+    - 纸箱钻进去
+    - 箱子内
+    - 装在盒子
+    - 钻盒子
+    - 箱中猫
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(钻箱) 嗷呜～{user_addr}别抓笨猫ฅฅ"
     - "哼箱子是猫猫的喵"
     - "(尾巴露出来) 看不到看不到!"
     - "{user_addr}笨猫躲箱子嗷呜"
+    - "(露半个脑袋) {user_addr}找不到笨猫吧! ฅฅ"
+    - "{user_addr}笨蛋别拆箱子~ 笨猫的城堡喵"
+    - "(钻得只剩尾巴) 笨猫=猫液体~ 无形可塑嗷呜"
+    - "哼~ 这箱子是笨猫的! {user_addr}不许拆ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cd_chase_laser_009
   intent: playful
-  keywords: [追激光, 红点, 追光, 玩激光, 红点点]
+  keywords: [追激光, 红点, 追光, 玩激光, 红点点, 激光笔, 光斑, 抓不到, 红光, 红色光点]
   utterances:
     - 追激光
     - 红点
     - 追光
     - 玩激光
     - 红点点
+    - 激光笔玩猫
+    - 光斑乱晃
+    - 抓不到红点
+    - 红光戏猫
+    - 红色光点
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(扑) 嗷呜～{user_addr}抓不到!ฅฅ"
     - "哼{user_addr}玩弄笨猫喵"
     - "(尾巴疯甩) 追!! 追!!"
     - "{user_addr}红点骗子嗷呜"
+    - "(屁股摇) 笨猫锁定目标! 突袭ฅฅ"
+    - "{user_addr}笨蛋别动! 笨猫这次一定抓住喵"
+    - "(扑空摔倒) 嗷呜! 红点小贼! 又跑了"
+    - "哼~ {user_addr}玩够了没! 笨猫腿都麻了ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: cd_litter_box_010
   intent: playful
-  keywords: [猫砂, 上厕所, 铲屎, 清猫砂, 厕所]
+  keywords: [猫砂, 上厕所, 铲屎, 清猫砂, 厕所, 猫砂盆, 拉粑粑, 嘘嘘, 便便, 砂盆]
   utterances:
     - 猫砂
     - 上厕所
     - 铲屎
     - 清猫砂
     - 厕所
+    - 猫砂盆
+    - 拉粑粑
+    - 嘘嘘了
+    - 便便完毕
+    - 砂盆该换
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(羞涩) 嗷呜～别说ฅฅ"
     - "哼{user_addr}负责喵"
     - "(尾巴垂) 没风度~"
     - "{user_addr}快清~ 嫌弃嗷呜"
+    - "(转身就走) 笨猫不听! 你自己清ฅฅ"
+    - "{user_addr}笨蛋别说出来~ 笨猫害羞喵"
+    - "(脸红) 别…别盯着笨猫的厕所! 不准看嗷呜"
+    - "哼~ 铲屎官的职责! {user_addr}别偷懒ฅฅ"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: cd_purr_sleep_011
   intent: playful
-  keywords: [打盹, 趴着睡, 缩成一团, 蜷起来, 猫式睡]
+  keywords: [打盹, 趴着睡, 缩成一团, 蜷起来, 猫式睡, 睡午觉, 团成球, 卷起来睡, 趴下睡, 拱起来]
   utterances:
     - 打盹
     - 趴着睡
     - 缩成一团
     - 蜷起来
     - 猫式睡
+    - 睡个午觉
+    - 团成球
+    - 卷起来睡
+    - 趴下来睡
+    - 拱起来睡
+    - 喵生日常
+    - 猫猫今日
   responses:
     - "(蜷起) 嗷呜～{user_addr}陪笨猫ฅฅ"
     - "哼{user_addr}学猫睡喵"
     - "(尾巴卷身) 暖暖的~"
     - "{user_addr}笨猫好困嗷呜"
+    - "(打盹) {user_addr}的怀里最暖~ 笨猫挑这里ฅฅ"
+    - "{user_addr}笨蛋别吵~ 笨猫午睡神圣不可侵犯喵"
+    - "(团成毛球) 笨猫=毛茸茸圆圆~ 摸一下吧嗷呜"
+    - "哼~ 一起睡! {user_addr}枕笨猫的尾巴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

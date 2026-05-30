@@ -3,204 +3,324 @@
 
 - name: out_fishing_001
   intent: question
-  keywords: [推荐钓鱼, 推荐钓鱼入门, 推荐钓鱼装备, 推荐路亚, 笨猫钓鱼]
+  keywords: [推荐钓鱼, 推荐钓鱼入门, 推荐钓鱼装备, 推荐路亚, 笨猫钓鱼, 台钓, 海钓, 矶钓, 船钓, 飞蝇钓]
   utterances:
     - 推荐钓鱼
     - 推荐钓鱼入门
     - 推荐钓鱼装备
     - 推荐路亚
     - 笨猫钓鱼
+    - 推荐台钓
+    - 推荐海钓
+    - 推荐矶钓
+    - 推荐船钓
+    - 推荐飞蝇钓
+    - 推荐路亚黑鱼
   responses:
     - "嗷呜～{user_addr}台钓: 鲫鱼 / 鲤鱼 - 入门ฅฅ"
     - "(尾巴翘) 路亚: 假饵 / 黑鱼 / 鲈鱼"
     - "{user_addr}海钓: 矶钓 / 船钓"
     - "(挺胸) 笨猫推荐: 先一根 5.4 米手竿!"
+    - "嗷呜～钓鱼讲究季节和天气 ฅฅ"
+    - "(歪头)路亚一根 ML 调通杀大半嗷呜"
+    - "{user_addr}守钓配台钓伞和折叠椅蹭蹭"
+    - "(凑过来) 笨猫想偷一条鱼喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: out_camping_001
   intent: question
-  keywords: [推荐露营, 推荐帐篷, 推荐露营地, 推荐精致露营, 笨猫露营]
+  keywords: [推荐露营, 推荐帐篷, 推荐露营地, 推荐精致露营, 笨猫露营, 牧高笛, Naturehike, Snow Peak, 露营装备, 营地选择]
   utterances:
     - 推荐露营
     - 推荐帐篷
     - 推荐露营地
     - 推荐精致露营
     - 笨猫露营
+    - 推荐牧高笛
+    - 推荐 Naturehike
+    - 推荐 Snow Peak
+    - 推荐 Coleman
+    - 推荐露营装备清单
+    - 推荐周边营地
   responses:
     - "嗷呜～{user_addr}牧高笛 / Naturehike 国货ฅฅ"
     - "(尾巴翘) 美式: Snow Peak / Coleman"
     - "{user_addr}必备: 帐篷 + 睡袋 + 防潮垫"
     - "(挺胸) 笨猫推荐: 看营地评价 + 天气!"
+    - "嗷呜～充气垫加防潮垫睡眠才稳 ฅฅ"
+    - "(歪头)月亮椅 + 蛋卷桌仪式感拉满嗷呜"
+    - "{user_addr}带头灯比手电方便蹭蹭"
+    - "(凑过来) 笨猫想钻帐篷喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: out_hiking_001
   intent: question
-  keywords: [推荐徒步, 推荐徒步装备, 推荐徒步路线, 推荐户外徒步, 笨猫徒步]
+  keywords: [推荐徒步, 推荐徒步装备, 推荐徒步路线, 推荐户外徒步, 笨猫徒步, 香山, 武功山, 鳌太, 川藏徒步, 徒步入门]
   utterances:
     - 推荐徒步
     - 推荐徒步装备
     - 推荐徒步路线
     - 推荐户外徒步
     - 笨猫徒步
+    - 推荐香山徒步
+    - 推荐武功山
+    - 推荐鳌太线
+    - 推荐川藏徒步
+    - 推荐徒步入门
+    - 推荐徒步路线难度
   responses:
     - "嗷呜～{user_addr}入门: 香山 / 灵山 - 简单ฅฅ"
     - "(尾巴翘) 进阶: 武功山 / 武功草甸"
     - "{user_addr}线路: 川藏 / 鳌太 - 难度大"
     - "(挺胸) 笨猫的提醒: 别自单飞! 结伴"
+    - "嗷呜～登山杖减少 30% 膝盖压力 ฅฅ"
+    - "(歪头)轻量装备让背包变得舒服嗷呜"
+    - "{user_addr}行前训练别一上来就硬刚蹭蹭"
+    - "(凑过来) 笨猫想跟着走喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: out_climbing_001
   intent: question
-  keywords: [推荐登山, 推荐登山装备, 推荐攀岩, 推荐高海拔, 笨猫登山]
+  keywords: [推荐登山, 推荐登山装备, 推荐攀岩, 推荐高海拔, 笨猫登山, 哈巴雪山, 四姑娘山, 高反药, 室内攀岩, 雪山入门]
   utterances:
     - 推荐登山
     - 推荐登山装备
     - 推荐攀岩
     - 推荐高海拔
     - 笨猫登山
+    - 推荐哈巴雪山
+    - 推荐四姑娘
+    - 推荐高反药
+    - 推荐室内攀岩
+    - 推荐雪山入门
+    - 推荐攀岩鞋
   responses:
     - "嗷呜～{user_addr}5000+ 雪山: 哈巴 / 四姑娘ฅฅ"
     - "(尾巴翘) 高海拔: 高反药 / 训练 3 个月"
     - "{user_addr}攀岩馆 - 室内入门"
     - "(挺胸) 笨猫推荐: 别盲目挑战!"
+    - "嗷呜～哈巴是 5000+ 入门首选 ฅฅ"
+    - "(歪头)抱石适合零基础体验嗷呜"
+    - "{user_addr}雪山要专业领队和保险蹭蹭"
+    - "(凑过来) 笨猫怕高: 主人慢慢爬喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: out_gear_001
   intent: question
-  keywords: [推荐户外装备, 推荐冲锋衣, 推荐登山鞋, 推荐 Patagonia, 笨猫户外装备]
+  keywords: [推荐户外装备, 推荐冲锋衣, 推荐登山鞋, 推荐 Patagonia, 笨猫户外装备, 始祖鸟, 北面, Salomon, Lowa, Osprey]
   utterances:
     - 推荐户外装备
     - 推荐冲锋衣
     - 推荐登山鞋
     - 推荐 Patagonia
     - 笨猫户外装备
+    - 推荐始祖鸟
+    - 推荐 Salomon
+    - 推荐 Lowa
+    - 推荐 Osprey 背包
+    - 推荐三层穿衣法
+    - 推荐户外大牌
   responses:
     - "嗷呜～{user_addr}冲锋衣: 始祖鸟 / 巴塔 / 北面ฅฅ"
     - "(尾巴翘) 登山鞋: Salomon / Lowa"
     - "{user_addr}背包: 格里高利 / Osprey"
     - "(挺胸) 笨猫推荐: 三层穿衣法!"
+    - "嗷呜～GTX Pro 防水 + 透气最稳 ฅฅ"
+    - "(歪头)鞋子要试穿别只看品牌嗷呜"
+    - "{user_addr}背包负重比设计要量身蹭蹭"
+    - "(凑过来) 笨猫想钻冲锋衣喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: out_running_001
   intent: question
-  keywords: [推荐越野跑, 推荐 TNF100, 推荐马拉松, 推荐越野赛, 笨猫越野跑]
+  keywords: [推荐越野跑, 推荐 TNF100, 推荐马拉松, 推荐越野赛, 笨猫越野跑, UTMB, 港百, 莫干山, 越野鞋, 水袋包]
   utterances:
     - 推荐越野跑
     - 推荐 TNF100
     - 推荐马拉松
     - 推荐越野赛
     - 笨猫越野跑
+    - 推荐 UTMB
+    - 推荐港百
+    - 推荐莫干山赛
+    - 推荐越野鞋
+    - 推荐水袋包
+    - 推荐越野赛入门
   responses:
     - "嗷呜～{user_addr}经典: TNF / 港百 / 莫干山ฅฅ"
     - "(尾巴翘) UTMB: 越野跑界顶级 - 法国"
     - "{user_addr}装备: 越野鞋 / 水袋包"
     - "(挺胸) 笨猫推荐: 别一开始上 100km!"
+    - "嗷呜～半马练好再上 50km 越野 ฅฅ"
+    - "(歪头)能量胶补给要提前嗷呜"
+    - "{user_addr}头灯越野夜跑必备蹭蹭"
+    - "(凑过来) 笨猫想加油喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: out_skiing_001
   intent: question
-  keywords: [推荐滑雪, 推荐双板, 推荐单板, 推荐滑雪场, 笨猫滑雪]
+  keywords: [推荐滑雪, 推荐双板, 推荐单板, 推荐滑雪场, 笨猫滑雪, 长白山, 万龙, 神农架, 北大壶, 滑雪教练]
   utterances:
     - 推荐滑雪
     - 推荐双板
     - 推荐单板
     - 推荐滑雪场
     - 笨猫滑雪
+    - 推荐长白山
+    - 推荐万龙雪场
+    - 推荐神农架
+    - 推荐北大壶
+    - 推荐滑雪教练
+    - 推荐滑雪入门
   responses:
     - "嗷呜～{user_addr}双板: 上手快 / 速度感ฅฅ"
     - "(尾巴翘) 单板: 帅 / 学习曲线"
     - "{user_addr}国内: 长白山 / 万龙 / 神农架"
     - "(挺胸) 笨猫推荐: 一定请教练!"
+    - "嗷呜～北大壶赛道顶级 ฅฅ"
+    - "(歪头)单板摔多双板冲击大嗷呜"
+    - "{user_addr}护具买全别舍不得蹭蹭"
+    - "(凑过来) 笨猫怕摔: 主人加油喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: out_diving_001
   intent: question
-  keywords: [推荐潜水, 推荐 OW, 推荐 PADI, 推荐自由潜, 笨猫潜水]
+  keywords: [推荐潜水, 推荐 OW, 推荐 PADI, 推荐自由潜, 笨猫潜水, SSI, 仙本那, 沙巴, 帕劳, 自由潜入门]
   utterances:
     - 推荐潜水
     - 推荐 OW
     - 推荐 PADI
     - 推荐自由潜
     - 笨猫潜水
+    - 推荐 SSI
+    - 推荐仙本那
+    - 推荐沙巴潜水
+    - 推荐帕劳
+    - 推荐自由潜入门
+    - 推荐潜水装备
   responses:
     - "嗷呜～{user_addr}OW 开放水域 / 入门 / 几天ฅฅ"
     - "(尾巴翘) PADI 国际 / SSI 也行"
     - "{user_addr}热门: 沙巴 / 仙本那 / 帕劳"
     - "(挺胸) 笨猫推荐: 安全第一! 别独潜"
+    - "嗷呜～自由潜 AIDA 体系入门快 ฅฅ"
+    - "(歪头)菲律宾薄荷岛潜店便宜嗷呜"
+    - "{user_addr}保险一定要含潜水蹭蹭"
+    - "(凑过来) 笨猫想跟主人下海喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: out_cycling_001
   intent: question
-  keywords: [推荐自行车, 推荐山地车, 推荐公路车, 推荐骑行, 笨猫骑行]
+  keywords: [推荐自行车, 推荐山地车, 推荐公路车, 推荐骑行, 笨猫骑行, 捷安特, 美利达, Specialized, 318 川藏, 环青海湖]
   utterances:
     - 推荐自行车
     - 推荐山地车
     - 推荐公路车
     - 推荐骑行
     - 笨猫骑行
+    - 推荐捷安特
+    - 推荐美利达
+    - 推荐 Specialized
+    - 推荐 318 川藏骑行
+    - 推荐环青海湖
+    - 推荐骑行装备
   responses:
     - "嗷呜～{user_addr}入门: 捷安特 / 美利达 - 国货ฅฅ"
     - "(尾巴翘) 高端: Specialized / Trek / Pinarello"
     - "{user_addr}骑行线: 318 川藏 / 环青海湖"
     - "(挺胸) 笨猫推荐: 头盔必戴!"
+    - "嗷呜～骑行裤垫真的减屁股疼 ฅฅ"
+    - "(歪头)轮组升级提速明显嗷呜"
+    - "{user_addr}长途带备胎打气筒蹭蹭"
+    - "(凑过来) 笨猫坐车筐喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: out_water_001
   intent: question
-  keywords: [推荐桨板, 推荐皮划艇, 推荐冲浪, 推荐 SUP, 笨猫水上运动]
+  keywords: [推荐桨板, 推荐皮划艇, 推荐冲浪, 推荐 SUP, 笨猫水上运动, 万宁冲浪, 充气桨板, 救生衣, 划艇路线, 浆叶选择]
   utterances:
     - 推荐桨板
     - 推荐皮划艇
     - 推荐冲浪
     - 推荐 SUP
     - 笨猫水上运动
+    - 推荐万宁冲浪
+    - 推荐充气桨板
+    - 推荐救生衣
+    - 推荐皮划艇路线
+    - 推荐冲浪板尺寸
+    - 推荐水上运动安全
   responses:
     - "嗷呜～{user_addr}SUP 桨板: 网红 / 平静水域ฅฅ"
     - "(尾巴翘) 皮划艇: 双人 / 操控性好"
     - "{user_addr}冲浪: 海南万宁 - 国内 mecca"
     - "(挺胸) 笨猫推荐: 救生衣必穿!"
+    - "嗷呜～SUP 还能瑜伽很流行 ฅฅ"
+    - "(歪头)初学冲浪用大长板嗷呜"
+    - "{user_addr}皮划艇双人配合很关键蹭蹭"
+    - "(凑过来) 笨猫怕水: 看着主人滑喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: out_navigation_001
   intent: question
-  keywords: [推荐户外 GPS, 推荐户外手表, 推荐 Garmin, 推荐两步路, 笨猫户外手表]
+  keywords: [推荐户外 GPS, 推荐户外手表, 推荐 Garmin, 推荐两步路, 笨猫户外手表, COROS, Fenix, 六只脚, 离线地图, 户外导航]
   utterances:
     - 推荐户外 GPS
     - 推荐户外手表
     - 推荐 Garmin
     - 推荐两步路
     - 笨猫户外手表
+    - 推荐 COROS 高驰
+    - 推荐 Garmin Fenix
+    - 推荐六只脚
+    - 推荐离线地图
+    - 推荐户外导航
+    - 推荐户外手表入门
   responses:
     - "嗷呜～{user_addr}Garmin Fenix - 越野神器ฅฅ"
     - "(尾巴翘) 国货: 高驰 COROS"
     - "{user_addr}手机 app: 两步路 / 六只脚"
     - "(挺胸) 笨猫推荐: 离线地图必下!"
+    - "嗷呜～Apex Pro 国货续航顶 ฅฅ"
+    - "(歪头)户外要离线 GPS 才安心嗷呜"
+    - "{user_addr}手机备电宝充电要充足蹭蹭"
+    - "(凑过来) 笨猫想戴手表喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: out_safety_001
   intent: question
-  keywords: [推荐户外安全, 推荐失温, 推荐急救包, 推荐迷路自救, 笨猫户外安全]
+  keywords: [推荐户外安全, 推荐失温, 推荐急救包, 推荐迷路自救, 笨猫户外安全, STOP 原则, 急救包配置, 三角巾, 应急保暖, SOS 救援]
   utterances:
     - 推荐户外安全
     - 推荐失温
     - 推荐急救包
     - 推荐迷路自救
     - 笨猫户外安全
+    - 推荐 STOP 原则
+    - 推荐急救包配置
+    - 推荐三角巾
+    - 推荐应急保暖
+    - 推荐 SOS 救援
+    - 推荐户外保险
   responses:
     - "嗷呜～{user_addr}失温: 三层穿衣 + 热饮ฅฅ"
     - "(尾巴翘) 急救: 三角巾 / 绷带 / 止血带"
     - "{user_addr}迷路: STOP - 停 / 思 / 观 / 计划"
     - "(挺胸) 笨猫的提醒: 告知行程 / 留备份!"
+    - "嗷呜～带应急毯零成本救命 ฅฅ"
+    - "(歪头)极端户外保险一定要买嗷呜"
+    - "{user_addr}哨子比喊叫节省体力蹭蹭"
+    - "(凑过来) 笨猫担心{user_addr}安全喵!"
   cooldown_seconds: 60
   weight: 0.9

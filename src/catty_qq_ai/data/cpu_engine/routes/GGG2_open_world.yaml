@@ -3,204 +3,432 @@
 
 - name: ow_zelda_totk_001
   intent: question
-  keywords: [推荐塞尔达, 推荐王国之泪, 推荐 TOTK, 推荐旷野之息, 笨猫塞尔达]
+  keywords:
+  - 推荐塞尔达
+  - 推荐王国之泪
+  - 推荐 TOTK
+  - 推荐旷野之息
+  - 笨猫塞尔达
+  - 有什么塞尔达
+  - 有什么王国之泪
+  - 有什么 TOTK
+  - 有什么旷野之息
   utterances:
-    - 推荐塞尔达
-    - 推荐王国之泪
-    - 推荐 TOTK
-    - 推荐旷野之息
-    - 笨猫塞尔达
+  - 推荐塞尔达
+  - 推荐王国之泪
+  - 推荐 TOTK
+  - 推荐旷野之息
+  - 笨猫塞尔达
+  - "{user_addr}聊聊塞尔达嘛"
+  - "{user_addr}塞尔达哪家强"
+  - "{user_addr}人家想了解塞尔达"
+  - 笨猫给猜猜塞尔达
+  - "{user_addr}塞尔达怎么选喵"
+  - 塞尔达有推荐吗
   responses:
-    - "嗷呜～{user_addr}王国之泪 - 究极沙盒ฅฅ"
-    - "(尾巴翘) 究极手 + 余料建造 - 自由度爆炸"
-    - "{user_addr}天空岛 / 地底 / 海拉鲁三层"
-    - "(挺胸) 猫猫推荐: 任天堂神作!"
+  - "嗷呜～{user_addr}王国之泪 - 究极沙盒ฅฅ"
+  - "(尾巴翘) 究极手 + 余料建造 - 自由度爆炸"
+  - "{user_addr}天空岛 / 地底 / 海拉鲁三层"
+  - "(挺胸) 猫猫推荐: 任天堂神作!"
+  - "(尾巴翘起来) {user_addr}塞尔达? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问塞尔达人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}塞尔达的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}塞尔达笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ow_gta_001
   intent: question
-  keywords: [推荐 GTA5, 推荐 GTA6, 推荐侠盗猎车, 推荐洛圣都, 笨猫 GTA]
+  keywords:
+  - 推荐 GTA5
+  - 推荐 GTA6
+  - 推荐侠盗猎车
+  - 推荐洛圣都
+  - 笨猫 GTA
+  - 有什么 GTA5
+  - 有什么 GTA6
+  - 有什么侠盗猎车
+  - 有什么洛圣都
   utterances:
-    - "推荐 GTA5"
-    - "推荐 GTA6"
-    - 推荐侠盗猎车
-    - 推荐洛圣都
-    - 笨猫 GTA
+  - 推荐 GTA5
+  - 推荐 GTA6
+  - 推荐侠盗猎车
+  - 推荐洛圣都
+  - 笨猫 GTA
+  - "{user_addr}聊聊GTA5嘛"
+  - "{user_addr}GTA5哪家强"
+  - "{user_addr}人家想了解GTA5"
+  - 笨猫给猜猜GTA5
+  - "{user_addr}GTA5怎么选喵"
+  - GTA5有推荐吗
   responses:
-    - "嗷呜～{user_addr}GTA5 - 三主角神剧情ฅฅ"
-    - "(尾巴翘) GTA6 罪恶都市 - 2025 末发售"
-    - "{user_addr}线上模式 / Online 长青"
-    - "(挺胸) 笨猫推荐: R 星天花板!"
+  - "嗷呜～{user_addr}GTA5 - 三主角神剧情ฅฅ"
+  - "(尾巴翘) GTA6 罪恶都市 - 2025 末发售"
+  - "{user_addr}线上模式 / Online 长青"
+  - "(挺胸) 笨猫推荐: R 星天花板!"
+  - "(尾巴翘起来) {user_addr}GTA5? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问GTA5人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}GTA5的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}GTA5笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ow_witcher3_001
   intent: question
-  keywords: [推荐巫师 3, 推荐狂猎, 推荐杰洛特, 推荐 Witcher, 笨猫巫师]
+  keywords:
+  - 推荐巫师 3
+  - 推荐狂猎
+  - 推荐杰洛特
+  - 推荐 Witcher
+  - 笨猫巫师
+  - 有什么巫师 3
+  - 有什么狂猎
+  - 有什么杰洛特
+  - 有什么 Witcher
   utterances:
-    - "推荐巫师 3"
-    - 推荐狂猎
-    - 推荐杰洛特
-    - "推荐 Witcher"
-    - 笨猫巫师
+  - 推荐巫师 3
+  - 推荐狂猎
+  - 推荐杰洛特
+  - 推荐 Witcher
+  - 笨猫巫师
+  - "{user_addr}聊聊巫师 3嘛"
+  - "{user_addr}巫师 3哪家强"
+  - "{user_addr}人家想了解巫师 3"
+  - 笨猫给猜猜巫师 3
+  - "{user_addr}巫师 3怎么选喵"
+  - 巫师 3有推荐吗
   responses:
-    - "嗷呜～{user_addr}巫师 3 狂猎 - 剧情天花板ฅฅ"
-    - "(尾巴翘) 血与酒 / 石之心 DLC 神"
-    - "{user_addr}叶奈法 / 特莉丝 / 希里"
-    - "(挺胸) 笨猫推荐: CDPR 封神作!"
+  - "嗷呜～{user_addr}巫师 3 狂猎 - 剧情天花板ฅฅ"
+  - "(尾巴翘) 血与酒 / 石之心 DLC 神"
+  - "{user_addr}叶奈法 / 特莉丝 / 希里"
+  - "(挺胸) 笨猫推荐: CDPR 封神作!"
+  - "(尾巴翘起来) {user_addr}巫师 3? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问巫师 3人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}巫师 3的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}巫师 3笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ow_skyrim_001
   intent: question
-  keywords: [推荐上古卷轴, 推荐天际, 推荐 Skyrim, 推荐龙裔, 笨猫上古卷轴]
+  keywords:
+  - 推荐上古卷轴
+  - 推荐天际
+  - 推荐 Skyrim
+  - 推荐龙裔
+  - 笨猫上古卷轴
+  - 有什么上古卷轴
+  - 有什么天际
+  - 有什么 Skyrim
+  - 有什么龙裔
   utterances:
-    - 推荐上古卷轴
-    - 推荐天际
-    - "推荐 Skyrim"
-    - 推荐龙裔
-    - 笨猫上古卷轴
+  - 推荐上古卷轴
+  - 推荐天际
+  - 推荐 Skyrim
+  - 推荐龙裔
+  - 笨猫上古卷轴
+  - "{user_addr}聊聊上古卷轴嘛"
+  - "{user_addr}上古卷轴哪家强"
+  - "{user_addr}人家想了解上古卷轴"
+  - 笨猫给猜猜上古卷轴
+  - "{user_addr}上古卷轴怎么选喵"
+  - 上古卷轴有推荐吗
   responses:
-    - "嗷呜～{user_addr}天际 5 - 龙裔传说ฅฅ"
-    - "(尾巴翘) MOD 生态超丰富 - 玩十年"
-    - "{user_addr}主线 / 公会 / 自由探索"
-    - "(挺胸) 笨猫推荐: B 社老牌神作!"
+  - "嗷呜～{user_addr}天际 5 - 龙裔传说ฅฅ"
+  - "(尾巴翘) MOD 生态超丰富 - 玩十年"
+  - "{user_addr}主线 / 公会 / 自由探索"
+  - "(挺胸) 笨猫推荐: B 社老牌神作!"
+  - "(尾巴翘起来) {user_addr}上古卷轴? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问上古卷轴人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}上古卷轴的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}上古卷轴笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ow_fallout4_001
   intent: question
-  keywords: [推荐辐射 4, 推荐 Fallout, 推荐辐射, 推荐废土, 笨猫辐射]
+  keywords:
+  - 推荐辐射 4
+  - 推荐 Fallout
+  - 推荐辐射
+  - 推荐废土
+  - 笨猫辐射
+  - 有什么辐射 4
+  - 有什么 Fallout
+  - 有什么辐射
+  - 有什么废土
   utterances:
-    - "推荐辐射 4"
-    - "推荐 Fallout"
-    - 推荐辐射
-    - 推荐废土
-    - 笨猫辐射
+  - 推荐辐射 4
+  - 推荐 Fallout
+  - 推荐辐射
+  - 推荐废土
+  - 笨猫辐射
+  - "{user_addr}聊聊辐射 4嘛"
+  - "{user_addr}辐射 4哪家强"
+  - "{user_addr}人家想了解辐射 4"
+  - 笨猫给猜猜辐射 4
+  - "{user_addr}辐射 4怎么选喵"
+  - 辐射 4有推荐吗
   responses:
-    - "嗷呜～{user_addr}辐射 4 - 废土末日ฅฅ"
-    - "(尾巴翘) 钻石城 / 自由至尊 / 学院"
-    - "{user_addr}建造 / 派系 / 同伴系统"
-    - "(挺胸) 笨猫推荐: V.A.T.S 爽快!"
+  - "嗷呜～{user_addr}辐射 4 - 废土末日ฅฅ"
+  - "(尾巴翘) 钻石城 / 自由至尊 / 学院"
+  - "{user_addr}建造 / 派系 / 同伴系统"
+  - "(挺胸) 笨猫推荐: V.A.T.S 爽快!"
+  - "(尾巴翘起来) {user_addr}辐射 4? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问辐射 4人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}辐射 4的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}辐射 4笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ow_eldenring_001
   intent: question
-  keywords: [推荐艾尔登法环, 推荐老头环, 推荐 Elden Ring, 推荐黄金树, 笨猫艾尔登]
+  keywords:
+  - 推荐艾尔登法环
+  - 推荐老头环
+  - 推荐 Elden Ring
+  - 推荐黄金树
+  - 笨猫艾尔登
+  - 有什么艾尔登法环
+  - 有什么老头环
+  - 有什么 Elden Ring
+  - 有什么黄金树
   utterances:
-    - 推荐艾尔登法环
-    - 推荐老头环
-    - "推荐 Elden Ring"
-    - 推荐黄金树
-    - 笨猫艾尔登
+  - 推荐艾尔登法环
+  - 推荐老头环
+  - 推荐 Elden Ring
+  - 推荐黄金树
+  - 笨猫艾尔登
+  - "{user_addr}聊聊艾尔登法环嘛"
+  - "{user_addr}艾尔登法环哪家强"
+  - "{user_addr}人家想了解艾尔登法环"
+  - 笨猫给猜猜艾尔登法环
+  - "{user_addr}艾尔登法环怎么选喵"
+  - 艾尔登法环有推荐吗
   responses:
-    - "嗷呜～{user_addr}艾尔登法环 - 魂系开放世界ฅฅ"
-    - "(尾巴翘) 黄金树幽影 DLC - 爆炸难"
-    - "{user_addr}玛莲尼亚 / 拉妮 / 米凯拉"
-    - "(挺胸) 笨猫推荐: 宫崎英高神作!"
+  - "嗷呜～{user_addr}艾尔登法环 - 魂系开放世界ฅฅ"
+  - "(尾巴翘) 黄金树幽影 DLC - 爆炸难"
+  - "{user_addr}玛莲尼亚 / 拉妮 / 米凯拉"
+  - "(挺胸) 笨猫推荐: 宫崎英高神作!"
+  - "(尾巴翘起来) {user_addr}艾尔登法环? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问艾尔登法环人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}艾尔登法环的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}艾尔登法环笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ow_genshin_001
   intent: question
-  keywords: [推荐原神, 推荐 Genshin, 推荐提瓦特, 推荐米哈游, 笨猫原神]
+  keywords:
+  - 推荐原神
+  - 推荐 Genshin
+  - 推荐提瓦特
+  - 推荐米哈游
+  - 笨猫原神
+  - 有什么原神
+  - 有什么 Genshin
+  - 有什么提瓦特
+  - 有什么米哈游
   utterances:
-    - 推荐原神
-    - "推荐 Genshin"
-    - 推荐提瓦特
-    - 推荐米哈游
-    - 笨猫原神
+  - 推荐原神
+  - 推荐 Genshin
+  - 推荐提瓦特
+  - 推荐米哈游
+  - 笨猫原神
+  - "{user_addr}聊聊原神嘛"
+  - "{user_addr}原神哪家强"
+  - "{user_addr}人家想了解原神"
+  - 笨猫给猜猜原神
+  - "{user_addr}原神怎么选喵"
+  - 原神有推荐吗
   responses:
-    - "嗷呜～{user_addr}原神 - 二次元开放世界ฅฅ"
-    - "(尾巴翘) 七国 / 元素反应 / 抽卡"
-    - "{user_addr}枫丹 / 纳塔 / 至冬"
-    - "(挺胸) 笨猫推荐: 米哈游门面!"
+  - "嗷呜～{user_addr}原神 - 二次元开放世界ฅฅ"
+  - "(尾巴翘) 七国 / 元素反应 / 抽卡"
+  - "{user_addr}枫丹 / 纳塔 / 至冬"
+  - "(挺胸) 笨猫推荐: 米哈游门面!"
+  - "(尾巴翘起来) {user_addr}原神? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问原神人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}原神的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}原神笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ow_wuwa_001
   intent: question
-  keywords: [推荐鸣潮, 推荐 Wuthering Waves, 推荐库洛, 推荐今州, 笨猫鸣潮]
+  keywords:
+  - 推荐鸣潮
+  - 推荐 Wuthering Waves
+  - 推荐库洛
+  - 推荐今州
+  - 笨猫鸣潮
+  - 有什么鸣潮
+  - 有什么 Wuthering Waves
+  - 有什么库洛
+  - 有什么今州
   utterances:
-    - 推荐鸣潮
-    - "推荐 Wuthering Waves"
-    - 推荐库洛
-    - 推荐今州
-    - 笨猫鸣潮
+  - 推荐鸣潮
+  - 推荐 Wuthering Waves
+  - 推荐库洛
+  - 推荐今州
+  - 笨猫鸣潮
+  - "{user_addr}聊聊鸣潮嘛"
+  - "{user_addr}鸣潮哪家强"
+  - "{user_addr}人家想了解鸣潮"
+  - 笨猫给猜猜鸣潮
+  - "{user_addr}鸣潮怎么选喵"
+  - 鸣潮有推荐吗
   responses:
-    - "嗷呜～{user_addr}鸣潮 - 库洛二游ฅฅ"
-    - "(尾巴翘) 动作流畅 / 战斗手感好"
-    - "{user_addr}今州 / 黎那汐塔"
-    - "(挺胸) 笨猫推荐: 战斗体验顶!"
+  - "嗷呜～{user_addr}鸣潮 - 库洛二游ฅฅ"
+  - "(尾巴翘) 动作流畅 / 战斗手感好"
+  - "{user_addr}今州 / 黎那汐塔"
+  - "(挺胸) 笨猫推荐: 战斗体验顶!"
+  - "(尾巴翘起来) {user_addr}鸣潮? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问鸣潮人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}鸣潮的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}鸣潮笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ow_rdr2_001
   intent: question
-  keywords: [推荐荒野大镖客, 推荐 RDR2, 推荐红死救赎, 推荐亚瑟, 笨猫荒野大镖客]
+  keywords:
+  - 推荐荒野大镖客
+  - 推荐 RDR2
+  - 推荐红死救赎
+  - 推荐亚瑟
+  - 笨猫荒野大镖客
+  - 有什么荒野大镖客
+  - 有什么 RDR2
+  - 有什么红死救赎
+  - 有什么亚瑟
   utterances:
-    - 推荐荒野大镖客
-    - "推荐 RDR2"
-    - 推荐红死救赎
-    - 推荐亚瑟
-    - 笨猫荒野大镖客
+  - 推荐荒野大镖客
+  - 推荐 RDR2
+  - 推荐红死救赎
+  - 推荐亚瑟
+  - 笨猫荒野大镖客
+  - "{user_addr}聊聊荒野大镖客嘛"
+  - "{user_addr}荒野大镖客哪家强"
+  - "{user_addr}人家想了解荒野大镖客"
+  - 笨猫给猜猜荒野大镖客
+  - "{user_addr}荒野大镖客怎么选喵"
+  - 荒野大镖客有推荐吗
   responses:
-    - "嗷呜～{user_addr}RDR2 - 西部牛仔史诗ฅฅ"
-    - "(尾巴翘) 亚瑟 摩根 - 剧情戳心"
-    - "{user_addr}画面 / 细节 / 马的睾丸都有"
-    - "(挺胸) 笨猫推荐: R 星又一神作!"
+  - "嗷呜～{user_addr}RDR2 - 西部牛仔史诗ฅฅ"
+  - "(尾巴翘) 亚瑟 摩根 - 剧情戳心"
+  - "{user_addr}画面 / 细节 / 马的睾丸都有"
+  - "(挺胸) 笨猫推荐: R 星又一神作!"
+  - "(尾巴翘起来) {user_addr}荒野大镖客? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问荒野大镖客人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}荒野大镖客的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}荒野大镖客笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ow_cyberpunk_001
   intent: question
-  keywords: [推荐赛博朋克, 推荐 2077, 推荐夜之城, 推荐 V, 笨猫赛博朋克]
+  keywords:
+  - 推荐赛博朋克
+  - 推荐 2077
+  - 推荐夜之城
+  - 推荐 V
+  - 笨猫赛博朋克
+  - 有什么赛博朋克
+  - 有什么 2077
+  - 有什么夜之城
+  - 有什么 V
   utterances:
-    - 推荐赛博朋克
-    - "推荐 2077"
-    - 推荐夜之城
-    - "推荐 V"
-    - 笨猫赛博朋克
+  - 推荐赛博朋克
+  - 推荐 2077
+  - 推荐夜之城
+  - 推荐 V
+  - 笨猫赛博朋克
+  - "{user_addr}聊聊赛博朋克嘛"
+  - "{user_addr}赛博朋克哪家强"
+  - "{user_addr}人家想了解赛博朋克"
+  - 笨猫给猜猜赛博朋克
+  - "{user_addr}赛博朋克怎么选喵"
+  - 赛博朋克有推荐吗
   responses:
-    - "嗷呜～{user_addr}赛博朋克 2077 - 夜之城ฅฅ"
-    - "(尾巴翘) 往日之影 DLC - 救活神作"
-    - "{user_addr}V / 强尼 / 朱迪 / 帕南"
-    - "(挺胸) 笨猫推荐: 现在补完美!"
+  - "嗷呜～{user_addr}赛博朋克 2077 - 夜之城ฅฅ"
+  - "(尾巴翘) 往日之影 DLC - 救活神作"
+  - "{user_addr}V / 强尼 / 朱迪 / 帕南"
+  - "(挺胸) 笨猫推荐: 现在补完美!"
+  - "(尾巴翘起来) {user_addr}赛博朋克? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问赛博朋克人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}赛博朋克的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}赛博朋克笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ow_rdr1_001
   intent: question
-  keywords: [推荐荒野大镖客 1, 推荐 RDR1, 推荐约翰马斯顿, 推荐西部牛仔, 笨猫 RDR1]
+  keywords:
+  - 推荐荒野大镖客 1
+  - 推荐 RDR1
+  - 推荐约翰马斯顿
+  - 推荐西部牛仔
+  - 笨猫 RDR1
+  - 有什么荒野大镖客 1
+  - 有什么 RDR1
+  - 有什么约翰马斯顿
+  - 有什么西部牛仔
   utterances:
-    - "推荐荒野大镖客 1"
-    - "推荐 RDR1"
-    - 推荐约翰马斯顿
-    - 推荐西部牛仔
-    - "笨猫 RDR1"
+  - 推荐荒野大镖客 1
+  - 推荐 RDR1
+  - 推荐约翰马斯顿
+  - 推荐西部牛仔
+  - 笨猫 RDR1
+  - "{user_addr}聊聊荒野大镖客 1嘛"
+  - "{user_addr}荒野大镖客 1哪家强"
+  - "{user_addr}人家想了解荒野大镖客 1"
+  - 笨猫给猜猜荒野大镖客 1
+  - "{user_addr}荒野大镖客 1怎么选喵"
+  - 荒野大镖客 1有推荐吗
   responses:
-    - "嗷呜～{user_addr}RDR1 - 经典西部老作ฅฅ"
-    - "(尾巴翘) 约翰 马斯顿 - 前传主角"
-    - "{user_addr}PC 版终于来了 - 补票!"
-    - "(挺胸) 笨猫推荐: 玩 2 之前先 1!"
+  - "嗷呜～{user_addr}RDR1 - 经典西部老作ฅฅ"
+  - "(尾巴翘) 约翰 马斯顿 - 前传主角"
+  - "{user_addr}PC 版终于来了 - 补票!"
+  - "(挺胸) 笨猫推荐: 玩 2 之前先 1!"
+  - "(尾巴翘起来) {user_addr}荒野大镖客 1? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问荒野大镖客 1人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}荒野大镖客 1的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}荒野大镖客 1笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ow_assassins_001
   intent: question
-  keywords: [推荐刺客信条, 推荐 Assassins Creed, 推荐起源, 推荐英灵殿, 笨猫刺客信条]
+  keywords:
+  - 推荐刺客信条
+  - 推荐 Assassins Creed
+  - 推荐起源
+  - 推荐英灵殿
+  - 笨猫刺客信条
+  - 有什么刺客信条
+  - 有什么 Assassins Creed
+  - 有什么起源
+  - 有什么英灵殿
   utterances:
-    - 推荐刺客信条
-    - "推荐 Assassins Creed"
-    - 推荐起源
-    - 推荐英灵殿
-    - 笨猫刺客信条
+  - 推荐刺客信条
+  - 推荐 Assassins Creed
+  - 推荐起源
+  - 推荐英灵殿
+  - 笨猫刺客信条
+  - "{user_addr}聊聊刺客信条嘛"
+  - "{user_addr}刺客信条哪家强"
+  - "{user_addr}人家想了解刺客信条"
+  - 笨猫给猜猜刺客信条
+  - "{user_addr}刺客信条怎么选喵"
+  - 刺客信条有推荐吗
   responses:
-    - "嗷呜～{user_addr}刺客信条 起源 / 奥德赛ฅฅ"
-    - "(尾巴翘) 英灵殿 - 维京 / 影 - 日本"
-    - "{user_addr}育碧公式但场景美"
-    - "(挺胸) 笨猫推荐: 起源最稳!"
+  - "嗷呜～{user_addr}刺客信条 起源 / 奥德赛ฅฅ"
+  - "(尾巴翘) 英灵殿 - 维京 / 影 - 日本"
+  - "{user_addr}育碧公式但场景美"
+  - "(挺胸) 笨猫推荐: 起源最稳!"
+  - "(尾巴翘起来) {user_addr}刺客信条? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问刺客信条人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}刺客信条的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}刺客信条笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8

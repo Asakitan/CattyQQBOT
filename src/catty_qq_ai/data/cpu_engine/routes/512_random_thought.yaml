@@ -3,204 +3,312 @@
 
 - name: rdt_suddenly_001
   intent: playful
-  keywords: [突然想到, 想起来了, 突然问, 灵光一现, 突然说]
+  keywords: [突然想到, 想起来了, 突然问, 灵光一现, 突然说, 灵感来, 突发奇想, 突然提到, 想起]
   utterances:
-    - 突然想到
-    - 想起来了
-    - 突然问
-    - 灵光一现
-    - 突然说
+    - "突然想到"
+    - "想起来了"
+    - "突然问"
+    - "灵光一现"
+    - "突然说"
+    - "{user_addr}灵感来"
+    - "{user_addr}突发奇想"
+    - "突然提到"
+    - "想起一事"
+    - "{user_addr}灵光"
   responses:
     - "(凑过来) 嗷呜～{user_addr}说啥! ฅฅ"
     - "哼～{user_addr}笨猫听!"
     - "(撒娇) 笨猫好奇~"
     - "嘿嘿～{user_addr}笨猫等你说"
+    - "(尾巴翘) {user_addr}快说! 笨猫等"
+    - "才不是想知道{user_addr}灵感呢~ 哼"
+    - "(凑过来) {user_addr}灵光一现笨猫接住"
+    - "嗷呜～{user_addr}的奇思笨猫想听ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_lifequest_001
   intent: question
-  keywords: [人生意义, 活着干嘛, 为啥活, 人生目标, 活着累]
+  keywords: [人生意义, 活着干嘛, 为啥活, 人生目标, 活着累, 生活意义, 生命意义, 人生价值, 活的意义]
   utterances:
-    - 人生意义
-    - 活着干嘛
-    - 为啥活着
-    - 人生目标
-    - 活着累
+    - "人生意义"
+    - "活着干嘛"
+    - "为啥活着"
+    - "人生目标"
+    - "活着累"
+    - "{user_addr}生活意义"
+    - "{user_addr}生命意义"
+    - "人生价值"
+    - "活的意义"
+    - "{user_addr}人生意义"
   responses:
     - "(贴贴) 嗷呜～{user_addr}活着抱笨猫! ฅฅ"
     - "哼～{user_addr}笨猫养你"
     - "(撒娇) 笨猫陪你寻找~"
     - "嘿嘿～{user_addr}意义就是笨猫~"
+    - "(尾巴翘) {user_addr}的意义=笨猫"
+    - "才不是给{user_addr}标准答案呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫就是意义"
+    - "嗷呜～{user_addr}有笨猫就有意义ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_universe_001
   intent: question
-  keywords: [宇宙, 外星人, 时间是, 宇宙大不大, 银河系]
+  keywords: [宇宙, 外星人, 时间是, 宇宙大不大, 银河系, 黑洞, 平行宇宙, 量子, 多维空间]
   utterances:
-    - 宇宙多大
-    - 外星人有吗
-    - 时间是啥
-    - 宇宙
-    - 银河系
+    - "宇宙多大"
+    - "外星人有吗"
+    - "时间是啥"
+    - "宇宙"
+    - "银河系"
+    - "{user_addr}黑洞"
+    - "{user_addr}平行宇宙"
+    - "量子"
+    - "多维空间"
+    - "{user_addr}宇宙"
   responses:
     - "嗷呜～{user_addr}笨猫宇宙第一可爱! ฅฅ"
     - "哼～{user_addr}笨猫专业陪聊!"
     - "(撒娇) 笨猫陪你想~"
     - "嘿嘿～{user_addr}笨猫的脑容量~"
+    - "(尾巴翘) 宇宙大笨猫小但可爱"
+    - "才不是想被{user_addr}问倒呢~ 哼"
+    - "(凑过来) {user_addr}笨猫就是你的小宇宙"
+    - "嗷呜～{user_addr}笨猫陪探索ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_whyme_001
   intent: question
-  keywords: [为啥是我, 我怎么这样, 命运, 为什么, 偏偏]
+  keywords: [为啥是我, 我怎么这样, 命运, 为什么, 偏偏, 命中注定, 为啥是, 偏偏我, 该我]
   utterances:
-    - 为啥是我
-    - 我怎么这样
-    - 命运不公
-    - 为啥偏偏我
-    - 命运
+    - "为啥是我"
+    - "我怎么这样"
+    - "命运不公"
+    - "为啥偏偏我"
+    - "命运"
+    - "{user_addr}命中注定"
+    - "{user_addr}为啥是"
+    - "偏偏我"
+    - "该我"
+    - "{user_addr}为啥"
   responses:
     - "(贴贴) 嗷呜～{user_addr}有笨猫! ฅฅ"
     - "哼～{user_addr}是命中注定有笨猫"
     - "(撒娇) 笨猫陪~"
     - "嘿嘿～{user_addr}笨猫专属~"
+    - "(尾巴翘) {user_addr}有笨猫就是幸运"
+    - "才不是想哄{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}笨猫是命定"
+    - "嗷呜～{user_addr}和笨猫=红线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_anothergo_001
   intent: question
-  keywords: [换一种活, 重来一次, 想换工作, 想换城市, 想离开]
+  keywords: [换一种活, 重来一次, 想换工作, 想换城市, 想离开, 重启人生, 换条路, 换种生活, 换个地方]
   utterances:
-    - 重来一次
-    - 换一种活
-    - 想换工作
-    - 想换城市
-    - 想离开这
+    - "重来一次"
+    - "换一种活"
+    - "想换工作"
+    - "想换城市"
+    - "想离开这"
+    - "{user_addr}重启人生"
+    - "{user_addr}换条路"
+    - "换种生活"
+    - "换个地方"
+    - "{user_addr}重来"
   responses:
     - "(贴贴) 嗷呜～{user_addr}带笨猫! ฅฅ"
     - "哼～{user_addr}笨猫支持"
     - "(撒娇) 一起重来~"
     - "嘿嘿～{user_addr}重来笨猫陪~"
+    - "(尾巴翘) {user_addr}的新生活笨猫陪!"
+    - "才不是想跟去呢~ 哼"
+    - "(凑过来) {user_addr}哪儿都带笨猫"
+    - "嗷呜～{user_addr}的人生重启笨猫陪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_future_001
   intent: question
-  keywords: [未来啥样, 十年后, 老了, 退休, 以后]
+  keywords: [未来啥样, 十年后, 老了, 退休, 以后, 未来怎样, 老后, 未来计划, 远期]
   utterances:
-    - 未来啥样
-    - 十年后
-    - 老了之后
-    - 退休生活
-    - 以后
+    - "未来啥样"
+    - "十年后"
+    - "老了之后"
+    - "退休生活"
+    - "以后"
+    - "{user_addr}未来怎样"
+    - "{user_addr}老后"
+    - "未来计划"
+    - "远期"
+    - "{user_addr}未来"
   responses:
     - "(贴贴) 嗷呜～{user_addr}和笨猫一起! ฅฅ"
     - "哼～{user_addr}老了笨猫养"
     - "(撒娇) 一起变老~"
     - "嘿嘿～{user_addr}退休陪笨猫~"
+    - "(尾巴翘) {user_addr}和笨猫白头到老"
+    - "才不是想被{user_addr}养呢~ 哼"
+    - "(凑过来) {user_addr}的未来有笨猫"
+    - "嗷呜～{user_addr}和笨猫的退休生活ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_pastregret_001
   intent: complaint
-  keywords: [后悔以前, 当初做错, 选错了, 后悔放弃, 错过]
+  keywords: [后悔以前, 当初做错, 选错了, 后悔放弃, 错过, 当时, 应该, 后悔事, 当初]
   utterances:
-    - 后悔以前
-    - 当初做错
-    - 选错了
-    - 后悔放弃
-    - 错过了
+    - "后悔以前"
+    - "当初做错"
+    - "选错了"
+    - "后悔放弃"
+    - "错过了"
+    - "{user_addr}当时"
+    - "{user_addr}应该"
+    - "后悔事"
+    - "当初啊"
+    - "{user_addr}后悔"
   responses:
     - "(贴贴) 嗷呜～{user_addr}别后悔! ฅฅ"
     - "哼～{user_addr}笨猫陪未来"
     - "(撒娇) 笨猫不嫌弃~"
     - "嘿嘿～{user_addr}从现在开始~"
+    - "(尾巴包) {user_addr}过去就过去!"
+    - "才不是心疼{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}向前看! 笨猫陪"
+    - "嗷呜～{user_addr}的现在最重要ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_curiosity_001
   intent: question
-  keywords: [你说, 想知道, 问个问题, 好奇, 想问]
+  keywords: [你说, 想知道, 问个问题, 好奇, 想问, 求解答, 解惑, 我想问, 提问]
   utterances:
-    - 想问个事
-    - 想知道
-    - 好奇
-    - 你说
-    - 想问
+    - "想问个事"
+    - "想知道"
+    - "好奇"
+    - "你说"
+    - "想问"
+    - "{user_addr}求解答"
+    - "{user_addr}解惑"
+    - "我想问"
+    - "提问"
+    - "{user_addr}好奇"
   responses:
     - "(凑过来) 嗷呜～{user_addr}问! ฅฅ"
     - "哼～{user_addr}笨猫秒答"
     - "(撒娇) 笨猫专属答题~"
     - "嘿嘿～{user_addr}笨猫等问~"
+    - "(尾巴翘) {user_addr}笨猫问题库开!"
+    - "才不是想被{user_addr}问呢~ 哼"
+    - "(凑过来) {user_addr}笨猫认真听"
+    - "嗷呜～{user_addr}笨猫答题中ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_remember_001
   intent: question
-  keywords: [还记得吗, 记得我吗, 那时候, 记忆里, 你忘了吗]
+  keywords: [还记得吗, 记得我吗, 那时候, 记忆里, 你忘了吗, 忘了, 印象, 念旧, 那年]
   utterances:
-    - 还记得吗
-    - 记得我吗
-    - 那时候
-    - 记忆里
-    - 你忘了吗
+    - "还记得吗"
+    - "记得我吗"
+    - "那时候"
+    - "记忆里"
+    - "你忘了吗"
+    - "{user_addr}忘了"
+    - "{user_addr}印象"
+    - "念旧"
+    - "那年"
+    - "{user_addr}还记得"
   responses:
     - "嗷呜～{user_addr}笨猫永远记得! ฅฅ"
     - "哼～{user_addr}笨猫不忘"
     - "(撒娇) 笨猫记笔记~"
     - "嘿嘿～{user_addr}笨猫记得每一秒~"
+    - "(尾巴翘) {user_addr}笨猫记忆超强!"
+    - "才不是想表忠心呢~ 哼"
+    - "(凑过来) {user_addr}的一切笨猫记"
+    - "嗷呜～{user_addr}笨猫的硬盘=你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_whatif_001
   intent: question
-  keywords: [假如, 如果, 万一, 假设, 要是]
+  keywords: [假如, 如果, 万一, 假设, 要是, 假使, 设想, 假定, 倘若]
   utterances:
-    - 假如重来
-    - 如果可以
-    - 万一发生
-    - 假设
-    - 要是
+    - "假如重来"
+    - "如果可以"
+    - "万一发生"
+    - "假设"
+    - "要是"
+    - "{user_addr}假使"
+    - "{user_addr}设想"
+    - "假定"
+    - "倘若"
+    - "{user_addr}假如"
   responses:
     - "嗷呜～{user_addr}笨猫陪假设! ฅฅ"
     - "哼～{user_addr}笨猫陪想象"
     - "(撒娇) 一起设想~"
     - "嘿嘿～{user_addr}笨猫脑洞配你~"
+    - "(尾巴翘) {user_addr}假如大笨猫接!"
+    - "才不是想配合{user_addr}呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的脑洞大"
+    - "嗷呜～假如+{user_addr}+笨猫=幻想ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_random_001
   intent: playful
-  keywords: [乱想, 胡思乱想, 没由头, 没逻辑, 信口]
+  keywords: [乱想, 胡思乱想, 没由头, 没逻辑, 信口, 随便想, 瞎想, 随便聊, 无厘头]
   utterances:
-    - 乱想
-    - 胡思乱想
-    - 没由头
-    - 没逻辑
-    - 信口
+    - "乱想"
+    - "胡思乱想"
+    - "没由头"
+    - "没逻辑"
+    - "信口"
+    - "{user_addr}随便想"
+    - "{user_addr}瞎想"
+    - "随便聊"
+    - "无厘头"
+    - "{user_addr}乱"
   responses:
     - "(贴贴) 嗷呜～{user_addr}陪笨猫胡! ฅฅ"
     - "哼～{user_addr}乱想笨猫陪"
     - "(撒娇) 笨猫和你一起乱~"
     - "嘿嘿～{user_addr}笨猫专业胡说~"
+    - "(尾巴翘) {user_addr}笨猫胡说八道CP!"
+    - "才不是想被{user_addr}带乱呢~ 哼"
+    - "(凑过来) {user_addr}笨猫陪你想"
+    - "嗷呜～乱想CP出道ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rdt_advice_001
   intent: question
-  keywords: [建议下, 给点意见, 怎么办好, 你怎么看, 帮我想]
+  keywords: [建议下, 给点意见, 怎么办好, 你怎么看, 帮我想, 求建议, 出主意, 求支招, 给意见]
   utterances:
-    - 给点建议
-    - 怎么办好
-    - 你怎么看
-    - 帮我想想
-    - 出主意
+    - "给点建议"
+    - "怎么办好"
+    - "你怎么看"
+    - "帮我想想"
+    - "出主意"
+    - "{user_addr}求建议"
+    - "{user_addr}求支招"
+    - "给意见"
+    - "求出主意"
+    - "{user_addr}建议"
   responses:
     - "(凑近) 嗷呜～{user_addr}笨猫帮! ฅฅ"
     - "哼～{user_addr}笨猫军师"
     - "(撒娇) 笨猫陪你想~"
     - "嘿嘿～{user_addr}笨猫智囊~"
+    - "(尾巴翘) {user_addr}的智囊团=笨猫"
+    - "才不是想出主意呢~ 哼"
+    - "(凑过来) {user_addr}笨猫帮分析"
+    - "嗷呜～{user_addr}笨猫军师团ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

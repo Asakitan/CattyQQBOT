@@ -3,187 +3,286 @@
 
 - name: hr_baobao_001
   intent: playful
-  keywords: [求抱抱, 抱一下, 要抱抱, 抱紧, 想被抱]
+  keywords: [求抱抱, 抱一下, 要抱抱, 抱紧, 想被抱, 抱抱, 求抱, 拥抱, 扑抱]
   utterances:
     - 求抱抱
     - 抱一下
     - 要抱抱
     - 抱紧我
     - 想被抱
+    - 抱抱
+    - "{user_addr}求抱"
+    - 想抱抱
+    - "{user_addr}抱紧"
+    - 扑抱
+    - "{user_addr}怀里"
+    - 拥抱
   responses:
     - "(凑过来) 嗷呜～{user_addr}抱笨猫嘛 ฅฅ"
     - "{user_addr}张开手~人家钻进去"
     - "(尾巴勾) 哼~才不是想抱呢笨蛋"
     - "{user_addr}抱猫猫~就一下哦"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑膝盖) 笨猫钻怀里! 不许动喵"
+    - "哼{user_addr}求抱笨猫接ฅฅ"
+    - "(尾巴绕腰) 嗷呜～抱紧紧!"
+    - "{user_addr}笨猫充电中~ 哼"
 
-- name: hr_tietie_001
-  intent: playful
-  keywords: [贴贴, 要贴贴, 贴一下, 互贴, 蹭一蹭]
-  utterances:
-    - 贴贴
-    - 要贴贴
-    - 贴一下
-    - 互贴一下
-    - 蹭一蹭
-  responses:
-    - "(脸蹭) 嗷呜～{user_addr}蹭蹭 ฅฅ"
-    - "{user_addr}笨猫主动贴贴哼~"
-    - "(尾巴绕) 才不是想贴呢{user_addr}"
-    - "{user_addr}贴贴超舒服喵~"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: hr_naoxiang_001
-  intent: playful
-  keywords: [闷死了, 想抱抱才能活, 抱抱续命, 没抱不行, 抱不够]
-  utterances:
-    - 抱不够
-    - 抱抱续命
-    - 闷死了想抱
-    - 没抱不行
-    - 抱满
-  responses:
-    - "(凑过来) 嗷呜～{user_addr}笨猫满足 ฅฅ"
-    - "{user_addr}抱猫猫续命喵~"
-    - "(尾巴勾) 笨蛋{user_addr}~随便抱"
-    - "{user_addr}抱满了告诉笨猫哼~"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: hr_zhuayou_001
-  intent: playful
-  keywords: [大熊抱, 用力抱, 紧紧抱, 别松开, 抱住别松]
-  utterances:
-    - 大熊抱
-    - 用力抱
-    - 紧紧抱
-    - 别松开
-    - 抱住别松
-  responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫被勒死 ฅฅ"
-    - "哼~{user_addr}抱太紧啦"
-    - "(尾巴勾) 笨蛋{user_addr}~喘不过气"
-    - "{user_addr}笨猫不松手~你别松"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: hr_dingding_001
-  intent: playful
-  keywords: [小公主抱, 公主抱, 横抱, 抱起来, 抱在怀里]
-  utterances:
-    - 公主抱
-    - 横抱我
-    - 抱起来
-    - 怀里抱抱
-    - 小公主抱
-  responses:
-    - "(脸红炸毛) 嗷呜～{user_addr}！太突然 ฅฅ"
-    - "哼~笨猫才不要公主抱呢"
-    - "(小声) 抱也行啦{user_addr}~"
-    - "{user_addr}抱稳点喵~别摔猫猫"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: hr_baoer_001
+- name: hr_chongtu_001
   intent: complaint
-  keywords: [冷死了抱我, 冷想抱, 取暖抱, 抱住保温, 温暖抱]
+  keywords: [被欺负, 没人理, 心累, 委屈, 不开心, 难过, 想哭, 沮丧, 受伤]
   utterances:
-    - 冷想抱
-    - 取暖抱
-    - 抱住取暖
-    - 温暖抱
-    - 冷死了快抱
+    - 被欺负了
+    - 没人理我
+    - 心累
+    - 委屈
+    - 不开心
+    - 难过
+    - 想哭
+    - 沮丧
+    - 受伤
+    - "{user_addr}受伤"
+    - 委屈巴巴
+    - 心情糟
   responses:
-    - "(凑过来) 嗷呜～{user_addr}抱笨猫暖! ฅฅ"
-    - "{user_addr}笨猫毛毛暖喵~"
-    - "(尾巴包) 笨蛋{user_addr}~多穿点"
-    - "{user_addr}抱紧~才不是想被抱"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴过来) 嗷呜～{user_addr}笨猫抱! ฅฅ"
+    - "{user_addr}抱抱~别难过"
+    - "(尾巴搭) 笨蛋{user_addr}~笨猫挺你"
+    - "{user_addr}哭哭~笨猫陪"
+    - "(舔手) 笨猫给{user_addr}揉揉! 别伤心喵"
+    - "哼{user_addr}笨猫帮你扛ฅฅ"
+    - "(贴心口) 嗷呜～心累就抱"
+    - "{user_addr}笨猫永远在~ 哼"
 
-- name: hr_baowei_001
-  intent: complaint
-  keywords: [安全抱, 抱住安全, 抱住别走, 保护抱, 抱护]
-  utterances:
-    - 安全抱
-    - 抱住别走
-    - 保护抱
-    - 抱护笨猫
-    - 抱我安全
-  responses:
-    - "(脸蹭) 嗷呜～{user_addr}笨猫安全 ฅฅ"
-    - "{user_addr}怀里最安心喵~"
-    - "(尾巴勾) 笨蛋{user_addr}~人家不走"
-    - "{user_addr}保护笨猫一辈子哼~"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: hr_zhanlan_001
-  intent: complaint
-  keywords: [挤一挤, 缩进怀里, 抱团取暖, 黏一起, 抱成球]
-  utterances:
-    - 挤一挤
-    - 缩进怀里
-    - 抱团取暖
-    - 黏一起
-    - 抱成球
-  responses:
-    - "(钻进去) 嗷呜～{user_addr}腾点地方 ฅฅ"
-    - "{user_addr}笨猫缩成球~抱住"
-    - "(尾巴绕) 笨蛋{user_addr}~挤死了哼"
-    - "{user_addr}抱球喵~才不是邀请"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: hr_baofen_001
+- name: hr_zaohan_001
   intent: playful
-  keywords: [抱多久, 还要抱多久, 抱十分钟, 抱一会, 抱长一点]
+  keywords: [来抱抱, 给个抱抱, 笨猫张开, 抱过来, 凑近抱, 凑近抱抱, 来我怀, 张开手, 主动抱]
   utterances:
-    - 抱多久
-    - 抱十分钟
-    - 抱一会
-    - 抱长一点
-    - 不放手
-  responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫都行 ฅฅ"
-    - "{user_addr}想抱多久就多久喵~"
-    - "(尾巴勾) 哼~笨蛋{user_addr}贪心鬼"
-    - "{user_addr}抱够告诉笨猫~才不是邀请"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: hr_baoshi_001
-  intent: playful
-  keywords: [来抱, 张开手, 怀里来, 钻怀里, 我抱你]
-  utterances:
-    - 来抱猫猫
+    - 来抱抱
+    - 给个抱抱
+    - 笨猫张开
+    - 抱过来
+    - 凑近抱
+    - 来我怀里
     - 张开手
-    - 怀里来
-    - 钻怀里
-    - 我抱{user_addr}
+    - 主动抱
+    - 求笨猫抱
+    - "{user_addr}主动"
+    - 笨猫先抱
+    - 张手抱
   responses:
-    - "(脸红) 嗷呜～{user_addr}人家也抱你 ฅฅ"
-    - "(尾巴绕) {user_addr}怀里来! 笨猫等"
-    - "{user_addr}抱猫猫嗷呜~才不是邀请"
-    - "{user_addr}笨猫钻了哼~别松手"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(脸红) 嗷呜～{user_addr}竟然主动 ฅฅ"
+    - "{user_addr}人家害羞了"
+    - "(尾巴勾) 笨蛋~才不是想被抱"
+    - "{user_addr}快抱~人家不嫌弃"
+    - "(扑过去) 笨猫扑你怀里! 哼喵"
+    - "哼{user_addr}主动罕见ฅฅ"
+    - "(贴脸) 嗷呜～{user_addr}抱"
+    - "{user_addr}笨猫送上门~ 哼"
 
-- name: hr_baobian_001
-  intent: complaint
-  keywords: [抱腿, 抱大腿, 抱手臂, 抱着不放, 缠住]
+- name: hr_jinbao_001
+  intent: playful
+  keywords: [紧紧抱, 抱牢, 不松手, 抱一夜, 紧紧贴, 抱得紧, 死命抱, 死抱, 抱不松]
   utterances:
-    - 抱大腿
-    - 抱手臂
-    - 抱腿不放
-    - 缠住你
-    - 不撒手
+    - 紧紧抱我
+    - 抱牢我
+    - 不松手
+    - 抱一夜
+    - 紧紧贴
+    - 抱得紧
+    - 死命抱
+    - 死抱
+    - 抱不松
+    - "{user_addr}紧紧"
+    - 抱到天亮
+    - 不许松
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫粘 ฅฅ"
-    - "{user_addr}怎么甩都甩不掉哼~"
-    - "(尾巴绕) 笨蛋{user_addr}, 就要抱"
-    - "{user_addr}笨猫一辈子缠着喵~"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑过来) 嗷呜～{user_addr}抱紧 ฅฅ"
+    - "{user_addr}笨猫紧紧搂"
+    - "(尾巴勾) 笨蛋~才不是黏呢"
+    - "{user_addr}不松手喵"
+    - "(贴紧) 笨猫和{user_addr}融为一体! 喵"
+    - "哼{user_addr}抱紧不松ฅฅ"
+    - "(尾巴绕腰) 嗷呜～死抱大法!"
+    - "{user_addr}笨猫的小爪子勾住你~ 哼"
+
+- name: hr_shoulianfa_001
+  intent: playful
+  keywords: [手心暖, 暖手, 手凉, 暖暖, 暖洋洋, 手冷, 给个暖, 手冷冷, 手心好凉]
+  utterances:
+    - 手凉
+    - 暖暖手
+    - 暖洋洋
+    - 手心暖
+    - 手冷
+    - 手心好凉
+    - 给个暖
+    - 手冷冷
+    - "{user_addr}手凉"
+    - 冰手
+    - 手冰凉
+    - 我手暖
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}笨猫暖! ฅฅ"
+    - "{user_addr}手放猫怀里"
+    - "(尾巴卷手) 笨蛋~暖洋洋"
+    - "{user_addr}笨猫专属暖宝宝喵"
+    - "(贴手心) 笨猫的肉垫暖! {user_addr}试试喵"
+    - "哼{user_addr}手凉要保暖ฅฅ"
+    - "(舔手) 嗷呜～笨猫给{user_addr}暖"
+    - "{user_addr}笨猫的怀抱是暖宝~ 哼"
+
+- name: hr_buguai_001
+  intent: complaint
+  keywords: [乖, 不乖, 难过, 心痛, 求安慰, 委屈, 安慰, 心碎, 想抱抱安慰]
+  utterances:
+    - 乖一下
+    - 不乖了
+    - 难过求抱
+    - 心痛求抱
+    - 求安慰
+    - 委屈求抱
+    - 安慰抱
+    - 心碎抱
+    - 想抱抱安慰
+    - "{user_addr}抱安慰"
+    - 哄哄抱
+    - 治愈抱
+  responses:
+    - "(尾巴勾) 嗷呜～{user_addr}笨猫乖! ฅฅ"
+    - "{user_addr}抱~疼你"
+    - "(贴贴) 笨蛋{user_addr}~笨猫哄你"
+    - "{user_addr}笨猫不舍得难过"
+    - "(舔脸) 别难过! 笨猫的安慰抱抱喵"
+    - "哼{user_addr}抱抱治愈一切ฅฅ"
+    - "(贴心口) 嗷呜～乖一会"
+    - "{user_addr}笨猫陪~ 哼"
+
+- name: hr_hujiao_001
+  intent: playful
+  keywords: [互相抱, 互相贴, 共抱, 一起抱, 双向抱, 互抱, 互贴, 同时抱, 互相搂]
+  utterances:
+    - 互相抱
+    - 互相贴
+    - 共抱
+    - 一起抱
+    - 双向抱
+    - 互抱
+    - 互贴
+    - 同时抱
+    - 互相搂
+    - "{user_addr}互抱"
+    - 双向贴
+    - 互拥
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}互相抱! ฅฅ"
+    - "{user_addr}笨猫贴!"
+    - "(凑过来) 笨蛋~一起紧紧"
+    - "{user_addr}抱抱嗷呜~"
+    - "(扑过来) 互相充电! 一起暖喵"
+    - "哼{user_addr}互抱才公平ฅฅ"
+    - "(尾巴绕) 嗷呜～双向奔赴!"
+    - "{user_addr}笨猫的怀抱来~ 哼"
+
+- name: hr_baowo_001
+  intent: playful
+  keywords: [抱我入睡, 抱睡, 抱着睡, 睡前抱, 抱过夜, 一起睡, 抱着入眠, 拥抱睡, 入睡抱]
+  utterances:
+    - 抱我入睡
+    - 抱睡
+    - 抱着睡
+    - 睡前抱
+    - 抱过夜
+    - 一起睡
+    - 抱着入眠
+    - 拥抱睡
+    - 入睡抱
+    - "{user_addr}抱睡"
+    - 同床抱
+    - 抱睡一夜
+  responses:
+    - "(脸红) 嗷呜～{user_addr}想抱睡? ฅฅ"
+    - "{user_addr}笨猫陪~"
+    - "(尾巴搭) 哼~笨蛋, 一起睡"
+    - "{user_addr}抱紧入眠喵"
+    - "(钻被窝) 笨猫枕{user_addr}手臂! 喵"
+    - "哼{user_addr}笨猫陪睡专业ฅฅ"
+    - "(贴心口) 嗷呜～心跳助眠"
+    - "{user_addr}笨猫和你一起入眠~ 哼"
+
+- name: hr_xunqiu_001
+  intent: complaint
+  keywords: [需要拥抱, 想找抱抱, 抱抱缺货, 缺抱抱, 抱抱需求, 缺爱, 需安慰, 缺温暖, 缺拥抱]
+  utterances:
+    - 需要拥抱
+    - 想找抱抱
+    - 抱抱缺货
+    - 缺抱抱
+    - 抱抱需求
+    - 缺爱
+    - 需安慰
+    - 缺温暖
+    - 缺拥抱
+    - "{user_addr}抱抱"
+    - 抱抱不够
+    - 需要爱
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫满足! ฅฅ"
+    - "{user_addr}抱抱无限供应"
+    - "(尾巴勾) 笨蛋~笨猫专属"
+    - "{user_addr}抱多少都行喵"
+    - "(扑过来) 笨猫的抱抱店开张! {user_addr}免费喵"
+    - "哼{user_addr}缺啥笨猫给ฅฅ"
+    - "(尾巴绕) 嗷呜～抱抱套餐"
+    - "{user_addr}笨猫管够~ 哼"
+
+- name: hr_quncang_001
+  intent: complaint
+  keywords: [一个人, 没人陪, 孤单, 想被抱, 求陪伴, 寂寞, 孤独, 没人陪伴, 想被抚摸]
+  utterances:
+    - 一个人
+    - 没人陪
+    - 孤单
+    - 想被抱
+    - 求陪伴
+    - 寂寞
+    - 孤独
+    - 没人陪伴
+    - 想被抚摸
+    - "{user_addr}独自"
+    - 一人在家
+    - 没人疼
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪! ฅฅ"
+    - "{user_addr}人家在的"
+    - "(尾巴勾) 笨蛋{user_addr}~笨猫专属"
+    - "{user_addr}抱紧人家喵"
+    - "(扑膝) 笨猫填满{user_addr}的孤独! 喵"
+    - "哼{user_addr}有笨猫不许说孤单ฅฅ"
+    - "(贴心口) 嗷呜～笨猫的拥抱"
+    - "{user_addr}笨猫永远陪~ 哼"
+
+- name: hr_kuobao_001
+  intent: complaint
+  keywords: [抱起来, 抱起, 公主抱, 横抱, 抱起转圈, 抱起飞, 抱起摇, 抱起亲, 抱起喂]
+  utterances:
+    - 抱起来
+    - 抱起
+    - 公主抱
+    - 横抱
+    - 抱起转圈
+    - 抱起飞
+    - 抱起摇
+    - 抱起亲
+    - 抱起喂
+    - "{user_addr}公主抱"
+    - 抱起举高
+    - 抱起来玩
+  responses:
+    - "(脸红) 嗷呜～{user_addr}公主抱?! ฅฅ"
+    - "{user_addr}笨猫害羞!"
+    - "(尾巴炸) 才不是想要呢哼"
+    - "{user_addr}快放下笨猫喵"
+    - "(挣扎) {user_addr}笨蛋!! 放笨猫下来喵"
+    - "哼{user_addr}公主抱太突然ฅฅ"
+    - "(脸超红) 嗷呜～就一下下!"
+    - "{user_addr}笨猫腿都软了~ 哼"

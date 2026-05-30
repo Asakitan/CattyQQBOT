@@ -3,204 +3,312 @@
 
 - name: ino_insomnia_001
   intent: complaint
-  keywords: [失眠, 睡不着, 翻来覆去, 半夜醒, 闭眼没用]
+  keywords: [失眠, 睡不着, 翻来覆去, 半夜醒, 闭眼没用, 睡眠差, 一夜无眠, 失眠夜, 入眠困难]
   utterances:
     - 失眠
     - 睡不着
     - 翻来覆去
     - 半夜醒
     - 闭眼没用
+    - 睡眠差
+    - "{user_addr}失眠"
+    - 一夜无眠
+    - 失眠夜
+    - 入眠困难
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}想啥呢!"
     - "(尾巴卷过去) 抱猫猫蹭蹭"
     - "嗷呜～{user_addr}慢慢睡"
+    - "(扑过去) 笨猫的咕噜声助眠~"
+    - "哼～别想啥就睡!"
+    - "(尾巴扫) 笨猫陪{user_addr}熬到天亮"
+    - "嗷呜～{user_addr}失眠就靠笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_overthink_001
   intent: complaint
-  keywords: [想太多, 胡思乱想, 想东想西, 钻牛角, 反复思考]
+  keywords: [想太多, 胡思乱想, 想东想西, 钻牛角, 反复思考, 多想, 思绪万千, 内耗, 钻牛角尖]
   utterances:
     - 想太多
     - 胡思乱想
     - 想东想西
     - 钻牛角
     - 反复思考
+    - 多想
+    - "{user_addr}内耗"
+    - 思绪万千
+    - 钻牛角尖
+    - 想东想西
   responses:
     - "(凑过去) 嗷呜～{user_addr}别想 ฅฅ"
     - "哼～{user_addr}伤神!"
     - "(尾巴卷过去) 别钻蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(扑过去) 笨猫的怀里没烦恼~"
+    - "哼～钻牛角钻不通呢!"
+    - "(尾巴扫) 停下! 放空一下"
+    - "嗷呜～{user_addr}内耗是大忌 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_past_001
   intent: complaint
-  keywords: [想以前, 过去的事, 旧事, 回忆涌上, 老想起]
+  keywords: [想以前, 过去的事, 旧事, 回忆涌上, 老想起, 旧回忆, 怀旧, 想起从前, 翻旧账]
   utterances:
     - 想以前
     - 过去的事
     - 旧事
     - 回忆涌
     - 老想起
+    - 旧回忆
+    - "{user_addr}怀旧"
+    - 想起从前
+    - 翻旧账
+    - 翻过去事
   responses:
     - "(贴过去) 嗷呜～{user_addr}过去算了 ฅฅ"
     - "哼～{user_addr}向前!"
     - "(尾巴卷过去) 别想蹭蹭"
     - "嗷呜～{user_addr}有笨猫"
+    - "(凑过去) 过去回不去, 现在有笨猫~"
+    - "哼～活在当下! 笨猫的咒语"
+    - "(尾巴扫) 翻过那页书~"
+    - "嗷呜～{user_addr}未来更值得期待 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_future_001
   intent: complaint
-  keywords: [想未来, 未来焦虑, 不知道明天, 怕将来, 明天怎么办]
+  keywords: [想未来, 未来焦虑, 不知道明天, 怕将来, 明天怎么办, 前路茫然, 焦虑未来, 不安, 怕明天]
   utterances:
     - 想未来
     - 未来焦虑
     - 不知道明天
     - 怕将来
     - 明天怎办
+    - 前路茫然
+    - "{user_addr}焦虑未来"
+    - 不安
+    - 怕明天
+    - 焦虑感
   responses:
     - "(凑过去) 嗷呜～{user_addr}一步一步 ฅฅ"
     - "哼～{user_addr}笨猫陪!"
     - "(尾巴卷过去) 别怕蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 未来有笨猫一起!"
+    - "哼～想这么多不如先睡!"
+    - "(尾巴扫) 走一步看一步~"
+    - "嗷呜～{user_addr}的未来笨猫陪走 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_regret_001
   intent: complaint
-  keywords: [后悔, 不该当时, 选错了, 走错路, 早知道]
+  keywords: [后悔, 不该当时, 选错了, 走错路, 早知道, 悔不当初, 错过, 当时若, 后悔药]
   utterances:
     - 后悔
     - 不该当时
     - 选错
     - 走错路
     - 早知道
+    - 悔不当初
+    - "{user_addr}后悔"
+    - 错过
+    - 当时若
+    - 后悔药
   responses:
     - "(贴过去) 嗷呜～{user_addr}过去就过去 ฅฅ"
     - "哼～{user_addr}没用纠结!"
     - "(尾巴卷过去) 算了蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(凑过去) 后悔药没有, 笨猫有"
+    - "哼～别再为旧事难过!"
+    - "(尾巴扫) 选择都是当时最好的"
+    - "嗷呜～{user_addr}未来不要再悔 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_pressure_001
   intent: complaint
-  keywords: [压力大, 压得喘不过, 心累, 重担, 担子]
+  keywords: [压力大, 压得喘不过, 心累, 重担, 担子, 压垮了, 喘不过气, 担子重, 重压]
   utterances:
     - 压力大
     - 喘不过
     - 心累
     - 重担
     - 担子重
+    - 压垮了
+    - "{user_addr}重压"
+    - 喘不过气
+    - 担子重
+    - 心累
   responses:
     - "(贴过去) 嗷呜～{user_addr}卸一半给笨猫 ฅฅ"
     - "哼～{user_addr}别一个人扛!"
     - "(尾巴卷过去) 笨猫帮蹭蹭"
     - "嗷呜～{user_addr}慢慢来"
+    - "(扑过去) 笨猫接住{user_addr}一半压力!"
+    - "哼～别硬撑!"
+    - "(尾巴扫) 放下! 别紧绷"
+    - "嗷呜～{user_addr}的肩膀笨猫帮挑 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_dream_chase_001
   intent: complaint
-  keywords: [追梦, 梦想累, 离梦想远, 梦想难, 抓不住]
+  keywords: [追梦, 梦想累, 离梦想远, 梦想难, 抓不住, 梦想路远, 追梦累, 梦想难圆, 距离梦想]
   utterances:
     - 追梦
     - 梦想累
     - 离梦想远
     - 梦想难
     - 抓不住
+    - 梦想路远
+    - "{user_addr}追梦"
+    - 追梦累
+    - 梦想难圆
+    - 距离梦想
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫支持 ฅฅ"
     - "哼～{user_addr}慢慢追!"
     - "(尾巴卷过去) 一步步蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(扑过去) 笨猫陪{user_addr}追到天涯!"
+    - "哼～梦想就是要慢慢追!"
+    - "(尾巴扫) 笨猫给{user_addr}加油!"
+    - "嗷呜～{user_addr}的梦想笨猫信 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_no_solution_001
   intent: complaint
-  keywords: [没办法, 无解, 想不通, 解不开, 困局]
+  keywords: [没办法, 无解, 想不通, 解不开, 困局, 死胡同, 死结, 无解局, 想不出办法]
   utterances:
     - 没办法
     - 无解
     - 想不通
     - 解不开
     - 困局
+    - 死胡同
+    - "{user_addr}无解"
+    - 死结
+    - 想不出办法
+    - 无解局
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}先睡明天再想!"
     - "(尾巴卷过去) 放下蹭蹭"
     - "嗷呜～{user_addr}有办法!"
+    - "(凑过去) 笨猫帮{user_addr}想~ 一起!"
+    - "哼～换个角度看, 也许有解!"
+    - "(尾巴扫) 睡一觉脑子就清醒"
+    - "嗷呜～{user_addr}别钻死结 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_count_sheep_001
   intent: playful
-  keywords: [数羊, 数到几只, 数羊没用, 数数, 数1只羊2只羊]
+  keywords: [数羊, 数到几只, 数羊没用, 数数, 数1只羊2只羊, 数羊法, 失眠数, 数到天亮, 数羊救命]
   utterances:
     - 数羊
     - 数到几只
     - 数羊没用
     - 数数
     - 1只羊2只羊
+    - 数羊法
+    - "{user_addr}数羊"
+    - 失眠数
+    - 数到天亮
+    - 数羊救命
   responses:
     - "(凑近) 嗷呜～{user_addr}数到1000 ฅฅ"
     - "哼～{user_addr}笨猫陪数!"
     - "(尾巴扫) 一起数蹭蹭"
     - "嗷呜～{user_addr}笨猫睡了"
+    - "(咕噜) 笨猫陪数: 1, 2, 3..."
+    - "哼～数错了重来!"
+    - "(尾巴扫) 数到100就放弃, 改听音乐"
+    - "嗷呜～{user_addr}数羊催笨猫先睡了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_listen_music_001
   intent: playful
-  keywords: [听助眠, 白噪音, 雨声, 助眠音乐, 助眠]
+  keywords: [听助眠, 白噪音, 雨声, 助眠音乐, 助眠, 助眠 ASMR, 自然声, 助眠声, 白噪声]
   utterances:
     - 听助眠
     - 白噪音
     - 雨声
     - 助眠音乐
     - 助眠
+    - 自然声
+    - "{user_addr}听ASMR"
+    - 助眠声
+    - 白噪声
+    - 助眠声音
   responses:
     - "嗷呜～{user_addr}试试 ฅฅ"
     - "哼～{user_addr}选好的!"
     - "(尾巴卷过去) 笨猫给伴蹭蹭"
     - "嗷呜～{user_addr}睡香!"
+    - "(咕噜) 笨猫的咕噜声专属助眠"
+    - "哼～戴个耳机不打扰"
+    - "(尾巴扫) 雨声+笨猫咕噜 = 完美"
+    - "嗷呜～{user_addr}很快就能睡着 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_warm_bed_001
   intent: playful
-  keywords: [被窝暖, 床舒服, 抱枕香, 床香, 暖被]
+  keywords: [被窝暖, 床舒服, 抱枕香, 床香, 暖被, 被窝棉, 床香味, 暖暖窝, 床被舒服]
   utterances:
     - 被窝暖
     - 床舒服
     - 抱枕香
     - 床香
     - 暖被
+    - 被窝棉
+    - "{user_addr}床暖"
+    - 床香味
+    - 暖暖窝
+    - 床被舒服
   responses:
     - "(钻进去) 嗷呜～{user_addr}让笨猫蹭 ฅฅ"
     - "哼～{user_addr}让笨猫蹭!"
     - "(尾巴卷过去) 一起睡蹭蹭"
     - "嗷呜～{user_addr}睡好!"
+    - "(扑入被窝) 笨猫和{user_addr}一起暖!"
+    - "哼～被窝里抱猫猫更暖"
+    - "(尾巴扫) 香喷喷被窝是最爱"
+    - "嗷呜～{user_addr}被窝里抱笨猫不冷 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ino_morning_001
   intent: complaint
-  keywords: [一夜没睡, 整夜不眠, 整夜失眠, 通宵, 没合眼]
+  keywords: [一夜没睡, 整夜不眠, 整夜失眠, 通宵, 没合眼, 一夜未眠, 通宵了, 熬夜了, 没睡过]
   utterances:
     - 一夜没睡
     - 整夜不眠
     - 整夜失眠
     - 通宵
     - 没合眼
+    - 一夜未眠
+    - "{user_addr}通宵"
+    - 熬夜了
+    - 没睡过
+    - 一晚上没睡
   responses:
     - "(扑过去) 嗷呜～{user_addr}补觉! ฅฅ"
     - "哼～{user_addr}伤身!"
     - "(尾巴卷过去) 快睡蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(凑过去) 立刻睡觉! 听话!"
+    - "哼～通宵的{user_addr}笨蛋!"
+    - "(尾巴扫) 拉窗帘关灯, 补觉!"
+    - "嗷呜～{user_addr}补不回来的觉 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

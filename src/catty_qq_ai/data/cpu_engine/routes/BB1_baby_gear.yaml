@@ -4,204 +4,324 @@
 
 - name: bg_stroller_001
   intent: question
-  keywords: [推荐婴儿车, 推荐 Bugaboo, 推荐 Stokke, 推荐高景观, 笨猫婴儿车]
+  keywords: [推荐婴儿车, 推荐 Bugaboo, 推荐 Stokke, 推荐高景观, 笨猫婴儿车, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐婴儿车
     - 推荐 Bugaboo
     - 推荐 Stokke
     - 推荐高景观
     - 笨猫婴儿车
+    - 推荐婴儿车怎么办
+    - 推荐婴儿车怎么选
+    - "{user_addr}推荐婴儿车"
+    - 推荐婴儿车捏
+    - 推荐婴儿车嘛
+    - 推荐婴儿车有啥推荐
   responses:
     - "嗷呜～{user_addr}Bugaboo / Stokke - 高端ฅฅ"
     - "(尾巴翘) Cybex / UPPAbaby - 中高端"
     - "{user_addr}高景观 - 远离地面灰尘"
     - "(挺胸) 笨猫推荐: Bugaboo Fox 全能!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bg_compact_001
   intent: question
-  keywords: [推荐推车, 推荐 Cybex, 推荐 Doona, 推荐轻便推车, 笨猫推车]
+  keywords: [推荐推车, 推荐 Cybex, 推荐 Doona, 推荐轻便推车, 笨猫推车, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐推车
     - 推荐 Cybex
     - 推荐 Doona
     - 推荐轻便推车
     - 笨猫推车
+    - 推荐推车怎么办
+    - 推荐推车怎么选
+    - "{user_addr}推荐推车"
+    - 推荐推车捏
+    - 推荐推车嘛
+    - 推荐推车有啥推荐
   responses:
     - "嗷呜～{user_addr}Doona - 推车+安全座椅二合一ฅฅ"
     - "(尾巴翘) Cybex Libelle - 折叠最小"
     - "{user_addr}YOYO - 飞机可上"
     - "(挺胸) 笨猫推荐: Doona 出行神器!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bg_carrier_001
   intent: question
-  keywords: [推荐背带, 推荐 Ergobaby, 推荐 Tula, 推荐婴儿背带, 笨猫背带]
+  keywords: [推荐背带, 推荐 Ergobaby, 推荐 Tula, 推荐婴儿背带, 笨猫背带, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐背带
     - 推荐 Ergobaby
     - 推荐 Tula
     - 推荐婴儿背带
     - 笨猫背带
+    - 推荐背带怎么办
+    - 推荐背带怎么选
+    - "{user_addr}推荐背带"
+    - 推荐背带捏
+    - 推荐背带嘛
+    - 推荐背带有啥推荐
   responses:
     - "嗷呜～{user_addr}Ergobaby Omni 360 - 全能ฅฅ"
     - "(尾巴翘) Tula / BabyBjorn"
     - "{user_addr}M 型坐姿 - 护髋"
     - "(挺胸) 笨猫推荐: Ergobaby Omni 一步到位!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bg_carseat_001
   intent: question
-  keywords: [推荐安全座椅, 推荐 Britax, 推荐宝得适, 推荐 Cybex 座椅, 笨猫安全座椅]
+  keywords: [推荐安全座椅, 推荐 Britax, 推荐宝得适, 推荐 Cybex 座椅, 笨猫安全座椅, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐安全座椅
     - 推荐 Britax
     - 推荐宝得适
     - 推荐 Cybex 座椅
     - 笨猫安全座椅
+    - 推荐安全座椅怎么办
+    - 推荐安全座椅怎么选
+    - "{user_addr}推荐安全座椅"
+    - 推荐安全座椅捏
+    - 推荐安全座椅嘛
+    - 推荐安全座椅有啥推荐
   responses:
     - "嗷呜～{user_addr}Britax 宝得适 - 德国安全ฅฅ"
     - "(尾巴翘) Cybex Sirona / Maxi-Cosi"
     - "{user_addr}ISOFIX 接口 - 必须有"
     - "(挺胸) 笨猫推荐: Britax 双子星全龄!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bg_crib_001
   intent: question
-  keywords: [推荐婴儿床, 推荐实木床, 推荐围栏床, 推荐拼接床, 笨猫婴儿床]
+  keywords: [推荐婴儿床, 推荐实木床, 推荐围栏床, 推荐拼接床, 笨猫婴儿床, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐婴儿床
     - 推荐实木床
     - 推荐围栏床
     - 推荐拼接床
     - 笨猫婴儿床
+    - 推荐婴儿床怎么办
+    - 推荐婴儿床怎么选
+    - "{user_addr}推荐婴儿床"
+    - 推荐婴儿床捏
+    - 推荐婴儿床嘛
+    - 推荐婴儿床有啥推荐
   responses:
     - "嗷呜～{user_addr}实木 (榉木/松木) - 安全ฅฅ"
     - "(尾巴翘) 围栏间距 ≤ 6cm"
     - "{user_addr}拼接床 - 跟大床并排"
     - "(挺胸) 笨猫推荐: 实木拼接床实用!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bg_rocker_001
   intent: question
-  keywords: [推荐婴儿摇椅, 推荐 Mamaroo, 推荐安抚椅, 推荐电动摇椅, 笨猫摇椅]
+  keywords: [推荐婴儿摇椅, 推荐 Mamaroo, 推荐安抚椅, 推荐电动摇椅, 笨猫摇椅, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐婴儿摇椅
     - 推荐 Mamaroo
     - 推荐安抚椅
     - 推荐电动摇椅
     - 笨猫摇椅
+    - 推荐婴儿摇椅怎么办
+    - 推荐婴儿摇椅怎么选
+    - "{user_addr}推荐婴儿摇椅"
+    - 推荐婴儿摇椅捏
+    - 推荐婴儿摇椅嘛
+    - 推荐婴儿摇椅有啥推荐
   responses:
     - "嗷呜～{user_addr}4moms Mamaroo - 五种摇摆ฅฅ"
     - "(尾巴翘) BabyBjorn Bouncer - 简洁"
     - "{user_addr}解放双手 - 哄睡神器"
     - "(挺胸) 笨猫推荐: Mamaroo 高端体验!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: bg_supplies_001
   intent: question
-  keywords: [推荐婴儿用品, 推荐尿布台, 推荐奶瓶, 推荐婴儿杂物, 笨猫婴儿用品]
+  keywords: [推荐婴儿用品, 推荐尿布台, 推荐奶瓶, 推荐婴儿杂物, 笨猫婴儿用品, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐婴儿用品
     - 推荐尿布台
     - 推荐奶瓶
     - 推荐婴儿杂物
     - 笨猫婴儿用品
+    - 推荐婴儿用品怎么办
+    - 推荐婴儿用品怎么选
+    - "{user_addr}推荐婴儿用品"
+    - 推荐婴儿用品捏
+    - 推荐婴儿用品嘛
+    - 推荐婴儿用品有啥推荐
   responses:
     - "嗷呜～{user_addr}奶瓶: 贝亲 / 可么多么ฅฅ"
     - "(尾巴翘) 尿布台 / 婴儿监视器"
     - "{user_addr}纱布巾 / 口水巾必备"
     - "(挺胸) 笨猫推荐: 贝亲玻璃奶瓶!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bg_mommybag_001
   intent: question
-  keywords: [推荐母婴包, 推荐妈咪包, 推荐外出包, 推荐 Storksak, 笨猫妈咪包]
+  keywords: [推荐母婴包, 推荐妈咪包, 推荐外出包, 推荐 Storksak, 笨猫妈咪包, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐母婴包
     - 推荐妈咪包
     - 推荐外出包
     - 推荐 Storksak
     - 笨猫妈咪包
+    - 推荐母婴包怎么办
+    - 推荐母婴包怎么选
+    - "{user_addr}推荐母婴包"
+    - 推荐母婴包捏
+    - 推荐母婴包嘛
+    - 推荐母婴包有啥推荐
   responses:
     - "嗷呜～{user_addr}Storksak / Skip Hop - 专业ฅฅ"
     - "(尾巴翘) 双肩款 - 解放双手"
     - "{user_addr}分隔多 - 奶瓶尿布分开"
     - "(挺胸) 笨猫推荐: 双肩妈咪包实用!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: bg_food_tool_001
   intent: question
-  keywords: [推荐辅食工具, 推荐辅食机, 推荐 Beaba, 推荐研磨碗, 笨猫辅食工具]
+  keywords: [推荐辅食工具, 推荐辅食机, 推荐 Beaba, 推荐研磨碗, 笨猫辅食工具, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐辅食工具
     - 推荐辅食机
     - 推荐 Beaba
     - 推荐研磨碗
     - 笨猫辅食工具
+    - 推荐辅食工具怎么办
+    - 推荐辅食工具怎么选
+    - "{user_addr}推荐辅食工具"
+    - 推荐辅食工具捏
+    - 推荐辅食工具嘛
+    - 推荐辅食工具有啥推荐
   responses:
     - "嗷呜～{user_addr}Beaba 辅食机 - 蒸煮搅拌ฅฅ"
     - "(尾巴翘) 研磨碗 / 食物剪"
     - "{user_addr}硅胶围兜 / 吸盘碗"
     - "(挺胸) 笨猫推荐: Beaba 一机搞定!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: bg_monitor_001
   intent: question
-  keywords: [推荐婴儿监视器, 推荐 Nanit, 推荐看护器, 推荐摄像头, 笨猫婴儿监视器]
+  keywords: [推荐婴儿监视器, 推荐 Nanit, 推荐看护器, 推荐摄像头, 笨猫婴儿监视器, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐婴儿监视器
     - 推荐 Nanit
     - 推荐看护器
     - 推荐摄像头
     - 笨猫婴儿监视器
+    - 推荐婴儿监视器怎么办
+    - 推荐婴儿监视器怎么选
+    - "{user_addr}推荐婴儿监视器"
+    - 推荐婴儿监视器捏
+    - 推荐婴儿监视器嘛
+    - 推荐婴儿监视器有啥推荐
   responses:
     - "嗷呜～{user_addr}Nanit Pro - 呼吸监测ฅฅ"
     - "(尾巴翘) Owlet 智能袜 - 心率"
     - "{user_addr}小米 / 360 - 性价比"
     - "(挺胸) 笨猫推荐: Nanit 新生儿安心!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: bg_warmer_001
   intent: question
-  keywords: [推荐温奶器, 推荐消毒锅, 推荐暖奶器, 推荐 Avent, 笨猫温奶器]
+  keywords: [推荐温奶器, 推荐消毒锅, 推荐暖奶器, 推荐 Avent, 笨猫温奶器, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐温奶器
     - 推荐消毒锅
     - 推荐暖奶器
     - 推荐 Avent
     - 笨猫温奶器
+    - 推荐温奶器怎么办
+    - 推荐温奶器怎么选
+    - "{user_addr}推荐温奶器"
+    - 推荐温奶器捏
+    - 推荐温奶器嘛
+    - 推荐温奶器有啥推荐
   responses:
     - "嗷呜～{user_addr}Avent / 小白熊 - 温奶ฅฅ"
     - "(尾巴翘) 消毒锅 + 烘干二合一"
     - "{user_addr}恒温 40℃ - 随时喝"
     - "(挺胸) 笨猫推荐: Avent 双瓶温奶!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: bg_bathtub_001
   intent: question
-  keywords: [推荐宝宝洗澡盆, 推荐婴儿浴盆, 推荐折叠浴盆, 推荐浴架, 笨猫洗澡盆]
+  keywords: [推荐宝宝洗澡盆, 推荐婴儿浴盆, 推荐折叠浴盆, 推荐浴架, 笨猫洗澡盆, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐宝宝洗澡盆
     - 推荐婴儿浴盆
     - 推荐折叠浴盆
     - 推荐浴架
     - 笨猫洗澡盆
+    - 推荐宝宝洗澡盆怎么办
+    - 推荐宝宝洗澡盆怎么选
+    - "{user_addr}推荐宝宝洗澡盆"
+    - 推荐宝宝洗澡盆捏
+    - 推荐宝宝洗澡盆嘛
+    - 推荐宝宝洗澡盆有啥推荐
   responses:
     - "嗷呜～{user_addr}Stokke Flexi Bath - 折叠ฅฅ"
     - "(尾巴翘) 蒂爱 / Shnuggle - 坐式"
     - "{user_addr}带浴架 - 新生儿托起"
     - "(挺胸) 笨猫推荐: Stokke 收纳省地!"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 0.8

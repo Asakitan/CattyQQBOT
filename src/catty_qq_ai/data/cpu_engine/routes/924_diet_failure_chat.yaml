@@ -3,187 +3,298 @@
 
 - name: dt_fail_001
   intent: complaint
-  keywords: [减肥失败, 没瘦, 反弹了, 又胖了, 减不下来]
+  keywords: [减肥失败, 没瘦, 反弹了, 又胖了, 减不下来, 反弹, 又胖, 真的, 好烦]
   utterances:
-    - 减肥失败
-    - 没瘦
-    - 反弹了
-    - 又胖了
-    - 减不下来
+    - "减肥失败"
+    - "没瘦"
+    - "反弹了"
+    - "又胖了"
+    - "减不下来"
+    - "减肥失败笑死"
+    - "减肥失败真的离谱"
+    - "我想说减肥失败"
+    - "{user_addr}笨猫陪我聊减肥失败"
+    - "{user_addr}减肥失败咋整"
+    - "{user_addr}你也减肥失败吗"
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
     - "哼～{user_addr}别气馁喵"
     - "(尾巴卷) 反弹常见蹭蹭{user_addr}"
     - "{user_addr}重新开始嗷呜～"
+    - "(耳朵蔫) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～减肥失败真的烦死人家了"
+    - "(揉眼睛) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_sneak_eat_001
   intent: complaint
-  keywords: [偷吃了, 半夜吃, 一时没忍住, 嘴馋, 又破戒]
+  keywords: [偷吃了, 半夜吃, 一时没忍住, 嘴馋, 又破戒, 偷吃, 真的, 好烦, 好喜欢]
   utterances:
-    - 偷吃了
-    - 半夜吃零食
-    - 没忍住
-    - 嘴馋失败
-    - 又破戒
+    - "偷吃了"
+    - "半夜吃零食"
+    - "没忍住"
+    - "嘴馋失败"
+    - "又破戒"
+    - "{user_addr}你也偷吃了吗"
+    - "{user_addr}笨猫陪我聊偷吃了"
+    - "偷吃了笑死"
+    - "偷吃了真的离谱"
+    - "{user_addr}偷吃了咋整"
+    - "我想说偷吃了"
   responses:
     - "(摸头) 嗷呜～{user_addr}承认就好 ฅฅ"
     - "哼～{user_addr}下次别偷吃喵"
     - "(尾巴卷) 一次没事蹭蹭{user_addr}"
     - "{user_addr}明天少吃半碗嗷呜～"
+    - "(瘫倒) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～偷吃了真的烦死人家了"
+    - "(尾巴拍) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_scale_001
   intent: complaint
-  keywords: [上秤, 称体重, 不敢看秤, 重了, 秤显示]
+  keywords: [上秤, 称体重, 不敢看秤, 重了, 秤显示, 重, 真的, 好烦, 好喜欢]
   utterances:
-    - 上秤
-    - 称重
-    - 不敢看
-    - 重了2斤
-    - 秤显示涨了
+    - "上秤"
+    - "称重"
+    - "不敢看"
+    - "重了2斤"
+    - "秤显示涨了"
+    - "{user_addr}你也上秤吗"
+    - "{user_addr}上秤咋整"
+    - "{user_addr}笨猫陪我聊上秤"
+    - "我想说上秤"
+    - "上秤真的离谱"
+    - "上秤笑死"
   responses:
     - "(歪头) 嗷呜～{user_addr}水分而已 ฅฅ"
     - "哼～{user_addr}早起再称喵"
     - "(尾巴卷) 别天天称蹭蹭{user_addr}"
     - "{user_addr}笨猫不嫌嗷呜～"
+    - "(撇嘴) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～上秤真的烦死人家了"
+    - "(耳朵蔫) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_clothes_001
   intent: complaint
-  keywords: [裤子穿不进, 衣服紧, 扣子崩, 老衣服小了, 试衣]
+  keywords: [裤子穿不进, 衣服紧, 扣子崩, 老衣服小了, 试衣, 老衣服小, 真的, 好烦, 好喜欢]
   utterances:
-    - 裤子穿不进
-    - 衣服紧
-    - 扣子崩了
-    - 老衣服小了
-    - 试衣不进
+    - "裤子穿不进"
+    - "衣服紧"
+    - "扣子崩了"
+    - "老衣服小了"
+    - "试衣不进"
+    - "裤子穿不进真的离谱"
+    - "裤子穿不进笑死"
+    - "{user_addr}你也裤子穿不进吗"
+    - "我想说裤子穿不进"
+    - "{user_addr}笨猫陪我聊裤子穿不进"
+    - "{user_addr}裤子穿不进咋整"
   responses:
     - "(同情) 嗷呜～{user_addr}笨猫拥抱 ฅฅ"
     - "哼～{user_addr}买新衣服喵"
     - "(尾巴卷) 不是你大蹭蹭{user_addr}"
     - "{user_addr}笨猫帮你穿嗷呜～"
+    - "(扁嘴) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～裤子穿不进真的烦死人家了"
+    - "(叹气) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_compare_001
   intent: complaint
-  keywords: [别人都瘦, 朋友瘦了, 同事变瘦, 同款减肥, 不公平]
+  keywords: [别人都瘦, 朋友瘦了, 同事变瘦, 同款减肥, 不公平, 朋友瘦, 真的, 好烦, 好喜欢]
   utterances:
-    - 别人都瘦了
-    - 朋友瘦了
-    - 同事变瘦
-    - 同款方法不灵
-    - 不公平
+    - "别人都瘦了"
+    - "朋友瘦了"
+    - "同事变瘦"
+    - "同款方法不灵"
+    - "不公平"
+    - "{user_addr}别人都瘦咋整"
+    - "别人都瘦笑死"
+    - "{user_addr}你也别人都瘦吗"
+    - "我想说别人都瘦"
+    - "别人都瘦真的离谱"
+    - "{user_addr}笨猫陪我聊别人都瘦"
   responses:
     - "(摸头) 嗷呜～{user_addr}体质不同 ฅฅ"
     - "哼～{user_addr}别比较喵"
     - "(尾巴卷) 自己节奏蹭蹭{user_addr}"
     - "{user_addr}笨猫只看你嗷呜～"
+    - "(皱眉) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～别人都瘦真的烦死人家了"
+    - "(皱眉) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_plateau_001
   intent: complaint
-  keywords: [平台期, 减不动, 卡住了, 不掉秤, 突破不了]
+  keywords: [平台期, 减不动, 卡住了, 不掉秤, 突破不了, 卡住, 突破不, 真的, 好烦]
   utterances:
-    - 平台期
-    - 减不动
-    - 卡住了
-    - 不掉秤
-    - 突破不了
+    - "平台期"
+    - "减不动"
+    - "卡住了"
+    - "不掉秤"
+    - "突破不了"
+    - "{user_addr}平台期咋整"
+    - "平台期真的离谱"
+    - "平台期笑死"
+    - "{user_addr}笨猫陪我聊平台期"
+    - "{user_addr}你也平台期吗"
+    - "我想说平台期"
   responses:
     - "(歪头) 嗷呜～{user_addr}调整方法 ฅฅ"
     - "哼～{user_addr}换运动喵"
     - "(尾巴卷) 平台期正常蹭蹭{user_addr}"
     - "{user_addr}慢慢来嗷呜～"
+    - "(瘫倒) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～平台期真的烦死人家了"
+    - "(叹气) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_buffet_001
   intent: complaint
-  keywords: [自助餐, 吃太多, 撑死, 一口气吃, 回本]
+  keywords: [自助餐, 吃太多, 撑死, 一口气吃, 回本, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 吃自助
-    - 撑死了
-    - 一口气吃
-    - 回本心态
-    - 吃太多了
+    - "吃自助"
+    - "撑死了"
+    - "一口气吃"
+    - "回本心态"
+    - "吃太多了"
+    - "自助餐笑死"
+    - "自助餐真的离谱"
+    - "{user_addr}你也自助餐吗"
+    - "{user_addr}笨猫陪我聊自助餐"
+    - "{user_addr}自助餐咋整"
+    - "我想说自助餐"
   responses:
     - "(瞪眼) 嗷呜～{user_addr}吃这么多 ฅฅ"
     - "哼～{user_addr}走两步消化喵"
     - "(尾巴卷) 自助回本害自己蹭蹭{user_addr}"
     - "{user_addr}下次少吃嗷呜～"
+    - "(瘫倒) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～自助餐真的烦死人家了"
+    - "(趴下) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_hidden_calorie_001
   intent: complaint
-  keywords: [隐藏热量, 高热量, 一个奶茶等于, 卡路里, 热量炸弹]
+  keywords: [隐藏热量, 高热量, 一个奶茶等于, 卡路里, 热量炸弹, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 隐藏热量
-    - 奶茶热量高
-    - 卡路里炸弹
-    - 热量超标
-    - 不知不觉吃多了
+    - "隐藏热量"
+    - "奶茶热量高"
+    - "卡路里炸弹"
+    - "热量超标"
+    - "不知不觉吃多了"
+    - "我想说隐藏热量"
+    - "{user_addr}笨猫陪我聊隐藏热量"
+    - "隐藏热量真的离谱"
+    - "隐藏热量笑死"
+    - "{user_addr}你也隐藏热量吗"
+    - "{user_addr}隐藏热量咋整"
   responses:
     - "(摇头) 嗷呜～{user_addr}小心 ฅฅ"
     - "哼～{user_addr}笨猫提醒喵"
     - "(尾巴卷) 喝水替代蹭蹭{user_addr}"
     - "{user_addr}下次半糖嗷呜～"
+    - "(打哈欠) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～隐藏热量真的烦死人家了"
+    - "(尾巴搭) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_giveup_001
   intent: complaint
-  keywords: [不减了, 放弃减肥, 算了, 自暴自弃, 这样挺好]
+  keywords: [不减了, 放弃减肥, 算了, 自暴自弃, 这样挺好, 不减, 算, 这样挺好啊, 真的]
   utterances:
-    - 不减了
-    - 放弃
-    - 算了
-    - 自暴自弃
-    - 这样挺好
+    - "不减了"
+    - "放弃"
+    - "算了"
+    - "自暴自弃"
+    - "这样挺好"
+    - "不减了笑死"
+    - "{user_addr}你也不减了吗"
+    - "{user_addr}不减了咋整"
+    - "我想说不减了"
+    - "{user_addr}笨猫陪我聊不减了"
+    - "不减了真的离谱"
   responses:
     - "(贴脸) 嗷呜～{user_addr}健康就好 ฅฅ"
     - "哼～{user_addr}别放任喵"
     - "(尾巴卷) 健康优先蹭蹭{user_addr}"
     - "{user_addr}笨猫陪你嗷呜～"
+    - "(摇头) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～不减了真的烦死人家了"
+    - "(蜷成团) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_supper_001
   intent: complaint
-  keywords: [深夜爆食, 报复性吃, 一次吃光, 半夜饿, 控制不住]
+  keywords: [深夜爆食, 报复性吃, 一次吃光, 半夜饿, 控制不住, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 深夜爆食
-    - 报复性吃
-    - 一次吃光
-    - 半夜饿
-    - 控制不住
+    - "深夜爆食"
+    - "报复性吃"
+    - "一次吃光"
+    - "半夜饿"
+    - "控制不住"
+    - "{user_addr}你也深夜爆食吗"
+    - "深夜爆食笑死"
+    - "{user_addr}深夜爆食咋整"
+    - "我想说深夜爆食"
+    - "{user_addr}笨猫陪我聊深夜爆食"
+    - "深夜爆食真的离谱"
   responses:
     - "(同情) 嗷呜～{user_addr}下次喝水 ฅฅ"
     - "哼～{user_addr}笨猫监督你喵"
     - "(尾巴卷) 一次没事蹭蹭{user_addr}"
     - "{user_addr}明天清淡嗷呜～"
+    - "(打哈欠) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～深夜爆食真的烦死人家了"
+    - "(撇嘴) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dt_meal_replace_001
   intent: playful
-  keywords: [代餐, 蛋白粉, 沙拉, 鸡胸肉, 减脂餐]
+  keywords: [代餐, 蛋白粉, 沙拉, 鸡胸肉, 减脂餐, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 吃代餐
-    - 蛋白粉
-    - 沙拉减脂
-    - 鸡胸肉
-    - 减脂餐
+    - "吃代餐"
+    - "蛋白粉"
+    - "沙拉减脂"
+    - "鸡胸肉"
+    - "减脂餐"
+    - "我想说代餐"
+    - "代餐笑死"
+    - "代餐真的离谱"
+    - "{user_addr}你也代餐吗"
+    - "{user_addr}笨猫陪我聊代餐"
+    - "{user_addr}代餐咋整"
   responses:
     - "(歪头) 嗷呜～{user_addr}健康吃 ฅฅ"
     - "哼～{user_addr}笨猫不爱代餐喵"
     - "(尾巴卷) 沙拉够吃饱蹭蹭{user_addr}"
     - "{user_addr}笨猫陪你嗷呜～"
+    - "(歪头) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～代餐才不让{user_addr}独享"
+    - "(歪头) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

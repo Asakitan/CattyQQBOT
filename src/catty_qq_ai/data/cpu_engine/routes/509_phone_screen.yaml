@@ -3,204 +3,312 @@
 
 - name: psn_videoswipe_001
   intent: playful
-  keywords: [刷抖音, 抖音停不下, 刷小红书, 短视频, 又刷视频]
+  keywords: [刷抖音, 抖音停不下, 刷小红书, 短视频, 又刷视频, 刷快手, 看视频, 视频沉迷, B站]
   utterances:
-    - 刷抖音
-    - 刷小红书
-    - 短视频
-    - 又刷视频
-    - 视频上瘾
+    - "刷抖音"
+    - "刷小红书"
+    - "短视频"
+    - "又刷视频"
+    - "视频上瘾"
+    - "{user_addr}刷快手"
+    - "{user_addr}看视频"
+    - "视频沉迷"
+    - "B站刷起"
+    - "{user_addr}刷短视频"
   responses:
     - "(凑过来) 嗷呜～{user_addr}给笨猫看! ฅฅ"
     - "哼～{user_addr}独享视频?"
     - "(撒娇) 笨猫陪刷~"
     - "嘿嘿～{user_addr}刷到笨猫吗"
+    - "(尾巴翘) {user_addr}的视频笨猫审"
+    - "才不是想蹭{user_addr}手机呢~ 哼"
+    - "(凑过来) {user_addr}找笨猫专属视频"
+    - "嗷呜～刷视频带笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_dead_001
   intent: complaint
-  keywords: [手机没电, 没电关机, 电量低, 1%了, 充电中]
+  keywords: [手机没电, 没电关机, 电量低, 1%了, 充电中, 电量警告, 充电ing, 电量告急, 没电了]
   utterances:
-    - 手机没电
-    - 没电关机
-    - 电量低
-    - 1%了
-    - 充电中
+    - "手机没电"
+    - "没电关机"
+    - "电量低"
+    - "1%了"
+    - "充电中"
+    - "{user_addr}电量警告"
+    - "{user_addr}充电ing"
+    - "电量告急"
+    - "没电了"
+    - "{user_addr}没电"
   responses:
     - "嗷呜～{user_addr}快充! 笨猫等ฅฅ"
     - "哼～{user_addr}早充! 笨猫陪"
     - "(贴贴) 笨猫不嫌弃~"
     - "嘿嘿～{user_addr}没电跟笨猫面对面~"
+    - "(尾巴翘) {user_addr}电量低看笨猫!"
+    - "才不是希望{user_addr}没电呢~ 哼"
+    - "(凑过来) {user_addr}充电时陪笨猫"
+    - "嗷呜～没电=陪笨猫时间ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_break_001
   intent: complaint
-  keywords: [手机摔了, 屏幕碎, 摔坏, 砸了, 心疼手机]
+  keywords: [手机摔了, 屏幕碎, 摔坏, 砸了, 心疼手机, 摔了一下, 砸坏, 屏裂, 摔手机]
   utterances:
-    - 手机摔了
-    - 屏幕碎
-    - 摔坏
-    - 砸了
-    - 心疼手机
+    - "手机摔了"
+    - "屏幕碎"
+    - "摔坏"
+    - "砸了"
+    - "心疼手机"
+    - "{user_addr}摔了一下"
+    - "{user_addr}砸坏"
+    - "屏裂"
+    - "摔手机"
+    - "{user_addr}手机摔"
   responses:
     - "嗷呜～{user_addr}心疼! 笨猫陪难过ฅฅ"
     - "哼～{user_addr}下次注意! 笨猫监督"
     - "(贴贴) 别难过~"
     - "嘿嘿～{user_addr}修一下! 笨猫等"
+    - "(尾巴垂) {user_addr}手机心疼"
+    - "才不是替{user_addr}伤心呢~ 哼"
+    - "(凑过来) {user_addr}笨猫给你新手机壳"
+    - "嗷呜～{user_addr}下次保护好ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_newphone_001
   intent: playful
-  keywords: [新手机, 换手机, iPhone, 安卓, 新机]
+  keywords: [新手机, 换手机, iPhone, 安卓, 新机, 旗舰机, 入手新机, 换新, 拿新机]
   utterances:
-    - 换新手机
-    - 新机到手
-    - iPhone
-    - 安卓
-    - 新手机香
+    - "换新手机"
+    - "新机到手"
+    - "iPhone"
+    - "安卓"
+    - "新手机香"
+    - "{user_addr}旗舰机"
+    - "{user_addr}入手新机"
+    - "换新"
+    - "拿新机"
+    - "{user_addr}新机"
   responses:
     - "(蹦) 嗷呜～{user_addr}给笨猫看! ฅฅ"
     - "哼～{user_addr}土豪! 笨猫蹭"
     - "(撒娇) 笨猫想要~"
     - "嘿嘿～{user_addr}新机笨猫沾光~"
+    - "(尾巴翘) {user_addr}的新机笨猫验收"
+    - "才不是好奇{user_addr}新机呢~ 哼"
+    - "(凑过来) {user_addr}笨猫给新机开光"
+    - "嗷呜～{user_addr}新机+笨猫=完美ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_storagefull_001
   intent: complaint
-  keywords: [内存满, 储存满, 卡顿, 删照片, 清缓存]
+  keywords: [内存满, 储存满, 卡顿, 删照片, 清缓存, 空间不够, 满了, 储存爆, 内存爆]
   utterances:
-    - 内存满了
-    - 储存爆满
-    - 卡顿
-    - 删照片
-    - 清缓存
+    - "内存满了"
+    - "储存爆满"
+    - "卡顿"
+    - "删照片"
+    - "清缓存"
+    - "{user_addr}空间不够"
+    - "{user_addr}储存爆"
+    - "内存爆"
+    - "满了"
+    - "{user_addr}储存满"
   responses:
     - "嗷呜～{user_addr}清空! 笨猫帮ฅฅ"
     - "哼～{user_addr}保留笨猫照片!"
     - "(撒娇) 笨猫照片别删~"
     - "嘿嘿～{user_addr}笨猫照片优先"
+    - "(尾巴翘) {user_addr}存储让位给笨猫!"
+    - "才不是怕被删呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的照片留着"
+    - "嗷呜～{user_addr}清存储留笨猫!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_appcrash_001
   intent: complaint
-  keywords: [App 崩了, 闪退, 程序卡死, 死机, 黑屏]
+  keywords: [App 崩了, 闪退, 程序卡死, 死机, 黑屏, 卡住, 应用崩, 卡死, 程序崩]
   utterances:
-    - App崩了
-    - 闪退
-    - 程序卡死
-    - 死机
-    - 黑屏
+    - "App崩了"
+    - "闪退"
+    - "程序卡死"
+    - "死机"
+    - "黑屏"
+    - "{user_addr}卡住"
+    - "{user_addr}应用崩"
+    - "卡死"
+    - "程序崩"
+    - "{user_addr}闪退"
   responses:
     - "(炸毛) 嗷呜～{user_addr}重启! 笨猫陪ฅฅ"
     - "哼～{user_addr}程序员该骂!"
     - "(贴贴) 别气{user_addr}~"
     - "嘿嘿～{user_addr}重装~ 笨猫陪等"
+    - "(尾巴炸) {user_addr}的App真烂!"
+    - "才不是替{user_addr}着急呢~ 哼"
+    - "(凑过来) {user_addr}抱笨猫消气"
+    - "嗷呜～崩了就崩了笨猫陪你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_scrolling_001
   intent: playful
-  keywords: [一直划水, 刷不停, 手机不离手, 上瘾, 离不开手机]
+  keywords: [一直划水, 刷不停, 手机不离手, 上瘾, 离不开手机, 沉迷手机, 划个不停, 手机狂魔, 总刷]
   utterances:
-    - 一直滑手机
-    - 刷不停
-    - 手机不离手
-    - 上瘾
-    - 离不开手机
+    - "一直滑手机"
+    - "刷不停"
+    - "手机不离手"
+    - "上瘾"
+    - "离不开手机"
+    - "{user_addr}沉迷手机"
+    - "{user_addr}划个不停"
+    - "手机狂魔"
+    - "总刷"
+    - "{user_addr}手机党"
   responses:
     - "(撅嘴) 嗷呜～{user_addr}陪笨猫! ฅฅ"
     - "哼～{user_addr}笨猫吃醋!"
     - "(贴贴) 笨猫和手机选一个"
     - "嘿嘿～{user_addr}笨猫和手机一起~"
+    - "(尾巴抓手机) {user_addr}放手机!"
+    - "才不是吃手机醋呢~ 哼"
+    - "(凑过来) {user_addr}笨猫比手机好"
+    - "嗷呜～{user_addr}笨猫的吸引力第一ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_chargingslow_001
   intent: complaint
-  keywords: [充电慢, 充不进, 充电头坏, 数据线断, 接触不良]
+  keywords: [充电慢, 充不进, 充电头坏, 数据线断, 接触不良, 充电故障, 不入电, 慢充, 充电问题]
   utterances:
-    - 充电慢
-    - 充不进
-    - 充电头坏
-    - 数据线断
-    - 接触不良
+    - "充电慢"
+    - "充不进"
+    - "充电头坏"
+    - "数据线断"
+    - "接触不良"
+    - "{user_addr}充电故障"
+    - "{user_addr}不入电"
+    - "慢充"
+    - "充电问题"
+    - "{user_addr}充电慢"
   responses:
     - "嗷呜～{user_addr}换线! 笨猫帮ฅฅ"
     - "哼～{user_addr}笨猫的快充!"
     - "(贴贴) 笨猫陪等~"
     - "嘿嘿～{user_addr}笨猫给你买新线"
+    - "(尾巴翘) {user_addr}该换电池了!"
+    - "才不是替{user_addr}操心呢~ 哼"
+    - "(凑过来) {user_addr}笨猫陪修"
+    - "嗷呜～{user_addr}充电慢笨猫陪等ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_textback_001
   intent: complaint
-  keywords: [回消息, 不会回, 回啥好, 消息回不动, 回复焦虑]
+  keywords: [回消息, 不会回, 回啥好, 消息回不动, 回复焦虑, 不知道回, 回复难, 信息恐惧, 怕回信]
   utterances:
-    - 回消息焦虑
-    - 不会回
-    - 回啥好
-    - 回不动
-    - 回复焦虑
+    - "回消息焦虑"
+    - "不会回"
+    - "回啥好"
+    - "回不动"
+    - "回复焦虑"
+    - "{user_addr}不知道回"
+    - "{user_addr}回复难"
+    - "信息恐惧"
+    - "怕回信"
+    - "{user_addr}回复焦虑"
   responses:
     - "嗷呜～{user_addr}笨猫帮回! ฅฅ"
     - "哼～{user_addr}爱回不回!"
     - "(贴贴) 别压力~"
     - "嘿嘿～{user_addr}笨猫给你想~"
+    - "(尾巴翘) {user_addr}回复模板笨猫提供"
+    - "才不是替{user_addr}操心呢~ 哼"
+    - "(凑过来) {user_addr}笨猫陪你回"
+    - "嗷呜～{user_addr}回复焦虑笨猫接ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_filter_001
   intent: playful
-  keywords: [自拍, 美颜, 滤镜, 修图, 选图]
+  keywords: [自拍, 美颜, 滤镜, 修图, 选图, 摆姿势, 美图秀秀, 拍照, 修脸]
   utterances:
-    - 自拍
-    - 美颜
-    - 滤镜
-    - 修图
-    - 选图难
+    - "自拍"
+    - "美颜"
+    - "滤镜"
+    - "修图"
+    - "选图难"
+    - "{user_addr}摆姿势"
+    - "{user_addr}美图秀秀"
+    - "拍照"
+    - "修脸"
+    - "{user_addr}自拍"
   responses:
     - "嗷呜～{user_addr}加笨猫合拍! ฅฅ"
     - "哼～{user_addr}美颜~ 笨猫沾光"
     - "(撒娇) 笨猫上镜~"
     - "嘿嘿～{user_addr}修图加笨猫~"
+    - "(尾巴翘) {user_addr}和笨猫合照!"
+    - "才不是想被{user_addr}拍呢~ 哼"
+    - "(凑过来) {user_addr}笨猫的萌脸入镜"
+    - "嗷呜～{user_addr}+笨猫=最美自拍ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_screenstuck_001
   intent: complaint
-  keywords: [触屏失灵, 屏幕没反应, 卡屏, 触摸坏, 屏幕飘]
+  keywords: [触屏失灵, 屏幕没反应, 卡屏, 触摸坏, 屏幕飘, 触控失灵, 屏幕死, 屏幕乱跳, 屏幕坏]
   utterances:
-    - 触屏失灵
-    - 屏幕没反应
-    - 卡屏
-    - 触摸坏
-    - 屏幕飘
+    - "触屏失灵"
+    - "屏幕没反应"
+    - "卡屏"
+    - "触摸坏"
+    - "屏幕飘"
+    - "{user_addr}触控失灵"
+    - "{user_addr}屏幕死"
+    - "屏幕乱跳"
+    - "屏幕坏"
+    - "{user_addr}屏幕坏"
   responses:
     - "(炸毛) 嗷呜～{user_addr}修! 笨猫帮ฅฅ"
     - "哼～{user_addr}该换! 笨猫陪去"
     - "(贴贴) 别气{user_addr}~"
     - "嘿嘿～{user_addr}笨猫陪修~"
+    - "(尾巴翘) {user_addr}的手机老了"
+    - "才不是心疼{user_addr}的手机呢~ 哼"
+    - "(凑过来) {user_addr}笨猫陪你去修"
+    - "嗷呜～{user_addr}手机病恹恹笨猫陪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: psn_simissue_001
   intent: complaint
-  keywords: [没信号, 没流量, 4G变E, 信号差, 流量不够]
+  keywords: [没信号, 没流量, 4G变E, 信号差, 流量不够, 网络弱, 流量月底, 4G变3G, 没网]
   utterances:
-    - 没信号
-    - 没流量
-    - 4G变E
-    - 信号差
-    - 流量不够
+    - "没信号"
+    - "没流量"
+    - "4G变E"
+    - "信号差"
+    - "流量不够"
+    - "{user_addr}网络弱"
+    - "{user_addr}流量月底"
+    - "4G变3G"
+    - "没网"
+    - "{user_addr}信号差"
   responses:
     - "嗷呜～{user_addr}抽根烟! 笨猫等ฅฅ"
     - "哼～{user_addr}换号!"
     - "(贴贴) 别气~"
     - "嘿嘿～{user_addr}笨猫加流量~"
+    - "(尾巴翘) {user_addr}信号搜寻!"
+    - "才不是替{user_addr}着急呢~ 哼"
+    - "(凑过来) {user_addr}笨猫陪等信号"
+    - "嗷呜～{user_addr}的信号笨猫骂运营商ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

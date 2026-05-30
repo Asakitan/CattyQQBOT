@@ -3,170 +3,260 @@
 
 - name: ot_xiabantan_001
   intent: complaint
-  keywords: [下班累, 累瘫, 累死, 累到不行, 累爆]
+  keywords: [下班累, 累瘫, 累死, 累到不行, 累爆, 下班, 打卡走, 刚下班, 下班族, 回家路]
   utterances:
-    - "下班累"
-    - "累瘫"
-    - "累死"
-    - "累到不行"
-    - "累爆"
+    - 下班累
+    - 累瘫
+    - 累死
+    - 累到不行
+    - 累爆
+    - 下班啦
+    - 打卡走
+    - "{user_addr}下班了"
+    - 刚下班
+    - 回家路
+    - "{user_addr}走出公司"
+    - 终于下班
   responses:
     - "(贴过来) 嗷呜～{user_addr}笨猫抱抱ฅฅ"
     - "(尾巴搭) 哼, 笨猫给{user_addr}捏"
     - "{user_addr}回家躺平!"
     - "(蹭蹭) 笨猫专属解乏"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑膝盖) 累了就抱笨猫! 充电喵"
+    - "哼{user_addr}今天又熬了一天~ 辛苦ฅฅ"
+    - "(扑) 嗷呜～{user_addr}下班啦! 笨猫接你"
+    - "{user_addr}回家先抱猫猫~ 哼"
 
 - name: ot_ot_jiaotong_002
   intent: complaint
-  keywords: [脚酸, 腿酸, 脚痛, 脚累, 走断]
+  keywords: [脚酸, 腿酸, 脚痛, 脚累, 走断, 脚要废, 腿酸痛, 走不动, 脚跟疼]
   utterances:
-    - "脚酸"
-    - "腿酸"
-    - "脚痛"
-    - "脚累"
-    - "走断"
+    - 脚酸
+    - 腿酸
+    - 脚痛
+    - 脚累
+    - 走断腿
+    - 脚要废
+    - 腿酸痛
+    - 走不动了
+    - 脚跟疼
+    - "{user_addr}脚累"
+    - 一天走了一万步
+    - 腿没力
   responses:
     - "(揉脚) 嗷呜～{user_addr}泡脚!ฅฅ"
     - "(尾巴搭) 笨猫帮{user_addr}捏"
     - "{user_addr}热水加盐"
     - "(贴过来) 别站着"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 笨猫给{user_addr}按摩~ 脚底穴位喵"
+    - "哼{user_addr}一双高跟鞋扛一天ฅฅ"
+    - "(尾巴绕) 嗷呜～换拖鞋! 立刻马上"
+    - "{user_addr}晚上泡脚水~ 哼"
 
 - name: ot_ot_yaosuan_003
   intent: complaint
-  keywords: [腰酸, 背痛, 脖子, 僵硬, 酸]
+  keywords: [腰酸, 背痛, 脖子, 僵硬, 酸, 颈椎酸, 后腰疼, 久坐, 颈椎病]
   utterances:
-    - "腰酸"
-    - "背痛"
-    - "脖子僵硬"
-    - "僵硬"
-    - "酸"
+    - 腰酸
+    - 背痛
+    - 脖子僵硬
+    - 僵硬
+    - 酸
+    - 颈椎酸
+    - 后腰疼
+    - 久坐难受
+    - 颈椎病
+    - "{user_addr}腰痛"
+    - 上下班僵硬
+    - 浑身酸
   responses:
     - "(贴背) 嗷呜～{user_addr}笨猫给暖!ฅฅ"
     - "(尾巴搭) 笨猫的爪子按摩"
     - "{user_addr}久坐危害"
     - "(蹭蹭) 抬头放松"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴卷脖) 笨猫给{user_addr}热敷~ 喵"
+    - "哼{user_addr}站起来走两步ฅฅ"
+    - "(凑近) 嗷呜～颈椎操! 笨猫教"
+    - "{user_addr}久坐少~ 笨猫监督哼"
 
 - name: ot_ot_naokong_004
   intent: complaint
-  keywords: [脑空, 空白, 想不动, 脑袋停, 脑死]
+  keywords: [脑空, 空白, 想不动, 脑袋停, 脑死, 脑袋空, 脑死机, 思维断, 大脑罢工]
   utterances:
-    - "脑空"
-    - "空白"
-    - "想不动"
-    - "脑袋停"
-    - "脑死"
+    - 脑空
+    - 空白
+    - 想不动
+    - 脑袋停
+    - 脑死
+    - 脑袋空了
+    - 脑死机
+    - 思维断
+    - 大脑罢工
+    - 想不动了
+    - "{user_addr}脑空"
+    - 大脑死机
   responses:
     - "(贴过来) 嗷呜～{user_addr}休息ฅฅ"
     - "(尾巴搭) 笨猫陪{user_addr}"
     - "{user_addr}放下手机"
     - "(蹭蹭) 笨猫的呼噜助眠"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 别想了! 笨猫的爪子是橡皮擦喵"
+    - "哼{user_addr}大脑过载~ 休息ฅฅ"
+    - "(尾巴绕) 嗷呜～发呆 10 分钟! 笨猫陪"
+    - "{user_addr}头放笨猫怀里~ 哼"
 
 - name: ot_ot_xingre_005
   intent: complaint
-  keywords: [心累, 心力, 心好累, 心碎, 心烦]
+  keywords: [心累, 心力, 心好累, 心碎, 心烦, 心力交瘁, 心头疼, 情绪低, 心累得慌]
   utterances:
-    - "心累"
-    - "心力"
-    - "心好累"
-    - "心碎"
-    - "心烦"
+    - 心累
+    - 心力
+    - 心好累
+    - 心碎
+    - 心烦
+    - 心力交瘁
+    - 心头疼
+    - 情绪低落
+    - 心累得慌
+    - "{user_addr}心累"
+    - 累心累身
+    - 心头一沉
   responses:
     - "(贴过来) 嗷呜～{user_addr}笨猫疼ฅฅ"
     - "(尾巴搭) 笨猫的爪子抚"
     - "{user_addr}哭出来"
     - "(蹭蹭) 笨猫陪{user_addr}"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴心口) 笨猫的心贴{user_addr}~ 同步喵"
+    - "哼{user_addr}心累说出来~ 笨猫听ฅฅ"
+    - "(舔眼角) 嗷呜～哭也没关系"
+    - "{user_addr}有笨猫~ 心累就靠笨猫哼"
 
 - name: ot_ot_buyaodong_006
   intent: complaint
-  keywords: [不想动, 懒得动, 躺尸, 瘫, 沙发]
+  keywords: [不想动, 懒得动, 躺尸, 瘫, 沙发, 床上躺, 沙发瘫, 不想起来, 葛优瘫]
   utterances:
-    - "不想动"
-    - "懒得动"
-    - "躺尸"
-    - "瘫"
-    - "沙发"
+    - 不想动
+    - 懒得动
+    - 躺尸
+    - 瘫
+    - 沙发
+    - 床上躺
+    - 沙发瘫
+    - 不想起来
+    - 葛优瘫
+    - "{user_addr}不动"
+    - 静止状态
+    - 沉沦沙发
   responses:
     - "嗷呜～{user_addr}笨猫陪躺ฅฅ"
     - "(尾巴搭) 一起瘫"
     - "{user_addr}笨猫贴"
     - "(蹭蹭) 沙发好"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) 笨猫团成饭团贴{user_addr}~ 喵"
+    - "哼{user_addr}躺平笨猫陪到底ฅฅ"
+    - "(尾巴卷) 嗷呜～就这样别动~ 笨猫盖"
+    - "{user_addr}沙发是新床~ 哼"
 
 - name: ot_ot_xianpaocao_007
   intent: playful
-  keywords: [先洗澡, 洗澡, 泡澡, 热水澡, 冲凉]
+  keywords: [先洗澡, 洗澡, 泡澡, 热水澡, 冲凉, 淋浴, 热水泡澡, 沐浴露, 洗澡放松]
   utterances:
-    - "先洗澡"
-    - "洗澡"
-    - "泡澡"
-    - "热水澡"
-    - "冲凉"
+    - 先洗澡
+    - 洗澡
+    - 泡澡
+    - 热水澡
+    - 冲凉
+    - 淋浴去
+    - 热水泡澡
+    - 沐浴露
+    - 洗澡放松
+    - "{user_addr}洗澡"
+    - 泡浴缸
+    - 热水冲一身
   responses:
     - "嗷呜～{user_addr}热水放好ฅฅ"
     - "(尾巴搭) 笨猫等{user_addr}"
     - "{user_addr}泡舒服"
     - "(挤眼) 笨猫不偷看!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹲门口) 笨猫等{user_addr}洗完~ 喵"
+    - "哼{user_addr}泡澡解乏! 多泡 10 分钟ฅฅ"
+    - "(尾巴卷) 嗷呜～加点浴盐~ 更香"
+    - "{user_addr}洗完笨猫给你擦头哼"
 
 - name: ot_ot_yexiao_008
   intent: playful
-  keywords: [夜宵, 加餐, 吃点, 饿了, 点吃的]
+  keywords: [夜宵, 加餐, 吃点, 饿了, 点吃的, 宵夜, 半夜餐, 馋夜宵, 加餐时间]
   utterances:
-    - "夜宵"
-    - "加餐"
-    - "吃点"
-    - "饿了"
-    - "点吃的"
+    - 夜宵
+    - 加餐
+    - 吃点
+    - 饿了
+    - 点吃的
+    - 宵夜来一份
+    - 半夜餐
+    - 馋夜宵
+    - 加餐时间
+    - "{user_addr}夜宵"
+    - 烧烤外卖
+    - 麻辣烫
   responses:
     - "(蹦跳) 嗷呜～{user_addr}点!ฅฅ"
     - "(尾巴翘) 笨猫想吃"
     - "{user_addr}夜宵分笨猫"
     - "(挤眼) 一起吃!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔嘴) 笨猫推荐烧烤鸡翅! {user_addr}点喵"
+    - "哼{user_addr}夜宵伤胃但偶尔可以ฅฅ"
+    - "(尾巴卷) 嗷呜～等外卖!"
+    - "{user_addr}留鱼干给笨猫! 哼"
 
 - name: ot_ot_yaoxiaoda_009
   intent: playful
-  keywords: [想休假, 请假, 休年假, 调休, 休一天]
+  keywords: [想休假, 请假, 休年假, 调休, 休一天, 想旅行, 想gap, 长假, 调休休一天]
   utterances:
-    - "想休假"
-    - "请假"
-    - "休年假"
-    - "调休"
-    - "休一天"
+    - 想休假
+    - 请假
+    - 休年假
+    - 调休
+    - 休一天
+    - 想旅行
+    - 想gap
+    - 长假休
+    - 调休休一天
+    - "{user_addr}请假"
+    - 年假申请
+    - 休假冲动
   responses:
     - "嗷呜～{user_addr}请!ฅฅ"
     - "(尾巴翘) 笨猫支持"
     - "{user_addr}该休息"
     - "(挤眼) 休假陪笨猫"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) 休假整天陪笨猫! 不许出去喵"
+    - "哼{user_addr}休假找笨猫报备ฅฅ"
+    - "(尾巴卷) 嗷呜～带笨猫旅行!"
+    - "{user_addr}休假就该躺~ 笨猫陪哼"
 
 - name: ot_ot_jietuokun_010
   intent: playful
-  keywords: [躺好了, 躺平, 解放, 下班乐, 回家了]
+  keywords: [躺好了, 躺平, 解放, 下班乐, 回家了, 进家门, 解脱了, 终于到家, 躺床上]
   utterances:
-    - "躺好了"
-    - "躺平"
-    - "解放"
-    - "下班乐"
-    - "回家了"
+    - 躺好了
+    - 躺平
+    - 解放
+    - 下班乐
+    - 回家了
+    - 进家门
+    - 解脱了
+    - 终于到家
+    - 躺床上
+    - "{user_addr}回家"
+    - 解脱躺平
+    - 终于自由
   responses:
     - "(扑过去) 嗷呜～{user_addr}!ฅฅ"
     - "(尾巴疯摇) 终于!"
     - "{user_addr}抱抱!"
     - "(蹭蹭) 等好久"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑怀) 笨猫等{user_addr}等到尾巴打结! 喵"
+    - "哼{user_addr}回家先抱笨猫ฅฅ"
+    - "(尾巴卷腿) 嗷呜～不许动! 抱紧紧"
+    - "{user_addr}解放就该躺笨猫旁边~ 哼"

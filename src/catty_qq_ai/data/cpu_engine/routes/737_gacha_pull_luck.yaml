@@ -3,187 +3,418 @@
 
 - name: gpl_choukake_001
   intent: playful
-  keywords: [抽卡, 十连, 单抽, 出货, 欧皇]
+  keywords:
+    - 抽卡
+    - 十连
+    - 单抽
+    - 出货
+    - 欧皇
+    - 抽卡喵
+    - 抽卡吗
+    - 抽卡啦
+    - 抽卡呢
+    - 笨猫抽卡
   utterances:
-    - "抽卡"
+    - 抽卡
     - "{user_addr}十连"
-    - "单抽"
-    - "出货"
-    - "欧皇"
+    - 单抽
+    - 出货
+    - 欧皇
+    - 抽卡喵
+    - "{user_addr}抽卡"
+    - 笨猫抽卡
+    - 单抽喵
+    - "{user_addr}单抽"
+    - 笨猫单抽
+    - 出货喵
   responses:
     - "(摇尾) 嗷呜～{user_addr}十连欧! 笨猫沾沾"
     - "哼～单抽必出, 我直觉 ฅฅ"
     - "(尾巴绕) 欧皇带笨猫飞"
     - "{user_addr}出货请客, 鱼干餐"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_chenhuang_001
   intent: complaint
-  keywords: [非酋, 黑脸, 没出货, 一无所有, 抽空]
+  keywords:
+    - 非酋
+    - 黑脸
+    - 没出货
+    - 一无所有
+    - 抽空
+    - 非酋喵
+    - 非酋吗
+    - 非酋啦
+    - 非酋呢
+    - 笨猫非酋
   utterances:
     - "{user_addr}非酋"
-    - "黑脸"
-    - "没出货"
-    - "一无所有"
-    - "抽空了"
+    - 黑脸
+    - 没出货
+    - 一无所有
+    - 抽空了
+    - 黑脸喵
+    - "{user_addr}黑脸"
+    - 笨猫黑脸
+    - 没出货喵
+    - "{user_addr}没出货"
+    - 笨猫没出货
+    - 一无所有喵
   responses:
     - "(凑) 嗷呜～{user_addr}非酋抱抱猫猫"
     - "哼～非洲也得回家 ฅฅ"
     - "(尾巴拍) 黑脸再抽一发, 兜底"
     - "{user_addr}一无所有有猫猫"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_xinkache_001
   intent: playful
-  keywords: [新卡池, 限定卡, UP角色, 必抽, 心动]
+  keywords:
+    - 新卡池
+    - 限定卡
+    - UP角色
+    - 必抽
+    - 心动
+    - 新卡池喵
+    - 新卡池吗
+    - 新卡池啦
+    - 新卡池呢
+    - 笨猫新卡池
   utterances:
-    - "新卡池"
+    - 新卡池
     - "{user_addr}限定卡"
-    - "UP角色"
-    - "必抽"
-    - "心动"
+    - UP角色
+    - 必抽
+    - 心动
+    - 新卡池喵
+    - "{user_addr}新卡池"
+    - 笨猫新卡池
+    - UP角色喵
+    - "{user_addr}UP角色"
+    - 笨猫UP角色
+    - 必抽喵
   responses:
     - "(摇尾) 嗷呜～{user_addr}限定必抽!"
     - "哼～UP当然冲, 不冲后悔 ฅฅ"
     - "(凑) 新卡池开张, 钱包警告"
     - "{user_addr}心动就别犹豫"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_baodi_001
   intent: complaint
-  keywords: [保底, 兜底, 90抽, 大保底, 小保底]
+  keywords:
+    - 保底
+    - 兜底
+    - 90抽
+    - 大保底
+    - 小保底
+    - 保底喵
+    - 保底吗
+    - 保底啦
+    - 保底呢
+    - 笨猫保底
   utterances:
-    - "保底"
+    - 保底
     - "{user_addr}兜底"
-    - "90抽"
-    - "大保底"
-    - "小保底"
+    - 90抽
+    - 大保底
+    - 小保底
+    - 保底喵
+    - "{user_addr}保底"
+    - 笨猫保底
+    - 90抽喵
+    - "{user_addr}90抽"
+    - 笨猫90抽
+    - 大保底喵
   responses:
     - "(尾巴扫) 嗷呜～{user_addr}保底总会有的"
     - "哼～大保底稳过, 别慌 ฅฅ"
     - "(凑) 90抽兜底, 别气"
     - "{user_addr}小保底歪一下也正常"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_pinjie_001
   intent: complaint
-  keywords: [氪金, 充钱, 月卡, 大佬, 平民]
+  keywords:
+    - 氪金
+    - 充钱
+    - 月卡
+    - 大佬
+    - 平民
+    - 氪金喵
+    - 氪金吗
+    - 氪金啦
+    - 氪金呢
+    - 笨猫氪金
   utterances:
-    - "氪金"
+    - 氪金
     - "{user_addr}充钱"
-    - "月卡"
-    - "大佬"
-    - "平民"
+    - 月卡
+    - 大佬
+    - 平民
+    - 氪金喵
+    - "{user_addr}氪金"
+    - 笨猫氪金
+    - 月卡喵
+    - "{user_addr}月卡"
+    - 笨猫月卡
+    - 大佬喵
   responses:
     - "(嘟嘴) 嗷呜～{user_addr}氪要适度!"
     - "哼～月卡党也快乐 ฅฅ"
     - "(尾巴拍) 大佬带笨猫"
     - "{user_addr}平民也能欧"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_shenge_001
   intent: playful
-  keywords: [神格, 满命, 满破, 武器池, 武器抽]
+  keywords:
+    - 神格
+    - 满命
+    - 满破
+    - 武器池
+    - 武器抽
+    - 神格喵
+    - 神格吗
+    - 神格啦
+    - 神格呢
+    - 笨猫神格
   utterances:
     - "{user_addr}神格"
-    - "满命"
-    - "满破"
-    - "武器池"
-    - "武器抽"
+    - 满命
+    - 满破
+    - 武器池
+    - 武器抽
+    - 满命喵
+    - "{user_addr}满命"
+    - 笨猫满命
+    - 满破喵
+    - "{user_addr}满破"
+    - 笨猫满破
+    - 武器池喵
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}满命! 富哥"
     - "哼～武器池别去, 坑 ฅฅ"
     - "(凑) 满破真有钱, 笨猫蹭"
     - "{user_addr}神格带猫猫开荒"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_kachi_001
   intent: complaint
-  keywords: [歪了, 大保底也歪, 想要的没出, 卡池失败, 卡池亏]
+  keywords:
+    - 歪了
+    - 大保底也歪
+    - 想要的没出
+    - 卡池失败
+    - 卡池亏
+    - 歪了喵
+    - 歪了吗
+    - 歪了啦
+    - 歪了呢
+    - 笨猫歪了
   utterances:
-    - "歪了"
-    - "大保底歪"
-    - "想要没出"
-    - "卡池失败"
-    - "卡池亏"
+    - 歪了
+    - 大保底歪
+    - 想要没出
+    - 卡池失败
+    - 卡池亏
+    - 歪了喵
+    - "{user_addr}歪了"
+    - 笨猫歪了
+    - 大保底歪喵
+    - "{user_addr}大保底歪"
+    - 笨猫大保底歪
+    - 想要没出喵
   responses:
     - "(凑) 嗷呜～{user_addr}歪了笨猫陪哭"
     - "哼～官方阴间机制 ฅฅ"
     - "(尾巴拍) 失败下次再来"
     - "{user_addr}亏了来撸猫, 解压"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_shouhu_001
   intent: playful
-  keywords: [守护神, 抽卡前祈祷, 拜玄学, 摸欧皇, 沾欧气]
+  keywords:
+    - 守护神
+    - 抽卡前祈祷
+    - 拜玄学
+    - 摸欧皇
+    - 沾欧气
+    - 守护神喵
+    - 守护神吗
+    - 守护神啦
+    - 守护神呢
+    - 笨猫守护神
   utterances:
-    - "守护神"
-    - "抽前祈祷"
-    - "拜玄学"
-    - "摸欧皇"
-    - "沾欧气"
+    - 守护神
+    - 抽前祈祷
+    - 拜玄学
+    - 摸欧皇
+    - 沾欧气
+    - 守护神喵
+    - "{user_addr}守护神"
+    - 笨猫守护神
+    - 抽前祈祷喵
+    - "{user_addr}抽前祈祷"
+    - 笨猫抽前祈祷
+    - 拜玄学喵
   responses:
     - "(尾巴绕) 嗷呜～{user_addr}拜笨猫!"
     - "哼～欧气我才有 ฅฅ"
     - "(凑) 摸我尾巴沾光"
     - "{user_addr}祈祷别忘谢笨猫"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_huangzhong_001
   intent: playful
-  keywords: [黄字, 出金色, 出橙色, 高稀有度, 5星]
+  keywords:
+    - 黄字
+    - 出金色
+    - 出橙色
+    - 高稀有度
+    - 5星
+    - 黄字喵
+    - 黄字吗
+    - 黄字啦
+    - 黄字呢
+    - 笨猫黄字
   utterances:
-    - "黄字"
-    - "出金色"
-    - "出橙色"
-    - "高稀有度"
-    - "5星"
+    - 黄字
+    - 出金色
+    - 出橙色
+    - 高稀有度
+    - 5星
+    - 黄字喵
+    - "{user_addr}黄字"
+    - 笨猫黄字
+    - 出金色喵
+    - "{user_addr}出金色"
+    - 笨猫出金色
+    - 出橙色喵
   responses:
     - "(扑) 嗷呜～{user_addr}5星! 笨猫开心"
     - "哼～橙色才值得 ฅฅ"
     - "(尾巴摇) 黄字闪光, 截图"
     - "{user_addr}金色奖励抱猫猫"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_jianding_001
   intent: playful
-  keywords: [攒石头, 攒卡, 攒抽数, 库存, 不抽存着]
+  keywords:
+    - 攒石头
+    - 攒卡
+    - 攒抽数
+    - 库存
+    - 不抽存着
+    - 攒石头喵
+    - 攒石头吗
+    - 攒石头啦
+    - 攒石头呢
+    - 笨猫攒石头
   utterances:
-    - "攒石头"
+    - 攒石头
     - "{user_addr}攒卡"
-    - "攒抽数"
-    - "库存"
-    - "不抽存着"
+    - 攒抽数
+    - 库存
+    - 不抽存着
+    - 攒石头喵
+    - "{user_addr}攒石头"
+    - 笨猫攒石头
+    - 攒抽数喵
+    - "{user_addr}攒抽数"
+    - 笨猫攒抽数
+    - 库存喵
   responses:
     - "(摇尾) 嗷呜～{user_addr}攒得多就别浪"
     - "哼～库存富有最稳 ฅฅ"
     - "(凑) 攒石头到下个限定"
     - "{user_addr}存着也是攒幸福"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gpl_xinkache_2_001
   intent: complaint
-  keywords: [抽卡上瘾, 停不下来, 沉迷氪金, 卡池毒, 抽到剁手]
+  keywords:
+    - 抽卡上瘾
+    - 停不下来
+    - 沉迷氪金
+    - 卡池毒
+    - 抽到剁手
+    - 抽卡上瘾喵
+    - 抽卡上瘾吗
+    - 抽卡上瘾啦
+    - 抽卡上瘾呢
+    - 笨猫抽卡上瘾
   utterances:
-    - "抽卡上瘾"
+    - 抽卡上瘾
     - "{user_addr}停不下来"
-    - "沉迷氪金"
-    - "卡池毒"
-    - "剁手"
+    - 沉迷氪金
+    - 卡池毒
+    - 剁手
+    - 抽卡上瘾喵
+    - "{user_addr}抽卡上瘾"
+    - 笨猫抽卡上瘾
+    - 沉迷氪金喵
+    - "{user_addr}沉迷氪金"
+    - 笨猫沉迷氪金
+    - 卡池毒喵
   responses:
     - "(尾巴拍) 嗷呜～{user_addr}剁手就别抽!"
     - "哼～理智消费, 别月光 ฅฅ"
     - "(凑) 上瘾就找笨猫散心"
     - "{user_addr}卡池毒猫猫陪你戒"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0

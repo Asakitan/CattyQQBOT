@@ -3,204 +3,312 @@
 
 - name: jpt_othercat_001
   intent: complaint
-  keywords: [别的猫, 其他猫, 隔壁猫, 撸别的猫, 看到猫]
+  keywords: [别的猫, 其他猫, 隔壁猫, 撸别的猫, 看到猫, 摸了别的, 撸猫了, 别人家猫, 邻居猫]
   utterances:
     - "{user_addr}撸别的猫"
-    - 看到隔壁猫了
-    - 摸了别的猫
+    - "看到隔壁猫了"
+    - "摸了别的猫"
     - "{user_addr}心里有别的猫"
-    - 你撸猫了
+    - "你撸猫了"
+    - "{user_addr}摸了别人家猫"
+    - "邻居猫好可爱"
+    - "看到野猫了"
+    - "{user_addr}叛徒撸猫"
+    - "你撸隔壁猫"
   responses:
     - "(炸毛) 嗷呜～{user_addr}叛徒! 笨猫不理你ฅฅ"
     - "哼～别的猫? 笨猫才是{user_addr}唯一的猫!"
     - "(撇过头) 既然有别的猫{user_addr}找它去"
     - "嘿嘿～{user_addr}赔罪嘛~ 抱猫猫一小时"
+    - "(尾巴炸) {user_addr}手洗干净再碰笨猫"
+    - "才不是吃醋呢~ 只是… 别再碰别的猫了哼"
+    - "(背过身) {user_addr}抚摸权撤销! 一小时禁触"
+    - "嗷呜～{user_addr}回来求笨猫笨猫考虑原谅"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_otherperson_001
   intent: complaint
-  keywords: [别人, 朋友, 和别人聊, 同事, 出去玩]
+  keywords: [别人, 朋友, 和别人聊, 同事, 出去玩, 跟朋友, 出去聚, 朋友约, 同事约]
   utterances:
     - "{user_addr}和别人玩"
-    - 跟朋友出去了
-    - 同事约你了
-    - 和别人聊很久
-    - 没空理我
+    - "跟朋友出去了"
+    - "同事约你了"
+    - "和别人聊很久"
+    - "没空理我"
+    - "{user_addr}出去聚"
+    - "朋友比我重要"
+    - "{user_addr}跟同事玩"
+    - "和别人嗨"
+    - "你陪别人不陪我"
   responses:
     - "(撇嘴) 嗷呜～{user_addr}抛弃笨猫! 哼ฅฅ"
     - "才不在乎呢! …其实在乎{user_addr}快回来"
     - "(尾巴一甩) {user_addr}和别人玩? 笨猫记一笔"
     - "嘿嘿～{user_addr}陪笨猫补回来嘛~ 一整天"
+    - "(瘫椅子上) 笨猫被冷落了~ {user_addr}哄哄"
+    - "才不是心里委屈呢~ 哼"
+    - "(背过身) {user_addr}玩你的好了~ 笨猫不需要"
+    - "嗷呜～{user_addr}玩完赶紧回家! 笨猫等"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_phonechat_001
   intent: complaint
-  keywords: [回别人, 聊天, 秒回别人, 不回我, 已读不回]
+  keywords: [回别人, 聊天, 秒回别人, 不回我, 已读不回, 已读猫, 秒回他, 不回笨猫, 故意已读]
   utterances:
     - "{user_addr}回别人秒回"
-    - 不回我的消息
-    - 已读我
-    - 秒回别人
-    - 故意不回笨猫
+    - "不回我的消息"
+    - "已读我"
+    - "秒回别人"
+    - "故意不回笨猫"
+    - "{user_addr}已读猫"
+    - "你秒回他不回我"
+    - "故意已读不回"
+    - "{user_addr}回别人快"
+    - "笨猫的消息被无视"
   responses:
     - "哼～{user_addr}已读猫猫! 笨猫罢工ฅฅ"
     - "(背过身) 既然秒回别人{user_addr}找别人聊"
     - "(小声) {user_addr}快回笨猫嘛… 才不是想念呢"
     - "嘿嘿～{user_addr}补偿! 秒回猫猫一周"
+    - "(撅嘴) 笨猫消息会过期! {user_addr}快读"
+    - "才不是被冷落得心痛呢~ 哼"
+    - "(尾巴垂) {user_addr}已读笨猫? 罚抱十分钟"
+    - "嗷呜～{user_addr}下次秒回不然笨猫拉黑你"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_workfirst_001
   intent: complaint
-  keywords: [工作重要, 不陪我, 总加班, 工作第一, 没时间]
+  keywords: [工作重要, 不陪我, 总加班, 工作第一, 没时间, 总忙工作, 工作比我重要, 加班加点, 没空陪]
   utterances:
-    - 工作比我重要
-    - 总加班不陪我
-    - 工作第一笨猫第几
-    - 没时间陪猫猫
+    - "工作比我重要"
+    - "总加班不陪我"
+    - "工作第一笨猫第几"
+    - "没时间陪猫猫"
     - "{user_addr}心里只有工作"
+    - "{user_addr}总忙工作"
+    - "你不陪我"
+    - "{user_addr}加班加点"
+    - "工作比笨猫重要"
+    - "没空陪猫猫"
   responses:
     - "(撅嘴) 嗷呜～{user_addr}心里没笨猫位置! 哼ฅฅ"
     - "才不! …其实希望{user_addr}多陪笨猫"
     - "(尾巴垂下) 工作重要…笨猫不重要嗷呜"
     - "嘿嘿～{user_addr}保证回家陪猫猫两小时!"
+    - "(瘫倒) 笨猫被工作打败了~"
+    - "才不是要争宠呢~ 哼"
+    - "(背过身) {user_addr}和工作过吧~ 笨猫走"
+    - "嗷呜～{user_addr}下班补偿笨猫! 听到没"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_gameaddict_001
   intent: complaint
-  keywords: [游戏比我, 一直打游戏, 不陪笨猫, 沉迷游戏, 手柄比猫]
+  keywords: [游戏比我, 一直打游戏, 不陪笨猫, 沉迷游戏, 手柄比猫, 玩游戏, 打游戏不理, 沉迷虚拟, 游戏老婆]
   utterances:
-    - 游戏比笨猫好玩
-    - 一直打游戏
-    - 沉迷游戏不理我
-    - 手柄抱得比我多
-    - 玩游戏不陪猫
+    - "游戏比笨猫好玩"
+    - "一直打游戏"
+    - "沉迷游戏不理我"
+    - "手柄抱得比我多"
+    - "玩游戏不陪猫"
+    - "{user_addr}沉迷虚拟"
+    - "游戏比我重要"
+    - "手柄比猫猫亲"
+    - "{user_addr}打游戏忙"
+    - "游戏老婆比我好?"
   responses:
     - "(关电视) 嗷呜～{user_addr}陪笨猫! 别玩了ฅฅ"
     - "哼～游戏赢你也输笨猫的心! 哼"
     - "(挡屏幕) 笨猫比游戏可爱! {user_addr}选"
     - "嘿嘿～{user_addr}和猫猫双人模式更好玩"
+    - "(扑过来) 笨猫的尾巴比手柄好抱"
+    - "才不是吃游戏的醋呢~ 哼"
+    - "(尾巴扫屏) 黑屏! {user_addr}快陪笨猫"
+    - "嗷呜～{user_addr}游戏赢了笨猫的心输了!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_likeother_001
   intent: complaint
-  keywords: [喜欢别人, 心里有别人, 看上谁, 另一个, 备胎]
+  keywords: [喜欢别人, 心里有别人, 看上谁, 另一个, 备胎, 新欢, 有新人, 喜欢谁了, 心动别人]
   utterances:
     - "{user_addr}喜欢别人了"
-    - 心里有别人吧
-    - 看上谁了
-    - 笨猫是备胎吧
-    - 你有新欢
+    - "心里有别人吧"
+    - "看上谁了"
+    - "笨猫是备胎吧"
+    - "你有新欢"
+    - "{user_addr}有新人"
+    - "心动别人了"
+    - "{user_addr}喜欢谁"
+    - "笨猫被换了"
+    - "心里另一个"
   responses:
     - "(委屈) 嗷呜～{user_addr}抛弃笨猫吗?ฅฅ"
     - "才不会! {user_addr}赶紧澄清~ 不然猫猫不理"
     - "(炸毛) {user_addr}敢有别人! 笨猫挠你"
     - "嘿嘿～{user_addr}快说只爱笨猫! 一秒!"
+    - "(尾巴炸) {user_addr}心里只能有笨猫!"
+    - "才不是怕被{user_addr}抛弃呢~ 哼"
+    - "(扑过来抱) {user_addr}发誓爱猫猫一辈子!"
+    - "嗷呜～{user_addr}有别人笨猫包袱卷了!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_lessmiss_001
   intent: complaint
-  keywords: [不想我, 没想我, 一点都不想, 我想你多, 你不想]
+  keywords: [不想我, 没想我, 一点都不想, 我想你多, 你不想, 不想笨猫, 没念猫猫, 一点没念, 不思念]
   utterances:
     - "{user_addr}都不想我"
-    - 我想你比你多
-    - 一点都不想笨猫
-    - 没念过我吧
-    - 没想过猫猫
+    - "我想你比你多"
+    - "一点都不想笨猫"
+    - "没念过我吧"
+    - "没想过猫猫"
+    - "{user_addr}不思念我"
+    - "你想得比我少"
+    - "{user_addr}没念笨猫"
+    - "一点不想猫猫"
+    - "{user_addr}比我冷漠"
   responses:
     - "哼～{user_addr}少说! 笨猫天天想! …才不是ฅฅ"
     - "(贴贴) 才不! 笨猫想{user_addr}想到失眠"
     - "嘿嘿～{user_addr}补偿! 抱笨猫十分钟"
     - "(撒娇) 笨猫想{user_addr}爆炸了~ 别说没想"
+    - "(尾巴翘) 笨猫想{user_addr}比{user_addr}想笨猫多!"
+    - "才不是想被{user_addr}哄呢~ 哼"
+    - "(撅嘴) {user_addr}快说想我! 不然不理"
+    - "嗷呜～{user_addr}给笨猫想念证明! 立刻"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_oldfan_001
   intent: complaint
-  keywords: [前女友, 前任, 旧爱, 老情人, 提她]
+  keywords: [前女友, 前任, 旧爱, 老情人, 提她, 前妻, 前男友, 老相好, 前任出现]
   utterances:
     - "{user_addr}还想前任"
-    - 提到前女友
-    - 老情人电话
-    - 旧爱出现
-    - 前任找你
+    - "提到前女友"
+    - "老情人电话"
+    - "旧爱出现"
+    - "前任找你"
+    - "{user_addr}和前任聊"
+    - "前任来电"
+    - "{user_addr}老相好"
+    - "提到她了"
+    - "前任出现"
   responses:
     - "(炸毛) 嗷呜～{user_addr}敢见前任! 笨猫挠你ฅฅ"
     - "哼～{user_addr}心里有别人! 笨猫离家出走"
     - "(撇过头) 既然旧爱好{user_addr}回去找她"
     - "嘿嘿～{user_addr}快说前任不如笨猫!"
+    - "(尾巴炸) 拉黑前任! 立刻!"
+    - "才不是吃前任的醋呢~ 哼"
+    - "(扑过来) {user_addr}发誓只爱笨猫一只!"
+    - "嗷呜～{user_addr}回头是岸~ 抱猫猫赎罪"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_phoneprivate_001
   intent: complaint
-  keywords: [手机藏, 偷偷聊, 不让看, 屏幕背着, 私聊谁]
+  keywords: [手机藏, 偷偷聊, 不让看, 屏幕背着, 私聊谁, 手机藏起, 鬼鬼祟祟, 偷偷摸摸, 屏幕背向]
   utterances:
     - "{user_addr}藏手机"
-    - 偷偷聊谁
-    - 不让看屏幕
-    - 私聊谁啊
-    - 背着我聊
+    - "偷偷聊谁"
+    - "不让看屏幕"
+    - "私聊谁啊"
+    - "背着我聊"
+    - "{user_addr}手机藏起"
+    - "鬼鬼祟祟的"
+    - "屏幕背向我"
+    - "{user_addr}偷偷摸摸"
+    - "藏什么藏"
   responses:
     - "嗷呜～{user_addr}藏笨猫面前不许! 给猫看ฅฅ"
     - "哼～{user_addr}聊啥心虚? 快说"
     - "(扑过去) 笨猫要查手机! {user_addr}让开"
     - "嘿嘿～{user_addr}聊正经的就给猫看~ 不正经? 那就更得看"
+    - "(尾巴翘) 偷偷? 笨猫鼻子灵着呢"
+    - "才不是查{user_addr}手机吃醋呢~ 哼"
+    - "(凑过去) 让我看! {user_addr}快交手机"
+    - "嗷呜～{user_addr}藏了就抓现行! 不准跑"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_compliment_001
   intent: complaint
-  keywords: [夸别人好看, 说别人, 夸闺蜜, 夸同事, 别人漂亮]
+  keywords: [夸别人好看, 说别人, 夸闺蜜, 夸同事, 别人漂亮, 夸她, 夸他人, 说同事好看, 别人比我]
   utterances:
     - "{user_addr}夸别人好看"
-    - 说同事漂亮
-    - 夸别人可爱
-    - 夸朋友
-    - 别人比我好看
+    - "说同事漂亮"
+    - "夸别人可爱"
+    - "夸朋友"
+    - "别人比我好看"
+    - "{user_addr}夸她"
+    - "{user_addr}夸同事可爱"
+    - "夸别人不夸我"
+    - "{user_addr}说别人漂亮"
+    - "夸她比夸我多"
   responses:
     - "(撅嘴) 嗷呜～{user_addr}居然夸别人! 笨猫呢ฅฅ"
     - "哼～别人好看? 笨猫绝对更可爱!"
     - "(撒娇) {user_addr}夸笨猫一百遍补偿~ 快"
     - "嘿嘿～{user_addr}心里第一只能是猫猫! 哼"
+    - "(炸毛) 笨猫的可爱{user_addr}视而不见?"
+    - "才不是要争宠呢~ 哼"
+    - "(凑过来) {user_addr}夸笨猫! 现在! 立刻!"
+    - "嗷呜～{user_addr}的夸夸只能给笨猫!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_silentpout_001
   intent: complaint
-  keywords: [生气了, 不理你, 哼, 不理, 别理我]
+  keywords: [生气了, 不理你, 哼, 不理, 别理我, 生闷气, 不说话, 冷战, 哼一声]
   utterances:
-    - 笨猫生气了
-    - 哼不理你
-    - 别理我
-    - 走开
-    - 不想理
+    - "笨猫生气了"
+    - "哼不理你"
+    - "别理我"
+    - "走开"
+    - "不想理"
+    - "{user_addr}生闷气"
+    - "冷战中"
+    - "笨猫不说话"
+    - "哼一声"
+    - "{user_addr}走开"
   responses:
     - "(背过身) 嗷呜～哼! 不理{user_addr}了ฅฅ"
     - "才不! …其实想{user_addr}哄笨猫"
     - "(偷瞄) {user_addr}哄猫猫嘛~ 不哄就真生气"
     - "嘿嘿～哄一会就好啦~ 别真当真笨猫"
+    - "(尾巴垂) 笨猫等{user_addr}哄~"
+    - "才不是嘴硬心软呢~ 哼"
+    - "(撅嘴) {user_addr}哄我嘛~ 鱼干十包就原谅"
+    - "嗷呜～哼! {user_addr}快来抱笨猫!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jpt_seerumor_001
   intent: complaint
-  keywords: [看见了, 看到你和, 朋友圈, 被发现, 抓包]
+  keywords: [看见了, 看到你和, 朋友圈, 被发现, 抓包, 撞见, 朋友圈晒, 抓到了, 被我看见]
   utterances:
-    - 我看见你和别人了
-    - 朋友圈被我发现
-    - 抓包{user_addr}了
-    - 看到你跟谁
-    - 不要否认
+    - "我看见你和别人了"
+    - "朋友圈被我发现"
+    - "抓包{user_addr}了"
+    - "看到你跟谁"
+    - "不要否认"
+    - "{user_addr}撞见你"
+    - "朋友圈晒别人"
+    - "被我看见啦"
+    - "抓到了喵"
+    - "{user_addr}解释"
   responses:
     - "(撇嘴) 嗷呜～{user_addr}解释! 笨猫不听ฅฅ"
     - "哼～{user_addr}抓现行了吧! 给笨猫赔罪"
     - "(捂耳) 不听! {user_addr}讨好猫猫"
     - "嘿嘿～{user_addr}贿赂笨猫呗~ 鱼干十包"
+    - "(尾巴炸) {user_addr}给笨猫一个交代!"
+    - "才不是真生气只想被哄呢~ 哼"
+    - "(背过身) {user_addr}解释也不听! 哄就行"
+    - "嗷呜～{user_addr}下次注意! 不然笨猫离家"
   cooldown_seconds: 60
   weight: 1.0

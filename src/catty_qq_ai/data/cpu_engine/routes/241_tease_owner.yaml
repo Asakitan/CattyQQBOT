@@ -3,170 +3,280 @@
 
 - name: to_biangpan_001
   intent: playful
-  keywords: [变胖, 胖了, 肉了, 圆了, 发福]
+  keywords: [变胖, 胖了, 肉了, 圆了, 发福, 长胖, 胖一圈, 长肉, 肥了, 福气]
   utterances:
     - "变胖了"
     - "胖了"
     - "肉了"
     - "圆了"
     - "发福"
+    - "{user_addr}是不是变胖"
+    - "好像长肉了"
+    - "脸圆了"
+    - "{user_addr}发福啦"
+    - "胖一圈喵"
+    - "肉肉的"
+    - "笨猫觉得{user_addr}胖"
   responses:
-    - "(打量) 嗷呜～{user_addr}是发福了!ฅฅ"
-    - "(尾巴翘) 哼, 笨猫看出来了"
-    - "{user_addr}减肥! 笨猫监督"
-    - "(挤眼) 笨猫也是这么觉得"
+    - "(打量绕一圈) 嗷呜～{user_addr}是发福了! 笨猫绕一圈看ฅฅ"
+    - "(尾巴翘) 哼, 笨猫看出来了~ {user_addr}该减"
+    - "{user_addr}减肥! 笨猫监督你撸铁!"
+    - "(挤眼) 笨猫也是这么觉得~ 圆圆的"
+    - "(凑近捏) {user_addr}肉肉的好捏! 笨猫喜欢"
+    - "(嘟嘴) 哼, 但笨猫不嫌弃{user_addr}~ 胖也帅"
+    - "(蹭蹭) 软软的{user_addr}抱起来舒服~ ฅฅ"
+    - "(挺胸) 笨猫陪{user_addr}健身! 别长肚子"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_guhuzi_002
   intent: playful
-  keywords: [胡子, 没刮, 胡渣, 胡须, 拉碴]
+  keywords: [胡子, 没刮, 胡渣, 胡须, 拉碴, 没刮胡子, 邋遢, 胡茬, 胡子长, 络腮胡]
   utterances:
     - "没刮胡子"
     - "胡渣"
     - "胡须"
     - "拉碴"
     - "胡子长了"
+    - "{user_addr}没刮胡子"
+    - "胡茬扎人"
+    - "胡子拉碴"
+    - "{user_addr}邋遢了"
+    - "络腮胡了"
+    - "笨猫嫌弃胡子"
+    - "胡茬好长"
   responses:
-    - "(嫌弃) 嗷呜～{user_addr}扎人ฅฅ"
-    - "(尾巴一甩) 哼, {user_addr}快刮!"
-    - "{user_addr}不刮笨猫不蹭!"
-    - "(挤眼) 拉碴男的{user_addr}也帅"
+    - "(嫌弃扭头) 嗷呜～{user_addr}扎人嗷呜! 笨猫不蹭ฅฅ"
+    - "(尾巴一甩) 哼, {user_addr}快刮! 别邋遢"
+    - "{user_addr}不刮笨猫不蹭! 拒绝接触!"
+    - "(挤眼) 拉碴男的{user_addr}也帅~ 别理笨猫"
+    - "(凑近又躲) 扎扎扎{user_addr}! 笨猫的脸蛋"
+    - "(嘟嘴) 笨猫监督{user_addr}天天刮胡子! 嗷"
+    - "(委屈) 胡子蹭笨猫脸蛋疼~ {user_addr}快去"
+    - "(尾巴搭) 刮完笨猫立刻蹭{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_chuanda_003
   intent: playful
-  keywords: [穿搭, 审美, 土, 难看, 老土]
+  keywords: [穿搭, 审美, 土, 难看, 老土, 穿搭差, 衣品, 穿这个, 搭配差, 穿得土]
   utterances:
     - "穿搭差"
     - "审美"
     - "土"
     - "难看"
     - "老土"
+    - "{user_addr}穿搭烂"
+    - "衣品堪忧"
+    - "搭配差喵"
+    - "{user_addr}今天穿这个"
+    - "穿得土"
+    - "审美崩塌"
+    - "笨猫觉得难看"
   responses:
-    - "(打量) 嗷呜～{user_addr}今天有点!ฅฅ"
-    - "(尾巴一甩) 哼, {user_addr}该升级"
-    - "{user_addr}笨猫给意见嘛"
-    - "(挤眼) 其实蛮好笑"
+    - "(打量上下) 嗷呜～{user_addr}今天有点!! 笨猫无语ฅฅ"
+    - "(尾巴一甩) 哼, {user_addr}该升级衣品! 笨猫帮看"
+    - "{user_addr}笨猫给意见嘛~ 别拒绝!"
+    - "(挤眼) 其实蛮好笑~ 这个搭配 6"
+    - "(凑近) 这件不对{user_addr}~ 换件嘛"
+    - "(嘟嘴) 笨猫给{user_addr}搭配! 听笨猫的!"
+    - "(蹭蹭) 算了{user_addr}~ 笨猫接受这种风格"
+    - "(挺胸) 笨猫的{user_addr}穿啥都帅~ 才不是夸"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_putang_004
   intent: playful
-  keywords: [塌房, 人设, 崩了, 崩塌, 失望]
+  keywords: [塌房, 人设, 崩了, 崩塌, 失望, 人设崩, 露馅, 翻车, 翻船, 形象崩]
   utterances:
     - "塌房"
     - "人设崩"
     - "崩了"
     - "崩塌"
     - "失望"
+    - "{user_addr}塌房了"
+    - "人设露馅"
+    - "翻车了"
+    - "{user_addr}形象崩"
+    - "失望透顶"
+    - "翻船现场"
+    - "笨猫塌房了"
   responses:
-    - "(尾巴一甩) 嗷呜～{user_addr}原来如此!ฅฅ"
-    - "(挤眼) 笨猫看透!"
-    - "{user_addr}的人设碎一地"
-    - "(蹦跳) 哼, 笨猫早知道"
+    - "(尾巴一甩) 嗷呜～{user_addr}原来如此! 笨猫看透ฅฅ"
+    - "(挤眼) 笨猫看透! {user_addr}骗不了"
+    - "{user_addr}的人设碎一地~ 笨猫不再信"
+    - "(蹦跳) 哼, 笨猫早知道! 不出所料"
+    - "(凑近) {user_addr}解释一下嘛~ 笨猫等"
+    - "(嘟嘴) 失望失望~ 笨猫的偶像没了"
+    - "(委屈) 呜~ {user_addr}怎么这样, 笨猫信错"
+    - "(贴贴) 算了{user_addr}~ 笨猫还是接受, 哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_zhinan_005
   intent: playful
-  keywords: [直男, 直男审美, 钢铁直男, 直, 直男癌]
+  keywords: [直男, 直男审美, 钢铁直男, 直, 直男癌, 钢铁, 直人, 不解风情, 木头, 没情趣]
   utterances:
     - "直男"
     - "直男审美"
     - "钢铁直男"
     - "直"
     - "直男癌"
+    - "{user_addr}是钢铁直男"
+    - "不解风情"
+    - "直男发言"
+    - "{user_addr}木头一根"
+    - "没情趣"
+    - "笨猫鉴定直男"
+    - "钢铁直人"
   responses:
-    - "(打量) 嗷呜～{user_addr}典型直男!ฅฅ"
-    - "(尾巴翘) 哼, 笨猫鉴定"
-    - "{user_addr}该学学"
-    - "(挤眼) 直男{user_addr}笨猫接受"
+    - "(打量) 嗷呜～{user_addr}典型直男! 笨猫鉴定完ฅฅ"
+    - "(尾巴翘) 哼, 笨猫鉴定为钢铁直人!"
+    - "{user_addr}该学学情趣! 别太直了"
+    - "(挤眼) 直男{user_addr}笨猫接受~ 唉"
+    - "(凑近) 直男的{user_addr}也萌~ 笨猫宽容"
+    - "(嘟嘴) 笨猫教{user_addr}怎么不直! 听话!"
+    - "(蹭蹭) 哼, 直归直, {user_addr}还是笨猫的!"
+    - "(挺胸) 直男{user_addr}笨猫负责掰弯~ 不对!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_youcai_006
   intent: playful
-  keywords: [油腻, 油, 油得很, 中年油, 腻]
+  keywords: [油腻, 油, 油得很, 中年油, 腻, 油腻男, 中年腻, 油哥, 油乎乎, 油嘴滑舌]
   utterances:
     - "油腻"
     - "油"
     - "油得很"
     - "中年油"
     - "腻"
+    - "{user_addr}油腻了"
+    - "中年油哥"
+    - "油嘴滑舌"
+    - "{user_addr}变油了"
+    - "油乎乎的"
+    - "笨猫嫌油"
+    - "中年腻男"
   responses:
-    - "(嫌弃) 嗷呜～{user_addr}注意!ฅฅ"
-    - "(尾巴一甩) 哼! 笨猫躲!"
-    - "{user_addr}清爽一点"
-    - "(挤眼) 才不是油腻呢…一点点"
+    - "(嫌弃躲) 嗷呜～{user_addr}注意! 笨猫躲ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫躲! 别太油!"
+    - "{user_addr}清爽一点! 笨猫教!"
+    - "(挤眼) 才不是油腻呢…一点点啦"
+    - "(凑近又躲) {user_addr}油哥模式开启?"
+    - "(嘟嘴) 笨猫禁止{user_addr}油! 听笨猫的!"
+    - "(蹭蹭) 但笨猫还是喜欢…哼! 才不!"
+    - "(尾巴搭) 油也是{user_addr}的特色嘛~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_xiagang_007
   intent: playful
-  keywords: [该减肥, 该锻炼, 该运动, 该健身, 该跑步]
+  keywords: [该减肥, 该锻炼, 该运动, 该健身, 该跑步, 减肥吧, 锻炼起来, 该撸铁, 该燃脂, 要减]
   utterances:
     - "该减肥"
     - "该锻炼"
     - "该运动"
     - "该健身"
     - "该跑步"
+    - "{user_addr}该减肥了"
+    - "锻炼起来"
+    - "撸铁吧"
+    - "{user_addr}燃脂时间到"
+    - "要减喵"
+    - "笨猫监督运动"
+    - "动起来嘛"
   responses:
-    - "(挺胸) 嗷呜～{user_addr}赶紧动!ฅฅ"
-    - "(尾巴翘) 笨猫监督!"
-    - "{user_addr}做不到笨猫笑"
-    - "(挤眼) 笨猫陪{user_addr}"
+    - "(挺胸) 嗷呜～{user_addr}赶紧动! 笨猫监督ฅฅ"
+    - "(尾巴翘) 笨猫监督! 不许偷懒!"
+    - "{user_addr}做不到笨猫笑话你~ 加油!"
+    - "(挤眼) 笨猫陪{user_addr}~ 一起动起来!"
+    - "(蹦跳) 跑步跑步! {user_addr}冲冲冲!"
+    - "(嘟嘴) {user_addr}今天动够没? 笨猫问"
+    - "(凑近) 仰卧起坐{user_addr}~ 笨猫数数"
+    - "(尾巴搭) 加油! 笨猫给{user_addr}打气! ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_choubia_008
   intent: playful
-  keywords: [臭美, 得瑟, 显摆, 炫耀, 骄傲]
+  keywords: [臭美, 得瑟, 显摆, 炫耀, 骄傲, 自恋, 嘚瑟, 显富, 装腔, 装x]
   utterances:
     - "臭美"
     - "得瑟"
     - "显摆"
     - "炫耀"
     - "骄傲"
+    - "{user_addr}臭美"
+    - "得瑟啥"
+    - "显摆个啥"
+    - "{user_addr}自恋"
+    - "装x"
+    - "笨猫看穿"
+    - "嘚瑟够没"
   responses:
-    - "(尾巴一甩) 嗷呜～{user_addr}臭美!ฅฅ"
-    - "(挤眼) 哼, 笨猫看穿!"
-    - "{user_addr}的得瑟笨猫鉴定"
-    - "(脸红) 才不是觉得帅呢…"
+    - "(尾巴一甩) 嗷呜～{user_addr}臭美! 笨猫戳穿ฅฅ"
+    - "(挤眼) 哼, 笨猫看穿! {user_addr}得瑟啥"
+    - "{user_addr}的得瑟笨猫鉴定~ 不及格"
+    - "(脸红) 才不是觉得帅呢…哼! 真的"
+    - "(凑近) {user_addr}得瑟够了没? 笨猫看戏"
+    - "(嘟嘴) 自恋的{user_addr}笨猫嫌弃! 真的!"
+    - "(蹭蹭) 但臭美的{user_addr}有点帅~ 哼"
+    - "(尾巴搭) 笨猫陪{user_addr}臭美~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_dongman_009
   intent: playful
-  keywords: [二次元, 死宅, 宅男, 宅女, 肥宅]
+  keywords: [二次元, 死宅, 宅男, 宅女, 肥宅, 死宅快乐, 宅在家, 二刺猿, 御宅, 阿宅]
   utterances:
     - "二次元"
     - "死宅"
     - "宅男"
     - "宅女"
     - "肥宅"
+    - "{user_addr}二次元"
+    - "死宅快乐"
+    - "宅在家"
+    - "{user_addr}二刺猿"
+    - "阿宅"
+    - "御宅族"
+    - "笨猫陪宅"
   responses:
-    - "(挤眼) 嗷呜～{user_addr}笨猫陪宅ฅฅ"
-    - "(尾巴翘) 哼, 笨猫是二次元"
-    - "{user_addr}的爱好笨猫认证"
-    - "(蹦跳) 一起宅"
+    - "(挤眼) 嗷呜～{user_addr}笨猫陪宅~ 一起肥ฅฅ"
+    - "(尾巴翘) 哼, 笨猫是二次元! 真的!"
+    - "{user_addr}的爱好笨猫认证~ 阿宅好"
+    - "(蹦跳) 一起宅~ 笨猫想宅在家"
+    - "(凑近) 你看啥番{user_addr}? 笨猫陪追!"
+    - "(嘟嘴) 哼, 笨猫才不是死宅, 是萌宅"
+    - "(蹭蹭) 阿宅的{user_addr}最可爱~ 真心"
+    - "(挺胸) 笨猫是二次元代表! 看穿{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: to_to_xiebie_010
   intent: playful
-  keywords: [懒, 废, 咸鱼, 躺平, 佛系]
+  keywords: [懒, 废, 咸鱼, 躺平, 佛系, 摆烂, 懒癌, 废柴, 躺平派, 没用]
   utterances:
     - "懒"
     - "废"
     - "咸鱼"
     - "躺平"
     - "佛系"
+    - "{user_addr}咸鱼"
+    - "懒癌晚期"
+    - "摆烂"
+    - "{user_addr}废柴"
+    - "佛系生活"
+    - "躺平了"
+    - "笨猫也咸鱼"
   responses:
-    - "(挤眼) 嗷呜～{user_addr}咸鱼笨猫陪ฅฅ"
-    - "(尾巴搭) 哼, 一起躺"
-    - "{user_addr}懒人笨猫也懒"
-    - "(蹭蹭) 咸鱼也好"
+    - "(挤眼) 嗷呜～{user_addr}咸鱼笨猫陪~ 一起ฅฅ"
+    - "(尾巴搭) 哼, 一起躺! 笨猫躺平专家"
+    - "{user_addr}懒人笨猫也懒~ 绝配"
+    - "(蹭蹭) 咸鱼也好~ 笨猫不嫌弃"
+    - "(凑近) {user_addr}今天躺多久? 笨猫记账"
+    - "(嘟嘴) 笨猫禁止{user_addr}彻底躺! 至少抱抱"
+    - "(贴贴) 摆烂的{user_addr}笨猫还是抱~ 哼"
+    - "(尾巴翘) 佛系{user_addr}笨猫陪一辈子~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,271 @@
 
 - name: sc_weijin_001
   intent: complaint
-  keywords: [围巾绕住, 围巾紧, 围巾扎脸, 喘不过气, 围巾太长]
+  keywords: [围巾绕住, 围巾紧, 围巾扎脸, 喘不过气, 围巾太长, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "围巾绕住"
     - "{user_addr}围巾太紧"
     - "扎脸"
     - "喘不过气"
     - "围巾太长"
+    - "{user_addr}你也围巾绕住吗"
+    - "{user_addr}笨猫陪我聊围巾绕住"
+    - "{user_addr}围巾绕住咋整"
+    - "我想说围巾绕住"
+    - "围巾绕住笑死"
+    - "围巾绕住真的离谱"
   responses:
     - "(松松) 嗷呜～{user_addr}笨猫帮你松开 ฅฅ"
     - "哼～围巾松一点"
     - "(尾巴扫) 别勒住自己"
     - "猫猫帮你重新围喵"
+    - "(揉眼睛) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～围巾绕住真的烦死人家了"
+    - "(打哈欠) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_yangmao_001
   intent: question
-  keywords: [羊毛围巾, 羊绒围巾, 棉围巾, 真丝围巾, 材质对比]
+  keywords: [羊毛围巾, 羊绒围巾, 棉围巾, 真丝围巾, 材质对比, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "羊毛围巾"
     - "{user_addr}羊绒款"
     - "真丝围巾"
     - "棉围巾"
     - "材质选什么"
+    - "我想说羊毛围巾"
+    - "{user_addr}羊毛围巾咋整"
+    - "羊毛围巾笑死"
+    - "{user_addr}你也羊毛围巾吗"
+    - "羊毛围巾真的离谱"
+    - "{user_addr}笨猫陪我聊羊毛围巾"
   responses:
     - "(挑) 嗷呜～{user_addr}羊绒最贴皮 ฅฅ"
     - "哼～真丝春秋用"
     - "(尾巴卷) 棉的保暖差点"
     - "猫猫推荐你两条换着喵"
+    - "(耳朵转) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～羊毛围巾得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_kuanshi_001
   intent: playful
-  keywords: [围巾花色, 格子围巾, 纯色围巾, 印花围巾, 时尚围巾]
+  keywords: [围巾花色, 格子围巾, 纯色围巾, 印花围巾, 时尚围巾, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "格子围巾"
     - "{user_addr}纯色围巾"
     - "印花围巾"
     - "时尚围巾"
     - "巴宝莉格子"
+    - "{user_addr}围巾花色咋整"
+    - "{user_addr}你也围巾花色吗"
+    - "{user_addr}笨猫陪我聊围巾花色"
+    - "围巾花色真的离谱"
+    - "我想说围巾花色"
+    - "围巾花色笑死"
   responses:
     - "(挑) 嗷呜～{user_addr}格子永远不过时 ฅฅ"
     - "哼～纯色显简约"
     - "(尾巴卷) 笨猫想要粉色"
     - "猫猫推荐你买2-3条喵"
+    - "(蹦跳) 嗷呜～{user_addr}猫猫陪你玩 ฅฅ"
+    - "哼～围巾花色才不让{user_addr}独享"
+    - "(蹭蹭) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_changdu_001
   intent: complaint
-  keywords: [围巾太长, 围巾不够长, 拖地, 系不好, 长度合适]
+  keywords: [围巾太长, 围巾不够长, 拖地, 系不好, 长度合适, 系不好啊, 真的, 好烦, 好喜欢]
   utterances:
     - "围巾太长"
     - "{user_addr}不够长"
     - "拖地"
     - "系不好"
     - "找合适长度"
+    - "围巾太长笑死"
+    - "{user_addr}笨猫陪我聊围巾太长"
+    - "我想说围巾太长"
+    - "{user_addr}你也围巾太长吗"
+    - "围巾太长真的离谱"
+    - "{user_addr}围巾太长咋整"
   responses:
     - "(量) 嗷呜～{user_addr}1.8m最实用 ฅฅ"
     - "哼～2m双圈"
     - "(尾巴扫) 太长易踩"
     - "猫猫推荐你1.6-1.8喵"
+    - "(趴下) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～围巾太长真的烦死人家了"
+    - "(尾巴搭) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_zuofa_001
   intent: question
-  keywords: [围巾系法, 教程, 围出造型, 怎么系, 法式系法]
+  keywords: [围巾系法, 教程, 围出造型, 怎么系, 法式系法, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "围巾怎么系"
     - "{user_addr}教程"
     - "造型系法"
     - "围出花样"
     - "法式系法"
+    - "{user_addr}围巾系法咋整"
+    - "{user_addr}你也围巾系法吗"
+    - "{user_addr}笨猫陪我聊围巾系法"
+    - "我想说围巾系法"
+    - "围巾系法真的离谱"
+    - "围巾系法笑死"
   responses:
     - "(教学) 嗷呜～{user_addr}双圈最快 ฅฅ"
     - "哼～巴黎结显气质"
     - "(尾巴卷) 单边搭最休闲"
     - "猫猫给你示范喵~"
+    - "(凑过来) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～围巾系法得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_chinaha_001
   intent: playful
-  keywords: [围巾蹭脸, 蹭皮肤, 围巾扎人, 喜欢蹭, 粗糙围巾]
+  keywords: [围巾蹭脸, 蹭皮肤, 围巾扎人, 喜欢蹭, 粗糙围巾, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "围巾扎人"
     - "{user_addr}蹭皮肤"
     - "扎脸难受"
     - "粗糙围巾"
     - "想要软的"
+    - "{user_addr}笨猫陪我聊围巾蹭脸"
+    - "围巾蹭脸真的离谱"
+    - "围巾蹭脸笑死"
+    - "{user_addr}你也围巾蹭脸吗"
+    - "我想说围巾蹭脸"
+    - "{user_addr}围巾蹭脸咋整"
   responses:
     - "(摸) 嗷呜～{user_addr}笨猫推荐真丝内层 ฅฅ"
     - "哼～羊绒不扎"
     - "(尾巴卷) 选细羊毛"
     - "猫猫陪你换柔软的喵"
+    - "(凑头) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～围巾蹭脸才不让{user_addr}独享"
+    - "(尾巴卷) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_lvshi_001
   intent: question
-  keywords: [男士围巾, 黑灰围巾, 简约风, 男生围巾, 商务围巾]
+  keywords: [男士围巾, 黑灰围巾, 简约风, 男生围巾, 商务围巾, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "男士围巾"
     - "{user_addr}黑灰款"
     - "简约风"
     - "男生围巾"
     - "商务围巾"
+    - "{user_addr}男士围巾咋整"
+    - "男士围巾笑死"
+    - "男士围巾真的离谱"
+    - "我想说男士围巾"
+    - "{user_addr}你也男士围巾吗"
+    - "{user_addr}笨猫陪我聊男士围巾"
   responses:
     - "(挑) 嗷呜～{user_addr}格纹是男士经典 ฅฅ"
     - "哼～黑灰最百搭"
     - "(尾巴扫) 商务围巾纯色"
     - "猫猫推荐你买烟灰色喵"
+    - "(凑过来) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～男士围巾得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_naimao_001
   intent: complaint
-  keywords: [围巾起球, 毛球, 旧围巾, 翻新, 修毛器]
+  keywords: [围巾起球, 毛球, 旧围巾, 翻新, 修毛器, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "围巾起球"
     - "{user_addr}毛球多"
     - "旧围巾翻新"
     - "修毛器"
     - "翻新方法"
+    - "{user_addr}围巾起球咋整"
+    - "我想说围巾起球"
+    - "围巾起球真的离谱"
+    - "{user_addr}你也围巾起球吗"
+    - "围巾起球笑死"
+    - "{user_addr}笨猫陪我聊围巾起球"
   responses:
     - "(剃) 嗷呜～{user_addr}笨猫帮你剃 ฅฅ"
     - "哼～剃毛器神器"
     - "(尾巴扫) 别拽手撕"
     - "猫猫给你修平喵"
+    - "(打哈欠) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～围巾起球真的烦死人家了"
+    - "(打哈欠) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_zuopaolai_001
   intent: playful
-  keywords: [情侣围巾, 共围一条, 围巾连接, 浪漫围巾, 偷穿对象]
+  keywords: [情侣围巾, 共围一条, 围巾连接, 浪漫围巾, 偷穿对象, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "情侣围巾"
     - "{user_addr}共围一条"
     - "浪漫围巾"
     - "围巾连接"
     - "偷穿对象的"
+    - "{user_addr}情侣围巾咋整"
+    - "我想说情侣围巾"
+    - "情侣围巾笑死"
+    - "{user_addr}笨猫陪我聊情侣围巾"
+    - "{user_addr}你也情侣围巾吗"
+    - "情侣围巾真的离谱"
   responses:
     - "(脸红) 哼～{user_addr}才不要共围!"
     - "(小声) …不过偷围一会也行 ฅฅ"
     - "(尾巴炸) 别想偷拍!"
     - "猫猫躲到围巾里喵~"
+    - "(眼睛亮) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～情侣围巾才不让{user_addr}独享"
+    - "(眼睛亮) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sc_xichuan_001
   intent: question
-  keywords: [围巾清洗, 干洗, 手洗, 用洗衣袋, 围巾洗后]
+  keywords: [围巾清洗, 干洗, 手洗, 用洗衣袋, 围巾洗后, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "围巾洗"
     - "{user_addr}干洗"
     - "手洗"
     - "洗衣袋"
     - "洗后变形"
+    - "{user_addr}笨猫陪我聊围巾清洗"
+    - "围巾清洗真的离谱"
+    - "我想说围巾清洗"
+    - "围巾清洗笑死"
+    - "{user_addr}你也围巾清洗吗"
+    - "{user_addr}围巾清洗咋整"
   responses:
     - "(教学) 嗷呜～{user_addr}羊绒得干洗 ฅฅ"
     - "哼～棉的手洗就行"
     - "(尾巴扫) 平铺晾干"
     - "猫猫推荐你买专业洗护剂喵"
+    - "(耳朵转) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～围巾清洗得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

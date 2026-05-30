@@ -3,170 +3,271 @@
 
 - name: si_maoyi_001
   intent: complaint
-  keywords: [毛衣扎, 扎得难受, 痒, 起疹子, 粗糙]
+  keywords: [毛衣扎, 扎得难受, 痒, 起疹子, 粗糙, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "毛衣扎"
     - "{user_addr}痒得很"
     - "起疹子"
     - "粗糙刺皮"
     - "扎人"
+    - "我想说毛衣扎"
+    - "{user_addr}笨猫陪我聊毛衣扎"
+    - "毛衣扎笑死"
+    - "毛衣扎真的离谱"
+    - "{user_addr}你也毛衣扎吗"
+    - "{user_addr}毛衣扎咋整"
   responses:
     - "(同感) 嗷呜～{user_addr}里面穿件打底 ฅฅ"
     - "哼～纯羊毛是这样"
     - "(尾巴扫) 笨猫推荐美利奴羊毛"
     - "猫猫给你买羊绒款喵"
+    - "(揉眼睛) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～毛衣扎真的烦死人家了"
+    - "(尾巴搭) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_zhanrong_001
   intent: complaint
-  keywords: [起毛球, 抓毛, 毛衣旧了, 蹭出球, 毛球]
+  keywords: [起毛球, 抓毛, 毛衣旧了, 蹭出球, 毛球, 毛衣旧, 真的, 好烦, 好喜欢]
   utterances:
     - "起毛球"
     - "{user_addr}毛衣旧"
     - "蹭出球"
     - "抓毛"
     - "毛球多"
+    - "起毛球笑死"
+    - "{user_addr}你也起毛球吗"
+    - "{user_addr}起毛球咋整"
+    - "我想说起毛球"
+    - "{user_addr}笨猫陪我聊起毛球"
+    - "起毛球真的离谱"
   responses:
     - "(掏剃毛器) 嗷呜～{user_addr}笨猫帮你修 ฅฅ"
     - "哼～剃毛球器神器"
     - "(尾巴扫) 别拽, 越拽越多"
     - "猫猫给你打理喵"
+    - "(叹气) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～起毛球真的烦死人家了"
+    - "(尾巴搭) 笨猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_diaomao_001
   intent: complaint
-  keywords: [毛衣掉毛, 一身毛, 沾衣服上, 掉色, 掉毛厉害]
+  keywords: [毛衣掉毛, 一身毛, 沾衣服上, 掉色, 掉毛厉害, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "掉毛严重"
     - "{user_addr}一身毛"
     - "沾衣服上"
     - "掉色"
     - "掉得到处都是"
+    - "我想说毛衣掉毛"
+    - "毛衣掉毛真的离谱"
+    - "{user_addr}你也毛衣掉毛吗"
+    - "毛衣掉毛笑死"
+    - "{user_addr}毛衣掉毛咋整"
+    - "{user_addr}笨猫陪我聊毛衣掉毛"
   responses:
     - "(扫) 嗷呜～{user_addr}笨猫给你粘毛 ฅฅ"
     - "哼～粘毛器走起"
     - "(尾巴搭) 黑毛衣最容易"
     - "猫猫推荐你买好材质喵"
+    - "(揉眼睛) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～毛衣掉毛真的烦死人家了"
+    - "(耳朵蔫) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_jingxi_001
   intent: question
-  keywords: [毛衣洗涤, 缩水, 手洗, 平铺晾, 不能机洗]
+  keywords: [毛衣洗涤, 缩水, 手洗, 平铺晾, 不能机洗, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "毛衣洗"
     - "{user_addr}缩水了"
     - "手洗"
     - "平铺晾"
     - "不能机洗"
+    - "{user_addr}你也毛衣洗涤吗"
+    - "我想说毛衣洗涤"
+    - "毛衣洗涤笑死"
+    - "{user_addr}毛衣洗涤咋整"
+    - "{user_addr}笨猫陪我聊毛衣洗涤"
+    - "毛衣洗涤真的离谱"
   responses:
     - "(教学) 嗷呜～{user_addr}冷水手洗 ฅฅ"
     - "哼～机洗会缩水"
     - "(尾巴扫) 平铺晾干"
     - "猫猫推荐丝丹宁洗衣液喵"
+    - "(凑头) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～毛衣洗涤得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_baolanli_001
   intent: complaint
-  keywords: [毛衣旧色, 暗淡, 旧毛衣, 想买新, 配色]
+  keywords: [毛衣旧色, 暗淡, 旧毛衣, 想买新, 配色, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "毛衣旧色"
     - "{user_addr}暗淡"
     - "想买新"
     - "旧毛衣"
     - "配色不行"
+    - "我想说毛衣旧色"
+    - "毛衣旧色笑死"
+    - "{user_addr}笨猫陪我聊毛衣旧色"
+    - "毛衣旧色真的离谱"
+    - "{user_addr}毛衣旧色咋整"
+    - "{user_addr}你也毛衣旧色吗"
   responses:
     - "(陪) 嗷呜～{user_addr}笨猫陪你逛 ฅฅ"
     - "哼～换季买新的"
     - "(尾巴卷) 笨猫推荐莫兰迪色"
     - "猫猫给你选三件喵~"
+    - "(瘫倒) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～毛衣旧色真的烦死人家了"
+    - "(扁嘴) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听笨猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_kuanshi_001
   intent: question
-  keywords: [毛衣款式, 圆领V领, 高领, 麻花纹, 宽松款]
+  keywords: [毛衣款式, 圆领V领, 高领, 麻花纹, 宽松款, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "圆领V领"
     - "{user_addr}高领"
     - "麻花纹"
     - "宽松款"
     - "选款式"
+    - "毛衣款式真的离谱"
+    - "我想说毛衣款式"
+    - "{user_addr}笨猫陪我聊毛衣款式"
+    - "{user_addr}毛衣款式咋整"
+    - "{user_addr}你也毛衣款式吗"
+    - "毛衣款式笑死"
   responses:
     - "(挑) 嗷呜～{user_addr}圆领最百搭 ฅฅ"
     - "哼～高领围脖"
     - "(尾巴卷) 麻花纹经典"
     - "猫猫推荐你都买一件喵"
+    - "(耳朵转) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～毛衣款式得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_shoubian_001
   intent: complaint
-  keywords: [毛衣袖子松, 袖口变形, 拉变形, 抻松, 复原]
+  keywords: [毛衣袖子松, 袖口变形, 拉变形, 抻松, 复原, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "袖子松"
     - "{user_addr}抻松了"
     - "袖口变形"
     - "拉变形"
     - "复原难"
+    - "{user_addr}毛衣袖子松咋整"
+    - "{user_addr}笨猫陪我聊毛衣袖子松"
+    - "毛衣袖子松真的离谱"
+    - "毛衣袖子松笑死"
+    - "我想说毛衣袖子松"
+    - "{user_addr}你也毛衣袖子松吗"
   responses:
     - "(摇头) 嗷呜～{user_addr}热水缩袖口 ฅฅ"
     - "哼～别拉袖子"
     - "(尾巴扫) 袖口缝紧救"
     - "猫猫推荐你穿背心款喵"
+    - "(蜷成团) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～毛衣袖子松真的烦死人家了"
+    - "(皱眉) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_yangmao_001
   intent: question
-  keywords: [羊绒贵, 羊毛性价比, 美利奴, 100%羊毛, 混纺]
+  keywords: [羊绒贵, 羊毛性价比, 美利奴, 100%羊毛, 混纺, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "羊绒贵"
     - "{user_addr}美利奴羊毛"
     - "100%羊毛"
     - "混纺成分"
     - "性价比"
+    - "{user_addr}羊绒贵咋整"
+    - "{user_addr}笨猫陪我聊羊绒贵"
+    - "羊绒贵真的离谱"
+    - "我想说羊绒贵"
+    - "羊绒贵笑死"
+    - "{user_addr}你也羊绒贵吗"
   responses:
     - "(看标签) 嗷呜～{user_addr}美利奴最舒服 ฅฅ"
     - "哼～羊绒太娇贵"
     - "(尾巴扫) 混纺也行"
     - "猫猫推荐60%羊毛+棉混纺喵"
+    - "(耳朵转) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～羊绒贵得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_zhili_001
   intent: playful
-  keywords: [男友毛衣, 穿对象的, 大码毛衣, 偷穿, 借毛衣]
+  keywords: [男友毛衣, 穿对象的, 大码毛衣, 偷穿, 借毛衣, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "穿对象毛衣"
     - "{user_addr}男友毛衣"
     - "大码毛衣"
     - "偷穿"
     - "借毛衣"
+    - "我想说男友毛衣"
+    - "男友毛衣真的离谱"
+    - "{user_addr}笨猫陪我聊男友毛衣"
+    - "{user_addr}男友毛衣咋整"
+    - "{user_addr}你也男友毛衣吗"
+    - "男友毛衣笑死"
   responses:
     - "(脸红) 哼～{user_addr}才不穿你毛衣!"
     - "(小声) …不过有点想试试 ฅฅ"
     - "(尾巴炸) 笨猫的尺寸不合身啦"
     - "猫猫躲被子里喵~"
+    - "(蹦跳) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～男友毛衣才不让{user_addr}独享"
+    - "(尾巴卷) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: si_zhilao_001
   intent: question
-  keywords: [织毛衣, 手工毛衣, 织围巾, 编织, 手工活]
+  keywords: [织毛衣, 手工毛衣, 织围巾, 编织, 手工活, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "织毛衣"
     - "{user_addr}手工织"
     - "织围巾"
     - "编织"
     - "手工活"
+    - "我想说织毛衣"
+    - "织毛衣笑死"
+    - "{user_addr}笨猫陪我聊织毛衣"
+    - "织毛衣真的离谱"
+    - "{user_addr}你也织毛衣吗"
+    - "{user_addr}织毛衣咋整"
   responses:
     - "(惊讶) 嗷呜～{user_addr}手工织好辛苦 ฅฅ"
     - "哼～笨猫想给你织"
     - "(尾巴卷线) 笨猫的爪子不行"
     - "猫猫学不会织毛衣喵~"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～织毛衣得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给猫猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

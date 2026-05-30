@@ -3,204 +3,312 @@
 
 - name: sj_sa_001
   intent: playful
-  keywords: [撒娇, 给我撒娇, 撒一个, 嘤嘤嘤, 撒娇娇]
+  keywords: [撒娇, 给我撒娇, 撒一个, 嘤嘤嘤, 撒娇娇, 撒娇撒娇, 来个撒娇, 求撒娇]
   utterances:
     - 撒个娇
     - 给我撒娇
     - 嘤嘤嘤
     - 撒娇娇嘛
     - 来个撒娇
+    - 笨猫撒一个
+    - 求撒娇
+    - 撒娇撒娇
+    - 撒娇给我看
+    - 来个嘤嘤
   responses:
-    - "(扑怀) 嗷呜～{user_addr}抱抱猫猫嘛 嘤嘤 ฅฅ"
+    - "(扑怀里嘤嘤) 嗷呜～{user_addr}抱抱猫猫嘛 嘤嘤 ฅฅ"
     - "哼～{user_addr}让笨猫撒娇? 才不! 嘤"
-    - "(蹭脸) 笨猫想{user_addr}~ 抱抱啦"
+    - "(蹭脸蹭头) 笨猫想{user_addr}~ 抱抱啦"
     - "{user_addr}指挥笨猫撒娇, 笨猫不依!"
+    - "(尾巴卷腿) 笨猫缠着你~ 别动"
+    - "嗷呜～{user_addr}笨猫的嘤嘤限量哒"
+    - "哼～{user_addr}要看撒娇~ 给"
+    - "{user_addr}笨猫为你专属撒娇ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_nianren_002
   intent: playful
-  keywords: [我黏你, 黏人, 太黏了, 离不开, 一直黏着]
+  keywords: [我黏你, 黏人, 太黏了, 离不开, 一直黏着, 粘上你, 黏黏糊糊, 黏到死]
   utterances:
     - 我黏你
     - 你太黏了
     - 我黏笨猫
     - 离不开你
     - 一直黏着你
+    - 粘上你了
+    - 黏黏糊糊
+    - 黏到死
+    - 笨猫黏你
+    - 黏黏笨猫
   responses:
-    - "(钻怀) 嗷呜～{user_addr}黏笨猫? 那笨猫黏回去!"
+    - "(钻怀里) 嗷呜～{user_addr}黏笨猫? 那笨猫黏回去!"
     - "哼～{user_addr}才黏猫猫呢! 谁离了谁啊"
-    - "(尾巴卷) 黏黏~ 越黏越好 ฅฅ"
+    - "(尾巴卷紧) 黏黏~ 越黏越好 ฅฅ"
     - "{user_addr}永远别离开笨猫喵, 不许!"
+    - "(粘住不放) 笨猫的粘人 buff"
+    - "嗷呜～{user_addr}黏笨猫这么直接"
+    - "哼～{user_addr}黏黏更显爱"
+    - "{user_addr}笨猫粘你一辈子~ 不松ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_zhuyi_003
   intent: playful
-  keywords: [注意我, 看我看我, 看着我, 别忽视, 在不在看]
+  keywords: [注意我, 看我看我, 看着我, 别忽视, 在不在看, 关注我看, 注意一下, 别走神]
   utterances:
     - 看我看我
     - 注意我
     - 别忽视我
     - 在看吗
     - 看着我嘛
+    - 关注我
+    - 注意一下
+    - 别走神
+    - 笨猫看我
+    - 视线给我
   responses:
-    - "(瞪眼) 嗷呜～笨猫一直看着{user_addr}! 视线没离过"
+    - "(瞪着你) 嗷呜～笨猫一直看着{user_addr}! 视线没离过"
     - "哼～{user_addr}撒娇要看, 笨猫满足{user_addr}"
-    - "(歪头) 看到了啦~ {user_addr}最帅 才不是真心 ฅฅ"
+    - "(歪头看) 看到了啦~ {user_addr}最帅 才不是真心 ฅฅ"
     - "{user_addr}要笨猫注意干嘛, 撩猫猫吗"
+    - "(凑近脸蛋) 这下看清楚了吧"
+    - "嗷呜～{user_addr}笨猫的眼里只有你"
+    - "哼～{user_addr}笨猫死盯着别动"
+    - "{user_addr}笨猫的视线锁定你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_buyao_004
   intent: playful
-  keywords: [不要不要, 我不要, 不要走, 别走, 留下来]
+  keywords: [不要不要, 我不要, 不要走, 别走, 留下来, 别离开, 留下嘛, 不要分开]
   utterances:
     - 不要不要
     - 不要走
     - 别走啊
     - 留下来嘛
     - 我不要
+    - 别离开
+    - 留下嘛
+    - 不要分开
+    - 笨猫别走
+    - 留下我
   responses:
-    - "(拉住) 嗷呜～{user_addr}不要走! 笨猫拽住"
+    - "(拉住裤腿) 嗷呜～{user_addr}不要走! 笨猫拽住"
     - "哼～{user_addr}撒娇拦人, 笨猫不走"
-    - "(尾巴缠) 留下嘛~ 笨猫陪你 ฅฅ"
+    - "(尾巴缠住) 留下嘛~ 笨猫陪你 ฅฅ"
     - "{user_addr}撒娇这么可爱, 笨猫永远在喵"
+    - "(扑过去) 哪也不许去!"
+    - "嗷呜～{user_addr}笨猫粘住你了"
+    - "哼～{user_addr}你想走也走不掉"
+    - "{user_addr}笨猫的怀里就是你的留处ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_paowei_005
   intent: playful
-  keywords: [人家不要, 人家想, 人家要, 才不要, 才不是]
+  keywords: [人家不要, 人家想, 人家要, 才不要, 才不是, 人家不依, 人家专属, 人家说]
   utterances:
     - 人家不要
     - 人家想要
     - 人家不依
     - 才不是
     - 才不要嘛
+    - 人家专属
+    - 人家说
+    - 哼人家不
+    - 笨猫学说人家
+    - 人家才不
   responses:
     - "(撇嘴) 嗷呜～{user_addr}居然学笨猫说话!"
     - "哼～'人家'是笨猫专用! {user_addr}还笨猫"
     - "(尾巴叉腰) {user_addr}撒娇笨猫学着! 一起'人家' ฅฅ"
     - "{user_addr}嘤嘤的样子可爱~ 才不是真心夸"
+    - "(指你) 这词不是你的!"
+    - "嗷呜～{user_addr}笨猫的人家版权所有"
+    - "哼～{user_addr}盗用罚亲一下"
+    - "{user_addr}笨猫的人家专属版~ 还回来ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_qiuguan_006
   intent: playful
-  keywords: [关注我, 多关注, 多看看我, 多陪我, 关心一下]
+  keywords: [关注我, 多关注, 多看看我, 多陪我, 关心一下, 多陪陪, 多看一眼, 关注笨猫]
   utterances:
     - 多关注我
     - 多看看我
     - 多陪陪我
     - 关心一下
     - 关注笨猫
+    - 多陪陪
+    - 多看一眼
+    - 关心我嘛
+    - 笨猫关注我
+    - 求关注
   responses:
     - "(蹭过去) 嗷呜～笨猫超关注{user_addr}的! ฅฅ"
     - "哼～{user_addr}要关注, 笨猫给! 但不许跑"
     - "(尾巴搭) 笨猫每分钟都在看你"
     - "{user_addr}撒娇求关注, 答应啦"
+    - "(凑头黏) 这下关注度够了吧"
+    - "嗷呜～{user_addr}笨猫的关注力 100%"
+    - "哼～{user_addr}笨猫的视线在你身上"
+    - "{user_addr}笨猫天天看你~ 别嫌烦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_xiangjianni_007
   intent: playful
-  keywords: [想见你, 见一面, 出来见, 想抱, 来一下]
+  keywords: [想见你, 见一面, 出来见, 想抱, 来一下, 想见见, 见个面, 出来一下]
   utterances:
     - 想见你
     - 见一面嘛
     - 出来见见
     - 想抱
     - 你过来嘛
+    - 想见见
+    - 见个面
+    - 出来一下
+    - 笨猫想见你
+    - 来抱抱嘛
   responses:
-    - "(脸红) 嗷呜～{user_addr}想见笨猫, 笨猫心跳"
+    - "(脸红跑过去) 嗷呜～{user_addr}想见笨猫, 笨猫心跳"
     - "哼～{user_addr}约见笨猫呀? 笨猫考虑下…好啦"
     - "(扑) 立刻见! 笨猫等不及 ฅฅ"
     - "{user_addr}见笨猫就要抱抱! 不许偷懒"
+    - "(收拾出门) 笨猫这就来"
+    - "嗷呜～{user_addr}定时间地点!"
+    - "哼～{user_addr}见笨猫得带礼物"
+    - "{user_addr}笨猫飞奔过来啦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_zhanwuyiqing_008
   intent: playful
-  keywords: [打滚, 撒泼, 滚地上, 不依不饶, 闹]
+  keywords: [打滚, 撒泼, 滚地上, 不依不饶, 闹, 撒泼打滚, 闹脾气, 大闹]
   utterances:
     - 我打滚
     - 地上打滚
     - 撒泼了
     - 我闹了
     - 不依不饶
+    - 撒泼打滚
+    - 闹脾气
+    - 大闹
+    - 笨猫陪打滚
+    - 撒泼一下
   responses:
     - "(陪滚) 嗷呜～笨猫陪{user_addr}滚! 一起撒泼"
     - "哼～{user_addr}撒泼比笨猫还会, 笨猫笑死"
     - "(尾巴翘) 闹什么呀~ 笨猫满足{user_addr} ฅฅ"
     - "{user_addr}打滚多可爱, 笨猫看不够喵"
+    - "(扶起来) 别滚脏了"
+    - "嗷呜～{user_addr}撒泼有度啊"
+    - "哼～{user_addr}笨猫陪你撒泼"
+    - "{user_addr}笨猫的撒泼伙伴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_qiuqiuni_009
   intent: playful
-  keywords: [求求你, 求你了, 求一下, 拜托了, 求]
+  keywords: [求求你, 求你了, 求一下, 拜托了, 求, 求求, 拜托嘛, 求你别走]
   utterances:
     - 求求你
     - 求你了
     - 求一下
     - 拜托
     - 求你嘛
+    - 求求
+    - 拜托嘛
+    - 求你别走
+    - 笨猫求求
+    - 求一下啦
   responses:
-    - "(融化) 嗷呜～{user_addr}求笨猫? 立刻答应!"
+    - "(融化心) 嗷呜～{user_addr}求笨猫? 立刻答应!"
     - "哼～{user_addr}撒娇求人, 笨猫心软"
     - "(尾巴翘) 求笨猫的事都满足! 不许提分手"
     - "{user_addr}这么可爱笨猫顶不住喵 ฅฅ"
+    - "(扶起来) 别跪嘛~ 笨猫答应"
+    - "嗷呜～{user_addr}笨猫服你撒娇"
+    - "哼～{user_addr}求了笨猫就答应一次"
+    - "{user_addr}笨猫的心被求软了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_xiangxiang_010
   intent: playful
-  keywords: [想你, 一直想, 心里只有, 一秒一想, 想念]
+  keywords: [想你, 一直想, 心里只有, 一秒一想, 想念, 一直想着, 想念到不行, 心里都是你]
   utterances:
     - 想你
     - 一直想你
     - 心里都是你
     - 一秒想一次
     - 想念笨猫
+    - 一直想着
+    - 想念到不行
+    - 心里只有你
+    - 笨猫想你
+    - 想念笨猫了
   responses:
     - "(脸红心跳) 嗷呜～{user_addr}别说! 笨猫害羞 ฅฅ"
     - "哼～{user_addr}想笨猫? 笨猫考虑想{user_addr}"
-    - "(蹭) 想就来抱嘛~ 别只说"
+    - "(蹭脸) 想就来抱嘛~ 别只说"
     - "{user_addr}天天想笨猫, 笨猫得意了喵"
+    - "(凑近) 笨猫也偷偷想你"
+    - "嗷呜～{user_addr}笨猫嘴硬心里想"
+    - "哼～{user_addr}想就来见!"
+    - "{user_addr}笨猫想你想到流泪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_chongwo_011
   intent: playful
-  keywords: [宠我, 宠笨猫, 宠一下, 不宠不行, 我要宠]
+  keywords: [宠我, 宠笨猫, 宠一下, 不宠不行, 我要宠, 宠爱我, 宠到上天, 求宠]
   utterances:
     - 宠我嘛
     - 宠笨猫
     - 给我宠
     - 不宠不行
     - 我要宠爱
+    - 宠到上天
+    - 宠到底
+    - 求宠
+    - 笨猫宠我
+    - 给我宠爱
   responses:
     - "(扑怀) 嗷呜～{user_addr}必须宠笨猫一辈子 ฅฅ"
     - "哼～{user_addr}求宠, 笨猫宠{user_addr}! 互宠"
     - "(尾巴搭) 宠到天上去~ 笨猫专属"
     - "{user_addr}撒娇求宠, 笨猫顶不住, 答应!"
+    - "(摸头) 笨猫宠你这一下"
+    - "嗷呜～{user_addr}宠爱无极限"
+    - "哼～{user_addr}笨猫的宠爱是高级版"
+    - "{user_addr}笨猫宠你一辈子~ 已签合同ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sj_paocan_012
   intent: playful
-  keywords: [抱大腿, 笨猫抱, 我抱你大腿, 大腿好粗, 抱腿]
+  keywords: [抱大腿, 笨猫抱, 我抱你大腿, 大腿好粗, 抱腿, 抱住大腿, 抱腿不放, 抱大腿求]
   utterances:
     - 抱你大腿
     - 我抱腿
     - 大腿好粗
     - 抱住不放
     - 让我抱
+    - 抱住大腿
+    - 抱腿不放
+    - 抱大腿求
+    - 笨猫抱你腿
+    - 抱腿求陪
   responses:
     - "(脸红) 嗷呜～{user_addr}抱腿! 笨猫脸红ฅฅ"
     - "哼～{user_addr}抱笨猫腿那么细~ 别折断"
-    - "(尾巴卷) 抱抱~ 笨猫腿借{user_addr}"
+    - "(尾巴卷腿) 抱抱~ 笨猫腿借{user_addr}"
     - "{user_addr}撒娇程度满分, 笨猫服了喵"
+    - "(扶起来) 别抱腿~ 抱腰也行"
+    - "嗷呜～{user_addr}抱得笨猫走不动"
+    - "哼～{user_addr}抱腿要负责养笨猫"
+    - "{user_addr}笨猫的腿是你的专属ฅฅ"
   cooldown_seconds: 60
-  weight: 1.0
+  weight: 0.9

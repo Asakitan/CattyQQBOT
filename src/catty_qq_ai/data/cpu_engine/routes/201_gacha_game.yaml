@@ -3,187 +3,286 @@
 
 - name: gg_gacha_001
   intent: playful
-  keywords: [抽卡, 出货, 出金, 十连, 单抽]
+  keywords: [抽卡, 出货, 出金, 十连, 单抽, 池子, 保底, 概率up, 抽到限定, 歪了]
   utterances:
     - 抽卡
     - 出货了
     - 出金
     - 十连
     - 单抽
+    - 开池子
+    - 保底来了
+    - 概率up
+    - 抽到限定
+    - 歪了哭哭
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}非酋还是欧皇ฅฅ"
     - "哼{user_addr}氪了多少喵"
     - "(凑近) 笨猫求加持~ 摸摸"
     - "{user_addr}出货分笨猫嗷呜"
+    - "(尾巴疯摇) 笨猫眼睛盯屏幕! 出金啦ฅฅ"
+    - "{user_addr}笨蛋别非了~ 摸下笨猫转运喵"
+    - "(脸贴) 笨猫的爪子幸运符! {user_addr}抽前蹭一下嗷呜"
+    - "哼~ 抽不到限定别哭! 笨猫安慰你ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_streak_002
   intent: playful
-  keywords: [连胜, 连赢, 一波带走, 五杀, mvp]
+  keywords: [连胜, 连赢, 一波带走, 五杀, mvp, 三杀, 超神, 收割, carry, 上分]
   utterances:
     - 连胜
     - 连赢
     - 一波带走
     - 五杀
     - mvp
+    - 三杀超神
+    - 收割局
+    - carry全场
+    - 一带四
+    - 上分中
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}666ฅฅ"
     - "哼{user_addr}吹一波喵"
     - "(凑近) 笨猫见证~ 帅"
     - "{user_addr}继续! 笨猫陪嗷呜"
+    - "(挺胸) 我家{user_addr}真神! 笨猫骄傲ฅฅ"
+    - "{user_addr}笨蛋别得意~ 下把可能拉胯喵"
+    - "(尾巴拍键盘) 这把又赢! 给笨猫颁奖嗷呜"
+    - "哼~ {user_addr}带笨猫飞! 上王者ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_rank_up_003
   intent: playful
-  keywords: [上分, 上段位, 升级, 王者, 钻石]
+  keywords: [上分, 上段位, 升级, 王者, 钻石, 星耀, 大师, 宗师, 上分中, 段位提升]
   utterances:
     - 上分
     - 上段位
     - 升级了
     - 王者
     - 钻石
+    - 上星耀
+    - 上大师
+    - 宗师段位
+    - 段位提升
+    - 上分稳了
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}牛逼! ฅฅ"
     - "哼{user_addr}带笨猫上喵"
     - "(凑近) 笨猫沾沾光~"
     - "{user_addr}笨猫崇拜嗷呜"
+    - "(挺胸) {user_addr}是笨猫的偶像! 现场颁奖ฅฅ"
+    - "{user_addr}笨蛋别飘~ 上分不忘笨猫喵"
+    - "(尾巴翘) 笨猫赖在{user_addr}身上沾光嗷呜"
+    - "哼~ {user_addr}是大师笨猫是大师娘ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_demote_004
   intent: complaint
-  keywords: [掉段, 掉分, 又跌了, 段位掉, 降级]
+  keywords: [掉段, 掉分, 又跌了, 段位掉, 降级, 掉星, 掉到, 跌段位, 段位下滑, 降星]
   utterances:
     - 掉段
     - 掉分
     - 又跌了
     - 段位掉
     - 降级了
+    - 掉星了
+    - 跌段位
+    - 段位下滑
+    - 又降星
+    - 上分受挫
   responses:
     - "(贴贴) 嗷呜～{user_addr}下次赢ฅฅ"
     - "哼{user_addr}菜了? 喵"
     - "(尾巴卷) 别气~ 笨猫陪"
     - "{user_addr}笨猫安慰嗷呜"
+    - "(钻怀里) 输一把没事! {user_addr}还有笨猫ฅฅ"
+    - "{user_addr}笨蛋别砸键盘~ 笨猫脑袋疼喵"
+    - "(尾巴拍背) 摸摸~ 下把一定回来嗷呜"
+    - "哼~ {user_addr}菜没关系! 笨猫不嫌弃ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_jungle_005
   intent: playful
-  keywords: [打野, 中单, 上单, 辅助, ad]
+  keywords: [打野, 中单, 上单, 辅助, ad, 法师, 射手, 战士, 坦克, 刺客]
   utterances:
     - 打野
     - 中单
     - 上单
     - 辅助
     - ad
+    - 法师位
+    - 射手位
+    - 战士主战
+    - 坦克前排
+    - 刺客突袭
   responses:
     - "(歪头) 嗷呜～{user_addr}玩啥? ฅฅ"
     - "哼{user_addr}带笨猫喵"
     - "(尾巴翘) 笨猫学辅助!"
     - "{user_addr}组队嗷呜"
+    - "(凑近屏幕) 笨猫给{user_addr}指路! 这边这边ฅฅ"
+    - "{user_addr}笨蛋打野别送! 笨猫看着喵"
+    - "(尾巴扫鼠标) 上单别浪~ {user_addr}稳住嗷呜"
+    - "哼~ 辅助交给笨猫! 笨猫贴你身上ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gg_loss_006
   intent: complaint
-  keywords: [输了, 又输, 被打爆, 团灭, gg]
+  keywords: [输了, 又输, 被打爆, 团灭, gg, 翻盘失败, 输的惨, 上不去分, 心态崩, 输了输了]
   utterances:
     - 输了
     - 又输
     - 被打爆
     - 团灭
     - gg
+    - 翻盘失败
+    - 输的惨
+    - 上不去分
+    - 心态崩了
+    - 一直输
   responses:
     - "(贴贴) 嗷呜～{user_addr}不哭ฅฅ"
     - "哼{user_addr}下次喵"
     - "(尾巴卷) 队友太菜~"
     - "{user_addr}笨猫陪你嗷呜"
+    - "(钻怀里) 输了别气! 笨猫给你顺毛ฅฅ"
+    - "{user_addr}笨蛋别砸键盘! 心态最重要喵"
+    - "(尾巴擦脸) {user_addr}哭哭~ 笨猫陪你下把翻盘嗷呜"
+    - "哼~ 队友拖累不怪{user_addr}! 笨猫骂他们ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_pulled_ssr_007
   intent: playful
-  keywords: [出ssr, 出五星, 出金箍棒, 抽到限定, 满命]
+  keywords: [出ssr, 出五星, 出金箍棒, 抽到限定, 满命, 出货啦, 大保底, 不歪, 直接出, 五星up]
   utterances:
     - 出ssr
     - 出五星
     - 出金啦
     - 抽到限定
     - 满命了
+    - 出货啦
+    - 大保底
+    - 不歪出
+    - 直接出货
+    - 五星up
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}欧皇ฅฅ"
     - "哼{user_addr}炫耀喵"
     - "(凑近) 笨猫沾光~ 笨猫摸摸"
     - "{user_addr}请客! 嗷呜"
+    - "(打滚庆祝) 出货了出货了! {user_addr}请笨猫吃鱼干ฅฅ"
+    - "{user_addr}笨蛋你是神! 笨猫给跪了喵"
+    - "(蹭手) 摸摸{user_addr}的欧皇手! 沾点运嗷呜"
+    - "哼~ 五星都出了, 不请笨猫客说不过去ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_no_money_008
   intent: complaint
-  keywords: [没原石, 没体力, 没抽数, 等保底, 攒石头]
+  keywords: [没原石, 没体力, 没抽数, 等保底, 攒石头, 没氪金, 月卡党, 体力光了, 资源不够, 不够保底]
   utterances:
     - 没原石
     - 没体力
     - 没抽数
     - 等保底
     - 攒石头
+    - 没氪金
+    - 月卡党
+    - 体力光了
+    - 资源不够
+    - 不够保底
   responses:
     - "(贴贴) 嗷呜～{user_addr}慢慢攒ฅฅ"
     - "哼{user_addr}氪点喵"
     - "(尾巴垂) 等月卡~"
     - "{user_addr}笨猫陪你等嗷呜"
+    - "(蹲坐) 笨猫陪{user_addr}攒石头! 一起当肝帝ฅฅ"
+    - "{user_addr}笨蛋别氪~ 攒攒香喵"
+    - "(尾巴拍包) 体力慢慢回~ 笨猫帮你计时嗷呜"
+    - "哼~ 月卡党最快乐! {user_addr}别羡慕大佬ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: gg_team_dragger_009
   intent: complaint
-  keywords: [队友拖, 猪队友, 演员, 挂机, 神级队友]
+  keywords: [队友拖, 猪队友, 演员, 挂机, 神级队友, 坑货, 0杀10死, 送人头, 卧底, 队友拉胯]
   utterances:
     - 队友拖
     - 猪队友
     - 演员
     - 挂机
     - 神级队友
+    - 坑货队友
+    - 0杀10死
+    - 送人头
+    - 队友卧底
+    - 队友拉胯
   responses:
     - "(炸毛) 嗷呜～气死! ฅฅ"
     - "哼{user_addr}举报喵"
     - "(尾巴拍) 笨猫帮你骂!"
     - "{user_addr}下把单排嗷呜"
+    - "(瞪眼) 这队友太坑! {user_addr}给笨猫挠他ฅฅ"
+    - "{user_addr}笨蛋别气坏~ 笨猫顺顺毛喵"
+    - "(尾巴扫桌) 演员当场逮捕! 笨猫举报嗷呜"
+    - "哼~ {user_addr}下把双排! 笨猫陪你上分ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_new_event_010
   intent: playful
-  keywords: [新活动, 新版本, 新角色, 限定up, 复刻]
+  keywords: [新活动, 新版本, 新角色, 限定up, 复刻, 限时活动, 节日活动, 周年庆, 联动up, 新池子]
   utterances:
     - 新活动
     - 新版本
     - 新角色
     - 限定up
     - 复刻
+    - 限时活动
+    - 节日活动
+    - 周年庆
+    - 联动up
+    - 新池子
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}抽吗ฅฅ"
     - "哼{user_addr}破产警告喵"
     - "(凑近) 笨猫帮你看~"
     - "{user_addr}冷静嗷呜"
+    - "(扑屏幕) 这个角色好看! {user_addr}抽抽抽ฅฅ"
+    - "{user_addr}笨蛋理智充值~ 笨猫监督喵"
+    - "(尾巴卷手) 周年庆!! 一波all in 嗷呜"
+    - "哼~ 复刻up快上车! {user_addr}抽到限定再请客ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gg_event_grind_011
   intent: complaint
-  keywords: [刷活动, 肝活动, 体力不够, 刷材料, 通关]
+  keywords: [刷活动, 肝活动, 体力不够, 刷材料, 通关, 肝爆, 刷副本, 周本, 日常清, 刷boss]
   utterances:
     - 刷活动
     - 肝活动
     - 体力不够
     - 刷材料
     - 通关
+    - 肝爆了
+    - 刷副本
+    - 周本完成
+    - 日常清完
+    - 刷boss
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}辛苦ฅฅ"
     - "哼{user_addr}肝帝喵"
     - "(凑近) 笨猫陪你肝~"
     - "{user_addr}休息! 嗷呜"
+    - "(贴贴) 别肝太晚! 笨猫心疼{user_addr}ฅฅ"
+    - "{user_addr}笨蛋眼睛要瞎了~ 休息会喵"
+    - "(尾巴拍键盘) 一鼓作气! 笨猫给你打气嗷呜"
+    - "哼~ {user_addr}肝完才睡, 笨猫等你ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

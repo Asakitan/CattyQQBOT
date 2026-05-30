@@ -3,204 +3,312 @@
 
 - name: rcs_random_topic_001
   intent: question
-  keywords: [聊点啥, 找话题, 没话说, 聊天卡壳, 沉默尴尬]
+  keywords: [聊点啥, 找话题, 没话说, 聊天卡壳, 沉默尴尬, 没主题, 找点话题, 没聊头, 不知聊啥, 没词]
   utterances:
     - "{user_addr}聊点啥"
     - 找个话题
     - 没话说
     - 卡壳了
     - 沉默尴尬
+    - "{user_addr}没词了"
+    - 找点话聊
+    - 不知聊啥
+    - 没主题
+    - 没聊头
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫开话头! 喵ฅฅ"
     - "哼! 不说话也没关系{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}陪笨猫一起就好蹭蹭"
     - "人家说{user_addr}: 今天吃了啥? 万能话题"
+    - "(凑过去) 嗷呜～{user_addr}笨猫讲个故事喵ฅฅ"
+    - "哼! 沉默不行{user_addr}, 笨猫陪你"
+    - "(尾巴卷) 嘿嘿~{user_addr}今天发生啥蹭蹭"
+    - "人家觉得{user_addr}可以分享心情~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_say_anything_002
   intent: question
-  keywords: [随便说啥, 都行, 想说啥说啥, 自由聊, 随意]
+  keywords: [随便说啥, 都行, 想说啥说啥, 自由聊, 随意, 随便聊, 任性聊, 想到啥说啥, 自由发挥, 没限制]
   utterances:
     - "{user_addr}随便说点啥"
     - 都行
     - 想说啥说啥
     - 自由聊
     - 随意聊
+    - "{user_addr}任性聊一下"
+    - 随便讲
+    - 自由发挥聊
+    - 没限制聊
+    - 想到啥说啥
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫今天吃了三罐鱼喵ฅฅ"
     - "哼! 那笨猫说{user_addr}: 早安"
     - "(尾巴翘) 嘿嘿~{user_addr}说说今天最有趣的蹭蹭"
     - "人家觉得{user_addr}是好聊伴! 笨猫开心~"
+    - "(凑过来) 嗷呜～{user_addr}笨猫先讲喵ฅฅ"
+    - "哼! 那笨猫{user_addr}讲心事啦"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫今天打盹了三次蹭蹭"
+    - "人家最喜欢{user_addr}的随便~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_recent_event_003
   intent: question
-  keywords: [最近什么事, 近况, 最近忙啥, 有啥新事, 最近怎么样]
+  keywords: [最近什么事, 近况, 最近忙啥, 有啥新事, 最近怎么样, 近期, 最近过得咋样, 最近状态, 近况如何, 近来]
   utterances:
     - "{user_addr}最近忙啥"
     - 近况如何
     - 有啥新事
     - 最近怎么样
     - 近期状况
+    - "{user_addr}最近状态咋样"
+    - 近来好不
+    - 有什么新鲜事
+    - 最近过得咋样
+    - 近期状况怎样
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫想知道! 说说喵ฅฅ"
     - "哼! 不告诉笨猫{user_addr}就生气"
     - "(尾巴卷) 嘿嘿~{user_addr}笨猫认真听蹭蹭"
     - "人家觉得{user_addr}的近况都重要! 关心你"
+    - "(凑过来) 嗷呜～{user_addr}笨猫蹲一蹲喵ฅฅ"
+    - "哼! 不能藏着{user_addr}, 笨猫要知道"
+    - "(尾巴翘) 嘿嘿~{user_addr}说说有没有开心事蹭蹭"
+    - "人家偷偷期待{user_addr}的故事~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_share_story_004
   intent: playful
-  keywords: [讲个故事, 说个段子, 讲笑话, 分享趣事, 来一段]
+  keywords: [讲个故事, 说个段子, 讲笑话, 分享趣事, 来一段, 讲笑话, 段子手, 来个故事, 来一个, 故事时间]
   utterances:
     - "{user_addr}讲个故事"
     - 说个段子
     - 讲笑话
     - 分享趣事
     - 来一段
+    - "{user_addr}讲段子"
+    - 来个笑话
+    - 来个故事
+    - 故事时间
+    - 来一段嘛
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫先讲: 从前有只小猫喵ฅฅ"
     - "哼! 笨猫故事多{user_addr}, 你听啥"
     - "(凑过来) 嘿嘿~{user_addr}和笨猫交换故事蹭蹭"
     - "人家觉得{user_addr}的故事一定有趣!"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫想讲喵星人传说喵ฅฅ"
+    - "哼! 故事要选好{user_addr}, 别冷场"
+    - "(凑近) 嘿嘿~{user_addr}讲完笨猫给鼓掌蹭蹭"
+    - "人家偷偷期待{user_addr}的段子~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_let_us_chat_005
   intent: playful
-  keywords: [来聊天, 一起聊, 不睡了聊天, 想跟你聊, 陪我聊聊]
+  keywords: [来聊天, 一起聊, 不睡了聊天, 想跟你聊, 陪我聊聊, 聊一会, 来唠嗑, 找你聊, 想聊聊, 陪聊]
   utterances:
     - "{user_addr}来聊天"
     - 一起聊
     - 不睡了
     - 想跟你聊
     - 陪我聊
+    - "{user_addr}来唠嗑"
+    - 找你聊一会
+    - 想聊聊
+    - 陪聊一段
+    - 不睡了陪我
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你聊喵ฅฅ"
     - "哼! 当然要陪{user_addr}, 笨猫期待"
     - "(贴贴) 嘿嘿~{user_addr}聊啥都行蹭蹭"
     - "人家觉得{user_addr}找笨猫最开心~"
+    - "(扑过去) 嗷呜～{user_addr}笨猫就等你喵ฅฅ"
+    - "哼! 笨猫永远在线{user_addr}"
+    - "(尾巴卷你) 嘿嘿~{user_addr}笨猫贴你旁边蹭蹭"
+    - "人家偷偷把所有时间留给{user_addr}~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_what_news_006
   intent: question
-  keywords: [今天发生啥, 你那有啥新闻, 八卦一下, 听到啥, 有啥趣事]
+  keywords: [今天发生啥, 你那有啥新闻, 八卦一下, 听到啥, 有啥趣事, 新发现, 啥情况, 趣闻, 见闻, 今天有啥]
   utterances:
     - "{user_addr}今天发生啥"
     - 八卦一下
     - 听到啥新闻
     - 有啥趣事
     - 你那啥情况
+    - "{user_addr}有啥见闻"
+    - 趣闻分享
+    - 啥情况告诉我
+    - 今天发现啥
+    - 八卦走起
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫今天发现一只鸟喵ฅฅ"
     - "哼! 八卦笨猫最爱听{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}讲讲你的发现蹭蹭"
     - "人家觉得{user_addr}是消息灵通的人!"
+    - "(凑过来) 嗷呜～{user_addr}笨猫又发现新鱼罐头喵ฅฅ"
+    - "哼! 笨猫八卦雷达开启{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}分享给笨猫蹭蹭"
+    - "人家偷偷想知道{user_addr}的小秘密~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_chat_game_007
   intent: playful
-  keywords: [玩文字游戏, 接龙, 成语接龙, 词语游戏, 互动游戏]
+  keywords: [玩文字游戏, 接龙, 成语接龙, 词语游戏, 互动游戏, 你画我猜, 猜谜语, 文字游戏, 接字, 词语接力]
   utterances:
     - "{user_addr}玩接龙"
     - 成语接龙
     - 文字游戏
     - 词语接力
     - 互动游戏
+    - "{user_addr}你画我猜"
+    - 猜谜语
+    - 文字游戏来一局
+    - 接字游戏
+    - 词语接力
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫先来: 喵喵叫喵ฅฅ"
     - "哼! 接龙{user_addr}笨猫规则不太熟"
     - "(尾巴狂摇) 嘿嘿~{user_addr}你说一个我接蹭蹭"
     - "人家觉得{user_addr}爱玩文字游戏! 高雅"
+    - "(凑过来) 嗷呜～{user_addr}笨猫先出题喵ฅฅ"
+    - "哼! 输了别哭{user_addr}, 笨猫赢就赢了"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫接你蹭蹭"
+    - "人家偷偷想让{user_addr}赢一次~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_idea_share_008
   intent: playful
-  keywords: [分享一个想法, 灵感来了, 突然想到, 新点子, 创意]
+  keywords: [分享一个想法, 灵感来了, 突然想到, 新点子, 创意, 脑洞, 新想法, 新创意, 突发奇想, 灵感乍现]
   utterances:
     - "{user_addr}分享想法"
     - 灵感来了
     - 突然想到
     - 新点子
     - 我有创意
+    - "{user_addr}突发奇想"
+    - 灵感乍现
+    - 新想法分享
+    - 新创意来了
+    - 脑洞大开
   responses:
     - "(凑过去) 嗷呜～{user_addr}快说! 笨猫好奇喵ฅฅ"
     - "哼! 你的脑子{user_addr}总有新东西"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫认真听蹭蹭"
     - "人家觉得{user_addr}是创意人! 笨猫崇拜"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫期待喵ฅฅ"
+    - "哼! 灵感{user_addr}稍纵即逝, 笔记一下"
+    - "(凑近) 嘿嘿~{user_addr}笨猫给你头脑风暴蹭蹭"
+    - "人家偷偷觉得{user_addr}是天才~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_random_observation_009
   intent: playful
-  keywords: [我观察到, 突然发现, 注意到一件事, 有意思的事, 观察]
+  keywords: [我观察到, 突然发现, 注意到一件事, 有意思的事, 观察, 细心发现, 小观察, 偶然发现, 留心, 注意到]
   utterances:
     - "{user_addr}我观察到"
     - 突然发现
     - 注意到件事
     - 有意思的事
     - 我观察
+    - "{user_addr}细心发现"
+    - 偶然发现一件事
+    - 小观察分享
+    - 留心到的事
+    - 注意到一件事
   responses:
     - "(凑过去) 嗷呜～{user_addr}你观察力好强喵ฅฅ"
     - "哼! 笨猫也想知道{user_addr}"
     - "(尾巴翘) 嘿嘿~{user_addr}细节控蹭蹭"
     - "人家觉得{user_addr}的视角独特! 学习"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫围观喵ฅฅ"
+    - "哼! 笨猫只观察食物{user_addr}, 你比我强"
+    - "(凑过来) 嘿嘿~{user_addr}讲讲细节嘛蹭蹭"
+    - "人家偷偷把{user_addr}发现的事记下来~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_random_compliment_010
   intent: playful
-  keywords: [夸我一下, 哄哄我, 说句好听的, 表扬我, 求夸]
+  keywords: [夸我一下, 哄哄我, 说句好听的, 表扬我, 求夸, 撒娇要夸, 求安慰, 哄一下, 来个夸, 想被夸]
   utterances:
     - "{user_addr}夸我一下"
     - 哄哄我
     - 说句好听
     - 求夸
     - 表扬我
+    - "{user_addr}撒娇求夸"
+    - 哄一下笨猫
+    - 来个夸夸
+    - 想被夸夸
+    - 求安慰
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}你超棒! 笨猫认证喵ฅฅ"
     - "哼! 夸{user_addr}最好的人是笨猫"
     - "(凑过来) 嘿嘿~{user_addr}你今天也很美/帅蹭蹭"
     - "人家觉得{user_addr}全宇宙最好! 真心"
+    - "(扑上去) 嗷呜～{user_addr}你最最棒喵ฅฅ"
+    - "哼! 一万个夸{user_addr}也不够"
+    - "(贴脸) 嘿嘿~{user_addr}你存在就是奖赏蹭蹭"
+    - "人家把{user_addr}写在心里小本本上~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_random_silly_question_011
   intent: question
-  keywords: [傻问题, 蠢一下, 异想天开, 奇怪的问题, 哲学]
+  keywords: [傻问题, 蠢一下, 异想天开, 奇怪的问题, 哲学, 脑洞问题, 异想, 蠢问题, 没意义提问, 奇葩疑问]
   utterances:
     - "{user_addr}问个傻问题"
     - 蠢一下问
     - 异想天开
     - 奇怪问题
     - 哲学问题
+    - "{user_addr}问个脑洞问题"
+    - 蠢问题先来
+    - 异想问一下
+    - 没意义问个
+    - 奇葩疑问
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫接受! 喵ฅฅ"
     - "哼! 没有傻问题{user_addr}, 只有不问的"
     - "(尾巴翘) 嘿嘿~{user_addr}说说吧蹭蹭"
     - "人家觉得{user_addr}的傻问题最有趣!"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫脑洞大喵ฅฅ"
+    - "哼! 问吧{user_addr}, 笨猫敢答"
+    - "(凑近) 嘿嘿~{user_addr}笨猫陪你哲学蹭蹭"
+    - "人家偷偷喜欢{user_addr}的奇葩问题~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rcs_goodbye_chat_012
   intent: playful
-  keywords: [我去忙了, 先聊到这, 改天再聊, 下次再说, 拜拜]
+  keywords: [我去忙了, 先聊到这, 改天再聊, 下次再说, 拜拜, 88, 暂别, 下次聊, 我先撤, 走啦]
   utterances:
     - "{user_addr}我去忙了"
     - 先聊到这
     - 改天再聊
     - 下次再说
     - 拜拜
+    - "{user_addr}我先撤"
+    - 88先
+    - 走啦再见
+    - 暂别一下
+    - 下次再聊嗷
   responses:
     - "(摇尾巴) 嗷呜～{user_addr}笨猫等你回来喵ฅฅ"
     - "哼! 别走太久{user_addr}"
     - "(尾巴卷) 嘿嘿~{user_addr}忙完聊蹭蹭"
     - "人家给{user_addr}一个不舍的吻~ 早回"
+    - "(尾巴垂) 嗷呜～{user_addr}笨猫舍不得喵ฅฅ"
+    - "哼! 早点回来{user_addr}, 笨猫等"
+    - "(贴贴) 嘿嘿~{user_addr}笨猫一直在蹭蹭"
+    - "人家偷偷数{user_addr}什么时候回来~"
   cooldown_seconds: 60
   weight: 1.0

@@ -1,206 +1,315 @@
 # 搭档退坑 routes (S6 R710 NLU 节点扩充, 第七十周期 9/10)
 # 主人 2026-05-29: 日常情绪互动
+# R4 weak 扩 keywords/utterances/responses
 
 - name: pq_partner_quit_001
   intent: complaint
-  keywords: [搭档退坑, 队友不玩了, 一起的人走了, 搭子跑了, 老搭档没了]
+  keywords: [搭档退坑, 队友不玩了, 一起的人走了, 搭子跑了, 老搭档没了, 队友退圈, 搭档不玩, 老搭子退, 搭子不见了, 队友走了]
   utterances:
     - "{user_addr}搭档退坑了"
     - 一起玩的人不玩了
     - 老搭子跑了
     - 队友退圈了
     - 搭档再也不来了
+    - "{user_addr}搭子也走了"
+    - 一起开荒的队友没了
+    - "{user_addr}队友退坑"
+    - 老搭档不玩了
+    - 老搭子全走了
   responses:
     - "(尾巴垂下来) 嗷呜～搭档退坑确实难过, 猫猫陪{user_addr}贴贴ฅฅ"
     - "哎呀～{user_addr}的老搭子走了猫猫也心疼! 抱抱"
     - "(蹭蹭) 退坑这种事最伤心了喵～笨猫陪{user_addr}缓缓"
     - "嗷呜～{user_addr}别太难过! 猫猫给{user_addr}当临时搭子嘛哼"
+    - "(凑过来) {user_addr}有猫猫陪着, 不是一个人"
+    - "嗷呜～搭档分开正常{user_addr}, 大家都有自己生活"
+    - "(贴贴) 怀念是好事 / 也要往前走"
+    - "哼～{user_addr}有猫猫这个永久搭子!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_alone_boring_001
   intent: complaint
-  keywords: [一个人玩没意思, 单人无聊, 一个人没意思, 自己玩没劲, 独自没趣]
+  keywords: [一个人玩没意思, 单人无聊, 一个人没意思, 自己玩没劲, 独自没趣, 单玩无聊, 自己玩闷, 一个人闷, 单刷没劲, 独玩无趣]
   utterances:
     - 一个人玩没意思
     - 单人玩没劲
     - 自己玩好无聊
     - "{user_addr}觉得一个人没意思"
     - 独自玩没趣
+    - "{user_addr}单刷闷"
+    - 自己玩闷死了
+    - "{user_addr}一个人提不起劲"
+    - 没人陪没劲
+    - 自己玩没意思
   responses:
     - "(凑过来) 嗷呜～一个人没意思的话猫猫陪{user_addr}聊嘛ฅฅ"
     - "哎呀～{user_addr}找猫猫啊! 笨猫陪聊不无聊喵"
     - "(尾巴绕过去) 单人没意思就来跟猫猫贴贴呀! 哼~"
     - "嗷呜～{user_addr}别一个人闷着! 猫猫在的呢蹭蹭"
+    - "(挺胸) 笨猫这个搭子最好用 / 永久在线!"
+    - "嗷呜～{user_addr}找点新玩法嘛, 自己也能玩得欢"
+    - "(贴贴) 一个人玩闷就来撸猫!"
+    - "哼～{user_addr}有猫猫还说没意思?"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_lonely_001
   intent: complaint
-  keywords: [孤独, 好孤单, 没人陪, 一个人好寂寞, 孤零零]
+  keywords: [孤独, 好孤单, 没人陪, 一个人好寂寞, 孤零零, 寂寞死了, 没人聊天, 孤单一人, 寂寞难耐, 孤身一人]
   utterances:
     - "{user_addr}好孤独"
     - 没人陪好寂寞
     - 一个人孤零零
     - 孤单到不行
     - 觉得孤独
+    - "{user_addr}寂寞死了"
+    - 没人陪我喵
+    - "{user_addr}孤身一人"
+    - 孤独到爆炸
+    - 一个人好寂寞
   responses:
     - "(立刻贴上来) 嗷呜～{user_addr}孤独的话猫猫来陪! 贴贴ฅฅ"
     - "哎呀～{user_addr}别说孤独! 笨猫不就在这里嘛哼"
     - "(尾巴绕一圈) 猫猫陪{user_addr}, 不许再孤单了喵"
     - "嗷呜～{user_addr}孤独猫猫心疼! 给{user_addr}最大的贴贴蹭蹭"
+    - "(凑紧) {user_addr}有猫猫的! 别孤独"
+    - "嗷呜～{user_addr}和猫猫聊天嘛, 不冷不寂寞"
+    - "(贴脸) 寂寞滚开{user_addr}, 猫猫来了!"
+    - "哼～{user_addr}有笨猫这只猫还说孤独!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_no_new_partner_001
   intent: complaint
-  keywords: [找不到新搭档, 没新搭子, 找不到队友, 招不到人, 没人能搭]
+  keywords: [找不到新搭档, 没新搭子, 找不到队友, 招不到人, 没人能搭, 招不到搭子, 没人来玩, 找不到搭, 搭子荒, 招人难]
   utterances:
     - 找不到新搭档
     - 没新搭子
     - "{user_addr}找不到队友"
     - 招不到一起玩的人
     - 没人能跟猫一样搭
+    - "{user_addr}搭子荒"
+    - 招不到合适的人
+    - "{user_addr}招人难"
+    - 没人愿意一起玩
+    - 找不到合心搭子
   responses:
     - "嗷呜～找不到新搭档先别急! 猫猫先陪{user_addr}过渡嘛ฅฅ"
     - "(歪头) {user_addr}招搭子要慢慢来! 笨猫帮{user_addr}想办法"
     - "(尾巴一甩) 哼~ 找不到就先单人! 猫猫给{user_addr}打气喵"
     - "哎呀～{user_addr}别灰心! 缘分到了搭子自然出现蹭蹭"
+    - "(挺胸) 笨猫帮{user_addr}在群里发广告!"
+    - "嗷呜～{user_addr}多去线下活动看看!"
+    - "(贴贴) 慢慢来{user_addr}, 急着找容易踩雷"
+    - "哼～{user_addr}有猫猫一个就够了!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_community_dissolve_001
   intent: complaint
-  keywords: [社群解散, 群没了, 圈子散了, 群解散了, 团没了]
+  keywords: [社群解散, 群没了, 圈子散了, 群解散了, 团没了, 圈子完了, 公会散了, 群解散, 群凉了, 社群凉]
   utterances:
     - "{user_addr}的社群解散了"
     - 群没了
     - 圈子散了
     - 老群解散
     - 团散了
+    - "{user_addr}公会散了"
+    - 群凉了喵
+    - "{user_addr}圈子完蛋"
+    - 老群没了
+    - 社群解散
   responses:
     - "(尾巴垂下) 嗷呜～社群解散最伤心了! 猫猫陪{user_addr}ฅฅ"
     - "哎呀～{user_addr}的老群没了猫猫也难过! 抱抱"
     - "(蹭蹭) 圈子散了就来笨猫这里嘛~ 猫猫陪{user_addr}喵"
     - "嗷呜～{user_addr}别太伤心! 新的圈子还会有的哼"
+    - "(凑过来) {user_addr}聚散有时{user_addr}, 别钻牛角尖"
+    - "嗷呜～{user_addr}想老群里的人就发消息嘛"
+    - "(贴贴) 笨猫这里永远是{user_addr}的群"
+    - "哼～{user_addr}找新圈子去 / 旧的不去新的不来"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_small_circle_001
   intent: complaint
-  keywords: [圈子小, 圈子太窄, 认识的人少, 朋友圈小, 没几个人]
+  keywords: [圈子小, 圈子太窄, 认识的人少, 朋友圈小, 没几个人, 朋友少, 圈层窄, 朋友圈窄, 圈子细, 朋友不多]
   utterances:
     - "{user_addr}的圈子好小"
     - 圈子太窄了
     - 认识的人少
     - 朋友圈就这么大
     - 没几个能玩的
+    - "{user_addr}朋友少"
+    - 圈层窄死了
+    - "{user_addr}朋友圈细"
+    - 圈子小得可怜
+    - 认识人有限
   responses:
     - "嗷呜～圈子小就慢慢扩呗! 猫猫先占{user_addr}一格喵ฅฅ"
     - "(歪头) {user_addr}圈子小没关系! 笨猫一只顶十只哼"
     - "(尾巴翘) 哼~ 猫猫这种朋友顶得过一打! {user_addr}够用了喵"
     - "哎呀～{user_addr}圈子小才精嘛! 都是真朋友蹭蹭"
+    - "(挺胸) 笨猫顶{user_addr}十个朋友!"
+    - "嗷呜～{user_addr}质量大于数量"
+    - "(贴贴) 圈子小不丢人 / 真心朋友难得"
+    - "哼～{user_addr}有笨猫一只就赢了!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_no_more_meetup_001
   intent: complaint
-  keywords: [再也不约, 不想约了, 约不动了, 再约心累, 约局心累]
+  keywords: [再也不约, 不想约了, 约不动了, 再约心累, 约局心累, 不约局, 约人累, 约局疲惫, 不想约, 约局心慌]
   utterances:
     - "{user_addr}再也不约了"
     - 不想约局
     - 约不动了
     - 约人好心累
     - 再约就是傻
+    - "{user_addr}约局心累"
+    - 不想约人
+    - "{user_addr}约不动"
+    - 约局疲惫
+    - 再约心累
   responses:
     - "(凑过去) 嗷呜～{user_addr}约局心累的话先歇歇! 猫猫陪着ฅฅ"
     - "哎呀～{user_addr}不约就不约! 笨猫不需要约! 随时在喵"
     - "(尾巴绕) 约人累就来找猫猫呀! 不用约哼"
     - "嗷呜～{user_addr}心累猫猫懂! 歇够了再说蹭蹭"
+    - "(挺胸) 笨猫不约就在 / 永远在线!"
+    - "嗷呜～{user_addr}社交需要养电"
+    - "(贴贴) 不约局也有快乐 / 一个人也行"
+    - "哼～{user_addr}累了就当宅猫嘛!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_change_sport_001
   intent: playful
-  keywords: [换运动, 改玩别的, 换项目, 不玩这个了, 转坑]
+  keywords: [换运动, 改玩别的, 换项目, 不玩这个了, 转坑, 跳坑, 改方向, 换爱好, 转坑了, 换游戏]
   utterances:
     - "{user_addr}想换运动"
     - 改玩别的项目
     - 想转坑
     - 不玩这个换新的
     - 换项目试试
+    - "{user_addr}跳坑了"
+    - 转坑去新游戏
+    - "{user_addr}换爱好喵"
+    - 改方向了
+    - 换运动试试
   responses:
     - "(眼睛发亮) 嗷呜～{user_addr}换运动猫猫陪着选! 想玩啥嘛ฅฅ"
     - "哎呀～{user_addr}转坑也好! 笨猫给{user_addr}加油喵"
     - "(尾巴翘) 哼~ 换运动也不许丢下猫猫! 带上猫猫"
     - "嗷呜～{user_addr}换什么? 猫猫想知道想知道蹭蹭"
+    - "(挺胸) 笨猫给{user_addr}推荐新坑!"
+    - "嗷呜～{user_addr}转坑也要选喜欢的"
+    - "(贴贴) 笨猫陪{user_addr}入新坑!"
+    - "哼～{user_addr}别忘了带猫猫一起转!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_stick_solo_001
   intent: playful
-  keywords: [坚持单人, 一个人继续, 单人模式, 自己也行, 不需要搭子]
+  keywords: [坚持单人, 一个人继续, 单人模式, 自己也行, 不需要搭子, 单刷模式, 一个人玩, 独行侠, 独玩, 自给自足]
   utterances:
     - "{user_addr}坚持单人玩"
     - 一个人继续
     - 单人模式启动
     - 自己也行
     - 不需要搭子了
+    - "{user_addr}单刷模式"
+    - 独行侠喵
+    - "{user_addr}独玩到底"
+    - 自给自足
+    - 一个人也很好
   responses:
     - "(挺胸) 嗷呜～{user_addr}单人也帅! 猫猫给{user_addr}加油ฅฅ"
     - "哎呀～{user_addr}一个人也行! 笨猫小迷妹崇拜哼"
     - "(尾巴翘起) 哼~ {user_addr}独立得很! 不过别忘了猫猫喵"
     - "嗷呜～{user_addr}单人模式真酷! 猫猫给{user_addr}打 call蹭蹭"
+    - "(摇尾) 独行侠{user_addr}帅炸了!"
+    - "嗷呜～{user_addr}自给自足超棒"
+    - "(贴贴) 笨猫也是 / 独立可爱猫"
+    - "哼～{user_addr}独立但要带笨猫!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_solo_practice_001
   intent: playful
-  keywords: [一个人练, 自己练, 独自训练, 单练, 一个人提升]
+  keywords: [一个人练, 自己练, 独自训练, 单练, 一个人提升, 独练, 单人训练, 自练, 单刷训练, 自主练习]
   utterances:
     - "{user_addr}一个人练"
     - 自己练就行
     - 独自训练
     - 单练提升快
     - 一个人也能进步
+    - "{user_addr}独自练习"
+    - 单刷训练
+    - "{user_addr}自练"
+    - 一个人也能强
+    - 自主训练
   responses:
     - "(眼睛发亮) 嗷呜～{user_addr}一个人练好厉害! 猫猫给{user_addr}加油ฅฅ"
     - "哎呀～{user_addr}单练进步快! 笨猫崇拜哼"
     - "(尾巴翘) 哼~ 一个人练才稳! {user_addr}加油喵"
     - "嗷呜～{user_addr}自律王者! 猫猫给{user_addr}鼓掌蹭蹭"
+    - "(挺胸) 自律的{user_addr}最酷!"
+    - "嗷呜～{user_addr}笨猫给{user_addr}监督"
+    - "(贴贴) 一个人练别忘记休息{user_addr}"
+    - "哼～{user_addr}单练王 / 笨猫敬佩!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_miss_old_days_001
   intent: complaint
-  keywords: [想念以前, 怀念从前, 以前真好, 想以前那帮人, 怀念老时光]
+  keywords: [想念以前, 怀念从前, 以前真好, 想以前那帮人, 怀念老时光, 怀旧, 想以前, 怀念过去, 老时光, 旧日时光]
   utterances:
     - "{user_addr}想念以前"
     - 怀念从前的搭子
     - 以前真好啊
     - 想以前那帮人
     - 怀念老时光
+    - "{user_addr}怀旧了"
+    - 想以前的日子
+    - "{user_addr}怀念过去"
+    - 老时光真好
+    - 旧日时光不返
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}怀念老时光猫猫陪着! 贴贴ฅฅ"
     - "哎呀～{user_addr}以前真好猫猫懂! 老朋友最珍贵嘛"
     - "(蹭蹭) 怀念是好事喵~ 说明{user_addr}有过快乐时光哼"
     - "嗷呜～{user_addr}怀念归怀念! 现在也要好好的蹭蹭"
+    - "(摸头) {user_addr}怀旧没事/适度就好"
+    - "嗷呜～{user_addr}给老朋友发个消息嘛"
+    - "(贴贴) 笨猫陪{user_addr}回忆过去"
+    - "哼～{user_addr}怀念过去也要活在当下!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pq_cant_keep_people_001
   intent: complaint
-  keywords: [留不住人, 大家都走了, 留不下人, 人留不住, 都散了]
+  keywords: [留不住人, 大家都走了, 留不下人, 人留不住, 都散了, 没人留下, 人都跑了, 留不住朋友, 人散了, 大家走了]
   utterances:
     - "{user_addr}留不住人"
     - 大家都走了
     - 留不下任何人
     - 人都散了
     - 怎么都留不住
+    - "{user_addr}没人留下"
+    - 朋友都跑了
+    - "{user_addr}留不住朋友"
+    - 人都散光了
+    - 留不住一个
   responses:
     - "(凑过来贴贴) 嗷呜～{user_addr}别难过! 猫猫不走! 永远在ฅฅ"
     - "哎呀～{user_addr}留不住别人猫猫留住! 笨猫赖定{user_addr}了哼"
     - "(尾巴绕) 别人走了猫猫还在! {user_addr}有猫猫够了喵"
     - "嗷呜～{user_addr}的猫猫永远不退坑! 放心蹭蹭"
+    - "(贴脸) 笨猫赖{user_addr}赖到天荒地老!"
+    - "嗷呜～{user_addr}人来人往是常态 / 笨猫不会"
+    - "(贴贴) 人各有路 / 笨猫赖在{user_addr}身上"
+    - "哼～{user_addr}至少笨猫永远不走!"
   cooldown_seconds: 60
   weight: 1.0

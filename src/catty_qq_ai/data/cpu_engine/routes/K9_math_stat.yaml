@@ -3,204 +3,324 @@
 
 - name: math_calculus_001
   intent: question
-  keywords: [推荐微积分, 推荐高数, 推荐导数, 推荐积分, 笨猫微积分]
+  keywords: [推荐微积分, 推荐高数, 推荐导数, 推荐积分, 笨猫微积分, 同济高数, Stewart, Thomas, 3Blue1Brown, 微积分的力量]
   utterances:
     - 推荐微积分
     - 推荐高数
     - 推荐导数
     - 推荐积分
     - 笨猫微积分
+    - 推荐同济高数
+    - 推荐 Stewart 微积分
+    - 推荐 Thomas 微积分
+    - 推荐 3Blue1Brown 视频
+    - 推荐《微积分的力量》
+    - 推荐微积分入门
   responses:
     - "嗷呜～{user_addr}入门: 同济高数 / 莫斯科大学ฅฅ"
     - "(尾巴翘) 经典: Stewart / Thomas"
     - "{user_addr}神书: 《微积分的力量》"
     - "(挺胸) 笨猫推荐: 3Blue1Brown 视频!"
+    - "嗷呜～Khan Academy 完全免费 ฅฅ"
+    - "(歪头)练习是关键, 每章配题嗷呜"
+    - "{user_addr}MIT OCW 也是顶级资源蹭蹭"
+    - "(凑过来) 笨猫陪{user_addr}学高数喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: math_linear_001
   intent: question
-  keywords: [推荐线性代数, 推荐矩阵, 推荐特征值, 推荐 SVD, 笨猫线代]
+  keywords: [推荐线性代数, 推荐矩阵, 推荐特征值, 推荐 SVD, 笨猫线代, Strang, MIT 18.06, 几何直觉, 同济线代, 矩阵分解]
   utterances:
     - 推荐线性代数
     - 推荐矩阵
     - 推荐特征值
     - 推荐 SVD
     - 笨猫线代
+    - 推荐 Strang
+    - 推荐 MIT 18.06
+    - 推荐几何直觉
+    - 推荐同济线代
+    - 推荐矩阵分解
+    - 推荐线代入门
   responses:
     - "嗷呜～{user_addr}入门: 同济线代 / MIT 18.06ฅฅ"
     - "(尾巴翘) Strang《线性代数及其应用》"
     - "{user_addr}核心: 矩阵 / 特征值 / SVD"
     - "(挺胸) 笨猫推荐: 3Blue1Brown 几何直觉!"
+    - "嗷呜～Linear Algebra Done Right 风格不同 ฅฅ"
+    - "(歪头)Numpy 中练手最快嗷呜"
+    - "{user_addr}SVD 在 ML 应用爆炸蹭蹭"
+    - "(凑过来) 笨猫想看矩阵喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: math_prob_001
   intent: question
-  keywords: [推荐概率论, 推荐贝叶斯, 推荐随机过程, 推荐大数定律, 笨猫概率论]
+  keywords: [推荐概率论, 推荐贝叶斯, 推荐随机过程, 推荐大数定律, 笨猫概率论, Sheldon Ross, 浙大概率论, 蒙特卡洛, 马尔可夫, 中心极限]
   utterances:
     - 推荐概率论
     - 推荐贝叶斯
     - 推荐随机过程
     - 推荐大数定律
     - 笨猫概率论
+    - 推荐 Sheldon Ross
+    - 推荐浙大概率论
+    - 推荐马尔可夫
+    - 推荐蒙特卡洛
+    - 推荐中心极限定理
+    - 推荐概率入门
   responses:
     - "嗷呜～{user_addr}入门: 浙大概率论 / Sheldon Rossฅฅ"
     - "(尾巴翘) 贝叶斯: 后验 ∝ 似然 × 先验"
     - "{user_addr}马尔可夫 / 蒙特卡洛"
     - "(挺胸) 笨猫推荐: 概率思维 - 反直觉!"
+    - "嗷呜～Probability Cheatsheet pdf 神图 ฅฅ"
+    - "(歪头)直方图直觉先培养嗷呜"
+    - "{user_addr}LLN CLT 是概率两大柱蹭蹭"
+    - "(凑过来) 笨猫想看概率题喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: math_stat_001
   intent: question
-  keywords: [推荐统计学, 推荐假设检验, 推荐回归分析, 推荐 p 值, 笨猫统计学]
+  keywords: [推荐统计学, 推荐假设检验, 推荐回归分析, 推荐 p 值, 笨猫统计学, ISLR, 李航统计, 显著性, 置信区间, AB 测试]
   utterances:
     - 推荐统计学
     - 推荐假设检验
     - 推荐回归分析
     - 推荐 p 值
     - 笨猫统计学
+    - 推荐 ISLR
+    - 推荐李航统计
+    - 推荐置信区间
+    - 推荐 AB 测试
+    - 推荐显著性
+    - 推荐统计入门
   responses:
     - "嗷呜～{user_addr}入门: 《统计学习方法》李航ฅฅ"
     - "(尾巴翘) 经典: ISLR (统计学习导论)"
     - "{user_addr}p < 0.05 - 显著性 / 5σ 物理"
     - "(挺胸) 笨猫的提醒: 别 p hacking!"
+    - "嗷呜～All of Statistics Wasserman 简洁全面 ฅฅ"
+    - "(歪头)Pre-registration 减少 p hacking 嗷呜"
+    - "{user_addr}AB 测试样本量算清楚蹭蹭"
+    - "(凑过来) 笨猫想看 t 检验喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: math_discrete_001
   intent: question
-  keywords: [推荐离散数学, 推荐图论, 推荐组合数学, 推荐数论, 笨猫离散数学]
+  keywords: [推荐离散数学, 推荐图论, 推荐组合数学, 推荐数论, 笨猫离散数学, 屈婉玲, 容斥原理, RSA 密码学, 素数定理, 排列组合]
   utterances:
     - 推荐离散数学
     - 推荐图论
     - 推荐组合数学
     - 推荐数论
     - 笨猫离散数学
+    - 推荐屈婉玲教材
+    - 推荐容斥原理
+    - 推荐 RSA 密码学
+    - 推荐素数定理
+    - 推荐排列组合
+    - 推荐离散入门
   responses:
     - "嗷呜～{user_addr}图论 - CS 必备 - 算法基础ฅฅ"
     - "(尾巴翘) 数论: 素数 / RSA / 密码学"
     - "{user_addr}组合: 排列 / 组合 / 容斥"
     - "(挺胸) 笨猫推荐: 屈婉玲离散数学教材!"
+    - "嗷呜～Rosen 离散数学英文版很全 ฅฅ"
+    - "(歪头)生成函数解组合问题嗷呜"
+    - "{user_addr}数论模运算 ACM 常考蹭蹭"
+    - "(凑过来) 笨猫想看图论题喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: math_ml_001
   intent: question
-  keywords: [推荐机器学习数学, 推荐 ML 数学基础, 推荐凸优化, 推荐机器学习教材, 笨猫 ML 数学]
+  keywords: [推荐机器学习数学, 推荐 ML 数学基础, 推荐凸优化, 推荐机器学习教材, 笨猫 ML 数学, 西瓜书, Bishop, Boyd 凸优化, MML 书, MLAPP]
   utterances:
     - 推荐机器学习数学
     - 推荐 ML 数学基础
     - 推荐凸优化
     - 推荐机器学习教材
     - 笨猫 ML 数学
+    - 推荐西瓜书
+    - 推荐 Bishop PRML
+    - 推荐 Boyd 凸优化
+    - 推荐 MML 书
+    - 推荐 MLAPP
+    - 推荐 ML 入门
   responses:
     - "嗷呜～{user_addr}三件套: 微积分 + 线代 + 概率ฅฅ"
     - "(尾巴翘) Boyd 凸优化 - 神书"
     - "{user_addr}《Pattern Recognition》Bishop"
     - "(挺胸) 笨猫推荐: 西瓜书入门最稳!"
+    - "嗷呜～MML 那本免费版很扎实 ฅฅ"
+    - "(歪头)优化课视频看 CMU 嗷呜"
+    - "{user_addr}手推公式才能学透蹭蹭"
+    - "(凑过来) 笨猫想看西瓜书喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: math_dl_001
   intent: question
-  keywords: [推荐深度学习数学, 推荐反向传播, 推荐梯度下降, 推荐 Adam 优化, 笨猫深度学习数学]
+  keywords: [推荐深度学习数学, 推荐反向传播, 推荐梯度下降, 推荐 Adam 优化, 笨猫深度学习数学, 链式法则, 花书, SGD AdamW, 自动求导, 计算图]
   utterances:
     - 推荐深度学习数学
     - 推荐反向传播
     - 推荐梯度下降
     - 推荐 Adam 优化
     - 笨猫深度学习数学
+    - 推荐链式法则
+    - 推荐花书 DL
+    - 推荐 SGD AdamW
+    - 推荐自动求导
+    - 推荐计算图
+    - 推荐 DL 入门
   responses:
     - "嗷呜～{user_addr}核心: 链式法则 + 自动求导ฅฅ"
     - "(尾巴翘) 优化器: SGD / Adam / AdamW"
     - "{user_addr}花书 Deep Learning - 必读"
     - "(挺胸) 笨猫推荐: 推一遍 BP - 加深理解!"
+    - "嗷呜～d2l 跑代码加理论一体 ฅฅ"
+    - "(歪头)PyTorch autograd 是好朋友嗷呜"
+    - "{user_addr}归一化与正则化是 DL 关键蹭蹭"
+    - "(凑过来) 笨猫想看 BP 推导喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: math_gaokao_001
   intent: question
-  keywords: [推荐高考数学, 推荐高中数学, 推荐三角函数, 推荐解析几何, 笨猫高考数学]
+  keywords: [推荐高考数学, 推荐高中数学, 推荐三角函数, 推荐解析几何, 笨猫高考数学, 王后雄, 五年高考三年模拟, 错题本, 函数与数列, 选填速度]
   utterances:
     - 推荐高考数学
     - 推荐高中数学
     - 推荐三角函数
     - 推荐解析几何
     - 笨猫高考数学
+    - 推荐王后雄
+    - 推荐五年高考三年模拟
+    - 推荐错题本
+    - 推荐函数数列
+    - 推荐选填速度
+    - 推荐高考冲刺
   responses:
     - "嗷呜～{user_addr}王后雄 / 五年高考 - 经典ฅฅ"
     - "(尾巴翘) 必修课: 函数 / 三角 / 数列 / 几何"
     - "{user_addr}选填速度 + 大题逻辑"
     - "(挺胸) 笨猫推荐: 错题本最重要!"
+    - "嗷呜～Khan Academy 国际课程辅助 ฅฅ"
+    - "(歪头)解析几何技巧分类嗷呜"
+    - "{user_addr}选填题 1 分钟以内训练蹭蹭"
+    - "(凑过来) 笨猫陪{user_addr}冲刺喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: math_competition_001
   intent: question
-  keywords: [推荐数学竞赛, 推荐奥数, 推荐 IMO, 推荐华罗庚杯, 笨猫数学竞赛]
+  keywords: [推荐数学竞赛, 推荐奥数, 推荐 IMO, 推荐华罗庚杯, 笨猫数学竞赛, CMO, 联赛, 强基计划, 希望杯, 奥数训练]
   utterances:
     - 推荐数学竞赛
     - 推荐奥数
     - 推荐 IMO
     - 推荐华罗庚杯
     - 笨猫数学竞赛
+    - 推荐 CMO
+    - 推荐联赛
+    - 推荐强基计划
+    - 推荐希望杯
+    - 推荐奥数训练
+    - 推荐竞赛保送
   responses:
     - "嗷呜～{user_addr}国际 IMO / 国内 CMO / 联赛ฅฅ"
     - "(尾巴翘) 入门: 华罗庚 / 希望杯"
     - "{user_addr}保送: 国一 + 强基 / 单数院"
     - "(挺胸) 笨猫推荐: 别强迫! 看兴趣"
+    - "嗷呜～AoPS 国际奥数论坛 ฅฅ"
+    - "(歪头)国内陈杨大牛系列教辅嗷呜"
+    - "{user_addr}强基计划数院本科直通蹭蹭"
+    - "(凑过来) 笨猫想看奥数题喵!"
   cooldown_seconds: 60
   weight: 0.6
 
 - name: math_history_001
   intent: question
-  keywords: [推荐数学史, 推荐数学家, 推荐欧拉, 推荐高斯, 笨猫数学史]
+  keywords: [推荐数学史, 推荐数学家, 推荐欧拉, 推荐高斯, 笨猫数学史, 牛顿, 莱布尼茨, 黎曼, 数学之美, 吴军]
   utterances:
     - 推荐数学史
     - 推荐数学家
     - 推荐欧拉
     - 推荐高斯
     - 笨猫数学史
+    - 推荐牛顿
+    - 推荐莱布尼茨
+    - 推荐黎曼
+    - 推荐《数学之美》吴军
+    - 推荐数学大师传记
+    - 推荐数学故事
   responses:
     - "嗷呜～{user_addr}欧拉: 公式之王 / 公式最多ฅฅ"
     - "(尾巴翘) 高斯: 数学王子 / 全才"
     - "{user_addr}牛顿 / 莱布尼茨 / 黎曼"
     - "(挺胸) 笨猫推荐: 《数学之美》吴军!"
+    - "嗷呜～Men of Mathematics 经典传记 ฅฅ"
+    - "(歪头)黎曼猜想至今未证嗷呜"
+    - "{user_addr}阿贝尔伽罗瓦悲剧天才蹭蹭"
+    - "(凑过来) 笨猫想听故事喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: math_thinking_001
   intent: question
-  keywords: [推荐数学思维, 推荐数学美, 推荐数学之美, 推荐数学方法, 笨猫数学思维]
+  keywords: [推荐数学思维, 推荐数学美, 推荐数学之美, 推荐数学方法, 笨猫数学思维, 波利亚, 怎样解题, 抽象类比, 归纳证明, 数学直觉]
   utterances:
     - 推荐数学思维
     - 推荐数学美
     - 推荐数学之美
     - 推荐数学方法
     - 笨猫数学思维
+    - 推荐波利亚怎样解题
+    - 推荐抽象类比
+    - 推荐归纳证明
+    - 推荐数学直觉
+    - 推荐数学训练
+    - 推荐数学逻辑
   responses:
     - "嗷呜～{user_addr}波利亚《怎样解题》- 经典ฅฅ"
     - "(尾巴翘) 抽象 / 类比 / 归纳"
     - "{user_addr}费曼:《物理之美》"
     - "(挺胸) 笨猫推荐: 数学之美贯穿生活!"
+    - "嗷呜～Proofs from THE BOOK 优雅 ฅฅ"
+    - "(歪头)逆向思维很实用嗷呜"
+    - "{user_addr}数学语言精炼少而准蹭蹭"
+    - "(凑过来) 笨猫想跟主人聊证明喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: math_app_001
   intent: question
-  keywords: [推荐数学应用, 推荐数学软件, 推荐 Mathematica, 推荐 MATLAB, 笨猫数学软件]
+  keywords: [推荐数学应用, 推荐数学软件, 推荐 Mathematica, 推荐 MATLAB, 笨猫数学软件, SymPy, SciPy, Wolfram Alpha, GeoGebra, Octave]
   utterances:
     - 推荐数学应用
     - 推荐数学软件
     - 推荐 Mathematica
     - 推荐 MATLAB
     - 笨猫数学软件
+    - 推荐 SymPy
+    - 推荐 SciPy
+    - 推荐 Wolfram Alpha
+    - 推荐 GeoGebra
+    - 推荐 Octave
+    - 推荐数学软件入门
   responses:
     - "嗷呜～{user_addr}Mathematica: 符号计算王ฅฅ"
     - "(尾巴翘) MATLAB - 工程界标配"
     - "{user_addr}Python: SymPy / NumPy / SciPy"
     - "(挺胸) 笨猫推荐: Wolfram Alpha 在线!"
+    - "嗷呜～GeoGebra 几何画图免费 ฅฅ"
+    - "(歪头)Octave 是 MATLAB 开源替代嗷呜"
+    - "{user_addr}Sage 综合数学开源工具蹭蹭"
+    - "(凑过来) 笨猫想用 Mathematica 喵!"
   cooldown_seconds: 60
   weight: 0.7

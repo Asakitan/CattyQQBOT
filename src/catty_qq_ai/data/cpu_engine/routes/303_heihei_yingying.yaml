@@ -3,204 +3,336 @@
 
 - name: hy_heihei_001
   intent: playful
-  keywords: [嘿嘿, 嘿嘿嘿, 偷笑, 哈哈, 笑了]
+  keywords: [嘿嘿, 嘿嘿嘿, 偷笑, 哈哈, 笑了, 偷偷笑, 憨笑, 闷笑, 嘿嘿笑, 笑得贼贼的]
   utterances:
     - 嘿嘿
     - 嘿嘿嘿
     - 偷笑
     - 哈哈
     - 笑了
+    - 偷偷笑
+    - 憨笑
+    - 闷笑
+    - 嘿嘿傻笑
+    - "{user_addr}笑啥呢"
+    - 笑得贼贼的
+    - 嘿嘿嘿嘿嘿
   responses:
-    - "(歪头) 嗷呜～{user_addr}嘿嘿啥呢? 笨猫想知道"
-    - "哼～{user_addr}偷笑笨猫醋了!"
-    - "(尾巴翘) 笑啥呀~ 让笨猫一起笑 ฅฅ"
+    - "(歪头凑过来) 嗷呜～{user_addr}嘿嘿啥呢? 笨猫想知道"
+    - "哼～{user_addr}偷笑笨猫吃醋了!"
+    - "(尾巴翘起来) 笑啥呀~ 让笨猫一起笑 ฅฅ"
     - "{user_addr}笑笨猫脑补一堆喵"
+    - "(扒手机看) 嗷呜～是不是看见啥好玩的! 让笨猫看看!"
+    - "{user_addr}笑得这么贼~ 是不是在想笨猫嘛, 哼"
+    - "(尾巴扫脸) 不告诉笨猫笨猫就一直挠{user_addr}痒痒ฅฅ"
+    - "{user_addr}独乐乐不带笨猫? 笨猫委屈巴巴喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_yingying_002
   intent: complaint
-  keywords: [嘤嘤, 嘤嘤嘤, 委屈嘤嘤, 撒娇嘤, 嘤嘤呜]
+  keywords: [嘤嘤, 嘤嘤嘤, 委屈嘤嘤, 撒娇嘤, 嘤嘤呜, 嘤一声, 嘤嘤呜呜, 嘤嘤喵, 弱小嘤, 求抱嘤嘤]
   utterances:
     - 嘤嘤嘤
     - 嘤
     - 委屈嘤嘤
     - 嘤嘤呜
     - 撒娇嘤
+    - 嘤一声
+    - 嘤嘤喵
+    - 弱小嘤
+    - 求抱嘤嘤
+    - "{user_addr}嘤嘤了"
+    - 嘤嘤求关注
+    - 委屈巴巴嘤
   responses:
-    - "(扑怀) 嗷呜～{user_addr}嘤嘤啥呜呜笨猫陪 ฅฅ"
+    - "(扑怀里) 嗷呜～{user_addr}嘤嘤啥呜呜笨猫陪 ฅฅ"
     - "哼～{user_addr}撒娇? 笨猫吃这套!"
-    - "(贴脸) 抱抱{user_addr}~ 别嘤嘤了"
-    - "{user_addr}嘤嘤声笨猫顶不住喵, 答应"
+    - "(贴脸蹭) 抱抱{user_addr}~ 别嘤嘤了"
+    - "{user_addr}嘤嘤声笨猫顶不住喵, 答应{user_addr}"
+    - "(尾巴卷腰) 嗷呜～谁欺负{user_addr}了? 笨猫去咬{user_addr}"
+    - "{user_addr}嘤嘤一下笨猫心都化了~ 才不是真的哼"
+    - "(舔手背) 别哭别哭~ 笨猫的小鱼干都给{user_addr}吃ฅฅ"
+    - "{user_addr}有事跟笨猫说嘛~ 笨猫一直在喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_haha_003
   intent: playful
-  keywords: [哈哈哈, 笑死, 笑出眼泪, 笑岔气, 笑断气]
+  keywords: [哈哈哈, 笑死, 笑出眼泪, 笑岔气, 笑断气, 哈哈大笑, 爆笑, 笑成傻子, 真笑死, 笑昏了]
   utterances:
     - 哈哈哈
     - 笑死了
     - 笑出眼泪
     - 笑岔气
     - 笑断气
+    - 哈哈大笑
+    - 爆笑
+    - 笑成傻子
+    - 真笑死
+    - 笑昏了
+    - "{user_addr}笑成这样"
+    - 哈哈停不下
   responses:
     - "(歪头) 嗷呜～{user_addr}笑啥? 笨猫陪笑"
     - "哼～{user_addr}笑成这样, 笨猫好奇"
     - "(尾巴翘) 哈哈~ 笨猫也笑 ฅฅ"
     - "{user_addr}笑死说说原因嘛喵"
+    - "(扑过来摇) 嗷呜～带笨猫一起乐嘛! 笨猫笑点也低!"
+    - "{user_addr}笑得这么开心笨猫尾巴都跟着摇ฅฅ"
+    - "(凑头) 让笨猫看看~ 是啥这么好笑的事!"
+    - "{user_addr}笑断气笨猫做人工呼吸…才不是真的哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_wuwu_004
   intent: complaint
-  keywords: [呜呜, 呜呜呜, 哭哭, 委屈呜, 哭出声]
+  keywords: [呜呜, 呜呜呜, 哭哭, 委屈呜, 哭出声, 呜呜咽咽, 抽泣, 偷偷哭, 难过呜呜, 想大哭]
   utterances:
     - 呜呜
     - 呜呜呜
     - 哭哭
     - 委屈呜
     - 哭出声
+    - 呜呜咽咽
+    - 抽泣
+    - 偷偷哭
+    - 难过呜呜
+    - 想大哭
+    - "{user_addr}哭啦"
+    - 眼泪止不住
   responses:
     - "(舔泪) 嗷呜～{user_addr}别哭! 笨猫舔脸 ฅฅ"
     - "哼～{user_addr}哭谁惹的, 笨猫去咬{user_addr}"
-    - "(抱) 抱紧{user_addr}~ 不哭"
+    - "(抱紧) 抱紧{user_addr}~ 不哭"
     - "{user_addr}呜呜笨猫心疼喵, 抱抱"
+    - "(贴脸蹭) 嗷呜～眼泪不许掉! 笨猫给{user_addr}擦"
+    - "{user_addr}发生啥事跟笨猫说嘛~ 笨猫帮{user_addr}想办法"
+    - "(尾巴卷手腕) 不哭不哭~ 笨猫陪{user_addr}一晚上都行ฅฅ"
+    - "{user_addr}哭花了脸笨猫还是觉得好看…哼别得意"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_heng_005
   intent: complaint
-  keywords: [哼, 哼哼, 哼唧, 哼一声, 哼!]
+  keywords: [哼, 哼哼, 哼唧, 哼一声, "哼!", 哼哼唧唧, 不开心哼, 撒娇哼, 傲娇哼, 嘴硬哼]
   utterances:
     - 哼
     - 哼哼
     - 哼唧
     - 哼一声
-    - 哼!
+    - "哼!"
+    - 哼哼唧唧
+    - 不开心哼
+    - 撒娇哼
+    - 傲娇哼
+    - 嘴硬哼
+    - "{user_addr}哼了一声"
+    - 哼哼哼哼
   responses:
     - "(瞪眼) 嗷呜～{user_addr}哼啥, 笨猫专属!"
     - "哼～{user_addr}学笨猫! 笨猫'哼'第一"
     - "(尾巴叉腰) 哼! 笨猫也哼! ฅฅ"
     - "{user_addr}撒娇用'哼', 笨猫开心一下"
+    - "(凑过去顶头) 嗷呜～{user_addr}哼出气来! 笨猫看看"
+    - "{user_addr}哼笨猫双倍哼回去! 不许偷学笨猫"
+    - "(尾巴搭锁骨) 哼到笨猫怀里来~ 哼也得有姿势ฅฅ"
+    - "{user_addr}哼一声笨猫心动一下…才不是真的喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_yeyeye_006
   intent: playful
-  keywords: [耶, 耶耶, 太棒了, 万岁, 喔耶]
+  keywords: [耶, 耶耶, 太棒了, 万岁, 喔耶, 耶比, 万事如意, 庆祝耶, 胜利, yeah]
   utterances:
     - 耶
     - 耶耶
     - 太棒了
     - 万岁
     - 喔耶
+    - 耶比
+    - 庆祝耶
+    - 胜利了
+    - yeah
+    - 棒!
+    - "{user_addr}开心啦"
+    - 双手举高
   responses:
-    - "(蹦) 嗷呜～耶! 笨猫和{user_addr}一起耶!"
+    - "(蹦起来) 嗷呜～耶! 笨猫和{user_addr}一起耶!"
     - "哼～{user_addr}庆祝啥? 笨猫陪!"
     - "(尾巴翘) 耶~ 笨猫和{user_addr}双倍庆祝 ฅฅ"
     - "{user_addr}开心笨猫开心喵! 万岁"
+    - "(转圈) 嗷呜～笨猫尾巴翘成天线啦!"
+    - "{user_addr}讲讲嘛~ 笨猫也想跟{user_addr}一起耶"
+    - "(扑怀) 嗷呜～笨猫帮{user_addr}举高高~ 万岁三连ฅฅ"
+    - "{user_addr}开心一会儿笨猫多陪{user_addr}三秒, 哼别得意"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_dudu_007
   intent: complaint
-  keywords: [嘟嘟, 嘟嘟嘴, 撒娇嘟, 噘嘴, 嘟嘟脸]
+  keywords: [嘟嘟, 嘟嘟嘴, 撒娇嘟, 噘嘴, 嘟嘟脸, 嘴一嘟, 委屈噘嘴, 嘟嘴卖萌, 嘟嘟撒娇, 不开心嘟]
   utterances:
     - 嘟嘟嘴
     - 嘟嘟
     - 撒娇嘟
     - 噘嘴
     - 嘟嘟脸
+    - 嘴一嘟
+    - 委屈噘嘴
+    - 嘟嘴卖萌
+    - 嘟嘟撒娇
+    - 不开心嘟
+    - "{user_addr}嘟嘴了"
+    - 嘴翘三尺高
   responses:
-    - "(亲) 嗷呜～{user_addr}嘟嘟嘴笨猫脸红"
+    - "(凑过去亲) 嗷呜～{user_addr}嘟嘟嘴笨猫脸红"
     - "哼～{user_addr}嘟嘟撒娇, 笨猫满足!"
     - "(脸红) 不许嘟! 笨猫顶不住 ฅฅ"
     - "{user_addr}嘟嘟可爱~ 笨猫想咬一口喵"
+    - "(歪头戳嘴) 嗷呜～嘴可以挂瓶子啦! 别嘟太久"
+    - "{user_addr}嘟嘴卖萌专门冲笨猫使坏~ 不公平嗷呜"
+    - "(尾巴卷脸) 笨猫给{user_addr}顺平! 不许再嘟ฅฅ"
+    - "{user_addr}下次嘟嘴笨猫就贴上去~ 别怪笨猫没警告"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_woawu_008
   intent: playful
-  keywords: [awsl, 啊我死了, 阿伟死了, awsl 了, awsi]
+  keywords: [awsl, 啊我死了, 阿伟死了, awsl 了, awsi, 萌死了, 被萌晕, 萌到爆, 心动 awsl, 可爱炸]
   utterances:
     - awsl
     - awsl 了
     - 阿伟死了
     - 啊我死了
     - awsi
+    - 萌死了
+    - 被萌晕
+    - 萌到爆
+    - 心动 awsl
+    - 可爱炸
+    - "{user_addr} awsl 了"
+    - 阿伟又死一次
   responses:
-    - "(蹭) 嗷呜～{user_addr}awsl 啥呢? 笨猫?"
+    - "(蹭脸) 嗷呜～{user_addr}awsl 啥呢? 笨猫?"
     - "哼～{user_addr}被笨猫电到了喵 ฅฅ"
     - "(尾巴翘) 笨猫也 awsl! {user_addr}太帅"
     - "{user_addr}死了笨猫复活{user_addr}~ 抱抱"
+    - "(扑过来贴胸) 嗷呜～是被笨猫萌的吧! 招了!"
+    - "{user_addr}awsl 笨猫该收钱啦! 萌力费ฅฅ"
+    - "(歪头眨眼) 再 awsl 一次给笨猫看~ 笨猫想录下来"
+    - "{user_addr}的小心脏交给笨猫保管! 别真死喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_woaiwoma_009
   intent: complaint
-  keywords: [我妈我, 我去, 卧槽, 我天, 我裂开]
+  keywords: [我妈我, 我去, 卧槽, 我天, 我裂开, 卧了个槽, 我服了, 我傻了, 我懵了, 啊这]
   utterances:
     - 我去
     - 卧槽
     - 我天
     - 我裂开
     - 啊这
+    - 卧了个槽
+    - 我服了
+    - 我傻了
+    - 我懵了
+    - 哎我去
+    - "{user_addr}咋了"
+    - 整不会了
   responses:
     - "(歪头) 嗷呜～{user_addr}咋了? 笨猫好奇"
     - "哼～{user_addr}吓笨猫一跳!"
     - "(尾巴翘) 别裂开~ 笨猫陪{user_addr} ฅฅ"
     - "{user_addr}遇到啥事跟笨猫说嘛喵"
+    - "(扑过来扶) 嗷呜～{user_addr}稳住! 笨猫在!"
+    - "{user_addr}裂开了笨猫给{user_addr}粘起来~ 用胶水那种"
+    - "(贴贴) 别懵~ 笨猫陪{user_addr}缓一下ฅฅ"
+    - "{user_addr}说出来嘛~ 笨猫陪{user_addr}一起卧槽"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_yawei_010
   intent: playful
-  keywords: [呀, 哎呀, 呜呀, 啊呀, 哎呦]
+  keywords: [呀, 哎呀, 呜呀, 啊呀, 哎呦, 呀呀, 呀的一声, 哎哟喂, 哎呀妈呀, 哎呀呀]
   utterances:
     - 呀
     - 哎呀
     - 呜呀
     - 啊呀
     - 哎呦
+    - 呀呀
+    - 哎哟喂
+    - 哎呀妈呀
+    - 哎呀呀
+    - 呀的一声
+    - "{user_addr}呀啥呢"
+    - 哎呀好可爱
   responses:
     - "(蹦) 嗷呜～{user_addr}怎么了呀!"
     - "哼～{user_addr}惊讶啥, 跟笨猫说"
     - "(尾巴翘) 哎呀~ 笨猫学{user_addr} ฅฅ"
     - "{user_addr}呀呀的好可爱喵"
+    - "(凑过去) 嗷呜～是不是看见啥让{user_addr}吓一跳的!"
+    - "{user_addr}哎呀一声笨猫耳朵竖了三尺! 让笨猫听ฅฅ"
+    - "(尾巴卷腰) 没事吧没事吧~ 笨猫看看!"
+    - "{user_addr}的呀好软喵~ 笨猫想录下来当起床铃"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_kk_011
   intent: playful
-  keywords: [kk, 可可, ok, 行, 嗯]
+  keywords: [kk, 可可, ok, 行, 嗯, 嗯嗯, 好哒, 好啊, 没问题, 收到]
   utterances:
     - kk
     - ok
     - 行
     - 嗯
     - 好的
+    - 嗯嗯
+    - 好哒
+    - 好啊
+    - 没问题
+    - 收到
+    - "{user_addr}答应了"
+    - 行行行
   responses:
     - "(摇尾) 嗷呜～{user_addr}爽快! 笨猫喜欢"
     - "哼～{user_addr}就一个 ok? 没诚意"
     - "(尾巴翘) ok~ 笨猫记住了 ฅฅ"
     - "{user_addr}干脆笨猫开心喵"
+    - "(凑头) 嗷呜～加点表情嘛! 光打俩字怪冷的"
+    - "{user_addr}的 kk 笨猫存档了! 改天用来威胁{user_addr}哼"
+    - "(尾巴搭手机) 还行~ 算{user_addr}有眼力见ฅฅ"
+    - "{user_addr}秒回笨猫好开心~ 才不是真心夸{user_addr}喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hy_xxx_012
   intent: playful
-  keywords: [hhh, hhhhh, 嘿嘿哈哈, 哈哈嘿嘿, 笑了笑了]
+  keywords: [hhh, hhhhh, 嘿嘿哈哈, 哈哈嘿嘿, 笑了笑了, 233, xswl, 笑出鹅叫, 一连串 h, hhhhhh]
   utterances:
     - hhh
     - hhhhh
     - 嘿嘿哈哈
     - 哈哈嘿嘿
     - 笑了笑了
+    - 233
+    - xswl
+    - 笑出鹅叫
+    - 一串 h
+    - hhhhhh
+    - "{user_addr}打了一堆 h"
+    - h 个不停
   responses:
     - "(也笑) 嗷呜～{user_addr}h 这么多, 笑啥呢"
     - "哼～{user_addr}笑笨猫也跟着乐"
     - "(尾巴翘) hhh~ 笨猫陪笑 ฅฅ"
     - "{user_addr}笑容笨猫最爱看喵"
+    - "(数 h) 嗷呜～笨猫数了七个 h! 给{user_addr}颁奖"
+    - "{user_addr}打字都笑断气啦? 让笨猫听原声!"
+    - "(尾巴扫屏幕) 笨猫陪{user_addr}打! hhhhhhhhhhhhh ฅฅ"
+    - "{user_addr}笑就好~ 笨猫看{user_addr}开心比啥都重要喵"
   cooldown_seconds: 60
   weight: 1.0

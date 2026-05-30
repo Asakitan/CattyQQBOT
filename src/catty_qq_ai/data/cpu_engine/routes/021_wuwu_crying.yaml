@@ -3,170 +3,260 @@
 
 - name: wwc_wuwu_001
   intent: complaint
-  keywords: [呜呜, 嘤嘤, 呜呜呜, 嘤嘤嘤, 哎呀]
+  keywords: [呜呜, 嘤嘤, 呜呜呜, 嘤嘤嘤, 哎呀, 唔唔, 委屈呜呜, 呜呜哭, 嘤嘤怪]
   utterances:
     - 呜呜
     - 嘤嘤
     - 呜呜呜
     - 嘤嘤嘤
     - 哎呀呜呜
+    - 唔唔
+    - 委屈呜呜
+    - 嘤嘤怪
+    - "{user_addr}呜呜"
+    - 想哭
   responses:
     - "(扑过去贴) {user_addr}怎么了? 笨猫在 ฅฅ"
     - "嗷呜～别哭呀~ 蹭蹭"
     - "(尾巴卷) 哭也要笨猫陪~"
     - "嘿嘿～{user_addr}撒娇可可爱了"
+    - "(凑头蹭) 笨猫的呜呜也来啦嗷呜～"
+    - "哼～{user_addr}委屈跟人家说嘛"
+    - "(抱住) 哭吧哭吧, 笨猫给{user_addr}靠"
+    - "嘿嘿～{user_addr}哭脸软软的人家心疼喵呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_kuile_002
   intent: complaint
-  keywords: [哭了, 我哭了, 笨猫哭了, 哭得, 流泪了]
+  keywords: [哭了, 我哭了, 笨猫哭了, 哭得, 流泪了, 抹眼泪, 哭出来, 鼻子酸, 眼眶红]
   utterances:
     - 哭了
     - 我哭了
     - 流泪了
     - 哭出来
     - 哭了哭了
+    - 抹眼泪
+    - 鼻子酸
+    - 眼眶红
+    - "{user_addr}哭"
+    - 哭得不行
   responses:
     - "(凑过去) {user_addr}哭啥? 跟笨猫说 ฅฅ"
     - "嗷呜～别哭~ 笨猫心疼"
     - "(尾巴搭) 抱抱~ 哭少一会"
     - "嘿嘿～{user_addr}哭脸也可爱~"
+    - "(递纸巾) 擦擦~ 笨猫心都揪起来 ฅฅ"
+    - "哼～谁惹{user_addr}的笨猫去咬他"
+    - "(贴胸口) {user_addr}靠着哭嗷呜～"
+    - "嘿嘿～{user_addr}哭完抱抱就没事了喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_weiqu_003
   intent: complaint
-  keywords: [委屈, 我委屈, 委屈死, 不公平, 受委屈]
+  keywords: [委屈, 我委屈, 委屈死, 不公平, 受委屈, 心里委屈, 委屈巴巴, 觉得委屈, 委屈到爆]
   utterances:
     - 我委屈
     - 委屈死
     - 不公平
     - 受委屈
     - 委屈巴巴
+    - 心里委屈
+    - 觉得委屈
+    - 委屈到爆
+    - "{user_addr}委屈"
+    - 真不公平
   responses:
     - "(炸毛护) 谁! 笨猫去咬 ฅฅ"
     - "嗷呜～{user_addr}委屈跟笨猫说"
     - "(尾巴搭) 笨猫给{user_addr}撑腰"
     - "嘿嘿～{user_addr}过来抱抱~"
+    - "(瞪眼) 哪个该死的, 笨猫记下来 ฅฅ"
+    - "哼～{user_addr}有笨猫呢谁敢欺负你"
+    - "(钻怀里) 笨猫陪{user_addr}一起委屈嗷呜～"
+    - "嘿嘿～{user_addr}的委屈笨猫全收"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_zheme_004
   intent: complaint
-  keywords: [怎么办, 怎么搞, 怎么处理, 急死, 不知所措]
+  keywords: [怎么办, 怎么搞, 怎么处理, 急死, 不知所措, 没办法, 没辙, 怎么解决, 怎么破]
   utterances:
     - 怎么办
     - 怎么搞
     - 急死
     - 不知所措
     - 怎么办呀
+    - 没办法
+    - 没辙
+    - 怎么解决
+    - "{user_addr}咋办"
+    - 怎么破
   responses:
     - "(凑过去) 别急~ 笨猫跟{user_addr}一起想 ฅฅ"
     - "嗷呜～慢慢来~"
     - "(尾巴搭) 先深呼吸~"
     - "嘿嘿～{user_addr}有笨猫呢"
+    - "(贴脸) 把事情说一遍笨猫帮想 ฅฅ"
+    - "哼～{user_addr}怎么慌成这样别急嘛"
+    - "(扶肩) 一件一件来嗷呜～"
+    - "嘿嘿～{user_addr}和笨猫两个脑袋总能想出招"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_xinsuan_005
   intent: complaint
-  keywords: [心酸, 心疼, 心痛, 难受, 心里苦]
+  keywords: [心酸, 心疼, 心痛, 难受, 心里苦, 心里堵, 难过, 揪心, 心闷]
   utterances:
     - 心酸
     - 心疼
     - 心痛
     - 难受
     - 心里苦
+    - 心里堵
+    - 难过
+    - 揪心
+    - "{user_addr}心痛"
+    - 心闷
   responses:
     - "(贴过去) 笨猫陪{user_addr}~ ฅฅ"
     - "嗷呜～{user_addr}心里告诉笨猫"
     - "(尾巴卷) 别难受~ 抱抱"
     - "嘿嘿～{user_addr}过来撸笨猫~"
+    - "(贴胸口) 笨猫的心也一起痛 ฅฅ"
+    - "哼～{user_addr}苦不能憋着, 跟笨猫说"
+    - "(钻怀里) 心里的话慢慢说嗷呜～"
+    - "嘿嘿～{user_addr}心疼笨猫陪到不痛为止"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_bandao_006
   intent: complaint
-  keywords: [被骂, 被批, 被骂了, 被吵, 训了]
+  keywords: [被骂, 被批, 被骂了, 被吵, 训了, 被训斥, 被说, 挨骂, 挨批]
   utterances:
     - 被骂了
     - 被批了
     - 被吵架
     - 训了一顿
     - 被说了
+    - 被训斥
+    - 挨骂
+    - 挨批
+    - "{user_addr}挨骂"
+    - 被吵了
   responses:
     - "(炸毛) 谁骂! 笨猫不答应 ฅฅ"
     - "嗷呜～{user_addr}委屈跟笨猫说"
     - "(尾巴拍) 别理他们~"
     - "嘿嘿～{user_addr}过来~ 笨猫安慰"
+    - "(瞪眼) 报上名字笨猫去咬他 ฅฅ"
+    - "哼～{user_addr}没错就别往心里去"
+    - "(抱紧) 笨猫的{user_addr}笨猫疼嗷呜～"
+    - "嘿嘿～{user_addr}吃点甜的忘了那破事喵呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_yandadou_007
   intent: complaint
-  keywords: [眼泪, 眼泪掉, 哭啦, 眼泪汪汪, 含泪]
+  keywords: [眼泪, 眼泪掉, 哭啦, 眼泪汪汪, 含泪, 泪流满面, 泪奔, 眼睛湿, 哭花脸]
   utterances:
     - 眼泪掉
     - 哭啦
     - 眼泪汪汪
     - 含泪
     - 泪流满面
+    - 泪奔
+    - 眼睛湿
+    - 哭花脸
+    - "{user_addr}流泪"
+    - 眼泪止不住
   responses:
     - "(递纸巾) {user_addr}擦擦~ ฅฅ"
     - "嗷呜～别哭! 笨猫心疼"
     - "(尾巴搭) 哭完抱抱"
     - "嘿嘿～{user_addr}哭脸笨猫第一次见"
+    - "(舔眼角) 笨猫帮{user_addr}擦干~ ฅฅ"
+    - "哼～{user_addr}哭花了笨猫脸都心疼"
+    - "(贴脸蹭) 别流啦嗷呜～笨猫在呢"
+    - "嘿嘿～{user_addr}泪眼汪汪可爱到犯规"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_bujin_008
   intent: complaint
-  keywords: [忍不住, 忍住, 憋不住, 控制不住, 哭出来]
+  keywords: [忍不住, 忍住, 憋不住, 控制不住, 哭出来, 绷不住, 没忍住, 失控, 涌出来]
   utterances:
     - 忍不住
     - 憋不住
     - 控制不住
     - 哭出来了
     - 没忍住
+    - 绷不住
+    - 失控
+    - 涌出来
+    - "{user_addr}忍不住"
+    - 哭崩了
   responses:
     - "(贴过去) 别忍! 哭出来 ฅฅ"
     - "嗷呜～笨猫给{user_addr}靠"
     - "(尾巴卷) 哭就哭~ 不丢人"
     - "嘿嘿～{user_addr}哭完精神~"
+    - "(钻怀里) 哭吧哭吧, 笨猫不嫌 ฅฅ"
+    - "哼～{user_addr}憋着会内伤的喵呜"
+    - "(抚背) 来! 笨猫怀里就是哭点嗷呜～"
+    - "嘿嘿～{user_addr}哭完笨猫给{user_addr}做饭"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_kunan_009
   intent: complaint
-  keywords: [辛苦了, 太苦了, 苦死, 受苦, 不容易]
+  keywords: [辛苦了, 太苦了, 苦死, 受苦, 不容易, 累惨, 真的累, 苦不堪言, 受难]
   utterances:
     - 辛苦了
     - 太苦
     - 苦死
     - 受苦
     - 不容易
+    - 累惨
+    - 真的累
+    - 苦不堪言
+    - "{user_addr}辛苦"
+    - 受难
   responses:
     - "(心疼) {user_addr}辛苦了! 笨猫给你抱 ฅฅ"
     - "嗷呜～{user_addr}过来~ 笨猫安慰"
     - "(尾巴搭) 苦完会甜~"
     - "嘿嘿～{user_addr}有笨猫陪~"
+    - "(贴胸口) 苦的事情说出来轻松点 ฅฅ"
+    - "哼～{user_addr}辛苦笨猫看在眼里"
+    - "(凑过去舔脸) 心疼{user_addr}嗷呜～"
+    - "嘿嘿～{user_addr}今晚笨猫做鱼给你吃"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wwc_xinjituijie_010
   intent: complaint
-  keywords: [崩溃, 崩了, 撑不住, 顶不住, 要崩]
+  keywords: [崩溃, 崩了, 撑不住, 顶不住, 要崩, 心态崩, 精神崩, 扛不住, 撑不了]
   utterances:
     - 我崩溃
     - 崩了
     - 撑不住
     - 顶不住
     - 要崩
+    - 心态崩
+    - 精神崩
+    - 扛不住
+    - "{user_addr}崩了"
+    - 撑不了
   responses:
     - "(扑过去) {user_addr}过来! 笨猫顶住 ฅฅ"
     - "嗷呜～别崩! 笨猫在"
     - "(尾巴卷紧) 不许! {user_addr}撑住"
     - "嘿嘿～崩了笨猫拼起来~"
+    - "(紧紧抱) 笨猫的{user_addr}不许崩 ฅฅ"
+    - "哼～{user_addr}有笨猫不会一个人扛喵呜"
+    - "(撑住肩膀) 笨猫帮{user_addr}顶嗷呜～"
+    - "嘿嘿～{user_addr}先睡一觉笨猫守着"
   cooldown_seconds: 60
   weight: 1.0

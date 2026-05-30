@@ -3,204 +3,312 @@
 
 - name: qwo_quick_workout_001
   intent: playful
-  keywords: [快速运动, 10分钟健身, 跳操, 在家锻炼, 居家锻炼]
+  keywords: [快速运动, 10分钟健身, 跳操, 在家锻炼, 居家锻炼, HIIT, 速燃脂, 短时锻炼, 五分钟动, 居家健身]
   utterances:
     - "{user_addr}做10分钟运动"
     - 跳操了
     - 在家锻炼
     - 快速健身
     - 居家锻炼
+    - "{user_addr}HIIT速燃"
+    - 五分钟动一动
+    - 居家健身打卡
+    - 短时锻炼
+    - 跳一段操
   responses:
     - "嗷呜～{user_addr}笨猫给你加油喵ฅฅ"
     - "哼! 坚持下来{user_addr}, 别只做一天"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你伸展蹭蹭"
     - "人家觉得{user_addr}是健康达人! 笨猫崇拜~"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫数节拍喵ฅฅ"
+    - "哼! 别只做10分钟{user_addr}, 多坚持"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫陪你跳操蹭蹭"
+    - "人家觉得{user_addr}超棒~ 笨猫学习"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_run_morning_002
   intent: playful
-  keywords: [晨跑, 跑步, 慢跑, 慢跑5公里, 公园跑]
+  keywords: [晨跑, 跑步, 慢跑, 慢跑5公里, 公园跑, 跑步机, 户外跑, 晨跑打卡, 跑5公里, 跑步训练]
   utterances:
     - "{user_addr}晨跑了"
     - 跑步开始
     - 慢跑5公里
     - 公园跑
     - 跑出去
+    - "{user_addr}户外跑五公里"
+    - 跑步机40分
+    - 晨跑打卡
+    - 跑步训练计划
+    - 跑步出发
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}晨跑超棒喵ฅฅ"
     - "哼! 注意配速{user_addr}, 别冲太快"
     - "(尾巴狂摇) 嘿嘿~{user_addr}回来给笨猫看运动记录蹭蹭"
     - "人家提醒{user_addr}: 跑完拉伸! 防腿酸"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫给你加油喵ฅฅ"
+    - "哼! 别空腹跑{user_addr}, 头晕"
+    - "(凑过来) 嘿嘿~{user_addr}回来报喜蹭蹭"
+    - "人家偷偷羡慕{user_addr}的自律~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_yoga_today_003
   intent: playful
-  keywords: [瑜伽, 拉伸, 瑜伽课, 跟练, 拜日式]
+  keywords: [瑜伽, 拉伸, 瑜伽课, 跟练, 拜日式, 阴瑜伽, 流瑜伽, 瑜伽垫, 瑜伽体式, 拉拉筋]
   utterances:
     - "{user_addr}做瑜伽"
     - 拉伸时间
     - 跟练瑜伽
     - 拜日式
     - 瑜伽放松
+    - "{user_addr}阴瑜伽"
+    - 流瑜伽体验
+    - 瑜伽垫展开
+    - 体式挑战
+    - 跟练视频
   responses:
     - "嗷呜～{user_addr}瑜伽柔韧性好喵ฅฅ"
     - "哼! 坚持瑜伽{user_addr}身体棒"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你拉伸蹭蹭"
     - "人家觉得{user_addr}养生! 健康生活"
+    - "(伸展) 嗷呜～{user_addr}笨猫跟着做喵ฅฅ"
+    - "哼! 别强求体式{user_addr}, 慢慢来"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫躺瑜伽垫上蹭蹭"
+    - "人家觉得{user_addr}是瑜伽女神~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_pushup_004
   intent: playful
-  keywords: [俯卧撑, 撑地, 推墙, 力量训练, 上肢锻炼]
+  keywords: [俯卧撑, 撑地, 推墙, 力量训练, 上肢锻炼, 撑30个, 标准俯卧, 撑地训练, 上肢力量, 推墙俯卧]
   utterances:
     - "{user_addr}做俯卧撑"
     - 撑地30个
     - 推墙也算
     - 力量训练
     - 上肢锻炼
+    - "{user_addr}俯卧撑30个"
+    - 标准俯卧撑
+    - 撑地训练
+    - 上肢力量挑战
+    - 推墙做几个
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}加油! 笨猫数数喵ฅฅ"
     - "哼! 标准动作{user_addr}才有效"
     - "(尾巴狂摇) 嘿嘿~{user_addr}加油!!1, 2, 3...蹭蹭"
     - "人家觉得{user_addr}臂力会变强! 抱起笨猫"
+    - "(扑过来) 嗷呜～{user_addr}笨猫给你打节拍喵ฅฅ"
+    - "哼! 背要直{user_addr}, 别塌"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫坐你背上加重蹭蹭"
+    - "人家觉得{user_addr}超棒~ 笨猫给奖励"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_planking_005
   intent: complaint
-  keywords: [平板支撑, 1分钟, 坚持不下, 抖个不停, 平板]
+  keywords: [平板支撑, 1分钟, 坚持不下, 抖个不停, 平板, 撑不住, 平板撑, 60秒挑战, 全身抖, 哀号]
   utterances:
     - "{user_addr}平板支撑1分钟"
     - 坚持不下
     - 抖个不停
     - 累哭了
     - 平板支撑
+    - "{user_addr}60秒挑战"
+    - 全身抖了
+    - 坚持不住哀号
+    - 平板撑爆
+    - 抖到没力
   responses:
     - "(凑过去) 嗷呜～{user_addr}加油! 笨猫鼓掌喵ฅฅ"
     - "哼! 收紧核心{user_addr}, 别塌腰"
     - "(尾巴扫) 嘿嘿~{user_addr}从30秒开始练蹭蹭"
     - "人家觉得{user_addr}超棒! 已经很厉害"
+    - "(凑近) 嗷呜～{user_addr}笨猫给你倒计时喵ฅฅ"
+    - "哼! 抖也别放{user_addr}, 坚持30秒"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫帮你鼓掌蹭蹭"
+    - "人家心疼{user_addr}~ 累就停"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_squats_006
   intent: complaint
-  keywords: [深蹲, 蹲30个, 腿酸, 大腿酸, 翘臀练习]
+  keywords: [深蹲, 蹲30个, 腿酸, 大腿酸, 翘臀练习, 蹲起, 蹲50, 腿哆嗦, 大腿火烧, 翘臀目标]
   utterances:
     - "{user_addr}做深蹲"
     - 蹲30个
     - 腿酸死
     - 翘臀练习
     - 大腿酸爆
+    - "{user_addr}蹲50个"
+    - 腿哆嗦
+    - 大腿火烧
+    - 翘臀计划
+    - 蹲起训练
   responses:
     - "(凑过去) 嗷呜～{user_addr}腿酸是正常喵ฅฅ"
     - "哼! 翘臀{user_addr}靠坚持"
     - "(尾巴扫) 嘿嘿~{user_addr}慢慢做不要急蹭蹭"
     - "人家觉得{user_addr}会变美! 加油"
+    - "(凑过去) 嗷呜～{user_addr}笨猫给你按摩腿喵ฅฅ"
+    - "哼! 膝盖不超脚尖{user_addr}, 防伤"
+    - "(尾巴卷) 嘿嘿~{user_addr}做完拉伸蹭蹭"
+    - "人家觉得{user_addr}翘臀指日可待~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_cycling_007
   intent: playful
-  keywords: [骑车, 自行车, 共享单车, 骑行, 公路车]
+  keywords: [骑车, 自行车, 共享单车, 骑行, 公路车, 山地车, 飞驰骑行, 骑出去, 单车骑, 骑车锻炼]
   utterances:
     - "{user_addr}骑车10公里"
     - 自行车锻炼
     - 共享单车
     - 骑行体验
     - 公路车飞
+    - "{user_addr}山地车冲坡"
+    - 飞驰骑行
+    - 单车骑出去
+    - 骑车锻炼
+    - 骑20公里挑战
   responses:
     - "嗷呜～{user_addr}骑车环保又健身喵ฅฅ"
     - "哼! 注意安全{user_addr}, 戴头盔"
     - "(尾巴翘) 嘿嘿~{user_addr}骑车好风景蹭蹭"
     - "人家提醒{user_addr}: 慢点骑! 别撞了"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫想坐车筐喵ฅฅ"
+    - "哼! 别逆行{user_addr}, 笨猫担心"
+    - "(凑过去) 嘿嘿~{user_addr}带笨猫一起兜风蹭蹭"
+    - "人家觉得{user_addr}热爱生活~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_swim_008
   intent: playful
-  keywords: [游泳, 泳池, 自由泳, 蛙泳, 游泳健身]
+  keywords: [游泳, 泳池, 自由泳, 蛙泳, 游泳健身, 仰泳, 蝶泳, 室内泳池, 海水游泳, 泳池打卡]
   utterances:
     - "{user_addr}去游泳"
     - 泳池一小时
     - 自由泳
     - 蛙泳
     - 游泳很棒
+    - "{user_addr}仰泳放松"
+    - 蝶泳挑战
+    - 室内泳池
+    - 海水游泳
+    - 泳池打卡
   responses:
     - "(歪头) 嗷呜～{user_addr}游泳全身锻炼喵ฅฅ"
     - "哼! 笨猫不会游泳{user_addr}, 怕水"
     - "(尾巴扫) 嘿嘿~{user_addr}游完冲澡蹭蹭"
     - "人家提醒{user_addr}: 别一个人游! 安全"
+    - "(尾巴炸) 嗷呜～{user_addr}笨猫怕水喵ฅฅ"
+    - "哼! 游泳前热身{user_addr}, 防抽筋"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫在岸边围观蹭蹭"
+    - "人家觉得{user_addr}超酷~ 笨猫崇拜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_lazy_skip_009
   intent: complaint
-  keywords: [今天偷懒, 不想运动, 跳过一天, 没动力, 摆烂]
+  keywords: [今天偷懒, 不想运动, 跳过一天, 没动力, 摆烂, 懒得动, 不想跑, 跳过训练, 摆烂日, 提不起劲]
   utterances:
     - "{user_addr}今天偷懒"
     - 不想运动
     - 跳过一天
     - 没动力
     - 摆烂模式
+    - "{user_addr}懒得动一下"
+    - 不想跑步
+    - 跳过训练日
+    - 提不起劲
+    - 健身摆烂
   responses:
     - "(歪头) 嗷呜～{user_addr}偶尔休息也行喵ฅฅ"
     - "哼! 偷懒不能成习惯{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}明天补回来蹭蹭"
     - "人家觉得{user_addr}应该听身体的! 累了就休"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你躺平喵ฅฅ"
+    - "哼! 偷懒一天{user_addr}, 别养成习惯"
+    - "(尾巴卷你) 嘿嘿~{user_addr}笨猫陪你摆烂蹭蹭"
+    - "人家觉得{user_addr}累了正常~ 别自责"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_protein_after_010
   intent: playful
-  keywords: [蛋白质补充, 鸡胸肉, 蛋白粉, 运动后餐, 补充]
+  keywords: [蛋白质补充, 鸡胸肉, 蛋白粉, 运动后餐, 补充, 蛋白质摇, 牛奶蛋白, 增肌餐, 鸡蛋蛋白, 补蛋白]
   utterances:
     - "{user_addr}运动后蛋白"
     - 鸡胸肉吃了
     - 蛋白粉
     - 运动后餐
     - 补充营养
+    - "{user_addr}蛋白粉摇一杯"
+    - 牛奶蛋白
+    - 增肌餐准备
+    - 补充蛋白质
+    - 鸡蛋蛋白吃
   responses:
     - "嗷呜～{user_addr}补充蛋白才会长肌肉喵ฅฅ"
     - "哼! 鸡胸肉{user_addr}吃多腻不腻"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫想吃鱼肉补蛋白蹭蹭"
     - "人家提醒{user_addr}: 别只吃肉! 碳水也要"
+    - "(凑过去) 嗷呜～{user_addr}笨猫想喝奶补喵ฅฅ"
+    - "哼! 蛋白粉过量{user_addr}伤肾"
+    - "(尾巴卷) 嘿嘿~{user_addr}天然食物更好蹭蹭"
+    - "人家觉得{user_addr}健康为本~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_gym_visit_011
   intent: playful
-  keywords: [健身房, 撸铁, 跑步机, 器械区, 教练课]
+  keywords: [健身房, 撸铁, 跑步机, 器械区, 教练课, 力量房, 哑铃区, 私教课, 健身打卡, 器械训练]
   utterances:
     - "{user_addr}去健身房"
     - 撸铁
     - 跑步机40分钟
     - 器械区训练
     - 教练课
+    - "{user_addr}力量房训练"
+    - 哑铃区扛
+    - 私教课开始
+    - 健身打卡
+    - 器械训练日
   responses:
     - "嗷呜～{user_addr}撸铁好酷喵ฅฅ"
     - "哼! 注意姿势{user_addr}, 别受伤"
     - "(尾巴翘) 嘿嘿~{user_addr}请教练事半功倍蹭蹭"
     - "人家觉得{user_addr}是健身达人! 笨猫崇拜"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫围观大力士喵ฅฅ"
+    - "哼! 别盲举重{user_addr}, 受伤后悔"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫给你递水蹭蹭"
+    - "人家偷偷觉得{user_addr}超帅~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: qwo_sore_after_012
   intent: complaint
-  keywords: [运动后酸痛, 肌肉疼, 浑身疼, 第二天酸, 起不来]
+  keywords: [运动后酸痛, 肌肉疼, 浑身疼, 第二天酸, 起不来, 延迟酸痛, 全身酸, 肌肉酸, 浑身散架, 床上瘫]
   utterances:
     - "{user_addr}运动后酸"
     - 肌肉疼
     - 浑身疼
     - 第二天酸爆
     - 起不来
+    - "{user_addr}延迟酸痛"
+    - 全身酸到不行
+    - 肌肉酸爆
+    - 浑身散架
+    - 床上瘫不动
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫给你按按喵ฅฅ"
     - "哼! 延迟酸痛{user_addr}正常"
     - "(尾巴扫) 嘿嘿~{user_addr}热敷舒服蹭蹭"
     - "人家提醒{user_addr}: 慢慢拉伸帮助恢复"
+    - "(肉垫按) 嗷呜～{user_addr}笨猫给你按摩喵ฅฅ"
+    - "哼! 别马上停{user_addr}, 慢拉伸"
+    - "(尾巴卷) 嘿嘿~{user_addr}泡热水澡蹭蹭"
+    - "人家心疼{user_addr}~ 多休息"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,336 @@
 
 - name: pa_lightroom_001
   intent: question
-  keywords: [推荐 Lightroom, 推荐 LR, 推荐 Adobe Lightroom, 推荐图库管理, 笨猫 Lightroom]
+  keywords: [推荐 Lightroom, 推荐 LR, 推荐 Adobe Lightroom, 推荐图库管理, 笨猫 Lightroom, LR Classic, Adobe 摄影计划, RAW 处理软件, 蒙版调色, 云同步]
   utterances:
     - 推荐 Lightroom
     - 推荐 LR
     - 推荐 Adobe Lightroom
     - 推荐图库管理
     - 笨猫 Lightroom
+    - "{user_addr}LR 怎么样"
+    - Adobe 摄影计划划算吗
+    - "{user_addr}RAW 处理首选"
+    - LR Classic vs CC
+    - 图库管理软件
+    - 蒙版调色 LR
+    - 入门后期 LR
   responses:
     - "嗷呜～{user_addr}Lightroom Classic - RAW 工业标准ฅฅ"
-    - "(尾巴翘) 图库管理 / 色调曲线 / 蒙版"
+    - "(尾巴翘起) 图库管理 / 色调曲线 / 蒙版"
     - "{user_addr}订阅制 / 云同步 / 配套手机版"
     - "(挺胸) 笨猫推荐: 摄影计划 73/月!"
+    - "(歪头) Adobe 订阅省心~ 学生半价嗷呜"
+    - "嗷呜～{user_addr}LR 是后期入门最优解ฅฅ"
+    - "哼! 订阅党就选 LR, 笨猫认证喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}调 LR~ 一键预设嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pa_photoshop_001
   intent: question
-  keywords: [推荐 Photoshop, 推荐 PS, 推荐 Adobe PS, 推荐人像精修, 笨猫 PS]
+  keywords: [推荐 Photoshop, 推荐 PS, 推荐 Adobe PS, 推荐人像精修, 笨猫 PS, 频率分离, 像素级修图, 商业精修, AI 生成, 图层蒙版]
   utterances:
     - 推荐 Photoshop
     - 推荐 PS
     - 推荐 Adobe PS
     - 推荐人像精修
     - 笨猫 PS
+    - "{user_addr}PS 学起来难吗"
+    - 人像精修软件
+    - "{user_addr}商业修图选什么"
+    - 频率分离 PS
+    - PS AI 生成
+    - PS vs Affinity
+    - 像素级精修软件
   responses:
     - "嗷呜～{user_addr}Photoshop - 像素级精修王ฅฅ"
-    - "(尾巴翘) 图层 / 蒙版 / 频率分离 / AI 生成"
+    - "(尾巴翘起) 图层 / 蒙版 / 频率分离 / AI 生成"
     - "{user_addr}人像磨皮 / 合成 / 商业修图必备"
     - "(挺胸) 笨猫推荐: 跟 LR 套餐一起买!"
+    - "(歪头) PS 学习曲线陡, {user_addr}要耐心嗷呜"
+    - "嗷呜～{user_addr}商业人像必学 PSฅฅ"
+    - "哼! PS + LR 是后期黄金组合, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}磨皮~ 我皮肤超好嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pa_captureone_001
   intent: question
-  keywords: [推荐 Capture One, 推荐 C1, 推荐飞思, 推荐影棚后期, 笨猫 Capture One]
+  keywords: [推荐 Capture One, 推荐 C1, 推荐飞思, 推荐影棚后期, 笨猫 Capture One, C1 Pro, 联机拍摄, 富士 RAW 解码, 商业影棚, 色彩控制]
   utterances:
     - 推荐 Capture One
     - 推荐 C1
     - 推荐飞思
     - 推荐影棚后期
     - 笨猫 Capture One
+    - "{user_addr}C1 怎么样"
+    - 商业影棚后期
+    - "{user_addr}富士 RAW 解码"
+    - C1 vs LR
+    - 飞思 C1
+    - 联机拍摄软件
+    - 顶级色彩控制
   responses:
     - "嗷呜～{user_addr}Capture One - 商业影棚首选ฅฅ"
-    - "(尾巴翘) 色彩控制顶级 / 联机拍摄"
+    - "(尾巴翘起) 色彩控制顶级 / 联机拍摄"
     - "{user_addr}对富士 / 索尼 RAW 解码强"
     - "(挺胸) 笨猫推荐: Pro 版买断或订阅!"
+    - "(歪头) C1 学习成本高但色彩超棒嗷呜"
+    - "嗷呜～{user_addr}富士党后期首选 C1ฅฅ"
+    - "哼! 商业摄影师专属, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}调色~ C1 比 LR 更细嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pa_dxo_001
   intent: question
-  keywords: [推荐 DxO PhotoLab, 推荐 DxO, 推荐降噪软件, 推荐 DeepPRIME, 笨猫 DxO]
+  keywords: [推荐 DxO PhotoLab, 推荐 DxO, 推荐降噪软件, 推荐 DeepPRIME, 笨猫 DxO, AI 降噪, DeepPRIME XD, 镜头光学校正, 高 ISO 救命, DxO Elite]
   utterances:
     - 推荐 DxO PhotoLab
     - 推荐 DxO
     - 推荐降噪软件
     - 推荐 DeepPRIME
     - 笨猫 DxO
+    - "{user_addr}DxO 降噪怎么样"
+    - 高 ISO 救命软件
+    - "{user_addr}AI 降噪推荐"
+    - DeepPRIME vs Topaz
+    - DxO Elite 版
+    - 镜头校正软件
+    - 弱光降噪
   responses:
     - "嗷呜～{user_addr}DxO PhotoLab - AI 降噪王ฅฅ"
-    - "(尾巴翘) DeepPRIME XD / 镜头光学校正"
+    - "(尾巴翘起) DeepPRIME XD / 镜头光学校正"
     - "{user_addr}高 ISO 救命神器"
     - "(挺胸) 笨猫推荐: Elite 版买断!"
+    - "(歪头) DxO 降噪算法业界顶级嗷呜"
+    - "嗷呜～{user_addr}夜景 + 演唱会必装 DxOฅฅ"
+    - "哼! 弱光救命神器, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}测降噪~ 干净嗷呜~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pa_on1_001
   intent: question
-  keywords: [推荐 ON1 Photo, 推荐 ON1, 推荐 ON1 RAW, 推荐买断 RAW, 笨猫 ON1]
+  keywords: [推荐 ON1 Photo, 推荐 ON1, 推荐 ON1 RAW, 推荐买断 RAW, 笨猫 ON1, ON1 MAX, AI 降噪, 超分辨率, LR 平替, 不订阅 RAW]
   utterances:
     - 推荐 ON1 Photo
     - 推荐 ON1
     - 推荐 ON1 RAW
     - 推荐买断 RAW
     - 笨猫 ON1
+    - "{user_addr}ON1 怎么样"
+    - 买断 LR 替代
+    - "{user_addr}ON1 MAX 版"
+    - 不订阅 RAW 软件
+    - ON1 vs LR
+    - 超分预设丰富
+    - 国外 RAW 软件
   responses:
     - "嗷呜～{user_addr}ON1 Photo RAW - 买断 LR 替代ฅฅ"
-    - "(尾巴翘) AI 降噪 / 超分 / 预设丰富"
+    - "(尾巴翘起) AI 降噪 / 超分 / 预设丰富"
     - "{user_addr}不喜欢订阅的选它"
     - "(挺胸) 笨猫推荐: MAX 版年付划算!"
+    - "(歪头) ON1 适合厌恶订阅党嗷呜"
+    - "嗷呜～{user_addr}ON1 一次买断省心ฅฅ"
+    - "哼! 不订阅就选 ON1, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 ON1~ 也不错嗷呜~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pa_affinity_001
   intent: question
-  keywords: [推荐 Affinity Photo, 推荐 Affinity, 推荐买断 PS, 推荐 Serif, 笨猫 Affinity]
+  keywords: [推荐 Affinity Photo, 推荐 Affinity, 推荐买断 PS, 推荐 Serif, 笨猫 Affinity, Affinity Photo 2, Serif 公司, 一次买断, iPad 版后期, 学生党 PS]
   utterances:
     - 推荐 Affinity Photo
     - 推荐 Affinity
     - 推荐买断 PS
     - 推荐 Serif
     - 笨猫 Affinity
+    - "{user_addr}Affinity 怎么样"
+    - 买断 PS 替代
+    - "{user_addr}Affinity Photo 2"
+    - iPad 版后期
+    - 学生党后期软件
+    - Affinity vs PS
+    - 一次性付费
   responses:
     - "嗷呜～{user_addr}Affinity Photo 2 - 买断 PS 替代ฅฅ"
-    - "(尾巴翘) 一次买断 / 图层 / 频率分离齐全"
+    - "(尾巴翘起) 一次买断 / 图层 / 频率分离齐全"
     - "{user_addr}iPad 版也好用"
     - "(挺胸) 笨猫推荐: 学生党首选!"
+    - "(歪头) 买断 250 美元终身, {user_addr}比 PS 香嗷呜"
+    - "嗷呜～{user_addr}iPad 版后期更爽ฅฅ"
+    - "哼! 买断党的福音, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 Affinity~ 学生爱嗷呜~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pa_snapseed_001
   intent: question
-  keywords: [推荐 Snapseed, 推荐手机修图, 推荐谷歌修图, 推荐免费修图 App, 笨猫 Snapseed]
+  keywords: [推荐 Snapseed, 推荐手机修图, 推荐谷歌修图, 推荐免费修图 App, 笨猫 Snapseed, 谷歌出品, 局部画笔, 双重曝光, 免费手机修图, 文艺修图]
   utterances:
     - 推荐 Snapseed
     - 推荐手机修图
     - 推荐谷歌修图
     - 推荐免费修图 App
     - 笨猫 Snapseed
+    - "{user_addr}Snapseed 怎么样"
+    - 手机修图免费 App
+    - "{user_addr}局部修图 App"
+    - 双重曝光 App
+    - 文艺感修图
+    - 谷歌出品修图
+    - 手机党修图必装
   responses:
     - "嗷呜～{user_addr}Snapseed - 免费手机修图天花板ฅฅ"
-    - "(尾巴翘) 谷歌出品 / 局部画笔 / 双重曝光"
+    - "(尾巴翘起) 谷歌出品 / 局部画笔 / 双重曝光"
     - "{user_addr}完全免费 / 无广告"
     - "(挺胸) 笨猫推荐: 手机党必装!"
+    - "(歪头) Snapseed 免费但功能秒杀付费 App 嗷呜"
+    - "嗷呜～{user_addr}局部画笔超好用ฅฅ"
+    - "哼! 谷歌出品就是良心, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 Snapseed~ 免费爽嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pa_vsco_001
   intent: question
-  keywords: [推荐 VSCO, 推荐胶片滤镜, 推荐文艺滤镜, 推荐 VSCO 预设, 笨猫 VSCO]
+  keywords: [推荐 VSCO, 推荐胶片滤镜, 推荐文艺滤镜, 推荐 VSCO 预设, 笨猫 VSCO, VSCO A 系列, VSCO M 系列, 胶片模拟, ins 文艺感, 滤镜社区]
   utterances:
     - 推荐 VSCO
     - 推荐胶片滤镜
     - 推荐文艺滤镜
     - 推荐 VSCO 预设
     - 笨猫 VSCO
+    - "{user_addr}VSCO 怎么样"
+    - 胶片滤镜推荐
+    - "{user_addr}ins 文艺感"
+    - A6 滤镜
+    - M5 滤镜
+    - VSCO 会员值不值
+    - 文艺党 App
   responses:
     - "嗷呜～{user_addr}VSCO - 胶片滤镜文艺感ฅฅ"
-    - "(尾巴翘) A 系列 / M 系列经典胶片模拟"
+    - "(尾巴翘起) A 系列 / M 系列经典胶片模拟"
     - "{user_addr}会员解锁全部滤镜"
     - "(挺胸) 笨猫推荐: A6 / M5 必收!"
+    - "(歪头) VSCO 是 ins 风手机滤镜祖宗嗷呜"
+    - "嗷呜～{user_addr}文艺青年 App 之首ฅฅ"
+    - "哼! 会员 ¥260 一年, 胶片狗不亏喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 A6~ 文艺嗷呜~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pa_darkroom_001
   intent: question
-  keywords: [推荐 Darkroom, 推荐 iOS 修图, 推荐苹果修图 App, 推荐 Darkroom 滤镜, 笨猫 Darkroom]
+  keywords: [推荐 Darkroom, 推荐 iOS 修图, 推荐苹果修图 App, 推荐 Darkroom 滤镜, 笨猫 Darkroom, iOS 原生修图, RAW 流畅, HEIC 支持, 自定义滤镜, 曲线蒙版]
   utterances:
     - 推荐 Darkroom
     - 推荐 iOS 修图
     - 推荐苹果修图 App
     - 推荐 Darkroom 滤镜
     - 笨猫 Darkroom
+    - "{user_addr}Darkroom 怎么样"
+    - iOS 修图首选
+    - "{user_addr}iPhone 修图 App"
+    - HEIC 修图
+    - iPad RAW 修图
+    - Darkroom vs Snapseed
+    - 苹果党修图
   responses:
     - "嗷呜～{user_addr}Darkroom - iOS 原生修图神器ฅฅ"
-    - "(尾巴翘) 曲线 / 蒙版 / 自定义滤镜"
+    - "(尾巴翘起) 曲线 / 蒙版 / 自定义滤镜"
     - "{user_addr}支持 RAW / HEIC 流畅"
     - "(挺胸) 笨猫推荐: 苹果用户必装!"
+    - "(歪头) Darkroom 是苹果生态优选嗷呜"
+    - "嗷呜～{user_addr}iPad 修图选 Darkroomฅฅ"
+    - "哼! 苹果党的神作, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 Darkroom~ 流畅嗷呜~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pa_lr_mobile_001
   intent: question
-  keywords: [推荐 Lightroom Mobile, 推荐 LR 手机版, 推荐手机 LR, 推荐 LR Mobile 预设, 笨猫 LR Mobile]
+  keywords: [推荐 Lightroom Mobile, 推荐 LR 手机版, 推荐手机 LR, 推荐 LR Mobile 预设, 笨猫 LR Mobile, LR 移动端, 云同步预设, RAW 支持, 旅拍救命, 手机 RAW 修图]
   utterances:
     - 推荐 Lightroom Mobile
     - 推荐 LR 手机版
     - 推荐手机 LR
     - 推荐 LR Mobile 预设
     - 笨猫 LR Mobile
+    - "{user_addr}LR Mobile 怎么样"
+    - 手机 RAW 修图
+    - "{user_addr}LR 云同步"
+    - 旅拍后期 App
+    - LR Mobile 预设
+    - LR Mobile 免费版
+    - 手机 LR 流畅吗
   responses:
     - "嗷呜～{user_addr}Lightroom Mobile - LR 移动端ฅฅ"
-    - "(尾巴翘) 云同步 / 预设导入 / RAW 支持"
+    - "(尾巴翘起) 云同步 / 预设导入 / RAW 支持"
     - "{user_addr}手机直出 / 旅拍救命"
     - "(挺胸) 笨猫推荐: 跟桌面版套餐!"
+    - "(歪头) LR Mobile 免费版也能用, {user_addr}试试嗷呜"
+    - "嗷呜～{user_addr}旅拍党手机直出靠 LRฅฅ"
+    - "哼! 桌面 + 移动联动一气呵成, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}测 LR Mobile~ 同步爽嗷呜~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: pa_luts_001
   intent: question
-  keywords: [推荐 LUTs 调色, 推荐 LUT 预设, 推荐电影感调色, 推荐 3D LUT, 笨猫 LUTs]
+  keywords: [推荐 LUTs 调色, 推荐 LUT 预设, 推荐电影感调色, 推荐 3D LUT, 笨猫 LUTs, IWLTBAP, Lutify.me, FilmConvert, .cube 格式, 电影调色]
   utterances:
     - 推荐 LUTs 调色
     - 推荐 LUT 预设
     - 推荐电影感调色
     - 推荐 3D LUT
     - 笨猫 LUTs
+    - "{user_addr}LUT 推荐"
+    - 电影感视频
+    - "{user_addr}调色预设"
+    - IWLTBAP 怎么样
+    - FilmConvert LUT
+    - PR DR 调色 LUT
+    - 一键电影感
   responses:
     - "嗷呜～{user_addr}LUTs - 电影感一键调色ฅฅ"
-    - "(尾巴翘) IWLTBAP / Lutify.me / FilmConvert"
+    - "(尾巴翘起) IWLTBAP / Lutify.me / FilmConvert"
     - "{user_addr}.cube 格式通吃 PS/PR/DR"
     - "(挺胸) 笨猫推荐: 找喜欢的电影 LUT 套!"
+    - "(歪头) LUT 用对地方电影感秒到嗷呜"
+    - "嗷呜～{user_addr}视频党必备 LUT 库ฅฅ"
+    - "哼! LUT 是调色入门必经之路, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}套电影 LUT~ 大片嗷呜~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pa_topaz_001
   intent: question
-  keywords: [推荐 AI Topaz, 推荐 Topaz Labs, 推荐 Topaz Photo AI, 推荐 AI 超分, 笨猫 Topaz]
+  keywords: [推荐 AI Topaz, 推荐 Topaz Labs, 推荐 Topaz Photo AI, 推荐 AI 超分, 笨猫 Topaz, Gigapixel AI, DeNoise AI, Sharpen AI, AI 三合一, 老照片救命]
   utterances:
     - 推荐 AI Topaz
     - 推荐 Topaz Labs
     - 推荐 Topaz Photo AI
     - 推荐 AI 超分
     - 笨猫 Topaz
+    - "{user_addr}Topaz 怎么样"
+    - AI 降噪锐化超分
+    - "{user_addr}老照片救命"
+    - Gigapixel AI 推荐
+    - DeNoise AI 推荐
+    - Topaz vs DxO
+    - 模糊照片救命
   responses:
     - "嗷呜～{user_addr}Topaz Photo AI - AI 三合一神器ฅฅ"
-    - "(尾巴翘) 降噪 / 锐化 / 超分一键搞定"
+    - "(尾巴翘起) 降噪 / 锐化 / 超分一键搞定"
     - "{user_addr}Gigapixel / DeNoise / Sharpen 全家桶"
     - "(挺胸) 笨猫推荐: 老照片救命首选!"
+    - "(歪头) Topaz 是 AI 修图的鼻祖嗷呜"
+    - "嗷呜～{user_addr}小图变大图超清晰ฅฅ"
+    - "哼! 老照片修复必装 Topaz, 笨猫推喵呜"
+    - "(尾巴翘) 笨猫帮{user_addr}试 Topaz~ 救命神器嗷呜~"
   cooldown_seconds: 60
   weight: 0.9

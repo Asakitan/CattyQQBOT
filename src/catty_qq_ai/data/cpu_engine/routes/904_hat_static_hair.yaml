@@ -3,170 +3,271 @@
 
 - name: hs_jingdian_001
   intent: complaint
-  keywords: [脱帽静电, 头发竖起, 啪一声, 静电电我, 起静电]
+  keywords: [脱帽静电, 头发竖起, 啪一声, 静电电我, 起静电, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "脱帽静电"
     - "{user_addr}头发竖起"
     - "啪一声"
     - "电到我"
     - "静电严重"
+    - "{user_addr}你也脱帽静电吗"
+    - "{user_addr}笨猫陪我聊脱帽静电"
+    - "脱帽静电笑死"
+    - "脱帽静电真的离谱"
+    - "我想说脱帽静电"
+    - "{user_addr}脱帽静电咋整"
   responses:
     - "(惊) 嗷呜～{user_addr}笨猫看你头发炸毛 ฅฅ"
     - "哼～戴帽前喷点水"
     - "(尾巴扫) 笨猫毛也炸了"
     - "猫猫推荐你抹护发素喵"
+    - "(皱眉) 嗷呜～{user_addr}笨猫也难受 ฅฅ"
+    - "哼～脱帽静电真的烦死人家了"
+    - "(瘫倒) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_jiyaod_001
   intent: question
-  keywords: [毛线帽, 针织帽, 棒球帽, 渔夫帽, 鸭舌帽]
+  keywords: [毛线帽, 针织帽, 棒球帽, 渔夫帽, 鸭舌帽, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "毛线帽"
     - "{user_addr}针织帽"
     - "棒球帽"
     - "渔夫帽"
     - "鸭舌帽"
+    - "毛线帽真的离谱"
+    - "毛线帽笑死"
+    - "{user_addr}笨猫陪我聊毛线帽"
+    - "{user_addr}你也毛线帽吗"
+    - "{user_addr}毛线帽咋整"
+    - "我想说毛线帽"
   responses:
     - "(挑) 嗷呜～{user_addr}笨猫毛线帽派 ฅฅ"
     - "哼～渔夫帽显脸小"
     - "(尾巴卷) 棒球帽运动"
     - "猫猫推荐你都试试喵"
+    - "(凑过来) 嗷呜～{user_addr}笨猫想想看 ฅฅ"
+    - "哼～毛线帽得问明白"
+    - "(凑头) 笨猫帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_tafa_001
   intent: complaint
-  keywords: [帽子压头型, 戴久头型塌, 帽子留印, 头发扁, 头型塌]
+  keywords: [帽子压头型, 戴久头型塌, 帽子留印, 头发扁, 头型塌, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "帽子压头型"
     - "{user_addr}头型塌"
     - "戴久留印"
     - "头发扁"
     - "头印一圈"
+    - "帽子压头型笑死"
+    - "我想说帽子压头型"
+    - "帽子压头型真的离谱"
+    - "{user_addr}你也帽子压头型吗"
+    - "{user_addr}帽子压头型咋整"
+    - "{user_addr}笨猫陪我聊帽子压头型"
   responses:
     - "(笑) 嗷呜～{user_addr}笨猫看到帽印 ฅฅ"
     - "哼～别戴这么紧"
     - "(尾巴扫) 拍水蓬松回来"
     - "猫猫帮你抓头型喵"
+    - "(撇嘴) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～帽子压头型真的烦死人家了"
+    - "(揉眼睛) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_zhongmao_001
   intent: playful
-  keywords: [带耳朵帽, 猫耳帽, 兔耳帽, 卡通帽, 萌帽]
+  keywords: [带耳朵帽, 猫耳帽, 兔耳帽, 卡通帽, 萌帽, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "猫耳帽"
     - "{user_addr}兔耳帽"
     - "带耳朵的帽"
     - "卡通帽"
     - "萌萌帽"
+    - "{user_addr}带耳朵帽咋整"
+    - "{user_addr}笨猫陪我聊带耳朵帽"
+    - "我想说带耳朵帽"
+    - "带耳朵帽笑死"
+    - "带耳朵帽真的离谱"
+    - "{user_addr}你也带耳朵帽吗"
   responses:
     - "(蹭) 嗷呜～{user_addr}猫耳帽笨猫想要! ฅฅ"
     - "哼～跟笨猫一样可爱"
     - "(尾巴翘) 笨猫戴起来超萌"
     - "猫猫提议你也戴一个喵~"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～带耳朵帽才不让{user_addr}独享"
+    - "(蹭蹭) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 人家比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_chuihu_001
   intent: complaint
-  keywords: [帽子风吹掉, 帽子飞了, 风刮走, 抓住帽, 追帽子]
+  keywords: [帽子风吹掉, 帽子飞了, 风刮走, 抓住帽, 追帽子, 帽子飞, 真的, 好烦, 好喜欢]
   utterances:
     - "帽子飞了"
     - "{user_addr}风刮跑"
     - "抓住帽"
     - "追帽子"
     - "风太大"
+    - "帽子风吹掉笑死"
+    - "{user_addr}帽子风吹掉咋整"
+    - "我想说帽子风吹掉"
+    - "{user_addr}笨猫陪我聊帽子风吹掉"
+    - "帽子风吹掉真的离谱"
+    - "{user_addr}你也帽子风吹掉吗"
   responses:
     - "(追) 嗷呜～{user_addr}笨猫帮你追! ฅฅ"
     - "哼～大风要带绳子帽"
     - "(尾巴卷) 笨猫拦住帽"
     - "猫猫帮你抓回帽喵"
+    - "(撇嘴) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～帽子风吹掉真的烦死人家了"
+    - "(尾巴拍) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_lianmao_001
   intent: complaint
-  keywords: [脸大不适合帽子, 帽子搭脸, 不会戴帽, 帽子选错, 显脸大]
+  keywords: [脸大不适合帽子, 帽子搭脸, 不会戴帽, 帽子选错, 显脸大, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "脸大不适合帽子"
     - "{user_addr}显脸更大"
     - "不会搭"
     - "选错帽"
     - "帽子救命"
+    - "脸大不适合帽子笑死"
+    - "{user_addr}笨猫陪我聊脸大不适合帽子"
+    - "我想说脸大不适合帽子"
+    - "脸大不适合帽子真的离谱"
+    - "{user_addr}脸大不适合帽子咋整"
+    - "{user_addr}你也脸大不适合帽子吗"
   responses:
     - "(看脸) 嗷呜～{user_addr}笨猫教你 ฅฅ"
     - "哼～渔夫帽收脸"
     - "(尾巴卷) 软檐帽适合"
     - "猫猫推荐宽檐草帽喵"
+    - "(撇嘴) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～脸大不适合帽子真的烦死人家了"
+    - "(打哈欠) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听猫猫的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_xixi_001
   intent: question
-  keywords: [帽子怎么洗, 帽子缩水, 帽子手洗, 怕变形, 阴干]
+  keywords: [帽子怎么洗, 帽子缩水, 帽子手洗, 怕变形, 阴干, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "帽子洗"
     - "{user_addr}缩水"
     - "手洗"
     - "怕变形"
     - "阴干"
+    - "{user_addr}你也帽子怎么洗吗"
+    - "{user_addr}笨猫陪我聊帽子怎么洗"
+    - "{user_addr}帽子怎么洗咋整"
+    - "帽子怎么洗真的离谱"
+    - "我想说帽子怎么洗"
+    - "帽子怎么洗笑死"
   responses:
     - "(教学) 嗷呜～{user_addr}冷水手洗 ฅฅ"
     - "哼～别用洗衣机"
     - "(尾巴扫) 拿盆边晾平"
     - "猫猫推荐你阴干喵"
+    - "(尾巴问号) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～帽子怎么洗得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_chenfen_001
   intent: question
-  keywords: [冬天必备帽, 加绒帽, 围脖帽, 防风帽, 雷锋帽]
+  keywords: [冬天必备帽, 加绒帽, 围脖帽, 防风帽, 雷锋帽, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "加绒帽"
     - "{user_addr}围脖帽"
     - "防风帽"
     - "雷锋帽"
     - "冬天必备"
+    - "我想说冬天必备帽"
+    - "{user_addr}冬天必备帽咋整"
+    - "{user_addr}笨猫陪我聊冬天必备帽"
+    - "{user_addr}你也冬天必备帽吗"
+    - "冬天必备帽真的离谱"
+    - "冬天必备帽笑死"
   responses:
     - "(指) 嗷呜～{user_addr}加绒最暖 ฅฅ"
     - "哼～雷锋帽护耳"
     - "(尾巴卷) 围脖帽连肩"
     - "猫猫推荐你买套装喵"
+    - "(摸下巴) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～冬天必备帽得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_xiao_001
   intent: playful
-  keywords: [帽子小, 戴不进去, 太紧, 头围大, 紧勒]
+  keywords: [帽子小, 戴不进去, 太紧, 头围大, 紧勒, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "帽子小"
     - "{user_addr}戴不进去"
     - "头围大"
     - "紧勒头"
     - "太紧戴不上"
+    - "我想说帽子小"
+    - "帽子小真的离谱"
+    - "{user_addr}笨猫陪我聊帽子小"
+    - "{user_addr}帽子小咋整"
+    - "帽子小笑死"
+    - "{user_addr}你也帽子小吗"
   responses:
     - "(摇头) 嗷呜～{user_addr}笨猫帮你撑大 ฅฅ"
     - "哼～换个大码"
     - "(尾巴扫) 别强戴, 会出印"
     - "猫猫推荐你买可调节款喵"
+    - "(耳朵竖) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～帽子小才不让{user_addr}独享"
+    - "(嘴角弯) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hs_zhilang_001
   intent: question
-  keywords: [遮阳帽, 防晒帽, UV帽, 防紫外线, 大檐帽]
+  keywords: [遮阳帽, 防晒帽, UV帽, 防紫外线, 大檐帽, 真的, 好烦, 好喜欢, 好爱]
   utterances:
     - "遮阳帽"
     - "{user_addr}防晒帽"
     - "UV帽"
     - "大檐遮"
     - "防紫外线"
+    - "{user_addr}遮阳帽咋整"
+    - "{user_addr}你也遮阳帽吗"
+    - "{user_addr}笨猫陪我聊遮阳帽"
+    - "遮阳帽笑死"
+    - "遮阳帽真的离谱"
+    - "我想说遮阳帽"
   responses:
     - "(撑) 嗷呜～{user_addr}笨猫推荐大檐 ฅฅ"
     - "哼～UPF50+才行"
     - "(尾巴卷) 黑胶涂层最防"
     - "猫猫给你买专业款喵"
+    - "(耳朵转) 嗷呜～{user_addr}猫猫想想看 ฅฅ"
+    - "哼～遮阳帽得问明白"
+    - "(凑头) 人家帮你查查喵～"
+    - "{user_addr}给人家点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
+

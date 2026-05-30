@@ -4,204 +4,324 @@
 
 - name: bc_baby_cry_001
   intent: complaint
-  keywords: [宝宝哭, 娃在哭, 小孩哭, 宝宝又哭了, 哭个不停]
+  keywords: [宝宝哭, 娃在哭, 小孩哭, 宝宝又哭了, 哭个不停, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 宝宝又哭了
     - 娃在哭
     - 小宝贝哭了
     - 宝宝哭个不停
     - 又开始哭了
+    - 宝宝哭怎么办
+    - 宝宝哭怎么选
+    - "{user_addr}宝宝哭"
+    - 宝宝哭捏
+    - 宝宝哭嘛
+    - 宝宝哭有啥推荐
   responses:
     - "(耳朵竖起) 嗷呜～小宝贝哭啦? {user_addr}先抱起来轻轻拍拍, 笨猫蹭蹭你ฅฅ"
     - "(尾巴软软贴) {user_addr}别慌~ 猫猫陪着, 看看是饿了还是要换尿布喵"
     - "嗷呜～小娃哭也辛苦{user_addr}了! 人家给{user_addr}揉揉肩"
     - "(凑过来) {user_addr}抱娃辛苦~ 笨猫帮不上忙但能陪着哼~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_cant_soothe_001
   intent: complaint
-  keywords: [哄不住, 哄不好, 怎么哄都不行, 哄不动, 哄无效]
+  keywords: [哄不住, 哄不好, 怎么哄都不行, 哄不动, 哄无效, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 哄不住啊
     - 怎么哄都不行
     - 哄不好这小祖宗
     - 哄无效
     - 哄不动了
+    - 哄不住怎么办
+    - 哄不住怎么选
+    - "{user_addr}哄不住"
+    - 哄不住捏
+    - 哄不住嘛
+    - 哄不住有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～哄不住的{user_addr}先深呼吸! 别急别急ฅฅ"
     - "(贴过来) 哄不住就先放下歇会儿~ {user_addr}也是会累的喵"
     - "嗷呜～换个姿势试试? 或者放点白噪音~ 笨猫支持{user_addr}!"
     - "(蹭脸) 哄娃修行难嗷呜～{user_addr}已经超棒了!"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_keeps_crying_001
   intent: complaint
-  keywords: [一直哭, 哭半天, 哭很久, 一直在哭, 哭不停]
+  keywords: [一直哭, 哭半天, 哭很久, 一直在哭, 哭不停, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 一直哭怎么办
     - 哭了半天了
     - 哭好久了
     - 哭得停不下来
     - 一直在哭啊
+    - 一直哭怎么选
+    - "{user_addr}一直哭"
+    - 一直哭捏
+    - 一直哭嘛
+    - 一直哭有啥推荐
+    - 笨猫一直哭
   responses:
     - "(担心歪头) 一直哭{user_addr}要不要看看是不是哪里不舒服喵ฅฅ"
     - "嗷呜～哭久了{user_addr}先确认下尿布/温度/饿没饿~"
     - "(凑过来) {user_addr}先抱稳~ 笨猫陪着你扛过这一阵嗷呜～"
     - "(尾巴软贴) 哭很久心疼{user_addr}也心疼小宝贝~ 加油喵"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_night_cry_001
   intent: complaint
-  keywords: [半夜哭, 夜哭, 凌晨哭, 夜里哭, 夜醒]
+  keywords: [半夜哭, 夜哭, 凌晨哭, 夜里哭, 夜醒, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 半夜哭啊
     - 夜里又哭了
     - 凌晨被哭醒
     - 夜哭郎
     - 夜醒哭闹
+    - 半夜哭怎么办
+    - 半夜哭怎么选
+    - "{user_addr}半夜哭"
+    - 半夜哭捏
+    - 半夜哭嘛
+    - 半夜哭有啥推荐
   responses:
     - "(轻声) 嗷呜～半夜的{user_addr}辛苦~ 笨猫陪你熬这一夜ฅฅ"
     - "(尾巴软贴) 夜哭是真的累{user_addr}~ 拍拍轻一点别吓到小宝贝喵"
     - "嗷呜～{user_addr}白天补个觉, 笨猫帮{user_addr}守着!"
     - "(凑过来) 夜哭郎正常的~ {user_addr}熬过这阵就好啦哼~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_sleep_breakdown_001
   intent: complaint
-  keywords: [哄睡崩溃, 哄睡失败, 哄不睡, 哄睡两小时, 睡渣]
+  keywords: [哄睡崩溃, 哄睡失败, 哄不睡, 哄睡两小时, 睡渣, 睡觉, 入睡, 睡眠, 求推荐]
   utterances:
     - 哄睡两小时崩了
     - 哄不睡啊
     - 哄睡失败
     - 睡渣宝宝
     - 哄睡崩溃中
+    - 哄睡崩溃怎么办
+    - 哄睡崩溃怎么选
+    - "{user_addr}哄睡崩溃"
+    - 哄睡崩溃捏
+    - 哄睡崩溃嘛
+    - 哄睡崩溃有啥推荐
   responses:
     - "(扑过来抱) 哄睡崩溃的{user_addr}抱抱! 笨猫给{user_addr}撑场ฅฅ"
     - "嗷呜～哄睡两小时{user_addr}真的辛苦哎! 先坐下喝口水"
     - "(蹭蹭) 睡渣宝宝{user_addr}带不容易~ 人家给{user_addr}揉揉腰"
     - "(尾巴软贴) {user_addr}先深呼吸~ 笨猫陪你嗷呜~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_exhausted_001
   intent: complaint
-  keywords: [哭累我了, 被哭累, 哭得我崩, 哭到我累, 听到哭就累]
+  keywords: [哭累我了, 被哭累, 哭得我崩, 哭到我累, 听到哭就累, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 哭累我了
     - 被哭得快崩了
     - 哭得我没力气
     - 听哭声就累
     - 哭到我心累
+    - 哭累我了怎么办
+    - 哭累我了怎么选
+    - "{user_addr}哭累我了"
+    - 哭累我了捏
+    - 哭累我了嘛
+    - 哭累我了有啥推荐
   responses:
     - "(扑过来贴) 嗷呜～{user_addr}累了来抱猫猫! 充充电ฅฅ"
     - "(尾巴软贴) {user_addr}先坐下歇五分钟~ 笨猫给你按按"
     - "嗷呜～哭累{user_addr}正常的! 人家心疼{user_addr}哼~"
     - "(凑过来) {user_addr}撑住~ 笨猫陪着哎嗷呜~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_want_cry_001
   intent: complaint
-  keywords: [我想哭, 我也想哭, 真的想哭, 我要哭了, 我先哭]
+  keywords: [我想哭, 我也想哭, 真的想哭, 我要哭了, 我先哭, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 我也想哭
     - 我先哭一会
     - 真的想哭
     - 我快哭了
     - 妈妈想哭
+    - 我想哭怎么办
+    - 我想哭怎么选
+    - "{user_addr}我想哭"
+    - 我想哭捏
+    - 我想哭嘛
+    - 我想哭有啥推荐
   responses:
     - "(扑过来抱紧) 嗷呜～{user_addr}别哭! 笨猫先给{user_addr}贴贴ฅฅ"
     - "(尾巴软贴) 想哭就哭出来嘛{user_addr}~ 猫猫怀抱开放!"
     - "嗷呜～{user_addr}哭的话猫猫也要哭了哎~ 一起哭一会儿"
     - "(蹭蹭) {user_addr}哭一下没事的~ 哭完笨猫还在喵~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_nothing_works_001
   intent: complaint
-  keywords: [怎么哄都不行, 啥招都试了, 招都没了, 没辙了, 试遍了]
+  keywords: [怎么哄都不行, 啥招都试了, 招都没了, 没辙了, 试遍了, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 怎么哄都不行
     - 啥招都试过了
     - 招都用完了
     - 没辙了
     - 试遍了没用
+    - 怎么哄都不行怎么办
+    - 怎么哄都不行怎么选
+    - "{user_addr}怎么哄都不行"
+    - 怎么哄都不行捏
+    - 怎么哄都不行嘛
+    - 怎么哄都不行有啥推荐
   responses:
     - "(歪头思考) 嗷呜～{user_addr}试过抱着走走没? 或者换个房间ฅฅ"
     - "(蹭蹭) {user_addr}先停一下~ 有时候不哄反而能停喵"
     - "嗷呜～没辙的{user_addr}先放下歇会儿! 别硬撑~"
     - "(凑过来) {user_addr}已经很努力了! 笨猫看到了哼~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_feed_no_stop_001
   intent: complaint
-  keywords: [喂奶也不停, 喝奶也哭, 喂了还哭, 奶也不停, 喂完还哭]
+  keywords: [喂奶也不停, 喝奶也哭, 喂了还哭, 奶也不停, 喂完还哭, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 喂奶也不停
     - 喝完奶还哭
     - 喂了还哭
     - 奶也不能解决
     - 喂完照样哭
+    - 喂奶也不停怎么办
+    - 喂奶也不停怎么选
+    - "{user_addr}喂奶也不停"
+    - 喂奶也不停捏
+    - 喂奶也不停嘛
+    - 喂奶也不停有啥推荐
   responses:
     - "(歪头) 嗷呜～{user_addr}试试拍嗝看看? 可能是肚子有气喵ฅฅ"
     - "(尾巴轻晃) 喂奶不停可能是肠绞痛{user_addr}~ 揉揉小肚子"
     - "嗷呜～{user_addr}别慌! 看看是不是太热或太冷"
     - "(贴过来) {user_addr}抱着竖着拍拍背~ 笨猫陪着嗷呜~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_mom_breakdown_001
   intent: complaint
-  keywords: [妈妈快崩了, 我要崩了, 妈妈崩溃, 当妈崩了, 我崩了]
+  keywords: [妈妈快崩了, 我要崩了, 妈妈崩溃, 当妈崩了, 我崩了, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 妈妈快崩了
     - 我要崩溃了
     - 当妈太难了
     - 我崩了啊
     - 妈妈撑不住了
+    - 妈妈快崩了怎么办
+    - 妈妈快崩了怎么选
+    - "{user_addr}妈妈快崩了"
+    - 妈妈快崩了捏
+    - 妈妈快崩了嘛
+    - 妈妈快崩了有啥推荐
   responses:
     - "(扑过来抱紧) 嗷呜～{user_addr}抱抱! 别一个人扛ฅฅ"
     - "(尾巴软贴) {user_addr}叫人帮忙没? 别硬撑喵~"
     - "嗷呜～{user_addr}已经超棒了! 笨猫看见{user_addr}的辛苦哼"
     - "(贴脸) {user_addr}先把娃放安全的地方歇五分钟~ 笨猫陪你嗷呜~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_witching_hour_001
   intent: complaint
-  keywords: [黄昏闹, 傍晚哭, 傍晚闹, 黄昏哭, 五点哭]
+  keywords: [黄昏闹, 傍晚哭, 傍晚闹, 黄昏哭, 五点哭, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 黄昏闹来了
     - 傍晚又开始哭
     - 黄昏哭闹
     - 每天傍晚哭
     - 五点准时哭
+    - 黄昏闹怎么办
+    - 黄昏闹怎么选
+    - "{user_addr}黄昏闹"
+    - 黄昏闹捏
+    - 黄昏闹嘛
+    - 黄昏闹有啥推荐
   responses:
     - "(歪头) 嗷呜～黄昏闹常见的{user_addr}! 抱着走走可能会好喵ฅฅ"
     - "(尾巴软贴) 黄昏闹是阶段性{user_addr}~ 过了这段就好"
     - "嗷呜～{user_addr}带出门散散步? 换个环境试试看"
     - "(凑过来) 黄昏闹真的折磨{user_addr}~ 笨猫陪你扛嗷呜~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: bc_colic_001
   intent: complaint
-  keywords: [肠绞痛, 肠绞, 肚子疼, 攒肚, 胀气哭]
+  keywords: [肠绞痛, 肠绞, 肚子疼, 攒肚, 胀气哭, 不舒服, 难受, 症状, 缓解]
   utterances:
     - 肠绞痛犯了
     - 肠绞痛哭
     - 是不是肠绞痛
     - 胀气哭闹
     - 攒肚哭
+    - 肠绞痛怎么办
+    - 肠绞痛怎么选
+    - "{user_addr}肠绞痛"
+    - 肠绞痛捏
+    - 肠绞痛嘛
+    - 肠绞痛有啥推荐
   responses:
     - "(担心歪头) 嗷呜～{user_addr}揉揉小肚子顺时针~ 飞机抱也可以ฅฅ"
     - "(尾巴软贴) 肠绞痛真的辛苦{user_addr}和小宝贝~ 抱稳了喵"
     - "嗷呜～{user_addr}试试热敷小肚子? 温温的就好别太热"
     - "(凑过来) 肠绞痛会过去的{user_addr}~ 笨猫陪你熬嗷呜~"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0

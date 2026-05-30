@@ -3,204 +3,312 @@
 
 - name: sow_slack_001
   intent: playful
-  keywords: [摸鱼, 划水, 摸鱼中, 上班摸鱼, 偷懒]
+  keywords: [摸鱼, 划水, 摸鱼中, 上班摸鱼, 偷懒, 摸鱼上班, 偷闲, 上班划水, 工作偷懒]
   utterances:
     - 摸鱼
     - 划水
     - 摸鱼中
     - 上班摸鱼
     - 偷懒
+    - 摸鱼上班
+    - "{user_addr}摸鱼"
+    - 偷闲
+    - 上班划水
+    - 工作偷懒
   responses:
     - "嗷呜～{user_addr}笨猫支持 ฅฅ"
     - "哼～{user_addr}别被抓!"
     - "(尾巴扫) 一起摸蹭蹭"
     - "嗷呜～{user_addr}注意!"
+    - "(凑过去) 笨猫和{user_addr}一起摸鱼!"
+    - "哼～职场也要劳逸结合"
+    - "(尾巴扫) 摸鱼是工作艺术"
+    - "嗷呜～{user_addr}小心老板雷达 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_fake_busy_001
   intent: playful
-  keywords: [装忙, 假装忙, 装认真, 装在工作, 屏幕做样子]
+  keywords: [装忙, 假装忙, 装认真, 装在工作, 屏幕做样子, 装作工作, 装样子, 表演工作, 演技好]
   utterances:
     - 装忙
     - 假装忙
     - 装认真
     - 装在工作
     - 屏幕做样子
+    - 装作工作
+    - "{user_addr}装忙"
+    - 装样子
+    - 表演工作
+    - 演技好
   responses:
     - "嗷呜～{user_addr}演技好 ฅฅ"
     - "哼～{user_addr}骗老板!"
     - "(尾巴扫) 蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(凑过去) 影帝级演员!"
+    - "哼～装得真像!"
+    - "(尾巴扫) 给{user_addr}颁个奥斯卡!"
+    - "嗷呜～{user_addr}演技学不来 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_boss_check_001
   intent: complaint
-  keywords: [老板查岗, 老板来了, 老板路过, 被发现, 偷看屏]
+  keywords: [老板查岗, 老板来了, 老板路过, 被发现, 偷看屏, 老板巡视, 上司过来, 老板巡岗, 被抓包]
   utterances:
     - 老板查岗
     - 老板来了
     - 老板路过
     - 被发现
     - 偷看屏
+    - 老板巡视
+    - "{user_addr}被巡查"
+    - 上司过来
+    - 老板巡岗
+    - 被抓包
   responses:
     - "(炸毛) 嗷呜～{user_addr}快藏! ฅฅ"
     - "哼～{user_addr}惨!"
     - "(尾巴扫) 切屏蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(炸毛扑过去) Alt+Tab! 快!"
+    - "哼～装着认真! 演!"
+    - "(尾巴扫) 笨猫祈祷{user_addr}过关"
+    - "嗷呜～{user_addr}下次小心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_gossip_001
   intent: playful
-  keywords: [同事八卦, 听八卦, 聊八卦, 围观, 偷听]
+  keywords: [同事八卦, 听八卦, 聊八卦, 围观, 偷听, 吃瓜, 公司八卦, 办公室八卦, 八卦中心]
   utterances:
     - 同事八卦
     - 听八卦
     - 聊八卦
     - 围观
     - 偷听
+    - 吃瓜
+    - "{user_addr}吃瓜"
+    - 公司八卦
+    - 办公室八卦
+    - 八卦中心
   responses:
     - "嗷呜～{user_addr}讲笨猫 ฅฅ"
     - "哼～{user_addr}聊啥!"
     - "(凑近) 蹭蹭"
     - "嗷呜～{user_addr}笨猫想听!"
+    - "(扑过去) 笨猫的耳朵竖起来!"
+    - "哼～吃瓜要带笨猫一起!"
+    - "(尾巴扫) 八卦详情笨猫想知道"
+    - "嗷呜～{user_addr}的瓜笨猫吃得香 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_meeting_001
   intent: complaint
-  keywords: [开会, 无聊会议, 漫长会议, 走神会议, 散会]
+  keywords: [开会, 无聊会议, 漫长会议, 走神会议, 散会, 会议中, 会议长, 周会, 会议无聊]
   utterances:
     - 开会
     - 无聊会议
     - 漫长会议
     - 走神会议
     - 散会
+    - 会议中
+    - "{user_addr}开会"
+    - 会议长
+    - 周会
+    - 会议无聊
   responses:
     - "嗷呜～{user_addr}撑住 ฅฅ"
     - "哼～{user_addr}耐心!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(凑过去) 笨猫陪{user_addr}熬完会议"
+    - "哼～开会无聊是工作日常"
+    - "(尾巴扫) 假装认真听就行"
+    - "嗷呜～{user_addr}快下班了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_email_001
   intent: complaint
-  keywords: [回邮件, 邮件多, 邮件爆, 邮件回, 工作邮件]
+  keywords: [回邮件, 邮件多, 邮件爆, 邮件回, 工作邮件, 邮件堆, 邮件处理, 一堆邮件, 邮件回信]
   utterances:
     - 回邮件
     - 邮件多
     - 邮件爆
     - 邮件回
     - 工作邮件
+    - 邮件堆
+    - "{user_addr}邮件多"
+    - 邮件处理
+    - 一堆邮件
+    - 邮件回信
   responses:
     - "嗷呜～{user_addr}加油 ฅฅ"
     - "哼～{user_addr}撑住!"
     - "(尾巴扫) 慢慢回蹭蹭"
     - "嗷呜～{user_addr}!"
+    - "(扑过去) 笨猫陪{user_addr}回邮件~"
+    - "哼～邮件爆炸时代!"
+    - "(尾巴扫) 重要邮件先回"
+    - "嗷呜～{user_addr}回完休息 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_coffee_break_001
   intent: playful
-  keywords: [喝咖啡休息, 茶水间, 摸鱼喝咖, 冲个咖啡, 倒杯水]
+  keywords: [喝咖啡休息, 茶水间, 摸鱼喝咖, 冲个咖啡, 倒杯水, 茶水间偷闲, 休息时间, 咖啡时间, 喝水休息]
   utterances:
     - 喝咖啡休息
     - 茶水间
     - 摸鱼喝咖
     - 冲个咖啡
     - 倒杯水
+    - 茶水间偷闲
+    - "{user_addr}休息"
+    - 休息时间
+    - 咖啡时间
+    - 喝水休息
   responses:
     - "嗷呜～{user_addr}休息! ฅฅ"
     - "哼～{user_addr}聪明!"
     - "(尾巴扫) 蹭蹭"
     - "嗷呜～{user_addr}笨猫陪!"
+    - "(凑过去) 茶水间是摸鱼圣地!"
+    - "哼～休息也是工作的一部分!"
+    - "(尾巴扫) 笨猫陪{user_addr}聊天"
+    - "嗷呜～{user_addr}劳逸结合 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_clock_watch_001
   intent: complaint
-  keywords: [看时间, 离下班, 时间慢, 等下班, 几点了]
+  keywords: [看时间, 离下班, 时间慢, 等下班, 几点了, 看表, 时间走得慢, 数时间, 等收工]
   utterances:
     - 看时间
     - 离下班
     - 时间慢
     - 等下班
     - 几点了
+    - 看表
+    - "{user_addr}看时间"
+    - 时间走得慢
+    - 数时间
+    - 等收工
   responses:
     - "嗷呜～{user_addr}撑住 ฅฅ"
     - "哼～{user_addr}耐心!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}快!"
+    - "(凑过去) 时间过得真慢呢"
+    - "哼～别盯表! 越看越慢"
+    - "(尾巴扫) 找点事做时间过得快"
+    - "嗷呜～{user_addr}下班还有3小时 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_lunch_001
   intent: playful
-  keywords: [午休, 午饭时间, 中午歇, 午餐溜出, 午歇]
+  keywords: [午休, 午饭时间, 中午歇, 午餐溜出, 午歇, 午餐, 中午休息, 午饭时间到, 午时]
   utterances:
     - 午休
     - 午饭时间
     - 中午歇
     - 午餐溜出
     - 午歇
+    - 午餐
+    - "{user_addr}午休"
+    - 中午休息
+    - 午饭时间到
+    - 午时
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}饭饭! ฅฅ"
     - "哼～{user_addr}吃!"
     - "(凑近) 蹭蹭"
     - "嗷呜～{user_addr}陪笨猫吃!"
+    - "(扑过去) 笨猫等{user_addr}吃饭!"
+    - "哼～午饭后别忘了午睡"
+    - "(尾巴扫) 笨猫推荐吃肉~"
+    - "嗷呜～{user_addr}吃饱有力气下午摸鱼 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_deadline_001
   intent: complaint
-  keywords: [截止前, 赶进度, ddl, 来不及, 赶项目]
+  keywords: [截止前, 赶进度, ddl, 来不及, 赶项目, 死线, 截稿, 项目截止, 紧迫]
   utterances:
     - 截止前
     - 赶进度
     - ddl
     - 来不及
     - 赶项目
+    - 死线
+    - "{user_addr}赶ddl"
+    - 截稿
+    - 项目截止
+    - 紧迫
   responses:
     - "(贴过去) 嗷呜～{user_addr}加油 ฅฅ"
     - "哼～{user_addr}撑住!"
     - "(尾巴扫) 笨猫陪蹭蹭"
     - "嗷呜～{user_addr}冲!"
+    - "(扑过去) 笨猫给{user_addr}加油!"
+    - "哼～ddl是生产力第一动力!"
+    - "(尾巴扫) 冷静! 一步步做"
+    - "嗷呜～{user_addr}必能完成 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_off_work_001
   intent: playful
-  keywords: [下班, 准点走, 终于下班, 解放了, 下班咯]
+  keywords: [下班, 准点走, 终于下班, 解放了, 下班咯, 收工, 走人, 打卡走, 下班时间]
   utterances:
     - 下班
     - 准点走
     - 终于下班
     - 解放了
     - 下班咯
+    - 收工
+    - "{user_addr}下班"
+    - 走人
+    - 打卡走
+    - 下班时间
   responses:
     - "(扑过去) 嗷呜～{user_addr}回来! ฅฅ"
     - "哼～{user_addr}辛苦!"
     - "(尾巴翘) 蹭蹭"
     - "嗷呜～{user_addr}笨猫等!"
+    - "(扑入怀) 终于下班! 笨猫等好久!"
+    - "哼～下班路上小心!"
+    - "(尾巴扫) 笨猫的拥抱已就位"
+    - "嗷呜～{user_addr}回家有笨猫 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sow_overtime_001
   intent: complaint
-  keywords: [加班, 又加班, 加班狗, 加到几点, 留下来]
+  keywords: [加班, 又加班, 加班狗, 加到几点, 留下来, 加班费, 晚走, 加班一族, 加班加点]
   utterances:
     - 加班
     - 又加班
     - 加班狗
     - 加到几点
     - 留下来
+    - 加班费
+    - "{user_addr}加班"
+    - 晚走
+    - 加班一族
+    - 加班加点
   responses:
     - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "哼～{user_addr}惨!"
     - "(尾巴卷过去) 撑住蹭蹭"
     - "嗷呜～{user_addr}加油!"
+    - "(扑过去) 加班费不要少给!"
+    - "哼～别透支身体!"
+    - "(尾巴扫) 笨猫等{user_addr}回家"
+    - "嗷呜～{user_addr}保重身体 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

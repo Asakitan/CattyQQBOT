@@ -3,204 +3,324 @@
 
 - name: ou_otaku_001
   intent: question
-  keywords: [推荐御宅族, 推荐 Otaku, 推荐宅文化, 推荐宅男, 笨猫御宅]
+  keywords: [推荐御宅族, 推荐 Otaku, 推荐宅文化, 推荐宅男, 笨猫御宅, 秋叶原, Comic Market, ACGN, 宅女, 健康宅]
   utterances:
     - 推荐御宅族
     - 推荐 Otaku
     - 推荐宅文化
     - 推荐宅男
     - 笨猫御宅
+    - 推荐秋叶原
+    - 推荐 Comic Market
+    - 推荐 ACGN
+    - 推荐宅女
+    - 推荐健康宅
+    - 推荐御宅入门
   responses:
     - "嗷呜～{user_addr}Otaku - 沉迷 ACGN 的人ฅฅ"
     - "(尾巴翘) 日语原意 / 中文宅"
     - "{user_addr}秋叶原 / Comic Market"
     - "(挺胸) 猫猫推荐: 健康宅最棒!"
+    - "嗷呜～御宅文化进化为亚文化主流 ฅฅ"
+    - "(歪头)别熬夜要多运动嗷呜"
+    - "{user_addr}秋叶原现在更多旅游化蹭蹭"
+    - "(凑过来) 笨猫想跟主人逛秋叶原喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_dead_otaku_001
   intent: question
-  keywords: [推荐死宅, 推荐腐宅, 推荐宅腐, 推荐肥宅, 笨猫死宅]
+  keywords: [推荐死宅, 推荐腐宅, 推荐宅腐, 推荐肥宅, 笨猫死宅, 肥宅快乐水, 重度 ACGN, BL, 自嘲文化, 死宅生活]
   utterances:
     - 推荐死宅
     - 推荐腐宅
     - 推荐宅腐
     - 推荐肥宅
     - 笨猫死宅
+    - 推荐肥宅快乐水
+    - 推荐重度 ACGN
+    - 推荐 BL
+    - 推荐自嘲文化
+    - 推荐死宅生活
+    - 推荐死宅入门
   responses:
     - "嗷呜～{user_addr}死宅 - 重度 ACGN ฅฅ"
     - "(尾巴翘) 腐宅 = 喜欢 BL"
     - "{user_addr}肥宅快乐水 / 自嘲"
     - "(挺胸) 人家推荐: 适度最好!"
+    - "嗷呜～自嘲是文化但要保持健康 ฅฅ"
+    - "(歪头)肥宅快乐水尽量减糖嗷呜"
+    - "{user_addr}腐宅圈子要彼此尊重蹭蹭"
+    - "(凑过来) 笨猫不要做死宅喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_itabag_001
   intent: question
-  keywords: [推荐痛包, 推荐谷子, 推荐吧唧, 推荐徽章, 笨猫痛包]
+  keywords: [推荐痛包, 推荐谷子, 推荐吧唧, 推荐徽章, 笨猫痛包, 立牌, 挂件, 透卡, goods, 周边]
   utterances:
     - 推荐痛包
     - 推荐谷子
     - 推荐吧唧
     - 推荐徽章
     - 笨猫痛包
+    - 推荐立牌
+    - 推荐挂件
+    - 推荐透卡
+    - 推荐 goods 周边
+    - 推荐痛包搭配
+    - 推荐谷子入门
   responses:
     - "嗷呜～{user_addr}痛包 - 挂满谷子的包ฅฅ"
     - "(尾巴翘) 吧唧 (徽章) / 立牌 / 挂件"
     - "{user_addr}谷子 = goods 周边"
     - "(挺胸) 猫猫推荐: 透卡贴起来!"
+    - "嗷呜～痛包别太重伤肩 ฅฅ"
+    - "(歪头)买正版支持创作嗷呜"
+    - "{user_addr}吧唧塞满超有满足感蹭蹭"
+    - "(凑过来) 笨猫想戴吧唧喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_doujin_cp_001
   intent: question
-  keywords: [推荐同人圈, 推荐 CP, 推荐配对, 推荐嗑 CP, 笨猫同人]
+  keywords: [推荐同人圈, 推荐 CP, 推荐配对, 推荐嗑 CP, 笨猫同人, 官配, 逆 CP, 拆 CP, 嗑到上头, 同人创作]
   utterances:
     - 推荐同人圈
     - 推荐 CP
     - 推荐配对
     - 推荐嗑 CP
     - 笨猫同人
+    - 推荐官配
+    - 推荐逆 CP
+    - 推荐拆 CP
+    - 推荐嗑到上头
+    - 推荐同人创作
+    - 推荐 CP 入门
   responses:
     - "嗷呜～{user_addr}CP = Coupling 配对ฅฅ"
     - "(尾巴翘) 官配 / 逆 CP / 拆 CP"
     - "{user_addr}嗑到了 / 上头"
     - "(挺胸) 笨猫推荐: 别下场撕!"
+    - "嗷呜～CP 圈撕逼最累 ฅฅ"
+    - "(歪头)只嗑不评是和平方式嗷呜"
+    - "{user_addr}尊重原作再创作蹭蹭"
+    - "(凑过来) 笨猫想嗑 CP 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_bilibili_up_001
   intent: question
-  keywords: [推荐 B 站 Up, 推荐 Up 主, 推荐 bilibili, 推荐 UP, 笨猫 Up 主]
+  keywords: [推荐 B 站 Up, 推荐 Up 主, 推荐 bilibili, 推荐 UP, 笨猫 Up 主, 老番茄, 影视飓风, LKs, 罗翔, 何同学]
   utterances:
     - "推荐 B 站 Up"
     - 推荐 Up 主
     - 推荐 bilibili
     - 推荐 UP
     - 笨猫 Up 主
+    - 推荐老番茄
+    - 推荐影视飓风
+    - 推荐 LKs
+    - 推荐罗翔说刑法
+    - 推荐何同学
+    - 推荐 B 站 UP 入门
   responses:
     - "嗷呜～{user_addr}老番茄 / 红警 HBK08 ฅฅ"
     - "(尾巴翘) 影视飓风 / LKs"
     - "{user_addr}罗翔说刑法 / 何同学"
     - "(挺胸) 人家推荐: 关注一波!"
+    - "嗷呜～王骁辨证看世界 ฅฅ"
+    - "(歪头)半佛仙人观点犀利嗷呜"
+    - "{user_addr}手工耿沙雕硬核蹭蹭"
+    - "(凑过来) 笨猫想看 UP 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_lolita_001
   intent: question
-  keywords: [推荐 LO 娘, 推荐萝莉塔, 推荐 Lolita, 推荐洛丽塔, 笨猫 lo 裙]
+  keywords: [推荐 LO 娘, 推荐萝莉塔, 推荐 Lolita, 推荐洛丽塔, 笨猫 lo 裙, 甜 lo, 古典 lo, 哥特 lo, 三坑, 正版 lo]
   utterances:
     - "推荐 LO 娘"
     - 推荐萝莉塔
     - 推荐 Lolita
     - 推荐洛丽塔
     - 笨猫 lo 裙
+    - 推荐甜 lo
+    - 推荐古典 lo
+    - 推荐哥特 lo
+    - 推荐三坑
+    - 推荐正版 lo
+    - 推荐 LO 入门
   responses:
     - "嗷呜～{user_addr}Lolita - 洋装少女系ฅฅ"
     - "(尾巴翘) 甜 lo / 古典 lo / 哥特 lo"
     - "{user_addr}三坑之一 (Lolita/JK/汉服)"
     - "(挺胸) 猫猫推荐: 入正版!"
+    - "嗷呜～lo 圈娘穿正版很自豪 ฅฅ"
+    - "(歪头)山版别买伤害设计师嗷呜"
+    - "{user_addr}穿搭妆容配套蹭蹭"
+    - "(凑过来) 笨猫想看 lo 娘喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_hanfu_jk_001
   intent: question
-  keywords: [推荐汉服, 推荐 jk, 推荐 JK 制服, 推荐三坑, 笨猫汉服]
+  keywords: [推荐汉服, 推荐 jk, 推荐 JK 制服, 推荐三坑, 笨猫汉服, 格裙, 水手服, 西式 JK, 华夏服饰, 汉服形制]
   utterances:
     - 推荐汉服
     - 推荐 jk
     - 推荐 JK 制服
     - 推荐三坑
     - 笨猫汉服
+    - 推荐格裙
+    - 推荐水手服
+    - 推荐西式 JK
+    - 推荐华夏服饰
+    - 推荐汉服形制
+    - 推荐汉服入门
   responses:
     - "嗷呜～{user_addr}汉服 - 华夏传统服饰ฅฅ"
     - "(尾巴翘) JK = 女子高中生制服"
     - "{user_addr}格裙 / 水手服 / 西式"
     - "(挺胸) 笨猫推荐: 笨猫穿 JK ฅฅ"
+    - "嗷呜～汉服形制要规范 ฅฅ"
+    - "(歪头)JK 格裙看校供学院风嗷呜"
+    - "{user_addr}三坑都需要日常打理蹭蹭"
+    - "(凑过来) 笨猫想穿 JK 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_vtuber_001
   intent: question
-  keywords: [推荐虚拟主播, 推荐 VTuber, 推荐 V 圈, 推荐皮套, 笨猫 vtb]
+  keywords: [推荐虚拟主播, 推荐 VTuber, 推荐 V 圈, 推荐皮套, 笨猫 vtb, hololive, 彩虹社, A-Soul, 皮套人, 中之人]
   utterances:
     - 推荐虚拟主播
     - 推荐 VTuber
     - "推荐 V 圈"
     - 推荐皮套
     - 笨猫 vtb
+    - 推荐 hololive
+    - 推荐彩虹社
+    - 推荐 A-Soul
+    - 推荐皮套人
+    - 推荐中之人
+    - 推荐 V 圈入门
   responses:
     - "嗷呜～{user_addr}VTuber - 虚拟主播ฅฅ"
     - "(尾巴翘) hololive / 彩虹社 / A-Soul"
     - "{user_addr}皮套人 / 中之人"
     - "(挺胸) 人家推荐: 看本命!"
+    - "嗷呜～国 V 也很可爱 ฅฅ"
+    - "(歪头)不要扒中之人嗷呜"
+    - "{user_addr}看直播补番都行蹭蹭"
+    - "(凑过来) 笨猫想做 VTuber 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_acg_music_001
   intent: question
-  keywords: [推荐二次元音乐, 推荐 ACG 音乐, 推荐动漫音乐, 推荐 OP ED, 笨猫二次元音乐]
+  keywords: [推荐二次元音乐, 推荐 ACG 音乐, 推荐动漫音乐, 推荐 OP ED, 笨猫二次元音乐, LiSA, Aimer, YOASOBI, 米津玄师, RADWIMPS]
   utterances:
     - 推荐二次元音乐
     - "推荐 ACG 音乐"
     - 推荐动漫音乐
     - "推荐 OP ED"
     - 笨猫二次元音乐
+    - 推荐 LiSA
+    - 推荐 Aimer
+    - 推荐 YOASOBI
+    - 推荐米津玄师
+    - 推荐 RADWIMPS
+    - 推荐 OST 入门
   responses:
     - "嗷呜～{user_addr}OP / ED / OST ฅฅ"
     - "(尾巴翘) LiSA / Aimer / YOASOBI"
     - "{user_addr}米津玄师 / RADWIMPS"
     - "(挺胸) 猫猫推荐: 网易云搜!"
+    - "嗷呜～夜咄ディセイブ很催泪 ฅฅ"
+    - "(歪头)Sawano 神配乐嗷呜"
+    - "{user_addr}补番先听 OP 入坑蹭蹭"
+    - "(凑过来) 笨猫想听 OST 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_cosplay_001
   intent: question
-  keywords: [推荐 cosplay, 推荐 cos, 推荐 coser, 推荐角色扮演, 笨猫 cos]
+  keywords: [推荐 cosplay, 推荐 cos, 推荐 coser, 推荐角色扮演, 笨猫 cos, 假发, 道具, 化妆, 漫展, 还原度]
   utterances:
     - 推荐 cosplay
     - 推荐 cos
     - 推荐 coser
     - 推荐角色扮演
     - 笨猫 cos
+    - 推荐假发选购
+    - 推荐道具制作
+    - 推荐 cos 化妆
+    - 推荐漫展 cos
+    - 推荐还原度
+    - 推荐 cos 入门
   responses:
     - "嗷呜～{user_addr}Cosplay - 角色扮演ฅฅ"
     - "(尾巴翘) 假发 / 服装 / 道具 / 化妆"
     - "{user_addr}漫展 / 摄影 / 还原度"
     - "(挺胸) 笨猫推荐: 笨猫本身就是!"
+    - "嗷呜～cos 摄影也是一门艺术 ฅฅ"
+    - "(歪头)注意尊重原作角色嗷呜"
+    - "{user_addr}漫展前要练姿势蹭蹭"
+    - "(凑过来) 笨猫想 cos 喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_comic_expo_001
   intent: question
-  keywords: [推荐漫展, 推荐 BW, 推荐 CCG, 推荐 ChinaJoy, 笨猫漫展]
+  keywords: [推荐漫展, 推荐 BW, 推荐 CCG, 推荐 ChinaJoy, 笨猫漫展, 萤火虫, 北京 IDO, 抢票, BilibiliWorld, 漫展攻略]
   utterances:
     - 推荐漫展
     - 推荐 BW
     - 推荐 CCG
     - 推荐 ChinaJoy
     - 笨猫漫展
+    - 推荐萤火虫漫展
+    - 推荐北京 IDO
+    - 推荐 BilibiliWorld
+    - 推荐 ChinaJoy
+    - 推荐漫展攻略
+    - 推荐漫展入门
   responses:
     - "嗷呜～{user_addr}BW = BilibiliWorld ฅฅ"
     - "(尾巴翘) CCG (上海) / CJ (ChinaJoy)"
     - "{user_addr}萤火虫 / 北京 IDO"
     - "(挺胸) 人家推荐: 提前抢票!"
+    - "嗷呜～漫展周边场内贵 ฅฅ"
+    - "(歪头)排队记得带水嗷呜"
+    - "{user_addr}痛包+应援棒带齐蹭蹭"
+    - "(凑过来) 笨猫想去漫展喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ou_doujinshi_001
   intent: question
-  keywords: [推荐同人本, 推荐同人志, 推荐 C 团, 推荐本子, 笨猫同人本]
+  keywords: [推荐同人本, 推荐同人志, 推荐 C 团, 推荐本子, 笨猫同人本, Comic Market, 全年龄, R-18, 同人志区, 原创同人]
   utterances:
     - 推荐同人本
     - 推荐同人志
     - "推荐 C 团"
     - 推荐本子
     - 笨猫同人本
+    - 推荐 Comic Market
+    - 推荐全年龄向
+    - 推荐 R-18 区分
+    - 推荐同人志区
+    - 推荐原创同人
+    - 推荐同人本入门
   responses:
     - "嗷呜～{user_addr}同人志 - 粉丝自制ฅฅ"
     - "(尾巴翘) Comic Market (C 团)"
     - "{user_addr}全年龄 / R-18 区分"
     - "(挺胸) 笨猫推荐: 支持原创!"
+    - "嗷呜～C 团一年两次东京有明 ฅฅ"
+    - "(歪头)国内有 CP 漫展嗷呜"
+    - "{user_addr}支持作者别买盗版蹭蹭"
+    - "(凑过来) 笨猫想看本子喵!"
   cooldown_seconds: 60
   weight: 1.0

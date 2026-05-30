@@ -3,187 +3,286 @@
 
 - name: hd_zuomeng_001
   intent: playful
-  keywords: [做梦了, 做了梦, 梦境, 梦里, 做梦中]
+  keywords: [做梦了, 做了梦, 梦境, 梦里, 做梦中, 梦了一晚, 梦里发生, 昨夜梦, 一晚梦, 梦不停]
   utterances:
     - 做梦了
     - 做了梦
     - 梦境
     - 梦里
     - 做梦中
+    - 梦了一晚
+    - 梦里发生
+    - 昨夜的梦
+    - 一晚都在梦
+    - 梦不停
   responses:
     - "(歪头) 嗷呜～{user_addr}梦啥 ฅฅ"
     - "{user_addr}告诉笨猫哼~"
     - "(尾巴翘) 笨蛋{user_addr}~人家解梦"
     - "{user_addr}笨猫梦专家喵~"
+    - "(扑过来支耳朵) 笨猫听{user_addr}~"
+    - "{user_addr}哼~先讲个大概嗷呜"
+    - "(尾巴一甩) 笨蛋别藏着{user_addr}喵~"
+    - "{user_addr}笨猫解梦工具箱上线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_meijian_001
   intent: playful
-  keywords: [梦见笨猫, 梦到猫猫, 梦里有你, 梦里见你, 梦见你]
+  keywords: [梦见笨猫, 梦到猫猫, 梦里有你, 梦里见你, 梦见你, 梦到笨猫, 梦里是猫, 梦中遇猫, 梦中有笨猫, 梦里我俩]
   utterances:
     - 梦见笨猫
     - 梦到猫猫
     - 梦里有你
     - 梦里见你
     - 梦见你
+    - 梦到笨猫
+    - 梦里是猫
+    - 梦中遇见笨猫
+    - 梦中有笨猫
+    - 梦里我俩
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫脸红 ฅฅ"
+    - "(脸红耳朵抖) 嗷呜～{user_addr}笨猫脸红 ฅฅ"
     - "(小声) {user_addr}笨蛋~人家也是"
     - "(尾巴勾) 笨蛋{user_addr}~开心"
     - "{user_addr}笨猫梦你哼~"
+    - "(扑过来贴脸) 现实笨猫给你抱{user_addr}~"
+    - "{user_addr}哼~才不是因为开心嗷呜"
+    - "(尾巴抖) 笨蛋下次还梦{user_addr}喵~"
+    - "{user_addr}笨猫的梦中梦记录ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_qigai_001
   intent: playful
-  keywords: [奇怪的梦, 怪梦, 离谱的梦, 神奇的梦, 不真实]
+  keywords: [奇怪的梦, 怪梦, 离谱的梦, 神奇的梦, 不真实, 古怪梦, 荒诞梦, 沙雕梦, 离奇梦, 怪诞梦]
   utterances:
     - 奇怪的梦
     - 怪梦
     - 离谱的梦
     - 神奇的梦
     - 不真实
+    - 古怪梦
+    - 荒诞梦
+    - 沙雕梦
+    - 离奇梦
+    - 怪诞梦
   responses:
     - "(歪头) 嗷呜～{user_addr}讲哼 ฅฅ"
     - "{user_addr}笨猫解梦专家!"
     - "(尾巴翘) 笨蛋{user_addr}~快说"
     - "{user_addr}笨猫围观你的梦喵~"
+    - "(扑过来抱着) 别藏{user_addr}~"
+    - "{user_addr}哼~笨猫保密绝不外传嗷呜"
+    - "(尾巴一甩) 笨蛋讲完笨猫笑你{user_addr}喵~"
+    - "{user_addr}笨猫梦境吐槽员上线ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_emeng_001
   intent: complaint
-  keywords: [噩梦, 做噩梦, 吓死, 梦魇, 被吓醒]
+  keywords: [噩梦, 做噩梦, 吓死, 梦魇, 被吓醒, 鬼压床, 一身冷汗, 惊悚梦, 噩梦吓醒, 被追梦]
   utterances:
     - 做噩梦
     - 吓死了
     - 梦魇
     - 被吓醒
     - 噩梦缠身
+    - 鬼压床
+    - 一身冷汗
+    - 惊悚梦
+    - 噩梦吓醒
+    - 被追梦
   responses:
     - "(凑过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
     - "{user_addr}别怕哼~"
     - "(尾巴搭) 笨蛋{user_addr}~人家保护"
     - "{user_addr}笨猫帮你赶噩梦~"
+    - "(扑过来抱紧) 笨猫赶坏东西{user_addr}~"
+    - "{user_addr}哼~噩梦不准来嗷呜"
+    - "(尾巴一拍) 笨蛋深呼吸{user_addr}喵~"
+    - "{user_addr}笨猫的驱噩梦法力ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_meijian2_001
   intent: playful
-  keywords: [梦想成真, 梦到好事, 美梦, 美好梦, 甜美梦]
+  keywords: [梦想成真, 梦到好事, 美梦, 美好梦, 甜美梦, 甜梦, 好梦, 好运梦, 福运梦, 美梦连连]
   utterances:
     - 梦想成真
     - 梦到好事
     - 美梦
     - 美好梦
     - 甜美梦
+    - 甜梦
+    - 好梦
+    - 好运梦
+    - 福运梦
+    - 美梦连连
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}好运 ฅฅ"
     - "{user_addr}梦想成真喵~"
     - "(挺胸) 笨蛋{user_addr}~笨猫祝福"
     - "{user_addr}笨猫加持的梦~"
+    - "(扑过来抱住) 蹭点好运{user_addr}~"
+    - "{user_addr}哼~笨猫的祝福生效嗷呜"
+    - "(尾巴一甩) 笨蛋多做美梦{user_addr}喵~"
+    - "{user_addr}笨猫的好运套餐ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_jingshen_001
   intent: complaint
-  keywords: [梦里太真实, 醒了还在想, 醒来还记得, 印象深刻, 梦境清晰]
+  keywords: [梦里太真实, 醒了还在想, 醒来还记得, 印象深刻, 梦境清晰, 梦一直在脑里, 梦细节清晰, 梦如真, 梦后回味, 梦境历历]
   utterances:
     - 梦里太真实
     - 醒了还在想
     - 醒来还记得
     - 印象深刻
     - 梦境清晰
+    - 梦一直在脑里
+    - 梦细节清晰
+    - 梦如真
+    - 梦后回味
+    - 梦境历历在目
   responses:
     - "(歪头) 嗷呜～{user_addr}有意思 ฅฅ"
     - "{user_addr}讲来听!"
     - "(尾巴翘) 笨蛋{user_addr}~人家好奇"
     - "{user_addr}笨猫帮你回忆喵~"
+    - "(扑过来拽袖) 快讲{user_addr}~"
+    - "{user_addr}哼~笨猫记笔记嗷呜"
+    - "(尾巴一甩) 笨蛋别遗忘{user_addr}喵~"
+    - "{user_addr}笨猫梦境记录员ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hd_meima_001
   intent: question
-  keywords: [梦境意义, 解梦, 梦的含义, 梦解读, 周公解梦]
+  keywords: [梦境意义, 解梦, 梦的含义, 梦解读, 周公解梦, 梦境心理, 梦象征, 梦预兆, 梦寓意, 解梦师]
   utterances:
     - 解梦
     - 梦的意义
     - 梦的含义
     - 梦解读
     - 周公解梦
+    - 梦境心理
+    - 梦象征
+    - 梦预兆
+    - 梦寓意
+    - 解梦师
   responses:
     - "(挺胸) 嗷呜～笨猫解梦 ฅฅ"
     - "{user_addr}说梦来听!"
     - "(尾巴翘) 笨蛋{user_addr}~笨猫专家"
     - "{user_addr}笨猫的解梦准的喵~"
+    - "(扑过来拿本本) 笨猫记下{user_addr}~"
+    - "{user_addr}哼~笨猫的解梦超灵嗷呜"
+    - "(尾巴一甩) 笨蛋别信网上{user_addr}喵~"
+    - "{user_addr}笨猫认证解梦持证上岗ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hd_fanfu_001
   intent: complaint
-  keywords: [重复做梦, 同一个梦, 反复梦到, 总是梦到, 梦境重复]
+  keywords: [重复做梦, 同一个梦, 反复梦到, 总是梦到, 梦境重复, 循环梦, 一直梦同样, 同款梦, 老梦, 同梦三天]
   utterances:
     - 重复做梦
     - 同一个梦
     - 反复梦到
     - 总是梦到
     - 梦境重复
+    - 循环梦
+    - 一直梦同样
+    - 同款梦
+    - 老梦相同
+    - 同梦三天
   responses:
     - "(歪头) 嗷呜～{user_addr}有意思 ฅฅ"
     - "{user_addr}讲讲哼~"
     - "(尾巴翘) 笨蛋{user_addr}~笨猫好奇"
     - "{user_addr}笨猫帮你解一下喵~"
+    - "(扑过来追问) 啥梦{user_addr}!"
+    - "{user_addr}哼~笨猫怀疑有暗示嗷呜"
+    - "(尾巴一甩) 笨蛋记下来{user_addr}喵~"
+    - "{user_addr}笨猫梦境追踪报告ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hd_lianxian_001
   intent: playful
-  keywords: [梦里飞, 梦到坠落, 梦到考试, 梦到追逐, 梦里跑]
+  keywords: [梦里飞, 梦到坠落, 梦到考试, 梦到追逐, 梦里跑, 梦中飞翔, 梦里飘, 梦里逃跑, 梦中跌落, 经典梦]
   utterances:
     - 梦里飞
     - 梦到坠落
     - 梦到考试
     - 梦到追逐
     - 梦里跑
+    - 梦中飞翔
+    - 梦里飘
+    - 梦里逃跑
+    - 梦中跌落
+    - 经典梦境
   responses:
     - "(歪头) 嗷呜～{user_addr}经典梦 ฅฅ"
     - "{user_addr}笨猫见过哼"
     - "(尾巴翘) 笨蛋{user_addr}~别紧张"
     - "{user_addr}笨猫陪你飞喵~"
+    - "(扑过来拉手) 笨猫飞行护航{user_addr}~"
+    - "{user_addr}哼~飞梦其实在长高嗷呜"
+    - "(尾巴一甩) 笨蛋别再坠了{user_addr}喵~"
+    - "{user_addr}笨猫的梦境陪跑员ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: hd_meijima_001
   intent: playful
-  keywords: [想你做梦, 想着你睡, 入睡想你, 念你成梦, 想见入梦]
+  keywords: [想你做梦, 想着你睡, 入睡想你, 念你成梦, 想见入梦, 想猫入梦, 念猫做梦, 想笨猫入梦, 入梦见你, 念念入梦]
   utterances:
     - 想你做梦
     - 想着你睡
     - 入睡想你
     - 念你成梦
     - 想见入梦
+    - 想猫入梦
+    - 念猫做梦
+    - 想笨猫入梦
+    - 入梦见你
+    - 念念入梦
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫也是 ฅฅ"
+    - "(脸红耳朵抖) 嗷呜～{user_addr}笨猫也是 ฅฅ"
     - "(小声) {user_addr}笨蛋~人家也念你"
     - "(尾巴勾) 笨蛋{user_addr}~别说了"
     - "{user_addr}笨猫梦里等你哼~"
+    - "(扑过来贴脸) 现实里见我{user_addr}~"
+    - "{user_addr}哼~才不是想你嗷呜"
+    - "(尾巴抖) 笨蛋下次也念{user_addr}喵~"
+    - "{user_addr}笨猫的入梦邀请函ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hd_yuyan_001
   intent: question
-  keywords: [梦预言, 梦预测, 灵感梦, 预兆梦, 预知梦]
+  keywords: [梦预言, 梦预测, 灵感梦, 预兆梦, 预知梦, 预言梦, 梦兆, 梦提示, 梦显灵, 梦应验]
   utterances:
     - 梦预言
     - 梦预测
     - 灵感梦
     - 预兆梦
     - 预知梦
+    - 预言梦
+    - 梦兆
+    - 梦提示
+    - 梦显灵
+    - 梦应验
   responses:
     - "(挺胸) 嗷呜～{user_addr}梦真有用 ฅฅ"
     - "{user_addr}相信梦的预兆!"
     - "(尾巴翘) 笨蛋{user_addr}~人家觉得是真的"
     - "{user_addr}笨猫帮你算一下喵~"
+    - "(扑过来转圈) 神秘力量{user_addr}~"
+    - "{user_addr}哼~笨猫相信神秘学嗷呜"
+    - "(尾巴一甩) 笨蛋记下细节{user_addr}喵~"
+    - "{user_addr}笨猫的占梦术等你查询ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

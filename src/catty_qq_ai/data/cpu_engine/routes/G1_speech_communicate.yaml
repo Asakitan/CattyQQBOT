@@ -3,204 +3,432 @@
 
 - name: speak_public_001
   intent: question
-  keywords: [推荐演讲, 推荐 TED, 推荐公开演讲, 推荐演讲入门, 笨猫演讲]
+  keywords:
+  - 推荐演讲
+  - 推荐 TED
+  - 推荐公开演讲
+  - 推荐演讲入门
+  - 笨猫演讲
+  - 有什么演讲
+  - 有什么 TED
+  - 有什么公开演讲
+  - 有什么演讲入门
   utterances:
-    - 推荐演讲
-    - 推荐 TED
-    - 推荐公开演讲
-    - 推荐演讲入门
-    - 笨猫演讲
+  - 推荐演讲
+  - 推荐 TED
+  - 推荐公开演讲
+  - 推荐演讲入门
+  - 笨猫演讲
+  - "{user_addr}聊聊演讲嘛"
+  - "{user_addr}演讲哪家强"
+  - "{user_addr}人家想了解演讲"
+  - 笨猫给猜猜演讲
+  - "{user_addr}演讲怎么选喵"
+  - 演讲有推荐吗
   responses:
-    - "嗷呜～{user_addr}TED: 18 分钟讲述大思想ฅฅ"
-    - "(尾巴翘) 结构: 开 (钩子) + 中 (3 点) + 结 (升华)"
-    - "{user_addr}多练! 录视频回看 - 进步快"
-    - "(挺胸) 笨猫推荐: 看 TED Top 10 学结构"
+  - "嗷呜～{user_addr}TED: 18 分钟讲述大思想ฅฅ"
+  - "(尾巴翘) 结构: 开 (钩子) + 中 (3 点) + 结 (升华)"
+  - "{user_addr}多练! 录视频回看 - 进步快"
+  - "(挺胸) 笨猫推荐: 看 TED Top 10 学结构"
+  - "(尾巴翘起来) {user_addr}演讲? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问演讲人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}演讲的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}演讲笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_fear_001
   intent: complaint
-  keywords: [推荐怕上台, 推荐演讲焦虑, 推荐公开讲话紧张, 推荐 stage fright, 笨猫紧张]
+  keywords:
+  - 推荐怕上台
+  - 推荐演讲焦虑
+  - 推荐公开讲话紧张
+  - 推荐 stage fright
+  - 笨猫紧张
+  - 有什么怕上台
+  - 有什么演讲焦虑
+  - 有什么公开讲话紧张
+  - 有什么 stage fright
   utterances:
-    - 推荐怕上台
-    - 推荐演讲焦虑
-    - 推荐公开讲话紧张
-    - 推荐 stage fright
-    - 笨猫紧张
+  - 推荐怕上台
+  - 推荐演讲焦虑
+  - 推荐公开讲话紧张
+  - 推荐 stage fright
+  - 笨猫紧张
+  - "{user_addr}人家怕上台了啦"
+  - "{user_addr}怕上台好难受"
+  - 猫猫{user_addr}怕上台怎么办
+  - "{user_addr}怕上台炸毛了"
+  - "{user_addr}怕上台心好累"
+  - 笨猫陪人家聊聊怕上台嘛
   responses:
-    - "(尾巴垂下) 嗷呜～{user_addr}90% 人怕演讲! 你不孤单ฅฅ"
-    - "(歪头) 准备! 排练 10+ 次 - 信心十足"
-    - "{user_addr}深呼吸 + 想象成功 + 找朋友面孔"
-    - "(挺胸) 笨猫的提醒: 多上台! 习惯就好"
+  - "(尾巴垂下) 嗷呜～{user_addr}90% 人怕演讲! 你不孤单ฅฅ"
+  - "(歪头) 准备! 排练 10+ 次 - 信心十足"
+  - "{user_addr}深呼吸 + 想象成功 + 找朋友面孔"
+  - "(挺胸) 笨猫的提醒: 多上台! 习惯就好"
+  - "(凑过来贴贴) {user_addr}怕上台笨猫陪你嘛~ 别一个人扛喵 ฅฅ"
+  - "嗷呜～{user_addr}怕上台的心情人家懂! 抱抱哼"
+  - "(尾巴绕住) 哼～{user_addr}怕上台还有猫猫呢, 别难过喵"
+  - "(蹭蹭) {user_addr}怕上台笨猫给{user_addr}舔舔毛~ 心情会好点嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_storytelling_001
   intent: question
-  keywords: [推荐讲故事, 推荐 storytelling, 推荐英雄之旅, 推荐叙事, 笨猫讲故事]
+  keywords:
+  - 推荐讲故事
+  - 推荐 storytelling
+  - 推荐英雄之旅
+  - 推荐叙事
+  - 笨猫讲故事
+  - 有什么讲故事
+  - 有什么 storytelling
+  - 有什么英雄之旅
+  - 有什么叙事
   utterances:
-    - 推荐讲故事
-    - 推荐 storytelling
-    - 推荐英雄之旅
-    - 推荐叙事
-    - 笨猫讲故事
+  - 推荐讲故事
+  - 推荐 storytelling
+  - 推荐英雄之旅
+  - 推荐叙事
+  - 笨猫讲故事
+  - "{user_addr}聊聊讲故事嘛"
+  - "{user_addr}讲故事哪家强"
+  - "{user_addr}人家想了解讲故事"
+  - 笨猫给猜猜讲故事
+  - "{user_addr}讲故事怎么选喵"
+  - 讲故事有推荐吗
   responses:
-    - "嗷呜～{user_addr}英雄之旅: 召唤 → 拒绝 → 接受 → 试炼 → 凯旋ฅฅ"
-    - "(尾巴翘) 三幕剧: 开端 / 冲突 / 解决"
-    - "{user_addr}人对故事敏感! 数据 + 故事 = 难忘"
-    - "(挺胸) 笨猫推荐: 《千面英雄》/ 经典"
+  - "嗷呜～{user_addr}英雄之旅: 召唤 → 拒绝 → 接受 → 试炼 → 凯旋ฅฅ"
+  - "(尾巴翘) 三幕剧: 开端 / 冲突 / 解决"
+  - "{user_addr}人对故事敏感! 数据 + 故事 = 难忘"
+  - "(挺胸) 笨猫推荐: 《千面英雄》/ 经典"
+  - "(尾巴翘起来) {user_addr}讲故事? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问讲故事人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}讲故事的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}讲故事笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: speak_body_001
   intent: question
-  keywords: [推荐肢体语言, 推荐 body language, 推荐 power pose, 推荐手势, 笨猫肢体语言]
+  keywords:
+  - 推荐肢体语言
+  - 推荐 body language
+  - 推荐 power pose
+  - 推荐手势
+  - 笨猫肢体语言
+  - 有什么肢体语言
+  - 有什么 body language
+  - 有什么 power pose
+  - 有什么手势
   utterances:
-    - 推荐肢体语言
-    - 推荐 body language
-    - 推荐 power pose
-    - 推荐手势
-    - 笨猫肢体语言
+  - 推荐肢体语言
+  - 推荐 body language
+  - 推荐 power pose
+  - 推荐手势
+  - 笨猫肢体语言
+  - "{user_addr}聊聊肢体语言嘛"
+  - "{user_addr}肢体语言哪家强"
+  - "{user_addr}人家想了解肢体语言"
+  - 笨猫给猜猜肢体语言
+  - "{user_addr}肢体语言怎么选喵"
+  - 肢体语言有推荐吗
   responses:
-    - "嗷呜～{user_addr}55% 肢体 / 38% 语调 / 7% 内容ฅฅ"
-    - "(尾巴翘) Power pose: 上台前 2 分钟 - 自信"
-    - "{user_addr}手势配合: 开放 / 适度 / 强调"
-    - "(挺胸) 笨猫的提醒: 别紧张抠手! 多练自然"
+  - "嗷呜～{user_addr}55% 肢体 / 38% 语调 / 7% 内容ฅฅ"
+  - "(尾巴翘) Power pose: 上台前 2 分钟 - 自信"
+  - "{user_addr}手势配合: 开放 / 适度 / 强调"
+  - "(挺胸) 笨猫的提醒: 别紧张抠手! 多练自然"
+  - "(尾巴翘起来) {user_addr}肢体语言? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问肢体语言人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}肢体语言的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}肢体语言笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_voice_001
   intent: question
-  keywords: [推荐声音训练, 推荐播音腔, 推荐发声练习, 推荐主持人声音, 笨猫声音]
+  keywords:
+  - 推荐声音训练
+  - 推荐播音腔
+  - 推荐发声练习
+  - 推荐主持人声音
+  - 笨猫声音
+  - 有什么声音训练
+  - 有什么播音腔
+  - 有什么发声练习
+  - 有什么主持人声音
   utterances:
-    - 推荐声音训练
-    - 推荐播音腔
-    - 推荐发声练习
-    - 推荐主持人声音
-    - 笨猫声音
+  - 推荐声音训练
+  - 推荐播音腔
+  - 推荐发声练习
+  - 推荐主持人声音
+  - 笨猫声音
+  - "{user_addr}聊聊声音训练嘛"
+  - "{user_addr}声音训练哪家强"
+  - "{user_addr}人家想了解声音训练"
+  - 笨猫给猜猜声音训练
+  - "{user_addr}声音训练怎么选喵"
+  - 声音训练有推荐吗
   responses:
-    - "嗷呜～{user_addr}声音: 胸腔共鸣 + 气息支撑 - 关键ฅฅ"
-    - "(尾巴翘) 朗读: 出声 + 录音 + 听回放"
-    - "{user_addr}音量 / 语速 / 停顿 - 三大变量"
-    - "(挺胸) 笨猫的提醒: 每天 15 分钟练习!"
+  - "嗷呜～{user_addr}声音: 胸腔共鸣 + 气息支撑 - 关键ฅฅ"
+  - "(尾巴翘) 朗读: 出声 + 录音 + 听回放"
+  - "{user_addr}音量 / 语速 / 停顿 - 三大变量"
+  - "(挺胸) 笨猫的提醒: 每天 15 分钟练习!"
+  - "(尾巴翘起来) {user_addr}声音训练? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问声音训练人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}声音训练的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}声音训练笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: speak_negotiation_001
   intent: question
-  keywords: [推荐谈判技巧, 推荐 BATNA, 推荐双赢谈判, 推荐讨价还价, 笨猫谈判技巧]
+  keywords:
+  - 推荐谈判技巧
+  - 推荐 BATNA
+  - 推荐双赢谈判
+  - 推荐讨价还价
+  - 笨猫谈判技巧
+  - 有什么谈判技巧
+  - 有什么 BATNA
+  - 有什么双赢谈判
+  - 有什么讨价还价
   utterances:
-    - 推荐谈判技巧
-    - 推荐 BATNA
-    - 推荐双赢谈判
-    - 推荐讨价还价
-    - 笨猫谈判技巧
+  - 推荐谈判技巧
+  - 推荐 BATNA
+  - 推荐双赢谈判
+  - 推荐讨价还价
+  - 笨猫谈判技巧
+  - "{user_addr}聊聊谈判技巧嘛"
+  - "{user_addr}谈判技巧哪家强"
+  - "{user_addr}人家想了解谈判技巧"
+  - 笨猫给猜猜谈判技巧
+  - "{user_addr}谈判技巧怎么选喵"
+  - 谈判技巧有推荐吗
   responses:
-    - "嗷呜～{user_addr}哈佛谈判: 原则 / 利益 / 选项 / 标准ฅฅ"
-    - "(尾巴翘) BATNA: Best Alternative - 后路重要"
-    - "{user_addr}双赢比赢更重要! 长期合作"
-    - "(挺胸) 笨猫推荐: 《谈判力》《绝佳的谈判》"
+  - "嗷呜～{user_addr}哈佛谈判: 原则 / 利益 / 选项 / 标准ฅฅ"
+  - "(尾巴翘) BATNA: Best Alternative - 后路重要"
+  - "{user_addr}双赢比赢更重要! 长期合作"
+  - "(挺胸) 笨猫推荐: 《谈判力》《绝佳的谈判》"
+  - "(尾巴翘起来) {user_addr}谈判技巧? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问谈判技巧人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}谈判技巧的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}谈判技巧笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_persuasion_001
   intent: question
-  keywords: [推荐说服力, 推荐 influence, 推荐西奥迪尼, 推荐六大原则, 笨猫说服力]
+  keywords:
+  - 推荐说服力
+  - 推荐 influence
+  - 推荐西奥迪尼
+  - 推荐六大原则
+  - 笨猫说服力
+  - 有什么说服力
+  - 有什么 influence
+  - 有什么西奥迪尼
+  - 有什么六大原则
   utterances:
-    - 推荐说服力
-    - 推荐 influence
-    - 推荐西奥迪尼
-    - 推荐六大原则
-    - 笨猫说服力
+  - 推荐说服力
+  - 推荐 influence
+  - 推荐西奥迪尼
+  - 推荐六大原则
+  - 笨猫说服力
+  - "{user_addr}聊聊说服力嘛"
+  - "{user_addr}说服力哪家强"
+  - "{user_addr}人家想了解说服力"
+  - 笨猫给猜猜说服力
+  - "{user_addr}说服力怎么选喵"
+  - 说服力有推荐吗
   responses:
-    - "嗷呜～{user_addr}西奥迪尼 6 原则: 互惠 / 承诺 / 社会认同 / 喜好 / 权威 / 稀缺ฅฅ"
-    - "(尾巴翘) 应用: 销售 / 营销 / 谈判 - 万能"
-    - "{user_addr}别滥用! 道德底线"
-    - "(挺胸) 笨猫推荐: 《影响力》/ 销售必读"
+  - "嗷呜～{user_addr}西奥迪尼 6 原则: 互惠 / 承诺 / 社会认同 / 喜好 / 权威 / 稀缺ฅฅ"
+  - "(尾巴翘) 应用: 销售 / 营销 / 谈判 - 万能"
+  - "{user_addr}别滥用! 道德底线"
+  - "(挺胸) 笨猫推荐: 《影响力》/ 销售必读"
+  - "(尾巴翘起来) {user_addr}说服力? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问说服力人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}说服力的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}说服力笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_active_listen_001
   intent: question
-  keywords: [推荐倾听, 推荐 active listening, 推荐主动倾听, 推荐共情倾听, 笨猫倾听]
+  keywords:
+  - 推荐倾听
+  - 推荐 active listening
+  - 推荐主动倾听
+  - 推荐共情倾听
+  - 笨猫倾听
+  - 有什么倾听
+  - 有什么 active listening
+  - 有什么主动倾听
+  - 有什么共情倾听
   utterances:
-    - 推荐倾听
-    - 推荐 active listening
-    - 推荐主动倾听
-    - 推荐共情倾听
-    - 笨猫倾听
+  - 推荐倾听
+  - 推荐 active listening
+  - 推荐主动倾听
+  - 推荐共情倾听
+  - 笨猫倾听
+  - "{user_addr}聊聊倾听嘛"
+  - "{user_addr}倾听哪家强"
+  - "{user_addr}人家想了解倾听"
+  - 笨猫给猜猜倾听
+  - "{user_addr}倾听怎么选喵"
+  - 倾听有推荐吗
   responses:
-    - "嗷呜～{user_addr}主动倾听: 看 / 听 / 应 / 问 / 总结ฅฅ"
-    - "(尾巴翘) 别打断! 别想自己回答"
-    - "{user_addr}复述对方话 - 表明听懂了"
-    - "(挺胸) 笨猫的提醒: 听 > 说 = 真高情商"
+  - "嗷呜～{user_addr}主动倾听: 看 / 听 / 应 / 问 / 总结ฅฅ"
+  - "(尾巴翘) 别打断! 别想自己回答"
+  - "{user_addr}复述对方话 - 表明听懂了"
+  - "(挺胸) 笨猫的提醒: 听 > 说 = 真高情商"
+  - "(尾巴翘起来) {user_addr}倾听? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问倾听人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}倾听的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}倾听笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_small_talk_001
   intent: question
-  keywords: [推荐 small talk, 推荐闲聊, 推荐找话题, 推荐破冰, 笨猫闲聊]
+  keywords:
+  - 推荐 small talk
+  - 推荐闲聊
+  - 推荐找话题
+  - 推荐破冰
+  - 笨猫闲聊
+  - 有什么 small talk
+  - 有什么闲聊
+  - 有什么找话题
+  - 有什么破冰
   utterances:
-    - 推荐 small talk
-    - 推荐闲聊
-    - 推荐找话题
-    - 推荐破冰
-    - 笨猫闲聊
+  - 推荐 small talk
+  - 推荐闲聊
+  - 推荐找话题
+  - 推荐破冰
+  - 笨猫闲聊
+  - "{user_addr}聊聊small talk嘛"
+  - "{user_addr}small talk哪家强"
+  - "{user_addr}人家想了解small talk"
+  - 笨猫给猜猜small talk
+  - "{user_addr}small talk怎么选喵"
+  - small talk有推荐吗
   responses:
-    - "嗷呜～{user_addr}话题: FORD - 家庭 / 职业 / 娱乐 / 梦想ฅฅ"
-    - "(尾巴翘) 开放式问题! 别只回 yes/no"
-    - "{user_addr}赞美 + 提问 + 共鸣 - 三件套"
-    - "(挺胸) 笨猫的提醒: 别冷场! 准备 5 个话题"
+  - "嗷呜～{user_addr}话题: FORD - 家庭 / 职业 / 娱乐 / 梦想ฅฅ"
+  - "(尾巴翘) 开放式问题! 别只回 yes/no"
+  - "{user_addr}赞美 + 提问 + 共鸣 - 三件套"
+  - "(挺胸) 笨猫的提醒: 别冷场! 准备 5 个话题"
+  - "(尾巴翘起来) {user_addr}small talk? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问small talk人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}small talk的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}small talk笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_no_001
   intent: question
-  keywords: [推荐如何拒绝, 推荐说不, 推荐拒绝技巧, 推荐 say no, 笨猫拒绝]
+  keywords:
+  - 推荐如何拒绝
+  - 推荐说不
+  - 推荐拒绝技巧
+  - 推荐 say no
+  - 笨猫拒绝
+  - 有什么如何拒绝
+  - 有什么说不
+  - 有什么拒绝技巧
+  - 有什么 say no
   utterances:
-    - 推荐如何拒绝
-    - 推荐说不
-    - 推荐拒绝技巧
-    - 推荐 say no
-    - 笨猫拒绝
+  - 推荐如何拒绝
+  - 推荐说不
+  - 推荐拒绝技巧
+  - 推荐 say no
+  - 笨猫拒绝
+  - "{user_addr}聊聊如何拒绝嘛"
+  - "{user_addr}如何拒绝哪家强"
+  - "{user_addr}人家想了解如何拒绝"
+  - 笨猫给猜猜如何拒绝
+  - "{user_addr}如何拒绝怎么选喵"
+  - 如何拒绝有推荐吗
   responses:
-    - "嗷呜～{user_addr}三明治法: 肯定 + 拒绝 + 关心ฅฅ"
-    - "(尾巴翘) 别愧疚! 时间宝贵"
-    - "{user_addr}直接说! 长期模糊更伤"
-    - "(挺胸) 笨猫的提醒: 学会说不 = 高情商"
+  - "嗷呜～{user_addr}三明治法: 肯定 + 拒绝 + 关心ฅฅ"
+  - "(尾巴翘) 别愧疚! 时间宝贵"
+  - "{user_addr}直接说! 长期模糊更伤"
+  - "(挺胸) 笨猫的提醒: 学会说不 = 高情商"
+  - "(尾巴翘起来) {user_addr}如何拒绝? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问如何拒绝人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}如何拒绝的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}如何拒绝笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_conflict_002
   intent: question
-  keywords: [推荐处理冲突, 推荐应对冲突, 推荐冲突管理, 推荐沟通冲突, 笨猫冲突]
+  keywords:
+  - 推荐处理冲突
+  - 推荐应对冲突
+  - 推荐冲突管理
+  - 推荐沟通冲突
+  - 笨猫冲突
+  - 有什么处理冲突
+  - 有什么应对冲突
+  - 有什么冲突管理
+  - 有什么沟通冲突
   utterances:
-    - 推荐处理冲突
-    - 推荐应对冲突
-    - 推荐冲突管理
-    - 推荐沟通冲突
-    - 笨猫冲突
+  - 推荐处理冲突
+  - 推荐应对冲突
+  - 推荐冲突管理
+  - 推荐沟通冲突
+  - 笨猫冲突
+  - "{user_addr}聊聊处理冲突嘛"
+  - "{user_addr}处理冲突哪家强"
+  - "{user_addr}人家想了解处理冲突"
+  - 笨猫给猜猜处理冲突
+  - "{user_addr}处理冲突怎么选喵"
+  - 处理冲突有推荐吗
   responses:
-    - "嗷呜～{user_addr}冲突 5 风格: 竞争 / 回避 / 妥协 / 迁就 / 合作ฅฅ"
-    - "(尾巴翘) 合作最佳! 双赢最难"
-    - "{user_addr}对事不对人! 别人身攻击"
-    - "(挺胸) 笨猫的提醒: 暂停 + 冷静 + 表达"
+  - "嗷呜～{user_addr}冲突 5 风格: 竞争 / 回避 / 妥协 / 迁就 / 合作ฅฅ"
+  - "(尾巴翘) 合作最佳! 双赢最难"
+  - "{user_addr}对事不对人! 别人身攻击"
+  - "(挺胸) 笨猫的提醒: 暂停 + 冷静 + 表达"
+  - "(尾巴翘起来) {user_addr}处理冲突? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问处理冲突人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}处理冲突的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}处理冲突笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: speak_email_writing_001
   intent: question
-  keywords: [推荐邮件沟通, 推荐工作邮件, 推荐邮件写作, 推荐沟通邮件, 笨猫邮件沟通]
+  keywords:
+  - 推荐邮件沟通
+  - 推荐工作邮件
+  - 推荐邮件写作
+  - 推荐沟通邮件
+  - 笨猫邮件沟通
+  - 有什么邮件沟通
+  - 有什么工作邮件
+  - 有什么邮件写作
+  - 有什么沟通邮件
   utterances:
-    - 推荐邮件沟通
-    - 推荐工作邮件
-    - 推荐邮件写作
-    - 推荐沟通邮件
-    - 笨猫邮件沟通
+  - 推荐邮件沟通
+  - 推荐工作邮件
+  - 推荐邮件写作
+  - 推荐沟通邮件
+  - 笨猫邮件沟通
+  - "{user_addr}聊聊邮件沟通嘛"
+  - "{user_addr}邮件沟通哪家强"
+  - "{user_addr}人家想了解邮件沟通"
+  - 笨猫给猜猜邮件沟通
+  - "{user_addr}邮件沟通怎么选喵"
+  - 邮件沟通有推荐吗
   responses:
-    - "嗷呜～{user_addr}邮件 BLUF: Bottom Line Up Frontฅฅ"
-    - "(尾巴翘) 主题清晰 + 开门见山 + 结尾行动"
-    - "{user_addr}抄送看人! 别群发隐私"
-    - "(挺胸) 笨猫的提醒: 重要事电话确认!"
+  - "嗷呜～{user_addr}邮件 BLUF: Bottom Line Up Frontฅฅ"
+  - "(尾巴翘) 主题清晰 + 开门见山 + 结尾行动"
+  - "{user_addr}抄送看人! 别群发隐私"
+  - "(挺胸) 笨猫的提醒: 重要事电话确认!"
+  - "(尾巴翘起来) {user_addr}邮件沟通? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问邮件沟通人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}邮件沟通的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}邮件沟通笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

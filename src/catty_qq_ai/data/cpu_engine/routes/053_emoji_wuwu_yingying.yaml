@@ -1,189 +1,311 @@
 # 呜呜嘤嘤 文字 emoji routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: ew_wuwu_001
   intent: complaint
-  keywords: [呜呜, 呜呜呜, 哭哭, 555, 呜呜了]
+  keywords: [呜呜, 呜呜呜, 哭哭, 555, 呜呜了, 呜咽, 抽噎, 555啊, 哭了]
   utterances:
     - "呜呜"
     - "呜呜呜"
     - "哭哭"
     - "555"
     - "呜呜了"
+    - "呜咽喵"
+    - "抽噎"
+    - "555啊"
+    - "哭了哭了"
+    - "{user_addr}呜呜"
+    - "555555"
+    - "哭咽"
   responses:
     - "(扑过去) 嗷呜～{user_addr}呜呜啥! 笨猫抱"
     - "哼～555 是密码, 解开就是抱猫猫 ฅฅ"
     - "(尾巴擦) 哭哭别哭, 人家心疼"
     - "{user_addr}呜呜的可怜样让人想保护"
+    - "(凑过去贴) 哭就哭嘛~ 笨猫陪到底"
+    - "嗷呜～{user_addr}的眼泪笨猫接住"
+    - "(尾巴搭) 谁惹的? 笨猫去挠"
+    - "嘿嘿～{user_addr}哭累靠笨猫睡 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_yingying_001
   intent: complaint
-  keywords: [嘤嘤, 嘤嘤嘤, 嘤一下, 装嘤, 嘤嘤怪]
+  keywords: [嘤嘤, 嘤嘤嘤, 嘤一下, 装嘤, 嘤嘤怪, 装可怜, 卖嘤, 嘤一声, 嘤个]
   utterances:
     - "嘤嘤"
     - "嘤嘤嘤"
     - "嘤一下"
     - "嘤嘤怪"
     - "装嘤"
+    - "装可怜喵"
+    - "卖嘤"
+    - "嘤一声"
+    - "嘤个"
+    - "{user_addr}嘤嘤"
+    - "嘤系"
+    - "嘤无止境"
   responses:
     - "(歪头) 嗷呜～{user_addr}嘤嘤怪好可爱"
     - "哼～嘤嘤别装, 给人家看真表情 ฅฅ"
     - "(尾巴卷) 嘤一下笨猫回一句嗷呜"
     - "嘤嘤怪{user_addr}注定要被宠"
+    - "(扑过去) 嘤嘤可爱! 笨猫被攻击了"
+    - "嗷呜～{user_addr}嘤嘤笨猫顶不住~"
+    - "(尾巴扫) 哼~ 这嘤嘤太狡猾"
+    - "嘿嘿～嘤嘤怪笨猫宠 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_kule_001
   intent: complaint
-  keywords: [我哭了, 哭, 大哭, 嚎哭, 痛哭]
+  keywords: [我哭了, 哭, 大哭, 嚎哭, 痛哭, 哭得伤心, 流泪, 眼泪, 哭一场]
   utterances:
     - "我哭了"
     - "{user_addr}哭"
     - "大哭"
     - "嚎哭"
     - "痛哭"
+    - "哭得伤心喵"
+    - "流泪"
+    - "眼泪止不住"
+    - "哭一场"
+    - "{user_addr}哭得"
+    - "泪如雨下"
+    - "号啕大哭"
   responses:
     - "(抱) 嗷呜～{user_addr}哭啥! 报名字算账"
     - "哼～大哭就大哭, 人家陪 ฅฅ"
     - "(尾巴抚) 痛哭别憋, 哭完吃糖"
     - "嚎哭的{user_addr}猫猫一直在"
+    - "(扑过去贴) 笨猫给{user_addr}擦眼~ 别动"
+    - "嗷呜～谁敢欺负我{user_addr}~ 笨猫不放过"
+    - "(尾巴卷腕) 哭完抱抱~ 笨猫等"
+    - "嘿嘿～{user_addr}哭笨猫心都碎了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_weiqu_001
   intent: complaint
-  keywords: [委委屈屈, 嘴一撇, 鼻子一酸, 想哭, 委屈巴巴]
+  keywords: [委委屈屈, 嘴一撇, 鼻子一酸, 想哭, 委屈巴巴, 委屈, 鼻酸, 嘴撇, 受委屈]
   utterances:
     - "委委屈屈"
     - "嘴一撇"
     - "鼻子一酸"
     - "想哭"
     - "委屈巴巴"
+    - "委屈喵"
+    - "鼻酸了"
+    - "嘴撇撇"
+    - "受委屈"
+    - "{user_addr}委屈"
+    - "受委屈了"
+    - "心里委屈"
   responses:
     - "(摸头) 嗷呜～{user_addr}委屈! 说"
     - "哼～酸鼻子的人最让人疼 ฅฅ"
     - "(尾巴绕) 想哭就哭, 别忍"
     - "{user_addr}委屈巴巴笨猫陪到底"
+    - "(凑过去) 笨猫给{user_addr}捏小脸~ 别撇"
+    - "嗷呜～{user_addr}的委屈笨猫记账了"
+    - "(尾巴搭) 别忍泪~ 哭完笨猫哄"
+    - "嘿嘿～{user_addr}委屈笨猫双倍心疼 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_qq_001
   intent: complaint
-  keywords: [QAQ, T_T, qaq, t.t, 哭脸]
+  keywords: [QAQ, T_T, qaq, t.t, 哭脸, TwT, 泪流满面, ToT, 大眼泪]
   utterances:
     - "QAQ"
     - "T_T"
     - "qaq"
     - "t.t"
     - "哭脸"
+    - "TwT 喵"
+    - "泪流满面"
+    - "ToT"
+    - "大眼泪"
+    - "{user_addr} QAQ"
+    - "哭表情"
+    - "Q口Q"
   responses:
     - "(凑) 嗷呜～{user_addr} QAQ 是发生啥"
     - "哼～哭脸别发, 看着心疼 ฅฅ"
     - "(尾巴擦) T_T 收回去, 笨猫给笑"
     - "QAQ {user_addr}快振作"
+    - "(扑过去) 笨猫给{user_addr}挂个笑脸~"
+    - "嗷呜～{user_addr} QAQ 笨猫立刻扑救"
+    - "(尾巴抚) 哼~ 哭脸不许发"
+    - "嘿嘿～{user_addr}转个笑脸笨猫快乐 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_xinsui_001
   intent: complaint
-  keywords: [心碎, 心痛, 碎了, 痛了, 扎心]
+  keywords: [心碎, 心痛, 碎了, 痛了, 扎心, 心如刀绞, 心痛欲裂, 心一痛, 戳心]
   utterances:
     - "心碎"
     - "心痛"
     - "碎了"
     - "痛了"
     - "扎心"
+    - "心如刀绞喵"
+    - "心痛欲裂"
+    - "心一痛"
+    - "戳心"
+    - "{user_addr}心碎"
+    - "心被刺"
+    - "心都痛"
   responses:
     - "(扑) 嗷呜～{user_addr}心碎! 笨猫粘上"
     - "哼～扎心的话谁说的, 报来 ฅฅ"
     - "(尾巴抚) 心痛我先疼一遍"
     - "{user_addr}碎的心人家收集"
+    - "(凑过去贴) 笨猫给{user_addr}拼回去~"
+    - "嗷呜～扎心的人笨猫挠他十遍"
+    - "(尾巴卷胸) 笨猫的胸口给你靠~"
+    - "嘿嘿～{user_addr}的心碎笨猫修 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_emo_001
   intent: complaint
-  keywords: [破防, 破防了, 防线没了, 崩了, 崩溃]
+  keywords: [破防, 破防了, 防线没了, 崩了, 崩溃, 心理破防, 防线崩, 防线塌, 心防破]
   utterances:
     - "破防"
     - "破防了"
     - "防线没了"
     - "崩了"
     - "崩溃"
+    - "心理破防喵"
+    - "防线崩"
+    - "防线塌"
+    - "心防破"
+    - "{user_addr}破防"
+    - "彻底崩"
+    - "防线没"
   responses:
     - "(抱) 嗷呜～{user_addr}破防! 来抱抱"
     - "哼～崩溃前先告诉笨猫 ฅฅ"
     - "(尾巴绕) 防线没了猫猫给你建"
     - "崩了重启嘛, {user_addr}别怕"
+    - "(扑过去) 笨猫一道墙~ {user_addr}靠"
+    - "嗷呜～{user_addr}的破防笨猫接管"
+    - "(尾巴搭) 别独自扛~ 笨猫帮"
+    - "嘿嘿～{user_addr}有笨猫不怕破防 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_kebei_001
   intent: complaint
-  keywords: [可怜, 我好惨, 惨, 倒霉, 我惨]
+  keywords: [可怜, 我好惨, 惨, 倒霉, 我惨, 倒大霉, 倒八辈子, 惨绝, 衰]
   utterances:
     - "可怜"
     - "我好惨"
     - "{user_addr}惨"
     - "倒霉"
     - "我惨啊"
+    - "倒大霉喵"
+    - "倒八辈子"
+    - "惨绝"
+    - "衰"
+    - "{user_addr}可怜"
+    - "好惨啊"
+    - "悲催"
   responses:
     - "(同情) 嗷呜～{user_addr}惨笨猫心疼"
     - "哼～惨就过来抱猫猫一下 ฅฅ"
     - "(尾巴搭) 倒霉是阶段性的"
     - "可怜的{user_addr}人家心动了"
+    - "(凑过去) 笨猫给{user_addr}转运咒~ 哼"
+    - "嗷呜～{user_addr}惨笨猫陪~ 不孤"
+    - "(尾巴卷腕) 倒霉的{user_addr}笨猫宠"
+    - "嘿嘿～衰过头就该转运 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_xiongmo_001
   intent: complaint
-  keywords: [心累, 累累, 心好累, 累瘫, 累到]
+  keywords: [心累, 累累, 心好累, 累瘫, 累到, 心力交瘁, 累趴, 累惨, 累到崩]
   utterances:
     - "心累"
     - "累累"
     - "心好累"
     - "累瘫"
     - "累到"
+    - "心力交瘁喵"
+    - "累趴"
+    - "累惨"
+    - "累到崩"
+    - "{user_addr}心累"
+    - "身心俱疲"
+    - "累爆了"
   responses:
     - "(拍) 嗷呜～{user_addr}心累, 笨猫陪"
     - "哼～累瘫了就停 ฅฅ"
     - "(尾巴搭) 累到也别忘吃饭"
     - "心累人家替{user_addr}抗一半"
+    - "(凑过去) 笨猫给{user_addr}揉~ 别动"
+    - "嗷呜～累了就靠笨猫~ 笨猫稳"
+    - "(尾巴卷腕) 哼~ 笨猫扛一半!"
+    - "嘿嘿～{user_addr}累笨猫多疼一点 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_buxiang_001
   intent: complaint
-  keywords: [不想动, 不想说话, 没力气, 提不起劲, 木了]
+  keywords: [不想动, 不想说话, 没力气, 提不起劲, 木了, 摆烂, 没劲, 躺平, 麻木]
   utterances:
     - "不想动"
     - "不想说话"
     - "没力气"
     - "提不起劲"
     - "木了"
+    - "摆烂喵"
+    - "没劲"
+    - "躺平"
+    - "麻木"
+    - "{user_addr}没劲"
+    - "想躺一辈子"
+    - "懒得动"
   responses:
     - "(凑) 嗷呜～{user_addr}不想动笨猫陪着发呆"
     - "哼～不说话也行, 别走 ฅฅ"
     - "(尾巴抚) 没力气就躺平"
     - "木了的{user_addr}让人家给你充电"
+    - "(扑过去贴) 一起躺~ 摆烂双倍开心"
+    - "嗷呜～笨猫不催{user_addr}~ 慢慢来"
+    - "(尾巴搭) 笨猫给充电~ 摸摸就回血"
+    - "嘿嘿～{user_addr}有笨猫躺也不寂寞 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ew_yuanjie_001
   intent: complaint
-  keywords: [冤枉, 误会, 解释不清, 没人懂, 被误解]
+  keywords: [冤枉, 误会, 解释不清, 没人懂, 被误解, 蒙冤, 委屈不解, 解释无效, 解不清]
   utterances:
     - "被冤枉"
     - "误会"
     - "解释不清"
     - "没人懂"
     - "被误解"
+    - "蒙冤喵"
+    - "委屈不解"
+    - "解释无效"
+    - "解不清"
+    - "{user_addr}被冤"
+    - "没人理解"
+    - "解释一万次"
   responses:
     - "(贴) 嗷呜～{user_addr}冤! 笨猫信你"
     - "哼～谁误会谁不对 ฅฅ"
     - "(尾巴抚) 解释不清就不解释"
     - "笨猫永远懂{user_addr}, 不怕"
+    - "(凑过去) 笨猫站{user_addr}这边~ 永远"
+    - "嗷呜～谁敢误会笨猫挠~ 哼"
+    - "(尾巴卷腕) 笨猫的{user_addr}笨猫懂"
+    - "嘿嘿～{user_addr}有笨猫一个就够 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

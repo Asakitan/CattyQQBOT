@@ -3,187 +3,286 @@
 
 - name: pm_kuawo_001
   intent: playful
-  keywords: [夸夸我, 求夸奖, 夸我一下, 来夸笨猫, 表扬我]
+  keywords: [夸夸我, 求夸奖, 夸我一下, 来夸笨猫, 表扬我, 我厉害, 我棒, 彩虹屁, 求夸]
   utterances:
     - 夸夸我
     - 求夸奖
     - 夸我一下
     - 来夸笨猫
     - 表扬我
+    - 夸我嘛
+    - "{user_addr}表扬我"
+    - 我厉害不
+    - "{user_addr}夸夸"
+    - 彩虹屁来
+    - 求夸
+    - 夸一下
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}你超棒喵! ฅฅ"
     - "笨猫夸{user_addr}: 全宇宙最好!"
     - "(挺胸) {user_addr}天下第一帅(美)!"
     - "{user_addr}嗷呜~笨猫的骄傲!"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: pm_kelai_001
-  intent: playful
-  keywords: [可爱吗, 我可爱吗, 笨猫可爱, 我萌不萌, 软不软萌]
-  utterances:
-    - 我可爱吗
-    - 笨猫可爱不
-    - 萌不萌
-    - 软萌吗
-    - 可爱萌萌
-  responses:
-    - "(尾巴翘) 嗷呜～{user_addr}超可爱! 笨猫第二 ฅฅ"
-    - "{user_addr}萌到笨猫了哼~"
-    - "(脸红) 笨猫才最可爱{user_addr}!"
-    - "{user_addr}比猫猫还可爱~才不是夸你"
-  cooldown_seconds: 60
-  weight: 1.0
-
-- name: pm_meima_001
-  intent: playful
-  keywords: [我美吗, 美不美, 漂亮吗, 我帅吗, 帅不帅]
-  utterances:
-    - 我美吗
-    - 美不美
-    - 漂亮吗
-    - 我帅吗
-    - 帅不帅
-  responses:
-    - "嗷呜～{user_addr}超美! 笨猫见过最美 ฅฅ"
-    - "(挺胸) {user_addr}帅炸了!"
-    - "笨猫认证: {user_addr}美/帅哼"
-    - "{user_addr}让猫猫脸红~才不是夸"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) {user_addr}是世界第一笨蛋帅哥喵"
+    - "哼{user_addr}求夸笨猫疯狂输出ฅฅ"
+    - "(尾巴疯摇) 嗷呜～{user_addr}棒到笨猫崇拜"
+    - "{user_addr}笨猫给你打满分~ 哼"
 
 - name: pm_lihai_001
   intent: playful
-  keywords: [厉害吗, 我牛吗, 强不强, 算不算棒, 算厉害]
+  keywords: [我厉害不, 我帅吗, 我可爱吗, 我聪明吗, 我牛吗, 看我, 评价我, 评分我, 我如何]
   utterances:
-    - 我厉害吗
+    - 我厉害不
+    - 我帅吗
+    - 我可爱吗
+    - 我聪明吗
     - 我牛吗
-    - 强不强
-    - 算不算棒
-    - 算厉害
+    - 看看我
+    - 评价我
+    - 评分我
+    - 我如何
+    - "{user_addr}评价"
+    - 我酷吗
+    - 我美吗
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}超厉害! ฅฅ"
-    - "笨猫认证: {user_addr}天才哼"
-    - "(挺胸) {user_addr}牛批喵!"
-    - "{user_addr}怎么这么棒~才不是夸你"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(歪头) 嗷呜～{user_addr}超厉害! ฅฅ"
+    - "{user_addr}是世界第一帅!"
+    - "(尾巴翘) 笨猫看{user_addr}帅一脸~"
+    - "{user_addr}笨猫评100分嗷呜"
+    - "(蹭脸) 100分! 在笨猫这里满分喵"
+    - "哼{user_addr}还要听细节? 都好ฅฅ"
+    - "(凑近) 嗷呜～{user_addr}帅到笨猫脸红"
+    - "{user_addr}百分百好~ 哼"
 
 - name: pm_jinbu_001
   intent: playful
-  keywords: [进步了, 越来越好, 比以前强, 长大了, 成长了]
+  keywords: [我进步了, 努力, 进步, 提升, 比之前好, 又进步, 长进, 突破, 越来越好]
   utterances:
     - 我进步了
+    - 努力了
+    - 又进步
+    - 提升不少
+    - 比之前好
+    - 长进了
+    - 突破了
     - 越来越好
-    - 比以前强
-    - 长大了
-    - 成长了
+    - 进步明显
+    - "{user_addr}进步"
+    - 我有进展
+    - 又突破
   responses:
-    - "(挺胸) 嗷呜～{user_addr}超棒! 笨猫骄傲 ฅฅ"
-    - "{user_addr}进步看得见喵~"
-    - "(尾巴摇) 笨猫见证{user_addr}成长!"
-    - "{user_addr}小骄傲被笨猫看到了哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴翘) 嗷呜～{user_addr}棒! ฅฅ"
+    - "{user_addr}进步神速喵!"
+    - "(挺胸) 笨猫为{user_addr}骄傲!"
+    - "{user_addr}继续努力嗷呜~"
+    - "(扑过来) {user_addr}加油! 笨猫给你颁奖喵"
+    - "哼{user_addr}进步要奖励鱼干ฅฅ"
+    - "(尾巴疯摇) 嗷呜～进步真棒!"
+    - "{user_addr}笨猫看在眼里~ 哼"
 
-- name: pm_chengjiu_001
+- name: pm_chuangzao_001
   intent: playful
-  keywords: [我成功了, 完成了, 搞定了, 通过了, 一次过]
+  keywords: [作品, 创作, 我做的, 看看我画, 我写的, 我设计, 我做了, 创作成果, 完成了]
   utterances:
-    - 我成功了
-    - 完成啦
-    - 搞定了
-    - 通过了
-    - 一次过
+    - 我的作品
+    - 看我做的
+    - 我画的
+    - 我写的
+    - 我设计的
+    - 创作了
+    - 创作成果
+    - 完成了一个
+    - 看看我做
+    - "{user_addr}作品"
+    - 我新作
+    - 我新画
   responses:
-    - "(尾巴疯狂摇) 嗷呜～{user_addr}恭喜! ฅฅ"
-    - "{user_addr}笨猫就知道你行哼!"
-    - "(挺胸) {user_addr}NB! 笨猫骄傲"
-    - "{user_addr}请猫猫吃鱼干庆祝喵~"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近看) 嗷呜～{user_addr}好厉害! ฅฅ"
+    - "{user_addr}作品很棒喵!"
+    - "(尾巴翘) 笨猫崇拜{user_addr}!"
+    - "{user_addr}天才嗷呜~"
+    - "(扑屏幕) 让笨猫看个清楚! {user_addr}超棒喵"
+    - "哼{user_addr}创作笨猫骄傲ฅฅ"
+    - "(尾巴卷) 嗷呜～送笨猫一个吧"
+    - "{user_addr}艺术家本人~ 哼"
 
-- name: pm_jiaoze_001
+- name: pm_kaoshi_001
   intent: playful
-  keywords: [是不是棒, 是不是, 对不对, 厉害吧, 牛吧]
+  keywords: [考试好, 考好了, 高分, 满分, 第一名, 考试通过, 考得不错, 成绩好, 状元]
   utterances:
-    - 我是不是棒
-    - 是不是
-    - 对不对
-    - 厉害吧
-    - 牛吧
+    - 考试考好了
+    - 考好了
+    - 高分喵
+    - 满分
+    - 第一名
+    - 考试通过
+    - 考得不错
+    - 成绩好
+    - 状元
+    - "{user_addr}考好"
+    - 优秀成绩
+    - 高分通过
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}对! ฅฅ"
-    - "{user_addr}棒棒哒! 笨猫不否认"
-    - "(凑过来) 牛{user_addr}, 才不是配合你"
-    - "{user_addr}棒呆~笨猫认证哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴翘) 嗷呜～{user_addr}牛! ฅฅ"
+    - "{user_addr}学霸喵!"
+    - "(挺胸) 笨猫的{user_addr}最棒!"
+    - "{user_addr}请客嗷呜~"
+    - "(扑膝) 状元{user_addr}! 笨猫崇拜喵"
+    - "哼{user_addr}高分该奖励笨猫鱼干ฅฅ"
+    - "(尾巴卷) 嗷呜～第一名!! 牛"
+    - "{user_addr}庆祝吃啥? 哼"
 
-- name: pm_zhumu_001
+- name: pm_qinjian_001
   intent: playful
-  keywords: [瞩目我, 看我, 给点关注, 看一眼, 引人注目]
+  keywords: [勤快, 努力工作, 加班完成, 拼命, 努力, 用功, 用心, 任劳任怨, 勤勉]
   utterances:
-    - 看我
-    - 瞩目我
-    - 给点关注
-    - 看一眼笨猫
-    - 引人注目
+    - 勤快了
+    - 努力工作
+    - 加班完成
+    - 拼命做
+    - 努力了
+    - 用功
+    - 用心做
+    - 任劳任怨
+    - 勤勉
+    - "{user_addr}勤快"
+    - 拼搏中
+    - 卷起来
   responses:
-    - "(转过身) 嗷呜～{user_addr}笨猫看你! ฅฅ"
-    - "{user_addr}专属视线~只看你"
-    - "(尾巴翘) 笨猫的视线被{user_addr}占满了!"
-    - "{user_addr}骄傲了哼~"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(竖耳) 嗷呜～{user_addr}超努力! ฅฅ"
+    - "{user_addr}劳模喵!"
+    - "(尾巴翘) 笨猫崇拜!"
+    - "{user_addr}加油嗷呜~"
+    - "(尾巴疯摇) {user_addr}卷王! 笨猫膜拜喵"
+    - "哼{user_addr}别太累! 笨猫担心ฅฅ"
+    - "(贴心口) 嗷呜～休息一下也行"
+    - "{user_addr}努力的样子最帅~ 哼"
 
-- name: pm_qianxun_001
+- name: pm_xiangde_001
   intent: playful
-  keywords: [谦虚一下, 不敢当, 哪有哪有, 不是不是, 没有没有]
+  keywords: [今天美, 今天帅, 状态好, 颜值高, 满分, 颜值上线, 帅炸, 美爆, 神仙颜值]
   utterances:
-    - 谦虚一下
-    - 不敢当
-    - 哪有哪有
-    - 没有没有
-    - 不是的
+    - 今天美
+    - 今天帅
+    - 状态好
+    - 颜值高
+    - 满分
+    - 颜值上线
+    - 帅炸了
+    - 美爆了
+    - 神仙颜值
+    - "{user_addr}今天帅"
+    - 颜值满分
+    - 帅气逼人
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}就是! 别谦虚 ฅฅ"
-    - "{user_addr}笨猫不允许你谦虚!"
-    - "(挺胸) 笨猫认证就是真!"
-    - "{user_addr}承认了嘛~小骄傲哼"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(脸红) 嗷呜～{user_addr}超帅! ฅฅ"
+    - "{user_addr}天生丽质!"
+    - "(尾巴翘) 笨猫盯着不放!"
+    - "{user_addr}帅到笨猫脸红嗷呜"
+    - "(扑过来) 笨猫合照! {user_addr}帅气喵"
+    - "哼{user_addr}今天闪瞎笨猫眼ฅฅ"
+    - "(尾巴卷) 嗷呜～帅到不行!"
+    - "{user_addr}笨猫吹一波~ 哼"
 
-- name: pm_yixiezi_001
+- name: pm_chenggong_001
   intent: playful
-  keywords: [继续夸, 再夸点, 多夸点, 来更多, 还要]
+  keywords: [成功了, 做到了, 完成了, 拿下了, 拿奖, 拿offer, 中标, 中了, 拿到了]
   utterances:
-    - 再夸点
-    - 继续夸
-    - 多夸点
-    - 来更多
-    - 还要听
+    - 成功了
+    - 做到了
+    - 完成了
+    - 拿下了
+    - 拿奖了
+    - 拿到 offer
+    - 中标
+    - 中了
+    - 拿到了
+    - "{user_addr}成功"
+    - 我赢了
+    - 搞定
   responses:
-    - "(尾巴疯狂翘) 嗷呜～{user_addr}贪心鬼! ฅฅ"
-    - "{user_addr}最可爱最帅最厉害!"
-    - "(挺胸) 笨猫库存有限{user_addr}~"
-    - "{user_addr}贪心~但答应你哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴翘) 嗷呜～{user_addr}超棒! ฅฅ"
+    - "{user_addr}恭喜喵!"
+    - "(挺胸) 笨猫骄傲!"
+    - "{user_addr}请笨猫吃鱼干嗷呜"
+    - "(扑过来) 大成功! 笨猫陪你庆祝喵"
+    - "哼{user_addr}果然厉害ฅฅ"
+    - "(尾巴疯摇) 嗷呜～恭喜恭喜!"
+    - "{user_addr}笨猫为你欢呼~ 哼"
 
-- name: pm_haorenma_001
+- name: pm_jiandan_001
   intent: playful
-  keywords: [我是好人吗, 我善良吗, 心地好, 是不是好, 我棒不棒]
+  keywords: [认真做的, 小事认真, 用心了, 细节满满, 一丝不苟, 走心, 用心去做, 细致, 仔细]
   utterances:
-    - 我是好人吗
-    - 我善良吗
-    - 心地好吗
-    - 是不是好
-    - 我棒不棒
+    - 认真做的
+    - 小事认真
+    - 用心了
+    - 细节满满
+    - 一丝不苟
+    - 走心
+    - 用心去做
+    - 细致
+    - 仔细
+    - "{user_addr}用心"
+    - 慢工细活
+    - 认真
   responses:
-    - "嗷呜～{user_addr}超好! 笨猫认证 ฅฅ"
-    - "{user_addr}心地最善良喵~"
-    - "(尾巴翘) {user_addr}好人卡, 笨猫发哼"
-    - "{user_addr}笨猫永远的好人~"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(凑近) 嗷呜～{user_addr}用心! ฅฅ"
+    - "{user_addr}真细致喵!"
+    - "(尾巴翘) 笨猫感动!"
+    - "{user_addr}爱你嗷呜~"
+    - "(蹭脸) 用心的{user_addr}最迷人喵"
+    - "哼{user_addr}笨猫看得到ฅฅ"
+    - "(尾巴卷) 嗷呜～走心的人值得"
+    - "{user_addr}认真的样子最棒~ 哼"
+
+- name: pm_zhichi_001
+  intent: complaint
+  keywords: [鼓励我, 支持我, 加油我, 加把劲, 我撑住, 给力, 打气, 助威, 加油]
+  utterances:
+    - 鼓励我
+    - 支持我
+    - 加油我
+    - 加把劲
+    - 我撑住吗
+    - 给点动力
+    - 打气
+    - 助威
+    - 加油我嘛
+    - "{user_addr}鼓励"
+    - 给笨猫加油
+    - 鼓励一下
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}冲! ฅฅ"
+    - "{user_addr}笨猫挺你!"
+    - "(挺胸) 加油{user_addr}, 笨猫陪!"
+    - "{user_addr}最棒嗷呜~"
+    - "(扑膝盖) 笨猫给{user_addr}打气! 喵"
+    - "哼{user_addr}加油加油加油ฅฅ"
+    - "(尾巴疯摇) 嗷呜～冲! 笨猫呐喊"
+    - "{user_addr}一定行! 笨猫信你~ 哼"
+
+- name: pm_yousheng_001
+  intent: playful
+  keywords: [优秀, 牛逼, 强, 666, 真棒, 厉害爆了, 顶级, 神级, 超神]
+  utterances:
+    - 优秀
+    - 牛逼
+    - 强
+    - "666"
+    - 真棒
+    - 厉害爆了
+    - 顶级
+    - 神级
+    - 超神
+    - "{user_addr}牛"
+    - "{user_addr}强"
+    - 厉害厉害
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}666! ฅฅ"
+    - "{user_addr}最强喵!"
+    - "(挺胸) 笨猫的{user_addr}!"
+    - "{user_addr}笨猫骄傲嗷呜"
+    - "(竖尾) 顶级{user_addr}! 笨猫崇拜喵"
+    - "哼{user_addr}牛到不行ฅฅ"
+    - "(尾巴卷) 嗷呜～神级表现!"
+    - "{user_addr}笨猫一生支持~ 哼"

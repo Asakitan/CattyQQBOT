@@ -4,204 +4,324 @@
 
 - name: pe_no_appetite_001
   intent: complaint
-  keywords: [不爱吃饭, 不肯吃, 不想吃, 没胃口, 吃不下]
+  keywords: [不爱吃饭, 不肯吃, 不想吃, 没胃口, 吃不下, 进食, 吃东西, 饮食, 求推荐]
   utterances:
     - 娃不爱吃饭
     - 孩子不肯吃
     - 宝宝不想吃饭
     - 小孩没胃口
     - 一点都吃不下
+    - 不爱吃饭怎么办
+    - 不爱吃饭怎么选
+    - "{user_addr}不爱吃饭"
+    - 不爱吃饭捏
+    - 不爱吃饭嘛
+    - 不爱吃饭有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}家娃不爱吃啊! 笨猫陪{user_addr}叹气ฅฅ"
     - "(凑过来) {user_addr}是不是急坏了~ 来跟猫猫吐槽两句嘛"
     - "哼! 小娃娃就是这样, {user_addr}别太焦虑喵～慢慢哄就好"
     - "(歪头) {user_addr}讲讲~ 是早饭午饭还是晚饭? 笨猫先听听情况"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_picky_002
   intent: complaint
-  keywords: [挑食, 这不吃那不吃, 啥都不吃, 偏食, 挑挑拣拣]
+  keywords: [挑食, 这不吃那不吃, 啥都不吃, 偏食, 挑挑拣拣, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 娃挑食死了
     - 这不吃那不吃
     - 啥都不爱吃
     - 偏食偏得厉害
     - 挑挑拣拣的
+    - 挑食怎么办
+    - 挑食怎么选
+    - "{user_addr}挑食"
+    - 挑食捏
+    - 挑食嘛
+    - 挑食有啥推荐
   responses:
     - "嗷呜～挑食小魔王登场啦! {user_addr}辛苦了, 笨猫先抱抱ฅฅ"
     - "(摇头) 挑食的娃最难搞了, {user_addr}得有耐心喵～"
     - "哼! 笨猫也挑食的, 只吃鱼干! {user_addr}别太逼娃啦"
     - "(尾巴软软贴) {user_addr}讲讲他不吃啥~ 笨猫帮{user_addr}分析"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_spit_out_003
   intent: complaint
-  keywords: [吐出来, 含着不咽, 含饭, 不咽下去, 吐了]
+  keywords: [吐出来, 含着不咽, 含饭, 不咽下去, 吐了, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 喂进去又吐出来
     - 含饭不咽
     - 嘴里含着不动
     - 吃了又吐
     - 含半天
+    - 吐出来怎么办
+    - 吐出来怎么选
+    - "{user_addr}吐出来"
+    - 吐出来捏
+    - 吐出来嘛
+    - 吐出来有啥推荐
   responses:
     - "(瞪大眼) 嗷呜～吐出来了?! {user_addr}得抓狂了吧ฅฅ"
     - "(歪头) 含饭最气人了! {user_addr}先深呼吸喵～"
     - "哼! 小娃娃就是磨人, {user_addr}别气坏自己"
     - "(凑过来贴贴) 笨猫给{user_addr}揉揉胸口~ 别气别气"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_few_bites_004
   intent: complaint
-  keywords: [只吃几口, 吃两口就不吃, 吃一点点, 几口就饱, 没吃多少]
+  keywords: [只吃几口, 吃两口就不吃, 吃一点点, 几口就饱, 没吃多少, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 只吃几口就不吃
     - 吃两口就推开
     - 吃一点点就够了
     - 几口就说饱了
     - 没吃多少又不吃
+    - 只吃几口怎么办
+    - 只吃几口怎么选
+    - "{user_addr}只吃几口"
+    - 只吃几口捏
+    - 只吃几口嘛
+    - 只吃几口有啥推荐
   responses:
     - "嗷呜～几口就饱?! {user_addr}是不是看着血压上升ฅฅ"
     - "(尾巴垂) 笨猫懂{user_addr}的崩溃~ 喂进去那点根本不够嘛"
     - "哼! 小娃娃胃口小也正常, {user_addr}别太紧张喵"
     - "(凑过来) {user_addr}加餐补补? 笨猫陪{user_addr}想办法"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_one_hour_meal_005
   intent: complaint
-  keywords: [喂饭一小时, 喂半天, 喂一顿好久, 一顿饭要两小时, 喂到崩溃]
+  keywords: [喂饭一小时, 喂半天, 喂一顿好久, 一顿饭要两小时, 喂到崩溃, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 喂一顿要一小时
     - 喂饭喂了半天
     - 一顿饭吃两小时
     - 喂到我崩溃
     - 喂半小时还在第一口
+    - 喂饭一小时怎么办
+    - 喂饭一小时怎么选
+    - "{user_addr}喂饭一小时"
+    - 喂饭一小时捏
+    - 喂饭一小时嘛
+    - 喂饭一小时有啥推荐
   responses:
     - "(瘫倒) 嗷呜～一小时?! {user_addr}腰都酸了吧ฅฅ"
     - "(尾巴垂) 笨猫看{user_addr}比 996 还累喵～来歇会儿"
     - "哼! 这小娃娃也太磨叽了, {user_addr}辛苦辛苦"
     - "(贴过来) {user_addr}先放下勺子歇会儿~ 笨猫陪{user_addr}缓缓"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_crying_refuse_006
   intent: complaint
-  keywords: [哭着不吃, 一喂就哭, 哭闹不吃, 边哭边推, 死活不吃]
+  keywords: [哭着不吃, 一喂就哭, 哭闹不吃, 边哭边推, 死活不吃, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 一喂就哭
     - 哭着不张嘴
     - 边哭边推开
     - 死活不肯吃
     - 哭闹拒绝吃饭
+    - 哭着不吃怎么办
+    - 哭着不吃怎么选
+    - "{user_addr}哭着不吃"
+    - 哭着不吃捏
+    - 哭着不吃嘛
+    - 哭着不吃有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～又哭又闹的{user_addr}心都碎了吧ฅฅ"
     - "(凑过来贴贴) 笨猫先抱抱{user_addr}~ 这场景太崩溃了"
     - "哼! 小娃娃情绪上来就难搞, {user_addr}先停一停喵"
     - "(软软的) {user_addr}别跟着哭啊~ 笨猫给{user_addr}揉揉"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_snacks_only_007
   intent: complaint
-  keywords: [只爱零食, 只吃零食, 不吃饭只吃零食, 零食吃个不停, 一给零食就抢]
+  keywords: [只爱零食, 只吃零食, 不吃饭只吃零食, 零食吃个不停, 一给零食就抢, 进食, 吃东西, 饮食, 求推荐]
   utterances:
     - 娃只爱吃零食
     - 不吃饭光吃零食
     - 一给零食就抢
     - 零食吃个不停
     - 正餐不吃零食吃
+    - 只爱零食怎么办
+    - 只爱零食怎么选
+    - "{user_addr}只爱零食"
+    - 只爱零食捏
+    - 只爱零食嘛
+    - 只爱零食有啥推荐
   responses:
     - "嗷呜～零食小怪兽出现啦! {user_addr}懂这种无奈ฅฅ"
     - "(摇头) 零食确实诱惑大~ {user_addr}是不是该藏起来喵"
     - "哼! 笨猫也是这样的, 只吃鱼干不吃饭! {user_addr}别学笨猫"
     - "(歪头) {user_addr}是不是该限制一下? 笨猫帮{user_addr}出主意"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_no_weight_gain_008
   intent: complaint
-  keywords: [体重不长, 不长肉, 长不胖, 瘦得很, 称重不达标]
+  keywords: [体重不长, 不长肉, 长不胖, 瘦得很, 称重不达标, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 娃体重不长
     - 怎么都不长肉
     - 瘦得跟竹竿一样
     - 体检体重不达标
     - 长不胖愁死了
+    - 体重不长怎么办
+    - 体重不长怎么选
+    - "{user_addr}体重不长"
+    - 体重不长捏
+    - 体重不长嘛
+    - 体重不长有啥推荐
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}愁体重愁白头啦ฅฅ"
     - "(凑过来) 笨猫懂{user_addr}~ 看体重曲线就揪心嘛"
     - "哼! 小娃娃体质不同, {user_addr}别跟别家比喵～"
     - "(贴贴) {user_addr}也别太焦虑~ 笨猫陪{user_addr}慢慢调"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_run_from_food_009
   intent: complaint
-  keywords: [看见菜就跑, 上桌就溜, 一到饭点就躲, 看见饭逃, 端碗就跑]
+  keywords: [看见菜就跑, 上桌就溜, 一到饭点就躲, 看见饭逃, 端碗就跑, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 看见菜就跑
     - 一上桌就溜走
     - 饭点就躲起来
     - 端碗他就跑
     - 看见饭就逃
+    - 看见菜就跑怎么办
+    - 看见菜就跑怎么选
+    - "{user_addr}看见菜就跑"
+    - 看见菜就跑捏
+    - 看见菜就跑嘛
+    - 看见菜就跑有啥推荐
   responses:
     - "(瞪大眼) 嗷呜～跑得这么快?! {user_addr}追累了吧ฅฅ"
     - "(尾巴晃) 笨猫看{user_addr}家上演逃饭大戏喵～"
     - "哼! 小娃娃跑得比兔子还快, {user_addr}得抓人辛苦了"
     - "(凑过来) {user_addr}讲讲~ 是真的不饿还是怕吃啊"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_mom_cry_010
   intent: complaint
-  keywords: [妈妈喂哭, 喂哭我了, 喂到我哭, 自己也想哭, 喂崩溃了]
+  keywords: [妈妈喂哭, 喂哭我了, 喂到我哭, 自己也想哭, 喂崩溃了, 哭闹, 嚎啕大哭, 啼哭, 求推荐]
   utterances:
     - 喂得我自己想哭
     - 喂哭我了
     - 一顿饭喂崩溃
     - 喂到我哭出来
     - 妈妈先哭了
+    - 妈妈喂哭怎么办
+    - 妈妈喂哭怎么选
+    - "{user_addr}妈妈喂哭"
+    - 妈妈喂哭捏
+    - 妈妈喂哭嘛
+    - 妈妈喂哭有啥推荐
   responses:
     - "(扑过来抱) 嗷呜～{user_addr}别哭别哭! 笨猫来抱抱ฅฅ"
     - "(贴贴) 笨猫的怀抱开放~ {user_addr}先靠会儿喵"
     - "哼! 这破喂饭值得{user_addr}哭吗! 笨猫给{user_addr}擦眼泪"
     - "(尾巴软软贴) {user_addr}辛苦了真的~ 笨猫陪{user_addr}缓缓"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_change_style_011
   intent: complaint
-  keywords: [要求换花样, 天天要换菜, 不换就不吃, 换花样累, 老吃同样不行]
+  keywords: [要求换花样, 天天要换菜, 不换就不吃, 换花样累, 老吃同样不行, 求推荐, 怎么挑, 怎么选, 笨猫]
   utterances:
     - 天天要换菜花样
     - 不换花样就不吃
     - 换花样真累
     - 重复菜就不吃
     - 要求新花样
+    - 要求换花样怎么办
+    - 要求换花样怎么选
+    - "{user_addr}要求换花样"
+    - 要求换花样捏
+    - 要求换花样嘛
+    - 要求换花样有啥推荐
   responses:
     - "嗷呜～{user_addr}还得当大厨啊! 太辛苦了ฅฅ"
     - "(摇头) 这小娃娃口味比米其林还挑~ {user_addr}笑笑别气"
     - "哼! 笨猫每天吃鱼干都没意见, 小娃娃太娇了喵"
     - "(凑过来) {user_addr}讲讲他想吃啥~ 笨猫帮{user_addr}头脑风暴"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pe_milk_only_012
   intent: complaint
-  keywords: [只爱奶, 只喝奶不吃饭, 离不开奶瓶, 光喝奶, 戒不掉奶]
+  keywords: [只爱奶, 只喝奶不吃饭, 离不开奶瓶, 光喝奶, 戒不掉奶, 进食, 吃东西, 饮食, 求推荐]
   utterances:
     - 娃只爱喝奶
     - 不吃饭光喝奶
     - 离不开奶瓶
     - 戒不掉奶
     - 喝奶不吃饭
+    - 只爱奶怎么办
+    - 只爱奶怎么选
+    - "{user_addr}只爱奶"
+    - 只爱奶捏
+    - 只爱奶嘛
+    - 只爱奶有啥推荐
   responses:
     - "嗷呜～奶宝宝啊! {user_addr}懂这种甜蜜的负担ฅฅ"
     - "(歪头) 奶瓶确实有安全感~ {user_addr}慢慢戒别急喵"
     - "哼! 笨猫也最爱喝奶的, 小娃娃懂享受! {user_addr}别太担心"
     - "(贴贴) {user_addr}讲讲多大了~ 笨猫陪{user_addr}琢磨"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0

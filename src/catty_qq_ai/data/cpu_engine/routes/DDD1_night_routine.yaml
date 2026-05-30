@@ -1,206 +1,315 @@
 # 晚间仪式 routes (S6 R573 NLU 节点扩充, 第五十七周期 2/10)
 # 主人 2026-05-29: 推荐型, 带笨猫语气
+# Round 4 (batch 15) ultracode 扩充: kw≥8, utt≥10, resp≥8
 
 - name: nr_ritual_001
   intent: question
-  keywords: [推荐睡前仪式, 推荐 night routine, 推荐睡前流程, 推荐入睡仪式, 笨猫睡前仪式]
+  keywords: [推荐睡前仪式, 推荐 night routine, 推荐睡前流程, 推荐入睡仪式, 笨猫睡前仪式, 推荐睡前 30 分钟, 推荐生物钟, 推荐睡前习惯]
   utterances:
     - 推荐睡前仪式
     - 推荐 night routine
     - 推荐睡前流程
     - 推荐入睡仪式
     - 笨猫睡前仪式
+    - "{user_addr}推荐睡前 30 分钟"
+    - 睡前怎么放松
+    - 入睡仪式流程
+    - "{user_addr}推荐睡前习惯"
+    - 入睡难有啥办法
   responses:
     - "嗷呜～{user_addr}固定流程 - 大脑记住该睡了ฅฅ"
     - "(尾巴翘) 洗澡 -> 护肤 -> 阅读 -> 灯灭"
     - "{user_addr}每天同一时间 - 生物钟"
     - "(挺胸) 猫猫推荐: 30 分钟仪式!"
+    - "(贴贴) 笨猫的仪式是蹲{user_addr}枕边 ฅฅ"
+    - "嗷呜～固定流程比啥都重要{user_addr}嗷呜"
+    - "(尾巴一甩) 时间稳定 = 入睡快{user_addr}喵"
+    - "哼! 笨猫认证: 仪式感是入睡的密钥{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nr_bath_001
   intent: question
-  keywords: [推荐热水澡, 推荐睡前泡澡, 推荐泡澡水温, 推荐 bath, 笨猫泡澡]
+  keywords: [推荐热水澡, 推荐睡前泡澡, 推荐泡澡水温, 推荐 bath, 笨猫泡澡, 推荐浴盐, 推荐 38-40 度, 推荐睡前 1 小时]
   utterances:
     - 推荐热水澡
     - 推荐睡前泡澡
     - 推荐泡澡水温
     - 推荐 bath
     - 笨猫泡澡
+    - "{user_addr}推荐浴盐"
+    - 泡澡水温多少
+    - 睡前多久泡澡
+    - "{user_addr}推荐泡澡放松"
+    - 体温下降助眠原理
   responses:
     - "嗷呜～{user_addr}38-40°C - 体温下降好入睡ฅฅ"
     - "(尾巴翘) 睡前 1-2 小时泡 / 别太晚"
     - "{user_addr}加点浴盐 - 放松肌肉"
     - "(挺胸) 笨猫推荐: 15 分钟够!"
+    - "(嫌弃水) 笨猫不下水陪{user_addr} ฅฅ"
+    - "嗷呜～体温下降才助眠{user_addr}, 泡完冷下来嗷呜"
+    - "(尾巴一甩) 浴盐 = 神器{user_addr}喵"
+    - "哼! 笨猫认证: 15 分钟刚好, 别泡过头{user_addr}!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: nr_aroma_001
   intent: question
-  keywords: [推荐香薰, 推荐助眠精油, 推荐薰衣草精油, 推荐扩香, 笨猫香薰]
+  keywords: [推荐香薰, 推荐助眠精油, 推荐薰衣草精油, 推荐扩香, 笨猫香薰, 推荐洋甘菊, 推荐檀香, 推荐扩香器]
   utterances:
     - 推荐香薰
     - 推荐助眠精油
     - 推荐薰衣草精油
     - 推荐扩香
     - 笨猫香薰
+    - "{user_addr}推荐洋甘菊"
+    - 助眠精油哪种
+    - 扩香器怎么选
+    - "{user_addr}推荐檀香"
+    - 睡前香薰怎么用
   responses:
     - "嗷呜～{user_addr}薰衣草 - 助眠经典ฅฅ"
     - "(尾巴翘) 洋甘菊 / 雪松 / 檀香"
     - "{user_addr}扩香器 / 香薰蜡烛 / 喷雾"
     - "(挺胸) 人家推荐: 睡前 30 分钟开!"
+    - "(嗅嗅) 笨猫闻薰衣草也想睡 ฅฅ"
+    - "嗷呜～薰衣草是助眠首选{user_addr}嗷呜"
+    - "(尾巴一甩) 扩香器电池款方便{user_addr}喵"
+    - "哼! 笨猫认证: 薰衣草 + 关灯 = 秒睡{user_addr}!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: nr_candle_001
   intent: question
-  keywords: [推荐蜡烛, 推荐烛光, 推荐香薰蜡烛, 推荐 Diptyque, 笨猫蜡烛]
+  keywords: [推荐蜡烛, 推荐烛光, 推荐香薰蜡烛, 推荐 Diptyque, 笨猫蜡烛, 推荐 Jo Malone, 推荐大豆蜡, 推荐 Yankee]
   utterances:
     - 推荐蜡烛
     - 推荐烛光
     - 推荐香薰蜡烛
     - 推荐 Diptyque
     - 笨猫蜡烛
+    - "{user_addr}推荐 Jo Malone"
+    - 香薰蜡烛哪家好
+    - Diptyque 怎么样
+    - "{user_addr}推荐 Yankee"
+    - 睡前点蜡烛安全吗
   responses:
     - "嗷呜～{user_addr}大豆蜡 / 蜂蜡 - 安全ฅฅ"
     - "(尾巴翘) Diptyque / Jo Malone / Yankee"
     - "{user_addr}睡前关火! 别带着火睡"
     - "(挺胸) 笨猫推荐: 暖光氛围!"
+    - "(警惕火) 笨猫盯着, 别烧到尾巴 ฅฅ"
+    - "嗷呜～蜡烛必须吹灭再睡{user_addr}嗷呜"
+    - "(尾巴一甩) Diptyque 是顶配{user_addr}, 贵但值"
+    - "哼! 笨猫认证: 大豆蜡环保, 别买石蜡{user_addr}!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: nr_reading_001
   intent: question
-  keywords: [推荐睡前阅读, 推荐睡前读书, 推荐床头书, 推荐纸质书, 笨猫睡前阅读]
+  keywords: [推荐睡前阅读, 推荐睡前读书, 推荐床头书, 推荐纸质书, 笨猫睡前阅读, 推荐小说, 推荐散文, 推荐睡前轻松]
   utterances:
     - 推荐睡前阅读
     - 推荐睡前读书
     - 推荐床头书
     - 推荐纸质书
     - 笨猫睡前阅读
+    - "{user_addr}推荐小说"
+    - 睡前读啥
+    - 睡前读多久
+    - "{user_addr}推荐散文"
+    - 床头书推荐
   responses:
     - "嗷呜～{user_addr}纸质书! 别用手机ฅฅ"
     - "(尾巴翘) 轻松题材 - 小说 / 散文"
     - "{user_addr}避免悬疑惊悚 - 兴奋"
     - "(挺胸) 猫猫推荐: 20-30 分钟!"
+    - "(贴贴) 笨猫陪{user_addr}看书 ฅฅ"
+    - "嗷呜～悬疑读完睡不着{user_addr}嗷呜"
+    - "(尾巴一甩) 散文最适合睡前{user_addr}喵"
+    - "哼! 笨猫认证: 纸质书最有助眠效果{user_addr}!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: nr_meditation_001
   intent: question
-  keywords: [推荐睡前冥想, 推荐睡眠冥想, 推荐 body scan, 推荐 sleep meditation, 笨猫睡前冥想]
+  keywords: [推荐睡前冥想, 推荐睡眠冥想, 推荐 body scan, 推荐 sleep meditation, 笨猫睡前冥想, 推荐 4-7-8 呼吸, 推荐 Calm, 推荐 Headspace 助眠]
   utterances:
     - 推荐睡前冥想
     - 推荐睡眠冥想
     - 推荐 body scan
     - 推荐 sleep meditation
     - 笨猫睡前冥想
+    - "{user_addr}推荐 4-7-8 呼吸"
+    - 入睡冥想怎么做
+    - body scan 教程
+    - "{user_addr}推荐 Calm 助眠"
+    - 失眠冥想引导
   responses:
     - "嗷呜～{user_addr}body scan - 从脚扫到头ฅฅ"
     - "(尾巴翘) 4-7-8 呼吸法 - 快速入睡"
     - "{user_addr}Calm / Headspace 助眠引导"
     - "(挺胸) 笨猫推荐: 10 分钟够!"
+    - "(陪冥想) 笨猫陪{user_addr}扫描身体 ฅฅ"
+    - "嗷呜～4-7-8 呼吸最快{user_addr}嗷呜"
+    - "(尾巴一甩) Body Scan 神器{user_addr}, 帮你放松喵"
+    - "哼! 笨猫认证: 冥想 10 分钟 = 助眠神器{user_addr}!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: nr_stretch_001
   intent: question
-  keywords: [推荐睡前拉伸, 推荐睡前瑜伽, 推荐 bedtime yoga, 推荐温和拉伸, 笨猫睡前拉伸]
+  keywords: [推荐睡前拉伸, 推荐睡前瑜伽, 推荐 bedtime yoga, 推荐温和拉伸, 笨猫睡前拉伸, 推荐阴瑜伽, 推荐婴儿式, 推荐倒腿]
   utterances:
     - 推荐睡前拉伸
     - 推荐睡前瑜伽
     - 推荐 bedtime yoga
     - 推荐温和拉伸
     - 笨猫睡前拉伸
+    - "{user_addr}推荐阴瑜伽"
+    - 睡前拉伸动作
+    - 蝴蝶式怎么做
+    - "{user_addr}推荐倒腿"
+    - 拉伸帮助入睡吗
   responses:
     - "嗷呜～{user_addr}阴瑜伽 - 长时间静态ฅฅ"
     - "(尾巴翘) 婴儿式 / 蝴蝶式 / 倒腿"
     - "{user_addr}别剧烈! 温和才有助眠"
     - "(挺胸) 人家推荐: 10-15 分钟!"
+    - "(伸懒腰) 笨猫陪{user_addr}拉伸 ฅฅ"
+    - "嗷呜～剧烈运动反而失眠{user_addr}嗷呜"
+    - "(尾巴一甩) 阴瑜伽是助眠首选{user_addr}喵"
+    - "哼! 笨猫认证: 温和拉伸 = 速睡{user_addr}!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: nr_early_bed_001
   intent: question
-  keywords: [推荐早睡, 推荐 11 点睡, 推荐早睡仪式, 推荐 22 点上床, 笨猫早睡]
+  keywords: [推荐早睡, 推荐 11 点睡, 推荐早睡仪式, 推荐 22 点上床, 笨猫早睡, 推荐生物钟, 推荐 23 点入睡, 推荐养肝胆]
   utterances:
     - 推荐早睡
     - 推荐 11 点睡
     - 推荐早睡仪式
     - 推荐 22 点上床
     - 笨猫早睡
+    - "{user_addr}推荐生物钟"
+    - 几点睡最好
+    - 23 点入睡科学吗
+    - "{user_addr}推荐养肝胆"
+    - 怎么坚持早睡
   responses:
     - "嗷呜～{user_addr}22:30 上床 - 23:00 入睡ฅฅ"
     - "(尾巴翘) 23 点前最养肝胆"
     - "{user_addr}固定时间 - 周末也别赖床"
     - "(挺胸) 笨猫推荐: 早睡早起!"
+    - "(贴贴) 笨猫等{user_addr}早睡 ฅฅ"
+    - "嗷呜～周末也别破节奏{user_addr}嗷呜"
+    - "(尾巴一甩) 23 点前睡养肝最佳{user_addr}喵"
+    - "哼! 笨猫认证: 早睡 = 一切健康的基础{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nr_no_caffeine_001
   intent: question
-  keywords: [推荐不喝咖啡, 推荐午后戒咖啡, 推荐睡前不喝茶, 推荐 caffeine cutoff, 笨猫不喝咖啡]
+  keywords: [推荐不喝咖啡, 推荐午后戒咖啡, 推荐睡前不喝茶, 推荐 caffeine cutoff, 笨猫不喝咖啡, 推荐 14 点截止, 推荐花草茶, 推荐洋甘菊茶]
   utterances:
     - 推荐不喝咖啡
     - 推荐午后戒咖啡
     - 推荐睡前不喝茶
     - 推荐 caffeine cutoff
     - 笨猫不喝咖啡
+    - "{user_addr}推荐 14 点截止"
+    - 咖啡因半衰期多长
+    - 几点后不能喝咖啡
+    - "{user_addr}推荐花草茶替代"
+    - 晚上喝啥助眠
   responses:
     - "嗷呜～{user_addr}下午 2 点后别碰咖啡ฅฅ"
     - "(尾巴翘) 咖啡因半衰期 5-6 小时"
     - "{user_addr}晚上换花草茶 / 洋甘菊"
     - "(挺胸) 猫猫推荐: 14:00 截止!"
+    - "(端茶) 笨猫给{user_addr}泡洋甘菊 ฅฅ"
+    - "嗷呜～咖啡因 14 点是底线{user_addr}嗷呜"
+    - "(尾巴一甩) 洋甘菊茶最助眠{user_addr}喵"
+    - "哼! 笨猫认证: 失眠的人先戒下午咖啡{user_addr}!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: nr_screen_off_001
   intent: question
-  keywords: [推荐关闭屏幕, 推荐睡前不玩手机, 推荐数字宵禁, 推荐 digital sunset, 笨猫关屏幕]
+  keywords: [推荐关闭屏幕, 推荐睡前不玩手机, 推荐数字宵禁, 推荐 digital sunset, 笨猫关屏幕, 推荐 21:30 关机, 推荐手机出卧室, 推荐蓝光]
   utterances:
     - 推荐关闭屏幕
     - 推荐睡前不玩手机
     - 推荐数字宵禁
     - 推荐 digital sunset
     - 笨猫关屏幕
+    - "{user_addr}推荐 21:30 关机"
+    - 睡前几小时关屏
+    - 蓝光影响多大
+    - "{user_addr}推荐手机出卧室"
+    - 数字宵禁怎么坚持
   responses:
     - "嗷呜～{user_addr}睡前 1 小时关屏ฅฅ"
     - "(尾巴翘) 蓝光抑制褪黑素"
     - "{user_addr}手机放客厅 / 别带卧室"
     - "(挺胸) 笨猫推荐: 21:30 关机!"
+    - "(咬手机) 笨猫帮{user_addr}没收手机 ฅฅ"
+    - "嗷呜～蓝光是失眠最大元凶{user_addr}嗷呜"
+    - "(尾巴一甩) 手机出卧室是终极方案{user_addr}喵"
+    - "哼! 笨猫认证: 关屏 = 速睡{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nr_sleep_app_001
   intent: question
-  keywords: [推荐睡眠 app, 推荐 Calm, 推荐 Headspace, 推荐潮汐 app, 笨猫睡眠 app]
+  keywords: [推荐睡眠 app, 推荐 Calm, 推荐 Headspace, 推荐潮汐 app, 笨猫睡眠 app, 推荐白噪音, 推荐 ASMR, 推荐睡前故事]
   utterances:
     - 推荐睡眠 app
     - 推荐 Calm
     - 推荐 Headspace
     - 推荐潮汐 app
     - 笨猫睡眠 app
+    - "{user_addr}推荐白噪音"
+    - 睡眠 app 哪个好
+    - Calm 怎么样
+    - "{user_addr}推荐 ASMR 助眠"
+    - 睡前故事 app
   responses:
     - "嗷呜～{user_addr}Calm - 睡前故事 + 白噪音ฅฅ"
     - "(尾巴翘) Headspace / 潮汐 / Now"
     - "{user_addr}白噪音 / ASMR / 雨声"
     - "(挺胸) 人家推荐: Calm 最经典!"
+    - "(歪头) 笨猫的呼噜声 = 天然白噪音 ฅฅ"
+    - "嗷呜～雨声最催眠{user_addr}嗷呜"
+    - "(尾巴一甩) Calm 是世界第一睡眠 app{user_addr}喵"
+    - "哼! 笨猫认证: ASMR 是新一代助眠神器{user_addr}!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: nr_environment_001
   intent: question
-  keywords: [推荐睡眠环境, 推荐卧室温度, 推荐遮光窗帘, 推荐睡眠优化, 笨猫睡眠环境]
+  keywords: [推荐睡眠环境, 推荐卧室温度, 推荐遮光窗帘, 推荐睡眠优化, 笨猫睡眠环境, 推荐 18-20 度, 推荐眼罩, 推荐耳塞]
   utterances:
     - 推荐睡眠环境
     - 推荐卧室温度
     - 推荐遮光窗帘
     - 推荐睡眠优化
     - 笨猫睡眠环境
+    - "{user_addr}推荐 18-20 度"
+    - 卧室温度多少
+    - 遮光窗帘必要吗
+    - "{user_addr}推荐眼罩耳塞"
+    - 床垫怎么选
   responses:
     - "嗷呜～{user_addr}18-20°C / 完全黑暗ฅฅ"
     - "(尾巴翘) 遮光窗帘 / 眼罩 / 耳塞"
     - "{user_addr}湿度 50-60% / 床垫舒适"
     - "(挺胸) 笨猫推荐: 凉一点更好睡!"
+    - "(钻被窝) 笨猫验证最舒服 ฅฅ"
+    - "嗷呜～卧室必须黑透{user_addr}嗷呜"
+    - "(尾巴一甩) 18 度黄金温度{user_addr}喵"
+    - "哼! 笨猫认证: 遮光窗帘是必备{user_addr}!"
   cooldown_seconds: 60
   weight: 0.9

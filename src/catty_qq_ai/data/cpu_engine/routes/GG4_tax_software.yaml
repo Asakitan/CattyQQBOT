@@ -3,204 +3,432 @@
 
 - name: ts_personal_cn_001
   intent: question
-  keywords: [推荐个税 app, 推荐个人所得税, 推荐个税申报, 推荐汇算清缴, 笨猫个税]
+  keywords:
+  - 推荐个税 app
+  - 推荐个人所得税
+  - 推荐个税申报
+  - 推荐汇算清缴
+  - 笨猫个税
+  - 有什么个税 app
+  - 有什么个人所得税
+  - 有什么个税申报
+  - 有什么汇算清缴
   utterances:
-    - 推荐个税 app
-    - 推荐个人所得税
-    - 推荐个税申报
-    - 推荐汇算清缴
-    - 笨猫个税
+  - 推荐个税 app
+  - 推荐个人所得税
+  - 推荐个税申报
+  - 推荐汇算清缴
+  - 笨猫个税
+  - "{user_addr}聊聊个税 app嘛"
+  - "{user_addr}个税 app哪家强"
+  - "{user_addr}人家想了解个税 app"
+  - 笨猫给猜猜个税 app
+  - "{user_addr}个税 app怎么选喵"
+  - 个税 app有推荐吗
   responses:
-    - "嗷呜～{user_addr}个人所得税 app - 官方ฅฅ"
-    - "(尾巴翘) 国税总局出品 / 免费"
-    - "{user_addr}3-6 月汇算清缴 / 别忘退税"
-    - "(挺胸) 笨猫推荐: 装一个准没错!"
+  - "嗷呜～{user_addr}个人所得税 app - 官方ฅฅ"
+  - "(尾巴翘) 国税总局出品 / 免费"
+  - "{user_addr}3-6 月汇算清缴 / 别忘退税"
+  - "(挺胸) 笨猫推荐: 装一个准没错!"
+  - "(尾巴翘起来) {user_addr}个税 app? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问个税 app人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}个税 app的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}个税 app笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_us_paid_001
   intent: question
-  keywords: [推荐 TurboTax, 推荐 H&R Block, 推荐美国报税, 推荐 TaxAct, 笨猫 TurboTax]
+  keywords:
+  - 推荐 TurboTax
+  - 推荐 H&R Block
+  - 推荐美国报税
+  - 推荐 TaxAct
+  - 笨猫 TurboTax
+  - 有什么 TurboTax
+  - 有什么 H&R Block
+  - 有什么美国报税
+  - 有什么 TaxAct
   utterances:
-    - 推荐 TurboTax
-    - 推荐 H&R Block
-    - 推荐美国报税
-    - 推荐 TaxAct
-    - 笨猫 TurboTax
+  - 推荐 TurboTax
+  - 推荐 H&R Block
+  - 推荐美国报税
+  - 推荐 TaxAct
+  - 笨猫 TurboTax
+  - "{user_addr}聊聊TurboTax嘛"
+  - "{user_addr}TurboTax哪家强"
+  - "{user_addr}人家想了解TurboTax"
+  - 笨猫给猜猜TurboTax
+  - "{user_addr}TurboTax怎么选喵"
+  - TurboTax有推荐吗
   responses:
-    - "嗷呜～{user_addr}TurboTax - 美国第一ฅฅ"
-    - "(尾巴翘) H&R Block / TaxAct"
-    - "{user_addr}付费但流程顺 / 复杂报税友好"
-    - "(挺胸) 笨猫推荐: TurboTax Deluxe!"
+  - "嗷呜～{user_addr}TurboTax - 美国第一ฅฅ"
+  - "(尾巴翘) H&R Block / TaxAct"
+  - "{user_addr}付费但流程顺 / 复杂报税友好"
+  - "(挺胸) 笨猫推荐: TurboTax Deluxe!"
+  - "(尾巴翘起来) {user_addr}TurboTax? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问TurboTax人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}TurboTax的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}TurboTax笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ts_us_free_001
   intent: question
-  keywords: [推荐免费报税, 推荐 FreeTaxUSA, 推荐 Cash App Taxes, 推荐 IRS Free File, 笨猫免费报税]
+  keywords:
+  - 推荐免费报税
+  - 推荐 FreeTaxUSA
+  - 推荐 Cash App Taxes
+  - 推荐 IRS Free File
+  - 笨猫免费报税
+  - 有什么免费报税
+  - 有什么 FreeTaxUSA
+  - 有什么 Cash App Taxes
+  - 有什么 IRS Free File
   utterances:
-    - 推荐免费报税
-    - 推荐 FreeTaxUSA
-    - 推荐 Cash App Taxes
-    - 推荐 IRS Free File
-    - 笨猫免费报税
+  - 推荐免费报税
+  - 推荐 FreeTaxUSA
+  - 推荐 Cash App Taxes
+  - 推荐 IRS Free File
+  - 笨猫免费报税
+  - "{user_addr}聊聊免费报税嘛"
+  - "{user_addr}免费报税哪家强"
+  - "{user_addr}人家想了解免费报税"
+  - 笨猫给猜猜免费报税
+  - "{user_addr}免费报税怎么选喵"
+  - 免费报税有推荐吗
   responses:
-    - "嗷呜～{user_addr}FreeTaxUSA - 联邦免费ฅฅ"
-    - "(尾巴翘) Cash App Taxes / IRS Free File"
-    - "{user_addr}收入<79k 走 IRS Free File"
-    - "(挺胸) 笨猫推荐: FreeTaxUSA 性价比!"
+  - "嗷呜～{user_addr}FreeTaxUSA - 联邦免费ฅฅ"
+  - "(尾巴翘) Cash App Taxes / IRS Free File"
+  - "{user_addr}收入<79k 走 IRS Free File"
+  - "(挺胸) 笨猫推荐: FreeTaxUSA 性价比!"
+  - "(尾巴翘起来) {user_addr}免费报税? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问免费报税人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}免费报税的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}免费报税笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ts_refund_001
   intent: question
-  keywords: [推荐退税, 推荐抵扣项, 推荐税收抵免, 推荐退税技巧, 笨猫退税]
+  keywords:
+  - 推荐退税
+  - 推荐抵扣项
+  - 推荐税收抵免
+  - 推荐退税技巧
+  - 笨猫退税
+  - 有什么退税
+  - 有什么抵扣项
+  - 有什么税收抵免
+  - 有什么退税技巧
   utterances:
-    - 推荐退税
-    - 推荐抵扣项
-    - 推荐税收抵免
-    - 推荐退税技巧
-    - 笨猫退税
+  - 推荐退税
+  - 推荐抵扣项
+  - 推荐税收抵免
+  - 推荐退税技巧
+  - 笨猫退税
+  - "{user_addr}聊聊退税嘛"
+  - "{user_addr}退税哪家强"
+  - "{user_addr}人家想了解退税"
+  - 笨猫给猜猜退税
+  - "{user_addr}退税怎么选喵"
+  - 退税有推荐吗
   responses:
-    - "嗷呜～{user_addr}专项附加 + 公益捐赠ฅฅ"
-    - "(尾巴翘) 年终奖单独 vs 合并算"
-    - "{user_addr}两个算法都试 / 选退得多的"
-    - "(挺胸) 笨猫推荐: 别躺着 / 主动算!"
+  - "嗷呜～{user_addr}专项附加 + 公益捐赠ฅฅ"
+  - "(尾巴翘) 年终奖单独 vs 合并算"
+  - "{user_addr}两个算法都试 / 选退得多的"
+  - "(挺胸) 笨猫推荐: 别躺着 / 主动算!"
+  - "(尾巴翘起来) {user_addr}退税? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问退税人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}退税的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}退税笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_special_deduct_001
   intent: question
-  keywords: [推荐专项附加扣除, 推荐子女教育, 推荐房贷利息, 推荐赡养老人, 笨猫专项扣除]
+  keywords:
+  - 推荐专项附加扣除
+  - 推荐子女教育
+  - 推荐房贷利息
+  - 推荐赡养老人
+  - 笨猫专项扣除
+  - 有什么专项附加扣除
+  - 有什么子女教育
+  - 有什么房贷利息
+  - 有什么赡养老人
   utterances:
-    - 推荐专项附加扣除
-    - 推荐子女教育
-    - 推荐房贷利息
-    - 推荐赡养老人
-    - 笨猫专项扣除
+  - 推荐专项附加扣除
+  - 推荐子女教育
+  - 推荐房贷利息
+  - 推荐赡养老人
+  - 笨猫专项扣除
+  - "{user_addr}聊聊专项附加扣除嘛"
+  - "{user_addr}专项附加扣除哪家强"
+  - "{user_addr}人家想了解专项附加扣除"
+  - 笨猫给猜猜专项附加扣除
+  - "{user_addr}专项附加扣除怎么选喵"
+  - 专项附加扣除有推荐吗
   responses:
-    - "嗷呜～{user_addr}子女教育 2000/月/娃ฅฅ"
-    - "(尾巴翘) 房贷 1000 / 房租 800-1500"
-    - "{user_addr}赡养老人 3000 / 继续教育 400"
-    - "(挺胸) 笨猫推荐: 全填上 / 省一笔!"
+  - "嗷呜～{user_addr}子女教育 2000/月/娃ฅฅ"
+  - "(尾巴翘) 房贷 1000 / 房租 800-1500"
+  - "{user_addr}赡养老人 3000 / 继续教育 400"
+  - "(挺胸) 笨猫推荐: 全填上 / 省一笔!"
+  - "(尾巴翘起来) {user_addr}专项附加扣除? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问专项附加扣除人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}专项附加扣除的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}专项附加扣除笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ts_small_biz_001
   intent: question
-  keywords: [推荐六税两费, 推荐小微企业, 推荐增值税减免, 推荐小规模纳税人, 笨猫小微税收]
+  keywords:
+  - 推荐六税两费
+  - 推荐小微企业
+  - 推荐增值税减免
+  - 推荐小规模纳税人
+  - 笨猫小微税收
+  - 有什么六税两费
+  - 有什么小微企业
+  - 有什么增值税减免
+  - 有什么小规模纳税人
   utterances:
-    - 推荐六税两费
-    - 推荐小微企业
-    - 推荐增值税减免
-    - 推荐小规模纳税人
-    - 笨猫小微税收
+  - 推荐六税两费
+  - 推荐小微企业
+  - 推荐增值税减免
+  - 推荐小规模纳税人
+  - 笨猫小微税收
+  - "{user_addr}聊聊六税两费嘛"
+  - "{user_addr}六税两费哪家强"
+  - "{user_addr}人家想了解六税两费"
+  - 笨猫给猜猜六税两费
+  - "{user_addr}六税两费怎么选喵"
+  - 六税两费有推荐吗
   responses:
-    - "嗷呜～{user_addr}小规模季<30 万免增值ฅฅ"
-    - "(尾巴翘) 六税两费减半 / 资源教育附加"
-    - "{user_addr}小微企业所得税 5% (优惠期)"
-    - "(挺胸) 笨猫推荐: 政策吃透!"
+  - "嗷呜～{user_addr}小规模季<30 万免增值ฅฅ"
+  - "(尾巴翘) 六税两费减半 / 资源教育附加"
+  - "{user_addr}小微企业所得税 5% (优惠期)"
+  - "(挺胸) 笨猫推荐: 政策吃透!"
+  - "(尾巴翘起来) {user_addr}六税两费? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问六税两费人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}六税两费的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}六税两费笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ts_corporate_001
   intent: question
-  keywords: [推荐企业税务, 推荐企业所得税, 推荐汇算清缴企业, 推荐税务申报, 笨猫企业税]
+  keywords:
+  - 推荐企业税务
+  - 推荐企业所得税
+  - 推荐汇算清缴企业
+  - 推荐税务申报
+  - 笨猫企业税
+  - 有什么企业税务
+  - 有什么企业所得税
+  - 有什么汇算清缴企业
+  - 有什么税务申报
   utterances:
-    - 推荐企业税务
-    - 推荐企业所得税
-    - 推荐汇算清缴企业
-    - 推荐税务申报
-    - 笨猫企业税
+  - 推荐企业税务
+  - 推荐企业所得税
+  - 推荐汇算清缴企业
+  - 推荐税务申报
+  - 笨猫企业税
+  - "{user_addr}聊聊企业税务嘛"
+  - "{user_addr}企业税务哪家强"
+  - "{user_addr}人家想了解企业税务"
+  - 笨猫给猜猜企业税务
+  - "{user_addr}企业税务怎么选喵"
+  - 企业税务有推荐吗
   responses:
-    - "嗷呜～{user_addr}企业所得税 25% / 小微 5%ฅฅ"
-    - "(尾巴翘) 5/31 前汇算 / 别拖"
-    - "{user_addr}电子税务局 / 找代账"
-    - "(挺胸) 笨猫推荐: 别自己硬扛 / 找会计!"
+  - "嗷呜～{user_addr}企业所得税 25% / 小微 5%ฅฅ"
+  - "(尾巴翘) 5/31 前汇算 / 别拖"
+  - "{user_addr}电子税务局 / 找代账"
+  - "(挺胸) 笨猫推荐: 别自己硬扛 / 找会计!"
+  - "(尾巴翘起来) {user_addr}企业税务? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问企业税务人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}企业税务的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}企业税务笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ts_freelance_001
   intent: question
-  keywords: [推荐自由职业者税务, 推荐劳务报酬, 推荐稿酬, 推荐个体户, 笨猫自由职业税]
+  keywords:
+  - 推荐自由职业者税务
+  - 推荐劳务报酬
+  - 推荐稿酬
+  - 推荐个体户
+  - 笨猫自由职业税
+  - 有什么自由职业者税务
+  - 有什么劳务报酬
+  - 有什么稿酬
+  - 有什么个体户
   utterances:
-    - 推荐自由职业者税务
-    - 推荐劳务报酬
-    - 推荐稿酬
-    - 推荐个体户
-    - 笨猫自由职业税
+  - 推荐自由职业者税务
+  - 推荐劳务报酬
+  - 推荐稿酬
+  - 推荐个体户
+  - 笨猫自由职业税
+  - "{user_addr}聊聊自由职业者税务嘛"
+  - "{user_addr}自由职业者税务哪家强"
+  - "{user_addr}人家想了解自由职业者税务"
+  - 笨猫给猜猜自由职业者税务
+  - "{user_addr}自由职业者税务怎么选喵"
+  - 自由职业者税务有推荐吗
   responses:
-    - "嗷呜～{user_addr}劳务报酬并入综合所得ฅฅ"
-    - "(尾巴翘) 稿酬打 7 折 / 特许使用费"
-    - "{user_addr}个体户经营所得 5%-35%"
-    - "(挺胸) 笨猫推荐: 收据留好 / 抵扣!"
+  - "嗷呜～{user_addr}劳务报酬并入综合所得ฅฅ"
+  - "(尾巴翘) 稿酬打 7 折 / 特许使用费"
+  - "{user_addr}个体户经营所得 5%-35%"
+  - "(挺胸) 笨猫推荐: 收据留好 / 抵扣!"
+  - "(尾巴翘起来) {user_addr}自由职业者税务? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问自由职业者税务人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}自由职业者税务的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}自由职业者税务笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ts_us_forms_001
   intent: question
-  keywords: [推荐 W-9, 推荐 W-8BEN, 推荐 1099, 推荐 1040, 笨猫美国表格]
+  keywords:
+  - 推荐 W-9
+  - 推荐 W-8BEN
+  - 推荐 1099
+  - 推荐 1040
+  - 笨猫美国表格
+  - 有什么 W-9
+  - 有什么 W-8BEN
+  - 有什么 1099
+  - 有什么 1040
   utterances:
-    - "推荐 W-9"
-    - "推荐 W-8BEN"
-    - "推荐 1099"
-    - "推荐 1040"
-    - 笨猫美国表格
+  - 推荐 W-9
+  - 推荐 W-8BEN
+  - 推荐 1099
+  - 推荐 1040
+  - 笨猫美国表格
+  - "{user_addr}聊聊W-9嘛"
+  - "{user_addr}W-9哪家强"
+  - "{user_addr}人家想了解W-9"
+  - 笨猫给猜猜W-9
+  - "{user_addr}W-9怎么选喵"
+  - W-9有推荐吗
   responses:
-    - "嗷呜～{user_addr}W-9 美国人 / W-8BEN 非美ฅฅ"
-    - "(尾巴翘) 1099-NEC 自由职业收入"
-    - "{user_addr}1040 主表 / Schedule C 自雇"
-    - "(挺胸) 笨猫推荐: 签合同前问清!"
+  - "嗷呜～{user_addr}W-9 美国人 / W-8BEN 非美ฅฅ"
+  - "(尾巴翘) 1099-NEC 自由职业收入"
+  - "{user_addr}1040 主表 / Schedule C 自雇"
+  - "(挺胸) 笨猫推荐: 签合同前问清!"
+  - "(尾巴翘起来) {user_addr}W-9? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问W-9人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}W-9的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}W-9笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: ts_consult_cpa_001
   intent: question
-  keywords: [推荐税务咨询, 推荐 CPA, 推荐注会, 推荐税务师, 笨猫税务咨询]
+  keywords:
+  - 推荐税务咨询
+  - 推荐 CPA
+  - 推荐注会
+  - 推荐税务师
+  - 笨猫税务咨询
+  - 有什么税务咨询
+  - 有什么 CPA
+  - 有什么注会
+  - 有什么税务师
   utterances:
-    - 推荐税务咨询
-    - 推荐 CPA
-    - 推荐注会
-    - 推荐税务师
-    - 笨猫税务咨询
+  - 推荐税务咨询
+  - 推荐 CPA
+  - 推荐注会
+  - 推荐税务师
+  - 笨猫税务咨询
+  - "{user_addr}聊聊税务咨询嘛"
+  - "{user_addr}税务咨询哪家强"
+  - "{user_addr}人家想了解税务咨询"
+  - 笨猫给猜猜税务咨询
+  - "{user_addr}税务咨询怎么选喵"
+  - 税务咨询有推荐吗
   responses:
-    - "嗷呜～{user_addr}复杂税务找 CPA / 注税ฅฅ"
-    - "(尾巴翘) 跨境 / 股权 / 大额必请"
-    - "{user_addr}费用几千到几万 / 省更多"
-    - "(挺胸) 笨猫推荐: 别省专业费!"
+  - "嗷呜～{user_addr}复杂税务找 CPA / 注税ฅฅ"
+  - "(尾巴翘) 跨境 / 股权 / 大额必请"
+  - "{user_addr}费用几千到几万 / 省更多"
+  - "(挺胸) 笨猫推荐: 别省专业费!"
+  - "(尾巴翘起来) {user_addr}税务咨询? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问税务咨询人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}税务咨询的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}税务咨询笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ts_planning_001
   intent: question
-  keywords: [推荐税务筹划, 推荐节税, 推荐合理避税, 推荐税收优化, 笨猫税务筹划]
+  keywords:
+  - 推荐税务筹划
+  - 推荐节税
+  - 推荐合理避税
+  - 推荐税收优化
+  - 笨猫税务筹划
+  - 有什么税务筹划
+  - 有什么节税
+  - 有什么合理避税
+  - 有什么税收优化
   utterances:
-    - 推荐税务筹划
-    - 推荐节税
-    - 推荐合理避税
-    - 推荐税收优化
-    - 笨猫税务筹划
+  - 推荐税务筹划
+  - 推荐节税
+  - 推荐合理避税
+  - 推荐税收优化
+  - 笨猫税务筹划
+  - "{user_addr}聊聊税务筹划嘛"
+  - "{user_addr}税务筹划哪家强"
+  - "{user_addr}人家想了解税务筹划"
+  - 笨猫给猜猜税务筹划
+  - "{user_addr}税务筹划怎么选喵"
+  - 税务筹划有推荐吗
   responses:
-    - "嗷呜～{user_addr}年终奖拆分 / 工资+奖金ฅฅ"
-    - "(尾巴翘) 公益捐赠 30% 抵扣"
-    - "{user_addr}年金 / 商业养老 / 抵扣"
-    - "(挺胸) 笨猫推荐: 提前规划!"
+  - "嗷呜～{user_addr}年终奖拆分 / 工资+奖金ฅฅ"
+  - "(尾巴翘) 公益捐赠 30% 抵扣"
+  - "{user_addr}年金 / 商业养老 / 抵扣"
+  - "(挺胸) 笨猫推荐: 提前规划!"
+  - "(尾巴翘起来) {user_addr}税务筹划? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问税务筹划人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}税务筹划的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}税务筹划笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ts_compliance_001
   intent: question
-  keywords: [推荐避税合规, 推荐税务合规, 推荐反避税, 推荐 CRS, 笨猫税务合规]
+  keywords:
+  - 推荐避税合规
+  - 推荐税务合规
+  - 推荐反避税
+  - 推荐 CRS
+  - 笨猫税务合规
+  - 有什么避税合规
+  - 有什么税务合规
+  - 有什么反避税
+  - 有什么 CRS
   utterances:
-    - 推荐避税合规
-    - 推荐税务合规
-    - 推荐反避税
-    - "推荐 CRS"
-    - 笨猫税务合规
+  - 推荐避税合规
+  - 推荐税务合规
+  - 推荐反避税
+  - 推荐 CRS
+  - 笨猫税务合规
+  - "{user_addr}聊聊避税合规嘛"
+  - "{user_addr}避税合规哪家强"
+  - "{user_addr}人家想了解避税合规"
+  - 笨猫给猜猜避税合规
+  - "{user_addr}避税合规怎么选喵"
+  - 避税合规有推荐吗
   responses:
-    - "嗷呜～{user_addr}合理节税 ≠ 逃税ฅฅ"
-    - "(尾巴翘) CRS 全球账户透明 / 别藏"
-    - "{user_addr}虚开发票牢底坐穿"
-    - "(挺胸) 笨猫推荐: 守法第一!"
+  - "嗷呜～{user_addr}合理节税 ≠ 逃税ฅฅ"
+  - "(尾巴翘) CRS 全球账户透明 / 别藏"
+  - "{user_addr}虚开发票牢底坐穿"
+  - "(挺胸) 笨猫推荐: 守法第一!"
+  - "(尾巴翘起来) {user_addr}避税合规? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问避税合规人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}避税合规的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}避税合规笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 0.8

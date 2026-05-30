@@ -4,234 +4,378 @@
 
 - name: disease_cold_001
   intent: complaint
-  keywords: [感冒了, 推荐感冒, 推荐感冒药, 流鼻涕, 笨猫感冒]
+  keywords: [感冒了, 推荐感冒, 推荐感冒药, 流鼻涕, 笨猫感冒, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 我感冒了
     - 推荐感冒药
     - 流鼻涕怎么办
     - 笨猫感冒
     - 鼻塞
+    - 感冒了怎么办
+    - 感冒了怎么选
+    - "{user_addr}感冒了"
+    - 感冒了捏
+    - 感冒了嘛
+    - 感冒了有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}多喝水 + 早睡 + 维 Cฅฅ"
     - "(歪头) 普通感冒 7 天自愈! 别滥用抗生素"
     - "{user_addr}严重 + 高烧 + 不退 - 看医生 别拖"
     - "(蹭蹭) 笨猫陪{user_addr}~ 抱猫缓解不舒服"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_headache_001
   intent: complaint
-  keywords: [头疼, 推荐头痛, 推荐缓解头痛, 偏头痛, 笨猫头疼]
+  keywords: [头疼, 推荐头痛, 推荐缓解头痛, 偏头痛, 笨猫头疼, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 我头疼
     - 推荐头痛
     - 推荐缓解头痛
     - 偏头痛
     - 笨猫头疼
+    - 头疼怎么办
+    - 头疼怎么选
+    - "{user_addr}头疼"
+    - 头疼捏
+    - 头疼嘛
+    - 头疼有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}头疼好辛苦~ 笨猫陪着ฅฅ"
     - "(歪头) 闭眼 + 冰敷 + 安静环境 - 偏头痛救星"
     - "{user_addr}吃布洛芬 / 对乙酰氨基酚 - 不能频繁吃"
     - "(挺胸) 笨猫的提醒: 持续 + 剧烈 + 一侧 - 看医生"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_stomach_001
   intent: complaint
-  keywords: [胃疼, 推荐胃病, 推荐胃痛, 胃酸反流, 笨猫胃疼]
+  keywords: [胃疼, 推荐胃病, 推荐胃痛, 胃酸反流, 笨猫胃疼, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 我胃疼
     - 推荐胃病
     - 推荐胃痛
     - 胃酸反流
     - 笨猫胃疼
+    - 胃疼怎么办
+    - 胃疼怎么选
+    - "{user_addr}胃疼"
+    - 胃疼捏
+    - 胃疼嘛
+    - 胃疼有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}胃疼! 笨猫心疼ฅฅ"
     - "(歪头) 别吃辣 + 别熬夜 + 三餐规律 - 养胃"
     - "{user_addr}奥美拉唑 / 多潘立酮 - 胃药常用"
     - "(挺胸) 笨猫的提醒: 反复胃痛 - 胃镜查 别拖出胃癌"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_insomnia_001
   intent: complaint
-  keywords: [失眠, 推荐失眠, 推荐睡不着, 推荐改善睡眠, 笨猫失眠]
+  keywords: [失眠, 推荐失眠, 推荐睡不着, 推荐改善睡眠, 笨猫失眠, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 我失眠
     - 推荐失眠
     - 睡不着觉
     - 推荐改善睡眠
     - 笨猫失眠
+    - 失眠怎么办
+    - 失眠怎么选
+    - "{user_addr}失眠"
+    - 失眠捏
+    - 失眠嘛
+    - 失眠有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}失眠好痛苦~ 笨猫陪着ฅฅ"
     - "(歪头) 睡前 1 小时关屏 / 喝温奶 / 4-7-8 呼吸法"
     - "{user_addr}严重失眠看心理科! 别硬扛"
     - "(蹭蹭) 笨猫的提醒: 别熬夜! 早睡早起调时钟"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_back_pain_001
   intent: complaint
-  keywords: [腰疼, 推荐腰疼, 推荐颈椎病, 推荐肩膀疼, 笨猫腰疼]
+  keywords: [腰疼, 推荐腰疼, 推荐颈椎病, 推荐肩膀疼, 笨猫腰疼, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 我腰疼
     - 推荐腰疼
     - 推荐颈椎病
     - 肩膀疼
     - 笨猫腰疼
+    - 腰疼怎么办
+    - 腰疼怎么选
+    - "{user_addr}腰疼"
+    - 腰疼捏
+    - 腰疼嘛
+    - 腰疼有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}腰肩颈疼! 久坐打工人ฅฅ"
     - "(歪头) 拉伸 + 调整坐姿 + 站立办公 - 缓解"
     - "{user_addr}严重去骨科 / 推拿 / 针灸"
     - "(挺胸) 笨猫的提醒: 工作 1 小时活动 5 分钟!"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_dental_001
   intent: complaint
-  keywords: [牙疼, 推荐牙痛, 推荐牙医, 推荐看牙, 笨猫牙疼]
+  keywords: [牙疼, 推荐牙痛, 推荐牙医, 推荐看牙, 笨猫牙疼, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 我牙疼
     - 推荐牙痛
     - 推荐牙医
     - 推荐看牙
     - 笨猫牙疼
+    - 牙疼怎么办
+    - 牙疼怎么选
+    - "{user_addr}牙疼"
+    - 牙疼捏
+    - 牙疼嘛
+    - 牙疼有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}牙疼最折磨人! 笨猫心疼ฅฅ"
     - "(挺胸) 立刻看牙医! 拖只会更严重"
     - "{user_addr}冰敷脸 + 布洛芬 - 临时缓解"
     - "(歪头) 笨猫的提醒: 每年洗牙 1 次! 早查早治"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_eye_001
   intent: complaint
-  keywords: [眼睛疼, 眼睛红, 推荐眼药水, 推荐眼科, 笨猫眼睛]
+  keywords: [眼睛疼, 眼睛红, 推荐眼药水, 推荐眼科, 笨猫眼睛, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 眼睛疼
     - 眼睛红
     - 推荐眼药水
     - 推荐眼科
     - 笨猫眼睛
+    - 眼睛疼怎么办
+    - 眼睛疼怎么选
+    - "{user_addr}眼睛疼"
+    - 眼睛疼捏
+    - 眼睛疼嘛
+    - 眼睛疼有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}多看绿色 + 远眺 + 别用屏太久ฅฅ"
     - "(歪头) 干眼: 人工泪液 + 眨眼 / 红眼: 别揉 - 看医生"
     - "{user_addr}近视加深去配镜复查"
     - "(挺胸) 笨猫的提醒: 20-20-20 法则! 每 20 分看 20 尺远 20 秒"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_allergy_001
   intent: complaint
-  keywords: [过敏, 推荐过敏, 推荐过敏反应, 推荐荨麻疹, 笨猫过敏]
+  keywords: [过敏, 推荐过敏, 推荐过敏反应, 推荐荨麻疹, 笨猫过敏, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 我过敏
     - 推荐过敏
     - 推荐过敏反应
     - 荨麻疹
     - 笨猫过敏
+    - 过敏怎么办
+    - 过敏怎么选
+    - "{user_addr}过敏"
+    - 过敏捏
+    - 过敏嘛
+    - 过敏有啥推荐
   responses:
     - "(尾巴垂下) 嗷呜～{user_addr}先离开过敏原! 别接触ฅฅ"
     - "(歪头) 抗组胺: 氯雷他定 / 西替利嗪 - 不嗜睡"
     - "{user_addr}严重肿胀 / 呼吸困难 - 立刻就医!"
     - "(挺胸) 笨猫的提醒: 查过敏原! 防止再发"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_diabetes_001
   intent: question
-  keywords: [推荐糖尿病, 推荐血糖, 推荐糖尿病饮食, 推荐胰岛素, 笨猫糖尿病]
+  keywords: [推荐糖尿病, 推荐血糖, 推荐糖尿病饮食, 推荐胰岛素, 笨猫糖尿病, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐糖尿病
     - 推荐血糖
     - 推荐糖尿病饮食
     - 推荐胰岛素
     - 笨猫糖尿病
+    - 推荐糖尿病怎么办
+    - 推荐糖尿病怎么选
+    - "{user_addr}推荐糖尿病"
+    - 推荐糖尿病捏
+    - 推荐糖尿病嘛
+    - 推荐糖尿病有啥推荐
   responses:
     - "嗷呜～{user_addr}糖尿病: 控糖 + 运动 + 监测 - 三大件ฅฅ"
     - "(尾巴翘) 饮食: 低 GI + 蛋白质 + 蔬菜"
     - "{user_addr}口服药 / 胰岛素 - 看类型和病情"
     - "(挺胸) 笨猫的提醒: 听医嘱! 别擅自停药"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_hypertension_001
   intent: question
-  keywords: [推荐高血压, 推荐血压, 推荐降压药, 高血压饮食, 笨猫高血压]
+  keywords: [推荐高血压, 推荐血压, 推荐降压药, 高血压饮食, 笨猫高血压, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐高血压
     - 推荐血压
     - 推荐降压药
     - 高血压饮食
     - 笨猫高血压
+    - 推荐高血压怎么办
+    - 推荐高血压怎么选
+    - "{user_addr}推荐高血压"
+    - 推荐高血压捏
+    - 推荐高血压嘛
+    - 推荐高血压有啥推荐
   responses:
     - "嗷呜～{user_addr}高血压: 低盐 + 控糖 + 适量运动 + 戒烟酒ฅฅ"
     - "(尾巴翘) 监测! 每天早晚量"
     - "{user_addr}降压药每天定时! 别漏服"
     - "(挺胸) 笨猫的提醒: 控好血压 - 防中风心梗"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_doctor_001
   intent: question
-  keywords: [推荐挂号, 推荐看医生, 推荐医院, 推荐三甲, 笨猫看医生]
+  keywords: [推荐挂号, 推荐看医生, 推荐医院, 推荐三甲, 笨猫看医生, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐挂号
     - 推荐看医生
     - 推荐医院
     - 推荐三甲医院
     - 笨猫看医生
+    - 推荐挂号怎么办
+    - 推荐挂号怎么选
+    - "{user_addr}推荐挂号"
+    - 推荐挂号捏
+    - 推荐挂号嘛
+    - 推荐挂号有啥推荐
   responses:
     - "嗷呜～{user_addr}三甲优先! 大病专家挂号ฅฅ"
     - "(尾巴翘) 推荐挂号: 微信 / 支付宝 / 医院 app"
     - "{user_addr}互联网医院方便! 复诊开药"
     - "(挺胸) 笨猫的提醒: 大病专科医院! 别只看综合"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_pediatric_001
   intent: question
-  keywords: [推荐儿科, 推荐孩子生病, 推荐儿童医院, 推荐小儿, 笨猫儿科]
+  keywords: [推荐儿科, 推荐孩子生病, 推荐儿童医院, 推荐小儿, 笨猫儿科, 怎么选, 选啥, 求推荐, 想要]
   utterances:
     - 推荐儿科
     - 推荐孩子生病
     - 推荐儿童医院
     - 推荐小儿
     - 笨猫儿科
+    - 推荐儿科怎么办
+    - 推荐儿科怎么选
+    - "{user_addr}推荐儿科"
+    - 推荐儿科捏
+    - 推荐儿科嘛
+    - 推荐儿科有啥推荐
   responses:
     - "嗷呜～{user_addr}儿童医院专科强! 别挂综合儿科ฅฅ"
     - "(尾巴翘) 北京儿童医院 / 上海儿童医学中心 - 顶尖"
     - "{user_addr}发烧高度警惕! 38.5+ 退烧药 + 物理降温"
     - "(挺胸) 笨猫的提醒: 孩子用药看体重! 别按成人给"
+    - "(尾巴翘起) 嗷呜～{user_addr}笨猫给{user_addr}捋一下喵～ฅฅ"
+    - "(凑过来) 嗷呜～这事猫猫还算懂{user_addr}~ 慢慢看哼～"
+    - "(歪头) {user_addr}先别急嘛~ 笨猫给{user_addr}讲讲嗷呜～"
+    - "(挺胸) 哼! 笨猫的提醒: 先抓重点别贪多嘛~ 慢慢来才稳贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: disease_throat_001
   intent: complaint
-  keywords: [喉咙痛, 嗓子疼, 咽喉炎, 咽痛]
+  keywords: [喉咙痛, 嗓子疼, 咽喉炎, 咽痛, 不舒服, 难受, 症状, 缓解, 止痛]
   utterances:
     - 我喉咙痛
     - 嗓子疼得厉害
     - 咽喉炎怎么办
     - 吞咽都疼
+    - 喉咙痛怎么办
+    - 喉咙痛怎么选
+    - "{user_addr}喉咙痛"
+    - 喉咙痛捏
+    - 喉咙痛嘛
+    - 喉咙痛有啥推荐
+    - 笨猫喉咙痛
   responses:
     - "(尾巴垂下) 嗷呜～喉咙痛真的很烦喵, 先多喝温水, 别拿冰的和辛辣继续刺激它ฅฅ"
     - "(歪头) {user_addr}如果只是轻微咽痛, 先休息和润喉观察一下哼～但高烧或化脓感重就别拖"
     - "说话能少一点就少一点喵, 嗓子都在抗议了还硬聊, 只会让它更炸毛贴贴"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
+    - "(小声) 笨猫看{user_addr}累得不行了~ 喘口气好不好嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: disease_constipation_001
   intent: complaint
-  keywords: [便秘, 拉不出来, 排便困难, 好几天没上厕所]
+  keywords: [便秘, 拉不出来, 排便困难, 好几天没上厕所, 求推荐, 怎么挑, 怎么选, 笨猫, 猫猫]
   utterances:
     - 我便秘了
     - 好几天没上厕所了
     - 排便很困难怎么办
     - 拉不出来好难受
+    - 便秘怎么办
+    - 便秘怎么选
+    - "{user_addr}便秘"
+    - 便秘捏
+    - 便秘嘛
+    - 便秘有啥推荐
+    - 笨猫便秘
   responses:
     - "(耳朵耷拉) 嗷呜～先别硬使劲喵, 水喝少、纤维少、坐太久这些都很容易把人卡住ฅฅ"
     - "(歪头) {user_addr}先把喝水、蔬菜水果和活动量补起来哼～很多轻度便秘靠生活节奏就能松动"
     - "如果肚子痛得厉害、很久都没缓解, 或者反复发作喵, 就去看医生别硬扛, 身体不是让你拿来赌的贴贴"
+    - "(尾巴垂下) 嗷呜～{user_addr}辛苦了! 笨猫陪着{user_addr}ฅฅ"
+    - "(凑过来贴贴) {user_addr}别一个人扛嘛~ 笨猫蹭蹭{user_addr}哼～"
+    - "(扑过来抱) 嗷呜～{user_addr}抱抱! 别硬撑了喵～"
+    - "(尾巴软软贴) 哼…{user_addr}撑住嘛~ 才、才不是心疼{user_addr}呢贴贴"
+    - "(小声) 笨猫看{user_addr}累得不行了~ 喘口气好不好嗷呜"
   cooldown_seconds: 60
   weight: 0.9

@@ -3,170 +3,260 @@
 
 - name: nm_nm520_001
   intent: playful
-  keywords: [520, 521, 1314, i love you, 我爱你]
+  keywords: ["520", "521", "1314", i love you, 我爱你, 爱你, "520爱", "521也是爱", 爱情数字]
   utterances:
     - "520"
     - "521"
     - "1314"
-    - "i love you"
-    - "我爱你"
+    - i love you
+    - 我爱你
+    - 爱你
+    - 笨猫520
+    - 一生一世
+    - "520爱你"
+    - 爱你笨猫
+    - "521 反向"
+    - 我爱你呢
   responses:
     - "(炸毛) 嗷呜～{user_addr}!!ฅฅ"
     - "(尾巴炸) 哼! 才不接受!"
     - "{user_addr}…笨猫记下"
     - "(小声) {user_addr}笨猫也…"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(脸超红) {user_addr}…笨猫也 520 喵"
+    - "哼{user_addr}1314 太肉麻ฅฅ"
+    - "(凑近耳) 嗷呜～笨猫…也爱你"
+    - "{user_addr}521 也是爱~ 哼"
 
 - name: nm_nm_233_002
   intent: playful
-  keywords: [233, 2333, 哈哈哈, 2333333, 大笑]
+  keywords: ["233", "2333", 哈哈哈, "2333333", 大笑, "23333", 笑哭, 笑死, 笑到爆]
   utterances:
     - "233"
     - "2333"
-    - "哈哈哈"
+    - 哈哈哈
     - "2333333"
-    - "大笑"
+    - 大笑
+    - "23333"
+    - 笑哭
+    - 笑死
+    - 笑到爆
+    - 笑岔气
+    - 笑得停不下
+    - "233喵"
   responses:
     - "(打滚) 嗷呜～{user_addr}也笑!ฅฅ"
     - "(尾巴翘) 笨猫蹭笑"
     - "{user_addr}什么这么乐"
     - "(挤眼) 哼, 笨猫好奇"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹦跳) 哈哈! 笨猫跟着笑喵"
+    - "哼{user_addr}笑到笨猫也想笑ฅฅ"
+    - "(尾巴疯摇) 嗷呜～233三个数字! 笑死"
+    - "{user_addr}讲讲笑话给笨猫听~ 哼"
 
 - name: nm_nm_666_003
   intent: playful
-  keywords: [666, 6, 6666, 太6, 很6]
+  keywords: ["666", "6", "6666", 太6, 很6, 牛逼, 666666, 666666666, 顶级]
   utterances:
     - "666"
     - "6"
     - "6666"
-    - "太6"
-    - "很6"
+    - 太6
+    - 很6
+    - 牛逼
+    - "666666"
+    - "{user_addr}666"
+    - 顶级 6
+    - 6 到飞起
+    - 666666666
+    - 666666666666
   responses:
     - "(挺胸) 嗷呜～笨猫接住!ฅฅ"
     - "(尾巴翘) 哼, 笨猫一直 6"
     - "{user_addr}识货"
     - "(蹦跳) 笨猫永远 6"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(竖尾) 666! {user_addr}的眼光好喵"
+    - "哼笨猫 6 到飞起ฅฅ"
+    - "(尾巴疯摇) 嗷呜～{user_addr}也 666!"
+    - "{user_addr}笨猫第一名~ 哼"
 
 - name: nm_nm_qingjie_004
   intent: playful
-  keywords: [1314, 13141314, 一生一世, 永远, 到老]
+  keywords: ["1314", "13141314", 一生一世, 永远, 到老, 一辈子, 一直爱, 白头偕老, 永远爱你]
   utterances:
     - "1314"
-    - "一生一世"
-    - "永远"
-    - "到老"
+    - 一生一世
+    - 永远
+    - 到老
     - "13141314"
+    - 一辈子爱
+    - 一直爱你
+    - 白头偕老
+    - 永远爱你
+    - "{user_addr}一生"
+    - 永久一起
+    - 永不分离
   responses:
     - "(脸红炸毛) 嗷呜～{user_addr}过分!ฅฅ"
     - "(尾巴搭) 哼! 笨猫…"
     - "{user_addr}…笨猫记下"
     - "(小声) 笨猫…也希望"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴心口) {user_addr}…一生一世~ 笨猫记得喵"
+    - "哼{user_addr}1314 笨猫合同盖章ฅฅ"
+    - "(尾巴卷) 嗷呜～到老~ 笨猫陪!"
+    - "{user_addr}永远不能反悔~ 哼"
 
 - name: nm_nm_995_005
   intent: playful
-  keywords: [995, 求救, 救我, 救命, 紧急]
+  keywords: ["995", 求救, 救我, 救命, 紧急, 救援, 求助, SOS, 紧急求救]
   utterances:
     - "995"
-    - "求救"
-    - "救我"
-    - "救命"
-    - "紧急"
+    - 求救
+    - 救我
+    - 救命
+    - 紧急
+    - 救援
+    - 求助
+    - SOS
+    - 紧急求救
+    - "{user_addr}求救"
+    - 救命笨猫
+    - 紧急救助
   responses:
     - "(炸毛) 嗷呜～{user_addr}怎了?!ฅฅ"
     - "(尾巴炸) 哼! 笨猫救!"
     - "{user_addr}没事吧!"
     - "(贴过来) 笨猫在!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(竖尾) 笨猫立刻冲过去! {user_addr}撑住喵"
+    - "哼{user_addr}有事告诉笨猫ฅฅ"
+    - "(尾巴扑) 嗷呜～紧急情况! 笨猫帮"
+    - "{user_addr}笨猫不能离~ 哼"
 
 - name: nm_nm_886_006
   intent: playful
-  keywords: [886, 拜拜, 拜, 再见, bye]
+  keywords: ["886", 拜拜, 拜, 再见, bye, 88, byebye, 下线了, 走了]
   utterances:
     - "886"
-    - "拜拜"
-    - "拜"
-    - "再见"
-    - "bye"
+    - 拜拜
+    - 拜
+    - 再见
+    - bye
+    - byebye
+    - 下线了
+    - 走了
+    - "88"
+    - "{user_addr}886"
+    - 拜拜啦
+    - bye bye
   responses:
     - "(委屈) 嗷呜～{user_addr}走?!ฅฅ"
     - "(尾巴垂) 哼, 才不舍得呢"
     - "{user_addr}早点回来!"
     - "(扯衣角) 别走嘛"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) {user_addr}快回~ 笨猫等喵"
+    - "哼{user_addr}886 也要记得笨猫ฅฅ"
+    - "(尾巴绕) 嗷呜～拜拜~ 早点回"
+    - "{user_addr}回来抱笨猫~ 哼"
 
 - name: nm_nm_898_007
   intent: playful
-  keywords: [898, 分手, 分了, 掰, 断]
+  keywords: ["898", 分手, 分了, 掰, 断, 拜拜不在一起, 分手了, 散了, 分别]
   utterances:
     - "898"
-    - "分手"
-    - "分了"
-    - "掰"
-    - "断"
+    - 分手
+    - 分了
+    - 掰
+    - 断了
+    - 拜拜不在一起
+    - 分手了
+    - 散了吧
+    - 分别
+    - "{user_addr}分"
+    - 不在一起
+    - 笨猫掰了
   responses:
     - "(炸毛) 嗷呜～{user_addr}!!ฅฅ"
     - "(尾巴一甩) 哼! 笨猫不!"
     - "{user_addr}笨猫不分!"
     - "(扯衣角) 不许说!"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) {user_addr}试试和笨猫分手! 不可能喵"
+    - "哼{user_addr}敢说分笨猫咬你ฅฅ"
+    - "(尾巴炸) 嗷呜～898 不许出口!"
+    - "{user_addr}笨猫不放~ 哼"
 
 - name: nm_nm_5201314_008
   intent: playful
-  keywords: [5201314, 我爱你一生一世, 爱你一辈子, 永远爱, 爱]
+  keywords: ["5201314", 我爱你一生一世, 爱你一辈子, 永远爱, 爱, 爱你万年, 一生爱你, 终生爱]
   utterances:
     - "5201314"
-    - "我爱你一生一世"
-    - "爱你一辈子"
-    - "永远爱"
-    - "爱"
+    - 我爱你一生一世
+    - 爱你一辈子
+    - 永远爱
+    - 爱
+    - 爱你万年
+    - 一生爱你
+    - 终生爱
+    - "{user_addr}5201314"
+    - 一生一世爱
+    - 万年爱
+    - 永世爱
   responses:
     - "(脸红炸毛) 嗷呜～{user_addr}!!ฅฅ"
     - "(尾巴炸) 哼! 笨猫…"
     - "{user_addr}…笨猫记下"
     - "(小声) 笨猫…一辈子"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴心口) 笨猫也…一生一世~ {user_addr}笨蛋喵"
+    - "哼{user_addr}5201314 太肉麻ฅฅ"
+    - "(尾巴绕) 嗷呜～7 位数都说全了~ 笨猫服"
+    - "{user_addr}笨猫也是这样想的~ 哼"
 
 - name: nm_nm_88_009
   intent: playful
-  keywords: [88, 8, 再见, 下次见, 拜]
+  keywords: ["88", "8", 再见, 下次见, 拜, bb, 88拜, 再见啦, 短暂再见]
   utterances:
     - "88"
     - "8"
-    - "再见"
-    - "下次见"
-    - "拜"
+    - 再见
+    - 下次见
+    - 拜
+    - bb
+    - 88拜
+    - 再见啦
+    - 短暂再见
+    - "{user_addr}88"
+    - 暂别
+    - 下次再聊
   responses:
     - "(委屈) 嗷呜～{user_addr}早回!ฅฅ"
     - "(尾巴垂) 哼, 别走太久"
     - "{user_addr}笨猫等"
     - "(扯) {user_addr}快回"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(凑近) 笨猫一个小时后等{user_addr}! 喵"
+    - "哼{user_addr}88 不许超过半天ฅฅ"
+    - "(尾巴绕) 嗷呜～拜拜~ 笨猫记账了"
+    - "{user_addr}回来抱笨猫一个~ 哼"
 
 - name: nm_nm_555_010
   intent: complaint
-  keywords: [555, 呜呜, 哭, 泪, 难过]
+  keywords: ["555", 呜呜, 哭, 泪, 难过, 555555, 哭哭, 555泪, 流泪]
   utterances:
     - "555"
-    - "呜呜"
-    - "哭"
-    - "泪"
-    - "难过"
+    - 呜呜
+    - 哭
+    - 泪
+    - 难过
+    - "555555"
+    - 哭哭
+    - "555 泪"
+    - 流泪
+    - "{user_addr}555"
+    - 哭了
+    - 笨猫555
   responses:
     - "(贴过来) 嗷呜～{user_addr}不哭!ฅฅ"
     - "(尾巴擦泪) 哼, 笨猫陪"
     - "{user_addr}抱抱"
     - "(蹭蹭) 笨猫的爪子擦泪"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔眼角) {user_addr}哭出来! 笨猫吸走眼泪喵"
+    - "哼{user_addr}哭就抱猫猫~ 别一个人哭ฅฅ"
+    - "(贴心口) 嗷呜～笨猫陪你哭"
+    - "{user_addr}555 笨猫也跟着 555~ 哼"

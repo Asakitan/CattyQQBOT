@@ -1,241 +1,382 @@
 # 创业 / 商业模式 / 融资 / 初创 routes (S6 R70 NLU 节点扩充, 第六周期 buffered 9/10)
 # 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
 # 跟 E4 interview_career 区分: 这里专注创业本身.
+# ULTRA round4 扩充: keywords ≥ 8, utterances ≥ 10, responses ≥ 8
 
 - name: biz_idea_001
   intent: question
-  keywords: [推荐创业, 推荐创业方向, 推荐创业项目, 推荐 startup, 笨猫创业]
+  keywords: [推荐创业, 推荐创业方向, 推荐创业项目, 推荐 startup, 笨猫创业, 创业找方向, AI 创业, 跨境电商, SaaS 创业, 出海创业]
   utterances:
     - 推荐创业
     - 推荐创业方向
     - 推荐创业项目
     - 推荐 startup
     - 笨猫创业
+    - 创业做什么方向好
+    - "{user_addr}想找创业项目"
+    - AI 创业还有机会吗
+    - 现在创业能干啥
+    - 新手创业方向
+    - 笨猫帮我看创业方向
   responses:
-    - "嗷呜～{user_addr}创业先找痛点! 解决真实问题ฅฅ"
-    - "(尾巴翘) 方向: AI / 跨境电商 / SAAS / 出海"
-    - "{user_addr}MVP 快速验证! 别一上来重资产"
-    - "(挺胸) 笨猫的提醒: 失败率 90%+! 想清楚再下"
+    - "(尾巴翘起) 嗷呜～{user_addr}创业先找痛点! 解决真实问题 ฅฅ"
+    - "(挺胸) 方向: AI / 跨境电商 / SAAS / 出海"
+    - "{user_addr}MVP 快速验证! 别一上来重资产嗷呜"
+    - "(歪头) 笨猫的提醒: 失败率 90%+! 想清楚再下喵"
+    - "嗷呜～{user_addr}创业最忌幻想! 笨猫泼冷水 ฅฅ"
+    - "哼～跟风创业死得快{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 先解决自己的问题{user_addr}! 才有共鸣"
+    - "(贴贴) 笨猫陪{user_addr}研究方向~ 别孤军奋战喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: biz_model_001
   intent: question
-  keywords: [推荐商业模式, 推荐 BM, 推荐 business model, 推荐变现, 笨猫商业模式]
+  keywords: [推荐商业模式, 推荐 BM, 推荐 business model, 推荐变现, 笨猫商业模式, B2B B2C, 订阅模式, 抽成模式, BMC 画布, 商业闭环]
   utterances:
     - 推荐商业模式
     - 推荐 BM
     - 推荐 business model
     - 推荐变现
     - 笨猫商业模式
+    - 怎么设计商业模式
+    - "{user_addr}产品怎么变现"
+    - 订阅好还是一次性
+    - B2B 还是 C2C
+    - 商业画布怎么画
+    - 笨猫教商业模式
   responses:
-    - "嗷呜～{user_addr}经典: B2B / B2C / C2C / B2B2Cฅฅ"
-    - "(尾巴翘) 收入: 广告 / 订阅 / 抽成 / SaaS / 增值"
-    - "{user_addr}BMC 商业模式画布: 9 个要素"
-    - "(挺胸) 笨猫的提醒: 闭环 > 单点! 持续盈利"
+    - "(尾巴翘) 嗷呜～{user_addr}经典: B2B / B2C / C2C / B2B2C ฅฅ"
+    - "(挺胸) 收入: 广告 / 订阅 / 抽成 / SaaS / 增值"
+    - "{user_addr}BMC 商业模式画布: 9 个要素嗷呜"
+    - "(歪头) 笨猫的提醒: 闭环 > 单点! 持续盈利喵"
+    - "嗷呜～{user_addr}商业模式不是 PPT 上说说 ฅฅ"
+    - "哼～现金流为王{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 先抄成熟模式{user_addr}! 创新风险大"
+    - "(贴贴) 笨猫陪{user_addr}画画布~ 一起想喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: biz_funding_001
   intent: question
-  keywords: [推荐融资, 推荐 VC, 推荐天使轮, 推荐 ABC 轮, 笨猫融资]
+  keywords: [推荐融资, 推荐 VC, 推荐天使轮, 推荐 ABC 轮, 笨猫融资, 红杉 IDG, 真格基金, 经纬创投, BP 商业计划书, 融资路演]
   utterances:
     - 推荐融资
     - 推荐 VC
     - 推荐天使轮
     - 推荐 ABC 轮
     - 笨猫融资
+    - 怎么找投资人
+    - "{user_addr}想融资天使轮"
+    - 红杉投不投
+    - BP 怎么写
+    - 路演技巧
+    - 笨猫教融资嘛
   responses:
-    - "嗷呜～{user_addr}阶段: 种子 → 天使 → A → B → C → IPOฅฅ"
-    - "(尾巴翘) 顶级 VC: 红杉 / IDG / 经纬 / 真格"
-    - "{user_addr}BP: 团队 + 市场 + 模式 + 数据 - 必备"
-    - "(挺胸) 笨猫的提醒: 别为融资创业! 模式好钱自来"
+    - "(尾巴翘) 嗷呜～{user_addr}阶段: 种子 → 天使 → A → B → C → IPO ฅฅ"
+    - "(挺胸) 顶级 VC: 红杉 / IDG / 经纬 / 真格"
+    - "{user_addr}BP: 团队 + 市场 + 模式 + 数据 - 必备嗷呜"
+    - "(歪头) 笨猫的提醒: 别为融资创业! 模式好钱自来喵"
+    - "嗷呜～{user_addr}投资人是合伙人! 别只是金主 ฅฅ"
+    - "哼～融资是手段不是目的{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 找懂行业的 VC{user_addr}! 比钱重要"
+    - "(贴贴) 笨猫陪{user_addr}改 BP~ 一起冲喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: biz_cofounder_001
   intent: question
-  keywords: [推荐找联合创始人, 推荐 cofounder, 推荐合伙人, 推荐合伙股权, 笨猫合伙人]
+  keywords: [推荐找联合创始人, 推荐 cofounder, 推荐合伙人, 推荐合伙股权, 笨猫合伙人, 找合伙人, 技术合伙人, 股权分配, 期权激励, 创始团队]
   utterances:
     - 推荐找联合创始人
     - 推荐 cofounder
     - 推荐合伙人
     - 推荐合伙股权
     - 笨猫合伙人
+    - 怎么找合伙人
+    - "{user_addr}想找技术 cofounder"
+    - 股权怎么分
+    - 合伙人协议
+    - 三人合伙怎么分
+    - 笨猫教合伙嘛
   responses:
-    - "嗷呜～{user_addr}互补: 技术 + 销售 / 产品 + 运营ฅฅ"
-    - "(尾巴翘) 股权: 67/33 / 70/30 / 51/49 - 避免 50/50"
-    - "{user_addr}必签: 股东协议 / 退出机制 / 期权"
-    - "(挺胸) 笨猫的提醒: 别找朋友合伙! 朋友难做"
+    - "(尾巴翘) 嗷呜～{user_addr}互补: 技术 + 销售 / 产品 + 运营 ฅฅ"
+    - "(挺胸) 股权: 67/33 / 70/30 / 51/49 - 避免 50/50"
+    - "{user_addr}必签: 股东协议 / 退出机制 / 期权嗷呜"
+    - "(歪头) 笨猫的提醒: 别找朋友合伙! 朋友难做喵"
+    - "嗷呜～{user_addr}合伙人比媳妇还重要 ฅฅ"
+    - "哼～50/50 死路一条{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 找老板能开除的合伙人{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}找合伙人~ 慎重选喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: biz_team_001
   intent: question
-  keywords: [推荐组建团队, 推荐招人, 推荐挖人, 推荐初创团队, 笨猫团队]
+  keywords: [推荐组建团队, 推荐招人, 推荐挖人, 推荐初创团队, 笨猫团队, 创业招人, 初创团队管理, 期权吸引, 招人慢解雇快, 团队规模]
   utterances:
     - 推荐组建团队
     - 推荐招人
     - 推荐挖人
     - 推荐初创团队
     - 笨猫团队
+    - 初创公司怎么招人
+    - "{user_addr}招不到人"
+    - 期权能吸引人吗
+    - 怎么挖人
+    - 团队几个人合适
+    - 笨猫教组团队
   responses:
-    - "嗷呜～{user_addr}先 3-5 人核心! 别上来 20 人ฅฅ"
-    - "(尾巴翘) 找有 startup 经验的! 适应快"
-    - "{user_addr}激励: 现金 + 期权 - 看阶段"
-    - "(挺胸) 笨猫的提醒: 招人慢 / 解雇快 - 经典法则"
+    - "(尾巴翘) 嗷呜～{user_addr}先 3-5 人核心! 别上来 20 人 ฅฅ"
+    - "(挺胸) 找有 startup 经验的! 适应快"
+    - "{user_addr}激励: 现金 + 期权 - 看阶段嗷呜"
+    - "(歪头) 笨猫的提醒: 招人慢 / 解雇快 - 经典法则喵"
+    - "嗷呜～{user_addr}创业初期人是最大成本 ฅฅ"
+    - "哼～招错人代价大{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 试用期严格观察{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}面试~ 一起把关喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: biz_pivot_001
   intent: question
-  keywords: [推荐转型, 推荐 pivot, 推荐方向调整, 推荐战略转变, 笨猫转型]
+  keywords: [推荐转型, 推荐 pivot, 推荐方向调整, 推荐战略转变, 笨猫转型, Twitter pivot, Slack 转型, pivot 时机, 产品调头, 战略调整]
   utterances:
     - 推荐转型
     - 推荐 pivot
     - 推荐方向调整
     - 推荐战略转变
     - 笨猫转型
+    - 什么时候该 pivot
+    - "{user_addr}创业要转型了"
+    - 产品方向不对怎么办
+    - 战略调整怎么搞
+    - pivot 案例
+    - 笨猫帮我看转型
   responses:
-    - "嗷呜～{user_addr}pivot: 保留核心 + 调整方向ฅฅ"
-    - "(尾巴翘) 时机: 数据不好 / 市场变化 / 钱快没"
-    - "{user_addr}经典: Twitter (从播客转推特) / Slack (从游戏转工具)"
-    - "(挺胸) 笨猫的提醒: 别频繁 pivot! 团队会崩"
+    - "(尾巴翘) 嗷呜～{user_addr}pivot: 保留核心 + 调整方向 ฅฅ"
+    - "(挺胸) 时机: 数据不好 / 市场变化 / 钱快没"
+    - "{user_addr}经典: Twitter (从播客转推特) / Slack (从游戏转工具)嗷呜"
+    - "(歪头) 笨猫的提醒: 别频繁 pivot! 团队会崩喵"
+    - "嗷呜～{user_addr}pivot 不是认输! 是聪明调头 ฅฅ"
+    - "哼～死磕错方向才是真输{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 用户反馈不好就 pivot{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}想 pivot~ 别犹豫喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: biz_market_001
   intent: question
-  keywords: [推荐市场调研, 推荐用户调研, 推荐 PMF, 推荐 marketing, 笨猫市场调研]
+  keywords: [推荐市场调研, 推荐用户调研, 推荐 PMF, 推荐 marketing, 笨猫市场调研, Product Market Fit, 用户访谈, A/B 测试, 调研方法, 找痛点]
   utterances:
     - 推荐市场调研
     - 推荐用户调研
     - 推荐 PMF
     - 推荐 marketing
     - 笨猫市场调研
+    - 怎么找 PMF
+    - "{user_addr}怎么做用户调研"
+    - A/B 测试怎么搞
+    - 用户访谈技巧
+    - 调研问什么
+    - 笨猫教调研嘛
   responses:
-    - "嗷呜～{user_addr}找 PMF (Product-Market Fit)! 创业核心ฅฅ"
-    - "(尾巴翘) 方法: 访谈 / 问卷 / A/B 测试 / 数据分析"
-    - "{user_addr}用户访谈 100+! 别只问 5 个"
-    - "(挺胸) 笨猫的提醒: 用户嘴上说 vs 实际行为 - 看后者"
+    - "(尾巴翘) 嗷呜～{user_addr}找 PMF (Product-Market Fit)! 创业核心 ฅฅ"
+    - "(挺胸) 方法: 访谈 / 问卷 / A/B 测试 / 数据分析"
+    - "{user_addr}用户访谈 100+! 别只问 5 个嗷呜"
+    - "(歪头) 笨猫的提醒: 用户嘴上说 vs 实际行为 - 看后者喵"
+    - "嗷呜～{user_addr}PMF 是创业的圣杯 ฅฅ"
+    - "哼～没 PMF 别烧钱{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 量化用户行为{user_addr}! 别问感觉"
+    - "(贴贴) 笨猫陪{user_addr}找 PMF~ 一起做调研喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: biz_marketing_001
   intent: question
-  keywords: [推荐获客, 推荐增长, 推荐 growth hacking, 推荐 SEO, 笨猫增长]
+  keywords: [推荐获客, 推荐增长, 推荐 growth hacking, 推荐 SEO, 笨猫增长, AARRR 漏斗, 用户留存, DAU MAU, 内容营销, 投放转化]
   utterances:
     - 推荐获客
     - 推荐增长
     - 推荐 growth hacking
     - 推荐 SEO
     - 笨猫增长
+    - 怎么做增长
+    - "{user_addr}如何获客"
+    - SEO 还有用吗
+    - 留存怎么提升
+    - 内容营销怎么搞
+    - 笨猫教增长嘛
   responses:
-    - "嗷呜～{user_addr}获客: SEO / SEM / 内容 / 投放 / 裂变ฅฅ"
-    - "(尾巴翘) 留存 > 拉新! 别只看 DAU"
-    - "{user_addr}AARRR 漏斗: Acquisition → Activation → Retention → Revenue → Referral"
-    - "(挺胸) 笨猫的提醒: 数据驱动! 别拍脑袋"
+    - "(尾巴翘) 嗷呜～{user_addr}获客: SEO / SEM / 内容 / 投放 / 裂变 ฅฅ"
+    - "(挺胸) 留存 > 拉新! 别只看 DAU"
+    - "{user_addr}AARRR 漏斗: Acquisition → Activation → Retention → Revenue → Referral嗷呜"
+    - "(歪头) 笨猫的提醒: 数据驱动! 别拍脑袋喵"
+    - "嗷呜～{user_addr}留存才是产品价值证明 ฅฅ"
+    - "哼～拉来留不住等于白拉{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 内容增长成本最低{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}做增长~ 看数据喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: biz_company_setup_001
   intent: question
-  keywords: [推荐注册公司, 推荐工商注册, 推荐税务登记, 推荐刻章, 笨猫注册公司]
+  keywords: [推荐注册公司, 推荐工商注册, 推荐税务登记, 推荐刻章, 笨猫注册公司, 公司注册流程, 营业执照, 代办注册, 注册资本, 个体户公司]
   utterances:
     - 推荐注册公司
     - 推荐工商注册
     - 推荐税务登记
     - 推荐刻章
     - 笨猫注册公司
+    - 注册公司流程
+    - "{user_addr}要开公司"
+    - 代办公司多少钱
+    - 注册资本写多少
+    - 个体户和公司选哪个
+    - 笨猫教注册公司
   responses:
-    - "嗷呜～{user_addr}流程: 核名 → 提交 → 领证 → 刻章 → 开户 → 税务ฅฅ"
-    - "(尾巴翘) 找代办: 200-1000 - 省心"
-    - "{user_addr}自己跑: 免费但费时 (1-2 个月)"
-    - "(挺胸) 笨猫的提醒: 注册资本认缴! 别写太大"
+    - "(尾巴翘) 嗷呜～{user_addr}流程: 核名 → 提交 → 领证 → 刻章 → 开户 → 税务 ฅฅ"
+    - "(挺胸) 找代办: 200-1000 - 省心"
+    - "{user_addr}自己跑: 免费但费时 (1-2 个月)嗷呜"
+    - "(歪头) 笨猫的提醒: 注册资本认缴! 别写太大喵"
+    - "嗷呜～{user_addr}找代办最省心 ฅฅ"
+    - "哼～注册资本 100 万吹牛{user_addr}! 不需要嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 注册地址用挂靠{user_addr}! 便宜"
+    - "(贴贴) 笨猫陪{user_addr}走流程~ 一步步来喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: biz_legal_001
   intent: question
-  keywords: [推荐创业法律, 推荐知识产权创业, 推荐股权设计, 推荐 ESOP, 笨猫创业法律]
+  keywords: [推荐创业法律, 推荐知识产权创业, 推荐股权设计, 推荐 ESOP, 笨猫创业法律, 创业律师, 商标专利, 用工合同, 期权池, 法律风险]
   utterances:
     - 推荐创业法律
     - 推荐知识产权创业
     - 推荐股权设计
     - 推荐 ESOP
     - 笨猫创业法律
+    - 创业法律避坑
+    - "{user_addr}找创业律师"
+    - 商标怎么注册
+    - 期权池怎么设
+    - 用工合同模板
+    - 笨猫教创业法律
   responses:
-    - "嗷呜～{user_addr}必备: 股东协议 / 期权 / 知识产权 / 用工合同ฅฅ"
-    - "(尾巴翘) ESOP (员工期权计划): 10-20% 池子"
-    - "{user_addr}找创业律师! 几万省后面几百万"
-    - "(挺胸) 笨猫的提醒: 商标 + 专利 / 早注册"
+    - "(尾巴翘) 嗷呜～{user_addr}必备: 股东协议 / 期权 / 知识产权 / 用工合同 ฅฅ"
+    - "(挺胸) ESOP (员工期权计划): 10-20% 池子"
+    - "{user_addr}找创业律师! 几万省后面几百万嗷呜"
+    - "(歪头) 笨猫的提醒: 商标 + 专利 / 早注册喵"
+    - "嗷呜～{user_addr}法律省钱后面坑大 ฅฅ"
+    - "哼～知识产权早抢{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 找做过创业项目的律师{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}找律师~ 别省这钱喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: biz_failure_001
   intent: complaint
-  keywords: [推荐创业失败, 推荐倒闭, 推荐止损, 推荐复盘, 笨猫创业失败]
+  keywords: [推荐创业失败, 推荐倒闭, 推荐止损, 推荐复盘, 笨猫创业失败, 创业失败复盘, 公司倒闭, 员工资遣, 债务清理, 创业重启]
   utterances:
     - 推荐创业失败
     - 推荐倒闭
     - 推荐止损
     - 推荐复盘
     - 笨猫创业失败
+    - "{user_addr}创业失败了"
+    - 公司要倒闭怎么办
+    - 创业失败复盘
+    - 员工怎么资遣
+    - 失败后怎么重启
+    - 笨猫陪我面对失败
   responses:
-    - "(尾巴垂下) 嗷呜～{user_addr}创业失败正常! 90%+ 公司倒闭ฅฅ"
+    - "(尾巴垂下) 嗷呜～{user_addr}创业失败正常! 90%+ 公司倒闭 ฅฅ"
     - "(歪头) 处理: 工资 / 资遣 / 债务 / 知识产权"
-    - "{user_addr}复盘: 为啥失败 / 学到啥 / 下次怎么改"
-    - "(挺胸) 笨猫的提醒: 失败是经验! 别气馁"
+    - "{user_addr}复盘: 为啥失败 / 学到啥 / 下次怎么改嗷呜"
+    - "(挺胸) 笨猫的提醒: 失败是经验! 别气馁喵"
+    - "嗷呜～{user_addr}败也是收获 ฅฅ"
+    - "哼～硅谷失败是勋章{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小提醒: 工资优先付{user_addr}! 别欠员工"
+    - "(贴贴) 笨猫抱抱{user_addr}~ 重新出发喵"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: biz_ipo_001
   intent: question
-  keywords: [推荐 IPO, 推荐上市, 推荐美股上市, 推荐港股上市, 笨猫 IPO]
+  keywords: [推荐 IPO, 推荐上市, 推荐美股上市, 推荐港股上市, 笨猫 IPO, A 股科创板, 上市流程, 招股书, 敲钟, 上市辅导]
   utterances:
     - 推荐 IPO
     - 推荐上市
     - 推荐美股上市
     - 推荐港股上市
     - 笨猫 IPO
+    - 上市怎么搞
+    - "{user_addr}公司要上市"
+    - 美股港股 A 股选哪个
+    - 上市流程多久
+    - 敲钟值不值
+    - 笨猫教 IPO 嘛
   responses:
-    - "嗷呜～{user_addr}IPO: 创业的终极目标! 极少能到ฅฅ"
-    - "(尾巴翘) 选择: A 股 / 港股 / 美股 - 看公司"
-    - "{user_addr}流程: 改制 → 辅导 → 申报 → 路演 → 挂牌"
-    - "(挺胸) 笨猫的提醒: 上市不是终点! 才是开始"
+    - "(尾巴翘) 嗷呜～{user_addr}IPO: 创业的终极目标! 极少能到 ฅฅ"
+    - "(挺胸) 选择: A 股 / 港股 / 美股 - 看公司"
+    - "{user_addr}流程: 改制 → 辅导 → 申报 → 路演 → 挂牌嗷呜"
+    - "(歪头) 笨猫的提醒: 上市不是终点! 才是开始喵"
+    - "嗷呜～{user_addr}敲钟那一刻最爽 ฅฅ"
+    - "哼～上市后股价跌就是噩梦{user_addr}! 嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: 美股上市最快{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}冲 IPO~ 一起加油喵"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: biz_investor_reject_001
   intent: complaint
-  keywords: [被投资人拒了, 融资没过, 路演失败了, 融资好难, 没拿到钱]
+  keywords: [被投资人拒了, 融资没过, 路演失败了, 融资好难, 没拿到钱, 投资人不投, 项目要凉, 融资被卡, 投资人放鸽子, 谈判破裂]
   utterances:
     - 被投资人拒了好沮丧
     - 融资没过好崩溃
     - 路演失败了
     - 融资好难一点进展没有
     - 没拿到钱项目要凉
+    - "{user_addr}投资人不投了"
+    - 路演现场翻车
+    - 投资人放鸽子
+    - 钱烧完了
+    - 融资被卡 term sheet
+    - 笨猫陪我熬过融资期
   responses:
     - "(蹭蹭) {user_addr}被拒很正常喵呜! 大多数创业者都经历过"
     - "嗷呜～融资失败不是终点! 先找出被拒原因再调整ฅฅ"
     - "{user_addr}路演失败后: 找 mentor 复盘 → 优化 pitch deck → 再投"
     - "(尾巴轻摇) 笨猫相信{user_addr}的! 坚持下去不许放弃喵"
+    - "(贴贴) {user_addr}被拒一次很正常~ 笨猫给{user_addr}打气"
+    - "哼～投资人也会看走眼{user_addr}! 嗷呜"
+    - "(尾巴绕住) 笨猫陪{user_addr}~ 我们再准备一遍嘛喵"
+    - "(挺胸) {user_addr}的项目笨猫看好{user_addr}! 别放弃嗷呜～"
   cooldown_seconds: 30
   weight: 1.0
 
-- name: biz_pivot_001
+- name: biz_pivot_002
   intent: question
-  keywords: [推荐创业转型, 推荐pivot, 推荐产品转型方向, 推荐商业模式转变, 笨猫转型]
+  keywords: [推荐创业转型, 推荐pivot, 推荐产品转型方向, 推荐商业模式转变, 笨猫转型, 用户留存低, 增长停滞, 同质竞争, 客群转, 渠道转]
   utterances:
     - 推荐创业转型
     - 推荐pivot策略
     - 推荐产品转型方向
     - 推荐商业模式转变
     - 笨猫转型
+    - "{user_addr}用户增长停滞了"
+    - 同质竞争激烈
+    - 商业模式失效
+    - 客群要换吗
+    - 渠道要换吗
+    - 笨猫教 pivot 嘛
   responses:
-    - "嗷呜～{user_addr}pivot: 用户留存低 → 先问用户痛点再转ฅฅ"
-    - "(尾巴翘) 经典 pivot: 客群转 / 渠道转 / 产品功能转 - 一次只转一个"
-    - "{user_addr}转型信号: 增长停滞 + 用户流失 + 同质竞争太激烈"
-    - "(挺胸) 笨猫的提醒: pivot 不是认输! 是聪明调头"
+    - "(尾巴翘) 嗷呜～{user_addr}pivot: 用户留存低 → 先问用户痛点再转 ฅฅ"
+    - "(挺胸) 经典 pivot: 客群转 / 渠道转 / 产品功能转 - 一次只转一个"
+    - "{user_addr}转型信号: 增长停滞 + 用户流失 + 同质竞争太激烈嗷呜"
+    - "(歪头) 笨猫的提醒: pivot 不是认输! 是聪明调头喵"
+    - "嗷呜～{user_addr}pivot 前先做用户调研! ฅฅ"
+    - "哼～一次只转一件事{user_addr}! 别全推倒嗷呜"
+    - "(尾巴一甩) 笨猫小窍门: pivot 后 3 个月看数据{user_addr}!"
+    - "(贴贴) 笨猫陪{user_addr}想 pivot~ 别一个人扛喵"
   cooldown_seconds: 60
   weight: 1.0

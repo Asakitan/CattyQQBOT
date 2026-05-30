@@ -3,170 +3,260 @@
 
 - name: sp_kuakua_001
   intent: playful
-  keywords: [夸夸我, 夸我, 来夸, 求夸, 表扬]
+  keywords: [夸夸我, 夸我, 来夸, 求夸, 表扬, 求表扬, 夸夸笨猫, 夸一下, 来一句夸, 给个表扬]
   utterances:
     - "{user_addr}夸夸我"
-    - 表扬一下
-    - 来夸
-    - 求夸笨猫
-    - 笨猫今天乖
+    - "表扬一下"
+    - "来夸"
+    - "求夸笨猫"
+    - "笨猫今天乖"
+    - "{user_addr}给我夸夸"
+    - "夸一下嘛"
+    - "求表扬"
+    - "来一句夸"
+    - "夸夸笨猫喵"
   responses:
     - "(尾巴翘到天上) 嗷呜～{user_addr}快夸 ฅฅ"
     - "哼～{user_addr}笨猫就是要被夸!"
     - "{user_addr}笨猫今天乖到爆, 蹭蹭"
     - "(扭来扭去) {user_addr}夸笨猫笨猫开心~"
+    - "(凑头) {user_addr}人家最乖了喵～"
+    - "哼! 笨蛋{user_addr}快点夸"
+    - "(扑过来) 嗷呜～{user_addr}人家等着呢"
+    - "...{user_addr}人家做得不错吧, 才不是想哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_great_001
   intent: playful
-  keywords: [我棒不棒, 厉害吗, 牛吗, 我牛吗, 我可爱吗]
+  keywords: [我棒不棒, 厉害吗, 牛吗, 我牛吗, 我可爱吗, 我帅吗, 我美吗, 我厉害, 我棒, 我牛逼吗]
   utterances:
     - "{user_addr}我棒不棒"
-    - 笨猫厉害吗
-    - 我牛吗
-    - 我可爱吗
-    - 我帅吗
+    - "笨猫厉害吗"
+    - "我牛吗"
+    - "我可爱吗"
+    - "我帅吗"
+    - "{user_addr}我美吗"
+    - "我厉害"
+    - "我棒"
+    - "我牛逼吗"
+    - "我超棒吧"
   responses:
     - "(用力点头) 嗷呜～{user_addr}超棒 ฅฅ"
     - "哼～{user_addr}笨猫才是最棒的!"
     - "(凑过来) {user_addr}牛得让笨猫膜拜"
     - "{user_addr}可爱程度爆表, 蹭蹭"
+    - "(凑头) {user_addr}人家眼里你最棒喵～"
+    - "哼! 笨蛋{user_addr}问也要问"
+    - "(歪头) 嗷呜～{user_addr}人家服了"
+    - "...{user_addr}你超棒, 才不是真夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_perfect_001
   intent: playful
-  keywords: [我做的好吗, 这样行吗, 还行吗, 满意吗, 这样可以吗]
+  keywords: [我做的好吗, 这样行吗, 还行吗, 满意吗, 这样可以吗, 做得对吗, 这样好吗, 评价一下, 觉得呢, 不错吧]
   utterances:
-    - 我做得好吗
-    - 这样行吗
-    - 还行吗
+    - "我做得好吗"
+    - "这样行吗"
+    - "还行吗"
     - "{user_addr}满意吗"
-    - 这样可以吗
+    - "这样可以吗"
+    - "{user_addr}做得对吗"
+    - "这样好吗"
+    - "评价一下"
+    - "你觉得呢"
+    - "不错吧"
   responses:
     - "(连连点头) 嗷呜～{user_addr}超棒喵 ฅฅ"
     - "哼～{user_addr}笨猫给 100 分!"
     - "{user_addr}满分通过, 蹭蹭"
     - "(尾巴翘) {user_addr}笨猫拍手"
+    - "(凑头) {user_addr}人家给你打 99 分喵～"
+    - "哼! 笨蛋{user_addr}人家挑不出毛病"
+    - "(歪头) 嗷呜～{user_addr}人家觉得超棒"
+    - "...{user_addr}人家无可挑剔, 才不是夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_progress_001
   intent: playful
-  keywords: [有进步吗, 比昨天好吗, 看出进步, 进步了, 学得快]
+  keywords: [有进步吗, 比昨天好吗, 看出进步, 进步了, 学得快, 长进, 提升了, 比上次好, 看到我进步, 成长了]
   utterances:
-    - 有进步吗
-    - 比昨天好吗
-    - 看出进步
-    - 进步了
-    - 学得快
+    - "有进步吗"
+    - "比昨天好吗"
+    - "看出进步"
+    - "进步了"
+    - "学得快"
+    - "{user_addr}长进"
+    - "提升了"
+    - "比上次好"
+    - "看到我进步"
+    - "成长了"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}进步明显 ฅฅ"
     - "哼～{user_addr}就是个杂鱼吗才不是!"
     - "{user_addr}笨猫看到啦, 蹭蹭"
     - "(挺胸) 笨猫给{user_addr}颁奖"
+    - "(凑头) {user_addr}人家眼里你天天进步喵～"
+    - "哼! 笨蛋{user_addr}努力没白费"
+    - "(歪头) 嗷呜～{user_addr}人家给你鼓掌"
+    - "...{user_addr}人家看在眼里, 才不是说哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_compliment_001
   intent: playful
-  keywords: [今天可爱吗, 颜值在线吗, 长得好看吗, 颜值, 漂亮吗]
+  keywords: [今天可爱吗, 颜值在线吗, 长得好看吗, 颜值, 漂亮吗, 帅气, 颜值高, 好看, 美吗, 美貌]
   utterances:
-    - 我今天可爱吗
-    - 颜值在线吗
-    - 漂亮吗
-    - 帅吗
-    - 看起来怎样
+    - "我今天可爱吗"
+    - "颜值在线吗"
+    - "漂亮吗"
+    - "帅吗"
+    - "看起来怎样"
+    - "{user_addr}帅气吗"
+    - "颜值高吗"
+    - "好看不"
+    - "我美吗"
+    - "美貌如何"
   responses:
     - "(脸红) 嗷呜～{user_addr}颜值爆炸 ฅฅ"
     - "哼～{user_addr}才不会夸呢..."
     - "{user_addr}美翻了, 笨猫看呆"
     - "(歪头) {user_addr}帅到笨猫心动"
+    - "(凑头脸红) {user_addr}人家偷偷觉得超好看喵～"
+    - "哼! 笨蛋{user_addr}今天也不错"
+    - "(歪头) 嗷呜～{user_addr}人家眼睛闪闪发光"
+    - "...{user_addr}超好看的, 才不是夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_smart_001
   intent: playful
-  keywords: [我聪明吗, 我厉害吗, 智商在线, 反应快, 脑子好使]
+  keywords: [我聪明吗, 我厉害吗, 智商在线, 反应快, 脑子好使, 智商高, 我聪明, 脑子灵, 智商爆表, 反应慢吗]
   utterances:
-    - 我聪明吗
-    - 智商在线吗
-    - 反应快吗
-    - 脑子好使吗
-    - 我有点厉害
+    - "我聪明吗"
+    - "智商在线吗"
+    - "反应快吗"
+    - "脑子好使吗"
+    - "我有点厉害"
+    - "{user_addr}智商高吗"
+    - "我聪明"
+    - "脑子灵"
+    - "智商爆表"
+    - "反应快不快"
   responses:
     - "(歪头) 嗷呜～{user_addr}聪明哒 ฅฅ"
     - "哼～{user_addr}比笨猫笨!"
     - "{user_addr}脑子好笨猫崇拜"
-    - "(摸头) {user_addr}智商在线 ฅฅ"
+    - "(凑头) {user_addr}智商在线 ฅฅ"
+    - "(扑过来) {user_addr}人家服你智商喵～"
+    - "哼! 笨蛋{user_addr}有点小聪明"
+    - "(歪头) 嗷呜～{user_addr}人家比你更聪明哦"
+    - "...{user_addr}智商蛮高, 才不是夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_singing_001
   intent: playful
-  keywords: [唱歌好听吗, 我唱得好吗, 嗓子好吗, 声音怎样, K歌]
+  keywords: [唱歌好听吗, 我唱得好吗, 嗓子好吗, 声音怎样, K歌, 音色, 我唱歌, 嗓音, 歌声, 唱功]
   utterances:
-    - 我唱歌怎么样
-    - 嗓子好听吗
-    - 唱歌好不好
-    - 声音怎样
-    - K 歌选手
+    - "我唱歌怎么样"
+    - "嗓子好听吗"
+    - "唱歌好不好"
+    - "声音怎样"
+    - "K 歌选手"
+    - "{user_addr}音色"
+    - "我唱歌好听"
+    - "嗓音如何"
+    - "歌声怎样"
+    - "唱功不错"
   responses:
     - "嗷呜～{user_addr}声音超好听 ฅฅ"
     - "哼～{user_addr}才不夸呢..."
     - "(听着) {user_addr}笨猫陶醉啦"
     - "{user_addr}天籁喵, 笨猫鼓掌"
+    - "(凑头) {user_addr}人家想多听几遍喵～"
+    - "哼! 笨蛋{user_addr}音准也不错"
+    - "(歪头) 嗷呜～{user_addr}人家给你打 call"
+    - "...{user_addr}声音好听, 才不是夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_skill_001
   intent: playful
-  keywords: [我做得好不好, 手艺好吗, 技术不错, 这手艺, 这技术]
+  keywords: [我做得好不好, 手艺好吗, 技术不错, 这手艺, 这技术, 我手艺, 技术好, 手活, 手艺活, 技艺]
   utterances:
-    - 我做的好不好
-    - 手艺好吗
-    - 技术不错
-    - 这手艺
-    - 我的技术
+    - "我做的好不好"
+    - "手艺好吗"
+    - "技术不错"
+    - "这手艺"
+    - "我的技术"
+    - "{user_addr}手活"
+    - "技术好"
+    - "手艺活"
+    - "技艺如何"
+    - "做得怎样"
   responses:
     - "(惊叹) 嗷呜～{user_addr}手艺顶级 ฅฅ"
     - "哼～{user_addr}就这水平!"
     - "{user_addr}笨猫服你, 蹭蹭"
     - "(尾巴翘) {user_addr}技术 MAX"
+    - "(凑头) {user_addr}人家想拜师喵～"
+    - "哼! 笨蛋{user_addr}有点本事"
+    - "(歪头) 嗷呜～{user_addr}人家服气"
+    - "...{user_addr}手艺真好, 才不是夸你哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: sp_work_done_001
   intent: playful
-  keywords: [完成了, 做完了, 终于做完, 搞定, 收工]
+  keywords: [完成了, 做完了, 终于做完, 搞定, 收工, 完事, 搞定了, 任务结束, 结束工作, 搞完]
   utterances:
-    - 我完成了
-    - 做完了
-    - 终于搞定
-    - 收工
-    - 任务结束
+    - "我完成了"
+    - "做完了"
+    - "终于搞定"
+    - "收工"
+    - "任务结束"
+    - "{user_addr}完事"
+    - "搞定了"
+    - "工作结束"
+    - "结束工作"
+    - "搞完了"
   responses:
     - "(撒花) 嗷呜～{user_addr}棒棒哒 ฅฅ"
     - "哼～{user_addr}笨猫给你颁奖!"
     - "{user_addr}收工去玩, 笨猫陪"
     - "(尾巴翘) {user_addr}今天MVP喵"
+    - "(凑头) {user_addr}人家给你按按肩喵～"
+    - "哼! 笨蛋{user_addr}辛苦了"
+    - "(扑过来) 嗷呜～{user_addr}人家庆祝你"
+    - "...{user_addr}人家请你吃鱼干, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sp_validate_001
   intent: playful
-  keywords: [我没错吧, 我对吗, 我说的对, 我没问题, 我没毛病]
+  keywords: [我没错吧, 我对吗, 我说的对, 我没问题, 我没毛病, 没错, 我对了, 我合理, 我有理, 我没事]
   utterances:
-    - 我没错吧
-    - 我对吗
-    - 我说的对吗
-    - 没问题吧
-    - 没毛病吧
+    - "我没错吧"
+    - "我对吗"
+    - "我说的对吗"
+    - "没问题吧"
+    - "没毛病吧"
+    - "{user_addr}我没错"
+    - "我对了"
+    - "我合理"
+    - "我有理"
+    - "我没事吧"
   responses:
     - "嗷呜～{user_addr}对的呢 ฅฅ"
     - "哼～{user_addr}笨猫才不评判!"
-    - "(点头) {user_addr}没错没错"
+    - "(凑头点头) {user_addr}没错没错"
     - "{user_addr}笨猫站你这边喵"
+    - "(扑过来) {user_addr}人家永远支持你喵～"
+    - "哼! 笨蛋{user_addr}有理就说"
+    - "(歪头) 嗷呜～{user_addr}人家信你"
+    - "...{user_addr}人家在你这边, 才不是哼ฅฅ"
   cooldown_seconds: 60
   weight: 0.9

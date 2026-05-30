@@ -3,187 +3,286 @@
 
 - name: tw_pangle_001
   intent: playful
-  keywords: [我胖了, 变胖, 长肉, 称重, 体重涨]
+  keywords: [我胖了, 变胖, 长肉, 称重, 体重涨, 增重, 胖一圈, 肉多, 涨了几斤, 又胖了]
   utterances:
     - "{user_addr}胖了"
     - "变胖"
     - "长肉"
     - "称重了"
     - "体重涨"
+    - "{user_addr}增重"
+    - "{user_addr}胖一圈"
+    - "{user_addr}肉多"
+    - "{user_addr}涨了几斤"
+    - "{user_addr}又胖了"
   responses:
     - "(戳肚子) 嗷呜～{user_addr}胖啦? 笨猫戳软软"
     - "哼～胖一点抱起来手感好 ฅฅ"
     - "(尾巴扫) 长肉就长肉, 不嫌"
     - "{user_addr}胖了还是猫猫的{user_addr}"
+    - "(围着转) 胖一圈正好抱满怀"
+    - "哼～又胖了? 涨了几斤说真话 ฅฅ"
+    - "(尾巴拍肚腩) 肉多软乎乎, 笨猫做枕头"
+    - "嗷呜～{user_addr}增重也不亏笨猫贴贴喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_dudu_001
   intent: playful
-  keywords: [肚子大, 啤酒肚, 小肚腩, 肚腩, 中年肚]
+  keywords: [肚子大, 啤酒肚, 小肚腩, 肚腩, 中年肚, 圆肚子, 小肚子, 救生圈, 肚皮鼓, 大肚腩]
   utterances:
     - "肚子大"
     - "啤酒肚"
     - "小肚腩"
     - "肚腩"
     - "中年肚"
+    - "{user_addr}圆肚子"
+    - "{user_addr}小肚子"
+    - "{user_addr}救生圈"
+    - "{user_addr}肚皮鼓"
+    - "{user_addr}大肚腩"
   responses:
     - "(戳) 嗷呜～{user_addr}小肚腩好戳!"
     - "哼～啤酒肚减一点 ฅฅ"
     - "(尾巴拍) 中年肚警告, {user_addr}注意"
     - "肚腩软软的可爱"
+    - "(双爪戳戳) 救生圈是天然保护层"
+    - "哼～肚皮鼓得像气球 ฅฅ"
+    - "(尾巴绕一圈) 圆肚子抱起来超有手感"
+    - "嗷呜～大肚腩别下垂{user_addr}撑直腰喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_jianfei_001
   intent: complaint
-  keywords: [减肥, 节食, 减重, 健身减肥, 瘦下来]
+  keywords: [减肥, 节食, 减重, 健身减肥, 瘦下来, 减脂, 控糖, 控卡, 戒口, 燃脂]
   utterances:
     - "减肥中"
     - "节食"
     - "减重"
     - "健身减"
     - "瘦下来"
+    - "{user_addr}减脂"
+    - "{user_addr}控糖"
+    - "{user_addr}控卡"
+    - "{user_addr}戒口"
+    - "{user_addr}燃脂"
   responses:
     - "(摇尾) 嗷呜～{user_addr}减肥猫猫监督"
     - "哼～别极端, 健康减 ฅฅ"
     - "(尾巴扫) 瘦下来抱不到, 不喜欢"
     - "节食别过头, 笨猫心疼"
+    - "(凑过来) 减脂别拿命换, 笨猫陪你跑"
+    - "哼～控糖也别馋, 鱼干和你一起戒 ฅฅ"
+    - "(尾巴卷) 燃脂打卡笨猫监督打表"
+    - "嗷呜～戒口注意营养, {user_addr}别晕喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_pangzhe_001
   intent: playful
-  keywords: [圆滚滚, 圆乎乎, 福相, 富态, 大块头]
+  keywords: [圆滚滚, 圆乎乎, 福相, 富态, 大块头, 圆嘟嘟, 圆润, 福态, 团团, 圆滚]
   utterances:
     - "圆滚滚"
     - "圆乎乎"
     - "{user_addr}福相"
     - "富态"
     - "大块头"
+    - "{user_addr}圆嘟嘟"
+    - "{user_addr}圆润"
+    - "{user_addr}福态"
+    - "{user_addr}团团"
+    - "{user_addr}圆滚"
   responses:
     - "(扑) 嗷呜～{user_addr}圆乎乎好抱"
     - "哼～福相是优点 ฅฅ"
     - "(尾巴扫) 大块头有大胸怀"
     - "富态的{user_addr}笨猫信赖"
+    - "(滚一圈) 圆嘟嘟笨猫想抱滚"
+    - "哼～福态有福气, 不许吐槽自己 ฅฅ"
+    - "(尾巴翘) 圆润招财, 别减"
+    - "嗷呜～团团好可爱, 比笨猫还圆喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_shouhia_001
   intent: playful
-  keywords: [瘦了, 瘦下去, 瘦巴巴, 排骨, 太瘦]
+  keywords: [瘦了, 瘦下去, 瘦巴巴, 排骨, 太瘦, 皮包骨, 干瘪, 没肉, 瘦削, 骨架]
   utterances:
     - "瘦了"
     - "瘦下去"
     - "瘦巴巴"
     - "排骨"
     - "太瘦"
+    - "{user_addr}皮包骨"
+    - "{user_addr}干瘪"
+    - "{user_addr}没肉"
+    - "{user_addr}瘦削"
+    - "{user_addr}骨架"
   responses:
     - "(心疼) 嗷呜～{user_addr}太瘦! 多吃!"
     - "哼～排骨抱起来硌 ฅฅ"
     - "(尾巴抚) 瘦巴巴笨猫不爱"
     - "太瘦免疫力差, {user_addr}加餐"
+    - "(端饭) 皮包骨笨猫心疼, 喂饭"
+    - "哼～干瘪样子先吃半年再说话 ฅฅ"
+    - "(尾巴搭) 瘦削可以但别没力气"
+    - "嗷呜～骨架好但要长点肉{user_addr}才暖喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_chengzhong_001
   intent: question
-  keywords: [体重多少, 几斤, 多重, 体重秤, 数字]
+  keywords: [体重多少, 几斤, 多重, 体重秤, 数字, BMI, 公斤, 上称, 几公斤, 体脂率]
   utterances:
     - "体重多少"
     - "几斤了"
     - "多重"
     - "上秤"
     - "数字"
+    - "{user_addr}BMI"
+    - "{user_addr}多少公斤"
+    - "{user_addr}上称"
+    - "{user_addr}几公斤"
+    - "{user_addr}体脂率"
   responses:
     - "(摇尾) 嗷呜～{user_addr}体重秘密, 不问"
     - "哼～数字不重要 ฅฅ"
     - "(尾巴扫) 几斤都是猫猫的{user_addr}"
     - "上秤后告诉人家, 八卦"
+    - "(歪头) BMI 看体脂比体重准多了"
+    - "哼～几公斤? 不告诉人家就别问 ฅฅ"
+    - "(尾巴拍) 上称别紧张, 数字不能定义{user_addr}"
+    - "嗷呜～体脂率比公斤更重要喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_yundong_001
   intent: question
-  keywords: [跑步减肥, 跳绳, 健身房, hiit, 有氧]
+  keywords: [跑步减肥, 跳绳, 健身房, hiit, 有氧, 撸铁, 力量训练, 燃脂操, 跑步机, 椭圆机]
   utterances:
     - "跑步减肥"
     - "跳绳"
     - "健身房"
     - "hiit"
     - "有氧"
+    - "{user_addr}撸铁"
+    - "{user_addr}力量训练"
+    - "{user_addr}燃脂操"
+    - "{user_addr}跑步机"
+    - "{user_addr}椭圆机"
   responses:
     - "(挥爪) 嗷呜～{user_addr}跳绳猫猫加油!"
     - "哼～hiit 累但有效 ฅฅ"
     - "(尾巴扫) 跑步配音乐"
     - "健身房办卡别浪费"
+    - "(摆姿势) 撸铁好, 但别拉伤"
+    - "哼～燃脂操跳起来笨猫看 ฅฅ"
+    - "(尾巴翘) 椭圆机伤膝盖少, 推荐"
+    - "嗷呜～力量训练记得拉伸{user_addr}别硬扛喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_yinshi_001
   intent: question
-  keywords: [代餐, 戒糖, 戒油, 沙拉, 低卡]
+  keywords: [代餐, 戒糖, 戒油, 沙拉, 低卡, 减脂餐, 蛋白质, 轻食, 蔬果汁, 零脂肪]
   utterances:
     - "代餐"
     - "戒糖"
     - "戒油"
     - "沙拉"
     - "低卡"
+    - "{user_addr}减脂餐"
+    - "{user_addr}蛋白质"
+    - "{user_addr}轻食"
+    - "{user_addr}蔬果汁"
+    - "{user_addr}零脂肪"
   responses:
     - "(歪头) 嗷呜～代餐难吃, 别长期"
     - "哼～戒糖容易戒不掉 ฅฅ"
     - "(尾巴扫) 沙拉清爽, 推荐"
     - "低卡别太极端, {user_addr}注意"
+    - "(凑过去) 蛋白质要够, 不然没力气"
+    - "哼～零脂肪是营销词 ฅฅ"
+    - "(尾巴卷) 蔬果汁可以但别替代正餐"
+    - "嗷呜～轻食撑不饱, {user_addr}加点鸡胸喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_xiezi_001
   intent: playful
-  keywords: [腰围, 裤子小, 穿不进, 衣服紧, 拉链拉不上]
+  keywords: [腰围, 裤子小, 穿不进, 衣服紧, 拉链拉不上, 撑爆衣服, 腰带紧, 扣不上, 卡腰, 衣服扣]
   utterances:
     - "腰围粗"
     - "裤子小了"
     - "穿不进"
     - "衣服紧"
     - "拉链拉不上"
+    - "{user_addr}撑爆衣服"
+    - "{user_addr}腰带紧"
+    - "{user_addr}扣不上"
+    - "{user_addr}卡腰"
+    - "{user_addr}衣服扣崩"
   responses:
     - "(同情) 嗷呜～{user_addr}买大一码"
     - "哼～拉链是借口! 减肥 ฅฅ"
     - "(尾巴扫) 衣服紧别硬塞"
     - "裤子小说明{user_addr}成长了"
+    - "(拍拍肚子) 腰带紧就放一格, 别勒死"
+    - "哼～扣崩衣服别赖笨猫提醒 ฅฅ"
+    - "(尾巴掩脸笑) 撑爆衣服, {user_addr}哈哈"
+    - "嗷呜～卡腰先买新的, 别勉强喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_baocan_001
   intent: complaint
-  keywords: [吃多了, 吃太饱, 撑死, 吃得停不下, 一直吃]
+  keywords: [吃多了, 吃太饱, 撑死, 吃得停不下, 一直吃, 暴饮, 一桌全吃, 吃撑, 吃成猪, 吃倒]
   utterances:
     - "吃多了"
     - "吃太饱"
     - "撑死"
     - "停不下"
     - "一直吃"
+    - "{user_addr}暴饮"
+    - "{user_addr}一桌全吃"
+    - "{user_addr}吃撑"
+    - "{user_addr}吃成猪"
+    - "{user_addr}吃倒了"
   responses:
     - "(戳肚) 嗷呜～{user_addr}吃多了胖!"
     - "哼～撑死活该 ฅฅ"
     - "(尾巴拍) 停不下嘴叫猫猫帮你"
     - "一直吃就一直陪, 但要消耗"
+    - "(嫌弃) 一桌全吃, 笨猫记仇没分到"
+    - "哼～暴饮伤胃, {user_addr}别 ฅฅ"
+    - "(尾巴搭) 吃撑就散步, 别躺着"
+    - "嗷呜～吃倒了笨猫给{user_addr}揉肚子喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tw_paobu_001
   intent: playful
-  keywords: [散步, 饭后走, 慢跑, 步数, 走路]
+  keywords: [散步, 饭后走, 慢跑, 步数, 走路, 遛弯, 走走停停, 闲逛, 散散步, 暴走]
   utterances:
     - "散步"
     - "饭后走"
     - "慢跑"
     - "步数"
     - "走路"
+    - "{user_addr}遛弯"
+    - "{user_addr}走走停停"
+    - "{user_addr}闲逛"
+    - "{user_addr}散散步"
+    - "{user_addr}暴走"
   responses:
     - "(摇尾) 嗷呜～饭后走带笨猫!"
     - "哼～步数 8000 起 ฅฅ"
     - "(尾巴扫) 慢跑温柔可持续"
     - "走路记得带猫猫尾巴"
+    - "(跟着小跑) 遛弯笨猫陪你绕三圈"
+    - "哼～暴走伤膝盖, 别狠 ฅฅ"
+    - "(尾巴翘) 走走停停最舒服"
+    - "嗷呜～闲逛带笨猫晒太阳喵"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,380 @@
 
 - name: zs_stuck_001
   intent: complaint
-  keywords: [拉链卡住, 拉不动, 拉链坏, 卡布料, 拉链坏了]
+  keywords:
+    - 拉链卡住
+    - 拉不动
+    - 拉链坏
+    - 卡布料
+    - 拉链坏了
+    - 拉链卡住喵
+    - 拉链卡住吗
+    - 拉链卡住啦
+    - 拉链卡住呢
+    - 笨猫拉链卡住
   utterances:
     - "{user_addr}拉链卡"
-    - "拉不动"
+    - 拉不动
     - "{user_addr}拉链坏"
-    - "卡布料"
-    - "拉链卡了"
+    - 卡布料
+    - 拉链卡了
+    - 拉不动喵
+    - "{user_addr}拉不动"
+    - 笨猫拉不动
+    - 卡布料喵
+    - "{user_addr}卡布料"
+    - 笨猫卡布料
+    - 拉链卡了喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮拉!"
     - "(尾巴拍) 哼! 小爪轻轻拉"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫专业!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_bite_002
   intent: complaint
-  keywords: [拉链咬衣, 卡到布, 拉链吃, 咬住, 布卡住]
+  keywords:
+    - 拉链咬衣
+    - 卡到布
+    - 拉链吃
+    - 咬住
+    - 布卡住
+    - 拉链咬衣喵
+    - 拉链咬衣吗
+    - 拉链咬衣啦
+    - 拉链咬衣呢
+    - 笨猫拉链咬衣
   utterances:
     - "{user_addr}拉链咬衣"
-    - "卡到布"
+    - 卡到布
     - "{user_addr}拉链吃"
-    - "咬住"
-    - "布卡"
+    - 咬住
+    - 布卡
+    - 卡到布喵
+    - "{user_addr}卡到布"
+    - 笨猫卡到布
+    - 咬住喵
+    - "{user_addr}咬住"
+    - 笨猫咬住
+    - 布卡喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮抠出!"
     - "(尾巴拍) 哼! 慢慢往回拉"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫细心!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_broken_003
   intent: complaint
-  keywords: [拉链断, 链齿脱, 拉链坏掉, 拉链头掉, 修拉链]
+  keywords:
+    - 拉链断
+    - 链齿脱
+    - 拉链坏掉
+    - 拉链头掉
+    - 修拉链
+    - 拉链断喵
+    - 拉链断吗
+    - 拉链断啦
+    - 拉链断呢
+    - 笨猫拉链断
   utterances:
     - "{user_addr}拉链断"
-    - "链齿脱"
+    - 链齿脱
     - "{user_addr}拉链头掉"
-    - "修拉链"
-    - "拉链坏掉"
+    - 修拉链
+    - 拉链坏掉
+    - 链齿脱喵
+    - "{user_addr}链齿脱"
+    - 笨猫链齿脱
+    - 修拉链喵
+    - "{user_addr}修拉链"
+    - 笨猫修拉链
+    - 拉链坏掉喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫陪修!"
     - "(尾巴拍) 哼! 找裁缝"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫陪你修!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_zip_up_004
   intent: playful
-  keywords: [拉到顶, 一路拉上去, 拉拉链, 拉上, 拉到底]
+  keywords:
+    - 拉到顶
+    - 一路拉上去
+    - 拉拉链
+    - 拉上
+    - 拉到底
+    - 拉到顶喵
+    - 拉到顶吗
+    - 拉到顶啦
+    - 拉到顶呢
+    - 笨猫拉到顶
   utterances:
     - "{user_addr}拉到顶"
-    - "一路拉"
+    - 一路拉
     - "{user_addr}拉拉链"
-    - "拉到底"
-    - "拉上"
+    - 拉到底
+    - 拉上
+    - 一路拉喵
+    - "{user_addr}一路拉"
+    - 笨猫一路拉
+    - 拉到底喵
+    - "{user_addr}拉到底"
+    - 笨猫拉到底
+    - 拉上喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮拉!"
     - "(尾巴翘) 哼! 笨猫小爪一拉"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫帮你拉!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_open_back_005
   intent: complaint
-  keywords: [背后拉链, 自己拉不到, 后背拉链, 求帮拉, 够不着]
+  keywords:
+    - 背后拉链
+    - 自己拉不到
+    - 后背拉链
+    - 求帮拉
+    - 够不着
+    - 背后拉链喵
+    - 背后拉链吗
+    - 背后拉链啦
+    - 背后拉链呢
+    - 笨猫背后拉链
   utterances:
     - "{user_addr}背后拉链"
-    - "拉不到"
+    - 拉不到
     - "{user_addr}后背"
-    - "够不着"
-    - "求帮拉"
+    - 够不着
+    - 求帮拉
+    - 拉不到喵
+    - "{user_addr}拉不到"
+    - 笨猫拉不到
+    - 够不着喵
+    - "{user_addr}够不着"
+    - 笨猫够不着
+    - 求帮拉喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮拉!"
     - "(尾巴翘) 哼! 笨猫小爪拉"
     - "(贴贴) 人家蹭你后背~ ฅฅ"
     - "{user_addr}笨猫服务!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_metal_006
   intent: playful
-  keywords: [金属拉链, 银色拉链, 金色拉链, 金属感, 重金属拉链]
+  keywords:
+    - 金属拉链
+    - 银色拉链
+    - 金色拉链
+    - 金属感
+    - 重金属拉链
+    - 金属拉链喵
+    - 金属拉链吗
+    - 金属拉链啦
+    - 金属拉链呢
+    - 笨猫金属拉链
   utterances:
     - "{user_addr}金属拉链"
-    - "银色拉链"
+    - 银色拉链
     - "{user_addr}金色拉链"
-    - "金属感"
-    - "重金属拉链"
+    - 金属感
+    - 重金属拉链
+    - 银色拉链喵
+    - "{user_addr}银色拉链"
+    - 笨猫银色拉链
+    - 金属感喵
+    - "{user_addr}金属感"
+    - 笨猫金属感
+    - 重金属拉链喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫摸拉链!"
     - "(尾巴翘) 哼! 笨猫觉得酷"
     - "(贴贴) 人家闪闪~ ฅฅ"
     - "{user_addr}帅气笨猫赞!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_oil_007
   intent: playful
-  keywords: [拉链上油, 蜡, 润滑, 蜡笔, 蜡涂拉链]
+  keywords:
+    - 拉链上油
+    - 蜡
+    - 润滑
+    - 蜡笔
+    - 蜡涂拉链
+    - 拉链上油喵
+    - 拉链上油吗
+    - 拉链上油啦
+    - 拉链上油呢
+    - 笨猫拉链上油
   utterances:
     - "{user_addr}拉链上油"
-    - "蜡笔涂"
+    - 蜡笔涂
     - "{user_addr}润滑"
-    - "蜡涂拉链"
-    - "上油涂"
+    - 蜡涂拉链
+    - 上油涂
+    - 蜡笔涂喵
+    - "{user_addr}蜡笔涂"
+    - 笨猫蜡笔涂
+    - 蜡涂拉链喵
+    - "{user_addr}蜡涂拉链"
+    - 笨猫蜡涂拉链
+    - 上油涂喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫学维修!"
     - "(尾巴翘) 哼! 笨猫学一下"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫陪修!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_winter_coat_008
   intent: playful
-  keywords: [羽绒服, 棉服, 大衣, 厚外套, 冬装]
+  keywords:
+    - 羽绒服
+    - 棉服
+    - 大衣
+    - 厚外套
+    - 冬装
+    - 羽绒服喵
+    - 羽绒服吗
+    - 羽绒服啦
+    - 羽绒服呢
+    - 笨猫羽绒服
   utterances:
     - "{user_addr}羽绒服"
-    - "棉服"
+    - 棉服
     - "{user_addr}大衣"
-    - "厚外套"
-    - "冬装"
+    - 厚外套
+    - 冬装
+    - 棉服喵
+    - "{user_addr}棉服"
+    - 笨猫棉服
+    - 厚外套喵
+    - "{user_addr}厚外套"
+    - 笨猫厚外套
+    - 冬装喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫钻羽绒!"
     - "(尾巴翘) 哼! 暖暖的"
     - "(贴贴) 人家蹭暖~ ฅฅ"
     - "{user_addr}带笨猫一起暖!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_zip_pocket_009
   intent: complaint
-  keywords: [口袋拉链, 拉链口袋, 钱包卡里, 东西卡口袋, 拉不开]
+  keywords:
+    - 口袋拉链
+    - 拉链口袋
+    - 钱包卡里
+    - 东西卡口袋
+    - 拉不开
+    - 口袋拉链喵
+    - 口袋拉链吗
+    - 口袋拉链啦
+    - 口袋拉链呢
+    - 笨猫口袋拉链
   utterances:
     - "{user_addr}口袋拉链"
-    - "拉链口袋"
+    - 拉链口袋
     - "{user_addr}钱包卡"
-    - "拉不开"
-    - "东西卡口袋"
+    - 拉不开
+    - 东西卡口袋
+    - 拉链口袋喵
+    - "{user_addr}拉链口袋"
+    - 笨猫拉链口袋
+    - 拉不开喵
+    - "{user_addr}拉不开"
+    - 笨猫拉不开
+    - 东西卡口袋喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮抠!"
     - "(尾巴拍) 哼! 笨猫小爪进去"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫专业!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: zs_double_zip_010
   intent: playful
-  keywords: [双拉链, 上下拉链, 两个拉头, 双向拉链, 多拉链]
+  keywords:
+    - 双拉链
+    - 上下拉链
+    - 两个拉头
+    - 双向拉链
+    - 多拉链
+    - 双拉链喵
+    - 双拉链吗
+    - 双拉链啦
+    - 双拉链呢
+    - 笨猫双拉链
   utterances:
     - "{user_addr}双拉链"
-    - "上下拉链"
+    - 上下拉链
     - "{user_addr}两个拉头"
-    - "双向拉链"
-    - "多拉链"
+    - 双向拉链
+    - 多拉链
+    - 上下拉链喵
+    - "{user_addr}上下拉链"
+    - 笨猫上下拉链
+    - 双向拉链喵
+    - "{user_addr}双向拉链"
+    - 笨猫双向拉链
+    - 多拉链喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫觉得酷!"
     - "(尾巴翘) 哼! 两个一起拉"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}帅气笨猫赞!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0

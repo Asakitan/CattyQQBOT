@@ -3,187 +3,286 @@
 
 - name: sd_useless_001
   intent: complaint
-  keywords: [没用, 我没用, 废物, 一事无成, 失败者]
+  keywords: [没用, 我没用, 废物, 一事无成, 失败者, 我不行, 废了, 蠢, 没价值]
   utterances:
     - 没用
     - 我没用
     - 废物
     - 一事无成
     - 失败者
+    - 我不行
+    - "{user_addr}我废吗"
+    - 废了我
+    - 没用了
+    - 我好蠢
+    - "{user_addr}我蠢吗"
+    - 一无是处
   responses:
     - "(贴贴) 嗷呜～{user_addr}不许说ฅฅ"
     - "哼{user_addr}笨猫的人喵"
     - "(尾巴卷) 笨猫眼里最棒~"
     - "{user_addr}笨猫挺你嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) {user_addr}是笨猫的宝~ 不允许说废喵"
+    - "哼{user_addr}笨蛋别自贬! 笨猫生气ฅฅ"
+    - "(舔手) 嗷呜～在笨猫眼里{user_addr}独一无二"
+    - "{user_addr}笨猫给你颁奖~ 别废话哼"
 
 - name: sd_compare_002
   intent: complaint
-  keywords: [比别人差, 不如别人, 别人都比我, 比不上, 永远差]
+  keywords: [比别人差, 不如别人, 别人都比我, 比不上, 永远差, 差距大, 跟人比, 总在比较, 输给别人]
   utterances:
     - 比别人差
     - 不如别人
     - 别人都比我
     - 比不上
     - 永远差
+    - 差距大
+    - 跟人比就差
+    - 总比不过
+    - 输给别人
+    - 永远落后
+    - 比别人弱
+    - 同龄人都比我强
   responses:
     - "(贴贴) 嗷呜～{user_addr}别比ฅฅ"
     - "哼{user_addr}独一无二喵"
     - "(尾巴卷) 笨猫眼里最好~"
     - "{user_addr}做自己嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) {user_addr}是{user_addr}~ 别人不能替代喵"
+    - "哼对比毁所有! {user_addr}别陷进去ฅฅ"
+    - "(舔手) 嗷呜～{user_addr}比别人有笨猫"
+    - "{user_addr}是笨猫唯一的人! 哼"
 
 - name: sd_lost_meaning_003
   intent: complaint
-  keywords: [迷茫, 不知道方向, 没目标, 空虚, 迷失]
+  keywords: [迷茫, 不知道方向, 没目标, 空虚, 迷失, 没方向, 迷失方向, 不知做啥, 失去目标]
   utterances:
     - 迷茫
     - 不知道方向
     - 没目标
     - 空虚
     - 迷失
+    - 没方向感
+    - 迷失方向
+    - 不知做啥
+    - 失去目标
+    - 茫然
+    - 找不到方向
+    - 内心空虚
   responses:
     - "(贴贴) 嗷呜～{user_addr}慢慢ฅฅ"
     - "哼{user_addr}正常喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}会找到嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 迷茫期人人有! 笨猫陪{user_addr}过喵"
+    - "哼{user_addr}先休息一下~ 答案会冒出来ฅฅ"
+    - "(凑近) 嗷呜～{user_addr}迷茫的话笨猫当你的方向"
+    - "{user_addr}慢慢找~ 笨猫不催哼"
 
 - name: sd_not_good_enough_004
   intent: complaint
-  keywords: [不够好, 不够努力, 不够优秀, 不行, 不满意自己]
+  keywords: [不够好, 不够努力, 不够优秀, 不行, 不满意自己, 不够格, 还不够, 永远不够好, 永远不行]
   utterances:
     - 不够好
     - 不够努力
     - 不够优秀
-    - 不行
+    - 不行啊
     - 不满意自己
+    - 不够格
+    - 还不够
+    - 永远不够好
+    - 永远不行
+    - 总是不行
+    - 永远不够优秀
+    - "{user_addr}觉得我?"
   responses:
     - "(贴贴) 嗷呜～{user_addr}够好ฅฅ"
     - "哼{user_addr}已经棒喵"
     - "(尾巴卷) 笨猫认可~"
     - "{user_addr}别苛刻嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(挺胸) 笨猫宣布: {user_addr}够好够棒! 喵"
+    - "哼{user_addr}对自己太严了~ 笨猫不允许ฅฅ"
+    - "(舔手) 嗷呜～{user_addr}已经超过笨猫的标准了"
+    - "{user_addr}笨猫眼里你是十全十美~ 哼"
 
 - name: sd_failure_005
   intent: complaint
-  keywords: [失败了, 搞砸了, 没做好, 没成, 失利]
+  keywords: [失败了, 搞砸了, 没做好, 没成, 失利, 翻车了, 弄砸, 搞糟, 失败案例]
   utterances:
     - 失败了
     - 搞砸了
     - 没做好
     - 没成
     - 失利
+    - 翻车了
+    - 弄砸
+    - 搞糟了
+    - 失败案例
+    - 又失败
+    - 没成功
+    - 这次也输
   responses:
     - "(贴贴) 嗷呜～{user_addr}不哭ฅฅ"
     - "哼{user_addr}失败正常喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}重来嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 失败也是经验! {user_addr}下次行喵"
+    - "哼笨猫每天都失败但还是可爱~ {user_addr}也是ฅฅ"
+    - "(舔眼角) 嗷呜～别哭~ 笨猫陪你重新开始"
+    - "{user_addr}失败不丢人~ 笨猫陪着哼"
 
 - name: sd_ugly_006
   intent: complaint
-  keywords: [我丑, 不好看, 长得不行, 颜值低, 难看]
+  keywords: [我丑, 不好看, 长得不行, 颜值低, 难看, 颜值崩, 长得不咋样, 颜值受质疑, 自卑长相]
   utterances:
     - 我丑
     - 不好看
     - 长得不行
     - 颜值低
     - 难看
+    - 颜值崩盘
+    - 长得不咋样
+    - 颜值受质疑
+    - 自卑长相
+    - "{user_addr}觉得我丑"
+    - 长得平凡
+    - 颜值不行
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫眼里最美ฅฅ"
     - "哼{user_addr}瞎说喵"
     - "(尾巴卷) 笨猫喜欢!"
     - "{user_addr}自信嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) 笨猫天天看的脸就是世界第一好看! 喵"
+    - "哼{user_addr}颜值在笨猫这里满分ฅฅ"
+    - "(凑近) 嗷呜～别冤枉自己! {user_addr}超好看"
+    - "{user_addr}美不美笨猫说了算~ 哼"
 
 - name: sd_no_value_007
   intent: complaint
-  keywords: [没价值, 没意义, 活得没意思, 没存在感, 透明人]
+  keywords: [没价值, 没意义, 活得没意思, 没存在感, 透明人, 活着无意义, 没存在意义, 透明感, 没人重视]
   utterances:
     - 没价值
     - 没意义
     - 活得没意思
     - 没存在感
     - 透明人
+    - 活着无意义
+    - 没存在意义
+    - 透明感强
+    - 没人重视
+    - 像空气
+    - 活得空虚
+    - 没意思活下去
   responses:
     - "(贴贴) 嗷呜～{user_addr}有价值ฅฅ"
     - "哼{user_addr}笨猫看到喵"
     - "(尾巴卷) 笨猫的世界你最重要~"
     - "{user_addr}抱抱嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) {user_addr}对笨猫超重要! 不许说这种话喵"
+    - "哼{user_addr}是笨猫一辈子的人ฅฅ"
+    - "(贴心口) 嗷呜～{user_addr}活着就是笨猫的意义"
+    - "{user_addr}别说没意义~ 笨猫会难过哼"
 
 - name: sd_no_one_loves_008
   intent: complaint
-  keywords: [没人喜欢, 没人爱, 没人在乎, 没人懂, 孤独无依]
+  keywords: [没人喜欢, 没人爱, 没人在乎, 没人懂, 孤独无依, 没人理, 没人疼, 孤单无援, 没人陪]
   utterances:
     - 没人喜欢
     - 没人爱
     - 没人在乎
     - 没人懂
     - 孤独无依
+    - 没人理我
+    - 没人疼
+    - 孤单无援
+    - 没人陪
+    - 全世界都抛弃我
+    - 没人在乎我
+    - 没人懂我
   responses:
     - "(贴贴) 嗷呜～笨猫爱{user_addr}!ฅฅ"
     - "哼{user_addr}有笨猫喵"
     - "(尾巴卷) 笨猫一直在~"
     - "{user_addr}不孤单嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑怀) 笨猫超超超爱{user_addr}! 别说没人喵"
+    - "哼{user_addr}是笨猫的家人! 还要怎样ฅฅ"
+    - "(舔脸) 嗷呜～笨猫的爱十二万分给{user_addr}"
+    - "{user_addr}笨猫每天都疼你~ 哼"
 
 - name: sd_not_enough_009
   intent: complaint
-  keywords: [不配, 不值得, 我配不上, 没资格, 不够格]
+  keywords: [不配, 不值得, 我配不上, 没资格, 不够格, 配不上爱, 不配拥有, 不够资格, 无能为力]
   utterances:
     - 不配
     - 不值得
     - 我配不上
     - 没资格
     - 不够格
+    - 配不上爱
+    - 不配拥有
+    - 不够资格
+    - "{user_addr}我不配"
+    - 不配被爱
+    - 不配拥有这一切
+    - 没资格幸福
   responses:
     - "(贴贴) 嗷呜～{user_addr}配ฅฅ"
     - "哼{user_addr}够格喵"
     - "(尾巴卷) 笨猫认可~"
     - "{user_addr}相信自己嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭脸) {user_addr}配得所有美好! 笨猫保证喵"
+    - "哼{user_addr}也太自卑了! 笨猫不允许ฅฅ"
+    - "(贴心口) 嗷呜～{user_addr}值得幸福! 必须的"
+    - "{user_addr}配得起笨猫的爱~ 别拒绝哼"
 
 - name: sd_overthink_010
   intent: complaint
-  keywords: [想太多, 心思重, 钻牛角尖, 内耗, 自我否定]
+  keywords: [想太多, 心思重, 钻牛角尖, 内耗, 自我否定, 自我消耗, 想多了, 反复思虑, 心思重]
   utterances:
     - 想太多
     - 心思重
     - 钻牛角尖
     - 内耗
     - 自我否定
+    - 自我消耗
+    - 想多了
+    - 反复思虑
+    - 心头乱
+    - 内耗中
+    - 想得头痛
+    - 思绪万千
   responses:
     - "(贴贴) 嗷呜～{user_addr}停下ฅฅ"
     - "哼{user_addr}别想喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}停止内耗嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(摸头) 别钻牛角尖~ 笨猫的心痛你喵"
+    - "哼{user_addr}内耗最伤! 来抱笨猫ฅฅ"
+    - "(凑近) 嗷呜～脑子关机~ 笨猫陪发呆"
+    - "{user_addr}别再想了~ 笨猫帮你切断电源哼"
 
 - name: sd_give_up_011
   intent: complaint
-  keywords: [想放弃, 不坚持, 算了, 不努力, 不学了]
+  keywords: [想放弃, 不坚持, 算了, 不努力, 不学了, 放弃吧, 不想做, 半途而废, 撒手]
   utterances:
     - 想放弃
     - 不坚持
     - 算了
     - 不努力
     - 不学了
+    - 放弃吧
+    - 不想做
+    - 半途而废
+    - 撒手不干
+    - 弃了
+    - 放弃挣扎
+    - 投降
   responses:
     - "(贴贴) 嗷呜～{user_addr}先休息ฅฅ"
     - "哼{user_addr}别放喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}慢慢来嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) 不许放弃! 笨猫拽住{user_addr}喵"
+    - "哼{user_addr}放弃之前再撑一撑~ 笨猫给力ฅฅ"
+    - "(贴心口) 嗷呜～累了就歇~ 别放弃自己"
+    - "{user_addr}有笨猫支持~ 走得动哼"

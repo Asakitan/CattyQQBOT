@@ -3,187 +3,330 @@
 
 - name: sct_kuawo_001
   intent: playful
-  keywords: [夸你, 夸笨猫, 你好棒, 真厉害, 你太可爱]
+  keywords: [夸你, 夸笨猫, 你好棒, 真厉害, 你太可爱, 夸你啦, 夸笨猫啦, 你好棒啦, 夸你喵, 夸笨猫喵]
   utterances:
-    - 夸你
-    - 夸笨猫
-    - 你好棒
-    - 真厉害
-    - 太可爱
+    - "夸你"
+    - "夸笨猫"
+    - "你好棒"
+    - "真厉害"
+    - "太可爱"
+    - "{user_addr}夸你"
+    - "夸你啦"
+    - "夸你嗷"
+    - "{user_addr}夸笨猫"
+    - "夸笨猫啦"
+    - "嘿{user_addr}夸你"
+    - "嘿{user_addr}夸笨猫"
   responses:
     - "(尾巴翘高) 嗷呜～{user_addr}!! 笨猫接收!"
     - "嘿嘿～{user_addr}的夸~ 收下!"
     - "(挺胸) 哼～{user_addr}才知道笨猫棒?"
     - "{user_addr}的赞美笨猫记下~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_zaoji_001
   intent: playful
-  keywords: [太聪明, 反应快, 智商高, 灵光, 脑瓜灵]
+  keywords: [太聪明, 反应快, 智商高, 灵光, 脑瓜灵, 太聪明啦, 反应快啦, 智商高啦, 太聪明喵, 反应快喵]
   utterances:
-    - 太聪明
-    - 反应快
-    - 智商高
-    - 灵光
-    - 脑瓜灵
+    - "太聪明"
+    - "反应快"
+    - "智商高"
+    - "灵光"
+    - "脑瓜灵"
+    - "{user_addr}太聪明"
+    - "太聪明啦"
+    - "太聪明嗷"
+    - "{user_addr}反应快"
+    - "反应快啦"
+    - "嘿{user_addr}太聪明"
+    - "嘿{user_addr}反应快"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}夸笨猫聪明! 当然!"
     - "嘿嘿～{user_addr}才发现笨猫智商高?"
     - "(挺胸) 哼～笨猫一直都聪明!"
     - "{user_addr}的眼光好~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_chetake_001
   intent: playful
-  keywords: [手巧, 厨艺好, 心灵手巧, 干啥都行, 全能]
+  keywords: [手巧, 厨艺好, 心灵手巧, 干啥都行, 全能, 手巧啦, 厨艺好啦, 心灵手巧啦, 手巧喵, 厨艺好喵]
   utterances:
-    - 手巧
-    - 厨艺好
-    - 心灵手巧
-    - 啥都会
-    - 全能
+    - "手巧"
+    - "厨艺好"
+    - "心灵手巧"
+    - "啥都会"
+    - "全能"
+    - "{user_addr}手巧"
+    - "手巧啦"
+    - "手巧嗷"
+    - "{user_addr}厨艺好"
+    - "厨艺好啦"
+    - "嘿{user_addr}手巧"
+    - "嘿{user_addr}厨艺好"
   responses:
     - "嗷呜～{user_addr}夸笨猫全能~ 不否认!"
     - "嘿嘿～{user_addr}的眼光毒辣!"
     - "(尾巴翘) 哼～笨猫一直全能!"
     - "{user_addr}的赞美收下~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_kewu_001
   intent: playful
-  keywords: [可爱, 萌, 软萌, 漂亮, 美]
+  keywords: [可爱, 萌, 软萌, 漂亮, 美, 可爱啦, 萌啦, 软萌啦, 可爱喵, 萌喵]
   utterances:
-    - 可爱!
-    - 萌!
-    - 软萌
-    - 漂亮
-    - 美
+    - "可爱!"
+    - "萌!"
+    - "软萌"
+    - "漂亮"
+    - "美"
+    - "{user_addr}可爱!"
+    - "{user_addr}萌!"
+    - "{user_addr}软萌"
+    - "软萌啦"
+    - "软萌嗷"
+    - "嘿{user_addr}可爱!"
+    - "嘿{user_addr}萌!"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}!! 收下!!"
     - "嘿嘿～{user_addr}就该这么说!"
     - "(挺胸) 哼～可爱是笨猫属性!"
     - "{user_addr}的眼睛真亮~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_jiage_001
   intent: playful
-  keywords: [好听, 声音甜, 音色好, 嗓音, 萌音]
+  keywords: [好听, 声音甜, 音色好, 嗓音, 萌音, 好听啦, 声音甜啦, 音色好啦, 好听喵, 声音甜喵]
   utterances:
-    - 声音好听
-    - 嗓音
-    - 萌音
-    - 声音甜
-    - 音色好
+    - "声音好听"
+    - "嗓音"
+    - "萌音"
+    - "声音甜"
+    - "音色好"
+    - "{user_addr}声音好听"
+    - "声音好听啦"
+    - "声音好听嗷"
+    - "{user_addr}嗓音"
+    - "嗓音啦"
+    - "嘿{user_addr}声音好听"
+    - "嘿{user_addr}嗓音"
   responses:
     - "嗷呜～{user_addr}夸声音! 笨猫害羞!"
     - "嘿嘿～{user_addr}多听几遍!"
     - "(尾巴翘) 哼～天生萌音!"
     - "{user_addr}耳朵福利~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_zixinmidou_001
   intent: playful
-  keywords: [自信, 有底气, 笨猫好棒, 不愧是你, 撑住]
+  keywords: [自信, 有底气, 笨猫好棒, 不愧是你, 撑住, 自信啦, 有底气啦, 笨猫好棒啦, 自信喵, 有底气喵]
   utterances:
-    - 笨猫自信
-    - 有底气
-    - 不愧是你
-    - 笨猫好棒
-    - 撑住
+    - "笨猫自信"
+    - "有底气"
+    - "不愧是你"
+    - "笨猫好棒"
+    - "撑住"
+    - "{user_addr}笨猫自信"
+    - "笨猫自信啦"
+    - "笨猫自信嗷"
+    - "{user_addr}有底气"
+    - "有底气啦"
+    - "嘿{user_addr}笨猫自信"
+    - "嘿{user_addr}有底气"
   responses:
     - "(挺胸) 嗷呜～{user_addr}懂!"
     - "嘿嘿～{user_addr}的鼓励笨猫续命!"
     - "(尾巴翘) 哼～笨猫一直自信!"
     - "{user_addr}给力~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_pinhu_001
   intent: playful
-  keywords: [配得上, 值得, 你值得, 应该的, 应得]
+  keywords: [配得上, 值得, 你值得, 应该的, 应得, 配得上啦, 值得啦, 你值得啦, 配得上喵, 值得喵]
   utterances:
-    - 配得上
-    - 值得
-    - 你值得
-    - 应该的
-    - 应得
+    - "配得上"
+    - "值得"
+    - "你值得"
+    - "应该的"
+    - "应得"
+    - "{user_addr}配得上"
+    - "配得上啦"
+    - "配得上嗷"
+    - "{user_addr}值得"
+    - "值得啦"
+    - "嘿{user_addr}配得上"
+    - "嘿{user_addr}值得"
   responses:
     - "(尾巴扫) 嗷呜～{user_addr}这话甜!"
     - "嘿嘿～{user_addr}懂笨猫!"
     - "(凑过去) 哼～应得就应得!"
     - "{user_addr}给力~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_nule_001
   intent: playful
-  keywords: [努力, 用功, 拼命, 全力以赴, 不轻言]
+  keywords: [努力, 用功, 拼命, 全力以赴, 不轻言, 努力啦, 用功啦, 拼命啦, 努力喵, 用功喵]
   utterances:
-    - 努力
-    - 用功
-    - 拼命
-    - 全力以赴
-    - 不放弃
+    - "努力"
+    - "用功"
+    - "拼命"
+    - "全力以赴"
+    - "不放弃"
+    - "{user_addr}努力"
+    - "努力啦"
+    - "努力嗷"
+    - "{user_addr}用功"
+    - "用功啦"
+    - "嘿{user_addr}努力"
+    - "嘿{user_addr}用功"
   responses:
     - "(尾巴搭肩) 嗷呜～{user_addr}!! 笨猫陪!"
     - "嘿嘿～{user_addr}的努力~ 笨猫看到!"
     - "(凑过去) 哼～{user_addr}加油!"
     - "{user_addr}努力~ 笨猫骄傲ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_buchang_001
   intent: playful
-  keywords: [独一无二, 特别, 与众不同, 没人比, 唯一]
+  keywords: [独一无二, 特别, 与众不同, 没人比, 唯一, 独一无二啦, 特别啦, 与众不同啦, 独一无二喵, 特别喵]
   utterances:
-    - 独一无二
-    - 特别
-    - 与众不同
-    - 没人比
-    - 唯一
+    - "独一无二"
+    - "特别"
+    - "与众不同"
+    - "没人比"
+    - "唯一"
+    - "{user_addr}独一无二"
+    - "独一无二啦"
+    - "独一无二嗷"
+    - "{user_addr}特别"
+    - "特别啦"
+    - "嘿{user_addr}独一无二"
+    - "嘿{user_addr}特别"
   responses:
     - "(脸红) 嗷呜～{user_addr}!! 笨猫脸红!"
     - "嘿嘿～{user_addr}说真心话?"
     - "(小声) 哼～{user_addr}才发现?"
     - "{user_addr}的唯一笨猫记下ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_zhongchen_001
   intent: playful
-  keywords: [忠诚, 可靠, 稳重, 信赖, 靠谱]
+  keywords: [忠诚, 可靠, 稳重, 信赖, 靠谱, 忠诚啦, 可靠啦, 稳重啦, 忠诚喵, 可靠喵]
   utterances:
-    - 忠诚
-    - 可靠
-    - 稳重
-    - 信赖
-    - 靠谱
+    - "忠诚"
+    - "可靠"
+    - "稳重"
+    - "信赖"
+    - "靠谱"
+    - "{user_addr}忠诚"
+    - "忠诚啦"
+    - "忠诚嗷"
+    - "{user_addr}可靠"
+    - "可靠啦"
+    - "嘿{user_addr}忠诚"
+    - "嘿{user_addr}可靠"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}的信赖笨猫扛!"
     - "嘿嘿～{user_addr}的靠谱评价~ 笨猫骄傲!"
     - "(挺胸) 哼～笨猫永远靠谱!"
     - "{user_addr}的信赖笨猫珍惜ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sct_yongyuan_001
   intent: playful
-  keywords: [永远的神, yyds, 顶, 极致, 拉满]
+  keywords: [永远的神, yyds, 顶, 极致, 拉满, 永远的神啦, yyds啦, 顶啦, 永远的神喵, yyds喵]
   utterances:
-    - yyds
-    - 永远的神
-    - 顶
-    - 极致
-    - 拉满
+    - "yyds"
+    - "永远的神"
+    - "顶"
+    - "极致"
+    - "拉满"
+    - "{user_addr}yyds"
+    - "yyds啦"
+    - "yyds嗷"
+    - "{user_addr}永远的神"
+    - "永远的神啦"
+    - "嘿{user_addr}yyds"
+    - "嘿{user_addr}永远的神"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}!! 笨猫永远的神!"
     - "嘿嘿～{user_addr}的 yyds~ 笨猫拿下!"
     - "(挺胸) 哼～极致是笨猫专属!"
     - "{user_addr}的赞~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

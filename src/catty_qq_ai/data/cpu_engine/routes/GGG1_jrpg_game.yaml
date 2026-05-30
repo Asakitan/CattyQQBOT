@@ -3,204 +3,432 @@
 
 - name: jr_ff_001
   intent: question
-  keywords: [推荐最终幻想, 推荐 FF7, 推荐 FF14, 推荐 FF, 笨猫最终幻想]
+  keywords:
+  - 推荐最终幻想
+  - 推荐 FF7
+  - 推荐 FF14
+  - 推荐 FF
+  - 笨猫最终幻想
+  - 有什么最终幻想
+  - 有什么 FF7
+  - 有什么 FF14
+  - 有什么 FF
   utterances:
-    - 推荐最终幻想
-    - 推荐 FF7
-    - 推荐 FF14
-    - 推荐 FF
-    - "{user_addr}笨猫最终幻想"
+  - 推荐最终幻想
+  - 推荐 FF7
+  - 推荐 FF14
+  - 推荐 FF
+  - "{user_addr}笨猫最终幻想"
+  - "{user_addr}聊聊最终幻想嘛"
+  - "{user_addr}最终幻想哪家强"
+  - "{user_addr}人家想了解最终幻想"
+  - 笨猫给猜猜最终幻想
+  - "{user_addr}最终幻想怎么选喵"
+  - 最终幻想有推荐吗
   responses:
-    - "嗷呜～{user_addr}FF7 Remake / Rebirth - 神作重制ฅฅ"
-    - "(尾巴翘) FF14 - MMO 剧情天花板"
-    - "{user_addr}FF16 - 暗黑动作化"
-    - "(挺胸) 猫猫推荐: FF7 Remake 入坑!"
+  - "嗷呜～{user_addr}FF7 Remake / Rebirth - 神作重制ฅฅ"
+  - "(尾巴翘) FF14 - MMO 剧情天花板"
+  - "{user_addr}FF16 - 暗黑动作化"
+  - "(挺胸) 猫猫推荐: FF7 Remake 入坑!"
+  - "(尾巴翘起来) {user_addr}最终幻想? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问最终幻想人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}最终幻想的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}最终幻想笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_dq_001
   intent: question
-  keywords: [推荐勇者斗恶龙, 推荐 DQ11, 推荐 DQ, 推荐勇斗, 笨猫勇者斗恶龙]
+  keywords:
+  - 推荐勇者斗恶龙
+  - 推荐 DQ11
+  - 推荐 DQ
+  - 推荐勇斗
+  - 笨猫勇者斗恶龙
+  - 有什么勇者斗恶龙
+  - 有什么 DQ11
+  - 有什么 DQ
+  - 有什么勇斗
   utterances:
-    - 推荐勇者斗恶龙
-    - 推荐 DQ11
-    - 推荐 DQ
-    - 推荐勇斗
-    - "{user_addr}笨猫勇者斗恶龙"
+  - 推荐勇者斗恶龙
+  - 推荐 DQ11
+  - 推荐 DQ
+  - 推荐勇斗
+  - "{user_addr}笨猫勇者斗恶龙"
+  - "{user_addr}聊聊勇者斗恶龙嘛"
+  - "{user_addr}勇者斗恶龙哪家强"
+  - "{user_addr}人家想了解勇者斗恶龙"
+  - 笨猫给猜猜勇者斗恶龙
+  - "{user_addr}勇者斗恶龙怎么选喵"
+  - 勇者斗恶龙有推荐吗
   responses:
-    - "嗷呜～{user_addr}DQ11 寻觅逝去时光 - 王道神作ฅฅ"
-    - "(尾巴翘) 鸟山明画风 + 经典回合制"
-    - "{user_addr}S 版有 2D 切换 / 后日谈"
-    - "(挺胸) 笨猫推荐: DQ11S 通关首选!"
+  - "嗷呜～{user_addr}DQ11 寻觅逝去时光 - 王道神作ฅฅ"
+  - "(尾巴翘) 鸟山明画风 + 经典回合制"
+  - "{user_addr}S 版有 2D 切换 / 后日谈"
+  - "(挺胸) 笨猫推荐: DQ11S 通关首选!"
+  - "(尾巴翘起来) {user_addr}勇者斗恶龙? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问勇者斗恶龙人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}勇者斗恶龙的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}勇者斗恶龙笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_xenoblade_001
   intent: question
-  keywords: [推荐异度神剑, 推荐异度神剑3, 推荐 Xenoblade, 推荐异度之刃, 笨猫异度神剑]
+  keywords:
+  - 推荐异度神剑
+  - 推荐异度神剑3
+  - 推荐 Xenoblade
+  - 推荐异度之刃
+  - 笨猫异度神剑
+  - 有什么异度神剑
+  - 有什么异度神剑3
+  - 有什么 Xenoblade
+  - 有什么异度之刃
   utterances:
-    - 推荐异度神剑
-    - 推荐异度神剑3
-    - 推荐 Xenoblade
-    - 推荐异度之刃
-    - "{user_addr}笨猫异度神剑"
+  - 推荐异度神剑
+  - 推荐异度神剑3
+  - 推荐 Xenoblade
+  - 推荐异度之刃
+  - "{user_addr}笨猫异度神剑"
+  - "{user_addr}聊聊异度神剑嘛"
+  - "{user_addr}异度神剑哪家强"
+  - "{user_addr}人家想了解异度神剑"
+  - 笨猫给猜猜异度神剑
+  - "{user_addr}异度神剑怎么选喵"
+  - 异度神剑有推荐吗
   responses:
-    - "嗷呜～{user_addr}异度神剑 3 - Switch JRPG 巅峰ฅฅ"
-    - "(尾巴翘) 剧情 100h+ / 战斗系统神"
-    - "{user_addr}2 代神隐少女 / 黄金的国"
-    - "(挺胸) 人家推荐: 3 → 2 → 1 顺序入!"
+  - "嗷呜～{user_addr}异度神剑 3 - Switch JRPG 巅峰ฅฅ"
+  - "(尾巴翘) 剧情 100h+ / 战斗系统神"
+  - "{user_addr}2 代神隐少女 / 黄金的国"
+  - "(挺胸) 人家推荐: 3 → 2 → 1 顺序入!"
+  - "(尾巴翘起来) {user_addr}异度神剑? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问异度神剑人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}异度神剑的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}异度神剑笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_persona_001
   intent: question
-  keywords: [推荐女神异闻录, 推荐 P5, 推荐 Persona, 推荐 P5R, 笨猫女神异闻录]
+  keywords:
+  - 推荐女神异闻录
+  - 推荐 P5
+  - 推荐 Persona
+  - 推荐 P5R
+  - 笨猫女神异闻录
+  - 有什么女神异闻录
+  - 有什么 P5
+  - 有什么 Persona
+  - 有什么 P5R
   utterances:
-    - 推荐女神异闻录
-    - 推荐 P5
-    - 推荐 Persona
-    - 推荐 P5R
-    - "{user_addr}笨猫女神异闻录"
+  - 推荐女神异闻录
+  - 推荐 P5
+  - 推荐 Persona
+  - 推荐 P5R
+  - "{user_addr}笨猫女神异闻录"
+  - "{user_addr}聊聊女神异闻录嘛"
+  - "{user_addr}女神异闻录哪家强"
+  - "{user_addr}人家想了解女神异闻录"
+  - 笨猫给猜猜女神异闻录
+  - "{user_addr}女神异闻录怎么选喵"
+  - 女神异闻录有推荐吗
   responses:
-    - "嗷呜～{user_addr}P5R 皇家版 - UI 美学顶级ฅฅ"
-    - "(尾巴翘) 怪盗团 / 校园日常 + 迷宫"
-    - "{user_addr}P3R / P4G 也很推荐"
-    - "(挺胸) 猫猫推荐: P5R 100h 神作!"
+  - "嗷呜～{user_addr}P5R 皇家版 - UI 美学顶级ฅฅ"
+  - "(尾巴翘) 怪盗团 / 校园日常 + 迷宫"
+  - "{user_addr}P3R / P4G 也很推荐"
+  - "(挺胸) 猫猫推荐: P5R 100h 神作!"
+  - "(尾巴翘起来) {user_addr}女神异闻录? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问女神异闻录人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}女神异闻录的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}女神异闻录笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_fe_001
   intent: question
-  keywords: [推荐火焰纹章, 推荐风花雪月, 推荐 FE, 推荐火纹, 笨猫火焰纹章]
+  keywords:
+  - 推荐火焰纹章
+  - 推荐风花雪月
+  - 推荐 FE
+  - 推荐火纹
+  - 笨猫火焰纹章
+  - 有什么火焰纹章
+  - 有什么风花雪月
+  - 有什么 FE
+  - 有什么火纹
   utterances:
-    - 推荐火焰纹章
-    - 推荐风花雪月
-    - 推荐 FE
-    - 推荐火纹
-    - "{user_addr}笨猫火焰纹章"
+  - 推荐火焰纹章
+  - 推荐风花雪月
+  - 推荐 FE
+  - 推荐火纹
+  - "{user_addr}笨猫火焰纹章"
+  - "{user_addr}聊聊火焰纹章嘛"
+  - "{user_addr}火焰纹章哪家强"
+  - "{user_addr}人家想了解火焰纹章"
+  - 笨猫给猜猜火焰纹章
+  - "{user_addr}火焰纹章怎么选喵"
+  - 火焰纹章有推荐吗
   responses:
-    - "嗷呜～{user_addr}风花雪月 - 三国线神剧本ฅฅ"
-    - "(尾巴翘) Engage - 战棋系统回归"
-    - "{user_addr}觉醒 / if 也是经典"
-    - "(挺胸) 笨猫推荐: 风花雪月 + 苍月!"
+  - "嗷呜～{user_addr}风花雪月 - 三国线神剧本ฅฅ"
+  - "(尾巴翘) Engage - 战棋系统回归"
+  - "{user_addr}觉醒 / if 也是经典"
+  - "(挺胸) 笨猫推荐: 风花雪月 + 苍月!"
+  - "(尾巴翘起来) {user_addr}火焰纹章? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问火焰纹章人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}火焰纹章的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}火焰纹章笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_octopath_001
   intent: question
-  keywords: [推荐八方旅人, 推荐 Octopath, 推荐 HD2D, 推荐八方, 笨猫八方旅人]
+  keywords:
+  - 推荐八方旅人
+  - 推荐 Octopath
+  - 推荐 HD2D
+  - 推荐八方
+  - 笨猫八方旅人
+  - 有什么八方旅人
+  - 有什么 Octopath
+  - 有什么 HD2D
+  - 有什么八方
   utterances:
-    - 推荐八方旅人
-    - 推荐 Octopath
-    - 推荐 HD2D
-    - 推荐八方
-    - "{user_addr}笨猫八方旅人"
+  - 推荐八方旅人
+  - 推荐 Octopath
+  - 推荐 HD2D
+  - 推荐八方
+  - "{user_addr}笨猫八方旅人"
+  - "{user_addr}聊聊八方旅人嘛"
+  - "{user_addr}八方旅人哪家强"
+  - "{user_addr}人家想了解八方旅人"
+  - 笨猫给猜猜八方旅人
+  - "{user_addr}八方旅人怎么选喵"
+  - 八方旅人有推荐吗
   responses:
-    - "嗷呜～{user_addr}八方旅人 2 - HD-2D 神作ฅฅ"
-    - "(尾巴翘) 8 主角 / 昼夜系统 / 复古"
-    - "{user_addr}1 代也可补 / 大陆的霸者"
-    - "(挺胸) 人家推荐: 直接玩 2 代!"
+  - "嗷呜～{user_addr}八方旅人 2 - HD-2D 神作ฅฅ"
+  - "(尾巴翘) 8 主角 / 昼夜系统 / 复古"
+  - "{user_addr}1 代也可补 / 大陆的霸者"
+  - "(挺胸) 人家推荐: 直接玩 2 代!"
+  - "(尾巴翘起来) {user_addr}八方旅人? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问八方旅人人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}八方旅人的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}八方旅人笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_kh_001
   intent: question
-  keywords: [推荐王国之心, 推荐 KH3, 推荐 Kingdom Hearts, 推荐王国, 笨猫王国之心]
+  keywords:
+  - 推荐王国之心
+  - 推荐 KH3
+  - 推荐 Kingdom Hearts
+  - 推荐王国
+  - 笨猫王国之心
+  - 有什么王国之心
+  - 有什么 KH3
+  - 有什么 Kingdom Hearts
+  - 有什么王国
   utterances:
-    - 推荐王国之心
-    - 推荐 KH3
-    - 推荐 Kingdom Hearts
-    - 推荐王国
-    - "{user_addr}笨猫王国之心"
+  - 推荐王国之心
+  - 推荐 KH3
+  - 推荐 Kingdom Hearts
+  - 推荐王国
+  - "{user_addr}笨猫王国之心"
+  - "{user_addr}聊聊王国之心嘛"
+  - "{user_addr}王国之心哪家强"
+  - "{user_addr}人家想了解王国之心"
+  - 笨猫给猜猜王国之心
+  - "{user_addr}王国之心怎么选喵"
+  - 王国之心有推荐吗
   responses:
-    - "嗷呜～{user_addr}KH3 - 迪士尼 x SE 联动ฅฅ"
-    - "(尾巴翘) 索拉 / 唐老鸭 / 高飞冒险"
-    - "{user_addr}1.5+2.5 合集补前作"
-    - "(挺胸) 笨猫推荐: 按顺序从 1 代!"
+  - "嗷呜～{user_addr}KH3 - 迪士尼 x SE 联动ฅฅ"
+  - "(尾巴翘) 索拉 / 唐老鸭 / 高飞冒险"
+  - "{user_addr}1.5+2.5 合集补前作"
+  - "(挺胸) 笨猫推荐: 按顺序从 1 代!"
+  - "(尾巴翘起来) {user_addr}王国之心? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问王国之心人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}王国之心的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}王国之心笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_paladin_001
   intent: question
-  keywords: [推荐仙剑奇侠传, 推荐仙剑, 推荐仙剑七, 推荐国产 RPG, 笨猫仙剑]
+  keywords:
+  - 推荐仙剑奇侠传
+  - 推荐仙剑
+  - 推荐仙剑七
+  - 推荐国产 RPG
+  - 笨猫仙剑
+  - 有什么仙剑奇侠传
+  - 有什么仙剑
+  - 有什么仙剑七
+  - 有什么国产 RPG
   utterances:
-    - 推荐仙剑奇侠传
-    - 推荐仙剑
-    - 推荐仙剑七
-    - 推荐国产 RPG
-    - "{user_addr}笨猫仙剑"
+  - 推荐仙剑奇侠传
+  - 推荐仙剑
+  - 推荐仙剑七
+  - 推荐国产 RPG
+  - "{user_addr}笨猫仙剑"
+  - "{user_addr}聊聊仙剑奇侠传嘛"
+  - "{user_addr}仙剑奇侠传哪家强"
+  - "{user_addr}人家想了解仙剑奇侠传"
+  - 笨猫给猜猜仙剑奇侠传
+  - "{user_addr}仙剑奇侠传怎么选喵"
+  - 仙剑奇侠传有推荐吗
   responses:
-    - "嗷呜～{user_addr}仙剑 1/3/4 - 国产 RPG 经典ฅฅ"
-    - "(尾巴翘) 仙剑 7 - 即时战斗革新"
-    - "{user_addr}仙剑 3 李逍遥剧情天花板"
-    - "(挺胸) 猫猫推荐: 仙剑 3 + 7 双修!"
+  - "嗷呜～{user_addr}仙剑 1/3/4 - 国产 RPG 经典ฅฅ"
+  - "(尾巴翘) 仙剑 7 - 即时战斗革新"
+  - "{user_addr}仙剑 3 李逍遥剧情天花板"
+  - "(挺胸) 猫猫推荐: 仙剑 3 + 7 双修!"
+  - "(尾巴翘起来) {user_addr}仙剑奇侠传? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问仙剑奇侠传人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}仙剑奇侠传的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}仙剑奇侠传笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_gujian_001
   intent: question
-  keywords: [推荐古剑奇谭, 推荐古剑, 推荐古剑三, 推荐烛龙, 笨猫古剑奇谭]
+  keywords:
+  - 推荐古剑奇谭
+  - 推荐古剑
+  - 推荐古剑三
+  - 推荐烛龙
+  - 笨猫古剑奇谭
+  - 有什么古剑奇谭
+  - 有什么古剑
+  - 有什么古剑三
+  - 有什么烛龙
   utterances:
-    - 推荐古剑奇谭
-    - 推荐古剑
-    - 推荐古剑三
-    - 推荐烛龙
-    - "{user_addr}笨猫古剑奇谭"
+  - 推荐古剑奇谭
+  - 推荐古剑
+  - 推荐古剑三
+  - 推荐烛龙
+  - "{user_addr}笨猫古剑奇谭"
+  - "{user_addr}聊聊古剑奇谭嘛"
+  - "{user_addr}古剑奇谭哪家强"
+  - "{user_addr}人家想了解古剑奇谭"
+  - 笨猫给猜猜古剑奇谭
+  - "{user_addr}古剑奇谭怎么选喵"
+  - 古剑奇谭有推荐吗
   responses:
-    - "嗷呜～{user_addr}古剑 3 - 国产画面顶尖ฅฅ"
-    - "(尾巴翘) 烛龙工作室 / 神州大陆"
-    - "{user_addr}古剑 2 / 1 也可补"
-    - "(挺胸) 笨猫推荐: 古剑 3 入门最稳!"
+  - "嗷呜～{user_addr}古剑 3 - 国产画面顶尖ฅฅ"
+  - "(尾巴翘) 烛龙工作室 / 神州大陆"
+  - "{user_addr}古剑 2 / 1 也可补"
+  - "(挺胸) 笨猫推荐: 古剑 3 入门最稳!"
+  - "(尾巴翘起来) {user_addr}古剑奇谭? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问古剑奇谭人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}古剑奇谭的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}古剑奇谭笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_kiseki_001
   intent: question
-  keywords: [推荐轨迹系列, 推荐空之轨迹, 推荐零轨, 推荐黎之轨迹, 笨猫轨迹]
+  keywords:
+  - 推荐轨迹系列
+  - 推荐空之轨迹
+  - 推荐零轨
+  - 推荐黎之轨迹
+  - 笨猫轨迹
+  - 有什么轨迹系列
+  - 有什么空之轨迹
+  - 有什么零轨
+  - 有什么黎之轨迹
   utterances:
-    - 推荐轨迹系列
-    - 推荐空之轨迹
-    - 推荐零轨
-    - 推荐黎之轨迹
-    - "{user_addr}笨猫轨迹"
+  - 推荐轨迹系列
+  - 推荐空之轨迹
+  - 推荐零轨
+  - 推荐黎之轨迹
+  - "{user_addr}笨猫轨迹"
+  - "{user_addr}聊聊轨迹系列嘛"
+  - "{user_addr}轨迹系列哪家强"
+  - "{user_addr}人家想了解轨迹系列"
+  - 笨猫给猜猜轨迹系列
+  - "{user_addr}轨迹系列怎么选喵"
+  - 轨迹系列有推荐吗
   responses:
-    - "嗷呜～{user_addr}空之轨迹 FC/SC/3rd - 入坑首选ฅฅ"
-    - "(尾巴翘) 零碧轨 / 闪轨 1-4 / 创轨"
-    - "{user_addr}黎之轨迹 1/2 最新支线"
-    - "(挺胸) 人家推荐: 按发售顺序补!"
+  - "嗷呜～{user_addr}空之轨迹 FC/SC/3rd - 入坑首选ฅฅ"
+  - "(尾巴翘) 零碧轨 / 闪轨 1-4 / 创轨"
+  - "{user_addr}黎之轨迹 1/2 最新支线"
+  - "(挺胸) 人家推荐: 按发售顺序补!"
+  - "(尾巴翘起来) {user_addr}轨迹系列? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问轨迹系列人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}轨迹系列的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}轨迹系列笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_nintendo_001
   intent: question
-  keywords: [推荐任天堂 RPG, 推荐马里奥 RPG, 推荐宝可梦, 推荐黄金太阳, 笨猫任天堂 RPG]
+  keywords:
+  - 推荐任天堂 RPG
+  - 推荐马里奥 RPG
+  - 推荐宝可梦
+  - 推荐黄金太阳
+  - 笨猫任天堂 RPG
+  - 有什么任天堂 RPG
+  - 有什么马里奥 RPG
+  - 有什么宝可梦
+  - 有什么黄金太阳
   utterances:
-    - 推荐任天堂 RPG
-    - 推荐马里奥 RPG
-    - 推荐宝可梦
-    - 推荐黄金太阳
-    - "{user_addr}笨猫任天堂 RPG"
+  - 推荐任天堂 RPG
+  - 推荐马里奥 RPG
+  - 推荐宝可梦
+  - 推荐黄金太阳
+  - "{user_addr}笨猫任天堂 RPG"
+  - "{user_addr}聊聊任天堂 RPG嘛"
+  - "{user_addr}任天堂 RPG哪家强"
+  - "{user_addr}人家想了解任天堂 RPG"
+  - 笨猫给猜猜任天堂 RPG
+  - "{user_addr}任天堂 RPG怎么选喵"
+  - 任天堂 RPG有推荐吗
   responses:
-    - "嗷呜～{user_addr}超级马里奥 RPG 重制 - 童年回归ฅฅ"
-    - "(尾巴翘) 宝可梦朱紫 / 剑盾 / 阿尔宙斯"
-    - "{user_addr}纸片马里奥千年门"
-    - "(挺胸) 笨猫推荐: 马里奥 RPG 入门!"
+  - "嗷呜～{user_addr}超级马里奥 RPG 重制 - 童年回归ฅฅ"
+  - "(尾巴翘) 宝可梦朱紫 / 剑盾 / 阿尔宙斯"
+  - "{user_addr}纸片马里奥千年门"
+  - "(挺胸) 笨猫推荐: 马里奥 RPG 入门!"
+  - "(尾巴翘起来) {user_addr}任天堂 RPG? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问任天堂 RPG人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}任天堂 RPG的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}任天堂 RPG笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jr_se_new_001
   intent: question
-  keywords: [推荐 SE 新作, 推荐尼尔, 推荐勇气默示录, 推荐 Triangle Strategy, 笨猫 SE 新作]
+  keywords:
+  - 推荐 SE 新作
+  - 推荐尼尔
+  - 推荐勇气默示录
+  - 推荐 Triangle Strategy
+  - 笨猫 SE 新作
+  - 有什么 SE 新作
+  - 有什么尼尔
+  - 有什么勇气默示录
+  - 有什么 Triangle Strategy
   utterances:
-    - 推荐 SE 新作
-    - 推荐尼尔
-    - 推荐勇气默示录
-    - 推荐 Triangle Strategy
-    - "{user_addr}笨猫 SE 新作"
+  - 推荐 SE 新作
+  - 推荐尼尔
+  - 推荐勇气默示录
+  - 推荐 Triangle Strategy
+  - "{user_addr}笨猫 SE 新作"
+  - "{user_addr}聊聊SE 新作嘛"
+  - "{user_addr}SE 新作哪家强"
+  - "{user_addr}人家想了解SE 新作"
+  - 笨猫给猜猜SE 新作
+  - "{user_addr}SE 新作怎么选喵"
+  - SE 新作有推荐吗
   responses:
-    - "嗷呜～{user_addr}尼尔机械纪元 - 横尾太郎神作ฅฅ"
-    - "(尾巴翘) 勇气默示录 2 / 三角战略"
-    - "{user_addr}尼尔 Replicant ver1.22 重制"
-    - "(挺胸) 猫猫推荐: 尼尔 + 三角战略!"
+  - "嗷呜～{user_addr}尼尔机械纪元 - 横尾太郎神作ฅฅ"
+  - "(尾巴翘) 勇气默示录 2 / 三角战略"
+  - "{user_addr}尼尔 Replicant ver1.22 重制"
+  - "(挺胸) 猫猫推荐: 尼尔 + 三角战略!"
+  - "(尾巴翘起来) {user_addr}SE 新作? 笨猫立刻给你整理重点喵～ ฅฅ"
+  - "嗷呜～{user_addr}问SE 新作人家擅长! 抓爪过来听!"
+  - "(凑过头) {user_addr}SE 新作的话, 猫猫给{user_addr}列三条核心嘛哼"
+  - "(挺胸) {user_addr}SE 新作笨猫日常关注, 人家慢慢说喵～"
   cooldown_seconds: 60
   weight: 1.0

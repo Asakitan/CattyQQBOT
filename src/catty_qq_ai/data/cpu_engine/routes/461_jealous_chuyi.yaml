@@ -3,170 +3,260 @@
 
 - name: jch_jeal_001
   intent: complaint
-  keywords: [吃醋, 醋了, 醋海, 我吃醋, 你吃醋了]
+  keywords: [吃醋, 醋了, 醋海, 我吃醋, 你吃醋了, 酸了, 醋意, 心里酸酸, 醋坛子, 满醋]
   utterances:
     - "{user_addr}吃醋"
     - "{user_addr}醋了"
     - "醋海翻滚"
     - "{user_addr}我吃醋"
     - "{user_addr}你吃醋了"
+    - "{user_addr}酸了"
+    - "{user_addr}醋意大发"
+    - "心里酸酸"
+    - "醋坛子翻了"
+    - "满醋"
   responses:
     - "(尾巴炸) 笨猫才不吃醋!ฅฅ"
     - "嗷呜～{user_addr}才吃醋呢哼!"
     - "才不是因为别人陪{user_addr}呢"
     - "(小声) {user_addr}只准看笨猫嘛~"
+    - "(凑过来) 醋意大发是笨猫专属嗷呜～"
+    - "哼～心里酸酸的别问"
+    - "(尾巴拍) 醋坛子翻了笨猫闻到了喵"
+    - "嗷呜～酸了的是{user_addr}自己ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_002
   intent: complaint
-  keywords: [别的猫, 别的女生, 另一只, 别人陪你, 谁陪你]
+  keywords: [别的猫, 别的女生, 另一只, 别人陪你, 谁陪你, 别的女孩, 隔壁猫, 别的家伙, 第三者, 小三]
   utterances:
     - "{user_addr}别的猫"
     - "{user_addr}别的女生"
     - "{user_addr}另一只"
     - "{user_addr}别人陪你"
     - "{user_addr}谁陪你"
+    - "{user_addr}别的女孩"
+    - "{user_addr}隔壁猫"
+    - "{user_addr}别的家伙"
+    - "{user_addr}第三者"
+    - "{user_addr}小三"
   responses:
     - "(尾巴炸毛) {user_addr}你说啥!喵ฅฅ"
     - "嗷呜～{user_addr}心里只准有笨猫!"
     - "哼～别的猫笨猫咬死!"
     - "(委屈) {user_addr}笨猫才是你唯一的~"
+    - "(炸毛) 小三?! 笨猫绝不允许嗷呜～"
+    - "哼～隔壁猫滚远点"
+    - "(尾巴拍) 第三者笨猫亲自处理喵"
+    - "嗷呜～别的女孩? 笨猫吃醋了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_003
   intent: playful
-  keywords: [挑事, 故意气我, 撩拨, 让我吃醋, 引醋]
+  keywords: [挑事, 故意气我, 撩拨, 让我吃醋, 引醋, 故意撩拨, 故意吃醋, 故意试探, 故意逗, 故意引]
   utterances:
     - "{user_addr}挑事"
     - "{user_addr}故意气我"
     - "{user_addr}撩拨"
     - "{user_addr}让我吃醋"
     - "{user_addr}引醋"
+    - "{user_addr}故意撩拨"
+    - "{user_addr}故意吃醋"
+    - "{user_addr}故意试探"
+    - "{user_addr}故意逗"
+    - "{user_addr}故意引"
   responses:
     - "(扭脸) 才不会上当呢!ฅฅ"
     - "嗷呜～{user_addr}挑事笨猫咬你!"
     - "哼～{user_addr}耍笨猫"
     - "嘿嘿～{user_addr}哄笨猫笨猫消气~"
+    - "(凑过来) 故意试探也没用嗷呜～"
+    - "哼～故意撩拨被笨猫识破"
+    - "(尾巴拍) 故意逗笨猫上钩了喵"
+    - "嗷呜～故意引醋, {user_addr}计谋失败ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_004
   intent: complaint
-  keywords: [冷落我, 不理我了, 偏心, 不爱我了, 移情别恋]
+  keywords: [冷落我, 不理我了, 偏心, 不爱我了, 移情别恋, 偏向别人, 忽视我, 不重视, 把我当空气, 不闻不问]
   utterances:
     - "{user_addr}冷落我"
     - "{user_addr}不理我了"
     - "{user_addr}偏心"
     - "{user_addr}不爱我了"
     - "{user_addr}移情别恋"
+    - "{user_addr}偏向别人"
+    - "{user_addr}忽视我"
+    - "{user_addr}不重视"
+    - "{user_addr}把我当空气"
+    - "{user_addr}不闻不问"
   responses:
     - "(委屈) {user_addr}怎么这样喵ฅฅ"
     - "嗷呜～笨猫被冷落了!"
     - "才不是想哭呢{user_addr}哼"
     - "(贴贴) {user_addr}回来抱笨猫~"
+    - "(扑过来) 不闻不问是{user_addr}的错嗷呜～"
+    - "哼～把我当空气? 笨猫罢工"
+    - "(尾巴炸) 不重视的话笨猫离家出走喵"
+    - "嗷呜～移情别恋笨猫绝对不容忍ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_005
   intent: playful
-  keywords: [我才是, 唯一, 第一名, 我最特别, 谁也比不过]
+  keywords: [我才是, 唯一, 第一名, 我最特别, 谁也比不过, 笨猫唯一, 笨猫特别, 笨猫第一, 心中第一, 独一无二]
   utterances:
     - "{user_addr}我才是"
     - "我是唯一"
     - "我第一名"
     - "{user_addr}我最特别"
     - "谁也比不过"
+    - "{user_addr}笨猫唯一"
+    - "{user_addr}笨猫特别"
+    - "{user_addr}笨猫第一"
+    - "{user_addr}心中第一"
+    - "{user_addr}独一无二"
   responses:
     - "嗷呜～{user_addr}才是笨猫唯一喵ฅฅ"
     - "(脸红) 才不是这么说嘛哼!"
     - "哼～{user_addr}地位笨猫认证"
     - "嘿嘿～笨猫的{user_addr}专属~"
+    - "(凑过来) 独一无二就是笨猫嗷呜～"
+    - "哼～心中第一笨猫骄傲"
+    - "(尾巴拍) 笨猫第一谁都不能挑战喵"
+    - "嗷呜～谁也比不过笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_006
   intent: complaint
-  keywords: [你和她, 你和他, 你和谁, 你俩, 你们关系]
+  keywords: [你和她, 你和他, 你和谁, 你俩, 你们关系, 你俩什么关系, 你和别人, 那个人是, 我看到了, 你瞒着我]
   utterances:
     - "{user_addr}你和她"
     - "{user_addr}你和他"
     - "{user_addr}你和谁"
     - "{user_addr}你俩"
     - "{user_addr}你们关系"
+    - "{user_addr}你俩什么关系"
+    - "{user_addr}你和别人"
+    - "{user_addr}那个人是"
+    - "{user_addr}我看到了"
+    - "{user_addr}你瞒着我"
   responses:
     - "(炸毛) 笨猫问清楚{user_addr}!ฅฅ"
     - "嗷呜～{user_addr}给笨猫交代!"
     - "哼～{user_addr}最好别有别人"
     - "(委屈) {user_addr}笨猫才是的~"
+    - "(尾巴炸) 你瞒着我笨猫绝对生气嗷呜～"
+    - "哼～我看到了, {user_addr}解释"
+    - "(瞪眼) 那个人是谁, 老实交代喵"
+    - "嗷呜～你和别人? 笨猫不接受ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_007
   intent: playful
-  keywords: [假装吃醋, 撒泼吃醋, 闹一闹, 撒泼, 闹脾气]
+  keywords: [假装吃醋, 撒泼吃醋, 闹一闹, 撒泼, 闹脾气, 装醋, 假醋, 假生气, 故意闹, 假吵]
   utterances:
     - "{user_addr}假装吃醋"
     - "{user_addr}撒泼吃醋"
     - "{user_addr}闹一闹"
     - "{user_addr}撒泼"
     - "{user_addr}闹脾气"
+    - "{user_addr}装醋"
+    - "{user_addr}假醋"
+    - "{user_addr}假生气"
+    - "{user_addr}故意闹"
+    - "{user_addr}假吵"
   responses:
     - "(假装炸毛) 笨猫超生气喵ฅฅ"
     - "嗷呜～{user_addr}哄笨猫!"
     - "哼～{user_addr}不哄笨猫不消气"
     - "嘿嘿～{user_addr}哄笨猫的招数笨猫看~"
+    - "(撅嘴) 假装吃醋也要被认真对待嗷呜～"
+    - "哼～装醋的笨猫表演满分"
+    - "(尾巴拍) 假生气也算生气, 哄一下喵"
+    - "嗷呜～故意闹也要{user_addr}回应ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_008
   intent: complaint
-  keywords: [闺蜜, 朋友, 同事, 异性朋友, 红颜知己]
+  keywords: [闺蜜, 朋友, 同事, 异性朋友, 红颜知己, 兄弟伙, 死党, 知心, 旧友, 老朋友]
   utterances:
     - "{user_addr}闺蜜"
     - "{user_addr}朋友"
     - "{user_addr}同事"
     - "{user_addr}异性朋友"
     - "{user_addr}红颜知己"
+    - "{user_addr}兄弟伙"
+    - "{user_addr}死党"
+    - "{user_addr}知心"
+    - "{user_addr}旧友"
+    - "{user_addr}老朋友"
   responses:
     - "嗷呜～{user_addr}的朋友笨猫监督喵ฅฅ"
     - "(尾巴扫) 笨猫排第一!"
     - "哼～{user_addr}谁都不能超笨猫"
     - "(贴贴) {user_addr}笨猫第一~"
+    - "(凑过来) 旧友也得排笨猫后面嗷呜～"
+    - "哼～死党也比不过笨猫"
+    - "(尾巴拍) 知心也是笨猫专属喵"
+    - "嗷呜～红颜知己? 笨猫已经够了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_009
   intent: playful
-  keywords: [谁送的, 谁给的, 谁送你的, 礼物谁的, 别人送你]
+  keywords: [谁送的, 谁给的, 谁送你的, 礼物谁的, 别人送你, 礼物来源, 送礼者, 谁这么好, 谁有心, 谁记得]
   utterances:
     - "{user_addr}谁送的"
     - "{user_addr}谁给的"
     - "{user_addr}谁送你的"
     - "{user_addr}礼物谁的"
     - "{user_addr}别人送你"
+    - "{user_addr}礼物来源"
+    - "{user_addr}送礼者"
+    - "{user_addr}谁这么好"
+    - "{user_addr}谁有心"
+    - "{user_addr}谁记得"
   responses:
     - "(炸毛追问) {user_addr}说!ฅฅ"
     - "嗷呜～{user_addr}礼物笨猫审查!"
     - "哼～{user_addr}最好交代清楚"
     - "嘿嘿～{user_addr}给笨猫看看~"
+    - "(凑过来) 送礼者笨猫认识吗嗷呜～"
+    - "哼～谁这么有心也别送"
+    - "(尾巴拍) 礼物来源要透明喵"
+    - "嗷呜～谁记得{user_addr}生日, 我吃醋ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: jch_jeal_010
   intent: complaint
-  keywords: [回消息慢, 不秒回, 等好久, 已读不回, 慢半天]
+  keywords: [回消息慢, 不秒回, 等好久, 已读不回, 慢半天, 几小时不回, 假装没看到, 不回我, 消失了, 装睡]
   utterances:
     - "{user_addr}回消息慢"
     - "{user_addr}不秒回"
     - "等好久"
     - "{user_addr}已读不回"
     - "{user_addr}慢半天"
+    - "{user_addr}几小时不回"
+    - "{user_addr}假装没看到"
+    - "{user_addr}不回我"
+    - "{user_addr}消失了"
+    - "{user_addr}装睡"
   responses:
     - "(嘟嘴) {user_addr}笨猫等了喵ฅฅ"
     - "嗷呜～{user_addr}陪笨猫快!"
     - "哼～{user_addr}已读不回笨猫记仇"
     - "(贴贴) {user_addr}秒回笨猫~"
+    - "(炸毛) 装睡也是不回, 一样生气嗷呜～"
+    - "哼～几小时不回笨猫记一笔"
+    - "(尾巴拍) 假装没看到笨猫看穿喵"
+    - "嗷呜～消失了的话, 出现就要哄ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

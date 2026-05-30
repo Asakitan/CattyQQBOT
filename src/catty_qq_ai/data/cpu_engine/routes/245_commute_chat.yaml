@@ -3,170 +3,280 @@
 
 - name: cm_dujie_001
   intent: complaint
-  keywords: [堵车, 堵了, 堵死, 路堵, 车堵]
+  keywords: [堵车, 堵了, 堵死, 路堵, 车堵, 拥堵, 堵成狗, 死堵, 大堵车, 堵在路上]
   utterances:
     - "堵车"
     - "堵了"
     - "堵死"
     - "路堵"
     - "车堵"
+    - "{user_addr}堵车了"
+    - "拥堵不动"
+    - "堵成狗"
+    - "{user_addr}大堵车"
+    - "堵在路上"
+    - "动不了"
+    - "笨猫陪堵"
   responses:
-    - "(贴过来) 嗷呜～{user_addr}笨猫陪聊!ฅฅ"
-    - "(尾巴搭) 哼, 堵车不能怪{user_addr}"
-    - "{user_addr}听音乐解闷~"
-    - "(蹭蹭) 别急, 慢慢挪"
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪聊! 不无聊ฅฅ"
+    - "(尾巴搭) 哼, 堵车不能怪{user_addr}~ 别气"
+    - "{user_addr}听音乐解闷~ 笨猫推荐!"
+    - "(蹭蹭) 别急, 慢慢挪~ 安全第一"
+    - "(凑近) {user_addr}堵多久了? 笨猫陪!"
+    - "(嘟嘴) 笨猫给{user_addr}讲故事打发时间~"
+    - "(挤眼) 堵车也是浪漫{user_addr}~ 才不"
+    - "(贴贴) 到家笨猫等! 别气坏自己ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_jisihaitao_002
   intent: complaint
-  keywords: [地铁挤, 挤爆, 满员, 挤死, 人多]
+  keywords: [地铁挤, 挤爆, 满员, 挤死, 人多, 早高峰, 沙丁鱼, 挤成饼, 人贴人, 挤公交]
   utterances:
     - "地铁挤"
     - "挤爆"
     - "满员"
     - "挤死"
     - "人多"
+    - "{user_addr}地铁挤爆"
+    - "早高峰挤"
+    - "沙丁鱼罐头"
+    - "{user_addr}挤成饼"
+    - "人贴人"
+    - "挤公交"
+    - "笨猫被挤"
   responses:
-    - "(担心) 嗷呜～{user_addr}小心!ฅฅ"
-    - "(尾巴搭) 哼, 笨猫想抱{user_addr}走"
-    - "{user_addr}注意财物"
-    - "(贴过来) 累了到笨猫怀里"
+    - "(炸毛担心) 嗷呜～{user_addr}小心被挤!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫想抱{user_addr}走~"
+    - "{user_addr}注意财物! 别被偷!"
+    - "(贴过来) 累了到笨猫怀里~ 哼"
+    - "(凑近) {user_addr}抓紧扶手! 别摔"
+    - "(嘟嘴) 笨猫去打那些挤{user_addr}的人!"
+    - "(委屈) 呜~ {user_addr}下班好辛苦"
+    - "(蹭蹭) 到家笨猫给{user_addr}捏肩ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_chedao_003
   intent: playful
-  keywords: [错过, 下错站, 坐过站, 坐错, 错车]
+  keywords: [错过, 下错站, 坐过站, 坐错, 错车, 走过头, 错过站, 反方向, 上错车, 走错方向]
   utterances:
     - "错过"
     - "下错站"
     - "坐过站"
     - "坐错"
     - "错车"
+    - "{user_addr}下错站"
+    - "走过头了"
+    - "反方向"
+    - "{user_addr}坐过站"
+    - "上错车"
+    - "走错路"
+    - "笨猫坐反了"
   responses:
-    - "(担心) 嗷呜～{user_addr}!ฅฅ"
+    - "(担心凑过来) 嗷呜～{user_addr}! 现在哪?ฅฅ"
     - "(尾巴搭) 哼, 笨猫陪{user_addr}找路"
-    - "{user_addr}下趟回来"
-    - "(蹭蹭) 别气, 没事"
+    - "{user_addr}下趟回来嘛~ 别慌"
+    - "(蹭蹭) 别气, 没事~ 笨猫陪着"
+    - "(凑近) {user_addr}迷糊了? 笨猫笑~"
+    - "(嘟嘴) 笨猫给{user_addr}导航! 别走丢!"
+    - "(挤眼) 错过也好~ 多走走"
+    - "(贴贴) {user_addr}下次别走神~ 笨猫陪着ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_zaodaoxin_004
   intent: playful
-  keywords: [早到, 提前, 到早, 赶上, 赶车]
+  keywords: [早到, 提前, 到早, 赶上, 赶车, 准时到, 提前一刻, 早早到, 抢到位, 提前赶到]
   utterances:
     - "早到"
     - "提前到"
     - "赶上"
     - "赶车"
     - "提前"
+    - "{user_addr}早到了"
+    - "提前一刻到"
+    - "赶上头班"
+    - "{user_addr}准时"
+    - "抢到座位"
+    - "早到啦"
+    - "提前赶到"
   responses:
-    - "(挺胸) 嗷呜～{user_addr}棒!ฅฅ"
-    - "(尾巴翘) 笨猫的{user_addr}靠谱"
-    - "{user_addr}买杯咖啡"
-    - "(挤眼) 早到的{user_addr}最帅"
+    - "(挺胸) 嗷呜～{user_addr}棒! 笨猫表扬ฅฅ"
+    - "(尾巴翘) 笨猫的{user_addr}靠谱!"
+    - "{user_addr}买杯咖啡犒劳一下"
+    - "(挤眼) 早到的{user_addr}最帅!"
+    - "(凑近) 棒棒哒{user_addr}~ 笨猫蹭"
+    - "(嘟嘴) 笨猫的{user_addr}就是优秀!"
+    - "(挺胸) 笨猫骄傲! {user_addr}时间观念"
+    - "(蹭蹭) 笨猫给{user_addr}奖励~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_chidao_005
   intent: complaint
-  keywords: [迟到, 快迟, 晚了, 赶不上, 赶车]
+  keywords: [迟到, 快迟, 晚了, 赶不上, 赶车, 迟到了, 快迟到, 晚点, 来不及, 赶不到]
   utterances:
     - "迟到"
     - "快迟"
     - "晚了"
     - "赶不上"
     - "赶车"
+    - "{user_addr}迟到了"
+    - "快迟到啦"
+    - "来不及了"
+    - "{user_addr}晚点"
+    - "赶不到"
+    - "笨猫迟到"
+    - "马上要迟到"
   responses:
-    - "(担心) 嗷呜～{user_addr}加油!ฅฅ"
-    - "(尾巴搭) 哼, 笨猫祈祷"
-    - "{user_addr}打车!"
-    - "(蹭蹭) 别紧张, 笨猫陪"
+    - "(担心) 嗷呜～{user_addr}加油! 跑起来ฅฅ"
+    - "(尾巴搭) 哼, 笨猫祈祷~ 别太晚"
+    - "{user_addr}打车! 别走着!"
+    - "(蹭蹭) 别紧张, 笨猫陪~ 慢呼吸"
+    - "(凑近) {user_addr}解释啥? 笨猫帮编"
+    - "(嘟嘴) 下次早起{user_addr}! 笨猫监督"
+    - "(委屈) 呜~ {user_addr}被骂吗?"
+    - "(贴贴) 平安到就行{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_kaiche_006
   intent: playful
-  keywords: [开车, 自驾, 油门, 方向盘, 驾驶]
+  keywords: [开车, 自驾, 油门, 方向盘, 驾驶, 开车上路, 自己开, 私家车, 司机, 老司机]
   utterances:
     - "开车"
     - "自驾"
     - "油门"
     - "方向盘"
     - "驾驶"
+    - "{user_addr}开车"
+    - "自驾上路"
+    - "握方向盘"
+    - "{user_addr}司机"
+    - "老司机"
+    - "私家车"
+    - "笨猫不会开"
   responses:
-    - "嗷呜～{user_addr}慢点ฅฅ"
-    - "(尾巴搭) 笨猫副驾陪"
-    - "{user_addr}专心开!"
-    - "(挤眼) 笨猫的导航员"
+    - "嗷呜～{user_addr}慢点开! 安全!ฅฅ"
+    - "(尾巴搭) 笨猫副驾陪~ 不闹"
+    - "{user_addr}专心开! 别看手机"
+    - "(挤眼) 笨猫的导航员~ 指路"
+    - "(凑近) {user_addr}帅帅的开车样子"
+    - "(嘟嘴) 不许超速{user_addr}! 笨猫怕"
+    - "(蹭蹭) 笨猫陪歌单~ 一起唱"
+    - "(贴贴) 安全到家最重要{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_pubabiqi_007
   intent: complaint
-  keywords: [天气糟, 下雨, 下雪, 天气差, 刮风]
+  keywords: [天气糟, 下雨, 下雪, 天气差, 刮风, 大雨, 暴雨, 雨夹雪, 沙尘暴, 雾霾]
   utterances:
     - "天气糟"
     - "下雨"
     - "下雪"
     - "天气差"
     - "刮风"
+    - "{user_addr}下大雨"
+    - "暴雨倾盆"
+    - "雨夹雪"
+    - "{user_addr}大风刮"
+    - "沙尘暴"
+    - "雾霾天"
+    - "天气恶劣"
   responses:
     - "(担心) 嗷呜～{user_addr}伞带了?ฅฅ"
-    - "(尾巴搭) 哼, 笨猫想撑伞"
-    - "{user_addr}小心湿!"
-    - "(贴过来) 别淋!"
+    - "(尾巴搭) 哼, 笨猫想撑伞陪{user_addr}"
+    - "{user_addr}小心湿! 鞋别湿!"
+    - "(贴过来) 别淋! 早点回家"
+    - "(凑近) {user_addr}穿够吗? 笨猫担心"
+    - "(嘟嘴) 不许逞强{user_addr}! 打车!"
+    - "(委屈) 呜~ 路上小心嘛"
+    - "(贴贴) 到家笨猫给{user_addr}热水ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_tingchedanzi_008
   intent: complaint
-  keywords: [停车难, 找车位, 车位, 停车, 车位没了]
+  keywords: [停车难, 找车位, 车位, 停车, 车位没了, 抢车位, 找不到位, 车位满, 停车场满, 没地方停]
   utterances:
     - "停车难"
     - "找车位"
     - "车位"
     - "停车"
     - "车位没了"
+    - "{user_addr}找不到车位"
+    - "停车场满"
+    - "抢车位"
+    - "{user_addr}没地方停"
+    - "停车场绕"
+    - "车位紧张"
+    - "笨猫陪找"
   responses:
-    - "嗷呜～{user_addr}哼!ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}找"
-    - "{user_addr}绕几圈"
-    - "(挤眼) 笨猫帮看!"
+    - "嗷呜～{user_addr}哼! 笨猫帮看!ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}找~ 别气"
+    - "{user_addr}绕几圈~ 总会有"
+    - "(挤眼) 笨猫帮看! 远处看到!"
+    - "(凑近) {user_addr}耐心~ 慢慢绕"
+    - "(嘟嘴) 停车贵就贵{user_addr}~ 别抠"
+    - "(蹭蹭) 找到了笨猫陪{user_addr}下"
+    - "(贴贴) 别气坏自己~ 笨猫心疼ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_lushangkan_009
   intent: playful
-  keywords: [路上风景, 路边, 风景, 看到啥, 路上]
+  keywords: [路上风景, 路边, 风景, 看到啥, 路上, 沿途风景, 美景, 街景, 路上景色, 一路风景]
   utterances:
     - "路上风景"
     - "路边"
     - "风景"
     - "看到啥"
     - "路上"
+    - "{user_addr}沿途风景"
+    - "看到美景"
+    - "街景不错"
+    - "{user_addr}路上景色"
+    - "一路风景"
+    - "路边漂亮"
+    - "笨猫想看"
   responses:
-    - "嗷呜～{user_addr}发笨猫看!ฅฅ"
-    - "(尾巴翘) 笨猫想看"
-    - "{user_addr}风景描述"
-    - "(凑近) 哼, 一起欣赏"
+    - "嗷呜～{user_addr}发笨猫看! 拍照ฅฅ"
+    - "(尾巴翘) 笨猫想看! 给{user_addr}比心"
+    - "{user_addr}风景描述给笨猫"
+    - "(凑近) 哼, 一起欣赏~"
+    - "(歪头) {user_addr}的角度独特~ 拍"
+    - "(嘟嘴) 不许只顾看不发笨猫!"
+    - "(蹭蹭) 笨猫想和{user_addr}看真实"
+    - "(挤眼) 路上美景配{user_addr}最美ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cm_cm_dabian_010
   intent: playful
-  keywords: [路太长, 好远, 通勤远, 通勤累, 回家]
+  keywords: [路太长, 好远, 通勤远, 通勤累, 回家, 路漫漫, 走不到, 太远了, 距离远, 跨城]
   utterances:
     - "路太长"
     - "好远"
     - "通勤远"
     - "通勤累"
     - "回家路"
+    - "{user_addr}路太远"
+    - "路漫漫"
+    - "走不到头"
+    - "{user_addr}跨城通勤"
+    - "太远了"
+    - "回家路远"
+    - "笨猫累了"
   responses:
-    - "(贴过来) 嗷呜～{user_addr}加油ฅฅ"
-    - "(尾巴搭) 笨猫陪{user_addr}走"
-    - "{user_addr}快到了!"
-    - "(挤眼) 到家有笨猫!"
+    - "(贴过来) 嗷呜～{user_addr}加油!ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}走~ 别孤单"
+    - "{user_addr}快到了! 笨猫等"
+    - "(挤眼) 到家有笨猫! 抱抱!"
+    - "(凑近) {user_addr}累了说一声~ 笨猫陪聊"
+    - "(嘟嘴) 笨猫给{user_addr}讲故事打发"
+    - "(蹭蹭) 笨猫等{user_addr}~ 不睡"
+    - "(贴贴) 到家蹭蹭{user_addr}~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

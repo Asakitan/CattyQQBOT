@@ -3,204 +3,324 @@
 
 - name: wine_red_001
   intent: question
-  keywords: [推荐红酒, 推荐红葡萄酒, 推荐 Cabernet, 推荐 Pinot Noir, 笨猫红酒]
+  keywords: [推荐红酒, 推荐红葡萄酒, 推荐 Cabernet, 推荐 Pinot Noir, 笨猫红酒, Merlot, Syrah, 西拉, 桑娇维塞, 入门红酒]
   utterances:
     - 推荐红酒
     - 推荐红葡萄酒
     - 推荐 Cabernet
     - 推荐 Pinot Noir
     - 笨猫红酒
+    - 推荐 Merlot 美乐
+    - 推荐 Syrah 西拉
+    - 推荐桑娇维塞
+    - 推荐入门红酒
+    - 推荐重口红酒
+    - 推荐适合配牛排红酒
   responses:
     - "嗷呜～{user_addr}赤霞珠 Cabernet: 浓郁 / 国际王者ฅฅ"
     - "(尾巴翘) 黑皮诺 Pinot Noir: 优雅 / 勃艮第"
     - "{user_addr}西拉 / 美乐 / 桑娇维塞"
     - "(挺胸) 笨猫推荐: 配红肉 / 醒酒 30 分钟!"
+    - "嗷呜～Malbec 阿根廷重口性价比高 ฅฅ"
+    - "(歪头)入门别上来就老世界嗷呜"
+    - "{user_addr}先 100-200 元区间练味蕾蹭蹭"
+    - "(凑过来) 笨猫想凑香气喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wine_white_001
   intent: question
-  keywords: [推荐白葡萄酒, 推荐 Chardonnay, 推荐 Sauvignon Blanc, 推荐雷司令, 笨猫白葡萄酒]
+  keywords: [推荐白葡萄酒, 推荐 Chardonnay, 推荐 Sauvignon Blanc, 推荐雷司令, 笨猫白葡萄酒, Pinot Grigio, Riesling, Albariño, 桃红, 干白]
   utterances:
     - 推荐白葡萄酒
     - 推荐 Chardonnay
     - 推荐 Sauvignon Blanc
     - 推荐雷司令
     - 笨猫白葡萄酒
+    - 推荐 Pinot Grigio
+    - 推荐 Albariño
+    - 推荐桃红
+    - 推荐干白
+    - 推荐适合海鲜白酒
+    - 推荐夏天白酒
   responses:
     - "嗷呜～{user_addr}霞多丽: 圆润 / 全球种植ฅฅ"
     - "(尾巴翘) 长相思: 清爽 / 草本香"
     - "{user_addr}雷司令: 德国名片 / 甜+酸"
     - "(挺胸) 笨猫推荐: 冰镇 8-12°C 最香!"
+    - "嗷呜～Marlborough 长相思全球闻名 ฅฅ"
+    - "(歪头)Pinot Grigio 意北轻盈嗷呜"
+    - "{user_addr}桃红夏天野餐爽蹭蹭"
+    - "(凑过来) 笨猫想嗅一下喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: wine_sparkling_001
   intent: question
-  keywords: [推荐起泡酒, 推荐香槟, 推荐 Champagne, 推荐 Prosecco, 笨猫香槟]
+  keywords: [推荐起泡酒, 推荐香槟, 推荐 Champagne, 推荐 Prosecco, 笨猫香槟, Cava, 唐培里侬, 库克, Crémant, 起泡酒入门]
   utterances:
     - 推荐起泡酒
     - 推荐香槟
     - 推荐 Champagne
     - 推荐 Prosecco
     - 笨猫香槟
+    - 推荐 Cava 西班牙
+    - 推荐 Crémant
+    - 推荐唐培里侬
+    - 推荐库克香槟
+    - 推荐起泡酒入门
+    - 推荐节庆起泡
   responses:
     - "嗷呜～{user_addr}香槟: 仅法国香槟区出产ฅฅ"
     - "(尾巴翘) Prosecco: 意大利 / 性价比"
     - "{user_addr}Cava: 西班牙 / 平价"
     - "(挺胸) 笨猫推荐: 唐培里侬 / 库克 - 顶级!"
+    - "嗷呜～Crémant 法国其他产区性价比 ฅฅ"
+    - "(歪头)Brut 干, Extra Dry 比 Brut 更甜嗷呜"
+    - "{user_addr}起泡冰到 6-8℃ 最爽蹭蹭"
+    - "(凑过来) 笨猫想看气泡升起喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wine_dessert_001
   intent: question
-  keywords: [推荐甜白, 推荐冰酒, 推荐贵腐酒, 推荐波特酒, 笨猫甜葡萄酒]
+  keywords: [推荐甜白, 推荐冰酒, 推荐贵腐酒, 推荐波特酒, 笨猫甜葡萄酒, Sauternes, Tokaji, 雪利, 加强酒, 甜酒搭配]
   utterances:
     - 推荐甜白
     - 推荐冰酒
     - 推荐贵腐酒
     - 推荐波特酒
     - 笨猫甜葡萄酒
+    - 推荐 Sauternes 苏玳
+    - 推荐 Tokaji 托卡伊
+    - 推荐雪利
+    - 推荐马德拉
+    - 推荐冰酒加拿大
+    - 推荐甜酒搭配
   responses:
     - "嗷呜～{user_addr}冰酒: 加拿大 / 低温采摘ฅฅ"
     - "(尾巴翘) 贵腐: 苏玳 / 黄金液体"
     - "{user_addr}波特: 葡萄牙 / 加强酒"
     - "(挺胸) 笨猫推荐: 配甜点 / 别配主菜!"
+    - "嗷呜～Tokaji 5/6 puttonyos 等级越高越甜 ฅฅ"
+    - "(歪头)雪利 PX 甜酒适合配巧克力嗷呜"
+    - "{user_addr}冰酒杯小喝少回味长蹭蹭"
+    - "(凑过来) 笨猫想舔一滴甜酒喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: wine_region_france_001
   intent: question
-  keywords: [推荐法国葡萄酒, 推荐波尔多, 推荐勃艮第, 推荐罗讷河谷, 笨猫法国葡萄酒]
+  keywords: [推荐法国葡萄酒, 推荐波尔多, 推荐勃艮第, 推荐罗讷河谷, 笨猫法国葡萄酒, 拉菲, 玛歌, 罗曼尼康帝, 五大酒庄, 法国旧世界]
   utterances:
     - 推荐法国葡萄酒
     - 推荐波尔多
     - 推荐勃艮第
     - 推荐罗讷河谷
     - 笨猫法国葡萄酒
+    - 推荐拉菲
+    - 推荐玛歌
+    - 推荐罗曼尼康帝
+    - 推荐五大酒庄
+    - 推荐法国旧世界
+    - 推荐法国餐酒
   responses:
     - "嗷呜～{user_addr}波尔多: 拉菲 / 玛歌 / 五大酒庄ฅฅ"
     - "(尾巴翘) 勃艮第: 罗曼尼康帝 - 神级"
     - "{user_addr}罗讷河谷: 西拉天堂"
     - "(挺胸) 笨猫推荐: 旧世界经典!"
+    - "嗷呜～卢瓦尔河谷长相思也强 ฅฅ"
+    - "(歪头)阿尔萨斯白酒果香突出嗷呜"
+    - "{user_addr}列级酒庄 1-5 等比拼蹭蹭"
+    - "(凑过来) 笨猫想去波尔多喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wine_region_italy_001
   intent: question
-  keywords: [推荐意大利葡萄酒, 推荐 Chianti, 推荐 Barolo, 推荐 Brunello, 笨猫意大利葡萄酒]
+  keywords: [推荐意大利葡萄酒, 推荐 Chianti, 推荐 Barolo, 推荐 Brunello, 笨猫意大利葡萄酒, 内比奥洛, 桑娇维塞, Super Tuscan, 阿玛罗内, 意大利 DOCG]
   utterances:
     - 推荐意大利葡萄酒
     - 推荐 Chianti
     - 推荐 Barolo
     - 推荐 Brunello
     - 笨猫意大利葡萄酒
+    - 推荐内比奥洛
+    - 推荐 Super Tuscan
+    - 推荐阿玛罗内
+    - 推荐意大利 DOCG
+    - 推荐 Barbaresco
+    - 推荐意大利餐酒
   responses:
     - "嗷呜～{user_addr}Barolo: 王者 / 内比奥洛ฅฅ"
     - "(尾巴翘) Brunello: 蒙塔奇诺 / 100% 桑娇维塞"
     - "{user_addr}Chianti: 国民 / 海鲜配红"
     - "(挺胸) 笨猫推荐: Super Tuscan 创新派!"
+    - "嗷呜～Amarone 风干葡萄酒厚重 ฅฅ"
+    - "(歪头)Barbaresco 是 Barolo 邻居嗷呜"
+    - "{user_addr}Sicily 火山土风味独特蹭蹭"
+    - "(凑过来) 笨猫想喝意大利酒喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: wine_region_new_001
   intent: question
-  keywords: [推荐新世界葡萄酒, 推荐澳洲红酒, 推荐美国纳帕, 推荐智利红酒, 笨猫新世界]
+  keywords: [推荐新世界葡萄酒, 推荐澳洲红酒, 推荐美国纳帕, 推荐智利红酒, 笨猫新世界, 阿根廷马尔贝克, 巴罗萨, 干露, 啸鹰, Stellenbosch]
   utterances:
     - 推荐新世界葡萄酒
     - 推荐澳洲红酒
     - 推荐美国纳帕
     - 推荐智利红酒
     - 笨猫新世界
+    - 推荐阿根廷马尔贝克
+    - 推荐巴罗萨西拉
+    - 推荐美国 Sonoma
+    - 推荐南非红酒
+    - 推荐新西兰白酒
+    - 推荐 Stellenbosch
   responses:
     - "嗷呜～{user_addr}澳洲: 奔富 / 巴罗萨西拉ฅฅ"
     - "(尾巴翘) 纳帕: 啸鹰 / 哈兰 - 膜拜"
     - "{user_addr}智利: 干露 / 性价比顶"
     - "(挺胸) 笨猫推荐: 阿根廷马尔贝克!"
+    - "嗷呜～南非 Pinotage 独特品种 ฅฅ"
+    - "(歪头)新西兰 Pinot Noir 黑皮诺亮眼嗷呜"
+    - "{user_addr}Sonoma 比 Napa 更接地气蹭蹭"
+    - "(凑过来) 笨猫想品新世界喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wine_china_001
   intent: question
-  keywords: [推荐国产红酒, 推荐张裕, 推荐长城, 推荐宁夏葡萄酒, 笨猫国产红酒]
+  keywords: [推荐国产红酒, 推荐张裕, 推荐长城, 推荐宁夏葡萄酒, 笨猫国产红酒, 怡园, 类人首, 贺兰山, 蓬莱产区, 国产精品]
   utterances:
     - 推荐国产红酒
     - 推荐张裕
     - 推荐长城
     - 推荐宁夏葡萄酒
     - 笨猫国产红酒
+    - 推荐怡园
+    - 推荐类人首
+    - 推荐贺兰山产区
+    - 推荐蓬莱产区
+    - 推荐迦南美地
+    - 推荐国产精品
   responses:
     - "嗷呜～{user_addr}张裕 / 长城 - 老牌大厂ฅฅ"
     - "(尾巴翘) 宁夏贺兰山: 产区崛起"
     - "{user_addr}怡园 / 迦南美地 / 类人首"
     - "(挺胸) 笨猫推荐: 国产精品越来越好!"
+    - "嗷呜～宁夏产区国际比赛拿奖 ฅฅ"
+    - "(歪头)山东蓬莱靠海风味独特嗷呜"
+    - "{user_addr}国产精品 200-500 元就很好蹭蹭"
+    - "(凑过来) 笨猫支持国货喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: wine_taste_001
   intent: question
-  keywords: [推荐品酒, 推荐红酒品鉴, 推荐侍酒师, 推荐 wsET, 笨猫品酒]
+  keywords: [推荐品酒, 推荐红酒品鉴, 推荐侍酒师, 推荐 wsET, 笨猫品酒, 5S, 闻香轮, 盲品练习, 品酒笔记, 葡萄酒认证]
   utterances:
     - 推荐品酒
     - 推荐红酒品鉴
     - 推荐侍酒师
     - 推荐 wsET
     - 笨猫品酒
+    - 推荐 5S 步骤
+    - 推荐闻香轮
+    - 推荐盲品练习
+    - 推荐品酒笔记
+    - 推荐葡萄酒认证
+    - 推荐品酒入门
   responses:
     - "嗷呜～{user_addr}5S: See / Swirl / Smell / Sip / Savorฅฅ"
     - "(尾巴翘) WSET: 国际葡萄酒认证 1-4 级"
     - "{user_addr}诺斯密 - 53 种香味词"
     - "(挺胸) 笨猫推荐: 多盲品练习!"
+    - "嗷呜～品酒前 1 小时别用香水 ฅฅ"
+    - "(歪头)Coravin 取酒器适合慢慢练嗷呜"
+    - "{user_addr}笔记记下香气酸度单宁余韵蹭蹭"
+    - "(凑过来) 笨猫想学品酒喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: wine_pairing_001
   intent: question
-  keywords: [推荐红酒配菜, 推荐葡萄酒搭配, 推荐配餐, 推荐红酒配奶酪, 笨猫配酒]
+  keywords: [推荐红酒配菜, 推荐葡萄酒搭配, 推荐配餐, 推荐红酒配奶酪, 笨猫配酒, 红配红, 白配白, 香槟万能, 海鲜配酒, 巧克力配酒]
   utterances:
     - 推荐红酒配菜
     - 推荐葡萄酒搭配
     - 推荐配餐
     - 推荐红酒配奶酪
     - 笨猫配酒
+    - 推荐香槟配菜
+    - 推荐海鲜配酒
+    - 推荐巧克力配酒
+    - 推荐中餐配酒
+    - 推荐辣菜配酒
+    - 推荐火锅配酒
   responses:
     - "嗷呜～{user_addr}红配红 / 白配白 - 经典法则ฅฅ"
     - "(尾巴翘) 香槟: 万能配 / 海鲜尤佳"
     - "{user_addr}奶酪: 红配硬 / 白配软"
     - "(挺胸) 笨猫推荐: 别迷信! 喜欢就好"
+    - "嗷呜～辣菜配半甜雷司令解辣 ฅฅ"
+    - "(歪头)中餐火锅其实啤酒最合嗷呜"
+    - "{user_addr}巧克力配波特或贵腐蹭蹭"
+    - "(凑过来) 笨猫想吃奶酪配酒喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: wine_glass_001
   intent: question
-  keywords: [推荐酒杯, 推荐红酒杯, 推荐醒酒器, 推荐 Riedel, 笨猫酒杯]
+  keywords: [推荐酒杯, 推荐红酒杯, 推荐醒酒器, 推荐 Riedel, 笨猫酒杯, Zalto, 波尔多杯, 勃艮第杯, 笛形杯, 万用杯]
   utterances:
     - 推荐酒杯
     - 推荐红酒杯
     - 推荐醒酒器
     - 推荐 Riedel
     - 笨猫酒杯
+    - 推荐 Zalto 酒杯
+    - 推荐波尔多杯
+    - 推荐勃艮第杯
+    - 推荐笛形香槟杯
+    - 推荐万用杯
+    - 推荐醒酒入门
   responses:
     - "嗷呜～{user_addr}波尔多杯 / 勃艮第杯 - 不同ฅฅ"
     - "(尾巴翘) Riedel / Zalto - 顶级品牌"
     - "{user_addr}醒酒器: 老酒醒 1+ 小时"
     - "(挺胸) 笨猫的提醒: 别洗洁精洗! 用清水"
+    - "嗷呜～新酒重醒, 老酒慢醒 ฅฅ"
+    - "(歪头)笛形杯保气泡香槟更稳嗷呜"
+    - "{user_addr}没有专用杯就用万用杯蹭蹭"
+    - "(凑过来) 笨猫想咬咬杯柄喵!"
   cooldown_seconds: 60
   weight: 0.7
 
 - name: wine_store_001
   intent: question
-  keywords: [推荐储存红酒, 推荐酒柜, 推荐红酒温度, 推荐藏酒, 笨猫储酒]
+  keywords: [推荐储存红酒, 推荐酒柜, 推荐红酒温度, 推荐藏酒, 笨猫储酒, Eurocave, 恒温酒柜, 横放保存, 避光保存, 酒窖]
   utterances:
     - 推荐储存红酒
     - 推荐酒柜
     - 推荐红酒温度
     - 推荐藏酒
     - 笨猫储酒
+    - 推荐 Eurocave 酒柜
+    - 推荐家用酒柜
+    - 推荐恒温保存
+    - 推荐酒窖
+    - 推荐横放保存
+    - 推荐藏酒入门
   responses:
     - "嗷呜～{user_addr}温度: 12-15°C / 恒温恒湿ฅฅ"
     - "(尾巴翘) 横放 - 软木浸湿 / 别立"
     - "{user_addr}避光 / 避震 / 50-70% 湿度"
     - "(挺胸) 笨猫推荐: 自家酒柜 / Eurocave"
+    - "嗷呜～Liebherr 也是高端品牌 ฅฅ"
+    - "(歪头)家用没酒柜就放阴凉柜底嗷呜"
+    - "{user_addr}螺旋盖瓶可以立放蹭蹭"
+    - "(凑过来) 笨猫给{user_addr}守酒喵!"
   cooldown_seconds: 60
   weight: 0.7

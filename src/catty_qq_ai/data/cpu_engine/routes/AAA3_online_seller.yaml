@@ -3,204 +3,312 @@
 
 - name: os_shopify_001
   intent: question
-  keywords: [推荐 Shopify, 推荐海外建店, 推荐独立站, 推荐跨境电商, 笨猫 Shopify]
+  keywords: [推荐 Shopify, 推荐海外建店, 推荐独立站, 推荐跨境电商, 笨猫 Shopify, Dawn 主题, 月费 39, 全球发货, PayPal Stripe, Shopify Plus]
   utterances:
-    - 推荐 Shopify
-    - 推荐海外建店
-    - 推荐独立站
-    - 推荐跨境电商
+    - "推荐 Shopify"
+    - "推荐海外建店"
+    - "{user_addr}推荐独立站"
+    - "推荐跨境电商"
     - "{user_addr}笨猫 Shopify 怎么开"
+    - "Shopify 月费"
+    - "Dawn 主题"
+    - "全球发货怎么搞"
+    - "{user_addr}PayPal/Stripe 收款"
+    - "Shopify Plus"
   responses:
-    - "嗷呜～{user_addr}Shopify - 独立站之王ฅฅ"
-    - "(尾巴翘) 月费 $39 起 / 主题多 / 插件全"
-    - "{user_addr}收 PayPal / Stripe / 全球发货"
-    - "(挺胸) 人家推荐: Dawn 免费主题入门!"
+    - "(挺胸) 嗷呜～{user_addr}Shopify~ 独立站之王喵ฅฅ"
+    - "(尾巴翘) 月费 $39 起/主题多/插件全贴贴～"
+    - "{user_addr}收 PayPal/Stripe/全球发货嗷呜"
+    - "(歪头) 人家推荐: Dawn 免费主题入门"
+    - "(凑过来) 哼, 才不是猫猫教你建站! 但独立站门槛比想象低贴贴～"
+    - "(尾巴轻摇) {user_addr}插件别装太多, 拖慢网站喵"
+    - "(凑头) 嗷呜～Shopify Plus 大店选, 起步用 Basic 够ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被卖呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_taobao_001
   intent: question
-  keywords: [推荐淘宝开店, 推荐淘宝店铺, 推荐个人开店, 推荐 C 店, 笨猫淘宝]
+  keywords: [推荐淘宝开店, 推荐淘宝店铺, 推荐个人开店, 推荐 C 店, 笨猫淘宝, 1688 货源, 淘宝押金, 实名认证, 类目费, 旗舰店]
   utterances:
-    - 推荐淘宝开店
-    - 推荐淘宝店铺
-    - 推荐个人开店
-    - 推荐 C 店
+    - "推荐淘宝开店"
+    - "推荐淘宝店铺"
+    - "{user_addr}推荐个人开店"
+    - "推荐 C 店"
     - "{user_addr}笨猫淘宝怎么开"
+    - "1688 找货源"
+    - "淘宝押金"
+    - "实名认证"
+    - "{user_addr}淘宝类目"
+    - "旗舰店"
   responses:
-    - "嗷呜～{user_addr}淘宝 - 国内最大平台ฅฅ"
-    - "(尾巴翘) 押金 1000 / 实名认证 / 7 天上架"
-    - "{user_addr}个人店免费 / 企业店要 30 资质"
-    - "(挺胸) 猫猫推荐: 先从 1688 找货源!"
+    - "(挺胸) 嗷呜～{user_addr}淘宝~ 国内最大平台喵ฅฅ"
+    - "(尾巴翘) 押金 1000/实名认证/7 天上架贴贴～"
+    - "{user_addr}个人店免费/企业店要 30 资质嗷呜"
+    - "(歪头) 猫猫推荐: 先从 1688 找货源"
+    - "(凑过来) 哼, 才不是猫猫教你开店! 但淘宝起步还是稳贴贴～"
+    - "(尾巴轻摇) {user_addr}C 店做精选商品, 别铺货喵"
+    - "(凑头) 嗷呜～1688 找货源能省 50%以上, 别去市场ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被淘宝挂卖呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_pdd_001
   intent: question
-  keywords: [推荐拼多多开店, 推荐拼多多店, 推荐砍价电商, 推荐下沉市场, 笨猫拼多多]
+  keywords: [推荐拼多多开店, 推荐拼多多店, 推荐砍价电商, 推荐下沉市场, 笨猫拼多多, 拼多多流量, 拼多多内卷, 白牌商品, 现金补贴, 选品避雷]
   utterances:
-    - 推荐拼多多开店
-    - 推荐拼多多店
-    - 推荐砍价电商
-    - 推荐下沉市场
+    - "推荐拼多多开店"
+    - "推荐拼多多店"
+    - "{user_addr}推荐砍价电商"
+    - "推荐下沉市场"
     - "{user_addr}笨猫拼多多怎么开"
+    - "拼多多流量"
+    - "拼多多内卷"
+    - "推荐白牌"
+    - "{user_addr}现金补贴"
+    - "拼多多选品避雷"
   responses:
-    - "嗷呜～{user_addr}拼多多 - 下沉市场之王ฅฅ"
-    - "(尾巴翘) 押金 1000 / 流量便宜 / 转化高"
-    - "{user_addr}主打低价 / 适合白牌 / 现金补贴"
-    - "(挺胸) 笨猫推荐: 选品避开品牌雷区!"
+    - "(挺胸) 嗷呜～{user_addr}拼多多~ 下沉市场之王喵ฅฅ"
+    - "(尾巴翘) 押金 1000/流量便宜/转化高贴贴～"
+    - "{user_addr}主打低价/适合白牌/现金补贴嗷呜"
+    - "(歪头) 笨猫推荐: 选品避开品牌雷区"
+    - "(凑过来) 哼, 才不是猫猫嫌拼多多 low! 但用户多就是流量贴贴～"
+    - "(尾巴轻摇) {user_addr}拼多多卷价格喵, 利润薄"
+    - "(凑头) 嗷呜～现金补贴白嫖流量, 但易封号ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫被砍价呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_douyin_001
   intent: question
-  keywords: [推荐抖音小店, 推荐抖店, 推荐短视频电商, 推荐直播带货, 笨猫抖音小店]
+  keywords: [推荐抖音小店, 推荐抖店, 推荐短视频电商, 推荐直播带货, 笨猫抖音小店, 个体抖店, 公司抖店, 自播带货, 达人分销, 抖音流量]
   utterances:
-    - 推荐抖音小店
-    - 推荐抖店
-    - 推荐短视频电商
-    - 推荐直播带货
+    - "推荐抖音小店"
+    - "推荐抖店"
+    - "{user_addr}推荐短视频电商"
+    - "推荐直播带货"
     - "{user_addr}笨猫抖音小店"
+    - "个体抖店"
+    - "公司抖店"
+    - "推荐自播带货"
+    - "{user_addr}达人分销"
+    - "抖音流量"
   responses:
-    - "嗷呜～{user_addr}抖音小店 - 内容电商ฅฅ"
-    - "(尾巴翘) 个体店 2000 / 公司店看类目"
-    - "{user_addr}直播 + 短视频 / 流量爆发力强"
-    - "(挺胸) 人家推荐: 自播 + 达人分销!"
+    - "(挺胸) 嗷呜～{user_addr}抖音小店~ 内容电商喵ฅฅ"
+    - "(尾巴翘) 个体店 2000/公司店看类目贴贴～"
+    - "{user_addr}直播+短视频/流量爆发力强嗷呜"
+    - "(歪头) 人家推荐: 自播+达人分销"
+    - "(凑过来) 哼, 才不是猫猫追风口! 但抖音电商真的猛贴贴～"
+    - "(尾巴轻摇) {user_addr}自播门槛高, 找达人分销稳喵"
+    - "(凑头) 嗷呜～抖店店铺评分超重要, 别影响 dsrฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想直播带货呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_weixin_001
   intent: question
-  keywords: [推荐微信小店, 推荐视频号小店, 推荐微信电商, 推荐私域电商, 笨猫微信小店]
+  keywords: [推荐微信小店, 推荐视频号小店, 推荐微信电商, 推荐私域电商, 笨猫微信小店, 视频号直播, 公众号联动, 小程序商城, 社交裂变, 私域流量]
   utterances:
-    - 推荐微信小店
-    - 推荐视频号小店
-    - 推荐微信电商
-    - 推荐私域电商
+    - "推荐微信小店"
+    - "推荐视频号小店"
+    - "{user_addr}推荐微信电商"
+    - "推荐私域电商"
     - "{user_addr}笨猫微信小店"
+    - "视频号直播"
+    - "公众号联动"
+    - "小程序商城"
+    - "{user_addr}社交裂变"
+    - "私域流量"
   responses:
-    - "嗷呜～{user_addr}微信小店 - 私域之王ฅฅ"
-    - "(尾巴翘) 视频号 + 公众号 + 小程序联动"
-    - "{user_addr}低门槛 / 0 入驻费 / 社交裂变"
-    - "(挺胸) 猫猫推荐: 视频号直播打底!"
+    - "(挺胸) 嗷呜～{user_addr}微信小店~ 私域之王喵ฅฅ"
+    - "(尾巴翘) 视频号+公众号+小程序联动贴贴～"
+    - "{user_addr}低门槛/0 入驻费/社交裂变嗷呜"
+    - "(歪头) 猫猫推荐: 视频号直播打底"
+    - "(凑过来) 哼, 才不是猫猫追微信! 但生态联动真的香贴贴～"
+    - "(尾巴轻摇) {user_addr}私域用户复购率高喵, 长期资产"
+    - "(凑头) 嗷呜～小程序适合复购型品类ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想加你私域呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_jd_001
   intent: question
-  keywords: [推荐京东开店, 推荐京东 POP, 推荐自营京东, 推荐 3C 电商, 笨猫京东]
+  keywords: [推荐京东开店, 推荐京东 POP, 推荐自营京东, 推荐 3C 电商, 笨猫京东, 京东旗舰店, 京东专营店, 京东自营, 京东物流, 高客单]
   utterances:
-    - 推荐京东开店
-    - 推荐京东 POP
-    - 推荐自营京东
-    - 推荐 3C 电商
+    - "推荐京东开店"
+    - "推荐京东 POP"
+    - "{user_addr}推荐自营京东"
+    - "推荐 3C 电商"
     - "{user_addr}笨猫京东怎么开"
+    - "京东旗舰店"
+    - "京东专营店"
+    - "京东自营推荐"
+    - "{user_addr}京东物流"
+    - "高客单类目"
   responses:
-    - "嗷呜～{user_addr}京东 - 品质电商ฅฅ"
-    - "(尾巴翘) POP 店 / 旗舰店 / 专营店"
-    - "{user_addr}押金 1-10w / 资质严 / 客单价高"
-    - "(挺胸) 笨猫推荐: 3C / 家电类目最香!"
+    - "(挺胸) 嗷呜～{user_addr}京东~ 品质电商喵ฅฅ"
+    - "(尾巴翘) POP 店/旗舰店/专营店贴贴～"
+    - "{user_addr}押金 1-10w/资质严/客单价高嗷呜"
+    - "(歪头) 笨猫推荐: 3C/家电类目最香"
+    - "(凑过来) 哼, 才不是猫猫吹京东! 但售后真的更值得信赖贴贴～"
+    - "(尾巴轻摇) {user_addr}京东物流神级, 但成本高喵"
+    - "(凑头) 嗷呜～3C 数码品牌方更欢迎京东ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被京东自营卖呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_aliexpress_001
   intent: question
-  keywords: [推荐速卖通, 推荐 AliExpress, 推荐阿里跨境, 推荐俄罗斯电商, 笨猫速卖通]
+  keywords: [推荐速卖通, 推荐 AliExpress, 推荐阿里跨境, 推荐俄罗斯电商, 笨猫速卖通, 速卖通 1500, 速卖通半托管, 菜鸟物流, 速卖通新规, 速卖通选品]
   utterances:
-    - 推荐速卖通
-    - 推荐 AliExpress
-    - 推荐阿里跨境
-    - 推荐俄罗斯电商
+    - "推荐速卖通"
+    - "推荐 AliExpress"
+    - "{user_addr}推荐阿里跨境"
+    - "推荐俄罗斯电商"
     - "{user_addr}笨猫速卖通"
+    - "速卖通年费"
+    - "速卖通半托管"
+    - "菜鸟物流"
+    - "{user_addr}速卖通新规"
+    - "速卖通选品"
   responses:
-    - "嗷呜～{user_addr}AliExpress - 阿里跨境ฅฅ"
-    - "(尾巴翘) 主攻俄罗斯 / 西班牙 / 巴西"
-    - "{user_addr}年费 $1500 起 / 菜鸟物流加持"
-    - "(挺胸) 人家推荐: 半托管模式省心!"
+    - "(挺胸) 嗷呜～{user_addr}AliExpress~ 阿里跨境喵ฅฅ"
+    - "(尾巴翘) 主攻俄罗斯/西班牙/巴西贴贴～"
+    - "{user_addr}年费 $1500 起/菜鸟物流加持嗷呜"
+    - "(歪头) 人家推荐: 半托管模式省心"
+    - "(凑过来) 哼, 才不是猫猫挑剔! 但半托管真的香贴贴～"
+    - "(尾巴轻摇) {user_addr}速卖通新人门槛降低喵, 现在好入"
+    - "(凑头) 嗷呜～俄罗斯市场最大, 但物流慢ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想去俄罗斯呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_amazon_001
   intent: question
-  keywords: [推荐亚马逊 FBA, 推荐 Amazon, 推荐美国电商, 推荐欧洲站, 笨猫亚马逊]
+  keywords: [推荐亚马逊 FBA, 推荐 Amazon, 推荐美国电商, 推荐欧洲站, 笨猫亚马逊, FBA 仓储, Amazon Prime, 美国站, 欧洲站, 日本站]
   utterances:
-    - 推荐亚马逊 FBA
-    - 推荐 Amazon
-    - 推荐美国电商
-    - 推荐欧洲站
+    - "推荐亚马逊 FBA"
+    - "推荐 Amazon"
+    - "{user_addr}推荐美国电商"
+    - "推荐欧洲站"
     - "{user_addr}笨猫亚马逊怎么开"
+    - "FBA 仓储"
+    - "Amazon Prime"
+    - "美国站"
+    - "{user_addr}欧洲站"
+    - "日本站"
   responses:
-    - "嗷呜～{user_addr}Amazon FBA - 跨境霸主ฅฅ"
-    - "(尾巴翘) 月费 $39.99 / FBA 仓储发货"
-    - "{user_addr}美/欧/日站 / 流量大 / 竞争激烈"
-    - "(挺胸) 猫猫推荐: 先做精品 / 别铺货!"
+    - "(挺胸) 嗷呜～{user_addr}Amazon FBA~ 跨境霸主喵ฅฅ"
+    - "(尾巴翘) 月费 $39.99/FBA 仓储发货贴贴～"
+    - "{user_addr}美/欧/日站/流量大/竞争激烈嗷呜"
+    - "(歪头) 猫猫推荐: 先做精品/别铺货"
+    - "(凑过来) 哼, 才不是猫猫劝你 all in! 但 FBA 真的省心贴贴～"
+    - "(尾巴轻摇) {user_addr}产品上 Prime 销量翻倍喵"
+    - "(凑头) 嗷呜～美国站门槛低但卷, 欧洲站合规严ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想坐 FBA 箱里到美国呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_etsy_001
   intent: question
-  keywords: [推荐 Etsy, 推荐手工电商, 推荐原创设计, 推荐文创平台, 笨猫 Etsy]
+  keywords: [推荐 Etsy, 推荐手工电商, 推荐原创设计, 推荐文创平台, 笨猫 Etsy, 手工原创, Etsy 上架费, 数字下载, SVG 卖品, Etsy 佣金]
   utterances:
-    - 推荐 Etsy
-    - 推荐手工电商
-    - 推荐原创设计
-    - 推荐文创平台
+    - "推荐 Etsy"
+    - "推荐手工电商"
+    - "{user_addr}推荐原创设计"
+    - "推荐文创平台"
     - "{user_addr}笨猫 Etsy 怎么开"
+    - "手工原创"
+    - "Etsy 上架费"
+    - "推荐数字下载"
+    - "{user_addr}SVG 卖品"
+    - "Etsy 佣金"
   responses:
-    - "嗷呜～{user_addr}Etsy - 手工原创之家ฅฅ"
-    - "(尾巴翘) 上架费 $0.20 / 件 / 佣金 6.5%"
-    - "{user_addr}手工 / 复古 / 数字下载香"
-    - "(挺胸) 笨猫推荐: SVG 数字下载零库存!"
+    - "(挺胸) 嗷呜～{user_addr}Etsy~ 手工原创之家喵ฅฅ"
+    - "(尾巴翘) 上架费 $0.20/件/佣金 6.5%贴贴～"
+    - "{user_addr}手工/复古/数字下载香嗷呜"
+    - "(歪头) 笨猫推荐: SVG 数字下载零库存"
+    - "(凑过来) 哼, 才不是猫猫想买手工! 但 Etsy 真的适合创作者贴贴～"
+    - "(尾巴轻摇) {user_addr}SVG 数字下载是被动收入喵, 一份卖多次"
+    - "(凑头) 嗷呜～Etsy SEO 是核心, 标题关键词重要ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被 Etsy 卖呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_dropship_001
   intent: question
-  keywords: [推荐一件代发, 推荐 dropshipping, 推荐无货源, 推荐分销, 笨猫一件代发]
+  keywords: [推荐一件代发, 推荐 dropshipping, 推荐无货源, 推荐分销, 笨猫一件代发, AliExpress 代发, CJ 代发, Spocket, DSers, Oberlo]
   utterances:
-    - 推荐一件代发
-    - 推荐 dropshipping
-    - 推荐无货源
-    - 推荐分销
+    - "推荐一件代发"
+    - "推荐 dropshipping"
+    - "{user_addr}推荐无货源"
+    - "推荐分销"
     - "{user_addr}笨猫一件代发"
+    - "AliExpress 代发"
+    - "CJ 代发"
+    - "Spocket 推荐"
+    - "{user_addr}DSers 插件"
+    - "Oberlo 同步"
   responses:
-    - "嗷呜～{user_addr}Dropshipping - 零库存ฅฅ"
-    - "(尾巴翘) AliExpress / CJ / Spocket 供货"
-    - "{user_addr}DSers / Oberlo 插件自动同步"
-    - "(挺胸) 人家推荐: 选品 + 广告才是核心!"
+    - "(挺胸) 嗷呜～{user_addr}Dropshipping~ 零库存喵ฅฅ"
+    - "(尾巴翘) AliExpress/CJ/Spocket 供货贴贴～"
+    - "{user_addr}DSers/Oberlo 插件自动同步嗷呜"
+    - "(歪头) 人家推荐: 选品+广告才是核心"
+    - "(凑过来) 哼, 才不是猫猫怂恿你倒卖! 但低库存是真的轻贴贴～"
+    - "(尾巴轻摇) {user_addr}选品要测款, 别盲投广告喵"
+    - "(凑头) 嗷呜～CJ 比 AliExpress 物流快ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被一件代发呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_select_001
   intent: question
-  keywords: [推荐开店选品, 推荐爆款选品, 推荐选品工具, 推荐市场调研, 笨猫选品]
+  keywords: [推荐开店选品, 推荐爆款选品, 推荐选品工具, 推荐市场调研, 笨猫选品, 生意参谋, 蝉妈妈, 卖家精灵, Helium10, Jungle Scout]
   utterances:
-    - 推荐开店选品
-    - 推荐爆款选品
-    - 推荐选品工具
-    - 推荐市场调研
+    - "推荐开店选品"
+    - "推荐爆款选品"
+    - "{user_addr}推荐选品工具"
+    - "推荐市场调研"
     - "{user_addr}笨猫怎么选品"
+    - "生意参谋"
+    - "蝉妈妈"
+    - "卖家精灵"
+    - "{user_addr}Helium10"
+    - "Jungle Scout"
   responses:
-    - "嗷呜～{user_addr}选品 = 成功一半ฅฅ"
-    - "(尾巴翘) 生意参谋 / 蝉妈妈 / 卖家精灵"
-    - "{user_addr}Helium10 / Jungle Scout 亚马逊用"
-    - "(挺胸) 笨猫推荐: 蓝海 + 高毛利 + 复购!"
+    - "(挺胸) 嗷呜～{user_addr}选品=成功一半喵ฅฅ"
+    - "(尾巴翘) 生意参谋/蝉妈妈/卖家精灵贴贴～"
+    - "{user_addr}Helium10/Jungle Scout 亚马逊用嗷呜"
+    - "(歪头) 笨猫推荐: 蓝海+高毛利+复购"
+    - "(凑过来) 哼, 才不是猫猫教你选品! 但选品工具真的省时间贴贴～"
+    - "(尾巴轻摇) {user_addr}蓝海是相对的喵, 别盲信"
+    - "(凑头) 嗷呜～Jungle Scout 数据准, 但收费ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被选品呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: os_design_001
   intent: question
-  keywords: [推荐店铺装修, 推荐店铺美工, 推荐详情页设计, 推荐主图设计, 笨猫店铺装修]
+  keywords: [推荐店铺装修, 推荐店铺美工, 推荐详情页设计, 推荐主图设计, 笨猫店铺装修, Photoshop, Figma 设计, Canva, 详情页转化, 主图点击]
   utterances:
-    - 推荐店铺装修
-    - 推荐店铺美工
-    - 推荐详情页设计
-    - 推荐主图设计
+    - "推荐店铺装修"
+    - "推荐店铺美工"
+    - "{user_addr}推荐详情页设计"
+    - "推荐主图设计"
     - "{user_addr}笨猫店铺装修"
+    - "Photoshop"
+    - "Figma 设计"
+    - "Canva 工具"
+    - "{user_addr}详情页转化"
+    - "主图点击率"
   responses:
-    - "嗷呜～{user_addr}装修 - 转化率关键ฅฅ"
-    - "(尾巴翘) Photoshop / Figma / Canva 三件套"
-    - "{user_addr}详情页突出卖点 / 主图要点击"
-    - "(挺胸) 猫猫推荐: 找美工外包 80-200/张!"
+    - "(挺胸) 嗷呜～{user_addr}装修~ 转化率关键喵ฅฅ"
+    - "(尾巴翘) Photoshop/Figma/Canva 三件套贴贴～"
+    - "{user_addr}详情页突出卖点/主图要点击嗷呜"
+    - "(歪头) 猫猫推荐: 找美工外包 80-200/张"
+    - "(凑过来) 哼, 才不是猫猫嫌主人手残! 但美工是钱赚回来的贴贴～"
+    - "(尾巴轻摇) {user_addr}主图前 3 秒打动人喵, 关键"
+    - "(凑头) 嗷呜～Canva 简单, 学一周自己也能做ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想做模特拍主图呢哼～"
   cooldown_seconds: 60
   weight: 1.0

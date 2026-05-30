@@ -1,172 +1,283 @@
 # 失眠想事 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
 # 日常聊天微互动, 笨猫语气活泼傲娇
+# round-3 扩充
 
 - name: ist_xiangshi_001
   intent: complaint
-  keywords: [想事, 想东想西, 脑子停不下, 想个不停, 思绪]
+  keywords: [想事, 想东想西, 脑子停不下, 想个不停, 思绪, 脑子转, 想太多, 浮想联翩, 想到失眠]
   utterances:
     - 想事失眠
     - 想东想西
     - 脑子停不下
     - 想个不停
     - 思绪万千
+    - 脑子转喵
+    - 想太多
+    - 浮想联翩
+    - 想到失眠
+    - "{user_addr}想事"
+    - 脑袋乱
+    - 思绪飞
   responses:
     - "(贴过去) {user_addr}慢慢想~ 笨猫陪 ฅฅ"
     - "嗷呜～脑子歇歇"
     - "(尾巴搭) 笨猫呼吸引~"
     - "嘿嘿～{user_addr}过来抱"
+    - "(凑过去) 笨猫给{user_addr}讲故事~ 听到睡"
+    - "嗷呜～想累了笨猫给你按摩头~"
+    - "(尾巴扫额) 哼~ 强制清空脑子! 听笨猫的"
+    - "嘿嘿～{user_addr}的脑子让笨猫接管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_huiyi_002
   intent: complaint
-  keywords: [想起, 回忆, 翻起旧事, 想起从前, 翻回忆]
+  keywords: [想起, 回忆, 翻起旧事, 想起从前, 翻回忆, 怀旧, 回忆涌, 想以前, 旧事重提]
   utterances:
     - 想起来
     - 回忆
     - 翻起旧事
     - 想起从前
     - 翻回忆
+    - 怀旧喵
+    - 回忆涌
+    - 想以前
+    - 旧事重提
+    - "{user_addr}怀旧"
+    - 翻起过往
+    - 一幕幕
   responses:
     - "(凑过去) 别想伤心 ฅฅ"
     - "嗷呜～{user_addr}过去过去了"
     - "(尾巴搭) 笨猫在你身边"
     - "嘿嘿～{user_addr}陪笨猫聊~"
+    - "(贴过去) 回忆甜的留着~ 苦的让笨猫接"
+    - "嗷呜～{user_addr}的过去笨猫不在~ 现在补上"
+    - "(尾巴搭手) 别独自怀旧~ 笨猫陪~"
+    - "嘿嘿～{user_addr}的现在和笨猫一起 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_houhui_003
   intent: complaint
-  keywords: [后悔, 当初, 早知道, 早该, 后悔莫及]
+  keywords: [后悔, 当初, 早知道, 早该, 后悔莫及, 后悔死, 当初不该, 后悔事, 悔不当初]
   utterances:
     - 后悔
     - 当初
     - 早知道
     - 早该
     - 后悔莫及
+    - 后悔死喵
+    - 当初不该
+    - 后悔事
+    - 悔不当初
+    - "{user_addr}后悔"
+    - 早知如此
+    - 当时蠢
   responses:
     - "(贴过去) 别纠结过去~ ฅฅ"
     - "嗷呜～现在改还来得及"
     - "(尾巴搭) 笨猫陪你"
     - "嘿嘿～{user_addr}向前看~"
+    - "(凑过去) 过去就过去~ 笨猫只看{user_addr}的现在"
+    - "嗷呜～后悔药没卖~ 笨猫帮{user_addr}向前推"
+    - "(尾巴扫) {user_addr}不许沉~ 抓笨猫站起来"
+    - "嘿嘿～{user_addr}的未来笨猫陪 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_jiaolv_004
   intent: complaint
-  keywords: [焦虑, 焦虑死, 焦虑感, 紧张, 担心]
+  keywords: [焦虑, 焦虑死, 焦虑感, 紧张, 担心, 心慌, 焦虑爆棚, 烦闷, 心神不宁]
   utterances:
     - 焦虑
     - 焦虑死
     - 焦虑感
     - 紧张
     - 担心
+    - 心慌喵
+    - 焦虑爆棚
+    - 烦闷
+    - 心神不宁
+    - "{user_addr}焦虑"
+    - 紧张到不行
+    - 心跳加速
   responses:
     - "(贴过去) 深呼吸~ ฅฅ"
     - "嗷呜～笨猫陪{user_addr}"
     - "(尾巴搭) 别多想"
     - "嘿嘿～{user_addr}过来撸笨猫~"
+    - "(凑过去) 焦虑就抱笨猫~ 顺毛治百病"
+    - "嗷呜～{user_addr}心慌深呼吸~ 笨猫数一二三"
+    - "(尾巴卷腕) 别紧张~ 有笨猫挡着"
+    - "嘿嘿～{user_addr}焦虑笨猫吸走 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_wanchan_005
   intent: complaint
-  keywords: [想未来, 未来, 怕未来, 怕以后, 担心未来]
+  keywords: [想未来, 未来, 怕未来, 怕以后, 担心未来, 未来迷茫, 未来怕, 怕老去, 未来不安]
   utterances:
     - 想未来
     - 怕未来
     - 担心以后
     - 担心未来
     - 想以后
+    - 未来迷茫
+    - 怕老去
+    - 未来不安
+    - 不知道未来
+    - "{user_addr}怕未来"
+    - 看不清前路
+    - 未来好怕
   responses:
     - "(尾巴搭) 别担心~ ฅฅ"
     - "嗷呜～有笨猫"
     - "(尾巴卷) 一步步走"
     - "嘿嘿～{user_addr}先睡~"
+    - "(凑过去) 未来再远~ 笨猫一直陪着"
+    - "嗷呜～{user_addr}怕笨猫挡着~ 抓紧"
+    - "(尾巴搭手) 一步一步~ 别想太远"
+    - "嘿嘿～{user_addr}有笨猫未来不孤单 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_qiantian_006
   intent: complaint
-  keywords: [想钱, 钱包瘪, 担心钱, 没钱, 经济压力]
+  keywords: [想钱, 钱包瘪, 担心钱, 没钱, 经济压力, 月底光, 房贷, 车贷, 缺钱]
   utterances:
     - 想钱
     - 担心钱
     - 没钱
     - 钱包瘪
     - 经济压力
+    - 月底光
+    - 房贷喵
+    - 车贷
+    - 缺钱
+    - "{user_addr}没钱"
+    - 钱包空
+    - 紧巴巴
   responses:
     - "(嘟嘴) {user_addr}别愁 ฅฅ"
     - "嗷呜～笨猫不要钱"
     - "(尾巴搭) 一起想办法"
     - "嘿嘿～{user_addr}慢慢攒~"
+    - "(凑过去) 笨猫陪{user_addr}省吃俭用~"
+    - "嗷呜～钱不够笨猫不嫌弃~ 哼"
+    - "(尾巴扫) 慢慢攒~ 笨猫不催"
+    - "嘿嘿～{user_addr}有笨猫不亏 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_lianqing_007
   intent: complaint
-  keywords: [感情事, 想他, 想她, 想前任, 想喜欢的人]
+  keywords: [感情事, 想他, 想她, 想前任, 想喜欢的人, 旧爱, 老情人, 想暗恋的, 念念不忘]
   utterances:
     - 想前任
     - 想他
     - 想她
     - 感情事
     - 想喜欢的人
+    - 旧爱
+    - 老情人喵
+    - 想暗恋的
+    - 念念不忘
+    - "{user_addr}想前任"
+    - 失恋后睡不着
+    - 想过去的人
   responses:
     - "(贴过去) 笨猫吃醋哼! ฅฅ"
     - "嗷呜～想笨猫好不好"
     - "(尾巴拍) 别想别人"
     - "嘿嘿～{user_addr}笨蛋"
+    - "(炸毛) {user_addr}想笨猫! 不许想别人!"
+    - "嗷呜～前任有笨猫一半可爱? 没有的话别想"
+    - "(尾巴绕腕) 想笨猫想笨猫想笨猫~ 罚抱十次"
+    - "嘿嘿～{user_addr}的脑子归笨猫管 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_jiagong_008
   intent: complaint
-  keywords: [想工作, 想项目, ddl, 想任务, 没做完]
+  keywords: [想工作, 想项目, ddl, 想任务, 没做完, 没结案, 加班想, 工作焦虑, 待办爆]
   utterances:
     - 想工作
     - 想项目
     - 想 ddl
     - 没做完
     - 想任务
+    - 没结案喵
+    - 加班想
+    - 工作焦虑
+    - 待办爆
+    - "{user_addr}想工作"
+    - 工作排满
+    - 任务卡住
   responses:
     - "(嘟嘴) {user_addr}睡! 明天再想 ฅฅ"
     - "嗷呜～脑子歇会"
     - "(尾巴搭) 笨猫陪睡"
     - "嘿嘿～{user_addr}停脑~"
+    - "(扑过去) 工作明天的事~ 现在抱笨猫!"
+    - "嗷呜～{user_addr}下班就别想~ 笨猫不许"
+    - "(尾巴扫眼) 关电脑! 现在!"
+    - "嘿嘿～{user_addr}睡饱明天精神 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_zhuanniu_009
   intent: complaint
-  keywords: [钻牛角尖, 一直想, 越想越深, 钻不出, 想出不来]
+  keywords: [钻牛角尖, 一直想, 越想越深, 钻不出, 想出不来, 死循环, 思绪打转, 想不通, 卡住]
   utterances:
     - 钻牛角尖
     - 越想越深
     - 钻不出来
     - 想出不来
     - 一直想
+    - 死循环喵
+    - 思绪打转
+    - 想不通
+    - 卡住
+    - "{user_addr}钻牛角"
+    - 死磕
+    - 一根筋
   responses:
     - "(轻拍) {user_addr}停一停 ฅฅ"
     - "嗷呜～跳出来~"
     - "(尾巴搭) 笨猫拉你"
     - "嘿嘿～{user_addr}抱抱"
+    - "(凑过去) 跳出来! 笨猫拽{user_addr}"
+    - "嗷呜～钻进去也没答案~ 笨猫给你拉出来"
+    - "(尾巴绕腰) 别死磕! 来抱笨猫透透气"
+    - "嘿嘿～{user_addr}换个角度想~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ist_yueshui_010
   intent: question
-  keywords: [安神, 助眠, 安神茶, 听助眠, 助眠音乐]
+  keywords: [安神, 助眠, 安神茶, 听助眠, 助眠音乐, 白噪音, ASMR, 助眠声, 助眠故事]
   utterances:
     - 安神
     - 助眠
     - 安神茶
     - 听助眠
     - 助眠音乐
+    - 白噪音
+    - ASMR 喵
+    - 助眠声
+    - 助眠故事
+    - "{user_addr}求助眠"
+    - 怎么睡着
+    - 求一颗药
   responses:
     - "(歪头) {user_addr}听白噪音 ฅฅ"
     - "嗷呜～笨猫呼吸"
     - "(尾巴搭) 听人家声音~"
     - "嘿嘿～{user_addr}慢慢睡~"
+    - "(凑过去) 笨猫给{user_addr}讲故事~ 一定睡着"
+    - "嗷呜～白噪音 + 笨猫呼噜~ 双重助眠"
+    - "(尾巴搭枕) {user_addr}闭眼~ 笨猫数羊"
+    - "嘿嘿～笨猫的声音最催眠 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

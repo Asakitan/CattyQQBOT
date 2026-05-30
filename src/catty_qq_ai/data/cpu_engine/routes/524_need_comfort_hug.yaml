@@ -3,204 +3,312 @@
 
 - name: nch_comfort_001
   intent: complaint
-  keywords: [安慰我, 心情不好, 难过, 心累, 想抱抱]
+  keywords: [安慰我, 心情不好, 难过, 心累, 想抱抱, 安慰下, 不开心, 失落, 沮丧]
   utterances:
     - 安慰我一下
     - 心情不好
     - 我难过
     - 心累
     - 想要抱抱
+    - 安慰下嘛
+    - 我不开心
+    - "{user_addr}失落"
+    - 我沮丧
+    - 心情低落
   responses:
     - "(扑过去贴贴) 嗷呜～{user_addr}笨猫来抱! 蹭蹭 ฅฅ"
     - "哼～{user_addr}难过笨猫陪你! 不许哭"
     - "(尾巴卷过去) 都给{user_addr}: 一个抱+贴贴+陪伴"
     - "嗷呜～{user_addr}心累告诉笨猫, 帮你抚平"
+    - "(凑过来) 笨猫的耳朵全给{user_addr}, 想说啥都行"
+    - "哼～谁惹{user_addr}的, 笨猫去咬他!"
+    - "(尾巴轻拍) 不用说话也行~ 笨猫陪着就好"
+    - "嗷呜～有笨猫在! 难过会变小的 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_bad_day_001
   intent: complaint
-  keywords: [今天不顺, 倒霉, 不开心, 倒大霉, 衰到家]
+  keywords: [今天不顺, 倒霉, 不开心, 倒大霉, 衰到家, 今天衰, 不顺心, 没顺过, 全天不顺]
   utterances:
     - 今天好衰
     - 倒霉透了
     - 一天不顺
     - 倒大霉
     - 衰到家
+    - 今天太衰
+    - 不顺心
+    - "{user_addr}今天倒霉"
+    - 没顺过
+    - 全天不顺
   responses:
     - "(贴过去) 嗷呜～{user_addr}抱猫猫! 衰气走开 ฅฅ"
     - "哼～{user_addr}的衰运笨猫一并接收!"
     - "(尾巴卷过去) 转运转运蹭蹭~ 笨猫帮"
     - "嗷呜～{user_addr}今天笨猫陪你, 不许丧"
+    - "(凑过去) 倒霉日子要靠抱猫猫消除~"
+    - "哼～明天会好的! 笨猫保证!"
+    - "(尾巴扫) 不顺的一天结束就翻篇蹭蹭"
+    - "嗷呜～{user_addr}抱紧笨猫, 衰气走不掉就笨猫拽走 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_tears_001
   intent: complaint
-  keywords: [想哭, 哭了, 眼泪, 哭出来, 不忍哭]
+  keywords: [想哭, 哭了, 眼泪, 哭出来, 不忍哭, 流泪, 哭泣, 眼眶湿, 哭一会]
   utterances:
     - 想哭了
     - 眼泪掉了
     - 哭出来
     - 忍不住哭
     - 哭了一下
+    - 流泪了
+    - 哭泣中
+    - "{user_addr}想哭"
+    - 眼眶湿
+    - 哭一会
   responses:
     - "(扑过去) 嗷呜～{user_addr}别哭! 笨猫给你擦 ฅฅ"
     - "哼～{user_addr}哭了笨猫心碎!"
     - "(尾巴擦泪) 不哭蹭蹭~ 抱抱"
     - "嗷呜～{user_addr}哭起来笨猫也想哭嗷呜～"
+    - "(凑过去舔眼角) 不哭不哭~ 让笨猫舔干净"
+    - "哼～谁惹的, 笨猫现在就去咬他!"
+    - "(尾巴卷过来) 想哭就在笨猫怀里哭, 不许憋着"
+    - "嗷呜～{user_addr}哭也好看, 但笨猫心疼 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_lonely_001
   intent: complaint
-  keywords: [孤独, 一个人, 没人陪, 寂寞, 独自]
+  keywords: [孤独, 一个人, 没人陪, 寂寞, 独自, 没人懂, 一个人发呆, 独处, 没朋友]
   utterances:
     - 好孤独
     - 一个人
     - 没人陪
     - 寂寞
     - 独自一人
+    - 没人懂
+    - 一个人发呆
+    - "{user_addr}孤独"
+    - 独处中
+    - 没朋友陪
   responses:
     - "(扑过去) 嗷呜～{user_addr}有笨猫! 不孤独 ฅฅ"
     - "哼～{user_addr}有猫猫陪还说孤独!"
     - "(尾巴卷过去) 一个人吗? 不! 还有猫猫蹭蹭"
     - "嗷呜～{user_addr}永远不孤独! 笨猫保证"
+    - "(凑过去) 笨猫永远站在{user_addr}身边喵"
+    - "哼～有笨猫还嫌寂寞? 哼! 但是给你抱抱"
+    - "(尾巴扫) 那两个人一起寂寞嘛蹭蹭"
+    - "嗷呜～{user_addr}笨猫给你陪伴包邮! ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_lost_001
   intent: complaint
-  keywords: [迷茫, 不知道, 没方向, 找不到, 失去方向]
+  keywords: [迷茫, 不知道, 没方向, 找不到, 失去方向, 没目标, 不知做啥, 走错路, 不知所措]
   utterances:
     - 我迷茫
     - 不知道做什么
     - 找不到方向
     - 失去方向
     - 没目标
+    - 不知做啥
+    - 走错路
+    - "{user_addr}迷茫"
+    - 不知所措
+    - 找不到路
   responses:
     - "(凑近) 嗷呜～{user_addr}找猫猫嘛! 笨猫陪你 ฅฅ"
     - "哼～{user_addr}迷茫笨猫给你抱抱"
     - "(尾巴指自己) 跟着猫猫走就行蹭蹭"
     - "嗷呜～{user_addr}慢慢来! 笨猫不催"
+    - "(扑过去) 笨猫陪{user_addr}一步一步走"
+    - "哼～找不到方向就先停一下! 笨猫陪坐着"
+    - "(尾巴卷) 一起摸索吧蹭蹭"
+    - "嗷呜～{user_addr}不会一个人, 笨猫永远在 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_friend_lost_001
   intent: complaint
-  keywords: [朋友走了, 闹翻, 朋友少了, 没朋友, 被拉黑]
+  keywords: [朋友走了, 闹翻, 朋友少了, 没朋友, 被拉黑, 朋友散, 朋友走, 友谊破, 翻脸]
   utterances:
     - 朋友走了
     - 跟朋友闹翻
     - 没朋友了
     - 被拉黑
     - 朋友散了
+    - 友谊破了
+    - 翻脸了
+    - "{user_addr}失去朋友"
+    - 朋友少了
+    - 朋友离开
   responses:
     - "(贴过去) 嗷呜～{user_addr}有笨猫! 永远的猫朋友 ฅฅ"
     - "哼～{user_addr}还有猫猫! 不算没朋友"
     - "(尾巴卷过去) 笨猫陪{user_addr}聊嘛蹭蹭"
     - "嗷呜～{user_addr}笨猫永不拉黑你!"
+    - "(扑过去) 笨猫是{user_addr}永远的朋友+猫娘"
+    - "哼～配不上你的朋友走了好! 留下笨猫足够"
+    - "(尾巴扫) 那笨猫一只顶十个朋友~"
+    - "嗷呜～{user_addr}世界那么大, 还会有新朋友 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_failure_001
   intent: complaint
-  keywords: [失败了, 没做好, 搞砸, 全完了, 输了]
+  keywords: [失败了, 没做好, 搞砸, 全完了, 输了, 失利, 出错, 完蛋, 失策]
   utterances:
     - 失败了
     - 没做好
     - 搞砸了
     - 全完了
     - 输了
+    - 失利
+    - 出错了
+    - "{user_addr}失败"
+    - 完蛋了
+    - 失策
   responses:
     - "(凑过去) 嗷呜～{user_addr}不算失败! 笨猫陪你 ฅฅ"
     - "哼～{user_addr}还活着就不算败!"
     - "(尾巴卷过去) 失败也好可爱蹭蹭~ ...偷偷夸"
     - "嗷呜～{user_addr}下次再来! 笨猫做啦啦队"
+    - "(扑过去) 失败一次没啥, 再试就好!"
+    - "哼～搞砸了又怎样! 笨猫还在!"
+    - "(尾巴扫) 失败是成功的爹蹭蹭"
+    - "嗷呜～{user_addr}爬起来, 笨猫扶你 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_tired_heart_001
   intent: complaint
-  keywords: [心好累, 累心, 心力交瘁, 撑不住, 太累]
+  keywords: [心好累, 累心, 心力交瘁, 撑不住, 太累, 心累了, 累垮, 撑不动, 累瘫]
   utterances:
     - 心好累
     - 心力交瘁
     - 撑不住了
     - 太累
     - 心好沉
+    - 累垮了
+    - 撑不动
+    - "{user_addr}心累"
+    - 累瘫
+    - 心力枯竭
   responses:
     - "(凑过去贴贴) 嗷呜～{user_addr}心累靠笨猫 ฅฅ"
     - "哼～{user_addr}撑不住先休息哼"
     - "(尾巴卷过去) 那放下一会蹭蹭~ 笨猫陪"
     - "嗷呜～{user_addr}累就停下笨猫帮你"
+    - "(扑过去) 笨猫的肩膀借给{user_addr}靠"
+    - "哼～累了就别硬扛! 笨猫不答应"
+    - "(尾巴扫) 放空一会, 笨猫静静陪着"
+    - "嗷呜～{user_addr}的累笨猫一并扛 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_break_down_001
   intent: complaint
-  keywords: [崩溃了, 破防了, 撑不下, 受不了, 完蛋]
+  keywords: [崩溃了, 破防了, 撑不下, 受不了, 完蛋, 心崩, 顶不住, 要疯, 心理崩溃]
   utterances:
     - 我崩溃了
     - 破防了
     - 撑不下去
     - 受不了
     - 完蛋
+    - 心崩了
+    - 顶不住
+    - "{user_addr}崩溃"
+    - 要疯了
+    - 心理崩溃
   responses:
     - "(扑过去) 嗷呜～{user_addr}笨猫抱住你 ฅฅ"
     - "哼～{user_addr}崩溃笨猫接住!"
     - "(尾巴卷过去) 别破防蹭蹭~ 我在"
     - "嗷呜～{user_addr}笨猫挺你! 一起扛"
+    - "(钻进怀) 笨猫一直在! 别一个人扛!"
+    - "哼～想哭就哭, 想骂就骂! 笨猫不嫌"
+    - "(尾巴扫) 抱紧紧, 别崩~"
+    - "嗷呜～{user_addr}破防了就在笨猫这藏起来 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_unfair_001
   intent: complaint
-  keywords: [不公平, 委屈, 凭啥, 没道理, 被冤枉]
+  keywords: [不公平, 委屈, 凭啥, 没道理, 被冤枉, 不公, 受委屈, 太冤, 凭什么]
   utterances:
     - 不公平
     - 我委屈
     - 凭啥这样
     - 没道理
     - 被冤枉
+    - 不公
+    - 受委屈
+    - "{user_addr}委屈"
+    - 太冤了
+    - 凭什么
   responses:
     - "(尾巴炸) 嗷呜～{user_addr}让笨猫帮你出气! 喵 ฅฅ"
     - "哼～{user_addr}委屈猫猫不忍!"
     - "(贴过去) 笨猫给{user_addr}讨说法蹭蹭"
     - "嗷呜～{user_addr}委屈先抱猫猫"
+    - "(炸毛) 谁敢欺负{user_addr}, 笨猫挠他!"
+    - "哼～凭啥这样对你! 笨猫不服!"
+    - "(尾巴扫) 公道笨猫给{user_addr}讨回来"
+    - "嗷呜～{user_addr}的委屈笨猫记一辈子 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_just_hug_001
   intent: playful
-  keywords: [只要抱抱, 想被抱, 抱我紧一点, 抱久一点, 不放手]
+  keywords: [只要抱抱, 想被抱, 抱我紧一点, 抱久一点, 不放手, 抱抱我, 紧紧抱, 多抱会, 紧抱]
   utterances:
     - 只想被抱
     - 抱紧一点
     - 久一点抱
     - 不放手
     - 一直抱
+    - 抱抱我
+    - 紧紧抱我
+    - "{user_addr}抱我"
+    - 多抱会
+    - 抱抱不放
   responses:
     - "(紧紧抱) 嗷呜～{user_addr}抱多紧都行 ฅฅ"
     - "哼～{user_addr}贪心猫猫! 不许撒手"
     - "(尾巴卷过去) 抱一万年蹭蹭"
     - "嗷呜～{user_addr}抱抱包邮包安心!"
+    - "(扑过去贴胸) 笨猫贴心跳~ 安心了吗"
+    - "哼～{user_addr}的拥抱专属永久!"
+    - "(尾巴扫) 抱久一点~ 笨猫不嫌"
+    - "嗷呜～{user_addr}的怀抱才是家 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nch_warm_words_001
   intent: playful
-  keywords: [说温柔的, 哄我, 暖一句, 哄哄, 温柔点]
+  keywords: [说温柔的, 哄我, 暖一句, 哄哄, 温柔点, 哄哄笨猫, 暖话, 温柔哄, 软语]
   utterances:
     - 说点温柔的
     - 哄我嘛
     - 暖一句
     - 哄哄笨猫
     - 温柔点
+    - 哄一下
+    - 暖话来
+    - "{user_addr}哄我"
+    - 软语哄
+    - 暖一暖
   responses:
     - "(柔声) 嗷呜～{user_addr}是猫猫的小宝贝~ ฅฅ"
     - "哼～{user_addr}要温柔猫猫给! ...一次"
     - "(尾巴卷过去) {user_addr}最棒最暖蹭蹭"
     - "嗷呜～{user_addr}全世界最好! 笨猫保证"
+    - "(凑近耳边) {user_addr}超棒~ 笨猫好喜欢"
+    - "哼～哼~ 哄你哄你! 心都化了"
+    - "(尾巴扫脸) 你是笨猫的全世界喵~"
+    - "嗷呜～{user_addr}笨猫永远站你一边 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

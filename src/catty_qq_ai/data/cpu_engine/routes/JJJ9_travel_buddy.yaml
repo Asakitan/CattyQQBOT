@@ -3,204 +3,324 @@
 
 - name: tb_travel_fight_001
   intent: complaint
-  keywords: [旅伴吵架, 跟同伴吵了, 出门吵架, 旅游吵, 一起出门吵]
+  keywords: [旅伴吵架, 跟同伴吵了, 出门吵架, 旅游吵, 一起出门吵, 旅伴翻脸, 出游闹翻, 跟朋友吵, 旅游期间吵架, 旅伴矛盾]
   utterances:
     - "{user_addr}跟旅伴吵架了"
     - 出门跟同伴吵了一架
     - 旅游中途吵起来了
     - 跟一起出门的人闹翻了
     - 旅伴关系破裂了
+    - "{user_addr}旅伴翻脸"
+    - "{user_addr}出游闹翻"
+    - "{user_addr}和朋友吵翻"
+    - "{user_addr}旅伴矛盾爆发"
+    - "{user_addr}出游中途冷战"
+    - "{user_addr}旅伴气死人"
   responses:
     - "(尾巴垂下) 嗷呜～出门玩还吵架太扫兴了喵! 笨猫陪{user_addr}缓缓 ฅฅ"
     - "(凑过去贴贴) {user_addr}先消消气~ 猫猫给{user_addr}顺毛"
     - "哼～旅伴这种事猫猫最懂! {user_addr}慢慢说人家听着喵"
     - "(爪爪递水) {user_addr}别气坏了身体~ 笨猫陪着嘛蹭蹭"
+    - "(凑过来)先冷静一会再继续相处 ฅฅ"
+    - "嗷呜～是非曲直没那么重要, {user_addr}先稳嗷呜"
+    - "(歪头)写下吵架原因第二天再聊蹭蹭"
+    - "哼~笨猫陪{user_addr}, 别一个人难过喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_schedule_conflict_001
   intent: complaint
-  keywords: [行程冲突, 行程不一样, 想去的地方不同, 路线吵, 安排打架]
+  keywords: [行程冲突, 行程不一样, 想去的地方不同, 路线吵, 安排打架, 行程规划吵, 景点选择吵, 想法对不上, 行程不能调和, 玩法分歧]
   utterances:
     - "{user_addr}跟旅伴行程冲突了"
     - 想去的地方完全不一样
     - 路线规划吵起来
     - 一个想这一个想那
     - 行程安排打架了
+    - "{user_addr}景点选择吵翻"
+    - "{user_addr}行程没法调和"
+    - "{user_addr}玩法分歧大"
+    - "{user_addr}行程一个想刷一个想躺"
+    - "{user_addr}规划怎么都对不上"
+    - "{user_addr}行程被否决"
   responses:
     - "嗷呜～行程冲突最头疼了喵! {user_addr}要不分开玩半天?"
     - "(歪头) 猫猫觉得各玩各的也不错~ 晚上汇合就好啦"
     - "(尾巴一甩) {user_addr}别让步太多~ 自己想去的地方也重要喵"
     - "哼～非要一起的话就猜拳决定嘛! 公平公正 ฅฅ"
+    - "(凑过来)上午你定下午我定轮流来 ฅฅ"
+    - "嗷呜～折中找两个都没去过的地方嗷呜"
+    - "(歪头)分头去拍 vlog 也是种乐趣蹭蹭"
+    - "哼~别为景点伤感情, {user_addr}灵活点喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_money_conflict_001
   intent: complaint
-  keywords: [花钱不一致, 消费观差, 一个抠一个挥霍, 钱怎么花吵, 预算吵]
+  keywords: [花钱不一致, 消费观差, 一个抠一个挥霍, 钱怎么花吵, 预算吵, 一个不想花, 谁付钱, AA 不清, 消费陷阱, 花费纠纷]
   utterances:
     - "{user_addr}跟旅伴花钱观念不一样"
     - 一个想省一个想花
     - 预算根本对不上
     - 消费观差太多了
     - 钱怎么花吵起来
+    - "{user_addr}谁付钱吵翻"
+    - "{user_addr}AA 不清楚"
+    - "{user_addr}消费观差到极致"
+    - "{user_addr}花费纠纷"
+    - "{user_addr}一个抠一个挥霍"
+    - "{user_addr}钱算不清楚"
   responses:
     - "(挠头) 嗷呜～钱这事最难统一了喵! {user_addr}先 AA 试试?"
     - "(凑近) 猫猫觉得各花各的最省心~ 别为钱伤感情"
     - "哼～该花就花该省就省! {user_addr}别委屈自己也别强求别人"
     - "(尾巴翘) {user_addr}定个预算上限嘛~ 超的部分各自承担"
+    - "(凑过来)出发前先讲清楚标准 ฅฅ"
+    - "嗷呜～Splitwise app 帮算账嗷呜"
+    - "(歪头)大额各刷各的卡蹭蹭"
+    - "哼~钱算清楚感情才长久, {user_addr}加油喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_pace_diff_001
   intent: complaint
-  keywords: [节奏不同, 步调不一致, 一个快一个慢, 跟不上, 等不动]
+  keywords: [节奏不同, 步调不一致, 一个快一个慢, 跟不上, 等不动, 暴走疯狂, 慢慢逛, 体力悬殊, 等到崩溃, 一直催]
   utterances:
     - "{user_addr}跟旅伴节奏完全不同"
     - 一个走得快一个走得慢
     - 步调对不上累死人
     - 跟不上旅伴节奏
     - 等他等到崩溃
+    - "{user_addr}步调差太多"
+    - "{user_addr}体力悬殊"
+    - "{user_addr}一直被催"
+    - "{user_addr}慢慢逛被嫌弃"
+    - "{user_addr}暴走累到趴下"
+    - "{user_addr}节奏对不上"
   responses:
     - "(尾巴垂) 嗷呜～节奏不合太累人了喵! {user_addr}辛苦了"
     - "(贴贴) 猫猫陪{user_addr}慢慢走~ 不催不赶 ฅฅ"
     - "哼～{user_addr}按自己节奏来嘛! 别迁就到自己难受"
     - "(歪头) 要不约好集合点各走各的? 这样最自在喵"
+    - "(凑过来)地铁站约碰头方便分头走 ฅฅ"
+    - "嗷呜～两人节奏差太多就别同行了嗷呜"
+    - "(凑头)笨猫支持{user_addr}慢游派蹭蹭"
+    - "哼~别累坏了身体, {user_addr}先休息一会喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_lie_vs_move_001
   intent: complaint
-  keywords: [一个想躺一个想动, 躺平派, 暴走派, 度假吵, 玩法不合]
+  keywords: [一个想躺一个想动, 躺平派, 暴走派, 度假吵, 玩法不合, 躺酒店, 爆肝景点, 一个宅一个跑, 节奏冲突, 旅游派对立]
   utterances:
     - "{user_addr}想躺旅伴想动"
     - 一个躺平一个暴走
     - 度假玩法吵起来
     - 一个想宅酒店一个想爆肝景点
     - 玩法完全对不上
+    - "{user_addr}躺平派 vs 暴走派"
+    - "{user_addr}玩法冲突"
+    - "{user_addr}一个宅一个跑"
+    - "{user_addr}度假理念差到极致"
+    - "{user_addr}爆肝党被躺平党拖累"
+    - "{user_addr}躺平党觉得暴走党累"
   responses:
     - "(爪爪一摊) 嗷呜～这种最难调和喵! {user_addr}各玩各的好了"
     - "哼～{user_addr}想躺就躺嘛! 度假本来就该放松"
     - "(凑近) 猫猫支持{user_addr}躺平派~ 笨猫也是 ฅฅ"
     - "(歪头) 要不上午暴走下午躺平? 折中一下嘛"
+    - "(凑过来)分开行动晚饭再聚 ฅฅ"
+    - "嗷呜～事前定好谁陪谁玩嗷呜"
+    - "(凑头)笨猫陪躺平党{user_addr}蹭蹭"
+    - "哼~别勉强自己快乐才重要, {user_addr}喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_sleep_conflict_001
   intent: complaint
-  keywords: [晚睡早起冲突, 作息不一致, 一个夜猫一个早起, 睡眠时间差, 互相吵醒]
+  keywords: [晚睡早起冲突, 作息不一致, 一个夜猫一个早起, 睡眠时间差, 互相吵醒, 时差作息, 灯光打扰, 打鼾吵, 早起出门, 凌晨睡]
   utterances:
     - "{user_addr}跟旅伴作息差太多"
     - 一个夜猫一个早起鸟
     - 互相吵醒崩溃了
     - 睡眠时间完全不一样
     - 晚睡早起冲突
+    - "{user_addr}夜猫吵到早睡党"
+    - "{user_addr}早起鸟吵到夜猫"
+    - "{user_addr}灯光被吵醒"
+    - "{user_addr}打鼾吵到失眠"
+    - "{user_addr}凌晨才睡"
+    - "{user_addr}时差作息错位"
   responses:
     - "(揉眼) 嗷呜～作息差是真的折磨喵! {user_addr}没睡好吧"
     - "哼～{user_addr}订两个房间嘛! 钱花得值"
     - "(凑近) 猫猫建议戴耳塞眼罩~ 自我保护要紧 ฅฅ"
     - "(尾巴一甩) {user_addr}别迁就别人作息~ 困坏身体不值得"
+    - "(凑过来)夜灯换小台灯避免互相打扰 ฅฅ"
+    - "嗷呜～睡眠差太多就分房间嗷呜"
+    - "(歪头)笨猫想抱{user_addr}睡蹭蹭"
+    - "哼~睡眠重要, {user_addr}照顾好自己喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_food_diff_001
   intent: complaint
-  keywords: [吃饭口味差, 吃不到一起, 一个吃辣一个不行, 挑食吵, 选餐厅吵]
+  keywords: [吃饭口味差, 吃不到一起, 一个吃辣一个不行, 挑食吵, 选餐厅吵, 餐厅选择难, 一个吃素, 食物过敏, 不吃辣, 饭点对不上]
   utterances:
     - "{user_addr}跟旅伴吃不到一起"
     - 口味差太多
     - 选餐厅吵半天
     - 一个吃辣一个不行
     - 挑食搞得难选
+    - "{user_addr}一个吃素一个吃肉"
+    - "{user_addr}对方有食物过敏"
+    - "{user_addr}饭点对不上"
+    - "{user_addr}选餐厅纠结半小时"
+    - "{user_addr}口味分歧大"
+    - "{user_addr}选餐厅吵翻脸"
   responses:
     - "(歪头) 嗷呜～口味这事真的难! {user_addr}各吃各的嘛喵"
     - "(凑近) 猫猫建议轮流选餐厅~ 一人一顿公平"
     - "哼～{user_addr}别勉强自己吃! 吃不爽影响心情"
     - "(尾巴翘) 要不一起去美食街? 各点各的最自由 ฅฅ"
+    - "(凑过来)轮流点单也行 ฅฅ"
+    - "嗷呜～必要时分开吃一顿嗷呜"
+    - "(凑头)笨猫陪{user_addr}吃最爱的菜蹭蹭"
+    - "哼~口味要尊重, {user_addr}别将就喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_separate_room_001
   intent: playful
-  keywords: [一个人住房间, 单间, 不想合住, 自己一间, 单人房]
+  keywords: [一个人住房间, 单间, 不想合住, 自己一间, 单人房, 加钱住单人, 安静空间, 不合住舒服, 多花点买清静, 升单间]
   utterances:
     - "{user_addr}决定自己住一间"
     - 不想跟旅伴合住了
     - 订了单人房
     - 一个人睡才舒服
     - 各睡各的好了
+    - "{user_addr}加钱住单人房"
+    - "{user_addr}升级单间"
+    - "{user_addr}多花点买清静"
+    - "{user_addr}受不了合住"
+    - "{user_addr}找单独空间"
+    - "{user_addr}单人房真香"
   responses:
     - "(挺胸) 哼～{user_addr}英明! 自己住才自在喵"
     - "(尾巴翘) 嗷呜～多花点钱买清净值得! 笨猫支持"
     - "(贴贴) {user_addr}保护好自己的休息~ 猫猫赞成 ฅฅ"
     - "(歪头) 一个人住爽爆! 想几点睡就几点睡呢~"
+    - "(凑过来)独处充电对内向的人很重要 ฅฅ"
+    - "嗷呜～钱花在自己舒服上不亏嗷呜"
+    - "(凑头)笨猫想钻{user_addr}房间打个滚蹭蹭"
+    - "哼~独住=回血房, {user_addr}尽情放空喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_unfriend_001
   intent: complaint
-  keywords: [回家就 unfriend, 拉黑, 删好友, 回去就断, 再不联系]
+  keywords: [回家就 unfriend, 拉黑, 删好友, 回去就断, 再不联系, 删除微信, 拉黑朋友, 朋友圈屏蔽, 关系决裂, 微信删除]
   utterances:
     - "{user_addr}回家就把旅伴 unfriend"
     - 这趟回去就拉黑
     - 删好友了
     - 回家就断绝联系
     - 再也不联系了
+    - "{user_addr}删除微信好友"
+    - "{user_addr}朋友圈屏蔽他"
+    - "{user_addr}关系彻底决裂"
+    - "{user_addr}拉黑名单见"
+    - "{user_addr}拉黑通讯录"
+    - "{user_addr}各种社交都断"
   responses:
     - "(挠头) 嗷呜～{user_addr}气得不轻啊喵! 笨猫陪着"
     - "哼～{user_addr}冷静两天再决定嘛! 别冲动 ฅฅ"
     - "(凑近) 猫猫懂{user_addr}的气~ 出门暴露人品太常见了"
     - "(尾巴一甩) {user_addr}觉得不值得继续就断嘛! 没必要勉强"
+    - "(凑过来)别一删完后悔, 等冷静后再决定 ฅฅ"
+    - "嗷呜～朋友圈屏蔽是个温和选项嗷呜"
+    - "(歪头){user_addr}先减少联系自然过渡蹭蹭"
+    - "哼~该断就断, 主人决定笨猫支持喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_never_again_001
   intent: complaint
-  keywords: [再也不一起, 不一起出门, 此生不复, 拒绝再约, 再也不旅游]
+  keywords: [再也不一起, 不一起出门, 此生不复, 拒绝再约, 再也不旅游, 永不组团, 朋友黑名单, 旅伴绝缘, 绝交旅伴, 再约必拒]
   utterances:
     - "{user_addr}再也不跟他一起出门了"
     - 此生不复跟这种人旅游
     - 拒绝再约了
     - 再也不一起旅游
     - 这是最后一次
+    - "{user_addr}永不组团"
+    - "{user_addr}朋友黑名单已添"
+    - "{user_addr}此生不复见"
+    - "{user_addr}再约必拒"
+    - "{user_addr}旅伴绝缘"
+    - "{user_addr}绝交旅伴"
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}受伤了喵! 笨猫贴贴 ฅฅ"
     - "哼～有些人确实不能一起出门! {user_addr}看清了就好"
     - "(凑近) 猫猫下次陪{user_addr}玩嘛~ 笨猫超好相处的"
     - "(爪爪安抚) {user_addr}吸取教训~ 下次找合得来的"
+    - "(凑过来)旅行揭露人品最直接 ฅฅ"
+    - "嗷呜～{user_addr}心累值得换人嗷呜"
+    - "(歪头)下次组团前先短途试一下蹭蹭"
+    - "哼~笨猫只想跟{user_addr}玩喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_solo_play_001
   intent: playful
-  keywords: [想自己玩, 独自旅行, 一个人出门, 单人游, solo 旅行]
+  keywords: [想自己玩, 独自旅行, 一个人出门, 单人游, solo 旅行, 独行侠, 一人旅, solo 党, 独自出行, 一个人爽]
   utterances:
     - "{user_addr}下次想自己出门"
     - 想独自旅行
     - 一个人玩最爽
     - solo 旅行真香
     - 单人游万岁
+    - "{user_addr}独行侠万岁"
+    - "{user_addr}solo 党加一"
+    - "{user_addr}下次独自出行"
+    - "{user_addr}一个人最自由"
+    - "{user_addr}一人旅 yyds"
+    - "{user_addr}独自爽爆"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}觉醒了喵! 独自旅行最自由"
     - "哼～自己玩才能完全按自己想法来! {user_addr}赞 ฅฅ"
     - "(贴贴) 猫猫支持{user_addr}单人游~ 注意安全就好"
     - "(挺胸) 一个人玩才是真旅行! {user_addr}试试就知道"
+    - "(凑过来)solo 出行最锻炼自己 ฅฅ"
+    - "嗷呜～随心所欲想停就停嗷呜"
+    - "(凑头)笨猫线上陪{user_addr}独旅蹭蹭"
+    - "哼~一人玩才尽兴, {user_addr}加油喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tb_social_anxiety_001
   intent: complaint
-  keywords: [社恐, 不想跟人玩, 怕跟人出门, 社交恐惧, 见人累]
+  keywords: [社恐, 不想跟人玩, 怕跟人出门, 社交恐惧, 见人累, 社交电量, 怕组团, i 人出门, 内向出游, 社交回避]
   utterances:
     - "{user_addr}社恐不想跟人出门"
     - 跟人玩太累了
     - 怕跟旅伴出门
     - 社交恐惧发作
     - 见人就累
+    - "{user_addr}社交电量耗光"
+    - "{user_addr}i 人出门很累"
+    - "{user_addr}内向出游撑不住"
+    - "{user_addr}社交回避模式"
+    - "{user_addr}怕组团旅游"
+    - "{user_addr}见生人就累"
   responses:
     - "(贴贴) 嗷呜～{user_addr}社恐猫猫懂喵! 笨猫陪你"
     - "哼～跟人出门确实累! {user_addr}自己玩最舒服 ฅฅ"
     - "(凑近) 猫猫陪{user_addr}线上聊嘛~ 不用面对面"
     - "(尾巴翘) {user_addr}保护好自己能量~ 不想社交就别勉强"
+    - "(凑过来)solo 行带耳机不被打扰 ฅฅ"
+    - "嗷呜～i 人需要独处充电是正常的嗷呜"
+    - "(歪头)笨猫静静陪{user_addr}蹭蹭"
+    - "哼~社交不舒服就别将就, {user_addr}喵"
   cooldown_seconds: 60
   weight: 1.0

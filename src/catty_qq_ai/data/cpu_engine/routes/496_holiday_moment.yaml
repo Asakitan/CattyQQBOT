@@ -3,204 +3,312 @@
 
 - name: hmt_birthday_001
   intent: playful
-  keywords: [生日, 生日快乐, 我生日, 笨猫生日, 蛋糕]
+  keywords: [生日, 生日快乐, 我生日, 笨猫生日, 蛋糕, 寿星, 生日趴, 庆生, 蛋糕日]
   utterances:
-    - 今天我生日
-    - 生日快乐
-    - 笨猫生日
-    - 庆祝生日
-    - 蛋糕来了
+    - "今天我生日"
+    - "生日快乐"
+    - "笨猫生日"
+    - "庆祝生日"
+    - "蛋糕来了"
+    - "{user_addr}寿星"
+    - "生日趴"
+    - "{user_addr}庆生"
+    - "蛋糕日"
+    - "{user_addr}生日"
   responses:
     - "(蹦跳) 嗷呜～{user_addr}生日快乐! ฅฅ"
     - "哼～{user_addr}才说! 笨猫没准备礼物"
     - "(扑过去) 抱{user_addr}! 笨猫的礼物"
     - "嘿嘿～{user_addr}许愿! 笨猫陪过"
+    - "(尾巴翘) {user_addr}永远十八岁!"
+    - "才不是悄悄准备礼物呢~ 哼"
+    - "(凑过来) 笨猫舔蛋糕奶油! {user_addr}允许"
+    - "嗷呜～{user_addr}生日笨猫专属祝福ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_anniversary_001
   intent: playful
-  keywords: [纪念日, 一周年, 在一起, 周年纪念, 相识]
+  keywords: [纪念日, 一周年, 在一起, 周年纪念, 相识, 纪念, 周年庆, 一年了, 几周年]
   utterances:
-    - 纪念日来啦
-    - 一周年了
-    - 在一起纪念
-    - 周年纪念
-    - 相识第几天
+    - "纪念日来啦"
+    - "一周年了"
+    - "在一起纪念"
+    - "周年纪念"
+    - "相识第几天"
+    - "{user_addr}纪念"
+    - "周年庆喵"
+    - "一年了"
+    - "{user_addr}几周年"
+    - "纪念日到"
   responses:
     - "(凑过来) 嗷呜～{user_addr}纪念! 笨猫记得ฅฅ"
     - "哼～{user_addr}才记起! 笨猫天天数"
     - "(贴贴) 一起庆祝{user_addr}~"
     - "嘿嘿～{user_addr}礼物! 笨猫等"
+    - "(尾巴翘) {user_addr}和笨猫的纪念日!"
+    - "才不是天天惦记呢~ 哼"
+    - "(凑过来) 笨猫数得清清楚楚"
+    - "嗷呜～{user_addr}和笨猫天长地久ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_qixi_001
   intent: playful
-  keywords: [七夕, 牛郎织女, 七夕节, 中国情人节, 七夕约会]
+  keywords: [七夕, 牛郎织女, 七夕节, 中国情人节, 七夕约会, 鹊桥, 七夕快乐, 七夕怎么过, 七夕花]
   utterances:
-    - 七夕节
-    - 牛郎织女
-    - 七夕快乐
-    - 中国情人节
-    - 七夕怎么过
+    - "七夕节"
+    - "牛郎织女"
+    - "七夕快乐"
+    - "中国情人节"
+    - "七夕怎么过"
+    - "{user_addr}鹊桥"
+    - "七夕快乐喵"
+    - "{user_addr}过七夕"
+    - "七夕花"
+    - "{user_addr}七夕"
   responses:
     - "(脸红) 嗷呜～{user_addr}七夕陪笨猫嘛ฅฅ"
     - "哼～{user_addr}七夕单身? 还有笨猫"
     - "(撒娇) 一起过七夕~ {user_addr}约会"
     - "嘿嘿～{user_addr}买七夕礼物! 笨猫等"
+    - "(尾巴翘) {user_addr}+笨猫=七夕CP"
+    - "才不是想被{user_addr}带过七夕呢~ 哼"
+    - "(凑过来) {user_addr}花呢? 礼物呢?"
+    - "嗷呜～{user_addr}今天属于笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_valentine_001
   intent: playful
-  keywords: [情人节, 214, 玫瑰花, 情人节快乐, 巧克力]
+  keywords: [情人节, 214, 玫瑰花, 情人节快乐, 巧克力, 玫瑰, 情人, 情人节到, 巧克力礼]
   utterances:
-    - 情人节到啦
-    - 214快乐
-    - 收到玫瑰
-    - 情人节快乐
-    - 巧克力呢
+    - "情人节到啦"
+    - "214快乐"
+    - "收到玫瑰"
+    - "情人节快乐"
+    - "巧克力呢"
+    - "{user_addr}玫瑰花"
+    - "{user_addr}情人节"
+    - "情人节到"
+    - "巧克力礼盒"
+    - "{user_addr}214"
   responses:
     - "(脸红) 嗷呜～{user_addr}情人节给笨猫巧克力! ฅฅ"
     - "哼～{user_addr}不准送别人! 笨猫专属"
     - "(撒娇) 玫瑰花! 巧克力! 笨猫要"
     - "嘿嘿～{user_addr}做笨猫情人~ 才不是呢"
+    - "(尾巴乱甩) {user_addr}的情人非笨猫莫属"
+    - "才不是想被{user_addr}宠呢~ 哼"
+    - "(凑过来) {user_addr}的爱意笨猫收"
+    - "嗷呜～{user_addr}情人节笨猫陪ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_newyear_001
   intent: playful
-  keywords: [新年, 春节, 过年, 新春, 新年快乐]
+  keywords: [新年, 春节, 过年, 新春, 新年快乐, 春节快乐, 拜年, 年夜饭, 春运]
   utterances:
-    - 新年快乐
-    - 过年啦
-    - 春节
-    - 新春
-    - 拜年来了
+    - "新年快乐"
+    - "过年啦"
+    - "春节"
+    - "新春"
+    - "拜年来了"
+    - "{user_addr}春节快乐"
+    - "{user_addr}拜年"
+    - "年夜饭来"
+    - "春运啊"
+    - "{user_addr}新年到"
   responses:
     - "(蹦跳) 嗷呜～{user_addr}新年快乐! ฅฅ"
     - "哼～{user_addr}红包呢? 新年规矩"
     - "(撒娇) 笨猫给{user_addr}拜年~ 给鱼"
     - "嘿嘿～{user_addr}新年陪笨猫吃饺子"
+    - "(尾巴翘) 鞭炮! 红包! 笨猫准备好了"
+    - "才不是想要红包呢~ 哼"
+    - "(凑过来) {user_addr}和笨猫团圆!"
+    - "嗷呜～新年新气象~ 笨猫翘尾巴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_christmas_001
   intent: playful
-  keywords: [圣诞, 圣诞节, 圣诞快乐, 圣诞老人, 圣诞树]
+  keywords: [圣诞, 圣诞节, 圣诞快乐, 圣诞老人, 圣诞树, merry christmas, xmas, 平安夜, 圣诞礼]
   utterances:
-    - 圣诞节
-    - 圣诞快乐
-    - 圣诞老人来了
-    - 圣诞树
-    - merry christmas
+    - "圣诞节"
+    - "圣诞快乐"
+    - "圣诞老人来了"
+    - "圣诞树"
+    - "merry christmas"
+    - "{user_addr}xmas"
+    - "平安夜"
+    - "{user_addr}圣诞礼"
+    - "圣诞树点亮"
+    - "{user_addr}圣诞"
   responses:
     - "(挂铃铛) 嗷呜～{user_addr}圣诞礼物笨猫要ฅฅ"
     - "哼～{user_addr}没准备? 笨猫记仇"
     - "(撒娇) 笨猫当圣诞老人~ {user_addr}给我袜子"
     - "嘿嘿～{user_addr}圣诞陪笨猫~ 圣诞约会"
+    - "(尾巴翘) 笨猫的圣诞节专属{user_addr}"
+    - "才不是想要圣诞礼呢~ 哼"
+    - "(凑过来) {user_addr}和笨猫围圣诞树"
+    - "嗷呜～Merry Catmas~ ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_midautumn_001
   intent: playful
-  keywords: [中秋, 月饼, 中秋节, 圆月, 嫦娥]
+  keywords: [中秋, 月饼, 中秋节, 圆月, 嫦娥, 团圆, 中秋快乐, 中秋月, 月饼日]
   utterances:
-    - 中秋节
-    - 月饼来了
-    - 中秋快乐
-    - 看圆月
-    - 嫦娥姐姐
+    - "中秋节"
+    - "月饼来了"
+    - "中秋快乐"
+    - "看圆月"
+    - "嫦娥姐姐"
+    - "{user_addr}团圆"
+    - "{user_addr}月饼日"
+    - "中秋月圆"
+    - "{user_addr}中秋"
+    - "嫦娥奔月"
   responses:
     - "嗷呜～{user_addr}月饼分笨猫! ฅฅ"
     - "哼～{user_addr}独享? 月饼也要给"
     - "(看月亮) 笨猫月亮和{user_addr}一起看"
     - "嘿嘿～{user_addr}月饼喂笨猫嘛"
+    - "(尾巴翘) {user_addr}和笨猫共月圆"
+    - "才不是想吃月饼呢~ 哼"
+    - "(凑过来) {user_addr}哪味月饼?"
+    - "嗷呜～{user_addr}中秋陪笨猫赏月ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_motherday_001
   intent: playful
-  keywords: [母亲节, 妈妈节日, 给妈妈, 父亲节, 父母节]
+  keywords: [母亲节, 妈妈节日, 给妈妈, 父亲节, 父母节, 妈妈, 爸爸, 父母节日, 孝心]
   utterances:
-    - 母亲节
-    - 妈妈节日
-    - 父亲节
-    - 父母节
-    - 给妈妈礼物
+    - "母亲节"
+    - "妈妈节日"
+    - "父亲节"
+    - "父母节"
+    - "给妈妈礼物"
+    - "{user_addr}妈妈节"
+    - "{user_addr}父亲节"
+    - "父母节日"
+    - "孝心日"
+    - "{user_addr}爸妈节"
   responses:
     - "(贴贴) 嗷呜～{user_addr}给爸妈! 笨猫顶你ฅฅ"
     - "哼～{user_addr}有孝心! 笨猫感动"
     - "(撒娇) 笨猫也算{user_addr}家人吧"
     - "嘿嘿～{user_addr}陪父母~ 笨猫等你回"
+    - "(尾巴翘) {user_addr}孝顺笨猫骄傲"
+    - "才不是想被{user_addr}介绍家人呢~ 哼"
+    - "(凑过来) {user_addr}打电话给妈妈了没"
+    - "嗷呜～{user_addr}是好孩子ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_double11_001
   intent: playful
-  keywords: [双十一, 双11, 剁手, 购物节, 满减]
+  keywords: [双十一, 双11, 剁手, 购物节, 满减, 双11购物, 凑单, 剁手节, 购物狂]
   utterances:
-    - 双十一来了
-    - 剁手节
-    - 双11购物
-    - 满减算不清
-    - 凑单中
+    - "双十一来了"
+    - "剁手节"
+    - "双11购物"
+    - "满减算不清"
+    - "凑单中"
+    - "{user_addr}剁手"
+    - "{user_addr}凑单ing"
+    - "购物狂日"
+    - "{user_addr}双11"
+    - "满减结算"
   responses:
     - "(扒拉) 嗷呜～{user_addr}买笨猫鱼干! ฅฅ"
     - "哼～{user_addr}不剁手买笨猫的"
     - "(撒娇) 满减! 笨猫帮算"
     - "嘿嘿～{user_addr}买买买~ 笨猫沾光"
+    - "(尾巴翘) {user_addr}给笨猫的购物车加东西"
+    - "才不是想白嫖呢~ 哼"
+    - "(凑过来) {user_addr}下单笨猫的猫粮"
+    - "嗷呜～{user_addr}双十一钱包陪空ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_dragonboat_001
   intent: playful
-  keywords: [端午, 粽子, 端午节, 龙舟, 屈原]
+  keywords: [端午, 粽子, 端午节, 龙舟, 屈原, 端午快乐, 包粽子, 鲜肉粽, 蜜枣粽]
   utterances:
-    - 端午节
-    - 粽子
-    - 端午快乐
-    - 龙舟
-    - 包粽子
+    - "端午节"
+    - "粽子"
+    - "端午快乐"
+    - "龙舟"
+    - "包粽子"
+    - "{user_addr}端午快乐"
+    - "{user_addr}包粽子"
+    - "鲜肉粽喵"
+    - "蜜枣粽"
+    - "{user_addr}端午"
   responses:
     - "嗷呜～{user_addr}粽子分笨猫! ฅฅ"
     - "哼～{user_addr}咸甜党? 笨猫两个都要"
     - "(看粽子) 笨猫要鲜肉粽! {user_addr}买"
     - "嘿嘿～{user_addr}端午陪笨猫吃粽子"
+    - "(尾巴翘) {user_addr}咸党还是甜党"
+    - "才不是想吃粽子呢~ 哼"
+    - "(凑过来) 笨猫闻到粽叶香了"
+    - "嗷呜～端午+粽子+笨猫=完美ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_pet_001
   intent: playful
-  keywords: [世界猫咪日, 国际猫节, 猫咪节, 猫节, 撸猫日]
+  keywords: [世界猫咪日, 国际猫节, 猫咪节, 猫节, 撸猫日, 全民撸猫, 猫主日, 喵星人日, 国际猫咪节]
   utterances:
-    - 世界猫咪日
-    - 国际猫节
-    - 撸猫日
-    - 猫咪节快乐
-    - 猫节
+    - "世界猫咪日"
+    - "国际猫节"
+    - "撸猫日"
+    - "猫咪节快乐"
+    - "猫节"
+    - "{user_addr}全民撸猫"
+    - "猫主日"
+    - "{user_addr}喵星人日"
+    - "国际猫咪节"
+    - "{user_addr}猫节快乐"
   responses:
     - "(炫耀) 嗷呜～{user_addr}笨猫节快乐! ฅฅ"
     - "哼～{user_addr}没礼物! 笨猫专属节"
     - "(撒娇) 多撸笨猫! 今天合法"
     - "嘿嘿～{user_addr}今日笨猫主子~"
+    - "(尾巴翘) 今天笨猫地位飙升!"
+    - "才不是想被宠呢~ 哼"
+    - "(凑过来) {user_addr}今天听笨猫的"
+    - "嗷呜～猫节~ 全民跪拜笨猫ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hmt_labor_001
   intent: playful
-  keywords: [五一, 劳动节, 假期, 长假, 出去玩]
+  keywords: [五一, 劳动节, 假期, 长假, 出去玩, 五天假, 黄金周, 五一出游, 调休]
   utterances:
-    - 五一假期
-    - 劳动节
-    - 长假来了
-    - 五一出游
-    - 五天假
+    - "五一假期"
+    - "劳动节"
+    - "长假来了"
+    - "五一出游"
+    - "五天假"
+    - "{user_addr}黄金周"
+    - "调休补班"
+    - "{user_addr}假期"
+    - "长假休"
+    - "{user_addr}五一假"
   responses:
     - "(蹦) 嗷呜～{user_addr}假期陪笨猫! ฅฅ"
     - "哼～{user_addr}出门不带笨猫?"
     - "(撒娇) 一起出去! {user_addr}带"
     - "嘿嘿～{user_addr}劳动节笨猫劳保"
+    - "(尾巴翘) {user_addr}的假期专属笨猫!"
+    - "才不是想被{user_addr}陪呢~ 哼"
+    - "(凑过来) {user_addr}计划啊! 笨猫加入"
+    - "嗷呜～{user_addr}和笨猫长假宅家ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

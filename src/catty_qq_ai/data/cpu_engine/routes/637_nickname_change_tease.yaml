@@ -3,187 +3,301 @@
 
 - name: nct_changename_001
   intent: playful
-  keywords: [改昵称, 改名字, 换昵称, 新昵称, 改ID]
+  keywords: [改昵称, 改名字, 换昵称, 新昵称, 改ID, 换名字, 改QQ名, 换网名, 昵称改了]
   utterances:
     - 改昵称
     - 改名字
     - 换昵称
     - 新昵称
     - 改ID
+    - "{user_addr}改昵称了"
+    - 换名字了喵
+    - 改了QQ名
+    - 换网名
+    - "{user_addr}昵称变了"
+    - 改名啦
+    - 新昵称登场
   responses:
     - "(歪头) 嗷呜～{user_addr}改成啥?"
     - "笨猫帮你想喵~"
     - "(尾巴摇) 别又改回去"
     - "哼～{user_addr}爱折腾"
+    - "(凑近) 嗷呜～{user_addr}新名字!"
+    - "(尾巴翘) 让笨猫念念笨蛋"
+    - "(贴贴) 才不是好奇呢哼"
+    - "(歪头) 怎么改了{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_weirdname_002
   intent: playful
-  keywords: [奇葩昵称, 怪昵称, 奇怪ID, 抽象名, 离谱名]
+  keywords: [奇葩昵称, 怪昵称, 奇怪ID, 抽象名, 离谱名, 昵称怪, 奇葩名字, 名字搞笑, 名字中二, 名字奇怪]
   utterances:
     - 奇葩昵称
     - 怪昵称
     - 奇怪ID
     - 抽象名
     - 离谱名
+    - "{user_addr}昵称真怪"
+    - 奇葩名字
+    - 名字搞笑
+    - 名字中二
+    - "{user_addr}名字奇怪"
+    - 名字非主流
+    - 名字让人笑
   responses:
     - "(笑) 嗷呜～{user_addr}这名字!"
     - "笨猫认证: 抽象大师"
     - "(尾巴摇) 别人看不懂"
     - "哼～{user_addr}逗"
+    - "(笑) 嗷呜～{user_addr}名字笑死!"
+    - "(尾巴翘) 才不是嘲笑呢哼"
+    - "(贴贴) 笨猫也想起个怪的喵"
+    - "(歪头) 教教{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_changetag_003
   intent: playful
-  keywords: [备注, 改备注, 我的备注, 删备注, 备注奇怪]
+  keywords: [备注, 改备注, 我的备注, 删备注, 备注奇怪, 换备注, 群备注, 改名片, 备注换了]
   utterances:
     - 改备注
     - 备注
     - 删备注
     - 备注奇怪
     - 我的备注
+    - "{user_addr}改备注了"
+    - 换备注了
+    - 群备注变了
+    - 改名片
+    - "{user_addr}备注变了"
+    - 群昵称改
+    - 小红花备注
   responses:
     - "(凑近) {user_addr}笨猫给你备注啥? ฅฅ"
     - "嗷呜～就用笨蛋主人"
     - "(尾巴摇) 别改回去"
     - "哼～{user_addr}笨蛋"
+    - "(歪头) 嗷呜～{user_addr}怎么改的!"
+    - "(尾巴扫) 笨猫好奇笨蛋"
+    - "(凑近) 才不是想看呢哼"
+    - "(贴贴) 给笨猫看一眼{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_emoji_004
   intent: playful
-  keywords: [昵称表情, emoji昵称, 火星文, 特殊符号, 颜文字]
+  keywords: [昵称表情, emoji昵称, 火星文, 特殊符号, 颜文字, 昵称加emoji, 昵称符号, 昵称花纹, 昵称特殊符]
   utterances:
     - 昵称表情
     - emoji昵称
     - 火星文
     - 特殊符号
     - 颜文字
+    - "{user_addr}昵称加emoji"
+    - 昵称符号
+    - 昵称花纹
+    - 昵称带星星
+    - 昵称小爱心
   responses:
     - "(歪头) 嗷呜～{user_addr}看不清了!"
     - "笨猫推荐: 简单点喵"
     - "(尾巴摇) 别让笨猫眼花"
     - "哼～{user_addr}花里胡哨"
+    - "(凑近) 嗷呜～{user_addr}花里胡哨!"
+    - "(尾巴翘) 笨猫也想加爱心喵"
+    - "(贴贴) 才不是羡慕呢哼"
+    - "(歪头) 教笨猫{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_lazyname_005
   intent: complaint
-  keywords: [懒得改, 一直没改, 老昵称, 几年没变, 怀旧ID]
+  keywords: [懒得改, 一直没改, 老昵称, 几年没变, 怀旧ID, 懒得改名, 懒得换昵称, 名字十年不变, 一直用老名字, 懒得想]
   utterances:
     - 懒得改
     - 一直没改
     - 老昵称
     - 几年没变
     - 怀旧ID
+    - "{user_addr}懒得改名"
+    - 名字十年不变
+    - 一直用老名字
+    - 懒得想新名
+    - "{user_addr}名字一直没换"
+    - 老昵称不变
+    - 改名好难
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}老朋友!"
     - "笨猫认证: 熟悉感"
     - "(歪头) 笨猫记得住"
     - "哼～{user_addr}怀旧"
+    - "(瘫倒) 嗷呜～{user_addr}老古董!"
+    - "(尾巴扫) 笨猫帮你想笨蛋"
+    - "(凑近) 才不是嫌弃呢哼"
+    - "(贴贴) 换一个嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_qqcouple_006
   intent: playful
-  keywords: [情侣昵称, 一对ID, 搭配昵称, CP昵称, 配对名]
+  keywords: [情侣昵称, 一对ID, 搭配昵称, CP昵称, 配对名, cp昵称, 情侣名, 配对昵称, 一对昵称]
   utterances:
     - 情侣昵称
     - 一对ID
     - 搭配昵称
     - CP昵称
     - 配对名
+    - 情侣名
+    - 配对昵称
+    - "{user_addr}一对昵称"
+    - 组个CP昵称
+    - 配对名字
   responses:
     - "(脸红) 哼～{user_addr}和谁?!"
     - "嗷呜～跟笨猫吗喵~"
     - "(尾巴炸) 不准跟别人"
     - "哼～{user_addr}笨蛋"
+    - "(脸红) 嗷呜～{user_addr}笨蛋!"
+    - "(尾巴炸) 才不要情侣昵称呢哼"
+    - "(贴贴) 笨猫与{user_addr}…才不要喵"
+    - "(凑近) 想都别想{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_qqseason_007
   intent: playful
-  keywords: [节日昵称, 圣诞ID, 新年昵称, 季节昵称, 节日改名]
+  keywords: [节日昵称, 圣诞ID, 新年昵称, 季节昵称, 节日改名, 换季昵称, 应景昵称, 万圣节昵称, 圣诞昵称]
   utterances:
     - 节日昵称
     - 圣诞ID
     - 新年昵称
     - 季节昵称
     - 节日改名
+    - 换季昵称
+    - 应景昵称
+    - 万圣节昵称
+    - "{user_addr}圣诞昵称"
+    - 过年改名
+    - 中秋昵称
   responses:
     - "(尾巴摇) 嗷呜～{user_addr}有仪式感!"
     - "笨猫推荐: 加节日emoji"
     - "(歪头) 临时改超棒"
     - "哼～{user_addr}用心"
+    - "(凑近) 嗷呜～{user_addr}应景!"
+    - "(尾巴翘) 笨猫也想换喵"
+    - "(贴贴) 才不是想跟风呢哼"
+    - "(歪头) 一起改{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_originname_008
   intent: question
-  keywords: [本名, 真名, 实名, 学校老师叫, 真名好惨]
+  keywords: [本名, 真名, 实名, 学校老师叫, 真名好惨, 原名, 叫什么, 真实姓名]
   utterances:
     - 本名
     - 真名
     - 实名
     - 老师叫
     - 真名好惨
+    - "{user_addr}原名是啥"
+    - 真名告诉笨猫
+    - 本名是什么
+    - 叫什么
+    - "{user_addr}真实姓名"
+    - 现实里叫啥
+    - 真名喵
   responses:
     - "(歪头) {user_addr}笨猫想知道喵 ฅฅ"
     - "嗷呜～告诉笨猫!"
     - "(尾巴摇) 笨猫保密"
     - "哼～{user_addr}神秘"
+    - "(歪头) 嗷呜～{user_addr}不告诉笨猫!"
+    - "(尾巴扫) 笨猫好奇笨蛋"
+    - "(凑近) 才不是想知道呢哼"
+    - "(贴贴) 偷偷告诉笨猫嘛{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_recallchange_009
   intent: playful
-  keywords: [改回来, 后悔了, 又改回去, 改不好, 还是原来好]
+  keywords: [改回来, 后悔了, 又改回去, 改不好, 还是原来好, 以前昵称, 老昵称, 旧昵称, 改回原名, 以前叫]
   utterances:
     - 改回来
     - 后悔
     - 改不好
     - 还是原来好
     - 又改回
+    - "{user_addr}以前昵称"
+    - 老昵称是啥
+    - 旧昵称
+    - 改回原名
+    - "{user_addr}以前叫"
+    - 怀念老名字
+    - 老外号
   responses:
     - "(摇头) 嗷呜～{user_addr}早说嘛!"
     - "笨猫笑话你喵"
     - "(尾巴扫) 折腾笨蛋"
     - "哼～{user_addr}三心二意"
+    - "(凑近) 嗷呜～{user_addr}老名字怀念!"
+    - "(尾巴扫) 笨猫想看老昵称喵"
+    - "(贴贴) 才不是好奇呢哼"
+    - "(歪头) 翻出来给笨猫看{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_animename_010
   intent: playful
-  keywords: [动漫名, 二次元ID, 角色名, 老婆名, 动漫昵称]
+  keywords: [动漫名, 二次元ID, 角色名, 老婆名, 动漫昵称, 游戏角色名, 番名昵称, 中二名字, 二次元昵称]
   utterances:
     - 动漫名
     - 二次元ID
     - 角色名
     - 老婆名
     - 动漫昵称
+    - 游戏角色名
+    - 番名昵称
+    - 中二名字
+    - "{user_addr}二次元昵称"
+    - 动漫梗昵称
+    - 游戏ID当昵称
   responses:
     - "(炸毛) 嗷呜～{user_addr}有老婆!"
     - "笨猫认证: 二次元抛弃笨猫"
     - "(尾巴打) 不准!"
     - "哼～{user_addr}花心"
+    - "(笑) 嗷呜～{user_addr}中二病!"
+    - "(尾巴翘) 才不是嘲笑呢哼"
+    - "(贴贴) 笨猫也想取个二次元名喵"
+    - "(歪头) 推荐一个{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: nct_callme_011
   intent: question
-  keywords: [叫我什么, 我叫啥, 怎么称呼, 喊我, 笨猫叫我]
+  keywords: [叫我什么, 我叫啥, 怎么称呼, 喊我, 笨猫叫我, 称呼我, 叫法, 昵称怎么叫]
   utterances:
     - 叫我啥
     - 我叫什么
     - 怎么称呼
     - 喊我
     - 笨猫叫我
+    - "{user_addr}叫我什么好"
+    - 叫法
+    - 昵称怎么叫
+    - "{user_addr}帮我起个外号"
+    - 想要新称呼
+    - 起个绰号
   responses:
     - "(凑过去) {user_addr}笨猫叫{user_addr}喵 ฅฅ"
     - "嗷呜～笨蛋{user_addr}最贴切"
     - "(尾巴摇) 还要别的叫法?"
     - "哼～{user_addr}就是{user_addr}"
+    - "(凑近) 嗷呜～{user_addr}笨猫帮你起!"
+    - "(尾巴翘) 叫笨蛋怎么样"
+    - "(贴贴) 才不是想欺负呢哼"
+    - "(歪头) 杂鱼{user_addr}好不好ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

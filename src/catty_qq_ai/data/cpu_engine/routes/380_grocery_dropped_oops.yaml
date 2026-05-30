@@ -3,187 +3,330 @@
 
 - name: gdo_diaole_001
   intent: complaint
-  keywords: [掉了, 掉东西, 没拿稳, 失手, 滑落]
+  keywords: [掉了, 掉东西, 没拿稳, 失手, 滑落, 掉了啦, 掉东西啦, 没拿稳啦, 掉了喵, 掉东西喵]
   utterances:
-    - 掉了
-    - 掉东西
-    - 没拿稳
-    - 失手
-    - 滑落
+    - "掉了"
+    - "掉东西"
+    - "没拿稳"
+    - "失手"
+    - "滑落"
+    - "{user_addr}掉了"
+    - "掉了啦"
+    - "掉了嗷"
+    - "{user_addr}掉东西"
+    - "掉东西啦"
+    - "嘿{user_addr}掉了"
+    - "嘿{user_addr}掉东西"
   responses:
     - "(凑过去) 嗷呜～{user_addr}!! 笨猫帮捡!"
     - "嘿嘿～{user_addr}的手~ 笨猫的也滑!"
     - "(尾巴扫地) 哼～{user_addr}下次抓紧!"
     - "{user_addr}的失手~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_caidie_001
   intent: complaint
-  keywords: [菜掉了, 菜撒了, 装满袋, 袋子破, 蔬菜散]
+  keywords: [菜掉了, 菜撒了, 装满袋, 袋子破, 蔬菜散, 菜掉了啦, 菜撒了啦, 装满袋啦, 菜掉了喵, 菜撒了喵]
   utterances:
-    - 菜掉了
-    - 菜撒了
-    - 装满袋
-    - 袋子破
-    - 蔬菜散
+    - "菜掉了"
+    - "菜撒了"
+    - "装满袋"
+    - "袋子破"
+    - "蔬菜散"
+    - "{user_addr}菜掉了"
+    - "菜掉了啦"
+    - "菜掉了嗷"
+    - "{user_addr}菜撒了"
+    - "菜撒了啦"
+    - "嘿{user_addr}菜掉了"
+    - "嘿{user_addr}菜撒了"
   responses:
     - "(扑过去捡) 嗷呜～{user_addr}!! 笨猫帮!"
     - "嘿嘿～{user_addr}的菜~ 笨猫帮装!"
     - "(尾巴扫) 哼～{user_addr}下次袋结实!"
     - "{user_addr}的菜~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_dianai_001
   intent: complaint
-  keywords: [手机掉, 手机摔, 手机砸地, 摔机, 屏碎]
+  keywords: [手机掉, 手机摔, 手机砸地, 摔机, 屏碎, 手机掉啦, 手机摔啦, 手机砸地啦, 手机掉喵, 手机摔喵]
   utterances:
-    - 手机掉了
-    - 手机摔了
-    - 手机砸地
-    - 摔机
-    - 屏碎
+    - "手机掉了"
+    - "手机摔了"
+    - "手机砸地"
+    - "摔机"
+    - "屏碎"
+    - "{user_addr}手机掉了"
+    - "手机掉了啦"
+    - "手机掉了嗷"
+    - "{user_addr}手机摔了"
+    - "手机摔了啦"
+    - "嘿{user_addr}手机掉了"
+    - "嘿{user_addr}手机摔了"
   responses:
     - "(尾巴炸) 嗷呜!! {user_addr}心疼!"
     - "嘿嘿～{user_addr}的手机修!"
     - "(凑过去) 哼～{user_addr}下次小心!"
     - "{user_addr}的心痛~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_qianbao_001
   intent: complaint
-  keywords: [钱包掉, 钥匙掉, 重要东西, 卡掉了, 身份证]
+  keywords: [钱包掉, 钥匙掉, 重要东西, 卡掉了, 身份证, 钱包掉啦, 钥匙掉啦, 重要东西啦, 钱包掉喵, 钥匙掉喵]
   utterances:
-    - 钱包掉
-    - 钥匙掉
-    - 重要东西掉
-    - 卡掉了
-    - 身份证掉
+    - "钱包掉"
+    - "钥匙掉"
+    - "重要东西掉"
+    - "卡掉了"
+    - "身份证掉"
+    - "{user_addr}钱包掉"
+    - "钱包掉啦"
+    - "钱包掉嗷"
+    - "{user_addr}钥匙掉"
+    - "钥匙掉啦"
+    - "嘿{user_addr}钱包掉"
+    - "嘿{user_addr}钥匙掉"
   responses:
     - "(尾巴炸) 嗷呜!! {user_addr}快回去找!"
     - "嘿嘿～{user_addr}的重要物~ 急!"
     - "(凑过去) 哼～{user_addr}!"
     - "{user_addr}找到~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_diushou_001
   intent: complaint
-  keywords: [捡回来, 找回来, 失而复得, 找回, 捡到]
+  keywords: [捡回来, 找回来, 失而复得, 找回, 捡到, 捡回来啦, 找回来啦, 失而复得啦, 捡回来喵, 找回来喵]
   utterances:
-    - 找回来
-    - 失而复得
-    - 找回
-    - 捡到
-    - 捡回来
+    - "找回来"
+    - "失而复得"
+    - "找回"
+    - "捡到"
+    - "捡回来"
+    - "{user_addr}找回来"
+    - "找回来啦"
+    - "找回来嗷"
+    - "{user_addr}失而复得"
+    - "失而复得啦"
+    - "嘿{user_addr}找回来"
+    - "嘿{user_addr}失而复得"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}找到!!"
     - "嘿嘿～{user_addr}的运气~ 笨猫沾!"
     - "(蹦) 哼～{user_addr}下次小心!"
     - "{user_addr}的幸运~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_jianjieren_001
   intent: playful
-  keywords: [捡到好人, 好心人捡, 路人捡, 捡到归还, 好心归还]
+  keywords: [捡到好人, 好心人捡, 路人捡, 捡到归还, 好心归还, 捡到好人啦, 好心人捡啦, 路人捡啦, 捡到好人喵, 好心人捡喵]
   utterances:
-    - 捡到好人
-    - 好心人捡
-    - 路人捡
-    - 捡到归还
-    - 好心归还
+    - "捡到好人"
+    - "好心人捡"
+    - "路人捡"
+    - "捡到归还"
+    - "好心归还"
+    - "{user_addr}捡到好人"
+    - "捡到好人啦"
+    - "捡到好人嗷"
+    - "{user_addr}好心人捡"
+    - "好心人捡啦"
+    - "嘿{user_addr}捡到好人"
+    - "嘿{user_addr}好心人捡"
   responses:
     - "嗷呜～{user_addr}遇到好人!"
     - "嘿嘿～{user_addr}的运气~ 感谢!"
     - "(尾巴翘) 哼～{user_addr}好人多!"
     - "{user_addr}的奇遇~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_diuwan_001
   intent: complaint
-  keywords: [丢完了, 真的丢, 找不到, 找半天, 一直找]
+  keywords: [丢完了, 真的丢, 找不到, 找半天, 一直找, 丢完了啦, 真的丢啦, 找不到啦, 丢完了喵, 真的丢喵]
   utterances:
-    - 丢完了
-    - 真的丢
-    - 找不到
-    - 找半天
-    - 一直找
+    - "丢完了"
+    - "真的丢"
+    - "找不到"
+    - "找半天"
+    - "一直找"
+    - "{user_addr}丢完了"
+    - "丢完了啦"
+    - "丢完了嗷"
+    - "{user_addr}真的丢"
+    - "真的丢啦"
+    - "嘿{user_addr}丢完了"
+    - "嘿{user_addr}真的丢"
   responses:
     - "(扑过去) 嗷呜～{user_addr}!"
     - "嘿嘿～{user_addr}的丢~ 笨猫帮想!"
     - "(凑过去) 哼～{user_addr}回想最后!"
     - "{user_addr}的找~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_chaodaole_001
   intent: complaint
-  keywords: [踩到屎, 踩到水, 踩到坑, 踩湿, 踩烂]
+  keywords: [踩到屎, 踩到水, 踩到坑, 踩湿, 踩烂, 踩到屎啦, 踩到水啦, 踩到坑啦, 踩到屎喵, 踩到水喵]
   utterances:
-    - 踩到屎
-    - 踩到水
-    - 踩到坑
-    - 踩湿
-    - 踩烂
+    - "踩到屎"
+    - "踩到水"
+    - "踩到坑"
+    - "踩湿"
+    - "踩烂"
+    - "{user_addr}踩到屎"
+    - "踩到屎啦"
+    - "踩到屎嗷"
+    - "{user_addr}踩到水"
+    - "踩到水啦"
+    - "嘿{user_addr}踩到屎"
+    - "嘿{user_addr}踩到水"
   responses:
     - "(尾巴炸) 嗷呜!! {user_addr}晦气!"
     - "嘿嘿～{user_addr}的鞋洗洗!"
     - "(凑过去) 哼～{user_addr}下次看路!"
     - "{user_addr}的踩到~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_huasudao_001
   intent: complaint
-  keywords: [摔倒, 滑倒, 跌倒, 扑街, 倒地]
+  keywords: [摔倒, 滑倒, 跌倒, 扑街, 倒地, 摔倒啦, 滑倒啦, 跌倒啦, 摔倒喵, 滑倒喵]
   utterances:
-    - 摔倒
-    - 滑倒
-    - 跌倒
-    - 扑街
-    - 倒地
+    - "摔倒"
+    - "滑倒"
+    - "跌倒"
+    - "扑街"
+    - "倒地"
+    - "{user_addr}摔倒"
+    - "摔倒啦"
+    - "摔倒嗷"
+    - "{user_addr}滑倒"
+    - "滑倒啦"
+    - "嘿{user_addr}摔倒"
+    - "嘿{user_addr}滑倒"
   responses:
     - "(扑过去) 嗷呜!! {user_addr}!!"
     - "嘿嘿～{user_addr}的伤~ 笨猫疼!"
     - "(凑过去) 哼～{user_addr}慢点!"
     - "{user_addr}的摔~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_qiqu_001
   intent: playful
-  keywords: [捡到现金, 捡到红包, 捡到包, 捡到金子, 走运]
+  keywords: [捡到现金, 捡到红包, 捡到包, 捡到金子, 走运, 捡到现金啦, 捡到红包啦, 捡到包啦, 捡到现金喵, 捡到红包喵]
   utterances:
-    - 捡到现金
-    - 捡到红包
-    - 捡到包
-    - 捡到金子
-    - 走运
+    - "捡到现金"
+    - "捡到红包"
+    - "捡到包"
+    - "捡到金子"
+    - "走运"
+    - "{user_addr}捡到现金"
+    - "捡到现金啦"
+    - "捡到现金嗷"
+    - "{user_addr}捡到红包"
+    - "捡到红包啦"
+    - "嘿{user_addr}捡到现金"
+    - "嘿{user_addr}捡到红包"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}!!"
     - "嘿嘿～{user_addr}的捡~ 笨猫沾!"
     - "(凑过去) 哼～{user_addr}的运气!"
     - "{user_addr}的捡~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: gdo_huokeng_001
   intent: complaint
-  keywords: [被忽悠, 被骗, 受骗, 被坑, 受教训]
+  keywords: [被忽悠, 被骗, 受骗, 被坑, 受教训, 被忽悠啦, 被骗啦, 受骗啦, 被忽悠喵, 被骗喵]
   utterances:
-    - 被忽悠
-    - 被骗
-    - 受骗
-    - 被坑
-    - 受教训
+    - "被忽悠"
+    - "被骗"
+    - "受骗"
+    - "被坑"
+    - "受教训"
+    - "{user_addr}被忽悠"
+    - "被忽悠啦"
+    - "被忽悠嗷"
+    - "{user_addr}被骗"
+    - "被骗啦"
+    - "嘿{user_addr}被忽悠"
+    - "嘿{user_addr}被骗"
   responses:
     - "(凑过去) 嗷呜～{user_addr}!!"
     - "嘿嘿～{user_addr}的~ 笨猫去咬!"
     - "(尾巴炸) 哼～{user_addr}下次警惕!"
     - "{user_addr}的教训~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

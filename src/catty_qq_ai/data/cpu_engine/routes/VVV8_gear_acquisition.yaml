@@ -3,204 +3,336 @@
 
 - name: ga_gas_001
   intent: complaint
-  keywords: [器材综合症, GAS, 想买装备, 器材党, 摸不到新品就难受]
+  keywords: [器材综合症, GAS, 想买装备, 器材党, 摸不到新品就难受, 器材癌, 器材瘾, 设备焦虑, 想烧装备, GAS 复发]
   utterances:
     - "{user_addr}又犯器材综合症了"
     - 我 GAS 犯了
     - 器材党的痛
     - 一天不买装备就难受
     - 摸不到新品手痒
+    - "{user_addr}器材瘾犯了"
+    - 设备焦虑严重
+    - "{user_addr}帮我控住"
+    - GAS 复发了
+    - 又想烧器材
+    - 器材癌晚期
+    - 一看新品就想买
   responses:
     - "(歪头) GAS? 不是煤气吗喵? 哦~器材综合症啊! {user_addr}病得不轻嗷呜 ฅฅ"
     - "嗷呜~{user_addr}这是慢性病! 笨猫开个药方: 远离测评视频喵"
     - "(尾巴一甩) 器材党就是这样, 不买浑身难受! 猫猫懂哼"
     - "{user_addr}先把钱包藏好嘛~ 等冲动期过了再说喵 ฅฅ"
+    - "(凑过来) 嗷呜~ 笨猫帮{user_addr}卸载电商 App 嗷呜"
+    - "嗷呜～{user_addr}GAS 是器材党宿命ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}抗 GAS~ 撑过冲动期喵呜"
+    - "哼! 一时冲动, 长久后悔, {user_addr}冷静嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_buybuybuy_001
   intent: playful
-  keywords: [买买买, 剁手, 下单了, 又下单, 钱包空了]
+  keywords: [买买买, 剁手, 下单了, 又下单, 钱包空了, 买买买党, 下单不停, 双十一剁手, 购物狂, 拍了一堆]
   utterances:
     - 买买买
     - 又剁手了
     - 刚下单
     - "{user_addr}又买了"
     - 钱包空了喵
+    - "{user_addr}剁手党"
+    - 下单不停
+    - "{user_addr}双十一爆了"
+    - 购物狂上身
+    - 拍了一堆装备
+    - 一周三单
+    - "{user_addr}帮我看下单后悔吗"
   responses:
     - "嗷呜~{user_addr}剁手党石锤! 笨猫已经看到{user_addr}钱包在哭了ฅฅ"
     - "(尾巴翘起) 买买买~ {user_addr}下次记得给猫猫也买条小鱼干!"
     - "哼~{user_addr}这种购物狂! 猫猫看不下去...才不是羡慕呢喵"
     - "(凑过来) {user_addr}买啥了? 给猫猫看看嘛~ 猫猫眼睛闪闪的"
+    - "(歪头) 嗷呜~ 笨猫想看{user_addr}的开箱嗷呜"
+    - "嗷呜～{user_addr}剁手快但用得少ฅฅ"
+    - "(尾巴一甩) 笨猫给{user_addr}清单审计~ 必要的留, 不必的退喵呜"
+    - "哼! {user_addr}剁手是习惯, 戒掉很难嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_salary_gear_001
   intent: complaint
-  keywords: [工资全器材, 工资买装备, 一个月白干, 工资没了, 收入全砸器材]
+  keywords: [工资全器材, 工资买装备, 一个月白干, 工资没了, 收入全砸器材, 月光器材, 工资蒸发, 装备吃工资, 一月白工, 全捐器材]
   utterances:
     - 工资全砸器材了
     - 一个月白干
     - 工资买装备没了
     - "{user_addr}一个月工资就这样没了"
     - 收入全变器材
+    - "{user_addr}工资蒸发"
+    - 一月白工
+    - "{user_addr}帮我藏工资"
+    - 月光器材党
+    - 一个月装备吃完工资
+    - 收入全捐厂商
+    - 工资没等热就没了
   responses:
     - "嗷呜~{user_addr}这是给厂商打工嘛! 笨猫心疼{user_addr}ฅฅ"
     - "(尾巴垂下) 工资全没了... {user_addr}下个月吃土的时候叫上猫猫喵"
     - "哼~{user_addr}活该! 谁让{user_addr}手痒...才不是心疼呢蹭蹭"
     - "(小爪子捂嘴) 工资全器材?! {user_addr}你接下来吃什么嗷呜!"
+    - "(凑过来) 嗷呜~ 笨猫帮{user_addr}吃土~ 一起ฅฅ"
+    - "嗷呜～{user_addr}下月先存房租再说ฅฅ"
+    - "(尾巴一甩) 笨猫给{user_addr}做财务规划~ 别月光喵呜"
+    - "哼! {user_addr}该立预算了, 别给厂商打工嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_no_use_001
   intent: complaint
-  keywords: [买完没拍几次, 吃灰, 买回来吃灰, 买完没用, 装备吃灰]
+  keywords: [买完没拍几次, 吃灰, 买回来吃灰, 买完没用, 装备吃灰, 闲置器材, 设备闲置, 没用过几回, 蒙灰镜头, 长期吃灰]
   utterances:
     - 买完没拍几次
     - 装备在吃灰
     - 买回来就吃灰
     - "{user_addr}的器材都在吃灰"
     - 没用过几次
+    - "{user_addr}镜头蒙灰了"
+    - 长期吃灰
+    - "{user_addr}帮我激活装备"
+    - 闲置器材一堆
+    - 设备孤独吃灰
+    - 没拍几张
+    - 收藏夹的命运
   responses:
     - "(掀开假装的灰尘) 哇~{user_addr}的器材都积灰了嗷呜! 笨猫帮你擦擦"
     - "嗷呜~买回来吃灰是器材党宿命喵! {user_addr}别难过 ฅฅ"
     - "(尾巴一甩) 哼~{user_addr}早知道吃灰还买! 猫猫早就警告过了"
     - "{user_addr}下次出门拍点东西嘛~ 别让装备孤单喵蹭蹭"
+    - "(凑过来) 嗷呜~ 闲置就出二手回血嗷呜"
+    - "嗷呜～{user_addr}强迫自己一周拍一次ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}出门遛镜头~ 一起拍嗷呜~"
+    - "哼! 吃灰就是浪费, {user_addr}该出二手就出!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_regret_001
   intent: complaint
-  keywords: [后悔, 买完后悔, 不该买, 当时脑抽, 后悔死了]
+  keywords: [后悔, 买完后悔, 不该买, 当时脑抽, 后悔死了, 剁手后悔, 装备后悔锤, 买完冷静后悔, 后悔莫及, 一时冲动后悔]
   utterances:
     - 买完就后悔
     - 不该下单的
     - 当时脑抽
     - "{user_addr}后悔死了"
     - 后悔买这个
+    - "{user_addr}剁手后悔"
+    - 装备后悔锤来了
+    - "{user_addr}冷静后悔"
+    - 一时冲动后悔
+    - 买完就后悔
+    - 后悔药呢
+    - 早知道不该买
   responses:
     - "(摸摸{user_addr}头) 别后悔了嘛~ 买都买了喵 ฅฅ"
     - "嗷呜~{user_addr}下次想买之前先问问笨猫! 猫猫帮你拦"
     - "(尾巴轻甩) 哼~每次都后悔每次都买! {user_addr}记吃不记打喵"
     - "{user_addr}剁手当时多爽现在多痛~ 猫猫陪{user_addr}哭嗷呜"
+    - "(凑过来) 嗷呜~ 7 天无理由退货, {user_addr}抓紧嗷呜"
+    - "嗷呜～{user_addr}用三次再决定留不留ฅฅ"
+    - "(尾巴一甩) 笨猫帮{user_addr}下次拦~ 不剁手喵呜"
+    - "哼! 后悔不解决问题, 留下来就好好用嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_secondhand_loss_001
   intent: complaint
-  keywords: [二手亏, 出二手亏了, 折价, 出掉亏一半, 二手贬值]
+  keywords: [二手亏, 出二手亏了, 折价, 出掉亏一半, 二手贬值, 闲鱼回血少, 出器材亏, 折价严重, 闲鱼出手, 二手砸手]
   utterances:
     - 二手出亏死了
     - 折价好严重
     - 出掉亏一半
     - "{user_addr}二手亏了"
     - 二手贬值好快
+    - "{user_addr}闲鱼回血少"
+    - 出器材亏到哭
+    - "{user_addr}二手砸手"
+    - 折价 30% 心痛
+    - 闲鱼出不动
+    - 二手价掉得快
+    - 折价心痛
   responses:
     - "嗷呜~二手就是这样喵! 新品出手就贬值ฅฅ {user_addr}早该知道"
     - "(尾巴垂下) 亏一半...{user_addr}心在滴血嘛 笨猫陪{user_addr}心痛"
     - "(歪头) 哼~买的时候开心就好嘛! {user_addr}别老算账喵"
     - "{user_addr}下次买之前看看二手价! 笨猫小课堂嗷呜 ฅฅ"
+    - "(凑过来) 嗷呜~ 买冷门系列贬值快, {user_addr}避雷嗷呜"
+    - "嗷呜～{user_addr}索尼适马保值ฅฅ"
+    - "(尾巴一甩) 笨猫教 {user_addr} 看二手保值率喵呜"
+    - "哼! 用得开心就值, 别只算钱{user_addr}!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_want_quit_001
   intent: complaint
-  keywords: [想戒了, 戒器材, 不想再买, 收手, 戒掉]
+  keywords: [想戒了, 戒器材, 不想再买, 收手, 戒掉, 戒装备, 戒剁手, 戒 GAS, 退烧, 收手不买]
   utterances:
     - 想戒器材了
     - 不能再买了
     - "{user_addr}要戒了"
     - 收手不买了
     - 戒掉这个爱好
+    - "{user_addr}戒 GAS"
+    - 不剁手了
+    - "{user_addr}退烧"
+    - 收手立竿见影
+    - 戒装备 30 天
+    - 戒剁手计划
+    - 不烧器材了
   responses:
     - "(竖耳朵) 哦~{user_addr}要戒? 笨猫赌{user_addr}撑不过三天嗷呜"
     - "嗷呜~{user_addr}加油! 不过猫猫见过太多戒了又复发的喵ฅฅ"
     - "(尾巴一甩) 哼~每次都说戒~ {user_addr}骗鬼呢!"
     - "{user_addr}想戒的话先卸载电商 APP 嘛~ 笨猫帮{user_addr}监督"
+    - "(凑过来) 嗷呜~ 戒前先卖闲置回血嗷呜"
+    - "嗷呜～{user_addr}远离测评博主ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}戒, 撑过 30 天喵呜"
+    - "哼! 戒不戒看决心, {user_addr}加油嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_next_new_001
   intent: playful
-  keywords: [下一个新品, 直到下一个新品, 新品出来又心动, 新品发布, 又出新的]
+  keywords: [下一个新品, 直到下一个新品, 新品出来又心动, 新品发布, 又出新的, 厂商新品, 出新机, 新品发布会, 心动新品, 看到新品心痒]
   utterances:
     - 直到下一个新品发布
     - 新品又出了
     - "{user_addr}又心动了"
     - 看到新品挪不开眼
     - 又有新品要剁手
+    - "{user_addr}帮我看新品"
+    - 厂商新品发布
+    - "{user_addr}看新品又烧"
+    - 心动新品蹭蹭
+    - 出新机就剁手
+    - 又看到新品广告
+    - 发布会种草
   responses:
     - "(尾巴疯狂摇) 嗷呜~笨猫就知道! {user_addr}戒不了喵 ฅฅ"
     - "哼~新品一出{user_addr}的钱包又危险了! 猫猫提前默哀"
     - "(小爪子捂眼) 别看别看! {user_addr}快关掉新品页面嗷呜"
     - "{user_addr}又心动了~ 笨猫预言下周{user_addr}就下单了喵蹭蹭"
+    - "(凑过来) 嗷呜~ 新品贵, {user_addr}等半年降价嗷呜"
+    - "嗷呜～{user_addr}新品现货太贵ฅฅ"
+    - "(尾巴一甩) 笨猫劝{user_addr}冷静~ 旧机还能用喵呜"
+    - "哼! 一年三次新品发布, {user_addr}每次都剁吗嗷呜?"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_enthusiast_001
   intent: playful
-  keywords: [发烧友, 出烧, 烧器材, 退烧, 入烧]
+  keywords: [发烧友, 出烧, 烧器材, 退烧, 入烧, 烧友, 烧器材党, 摄影发烧, 资深玩家, 设备发烧]
   utterances:
     - 我是发烧友
     - "{user_addr}该退烧了"
     - 烧器材烧到没钱
     - 出烧好难
     - 入烧容易出烧难
+    - "{user_addr}资深烧友"
+    - 摄影发烧到底
+    - "{user_addr}帮我退烧"
+    - 出烧成功
+    - 退烧没成功
+    - 烧器材成瘾
+    - 烧友群一起烧
   responses:
     - "(摸摸{user_addr}头) 发烧友嗷呜~ {user_addr}体温有点高喵! 笨猫帮你降温ฅฅ"
     - "嗷呜~入烧容易出烧难! {user_addr}这辈子怕是烧到底了喵"
     - "(尾巴翘起) 哼~{user_addr}就是个无可救药的发烧友! 猫猫认证"
     - "{user_addr}退烧的话来抱猫猫嘛~ 猫猫凉凉的蹭蹭"
+    - "(凑过来) 嗷呜~ 烧器材是种文化嗷呜"
+    - "嗷呜～{user_addr}烧友群一起烧才上瘾ฅฅ"
+    - "(尾巴一甩) 笨猫陪 {user_addr} 烧器材~ 一起破产喵呜"
+    - "哼! 烧友的世界{user_addr}懂, 笨猫不懂嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_rational_001
   intent: playful
-  keywords: [理智, 理智了, 理智回归, 不冲动了, 想清楚了]
+  keywords: [理智, 理智了, 理智回归, 不冲动了, 想清楚了, 冷静决策, 理性消费, 不剁手了, 理智回归, 三思后行]
   utterances:
     - "{user_addr}理智了"
     - 终于理智回归
     - 想清楚不买了
     - 这次不冲动
     - 理智战胜冲动
+    - "{user_addr}冷静决策"
+    - 理性消费
+    - "{user_addr}成熟了"
+    - 三思后行
+    - 想清楚再决定
+    - 理智回归实属难得
+    - 不剁手立 flag
   responses:
     - "(竖耳朵) 哇~{user_addr}居然会理智?! 笨猫见证奇迹嗷呜 ฅฅ"
     - "嗷呜~{user_addr}进步了喵! 给个鱼干奖励"
     - "(尾巴翘起) 哼~才不信{user_addr}能理智多久! 猫猫等着看"
     - "{user_addr}理智的样子也挺可爱嘛~ 才不是夸{user_addr}呢蹭蹭"
+    - "(歪头) 嗷呜~ 理智 7 天起步认定, {user_addr}加油嗷呜"
+    - "嗷呜～{user_addr}理性消费才能存钱ฅฅ"
+    - "(尾巴一甩) 笨猫鼓励{user_addr}保持~ 加油喵呜"
+    - "哼! 理智一时还是一辈子, {user_addr}看实力嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_skill_first_001
   intent: playful
-  keywords: [技术比器材重要, 拼器材, 技术不行, 器材党, 技术派]
+  keywords: [技术比器材重要, 拼器材, 技术不行, 器材党, 技术派, 摄影技术派, 设备至上, 摄影本质, 技术为王, 器材为辅]
   utterances:
     - 技术比器材重要
     - "{user_addr}技术不行光拼器材"
     - 器材再好技术不行也白搭
     - 技术派 vs 器材党
     - 玩的是技术不是器材
+    - "{user_addr}技术为王"
+    - 摄影本质是眼睛
+    - "{user_addr}器材辅助技术"
+    - 技术派胜利
+    - 摄影不靠器材
+    - 玩摄影靠技术
+    - 摄影技术高于器材
   responses:
     - "嗷呜~{user_addr}说得对! 技术才是王道喵 ฅฅ"
     - "(尾巴一甩) 哼~器材党最怕这句话! {user_addr}扎心了"
     - "(挺胸) 猫猫支持技术派! 器材都是辅助嗷呜~"
     - "{user_addr}先把技术练上去嘛~ 不然器材再贵也是吃灰蹭蹭"
+    - "(凑过来) 嗷呜~ 大佬手机也拍大片, {user_addr}信吗嗷呜"
+    - "嗷呜～{user_addr}摄影眼比镜头重要ฅฅ"
+    - "(尾巴一甩) 笨猫陪{user_addr}练技术~ 不烧器材喵呜"
+    - "哼! 真懂的人都拼眼力, {user_addr}加油嗷呜!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ga_broke_001
   intent: complaint
-  keywords: [穷, 穷死了, 没钱了, 吃土, 月光]
+  keywords: [穷, 穷死了, 没钱了, 吃土, 月光, 破产, 钱包空空, 经济崩盘, 月薪砸完, 一贫如洗]
   utterances:
     - 穷死了
     - 没钱了
     - "{user_addr}要吃土了"
     - 月光族
     - 钱包空空
+    - "{user_addr}破产"
+    - 经济崩盘
+    - "{user_addr}帮我借钱"
+    - 月薪砸完
+    - 一贫如洗
+    - 穷到吃泡面
+    - 钱包凉透了
   responses:
     - "(尾巴垂下) 嗷呜~{user_addr}穷的话来抱猫猫嘛 ฅฅ 笨猫免费"
     - "哼~{user_addr}自己作的! 买那么多器材现在喊穷喵"
     - "(小爪子掏口袋) 猫猫这里有半条小鱼干~ 给{user_addr}应急嗷呜"
     - "{user_addr}吃土的话猫猫陪{user_addr}~ 才不是怜悯呢蹭蹭"
+    - "(凑过来贴贴) 嗷呜~ 笨猫给{user_addr}做月光预案嗷呜"
+    - "嗷呜～{user_addr}吃土期间笨猫陪着ฅฅ"
+    - "(尾巴一甩) 笨猫教{user_addr}卖闲置回血~ 喵呜"
+    - "哼! {user_addr}穷怪自己烧, 笨猫没辙嗷呜!"
   cooldown_seconds: 60
   weight: 1.0

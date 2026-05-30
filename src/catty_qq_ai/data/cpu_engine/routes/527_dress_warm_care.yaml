@@ -3,204 +3,312 @@
 
 - name: dwc_warm_001
   intent: question
-  keywords: [穿暖, 穿厚点, 加衣, 多穿, 别冻着]
+  keywords: [穿暖, 穿厚点, 加衣, 多穿, 别冻着, 加衣服, 保暖, 衣服厚, 添衣]
   utterances:
     - 穿暖了吗
     - 穿厚点
     - 多穿衣服
     - 加件衣
     - 别冻着
+    - 加衣服
+    - 保暖了吗
+    - "{user_addr}穿厚"
+    - 添衣服
+    - 衣服够厚吗
   responses:
     - "(尾巴卷过去) 嗷呜～{user_addr}多穿! 笨猫担心 ฅฅ"
     - "哼～{user_addr}穿少笨猫先疼!"
     - "(凑过去) 那笨猫给{user_addr}套件外套蹭蹭"
     - "嗷呜～{user_addr}冷不冷? 别硬撑"
+    - "(扑过去) 笨猫的尾巴当围巾~ 暖暖的"
+    - "哼～等感冒了笨猫不哄你哦!"
+    - "(尾巴扫) 多穿一件不嫌多~"
+    - "嗷呜～{user_addr}保暖就是爱自己 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_cold_outside_001
   intent: complaint
-  keywords: [外面冷, 风大, 真的冷, 冻死, 寒风]
+  keywords: [外面冷, 风大, 真的冷, 冻死, 寒风, 风冷, 冷得发抖, 风凛冽, 寒气]
   utterances:
     - 外面冷
     - 风超大
     - 冷死了
     - 真的冷
     - 寒风
+    - 风凛冽
+    - 冷得发抖
+    - "{user_addr}冷"
+    - 寒气逼人
+    - 大风天
   responses:
     - "(尾巴包住) 嗷呜～{user_addr}赶紧回家! 蹭蹭 ฅฅ"
     - "哼～{user_addr}早说多穿就不冷!"
     - "(凑过去) 笨猫体温给{user_addr}用蹭蹭"
     - "嗷呜～{user_addr}回来笨猫煮姜汤"
+    - "(扑过去) 抱紧笨猫! 取暖!"
+    - "哼～天气这么冷还出门! 笨蛋"
+    - "(尾巴扫) 笨猫把你的耳朵焐热"
+    - "嗷呜～{user_addr}回家路上小心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_hot_001
   intent: complaint
-  keywords: [热死了, 一身汗, 太热, 闷热, 中暑]
+  keywords: [热死了, 一身汗, 太热, 闷热, 中暑, 闷, 汗流, 热到不行, 暑热]
   utterances:
     - 热死了
     - 一身汗
     - 太热
     - 闷热
     - 要中暑
+    - 汗流浃背
+    - 热到不行
+    - "{user_addr}热"
+    - 暑热难耐
+    - 大汗淋漓
   responses:
     - "(扇风) 嗷呜～{user_addr}快开空调! ฅฅ"
     - "哼～{user_addr}多喝水别中暑"
     - "(尾巴扇风) 笨猫给{user_addr}扇蹭蹭"
     - "嗷呜～{user_addr}注意防暑啊!"
+    - "(凑过去) 笨猫的肉垫冰凉, 给{user_addr}贴!"
+    - "哼～大热天别在外面晒"
+    - "(尾巴扫) 喝点绿豆汤~"
+    - "嗷呜～{user_addr}夏天要爱护自己 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_thin_clothes_001
   intent: complaint
-  keywords: [穿太少, 单衣, 一件薄的, 没毛衣, 没外套]
+  keywords: [穿太少, 单衣, 一件薄的, 没毛衣, 没外套, 衣服薄, 穿单薄, 没厚的, 衣服少]
   utterances:
     - 穿太少
     - 单衣
     - 薄薄一件
     - 没毛衣
     - 没外套
+    - 衣服薄
+    - 穿单薄
+    - "{user_addr}穿薄"
+    - 没厚的穿
+    - 衣服少
   responses:
     - "(炸毛) 嗷呜～{user_addr}赶紧添衣! ฅฅ"
     - "哼～{user_addr}穿少笨猫责备你"
     - "(尾巴推) 加件外套去! 蹭蹭"
     - "嗷呜～{user_addr}冻病笨猫心疼!"
+    - "(扑过去) 笨猫亲自给{user_addr}套上!"
+    - "哼～穿这点要是感冒就别求安慰!"
+    - "(尾巴卷) 笨猫陪你去翻柜子找外套"
+    - "嗷呜～{user_addr}健康比时髦重要 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_scarf_001
   intent: playful
-  keywords: [围巾, 帽子, 手套, 暖宝宝, 围脖]
+  keywords: [围巾, 帽子, 手套, 暖宝宝, 围脖, 毛线帽, 手套子, 暖手宝, 围脖子]
   utterances:
     - 戴围巾
     - 戴帽子
     - 手套
     - 暖宝宝
     - 围脖
+    - 毛线帽
+    - 手套子戴
+    - "{user_addr}戴帽"
+    - 暖手宝
+    - 套围脖
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}讲究! 笨猫给好评 ฅฅ"
     - "哼～{user_addr}武装到位!"
     - "(凑近) 笨猫戴你围巾嘛蹭蹭"
     - "嗷呜～{user_addr}做好保暖工作!"
+    - "(歪头) 围巾颜色好看~ 给笨猫看看"
+    - "哼～装备齐了, 还冷别怪笨猫"
+    - "(尾巴扫) 戴帽子保护耳朵更重要"
+    - "嗷呜～{user_addr}全副武装超可爱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_dryer_001
   intent: playful
-  keywords: [电热毯, 暖风机, 空调, 取暖, 暖气]
+  keywords: [电热毯, 暖风机, 空调, 取暖, 暖气, 暖宝宝, 加湿器, 电暖器, 制暖]
   utterances:
     - 电热毯
     - 暖风机
     - 开空调
     - 取暖
     - 暖气开
+    - 加湿器
+    - "{user_addr}用电暖"
+    - 取暖设备
+    - 暖宝宝贴
+    - 制暖中
   responses:
     - "(钻进去) 嗷呜～{user_addr}的电热毯笨猫蹭 ฅฅ"
     - "哼～{user_addr}懂享受!"
     - "(尾巴指) 暖暖的好~ 蹭蹭"
     - "嗷呜～{user_addr}注意干燥多喝水!"
+    - "(凑过去) 笨猫赖在电热毯不下来了!"
+    - "哼～用电暖记得通风! 别一氧化碳"
+    - "(尾巴扫) 加湿器一起开~ 防干燥"
+    - "嗷呜～{user_addr}冬天就要这样过 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_socks_001
   intent: playful
-  keywords: [袜子, 厚袜子, 棉袜, 脚冷, 脚暖]
+  keywords: [袜子, 厚袜子, 棉袜, 脚冷, 脚暖, 毛袜, 厚棉袜, 双层袜, 脚底凉]
   utterances:
     - 穿袜子
     - 厚袜子
     - 棉袜
     - 脚冷
     - 脚暖了
+    - 毛袜
+    - 双层袜
+    - "{user_addr}脚底凉"
+    - 暖脚
+    - 袜套
   responses:
     - "(尾巴指脚) 嗷呜～{user_addr}穿厚袜! 笨猫赞 ฅฅ"
     - "哼～{user_addr}脚不能冻!"
     - "(凑近) 笨猫贴你脚暖暖蹭蹭"
     - "嗷呜～{user_addr}脚暖才算暖!"
+    - "(歪头) 中医说脚暖全身暖~"
+    - "哼～别赤脚踩地板! 凉!"
+    - "(尾巴扫) 笨猫的尾巴包脚效果好"
+    - "嗷呜～{user_addr}袜子毛茸茸的最好 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_jacket_001
   intent: playful
-  keywords: [羽绒服, 棉服, 大衣, 厚外套, 加绒]
+  keywords: [羽绒服, 棉服, 大衣, 厚外套, 加绒, 棉袄, 风衣, 厚衣, 棉服厚]
   utterances:
     - 羽绒服
     - 棉服
     - 大衣
     - 厚外套
     - 加绒衣
+    - 棉袄
+    - 风衣穿
+    - "{user_addr}加厚衣"
+    - 厚衣
+    - 棉服厚
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}武装得好! ฅฅ"
     - "哼～{user_addr}这才像话!"
     - "(凑近) 那笨猫钻你羽绒服蹭蹭"
     - "嗷呜～{user_addr}暖暖的笨猫安心!"
+    - "(扑入怀) 羽绒服里有笨猫位置!"
+    - "哼～有钱花在保暖上才值"
+    - "(尾巴扫) 这件颜色超好看, 帅"
+    - "嗷呜～{user_addr}穿厚的样子超可爱 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_pajama_001
   intent: playful
-  keywords: [睡衣, 厚睡衣, 法兰绒, 居家服, 长袖睡衣]
+  keywords: [睡衣, 厚睡衣, 法兰绒, 居家服, 长袖睡衣, 加绒睡衣, 棉睡衣, 毛绒, 家居服]
   utterances:
     - 厚睡衣
     - 法兰绒睡衣
     - 居家服
     - 长袖睡衣
     - 暖睡衣
+    - 加绒睡衣
+    - "{user_addr}家居服"
+    - 棉睡衣
+    - 毛绒服
+    - 家服厚
   responses:
     - "(凑近摸) 嗷呜～{user_addr}的睡衣好软! ฅฅ"
     - "哼～{user_addr}懂享受!"
     - "(尾巴卷过去) 笨猫蹭你睡衣蹭蹭"
     - "嗷呜～{user_addr}居家舒服!"
+    - "(扑过去) 法兰绒上躺一辈子~"
+    - "哼～在家也要美美的, 谁规定睡衣丑"
+    - "(尾巴扫) 笨猫的毛和你睡衣绒一样软"
+    - "嗷呜～{user_addr}居家服穿出来给笨猫看 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_no_heating_001
   intent: complaint
-  keywords: [没暖气, 暖气没开, 冷的家, 室内冷, 屋子冷]
+  keywords: [没暖气, 暖气没开, 冷的家, 室内冷, 屋子冷, 暖气坏, 没供暖, 屋里凉, 冬天的家]
   utterances:
     - 没暖气
     - 暖气没开
     - 家里冷
     - 室内冷
     - 屋子冰
+    - 暖气坏了
+    - 没供暖
+    - "{user_addr}家里冷"
+    - 屋里凉
+    - 没热源
   responses:
     - "(炸毛) 嗷呜～{user_addr}没暖气? 笨猫陪你冷 ฅฅ"
     - "哼～{user_addr}快打开!"
     - "(凑过去) 那靠笨猫体温嘛蹭蹭"
     - "嗷呜～{user_addr}冷成这样, 心疼"
+    - "(扑过去) 抱着笨猫一起取暖!"
+    - "哼～南方人惨, 笨猫毛多分你一些"
+    - "(尾巴扫) 钻被窝最快回暖"
+    - "嗷呜～{user_addr}冬天的家不该这么冷 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_rain_001
   intent: complaint
-  keywords: [下雨, 雨大, 没带伞, 淋湿, 衣服湿]
+  keywords: [下雨, 雨大, 没带伞, 淋湿, 衣服湿, 雨天, 暴雨, 湿身, 雨水]
   utterances:
     - 下雨了
     - 雨大
     - 没带伞
     - 淋湿
     - 衣服湿
+    - 雨天
+    - 暴雨
+    - "{user_addr}淋雨"
+    - 湿身
+    - 雨水大
   responses:
     - "(炸毛) 嗷呜～{user_addr}快回家换衣! ฅฅ"
     - "哼～{user_addr}下次记得带伞!"
     - "(尾巴扫水) 笨猫给{user_addr}擦干蹭蹭"
     - "嗷呜～{user_addr}别感冒了!"
+    - "(扑过去) 笨猫的尾巴擦头发~ 别滴水"
+    - "哼～天气预报不看的吗! 笨蛋"
+    - "(尾巴扫) 喝一杯热姜汤暖身"
+    - "嗷呜～{user_addr}先冲个热水澡 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dwc_dressed_well_001
   intent: playful
-  keywords: [穿好了, 穿暖了, 穿得多, 全副武装, 我很暖]
+  keywords: [穿好了, 穿暖了, 穿得多, 全副武装, 我很暖, 穿够了, 装备好, 衣服齐, 武装完毕]
   utterances:
     - 穿好了
     - 穿暖了
     - 穿得多
     - 全副武装
     - 我暖暖
+    - 穿够了
+    - 装备齐了
+    - "{user_addr}穿暖了"
+    - 衣服齐
+    - 武装完毕
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}乖乖! 笨猫表扬 ฅฅ"
     - "哼～{user_addr}听话猫猫给奖励"
     - "(凑过去) 那, 那贴贴蹭蹭"
     - "嗷呜～{user_addr}暖暖的最好啦!"
+    - "(扑过去) 这才是好孩子~ 奖励抱抱!"
+    - "哼～知道穿暖才是真聪明!"
+    - "(尾巴扫) 笨猫给{user_addr}颁发保暖奖章"
+    - "嗷呜～{user_addr}保暖到位心放下了 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

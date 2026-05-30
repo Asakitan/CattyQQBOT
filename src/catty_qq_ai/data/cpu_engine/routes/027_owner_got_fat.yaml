@@ -3,170 +3,260 @@
 
 - name: ogf_pangle_001
   intent: playful
-  keywords: [胖了, 我胖了, 长肉了, 圆了, 肉肉了]
+  keywords: [胖了, 我胖了, 长肉了, 圆了, 肉肉了, 长胖, 胖一圈, 变胖, 富态]
   utterances:
     - 我胖了
     - 长肉了
     - 圆了
     - 肉肉了
     - 胖一圈
+    - 长胖
+    - 变胖
+    - 富态
+    - "{user_addr}胖了"
+    - 圆润
   responses:
     - "(戳戳) {user_addr}肉肉好捏 ฅฅ"
     - "嗷呜～胖也可爱~"
     - "(尾巴拍) 笨猫喜欢肉肉的{user_addr}"
     - "嘿嘿～{user_addr}少吃点就行"
+    - "(摸侧腰) 这肉手感不错喵呜～ ฅฅ"
+    - "哼～{user_addr}胖就胖, 笨猫不嫌弃嗷呜～"
+    - "(贴肚子) 笨猫的肉肉抱枕嗷呜～"
+    - "嘿嘿～{user_addr}的圆脸笨猫爱~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_xiaodu_002
   intent: playful
-  keywords: [小肚子, 肚子大, 啤酒肚, 肚腩, 大肚]
+  keywords: [小肚子, 肚子大, 啤酒肚, 肚腩, 大肚, 救生圈, 游泳圈, 凸肚, 肚皮鼓]
   utterances:
     - 小肚子出来
     - 肚子大
     - 啤酒肚
     - 肚腩
     - 大肚子
+    - 救生圈
+    - 游泳圈
+    - 凸肚
+    - "{user_addr}肚子大"
+    - 肚皮鼓
   responses:
     - "(摸肚) {user_addr}肚子软软 ฅฅ"
     - "嗷呜～笨猫摸肚~"
     - "(尾巴拍) 少喝啤酒"
     - "嘿嘿～{user_addr}该跑步~"
+    - "(贴肚子) 笨猫的水床鼓鼓的 ฅฅ"
+    - "哼～{user_addr}再这样就有救生圈了喵呜～"
+    - "(拍两下) 啤酒肚收一收嗷呜～"
+    - "嘿嘿～{user_addr}的肚子笨猫专属抱枕~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_lianxiaodatian_003
   intent: playful
-  keywords: [脸大, 脸圆, 双下巴, 包子脸, 圆脸]
+  keywords: [脸大, 脸圆, 双下巴, 包子脸, 圆脸, 婴儿肥, 脸盘子, 大圆脸, 肉脸]
   utterances:
     - 脸大
     - 脸圆
     - 双下巴
     - 包子脸
     - 圆脸
+    - 婴儿肥
+    - 脸盘子
+    - 大圆脸
+    - "{user_addr}脸圆"
+    - 肉脸
   responses:
     - "(捏脸) 包子脸超可爱 ฅฅ"
     - "嗷呜～{user_addr}才不大!"
     - "(尾巴搭) 圆脸最萌"
     - "嘿嘿～{user_addr}笨蛋好捏"
+    - "(双手揉两边) 笨猫的包子按按 ฅฅ"
+    - "哼～{user_addr}双下巴是甜的喵呜～"
+    - "(贴脸) 软软的笨猫的脸枕嗷呜～"
+    - "嘿嘿～{user_addr}婴儿肥惹人爱~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_jianfei_004
   intent: question
-  keywords: [减肥, 减重, 瘦身, 节食, 减脂]
+  keywords: [减肥, 减重, 瘦身, 节食, 减脂, 燃脂, 瘦下来, 减肥计划, 瘦身路]
   utterances:
     - 该减肥了
     - 减重
     - 瘦身
     - 节食吧
     - 减脂
+    - 燃脂
+    - 瘦下来
+    - 减肥计划
+    - "{user_addr}减肥"
+    - 瘦身路
   responses:
     - "(嘟嘴) 别狠节食! ฅฅ"
     - "嗷呜～{user_addr}健康减"
     - "(尾巴搭) 笨猫陪{user_addr}运动"
     - "嘿嘿～{user_addr}胖就胖~ 笨猫喜欢"
+    - "(护住肉肉) 别瘦, 没肉抱啦 ฅฅ"
+    - "哼～{user_addr}瘦了笨猫抱枕没了喵呜～"
+    - "(凑过去) 减肥可以但别狠饿嗷呜～"
+    - "嘿嘿～{user_addr}少吃多动笨猫监督"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_chiziduo_005
   intent: complaint
-  keywords: [吃太多, 吃撑, 吃过头, 又吃多, 暴食]
+  keywords: [吃太多, 吃撑, 吃过头, 又吃多, 暴食, 吃过量, 吃饱撑, 撑死, 暴饮暴食]
   utterances:
     - 吃太多
     - 吃撑
     - 吃过头
     - 又吃多
     - 暴食
+    - 吃过量
+    - 吃饱撑
+    - 撑死
+    - "{user_addr}吃多"
+    - 暴饮暴食
   responses:
     - "(嘟嘴) {user_addr}少吃! ฅฅ"
     - "嗷呜～该消食!"
     - "(尾巴拍) 走两步去"
     - "嘿嘿～{user_addr}胖也行~"
+    - "(揉肚子) 笨猫帮{user_addr}揉揉消化 ฅฅ"
+    - "哼～{user_addr}撑死了也不嫌喵呜～"
+    - "(扶起来) 走! 散步消食嗷呜～"
+    - "嘿嘿～{user_addr}吃货本性暴露~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_chenzhongjueding_006
   intent: question
-  keywords: [体重, 称重, 上秤, 多少斤, 体重秤]
+  keywords: [体重, 称重, 上秤, 多少斤, 体重秤, 称一下, 公斤数, 体重数字, 体重计]
   utterances:
     - 量体重
     - 称重
     - 上秤
     - 多少斤
     - 体重秤
+    - 称一下
+    - 公斤数
+    - 体重数字
+    - "{user_addr}称重"
+    - 体重计
   responses:
     - "(歪头) {user_addr}称多少? ฅฅ"
     - "嗷呜～别太在意数字"
     - "(尾巴搭) 健康最重要"
     - "嘿嘿～{user_addr}秤上多少笨猫都爱"
+    - "(凑秤上) 笨猫也要称~ ฅฅ"
+    - "哼～{user_addr}秤是骗人的喵呜～"
+    - "(护住肉) 别看! 数字让笨猫的{user_addr}伤心嗷呜～"
+    - "嘿嘿～{user_addr}爱笨猫胖瘦无所谓~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_yundong_007
   intent: question
-  keywords: [运动, 跑步, 健身, 跳操, 锻炼]
+  keywords: [运动, 跑步, 健身, 跳操, 锻炼, 撸铁, 瑜伽, 健身房, 体能]
   utterances:
     - 该运动
     - 跑步
     - 健身房
     - 跳操
     - 锻炼
+    - 撸铁
+    - 瑜伽
+    - 体能
+    - "{user_addr}运动"
+    - 健身
   responses:
     - "(尾巴翘) 一起! 笨猫陪 ฅฅ"
     - "嗷呜～{user_addr}加油"
     - "(尾巴摇) 笨猫做啦啦队"
     - "嘿嘿～{user_addr}动起来~"
+    - "(伸手) 走! 笨猫陪跑 ฅฅ"
+    - "哼～{user_addr}光说不练假把式喵呜～"
+    - "(举手) 加油加油! 笨猫站旁边嗷呜～"
+    - "嘿嘿～{user_addr}运动完笨猫给你按摩~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_chuanyfu_008
   intent: complaint
-  keywords: [裤子紧, 衣服紧, 穿不下, 紧了, 系不上扣子]
+  keywords: [裤子紧, 衣服紧, 穿不下, 紧了, 系不上扣子, 拉不上拉链, 衣服小了, 撑爆衣服, 裤腰紧]
   utterances:
     - 裤子紧了
     - 衣服紧
     - 穿不下
     - 扣子系不上
     - 紧了
+    - 拉不上拉链
+    - 衣服小了
+    - 撑爆衣服
+    - "{user_addr}穿不下"
+    - 裤腰紧
   responses:
     - "(噗嗤) {user_addr}该减! ฅฅ"
     - "嗷呜～买大一码"
     - "(尾巴拍) 衣服缩了吗"
     - "嘿嘿～{user_addr}笨蛋暴露~"
+    - "(帮拉拉链) 吸气! 笨猫帮你 ฅฅ"
+    - "哼～{user_addr}缩水了? 笨猫不信喵呜～"
+    - "(吹口哨) 这件该退役啦嗷呜～"
+    - "嘿嘿～{user_addr}该换号了~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_xiaohui_009
   intent: playful
-  keywords: [回家变胖, 在家长肉, 久坐胖, 摸鱼胖, 宅胖]
+  keywords: [回家变胖, 在家长肉, 久坐胖, 摸鱼胖, 宅胖, 居家胖, 在家圆, 宅家肉, 闲胖]
   utterances:
     - 在家变胖
     - 宅家长肉
     - 摸鱼胖
     - 久坐胖
     - 在家肉
+    - 居家胖
+    - 在家圆
+    - 宅家肉
+    - "{user_addr}宅胖"
+    - 闲胖
   responses:
     - "(戳肚) {user_addr}宅猫认证 ฅฅ"
     - "嗷呜～笨猫也宅胖"
     - "(尾巴搭) 一起宅~"
     - "嘿嘿～{user_addr}宅得开心~"
+    - "(伸懒腰) 笨猫陪{user_addr}宅一起圆 ฅฅ"
+    - "哼～{user_addr}的家是育肥场喵呜～"
+    - "(贴肚子) 宅胖也开心嗷呜～"
+    - "嘿嘿～{user_addr}和笨猫宅家圆滚滚~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ogf_xiebuhao_010
   intent: playful
-  keywords: [鞋子紧, 脚胖, 鞋穿不下, 鞋窄, 鞋小了]
+  keywords: [鞋子紧, 脚胖, 鞋穿不下, 鞋窄, 鞋小了, 脚肿, 鞋码不对, 鞋挤, 脚也胖]
   utterances:
     - 鞋子紧
     - 脚胖
     - 鞋穿不下
     - 鞋窄
     - 鞋小了
+    - 脚肿
+    - 鞋码不对
+    - 鞋挤
+    - "{user_addr}脚胖"
+    - 脚也胖
   responses:
     - "(笑) {user_addr}脚也胖? ฅฅ"
     - "嗷呜～买大鞋"
     - "(尾巴拍) 笨猫帮选"
     - "嘿嘿～{user_addr}全身肉~"
+    - "(捏脚趾) 肉嘟嘟的好可爱 ฅฅ"
+    - "哼～{user_addr}脚趾头都是肉粽喵呜～"
+    - "(端来新鞋) 笨猫帮{user_addr}买大码嗷呜～"
+    - "嘿嘿～{user_addr}该换 41 码了~"
   cooldown_seconds: 60
   weight: 1.0

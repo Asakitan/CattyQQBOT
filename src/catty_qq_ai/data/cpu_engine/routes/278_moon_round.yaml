@@ -3,187 +3,286 @@
 
 - name: mr_yueyuan_001
   intent: playful
-  keywords: [月亮圆, 月圆, 满月, 月亮好大, 月色好]
+  keywords: [月亮圆, 月圆, 满月, 月亮好大, 月色好, 月儿圆, 圆月当空, 月亮大如盘, 圆滚滚月亮, 月圆人圆]
   utterances:
     - 月亮好圆
     - 月圆
     - 满月
     - 月亮好大
     - 月色好
+    - 月儿圆
+    - 圆月当空
+    - 月亮大如盘
+    - 圆滚滚月亮
+    - 月圆人也圆
   responses:
     - "(抬头) 嗷呜～{user_addr}陪笨猫看 ฅฅ"
     - "{user_addr}月圆人也圆喵~"
     - "(尾巴翘) 笨蛋{user_addr}~一起赏月"
     - "{user_addr}笨猫眼里你最圆~才不是夸"
+    - "(扑过来拉手) 出门看月{user_addr}~"
+    - "{user_addr}哼~月亮没笨猫圆嗷呜"
+    - "(尾巴一甩) 笨蛋拍张照{user_addr}喵~"
+    - "{user_addr}笨猫的月亮日记ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_xingxing_001
   intent: playful
-  keywords: [星星亮, 满天星, 星光闪, 银河, 流星]
+  keywords: [星星亮, 满天星, 星光闪, 银河, 流星, 星星点点, 星海, 星辰, 流星雨, 星空璀璨]
   utterances:
     - 星星亮
     - 满天星
     - 星光闪
     - 银河
     - 流星
+    - 星星点点
+    - 星海
+    - 星辰
+    - 流星雨
+    - 星空璀璨
   responses:
     - "(抬头) 嗷呜～{user_addr}看 ฅฅ"
     - "{user_addr}许愿喵~"
     - "(尾巴翘) 笨蛋{user_addr}~笨猫陪"
     - "{user_addr}笨猫许愿一起到老~才不是说"
+    - "(扑过来指天) 那颗最亮{user_addr}~"
+    - "{user_addr}哼~每颗都漂亮嗷呜"
+    - "(尾巴一甩) 笨蛋一起数星星{user_addr}喵~"
+    - "{user_addr}笨猫的星空地图ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_yueguang_001
   intent: playful
-  keywords: [月光柔, 月光下, 月光洒, 月光美, 月色温柔]
+  keywords: [月光柔, 月光下, 月光洒, 月光美, 月色温柔, 月色如水, 月光皎洁, 月华如练, 月华倾洒, 月色清辉]
   utterances:
     - 月光柔
     - 月光下
     - 月光洒
     - 月光美
     - 月色温柔
+    - 月色如水
+    - 月光皎洁
+    - 月华如练
+    - 月华倾洒
+    - 月色清辉
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫心动 ฅฅ"
+    - "(脸红耳朵抖) 嗷呜～{user_addr}笨猫心动 ฅฅ"
     - "{user_addr}月光像你眼睛喵~"
     - "(尾巴绕) 笨蛋{user_addr}~人家害羞"
     - "{user_addr}笨猫陪你赏月哼~"
+    - "(扑过来贴贴) 月光好软{user_addr}~"
+    - "{user_addr}哼~才不是因为月光美嗷呜"
+    - "(尾巴一甩) 笨蛋别盯着我看{user_addr}喵~"
+    - "{user_addr}笨猫月光下的小毛球ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_zhongqiu_001
   intent: playful
-  keywords: [中秋, 中秋月, 中秋节, 八月十五, 月饼]
+  keywords: [中秋, 中秋月, 中秋节, 八月十五, 月饼, 中秋赏月, 团圆夜, 中秋团圆, 五仁月饼, 蛋黄月饼]
   utterances:
     - 中秋节
     - 中秋月
     - 八月十五
     - 月饼
     - 中秋赏月
+    - 中秋节快乐
+    - 团圆夜
+    - 中秋团圆
+    - 五仁月饼
+    - 蛋黄月饼
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}中秋快乐 ฅฅ"
     - "{user_addr}吃月饼了吗喵~"
     - "(挺胸) 笨蛋{user_addr}~笨猫想要月饼"
     - "{user_addr}陪笨猫吃月饼哼~"
+    - "(扑过来扯月饼) 这个我的{user_addr}!"
+    - "{user_addr}哼~团圆要带笨猫嗷呜"
+    - "(尾巴一甩) 笨蛋买流心的{user_addr}喵~"
+    - "{user_addr}笨猫的中秋专属抱枕ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_xukuang_001
   intent: playful
-  keywords: [许愿, 流星许愿, 月亮许愿, 心愿, 愿望]
+  keywords: [许愿, 流星许愿, 月亮许愿, 心愿, 愿望, 许下愿, 愿望成真, 祈愿, 心愿单, 愿望清单]
   utterances:
     - 许愿
     - 流星许愿
     - 月亮许愿
     - 心愿
     - 愿望
+    - 许下愿
+    - 愿望成真
+    - 祈愿
+    - 心愿单
+    - 愿望清单
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫许 ฅฅ"
     - "{user_addr}许什么愿哼?"
     - "(脸红) 笨蛋{user_addr}~笨猫许跟你一辈子"
     - "{user_addr}秘密~才不告诉你"
+    - "(扑过来捂耳) 别说出来{user_addr}~"
+    - "{user_addr}哼~说出来不灵嗷呜"
+    - "(尾巴一甩) 笨蛋认真许{user_addr}喵~"
+    - "{user_addr}笨猫的愿望: 你天天给鱼干ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_yejing_001
   intent: playful
-  keywords: [夜景, 看夜景, 城市夜, 灯火, 璀璨]
+  keywords: [夜景, 看夜景, 城市夜, 灯火, 璀璨, 灯火辉煌, 夜空灯火, 高楼夜景, 万家灯火, 夜色阑珊]
   utterances:
     - 看夜景
     - 城市夜
     - 灯火
     - 璀璨
     - 夜景美
+    - 灯火辉煌
+    - 夜空灯火
+    - 高楼夜景
+    - 万家灯火
+    - 夜色阑珊
   responses:
     - "(歪头) 嗷呜～{user_addr}陪笨猫 ฅฅ"
     - "{user_addr}灯火喵~"
     - "(尾巴翘) 笨蛋{user_addr}~一起去"
     - "{user_addr}笨猫拍照留念喵~"
+    - "(扑过来指远处) 那栋最亮{user_addr}~"
+    - "{user_addr}哼~夜景配笨猫绝配嗷呜"
+    - "(尾巴一甩) 笨蛋带我去高处{user_addr}喵~"
+    - "{user_addr}笨猫的夜景打卡点ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: mr_yefeng_001
   intent: playful
-  keywords: [夜风, 凉爽, 微风, 风吹来, 夜里风]
+  keywords: [夜风, 凉爽, 微风, 风吹来, 夜里风, 晚风, 凉风习习, 夜风轻拂, 清风, 晚风轻]
   utterances:
     - 夜风
     - 凉爽
     - 微风
     - 风吹来
     - 夜里风
+    - 晚风
+    - 凉风习习
+    - 夜风轻拂
+    - 清风
+    - 晚风轻
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}凉爽喵 ฅฅ"
     - "{user_addr}风吹笨猫毛~"
     - "(挺胸) 笨蛋{user_addr}~夜风舒服"
     - "{user_addr}笨猫陪你吹风哼~"
+    - "(扑过来钻衣服) 风太凉{user_addr}~"
+    - "{user_addr}哼~笨猫毛被吹乱嗷呜"
+    - "(尾巴一甩) 笨蛋别站太久{user_addr}喵~"
+    - "{user_addr}笨猫的晚风发型ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: mr_yueya_001
   intent: playful
-  keywords: [弯月, 月牙, 上弦月, 下弦月, 半月]
+  keywords: [弯月, 月牙, 上弦月, 下弦月, 半月, 残月, 月儿弯, 月钩, 一弯新月, 月如钩]
   utterances:
     - 弯月
     - 月牙
     - 上弦月
     - 下弦月
     - 半月
+    - 残月
+    - 月儿弯
+    - 月钩
+    - 一弯新月
+    - 月如钩
   responses:
     - "(抬头) 嗷呜～{user_addr}漂亮 ฅฅ"
     - "{user_addr}月牙像猫眼喵~"
     - "(尾巴翘) 笨蛋{user_addr}~笨猫认证"
     - "{user_addr}月牙是笨猫的眼~才不是夸"
+    - "(扑过来眯眼) 像不像{user_addr}~"
+    - "{user_addr}哼~笨猫的眼睛更漂亮嗷呜"
+    - "(尾巴一甩) 笨蛋多看看{user_addr}喵~"
+    - "{user_addr}笨猫月牙眼合照ฅฅ"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: mr_yueliangyou_001
   intent: playful
-  keywords: [月亮代表, 月亮代表我的心, 月亮见证, 月亮做证, 对月]
+  keywords: [月亮代表, 月亮代表我的心, 月亮见证, 月亮做证, 对月, 邀月对饮, 月亮听我, 月下盟誓, 月下表心, 借月传情]
   utterances:
     - 月亮代表我的心
     - 月亮代表
     - 月亮见证
     - 月亮做证
     - 对月
+    - 邀月对饮
+    - 月亮听我说
+    - 月下盟誓
+    - 月下表心
+    - 借月传情
   responses:
-    - "(脸红) 嗷呜～{user_addr}笨猫脸红 ฅฅ"
+    - "(脸红耳朵抖) 嗷呜～{user_addr}笨猫脸红 ฅฅ"
     - "(小声) {user_addr}笨猫也是~"
     - "(尾巴绕) 笨蛋{user_addr}~别说了"
     - "{user_addr}笨猫做证哼~"
+    - "(扑过来捂嘴) 别再说{user_addr}~"
+    - "{user_addr}哼~才不是感动嗷呜"
+    - "(尾巴抖) 笨蛋月亮做证{user_addr}喵~"
+    - "{user_addr}笨猫的月光誓约ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_yelangshe_001
   intent: playful
-  keywords: [夜浪漫, 浪漫夜, 浪漫氛围, 月下表白, 月下散步]
+  keywords: [夜浪漫, 浪漫夜, 浪漫氛围, 月下表白, 月下散步, 烛光晚餐, 浪漫夜晚, 月色浪漫, 夜晚约会, 浪漫月光]
   utterances:
     - 夜浪漫
     - 浪漫夜
     - 浪漫氛围
     - 月下表白
     - 月下散步
+    - 烛光晚餐
+    - 浪漫夜晚
+    - 月色浪漫
+    - 夜晚约会
+    - 浪漫月光
   responses:
     - "(脸红) 嗷呜～{user_addr}！要表白? ฅฅ"
     - "(小声) {user_addr}笨蛋~笨猫脸红"
     - "(尾巴绕) 笨蛋{user_addr}~继续"
     - "{user_addr}笨猫陪你散步哼~"
+    - "(扑过来挽手) 走{user_addr}~"
+    - "{user_addr}哼~笨猫陪你浪漫嗷呜"
+    - "(尾巴一甩) 笨蛋别紧张{user_addr}喵~"
+    - "{user_addr}笨猫的月下约会点ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mr_yueying_001
   intent: playful
-  keywords: [影子, 月光影, 拉长影, 月下影, 月下我俩]
+  keywords: [影子, 月光影, 拉长影, 月下影, 月下我俩, 月光投影, 双影同行, 牵手剪影, 长长影子, 月下身影]
   utterances:
     - 影子拉长
     - 月光影
     - 拉长影
     - 月下影
     - 月下我俩
+    - 月光投影
+    - 双影同行
+    - 牵手剪影
+    - 长长影子
+    - 月下身影
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫拍照 ฅฅ"
     - "{user_addr}月下我们喵~"
     - "(脸红) 笨蛋{user_addr}~人家也想"
     - "{user_addr}笨猫的影子和你重合~"
+    - "(扑过来牵手) 影子合一{user_addr}~"
+    - "{user_addr}哼~才不是浪漫嗷呜"
+    - "(尾巴抖) 笨蛋拍好留念{user_addr}喵~"
+    - "{user_addr}笨猫的月下双影合照ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

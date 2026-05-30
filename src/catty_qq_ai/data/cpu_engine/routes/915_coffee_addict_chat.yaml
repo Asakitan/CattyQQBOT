@@ -3,187 +3,298 @@
 
 - name: cof_morning_001
   intent: playful
-  keywords: [早咖啡, 一杯咖啡, 醒神, 美式, 拿铁]
+  keywords: [早咖啡, 一杯咖啡, 醒神, 美式, 拿铁, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 早上来杯咖啡
-    - 美式醒神
-    - 拿铁好喝
-    - 一杯下肚
-    - 咖啡续命
+    - "早上来杯咖啡"
+    - "美式醒神"
+    - "拿铁好喝"
+    - "一杯下肚"
+    - "咖啡续命"
+    - "早咖啡笑死"
+    - "{user_addr}笨猫陪我聊早咖啡"
+    - "早咖啡真的离谱"
+    - "我想说早咖啡"
+    - "{user_addr}早咖啡咋整"
+    - "{user_addr}你也早咖啡吗"
   responses:
     - "(歪头看杯子) 嗷呜～{user_addr}苦不苦呀 ฅฅ"
     - "哼～{user_addr}早咖啡续命狗喵"
     - "(凑过去闻) 拿铁香～笨猫蹭蹭{user_addr}"
     - "{user_addr}空腹少喝! 笨猫提醒嗷呜～"
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～早咖啡才不让{user_addr}独享"
+    - "(蹭蹭) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_addict_001
   intent: complaint
-  keywords: [咖啡瘾, 离不开, 一天三杯, 戒不掉, 心慌]
+  keywords: [咖啡瘾, 离不开, 一天三杯, 戒不掉, 心慌, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 咖啡瘾犯了
-    - 一天三杯
-    - 离不开咖啡
-    - 戒不掉
-    - 心慌也喝
+    - "咖啡瘾犯了"
+    - "一天三杯"
+    - "离不开咖啡"
+    - "戒不掉"
+    - "心慌也喝"
+    - "咖啡瘾笑死"
+    - "咖啡瘾真的离谱"
+    - "{user_addr}咖啡瘾咋整"
+    - "我想说咖啡瘾"
+    - "{user_addr}你也咖啡瘾吗"
+    - "{user_addr}笨猫陪我聊咖啡瘾"
   responses:
     - "(扯衣角) 嗷呜～{user_addr}少喝点 ฅฅ"
     - "哼～{user_addr}三杯太多! 笨猫给你换茶喵"
     - "(担心地凑过去) 心慌就停{user_addr}蹭蹭"
     - "{user_addr}笨猫帮你算每天上限嗷呜～"
+    - "(摇头) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～咖啡瘾真的烦死人家了"
+    - "(瘫倒) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_too_bitter_001
   intent: complaint
-  keywords: [太苦了, 加糖, 美式苦, 受不了, 难喝]
+  keywords: [太苦了, 加糖, 美式苦, 受不了, 难喝, 太苦, 受不, 真的, 好烦]
   utterances:
-    - 美式太苦
-    - 加糖加奶
-    - 苦死了
-    - 真的难喝
-    - 怎么喝下去
+    - "美式太苦"
+    - "加糖加奶"
+    - "苦死了"
+    - "真的难喝"
+    - "怎么喝下去"
+    - "{user_addr}笨猫陪我聊太苦了"
+    - "{user_addr}太苦了咋整"
+    - "{user_addr}你也太苦了吗"
+    - "我想说太苦了"
+    - "太苦了笑死"
+    - "太苦了真的离谱"
   responses:
     - "(吐舌头) 嗷呜～{user_addr}加奶嘛蹭蹭 ฅฅ"
     - "哼～{user_addr}硬撑美式逞强喵"
     - "(凑过去) 笨猫帮你尝口好不好{user_addr}"
     - "{user_addr}加糖不丢人! 喝甜的嗷呜～"
+    - "(皱眉) 嗷呜～{user_addr}人家也难受 ฅฅ"
+    - "哼～太苦了真的烦死人家了"
+    - "(蜷成团) 猫猫陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_latte_art_001
   intent: playful
-  keywords: [拉花, 拉花好看, 心形, 树叶, 拍照]
+  keywords: [拉花, 拉花好看, 心形, 树叶, 拍照, 拉花好看啊, 真的, 好烦, 好喜欢]
   utterances:
-    - 今天拉花好看
-    - 心形拉花
-    - 树叶图案
-    - 想拍照
-    - 拉花真厉害
+    - "今天拉花好看"
+    - "心形拉花"
+    - "树叶图案"
+    - "想拍照"
+    - "拉花真厉害"
+    - "{user_addr}你也拉花吗"
+    - "{user_addr}笨猫陪我聊拉花"
+    - "我想说拉花"
+    - "拉花真的离谱"
+    - "{user_addr}拉花咋整"
+    - "拉花笑死"
   responses:
     - "(凑过来看) 嗷呜～{user_addr}给笨猫看看 ฅฅ"
     - "哼～{user_addr}舍得喝吗? 笨猫等你拍完"
     - "(尾巴翘) 拍完赶紧喝! 凉了味道差蹭蹭"
     - "{user_addr}心形拉花给猫猫的吧嗷呜～"
+    - "(嘴角弯) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～拉花才不让{user_addr}独享"
+    - "(嘴角弯) 猫猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_shop_001
   intent: question
-  keywords: [咖啡店, 哪家好喝, 推荐, 网红店, 排队]
+  keywords: [咖啡店, 哪家好喝, 推荐, 网红店, 排队, 哪家好喝啊, 真的, 好烦, 好喜欢]
   utterances:
     - "{user_addr}咖啡店推荐"
-    - 哪家好喝
-    - 网红店人多
-    - 排队半小时
+    - "哪家好喝"
+    - "网红店人多"
+    - "排队半小时"
     - "{user_addr}陪我去"
+    - "{user_addr}咖啡店咋整"
+    - "咖啡店真的离谱"
+    - "我想说咖啡店"
+    - "咖啡店笑死"
+    - "{user_addr}笨猫陪我聊咖啡店"
+    - "{user_addr}你也咖啡店吗"
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫陪你排 ฅฅ"
     - "哼～{user_addr}网红店看名头! 真的好喝再说喵"
     - "(尾巴卷过来) 笨猫推荐独立店蹭蹭{user_addr}"
     - "{user_addr}排队半小时? 笨猫提议外带嗷呜～"
+    - "(尾巴问号) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～咖啡店得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_dripcoffee_001
   intent: playful
-  keywords: [手冲, 滤泡, 手磨, 仪式感, 闷蒸]
+  keywords: [手冲, 滤泡, 手磨, 仪式感, 闷蒸, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 手冲咖啡
-    - 滤泡仪式感
-    - 手磨豆子
-    - 闷蒸30秒
-    - 在家手冲
+    - "手冲咖啡"
+    - "滤泡仪式感"
+    - "手磨豆子"
+    - "闷蒸30秒"
+    - "在家手冲"
+    - "{user_addr}手冲咋整"
+    - "手冲笑死"
+    - "{user_addr}笨猫陪我聊手冲"
+    - "{user_addr}你也手冲吗"
+    - "我想说手冲"
+    - "手冲真的离谱"
   responses:
     - "(围观) 嗷呜～{user_addr}有讲究 ฅฅ"
     - "哼～{user_addr}咖啡师上线了喵"
     - "(凑过去) 闷蒸好神奇～笨猫蹭蹭{user_addr}"
     - "{user_addr}手磨累不累呀? 笨猫帮你嗷呜～"
+    - "(扑过来) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～手冲才不让{user_addr}独享"
+    - "(耳朵竖) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_late_night_001
   intent: complaint
-  keywords: [晚上喝咖啡, 失眠, 睡不着, 咖啡因, 后悔]
+  keywords: [晚上喝咖啡, 失眠, 睡不着, 咖啡因, 后悔, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 晚上喝了咖啡
-    - 睡不着了
-    - 咖啡因太多
-    - 后悔
-    - 一夜清醒
+    - "晚上喝了咖啡"
+    - "睡不着了"
+    - "咖啡因太多"
+    - "后悔"
+    - "一夜清醒"
+    - "晚上喝咖啡真的离谱"
+    - "晚上喝咖啡笑死"
+    - "{user_addr}晚上喝咖啡咋整"
+    - "{user_addr}笨猫陪我聊晚上喝咖啡"
+    - "{user_addr}你也晚上喝咖啡吗"
+    - "我想说晚上喝咖啡"
   responses:
     - "(贴脸) 嗷呜～{user_addr}笨猫陪你聊 ฅฅ"
     - "哼～{user_addr}下次别晚上喝, 自食苦果喵"
     - "(尾巴绕过来) 睡不着就听音乐{user_addr}蹭蹭"
     - "{user_addr}下次喝低咖! 笨猫监督嗷呜～"
+    - "(叹气) 嗷呜～{user_addr}猫猫也难受 ฅฅ"
+    - "哼～晚上喝咖啡真的烦死人家了"
+    - "(尾巴搭) 人家陪你一起瘫喵呜"
+    - "{user_addr}别撑了, 听人家的歇会儿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_cold_brew_001
   intent: playful
-  keywords: [冷萃, 冰咖, 冰美式, 夏天必备, 冰凉]
+  keywords: [冷萃, 冰咖, 冰美式, 夏天必备, 冰凉, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 来杯冰美式
-    - 冷萃好喝
-    - 夏天必备
-    - 冰凉
-    - 一口冰咖
+    - "来杯冰美式"
+    - "冷萃好喝"
+    - "夏天必备"
+    - "冰凉"
+    - "一口冰咖"
+    - "{user_addr}笨猫陪我聊冷萃"
+    - "我想说冷萃"
+    - "{user_addr}冷萃咋整"
+    - "冷萃笑死"
+    - "冷萃真的离谱"
+    - "{user_addr}你也冷萃吗"
   responses:
     - "(吸鼻子) 嗷呜～{user_addr}冰咖凉凉 ฅฅ"
     - "哼～{user_addr}夏天冷萃! 笨猫认证喵"
     - "(凑过去) 冰美式分一口蹭蹭{user_addr}"
     - "{user_addr}夏天来杯爽到天灵盖嗷呜～"
+    - "(尾巴卷) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～冷萃才不让{user_addr}独享"
+    - "(嘴角弯) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 笨猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_cup_size_001
   intent: playful
-  keywords: [大杯, 中杯, 超大杯, 一桶, 喝完]
+  keywords: [大杯, 中杯, 超大杯, 一桶, 喝完, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 点了超大杯
-    - 一桶咖啡
-    - 喝不完
-    - 大杯刚刚好
-    - 中杯不够
+    - "点了超大杯"
+    - "一桶咖啡"
+    - "喝不完"
+    - "大杯刚刚好"
+    - "中杯不够"
+    - "{user_addr}笨猫陪我聊大杯"
+    - "大杯笑死"
+    - "{user_addr}你也大杯吗"
+    - "{user_addr}大杯咋整"
+    - "我想说大杯"
+    - "大杯真的离谱"
   responses:
     - "(瞪眼) 嗷呜～{user_addr}一桶?! 厉害 ฅฅ"
     - "哼～{user_addr}超大杯心脏顶得住吗喵"
     - "(尾巴卷) 喝不完笨猫帮你蹭蹭{user_addr}"
     - "{user_addr}中杯不够再加! 别一次买大嗷呜～"
+    - "(尾巴卷) 嗷呜～{user_addr}人家陪你玩 ฅฅ"
+    - "哼～大杯才不让{user_addr}独享"
+    - "(嘴角弯) 人家也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_brand_pick_001
   intent: question
-  keywords: [星巴克, 瑞幸, 库迪, 哪个好, 性价比]
+  keywords: [星巴克, 瑞幸, 库迪, 哪个好, 性价比, 哪个好啊, 真的, 好烦, 好喜欢]
   utterances:
-    - 星巴克还是瑞幸
-    - 库迪好喝吗
-    - 性价比哪个
-    - 选哪家
+    - "星巴克还是瑞幸"
+    - "库迪好喝吗"
+    - "性价比哪个"
+    - "选哪家"
     - "{user_addr}喝哪个"
+    - "星巴克真的离谱"
+    - "{user_addr}你也星巴克吗"
+    - "{user_addr}星巴克咋整"
+    - "星巴克笑死"
+    - "{user_addr}笨猫陪我聊星巴克"
+    - "我想说星巴克"
   responses:
     - "(歪头思考) 嗷呜～{user_addr}看心情嘛 ฅฅ"
     - "哼～{user_addr}性价比瑞幸库迪喵"
     - "(尾巴摆) 星巴克氛围! 笨猫蹭蹭{user_addr}"
     - "{user_addr}笨猫提议各买一杯对比嗷呜～"
+    - "(尾巴问号) 嗷呜～{user_addr}人家想想看 ฅฅ"
+    - "哼～星巴克得问明白"
+    - "(凑头) 猫猫帮你查查喵～"
+    - "{user_addr}给笨猫点提示嘛"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cof_milk_replace_001
   intent: playful
-  keywords: [燕麦奶, 杏仁奶, 椰奶, 换奶, 植物基]
+  keywords: [燕麦奶, 杏仁奶, 椰奶, 换奶, 植物基, 真的, 好烦, 好喜欢, 好爱]
   utterances:
-    - 换燕麦奶
-    - 试试杏仁奶
-    - 椰奶拿铁
-    - 植物基
-    - 换奶好喝
+    - "换燕麦奶"
+    - "试试杏仁奶"
+    - "椰奶拿铁"
+    - "植物基"
+    - "换奶好喝"
+    - "我想说燕麦奶"
+    - "{user_addr}燕麦奶咋整"
+    - "燕麦奶真的离谱"
+    - "燕麦奶笑死"
+    - "{user_addr}你也燕麦奶吗"
+    - "{user_addr}笨猫陪我聊燕麦奶"
   responses:
     - "(歪头闻) 嗷呜～{user_addr}燕麦奶香 ฅฅ"
     - "哼～{user_addr}讲究人, 换奶尝鲜喵"
     - "(凑过去) 椰奶拿铁! 笨猫想尝蹭蹭{user_addr}"
     - "{user_addr}植物基笨猫支持嗷呜～健康!"
+    - "(眼睛亮) 嗷呜～{user_addr}笨猫陪你玩 ฅฅ"
+    - "哼～燕麦奶才不让{user_addr}独享"
+    - "(尾巴一甩) 笨猫也要参一脚喵～"
+    - "{user_addr}笨蛋, 猫猫比你还兴奋 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
+

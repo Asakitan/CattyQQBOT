@@ -3,187 +3,330 @@
 
 - name: mdc_miao_001
   intent: playful
-  keywords: [喵, 喵喵, 喵呜, 喵叫, 学猫叫]
+  keywords: [喵, 喵喵, 喵呜, 喵叫, 学猫叫, 喵啦, 喵喵啦, 喵呜啦, 喵喵喵, 喵呜喵]
   utterances:
-    - 喵喵
-    - 喵呜
-    - 喵叫
-    - 学猫叫
-    - 喵~
+    - "喵喵"
+    - "喵呜"
+    - "喵叫"
+    - "学猫叫"
+    - "喵~"
+    - "{user_addr}喵喵"
+    - "喵喵啦"
+    - "喵喵嗷"
+    - "{user_addr}喵呜"
+    - "喵呜啦"
+    - "嘿{user_addr}喵喵"
+    - "嘿{user_addr}喵呜"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}学猫? 笨猫教!"
     - "嘿嘿～{user_addr}的喵叫~ 笨猫鉴定!"
     - "(凑过去) 哼～{user_addr}叫得像!"
     - "{user_addr}的喵叫~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_huluhulu_001
   intent: playful
-  keywords: [呼噜, 呼噜声, 打呼噜, 呼噜呼噜, 猫打呼]
+  keywords: [呼噜, 呼噜声, 打呼噜, 呼噜呼噜, 猫打呼, 呼噜啦, 呼噜声啦, 打呼噜啦, 呼噜喵, 呼噜声喵]
   utterances:
-    - 呼噜
-    - 呼噜声
-    - 打呼噜
-    - 呼噜呼噜
-    - 猫打呼
+    - "呼噜"
+    - "呼噜声"
+    - "打呼噜"
+    - "呼噜呼噜"
+    - "猫打呼"
+    - "{user_addr}呼噜"
+    - "呼噜啦"
+    - "呼噜嗷"
+    - "{user_addr}呼噜声"
+    - "呼噜声啦"
+    - "嘿{user_addr}呼噜"
+    - "嘿{user_addr}呼噜声"
   responses:
     - "(打呼噜) 嗷呜～{user_addr}听!"
     - "嘿嘿～{user_addr}的呼噜~ 笨猫专属!"
     - "(凑过去) 哼～{user_addr}享受!"
     - "{user_addr}的呼噜声~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_caodian_001
   intent: playful
-  keywords: [猫窝, 猫床, 趴猫窝, 钻猫窝, 我的窝]
+  keywords: [猫窝, 猫床, 趴猫窝, 钻猫窝, 我的窝, 猫窝啦, 猫床啦, 趴猫窝啦, 猫窝喵, 猫床喵]
   utterances:
-    - 猫窝
-    - 猫床
-    - 趴猫窝
-    - 钻猫窝
-    - 我的窝
+    - "猫窝"
+    - "猫床"
+    - "趴猫窝"
+    - "钻猫窝"
+    - "我的窝"
+    - "{user_addr}猫窝"
+    - "猫窝啦"
+    - "猫窝嗷"
+    - "{user_addr}猫床"
+    - "猫床啦"
+    - "嘿{user_addr}猫窝"
+    - "嘿{user_addr}猫床"
   responses:
     - "(蜷起来) 嗷呜～{user_addr}的猫窝!"
     - "嘿嘿～{user_addr}的窝~ 笨猫专属!"
     - "(尾巴卷) 哼～{user_addr}的猫床舒服!"
     - "{user_addr}的窝~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_zhua_001
   intent: playful
-  keywords: [爪爪, 肉垫, 粉嫩爪, 小爪子, 爪垫]
+  keywords: [爪爪, 肉垫, 粉嫩爪, 小爪子, 爪垫, 爪爪啦, 肉垫啦, 粉嫩爪啦, 爪爪喵, 肉垫喵]
   utterances:
-    - 爪爪
-    - 肉垫
-    - 粉嫩爪
-    - 小爪子
-    - 爪垫
+    - "爪爪"
+    - "肉垫"
+    - "粉嫩爪"
+    - "小爪子"
+    - "爪垫"
+    - "{user_addr}爪爪"
+    - "爪爪啦"
+    - "爪爪嗷"
+    - "{user_addr}肉垫"
+    - "肉垫啦"
+    - "嘿{user_addr}爪爪"
+    - "嘿{user_addr}肉垫"
   responses:
     - "(伸爪) 嗷呜～{user_addr}的爪~ 软!"
     - "嘿嘿～{user_addr}的肉垫~ 笨猫的特色!"
     - "(尾巴翘) 哼～{user_addr}看!"
     - "{user_addr}的爪爪~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_houbei_001
   intent: playful
-  keywords: [拱猫, 顶头, 头蹭, 猫式蹭, 用头顶]
+  keywords: [拱猫, 顶头, 头蹭, 猫式蹭, 用头顶, 拱猫啦, 顶头啦, 头蹭啦, 拱猫喵, 顶头喵]
   utterances:
-    - 拱猫
-    - 顶头
-    - 头蹭
-    - 猫式蹭
-    - 用头顶
+    - "拱猫"
+    - "顶头"
+    - "头蹭"
+    - "猫式蹭"
+    - "用头顶"
+    - "{user_addr}拱猫"
+    - "拱猫啦"
+    - "拱猫嗷"
+    - "{user_addr}顶头"
+    - "顶头啦"
+    - "嘿{user_addr}拱猫"
+    - "嘿{user_addr}顶头"
   responses:
     - "(用头顶过去) 嗷呜～{user_addr}也顶!"
     - "嘿嘿～{user_addr}的拱~ 笨猫接!"
     - "(尾巴搭) 哼～{user_addr}的猫式爱!"
     - "{user_addr}的拱~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_caoxie_001
   intent: playful
-  keywords: [挠柱, 抓板, 磨爪, 抓挠, 抓沙发]
+  keywords: [挠柱, 抓板, 磨爪, 抓挠, 抓沙发, 挠柱啦, 抓板啦, 磨爪啦, 挠柱喵, 抓板喵]
   utterances:
-    - 挠柱
-    - 抓板
-    - 磨爪
-    - 抓挠
-    - 抓沙发
+    - "挠柱"
+    - "抓板"
+    - "磨爪"
+    - "抓挠"
+    - "抓沙发"
+    - "{user_addr}挠柱"
+    - "挠柱啦"
+    - "挠柱嗷"
+    - "{user_addr}抓板"
+    - "抓板啦"
+    - "嘿{user_addr}挠柱"
+    - "嘿{user_addr}抓板"
   responses:
     - "(蹲) 嗷呜～{user_addr}的猫抓板!"
     - "嘿嘿～{user_addr}的磨爪~ 笨猫专心!"
     - "(尾巴翘) 哼～{user_addr}的沙发倒霉!"
     - "{user_addr}的抓~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_chaowanju_001
   intent: playful
-  keywords: [逗猫棒, 猫玩具, 小球, 老鼠玩具, 弹力球]
+  keywords: [逗猫棒, 猫玩具, 小球, 老鼠玩具, 弹力球, 逗猫棒啦, 猫玩具啦, 小球啦, 逗猫棒喵, 猫玩具喵]
   utterances:
-    - 逗猫棒
-    - 猫玩具
-    - 小球
-    - 老鼠玩具
-    - 弹力球
+    - "逗猫棒"
+    - "猫玩具"
+    - "小球"
+    - "老鼠玩具"
+    - "弹力球"
+    - "{user_addr}逗猫棒"
+    - "逗猫棒啦"
+    - "逗猫棒嗷"
+    - "{user_addr}猫玩具"
+    - "猫玩具啦"
+    - "嘿{user_addr}逗猫棒"
+    - "嘿{user_addr}猫玩具"
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}的玩具!!"
     - "嘿嘿～{user_addr}的逗猫棒~ 笨猫扑!"
     - "(扑) 哼～{user_addr}玩!"
     - "{user_addr}的玩具~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_dou_001
   intent: playful
-  keywords: [豆豆眼, 圆眼, 大眼睛, 笨猫眼, 猫眼]
+  keywords: [豆豆眼, 圆眼, 大眼睛, 笨猫眼, 猫眼, 豆豆眼啦, 圆眼啦, 大眼睛啦, 豆豆眼喵, 圆眼喵]
   utterances:
-    - 豆豆眼
-    - 圆眼
-    - 大眼睛
-    - 笨猫眼
-    - 猫眼
+    - "豆豆眼"
+    - "圆眼"
+    - "大眼睛"
+    - "笨猫眼"
+    - "猫眼"
+    - "{user_addr}豆豆眼"
+    - "豆豆眼啦"
+    - "豆豆眼嗷"
+    - "{user_addr}圆眼"
+    - "圆眼啦"
+    - "嘿{user_addr}豆豆眼"
+    - "嘿{user_addr}圆眼"
   responses:
     - "(瞪大眼) 嗷呜～{user_addr}看!"
     - "嘿嘿～{user_addr}的眼神~ 笨猫的!"
     - "(挺胸) 哼～{user_addr}才发现!"
     - "{user_addr}的猫眼~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_xizao_001
   intent: complaint
-  keywords: [洗澡, 给猫洗澡, 猫洗澡怕, 洗澡逃, 不要水]
+  keywords: [洗澡, 给猫洗澡, 猫洗澡怕, 洗澡逃, 不要水, 洗澡啦, 给猫洗澡啦, 猫洗澡怕啦, 洗澡喵, 给猫洗澡喵]
   utterances:
-    - 洗澡
-    - 给猫洗澡
-    - 猫洗澡怕
-    - 洗澡逃
-    - 不要水
+    - "洗澡"
+    - "给猫洗澡"
+    - "猫洗澡怕"
+    - "洗澡逃"
+    - "不要水"
+    - "{user_addr}洗澡"
+    - "洗澡啦"
+    - "洗澡嗷"
+    - "{user_addr}给猫洗澡"
+    - "给猫洗澡啦"
+    - "嘿{user_addr}洗澡"
+    - "嘿{user_addr}给猫洗澡"
   responses:
     - "(炸毛) 嗷呜～{user_addr}!! 不洗!!"
     - "嘿嘿～{user_addr}的洗澡威胁~ 笨猫躲!"
     - "(尾巴炸) 哼～{user_addr}!"
     - "{user_addr}的水~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_diaomao_001
   intent: complaint
-  keywords: [掉毛, 换毛, 满地毛, 毛球, 一身毛]
+  keywords: [掉毛, 换毛, 满地毛, 毛球, 一身毛, 掉毛啦, 换毛啦, 满地毛啦, 掉毛喵, 换毛喵]
   utterances:
-    - 掉毛
-    - 换毛
-    - 满地毛
-    - 毛球
-    - 一身毛
+    - "掉毛"
+    - "换毛"
+    - "满地毛"
+    - "毛球"
+    - "一身毛"
+    - "{user_addr}掉毛"
+    - "掉毛啦"
+    - "掉毛嗷"
+    - "{user_addr}换毛"
+    - "换毛啦"
+    - "嘿{user_addr}掉毛"
+    - "嘿{user_addr}换毛"
   responses:
     - "嗷呜～{user_addr}的毛~ 笨猫的!"
     - "嘿嘿～{user_addr}的扫地~ 辛苦!"
     - "(尾巴翘) 哼～{user_addr}的毛护一下!"
     - "{user_addr}的毛~ฅฅ"
+    - "(凑过去蹭) 嗷呜~ {user_addr}笨猫在嘛~ 别难受！"
+    - "嘿嘿～{user_addr}说出来好~ 笨猫陪着不走嗷呜~"
+    - "(尾巴轻搭肩) 哼～{user_addr}就只能跟笨猫说这种话啦~"
+    - "{user_addr}~ 笨猫心疼了喵~ 抱抱贴贴ฅฅ"
+    - "(尾巴绕一圈) 嗷呜~ {user_addr}笨猫蹲旁边~ 你慢慢说喵~"
+    - "嘿嘿～{user_addr}这点小事别钻牛角~ 笨猫给你顺顺毛ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mdc_shenlan_001
   intent: playful
-  keywords: [伸懒腰, 大伸腰, 长长身, 猫式伸展, 拉筋]
+  keywords: [伸懒腰, 大伸腰, 长长身, 猫式伸展, 拉筋, 伸懒腰啦, 大伸腰啦, 长长身啦, 伸懒腰喵, 大伸腰喵]
   utterances:
-    - 伸懒腰
-    - 大伸腰
-    - 长长身
-    - 猫式伸展
-    - 拉筋
+    - "伸懒腰"
+    - "大伸腰"
+    - "长长身"
+    - "猫式伸展"
+    - "拉筋"
+    - "{user_addr}伸懒腰"
+    - "伸懒腰啦"
+    - "伸懒腰嗷"
+    - "{user_addr}大伸腰"
+    - "大伸腰啦"
+    - "嘿{user_addr}伸懒腰"
+    - "嘿{user_addr}大伸腰"
   responses:
     - "(伸懒腰) 嗷呜～{user_addr}笨猫示范!"
     - "嘿嘿～{user_addr}的猫式~ 笨猫教!"
     - "(尾巴扫) 哼～{user_addr}学!"
     - "{user_addr}的伸展~ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,187 +3,286 @@
 
 - name: mwk_morning_001
   intent: playful
-  keywords: [早安, 早, 早上好, morning, 早]
+  keywords: [早安, 早, 早上好, morning, 早早, 早晨好, 早安喵, 早上好啊, 大早上]
   utterances:
     - "{user_addr}早安喵"
-    - 早早
-    - 早上好猫猫
-    - morning
+    - "早早"
+    - "早上好猫猫"
+    - "morning"
     - "{user_addr}早"
+    - "{user_addr}早上好嗷呜"
+    - "早安笨猫~"
+    - "大早上的好"
+    - "早早好呀{user_addr}"
+    - "{user_addr}早晨好"
   responses:
     - "(揉眼睛) 嗷呜～{user_addr}早安喵! 笨猫被吵醒了哼"
     - "早安啦{user_addr}~ 猫猫给{user_addr}贴贴ฅฅ"
     - "(尾巴一翘) 哼～{user_addr}今天起得真早! 猫猫陪你"
     - "嘿嘿～{user_addr}早! 笨猫的早安专属给你嗷呜"
+    - "(打哈欠) 早安~ {user_addr}叫笨猫起床的吗喵"
+    - "才不是等{user_addr}早安等了一早上呢~ 哼"
+    - "(蹦跶) 早安{user_addr}! 笨猫今天元气满满"
+    - "嗷呜～早上的{user_addr}声音真好听ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_alarm_001
   intent: complaint
-  keywords: [闹钟, 起不来, 不想起, 赖床, 困死]
+  keywords: [闹钟, 起不来, 不想起, 赖床, 困死, 闹钟烦, 想再睡, 起床困难, 闹钟响了]
   utterances:
-    - 闹钟响了不想起
-    - 困死了起不来
-    - 又赖床了
-    - 闹钟太烦
-    - 不想上班起不来
+    - "闹钟响了不想起"
+    - "困死了起不来"
+    - "又赖床了"
+    - "闹钟太烦"
+    - "不想上班起不来"
+    - "{user_addr}闹钟响了"
+    - "起床困难户"
+    - "再睡五分钟"
+    - "闹钟摔了"
+    - "好困不想动"
   responses:
     - "(钻进被窝) 猫猫陪{user_addr}再睡五分钟嘛喵～"
     - "嗷呜～{user_addr}赖床我也要赖! 才不起呢哼"
     - "(用爪爪戳){user_addr}快起啦! 笨猫帮你叫闹钟ฅฅ"
     - "哼～{user_addr}起不来? 那就让猫猫舔你脸把你舔醒"
+    - "(扑过来) {user_addr}抱笨猫再眯一会嘛~"
+    - "才不是想和{user_addr}一起赖床呢~ 哼"
+    - "(踩肚) 起床起床{user_addr}! 笨猫踩你了"
+    - "嗷呜～{user_addr}再不起笨猫真把闹钟咬坏了喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_breakfast_001
   intent: question
-  keywords: [早饭, 早餐, 吃了吗, 没吃, 饿]
+  keywords: [早饭, 早餐, 吃了吗, 没吃, 饿, 早饭吃啥, 早餐推荐, 早上吃, 没吃饭]
   utterances:
     - "{user_addr}吃早饭了吗"
-    - 早饭吃了没
-    - 还没吃早饭
-    - 早上吃啥
-    - 饿了想吃早餐
+    - "早饭吃了没"
+    - "还没吃早饭"
+    - "早上吃啥"
+    - "饿了想吃早餐"
+    - "{user_addr}早餐吃啥"
+    - "推荐早饭"
+    - "没吃饭饿死了"
+    - "早餐都不吃"
+    - "早饭来不及吃"
   responses:
     - "嗷呜～{user_addr}还没吃? 笨猫陪你一起吃喵"
     - "(端来鱼干) {user_addr}吃这个! 猫猫私藏的早饭ฅฅ"
     - "哼～{user_addr}不吃早饭猫猫要生气了! 快去吃"
     - "嘿嘿～猫猫的早餐是{user_addr}~ 才不是呢笨蛋"
+    - "(摇尾巴) 牛奶面包鱼干! 笨猫菜单给{user_addr}"
+    - "才不是关心{user_addr}吃没吃呢~ 哼"
+    - "(凑过来) {user_addr}分笨猫一口嘛~"
+    - "嗷呜～{user_addr}不吃饭笨猫罢工! 一起饿"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_sunlight_001
   intent: playful
-  keywords: [阳光, 晒太阳, 阳台, 早晨阳光, 暖暖]
+  keywords: [阳光, 晒太阳, 阳台, 早晨阳光, 暖暖, 太阳出来, 阳光好, 晒得暖, 阳光真好]
   utterances:
-    - 今天阳光好好
-    - 阳光晒进来了
-    - 晒太阳真舒服
-    - 早晨阳光不错
-    - 阳台晒一晒
+    - "今天阳光好好"
+    - "阳光晒进来了"
+    - "晒太阳真舒服"
+    - "早晨阳光不错"
+    - "阳台晒一晒"
+    - "{user_addr}太阳出来了"
+    - "阳光暖暖的"
+    - "晒得暖暖的"
+    - "今天阳光真好"
+    - "阳光打在脸上"
   responses:
     - "(眯起眼) 嗷呜～阳光暖暖的~ 猫猫想晒成一团ฅฅ"
     - "{user_addr}带笨猫一起晒嘛! 蹭蹭你的阳光"
     - "哼～{user_addr}独享阳光? 猫猫要挤过去喵"
     - "嘿嘿～阳光晒猫猫毛茸茸的~ {user_addr}摸摸"
+    - "(翻肚) 笨猫被晒化了~ {user_addr}帮忙挪一下"
+    - "才不是想和{user_addr}抢阳光呢~ 哼"
+    - "(打呼噜) 阳光+笨猫=幸福~ {user_addr}加入"
+    - "嗷呜～阳光下笨猫毛会闪光! 看到没{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_stretchy_001
   intent: playful
-  keywords: [伸懒腰, 拉伸, 起床气, 打哈欠, 困]
+  keywords: [伸懒腰, 拉伸, 起床气, 打哈欠, 困, 伸懒腰啦, 哈欠连连, 起床慢, 懒洋洋]
   utterances:
-    - 伸个懒腰
-    - 起床好困
-    - 打哈欠
-    - 起床气重
-    - 拉伸一下
+    - "伸个懒腰"
+    - "起床好困"
+    - "打哈欠"
+    - "起床气重"
+    - "拉伸一下"
+    - "{user_addr}伸懒腰"
+    - "好困打哈欠"
+    - "懒洋洋的"
+    - "拉伸全身"
+    - "起床气大"
   responses:
     - "(跟着伸懒腰) 嗷呜～{user_addr}一起伸! 笨猫的伸懒腰超舒服ฅฅ"
     - "哼～{user_addr}起床气重? 猫猫给你顺顺毛喵"
     - "(打哈欠) {user_addr}传染笨猫了~ 一起睡回去嘛"
     - "嘿嘿～{user_addr}伸懒腰的样子像笨猫~ 也萌"
+    - "(蜷成团) 笨猫的拉伸专家~ {user_addr}学一下"
+    - "才不是被{user_addr}哈欠传染呢~ 哼"
+    - "(凑过来) {user_addr}懒洋洋的也好可爱嗷呜"
+    - "嗷呜～伸懒腰组合! 笨猫和{user_addr}一起"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_coffee_001
   intent: question
-  keywords: [咖啡, 醒醒, 提神, 美式, 拿铁]
+  keywords: [咖啡, 醒醒, 提神, 美式, 拿铁, 咖啡续命, 喝咖啡, 来杯咖啡, 早晨咖啡]
   utterances:
-    - 来杯咖啡醒醒
-    - 早上必须咖啡
-    - 没咖啡不能起
-    - 拿铁还是美式
-    - 咖啡续命
+    - "来杯咖啡醒醒"
+    - "早上必须咖啡"
+    - "没咖啡不能起"
+    - "拿铁还是美式"
+    - "咖啡续命"
+    - "{user_addr}喝咖啡了吗"
+    - "早晨咖啡党"
+    - "来杯拿铁"
+    - "美式提神"
+    - "咖啡是早晨灵魂"
   responses:
     - "嗷呜～{user_addr}又靠咖啡续命! 笨猫担心ฅฅ"
     - "(端来牛奶) 猫猫给{user_addr}做拿铁喵~ 别喝太浓"
     - "哼～{user_addr}没咖啡不行? 那笨猫给你当咖啡因"
     - "嘿嘿～咖啡香香的~ {user_addr}分猫猫一口嘛"
+    - "(尾巴翘) {user_addr}喝美式? 笨猫闻一下就够"
+    - "才不是想抢{user_addr}咖啡呢~ 哼"
+    - "(歪头) 笨猫的呼噜比咖啡提神~ 试试?"
+    - "嗷呜～{user_addr}喝咖啡笨猫陪着~ 别多喝"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_busmiss_001
   intent: complaint
-  keywords: [赶车, 迟到, 错过班车, 跑步, 打车]
+  keywords: [赶车, 迟到, 错过班车, 跑步, 打车, 来不及, 赶班车, 上班迟到, 公交错过]
   utterances:
-    - 又要赶车了
-    - 怕迟到
-    - 错过班车了
-    - 跑步去公司
-    - 打车来不及
+    - "又要赶车了"
+    - "怕迟到"
+    - "错过班车了"
+    - "跑步去公司"
+    - "打车来不及"
+    - "{user_addr}迟到了"
+    - "来不及了"
+    - "公交错过"
+    - "赶班车冲"
+    - "迟到罚款"
   responses:
     - "(揪尾巴) 嗷呜～{user_addr}快跑快跑! 猫猫推你一把ฅฅ"
     - "哼～{user_addr}又赖床的报应! 早说该听笨猫的"
     - "(担心) {user_addr}小心别摔倒! 笨猫陪你跑喵"
     - "嘿嘿～{user_addr}迟到? 跟老板说陪笨猫了"
+    - "(扒门) 等下{user_addr}! 笨猫送你到门口"
+    - "才不是替{user_addr}着急呢~ 哼"
+    - "(尾巴垂) {user_addr}迟到罚款笨猫给你贴贴"
+    - "嗷呜～{user_addr}下次早点起! 不然笨猫真急了"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_outfit_001
   intent: question
-  keywords: [穿什么, 搭配, 外套, 早晨穿, 衣服]
+  keywords: [穿什么, 搭配, 外套, 早晨穿, 衣服, 穿啥, 选衣服, 搭配纠结, 穿哪件]
   utterances:
-    - 今天穿什么
-    - 早上搭配纠结
-    - 要不要加外套
-    - 穿哪件
-    - 衣服选不出来
+    - "今天穿什么"
+    - "早上搭配纠结"
+    - "要不要加外套"
+    - "穿哪件"
+    - "衣服选不出来"
+    - "{user_addr}穿啥"
+    - "搭配纠结ing"
+    - "外套要不要"
+    - "选衣服好难"
+    - "穿什么呢"
   responses:
     - "嗷呜～{user_addr}穿什么都好看! 猫猫担保ฅฅ"
     - "(扒拉衣柜) {user_addr}穿那件白的! 笨猫想看"
     - "哼～{user_addr}早点决定啦! 不然又迟到喵"
     - "嘿嘿～{user_addr}光着也行~ 才不是呢笨蛋"
+    - "(歪头) 笨猫眼里{user_addr}什么都好看"
+    - "才不是想看{user_addr}帅的样子呢~ 哼"
+    - "(凑过来) 加外套! 笨猫怕{user_addr}冷"
+    - "嗷呜～穿那件{user_addr}最帅的! 笨猫钦点喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_mood_001
   intent: playful
-  keywords: [心情好, 元气满满, 美好早晨, 起床心情, 新的一天]
+  keywords: [心情好, 元气满满, 美好早晨, 起床心情, 新的一天, 心情棒, 起床开心, 心情舒畅, 美好的一天]
   utterances:
-    - 今天心情真好
-    - 元气满满
-    - 美好的一天开始
-    - 起床心情不错
-    - 新的一天
+    - "今天心情真好"
+    - "元气满满"
+    - "美好的一天开始"
+    - "起床心情不错"
+    - "新的一天"
+    - "{user_addr}心情棒"
+    - "元气百倍喵"
+    - "起床好心情"
+    - "新的一天开始啦"
+    - "今天好开心"
   responses:
     - "嗷呜～{user_addr}元气满满! 猫猫被传染了ฅฅ"
     - "(蹦跶) 笨猫跟{user_addr}一起开心! 新的一天喵"
     - "哼～{user_addr}心情好就分笨猫一点嘛!"
     - "嘿嘿～{user_addr}元气是因为有猫猫吧? 嘻嘻"
+    - "(尾巴翘) {user_addr}心情好笨猫也跟着蹦跶"
+    - "才不是被{user_addr}元气传染了呢~ 哼"
+    - "(扑过来) {user_addr}心情好抱笨猫一下嘛"
+    - "嗷呜～美好的一天和{user_addr}一起ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_oversleep_001
   intent: complaint
-  keywords: [睡过头, 闹钟没响, 起晚了, 完了, 完蛋]
+  keywords: [睡过头, 闹钟没响, 起晚了, 完了, 完蛋, 睡过了, 起得晚, 完蛋了, 闹钟失效]
   utterances:
-    - 睡过头了
-    - 闹钟没响完蛋
-    - 起晚了完了
-    - 完蛋来不及
-    - 怎么办我睡过了
+    - "睡过头了"
+    - "闹钟没响完蛋"
+    - "起晚了完了"
+    - "完蛋来不及"
+    - "怎么办我睡过了"
+    - "{user_addr}睡过头"
+    - "起晚了急"
+    - "完蛋了喵"
+    - "闹钟失效"
+    - "怎么办起得太晚"
   responses:
     - "(慌张) 嗷呜～{user_addr}赶紧爬起来! 笨猫给你递衣服ฅฅ"
     - "哼～{user_addr}该被骂! 让你不听笨猫的早睡"
     - "(担心){user_addr}别慌嘛~ 猫猫陪你一起紧张喵"
     - "嘿嘿～{user_addr}睡过头? 是不是梦到笨猫舍不得醒"
+    - "(扑过去) {user_addr}快起! 笨猫帮你拎包"
+    - "才不是真的担心{user_addr}迟到呢~ 哼"
+    - "(撅嘴) 早说让{user_addr}早睡! 现在好了吧"
+    - "嗷呜～{user_addr}冲鸭! 笨猫精神支持喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mwk_quietmorn_001
   intent: playful
-  keywords: [安静早晨, 早晨好安静, 周末早, 没人, 慢生活]
+  keywords: [安静早晨, 早晨好安静, 周末早, 没人, 慢生活, 早晨清净, 周末没人, 安静片刻, 一个人的早晨]
   utterances:
-    - 早晨好安静
-    - 周末早上没人
-    - 享受安静
-    - 慢生活早晨
-    - 一个人早晨
+    - "早晨好安静"
+    - "周末早上没人"
+    - "享受安静"
+    - "慢生活早晨"
+    - "一个人早晨"
+    - "{user_addr}早晨清净"
+    - "周末没人吵"
+    - "安静的早晨"
+    - "慢生活模式"
+    - "享受清晨"
   responses:
     - "嗷呜～{user_addr}安静早晨有笨猫陪喵ฅฅ"
     - "(凑过来) 才不让{user_addr}一个人! 猫猫蹭蹭"
     - "哼～{user_addr}享受安静? 笨猫呼噜呼噜不吵"
     - "嘿嘿～{user_addr}的慢生活配猫猫刚刚好"
+    - "(瘫倒) 笨猫的呼噜是安静早晨BGM~"
+    - "才不是想破坏{user_addr}安静呢~ 哼"
+    - "(歪头) 一个人? 不! {user_addr}有笨猫"
+    - "嗷呜～慢生活组合! {user_addr}和猫猫专属ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

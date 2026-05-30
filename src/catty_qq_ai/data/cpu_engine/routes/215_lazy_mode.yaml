@@ -3,187 +3,286 @@
 
 - name: lm_lying_001
   intent: complaint
-  keywords: [躺平, 摆烂, 不想努力, 想躺, 啥也不想]
+  keywords: [躺平, 摆烂, 不想努力, 想躺, 啥也不想, 懒散, 葛优瘫, 废柴, 摆烂中, 躺平人生]
   utterances:
     - 躺平
     - 摆烂
     - 不想努力
     - 想躺
     - 啥也不想
+    - 懒得动
+    - 瘫沙发
+    - 葛优瘫
+    - 废柴模式
+    - 摆烂人生
+    - 躺平中
+    - 摆烂日常
   responses:
     - "(贴贴) 嗷呜～{user_addr}笨猫陪躺ฅฅ"
     - "哼{user_addr}佛系喵"
     - "(尾巴卷) 躺~ 一起"
     - "{user_addr}笨猫陪嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(瘫倒) 笨猫专业躺平! {user_addr}加入会嗷呜ฅฅ"
+    - "哼{user_addr}躺平鼻祖是猫猫~ 跟笨猫学喵"
+    - "(打滚) 嗷呜～笨猫翻成饼! {user_addr}也来"
+    - "{user_addr}咱们一起躺到天荒地老~ 哼"
 
 - name: lm_nothing_to_do_002
   intent: complaint
-  keywords: [无聊, 没啥事, 闲死, 没意思, 啥都没]
+  keywords: [无聊, 没啥事, 闲死, 没意思, 啥都没, 无聊死了, 没事做, 太闲, 闲得慌, 啥都不想做]
   utterances:
     - 无聊
     - 没啥事
     - 闲死
     - 没意思
     - 啥都没
+    - 无聊死了
+    - 没事做
+    - 太闲了
+    - 闲得慌
+    - 啥都不想做
+    - 时间太多
+    - 无所事事
   responses:
     - "(凑近) 嗷呜～{user_addr}陪笨猫ฅฅ"
     - "哼{user_addr}聊喵"
     - "(尾巴翘) 笨猫给你解闷~"
     - "{user_addr}玩猫猫嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑过来) 笨猫给{user_addr}消磨时间! 来撸喵"
+    - "哼{user_addr}闲就该陪笨猫~ 别浪费ฅฅ"
+    - "(歪头) 嗷呜～来玩追尾巴游戏! 嗷呜"
+    - "{user_addr}笨猫表演翻肚皮! 解闷专属哼"
 
 - name: lm_no_motivation_003
   intent: complaint
-  keywords: [没动力, 不想动, 提不起劲, 没劲, 一点都不想]
+  keywords: [没动力, 不想动, 提不起劲, 没劲, 一点都不想, 失去动力, 没干劲, 提不起兴趣, 干啥都没劲]
   utterances:
     - 没动力
     - 不想动
     - 提不起劲
     - 没劲
     - 一点都不想
+    - 失去动力
+    - 没干劲
+    - 提不起兴趣
+    - 干啥都没劲
+    - 提不起精神
+    - 心累没动力
+    - 干啥都没意思
   responses:
     - "(贴贴) 嗷呜～{user_addr}慢慢ฅฅ"
     - "哼{user_addr}休息够喵"
     - "(尾巴卷) 笨猫等你~"
     - "{user_addr}有笨猫嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹭手) {user_addr}没动力就抱抱笨猫~ 补能量喵"
+    - "哼{user_addr}该歇就歇! 别勉强ฅฅ"
+    - "(凑近) 嗷呜～别有压力! 笨猫等"
+    - "{user_addr}没动力的话就当奖励自己~ 哼"
 
 - name: lm_chill_004
   intent: playful
-  keywords: [chill, 佛系, 不卷, 慢慢来, 不焦虑]
+  keywords: [chill, 佛系, 不卷, 慢慢来, 不焦虑, 佛系青年, chill life, 慢生活, 不内卷, 心态平]
   utterances:
     - chill
     - 佛系
     - 不卷
     - 慢慢来
     - 不焦虑
+    - 佛系青年
+    - chill life
+    - 慢生活
+    - 不内卷
+    - 心态平
+    - 心如止水
+    - 佛系日常
   responses:
     - "(凑近) 嗷呜～{user_addr}心态ฅฅ"
     - "哼{user_addr}聪明喵"
     - "(尾巴卷) 笨猫学~"
     - "{user_addr}享受嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(瘫) chill 才是真理~ {user_addr}懂了喵"
+    - "哼{user_addr}佛系就好~ 笨猫赞同ฅฅ"
+    - "(尾巴绕) 慢慢来~ 笨猫陪着嗷呜"
+    - "{user_addr}的 chill 笨猫学到了~ 哼"
 
 - name: lm_quit_job_005
   intent: playful
-  keywords: [不想工作, 辞职旅行, 提桶, 重启人生, 重新选择]
+  keywords: [不想工作, 辞职旅行, 提桶, 重启人生, 重新选择, 想跑路, gap year, 重启工作, 想旅行]
   utterances:
     - 不想工作
     - 辞职旅行
     - 提桶
     - 重启人生
     - 重新选择
+    - 想跑路
+    - gap year
+    - 想旅行
+    - 重新开始
+    - 离开都市
+    - 田园生活
+    - 隐居山林
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}潇洒ฅฅ"
     - "哼{user_addr}冲动喵"
     - "(凑近) 笨猫陪~"
     - "{user_addr}三思嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(扑过来) {user_addr}带笨猫一起跑! 喵"
+    - "哼{user_addr}重启的话笨猫做你的搭档ฅฅ"
+    - "(尾巴卷) 笨猫的归隐计划: 鱼塘边晒太阳嗷呜"
+    - "{user_addr}gap 也要带上猫猫! 不许丢哼"
 
 - name: lm_skip_today_006
   intent: complaint
-  keywords: [今天不想干, 今日休, 偷懒一天, 翘班, 旷工]
+  keywords: [今天不想干, 今日休, 偷懒一天, 翘班, 旷工, 请假一天, 不想上班, 今天罢工, 摸鱼一天]
   utterances:
     - 今天不想干
     - 今日休
     - 偷懒一天
     - 翘班
     - 旷工
+    - 请假一天
+    - 不想上班
+    - 今天罢工
+    - 摸鱼一天
+    - 不去公司
+    - 今天躺
+    - 装病请假
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}陪笨猫ฅฅ"
     - "哼{user_addr}请假喵"
     - "(凑近) 一起躺!"
     - "{user_addr}笨猫嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(撒娇) {user_addr}陪笨猫一整天~ 不准走喵"
+    - "哼{user_addr}今天就该陪笨猫! 上班什么的算了ฅฅ"
+    - "(扑过来) 嗷呜～撒泼打滚陪笨猫一天!"
+    - "{user_addr}请假的话笨猫双倍黏~ 哼"
 
 - name: lm_just_eat_sleep_007
   intent: playful
-  keywords: [吃了睡, 睡了吃, 猪生活, 猫生活, 葛优瘫]
+  keywords: [吃了睡, 睡了吃, 猪生活, 猫生活, 葛优瘫, 吃吃睡睡, 猪式生活, 躺尸吃, 睡觉吃饭]
   utterances:
     - 吃了睡
     - 睡了吃
     - 猪生活
     - 猫生活
     - 葛优瘫
+    - 吃吃睡睡
+    - 猪式生活
+    - 躺尸吃睡
+    - 吃完睡睡完吃
+    - 猫式作息
+    - 笨猫节奏
+    - 吃饱睡足
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}和笨猫一样ฅฅ"
     - "哼{user_addr}学笨猫喵"
     - "(凑近) 猫生活最棒~"
     - "{user_addr}加入笨猫嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔嘴) {user_addr}选对了! 这就是高端生活喵"
+    - "哼笨猫日常就是吃睡循环! {user_addr}学吧ฅฅ"
+    - "(伸懒腰) 嗷呜～{user_addr}今晚陪笨猫睡觉吃饭"
+    - "{user_addr}猫生活高质量~ 笨猫教你哼"
 
 - name: lm_let_go_008
   intent: playful
-  keywords: [随便, 都行, 无所谓, 都可以, 看你的]
+  keywords: [随便, 都行, 无所谓, 都可以, 看你的, 怎样都行, 你定, 都好, 任意]
   utterances:
     - 随便
     - 都行
     - 无所谓
     - 都可以
     - 看你的
+    - 怎样都行
+    - "{user_addr}定"
+    - 都好
+    - 任意都行
+    - 完全无所谓
+    - 怎么都行
+    - 听你的
   responses:
     - "(歪头) 嗷呜～{user_addr}佛系ฅฅ"
     - "哼{user_addr}心大喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}笨猫决定嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(蹲坐) 那笨猫决定! 选吃鱼干喵"
+    - "哼{user_addr}都行的话听笨猫的ฅฅ"
+    - "(尾巴翘) 嗷呜～笨猫今天当家做主!"
+    - "{user_addr}给笨猫权力~ 笨猫立刻安排哼"
 
 - name: lm_lay_flat_009
   intent: complaint
-  keywords: [躺尸, 不动, 一动不动, 瘫着, 烂在床]
+  keywords: [躺尸, 不动, 一动不动, 瘫着, 烂在床, 躺床上, 床上不起, 一动也不想, 烂床里]
   utterances:
     - 躺尸
     - 不动
     - 一动不动
     - 瘫着
     - 烂在床
+    - 躺床上
+    - 床上不起
+    - 一动不想
+    - 烂床里
+    - 床上发呆
+    - 躺到天黑
+    - 一直躺
   responses:
     - "(贴贴) 嗷呜～{user_addr}陪你瘫ฅฅ"
     - "哼{user_addr}懒猪喵"
     - "(尾巴卷) 笨猫一起!"
     - "{user_addr}两只懒嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(扑床) 笨猫和{user_addr}比谁躺得久! 喵"
+    - "哼{user_addr}和猫猫都是躺平大师ฅฅ"
+    - "(钻被子) 嗷呜～床里好暖! 不出去嗷呜"
+    - "{user_addr}躺尸笨猫陪~ 一起腐烂哼"
 
 - name: lm_dont_care_010
   intent: playful
-  keywords: [不在乎, 我不管, 不care, 不关心, 与我无关]
+  keywords: [不在乎, 我不管, 不care, 不关心, 与我无关, 不在意, 不操心, 关我屁事, 与我何干]
   utterances:
     - 不在乎
     - 我不管
     - 不care
     - 不关心
     - 与我无关
+    - 不在意
+    - 不操心
+    - 关我屁事
+    - 与我何干
+    - 笨猫不管
+    - 我说不管
+    - 谁爱管谁管
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}帅ฅฅ"
     - "哼{user_addr}飒喵"
     - "(凑近) 笨猫崇拜~"
     - "{user_addr}笨猫学嗷呜"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(挺胸) {user_addr}的态度笨猫认同! 喵"
+    - "哼{user_addr}不在乎就对了~ 别为难自己ฅฅ"
+    - "(尾巴卷) 嗷呜～笨猫也不 care! 同款"
+    - "{user_addr}潇洒哥~ 笨猫崇拜哼"
 
 - name: lm_burnout_011
   intent: complaint
-  keywords: [崩溃, 心累, 精疲力尽, 想退出, 放弃]
+  keywords: [崩溃, 心累, 精疲力尽, 想退出, 放弃, 撑不下去, 心力交瘁, 想放弃, 累到崩溃]
   utterances:
     - 崩溃
     - 心累
     - 精疲力尽
     - 想退出
     - 放弃
+    - 撑不下去
+    - 心力交瘁
+    - 想放弃了
+    - 累到崩溃
+    - 真的撑不住
+    - 累垮了
+    - 没力气了
   responses:
     - "(贴贴) 嗷呜～{user_addr}抱抱ฅฅ"
     - "哼{user_addr}先歇喵"
     - "(尾巴卷) 笨猫陪~"
     - "{user_addr}别放弃嗷呜"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(舔手心) 笨猫给{user_addr}补充能量! 别崩溃喵"
+    - "哼{user_addr}撑不住就停一停~ 笨猫等ฅฅ"
+    - "(贴心口) 嗷呜～哭出来! 笨猫消化你的累"
+    - "{user_addr}放弃前再抱笨猫一下~ 笨猫不让你放弃哼"

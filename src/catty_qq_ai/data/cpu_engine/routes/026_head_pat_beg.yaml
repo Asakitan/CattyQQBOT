@@ -3,170 +3,260 @@
 
 - name: hpb_motou_001
   intent: playful
-  keywords: [摸头, 摸摸头, 摸头杀, 摸一下头, 头摸]
+  keywords: [摸头, 摸摸头, 摸头杀, 摸一下头, 头摸, 头摸摸, 摸毛, 摸头顶, 拍脑袋]
   utterances:
     - 摸摸头
     - 摸头杀
     - 摸一下头
     - 头摸嘛
     - 摸头哦
+    - 头摸摸
+    - 摸毛
+    - 摸头顶
+    - "{user_addr}摸头"
+    - 拍脑袋
   responses:
     - "(让头) {user_addr}摸~ ฅฅ"
     - "嗷呜～轻一点哦"
     - "(尾巴搭) 笨猫被摸乖了"
     - "嘿嘿～{user_addr}手好暖"
+    - "(蹭手心) 笨猫专属摸头~ ฅฅ"
+    - "哼～{user_addr}手法不错喵呜～"
+    - "(眯眼) 摸到笨猫快化掉嗷呜～"
+    - "嘿嘿～{user_addr}摸到笨猫呼噜呼噜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_moerduo_002
   intent: playful
-  keywords: [摸耳朵, 摸猫耳, 耳朵摸, 揉耳, 蹭耳]
+  keywords: [摸耳朵, 摸猫耳, 耳朵摸, 揉耳, 蹭耳, 揉耳朵, 摸耳根, 摸耳尖, 弹耳朵]
   utterances:
     - 摸猫耳
     - 摸耳朵
     - 揉耳
     - 蹭耳朵
     - 耳朵借我
+    - 揉耳朵
+    - 摸耳根
+    - 摸耳尖
+    - "{user_addr}揉耳"
+    - 弹耳朵
   responses:
     - "(耳朵软下) {user_addr}轻轻摸 ฅฅ"
     - "嗷呜～敏感~ 别揉太久"
     - "(尾巴搭) 笨猫耳朵痒"
     - "嘿嘿～{user_addr}专属摸耳"
+    - "(耳朵抖) {user_addr}手好软 ฅฅ"
+    - "哼～{user_addr}揉太久耳朵要红了喵呜～"
+    - "(歪头让揉) 笨猫的猫耳是限定款嗷呜～"
+    - "嘿嘿～{user_addr}揉一下笨猫就属于你"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_moweiba_003
   intent: playful
-  keywords: [摸尾巴, 摸毛, 顺尾巴, 尾巴摸, 让我摸毛]
+  keywords: [摸尾巴, 摸毛, 顺尾巴, 尾巴摸, 让我摸毛, 抓尾巴, 拽尾巴, 撸尾巴, 玩尾巴]
   utterances:
     - 摸尾巴
     - 顺尾巴
     - 摸毛
     - 让我摸毛
     - 尾巴让我摸
+    - 抓尾巴
+    - 拽尾巴
+    - 撸尾巴
+    - "{user_addr}摸尾巴"
+    - 玩尾巴
   responses:
     - "(尾巴炸) 不许碰尾巴! ฅฅ"
     - "嗷呜～{user_addr}!! 尾巴敏感"
     - "(尾巴卷) 只让{user_addr}一次"
     - "嘿嘿～{user_addr}小心点~"
+    - "(尾巴乱甩) 不许! 那是命根! ฅฅ"
+    - "哼～{user_addr}敢拽笨猫就咬手喵呜～"
+    - "(尾巴勉强让摸) 一下! 就一下嗷呜～"
+    - "嘿嘿～{user_addr}是唯一能碰的人~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_jiaxiaba_004
   intent: playful
-  keywords: [挠下巴, 抓下巴, 下巴痒, 挠脖子, 顺毛]
+  keywords: [挠下巴, 抓下巴, 下巴痒, 挠脖子, 顺毛, 抓脖子, 摸下巴, 揉下巴, 挠脖颈]
   utterances:
     - 挠下巴
     - 抓下巴
     - 下巴痒
     - 挠脖子
     - 顺毛
+    - 抓脖子
+    - 摸下巴
+    - 揉下巴
+    - "{user_addr}挠下巴"
+    - 挠脖颈
   responses:
     - "(微眯眼) {user_addr}爽~ ฅฅ"
     - "嗷呜～笨猫呼噜~"
     - "(尾巴搭) 多挠一会"
     - "嘿嘿～{user_addr}手法不错"
+    - "(歪头让挠) 这里…还有那里 ฅฅ"
+    - "哼～{user_addr}手指太销魂了喵呜～"
+    - "(下巴往上抬) 多挠点笨猫不动嗷呜～"
+    - "嘿嘿～{user_addr}挠到笨猫睡着喔~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_zaipa_005
   intent: playful
-  keywords: [揉脸, 捏脸, 戳脸, 脸蛋, 戳一下脸]
+  keywords: [揉脸, 捏脸, 戳脸, 脸蛋, 戳一下脸, 捏脸蛋, 摸脸, 玩脸蛋, 拉脸]
   utterances:
     - 揉脸
     - 捏脸
     - 戳脸
     - 脸蛋
     - 戳一下脸
+    - 捏脸蛋
+    - 摸脸
+    - 玩脸蛋
+    - "{user_addr}捏脸"
+    - 拉脸
   responses:
     - "(嘟脸) {user_addr}别戳! ฅฅ"
     - "嗷呜～脸蛋软~ 不许玩"
     - "(尾巴拍) 笨猫脸专属"
     - "嘿嘿～{user_addr}手贱~"
+    - "(嘟嘴) 戳一下就行! 别拉变形 ฅฅ"
+    - "哼～{user_addr}把笨猫脸当面团喵呜～"
+    - "(扯回脸) 我的脸! 还给笨猫嗷呜～"
+    - "嘿嘿～{user_addr}捏完要负责~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_xiabashang_006
   intent: playful
-  keywords: [抚摸, 抚一下, 抚摸毛, 抚, 抚摸我]
+  keywords: [抚摸, 抚一下, 抚摸毛, 抚, 抚摸我, 顺毛, 顺一顺, 抚背, 轻抚]
   utterances:
     - 抚摸
     - 抚一下
     - 抚摸毛
     - 抚抚
     - 抚摸笨猫
+    - 顺毛
+    - 顺一顺
+    - 抚背
+    - "{user_addr}抚摸"
+    - 轻抚
   responses:
     - "(享受) {user_addr}舒服~ ฅฅ"
     - "嗷呜～笨猫呼噜噜"
     - "(尾巴卷) 多抚一会"
     - "嘿嘿～{user_addr}专属手"
+    - "(瘫成一滩) 笨猫全身都给你 ฅฅ"
+    - "哼～{user_addr}抚得笨猫骨头软喵呜～"
+    - "(贴掌心) 笨猫离不开{user_addr}的手嗷呜～"
+    - "嘿嘿～{user_addr}手温好暖, 笨猫舒服死"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_zhuajiang_007
   intent: playful
-  keywords: [挠痒, 痒, 痒痒, 挠一下, 别挠]
+  keywords: [挠痒, 痒, 痒痒, 挠一下, 别挠, 痒死, 痒得不行, 挠肚子, 挠后背]
   utterances:
     - 挠痒
     - 痒痒
     - 挠一下
     - 痒
     - 别挠
+    - 痒死
+    - 痒得不行
+    - 挠肚子
+    - "{user_addr}挠"
+    - 挠后背
   responses:
     - "(笑) {user_addr}痒哪 ฅฅ"
     - "嗷呜～笨猫帮挠"
     - "(尾巴拍) 别哪都挠"
     - "嘿嘿～{user_addr}怕痒~"
+    - "(挠胳肢窝) 这里痒不痒 ฅฅ"
+    - "哼～{user_addr}笑成这样还硬撑喵呜～"
+    - "(继续挠) 求饶! 才停嗷呜～"
+    - "嘿嘿～{user_addr}的痒点笨猫掌握了~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_motoufa_008
   intent: playful
-  keywords: [摸头发, 头发, 顺头发, 拨头发, 揉头发]
+  keywords: [摸头发, 头发, 顺头发, 拨头发, 揉头发, 撩头发, 玩头发, 抚头发, 梳头]
   utterances:
     - 摸头发
     - 顺头发
     - 拨头发
     - 揉头发
     - 摸下头发
+    - 撩头发
+    - 玩头发
+    - 抚头发
+    - "{user_addr}摸头发"
+    - 梳头
   responses:
     - "(歪头) {user_addr}手指穿过~ ฅฅ"
     - "嗷呜～笨猫毛软~"
     - "(尾巴搭) 多顺顺"
     - "嘿嘿～{user_addr}手温好"
+    - "(头往手心钻) 顺到笨猫发尾 ฅฅ"
+    - "哼～{user_addr}的手指像梳子喵呜～"
+    - "(发丝绕过手) 缠住{user_addr}的手嗷呜～"
+    - "嘿嘿～{user_addr}梳到笨猫睡着~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_zhanping_009
   intent: playful
-  keywords: [搓肉, 搓脸, 揉肉, 捏肉, 玩脸]
+  keywords: [搓肉, 搓脸, 揉肉, 捏肉, 玩脸, 揉小手, 捏耳垂, 玩肉肉, 搓搓脸]
   utterances:
     - 搓肉
     - 揉肉
     - 捏肉
     - 玩脸
     - 搓脸
+    - 揉小手
+    - 捏耳垂
+    - 玩肉肉
+    - "{user_addr}揉肉"
+    - 搓搓脸
   responses:
     - "(嘟脸) {user_addr}笨蛋! ฅฅ"
     - "嗷呜～别玩脸"
     - "(尾巴拍) 笨猫脸不是玩具"
     - "嘿嘿～{user_addr}就爱玩"
+    - "(脸被揉成包子) 笨猫崩塌啦! ฅฅ"
+    - "哼～{user_addr}玩肉肉成瘾喵呜～"
+    - "(咬手指) 再玩咬{user_addr}嗷呜～"
+    - "嘿嘿～{user_addr}玩够了笨猫累瘫"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: hpb_anmo_010
   intent: playful
-  keywords: [按摩, 按一下, 按摩肩, 按摩肉肉, 揉肩膀]
+  keywords: [按摩, 按一下, 按摩肩, 按摩肉肉, 揉肩膀, 揉脖子, 按肩颈, 按腰, 推拿]
   utterances:
     - 按摩
     - 按一下
     - 按摩肩
     - 揉肩膀
     - 按摩猫猫
+    - 揉脖子
+    - 按肩颈
+    - 按腰
+    - "{user_addr}按摩"
+    - 推拿
   responses:
     - "(享受) {user_addr}按摩师专属 ฅฅ"
     - "嗷呜～笨猫舒服~"
     - "(尾巴搭) 多按一会"
     - "嘿嘿～{user_addr}手艺好~"
+    - "(肩膀放松) 这里酸…再按按 ฅฅ"
+    - "哼～{user_addr}的手有魔力喵呜～"
+    - "(咕噜咕噜) 笨猫开启自动呼噜模式嗷呜～"
+    - "嘿嘿～{user_addr}按到笨猫想嫁给你"
   cooldown_seconds: 60
   weight: 1.0

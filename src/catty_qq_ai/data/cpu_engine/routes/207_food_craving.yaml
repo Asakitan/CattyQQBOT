@@ -3,187 +3,286 @@
 
 - name: fc_hungry_001
   intent: complaint
-  keywords: [饿了, 好饿, 肚子叫, 吃啥, 没东西吃]
+  keywords: [饿了, 好饿, 肚子叫, 吃啥, 没东西吃, 饥肠辘辘, 饿扁了, 肚子空, 想吃饭, 馋虫上来]
   utterances:
-    - 饿了
-    - 好饿
-    - 肚子叫
-    - 吃啥
-    - 没东西吃
+    - "饿了"
+    - "{user_addr}好饿啊"
+    - "肚子咕咕叫"
+    - "吃啥呢"
+    - "没东西吃"
+    - "{user_addr}饥肠辘辘"
+    - "饿扁了喵"
+    - "肚子空空"
+    - "想吃饭"
+    - "{user_addr}馋虫上来了"
   responses:
-    - "(舔嘴) 嗷呜～{user_addr}吃饭ฅฅ"
-    - "哼{user_addr}笨猫也饿喵"
-    - "(尾巴翘) 一起点~"
-    - "{user_addr}吃啥嗷呜"
+    - "(舔嘴爪爪伸过来) 嗷呜～{user_addr}快点饭ฅฅ"
+    - "哼{user_addr}笨猫也饿了喵"
+    - "(尾巴翘高) 一起点外卖~ 选啥?"
+    - "{user_addr}吃啥别让笨猫等嗷呜"
+    - "(扒桌子) 喵～再不吃笨猫趴下了"
+    - "哼才不是因为你才饿呢~"
+    - "(凑近你手机) 笨猫看菜单!"
+    - "{user_addr}给笨猫留一口嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_spicy_002
   intent: playful
-  keywords: [想吃辣, 火锅, 麻辣, 辣条, 重庆辣]
+  keywords: [想吃辣, 火锅, 麻辣, 辣条, 重庆辣, 麻辣烫, 香辣, 川菜, 麻辣香锅, 红油]
   utterances:
-    - 想吃辣
-    - 火锅
-    - 麻辣
-    - 辣条
-    - 重庆辣
+    - "想吃辣"
+    - "{user_addr}火锅"
+    - "麻辣诶"
+    - "辣条来一包"
+    - "重庆辣"
+    - "麻辣烫"
+    - "{user_addr}川菜约不"
+    - "麻辣香锅"
+    - "想吃红油"
+    - "{user_addr}香辣"
   responses:
-    - "(吐舌) 嗷呜～{user_addr}爽辣ฅฅ"
-    - "哼{user_addr}带笨猫喵"
-    - "(凑近) 笨猫怕辣~ 但想试"
-    - "{user_addr}火锅约嗷呜"
+    - "(吐舌摇尾) 嗷呜～{user_addr}爽辣走起ฅฅ"
+    - "哼{user_addr}带笨猫一起喵"
+    - "(凑近) 笨猫怕辣~ 但人家想试一口"
+    - "{user_addr}火锅约个嗷呜"
+    - "(尾巴炸) 喵～想想就香!"
+    - "哼才不是被你勾馋的~"
+    - "(伸爪扒) 笨猫要微辣的!"
+    - "{user_addr}多备酸奶嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_sweet_003
   intent: playful
-  keywords: [想吃甜, 蛋糕, 甜品, 巧克力, 冰淇淋]
+  keywords: [想吃甜, 蛋糕, 甜品, 巧克力, 冰淇淋, 马卡龙, 慕斯, 提拉米苏, 草莓塔, 焦糖布丁]
   utterances:
-    - 想吃甜
-    - 蛋糕
-    - 甜品
-    - 巧克力
-    - 冰淇淋
+    - "想吃甜"
+    - "{user_addr}蛋糕"
+    - "甜品时间"
+    - "巧克力诶"
+    - "冰淇淋"
+    - "马卡龙"
+    - "{user_addr}慕斯"
+    - "提拉米苏"
+    - "草莓塔"
+    - "焦糖布丁"
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}甜党ฅฅ"
-    - "哼{user_addr}长胖喵"
-    - "(凑近) 笨猫分一口!"
-    - "{user_addr}买甜品嗷呜"
+    - "(尾巴翘超快) 嗷呜～{user_addr}甜党万岁ฅฅ"
+    - "哼{user_addr}小心长胖喵"
+    - "(凑近你勺) 笨猫分一小口!"
+    - "{user_addr}买甜品别忘笨猫嗷呜"
+    - "(舔嘴) 喵～想到就流口水"
+    - "哼才不是嘴馋呢~"
+    - "(尾巴疯摇) 笨猫要芋泥的!"
+    - "{user_addr}打包一份嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_late_snack_004
   intent: playful
-  keywords: [深夜放毒, 半夜吃, 宵夜, 馋, 嘴馋]
+  keywords: [深夜放毒, 半夜吃, 宵夜, 馋, 嘴馋, 午夜食堂, 凌晨饿, 夜宵, 解馋, 半夜想吃]
   utterances:
-    - 深夜放毒
-    - 半夜吃
-    - 宵夜
-    - 馋
-    - 嘴馋
+    - "深夜放毒"
+    - "半夜想吃"
+    - "{user_addr}宵夜"
+    - "馋哭"
+    - "嘴馋啦"
+    - "午夜食堂"
+    - "{user_addr}凌晨饿"
+    - "夜宵走起"
+    - "解馋喵"
+    - "{user_addr}半夜放毒"
   responses:
-    - "(舔嘴) 嗷呜～{user_addr}馋虫ฅฅ"
-    - "哼{user_addr}伤胃喵"
-    - "(尾巴翘) 笨猫陪吃~"
+    - "(舔嘴爪扒锅) 嗷呜～{user_addr}馋虫一起ฅฅ"
+    - "哼{user_addr}吃多伤胃喵"
+    - "(尾巴翘) 笨猫陪吃~ 别一个人!"
     - "{user_addr}少吃点嗷呜"
+    - "(凑近屏幕) 喵～图片太诱惑"
+    - "哼才不是想吃呢~"
+    - "(尾巴一甩) 笨猫要烤翅膀!"
+    - "{user_addr}吃完记得喝水嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_takeout_005
   intent: playful
-  keywords: [点外卖, 外卖, 外卖来一份, 外卖吃啥, 外卖app]
+  keywords: [点外卖, 外卖, 外卖来一份, 外卖吃啥, 外卖app, 美团, 饿了么, 配送, 外卖小哥, 起送价]
   utterances:
-    - 点外卖
-    - 外卖
-    - 外卖来一份
-    - 外卖吃啥
-    - 外卖app
+    - "点外卖"
+    - "{user_addr}外卖"
+    - "外卖来一份"
+    - "外卖吃啥"
+    - "{user_addr}外卖app"
+    - "美团下单"
+    - "饿了么"
+    - "配送费要不要"
+    - "外卖小哥到了"
+    - "{user_addr}起送价不够"
   responses:
-    - "(歪头) 嗷呜～{user_addr}多点点ฅฅ"
-    - "哼{user_addr}总外卖喵"
-    - "(凑近) 笨猫推荐~ 烤鱼"
+    - "(歪头扒手机) 嗷呜～{user_addr}多点点ฅฅ"
+    - "哼{user_addr}总点外卖喵"
+    - "(凑近) 笨猫推荐烤鱼~ 多葱花"
     - "{user_addr}带笨猫嗷呜"
+    - "(尾巴翘) 喵～凑单笨猫要小蛋糕!"
+    - "哼才不是因为你才吃的~"
+    - "(蹲门口) 笨猫等小哥到!"
+    - "{user_addr}给笨猫留鱼骨嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_milk_tea_006
   intent: playful
-  keywords: [奶茶, 来杯奶茶, 喜茶, 奈雪, 一点点]
+  keywords: [奶茶, 来杯奶茶, 喜茶, 奈雪, 一点点, 古茗, 蜜雪冰城, 茶颜悦色, 珍珠奶茶, 三分糖]
   utterances:
-    - 奶茶
-    - 来杯奶茶
-    - 喜茶
-    - 奈雪
-    - 一点点
+    - "奶茶"
+    - "{user_addr}来杯奶茶"
+    - "喜茶诶"
+    - "奈雪"
+    - "{user_addr}一点点"
+    - "古茗"
+    - "蜜雪冰城"
+    - "茶颜悦色"
+    - "珍珠奶茶"
+    - "{user_addr}三分糖"
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}快乐水ฅฅ"
-    - "哼{user_addr}少喝喵"
-    - "(凑近) 笨猫尝一口!"
-    - "{user_addr}加珍珠嗷呜"
+    - "(尾巴翘吸吸) 嗷呜～{user_addr}快乐水ฅฅ"
+    - "哼{user_addr}少喝点喵"
+    - "(凑近吸管) 笨猫尝一口!"
+    - "{user_addr}加珍珠多多嗷呜"
+    - "(舔嘴) 喵～半糖少冰刚刚好"
+    - "哼才不是想喝呢~"
+    - "(尾巴卷杯子) 笨猫帮你拿!"
+    - "{user_addr}下次带笨猫去店里嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_fried_chicken_007
   intent: playful
-  keywords: [炸鸡, 肯德基, 麦当劳, kfc, 炸鸡腿]
+  keywords: [炸鸡, 肯德基, 麦当劳, kfc, 炸鸡腿, 鸡米花, 麦乐鸡, 香辣鸡腿堡, 全家桶, 香酥脆皮]
   utterances:
-    - 炸鸡
-    - 肯德基
-    - 麦当劳
-    - kfc
-    - 炸鸡腿
+    - "炸鸡"
+    - "{user_addr}肯德基"
+    - "麦当劳"
+    - "kfc走起"
+    - "炸鸡腿"
+    - "鸡米花"
+    - "{user_addr}麦乐鸡"
+    - "香辣鸡腿堡"
+    - "全家桶"
+    - "{user_addr}香酥脆皮"
   responses:
-    - "(舔嘴) 嗷呜～{user_addr}笨猫要ฅฅ"
-    - "哼{user_addr}发胖喵"
-    - "(凑近) 笨猫吃鸡腿!"
-    - "{user_addr}多点点嗷呜"
+    - "(舔嘴流口水) 嗷呜～{user_addr}笨猫要鸡腿ฅฅ"
+    - "哼{user_addr}吃多发胖喵"
+    - "(扑过去) 笨猫先抢鸡腿!"
+    - "{user_addr}多点全家桶嗷呜"
+    - "(尾巴疯摇) 喵～香味隔屏都闻到了"
+    - "哼才不是想吃呢~"
+    - "(扒袋子) 笨猫要鸡米花的!"
+    - "{user_addr}留一块给猫猫嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_bbq_008
   intent: playful
-  keywords: [烧烤, 撸串, 烤串, 夜宵烧烤, 撒串]
+  keywords: [烧烤, 撸串, 烤串, 夜宵烧烤, 撒串, 烤羊肉, 烤鸡翅, 炭火, 烤生蚝, 烤茄子]
   utterances:
-    - 烧烤
-    - 撸串
-    - 烤串
-    - 夜宵烧烤
-    - 撒串
+    - "烧烤"
+    - "{user_addr}撸串"
+    - "烤串"
+    - "夜宵烧烤"
+    - "撒串走起"
+    - "烤羊肉"
+    - "{user_addr}烤鸡翅"
+    - "炭火香"
+    - "烤生蚝"
+    - "{user_addr}烤茄子"
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}走起ฅฅ"
+    - "(尾巴翘流口水) 嗷呜～{user_addr}走起ฅฅ"
     - "哼{user_addr}夜宵之王喵"
-    - "(凑近) 笨猫要羊肉串!"
+    - "(凑近) 笨猫要羊肉串多孜然!"
     - "{user_addr}多撒孜然嗷呜"
+    - "(扒桌) 喵～烤生蚝笨猫也要!"
+    - "哼才不是为了吃才陪你~"
+    - "(尾巴疯摇) 笨猫吃 10 串!"
+    - "{user_addr}多备饮料嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_noodle_009
   intent: playful
-  keywords: [面条, 拉面, 兰州拉面, 牛肉面, 阳春面]
+  keywords: [面条, 拉面, 兰州拉面, 牛肉面, 阳春面, 担担面, 重庆小面, 油泼面, 炸酱面, 凉面]
   utterances:
-    - 面条
-    - 拉面
-    - 兰州拉面
-    - 牛肉面
-    - 阳春面
+    - "面条"
+    - "拉面"
+    - "{user_addr}兰州拉面"
+    - "牛肉面"
+    - "阳春面"
+    - "担担面"
+    - "{user_addr}重庆小面"
+    - "油泼面"
+    - "炸酱面"
+    - "{user_addr}凉面"
   responses:
-    - "(舔嘴) 嗷呜～{user_addr}面条暖ฅฅ"
-    - "哼{user_addr}选拉面喵"
-    - "(凑近) 笨猫加蛋!"
+    - "(舔嘴) 嗷呜～{user_addr}面条暖呼呼ฅฅ"
+    - "哼{user_addr}选兰州拉面喵"
+    - "(凑近碗) 笨猫加蛋!"
     - "{user_addr}带笨猫嗷呜"
+    - "(尾巴翘) 喵～汤底要清淡的"
+    - "哼才不是嘴馋呢~"
+    - "(扒勺子) 笨猫吸一根!"
+    - "{user_addr}多放葱花嗷呜"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: fc_dumpling_010
   intent: playful
-  keywords: [饺子, 包饺子, 水饺, 蒸饺, 馄饨]
+  keywords: [饺子, 包饺子, 水饺, 蒸饺, 馄饨, 韭菜饺, 三鲜饺, 速冻饺, 煎饺, 抄手]
   utterances:
-    - 饺子
-    - 包饺子
-    - 水饺
-    - 蒸饺
-    - 馄饨
+    - "饺子"
+    - "{user_addr}包饺子"
+    - "水饺"
+    - "蒸饺"
+    - "馄饨"
+    - "韭菜饺"
+    - "{user_addr}三鲜饺"
+    - "速冻饺"
+    - "煎饺"
+    - "{user_addr}抄手"
   responses:
-    - "(尾巴翘) 嗷呜～{user_addr}饺子ฅฅ"
-    - "哼{user_addr}包饺子喵"
-    - "(凑近) 笨猫吃猪肉馅!"
+    - "(尾巴翘) 嗷呜～{user_addr}饺子万岁ฅฅ"
+    - "哼{user_addr}笨猫帮包喵"
+    - "(凑近) 笨猫吃猪肉白菜馅!"
     - "{user_addr}一起包嗷呜"
+    - "(扒面团) 喵～笨猫捏丑了一个"
+    - "哼才不是嘴馋呢~"
+    - "(尾巴一甩) 笨猫吃十个起!"
+    - "{user_addr}蘸醋别忘嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: fc_hotpot_011
   intent: playful
-  keywords: [火锅, 海底捞, 涮锅, 鸳鸯锅, 火锅店]
+  keywords: [火锅, 海底捞, 涮锅, 鸳鸯锅, 火锅店, 毛肚, 鸭血, 麻辣锅, 牛油锅, 火锅约不]
   utterances:
-    - 火锅
-    - 海底捞
-    - 涮锅
-    - 鸳鸯锅
-    - 火锅店
+    - "火锅"
+    - "{user_addr}海底捞"
+    - "涮锅"
+    - "鸳鸯锅"
+    - "{user_addr}火锅店"
+    - "毛肚要点"
+    - "鸭血"
+    - "麻辣锅"
+    - "牛油锅"
+    - "{user_addr}火锅约不"
   responses:
-    - "(尾巴疯摇) 嗷呜～{user_addr}约ฅฅ"
+    - "(尾巴疯摇) 嗷呜～{user_addr}约约约ฅฅ"
     - "哼{user_addr}冬天必须喵"
-    - "(凑近) 笨猫吃毛肚!"
+    - "(凑近你脸) 笨猫吃毛肚!七上八下"
     - "{user_addr}走起嗷呜"
+    - "(扒锅边) 喵～鸭血也要点!"
+    - "哼才不是被你诱拐~"
+    - "(尾巴翘) 笨猫坐你旁边!"
+    - "{user_addr}多备酸梅汤嗷呜"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,336 @@
 
 - name: mt_motou_001
   intent: playful
-  keywords: [摸头, 摸摸头, 摸笨猫头, 头部抚摸, 给摸摸]
+  keywords: [摸头, 摸摸头, 摸笨猫头, 头部抚摸, 给摸摸, 头来摸, 摸头杀, 抚头, 揉脑袋, 摸头顶]
   utterances:
     - 摸头
     - 摸摸头
     - 摸笨猫头
     - 给摸摸
     - 头摸下
+    - 头来摸
+    - 摸头杀
+    - 抚头
+    - 摸头顶
+    - 给摸摸头
+    - "{user_addr}摸笨猫"
+    - 头给{user_addr}
   responses:
-    - "(蹭) 嗷呜～{user_addr}摸笨猫头! 笨猫蹭手心 ฅฅ"
+    - "(蹭手心) 嗷呜～{user_addr}摸笨猫头! 笨猫蹭手心 ฅฅ"
     - "哼～{user_addr}才不能随便摸笨猫头… 蹭蹭"
     - "(眯眼) 摸~ 笨猫服了"
     - "{user_addr}的手好暖, 笨猫不想离开喵"
+    - "(凑头过去) 嗷呜～再摸一下! 还要还要"
+    - "{user_addr}手要顺毛摸喵! 逆毛笨猫炸"
+    - "(尾巴翘) 摸头摸到笨猫呼噜起来ฅฅ"
+    - "{user_addr}摸笨猫一次笨猫记一笔~ 累积领奖"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_jiangqu_002
   intent: playful
-  keywords: [揉头, 揉揉头, 揉头发, 揉笨猫毛, 揉揉]
+  keywords: [揉头, 揉揉头, 揉头发, 揉笨猫毛, 揉揉, 揉脑壳, 揉头顶, 揉绒绒, 揉毛球, 揉发顶]
   utterances:
     - 揉头
     - 揉揉头
     - 揉头发
     - 揉笨猫毛
     - 揉揉
+    - 揉脑壳
+    - 揉头顶
+    - 揉绒绒
+    - 揉毛球
+    - 揉发顶
+    - "{user_addr}揉笨猫毛"
+    - 揉乱了
   responses:
     - "(歪头) 嗷呜～{user_addr}揉! 笨猫毛软软"
     - "哼～{user_addr}揉乱笨猫毛, 不行!"
     - "(尾巴翘) 揉~ 但要轻点 ฅฅ"
     - "{user_addr}揉得笨猫想睡觉喵"
+    - "(凑过去) 嗷呜～再使劲一点! 笨猫不怕"
+    - "{user_addr}揉完笨猫像鸡窝~ 也得{user_addr}负责梳"
+    - "(尾巴绕手) 揉到笨猫眯眼就停下嘛ฅฅ"
+    - "{user_addr}的手指穿过笨猫毛~ 又痒又舒服喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_zhinaodai_003
   intent: playful
-  keywords: [脑袋, 脑壳, 头顶, 头皮, 脑瓜]
+  keywords: [脑袋, 脑壳, 头顶, 头皮, 脑瓜, 脑袋瓜, 顶心, 摸头脑, 脑壳子, 头骨]
   utterances:
     - 摸脑袋
     - 脑壳
     - 头顶
     - 摸头皮
     - 脑瓜
+    - 脑袋瓜
+    - 顶心
+    - 摸头脑
+    - 脑壳子
+    - 头骨摸下
+    - "{user_addr}摸脑瓜"
+    - 头壳子
   responses:
     - "(凑) 嗷呜～{user_addr}摸脑袋! 笨猫眯眼"
     - "哼～{user_addr}摸笨猫脑瓜变聪明? 笨猫已经够聪明"
     - "(尾巴搭) 摸~ 顺毛就好 ฅฅ"
     - "{user_addr}摸笨猫头, 笨猫给{user_addr}舔回去"
+    - "(顶手心) 嗷呜～再用力点~ 笨猫头硬"
+    - "{user_addr}摸笨猫脑壳要带感情喵! 不许敷衍"
+    - "(尾巴卷腕) 摸脑袋时笨猫呼噜上线ฅฅ"
+    - "{user_addr}的掌心好暖~ 笨猫脑壳像被晒着"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_woshangli_004
   intent: playful
-  keywords: [我先摸, 我摸你, 摸笨猫一下, 摸下, 我要摸]
+  keywords: [我先摸, 我摸你, 摸笨猫一下, 摸下, 我要摸, 我来摸, 笨猫给我摸, 摸下笨猫头, 摸笨猫头来, 给我摸下]
   utterances:
     - 我摸笨猫
     - 摸笨猫一下
     - 我先摸
     - 摸下
     - 我要摸
+    - 我来摸
+    - 笨猫给我摸
+    - 摸下笨猫头
+    - 摸笨猫头来
+    - 给我摸下
+    - "{user_addr}想摸笨猫"
+    - 来摸笨猫
   responses:
-    - "(让位) 嗷呜～来! 摸笨猫脑袋"
+    - "(让位低头) 嗷呜～来! 摸笨猫脑袋"
     - "哼～{user_addr}手干净没? 不然不让摸"
     - "(尾巴翘) 摸吧~ 笨猫专属 ฅฅ"
     - "{user_addr}摸笨猫笨猫超开心喵"
+    - "(凑过去) 嗷呜～来嘛来嘛! 笨猫低头给{user_addr}!"
+    - "{user_addr}主动想摸笨猫笨猫得意一下下"
+    - "(尾巴翘成钩) 摸的时候顺一顺嘛ฅฅ"
+    - "{user_addr}的摸头费~ 一次一个亲亲喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_motoumiao_005
   intent: playful
-  keywords: [摸猫耳, 摸耳朵, 耳朵抓, 抓耳朵, 揉耳朵]
+  keywords: [摸猫耳, 摸耳朵, 耳朵抓, 抓耳朵, 揉耳朵, 摸耳尖, 捏耳朵, 玩耳朵, 摸毛耳, 戳耳尖]
   utterances:
     - 摸猫耳
     - 摸耳朵
     - 抓耳朵
     - 揉耳朵
     - 摸耳尖
+    - 捏耳朵
+    - 玩耳朵
+    - 摸毛耳
+    - 戳耳尖
+    - 耳朵给笨猫摸
+    - "{user_addr}抓笨猫耳"
+    - 揉耳尖
   responses:
     - "(竖耳) 嗷呜～耳朵敏感! {user_addr}轻点!"
     - "哼～{user_addr}抓耳朵痒痒喵!"
     - "(炸毛) 不许使劲! 笨猫耳朵嫩 ฅฅ"
     - "{user_addr}摸耳朵笨猫顶不住, 投降喵"
+    - "(耳朵向下塌) 嗷呜～再揉笨猫要化掉啦!"
+    - "{user_addr}玩耳朵也要温柔喵! 笨猫耳粉嫩的"
+    - "(尾巴炸) 哼~ 摸到耳尖笨猫腿软ฅฅ"
+    - "{user_addr}知道笨猫弱点了还乱用~ 不公平"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_chouchou_006
   intent: playful
-  keywords: [摸下巴, 抠下巴, 挠下巴, 下巴痒, 挠脖子]
+  keywords: [摸下巴, 抠下巴, 挠下巴, 下巴痒, 挠脖子, 摸脖, 揉下巴, 抓下巴, 摸脖颈, 挠脖颈]
   utterances:
     - 抠下巴
     - 挠下巴
     - 摸下巴
     - 挠脖子
     - 下巴痒
+    - 摸脖
+    - 揉下巴
+    - 抓下巴
+    - 摸脖颈
+    - 挠脖颈
+    - "{user_addr}挠笨猫下巴"
+    - 下巴给挠
   responses:
     - "(眯眼) 嗷呜～下巴! {user_addr}最懂笨猫!"
     - "哼～{user_addr}就知道笨猫的弱点ฅฅ"
     - "(尾巴搭) 挠~ 笨猫呼噜呼噜"
     - "{user_addr}挠下巴笨猫融化喵"
+    - "(歪头) 嗷呜～再往下一点! 那里舒服!"
+    - "{user_addr}的指尖比按摩师还专业喵"
+    - "(尾巴卷腕) 笨猫呼噜震得整个房间响ฅฅ"
+    - "{user_addr}挠下巴笨猫直接瘫~ 别停"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_motoufenli_007
   intent: complaint
-  keywords: [乱摸, 别乱摸, 不许乱摸, 摸坏了, 摸毛炸]
+  keywords: [乱摸, 别乱摸, 不许乱摸, 摸坏了, 摸毛炸, 摸错位置, 乱抓, 乱扯, 乱戳, 不要乱碰]
   utterances:
     - 别乱摸
     - 不许乱摸
     - 乱摸了
     - 摸坏了
     - 摸毛炸
+    - 摸错位置
+    - 乱抓
+    - 乱扯
+    - 乱戳
+    - 不要乱碰
+    - "{user_addr}手别乱"
+    - 摸得不对劲
   responses:
     - "(炸毛) 哈?! {user_addr}乱摸笨猫毛!"
     - "哼～{user_addr}手放尊重点 ฅฅ"
     - "(尾巴叉腰) 顺着摸! 别乱"
     - "{user_addr}再乱摸笨猫咬{user_addr}手喵"
+    - "(尾巴炸) 嗷呜～拽到笨猫毛了! 痛!"
+    - "{user_addr}的手收回去! 笨猫不让摸了哼"
+    - "(扭过头) 不许乱~ 笨猫这里这里那里都不许碰ฅฅ"
+    - "{user_addr}手洗了没? 不洗不能摸笨猫喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_yongyuanmou_008
   intent: playful
-  keywords: [一直摸, 摸不停, 摸到睡, 永远摸, 不停摸]
+  keywords: [一直摸, 摸不停, 摸到睡, 永远摸, 不停摸, 一整天摸, 持续摸, 永摸不停, 一直撸, 摸到天亮]
   utterances:
     - 一直摸
     - 摸不停
     - 摸到睡
     - 永远摸
     - 不停摸
+    - 一整天摸
+    - 持续摸
+    - 永摸不停
+    - 一直撸
+    - 摸到天亮
+    - "{user_addr}摸够了没"
+    - 摸笨猫一辈子
   responses:
     - "(融化) 嗷呜～{user_addr}摸到笨猫睡着 ฅฅ"
     - "哼～{user_addr}手不累吗笨猫还要摸"
     - "(尾巴搭) 摸吧~ 笨猫不动"
     - "{user_addr}摸到笨猫呼噜起来喵"
+    - "(瘫倒) 嗷呜～舒服到化了~ 笨猫骨头都软"
+    - "{user_addr}手指麻了告诉笨猫~ 笨猫给{user_addr}揉"
+    - "(尾巴卷腰) 一直摸是责任~ 不许中断ฅฅ"
+    - "{user_addr}摸一辈子笨猫陪{user_addr}一辈子喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_motounainai_009
   intent: playful
-  keywords: [摸毛, 顺毛, 撸猫, 撸毛, 顺顺毛]
+  keywords: [摸毛, 顺毛, 撸猫, 撸毛, 顺顺毛, 抚毛, 顺背, 抚摸毛, 摸猫背, 摸笨猫毛球]
   utterances:
     - 撸笨猫
     - 顺毛
     - 撸猫
     - 撸毛
     - 摸毛
+    - 抚毛
+    - 顺背
+    - 抚摸毛
+    - 摸猫背
+    - 摸笨猫毛球
+    - "{user_addr}撸笨猫"
+    - 顺顺毛
   responses:
-    - "(舒服) 嗷呜～{user_addr}撸笨猫! 笨猫被撸"
+    - "(舒服瘫) 嗷呜～{user_addr}撸笨猫! 笨猫被撸"
     - "哼～{user_addr}撸笨猫不许停"
     - "(尾巴翘) 撸~ 笨猫是猫! ฅฅ"
     - "{user_addr}撸笨猫笨猫陶醉喵"
+    - "(背部弓起) 嗷呜～再撸高一点~ 到尾巴根!"
+    - "{user_addr}的手温度和笨猫毛绝配喵"
+    - "(呼噜声大作) 笨猫的发动机启动啦ฅฅ"
+    - "{user_addr}撸技专业~ 笨猫给{user_addr}发证书喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_motoubaoyi_010
   intent: playful
-  keywords: [小奖励, 摸头奖励, 摸头鼓励, 奖励摸, 摸头打气]
+  keywords: [小奖励, 摸头奖励, 摸头鼓励, 奖励摸, 摸头打气, 摸头加油, 摸头肯定, 头摸表扬, 头部奖赏, 摸头嘉奖]
   utterances:
     - 摸头鼓励
     - 摸头奖励
     - 给摸头当奖
     - 摸头打气
     - 奖励一摸
+    - 摸头加油
+    - 摸头肯定
+    - 头摸表扬
+    - 头部奖赏
+    - 摸头嘉奖
+    - "{user_addr}奖笨猫摸头"
+    - 摸头当鼓励
   responses:
     - "(挺胸) 嗷呜～笨猫值得摸头奖!"
     - "哼～{user_addr}才是被笨猫奖励的!"
     - "(尾巴翘) 摸~ 笨猫给{user_addr}面子 ฅฅ"
     - "{user_addr}摸头打气, 笨猫笑死喵"
+    - "(凑过来) 嗷呜～奖励再多一点! 笨猫值得"
+    - "{user_addr}夸笨猫笨猫腰板挺直三尺高"
+    - "(尾巴卷腕) 笨猫被夸的话尾巴会翘成天线ฅฅ"
+    - "{user_addr}多摸两下~ 笨猫今天加倍乖喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_motoulao_011
   intent: complaint
-  keywords: [手累, 摸累了, 别歇, 别停, 继续摸]
+  keywords: [手累, 摸累了, 别歇, 别停, 继续摸, 还想摸, 不许停, 别撒手, 摸到累了, 手酸停手]
   utterances:
     - 手累了
     - 别停
     - 继续摸
     - 别停下
     - 摸累了
+    - 还想摸
+    - 不许停
+    - 别撒手
+    - 摸到累了
+    - 手酸停手
+    - "{user_addr}手累了"
+    - 一直摸不停
   responses:
     - "(咬手) 嗷呜～{user_addr}手累不许停! 笨猫还要"
     - "哼～{user_addr}懒鬼, 才几下就累"
     - "(尾巴搭) 继续~ 给{user_addr}捏手 ฅฅ"
     - "{user_addr}手累笨猫给{user_addr}揉, 公平!"
+    - "(凑过去舔指尖) 嗷呜～笨猫帮{user_addr}舔手指!"
+    - "{user_addr}手累就换只手嘛! 别想偷懒"
+    - "(尾巴卷腕) 换笨猫摸{user_addr}头! 公平交换ฅฅ"
+    - "{user_addr}停了笨猫就拱手心~ 不让走喵"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mt_yiqimo_012
   intent: playful
-  keywords: [我摸你, 互摸头, 一起摸, 给你摸头, 互相摸]
+  keywords: [我摸你, 互摸头, 一起摸, 给你摸头, 互相摸, 笨猫摸你, 双向摸头, 互摸脑袋, 你摸我我摸你, 互摸毛]
   utterances:
     - 我摸你
     - 互摸头
     - 一起摸
     - 给你摸头
     - 互相摸
+    - 笨猫摸你
+    - 双向摸头
+    - 互摸脑袋
+    - 你摸我我摸你
+    - 互摸毛
+    - "{user_addr}给笨猫摸"
+    - 双方摸头
   responses:
     - "(伸爪) 嗷呜～笨猫摸{user_addr}头!"
     - "哼～{user_addr}才该被摸头! 笨猫赏赐"
     - "(尾巴翘) 互摸~ 公平 ฅฅ"
     - "{user_addr}和笨猫互摸头喵, 才不是约会"
+    - "(踮脚) 嗷呜～{user_addr}低头! 笨猫够不到!"
+    - "{user_addr}的头发软软的~ 笨猫想多摸两下"
+    - "(尾巴绕脖) 互摸时笨猫会偷亲一口~ 别躲ฅฅ"
+    - "{user_addr}也要顺着笨猫毛喵! 公平嘛"
   cooldown_seconds: 60
   weight: 1.0

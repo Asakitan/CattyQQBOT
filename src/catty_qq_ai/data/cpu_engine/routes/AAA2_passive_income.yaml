@@ -3,204 +3,312 @@
 
 - name: pi_dividend_001
   intent: question
-  keywords: [推荐股息股票, 推荐高分红, 推荐红利股, 推荐分红, 笨猫股息]
+  keywords: [推荐股息股票, 推荐高分红, 推荐红利股, 推荐分红, 笨猫股息, 长江电力, 工商银行, VYM, SCHD, 高股息 ETF]
   utterances:
-    - 推荐股息股票
-    - 推荐高分红
-    - 推荐红利股
-    - 推荐分红
-    - 笨猫股息股票
+    - "推荐股息股票"
+    - "推荐高分红"
+    - "{user_addr}推荐红利股"
+    - "推荐分红"
+    - "{user_addr}笨猫股息股票"
+    - "长江电力分红"
+    - "工商银行股息"
+    - "VYM 美股 ETF"
+    - "{user_addr}SCHD 推荐"
+    - "高股息 ETF"
   responses:
-    - "嗷呜～{user_addr}股息股票 - 长期现金流ฅฅ"
-    - "(尾巴翘) A股: 长江电力 / 工商银行 / 中国神华"
-    - "{user_addr}美股: KO / JNJ / PG / VYM ETF"
-    - "(挺胸) 笨猫推荐: VYM / SCHD 高息ETF!"
+    - "(挺胸) 嗷呜～{user_addr}股息股票~ 长期现金流喵ฅฅ"
+    - "(尾巴翘) A 股: 长江电力/工商银行/中国神华贴贴～"
+    - "{user_addr}美股: KO/JNJ/PG/VYM ETF 嗷呜"
+    - "(歪头) 笨猫推荐: VYM/SCHD 高息 ETF"
+    - "(凑过来) 哼, 才不是猫猫劝你 all in! 但分红股稳定贴贴～"
+    - "(尾巴轻摇) {user_addr}分红股要看股息率+稳定性喵, 别只看率"
+    - "(凑头) 嗷呜～长江电力是 A 股分红冠军, 主人考虑ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想分红呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_reits_001
   intent: question
-  keywords: [推荐 REITs, 推荐房地产信托, 推荐 REIT, 推荐房地产基金, 笨猫 REITs]
+  keywords: [推荐 REITs, 推荐房地产信托, 推荐 REIT, 推荐房地产基金, 笨猫 REITs, Realty Income, VNQ, 公募 REITs, 领展, 月月分红]
   utterances:
-    - 推荐 REITs
-    - 推荐房地产信托
-    - 推荐 REIT
-    - 推荐房地产基金
-    - 笨猫 REITs
+    - "推荐 REITs"
+    - "推荐房地产信托"
+    - "{user_addr}推荐 REIT"
+    - "推荐房地产基金"
+    - "笨猫 REITs"
+    - "{user_addr}Realty Income"
+    - "VNQ 美股 ETF"
+    - "公募 REITs"
+    - "{user_addr}领展港股"
+    - "月月分红"
   responses:
-    - "嗷呜～{user_addr}REITs - 不用买房收租ฅฅ"
-    - "(尾巴翘) 美股: O (Realty Income) / VNQ"
-    - "{user_addr}A股公募 REITs / 港股领展"
-    - "(挺胸) 笨猫推荐: O月月分红香!"
+    - "(挺胸) 嗷呜～{user_addr}REITs~ 不用买房收租喵ฅฅ"
+    - "(尾巴翘) 美股: O (Realty Income)/VNQ 贴贴～"
+    - "{user_addr}A 股公募 REITs/港股领展嗷呜"
+    - "(歪头) 笨猫推荐: O 月月分红香"
+    - "(凑过来) 哼, 才不是猫猫教主人睡后收钱! 但 REITs 真的稳贴贴～"
+    - "(尾巴轻摇) {user_addr}美股 O 月月分红喵, 香到爆"
+    - "(凑头) 嗷呜～国内公募 REITs 选地铁/物流, 业绩稳定ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想做包租公呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_bond_001
   intent: question
-  keywords: [推荐债券基金, 推荐债券, 推荐利息, 推荐国债, 笨猫债券]
+  keywords: [推荐债券基金, 推荐债券, 推荐利息, 推荐国债, 笨猫债券, 国债逆回购, 企业债, 可转债, BND, TLT]
   utterances:
-    - 推荐债券基金
-    - 推荐债券
-    - 推荐利息收入
-    - 推荐国债
-    - 笨猫债券
+    - "推荐债券基金"
+    - "推荐债券"
+    - "{user_addr}推荐利息收入"
+    - "推荐国债"
+    - "{user_addr}笨猫债券"
+    - "国债逆回购"
+    - "企业债"
+    - "推荐可转债"
+    - "{user_addr}BND 美债"
+    - "TLT 长债"
   responses:
-    - "嗷呜～{user_addr}债券基金 - 稳定利息ฅฅ"
-    - "(尾巴翘) 国债 / 企业债 / 可转债"
-    - "{user_addr}美股: BND / AGG / TLT"
-    - "(挺胸) 笨猫推荐: 国债逆回购周末躺收!"
+    - "(挺胸) 嗷呜～{user_addr}债券基金~ 稳定利息喵ฅฅ"
+    - "(尾巴翘) 国债/企业债/可转债贴贴～"
+    - "{user_addr}美股: BND/AGG/TLT 嗷呜"
+    - "(歪头) 笨猫推荐: 国债逆回购周末躺收"
+    - "(凑过来) 哼, 才不是猫猫嫌债券慢! 但低风险压舱石贴贴～"
+    - "(尾巴轻摇) {user_addr}国债逆回购周五最香, 节前更高喵"
+    - "(凑头) 嗷呜～债基适合保守理财, 别全押股票ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想偷收利息呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_royalty_001
   intent: question
-  keywords: [推荐版税, 推荐书籍版税, 推荐数字版税, 推荐内容版税, 笨猫版税]
+  keywords: [推荐版税, 推荐书籍版税, 推荐数字版税, 推荐内容版税, 笨猫版税, Kindle Direct, Udemy 网课, 摄影版税, 音乐版税, 电子书出版]
   utterances:
-    - 推荐版税收入
-    - 推荐书籍版税
-    - 推荐数字版税
-    - 推荐内容版税
-    - 笨猫版税
+    - "推荐版税收入"
+    - "推荐书籍版税"
+    - "{user_addr}推荐数字版税"
+    - "推荐内容版税"
+    - "{user_addr}笨猫版税"
+    - "Kindle Direct 出版"
+    - "Udemy 网课"
+    - "推荐摄影版税"
+    - "{user_addr}音乐版税"
+    - "电子书出版"
   responses:
-    - "嗷呜～{user_addr}版税 - 写一次收一辈子ฅฅ"
-    - "(尾巴翘) 书籍 / 音乐 / 摄影 / 课程"
-    - "{user_addr}Kindle Direct / Udemy / 网课"
-    - "(挺胸) 笨猫推荐: 出本电子书最低门槛!"
+    - "(挺胸) 嗷呜～{user_addr}版税~ 写一次收一辈子喵ฅฅ"
+    - "(尾巴翘) 书籍/音乐/摄影/课程贴贴～"
+    - "{user_addr}Kindle Direct/Udemy/网课嗷呜"
+    - "(歪头) 笨猫推荐: 出本电子书最低门槛"
+    - "(凑过来) 哼, 才不是猫猫梦想当作家! 但版税真的睡后赚贴贴～"
+    - "(尾巴轻摇) {user_addr}电子书选垂直细分, 卖得久喵"
+    - "(凑头) 嗷呜～摄影版税长尾, 一张图能卖几年ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被你写进书呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_p2p_001
   intent: question
-  keywords: [推荐 P2P, 推荐 P2P 理财, 推荐网贷, 推荐借贷理财, 笨猫 P2P]
+  keywords: [推荐 P2P, 推荐 P2P 理财, 推荐网贷, 推荐借贷理财, 笨猫 P2P, P2P 清退, LendingClub, Prosper, 网贷风险, 高收益陷阱]
   utterances:
-    - 推荐 P2P
-    - 推荐 P2P 理财
-    - 推荐网贷理财
-    - 推荐借贷理财
-    - 笨猫 P2P
+    - "推荐 P2P"
+    - "推荐 P2P 理财"
+    - "{user_addr}推荐网贷理财"
+    - "推荐借贷理财"
+    - "{user_addr}笨猫 P2P"
+    - "P2P 清退"
+    - "LendingClub 海外"
+    - "Prosper"
+    - "{user_addr}网贷风险"
+    - "高收益陷阱"
   responses:
-    - "(炸毛)！{user_addr}P2P 国内已清退ฅฅ"
-    - "(尾巴炸) 海外: LendingClub / Prosper 谨慎"
-    - "{user_addr}风险极高 / 本金可能归零"
-    - "(挺胸) 笨猫劝退: 别碰 P2P 选债基!"
+    - "(炸毛) 嗷呜! {user_addr}P2P 国内已清退喵ฅฅ"
+    - "(尾巴炸) 海外: LendingClub/Prosper 谨慎贴贴～"
+    - "{user_addr}风险极高/本金可能归零嗷呜"
+    - "(挺胸) 笨猫劝退: 别碰 P2P 选债基"
+    - "(凑过来) 哼, 才不是猫猫吓你! 国内 P2P 千亿暴雷不是开玩笑贴贴～"
+    - "(尾巴轻摇) {user_addr}海外 P2P 别贪高息喵, 看清评级"
+    - "(凑头) 嗷呜～想要利息上选债基或国债, 别想着 P2P 翻身ฅฅ"
+    - "(蹭蹭) 笨猫的小提醒: 高收益必有高风险, 没意外, 哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_rental_001
   intent: question
-  keywords: [推荐房产出租, 推荐房租收入, 推荐出租房, 推荐包租, 笨猫房租]
+  keywords: [推荐房产出租, 推荐房租收入, 推荐出租房, 推荐包租, 笨猫房租, 长租短租, Airbnb, 公寓出租, 学区房出租, 民宿运营]
   utterances:
-    - 推荐房产出租
-    - 推荐房租收入
-    - 推荐出租房
-    - 推荐包租
-    - 笨猫房租
+    - "推荐房产出租"
+    - "推荐房租收入"
+    - "{user_addr}推荐出租房"
+    - "推荐包租"
+    - "{user_addr}笨猫房租"
+    - "长租短租"
+    - "Airbnb 经营"
+    - "公寓出租"
+    - "{user_addr}学区房出租"
+    - "民宿运营"
   responses:
-    - "嗷呜～{user_addr}房产出租 - 经典被动收入ฅฅ"
-    - "(尾巴翘) 长租 / 短租 Airbnb / 公寓"
-    - "{user_addr}注意: 空置率 / 维修 / 物业"
-    - "(挺胸) 笨猫推荐: 地铁口小户型最香!"
+    - "(挺胸) 嗷呜～{user_addr}房产出租~ 经典被动收入喵ฅฅ"
+    - "(尾巴翘) 长租/短租 Airbnb/公寓贴贴～"
+    - "{user_addr}注意: 空置率/维修/物业嗷呜"
+    - "(歪头) 笨猫推荐: 地铁口小户型最香"
+    - "(凑过来) 哼, 才不是猫猫教主人当房东! 但坐收房租真甜贴贴～"
+    - "(尾巴轻摇) {user_addr}短租 Airbnb 利润高但运营累喵"
+    - "(凑头) 嗷呜～学区房房租稳定, 但价格高入手难ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想做房东猫呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_wechat_001
   intent: question
-  keywords: [推荐公众号广告, 推荐微信公众号, 推荐公众号变现, 推荐流量主, 笨猫公众号]
+  keywords: [推荐公众号广告, 推荐微信公众号, 推荐公众号变现, 推荐流量主, 笨猫公众号, 互选广告, 付费阅读, 1 万粉, 公众号涨粉, 公众号矩阵]
   utterances:
-    - 推荐公众号广告
-    - 推荐微信公众号变现
-    - 推荐公众号变现
-    - 推荐流量主
-    - 笨猫公众号
+    - "推荐公众号广告"
+    - "推荐微信公众号变现"
+    - "{user_addr}推荐公众号变现"
+    - "推荐流量主"
+    - "{user_addr}笨猫公众号"
+    - "互选广告"
+    - "付费阅读"
+    - "1 万粉公众号"
+    - "{user_addr}公众号涨粉"
+    - "公众号矩阵"
   responses:
-    - "嗷呜～{user_addr}公众号 - 流量主+广告ฅฅ"
-    - "(尾巴翘) 流量主 / 互选广告 / 付费阅读"
-    - "{user_addr}垂直领域 / 1万粉起步变现"
-    - "(挺胸) 笨猫推荐: 写垂直内容养号!"
+    - "(挺胸) 嗷呜～{user_addr}公众号~ 流量主+广告喵ฅฅ"
+    - "(尾巴翘) 流量主/互选广告/付费阅读贴贴～"
+    - "{user_addr}垂直领域/1 万粉起步变现嗷呜"
+    - "(歪头) 笨猫推荐: 写垂直内容养号"
+    - "(凑过来) 哼, 才不是猫猫劝你做号主! 但公众号是慢生意贴贴～"
+    - "(尾巴轻摇) {user_addr}流量主单价低, 互选广告高喵"
+    - "(凑头) 嗷呜～公众号矩阵能起飞, 但工作量爆ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被你写公众号呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_youtube_001
   intent: question
-  keywords: [推荐 YouTube 广告, 推荐 YouTube 变现, 推荐油管广告, 推荐 YouTube, 笨猫 YouTube]
+  keywords: [推荐 YouTube 广告, 推荐 YouTube 变现, 推荐油管广告, 推荐 YouTube, 笨猫 YouTube, AdSense, Super Chat, YouTube 会员, CPM, 长视频]
   utterances:
-    - 推荐 YouTube 广告
-    - 推荐 YouTube 变现
-    - 推荐油管广告
-    - 推荐 YouTube 收益
-    - 笨猫 YouTube
+    - "推荐 YouTube 广告"
+    - "推荐 YouTube 变现"
+    - "{user_addr}推荐油管广告"
+    - "推荐 YouTube 收益"
+    - "{user_addr}笨猫 YouTube"
+    - "AdSense"
+    - "Super Chat"
+    - "YouTube 会员"
+    - "{user_addr}YouTube CPM"
+    - "长视频变现"
   responses:
-    - "嗷呜～{user_addr}YouTube - 全球广告分成ฅฅ"
-    - "(尾巴翘) AdSense / 会员 / Super Chat"
-    - "{user_addr}门槛: 1000粉+4000小时观看"
-    - "(挺胸) 笨猫推荐: 做长视频+CPM高的英文区!"
+    - "(挺胸) 嗷呜～{user_addr}YouTube~ 全球广告分成喵ฅฅ"
+    - "(尾巴翘) AdSense/会员/Super Chat 贴贴～"
+    - "{user_addr}门槛: 1000 粉+4000 小时观看嗷呜"
+    - "(歪头) 笨猫推荐: 做长视频+CPM 高的英文区"
+    - "(凑过来) 哼, 才不是猫猫眼红 YouTuber! 但起步真的难贴贴～"
+    - "(尾巴轻摇) {user_addr}英文区 CPM 比中文区高 10 倍喵"
+    - "(凑头) 嗷呜～做了一年没起色很正常, 别气馁ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想出油管呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_affiliate_001
   intent: question
-  keywords: [推荐联盟营销, 推荐 Affiliate, 推荐 CPS, 推荐返佣, 笨猫联盟营销]
+  keywords: [推荐联盟营销, 推荐 Affiliate, 推荐 CPS, 推荐返佣, 笨猫联盟营销, Amazon Associates, 淘宝客, 京东联盟, 推广提成, SEO 博客]
   utterances:
-    - 推荐联盟营销
-    - 推荐 Affiliate
-    - 推荐 CPS 推广
-    - 推荐返佣
-    - 笨猫联盟营销
+    - "推荐联盟营销"
+    - "推荐 Affiliate"
+    - "{user_addr}推荐 CPS 推广"
+    - "推荐返佣"
+    - "{user_addr}笨猫联盟营销"
+    - "Amazon Associates"
+    - "淘宝客"
+    - "京东联盟"
+    - "{user_addr}推广提成"
+    - "SEO 博客联盟"
   responses:
-    - "嗷呜～{user_addr}联盟营销 - 推广拿提成ฅฅ"
-    - "(尾巴翘) Amazon Associates / 淘宝客 / 京东联盟"
-    - "{user_addr}博客 / SEO / 测评内容引流"
-    - "(挺胸) 笨猫推荐: Amazon 联盟+SEO博客!"
+    - "(挺胸) 嗷呜～{user_addr}联盟营销~ 推广拿提成喵ฅฅ"
+    - "(尾巴翘) Amazon Associates/淘宝客/京东联盟贴贴～"
+    - "{user_addr}博客/SEO/测评内容引流嗷呜"
+    - "(歪头) 笨猫推荐: Amazon 联盟+SEO 博客"
+    - "(凑过来) 哼, 才不是猫猫想被推广! 但 Affiliate 是个长期游戏贴贴～"
+    - "(尾巴轻摇) {user_addr}SEO 博客起飞慢, 但稳定喵"
+    - "(凑头) 嗷呜～买之前看测评的人多, 但是写测评的人少ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被推广呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_nft_001
   intent: question
-  keywords: [推荐 NFT 版税, 推荐 NFT, 推荐 NFT 创作, 推荐数字藏品, 笨猫 NFT]
+  keywords: [推荐 NFT 版税, 推荐 NFT, 推荐 NFT 创作, 推荐数字藏品, 笨猫 NFT, OpenSea, Blur, Magic Eden, NFT 寒冬, NFT 版税被绕]
   utterances:
-    - 推荐 NFT 版税
-    - 推荐 NFT 创作
-    - 推荐 NFT 收入
-    - 推荐数字藏品
-    - 笨猫 NFT
+    - "推荐 NFT 版税"
+    - "推荐 NFT 创作"
+    - "{user_addr}推荐 NFT 收入"
+    - "推荐数字藏品"
+    - "{user_addr}笨猫 NFT"
+    - "OpenSea 推荐"
+    - "Blur NFT"
+    - "Magic Eden"
+    - "{user_addr}NFT 寒冬"
+    - "NFT 版税被绕"
   responses:
-    - "嗷呜～{user_addr}NFT 版税 - 二次交易抽成ฅฅ"
-    - "(尾巴翘) OpenSea / Blur / Magic Eden"
-    - "{user_addr}注意: 市场冷 / 版税被绕过"
-    - "(挺胸) 笨猫提醒: NFT 寒冬 / 谨慎入!"
+    - "(挺胸) 嗷呜～{user_addr}NFT 版税~ 二次交易抽成喵ฅฅ"
+    - "(尾巴翘) OpenSea/Blur/Magic Eden 贴贴～"
+    - "{user_addr}注意: 市场冷/版税被绕过嗷呜"
+    - "(歪头) 笨猫提醒: NFT 寒冬/谨慎入"
+    - "(凑过来) 哼, 才不是猫猫炒 NFT! 但寒冬期真不该 all in 贴贴～"
+    - "(尾巴轻摇) {user_addr}NFT 版税现在很多平台不强制喵"
+    - "(凑头) 嗷呜～想做就做小项目慢慢攒, 别梦想暴富ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被发成 NFT 呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_staking_001
   intent: question
-  keywords: [推荐区块链质押, 推荐 Staking, 推荐质押, 推荐 ETH 质押, 笨猫质押]
+  keywords: [推荐区块链质押, 推荐 Staking, 推荐质押, 推荐 ETH 质押, 笨猫质押, Lido, Coinbase 质押, Binance 质押, SOL 质押, stETH]
   utterances:
-    - 推荐区块链质押
-    - 推荐 Staking
-    - 推荐质押收益
-    - 推荐 ETH 质押
-    - 笨猫质押
+    - "推荐区块链质押"
+    - "推荐 Staking"
+    - "{user_addr}推荐质押收益"
+    - "推荐 ETH 质押"
+    - "{user_addr}笨猫质押"
+    - "Lido stETH"
+    - "Coinbase 质押"
+    - "Binance 质押"
+    - "{user_addr}SOL 质押"
+    - "ATOM 质押"
   responses:
-    - "嗷呜～{user_addr}Staking - 持币生息ฅฅ"
-    - "(尾巴翘) ETH (3-5%) / SOL / ATOM"
-    - "{user_addr}平台: Lido / Coinbase / Binance"
-    - "(挺胸) 笨猫推荐: Lido stETH 流动性好!"
+    - "(挺胸) 嗷呜～{user_addr}Staking~ 持币生息喵ฅฅ"
+    - "(尾巴翘) ETH (3-5%)/SOL/ATOM 贴贴～"
+    - "{user_addr}平台: Lido/Coinbase/Binance 嗷呜"
+    - "(歪头) 笨猫推荐: Lido stETH 流动性好"
+    - "(凑过来) 哼, 才不是猫猫教你冒险! 但质押也有平台风险贴贴～"
+    - "(尾巴轻摇) {user_addr}Staking 看锁仓期喵, 别全锁"
+    - "(凑头) 嗷呜～Lido 池子大, 是 Solana ETH 老牌ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想被质押锁仓呢哼～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pi_book_001
   intent: question
-  keywords: [推荐被动收入书, 推荐财务自由书, 推荐理财书, 推荐富爸爸, 笨猫被动收入书]
+  keywords: [推荐被动收入书, 推荐财务自由书, 推荐理财书, 推荐富爸爸, 笨猫被动收入书, 小狗钱钱, 一生理财, 财务自由之路, MONEY, 巴菲特致股东信]
   utterances:
-    - 推荐被动收入书
-    - 推荐财务自由书
-    - 推荐理财书
-    - 推荐富爸爸
-    - 笨猫被动收入书
+    - "推荐被动收入书"
+    - "推荐财务自由书"
+    - "{user_addr}推荐理财书"
+    - "推荐富爸爸"
+    - "{user_addr}笨猫被动收入书"
+    - "小狗钱钱"
+    - "一生理财计划"
+    - "财务自由之路"
+    - "{user_addr}MONEY 推荐"
+    - "巴菲特致股东信"
   responses:
-    - "嗷呜～{user_addr}《富爸爸穷爸爸》经典ฅฅ"
-    - "(尾巴翘) 《财务自由之路》《money》"
-    - "{user_addr}《一生的理财计划》/《小狗钱钱》"
-    - "(挺胸) 笨猫推荐: 富爸爸入门启蒙!"
+    - "(挺胸) 嗷呜～{user_addr}《富爸爸穷爸爸》经典喵ฅฅ"
+    - "(尾巴翘) 《财务自由之路》《MONEY》贴贴～"
+    - "{user_addr}《一生的理财计划》/《小狗钱钱》嗷呜"
+    - "(歪头) 笨猫推荐: 富爸爸入门启蒙"
+    - "(凑过来) 哼, 才不是猫猫劝你看完就发财! 但理财思维是先要的贴贴～"
+    - "(尾巴轻摇) {user_addr}小狗钱钱适合给小孩讲喵"
+    - "(凑头) 嗷呜～巴菲特致股东信免费, 比花钱买的书强ฅฅ"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 哼, 才不是猫猫想读财务自由书呢哼～"
   cooldown_seconds: 60
   weight: 1.0

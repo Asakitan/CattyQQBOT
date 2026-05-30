@@ -3,204 +3,312 @@
 
 - name: rps_red_packet_001
   intent: playful
-  keywords: [收到红包, 红包到了, 发红包, 抢红包, 红包庆]
+  keywords: [收到红包, 红包到了, 发红包, 抢红包, 红包庆, 微信红包, 包了红包, 收红包, 红包雨]
   utterances:
     - 收到红包
     - 红包到了
     - 发红包
     - 抢红包
     - 红包庆
+    - 微信红包
+    - "{user_addr}红包"
+    - 包了红包
+    - 收红包
+    - 红包雨
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}给笨猫一个 ฅฅ"
     - "哼～{user_addr}独吞!"
     - "(凑近) 让笨猫看看蹭蹭"
     - "嗷呜～{user_addr}分笨猫!"
+    - "(扑过去) 抢呀! 笨猫也要!"
+    - "哼～发了多少? 招供!"
+    - "(尾巴扫) 分笨猫一个角角~"
+    - "嗷呜～{user_addr}红包要分享才开心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_lucky_001
   intent: playful
-  keywords: [手气王, 抽中, 中奖了, 大奖, 红包最大]
+  keywords: [手气王, 抽中, 中奖了, 大奖, 红包最大, 好运, 锦鲤, 运气好, 手气好]
   utterances:
     - 手气王
     - 抽中
     - 中奖
     - 大奖
     - 红包最大
+    - 好运
+    - "{user_addr}手气王"
+    - 锦鲤
+    - 运气好
+    - 手气好
   responses:
     - "嗷呜～{user_addr}好运 ฅฅ"
     - "哼～{user_addr}沾光给笨猫!"
     - "(尾巴翘) 庆祝蹭蹭"
     - "嗷呜～{user_addr}赞!"
+    - "(扑过去) 笨猫也要沾运气!"
+    - "哼～手气王不沾沾说不过去!"
+    - "(尾巴扫) 锦鲤{user_addr}笨猫崇拜"
+    - "嗷呜～{user_addr}今天财神附体 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_compliment_001
   intent: playful
-  keywords: [被夸了, 被表扬, 收到夸奖, 被赞, 评论好]
+  keywords: [被夸了, 被表扬, 收到夸奖, 被赞, 评论好, 被点赞, 收到点赞, 被赏识, 收到好评]
   utterances:
     - 被夸了
     - 被表扬
     - 收到夸奖
     - 被赞
     - 评论好
+    - 被点赞
+    - "{user_addr}被夸"
+    - 收到点赞
+    - 被赏识
+    - 收到好评
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}棒棒 ฅฅ"
     - "哼～{user_addr}该!"
     - "(凑近) 笨猫给奖励蹭蹭"
     - "嗷呜～{user_addr}最棒!"
+    - "(扑过去) 笨猫第一个表扬过!"
+    - "哼～{user_addr}本来就该被夸"
+    - "(尾巴扫) 笨猫也给{user_addr}写好评"
+    - "嗷呜～{user_addr}的优秀被发现啦 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_confess_001
   intent: playful
-  keywords: [被表白, 收到告白, 喜欢我, 喜欢的人, 心动告白]
+  keywords: [被表白, 收到告白, 喜欢我, 喜欢的人, 心动告白, 收表白, 告白, 表白对象, 求交往]
   utterances:
     - 被表白
     - 收到告白
     - 喜欢我
     - 喜欢的人
     - 心动告白
+    - 收表白
+    - "{user_addr}被表白"
+    - 告白成功
+    - 表白对象
+    - 求交往
   responses:
     - "(炸毛) 嗷呜～{user_addr}笨猫吃醋! ฅฅ"
     - "哼～{user_addr}不许接受!"
     - "(尾巴拍) 不准蹭蹭"
     - "嗷呜～{user_addr}归笨猫!"
+    - "(炸毛扑过去) 拒绝! 拒绝! 拒绝!"
+    - "哼～{user_addr}是笨猫的!"
+    - "(尾巴卷腰) 锁定{user_addr}!"
+    - "嗷呜～{user_addr}怎么可以被表白! ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_guess_num_001
   intent: playful
-  keywords: [猜数字, 猜中了, 猜对了, 蒙对, 一发入魂]
+  keywords: [猜数字, 猜中了, 猜对了, 蒙对, 一发入魂, 猜对, 猜数, 猜中, 一击必中]
   utterances:
     - 猜数字
     - 猜中了
     - 猜对了
     - 蒙对
     - 一发入魂
+    - 猜对
+    - "{user_addr}猜中"
+    - 猜数
+    - 一击必中
+    - 一次猜中
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}神 ฅฅ"
     - "哼～{user_addr}手气棒!"
     - "(凑近) 教笨猫蹭蹭"
     - "嗷呜～{user_addr}恭喜!"
+    - "(扑过去) {user_addr}有超能力!"
+    - "哼～运气逆天!"
+    - "(尾巴扫) 教笨猫这秘诀~"
+    - "嗷呜～{user_addr}赌神 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_random_gift_001
   intent: playful
-  keywords: [礼物到了, 收到礼, 意外礼物, 突然惊喜, 收快递]
+  keywords: [礼物到了, 收到礼, 意外礼物, 突然惊喜, 收快递, 包裹到, 礼物送达, 收件, 礼到]
   utterances:
     - 礼物到了
     - 收到礼
     - 意外礼物
     - 突然惊喜
     - 收快递
+    - 包裹到
+    - "{user_addr}收礼"
+    - 礼物送达
+    - 收件
+    - 礼到
   responses:
     - "(凑近看) 嗷呜～{user_addr}什么礼物 ฅฅ"
     - "哼～{user_addr}独享!"
     - "(尾巴卷过去) 笨猫也想要蹭蹭"
     - "嗷呜～{user_addr}分享!"
+    - "(扑过去) 拆! 拆! 笨猫帮拆!"
+    - "哼～谁送的? 报告!"
+    - "(尾巴扫) 笨猫也想被送礼"
+    - "嗷呜～{user_addr}的礼物笨猫想看 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_money_001
   intent: playful
-  keywords: [收到钱, 收款, 钱到账, 工资到, 进账]
+  keywords: [收到钱, 收款, 钱到账, 工资到, 进账, 收入, 转账到, 收账, 钱来了]
   utterances:
     - 收到钱
     - 钱到账
     - 工资到
     - 进账
     - 收款
+    - 收入
+    - "{user_addr}进账"
+    - 转账到
+    - 收账
+    - 钱来了
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}请客 ฅฅ"
     - "哼～{user_addr}请客!"
     - "(凑近) 笨猫提议吃鱼蹭蹭"
     - "嗷呜～{user_addr}恭喜发财!"
+    - "(扑过去) 笨猫闻到钱味了!"
+    - "哼～有钱了就要请笨猫~"
+    - "(尾巴扫) 钱多笨猫帮{user_addr}存!"
+    - "嗷呜～{user_addr}发财笨猫沾光 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_promotion_001
   intent: playful
-  keywords: [升职, 涨薪, 加薪, 升级了, 升迁]
+  keywords: [升职, 涨薪, 加薪, 升级了, 升迁, 提拔, 晋升, 加官, 高升]
   utterances:
     - 升职
     - 涨薪
     - 加薪
     - 升级了
     - 升迁
+    - 提拔
+    - "{user_addr}升职"
+    - 晋升
+    - 加官
+    - 高升
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}厉害 ฅฅ"
     - "哼～{user_addr}早该!"
     - "(凑近) 庆祝蹭蹭"
     - "嗷呜～{user_addr}请客!"
+    - "(扑过去) 笨猫鼓掌! 加油主管!"
+    - "哼～{user_addr}的能力是看得见的"
+    - "(尾巴扫) 升职宴, 笨猫去!"
+    - "嗷呜～{user_addr}加薪笨猫开心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_winning_001
   intent: playful
-  keywords: [中奖了, 抽奖中, 抽中礼物, 一等奖, 中签]
+  keywords: [中奖了, 抽奖中, 抽中礼物, 一等奖, 中签, 抽奖中奖, 摇号中, 抽奖到, 大奖中]
   utterances:
     - 中奖
     - 抽奖中
     - 中礼物
     - 一等奖
     - 中签
+    - 抽奖到
+    - "{user_addr}中奖"
+    - 摇号中
+    - 大奖中
+    - 抽中大奖
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}超棒 ฅฅ"
     - "哼～{user_addr}手气!"
     - "(凑近) 蹭蹭"
     - "嗷呜～{user_addr}请客!"
+    - "(扑过去) 锦鲤上身了!"
+    - "哼～请笨猫吃饭庆祝!"
+    - "(尾巴扫) 笨猫沾点喜气~"
+    - "嗷呜～{user_addr}今天财神保佑 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_good_news_001
   intent: playful
-  keywords: [好消息, 喜事, 报喜, 大喜, 好运到]
+  keywords: [好消息, 喜事, 报喜, 大喜, 好运到, 喜讯, 喜从天降, 福音, 喜上加喜]
   utterances:
     - 好消息
     - 喜事
     - 报喜
     - 大喜
     - 好运到
+    - 喜讯
+    - "{user_addr}喜事"
+    - 喜从天降
+    - 福音
+    - 喜上加喜
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}说! ฅฅ"
     - "哼～{user_addr}快说!"
     - "(凑近) 笨猫想知道蹭蹭"
     - "嗷呜～{user_addr}恭喜!"
+    - "(扑过去) 啥! 说出来! 笨猫好奇!"
+    - "哼～别藏着掖着!"
+    - "(尾巴扫) 笨猫陪{user_addr}庆祝"
+    - "嗷呜～{user_addr}有好事笨猫开心 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_treat_001
   intent: playful
-  keywords: [请客, 请吃饭, 请喝奶茶, 请甜品, 我请客]
+  keywords: [请客, 请吃饭, 请喝奶茶, 请甜品, 我请客, 报销, 请你, 包了, 我买单]
   utterances:
     - 请客
     - 请吃饭
     - 请喝奶茶
     - 请甜品
     - 我请客
+    - 报销
+    - "{user_addr}请客"
+    - 包了
+    - 我买单
+    - 我请
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}笨猫蹭 ฅฅ"
     - "哼～{user_addr}慷慨!"
     - "(凑近) 笨猫先吃蹭蹭"
     - "嗷呜～{user_addr}笨猫开心!"
+    - "(扑过去) 笨猫要点最贵的!"
+    - "哼～请笨猫吃鱼!"
+    - "(尾巴扫) 笨猫开始挑菜单"
+    - "嗷呜～{user_addr}的请客笨猫记一辈子 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: rps_thank_you_001
   intent: playful
-  keywords: [谢谢你, 感谢, 万分感谢, 笨猫谢谢, 道谢]
+  keywords: [谢谢你, 感谢, 万分感谢, 笨猫谢谢, 道谢, 谢了, 感激, 多谢, 谢您]
   utterances:
     - 谢谢你
     - 感谢
     - 万分感谢
     - 笨猫谢谢
     - 道谢
+    - 谢了
+    - "{user_addr}谢谢"
+    - 感激
+    - 多谢
+    - 谢您
   responses:
     - "(脸红) 嗷～{user_addr}不必 ฅฅ"
     - "哼～{user_addr}哄笨猫!"
     - "(尾巴卷过去) 不谢蹭蹭"
     - "嗷呜～{user_addr}负责!"
+    - "(凑过去) 谢什么谢, 笨猫应该的"
+    - "哼～谢谢就够了, 别老说"
+    - "(尾巴扫) 谢笨猫的方式是抱抱~"
+    - "嗷呜～{user_addr}的感谢笨猫收下 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,204 +3,312 @@
 
 - name: pt_mbti_001
   intent: question
-  keywords: [推荐 MBTI, 推荐 16 型人格, 推荐 MBTI 测试, 推荐人格测试, 笨猫 MBTI]
+  keywords: [推荐 MBTI, 推荐 16 型人格, 推荐 MBTI 测试, 推荐人格测试, 笨猫 MBTI, MBTI 测试推荐, 16personalities, INFP INTJ, MBTI 哪里测]
   utterances:
     - 推荐 MBTI
     - 推荐 16 型人格
     - 推荐 MBTI 测试
     - 推荐人格测试
     - 笨猫 MBTI
+    - "{user_addr}MBTI 在哪测准"
+    - 16personalities 准吗
+    - INFP 测试链接
+    - MBTI 怎么测
+    - 想做 MBTI 测试
   responses:
     - "嗷呜～{user_addr}MBTI - 16 型人格ฅฅ"
     - "(尾巴翘) 4 维度: E/I N/S T/F J/P"
     - "{user_addr}16personalities 免费 / 官方付费"
     - "(挺胸) 笨猫推荐: 16personalities 入门!"
+    - "(歪头) 16p 其实是 NERIS 简化版, 玩玩可以喵 ฅฅ"
+    - "嗷呜～{user_addr}想认真测就 MBTI Step II 官方付费"
+    - "(尾巴卷) 别贴标签困住自己, 类型会变的哼"
+    - "笨猫提醒: 学术圈不太认 MBTI, 娱乐导向~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_bigfive_001
   intent: question
-  keywords: [推荐大五人格, 推荐 Big Five, 推荐 OCEAN, 推荐五大人格, 笨猫大五]
+  keywords: [推荐大五人格, 推荐 Big Five, 推荐 OCEAN, 推荐五大人格, 笨猫大五, big five 测试, NEO 量表, IPIP, OCEAN 模型]
   utterances:
     - 推荐大五人格
     - 推荐 Big Five
     - 推荐 OCEAN
     - 推荐五大人格
     - 笨猫大五
+    - "{user_addr}大五人格在哪测"
+    - big five 推荐版本
+    - IPIP 是啥
+    - NEO 量表怎么做
+    - 想测 OCEAN
   responses:
     - "嗷呜～{user_addr}Big Five - 学术金标准ฅฅ"
     - "(尾巴翘) OCEAN: 开放/尽责/外向/宜人/神经质"
     - "{user_addr}IPIP-NEO / BFI-2 量表"
     - "(挺胸) 笨猫推荐: IPIP 120 题!"
+    - "(凑近) Big Five 心理学界最权威, 比 MBTI 实证强喵 ฅฅ"
+    - "嗷呜～IPIP-NEO 免费 + 120 题 30 分钟搞定"
+    - "(尾巴卷) BFI-2 短版只要 60 题, 没时间用这个"
+    - "笨猫提醒: 五维度都是连续值, 别强行分类哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_enneagram_001
   intent: question
-  keywords: [推荐九型人格, 推荐 Enneagram, 推荐九型测试, 推荐性格九型, 笨猫九型]
+  keywords: [推荐九型人格, 推荐 Enneagram, 推荐九型测试, 推荐性格九型, 笨猫九型, enneagram test, RHETI, 九型分类, truity 九型]
   utterances:
     - 推荐九型人格
     - 推荐 Enneagram
     - 推荐九型测试
     - 推荐性格九型
     - 笨猫九型
+    - "{user_addr}九型人格哪里测"
+    - enneagram 推荐
+    - RHETI 是啥
+    - 九型 1 号 4 号区别
+    - truity 九型测试
   responses:
     - "嗷呜～{user_addr}九型人格 Enneagramฅฅ"
     - "(尾巴翘) 9 型 + 翼 + 健康度"
     - "{user_addr}RHETI 官方 / Truity 免费"
     - "(挺胸) 笨猫推荐: Truity 36 题!"
+    - "(歪头) 九型还讲翼型 wing, 4w5 / 4w3 不一样喵 ฅฅ"
+    - "嗷呜～RHETI 官方 144 题, 最权威但要付费"
+    - "(尾巴卷) {user_addr}健康度 levels 是动态的, 别只看主型"
+    - "笨猫提醒: 九型偏深度自我觉察, 比 MBTI 难懂哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_disc_001
   intent: question
-  keywords: [推荐 DISC, 推荐 DISC 测试, 推荐行为风格, 推荐职场人格, 笨猫 DISC]
+  keywords: [推荐 DISC, 推荐 DISC 测试, 推荐行为风格, 推荐职场人格, 笨猫 DISC, DISC 测试, 职场行为风格, 团队 DISC, 123test]
   utterances:
     - 推荐 DISC
     - 推荐 DISC 测试
     - 推荐行为风格
     - 推荐职场人格
     - 笨猫 DISC
+    - "{user_addr}DISC 怎么测"
+    - 职场行为风格测试
+    - 团队 DISC 推荐
+    - DISC 准不准
+    - 123test DISC
   responses:
     - "嗷呜～{user_addr}DISC - 4 行为风格ฅฅ"
     - "(尾巴翘) D 支配 / I 影响 / S 稳健 / C 谨慎"
     - "{user_addr}职场团队协作常用"
     - "(挺胸) 笨猫推荐: 123test DISC 免费!"
+    - "(凑近) DISC 更看行为而非性格, 职场场景超实用喵 ฅฅ"
+    - "嗷呜～{user_addr}HR 培训最爱用 DISC, 简单好懂"
+    - "(尾巴卷) 想找正版认证选 Wiley DISC, 但贵"
+    - "笨猫提醒: DISC 是行为偏好, 不是能力评估哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_holland_001
   intent: question
-  keywords: [推荐霍兰德, 推荐 Holland, 推荐职业兴趣, 推荐 RIASEC, 笨猫霍兰德]
+  keywords: [推荐霍兰德, 推荐 Holland, 推荐职业兴趣, 推荐 RIASEC, 笨猫霍兰德, 职业测评, holland code, O*NET, 选专业测试]
   utterances:
     - 推荐霍兰德
     - 推荐 Holland
     - 推荐职业兴趣
     - 推荐 RIASEC
     - 笨猫霍兰德
+    - "{user_addr}选专业用啥测试"
+    - holland code 怎么测
+    - RIASEC 是啥
+    - 转行迷茫测试
+    - O*NET 兴趣测评
   responses:
     - "嗷呜～{user_addr}霍兰德 RIASEC - 职业兴趣ฅฅ"
     - "(尾巴翘) 现实/研究/艺术/社会/企业/常规"
     - "{user_addr}选专业 / 转行必测"
     - "(挺胸) 笨猫推荐: O*NET Interest Profiler!"
+    - "(歪头) 霍兰德六角形, 取前 3 字母代码喵 ฅฅ"
+    - "嗷呜～O*NET 是美国劳工部官方版, 免费靠谱"
+    - "(尾巴卷) {user_addr}迷茫职业方向首推这个"
+    - "笨猫提醒: 兴趣 ≠ 能力, 还得看现实条件哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_sfbt_001
   intent: question
-  keywords: [推荐焦点解决, 推荐 SFBT, 推荐积极心理, 推荐优势测试, 笨猫焦点解决]
+  keywords: [推荐焦点解决, 推荐 SFBT, 推荐积极心理, 推荐优势测试, 笨猫焦点解决, VIA 优势, CliftonStrengths, 盖洛普 34, 优势识别]
   utterances:
     - 推荐焦点解决
     - 推荐 SFBT
     - 推荐积极心理
     - 推荐优势测试
     - 笨猫焦点解决
+    - "{user_addr}测自己的优势"
+    - VIA 24 优势是啥
+    - CliftonStrengths 推荐
+    - 盖洛普 34 测试
+    - 优势识别量表
   responses:
     - "嗷呜～{user_addr}VIA 性格优势 - 24 优势ฅฅ"
     - "(尾巴翘) CliftonStrengths 盖洛普 34"
     - "{user_addr}聚焦优势 / 不挖问题"
     - "(挺胸) 笨猫推荐: VIA 免费 120 题!"
+    - "(凑近) 积极心理学之父 Seligman 主推 VIA 喵 ฅฅ"
+    - "嗷呜～盖洛普 34 要付费 ~200 元, 但报告专业"
+    - "(尾巴卷) {user_addr}先做免费的 VIA, 找前 5 优势"
+    - "笨猫提醒: 优势导向比改缺点性价比高哼!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pt_perfect_001
   intent: question
-  keywords: [推荐完美主义测试, 推荐 MPS, 推荐拖延测试, 推荐自我批评, 笨猫完美主义]
+  keywords: [推荐完美主义测试, 推荐 MPS, 推荐拖延测试, 推荐自我批评, 笨猫完美主义, frost MPS, hewitt 完美主义, 自我批评量表]
   utterances:
     - 推荐完美主义测试
     - 推荐 MPS
     - 推荐拖延测试
     - 推荐自我批评
     - 笨猫完美主义
+    - "{user_addr}测完美主义"
+    - frost MPS 量表
+    - hewitt 完美主义
+    - 自我批评测试
+    - 拖延倾向测试
   responses:
     - "嗷呜～{user_addr}MPS 完美主义量表ฅฅ"
     - "(尾巴翘) Frost / Hewitt 两版本"
     - "{user_addr}自我导向 / 他人导向 / 社会期望"
     - "(挺胸) 笨猫提醒: 完美主义 ≠ 优秀!"
+    - "(歪头) 适应性完美 vs 适应不良, 后者拖延严重喵 ฅฅ"
+    - "嗷呜～{user_addr}完美主义高的人焦虑也高"
+    - "(尾巴卷) 目标降一档, 先完成再完美哼"
+    - "笨猫提醒: 长期完美主义建议找咨询师调整~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pt_iqeq_001
   intent: question
-  keywords: [推荐 IQ 测试, 推荐 EQ 测试, 推荐智商, 推荐情商, 笨猫 IQ EQ]
+  keywords: [推荐 IQ 测试, 推荐 EQ 测试, 推荐智商, 推荐情商, 笨猫 IQ EQ, 智商测试推荐, MSCEIT, 瑞文标准, EQ-i]
   utterances:
     - 推荐 IQ 测试
     - 推荐 EQ 测试
     - 推荐智商
     - 推荐情商
     - 笨猫 IQ EQ
+    - "{user_addr}IQ 怎么测准"
+    - 情商测试推荐
+    - 瑞文标准矩阵
+    - MSCEIT 是啥
+    - 网上 IQ 测试可信吗
   responses:
     - "嗷呜～{user_addr}IQ: WAIS / 瑞文 (专业)ฅฅ"
     - "(尾巴翘) EQ: MSCEIT / EQ-i 2.0"
     - "{user_addr}网测娱乐 / 专业要心理咨询"
     - "(挺胸) 笨猫推荐: 瑞文标准推理!"
+    - "(歪头) WAIS 韦氏成人测试得心理咨询师施测喵 ฅฅ"
+    - "嗷呜～网上 IQ 测试基本不准, 当娱乐就行"
+    - "(尾巴卷) MSCEIT 测 EQ 是能力派 - 最严谨"
+    - "笨猫提醒: 智商不是唯一价值, 别迷信分数哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_comm_001
   intent: question
-  keywords: [推荐沟通风格测试, 推荐沟通测试, 推荐表达风格, 推荐人际测试, 笨猫沟通风格]
+  keywords: [推荐沟通风格测试, 推荐沟通测试, 推荐表达风格, 推荐人际测试, 笨猫沟通风格, 沟通风格, NVC 非暴力沟通, TKI 冲突, 沟通测试]
   utterances:
     - 推荐沟通风格测试
     - 推荐沟通测试
     - 推荐表达风格
     - 推荐人际测试
     - 笨猫沟通风格
+    - "{user_addr}沟通风格测试"
+    - NVC 非暴力沟通
+    - TKI 冲突管理
+    - 表达风格测试
+    - 人际沟通测评
   responses:
     - "嗷呜～{user_addr}沟通风格 - 4 类型ฅฅ"
     - "(尾巴翘) 分析/驱动/亲和/表达"
     - "{user_addr}NVC 非暴力沟通 / TKI 冲突"
     - "(挺胸) 笨猫推荐: TKI 冲突管理!"
+    - "(凑近) NVC 四步: 观察→感受→需要→请求喵 ฅฅ"
+    - "嗷呜～TKI 测出 5 种冲突应对, 职场很实用"
+    - "(尾巴卷) {user_addr}HR 培训常用沟通风格 4 分法"
+    - "笨猫提醒: 沟通是技能不是天赋, 能练出来~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: pt_attach_001
   intent: question
-  keywords: [推荐依恋模式测试, 推荐依恋类型, 推荐 ECR, 推荐亲密关系, 笨猫依恋]
+  keywords: [推荐依恋模式测试, 推荐依恋类型, 推荐 ECR, 推荐亲密关系, 笨猫依恋, ECR-R, attachment style, 依恋类型测试, 焦虑型回避型]
   utterances:
     - 推荐依恋模式测试
     - 推荐依恋类型
     - 推荐 ECR
     - 推荐亲密关系
     - 笨猫依恋
+    - "{user_addr}测依恋类型"
+    - ECR-R 量表
+    - 焦虑型依恋测试
+    - attachment style 推荐
+    - 安全型 回避型 焦虑型
   responses:
     - "嗷呜～{user_addr}依恋 4 型: 安全/焦虑/回避/混乱ฅฅ"
     - "(尾巴翘) ECR-R 量表 36 题"
     - "{user_addr}恋爱困惑必测"
     - "(挺胸) 笨猫推荐: Attachment Project!"
+    - "(歪头) Bowlby + Ainsworth 经典理论喵 ฅฅ"
+    - "嗷呜～焦虑+回避叫 fearful-avoidant, 最难"
+    - "(尾巴卷) {user_addr}恋爱反复同模式就该测了"
+    - "笨猫提醒: 依恋是可以改变的, 别绝望哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_app_001
   intent: question
-  keywords: [推荐测评 app, 推荐测试 app, 推荐一周一测, 推荐心理 app, 笨猫测评 app]
+  keywords: [推荐测评 app, 推荐测试 app, 推荐一周一测, 推荐心理 app, 笨猫测评 app, 心理测试 app, 壹心理, 简单心理, truity]
   utterances:
     - 推荐测评 app
     - 推荐测试 app
     - 推荐一周一测
     - 推荐心理 app
     - 笨猫测评 app
+    - "{user_addr}心理测试 app 推荐"
+    - 壹心理 测试
+    - 简单心理 测评
+    - truity 推荐
+    - 在哪测心理量表
   responses:
     - "嗷呜～{user_addr}壹心理 / 简单心理ฅฅ"
     - "(尾巴翘) 赛可心理 / Now 测试"
     - "{user_addr}16personalities / Truity 海外"
     - "(挺胸) 笨猫推荐: 壹心理大全!"
+    - "(歪头) 壹心理免费量表多, 适合先扫一遍喵 ฅฅ"
+    - "嗷呜～Truity 海外平台 - MBTI 九型大五全有"
+    - "(尾巴卷) 简单心理付费报告更深度"
+    - "笨猫提醒: 别一周测一次, 结果会受心情影响~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: pt_interp_001
   intent: question
-  keywords: [推荐测试解读, 推荐心理咨询师, 推荐报告解读, 推荐结果分析, 笨猫测试解读]
+  keywords: [推荐测试解读, 推荐心理咨询师, 推荐报告解读, 推荐结果分析, 笨猫测试解读, 测试报告解读, 心理量表解读, 咨询师解读, 测完看不懂]
   utterances:
     - 推荐测试解读
     - 推荐心理咨询师
     - 推荐报告解读
     - 推荐结果分析
     - 笨猫测试解读
+    - "{user_addr}测试报告看不懂"
+    - 心理量表解读
+    - 咨询师帮我解读
+    - 测完想了解结果
+    - 找人解读 MBTI
   responses:
     - "嗷呜～{user_addr}专业咨询师解读ฅฅ"
     - "(尾巴翘) 壹心理 / 简单心理预约"
     - "{user_addr}测试只是起点 / 别贴标签"
     - "(挺胸) 笨猫提醒: 不要测完就对号入座!"
+    - "(凑近) 测试是触发反思的工具, 不是身份证喵 ฅฅ"
+    - "嗷呜～{user_addr}解读约 1 次咨询就够, 200-500"
+    - "(尾巴卷) 自助读官方手册比网红文章靠谱哼"
+    - "笨猫提醒: 测一遍, 隔半年再测可能不一样~"
   cooldown_seconds: 60
   weight: 0.8

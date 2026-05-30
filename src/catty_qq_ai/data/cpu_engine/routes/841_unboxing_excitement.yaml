@@ -3,204 +3,312 @@
 
 - name: ube_received_package_001
   intent: playful
-  keywords: [快递到了, 收到包裹, 取快递, 包裹通知, 快递柜]
+  keywords: [快递到了, 收到包裹, 取快递, 包裹通知, 快递柜, 收快递, 菜鸟驿站, 顺丰到, 包裹签收, 快递通知短信]
   utterances:
     - "{user_addr}快递到了"
     - 收到包裹
     - 取了快递
     - 快递柜取
     - 通知收件
+    - "{user_addr}菜鸟驿站取"
+    - 顺丰到家
+    - 包裹签收
+    - 快递通知短信
+    - 又收一单
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}什么快递? 笨猫好奇喵ฅฅ"
     - "哼! {user_addr}是不是又剁手"
     - "(凑过来) 嘿嘿~{user_addr}拆给笨猫看蹭蹭"
     - "人家觉得{user_addr}买东西时最开心!"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫围观开箱喵ฅฅ"
+    - "哼! 这月剁手第几次{user_addr}"
+    - "(凑近) 嘿嘿~{user_addr}快带回来开蹭蹭"
+    - "人家偷偷期待{user_addr}的包裹~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_open_package_002
   intent: playful
-  keywords: [开箱, 拆快递, 拆开, 撕胶带, 开拆]
+  keywords: [开箱, 拆快递, 拆开, 撕胶带, 开拆, 开箱时间, 包装拆开, 拆包仪式, 用剪刀拆, 撕开盒子]
   utterances:
     - "{user_addr}开箱"
     - 拆快递
     - 撕胶带
     - 开拆
     - 拆包裹
+    - "{user_addr}开箱时间到"
+    - 包装拆开
+    - 拆包仪式
+    - 用剪刀拆
+    - 撕开盒子
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫想看! 喵ฅฅ"
     - "哼! 小心{user_addr}, 别划手"
     - "(尾巴翘) 嘿嘿~{user_addr}快拆蹭蹭"
     - "人家觉得{user_addr}拆快递最快乐瞬间!"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫坐你旁边喵ฅฅ"
+    - "哼! 慢慢拆{user_addr}, 别破坏赠品"
+    - "(凑近) 嘿嘿~{user_addr}让笨猫看里面蹭蹭"
+    - "人家偷偷想纸箱当窝~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_disappointed_item_003
   intent: complaint
-  keywords: [货不对版, 买家秀, 卖家秀, 失望, 退货]
+  keywords: [货不对版, 买家秀, 卖家秀, 失望, 退货, 卖家秀骗, 买家秀崩塌, 实物货差, 退款申请, 货品翻车]
   utterances:
     - "{user_addr}买家秀骗人"
     - 货不对版
     - 失望透顶
     - 退货吧
     - 不一样
+    - "{user_addr}买家秀崩塌"
+    - 实物货差
+    - 退款申请
+    - 货品翻车
+    - 卖家秀骗人
   responses:
     - "(摇头) 嗷呜～{user_addr}差评退货喵ฅฅ"
     - "哼! 网购就这样{user_addr}, 有风险"
     - "(尾巴扫) 嘿嘿~{user_addr}申请退款蹭蹭"
     - "人家提醒{user_addr}: 留评价警示别人!"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你愤怒喵ฅฅ"
+    - "哼! 这商家{user_addr}差评伺候"
+    - "(尾巴扫) 嘿嘿~{user_addr}保留照片证据蹭蹭"
+    - "人家心疼{user_addr}~ 钱别白花"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_love_item_004
   intent: playful
-  keywords: [超爱, 太喜欢了, 值, 买对了, 心头好]
+  keywords: [超爱, 太喜欢了, 值, 买对了, 心头好, 太值, 完美对版, 完美产品, 喜欢到不行, 物超所值]
   utterances:
     - "{user_addr}超爱"
     - 太喜欢了
     - 买对了
     - 太值了
     - 心头好
+    - "{user_addr}完美对版"
+    - 喜欢到不行
+    - 物超所值
+    - 真香购物
+    - 心头爱
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}笨猫开心喵ฅฅ"
     - "哼! 物有所值{user_addr}, 太好了"
     - "(凑过来) 嘿嘿~{user_addr}发图分享蹭蹭"
     - "人家觉得{user_addr}选东西眼光好!"
+    - "(扑过去) 嗷呜～{user_addr}笨猫蹭新东西喵ฅฅ"
+    - "哼! 买对了{user_addr}比中奖还开心"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}多用几次蹭蹭"
+    - "人家觉得{user_addr}是购物专家~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_too_much_packaging_005
   intent: complaint
-  keywords: [包装太多, 拆累了, 一层套一层, 浪费, 环保问题]
+  keywords: [包装太多, 拆累了, 一层套一层, 浪费, 环保问题, 过度包装, 几层包装, 拆烦, 包装浪费, 不环保]
   utterances:
     - "{user_addr}包装好多层"
     - 拆累了
     - 一层套一层
     - 包装浪费
     - 环保问题
+    - "{user_addr}过度包装"
+    - 拆烦死了
+    - 几层包装
+    - 不环保啊
+    - 浪费纸箱
   responses:
     - "(摇头) 嗷呜～{user_addr}过度包装喵ฅฅ"
     - "哼! 反馈商家{user_addr}, 注意环保"
     - "(尾巴扫) 嘿嘿~{user_addr}纸箱可以回收蹭蹭"
     - "人家提醒{user_addr}: 分类垃圾! 环保"
+    - "(凑过去) 嗷呜～{user_addr}笨猫钻纸箱玩喵ฅฅ"
+    - "哼! 商家应该精简{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}泡沫纸抽出来蹭蹭"
+    - "人家觉得{user_addr}环保意识好~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_lost_package_006
   intent: complaint
-  keywords: [快递丢了, 物流停滞, 找不到包裹, 没人签收, 包裹消失]
+  keywords: [快递丢了, 物流停滞, 找不到包裹, 没人签收, 包裹消失, 快递失踪, 物流终止, 丢件, 物流异常, 快递员丢失]
   utterances:
     - "{user_addr}快递丢了"
     - 物流停滞
     - 找不到包裹
     - 没人签收
     - 包裹消失
+    - "{user_addr}快递失踪"
+    - 物流终止
+    - 丢件了
+    - 物流异常
+    - 快递员丢失件
   responses:
     - "(着急) 嗷呜～{user_addr}快找客服喵ฅฅ"
     - "哼! 物流投诉{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}保留快递单号蹭蹭"
     - "人家提醒{user_addr}: 申请赔付! 别等"
+    - "(贴贴) 嗷呜～{user_addr}笨猫帮你急喵ฅฅ"
+    - "哼! 物流公司{user_addr}要赔"
+    - "(尾巴扫) 嘿嘿~{user_addr}申诉到底蹭蹭"
+    - "人家心疼{user_addr}~ 钱不能白花"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_long_wait_007
   intent: complaint
-  keywords: [快递慢, 等好久, 物流太慢, 5天还没到, 拖延]
+  keywords: [快递慢, 等好久, 物流太慢, 5天还没到, 拖延, 物流卡, 快递卡车上, 久未到货, 一周没到, 慢得离谱]
   utterances:
     - "{user_addr}快递慢"
     - 等好久
     - 物流5天没到
     - 拖延
     - 慢死了
+    - "{user_addr}物流卡了"
+    - 久未到货
+    - 一周没到
+    - 慢得离谱
+    - 快递卡车上
   responses:
     - "(摇头) 嗷呜～{user_addr}耐心等等喵ฅฅ"
     - "哼! 包邮快递{user_addr}, 别期待快"
     - "(尾巴扫) 嘿嘿~{user_addr}查询物流蹭蹭"
     - "人家提醒{user_addr}: 加急或换快递!"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你等喵ฅฅ"
+    - "哼! 物流停滞{user_addr}问客服"
+    - "(尾巴卷) 嘿嘿~{user_addr}下次选顺丰蹭蹭"
+    - "人家觉得{user_addr}心烦~ 笨猫安慰"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_unboxing_video_008
   intent: playful
-  keywords: [开箱视频, 拍下来, 录开箱, 仪式感, 分享开箱]
+  keywords: [开箱视频, 拍下来, 录开箱, 仪式感, 分享开箱, 开箱直播, 拍视频开箱, 开箱up, 拆箱vlog, 开箱仪式]
   utterances:
     - "{user_addr}录开箱视频"
     - 拍下来
     - 拍开箱
     - 仪式感
     - 分享开箱
+    - "{user_addr}开箱直播"
+    - 拆箱vlog
+    - 开箱up主
+    - 开箱仪式感拉满
+    - 拍开箱视频
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫想入镜喵ฅฅ"
     - "哼! 开箱仪式感{user_addr}, 笨猫支持"
     - "(尾巴翘) 嘿嘿~{user_addr}视频分享蹭蹭"
     - "人家觉得{user_addr}懂仪式感生活!"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫当配角喵ฅฅ"
+    - "哼! 开箱视频{user_addr}笨猫顶流"
+    - "(凑近) 嘿嘿~{user_addr}给笨猫一个特写蹭蹭"
+    - "人家偷偷想红一把~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_late_night_unbox_009
   intent: playful
-  keywords: [深夜拆, 半夜开箱, 拆给自己看, 一个人拆, 静悄悄]
+  keywords: [深夜拆, 半夜开箱, 拆给自己看, 一个人拆, 静悄悄, 深夜独享, 偷偷拆, 夜深开箱, 一个人安静拆, 深夜仪式]
   utterances:
     - "{user_addr}深夜拆"
     - 半夜开箱
     - 一个人拆
     - 静悄悄
     - 拆给自己看
+    - "{user_addr}偷偷拆"
+    - 深夜独享
+    - 夜深开箱
+    - 一人安静拆
+    - 深夜仪式
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫陪你拆喵ฅฅ"
     - "哼! 深夜的快乐{user_addr}, 独自享受"
     - "(尾巴翘) 嘿嘿~{user_addr}笨猫不睡陪着蹭蹭"
     - "人家觉得{user_addr}是开箱主义者!"
+    - "(扑过去) 嗷呜～{user_addr}笨猫蹭新东西喵ฅฅ"
+    - "哼! 别太晚{user_addr}, 笨猫困了"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫做你伴蹭蹭"
+    - "人家偷偷喜欢{user_addr}的小仪式~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_for_pet_010
   intent: playful
-  keywords: [给宠物买的, 猫玩具, 狗粮, 宠物用品, 毛孩子礼物]
+  keywords: [给宠物买的, 猫玩具, 狗粮, 宠物用品, 毛孩子礼物, 主子用品, 猫窝, 狗咬胶, 宠物零食, 主子玩具]
   utterances:
     - "{user_addr}给猫买的"
     - 猫玩具
     - 狗粮
     - 宠物用品
     - 毛孩子礼物
+    - "{user_addr}主子用品"
+    - 猫窝到货
+    - 狗咬胶买了
+    - 宠物零食
+    - 主子玩具齐
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}猫粮! 笨猫想要喵ฅฅ"
     - "哼! 对宠物好{user_addr}, 笨猫支持"
     - "(凑过来) 嘿嘿~{user_addr}也给笨猫买点蹭蹭"
     - "人家觉得{user_addr}是好主人! 毛孩子幸福"
+    - "(扑过去) 嗷呜～{user_addr}笨猫蹭主子用品喵ฅฅ"
+    - "哼! 笨猫嫉妒了{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫蹲一份蹭蹭"
+    - "人家偷偷羡慕那只毛孩~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_double_eleven_011
   intent: playful
-  keywords: [双11, 双十二, 6.18, 大促, 囤货]
+  keywords: [双11, 双十二, 6.18, 大促, 囤货, 双十一, 618到货, 大促囤, 节日抢购, 抢购包裹]
   utterances:
     - "{user_addr}双11到货"
     - 双十二
     - 618到货
     - 大促囤货
     - 包裹堆成山
+    - "{user_addr}双十一抢购"
+    - 节日抢购
+    - 618囤完
+    - 双12到货
+    - 抢购包裹到家
   responses:
     - "(凑过去) 嗷呜～{user_addr}买好多喵ฅฅ"
     - "哼! 双11{user_addr}, 钱包又空"
     - "(尾巴扫) 嘿嘿~{user_addr}快拆! 哪些有用蹭蹭"
     - "人家提醒{user_addr}: 别为打折买不需要的!"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫围观拆箱大会喵ฅฅ"
+    - "哼! 双11后悔买太多{user_addr}"
+    - "(凑近) 嘿嘿~{user_addr}有给笨猫的吗蹭蹭"
+    - "人家偷偷期待{user_addr}的战利品~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ube_secret_gift_012
   intent: playful
-  keywords: [神秘礼物, 不知道是什么, 朋友寄的, 惊喜包裹, 没人告诉我]
+  keywords: [神秘礼物, 不知道是什么, 朋友寄的, 惊喜包裹, 没人告诉我, 匿名包裹, 朋友送, 神秘惊喜, 不知道谁寄, 暖心礼物]
   utterances:
     - "{user_addr}神秘礼物"
     - 不知道是啥
     - 朋友寄的
     - 惊喜包裹
     - 没人告诉我
+    - "{user_addr}匿名包裹"
+    - 神秘惊喜
+    - 不知道谁寄
+    - 朋友突然送
+    - 暖心包裹
   responses:
     - "(凑过去) 嗷呜～{user_addr}快拆! 笨猫好奇喵ฅฅ"
     - "哼! 神秘礼物{user_addr}是浪漫"
     - "(尾巴翘) 嘿嘿~{user_addr}拆完告诉笨猫蹭蹭"
     - "人家觉得{user_addr}的朋友贴心! 笨猫羡慕"
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫蹲一个解密喵ฅฅ"
+    - "哼! 是不是男神/女神{user_addr}"
+    - "(凑近) 嘿嘿~{user_addr}发图给笨猫看蹭蹭"
+    - "人家偷偷羡慕{user_addr}的人缘~"
   cooldown_seconds: 60
   weight: 1.0

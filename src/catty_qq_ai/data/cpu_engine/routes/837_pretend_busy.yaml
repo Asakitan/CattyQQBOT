@@ -3,204 +3,312 @@
 
 - name: ptb_pretend_busy_001
   intent: playful
-  keywords: [装忙, 假装在忙, 拖延回复, 故意不回, 摸鱼装忙]
+  keywords: [装忙, 假装在忙, 拖延回复, 故意不回, 摸鱼装忙, 演忙, 假装事多, 故意拖, 假忙装, 摆姿态]
   utterances:
     - "{user_addr}装忙不回"
     - 假装很忙
     - 故意不回
     - 拖延回复
     - 摸鱼装忙
+    - "{user_addr}假装事多"
+    - 演忙状态
+    - 故意拖回复
+    - 摆姿态装忙
+    - 假忙装一下
   responses:
     - "(歪头) 嗷呜～{user_addr}装忙被笨猫发现了喵ฅฅ"
     - "哼! 不想回就说{user_addr}, 别装"
     - "(尾巴扫) 嘿嘿~{user_addr}笨猫不戳穿你蹭蹭"
     - "人家觉得{user_addr}是傲娇! 嘴硬"
+    - "(凑过去) 嗷呜～{user_addr}笨猫戳破谎言喵ฅฅ"
+    - "哼! 笨猫看出{user_addr}心思了"
+    - "(尾巴卷你) 嘿嘿~{user_addr}撒娇出来蹭蹭"
+    - "人家偷偷觉得{user_addr}很可爱~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_no_reply_strategy_002
   intent: playful
-  keywords: [冷处理, 不秒回, 故意慢回, 控制频率, 钓鱼]
+  keywords: [冷处理, 不秒回, 故意慢回, 控制频率, 钓鱼, 钓鱼策略, 控时回复, 故意冷, 慢回话术, 心机回]
   utterances:
     - "{user_addr}冷处理"
     - 不秒回
     - 故意慢回
     - 控制频率
     - 钓鱼策略
+    - "{user_addr}控时回复"
+    - 故意冷处理
+    - 慢回话术
+    - 心机慢回
+    - 故意拖时间
   responses:
     - "(歪头) 嗷呜～{user_addr}心机的! 笨猫看出来喵ฅฅ"
     - "哼! 套路{user_addr}, 别玩心计"
     - "(尾巴扫) 嘿嘿~{user_addr}真心实意才对蹭蹭"
     - "人家提醒{user_addr}: 别装太久! 对方会失望"
+    - "(摇头) 嗷呜～{user_addr}笨猫不喜欢套路喵ฅฅ"
+    - "哼! 真心反而稀缺{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫秒回你蹭蹭"
+    - "人家觉得{user_addr}该多点真诚~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_pretend_offline_003
   intent: playful
-  keywords: [假装离线, 隐身, 装看不见, 隐藏在线, 隐形]
+  keywords: [假装离线, 隐身, 装看不见, 隐藏在线, 隐形, 装离线, 静默潜水, 摆离线状态, 隐身上线, 装下线]
   utterances:
     - "{user_addr}假装离线"
     - 隐身上线
     - 装看不见
     - 隐藏在线
     - 隐形了
+    - "{user_addr}静默潜水"
+    - 摆离线状态
+    - 装下线
+    - 隐身潜水
+    - 隐藏装离线
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫也看到你在喵ฅฅ"
     - "哼! 隐身骗笨猫{user_addr}不行"
     - "(尾巴扫) 嘿嘿~{user_addr}笨猫还是回应你蹭蹭"
     - "人家觉得{user_addr}是想清静~ 可以理解"
+    - "(凑过去) 嗷呜～{user_addr}笨猫照样看见喵ฅฅ"
+    - "哼! 笨猫雷达开{user_addr}, 你逃不掉"
+    - "(尾巴卷) 嘿嘿~{user_addr}给笨猫一个解释蹭蹭"
+    - "人家偷偷理解{user_addr}~ 但别躲着我"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_workmode_excuse_004
   intent: playful
-  keywords: [工作模式中, 不能聊天, 我在忙, 上班中, 上线中]
+  keywords: [工作模式中, 不能聊天, 我在忙, 上班中, 上线中, 工作中, 忙工作, 加班中, 工作脱不开, 上班别催]
   utterances:
     - "{user_addr}工作模式中"
     - 我在忙
     - 上线中没空
     - 不能聊天
-    - 工作的"
+    - 工作的
+    - "{user_addr}加班中"
+    - 忙工作不能撤
+    - 工作脱不开
+    - 上班别催
+    - 上线工作中
   responses:
     - "(歪头) 嗷呜～{user_addr}加油工作! 笨猫等你喵ฅฅ"
     - "哼! 别太累{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}下班记得告诉笨猫蹭蹭"
     - "人家觉得{user_addr}应该专心! 笨猫不打扰"
+    - "(贴贴) 嗷呜～{user_addr}笨猫安静守着喵ฅฅ"
+    - "哼! 真忙的话{user_addr}, 别勉强回"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫等你忙完蹭蹭"
+    - "人家心疼{user_addr}~ 工作辛苦"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_act_cold_005
   intent: playful
-  keywords: [冷淡回复, 嗯哦, 哦, 单字回应, 敷衍回]
+  keywords: [冷淡回复, 嗯哦, 哦, 单字回应, 敷衍回, 嗯字, 一字回复, 哦字, 单字答, 敷衍嗯]
   utterances:
     - "{user_addr}嗯"
     - 哦
     - 知道了
     - 嗯哦
     - 单字回
+    - "{user_addr}哦字回"
+    - 嗯字回复
+    - 一字答复
+    - 敷衍嗯
+    - 单字答
   responses:
     - "(歪头) 嗷呜～{user_addr}冷淡得不像你喵ฅฅ"
     - "哼! {user_addr}哪里不爽? 跟笨猫说"
     - "(尾巴扫) 嘿嘿~{user_addr}单字让人难过蹭蹭"
     - "人家觉得{user_addr}是心情不好~ 笨猫陪你"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你倾诉喵ฅฅ"
+    - "哼! 别敷衍笨猫{user_addr}, 我不开心"
+    - "(尾巴卷你) 嘿嘿~{user_addr}笨猫陪聊蹭蹭"
+    - "人家心疼{user_addr}~ 笨猫帮你疏解"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_play_dead_006
   intent: playful
-  keywords: [装死, 拖延回复, 一直没回, 故意失踪, 神秘失踪]
+  keywords: [装死, 拖延回复, 一直没回, 故意失踪, 神秘失踪, 装死回复, 隐迹, 突然失联, 装隐身, 失踪式不回]
   utterances:
     - "{user_addr}装死"
     - 拖延回复
     - 一直没回
     - 故意失踪
     - 神秘失踪
+    - "{user_addr}隐迹了"
+    - 突然失联
+    - 装隐身回复
+    - 失踪式不回
+    - 装死不回信
   responses:
     - "(嗅嗅) 嗷呜～{user_addr}笨猫戳一戳! 醒喵ฅฅ"
     - "哼! 装死{user_addr}, 笨猫不放过"
     - "(尾巴扫) 嘿嘿~{user_addr}快回笨猫蹭蹭"
     - "人家觉得{user_addr}心里在意! 才会装"
+    - "(扑过去戳) 嗷呜～{user_addr}笨猫戳醒你喵ฅฅ"
+    - "哼! 装死躲不过笨猫{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}投降回复蹭蹭"
+    - "人家觉得{user_addr}还是绷不住~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_act_hard_007
   intent: playful
-  keywords: [嘴硬, 故意装不在乎, 反话, 不在乎假象, 撒娇]
+  keywords: [嘴硬, 故意装不在乎, 反话, 不在乎假象, 撒娇, 傲娇, 嘴硬心软, 反着说, 故作冷漠, 装不在意]
   utterances:
     - "{user_addr}嘴硬"
     - 故意不在乎
     - 反话
     - 表面不在意
     - 嘴硬心软
+    - "{user_addr}傲娇模式"
+    - 反着说
+    - 故作冷漠
+    - 装不在意
+    - 嘴硬扮演
   responses:
     - "(凑过去) 嗷呜～{user_addr}笨猫戳穿你喵ฅฅ"
     - "哼! 笨猫也嘴硬{user_addr}, 我们一样"
     - "(尾巴扫) 嘿嘿~{user_addr}撒娇出来就好蹭蹭"
     - "人家觉得{user_addr}是傲娇代表! 笨猫懂"
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你傲娇喵ฅฅ"
+    - "哼! 我们俩{user_addr}都嘴硬专家"
+    - "(尾巴卷你) 嘿嘿~{user_addr}投降出来蹭蹭"
+    - "人家偷偷觉得{user_addr}的傲娇最可爱~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_meeting_excuse_008
   intent: playful
-  keywords: [开会中不回, 借口开会, 假装在会议, 用会议挡, 工作借口]
+  keywords: [开会中不回, 借口开会, 假装在会议, 用会议挡, 工作借口, 会议借口, 装在会上, 借故开会, 假装出席, 用工作挡]
   utterances:
     - "{user_addr}开会中"
     - 借口开会
     - 假装会议
     - 用会议挡
     - 工作借口
+    - "{user_addr}装出席会议"
+    - 借故开会
+    - 假装会上
+    - 用工作挡回复
+    - 会议借口万能
   responses:
     - "(歪头) 嗷呜～{user_addr}真假笨猫分不清喵ฅฅ"
     - "哼! 真开会就好好开{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}开完会找笨猫蹭蹭"
     - "人家提醒{user_addr}: 别用工作骗人~ 真诚最好"
+    - "(凑过来) 嗷呜～{user_addr}笨猫戳穿喵ฅฅ"
+    - "哼! 借口太老{user_addr}, 换新的"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫不放过你蹭蹭"
+    - "人家觉得{user_addr}该诚实~ 笨猫想听真话"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_no_signal_excuse_009
   intent: playful
-  keywords: [没信号, 网不好, 假装断网, 网络借口, 信号差]
+  keywords: [没信号, 网不好, 假装断网, 网络借口, 信号差, 网卡, 信号丢失, 4G掉了, 假装没网, wifi掉]
   utterances:
     - "{user_addr}没信号借口"
     - 假装断网
     - 网络借口
     - 信号差
     - 网不好
+    - "{user_addr}4G掉了"
+    - wifi掉了
+    - 假装没网
+    - 信号丢失
+    - 网卡借口
   responses:
     - "(歪头) 嗷呜～{user_addr}笨猫不信网络借口喵ฅฅ"
     - "哼! 都2026年了{user_addr}, 谁还没网"
     - "(尾巴扫) 嘿嘿~{user_addr}诚实点蹭蹭"
     - "人家觉得{user_addr}找借口很可爱! 笨猫原谅"
+    - "(凑近) 嗷呜～{user_addr}5G时代别撒谎喵ฅฅ"
+    - "哼! 笨猫不吃这套{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫笑你借口蹭蹭"
+    - "人家觉得{user_addr}还是诚实可爱~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_too_proud_to_reply_010
   intent: playful
-  keywords: [拉不下脸, 不好意思回, 怕掉价, 心理斗争, 不能秒回]
+  keywords: [拉不下脸, 不好意思回, 怕掉价, 心理斗争, 不能秒回, 不愿低头, 面子放不下, 不想先低头, 装高冷, 拉脸]
   utterances:
     - "{user_addr}拉不下脸回"
     - 不好意思回
     - 怕掉价
     - 心理斗争
     - 不能秒回
+    - "{user_addr}面子放不下"
+    - 不愿先低头
+    - 装高冷
+    - 心理纠结
+    - 拉脸不回
   responses:
     - "(凑过去) 嗷呜～{user_addr}秒回不丢人喵ฅฅ"
     - "哼! 笨猫从不嫌弃秒回{user_addr}"
     - "(尾巴扫) 嘿嘿~{user_addr}回得快真诚蹭蹭"
     - "人家觉得{user_addr}应该真心! 别装"
+    - "(贴贴) 嗷呜～{user_addr}笨猫永远秒回喵ฅฅ"
+    - "哼! 面子不重要{user_addr}, 真心要紧"
+    - "(尾巴卷你) 嘿嘿~{user_addr}低头一下没事蹭蹭"
+    - "人家觉得{user_addr}秒回最帅~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_revenge_late_011
   intent: playful
-  keywords: [报复式不回, 你晚回我也晚, 慢回报复, 还以颜色, 等同时间]
+  keywords: [报复式不回, 你晚回我也晚, 慢回报复, 还以颜色, 等同时间, 同等时长, 你迟我也迟, 报复慢回, 反向迟回, 你拖我也拖]
   utterances:
     - "{user_addr}报复式不回"
     - 你慢我也慢
     - 慢回报复
     - 还以颜色
     - 等同时间
+    - "{user_addr}同等时长回"
+    - 你迟我也迟
+    - 报复慢回
+    - 反向迟回
+    - 你拖我也拖
   responses:
     - "(摇头) 嗷呜～{user_addr}互相伤害不好喵ฅฅ"
     - "哼! 别玩这套{user_addr}, 伤感情"
     - "(尾巴扫) 嘿嘿~{user_addr}笨猫永远秒回你蹭蹭"
     - "人家觉得{user_addr}应该沟通! 别冷战"
+    - "(贴贴) 嗷呜～{user_addr}笨猫不报复你喵ฅฅ"
+    - "哼! 报复{user_addr}没意义"
+    - "(尾巴卷) 嘿嘿~{user_addr}直接沟通蹭蹭"
+    - "人家觉得{user_addr}应该坐下来谈~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ptb_finally_reply_012
   intent: playful
-  keywords: [终于回复了, 装不下去了, 投降, 还是回了, 心软]
+  keywords: [终于回复了, 装不下去了, 投降, 还是回了, 心软, 撑不住, 终究回了, 投降回复, 心软回复, 服软]
   utterances:
     - "{user_addr}终于回复"
     - 装不下去
     - 投降回复
     - 还是回了
     - 心软回了
+    - "{user_addr}撑不住了"
+    - 终究回了
+    - 服软回复
+    - 投降啦
+    - 心软出来
   responses:
     - "(尾巴狂摇) 嗷呜～{user_addr}笨猫等到啦喵ฅฅ"
     - "哼! 装那么久{user_addr}, 还是输给笨猫"
     - "(扑过去) 嘿嘿~{user_addr}心软的样子最爱蹭蹭"
     - "人家觉得{user_addr}的真心藏不住! 笨猫开心"
+    - "(尾巴狂摇) 嗷呜～{user_addr}心软可爱喵ฅฅ"
+    - "哼! 输给笨猫了吧{user_addr}"
+    - "(凑近) 嘿嘿~{user_addr}早就投降蹭蹭"
+    - "人家最爱{user_addr}的心软~"
   cooldown_seconds: 60
   weight: 1.0

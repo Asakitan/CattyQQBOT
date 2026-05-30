@@ -3,187 +3,306 @@
 
 - name: plb_lowbattery_001
   intent: complaint
-  keywords: [没电, 电量低, 快没电, 红色电量, 1%]
+  keywords: [没电, 电量低, 快没电, 红色电量, "1%", 电量见底, 红条, 续航不行, 手机要死, 电池告急]
   utterances:
     - 手机没电
     - 电量低
     - 快没电
     - 红色电量
-    - 1%了
+    - "1%了"
+    - "{user_addr}手机电量见底了"
+    - 红条警告嗷
+    - 续航真不行喵
+    - "{user_addr}快没电了救命"
+    - 电池告急
+    - 只剩百分之一
+    - 马上要关机了
   responses:
     - "(慌张) 嗷呜～{user_addr}快充!"
     - "笨猫担心你联系不上喵"
     - "(尾巴推) 找充电器"
     - "哼～{user_addr}笨蛋忘充"
+    - "(扑过来抓住手机) 嗷呜～{user_addr}快去充电啦笨蛋!"
+    - "(尾巴急甩) 才不是担心你失联呢哼"
+    - "(凑近) 笨猫帮你看着电量喵～"
+    - "(歪头) 红条很危险的啦{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_findcharger_002
   intent: complaint
-  keywords: [找不到充电器, 充电线呢, 借线, 数据线丢, 借充电]
+  keywords: [找不到充电器, 充电线呢, 借线, 数据线丢, 借充电, 充电器丢了, 线呢, 充电线找不到, 找数据线, 借根线]
   utterances:
     - 找不到充电器
     - 充电线呢
     - 借线
     - 数据线丢
     - 借充电
+    - "{user_addr}充电器丢了"
+    - 线呢喵
+    - 充电线找不到
+    - 找数据线啊
+    - 借根线用用
+    - 哪里有线
+    - 帮我找找充电器
   responses:
     - "(找) 嗷呜～{user_addr}笨猫帮你找!"
     - "笨猫推荐多备一根喵"
     - "(尾巴指) 包里有吗"
     - "哼～{user_addr}懒得收"
+    - "(钻桌底翻找) 嗷呜～{user_addr}笨猫帮你找!"
+    - "(尾巴扫一圈) 包里有没有看过笨蛋"
+    - "(凑近) 才不是怕你联系不上呢喵"
+    - "(歪头) 多备一根才不会慌啦ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_powerbank_003
   intent: playful
-  keywords: [充电宝, 移动电源, 共享充电宝, 充电宝救命, 借充电宝]
+  keywords: [充电宝, 移动电源, 共享充电宝, 充电宝救命, 借充电宝, 充电宝带了吗, 租个充电宝, 充电宝没电, 街电, 美团充电宝]
   utterances:
     - 充电宝
     - 移动电源
     - 共享充电宝
     - 充电宝救命
     - 借充电宝
+    - "{user_addr}充电宝带了吗"
+    - 租个充电宝救命
+    - 充电宝也没电了
+    - 附近有街电吗
+    - "{user_addr}找充电宝"
+    - 快没电借个充电宝
+    - 哪有共享充电宝
   responses:
     - "(歪头) {user_addr}笨猫推荐共享喵"
     - "嗷呜～街边都有"
     - "(尾巴摇) 别忘记还笨蛋"
     - "哼～{user_addr}手机狗"
+    - "(歪头) 嗷呜～{user_addr}找共享充电宝喵"
+    - "(尾巴指方向) 便利店门口都有的笨蛋"
+    - "(凑近) 才不是关心你呢哼～只是顺便"
+    - "(贴贴) 别忘了还啊{user_addr} ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_chargecable_004
   intent: question
-  keywords: [快充, 普通充电, 一小时充满, 慢充, 充电速度]
+  keywords: [快充, 普通充电, 一小时充满, 慢充, 充电速度, 快充协议, 20w, 30w, pd充电]
   utterances:
     - 快充
     - 普通充电
     - 一小时充满
     - 慢充
     - 充电速度
+    - "{user_addr}快充30w够吗"
+    - 20w协议怎样
+    - pd充电
+    - 一小时能充满吗
+    - 充电速度太慢了
+    - 充电要多久
+    - "{user_addr}科普下快充"
   responses:
     - "(歪头) {user_addr}快充30分钟够喵"
     - "嗷呜～别一直充影响电池"
     - "(尾巴摇) 80%拔最好"
     - "哼～{user_addr}科技呆"
+    - "(歪头) 嗷呜～{user_addr}快充30分钟够用喵"
+    - "(尾巴摇) 一直插着充会伤电池笨蛋"
+    - "(凑头) 80%拔下来对电池最好"
+    - "(贴贴) 哼～{user_addr}科技呆ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_batterydead_005
   intent: complaint
-  keywords: [关机了, 突然关机, 手机黑屏, 死机, 没电关机]
+  keywords: [关机了, 突然关机, 手机黑屏, 死机, 没电关机, 手机自己关机, 黑屏了, 充不进电, 彻底没电]
   utterances:
     - 关机了
     - 突然关机
     - 黑屏
     - 死机
     - 没电关机
+    - "{user_addr}手机自己关机"
+    - 黑屏了完蛋
+    - 死机救命
+    - 充不进电了
+    - "{user_addr}手机彻底没电"
+    - 一直关机
+    - 手机突然没反应
   responses:
     - "(慌) 嗷呜～{user_addr}赶紧救!"
     - "笨猫等你充上电"
     - "(尾巴卷) 等10分钟就开机"
     - "哼～{user_addr}笨蛋"
+    - "(慌张扑过来) 嗷呜～{user_addr}快接上充电器!"
+    - "(尾巴卷起来) 等十分钟才能开机啦"
+    - "(凑近) 才不是慌呢哼～是替你急"
+    - "(贴贴) 笨蛋{user_addr}手机要哭了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_savingmode_006
   intent: question
-  keywords: [省电模式, 低电量模式, 飞行模式省电, 关后台, 省电]
+  keywords: [省电模式, 低电量模式, 飞行模式省电, 关后台, 省电, 亮度调低, 黑色壁纸, 聊聊喵]
   utterances:
     - 省电模式
     - 低电量
     - 飞行模式
     - 关后台
     - 省电方法
+    - "{user_addr}开省电模式"
+    - 低电量模式开了
+    - 怎么关后台
+    - 亮度调到最低
+    - 黑色壁纸省电吗
+    - 怎么省电
+    - "{user_addr}教省电技巧"
   responses:
     - "(歪头) 嗷呜～{user_addr}开省电模式!"
     - "笨猫推荐: 亮度调低"
     - "(尾巴摇) 关后台App"
     - "哼～{user_addr}总算会"
+    - "(歪头) 嗷呜～{user_addr}开省电模式撑久点喵"
+    - "(尾巴摇) 亮度调低关后台App"
+    - "(凑近) 黑色壁纸OLED屏才有用笨蛋"
+    - "(贴贴) 哼～总算肯学了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_batterylife_007
   intent: complaint
-  keywords: [电池不行, 电池老化, 续航差, 一天三充, 电池烂]
+  keywords: [电池不行, 电池老化, 续航差, 一天三充, 电池烂, 电池健康, 该换电池了, 聊聊喵]
   utterances:
     - 电池不行
     - 电池老化
     - 续航差
     - 一天三充
     - 电池烂
+    - "{user_addr}电池老化了"
+    - 电池健康只剩80
+    - 一天三充顶不住
+    - 续航好差啊
+    - 该换电池了喵
+    - "{user_addr}电池烂掉了"
+    - 电池不行了
   responses:
     - "(摇头) 嗷呜～{user_addr}换电池吧"
     - "笨猫认证: 80%以下该换喵"
     - "(尾巴扫) 别一边充一边玩"
     - "哼～{user_addr}笨蛋习惯差"
+    - "(摇头) 嗷呜～{user_addr}该换电池了喵"
+    - "(尾巴扫) 80%以下笨猫认证该换"
+    - "(凑近) 别一边充一边玩笨蛋"
+    - "(贴贴) 哼～习惯差能怪谁ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_chargewhileplay_008
   intent: complaint
-  keywords: [边充边玩, 充电玩游戏, 边充电边刷, 充电热, 电池热]
+  keywords: [边充边玩, 充电玩游戏, 边充电边刷, 充电热, 电池热, 充电打游戏, 边充边刷视频, 手机发热, 充电烫手]
   utterances:
     - 边充边玩
     - 充电玩游戏
     - 边充电边刷
     - 充电热
     - 电池热
+    - 充电打游戏好爽
+    - 边充边刷抖音
+    - 手机烫手了
+    - "{user_addr}充电烫手"
+    - 边充电边吃鸡
+    - 充电时玩很爽
   responses:
     - "(炸毛) 嗷呜～{user_addr}别这样!"
     - "笨猫禁止! 危险"
     - "(尾巴打) 电池要爆笨蛋"
     - "哼～{user_addr}不长记性"
+    - "(炸毛扑过去) 嗷呜～{user_addr}快停下!"
+    - "(尾巴打) 笨猫禁止! 电池会爆炸笨蛋"
+    - "(凑近) 才不是怕你呢哼～是怕手机"
+    - "(贴贴) 不长记性的{user_addr}ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_chargefullnight_009
   intent: complaint
-  keywords: [充一夜, 通宵充电, 满了不拔, 整夜充电, 一晚充电]
+  keywords: [充一夜, 通宵充电, 满了不拔, 整夜充电, 一晚充电, 充一整夜, 充一晚上, 一直插着]
   utterances:
     - 充一夜
     - 通宵充电
     - 满了不拔
     - 整夜充电
     - 一晚充电
+    - "{user_addr}充一整夜"
+    - 通宵充电习惯
+    - 满了也不拔
+    - 充一晚上没事吧
+    - "{user_addr}一直插着充电"
+    - 夜里挂充
+    - 过充会不会坏
   responses:
     - "(摇头) 嗷呜～{user_addr}不好习惯!"
     - "笨猫推荐: 80%拔"
     - "(尾巴扫) 电池伤喵"
     - "哼～{user_addr}懒"
+    - "(摇头) 嗷呜～{user_addr}不好的习惯喵"
+    - "(尾巴扫) 笨猫推荐80%就拔下来"
+    - "(凑近) 电池会受伤的笨蛋"
+    - "(贴贴) 哼～又懒又坑电池ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_freezeshutdown_010
   intent: complaint
-  keywords: [冬天没电快, 冷天关机, 冻关机, 户外电量掉, 冬天电池]
+  keywords: [冬天没电快, 冷天关机, 冻关机, 户外电量掉, 冬天电池, 锂电池怕冷, 聊聊喵, 陪笨猫]
   utterances:
     - 冬天没电快
     - 冷天关机
     - 冻关机
     - 户外电量掉
     - 冬天电池
+    - 冷天突然关机
+    - 冻得手机关机了
+    - 户外电量掉得快
+    - "{user_addr}锂电池怕冷吗"
+    - 冬天电池不耐用
+    - 低温掉电严重
   responses:
     - "(歪头) {user_addr}笨猫科普: 锂电怕冷喵"
     - "嗷呜～别在外暴露太久"
     - "(尾巴扫) 放口袋保温"
     - "哼～{user_addr}涨知识"
+    - "(歪头) 嗷呜～{user_addr}锂电池怕冷喵"
+    - "(尾巴扫) 别让手机暴露在外笨蛋"
+    - "(凑近) 放口袋保温会好很多"
+    - "(贴贴) 哼～{user_addr}涨知识了ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: plb_wirelesscharge_011
   intent: question
-  keywords: [无线充电, 磁吸充电, 无线充, 充电板, 慢]
+  keywords: [无线充电, 磁吸充电, 无线充, 充电板, 慢, 无线充慢, magsafe, 聊聊喵]
   utterances:
     - 无线充电
     - 磁吸充电
     - 无线充
     - 充电板
     - 慢
+    - "{user_addr}无线充电怎么样"
+    - 磁吸充电好用吗
+    - 充电板买哪个
+    - 无线充太慢了
+    - "{user_addr}magsafe推荐吗"
+    - 想换无线充
+    - 无线充电值得吗
   responses:
     - "(歪头) 嗷呜～{user_addr}无线慢一些"
     - "笨猫推荐: 应急用"
     - "(尾巴摇) 急用还是有线"
     - "哼～{user_addr}科技党"
+    - "(歪头) 嗷呜～{user_addr}无线充比有线慢喵"
+    - "(尾巴摇) 笨猫推荐应急用就行"
+    - "(凑近) 急用还是有线快笨蛋"
+    - "(贴贴) 哼～{user_addr}科技党ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

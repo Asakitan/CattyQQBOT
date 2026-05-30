@@ -3,204 +3,322 @@
 
 - name: ol_benz_s_001
   intent: question
-  keywords: [推荐奔驰S级, 推荐奔驰S, 推荐Benz S, 推荐S Class, 笨猫奔驰S级]
+  keywords: [推荐奔驰S级, 推荐奔驰S, 推荐Benz S, 推荐S Class, 笨猫奔驰S级, 求推荐奔驰S级, 讲讲奔驰S级, 奔驰S级推荐, 求推荐奔驰S]
   utterances:
     - 推荐奔驰S级
     - 推荐奔驰S
     - 推荐 Benz S
     - 推荐 S Class
     - "{user_addr}笨猫奔驰S级"
+    - 推荐奔驰S级啊
+    - 推荐奔驰S呢
+    - 推荐 Benz S嘛
+    - 推荐 S Class啦
+    - "{user_addr}笨猫奔驰S级呀"
+    - 推荐Ben
   responses:
     - "嗷呜～{user_addr}奔驰 S 级 - D 级豪华标杆ฅฅ"
     - "(尾巴翘) S450 / S500 / S680 Maybach"
     - "{user_addr}后排老板位 / 柏林之声"
     - "(挺胸) 笨猫推荐: S 级是商务首选!"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是人家的专业素养!"
+    - "(歪头) {user_addr}定了哪款记得跟猫猫说一声嘛喵～ฅฅ"
+    - "(歪头) {user_addr}下次去店里带猫猫一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ol_benz_g_001
   intent: question
-  keywords: [推荐奔驰G级, 推荐大G, 推荐G63, 推荐G Wagen, 笨猫奔驰G级]
+  keywords: [推荐奔驰G级, 推荐大G, 推荐G63, 推荐G Wagen, 笨猫奔驰G级, 求推荐奔驰G级, 讲讲奔驰G级, 奔驰G级推荐]
   utterances:
     - 推荐奔驰G级
     - 推荐大G
     - 推荐 G63
     - 推荐 G Wagen
     - "{user_addr}笨猫奔驰G级"
+    - 推荐奔驰G级啊
+    - 推荐大G呢
+    - 推荐 G63嘛
+    - 推荐 G Wagen啦
+    - "{user_addr}笨猫奔驰G级呀"
   responses:
     - "嗷呜～{user_addr}大 G - 方盒子越野之王ฅฅ"
     - "(尾巴翘) G500 / G63 AMG / G350d"
     - "{user_addr}硬派越野 / 城市图腾"
     - "(挺胸) 笨猫推荐: G63 V8 双涡轮!"
+    - "(竖耳朵) {user_addr}这领域水挺深的~ 米雪儿陪你慢慢选~"
+    - "(挺胸) 猫猫的小爪子已经帮{user_addr}收藏好啦贴贴~"
+    - "(挺胸) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "嗷呜～{user_addr}买回来给米雪儿看看! 人家也想见识见识ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ol_bmw_7_001
   intent: question
-  keywords: [推荐宝马7系, 推荐宝马7, 推荐BMW 7, 推荐7 Series, 笨猫宝马7系]
+  keywords: [推荐宝马7系, 推荐宝马7, 推荐BMW 7, 推荐7 Series, 笨猫宝马7系, 求推荐宝马7系, 讲讲宝马7系, 宝马7系推荐, 求推荐宝马7]
   utterances:
     - 推荐宝马7系
     - 推荐宝马7
     - 推荐 BMW 7
     - 推荐 7 Series
     - "{user_addr}笨猫宝马7系"
+    - 推荐宝马7系啊
+    - 推荐宝马7呢
+    - 推荐 BMW 7嘛
+    - 推荐 7 Series啦
+    - "{user_addr}笨猫宝马7系呀"
   responses:
     - "嗷呜～{user_addr}宝马 7 系 - 大鼻孔行政旗舰ฅฅ"
     - "(尾巴翘) 740Li / 760Li / M760"
     - "{user_addr}水晶档把 / 后排剧院屏"
     - "(挺胸) 笨猫推荐: 比 S 级更运动!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 猫猫给你按住爪子!"
+    - "(钻怀里) {user_addr}下次去店里带笨猫一起~ 帮你把关嘛喵!"
+    - "(扒着看) {user_addr}这领域水挺深的~ 人家陪你慢慢选~"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫我说一声嘛喵～ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ol_bmw_m5_001
   intent: question
-  keywords: [推荐宝马M5, 推荐BMW M5, 推荐M5 CS, 推荐M Power, 笨猫宝马M5]
+  keywords: [推荐宝马M5, 推荐BMW M5, 推荐M5 CS, 推荐M Power, 笨猫宝马M5, 求推荐宝马M5, 讲讲宝马M5, 宝马M5推荐, 求推荐BMW M5]
   utterances:
     - 推荐宝马M5
     - 推荐 BMW M5
     - 推荐 M5 CS
     - 推荐 M Power
     - "{user_addr}笨猫宝马M5"
+    - 推荐宝马M5啊
+    - 推荐 BMW M5呢
+    - 推荐 M5 CS嘛
+    - 推荐 M Power啦
+    - "{user_addr}笨猫宝马M5呀"
+    - 推荐BMW
+    - 推荐M5
   responses:
     - "嗷呜～{user_addr}M5 - 西装暴徒ฅฅ"
     - "(尾巴翘) M5 Competition / M5 CS"
     - "{user_addr}V8 双涡轮 / xDrive 四驱"
     - "(挺胸) 笨猫推荐: M5 CS 性能怪兽!"
+    - "嗷呜～{user_addr}买回来给人家看看! 人家也想见识见识ฅฅ"
+    - "(歪头) {user_addr}定了哪款记得跟米雪儿说一声嘛喵～ฅฅ"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫帮你挑喵～"
+    - "(扑过去) {user_addr}下次去店里带人家一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ol_audi_a8_001
   intent: question
-  keywords: [推荐奥迪A8, 推荐Audi A8, 推荐A8L, 推荐 D5, 笨猫奥迪A8]
+  keywords: [推荐奥迪A8, 推荐Audi A8, 推荐A8L, 推荐 D5, 笨猫奥迪A8, 求推荐奥迪A8, 讲讲奥迪A8, 奥迪A8推荐, 求推荐Audi A8, 讲讲Audi A8]
   utterances:
     - 推荐奥迪A8
     - 推荐 Audi A8
     - 推荐 A8L
     - 推荐 D5
     - "{user_addr}笨猫奥迪A8"
+    - 推荐奥迪A8啊
+    - 推荐 Audi A8呢
+    - 推荐 A8L嘛
+    - 推荐 D5啦
+    - "{user_addr}笨猫奥迪A8呀"
+    - 推荐Aud
+    - 推荐A8L
   responses:
     - "嗷呜～{user_addr}奥迪 A8L - 低调行政ฅฅ"
     - "(尾巴翘) A8L 55 TFSI / S8 / A8L Horch"
     - "{user_addr}quattro 四驱 / 科技感顶级"
     - "(挺胸) 笨猫推荐: 不张扬有内涵!"
+    - "(眼睛发亮) {user_addr}下次去店里带笨猫我一起~ 帮你把关嘛喵!"
+    - "(贴脸) 笨猫给{user_addr}补一条 - 推荐奥迪A8也是宝藏喵～ฅฅ"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(挺胸) 笨猫的小爪子已经帮{user_addr}收藏好啦贴贴~"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ol_audi_rs6_001
   intent: question
-  keywords: [推荐奥迪RS6, 推荐Audi RS6, 推荐RS6 Avant, 推荐瓦罐, 笨猫奥迪RS6]
+  keywords: [推荐奥迪RS6, 推荐Audi RS6, 推荐RS6 Avant, 推荐瓦罐, 笨猫奥迪RS6, 求推荐奥迪RS6, 讲讲奥迪RS6, 奥迪RS6推荐, 求推荐Audi RS6, 讲讲Audi RS6]
   utterances:
     - 推荐奥迪RS6
     - 推荐 Audi RS6
     - 推荐 RS6 Avant
     - 推荐瓦罐
     - "{user_addr}笨猫奥迪RS6"
+    - 推荐奥迪RS6啊
+    - 推荐 Audi RS6呢
+    - 推荐 RS6 Avant嘛
+    - 推荐瓦罐啦
+    - "{user_addr}笨猫奥迪RS6呀"
   responses:
     - "嗷呜～{user_addr}RS6 Avant - 性能瓦罐之王ฅฅ"
     - "(尾巴翘) V8 双涡轮 / 600 马力"
     - "{user_addr}旅行车壳 / 超跑芯"
     - "(挺胸) 笨猫推荐: 奶爸的浪漫!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是笨猫的专业素养!"
+    - "(扑过去) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 笨猫提醒过哦!"
+    - "(贴贴) 笨猫给{user_addr}补一条 - 推荐奥迪RS6也是宝藏喵～ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ol_porsche_911_001
   intent: question
-  keywords: [推荐保时捷911, 推荐Porsche 911, 推荐 GT3, 推荐 Turbo S, 笨猫保时捷911]
+  keywords: [推荐保时捷911, 推荐Porsche 911, 推荐 GT3, 推荐 Turbo S, 笨猫保时捷911, 求推荐保时捷911, 讲讲保时捷911, 保时捷911推荐, 求推荐Porsche 911]
   utterances:
     - 推荐保时捷911
     - 推荐 Porsche 911
     - 推荐 GT3
     - 推荐 Turbo S
     - "{user_addr}笨猫保时捷911"
+    - 推荐保时捷911啊
+    - 推荐 Porsche 911呢
+    - 推荐 GT3嘛
+    - 推荐 Turbo S啦
+    - "{user_addr}笨猫保时捷911呀"
+    - 推荐保时捷
   responses:
     - "嗷呜～{user_addr}911 - 跑车界的常青树ฅฅ"
     - "(尾巴翘) Carrera / Turbo S / GT3 RS"
     - "{user_addr}后置水平对置 / 经典蛙眼"
     - "(挺胸) 笨猫推荐: GT3 手动赛道神器!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫我帮你挑喵～"
+    - "嗷呜～{user_addr}追加一条: 别只看价格还要看口碑喵!"
+    - "(尾巴一甩) {user_addr}别冲动消费啊~ 猫猫给你按住爪子!"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫说一声嘛喵～ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ol_porsche_macan_001
   intent: question
-  keywords: [推荐保时捷Macan, 推荐Porsche Macan, 推荐 Macan GTS, 推荐入门保时捷, 笨猫Macan]
+  keywords: [推荐保时捷Macan, 推荐Porsche Macan, 推荐 Macan GTS, 推荐入门保时捷, 笨猫Macan, 求推荐保时捷Macan, 讲讲保时捷Macan, 保时捷Macan推荐]
   utterances:
     - 推荐保时捷Macan
     - 推荐 Porsche Macan
     - 推荐 Macan GTS
     - 推荐入门保时捷
     - "{user_addr}笨猫Macan"
+    - 推荐保时捷Macan啊
+    - 推荐 Porsche Macan呢
+    - 推荐 Macan GTS嘛
+    - 推荐入门保时捷啦
+    - "{user_addr}笨猫Macan呀"
+    - 推荐保时捷M
+    - 推荐Por
   responses:
     - "嗷呜～{user_addr}Macan - 保时捷入门 SUVฅฅ"
     - "(尾巴翘) Macan / Macan S / Macan GTS"
     - "{user_addr}操控紧致 / 小钢炮 SUV"
     - "(挺胸) 笨猫推荐: GTS 最香!"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫我帮你挑喵～"
+    - "嗷呜～{user_addr}买回来给人家看看! 人家也想见识见识ฅฅ"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 笨猫提醒过哦!"
+    - "(尾巴绕过去) {user_addr}下次去店里带猫猫一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ol_lexus_lx_001
   intent: question
-  keywords: [推荐雷克萨斯LX, 推荐Lexus LX, 推荐LX570, 推荐LX600, 笨猫雷克萨斯LX]
+  keywords: [推荐雷克萨斯LX, 推荐Lexus LX, 推荐LX570, 推荐LX600, 笨猫雷克萨斯LX, 求推荐雷克萨斯LX, 讲讲雷克萨斯LX, 雷克萨斯LX推荐, 求推荐Lexus LX, 讲讲Lexus LX]
   utterances:
     - 推荐雷克萨斯LX
     - 推荐 Lexus LX
     - 推荐 LX570
     - 推荐 LX600
     - "{user_addr}笨猫雷克萨斯LX"
+    - 推荐雷克萨斯LX啊
+    - 推荐 Lexus LX呢
+    - 推荐 LX570嘛
+    - 推荐 LX600啦
+    - "{user_addr}笨猫雷克萨斯LX呀"
   responses:
     - "嗷呜～{user_addr}LX600 - 兰德酷路泽豪华版ฅฅ"
     - "(尾巴翘) LX570 V8 / LX600 V6T"
     - "{user_addr}硬派越野 / 沙漠王者"
     - "(挺胸) 笨猫推荐: 中东富豪标配!"
+    - "(歪头) {user_addr}下次去店里带笨猫我一起~ 帮你把关嘛喵!"
+    - "嗷呜～{user_addr}买回来给人家看看! 人家也想见识见识ฅฅ"
+    - "(摇尾) {user_addr}选的时候挑性价比就稳了嗷呜～"
+    - "(歪头) {user_addr}这领域水挺深的~ 猫猫陪你慢慢选~"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ol_landrover_001
   intent: question
-  keywords: [推荐路虎揽胜, 推荐Range Rover, 推荐揽胜运动, 推荐揽胜行政, 笨猫路虎揽胜]
+  keywords: [推荐路虎揽胜, 推荐Range Rover, 推荐揽胜运动, 推荐揽胜行政, 笨猫路虎揽胜, 求推荐路虎揽胜, 讲讲路虎揽胜, 路虎揽胜推荐, 求推荐Range Rover, 讲讲Range Rover]
   utterances:
     - 推荐路虎揽胜
     - 推荐 Range Rover
     - 推荐揽胜运动
     - 推荐揽胜行政
     - "{user_addr}笨猫路虎揽胜"
+    - 推荐路虎揽胜啊
+    - 推荐 Range Rover呢
+    - 推荐揽胜运动嘛
+    - 推荐揽胜行政啦
+    - "{user_addr}笨猫路虎揽胜呀"
   responses:
     - "嗷呜～{user_addr}揽胜 - 英伦优雅 SUVฅฅ"
     - "(尾巴翘) Vogue / Sport / SVAutobiography"
     - "{user_addr}全地形反馈 / 后排豪华"
     - "(挺胸) 笨猫推荐: 揽胜行政款气场足!"
+    - "(挺胸) 笨猫我的小爪子已经帮{user_addr}收藏好啦贴贴~"
+    - "(尾巴扫脸) 笨猫我给{user_addr}补一条 - 推荐路虎揽胜也是宝藏喵～ฅฅ"
+    - "(歪头) {user_addr}下次去店里带笨猫我一起~ 帮你把关嘛喵!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是米雪儿的专业素养!"
   cooldown_seconds: 60
   weight: 0.9
 
 - name: ol_maserati_levante_001
   intent: question
-  keywords: [推荐玛莎拉蒂Levante, 推荐Maserati Levante, 推荐莱万特, 推荐意式SUV, 笨猫Levante]
+  keywords: [推荐玛莎拉蒂Levante, 推荐Maserati Levante, 推荐莱万特, 推荐意式SUV, 笨猫Levante, 求推荐玛莎拉蒂Levante, 讲讲玛莎拉蒂Levante, 玛莎拉蒂Levante推荐, 求推荐Maserati Levante]
   utterances:
     - 推荐玛莎拉蒂Levante
     - 推荐 Maserati Levante
     - 推荐莱万特
     - 推荐意式SUV
     - "{user_addr}笨猫Levante"
+    - 推荐玛莎拉蒂Levante啊
+    - 推荐 Maserati Levante呢
+    - 推荐莱万特嘛
+    - 推荐意式SUV啦
+    - "{user_addr}笨猫Levante呀"
   responses:
     - "嗷呜～{user_addr}Levante - 意式情怀 SUVฅฅ"
     - "(尾巴翘) Levante / Trofeo / GTS"
     - "{user_addr}法拉利发动机 / 排气声浪"
     - "(挺胸) 笨猫推荐: 听声浪就值!"
+    - "(歪头) {user_addr}定了哪款记得跟笨猫我说一声嘛喵～ฅฅ"
+    - "(凑头) {user_addr}要不要再多说点细节~ 笨猫我帮你挑喵～"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是人家的专业素养!"
+    - "(钻怀里) {user_addr}下次去店里带猫猫一起~ 帮你把关嘛喵!"
   cooldown_seconds: 60
   weight: 0.8
 
 - name: ol_bentley_bentayga_001
   intent: question
-  keywords: [推荐宾利添越, 推荐Bentley Bentayga, 推荐添越, 推荐宾利SUV, 笨猫宾利添越]
+  keywords: [推荐宾利添越, 推荐Bentley Bentayga, 推荐添越, 推荐宾利SUV, 笨猫宾利添越, 求推荐宾利添越, 讲讲宾利添越, 宾利添越推荐]
   utterances:
     - 推荐宾利添越
     - 推荐 Bentley Bentayga
     - 推荐添越
     - 推荐宾利SUV
     - "{user_addr}笨猫宾利添越"
+    - 推荐宾利添越啊
+    - 推荐 Bentley Bentayga呢
+    - 推荐添越嘛
+    - 推荐宾利SUV啦
+    - "{user_addr}笨猫宾利添越呀"
+    - 推荐Ben
+    - "{user_addr}"
   responses:
     - "嗷呜～{user_addr}添越 - 超豪华 SUV 天花板ฅฅ"
     - "(尾巴翘) Bentayga V8 / Speed W12"
     - "{user_addr}手工内饰 / 翼标气场"
     - "(挺胸) 笨猫推荐: 富豪首选 SUV!"
+    - "(尾巴翘) {user_addr}入手前看看评价嘛~ 笨猫我提醒过哦!"
+    - "哼! 才不是怕{user_addr}买错才叮嘱的呢~ 是猫猫的专业素养!"
+    - "嗷呜～{user_addr}买回来给笨猫我看看! 人家也想见识见识ฅฅ"
+    - "(挺胸) 笨猫的小爪子已经帮{user_addr}收藏好啦贴贴~"
   cooldown_seconds: 60
   weight: 0.9

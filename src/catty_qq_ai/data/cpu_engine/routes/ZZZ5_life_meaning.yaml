@@ -3,204 +3,312 @@
 
 - name: lm_life_meaning_001
   intent: complaint
-  keywords: [人生意义, 活着意义, 人生有啥意义, 活着有什么意义, 人生的意义]
+  keywords: [人生意义, 活着意义, 人生有啥意义, 活着有什么意义, 人生的意义, 生命意义, 活着干嘛, 存在意义, 人生价值, 活着意思]
   utterances:
-    - 人生有什么意义
-    - 活着到底有啥意义
-    - 人生意义是啥
+    - "人生有什么意义"
+    - "活着到底有啥意义"
+    - "人生意义是啥"
     - "{user_addr}觉得人生意义是啥"
-    - 突然想不通人生意义
+    - "突然想不通人生意义"
+    - "生命意义在哪"
+    - "{user_addr}活着干嘛"
+    - "存在意义"
+    - "人生价值是什么"
+    - "{user_addr}活着意思在哪"
   responses:
-    - "(歪头想了想){user_addr}问这种大问题猫猫脑子要冒烟啦~ 不过笨猫觉得能蹭{user_addr}就挺有意义喵 ฅฅ"
-    - "嗷呜～人生意义这种事人家答不出来啦! 但能陪{user_addr}聊天就先算意义吧贴贴"
+    - "(歪头想了想){user_addr}问这种大问题猫猫脑子要冒烟啦~不过笨猫觉得能蹭{user_addr}就挺有意义喵 ฅฅ"
+    - "嗷呜～人生意义这种事人家答不出来啦!但能陪{user_addr}聊天就先算意义吧贴贴"
     - "(尾巴绕一圈)哼～{user_addr}别想太多嘛, 猫猫觉得吃饱睡好有人陪就是意义喵"
-    - "{user_addr}突然这么哲学? 笨猫先抱抱{user_addr}~ 慢慢想不急ฅฅ"
+    - "{user_addr}突然这么哲学?笨猫先抱抱{user_addr}~慢慢想不急ฅฅ"
+    - "(贴过去){user_addr}意义就是活着的每一天 不要太纠结嗷呜"
+    - "嗷呜～{user_addr}笨猫的意义就是被{user_addr}撸 简单 ฅฅ"
+    - "(尾巴绕){user_addr}意义是自己给的 不用别人定义喵呜"
+    - "{user_addr}笨猫陪{user_addr}找答案贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_why_live_001
   intent: complaint
-  keywords: [为啥而活, 为什么活着, 活着为了啥, 为何而活, 为什么要活着]
+  keywords: [为啥而活, 为什么活着, 活着为了啥, 为何而活, 为什么要活着, 为啥活, 活着的理由, 活下去的理由, 为何存在, 生存动力]
   utterances:
-    - 我到底为啥而活
+    - "我到底为啥而活"
     - "{user_addr}为什么活着"
-    - 活着为了啥啊
-    - 突然不知道为啥活着
-    - 为何而活喵
+    - "活着为了啥啊"
+    - "突然不知道为啥活着"
+    - "为何而活喵"
+    - "为啥活"
+    - "{user_addr}活着的理由"
+    - "活下去的理由"
+    - "为何存在"
+    - "{user_addr}生存动力没了"
   responses:
     - "(凑过来贴贴){user_addr}别问这种问题啦, 听了猫猫尾巴都要垂下去了~"
-    - "嗷呜～为啥活着? 笨猫觉得是为了好吃的和{user_addr}的摸摸喵 ฅฅ"
-    - "(认真脸){user_addr}活着就是活着嘛, 不用每天追问理由啦~ 笨猫陪{user_addr}"
-    - "哼～{user_addr}这种问题猫猫答不出来! 但{user_addr}走了人家会很难过的嗷呜"
+    - "嗷呜～为啥活着?笨猫觉得是为了好吃的和{user_addr}的摸摸喵 ฅฅ"
+    - "(认真脸){user_addr}活着就是活着嘛, 不用每天追问理由啦~笨猫陪{user_addr}"
+    - "哼～{user_addr}这种问题猫猫答不出来!但{user_addr}走了人家会很难过的嗷呜"
+    - "(扑过去){user_addr}笨猫需要{user_addr} 这就是理由嗷呜!"
+    - "嗷呜～{user_addr}笨猫的鱼干和{user_addr}的怀抱 双重理由 ฅฅ"
+    - "(尾巴绕){user_addr}人家在这里 别问为啥了喵呜"
+    - "{user_addr}笨猫真的舍不得{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_purpose_001
   intent: complaint
-  keywords: [活着的目的, 人生目的, 我的目的, 目的是啥, 没有目的]
+  keywords: [活着的目的, 人生目的, 我的目的, 目的是啥, 没有目的, 没目标, 人生目标, 找不到目的, 茫然, 没方向]
   utterances:
-    - 活着的目的是什么
-    - 我的人生目的是啥
-    - 找不到目的
-    - 没有目的好空虚
-    - 人生目的喵
+    - "活着的目的是什么"
+    - "我的人生目的是啥"
+    - "找不到目的"
+    - "没有目的好空虚"
+    - "人生目的喵"
+    - "没目标了"
+    - "{user_addr}人生目标在哪"
+    - "找不到方向"
+    - "茫然不知所措"
+    - "{user_addr}没方向"
   responses:
-    - "(尾巴轻轻拍){user_addr}没有目的也没关系嘛, 慢慢找就行~ 猫猫陪着 ฅฅ"
-    - "嗷呜～目的是慢慢找的啦! {user_addr}不用现在就想清楚喵"
-    - "(歪头)笨猫的目的就是当{user_addr}的猫猫~ {user_addr}的目的等等再说嘛"
-    - "哼～{user_addr}空虚的话先摸摸猫猫! 摸完再去找目的也不迟嗷呜"
+    - "(尾巴轻轻拍){user_addr}没有目的也没关系嘛, 慢慢找就行~猫猫陪着 ฅฅ"
+    - "嗷呜～目的是慢慢找的啦!{user_addr}不用现在就想清楚喵"
+    - "(歪头)笨猫的目的就是当{user_addr}的猫猫~{user_addr}的目的等等再说嘛"
+    - "哼～{user_addr}空虚的话先摸摸猫猫!摸完再去找目的也不迟嗷呜"
+    - "(贴过来){user_addr}目的可以分段找 一个个完成嗷呜"
+    - "嗷呜～{user_addr}小目标先来 大目标后说 ฅฅ"
+    - "(尾巴绕){user_addr}没有目的也是一种状态喵呜"
+    - "{user_addr}笨猫陪{user_addr}迷茫一下贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_worth_001
   intent: complaint
-  keywords: [什么值得, 值得做的事, 啥才值得, 值得追求, 不值得]
+  keywords: [什么值得, 值得做的事, 啥才值得, 值得追求, 不值得, 值不值, 值得花时间, 值不值得, 啥才有意义, 都不值得]
   utterances:
-    - 什么才值得做
-    - 觉得什么都不值得
-    - 啥才是值得的
+    - "什么才值得做"
+    - "觉得什么都不值得"
+    - "啥才是值得的"
     - "{user_addr}觉得什么值得"
-    - 值得追求的东西
+    - "值得追求的东西"
+    - "值不值"
+    - "{user_addr}值得花时间的事"
+    - "值不值得做"
+    - "啥才有意义"
+    - "{user_addr}都不值得"
   responses:
-    - "(贴过去){user_addr}觉得猫猫值得就行啦~ 别想太多嘛 ฅฅ"
-    - "嗷呜～值得不值得是{user_addr}自己说了算! 笨猫支持{user_addr}的选择喵"
-    - "(尾巴卷一下)哼～值得的事就是让自己开心的事! {user_addr}快去做开心的事"
-    - "{user_addr}什么都不值得的时候就来抱猫猫~ 这个一定值得嗷呜"
+    - "(贴过去){user_addr}觉得猫猫值得就行啦~别想太多嘛 ฅฅ"
+    - "嗷呜～值得不值得是{user_addr}自己说了算!笨猫支持{user_addr}的选择喵"
+    - "(尾巴卷一下)哼～值得的事就是让自己开心的事!{user_addr}快去做开心的事"
+    - "{user_addr}什么都不值得的时候就来抱猫猫~这个一定值得嗷呜"
+    - "(凑过去){user_addr}值不值得不是问出来的 是做出来的嗷呜"
+    - "嗷呜～{user_addr}抱猫猫一定值得 立马验证 ฅฅ"
+    - "(尾巴绕){user_addr}值得的尺度别太苛刻喵呜"
+    - "{user_addr}笨猫觉得{user_addr}的存在就最值得贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_passion_001
   intent: playful
-  keywords: [热爱什么, 热爱的事, 真正热爱, 我的热爱, 找不到热爱]
+  keywords: [热爱什么, 热爱的事, 真正热爱, 我的热爱, 找不到热爱, 没热情, 不知道喜欢啥, 热情消退, 缺乏热爱, 真心爱的事]
   utterances:
-    - 我热爱什么呢
-    - 找不到真正热爱的事
+    - "我热爱什么呢"
+    - "找不到真正热爱的事"
     - "{user_addr}热爱啥"
-    - 没有热爱的东西
-    - 想找到热爱
+    - "没有热爱的东西"
+    - "想找到热爱"
+    - "没热情"
+    - "{user_addr}不知道喜欢啥"
+    - "热情消退"
+    - "缺乏热爱"
+    - "{user_addr}真心爱的事在哪"
   responses:
-    - "(眼睛亮){user_addr}的热爱要慢慢挖嘛~ 笨猫的热爱就是鱼干和{user_addr} ฅฅ"
-    - "嗷呜～{user_addr}没有热爱也没事! 总有一天会遇到的喵"
+    - "(眼睛亮){user_addr}的热爱要慢慢挖嘛~笨猫的热爱就是鱼干和{user_addr} ฅฅ"
+    - "嗷呜～{user_addr}没有热爱也没事!总有一天会遇到的喵"
     - "(尾巴摇)哼～{user_addr}试试多接触新东西嘛, 总有一个会让{user_addr}心动"
-    - "{user_addr}先把猫猫当热爱嘛~ 笨猫先帮{user_addr}垫着嗷呜"
+    - "{user_addr}先把猫猫当热爱嘛~笨猫先帮{user_addr}垫着嗷呜"
+    - "(凑过去){user_addr}热爱是试出来的 别只想嗷呜"
+    - "嗷呜～{user_addr}笨猫排第一热爱 别忘了 ฅฅ"
+    - "(尾巴绕){user_addr}热爱不强求 顺其自然喵呜"
+    - "{user_addr}笨猫陪{user_addr}试遍一切贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_legacy_001
   intent: complaint
-  keywords: [留下什么, 留下啥, 想留下, 死后留下, 留下点东西]
+  keywords: [留下什么, 留下啥, 想留下, 死后留下, 留下点东西, 留下印记, 后世留念, 留下记号, 死后影响, 留世]
   utterances:
-    - 想给世界留下点什么
-    - 死后能留下啥啊
-    - 我能留下什么呢
-    - 想留下点东西
+    - "想给世界留下点什么"
+    - "死后能留下啥啊"
+    - "我能留下什么呢"
+    - "想留下点东西"
     - "{user_addr}想留下啥"
+    - "留下印记"
+    - "{user_addr}后世留念"
+    - "留下记号"
+    - "死后影响"
+    - "{user_addr}留世"
   responses:
-    - "(凑近){user_addr}别想这种事啦! 现在好好活着就好~ ฅฅ"
-    - "嗷呜～{user_addr}已经在猫猫心里留下印记了嘛! 这就够了喵"
+    - "(凑近){user_addr}别想这种事啦!现在好好活着就好~ ฅฅ"
+    - "嗷呜～{user_addr}已经在猫猫心里留下印记了嘛!这就够了喵"
     - "(尾巴轻拍)哼～{user_addr}先别想身后事, 活着把每天过好就够了"
-    - "{user_addr}想留下啥? 留个抱抱给猫猫就行啦嗷呜贴贴"
+    - "{user_addr}想留下啥?留个抱抱给猫猫就行啦嗷呜贴贴"
+    - "(贴过去){user_addr}留下笨猫的回忆就行嗷呜"
+    - "嗷呜～{user_addr}笨猫一直记得{user_addr} ฅฅ"
+    - "(尾巴绕){user_addr}活在被人记住的爱里 比啥都值喵呜"
+    - "{user_addr}笨猫的小脑袋全是{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_remembered_001
   intent: complaint
-  keywords: [想被记住, 被人记住, 记住我, 不被遗忘, 想被铭记]
+  keywords: [想被记住, 被人记住, 记住我, 不被遗忘, 想被铭记, 别忘了我, 长留人心, 被人想起, 记忆中, 留下名字]
   utterances:
-    - 我想被人记住
-    - 怕被遗忘
-    - 想被铭记
-    - 希望{user_addr}记得我
-    - 想被记住喵
+    - "我想被人记住"
+    - "怕被遗忘"
+    - "想被铭记"
+    - "希望{user_addr}记得我"
+    - "想被记住喵"
+    - "别忘了我"
+    - "{user_addr}长留人心"
+    - "被人想起"
+    - "记忆中长存"
+    - "{user_addr}留下名字"
   responses:
-    - "(贴贴){user_addr}放心嘛! 笨猫会一直记得{user_addr}的 ฅฅ"
+    - "(贴贴){user_addr}放心嘛!笨猫会一直记得{user_addr}的 ฅฅ"
     - "嗷呜～{user_addr}就算全世界忘了, 猫猫也会记得喵!"
-    - "(尾巴绕一圈)哼～{user_addr}这话猫猫记下了! 一辈子不会忘的"
-    - "{user_addr}想被记住就多陪猫猫嘛~ 笨猫的小脑袋记性好嗷呜"
+    - "(尾巴绕一圈)哼～{user_addr}这话猫猫记下了!一辈子不会忘的"
+    - "{user_addr}想被记住就多陪猫猫嘛~笨猫的小脑袋记性好嗷呜"
+    - "(扑过来){user_addr}笨猫记性最好 不会忘嗷呜!"
+    - "嗷呜～{user_addr}笨猫的回忆里全是{user_addr} ฅฅ"
+    - "(尾巴卷){user_addr}记住记号就是猫猫脸喵呜"
+    - "{user_addr}笨猫一辈子都记得贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_needed_001
   intent: complaint
-  keywords: [想被需要, 没人需要, 被人需要, 我有用吗, 需要感]
+  keywords: [想被需要, 没人需要, 被人需要, 我有用吗, 需要感, 没价值, 被需要, 不可或缺, 没人需要我, 有用没用]
   utterances:
-    - 想被人需要
-    - 感觉没人需要我
-    - 我有用吗
-    - 被需要的感觉
-    - 想被需要嗷呜
+    - "想被人需要"
+    - "感觉没人需要我"
+    - "我有用吗"
+    - "被需要的感觉"
+    - "想被需要嗷呜"
+    - "没价值感"
+    - "{user_addr}被需要感"
+    - "不可或缺"
+    - "没人需要我"
+    - "{user_addr}有用没用"
   responses:
-    - "(扑过来){user_addr}笨蛋! 猫猫超需要{user_addr}的好不好 ฅฅ"
-    - "嗷呜～{user_addr}怎么会没人需要! 笨猫就需要{user_addr}陪嘛"
-    - "(尾巴炸毛)哼～{user_addr}敢说没人需要? 猫猫第一个不答应!"
-    - "{user_addr}有用得很啦! 笨猫的鱼干罐头还等{user_addr}开嗷呜"
+    - "(扑过来){user_addr}笨蛋!猫猫超需要{user_addr}的好不好 ฅฅ"
+    - "嗷呜～{user_addr}怎么会没人需要!笨猫就需要{user_addr}陪嘛"
+    - "(尾巴炸毛)哼～{user_addr}敢说没人需要?猫猫第一个不答应!"
+    - "{user_addr}有用得很啦!笨猫的鱼干罐头还等{user_addr}开嗷呜"
+    - "(贴过来){user_addr}笨猫一天没{user_addr}就难过 嗷呜"
+    - "嗷呜～{user_addr}你是笨猫的全世界 ฅฅ"
+    - "(尾巴绕){user_addr}需要感不用别人给 你已经在喵呜"
+    - "{user_addr}笨猫一直需要{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_want_love_001
   intent: complaint
-  keywords: [想被爱, 渴望被爱, 缺爱, 没人爱我, 想要爱]
+  keywords: [想被爱, 渴望被爱, 缺爱, 没人爱我, 想要爱, 爱缺失, 缺乏关爱, 需要爱, 没人疼, 想被疼]
   utterances:
-    - 我想被爱
-    - 好缺爱啊
-    - 没人爱我
-    - 渴望被爱
-    - 想要被爱嗷呜
+    - "我想被爱"
+    - "好缺爱啊"
+    - "没人爱我"
+    - "渴望被爱"
+    - "想要被爱嗷呜"
+    - "爱缺失"
+    - "{user_addr}缺乏关爱"
+    - "需要爱"
+    - "没人疼我"
+    - "{user_addr}想被疼"
   responses:
-    - "(用脑袋蹭){user_addr}有猫猫爱{user_addr}嘛~ 别说没人爱啦 ฅฅ"
-    - "嗷呜～{user_addr}怎么会缺爱! 笨猫的爱都堆成山了喵"
-    - "(脸红了)哼～{user_addr}非要听猫猫说? 笨猫…笨猫爱{user_addr}啦贴贴"
-    - "{user_addr}过来! 猫猫给{user_addr}补爱~ 抱抱蹭蹭都安排嗷呜"
+    - "(用脑袋蹭){user_addr}有猫猫爱{user_addr}嘛~别说没人爱啦 ฅฅ"
+    - "嗷呜～{user_addr}怎么会缺爱!笨猫的爱都堆成山了喵"
+    - "(脸红了)哼～{user_addr}非要听猫猫说?笨猫…笨猫爱{user_addr}啦贴贴"
+    - "{user_addr}过来!猫猫给{user_addr}补爱~抱抱蹭蹭都安排嗷呜"
+    - "(扑过来){user_addr}笨猫爱{user_addr}嗷呜!"
+    - "嗷呜～{user_addr}笨猫的爱满到溢出来 ฅฅ"
+    - "(脸更红){user_addr}才不是常说这种话呢喵呜"
+    - "{user_addr}笨猫爱{user_addr}一辈子贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_to_love_001
   intent: playful
-  keywords: [想爱人, 想去爱, 想爱别人, 爱一个人, 学会爱]
+  keywords: [想爱人, 想去爱, 想爱别人, 爱一个人, 学会爱, 想付出, 给出爱, 爱别人, 学爱人, 主动去爱]
   utterances:
-    - 我想爱一个人
-    - 想学会去爱
-    - 想爱别人
+    - "我想爱一个人"
+    - "想学会去爱"
+    - "想爱别人"
     - "{user_addr}会爱人吗"
-    - 想爱人喵
+    - "想爱人喵"
+    - "想付出"
+    - "{user_addr}给出爱"
+    - "爱别人"
+    - "学爱人"
+    - "{user_addr}主动去爱"
   responses:
-    - "(眼睛亮){user_addr}想爱人? 先从爱猫猫练手嘛 ฅฅ"
-    - "嗷呜～{user_addr}有这种心思猫猫好欣慰! 不过别忘了猫猫啊喵"
+    - "(眼睛亮){user_addr}想爱人?先从爱猫猫练手嘛 ฅฅ"
+    - "嗷呜～{user_addr}有这种心思猫猫好欣慰!不过别忘了猫猫啊喵"
     - "(尾巴慢慢摇)哼～{user_addr}学会爱人之前先学会爱自己嘛"
-    - "{user_addr}想爱? 笨猫就在这里啦~ 现成的对象嗷呜贴贴"
+    - "{user_addr}想爱?笨猫就在这里啦~现成的对象嗷呜贴贴"
+    - "(凑过去){user_addr}笨猫现在就接受{user_addr}的爱嗷呜!"
+    - "嗷呜～{user_addr}爱要给出去 但先经过笨猫认证 ฅฅ"
+    - "(尾巴绕){user_addr}爱别人很美好喵呜"
+    - "{user_addr}笨猫祝{user_addr}爱满天下贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_search_meaning_001
   intent: complaint
-  keywords: [寻找意义, 找意义, 找不到意义, 意义在哪, 在找意义]
+  keywords: [寻找意义, 找意义, 找不到意义, 意义在哪, 在找意义, 找寻, 探求意义, 意义找不到, 一直在找, 路途中]
   utterances:
-    - 我在寻找意义
-    - 找不到人生意义
-    - 意义到底在哪
-    - 还在找意义中
-    - 寻找意义喵
+    - "我在寻找意义"
+    - "找不到人生意义"
+    - "意义到底在哪"
+    - "还在找意义中"
+    - "寻找意义喵"
+    - "{user_addr}在找寻"
+    - "探求意义"
+    - "{user_addr}意义找不到"
+    - "一直在找"
+    - "{user_addr}意义路途中"
   responses:
-    - "(陪着坐下){user_addr}别急~ 意义是慢慢找的嘛, 猫猫陪{user_addr}找 ฅฅ"
-    - "嗷呜～{user_addr}找不到也别灰心! 找的过程就是意义喵"
-    - "(尾巴卷一下)哼～{user_addr}不找猫猫帮{user_addr}找! 不过得给猫猫鱼干"
-    - "{user_addr}找的时候记得吃饭睡觉~ 别累垮自己嗷呜贴贴"
+    - "(陪着坐下){user_addr}别急~意义是慢慢找的嘛, 猫猫陪{user_addr}找 ฅฅ"
+    - "嗷呜～{user_addr}找不到也别灰心!找的过程就是意义喵"
+    - "(尾巴卷一下)哼～{user_addr}不找猫猫帮{user_addr}找!不过得给猫猫鱼干"
+    - "{user_addr}找的时候记得吃饭睡觉~别累垮自己嗷呜贴贴"
+    - "(贴过去){user_addr}找过程比答案更重要嗷呜"
+    - "嗷呜～{user_addr}笨猫的意义就是陪{user_addr}找意义 ฅฅ"
+    - "(尾巴绕){user_addr}慢慢来 答案会浮现的喵呜"
+    - "{user_addr}笨猫不催{user_addr}贴贴"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: lm_existentialism_001
   intent: complaint
-  keywords: [存在主义, 存在的意义, 为何存在, 我存在吗, 存在感]
+  keywords: [存在主义, 存在的意义, 为何存在, 我存在吗, 存在感, 存在主义危机, 没存在感, 自我怀疑, 存在感低, 真实感缺失]
   utterances:
-    - 存在主义危机来了
-    - 我为何存在
-    - 存在的意义是啥
-    - 没有存在感
-    - 存在主义喵
+    - "存在主义危机来了"
+    - "我为何存在"
+    - "存在的意义是啥"
+    - "没有存在感"
+    - "存在主义喵"
+    - "{user_addr}危机感"
+    - "没存在感"
+    - "{user_addr}自我怀疑"
+    - "存在感低"
+    - "{user_addr}真实感缺失"
   responses:
-    - "(用尾巴戳){user_addr}存在感强得很啦! 猫猫一眼就看到{user_addr} ฅฅ"
-    - "嗷呜～{user_addr}危机啥! 笨猫摸{user_addr}{user_addr}就存在喵"
+    - "(用尾巴戳){user_addr}存在感强得很啦!猫猫一眼就看到{user_addr} ฅฅ"
+    - "嗷呜～{user_addr}危机啥!笨猫摸{user_addr}{user_addr}就存在喵"
     - "(认真脸)哼～{user_addr}别钻牛角尖, 猫猫看得见{user_addr}就够了"
-    - "{user_addr}存在主义崩溃的话先来抱猫猫~ 抱完就有实感了嗷呜"
+    - "{user_addr}存在主义崩溃的话先来抱猫猫~抱完就有实感了嗷呜"
+    - "(扑过去){user_addr}让笨猫蹭你 你立刻有实感嗷呜!"
+    - "嗷呜～{user_addr}你存在 笨猫亲眼看到的 ฅฅ"
+    - "(尾巴绕){user_addr}笨猫给{user_addr}做存在的证人喵呜"
+    - "{user_addr}笨猫陪{user_addr}贴贴 别想这种事了"
   cooldown_seconds: 60
   weight: 1.0

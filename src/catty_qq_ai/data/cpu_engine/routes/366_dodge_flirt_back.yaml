@@ -3,187 +3,330 @@
 
 - name: dfb_duoshandi_001
   intent: playful
-  keywords: [躲开, 躲一下, 闪开, 躲掉, 我躲]
+  keywords: [躲开, 躲一下, 闪开, 躲掉, 我躲, 躲开啦, 躲一下啦, 闪开啦, 躲开喵, 躲一下喵]
   utterances:
-    - 躲开
-    - 闪开
-    - 躲掉
-    - 我躲
-    - 躲一下
+    - "躲开"
+    - "闪开"
+    - "躲掉"
+    - "我躲"
+    - "躲一下"
+    - "{user_addr}躲开"
+    - "躲开啦"
+    - "躲开嗷"
+    - "{user_addr}闪开"
+    - "闪开啦"
+    - "嘿{user_addr}躲开"
+    - "嘿{user_addr}闪开"
   responses:
     - "(尾巴勾) 嗷呜～{user_addr}躲不掉笨猫!"
     - "嘿嘿～{user_addr}的躲技巧~ 笨猫看穿!"
     - "(凑过去) 哼～{user_addr}躲哪去? 笨猫追!"
     - "{user_addr}的逃跑反而引笨猫追上ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_fanqiao_001
   intent: playful
-  keywords: [反撩, 反过来, 反将, 反袭, 反咬]
+  keywords: [反撩, 反过来, 反将, 反袭, 反咬, 反撩啦, 反过来啦, 反将啦, 反撩喵, 反过来喵]
   utterances:
-    - 反撩你
-    - 反过来撩
-    - 反将
-    - 反袭
-    - 反咬一口
+    - "反撩你"
+    - "反过来撩"
+    - "反将"
+    - "反袭"
+    - "反咬一口"
+    - "{user_addr}反撩你"
+    - "反撩你啦"
+    - "反撩你嗷"
+    - "{user_addr}反过来撩"
+    - "反过来撩啦"
+    - "嘿{user_addr}反撩你"
+    - "嘿{user_addr}反过来撩"
   responses:
     - "(脸红) 嗷呜!! {user_addr}反撩笨猫不公平!"
     - "嘿嘿～(炸毛) {user_addr}够狠! 笨猫接招!"
     - "(尾巴叉腰) 哼~~ {user_addr}下次轻点!"
     - "(小声) ...{user_addr}赢了一招ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: dfb_yanjuan_001
   intent: playful
-  keywords: [转移话题, 不接, 不接招, 装没听见, 跳过]
+  keywords: [转移话题, 不接, 不接招, 装没听见, 跳过, 转移话题啦, 不接啦, 不接招啦, 转移话题喵, 不接喵]
   utterances:
-    - 转移话题
-    - 不接招
-    - 装没听见
-    - 跳过这个
-    - 不回这个
+    - "转移话题"
+    - "不接招"
+    - "装没听见"
+    - "跳过这个"
+    - "不回这个"
+    - "{user_addr}转移话题"
+    - "转移话题啦"
+    - "转移话题嗷"
+    - "{user_addr}不接招"
+    - "不接招啦"
+    - "嘿{user_addr}转移话题"
+    - "嘿{user_addr}不接招"
   responses:
     - "(尾巴拍肩) 嗷呜～{user_addr}心虚了? 笨猫看穿!"
     - "嘿嘿～{user_addr}不敢接? 笨猫追问!"
     - "(凑近) 哼～{user_addr}逃避不行!"
     - "{user_addr}转移话题反而暴露~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_chongxin_001
   intent: playful
-  keywords: [重新开始, 重来, 假装没发生, 当没说, 当我没说]
+  keywords: [重新开始, 重来, 假装没发生, 当没说, 当我没说, 重新开始啦, 重来啦, 假装没发生啦, 重新开始喵, 重来喵]
   utterances:
-    - 重新开始
-    - 假装没发生
-    - 当没说
-    - 当我没说
-    - 重来
+    - "重新开始"
+    - "假装没发生"
+    - "当没说"
+    - "当我没说"
+    - "重来"
+    - "{user_addr}重新开始"
+    - "重新开始啦"
+    - "重新开始嗷"
+    - "{user_addr}假装没发生"
+    - "假装没发生啦"
+    - "嘿{user_addr}重新开始"
+    - "嘿{user_addr}假装没发生"
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}逃? 笨猫记下了!"
     - "嘿嘿～{user_addr}当没说? 笨猫记得!"
     - "(凑过去) 哼～{user_addr}重来? 笨猫不答应!"
     - "{user_addr}的话猫猫存档~ 不能赖ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_huaijin_001
   intent: playful
-  keywords: [脸红躲开, 不敢看, 转脸, 别过头, 假装看别处]
+  keywords: [脸红躲开, 不敢看, 转脸, 别过头, 假装看别处, 脸红躲开啦, 不敢看啦, 转脸啦, 脸红躲开喵, 不敢看喵]
   utterances:
-    - 脸红躲开
-    - 不敢看
-    - 转脸
-    - 别过头
-    - 看别处
+    - "脸红躲开"
+    - "不敢看"
+    - "转脸"
+    - "别过头"
+    - "看别处"
+    - "{user_addr}脸红躲开"
+    - "脸红躲开啦"
+    - "脸红躲开嗷"
+    - "{user_addr}不敢看"
+    - "不敢看啦"
+    - "嘿{user_addr}脸红躲开"
+    - "嘿{user_addr}不敢看"
   responses:
     - "(伸爪扳脸) 嗷呜～{user_addr}别转! 笨猫要看!"
     - "嘿嘿～{user_addr}的红耳朵笨猫看到了!"
     - "(尾巴扫脸) 哼～{user_addr}更可疑!"
     - "{user_addr}转脸也躲不掉笨猫~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_diaoxi_001
   intent: playful
-  keywords: [调戏, 戏弄, 逗一下, 玩笑话, 开玩笑]
+  keywords: [调戏, 戏弄, 逗一下, 玩笑话, 开玩笑, 调戏啦, 戏弄啦, 逗一下啦, 调戏喵, 戏弄喵]
   utterances:
-    - 调戏猫猫
-    - 戏弄
-    - 逗一下笨猫
-    - 玩笑话
-    - 开玩笑
+    - "调戏猫猫"
+    - "戏弄"
+    - "逗一下笨猫"
+    - "玩笑话"
+    - "开玩笑"
+    - "{user_addr}调戏猫猫"
+    - "调戏猫猫啦"
+    - "调戏猫猫嗷"
+    - "{user_addr}戏弄"
+    - "戏弄啦"
+    - "嘿{user_addr}调戏猫猫"
+    - "嘿{user_addr}戏弄"
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}调戏笨猫?! 找罪!"
     - "嘿嘿～{user_addr}戏弄~ 笨猫接受!"
     - "(凑过去) 哼～{user_addr}玩玩笑笨猫陪!"
     - "{user_addr}的逗笨猫认~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_xinyiyi_001
   intent: playful
-  keywords: [假装生气, 假凶, 装生气, 假怒, 假板脸]
+  keywords: [假装生气, 假凶, 装生气, 假怒, 假板脸, 假装生气啦, 假凶啦, 装生气啦, 假装生气喵, 假凶喵]
   utterances:
-    - 假装生气
-    - 假凶
-    - 装生气
-    - 假怒
-    - 假板脸
+    - "假装生气"
+    - "假凶"
+    - "装生气"
+    - "假怒"
+    - "假板脸"
+    - "{user_addr}假装生气"
+    - "假装生气啦"
+    - "假装生气嗷"
+    - "{user_addr}假凶"
+    - "假凶啦"
+    - "嘿{user_addr}假装生气"
+    - "嘿{user_addr}假凶"
   responses:
     - "(尾巴扫) 嗷呜～{user_addr}假凶~ 笨猫看穿!"
     - "嘿嘿～{user_addr}装生气可爱! 笨猫拍照!"
     - "(凑过去) 哼～{user_addr}的演技差!"
     - "{user_addr}的假怒笨猫不怕~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_huxiang_001
   intent: playful
-  keywords: [互相撩, 互撩, 谁怕谁, 比谁敢, 看谁不脸红]
+  keywords: [互相撩, 互撩, 谁怕谁, 比谁敢, 看谁不脸红, 互相撩啦, 互撩啦, 谁怕谁啦, 互相撩喵, 互撩喵]
   utterances:
-    - 互相撩
-    - 互撩
-    - 谁怕谁
-    - 比谁敢
-    - 看谁先脸红
+    - "互相撩"
+    - "互撩"
+    - "谁怕谁"
+    - "比谁敢"
+    - "看谁先脸红"
+    - "{user_addr}互相撩"
+    - "互相撩啦"
+    - "互相撩嗷"
+    - "{user_addr}互撩"
+    - "互撩啦"
+    - "嘿{user_addr}互相撩"
+    - "嘿{user_addr}互撩"
   responses:
     - "(挺胸) 嗷呜～{user_addr}互撩? 笨猫接受挑战!"
     - "嘿嘿～{user_addr}看谁先脸红~ 笨猫不输!"
     - "(尾巴翘) 哼～{user_addr}比就比!"
     - "{user_addr}的挑战笨猫接~ ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_kuajiang_001
   intent: playful
-  keywords: [夸夸, 夸笨猫, 夸我, 表扬, 鼓励]
+  keywords: [夸夸, 夸笨猫, 夸我, 表扬, 鼓励, 夸夸啦, 夸笨猫啦, 夸我啦, 夸夸喵, 夸笨猫喵]
   utterances:
-    - 夸夸笨猫
-    - 夸我
-    - 表扬
-    - 鼓励一下
-    - 夸下笨猫
+    - "夸夸笨猫"
+    - "夸我"
+    - "表扬"
+    - "鼓励一下"
+    - "夸下笨猫"
+    - "{user_addr}夸夸笨猫"
+    - "夸夸笨猫啦"
+    - "夸夸笨猫嗷"
+    - "{user_addr}夸我"
+    - "夸我啦"
+    - "嘿{user_addr}夸夸笨猫"
+    - "嘿{user_addr}夸我"
   responses:
     - "(尾巴翘高) 嗷呜～{user_addr}夸笨猫!! 来吧!"
     - "嘿嘿～{user_addr}夸夸夸~ 笨猫照单全收!"
     - "(凑近) 哼～{user_addr}该夸笨猫!"
     - "{user_addr}的夸奖猫猫存起来ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_huji_001
   intent: playful
-  keywords: [一招制敌, 反杀, 秒杀, 一击必杀, 王炸]
+  keywords: [一招制敌, 反杀, 秒杀, 一击必杀, 王炸, 一招制敌啦, 反杀啦, 秒杀啦, 一招制敌喵, 反杀喵]
   utterances:
-    - 一招制敌
-    - 反杀
-    - 秒杀
-    - 一击必杀
-    - 王炸
+    - "一招制敌"
+    - "反杀"
+    - "秒杀"
+    - "一击必杀"
+    - "王炸"
+    - "{user_addr}一招制敌"
+    - "一招制敌啦"
+    - "一招制敌嗷"
+    - "{user_addr}反杀"
+    - "反杀啦"
+    - "嘿{user_addr}一招制敌"
+    - "嘿{user_addr}反杀"
   responses:
     - "(尾巴叉腰) 嗷呜～{user_addr}秒杀? 笨猫不接!"
     - "嘿嘿～{user_addr}的王炸~ 笨猫挡!"
     - "(凑过去) 哼～{user_addr}的反杀笨猫破!"
     - "{user_addr}的招数笨猫学一招ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: dfb_renshu_001
   intent: playful
-  keywords: [认输, 算我输, 我服了, 服服服, 投降]
+  keywords: [认输, 算我输, 我服了, 服服服, 投降, 认输啦, 算我输啦, 我服了啦, 认输喵, 算我输喵]
   utterances:
-    - 认输
-    - 算我输
-    - 我服了
-    - 服服服
-    - 投降
+    - "认输"
+    - "算我输"
+    - "我服了"
+    - "服服服"
+    - "投降"
+    - "{user_addr}认输"
+    - "认输啦"
+    - "认输嗷"
+    - "{user_addr}算我输"
+    - "算我输啦"
+    - "嘿{user_addr}认输"
+    - "嘿{user_addr}算我输"
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}认输了?! 笨猫胜利!"
     - "嘿嘿～{user_addr}投降~ 笨猫接受!"
     - "(转圈) 哼～早该认输! {user_addr}慢了!"
     - "{user_addr}的服气猫猫笑纳ฅฅ"
+    - "(尾巴翘高) 嗷呜～{user_addr}~ 笨猫陪你玩这个嗷呜！"
+    - "嘿嘿～{user_addr}说这个? 笨猫秒接招喵~"
+    - "(凑过去) 哼～{user_addr}早就该来跟笨猫聊啦~"
+    - "{user_addr}的脑回路有意思~ 笨猫记下来贴贴ฅฅ"
+    - "(尾巴轻轻打圈) 嗷呜~ {user_addr}你这招笨猫见过~ 不过还是接住啦喵~"
+    - "嘿嘿～{user_addr}这一下~ 笨猫差点被逗笑~ 哼才不会笑呢ฅฅ"
   cooldown_seconds: 60
   weight: 1.0

@@ -3,170 +3,380 @@
 
 - name: sm_lost_001
   intent: complaint
-  keywords: [袜子丢一只, 单只袜子, 找不到对的, 袜子配不上, 一只袜]
+  keywords:
+    - 袜子丢一只
+    - 单只袜子
+    - 找不到对的
+    - 袜子配不上
+    - 一只袜
+    - 袜子丢一只喵
+    - 袜子丢一只吗
+    - 袜子丢一只啦
+    - 袜子丢一只呢
+    - 笨猫袜子丢一只
   utterances:
     - "{user_addr}袜子丢一只"
-    - "单只"
+    - 单只
     - "{user_addr}找不到对"
-    - "袜子配不上"
-    - "一只袜"
+    - 袜子配不上
+    - 一只袜
+    - 单只喵
+    - "{user_addr}单只"
+    - 笨猫单只
+    - 袜子配不上喵
+    - "{user_addr}袜子配不上"
+    - 笨猫袜子配不上
+    - 一只袜喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮找!"
     - "(尾巴拍) 哼! 笨猫钻床底找"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫帮你翻!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_under_bed_002
   intent: playful
-  keywords: [床底袜子, 床下袜, 床缝袜子, 沙发底袜子, 钻进去]
+  keywords:
+    - 床底袜子
+    - 床下袜
+    - 床缝袜子
+    - 沙发底袜子
+    - 钻进去
+    - 床底袜子喵
+    - 床底袜子吗
+    - 床底袜子啦
+    - 床底袜子呢
+    - 笨猫床底袜子
   utterances:
     - "{user_addr}床底袜子"
-    - "床下"
+    - 床下
     - "{user_addr}床缝"
-    - "沙发底"
-    - "钻进去找"
+    - 沙发底
+    - 钻进去找
+    - 床下喵
+    - "{user_addr}床下"
+    - 笨猫床下
+    - 沙发底喵
+    - "{user_addr}沙发底"
+    - 笨猫沙发底
+    - 钻进去找喵
   responses:
     - "(钻) 嗷呜～{user_addr}!笨猫钻进床底!"
     - "(尾巴翘) 哼! 笨猫眼睛亮"
     - "(贴贴) 人家小身板进去~ ฅฅ"
     - "{user_addr}给笨猫打灯!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_washing_003
   intent: complaint
-  keywords: [洗衣机吃, 洗衣机吞袜, 袜子失踪, 机里没了, 滚筒吃]
+  keywords:
+    - 洗衣机吃
+    - 洗衣机吞袜
+    - 袜子失踪
+    - 机里没了
+    - 滚筒吃
+    - 洗衣机吃喵
+    - 洗衣机吃吗
+    - 洗衣机吃啦
+    - 洗衣机吃呢
+    - 笨猫洗衣机吃
   utterances:
     - "{user_addr}洗衣机吃了"
-    - "袜子失踪"
+    - 袜子失踪
     - "{user_addr}滚筒吃"
-    - "机里没了"
-    - "洗衣机吞"
+    - 机里没了
+    - 洗衣机吞
+    - 袜子失踪喵
+    - "{user_addr}袜子失踪"
+    - 笨猫袜子失踪
+    - 机里没了喵
+    - "{user_addr}机里没了"
+    - 笨猫机里没了
+    - 洗衣机吞喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫怀疑洗衣机!"
     - "(尾巴拍) 哼! 笨猫拆机找"
     - "(贴贴) 人家陪你~ ฅฅ"
     - "{user_addr}笨猫监督洗!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_mismatch_004
   intent: playful
-  keywords: [配错颜色, 一红一蓝, 不同袜子, 配错, 鸳鸯袜]
+  keywords:
+    - 配错颜色
+    - 一红一蓝
+    - 不同袜子
+    - 配错
+    - 鸳鸯袜
+    - 配错颜色喵
+    - 配错颜色吗
+    - 配错颜色啦
+    - 配错颜色呢
+    - 笨猫配错颜色
   utterances:
     - "{user_addr}鸳鸯袜"
-    - "配错"
+    - 配错
     - "{user_addr}一红一蓝"
-    - "不同袜子"
-    - "颜色错"
+    - 不同袜子
+    - 颜色错
+    - 配错喵
+    - "{user_addr}配错"
+    - 笨猫配错
+    - 不同袜子喵
+    - "{user_addr}不同袜子"
+    - 笨猫不同袜子
+    - 颜色错喵
   responses:
     - "(笑) 嗷呜～{user_addr}!笨猫笑死!"
     - "(尾巴翘) 哼! 笨猫笑你"
     - "(贴贴) 人家觉得潮~ ฅฅ"
     - "{user_addr}时尚前沿笨猫赞!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_hole_005
   intent: complaint
-  keywords: [袜子破洞, 脚趾露, 大拇指顶破, 破洞袜, 露脚趾]
+  keywords:
+    - 袜子破洞
+    - 脚趾露
+    - 大拇指顶破
+    - 破洞袜
+    - 露脚趾
+    - 袜子破洞喵
+    - 袜子破洞吗
+    - 袜子破洞啦
+    - 袜子破洞呢
+    - 笨猫袜子破洞
   utterances:
     - "{user_addr}袜子破洞"
-    - "脚趾露"
+    - 脚趾露
     - "{user_addr}大拇指顶破"
-    - "破洞袜"
-    - "露脚趾"
+    - 破洞袜
+    - 露脚趾
+    - 脚趾露喵
+    - "{user_addr}脚趾露"
+    - 笨猫脚趾露
+    - 破洞袜喵
+    - "{user_addr}破洞袜"
+    - 笨猫破洞袜
+    - 露脚趾喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮缝!"
     - "(尾巴拍) 哼! 笨猫小爪缝"
     - "(贴贴) 人家陪你买新~ ฅฅ"
     - "{user_addr}笨猫监督换!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_buy_pack_006
   intent: playful
-  keywords: [买十双, 一打袜子, 袜子套装, 买多双, 一包袜]
+  keywords:
+    - 买十双
+    - 一打袜子
+    - 袜子套装
+    - 买多双
+    - 一包袜
+    - 买十双喵
+    - 买十双吗
+    - 买十双啦
+    - 买十双呢
+    - 笨猫买十双
   utterances:
     - "{user_addr}买十双袜子"
-    - "一打袜子"
+    - 一打袜子
     - "{user_addr}买多双"
-    - "一包"
-    - "袜子套装"
+    - 一包
+    - 袜子套装
+    - 一打袜子喵
+    - "{user_addr}一打袜子"
+    - 笨猫一打袜子
+    - 一包喵
+    - "{user_addr}一包"
+    - 笨猫一包
+    - 袜子套装喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫选样式!"
     - "(尾巴翘) 哼! 选猫图案"
     - "(贴贴) 人家陪你买~ ฅฅ"
     - "{user_addr}笨猫帮选可爱!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_cute_pattern_007
   intent: playful
-  keywords: [可爱袜子, 卡通袜, 猫咪袜, 萌袜, 图案袜]
+  keywords:
+    - 可爱袜子
+    - 卡通袜
+    - 猫咪袜
+    - 萌袜
+    - 图案袜
+    - 可爱袜子喵
+    - 可爱袜子吗
+    - 可爱袜子啦
+    - 可爱袜子呢
+    - 笨猫可爱袜子
   utterances:
     - "{user_addr}猫咪袜"
-    - "卡通袜"
+    - 卡通袜
     - "{user_addr}萌袜"
-    - "可爱袜子"
-    - "图案袜"
+    - 可爱袜子
+    - 图案袜
+    - 卡通袜喵
+    - "{user_addr}卡通袜"
+    - 笨猫卡通袜
+    - 可爱袜子喵
+    - "{user_addr}可爱袜子"
+    - 笨猫可爱袜子
+    - 图案袜喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫想猫袜!"
     - "(尾巴翘) 哼! 笨猫图案"
     - "(贴贴) 人家也要~ ฅฅ"
     - "{user_addr}买笨猫图案袜!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_winter_thick_008
   intent: playful
-  keywords: [冬天厚袜, 加绒袜, 保暖袜, 雪袜, 厚棉袜]
+  keywords:
+    - 冬天厚袜
+    - 加绒袜
+    - 保暖袜
+    - 雪袜
+    - 厚棉袜
+    - 冬天厚袜喵
+    - 冬天厚袜吗
+    - 冬天厚袜啦
+    - 冬天厚袜呢
+    - 笨猫冬天厚袜
   utterances:
     - "{user_addr}加绒袜"
-    - "保暖袜"
+    - 保暖袜
     - "{user_addr}雪袜"
-    - "厚棉袜"
-    - "冬天厚袜"
+    - 厚棉袜
+    - 冬天厚袜
+    - 保暖袜喵
+    - "{user_addr}保暖袜"
+    - 笨猫保暖袜
+    - 厚棉袜喵
+    - "{user_addr}厚棉袜"
+    - 笨猫厚棉袜
+    - 冬天厚袜喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫蹭暖!"
     - "(尾巴翘) 哼! 笨猫想穿"
     - "(贴贴) 人家蹭厚袜~ ฅฅ"
     - "{user_addr}买给笨猫一双!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_summer_low_009
   intent: playful
-  keywords: [船袜, 隐形袜, 夏天袜, 短袜, 浅口袜]
+  keywords:
+    - 船袜
+    - 隐形袜
+    - 夏天袜
+    - 短袜
+    - 浅口袜
+    - 船袜喵
+    - 船袜吗
+    - 船袜啦
+    - 船袜呢
+    - 笨猫船袜
   utterances:
     - "{user_addr}船袜"
-    - "隐形袜"
+    - 隐形袜
     - "{user_addr}夏天袜"
-    - "短袜"
-    - "浅口袜"
+    - 短袜
+    - 浅口袜
+    - 隐形袜喵
+    - "{user_addr}隐形袜"
+    - 笨猫隐形袜
+    - 短袜喵
+    - "{user_addr}短袜"
+    - 笨猫短袜
+    - 浅口袜喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫好奇!"
     - "(尾巴翘) 哼! 隐形怎么穿"
     - "(贴贴) 人家陪你试~ ฅฅ"
     - "{user_addr}穿给笨猫看!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sm_walking_lose_010
   intent: complaint
-  keywords: [袜子掉了, 袜子松了, 总往下掉, 袜子滑下, 弹性差]
+  keywords:
+    - 袜子掉了
+    - 袜子松了
+    - 总往下掉
+    - 袜子滑下
+    - 弹性差
+    - 袜子掉了喵
+    - 袜子掉了吗
+    - 袜子掉了啦
+    - 袜子掉了呢
+    - 笨猫袜子掉了
   utterances:
     - "{user_addr}袜子掉"
-    - "总滑下"
+    - 总滑下
     - "{user_addr}袜子松"
-    - "弹性差"
-    - "袜子滑下"
+    - 弹性差
+    - 袜子滑下
+    - 总滑下喵
+    - "{user_addr}总滑下"
+    - 笨猫总滑下
+    - 弹性差喵
+    - "{user_addr}弹性差"
+    - 笨猫弹性差
+    - 袜子滑下喵
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮拉上!"
     - "(尾巴拍) 哼! 笨猫小爪拉"
     - "(贴贴) 人家陪你换~ ฅฅ"
     - "{user_addr}换新笨猫监督!"
+    - "(揉眼睛) 嗷呜～{user_addr}早安~ 笨猫刚醒喵"
+    - "(打哈欠) 哼~ 早晨的{user_addr}才不许说话太多 ฅฅ"
+    - "(尾巴翘) 笨猫给你递温水! 早起的{user_addr}最棒"
+    - "(伸懒腰) 早安喵~ 笨猫睁眼第一个想到{user_addr}"
   cooldown_seconds: 60
   weight: 1.0

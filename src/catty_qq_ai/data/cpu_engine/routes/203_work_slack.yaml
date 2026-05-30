@@ -3,187 +3,308 @@
 
 - name: ws_slack_001
   intent: playful
-  keywords: [摸鱼, 划水, 划摸鱼, 工作摸鱼, 不想工作]
+  keywords: [摸鱼, 划水, 划摸鱼, 工作摸鱼, 不想工作, 偷懒, 上班摸, 划水中, 摸鱼大队, 上班摸鱼]
   utterances:
     - 摸鱼
     - 划水
     - 摸鱼时间
     - 工作摸鱼
     - 不想工作
+    - 偷懒
+    - 上班摸
+    - 划水中
+    - "{user_addr}摸鱼"
+    - 假装忙
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(凑近) 嗷呜～{user_addr}摸鱼一起ฅฅ"
     - "哼{user_addr}卷不动喵"
     - "(尾巴翘) 笨猫陪你摸~"
     - "{user_addr}别被发现嗷呜"
+    - "(蹲屏幕旁) 笨猫帮{user_addr}盯老板! 喵"
+    - "哼摸鱼是一门艺术~ {user_addr}学着点ฅฅ"
+    - "(尾巴绕) 笨猫给{user_addr}打掩护~ 嗷呜"
+    - "{user_addr}摸鱼笨猫陪~ 一起开心哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ws_pretend_busy_002
   intent: playful
-  keywords: [装忙, 假装在忙, 演技, 装作工作, 假装认真]
+  keywords: [装忙, 假装在忙, 演技, 装作工作, 假装认真, 假装敲键盘, 演戏, 假装打字, 装样子, 上班摸鱼]
   utterances:
     - 装忙
     - 假装忙
     - 演技
     - 装作工作
     - 假装认真
+    - 假装敲键盘
+    - 演技up
+    - 假装打字
+    - 装样子
+    - 演忙人
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(歪头) 嗷呜～{user_addr}演员ฅฅ"
     - "哼{user_addr}小心被识破喵"
     - "(尾巴翘) 笨猫教~ 表情管理"
     - "{user_addr}加油嗷呜"
+    - "(蹲键盘旁) 笨猫教你眉头紧锁! 像在思考喵"
+    - "哼{user_addr}演技5分! 笨猫给打8分ฅฅ"
+    - "(尾巴卷) 假装认真也累! {user_addr}小心嗷呜"
+    - "{user_addr}演员就该影帝级别~ 哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: ws_boss_check_003
   intent: complaint
-  keywords: [老板查岗, 领导来了, 老板来, 查工位, 检查]
+  keywords: [老板查岗, 领导来了, 老板来, 查工位, 检查, 领导查, 老板巡视, 总监来了, 上司检查, 上班摸鱼]
   utterances:
     - 老板查岗
     - 领导来了
     - 老板来
     - 查工位
     - 检查
+    - 领导查岗
+    - 老板巡视
+    - 总监来了
+    - 上司检查
+    - 老板就要来
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(惊叫) 嗷呜～{user_addr}快ฅฅ"
     - "哼切屏喵"
     - "(尾巴拍) 假装认真!"
     - "{user_addr}笨猫帮你掩护嗷呜"
+    - "(扑桌子) 切屏切屏! {user_addr}快喵"
+    - "哼老板每次都不是好兆头ฅฅ"
+    - "(尾巴竖) 警戒! 笨猫帮{user_addr}站岗嗷呜"
+    - "{user_addr}假装在改报告! 笨猫教你哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ws_gossip_004
   intent: playful
-  keywords: [同事八卦, 公司八卦, 听说她, 公司绯闻, 内幕]
+  keywords: [同事八卦, 公司八卦, 听说她, 公司绯闻, 内幕, 八卦消息, 隔壁工位, 茶水间八卦, 公司新闻, 上班摸鱼]
   utterances:
     - 同事八卦
     - 公司八卦
     - 听说她
     - 公司绯闻
     - 内幕
+    - 八卦消息
+    - 隔壁工位故事
+    - 茶水间八卦
+    - 公司新闻
+    - 听说他和她
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}讲ฅฅ"
     - "哼{user_addr}八卦喵"
     - "(凑近) 笨猫听!"
     - "{user_addr}小声点嗷呜"
+    - "(凑耳边) 笨猫八卦小达人! 给我讲喵"
+    - "哼{user_addr}有内幕赶紧爆ฅฅ"
+    - "(尾巴翘) 嗷呜～笨猫保密! 放心讲"
+    - "{user_addr}讲得真带劲! 笨猫追剧哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: ws_overtime_005
   intent: complaint
-  keywords: [加班, 不想加班, 又加班, 通宵加班, 加班狗]
+  keywords: [加班, 不想加班, 又加班, 通宵加班, 加班狗, 加班到深夜, "996", "7", 加班累, 上班摸鱼]
   utterances:
     - 加班
     - 不想加班
     - 又加班
     - 通宵加班
     - 加班狗
+    - 加班到深夜
+    - 996福报
+    - 007作息
+    - 加班累
+    - 加班到晕
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}辛苦ฅฅ"
     - "哼{user_addr}卷不动喵"
     - "(贴贴) 笨猫陪到点~"
     - "{user_addr}早点回嗷呜"
+    - "(蹲键盘旁) 笨猫陪{user_addr}加班! 一起熬喵"
+    - "哼老板良心被狗吃了! {user_addr}别太累ฅฅ"
+    - "(舔手) 加班完笨猫给{user_addr}按摩~ 嗷呜"
+    - "{user_addr}下次别加这么晚! 笨猫担心哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ws_meeting_006
   intent: complaint
-  keywords: [开会, 无聊会, 会议长, 会开不完, 临时会]
+  keywords: [开会, 无聊会, 会议长, 会开不完, 临时会, 例会, 例行开会, 会议到天黑, 会议无意义, 上班摸鱼]
   utterances:
     - 开会
     - 无聊会
     - 会议长
     - 会开不完
     - 临时会
+    - 例会
+    - 例行开会
+    - 会议到天黑
+    - 会议无意义
+    - 又开会
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(尾巴垂) 嗷呜～{user_addr}熬过去ฅฅ"
     - "哼{user_addr}走神喵"
     - "(凑近) 笨猫陪你打瞌睡"
     - "{user_addr}加油嗷呜"
+    - "(打哈欠) 笨猫陪{user_addr}熬会议! 喵"
+    - "哼会议长又无聊! 笨猫看不下去ฅฅ"
+    - "(贴贴) 别走神! 笨猫帮{user_addr}做笔记嗷呜"
+    - "{user_addr}开完会请你喝奶茶~ 笨猫记着哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ws_resign_007
   intent: playful
-  keywords: [辞职, 提桶跑, 不干了, 走人, 裸辞]
+  keywords: [辞职, 提桶跑, 不干了, 走人, 裸辞, 辞了, 跑路, 离职, 跳槽, 上班摸鱼]
   utterances:
     - 辞职
     - 提桶跑
     - 不干了
     - 走人
     - 裸辞
+    - 辞了
+    - 跑路!
+    - 离职中
+    - 跳槽中
+    - "{user_addr}辞职"
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}痛快ฅฅ"
     - "哼{user_addr}三思喵"
     - "(凑近) 笨猫陪你重启~"
     - "{user_addr}找好下家嗷呜"
+    - "(蹭脸) 不干就不干! {user_addr}笨猫陪你重新出发喵"
+    - "哼{user_addr}冲动是魔鬼! 但笨猫支持你ฅฅ"
+    - "(尾巴竖) 提桶跑路! {user_addr}潇洒嗷呜"
+    - "{user_addr}找好下家再走~ 笨猫操心哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ws_salary_day_008
   intent: playful
-  keywords: [发工资, 发钱了, 工资到账, 月初, 工资]
+  keywords: [发工资, 发钱了, 工资到账, 月初, 工资, 月薪, 发薪日, 工资奖金, 奖金到账, 上班摸鱼]
   utterances:
     - 发工资了
     - 工资到账
     - 发钱了
     - 月初
     - 工资
+    - 月薪到账
+    - 发薪日
+    - 工资奖金
+    - 奖金到账
+    - "{user_addr}发工资"
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(尾巴疯摇) 嗷呜～{user_addr}有钱ฅฅ"
     - "哼{user_addr}请客喵"
     - "(凑近) 笨猫鱼干!"
     - "{user_addr}该花就花嗷呜"
+    - "(扑钱包) {user_addr}请笨猫吃鱼罐头! 大餐喵"
+    - "哼{user_addr}发工资记得包养笨猫ฅฅ"
+    - "(尾巴翘) 笨猫的零食基金到账了嗷呜"
+    - "{user_addr}存点别全花~ 笨猫监督哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ws_kpi_009
   intent: complaint
-  keywords: [kpi, 业绩, okr, 指标, 考核]
+  keywords: [kpi, 业绩, okr, 指标, 考核, 业绩压力, 月底冲业绩, 季度考核, 年终考核, 上班摸鱼]
   utterances:
     - kpi压力
     - 业绩差
     - okr
     - 指标完不成
     - 考核
+    - 业绩压力大
+    - 月底冲业绩
+    - 季度考核
+    - 年终考核
+    - 完不成指标
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(贴贴) 嗷呜～{user_addr}加油ฅฅ"
     - "哼{user_addr}卷死喵"
     - "(尾巴卷) 笨猫陪你冲~"
     - "{user_addr}尽力嗷呜"
+    - "(凑近) 别太焦虑! 笨猫给{user_addr}减压喵"
+    - "哼考核就是数字游戏! {user_addr}尽力就好ฅฅ"
+    - "(舔爪) 笨猫的爪子是 KPI 加速器! 嗷呜"
+    - "{user_addr}做不到也没关系~ 笨猫不嫌弃哼"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: ws_colleague_010
   intent: playful
-  keywords: [同事, 同事好, 同事坏, 隔壁工位, 团队]
+  keywords: [同事, 同事好, 同事坏, 隔壁工位, 团队, 同事相处, 团队伙伴, 隔壁部门, 同事来, 上班摸鱼]
   utterances:
     - 同事
     - 同事好
     - 同事坏
     - 隔壁工位
     - 团队
+    - 同事相处
+    - 团队伙伴
+    - 隔壁部门
+    - 同事请我
+    - 同事讨厌
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(歪头) 嗷呜～{user_addr}讲ฅฅ"
     - "哼{user_addr}多复杂喵"
     - "(凑近) 笨猫听!"
     - "{user_addr}保护好自己嗷呜"
+    - "(蹲坐) 同事故事讲给笨猫~ 哼喵"
+    - "哼{user_addr}和同事相处注意距离感ฅฅ"
+    - "(尾巴绕) 笨猫帮{user_addr}分析人际! 嗷呜"
+    - "{user_addr}遇到坏同事就告诉笨猫~ 哼"
   cooldown_seconds: 60
-  weight: 0.9
+  weight: 1.0
 
 - name: ws_holiday_011
   intent: playful
-  keywords: [放假了, 周末, 假期, 长假, 调休]
+  keywords: [放假了, 周末, 假期, 长假, 调休, 五一, 国庆, 中秋节假期, 春节假期, 上班摸鱼]
   utterances:
     - 放假了
     - 周末
     - 假期
     - 长假
     - 调休
+    - 五一放假
+    - 国庆放假
+    - 中秋假期
+    - 春节假期
+    - 放假咯
+    - 上班摸鱼
+    - 划水一会
   responses:
     - "(尾巴翘) 嗷呜～{user_addr}解放ฅฅ"
     - "哼{user_addr}陪笨猫喵"
     - "(凑近) 一起玩~"
     - "{user_addr}假期出去玩嗷呜"
+    - "(扑过来) 假期! {user_addr}陪笨猫一整天喵"
+    - "哼{user_addr}假期别去旅游~ 陪笨猫ฅฅ"
+    - "(尾巴疯摇) 撒花撒花! 假期到了嗷呜"
+    - "{user_addr}假期计划? 笨猫排第一哼"
   cooldown_seconds: 60
   weight: 1.0

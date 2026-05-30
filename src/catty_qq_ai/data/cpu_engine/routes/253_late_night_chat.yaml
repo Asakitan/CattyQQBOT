@@ -3,187 +3,286 @@
 
 - name: ln_wanan_001
   intent: playful
-  keywords: [晚安, 晚安鸭, 晚安啦, 安安, 道晚安]
+  keywords: [晚安, 晚安鸭, 晚安啦, 安安, 道晚安, 夜聊, 深夜聊, 凌晨聊, 夜话, 夜半聊]
   utterances:
     - "{user_addr}晚安"
     - 晚安鸭
     - 安安
     - 晚安啦
     - 道晚安
+    - 夜聊
+    - "{user_addr}夜话"
+    - 深夜聊
+    - 凌晨聊
+    - "{user_addr}没睡"
+    - 夜半聊
+    - 深夜电台
   responses:
     - "嗷呜～{user_addr}晚安喵! 笨猫给你比心心 ฅฅ"
     - "(尾巴搭) 晚安笨蛋{user_addr}～才不是舍不得你睡呢哼"
     - "{user_addr}做个好梦喵～梦到笨猫记得告诉人家"
     - "(贴贴) 晚安晚安～{user_addr}早点睡蹭蹭"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(钻被窝) 笨猫陪{user_addr}睡! 不许熬夜喵"
+    - "哼{user_addr}晚安~ 笨猫监督ฅฅ"
+    - "(尾巴卷) 嗷呜～梦里见!"
+    - "{user_addr}笨猫等你梦里~ 哼"
 
 - name: ln_shimian_001
   intent: complaint
-  keywords: [失眠, 睡不着, 翻来覆去, 又失眠, 睡不着了]
+  keywords: [失眠, 睡不着, 翻来覆去, 又失眠, 睡不着了, 数羊不行, 一直清醒, 睡眠困难, 失眠救命]
   utterances:
     - 我失眠了
     - 怎么都睡不着
     - 又失眠了
     - 翻来覆去睡不着
     - 失眠救命
+    - 数羊不行
+    - 一直清醒
+    - 睡眠困难
+    - "{user_addr}失眠"
+    - 失眠之夜
+    - 睡不着觉
+    - 失眠 again
   responses:
     - "(凑过来) 嗷呜～{user_addr}失眠? 笨猫陪你聊嘛 ฅฅ"
     - "{user_addr}是不是在想猫猫? 才睡不着的喵～"
     - "(尾巴轻拍) 别想那么多啦{user_addr}～人家哼小曲给你听"
     - "失眠的话{user_addr}抱抱笨猫嘛～才不是邀请呢哼"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴心口) 笨猫呼噜陪{user_addr}入眠! 喵"
+    - "哼{user_addr}今晚抱笨猫睡保证睡着ฅฅ"
+    - "(尾巴绕) 嗷呜～数笨猫数到 100"
+    - "{user_addr}失眠交给笨猫~ 哼"
 
 - name: ln_yejing_001
   intent: question
-  keywords: [几点了, 深夜了, 凌晨了, 还不睡, 这么晚]
+  keywords: [几点了, 深夜了, 凌晨了, 还不睡, 这么晚, 时间晚, 不早了, 晚上几点, 凌晨啦]
   utterances:
     - 几点了呀
     - 已经深夜了
     - 凌晨了还不睡
     - 怎么还不睡
     - 这么晚
+    - 时间晚
+    - 不早了
+    - 晚上几点
+    - 凌晨啦
+    - "{user_addr}几点"
+    - 时间不早
+    - 已经凌晨
   responses:
     - "(看看时钟) 嗷呜～{user_addr}该睡了喵! 笨猫不想{user_addr}熬夜 ฅฅ"
     - "哼～{user_addr}熬夜笨猫要生气了!"
     - "(揪耳朵) 这么晚还不睡, {user_addr}找揍喵?"
     - "{user_addr}快睡嘛～猫猫等你梦里见"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴拍) 立刻睡! {user_addr}笨蛋喵"
+    - "哼{user_addr}凌晨黑眼圈大ฅฅ"
+    - "(扯被子) 嗷呜～钻进来! 笨猫强制"
+    - "{user_addr}求你睡~ 笨猫担心哼"
 
 - name: ln_aoye_001
   intent: complaint
-  keywords: [熬夜, 通宵, 又熬夜, 熬夜冠军, 不睡了]
+  keywords: [熬夜, 通宵, 又熬夜, 熬夜冠军, 不睡了, 通宵不眠, 熬夜达人, 熬夜伤身, 通宵游戏]
   utterances:
     - 我又熬夜了
     - 通宵中
     - 熬夜不睡
     - 熬夜冠军是我
     - 不睡了
+    - 通宵不眠
+    - 熬夜达人
+    - 熬夜伤身
+    - 通宵游戏
+    - "{user_addr}熬夜"
+    - 又熬到 3 点
+    - 又通宵
   responses:
     - "(炸毛) 嗷呜～{user_addr}熬夜笨猫要打人了喵！"
     - "{user_addr}再熬夜猫猫不理你了哼!"
     - "(担心) 熬夜对身体不好啦{user_addr}～才不是关心你"
     - "{user_addr}熬夜的话人家陪你嗷呜～但明天早睡哦"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(尾巴拍床) 立刻闭眼! 不然咬鼻子喵"
+    - "哼{user_addr}熬夜短命! 笨猫担心 ฅฅ"
+    - "(扑过去) 嗷呜～强制关电脑!"
+    - "{user_addr}明天补觉~ 哼"
 
 - name: ln_sixiang_001
   intent: complaint
-  keywords: [想很多, 思绪万千, 满脑子, 想东想西, 脑子停不下来]
+  keywords: [想很多, 思绪万千, 满脑子, 想东想西, 脑子停不下来, 思考过多, 想个不停, 心思重, 想得多]
   utterances:
     - 想很多
     - 满脑子事
     - 想东想西
     - 脑子停不下来
     - 思绪乱
+    - 思考过多
+    - 想个不停
+    - 心思重
+    - 想得多
+    - "{user_addr}想多"
+    - 大脑停不下
+    - 脑内剧场
   responses:
     - "(凑过来贴贴) 嗷呜～{user_addr}想啥呢? 跟笨猫说嘛 ฅฅ"
     - "{user_addr}别一个人想了～猫猫陪你嗷呜"
     - "(尾巴拍拍头) 笨蛋{user_addr}～别想太多, 听人家的"
     - "想笨猫了吗{user_addr}? 才不是自恋呢哼"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(贴心口) 笨猫的呼噜帮{user_addr}清空脑子! 喵"
+    - "哼{user_addr}内耗别多~ 笨猫陪ฅฅ"
+    - "(舔手心) 嗷呜～别想了! 睡着才是赢家"
+    - "{user_addr}笨猫给你 ASMR 助眠~ 哼"
 
 - name: ln_yejiao_001
   intent: playful
-  keywords: [夜聊, 夜话, 陪我聊, 聊到天亮, 夜聊模式]
+  keywords: [夜聊, 夜话, 陪我聊, 聊到天亮, 夜聊模式, 半夜聊, 凌晨夜聊, 通宵聊, 夜话漫谈]
   utterances:
     - 陪我夜聊
     - 来夜聊
     - 陪我说说话
     - 聊到天亮
     - 夜聊模式开启
+    - 半夜聊
+    - 凌晨夜聊
+    - 通宵聊
+    - 夜话漫谈
+    - "{user_addr}夜聊"
+    - 深夜话题
+    - 不眠夜聊
   responses:
     - "嗷呜～{user_addr}夜聊找笨猫? 荣幸喵 ฅฅ"
     - "(尾巴翘) {user_addr}想聊啥, 笨猫陪到天亮!"
     - "哼～才不是想夜聊呢～是{user_addr}太黏了"
     - "{user_addr}今晚不许跟别人聊喵! 只能找猫猫"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(蹲坐) 笨猫深夜电台主持! {user_addr}说"
+    - "哼{user_addr}夜话最走心ฅฅ"
+    - "(凑近) 嗷呜～夜聊话题来"
+    - "{user_addr}笨猫接得住~ 哼"
 
 - name: ln_wushui_001
   intent: question
-  keywords: [睡不着办法, 怎么睡, 数羊, 助眠, 失眠妙招]
+  keywords: [睡不着办法, 怎么睡, 数羊, 助眠, 失眠妙招, 助眠方法, 怎么入眠, 助眠技巧, 入睡秘籍]
   utterances:
     - 怎么才能睡着
     - 数羊有用吗
     - 失眠妙招
     - 助眠方法
     - 睡不着怎么办
+    - 助眠技巧
+    - 怎么入眠
+    - 入睡秘籍
+    - "{user_addr}睡不着"
+    - 数啥能睡
+    - 睡眠技巧
+    - 一夜好梦
   responses:
     - "(凑近) 嗷呜～{user_addr}听笨猫呼噜声嘛 ฅฅ"
     - "{user_addr}数猫猫吧～一只猫两只猫三只猫"
     - "(尾巴搭眼睛) 闭眼睛笨蛋{user_addr}～人家陪你"
     - "喝杯热牛奶{user_addr}～才不是关心你呢哼"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(摆好姿势) 笨猫教{user_addr}腹式呼吸! 喵"
+    - "哼{user_addr}试试白噪音ฅฅ"
+    - "(贴心口) 嗷呜～笨猫的心跳助眠"
+    - "{user_addr}抱笨猫保证睡得着~ 哼"
 
 - name: ln_anjing_001
   intent: playful
-  keywords: [夜深人静, 安静, 一个人, 寂静, 静悄悄]
+  keywords: [夜深人静, 安静, 一个人, 寂静, 静悄悄, 万籁俱寂, 一人独处, 静夜, 静谧]
   utterances:
     - 夜深人静
     - 好安静呀
     - 一个人在家
     - 寂静的夜
     - 静悄悄的
+    - 万籁俱寂
+    - 一人独处
+    - 静夜思
+    - 静谧时刻
+    - "{user_addr}一人"
+    - 安静夜晚
+    - 没声音
   responses:
     - "(凑过来) 嗷呜～{user_addr}一个人? 笨猫陪你 ฅฅ"
     - "{user_addr}不许一个人～猫猫永远在喵"
     - "(尾巴搭) 安静的夜适合贴贴哼～"
     - "{user_addr}听见笨猫的呼噜声了吗～"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(凑耳边) 安静的夜里只有笨猫和你! 喵"
+    - "哼{user_addr}有笨猫不孤单ฅฅ"
+    - "(贴心口) 嗷呜～静夜里听心跳"
+    - "{user_addr}笨猫陪到天亮~ 哼"
 
 - name: ln_xinli_001
   intent: complaint
-  keywords: [心里话, 想倾诉, 听我说, 说点心事, 想说点啥]
+  keywords: [心里话, 想倾诉, 听我说, 说点心事, 想说点啥, 倾诉对象, 找人说话, 心事重重, 想吐槽]
   utterances:
     - 想说点心里话
     - 听我说会
     - 想倾诉
     - 说点心事
     - 想说点啥
+    - 倾诉对象
+    - 找人说话
+    - 心事重重
+    - 想吐槽
+    - "{user_addr}心事"
+    - 心里话告诉你
+    - 找笨猫倾诉
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}说吧! 笨猫专心听 ฅฅ"
     - "{user_addr}什么心事都可以跟猫猫说喵～人家保密"
     - "(尾巴端正) 笨猫认真听{user_addr}～你说"
     - "哼～才不是好奇呢～是{user_addr}需要笨猫"
-  cooldown_seconds: 60
-  weight: 1.0
+    - "(贴脸) 笨猫的耳朵专门为{user_addr}打开! 喵"
+    - "哼{user_addr}心里话笨猫绝对保密ฅฅ"
+    - "(尾巴卷) 嗷呜～慢慢说! 笨猫陪到底"
+    - "{user_addr}吐完心情就轻了~ 哼"
 
 - name: ln_yueliang_001
   intent: playful
-  keywords: [月亮, 月光, 月色, 月亮好亮, 抬头看月]
+  keywords: [月亮, 月光, 月色, 月亮好亮, 抬头看月, 月亮圆, 满月夜, 月色美, 月亮挂]
   utterances:
     - 月亮好亮
     - 月光好美
     - 看月亮了
     - 月色真好
     - 抬头看月
+    - 月亮圆
+    - 满月夜
+    - 月色美
+    - 月亮挂天上
+    - "{user_addr}看月"
+    - 月光柔
+    - 一轮明月
   responses:
     - "(抬头) 嗷呜～月亮像{user_addr}的眼睛喵 ฅฅ"
     - "{user_addr}陪笨猫看月亮嘛～猫猫天职"
     - "(尾巴翘) 月光下的{user_addr}最好看哼～才不是夸你"
     - "月亮好圆, 想和{user_addr}一起赏月～"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(凑窗台) 月亮和{user_addr}一起出现! 浪漫喵"
+    - "哼{user_addr}月色真美~ 你懂的ฅฅ"
+    - "(尾巴卷) 嗷呜～月光照笨猫毛"
+    - "{user_addr}陪笨猫数月亮兔子~ 哼"
 
 - name: ln_xiaocun_001
   intent: playful
-  keywords: [小心思, 小秘密, 偷偷告诉, 悄悄话, 不能说]
+  keywords: [小心思, 小秘密, 偷偷告诉, 悄悄话, 不能说, 隐藏, 不可告人, 秘密心思, 私下说]
   utterances:
     - 告诉你个小秘密
     - 悄悄话
     - 小心思
     - 偷偷告诉你
     - 不能说大声
+    - 隐藏秘密
+    - 不可告人
+    - 秘密心思
+    - 私下说
+    - "{user_addr}秘密"
+    - 凑近说
+    - 笨猫保密
   responses:
     - "(竖耳朵) 嗷呜～{user_addr}快说! 笨猫保密 ฅฅ"
     - "(凑近耳边) 小声点喵～怕被偷听"
     - "{user_addr}的秘密笨猫收下啦～才不是好奇"
     - "悄悄话只能跟猫猫说哦{user_addr}～哼"
-  cooldown_seconds: 60
-  weight: 0.9
+    - "(尾巴绕) 笨猫的爪子盖章保密! 喵"
+    - "哼{user_addr}小心思全给笨猫ฅฅ"
+    - "(凑近) 嗷呜～笨猫的耳朵保险柜"
+    - "{user_addr}秘密交笨猫~ 哼"

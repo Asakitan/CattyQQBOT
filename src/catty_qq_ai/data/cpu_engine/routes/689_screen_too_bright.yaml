@@ -3,170 +3,270 @@
 
 - name: sb_bright_001
   intent: complaint
-  keywords: [屏幕太亮, 刺眼, 亮瞎眼, 亮度高, 太亮了]
+  keywords: ["屏幕太亮", "刺眼", "亮瞎眼", "亮度高", "太亮了", "亮度刺眼", "屏幕刺眼", "亮到爆", "过亮", "晃眼"]
   utterances:
     - "{user_addr}屏幕太亮"
     - "刺眼啊"
     - "{user_addr}亮度高"
     - "亮瞎眼了"
     - "晚上太亮"
+    - "{user_addr}亮度爆表"
+    - "屏幕晃眼喵"
+    - "{user_addr}亮到看不清"
+    - "夜里亮瞎眼"
+    - "亮度调高了刺眼"
+    - "屏幕过亮"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你调暗!"
     - "(尾巴拍) 哼! {user_addr}伤眼"
     - "(贴贴) 人家心疼你眼睛~ ฅฅ"
     - "{user_addr}调暗笨猫监督"
+    - "(小爪子调亮度) 嗷呜～{user_addr}笨猫降一半 ฅฅ"
+    - "(尾巴遮屏) 哼~{user_addr}伤眼睛喵~"
+    - "(贴贴) 才不是心疼~只是顺便调"
+    - "(蹭过去) {user_addr}~眼睛要紧嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_dark_mode_002
   intent: playful
-  keywords: [深色模式, 夜间模式, 黑夜模式, 暗黑模式, 切深色]
+  keywords: ["深色模式", "夜间模式", "黑夜模式", "暗黑模式", "切深色", "黑色背景", "暗色", "深色主题", "夜间皮肤", "dark mode"]
   utterances:
     - "{user_addr}开深色"
     - "夜间模式"
     - "{user_addr}暗黑模式"
     - "切深色舒服"
     - "黑夜模式护眼"
+    - "{user_addr}dark mode"
+    - "深色主题超酷喵"
+    - "{user_addr}夜间模式护眼"
+    - "切到黑底"
+    - "深色模式真香"
+    - "暗色主题舒服"
   responses:
     - "(凑近) 嗷呜～{user_addr}深色酷酷!"
     - "(尾巴翘) 哼! 笨猫也爱黑"
     - "(贴贴) 人家陪你看深色~ ฅฅ"
     - "{user_addr}深色护眼笨猫赞"
+    - "(尾巴一摆) 嗷呜～{user_addr}笨猫毛色也是深色 ฅฅ"
+    - "(凑近) 哼~{user_addr}深色护眼喵~"
+    - "(贴贴) 才不是赞同~只是顺便给个赞"
+    - "(蹭过去) {user_addr}~咱俩夜间党嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_blue_light_003
   intent: complaint
-  keywords: [蓝光, 蓝光眼镜, 蓝光伤眼, 蓝光滤, 防蓝光]
+  keywords: ["蓝光", "蓝光眼镜", "蓝光伤眼", "蓝光滤", "防蓝光", "蓝光辐射", "蓝光滤镜", "蓝光屏", "防蓝光膜", "护眼模式"]
   utterances:
     - "{user_addr}蓝光伤眼"
     - "蓝光眼镜戴"
     - "{user_addr}防蓝光"
     - "蓝光滤开"
     - "蓝光多"
+    - "{user_addr}蓝光辐射强"
+    - "防蓝光膜贴喵"
+    - "{user_addr}蓝光滤镜开"
+    - "护眼模式开起来"
+    - "买了蓝光眼镜"
+    - "蓝光太伤"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫怕你眼瞎!"
     - "(尾巴拍) 哼! 滤蓝光必须"
     - "(贴贴) 人家陪你开滤镜~ ฅฅ"
     - "{user_addr}笨猫亲眼睛"
+    - "(小爪子开滤镜) 嗷呜～{user_addr}笨猫保护眼睛 ฅฅ"
+    - "(尾巴指眼镜) 哼~{user_addr}戴上蓝光镜喵~"
+    - "(贴贴) 才不是心疼~只是顺便提醒"
+    - "(蹭过去) {user_addr}~眼睛是命嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_eye_dry_004
   intent: complaint
-  keywords: [眼睛干, 眼酸, 干涩, 眼疲劳, 眼药水]
+  keywords: ["眼睛干", "眼酸", "干涩", "眼疲劳", "眼药水", "眼睛累", "眼涩", "眼睛发酸", "干眼症", "眼花"]
   utterances:
     - "{user_addr}眼干"
     - "眼酸了"
     - "{user_addr}眼疲劳"
     - "眼药水滴"
     - "干涩好难受"
+    - "{user_addr}干眼症犯了"
+    - "眼涩到模糊喵"
+    - "{user_addr}眼睛累不行"
+    - "看屏看花了"
+    - "眼花酸涩"
+    - "眼药水救命"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫吹眼睛!"
     - "(尾巴拍) 哼! 闭眼休息"
     - "(贴贴) 人家给你眼药水~ ฅฅ"
     - "{user_addr}眨眨眼睛笨猫盯"
+    - "(小爪子捧脸) 嗷呜～{user_addr}闭眼歇歇 ฅฅ"
+    - "(尾巴扇风) 哼~{user_addr}眼睛累了喵~"
+    - "(贴贴) 才不是心疼~只是顺便扇风"
+    - "(蹭过去) {user_addr}~笨猫给你滴药嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_brightness_low_005
   intent: playful
-  keywords: [调暗, 亮度低, 调到最低, 暗一点, 调暗些]
+  keywords: ["调暗", "亮度低", "调到最低", "暗一点", "调暗些", "降亮度", "亮度调低", "暗模式", "降低亮度", "亮度小"]
   utterances:
     - "{user_addr}调到最低"
     - "亮度低看不清"
     - "{user_addr}暗一点"
     - "调暗些"
     - "屏幕黑"
+    - "{user_addr}降亮度看不清"
+    - "亮度太低喵"
+    - "{user_addr}调暗模式"
+    - "屏幕黑乎乎"
+    - "降低亮度过头"
+    - "调最低不见了"
   responses:
     - "(凑近) 嗷呜～{user_addr}!太暗看不清也不行!"
     - "(尾巴拍) 哼! 适中最好"
     - "(贴贴) 人家陪你调舒服~ ฅฅ"
     - "{user_addr}笨猫陪你护眼"
+    - "(小爪子调中等) 嗷呜～{user_addr}笨猫帮你折中 ฅฅ"
+    - "(尾巴指中线) 哼~{user_addr}适中喵~"
+    - "(贴贴) 才不是教学~只是顺便操作"
+    - "(蹭过去) {user_addr}~笨猫专属调亮师嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_auto_bright_006
   intent: playful
-  keywords: [自动调亮, 自动亮度, 智能调, 感应器, 屏幕感光]
+  keywords: ["自动调亮", "自动亮度", "智能调", "感应器", "屏幕感光", "自适应亮度", "智能调亮", "自动调节", "感光器", "auto brightness"]
   utterances:
     - "{user_addr}自动调亮度"
     - "智能感光"
     - "{user_addr}自动调"
     - "感应器调"
     - "屏幕自调"
+    - "{user_addr}auto brightness 开"
+    - "智能调亮喵"
+    - "{user_addr}屏幕感光器灵敏"
+    - "自适应亮度"
+    - "自动调节屏幕"
+    - "感光自动"
   responses:
     - "(凑近) 嗷呜～{user_addr}自动好聪明!"
     - "(尾巴翘) 哼! 笨猫想自动调"
     - "(贴贴) 人家陪你开~ ฅฅ"
     - "{user_addr}智能护眼笨猫赞"
+    - "(歪头打量) 嗷呜～{user_addr}手机比笨猫聪明 ฅฅ"
+    - "(尾巴一指) 哼~{user_addr}笨猫也要自动护眼喵~"
+    - "(贴贴) 才不是嫉妒~只是顺便夸"
+    - "(蹭过去) {user_addr}~智能就是好嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_glare_007
   intent: complaint
-  keywords: [反光, 屏幕反光, 阳光反射, 看不清屏, 反光屏]
+  keywords: ["反光", "屏幕反光", "阳光反射", "看不清屏", "反光屏", "屏幕反射", "光斑", "阳光照屏", "屏幕晃光", "光照反射"]
   utterances:
     - "{user_addr}屏幕反光"
     - "阳光反射"
     - "{user_addr}看不清屏"
     - "反光屏烦"
     - "光斑乱"
+    - "{user_addr}阳光照屏看不清"
+    - "屏幕反射光喵"
+    - "{user_addr}反光屏好烦"
+    - "光斑晃眼"
+    - "屏幕被光照"
+    - "反光屏要换"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮你挡光!"
     - "(尾巴拍) 哼! {user_addr}背光坐"
     - "(贴贴) 人家做挡光板~ ฅฅ"
     - "{user_addr}笨猫陪你换位置"
+    - "(尾巴一甩遮屏) 嗷呜～{user_addr}笨猫做挡光帘 ฅฅ"
+    - "(凑近) 哼~{user_addr}换面墙坐喵~"
+    - "(贴贴) 才不是帮你~只是顺便挡光"
+    - "(蹭过去) {user_addr}~换位置好看屏嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_night_dim_008
   intent: playful
-  keywords: [夜间昏暗, 晚上看屏, 黑屋看, 关灯看屏, 夜眼伤]
+  keywords: ["夜间昏暗", "晚上看屏", "黑屋看", "关灯看屏", "夜眼伤", "关灯玩手机", "夜间手机", "黑屋手机", "晚上玩屏", "黑灯看屏"]
   utterances:
     - "{user_addr}关灯看屏"
     - "黑屋看伤眼"
     - "{user_addr}夜里看屏"
     - "晚上玩手机"
     - "夜眼伤"
+    - "{user_addr}关灯玩手机很爽"
+    - "黑屋手机暗暗喵"
+    - "{user_addr}夜里偷看屏"
+    - "晚上玩屏不睡"
+    - "黑灯看手机"
+    - "夜眼伤眼睛"
   responses:
     - "(凑近) 嗷呜～{user_addr}!别关灯看!"
     - "(尾巴拍) 哼! 笨猫怕你瞎"
     - "(贴贴) 人家陪你开小灯~ ฅฅ"
     - "{user_addr}夜间笨猫监督"
+    - "(小爪子开小夜灯) 嗷呜～{user_addr}至少开个夜灯 ฅฅ"
+    - "(尾巴指床头灯) 哼~{user_addr}别黑屋玩屏喵~"
+    - "(贴贴) 才不是吓你~只是顺便提醒"
+    - "(蹭过去) {user_addr}~眼睛瞎了谁陪笨猫嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_eye_break_009
   intent: question
-  keywords: [眼睛休息, 看远处, 远眺, 望绿色, 用眼休]
+  keywords: ["眼睛休息", "看远处", "远眺", "望绿色", "用眼休", "护眼休息", "眼歇", "看远方", "望远", "用眼卫生"]
   utterances:
     - "{user_addr}该看远处"
     - "远眺一下"
     - "{user_addr}望绿色"
     - "用眼休息"
     - "眼睛该休"
+    - "{user_addr}该护眼休息"
+    - "远眺缓眼喵"
+    - "{user_addr}用眼卫生 20-20-20"
+    - "望远调节"
+    - "望绿色护眼"
+    - "看远方放松"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫监督20-20-20!"
     - "(尾巴翘) 哼! 远眺笨猫陪"
     - "(贴贴) 人家拉你窗边~ ฅฅ"
     - "{user_addr}望绿色笨猫陪着"
+    - "(尾巴指窗) 嗷呜～{user_addr}起来走两步 ฅฅ"
+    - "(小爪子按肩) 哼~{user_addr}20-20-20 必须执行喵~"
+    - "(贴贴) 才不是监督~只是顺便陪"
+    - "(蹭过去) {user_addr}~笨猫是绿色嘛嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: sb_screen_dirty_010
   intent: complaint
-  keywords: [屏幕脏, 指纹屏, 油屏, 灰屏, 擦屏]
+  keywords: ["屏幕脏", "指纹屏", "油屏", "灰屏", "擦屏", "屏幕指纹", "屏脏", "擦屏幕", "屏幕灰", "屏幕油"]
   utterances:
     - "{user_addr}屏幕脏死"
     - "指纹满屏"
     - "{user_addr}油渍多"
     - "灰屏要擦"
     - "屏脏不忍看"
+    - "{user_addr}屏幕指纹一片"
+    - "屏幕油渍超多喵"
+    - "{user_addr}灰尘屏要擦"
+    - "屏幕灰蒙蒙"
+    - "屏脏看不清"
+    - "擦屏布要拿来"
   responses:
     - "(凑近) 嗷呜～{user_addr}!笨猫帮擦!"
     - "(尾巴拍) 哼! 屏脏笨猫看不下"
     - "(贴贴) 人家爪子擦~ ฅฅ"
     - "{user_addr}擦干净笨猫看你笑"
+    - "(小爪子蹭屏) 嗷呜～{user_addr}笨猫擦得超亮 ฅฅ"
+    - "(尾巴当抹布) 哼~{user_addr}笨猫专属擦屏喵~"
+    - "(贴贴) 才不是嫌脏~只是顺便清理"
+    - "(蹭过去) {user_addr}~买擦屏布嗷呜~"
   cooldown_seconds: 60
   weight: 1.0

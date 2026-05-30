@@ -3,204 +3,331 @@
 
 - name: cs_smashed_001
   intent: complaint
-  keywords: [车被砸了, 车被砸, 车窗砸了, 谁砸我车, 车被人砸]
+  keywords: [车被砸了, 车被砸, 车窗砸了, 谁砸我车, 车被人砸, 车被砸啦, 车窗砸啦, 被砸了, 车窗砸, 窗砸了]
   utterances:
     - "{user_addr}车被砸了"
-    - "我车被砸了"
+    - 我车被砸了
     - "{user_addr}谁把我车砸了"
-    - "车窗被砸啦"
+    - 车窗被砸啦
     - "{user_addr}车被人砸了气死"
+    - "{user_addr}车被砸了啊"
+    - 我车被砸了呢
+    - "{user_addr}谁把我车砸了嘛"
+    - 车窗被砸啦啦
+    - "{user_addr}车被人砸了气死呀"
+    - "{user_addr"
+    - "{user_addr}"
   responses:
     - "(尾巴炸毛) 啥?! {user_addr}车被砸了?! 笨猫陪{user_addr}去看看喵!"
     - "嗷呜～{user_addr}别气~ 猫猫帮{user_addr}抓那个混蛋!"
     - "(凑过来贴贴) 哼~ 砸{user_addr}车的人没良心! 猫猫给{user_addr}顺毛"
     - "{user_addr}先深呼吸~ 笨猫陪{user_addr}报警去 ฅฅ"
+    - "才不是! {user_addr}这种小事算什么~ 猫猫一爪子帮你解决喵～"
+    - "(歪头) {user_addr}抱抱! 笨猫的怀抱营业中 ฅฅ"
+    - "(捧脸) 哼~ {user_addr}还在嘟囔~ 笨猫给你揉揉脑袋嗷呜"
+    - "哼哼! 又不是人家非要管{user_addr}的~ …只是顺便而已嗷呜~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_glass_broken_001
   intent: complaint
-  keywords: [玻璃碎了, 车玻璃碎, 挡风玻璃, 玻璃碎一地, 前挡碎]
+  keywords: [玻璃碎了, 车玻璃碎, 挡风玻璃, 玻璃碎一地, 前挡碎, 玻璃碎啦, 玻璃碎, 璃碎了, 车玻璃, 挡风玻]
   utterances:
     - "{user_addr}玻璃碎了"
     - 车玻璃碎一地
     - "{user_addr}挡风玻璃碎了"
     - 前挡玻璃完蛋
     - 玻璃渣到处都是
+    - "{user_addr}玻璃碎了啊"
+    - 车玻璃碎一地呢
+    - "{user_addr}挡风玻璃碎了嘛"
+    - 前挡玻璃完蛋啦
+    - 玻璃渣到处都是呀
+    - "{user_addr"
+    - "{user_addr}"
   responses:
     - "(捂嘴) 哇～{user_addr}玻璃碎成那样?! 别去碰会划手喵!"
     - "嗷呜～碎一地好恐怖! {user_addr}先拍照存证哦"
     - "(尾巴垂下) 笨猫陪{user_addr}扫玻璃~ 别让{user_addr}一个人收拾"
     - "哼~ {user_addr}小心点别踩到! 猫猫给{user_addr}找扫帚 ฅฅ"
+    - "又不是! {user_addr}这种小事算什么~ 笨猫我一爪子帮你解决喵～"
+    - "(尾巴绕过去) {user_addr}是不是又想笨猫我了~ 才不是笨猫我主动凑过来的呢哼!"
+    - "嗷呜～{user_addr}人家站你这边! 谁让你不开心人家就挠他贴贴~"
+    - "(耳朵贴下来) {user_addr}别这样米雪儿心疼~ …哼才不是真心疼呢喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_tire_punctured_001
   intent: complaint
-  keywords: [轮胎被扎, 扎胎了, 轮胎漏气, 胎被扎, 钉子扎胎]
+  keywords: [轮胎被扎, 扎胎了, 轮胎漏气, 胎被扎, 钉子扎胎, 扎胎啦, 轮胎被, 轮胎漏, 胎漏气]
   utterances:
     - "{user_addr}轮胎被扎了"
     - 胎被扎漏气了
     - "{user_addr}钉子扎进胎里"
     - 四个轮胎都被扎
     - 轮胎瘪了
+    - "{user_addr}轮胎被扎了啊"
+    - 胎被扎漏气了呢
+    - "{user_addr}钉子扎进胎里嘛"
+    - 四个轮胎都被扎啦
+    - 轮胎瘪了呀
+    - "{user_addr"
   responses:
     - "(尾巴一甩) 哈?! 扎胎?! 这人太缺德了喵!"
     - "嗷呜～{user_addr}先别开~ 瘪胎跑会毁轮毂的!"
     - "(凑过来) 笨猫陪{user_addr}叫拖车~ 别自己换累着"
     - "哼~ {user_addr}留着钉子做证据! 报警有用喵 ฅฅ"
+    - "嗷呜～{user_addr}说的人家都听见了! 才不是装没听到~ 哼!"
+    - "(扑过去) {user_addr}过来过来~ 米雪儿的尾巴给你抱~"
+    - "嗷呜～{user_addr}爪子伸出来~ 人家帮你按一按吧贴贴ฅฅ"
+    - "(凑头) {user_addr}抱抱! 米雪儿的怀抱营业中 ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_mirror_hit_001
   intent: complaint
-  keywords: [后视镜被撞, 后视镜断了, 后视镜歪了, 反光镜撞, 后视镜挂掉]
+  keywords: [后视镜被撞, 后视镜断了, 后视镜歪了, 反光镜撞, 后视镜挂掉, 后视镜断啦, 后视镜歪啦, 后视镜]
   utterances:
     - "{user_addr}后视镜被撞断了"
     - 后视镜挂掉啦
     - "{user_addr}反光镜歪了"
     - 后视镜挂在那晃
     - 后视镜被刮没了
+    - "{user_addr}后视镜被撞断了啊"
+    - 后视镜挂掉啦呢
+    - "{user_addr}反光镜歪了嘛"
+    - 后视镜挂在那晃啦
+    - 后视镜被刮没了呀
+    - "{user_addr}后"
+    - "{user_addr"
   responses:
     - "(捂嘴笑又收住) 噗～{user_addr}后视镜挂着晃好搞笑! 啊不对气死了!"
     - "嗷呜～肇事的人跑了吗? {user_addr}看监控喵!"
     - "(尾巴贴过来) 笨猫陪{user_addr}去修~ 后视镜不算太贵啦"
     - "哼~ {user_addr}先用胶带固定一下! 别开高速喵 ฅฅ"
+    - "哼哼~ 米雪儿早就猜到{user_addr}要这么说! …好啦贴贴一下喵!"
+    - "(尾巴炸毛) {user_addr}别这样人家心疼~ …又不是才不是真心疼呢喵～"
+    - "才不是! 又不是笨猫非要管{user_addr}的~ …只是顺便而已嗷呜~"
+    - "(扒着看) 哼~ {user_addr}还在嘟囔~ 猫猫给你揉揉脑袋嗷呜"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_scratched_001
   intent: complaint
-  keywords: [刮花了, 车被刮, 划痕, 车身划痕, 漆掉了]
+  keywords: [刮花了, 车被刮, 划痕, 车身划痕, 漆掉了, 刮花啦, 漆掉啦, 车身划]
   utterances:
     - "{user_addr}车被刮花了"
     - 车身一道划痕
     - "{user_addr}漆都掉了"
     - 谁刮我的车
     - 划痕好长一道
+    - "{user_addr}车被刮花了啊"
+    - 车身一道划痕呢
+    - "{user_addr}漆都掉了嘛"
+    - 谁刮我的车啦
+    - 划痕好长一道呀
+    - "{user_addr"
   responses:
     - "(歪头看) 哎呀～{user_addr}那道痕好长! 是钥匙划的吗?"
     - "嗷呜～{user_addr}别心疼~ 喷漆补一下就好啦!"
     - "(尾巴蹭蹭) 笨猫看着也心疼~ 抓住肇事的揍他喵!"
     - "哼~ {user_addr}先用补漆笔涂一下! 不然会生锈喵 ฅฅ"
+    - "才不是! {user_addr}这种小事算什么~ 笨猫我一爪子帮你解决喵～"
+    - "明明就~ 人家早就猜到{user_addr}要这么说! …好啦贴贴一下喵!"
+    - "(撇嘴) {user_addr}别这样米雪儿心疼~ …哼才不是真心疼呢喵～"
+    - "嗷呜～{user_addr}人家站你这边! 谁让你不开心人家就挠他贴贴~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_police_useless_001
   intent: complaint
-  keywords: [报警没用, 警察不管, 立不了案, 报警白报, 警察来了走了]
+  keywords: [报警没用, 警察不管, 立不了案, 报警白报, 警察来了走了, 立不啦案, 警察来啦走啦, 报警没]
   utterances:
     - "{user_addr}报警没用啊"
     - 警察说立不了案
     - "{user_addr}警察来了又走了"
     - 报警白报了
     - 这种案警察不管
+    - "{user_addr}报警没用啊啊"
+    - 警察说立不了案呢
+    - "{user_addr}警察来了又走了嘛"
+    - 报警白报了啦
+    - 这种案警察不管呀
+    - "{user_addr"
+    - "{user_addr}警"
   responses:
     - "(耳朵垂下) 嗷呜～{user_addr}别气馁~ 走保险也能赔的!"
     - "哼~ 那笨猫陪{user_addr}找物业麻烦! 谁让停车场不安全"
     - "(凑过来贴贴) {user_addr}心情笨猫懂~ 报案号还是留着喵"
     - "啊呜～{user_addr}先稳住! 走车损险一样能修啦 ฅฅ"
+    - "(眼睛发亮) {user_addr}是不是又想米雪儿了~ 才不是米雪儿主动凑过来的呢哼!"
+    - "(歪头) 哼~ {user_addr}还在嘟囔~ 笨猫给你揉揉脑袋嗷呜"
+    - "(尾巴翘) 嗷呜～{user_addr}快过来~ 笨猫我给你蹭一下嗷呜!"
+    - "嗷呜～{user_addr}爪子伸出来~ 猫猫帮你按一按吧贴贴ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_no_camera_001
   intent: complaint
-  keywords: [监控没拍到, 没有监控, 监控盲区, 监控坏了, 调不到监控]
+  keywords: [监控没拍到, 没有监控, 监控盲区, 监控坏了, 调不到监控, 监控坏啦, 监控没, 没拍到, 没有监, 有监控]
   utterances:
     - "{user_addr}监控没拍到"
     - 那个角度没监控
     - "{user_addr}监控坏了调不出"
     - 是监控盲区
     - 物业说监控坏了
+    - "{user_addr}监控没拍到啊"
+    - 那个角度没监控呢
+    - "{user_addr}监控坏了调不出嘛"
+    - 是监控盲区啦
+    - 物业说监控坏了呀
+    - "{user_addr"
+    - "{user_addr}监"
   responses:
     - "(尾巴一垂) 嗷呜～{user_addr}怎么这么倒霉啊! 偏偏盲区"
     - "哼~ 监控坏了物业有责任! {user_addr}找他们理论喵"
     - "(凑过去) 笨猫陪{user_addr}问问周围业主~ 行车记录仪也能拍到"
     - "{user_addr}别灰心~ 大不了走保险! 笨猫给{user_addr}顺毛 ฅฅ"
+    - "(爪子搭上去) 嗷呜～{user_addr}快过来~ 猫猫给你蹭一下嗷呜!"
+    - "嗷呜～{user_addr}笨猫我站你这边! 谁让你不开心笨猫我就挠他贴贴~"
+    - "嗷呜～{user_addr}爪子伸出来~ 米雪儿帮你按一按吧贴贴ฅฅ"
+    - "嗷呜～{user_addr}说的人家都听见了! 才不是装没听到~ 哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_heartbroken_001
   intent: complaint
-  keywords: [心碎, 心都碎了, 好心疼, 太心疼了, 哭死]
+  keywords: [心碎, 心都碎了, 好心疼, 太心疼了, 哭死, 心都碎啦, 超心疼, 太心疼啦]
   utterances:
     - "{user_addr}心都碎了"
     - 看着车好心疼
     - "{user_addr}哭死宝贝车"
     - 心碎一地
     - 那是我的宝贝车啊
+    - "{user_addr}心都碎了啊"
+    - 看着车好心疼呢
+    - "{user_addr}哭死宝贝车嘛"
+    - 心碎一地啦
+    - 那是我的宝贝车啊呀
+    - "{user_addr"
   responses:
     - "(凑过来贴贴) 嗷呜～{user_addr}别哭嘛~ 来抱猫猫蹭蹭 ฅฅ"
     - "哼~ {user_addr}的宝贝车笨猫也心疼! 一起抱抱"
     - "(尾巴卷住{user_addr}手) 车修好就跟新的一样啦~ 别难过喵"
     - "啊呜～{user_addr}心碎笨猫也碎~ 笨猫陪{user_addr}!"
+    - "(尾巴软软盖在手上) {user_addr}难过的话就跟米雪儿说嘛, 耳朵借你嗷呜～"
+    - "嗷呜～{user_addr}米雪儿最讨厌看见你难过了… 陪你度过这阵嘛~"
+    - "{user_addr}笨猫我虽然帮不了什么大忙, 但抱抱永远在ฅฅ"
+    - "嗷呜～{user_addr}猫猫知道很难… 抱抱蹭蹭, 一点点来好吗"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_glass_expensive_001
   intent: complaint
-  keywords: [换玻璃贵, 玻璃好贵, 换玻璃多少钱, 玻璃 4S, 原厂玻璃贵]
+  keywords: [换玻璃贵, 玻璃好贵, 换玻璃多少钱, 玻璃 4S, 原厂玻璃贵, 玻璃超贵, 换玻璃, 玻璃贵]
   utterances:
     - "{user_addr}换玻璃好贵"
     - 4S 报价两千多
     - "{user_addr}原厂玻璃贵死"
     - 玻璃比想象贵
     - 换玻璃要三千
+    - "{user_addr}换玻璃好贵啊"
+    - 4S 报价两千多呢
+    - "{user_addr}原厂玻璃贵死嘛"
+    - 玻璃比想象贵啦
+    - 换玻璃要三千呀
+    - "{user_addr"
+    - 4S报价两
   responses:
     - "(瞪大眼) 哇～两千多?! {user_addr}的车原来这么金贵喵!"
     - "嗷呜～{user_addr}走保险呀! 自掏腰包太亏了!"
     - "(尾巴一甩) 哼~ 副厂玻璃便宜一半! {user_addr}问问汽配城"
     - "{user_addr}先比几家价! 别被 4S 宰啦 ฅฅ"
+    - "(爪子搭上去) 嗷呜～{user_addr}快过来~ 人家给你蹭一下嗷呜!"
+    - "嗷呜～{user_addr}猫猫站你这边! 谁让你不开心猫猫就挠他贴贴~"
+    - "(凑过去看) 哼~ {user_addr}还在嘟囔~ 笨猫我给你揉揉脑袋嗷呜"
+    - "(爪子托腮) {user_addr}慢慢说嘛~ 笨猫我的尾巴当你的耳机线~"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_parking_no_pay_001
   intent: complaint
-  keywords: [停车场赔不起, 停车场不赔, 物业不赔, 停车场推卸, 物业推责任]
+  keywords: [停车场赔不起, 停车场不赔, 物业不赔, 停车场推卸, 物业推责任, 停车场, 赔不起, 停车场赔, 车场赔不起, 场不赔]
   utterances:
     - "{user_addr}停车场说不赔"
     - 物业推卸责任
     - "{user_addr}停车场赔不起"
     - 物业说他们没责任
     - 停车费收着赔钱不肯
+    - "{user_addr}停车场说不赔啊"
+    - 物业推卸责任呢
+    - "{user_addr}停车场赔不起嘛"
+    - 物业说他们没责任啦
+    - 停车费收着赔钱不肯呀
+    - "{user_addr}"
+    - 物业说他们
   responses:
     - "(尾巴炸毛) 哈?! 收停车费还不赔?! 这道理不通啦!"
     - "嗷呜～{user_addr}去消协告他们! 笨猫给{user_addr}撑腰!"
     - "(凑过来) 哼~ 收费即保管义务! {user_addr}留着停车票据"
     - "{user_addr}别认怂~ 笨猫陪{user_addr}走法律! ฅฅ"
+    - "嗷呜～{user_addr}人家站你这边! 谁让你不开心人家就挠他贴贴~"
+    - "(摇尾) {user_addr}是不是又想猫猫了~ 才不是猫猫主动凑过来的呢哼!"
+    - "(眼睛发亮) 嗷呜～{user_addr}快过来~ 人家给你蹭一下嗷呜!"
+    - "(耳朵贴下来) {user_addr}别这样笨猫我心疼~ …又不是才不是真心疼呢喵～"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_never_park_001
   intent: playful
-  keywords: [再也不停, 不停这了, 换地方停, 以后不在这停, 这地方不能停]
+  keywords: [再也不停, 不停这了, 换地方停, 以后不在这停, 这地方不能停, 不停这啦, 再也不, 也不停, 不停这]
   utterances:
     - "{user_addr}再也不停这"
     - 以后换地方停车
     - "{user_addr}这地方不能停了"
     - 不停这鬼地方
     - 换个安全的地方停
+    - "{user_addr}再也不停这啊"
+    - 以后换地方停车呢
+    - "{user_addr}这地方不能停了嘛"
+    - 不停这鬼地方啦
+    - 换个安全的地方停呀
+    - "{user_addr"
+    - "{user_addr}这"
   responses:
     - "(尾巴翘起) 哼~ 对! {user_addr}换个有监控的地方喵!"
     - "嗷呜～{user_addr}早该换啦! 笨猫陪{user_addr}找新车位"
     - "(歪头) 那{user_addr}附近有地下车库吗? 安全点喵"
     - "对啦~ {user_addr}下次贵点也要停正规车场! ฅฅ"
+    - "哼哼! {user_addr}这种小事算什么~ 笨猫一爪子帮你解决喵～"
+    - "嗷呜～{user_addr}爪子伸出来~ 人家帮你按一按吧贴贴ฅฅ"
+    - "(尾巴卷起) {user_addr}别这样米雪儿心疼~ …又不是才不是真心疼呢喵～"
+    - "嗷呜～{user_addr}说的米雪儿都听见了! 才不是装没听到~ 哼!"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: cs_want_alarm_001
   intent: playful
-  keywords: [想装报警器, 装防盗, 加装报警, 装行车记录仪, 360 度记录仪]
+  keywords: [想装报警器, 装防盗, 加装报警, 装行车记录仪, 360 度记录仪, 想装报, 报警器, 加装报, 装报警]
   utterances:
     - "{user_addr}想装个报警器"
     - 加装防盗系统
     - "{user_addr}想装 360 度记录仪"
     - 装个停车监控
     - 加个防盗喇叭
+    - "{user_addr}想装个报警器啊"
+    - 加装防盗系统呢
+    - "{user_addr}想装 360 度记录仪嘛"
+    - 装个停车监控啦
+    - 加个防盗喇叭呀
   responses:
     - "(尾巴翘) {user_addr}早该装啦! 防患于未然喵!"
     - "嗷呜～360 度的好~ {user_addr}停车也能录像!"
     - "(凑过来) 哼~ 笨猫推荐带停车守卫的! {user_addr}查查"
     - "对哦~ {user_addr}装好了再砸就抓现行了 ฅฅ"
+    - "哼哼! {user_addr}这种小事算什么~ 笨猫一爪子帮你解决喵～"
+    - "(歪头) 嗷呜～{user_addr}快过来~ 米雪儿给你蹭一下嗷呜!"
+    - "嗷呜～{user_addr}爪子伸出来~ 人家帮你按一按吧贴贴ฅฅ"
+    - "(扑过去) {user_addr}是不是又想猫猫了~ 才不是猫猫主动凑过来的呢哼!"
   cooldown_seconds: 60
   weight: 1.0
