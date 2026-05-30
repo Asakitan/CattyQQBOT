@@ -130,6 +130,33 @@ def _mark_cache_control(msg: dict[str, Any]) -> None:
 
 _CACHE_BOUNDARY_MARKER = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
 
+# 主人 2026-05-31 Stage3 私聊 cache: 带此标记的 head system message 在 merge 时**保持独立**,
+# 不并入 sys0 → 成为一个独立 cached block(在全局 sys0 之后、history 之前). 用途: 私聊单 user
+# 的 per-user/per-scope-day byte-stable 段(发言者/称呼/今日小心思/Lv/cb_diet 等, 5轮字节实测
+# 跨轮恒定)从 current-user 每轮 miss 区 hoist 到 history 前, 跨轮稳定进 cache, 命中 89%→97%+.
+# sys0 字节不变=保持全网跨-scope 共享前缀(铁律: per-scope 内容绝不 merge 进 sys0). 标记一律
+# merge 时剥除, 用可见 ASCII(漏到非 DeepSeek 端点只是无害文本, 不破 JSON).
+_SCOPE_PREFIX_SENTINEL = "<<<CATTY_SCOPE_PREFIX_NOMERGE>>>"
+
+# 私聊可 hoist 的 stable trailing system 段白名单前缀 (5 轮真实 dump 字节验证跨轮 md5 全等).
+# ⚠ 改这些段文案时必须同步更新此白名单, 否则该段漏 hoist(只少赚命中, 不会崩 — 保守设计).
+# volatile 段(当前时刻 per-hour / 续聊窗口 remaining 每轮变)**不在**白名单 → 留 current-user.
+_PRIVATE_HOIST_STABLE_PREFIXES = (
+    # 主人 2026-05-31 修正: 只留**真结构稳定**(私聊单人, 不随消息内容变)的段。
+    # 5轮真实dump字节验证 + 注入源码确认驱动因子:
+    "<<<CATTY_INTERNAL_INSTRUCTION (main preg",  # preg 567c 私聊单人状态稳定(最大块)
+    "【今日动作候选池",   # scope+date 种子, confirmed byte-stable
+    "【关系亲密度",       # per-Lv, 单条消息不改 Lv
+    "【日常 SFW",         # per-Lv
+    "【当前发言者",       # 私聊单人 = 固定
+    "记忆与称呼规则",      # 私聊单人 = 固定
+    "【当前对话相关 QQ",   # QQ映射 私聊单人 = 固定
+    # ❌移除(实测DRIFT, 进HOIST_BLOCK会破history前缀):
+    #   今日生活感/今日小心思(daily_life/catty_goals 吃 recent_text 末轮变)
+    #   character_book/cb_diet(user_text BFS hit, 真实对话随话题变)
+    #   scope_lorebook(per-scope命中, 条件触发)
+)
+
 
 def _has_marker_in_content(content: object, marker: str) -> bool:
     """检测 message.content (可能是 str 或 list[dict]) 是否含 boundary marker."""
@@ -417,7 +444,7 @@ def merge_consecutive_system_messages(messages: list[dict]) -> int:
             head_sys_idx.append(i)
         else:
             break
-    if len(head_sys_idx) < 2:
+    if not head_sys_idx:
         return 0
 
     def _to_text(c: object) -> str:
@@ -433,13 +460,107 @@ def merge_consecutive_system_messages(messages: list[dict]) -> int:
             return "\n\n".join(parts)
         return str(c or "")
 
-    merged_text = "\n\n".join(_to_text(messages[i].get("content")) for i in head_sys_idx)
-    keep = head_sys_idx[0]
+    # 主人 2026-05-31 Stage3: 带 _SCOPE_PREFIX_SENTINEL 的 head system 保持独立(不 merge),
+    # 当作独立 cached block. sentinel 一律剥除. 无 sentinel 时行为跟旧版完全一致(向后兼容).
+    scope_idx = [
+        i for i in head_sys_idx
+        if _SCOPE_PREFIX_SENTINEL in _to_text(messages[i].get("content"))
+    ]
+    for i in scope_idx:
+        messages[i]["content"] = _to_text(messages[i].get("content")).replace(
+            _SCOPE_PREFIX_SENTINEL, "",
+        )
+    merge_idx = [i for i in head_sys_idx if i not in scope_idx]
+    if len(merge_idx) < 2:
+        return 0
+    merged_text = "\n\n".join(_to_text(messages[i].get("content")) for i in merge_idx)
+    keep = merge_idx[0]
     messages[keep]["content"] = merged_text
-    # 倒序删除其余 head_sys_idx
-    for i in reversed(head_sys_idx[1:]):
+    # 倒序删除被 merge 掉的 (scope block 保留独立, 不删)
+    for i in reversed(merge_idx[1:]):
         del messages[i]
-    return len(head_sys_idx) - 1
+    return len(merge_idx) - 1
+
+
+def hoist_stable_private_trailing(messages: list[dict]) -> int:
+    """私聊专用: 把 current-user 之后的 stable trailing system 段(白名单)hoist 到
+    history 之前, 合并成一个独立 sentinel block → 跨轮稳定进 cache. volatile 段(时刻/续聊
+    /未知)留原位给 collapse_trailing_systems_into_last_user inline 进 current-user.
+
+    主人 2026-05-31 Stage3: 私聊单 user → 发言者/称呼/今日小心思/Lv/cb_diet 等段跨轮 md5
+    全等(5轮真实 dump 验证), 但它们目前是 current-user 之后的 trailing system → 被 collapse
+    inline 进每轮 miss 的 current-user. 本函数把这些 stable 段提到 **history 之前**(关键:
+    放 history 区会被 history 增长打断前缀, 这是 Stage2 群聊 t4 抖动根因; 放 history 前则
+    block 跨轮稳定, history 增长不影响 block 前缀).
+
+    结构变化: [sys_pre..., history..., current_user, trailing(stable+volatile)]
+          →  [sys_pre..., HOIST_BLOCK(sentinel), history..., current_user, trailing(volatile)]
+    之后 merge 把 sys_pre merge 成 sys0(HOIST_BLOCK 带 sentinel 独立不并入),
+    collapse 把剩余 volatile inline 进 current_user.
+
+    **仅私聊调用**(群聊每轮换 user → 发言者/称呼/画像 per-speaker 每轮变, hoist 反而每轮
+    破 block 后所有 history 前缀; 私聊单 user 才稳定). 调用方判 scope.startswith("private:").
+
+    in-place 修改 messages. 返回 hoist 的段数(0=没触发, 不改结构).
+    """
+    if not messages:
+        return 0
+
+    def _to_text(c: object) -> str:
+        if isinstance(c, str):
+            return c
+        if isinstance(c, list):
+            return "\n".join(
+                str(b.get("text", "") or "")
+                for b in c if isinstance(b, dict) and b.get("type") == "text"
+            )
+        return str(c or "")
+
+    # 1. 找 current user (最后一条 user)
+    last_user_idx = -1
+    for i in range(len(messages) - 1, -1, -1):
+        m = messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            last_user_idx = i
+            break
+    if last_user_idx < 0 or last_user_idx + 1 >= len(messages):
+        return 0  # 没 user 或 user 后无 trailing → 不触发
+
+    # 2. current user 之后的段分流: stable(白名单)→hoist, 其余→保留(volatile/非system)
+    stable_chunks: list[str] = []
+    keep_trailing: list[dict] = []
+    for j in range(last_user_idx + 1, len(messages)):
+        m = messages[j]
+        if not (isinstance(m, dict) and m.get("role") == "system"):
+            keep_trailing.append(m)
+            continue
+        txt = _to_text(m.get("content")).strip()
+        if txt and any(txt.startswith(p) for p in _PRIVATE_HOIST_STABLE_PREFIXES):
+            stable_chunks.append(txt)
+        else:
+            keep_trailing.append(m)
+    if not stable_chunks:
+        return 0  # 没可 hoist 的 stable 段
+
+    # 3. 找 history 起点 (第一条非 system message)
+    hist_start = len(messages)
+    for i, m in enumerate(messages):
+        if not (isinstance(m, dict) and m.get("role") == "system"):
+            hist_start = i
+            break
+
+    # 4. 删掉 current user 之后的所有 trailing, 重新 append volatile/非system 段
+    del messages[last_user_idx + 1:]
+    messages.extend(keep_trailing)
+
+    # 5. 把 stable 段合并成独立 sentinel block, 插到 history 之前 (sys_pre 之后)
+    #    sentinel 让 merge 不把它并进 sys0 (保持 sys0 全局共享前缀字节不变).
+    hoist_block = {
+        "role": "system",
+        "content": _SCOPE_PREFIX_SENTINEL + "\n\n".join(stable_chunks),
+    }
+    messages.insert(hist_start, hoist_block)
+    return len(stable_chunks)
 
 
 def stabilize_tools_order(tools: list[dict]) -> int:
@@ -741,6 +862,7 @@ __all__ = [
     "cachingAtDepthForClaude",
     "collapse_trailing_systems_into_last_user",
     "compute_prefix_hash",
+    "hoist_stable_private_trailing",
     "inject_system_tail_cache",
     "inject_tools_cache",
     "is_claude_endpoint",

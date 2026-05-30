@@ -892,6 +892,7 @@ async def _post_chat_completion_raw(
         from .prompt_cache import (
             collapse_trailing_systems_into_last_user,
             compute_prefix_hash,
+            hoist_stable_private_trailing,
             is_claude_endpoint,
             merge_consecutive_system_messages,
             stabilize_tools_order,
@@ -931,6 +932,21 @@ async def _post_chat_completion_raw(
                 "first_user_head=%r",
                 strip_hist, _diag_first_user_len, _diag_first_user_preview,
             )
+            # (a3) 主人 2026-05-31 Stage3: 私聊把 stable trailing system 段(发言者/称呼/今日
+            # 小心思/Lv/cb_diet, 5轮字节验证跨轮恒定)hoist 到 history 之前独立 sentinel block,
+            # 离开 current-user 每轮 miss 区进 cache. 仅私聊(单 user 才跨轮稳定; 群聊每轮换人
+            # 会破 block 后 history 前缀). volatile 段(时刻/续聊)留给下面 collapse.
+            try:
+                _scope_early = get_current_scope_key() or ""
+            except Exception:  # noqa: BLE001
+                _scope_early = ""
+            if _scope_early.startswith("private:"):
+                _hoisted = hoist_stable_private_trailing(messages)
+                if _hoisted:
+                    _logger.info(
+                        "deepseek prefix opt: hoisted %d stable private trailing → history前 "
+                        "(独立 sentinel block, 跨轮稳定进 cache)", _hoisted,
+                    )
             # (b) 合并开头连续 system → 单条 (前缀更紧凑)
             merged = merge_consecutive_system_messages(messages)
             if merged > 0:
