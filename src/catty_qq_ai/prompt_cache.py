@@ -602,9 +602,23 @@ def collapse_trailing_systems_into_last_user(messages: list[dict]) -> int:
     while i >= 0 and isinstance(messages[i], dict) and messages[i].get("role") == "system":
         i -= 1
     tail_start = i + 1  # messages[tail_start:] 全是末尾连续 system
-    # messages[i] 必须是 user (current user); 否则结构异常, 不动 (保守)
-    if i < 0 or not (isinstance(messages[i], dict) and messages[i].get("role") == "user"):
-        return 0
+    # 优先贴到紧邻 tail 的 current user; 若中间被空/未知消息隔开, 向前找最近 user。
+    # 但遇到 assistant/tool 说明已经越过模型输出边界, 不折叠以免改变语义。
+    user_idx = i
+    if not (user_idx >= 0 and isinstance(messages[user_idx], dict) and messages[user_idx].get("role") == "user"):
+        user_idx = -1
+        for j in range(i, -1, -1):
+            msg = messages[j]
+            if not isinstance(msg, dict):
+                continue
+            role = msg.get("role")
+            if role == "user":
+                user_idx = j
+                break
+            if role in {"assistant", "tool"}:
+                break
+        if user_idx < 0:
+            return 0
 
     def _to_text(c: object) -> str:
         if isinstance(c, str):
@@ -631,13 +645,13 @@ def collapse_trailing_systems_into_last_user(messages: list[dict]) -> int:
         + "\n\n".join(chunks)
         + "\n[/DYNAMIC_CONTEXT]"
     )
-    user_content = messages[i].get("content")
+    user_content = messages[user_idx].get("content")
     if isinstance(user_content, list):
         # multimodal (image+text): 末尾追加一个 text part, 保持结尾 user
         user_content.append({"type": "text", "text": dyn_text})
-        messages[i]["content"] = user_content
+        messages[user_idx]["content"] = user_content
     else:
-        messages[i]["content"] = str(user_content or "") + dyn_text
+        messages[user_idx]["content"] = str(user_content or "") + dyn_text
     n_removed = len(messages) - tail_start
     del messages[tail_start:]
     return n_removed
