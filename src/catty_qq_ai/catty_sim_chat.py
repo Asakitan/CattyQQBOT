@@ -28,11 +28,20 @@ from typing import Any
 _SIM_MESSAGE_ID_BASE = 10**12  # 大数 + time 让 mock event message_id 不撞真消息
 
 
-def _make_mock_private_event(user_id: int, text: str, *, self_id: int = 0):
+def _make_mock_private_event(
+    user_id: int,
+    text: str,
+    *,
+    self_id: int = 0,
+    nickname: str | None = None,
+    card: str | None = None,
+    title: str | None = None,
+):
     """构造 mock PrivateMessageEvent. user_id 是真用户 QQ 号 (主人会用 993255714)."""
     from nonebot.adapters.onebot.v11 import Message, PrivateMessageEvent
     from nonebot.adapters.onebot.v11.event import Sender
     now = int(time.time())
+    display = (card or nickname or f"sim_{user_id}").strip()
     return PrivateMessageEvent.model_construct(
         time=now,
         self_id=self_id,
@@ -46,17 +55,33 @@ def _make_mock_private_event(user_id: int, text: str, *, self_id: int = 0):
         raw_message=text,
         font=0,
         sender=Sender.model_construct(
-            user_id=user_id, nickname=f"sim_{user_id}", sex="unknown", age=0,
+            user_id=user_id,
+            nickname=(nickname or display),
+            card=(card or ""),
+            title=(title or ""),
+            sex="unknown",
+            age=0,
         ),
         to_me=True,
     )
 
 
-def _make_mock_group_event(user_id: int, group_id: int, text: str, *, self_id: int = 0):
+def _make_mock_group_event(
+    user_id: int,
+    group_id: int,
+    text: str,
+    *,
+    self_id: int = 0,
+    nickname: str | None = None,
+    card: str | None = None,
+    title: str | None = None,
+    group_name: str | None = None,
+):
     """构造 mock GroupMessageEvent. 默认 to_me=True 让 @ 笨猫流程走通."""
     from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message
     from nonebot.adapters.onebot.v11.event import Sender
     now = int(time.time())
+    display = (card or nickname or f"sim_{user_id}").strip()
     return GroupMessageEvent.model_construct(
         time=now,
         self_id=self_id,
@@ -70,12 +95,260 @@ def _make_mock_group_event(user_id: int, group_id: int, text: str, *, self_id: i
         original_message=Message(text),
         raw_message=text,
         font=0,
+        group_name=(group_name or ""),
         sender=Sender.model_construct(
-            user_id=user_id, nickname=f"sim_{user_id}", card=f"sim_{user_id}",
-            sex="unknown", age=0, role="member",
+            user_id=user_id,
+            nickname=(nickname or display),
+            card=(card or display),
+            title=(title or ""),
+            sex="unknown",
+            age=0,
+            role="member",
         ),
         to_me=True,
     )
+
+
+async def _build_full_real_flow_messages(event: Any, key: str, incoming: Any) -> tuple[list[dict[str, Any]], bool]:
+    """Build messages through the same runtime context assembly used by handle_chat.
+
+    sim_chat 的早期版本只调 _build_messages, 会漏掉 handle_chat 外层装配的
+    wake/emoji/StarRAG/续聊/特别关心等 runtime context. 这个 helper 只做 prompt
+    装配, 不发送 QQ 消息, 用于 cache 验证尽量贴近真实链路。
+    """
+    from nonebot.adapters.onebot.v11 import GroupMessageEvent
+    from . import (
+        _build_messages,
+        _conversation_queue_key,
+        _display_name,
+        _generic_emoji_context,
+        _remember_recent_conversation_event,
+        _should_request_semantic_reply_split,
+        _wake_context_prompt,
+        _bot_continuation_judgement_prompt,
+        ambient_store,
+        config,
+        memory_store,
+    )
+    from .message_utils import event_plain_text
+
+    # 模拟 observe_matcher 的轻量状态写入:真实 QQ 消息到达时, 在主回复前已经进入
+    # recent_conversation + ambient buffer. cache 测试如果跳过这里, wake/ambient 会瘦身。
+    try:
+        _remember_recent_conversation_event(event, incoming)
+    except Exception:
+        pass
+    if isinstance(event, GroupMessageEvent):
+        try:
+            ambient_store.record(
+                scope=_conversation_queue_key(event),
+                user_id=str(event.user_id),
+                nickname=_display_name(event),
+                text=event_plain_text(event),
+            )
+        except Exception:
+            pass
+
+    group_filter_context = ""
+    special_care_context = ""
+    try:
+        if isinstance(event, GroupMessageEvent) and memory_store.is_special_care_user(event):
+            special_care_context = memory_store.build_special_care_context(
+                event,
+                cooldown_seconds=config.catty_special_care_cooldown_seconds,
+                enforce_cooldown=bool(getattr(incoming, "opportunistic", False)),
+            ) or ""
+    except Exception:
+        special_care_context = ""
+
+    try:
+        memory_store.remember_event(event)
+    except Exception:
+        pass
+
+    current_group_id = event.group_id if isinstance(event, GroupMessageEvent) else None
+    try:
+        memory_tagged_games = (
+            memory_store.get_group_games(current_group_id) if current_group_id is not None else []
+        )
+    except Exception:
+        memory_tagged_games = []
+    try:
+        from .star_resonance_memory import (
+            build_star_resonance_dynamic_context,
+            build_star_resonance_static_context,
+        )
+        _star_force_group_related = "star_resonance" in memory_tagged_games
+        star_resonance_static_context = build_star_resonance_static_context(
+            incoming.text,
+            group_id=current_group_id,
+            group_ids=config.catty_game_context_star_resonance_group_ids,
+            force_group_related=_star_force_group_related,
+        )
+        star_resonance_context = (
+            build_star_resonance_dynamic_context(memory_store)
+            if star_resonance_static_context
+            else ""
+        )
+    except Exception:
+        star_resonance_static_context = ""
+        star_resonance_context = ""
+
+    try:
+        from .strinova_memory import build_strinova_context
+        strinova_context = build_strinova_context(
+            incoming.text,
+            group_id=current_group_id,
+            group_ids=config.catty_game_context_strinova_group_ids,
+            memory_store=memory_store,
+            force_group_related="strinova" in memory_tagged_games,
+        )
+    except Exception:
+        strinova_context = ""
+
+    other_game_contexts: list[str] = []
+    try:
+        for game_name in memory_tagged_games:
+            if game_name in {"strinova", "star_resonance"}:
+                continue
+            dynamic = memory_store.build_dynamic_game_context(game_name, recent_facts_limit=6)
+            if dynamic:
+                other_game_contexts.append(
+                    f"本群被标记为《{game_name}》相关。猫猫长期积累的事实记忆:\n{dynamic}"
+                )
+    except Exception:
+        other_game_contexts = []
+
+    try:
+        wake_context = _wake_context_prompt(
+            event,
+            incoming,
+            group_filter_context=bool(group_filter_context),
+            bot_continuation=False,
+        )
+    except Exception:
+        wake_context = ""
+    bot_continuation_context = ""
+    try:
+        from . import _recent_bot_prompted_user
+        if _recent_bot_prompted_user(event):
+            bot_continuation_context = _bot_continuation_judgement_prompt(event)
+    except Exception:
+        bot_continuation_context = ""
+
+    try:
+        emoji_context = _generic_emoji_context(incoming)
+    except Exception:
+        emoji_context = ""
+    try:
+        semantic_reply_split = await _should_request_semantic_reply_split(incoming)
+    except Exception:
+        semantic_reply_split = False
+
+    messages, prefer_spark = await _build_messages(
+        event,
+        key,
+        incoming,
+        semantic_reply_split=semantic_reply_split,
+        group_filter_context=group_filter_context,
+        special_care_context=special_care_context,
+        emoji_context=emoji_context,
+        star_resonance_context=star_resonance_context,
+        star_resonance_static_context=star_resonance_static_context,
+        strinova_context=strinova_context,
+        other_game_contexts=other_game_contexts,
+        wake_context=wake_context,
+        bot_continuation_context=bot_continuation_context,
+    )
+
+    # 复刻 handle_chat 中 _build_messages 之后的轻量 AuthorNote 注入. 这里不跑 vision/tool 图源
+    # hint, 但把影响 cache 的 NLU 综合提示/跨天提示带上。
+    try:
+        from nonebot.adapters.onebot.v11 import PrivateMessageEvent
+        from . import _configured_title, _get_session_cache, _event_is_owner
+        from .author_note import AuthorNote, inject_author_note, build_adaptive_drift_note
+        _user_is_owner = _event_is_owner(event)
+        _user_real_display = _configured_title(event).strip() or _display_name(event)
+        _recent_user_texts: list[str] = []
+        for _m in reversed(messages):
+            if _m.get("role") == "user":
+                _c = _m.get("content", "")
+                if isinstance(_c, str) and _c.strip():
+                    _recent_user_texts.append(_c)
+                    if len(_recent_user_texts) >= 3:
+                        break
+        _unified_hints: list[str] = []
+
+        def _short(s: str, n: int = 30) -> str:
+            if not s:
+                return ""
+            s2 = " ".join(line.strip() for line in s.splitlines() if line.strip())
+            if "】" in s2:
+                s2 = s2.split("】", 1)[1].strip()
+            return s2[:n].rstrip()
+
+        if _recent_user_texts:
+            try:
+                _adaptive_note = build_adaptive_drift_note(
+                    _recent_user_texts, is_owner=_user_is_owner,
+                )
+                _ad_short = _short(getattr(_adaptive_note, "content", ""), 28)
+                if _ad_short:
+                    _unified_hints.append(f"vibe:{_ad_short}")
+            except Exception:
+                pass
+            try:
+                from .catty_theory_of_mind import build_theory_of_mind_note
+                _tom_note = build_theory_of_mind_note(_recent_user_texts, is_owner=_user_is_owner)
+                _tom_short = _short(getattr(_tom_note, "content", ""), 28)
+                if _tom_short:
+                    _unified_hints.append(f"读心:{_tom_short}")
+            except Exception:
+                pass
+            if len(_recent_user_texts) >= 2:
+                try:
+                    from .catty_scene_transition import build_scene_transition_prompt
+                    _tr_short = _short(build_scene_transition_prompt(_recent_user_texts), 28)
+                    if _tr_short:
+                        _unified_hints.append(f"切换:{_tr_short}")
+                except Exception:
+                    pass
+                try:
+                    from .catty_multi_turn_callback import build_multi_turn_callback_prompt
+                    _cb_short = _short(build_multi_turn_callback_prompt(_recent_user_texts), 28)
+                    if _cb_short:
+                        _unified_hints.append(f"回调:{_cb_short}")
+                except Exception:
+                    pass
+        try:
+            from .catty_pacing import build_pacing_prompt
+            _pc_short = _short(build_pacing_prompt(messages), 28)
+            if _pc_short:
+                _unified_hints.append(f"节奏:{_pc_short}")
+        except Exception:
+            pass
+        if _unified_hints:
+            messages = inject_author_note(
+                messages,
+                AuthorNote(content="【NLU 综合提示】" + " | ".join(_unified_hints), depth=2),
+            )
+        try:
+            from .time_awareness import build_day_gap_note
+            _prev_turn_at = _get_session_cache().last_turn_at(key)
+            _day_gap_text = build_day_gap_note(
+                _prev_turn_at,
+                is_private=isinstance(event, PrivateMessageEvent),
+                is_owner=_user_is_owner,
+                user_display=_user_real_display,
+            )
+            if _day_gap_text:
+                messages = inject_author_note(messages, AuthorNote(content=_day_gap_text, depth=1))
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+    return messages, bool(prefer_spark)
 
 
 async def sim_chat(
@@ -88,6 +361,11 @@ async def sim_chat(
     with_tools: bool = True,
     force_spark: bool = False,
     persist: bool = False,
+    full_context: bool = True,
+    nickname: str | None = None,
+    card: str | None = None,
+    title: str | None = None,
+    group_name: str | None = None,
 ) -> dict[str, Any]:
     """模拟一条 incoming message, 走 _build_messages 拼完整 prompt, 可选调 AI 拿 reply.
 
@@ -132,9 +410,15 @@ async def sim_chat(
     uid = _to_qq_id(user_id, "user_id")
     gid = _to_qq_id(group_id, "group_id") if group_id is not None else None
     if gid:
-        event = _make_mock_group_event(uid, gid, text)
+        event = _make_mock_group_event(
+            uid, gid, text,
+            nickname=nickname, card=card, title=title, group_name=group_name,
+        )
     else:
-        event = _make_mock_private_event(uid, text)
+        event = _make_mock_private_event(
+            uid, text,
+            nickname=nickname, card=card, title=title,
+        )
 
     cfg = _module_config
 
@@ -157,7 +441,10 @@ async def sim_chat(
         except Exception:
             pass
 
-    _bm_ret = await _build_messages(event, key, incoming)
+    if full_context:
+        _bm_ret = await _build_full_real_flow_messages(event, key, incoming)
+    else:
+        _bm_ret = await _build_messages(event, key, incoming)
     # _build_messages 返回 (messages, _prefer_spark) tuple
     # 主人 2026-05-29 Round 15: 拿 prefer_spark 标记 — spark 真实路径走
     # chat_completion_codex_instant 不是 chat_completion_with_tools.

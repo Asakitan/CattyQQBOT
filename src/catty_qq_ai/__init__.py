@@ -11843,12 +11843,22 @@ async def _mount_dev_sim_chat_endpoint() -> None:
         include_messages = bool(body.get("include_messages", True))
         persist = bool(body.get("persist", False))
         with_tools = bool(body.get("with_tools", True))  # dev: with_tools=False 走 chat_completion(无 tools), 测 tools 对 cache 的影响
+        full_context = bool(body.get("full_context", True))
+        nickname = body.get("nickname")
+        card = body.get("card")
+        title = body.get("title")
+        group_name = body.get("group_name")
         try:
             from .catty_sim_chat import sim_chat
             result = await sim_chat(
                 text=text, user_id=user_id, group_id=group_id,
                 live=live, history_replace=history_replace, persist=persist,
                 with_tools=with_tools,
+                full_context=full_context,
+                nickname=str(nickname) if nickname is not None else None,
+                card=str(card) if card is not None else None,
+                title=str(title) if title is not None else None,
+                group_name=str(group_name) if group_name is not None else None,
             )
         except Exception as exc:  # noqa: BLE001
             import traceback
@@ -11876,7 +11886,7 @@ async def _mount_dev_sim_chat_endpoint() -> None:
             "messages": msgs_out if include_messages else None,
         }
 
-    logger.info("dev /dev/sim_chat endpoint mounted (POST {user_id, text, group_id?, live, history_replace, include_messages})")
+    logger.info("dev /dev/sim_chat endpoint mounted (POST {user_id, text, group_id?, live, history_replace, include_messages, full_context, nickname/card/title/group_name})")
 
     @app.post("/dev/ambient_inject")
     async def _dev_ambient_inject(req: Request):
