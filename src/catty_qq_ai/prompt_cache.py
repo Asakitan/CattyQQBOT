@@ -359,6 +359,45 @@ def adapt_assistant_prefill_for_strict_user_end(messages: list) -> list:
     return new_messages
 
 
+def inline_assistant_prefill_without_reordering(messages: list) -> list:
+    """Move trailing assistant prefill into the nearest user without moving that user.
+
+    DeepSeek spark has shape [prefix/history, current_user, dynamic systems..., assistant prefill].
+    If we move current_user to the end before collapsing systems, those dynamic systems stay as
+    standalone tail blockers. This helper only drops the assistant and appends a compact prefill
+    hint to the nearest user, preserving order so collapse_trailing_systems_into_last_user() can
+    merge the dynamic systems into that same user afterwards.
+    """
+    if not messages or len(messages) < 2:
+        return messages
+    tail = messages[-1]
+    if not isinstance(tail, dict) or tail.get("role") != "assistant":
+        return messages
+    last_user_idx = -1
+    for i in range(len(messages) - 2, -1, -1):
+        m = messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            last_user_idx = i
+            break
+    import copy
+    new_messages = copy.deepcopy(messages)
+    if last_user_idx < 0:
+        return new_messages[:-1]
+    prefill_text = str(tail.get("content") or "").strip()
+    if prefill_text:
+        hint = (
+            f"\n\n[PREFILL] 下一句回复必须以『{prefill_text}』作为前缀直接续写; "
+            "不要 meta 开场, 直接进入角色动作和台词."
+        )
+        user_content = new_messages[last_user_idx].get("content")
+        if isinstance(user_content, list):
+            user_content.append({"type": "text", "text": hint})
+            new_messages[last_user_idx]["content"] = user_content
+        else:
+            new_messages[last_user_idx]["content"] = str(user_content or "") + hint
+    return new_messages[:-1]
+
+
 def sweep_floating_systems_into_user_content(messages: list) -> list:
     """主人 2026-05-28 cache 修复 — 通用 sweep: 把所有 **不在顶部连续 sys 段** 的 system msg
     内容合并成 [DYNAMIC_CONTEXT] 块, inline 到 current user msg content 末尾.
@@ -975,6 +1014,7 @@ def compute_prefix_hash(
 
 __all__ = [
     "adapt_assistant_prefill_for_strict_user_end",
+    "inline_assistant_prefill_without_reordering",
     "cachingAtDepthForClaude",
     "collapse_trailing_systems_into_last_user",
     "compute_prefix_hash",

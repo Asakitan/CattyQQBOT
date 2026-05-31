@@ -894,6 +894,7 @@ async def _post_chat_completion_raw(
             compute_prefix_hash,
             hoist_stable_group_owner_trailing,
             hoist_stable_private_trailing,
+            inline_assistant_prefill_without_reordering,
             is_claude_endpoint,
             merge_consecutive_system_messages,
             stabilize_tools_order,
@@ -998,11 +999,11 @@ async def _post_chat_completion_raw(
                 and messages[-1].get("role") == "assistant"
             ):
                 before_len = len(messages)
-                messages = adapt_assistant_prefill_for_strict_user_end(messages)
+                messages = inline_assistant_prefill_without_reordering(messages)
                 if len(messages) != before_len:
                     _logger.info(
                         "deepseek prefix opt: adapted assistant prefill into last user "
-                        "(spark strict user-end cache boundary)",
+                        "without reordering (spark strict user-end cache boundary)",
                     )
             # (b2) 主人 2026-05-30 决定性修复: 末尾连续 system → inline 进 current user,
             # 让 messages 结尾 = user. 真实 dump 重放实测: 末尾=system 时 history 死锁不进
