@@ -3643,12 +3643,16 @@ def available_tool_schemas(
     if not enabled:
         return []
 
-    # 主人 2026-05-29 P3: tools 恒定全量 (不再 NLU intent gate). 旧 gate 让 tools 数组每轮变
-    # (闲聊命中→[], 关键词命中→[子集]) → DeepSeek tools 前缀(它排在 system 之前)每轮漂移 → 全 miss.
-    # 恒定全量 + 字典序锁定(发送前 stabilize_tools_order) → tools 前缀字节稳定进 cache, 且 P4 按需
-    # 上下文工具(catty_self_state / catty_user_profile / catty_recall)任意轮次都可调.
-    # lazy schema 下全量 ~1.2K, 命中价 0.1x 几乎免费. has_image 不再门控(无图时 image tool 由
-    # executor 自己 guard, 但 schema 恒定保证前缀稳定). user_text/has_image 参数保留兼容签名.
+    # 主人 2026-05-31 cache follow-up: flash+tools 实测 tools schema 约 6K 字符, 且 API 字段
+    # 序列化在 current-user 动态尾巴之后；即使 tools 自身 byte-stable, current-user 漂移也会让
+    # tools 一起落进 miss 区。恢复「无工具意图 → tools=[]」, 但只门控 schema, 不删 executor；
+    # 命中搜索/画图/记忆/查人/时间/MC/story-arc/图片等意图时仍发对应 tool, 功能不砍。
+    intent_hits = _detect_tool_intent(user_text, has_image)
+    if has_image:
+        intent_hits.update({"catty_image_search", "catty_nai_director"})
+    if not intent_hits:
+        return []
+
     excluded_list: list[str] = []
     if is_private:
         for name in getattr(config, "catty_tools_disabled_in_private", []) or []:
@@ -3661,7 +3665,7 @@ def available_tool_schemas(
 
     result = [
         schema for name, schema in _schema_pool.items()
-        if name not in excluded_set
+        if name in intent_hits and name not in excluded_set
     ]
     return result
 

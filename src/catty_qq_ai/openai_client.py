@@ -892,6 +892,7 @@ async def _post_chat_completion_raw(
         from .prompt_cache import (
             collapse_trailing_systems_into_last_user,
             compute_prefix_hash,
+            hoist_stable_group_owner_trailing,
             hoist_stable_private_trailing,
             is_claude_endpoint,
             merge_consecutive_system_messages,
@@ -947,6 +948,40 @@ async def _post_chat_completion_raw(
                         "deepseek prefix opt: hoisted %d stable private trailing → history前 "
                         "(独立 sentinel block, 跨轮稳定进 cache)", _hoisted,
                     )
+            elif _scope_early.startswith("group:"):
+                _owner_qq = ""
+                try:
+                    import sys as _sys
+                    _plugin_mod = _sys.modules.get("catty_qq_ai") or _sys.modules.get("src.catty_qq_ai")
+                    _runtime_config = getattr(_plugin_mod, "config", None) if _plugin_mod is not None else None
+                    if _runtime_config is None:
+                        from . import config as _config_module
+                        _runtime_config = getattr(_config_module, "config", None)
+                    _owner_qq = str(getattr(_runtime_config, "catty_owner_qq", "") or "").strip()
+                    if not _owner_qq or _owner_qq == "0":
+                        import os as _os
+                        _owner_qq = str(_os.environ.get("CATTY_OWNER_QQ", "") or "").strip()
+                except Exception:  # noqa: BLE001
+                    _owner_qq = ""
+                _current_user_text = ""
+                for _m in reversed(messages):
+                    if isinstance(_m, dict) and _m.get("role") == "user":
+                        _c = _m.get("content", "")
+                        if isinstance(_c, list):
+                            _current_user_text = "\n".join(
+                                str(_b.get("text", "") or "")
+                                for _b in _c if isinstance(_b, dict)
+                            )
+                        else:
+                            _current_user_text = str(_c or "")
+                        break
+                if _owner_qq and _current_user_text.startswith(f"[QQ:{_owner_qq}]"):
+                    _hoisted = hoist_stable_group_owner_trailing(messages)
+                    if _hoisted:
+                        _logger.info(
+                            "deepseek prefix opt: hoisted %d stable group-owner trailing → history前 "
+                            "(独立 sentinel block, owner-in-group cache)", _hoisted,
+                        )
             # (b) 合并开头连续 system → 单条 (前缀更紧凑)
             merged = merge_consecutive_system_messages(messages)
             if merged > 0:

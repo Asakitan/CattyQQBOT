@@ -160,6 +160,50 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
     # 注: 【笨猫小心思·候选池(universal)已走 order=163 pre-boundary 全局 block, 不在此白名单.
 )
 
+# 群聊里「当前发言者=真实主人」时可 hoist 的稳定 post-boundary 段。
+# 这些段不合并进全局 sys0, 而是作为 sentinel 独立 block 放在 history 前；这样只会让
+# owner-in-group 这个真实 scope/user 受益, 不会污染普通群友的共享前缀。
+_GROUP_OWNER_HOIST_STABLE_PREFIXES = (
+    "【笨猫小心思·主人专属】",
+    "【今日动作候选池",
+    "【主人专属·亲密度上限】",
+    "【关系亲密度",
+    "【日常 SFW",
+    "【当前发言者】",
+    "【当前对话相关 QQ",
+    "【已知用户的细节】",
+    "【正在追的话题(跨多条消息的故事线)】",
+    "【本轮启用 semantic_reply_split】",
+    "<<<CATTY_INTERNAL_INSTRUCTION (main preg",
+)
+
+
+def _to_text_content(content: object) -> str:
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        return "\n".join(
+            str(b.get("text", "") or "")
+            for b in content if isinstance(b, dict) and b.get("type") == "text"
+        )
+    return str(content or "")
+
+
+def _split_merged_dynamic_chunks(text: str) -> list[str]:
+    """把 _build_messages 合并后的 post-boundary system 尽量切回 PromptEntry 粒度。
+
+    PromptManager append 时用空行连接各 entry；绝大多数 entry 以【标题】或内部指令
+    marker 开头。这里只在“下一段看起来像新 entry 标题”时切, 避免误切普通正文。
+    """
+    if not text or not text.strip():
+        return []
+    import re as _re
+    parts = _re.split(
+        r"\n{2,}(?=(?:【|<<<CATTY_INTERNAL_INSTRUCTION|记忆与称呼规则))",
+        text.strip(),
+    )
+    return [p.strip() for p in parts if p and p.strip()]
+
 
 def _has_marker_in_content(content: object, marker: str) -> bool:
     """检测 message.content (可能是 str 或 list[dict]) 是否含 boundary marker."""
@@ -518,16 +562,6 @@ def hoist_stable_private_trailing(messages: list[dict]) -> int:
     if not messages:
         return 0
 
-    def _to_text(c: object) -> str:
-        if isinstance(c, str):
-            return c
-        if isinstance(c, list):
-            return "\n".join(
-                str(b.get("text", "") or "")
-                for b in c if isinstance(b, dict) and b.get("type") == "text"
-            )
-        return str(c or "")
-
     # 1. 找 current user (最后一条 user)
     last_user_idx = -1
     for i in range(len(messages) - 1, -1, -1):
@@ -546,7 +580,7 @@ def hoist_stable_private_trailing(messages: list[dict]) -> int:
         if not (isinstance(m, dict) and m.get("role") == "system"):
             keep_trailing.append(m)
             continue
-        txt = _to_text(m.get("content")).strip()
+        txt = _to_text_content(m.get("content")).strip()
         if txt and any(txt.startswith(p) for p in _PRIVATE_HOIST_STABLE_PREFIXES):
             stable_chunks.append(txt)
         else:
@@ -572,6 +606,66 @@ def hoist_stable_private_trailing(messages: list[dict]) -> int:
         "content": _SCOPE_PREFIX_SENTINEL + "\n\n".join(stable_chunks),
     }
     messages.insert(hist_start, hoist_block)
+    return len(stable_chunks)
+
+
+def hoist_stable_group_owner_trailing(messages: list[dict]) -> int:
+    """群聊主人专用: 从 merged post-boundary trailing system 中挑出稳定 owner 块。
+
+    普通群聊不能像私聊那样 hoist per-speaker 内容, 因为换人会让 block 每轮变。
+    但真实主人在固定 group scope 里发言时, 称呼/关系/主人专属状态/动作池/QQ映射等
+    对同一 owner 是稳定或低频变化的。把这些块放 history 前独立 sentinel block, 可以
+    减少 flash+tools 路径 current-user 里的 miss 大尾巴；wake/NLU/当前话题/生活感等仍
+    留在 trailing system, 继续由 collapse inline 到 current user。
+
+    只在 current user 文本以 [QQ:<owner_id>] 开头时由调用方触发。
+    """
+    if not messages:
+        return 0
+
+    last_user_idx = -1
+    for i in range(len(messages) - 1, -1, -1):
+        m = messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            last_user_idx = i
+            break
+    if last_user_idx < 0 or last_user_idx + 1 >= len(messages):
+        return 0
+
+    stable_chunks: list[str] = []
+    keep_trailing: list[dict] = []
+    for j in range(last_user_idx + 1, len(messages)):
+        m = messages[j]
+        if not (isinstance(m, dict) and m.get("role") == "system"):
+            keep_trailing.append(m)
+            continue
+        chunks = _split_merged_dynamic_chunks(_to_text_content(m.get("content")))
+        if not chunks:
+            keep_trailing.append(m)
+            continue
+        keep_chunks: list[str] = []
+        for chunk in chunks:
+            if any(chunk.startswith(p) for p in _GROUP_OWNER_HOIST_STABLE_PREFIXES):
+                stable_chunks.append(chunk)
+            else:
+                keep_chunks.append(chunk)
+        if keep_chunks:
+            keep_trailing.append({**m, "content": "\n\n".join(keep_chunks)})
+    if not stable_chunks:
+        return 0
+
+    hist_start = len(messages)
+    for i, m in enumerate(messages):
+        if not (isinstance(m, dict) and m.get("role") == "system"):
+            hist_start = i
+            break
+
+    del messages[last_user_idx + 1:]
+    messages.extend(keep_trailing)
+    messages.insert(hist_start, {
+        "role": "system",
+        "content": _SCOPE_PREFIX_SENTINEL + "\n\n".join(stable_chunks),
+    })
     return len(stable_chunks)
 
 
