@@ -503,6 +503,18 @@ def register_catty_persona(
         )
     except Exception as _daily_gate_exc:  # noqa: BLE001
         logger.debug(f"daily_affection_gate split register failed: {_daily_gate_exc}")
+
+    # 主人 2026-05-31: 关系亲密度 5档 tone 静态骨架进 cache prefix (order=152);
+    # 每轮的 Lv 指针 params 在 __init__.py deferred 段 (catty_relationship_params, order=484).
+    try:
+        from . import affection as _aff_mod
+        mgr.register(
+            "catty_relationship_skeleton",
+            content_fn=lambda: _aff_mod.build_relationship_skeleton(),
+            order=152,  # pre-boundary byte-stable skeleton 进 cache prefix
+        )
+    except Exception as _rel_exc:  # noqa: BLE001
+        logger.debug(f"relationship_skeleton register failed: {_rel_exc}")
     # 10-stage matrix + 5 档抗拒. max_stage = min(Lv, 群聊封顶 6); owner=Lv10 满级.
     # 跟 __init__._build_nsfw_spark_override 同步, 主 model (非 spark) 也按这套尺度回.
     _is_private_session = scope.startswith("private:") if scope else False

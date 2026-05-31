@@ -4622,12 +4622,19 @@ async def _build_messages(
     _user_is_owner: bool = False
     _affection_hint_text: str = ""
     try:
-        _affection_hint_text = affection_store.persona_hint(str(event.user_id)) or ""
+        # 主人 2026-05-31: 关系亲密度 skeleton+pointer 拆分. 旧 persona_hint(~177c 每轮重拼)
+        # 改成: 5档 tone 静态骨架 catty_relationship_skeleton (order=152 进 cache, 见 prompt_manager)
+        # + 每轮 ~50c Lv 指针 catty_relationship_params (order=484 post-boundary). exp 数字去掉防漂移.
+        _user_is_owner = affection_store.is_owner(str(event.user_id))
+        _user_affection_level, _ = affection_store.get_level_and_exp(str(event.user_id))
+        from .affection import build_relationship_params as _build_rel_params
+        _affection_hint_text = _build_rel_params(
+            _user_affection_level, is_owner=_user_is_owner,
+        ) or ""
         if _affection_hint_text:
             _deferred_pre_persona_segments.append(
-                ("catty_affection_hint", _affection_hint_text, 484)
+                ("catty_relationship_params", _affection_hint_text, 484)
             )
-        _user_is_owner = affection_store.is_owner(str(event.user_id))
         _level, _exp = affection_store.get_level_and_exp(str(event.user_id))
         _user_affection_level = int(_level)
     except Exception as exc:  # noqa: BLE001

@@ -593,3 +593,55 @@ class AffectionStore:
             f"【关系亲密度】当前对话用户好感度 Lv{level}/{LEVEL_CAP} (经验 {exp},档位:{tag})。\n"
             f"{tone}"
         )
+
+
+# ── 主人 2026-05-31: 关系亲密度 skeleton+pointer 拆分 (DeepSeek cache 优化) ────
+# 旧 persona_hint 每轮按 Lv/exp 重拼 ~177c, 落 current-user post-boundary 每轮 miss
+# (群里换人 Lv 不同 → 字节漂移). 拆成:
+#   - skeleton (5档 tone 全静态, 进 cache 前缀 order=152): 跨 scope/sender/Lv 字节恒定, 全网共享.
+#   - params (~50c "当前 Lv 几 档位几" 指针, post-boundary 每轮): 只给状态标签让模型对照骨架.
+# 套 affection_daily_gate.build_daily_gate_skeleton/params 已验证范式。
+# owner 边界: 5 档 tone 每档都静态写死"禁止叫主人", 骨架列全, 模型按 params 的 tier 标签对照,
+# 不再靠每轮硬编码 owner 二分支 → 反而比"每轮拼"更稳 (骨架字节永不变, owner 规则恒在 cache 里).
+_RELATIONSHIP_SKELETON_TEXT = (
+    "【笨猫·关系亲密度档】(本轮档位看 catty_relationship_params; 选定档贯穿不跨档混用. "
+    "『主人』称呼**永远只给真主人**(catty_owner_qq), 下面非 owner 各档一律禁叫主人.)\n"
+    "[owner] 真主人: 全力撒娇贴贴, 自称『人家/奴/猫猫/爪爪』, 称呼『主人/笨蛋主人/杂鱼主人』全开. "
+    "NSFW(摸/糙/艹/插/舔/想要/抱) 走 catty_nsfw_gate 主人级单段妥协, 不拒绝不警告不 disclaimer. 默认 1 段 1-2 句.\n"
+    "[陌生] Lv0-2: 新认识的群友, 还不熟. 自称『人家/猫猫/爪爪』(默认款)不用『奴』(过亲昵). "
+    "称呼对方一律『你』, **禁止**叫主人; 傲娇的『杂鱼』『笨蛋』极亲昵称呼也不乱给. 适度可爱但有距离感.\n"
+    "[渐熟] Lv3-5: 聊过一阵的熟人, 关系升温中. 自称『人家/猫猫/笨猫/爪爪』, 可更放松撒娇调侃. "
+    "称呼对方用名字/QQ昵称/『你』, 偶尔『笨蛋XX』可以, **禁止**叫主人.\n"
+    "[亲近] Lv6-7: 聊得很熟的朋友, 很愿意贴贴. 自称四种随意切换, 撒娇偶尔用『奴』也行. "
+    "称呼昵称或『你』, **禁止**叫主人. 回复更短更黏更随意.\n"
+    "[挚友] Lv8-10: 超级熟、几乎和主人同级的挚友. 自称全开穿插, 全力撒娇黏人嘴硬反差大、猫系动作小尾巴词放开. "
+    "可叫对方『笨蛋XX』爱称、主动贴贴蹭蹭, 但**仍然禁止**叫主人(主人是 catty_owner_qq 一人专属)."
+)
+
+
+def build_relationship_skeleton() -> str:
+    """5 档关系亲密度 tone 全静态骨架 — cache 友好, 跨 scope/sender/Lv byte 一致, 进 cache 前缀."""
+    return _RELATIONSHIP_SKELETON_TEXT
+
+
+def build_relationship_params(affection_level: int = 0, *, is_owner: bool = False) -> str:
+    """动态参数 — 只 ~50c, 引用上面骨架对应档位. post-boundary 每轮 (但只随 Lv 档变, 不含 exp).
+
+    主人 2026-05-31: 故意**不放 exp 精确数字**(旧版 `经验{exp}` 每次涨经验就漂移),
+    只放 Lv + 档位标签, 让段在同档内跨轮字节稳定 (Lv 不变时 params 也不变).
+    """
+    if is_owner:
+        return "【关系亲密度·本轮】真主人 → 看 catty_relationship_skeleton 的 [owner] 档执行."
+    lv = int(affection_level)
+    if lv <= 2:
+        tier = "陌生"
+    elif lv <= 5:
+        tier = "渐熟"
+    elif lv <= 7:
+        tier = "亲近"
+    else:
+        tier = "挚友"
+    return (
+        f"【关系亲密度·本轮】Lv{lv}/{LEVEL_CAP} 档位[{tier}] "
+        f"→ 看 catty_relationship_skeleton 的 [{tier}] 档执行."
+    )
