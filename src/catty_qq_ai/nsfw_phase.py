@@ -3244,18 +3244,55 @@ def build_phase_tracker_block_only(
 
 
 def build_phase_param_catalog_prompt() -> str:
-    """Stable catalog explaining compact phase parameter tokens.
+    """Stable full phase-state catalog for compact phase parameter tokens.
 
-    The local phase state machine remains authoritative. This catalog is static and
-    cache-friendly; per-turn state is provided by build_phase_params_block_only().
+    The local phase state machine remains authoritative. This function does not
+    rewrite the hand-authored phase content; it serializes the existing state
+    machine dictionaries into one cache-friendly stable prefix block. Per-turn
+    state is provided by build_phase_params_block_only().
     """
-    return (
-        "【NSFW phase 参数词典】本段稳定缓存; 本轮状态看 NSFW_PHASE_PARAMS。"
-        "本地状态机仍负责推进/降档/场景锚点/开场去重, LLM 只按参数选择当前状态。"
-        "字段: cur 当前P1-P8; next 建议推进目标; turn 当前阶段轮数; stuck=1 表示本地判定卡顿需推进; "
-        "rot 轮换索引; loc/outfit/tod/mood/focus/facet 为本地场景键; arc 为连续轮次; "
-        "dazed/over 表示特殊状态键; rules=现有 spark 稳定前缀和 phase 铁律。"
-    )
+    def _stringify_value(value: Any) -> str:
+        if isinstance(value, dict):
+            return "; ".join(f"{k}={_stringify_value(v)}" for k, v in value.items())
+        if isinstance(value, (list, tuple, set)):
+            return " / ".join(str(item) for item in value)
+        return str(value)
+
+    def _catalog_dict(title: str, data: dict[Any, Any]) -> list[str]:
+        rows = [f"\n【{title}】"]
+        for key in sorted(data.keys(), key=lambda x: str(x)):
+            meta = data.get(key)
+            if isinstance(meta, dict):
+                rows.append(f"- {key}: " + " | ".join(f"{mk}={_stringify_value(mv)}" for mk, mv in meta.items()))
+            else:
+                rows.append(f"- {key}: {_stringify_value(meta)}")
+        return rows
+
+    lines = [
+        "【NSFW phase 全量状态机缓存】本段是稳定 cache catalog；本轮只看 NSFW_PHASE_PARAMS 选择状态。",
+        "本地状态机负责推进/降档/场景锚点/开场去重；LLM 按 cur/next/loc/outfit/tod/mood/focus/facet 读取下方对应条目。",
+        "字段说明: cur 当前 P1-P8; next 建议目标; turn 当前阶段轮数; stuck=1 需推进; rot 轮换索引; arc 连续轮次; dazed/over 特殊状态。",
+    ]
+    lines.extend(_catalog_dict("PHASE_DEFINITIONS · P1-P8", PHASE_DEFINITIONS))
+    for title, data in (
+        ("LOCATION_PRESETS", LOCATION_PRESETS),
+        ("OUTFIT_PRESETS", OUTFIT_PRESETS),
+        ("TIME_OF_DAY_PRESETS", TIME_OF_DAY_PRESETS),
+        ("MOOD_PRESETS", MOOD_PRESETS),
+        ("BODY_FOCUS_PRESETS", BODY_FOCUS_PRESETS),
+        ("PERSONALITY_FACETS", PERSONALITY_FACETS),
+    ):
+        lines.extend(_catalog_dict(title, data))
+    for name in (
+        "SENSATION_DETAILS",
+        "SOUND_DETAILS",
+        "SMELL_DETAILS",
+        "FLUID_DETAILS",
+    ):
+        data = globals().get(name)
+        if isinstance(data, dict):
+            lines.extend(_catalog_dict(name, data))
+    return "\n".join(lines)
 
 
 def build_phase_params_block_only(
@@ -3272,10 +3309,7 @@ def build_phase_params_block_only(
     """
     if scope is None or user_id is None:
         return ""
-    key = _state_key(scope, user_id)
-    st = _NSFW_PHASE_BY_SCOPE.get(key)
-    if st is None:
-        return ""
+    st = get_phase_state(scope, user_id)
     current = max(1, min(8, int(st.current_phase or 1)))
     next_phase = min(8, current + 1)
     stuck_thr = _PHASE_STUCK_THRESHOLDS.get(current, 3)
@@ -3290,7 +3324,7 @@ def build_phase_params_block_only(
         f"loc={st.location or '-'}; outfit={st.outfit or '-'}; tod={st.time_of_day or '-'}; "
         f"mood={st.mood or '-'}; focus={st.body_focus or '-'}; facet={st.personality_facet or 'tsundere_classic'}; "
         f"arc={int(st.arc_count or 1)}; dazed={1 if st.dazed else 0}; over={int(st.overstim_phase or 0)}; "
-        f"owner={owner_flag}; addr={safe_addr}; rules=nsfw_phase_param_catalog"
+        f"owner={owner_flag}; addr={safe_addr}; rules=nsfw_phase_full_catalog"
     )
 
 
