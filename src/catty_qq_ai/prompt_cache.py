@@ -145,6 +145,7 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
     # 主人 2026-05-31 修正: 只留**真结构稳定**(私聊单人, 不随消息内容变)的段。
     # 5轮真实dump字节验证 + 注入源码确认驱动因子:
     "<<<CATTY_INTERNAL_INSTRUCTION (main preg",  # preg 567c 私聊单人状态稳定(最大块)
+    "【今日生活感】",     # scope+date(+time bucket) baseline, 不再吃 recent_text
     "【今日动作候选池",   # scope+date 种子, confirmed byte-stable
     "【关系亲密度",       # per-Lv, 单条消息不改 Lv
     "【日常 SFW",         # per-Lv
@@ -154,7 +155,6 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
     "【笨猫小心思·主人专属候选",  # 主人 2026-05-31 整桶: tier桶per-tier恒定(整桶注入不再sample)
     "【笨猫小心思·亲密档候选",    # 同上, Lv3+ tier恒定
     # ❌移除(实测DRIFT, 进HOIST_BLOCK会破history前缀):
-    #   今日生活感(daily_life 吃 recent_text 末轮变)
     #   character_book/cb_diet(user_text BFS hit, 真实对话随话题变)
     #   scope_lorebook(per-scope命中, 条件触发)
     # 注: 【笨猫小心思·候选池(universal)已走 order=163 pre-boundary 全局 block, 不在此白名单.
@@ -165,6 +165,7 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
 # owner-in-group 这个真实 scope/user 受益, 不会污染普通群友的共享前缀。
 _GROUP_OWNER_HOIST_STABLE_PREFIXES = (
     "【笨猫小心思·主人专属】",
+    "【今日生活感】",
     "【今日动作候选池",
     "【主人专属·亲密度上限】",
     "【关系亲密度",

@@ -673,8 +673,12 @@ def register_catty_persona(
     if "daily_life" not in legacy_disabled:
         mgr.register(
             "catty_daily_life",
-            content_fn=lambda: _dl.build_daily_life_prompt(scope, recent_text=user_text),
-            order=458,  # dynamic (recent_text 驱动 mood/activity), post-boundary
+            # 主人 2026-05-31 cache pointer 化: daily_life 是「今天笨猫在做什么」背景状态,
+            # 不该吃 current user_text 后每轮漂移。当前话题已经由 semantic_perception / NLU /
+            # character_book 处理; 这里固定为 scope+date(+时段/季节/天气配置)状态, 方便 hoist
+            # 到独立 cache block。后续若要更细 topical flavor, 用短 pointer/ID,不要塞整段动态句。
+            content_fn=lambda: _dl.build_daily_life_prompt(scope, recent_text=None),
+            order=458,  # per-scope/day deterministic, post-boundary 后由 prompt_cache hoist
         )
     # Catty Daily Goals - 笨猫小心思 (内在动机).
     # 主人 2026-05-31 整桶注入: 旧版每轮 sample(scope,date,tier,recent_text) → 字节漂移 →
