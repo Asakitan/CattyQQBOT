@@ -283,9 +283,12 @@ def _looks_like_prompt_injection(text: str) -> tuple[bool, int]:
 # 节流变量与 bg task tracker 已无 reader/writer, 删除.
 # NSFW spark 路径 sticky: 任何用户触发后 _NSFW_STICKY_SECONDS 内, 即使 followup 句没命中关键词
 # 也默认走 spark (用户引导『再深一点』『继续』可能不带触发词但仍在 NSFW 通道)。
-# key = f"{scope}:{user_id}" — 每个 session+用户独立, 不影响其它对话。
+# key = f"{scope}:{user_id}" — 每个 session+用户独立。
+# 群聊额外由 _NSFW_GROUP_OCCUPANT_BY_SCOPE 做 per-group 独占: A 开窗后 B/C 的消息仍会被
+# observe 记录到 recent buffer 作为围观上下文, 但不会触发单独回复。
 _NSFW_STICKY_SECONDS = 120.0  # 2 分钟内同一 user/scope 都继续走 NSFW spark
 _NSFW_STICKY_BY_SCOPE: dict[str, float] = {}
+_NSFW_GROUP_OCCUPANT_BY_SCOPE: dict[str, tuple[str, float, float]] = {}  # scope -> (user_id, until_wall, since_mono)
 # 主人 2026-05-30: 旧『连续 idle 关键词计数自动退 sticky』已弃用 (会场景还热时误踢回 CPU)。
 # 退出改由 DeepSeek 自评标志驱动 (_NSFW_EXIT_FLAG_COUNT)。_NSFW_STICKY_IDLE_COUNT 仅保留作清理用,
 # _NSFW_STICKY_IDLE_LIMIT 不再参与判定。明确 closing 语义 (好了/累了/睡吧) 仍即时退出。
@@ -321,6 +324,57 @@ _NSFW_TAIL_RECENCY_POINTER = (
     "② 写完后在**最末尾**单独一行追加隐藏标记 `<NSFW_STATE:CONTINUE|EXIT>` "
     "(对用户隐藏、保守判断 — 只要还有一丝暧昧/余温就给 CONTINUE)。"
 )
+
+
+def _mark_nsfw_group_occupant(scope: str, user_id: str, until_wall: float) -> None:
+    """群聊 NSFW 独占锁: 同群只允许当前 user 拿回复权, 其他人只进围观上下文。"""
+    if not scope.startswith("group:") or not user_id or until_wall <= time.time():
+        return
+    prev = _NSFW_GROUP_OCCUPANT_BY_SCOPE.get(scope)
+    since_mono = time.monotonic()
+    if prev and prev[0] == str(user_id) and prev[1] > time.time():
+        since_mono = prev[2]
+    _NSFW_GROUP_OCCUPANT_BY_SCOPE[scope] = (str(user_id), until_wall, since_mono)
+
+
+def _clear_nsfw_group_occupant(scope: str, user_id: str | None = None) -> None:
+    if not scope.startswith("group:"):
+        return
+    prev = _NSFW_GROUP_OCCUPANT_BY_SCOPE.get(scope)
+    if prev is None:
+        return
+    if user_id is None or prev[0] == str(user_id):
+        _NSFW_GROUP_OCCUPANT_BY_SCOPE.pop(scope, None)
+
+
+def _active_nsfw_group_occupant(scope: str) -> tuple[str, float] | None:
+    """返回 (user_id, since_mono)。优先用显式独占锁, fallback 扫普通 sticky 表。"""
+    if not scope.startswith("group:"):
+        return None
+    now_wall = time.time()
+    prev = _NSFW_GROUP_OCCUPANT_BY_SCOPE.get(scope)
+    if prev is not None:
+        user_id, until_wall, since_mono = prev
+        if now_wall < until_wall:
+            return user_id, since_mono
+        _NSFW_GROUP_OCCUPANT_BY_SCOPE.pop(scope, None)
+    prefix = f"{scope}:"
+    best_user = ""
+    best_until = 0.0
+    for sticky_key, until_wall in list(_NSFW_STICKY_BY_SCOPE.items()):
+        if now_wall >= until_wall:
+            continue
+        if not sticky_key.startswith(prefix):
+            continue
+        user_id = sticky_key[len(prefix):]
+        if user_id and until_wall > best_until:
+            best_user = user_id
+            best_until = until_wall
+    if best_user:
+        _mark_nsfw_group_occupant(scope, best_user, best_until)
+        prev = _NSFW_GROUP_OCCUPANT_BY_SCOPE.get(scope)
+        return (prev[0], prev[2]) if prev is not None else (best_user, time.monotonic())
+    return None
 
 
 def _extract_nsfw_state_flag(reply: str) -> tuple[str, str]:
@@ -390,6 +444,7 @@ def _apply_nsfw_state_flag(scope_key: str, user_id: str, flag: str, *, is_owner:
     _NSFW_STICKY_BY_SCOPE.pop(scope_key, None)
     _NSFW_STICKY_IDLE_COUNT.pop(scope_key, None)
     _NSFW_EXIT_FLAG_COUNT.pop(scope_key, None)
+    _clear_nsfw_group_occupant(_scope, str(user_id))
     # phase reset + revoke grantee + img counter reset (跟 closing/idle 退出对齐)。
     try:
         from .nsfw_phase import get_phase_state as _get_phase_state
@@ -3578,6 +3633,44 @@ def _wake_context_prompt(
     )
 
 
+def _nsfw_group_audience_context(event: MessageEvent, active_user_id: str) -> str:
+    """群 NSFW 独占期间, 把其它群友新消息作为围观/喊话上下文给当前 active user 看。"""
+    if not isinstance(event, GroupMessageEvent):
+        return ""
+    scope = _conversation_queue_key(event)
+    occupant = _active_nsfw_group_occupant(scope)
+    since_mono = occupant[1] if occupant is not None else max(0.0, time.monotonic() - _NSFW_STICKY_SECONDS)
+    current_user_id = str(active_user_id)
+    current_mid = _event_message_id(event)
+    recent = _ordered_unique_recent_messages(list(_recent_conversation_messages.get(scope, ())))
+    lines: list[str] = []
+    for item in recent:
+        if item.is_bot:
+            continue
+        if item.created_at + 0.001 < since_mono:
+            continue
+        if item.user_id == current_user_id:
+            continue
+        if current_mid and item.message_id == current_mid:
+            continue
+        text = (item.text or "").strip()
+        if not text:
+            continue
+        text = text.replace("\n", " ")[:80]
+        image_marker = " [含图片]" if item.has_image else ""
+        lines.append(f"- {item.display_name}({item.user_id}): {text}{image_marker}")
+        if len(lines) >= 6:
+            break
+    if not lines:
+        return ""
+    return (
+        "【群聊 NSFW 围观态势】同群其它人的消息只作为环境/围观/起哄/喊话参考, "
+        "不要把它们当成本轮 user, 不要单独回复他们; 当前回复仍只面向最后一条 user。"
+        "可以自然表现为『有人在看着/有人在叫/旁边有人起哄』, 但不要逐条点名除非剧情需要。\n"
+        + "\n".join(lines)
+    )
+
+
 def _bot_continuation_judgement_prompt(event: MessageEvent) -> str:
     remaining = _bot_reply_continuation_remaining(event)
     return (
@@ -5308,6 +5401,7 @@ async def _build_messages(
         _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
         _NSFW_EXIT_FLAG_COUNT.pop(_sticky_key, None)
+        _clear_nsfw_group_occupant(_arc_scope, str(event.user_id))
         _sticky_active = False
         # Phase D2: reset 之前先写 mood_overlay (仅 owner + phase >=7 时)
         if _user_is_owner:
@@ -5696,6 +5790,10 @@ async def _build_messages(
         or bool(_owner_cuckold_target_id)
         or (_hit_deep and _can_reach_deep)
     )
+    # 群聊 NSFW 独占尽早占位: 从这里开始本轮已确定要进 spark, 其它群友消息只作为围观上下文。
+    # 后面成功发送时还会滑窗刷新; closing / EXIT 会清锁。
+    if _route_spark and _is_group_chat_pre and not _breakthrough_outcome and not _is_image_intent(_utxt):
+        _mark_nsfw_group_occupant(_arc_scope, str(event.user_id), _now + _NSFW_STICKY_SECONDS)
     # 主 5.5 路径注入援交广告 / 嘴硬嘲讽 prompt (spark 路径会 overwrite messages 反正不影响)
     # 紧贴 user message 拿 recency bias, 让 5.5 这一条 reply 主动推销援交 OR 嘲讽穷光蛋
     if not _route_spark and (
@@ -5980,6 +6078,9 @@ async def _build_messages(
         # 主人 2026-05-30 cache R1+R4: 8铁律(1736字)已搬进静态前缀, user 之后只留 ~110字短指针
         # 拿 recency bias (覆盖延续 + 末尾隐藏标记两个 recency-critical 行为), 尾部 miss 大降.
         _inject_into_both(_NSFW_TAIL_RECENCY_POINTER)
+        _audience_context = _nsfw_group_audience_context(event, str(event.user_id))
+        if _audience_context:
+            _inject_into_both(_audience_context)
         # 主人 2026-05-30 cache R6: 群聊/非owner 的 per-user _override 延后到 user 之后注入,
         # 避免它进 current user 之前的共享前缀破坏同群跨发言者的 history cache (owner 私聊已在前缀注入).
         if _override_deferred_tail:
@@ -6247,8 +6348,10 @@ async def _build_messages(
                 f"NSFW paid: paid sticky 滑窗刷新 (key={_sticky_key}, outcome={_paid_nsfw_outcome}, "
                 f"continuation={_paid_is_continuation}, refreshed={_refreshed})"
             )
+            _mark_nsfw_group_occupant(_arc_scope, str(event.user_id), _now + _NSFW_STICKY_SECONDS)
         else:
             _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
+            _mark_nsfw_group_occupant(_arc_scope, str(event.user_id), _now + _NSFW_STICKY_SECONDS)
         _src = "deep_kw" if _hit_deep else "sticky"
         _chan = "private" if _is_private_chat else "group"
         if not _breakthrough_outcome:  # breakthrough 已单独 log 过, 不重复
@@ -8771,6 +8874,26 @@ async def _emoji_save_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
     return True
 
 
+async def _nsfw_group_suppress_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """群里 A 正在 NSFW 时, B/C 的消息只进观察缓冲, 不触发任何回复链路。"""
+    if not isinstance(event, GroupMessageEvent):
+        return False
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    scope = _conversation_queue_key(event)
+    occupant = _active_nsfw_group_occupant(scope)
+    if occupant is None:
+        return False
+    active_user_id, _ = occupant
+    if str(event.user_id) == str(active_user_id):
+        return False
+    logger.info(
+        f"NSFW group occupant suppress: scope={scope} active_user={active_user_id} "
+        f"suppressed_user={event.user_id} text={event_plain_text(event)[:60]!r}"
+    )
+    return True
+
+
 async def _affection_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     """匹配 签到 / 我的积分 / 好感度查询 这类命令,在主回复 AI 之前短路掉。
 
@@ -8825,6 +8948,7 @@ async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
     return True
 
 
+nsfw_group_suppress_matcher = on_message(rule=_nsfw_group_suppress_rule, priority=10, block=True)
 cpu_engine_matcher = on_message(rule=_cpu_engine_rule, priority=37, block=True)
 keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=True)
 emoji_save_matcher = on_message(rule=_emoji_save_rule, priority=41, block=True)
@@ -9028,6 +9152,11 @@ async def _debug_log_any_notice(bot: Bot, event: NoticeEvent) -> None:
         )
     except Exception as exc:
         logger.warning(f"[poke-debug] failed to log notice: {exc}")
+
+
+@nsfw_group_suppress_matcher.handle()
+async def handle_nsfw_group_suppress(matcher: Matcher) -> None:
+    await matcher.finish()
 
 
 @cpu_engine_matcher.handle()
