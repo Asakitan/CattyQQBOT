@@ -5891,6 +5891,8 @@ async def _build_messages(
             *([{"role": "system", "content": _phase_param_catalog}] if _phase_param_catalog else []),
             {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #4 + boundary
         ]
+        # 主人 2026-05-31 cache: NSFW phase 状态机全量 catalog 已经在上方稳定前缀里，
+        # 本地状态机照算；尾部只发 NSFW_PHASE_PARAMS 让 DeepSeek 选取对应状态。
         # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 inline 到 user content.
         # 旧 inline (CATTY_INTERNAL_INSTRUCTION wrap → user content 末尾) 是 Anthropic system 字段
         # 独立这一特性的 workaround → DeepSeek 用 OpenAI compat, role=system 可在 messages 数组任何位置.
@@ -10242,6 +10244,8 @@ async def _summary_loop() -> None:
             continue
         for group_id in memory_store.due_group_ids():
             try:
+                if not memory_store.claim_group_summary_run(group_id):
+                    continue
                 set_current_scope_key(f"summary:group:{group_id}")
                 messages = memory_store.build_summary_messages(group_id)
                 summary = await chat_completion_summary(config, messages)

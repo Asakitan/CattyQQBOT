@@ -725,15 +725,34 @@ class MemoryStore:
             return []
         due: list[str] = []
         now = datetime.now(timezone.utc)
+        today = _today()
         min_messages = min(50, self.max_corpus_messages)
         for group_id, group in self._data.get("groups", {}).items():
             corpus = group.get("corpus", []) if isinstance(group, dict) else []
             if len(corpus) < min_messages:
                 continue
+            if str(group.get("last_summary_attempt_date") or "") == today:
+                continue
             last_summary = _parse_time(group.get("last_summary_at")) if isinstance(group, dict) else None
             if last_summary is None or (now - last_summary).total_seconds() >= self.summary_interval_minutes * 60:
                 due.append(str(group_id))
         return due
+
+    def claim_group_summary_run(self, group_id: str) -> bool:
+        """持久化认领今天的群摘要任务,避免重启或失败后当天反复烧 summary。"""
+        if not self.enabled:
+            return False
+        group = self._data.setdefault("groups", {}).setdefault(group_id, {})
+        today = _today()
+        if str(group.get("last_summary_attempt_date") or "") == today:
+            return False
+        group["last_summary_attempt_date"] = today
+        group["last_summary_attempt_at"] = _now()
+        self._save()
+        if self.flush_sync():
+            return True
+        logger.warning(f"memory_store: failed to persist group summary claim for {group_id}")
+        return False
 
     def due_special_group_ids(self) -> list[str]:
         return self.due_group_ids()
@@ -1315,6 +1334,8 @@ class MemoryStore:
                 for raw_member in raw_members:
                     self._save_member_profile(group_id, profiles, members, raw_member)
         group["last_summary_at"] = _now()
+        group["last_summary_attempt_date"] = _today()
+        group["last_summary_attempt_at"] = group["last_summary_at"]
         group["corpus"] = []
         self._save()
 

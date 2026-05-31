@@ -555,7 +555,7 @@ class Config(BaseModel):
     # 续聊期间连续 catty_followup_idle_limit 次没直接提到笨猫 (非 mentioned/used_prefix) 也关窗。
     catty_followup_window_seconds: float = 25.0
     catty_followup_idle_limit: int = 3
-    catty_memory_summary_interval_minutes: int = 30
+    catty_memory_summary_interval_minutes: int = 1440
     catty_memory_max_corpus_messages: int = 800
     catty_memory_private_summary_messages: int = 500
     catty_memory_member_mention_threshold: int = 20

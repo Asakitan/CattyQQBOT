@@ -346,7 +346,7 @@
         "group_special_care_user_ids": {},
         "special_care_cooldown_seconds": 90,
         "special_care_response_window_minutes": 30,
-        "summary_interval_minutes": 30,
+        "summary_interval_minutes": 1440,
         "max_corpus_messages": 800,
         "reply_boost_enabled": true,
         "reply_boost_min_corpus_messages": 80,
