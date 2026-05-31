@@ -184,6 +184,23 @@ _GROUP_OWNER_HOIST_STABLE_PREFIXES = (
     "<<<CATTY_INTERNAL_INSTRUCTION (main preg",
 )
 
+# 群聊任意发言者都可 hoist 的 scope/day 稳定块。
+# 不包含当前发言者/画像/QQ映射/wake/NLU/character_book 等 per-user 或 per-message 段，
+# 避免把换人导致的漂移插到 history 前面。目标是先从 current-user DYN_SYS 尾巴里
+# 回收 3386+ token 漂移中的公共稳定部分。
+_GROUP_COMMON_HOIST_STABLE_PREFIXES = (
+    "【今日生活感】",
+    "【今日动作候选池",
+    "【时间桶上下文摘要】",
+    "【关系亲密度",
+    "【日常 SFW",
+    "【正在追的话题(跨多条消息的故事线)】",
+    "【本轮启用 semantic_reply_split】",
+    "【★★ 怀孕/生育状态 (持久化, 跨 session) ★★】",
+    "【★ 怀孕中",
+    "【★ 已生小猫",
+)
+
 
 def _to_text_content(content: object) -> str:
     if isinstance(content, str):
@@ -627,10 +644,18 @@ def hoist_stable_private_trailing(messages: list[dict]) -> int:
             keep_trailing.append(m)
             continue
         txt = _to_text_content(m.get("content")).strip()
-        if txt and any(txt.startswith(p) for p in _PRIVATE_HOIST_STABLE_PREFIXES):
-            stable_chunks.append(txt)
-        else:
+        chunks = _split_merged_dynamic_chunks(txt)
+        if not chunks:
             keep_trailing.append(m)
+            continue
+        keep_chunks: list[str] = []
+        for chunk in chunks:
+            if any(chunk.startswith(p) for p in _PRIVATE_HOIST_STABLE_PREFIXES):
+                stable_chunks.append(chunk)
+            else:
+                keep_chunks.append(chunk)
+        if keep_chunks:
+            keep_trailing.append({**m, "content": "\n\n".join(keep_chunks)})
     if not stable_chunks:
         return 0  # 没可 hoist 的 stable 段
 
@@ -692,6 +717,62 @@ def hoist_stable_group_owner_trailing(messages: list[dict]) -> int:
         keep_chunks: list[str] = []
         for chunk in chunks:
             if any(chunk.startswith(p) for p in _GROUP_OWNER_HOIST_STABLE_PREFIXES):
+                stable_chunks.append(chunk)
+            else:
+                keep_chunks.append(chunk)
+        if keep_chunks:
+            keep_trailing.append({**m, "content": "\n\n".join(keep_chunks)})
+    if not stable_chunks:
+        return 0
+
+    hist_start = len(messages)
+    for i, m in enumerate(messages):
+        if not (isinstance(m, dict) and m.get("role") == "system"):
+            hist_start = i
+            break
+
+    del messages[last_user_idx + 1:]
+    messages.extend(keep_trailing)
+    messages.insert(hist_start, {
+        "role": "system",
+        "content": _SCOPE_PREFIX_SENTINEL + "\n\n".join(stable_chunks),
+    })
+    return len(stable_chunks)
+
+
+def hoist_stable_group_common_trailing(messages: list[dict]) -> int:
+    """群聊通用: hoist 与当前发言者无关或已参数化的稳定块。
+
+    普通群友不能 hoist 当前发言者/画像/QQ 映射等 per-speaker 段；但 scope/day
+    稳定的生活感、动作池、时间桶摘要、短参数骨架等不该每轮 collapse 到 current
+    user 里重读。本函数只处理白名单公共块，剩余动态块继续留给 collapse。
+    """
+    if not messages:
+        return 0
+
+    last_user_idx = -1
+    for i in range(len(messages) - 1, -1, -1):
+        m = messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            last_user_idx = i
+            break
+    if last_user_idx < 0 or last_user_idx + 1 >= len(messages):
+        return 0
+
+    stable_chunks: list[str] = []
+    keep_trailing: list[dict] = []
+    for j in range(last_user_idx + 1, len(messages)):
+        m = messages[j]
+        if not (isinstance(m, dict) and m.get("role") == "system"):
+            keep_trailing.append(m)
+            continue
+        chunks = _split_merged_dynamic_chunks(_to_text_content(m.get("content")))
+        if not chunks:
+            keep_trailing.append(m)
+            continue
+        keep_chunks: list[str] = []
+        for chunk in chunks:
+            if any(chunk.startswith(p) for p in _GROUP_COMMON_HOIST_STABLE_PREFIXES):
                 stable_chunks.append(chunk)
             else:
                 keep_chunks.append(chunk)
@@ -1018,6 +1099,8 @@ __all__ = [
     "cachingAtDepthForClaude",
     "collapse_trailing_systems_into_last_user",
     "compute_prefix_hash",
+    "hoist_stable_group_common_trailing",
+    "hoist_stable_group_owner_trailing",
     "hoist_stable_private_trailing",
     "inject_system_tail_cache",
     "inject_tools_cache",

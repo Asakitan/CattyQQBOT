@@ -892,6 +892,7 @@ async def _post_chat_completion_raw(
         from .prompt_cache import (
             collapse_trailing_systems_into_last_user,
             compute_prefix_hash,
+            hoist_stable_group_common_trailing,
             hoist_stable_group_owner_trailing,
             hoist_stable_private_trailing,
             inline_assistant_prefill_without_reordering,
@@ -982,6 +983,13 @@ async def _post_chat_completion_raw(
                         _logger.info(
                             "deepseek prefix opt: hoisted %d stable group-owner trailing → history前 "
                             "(独立 sentinel block, owner-in-group cache)", _hoisted,
+                        )
+                else:
+                    _hoisted = hoist_stable_group_common_trailing(messages)
+                    if _hoisted:
+                        _logger.info(
+                            "deepseek prefix opt: hoisted %d stable group-common trailing → history前 "
+                            "(独立 sentinel block, group common cache)", _hoisted,
                         )
             # (b) 合并开头连续 system → 单条 (前缀更紧凑)
             merged = merge_consecutive_system_messages(messages)
