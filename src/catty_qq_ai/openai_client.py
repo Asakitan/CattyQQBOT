@@ -988,11 +988,27 @@ async def _post_chat_completion_raw(
                 _logger.debug(
                     "deepseek prefix opt: merged %d system blocks", merged,
                 )
+            # (b2-spark) 主人 2026-05-31 cache: DeepSeek spark 也不能长期保持
+            # [user, system..., assistant(prefill)] 结尾。先把 assistant prefill 改写到最近 user,
+            # 再让下面 collapse 把尾部 system 并入 user, 使 spark 也以 user 边界结尾。
+            # 旧版只给 Claude 中转做此适配, 导致 DeepSeek spark history 复用卡在 50-80%。
+            if (
+                messages
+                and isinstance(messages[-1], dict)
+                and messages[-1].get("role") == "assistant"
+            ):
+                before_len = len(messages)
+                messages = adapt_assistant_prefill_for_strict_user_end(messages)
+                if len(messages) != before_len:
+                    _logger.info(
+                        "deepseek prefix opt: adapted assistant prefill into last user "
+                        "(spark strict user-end cache boundary)",
+                    )
             # (b2) 主人 2026-05-30 决定性修复: 末尾连续 system → inline 进 current user,
             # 让 messages 结尾 = user. 真实 dump 重放实测: 末尾=system 时 history 死锁不进
             # cache (hit 7808), 改成末尾=user 后 history 进 cache (hit 7808→12224, +30pp).
             # 根因 = DeepSeek 只在 user-end/output-end 落盘 turn 边界单元, 末尾 system 两头不沾.
-            # spark 末尾是 assistant prefill 不触发此函数 → 自动只修群聊主路径, 不碰 spark.
+            # spark 已在上面把 assistant prefill 改写为 user hint, 因此也能触发这里的折叠。
             collapsed = collapse_trailing_systems_into_last_user(messages)
             if collapsed > 0:
                 _logger.info(
