@@ -9961,12 +9961,21 @@ def _affection_owner_tag(event: MessageEvent) -> str:
 async def _generate_affection_caption(
     event: MessageEvent, *, scene_brief: str, user_text: str,
 ) -> str | None:
-    """让笨猫人格 AI 自己写 1-2 句签到/查询 caption。走 spark(filter 路由) 快出文案,
+    """让笨猫人格 AI 自己写 1-2 句签到/查询 caption。优先走 DeepSeek/codex instant 快出文案,
     失败/超时返回 None,由调用方拿 fallback 兜底。
     """
-    # spark 走 catty_filter_* 路由,需要 filter_enabled 才行;否则降级到主模型
-    use_instant = bool(getattr(config, "catty_filter_enabled", False)) and (
-        config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key
+    # 主人 2026-06-01: 签到/积分 caption 也切 DeepSeek, 不再被 filter.enabled=false
+    # 挡回主链路或 CPU 模板池。codex_instant 会优先用 codex_instant_model,
+    # 再退到 nsfw_spark_model；当前生产配置 nsfw_spark_* 指向 DeepSeek。
+    use_instant = bool(
+        (config.catty_codex_instant_model or "").strip()
+        or (config.catty_nsfw_spark_model or "").strip()
+        or (config.catty_filter_model or "").strip()
+    ) and bool(
+        (config.catty_nsfw_spark_api_key or "").strip()
+        or (config.catty_filter_api_key or "").strip()
+        or (config.catty_audit_ai_api_key or "").strip()
+        or (config.catty_openai_api_key or "").strip()
     )
     if not use_instant and not _has_api_key():
         return None
@@ -10087,9 +10096,8 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
     user_text = event_plain_text(event)
     async with _locks[_conversation_queue_key(event)]:
         today_gained: int | None = None
-        # 主人 2026-05-29: 签到/积分查询全部走 CPU 模板池 (S5 quick_reply yaml),
-        # 不再调 AI 生成 caption - 这种 deterministic 命令浪费 token + 慢 1-3s.
-        # 真要 AI 文案时用 #ai signin (TODO) 显式触发, 否则 pool 出.
+        # 主人 2026-06-01: 签到/积分 caption 从 CPU 模板池切回 DeepSeek;
+        # AI 失败/超时才拿本地模板兜底,避免签到仍然抽 CPU 文案。
         _ce_nickname = "主人" if _event_is_owner(event) else (
             getattr(event.sender, "card", None) or getattr(event.sender, "nickname", None) or "你"
         )
@@ -10099,15 +10107,31 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
                 today_gained = int(result.get("gained") or 0)
             summary = affection_store.summary(user_id)
             card_mode = "signin" if today_gained is not None else "summary"
-            caption = _fallback_caption_signin(result, user_id=user_id, user_nickname=str(_ce_nickname))
-            logger.info(f"[quick_reply.signin] uid={user_id} caption={caption[:80]!r}")
+            caption = await _generate_affection_caption(
+                event,
+                scene_brief=_signin_scene_brief(result),
+                user_text=user_text,
+            )
+            if caption:
+                logger.info(f"[deepseek.signin] uid={user_id} caption={caption[:80]!r}")
+            else:
+                caption = _fallback_caption_signin(result, user_id=user_id, user_nickname=str(_ce_nickname))
+                logger.info(f"[quick_reply.signin.fallback] uid={user_id} caption={caption[:80]!r}")
             image_segment = _send_affection_card(
                 event, mode=card_mode, summary=summary, today_gained=today_gained,
             )
         elif cmd == "points":
             summary = affection_store.summary(user_id)
-            caption = _fallback_caption_summary(summary, user_id=user_id, user_nickname=str(_ce_nickname))
-            logger.info(f"[quick_reply.points] uid={user_id} caption={caption[:80]!r}")
+            caption = await _generate_affection_caption(
+                event,
+                scene_brief=_summary_scene_brief(summary),
+                user_text=user_text,
+            )
+            if caption:
+                logger.info(f"[deepseek.points] uid={user_id} caption={caption[:80]!r}")
+            else:
+                caption = _fallback_caption_summary(summary, user_id=user_id, user_nickname=str(_ce_nickname))
+                logger.info(f"[quick_reply.points.fallback] uid={user_id} caption={caption[:80]!r}")
             image_segment = _send_affection_card(
                 event, mode="summary", summary=summary,
             )
