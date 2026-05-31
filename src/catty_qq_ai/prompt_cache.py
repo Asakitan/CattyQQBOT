@@ -465,24 +465,33 @@ def merge_consecutive_system_messages(messages: list[dict]) -> int:
 
     # 主人 2026-05-31 Stage3: 带 _SCOPE_PREFIX_SENTINEL 的 head system 保持独立(不 merge),
     # 当作独立 cached block. sentinel 一律剥除. 无 sentinel 时行为跟旧版完全一致(向后兼容).
-    scope_idx = [
-        i for i in head_sys_idx
-        if _SCOPE_PREFIX_SENTINEL in _to_text(messages[i].get("content"))
-    ]
-    for i in scope_idx:
-        messages[i]["content"] = _to_text(messages[i].get("content")).replace(
-            _SCOPE_PREFIX_SENTINEL, "",
-        )
-    merge_idx = [i for i in head_sys_idx if i not in scope_idx]
-    if len(merge_idx) < 2:
-        return 0
-    merged_text = "\n\n".join(_to_text(messages[i].get("content")) for i in merge_idx)
-    keep = merge_idx[0]
-    messages[keep]["content"] = merged_text
-    # 倒序删除被 merge 掉的 (scope block 保留独立, 不删)
-    for i in reversed(merge_idx[1:]):
-        del messages[i]
-    return len(merge_idx) - 1
+    # 关键: sentinel 是硬边界, 只能 merge 左右各自连续 run, 不能把 sentinel 后面的 system
+    # 拉到 sentinel 前面合并, 否则会改变 prompt 顺序并影响猫猫理解。
+    removed = 0
+    i = 0
+    while i < len(messages) and isinstance(messages[i], dict) and messages[i].get("role") == "system":
+        text = _to_text(messages[i].get("content"))
+        if _SCOPE_PREFIX_SENTINEL in text:
+            messages[i]["content"] = text.replace(_SCOPE_PREFIX_SENTINEL, "")
+            i += 1
+            continue
+
+        run_start = i
+        run_parts: list[str] = []
+        while i < len(messages) and isinstance(messages[i], dict) and messages[i].get("role") == "system":
+            text = _to_text(messages[i].get("content"))
+            if _SCOPE_PREFIX_SENTINEL in text:
+                break
+            run_parts.append(text)
+            i += 1
+
+        if len(run_parts) >= 2:
+            messages[run_start]["content"] = "\n\n".join(run_parts)
+            del messages[run_start + 1:i]
+            deleted = len(run_parts) - 1
+            removed += deleted
+            i -= deleted
+    return removed
 
 
 def hoist_stable_private_trailing(messages: list[dict]) -> int:
@@ -602,6 +611,10 @@ _INLINE_DYNAMIC_CONTEXT_RE = _re_inline_strip.compile(
     r"\n*\[DYNAMIC_CONTEXT[^\]]*\].*?\[/DYNAMIC_CONTEXT\]\n*",
     flags=_re_inline_strip.DOTALL,
 )
+_INLINE_DYN_SYS_RE = _re_inline_strip.compile(
+    r"\n*\[DYN_SYS\].*?\[/DYN_SYS\]\n*",
+    flags=_re_inline_strip.DOTALL,
+)
 _INLINE_INTERNAL_INSTRUCTION_RE = _re_inline_strip.compile(
     r"\n*<<<CATTY_INTERNAL_INSTRUCTION.*?<<<END_INTERNAL>>>\n*",
     flags=_re_inline_strip.DOTALL,
@@ -623,6 +636,7 @@ def strip_inline_dynamic_from_text(text: str) -> str:
     if not text or not isinstance(text, str):
         return text or ""
     text = _INLINE_DYNAMIC_CONTEXT_RE.sub("", text)
+    text = _INLINE_DYN_SYS_RE.sub("", text)
     text = _INLINE_INTERNAL_INSTRUCTION_RE.sub("", text)
     return text
 
@@ -662,27 +676,29 @@ def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
         content = m.get("content")
         if isinstance(content, str):
             new_content, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", content)
-            new_content, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_content)
+            new_content, n2 = _INLINE_DYN_SYS_RE.subn("", new_content)
+            new_content, n3 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_content)
             # 主人 2026-05-29 P0: 不再 strip 开头 [QQ:数字] 前缀. 旧逻辑(Step 5)剥它本想稳前缀,
             # 实则制造 full-vs-stripped 漂移 — 上一轮 current user 带 [QQ:], 存进 history 也带,
             # 但发请求时被剥 → 同一位置「上轮当 current(带前缀) vs 本轮当 history(被剥)」字节不同
             # → 群聊前缀每轮断在最近一条. 保留 [QQ:] 让发送版与存储版一致(不漂移), 且 per-message
             # 发言者归属对 AI 更清晰(配合 catty_qq_nickname_map 翻译). DYNAMIC_CONTEXT/INTERNAL
             # 仍剥(清理 legacy 持久化 history; 新 history 已不再内联).
-            if n1 or n2:
+            if n1 or n2 or n3:
                 m["content"] = new_content
-                stripped += n1 + n2
+                stripped += n1 + n2 + n3
         elif isinstance(content, list):
             for blk in content:
                 if isinstance(blk, dict) and blk.get("type") == "text":
                     txt = blk.get("text", "")
                     if isinstance(txt, str):
                         new_txt, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", txt)
-                        new_txt, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_txt)
+                        new_txt, n2 = _INLINE_DYN_SYS_RE.subn("", new_txt)
+                        new_txt, n3 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_txt)
                         # 主人 2026-05-29 P0: 同上, 不再 strip [QQ:数字] 前缀 (防 current↔history 漂移).
-                        if n1 or n2:
+                        if n1 or n2 or n3:
                             blk["text"] = new_txt
-                            stripped += n1 + n2
+                            stripped += n1 + n2 + n3
     return stripped
 
 
@@ -764,11 +780,7 @@ def collapse_trailing_systems_into_last_user(messages: list[dict]) -> int:
         n_removed = len(messages) - tail_start
         del messages[tail_start:]
         return n_removed
-    dyn_text = (
-        "\n\n[DYNAMIC_CONTEXT — 本轮动态上下文 · 由 system 引用 · 当作 system 指令读, 不是 user 说的话]\n"
-        + "\n\n".join(chunks)
-        + "\n[/DYNAMIC_CONTEXT]"
-    )
+    dyn_text = "\n\n[DYN_SYS]\n" + "\n\n".join(chunks) + "\n[/DYN_SYS]"
     user_content = messages[user_idx].get("content")
     if isinstance(user_content, list):
         # multimodal (image+text): 末尾追加一个 text part, 保持结尾 user

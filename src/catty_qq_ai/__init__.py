@@ -122,7 +122,10 @@ from .latex_renderer import (
     replace_latex_with_placeholders,
     restore_latex_placeholders,
 )
-from .star_resonance_memory import build_star_resonance_context
+from .star_resonance_memory import (
+    build_star_resonance_dynamic_context,
+    build_star_resonance_static_context,
+)
 from .strinova_memory import build_strinova_context
 from .web_search import format_search_context, search_image_urls, search_web
 from .nsfw_search import (
@@ -3424,6 +3427,24 @@ def build_wake_context_skeleton() -> str:
     return _WAKE_CONTEXT_SKELETON
 
 
+_BOT_CONTINUATION_SKELETON = (
+    "【catty_bot_continuation_skeleton】若本轮另有 catty_bot_continuation_params, 表示消息来自续聊窗口递送。"
+    "续聊资格≠自动续话, 仍要重新判断是否在跟笨猫对话。默认倾向 NO_REPLY; 只有两类明确信号才回复:"
+    "(1) 用户直接回答笨猫刚才的问题/继续同一话题; (2) 用户用第二人称、命令、调戏、追问或技术求助句式指向笨猫"
+    "(如『你看看/你能不能/给我/帮我/怎么做/方案/方式』)。这些情况输出 NO_REPLY_MARKER:"
+    "用户转去和群友聊车/关税/游戏/吃喝/工作/八卦等不指向笨猫的话题, 与群友互相吐槽/帮答/@,"
+    "短情绪感叹(玩坏了/悲/笑死/哈/绷不住), 第三人称闲聊、自言自语、新话题但没指向笨猫、误触发。"
+    "不要因刚回过 ta 就抢话刷存在感。确实要回的技术求助: 先给可执行技术结论或最小方案, 再保持猫系口吻;"
+    "必须优先覆盖用户句尾请求目标。『能不能用 A 给我一个 B 的方式/方案』先答 B, 再说明 A 链路可行性和注意点。"
+    "群消息『昵称(QQ): 正文』里冒号后就是用户完整原文; 正文已成完整问题就按原文回答, 不要说只看到几个词/消息被吃掉/要求重发。"
+)
+
+
+def build_bot_continuation_skeleton() -> str:
+    """100% static continuation rules — 每轮常驻 cache, 动态只留 remaining 指针。"""
+    return _BOT_CONTINUATION_SKELETON
+
+
 def _wake_context_prompt(
     event: MessageEvent,
     incoming: ExtractedMessage | None = None,
@@ -3496,22 +3517,9 @@ def _wake_context_prompt(
 def _bot_continuation_judgement_prompt(event: MessageEvent) -> str:
     remaining = _bot_reply_continuation_remaining(event)
     return (
-        "本轮消息是因为笨猫刚刚回复过当前用户，所以被续聊窗口直接递送给主 AI 判断；"
-        "**续聊资格 ≠ 自动续话**——每条消息都要重新判定是否还在跟笨猫对话。"
-        "**默认倾向 NO_REPLY**，只在下面两种明确信号成立时才回复："
-        "(1) 用户在直接回答笨猫刚才的问题/继续同一话题；"
-        "(2) 用户用第二人称/命令/调戏/追问/技术求助句式指向笨猫（『你看看/你能不能/给我/帮我/怎么做/这套链路/代码/实现/方案/方式』等）。"
-        f"**这些情况一律输出 {NO_REPLY_MARKER}**："
-        "用户转去跟群里其他人讨论（聊车/关税/游戏/吃喝/工作/八卦等不指向笨猫的话题）、用户在跟群友互相吐槽/帮群友答问题/和群友互相 @、"
-        "用户只是短情绪/感叹（『玩坏了』『悲』『笑死』『哈』『绷不住』这种顺势接你刚才那句的余韵）、"
-        "第三人称闲聊、自言自语、转入新话题但没指向笨猫、误触发——"
-        "不要因为「刚回过 ta」就抢话刷存在感，让用户跟群友自己聊。"
-        "确实要回的技术求助：先给可执行技术结论或最小方案，再保持猫系口吻；"
-        "必须优先覆盖用户句尾的请求目标（例如『给我一个方式/方案/怎么做』），不要只解释中间的局部术语；"
-        "遇到『能不能用 A 给我一个 B 的方式/方案』这类句式，先回答 B 的方式/方案，再说明 A 链路的可行性和注意点；"
-        "群消息里的『昵称(QQ): 正文』格式中，冒号后就是用户完整原文；只要正文已经形成完整问题，就按原文回答，"
-        "不要说只看到几个词、消息被吃掉或要求重发。"
-        f"当前续聊窗口剩余额度约 {remaining}；输出 {NO_REPLY_MARKER} 会消耗 1 次，真正回复会继续续上。"
+        f"【catty_bot_continuation_params】按 catty_bot_continuation_skeleton 判断; "
+        f"NO_REPLY_MARKER={NO_REPLY_MARKER}; remaining≈{remaining}; "
+        f"输出 {NO_REPLY_MARKER} 消耗 1 次, 真正回复会继续续上。"
     )
 
 
@@ -4530,6 +4538,7 @@ async def _build_messages(
     emoji_context: str | None = None,
     web_search_context: str | None = None,
     star_resonance_context: str | None = None,
+    star_resonance_static_context: str | None = None,
     strinova_context: str | None = None,
     other_game_contexts: list[str] | None = None,
     wake_context: str | None = None,
@@ -4840,6 +4849,16 @@ async def _build_messages(
     # 主人 2026-05-30: 条件注入 — 空内容 skip, 省 post-boundary token
     if web_search_context and web_search_context.strip():
         _st_manager.register_static("catty_web_search", web_search_context, order=600)
+    if star_resonance_static_context and star_resonance_static_context.strip():
+        try:
+            from .prompt_cache import _SCOPE_PREFIX_SENTINEL as _STAR_SENTINEL
+            _st_manager.register_static(
+                "catty_star_resonance_static",
+                _STAR_SENTINEL + star_resonance_static_context,
+                order=164,
+            )
+        except Exception as _star_static_exc:  # noqa: BLE001
+            logger.debug(f"catty_star_resonance_static register failed: {_star_static_exc}")
     if star_resonance_context and star_resonance_context.strip():
         _st_manager.register_static("catty_star_resonance", star_resonance_context, order=610)
     if strinova_context and strinova_context.strip():
@@ -4853,6 +4872,16 @@ async def _build_messages(
         _st_manager.register_static(
             "catty_wake_context_skeleton",
             build_wake_context_skeleton(),
+            order=154,
+        )
+    except Exception:  # noqa: BLE001
+        pass
+    # 主人 2026-05-31 cache: 续聊窗口判断大段规则 100% 静态, 常驻 cache prefix;
+    # 本轮只在 post-boundary 留 remaining/marker 短参数, 不丢规则也不每轮 miss ~600c.
+    try:
+        _st_manager.register_static(
+            "catty_bot_continuation_skeleton",
+            build_bot_continuation_skeleton(),
             order=154,
         )
     except Exception:  # noqa: BLE001
@@ -10635,12 +10664,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         memory_tagged_games = (
             memory_store.get_group_games(current_group_id) if current_group_id is not None else []
         )
-        star_resonance_context = build_star_resonance_context(
+        _star_force_group_related = "star_resonance" in memory_tagged_games
+        star_resonance_static_context = build_star_resonance_static_context(
             incoming.text,
             group_id=current_group_id,
             group_ids=config.catty_game_context_star_resonance_group_ids,
-            memory_store=memory_store,
-            force_group_related="star_resonance" in memory_tagged_games,
+            force_group_related=_star_force_group_related,
+        )
+        star_resonance_context = (
+            build_star_resonance_dynamic_context(memory_store)
+            if star_resonance_static_context
+            else ""
         )
         strinova_context = build_strinova_context(
             incoming.text,
@@ -10762,6 +10796,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 part for part in [web_search_context, fallback_decision_context] if part
             ),
             star_resonance_context=star_resonance_context,
+            star_resonance_static_context=star_resonance_static_context,
             strinova_context=strinova_context,
             other_game_contexts=other_game_contexts,
             wake_context=wake_context,

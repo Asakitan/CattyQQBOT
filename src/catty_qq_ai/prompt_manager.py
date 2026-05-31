@@ -695,8 +695,9 @@ def register_catty_persona(
         content_fn=lambda: _cg.build_goals_tier_pool_prompt(
             affection_level=aff_level,
             is_owner=is_owner,
+            scope=scope,
         ),
-        order=459,  # tier 桶 (亲密/主人), 仅够格者非空; 私聊 hoist 缓存, 群聊 trailing
+        order=459,  # tier 桶 (亲密/主人) sample ~200c, 仅够格者非空; current-user 每轮 miss(小量)
     )
     # 主人 2026-05-28 C16-1: 砍 dynamic register — reunion / session_spice / random_encounter
     # 每个 ~200-500c hint, 跟 mood / daily_life 重叠功能. NLU 模块仍可独立调,

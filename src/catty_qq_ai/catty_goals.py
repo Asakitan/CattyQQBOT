@@ -874,33 +874,46 @@ def build_goals_universal_pool_prompt() -> str:
     )
 
 
-def build_goals_tier_pool_prompt(affection_level: int = 0, is_owner: bool = False) -> str:
-    """tier 桶: 亲密(Lv3+) / 主人专属(is_owner) 小心思全集. 仅够格时注入, stranger 返回空.
+def build_goals_tier_pool_prompt(
+    affection_level: int = 0,
+    is_owner: bool = False,
+    *,
+    scope: str = "",
+    now: datetime | None = None,
+    count: int = 3,
+) -> str:
+    """tier 桶: 亲密(Lv3+) / 主人专属(is_owner) 小心思. 仅够格时注入, stranger 返回空.
 
-    字节 per-tier 恒定 (owner / intimate 两种), 不再 sample → 私聊可进 hoist cache.
-    **owner 桶只在 is_owner=True 注入** → 非主人 prompt 里完全没有 owner 撒娇文本 (守边界).
+    主人 2026-05-31 **止血修复**: 旧版整桶列全部(owner 4013c!)落 current-user
+    post-boundary → 群聊每轮 miss 4013c (真主人在群里活动, 命中率从 84% 崩到 65%).
+    群聊 tier 桶物理上进不了 cache (换人时段出现/消失破 history 前缀), 所以**绝不能整桶**.
+    改回 deterministic sample N 条 (~200c, by scope+date+tier 同天同档稳定), 跟原
+    get_today_goals 一个量级. universal 全局池不变(进全局 cache 是对的); tier 只是少量补充.
+
+    **owner 桶只在 is_owner=True sample** → 非主人 prompt 里完全没有 owner 撒娇文本 (守边界).
     """
     if is_owner:
-        extra = (
+        pool = (
             list(_GOALS_AFFECTIONATE)
             + list(_GOALS_AFFECTIONATE_SCENE_EXPANSION)
             + list(_GOALS_OWNER_ONLY)
             + list(_GOALS_OWNER_SCENE_EXPANSION)
         )
-        label = (
-            "【笨猫小心思·主人专属候选】(仅对**真实主人**有效; 同样按对话氛围自然挑, "
-            "不报告. 可放开撒娇/求宠/占有欲, 但仍走傲娇包装.)"
-        )
+        label = "【笨猫小心思·主人专属】(仅真主人; 按氛围自然带, 不报告. 可放开撒娇/求宠/暧昧.)"
+        salt = "owner"
     elif affection_level >= 3:
-        extra = list(_GOALS_AFFECTIONATE) + list(_GOALS_AFFECTIONATE_SCENE_EXPANSION)
-        label = (
-            "【笨猫小心思·亲密档候选】(当前关系够亲密才可用; 按对话氛围自然挑, 不报告. "
-            "可适度撒娇但不用主人专属称呼.)"
-        )
+        pool = list(_GOALS_AFFECTIONATE) + list(_GOALS_AFFECTIONATE_SCENE_EXPANSION)
+        label = "【笨猫小心思·亲密档】(关系够亲密才用; 按氛围自然带, 不报告. 可适度撒娇不用主人称呼.)"
+        salt = "intimate"
     else:
         return ""
-    body = "\n".join(f"- {g}" for g in extra)
-    return label + "\n" + body
+    if not pool:
+        return ""
+    today = (now or datetime.now()).date().isoformat()
+    rng = Random(_hash_seed(scope or "global", today, salt=salt))
+    n = max(1, min(count, len(pool)))
+    picked = rng.sample(pool, k=n)
+    return label + " " + " | ".join(picked)
 
 
 __all__ = [
