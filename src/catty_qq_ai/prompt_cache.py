@@ -218,7 +218,7 @@ def _split_merged_dynamic_chunks(text: str) -> list[str]:
         return []
     import re as _re
     parts = _re.split(
-        r"\n{2,}(?=(?:【|<<<CATTY_INTERNAL_INSTRUCTION|记忆与称呼规则|记忆与称呼参数|当前时刻|群节奏感知))",
+        r"\n{2,}(?=(?:【|<<<CATTY_INTERNAL_INSTRUCTION|<<<END_INTERNAL|记忆与称呼规则|记忆与称呼参数|当前时刻|群节奏感知|特别关心触发))",
         text.strip(),
     )
     return [p.strip() for p in parts if p and p.strip()]

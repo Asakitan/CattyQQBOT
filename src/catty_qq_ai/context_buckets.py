@@ -203,11 +203,7 @@ class TimeBucketContextStore:
             current_turns = len(current.get("turns") or [])
         finalized = state.get("finalized") if isinstance(state.get("finalized"), list) else []
         scope_type = "group" if (is_group if is_group is not None else scope.startswith("group:")) else "private"
-        return (
-            "【时间桶参数】"
-            f"scope={scope_type}; bucket={bucket}; bucket_min={minutes}; "
-            f"current_turns={current_turns}; finalized={len(finalized)}"
-        )
+        return f"【TIME_BUCKET】s={scope_type};b={bucket};m={minutes};cur={current_turns};fin={len(finalized)}"
 
     def flush_sync(self) -> int:
         written = 0

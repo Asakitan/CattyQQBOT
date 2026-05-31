@@ -185,10 +185,23 @@ _MEMORY_NAMING_RULES = (
     "- 可以自然少量使用猫系颜文字或动作，如 (ฅ>ω<*ฅ)、(๑•̀ㅂ•́)و✧、ฅฅ；不要刷屏。"
 )
 
+_SPECIAL_CARE_RULES = (
+    "特别关心规则:\n"
+    "- special_care 只是更值得留意,不是强制回复;先看最后发言是否自然指向笨猫。\n"
+    f"- 如果 ta 正在跟群友聊车/游戏/吃喝/工作/答题/互相@等不指向笨猫的话题,不要抢话,输出 {NO_REPLY_MARKER}。\n"
+    "- 不要因为熟人就追每一句;一个话题接一次够了。\n"
+    f"- 不适合回复时只输出 {NO_REPLY_MARKER};最近没被理可轻微败犬/酸酸/嘴硬贴贴,但别抱怨或道德绑架。"
+)
+
 
 def build_memory_naming_rules() -> str:
     """返回静态称呼/记忆通则 (cache prefix 用, byte-stable)。见 _MEMORY_NAMING_RULES。"""
     return _MEMORY_NAMING_RULES
+
+
+def build_special_care_rules() -> str:
+    """返回特别关心静态规则 (cache prefix 用, byte-stable)。"""
+    return _SPECIAL_CARE_RULES
 
 
 class MemoryStore:
@@ -949,16 +962,12 @@ class MemoryStore:
         last_text = ""
         pending = state.get("pending")
         if isinstance(pending, dict):
-            last_text = str(pending.get("text") or "").strip()[:120]
+            last_text = str(pending.get("text") or "").strip()[:40]
         return (
-            "特别关心触发："
-            f"{_sender_name(event)}({user_id}) 是你特别关心的人，称呼可用「{title}」。"
-            "这**不是强制回复**，请根据 ta 的发言内容、群聊上下文和自然程度判断要不要跟上去。"
-            f"**特别注意**：如果 ta 正在跟群里其他人对话（聊车/游戏/吃喝/工作等不指向你的话题、跟群友互相吐槽、帮群友答问题、和群友互相 @），不要抢话，让 ta 专心跟群友聊，输出 {NO_REPLY_MARKER}。"
-            "也不要因为是熟人就连续接 ta 每一句话；一个话题接一次就够，别追着每条回。"
-            f"如果不适合回复，只输出 {NO_REPLY_MARKER}。上次贴上去无人接住：{last_ignored}；累计没被理 {ignored_count} 次。"
-            "如果最近没被理，可以表现一点败犬感、酸酸失落或嘴硬贴贴，但不要抱怨、道德绑架或刷存在感。"
-            + (f"上次你贴过去的内容：{last_text}" if last_text else "")
+            "【SPECIAL_CARE】"
+            f"user={user_id}/{_sender_name(event)};addr={title};ignored={ignored_count};last_ignored={last_ignored};"
+            "rules=special_care_rules"
+            + (f";last_reply={last_text}" if last_text else "")
         )
 
     def record_special_care_reply_sent(self, event: MessageEvent, text: str) -> None:
@@ -1647,11 +1656,10 @@ class MemoryStore:
             group_id = str(event.group_id)
             title = self._title_for(user_id, group_id)
             owner_ok = self._is_configured_owner(user_id, group_id)
-            lines.append(f"group={group_id}; title={title}; can_call_master={'yes' if owner_ok else 'no'}")
             if owner_ok:
-                lines.append("称呼:当前用户是配置主人,可叫主人/笨蛋主人/杂鱼主人")
+                lines.append(f"group={group_id};title={title};master=1;addr=主人/笨蛋主人/杂鱼主人")
             else:
-                lines.append("称呼:当前用户不是配置主人,禁止叫主人")
+                lines.append(f"group={group_id};title={title};master=0;addr=禁叫主人")
             group = self._data.get("groups", {}).get(group_id, {})
             if isinstance(group, dict):
                 # 主人 2026-05-28 plan-quizzical-crane Step 2: summary 不再被动注入 prompt.
@@ -1659,7 +1667,7 @@ class MemoryStore:
                 # → DeepSeek cache 多 prefix 不互相 evict, 命中率上升.
                 summary_present = bool(str(group.get("summary") or "").strip())
                 if summary_present:
-                    lines.append("recall:群长期记忆存在,需要回忆群史时 catty_recall(current_group),平时不用")
+                    lines.append("recall:group=exists;need群史=>catty_recall(current_group)")
                 # 群级别 sticky notes(AI 通过 catty_remember 写入的长期备忘)
                 group_notes_line = self._notes_context_line(group, label="本群笔记", limit=2)
                 if group_notes_line:
@@ -1688,23 +1696,22 @@ class MemoryStore:
                 members = group.get("members", {})
                 if isinstance(members, dict) and members:
                     lines.append(
-                        f"tools:群友画像{len(members)}人; 详情=user_profile(QQ); 群史=recall(current_group)"
+                        f"tools:profiles={len(members)};user_profile(QQ);recall(group)"
                     )
         elif isinstance(event, PrivateMessageEvent):
             title = self._title_for(user_id)
             owner_ok = self._is_configured_owner(user_id)
-            lines.append(f"private=1; title={title}; can_call_master={'yes' if owner_ok else 'no'}")
             if owner_ok:
-                lines.append("称呼:当前用户是配置主人,可叫主人/笨蛋主人/杂鱼主人")
+                lines.append(f"private=1;title={title};master=1;addr=主人/笨蛋主人/杂鱼主人")
             else:
-                lines.append("称呼:当前用户不是配置主人,禁止叫主人")
+                lines.append(f"private=1;title={title};master=0;addr=禁叫主人")
             user = self._data.get("users", {}).get(user_id, {})
             if isinstance(user, dict):
                 # 主人 2026-05-28 plan-quizzical-crane Step 2: private_summary 同样改成短提示,
                 # AI 需要时用 catty_recall(scope=current_user) 主动拉取.
                 summary_present = bool(str(user.get("private_summary") or "").strip())
                 if summary_present:
-                    lines.append("recall:私聊长期记忆存在,需要回忆旧事时 catty_recall(current_user),平时不用")
+                    lines.append("recall:private=exists;need旧事=>catty_recall(current_user)")
                 profile = user.get("private_profile", {})
                 if isinstance(profile, dict) and profile:
                     lines.append(

@@ -757,11 +757,7 @@ def register_catty_persona(
             is_academic = False
         if technical_direct or is_academic:
             return ""
-        return (
-            "【本轮长度硬约束】当前不是学术/技术/工程/排错问题: "
-            "回复总字数必须 ≤50 个中文字符, 1 句优先; "
-            "只保留最关键情绪/结论/动作, 删掉解释、铺垫和多余撒娇。"
-        )
+        return "【LEN】non-academic<=50zh;1句;keep emotion/action/core only"
 
     mgr.register(
         "catty_non_academic_length_guard",

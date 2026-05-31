@@ -3677,8 +3677,7 @@ def _nsfw_group_audience_context(event: MessageEvent, active_user_id: str) -> st
 def _bot_continuation_judgement_prompt(event: MessageEvent) -> str:
     remaining = _bot_reply_continuation_remaining(event)
     return (
-        f"【catty_bot_continuation_params】rem≈{remaining}; no_reply={NO_REPLY_MARKER}; "
-        "rules=catty_bot_continuation_skeleton"
+        f"【BOT_CONT】r≈{remaining};no={NO_REPLY_MARKER};rules=catty_bot_continuation_skeleton"
     )
 
 
@@ -4788,7 +4787,7 @@ async def _build_messages(
     if semantic_reply_split:
         _deferred_pre_persona_segments.append((
             "catty_semantic_reply_split_pointer",
-            "【本轮启用 semantic_reply_split】允许拆分回复, 规则看 cache 里 catty_semantic_reply_split_skeleton.",
+            "【SPLIT】on;rules=semantic_reply_split_skeleton",
             490,
         ))
     if incoming.opportunistic or group_filter_context:
@@ -5144,6 +5143,12 @@ async def _build_messages(
         _st_manager.register_static("catty_memory_rules", _build_mem_rules(), order=162)
     except Exception as _mr_exc:  # noqa: BLE001
         logger.debug(f"catty_memory_rules register failed: {_mr_exc}")
+    if special_care_context:
+        try:
+            from .memory import build_special_care_rules as _build_special_care_rules
+            _st_manager.register_static("catty_special_care_rules", _build_special_care_rules(), order=163)
+        except Exception as _scr_exc:  # noqa: BLE001
+            logger.debug(f"catty_special_care_rules register failed: {_scr_exc}")
     if not incoming.has_image:
         try:
             _recent_image_hint = _build_recent_image_reference_hint(event, incoming)
