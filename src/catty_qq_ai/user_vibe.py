@@ -463,6 +463,21 @@ def _bucket_confidence(c: int) -> str:
     return "低"
 
 
+def build_user_vibe_catalog_prompt() -> str:
+    """Stable catalog for interpreting compact user-vibe pointers.
+
+    主人 2026-05-31 cache: 旧版每轮在【对方画像】里重复塞一大段 vibe 解释文本,
+    这部分其实是全局常量。拆到 pre-boundary cache 后, current turn 只留短 pointer,
+    不降低画像智商, 也不让大段说明每轮 miss。
+    """
+    lines = [
+        "【对方画像标签词典】若本轮出现【对方画像】短指针, 按这里解释 vibe 标签；只用于微调反应基调, 不要复述给对方听。"
+    ]
+    for tag, hint in _VIBE_HINTS_ZH.items():
+        lines.append(f"- {tag}: {hint}")
+    return "\n".join(lines)
+
+
 def build_user_vibe_prompt(profile: dict[str, Any], user_display: str = "用户") -> str:
     """根据 profile 返回给 LLM 的「对方画像」段。confidence 不够返回 ""。"""
     if not profile:
@@ -473,23 +488,23 @@ def build_user_vibe_prompt(profile: dict[str, Any], user_display: str = "用户"
         return ""
     vibe = profile.get("vibe_tag")
     topics = profile.get("topic_tags") or []
-    # 主人 2026-05-29 Round 2: bucketed msg_count + confidence (cache 友好)
+    # 主人 2026-05-31 cache: 大段 vibe 解释已拆到 build_user_vibe_catalog_prompt()
+    # 的稳定 cache 词典；这里只留短 pointer, 避免 current-user 尾巴每轮 miss 一整段说明。
     lines = [
-        f"【对方画像】『{user_display}』({_bucket_msg_count(msg_count)},置信度{_bucket_confidence(confidence)}):"
+        f"【对方画像】『{user_display}』: vibe={vibe or '未知'}; "
+        f"熟悉度={_bucket_msg_count(msg_count)}; 置信度={_bucket_confidence(confidence)}"
     ]
-    if vibe and vibe in _VIBE_HINTS_ZH:
-        lines.append(f"- 主调:{vibe} — {_VIBE_HINTS_ZH[vibe]}")
     if topics:
-        topic_str = " / ".join(topics)
-        lines.append(f"- 常聊话题:{topic_str}")
+        topic_str = "/".join(str(t) for t in topics[:6])
+        lines.append(f"常聊={topic_str}")
     if not vibe and not topics:
         return ""
-    lines.append("(画像是从历史消息自动学的,只用来微调反应基调,不要复述给对方听。)")
     return "\n".join(lines)
 
 
 __all__ = [
     "UserVibeStore",
+    "build_user_vibe_catalog_prompt",
     "build_user_vibe_prompt",
     "classify_vibe_with_confidence",
     "classifier_cache_info",

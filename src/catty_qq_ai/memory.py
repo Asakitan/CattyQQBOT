@@ -1445,14 +1445,16 @@ class MemoryStore:
             return []
         lines: list[str] = []
         summary = str(user.get("private_summary") or "").strip()
-        if summary:
-            lines.append("- 同一 QQ 用户私聊摘要：" + summary)
+        if summary and not any(bad in summary for bad in ("暂无有效", "无文字交流", "无有效信息")):
+            lines.append("同QQ私聊摘要≈" + summary[:50])
         profile = user.get("private_profile", {})
+        impression = str(profile.get("impression") or "") if isinstance(profile, dict) else ""
         if isinstance(profile, dict) and profile:
-            lines.append(
-                f"- 同一 QQ 用户画像：性别={_clean_gender(profile.get('gender'))}，"
-                f"印象={str(profile.get('impression') or '暂无')[:80]}。"
-            )
+            if impression and not any(bad in impression for bad in ("暂无", "无法生成", "无有效")):
+                lines.append(
+                    f"同QQ画像:性别={_clean_gender(profile.get('gender'))},"
+                    f"印象={impression[:40]}"
+                )
         return lines
 
     def _profile_for(self, user_id: str, group_id: str) -> dict[str, Any]:
@@ -1618,16 +1620,17 @@ class MemoryStore:
             return ""
         user_id = str(event.user_id)
         name = _sender_name(event)
-        lines = ["记忆与称呼规则：", f"- 当前用户：QQ {user_id}，显示名「{name}」。"]
+        lines = [f"记忆与称呼参数: user={user_id}/{name}"]
 
         if isinstance(event, GroupMessageEvent):
             group_id = str(event.group_id)
             title = self._title_for(user_id, group_id)
-            lines.append(f"- 当前群：{group_id}；优先称呼当前用户为「{title}」。")
-            if self._is_configured_owner(user_id, group_id):
-                lines.append("- 当前用户在配置里被定义为「主人」，可以这样称呼。")
+            owner_ok = self._is_configured_owner(user_id, group_id)
+            lines.append(f"group={group_id}; title={title}; can_call_master={'yes' if owner_ok else 'no'}")
+            if owner_ok:
+                lines.append("称呼:当前用户是配置主人,可叫主人/笨蛋主人/杂鱼主人")
             else:
-                lines.append("- 只有配置称呼明确为「主人」的 QQ 才能被叫主人；当前用户不能叫主人。")
+                lines.append("称呼:当前用户不是配置主人,禁止叫主人")
             group = self._data.get("groups", {}).get(group_id, {})
             if isinstance(group, dict):
                 # 主人 2026-05-28 plan-quizzical-crane Step 2: summary 不再被动注入 prompt.
@@ -1635,20 +1638,19 @@ class MemoryStore:
                 # → DeepSeek cache 多 prefix 不互相 evict, 命中率上升.
                 summary_present = bool(str(group.get("summary") or "").strip())
                 if summary_present:
-                    lines.append(
-                        "- 本群有长期记忆 (summary + corpus): 需要回忆群里发生过什么时, "
-                        "调 catty_recall(scope=current_group) 拉取. 平时不用调."
-                    )
+                    lines.append("recall:群长期记忆存在,需要回忆群史时 catty_recall(current_group),平时不用")
                 # 群级别 sticky notes(AI 通过 catty_remember 写入的长期备忘)
-                group_notes_line = self._notes_context_line(group, label="本群笔记")
+                group_notes_line = self._notes_context_line(group, label="本群笔记", limit=2)
                 if group_notes_line:
                     lines.append(group_notes_line)
                 profile = self._profile_for(user_id, group_id)
+                impression = str(profile.get("impression") or "") if profile else ""
                 if profile:
-                    lines.append(
-                        f"- 当前用户画像：性别={_clean_gender(profile.get('gender'))}，"
-                        f"印象={str(profile.get('impression') or '暂无')[:80]}。"
-                    )
+                    if impression and not any(bad in impression for bad in ("暂无", "无法生成", "无有效")):
+                        lines.append(
+                            f"群内画像:性别={_clean_gender(profile.get('gender'))},"
+                            f"印象={impression[:40]}"
+                        )
                 # 用户级 sticky notes(跨群,只在用户对象上)
                 user_obj = self._data.get("users", {}).get(user_id, {})
                 if isinstance(user_obj, dict):
@@ -1665,34 +1667,31 @@ class MemoryStore:
                 members = group.get("members", {})
                 if isinstance(members, dict) and members:
                     lines.append(
-                        f"- 本群已记录 {len(members)} 位群友画像; 需要某人详情时调 "
-                        "catty_user_profile(user_id=对方QQ), 群整体记忆调 catty_recall(scope=current_group). 平时不用调."
+                        f"tools:群友画像{len(members)}人; 详情=user_profile(QQ); 群史=recall(current_group)"
                     )
         elif isinstance(event, PrivateMessageEvent):
             title = self._title_for(user_id)
-            lines.append(f"- 当前是私聊；优先称呼当前用户为「{title}」。")
-            if self._is_configured_owner(user_id):
-                lines.append("- 当前用户在配置里被定义为「主人」，可以这样称呼。")
+            owner_ok = self._is_configured_owner(user_id)
+            lines.append(f"private=1; title={title}; can_call_master={'yes' if owner_ok else 'no'}")
+            if owner_ok:
+                lines.append("称呼:当前用户是配置主人,可叫主人/笨蛋主人/杂鱼主人")
             else:
-                lines.append("- 只有配置称呼明确为「主人」的 QQ 才能被叫主人；当前用户不能叫主人。")
+                lines.append("称呼:当前用户不是配置主人,禁止叫主人")
             user = self._data.get("users", {}).get(user_id, {})
             if isinstance(user, dict):
                 # 主人 2026-05-28 plan-quizzical-crane Step 2: private_summary 同样改成短提示,
                 # AI 需要时用 catty_recall(scope=current_user) 主动拉取.
                 summary_present = bool(str(user.get("private_summary") or "").strip())
                 if summary_present:
-                    lines.append(
-                        "- 跟此用户有长期记忆 (private_summary + corpus): 需要回忆以前聊过什么时, "
-                        "调 catty_recall(scope=current_user) 拉取. 平时不用调."
-                    )
+                    lines.append("recall:私聊长期记忆存在,需要回忆旧事时 catty_recall(current_user),平时不用")
                 profile = user.get("private_profile", {})
                 if isinstance(profile, dict) and profile:
                     lines.append(
-                        f"- 私聊画像：性别={_clean_gender(profile.get('gender'))}，"
-                        f"印象={str(profile.get('impression') or '暂无')[:80]}。"
+                        f"私聊画像:性别={_clean_gender(profile.get('gender'))},"
+                        f"印象={str(profile.get('impression') or '暂无')[:60]}"
                     )
                 # 用户级 sticky notes
-                user_notes_line = self._notes_context_line(user, label="对此用户的笔记")
+                user_notes_line = self._notes_context_line(user, label="对此用户的笔记", limit=2)
                 if user_notes_line:
                     lines.append(user_notes_line)
 

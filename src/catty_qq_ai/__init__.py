@@ -2628,6 +2628,7 @@ class GroupFilterBatchState:
 
 @dataclass(slots=True)
 class RecentConversationMessage:
+    seq: int
     message_id: str
     user_id: str
     display_name: str
@@ -2649,6 +2650,7 @@ _expression_repeats: DefaultDict[str, ExpressionRepeatState] = defaultdict(Expre
 _group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(GroupFilterBatchState)
 _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _recent_conversation_messages: DefaultDict[str, deque[RecentConversationMessage]] = defaultdict(lambda: deque(maxlen=80))
+_recent_conversation_seq: DefaultDict[str, int] = defaultdict(int)
 _bot_reply_continuations: dict[str, BotReplyContinuationState] = {}
 _web_search_cooldowns: dict[str, float] = {}
 WEB_SEARCH_REQUEST_PREFIX = "[[CATTY_WEB_SEARCH:"
@@ -2864,6 +2866,16 @@ def _conversation_queue_key(event: MessageEvent) -> str:
     if isinstance(event, GroupMessageEvent):
         return f"group:{event.group_id}"
     return f"private:{event.user_id}"
+
+
+def _next_recent_conversation_seq(key: str) -> int:
+    """Per-scope monotonic id for wake_lines ledger rows.
+
+    主人 2026-05-31 cache: wake_lines 不能再用相对 +/- index, 否则每轮当前消息滑动都会
+    重写旧行, DeepSeek prefix/KV 接不上。这个 seq 只递增不回收, deque 裁剪也不改旧行编号。
+    """
+    _recent_conversation_seq[key] += 1
+    return _recent_conversation_seq[key]
 
 
 # 按 scope 滚动维护「最近 N 分钟出现过的图片 URL」, 给 imagegen edit 模式做
@@ -3163,6 +3175,7 @@ def _remember_recent_conversation_event(event: MessageEvent, incoming: Extracted
             return
     recent.append(
         RecentConversationMessage(
+            seq=_next_recent_conversation_seq(key),
             message_id=message_id,
             user_id=str(event.user_id),
             display_name=_display_name(event),
@@ -3198,6 +3211,7 @@ def _remember_bot_conversation_message(
         _mark_bot_reply_continuation(key, str(target_user_id))
     recent.append(
         RecentConversationMessage(
+            seq=_next_recent_conversation_seq(key),
             message_id=message_id,
             user_id=str(bot_id),
             display_name="笨猫",
@@ -3413,8 +3427,10 @@ def _recent_context_window(
 # skeleton 内容跨任何 sender/scope/turn 100% byte-stable, 只引用 lines.
 _WAKE_CONTEXT_SKELETON = (
     "当前是由一条消息唤起的回复。下面 catty_wake_lines 段会给出本会话独立实时上下文 (按时间顺序整理并去重)。"
+    "session chat history 已承载可缓存的主要最近问答; catty_wake_lines 只补充未进入 history 的邻近群聊差分。"
+    "catty_wake_current 会指出本轮当前唤起消息; 当前用户消息正文仍以最后一条 user 为准。"
     "实时场景通常只有上文和当前消息，若没有下文不要臆造。"
-    "请先定位带“<- 当前唤起消息”的发言者、它 @/回复/指向的对象，以及最近笨猫自己的发言；"
+    "请先按 catty_wake_current 和最后一条 user 定位当前唤起消息的发言者、它 @/回复/指向的对象，以及最近笨猫自己的发言；"
     "不要把别的群友发言误认成当前用户原文，也不要因为更早消息更热闹就偏离当前唤起消息。"
     "如果当前消息是在接前文、点名某个群友、要求评价某句称呼或梗，请结合上文选准回复目标；"
     "如果上下文显示是在让你攻击他人，保持轻度玩笑边界，不要升级辱骂。"
@@ -3452,26 +3468,30 @@ def _wake_context_prompt(
     group_filter_context: bool = False,
     bot_continuation: bool = False,
 ) -> str:
-    """主人 2026-05-29 Round 21: 只返回动态 lines 部分 (skeleton 单独 register 进 cache).
+    """只返回动态 wake delta 部分 (skeleton 单独 register 进 cache).
 
-    返回值就是 lines list 拼接, 加最短一行『参见 catty_wake_context_skeleton』指针.
+    主人 2026-05-31 cache 实测: system 块内部增长不会被 DeepSeek 当作可复用 KV 边界,
+    反而挡住 history cache。真正可缓存的最近上下文交给 chat history; wake 只发极短
+    current pointer + 少量未进 history 的邻近群聊差分。
     """
     key = _conversation_queue_key(event)
     recent = _ordered_unique_recent_messages(list(_recent_conversation_messages.get(key, ())))
     if not recent:
         return ""
     current_index = _find_current_recent_index(recent, event)
-    # 主人 2026-05-29 Round 24: wake_lines 是 cache miss 大头 (实测 6125c/~3370tok, 占 input 30%).
-    # 主人指令: 「1. history 去重 2. 砍到 6 条, 上下 3 条」.
-    # 之前 limit 16-50 条把群里近 50 条全列, 每轮全 miss + 跟 history 大量重叠.
-    # 现窗口硬 cap = 当前唤起 + 上 3 + 下 2 (共 6 条), 且跟 session history 去重.
+    # wake_lines 只补差分: current user 自身已经是最后一条 user, session history 也已承载
+    # 多轮问答并可被 DeepSeek 缓存。这里只留当前附近、且不在 history 中的群聊邻近消息。
+    technical_direct = False
+    if incoming is not None:
+        _t = (incoming.text or "").lower()
+        technical_direct = bool(
+            (incoming.mentioned or incoming.replied_to_self or incoming.used_prefix or incoming.directed_strength == "direct_address")
+            and any(k in _t for k in ("cache", "缓存", "kv", "命中", "修复", "测试", "链路", "部署", "编译", "代码", "bug", "报错", "日志"))
+        )
     _WAKE_BEFORE = 3
-    _WAKE_AFTER = 2
+    _WAKE_AFTER = 0 if technical_direct else 1
     start = max(0, current_index - _WAKE_BEFORE)
     end = min(len(recent), current_index + _WAKE_AFTER + 1)
-    # history 去重: 收集 session history 每条核心文本 (去前缀/inline 噪音后逐行).
-    # wake 里跟 history 重复的 (主要是 catty 自己回过的 + 触发过 catty 的 user 消息) 跳过,
-    # 但当前唤起消息**必留**.
     _hist_norm: set[str] = set()
     try:
         from .message_utils import build_history_key as _bhk
@@ -3484,7 +3504,6 @@ def _wake_context_prompt(
                 _c = "".join(b.get("text", "") for b in _c if isinstance(b, dict))
             for _ln in str(_c or "").split("\n"):
                 _ln = _ln.strip()
-                # 剥 [QQ:数字] / 昵称(QQ): 前缀, 取冒号后核心
                 if "]" in _ln[:24]:
                     _ln = _ln.split("]", 1)[-1].strip()
                 if len(_ln) >= 5:
@@ -3492,24 +3511,29 @@ def _wake_context_prompt(
     except Exception:  # noqa: BLE001
         pass
     lines: list[str] = []
+    current_seq = 0
     for index, item in enumerate(recent[start:end], start=start):
-        _itxt = (item.text or "").strip()
-        # history 去重 (当前唤起消息除外)
-        if index != current_index and _itxt and len(_itxt) >= 5 and _itxt in _hist_norm:
+        if index == current_index:
+            current_seq = item.seq
             continue
-        marker = " <- 当前唤起消息" if index == current_index else ""
+        if technical_direct:
+            continue
+        _itxt = (item.text or "").strip()
+        if _itxt and len(_itxt) >= 5 and _itxt in _hist_norm:
+            continue
         image_marker = " [含图片]" if item.has_image else ""
         speaker = f"{item.display_name}({item.user_id})"
         if item.is_bot:
             speaker = f"笨猫自己({item.user_id})"
             if item.target_user_id:
                 speaker += f" -> {item.target_user_id}"
-        lines.append(f"{index - current_index:+d}. {speaker}: {item.text}{image_marker}{marker}")
+        lines.append(f"#{item.seq:06d} {speaker}: {item.text}{image_marker}")
+    current_pointer = f"【catty_wake_current】当前唤起消息=最后一条 user; recent_seq=#{current_seq:06d}" if current_seq else "【catty_wake_current】当前唤起消息=最后一条 user"
     if not lines:
-        return ""
-    # 短指针 + lines. 处理规则看 cache 里 catty_wake_context_skeleton.
+        return current_pointer
     return (
-        f"【catty_wake_lines · 本轮 {len(lines)} 条 (含去重)】(处理规则见 cache 里 catty_wake_context_skeleton)\n"
+        current_pointer
+        + "\n【catty_wake_lines · delta】(仅补充未进入 history 的邻近发言; 处理规则见 cache 里 catty_wake_context_skeleton)\n"
         + "\n".join(lines)
     )
 
@@ -4053,14 +4077,28 @@ def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> 
     """主人 2026-05-29 Round 23: 只返回 dynamic 参数 + 1 行短指针. 规则段进了 cache."""
     tags = image_analysis.get("emotion_tags")
     tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
-    candidate_text = candidates or "当前本地表情库没有直接命中的候选；如果很适合发图，可以输出表情意图，程序会尝试联网搜索并下载到表情库。"
-    return (
-        "【emoji 参数 (规则见 cache 里 catty_emoji_skeleton)】\n"
-        f"图片兴趣度：{image_analysis.get('interest', 0)}/100\n"
-        f"图片/表情含义：{image_analysis.get('expression') or image_analysis.get('summary') or ''}\n"
-        f"情绪标签：{tag_text}\n"
-        f"可用表情候选：\n{candidate_text}"
-    )
+    raw_candidates = str(candidates or "").strip()
+    # 主人 2026-05-31 cache: emoji skeleton 里已有完整规则; 每轮只留短参数。
+    # candidates_text 可能很长(实测 600c+), 这里只给 Top3 摘要, 不影响模型输出 EMOJI_QUERY 意图。
+    compact_candidates: list[str] = []
+    for line in raw_candidates.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        compact_candidates.append(line[:60])
+        if len(compact_candidates) >= 3:
+            break
+    expr = str(image_analysis.get("expression") or image_analysis.get("summary") or "").strip()
+    parts = ["【emoji 参数】按 catty_emoji_skeleton; 有候选才考虑发表情"]
+    if tag_text:
+        parts.append(f"tags={tag_text[:80]}")
+    if expr:
+        parts.append(f"意图≈{expr[:60]}")
+    if compact_candidates:
+        parts.append("候选=" + " / ".join(compact_candidates))
+    else:
+        parts.append("候选=<无直接命中>；很适合时可输出表情意图让程序尝试检索")
+    return "\n".join(parts)
 
 
 def _image_analysis_description(image_analysis: dict[str, object]) -> str:
@@ -4298,6 +4336,10 @@ def _choose_matching_emoji(
 
 def _generic_emoji_context(incoming: ExtractedMessage) -> str:
     if not config.catty_emoji_enabled:
+        return ""
+    _t = (incoming.text or "").lower()
+    # 技术/排错/部署类强请求里 emoji 候选通常是噪音, 且会制造 post-boundary miss。
+    if any(k in _t for k in ("cache", "缓存", "kv", "命中", "修复", "测试", "链路", "部署", "编译", "代码", "bug", "报错", "日志")):
         return ""
     candidates = emoji_store.candidates_text(incoming.text)
     # 主人 2026-05-29 A: 没匹配到可用表情候选就不注入 emoji 参数段 (~142c/轮 post_boundary).
@@ -4750,12 +4792,20 @@ async def _build_messages(
             _nlu_cache.prime_history(_recent_user_texts_for_ctx[1:], top_n=3)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"prime_history failed: {exc}")
+    _technical_direct_keywords = (
+        "cache", "缓存", "kv", "命中", "修复", "测试", "链路", "部署", "编译", "代码", "bug", "报错", "日志"
+    )
+    _technical_direct_request = bool(
+        (incoming.mentioned or incoming.replied_to_self or incoming.used_prefix or incoming.directed_strength == "direct_address")
+        and any(k in (incoming.text or "").lower() for k in _technical_direct_keywords)
+    )
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
         # 主人 2026-05-29 (P2): 群聊默认沉默段按 scope 注入用 (私聊不注册群聊沉默块)。
         "is_group": isinstance(event, GroupMessageEvent),
         "user_text": incoming.text or "",
+        "technical_direct": _technical_direct_request,
         "recent_user_texts": _recent_user_texts_for_ctx,
         # 主人 2026-05-28: cache 修复 — character_card 渲染用 scope-stable user_display.
         # 群聊 macros 替 → "用户" (boundary 前 byte 一致); 真实发言者放到 boundary 后段.
@@ -4959,7 +5009,7 @@ async def _build_messages(
         pulse_now = time.monotonic()
         pulse_result = analyze_pulse(pulse_msgs, now=pulse_now)
         pulse_phase = pulse_result.phase
-        if "pulse" not in _disabled_layers:
+        if "pulse" not in _disabled_layers and not _technical_direct_request:
             _pulse_ctx = build_pulse_context(pulse_msgs, now=pulse_now) or ""
             if _pulse_ctx.strip():
                 _st_manager.register_static("catty_pulse", _pulse_ctx, order=770)
@@ -5133,6 +5183,7 @@ async def _build_messages(
     try:
         if (
             getattr(config, "catty_persona_reminder_enabled", True)
+            and not _technical_direct_request
             and history_messages  # 第一轮不 inject (cold session 已有 first_mes)
         ):
             from .catty_persona_reminder import should_inject_reminder, build_reminder_text

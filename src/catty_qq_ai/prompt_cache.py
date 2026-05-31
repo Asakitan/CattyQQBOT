@@ -151,6 +151,7 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
     "【日常 SFW",         # per-Lv
     "【当前发言者",       # 私聊单人 = 固定
     "记忆与称呼规则",      # 私聊单人 = 固定
+    "记忆与称呼参数",      # 私聊单人 = 固定(2026-05-31 已压缩成短参数)
     "【当前对话相关 QQ",   # QQ映射 私聊单人 = 固定
     "【笨猫小心思·主人专属候选",  # 主人 2026-05-31 整桶: tier桶per-tier恒定(整桶注入不再sample)
     "【笨猫小心思·亲密档候选",    # 同上, Lv3+ tier恒定
@@ -172,6 +173,7 @@ _GROUP_OWNER_HOIST_STABLE_PREFIXES = (
     "【日常 SFW",
     "【当前发言者】",
     "【当前对话相关 QQ",
+    "记忆与称呼参数",
     "【已知用户的细节】",
     "【正在追的话题(跨多条消息的故事线)】",
     "【本轮启用 semantic_reply_split】",
@@ -200,7 +202,7 @@ def _split_merged_dynamic_chunks(text: str) -> list[str]:
         return []
     import re as _re
     parts = _re.split(
-        r"\n{2,}(?=(?:【|<<<CATTY_INTERNAL_INSTRUCTION|记忆与称呼规则))",
+        r"\n{2,}(?=(?:【|<<<CATTY_INTERNAL_INSTRUCTION|记忆与称呼规则|记忆与称呼参数|当前时刻|群节奏感知))",
         text.strip(),
     )
     return [p.strip() for p in parts if p and p.strip()]

@@ -490,12 +490,15 @@ def build_world_info_block(
     now: float | None = None,
     affection_level: int = 0,
     is_owner: bool = False,
+    technical_direct: bool = False,
 ) -> str:
     """把命中且 position 匹配的 entry 拼成一段 system prompt 文本。"""
     hits = find_triggered_entries(
         text, scope, entries=entries, now=now,
         affection_level=affection_level, is_owner=is_owner,
     )
+    if technical_direct:
+        hits = [e for e in hits if e.constant]
     pieces = [e.content for e in hits if e.position == position]
     if not pieces:
         return ""

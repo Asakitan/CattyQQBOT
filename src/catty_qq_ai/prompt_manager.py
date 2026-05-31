@@ -317,6 +317,7 @@ def register_catty_persona(
     split_marker = ctx.get("reply_split_marker", "")
     system_prompt = ctx.get("system_prompt", "") or ""
     is_cold_session = bool(ctx.get("is_cold_session", False))
+    technical_direct = bool(ctx.get("technical_direct", False))
     self_check_enabled = bool(ctx.get("reply_self_check_enabled", True))
     style_examples_enabled = bool(ctx.get("reply_style_examples_enabled", True))
     # 完整 macro ctx,传给 character_card 各段做 {{user}}/{{date}}/{{idleDuration}} 等替换
@@ -471,11 +472,12 @@ def register_catty_persona(
             return "\n".join(lines)
         except Exception:  # noqa: BLE001
             return ""
-    mgr.register(
-        "catty_character_book_hits",
-        content_fn=_build_character_book_hits,
-        order=489,  # dynamic (user_text BFS hit ids + scope_lorebook content), post-boundary
-    )
+    if not technical_direct:
+        mgr.register(
+            "catty_character_book_hits",
+            content_fn=_build_character_book_hits,
+            order=489,  # dynamic (user_text BFS hit ids + scope_lorebook content), post-boundary
+        )
 
     # === Catty Daily Affection Gate - 5 档 Lv 分桶 (拆 cache 骨架 + dynamic 指针) ===
     # 主人 2026-05-28 C3c: 跟 NSFW gate 同款拆分 — 5 档完整骨架进 cache, 当前 Lv 指针留 dynamic.
@@ -631,10 +633,11 @@ def register_catty_persona(
         except Exception:  # noqa: BLE001
             return ""
 
-    mgr.register(
-        "catty_flirt_buffer", content_fn=_build_flirt_buffer,
-        order=488,  # dynamic (user_text + Lv + is_owner), post-boundary
-    )
+    if not technical_direct:
+        mgr.register(
+            "catty_flirt_buffer", content_fn=_build_flirt_buffer,
+            order=488,  # dynamic (user_text + Lv + is_owner), post-boundary
+        )
     # NOTE: catty_persona_memory (order=150) 已永久 disable — 内容跟 character_book ANCHOR 段重叠 ~1200c.
 
     # === 群聊/对话流/语义/场景 playbook (一坨补充) ===
@@ -749,6 +752,7 @@ def register_catty_persona(
             content_fn=lambda: _wi.build_world_info_block(
                 user_text, scope, position="after_char",
                 affection_level=aff_level, is_owner=is_owner,
+                technical_direct=technical_direct,
             ),
             order=469,  # dynamic (user_text BFS), post-boundary
         )
@@ -759,14 +763,15 @@ def register_catty_persona(
             order=468,  # P5.2: 移到 boundary 后
         )
         # Catty Arc Pusher: 看 active arc 跟 current msg 关联度, 给推进/回调 hint.
-        from .catty_arc_pusher import build_arc_pusher_prompt as _build_arc_pusher
-        mgr.register(
-            "catty_arc_pusher",
-            content_fn=lambda: _build_arc_pusher(
-                arc_store.get_active(scope), user_text,
-            ),
-            order=471,  # dynamic (arc + user_text), post-boundary
-        )
+        if not technical_direct:
+            from .catty_arc_pusher import build_arc_pusher_prompt as _build_arc_pusher
+            mgr.register(
+                "catty_arc_pusher",
+                content_fn=lambda: _build_arc_pusher(
+                    arc_store.get_active(scope), user_text,
+                ),
+                order=471,  # dynamic (arc + user_text), post-boundary
+            )
 
     # === QQ 节奏 + 自检 + image + 示例 (后段) ===
     # 主人 2026-05-29 Round 21: 465→153, qq_chat_rhythm 入参 split_marker 是固定常量,
@@ -874,6 +879,11 @@ def register_catty_persona(
     user_id = ctx.get("user_id", "")
     if user_vibe_store is not None and user_id:
         from . import user_vibe as _uv
+        mgr.register(
+            "catty_user_vibe_catalog",
+            content_fn=_uv.build_user_vibe_catalog_prompt,
+            order=162,
+        )
         mgr.register(
             "catty_user_vibe",
             content_fn=lambda: _uv.build_user_vibe_prompt(
