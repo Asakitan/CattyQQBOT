@@ -664,17 +664,27 @@ def register_catty_persona(
             content_fn=lambda: _dl.build_daily_life_prompt(scope, recent_text=user_text),
             order=458,  # dynamic (recent_text 驱动 mood/activity), post-boundary
         )
-    # Catty Daily Goals - 今日小心思 (内在动机). deterministic by (scope, date, user-tier).
+    # Catty Daily Goals - 笨猫小心思 (内在动机).
+    # 主人 2026-05-31 整桶注入: 旧版每轮 sample(scope,date,tier,recent_text) → 字节漂移 →
+    # current-user 每轮 miss. 改成整桶注入(常量), DeepSeek 按状态机(Lv/is_owner)+对话自选.
+    #   - universal 桶(neutral+mischief, 人人可见): sentinel 全局常量 block, order<455 pre-boundary
+    #     (merge 时不并入 sys0 → sys0 字节不变=db9e3d44 不重 warm; block 全网字节相同=共享 cache).
+    #   - tier 桶(亲密 Lv3+ / 主人撒娇): 仅够格者注入(守 owner 边界), post-boundary;
+    #     私聊走 hoist 进 cache (白名单含「笨猫小心思·主人/亲密」), 群聊 per-speaker 留 trailing.
     from . import catty_goals as _cg
+    from .prompt_cache import _SCOPE_PREFIX_SENTINEL as _GOALS_SENTINEL
     mgr.register(
-        "catty_daily_goals",
-        content_fn=lambda: _cg.build_catty_goals_prompt(
-            scope,
+        "catty_goals_universal_pool",
+        content_fn=lambda: _GOALS_SENTINEL + _cg.build_goals_universal_pool_prompt(),
+        order=163,  # pre-boundary 全局常量 sentinel block (不 merge 进 sys0, 全网共享 cache)
+    )
+    mgr.register(
+        "catty_goals_tier_pool",
+        content_fn=lambda: _cg.build_goals_tier_pool_prompt(
             affection_level=aff_level,
             is_owner=is_owner,
-            recent_text=user_text,
         ),
-        order=459,  # dynamic (recent_text + scope+date), post-boundary
+        order=459,  # tier 桶 (亲密/主人), 仅够格者非空; 私聊 hoist 缓存, 群聊 trailing
     )
     # 主人 2026-05-28 C16-1: 砍 dynamic register — reunion / session_spice / random_encounter
     # 每个 ~200-500c hint, 跟 mood / daily_life 重叠功能. NLU 模块仍可独立调,

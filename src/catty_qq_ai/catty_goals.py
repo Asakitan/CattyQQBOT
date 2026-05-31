@@ -846,7 +846,66 @@ def build_catty_goals_prompt(
     return "【今日小心思】" + " | ".join(goals) + " (内在动机自然带出, 不报告.)"
 
 
+# ── 主人 2026-05-31 整桶注入 (whole-bucket cache) ────────────────────────────
+# 旧 build_catty_goals_prompt 每轮 sample(scope,date,tier,recent_text) → 字节漂移 →
+# current-user 每轮 miss. 新方案: 整桶注入(常量) + 状态机(Lv/is_owner 在 current-user
+# 几个 token) → DeepSeek 自己按当前关系档位 + 对话氛围挑. 桶恒定 → 进 cache 永不 miss.
+# universal 桶(neutral+mischief, 人人可见 SFW)做全局共享 block; tier 桶(亲密/主人撒娇)
+# 仅够格者注入 → 守 [[feedback_owner_address_exclusive]] (陌生人 prompt 里根本没 owner 文本).
+
+
+def build_goals_universal_pool_prompt() -> str:
+    """universal 桶: neutral + mischief 全集 (人人可见的 SFW 小心思候选).
+
+    字节**全局恒定** (不依赖 scope/date/tier/recent_text) → 适合做全网共享 cache block.
+    DeepSeek 看整池, 按当前对话氛围自然挑 1-2 条 low-key 带出 (不报告/不罗列).
+    """
+    lines = (
+        list(_GOALS_NEUTRAL)
+        + list(_GOALS_NEUTRAL_SCENE_EXPANSION)
+        + list(_GOALS_MISCHIEF)
+        + list(_GOALS_MISCHIEF_SCENE_EXPANSION)
+    )
+    body = "\n".join(f"- {g}" for g in lines)
+    return (
+        "【笨猫小心思·候选池】(这是笨猫**可能**有的内在动机清单; 回复时按当前对话氛围"
+        "**自然挑 1-2 条** low-key 带出即可, 不必每条都用、更不要罗列/报告给用户. "
+        "档位不够亲密时只用这池里的中性/调皮项, 别越界撒娇.)\n" + body
+    )
+
+
+def build_goals_tier_pool_prompt(affection_level: int = 0, is_owner: bool = False) -> str:
+    """tier 桶: 亲密(Lv3+) / 主人专属(is_owner) 小心思全集. 仅够格时注入, stranger 返回空.
+
+    字节 per-tier 恒定 (owner / intimate 两种), 不再 sample → 私聊可进 hoist cache.
+    **owner 桶只在 is_owner=True 注入** → 非主人 prompt 里完全没有 owner 撒娇文本 (守边界).
+    """
+    if is_owner:
+        extra = (
+            list(_GOALS_AFFECTIONATE)
+            + list(_GOALS_AFFECTIONATE_SCENE_EXPANSION)
+            + list(_GOALS_OWNER_ONLY)
+            + list(_GOALS_OWNER_SCENE_EXPANSION)
+        )
+        label = (
+            "【笨猫小心思·主人专属候选】(仅对**真实主人**有效; 同样按对话氛围自然挑, "
+            "不报告. 可放开撒娇/求宠/占有欲, 但仍走傲娇包装.)"
+        )
+    elif affection_level >= 3:
+        extra = list(_GOALS_AFFECTIONATE) + list(_GOALS_AFFECTIONATE_SCENE_EXPANSION)
+        label = (
+            "【笨猫小心思·亲密档候选】(当前关系够亲密才可用; 按对话氛围自然挑, 不报告. "
+            "可适度撒娇但不用主人专属称呼.)"
+        )
+    else:
+        return ""
+    body = "\n".join(f"- {g}" for g in extra)
+    return label + "\n" + body
+
+
 __all__ = [
     "get_today_goals",
     "build_catty_goals_prompt",
+    "build_goals_universal_pool_prompt",
+    "build_goals_tier_pool_prompt",
 ]

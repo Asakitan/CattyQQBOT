@@ -151,10 +151,13 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
     "【当前发言者",       # 私聊单人 = 固定
     "记忆与称呼规则",      # 私聊单人 = 固定
     "【当前对话相关 QQ",   # QQ映射 私聊单人 = 固定
+    "【笨猫小心思·主人专属候选",  # 主人 2026-05-31 整桶: tier桶per-tier恒定(整桶注入不再sample)
+    "【笨猫小心思·亲密档候选",    # 同上, Lv3+ tier恒定
     # ❌移除(实测DRIFT, 进HOIST_BLOCK会破history前缀):
-    #   今日生活感/今日小心思(daily_life/catty_goals 吃 recent_text 末轮变)
+    #   今日生活感(daily_life 吃 recent_text 末轮变)
     #   character_book/cb_diet(user_text BFS hit, 真实对话随话题变)
     #   scope_lorebook(per-scope命中, 条件触发)
+    # 注: 【笨猫小心思·候选池(universal)已走 order=163 pre-boundary 全局 block, 不在此白名单.
 )
 
 
