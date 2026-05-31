@@ -2483,6 +2483,30 @@ def _build_nsfw_spark_override(
     )
 
 
+def _build_nsfw_spark_params(
+    *, is_private: bool, is_owner: bool, affection_level: int, is_nsfw_granted: bool = False,
+) -> str:
+    """Cache-friendly per-turn pointer for the stable NSFW spark skeleton."""
+    max_stage = _resolve_max_nsfw_stage(
+        affection_level=affection_level,
+        is_owner=is_owner,
+        is_private=is_private,
+        is_nsfw_granted=is_nsfw_granted,
+    )
+    resist = _resolve_nsfw_resist_label(
+        affection_level=affection_level,
+        is_owner=is_owner,
+    )
+    scene = "private" if is_private else "group"
+    cap = "owner" if is_owner else ("private" if is_private else "group")
+    return (
+        "【NSFW_PARAMS】"
+        f"scene={scene}; owner={1 if is_owner else 0}; Lv={int(affection_level)}; "
+        f"max_stage={max_stage}; resist={resist}; cap={cap}; "
+        "rules=nsfw_spark_stable_boundary"
+    )
+
+
 def _build_nsfw_slim_persona_bundle() -> str:
     """NSFW spark 专用 — 最小可工作的笨猫人格 bundle, 不带 SFW 长尾。
 
@@ -5891,7 +5915,15 @@ async def _build_messages(
         # 之后的尾部动态段(跟 phase tracker 同区), 既不破前缀又保 recency.
         _override_deferred_tail: str | None = None
         if _override and _override.strip():
-            _override_block = f"【笨猫 NSFW 模式覆盖 (per-user 动态段)】\n{_override}"
+            if not (_paid_nsfw_active or _owner_cuckold_target_id or _breakthrough_outcome):
+                _override_block = _build_nsfw_spark_params(
+                    is_private=_is_private_chat,
+                    is_owner=_user_is_owner,
+                    affection_level=_user_affection_level,
+                    is_nsfw_granted=_user_is_nsfw_granted,
+                )
+            else:
+                _override_block = f"【笨猫 NSFW 模式覆盖 (per-user 动态段)】\n{_override}"
             if _is_private_chat and _user_is_owner:
                 _inject_into_both(_override_block)  # owner 私聊: 恒定, 留前缀进 cache
             else:
