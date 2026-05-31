@@ -745,6 +745,29 @@ def register_catty_persona(
         content_fn=lambda: _CACHE_BOUNDARY_TEXT,
         order=455,
     )
+
+    def _build_non_academic_length_guard() -> str:
+        try:
+            from .cpu_engine.strong_interaction import detect_academic_signal
+            probe_text = "\n".join(
+                part for part in (user_text, image_description) if isinstance(part, str) and part.strip()
+            )
+            is_academic = detect_academic_signal(probe_text)
+        except Exception:  # noqa: BLE001
+            is_academic = False
+        if technical_direct or is_academic:
+            return ""
+        return (
+            "【本轮长度硬约束】当前不是学术/技术/工程/排错问题: "
+            "回复总字数必须 ≤50 个中文字符, 1 句优先; "
+            "只保留最关键情绪/结论/动作, 删掉解释、铺垫和多余撒娇。"
+        )
+
+    mgr.register(
+        "catty_non_academic_length_guard",
+        content_fn=_build_non_academic_length_guard,
+        order=497,  # dynamic per current user/image text, after current sender info
+    )
     if "world_info" not in legacy_disabled:
         mgr.register(
             "catty_world_info",
