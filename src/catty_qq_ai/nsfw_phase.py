@@ -3319,12 +3319,12 @@ def build_phase_params_block_only(
     safe_addr = "owner" if is_owner else (user_addr or "user")
     return (
         "【NSFW_PHASE_PARAMS】"
-        f"cur=P{current}; next=P{next_phase}; turn={int(st.turn_count or 0)}; "
-        f"stuck={1 if stuck else 0}; thr={stuck_thr}; rot={rotation}; "
-        f"loc={st.location or '-'}; outfit={st.outfit or '-'}; tod={st.time_of_day or '-'}; "
-        f"mood={st.mood or '-'}; focus={st.body_focus or '-'}; facet={st.personality_facet or 'tsundere_classic'}; "
-        f"arc={int(st.arc_count or 1)}; dazed={1 if st.dazed else 0}; over={int(st.overstim_phase or 0)}; "
-        f"owner={owner_flag}; addr={safe_addr}; rules=nsfw_phase_full_catalog"
+        f"cur=P{current};n=P{next_phase};t={int(st.turn_count or 0)};"
+        f"stk={1 if stuck else 0}/{stuck_thr};r={rotation};"
+        f"loc={st.location or '-'};out={st.outfit or '-'};tod={st.time_of_day or '-'};"
+        f"mood={st.mood or '-'};focus={st.body_focus or '-'};facet={st.personality_facet or 'tsundere_classic'};"
+        f"arc={int(st.arc_count or 1)};dz={1 if st.dazed else 0};ov={int(st.overstim_phase or 0)};"
+        f"own={owner_flag};addr={safe_addr};rules=full_catalog"
     )
 
 

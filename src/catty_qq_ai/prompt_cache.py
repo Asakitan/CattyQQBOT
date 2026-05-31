@@ -179,8 +179,6 @@ _GROUP_OWNER_HOIST_STABLE_PREFIXES = (
     "【当前对话相关 QQ",
     "记忆与称呼参数",
     "【已知用户的细节】",
-    "【正在追的话题(跨多条消息的故事线)】",
-    "【本轮启用 semantic_reply_split】",
     "<<<CATTY_INTERNAL_INSTRUCTION (main preg",
 )
 
@@ -192,10 +190,7 @@ _GROUP_COMMON_HOIST_STABLE_PREFIXES = (
     "【今日生活感】",
     "【今日动作候选池",
     "【时间桶上下文摘要】",
-    "【关系亲密度",
-    "【日常 SFW",
-    "【正在追的话题(跨多条消息的故事线)】",
-    "【本轮启用 semantic_reply_split】",
+    "<<<CATTY_INTERNAL_INSTRUCTION (main preg",
     "【★★ 怀孕/生育状态 (持久化, 跨 session) ★★】",
     "【★ 怀孕中",
     "【★ 已生小猫",

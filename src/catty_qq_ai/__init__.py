@@ -3583,8 +3583,8 @@ def _wake_context_prompt(
             (incoming.mentioned or incoming.replied_to_self or incoming.used_prefix or incoming.directed_strength == "direct_address")
             and any(k in _t for k in ("cache", "缓存", "kv", "命中", "修复", "测试", "链路", "部署", "编译", "代码", "bug", "报错", "日志"))
         )
-    _WAKE_BEFORE = 3
-    _WAKE_AFTER = 0 if technical_direct else 1
+    _WAKE_BEFORE = 1
+    _WAKE_AFTER = 0
     start = max(0, current_index - _WAKE_BEFORE)
     end = min(len(recent), current_index + _WAKE_AFTER + 1)
     _hist_norm: set[str] = set()
@@ -3622,7 +3622,10 @@ def _wake_context_prompt(
             speaker = f"笨猫自己({item.user_id})"
             if item.target_user_id:
                 speaker += f" -> {item.target_user_id}"
-        lines.append(f"#{item.seq:06d} {speaker}: {item.text}{image_marker}")
+        _short_text = " ".join(str(item.text or "").split())
+        if len(_short_text) > 72:
+            _short_text = _short_text[:71].rstrip() + "…"
+        lines.append(f"#{item.seq:06d} {speaker}: {_short_text}{image_marker}")
     current_pointer = f"【catty_wake_current】当前唤起消息=最后一条 user; recent_seq=#{current_seq:06d}" if current_seq else "【catty_wake_current】当前唤起消息=最后一条 user"
     if not lines:
         return current_pointer
@@ -3674,9 +3677,8 @@ def _nsfw_group_audience_context(event: MessageEvent, active_user_id: str) -> st
 def _bot_continuation_judgement_prompt(event: MessageEvent) -> str:
     remaining = _bot_reply_continuation_remaining(event)
     return (
-        f"【catty_bot_continuation_params】按 catty_bot_continuation_skeleton 判断; "
-        f"NO_REPLY_MARKER={NO_REPLY_MARKER}; remaining≈{remaining}; "
-        f"输出 {NO_REPLY_MARKER} 消耗 1 次, 真正回复会继续续上。"
+        f"【catty_bot_continuation_params】rem≈{remaining}; no_reply={NO_REPLY_MARKER}; "
+        "rules=catty_bot_continuation_skeleton"
     )
 
 

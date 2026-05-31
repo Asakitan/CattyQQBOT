@@ -118,7 +118,7 @@ def build_ambient_prompt(messages: list[AmbientMessage]) -> str:
         return ""
     now = time.time()
     lines = ["【笨猫·周边对话 (ambient, 听到但没人直接叫你)】"]
-    for m in messages:
+    for m in messages[-1:]:
         age_s = max(0.0, now - m.ts)
         if age_s < 120:
             age_label = "刚刚"
@@ -131,12 +131,12 @@ def build_ambient_prompt(messages: list[AmbientMessage]) -> str:
         else:
             age_label = "半小时前"
         nick = m.nickname or "?"
-        lines.append(f"- [{age_label}] {nick}: {m.text}")
+        text = " ".join(str(m.text or "").split())
+        if len(text) > 64:
+            text = text[:63].rstrip() + "…"
+        lines.append(f"- [{age_label}] {nick}: {text}")
     lines.append(
-        "↑ 这些不是直接对你说的, 是你『在场旁听』到的群里互聊. "
-        "**当前** user 才是真在跟你说话; ambient 可以让你了解群里气氛/在聊什么, "
-        "**偶尔**可以自然带一句『刚才 X 在说 Y 嘛』式接梗 — 但**别每条都接**, "
-        "否则会显得在监视。"
+        "↑ 旁听补丁: 当前 user 才是真在跟你说话; 只在明显接梗时轻带一句, 别逐条回应。"
     )
     return "\n".join(lines)
 
