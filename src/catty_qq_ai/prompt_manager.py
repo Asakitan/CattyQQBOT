@@ -592,14 +592,13 @@ def register_catty_persona(
     def _build_nsfw_gate_params() -> str:
         max_stage = _resolve_stage_cap()
         resist = _resolve_resist()
-        scene = "私聊" if _is_private_session else "群聊"
+        scene = "private" if _is_private_session else "group"
+        scope_cap = "owner" if is_owner else ("private" if _is_private_session else "group")
         return (
-            f"【NSFW 本轮参数】scene={scene} · Lv={affection_level} · is_owner={is_owner} · "
-            f"max_stage={max_stage}/10 · resist={resist}.\n"
-            f"→ 看 catty_nsfw_gate_skeleton: stage [1..{max_stage}] 当允许 ENGAGE, "
-            f"stage [{max_stage+1}..10] 当禁止 (max_stage=10 时无禁止). "
-            f"抗拒强度按骨架里 '{resist}' 那档执行."
-            + ("\n→ scene=群聊, 按骨架『群聊场景额外铁律』那段执行." if not _is_private_session else "")
+            "【NSFW_PARAMS】"
+            f"scene={scene}; owner={1 if is_owner else 0}; Lv={int(affection_level)}; "
+            f"max_stage={max_stage}; resist={resist}; cap={scope_cap}; "
+            "rules=catty_nsfw_gate_skeleton"
         )
 
     mgr.register(

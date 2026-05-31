@@ -117,6 +117,7 @@ from .reply_markers import (
 )
 from . import activity_feed
 from .session_cache import SessionCache, format_session_list_for_owner
+from .context_buckets import TimeBucketContextStore
 from .latex_renderer import (
     chunk_to_segments,
     replace_latex_with_placeholders,
@@ -2555,6 +2556,7 @@ ChatMessage = dict[str, object]
 # AI 看 3 轮真实对话就能学到口吻, 不需要 6 轮示例.
 HOT_SESSION_MIN_MESSAGES = 6
 _session_cache: "SessionCache | None" = None
+_time_bucket_context_store: "TimeBucketContextStore | None" = None
 
 
 def _get_session_cache() -> "SessionCache":
@@ -2568,6 +2570,20 @@ def _get_session_cache() -> "SessionCache":
         )
         _session_cache.load_from_disk()
     return _session_cache
+
+
+def _get_time_bucket_context_store() -> "TimeBucketContextStore":
+    global _time_bucket_context_store
+    if _time_bucket_context_store is None:
+        _time_bucket_context_store = TimeBucketContextStore(
+            directory=getattr(config, "catty_time_bucket_context_dir", "session_buckets"),
+            group_minutes=getattr(config, "catty_time_bucket_group_minutes", 15),
+            private_minutes=getattr(config, "catty_time_bucket_private_minutes", 30),
+            max_finalized_buckets=getattr(config, "catty_time_bucket_max_finalized", 8),
+            max_turns_per_bucket=getattr(config, "catty_time_bucket_max_turns_per_bucket", 24),
+            enabled=getattr(config, "catty_time_bucket_context_enabled", True),
+        )
+    return _time_bucket_context_store
 
 _locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 # IDE 多 tab 风格的会话排队:
@@ -4026,6 +4042,17 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
         cache.flush_sync()
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"session_cache flush_sync after _append_history failed: {exc}")
+    # 时间桶 sidecar: 旧 history 继续保留, 额外把完成的一轮写入当前 wall-clock bucket。
+    # 跨桶时旧 bucket 会封存成 byte-stable 摘要, _build_messages 再把摘要放到 cache 友好的段里。
+    try:
+        _get_time_bucket_context_store().record_turn(
+            key,
+            user_content,
+            assistant_content,
+            is_group=key.startswith("group:"),
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"time_bucket_context record_turn failed: {exc}")
     # 给训练 idle gate + dashboard conversation feed 用
     try:
         activity_feed.record_assistant_reply(
@@ -4963,6 +4990,23 @@ async def _build_messages(
         _st_manager.register_static("catty_bot_continuation", bot_continuation_context, order=635)
     if emoji_context and emoji_context.strip():
         _st_manager.register_static("catty_emoji_hint", emoji_context, order=640)
+    try:
+        _bucket_store = _get_time_bucket_context_store()
+        _bucket_store.roll_current_if_needed(
+            _arc_scope,
+            is_group=isinstance(event, GroupMessageEvent),
+        )
+        _bucket_summary = _bucket_store.build_stable_summary_prompt(_arc_scope)
+        if _bucket_summary and _bucket_summary.strip():
+            _st_manager.register_static("catty_time_bucket_summary", _bucket_summary, order=642)
+        _bucket_params = _bucket_store.build_current_params_prompt(
+            _arc_scope,
+            is_group=isinstance(event, GroupMessageEvent),
+        )
+        if _bucket_params and _bucket_params.strip():
+            _st_manager.register_static("catty_time_bucket_params", _bucket_params, order=643)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"time_bucket_context prompt register failed: {exc}")
     # IDE 风「最近 tool 调用日志」
     _recent_tools_ctx = recent_tool_calls_context(_conversation_queue_key(event)) or ""
     if _recent_tools_ctx.strip():
@@ -5807,6 +5851,12 @@ async def _build_messages(
         # _override 不同 → prefix hash 不同 → DeepSeek 跨 user 全 miss。新设计: prefix
         # 只剩 persona + boundary (~3700 tokens), 所有 user 同 scope 共享同一 prefix。
         # _override 改为 post-boundary 首个动态 inject (见下方 _inject_override_as_first 段)。
+        try:
+            from .nsfw_phase import build_phase_param_catalog_prompt as _build_phase_param_catalog
+            _phase_param_catalog = _build_phase_param_catalog()
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"phase param catalog build failed (non-fatal): {exc}")
+            _phase_param_catalog = ""
         _slim_messages: list[dict] = [
             {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态 ~2175t)
             # 主人 2026-05-30 cache R1+R4: 8铁律 + 事后标记规则是逐字常量, 从 current user 之后的
@@ -5814,6 +5864,7 @@ async def _build_messages(
             # 合并入 DeepSeek 缓存前缀 → 每轮 hit. recency 由 user 之后的 _NSFW_TAIL_RECENCY_POINTER 补偿.
             {"role": "system", "content": _NSFW_RECENCY_REMINDER},  # cache prefix #2 (8铁律, 静态)
             {"role": "system", "content": _NSFW_STATE_FLAG_INSTRUCTION},  # cache prefix #3 (事后标记规则, 静态)
+            *([{"role": "system", "content": _phase_param_catalog}] if _phase_param_catalog else []),
             {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #4 + boundary
         ]
         # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 inline 到 user content.
@@ -5909,7 +5960,6 @@ async def _build_messages(
                 apply_user_signal as _apply_user_signal,
                 update_location as _update_location,
                 update_scene_state as _update_scene_state,
-                build_phase_advance_hint as _build_phase_hint,
                 build_starter_examples_block as _build_starter,
                 get_phase_state as _get_phase_state,
             )
@@ -5929,15 +5979,7 @@ async def _build_messages(
                     f"NSFW user-side signal: val={_user_signal_val} → phase=P{_user_signal_state.current_phase} "
                     f"(key={_sticky_key})"
                 )
-            # 主人 2026-05-27 九轮升级: phase_hint + starter 都传 is_owner/user_addr
-            # 让 non-owner 场景下 hint 里的『主人』被本地 swap 为对方昵称 (不让 AI 处理)
-            _phase_hint = _build_phase_hint(
-                _arc_scope, str(event.user_id),
-                is_owner=_user_is_owner,
-                user_addr=_user_real_display,
-            )
-            if _phase_hint and _phase_hint.strip():
-                _inject_into_both(_phase_hint)
+            # phase params 只在尾部 tracker 注入一次, 保持最后 recency 且减少动态 miss。
             # 主人 2026-05-28: dazed 状态可见性 log
             try:
                 _ps_for_log = _get_phase_state(_arc_scope, str(event.user_id))
@@ -6122,8 +6164,8 @@ async def _build_messages(
         # → phase 切换时只影响 current_u 最末几百 chars, 前面 cache prefix 全命中.
         # 主人原话「phase 能不能放到后面去? 不影响其他的, phase 没有 3000 token 吧?」
         try:
-            from .nsfw_phase import build_phase_tracker_block_only as _build_phase_tracker
-            _phase_tracker = _build_phase_tracker(
+            from .nsfw_phase import build_phase_params_block_only as _build_phase_params
+            _phase_tracker = _build_phase_params(
                 _arc_scope, str(event.user_id),
                 is_owner=_user_is_owner,
                 user_addr=_user_real_display,
@@ -6215,12 +6257,12 @@ async def _build_messages(
         # 2. 场景状态注入 (location/outfit/mood/body_focus)
         try:
             from .nsfw_phase import (
-                build_phase_advance_hint as _build_phase_hint_main2,
+                build_phase_params_block_only as _build_phase_params_main2,
                 get_phase_state as _gps_main2,
             )
             _ps_main2 = _gps_main2(_arc_scope, str(event.user_id))
-            _scene_hint_main = _build_phase_hint_main2(
-                _ps_main2,
+            _scene_hint_main = _build_phase_params_main2(
+                _arc_scope, str(event.user_id),
                 is_owner=_user_is_owner,
                 user_addr=_user_real_display,
             )
@@ -10446,6 +10488,18 @@ async def _flush_session_cache_on_shutdown() -> None:
     written = _session_cache.flush_sync()
     if written:
         logger.info(f"session_cache: flushed {written} dirty sessions on shutdown")
+
+
+@get_driver().on_shutdown
+async def _flush_time_bucket_context_on_shutdown() -> None:
+    if _time_bucket_context_store is None:
+        return
+    try:
+        written = _time_bucket_context_store.flush_sync()
+        if written:
+            logger.info(f"time_bucket_context: flushed {written} dirty scopes on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"time_bucket_context: shutdown flush failed: {exc}")
 
 
 @get_driver().on_shutdown

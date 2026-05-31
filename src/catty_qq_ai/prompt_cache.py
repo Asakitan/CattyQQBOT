@@ -146,6 +146,8 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
     # 5轮真实dump字节验证 + 注入源码确认驱动因子:
     "<<<CATTY_INTERNAL_INSTRUCTION (main preg",  # preg 567c 私聊单人状态稳定(最大块)
     "【今日生活感】",     # scope+date(+time bucket) baseline, 不再吃 recent_text
+    "【时间桶上下文摘要】",  # 已封存 bucket 摘要, 同一 scope 内 byte-stable
+    "【NSFW phase 参数词典】",
     "【今日动作候选池",   # scope+date 种子, confirmed byte-stable
     "【关系亲密度",       # per-Lv, 单条消息不改 Lv
     "【日常 SFW",         # per-Lv
@@ -167,6 +169,8 @@ _PRIVATE_HOIST_STABLE_PREFIXES = (
 _GROUP_OWNER_HOIST_STABLE_PREFIXES = (
     "【笨猫小心思·主人专属】",
     "【今日生活感】",
+    "【时间桶上下文摘要】",
+    "【NSFW phase 参数词典】",
     "【今日动作候选池",
     "【主人专属·亲密度上限】",
     "【关系亲密度",

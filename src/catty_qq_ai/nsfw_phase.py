@@ -3206,10 +3206,7 @@ def build_phase_tracker_block_only(
     """
     if scope is None or user_id is None:
         return ""
-    key = _state_key(scope, user_id)
-    st = _NSFW_PHASE_BY_SCOPE.get(key)
-    if st is None:
-        return ""
+    st = get_phase_state(scope, user_id)
     current = max(1, min(8, int(st.current_phase or 1)))
     # 主人 2026-05-29 bug fix: _decide_next_phase 未定义 (NameError → 整个 block 静默崩 →
     # phase tracker 从没注入过, 是「对不上」帮凶). 与 update_phase/build_phase_advance_hint 一致:
@@ -3244,6 +3241,57 @@ def build_phase_tracker_block_only(
         + f"**铁律**: 本轮**不写 {current_meta['name']} 风**, 必须演 {next_meta['name']} 生理/思维/行为 ≥2 维度.\n"
     )
     return _swap_owner_addr(block, is_owner, user_addr)
+
+
+def build_phase_param_catalog_prompt() -> str:
+    """Stable catalog explaining compact phase parameter tokens.
+
+    The local phase state machine remains authoritative. This catalog is static and
+    cache-friendly; per-turn state is provided by build_phase_params_block_only().
+    """
+    return (
+        "【NSFW phase 参数词典】本段稳定缓存; 本轮状态看 NSFW_PHASE_PARAMS。"
+        "本地状态机仍负责推进/降档/场景锚点/开场去重, LLM 只按参数选择当前状态。"
+        "字段: cur 当前P1-P8; next 建议推进目标; turn 当前阶段轮数; stuck=1 表示本地判定卡顿需推进; "
+        "rot 轮换索引; loc/outfit/tod/mood/focus/facet 为本地场景键; arc 为连续轮次; "
+        "dazed/over 表示特殊状态键; rules=现有 spark 稳定前缀和 phase 铁律。"
+    )
+
+
+def build_phase_params_block_only(
+    scope: str,
+    user_id: str,
+    *,
+    is_owner: bool = True,
+    user_addr: str = "主人",
+) -> str:
+    """Compact per-turn phase state pointer for cache-friendly prompts.
+
+    This intentionally emits only state tokens, not the long phase prose. It keeps
+    all local state calculations intact while shrinking the dynamic tail.
+    """
+    if scope is None or user_id is None:
+        return ""
+    key = _state_key(scope, user_id)
+    st = _NSFW_PHASE_BY_SCOPE.get(key)
+    if st is None:
+        return ""
+    current = max(1, min(8, int(st.current_phase or 1)))
+    next_phase = min(8, current + 1)
+    stuck_thr = _PHASE_STUCK_THRESHOLDS.get(current, 3)
+    stuck = int(st.turn_count or 0) >= stuck_thr
+    rotation = int(next_phase) % 7
+    owner_flag = 1 if is_owner else 0
+    safe_addr = "owner" if is_owner else (user_addr or "user")
+    return (
+        "【NSFW_PHASE_PARAMS】"
+        f"cur=P{current}; next=P{next_phase}; turn={int(st.turn_count or 0)}; "
+        f"stuck={1 if stuck else 0}; thr={stuck_thr}; rot={rotation}; "
+        f"loc={st.location or '-'}; outfit={st.outfit or '-'}; tod={st.time_of_day or '-'}; "
+        f"mood={st.mood or '-'}; focus={st.body_focus or '-'}; facet={st.personality_facet or 'tsundere_classic'}; "
+        f"arc={int(st.arc_count or 1)}; dazed={1 if st.dazed else 0}; over={int(st.overstim_phase or 0)}; "
+        f"owner={owner_flag}; addr={safe_addr}; rules=nsfw_phase_param_catalog"
+    )
 
 
 def record_reply_opener(scope: str, user_id: str, reply: str) -> None:
@@ -3309,6 +3357,8 @@ __all__ = [
     "apply_user_signal",
     "build_cuckold_override",
     "build_phase_advance_hint",
+    "build_phase_param_catalog_prompt",
+    "build_phase_params_block_only",
     "build_phase_tracker_block_only",
     "build_prebreak_hint",
     "build_sensory_block",

@@ -377,6 +377,14 @@ class Config(BaseModel):
     catty_session_cache_dir: str = "sessions"
     catty_session_cache_max_sessions: int = 200
     catty_session_cache_save_debounce_seconds: float = 2.0
+    # 时间桶上下文 sidecar: 不改旧 sessions 格式, 把跨时间段的旧 raw 对话降温成稳定摘要,
+    # 当前桶只注入短参数, 让 DeepSeek prefix/KV 长时间稳定命中。
+    catty_time_bucket_context_enabled: bool = True
+    catty_time_bucket_context_dir: str = "session_buckets"
+    catty_time_bucket_group_minutes: int = 15
+    catty_time_bucket_private_minutes: int = 30
+    catty_time_bucket_max_finalized: int = 8
+    catty_time_bucket_max_turns_per_bucket: int = 24
     # bot 主进程 CPU affinity (Windows). 0 = 不绑核 (默认 OS 自由调度)
     # 6 核机器:1 = 核0 only,把 Ollama 留给核1-5
     catty_cpu_affinity_mask: int = 0
