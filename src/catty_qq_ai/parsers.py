@@ -6,6 +6,7 @@
 """
 from __future__ import annotations
 
+import ast
 import json
 import re
 from typing import Any
@@ -166,6 +167,71 @@ def lenient_json_object(text: str) -> dict[str, Any] | None:
     """宽容 JSON 对象解析:在 ``lenient_json_loads`` 基础上要求结果是 ``dict``。"""
     parsed = lenient_json_loads(text)
     return parsed if isinstance(parsed, dict) else None
+
+
+# ── Content-block 字面量兜底解包 ───────────────────────────────────────
+# 模型偶发把自己的回复包成 OpenAI/Anthropic content-block 的「字面量」再当纯文本吐出来:
+#     [{'type': 'text', 'text': '...'}]
+# 单引号 + 转义 \n 是 Python ``str(list)`` 的指纹(模型真换行会是实际换行、JSON 会用双引号),
+# 根因是历史里混入了这种格式后模型 few-shot 复读。这里在响应解析处把它解回纯文本,
+# 断掉「脏 reply 落盘 → 下轮模型再复读」的自我强化回声。纯输出侧, 不碰 prompt 组装/cache。
+
+# 廉价闸门:出现 'type':'text' / "type":"text" 才值得进昂贵的字面量解析。
+_CONTENT_BLOCK_HINT_RE = re.compile(r"""['"]type['"]\s*:\s*['"]text['"]""")
+
+
+def _text_from_content_blocks(obj: Any) -> str | None:
+    """从 content-block 结构(list[dict] 或单 dict)抽出拼接 text;不匹配返回 ``None``。
+
+    只认纯 text 块:出现非 ``text`` 类型块或 ``text`` 不是字符串就放弃(返回 None),
+    避免误伤本就合法的含 ``image_url`` / 工具结构的数据。
+    """
+    blocks = obj if isinstance(obj, list) else [obj]
+    if not blocks or not all(isinstance(b, dict) for b in blocks):
+        return None
+    parts: list[str] = []
+    saw_text = False
+    for b in blocks:
+        btype = b.get("type")
+        txt = b.get("text")
+        if btype not in (None, "text"):
+            return None
+        if isinstance(txt, str):
+            saw_text = True
+            parts.append(txt)
+        elif txt is not None:
+            return None
+    return "".join(parts) if saw_text else None
+
+
+def unwrap_content_block_repr(text: str) -> str:
+    """若整段文本是 content-block 列表/字典的字面量,解回纯文本;否则原样返回。
+
+    只在「整段」恰好是 ``[{'type':'text','text':...}]`` / ``{'type':'text','text':...}``
+    时解包(防止误伤正文里偶然出现的方括号)。先试 ``json.loads`` (双引号变体),
+    再试 ``ast.literal_eval`` (单引号 Python repr 变体)——两者都安全,literal_eval 只解析
+    字面量不执行代码。
+    """
+    if not text or not isinstance(text, str):
+        return text
+    stripped = text.strip()
+    if not (stripped.startswith("[{") or stripped.startswith("{")):
+        return text
+    if not stripped.endswith(("]", "}")):
+        return text
+    if not _CONTENT_BLOCK_HINT_RE.search(stripped):
+        return text
+    try:
+        parsed: Any = json.loads(stripped)
+    except (ValueError, TypeError):
+        try:
+            parsed = ast.literal_eval(stripped)
+        except (ValueError, SyntaxError, TypeError, MemoryError, RecursionError):
+            return text
+    extracted = _text_from_content_blocks(parsed)
+    if extracted is None:
+        return text
+    return extracted.strip() or text
 
 
 # ── Marker 闭合宽容化 ─────────────────────────────────────────────────

@@ -16,7 +16,7 @@ from PIL import Image, ImageSequence
 
 from .config import Config
 from .mc_status import mc_has_players
-from .parsers import lenient_json_object
+from .parsers import lenient_json_object, unwrap_content_block_repr
 from .reply_markers import INLINE_IMAGE_PREFIX, INLINE_IMAGE_SUFFIX
 
 
@@ -264,6 +264,9 @@ def _extract_content(data: dict[str, Any]) -> str:
     finish_reason = choice.get("finish_reason")
 
     if isinstance(content, str):
+        # 兜底:模型偶发把回复包成 content-block 字面量 [{'type':'text','text':...}] 当纯文本吐出,
+        # 解回真正的文本再往下走(纯响应解析侧,不影响 prompt/cache)。
+        content = unwrap_content_block_repr(content)
         # content 有文本,但有些模型(gpt-5.5)同时把图放在 message.images 字段——
         # 文本+图都拼上,让发送链路一起处理。
         rendered = (content.strip() + "\n" + _render_message_images(message)).strip()
