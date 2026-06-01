@@ -1,7 +1,4 @@
 [build-system]
-# 主人 2026-05-28: 不在 build-system 锁 numpy/Cython, 因为远端 Python 3.14
-# numpy 1.26 没有 cp314 wheel 会触发源码编译 + 需要 MSVC. cython 真要写 .pyx
-# 时通过 [cpu-engine] optional 装, setup.py 用 try/except 兼容缺失.
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
@@ -15,16 +12,11 @@ dependencies = [
   "nonebot2[fastapi]>=2.4.0",
   "nonebot-adapter-onebot>=2.4.0",
   "httpx>=0.27.0",
-  # 主人 2026-05-28: NAI 走 socks5h proxy (远端国内服务器到 image.novelai.net 直连被墙).
-  # httpx 不内置 SOCKS, 需要 socksio. 装上后 httpx 自动支持 socks5:// / socks5h:// proxy URL.
   "socksio>=1.0.0",
   "mcp>=1.0.0",
   "Pillow>=10.0.0",
   "pydantic>=2.0.0",
   "matplotlib>=3.8.0",
-  # 主人 2026-05-28: Anthropic 原生 /v1/messages + cache_control + context_management
-  # (compact-2026-01-12) 走 NewAPI SG relay 字节级透传, MAX OAuth 下 cache 静默 0
-  # 但 input>150K 自动 server-side compaction 触发省 token.
   "anthropic>=0.45.0",
 ]
 
@@ -35,7 +27,7 @@ local-training = [
 build = [
   "pyinstaller>=6.0.0",
 ]
-# 本地 NLU 增强层 (主人 2026-05-28 确认): jieba + text2vec + HanLP + numpy
+# 本地 NLU 增强层: jieba + text2vec + HanLP + numpy
 # 全部 encoder-only / 规则, 不生成, 不算 LLM. 走 hf-mirror.com 镜像下模型.
 # 安装: pip install -e .[nlu]   或   pip install -r requirements.txt 后单独 pip install <pkg>
 nlu = [
@@ -50,15 +42,9 @@ nlu = [
 # 复用 nlu 组的 bge-small ONNX, 不再装额外 embedding 模型.
 # 安装: pip install -e .[cpu-engine]
 cpu-engine = [
-  # 不引入 semantic-router 库: 自带 encoder 抽象偏服务侧 (OpenAI/Cohere),
-  # 适配现有 bge-small ONNX 反而多一层. 自家 100 行 SemanticRouter 更轻.
   "txtai>=8.0.0",
   "PyYAML>=6.0",
-  # 多关键词同时扫描 (C 实现的 Aho-Corasick), 比 Python 循环 substring 快 10-100 倍
   "pyahocorasick>=2.0.0",
-  # Cython 保留作为未来 profiling 热点的扩展位 (setup.py + native/ 骨架已搭)
-  # 当前 normalize/cosine/keyword_scan 都被 numpy(BLAS)/pyahocorasick(C) 覆盖,
-  # 暂不写 .pyx, 真出热点再迁移
   "Cython>=3.0",
 ]
 
