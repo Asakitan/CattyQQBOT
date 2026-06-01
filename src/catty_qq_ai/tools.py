@@ -29,6 +29,7 @@ from .affection import (
 )
 from .catty_nsfw_imagegen import _curl_post_json as _nai_curl_post_json
 from .config import Config
+from .emoji_store import EmojiStore
 from .hot_trends import fetch_hot_trends, normalize_sources
 from .image_reverse_search import (
     ImageSearchResult,
@@ -158,6 +159,34 @@ _MC_STATUS_SCHEMA: dict[str, Any] = {
             "type": "object",
             "properties": {},
             "required": [],
+        },
+    },
+}
+
+
+_EMOJI_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_emoji",
+        "description": (
+            "从本地 QQ 表情库搜索并发送一张表情图。适用场景:想用表情包表达害羞/得意/贴贴/炸毛/困惑/笑/撒娇/嘲讽等情绪;"
+            "用户说'发个表情/来个表情包/斗图/给我挑只小猫';或者你觉得这轮文字后配一张本地表情更自然。"
+            "本 tool 会把选中的本地图片加入待发送队列,最终回复里不用写图片路径,只要正常补一句短评即可。"
+            "不要用于搜索具体网图/角色图/梗图主题(那走 catty_meme_query),这里只查本地表情库。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "表情意图关键词,如:害羞贴贴/得意被夸/脸红炸毛/绷不住笑/委屈小猫/疑惑歪头。",
+                },
+                "tags": {
+                    "type": "string",
+                    "description": "可选,逗号分隔补充标签,如:猫猫,害羞,贴贴。",
+                },
+            },
+            "required": ["query"],
         },
     },
 }
@@ -849,6 +878,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
     "catty_mc_status": _MC_STATUS_SCHEMA,
+    "catty_emoji": _EMOJI_SCHEMA,
     "catty_web_search": _WEB_SEARCH_SCHEMA,
     "catty_nsfw_search": _NSFW_SEARCH_SCHEMA,
     "catty_image_search": _IMAGE_SEARCH_SCHEMA,
@@ -928,6 +958,14 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     ),
     "catty_mc_status": _make_lazy_schema(
         "catty_mc_status", "MC server 状态", {}, [],
+    ),
+    "catty_emoji": _make_lazy_schema(
+        "catty_emoji", "发本地表情图",
+        {
+            "query": {"type": "string", "description": "意图"},
+            "tags": {"type": "string", "description": "标签"},
+        },
+        ["query"],
     ),
     "catty_web_search": _make_lazy_schema(
         "catty_web_search", "联网搜索 (新闻/查询)",
@@ -1071,6 +1109,7 @@ class ToolContext:
     config: Config
     memory_store: MemoryStore
     event: MessageEvent | None
+    emoji_store: EmojiStore | None = None
     # 签到积分/好感度 store; imagegen 走它扣分,主人豁免。
     # __init__.py 在装配时注入;留 None 兼容老路径(本地调用不传也不崩)。
     affection_store: "AffectionStore | None" = None
@@ -1385,6 +1424,51 @@ async def _exec_web_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
     if sinked_to_game:
         payload["auto_sinked_to_game_memory"] = sinked_to_game
     return payload
+
+
+async def _exec_emoji(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    query = str(args.get("query") or "").strip()
+    if not query:
+        return {"error": "query 不能为空"}
+    if ctx.emoji_store is None or not bool(getattr(ctx.config, "catty_emoji_enabled", True)):
+        return {"error": "本地表情库未启用"}
+    raw_tags = str(args.get("tags") or "").strip()
+    tags = [part.strip() for part in re.split(r"[,，、;；|\s]+", raw_tags) if part.strip()]
+    limit = max(int(getattr(ctx.config, "catty_emoji_max_candidates", 8) or 8), 1)
+    entries = ctx.emoji_store.select(query, tags=tags, limit=limit)
+    if not entries:
+        ctx.emoji_store.refresh()
+        entries = ctx.emoji_store.select(query, tags=tags, limit=limit)
+    if not entries:
+        return {"error": "本地表情库没有匹配项", "query": query, "tags": tags}
+
+    entry = entries[0]
+    try:
+        from nonebot.adapters.onebot.v11 import MessageSegment
+    except Exception:  # noqa: BLE001
+        return {"error": "MessageSegment 不可用,运行环境异常"}
+    segment = MessageSegment.image(file=entry.path.resolve().as_uri())
+    ctx.pending_image_segments.append(segment)
+    return {
+        "ok": True,
+        "query": query,
+        "selected": {
+            "meaning": entry.meaning,
+            "tags": entry.tags[:8],
+            "source": entry.source,
+            "priority": entry.priority,
+            "filename": entry.path.name,
+        },
+        "candidates": [
+            {
+                "meaning": item.meaning,
+                "tags": item.tags[:6],
+                "filename": item.path.name,
+            }
+            for item in entries[:5]
+        ],
+        "note": "表情图已加入待发送队列,最终回复只要补一句短评即可;不要贴文件名或路径。",
+    }
 
 
 async def _exec_nsfw_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
@@ -3518,6 +3602,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_recall": _exec_recall,
     "catty_user_profile": _exec_user_profile,
     "catty_mc_status": _exec_mc_status,
+    "catty_emoji": _exec_emoji,
     "catty_web_search": _exec_web_search,
     "catty_nsfw_search": _exec_nsfw_search,
     "catty_image_search": _exec_image_search,
@@ -3551,6 +3636,10 @@ _TOOL_SCHEMAS_CACHE: dict[tuple, list[dict[str, Any]]] = {}
 # 关键词列表覆盖每个 tool 的常见触发词. 命中 1+ tool 时发对应 tool schema 给 AI,
 # AI 看完整 description 决策. 不命中 → tools=[], 省 20K+ bytes input.
 _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
+    "catty_emoji": (
+        "表情", "表情包", "斗图", "emoji", "发个表情", "来个表情", "挑一只小猫",
+        "害羞", "贴贴", "得意", "被夸", "炸毛", "脸红", "绷不住", "委屈", "疑惑",
+    ),
     "catty_imagegen": (
         "画", "画一张", "画一个", "画个", "画图", "画张", "出张", "出一张",
         "给我画", "帮我画", "生成图", "生图", "imagegen", "imggen", "img",
@@ -3571,9 +3660,7 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
         "新闻", "最近怎样", "事件", "热搜", "联网", "上网搜",
     ),
     "catty_nsfw_search": ("pixiv", "p 站", "色图", "本子", "找一张涩"),
-    "catty_meme_query": (
-        "梗图", "表情", "表情包", "斗图", "搜个梗", "meme",
-    ),
+    "catty_meme_query": ("梗图", "搜个梗", "meme", "网图", "来张图"),
     "catty_meme_explain": (
         "这是什么梗", "啥梗", "什么意思", "解释一下", "百科", "梗百科",
     ),
@@ -3794,23 +3881,24 @@ def tools_system_hint() -> str:
 def _tools_system_hint_legacy() -> str:
     """Legacy 完整版备份, 不再使用 — 主人 C16-6 决定砍."""
     return (
-        "你有 16 个本地工具,**真需要时才调**(每次调用 = 回复变慢):\n"
+        "你有 17 个本地工具,**真需要时才调**(每次调用 = 回复变慢):\n"
         "1. catty_recall — '上次/记得/之前'类时间指代且 context 无答案时查长期记忆/语料。\n"
         "2. catty_user_profile — 不确定的非当前发言者 QQ 才查;当前发言者画像已在 context。\n"
         "3. catty_mc_status — 用户问 MC 在线人数/可达性时调。\n"
         "4. catty_web_search — 最新新闻/版本/价格/事实/'搜一下'时调; 60s cd (主人豁免); 已知/闲聊不调。\n"
         "5. catty_nsfw_search — pixiv/iwara, **仅好友私聊**; 群里调返 error → 引导加私聊; 图程序自发, 你补 1-2 句短评不贴 URL。\n"
-        "6. catty_meme_query — Bing 拉梗图嵌入回复; 撒娇/情绪走本地表情库 (<<<CATTY_EMOJI_QUERY:意图>>>) 更快; 拿 image_uri 用 <<<CATTY_INLINE_IMAGE:URI>>> 嵌入。\n"
-        "7. catty_game_recall — 查游戏专属事实库 (strinova/star_resonance/minecraft/genshin); 跨群共享。\n"
-        "8. catty_game_remember — 群友给出具体名词/数字/版本/共识时记; 游戏群 web_search 自动 sink top3, 看到 `auto_sinked_to_game_memory` 别重复记。\n"
-        "9. catty_social_account — 查**笨猫本人**在指定平台账号 (不是主人); 群友问起或聊到对应平台游戏时调。\n"
-        "10. catty_group_game_tag — 群是某游戏的群 (长期/明确) confidence>=60 才打标签; 私聊返 error; 错了 remove=true 撤销。\n"
-        "11. catty_hot_trends — 中文热搜热梗 (微博/B站/知乎/抖音); '最近网上有啥/不认识的网络新词'调; 挑 1-3 条复述加猫娘吐槽; 90s cd (主人豁免)。\n"
-        "12. catty_now — 日期/时间/星期/季节/节日; 用户问『几号/几点/是不是 XX 节』或想用时段(深夜/饭点/节日)做反应时调; 明天=1/后天=2/昨天=-1。\n"
-        "13. catty_meme_explain — 萌娘百科查网络梗/ACG/角色/作品; not_found 别重试, 新闻/工业词改调 web_search; 拿 extract 短句复述不贴 URL。\n"
-        "14. catty_remember — 写用户/群笔记 (偏好/边界 ttl=90-180, 约定带 event_date 自动倒计时, 群特征); 闲聊吐槽/单次玩笑不要记。\n"
-        "15. catty_recall_notes — 查别人笔记 (build_context 已自动注入当前发言者笔记, 别重复查); 想看非发言者 QQ 或本群整体笔记时调。\n"
-        "16. catty_imagegen — **【铁律: 笨猫所有画图请求都从这个 tool 出, 别走 Markdown 图片语法/外部 URL/文字脑补图】** 其它通道会丢具体文字/列表/细节。"
+        "6. catty_emoji — 搜本地表情库并加入待发送队列; 撒娇/情绪/斗图/贴贴/炸毛优先调它,不要再手写 EMOJI_QUERY marker。\n"
+        "7. catty_meme_query — Bing 拉梗图嵌入回复; 具体网图/梗图主题才调; 拿 image_uri 用 <<<CATTY_INLINE_IMAGE:URI>>> 嵌入。\n"
+        "8. catty_game_recall — 查游戏专属事实库 (strinova/star_resonance/minecraft/genshin); 跨群共享。\n"
+        "9. catty_game_remember — 群友给出具体名词/数字/版本/共识时记; 游戏群 web_search 自动 sink top3, 看到 `auto_sinked_to_game_memory` 别重复记。\n"
+        "10. catty_social_account — 查**笨猫本人**在指定平台账号 (不是主人); 群友问起或聊到对应平台游戏时调。\n"
+        "11. catty_group_game_tag — 群是某游戏的群 (长期/明确) confidence>=60 才打标签; 私聊返 error; 错了 remove=true 撤销。\n"
+        "12. catty_hot_trends — 中文热搜热梗 (微博/B站/知乎/抖音); '最近网上有啥/不认识的网络新词'调; 挑 1-3 条复述加猫娘吐槽; 90s cd (主人豁免)。\n"
+        "13. catty_now — 日期/时间/星期/季节/节日; 用户问『几号/几点/是不是 XX 节』或想用时段(深夜/饭点/节日)做反应时调; 明天=1/后天=2/昨天=-1。\n"
+        "14. catty_meme_explain — 萌娘百科查网络梗/ACG/角色/作品; not_found 别重试, 新闻/工业词改调 web_search; 拿 extract 短句复述不贴 URL。\n"
+        "15. catty_remember — 写用户/群笔记 (偏好/边界 ttl=90-180, 约定带 event_date 自动倒计时, 群特征); 闲聊吐槽/单次玩笑不要记。\n"
+        "16. catty_recall_notes — 查别人笔记 (build_context 已自动注入当前发言者笔记, 别重复查); 想看非发言者 QQ 或本群整体笔记时调。\n"
+        "17. catty_imagegen — **【铁律: 笨猫所有画图请求都从这个 tool 出, 别走 Markdown 图片语法/外部 URL/文字脑补图】** 其它通道会丢具体文字/列表/细节。"
         "prompt 改写允许精简/重组/重排, 400-700 字; 不能丢: 引号里文字、列表项数、配色/材质/光影/构图/数字。"
         "触发: 用户明确画/生成 + 主语; 不要聊到就主动生图。NSFW/敏感词拒。图自动发, image_sent=true 后只补 1-2 句短评。180s cd (主人豁免); quality 默认 low。\n"
         "通用: 能并发但总开销=延迟, 能不调就不调; 拿结果别复读 JSON, 别出现 tool_call/function_call 标记 (INLINE_IMAGE 除外); error 用猫娘口吻说 '查不到/想不起来' 不贴 error 文本。"

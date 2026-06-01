@@ -11207,6 +11207,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             config=config,
             memory_store=memory_store,
             event=event,
+            emoji_store=emoji_store,
             affection_store=affection_store,
             prepare_nsfw_segments_fn=_prepare_nsfw_image_segments,
             download_binary_fn=download_binary,
