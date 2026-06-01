@@ -12,10 +12,12 @@
 from __future__ import annotations
 
 import asyncio
+from collections import OrderedDict
 import logging
 import re
 import time
 from dataclasses import dataclass, field
+from threading import RLock
 from typing import Any
 
 import httpx
@@ -43,26 +45,32 @@ class HotItem:
 _HOT_CACHE_TTL = 180.0      # 全局聚合结果 3 分钟缓存
 _HOT_TOTAL_TIMEOUT = 8.0    # 单次聚合总超时
 _HOT_PER_SOURCE_TIMEOUT = 4.5  # 单源超时
-_cache: dict[str, tuple[float, list[HotItem]]] = {}
+_HOT_CACHE_MAX = 32
+_cache: OrderedDict[str, tuple[float, list[HotItem]]] = OrderedDict()
+_cache_lock = RLock()
 
 
 def _cache_get(key: str) -> list[HotItem] | None:
-    entry = _cache.get(key)
-    if entry is None:
-        return None
-    expires_at, value = entry
-    if expires_at <= time.monotonic():
-        _cache.pop(key, None)
-        return None
-    return value
+    now = time.monotonic()
+    with _cache_lock:
+        entry = _cache.get(key)
+        if entry is None:
+            return None
+        expires_at, value = entry
+        if expires_at <= now:
+            _cache.pop(key, None)
+            return None
+        _cache.move_to_end(key)
+        return value
 
 
 def _cache_put(key: str, value: list[HotItem]) -> None:
-    _cache[key] = (time.monotonic() + _HOT_CACHE_TTL, value)
-    if len(_cache) > 32:
-        stale = sorted(_cache.items(), key=lambda item: item[1][0])
-        for k, _ in stale[: len(_cache) - 32]:
-            _cache.pop(k, None)
+    expires_at = time.monotonic() + _HOT_CACHE_TTL
+    with _cache_lock:
+        _cache[key] = (expires_at, value)
+        _cache.move_to_end(key)
+        while len(_cache) > _HOT_CACHE_MAX:
+            _cache.popitem(last=False)
 
 
 # ── 各源抓取实现 ──────────────────────────────────────────────────────

@@ -31,6 +31,14 @@ from datetime import datetime
 from typing import Any
 
 
+_DATETIME_FORMAT_RE = re.compile(r"\{\{datetimeformat::(.+?)\}\}")
+_SETVAR_RE = re.compile(r"\{\{setvar::([^:}]+)::([^}]*)\}\}")
+_GETVAR_RE = re.compile(r"\{\{getvar::([^}]+)\}\}")
+_RANDOM_RE = re.compile(r"\{\{random::([^}]+)\}\}")
+_PICK_RE = re.compile(r"\{\{pick::([^}]+)\}\}")
+_COMMENT_RE = re.compile(r"\{\{//[^}]*\}\}")
+
+
 # ── 顶层入口 ────────────────────────────────────────────────────────────
 def render(text: str, ctx: dict[str, Any] | None = None) -> str:
     """对 text 做完整 macro 替换,返回新字符串。
@@ -92,7 +100,7 @@ def _replace_time(text: str, ctx: dict[str, Any]) -> str:
             return now.strftime(m.group(1))
         except (ValueError, TypeError):
             return m.group(0)
-    text = re.sub(r"\{\{datetimeformat::(.+?)\}\}", _fmt_sub, text)
+    text = _DATETIME_FORMAT_RE.sub(_fmt_sub, text)
     return text
 
 
@@ -136,11 +144,11 @@ def _replace_variables(text: str, ctx: dict[str, Any]) -> str:
         name, value = m.group(1).strip(), m.group(2)
         variables[name] = value
         return ""
-    text = re.sub(r"\{\{setvar::([^:}]+)::([^}]*)\}\}", _setvar, text)
+    text = _SETVAR_RE.sub(_setvar, text)
     # {{getvar::name}} → 取值;不存在则空
     def _getvar(m: re.Match[str]) -> str:
         return str(variables.get(m.group(1).strip(), ""))
-    text = re.sub(r"\{\{getvar::([^}]+)\}\}", _getvar, text)
+    text = _GETVAR_RE.sub(_getvar, text)
     return text
 
 
@@ -164,8 +172,8 @@ def _replace_random_pick(text: str, ctx: dict[str, Any]) -> str:
         h = abs(hash(m.group(1))) if seed is None else abs(hash((seed, m.group(1))))
         return options[h % len(options)]
 
-    text = re.sub(r"\{\{random::([^}]+)\}\}", _random_sub, text)
-    text = re.sub(r"\{\{pick::([^}]+)\}\}", _pick_sub, text)
+    text = _RANDOM_RE.sub(_random_sub, text)
+    text = _PICK_RE.sub(_pick_sub, text)
     return text
 
 
@@ -180,7 +188,7 @@ def _replace_control(text: str, ctx: dict[str, Any]) -> str:
 
 # ── 注释 {{// ...}} → 删除整段 ──────────────────────────────────────
 def _strip_comments(text: str) -> str:
-    return re.sub(r"\{\{//[^}]*\}\}", "", text)
+    return _COMMENT_RE.sub("", text)
 
 
 __all__ = ["render"]

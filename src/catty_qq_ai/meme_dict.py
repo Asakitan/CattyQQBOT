@@ -24,8 +24,10 @@
 """
 from __future__ import annotations
 
+from collections import OrderedDict
 import logging
 import time
+from threading import RLock
 from typing import Any
 
 import httpx
@@ -44,26 +46,31 @@ _EXTRACT_MAX_CHARS = 360  # 给 AI 的摘要长度上限;太长会挤掉群聊�
 _CACHE_TTL = 600.0
 _CACHE_MAX = 128
 
-_cache: dict[str, tuple[float, dict[str, Any]]] = {}
+_cache: OrderedDict[str, tuple[float, dict[str, Any]]] = OrderedDict()
+_cache_lock = RLock()
 
 
 def _cache_get(key: str) -> dict[str, Any] | None:
-    entry = _cache.get(key)
-    if entry is None:
-        return None
-    expires_at, value = entry
-    if expires_at <= time.monotonic():
-        _cache.pop(key, None)
-        return None
-    return value
+    now = time.monotonic()
+    with _cache_lock:
+        entry = _cache.get(key)
+        if entry is None:
+            return None
+        expires_at, value = entry
+        if expires_at <= now:
+            _cache.pop(key, None)
+            return None
+        _cache.move_to_end(key)
+        return value
 
 
 def _cache_put(key: str, value: dict[str, Any]) -> None:
-    _cache[key] = (time.monotonic() + _CACHE_TTL, value)
-    if len(_cache) > _CACHE_MAX:
-        stale = sorted(_cache.items(), key=lambda item: item[1][0])
-        for k, _ in stale[: len(_cache) - _CACHE_MAX]:
-            _cache.pop(k, None)
+    expires_at = time.monotonic() + _CACHE_TTL
+    with _cache_lock:
+        _cache[key] = (expires_at, value)
+        _cache.move_to_end(key)
+        while len(_cache) > _CACHE_MAX:
+            _cache.popitem(last=False)
 
 
 _HEADERS = {
