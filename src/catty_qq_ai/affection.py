@@ -631,7 +631,7 @@ def build_relationship_params(affection_level: int = 0, *, is_owner: bool = Fals
     只放 Lv + 档位标签, 让段在同档内跨轮字节稳定 (Lv 不变时 params 也不变).
     """
     if is_owner:
-        return "【关系亲密度·本轮】真主人 → 看 catty_relationship_skeleton 的 [owner] 档执行."
+        return "【REL】tier=owner;rules=catty_relationship_skeleton"
     lv = int(affection_level)
     if lv <= 2:
         tier = "陌生"
@@ -641,7 +641,4 @@ def build_relationship_params(affection_level: int = 0, *, is_owner: bool = Fals
         tier = "亲近"
     else:
         tier = "挚友"
-    return (
-        f"【关系亲密度·本轮】Lv{lv}/{LEVEL_CAP} 档位[{tier}] "
-        f"→ 看 catty_relationship_skeleton 的 [{tier}] 档执行."
-    )
+    return f"【REL】lv={lv};tier={tier};rules=catty_relationship_skeleton"

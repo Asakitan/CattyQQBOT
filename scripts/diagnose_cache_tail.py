@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import defaultdict
 import hashlib
 import json
 import re
@@ -9,7 +10,7 @@ from typing import Any
 
 
 _SPLIT_RE = re.compile(
-    r"(?m)(?=^【|^<<<CATTY_INTERNAL_INSTRUCTION|^<<<END_INTERNAL|^当前时刻|^群节奏感知|^记忆与称呼|^特别关心触发)"
+    r"(?m)(?=^【|^<<<CATTY_INTERNAL_INSTRUCTION|^<<<END_INTERNAL|^当前时刻|^群节奏感知|^记忆与称呼|^特别关心触发|^必须回复场景|^疑似直接喊你)"
 )
 
 
@@ -64,11 +65,45 @@ def _scope_name(path: Path) -> str:
     return path.name.rsplit("_", 1)[0]
 
 
+def _percentile(values: list[int], ratio: float) -> int:
+    if not values:
+        return 0
+    ordered = sorted(values)
+    idx = min(len(ordered) - 1, max(0, int(round((len(ordered) - 1) * ratio))))
+    return ordered[idx]
+
+
+def _print_summary(paths: list[Path]) -> None:
+    by_heading: dict[str, list[int]] = defaultdict(list)
+    dyn_lengths: list[int] = []
+    for path in paths:
+        messages = _load_messages(path)
+        dyn, parts = _dyn_parts(_last_user_text(messages))
+        dyn_lengths.append(len(dyn))
+        for part in parts:
+            by_heading[_heading(part)].append(len(part))
+    if not paths:
+        return
+    print(
+        "\n## summary "
+        f"files={len(paths)} dyn_median={_percentile(dyn_lengths, 0.50)} "
+        f"dyn_p95={_percentile(dyn_lengths, 0.95)} dyn_max={max(dyn_lengths or [0])}"
+    )
+    rows = sorted(
+        ((max(lengths), _percentile(lengths, 0.95), _percentile(lengths, 0.50), len(lengths), heading)
+         for heading, lengths in by_heading.items()),
+        reverse=True,
+    )
+    for max_len, p95, median, count, heading in rows[:20]:
+        print(f"  max={max_len:4d} p95={p95:4d} med={median:4d} n={count:3d} {heading}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Diagnose Catty request dump cache tail.")
     parser.add_argument("root", nargs="?", default="logs/req_dumps", help="Directory containing req_dumps json files")
     parser.add_argument("--scope", action="append", default=[], help="Scope prefix, e.g. private_993255714")
     parser.add_argument("--latest", type=int, default=4, help="Latest dumps per scope to print")
+    parser.add_argument("--summary", action="store_true", help="Print aggregate dynamic chunk length summary for selected dumps")
     args = parser.parse_args()
 
     root = Path(args.root)
@@ -88,6 +123,10 @@ def main() -> None:
     for scope in scopes:
         selected = sorted(root.glob(scope + "_*.json"), key=lambda p: p.stat().st_mtime)[-args.latest :]
         if not selected:
+            continue
+        if args.summary:
+            print(f"\n### {scope}")
+            _print_summary(selected)
             continue
         print(f"\n### {scope}")
         for path in selected:
