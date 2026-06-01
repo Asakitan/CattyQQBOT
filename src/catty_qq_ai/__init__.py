@@ -2872,6 +2872,22 @@ _AI_REVEAL_EN_RE = re.compile(
 _USER_CONTINUATION_RE = re.compile(
     r"\n+\s*(?:主人|笨蛋主人|杂鱼主人|用户|User|user|\{\{user\}\})\s*[:：][\s\S]*$",
 )
+_UNICODE_EMOJI_RE = re.compile(
+    "["
+    "\U0001F1E6-\U0001F1FF"  # regional indicators / flags
+    "\U0001F300-\U0001F5FF"  # symbols & pictographs
+    "\U0001F600-\U0001F64F"  # emoticons
+    "\U0001F680-\U0001F6FF"  # transport & map symbols
+    "\U0001F700-\U0001F77F"
+    "\U0001F780-\U0001F7FF"
+    "\U0001F800-\U0001F8FF"
+    "\U0001F900-\U0001F9FF"
+    "\U0001FA70-\U0001FAFF"
+    "\U00002600-\U000026FF"  # misc symbols commonly rendered as emoji
+    "\U00002700-\U000027BF"  # dingbats
+    "]"
+)
+_EMOJI_MODIFIER_RE = re.compile(r"[\ufe0e\ufe0f\U0001F3FB-\U0001F3FF\u200d\u20e3]")
 
 
 def _strip_ai_self_reveal(text: str) -> str:
@@ -2894,6 +2910,18 @@ def _strip_ai_self_reveal(text: str) -> str:
             f"(orig {len(orig)} → {len(text)} chars)"
         )
     return text
+
+
+def _strip_unicode_emoji_for_send(text: str) -> str:
+    """出站前删除模型混入的 Unicode emoji；不影响 prompt / 本地表情包图片段。"""
+    if not text:
+        return text
+    cleaned = _UNICODE_EMOJI_RE.sub("", text)
+    cleaned = _EMOJI_MODIFIER_RE.sub("", cleaned)
+    if cleaned != text:
+        # 删除 emoji 后可能残留多余空格；不压中文标点和换行，避免改坏 QQ 语气。
+        cleaned = re.sub(r"[ \t]{2,}", " ", cleaned).strip()
+    return cleaned
 
 
 def _sanitize_residual_markers(text: str) -> str:
@@ -8054,6 +8082,7 @@ def _looks_like_qq_short_chat(reply: str) -> bool:
 
 def _reply_chunks(reply: str) -> list[str]:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
+    reply = _strip_unicode_emoji_for_send(reply)
 
     # 主人 2026-05-27: NSFW 长 reply (deepseek-v4-flash) 段落间默认双换行,
     # OneBot 原样发到 QQ 显示成大空白卡片很丑. collapse \n\n+ → \n 保留段落感无空行.
@@ -8149,6 +8178,7 @@ def _compose_reply_message(
     latex_sources: list[str] | None = None,
     inline_image_urls: list[str] | None = None,
 ) -> Message:
+    text = _strip_unicode_emoji_for_send(text)
     message = Message()
     if quote:
         quote_segment = _reply_quote_segment(event)
