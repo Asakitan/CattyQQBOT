@@ -84,6 +84,7 @@ from .world_info import build_world_info_block, find_triggered_entries
 from .entity_extractor import build_entity_context, extract_entities
 from .intent_classifier import build_intent_context, classify_intent
 from .parsers import strip_catty_markers as _strip_catty_markers
+from .parsers import unwrap_content_block_repr as _unwrap_content_block_repr
 from .slang_dict import annotate_slang, build_slang_context
 from .time_awareness import build_time_context
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, recent_tool_calls_context, tools_system_hint
@@ -2916,6 +2917,7 @@ def _strip_unicode_emoji_for_send(text: str) -> str:
     """出站前删除模型混入的 Unicode emoji；不影响 prompt / 本地表情包图片段。"""
     if not text:
         return text
+    text = _sanitize_reply_text_for_output(text)
     cleaned = _UNICODE_EMOJI_RE.sub("", text)
     cleaned = _EMOJI_MODIFIER_RE.sub("", cleaned)
     if cleaned != text:
@@ -2943,6 +2945,20 @@ def _sanitize_residual_markers(text: str) -> str:
     cleaned = cleaned.strip()
     if NO_REPLY_MARKER in cleaned and cleaned != NO_REPLY_MARKER:
         cleaned = cleaned.replace(NO_REPLY_MARKER, "").strip()
+    cleaned = _sanitize_reply_text_for_output(cleaned)
+    return cleaned
+
+
+def _sanitize_reply_text_for_output(text: str) -> str:
+    """最终出站文本兜底:反复剥掉模型复读的 content-block 字面量外壳。"""
+    if not text:
+        return ""
+    cleaned = str(text).strip()
+    for _ in range(3):
+        unwrapped = _unwrap_content_block_repr(cleaned).strip()
+        if unwrapped == cleaned:
+            break
+        cleaned = unwrapped
     return cleaned
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
@@ -11798,7 +11814,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             if placeholder_task is not None and not placeholder_task.done():
                 placeholder_task.cancel()
 
-        reply = await _apply_local_critic(event, incoming, messages, reply)
+        reply = _sanitize_reply_text_for_output(await _apply_local_critic(event, incoming, messages, reply))
 
         if _is_no_reply(reply):
             # 主人 2026-05-29 P1b: 私聊**绝不**因 NO_REPLY 冻结历史。
@@ -11814,7 +11830,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     f"never freeze private history): user={event.user_id} "
                     f"text={incoming.text[:80]!r}"
                 )
-                reply = await _resolve_no_reply(event, incoming, messages, reply)
+                reply = _sanitize_reply_text_for_output(await _resolve_no_reply(event, incoming, messages, reply))
             if _is_no_reply(reply):
                 if state.get("catty_session_closing"):
                     # closing intent 但主 AI 没回道别 → 也关窗退出会话跟踪
@@ -11829,11 +11845,16 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
                 await matcher.finish()
 
+        reply = _sanitize_reply_text_for_output(reply)
         reply, emoji_query = _extract_emoji_query(reply)
         # 注:梗图现在走 catty_meme_query toolcall,AI 自己把 base64:// URI 嵌入 INLINE_IMAGE 标记。
         # 多模态 AI 仍可能在 _extract_content 阶段直接产生 INLINE_IMAGE,两条路径都被发送链路统一解析。
         _save_assistant_training_sample(
-            event, incoming, messages, _strip_inline_image_markers(reply), emoji_query=emoji_query,
+            event,
+            incoming,
+            messages,
+            _strip_inline_image_markers(_sanitize_reply_text_for_output(reply)),
+            emoji_query=emoji_query,
         )
         # 主人 2026-05-28: NSFW 模式 (走 spark 路径) 不发表情 — 沉浸感优先,
         # AI 抽的 emoji_query 也丢掉, _should_auto_emoji_reply 也跳过.
@@ -11857,7 +11878,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # chunks 内只剩短占位符,_reply_chunks 切段时不会切到公式或图片标记中间;
         # 发送时 _compose_reply_message 看到占位符再渲染成图片消息段。
         # history/memory 用文本+[图片]兜底,base64 不进 prompt token。
-        reply_for_send, latex_sources = replace_latex_with_placeholders(reply)
+        reply_for_send, latex_sources = replace_latex_with_placeholders(_sanitize_reply_text_for_output(reply))
         reply_for_send, inline_image_urls = _extract_inline_images(reply_for_send)
         chunks = _reply_chunks(reply_for_send)
         if image_description and not image_description_cached:

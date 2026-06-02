@@ -196,6 +196,9 @@ def _candidate_content_block_literals(text: str) -> list[str]:
     # 线上见过 ``{'type': 'text', 'text': '...'}]``: 少了开头 [, 但右侧残留 ].
     if text.startswith("{") and text.endswith("}]"):
         candidates.append(text[:-1])
+    # 同一类截断还可能反过来: ``[{'type': 'text', 'text': '...'}`` 少了右侧 ].
+    if text.startswith("[{") and text.endswith("}") and not text.endswith("}]"):
+        candidates.append(text + "]")
     return candidates
 
 
