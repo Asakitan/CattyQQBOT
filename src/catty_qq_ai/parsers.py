@@ -190,6 +190,15 @@ _MALFORMED_TEXT_BLOCK_WRAPPER_RE = re.compile(
 )
 
 
+def _candidate_content_block_literals(text: str) -> list[str]:
+    """返回可安全尝试解析的 content-block 外壳候选。"""
+    candidates = [text]
+    # 线上见过 ``{'type': 'text', 'text': '...'}]``: 少了开头 [, 但右侧残留 ].
+    if text.startswith("{") and text.endswith("}]"):
+        candidates.append(text[:-1])
+    return candidates
+
+
 def _unwrap_malformed_text_block_wrapper(text: str) -> str | None:
     """剥掉模型偶发的坏 content-block 外壳: ``{'type': 'text': 'text': '...'}``。
 
@@ -247,20 +256,21 @@ def unwrap_content_block_repr(text: str) -> str:
         return text
     if not _CONTENT_BLOCK_HINT_RE.search(stripped):
         return text
-    try:
-        parsed: Any = json.loads(stripped)
-    except (ValueError, TypeError):
+    for candidate in _candidate_content_block_literals(stripped):
         try:
-            parsed = ast.literal_eval(stripped)
-        except (ValueError, SyntaxError, TypeError, MemoryError, RecursionError):
-            extracted_malformed = _unwrap_malformed_text_block_wrapper(stripped)
-            if extracted_malformed is None:
-                return text
-            return extracted_malformed.strip() or text
-    extracted = _text_from_content_blocks(parsed)
-    if extracted is None:
-        return text
-    return extracted.strip() or text
+            parsed: Any = json.loads(candidate)
+        except (ValueError, TypeError):
+            try:
+                parsed = ast.literal_eval(candidate)
+            except (ValueError, SyntaxError, TypeError, MemoryError, RecursionError):
+                extracted_malformed = _unwrap_malformed_text_block_wrapper(candidate)
+                if extracted_malformed is not None:
+                    return extracted_malformed.strip() or text
+                continue
+        extracted = _text_from_content_blocks(parsed)
+        if extracted is not None:
+            return extracted.strip() or text
+    return text
 
 
 # ── Marker 闭合宽容化 ─────────────────────────────────────────────────
