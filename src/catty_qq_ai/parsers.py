@@ -178,6 +178,32 @@ def lenient_json_object(text: str) -> dict[str, Any] | None:
 
 # 廉价闸门:出现 'type':'text' / "type":"text" 才值得进昂贵的字面量解析。
 _CONTENT_BLOCK_HINT_RE = re.compile(r"""['"]type['"]\s*:\s*['"]text['"]""")
+_MALFORMED_TEXT_BLOCK_WRAPPER_RE = re.compile(
+    r"""\A\s*
+        (?:\[\s*)?\{\s*
+        (?P<q1>['"])type(?P=q1)\s*:\s*(?P<q2>['"])text(?P=q2)\s*:\s*
+        (?P<q3>['"])text(?P=q3)\s*:\s*
+        (?P<q4>['"])(?P<body>(?:\\.|(?!\s*(?P=q4)\s*\}\s*(?:\]\s*)?\Z).)*)(?P=q4)
+        \s*\}\s*(?:\]\s*)?\Z
+    """,
+    re.DOTALL | re.VERBOSE,
+)
+
+
+def _unwrap_malformed_text_block_wrapper(text: str) -> str | None:
+    """剥掉模型偶发的坏 content-block 外壳: ``{'type': 'text': 'text': '...'}``。
+
+    这不是合法 JSON/Python 字面量,所以 ``json.loads`` / ``ast.literal_eval`` 都会失败。
+    仅接受整段文本就是单个 text block(可包一层 ``[]``)的形态,避免误伤普通正文。
+    """
+    match = _MALFORMED_TEXT_BLOCK_WRAPPER_RE.match(text)
+    if not match:
+        return None
+    body = match.group("body")
+    try:
+        return ast.literal_eval(match.group("q4") + body + match.group("q4"))
+    except (ValueError, SyntaxError, TypeError, MemoryError, RecursionError):
+        return body
 
 
 def _text_from_content_blocks(obj: Any) -> str | None:
@@ -227,7 +253,10 @@ def unwrap_content_block_repr(text: str) -> str:
         try:
             parsed = ast.literal_eval(stripped)
         except (ValueError, SyntaxError, TypeError, MemoryError, RecursionError):
-            return text
+            extracted_malformed = _unwrap_malformed_text_block_wrapper(stripped)
+            if extracted_malformed is None:
+                return text
+            return extracted_malformed.strip() or text
     extracted = _text_from_content_blocks(parsed)
     if extracted is None:
         return text

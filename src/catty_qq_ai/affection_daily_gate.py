@@ -151,8 +151,10 @@ def build_daily_gate_params(
 ) -> str:
     """动态参数 — 只 ~80 字符, 引用上面骨架对应档位."""
     tier = _resolve_tier(affection_level, is_owner)
-    owner_flag = 1 if is_owner else 0
-    return f"【DAILY_GATE】lv={int(affection_level)};owner={owner_flag};tier={tier};rules=catty_daily_affection_gate_skeleton"
+    return (
+        f"【日常 SFW 反应档·本轮参数】Lv={affection_level} · is_owner={is_owner} · tier={tier}.\n"
+        f"→ 看 catty_daily_affection_gate_skeleton 里 [{tier}] 那档 6 个维度执行 (撒娇/主动/称呼/动作/钩子/禁忌)."
+    )
 
 
 __all__ = [
