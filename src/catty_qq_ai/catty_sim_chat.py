@@ -498,6 +498,7 @@ async def sim_chat(
                     from . import memory_store, affection_store
                     from .tools import (
                         available_tool_schemas, execute_tool_call, ToolContext,
+                        should_force_imagegen_tool,
                     )
                     from nonebot.adapters.onebot.v11 import PrivateMessageEvent
                     _is_private = isinstance(event, PrivateMessageEvent)
@@ -508,12 +509,34 @@ async def sim_chat(
                         user_text=_user_text,
                         has_image=bool(getattr(incoming, "has_image", False)),
                     )
+                    _tool_choice: str | dict[str, object] = "auto"
+                    try:
+                        _force_imagegen = (
+                            should_force_imagegen_tool(
+                                _user_text,
+                                is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
+                            )
+                            and any(
+                                isinstance(_t, dict)
+                                and (
+                                    (_t.get("function") or {}).get("name") == "catty_imagegen"
+                                    or _t.get("name") == "catty_imagegen"
+                                )
+                                for _t in (_tools or [])
+                            )
+                        )
+                    except Exception:
+                        _force_imagegen = False
+                    if _force_imagegen:
+                        _tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
                     # 构 ToolContext (sim 模式只需基础 3 字段, 其它走 default)
                     _ctx = ToolContext(
                         config=cfg,
                         memory_store=memory_store,
                         event=event,
                         affection_store=affection_store,
+                        is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
+                        user_text=_user_text,
                     )
                     async def _executor(name: str, args_json: str) -> dict[str, object]:
                         return await execute_tool_call(name, args_json, _ctx)
@@ -523,6 +546,7 @@ async def sim_chat(
                         tool_executor=_executor,
                         max_rounds=int(getattr(cfg, "catty_tools_max_rounds", 3) or 3),
                         max_calls_per_round=int(getattr(cfg, "catty_tools_max_calls_per_round", 3) or 3),
+                        tool_choice=_tool_choice,
                     )
                 except Exception as _wt_exc:
                     # tool-path 失败 fallback 到 plain chat_completion (兼容老 sim 测试)

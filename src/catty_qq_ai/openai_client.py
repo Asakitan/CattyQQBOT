@@ -67,6 +67,7 @@ def _fallback_is_warm() -> bool:
 
 
 ChatMessage = dict[str, Any]
+ToolChoice = str | dict[str, Any]
 
 
 class OpenAICompatibleError(Exception):
@@ -820,7 +821,7 @@ async def _post_chat_completion_raw(
     extra_headers: dict[str, str],
     extra_body: dict[str, Any],
     tools: list[dict[str, Any]] | None = None,
-    tool_choice: str = "auto",
+    tool_choice: ToolChoice = "auto",
     enable_cache: bool = False,
     cache_depth: int = 2,
     stream: bool = False,
@@ -1556,6 +1557,7 @@ async def chat_completion_with_tools(
     router_api_key: str = "",
     router_model: str = "",
     router_label: str = "",
+    tool_choice: ToolChoice = "auto",
 ) -> str:
     """OpenAI function calling 主回复循环。
 
@@ -1593,11 +1595,16 @@ async def chat_completion_with_tools(
         )
     elif _native_route:
         _logger.info("tool_chat: starting with %d tools available (native /v1/messages)", len(tools))
+        if tool_choice != "auto":
+            _logger.info("tool_chat: forced tool_choice requested, native route will use provider auto")
     else:
         _logger.info("tool_chat: starting with %d tools available (OpenAI-compat)", len(tools))
+    if tool_choice != "auto" and not _native_route:
+        _logger.info("tool_chat: first round tool_choice forced: %s", tool_choice)
 
     history: list[ChatMessage] = list(messages)
     for round_idx in range(max(1, max_rounds)):
+        round_tool_choice: ToolChoice = tool_choice if round_idx == 0 else "auto"
         try:
             if _native_route:
                 from .anthropic_native_client import post_messages_native_data
@@ -1624,7 +1631,7 @@ async def chat_completion_with_tools(
                     extra_headers={},
                     extra_body={},
                     tools=tools,
-                    tool_choice="auto",
+                    tool_choice=round_tool_choice,
                     enable_cache=False,
                     cache_depth=2,
                     stream=_router_stream,
@@ -1649,7 +1656,7 @@ async def chat_completion_with_tools(
                     extra_headers=config.catty_openai_extra_headers,
                     extra_body=config.catty_openai_extra_body,
                     tools=tools,
-                    tool_choice="auto",
+                    tool_choice=round_tool_choice,
                     enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
                     cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
                     stream=_openai_stream,

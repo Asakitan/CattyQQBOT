@@ -3685,6 +3685,41 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
 }
 
 
+_IMAGEGEN_FORCE_QUERY_WORDS: tuple[str, ...] = (
+    "会画图吗", "会不会画图", "能画图吗", "能不能画图", "可以画图吗",
+    "可不可以画图", "支持画图吗", "画图功能", "怎么画图", "怎么生图",
+)
+_IMAGEGEN_FORCE_NSFW_BLOCK_WORDS: tuple[str, ...] = (
+    "抽插", "抽送", "插入", "插进", "插到", "插着",
+    "操我", "操你", "干你", "干我", "射进", "射满", "内射",
+    "精液", "蜜穴", "蜜液", "高潮", "潮吹", "潮喷",
+    "肉棒", "鸡巴", "下体", "阴茎", "做爱", "做我", "做你",
+)
+_IMAGEGEN_FORCE_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
+    re.compile(pattern)
+    for pattern in (
+        r"(?:帮我|给我|替我)?画(?:一张|一个|一幅|一下|张|个|幅|下).+",
+        r"(?:帮我|给我|替我).{0,6}(?:画图|生图|出图|生成图)",
+        r"(?:生成|做|出|来)(?:一张|一个|一幅|张|个|幅)?(?:图|图片|图像|插画|海报|壁纸|立绘|头像).+",
+        r"(?:画|生成|做|出).{0,10}(?:自画像|自拍|头像|立绘|插画|壁纸|海报|原画|线稿|猫娘|你自己|笨猫|猫猫)",
+    )
+)
+
+
+def should_force_imagegen_tool(user_text: str, *, is_directly_requested: bool) -> bool:
+    """Return True when the user clearly ordered Catty to draw now."""
+    if not is_directly_requested:
+        return False
+    text = re.sub(r"\s+", "", str(user_text or "").strip().lower())
+    if not text:
+        return False
+    if any(word in text for word in _IMAGEGEN_FORCE_QUERY_WORDS):
+        return False
+    if any(word in text for word in _IMAGEGEN_FORCE_NSFW_BLOCK_WORDS):
+        return False
+    return any(pattern.search(text) for pattern in _IMAGEGEN_FORCE_PATTERNS)
+
+
 def _detect_tool_intent(user_text: str, has_image: bool) -> set[str]:
     """NLU 简易关键词匹配 — 命中返回相关 tool name set, 不命中返回空 set.
 

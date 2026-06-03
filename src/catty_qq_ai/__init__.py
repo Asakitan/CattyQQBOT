@@ -87,7 +87,14 @@ from .parsers import strip_catty_markers as _strip_catty_markers
 from .parsers import unwrap_content_block_repr as _unwrap_content_block_repr
 from .slang_dict import annotate_slang, build_slang_context
 from .time_awareness import build_time_context
-from .tools import ToolContext, available_tool_schemas, execute_tool_call, recent_tool_calls_context, tools_system_hint
+from .tools import (
+    ToolContext,
+    available_tool_schemas,
+    execute_tool_call,
+    recent_tool_calls_context,
+    should_force_imagegen_tool,
+    tools_system_hint,
+)
 from .topic_classifier import build_topic_context, classify_topic
 from .persona_prompts import (
     build_catgirl_examples_prompt,
@@ -11246,6 +11253,28 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             user_text=_user_text_for_intent,
             has_image=_has_image_for_intent,
         )
+        _forced_tool_choice: str | dict[str, object] = "auto"
+        try:
+            _force_imagegen_tool = (
+                should_force_imagegen_tool(
+                    _user_text_for_intent,
+                    is_directly_requested=bool(incoming.directly_requested),
+                )
+                and any(
+                    isinstance(_t, dict)
+                    and (
+                        (_t.get("function") or {}).get("name") == "catty_imagegen"
+                        or _t.get("name") == "catty_imagegen"
+                    )
+                    for _t in (tools_for_main_reply or [])
+                )
+            )
+        except Exception as _force_exc:  # noqa: BLE001
+            logger.debug(f"imagegen force tool_choice check failed: {_force_exc}")
+            _force_imagegen_tool = False
+        if _force_imagegen_tool:
+            _forced_tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
+            logger.info("chat: explicit imagegen request → forcing catty_imagegen tool_choice")
         nsfw_image_segments: list[MessageSegment] = []
         # 主人 2026-05-29: NSFW 自动生图改后台异步, 文字优先发. 详见下方 chunk loop 前的 30s wait.
         _nsfw_img_task: asyncio.Task | None = None
@@ -11687,6 +11716,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     router_api_key=_router_key,
                     router_model=_router_model,
                     router_label=_router_label,
+                    tool_choice=_forced_tool_choice,
                 )
                 # S3.8: CPU 引擎预扣 base 后透传到这里, 现在按真实 token 结算
                 _credit_base_charged = state.get("catty_credit_base_charged")
