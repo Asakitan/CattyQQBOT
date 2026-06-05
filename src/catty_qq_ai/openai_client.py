@@ -70,6 +70,27 @@ ChatMessage = dict[str, Any]
 ToolChoice = str | dict[str, Any]
 
 
+# 主人 2026-06-06: 部分端点 (DeepSeek 思考模型 deepseek-v4-flash 等) 不支持非 "auto" 的
+# tool_choice — 强制 {"type":"function",...} 或 "required" 会 HTTP 400
+# "Thinking mode does not support this tool_choice". 一旦某 (base_url, model) 被探测到拒绝
+# 强制, 在 TTL 内记住它, 后续画图请求直接用 auto (实测 auto 下 AI 仍会主动调 catty_imagegen),
+# 省掉每次必失败的 400 往返。
+_FORCED_TOOL_CHOICE_BLOCKED: dict[str, float] = {}
+_FORCED_TOOL_CHOICE_BLOCK_TTL = 3600.0
+
+
+def _forced_tool_choice_blocked(endpoint_key: str) -> bool:
+    if not endpoint_key:
+        return False
+    until = _FORCED_TOOL_CHOICE_BLOCKED.get(endpoint_key)
+    return bool(until and time.monotonic() < until)
+
+
+def _mark_forced_tool_choice_blocked(endpoint_key: str) -> None:
+    if endpoint_key:
+        _FORCED_TOOL_CHOICE_BLOCKED[endpoint_key] = time.monotonic() + _FORCED_TOOL_CHOICE_BLOCK_TTL
+
+
 class OpenAICompatibleError(Exception):
     def __init__(self, public_message: str, detail: str | None = None) -> None:
         super().__init__(detail or public_message)
@@ -1603,72 +1624,115 @@ async def chat_completion_with_tools(
         _logger.info("tool_chat: first round tool_choice forced: %s", tool_choice)
 
     history: list[ChatMessage] = list(messages)
+
+    # 主人 2026-06-06: 发一轮请求 (按当前路由选端点)。抽成内部 helper, 以便强制 tool_choice 被
+    # 端点拒绝时能带着同一批 tools 用 "auto" 无缝重试本轮 (而不是丢掉工具降级成纯聊天)。
+    # history 是同一个 list 对象, loop 体 append 后闭包下次调用会读到最新内容。
+    async def _dispatch_round(rtc: ToolChoice) -> dict[str, Any]:
+        if _native_route:
+            from .anthropic_native_client import post_messages_native_data
+            # native /v1/messages 当前不透传 tool_choice — 一律走 provider auto。
+            return await post_messages_native_data(
+                config, history, tools=tools,
+                metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+            )
+        if _router_active:
+            # 主人 2026-05-28 Step 1: 非 Claude 端点开真流式 (chunk push dashboard)
+            try:
+                from .prompt_cache import is_claude_endpoint
+                _router_stream = not is_claude_endpoint(router_base_url, router_model)
+            except Exception:  # noqa: BLE001
+                _router_stream = False
+            return await _post_chat_completion_raw(
+                base_url=router_base_url,
+                api_key=router_api_key,
+                model=router_model,
+                messages=history,
+                timeout=config.catty_request_timeout,
+                proxy=config.catty_http_proxy,
+                temperature=config.catty_temperature,
+                max_tokens=config.catty_max_tokens,
+                extra_headers={},
+                extra_body={},
+                tools=tools,
+                tool_choice=rtc,
+                enable_cache=False,
+                cache_depth=2,
+                stream=_router_stream,
+            )
+        try:
+            from .prompt_cache import is_claude_endpoint
+            _openai_stream = not is_claude_endpoint(
+                config.catty_openai_base_url, config.catty_openai_model,
+            )
+        except Exception:  # noqa: BLE001
+            _openai_stream = False
+        return await _post_chat_completion_raw(
+            base_url=config.catty_openai_base_url,
+            api_key=config.catty_openai_api_key,
+            model=config.catty_openai_model,
+            messages=history,
+            timeout=config.catty_request_timeout,
+            proxy=config.catty_http_proxy,
+            temperature=config.catty_temperature,
+            max_tokens=config.catty_max_tokens,
+            extra_headers=config.catty_openai_extra_headers,
+            extra_body=config.catty_openai_extra_body,
+            tools=tools,
+            tool_choice=rtc,
+            enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
+            cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
+            stream=_openai_stream,
+        )
+
+    # 强制 tool_choice 的目标端点 (用于"该端点不支持强制"的能力缓存)。native 不透传 tool_choice,
+    # 故只对 router / openai-compat 路径有意义。
+    _force_endpoint_key = (
+        f"{router_base_url}|{router_model}" if _router_active
+        else f"{config.catty_openai_base_url}|{config.catty_openai_model}"
+    )
+
     for round_idx in range(max(1, max_rounds)):
         round_tool_choice: ToolChoice = tool_choice if round_idx == 0 else "auto"
-        try:
-            if _native_route:
-                from .anthropic_native_client import post_messages_native_data
-                data = await post_messages_native_data(
-                    config, history, tools=tools,
-                    metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
-                )
-            elif _router_active:
-                # 主人 2026-05-28 Step 1: 非 Claude 端点开真流式 (chunk push dashboard)
-                try:
-                    from .prompt_cache import is_claude_endpoint
-                    _router_stream = not is_claude_endpoint(router_base_url, router_model)
-                except Exception:  # noqa: BLE001
-                    _router_stream = False
-                data = await _post_chat_completion_raw(
-                    base_url=router_base_url,
-                    api_key=router_api_key,
-                    model=router_model,
-                    messages=history,
-                    timeout=config.catty_request_timeout,
-                    proxy=config.catty_http_proxy,
-                    temperature=config.catty_temperature,
-                    max_tokens=config.catty_max_tokens,
-                    extra_headers={},
-                    extra_body={},
-                    tools=tools,
-                    tool_choice=round_tool_choice,
-                    enable_cache=False,
-                    cache_depth=2,
-                    stream=_router_stream,
-                )
-            else:
-                try:
-                    from .prompt_cache import is_claude_endpoint
-                    _openai_stream = not is_claude_endpoint(
-                        config.catty_openai_base_url, config.catty_openai_model,
-                    )
-                except Exception:  # noqa: BLE001
-                    _openai_stream = False
-                data = await _post_chat_completion_raw(
-                    base_url=config.catty_openai_base_url,
-                    api_key=config.catty_openai_api_key,
-                    model=config.catty_openai_model,
-                    messages=history,
-                    timeout=config.catty_request_timeout,
-                    proxy=config.catty_http_proxy,
-                    temperature=config.catty_temperature,
-                    max_tokens=config.catty_max_tokens,
-                    extra_headers=config.catty_openai_extra_headers,
-                    extra_body=config.catty_openai_extra_body,
-                    tools=tools,
-                    tool_choice=round_tool_choice,
-                    enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
-                    cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
-                    stream=_openai_stream,
-                )
-        except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
-            _logger.warning(
-                "chat_completion_with_tools: round %d cloud call failed (%s); degrading to plain chat_completion",
-                round_idx,
-                exc.__class__.__name__,
+        # 已知该端点拒绝非 auto tool_choice (如 DeepSeek 思考模型) → 直接用 auto, 省一次必败 400。
+        if round_tool_choice != "auto" and _forced_tool_choice_blocked(_force_endpoint_key):
+            _logger.info(
+                "tool_chat: endpoint known to reject forced tool_choice → using auto (tools kept)",
             )
-            # 降级到 plain 调用,让原有 fallback/cooldown 逻辑接管(它会自己 mark unhealthy)。
-            return await chat_completion(config, messages)
+            round_tool_choice = "auto"
+        try:
+            data = await _dispatch_round(round_tool_choice)
+        except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+            # 主人 2026-06-06: 强制 tool_choice 第 0 轮失败 (端点不支持 object/required, 例如 DeepSeek
+            # 思考模型返回 "Thinking mode does not support this tool_choice") → 不要丢掉工具降级成纯聊天
+            # (那样明确画图请求永远不画)。带 tools 用 auto 重试本轮 — 实测 auto 下 AI 仍会主动调
+            # catty_imagegen。native 路径根本不透传 tool_choice (其失败与 tool_choice 无关), 故 guard
+            # 掉 — 避免把 native 的瞬时错误误判成"端点拒绝强制"而污染能力缓存 / 做无意义重试。
+            if round_idx == 0 and round_tool_choice != "auto" and not _native_route:
+                _logger.warning(
+                    "tool_chat: forced tool_choice rejected (%s); retrying round 0 with tool_choice=auto (tools kept)",
+                    exc.__class__.__name__,
+                )
+                try:
+                    data = await _dispatch_round("auto")
+                except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc2:
+                    _logger.warning(
+                        "chat_completion_with_tools: auto retry after forced reject also failed (%s); "
+                        "degrading to plain chat_completion",
+                        exc2.__class__.__name__,
+                    )
+                    return await chat_completion(config, messages)
+                # 仅"auto 重试成功 (而强制失败)"才确认是 tool_choice 维度问题 → 此时才标记端点拒绝强制;
+                # 若 auto 也失败 (端点整体临时挂) 已在上面 return, 不会污染缓存。
+                _mark_forced_tool_choice_blocked(_force_endpoint_key)
+            else:
+                _logger.warning(
+                    "chat_completion_with_tools: round %d cloud call failed (%s); degrading to plain chat_completion",
+                    round_idx,
+                    exc.__class__.__name__,
+                )
+                # 降级到 plain 调用,让原有 fallback/cooldown 逻辑接管(它会自己 mark unhealthy)。
+                return await chat_completion(config, messages)
 
         try:
             choice = data["choices"][0]

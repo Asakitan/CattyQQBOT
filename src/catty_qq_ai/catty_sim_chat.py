@@ -508,6 +508,7 @@ async def sim_chat(
                         is_private=_is_private,
                         user_text=_user_text,
                         has_image=bool(getattr(incoming, "has_image", False)),
+                        is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
                     )
                     _tool_choice: str | dict[str, object] = "auto"
                     try:

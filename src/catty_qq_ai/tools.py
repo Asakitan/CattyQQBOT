@@ -3640,11 +3640,9 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
         "表情", "表情包", "斗图", "emoji", "发个表情", "来个表情", "挑一只小猫",
         "害羞", "贴贴", "得意", "被夸", "炸毛", "脸红", "绷不住", "委屈", "疑惑",
     ),
-    "catty_imagegen": (
-        "画", "画一张", "画一个", "画个", "画图", "画张", "出张", "出一张",
-        "给我画", "帮我画", "生成图", "生图", "imagegen", "imggen", "img",
-        "海报", "立绘", "插画", "壁纸", "二次元", "猫娘画",
-    ),
+    # 主人 2026-06-06: catty_imagegen 不再用窄关键词表 — 改由 _is_image_intent 统一判断
+    # (覆盖 头像/图片/做张图/来一张/出个图/绘制/线稿 等口语 + NSFW explicit override),
+    # 与 NSFW spark 短路同一真相源, 消除两表漂移。详见 _detect_tool_intent / _IMAGE_INTENT_WORDS。
     "catty_nai_director": (
         "抠图", "去背景", "transparent", "线稿", "lineart", "sketch", "草图",
         "上色", "colorize", "情绪", "emotion", "去杂物", "declutter",
@@ -3720,10 +3718,62 @@ def should_force_imagegen_tool(user_text: str, *, is_directly_requested: bool) -
     return any(pattern.search(text) for pattern in _IMAGEGEN_FORCE_PATTERNS)
 
 
+# 画图意图判断 — 主人 2026-06-06: 从 __init__.py 下沉到此, 作为"画图意图"的单一真相源,
+# 同时供 NSFW spark 短路 (__init__ 从这里 import _is_image_intent) 和主 NLU gate
+# (_detect_tool_intent) 共用, 消除两表漂移 (此前 _INTENT_KEYWORDS['catty_imagegen'] 远窄于
+# spark 表 → 明确画图请求工具不进列表永远不画)。覆盖口语画图措辞: 头像/自拍/图片/做张图/
+# 来一张/出个图/绘制/线稿/海报/壁纸 等。
+_IMAGE_INTENT_WORDS: tuple[str, ...] = (
+    "画一", "画张", "画个", "画下", "画幅", "画起", "画我", "画你", "画猫",
+    "画一张", "画张图", "画个图", "画下图", "画图",
+    "绘一", "绘画", "绘制", "绘个", "绘出",
+    "出图", "出张", "出一张", "出个图",
+    "imagegen", "imggen", "image gen",
+    "生成图", "生图", "生成一张", "生成图片", "生成插画", "生成一幅",
+    "做张图", "做一张图", "做个图", "搞张图", "搞个图", "弄张图", "弄个图",
+    "来一张", "来张图",
+    # 主人 2026-05-27 十七轮 fix: 砍 '插画' 单独 (会被 NSFW '抽插画X' 误命中),
+    # 改成只命中 '张插画 / 画插画 / 来插画' 等显式画图动词搭配
+    "二次元", "动漫图", "原画", "线稿", "立绘", "头像", "自拍", "自画像",
+    "张插画", "画插画", "来插画", "出插画",
+    "图片", "图像", "图一张",
+    # 主人 2026-06-06: 并入原 _INTENT_KEYWORDS['catty_imagegen'] 独有词, 保覆盖不回退
+    "海报", "壁纸", "猫娘画",
+)
+
+# 主人 2026-05-27 十七轮 fix: NSFW explicit 动作词 — 出现这些就**不是**画图请求
+# 即使误命中 image_intent 也 override (例如『抽插画圈』 误中 '画X' / '插画')
+_IMAGE_INTENT_NSFW_OVERRIDE_WORDS: tuple[str, ...] = (
+    "抽插", "抽送", "插入", "插进", "插到", "插着",
+    "操我", "操你", "操猫", "操她", "操他", "干你", "干我",
+    "射进", "射满", "内射", "射在", "精液", "蜜穴", "蜜液",
+    "高潮", "潮吹", "潮喷", "勃起",
+    "肉棒", "鸡巴", "下体", "阴茎",
+    "舔下", "舔进", "扣下", "扣进",
+    "做爱", "做我", "做你",
+)
+
+
+def _is_image_intent(text: str) -> bool:
+    """user msg 是否在请求画图 (即使命中 NSFW 触发词也应让位给 imagegen tool).
+
+    主人 2026-05-27 十七轮 fix:
+    - 如 text 含 explicit NSFW 动作词 (抽插/内射/蜜穴等) → 强制返 False
+      (避免『抽插画圈』『画一下蜜穴』这种 NSFW 上下文被画图意图劫持)
+    """
+    if not text:
+        return False
+    # NSFW explicit 动作优先 — 即使含 image_intent 也判 False
+    if any(w in text for w in _IMAGE_INTENT_NSFW_OVERRIDE_WORDS):
+        return False
+    return any(w in text for w in _IMAGE_INTENT_WORDS)
+
+
 def _detect_tool_intent(user_text: str, has_image: bool) -> set[str]:
     """NLU 简易关键词匹配 — 命中返回相关 tool name set, 不命中返回空 set.
 
     image_search / nai_director 需要 has_image=True (没图不调).
+    catty_imagegen 走专用 _is_image_intent (含 NSFW explicit override), 与 spark 短路同一真相源。
     """
     if not user_text:
         return set()
@@ -3734,6 +3784,10 @@ def _detect_tool_intent(user_text: str, has_image: bool) -> set[str]:
             if kw.lower() in text_lower:
                 hit.add(tool_name)
                 break
+    # 主人 2026-06-06: imagegen 意图统一走 _is_image_intent — 覆盖 头像/图片/做张图/来一张 等
+    # _INTENT_KEYWORDS 漏掉、但 spark 短路表 (_IMAGE_INTENT_WORDS) 有的口语措辞, 消除两表漂移。
+    if _is_image_intent(user_text):
+        hit.add("catty_imagegen")
     # 没有图时去掉 image_search / nai_director
     if not has_image:
         hit.discard("catty_image_search")
@@ -3747,6 +3801,7 @@ def available_tool_schemas(
     is_private: bool,
     user_text: str = "",
     has_image: bool = False,
+    is_directly_requested: bool = False,
 ) -> list[dict[str, Any]]:
     """按 NLU intent 挑 tool schemas — 命中关键词才发对应 tool, 不命中 tools=[].
 
@@ -3772,6 +3827,14 @@ def available_tool_schemas(
     intent_hits = _detect_tool_intent(user_text, has_image)
     if has_image:
         intent_hits.update({"catty_image_search", "catty_nai_director"})
+    # 主人 2026-06-06: 明确画图指令 (should_force_imagegen_tool — force pattern 比
+    # _IMAGE_INTENT_WORDS 宽, 含 自画像/你自己/笨猫 等自指措辞) 即使 NLU 没把 imagegen 命中,
+    # 也强制把 imagegen schema 注入 — 闭合"force=True 但工具不进列表 → 永远不画"的窗口
+    # (与 __init__ 的 force tool_choice 判定是同一根因的上下游)。
+    if is_directly_requested and should_force_imagegen_tool(
+        user_text, is_directly_requested=True
+    ):
+        intent_hits.add("catty_imagegen")
     if not intent_hits:
         return []
 
