@@ -219,6 +219,32 @@ def _looks_like_ollama_route(base_url: str, api_key: str, extra_body: dict[str, 
     return parsed.port == 11434 or api_key.strip().lower() == "ollama"
 
 
+def _looks_like_deepseek_thinking_route(base_url: str, model: str) -> bool:
+    """DeepSeek v4 supports explicit thinking controls on OpenAI-compatible calls."""
+    model_l = (model or "").strip().lower()
+    if model_l.startswith("deepseek-v4"):
+        return True
+    parsed = urlparse((base_url or "").strip())
+    host = (parsed.hostname or "").lower()
+    return host.endswith("deepseek.com") and model_l.startswith("deepseek-v4")
+
+
+def _with_deepseek_thinking_defaults(
+    base_url: str,
+    model: str,
+    extra_body: dict[str, Any],
+) -> dict[str, Any]:
+    """Enable DeepSeek v4 thinking mode at max effort unless config overrides it."""
+    body = dict(extra_body or {})
+    if not _looks_like_deepseek_thinking_route(base_url, model):
+        return body
+    if "thinking" not in body:
+        body["thinking"] = {"type": "enabled"}
+    if "reasoning_effort" not in body:
+        body["reasoning_effort"] = "max"
+    return body
+
+
 # 主 AI 多模态输出里的图片(image_url / base64)在文本里用 INLINE_IMAGE 占位符表达,
 # 让发送链路看到后转成 MessageSegment.image。占位符常量在 reply_markers 里统一定义;
 # history 写入前要 strip 掉(否则 base64 会污染 prompt token)。
@@ -721,6 +747,7 @@ async def _stream_chat_completion_attempt(
     HTTP 错误 → raise OpenAICompatibleError (exc.status_code 标 5xx, caller 决定重试).
     """
     text_accum = ""
+    reasoning_accum = ""
     tool_calls_by_index: dict[int, dict[str, Any]] = {}
     finish_reason: str | None = None
     usage: dict[str, Any] | None = None
@@ -789,6 +816,10 @@ async def _stream_chat_completion_attempt(
                         except Exception:  # noqa: BLE001
                             pass
 
+                reasoning_delta = delta.get("reasoning_content") or delta.get("reasoning")
+                if reasoning_delta:
+                    reasoning_accum += reasoning_delta
+
                 # 累积 tool_calls (按 index 拼名字 + 参数)
                 tc_deltas = delta.get("tool_calls") or []
                 for tc_delta in tc_deltas:
@@ -817,6 +848,8 @@ async def _stream_chat_completion_attempt(
 
     # 拼成跟非流式相同的 dict
     message: dict[str, Any] = {"role": role, "content": text_accum}
+    if reasoning_accum:
+        message["reasoning_content"] = reasoning_accum
     if tool_calls_by_index:
         message["tool_calls"] = [
             tool_calls_by_index[i] for i in sorted(tool_calls_by_index.keys())
@@ -1090,6 +1123,8 @@ async def _post_chat_completion_raw(
             messages = adapt_assistant_prefill_for_strict_user_end(messages)
     except Exception as exc:  # noqa: BLE001
         _logger.warning(f"claude assistant prefill 适配失败 (降级到原 messages): {exc}")
+
+    extra_body = _with_deepseek_thinking_defaults(base_url, model, extra_body)
 
     payload: dict[str, Any] = {
         "model": model,
@@ -1760,6 +1795,8 @@ async def chat_completion_with_tools(
             assistant_msg["content"] = message["content"]
         else:
             assistant_msg["content"] = None
+        if isinstance(message.get("reasoning_content"), str):
+            assistant_msg["reasoning_content"] = message["reasoning_content"]
         history.append(assistant_msg)
 
         # 限制每轮最多执行 N 个 tool_call,超出的直接回 truncated 提示
