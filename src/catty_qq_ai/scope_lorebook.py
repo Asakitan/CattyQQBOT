@@ -38,6 +38,17 @@ from typing import Any, Iterable
 _MAX_ENTRIES_PER_SCOPE = 30        # 数量 cap (prompt 注入数量不要太多, 防稀释效果)
 _MAX_BYTES_PER_SCOPE = 200_000     # 大小 cap = 200KB/scope (主人约束: 超过就 LRU 压缩)
 _MAX_TOTAL_SCOPES = 100            # 整体 scope 数 cap (磁盘保护, 太多 scope 时 LRU)
+_MAX_KEYS_PER_ENTRY = 6            # 同义触发词 cap, 防一条 entry 带太多泛词
+_MAX_KEY_CHARS = 24                # 单 key 过长会降低命中质量且撑 prompt
+_MAX_CONTENT_CHARS = 300           # 和 summarize_scope_lore 的硬上限保持一致
+
+
+def _compact_space(text: str) -> str:
+    return " ".join(str(text or "").strip().split())
+
+
+def _normalise_for_dedupe(text: str) -> str:
+    return _compact_space(text).casefold()
 
 
 @dataclass
@@ -210,22 +221,41 @@ class ScopeLorebookStore:
 
     def add_entry(self, scope: str, keys: Iterable[str], content: str) -> ScopeLoreEntry | None:
         """添加一条新 entry。keys 去重 / 去空 / content trim。返回新 entry 或 None(参数无效)。"""
-        if not scope or not content or not content.strip():
+        content = _compact_space(content)[:_MAX_CONTENT_CHARS]
+        if not scope or not content:
             return None
-        key_tuple = tuple(dict.fromkeys(k.strip() for k in keys if k and k.strip()))
+        raw_keys: Iterable[str] = [keys] if isinstance(keys, str) else list(keys or [])
+        key_tuple = tuple(
+            dict.fromkeys(
+                _compact_space(str(k))[:_MAX_KEY_CHARS]
+                for k in raw_keys
+                if _compact_space(str(k))
+            )
+        )[:_MAX_KEYS_PER_ENTRY]
         if not key_tuple:
             return None
         now = time.time()
-        entry = ScopeLoreEntry(
-            identifier=f"scope_lore_{uuid.uuid4().hex[:8]}",
-            keys=key_tuple,
-            content=content.strip(),
-            created_at=now,
-            last_hit_at=0.0,
-            hit_count=0,
-        )
         with self._lock:
-            self._data.setdefault(scope, []).append(entry)
+            entries = self._data.setdefault(scope, [])
+            normalised_content = _normalise_for_dedupe(content)
+            for existing in entries:
+                if _normalise_for_dedupe(existing.content) != normalised_content:
+                    continue
+                merged_keys = tuple(dict.fromkeys((*existing.keys, *key_tuple)))[:_MAX_KEYS_PER_ENTRY]
+                if merged_keys != existing.keys:
+                    existing.keys = merged_keys
+                    self._dirty = True
+                self._last_access[scope] = now
+                return existing
+            entry = ScopeLoreEntry(
+                identifier=f"scope_lore_{uuid.uuid4().hex[:8]}",
+                keys=key_tuple,
+                content=content,
+                created_at=now,
+                last_hit_at=0.0,
+                hit_count=0,
+            )
+            entries.append(entry)
             self._last_access[scope] = now
             self._evict_entries_until_fit(scope)
             self._evict_scope_lru()
