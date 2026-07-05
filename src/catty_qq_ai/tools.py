@@ -2804,7 +2804,7 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
                 "provider": "nai",
                 "prompt": f"{_persona_imagegen.girl_tags}, cute, anime style",
                 "aspect": "portrait",
-                "short_review": "画好了！！快看！！",
+                "short_review": "画好了. 快看",
             }
         else:
             plan = {
@@ -2825,7 +2825,7 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     neg = str(plan.get("negative_prompt") or "").strip()
     self_portrait_kind = (plan.get("self_portrait") or "").strip().lower() \
         if isinstance(plan.get("self_portrait"), str) else ""
-    _default_review = "画好了！！快看！！" if _persona_imagegen is not None else "画好啦主人~ ฅฅ"
+    _default_review = "画好了. 快看" if _persona_imagegen is not None else "画好啦主人~ ฅฅ"
     short_review = str(plan.get("short_review") or _default_review).strip()
 
     # 自画像 → 强制 NAI + 加本地参考图 (锁人设)
