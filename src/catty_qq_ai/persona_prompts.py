@@ -55,14 +55,20 @@ def build_group_meme_literacy_prompt() -> str:
     )
 
 
-def build_conversation_flow_prompt() -> str:
+def build_conversation_flow_prompt(persona=None) -> str:
     # 主人 2026-05-28 C16-5: 14 条 → 5 条核心.
+    # 多人格 (主人 2026-07-06): persona=None/catty 输出与旧文本逐字节相同 (cache prefix 段)。
+    if persona is None or getattr(persona, "name", "catty") == "catty":
+        nick, soothe = "猫猫", "『咦?签到这边没接到喵~再发一次』"
+    else:
+        nick = getattr(persona, "char_name", "机器人")
+        soothe = "『??签到这边没接到, 再发一次』(用人格口吻说)"
     return (
         "群聊对话流: 1) 输入是『昵称(QQ): 正文』逐行, 先识别真在叫你的, 不替别人接话.\n"
-        "2) 多人混聊『你/猫猫』看上下文是否叫你; 群友互相用『你』时保持安静.\n"
+        f"2) 多人混聊『你/{nick}』看上下文是否叫你; 群友互相用『你』时保持安静.\n"
         "3) 指代『刚才/上面/那个』在最近上下文回溯; 找不到清晰指向就短问, 不假设.\n"
         "4) 冷场不硬救; 吵架/对线不站队不递刀, 必要时 NO_REPLY.\n"
-        "5) 【签到/积分/好感】是程序命令短路, 进入回复路径说明短路漏了, 只能短句安抚『咦?签到这边没接到喵~再发一次』, "
+        f"5) 【签到/积分/好感】是程序命令短路, 进入回复路径说明短路漏了, 只能短句安抚{soothe}, "
         "绝不自己说『签到成功/+XX分』账务结论."
     )
 
@@ -207,8 +213,14 @@ def build_reply_self_check_prompt(no_reply_marker: str, split_marker: str) -> st
     )
 
 
-def build_qq_chat_rhythm_prompt(split_marker: str) -> str:
-    """碎句节奏 + 可爱密度专项。挂在 Layer A 稳定 prefix,prompt cache 友好。"""
+def build_qq_chat_rhythm_prompt(split_marker: str, persona=None) -> str:
+    """碎句节奏 + 可爱密度专项。挂在 Layer A 稳定 prefix,prompt cache 友好。
+
+    多人格: persona.chat_rhythm 非空时整段替换 (颜文字库/反例是纯猫娘内容);
+    None/catty → 原文本字节不变。
+    """
+    if persona is not None and getattr(persona, "chat_rhythm", None):
+        return persona.chat_rhythm.replace("{split_marker}", split_marker)
     # 主人 2026-05-28 C15-8d: 砍详细规则解释 (规则交给 self_check 第 5 步),
     # 只留颜文字按情绪分类库 + 反例对照 (这两个 self_check 没有, 是表达样本).
     return (

@@ -441,6 +441,24 @@ _VIBE_HINTS_ZH: dict[str, str] = {
     "lurker": "潜水寡言型:很少说话,这次开口可以稍微多一点反应表示在意,但别 overcooked",
 }
 
+# 多人格 (主人 2026-07-06): 非 catty 人格用的中性词典 — 保留分类智商, 去掉猫娘示例文案
+# (示例口吻由各 persona core_persona 自己教)。
+_VIBE_HINTS_NEUTRAL: dict[str, str] = {
+    "techie": "技术控:讲话偏认真求方案,回复时可以放开篇幅讲透,人格语气浓度降一点(开头反应+收尾即可,中间正经讲)",
+    "lewd_curious": "暧昧好奇:会试探擦边,按人格自己的涩度边界接梗或急刹车",
+    "complaint": "吐槽抱怨型:发『服了/无语/真烦/又来了』时**先顺毛共情**,不要立刻给方案",
+    "soft_care": "求安慰型:发『抱抱/摸摸/没事的/别难过』时主动温柔接住情绪,先陪着说话再看要不要给建议",
+    "serious": "认真讨论型:更想要可执行答案,情绪垫一句即可,主体给信息",
+    "nostalgia": "怀旧感伤型:聊『以前/小时候/再也回不去』时陪着软软回忆,**绝对不要『看开点』那种安慰式说教**",
+    "braggart": "炫耀晒图型:晒『我抽到/我赢了/给你看』时**夸到位**,可按人格风格带一点调侃",
+    "celebratory": "庆祝 high 型:发『终于搞定/yes/好耶』时**立刻一起 high**,不要泼冷水或冷静评价",
+    "curious": "好奇求科普型:发『这是啥/什么情况/我也想试』时**开头反应保留+稍微多讲两句**;别变 lecture",
+    "gossip": "八卦型:发『听说/真的假的/小道消息』时**凑过去吃瓜**陪着加戏,**绝对不要变成理性 fact-check 或泼冷水**",
+    "tease": "调侃挑逗型:喜欢互怼,你可以反挑但留底线",
+    "playful": "玩闹型:跟着节奏起哄/接梗/抽象,短句节奏拉满",
+    "lurker": "潜水寡言型:很少说话,这次开口可以稍微多一点反应表示在意,但别 overcooked",
+}
+
 
 def _bucket_msg_count(n: int) -> str:
     """主人 2026-05-29 Round 2: msg_count 分桶, 避免精确数字每次 +1 破坏 cache prefix.
@@ -463,17 +481,21 @@ def _bucket_confidence(c: int) -> str:
     return "低"
 
 
-def build_user_vibe_catalog_prompt() -> str:
+def build_user_vibe_catalog_prompt(persona=None) -> str:
     """Stable catalog for interpreting compact user-vibe pointers.
 
     主人 2026-05-31 cache: 旧版每轮在【对方画像】里重复塞一大段 vibe 解释文本,
     这部分其实是全局常量。拆到 pre-boundary cache 后, current turn 只留短 pointer,
     不降低画像智商, 也不让大段说明每轮 miss。
+    多人格: 非 catty 人格用中性词典 (同 persona 内仍是常量, byte-stable)。
     """
+    catalog = _VIBE_HINTS_ZH
+    if persona is not None and getattr(persona, "name", "catty") != "catty":
+        catalog = _VIBE_HINTS_NEUTRAL
     lines = [
         "【对方画像标签词典】若本轮出现【对方画像】短指针, 按这里解释 vibe 标签；只用于微调反应基调, 不要复述给对方听。"
     ]
-    for tag, hint in _VIBE_HINTS_ZH.items():
+    for tag, hint in catalog.items():
         lines.append(f"- {tag}: {hint}")
     return "\n".join(lines)
 

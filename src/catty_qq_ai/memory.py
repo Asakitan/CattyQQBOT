@@ -226,14 +226,36 @@ _SPECIAL_CARE_RULES = (
 )
 
 
-def build_memory_naming_rules() -> str:
-    """返回静态称呼/记忆通则 (cache prefix 用, byte-stable)。见 _MEMORY_NAMING_RULES。"""
-    return _MEMORY_NAMING_RULES
+def _is_catty_persona(persona) -> bool:
+    return persona is None or getattr(persona, "name", "catty") == "catty"
 
 
-def build_special_care_rules() -> str:
-    """返回特别关心静态规则 (cache prefix 用, byte-stable)。"""
-    return _SPECIAL_CARE_RULES
+def build_memory_naming_rules(persona=None) -> str:
+    """返回静态称呼/记忆通则 (cache prefix 用, byte-stable)。见 _MEMORY_NAMING_RULES。
+
+    多人格: 非 catty 人格去掉猫系颜文字建议行 (口吻由 persona 自己教)。
+    """
+    if _is_catty_persona(persona):
+        return _MEMORY_NAMING_RULES
+    lines = [ln for ln in _MEMORY_NAMING_RULES.splitlines() if "猫系颜文字" not in ln]
+    return "\n".join(lines)
+
+
+def build_special_care_rules(persona=None) -> str:
+    """返回特别关心静态规则 (cache prefix 用, byte-stable)。
+
+    多人格: 非 catty 人格把『笨猫』换成 char_name、去掉猫系『贴贴』措辞。
+    """
+    if _is_catty_persona(persona):
+        return _SPECIAL_CARE_RULES
+    char = getattr(persona, "char_name", "机器人")
+    return (
+        "特别关心规则:\n"
+        f"- special_care 只是更值得留意,不是强制回复;先看最后发言是否自然指向{char}。\n"
+        f"- 如果 ta 正在跟群友聊车/游戏/吃喝/工作/答题/互相@等不指向{char}的话题,不要抢话,输出 {NO_REPLY_MARKER}。\n"
+        "- 不要因为熟人就追每一句;一个话题接一次够了。\n"
+        f"- 不适合回复时只输出 {NO_REPLY_MARKER};最近没被理可轻微委屈/酸酸/嘴硬,但别抱怨或道德绑架。"
+    )
 
 
 class MemoryStore:
@@ -1703,17 +1725,19 @@ class MemoryStore:
             }
         return {}
 
-    def build_context(self, event: MessageEvent) -> str:
+    def build_context(self, event: MessageEvent, persona=None) -> str:
         if not self.enabled:
             return ""
+        # 多人格: 无「主人」概念的人格 (机机) 强制走 master=0 分支, 不给『主人』称呼指令
+        _owner_concept = persona is None or getattr(persona, "owner_concept", True)
         user_id = str(event.user_id)
         name = _sender_name(event)
         lines = [f"记忆与称呼参数: user={user_id}/{name}"]
 
         if isinstance(event, GroupMessageEvent):
             group_id = str(event.group_id)
-            title = self._title_for(user_id, group_id)
-            owner_ok = self._is_configured_owner(user_id, group_id)
+            title = self._title_for(user_id, group_id) if _owner_concept else "群友"
+            owner_ok = self._is_configured_owner(user_id, group_id) and _owner_concept
             if owner_ok:
                 lines.append(f"group={group_id};title={title};master=1;addr=主人/笨蛋主人/杂鱼主人")
             else:
@@ -1778,8 +1802,8 @@ class MemoryStore:
                         f"tools:profiles={len(members)};user_profile(QQ);recall(group)"
                     )
         elif isinstance(event, PrivateMessageEvent):
-            title = self._title_for(user_id)
-            owner_ok = self._is_configured_owner(user_id)
+            title = self._title_for(user_id) if _owner_concept else ""
+            owner_ok = self._is_configured_owner(user_id) and _owner_concept
             if owner_ok:
                 lines.append(f"private=1;title={title};master=1;addr=主人/笨蛋主人/杂鱼主人")
             else:

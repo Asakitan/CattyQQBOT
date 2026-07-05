@@ -674,9 +674,49 @@ def _sender_name(event: MessageEvent) -> str:
     return str(event.user_id)
 
 
+# ── 多人格唤醒词 (主人 2026-07-06) ──────────────────────────────────────
+# __init__.py 启动时注册 resolver (event → Persona); persona.trigger_prefixes 非 None 时
+# **整组替换** config 的猫娘唤醒词 (机机群喊"机机/发电机", 不认"猫猫/笨猫")。
+# 用 config 视图代理而不改 Config 本体: 本函数内所有 helper 都吃 config 参数, 透明生效。
+_PERSONA_RESOLVER = None
+
+
+def set_persona_resolver(fn) -> None:
+    global _PERSONA_RESOLVER
+    _PERSONA_RESOLVER = fn
+
+
+class _PersonaConfigView:
+    """只覆盖唤醒词两个字段, 其余属性透传底层 Config。"""
+    __slots__ = ("_base", "catty_trigger_prefixes", "catty_directed_keywords")
+
+    def __init__(self, base: Config, prefixes: list[str], keywords: list[str]) -> None:
+        object.__setattr__(self, "_base", base)
+        object.__setattr__(self, "catty_trigger_prefixes", prefixes)
+        object.__setattr__(self, "catty_directed_keywords", keywords)
+
+    def __getattr__(self, name: str):
+        return getattr(object.__getattribute__(self, "_base"), name)
+
+
+def _persona_config_view(event: MessageEvent, config: Config) -> Config:
+    if _PERSONA_RESOLVER is None:
+        return config
+    try:
+        persona = _PERSONA_RESOLVER(event)
+    except Exception:  # noqa: BLE001
+        return config
+    prefixes = getattr(persona, "trigger_prefixes", None) if persona is not None else None
+    if prefixes is None:
+        return config
+    keywords = getattr(persona, "directed_keywords", None) or prefixes
+    return _PersonaConfigView(config, list(prefixes), list(keywords))  # type: ignore[return-value]
+
+
 def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, *, replied_to_self: bool = False) -> ExtractedMessage | None:
     if not _allowed_by_config(event, config):
         return None
+    config = _persona_config_view(event, config)
 
     # 硬拦 @全体成员 的群广播:这种消息本质是通知/公告,不是对话,笨猫接话很出戏
     # (主人 2026-05-28 反馈:36进16 通知被笨猫回『不』,需要彻底屏蔽)。

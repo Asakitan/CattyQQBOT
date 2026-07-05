@@ -578,6 +578,12 @@ class Config(BaseModel):
     catty_user_titles: dict[str, str] = Field(default_factory=dict)
     catty_group_user_titles: dict[str, dict[str, str]] = Field(default_factory=dict)
 
+    # ── 多人格 (主人 2026-07-06): 群号→人格名映射 + 全局默认人格 ──
+    # 解析优先级: persona_override_store(/人格 命令) > group_personas[gid] > default_persona。
+    # 人格名见 personas.PERSONAS (catty / fadianji), 支持中文别名 (机机/笨猫)。
+    catty_group_personas: dict[str, str] = Field(default_factory=dict)
+    catty_default_persona: str = "catty"
+
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 

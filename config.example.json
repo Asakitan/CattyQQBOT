@@ -362,6 +362,10 @@
         "star_resonance_group_ids": [],
         "strinova_group_ids": []
     },
+    "persona": {
+        "default": "catty",
+        "group_personas": {}
+    },
     "proactive": {
         "enabled": true,
         "max_daily_per_group": 5,

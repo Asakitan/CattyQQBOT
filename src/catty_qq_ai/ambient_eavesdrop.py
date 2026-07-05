@@ -112,12 +112,12 @@ class AmbientStore:
 # ── prompt 注入 ──────────────────────────────────────────────────────────
 
 
-def build_ambient_prompt(messages: list[AmbientMessage]) -> str:
-    """构建 ambient prompt 段. 空 list 返回 ""(skip register)."""
+def build_ambient_prompt(messages: list[AmbientMessage], char_name: str = "笨猫") -> str:
+    """构建 ambient prompt 段. 空 list 返回 ""(skip register). 多人格: char_name 换标题."""
     if not messages:
         return ""
     now = time.time()
-    lines = ["【笨猫·周边对话 (ambient, 听到但没人直接叫你)】"]
+    lines = [f"【{char_name}·周边对话 (ambient, 听到但没人直接叫你)】"]
     for m in messages[-1:]:
         age_s = max(0.0, now - m.ts)
         if age_s < 120:

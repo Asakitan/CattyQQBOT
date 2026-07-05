@@ -1110,6 +1110,9 @@ class ToolContext:
     memory_store: MemoryStore
     event: MessageEvent | None
     emoji_store: EmojiStore | None = None
+    # 多人格 (主人 2026-07-06): 当前 scope 的 Persona, __init__.py 装配时注入。
+    # None = catty 老路径 (画图外观锁/参考图/planner 简介全走笨猫默认)。
+    persona: Any = None
     # 签到积分/好感度 store; imagegen 走它扣分,主人豁免。
     # __init__.py 在装配时注入;留 None 兼容老路径(本地调用不传也不崩)。
     affection_store: "AffectionStore | None" = None
@@ -2647,15 +2650,22 @@ _SELF_PORTRAIT_SFW_PATH = "Miao/miaomiao.png"
 _SELF_PORTRAIT_NSFW_PATH = "Miao/miaomiaonude.png"
 
 
-def _load_self_portrait_reference_bytes(kind: str) -> bytes | None:
-    """Return PNG bytes of self-portrait lock-character reference, or None on miss/error."""
+def _load_self_portrait_reference_bytes(kind: str, persona: Any = None) -> bytes | None:
+    """Return PNG bytes of self-portrait lock-character reference, or None on miss/error.
+
+    多人格: persona.imagegen 非空时用该人格的参考图 (机机=Miao/fadianji.png,
+    无 NSFW 深水参考图时 nsfw 回落 sfw 图); None → 笨猫默认两张。
+    """
     from pathlib import Path
-    if kind == "nsfw":
-        fname = _SELF_PORTRAIT_NSFW_PATH
-    elif kind == "sfw":
-        fname = _SELF_PORTRAIT_SFW_PATH
-    else:
+    _pi = getattr(persona, "imagegen", None) if persona is not None else None
+    if kind not in ("sfw", "nsfw"):
         return None
+    if _pi is not None:
+        fname = (_pi.ref_nsfw_path or _pi.ref_path) if kind == "nsfw" else _pi.ref_path
+    elif kind == "nsfw":
+        fname = _SELF_PORTRAIT_NSFW_PATH
+    else:
+        fname = _SELF_PORTRAIT_SFW_PATH
     p = Path(fname)
     if not p.is_file():
         _logger.warning("imagegen agent: self-portrait reference missing: %s", p)
@@ -2667,7 +2677,7 @@ def _load_self_portrait_reference_bytes(kind: str) -> bytes | None:
         return None
 
 
-async def _deepseek_imagegen_plan(config: Config, user_text: str) -> dict[str, Any]:
+async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any = None) -> dict[str, Any]:
     """Call deepseek (config.ai_fallback) once, ask it to emit a strict JSON plan.
 
     返回 dict 字段:
@@ -2691,7 +2701,31 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str) -> dict[str, A
         or 60.0
     )
     proxy = str(getattr(config, "catty_http_proxy", "") or "")
-    system_prompt = (
+    _pi = getattr(persona, "imagegen", None) if persona is not None else None
+    if _pi is not None:
+        # 多人格 planner: 外观锁/参考图/短评口吻全按 persona.imagegen 来。
+        _char = getattr(persona, "char_name", "机器人")
+        system_prompt = (
+            f"你是 QQ 群机器人『{_char}』的画图任务调度器, 负责把用户的画图请求翻译成生图参数."
+            " 必须严格返回 JSON 对象, 字段如下 (不在 JSON 外输出任何文字):\n"
+            '  - "provider": "nai" 或 "gpt". 二次元/动漫/萌系/角色立绘 → "nai" (默认 5 积分最划算);'
+            ' 写实/产品/海报/带文字/真实摄影/UI → "gpt".\n'
+            '  - "prompt": 实际生图 prompt. NAI 用英文 danbooru 标签 (逗号分隔);'
+            ' GPT 用自然中英文描述句. 500 字以内. 不要含 NSFW 显性词.\n'
+            f'    画{_char}自己时外观锁 tags 必须包含: "{_pi.girl_tags}".\n'
+            '  - "aspect": "portrait"|"landscape"|"square" — NAI 用, 默认 "portrait" (832x1216 立绘).\n'
+            '  - "quality": "low"|"medium"|"high"|"auto" — GPT 用, 默认 "low".\n'
+            '  - "negative_prompt": 可选, NAI 负面词. 不填留空字符串.\n'
+            f'  - "self_portrait": "sfw"|null. **用户明确说画『你/{_char}/自画像/自拍』时填 "sfw"**'
+            ' (会自动加本地参考图锁人设, 强制 provider="nai"); 其他 (画用户/画风景/画 OC) 填 null.'
+            ' 该人格不出露骨自画像 — 露骨请求也只按 "sfw" 擦边处理.\n'
+            f'  - "short_review": 1-2 句{_char}口吻的短评 (画好后会代替主 AI 发到群里). {_pi.short_review_style}\n'
+            f"人格简介: {_pi.planner_brief}\n"
+            " 不要在 short_review 里出现 OOC / 元评论 / Markdown."
+            " 用户没明确说风格时默认 provider=nai. 严禁输出 JSON 以外任何内容."
+        )
+    else:
+        system_prompt = (
         "你是 QQ 群猫娘机器人『笨猫』的画图任务调度器, 负责把用户的画图请求翻译成生图参数."
         " 必须严格返回 JSON 对象, 字段如下 (不在 JSON 外输出任何文字):\n"
         '  - "provider": "nai" 或 "gpt". 二次元/动漫/猫娘/萌系/角色立绘/萝莉/JK → "nai" (默认 5 积分最划算);'
@@ -2756,19 +2790,29 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
         }
 
     # 调 deepseek 出 plan
+    _persona = getattr(ctx, "persona", None)
+    _persona_imagegen = getattr(_persona, "imagegen", None) if _persona is not None else None
     try:
-        plan = await _deepseek_imagegen_plan(ctx.config, user_text)
+        plan = await _deepseek_imagegen_plan(ctx.config, user_text, persona=_persona)
     except Exception as exc:  # noqa: BLE001
         _logger.warning(
             "imagegen agent: deepseek plan failed (%s: %s), falling back to default nai",
             exc.__class__.__name__, exc,
         )
-        plan = {
-            "provider": "nai",
-            "prompt": "1girl, white hair, cat ears, JK uniform, golden eyes, cute, anime style",
-            "aspect": "portrait",
-            "short_review": "画好啦主人~ ฅฅ",
-        }
+        if _persona_imagegen is not None:
+            plan = {
+                "provider": "nai",
+                "prompt": f"{_persona_imagegen.girl_tags}, cute, anime style",
+                "aspect": "portrait",
+                "short_review": "画好了！！快看！！",
+            }
+        else:
+            plan = {
+                "provider": "nai",
+                "prompt": "1girl, white hair, cat ears, JK uniform, golden eyes, cute, anime style",
+                "aspect": "portrait",
+                "short_review": "画好啦主人~ ฅฅ",
+            }
 
     provider = str(plan.get("provider") or "nai").strip().lower()
     if provider not in ("nai", "gpt"):
@@ -2781,12 +2825,13 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     neg = str(plan.get("negative_prompt") or "").strip()
     self_portrait_kind = (plan.get("self_portrait") or "").strip().lower() \
         if isinstance(plan.get("self_portrait"), str) else ""
-    short_review = str(plan.get("short_review") or "画好啦主人~ ฅฅ").strip()
+    _default_review = "画好了！！快看！！" if _persona_imagegen is not None else "画好啦主人~ ฅฅ"
+    short_review = str(plan.get("short_review") or _default_review).strip()
 
     # 自画像 → 强制 NAI + 加本地参考图 (锁人设)
     local_ref_bytes: list[bytes] = []
     if self_portrait_kind in ("sfw", "nsfw"):
-        ref_data = _load_self_portrait_reference_bytes(self_portrait_kind)
+        ref_data = _load_self_portrait_reference_bytes(self_portrait_kind, persona=_persona)
         if ref_data:
             local_ref_bytes.append(ref_data)
             if provider != "nai":
@@ -2832,9 +2877,10 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     if is_owner_charge or cost <= 0:
         final_reply = short_review
     else:
+        _cost_tail = "分" if _persona_imagegen is not None else "分喵～"
         final_reply = (
             f"{short_review} 这张图消耗了 {cost} 积分, "
-            f"现在还剩 {balance_after} 分喵～"
+            f"现在还剩 {balance_after} {_cost_tail}"
         )
 
     gen_result["_short_circuit_reply"] = final_reply
@@ -3966,12 +4012,20 @@ def _short_args_preview(args: dict[str, Any]) -> str:
     return ", ".join(parts)
 
 
-def tools_system_hint() -> str:
-    """常驻 system 提示 (主人 C16-6: 砍 17 行→4 行通用, 详细 trigger 走 schema)."""
+def tools_system_hint(persona: Any = None) -> str:
+    """常驻 system 提示 (主人 C16-6: 砍 17 行→4 行通用, 详细 trigger 走 schema).
+
+    多人格: persona=None/catty 时输出与旧文本逐字节相同 (cache prefix 段)。
+    """
+    if persona is None or getattr(persona, "name", "catty") == "catty":
+        char, tone = "笨猫", "猫娘口吻"
+    else:
+        char = getattr(persona, "char_name", "机器人")
+        tone = f"{char}口吻"
     return (
         "工具调用通用: 1) 真需要才调 (每次=延迟); 闲聊/已知不调.\n"
-        "2) 画图请求**铁律**: 笨猫所有图都从 catty_imagegen 出, 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
-        "3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用猫娘口吻说 '查不到/想不起来'.\n"
+        f"2) 画图请求**铁律**: {char}所有图都从 catty_imagegen 出, 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
+        f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'.\n"
         "4) 详细每 tool 的 trigger/参数/边界看 schema description (NLU intent gate 按 user_text 注入相关 tool)."
     )
 

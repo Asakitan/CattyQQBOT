@@ -740,7 +740,11 @@ CATTY_CARD = CharacterCard(
 # 主人 2026-05-28 prompt 优化 C3d: character_book 拆 cache-stable 骨架 + dynamic hit pointer.
 # 骨架 (~3K, 完整 hardcoded entries 一次列出) → cache 友好, byte 稳定.
 # pointer (~100c, 本轮命中 id list) → dynamic, AI 自己从骨架里查对应 entry.
-def build_character_book_skeleton() -> str:
+def build_character_book_skeleton(
+    entries: tuple[CharacterBookEntry, ...] | None = None,
+    *,
+    char_name: str = "笨猫",
+) -> str:
     """character_book entries 骨架 — 只保留 constant entries (永远生效).
 
     主人 2026-05-29 Round 22: 砍关键词触发索引 (~1700c). keyword entries 命中时由
@@ -748,11 +752,15 @@ def build_character_book_skeleton() -> str:
     有这些 keys (BFS 命中机制本地完成, AI 看到注入即可). 总 skeleton ~530c.
 
     constant=True entries (唐猫/发言格式 ~2K) 完整保留 — 这些是核心人格私货.
+
+    主人 2026-07-06 多人格: entries=None → 笨猫 _CATTY_BOOK (默认路径字节不变);
+    非 catty persona 传自己的 entries + char_name。
     """
-    if not _CATTY_BOOK:
+    book = _CATTY_BOOK if entries is None else tuple(entries)
+    if not book:
         return ""
-    blocks: list[str] = ["【笨猫·角色私货库 character_book】"]
-    constant_entries = [e for e in _CATTY_BOOK if e.constant]
+    blocks: list[str] = [f"【{char_name}·角色私货库 character_book】"]
+    constant_entries = [e for e in book if e.constant]
     if constant_entries:
         blocks.append("\n— 常驻段 (始终生效) —")
         for entry in constant_entries:

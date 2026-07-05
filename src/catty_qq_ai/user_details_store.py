@@ -506,11 +506,13 @@ _FIELD_DISPLAY: dict[str, str] = {
 def build_user_details_prompt(
     details: dict[str, list[str]],
     user_display: str = "对方",
+    persona=None,
 ) -> str:
-    """构建 user details prompt 段. 空 details 返回 ""(skip register)."""
+    """构建 user details prompt 段. 空 details 返回 ""(skip register). 多人格: 示例称呼换掉."""
     if not details:
         return ""
-    lines = [f"【已知{user_display}的细节】(从历史对话自动学的, 可以主动 callback『主人之前不是说 X 嘛?』式):"]
+    callback_who = "主人" if persona is None or getattr(persona, "name", "catty") == "catty" else "你"
+    lines = [f"【已知{user_display}的细节】(从历史对话自动学的, 可以主动 callback『{callback_who}之前不是说 X 嘛?』式):"]
     for field, snippets in details.items():
         label = _FIELD_DISPLAY.get(field, field)
         lines.append(f"- {label}: {', '.join(snippets)}")

@@ -228,6 +228,23 @@ class TimeBucketContextStore:
             logger.warning(f"time_bucket_context: failed to write {scope}: {exc}")
             return False
 
+    def reset_scope(self, scope: str) -> bool:
+        """清空该 scope 的全部 bucket (内存 + 盘上)。多人格切换时用 —
+        旧人格口吻的历史摘要不能带进新人格 prompt。"""
+        if not scope:
+            return False
+        existed = self._data.pop(scope, None) is not None
+        self._loaded.discard(scope)
+        self._dirty.discard(scope)
+        try:
+            path = self._path(scope)
+            if path.is_file():
+                path.unlink()
+                existed = True
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"time_bucket_context: failed to delete {scope}: {exc}")
+        return existed
+
     def _path(self, scope: str) -> Path:
         return self._dir / f"{_sanitize_key_for_filename(scope)}.json"
 

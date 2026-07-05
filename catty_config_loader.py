@@ -908,6 +908,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GAME_CONTEXT_STAR_RESONANCE_GROUP_IDS", game_context.get("star_resonance_group_ids"), json_value=True)
     _set_env("CATTY_GAME_CONTEXT_STRINOVA_GROUP_IDS", game_context.get("strinova_group_ids"), json_value=True)
 
+    persona = _section(data, "persona")
+    _set_env("CATTY_DEFAULT_PERSONA", persona.get("default"))
+    _set_env("CATTY_GROUP_PERSONAS", persona.get("group_personas"), json_value=True)
+
     proactive = _section(data, "proactive")
     _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))
     _set_env("CATTY_PROACTIVE_MAX_DAILY_PER_GROUP", proactive.get("max_daily_per_group"))

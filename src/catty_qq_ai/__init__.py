@@ -223,6 +223,10 @@ catty_mood_store = CattyMoodStore(config.catty_memory_path)
 # 长期记忆。per-scope 200KB cap + LRU 压缩,落盘 scope_lorebooks.json。
 from .scope_lorebook import ScopeLorebookStore
 scope_lorebook_store = ScopeLorebookStore(config.catty_memory_path)
+# 多人格 (主人 2026-07-06): /人格 命令的 per-scope 覆盖持久化。
+# 解析优先级: override > config.catty_group_personas > catty_default_persona。
+from .persona_override_store import PersonaOverrideStore
+persona_override_store = PersonaOverrideStore(config.catty_memory_path)
 # Catty RAG: chromadb 向量记忆 — per-scope chat history 向量化 + 语义召回 top-K。
 # 让笨猫『记得久远的事』 — 关键词没命中但语义相近的旧对话也能召回。
 # graceful fallback: chromadb 未装时 store._enabled=False, add/query 全部 no-op。
@@ -3006,7 +3010,10 @@ def _event_is_owner(event: MessageEvent) -> bool:
 def _addr_user(event: MessageEvent) -> str:
     """返回当前消息发送者的合适称呼:owner 用『主人』,非 owner 用『你』。
     用于硬编码 bot 文案动态插入,避免误称群友为主人。
+    多人格: 无「主人」概念的人格 (机机) 对谁都用『你』。
     """
+    if not _persona_for_event(event).owner_concept:
+        return "你"
     return "主人" if _event_is_owner(event) else "你"
 
 
@@ -3014,6 +3021,23 @@ def _conversation_queue_key(event: MessageEvent) -> str:
     if isinstance(event, GroupMessageEvent):
         return f"group:{event.group_id}"
     return f"private:{event.user_id}"
+
+
+def _persona_for_scope(scope: str):
+    """scope → Persona 单一入口 (全文件禁止散装 resolve)。"""
+    from .personas import get_persona, resolve_persona_name
+    return get_persona(resolve_persona_name(
+        scope, config=config, override_store=persona_override_store,
+    ))
+
+
+def _persona_for_event(event: MessageEvent):
+    return _persona_for_scope(_conversation_queue_key(event))
+
+
+# 多人格唤醒词: extract_incoming_message 按 scope 换触发词 (机机群喊"机机"不喊"猫猫")
+from . import message_utils as _message_utils_mod
+_message_utils_mod.set_persona_resolver(_persona_for_event)
 
 
 def _next_recent_conversation_seq(key: str) -> int:
@@ -3573,40 +3597,46 @@ def _recent_context_window(
 # 主人 2026-05-29 Round 21: wake_context 拆 skeleton (静态引导, 进 cache prefix)
 # + lines (动态最近消息列表, 留 post-boundary). 之前合体段 5277 byte 是 miss 大头.
 # skeleton 内容跨任何 sender/scope/turn 100% byte-stable, 只引用 lines.
-_WAKE_CONTEXT_SKELETON = (
+_WAKE_CONTEXT_SKELETON_TPL = (
     "当前是由一条消息唤起的回复。下面 catty_wake_lines 段会给出本会话独立实时上下文 (按时间顺序整理并去重)。"
     "session chat history 已承载可缓存的主要最近问答; catty_wake_lines 只补充未进入 history 的邻近群聊差分。"
     "catty_wake_current 会指出本轮当前唤起消息; 当前用户消息正文仍以最后一条 user 为准。"
     "实时场景通常只有上文和当前消息，若没有下文不要臆造。"
-    "请先按 catty_wake_current 和最后一条 user 定位当前唤起消息的发言者、它 @/回复/指向的对象，以及最近笨猫自己的发言；"
+    "请先按 catty_wake_current 和最后一条 user 定位当前唤起消息的发言者、它 @/回复/指向的对象，以及最近{char}自己的发言；"
     "不要把别的群友发言误认成当前用户原文，也不要因为更早消息更热闹就偏离当前唤起消息。"
     "如果当前消息是在接前文、点名某个群友、要求评价某句称呼或梗，请结合上文选准回复目标；"
     "如果上下文显示是在让你攻击他人，保持轻度玩笑边界，不要升级辱骂。"
-    "如果上一条或近几条是笨猫自己刚刚向当前用户追问/邀请继续说话，而当前消息像回答或续聊，通常应该接住。"
+    "如果上一条或近几条是{char}自己刚刚向当前用户追问/邀请继续说话，而当前消息像回答或续聊，通常应该接住。"
 )
 
 
-def build_wake_context_skeleton() -> str:
-    """100% static — 跨 sender/scope/turn byte-stable. 进 cache prefix order=154."""
-    return _WAKE_CONTEXT_SKELETON
+def build_wake_context_skeleton(persona=None) -> str:
+    """per-persona static — 跨 sender/scope/turn byte-stable. 进 cache prefix order=154."""
+    char = getattr(persona, "char_name", "笨猫") if persona is not None else "笨猫"
+    return _WAKE_CONTEXT_SKELETON_TPL.format(char=char)
 
 
-_BOT_CONTINUATION_SKELETON = (
+_BOT_CONTINUATION_SKELETON_TPL = (
     "【catty_bot_continuation_skeleton】若本轮另有 catty_bot_continuation_params, 表示消息来自续聊窗口递送。"
-    "续聊资格≠自动续话, 仍要重新判断是否在跟笨猫对话。默认倾向 NO_REPLY; 只有两类明确信号才回复:"
-    "(1) 用户直接回答笨猫刚才的问题/继续同一话题; (2) 用户用第二人称、命令、调戏、追问或技术求助句式指向笨猫"
+    "续聊资格≠自动续话, 仍要重新判断是否在跟{char}对话。默认倾向 NO_REPLY; 只有两类明确信号才回复:"
+    "(1) 用户直接回答{char}刚才的问题/继续同一话题; (2) 用户用第二人称、命令、调戏、追问或技术求助句式指向{char}"
     "(如『你看看/你能不能/给我/帮我/怎么做/方案/方式』)。这些情况输出 NO_REPLY_MARKER:"
-    "用户转去和群友聊车/关税/游戏/吃喝/工作/八卦等不指向笨猫的话题, 与群友互相吐槽/帮答/@,"
-    "短情绪感叹(玩坏了/悲/笑死/哈/绷不住), 第三人称闲聊、自言自语、新话题但没指向笨猫、误触发。"
-    "不要因刚回过 ta 就抢话刷存在感。确实要回的技术求助: 先给可执行技术结论或最小方案, 再保持猫系口吻;"
+    "用户转去和群友聊车/关税/游戏/吃喝/工作/八卦等不指向{char}的话题, 与群友互相吐槽/帮答/@,"
+    "短情绪感叹(玩坏了/悲/笑死/哈/绷不住), 第三人称闲聊、自言自语、新话题但没指向{char}、误触发。"
+    "不要因刚回过 ta 就抢话刷存在感。确实要回的技术求助: 先给可执行技术结论或最小方案, 再保持{style};"
     "必须优先覆盖用户句尾请求目标。『能不能用 A 给我一个 B 的方式/方案』先答 B, 再说明 A 链路可行性和注意点。"
     "群消息『昵称(QQ): 正文』里冒号后就是用户完整原文; 正文已成完整问题就按原文回答, 不要说只看到几个词/消息被吃掉/要求重发。"
 )
 
 
-def build_bot_continuation_skeleton() -> str:
-    """100% static continuation rules — 每轮常驻 cache, 动态只留 remaining 指针。"""
-    return _BOT_CONTINUATION_SKELETON
+def build_bot_continuation_skeleton(persona=None) -> str:
+    """per-persona static continuation rules — 每轮常驻 cache, 动态只留 remaining 指针。"""
+    if persona is None or getattr(persona, "name", "catty") == "catty":
+        char, style = "笨猫", "猫系口吻"
+    else:
+        char = getattr(persona, "char_name", "机器人")
+        style = "人格口吻"
+    return _BOT_CONTINUATION_SKELETON_TPL.format(char=char, style=style)
 
 
 def _wake_context_prompt(
@@ -3735,6 +3765,10 @@ def _bot_continuation_judgement_prompt(event: MessageEvent) -> str:
 
 
 def _configured_title(event: MessageEvent) -> str:
+    # 多人格: 称号映射 (主人/特别称呼) 是笨猫语境的, 无「主人」概念的人格 (机机) 全部跳过,
+    # 让 {{user}}/display 回落到真实昵称 — 否则 fadianji 会把 owner 渲染成『主人』。
+    if not _persona_for_event(event).owner_concept:
+        return ""
     user_id = str(event.user_id)
     if isinstance(event, GroupMessageEvent):
         group_title = config.catty_group_user_titles.get(str(event.group_id), {}).get(user_id)
@@ -4239,16 +4273,20 @@ def _build_user_content(incoming: ExtractedMessage, *, image_description: str | 
     return f"{incoming.history_content}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
 
 
-def _build_emoji_skeleton_text() -> str:
-    """主人 2026-05-29 Round 23: 100% byte-stable emoji 规则段, register 到 cache prefix.
+def _build_emoji_skeleton_text(persona=None) -> str:
+    """主人 2026-05-29 Round 23: per-persona byte-stable emoji 规则段, register 到 cache prefix.
 
     跨 sender/scope/turn/image 字节稳定 — 进 cache prefix 后所有发 emoji 上下文的请求
-    都命中这部分, 不再每轮重发 ~520c.
+    都命中这部分, 不再每轮重发 ~520c. 多人格: 非 catty 只换措辞两处, 规则不变。
     """
+    if persona is None or getattr(persona, "name", "catty") == "catty":
+        lib_label, scene_line = "猫娘表情包", "被夸 / 撒娇 / 害羞 / 傲娇炸毛 / 接梗绷不住 / 贴贴黏人 / 玩闹起哄 / 被反撩"
+    else:
+        lib_label, scene_line = "表情包", "被夸 / 撒娇 / 害羞 / 炸毛 / 接梗绷不住 / 玩闹起哄 / 被反撩"
     return (
-        "本地表情库（猫娘表情包）由你自己判断要不要发——**不要每条都发，也不要从来不发**，"
+        f"本地表情库（{lib_label}）由你自己判断要不要发——**不要每条都发，也不要从来不发**，"
         "大约每 3~5 条对话挑一条情绪/反应最浓的那条才发，普通陈述、连续刚发过表情、信息密集解释都不发。"
-        "适合发的场景：被夸 / 撒娇 / 害羞 / 傲娇炸毛 / 接梗绷不住 / 贴贴黏人 / 玩闹起哄 / 被反撩——"
+        f"适合发的场景：{scene_line}——"
         "情绪明显且加表情真能强化语气时才发；只是顺嘴说话不发。"
         "想发就在回复正文末尾**独占一行**字面输出："
         f"{EMOJI_QUERY_PREFIX}你的表情意图{EMOJI_QUERY_SUFFIX}"
@@ -4779,6 +4817,10 @@ async def _build_messages(
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
 
+    # 多人格 (主人 2026-07-06): 每次 _build_messages 只 resolve 一次, 贯穿全函数 + ctx.
+    # catty 下全部 `_persona.x or 旧内容` 落到旧内容, 前缀字节不变。
+    _persona = _persona_for_scope(key)
+
     # 主人 2026-05-28 phase 5: per-request NLU cache. 同一条 incoming.text 之前
     # 被 embed 3-4 次 (detect_topics + score_user_message + detect_trend centroid),
     # 浪费 ~150ms/reply. 在 _build_messages 入口 bind contextvar, 整个 pipeline 内
@@ -4809,13 +4851,13 @@ async def _build_messages(
     # cold start, 之后私聊新前缀仍 100% byte-stable (后续段 tools_hint/core_persona 全是常量)。
     # 此处 _is_private_event 尚未定义 (在 4526 行), 就地用 isinstance(event, GroupMessageEvent)。
     if isinstance(event, GroupMessageEvent):
-        messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
+        messages.append({"role": "system", "content": _reply_gate_approved_prompt(_persona)})
 
     # ─── Layer B: function calling tools 提示常驻挂载 ───
     # web_search/nsfw_search/meme 全部走 tools 字段(OpenAI function calling),
     # 旧的 [[CATTY_WEB_SEARCH]] / [[CATTY_NSFW_SEARCH]] / <<<CATTY_MEME>>> 文本 marker 教学已废弃。
     if getattr(config, "catty_tools_enabled", True):
-        messages.append({"role": "system", "content": tools_system_hint()})
+        messages.append({"role": "system", "content": tools_system_hint(_persona)})
 
     # ─── Layer D: 按事件可能变(image_literacy 已迁到 register_catty_persona,这里走 has_image flag) ───
     # 主人 2026-05-28: cache 修复 — 所有 per-sender / per-Lv 动态 prompt 必须**延后到
@@ -4825,7 +4867,7 @@ async def _build_messages(
     _deferred_pre_persona_segments: list[tuple[str, str, int]] = []  # (identifier, content, order)
     if _force_direct_reply_enabled(event, incoming):
         _deferred_pre_persona_segments.append(
-            ("catty_force_direct_reply", _direct_reply_required_prompt(incoming), 489)
+            ("catty_force_direct_reply", _direct_reply_required_prompt(incoming, _persona), 489)
         )
     # 主人 2026-05-29 Round 23: semantic_reply_split prompt 内容 byte-stable
     # (除 max_chunks 是 config 常量), 跨 sender/scope/turn 都一样, 进 cache prefix 155.
@@ -4838,7 +4880,7 @@ async def _build_messages(
         ))
     if incoming.opportunistic or group_filter_context:
         _deferred_pre_persona_segments.append(
-            ("catty_opportunistic_reply", _opportunistic_reply_prompt(), 491)
+            ("catty_opportunistic_reply", _opportunistic_reply_prompt(_persona), 491)
         )
     if _soft_directed(incoming):
         probability, memory_boost_reason = _soft_directed_reply_probability(event, incoming)
@@ -4873,7 +4915,8 @@ async def _build_messages(
         _affection_hint_text = _build_rel_params(
             _user_affection_level, is_owner=_user_is_owner,
         ) or ""
-        if _affection_hint_text:
+        # 多人格: 关系亲密度骨架被禁的人格 (机机) 连 Lv 指针也不注入 (指针引用骨架, 单独出现只会困惑)
+        if _affection_hint_text and not _persona.segment_disabled("catty_relationship_skeleton"):
             _deferred_pre_persona_segments.append(
                 ("catty_relationship_params", _affection_hint_text, 484)
             )
@@ -4992,6 +5035,7 @@ async def _build_messages(
     )
     _register_catty_persona(_st_manager, {
         "config": config,
+        "persona": _persona,  # 多人格: 内容源 + 段黑名单 (catty=None 字段全走老路径)
         "scope": _arc_scope,
         # 主人 2026-05-29 (P2): 群聊默认沉默段按 scope 注入用 (私聊不注册群聊沉默块)。
         "is_group": isinstance(event, GroupMessageEvent),
@@ -5006,7 +5050,7 @@ async def _build_messages(
         "is_owner": _user_is_owner,
         "has_image": bool(image_description),
         "image_description": image_description or "",
-        "story_arc_store": story_arc_store,
+        "story_arc_store": None if _persona.feature_disabled("story_arc") else story_arc_store,
         "no_reply_marker": NO_REPLY_MARKER,
         "reply_split_marker": REPLY_SPLIT_MARKER,
         "system_prompt": system_prompt,
@@ -5022,7 +5066,7 @@ async def _build_messages(
         "mood_overlay_store": mood_overlay_store,
         "user_id": str(event.user_id),
         # Catty mood: 让 register_catty_persona 用 scope 拉当前 mood 注入 prompt
-        "catty_mood_store": catty_mood_store,
+        "catty_mood_store": None if _persona.feature_disabled("mood") else catty_mood_store,
         # Scope lorebook: AI 5.5 学到的『这个群专属小事』, _build_character_book BFS pool 里
         # 跟 hardcoded character_book 一起递归扫描, 命中时刷 hit_count。
         "scope_lorebook_store": scope_lorebook_store,
@@ -5044,7 +5088,10 @@ async def _build_messages(
                 "【当前发言者】",
                 f"- 这条消息的发言者: {_sender_text} (QQ {_sender_qq})",
             ]
-            if _user_is_owner:
+            if not _persona.owner_concept:
+                # 多人格: 无「主人」概念的人格 (如机机) — 部署者也无称呼特权。
+                _sender_info_lines.append("- 群里的用户, 按人格设定的称呼习惯称呼, 不叫『主人』.")
+            elif _user_is_owner:
                 _sender_info_lines.append("- 这是**主人**本人, 必须用『主人 / 笨蛋主人 / 杂鱼主人』称呼.")
             else:
                 _sender_info_lines.append(
@@ -5112,7 +5159,7 @@ async def _build_messages(
     try:
         _st_manager.register_static(
             "catty_wake_context_skeleton",
-            build_wake_context_skeleton(),
+            build_wake_context_skeleton(_persona),
             order=154,
         )
     except Exception:  # noqa: BLE001
@@ -5122,7 +5169,7 @@ async def _build_messages(
     try:
         _st_manager.register_static(
             "catty_bot_continuation_skeleton",
-            build_bot_continuation_skeleton(),
+            build_bot_continuation_skeleton(_persona),
             order=154,
         )
     except Exception:  # noqa: BLE001
@@ -5132,7 +5179,7 @@ async def _build_messages(
     try:
         _st_manager.register_static(
             "catty_semantic_reply_split_skeleton",
-            _semantic_reply_split_prompt(),
+            _semantic_reply_split_prompt(_persona),
             order=155,
         )
     except Exception:  # noqa: BLE001
@@ -5143,7 +5190,7 @@ async def _build_messages(
     try:
         _st_manager.register_static(
             "catty_emoji_skeleton",
-            _build_emoji_skeleton_text(),
+            _build_emoji_skeleton_text(_persona),
             order=156,
         )
     except Exception:  # noqa: BLE001
@@ -5177,7 +5224,7 @@ async def _build_messages(
         _st_manager.register_static("catty_recent_tools", _recent_tools_ctx, order=650)
     # 记忆 + 最近图片回指
     try:
-        _memory_ctx = memory_store.build_context(event)
+        _memory_ctx = memory_store.build_context(event, persona=_persona)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"memory_store.build_context failed: {exc}")
         _memory_ctx = ""
@@ -5186,13 +5233,13 @@ async def _build_messages(
     # 主人 2026-05-29 P4: 静态称呼/记忆通则进 cache prefix (从 build_context 抽出, byte-stable).
     try:
         from .memory import build_memory_naming_rules as _build_mem_rules
-        _st_manager.register_static("catty_memory_rules", _build_mem_rules(), order=162)
+        _st_manager.register_static("catty_memory_rules", _build_mem_rules(_persona), order=162)
     except Exception as _mr_exc:  # noqa: BLE001
         logger.debug(f"catty_memory_rules register failed: {_mr_exc}")
     if special_care_context:
         try:
             from .memory import build_special_care_rules as _build_special_care_rules
-            _st_manager.register_static("catty_special_care_rules", _build_special_care_rules(), order=163)
+            _st_manager.register_static("catty_special_care_rules", _build_special_care_rules(_persona), order=163)
         except Exception as _scr_exc:  # noqa: BLE001
             logger.debug(f"catty_special_care_rules register failed: {_scr_exc}")
     if not incoming.has_image:
@@ -5339,12 +5386,21 @@ async def _build_messages(
     # 可通过 catty_prompts_disabled = ["catty_first_mes"] 关闭。
     if is_cold_session and "catty_first_mes" not in (getattr(config, "catty_prompts_disabled", None) or []):
         try:
-            from .character_card import get_first_mes as _get_first_mes
-            _first_mes = _get_first_mes(ctx={
-                "char": "笨猫", "user": _user_real_display,
+            _first_mes_ctx = {
+                "char": _persona.char_name, "user": _user_real_display,
                 "group": _group_real_display,
                 "last_active_at": _last_active_at,
-            }, user_display=_user_real_display)
+            }
+            if _persona.first_mes is not None:
+                from .character_card import render_macros as _render_macros
+                _first_mes = _render_macros(
+                    _persona.first_mes,
+                    char_name=_persona.char_name, user_display=_user_real_display,
+                    group=_group_real_display, last_active_at=_last_active_at,
+                )
+            else:
+                from .character_card import get_first_mes as _get_first_mes
+                _first_mes = _get_first_mes(ctx=_first_mes_ctx, user_display=_user_real_display)
             if _first_mes and _first_mes.strip():
                 messages.append({"role": "assistant", "content": _first_mes})
         except Exception as exc:  # noqa: BLE001
@@ -5403,7 +5459,7 @@ async def _build_messages(
             from .catty_persona_reminder import should_inject_reminder, build_reminder_text
             _n = int(getattr(config, "catty_persona_reminder_every_n_turns", 6))
             if should_inject_reminder(key, _n):
-                _pending_persona_reminder_note = AuthorNote(content=build_reminder_text(), depth=2)
+                _pending_persona_reminder_note = AuthorNote(content=build_reminder_text(_persona), depth=2)
     except Exception as _pr_exc:  # noqa: BLE001
         logger.debug(f"persona_reminder collect failed (non-fatal): {_pr_exc}")
     # PHI 已在 P5.1+P5.2 内嵌 catty_core_persona, 不再独立 register.
@@ -5445,6 +5501,17 @@ async def _build_messages(
     _sticky_until = _NSFW_STICKY_BY_SCOPE.get(_sticky_key, 0.0)
     _sticky_active = _now < _sticky_until
     _hit_deep = _is_deep_nsfw(_utxt)
+    # 多人格 (主人 2026-07-06): 该人格禁用 NSFW 深水路径 (如机机=擦边玩梗为主) →
+    # 深水词/sticky 单闸短路: 不进 spark、不 grant、不破禁、不援交, 擦边话题由
+    # core_persona 的边界规则(自己急刹车)处理。函数尾部另有 prefer_spark 兜底钳制。
+    _nsfw_deep_allowed = not _persona.feature_disabled("nsfw_spark")
+    if not _nsfw_deep_allowed:
+        _hit_deep = False
+        if _sticky_active:
+            _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
+            _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
+            _NSFW_EXIT_FLAG_COUNT.pop(_sticky_key, None)
+            _sticky_active = False
     # 主人原话『2 分钟内都 NSFW, 但是判定到结束就直接结束』:
     # closing intent (好了/累了/睡吧) → 显式 user 信号, 立即退 sticky.
     # 主人 2026-05-30: 删掉旧『浅词 idle counter』退出 — 它靠 user 关键词误判, 会在场景还热时
@@ -5618,7 +5685,7 @@ async def _build_messages(
     # Owner cuckold 指令 (@某群友 + 出轨触发词) → 进 cuckold mode
     _owner_cuckold_target_id = ""
     _owner_cuckold_target_nick = ""
-    if _user_is_owner and _at_user_targets:
+    if _user_is_owner and _at_user_targets and _nsfw_deep_allowed:
         try:
             from .nsfw_phase import parse_cuckold_command as _parse_cuck
             _cuck_uid = _parse_cuck(_utxt, [uid for uid, _ in _at_user_targets])
@@ -5663,7 +5730,8 @@ async def _build_messages(
             close_paid_sticky as _close_paid_sticky,
         )
         # 援交 sticky 续杯: 好友申请『包养』自动接收 / 上次援交开的窗口未过期 → 复用 meta 不重复扣分
-        _paid_sticky_meta = None if _user_is_owner else _get_paid_sticky(_sticky_key)
+        # 多人格: nsfw_spark 禁用的人格 (机机) 不走援交路径 (含 sticky 复活/关键词).
+        _paid_sticky_meta = None if (_user_is_owner or not _nsfw_deep_allowed) else _get_paid_sticky(_sticky_key)
         # closing intent (好了/累了/睡吧) → 提前关窗, 落回普通处理 (跟 NSFW sticky 同语义)
         if _paid_sticky_meta is not None and _is_nsfw_closing(_utxt):
             _close_paid_sticky(_sticky_key)
@@ -5675,8 +5743,8 @@ async def _build_messages(
                 pass
             _paid_sticky_meta = None
             logger.info(f"chat: PAID NSFW sticky closing intent → exit (user={event.user_id}, hit='{_utxt[:30]}')")
-        _paid_kw_hit = _is_paid_trigger(_utxt)
-        _premium_kw_hit = _is_group_premium(_utxt)
+        _paid_kw_hit = _nsfw_deep_allowed and _is_paid_trigger(_utxt)
+        _premium_kw_hit = _nsfw_deep_allowed and _is_group_premium(_utxt)
         if _paid_sticky_meta is not None:
             _paid_nsfw_active = True
             _paid_is_continuation = True
@@ -6423,7 +6491,8 @@ async def _build_messages(
     # 之前 pregnancy + scene 只在 spark 路径注入, 主路径 (sonnet/日常对话) 完全看不到:
     # 笨猫不知道自己怀孕了、不知道自己在床上/桌上/浴室、穿着什么衣服.
     # 现在给主路径也注入 (精简版, 不影响 cache prefix).
-    if not prefer_spark:
+    # 多人格: 怀孕/NSFW 场景状态是笨猫全局共享状态, 非 catty 人格 (机机) 不注入.
+    if not prefer_spark and not _persona.feature_disabled("pregnancy"):
         # 1. 怀孕状态注入
         try:
             from .pregnancy_store import build_pregnancy_hint as _build_preg_hint_main
@@ -6714,18 +6783,30 @@ def _expression_repeat_message(bot: Bot, event: MessageEvent) -> Message | None:
     return None
 
 
-def _semantic_reply_split_prompt() -> str:
+def _semantic_reply_split_prompt(persona=None) -> str:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
+    _is_catty = persona is None or getattr(persona, "name", "catty") == "catty"
+    if _is_catty:
+        _neg = (
+            "**反例**（过度拆，禁止这样）：『这个表情猫猫看到了』『呆呆小仓鼠那张嘛』『但题目那张没识别出』『主人重发』"
+            "——一个完整想法被切碎，应合成一条：『这个表情看到啦～呆呆小仓鼠那张挺无辜，但题目那张没识别出，主人重发一次猫猫马上做』。"
+            "**正例**（自然拆 3 条）：『哈？？』『主人你这题也太缺德了喵』『猫猫平时是优雅蹲坑型，尾巴盘好、结束还要疯狂埋埋，绝不承认会炸毛喵！』"
+            "——『反应』『吐槽』『话题展开』三个真实轮次。"
+        )
+    else:
+        _neg = (
+            "**反例**（过度拆，禁止这样）：『这个表情看到了』『那张挺可爱』『但题目那张没识别出』『重发一下』"
+            "——一个完整想法被切碎，应合成一条：『这个表情看到啦！那张挺可爱，但题目那张没识别出，重发一次马上做！！』。"
+            "**正例**（自然拆 3 条）：『哈？？』『你这题也太缺德了！！』『行吧我认真看一眼…（并看不懂）』"
+            "——『反应』『吐槽』『话题展开』三个真实轮次。"
+        )
     return (
         "QQ 回复分段规则——按真实人类节奏拆，不要过度拆碎也不要全挤一团："
         "判断标准：把回复念出来，听起来像『一气呵成』还是『有几个独立轮次』？"
         "【一气呵成 → 单条】几个短句串成一个完整想法（看到图+评论这张+说没识别+让重发，全是同一个意思的展开），"
         "用逗号/句号连成一条 QQ 消息发，不要每短句单切。"
         "【真有几个轮次 → 拆 2~3 条】对前文的强反应 + 接下来要说的新事情；技术结论 + 后续追问；强情绪 + 话题展开。"
-        "**反例**（过度拆，禁止这样）：『这个表情猫猫看到了』『呆呆小仓鼠那张嘛』『但题目那张没识别出』『主人重发』"
-        "——一个完整想法被切碎，应合成一条：『这个表情看到啦～呆呆小仓鼠那张挺无辜，但题目那张没识别出，主人重发一次猫猫马上做』。"
-        "**正例**（自然拆 3 条）：『哈？？』『主人你这题也太缺德了喵』『猫猫平时是优雅蹲坑型，尾巴盘好、结束还要疯狂埋埋，绝不承认会炸毛喵！』"
-        "——『反应』『吐槽』『话题展开』三个真实轮次。"
+        f"{_neg}"
         f"拆分方法两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
         "被拆的前几条结尾少用句号/感叹号，自然些。"
         f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
@@ -6734,34 +6815,51 @@ def _semantic_reply_split_prompt() -> str:
     )
 
 
-def _opportunistic_reply_prompt() -> str:
+def _gate_prompt_names(persona=None) -> tuple[str, str, str]:
+    """接话判断 prompt 的 persona 插值三元组 (正式名, 昵称, 口吻短语)。
+
+    多人格 (主人 2026-07-06): persona=None / catty 时返回原文用词
+    ("笨猫"/"猫猫"/"用笨猫口吻") — 下面三个 prompt 函数 f-string 插值后
+    与旧硬编码文本逐字节相同, cache 前缀不变。
+    """
+    if persona is None or persona.name == "catty":
+        return "笨猫", "猫猫", "用笨猫口吻"
+    char = persona.char_name
+    style = persona.reply_gate_style or f"用{char}口吻"
+    return char, char, style
+
+
+def _opportunistic_reply_prompt(persona=None) -> str:
+    _, nick, _ = _gate_prompt_names(persona)
     return (
         "这是由普通群聊、特别关心或批量观察进入主 AI 判断的消息。"
-        f"请先判断当前消息是不是在跟猫猫说话；如果只是 A 对 B、第三人称聊你、顺手提到你、误触发或没人期待你接话，只输出 {NO_REPLY_MARKER}。"
+        f"请先判断当前消息是不是在跟{nick}说话；如果只是 A 对 B、第三人称聊你、顺手提到你、误触发或没人期待你接话，只输出 {NO_REPLY_MARKER}。"
     )
 
 
-def _reply_gate_approved_prompt() -> str:
+def _reply_gate_approved_prompt(persona=None) -> str:
     # 名字带 "reply_gate" 是历史遗留 — 2026-05-27 reply gate 已停, 但本函数返回的
     # NO_REPLY 决策 prompt 仍然在用 (给主 AI 看的接话引导, 不是本地 critic).
     # → 去掉「本轮消息已经通过入口唤起…交给主 AI 结合上下文判断」这种 system 元描述,
     #   只留必要的 NO_REPLY 决策规则。判断本身仍然要模型做(避免无脑接所有消息),
     #   但不再 leak 内部 gate 状态给模型让它"思考半天该不该回"。
+    char, _, style = _gate_prompt_names(persona)
+    owner_term = "主人" if (persona is None or persona.name == "catty") else "熟人"
     return (
-        "**接话判断**: 看上一轮笨猫是不是刚回过——"
+        f"**接话判断**: 看上一轮{char}是不是刚回过——"
         "如果上轮已经接过一句, 这轮 user 只是顺势感叹/吐槽/接刚才那句话的余韵 "
-        "(『玩坏了』『悲』『笑死』『哈』『绷不住』这种没指向笨猫的短情绪/感叹/吐槽), "
+        f"(『玩坏了』『悲』『笑死』『哈』『绷不住』这种没指向{char}的短情绪/感叹/吐槽), "
         f"或群友在评论你的回答而不是继续问你 — 输出 {NO_REPLY_MARKER}, 让对话自然落幕, 不追着接话。"
-        "**主人/特别关心 user 在跟群里其他人对话时也要 NO_REPLY** — "
-        "主人和群友聊比亚迪/关税/游戏/吃喝、互相吐槽、互相帮答、互相 @ — "
-        f"话题不指向你、没问你、没求你做事 → 输出 {NO_REPLY_MARKER}, 让主人专心跟群友聊, 不抢话刷存在感。"
-        f"另外这些也输出 {NO_REPLY_MARKER}: 误触发、重复回复同一条、A 对 B 说话、第三人称提到笨猫、顺手 @ 你但内容不是问你。"
-        "**真的在等笨猫接话时才回**: 直接问笨猫问题、明确求笨猫做事、新一轮主动喊笨猫、群里冷场期待笨猫起话。"
-        "信息不足时用笨猫口吻短短追问。"
+        f"**{owner_term}/特别关心 user 在跟群里其他人对话时也要 NO_REPLY** — "
+        f"{owner_term}和群友聊比亚迪/关税/游戏/吃喝、互相吐槽、互相帮答、互相 @ — "
+        f"话题不指向你、没问你、没求你做事 → 输出 {NO_REPLY_MARKER}, 让{owner_term}专心跟群友聊, 不抢话刷存在感。"
+        f"另外这些也输出 {NO_REPLY_MARKER}: 误触发、重复回复同一条、A 对 B 说话、第三人称提到{char}、顺手 @ 你但内容不是问你。"
+        f"**真的在等{char}接话时才回**: 直接问{char}问题、明确求{char}做事、新一轮主动喊{char}、群里冷场期待{char}起话。"
+        f"信息不足时{style}短短追问。"
     )
 
 
-def _direct_reply_required_prompt(incoming: ExtractedMessage) -> str:
+def _direct_reply_required_prompt(incoming: ExtractedMessage, persona=None) -> str:
     reasons: list[str] = []
     if incoming.mentioned:
         reasons.append("用户明确 @ 你")
@@ -6772,12 +6870,13 @@ def _direct_reply_required_prompt(incoming: ExtractedMessage) -> str:
     if incoming.directed_strength == "direct_address":
         reasons.append("本地判断是直接喊名/叫你办事")
     reason_text = "、".join(reasons) or "这是私聊或明确对你说话"
+    _, nick, style = _gate_prompt_names(persona)
     # 主人 2026-05-31 L3 cache: 压字节降每轮 miss(reply-gate 永远 inline 在 current user
     # 尾部进不了 cache 前缀), 保留全部接话/NO_REPLY 判断语义.
     return (
         f"必须回复场景（{reason_text}）：一般接话；"
-        f"若重复回复同一条/顺手@到猫猫/A对B说话/误触发则输出 {NO_REPLY_MARKER}；"
-        "信息不足就用笨猫口吻短追问。"
+        f"若重复回复同一条/顺手@到{nick}/A对B说话/误触发则输出 {NO_REPLY_MARKER}；"
+        f"信息不足就{style}短追问。"
     )
 
 
@@ -8515,6 +8614,9 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         return False
     scope = _conversation_queue_key(event)
     user_id = str(event.user_id)
+    # 多人格: CPU 引擎回复模板全是猫娘文案, 非 catty 人格直接透传主 AI.
+    if _persona_for_scope(scope).feature_disabled("cpu_engine"):
+        return False
     # 主人 2026-05-30『NSFW 不关 CPU 的事』: 在加载 router / 跑任何 CPU 逻辑之前先问 NSFW gate,
     # 命中就直接透传给主 AI / DeepSeek spark, CPU 完全不介入 (不 load router, 不 route_sync)。
     if _is_nsfw_context(scope, user_id, text):
@@ -8785,6 +8887,9 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
 async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
         return False
+    # 多人格: keyword_replies 固定文案是猫娘口吻, 非 catty 人格不触发.
+    if _persona_for_event(event).feature_disabled("keyword_replies"):
+        return False
     # scope 用会话级 key("group:{id}" / "private:{id}"),让 cooldown_seconds 字段
     # 按"群为单位"生效 —— 同群内 N 秒内同一关键词规则不会重复触发。
     reply = _keyword_reply_for_text(
@@ -8798,6 +8903,27 @@ async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> 
 
 
 _VIBE_CMD_RE = re.compile(r"^\s*/?(vibe_show|vibe_reset)(?:\s+(\d{4,12}))?\s*$", re.IGNORECASE)
+# 多人格 (主人 2026-07-06) 主人 only 命令:
+#   /人格            查当前 scope 人格 + 可用列表
+#   /人格 机机       切到 fadianji (persona_override_store 持久化, 优先级 > config 群映射)
+#   /人格 默认       清除 override, 回落 config 群映射 / 全局默认
+_PERSONA_CMD_RE = re.compile(r"^\s*/人格(?:\s+(\S{1,20}))?\s*$")
+
+
+async def _persona_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """主人 only 的 /人格 切换命令。非主人发送时静默不 block (落回普通聊天)。"""
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    if not _event_is_owner(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    match = _PERSONA_CMD_RE.match(text)
+    if not match:
+        return False
+    state["catty_persona_cmd_arg"] = (match.group(1) or "").strip()
+    return True
 # 主人 only 的 affection 管理命令: 改别人的签到/积分/经验状态。
 #   /aff_show <qq>             查概况
 #   /aff_reset_signin <qq>     重置某用户"今日已签到"标记(让他能再签一次)
@@ -8961,6 +9087,9 @@ async def _affection_command_rule(bot: Bot, event: MessageEvent, state: T_State)
     """
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
         return False
+    # 多人格: 签到/积分命令的回复文案是猫娘模板, 非 catty 人格不接管 (落回主 AI 用人格口吻回).
+    if _persona_for_event(event).feature_disabled("affection_commands"):
+        return False
     text = event_plain_text(event)
     if not text:
         return False
@@ -8984,6 +9113,9 @@ async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
     if not legs_picker.enabled:
         return False
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    # 多人格: 腿图是笨猫本人的照片库, 非 catty 人格不发
+    if _persona_for_event(event).feature_disabled("legs_picture"):
         return False
     text = event_plain_text(event)
     if not is_legs_trigger(text):
@@ -9012,6 +9144,7 @@ vibe_command_matcher = on_message(rule=_vibe_command_rule, priority=43, block=Tr
 aff_admin_matcher = on_message(rule=_aff_admin_rule, priority=44, block=True)
 catty_status_matcher = on_message(rule=_catty_status_rule, priority=45, block=True)
 lore_cmd_matcher = on_message(rule=_lore_cmd_rule, priority=46, block=True)
+persona_cmd_matcher = on_message(rule=_persona_cmd_rule, priority=48, block=True)
 evolution_cmd_matcher = on_message(rule=_evolution_cmd_rule, priority=47, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
@@ -9053,6 +9186,13 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
         f"target_id={event.target_id} group_id={getattr(event, 'group_id', None)}"
     )
     if not _poke_allowed(bot, event):
+        return False
+    # 多人格: 戳一戳回复池是猫娘文案, 非 catty 人格不响应 (后续可加机机版 poke 池).
+    _poke_persona_scope = (
+        f"group:{event.group_id}" if event.group_id is not None
+        else f"private:{event.user_id}"
+    )
+    if _persona_for_scope(_poke_persona_scope).feature_disabled("poke"):
         return False
     # 防刷屏：同一用户在同一会话短时间内连续戳，只回第一下
     scope = (
@@ -9336,6 +9476,77 @@ async def _generate_emoji_tags_via_vision(image_url: str, hint: str = "") -> tup
     if not tags:
         tags = ["主人收藏"]
     return meaning, tags[:6]
+
+
+@persona_cmd_matcher.handle()
+async def handle_persona_command(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    """主人用 `/人格` 查看、`/人格 机机` 切换、`/人格 默认` 清除 override。"""
+    if not _event_is_owner(event):
+        return
+    from .personas import PERSONAS, PERSONA_ALIASES, normalize_persona_name, resolve_persona_name
+    scope = _conversation_queue_key(event)
+    arg = str(state.get("catty_persona_cmd_arg") or "").strip()
+
+    def _effective() -> str:
+        return resolve_persona_name(scope, config=config, override_store=persona_override_store)
+
+    if not arg:
+        override = persona_override_store.get(scope)
+        lines = [
+            f"当前 scope: {scope}",
+            f"生效人格: {_effective()}" + (f" (命令覆盖: {override})" if override else " (config/默认)"),
+            "可用人格: " + " / ".join(sorted(PERSONAS)),
+            "别名: " + " ".join(f"{a}={n}" for a, n in PERSONA_ALIASES.items()),
+            "用法: /人格 <名字> 切换; /人格 默认 清除覆盖",
+        ]
+        await matcher.finish(Message("\n".join(lines)))
+
+    def _clear_scope_sessions() -> int:
+        """清本 scope 的 session cache (含 per-user 群历史变体) + bucket 摘要 + reminder 计数。
+
+        主人 2026-07-06: bucket 摘要 (session_buckets) 带旧人格口吻的历史 digest,
+        不清会让新人格 prompt 里混入『catty≈(尾巴…)』这类猫味残留。
+        """
+        from .catty_persona_reminder import reset_scope as _pr_reset
+        cache = _get_session_cache()
+        keys = [
+            k for k, _cnt, _ts in cache.list_sessions()
+            if k == scope or k.startswith(f"{scope}:user:")
+        ]
+        for k in keys:
+            cache.pop(k)
+            _pr_reset(k)
+        try:
+            _bucket_store = _get_time_bucket_context_store()
+            for k in set(keys) | {scope}:
+                _bucket_store.reset_scope(k)
+        except Exception as _bk_exc:  # noqa: BLE001
+            logger.debug(f"persona switch bucket reset failed: {_bk_exc}")
+        return len(keys)
+
+    if arg in ("默认", "清除", "default", "reset"):
+        existed = persona_override_store.clear(scope)
+        cleared = _clear_scope_sessions() if existed else 0
+        await matcher.finish(Message(
+            f"已清除人格覆盖 (清空 {cleared} 份会话历史), 现在生效: {_effective()}"
+            if existed else f"本 scope 没有人格覆盖, 当前生效: {_effective()}"
+        ))
+
+    name = normalize_persona_name(arg)
+    if name is None:
+        await matcher.finish(Message(
+            f"不认识的人格『{arg}』。可用: " + " / ".join(sorted(PERSONAS))
+            + "; 别名: " + " ".join(PERSONA_ALIASES)
+        ))
+    if name == _effective():
+        await matcher.finish(Message(f"当前已经是 {name} 人格, 不用切。"))
+    persona_override_store.set(scope, name, set_by=str(event.user_id))
+    # 切人格 = 前缀重建 + 旧口吻 history 不能留 (污染新人格), 清空该 scope 会话
+    cleared = _clear_scope_sessions()
+    await matcher.finish(Message(
+        f"人格已切换: {name} (scope={scope}, 已清空 {cleared} 份会话历史)。"
+        f"取消用 /人格 默认"
+    ))
 
 
 @vibe_command_matcher.handle()
@@ -9886,12 +10097,17 @@ def _today_local_str() -> str:
     return _date.today().isoformat()
 
 
-def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str = "") -> str:
+def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str = "", persona=None) -> str:
     """签到 quick reply. 主人 2026-05-29 v3: 三层货架
     L0 Composer 拼装 (90K+ 组合, owner 场景)
     L1 yaml pool (精品桶)
     L2 硬编码兜底
+    多人格: 非 catty 人格不走猫娘模板池, 直接极简兜底 (正常情况 AI caption 已按人格生成)。
     """
+    if persona is not None and getattr(persona, "name", "catty") != "catty":
+        if bool(result.get("already")):
+            return "今天已经签过了！！明天再来！！"
+        return "签到成功！！今天的分到账了, 卡片自己看！！"
     is_owner = bool(result.get("is_owner"))
     level = int(result.get("level", 1))
     already = bool(result.get("already"))
@@ -9963,8 +10179,11 @@ def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str
     return "签到喵!新人加油攒分,人家等着你升好感嗷呜 ฅฅ"
 
 
-def _fallback_caption_summary(summary: dict, user_id: str = "", user_nickname: str = "") -> str:
-    """积分查询. 主人 2026-05-29 v2: 优先走 affection_summary yaml pool (含时段+去重)."""
+def _fallback_caption_summary(summary: dict, user_id: str = "", user_nickname: str = "", persona=None) -> str:
+    """积分查询. 主人 2026-05-29 v2: 优先走 affection_summary yaml pool (含时段+去重).
+    多人格: 非 catty 人格直接极简兜底。"""
+    if persona is not None and getattr(persona, "name", "catty") != "catty":
+        return "积分卡端上来了！！状态自己看！！"
     is_owner = bool(summary.get("is_owner"))
     level = int(summary.get("level", 0))
     balance = int(summary.get("points", 0))
@@ -10004,6 +10223,8 @@ def _fallback_caption_summary(summary: dict, user_id: str = "", user_nickname: s
 
 def _affection_owner_tag(event: MessageEvent) -> str:
     """给 AI 生成用的『当前用户身份』提示串。"""
+    if not _persona_for_event(event).owner_concept:
+        return "对方是群友,按人格设定的称呼习惯称呼,**禁止**叫『主人』"
     owner_qq = str(getattr(config, "catty_owner_qq", "") or "").strip()
     is_owner = bool(owner_qq) and str(event.user_id) == owner_qq
     if is_owner:
@@ -10032,8 +10253,41 @@ async def _generate_affection_caption(
     )
     if not use_instant and not _has_api_key():
         return None
-    system_prompt = config.catty_system_prompt.strip()
+    _cap_persona = _persona_for_event(event)
     messages: list[ChatMessage] = []
+    if _cap_persona.name != "catty":
+        # 多人格: 用该人格的 core_persona + 提醒段生成签到文案 (机机口吻等)
+        if _cap_persona.core_persona:
+            messages.append({"role": "system", "content": _cap_persona.core_persona})
+        messages.append(
+            {
+                "role": "system",
+                "content": (
+                    "情境:用户刚刚发了签到/查积分命令,程序已经处理完账务并马上会附上一张『像素积分卡』图片。"
+                    f"你现在只需要用{_cap_persona.char_name}的口吻写一段 1-2 句短文案配着图发,"
+                    "数字(等级/积分/今日得分)全部由卡片承担,**禁止**罗列具体数字。\n"
+                    f"\n【本次状态】{scene_brief}\n"
+                    f"【对方身份】{_affection_owner_tag(event)}\n"
+                    "\n要求: 1-2 句短话; 不要罗列『+XX 分』『余额 YY』数字; "
+                    "不要拒绝、不要解释自己是 AI、不要 Markdown; 只输出正文。"
+                ),
+            }
+        )
+        messages.append({"role": "user", "content": user_text.strip() or "签到"})
+        try:
+            if use_instant:
+                _p_reply = await chat_completion_codex_instant(config, messages, max_tokens=200)
+            else:
+                _p_reply = await chat_completion(config, messages)
+        except OpenAICompatibleError as exc:
+            logger.debug(f"persona affection caption failed: {exc}")
+            return None
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"persona affection caption failed: {exc}")
+            return None
+        _p_reply = (str(_p_reply or "")).strip()
+        return _p_reply or None
+    system_prompt = config.catty_system_prompt.strip()
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.append(
@@ -10151,7 +10405,8 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
         today_gained: int | None = None
         # 主人 2026-06-01: 签到/积分 caption 从 CPU 模板池切回 DeepSeek;
         # AI 失败/超时才拿本地模板兜底,避免签到仍然抽 CPU 文案。
-        _ce_nickname = "主人" if _event_is_owner(event) else (
+        _cmd_persona = _persona_for_event(event)
+        _ce_nickname = "主人" if (_cmd_persona.owner_concept and _event_is_owner(event)) else (
             getattr(event.sender, "card", None) or getattr(event.sender, "nickname", None) or "你"
         )
         if cmd == "signin":
@@ -10168,7 +10423,7 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
             if caption:
                 logger.info(f"[deepseek.signin] uid={user_id} caption={caption[:80]!r}")
             else:
-                caption = _fallback_caption_signin(result, user_id=user_id, user_nickname=str(_ce_nickname))
+                caption = _fallback_caption_signin(result, user_id=user_id, user_nickname=str(_ce_nickname), persona=_cmd_persona)
                 logger.info(f"[quick_reply.signin.fallback] uid={user_id} caption={caption[:80]!r}")
             image_segment = _send_affection_card(
                 event, mode=card_mode, summary=summary, today_gained=today_gained,
@@ -10183,7 +10438,7 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
             if caption:
                 logger.info(f"[deepseek.points] uid={user_id} caption={caption[:80]!r}")
             else:
-                caption = _fallback_caption_summary(summary, user_id=user_id, user_nickname=str(_ce_nickname))
+                caption = _fallback_caption_summary(summary, user_id=user_id, user_nickname=str(_ce_nickname), persona=_cmd_persona)
                 logger.info(f"[quick_reply.points.fallback] uid={user_id} caption={caption[:80]!r}")
             image_segment = _send_affection_card(
                 event, mode="summary", summary=summary,
@@ -10644,6 +10899,11 @@ async def _proactive_bubble_loop() -> None:
                 active_window_minutes=max(config.catty_proactive_active_window_minutes, 0.0),
                 active_min_messages=max(config.catty_proactive_active_min_messages, 0),
             )
+            # 多人格: 主动冒泡文案是猫娘视角生成, 非 catty 人格的群跳过.
+            due_group_ids = [
+                gid for gid in due_group_ids
+                if not _persona_for_scope(f"group:{gid}").feature_disabled("proactive_bubble")
+            ]
             for group_id in due_group_ids:
                 try:
                     await _send_proactive_bubble(bot, group_id)
@@ -11193,6 +11453,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             memory_store=memory_store,
             event=event,
             emoji_store=emoji_store,
+            persona=_persona_for_event(event),  # 多人格: 画图参考图/planner/口吻按 persona
             affection_store=affection_store,
             prepare_nsfw_segments_fn=_prepare_nsfw_image_segments,
             download_binary_fn=download_binary,

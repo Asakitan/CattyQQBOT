@@ -531,10 +531,12 @@ async def sim_chat(
                     if _force_imagegen:
                         _tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
                     # 构 ToolContext (sim 模式只需基础 3 字段, 其它走 default)
+                    from . import _persona_for_event as _sim_persona_for_event
                     _ctx = ToolContext(
                         config=cfg,
                         memory_store=memory_store,
                         event=event,
+                        persona=_sim_persona_for_event(event),
                         affection_store=affection_store,
                         is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
                         user_text=_user_text,

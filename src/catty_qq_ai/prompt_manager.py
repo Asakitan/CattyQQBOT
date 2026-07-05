@@ -305,6 +305,22 @@ def register_catty_persona(
     from . import story_arc as _sa
     from . import world_info as _wi
 
+    # 主人 2026-07-06 多人格: ctx["persona"] 决定内容源与段黑名单。
+    # catty Persona 全字段 None → 每处 `persona.x or 旧常量` 都落到旧常量, 字节不变。
+    from .personas import get_persona as _get_persona
+    persona = ctx.get("persona") or _get_persona("catty")
+    _persona_disabled = persona.disabled_prompt_segments
+
+    def _reg(identifier: str, *args: Any, **kwargs: Any) -> None:
+        if identifier in _persona_disabled:
+            return
+        mgr.register(identifier, *args, **kwargs)
+
+    def _reg_static(identifier: str, *args: Any, **kwargs: Any) -> None:
+        if identifier in _persona_disabled:
+            return
+        mgr.register_static(identifier, *args, **kwargs)
+
     cfg = ctx["config"]
     scope = ctx["scope"]
     user_text = ctx.get("user_text", "") or ""
@@ -322,7 +338,7 @@ def register_catty_persona(
     style_examples_enabled = bool(ctx.get("reply_style_examples_enabled", True))
     # 完整 macro ctx,传给 character_card 各段做 {{user}}/{{date}}/{{idleDuration}} 等替换
     macro_ctx = {
-        "char": "笨猫",
+        "char": persona.char_name,
         "user": user_display,
         "group": ctx.get("group_display", ""),
         "last_user_message": ctx.get("last_user_message", ""),
@@ -340,9 +356,9 @@ def register_catty_persona(
     # 旧 build_reply_intelligence_prompt / get_description / get_personality /
     # get_scenario / build_reply_self_check_prompt 已不再 register, 内容内嵌到 core_persona.
     from . import catty_core_persona as _ccp
-    mgr.register(
+    _reg(
         "catty_core_persona",
-        content_fn=lambda: _ccp.CATTY_CORE_PERSONA,
+        content_fn=lambda: persona.core_persona or _ccp.CATTY_CORE_PERSONA,
         order=100,
     )
     # 主人 2026-05-29 (P2): 群聊默认沉默块**仅群聊注入** (私聊 1v1 无意义且带偏 NSFW)。
@@ -350,9 +366,9 @@ def register_catty_persona(
     # → 私聊前缀更短且仍 byte-stable。content 是常量 CATTY_GROUP_SILENCE。
     # ctx.get('is_group', False) 默认 False → 漏传时退化为不注入 (偏私聊, 安全)。
     if bool(ctx.get("is_group", False)):
-        mgr.register_static(
+        _reg_static(
             "catty_group_silence",
-            _ccp.CATTY_GROUP_SILENCE,
+            persona.group_silence or _ccp.CATTY_GROUP_SILENCE,
             order=105,
         )
     # ST V2 character_book: 嵌入式 lorebook — character_card 自带的笨猫私货 entry
@@ -377,9 +393,11 @@ def register_catty_persona(
     # 骨架: 所有 hardcoded entries 一次列出 (~3K, byte 稳定) → cache 友好, register_static.
     # hit pointer: BFS 命中的 hardcoded entry id list + scope_lorebook 命中 entries content → dynamic.
     try:
-        _cb_skeleton = _cc.build_character_book_skeleton()
+        _cb_skeleton = _cc.build_character_book_skeleton(
+            persona.character_book, char_name=persona.char_name,
+        )
         if _cb_skeleton:
-            mgr.register_static(
+            _reg_static(
                 "catty_character_book_skeleton",
                 _cb_skeleton,
                 order=145,  # 主人 2026-05-29 Round 19: 470→145 byte-stable 段进 cache prefix (boundary=455 前)
@@ -391,7 +409,10 @@ def register_catty_persona(
         """BFS 命中: hardcoded entries 只输出 id 列表 (引用骨架) + scope_lorebook 输出完整 content."""
         try:
             from types import SimpleNamespace
-            hardcoded = list(getattr(_cc.CATTY_CARD, "character_book", ()) or [])
+            if persona.character_book is not None:
+                hardcoded = list(persona.character_book)
+            else:
+                hardcoded = list(getattr(_cc.CATTY_CARD, "character_book", ()) or [])
             scope_entries: list = []
             if scope_lore_store is not None and scope:
                 for se in scope_lore_store.list_entries(scope):
@@ -473,7 +494,7 @@ def register_catty_persona(
         except Exception:  # noqa: BLE001
             return ""
     if not technical_direct:
-        mgr.register(
+        _reg(
             "catty_character_book_hits",
             content_fn=_build_character_book_hits,
             order=489,  # dynamic (user_text BFS hit ids + scope_lorebook content), post-boundary
@@ -486,7 +507,7 @@ def register_catty_persona(
             build_daily_gate_skeleton as _build_daily_gate_skeleton,
             build_daily_gate_params as _build_daily_gate_params,
         )
-        mgr.register_static(
+        _reg_static(
             "catty_daily_affection_gate_skeleton",
             _build_daily_gate_skeleton(),
             order=147,  # 主人 2026-05-29 Round 19: 471→147 byte-stable skeleton 进 cache prefix
@@ -498,7 +519,7 @@ def register_catty_persona(
             except Exception:  # noqa: BLE001
                 return ""
 
-        mgr.register(
+        _reg(
             "catty_daily_affection_gate_params",
             content_fn=_build_daily_gate_params_fn,
             order=486,  # dynamic (Lv + is_owner), post-boundary
@@ -510,7 +531,7 @@ def register_catty_persona(
     # 每轮的 Lv 指针 params 在 __init__.py deferred 段 (catty_relationship_params, order=484).
     try:
         from . import affection as _aff_mod
-        mgr.register(
+        _reg(
             "catty_relationship_skeleton",
             content_fn=lambda: _aff_mod.build_relationship_skeleton(),
             order=152,  # pre-boundary byte-stable skeleton 进 cache prefix
@@ -582,7 +603,7 @@ def register_catty_persona(
         "严禁泛指『你/你的』; NSFW 禁 ASCII 颜文字, 用喘息+动作+感官; 笨猫自己达高潮+自己降档."
     )
 
-    mgr.register_static(
+    _reg_static(
         "catty_nsfw_gate_skeleton",
         _NSFW_GATE_SKELETON,
         order=148,  # 主人 2026-05-29 Round 19: 472→148 静态骨架进 cache prefix (boundary=455 前)
@@ -601,7 +622,7 @@ def register_catty_persona(
             "rules=catty_nsfw_gate_skeleton"
         )
 
-    mgr.register(
+    _reg(
         "catty_nsfw_gate_params",
         content_fn=_build_nsfw_gate_params,
         order=487,  # dynamic (Lv + is_owner + scene), post-boundary
@@ -617,7 +638,7 @@ def register_catty_persona(
             except Exception:  # noqa: BLE001
                 return ""
 
-        mgr.register(
+        _reg(
             "catty_arc_resume", content_fn=_build_arc_resume_hint,
             order=485,  # dynamic (phase_state per-scope), post-boundary
         )
@@ -633,7 +654,7 @@ def register_catty_persona(
             return ""
 
     if not technical_direct:
-        mgr.register(
+        _reg(
             "catty_flirt_buffer", content_fn=_build_flirt_buffer,
             order=488,  # dynamic (user_text + Lv + is_owner), post-boundary
         )
@@ -642,29 +663,29 @@ def register_catty_persona(
     # === 群聊/对话流/语义/场景 playbook (一坨补充) ===
     # 主人 2026-05-29 Round 20: 跨 sender/跨轮 byte-stable 的 4 段移到 boundary 前 (149-152).
     # 进 cache prefix 后 group cache 命中量 +~1000 token (实测 group 185840951 从 39% 提升空间).
-    mgr.register(
+    _reg(
         "catty_group_meme_literacy",
         content_fn=lambda: _pp.build_group_meme_literacy_prompt(),
         order=149,  # Round 20: 460→149 跨 sender static, 入 cache prefix
     )
-    mgr.register(
+    _reg(
         "catty_conversation_flow",
-        content_fn=lambda: _pp.build_conversation_flow_prompt(),
+        content_fn=lambda: _pp.build_conversation_flow_prompt(persona),
         order=150,  # Round 20: 461→150 跨 sender static
     )
-    mgr.register(
+    _reg(
         "catty_semantic_perception",
         content_fn=lambda: _pp.build_semantic_perception_prompt(),
         order=151,  # Round 20: 462→151 跨 sender static
     )
-    mgr.register(
+    _reg(
         "catty_scenario_playbook",
         content_fn=lambda: _pp.build_scenario_playbook_prompt(no_reply),
         # 主人 2026-05-29 P1 PROMOTE: 463→157 进 cache prefix. no_reply 是常量 NO_REPLY_MARKER,
         # 内容 100% byte-stable 跨 sender/scope/turn → 一次性写、之后全命中, 不再每轮 ~400c miss.
         order=157,
     )
-    mgr.register(
+    _reg(
         "catty_scene_discrimination",
         content_fn=lambda: _pp.build_scene_discrimination_prompt(no_reply),
         # 主人 2026-05-29 P1 PROMOTE: 464→158 进 cache prefix (同上, byte-stable).
@@ -673,7 +694,7 @@ def register_catty_persona(
 
     # === ST 风新模块: daily_life / world_info / story_arc ===
     if "daily_life" not in legacy_disabled:
-        mgr.register(
+        _reg(
             "catty_daily_life",
             # 主人 2026-05-31 cache pointer 化: daily_life 是「今天笨猫在做什么」背景状态,
             # 不该吃 current user_text 后每轮漂移。当前话题已经由 semantic_perception / NLU /
@@ -691,12 +712,12 @@ def register_catty_persona(
     #     私聊走 hoist 进 cache (白名单含「笨猫小心思·主人/亲密」), 群聊 per-speaker 留 trailing.
     from . import catty_goals as _cg
     from .prompt_cache import _SCOPE_PREFIX_SENTINEL as _GOALS_SENTINEL
-    mgr.register(
+    _reg(
         "catty_goals_universal_pool",
         content_fn=lambda: _GOALS_SENTINEL + _cg.build_goals_universal_pool_prompt(),
         order=163,  # pre-boundary 全局常量 sentinel block (不 merge 进 sys0, 全网共享 cache)
     )
-    mgr.register(
+    _reg(
         "catty_goals_tier_pool",
         content_fn=lambda: _cg.build_goals_tier_pool_prompt(
             affection_level=aff_level,
@@ -740,7 +761,7 @@ def register_catty_persona(
         "4. 你回复时**绝对不要**复述/引用 [DYNAMIC_CONTEXT] 里的标签词 (Lv/stage/桥位/档位/系统/NSFW 等),\n"
         "   像之前一样把它们当成内部判定信息, 演出来就行, 不让 user 看见.\n"
     )
-    mgr.register(
+    _reg(
         "catty_cache_boundary",
         content_fn=lambda: _CACHE_BOUNDARY_TEXT,
         order=455,
@@ -759,13 +780,13 @@ def register_catty_persona(
             return ""
         return "【LEN】non-academic<=50zh;1句;keep emotion/action/core only"
 
-    mgr.register(
+    _reg(
         "catty_non_academic_length_guard",
         content_fn=_build_non_academic_length_guard,
         order=497,  # dynamic per current user/image text, after current sender info
     )
     if "world_info" not in legacy_disabled:
-        mgr.register(
+        _reg(
             "catty_world_info",
             content_fn=lambda: _wi.build_world_info_block(
                 user_text, scope, position="after_char",
@@ -775,7 +796,7 @@ def register_catty_persona(
             order=469,  # dynamic (user_text BFS), post-boundary
         )
     if "story_arc" not in legacy_disabled and arc_store is not None:
-        mgr.register(
+        _reg(
             "catty_story_arc",
             content_fn=lambda: _sa.build_story_arc_prompt(arc_store.get_active(scope)),
             order=468,  # P5.2: 移到 boundary 后
@@ -783,7 +804,7 @@ def register_catty_persona(
         # Catty Arc Pusher: 看 active arc 跟 current msg 关联度, 给推进/回调 hint.
         if not technical_direct:
             from .catty_arc_pusher import build_arc_pusher_prompt as _build_arc_pusher
-            mgr.register(
+            _reg(
                 "catty_arc_pusher",
                 content_fn=lambda: _build_arc_pusher(
                     arc_store.get_active(scope), user_text,
@@ -794,9 +815,9 @@ def register_catty_persona(
     # === QQ 节奏 + 自检 + image + 示例 (后段) ===
     # 主人 2026-05-29 Round 21: 465→153, qq_chat_rhythm 入参 split_marker 是固定常量,
     # 100% byte-stable 跨任何 sender/scope/turn → 入 cache prefix.
-    mgr.register(
+    _reg(
         "catty_qq_chat_rhythm",
-        content_fn=lambda: _pp.build_qq_chat_rhythm_prompt(split_marker),
+        content_fn=lambda: _pp.build_qq_chat_rhythm_prompt(split_marker, persona),
         order=153,
     )
 
@@ -815,7 +836,7 @@ def register_catty_persona(
         except Exception:  # noqa: BLE001
             return ""
 
-    mgr.register(
+    _reg(
         "catty_action_palette",
         content_fn=_build_action_palette,
         order=466,  # per-scope per-day deterministic — 跨天变化, 留 boundary 后 (主人 2026-05-29 Round 20: 不算 static)
@@ -823,7 +844,7 @@ def register_catty_persona(
     # 主人 2026-05-28 P5.1: catty_reply_self_check 已内嵌到 catty_core_persona §7 自检铁律,
     # 不再独立 register. self_check_enabled flag 保留 (后续若需独立增强可重新加).
     if self_check_enabled and False:  # P5.1 disabled, 留代码以便 toggle
-        mgr.register(
+        _reg(
             "catty_reply_self_check",
             content_fn=lambda: _pp.build_reply_self_check_prompt(no_reply, split_marker),
             order=220,
@@ -839,7 +860,7 @@ def register_catty_persona(
     # / scene_detector (order=461) / reply_self_check (order=220) 功能重叠. 各省 ~300-500c dynamic.
     # 总计省 ~2000c per call. 想恢复 → git revert C3a commit.
     if has_image:
-        mgr.register(
+        _reg(
             "catty_image_literacy",
             content_fn=lambda: _pp.build_image_literacy_prompt(),
             order=465,  # conditional (has_image), post-boundary
@@ -848,7 +869,7 @@ def register_catty_persona(
         _image_desc = ctx.get("image_description", "") or ""
         if _image_desc:
             from .catty_image_reaction import build_image_reaction_prompt as _build_image_reaction
-            mgr.register(
+            _reg(
                 "catty_image_reaction",
                 content_fn=lambda: _build_image_reaction(_image_desc),
                 order=467,  # dynamic (image_description), post-boundary
@@ -862,19 +883,27 @@ def register_catty_persona(
     # 强制 user="用户" (字面常量, 跟群聊占位一致) 保证 byte-stable 不分叉.
     # (catgirl_examples / disambiguation 只吃 no_reply/split_marker 常量, 本就 byte-stable.)
     if style_examples_enabled:
-        mgr.register(
+        _reg(
             "catty_catgirl_examples",
             content_fn=lambda: _pp.build_catgirl_examples_prompt(no_reply, split_marker),
             order=159,
         )
-        mgr.register(
+        _reg(
             "catty_disambiguation",
             content_fn=lambda: _pp.build_disambiguation_examples_prompt(no_reply),
             order=160,
         )
-        mgr.register(
+        def _mes_example_content() -> str:
+            if persona.mes_example is not None:
+                return _cc.render_macros(
+                    persona.mes_example,
+                    char_name=persona.char_name, user_display="用户",
+                )
+            return _cc.get_mes_example(ctx={**macro_ctx, "user": "用户"}, user_display="用户")
+
+        _reg(
             "catty_mes_example",
-            content_fn=lambda: _cc.get_mes_example(ctx={**macro_ctx, "user": "用户"}, user_display="用户"),
+            content_fn=_mes_example_content,
             order=161,
         )
 
@@ -886,7 +915,7 @@ def register_catty_persona(
     mood_store = ctx.get("catty_mood_store")
     if mood_store is not None:
         from . import catty_mood as _cm
-        mgr.register(
+        _reg(
             "catty_mood",
             content_fn=lambda: _cm.build_catty_mood_prompt(mood_store, scope),
             order=501,  # dynamic (cross-turn cumulative), post-boundary
@@ -897,12 +926,12 @@ def register_catty_persona(
     user_id = ctx.get("user_id", "")
     if user_vibe_store is not None and user_id:
         from . import user_vibe as _uv
-        mgr.register(
+        _reg(
             "catty_user_vibe_catalog",
-            content_fn=_uv.build_user_vibe_catalog_prompt,
+            content_fn=lambda: _uv.build_user_vibe_catalog_prompt(persona),
             order=162,
         )
-        mgr.register(
+        _reg(
             "catty_user_vibe",
             content_fn=lambda: _uv.build_user_vibe_prompt(
                 user_vibe_store.profile_for(user_id),
@@ -915,10 +944,11 @@ def register_catty_persona(
     _ambient_store_inst = ctx.get("ambient_store")
     if _ambient_store_inst is not None and scope and user_id:
         from .ambient_eavesdrop import build_ambient_prompt as _build_ambient_prompt
-        mgr.register(
+        _reg(
             "catty_ambient_chatter",
             content_fn=lambda: _build_ambient_prompt(
                 _ambient_store_inst.get_ambient(scope, exclude_user_id=user_id),
+                char_name=persona.char_name,
             ),
             order=497,  # dynamic (ambient buffer per-turn), post-boundary
         )
@@ -932,11 +962,12 @@ def register_catty_persona(
     _user_details_store_inst = ctx.get("user_details_store")
     if _user_details_store_inst is not None and user_id:
         from .user_details_store import build_user_details_prompt as _build_user_details_prompt
-        mgr.register(
+        _reg(
             "catty_user_details",
             content_fn=lambda: _build_user_details_prompt(
                 _user_details_store_inst.get_details(user_id),
                 user_display=user_display,
+                persona=persona,
             ),
             order=462,
         )
@@ -946,7 +977,7 @@ def register_catty_persona(
     rag_store = ctx.get("catty_rag_store")
     if rag_store is not None:
         from . import catty_rag as _crag
-        mgr.register(
+        _reg(
             "catty_rag_recall",
             content_fn=lambda: _crag.build_rag_recall_prompt(rag_store, scope, user_text, top_k=3),
             order=458,
