@@ -343,8 +343,12 @@ FADIANJI_IMAGEGEN = PersonaImagegen(
     planner_brief=(
         "画的是「机机」(不稳定发电机): 堕天使 VTuber, 淡紫长发紫瞳, 鲨鱼牙, "
         "黑色翅膀, 吊带袜, 娇小 150cm. 画风走可爱/整活向, 不画露骨内容 "
-        "(擦边到【健康】边界为止)."
+        "(擦边到【健康】边界为止). 自画像 prompt 必须带动作/姿势/表情 tags "
+        "(如 dynamic pose, jumping, pointing at viewer, sharp teeth grin, hands up 按场景选), "
+        "别全是呆板站立立绘 — 参考图只锁人设, 动作靠 prompt."
     ),
+    ref_strength=0.9,   # 主人 2026-07-06: 1.0 锁死站姿没动作, 降 0.9 给 prompt 动作留空间
+    ref_fidelity=0.9,
     short_review_style=(
         "发图配文用机机口吻: 超短句为主, 感叹号克制 (最多一处连打), 叠字可用, "
         "无波浪号无颜文字无emoji, 自称 我/机/小机, 可以括号自我吐槽 (画的比本体好看？？)."

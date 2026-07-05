@@ -2096,8 +2096,16 @@ async def _exec_imagegen_nai(
     director_ref_secondary: list[float] = []  # = 1 - fidelity
 
     # 主人 2026-05-29: agent 模式 local reference bytes 优先插入 (跳过 URL 下载循环)。
-    # 用于自画像锁人设 (Miao/miaomiao*.png), fidelity=1.0 strength=1.0 抓最大角色细节。
+    # 用于自画像锁人设 (Miao/miaomiao*.png), 默认 fidelity=1.0 strength=1.0 抓最大角色细节。
+    # 主人 2026-07-06 多人格: persona.imagegen 可调低 (1.0 锁死站姿没动作, 机机 0.9);
+    # catty persona.imagegen=None → 恒 1.0 老行为。
     # URL refs 仍在下面追加, 总数不超 _NAI_VIBE_REFERENCE_MAX。
+    _ref_pi = getattr(getattr(ctx, "persona", None), "imagegen", None)
+    try:
+        _local_ref_strength = max(0.0, min(1.0, float(getattr(_ref_pi, "ref_strength", 1.0)))) if _ref_pi else 1.0
+        _local_ref_fidelity = max(0.0, min(1.0, float(getattr(_ref_pi, "ref_fidelity", 1.0)))) if _ref_pi else 1.0
+    except (TypeError, ValueError):
+        _local_ref_strength, _local_ref_fidelity = 1.0, 1.0
     for data in (local_reference_bytes_list or []):
         if not data or len(director_ref_b64) >= _NAI_VIBE_REFERENCE_MAX:
             continue
@@ -2107,8 +2115,8 @@ async def _exec_imagegen_nai(
             _logger.warning("imagegen[nai] local reference resize failed: %s", exc)
             continue
         director_ref_b64.append(ref_b64)
-        director_ref_strength.append(1.0)
-        director_ref_secondary.append(0.0)  # = 1 - fidelity(1.0)
+        director_ref_strength.append(_local_ref_strength)
+        director_ref_secondary.append(round(1.0 - _local_ref_fidelity, 2))
     if director_ref_b64:
         _logger.info(
             "imagegen[nai]: %d local reference(s) attached (agent self-portrait mode)",

@@ -29,6 +29,10 @@ class PersonaImagegen:
     ref_nsfw_path: str = ""        # NSFW 参考图; 空 = 复用 ref_path
     planner_brief: str = ""        # 画图 planner (deepseek) 的人格简介段
     short_review_style: str = ""   # 发图配文的口吻说明
+    # NAI Precise Reference 力度 (主人 2026-07-06: 1.0 会锁死站姿没动作, 机机降 0.9)。
+    # catty 走 imagegen=None 老路径, 恒 1.0 不受影响。
+    ref_strength: float = 1.0      # director_reference_strength
+    ref_fidelity: float = 1.0      # 1 - secondary_strength
 
 
 @dataclass(frozen=True)
