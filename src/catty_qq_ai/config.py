@@ -226,6 +226,28 @@ class Config(BaseModel):
     # server 端跑摘要并在 response.content 里插 compaction block + applied_edits[] 标记.
     catty_compaction_enabled: bool = False
     catty_compaction_trigger_tokens: int = 150000  # Anthropic 默认 150K
+    # ── 主人 2026-07-06 多 provider 缓存适配 (openai-claude-95 计划) ─────────
+    # OpenAI 隐式缓存路由亲和: 仅对 detect_provider=='openai' 的端点注入
+    # payload.prompt_cache_key = "catty:{scope}"。DeepSeek 绝不注入 (Round 10 红线:
+    # user/prompt_cache_key 会把 DeepSeek 公共前缀 cache 分裂成独立 namespace 各自冷启)。
+    catty_openai_prompt_cache_key_enabled: bool = False
+    # native 路由 per-line 覆盖: key ∈ {main,spark,filter,summary_fallback,vision,router},
+    # value ∈ {auto,native,compat}; 缺省 auto = detect_provider(线路 base_url, model) 判别。
+    # 只在 catty_anthropic_native_enabled=True (总闸) 时整个 native 路由才激活。
+    catty_native_route_overrides: dict[str, str] = Field(default_factory=dict)
+    # per-line cache TTL ("5min"|"1h"), 缺省落全局 catty_cache_ttl。
+    # 目标态 {"main":"1h","spark":"1h"} — QQ 轮间隔常 >5min, 5min TTL 过期重写吃掉
+    # 命中 (读会续期, 只有间隔>TTL 的轮全量重写)。待 A/B 实测后写进远端 config。
+    catty_cache_ttl_overrides: dict[str, str] = Field(default_factory=dict)
+    # native 末尾 assistant prefill 模式: "hint"=现状字节等价 (丢 prefill 转强 IC hint
+    # 进最近 user); "native"=真 trailing assistant 续写; "auto"=按模型名分派。
+    catty_native_prefill_mode: str = "hint"
+    # native 额外 anthropic-beta (逃生阀: 某些中转要显式 extended-cache-ttl-2025-04-11
+    # 才认 1h TTL 等), 附加在默认 betas 之后。
+    catty_native_extra_betas: list[str] = Field(default_factory=list)
+    # A/B 测试 provider 注册表: {name: {base_url, api_key, model, native?("1")}}。
+    # 仅 /dev/sim_chat 的 provider_override 按名引用 — 凭据留在 config, 不过 HTTP。
+    catty_test_providers: dict[str, dict[str, str]] = Field(default_factory=dict)
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
     # ── Local NLU enrichment (jieba / text2vec / HanLP) ─────────────────
@@ -724,7 +746,7 @@ class Config(BaseModel):
 
     @field_validator(
         "catty_trigger_prefixes", "catty_directed_keywords", "catty_web_search_engines",
-        "catty_prompt_order", "catty_prompts_disabled",
+        "catty_prompt_order", "catty_prompts_disabled", "catty_native_extra_betas",
         mode="before",
     )
     @classmethod
@@ -792,6 +814,8 @@ class Config(BaseModel):
         "catty_vision_extra_headers",
         "catty_filter_extra_headers",
         "catty_local_critic_extra_headers",
+        "catty_native_route_overrides",
+        "catty_cache_ttl_overrides",
         mode="before",
     )
     @classmethod
@@ -820,6 +844,23 @@ class Config(BaseModel):
         if isinstance(value, str):
             return _parse_json_object(value)
         return value
+
+    @field_validator("catty_test_providers", mode="before")
+    @classmethod
+    def parse_test_providers(cls, value: Any) -> Any:
+        # {name: {base_url, api_key, model, native?}} — env 里是 JSON 字符串 (hot reload
+        # 走 Config.model_validate(raw env str), 必须 before-validator 解析)
+        if value is None or value == "":
+            return {}
+        if isinstance(value, str):
+            data = _parse_json_object(value)
+        else:
+            data = dict(value)
+        out: dict[str, dict[str, str]] = {}
+        for name, entry in data.items():
+            if isinstance(entry, dict):
+                out[str(name)] = {str(k): str(v) for k, v in entry.items()}
+        return out
 
     @field_validator("catty_group_titles", "catty_user_titles", "catty_group_personas", mode="before")
     @classmethod

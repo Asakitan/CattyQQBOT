@@ -12587,6 +12587,9 @@ async def _mount_dev_sim_chat_endpoint() -> None:
         card = body.get("card")
         title = body.get("title")
         group_name = body.get("group_name")
+        # 主人 2026-07-06 openai-claude-95: A/B provider override (名字引用
+        # config.catty_test_providers, 凭据不过 HTTP)
+        provider_override = body.get("provider_override")
         try:
             from .catty_sim_chat import sim_chat
             result = await sim_chat(
@@ -12598,6 +12601,7 @@ async def _mount_dev_sim_chat_endpoint() -> None:
                 card=str(card) if card is not None else None,
                 title=str(title) if title is not None else None,
                 group_name=str(group_name) if group_name is not None else None,
+                provider_override=str(provider_override) if provider_override else None,
             )
         except Exception as exc:  # noqa: BLE001
             import traceback
@@ -12622,6 +12626,8 @@ async def _mount_dev_sim_chat_endpoint() -> None:
             "history_count": result["history_count"],
             "stats": result["stats"],
             "reply": result["reply"],
+            "provider_override": result.get("provider_override", ""),
+            "override_model": result.get("override_model", ""),
             "messages": msgs_out if include_messages else None,
         }
 

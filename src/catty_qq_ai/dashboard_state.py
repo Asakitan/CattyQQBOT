@@ -150,6 +150,30 @@ def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> N
         # DeepSeek 计费系数: hit 0.1x, miss 1.0x
         billed_input_equiv = int(cache_read * 0.1 + input_tokens * 1.0)
         saved_pct = (1 - billed_input_equiv / total_context) * 100 if total_context > 0 else 0.0
+    elif not (
+        int(usage.get("cache_read_input_tokens") or 0)
+        or int(usage.get("cache_creation_input_tokens") or 0)
+        or int(usage.get("input_tokens") or 0)
+    ) and int(usage.get("prompt_tokens") or 0):
+        # === OpenAI 风格 (主人 2026-07-06 openai-claude-95 §二) ===
+        # OpenAI usage 没有 input_tokens 字段, 之前落 Anthropic 分支全 0 →
+        # dashboard cache 卡片瞎 + add_turn_usage(prompt_tokens=0) token 计费漏记。
+        prompt_details = usage.get("prompt_tokens_details") or {}
+        cache_read = int(prompt_details.get("cached_tokens") or 0)
+        cache_create = 0
+        input_tokens = max(int(usage.get("prompt_tokens") or 0) - cache_read, 0)
+        output_tokens = int(usage.get("completion_tokens") or 0)
+        total_context = cache_read + input_tokens
+        if scope:
+            _LATEST_USAGE_BY_SCOPE[scope] = {
+                "prompt_tokens": total_context,
+                "completion_tokens": output_tokens,
+                "ts": int(time.time()),
+            }
+        hit = (cache_read / total_context) if total_context > 0 else 0.0
+        # OpenAI 计费系数: cached input 0.1x (gpt-5 系价目), 未缓存 1.0x
+        billed_input_equiv = int(cache_read * 0.1 + input_tokens * 1.0)
+        saved_pct = (1 - billed_input_equiv / total_context) * 100 if total_context > 0 else 0.0
     else:
         # === Anthropic 风格 (原逻辑) ===
         cache_read = int(usage.get("cache_read_input_tokens") or 0)

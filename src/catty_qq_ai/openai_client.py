@@ -3,7 +3,6 @@ from __future__ import annotations
 import asyncio
 import base64
 import contextvars
-from collections import deque
 from io import BytesIO
 import json
 import logging
@@ -512,6 +511,54 @@ def _effective_main_model(config: Config) -> str:
     return get_current_model_override() or config.catty_openai_model
 
 
+# 主人 2026-07-06 openai-claude-95 §4.1: persona override 防呆告警去重 (per line|endpoint|model)
+_NATIVE_MISMATCH_WARNED: set[str] = set()
+
+
+def _route_native(config: Config, line: str, base_url: str, model: str) -> bool:
+    """native /v1/messages 路由单点决策 (主人 2026-07-06 openai-claude-95 §4.1).
+
+    catty_anthropic_native_enabled 语义升级: 「主线专属开关」→「native 路由总闸
+    (kill switch)」。False = 全网 OpenAI-compat 与旧行为逐字节一致 (回滚只改一个布尔);
+    True = 各线路按 catty_native_route_overrides[line] (native/compat 显式) 或
+    detect_provider(base_url, model)=='claude' (auto) 判别。全 deepseek 配置下判别
+    恒 False, 行为仍与总闸关时一致。
+
+    纯函数无 IO, 从**传入的 config 实例**读 → sim A/B 的 config 副本天然生效。
+    """
+    try:
+        if not bool(getattr(config, "catty_anthropic_native_enabled", False)):
+            return False
+        ov = ""
+        try:
+            overrides = getattr(config, "catty_native_route_overrides", {}) or {}
+            ov = str(overrides.get(line or "", "") or "").strip().lower()
+        except Exception:  # noqa: BLE001
+            ov = ""
+        if ov == "native":
+            return True
+        if ov == "compat":
+            return False
+        from .prompt_cache import detect_provider, is_claude_endpoint
+
+        routed = detect_provider(base_url, model) == "claude"
+        # persona model_override 防呆: 模型名像 claude 但端点是已知非 anthropic 域名 —
+        # detect_provider 的 URL 优先规则已兜住不走错协议, 这里只提示配置嫌疑 (去重防刷屏)。
+        if not routed and is_claude_endpoint("", model):
+            _key = f"{line}|{(base_url or '')[:40]}|{(model or '')[:20]}"
+            if _key not in _NATIVE_MISMATCH_WARNED:
+                _NATIVE_MISMATCH_WARNED.add(_key)
+                _logger.warning(
+                    "native route mismatch: model %r looks like claude but endpoint %r "
+                    "is a known non-anthropic provider (persona model_override?), "
+                    "staying on OpenAI-compat (line=%s)",
+                    (model or "")[:20], (base_url or "")[:40], line,
+                )
+        return routed
+    except Exception:  # noqa: BLE001
+        return False
+
+
 # === S6 (主人 2026-05-29): DeepSeek 回复统一蒸馏 hook ===
 # 主人决策: 所有"主 AI / catnify 透传 / NSFW spark / 占位/签到"等【生成自然语言回复】
 # 的链路都要蒸馏到 L3 corpus, 但 filter/分类/判断 (输出 bool/JSON) 绝不采.
@@ -637,16 +684,19 @@ async def _post_anthropic_native_chat(
     """
     from .anthropic_native_client import post_messages_native
 
-    # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill
-    from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
-    messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
-    # sweep 和 cache_control 标位都已由 post_messages_native 内部统一处理.
-    prepared_messages = messages_for_native
+    # 主人 2026-07-06 openai-claude-95 §2.5: prefill 收口 — 外部 adapt 已删,
+    # 由 post_messages_native 内部 _apply_prefill_mode 单一 owner 按 prefill_mode 处理.
+    # sweep / hoist / cache_control 标位同样都在 post_messages_native 内部统一处理.
+    prepared_messages = messages
+
+    # 主人 2026-07-06 openai-claude-95: model 用 _effective_main_model (修 native 下
+    # persona model_override 失效的老问题) + per-line TTL/betas/prefill_mode 贯通。
+    from .prompt_cache import resolve_cache_ttl
 
     data = await post_messages_native(
         base_url=config.catty_openai_base_url,
         api_key=config.catty_openai_api_key,
-        model=config.catty_openai_model,
+        model=_effective_main_model(config),
         messages=prepared_messages,
         max_tokens=config.catty_max_tokens or 4096,
         temperature=config.catty_temperature,
@@ -654,78 +704,119 @@ async def _post_anthropic_native_chat(
         enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
         compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
         metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+        cache_ttl=resolve_cache_ttl(config, "main"),
+        line="main",
+        prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
+        extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
     )
     return _extract_content(data)
 
 
-# DeepSeek rolling hit_rate 监控 (主人目标 95-98%, 掉到 90% warn)
-# maxlen=20: 最近 20 次请求滑动平均, 平滑单次噪声
-_DEEPSEEK_CACHE_ROLLING: deque[tuple[int, int]] = deque(maxlen=20)
-_DEEPSEEK_LOW_HIT_STREAK = 0  # 连续 < 90% 的次数, 连 3 次才 warn
+# OpenAI prompt_cache_key 被端点拒 (400/422) 的能力缓存 — key = f"{base_url}|{model}".
+# 复刻 _forced_tool_choice_blocked 模式: 探测到拒绝后本进程内不再对该端点发该参数.
+# (主人 2026-07-06 openai-claude-95 §三: 严格中转可能不认 unknown 参数)
+_PROMPT_CACHE_KEY_BLOCKED: set[str] = set()
 
 
-def _log_cache_stats(data: dict[str, Any], model: str) -> None:
+def _get_runtime_config() -> Any:
+    """拿全局运行时 Config 实例 — 深层无 config 参数的函数用.
+
+    复刻 _post_chat_completion_raw 群聊 hoist 段的 sys.modules 模式
+    (插件包顶层挂着 hot-reload 后的最新 config)。拿不到返回 None。
+    """
+    try:
+        import sys as _sys
+
+        _plugin_mod = _sys.modules.get("catty_qq_ai") or _sys.modules.get("src.catty_qq_ai")
+        _cfg = getattr(_plugin_mod, "config", None) if _plugin_mod is not None else None
+        if _cfg is None:
+            from . import config as _config_module
+
+            _cfg = getattr(_config_module, "config", None)
+        return _cfg
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _log_cache_stats(
+    data: dict[str, Any],
+    model: str,
+    *,
+    messages: list[ChatMessage] | None = None,
+    base_url: str = "",
+) -> None:
     """从 chat completion response 提取 cache hit 统计 + log.
 
-    优先级 (单次请求只走一条分支):
+    响应侧按 usage 字段嗅探分支 (中转改写字段时监控不瞎, 单次请求只走一条):
     1. DeepSeek 风格: usage.prompt_cache_hit_tokens / usage.prompt_cache_miss_tokens
        (DeepSeek 独有字段, 分开 hit/miss 比 OpenAI cached_tokens 更精确)
     2. Anthropic 风格: usage.cache_read_input_tokens / usage.cache_creation_input_tokens
     3. OpenAI 风格 (兜底): usage.prompt_tokens_details.cached_tokens / usage.prompt_tokens
+
+    主人 2026-07-06 openai-claude-95 §二: 三分支统一打 HIT_TARGET 行 (cache_metrics
+    按 provider|model 分桶 rolling, 修掉旧全局单 deque 混模型污染), provider 标签取
+    请求侧 detect_provider(base_url, model) — 与字段嗅探不一致时日志天然暴露诊断线索。
+    (2)/(3) 分支补齐 dashboard push (之前 openai usage 落 anthropic 分支全 0,
+    dashboard 瞎 + token 计费漏记)。
     """
-    global _DEEPSEEK_LOW_HIT_STREAK
     usage = data.get("usage") or {}
+    try:
+        from .prompt_cache import detect_provider
+
+        _provider = detect_provider(base_url, model)
+    except Exception:  # noqa: BLE001
+        _provider = "other"
+    try:
+        from .cache_metrics import (
+            compute_warm_fields,
+            format_hit_target_line,
+            record_hit,
+        )
+    except Exception:  # noqa: BLE001
+        return
+    _msgs, _hist, _warm = compute_warm_fields(messages)
+    try:
+        _hit_scope = get_current_scope_key() or ""
+    except Exception:  # noqa: BLE001
+        _hit_scope = ""
 
     # === (1) DeepSeek 风格 ===
     ds_hit = int(usage.get("prompt_cache_hit_tokens") or 0)
     ds_miss = int(usage.get("prompt_cache_miss_tokens") or 0)
     if ds_hit or ds_miss:
-        total = ds_hit + ds_miss
-        hit_rate = ds_hit / total if total > 0 else 0.0
-        # rolling 平均 (最近 20 次)
-        _DEEPSEEK_CACHE_ROLLING.append((ds_hit, total))
-        roll_hits = sum(h for h, _ in _DEEPSEEK_CACHE_ROLLING)
-        roll_total = sum(t for _, t in _DEEPSEEK_CACHE_ROLLING)
-        roll_rate = roll_hits / roll_total if roll_total > 0 else 0.0
+        stats = record_hit(_provider, model, ds_hit, ds_miss, 0)
         _logger.info(
             f"cache stats(deepseek) model={model[:20]} hit={ds_hit} "
-            f"miss={ds_miss} hit_rate={hit_rate:.0%} "
-            f"rolling{len(_DEEPSEEK_CACHE_ROLLING)}={roll_rate:.0%}",
+            f"miss={ds_miss} hit_rate={stats.this_rate:.0%} "
+            f"rolling{stats.roll_n}={stats.roll_rate:.0%}",
         )
         # 主人 2026-05-29 Round 1: 显眼 HIT_TARGET 状态 (grep 用), 目标 95-98%
-        _target_min = 0.95
-        if roll_rate >= _target_min:
-            _status = "OK"
-        else:
-            _gap = int((_target_min - roll_rate) * 100)
-            _status = f"LOW(-{_gap}pp)"
-        # 主人 2026-05-31 测量基建: 加 scope 标签让 sim A/B 按 scope 干净过滤 (不被并发真实群流量污染)
-        try:
-            _hit_scope = get_current_scope_key() or ""
-        except Exception:  # noqa: BLE001
-            _hit_scope = ""
+        # 主人 2026-05-31 测量基建: scope 标签让 sim A/B 按 scope 干净过滤
         _logger.info(
-            f"HIT_TARGET model={model[:20]} this={hit_rate:.1%} "
-            f"rolling{len(_DEEPSEEK_CACHE_ROLLING)}={roll_rate:.1%} "
-            f"target=95-98% status={_status} "
-            f"hit_tok={ds_hit} miss_tok={ds_miss} scope={_hit_scope}",
+            format_hit_target_line(
+                provider=_provider,
+                model=model,
+                stats=stats,
+                hit_tok=ds_hit,
+                miss_tok=ds_miss,
+                create_tok=0,
+                msgs=_msgs,
+                hist=_hist,
+                warm=_warm,
+                scope=_hit_scope,
+            ),
         )
         # rolling 命中率连续 3 次 < 90% → warn (主人目标 95-98%)
-        if len(_DEEPSEEK_CACHE_ROLLING) >= 5 and roll_rate < 0.9:
-            _DEEPSEEK_LOW_HIT_STREAK += 1
-            if _DEEPSEEK_LOW_HIT_STREAK >= 3:
-                _logger.warning(
-                    f"deepseek cache rolling hit_rate dropped to {roll_rate:.0%} "
-                    f"(target 95-98%), check prefix stability",
-                )
-                _DEEPSEEK_LOW_HIT_STREAK = 0  # 提醒后重置, 避免刷屏
-        else:
-            _DEEPSEEK_LOW_HIT_STREAK = 0
+        if stats.should_warn:
+            _logger.warning(
+                f"deepseek cache rolling hit_rate dropped to {stats.roll_rate:.0%} "
+                f"(target 95-98%), check prefix stability",
+            )
         # 主人 2026-05-28: 推 dashboard (DeepSeek 路径 cache 实时显示)
         try:
             from . import dashboard_state as _dash
-            _scope = get_current_scope_key() or ""
-            _dash.push_cache_stats(_scope or model, usage, model=model)
+
+            _dash.push_cache_stats(_hit_scope or model, usage, model=model)
         except Exception:  # noqa: BLE001
             pass
         return
@@ -742,11 +833,38 @@ def _log_cache_stats(data: dict[str, Any], model: str) -> None:
     total_input = cache_read + cache_create + input_tokens
     if total_input <= 0:
         return
-    hit_rate = cache_read / total_input
+    stats = record_hit(_provider, model, cache_read, input_tokens, cache_create)
     _logger.info(
         f"cache stats model={model[:20]} read={cache_read} create={cache_create} "
-        f"new={input_tokens} hit={hit_rate:.0%}"
+        f"new={input_tokens} hit={stats.this_rate:.0%}"
     )
+    _logger.info(
+        format_hit_target_line(
+            provider=_provider,
+            model=model,
+            stats=stats,
+            hit_tok=cache_read,
+            miss_tok=input_tokens,
+            create_tok=cache_create,
+            msgs=_msgs,
+            hist=_hist,
+            warm=_warm,
+            scope=_hit_scope,
+        ),
+    )
+    if stats.should_warn:
+        _logger.warning(
+            f"cache rolling hit_rate ({_provider}) dropped to {stats.roll_rate:.0%} "
+            f"(target 95-98%), check prefix/breakpoints/TTL",
+        )
+    # 主人 2026-07-06: openai / 中转 claude 走 compat 时之前不推 dashboard —
+    # cache 卡片瞎 + token_billing 漏记 (openai usage 落 anthropic 分支全 0), 补推。
+    try:
+        from . import dashboard_state as _dash
+
+        _dash.push_cache_stats(_hit_scope or model, usage, model=model)
+    except Exception:  # noqa: BLE001
+        pass
 
 
 async def _stream_chat_completion_attempt(
@@ -1168,6 +1286,29 @@ async def _post_chat_completion_raw(
         # include_usage: 让最后一个 chunk 返回 usage (DeepSeek / OpenAI 都支持)
         payload["stream_options"] = {"include_usage": True}
 
+    # === OpenAI 隐式缓存路由亲和 (主人 2026-07-06 openai-claude-95 §三) ===
+    # prompt_cache_key = "catty:{scope}" 让同 scope 请求落同一缓存分片 (官方建议按会话粒度).
+    # 红线: 只对 detect_provider=='openai' 的端点注入 — DeepSeek 绝不发 user/prompt_cache_key
+    # (下方 Round 10 注释是铁证: 传 user 会把 DeepSeek 公共前缀 cache 分裂成独立 namespace).
+    # 双 gate: provider 判别 + config 开关 (默认关); 端点拒收 400/422 时由 retry 层剥参拉黑.
+    try:
+        from .prompt_cache import detect_provider as _detect_provider
+
+        if _detect_provider(base_url, model) == "openai":
+            _rc = _get_runtime_config()
+            if _rc is not None and bool(
+                getattr(_rc, "catty_openai_prompt_cache_key_enabled", False),
+            ):
+                _pck_scope = ""
+                try:
+                    _pck_scope = get_current_scope_key() or ""
+                except Exception:  # noqa: BLE001
+                    _pck_scope = ""
+                if _pck_scope and f"{base_url}|{model}" not in _PROMPT_CACHE_KEY_BLOCKED:
+                    payload["prompt_cache_key"] = f"catty:{_pck_scope}"
+    except Exception:  # noqa: BLE001
+        pass
+
     # 主人 2026-05-29 Round 10 回滚: 完全不传 user 字段, 让 DeepSeek 后端公共前缀检测
     # 跨所有 catty 请求自动落盘共享 cache 池. 之前 Round 6 user=scope_key, Round 7 升级
     # scope+sys_md5 — 反而让每种 prefix 独立 namespace 都 cold start (主人 dashboard
@@ -1255,9 +1396,20 @@ async def _post_chat_completion_raw(
                             await asyncio.sleep(backoff)
                             continue
                         raise
+                    # 主人 2026-07-06: 端点拒 prompt_cache_key (严格中转 400/422) →
+                    # 剥参 + 拉黑该端点 + 重试本轮; 其余 4xx 语义不变 (直接抛)。
+                    if _status in (400, 422) and "prompt_cache_key" in payload:
+                        payload.pop("prompt_cache_key", None)
+                        _PROMPT_CACHE_KEY_BLOCKED.add(f"{base_url}|{model}")
+                        last_error = exc
+                        _logger.warning(
+                            f"endpoint rejected prompt_cache_key (stream HTTP {_status}), "
+                            f"stripped + blocked {base_url[:40]}|{model[:20]}, retrying",
+                        )
+                        continue
                     # 4xx 直接抛
                     raise
-                _log_cache_stats(data, model)
+                _log_cache_stats(data, model, messages=messages, base_url=base_url)
                 # 流式分支: chunk 已经 chunk-by-chunk 推过, 这里只 end_stream
                 if _dash_stream_id and _dash_mod is not None:
                     try:
@@ -1283,7 +1435,7 @@ async def _post_chat_completion_raw(
                 # === cache hit 监测 (DeepSeek / Anthropic / OpenAI 都识别) ===
                 # 主人 2026-05-28: 改为始终调用, 函数内部自己判断有无 cache 字段
                 # (DeepSeek 路径 enable_cache=False 但仍想看 prompt_cache_hit_tokens).
-                _log_cache_stats(data, model)
+                _log_cache_stats(data, model, messages=messages, base_url=base_url)
                 # === Dashboard: 推完整 text 当一次 delta + end_stream ===
                 if _dash_stream_id and _dash_mod is not None:
                     try:
@@ -1309,6 +1461,19 @@ async def _post_chat_completion_raw(
 
             detail = response.text[:500]
             if not (500 <= response.status_code < 600):
+                # 主人 2026-07-06: 端点拒 prompt_cache_key (严格中转 400/422) →
+                # 剥参 + 拉黑该端点 + 重试本轮; 其余 4xx 语义不变 (直接抛)。
+                if response.status_code in (400, 422) and "prompt_cache_key" in payload:
+                    payload.pop("prompt_cache_key", None)
+                    _PROMPT_CACHE_KEY_BLOCKED.add(f"{base_url}|{model}")
+                    last_error = OpenAICompatibleError(
+                        _catty_http_status_message("AI 接口", response.status_code), detail,
+                    )
+                    _logger.warning(
+                        f"endpoint rejected prompt_cache_key (HTTP {response.status_code}), "
+                        f"stripped + blocked {base_url[:40]}|{model[:20]}, retrying",
+                    )
+                    continue
                 # 4xx 直接抛,无重试意义
                 raise OpenAICompatibleError(
                     _catty_http_status_message("AI 接口", response.status_code), detail,
@@ -1608,6 +1773,34 @@ async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> st
         )
         _mark_fallback_warmed()
         return result
+    # 主人 2026-07-06 openai-claude-95: summary/主线兜底共用线 — ai_fallback 三件套
+    # 判定为 claude 时走 native /v1/messages (line="summary_fallback"), 失败落回 compat。
+    if _route_native(config, "summary_fallback", base_url, model):
+        try:
+            from .anthropic_native_client import post_messages_native
+            from .prompt_cache import resolve_cache_ttl
+            # prefill/sweep/hoist/断点全在 post_messages_native 内部收口 (2026-07-06)
+            data = await post_messages_native(
+                base_url=base_url,
+                api_key=api_key,
+                model=model,
+                messages=messages,
+                max_tokens=max_tokens or 4096,
+                temperature=temperature,
+                timeout=float(timeout),
+                metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+                cache_ttl=resolve_cache_ttl(config, "summary_fallback"),
+                line="summary_fallback",
+                prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
+                extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+            )
+            _mark_fallback_warmed()
+            return _extract_content(data)
+        except Exception as native_exc:  # noqa: BLE001
+            _logger.warning(
+                "summary_fallback native /v1/messages failed (%s); trying OpenAI-compat",
+                native_exc.__class__.__name__,
+            )
     result = await _post_chat_completion(
         base_url=base_url,
         api_key=api_key,
@@ -1666,7 +1859,11 @@ async def chat_completion_with_tools(
     # 格式 + history 里 OpenAI 风格 tool 消息 → Anthropic native tool_use/tool_result
     # blocks), 享受 cache hit 100% 同时保留 tool 调用能力.
     # router 模式强制走 OpenAI-compat (DeepSeek 等不走 Anthropic /v1/messages).
-    _native_route = bool(getattr(config, "catty_anthropic_native_enabled", False)) and not _router_active
+    # 主人 2026-07-06 openai-claude-95: gate 改 _route_native (per-line 判别, 见 §4.1)。
+    _native_route = (
+        _route_native(config, "main", config.catty_openai_base_url, _effective_main_model(config))
+        and not _router_active
+    )
     if _router_active:
         _logger.info(
             "tool_chat: router=%s model=%s starting with %d tools (OpenAI-compat, bypass main AI)",
@@ -1689,10 +1886,14 @@ async def chat_completion_with_tools(
     async def _dispatch_round(rtc: ToolChoice) -> dict[str, Any]:
         if _native_route:
             from .anthropic_native_client import post_messages_native_data
+            from .prompt_cache import resolve_cache_ttl
             # native /v1/messages 当前不透传 tool_choice — 一律走 provider auto。
             return await post_messages_native_data(
                 config, history, tools=tools,
                 metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+                model=_effective_main_model(config),
+                cache_ttl=resolve_cache_ttl(config, "main"),
+                line="main",
             )
         if _router_active:
             # 主人 2026-05-28 Step 1: 非 Claude 端点开真流式 (chunk push dashboard)
@@ -1980,7 +2181,9 @@ async def _chat_completion_impl(config: Config, messages: list[ChatMessage]) -> 
     # Anthropic native /v1/messages 分支 (主人 2026-05-28: NewAPI SG relay 透传 body 已开,
     # context_management server-side compaction 已在 Anthropic 端激活).
     # 失败降级走原 OpenAI-compat /chat/completions 路径 (兜底保证主链路不挂).
-    if getattr(config, "catty_anthropic_native_enabled", False):
+    # 主人 2026-07-06 openai-claude-95: gate 改 _route_native — 总闸开着但主线是
+    # deepseek 时不再白试 native (旧行为: 每轮 native 失败再降级, 浪费一次 RTT)。
+    if _route_native(config, "main", config.catty_openai_base_url, _effective_main_model(config)):
         try:
             result = await _post_anthropic_native_chat(config, messages)
             if _cloud_is_unhealthy():
@@ -2160,6 +2363,7 @@ async def _post_with_fallback(
     enable_cache: bool = False,
     cache_depth: int = 2,
     label: str = "",
+    line: str = "",
 ) -> str:
     """主 endpoint 调用失败 → 自动 fallback 到 ai_fallback config (sonnet → deepseek).
 
@@ -2170,31 +2374,44 @@ async def _post_with_fallback(
     主人 2026-05-28: native_enabled + Claude endpoint 时, 也走 native /v1/messages
     (绕开 NewAPI 中转层 OpenAI→Anthropic 转换 bug: codex_instant 等路径 OpenAI-compat
     带 role=system 被中转层转 Anthropic 时不提到顶层 system, Anthropic 直接 400 拒收).
+
+    主人 2026-07-06 openai-claude-95: gate 改 _route_native(line) per-line 判别;
+    降级链重排 native 失败 → 同 triple OpenAI-compat → line fallback (旧行为 native
+    异常直接跳 line fallback, 跳过了 compat 一级)。
     """
+    _line = line or "other"
     try:
-        # native /v1/messages 路径优先 (Claude endpoint + native_enabled)
-        if getattr(config, "catty_anthropic_native_enabled", False):
-            from .prompt_cache import is_claude_endpoint
-            if is_claude_endpoint(base_url, model):
+        # native /v1/messages 路径优先 (per-line 路由: 总闸 + override + detect_provider)
+        if _route_native(config, _line, base_url, model):
+            try:
                 from .anthropic_native_client import post_messages_native
-                from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
-                # 主人 2026-05-28 C18: caller 不标 cache_control, 全由 post_messages_native
-                # 内部 _apply_anthropic_cache_breakpoints 单一 owner 处理 (vscode 公式).
-                # sweep 也在 post_messages_native 内部做, 这里只做 prefill adapter.
-                prepared_messages = adapt_assistant_prefill_for_strict_user_end(messages)
+                from .prompt_cache import resolve_cache_ttl
+                # 主人 2026-05-28 C18 → 2026-07-06 收口: cache_control 标位、sweep、hoist、
+                # prefill 全由 post_messages_native 内部单一 owner 处理, caller 零预处理.
                 data = await post_messages_native(
                     base_url=base_url,
                     api_key=api_key,
                     model=model,
-                    messages=prepared_messages,
+                    messages=messages,
                     max_tokens=max_tokens or 4096,
                     temperature=temperature,
                     timeout=float(timeout),
                     enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
                     compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
                     metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+                    cache_ttl=resolve_cache_ttl(config, _line),
+                    line=_line,
+                    prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
+                    extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
                 )
                 return _extract_content(data)
+            except Exception as native_exc:  # noqa: BLE001
+                _logger.warning(
+                    "%s native /v1/messages failed (%s); trying OpenAI-compat same endpoint",
+                    label or "primary",
+                    native_exc.__class__.__name__,
+                )
+                # fall through → 同 triple 的 OpenAI-compat (请求本身可用, 只是 cache 死)
         return await _post_chat_completion(
             base_url=base_url, api_key=api_key, model=model,
             messages=messages, timeout=timeout, proxy=config.catty_http_proxy,
@@ -2271,6 +2488,7 @@ async def chat_completion_codex_instant(
         enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
         cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
         label=f"codex_instant({nsfw_model})",
+        line="spark",
     )
     # S6: codex_instant 覆盖 NSFW spark / 占位话 / 签到 caption — 都是面向用户的猫娘回复 → 蒸馏.
     # (在此入口埋而非 _post_with_fallback, 后者还被 _filter_completion 分类路径复用.)
@@ -2317,6 +2535,7 @@ async def _filter_completion(config: Config, messages: list[ChatMessage], *, fal
             or config.catty_openai_extra_body
         ),
         label=f"filter({model})",
+        line="filter",
     )
 
 
@@ -2559,6 +2778,32 @@ async def describe_images(config: Config, image_urls: list[str], context: str) -
         prepared_url = await _vision_image_url(config, url)
         content.append({"type": "image_url", "image_url": {"url": prepared_url}})
 
+    # 主人 2026-07-06 openai-claude-95: vision 线判定为 claude 时走 native (一次性调用
+    # 不标 cache breakpoints), 失败落回 compat。图片块由 _normalize_message_content 转换。
+    if _route_native(config, "vision", base_url, model):
+        try:
+            from .anthropic_native_client import post_messages_native
+
+            data = await post_messages_native(
+                base_url=base_url,
+                api_key=api_key,
+                model=model,
+                messages=[{"role": "user", "content": content}],
+                max_tokens=config.catty_vision_max_tokens or 4096,
+                temperature=config.catty_vision_temperature,
+                timeout=float(config.catty_vision_request_timeout or config.catty_request_timeout),
+                metadata_user_id=None,
+                tools=None,
+                line="vision",
+                enable_cache_breakpoints=False,
+                extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+            )
+            return _extract_content(data)
+        except Exception as native_exc:  # noqa: BLE001
+            _logger.warning(
+                "vision native /v1/messages failed (%s); trying OpenAI-compat",
+                native_exc.__class__.__name__,
+            )
     return await _post_chat_completion(
         base_url=base_url,
         api_key=api_key,
@@ -2593,10 +2838,38 @@ async def analyze_images_for_reply(config: Config, image_urls: list[str], contex
         prepared_url = await _vision_image_url(config, url)
         content.append({"type": "image_url", "image_url": {"url": prepared_url}})
 
+    _v_base_url = config.catty_vision_base_url or config.catty_openai_base_url
+    _v_api_key = config.catty_vision_api_key or config.catty_openai_api_key
+    _v_model = config.catty_vision_model or config.catty_openai_model
+    # 主人 2026-07-06 openai-claude-95: vision 线 native 旁路 (同 describe_images)。
+    if _route_native(config, "vision", _v_base_url, _v_model):
+        try:
+            from .anthropic_native_client import post_messages_native
+
+            data = await post_messages_native(
+                base_url=_v_base_url,
+                api_key=_v_api_key,
+                model=_v_model,
+                messages=[{"role": "user", "content": content}],
+                max_tokens=config.catty_vision_max_tokens or 4096,
+                temperature=config.catty_vision_temperature,
+                timeout=float(config.catty_vision_request_timeout or config.catty_request_timeout),
+                metadata_user_id=None,
+                tools=None,
+                line="vision",
+                enable_cache_breakpoints=False,
+                extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+            )
+            return _image_analysis_from_reply(_extract_content(data))
+        except Exception as native_exc:  # noqa: BLE001
+            _logger.warning(
+                "vision native /v1/messages failed (%s); trying OpenAI-compat",
+                native_exc.__class__.__name__,
+            )
     reply = await _post_chat_completion(
-        base_url=config.catty_vision_base_url or config.catty_openai_base_url,
-        api_key=config.catty_vision_api_key or config.catty_openai_api_key,
-        model=config.catty_vision_model or config.catty_openai_model,
+        base_url=_v_base_url,
+        api_key=_v_api_key,
+        model=_v_model,
         messages=[{"role": "user", "content": content}],
         timeout=config.catty_vision_request_timeout or config.catty_request_timeout,
         proxy=config.catty_http_proxy,

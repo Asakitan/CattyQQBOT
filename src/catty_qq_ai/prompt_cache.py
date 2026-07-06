@@ -87,14 +87,40 @@ def _get_cache_ttl() -> str | None:
     return None  # 默认 5min (不显式传 ttl 字段)
 
 
-def _build_cache_control_dict() -> dict[str, Any]:
+def resolve_cache_ttl(config: Any, line: str) -> str | None:
+    """per-line TTL 解析 (主人 2026-07-06 openai-claude-95 §4.1).
+
+    catty_cache_ttl_overrides[line] 优先, 缺省落全局 catty_cache_ttl。
+    返回 "1h" 或 "5min"; 异常返回 None (调用方沿用全局行为)。
+    """
+    try:
+        ov = ""
+        try:
+            overrides = getattr(config, "catty_cache_ttl_overrides", {}) or {}
+            ov = str(overrides.get(line or "", "") or "").strip()
+        except Exception:  # noqa: BLE001
+            ov = ""
+        val = ov or str(getattr(config, "catty_cache_ttl", "5min") or "5min").strip()
+        return "1h" if val.lower() == "1h" else "5min"
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _build_cache_control_dict(ttl: str | None = None) -> dict[str, Any]:
     """构造 cache_control dict, 根据 config 决定是否加 ttl: 1h.
 
     返回 {type: ephemeral} 或 {type: ephemeral, ttl: "1h"}.
+
+    主人 2026-07-06: 加 ttl 参数解除模块全局 config 依赖 (per-line override /
+    sim A/B config 副本可控)。ttl=None = 沿用全局 catty_cache_ttl (原行为不变);
+    传 "1h"/"5min" 时用传入值 (5min 是 Anthropic 默认, 不显式传字段)。
     """
     cc: dict[str, Any] = {"type": "ephemeral"}
-    ttl = _get_cache_ttl()
-    if ttl == "1h":
+    if isinstance(ttl, str) and ttl.strip():
+        eff = "1h" if ttl.strip().lower() == "1h" else None
+    else:
+        eff = _get_cache_ttl()
+    if eff == "1h":
         cc["ttl"] = "1h"
     return cc
 
@@ -312,6 +338,46 @@ def is_claude_endpoint(base_url: str, model: str) -> bool:
         return True
     # 中间人 (hugou.cc / openrouter) 模型名含 claude/anthropic/sonnet 都走 cache_control
     return False
+
+
+def detect_provider(base_url: str, model: str) -> str:
+    """请求侧 provider 判别: 'claude' | 'deepseek' | 'openai' | 'other'.
+
+    主人 2026-07-06 openai-claude-95 计划 §一: **URL 已知域名优先于模型名** —
+    这是 persona model_override 防呆的机制保证 (主线 base_url=deepseek 时 override
+    成 claude 模型名 → 仍判 deepseek 走 compat, 端点 400 暴露配置错误, 而不是
+    对 deepseek 端点走 claude 协议)。host 未知 (中转) 才按模型名归类。
+
+    用途分工: 本函数只管请求侧门控 (native 路由 / prompt_cache_key 注入) 和
+    HIT_TARGET 的 provider 标签; 响应侧 usage 解析仍按字段嗅探 (中转改写 usage
+    字段时监控不瞎)。is_claude_endpoint 本体保持零改动 (compat-claude 遗留路径用)。
+    """
+    host = ""
+    try:
+        from urllib.parse import urlparse
+
+        host = (urlparse((base_url or "").strip()).hostname or "").lower()
+    except Exception:  # noqa: BLE001
+        host = ""
+    if host:
+        if host == "deepseek.com" or host.endswith(".deepseek.com"):
+            return "deepseek"
+        if (
+            host == "openai.com"
+            or host.endswith(".openai.com")
+            or host.endswith(".openai.azure.com")
+        ):
+            return "openai"
+        if host == "anthropic.com" or host.endswith(".anthropic.com"):
+            return "claude"
+    m = (model or "").strip().lower()
+    if is_claude_endpoint("", model):
+        return "claude"
+    if m.startswith("deepseek"):
+        return "deepseek"
+    if m.startswith(("gpt-", "chatgpt-", "o1", "o3", "o4")):
+        return "openai"
+    return "other"
 
 
 def adapt_assistant_prefill_for_strict_user_end(messages: list) -> list:

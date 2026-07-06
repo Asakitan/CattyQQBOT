@@ -366,6 +366,7 @@ async def sim_chat(
     card: str | None = None,
     title: str | None = None,
     group_name: str | None = None,
+    provider_override: str | None = None,
 ) -> dict[str, Any]:
     """模拟一条 incoming message, 走 _build_messages 拼完整 prompt, 可选调 AI 拿 reply.
 
@@ -421,6 +422,42 @@ async def sim_chat(
         )
 
     cfg = _module_config
+
+    # 主人 2026-07-06 openai-claude-95 §五: A/B provider override — 按名字从
+    # config.catty_test_providers 取 {base_url, api_key, model, native?("1")},
+    # 用 pydantic 副本只影响本次调用 (chat_completion* 全部从传入 cfg 实例读,
+    # 结构性不泄漏真实流量; 凭据留在 config 不过 HTTP)。
+    # prompt 仍由全局 config 拼 (_build_messages 不吃 cfg) → 消息字节与生产一致,
+    # 只换端点 — 正是 A/B 想要的"同 prompt 换 provider"。
+    # 同时覆盖 spark/codex_instant 三件套: prefer_spark 轮次也打测试端点。
+    _override_model = ""
+    if provider_override:
+        _entry = (getattr(cfg, "catty_test_providers", {}) or {}).get(
+            str(provider_override).strip(),
+        )
+        if not isinstance(_entry, dict) or not str(_entry.get("base_url") or "").strip() \
+                or not str(_entry.get("model") or "").strip():
+            return {
+                "messages": [], "system_blocks": 0, "history_count": 0,
+                "reply": (
+                    f"[sim_chat: test provider {provider_override!r} 未注册或缺 base_url/model"
+                    " — 在远端 config.json ai.test_providers 里配]"
+                ),
+                "stats": {},
+            }
+        _override_model = str(_entry.get("model") or "").strip()
+        _override_base = str(_entry.get("base_url") or "").strip().rstrip("/")
+        _override_key = str(_entry.get("api_key") or "")
+        cfg = cfg.model_copy(update={
+            "catty_openai_base_url": _override_base,
+            "catty_openai_api_key": _override_key,
+            "catty_openai_model": _override_model,
+            "catty_nsfw_spark_base_url": _override_base,
+            "catty_nsfw_spark_api_key": _override_key,
+            "catty_nsfw_spark_model": _override_model,
+            "catty_codex_instant_model": _override_model,
+            "catty_anthropic_native_enabled": str(_entry.get("native") or "") == "1",
+        })
 
     incoming = extract_incoming_message(str(getattr(cfg, "qq_account", "0") or "0"), event, cfg)
     if incoming is None:
@@ -593,6 +630,8 @@ async def sim_chat(
         "system_blocks": len(system_msgs),
         "history_count": len(history_msgs),
         "reply": reply,
+        "provider_override": str(provider_override or ""),
+        "override_model": _override_model,
         "stats": {
             "total_chars": total_chars,
             "system_chars": sys_chars,

@@ -499,6 +499,13 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_ANTHROPIC_NATIVE_ENABLED", ai.get("anthropic_native_enabled"))
     _set_env("CATTY_COMPACTION_ENABLED", ai.get("compaction_enabled"))
     _set_env("CATTY_COMPACTION_TRIGGER_TOKENS", ai.get("compaction_trigger_tokens"))
+    # 主人 2026-07-06 多 provider 缓存适配 (openai-claude-95): 全部可缺省 → 走代码默认
+    _set_env("CATTY_OPENAI_PROMPT_CACHE_KEY_ENABLED", ai.get("openai_prompt_cache_key_enabled"))
+    _set_env("CATTY_NATIVE_ROUTE_OVERRIDES", ai.get("native_route_overrides"), json_value=True)
+    _set_env("CATTY_CACHE_TTL_OVERRIDES", ai.get("cache_ttl_overrides"), json_value=True)
+    _set_env("CATTY_NATIVE_PREFILL_MODE", ai.get("native_prefill_mode"))
+    _set_env("CATTY_NATIVE_EXTRA_BETAS", ai.get("native_extra_betas"), json_value=True)
+    _set_env("CATTY_TEST_PROVIDERS", ai.get("test_providers"), json_value=True)
 
     ai_fallback = _section(data, "ai_fallback")
     _set_env("CATTY_AI_FALLBACK_ENABLED", ai_fallback.get("enabled"))

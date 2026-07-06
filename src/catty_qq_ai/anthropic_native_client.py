@@ -138,10 +138,60 @@ def _strip_existing_cache_control(
     return stripped
 
 
+# 主人 2026-07-06 openai-claude-95 §2.5: prefill auto 模式的模型名分派表 —
+# 这些家族对末尾 assistant prefill 返回 400, 走 hint; 其余 (sonnet-4-5/haiku/3.x) 走 native。
+_PREFILL_HINT_MODEL_KEYS = (
+    "sonnet-4-6", "opus-4-6", "opus-4-7", "opus-4-8", "fable", "mythos",
+)
+
+
+def _apply_prefill_mode(messages: list[dict], prefill_mode: str, model: str) -> list[dict]:
+    """末尾 assistant prefill 收口 — 单一 owner (主人 2026-07-06 openai-claude-95 §2.5).
+
+    hint (默认): 等价旧外部 adapt_assistant_prefill_for_strict_user_end 调用 —
+        丢末尾 assistant, prefill 文本转强 IC hint 追加进最近 user 并把该 user 移到末尾
+        (字节等价迁移, 外部 caller 的 adapt 调用已删除)。
+    native: 保留末尾 assistant 真续写 (Anthropic 协议原生支持);
+        400 规则: 末 text block 不得有尾随空白 → rstrip。空 prefill 直接 drop。
+    auto: 按模型名分派 (_PREFILL_HINT_MODEL_KEYS 命中 → hint, 否则 → native)。
+
+    无末尾 assistant → no-op 原样返回。
+    """
+    if (
+        not messages
+        or not isinstance(messages[-1], dict)
+        or messages[-1].get("role") != "assistant"
+    ):
+        return messages
+    mode = (prefill_mode or "hint").strip().lower()
+    if mode == "auto":
+        ml = (model or "").lower()
+        mode = "hint" if any(k in ml for k in _PREFILL_HINT_MODEL_KEYS) else "native"
+    if mode == "native":
+        tail = messages[-1]
+        c = tail.get("content")
+        if isinstance(c, str):
+            if not c.strip():
+                return messages[:-1]  # 空 prefill → drop
+            tail["content"] = c.rstrip()
+        elif isinstance(c, list):
+            for j in range(len(c) - 1, -1, -1):
+                blk = c[j]
+                if isinstance(blk, dict) and blk.get("type") == "text":
+                    blk["text"] = str(blk.get("text") or "").rstrip()
+                    break
+        return messages
+    from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
+    return adapt_assistant_prefill_for_strict_user_end(messages)
+
+
 def _apply_anthropic_cache_breakpoints(
     system_blocks: list[dict] | None,
     messages: list[dict],
     tools: list[dict] | None,
+    cc: dict | None = None,
+    line: str = "",
+    scope_block_indices: list[int] | None = None,
 ) -> None:
     """单一 owner 标 Anthropic cache_control 4 breakpoint (vscode messagesApi.ts 公式).
 
@@ -165,8 +215,11 @@ def _apply_anthropic_cache_breakpoints(
     if _stripped > 0:
         logger.debug("cache_control single-owner: stripped %d residual marker(s)", _stripped)
 
-    from .prompt_cache import _build_cache_control_dict
-    cc = _build_cache_control_dict()
+    # 主人 2026-07-06 openai-claude-95: cc 可由 caller 传入 (per-line TTL override);
+    # None = 沿用全局 config.catty_cache_ttl (原行为不变)。
+    if cc is None:
+        from .prompt_cache import _build_cache_control_dict
+        cc = _build_cache_control_dict()
 
     # 主人 2026-05-28 cache diag: dump sys block hash + sizes (诊断 cache miss)
     try:
@@ -205,47 +258,94 @@ def _apply_anthropic_cache_breakpoints(
     except Exception as _exc:  # noqa: BLE001
         logger.debug(f"cache_diag log failed: {_exc}")
 
-    # 1. tools[-1] (Anthropic native: 顶层 cache_control 字段)
-    if tools:
-        for i in range(len(tools) - 1, -1, -1):
-            if isinstance(tools[i], dict):
-                tools[i]["cache_control"] = cc
-                break
+    # === 主人 2026-07-06 openai-claude-95 §2.2 断点 v2 (预算 4, 按优先级分配) ===
+    # 旧 vscode 公式的问题: ① system[-1] 单断点无法让「全局段」独立于「scope 段」命中
+    # (新 scope 首轮吃不到全网共享的全局前缀); ② messages 倒数第 1 条 = current user
+    # (含每轮变的动态尾) → 该 entry 次轮必 miss, 纯写价浪费。
+    # v2: ① tools[-1] → ② 全局段末 block (含 CACHE_BOUNDARY marker, 全 scope 共享 entry)
+    # → ③ scope-hoist block (同 scope 跨轮 entry) → ④ 尾部: spark 标 final user
+    # (软拒 retry 同字节 → retry 0.1x 读全量), 其余线路标 history 尾锚 (跳过 current
+    # user 和 trailing assistant prefill)。
+    budget = 4
 
-    # 2. system_blocks[-1] 末 block (跳 thinking) — vscode 公式
-    # 主人 2026-05-28 撤回 P5.7 sys[0] 改动: 严格走 vscode messagesApi.ts 公式.
-    # 真正 fix 在 caller: NSFW spark 不再 inject 动态段到 sys 末尾, 改 user content.
-    if system_blocks:
-        for i in range(len(system_blocks) - 1, -1, -1):
-            blk = system_blocks[i]
-            if (
-                isinstance(blk, dict)
-                and blk.get("type") not in ("thinking", "redacted_thinking")
-            ):
-                blk["cache_control"] = cc
-                break
-
-    # 3 + 4. messages 倒数 2 条可缓存 message 末 block — vscode 公式 (撤回 P5 砍位)
-    marked = 0
-    for i in range(len(messages) - 1, -1, -1):
-        if marked >= 2:
-            break
-        m = messages[i]
-        if not isinstance(m, dict):
-            continue
-        if m.get("role") not in ("user", "assistant"):
-            continue
+    def _mark_message(idx: int) -> bool:
+        m = messages[idx]
+        if not isinstance(m, dict) or m.get("role") not in ("user", "assistant"):
+            return False
         content = m.get("content")
         if isinstance(content, str) and content.strip():
             m["content"] = [{"type": "text", "text": content, "cache_control": cc}]
-            marked += 1
-        elif isinstance(content, list) and content:
+            return True
+        if isinstance(content, list) and content:
             for j in range(len(content) - 1, -1, -1):
                 blk = content[j]
                 if isinstance(blk, dict) and blk.get("type") not in ("thinking", "redacted_thinking"):
                     blk["cache_control"] = cc
-                    marked += 1
+                    return True
+        return False
+
+    # ① tools[-1] (Anthropic native: 顶层 cache_control 字段)
+    if tools:
+        for i in range(len(tools) - 1, -1, -1):
+            if isinstance(tools[i], dict):
+                tools[i]["cache_control"] = cc
+                budget -= 1
+                break
+
+    # ② 全局段末 block: 优先「含 CACHE_BOUNDARY marker 的最后一个 block」(order=455
+    #    收尾锚, 语义天然对齐全局稳定前缀); 找不到 → 最后一个非 scope-hoist 的 block。
+    _scope_set = set(scope_block_indices or [])
+    _gidx: int | None = None
+    if system_blocks and budget > 0:
+        try:
+            from .prompt_cache import _CACHE_BOUNDARY_MARKER
+        except Exception:  # noqa: BLE001
+            _CACHE_BOUNDARY_MARKER = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
+        for i in range(len(system_blocks) - 1, -1, -1):
+            blk = system_blocks[i]
+            if isinstance(blk, dict) and _CACHE_BOUNDARY_MARKER in str(blk.get("text", "")):
+                _gidx = i
+                break
+        if _gidx is None:
+            for i in range(len(system_blocks) - 1, -1, -1):
+                if i in _scope_set:
+                    continue
+                blk = system_blocks[i]
+                if (
+                    isinstance(blk, dict)
+                    and blk.get("type") not in ("thinking", "redacted_thinking")
+                ):
+                    _gidx = i
                     break
+        if _gidx is not None:
+            system_blocks[_gidx]["cache_control"] = cc
+            budget -= 1
+
+    # ③ scope-hoist block (最后一个 sentinel block, ≠ ②)
+    if _scope_set and system_blocks and budget > 0:
+        _sidx = max(_scope_set)
+        if _sidx != _gidx and 0 <= _sidx < len(system_blocks) and isinstance(system_blocks[_sidx], dict):
+            system_blocks[_sidx]["cache_control"] = cc
+            budget -= 1
+
+    # ④ 尾部锚
+    _last_user_idx: int | None = None
+    for i in range(len(messages) - 1, -1, -1):
+        m = messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            _last_user_idx = i
+            break
+    if line == "spark" and _last_user_idx is not None and budget > 0:
+        # spark: 标 final user — 同轮软拒 retry 请求字节相同, retry 直接 0.1x 读全量
+        if _mark_message(_last_user_idx):
+            budget -= 1
+    _i = (_last_user_idx - 1) if _last_user_idx is not None else len(messages) - 1
+    while budget > 0 and _i >= 0:
+        # history 尾锚 (= 上轮 assistant/user, 次轮真正能命中的写锚); 跳过 current user
+        # 之后的一切 (trailing assistant prefill 不标 — 次轮字节必变, 纯写价浪费)
+        if _mark_message(_i):
+            budget -= 1
+        _i -= 1
 
 
 def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -718,10 +818,17 @@ def _native_response_to_openai_shape(response: Any) -> dict[str, Any]:
     }
 
 
-def _log_native_usage(data: dict[str, Any], model: str) -> None:
+def _log_native_usage(
+    data: dict[str, Any],
+    model: str,
+    *,
+    messages: list[dict] | None = None,
+) -> None:
     """打印 native /v1/messages 的 usage + compaction 触发情况.
 
     跟 _log_cache_stats 同款字段, 但额外打印 applied_edits[] 标记 compaction 是否触发.
+    主人 2026-07-06 openai-claude-95 §二: 追加统一 HIT_TARGET 行 (provider=claude,
+    cache_metrics 分桶 rolling), 原有行为全部保留兜底。
     """
     usage = data.get("usage") or {}
     cache_read = int(usage.get("cache_read_input_tokens") or 0)
@@ -739,6 +846,46 @@ def _log_native_usage(data: dict[str, Any], model: str) -> None:
         "native /v1/messages model=%s read=%d create=%d new=%d hit=%.0f%%%s",
         (model or "")[:20], cache_read, cache_create, input_tokens, hit_rate * 100, compaction_flag,
     )
+    # === 统一 HIT_TARGET 行 (失败静默, 不影响原行为) ===
+    if total_input > 0:
+        try:
+            from .cache_metrics import (
+                compute_warm_fields,
+                format_hit_target_line,
+                record_hit,
+            )
+
+            _scope = ""
+            try:
+                from .openai_client import get_current_scope_key
+
+                _scope = get_current_scope_key() or ""
+            except Exception:  # noqa: BLE001
+                _scope = ""
+            _msgs, _hist, _warm = compute_warm_fields(messages)
+            stats = record_hit("claude", model or "", cache_read, input_tokens, cache_create)
+            logger.info(
+                format_hit_target_line(
+                    provider="claude",
+                    model=model or "",
+                    stats=stats,
+                    hit_tok=cache_read,
+                    miss_tok=input_tokens,
+                    create_tok=cache_create,
+                    msgs=_msgs,
+                    hist=_hist,
+                    warm=_warm,
+                    scope=_scope,
+                ),
+            )
+            if stats.should_warn:
+                logger.warning(
+                    "claude cache rolling hit_rate dropped to %.0f%% "
+                    "(target 95-98%%), check breakpoints/TTL",
+                    stats.roll_rate * 100,
+                )
+        except Exception:  # noqa: BLE001
+            pass
     # 主人 2026-05-28 C6: 推送到 dashboard 让前端实时显示 cache hit ratio
     try:
         from . import dashboard_state as _dash
@@ -773,8 +920,20 @@ async def post_messages_native(
     tools: list[dict] | None = None,
     extra_headers: dict[str, str] | None = None,
     metadata_user_id: str | None = None,
+    cache_ttl: str | None = None,
+    prefill_mode: str = "hint",
+    line: str = "",
+    enable_cache_breakpoints: bool = True,
 ) -> dict[str, Any]:
     """走 anthropic AsyncAnthropic SDK 发 /v1/messages, 返回 OpenAI-compat shape response.
+
+    主人 2026-07-06 openai-claude-95 新参数 (全部有默认值, 向后兼容):
+      cache_ttl: per-line TTL ("5min"/"1h", prompt_cache.resolve_cache_ttl 产出);
+                 None = 沿用全局 config.catty_cache_ttl。
+      prefill_mode: 末尾 assistant prefill 处理模式 ("hint"/"native"/"auto")。
+                 Batch B 仅接收 (外部 adapt 仍在 caller), Batch C 收口到本函数内。
+      line: 线路标签 (main/spark/filter/summary_fallback/vision), 日志/metrics 用。
+      enable_cache_breakpoints: False = 跳过 cache_control 标位 (vision 一次性调用)。
 
     Args:
         base_url:  NewAPI SG relay (e.g., http://localhost:3000) 或 native api.anthropic.com
@@ -831,7 +990,89 @@ async def post_messages_native(
     # 主人 2026-05-28 C19: tool_use/tool_result 配对兜底 — history rotation / batch
     # trim 切断配对 → Anthropic 500. 在转换格式之后立刻 sanitize, 删孤立 block.
     messages = _sanitize_tool_pairs(messages)
-    # 主人 2026-05-28 C11 重启 sweep: 主人贴 10:34-10:36 sweep 时代 cache hit 85%+ 实证.
+    # === 主人 2026-07-06 openai-claude-95 §4.2: native 前缀管线 (镜像 DeepSeek 管线) ===
+    # 顺序: stabilize_tools → strip_history 动态段 → scope hoist → prefill 收口 →
+    #       sweep → split(+sentinel 剥离/记录) → normalize → 断点 v2。
+    # 仅 sweep 不够 — 它会把私聊已 hoist 回收的稳定段每轮 inline 进 user 丢掉命中;
+    # 不需要 merge (Anthropic system 是 block 数组, block 结构跨轮稳定即可)。
+    # (2.5) tools 字典序锁死 — native 协议 tools 在 system 之前参与前缀, 顺序漂移=全报废
+    if tools:
+        try:
+            from .prompt_cache import stabilize_tools_order
+            tools = list(tools)
+            stabilize_tools_order(tools)
+        except Exception as _st_exc:  # noqa: BLE001
+            logger.debug(f"native stabilize_tools_order failed (non-fatal): {_st_exc}")
+    # (3) history user 剥 [DYNAMIC_CONTEXT]/[DYN_SYS]/<<<INTERNAL>>> 残留 (保险丝,
+    #     current-turn 最后一条 user 不动 — 与 deepseek 路径同一函数同语义)
+    try:
+        from .prompt_cache import strip_inline_dynamic_segments_from_history
+        strip_inline_dynamic_segments_from_history(messages)
+    except Exception as _sh_exc:  # noqa: BLE001
+        logger.debug(f"native strip_inline_history failed (non-fatal): {_sh_exc}")
+    # (4) scope hoist — 复刻 openai_client._post_chat_completion_raw (a3) 的调度:
+    #     private → private 白名单; group + owner 开头 → owner 白名单; group → common。
+    #     hoist 块带 _SCOPE_PREFIX_SENTINEL 插在顶部 system run 末尾 (history 之前)。
+    _scope_hoisted = 0
+    try:
+        from .prompt_cache import (
+            hoist_stable_group_common_trailing,
+            hoist_stable_group_owner_trailing,
+            hoist_stable_private_trailing,
+        )
+        try:
+            from .openai_client import get_current_scope_key as _get_scope
+            _hoist_scope = _get_scope() or ""
+        except Exception:  # noqa: BLE001
+            _hoist_scope = ""
+        if _hoist_scope.startswith("private:"):
+            _scope_hoisted = hoist_stable_private_trailing(messages)
+        elif _hoist_scope.startswith("group:"):
+            _owner_qq = ""
+            try:
+                import sys as _sys
+                _plugin_mod = _sys.modules.get("catty_qq_ai") or _sys.modules.get("src.catty_qq_ai")
+                _runtime_config = getattr(_plugin_mod, "config", None) if _plugin_mod is not None else None
+                _owner_qq = str(getattr(_runtime_config, "catty_owner_qq", "") or "").strip()
+                if not _owner_qq or _owner_qq == "0":
+                    import os as _os
+                    _owner_qq = str(_os.environ.get("CATTY_OWNER_QQ", "") or "").strip()
+            except Exception:  # noqa: BLE001
+                _owner_qq = ""
+            _current_user_text = ""
+            for _m in reversed(messages):
+                if isinstance(_m, dict) and _m.get("role") == "user":
+                    _c = _m.get("content", "")
+                    if isinstance(_c, list):
+                        _current_user_text = "\n".join(
+                            str(_b.get("text", "") or "")
+                            for _b in _c if isinstance(_b, dict)
+                        )
+                    else:
+                        _current_user_text = str(_c or "")
+                    break
+            if _owner_qq and _current_user_text.startswith(f"[QQ:{_owner_qq}]"):
+                _scope_hoisted = hoist_stable_group_owner_trailing(messages)
+            else:
+                _scope_hoisted = hoist_stable_group_common_trailing(messages)
+        if _scope_hoisted:
+            logger.info(
+                "native prefix opt: hoisted %d stable trailing → history前 sentinel block (line=%s)",
+                _scope_hoisted, line or "?",
+            )
+    except Exception as _hoist_exc:  # noqa: BLE001
+        logger.debug(f"native scope hoist failed (non-fatal): {_hoist_exc}")
+    # (5) prefill 收口 (单一 owner — 外部 caller 不再各自 adapt)
+    try:
+        messages = _apply_prefill_mode(messages, prefill_mode, model)
+    except Exception as _pf_exc:  # noqa: BLE001
+        logger.warning(f"native prefill 收口失败 (降级 hint 语义): {_pf_exc}")
+        try:
+            from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
+            messages = adapt_assistant_prefill_for_strict_user_end(messages)
+        except Exception:  # noqa: BLE001
+            pass
+    # (6) 主人 2026-05-28 C11 重启 sweep: 主人贴 10:34-10:36 sweep 时代 cache hit 85%+ 实证.
     # 回退 sweep 后 sys_blocks 含动态段, NewAPI relay 看 sys 数组不稳定 → cache miss.
     # 重启让 sys 段只剩静态 (persona+override+supplement), 动态段 inline 到 user [DYNAMIC_CONTEXT].
     # history 不进 cache (messages marker C10 已删), 只 sys static prefix 进 cache. 拒绝问题
@@ -844,8 +1085,19 @@ async def post_messages_native(
     # Phase 1.3 守卫: sweep 后再扫一遍, 看动态段是否仍以 system role 漏出. 不 raise (主人选 A
     # 留生产但 DEBUG/WARNING 提示), 漏出会被 _split_system_and_messages 自动归并到 system_blocks.
     _warn_inline_system_messages(messages)
-    # 拆分顶部 system + 对话, 并 normalize multimodal content
+    # (7) 拆分顶部 system + 对话; sentinel 剥离 + 记录 scope block 索引 (断点 v2 用)
     system_blocks, other_messages = _split_system_and_messages(messages)
+    _scope_block_indices: list[int] = []
+    try:
+        from .prompt_cache import _SCOPE_PREFIX_SENTINEL
+        for _bi, _blk in enumerate(system_blocks):
+            _bt = _blk.get("text") if isinstance(_blk, dict) else None
+            if isinstance(_bt, str) and _SCOPE_PREFIX_SENTINEL in _bt:
+                _blk["text"] = _bt.replace(_SCOPE_PREFIX_SENTINEL, "")
+                _scope_block_indices.append(_bi)
+    except Exception as _sn_exc:  # noqa: BLE001
+        logger.debug(f"native sentinel strip failed (non-fatal): {_sn_exc}")
+    # (8) normalize multimodal content
     other_messages = [_normalize_message_content(m) for m in other_messages]
 
     create_kwargs: dict[str, Any] = {
@@ -873,12 +1125,22 @@ async def post_messages_native(
     #   4. messages 倒数第 2 条「可缓存」block cache_control (TTL 漂移 fallback)
     try:
         from .prompt_cache import is_claude_endpoint
-        if is_claude_endpoint(base_url, model):
+        if enable_cache_breakpoints and is_claude_endpoint(base_url, model):
+            # 主人 2026-07-06: per-line TTL — cache_ttl 传入时构造对应 cc, 否则沿用全局
+            _cc_override = None
+            if cache_ttl:
+                from .prompt_cache import _build_cache_control_dict
+                _cc_override = _build_cache_control_dict(cache_ttl)
             _apply_anthropic_cache_breakpoints(
                 create_kwargs.get("system"),
                 create_kwargs["messages"],
                 create_kwargs.get("tools"),
+                cc=_cc_override,
+                line=line,
+                scope_block_indices=_scope_block_indices,
             )
+        elif not enable_cache_breakpoints:
+            logger.debug("cache breakpoints skipped (enable_cache_breakpoints=False, line=%s)", line)
     except Exception as _cc_exc:  # noqa: BLE001
         logger.debug(f"cache_control 标位失败 (non-fatal): {_cc_exc}")
 
@@ -1225,7 +1487,7 @@ async def post_messages_native(
         logger.debug(f"diagnostics parse failed (non-fatal): {_diag_exc}")
 
     data = _native_response_to_openai_shape(response)
-    _log_native_usage(data, model)
+    _log_native_usage(data, model, messages=messages)
     return data
 
 
@@ -1235,6 +1497,11 @@ async def post_messages_native_data(
     *,
     tools: list[dict] | None = None,
     metadata_user_id: str | None = None,
+    base_url: str | None = None,
+    api_key: str | None = None,
+    model: str | None = None,
+    cache_ttl: str | None = None,
+    line: str = "main",
 ) -> dict[str, Any]:
     """走 native /v1/messages, 返回完整 OpenAI-compat response dict (含 tool_calls).
 
@@ -1246,15 +1513,14 @@ async def post_messages_native_data(
     post_messages_native 内部 sweep+split_system 之后由 _apply_anthropic_cache_breakpoints
     统一标. caller 层 (这里) 不再插 cache_control marker, 避免 multiple owners 冲突.
     """
-    # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill
-    from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
-    messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
-
+    # 主人 2026-07-06 openai-claude-95 §2.5: 外部 adapt 已删 — prefill 收口在
+    # post_messages_native 内部 _apply_prefill_mode 单一 owner 处理。
+    # 三件套可由 caller 按线路传入 (per-line 路由), None = 落回主线 catty_openai_*。
     return await post_messages_native(
-        base_url=config.catty_openai_base_url,
-        api_key=config.catty_openai_api_key,
-        model=config.catty_openai_model,
-        messages=messages_for_native,
+        base_url=(base_url or config.catty_openai_base_url),
+        api_key=(api_key or config.catty_openai_api_key),
+        model=(model or config.catty_openai_model),
+        messages=messages,
         max_tokens=config.catty_max_tokens or 4096,
         temperature=config.catty_temperature,
         metadata_user_id=metadata_user_id,
@@ -1262,6 +1528,10 @@ async def post_messages_native_data(
         enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
         compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
         tools=tools,
+        cache_ttl=cache_ttl,
+        line=line,
+        prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
+        extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
     )
 
 
