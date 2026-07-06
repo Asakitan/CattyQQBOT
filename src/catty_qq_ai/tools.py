@@ -2785,6 +2785,34 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
     return plan
 
 
+async def _persona_image_caption(
+    config: Config, persona: Any, user_text: str, gen_prompt: str,
+) -> str:
+    """非 catty 人格的画图配文 — 用人格 core_persona + instant 模型现写 (主人 2026-07-06:
+    机机的画图回复让 AI 自己来写, 不用 planner 的 short_review 模板腔)。失败返 "" 由调用方兜底。"""
+    from .openai_client import chat_completion_codex_instant
+    messages: list[dict[str, Any]] = []
+    core = str(getattr(persona, "core_persona", "") or "")
+    if core:
+        messages.append({"role": "system", "content": core})
+    messages.append({
+        "role": "system",
+        "content": (
+            "情境: 你刚用画图工具画完一张图, 图马上会随这条消息一起发到群里. "
+            f"生图内容概要: {(gen_prompt or '')[:200]}\n"
+            "给这张图写配文: 1-2 条你的口吻短句 (可换行分条), 别解释画图过程, "
+            "别罗列积分/数字 (系统会自动补报价), 不用 Markdown, 只输出正文."
+        ),
+    })
+    messages.append({"role": "user", "content": (user_text or "").strip()[:200] or "画好了"})
+    try:
+        reply = await chat_completion_codex_instant(config, messages, max_tokens=150)
+    except Exception as exc:  # noqa: BLE001
+        _logger.debug("persona image caption failed (non-fatal): %s", exc)
+        return ""
+    return str(reply or "").strip()
+
+
 async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     """Agent 模式入口 — sonnet 传空 args 时执行此函数。
 
@@ -2880,6 +2908,13 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
 
     if not isinstance(gen_result, dict) or "error" in gen_result:
         return gen_result  # 生图失败原样返回, 让主 AI 看到 error 并解释
+
+    # 多人格 (主人 2026-07-06): 非 catty 配文由人格 AI 现写 (core_persona + instant),
+    # planner 的 short_review 只作 AI 失败时的兜底.
+    if _persona_imagegen is not None:
+        _ai_review = await _persona_image_caption(ctx.config, _persona, user_text, gen_prompt)
+        if _ai_review:
+            short_review = _ai_review
 
     # 把 deepseek 短评 + 报价拼到 _short_circuit_reply
     cost = int(gen_result.get("cost", 0) or 0)
