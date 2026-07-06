@@ -6794,13 +6794,12 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "——『反应』『吐槽』『话题展开』三个真实轮次。"
         )
     else:
-        # 多人格 (主人 2026-07-06): 非 catty (机机) 默认反过来 — 弹幕式连发, 拆是常态.
+        # 多人格 (主人 2026-07-06): 非 catty (机机) — 1 条短句为主, 连发是情绪爆发不是常态.
         return (
-            "QQ 回复分段规则——弹幕式连发是常态："
-            "一个意思拆成 2~4 条 3-8 字的短气泡（换行分条），像连着发弹幕；"
-            "偶尔一条 20-40 字长句收尾。"
-            "**正例**：『无敌绘制』『已稳定』『这么简单的道理』『怎么没人发现过』——四条短气泡。"
-            "**例外**：单词就能回的（帅 / 草 / 好好好好）只发一条，别硬凑；"
+            "QQ 回复分段规则——长度分布：大多数回复只有 1 条短句（3-15 字）；"
+            "偶尔 2 条；情绪上头/整活才 3~4 条 3-8 字短气泡连发（换行分条）。"
+            "**连发正例**（仅整活时）：『无敌绘制』『已稳定』『这么简单的道理』『怎么没人发现过』。"
+            "单词就能回的（帅 / 草 / 好好好好）只发一条，别硬凑；"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
             f"拆分方法两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
             "被拆的前几条结尾少用句号/感叹号，自然些。"
@@ -8172,7 +8171,7 @@ def _looks_like_qq_short_chat(reply: str) -> bool:
     return True
 
 
-def _reply_chunks(reply: str) -> list[str]:
+def _reply_chunks(reply: str, persona=None) -> list[str]:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     reply = _strip_unicode_emoji_for_send(reply)
 
@@ -8190,6 +8189,24 @@ def _reply_chunks(reply: str) -> list[str]:
             chunks[index] = chunks[index].rstrip(TRAILING_CHAT_PUNCTUATION)
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
+
+    # 路径 1.5 (多人格, 主人 2026-07-06): 非 catty 人格 (机机) 弹幕式换行必须切开 —
+    # 旧路径 2 的三个坑会让"换行了但没分条": >max_chunks 行整段不切 / 总长 >240 不切 /
+    # 单段 >80 不切. 这里放宽: 行数超限用 _cap_reply_chunks 合并尾部, 总长阈值 320,
+    # 只要不是技术格式 (代码/公式/列表) 就按行切.
+    if (
+        persona is not None
+        and getattr(persona, "name", "catty") != "catty"
+        and "\n" in reply
+        and len(reply) <= 320
+        and not any(m in reply for m in _TECHNICAL_FORMATTING_PATTERNS)
+        and len(re.findall(r"(?:^|\n)\s*(?:[-*]|\d+\.)\s", reply)) < 2
+    ):
+        segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
+        if len(segments) >= 2 and all(len(seg) <= 100 for seg in segments):
+            for index in range(len(segments) - 1):
+                segments[index] = segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
+            return _cap_reply_chunks(segments, max_chunks=max_chunks)
 
     # 路径 2:AI 用换行表达"QQ 节奏拆分"(短回复且无技术格式标记)
     # —— 严格限定为短聊场景,避免长技术答里的 \n 被错拆
@@ -12142,7 +12159,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # history/memory 用文本+[图片]兜底,base64 不进 prompt token。
         reply_for_send, latex_sources = replace_latex_with_placeholders(_sanitize_reply_text_for_output(reply))
         reply_for_send, inline_image_urls = _extract_inline_images(reply_for_send)
-        chunks = _reply_chunks(reply_for_send)
+        chunks = _reply_chunks(reply_for_send, persona=_persona_for_event(event))
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
         if chunks:

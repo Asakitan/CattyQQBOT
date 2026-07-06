@@ -2725,11 +2725,11 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
             '  - "aspect": "portrait"|"landscape"|"square" — NAI 用, 默认 "portrait" (832x1216 立绘).\n'
             '  - "quality": "low"|"medium"|"high"|"auto" — GPT 用, 默认 "low".\n'
             '  - "negative_prompt": 可选, NAI 负面词. 不填留空字符串.\n'
-            f'  - "self_portrait": "sfw"|null. **只有用户明确说画『你/{_char}/自画像/自拍』本人时才填 "sfw"**'
-            ' (会自动加本地参考图锁人设, 强制 provider="nai").'
+            f'  - "self_portrait": "sfw"|null. **用户明确说画『你/{_char}/自画像/自拍』本人, 或要{_char}的'
+            '腿图/脚图/袜子照等局部时, 填 "sfw"** (会自动加本地参考图锁人设, 强制 provider="nai";'
+            ' 局部请求 prompt 加 lower body/foot focus/thighhighs 等构图 tags, 擦边不露骨).'
             ' 其他一切请求 (画用户/风景/别的角色/OC/梗图) 一律填 null —'
-            ' null 时**不加参考图**, prompt 也**绝不掺上面的外观锁 tags**, 完全按用户需求自由构思.'
-            ' 该人格不出露骨自画像 — 露骨请求也只按 "sfw" 擦边处理.\n'
+            ' null 时**不加参考图**, prompt 也**绝不掺上面的外观锁 tags**, 完全按用户需求自由构思.\n'
             f'  - "short_review": 1-2 句{_char}口吻的短评 (画好后会代替主 AI 发到群里). {_pi.short_review_style}\n'
             f"人格简介: {_pi.planner_brief}\n"
             " 不要在 short_review 里出现 OOC / 元评论 / Markdown."
@@ -3796,6 +3796,9 @@ _IMAGE_INTENT_WORDS: tuple[str, ...] = (
     "图片", "图像", "图一张",
     # 主人 2026-06-06: 并入原 _INTENT_KEYWORDS['catty_imagegen'] 独有词, 保覆盖不回退
     "海报", "壁纸", "猫娘画",
+    # 主人 2026-07-06 多人格: 腿/脚福利词也挂 imagegen tool — 机机人格腿图走画图自画像
+    # (catty 群不受影响: legs_picture matcher priority 35 先短路, 到不了主 AI).
+    "腿图", "看腿", "脚图", "看脚", "腿照", "脚照", "看看腿", "看看脚",
 )
 
 # 主人 2026-05-27 十七轮 fix: NSFW explicit 动作词 — 出现这些就**不是**画图请求
