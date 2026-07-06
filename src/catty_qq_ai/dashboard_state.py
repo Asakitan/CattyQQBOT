@@ -168,6 +168,14 @@ def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> N
         # Anthropic 定价系数 (1h TTL): cache_read 0.1x / cache_create 2.0x / input 1.0x
         billed_input_equiv = int(cache_read * 0.1 + cache_create * 2.0 + input_tokens * 1.0)
         saved_pct = (1 - billed_input_equiv / total_context) * 100 if total_context > 0 else 0.0
+    # 主人 2026-07-06: token 计费 turn 桶累加 (contextvar 并发隔离, 桶不存在时 no-op).
+    # total_context 两个分支都恰好 = prompt 总量 (DeepSeek: hit+miss / Anthropic: read+create+input).
+    try:
+        from .token_billing import add_turn_usage
+
+        add_turn_usage(prompt_tokens=total_context, completion_tokens=output_tokens)
+    except Exception:  # noqa: BLE001
+        pass
     _broadcast({
         "type": "cache_stats",
         "scope": scope,

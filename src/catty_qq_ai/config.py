@@ -491,6 +491,16 @@ class Config(BaseModel):
     catty_credit_persist_path: str = "src/catty_qq_ai/data/credit/user_credits.json"
     catty_credit_persist_debounce_seconds: float = 5.0
 
+    # ── Token 计费 (主人 2026-07-06, 取代上面已随 CPU 引擎关停的 credit 链路) ──
+    # 私聊: 每次回复按本轮全部 AI 调用的 prompt+completion token 扣积分,
+    #   每 tokens_per_point 个 token 扣 1 分 (向上取整); 余额 <=0 拦截要签到.
+    # 群聊: 不扣积分, 每人每小时 quota 个 token 额度 (整点桶), 超了拦截,
+    #   每小时只提示一次. 主人全豁免. 两者与 catty_credit_enabled 互不相干.
+    # 拦截提醒 AI 现写 (token_billing.ai_gate_reply), 失败兜底固定文案池.
+    catty_token_billing_enabled: bool = True
+    catty_private_tokens_per_point: int = 1000
+    catty_group_hourly_token_quota: int = 300_000  # 0 = 群聊不限
+
     # ── 强互动判定 (强制走 DeepSeek 的场景, 积分够才放行) ───────────────────
     # 主人 2026-05-28: NSFW phase>=P3 / 意图 ∈ strong_intents / 情绪强烈 / CPU 信心<阈值.
     catty_strong_cpu_confidence_threshold: float = 0.7

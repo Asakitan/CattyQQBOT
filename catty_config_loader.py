@@ -816,6 +816,12 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_CREDIT_PERSIST_PATH", credit.get("persist_path"))
     _set_env("CATTY_CREDIT_PERSIST_DEBOUNCE_SECONDS", credit.get("persist_debounce_seconds"))
 
+    # 主人 2026-07-06: token 计费 (私聊按 token 扣积分 + 群聊每人每小时额度)
+    token_billing = _section(data, "token_billing")
+    _set_env("CATTY_TOKEN_BILLING_ENABLED", token_billing.get("enabled"))
+    _set_env("CATTY_PRIVATE_TOKENS_PER_POINT", token_billing.get("private_tokens_per_point"))
+    _set_env("CATTY_GROUP_HOURLY_TOKEN_QUOTA", token_billing.get("group_hourly_token_quota"))
+
     strong = _section(data, "strong_interaction")
     _set_env("CATTY_STRONG_CPU_CONFIDENCE_THRESHOLD", strong.get("cpu_confidence_threshold"))
     _set_env("CATTY_STRONG_EMOTION_INTENSITY_THRESHOLD", strong.get("emotion_intensity_threshold"))

@@ -489,6 +489,29 @@ def get_current_scope_key() -> str | None:
     return _current_scope_key_var.get()
 
 
+# 主人 2026-07-06: persona 级主模型覆写 (机机走 deepseek-v4-pro, flash 接不住谐音黑话).
+# 同 scope_key 模式: handle_chat 入口按 persona set, 主回复路径 (OpenAI-compat) 读取.
+# 只覆盖 catty_openai_model 的主回复调用点; native /v1/messages、filter/vision/audit/
+# fallback 等独立 model 配置不受影响. 换模型只换 model 字段, prompt 字节不变;
+# DeepSeek server cache 按模型隔离, 机机 scope 首轮 miss 一次属预期.
+_current_model_override_var: contextvars.ContextVar[str | None] = contextvars.ContextVar(
+    "catty_current_model_override", default=None,
+)
+
+
+def set_current_model_override(model: str | None) -> contextvars.Token:
+    """bot handler 入口按 persona.model_override 调用; None/空串 = 用 config 主模型."""
+    return _current_model_override_var.set((model or "").strip() or None)
+
+
+def get_current_model_override() -> str | None:
+    return _current_model_override_var.get()
+
+
+def _effective_main_model(config: Config) -> str:
+    return get_current_model_override() or config.catty_openai_model
+
+
 # === S6 (主人 2026-05-29): DeepSeek 回复统一蒸馏 hook ===
 # 主人决策: 所有"主 AI / catnify 透传 / NSFW spark / 占位/签到"等【生成自然语言回复】
 # 的链路都要蒸馏到 L3 corpus, 但 filter/分类/判断 (输出 bool/JSON) 绝不采.
@@ -1698,14 +1721,14 @@ async def chat_completion_with_tools(
         try:
             from .prompt_cache import is_claude_endpoint
             _openai_stream = not is_claude_endpoint(
-                config.catty_openai_base_url, config.catty_openai_model,
+                config.catty_openai_base_url, _effective_main_model(config),
             )
         except Exception:  # noqa: BLE001
             _openai_stream = False
         return await _post_chat_completion_raw(
             base_url=config.catty_openai_base_url,
             api_key=config.catty_openai_api_key,
-            model=config.catty_openai_model,
+            model=_effective_main_model(config),
             messages=history,
             timeout=config.catty_request_timeout,
             proxy=config.catty_http_proxy,
@@ -1724,7 +1747,7 @@ async def chat_completion_with_tools(
     # 故只对 router / openai-compat 路径有意义。
     _force_endpoint_key = (
         f"{router_base_url}|{router_model}" if _router_active
-        else f"{config.catty_openai_base_url}|{config.catty_openai_model}"
+        else f"{config.catty_openai_base_url}|{_effective_main_model(config)}"
     )
 
     for round_idx in range(max(1, max_rounds)):
@@ -1986,7 +2009,7 @@ async def _chat_completion_impl(config: Config, messages: list[ChatMessage]) -> 
         result = await _post_chat_completion(
             base_url=config.catty_openai_base_url,
             api_key=config.catty_openai_api_key,
-            model=config.catty_openai_model,
+            model=_effective_main_model(config),
             messages=messages,
             timeout=config.catty_request_timeout,
             proxy=config.catty_http_proxy,

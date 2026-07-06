@@ -11137,8 +11137,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
     # 主人 2026-05-28: 设置 scope contextvar 让 LLM 调用层自动取出当前 scope 作为
     # Anthropic metadata.user_id (cache routing 关键). async task 内 contextvar 自动隔离.
     try:
-        from .openai_client import set_current_scope_key, set_current_distill_context
+        from .openai_client import (
+            set_current_scope_key,
+            set_current_distill_context,
+            set_current_model_override,
+        )
         set_current_scope_key(history_key)
+        # 主人 2026-07-06: persona 级主模型覆写 (机机→deepseek-v4-pro), contextvar
+        # 跟 scope_key 同生命周期, 本 handler task 内所有主回复调用生效.
+        set_current_model_override(
+            getattr(_persona_for_event(event), "model_override", None)
+        )
         # S6 (主人 2026-05-29): 记下本轮干净 user 原文 + 脱敏 terms, 让 openai_client 的
         # 回复入口 (chat_completion / _with_tools / _instant / _codex_instant) 在拿到
         # DeepSeek 回复时统一蒸馏到 L3 — 不管 handle_chat 内部怎么分段/分支都只采一次完整回复.
@@ -11180,6 +11189,77 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 f"scope={queue_key} text={incoming.text[:60]!r}"
             )
             await matcher.finish()
+
+        # ── 主人 2026-07-06: token 计费门 (见 token_billing.py 模块 docstring) ──
+        # 私聊: 余额 <=0 拦截 (撒娇要签到), 回复后按本轮真实 token 扣分.
+        # 群聊: 不扣分, 每人每小时额度, 超了拦截 (每小时只提示一次). 主人豁免.
+        # 拦截文案不进 AI history (不污染 cache 前缀), 直接 finish 发送.
+        if (
+            bool(getattr(config, "catty_token_billing_enabled", True))
+            and not _event_is_owner(event)
+        ):
+            from . import token_billing as _tb
+
+            _tb_user_id = str(event.user_id)
+            _tb_is_private = not isinstance(event, GroupMessageEvent)
+            if _tb_is_private:
+                if affection_store.get_points(_tb_user_id) <= 0:
+                    logger.info(
+                        f"[token_billing] private broke: uid={_tb_user_id} balance<=0 -> beg"
+                    )
+                    _tb_persona = _persona_for_event(event)
+                    # 提醒 AI 现写 (turn 桶未开, 这次调用不计费), 失败兜底固定池
+                    _tb_msg = await _tb.ai_gate_reply(config, _tb_persona, "broke", incoming.text)
+                    await matcher.finish(
+                        _tb_msg or _tb.pick_broke_reply(getattr(_tb_persona, "name", "catty"))
+                    )
+            else:
+                _tb_quota = int(getattr(config, "catty_group_hourly_token_quota", 300_000) or 0)
+                if _tb_quota > 0:
+                    _tb_over, _tb_notified = _tb.group_quota_exceeded(_tb_user_id, _tb_quota)
+                    if _tb_over:
+                        logger.info(
+                            f"[token_billing] group quota exceeded: uid={_tb_user_id} "
+                            f"used={_tb.group_quota_used(_tb_user_id)} quota={_tb_quota} "
+                            f"notified={_tb_notified}"
+                        )
+                        if _tb_notified:
+                            await matcher.finish()  # 本小时已提示过, 静默
+                        _tb.group_quota_mark_notified(_tb_user_id)
+                        _tb_persona = _persona_for_event(event)
+                        _tb_msg = await _tb.ai_gate_reply(config, _tb_persona, "quota", incoming.text)
+                        await matcher.finish(
+                            _tb_msg or _tb.pick_quota_reply(getattr(_tb_persona, "name", "catty"))
+                        )
+            # 放行 → 开 turn 桶, 锁栈退出时结算 (finish 异常/正常返回/报错全覆盖;
+            # LIFO 先结算再放锁). 拦截分支已 finish, 不会走到这.
+            _tb_turn_usage = _tb.begin_turn_usage()
+
+            def _tb_settle(
+                _bucket: dict = _tb_turn_usage,
+                _uid: str = _tb_user_id,
+                _is_private: bool = _tb_is_private,
+            ) -> None:
+                try:
+                    _p = int(_bucket.get("prompt_tokens", 0))
+                    _c = int(_bucket.get("completion_tokens", 0))
+                    if _p + _c <= 0:
+                        return
+                    if _is_private:
+                        _tb.settle_private_tokens(
+                            affection_store, config, _uid,
+                            prompt_tokens=_p, completion_tokens=_c,
+                        )
+                    else:
+                        _used = _tb.add_group_usage(_uid, _p + _c)
+                        logger.info(
+                            f"[token_billing] GROUP_USAGE uid={_uid} +{_p + _c} "
+                            f"hour_used={_used}"
+                        )
+                except Exception as _tb_exc:  # noqa: BLE001
+                    logger.warning(f"[token_billing] settle failed: {_tb_exc}")
+
+            _lock_stack.callback(_tb_settle)
 
         anger_context = ""
         if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled and not group_filter_context:
