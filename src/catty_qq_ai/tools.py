@@ -2658,31 +2658,37 @@ _SELF_PORTRAIT_SFW_PATH = "Miao/miaomiao.png"
 _SELF_PORTRAIT_NSFW_PATH = "Miao/miaomiaonude.png"
 
 
-def _load_self_portrait_reference_bytes(kind: str, persona: Any = None) -> bytes | None:
-    """Return PNG bytes of self-portrait lock-character reference, or None on miss/error.
+def _load_self_portrait_reference_bytes(kind: str, persona: Any = None) -> list[bytes]:
+    """Return PNG bytes of self-portrait lock-character reference(s), [] on miss/error.
 
-    多人格: persona.imagegen 非空时用该人格的参考图 (机机=Miao/fadianji.png,
-    无 NSFW 深水参考图时 nsfw 回落 sfw 图); None → 笨猫默认两张。
+    多人格: persona.imagegen 非空时用该人格的参考图 (机机=Miao/fadianji.png +
+    ref_path_extra 里的额外角度图, 无 NSFW 深水参考图时 nsfw 回落 sfw 图);
+    None → 笨猫默认两张 (miaomiao/miaomiaonude, 各自单张不叠加)。
     """
     from pathlib import Path
     _pi = getattr(persona, "imagegen", None) if persona is not None else None
     if kind not in ("sfw", "nsfw"):
-        return None
+        return []
     if _pi is not None:
-        fname = (_pi.ref_nsfw_path or _pi.ref_path) if kind == "nsfw" else _pi.ref_path
+        fnames = [(_pi.ref_nsfw_path or _pi.ref_path) if kind == "nsfw" else _pi.ref_path]
+        fnames.extend(_pi.ref_path_extra)
     elif kind == "nsfw":
-        fname = _SELF_PORTRAIT_NSFW_PATH
+        fnames = [_SELF_PORTRAIT_NSFW_PATH]
     else:
-        fname = _SELF_PORTRAIT_SFW_PATH
-    p = Path(fname)
-    if not p.is_file():
-        _logger.warning("imagegen agent: self-portrait reference missing: %s", p)
-        return None
-    try:
-        return p.read_bytes()
-    except OSError as exc:
-        _logger.warning("imagegen agent: self-portrait reference read failed: %s: %s", p, exc)
-        return None
+        fnames = [_SELF_PORTRAIT_SFW_PATH]
+    out: list[bytes] = []
+    for fname in fnames:
+        if not fname:
+            continue
+        p = Path(fname)
+        if not p.is_file():
+            _logger.warning("imagegen agent: self-portrait reference missing: %s", p)
+            continue
+        try:
+            out.append(p.read_bytes())
+        except OSError as exc:
+            _logger.warning("imagegen agent: self-portrait reference read failed: %s: %s", p, exc)
+    return out
 
 
 async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any = None) -> dict[str, Any]:
@@ -2888,9 +2894,9 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     # 自画像 → 强制 NAI + 加本地参考图 (锁人设)
     local_ref_bytes: list[bytes] = []
     if self_portrait_kind in ("sfw", "nsfw"):
-        ref_data = _load_self_portrait_reference_bytes(self_portrait_kind, persona=_persona)
-        if ref_data:
-            local_ref_bytes.append(ref_data)
+        ref_data_list = _load_self_portrait_reference_bytes(self_portrait_kind, persona=_persona)
+        if ref_data_list:
+            local_ref_bytes.extend(ref_data_list)
             if provider != "nai":
                 _logger.info(
                     "imagegen agent: self_portrait=%s, forcing provider nai (was %s)",

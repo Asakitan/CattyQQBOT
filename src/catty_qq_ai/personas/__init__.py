@@ -27,6 +27,7 @@ class PersonaImagegen:
     girl_tags: str                 # NAI 外观锁 tags, e.g. "1girl, purple hair, ..."
     ref_path: str                  # SFW 自画像参考图 (相对 repo 根)
     ref_nsfw_path: str = ""        # NSFW 参考图; 空 = 复用 ref_path
+    ref_path_extra: tuple[str, ...] = field(default_factory=tuple)  # 额外参考图(sfw/nsfw 都会带上)
     planner_brief: str = ""        # 画图 planner (deepseek) 的人格简介段
     short_review_style: str = ""   # 发图配文的口吻说明
     # NAI Precise Reference 力度 (主人 2026-07-06: 1.0 会锁死站姿没动作, 机机降 0.9)。
