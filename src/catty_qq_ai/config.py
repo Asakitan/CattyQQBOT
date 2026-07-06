@@ -811,7 +811,7 @@ class Config(BaseModel):
             return _parse_json_object(value)
         return value
 
-    @field_validator("catty_group_titles", "catty_user_titles", mode="before")
+    @field_validator("catty_group_titles", "catty_user_titles", "catty_group_personas", mode="before")
     @classmethod
     def parse_title_map(cls, value: Any) -> Any:
         if value is None or value == "":
