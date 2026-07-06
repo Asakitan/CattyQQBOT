@@ -2760,29 +2760,44 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
         ' 自称『人家/猫猫/笨猫』, 不要在 short_review 里出现 OOC / 元评论 / Markdown.\n'
         "用户没明确说风格时默认 provider=nai (二次元最划算). 严禁输出 JSON 以外任何内容."
     )
-    response = await _post_chat_completion_raw(
-        base_url=base_url,
-        api_key=api_key,
-        model=model,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"用户原话: {user_text}"},
-        ],
-        timeout=timeout,
-        proxy=proxy,
-        temperature=0.6,
-        max_tokens=800,
-        extra_headers={},
-        extra_body={"response_format": {"type": "json_object"}},
-    )
-    try:
-        content = response["choices"][0]["message"]["content"]
-    except (KeyError, IndexError, TypeError) as exc:
-        raise RuntimeError(f"deepseek plan 返回格式错: {repr(response)[:200]}") from exc
-    plan = lenient_json_object(content)
-    if not isinstance(plan, dict):
-        raise RuntimeError(f"deepseek plan 不是 JSON 对象: {content[:200]}")
-    return plan
+    # 主人 2026-07-06 修「自画像没带参考图」: DeepSeek thinking 模型 + json mode 下
+    # reasoning 吃掉 max_tokens=800 → content 空 → plan 失败走 fallback (fallback 不带
+    # self_portrait → 参考图丢失). 双修: max_tokens 提到 1600 + 空/非 JSON 时裸跑重试一次
+    # (无 response_format, 靠 lenient_json_object 从散文里抠 JSON)。
+    last_content = ""
+    for _attempt, _extra_body in enumerate((
+        {"response_format": {"type": "json_object"}},
+        {},
+    )):
+        response = await _post_chat_completion_raw(
+            base_url=base_url,
+            api_key=api_key,
+            model=model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f"用户原话: {user_text}"},
+            ],
+            timeout=timeout,
+            proxy=proxy,
+            temperature=0.6,
+            max_tokens=1600,
+            extra_headers={},
+            extra_body=_extra_body,
+        )
+        try:
+            content = response["choices"][0]["message"]["content"]
+        except (KeyError, IndexError, TypeError) as exc:
+            raise RuntimeError(f"deepseek plan 返回格式错: {repr(response)[:200]}") from exc
+        last_content = str(content or "")
+        plan = lenient_json_object(last_content)
+        if isinstance(plan, dict):
+            return plan
+        _logger.warning(
+            "imagegen planner attempt %d non-JSON content (len=%d), %s",
+            _attempt + 1, len(last_content),
+            "retrying without json mode" if _attempt == 0 else "giving up",
+        )
+    raise RuntimeError(f"deepseek plan 不是 JSON 对象: {last_content[:200]}")
 
 
 async def _persona_image_caption(
@@ -2839,10 +2854,13 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
             exc.__class__.__name__, exc,
         )
         if _persona_imagegen is not None:
+            # fallback prompt 画的就是人格本人 → self_portrait=sfw 保证参考图不丢
+            # (主人 2026-07-06: 之前 fallback 不带 self_portrait, planner 一挂参考图就丢)
             plan = {
                 "provider": "nai",
                 "prompt": f"{_persona_imagegen.girl_tags}, cute, anime style",
                 "aspect": "portrait",
+                "self_portrait": "sfw",
                 "short_review": "画好了. 快看",
             }
         else:
