@@ -64,7 +64,7 @@ class Persona:
     # 非 None = **整组替换** config 值 (extract_incoming_message 按 scope 生效)。
     trigger_prefixes: "tuple[str, ...] | None" = None
     directed_keywords: "tuple[str, ...] | None" = None
-    # 主模型覆写 (主人 2026-07-06: 机机没有 spark pro 通道, flash 接不住谐音黑话 → 整体升 pro)。
+    # 主模型覆写 (主人 2026-08-02: 机机与 catty 统一使用 flash, 不再自动升 pro)。
     # None = 用 config.catty_openai_model; 仅覆盖 OpenAI-compat 主回复路径, base_url/key 不变。
     model_override: str | None = None
 

@@ -11143,7 +11143,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             set_current_model_override,
         )
         set_current_scope_key(history_key)
-        # 主人 2026-07-06: persona 级主模型覆写 (机机→deepseek-v4-pro), contextvar
+        # 主人 2026-08-02: persona 级主模型覆写 (机机→deepseek-v4-flash), contextvar
         # 跟 scope_key 同生命周期, 本 handler task 内所有主回复调用生效.
         set_current_model_override(
             getattr(_persona_for_event(event), "model_override", None)
@@ -11777,11 +11777,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _append_internal_system(messages, _img_hint, label="img source hint")
         try:
             if _prefer_spark:
-                # NSFW deep 路径: 默认走 catty_nsfw_spark_model (5.5) — 主人要多用 5.5.
-                # 5.5 软拒 → 不 retry, 直接 retreat 模板 + count+1.
-                # 累计 N 次软拒 → 下次起切 fallback (5.3-spark) **并自动注入 trope hint**
+                # NSFW deep 路径: 默认走 catty_nsfw_spark_model (当前统一为 flash).
+                # 主模型软拒 → 不 retry, 直接 retreat 模板 + count+1.
+                # 累计 N 次软拒 → 下次起切 fallback **并自动注入 trope hint**
                 # 让 spark 按 18 trope 场景写, 不只是 alignment 噪声.
-                # 收到非软拒 reply → reset count 回主 model 5.5.
+                # 收到非软拒 reply → reset count 回主模型.
                 _nsfw_scope_key = f"{_conversation_queue_key(event)}:{event.user_id}"
                 _chosen_model = _pick_nsfw_model_for(_nsfw_scope_key)
                 _user_text_now = incoming.text or ""
@@ -11791,7 +11791,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     and _chosen_model == _fallback_model
                     and _fallback_model != (config.catty_nsfw_spark_model or "").strip()
                 )
-                # 主 5.5 + fallback 都注入 trope hint (主人要 5.5 也按 18 trope 场景写,
+                # 主模型 + fallback 都注入 trope hint (让两条线路都按 18 trope 场景写,
                 # 不只是 alignment-driven 隐藏拒绝).
                 _spark_messages = messages
                 # 主人 2026-05-27 bug fix: _user_real_display 是 _build_messages 的 local,

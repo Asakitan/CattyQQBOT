@@ -569,7 +569,6 @@ FADIANJI_PERSONA = Persona(
     chat_rhythm=FADIANJI_CHAT_RHYTHM,
     trigger_prefixes=FADIANJI_TRIGGER_PREFIXES,
     directed_keywords=FADIANJI_DIRECTED_KEYWORDS,
-    # 主人 2026-07-06: 「艾草=挨操」这种谐音骚话 flash 接不住按字面回(浇水), 机机人设
-    # 靠模型自己接梗不靠梗库堆提示词 → 主回复升 pro (机机禁了 nsfw_spark, 没有 pro 通道).
-    model_override="deepseek-v4-pro",
+    # 主人 2026-08-02: flash 现在已经够用, 机机主回复不再自动升 pro。
+    model_override="deepseek-v4-flash",
 )

@@ -488,7 +488,7 @@ def get_current_scope_key() -> str | None:
     return _current_scope_key_var.get()
 
 
-# 主人 2026-07-06: persona 级主模型覆写 (机机走 deepseek-v4-pro, flash 接不住谐音黑话).
+# 主人 2026-08-02: persona 级主模型覆写保留, 机机已统一走 deepseek-v4-flash。
 # 同 scope_key 模式: handle_chat 入口按 persona set, 主回复路径 (OpenAI-compat) 读取.
 # 只覆盖 catty_openai_model 的主回复调用点; native /v1/messages、filter/vision/audit/
 # fallback 等独立 model 配置不受影响. 换模型只换 model 字段, prompt 字节不变;
