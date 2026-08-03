@@ -555,6 +555,7 @@ async def _compose_base_caption(
             max_tokens=400,
             extra_headers={},
             extra_body={},
+            request_route="imagegen_caption",
         )
         raw = str(response["choices"][0]["message"]["content"] or "")
         logger.info(

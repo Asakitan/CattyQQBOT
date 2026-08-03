@@ -846,8 +846,41 @@ def _log_native_usage(
         "native /v1/messages model=%s read=%d create=%d new=%d hit=%.0f%%%s",
         (model or "")[:20], cache_read, cache_create, input_tokens, hit_rate * 100, compaction_flag,
     )
+    if total_input <= 0:
+        return
+    request_diagnostics: dict[str, Any] | None = None
+    cohort_diagnostics: dict[str, Any] | None = None
+    provider = "claude"
+    is_auxiliary = False
+    try:
+        from .openai_client import (
+            _get_current_cache_request_diagnostics,
+            _record_cache_cohort_diagnostics,
+            _record_session_token_ratio_sample,
+        )
+
+        request_diagnostics = _get_current_cache_request_diagnostics()
+        provider = str((request_diagnostics or {}).get("provider") or provider)
+        is_auxiliary = (
+            str((request_diagnostics or {}).get("request_class") or "").strip().lower()
+            == "auxiliary"
+        )
+        if not is_auxiliary:
+            _record_session_token_ratio_sample(
+                model,
+                total_input,
+                int((request_diagnostics or {}).get("local_input_tokens") or 0),
+            )
+        cohort_diagnostics = _record_cache_cohort_diagnostics(
+            request_diagnostics,
+            hit_tok=cache_read,
+            miss_tok=input_tokens,
+            create_tok=cache_create,
+        )
+    except Exception:  # noqa: BLE001
+        cohort_diagnostics = request_diagnostics
     # === 统一 HIT_TARGET 行 (失败静默, 不影响原行为) ===
-    if total_input > 0:
+    if not is_auxiliary:
         try:
             from .cache_metrics import (
                 compute_warm_fields,
@@ -863,10 +896,10 @@ def _log_native_usage(
             except Exception:  # noqa: BLE001
                 _scope = ""
             _msgs, _hist, _warm = compute_warm_fields(messages)
-            stats = record_hit("claude", model or "", cache_read, input_tokens, cache_create)
+            stats = record_hit(provider, model or "", cache_read, input_tokens, cache_create)
             logger.info(
                 format_hit_target_line(
-                    provider="claude",
+                    provider=provider,
                     model=model or "",
                     stats=stats,
                     hit_tok=cache_read,
@@ -876,6 +909,7 @@ def _log_native_usage(
                     hist=_hist,
                     warm=_warm,
                     scope=_scope,
+                    diagnostics=cohort_diagnostics,
                 ),
             )
             if stats.should_warn:
@@ -900,6 +934,7 @@ def _log_native_usage(
             _scope_for_dash or model,  # fallback 到 model 兼容老 dashboard
             usage,
             model=model,
+            diagnostics=cohort_diagnostics,
         )
     except Exception:  # noqa: BLE001
         pass

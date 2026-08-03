@@ -60,6 +60,7 @@ from .emoji_store import EmojiEntry, EmojiStore
 from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
 from .memory import MemoryStore
 from .openai_client import (
+    _SESSION_HISTORY_MARKER,
     chat_completion_codex_instant,
     MCBusyError,
     OpenAICompatibleError,
@@ -2689,6 +2690,7 @@ _locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 #   不同用户在同群可以并发回复(替代老的"一群一把大锁全 serialize")
 # 私聊没有 group sema,只用 user lock(本来就一人一会话)；群并发关闭时回退到 _locks[group:GID]。
 _user_in_scope_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
+_conversation_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _group_concurrency_semas: dict[str, asyncio.Semaphore] = {}
 _group_concurrency_sema_capacities: dict[str, int] = {}
 # Serializes full-group semaphore acquisition between /人格 and config transitions.
@@ -4717,33 +4719,124 @@ def _reset_history(key: str) -> None:
     _get_session_cache().pop(key)
 
 
+def _session_context_snapshot(key: str) -> dict[str, object]:
+    cache = _get_session_cache()
+    history = list(cache.get(key))
+    metadata = cache.get_metadata(key) or {}
+    target_tokens = int(
+        getattr(config, "catty_session_context_target_tokens", 256_000)
+    )
+    headroom_tokens = int(
+        getattr(config, "catty_session_context_headroom_tokens", 32_000)
+    )
+    return {
+        "conversation_id": key,
+        "session_context_enabled": bool(
+            getattr(config, "catty_session_context_enabled", False)
+        ),
+        "history_tokens": int(metadata.get("history_tokens_estimate") or 0),
+        "history_messages": len(history),
+        "history_turns": sum(
+            1 for message in history
+            if isinstance(message, dict) and message.get("role") == "user"
+        ),
+        "trim_epoch": int(metadata.get("trim_epoch") or 0),
+        "trim_count": int(metadata.get("trim_count") or 0),
+        "context_updated_at": float(metadata.get("context_updated_at") or 0.0),
+        "target_context_tokens": target_tokens,
+        "trim_to_tokens": int(
+            getattr(config, "catty_session_context_trim_to_tokens", 192_000)
+        ),
+        "headroom_tokens": headroom_tokens,
+        "history_high_watermark_tokens": max(target_tokens - headroom_tokens, 0),
+        "model_context_tokens": int(
+            getattr(config, "catty_model_context_tokens", 1_000_000)
+        ),
+    }
+
+
 def _append_history(key: str, user_content: str, assistant_content: str) -> None:
     cache = _get_session_cache()
     history = list(cache.get(key))
     history.append({"role": "user", "content": user_content})
     history.append({"role": "assistant", "content": assistant_content})
-    max_messages = max(config.catty_history_turns, 0) * 2
-    # 主人 2026-05-28 C4 — batch trim 让 cache lookback 命中:
-    # 之前: 每轮新增 2 条挤出 2 条 → msg[2..end] 跨轮全在滑 → Anthropic 20-block lookback
-    #       找不到子集匹配 → cache_read 卡在 sys 部分 (6.4K), history 永远不进 cache.
-    # 现在: append-only 到 max_messages*2 才一次性 trim 回 max_messages.
-    #       这样 max_messages 轮内 history 完全 append-only (byte 稳定),
-    #       Anthropic lookback 命中之前 cache 的 history prefix, cache_read 大涨.
-    #       trim 只在每 max_messages 轮发生 1 次 (cache 失效 1 次), 之后又能持续命中.
-    trim_threshold = max_messages * 2 if max_messages else 0
-    if trim_threshold and len(history) > trim_threshold:
-        # 触发 batch trim — 一次性砍回 max_messages 长度
-        if (
-            len(history) >= 4
-            and isinstance(history[0], dict) and history[0].get("role") == "user"
-            and isinstance(history[1], dict) and history[1].get("role") == "assistant"
-        ):
-            history = history[:2] + history[-(max_messages - 2):]
-        else:
-            history = history[-max_messages:]
-    elif max_messages == 0:
-        history = []
-    cache.set(key, history)
+    session_context_enabled = bool(
+        getattr(config, "catty_session_context_enabled", False)
+    )
+    metadata = cache.get_metadata(key) or {}
+    trim_epoch = int(metadata.get("trim_epoch") or 0)
+    trim_count = int(metadata.get("trim_count") or 0)
+    history_tokens_estimate = 0
+    if session_context_enabled:
+        from .nlu.prompt_compressor import (
+            count_history_tokens,
+            trim_history_to_token_budget,
+        )
+        from .openai_client import (
+            get_current_model_override,
+            get_session_token_estimator_multiplier,
+        )
+
+        model = get_current_model_override() or str(
+            getattr(config, "catty_openai_model", "") or ""
+        )
+        multiplier = get_session_token_estimator_multiplier(model)
+        target_tokens = int(
+            getattr(config, "catty_session_context_target_tokens", 256_000)
+        )
+        trim_to_tokens = int(
+            getattr(config, "catty_session_context_trim_to_tokens", 192_000)
+        )
+        headroom_tokens = int(
+            getattr(config, "catty_session_context_headroom_tokens", 32_000)
+        )
+        high_watermark = max(target_tokens - headroom_tokens, 0)
+        history_tokens_estimate = int(
+            count_history_tokens(history) * multiplier + 0.999999
+        )
+        if history_tokens_estimate > high_watermark:
+            local_trim_budget = int(trim_to_tokens / multiplier) if multiplier > 0 else 0
+            trimmed_history = trim_history_to_token_budget(
+                history,
+                local_trim_budget,
+            )
+            if len(trimmed_history) < len(history):
+                history = trimmed_history
+                trim_epoch += 1
+                trim_count += 1
+                history_tokens_estimate = int(
+                    count_history_tokens(history) * multiplier + 0.999999
+                )
+                logger.info(
+                    f"session_context trim: scope={key} messages={len(history)} "
+                    f"tokens≈{history_tokens_estimate} high={high_watermark} "
+                    f"low={trim_to_tokens} epoch={trim_epoch}"
+                )
+        cache.set(key, history)
+        cache.update_metadata(
+            key,
+            history_tokens_estimate=history_tokens_estimate,
+            trim_epoch=trim_epoch,
+            trim_count=trim_count,
+            context_updated_at=time.time(),
+        )
+    else:
+        max_messages = max(config.catty_history_turns, 0) * 2
+        # 主人 2026-05-28 C4 — batch trim 让 cache lookback 命中:
+        # append-only 到 max_messages*2 才一次性 trim 回 max_messages。
+        trim_threshold = max_messages * 2 if max_messages else 0
+        if trim_threshold and len(history) > trim_threshold:
+            if (
+                len(history) >= 4
+                and isinstance(history[0], dict) and history[0].get("role") == "user"
+                and isinstance(history[1], dict) and history[1].get("role") == "assistant"
+            ):
+                history = history[:2] + history[-(max_messages - 2):]
+            else:
+                history = history[-max_messages:]
+        elif max_messages == 0:
+            history = []
+        cache.set(key, history)
     # 主人 2026-05-28 fix: session 改立即写盘, 不 debounce.
     # 主人原话『胶布场景没了』 — 根因: bot 频繁重启 (我 push 多个 fix 触发 24+ 次重启),
     # session debounce 2s 写盘窗口被 SIGTERM 吃掉, dirty 内存丢, 旧文件被新短 history 覆盖.
@@ -5971,6 +6064,7 @@ async def _build_messages(
         if (
             getattr(config, "catty_prompt_compressor_enabled", False)
             and history_messages
+            and not getattr(config, "catty_session_context_enabled", False)
         ):
             from .nlu.prompt_compressor import monotonic_history_trim
             _budget_total = (
@@ -6000,6 +6094,12 @@ async def _build_messages(
                 )
     except Exception as _pc_exc:  # noqa: BLE001
         logger.debug(f"monotonic history trim failed (non-fatal): {_pc_exc}")
+    if getattr(config, "catty_session_context_enabled", False):
+        history_messages = [
+            {**message, _SESSION_HISTORY_MARKER: True}
+            if isinstance(message, dict) else message
+            for message in history_messages
+        ]
     messages.extend(history_messages)
     # 主人 2026-05-29 cache fix (P0): 每 N 轮 reminder 改成 user+post_boundary 之后的 trailing
     # system. 旧逻辑 inject_author_note 内联进当前 user → 下轮该 user 变 history 被 strip 剥掉 →
@@ -11793,12 +11893,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         if isinstance(gate_result, dict)
         else ""
     )
-    history_key = build_history_key(event, config)
     queue_key = _conversation_queue_key(event)
     # IDE 多 tab 风格的会话排队:
     # 1) transition gate: 只包住 admission，配置/人格切换排空队列时阻止新请求插队。
-    # 2) user_lock: 同一用户在同群/私聊里串行(防同人乱序)
-    # 3) group_sema: 每群最多 N 并发(catty_reply_group_concurrency),不同用户可并行；
+    # 2) conversation_lock: canonical history scope 串行读取→请求→写回；群共享历史时
+    #    同群不同用户也必须排队，group:user 模式则仍可按用户并行。
+    # 3) user_lock: 同一用户在同群/私聊里串行(防同人乱序)
+    # 4) group_sema: 每群最多 N 并发(catty_reply_group_concurrency),不同用户可并行；
     #    关闭群并发时回退到老的 _locks[group:GID] 一群一把大锁。
     # AsyncExitStack 只持有 user/group queue primitive 到本轮结束；transition gate 在
     # admission 完成后立即释放，保留群内并发而不会让 transition 排空 semaphore 时插队。
@@ -11810,7 +11911,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
     import contextlib as _ctxlib
     async with _ctxlib.AsyncExitStack() as _lock_stack:
         async with _persona_config_transition_lock:
+            # Config hot reload may change group_history_scope while a request is
+            # waiting for admission. Resolve the canonical key only after the
+            # transition gate so this whole lifecycle uses one current identity.
+            history_key = build_history_key(event, config)
             transition_lock = _persona_transition_locks[transition_scope]
+            conversation_lock = _conversation_locks[history_key]
             user_lock = _user_in_scope_locks[_user_in_scope_lock_key(event)]
             queue_was_busy = queue_was_busy or transition_lock.locked()
             await transition_lock.acquire()
@@ -11823,9 +11929,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     if isinstance(event, GroupMessageEvent) and group_sema is None
                     else None
                 )
-                queue_was_busy = queue_was_busy or user_lock.locked() or (
+                queue_was_busy = queue_was_busy or conversation_lock.locked() or user_lock.locked() or (
                     group_sema is not None and group_sema._value <= 0  # type: ignore[attr-defined]
                 ) or (group_lock is not None and group_lock.locked())
+                await _lock_stack.enter_async_context(conversation_lock)
                 await _lock_stack.enter_async_context(user_lock)
                 if group_sema is not None:
                     await _lock_stack.enter_async_context(group_sema)
@@ -11851,9 +11958,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         try:
             from .openai_client import (
                 reset_current_model_override,
+                reset_current_logical_turn,
                 reset_current_persona_reply_context,
+                reset_current_session_context,
                 reset_current_scope_key,
+                set_current_logical_turn,
                 set_current_scope_key,
+                set_current_session_context,
                 set_current_distill_context,
                 set_current_model_override,
                 set_current_persona_reply_context,
@@ -11868,6 +11979,25 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _lock_stack.callback(reset_current_scope_key, _scope_key_token)
             except Exception:  # noqa: BLE001
                 reset_current_scope_key(_scope_key_token)
+                raise
+
+            _logical_turn_token = set_current_logical_turn()
+            try:
+                _lock_stack.callback(reset_current_logical_turn, _logical_turn_token)
+            except Exception:  # noqa: BLE001
+                reset_current_logical_turn(_logical_turn_token)
+                raise
+
+            _session_context_token = set_current_session_context(
+                _session_context_snapshot(history_key)
+            )
+            try:
+                _lock_stack.callback(
+                    reset_current_session_context,
+                    _session_context_token,
+                )
+            except Exception:  # noqa: BLE001
+                reset_current_session_context(_session_context_token)
                 raise
 
             _reply_context = _persona_reply_context_for_event(event)
@@ -12629,7 +12759,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _refusal_history: list[str] = []  # 收集每次软拒原文用于 log
                 for _try in range(1, _MAX_NSFW_RETRY + 1):
                     reply = await chat_completion_codex_instant(
-                        config, _spark_messages, max_tokens=800, model_override=_chosen_model,
+                        config,
+                        _spark_messages,
+                        max_tokens=800,
+                        model_override=_chosen_model,
+                        request_route="nsfw_main",
                     )
                     # 主人 2026-05-30: 先抽末尾 <NSFW_STATE:...> 标志并剥除, 下游 refusal 判定 /
                     # phase 反推 / opener 记录全看干净 reply, 不被标志污染。

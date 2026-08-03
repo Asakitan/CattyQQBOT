@@ -28,6 +28,21 @@ from typing import Any
 _SIM_MESSAGE_ID_BASE = 10**12  # 大数 + time 让 mock event message_id 不撞真消息
 
 
+def _to_qq_id(value: int | str, fallback_label: str) -> int:
+    if isinstance(value, int):
+        return value
+    text = str(value).strip()
+    if not text:
+        raise ValueError(f"{fallback_label} 为空")
+    try:
+        return int(text)
+    except ValueError:
+        import hashlib
+
+        digest = hashlib.md5(text.encode()).digest()
+        return int.from_bytes(digest[:6], "big")
+
+
 def _make_mock_private_event(
     user_id: int,
     text: str,
@@ -351,7 +366,7 @@ async def _build_full_real_flow_messages(event: Any, key: str, incoming: Any) ->
     return messages, bool(prefer_spark)
 
 
-async def sim_chat(
+async def _sim_chat_unlocked(
     *,
     text: str,
     user_id: int | str,
@@ -367,6 +382,8 @@ async def sim_chat(
     title: str | None = None,
     group_name: str | None = None,
     provider_override: str | None = None,
+    locked_history_key: str,
+    config_snapshot: Any,
 ) -> dict[str, Any]:
     """模拟一条 incoming message, 走 _build_messages 拼完整 prompt, 可选调 AI 拿 reply.
 
@@ -392,32 +409,22 @@ async def sim_chat(
     from . import (  # circular-safe deferred
         _build_messages,
         _persona_reply_context_for_event,
-        config as _module_config,
+        _session_context_snapshot,
     )
-    from .message_utils import build_history_key, extract_incoming_message
+    from .message_utils import extract_incoming_message
     from .openai_client import (
         chat_completion,
         chat_completion_with_tools,
+        get_current_logical_turn,
+        reset_current_logical_turn,
         reset_current_persona_reply_context,
+        reset_current_session_context,
         reset_current_scope_key,
+        set_current_logical_turn,
         set_current_persona_reply_context,
+        set_current_session_context,
         set_current_scope_key,
     )
-
-    # 主人 2026-05-28: dev/sim_chat 支持非数字 user_id (e.g. 'owner_test') 用作 mock —
-    # 数字直接用, 非数字 hash 出稳定正整数作 fake QQ. group_id 同理.
-    def _to_qq_id(val: int | str, fallback_label: str) -> int:
-        if isinstance(val, int):
-            return val
-        s = str(val).strip()
-        if not s:
-            raise ValueError(f"{fallback_label} 为空")
-        try:
-            return int(s)
-        except ValueError:
-            import hashlib
-            digest = hashlib.md5(s.encode()).digest()
-            return int.from_bytes(digest[:6], "big")  # 6 字节 → 0..2^48, 不溢 QQ 号位数感
 
     uid = _to_qq_id(user_id, "user_id")
     gid = _to_qq_id(group_id, "group_id") if group_id is not None else None
@@ -432,7 +439,7 @@ async def sim_chat(
             nickname=nickname, card=card, title=title,
         )
 
-    cfg = _module_config
+    cfg = config_snapshot
 
     # 主人 2026-07-06 openai-claude-95 §五: A/B provider override — 按名字从
     # config.catty_test_providers 取 {base_url, api_key, model, native?("1")},
@@ -478,7 +485,7 @@ async def sim_chat(
             "stats": {},
         }
 
-    key = build_history_key(event, cfg)
+    key = locked_history_key
 
     # build_messages 内部读 session_cache 拿历史, history_replace=True 时清空一下
     if history_replace:
@@ -489,10 +496,25 @@ async def sim_chat(
         except Exception:
             pass
 
-    if full_context:
-        _bm_ret = await _build_full_real_flow_messages(event, key, incoming)
-    else:
-        _bm_ret = await _build_messages(event, key, incoming)
+    _logical_turn_id = ""
+    import contextlib as _ctxlib
+    with _ctxlib.ExitStack() as _build_context_stack:
+        _build_scope_token = set_current_scope_key(key)
+        _build_context_stack.callback(reset_current_scope_key, _build_scope_token)
+        _build_turn_token = set_current_logical_turn()
+        _build_context_stack.callback(reset_current_logical_turn, _build_turn_token)
+        _build_session_token = set_current_session_context(_session_context_snapshot(key))
+        _build_context_stack.callback(
+            reset_current_session_context,
+            _build_session_token,
+        )
+        if full_context:
+            _bm_ret = await _build_full_real_flow_messages(event, key, incoming)
+        else:
+            _bm_ret = await _build_messages(event, key, incoming)
+        _logical_turn_id = str(
+            (get_current_logical_turn() or {}).get("logical_turn_id") or ""
+        )
     # _build_messages 返回 (messages, _prefer_spark) tuple
     # 主人 2026-05-29 Round 15: 拿 prefer_spark 标记 — spark 真实路径走
     # chat_completion_codex_instant 不是 chat_completion_with_tools.
@@ -517,12 +539,18 @@ async def sim_chat(
 
     reply = "[dry-run: live=False, 未调 AI]"
     if live:
+        _logical_turn_token = None
         _persona_reply_context_token = None
+        _session_context_token = None
         _scope_key_token = None
         try:
             # sim_chat 绕过 handle_chat；补齐主回复的 scope 和人格上下文，让 tool follow-up /
             # fallback 保持当前 persona，不会回退 Catty 默认目录。
             _scope_key_token = set_current_scope_key(key)
+            _logical_turn_token = set_current_logical_turn(_logical_turn_id)
+            _session_context_token = set_current_session_context(
+                _session_context_snapshot(key)
+            )
             _sim_reply_context = _persona_reply_context_for_event(event)
             _persona_reply_context_token = set_current_persona_reply_context(
                 _sim_reply_context
@@ -534,7 +562,10 @@ async def sim_chat(
                     from .openai_client import chat_completion_codex_instant
                     # 真实 spark 用 _pick_nsfw_model_for + max_tokens=800
                     reply_obj = await chat_completion_codex_instant(
-                        cfg, messages, max_tokens=800,
+                        cfg,
+                        messages,
+                        max_tokens=800,
+                        request_route="nsfw_main",
                     )
                     reply = str(reply_obj or "[AI returned empty]")
                 except Exception as _spark_exc:
@@ -641,6 +672,10 @@ async def sim_chat(
         finally:
             if _persona_reply_context_token is not None:
                 reset_current_persona_reply_context(_persona_reply_context_token)
+            if _session_context_token is not None:
+                reset_current_session_context(_session_context_token)
+            if _logical_turn_token is not None:
+                reset_current_logical_turn(_logical_turn_token)
             if _scope_key_token is not None:
                 reset_current_scope_key(_scope_key_token)
 
@@ -683,6 +718,66 @@ async def sim_chat(
             "raw_len": len(messages),
         },
     }
+
+
+async def sim_chat(
+    *,
+    text: str,
+    user_id: int | str,
+    group_id: int | str | None = None,
+    live: bool = True,
+    history_replace: bool = False,
+    with_tools: bool = True,
+    force_spark: bool = False,
+    persist: bool = False,
+    full_context: bool = True,
+    nickname: str | None = None,
+    card: str | None = None,
+    title: str | None = None,
+    group_name: str | None = None,
+    provider_override: str | None = None,
+) -> dict[str, Any]:
+    """Run one simulation under the production canonical conversation lock."""
+    from . import _conversation_locks, _persona_config_transition_lock
+    from .message_utils import build_history_key
+
+    uid = _to_qq_id(user_id, "user_id")
+    gid = _to_qq_id(group_id, "group_id") if group_id is not None else None
+    if gid:
+        event = _make_mock_group_event(uid, gid, text)
+    else:
+        event = _make_mock_private_event(uid, text)
+    import contextlib as _ctxlib
+    async with _ctxlib.AsyncExitStack() as _lock_stack:
+        # sim_chat is a diagnostic path, so keep the global transition gate for
+        # its whole lifecycle: _build_messages/_session_context_snapshot/
+        # _append_history still read package-global config. This guarantees the
+        # captured key, provider config, prompt config and persistence budget are
+        # one immutable transition snapshot instead of mixing old/new settings.
+        await _lock_stack.enter_async_context(_persona_config_transition_lock)
+        from . import config as config_snapshot
+
+        locked_history_key = build_history_key(event, config_snapshot)
+        conversation_lock = _conversation_locks[locked_history_key]
+        await _lock_stack.enter_async_context(conversation_lock)
+        return await _sim_chat_unlocked(
+            text=text,
+            user_id=user_id,
+            group_id=group_id,
+            live=live,
+            history_replace=history_replace,
+            with_tools=with_tools,
+            force_spark=force_spark,
+            persist=persist,
+            full_context=full_context,
+            nickname=nickname,
+            card=card,
+            title=title,
+            group_name=group_name,
+            provider_override=provider_override,
+            locked_history_key=locked_history_key,
+            config_snapshot=config_snapshot,
+        )
 
 
 __all__ = ["sim_chat"]

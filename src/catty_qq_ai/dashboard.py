@@ -57,11 +57,20 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
 <div id="diag" style="background:#eef;border:1px solid #99c;padding:6px;font:12px monospace;color:#039;margin-bottom:8px;">DIAG: HTML 加载完成, JS 未执行 — 如果一直停在这, 说明 script 块没跑或语法错</div>
 
 <div class="section">
-  <h2>Context Window 实时 (最新 1 条 chat)</h2>
+  <h2>本次模型输入（最新 chat provider request）</h2>
   <div id="ctx-live">等待 cache_stats…</div>
+</div>
+
+<div class="section">
+  <h2>当前会话窗口</h2>
+  <div id="session-live">等待 session context…</div>
+</div>
+
+<div class="section">
+  <h2>缓存效率</h2>
+  <div id="cache-live">等待 cache_stats…</div>
   <div style="margin-top:8px; font-size:11px; color:#888;">
-    📌 <b>1M context</b> 是模型 input 上限, 跟 cache 独立. <b>cache_read 9 折</b>计费让长会话省钱.
-    1h TTL: 5min 后再发也能命中 (5min TTL 已失效).
+    DeepSeek 命中输入默认按未命中价格的 2% 估算；provider 前缀缓存是 best-effort，闲置后可能在数小时到数天内清理。
   </div>
 </div>
 
@@ -74,8 +83,8 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
     <div id="scope-rows">等待 cache_stats 推送…</div>
   </div>
   <div class="legend">
-    <span><i style="background:#2ea44f"></i>cache_read (10% 计费)</span>
-    <span><i style="background:#f1c40f"></i>cache_create (125% 计费, 1h TTL)</span>
+    <span><i style="background:#2ea44f"></i>cache_read (按 provider profile)</span>
+    <span><i style="background:#f1c40f"></i>cache_create (provider 支持时)</span>
     <span><i style="background:#3498db"></i>input (100% 计费)</span>
     <span><i style="background:#e67e22"></i>output</span>
   </div>
@@ -121,7 +130,14 @@ const dialogHistory = [];  // 对话堆栈: 新的 push 到末尾 (底部), 满 
 const DIALOG_MAX = 30;
 const eventsBox = document.getElementById('events');
 const statusEl = document.getElementById('status');
-const CONTEXT_LIMIT = 1000000;  // 1M context (Sonnet 4.6 / Opus 4.7 1M 模式)
+const CONTEXT_LIMIT = 0;
+function fmt(value) {
+  const n = Number(value || 0);
+  if (!Number.isFinite(n)) return '0';
+  return n >= 1000 ? (n / 1000).toFixed(1) + 'K' : (Number.isInteger(n) ? String(n) : n.toFixed(2));
+}
+function pct(value) { return (Number(value || 0) * 100).toFixed(1) + '%'; }
+function inputTotal(s) { return Number(s.input_total || s.total_context || ((s.read || 0) + (s.create || 0) + (s.input || 0))); }
 
 function modelBadgeStyle(model) {
   // DeepSeek 蓝紫, Claude Sonnet/Opus 紫红, 其他灰
@@ -135,80 +151,73 @@ function modelBadgeStyle(model) {
 
 function renderContextLive() {
   const rows = [...scopeMap.entries()].sort((a,b) => b[1].last_ts - a[1].last_ts);
+  const inputEl = document.getElementById('ctx-live');
+  const sessionEl = document.getElementById('session-live');
+  const cacheEl = document.getElementById('cache-live');
   if (rows.length === 0) {
-    document.getElementById('ctx-live').innerHTML = '等待 cache_stats…';
+    inputEl.textContent = '等待 cache_stats…';
+    sessionEl.textContent = '等待 session context…';
+    cacheEl.textContent = '等待 cache_stats…';
     return;
   }
-  const [scope, s] = rows[0];  // 最新 1 条
-  const total = s.total_context || (s.read + s.create + s.input);
-  const ctxPct = (total / CONTEXT_LIMIT * 100).toFixed(2);
-  const billed = s.billed_input_equiv || 0;
-  const savedPct = s.saved_pct || 0;
-  const hitClass = s.hit < 0.3 ? 'hit-bad' : s.hit < 0.6 ? 'hit-mid' : 'hit-good';
-  const diagnostics = s.diagnostics || {};
-  const anchor = diagnostics.anchor || (diagnostics.anchor_before !== undefined ? `${diagnostics.anchor_before}>${diagnostics.anchor_after}` : '-');
-  const diagnosticLine = (diagnostics.cohort || diagnostics.wire_tool_hash || diagnostics.prefix_sys_hash) ? `<div style="margin-top:6px;font-size:11px;color:#666;"><b>诊断</b>: cohort ${String(diagnostics.cohort || '-').slice(0, 12)} · anchor ${anchor} · prefix ${String(diagnostics.prefix_sys_hash || '-').slice(0, 8)}/${String(diagnostics.prefix_first_hash || '-').slice(0, 8)} · tool ${String(diagnostics.wire_tool_hash || '-').slice(0, 8)}</div>` : '';
-  const fmt = n => (n >= 1000 ? (n/1000).toFixed(1)+'K' : n.toString());
-  document.getElementById('ctx-live').innerHTML = `
-    <div style="font:13px ui-monospace,monospace;">
-      <div><b>scope</b>: ${scope} &nbsp;·&nbsp; <b>model</b>: ${s.model || '(unknown)'}</div>
-      <div style="margin-top:6px;">
-        <b>Total context</b>: ${fmt(total)} / 1M tokens (<b>${ctxPct}%</b> of 1M)
-        <div class="bar" style="margin-top:3px;">
-          <div style="width:${Math.min(ctxPct, 100)}%; background:linear-gradient(90deg,#2ea44f,#3498db,#f1c40f);"></div>
-        </div>
-      </div>
-      <div style="margin-top:8px;">
-        <b>Token 分布</b>:
-        <span style="color:#2ea44f">R ${fmt(s.read)}</span> /
-        <span style="color:#f1c40f">C ${fmt(s.create)}</span> /
-        <span style="color:#3498db">I ${fmt(s.input)}</span> /
-        <span style="color:#e67e22">O ${fmt(s.output)}</span>
-      </div>
-      <div style="margin-top:8px; padding:8px; background:#f0f8ff; border-radius:4px;">
-        <b>💰 计费估算</b> (1h TTL 价格): <span style="color:#2ea44f;font-weight:bold">${fmt(billed)} 等价 input token</span>
-        <br>
-        <span style="font-size:11px; color:#555;">
-          (raw total ${fmt(total)} - 不用 cache 全价就是 ${fmt(total)}, 现在只算 ${fmt(billed)},
-          <b style="color:#27ae60">省 ${savedPct.toFixed(1)}%</b>)
-        </span>
-      </div>
-      <div style="margin-top:6px;">
-        <b>Cache 命中率</b>: <span class="${hitClass}">${(s.hit*100).toFixed(1)}%</span>
-        ${s.hit < 0.5 ? ' ⚠️ 命中率低 — 可能是首次 chat 或 cache 过期' : ''}
-      </div>
-      ${diagnosticLine}
-    </div>
+  const [scope, s] = rows[0];
+  const total = inputTotal(s);
+  const read = Number(s.read || 0);
+  const create = Number(s.create || 0);
+  const fresh = Number(s.input || 0);
+  const output = Number(s.output || 0);
+  const actual = s.actual_hit_rate == null ? Number(s.hit || 0) : Number(s.actual_hit_rate);
+  const normalized = s.normalized_cache_kpi;
+  const rollingActual = Number(s.rolling_actual_hit_rate || 0);
+  const rollingNormalized = s.rolling_normalized_cache_kpi;
+  const c = s.session_context || {};
+  const modelLimit = Number(c.model_context_tokens || CONTEXT_LIMIT);
+  const retained = Number(c.retained_input_tokens || 0);
+  const retainedPct = modelLimit > 0 ? (retained / modelLimit * 100).toFixed(2) + '%' : 'N/A';
+  const totalForBar = total || 1;
+  const createBilling = create > 0 ? ` · create ×${fmt(s.cache_create_billing_multiplier)}` : '';
+  inputEl.innerHTML = `
+    <div><b>scope</b>: ${scope} · <b>model</b>: ${s.model || '(unknown)'}</div>
+    <div style="margin-top:6px;"><b>Model input</b>: ${fmt(total)} tokens <span style="font-size:11px;color:#666;">(input denominator; output excluded)</span></div>
+    <div class="bar" style="margin-top:3px;"><div class="read" style="width:${Math.min(read / totalForBar * 100, 100)}%"></div><div class="create" style="width:${Math.min(create / totalForBar * 100, 100)}%"></div><div class="input" style="width:${Math.min(fresh / totalForBar * 100, 100)}%"></div></div>
+    <div style="margin-top:5px;font-size:12px;">cached ${fmt(read)} · create ${fmt(create)} · uncached ${fmt(fresh)} · output ${fmt(output)} <b>(not in input total)</b></div>
+  `;
+  sessionEl.innerHTML = `
+    <div><b>Retained input</b>: ${fmt(retained)} / ${modelLimit > 0 ? fmt(modelLimit) : 'N/A'} (${retainedPct})</div>
+    <div style="margin-top:5px;"><b>History</b>: ${fmt(c.history_tokens)} tokens · ${fmt(c.history_turns)} turns · ${fmt(c.history_messages)} messages</div>
+    <div style="margin-top:5px;"><b>Target / watermark / headroom</b>: ${fmt(c.target_context_tokens)} / ${fmt(c.history_high_watermark_tokens)} / ${fmt(c.headroom_tokens)}</div>
+    <div style="margin-top:5px;"><b>Trim</b>: epoch ${fmt(c.trim_epoch)} · count ${fmt(c.trim_count)} · request removed ${fmt(c.request_trimmed_messages)}</div>
+    <div style="margin-top:5px;"><b>Request</b>: ${s.request_route || '-'} / ${s.request_kind || c.request_kind || '-'} · ${s.logical_turn_id || c.logical_turn_id || '-'}</div>
+  `;
+  const hot99Status = s.hot99_status || 'N/A';
+  const hot99Rate = s.hot99_rate == null ? 'N/A' : pct(s.hot99_rate);
+  cacheEl.innerHTML = `
+    <div><b>Actual hit</b>: <span class="${actual < 0.3 ? 'hit-bad' : actual < 0.6 ? 'hit-mid' : 'hit-good'}">${pct(actual)}</span> · <b>Normalized cacheable KPI</b>: ${normalized == null ? 'N/A' : pct(normalized)}</div>
+    <div style="margin-top:5px;"><b>Rolling (${fmt(s.rolling_n)} events)</b>: actual ${pct(rollingActual)} · normalized ${rollingNormalized == null ? 'N/A' : pct(rollingNormalized)}</div>
+    <div style="margin-top:5px;"><b>Hot99</b>: ${hot99Status} · raw ${hot99Rate} · eligible n=${fmt(s.hot99_eligible_count)}</div>
+    <div style="margin-top:5px;"><b>Billing profile</b>: ${s.billing_profile || '-'} · cached input ×${fmt(s.cache_read_billing_multiplier)}${createBilling} · ${fmt(s.billed_input_equiv)} equivalent input · saved ${Number(s.saved_pct || 0).toFixed(1)}%</div>
   `;
 }
-
 function renderScopes() {
   const rows = [...scopeMap.entries()].sort((a,b) => b[1].last_ts - a[1].last_ts).slice(0, 5);
   if (rows.length === 0) {
-    document.getElementById('scope-rows').innerHTML = '等待 cache_stats…';
+    document.getElementById('scope-rows').innerHTML = '等待 cache/session 推送…';
     return;
   }
-  document.getElementById('scope-rows').innerHTML = rows.map(([model, s]) => {
-    const total = s.read + s.create + s.input + s.output;
-    const pct = (n) => total > 0 ? (n / total * 100).toFixed(0) + '%' : '0%';
-    const hitClass = s.hit < 0.1 ? 'hit-bad' : s.hit < 0.5 ? 'hit-mid' : 'hit-good';
+  document.getElementById('scope-rows').innerHTML = rows.map(([scope, s]) => {
+    const total = inputTotal(s) || 1;
+    const actual = s.actual_hit_rate == null ? Number(s.hit || 0) : Number(s.actual_hit_rate);
+    const normalized = s.normalized_cache_kpi;
+    const pctWidth = n => Math.min(Number(n || 0) / total * 100, 100).toFixed(0) + '%';
+    const hitClass = actual < 0.1 ? 'hit-bad' : actual < 0.5 ? 'hit-mid' : 'hit-good';
     return `
       <div class="row">
-        <div>
-          <div><b>${model}</b></div>
-          <div class="bar">
-            <div class="read"   style="width:${pct(s.read)}"></div>
-            <div class="create" style="width:${pct(s.create)}"></div>
-            <div class="input"  style="width:${pct(s.input)}"></div>
-            <div class="output" style="width:${pct(s.output)}"></div>
-          </div>
-        </div>
-        <div>R ${s.read} / C ${s.create} / I ${s.input} / O ${s.output}</div>
-        <div class="${hitClass}">${(s.hit*100).toFixed(1)}%</div>
+        <div><div><b>${scope}</b> <span style="font-size:11px;color:#666;">${s.model || ''}</span></div><div class="bar"><div class="read" style="width:${pctWidth(s.read)}"></div><div class="create" style="width:${pctWidth(s.create)}"></div><div class="input" style="width:${pctWidth(s.input)}"></div></div></div>
+        <div>R ${fmt(s.read)} / C ${fmt(s.create)} / I ${fmt(s.input)}<br><span style="font-size:11px;color:#666;">O ${fmt(s.output)} excluded</span></div>
+        <div class="${hitClass}">${pct(actual)}<br><span style="font-size:11px;font-weight:normal;color:#666;">norm ${normalized == null ? 'N/A' : pct(normalized)} · roll ${pct(s.rolling_actual_hit_rate)}</span></div>
       </div>`;
   }).join('');
 }
-
 function renderStreams() {
   document.getElementById('active-count').textContent = activeStreams.size > 0 ? `(${activeStreams.size} active)` : '';
   if (activeStreams.size === 0) {
@@ -264,6 +273,39 @@ function renderDialogStack() {
   el.scrollTop = el.scrollHeight;
 }
 
+function applySnapshot(snapshot) {
+  scopeMap.clear();
+  Object.entries(snapshot.scope_state || {}).forEach(([scope, state]) => {
+    const latest = state.latest_cache_stats || {};
+    scopeMap.set(scope, {
+      model: latest.model || state.model || '',
+      read: latest.cache_read || 0, create: latest.cache_create || 0,
+      input: latest.input_tokens || 0, output: latest.output_tokens || 0,
+      hit: latest.hit_ratio || 0, actual_hit_rate: latest.actual_hit_rate,
+      normalized_cache_kpi: latest.normalized_cache_kpi,
+      rolling_actual_hit_rate: (state.cache_rolling || {}).rolling_actual_hit_rate || 0,
+      rolling_normalized_cache_kpi: (state.cache_rolling || {}).rolling_normalized_cache_kpi,
+      rolling_n: (state.cache_rolling || {}).rolling_n || 0,
+      input_total: latest.input_total || latest.total_context || 0,
+      total_context: latest.total_context || 0,
+      billed_input_equiv: latest.billed_input_equiv || 0,
+      saved_pct: latest.saved_pct || 0,
+      billing_profile: latest.billing_profile || '',
+      cache_read_billing_multiplier: latest.cache_read_billing_multiplier || 0,
+      cache_create_billing_multiplier: latest.cache_create_billing_multiplier || 0,
+      request_route: latest.request_route || '', request_kind: latest.request_kind || '', logical_turn_id: latest.logical_turn_id || '',
+      hot99_status: latest.hot99_status || 'N/A', hot99_rate: latest.hot99_rate,
+      hot99_eligible_count: latest.hot99_eligible_count || 0,
+      session_context: state.session_context || {},
+      last_ts: latest.ts || state.updated_at || 0,
+    });
+  });
+  activeStreams.clear();
+  (snapshot.active_streams || []).forEach(stream => activeStreams.set(stream.stream_id, { text: stream.text_preview || '', model: stream.model || '', started: stream.started_at || Date.now() / 1000 }));
+  renderContextLive();
+  renderScopes();
+  renderStreams();
+}
 function setConnected() {
   statusEl.textContent ='SSE 已连接';
   statusEl.className ='status-on';
@@ -292,20 +334,46 @@ function connectSSE() {
       console.warn('[catty dash] JSON parse fail', err, e.data.slice(0, 100));
       return;
     }
-    if (payload.type === 'cache_stats') {
+    if (payload.type === 'snapshot') {
+      applySnapshot(payload.data || {});
+    } else if (payload.type === 'cache_stats') {
+      if (payload.request_class === 'auxiliary') {
+        appendEvent(`cache_stats auxiliary ${payload.request_route || payload.request_kind || '-'} input=${fmt(payload.input_total || payload.total_context)}`);
+        return;
+      }
+      const existing = scopeMap.get(payload.scope || 'unknown') || {};
       scopeMap.set(payload.scope || 'unknown', {
-        model: payload.model || '',
-        read: payload.cache_read, create: payload.cache_create,
-        input: payload.input_tokens, output: payload.output_tokens,
-        hit: payload.hit_ratio, last_ts: payload.ts,
+        ...existing,
+        model: payload.model || existing.model || '',
+        read: payload.cache_read || 0, create: payload.cache_create || 0,
+        input: payload.input_tokens || 0, output: payload.output_tokens || 0,
+        hit: payload.hit_ratio || 0, actual_hit_rate: payload.actual_hit_rate,
+        normalized_cache_kpi: payload.normalized_cache_kpi,
+        rolling_actual_hit_rate: payload.rolling_actual_hit_rate || 0,
+        rolling_normalized_cache_kpi: payload.rolling_normalized_cache_kpi,
+        rolling_n: payload.rolling_n || 0,
+        input_total: payload.input_total || payload.total_context || 0,
         total_context: payload.total_context || 0,
         billed_input_equiv: payload.billed_input_equiv || 0,
         saved_pct: payload.saved_pct || 0,
-        diagnostics: payload.diagnostics || null,
+        billing_profile: payload.billing_profile || '',
+        cache_read_billing_multiplier: payload.cache_read_billing_multiplier || 0,
+        cache_create_billing_multiplier: payload.cache_create_billing_multiplier || 0,
+        request_route: payload.request_route || '', request_kind: payload.request_kind || '', logical_turn_id: payload.logical_turn_id || '',
+        hot99_status: payload.hot99_status || 'N/A', hot99_rate: payload.hot99_rate,
+        hot99_eligible_count: payload.hot99_eligible_count || 0,
+        session_context: payload.session_context || existing.session_context || {},
+        last_ts: payload.ts,
       });
       renderContextLive();
       renderScopes();
-      appendEvent(`cache_stats ${payload.scope} hit=${(payload.hit_ratio*100).toFixed(0)}% R=${payload.cache_read} C=${payload.cache_create} billed=${payload.billed_input_equiv || 0}`);
+      appendEvent(`cache_stats ${payload.scope} actual=${pct(payload.actual_hit_rate == null ? payload.hit_ratio : payload.actual_hit_rate)} input=${fmt(payload.input_total || payload.total_context)}`);
+    } else if (payload.type === 'session_context') {
+      const existing = scopeMap.get(payload.scope || 'unknown') || {};
+      scopeMap.set(payload.scope || 'unknown', { ...existing, model: payload.model || existing.model || '', session_context: payload.session_context || {}, last_ts: payload.ts || existing.last_ts || 0 });
+      renderContextLive();
+      renderScopes();
+      appendEvent(`session_context ${payload.scope} retained=${fmt((payload.session_context || {}).retained_input_tokens)}`);
     } else if (payload.type === 'stream_start') {
       activeStreams.set(payload.stream_id, { text: '', model: payload.model, started: payload.ts });
       renderStreams();

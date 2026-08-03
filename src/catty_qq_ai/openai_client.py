@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+from collections import deque
 import contextvars
 import hashlib
 from io import BytesIO
@@ -938,6 +939,7 @@ async def _post_chat_completion(
     extra_body: dict[str, Any],
     enable_cache: bool = False,
     cache_depth: int = 2,
+    request_route: str = "main",
 ) -> str:
     # 主人 2026-05-28 Step 1: 非 Claude 端点 (DeepSeek 等 OpenAI compat) 自动开真流式.
     # Claude 中间人路径保持非流式 (cache_control 注入 + Anthropic SDK 流式走 native 路径).
@@ -961,6 +963,7 @@ async def _post_chat_completion(
         enable_cache=enable_cache,
         cache_depth=cache_depth,
         stream=_stream,
+        request_route=request_route,
     )
     return _extract_content(data)
 
@@ -971,6 +974,17 @@ async def _post_chat_completion(
 _current_scope_key_var: contextvars.ContextVar[str | None] = contextvars.ContextVar(
     "catty_current_scope_key", default=None,
 )
+
+_current_logical_turn_var: contextvars.ContextVar[dict[str, Any] | None] = contextvars.ContextVar(
+    "catty_current_logical_turn",
+    default=None,
+)
+_current_session_context_var: contextvars.ContextVar[dict[str, Any] | None] = contextvars.ContextVar(
+    "catty_current_session_context",
+    default=None,
+)
+
+_SESSION_TOKEN_RATIO_SAMPLES: dict[str, deque[float]] = {}
 
 
 def set_current_scope_key(scope_key: str | None) -> contextvars.Token:
@@ -989,6 +1003,105 @@ def get_current_scope_key() -> str | None:
 def reset_current_scope_key(token: contextvars.Token) -> None:
     """恢复 `set_current_scope_key()` 之前的 scope，供旁路/sim 调用显式收口。"""
     _current_scope_key_var.reset(token)
+
+
+def set_current_logical_turn(logical_turn_id: str | None = None) -> contextvars.Token:
+    """Bind one local conversation turn without adding provider payload fields."""
+    scope_key = get_current_scope_key() or ""
+    turn_id = str(logical_turn_id or "").strip()
+    if not turn_id:
+        seed = f"{scope_key or 'noscope'}:{time.time_ns()}"
+        turn_id = hashlib.sha256(seed.encode("utf-8")).hexdigest()[:16]
+    return _current_logical_turn_var.set({
+        "logical_turn_id": turn_id,
+        "request_seq": 0,
+        "scope_key": scope_key,
+    })
+
+
+def reset_current_logical_turn(token: contextvars.Token) -> None:
+    _current_logical_turn_var.reset(token)
+
+
+def get_current_logical_turn() -> dict[str, Any] | None:
+    state = _current_logical_turn_var.get()
+    return dict(state) if isinstance(state, dict) else None
+
+
+def set_current_session_context(context: dict[str, Any] | None) -> contextvars.Token:
+    return _current_session_context_var.set(dict(context) if isinstance(context, dict) else None)
+
+
+def reset_current_session_context(token: contextvars.Token) -> None:
+    _current_session_context_var.reset(token)
+
+
+def get_current_session_context() -> dict[str, Any] | None:
+    context = _current_session_context_var.get()
+    return dict(context) if isinstance(context, dict) else None
+
+
+def _next_request_identity(
+    messages: list[ChatMessage],
+    tools: list[dict[str, Any]] | None,
+    *,
+    request_route: str = "main",
+    request_class: str = "chat",
+) -> dict[str, Any]:
+    state = _current_logical_turn_var.get()
+    scope_key = get_current_scope_key() or ""
+    if not isinstance(state, dict) or str(state.get("scope_key") or "") != scope_key:
+        token = set_current_logical_turn()
+        del token
+        state = _current_logical_turn_var.get() or {}
+    next_state = dict(state)
+    request_seq = int(next_state.get("request_seq") or 0) + 1
+    next_state["request_seq"] = request_seq
+    has_tool_result = any(
+        isinstance(message, dict) and message.get("role") == "tool"
+        for message in messages
+    )
+    if request_class == "auxiliary":
+        class_seq = int(next_state.get("auxiliary_request_seq") or 0) + 1
+        next_state["auxiliary_request_seq"] = class_seq
+        request_kind = f"auxiliary:{request_route or 'other'}"
+    else:
+        class_seq = int(next_state.get("chat_request_seq") or 0) + 1
+        next_state["chat_request_seq"] = class_seq
+        if tools:
+            request_kind = "tool_followup" if has_tool_result else "tool_initial"
+        else:
+            request_kind = "chat" if class_seq == 1 else "chat_followup"
+    _current_logical_turn_var.set(next_state)
+    return {
+        "logical_turn_id": str(next_state.get("logical_turn_id") or ""),
+        "request_seq": request_seq,
+        "request_class_seq": class_seq,
+        "request_kind": request_kind,
+        "request_route": request_route,
+        "request_class": request_class,
+    }
+
+
+def _record_session_token_ratio_sample(model: str, actual_tokens: int, local_tokens: int) -> None:
+    if actual_tokens <= 0 or local_tokens <= 0:
+        return
+    ratio = actual_tokens / local_tokens
+    if ratio <= 0 or ratio > 8:
+        return
+    samples = _SESSION_TOKEN_RATIO_SAMPLES.setdefault(model, deque(maxlen=64))
+    samples.append(ratio)
+
+
+def get_session_token_estimator_multiplier(model: str | None = None) -> float:
+    """Return max(1.25, recent per-model actual/local p95)."""
+    model_key = str(model or "").strip()
+    samples = list(_SESSION_TOKEN_RATIO_SAMPLES.get(model_key, ()))
+    if len(samples) < 4:
+        return 1.25
+    samples.sort()
+    index = min(max(int(len(samples) * 0.95 + 0.999999) - 1, 0), len(samples) - 1)
+    return max(1.25, float(samples[index]))
 
 
 # Request-local cache diagnostics are populated only after the final wire payload
@@ -1224,23 +1337,38 @@ async def _post_anthropic_native_chat(
     # persona model_override 失效的老问题) + per-line TTL/betas/prefill_mode 贯通。
     from .prompt_cache import resolve_cache_ttl
 
-    data = await post_messages_native(
+    _native_model = _effective_main_model(config)
+    _native_payload: dict[str, Any] = {
+        "messages": prepared_messages,
+        "max_tokens": config.catty_max_tokens or 4096,
+    }
+    _native_diagnostics_token, _ = _bind_native_request_diagnostics(
         base_url=config.catty_openai_base_url,
-        api_key=config.catty_openai_api_key,
-        model=_effective_main_model(config),
-        messages=prepared_messages,
-        max_tokens=config.catty_max_tokens or 4096,
-        temperature=config.catty_temperature,
-        timeout=float(config.catty_request_timeout),
-        enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
-        compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
-        metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
-        cache_ttl=resolve_cache_ttl(config, "main"),
-        line="main",
-        prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
-        extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+        model=_native_model,
+        payload=_native_payload,
+        request_route="main",
     )
-    return _extract_content(data)
+    prepared_messages = _native_payload["messages"]
+    try:
+        data = await post_messages_native(
+            base_url=config.catty_openai_base_url,
+            api_key=config.catty_openai_api_key,
+            model=_native_model,
+            messages=prepared_messages,
+            max_tokens=config.catty_max_tokens or 4096,
+            temperature=config.catty_temperature,
+            timeout=float(config.catty_request_timeout),
+            enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
+            compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
+            metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+            cache_ttl=resolve_cache_ttl(config, "main"),
+            line="main",
+            prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
+            extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+        )
+        return _extract_content(data)
+    finally:
+        _reset_native_request_diagnostics(_native_diagnostics_token)
 
 
 # OpenAI prompt_cache_key 被端点拒 (400/422) 的能力缓存 — key = f"{base_url}|{model}".
@@ -1269,6 +1397,133 @@ def _get_runtime_config() -> Any:
         return None
 
 
+_SESSION_HISTORY_MARKER = "_catty_session_history"
+
+
+def _prepare_session_context_payload(
+    payload: dict[str, Any],
+    *,
+    model: str,
+) -> dict[str, Any]:
+    """Trim marked history only for this final request and remove internal markers."""
+    raw_messages = payload.get("messages")
+    if not isinstance(raw_messages, list):
+        return {}
+
+    messages: list[ChatMessage] = []
+    marked_history: list[ChatMessage] = []
+    first_marked_index: int | None = None
+    for raw_message in raw_messages:
+        if not isinstance(raw_message, dict):
+            messages.append(raw_message)
+            continue
+        message = dict(raw_message)
+        is_history = bool(message.pop(_SESSION_HISTORY_MARKER, False))
+        if is_history:
+            if first_marked_index is None:
+                first_marked_index = len(messages)
+            marked_history.append(message)
+        else:
+            messages.append(message)
+
+    runtime_config = _get_runtime_config()
+    enabled = bool(
+        runtime_config is not None
+        and getattr(runtime_config, "catty_session_context_enabled", False)
+    )
+    multiplier = get_session_token_estimator_multiplier(model)
+    try:
+        from .nlu.prompt_compressor import (
+            count_history_tokens,
+            count_message_tokens,
+            count_tokens,
+            trim_history_to_token_budget,
+        )
+    except Exception:  # noqa: BLE001
+        payload["messages"] = raw_messages
+        for raw_message in raw_messages:
+            if isinstance(raw_message, dict):
+                raw_message.pop(_SESSION_HISTORY_MARKER, None)
+        return {}
+
+    tools = payload.get("tools")
+    tools_text = ""
+    if tools:
+        try:
+            tools_text = json.dumps(tools, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        except (TypeError, ValueError):
+            tools_text = str(tools)
+
+    non_history_local = count_history_tokens(messages) + count_tokens(tools_text)
+    target_tokens = int(
+        getattr(runtime_config, "catty_session_context_target_tokens", 256_000)
+        if runtime_config is not None else 256_000
+    )
+    trim_to_tokens = int(
+        getattr(runtime_config, "catty_session_context_trim_to_tokens", 192_000)
+        if runtime_config is not None else 192_000
+    )
+    headroom_tokens = int(
+        getattr(runtime_config, "catty_session_context_headroom_tokens", 32_000)
+        if runtime_config is not None else 32_000
+    )
+    model_context_tokens = int(
+        getattr(runtime_config, "catty_model_context_tokens", 1_000_000)
+        if runtime_config is not None else 1_000_000
+    )
+    max_output_tokens = max(int(payload.get("max_tokens") or 0), 0)
+    effective_target = min(target_tokens, max(model_context_tokens - max_output_tokens, 0))
+    non_history_estimate = int(non_history_local * multiplier + 0.999999)
+    allowed_history_estimate = max(effective_target - non_history_estimate, 0)
+    allowed_history_local = int(allowed_history_estimate / multiplier) if multiplier > 0 else 0
+
+    retained_history = marked_history
+    emergency_trimmed = False
+    if enabled and marked_history:
+        retained_history = trim_history_to_token_budget(marked_history, allowed_history_local)
+        emergency_trimmed = len(retained_history) != len(marked_history)
+
+    if first_marked_index is not None:
+        messages[first_marked_index:first_marked_index] = retained_history
+    payload["messages"] = messages
+
+    history_local = count_history_tokens(retained_history)
+    history_estimate = int(history_local * multiplier + 0.999999)
+    retained_input_estimate = non_history_estimate + history_estimate
+    current_turn_local = 0
+    for index in range(len(messages) - 1, -1, -1):
+        message = messages[index]
+        if isinstance(message, dict) and message.get("role") == "user":
+            current_turn_local = count_history_tokens(messages[index:])
+            break
+
+    context = get_current_session_context() or {}
+    return {
+        **context,
+        "session_context_enabled": enabled,
+        "token_estimator_multiplier": multiplier,
+        "local_input_tokens": non_history_local + history_local,
+        "retained_input_tokens": retained_input_estimate,
+        "history_tokens": history_estimate,
+        "history_messages": len(retained_history),
+        "history_turns": sum(
+            1 for message in retained_history
+            if isinstance(message, dict) and message.get("role") == "user"
+        ),
+        "non_history_input_tokens": non_history_estimate,
+        "unavoidable_current_turn_tokens": int(current_turn_local * multiplier + 0.999999),
+        "target_context_tokens": target_tokens,
+        "trim_to_tokens": trim_to_tokens,
+        "headroom_tokens": headroom_tokens,
+        "history_high_watermark_tokens": max(target_tokens - headroom_tokens, 0),
+        "model_context_tokens": model_context_tokens,
+        "max_output_tokens": max_output_tokens,
+        "allowed_history_tokens": allowed_history_estimate,
+        "request_emergency_trimmed": emergency_trimmed,
+        "request_trimmed_messages": len(marked_history) - len(retained_history),
+    }
+
+
 def _cache_request_dump_enabled() -> bool:
     """Return the single default-off cache diagnostic switch."""
     config = _get_runtime_config()
@@ -1283,6 +1538,64 @@ def _cache_scope_type(scope: str) -> str:
     if scope.startswith("summary:"):
         return "summary"
     return "unknown"
+
+
+# 256K session 模式跳过 compressor monotonic trim → 没有 compressor anchor
+# observation。用每 scope 上次见到的 trim_epoch + request-local emergency trim
+# 推断"本轮前缀相对上一轮是否变化", 让默认长会话路径也能产出显式 anchor。
+_SESSION_TRIM_EPOCH_OBSERVED: dict[str, int] = {}
+
+
+def _session_mode_anchor_observation(
+    scope: str,
+    session_context: dict[str, Any],
+) -> dict[str, Any]:
+    """Synthesize an anchor observation for the persistent-session path.
+
+    前缀只在两种情况下相对上一轮变化: 持久层 trim (trim_epoch 递增) 或本轮
+    request-local emergency trim。首次观察按 legacy monotonic 语义视为稳定。
+    """
+    trim_epoch = int(session_context.get("trim_epoch") or 0)
+    key = str(scope or session_context.get("conversation_id") or "")
+    previous = _SESSION_TRIM_EPOCH_OBSERVED.get(key)
+    if key:
+        if len(_SESSION_TRIM_EPOCH_OBSERVED) > 512:
+            _SESSION_TRIM_EPOCH_OBSERVED.clear()
+        _SESSION_TRIM_EPOCH_OBSERVED[key] = trim_epoch
+    emergency = bool(session_context.get("request_emergency_trimmed"))
+    epoch_changed = previous is not None and previous != trim_epoch
+    changed = bool(emergency or epoch_changed)
+    reason = (
+        "request_emergency_trim" if emergency
+        else "trim_epoch_changed" if epoch_changed
+        else ""
+    )
+    return {
+        "scope_id": key,
+        "anchor_before": previous if previous is not None else trim_epoch,
+        "anchor_after": trim_epoch,
+        "anchor_changed": changed,
+        "reset_reason": reason,
+        "source": "session_context",
+        "request_emergency_trimmed": emergency,
+    }
+
+
+def _request_class_for_route(route: str, scope: str) -> str:
+    normalized = str(route or "main").strip().lower()
+    if scope.startswith("summary:") or normalized in {
+        "audit",
+        "filter",
+        "local_critic",
+        "summary",
+        "summary_fallback",
+        "vision",
+        "imagegen_plan",
+        "imagegen_caption",
+        "spark",
+    }:
+        return "auxiliary"
+    return "chat"
 
 
 def _cache_persona_name() -> str:
@@ -1340,6 +1653,11 @@ def _build_cache_request_diagnostics(
     base_url: str,
     model: str,
     payload: dict[str, Any],
+    request_route: str = "main",
+    request_class: str = "chat",
+    request_identity: dict[str, Any] | None = None,
+    session_context: dict[str, Any] | None = None,
+    transport: str = "openai_compat",
 ) -> dict[str, Any]:
     messages = payload.get("messages")
     final_messages = messages if isinstance(messages, list) else []
@@ -1362,11 +1680,29 @@ def _build_cache_request_diagnostics(
         anchor = get_anchor_observation()
     except Exception:  # noqa: BLE001
         anchor = None
+    anchor_observed = isinstance(anchor, dict) and "anchor_changed" in anchor
+    anchor_changed = bool(anchor.get("anchor_changed")) if anchor_observed else False
     wire_tool_hash = _wire_tool_hash(payload.get("tools"))
     prefix_sys_hash, prefix_first_hash, message_end_role = _payload_prefix_hashes(final_messages)
+    prompt_variant = _canonical_cache_diagnostic_sha256({
+        "prefix_sys_hash": prefix_sys_hash,
+        "prefix_first_hash": prefix_first_hash,
+        "message_end_role": message_end_role,
+    })
+    request_identity = dict(request_identity or {})
+    session_context = dict(session_context or {})
+    if anchor is None and session_context.get("session_context_enabled"):
+        # 默认 256K 路径没有 compressor anchor — 合成显式观察, 否则 Hot99
+        # eligibility 的 anchor_observed 门槛在 session 模式下永远不满足。
+        anchor = _session_mode_anchor_observation(scope, session_context)
+        anchor_observed = True
+        anchor_changed = bool(anchor.get("anchor_changed"))
     diagnostics: dict[str, Any] = {
         "provider": provider,
-        "route": "openai_compat",
+        "route": request_route,
+        "request_route": request_route,
+        "request_class": request_class,
+        "transport": transport,
         "scope_type": _cache_scope_type(scope),
         "persona": _cache_persona_name(),
         "wire_tool_hash": wire_tool_hash,
@@ -1375,10 +1711,21 @@ def _build_cache_request_diagnostics(
         "message_end_role": message_end_role,
         "prefix_sys_hash": prefix_sys_hash,
         "prefix_first_hash": prefix_first_hash,
+        "prompt_variant": prompt_variant,
         "anchor": anchor,
+        "anchor_observed": anchor_observed,
+        "conversation_id": str(session_context.get("conversation_id") or scope),
+        "trim_epoch": int(session_context.get("trim_epoch") or 0),
+        **session_context,
+        **request_identity,
     }
+    runtime_config = _get_runtime_config()
+    if provider == "deepseek" and runtime_config is not None:
+        diagnostics["cache_hit_billing_multiplier"] = float(
+            getattr(runtime_config, "catty_cache_hit_input_price_ratio", 0.02)
+        )
     try:
-        diagnostics["cohort_metadata"] = build_cohort_metadata(
+        cohort_kwargs = dict(
             provider=provider,
             model=model,
             route=diagnostics["route"],
@@ -1386,11 +1733,70 @@ def _build_cache_request_diagnostics(
             persona=diagnostics["persona"],
             warm=warm,
             tool_set_hash=wire_tool_hash,
-            anchor_changed=bool((anchor or {}).get("anchor_changed", False)),
+            anchor_changed=anchor_changed,
+            anchor_observed=anchor_observed,
+            prompt_variant=prompt_variant,
+            trim_epoch=diagnostics["trim_epoch"],
+            request_kind=diagnostics.get("request_kind", ""),
+            request_class=diagnostics.get("request_class", ""),
         )
+        try:
+            diagnostics["cohort_metadata"] = build_cohort_metadata(**cohort_kwargs)
+        except TypeError:
+            for key in (
+                "anchor_observed",
+                "prompt_variant",
+                "trim_epoch",
+                "request_kind",
+                "request_class",
+            ):
+                cohort_kwargs.pop(key, None)
+            diagnostics["cohort_metadata"] = build_cohort_metadata(**cohort_kwargs)
     except Exception:  # noqa: BLE001
         diagnostics["cohort_metadata"] = {}
     return diagnostics
+
+
+def _bind_native_request_diagnostics(
+    *,
+    base_url: str,
+    model: str,
+    payload: dict[str, Any],
+    request_route: str,
+) -> tuple[contextvars.Token, dict[str, Any]]:
+    session_context = _prepare_session_context_payload(payload, model=model)
+    messages = payload.get("messages") if isinstance(payload.get("messages"), list) else []
+    scope = get_current_scope_key() or ""
+    request_class = _request_class_for_route(request_route, scope)
+    request_identity = _next_request_identity(
+        messages,
+        payload.get("tools"),
+        request_route=request_route,
+        request_class=request_class,
+    )
+    diagnostics = _build_cache_request_diagnostics(
+        base_url=base_url,
+        model=model,
+        payload=payload,
+        request_route=request_route,
+        request_class=request_class,
+        request_identity=request_identity,
+        session_context=session_context,
+        transport="anthropic_native",
+    )
+    return _current_cache_request_diagnostics_var.set(diagnostics), diagnostics
+
+
+def _reset_native_request_diagnostics(token: contextvars.Token) -> None:
+    try:
+        _current_cache_request_diagnostics_var.reset(token)
+    finally:
+        try:
+            from .nlu.prompt_compressor import clear_anchor_observation
+
+            clear_anchor_observation()
+        except Exception:  # noqa: BLE001
+            pass
 
 
 def _record_cache_cohort_diagnostics(
@@ -1422,6 +1828,12 @@ def _record_cache_cohort_diagnostics(
         "cohort": stats.cohort_key,
         "actual_hit_rate": stats.this_rate,
         "normalized_kpi": stats.normalized_rate,
+        "hot99_eligible": stats.hot99_eligible,
+        "hot99_eligible_count": stats.hot99_eligible_count,
+        "hot99_rate": stats.hot99_raw_rate,
+        "hot99_raw_rate": stats.hot99_raw_rate,
+        "hot99_status": stats.hot99_status,
+        "hot99_target": stats.hot99_target,
     })
     return diagnostics
 
@@ -1468,11 +1880,39 @@ def _log_cache_stats(
     except Exception:  # noqa: BLE001
         _hit_scope = ""
     _request_diagnostics = _get_current_cache_request_diagnostics()
+    _is_auxiliary = (
+        str((_request_diagnostics or {}).get("request_class") or "").strip().lower()
+        == "auxiliary"
+    )
 
     # === (1) DeepSeek 风格 ===
     ds_hit = int(usage.get("prompt_cache_hit_tokens") or 0)
     ds_miss = int(usage.get("prompt_cache_miss_tokens") or 0)
     if ds_hit or ds_miss:
+        if _is_auxiliary:
+            _cohort_diagnostics = _record_cache_cohort_diagnostics(
+                _request_diagnostics,
+                hit_tok=ds_hit,
+                miss_tok=ds_miss,
+                create_tok=0,
+            )
+            try:
+                from . import dashboard_state as _dash
+
+                _dash.push_cache_stats(
+                    _hit_scope or model,
+                    usage,
+                    model=model,
+                    diagnostics=_cohort_diagnostics,
+                )
+            except Exception:  # noqa: BLE001
+                pass
+            return
+        _record_session_token_ratio_sample(
+            model,
+            ds_hit + ds_miss,
+            int((_request_diagnostics or {}).get("local_input_tokens") or 0),
+        )
         stats = record_hit(_provider, model, ds_hit, ds_miss, 0)
         _cohort_diagnostics = _record_cache_cohort_diagnostics(
             _request_diagnostics,
@@ -1534,6 +1974,30 @@ def _log_cache_stats(
     total_input = cache_read + cache_create + input_tokens
     if total_input <= 0:
         return
+    if _is_auxiliary:
+        _cohort_diagnostics = _record_cache_cohort_diagnostics(
+            _request_diagnostics,
+            hit_tok=cache_read,
+            miss_tok=input_tokens,
+            create_tok=cache_create,
+        )
+        try:
+            from . import dashboard_state as _dash
+
+            _dash.push_cache_stats(
+                _hit_scope or model,
+                usage,
+                model=model,
+                diagnostics=_cohort_diagnostics,
+            )
+        except Exception:  # noqa: BLE001
+            pass
+        return
+    _record_session_token_ratio_sample(
+        model,
+        total_input,
+        int((_request_diagnostics or {}).get("local_input_tokens") or 0),
+    )
     stats = record_hit(_provider, model, cache_read, input_tokens, cache_create)
     _cohort_diagnostics = _record_cache_cohort_diagnostics(
         _request_diagnostics,
@@ -1733,6 +2197,7 @@ async def _post_chat_completion_raw(
     enable_cache: bool = False,
     cache_depth: int = 2,
     stream: bool = False,
+    request_route: str = "main",
 ) -> dict[str, Any]:
     """返回完整 response JSON,供 function calling 链路读 tool_calls。
 
@@ -2028,10 +2493,39 @@ async def _post_chat_completion_raw(
     # 看到 67% / 27% 是各自独立 cache cold 的结果).
     # DeepSeek 文档明确: "多请求公共前缀检测落盘" — 不传 user 时自动跨请求共享 prefix.
 
+    try:
+        from .prompt_cache import detect_provider as _detect_payload_provider
+
+        if _detect_payload_provider(base_url, model) == "deepseek":
+            payload.pop("user", None)
+            payload.pop("user_id", None)
+            payload.pop("prompt_cache_key", None)
+            payload.pop("conversation_id", None)
+    except Exception:  # noqa: BLE001
+        pass
+
+    _session_context_diagnostics = _prepare_session_context_payload(
+        payload,
+        model=model,
+    )
+    messages = payload.get("messages") if isinstance(payload.get("messages"), list) else messages
+    _scope_for_request = get_current_scope_key() or ""
+    _request_class = _request_class_for_route(request_route, _scope_for_request)
+    _request_identity = _next_request_identity(
+        messages,
+        payload.get("tools"),
+        request_route=request_route,
+        request_class=_request_class,
+    )
+
     _request_cache_diagnostics = _build_cache_request_diagnostics(
         base_url=base_url,
         model=model,
         payload=payload,
+        request_route=request_route,
+        request_class=_request_class,
+        request_identity=_request_identity,
+        session_context=_session_context_diagnostics,
     )
     _cache_diagnostics_token = _current_cache_request_diagnostics_var.set(
         _request_cache_diagnostics,
@@ -2273,6 +2767,8 @@ async def _post_ollama_chat(
     if "think" in extra_body:
         payload["think"] = extra_body["think"]
 
+    _prepare_session_context_payload(payload, model=model)
+
     headers = {
         "Content-Type": "application/json",
         **extra_headers,
@@ -2477,7 +2973,12 @@ async def _warmup_fallback_if_cold(config: Config) -> bool:
     return True
 
 
-async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> str:
+async def _post_fallback_chat(
+    config: Config,
+    messages: list[ChatMessage],
+    *,
+    request_route: str = "fallback",
+) -> str:
     await _check_mc_gate_or_raise(config)
 
     # 冷启动时先单独 warmup,避免真正请求同时承担 load + 大 prompt 处理被卡 60s+。
@@ -2517,27 +3018,40 @@ async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> st
         return result
     # 主人 2026-07-06 openai-claude-95: summary/主线兜底共用线 — ai_fallback 三件套
     # 判定为 claude 时走 native /v1/messages (line="summary_fallback"), 失败落回 compat。
-    if _route_native(config, "summary_fallback", base_url, model):
+    if _route_native(config, request_route, base_url, model):
         try:
             from .anthropic_native_client import post_messages_native
             from .prompt_cache import resolve_cache_ttl
             # prefill/sweep/hoist/断点全在 post_messages_native 内部收口 (2026-07-06)
-            data = await post_messages_native(
+            _native_payload: dict[str, Any] = {
+                "messages": messages,
+                "max_tokens": max_tokens or 4096,
+            }
+            _native_diagnostics_token, _ = _bind_native_request_diagnostics(
                 base_url=base_url,
-                api_key=api_key,
                 model=model,
-                messages=messages,
-                max_tokens=max_tokens or 4096,
-                temperature=temperature,
-                timeout=float(timeout),
-                metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
-                cache_ttl=resolve_cache_ttl(config, "summary_fallback"),
-                line="summary_fallback",
-                prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
-                extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                payload=_native_payload,
+                request_route=request_route,
             )
-            _mark_fallback_warmed()
-            return _extract_content(data)
+            try:
+                data = await post_messages_native(
+                    base_url=base_url,
+                    api_key=api_key,
+                    model=model,
+                    messages=_native_payload["messages"],
+                    max_tokens=max_tokens or 4096,
+                    temperature=temperature,
+                    timeout=float(timeout),
+                    metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+                    cache_ttl=resolve_cache_ttl(config, request_route),
+                    line=request_route,
+                    prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
+                    extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                )
+                _mark_fallback_warmed()
+                return _extract_content(data)
+            finally:
+                _reset_native_request_diagnostics(_native_diagnostics_token)
         except Exception as native_exc:  # noqa: BLE001
             _logger.warning(
                 "summary_fallback native /v1/messages failed (%s); trying OpenAI-compat",
@@ -2554,6 +3068,7 @@ async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> st
         max_tokens=max_tokens,
         extra_headers=extra_headers,
         extra_body=extra_body,
+        request_route=request_route,
     )
     _mark_fallback_warmed()
     return result
@@ -2631,13 +3146,28 @@ async def chat_completion_with_tools(
             from .anthropic_native_client import post_messages_native_data
             from .prompt_cache import resolve_cache_ttl
             # native /v1/messages 当前不透传 tool_choice — 一律走 provider auto。
-            return await post_messages_native_data(
-                config, history, tools=tools,
-                metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+            _native_payload: dict[str, Any] = {
+                "messages": history,
+                "tools": tools,
+                "max_tokens": config.catty_max_tokens or 4096,
+            }
+            _native_model = _effective_main_model(config)
+            _native_diagnostics_token, _ = _bind_native_request_diagnostics(
+                base_url=config.catty_openai_base_url,
                 model=_effective_main_model(config),
-                cache_ttl=resolve_cache_ttl(config, "main"),
-                line="main",
+                payload=_native_payload,
+                request_route="main",
             )
+            try:
+                return await post_messages_native_data(
+                    config, _native_payload["messages"], tools=tools,
+                    metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+                    model=_native_model,
+                    cache_ttl=resolve_cache_ttl(config, "main"),
+                    line="main",
+                )
+            finally:
+                _reset_native_request_diagnostics(_native_diagnostics_token)
         if _router_active:
             # 主人 2026-05-28 Step 1: 非 Claude 端点开真流式 (chunk push dashboard)
             try:
@@ -2661,6 +3191,7 @@ async def chat_completion_with_tools(
                 enable_cache=False,
                 cache_depth=2,
                 stream=_router_stream,
+                request_route="router",
             )
         try:
             from .prompt_cache import is_claude_endpoint
@@ -2685,6 +3216,7 @@ async def chat_completion_with_tools(
             enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
             cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
             stream=_openai_stream,
+            request_route="main",
         )
 
     # 强制 tool_choice 的目标端点 (用于"该端点不支持强制"的能力缓存)。native 不透传 tool_choice,
@@ -2723,7 +3255,7 @@ async def chat_completion_with_tools(
                         "degrading to plain chat_completion",
                         exc2.__class__.__name__,
                     )
-                    return await chat_completion(config, messages)
+                    return await chat_completion(config, history)
                 # 仅"auto 重试成功 (而强制失败)"才确认是 tool_choice 维度问题 → 此时才标记端点拒绝强制;
                 # 若 auto 也失败 (端点整体临时挂) 已在上面 return, 不会污染缓存。
                 _mark_forced_tool_choice_blocked(_force_endpoint_key)
@@ -2734,7 +3266,7 @@ async def chat_completion_with_tools(
                     exc.__class__.__name__,
                 )
                 # 降级到 plain 调用,让原有 fallback/cooldown 逻辑接管(它会自己 mark unhealthy)。
-                return await chat_completion(config, messages)
+                return await chat_completion(config, history)
 
         try:
             choice = data["choices"][0]
@@ -3042,6 +3574,7 @@ async def local_critic_completion(
         max_tokens=request_max_tokens,
         extra_headers=config.catty_local_critic_extra_headers,
         extra_body=body,
+        request_route="local_critic",
     )
 
 
@@ -3081,7 +3614,11 @@ async def chat_completion_summary(config: Config, messages: list[ChatMessage]) -
     """
     if _fallback_is_configured(config):
         try:
-            return await _post_fallback_chat(config, messages)
+            return await _post_fallback_chat(
+                config,
+                messages,
+                request_route="summary_fallback",
+            )
         except MCBusyError:
             _logger.info("chat_completion_summary: MC busy, falling back to main AI for summary")
         except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:  # noqa: BLE001
@@ -3147,23 +3684,36 @@ async def _post_with_fallback(
                 from .prompt_cache import resolve_cache_ttl
                 # 主人 2026-05-28 C18 → 2026-07-06 收口: cache_control 标位、sweep、hoist、
                 # prefill 全由 post_messages_native 内部单一 owner 处理, caller 零预处理.
-                data = await post_messages_native(
+                _native_payload: dict[str, Any] = {
+                    "messages": messages,
+                    "max_tokens": max_tokens or 4096,
+                }
+                _native_diagnostics_token, _ = _bind_native_request_diagnostics(
                     base_url=base_url,
-                    api_key=api_key,
                     model=model,
-                    messages=messages,
-                    max_tokens=max_tokens or 4096,
-                    temperature=temperature,
-                    timeout=float(timeout),
-                    enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
-                    compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
-                    metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
-                    cache_ttl=resolve_cache_ttl(config, _line),
-                    line=_line,
-                    prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
-                    extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                    payload=_native_payload,
+                    request_route=_line,
                 )
-                return _extract_content(data)
+                try:
+                    data = await post_messages_native(
+                        base_url=base_url,
+                        api_key=api_key,
+                        model=model,
+                        messages=_native_payload["messages"],
+                        max_tokens=max_tokens or 4096,
+                        temperature=temperature,
+                        timeout=float(timeout),
+                        enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
+                        compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
+                        metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+                        cache_ttl=resolve_cache_ttl(config, _line),
+                        line=_line,
+                        prefill_mode=str(getattr(config, "catty_native_prefill_mode", "hint") or "hint"),
+                        extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                    )
+                    return _extract_content(data)
+                finally:
+                    _reset_native_request_diagnostics(_native_diagnostics_token)
             except Exception as native_exc:  # noqa: BLE001
                 _logger.warning(
                     "%s native /v1/messages failed (%s); trying OpenAI-compat same endpoint",
@@ -3177,6 +3727,7 @@ async def _post_with_fallback(
             temperature=temperature, max_tokens=max_tokens,
             extra_headers=extra_headers, extra_body=extra_body,
             enable_cache=enable_cache, cache_depth=cache_depth,
+            request_route=_line,
         )
     except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
         if not _fallback_is_configured(config):
@@ -3187,7 +3738,7 @@ async def _post_with_fallback(
             exc.__class__.__name__,
             config.catty_ai_fallback_model,
         )
-        return await _post_fallback_chat(config, messages)
+        return await _post_fallback_chat(config, messages, request_route=_line)
     except Exception as exc:  # noqa: BLE001
         # native SDK 抛的 anthropic.* 异常不属于上面捕获范围; 让它也走 fallback
         if not _fallback_is_configured(config):
@@ -3198,7 +3749,7 @@ async def _post_with_fallback(
             exc.__class__.__name__,
             config.catty_ai_fallback_model,
         )
-        return await _post_fallback_chat(config, messages)
+        return await _post_fallback_chat(config, messages, request_route=_line)
 
 
 async def chat_completion_codex_instant(
@@ -3207,6 +3758,7 @@ async def chat_completion_codex_instant(
     *,
     max_tokens: int = 800,
     model_override: str = "",
+    request_route: str = "spark",
 ) -> str:
     """通用 5.3-codex 短回复路径 — placeholder / 签到 caption / NSFW deep 共用。
     model_override 优先, 否则 catty_nsfw_spark_model, 兜底 catty_filter_model.
@@ -3247,7 +3799,7 @@ async def chat_completion_codex_instant(
         enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
         cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
         label=f"codex_instant({nsfw_model})",
-        line="spark",
+        line=request_route,
     )
     # S6: codex_instant 覆盖 NSFW spark / 占位话 / 签到 caption — 都是面向用户的猫娘回复 → 蒸馏.
     # (在此入口埋而非 _post_with_fallback, 后者还被 _filter_completion 分类路径复用.)
@@ -3542,22 +4094,34 @@ async def describe_images(config: Config, image_urls: list[str], context: str) -
     if _route_native(config, "vision", base_url, model):
         try:
             from .anthropic_native_client import post_messages_native
-
-            data = await post_messages_native(
+            _native_payload: dict[str, Any] = {
+                "messages": [{"role": "user", "content": content}],
+                "max_tokens": config.catty_vision_max_tokens or 4096,
+            }
+            _native_diagnostics_token, _ = _bind_native_request_diagnostics(
                 base_url=base_url,
-                api_key=api_key,
                 model=model,
-                messages=[{"role": "user", "content": content}],
-                max_tokens=config.catty_vision_max_tokens or 4096,
-                temperature=config.catty_vision_temperature,
-                timeout=float(config.catty_vision_request_timeout or config.catty_request_timeout),
-                metadata_user_id=None,
-                tools=None,
-                line="vision",
-                enable_cache_breakpoints=False,
-                extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                payload=_native_payload,
+                request_route="vision",
             )
-            return _extract_content(data)
+            try:
+                data = await post_messages_native(
+                    base_url=base_url,
+                    api_key=api_key,
+                    model=model,
+                    messages=_native_payload["messages"],
+                    max_tokens=config.catty_vision_max_tokens or 4096,
+                    temperature=config.catty_vision_temperature,
+                    timeout=float(config.catty_vision_request_timeout or config.catty_request_timeout),
+                    metadata_user_id=None,
+                    tools=None,
+                    line="vision",
+                    enable_cache_breakpoints=False,
+                    extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                )
+                return _extract_content(data)
+            finally:
+                _reset_native_request_diagnostics(_native_diagnostics_token)
         except Exception as native_exc:  # noqa: BLE001
             _logger.warning(
                 "vision native /v1/messages failed (%s); trying OpenAI-compat",
@@ -3574,6 +4138,7 @@ async def describe_images(config: Config, image_urls: list[str], context: str) -
         max_tokens=config.catty_vision_max_tokens,
         extra_headers=config.catty_vision_extra_headers or config.catty_openai_extra_headers,
         extra_body=config.catty_vision_extra_body,
+        request_route="vision",
     )
 
 
@@ -3604,22 +4169,34 @@ async def analyze_images_for_reply(config: Config, image_urls: list[str], contex
     if _route_native(config, "vision", _v_base_url, _v_model):
         try:
             from .anthropic_native_client import post_messages_native
-
-            data = await post_messages_native(
+            _native_payload: dict[str, Any] = {
+                "messages": [{"role": "user", "content": content}],
+                "max_tokens": config.catty_vision_max_tokens or 4096,
+            }
+            _native_diagnostics_token, _ = _bind_native_request_diagnostics(
                 base_url=_v_base_url,
-                api_key=_v_api_key,
                 model=_v_model,
-                messages=[{"role": "user", "content": content}],
-                max_tokens=config.catty_vision_max_tokens or 4096,
-                temperature=config.catty_vision_temperature,
-                timeout=float(config.catty_vision_request_timeout or config.catty_request_timeout),
-                metadata_user_id=None,
-                tools=None,
-                line="vision",
-                enable_cache_breakpoints=False,
-                extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                payload=_native_payload,
+                request_route="vision",
             )
-            return _image_analysis_from_reply(_extract_content(data))
+            try:
+                data = await post_messages_native(
+                    base_url=_v_base_url,
+                    api_key=_v_api_key,
+                    model=_v_model,
+                    messages=_native_payload["messages"],
+                    max_tokens=config.catty_vision_max_tokens or 4096,
+                    temperature=config.catty_vision_temperature,
+                    timeout=float(config.catty_vision_request_timeout or config.catty_request_timeout),
+                    metadata_user_id=None,
+                    tools=None,
+                    line="vision",
+                    enable_cache_breakpoints=False,
+                    extra_betas=list(getattr(config, "catty_native_extra_betas", []) or []) or None,
+                )
+                return _image_analysis_from_reply(_extract_content(data))
+            finally:
+                _reset_native_request_diagnostics(_native_diagnostics_token)
         except Exception as native_exc:  # noqa: BLE001
             _logger.warning(
                 "vision native /v1/messages failed (%s); trying OpenAI-compat",
@@ -3636,5 +4213,6 @@ async def analyze_images_for_reply(config: Config, image_urls: list[str], contex
         max_tokens=config.catty_vision_max_tokens,
         extra_headers=config.catty_vision_extra_headers or config.catty_openai_extra_headers,
         extra_body=config.catty_vision_extra_body,
+        request_route="vision",
     )
     return _image_analysis_from_reply(reply)

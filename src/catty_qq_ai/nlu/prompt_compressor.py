@@ -200,6 +200,57 @@ def _msg_text(msg: Any) -> str:
         return text
 
 
+def count_message_tokens(message: Any) -> int:
+    """Estimate one wire/history message using the existing tokenizer path."""
+    return count_tokens(_msg_text(message))
+
+
+def count_history_tokens(history: list[dict]) -> int:
+    """Estimate the token total for a chronological history list."""
+    return sum(count_message_tokens(message) for message in history)
+
+
+def trim_history_to_token_budget(
+    history: list[dict],
+    target_tokens: int,
+) -> list[dict]:
+    """Return the newest contiguous complete turns that fit ``target_tokens``.
+
+    A turn starts at a ``user`` message and extends to (but not including) the
+    next ``user`` message.  The newest turn is always retained intact, even if
+    it alone exceeds the target; older leading orphan messages are discarded.
+    """
+    if not history or target_tokens <= 0:
+        return []
+
+    user_starts = [
+        index
+        for index, message in enumerate(history)
+        if isinstance(message, dict) and message.get("role") == "user"
+    ]
+    if not user_starts:
+        return []
+
+    turns: list[list[dict]] = []
+    for position, start in enumerate(user_starts):
+        end = user_starts[position + 1] if position + 1 < len(user_starts) else len(history)
+        turns.append(history[start:end])
+
+    selected: list[list[dict]] = []
+    total = 0
+    for turn in reversed(turns):
+        turn_tokens = count_history_tokens(turn)
+        if selected and total + turn_tokens > target_tokens:
+            break
+        selected.append(turn)
+        total += turn_tokens
+        if total >= target_tokens:
+            break
+
+    selected.reverse()
+    return [message for turn in selected for message in turn]
+
+
 # ── 拿 compressor 相关 config (lazy import 防 circular) ──────────
 def _config_get(field: str, default: Any) -> Any:
     try:

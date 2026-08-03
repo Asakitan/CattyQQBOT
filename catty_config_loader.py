@@ -60,6 +60,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "base_url": "https://api.openai.com/v1",
         "api_key": "",
         "model": "gpt-4o-mini",
+        "model_context_tokens": 1000000,
+        "cache_hit_input_price_ratio": 0.02,
         "extra_headers": {},
         "extra_body": {},
         "temperature": 0.7,
@@ -288,6 +290,14 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "group_require_mention_or_prefix": True,
         "group_history_scope": "group",
         "history_turns": 16,
+        "session_context_enabled": True,
+        "session_context_target_tokens": 256000,
+        "session_context_trim_to_tokens": 192000,
+        "session_context_headroom_tokens": 32000,
+        "session_cache_persistence_enabled": True,
+        "session_cache_dir": "sessions",
+        "session_cache_max_sessions": 200,
+        "session_cache_save_debounce_seconds": 2.0,
         "directed_keywords": ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"],
         "keyword_replies": [],
         "soft_directed_reply_probability": 0.65,
@@ -494,6 +504,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_OPENAI_EXTRA_BODY", ai.get("extra_body"), json_value=True)
     _set_env("CATTY_TEMPERATURE", ai.get("temperature"))
     _set_env("CATTY_MAX_TOKENS", ai.get("max_tokens"))
+    _set_env("CATTY_MODEL_CONTEXT_TOKENS", ai.get("model_context_tokens"))
+    _set_env("CATTY_CACHE_HIT_INPUT_PRICE_RATIO", ai.get("cache_hit_input_price_ratio"))
     _set_env("CATTY_REQUEST_TIMEOUT", ai.get("request_timeout"))
     _set_env("CATTY_HTTP_PROXY", ai.get("http_proxy"))
     # 主人 2026-05-28: Anthropic 原生 /v1/messages + server-side compaction
@@ -735,6 +747,14 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_REQUIRE_MENTION_OR_PREFIX", chat.get("group_require_mention_or_prefix"))
     _set_env("CATTY_GROUP_HISTORY_SCOPE", chat.get("group_history_scope"))
     _set_env("CATTY_HISTORY_TURNS", chat.get("history_turns"))
+    _set_env("CATTY_SESSION_CONTEXT_ENABLED", chat.get("session_context_enabled"))
+    _set_env("CATTY_SESSION_CONTEXT_TARGET_TOKENS", chat.get("session_context_target_tokens"))
+    _set_env("CATTY_SESSION_CONTEXT_TRIM_TO_TOKENS", chat.get("session_context_trim_to_tokens"))
+    _set_env("CATTY_SESSION_CONTEXT_HEADROOM_TOKENS", chat.get("session_context_headroom_tokens"))
+    _set_env("CATTY_SESSION_CACHE_PERSISTENCE_ENABLED", chat.get("session_cache_persistence_enabled"))
+    _set_env("CATTY_SESSION_CACHE_DIR", chat.get("session_cache_dir"))
+    _set_env("CATTY_SESSION_CACHE_MAX_SESSIONS", chat.get("session_cache_max_sessions"))
+    _set_env("CATTY_SESSION_CACHE_SAVE_DEBOUNCE_SECONDS", chat.get("session_cache_save_debounce_seconds"))
     _set_env("CATTY_CPU_AFFINITY_MASK", chat.get("cpu_affinity_mask"))
     _set_env("CATTY_DIRECTED_KEYWORDS", chat.get("directed_keywords"), json_value=True)
     _set_env("CATTY_IGNORED_USER_IDS", chat.get("ignored_user_ids"), json_value=True)

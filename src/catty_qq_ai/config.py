@@ -2,7 +2,7 @@ import json
 import re
 from typing import Any
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 def _split_text(value: str) -> list[str]:
@@ -48,6 +48,8 @@ class Config(BaseModel):
     catty_openai_base_url: str = "https://api.openai.com/v1"
     catty_openai_api_key: str = ""
     catty_openai_model: str = "gpt-4o-mini"
+    catty_model_context_tokens: int = 1_000_000
+    catty_cache_hit_input_price_ratio: float = 0.02
     catty_openai_extra_headers: dict[str, str] = Field(default_factory=dict)
     catty_openai_extra_body: dict[str, Any] = Field(default_factory=dict)
 
@@ -385,11 +387,14 @@ class Config(BaseModel):
     catty_enable_group: bool = True
     catty_private_require_prefix: bool = False
     catty_group_require_mention_or_prefix: bool = True
-    # 主人 2026-05-28 P5.4: 每个 QQ 号一个独立 user session.
-    # "group" = 共享 (默认旧值), "user" = per-user (group_id + user_id 复合 key).
+    # "group" = shared default, "user" = per-user (group_id + user_id composite key).
     # ambient_eavesdrop/proactive/catty_mood 保持 _conversation_queue_key (群级) 看群里在场感.
-    catty_group_history_scope: str = "user"
-    catty_history_turns: int = 3  # 主人 2026-05-28 C15-6: 6→3 (6 条), 强模型 + 8.4K cache 锁人格, history 给最近延续就够
+    catty_group_history_scope: str = "group"
+    catty_history_turns: int = 3  # Legacy short-history mode only.
+    catty_session_context_enabled: bool = True
+    catty_session_context_target_tokens: int = 256_000
+    catty_session_context_trim_to_tokens: int = 192_000
+    catty_session_context_headroom_tokens: int = 32_000
     catty_session_cache_persistence_enabled: bool = True
     catty_session_cache_dir: str = "sessions"
     catty_session_cache_max_sessions: int = 200
@@ -721,6 +726,25 @@ class Config(BaseModel):
         if normalized not in {"group", "user"}:
             raise ValueError("catty_group_history_scope must be group or user")
         return normalized
+
+    @model_validator(mode="after")
+    def validate_session_context_token_budget(self) -> "Config":
+        trim_to_tokens = self.catty_session_context_trim_to_tokens
+        target_tokens = self.catty_session_context_target_tokens
+        headroom_tokens = self.catty_session_context_headroom_tokens
+        model_context_tokens = self.catty_model_context_tokens
+
+        if not 0 < trim_to_tokens < target_tokens <= model_context_tokens:
+            raise ValueError(
+                "session context tokens must satisfy "
+                "0 < trim_to_tokens < target_tokens <= model_context_tokens"
+            )
+        if not 0 < headroom_tokens < target_tokens - trim_to_tokens:
+            raise ValueError(
+                "session context headroom must satisfy "
+                "0 < headroom_tokens < target_tokens - trim_to_tokens"
+            )
+        return self
 
     @field_validator("catty_local_critic_mode")
     @classmethod

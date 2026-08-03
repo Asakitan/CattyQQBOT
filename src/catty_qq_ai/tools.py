@@ -3090,6 +3090,7 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
             max_tokens=1600,
             extra_headers={},
             extra_body=_extra_body,
+            request_route="imagegen_plan",
         )
         try:
             content = response["choices"][0]["message"]["content"]
