@@ -148,10 +148,19 @@ def settle_private_tokens(
 
 # ── 拦截提醒 AI 现写 (主人 2026-07-06, 抄 tools._persona_image_caption 模式) ──
 # catty 的 core_persona=None (走 builder), 现写时用这段简版速写兜人设;
-# 机机等其他人格直接用其 core_persona 全文.
+# 机机使用独立的计费拦截短提示，未知人格走中性短助手文案。
 _CATTY_BRIEF = (
     "你是笨猫, 一只住在 QQ 里的猫娘. 自称 人家/奴/猫猫/笨猫, 语气软糯爱撒娇, "
     "句尾常带喵, 会用颜文字比如 (=´ω｀=) (=；ω；=). 说话短, 一两句就够."
+)
+
+_FADIANJI_BILLING_BRIEF = (
+    "你是机机，一台住在 QQ 里的不稳定发电机。自称我、机或小机。说话短而直接，"
+    "带点低能量的轻松吐槽和俏皮催促，像熟人聊天，一两句就够。"
+)
+
+_NEUTRAL_BRIEF = (
+    "你是一个简短、友好的 QQ 聊天助手。用自然、中性的中文回应，保持一两句，不使用特定角色设定。"
 )
 
 
@@ -163,25 +172,56 @@ async def ai_gate_reply(config: Any, persona: Any, kind: str, user_text: str = "
     """
     from .openai_client import chat_completion_codex_instant
 
-    core = str(getattr(persona, "core_persona", "") or "") or _CATTY_BRIEF
-    if kind == "broke":
+    persona_name = str(getattr(persona, "name", "") or "").strip().lower()
+    is_catty = persona_name == "catty"
+    if is_catty:
+        core = str(getattr(persona, "core_persona", "") or "")
+        core = core or _CATTY_BRIEF
+    elif persona_name == "fadianji":
+        core = _FADIANJI_BILLING_BRIEF
+    else:
+        core = _NEUTRAL_BRIEF
+
+    if is_catty:
+        if kind == "broke":
+            scene = (
+                "情境: 对方私聊找你聊天, 但他的积分已经用完了 (你每次回复都会按 token 消耗"
+                "他的积分, 他发『签到』就能领到新积分). 没积分你就没力气说话. "
+                "拒绝这次聊天, 用撒娇/耍赖的方式让他去签到充值再来. "
+            )
+        else:
+            scene = (
+                "情境: 对方在群里找你聊天, 但他这个小时的聊天额度已经用完了 "
+                "(每人每小时有限额, 下个整点自动恢复, 跟积分无关不用提签到). "
+                "告诉他这个小时你不能再陪他聊了, 让他下个小时再来找你. "
+            )
+        output_instruction = (
+            "用你的口吻写 1-2 条短句 (可换行分条), 不用 Markdown, "
+            "对方不是你的主人绝对不要叫他主人, 只输出正文."
+        )
+    elif kind == "broke":
         scene = (
-            "情境: 对方私聊找你聊天, 但他的积分已经用完了 (你每次回复都会按 token 消耗"
-            "他的积分, 他发『签到』就能领到新积分). 没积分你就没力气说话. "
-            "拒绝这次聊天, 用撒娇/耍赖的方式让他去签到充值再来. "
+            "情境: 对方私聊找你聊天, 但他的积分已经用完了 (每次回复都会按 token 消耗"
+            "积分, 发送『签到』可领取新积分). 按当前人格简短说明本次无法继续聊天，"
+            "提醒他签到后再来。"
+        )
+        output_instruction = (
+            "按当前人格的口吻写 1-2 条短句 (可换行分条), 不用 Markdown, 只输出正文."
         )
     else:
         scene = (
             "情境: 对方在群里找你聊天, 但他这个小时的聊天额度已经用完了 "
             "(每人每小时有限额, 下个整点自动恢复, 跟积分无关不用提签到). "
-            "告诉他这个小时你不能再陪他聊了, 让他下个小时再来找你. "
+            "按当前人格简短说明本小时无法继续聊天，请他下个小时再来。"
+        )
+        output_instruction = (
+            "按当前人格的口吻写 1-2 条短句 (可换行分条), 不用 Markdown, 只输出正文."
         )
     messages = [
         {"role": "system", "content": core},
         {
             "role": "system",
-            "content": scene + "用你的口吻写 1-2 条短句 (可换行分条), 不用 Markdown, "
-            "对方不是你的主人绝对不要叫他主人, 只输出正文.",
+            "content": scene + output_instruction,
         },
         {"role": "user", "content": (user_text or "").strip()[:120] or "在吗"},
     ]
@@ -208,6 +248,11 @@ _BROKE_REPLIES: dict[str, tuple[str, ...]] = {
     ),
 }
 
+_NEUTRAL_BROKE_REPLIES: tuple[str, ...] = (
+    "积分已用完，请发送『签到』领取新积分后再来。",
+    "当前积分不足，请先发送『签到』领取新积分。",
+)
+
 _QUOTA_REPLIES: dict[str, tuple[str, ...]] = {
     "catty": (
         "这个小时的额度被你聊光光啦…猫猫的嗓子都要冒烟了，下个小时再来找人家玩嘛(=´ω｀=)",
@@ -219,12 +264,21 @@ _QUOTA_REPLIES: dict[str, tuple[str, ...]] = {
     ),
 }
 
+_NEUTRAL_QUOTA_REPLIES: tuple[str, ...] = (
+    "本小时聊天额度已用完，请下个整点后再试。",
+    "当前小时额度已用完，请下个小时再来。",
+)
+
 
 def pick_broke_reply(persona_name: str) -> str:
-    pool = _BROKE_REPLIES.get(str(persona_name or "").lower()) or _BROKE_REPLIES["catty"]
+    pool = _BROKE_REPLIES.get(
+        str(persona_name or "").strip().lower(), _NEUTRAL_BROKE_REPLIES
+    )
     return random.choice(pool)
 
 
 def pick_quota_reply(persona_name: str) -> str:
-    pool = _QUOTA_REPLIES.get(str(persona_name or "").lower()) or _QUOTA_REPLIES["catty"]
+    pool = _QUOTA_REPLIES.get(
+        str(persona_name or "").strip().lower(), _NEUTRAL_QUOTA_REPLIES
+    )
     return random.choice(pool)

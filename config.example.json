@@ -33,7 +33,8 @@
         "http_proxy": "",
         "anthropic_native_enabled": false,
         "compaction_enabled": false,
-        "compaction_trigger_tokens": 150000
+        "compaction_trigger_tokens": 150000,
+        "cache_diag_enabled": false
     },
     "ai_fallback": {
         "enabled": false,
@@ -221,7 +222,7 @@
     },
     "web_search": {
         "enabled": true,
-        "cooldown_seconds": 600,
+        "cooldown_seconds": 60,
         "max_results": 5,
         "request_timeout": 10,
         "engines": [

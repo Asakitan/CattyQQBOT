@@ -41,6 +41,7 @@ _MAX_TOTAL_SCOPES = 100            # 整体 scope 数 cap (磁盘保护, 太多 
 _MAX_KEYS_PER_ENTRY = 6            # 同义触发词 cap, 防一条 entry 带太多泛词
 _MAX_KEY_CHARS = 24                # 单 key 过长会降低命中质量且撑 prompt
 _MAX_CONTENT_CHARS = 300           # 和 summarize_scope_lore 的硬上限保持一致
+_DEFAULT_PERSONA = "catty"
 
 
 def _compact_space(text: str) -> str:
@@ -49,6 +50,11 @@ def _compact_space(text: str) -> str:
 
 def _normalise_for_dedupe(text: str) -> str:
     return _compact_space(text).casefold()
+
+
+def _normalise_persona(persona: str | None) -> str:
+    value = str(persona or _DEFAULT_PERSONA).strip().lower()
+    return value or _DEFAULT_PERSONA
 
 
 @dataclass
@@ -60,6 +66,7 @@ class ScopeLoreEntry:
     created_at: float = 0.0
     last_hit_at: float = 0.0
     hit_count: int = 0
+    persona: str = _DEFAULT_PERSONA
 
     def to_payload(self) -> dict[str, Any]:
         return {
@@ -69,6 +76,7 @@ class ScopeLoreEntry:
             "created_at": self.created_at,
             "last_hit_at": self.last_hit_at,
             "hit_count": self.hit_count,
+            "persona": _normalise_persona(self.persona),
         }
 
     @classmethod
@@ -90,6 +98,7 @@ class ScopeLoreEntry:
             created_at=float(payload.get("created_at") or 0.0),
             last_hit_at=float(payload.get("last_hit_at") or 0.0),
             hit_count=int(payload.get("hit_count") or 0),
+            persona=_normalise_persona(payload.get("persona")),
         )
 
 
@@ -201,6 +210,7 @@ class ScopeLorebookStore:
         return (
             len(entry.content.encode("utf-8"))
             + sum(len(k.encode("utf-8")) for k in entry.keys)
+            + len(_normalise_persona(entry.persona).encode("utf-8"))
             + 64  # identifier + 时间戳 + JSON 包装的常数开销
         )
 
@@ -219,11 +229,19 @@ class ScopeLorebookStore:
             entries.pop(0)  # 删 last_hit_at 最早的那条
         self._data[scope] = entries
 
-    def add_entry(self, scope: str, keys: Iterable[str], content: str) -> ScopeLoreEntry | None:
+    def add_entry(
+        self,
+        scope: str,
+        keys: Iterable[str],
+        content: str,
+        *,
+        persona: str | None = None,
+    ) -> ScopeLoreEntry | None:
         """添加一条新 entry。keys 去重 / 去空 / content trim。返回新 entry 或 None(参数无效)。"""
         content = _compact_space(content)[:_MAX_CONTENT_CHARS]
         if not scope or not content:
             return None
+        persona_name = _normalise_persona(persona)
         raw_keys: Iterable[str] = [keys] if isinstance(keys, str) else list(keys or [])
         key_tuple = tuple(
             dict.fromkeys(
@@ -239,6 +257,8 @@ class ScopeLorebookStore:
             entries = self._data.setdefault(scope, [])
             normalised_content = _normalise_for_dedupe(content)
             for existing in entries:
+                if _normalise_persona(existing.persona) != persona_name:
+                    continue
                 if _normalise_for_dedupe(existing.content) != normalised_content:
                     continue
                 merged_keys = tuple(dict.fromkeys((*existing.keys, *key_tuple)))[:_MAX_KEYS_PER_ENTRY]
@@ -254,6 +274,7 @@ class ScopeLorebookStore:
                 created_at=now,
                 last_hit_at=0.0,
                 hit_count=0,
+                persona=persona_name,
             )
             entries.append(entry)
             self._last_access[scope] = now
@@ -262,19 +283,34 @@ class ScopeLorebookStore:
             self._dirty = True
         return entry
 
-    def list_entries(self, scope: str) -> list[ScopeLoreEntry]:
-        """返回 scope 当前所有 entries 拷贝(按 created_at 升序)。"""
+    def list_entries(self, scope: str, *, persona: str | None = None) -> list[ScopeLoreEntry]:
+        """返回 scope 当前人格的 entries 拷贝(按 created_at 升序)。"""
+        persona_name = _normalise_persona(persona)
         with self._lock:
-            entries = list(self._data.get(scope) or [])
+            entries = [
+                entry for entry in (self._data.get(scope) or [])
+                if _normalise_persona(entry.persona) == persona_name
+            ]
         entries.sort(key=lambda e: e.created_at)
         return entries
 
-    def remove_entry(self, scope: str, identifier: str) -> bool:
-        """按 identifier 删除一条 entry。返回是否真删了。"""
+    def remove_entry(
+        self,
+        scope: str,
+        identifier: str,
+        *,
+        persona: str | None = None,
+    ) -> bool:
+        """按 identifier 删除当前人格的一条 entry。返回是否真删了。"""
+        persona_name = _normalise_persona(persona)
         with self._lock:
             entries = self._data.get(scope) or []
             before = len(entries)
-            entries = [e for e in entries if e.identifier != identifier]
+            entries = [
+                entry for entry in entries
+                if entry.identifier != identifier
+                or _normalise_persona(entry.persona) != persona_name
+            ]
             if len(entries) == before:
                 return False
             if entries:
@@ -285,12 +321,22 @@ class ScopeLorebookStore:
             self._dirty = True
             return True
 
-    def mark_hit(self, scope: str, identifier: str) -> None:
-        """命中时刷 last_hit_at + hit_count(给 character_book 递归扫描调用)。"""
+    def mark_hit(
+        self,
+        scope: str,
+        identifier: str,
+        *,
+        persona: str | None = None,
+    ) -> None:
+        """命中时刷当前人格 entry 的 last_hit_at + hit_count。"""
         now = time.time()
+        persona_name = _normalise_persona(persona)
         with self._lock:
             for entry in self._data.get(scope) or []:
-                if entry.identifier == identifier:
+                if (
+                    entry.identifier == identifier
+                    and _normalise_persona(entry.persona) == persona_name
+                ):
                     entry.last_hit_at = now
                     entry.hit_count += 1
                     self._last_access[scope] = now
@@ -305,33 +351,70 @@ class ScopeLorebookStore:
         with self._lock:
             return sum(len(v) for v in self._data.values())
 
-    def scope_byte_size(self, scope: str) -> int:
-        """诊断: 返回 scope 当前 entries 估算字节大小(给 dashboard / debug)。"""
+    def scope_byte_size(self, scope: str, *, persona: str | None = None) -> int:
+        """诊断: 返回 scope 当前人格 entries 的估算字节大小。"""
+        persona_name = _normalise_persona(persona)
         with self._lock:
-            entries = self._data.get(scope) or []
-            return sum(self._entry_byte_size(e) for e in entries)
+            entries = [
+                entry for entry in (self._data.get(scope) or [])
+                if _normalise_persona(entry.persona) == persona_name
+            ]
+            return sum(self._entry_byte_size(entry) for entry in entries)
 
     # ── 后台 auto-summary 节流支持 ─────────────────────────────────
-    def was_summarized_on(self, scope: str, date_str: str) -> bool:
-        """检查 scope 是否在指定日期(YYYY-MM-DD) 已总结过。"""
-        with self._lock:
-            m = self._meta.get(scope) or {}
-            return str(m.get("last_summary_date") or "") == date_str
+    def _summary_meta_for_persona(self, scope: str, persona: str) -> dict[str, Any]:
+        meta = self._meta.get(scope) or {}
+        per_persona = meta.get("summary_by_persona") or {}
+        if isinstance(per_persona, dict):
+            state = per_persona.get(persona)
+            if isinstance(state, dict):
+                return state
+        # 旧 payload 的扁平 summary 元数据仅属于 Catty。
+        return meta if persona == _DEFAULT_PERSONA else {}
 
-    def mark_summarized_on(self, scope: str, date_str: str) -> None:
-        """记录 scope 在指定日期总结过(节流标记)。"""
+    def was_summarized_on(
+        self,
+        scope: str,
+        date_str: str,
+        *,
+        persona: str | None = None,
+    ) -> bool:
+        """检查当前人格是否在指定日期(YYYY-MM-DD) 已总结过。"""
+        persona_name = _normalise_persona(persona)
         with self._lock:
-            m = self._meta.setdefault(scope, {})
-            m["last_summary_date"] = date_str
-            m["last_summary_at"] = time.time()
+            state = self._summary_meta_for_persona(scope, persona_name)
+            return str(state.get("last_summary_date") or "") == date_str
+
+    def mark_summarized_on(
+        self,
+        scope: str,
+        date_str: str,
+        *,
+        persona: str | None = None,
+    ) -> None:
+        """记录当前人格在指定日期总结过(节流标记)。"""
+        persona_name = _normalise_persona(persona)
+        with self._lock:
+            meta = self._meta.setdefault(scope, {})
+            per_persona = meta.get("summary_by_persona")
+            if not isinstance(per_persona, dict):
+                per_persona = {}
+                meta["summary_by_persona"] = per_persona
+            state = per_persona.setdefault(persona_name, {})
+            state["last_summary_date"] = date_str
+            state["last_summary_at"] = time.time()
+            # 保留旧扁平字段，旧 JSON / 旧调用者继续把它视为 Catty 节流状态。
+            if persona_name == _DEFAULT_PERSONA:
+                meta["last_summary_date"] = state["last_summary_date"]
+                meta["last_summary_at"] = state["last_summary_at"]
             self._dirty = True
 
-    def last_summary_date(self, scope: str) -> str:
-        """返回 scope 上次总结日期(YYYY-MM-DD), 没有返回 ''。"""
+    def last_summary_date(self, scope: str, *, persona: str | None = None) -> str:
+        """返回当前人格上次总结日期(YYYY-MM-DD), 没有返回 ''。"""
+        persona_name = _normalise_persona(persona)
         with self._lock:
-            m = self._meta.get(scope) or {}
-            return str(m.get("last_summary_date") or "")
-
+            state = self._summary_meta_for_persona(scope, persona_name)
+            return str(state.get("last_summary_date") or "")
 
 __all__ = [
     "ScopeLoreEntry",

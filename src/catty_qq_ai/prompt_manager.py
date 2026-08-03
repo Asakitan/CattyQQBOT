@@ -415,7 +415,7 @@ def register_catty_persona(
                 hardcoded = list(getattr(_cc.CATTY_CARD, "character_book", ()) or [])
             scope_entries: list = []
             if scope_lore_store is not None and scope:
-                for se in scope_lore_store.list_entries(scope):
+                for se in scope_lore_store.list_entries(scope, persona=persona.name):
                     scope_entries.append(SimpleNamespace(
                         identifier=se.identifier,
                         keys=tuple(se.keys),
@@ -456,7 +456,11 @@ def register_catty_persona(
                             triggered.add(entry.identifier)
                             if is_scope and scope_lore_store is not None:
                                 try:
-                                    scope_lore_store.mark_hit(scope, entry.identifier)
+                                    scope_lore_store.mark_hit(
+                                        scope,
+                                        entry.identifier,
+                                        persona=persona.name,
+                                    )
                                 except Exception:  # noqa: BLE001
                                     pass
                             break
@@ -862,7 +866,7 @@ def register_catty_persona(
     if has_image:
         _reg(
             "catty_image_literacy",
-            content_fn=lambda: _pp.build_image_literacy_prompt(),
+            content_fn=lambda: _pp.build_image_literacy_prompt(persona),
             order=465,  # conditional (has_image), post-boundary
         )
         # Catty Image Reaction: 根据 image_description 关键词命中给具体情绪反应 hint.
@@ -979,7 +983,13 @@ def register_catty_persona(
         from . import catty_rag as _crag
         _reg(
             "catty_rag_recall",
-            content_fn=lambda: _crag.build_rag_recall_prompt(rag_store, scope, user_text, top_k=3),
+            content_fn=lambda: _crag.build_rag_recall_prompt(
+                rag_store,
+                scope,
+                user_text,
+                top_k=3,
+                persona=persona.name,
+            ),
             order=458,
         )
 

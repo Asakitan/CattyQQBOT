@@ -93,6 +93,6 @@ def build_strinova_context(
         except Exception:
             dynamic = ""
         if dynamic:
-            sections.append("猫猫长期积累的 Strinova 事实记忆(高优先级,版本/活动/玩家共识):\n" + dynamic)
+            sections.append("Strinova 共享事实记忆(高优先级,版本/活动/玩家共识):\n" + dynamic)
     sections.append("资料来源：\n" + "\n".join(f"- {source}" for source in _SOURCES))
     return "\n".join(sections)

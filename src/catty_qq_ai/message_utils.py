@@ -1,3 +1,4 @@
+import html
 import logging
 import random
 import re
@@ -181,8 +182,26 @@ class ExtractedMessage:
     opportunistic: bool = False
 
 
-_CONTROL_CODE_PATTERN = re.compile(r"\[(?:CQ:)?(?:at|reply)[:,][^\]]*\]", re.IGNORECASE)
+@dataclass(slots=True)
+class ReplySource:
+    message_id: str = ""
+    sender_id: str = ""
+    sender_name: str = ""
+    text: str = ""
+    images: list[tuple[str, str]] | None = None
+    is_current_bot: bool = False
+
+    def __post_init__(self) -> None:
+        if self.images is None:
+            self.images = []
+
+
+_CONTROL_CODE_PATTERN = re.compile(r"\[(?:CQ:)?(?:at|reply|image|mface)[:,][^\]]*\]", re.IGNORECASE)
 _CONTROL_TAG_PATTERN = re.compile(r"\[(?:CQ:)?(?P<type>at|reply)[:,](?P<data>[^\]]*)\]", re.IGNORECASE)
+_MEDIA_CONTROL_TAG_PATTERN = re.compile(
+    r"\[(?:CQ:)?(?P<type>image|mface)[:,](?P<data>[^\]]*)\]",
+    re.IGNORECASE,
+)
 
 
 def _message_text_segments(event: MessageEvent) -> list[str]:
@@ -292,14 +311,139 @@ def _image_cache_key(segment_type: str, data: dict[str, Any], url: str) -> str:
 
 def extract_images(event: MessageEvent) -> list[tuple[str, str]]:
     images: list[tuple[str, str]] = []
+    seen_urls: set[str] = set()
     for segment in event.message:
         if segment.type not in {"image", "mface"}:
             continue
         url = str(segment.data.get("url") or "").strip()
-        if not url:
+        if not url or url in seen_urls:
             continue
+        seen_urls.add(url)
         images.append((url, _image_cache_key(segment.type, segment.data, url)))
     return images
+
+
+def _object_field(source: object, name: str, default: Any = None) -> Any:
+    if isinstance(source, dict):
+        return source.get(name, default)
+    return getattr(source, name, default)
+
+
+def _message_segments(message: object) -> list[object]:
+    raw = _object_field(message, "message")
+    try:
+        raw_is_empty = raw is None or isinstance(raw, str) or len(raw) == 0
+    except TypeError:
+        raw_is_empty = False
+    if raw_is_empty:
+        original = _object_field(message, "original_message")
+        if original is not None and not isinstance(original, str):
+            raw = original
+    if raw is None or isinstance(raw, str):
+        return []
+    try:
+        return list(raw)
+    except TypeError:
+        return []
+
+
+def _segment_type_data(segment: object) -> tuple[str, dict[str, Any]]:
+    seg_type = str(_object_field(segment, "type", "") or "")
+    data = _object_field(segment, "data", {}) or {}
+    return seg_type, data if isinstance(data, dict) else {}
+
+
+def _raw_message_texts(message: object) -> list[str]:
+    texts: list[str] = []
+    for field_name in ("raw_message", "message", "original_message"):
+        value = _object_field(message, field_name, "")
+        if isinstance(value, str) and value.strip() and value not in texts:
+            texts.append(value)
+    return texts
+
+
+def _media_segments_from_control_text(text: str) -> list[tuple[str, dict[str, Any]]]:
+    segments: list[tuple[str, dict[str, Any]]] = []
+    for match in _MEDIA_CONTROL_TAG_PATTERN.finditer(text):
+        data: dict[str, Any] = {}
+        for part in match.group("data").split(","):
+            key, separator, value = part.partition("=")
+            if separator and key.strip():
+                data[key.strip()] = html.unescape(value.strip())
+        segments.append((match.group("type").lower(), data))
+    return segments
+
+
+def reply_source_from_message(
+    message: object,
+    *,
+    message_id: str = "",
+    self_id: str = "",
+) -> ReplySource:
+    """把 event.reply / get_msg 的 dict 或对象统一成一次性引用快照。"""
+    sender = _object_field(message, "sender")
+    sender_id = str(
+        _object_field(sender, "user_id", "")
+        or _object_field(message, "user_id", "")
+        or ""
+    ).strip()
+    sender_name = ""
+    for key in ("card", "nickname"):
+        value = str(_object_field(sender, key, "") or "").strip()
+        if value:
+            sender_name = value
+            break
+
+    text_parts: list[str] = []
+    images: list[tuple[str, str]] = []
+    seen_image_urls: set[str] = set()
+    for segment in _message_segments(message):
+        seg_type, data = _segment_type_data(segment)
+        if seg_type == "text":
+            text_parts.append(str(data.get("text") or ""))
+        elif seg_type == "at":
+            name = str(data.get("name") or "").strip()
+            qq = str(data.get("qq") or "").strip()
+            if name and qq:
+                text_parts.append(f"@{name}(QQ:{qq})")
+            elif name:
+                text_parts.append(f"@{name}")
+            elif qq:
+                text_parts.append(f"@QQ_{qq}")
+        elif seg_type in {"image", "mface"}:
+            url = str(data.get("url") or "").strip()
+            if not url or url in seen_image_urls:
+                continue
+            item = (url, _image_cache_key(seg_type, data, url))
+            seen_image_urls.add(url)
+            images.append(item)
+
+    raw_texts = _raw_message_texts(message)
+    for raw_text in raw_texts:
+        for seg_type, data in _media_segments_from_control_text(raw_text):
+            url = str(data.get("url") or "").strip()
+            if not url or url in seen_image_urls:
+                continue
+            seen_image_urls.add(url)
+            images.append((url, _image_cache_key(seg_type, data, url)))
+
+    text = _strip_control_codes("".join(text_parts).strip())
+    if not text and raw_texts:
+        text = _strip_control_codes(raw_texts[0].strip())
+    resolved_message_id = str(
+        message_id
+        or _object_field(message, "message_id", "")
+        or _object_field(message, "id", "")
+        or ""
+    ).strip()
+    return ReplySource(
+        message_id=resolved_message_id,
+        sender_id=sender_id,
+        sender_name=sender_name,
+        text=text[:500],
+        images=images,
+        is_current_bot=bool(sender_id and self_id and sender_id == str(self_id)),
+    )
 
 
 def _normalize_repeat_text(text: str) -> str:

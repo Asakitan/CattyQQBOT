@@ -228,6 +228,39 @@ class TimeBucketContextStore:
             logger.warning(f"time_bucket_context: failed to write {scope}: {exc}")
             return False
 
+    def known_scopes(self, prefix: str = "") -> list[str]:
+        """Return known scope keys from memory and valid persisted bucket payloads."""
+        scopes = {
+            scope
+            for scope in self._data
+            if isinstance(scope, str) and scope.startswith(prefix)
+        }
+        if not self._dir.is_dir():
+            return sorted(scopes)
+        try:
+            for path in self._dir.glob("*.json"):
+                try:
+                    raw = json.loads(path.read_text(encoding="utf-8"))
+                except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+                    logger.debug(f"time_bucket_context: skipped invalid scope file {path.name}: {exc}")
+                    continue
+                scope = raw.get("key") if isinstance(raw, dict) else None
+                if isinstance(scope, str) and scope and scope.startswith(prefix):
+                    scopes.add(scope)
+        except OSError as exc:
+            logger.warning(f"time_bucket_context: failed to scan {self._dir}: {exc}")
+        return sorted(scopes)
+
+    def reset_matching(self, prefix: str) -> int:
+        """Reset all discovered scopes with a non-empty prefix and return the count."""
+        if not prefix:
+            return 0
+        reset_count = 0
+        for scope in self.known_scopes(prefix):
+            if self.reset_scope(scope):
+                reset_count += 1
+        return reset_count
+
     def reset_scope(self, scope: str) -> bool:
         """清空该 scope 的全部 bucket (内存 + 盘上)。多人格切换时用 —
         旧人格口吻的历史摘要不能带进新人格 prompt。"""

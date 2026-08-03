@@ -21,6 +21,77 @@ if TYPE_CHECKING:
     from ..character_card import CharacterBookEntry
 
 
+@dataclass(frozen=True, slots=True)
+class PersonaReplyCatalog:
+    """人格专属的业务 fallback 文案与指令。"""
+    slow_reply_placeholders: tuple[str, ...] = ()
+    slow_reply_owner_placeholders: tuple[str, ...] = ()
+    force_reply_instruction: str = ""
+    no_reply_image_fallback: str = ""
+    no_reply_reply_fallback: str = ""
+    no_reply_mention_fallback: str = ""
+    no_reply_default_fallback: str = ""
+    api_timeout_reply: str = ""
+    api_transport_reply: str = ""
+    image_send_failure_reply: str = ""
+    tool_result_follow_up_instruction: str = ""
+    turtle_soup_cooldown_reply: str = ""
+    turtle_soup_rule_line: str = ""
+    api_key_missing_reply: str = ""
+    web_search_cooldown_reply: str = ""
+    web_search_failure_instruction: str = ""
+    web_search_disabled_instruction: str = ""
+    busy_fallback_reply: str = ""
+
+    @property
+    def no_reply_fallbacks(self) -> tuple[str, str, str, str]:
+        return (
+            self.no_reply_image_fallback,
+            self.no_reply_reply_fallback,
+            self.no_reply_mention_fallback,
+            self.no_reply_default_fallback,
+        )
+
+
+NEUTRAL_REPLY_CATALOG = PersonaReplyCatalog(
+    slow_reply_placeholders=(
+        "稍等，我在处理。",
+        "正在整理，马上。",
+    ),
+    force_reply_instruction=(
+        "刚才没有回复成功。按当前上下文直接回复用户，不要再次沉默。"
+    ),
+    no_reply_image_fallback="图片收到了。你想让我看哪里？",
+    no_reply_reply_fallback="收到。请继续。",
+    no_reply_mention_fallback="在。需要我做什么？",
+    no_reply_default_fallback="收到。刚才漏回了，请继续。",
+    api_timeout_reply="请求超时了，请稍后再试。",
+    api_transport_reply="服务暂时连不上，请稍后再试。",
+    image_send_failure_reply="图片发送失败了，请稍后再试。",
+    tool_result_follow_up_instruction=(
+        "请根据工具结果直接回复用户，不要复述原始数据或调用过程。"
+    ),
+    turtle_soup_cooldown_reply=(
+        "这个群刚开过海龟汤，还剩 {remaining} 才能继续。可以先问上一题。"
+    ),
+    turtle_soup_rule_line="规则：只能问能用“是/否/无关”回答的问题，答案暂不公布。",
+    api_key_missing_reply="还没有配置 API Key，请先在 config.json 中填写 ai.api_key。",
+    web_search_cooldown_reply=(
+        "{user_title}刚刚已经使用过联网搜索，还剩 {remaining}，请稍后再试。"
+    ),
+    web_search_failure_instruction=(
+        "本轮用户明确要求联网搜索「{query}」，但本地 Google/Bing 搜索插件调用失败。"
+        "请如实说明这次联网查询失败，不要编造搜索结果、链接、日期或来源；"
+        "可以基于已有知识给出有限建议，并提醒用户稍后重试。"
+    ),
+    web_search_disabled_instruction=(
+        "本轮用户要求联网搜索，但当前配置关闭了 web_search.enabled。"
+        "请说明联网搜索暂时不可用。"
+    ),
+    busy_fallback_reply="本地服务正被游戏占用，请稍后再试。",
+)
+
+
 @dataclass(frozen=True)
 class PersonaImagegen:
     """persona 专属画图配置(自画像参考图 + 外观锁 + planner 人格简介)。"""
@@ -67,6 +138,8 @@ class Persona:
     # 主模型覆写 (主人 2026-08-02: 机机与 catty 统一使用 flash, 不再自动升 pro)。
     # None = 用 config.catty_openai_model; 仅覆盖 OpenAI-compat 主回复路径, base_url/key 不变。
     model_override: str | None = None
+    # None = 使用默认人格的模块级业务 fallback catalog，避免改变 catty 旧路径。
+    reply_catalog: PersonaReplyCatalog | None = None
 
     def segment_disabled(self, identifier: str) -> bool:
         return identifier in self.disabled_prompt_segments
@@ -75,10 +148,57 @@ class Persona:
         return feature in self.disabled_features
 
 
+@dataclass(frozen=True, slots=True)
+class PersonaReplyContext:
+    """已解析人格 + 当前事件事实，供回复 fallback 路径复用。"""
+    persona: Persona
+    is_owner: bool
+    reply_catalog: PersonaReplyCatalog
+
+    @property
+    def catalog(self) -> PersonaReplyCatalog:
+        return self.reply_catalog
+
+    @property
+    def owner_concept(self) -> bool:
+        return self.persona.owner_concept
+
+    @property
+    def owner_address_allowed(self) -> bool:
+        return self.is_owner and self.owner_concept
+
+    def feature_disabled(self, feature: str) -> bool:
+        return self.persona.feature_disabled(feature)
+
+    @property
+    def placeholder_pool(self) -> tuple[str, ...]:
+        if self.owner_address_allowed:
+            return (
+                self.reply_catalog.slow_reply_placeholders
+                + self.reply_catalog.slow_reply_owner_placeholders
+            )
+        return self.reply_catalog.slow_reply_placeholders
+
+    def render(self, template: str, /, **values: object) -> str:
+        """渲染静态目录模板；保留字段不可覆盖，缺字段按 `KeyError` 快速失败。"""
+        reserved: dict[str, object] = {
+            "char": self.persona.char_name,
+            "char_name": self.persona.char_name,
+            "owner_address": "主人" if self.owner_address_allowed else "你",
+        }
+        collisions = reserved.keys() & values.keys()
+        if collisions:
+            names = ", ".join(sorted(collisions))
+            raise ValueError(f"reserved reply template field(s): {names}")
+        fields: dict[str, object] = dict(values)
+        fields.update(reserved)
+        return template.format_map(fields)
+
+
 DEFAULT_PERSONA_NAME = "catty"
 
-from .catty import CATTY_PERSONA  # noqa: E402
-from .fadianji import FADIANJI_PERSONA  # noqa: E402
+from .catty import CATTY_PERSONA, CATTY_REPLY_CATALOG  # noqa: E402
+from .fadianji import FADIANJI_PERSONA, FADIANJI_REPLY_CATALOG  # noqa: E402
 
 PERSONAS: dict[str, Persona] = {
     CATTY_PERSONA.name: CATTY_PERSONA,
@@ -108,6 +228,28 @@ def normalize_persona_name(raw: str) -> str | None:
 def get_persona(name: str | None) -> Persona:
     """未知/空名 fallback catty — 人格解析永不抛异常。"""
     return PERSONAS.get(str(name or "").strip().lower(), CATTY_PERSONA)
+
+
+def get_reply_catalog(persona: Persona) -> PersonaReplyCatalog:
+    """返回人格目录；只有 Catty 使用 Catty fallback，其它缺省人格走中性目录。"""
+    if persona.reply_catalog is not None:
+        return persona.reply_catalog
+    if persona.name == CATTY_PERSONA.name:
+        return CATTY_REPLY_CATALOG
+    return NEUTRAL_REPLY_CATALOG
+
+
+def build_persona_reply_context(
+    persona: Persona,
+    *,
+    is_owner: bool,
+) -> PersonaReplyContext:
+    """由已解析的 Persona 和真实 owner 事实构造上下文，不接收原始别名。"""
+    return PersonaReplyContext(
+        persona=persona,
+        is_owner=bool(is_owner),
+        reply_catalog=get_reply_catalog(persona),
+    )
 
 
 def resolve_persona_name(
@@ -147,12 +289,19 @@ def resolve_persona_name(
 
 
 __all__ = [
+    "CATTY_REPLY_CATALOG",
     "DEFAULT_PERSONA_NAME",
+    "FADIANJI_REPLY_CATALOG",
+    "NEUTRAL_REPLY_CATALOG",
     "PERSONAS",
     "PERSONA_ALIASES",
     "Persona",
     "PersonaImagegen",
+    "PersonaReplyCatalog",
+    "PersonaReplyContext",
+    "build_persona_reply_context",
     "get_persona",
+    "get_reply_catalog",
     "normalize_persona_name",
     "resolve_persona_name",
 ]

@@ -120,7 +120,13 @@ def end_stream(stream_id: str, final_usage: dict[str, Any] | None = None) -> Non
     })
 
 
-def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> None:
+def push_cache_stats(
+    scope: str,
+    usage: dict[str, Any],
+    *,
+    model: str = "",
+    diagnostics: Any = None,
+) -> None:
     """把 cache 命中率 + context window 占用推到 dashboard.
 
     优先识别 DeepSeek 风格 (prompt_cache_hit_tokens / prompt_cache_miss_tokens),
@@ -212,6 +218,7 @@ def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> N
         "total_context": total_context,
         "billed_input_equiv": billed_input_equiv,
         "saved_pct": saved_pct,
+        "diagnostics": diagnostics,
         "ts": time.time(),
     })
 

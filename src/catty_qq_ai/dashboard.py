@@ -145,6 +145,9 @@ function renderContextLive() {
   const billed = s.billed_input_equiv || 0;
   const savedPct = s.saved_pct || 0;
   const hitClass = s.hit < 0.3 ? 'hit-bad' : s.hit < 0.6 ? 'hit-mid' : 'hit-good';
+  const diagnostics = s.diagnostics || {};
+  const anchor = diagnostics.anchor || (diagnostics.anchor_before !== undefined ? `${diagnostics.anchor_before}>${diagnostics.anchor_after}` : '-');
+  const diagnosticLine = (diagnostics.cohort || diagnostics.wire_tool_hash || diagnostics.prefix_sys_hash) ? `<div style="margin-top:6px;font-size:11px;color:#666;"><b>诊断</b>: cohort ${String(diagnostics.cohort || '-').slice(0, 12)} · anchor ${anchor} · prefix ${String(diagnostics.prefix_sys_hash || '-').slice(0, 8)}/${String(diagnostics.prefix_first_hash || '-').slice(0, 8)} · tool ${String(diagnostics.wire_tool_hash || '-').slice(0, 8)}</div>` : '';
   const fmt = n => (n >= 1000 ? (n/1000).toFixed(1)+'K' : n.toString());
   document.getElementById('ctx-live').innerHTML = `
     <div style="font:13px ui-monospace,monospace;">
@@ -174,6 +177,7 @@ function renderContextLive() {
         <b>Cache 命中率</b>: <span class="${hitClass}">${(s.hit*100).toFixed(1)}%</span>
         ${s.hit < 0.5 ? ' ⚠️ 命中率低 — 可能是首次 chat 或 cache 过期' : ''}
       </div>
+      ${diagnosticLine}
     </div>
   `;
 }
@@ -297,6 +301,7 @@ function connectSSE() {
         total_context: payload.total_context || 0,
         billed_input_equiv: payload.billed_input_equiv || 0,
         saved_pct: payload.saved_pct || 0,
+        diagnostics: payload.diagnostics || null,
       });
       renderContextLive();
       renderScopes();

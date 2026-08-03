@@ -10,9 +10,9 @@
 - 持久化到 memory_dir/story_arcs.json,重启不丢
 
 触发来源(都通过 add_arc 写入):
-1. AI 自己 toolcall: catty_story_arc_set/clear(下一轮加 tool 时实现)
+1. AI 自己 toolcall: catty_story_arc_set/clear
 2. 自动触发器: 用户首次提某关键词(『今晚约不约』『生病了』『考试结束』等)→ 笨猫自动开一个 arc
-3. 主人指令(下一轮): /story start 主人 还在工作 笨猫等了一小时
+3. 预留主人指令: /story start 主人 还在工作 笨猫等了一小时
 
 注入到 prompt:
 - build_story_arc_prompt(scope) 返回当前 active arc 的简短描述给 LLM:

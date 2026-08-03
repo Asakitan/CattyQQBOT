@@ -12,7 +12,7 @@
   - 但其实还该调 catty_game_recall 拿专属事实库
   - AI 不一定察觉 → 漏读
 
-加 cascade map 后, recall 出 result 时, 系统主动提示『下一轮可以调 catty_game_recall(scope='strinova')』,
+加 cascade map 后, recall 出 result 时, 系统主动提示『下一轮可以调 catty_game_recall(game='strinova')』,
 AI 容易接住.
 
 实现:
@@ -25,12 +25,14 @@ pure function — 不读 store, 不发起新 tool call (建议交给 AI 决定).
 """
 from __future__ import annotations
 
+from collections.abc import Collection
+import json
 from typing import Any
 
 
 # CascadeRule 形态:
 # {
-#   "on_result_contains": str | list[str],  # result JSON 含某 key 或子串才触发
+#   "on_result_contains": str | list[str],  # 成功 result 的顶层/浅层 key 或值命中才触发
 #   "suggest": str,  # 推荐 target tool 名
 #   "hint": str,  # 给 AI 的具体提示 (中文, 含调用建议)
 # }
@@ -88,8 +90,8 @@ _CASCADE_RULES: dict[str, list[dict[str, Any]]] = {
     # catty_game_recall 拿到事实后, 如果用户问『最近版本』, 提示可以调 web_search 拿最新
     "catty_game_recall": [
         {
-            "on_result_contains": ["facts", "entries"],
-            "suggest": "",  # 不强制下一步
+            "on_result_contains": ["facts", "entries", "matches", "long_term_summary"],
+            "suggest": "catty_web_search",
             "hint": (
                 "[cascade hint] catty_game_recall 拿到了事实库. 如果用户问的是『最新版本/今天的活动』"
                 "等时效性内容, 事实库可能过时, 下一轮可以调 catty_web_search(query='游戏名 最新版本') 补充."
@@ -100,7 +102,7 @@ _CASCADE_RULES: dict[str, list[dict[str, Any]]] = {
     # catty_now 拿到时间, 如果接近特定节日/时段, 提示
     "catty_now": [
         {
-            "on_result_contains": "festival",
+            "on_result_contains": ["festival", "festivals_today", "next_festival"],
             "suggest": "",
             "hint": (
                 "[cascade hint] catty_now 显示当前接近一个节日. 回复时可以自然带节日氛围, "
@@ -123,25 +125,57 @@ _CASCADE_RULES: dict[str, list[dict[str, Any]]] = {
 }
 
 
-def _check_match(payload: Any, needle: str) -> bool:
-    """递归在 payload 里找 needle (key 或子串)."""
+_MAX_STRUCTURED_MATCH_DEPTH = 2
+
+
+def _has_meaningful_value(value: Any) -> bool:
+    if isinstance(value, str):
+        return bool(value.strip())
+    return bool(value)
+
+
+def _check_match(payload: Any, needle: str, *, _depth: int = 0) -> bool:
+    """只在成功的结构化结果中检查顶层及有限深度的 key / value。"""
     if not needle:
         return False
+    if _depth == 0:
+        if isinstance(payload, str):
+            try:
+                payload = json.loads(payload)
+            except json.JSONDecodeError:
+                return False
+        if not isinstance(payload, dict):
+            return False
+        if (
+            payload.get("error")
+            or payload.get("ok") is False
+            or payload.get("success") is False
+        ):
+            return False
+
     if isinstance(payload, dict):
-        # 先看 key, 再看 value
-        for k, v in payload.items():
-            if isinstance(k, str) and needle in k:
+        for key, value in payload.items():
+            if isinstance(key, str) and key == needle and _has_meaningful_value(value):
                 return True
-            if _check_match(v, needle):
+            if isinstance(value, str) and needle in value:
+                return True
+            if (
+                _depth < _MAX_STRUCTURED_MATCH_DEPTH
+                and isinstance(value, (dict, list))
+                and _check_match(value, needle, _depth=_depth + 1)
+            ):
                 return True
         return False
     if isinstance(payload, list):
         for item in payload:
-            if _check_match(item, needle):
+            if isinstance(item, str) and needle in item:
                 return True
-        return False
-    if isinstance(payload, str):
-        return needle in payload
+            if (
+                _depth < _MAX_STRUCTURED_MATCH_DEPTH
+                and isinstance(item, (dict, list))
+                and _check_match(item, needle, _depth=_depth + 1)
+            ):
+                return True
     return False
 
 
@@ -150,6 +184,7 @@ def check_cascade(
     tool_result: Any,
     *,
     max_hints: int = 2,
+    allowed_tools: Collection[str] | None = None,
 ) -> list[str]:
     """看 tool 结果, 返回 cascade hints (≤max_hints 条).
 
@@ -159,11 +194,16 @@ def check_cascade(
 
     返回 list[hint_str], 空 list 时不注入.
     """
+    if max_hints <= 0:
+        return []
     rules = _CASCADE_RULES.get(tool_name)
     if not rules:
         return []
     out: list[str] = []
     for rule in rules:
+        suggested_tool = str(rule.get("suggest") or "").strip()
+        if suggested_tool and allowed_tools is not None and suggested_tool not in allowed_tools:
+            continue
         triggers = rule.get("on_result_contains")
         if isinstance(triggers, str):
             triggers = [triggers]
@@ -183,7 +223,11 @@ def check_cascade(
     return out
 
 
-def build_post_tool_hint(executed_tool_results: list[tuple[str, Any]]) -> str:
+def build_post_tool_hint(
+    executed_tool_results: list[tuple[str, Any]],
+    *,
+    allowed_tools: Collection[str] | None = None,
+) -> str:
     """给 chat_completion_with_tools 用: 把多个 tool 的 cascade hints 合成 1 个 system msg.
 
     executed_tool_results: list of (tool_name, parsed_result_dict)
@@ -191,7 +235,7 @@ def build_post_tool_hint(executed_tool_results: list[tuple[str, Any]]) -> str:
     """
     all_hints: list[str] = []
     for name, result in executed_tool_results:
-        hints = check_cascade(name, result)
+        hints = check_cascade(name, result, allowed_tools=allowed_tools)
         all_hints.extend(hints)
     if not all_hints:
         return ""

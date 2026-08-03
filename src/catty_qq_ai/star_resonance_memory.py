@@ -121,7 +121,7 @@ def build_star_resonance_dynamic_context(memory_store: object | None = None) -> 
         dynamic = ""
     if not dynamic:
         return ""
-    return "猫猫长期积累的星痕共鸣事实记忆(高优先级,版本/职业/活动):\n" + dynamic
+    return "星痕共鸣共享事实记忆(高优先级,版本/职业/活动):\n" + dynamic
 
 
 def build_star_resonance_context(

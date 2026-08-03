@@ -38,6 +38,47 @@ _RECALL_MIN_SIMILARITY = 0.3  # 余弦相似度低于此值不召回 (噪音过�
 # evict 时间: collection 超 1h 未访问 → 主动 release
 _MAX_ACTIVE_COLLECTIONS = 100
 _COLLECTION_STALE_SECONDS = 3600.0
+_DEFAULT_PERSONA = "catty"
+_SHARED_RAG_ROLES = frozenset({
+    "user",
+    "memory_summary",
+    "member_profile",
+    "user_profile",
+})
+_PERSONA_SPECIFIC_RAG_ROLES = frozenset({"assistant", "lore_entry"})
+
+
+def _normalise_persona(persona: str | None) -> str:
+    value = str(persona or _DEFAULT_PERSONA).strip().lower()
+    return value or _DEFAULT_PERSONA
+
+
+def _metadata_visible_to_persona(metadata: dict[str, Any], persona: str | None) -> bool:
+    """共享事实对全部人格可见；人格回复/lore 只对所属人格可见。"""
+    role = str(metadata.get("role") or "").strip()
+    if role in _SHARED_RAG_ROLES:
+        return True
+    if role in _PERSONA_SPECIFIC_RAG_ROLES:
+        # 旧 assistant/lore 没有 persona metadata，按 Catty legacy 处理。
+        return _normalise_persona(metadata.get("persona")) == _normalise_persona(persona)
+    return False
+
+
+def _persona_query_where(persona: str) -> dict[str, Any] | None:
+    """非 Catty 先在 Chroma 侧排除旧 Catty assistant/lore，客户端仍二次过滤。"""
+    if persona == _DEFAULT_PERSONA:
+        return None
+    return {
+        "$or": [
+            {"role": {"$in": sorted(_SHARED_RAG_ROLES)}},
+            {
+                "$and": [
+                    {"role": {"$in": sorted(_PERSONA_SPECIFIC_RAG_ROLES)}},
+                    {"persona": {"$eq": persona}},
+                ]
+            },
+        ]
+    }
 
 
 def _sanitize_collection_name(scope: str) -> str:
@@ -292,6 +333,7 @@ class CattyRAGStore:
         role: str = "user",
         user_id: str = "",
         ts: float | None = None,
+        persona: str | None = None,
     ) -> None:
         """添加一条消息到 RAG。重复 doc_id 用 upsert 不会重复存。失败静默。"""
         if not self._enabled or not scope or not text or not text.strip():
@@ -300,16 +342,21 @@ class CattyRAGStore:
         if col is None:
             return
         ts = ts if ts is not None else time.time()
-        doc_id = f"{int(ts * 1000)}:{role}:{user_id or 'na'}"
+        role_name = str(role or "user").strip() or "user"
+        persona_name = _normalise_persona(persona)
+        doc_id = f"{int(ts * 1000)}:{role_name}:{user_id or 'na'}"
+        if role_name in _PERSONA_SPECIFIC_RAG_ROLES and persona_name != _DEFAULT_PERSONA:
+            doc_id = f"{doc_id}:{persona_name}"
         try:
             col.upsert(
                 ids=[doc_id],
                 documents=[text.strip()[:1500]],  # 单文档 max 1500 字
                 metadatas=[{
-                    "role": role,
+                    "role": role_name,
                     "user_id": str(user_id) if user_id else "",
                     "ts": ts,
                     "scope": scope,
+                    "persona": persona_name,
                 }],
             )
         except Exception as exc:  # noqa: BLE001
@@ -323,30 +370,32 @@ class CattyRAGStore:
         top_k: int = 3,
         min_similarity: float = _RECALL_MIN_SIMILARITY,
         boost_recency: bool = True,
+        persona: str | None = None,
     ) -> list[tuple[float, str, dict[str, Any]]]:
-        """语义召回 top-K (score, text, metadata)。score 是余弦相似度 [0,1]。
-
-        score < min_similarity 的过滤掉。无结果返回 []。
-
-        boost_recency (default True):
-        - 内部 fetch top_k*3 候选, 按 ts 给 score 加权重排序后切 top_k
-        - 加权: <24h *1.30 / <7d *1.15 / <30d *1.05 / 更老 *1.00
-        - 返回的 score 仍是 raw similarity (下游显示 + age 自然交代时效), boosted 只用于排序
-        - 目的: 最近发生的事更容易被召回, 几周前的旧记忆次要
-        """
+        """语义召回当前人格可见的 top-K 历史。省略 persona 时保持 Catty legacy 行为。"""
         if not self._enabled or not scope or not query_text or not query_text.strip():
             return []
         col = self._get_collection(scope)
         if col is None:
             return []
-        # boost 模式下拿 top_k*3 候选给重排序留余量, 否则照原样
+        persona_name = _normalise_persona(persona)
         fetch_n = top_k * 3 if boost_recency else top_k
         fetch_n = max(1, min(fetch_n, _MAX_RECALL_TOP_K))
+        query_kwargs = {
+            "query_texts": [query_text.strip()[:1000]],
+            "n_results": fetch_n,
+        }
         try:
-            res = col.query(
-                query_texts=[query_text.strip()[:1000]],
-                n_results=fetch_n,
-            )
+            where = _persona_query_where(persona_name)
+            if where is None:
+                res = col.query(**query_kwargs)
+            else:
+                try:
+                    res = col.query(**query_kwargs, where=where)
+                except Exception as exc:  # noqa: BLE001
+                    # 老 Chroma 或 metadata filter 不兼容时退回客户端过滤，仍不泄漏。
+                    logger.debug(f"catty_rag.query persona where fallback: {exc}")
+                    res = col.query(**query_kwargs)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_rag.query failed: {exc}")
             return []
@@ -354,13 +403,14 @@ class CattyRAGStore:
         metas = (res.get("metadatas") or [[]])[0] or []
         dists = (res.get("distances") or [[]])[0] or []
         now = time.time()
-        candidates: list[tuple[float, float, str, dict[str, Any]]] = []  # (raw, boosted, text, meta)
+        candidates: list[tuple[float, float, str, dict[str, Any]]] = []
         for doc, meta, dist in zip(docs, metas, dists):
-            # chromadb cosine distance 是 1-similarity, score = 1 - distance
             score = 1.0 - float(dist)
             if score < min_similarity:
                 continue
             meta_d = dict(meta or {})
+            if not _metadata_visible_to_persona(meta_d, persona_name):
+                continue
             if boost_recency:
                 ts = float(meta_d.get("ts") or 0.0)
                 if ts > 0:
@@ -379,8 +429,7 @@ class CattyRAGStore:
             else:
                 boosted = score
             candidates.append((score, boosted, str(doc), meta_d))
-        # 按 boosted score 倒序排序, 切 top_k. 不 boost 时 boosted==score 行为不变。
-        candidates.sort(key=lambda c: -c[1])
+        candidates.sort(key=lambda candidate: -candidate[1])
         return [(raw, doc, meta) for raw, _boosted, doc, meta in candidates[:top_k]]
 
     def total_docs(self, scope: str) -> int:
@@ -539,6 +588,7 @@ class CattyRAGStore:
                         role="lore_entry",
                         user_id="",
                         ts=float(getattr(entry, "created_at", 0.0) or 0.0) or time.time(),
+                        persona=getattr(entry, "persona", None),
                     )
                     count += 1
                 except Exception:  # noqa: BLE001
@@ -587,11 +637,12 @@ def build_rag_recall_prompt(
     user_text: str,
     *,
     top_k: int = 3,
+    persona: str | None = None,
 ) -> str:
-    """根据当前 user_text 召回 top-K 历史, 拼成 prompt 段。无召回返回 ''。"""
+    """根据当前 user_text 召回当前人格可见的 top-K 历史，拼成 prompt 段。"""
     if not store.enabled or not scope or not user_text:
         return ""
-    hits = store.query(scope, user_text, top_k=top_k)
+    hits = store.query(scope, user_text, top_k=top_k, persona=persona)
     if not hits:
         return ""
     lines = ["【RAG 向量召回 (语义近的旧对话片段)】"]
@@ -611,7 +662,6 @@ def build_rag_recall_prompt(
         lines.append(f"- [{role}/{age}, 相似度 {score:.2f}] {text[:200]}")
     lines.append("(这些是语义近的旧片段, 仅供回忆参考, 不要复述给用户, 不要假装『刚才说过』除非真的相关)")
     return "\n".join(lines)
-
 
 __all__ = [
     "CattyRAGStore",

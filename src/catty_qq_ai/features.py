@@ -115,12 +115,13 @@ def turtle_soup_remaining(
     return max(last + max(cooldown_seconds, 0.0) - now, 0.0)
 
 
-def choose_turtle_soup(key: str) -> str:
+def choose_turtle_soup(key: str, persona_rule_line: str | None = None) -> str:
     soup = random.Random(f"{key}:{int(time.time()) // 300}").choice(TURTLE_SOUPS)
+    rule_line = persona_rule_line or "规则：只能问能用“是/否/无关”回答的问题，答案人家先藏起来喵。"
     return (
         f"海龟汤《{soup['title']}》\n"
         f"题面：{soup['question']}\n"
-        "规则：只能问能用“是/否/无关”回答的问题，答案人家先藏起来喵。"
+        f"{rule_line}"
     )
 
 

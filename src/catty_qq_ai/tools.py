@@ -16,7 +16,7 @@ import logging
 import re
 import time
 from dataclasses import dataclass, field
-from typing import Any, Awaitable, Callable
+from typing import Any, Awaitable, Callable, Collection, Literal
 
 import httpx
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
@@ -342,11 +342,10 @@ _MEME_QUERY_SCHEMA: dict[str, Any] = {
             "群友点名想看某个梗/角色/场景的图(『双人马桶』『帝皇黄金马桶』『某个老婆』之类)就放心调。"
             "**和本地表情库(EMOJI_QUERY)分工**:撒娇/玩梗/情绪反应走 EMOJI_QUERY 自动配;"
             "群友点名要一张'有具体主题的网图'(角色/作品/梗/物体)时调本 tool。"
-            "返回 image_uri 是 base64:// URI;你拿到后**必须在最终回复中**用 "
-            "`<<<CATTY_INLINE_IMAGE:URI>>>` 标记把它嵌入想要展示图片的位置,"
-            "发送链路会自动转成 QQ 图片消息。"
+            "成功后插件会把下载好的图片加入待发送队列,最终回复只补一句短评,"
+            "不要输出图片 URI/链接/INLINE_IMAGE 标记。"
             "整个 tool 内部限 25s,失败/超时会返回 error;这时用文字回复即可,"
-            "可以给 1-2 个备用关键词让群友自己搜,不要拼任何 INLINE_IMAGE 标记。"
+            "可以给 1-2 个备用关键词让群友自己搜。"
         ),
         "parameters": {
             "type": "object",
@@ -971,7 +970,6 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
         "catty_web_search", "联网搜索 (新闻/查询)",
         {
             "query": {"type": "string", "description": "查询词"},
-            "num_results": {"type": "integer", "description": "条数"},
         },
         ["query"],
     ),
@@ -1074,22 +1072,25 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_nai_director": _make_lazy_schema(
         "catty_nai_director", "NAI 改图 (抠图/线稿/上色等)",
         {
-            "action": {"type": "string", "description": "动作"},
-            "image_url": {"type": "string", "description": "图 URL"},
-            "prompt": {"type": "string", "description": "prompt"},
+            "req_type": {"type": "string", "enum": list(_NAI_DIRECTOR_REQ_TYPES), "description": "类型"},
+            "prompt": {"type": "string", "description": "提示词"},
+            "defry": {"type": "integer", "description": "强度"},
         },
-        ["action"],
+        ["req_type"],
     ),
     "catty_story_arc_set": _make_lazy_schema(
         "catty_story_arc_set", "开 story arc (跨多轮故事线)",
         {
             "title": {"type": "string", "description": "标题"},
-            "summary": {"type": "string", "description": "概要"},
+            "context": {"type": "string", "description": "上下文"},
+            "ttl_hours": {"type": "number", "description": "TTL 小时"},
         },
-        ["title"],
+        ["title", "context"],
     ),
     "catty_story_arc_clear": _make_lazy_schema(
-        "catty_story_arc_clear", "结束 story arc", {}, [],
+        "catty_story_arc_clear", "结束 story arc",
+        {"title": {"type": "string", "description": "标题"}},
+        ["title"],
     ),
     "catty_recall_user_messages": _make_lazy_schema(
         "catty_recall_user_messages", "拉某群友最近 N 条消息 (群聊接梗用)",
@@ -1100,6 +1101,174 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
         ["user_id"],
     ),
 }
+
+
+# ── Tool capability metadata ──────────────────────────────────────────
+
+ToolScope = Literal["private", "group", "both"]
+ToolExecutionMode = Literal["read", "write", "external"]
+
+
+@dataclass(frozen=True, slots=True)
+class ToolCapability:
+    """Tool 的轻量可用性与调度元数据；不改动 OpenAI schema 本体。"""
+
+    scope: ToolScope = "both"
+    requires_image: bool = False
+    accepts_explicit_image_url: bool = False
+    requires_direct_request: bool = False
+    persona_feature: str | None = None
+    execution_mode: ToolExecutionMode = "read"
+
+
+_TOOL_CAPABILITIES: dict[str, ToolCapability] = {
+    "catty_recall": ToolCapability(),
+    "catty_user_profile": ToolCapability(),
+    "catty_mc_status": ToolCapability(execution_mode="external"),
+    "catty_emoji": ToolCapability(execution_mode="write"),
+    "catty_web_search": ToolCapability(execution_mode="external"),
+    "catty_nsfw_search": ToolCapability(
+        scope="private",
+        persona_feature="nsfw_spark",
+        execution_mode="external",
+    ),
+    "catty_image_search": ToolCapability(
+        requires_image=True,
+        accepts_explicit_image_url=True,
+        execution_mode="external",
+    ),
+    "catty_meme_query": ToolCapability(execution_mode="external"),
+    "catty_game_recall": ToolCapability(),
+    "catty_game_remember": ToolCapability(execution_mode="write"),
+    "catty_social_account": ToolCapability(),
+    "catty_group_game_tag": ToolCapability(scope="group", execution_mode="write"),
+    "catty_hot_trends": ToolCapability(execution_mode="external"),
+    "catty_now": ToolCapability(),
+    "catty_meme_explain": ToolCapability(execution_mode="external"),
+    "catty_remember": ToolCapability(execution_mode="write"),
+    "catty_recall_notes": ToolCapability(),
+    "catty_imagegen": ToolCapability(
+        requires_direct_request=True,
+        execution_mode="external",
+    ),
+    "catty_nai_director": ToolCapability(
+        requires_image=True,
+        requires_direct_request=True,
+        execution_mode="external",
+    ),
+    "catty_story_arc_set": ToolCapability(
+        persona_feature="story_arc",
+        execution_mode="write",
+    ),
+    "catty_story_arc_clear": ToolCapability(
+        persona_feature="story_arc",
+        execution_mode="write",
+    ),
+    "catty_recall_user_messages": ToolCapability(scope="group"),
+}
+
+
+def tool_capability(name: str) -> ToolCapability | None:
+    """返回 tool 的稳定 capability 元数据；未知名称返回 None。"""
+    return _TOOL_CAPABILITIES.get(name)
+
+
+def tool_execution_mode(name: str) -> ToolExecutionMode | None:
+    """返回 tool 的 read/write/external 调度类别；未知名称返回 None。"""
+    capability = tool_capability(name)
+    return capability.execution_mode if capability is not None else None
+
+
+def _is_catty_persona(persona: Any) -> bool:
+    return persona is None or getattr(persona, "name", None) == "catty"
+
+
+def _persona_text(persona: Any, catty_text: str, non_catty_text: str) -> str:
+    return catty_text if _is_catty_persona(persona) else non_catty_text
+
+
+def _private_disabled_tool_names(config: Config) -> set[str]:
+    return {
+        str(name).strip()
+        for name in (getattr(config, "catty_tools_disabled_in_private", []) or [])
+        if str(name).strip()
+    }
+
+
+def _persona_feature_disabled(persona: Any, feature: str | None) -> bool:
+    if persona is None or not feature:
+        return False
+    checker = getattr(persona, "feature_disabled", None)
+    if not callable(checker):
+        return False
+    try:
+        return bool(checker(feature))
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def _tool_capability_denial_reason(
+    name: str,
+    *,
+    is_private: bool,
+    is_group: bool,
+    has_image: bool,
+    is_directly_requested: bool,
+    has_explicit_image_url: bool = False,
+    persona: Any = None,
+    disabled_in_private: Collection[str] = (),
+) -> str | None:
+    capability = tool_capability(name)
+    if capability is None:
+        return None
+    if capability.scope == "private" and not is_private:
+        return "private_only"
+    if capability.scope == "group" and not is_group:
+        return "group_only"
+    if is_private and name in disabled_in_private:
+        return "disabled_in_private"
+    if capability.requires_image and not has_image:
+        if not (
+            capability.accepts_explicit_image_url and has_explicit_image_url
+        ):
+            return "requires_image"
+    if capability.requires_direct_request and not is_directly_requested:
+        return "requires_direct_request"
+    if _persona_feature_disabled(persona, capability.persona_feature):
+        return "persona_feature_disabled"
+    return None
+
+
+_TOOL_CAPABILITY_DENIAL_MESSAGES: dict[str, str] = {
+    "not_in_allowlist": "本轮未获准使用该工具。",
+    "private_only": "该工具仅限私聊使用。",
+    "group_only": "该工具仅限群聊使用。",
+    "disabled_in_private": "该工具已被私聊配置禁用。",
+    "requires_image": "该工具需要当前或最近上下文中的图片。",
+    "requires_direct_request": "该工具只在用户直接请求猫猫时可用。",
+    "persona_feature_disabled": "当前人格已关闭该工具对应功能。",
+}
+
+
+def _tool_capability_error(
+    name: str,
+    reason: str,
+    *,
+    persona: Any = None,
+) -> dict[str, str]:
+    message = _TOOL_CAPABILITY_DENIAL_MESSAGES.get(reason, "该工具当前不可用。")
+    if reason == "requires_direct_request":
+        message = _persona_text(
+            persona,
+            message,
+            "该工具仅在用户明确向当前机器人提出请求时可用。",
+        )
+    return {
+        "error": "tool_not_allowed",
+        "tool": name,
+        "reason": reason,
+        "message": message,
+    }
 
 
 # ── Tool 上下文 / 注入 ─────────────────────────────────────────────────
@@ -1341,9 +1510,12 @@ async def _exec_mc_status(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
         "online_players": int(players),
         "host": host,
         "port": port,
-        "note": (
+        "note": _persona_text(
+            ctx.persona,
             "结果有 30s 本地缓存。reachable=False 通常表示服务器没开或不在白名单网段;"
-            "不是猫猫的锅,你可以直接告诉用户'服务器目前掉了/猫猫连不上'。"
+            "不是猫猫的锅,你可以直接告诉用户'服务器目前掉了/猫猫连不上'。",
+            "结果有 30s 本地缓存。reachable=False 通常表示服务器没开或不在白名单网段;"
+            "可直接告知用户服务器当前不可达。",
         ),
     }
 
@@ -1491,7 +1663,11 @@ async def _exec_nsfw_search(args: dict[str, Any], ctx: ToolContext) -> dict[str,
     if not ctx.is_private:
         # 群里直接挡掉,让 AI 用人格自然引导用户去私聊
         return {
-            "error": "群里禁止 NSFW 搜索;请用猫娘人格让用户加好友私聊再来。",
+            "error": _persona_text(
+                ctx.persona,
+                "群里禁止 NSFW 搜索;请用猫娘人格让用户加好友私聊再来。",
+                "群里禁止 NSFW 搜索;请引导用户在私聊中继续。",
+            ),
             "suggest_private_chat": True,
         }
 
@@ -1546,10 +1722,14 @@ async def _exec_nsfw_search(args: dict[str, Any], ctx: ToolContext) -> dict[str,
             }
             for r in context_results[: max(image_send_count * 2, 6)]
         ],
-        "guidance": (
+        "guidance": _persona_text(
+            ctx.persona,
             "image 命中且 images_already_sent>0:程序已经把图发了,你只补 1-2 句猫娘短评,不要贴链接;"
             "image 但 images_already_sent=0:下载全失败,挑 1-2 个 results URL 给主人,简短;"
-            "video:挑 1-3 个 iwara 链接抛出去配短评。禁止编造 URL、禁止安全免责模板。"
+            "video:挑 1-3 个 iwara 链接抛出去配短评。禁止编造 URL、禁止安全免责模板。",
+            "image 命中且 images_already_sent>0:程序已经把图发了，只补 1-2 句符合当前人格的短评，不要贴链接;"
+            "image 但 images_already_sent=0:下载全失败，挑 1-2 个 results URL 给用户，简短;"
+            "video:挑 1-3 个 iwara 链接配短评。禁止编造 URL。",
         ),
     }
 
@@ -1588,7 +1768,11 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
                 "没找到可搜的图片:image_url 没传,当前消息没附图,最近群里也没图(5 分钟内/最多 6 张)。"
                 "请用户重新发图或贴图片 URL。"
             ),
-            "guidance": "用猫娘人格让用户重新发一张图或贴图片直链。",
+            "guidance": _persona_text(
+                ctx.persona,
+                "用猫娘人格让用户重新发一张图或贴图片直链。",
+                "让用户重新发送一张图片或提供图片直链。",
+            ),
         }
     if image_index >= len(ordered):
         image_index = 0
@@ -1607,8 +1791,16 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         remaining = max(last + cd_seconds - now, 0.0)
         if remaining > 0:
             return {
-                "error": f"搜图冷却剩 {int(remaining)}s,稍后再戳人家喵",
-                "guidance": "用猫娘人格说稍等几秒再搜,不要重复调本 tool。",
+                "error": _persona_text(
+                    ctx.persona,
+                    f"搜图冷却剩 {int(remaining)}s,稍后再戳人家喵",
+                    f"搜图冷却剩 {int(remaining)}s，请稍后再试。",
+                ),
+                "guidance": _persona_text(
+                    ctx.persona,
+                    "用猫娘人格说稍等几秒再搜,不要重复调本 tool。",
+                    "请告知用户稍等几秒再搜索，不要重复调用本 tool。",
+                ),
             }
         _image_search_cooldowns[cd_key] = now
 
@@ -1661,11 +1853,15 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         payload["engine_errors"] = errors
     if yandex_blocked:
         payload["yandex_blocked"] = True
-        payload["yandex_blocked_hint"] = (
+        payload["yandex_blocked_hint"] = _persona_text(
+            ctx.persona,
             "Yandex(ya.ru 备用域名也)拿到 stub 页,这是真人/X 搜图主力引擎不可用。"
             "用猫娘人格告诉主人:Yandex 这次没回数据,真人/X 来源搜不到;"
             "可以让主人去 config.json 的 ai.http_proxy 配个代理重试,或换张更清晰的图。"
-            "**不要装作搜全了**,SauceNAO/ascii2d 的结果只覆盖二次元。"
+            "**不要装作搜全了**,SauceNAO/ascii2d 的结果只覆盖二次元。",
+            "Yandex（含 ya.ru 备用域名）拿到 stub 页，真人/X 搜图的主力引擎当前不可用。"
+            "请如实说明本次没有拿到真人/X 来源；可建议用户在 config.json 的 ai.http_proxy 配置代理后重试，"
+            "或换一张更清晰的图片。**不要装作已经搜全**，SauceNAO/ascii2d 的结果主要覆盖二次元。",
         )
     # 标出 X/Twitter 命中(extra.is_x_twitter=True 或 URL 含 twitter/x.com)
     # — AI 必须复述 X 链接,即使 similarity 低,主人最关心 X 真人来源
@@ -1710,6 +1906,40 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
                "提醒主人配代理(yandex_blocked=True 时)。"
                if yandex_blocked else "")
         )
+    if not _is_catty_persona(ctx.persona):
+        if not results:
+            payload["guidance"] = (
+                "搜不到结果时如实告知用户，可以让对方换一张更清晰的图片或提供原图链接，"
+                "**禁止编造作者、番名或链接**。"
+                + (
+                    " 本次 Yandex 被阻断；如果是真人图片，请按 yandex_blocked_hint 提示用户配置代理。"
+                    if yandex_blocked else ""
+                )
+            )
+        else:
+            x_twitter_note = (
+                f" 本轮命中 {len(x_twitter_hits)} 条 X(Twitter) 链接（见 x_twitter_urls），"
+                "无论 similarity 多少，都必须优先复述这些 X 链接给用户；"
+                "不要因为相似度低跳过 X 链接，只贴二次元 booru。"
+                "**禁止**只贴 Konachan/Pixiv 而把 Twitter 链接埋掉。"
+                if x_twitter_hits else ""
+            )
+            payload["guidance"] = (
+                "用当前人格复述 1-3 条最关键的结果。**高优先级规则（覆盖相似度判断）**："
+                "**source=saucenao 或 source=yandex 的结果必须优先复述**（这两个是主力引擎，"
+                "results 数组已经按此规则排序；先看 top N 中 saucenao/yandex 命中，"
+                "其它引擎 ascii2d/iqdb/trace.moe 只在 saucenao+yandex 都没有信号时再补）。"
+                "在 saucenao+yandex 内部，挑选顺序为："
+                "(1) X/Twitter URL（含 is_x_twitter 标记）>(2) similarity > 60>(3) 其它优选结果。"
+                "**不要照搬 JSON、复读相似度小数或编造 results 以外的信息**。"
+                "**绝对禁止**跳过 saucenao/yandex 结果，只贴 ascii2d/iqdb 链接；后者只是 fallback。"
+                + x_twitter_note
+                + (
+                    " 如果结果全是 booru/Pixiv 二次元站而图片本身是真人或自拍，**必须**按 yandex_blocked_hint "
+                    "提示用户配置代理（yandex_blocked=True 时）。"
+                    if yandex_blocked else ""
+                )
+            )
     return payload
 
 
@@ -1786,16 +2016,19 @@ async def _meme_query_impl(keywords: str, ctx: ToolContext) -> dict[str, Any]:
 
     if winner is None:
         return {"error": "拿到候选 URL 但全部下载失败,用文字回复即可"}
-    image_data, _content_type, source_url = winner
+    image_data, _content_type, _source_url = winner
     uri = "base64://" + base64.b64encode(image_data).decode("ascii")
+    try:
+        from nonebot.adapters.onebot.v11 import MessageSegment
+    except ImportError:
+        return {"error": "MessageSegment 不可用,运行环境异常"}
+    ctx.pending_image_segments.append(MessageSegment.image(uri))
     return {
-        "image_uri": uri,
-        "source_url": source_url,
+        "ok": True,
         "keywords": keywords,
-        "note": (
-            "把这个 image_uri **完整原样**用 <<<CATTY_INLINE_IMAGE:URI>>> 标记嵌进最终回复想展示图的位置。"
-            "切勿把 URI 截断、切勿单独输出 URI,也不要把 source_url 贴出来当链接。"
-        ),
+        "image_queued": True,
+        "image_bytes": len(image_data),
+        "guidance": "梗图已加入待发送队列,最终回复只补一句短评;不要贴图片 URI、链接或 INLINE_IMAGE 标记。",
     }
 
 
@@ -2012,12 +2245,17 @@ async def _exec_imagegen_nai(
                 "shortfall": cost - balance,
                 "user_level": level,
                 "today_checkin_estimate": f"{lo}-{hi}",
-                "user_facing_hint": (
+                "user_facing_hint": _persona_text(
+                    ctx.persona,
                     f"用猫娘口吻提醒用户:他当前只有 {balance} 积分,这张图(NAI/{aspect_key})要 {cost} 分,"
                     f"还差 {cost - balance} 分。让他发『签到』来领今天的积分,"
                     f"他现在好感等级 Lv{level},今天签到大概能拿 {lo}-{hi} 分。"
                     "傲娇但要把要点说全:差多少、要 Lv 几、发『签到』两个字就能领。"
-                    "**禁止**自己再调一次 catty_imagegen 重复发。"
+                    "**禁止**自己再调一次 catty_imagegen 重复发。",
+                    f"提醒用户：当前只有 {balance} 积分，这张图（NAI/{aspect_key}）需要 {cost} 分，"
+                    f"还差 {cost - balance} 分。可发送『签到』领取今日积分；当前好感等级为 Lv{level}，"
+                    f"今天预计可获得 {lo}-{hi} 分。说明差额、等级与签到方式。"
+                    "**禁止**再次调用 catty_imagegen 重复生成。",
                 ),
             }
 
@@ -2031,7 +2269,13 @@ async def _exec_imagegen_nai(
             last = _imagegen_cooldowns.get(cd_key, 0.0)
             remaining = max(last + cd_seconds - now, 0.0)
             if remaining > 0:
-                return {"error": f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵"}
+                return {
+                    "error": _persona_text(
+                        ctx.persona,
+                        f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵",
+                        f"生图冷却剩 {int(remaining)}s，请稍后再试。",
+                    )
+                }
             _imagegen_cooldowns[cd_key] = now
 
     # ── v4 系列必须传结构化 v4_prompt/v4_negative_prompt + SDK 全套字段 ──
@@ -2328,14 +2572,23 @@ async def _exec_imagegen_nai(
         "cost": cost,
         "balance_after": balance_after,
         "is_owner_charge": is_owner_charge,
-        "guidance": (
+        "guidance": _persona_text(
+            ctx.persona,
             "图已经程序自动发出去了,你只需补 1-2 句猫娘短评(『画好啦~主人看看喜不喜欢喵 ฅฅ』)。"
             "**禁止**贴 base64 / file 路径 / image_uri 到回复里;**禁止**再调一次 catty_imagegen 重复发。"
             + (
                 ""
                 if is_owner_charge
                 else f" **必须在最终回复里报价**:『这张图消耗了 {cost} 积分,主人现在还剩 {balance_after} 分喵～』(余额低于 100 时加一句『再画要签到啦~』,不用过分强调)。"
-            )
+            ),
+            "图片已经自动发出。只补 1-2 句符合当前人格的短评。"
+            "**禁止**贴 base64 / file 路径 / image_uri 到回复里；**禁止**再次调用 catty_imagegen 重复生成。"
+            + (
+                ""
+                if is_owner_charge
+                else f" **必须在最终回复里报价**：『这张图消耗了 {cost} 积分，当前余额 {balance_after} 分。』"
+                "余额低于 100 时可提醒签到，无需过分强调。"
+            ),
         ),
     }
 
@@ -2349,8 +2602,16 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
         return {"error": "NovelAI 通道未启用 (imagegen.nai.enabled=false)"}
     if not getattr(ctx, "is_directly_requested", True):
         return {
-            "error": "用户没直接 @ 猫猫,不允许主动调 director tool。",
-            "guidance": "director 只能在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫) + 明确要求加工时调。",
+            "error": _persona_text(
+                ctx.persona,
+                "用户没直接 @ 猫猫,不允许主动调 director tool。",
+                "用户未直接指向当前机器人，不能主动调用 director tool。",
+            ),
+            "guidance": _persona_text(
+                ctx.persona,
+                "director 只能在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫) + 明确要求加工时调。",
+                "director 只能在用户明确指向当前机器人（@ / 引用回复 / 直呼）并明确要求加工时调用。",
+            ),
         }
     req_type = str(args.get("req_type") or "").strip().lower()
     if req_type not in _NAI_DIRECTOR_REQ_TYPES:
@@ -2454,11 +2715,16 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
                 "shortfall": cost - balance,
                 "user_level": level,
                 "today_checkin_estimate": f"{lo}-{hi}",
-                "user_facing_hint": (
+                "user_facing_hint": _persona_text(
+                    ctx.persona,
                     f"用猫娘口吻提醒用户:他当前只有 {balance} 积分,这次 director({req_type})要 {cost} 分,"
                     f"还差 {cost - balance} 分。让他发『签到』来领今天的积分,"
                     f"他现在好感等级 Lv{level},今天签到大概能拿 {lo}-{hi} 分。"
-                    "**禁止**自己再调一次 catty_nai_director 重复发。"
+                    "**禁止**自己再调一次 catty_nai_director 重复发。",
+                    f"提醒用户：当前只有 {balance} 积分，这次 director({req_type})需要 {cost} 分，"
+                    f"还差 {cost - balance} 分。可发送『签到』领取今日积分；当前好感等级为 Lv{level}，"
+                    f"今天预计可获得 {lo}-{hi} 分。"
+                    "**禁止**再次调用 catty_nai_director 重复处理。",
                 ),
             }
 
@@ -2471,7 +2737,13 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
             last = _imagegen_cooldowns.get(cd_key, 0.0)
             remaining = max(last + cd_seconds - now, 0.0)
             if remaining > 0:
-                return {"error": f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵"}
+                return {
+                    "error": _persona_text(
+                        ctx.persona,
+                        f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵",
+                        f"生图冷却剩 {int(remaining)}s，请稍后再试。",
+                    )
+                }
             _imagegen_cooldowns[cd_key] = now
 
     payload: dict[str, Any] = {
@@ -2588,14 +2860,22 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
         "cost": cost,
         "balance_after": balance_after,
         "is_owner_charge": is_owner_charge,
-        "guidance": (
+        "guidance": _persona_text(
+            ctx.persona,
             f"director({req_type}) 已自动发图。你只需补 1-2 句猫娘短评。"
             "**禁止**贴 base64/file 路径到回复;**禁止**再调一次 catty_nai_director 重复发。"
             + (
                 ""
                 if is_owner_charge
                 else f" **必须在最终回复里报价**:『director({req_type}) 消耗了 {cost} 积分,主人还剩 {balance_after} 分喵～』"
-            )
+            ),
+            f"director({req_type}) 已自动发图。只补 1-2 句符合当前人格的短评。"
+            "**禁止**贴 base64/file 路径到回复；**禁止**再次调用 catty_nai_director 重复处理。"
+            + (
+                ""
+                if is_owner_charge
+                else f" **必须在最终回复里报价**：『director({req_type}) 消耗了 {cost} 积分，当前余额 {balance_after} 分。』"
+            ),
         ),
     }
 
@@ -2661,21 +2941,25 @@ _SELF_PORTRAIT_NSFW_PATH = "Miao/miaomiaonude.png"
 def _load_self_portrait_reference_bytes(kind: str, persona: Any = None) -> list[bytes]:
     """Return PNG bytes of self-portrait lock-character reference(s), [] on miss/error.
 
-    多人格: persona.imagegen 非空时用该人格的参考图 (机机=Miao/fadianji.png +
+    多人格: 配置了 imagegen 的非 Catty 人格用其参考图 (机机=Miao/fadianji.png +
     ref_path_extra 里的额外角度图, 无 NSFW 深水参考图时 nsfw 回落 sfw 图);
-    None → 笨猫默认两张 (miaomiao/miaomiaonude, 各自单张不叠加)。
+    Catty 默认两张 (miaomiao/miaomiaonude, 各自单张不叠加), 其余人格不加载参考图。
     """
     from pathlib import Path
-    _pi = getattr(persona, "imagegen", None) if persona is not None else None
+    _is_catty = _is_catty_persona(persona)
+    _pi = getattr(persona, "imagegen", None) if not _is_catty else None
     if kind not in ("sfw", "nsfw"):
         return []
     if _pi is not None:
         fnames = [(_pi.ref_nsfw_path or _pi.ref_path) if kind == "nsfw" else _pi.ref_path]
         fnames.extend(_pi.ref_path_extra)
-    elif kind == "nsfw":
-        fnames = [_SELF_PORTRAIT_NSFW_PATH]
+    elif _is_catty:
+        if kind == "nsfw":
+            fnames = [_SELF_PORTRAIT_NSFW_PATH]
+        else:
+            fnames = [_SELF_PORTRAIT_SFW_PATH]
     else:
-        fnames = [_SELF_PORTRAIT_SFW_PATH]
+        return []
     out: list[bytes] = []
     for fname in fnames:
         if not fname:
@@ -2715,8 +2999,9 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
         or 60.0
     )
     proxy = str(getattr(config, "catty_http_proxy", "") or "")
+    _is_catty = _is_catty_persona(persona)
     _pi = getattr(persona, "imagegen", None) if persona is not None else None
-    if _pi is not None:
+    if not _is_catty and _pi is not None:
         # 多人格 planner: 外观锁/参考图/短评口吻全按 persona.imagegen 来。
         _char = getattr(persona, "char_name", "机器人")
         system_prompt = (
@@ -2741,7 +3026,7 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
             " 不要在 short_review 里出现 OOC / 元评论 / Markdown."
             " 用户没明确说风格时默认 provider=nai. 严禁输出 JSON 以外任何内容."
         )
-    else:
+    elif _is_catty:
         system_prompt = (
         "你是 QQ 群猫娘机器人『笨猫』的画图任务调度器, 负责把用户的画图请求翻译成生图参数."
         " 必须严格返回 JSON 对象, 字段如下 (不在 JSON 外输出任何文字):\n"
@@ -2766,6 +3051,22 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
         ' 自称『人家/猫猫/笨猫』, 不要在 short_review 里出现 OOC / 元评论 / Markdown.\n'
         "用户没明确说风格时默认 provider=nai (二次元最划算). 严禁输出 JSON 以外任何内容."
     )
+    else:
+        system_prompt = (
+            "你是 QQ 群机器人的画图任务调度器, 负责把用户的画图请求翻译成生图参数."
+            " 必须严格返回 JSON 对象, 字段如下 (不在 JSON 外输出任何文字):\n"
+            '  - "provider": "nai" 或 "gpt". 二次元/动漫/萌系/角色立绘 → "nai" (默认 5 积分最划算);'
+            ' 写实/产品/海报/带文字/真实摄影/UI → "gpt".\n'
+            '  - "prompt": 实际生图 prompt. NAI 用英文 danbooru 标签 (逗号分隔);'
+            ' GPT 用自然中英文描述句. 500 字以内. 不要含 NSFW 显性词.\n'
+            '  - "aspect": "portrait"|"landscape"|"square" — NAI 用, 默认 "portrait" (832x1216 立绘).\n'
+            '  - "quality": "low"|"medium"|"high"|"auto" — GPT 用, 默认 "low".\n'
+            '  - "negative_prompt": 可选, NAI 负面词. 不填留空字符串.\n'
+            '  - "self_portrait": null. 始终填写 null, 不使用本地人物参考图.\n'
+            '  - "short_review": 1-2 句自然简短的配文 (画好后会发到群里).\n'
+            "不要在 short_review 里出现 OOC / 元评论 / Markdown. 用户没明确说风格时默认 provider=nai. "
+            "严禁输出 JSON 以外任何内容."
+        )
     # 主人 2026-07-06 修「自画像没带参考图」: DeepSeek thinking 模型 + json mode 下
     # reasoning 吃掉 max_tokens=800 → content 空 → plan 失败走 fallback (fallback 不带
     # self_portrait → 参考图丢失). 双修: max_tokens 提到 1600 + 空/非 JSON 时裸跑重试一次
@@ -2851,7 +3152,8 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
 
     # 调 deepseek 出 plan
     _persona = getattr(ctx, "persona", None)
-    _persona_imagegen = getattr(_persona, "imagegen", None) if _persona is not None else None
+    _is_catty = _is_catty_persona(_persona)
+    _persona_imagegen = getattr(_persona, "imagegen", None) if not _is_catty else None
     try:
         plan = await _deepseek_imagegen_plan(ctx.config, user_text, persona=_persona)
     except Exception as exc:  # noqa: BLE001
@@ -2869,12 +3171,20 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
                 "self_portrait": "sfw",
                 "short_review": "画好了. 快看",
             }
-        else:
+        elif _is_catty:
             plan = {
                 "provider": "nai",
                 "prompt": "1girl, white hair, cat ears, JK uniform, golden eyes, cute, anime style",
                 "aspect": "portrait",
                 "short_review": "画好啦主人~ ฅฅ",
+            }
+        else:
+            plan = {
+                "provider": "nai",
+                "prompt": "anime illustration, detailed, high quality",
+                "aspect": "portrait",
+                "self_portrait": None,
+                "short_review": "画好了. 请查看",
             }
 
     provider = str(plan.get("provider") or "nai").strip().lower()
@@ -2888,8 +3198,17 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     neg = str(plan.get("negative_prompt") or "").strip()
     self_portrait_kind = (plan.get("self_portrait") or "").strip().lower() \
         if isinstance(plan.get("self_portrait"), str) else ""
-    _default_review = "画好了. 快看" if _persona_imagegen is not None else "画好啦主人~ ฅฅ"
-    short_review = str(plan.get("short_review") or _default_review).strip()
+    if not _is_catty and _persona_imagegen is None:
+        self_portrait_kind = ""
+    _default_review = (
+        "画好啦主人~ ฅฅ"
+        if _is_catty
+        else "画好了. 快看" if _persona_imagegen is not None else "画好了. 请查看"
+    )
+    if not _is_catty and _persona_imagegen is None:
+        short_review = _default_review
+    else:
+        short_review = str(plan.get("short_review") or _default_review).strip()
 
     # 自画像 → 强制 NAI + 加本地参考图 (锁人设)
     local_ref_bytes: list[bytes] = []
@@ -2947,7 +3266,7 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     if is_owner_charge or cost <= 0:
         final_reply = short_review
     else:
-        _cost_tail = "分" if _persona_imagegen is not None else "分喵～"
+        _cost_tail = "分喵～" if _is_catty else "分"
         final_reply = (
             f"{short_review} 这张图消耗了 {cost} 积分, "
             f"现在还剩 {balance_after} {_cost_tail}"
@@ -2971,8 +3290,16 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
     # 私聊/直接 @ 猫猫的群消息 is_directly_requested=True,放行。
     if not getattr(ctx, "is_directly_requested", True):
         return {
-            "error": "用户没直接 @ 猫猫,不允许主动画图。把这条 tool_call 取消,改成纯文字回应。",
-            "guidance": "imagegen 只在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫)+ 说画时才能调。",
+            "error": _persona_text(
+                ctx.persona,
+                "用户没直接 @ 猫猫,不允许主动画图。把这条 tool_call 取消,改成纯文字回应。",
+                "用户未直接指向当前机器人，不能主动画图。取消这条 tool_call，改成纯文字回应。",
+            ),
+            "guidance": _persona_text(
+                ctx.persona,
+                "imagegen 只在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫)+ 说画时才能调。",
+                "imagegen 只在用户明确指向当前机器人（@ / 引用回复 / 直呼）并明确要求画图时调用。",
+            ),
         }
     # 主人 2026-05-29: agent 模式 — sonnet 端 schema 已经全空, args.prompt 为空时
     # 走 deepseek 代理决策 (provider/prompt/参考图/短评 全甩给 deepseek), 主 sonnet
@@ -3015,7 +3342,13 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
             last = _imagegen_cooldowns.get(cd_key, 0.0)
             remaining = max(last + cd_seconds - now, 0.0)
             if remaining > 0:
-                return {"error": f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵"}
+                return {
+                    "error": _persona_text(
+                        ctx.persona,
+                        f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵",
+                        f"生图冷却剩 {int(remaining)}s，请稍后再试。",
+                    )
+                }
             _imagegen_cooldowns[cd_key] = now
 
     size = str(args.get("size") or getattr(ctx.config, "catty_imagegen_default_size", "1024x1024") or "1024x1024").strip()
@@ -3041,12 +3374,17 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
                 "shortfall": image_cost - balance,
                 "user_level": level,
                 "today_checkin_estimate": f"{lo}-{hi}",
-                "user_facing_hint": (
+                "user_facing_hint": _persona_text(
+                    ctx.persona,
                     f"用猫娘口吻提醒用户:他当前只有 {balance} 积分,这张图(quality={quality})要 {image_cost} 分,"
                     f"还差 {image_cost - balance} 分。让他发『签到』来领今天的积分,"
                     f"他现在好感等级 Lv{level},今天签到大概能拿 {lo}-{hi} 分。"
                     "傲娇但要把要点说全:差多少、要 Lv 几、发『签到』两个字就能领。"
-                    "**禁止**自己再调一次 catty_imagegen 重复发。"
+                    "**禁止**自己再调一次 catty_imagegen 重复发。",
+                    f"提醒用户：当前只有 {balance} 积分，这张图（quality={quality}）需要 {image_cost} 分，"
+                    f"还差 {image_cost - balance} 分。可发送『签到』领取今日积分；当前好感等级为 Lv{level}，"
+                    f"今天预计可获得 {lo}-{hi} 分。说明差额、等级与签到方式。"
+                    "**禁止**再次调用 catty_imagegen 重复生成。",
                 ),
             }
 
@@ -3295,9 +3633,11 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
                 "retry_guidance": (
                     "精简 prompt 到 300 字以内 + quality=low + size=1024x1024 再调,或过 30s 重试。"
                 ),
-                "user_facing_hint": (
+                "user_facing_hint": _persona_text(
+                    ctx.persona,
                     "可以对用户说:『主人这次画图被上游网关挡住啦(尾巴垂垂),"
-                    "猫猫稍等再试,或者主人精简下要求~』"
+                    "猫猫稍等再试,或者主人精简下要求~』",
+                    "可以对用户说：『这次画图被上游网关拦住了，请稍后再试，或者精简一下要求。』",
                 ),
             }
         return {"error": f"生图接口 HTTP {response.status_code}: {detail[:200]}"}
@@ -3372,14 +3712,23 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         "cost": image_cost,
         "balance_after": balance_after,
         "is_owner_charge": is_owner_charge,
-        "guidance": (
+        "guidance": _persona_text(
+            ctx.persona,
             "图已经程序自动发出去了,你只需补 1-2 句猫娘短评(『画好啦~主人看看喜不喜欢喵 ฅฅ』)。"
             "**禁止**贴 base64 / file 路径 / image_uri 到回复里;**禁止**再调一次 catty_imagegen 重复发。"
             + (
                 ""
                 if is_owner_charge
                 else f" **必须在最终回复里报价**:『这张图(quality={quality})消耗了 {image_cost} 积分,主人现在还剩 {balance_after} 分喵～』(余额低于 100 时加『再画要签到啦~』)。"
-            )
+            ),
+            "图片已经自动发出。只补 1-2 句符合当前人格的短评。"
+            "**禁止**贴 base64 / file 路径 / image_uri 到回复里；**禁止**再次调用 catty_imagegen 重复生成。"
+            + (
+                ""
+                if is_owner_charge
+                else f" **必须在最终回复里报价**：『这张图（quality={quality}）消耗了 {image_cost} 积分，当前余额 {balance_after} 分。』"
+                "余额低于 100 时可提醒签到。"
+            ),
         ),
     }
 
@@ -3387,13 +3736,18 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
 async def _exec_story_arc_set(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     if ctx.story_arc_store is None or not ctx.scope_key:
         return {"error": "story_arc 不可用(store 未注入或 scope 缺失)"}
-    title = str(args.get("title") or "").strip()
-    context = str(args.get("context") or "").strip()
+    title = str(args.get("title") or "").strip()[:20]
+    context = str(args.get("context") or "").strip()[:150]
     if not title or not context:
         return {"error": "title 和 context 都必填"}
+    if len(context) < 40:
+        return {"error": "context 至少需要 40 字"}
     try:
-        ttl_hours = float(args.get("ttl_hours") or 3.0)
+        ttl_raw = args.get("ttl_hours")
+        ttl_hours = float(ttl_raw) if ttl_raw is not None else 3.0
     except (TypeError, ValueError):
+        ttl_hours = 3.0
+    if ttl_hours != ttl_hours or ttl_hours in (float("inf"), float("-inf")):
         ttl_hours = 3.0
     ttl_hours = min(max(ttl_hours, 0.5), 12.0)
     ttl_seconds = int(ttl_hours * 3600)
@@ -3493,7 +3847,12 @@ async def _exec_group_game_tag(args: dict[str, Any], ctx: ToolContext) -> dict[s
             "game": game,
             "note": "已移除标签" if removed else "本群没有这个游戏标签,无需移除",
         }
-    confidence = int(args.get("confidence") or 80)
+    confidence_raw = args.get("confidence")
+    try:
+        confidence = int(confidence_raw) if confidence_raw is not None else 80
+    except (TypeError, ValueError):
+        confidence = 80
+    confidence = max(0, min(confidence, 100))
     reason = str(args.get("reason") or "")
     return ctx.memory_store.tag_group_with_game(
         group_id,
@@ -3620,9 +3979,12 @@ async def _exec_hot_trends(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
             "error": "所有热搜源都没拿到数据(可能网络/代理问题)",
             "errors_detail": payload.get("errors", []),
         }
-    payload["guidance"] = (
+    payload["guidance"] = _persona_text(
+        ctx.persona,
         "挑 1-3 条最有梗/最有讨论价值的复述,加猫娘吐槽,不要贴 URL,"
-        "不要照搬整段 JSON,不要复读 rank 数字。"
+        "不要照搬整段 JSON,不要复读 rank 数字。",
+        "挑 1-3 条最有梗或最有讨论价值的内容复述，可加入当前人格的简短评论，"
+        "不要贴 URL、照搬整段 JSON 或复读 rank 数字。",
     )
     return payload
 
@@ -3706,7 +4068,11 @@ async def _exec_social_account(args: dict[str, Any], ctx: ToolContext) -> dict[s
         return {
             "platform": platform,
             "url": "",
-            "note": "猫猫在这个平台没账号(或者还没设置)",
+            "note": _persona_text(
+                ctx.persona,
+                "猫猫在这个平台没账号(或者还没设置)",
+                "当前机器人在这个平台没有账号（或者尚未设置）。",
+            ),
         }
     return {"platform": platform, "url": url}
 
@@ -3741,12 +4107,6 @@ _EXECUTORS: dict[str, ToolExecutor] = {
 
 
 # ── 对外 API ───────────────────────────────────────────────────────────
-
-# 主人 2026-05-28 C3: tool schemas singleton cache. 同一 (enabled, is_private, excluded_set)
-# 输入永远返回同一个 list 对象 + 内容字节一致, 让 Anthropic cache key 跨调用稳定.
-# 5 分钟 TTL 不必要 (tool schemas 在 catty 生命期内基本不变).
-_TOOL_SCHEMAS_CACHE: dict[tuple, list[dict[str, Any]]] = {}
-
 
 # 主人 2026-05-28 C15-7: NLU intent → 只发命中意图相关的 tools, 不命中 tools=[]
 # 关键词列表覆盖每个 tool 的常见触发词. 命中 1+ tool 时发对应 tool schema 给 AI,
@@ -3797,6 +4157,35 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
         "刚才聊啥", "之前聊啥", "聊了什么", "刚才在说", "前面说",
     ),
 }
+
+
+_EXPLICIT_HTTP_URL_RE = re.compile(
+    r"https?://[^\s<>()\[\]{}\"'`]+",
+    re.IGNORECASE,
+)
+_COMMON_IMAGE_URL_RE = re.compile(
+    r"\.(?:apng|avif|bmp|gif|heic|heif|jpe?g|png|tiff?|webp)(?:[?#][^\s<>()\[\]{}\"'`]*)?$",
+    re.IGNORECASE,
+)
+_URL_TRAILING_PUNCTUATION = ".,;:!?，。；：！？、)]}）】》〉」』"
+
+
+def _has_explicit_image_url(user_text: str) -> bool:
+    """Return whether text supplies an http(s) image URL usable by reverse search."""
+    text = str(user_text or "")
+    urls = [
+        url.rstrip(_URL_TRAILING_PUNCTUATION)
+        for url in _EXPLICIT_HTTP_URL_RE.findall(text)
+    ]
+    if not urls:
+        return False
+    if any(_COMMON_IMAGE_URL_RE.search(url) for url in urls):
+        return True
+    context_text = _EXPLICIT_HTTP_URL_RE.sub(" ", text).lower()
+    return any(
+        keyword.lower() in context_text
+        for keyword in _INTENT_KEYWORDS["catty_image_search"]
+    )
 
 
 _IMAGEGEN_FORCE_QUERY_WORDS: tuple[str, ...] = (
@@ -3888,10 +4277,15 @@ def _is_image_intent(text: str) -> bool:
     return any(w in text for w in _IMAGE_INTENT_WORDS)
 
 
-def _detect_tool_intent(user_text: str, has_image: bool) -> set[str]:
+def _detect_tool_intent(
+    user_text: str,
+    has_image: bool,
+    *,
+    has_explicit_image_url: bool = False,
+) -> set[str]:
     """NLU 简易关键词匹配 — 命中返回相关 tool name set, 不命中返回空 set.
 
-    image_search / nai_director 需要 has_image=True (没图不调).
+    image_search 可使用文字里的显式图片 URL；nai_director 仍需要实际上下文图片。
     catty_imagegen 走专用 _is_image_intent (含 NSFW explicit override), 与 spark 短路同一真相源。
     """
     if not user_text:
@@ -3907,11 +4301,186 @@ def _detect_tool_intent(user_text: str, has_image: bool) -> set[str]:
     # _INTENT_KEYWORDS 漏掉、但 spark 短路表 (_IMAGE_INTENT_WORDS) 有的口语措辞, 消除两表漂移。
     if _is_image_intent(user_text):
         hit.add("catty_imagegen")
-    # 没有图时去掉 image_search / nai_director
+    # 文字图片 URL 只可供 image_search 使用，不能把它当作可加工的上下文图片。
+    if has_explicit_image_url:
+        hit.add("catty_image_search")
     if not has_image:
-        hit.discard("catty_image_search")
         hit.discard("catty_nai_director")
+    if not (has_image or has_explicit_image_url):
+        hit.discard("catty_image_search")
     return hit
+
+
+
+_NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
+    "catty_emoji": (
+        "从本地表情库搜索并发送一张表情图。适用场景：需要用表情表达害羞、得意、贴贴、"
+        "困惑、笑、撒娇或嘲讽等情绪，用户明确请求表情图，或文字回复后配一张本地表情更自然时。"
+        "选中的图片会加入待发送队列；最终回复只需补一句短评，不要输出图片路径。"
+        "不要用于搜索具体网图、角色图或梗图主题；这些场景使用 catty_meme_query。",
+        None,
+    ),
+    "catty_recall": (
+        "查询长期记忆和待压缩语料，定位与“上次/以前/那时候”有关的发言或共识。"
+        "适用场景：用户使用时间指代、需要确认某位群友此前说过的偏好、决定、梗或称呼，"
+        "或上下文暗示曾讨论过某个陌生话题。不要用于查询当前活跃消息。"
+        "返回 long_term_summary（长期摘要）和 matches（命中条目列表）。",
+        None,
+    ),
+    "catty_user_profile": (
+        "查询一个 QQ 用户的画像：称呼、性别、印象、置信度和关系标记。"
+        "适用场景：群里出现不认识的 QQ 号，或需要确认某位用户的称呼、关系或特别关心状态。"
+        "不要每条消息都查；当前发言者画像已在常驻 context 中。",
+        None,
+    ),
+    "catty_mc_status": (
+        "查询 Minecraft 服务器实时状态：在线人数和是否可连上。"
+        "适用场景：用户询问 MC 在线人数、服务器是否开启或是否有人在玩，"
+        "或需要确认是否邀请群友进服。结果有 30 秒缓存。",
+        None,
+    ),
+    "catty_web_search": (
+        "Google/Bing 联网搜索最新信息。只在用户询问新闻、版本、价格、教程、特定事实，"
+        "明确要求搜索，或模型知识可能过期时调用。图片出处用 catty_image_search，"
+        "网络梗和 ACG 词条用 catty_meme_explain，近期热搜用 catty_hot_trends。"
+        "每个 scope+用户有 cooldown；返回 results，基于结果生成回复，不得编造链接或输出 marker 文本。",
+        None,
+    ),
+    "catty_nsfw_search": (
+        "搜索 R-18 资源：pixiv 图片或 iwara 视频，仅好友私聊可调用。"
+        "kind=image 时插件会直接把下载好的图片发到聊天；拿到结果后只补 1-2 句符合当前人格的短评。"
+        "kind=video 时返回链接，挑 1-3 个配简短说明。query 的首个候选保留用户原话语种，"
+        "后面可用英文逗号追加 1-2 个候选。插件已自动启用 r18，同一用户 30 秒内只能搜索一次。",
+        None,
+    ),
+    "catty_image_search": (
+        "反向搜图：把一张图交给 SauceNAO / Yandex / trace.moe / ascii2d / iqdb，"
+        "查询作者、作品、角色、社交账号或同款来源。上下文有图片且用户询问出处、作者、原图、"
+        "角色、番剧、X 账号或同款时必须调用本工具，不要用文字搜索替代。"
+        "kind=anime 用于番剧场景；artwork 用于二次元插画；photo 用于真人自拍、cosplay、"
+        "X 或 Instagram；不确定时用 auto。返回 results 后挑 1-3 条关键结论复述，"
+        "不要照搬 JSON、复读相似度小数或编造未返回的信息。每个用户 60 秒一次冷却。",
+        None,
+    ),
+    "catty_game_recall": (
+        "查询游戏专属事实库：角色、版本、活动、机制和玩家事件。"
+        "适用场景：用户或群友聊到某个游戏，需要确认此前记录的信息。"
+        "游戏名建议用小写英文，也接受中文；不知道游戏名时可查询总数或已保存的游戏列表。",
+        None,
+    ),
+    "catty_game_remember": (
+        "把值得长期保留的游戏事实写入专属事实库。"
+        "仅在用户或群友给出具体版本、角色、机制、活动信息，或明确玩家约定时调用。"
+        "不要记录模糊吐槽、临时情绪、无法核验的传闻或重复事实。",
+        None,
+    ),
+    "catty_social_account": (
+        "查询当前机器人在指定平台的社交账号链接，不是用户的账号。适用场景："
+        "群友询问机器人在 Steam、Epic 等平台的账号，或聊到某游戏所属平台后需要提供对应账号。"
+        "先按常识判断游戏所属平台，再用 platform 查询。没有账号时返回空 url 和 note，"
+        "应如实说明，不得编造 URL。不要在没人询问时主动调用。",
+        "查询当前机器人某平台账号",
+    ),
+    "catty_hot_trends": (
+        "拉取中文互联网当下热搜和热梗（微博 / B 站 / 知乎 / 抖音聚合，180 秒缓存）。"
+        "适用场景：用户询问最近热点、热梗或榜单，或出现疑似近期网络新词需要确认。"
+        "也可在话题冷清时作为谈资。返回 sources 后挑 1-3 条复述并可加入当前人格的简短评论，"
+        "不要贴链接或照搬完整 JSON。",
+        None,
+    ),
+    "catty_remember": (
+        "把值得长期记住的事实写入用户或群笔记库。"
+        "适用场景：稳定偏好或边界、明确约定或承诺、群级长期特征。"
+        "不要记录闲聊吐槽、临时情绪、单次玩笑或已经查询到的同一条事实。"
+        "TTL 默认 30 天；偏好和边界可延长，约定应写到事件结束日期。",
+        None,
+    ),
+    "catty_meme_explain": (
+        "查询萌娘百科解释网络梗、ACG 词条、角色、作品或二次元术语。"
+        "适用场景：群友提到不认识的网络流行语、二次元词条、作品或角色，"
+        "或需要确认一个梗的精确出处。拿到结果后用当前人格短句复述，"
+        "不要照搬 extract、贴 URL 或复读 JSON。",
+        None,
+    ),
+    "catty_imagegen": (
+        "用户直接指向当前机器人（@ / 引用回复 / 直呼）并明确要求画图、生成图片时调用。\n"
+        "args 留空 {} 即可——provider 选择、NAI 标签 prompt、GPT 描述句、风格判定、参考图、"
+        "报价和短评配文全部由后端代理 LLM 自动决定，图片会自动发到聊天。"
+        "tool 调完本轮直接结束，不要再写文字回复。\n"
+        "禁触发：用户未直接请求当前机器人时只是闲聊提到画画、未明确要图时讨论某物，"
+        "或本地表情图已经足够的场景（走 catty_meme_query）。",
+        "用户直接向当前机器人明确请求画图时调用。args 留空 {}；图片会自动发到聊天，调用后本轮直接结束。",
+    ),
+    "catty_nai_director": (
+        "调用 NovelAI Director Tools 对一张已有图片做加工（线稿、抠图、上色、换情绪、去杂物等）。\n"
+        "前置条件：用户消息中必须有图片，优先当前消息附图，没有则使用群最近 5 分钟图片。"
+        "没有图片时直接让用户先发送图片，不要先调用 catty_imagegen。\n"
+        "必须由用户直接指向当前机器人（@ / 直呼）并明确提出具体加工要求时调用；"
+        "不要在闲聊提到描线或抠图时主动调用。\n"
+        "调用前先说明此次加工需要扣除的积分，bg-removal 需要明确提醒成本较高。"
+        "图片自动发送；image_sent=true 后只补 1-2 句符合当前人格的短评和报价。"
+        "禁止贴 base64 或文件路径，也不要重复调用。",
+        None,
+    ),
+    "catty_story_arc_set": (
+        "为当前会话创建会跨多条消息推进的 story arc。适用场景：双方刚开始一个需要后续推进的事情，"
+        "例如约好周末活动、对方正在处理某件事、或群友约定一起完成某项安排。"
+        "title 要短，context 写清当前状态、期待或关心点；不要为一句玩笑、单次闲聊或已结束的话题创建。",
+        None,
+    ),
+}
+
+_NON_CATTY_SCHEMA_PROPERTY_DESCRIPTIONS: dict[str, dict[str, str]] = {
+    "catty_emoji": {
+        "query": "表情意图关键词，例如：害羞、贴贴、得意、脸红、困惑或笑。",
+        "tags": "可选，逗号分隔补充标签，例如：害羞、贴贴。",
+    },
+    "catty_remember": {
+        "scope": "user=记到当前发言者的画像笔记（跨群通用）；group=记到当前群的群级笔记。",
+    },
+    "catty_social_account": {
+        "platform": "平台标识（小写英文），目前支持 steam。未来可能扩展 epic、xbox、psn、origin 等；传未知平台会返回 error，应自然说明即可。",
+    },
+    "catty_story_arc_set": {
+        "title": "短标题，≤20 字符，核心一句话。例如“等对方画的图”。",
+        "context": "当前状态、后续期待或关心点，30-150 字。例如“对方答应画一张戴蝴蝶结的图，聊到此事时保持期待感。”",
+    },
+}
+
+
+def _schema_for_persona(
+    name: str,
+    schema: dict[str, Any],
+    *,
+    lazy: bool,
+    persona: Any,
+) -> dict[str, Any]:
+    if _is_catty_persona(persona):
+        return schema
+    descriptions = _NON_CATTY_SCHEMA_DESCRIPTIONS.get(name)
+    description = descriptions[1 if lazy else 0] if descriptions else None
+    property_descriptions = (
+        {} if lazy else _NON_CATTY_SCHEMA_PROPERTY_DESCRIPTIONS.get(name, {})
+    )
+    if description is None and not property_descriptions:
+        return schema
+    function = dict(schema["function"])
+    if description is not None:
+        function["description"] = description
+    if property_descriptions:
+        parameters = dict(function["parameters"])
+        properties = dict(parameters["properties"])
+        for field, field_description in property_descriptions.items():
+            if field not in properties:
+                continue
+            property_schema = dict(properties[field])
+            property_schema["description"] = field_description
+            properties[field] = property_schema
+        parameters["properties"] = properties
+        function["parameters"] = parameters
+    copied = dict(schema)
+    copied["function"] = function
+    return copied
 
 
 def available_tool_schemas(
@@ -3921,6 +4490,7 @@ def available_tool_schemas(
     user_text: str = "",
     has_image: bool = False,
     is_directly_requested: bool = False,
+    persona: Any = None,
 ) -> list[dict[str, Any]]:
     """按 NLU intent 挑 tool schemas — 命中关键词才发对应 tool, 不命中 tools=[].
 
@@ -3933,7 +4503,9 @@ def available_tool_schemas(
         config: catty config
         is_private: True=私聊 (按 catty_tools_disabled_in_private 进一步过滤)
         user_text: 当前 user msg 文本, 用于 NLU intent 检测
-        has_image: 当前 user msg 是否含图片 (image_search / nai_director 需要)
+        has_image: 当前或最近上下文是否含实际图片（nai_director 必须）
+        is_directly_requested: 当前消息是否直接指向猫猫
+        persona: 当前 scope 的 Persona；已禁用的 persona feature 不暴露对应 tool
     """
     enabled = bool(getattr(config, "catty_tools_enabled", True))
     if not enabled:
@@ -3943,7 +4515,12 @@ def available_tool_schemas(
     # 序列化在 current-user 动态尾巴之后；即使 tools 自身 byte-stable, current-user 漂移也会让
     # tools 一起落进 miss 区。恢复「无工具意图 → tools=[]」, 但只门控 schema, 不删 executor；
     # 命中搜索/画图/记忆/查人/时间/MC/story-arc/图片等意图时仍发对应 tool, 功能不砍。
-    intent_hits = _detect_tool_intent(user_text, has_image)
+    has_explicit_image_url = _has_explicit_image_url(user_text)
+    intent_hits = _detect_tool_intent(
+        user_text,
+        has_image,
+        has_explicit_image_url=has_explicit_image_url,
+    )
     if has_image:
         intent_hits.update({"catty_image_search", "catty_nai_director"})
     # 主人 2026-06-06: 明确画图指令 (should_force_imagegen_tool — force pattern 比
@@ -3957,21 +4534,27 @@ def available_tool_schemas(
     if not intent_hits:
         return []
 
-    excluded_list: list[str] = []
-    if is_private:
-        for name in getattr(config, "catty_tools_disabled_in_private", []) or []:
-            excluded_list.append(str(name).strip())
-    excluded_set = set(excluded_list)
+    disabled_in_private = _private_disabled_tool_names(config) if is_private else set()
 
     # 主人 2026-05-28 P5.5: lazy schema 默认开 — description ≤30 字, properties 极简.
     _lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", True))
     _schema_pool = _LAZY_TOOL_SCHEMAS if _lazy else ALL_TOOL_SCHEMAS
 
-    result = [
-        schema for name, schema in _schema_pool.items()
-        if name in intent_hits and name not in excluded_set
+    return [
+        _schema_for_persona(name, schema, lazy=_lazy, persona=persona)
+        for name, schema in _schema_pool.items()
+        if name in intent_hits
+        and _tool_capability_denial_reason(
+            name,
+            is_private=is_private,
+            is_group=not is_private,
+            has_image=has_image,
+            is_directly_requested=is_directly_requested,
+            has_explicit_image_url=has_explicit_image_url,
+            persona=persona,
+            disabled_in_private=disabled_in_private,
+        ) is None
     ]
-    return result
 
 
 # IDE 风「最近 tool 调用日志」:scope -> deque[(tool_name, args_preview, ts, succeeded)]
@@ -4026,10 +4609,16 @@ async def execute_tool_call(
     name: str,
     arguments_json: str,
     ctx: ToolContext,
+    *,
+    allowed_names: Collection[str] | None = None,
 ) -> dict[str, Any]:
     """执行一次 tool_call。args 解析失败/未知 tool/执行抛错都返回结构化 error,
     让主 AI 在下一轮自己看懂出错原因(而不是把异常丢给用户)。
     """
+    if allowed_names is not None and name not in allowed_names:
+        _record_tool_call(_ctx_scope_key(ctx), name, (arguments_json or "")[:60], False)
+        return _tool_capability_error(name, "not_in_allowlist", persona=ctx.persona)
+
     executor = _EXECUTORS.get(name)
     if executor is None:
         _record_tool_call(_ctx_scope_key(ctx), name, "", False)
@@ -4045,6 +4634,26 @@ async def execute_tool_call(
             return {"error": "arguments 不是合法 JSON 对象,无法解析"}
         args = parsed
     args_preview = _short_args_preview(args)
+    has_image = bool(ctx.input_image_urls or ctx.recent_image_urls)
+    explicit_image_text = ctx.user_text
+    if name == "catty_image_search":
+        explicit_url = str(args.get("image_url") or "").strip()
+        if explicit_url:
+            explicit_image_text = f"{explicit_image_text}\n{explicit_url}"
+    has_explicit_image_url = _has_explicit_image_url(explicit_image_text)
+    denial_reason = _tool_capability_denial_reason(
+        name,
+        is_private=ctx.is_private,
+        is_group=bool(ctx.group_id),
+        has_image=has_image,
+        is_directly_requested=bool(ctx.is_directly_requested),
+        has_explicit_image_url=has_explicit_image_url,
+        persona=ctx.persona,
+        disabled_in_private=_private_disabled_tool_names(ctx.config),
+    )
+    if denial_reason is not None:
+        _record_tool_call(_ctx_scope_key(ctx), name, args_preview, False)
+        return _tool_capability_error(name, denial_reason, persona=ctx.persona)
     try:
         result = await executor(args, ctx)
     except Exception as exc:  # noqa: BLE001
@@ -4113,7 +4722,7 @@ def _tools_system_hint_legacy() -> str:
         "4. catty_web_search — 最新新闻/版本/价格/事实/'搜一下'时调; 60s cd (主人豁免); 已知/闲聊不调。\n"
         "5. catty_nsfw_search — pixiv/iwara, **仅好友私聊**; 群里调返 error → 引导加私聊; 图程序自发, 你补 1-2 句短评不贴 URL。\n"
         "6. catty_emoji — 搜本地表情库并加入待发送队列; 撒娇/情绪/斗图/贴贴/炸毛优先调它,不要再手写 EMOJI_QUERY marker。\n"
-        "7. catty_meme_query — Bing 拉梗图嵌入回复; 具体网图/梗图主题才调; 拿 image_uri 用 <<<CATTY_INLINE_IMAGE:URI>>> 嵌入。\n"
+        "7. catty_meme_query — Bing 拉梗图; 具体网图/梗图主题才调; 命中图片由程序通过 pending_image_segments 在带外自动发送,只补一句短评。\n"
         "8. catty_game_recall — 查游戏专属事实库 (strinova/star_resonance/minecraft/genshin); 跨群共享。\n"
         "9. catty_game_remember — 群友给出具体名词/数字/版本/共识时记; 游戏群 web_search 自动 sink top3, 看到 `auto_sinked_to_game_memory` 别重复记。\n"
         "10. catty_social_account — 查**笨猫本人**在指定平台账号 (不是主人); 群友问起或聊到对应平台游戏时调。\n"
@@ -4126,5 +4735,5 @@ def _tools_system_hint_legacy() -> str:
         "17. catty_imagegen — **【铁律: 笨猫所有画图请求都从这个 tool 出, 别走 Markdown 图片语法/外部 URL/文字脑补图】** 其它通道会丢具体文字/列表/细节。"
         "prompt 改写允许精简/重组/重排, 400-700 字; 不能丢: 引号里文字、列表项数、配色/材质/光影/构图/数字。"
         "触发: 用户明确画/生成 + 主语; 不要聊到就主动生图。NSFW/敏感词拒。图自动发, image_sent=true 后只补 1-2 句短评。180s cd (主人豁免); quality 默认 low。\n"
-        "通用: 能并发但总开销=延迟, 能不调就不调; 拿结果别复读 JSON, 别出现 tool_call/function_call 标记 (INLINE_IMAGE 除外); error 用猫娘口吻说 '查不到/想不起来' 不贴 error 文本。"
+        "通用: 能并发但总开销=延迟, 能不调就不调; 拿结果别复读 JSON, 别出现 tool_call/function_call 标记; error 用猫娘口吻说 '查不到/想不起来' 不贴 error 文本。"
     )

@@ -31,9 +31,10 @@ class TimeBucketContextStoreTests(unittest.TestCase):
             self.assertIn("bucket=", summary)
             self.assertIn("主人第一句", summary)
             params = store.build_current_params_prompt("group:1", is_group=True, now=1704111360)
-            self.assertIn("【时间桶参数】", params)
-            self.assertIn("scope=group", params)
-            self.assertIn("finalized=1", params)
+            self.assertIn("【TIME_BUCKET】", params)
+            self.assertIn("s=group", params)
+            self.assertIn("cur=0", params)
+            self.assertIn("fin=1", params)
 
     def test_time_bucket_same_bucket_does_not_roll(self) -> None:
         import tempfile
@@ -46,8 +47,8 @@ class TimeBucketContextStoreTests(unittest.TestCase):
             self.assertFalse(store.roll_current_if_needed("group:2", is_group=True, now=1704110700))
             self.assertEqual(store.build_stable_summary_prompt("group:2"), "")
             params = store.build_current_params_prompt("group:2", is_group=True, now=1704110700)
-            self.assertIn("current_turns=1", params)
-            self.assertIn("finalized=0", params)
+            self.assertIn("cur=1", params)
+            self.assertIn("fin=0", params)
 
 
 if __name__ == "__main__":

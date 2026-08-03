@@ -23,6 +23,7 @@
 """
 from __future__ import annotations
 
+import contextvars
 import logging
 import re
 from typing import Any
@@ -47,6 +48,47 @@ def get_protected_identifiers() -> frozenset[str]:
 # → Anthropic cache prefix hit. 只在超 budget 时一次大跳 (一次 reset 后稳定多轮).
 # bot 重启时丢失 (内存 dict), 重启后第一轮从 0 重建, 之后稳定.
 _HISTORY_ANCHORS: dict[str, int] = {}
+
+
+_anchor_observation_var: contextvars.ContextVar[dict[str, Any] | None] = contextvars.ContextVar(
+    "catty_prompt_compressor_anchor_observation",
+    default=None,
+)
+
+
+def _set_anchor_observation(
+    *,
+    scope_id: str,
+    anchor_before: int,
+    anchor_after: int,
+    window_tokens: int,
+    trigger_tokens: int,
+    history_len: int,
+    keep_recent: int,
+    reset_reason: str = "",
+) -> None:
+    _anchor_observation_var.set({
+        "scope_id": scope_id,
+        "anchor_before": int(anchor_before),
+        "anchor_after": int(anchor_after),
+        "anchor_changed": bool(anchor_before != anchor_after),
+        "window_tokens": int(window_tokens),
+        "trigger_tokens": int(trigger_tokens),
+        "history_len": int(history_len),
+        "keep_recent": int(keep_recent),
+        "reset_reason": str(reset_reason or ""),
+    })
+
+
+def get_anchor_observation() -> dict[str, Any] | None:
+    """Return a detached observation for the current async request context."""
+    observation = _anchor_observation_var.get()
+    return dict(observation) if isinstance(observation, dict) else None
+
+
+def clear_anchor_observation() -> None:
+    """Clear the current request's observation after request diagnostics consume it."""
+    _anchor_observation_var.set(None)
 
 
 def reset_scope_anchor(scope_id: str | None = None) -> None:
@@ -294,83 +336,69 @@ def monotonic_history_trim(
     cut_ratio: float = 0.5,
     jump_threshold_ratio: float = 1.5,
 ) -> list[dict]:
-    """Cache-friendly history trim — anchor checkpoint pattern.
-
-    主人 2026-05-28 P3 设计 + plan-quizzical-crane Step 4 调阈值:
-    Anthropic prompt cache 看 messages 序列 prefix 字节哈希, 不只是 cache_control.
-    任何 query-driven 重排都会让 prefix 字节漂移 → cache miss.
-
-    方案: per-scope anchor checkpoint
-    - 同 scope 多轮间, anchor 不动 → history[anchor:] 前缀字节稳定 → cache hit
-    - 当 history[anchor:] **大幅**超 budget (jump_threshold_ratio × target) 时, anchor 大跳,
-      跳后剩 (1 - cut_ratio) × budget 留余量, 1 次 cache reset, 之后稳定多轮.
-
-    Args:
-        history: 完整 history list (append-only, 时序)
-        scope_id: per-scope 持久化标识 (catty session key)
-        target_tokens: history 段 token budget
-        keep_recent: 末尾必保 N 条 (anchor 不能超过 n - keep_recent)
-        cut_ratio: 触 budget 时砍多大比例 (0.5 = 砍后剩 50% budget, 主人 2026-05-28
-                   调高让 anchor 多撑几轮; 旧值 0.3 跳后剩 70% 下轮立即又破)
-        jump_threshold_ratio: 触跳阈值倍数 (1.5 = window > target × 1.5 才跳, 主人 2026-05-28
-                              新增. 旧 = 1.0 每轮触发; 1.5 = 5-10 轮触发 1 次, cache 命中率飙升)
-
-    Returns:
-        history[new_anchor:] — anchor 之后的部分.
-
-    Cache 行为:
-    - anchor 不变的轮 (大多数, ~每 5-10 轮): prefix 字节稳定 → cache hit
-    - anchor 跳跃的轮 (~每 5-10 轮 1 次): 1 次 cache miss, 之后稳定
-    """
+    """Cache-friendly history trim — anchor checkpoint pattern."""
     n = len(history)
+    anchor_before = _HISTORY_ANCHORS.get(scope_id, 0)
     if n == 0:
+        _set_anchor_observation(
+            scope_id=scope_id,
+            anchor_before=anchor_before,
+            anchor_after=anchor_before,
+            window_tokens=0,
+            trigger_tokens=0,
+            history_len=0,
+            keep_recent=keep_recent,
+            reset_reason="empty_history",
+        )
         return history
 
-    anchor = _HISTORY_ANCHORS.get(scope_id, 0)
-    # 越界保护 (history 被外部修剪过): 重锚到 keep_recent
+    anchor = anchor_before
+    reset_reason = ""
+    # Preserve the existing external-prune correction exactly.
     if anchor >= n:
         anchor = max(n - keep_recent, 0)
         _HISTORY_ANCHORS[scope_id] = anchor
+        reset_reason = "history_truncated"
 
     window = history[anchor:]
     window_tokens = sum(count_tokens(_msg_text(m)) for m in window)
-
-    # 主人 2026-05-28 plan-quizzical-crane Step 4: 触跳用 target × jump_threshold_ratio.
     trigger_tokens = int(target_tokens * jump_threshold_ratio)
     if window_tokens <= trigger_tokens:
-        # 没超 trigger, anchor 不动 → 字节稳定
+        _set_anchor_observation(
+            scope_id=scope_id,
+            anchor_before=anchor_before,
+            anchor_after=anchor,
+            window_tokens=window_tokens,
+            trigger_tokens=trigger_tokens,
+            history_len=n,
+            keep_recent=keep_recent,
+            reset_reason=reset_reason,
+        )
         return window
 
-    # 超 trigger: anchor 大跳, 砍到 (1 - cut_ratio) × target 留余量
     cut_to = max(int(target_tokens * (1.0 - cut_ratio)), 100)
     acc = 0
     new_anchor = anchor
-    # 从末尾倒数累加, 找新 anchor 满足总 ≤ cut_to 且保 keep_recent 条
     for i in range(n - 1, anchor - 1, -1):
         t = count_tokens(_msg_text(history[i]))
         if acc + t > cut_to and (n - i) > keep_recent:
             new_anchor = i + 1
             break
         acc += t
-    # 主人 2026-05-30 cache R3: 跳后落点强制对齐 user 整轮边界 — 让跳后 history 总是从完整一轮
-    # (user→assistant) 开始, 跨轮即便重算 anchor 也字节对齐, 且上游 _filter_soft_refusal_history
-    # 删 assistant 不会让 user/assistant 错位 (spark 特有二次漂移源)。优先向下 snap (保更多/更
-    # cache 友好), 向下到 anchor 都没 user 再向上找; 始终 ≥ anchor (anchor 单调不回退)。
     if 0 <= new_anchor < n and isinstance(history[new_anchor], dict) \
             and history[new_anchor].get("role") != "user":
         snapped = None
-        for j in range(new_anchor, anchor - 1, -1):  # 向下找最近 user (≥ anchor)
+        for j in range(new_anchor, anchor - 1, -1):
             if isinstance(history[j], dict) and history[j].get("role") == "user":
                 snapped = j
                 break
         if snapped is None:
-            for j in range(new_anchor + 1, max(n - keep_recent, 0) + 1):  # 向下没有再向上找
+            for j in range(new_anchor + 1, max(n - keep_recent, 0) + 1):
                 if 0 <= j < n and isinstance(history[j], dict) and history[j].get("role") == "user":
                     snapped = j
                     break
         if snapped is not None:
             new_anchor = snapped
-    # 不超过 n - keep_recent (强保 keep_recent 末尾)
     new_anchor = min(max(new_anchor, 0), max(n - keep_recent, 0))
 
     if new_anchor != anchor:
@@ -379,6 +407,17 @@ def monotonic_history_trim(
             "monotonic_trim[%s]: anchor %d→%d (n=%d, budget=%d, kept=%d tok)",
             scope_id, anchor, new_anchor, n, target_tokens, acc,
         )
+    anchor_after = _HISTORY_ANCHORS.get(scope_id, anchor)
+    _set_anchor_observation(
+        scope_id=scope_id,
+        anchor_before=anchor_before,
+        anchor_after=anchor_after,
+        window_tokens=window_tokens,
+        trigger_tokens=trigger_tokens,
+        history_len=n,
+        keep_recent=keep_recent,
+        reset_reason="window_exceeded_trigger" if new_anchor != anchor else reset_reason,
+    )
     return history[new_anchor:]
 
 
@@ -666,6 +705,8 @@ __all__ = [
     "monotonic_history_trim",      # Phase 3 cache-safe anchor checkpoint
     "reset_scope_anchor",
     "get_scope_anchor",
+    "get_anchor_observation",
+    "clear_anchor_observation",
     "select_user_details",
     "select_summary_paragraphs",
     "dynamic_tool_picker",

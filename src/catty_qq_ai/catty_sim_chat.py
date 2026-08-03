@@ -162,7 +162,7 @@ async def _build_full_real_flow_messages(event: Any, key: str, incoming: Any) ->
         special_care_context = ""
 
     try:
-        memory_store.remember_event(event)
+        memory_store.remember_event(event, text=incoming.text)
     except Exception:
         pass
 
@@ -214,7 +214,7 @@ async def _build_full_real_flow_messages(event: Any, key: str, incoming: Any) ->
             dynamic = memory_store.build_dynamic_game_context(game_name, recent_facts_limit=6)
             if dynamic:
                 other_game_contexts.append(
-                    f"本群被标记为《{game_name}》相关。猫猫长期积累的事实记忆:\n{dynamic}"
+                    f"本群被标记为《{game_name}》相关。共享事实记忆:\n{dynamic}"
                 )
     except Exception:
         other_game_contexts = []
@@ -389,9 +389,20 @@ async def sim_chat(
             "stats": {"total_chars": int, "system_chars": int, ...},
         }
     """
-    from . import _build_messages, config as _module_config  # circular-safe deferred
+    from . import (  # circular-safe deferred
+        _build_messages,
+        _persona_reply_context_for_event,
+        config as _module_config,
+    )
     from .message_utils import build_history_key, extract_incoming_message
-    from .openai_client import chat_completion, chat_completion_with_tools
+    from .openai_client import (
+        chat_completion,
+        chat_completion_with_tools,
+        reset_current_persona_reply_context,
+        reset_current_scope_key,
+        set_current_persona_reply_context,
+        set_current_scope_key,
+    )
 
     # 主人 2026-05-28: dev/sim_chat 支持非数字 user_id (e.g. 'owner_test') 用作 mock —
     # 数字直接用, 非数字 hash 出稳定正整数作 fake QQ. group_id 同理.
@@ -506,15 +517,16 @@ async def sim_chat(
 
     reply = "[dry-run: live=False, 未调 AI]"
     if live:
+        _persona_reply_context_token = None
+        _scope_key_token = None
         try:
-            # 主人 2026-05-28: sim_chat 也要 set_current_scope_key, 让 anthropic metadata.user_id
-            # 注入 (cache routing). 主 handle_chat 入口已经 set, 但 sim_chat 是 dev endpoint
-            # 旁路, 不经过 handle_chat → contextvar 是 None → metadata 不发. 这里补上.
-            try:
-                from .openai_client import set_current_scope_key
-                set_current_scope_key(key)
-            except Exception:  # noqa: BLE001
-                pass
+            # sim_chat 绕过 handle_chat；补齐主回复的 scope 和人格上下文，让 tool follow-up /
+            # fallback 保持当前 persona，不会回退 Catty 默认目录。
+            _scope_key_token = set_current_scope_key(key)
+            _sim_reply_context = _persona_reply_context_for_event(event)
+            _persona_reply_context_token = set_current_persona_reply_context(
+                _sim_reply_context
+            )
             # 主人 2026-05-29 Round 15: prefer_spark=True 时走真实 NSFW spark 路径
             # (chat_completion_codex_instant), 跟生产完全一致 (sys_md5=7ebd7276 不是 6a6b6972).
             if _prefer_spark:
@@ -532,20 +544,30 @@ async def sim_chat(
             # 之前 chat_completion 无 tools, sim 测出 99% 但生产 65% 差距大.
             elif with_tools:
                 try:
-                    from . import memory_store, affection_store
-                    from .tools import (
-                        available_tool_schemas, execute_tool_call, ToolContext,
-                        should_force_imagegen_tool,
+                    from . import (
+                        _available_tool_schemas_for_persona,
+                        _conversation_queue_key,
+                        _execute_schema_gated_tool_call,
+                        _recent_image_urls_for_scope,
+                        affection_store,
+                        memory_store,
+                        story_arc_store,
                     )
+                    from .tools import ToolContext, should_force_imagegen_tool
                     from nonebot.adapters.onebot.v11 import PrivateMessageEvent
                     _is_private = isinstance(event, PrivateMessageEvent)
                     _user_text = text
-                    _tools = available_tool_schemas(
+                    _sim_persona = _sim_reply_context.persona
+                    _sim_tool_scope_key = _conversation_queue_key(event)
+                    _sim_input_images = list(getattr(incoming, "image_urls", []) or [])
+                    _sim_recent_images = _recent_image_urls_for_scope(key)
+                    _tools, _allowed_tool_names = _available_tool_schemas_for_persona(
                         cfg,
                         is_private=_is_private,
                         user_text=_user_text,
-                        has_image=bool(getattr(incoming, "has_image", False)),
+                        has_image=bool(_sim_input_images or _sim_recent_images),
                         is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
+                        persona=_sim_persona,
                     )
                     _tool_choice: str | dict[str, object] = "auto"
                     try:
@@ -568,18 +590,35 @@ async def sim_chat(
                     if _force_imagegen:
                         _tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
                     # 构 ToolContext (sim 模式只需基础 3 字段, 其它走 default)
-                    from . import _persona_for_event as _sim_persona_for_event
                     _ctx = ToolContext(
                         config=cfg,
                         memory_store=memory_store,
                         event=event,
-                        persona=_sim_persona_for_event(event),
+                        persona=_sim_persona,
                         affection_store=affection_store,
+                        input_image_urls=_sim_input_images,
+                        recent_image_urls=_sim_recent_images,
                         is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
+                        story_arc_store=(
+                            None
+                            if _sim_persona.feature_disabled("story_arc")
+                            else story_arc_store
+                        ),
+                        scope_key=_sim_tool_scope_key,
                         user_text=_user_text,
                     )
-                    async def _executor(name: str, args_json: str) -> dict[str, object]:
-                        return await execute_tool_call(name, args_json, _ctx)
+                    async def _executor(
+                        name: str,
+                        args_json: str,
+                        *,
+                        _allowed_names: set[str] = _allowed_tool_names,
+                    ) -> dict[str, object]:
+                        return await _execute_schema_gated_tool_call(
+                            name,
+                            args_json,
+                            _ctx,
+                            allowed_names=_allowed_names,
+                        )
                     reply_obj = await chat_completion_with_tools(
                         cfg, messages,
                         tools=_tools,
@@ -599,6 +638,11 @@ async def sim_chat(
                 reply = str(reply_obj or "[AI returned empty]")
         except Exception as exc:  # noqa: BLE001
             reply = f"[sim_chat: chat_completion failed — {type(exc).__name__}: {exc}]"
+        finally:
+            if _persona_reply_context_token is not None:
+                reset_current_persona_reply_context(_persona_reply_context_token)
+            if _scope_key_token is not None:
+                reset_current_scope_key(_scope_key_token)
 
     # 主人 2026-05-29: persist 模式 — 复刻 handle_chat 的 _append_history (主链路同一函数),
     # 让多轮 sim 的 history 真实增长 + 到阈值 trim, 测真实 cache 命中(不再用固定 history).

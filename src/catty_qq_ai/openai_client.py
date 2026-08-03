@@ -3,11 +3,12 @@ from __future__ import annotations
 import asyncio
 import base64
 import contextvars
+import hashlib
 from io import BytesIO
 import json
 import logging
 import time
-from typing import Any
+from typing import Any, Callable
 from urllib.parse import urlparse
 
 import httpx
@@ -68,6 +69,27 @@ def _fallback_is_warm() -> bool:
 ChatMessage = dict[str, Any]
 ToolChoice = str | dict[str, Any]
 
+# Phase 2B: 请求层只接收 PersonaReplyContext duck type，避免反向 import personas 形成循环。
+# 未设置时严格沿用 Catty 老路径，保证已有调用方和 cache/tool 合约不变。
+_current_persona_reply_context_var: contextvars.ContextVar[Any | None] = contextvars.ContextVar(
+    "catty_current_persona_reply_context", default=None,
+)
+
+
+def set_current_persona_reply_context(context: Any | None) -> contextvars.Token:
+    """设置当前 async context 的 PersonaReplyContext duck type。"""
+    return _current_persona_reply_context_var.set(context)
+
+
+def get_current_persona_reply_context() -> Any | None:
+    """读取当前请求的人格回复上下文；None 保持 Catty 兼容路径。"""
+    return _current_persona_reply_context_var.get()
+
+
+def reset_current_persona_reply_context(token: contextvars.Token) -> None:
+    """用 set_current_persona_reply_context 返回的 token 恢复上一个上下文。"""
+    _current_persona_reply_context_var.reset(token)
+
 
 # 主人 2026-06-06: 部分端点 (DeepSeek 思考模型 deepseek-v4-flash 等) 不支持非 "auto" 的
 # tool_choice — 强制 {"type":"function",...} 或 "required" 会 HTTP 400
@@ -120,7 +142,41 @@ _HTTP_5XX_VARIANTS = (
 )
 
 
+def _is_catty_persona_reply_context(context: Any | None) -> bool:
+    if context is None:
+        return True
+    persona = getattr(context, "persona", None)
+    return str(getattr(persona, "name", "") or "").strip().lower() == "catty"
+
+
+def _render_persona_api_transport_reply(
+    context: Any,
+    service_name: str,
+    status_code: int,
+) -> str:
+    catalog = getattr(context, "catalog", None)
+    template = str(getattr(catalog, "api_transport_reply", "") or "").strip()
+    if not template:
+        template = "{service_name}暂时不可用，请稍后再试。"
+
+    render = getattr(context, "render", None)
+    if callable(render):
+        message = str(render(template, service_name=service_name, status_code=status_code)).strip()
+    else:
+        message = template.format(service_name=service_name, status_code=status_code).strip()
+
+    if str(status_code) not in message:
+        message = f"{message}（{status_code}）"
+    if status_code in {401, 403}:
+        message = f"{message} 请检查 API Key 或权限配置。"
+    return message
+
+
 def _catty_http_status_message(service_name: str, status_code: int) -> str:
+    context = get_current_persona_reply_context()
+    if not _is_catty_persona_reply_context(context):
+        return _render_persona_api_transport_reply(context, service_name, status_code)
+
     import random as _random
     if status_code == 503:
         return _random.choice(_HTTP_503_VARIANTS).format(svc=service_name)
@@ -131,6 +187,35 @@ def _catty_http_status_message(service_name: str, status_code: int) -> str:
     if 500 <= status_code < 600:
         return _random.choice(_HTTP_5XX_VARIANTS).format(svc=service_name, code=status_code)
     return f"喵呜，{service_name}请求没过（{status_code}），主人检查一下配置或稍后再试。"
+
+
+_CATTY_TOOL_RESULT_FOLLOW_UP_HINT = (
+    "请基于以上 tool 结果**用笨猫口吻**回答, **绝不**复读 JSON 字段名 "
+    "(如 'long_term_summary' / 'matches' / 'extract' 等), "
+    "**绝不**贴原始字典/数组. 把结果挑出 1-2 个有用点用猫娘语气短句串起来即可."
+)
+_TOOL_RESULT_ANTI_JSON_HINT = (
+    "**绝不**复读 JSON 字段名 (如 'long_term_summary' / 'matches' / 'extract' 等), "
+    "**绝不**贴原始字典/数组。"
+)
+
+
+def _tool_result_follow_up_hint() -> str:
+    context = get_current_persona_reply_context()
+    if _is_catty_persona_reply_context(context):
+        return _CATTY_TOOL_RESULT_FOLLOW_UP_HINT
+
+    catalog = getattr(context, "catalog", None)
+    prefix = str(getattr(catalog, "tool_result_follow_up_instruction", "") or "").strip()
+    if not prefix:
+        prefix = "请根据工具结果直接回复用户。"
+    return f"{prefix} {_TOOL_RESULT_ANTI_JSON_HINT}"
+
+
+def _mc_busy_public_message() -> str:
+    if _is_catty_persona_reply_context(get_current_persona_reply_context()):
+        return "喵呜，MC 群友正在玩游戏中，猫猫这会儿不能用本地脑子顶上来——主人稍等一下再戳。"
+    return "本地服务正被游戏占用，请稍后再试。"
 
 
 def _chat_completions_url(base_url: str) -> str:
@@ -199,6 +284,419 @@ def normalize_openai_tool_schemas(tools: list[dict[str, Any]] | None) -> list[di
                 },
             })
     return out
+
+
+_INVALID_TOOL_CALL_NAME = "__invalid_tool_call__"
+_TOOL_HISTORY_MAX_JSON_CHARS = 12_000
+_TOOL_HISTORY_MAX_ARGUMENT_JSON_CHARS = 4_000
+_TOOL_HISTORY_MAX_STRING_CHARS = 2_000
+_TOOL_HISTORY_MAX_LIST_ITEMS = 24
+_TOOL_HISTORY_MAX_MAPPING_ITEMS = 40
+_TOOL_HISTORY_MAX_DEPTH = 8
+_TOOL_HISTORY_BLOB_MIN_CHARS = 1_024
+_TOOL_HISTORY_SENSITIVE_KEYS = {
+    "api_key",
+    "apikey",
+    "authorization",
+    "access_token",
+    "refresh_token",
+    "token",
+    "secret",
+    "password",
+    "passwd",
+    "credential",
+    "credentials",
+    "cookie",
+    "cookies",
+}
+
+
+def _tool_payload_short_hash(value: str | bytes) -> str:
+    raw = value if isinstance(value, bytes) else value.encode("utf-8", errors="replace")
+    return hashlib.sha256(raw).hexdigest()[:12]
+
+
+def _allowed_tool_names(tools: list[dict[str, Any]]) -> set[str]:
+    names: set[str] = set()
+    for schema in normalize_openai_tool_schemas(tools):
+        function = schema.get("function")
+        name = function.get("name") if isinstance(function, dict) else None
+        if isinstance(name, str) and name.strip():
+            names.add(name.strip())
+    return names
+
+
+def _is_valid_tool_function_name(name: str) -> bool:
+    return bool(name) and len(name) <= 64 and all(
+        char.isascii() and (char.isalnum() or char in {"_", "-"})
+        for char in name
+    )
+
+
+def _coerce_tool_arguments(arguments: Any) -> str:
+    if isinstance(arguments, str):
+        return arguments
+    try:
+        return json.dumps(arguments if arguments is not None else {}, ensure_ascii=False)
+    except (TypeError, ValueError):
+        return "{}"
+
+
+def _normalize_assistant_tool_calls(
+    raw_tool_calls: Any,
+    *,
+    round_idx: int,
+) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
+    raw_calls = raw_tool_calls if isinstance(raw_tool_calls, list) else [raw_tool_calls]
+    normalized_calls: list[dict[str, Any]] = []
+    call_specs: list[dict[str, str]] = []
+    seen_ids: set[str] = set()
+
+    for call_idx, raw_call in enumerate(raw_calls):
+        call = raw_call if isinstance(raw_call, dict) else {}
+        raw_id = call.get("id")
+        call_id = raw_id.strip() if isinstance(raw_id, str) else ""
+        if not call_id or call_id in seen_ids:
+            base_id = f"catty_tool_call_{round_idx}_{call_idx}"
+            call_id = base_id
+            suffix = 1
+            while call_id in seen_ids:
+                call_id = f"{base_id}_{suffix}"
+                suffix += 1
+        seen_ids.add(call_id)
+
+        function = call.get("function") if isinstance(raw_call, dict) else None
+        requested_name = ""
+        arguments_json = "{}"
+        error_reason = ""
+        if not isinstance(raw_call, dict):
+            error_reason = "tool_call_not_object"
+        elif call.get("type") not in (None, "function"):
+            error_reason = "unsupported_tool_call_type"
+        elif not isinstance(function, dict):
+            error_reason = "invalid_function"
+        else:
+            raw_name = function.get("name")
+            requested_name = raw_name.strip() if isinstance(raw_name, str) else ""
+            arguments_json = _coerce_tool_arguments(function.get("arguments"))
+            if not _is_valid_tool_function_name(requested_name):
+                error_reason = "invalid_function_name"
+
+        history_name = requested_name if not error_reason else _INVALID_TOOL_CALL_NAME
+        normalized_calls.append(
+            {
+                "id": call_id,
+                "type": "function",
+                "function": {
+                    "name": history_name,
+                    "arguments": _serialize_tool_arguments_for_history(arguments_json),
+                },
+            }
+        )
+        call_specs.append(
+            {
+                "id": call_id,
+                "name": history_name,
+                "requested_name": requested_name,
+                "arguments_json": arguments_json,
+                "error_reason": error_reason,
+            }
+        )
+
+    return normalized_calls, call_specs
+
+
+def _tool_argument_log_summary(arguments_json: str) -> tuple[int, str, str]:
+    args_len = len(arguments_json)
+    args_hash = _tool_payload_short_hash(arguments_json)
+    try:
+        parsed = json.loads(arguments_json)
+    except (TypeError, ValueError):
+        return args_len, "<invalid_json>", args_hash
+    if not isinstance(parsed, dict):
+        return args_len, f"<{type(parsed).__name__}>", args_hash
+    fields = sorted(str(field)[:64] for field in parsed)
+    if not fields:
+        return args_len, "<none>", args_hash
+    if len(fields) > 8:
+        return args_len, ",".join(fields[:8]) + f",...(+{len(fields) - 8})", args_hash
+    return args_len, ",".join(fields), args_hash
+
+
+def _tool_call_error(code: str, message: str, **details: Any) -> dict[str, Any]:
+    return {"error": {"code": code, "message": message, **details}}
+
+
+def _is_sensitive_tool_history_key(key: str) -> bool:
+    normalized = key.strip().lower().replace("-", "_")
+    return (
+        normalized in _TOOL_HISTORY_SENSITIVE_KEYS
+        or normalized.endswith(("_api_key", "_token", "_secret", "_password", "_cookie"))
+    )
+
+
+def _tool_history_blob_summary(value: str | bytes, *, kind: str) -> str:
+    length = len(value)
+    return f"<{kind} omitted chars={length} sha256={_tool_payload_short_hash(value)}>"
+
+
+def _looks_like_oversize_blob(value: str) -> bool:
+    compact = "".join(value.split())
+    if len(compact) < _TOOL_HISTORY_BLOB_MIN_CHARS:
+        return False
+    blob_chars = sum(char.isalnum() or char in "+/=_-" for char in compact)
+    return blob_chars / len(compact) >= 0.95
+
+
+def _sanitize_tool_result_for_history(
+    value: Any,
+    *,
+    depth: int = 0,
+    seen: set[int] | None = None,
+) -> Any:
+    if seen is None:
+        seen = set()
+    if depth >= _TOOL_HISTORY_MAX_DEPTH:
+        return {"truncated": "max_depth", "type": type(value).__name__}
+    if isinstance(value, str):
+        lowered = value.lstrip().lower()
+        if lowered.startswith("base64://"):
+            return _tool_history_blob_summary(value, kind="base64")
+        if lowered.startswith("data:"):
+            return _tool_history_blob_summary(value, kind="data_uri")
+        if _looks_like_oversize_blob(value):
+            return _tool_history_blob_summary(value, kind="blob")
+        if len(value) > _TOOL_HISTORY_MAX_STRING_CHARS:
+            return (
+                value[:_TOOL_HISTORY_MAX_STRING_CHARS]
+                + f"...<truncated chars={len(value)} sha256={_tool_payload_short_hash(value)}>"
+            )
+        return value
+    if isinstance(value, (bytes, bytearray, memoryview)):
+        return _tool_history_blob_summary(bytes(value), kind="binary")
+    if value is None or isinstance(value, (bool, int, float)):
+        return value
+    if isinstance(value, dict):
+        identity = id(value)
+        if identity in seen:
+            return "<circular_reference>"
+        seen.add(identity)
+        try:
+            sanitized: dict[str, Any] = {}
+            items = list(value.items())
+            for key, item in items[:_TOOL_HISTORY_MAX_MAPPING_ITEMS]:
+                key_text = key if isinstance(key, str) else f"<{type(key).__name__}>"
+                if key_text.startswith("_short_circuit") or key_text == "_deepseek_plan":
+                    continue
+                safe_key = key_text[:128]
+                if _is_sensitive_tool_history_key(key_text):
+                    sanitized[safe_key] = "<redacted>"
+                else:
+                    sanitized[safe_key] = _sanitize_tool_result_for_history(
+                        item,
+                        depth=depth + 1,
+                        seen=seen,
+                    )
+            if len(items) > _TOOL_HISTORY_MAX_MAPPING_ITEMS:
+                sanitized["_catty_history_truncated_fields"] = len(items) - _TOOL_HISTORY_MAX_MAPPING_ITEMS
+            return sanitized
+        finally:
+            seen.discard(identity)
+    if isinstance(value, (list, tuple, set, frozenset)):
+        identity = id(value)
+        if identity in seen:
+            return "<circular_reference>"
+        seen.add(identity)
+        try:
+            items = list(value)
+            sanitized = [
+                _sanitize_tool_result_for_history(item, depth=depth + 1, seen=seen)
+                for item in items[:_TOOL_HISTORY_MAX_LIST_ITEMS]
+            ]
+            if len(items) > _TOOL_HISTORY_MAX_LIST_ITEMS:
+                sanitized.append(
+                    {
+                        "truncated_items": len(items) - _TOOL_HISTORY_MAX_LIST_ITEMS,
+                    }
+                )
+            return sanitized
+        finally:
+            seen.discard(identity)
+    return f"<non_json_value type={type(value).__name__}>"
+
+
+def _serialize_tool_result_for_history(payload: Any) -> str:
+    sanitized = _sanitize_tool_result_for_history(payload)
+    try:
+        content = json.dumps(
+            sanitized,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+    except (TypeError, ValueError):
+        content = json.dumps(
+            _tool_call_error(
+                "tool_result_not_serializable",
+                "Tool result could not be serialized for history.",
+            ),
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+    if len(content) <= _TOOL_HISTORY_MAX_JSON_CHARS:
+        return content
+    return json.dumps(
+        {
+            "truncated": True,
+            "reason": "tool_result_exceeded_history_budget",
+            "json_chars": len(content),
+            "sha256": _tool_payload_short_hash(content),
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+
+
+def _serialize_tool_arguments_for_history(arguments_json: str) -> str:
+    try:
+        parsed = json.loads(arguments_json)
+    except (TypeError, ValueError):
+        return json.dumps(
+            {
+                "invalid": True,
+                "chars": len(arguments_json),
+                "sha256": _tool_payload_short_hash(arguments_json),
+            },
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+
+    if not isinstance(parsed, dict):
+        return json.dumps(
+            {
+                "invalid": True,
+                "chars": len(arguments_json),
+                "sha256": _tool_payload_short_hash(arguments_json),
+            },
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+
+    sanitized = _sanitize_tool_result_for_history(parsed)
+    try:
+        content = json.dumps(
+            sanitized,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+    except (TypeError, ValueError):
+        return json.dumps(
+            {
+                "invalid": True,
+                "chars": len(arguments_json),
+                "sha256": _tool_payload_short_hash(arguments_json),
+            },
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+    if len(content) <= _TOOL_HISTORY_MAX_ARGUMENT_JSON_CHARS:
+        return content
+    return json.dumps(
+        {
+            "truncated": True,
+            "reason": "tool_arguments_exceeded_history_budget",
+            "json_chars": len(content),
+            "sha256": _tool_payload_short_hash(content),
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+
+
+async def _execute_tool_calls(
+    tool_executor: Any,
+    calls: list[dict[str, str]],
+) -> list[Any]:
+    async def _gather_compatibly() -> list[Any]:
+        return await asyncio.gather(
+            *[
+                tool_executor(call["name"], call["arguments_json"])
+                for call in calls
+            ],
+            return_exceptions=True,
+        )
+
+    async def _execute_serially() -> list[Any]:
+        results: list[Any] = []
+        for call in calls:
+            try:
+                results.append(
+                    await tool_executor(call["name"], call["arguments_json"])
+                )
+            except Exception as exc:  # noqa: BLE001
+                results.append(exc)
+        return results
+
+    try:
+        from . import tools as tools_module
+    except Exception as exc:  # noqa: BLE001
+        _logger.warning(
+            "tool scheduling compatibility fallback: .tools import failed (%s); "
+            "executing %d calls serially",
+            exc.__class__.__name__,
+            len(calls),
+        )
+        return await _execute_serially()
+    tool_execution_mode = getattr(tools_module, "tool_execution_mode", None)
+    if not callable(tool_execution_mode):
+        _logger.warning(
+            "tool scheduling hook missing after .tools import; treating %d calls as serial side effects",
+            len(calls),
+        )
+
+    results: list[Any] = [None] * len(calls)
+    pending_reads: list[int] = []
+
+    async def _flush_reads() -> None:
+        if not pending_reads:
+            return
+        indexes = tuple(pending_reads)
+        pending_reads.clear()
+        read_results = await asyncio.gather(
+            *[
+                tool_executor(calls[index]["name"], calls[index]["arguments_json"])
+                for index in indexes
+            ],
+            return_exceptions=True,
+        )
+        for index, result in zip(indexes, read_results):
+            results[index] = result
+
+    for index, call in enumerate(calls):
+        mode: Any = None
+        if callable(tool_execution_mode):
+            try:
+                mode = tool_execution_mode(call["name"])
+            except Exception as exc:  # noqa: BLE001
+                _logger.warning(
+                    "tool scheduling hook failed for %s (%s); treating call as a serial side effect",
+                    call["name"],
+                    exc.__class__.__name__,
+                )
+        if isinstance(mode, str) and mode.strip().lower() == "read":
+            pending_reads.append(index)
+            continue
+        await _flush_reads()
+        try:
+            results[index] = await tool_executor(
+                call["name"],
+                call["arguments_json"],
+            )
+        except Exception as exc:  # noqa: BLE001
+            results[index] = exc
+    await _flush_reads()
+    return results
 
 
 def _ollama_chat_url(base_url: str) -> str:
@@ -488,6 +986,24 @@ def get_current_scope_key() -> str | None:
     return _current_scope_key_var.get()
 
 
+def reset_current_scope_key(token: contextvars.Token) -> None:
+    """恢复 `set_current_scope_key()` 之前的 scope，供旁路/sim 调用显式收口。"""
+    _current_scope_key_var.reset(token)
+
+
+# Request-local cache diagnostics are populated only after the final wire payload
+# exists, then reset after the HTTP request path completes.
+_current_cache_request_diagnostics_var: contextvars.ContextVar[dict[str, Any] | None] = contextvars.ContextVar(
+    "catty_current_cache_request_diagnostics",
+    default=None,
+)
+
+
+def _get_current_cache_request_diagnostics() -> dict[str, Any] | None:
+    diagnostics = _current_cache_request_diagnostics_var.get()
+    return dict(diagnostics) if isinstance(diagnostics, dict) else None
+
+
 # 主人 2026-08-02: persona 级主模型覆写保留, 机机已统一走 deepseek-v4-flash。
 # 同 scope_key 模式: handle_chat 入口按 persona set, 主回复路径 (OpenAI-compat) 读取.
 # 只覆盖 catty_openai_model 的主回复调用点; native /v1/messages、filter/vision/audit/
@@ -505,6 +1021,11 @@ def set_current_model_override(model: str | None) -> contextvars.Token:
 
 def get_current_model_override() -> str | None:
     return _current_model_override_var.get()
+
+
+def reset_current_model_override(token: contextvars.Token) -> None:
+    """恢复 `set_current_model_override()` 之前的模型覆盖。"""
+    _current_model_override_var.reset(token)
 
 
 def _effective_main_model(config: Config) -> str:
@@ -586,15 +1107,25 @@ def set_reply_distill_hook(fn: Any) -> None:
     _reply_distill_hook = fn
 
 
-def set_current_distill_context(user_text: str | None, terms: list[str] | None) -> None:
+def set_current_distill_context(
+    user_text: str | None,
+    terms: list[str] | None,
+) -> Callable[[], None]:
     """bot handler 入口 (handle_chat) 调: 记下当前轮干净 user 原文 + 脱敏 terms.
 
-    只有 set 过的 async context 才会触发蒸馏 — 后台总结 / dev sim / 分类判断路径不 set,
+    只有 set 过的 async context 才会触发蒸馏 — 后台总结 / sim_chat / 分类判断路径不 set,
     自然被 _maybe_distill_reply 的安全阀挡掉, 不会把非聊天内容污染进 L3.
+
+    返回一个恢复前序 context 的回调，方便请求生命周期挂到 ExitStack。
     """
-    _current_distill_ctx_var.set(
+    token = _current_distill_ctx_var.set(
         {"user_text": user_text or "", "terms": list(terms or [])}
     )
+
+    def _clear() -> None:
+        _current_distill_ctx_var.reset(token)
+
+    return _clear
 
 
 def clear_current_distill_context() -> None:
@@ -738,6 +1269,163 @@ def _get_runtime_config() -> Any:
         return None
 
 
+def _cache_request_dump_enabled() -> bool:
+    """Return the single default-off cache diagnostic switch."""
+    config = _get_runtime_config()
+    return bool(getattr(config, "catty_cache_diag_enabled", False)) if config is not None else False
+
+
+def _cache_scope_type(scope: str) -> str:
+    if scope.startswith("private:"):
+        return "private"
+    if scope.startswith("group:"):
+        return "group"
+    if scope.startswith("summary:"):
+        return "summary"
+    return "unknown"
+
+
+def _cache_persona_name() -> str:
+    context = get_current_persona_reply_context()
+    persona = getattr(context, "persona", None) if context is not None else None
+    name = str(getattr(persona, "name", "") or "").strip()
+    return name or "catty"
+
+
+def _canonical_cache_diagnostic_sha256(value: Any) -> str:
+    try:
+        from .cache_metrics import canonical_sha256
+
+        return canonical_sha256(value)
+    except Exception:  # noqa: BLE001
+        try:
+            encoded = json.dumps(
+                value,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+                default=str,
+            ).encode("utf-8")
+        except (TypeError, ValueError):
+            encoded = repr(value).encode("utf-8", errors="replace")
+        return hashlib.sha256(encoded).hexdigest()
+
+
+def _wire_tool_hash(tools: Any) -> str:
+    """Hash normalized OpenAI wire schemas, not the caller's source shape."""
+    schemas = normalize_openai_tool_schemas(tools if isinstance(tools, list) else None)
+    return _canonical_cache_diagnostic_sha256(schemas)
+
+
+def _payload_prefix_hashes(messages: Any) -> tuple[str, str, str]:
+    if not isinstance(messages, list) or not messages:
+        return "", "", ""
+    leading_system: list[dict[str, Any]] = []
+    for message in messages:
+        if not isinstance(message, dict) or message.get("role") != "system":
+            break
+        leading_system.append(message)
+    first = messages[0] if isinstance(messages[0], dict) else {"value": messages[0]}
+    end = messages[-1] if isinstance(messages[-1], dict) else {}
+    end_role = str(end.get("role") or "")
+    return (
+        _canonical_cache_diagnostic_sha256(leading_system) if leading_system else "",
+        _canonical_cache_diagnostic_sha256(first),
+        end_role,
+    )
+
+
+def _build_cache_request_diagnostics(
+    *,
+    base_url: str,
+    model: str,
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    messages = payload.get("messages")
+    final_messages = messages if isinstance(messages, list) else []
+    try:
+        from .prompt_cache import detect_provider
+
+        provider = detect_provider(base_url, model)
+    except Exception:  # noqa: BLE001
+        provider = "other"
+    scope = get_current_scope_key() or ""
+    try:
+        from .cache_metrics import build_cohort_metadata, compute_warm_fields
+
+        _msgs, _hist, warm = compute_warm_fields(final_messages)
+    except Exception:  # noqa: BLE001
+        warm = 0
+    try:
+        from .nlu.prompt_compressor import get_anchor_observation
+
+        anchor = get_anchor_observation()
+    except Exception:  # noqa: BLE001
+        anchor = None
+    wire_tool_hash = _wire_tool_hash(payload.get("tools"))
+    prefix_sys_hash, prefix_first_hash, message_end_role = _payload_prefix_hashes(final_messages)
+    diagnostics: dict[str, Any] = {
+        "provider": provider,
+        "route": "openai_compat",
+        "scope_type": _cache_scope_type(scope),
+        "persona": _cache_persona_name(),
+        "wire_tool_hash": wire_tool_hash,
+        "tool_count": len(payload.get("tools") or []),
+        "stream": bool(payload.get("stream")),
+        "message_end_role": message_end_role,
+        "prefix_sys_hash": prefix_sys_hash,
+        "prefix_first_hash": prefix_first_hash,
+        "anchor": anchor,
+    }
+    try:
+        diagnostics["cohort_metadata"] = build_cohort_metadata(
+            provider=provider,
+            model=model,
+            route=diagnostics["route"],
+            scope_type=diagnostics["scope_type"],
+            persona=diagnostics["persona"],
+            warm=warm,
+            tool_set_hash=wire_tool_hash,
+            anchor_changed=bool((anchor or {}).get("anchor_changed", False)),
+        )
+    except Exception:  # noqa: BLE001
+        diagnostics["cohort_metadata"] = {}
+    return diagnostics
+
+
+def _record_cache_cohort_diagnostics(
+    request_diagnostics: dict[str, Any] | None,
+    *,
+    hit_tok: int,
+    miss_tok: int,
+    create_tok: int,
+) -> dict[str, Any] | None:
+    if not request_diagnostics:
+        return None
+    diagnostics = dict(request_diagnostics)
+    metadata = diagnostics.get("cohort_metadata")
+    if not isinstance(metadata, dict):
+        return diagnostics
+    try:
+        from .cache_metrics import record_cohort_hit
+
+        stats = record_cohort_hit(
+            metadata,
+            hit_tok,
+            miss_tok,
+            create_tok,
+            unavoidable_current_turn_tokens=diagnostics.get("unavoidable_current_turn_tokens"),
+        )
+    except Exception:  # noqa: BLE001
+        return diagnostics
+    diagnostics.update({
+        "cohort": stats.cohort_key,
+        "actual_hit_rate": stats.this_rate,
+        "normalized_kpi": stats.normalized_rate,
+    })
+    return diagnostics
+
+
 def _log_cache_stats(
     data: dict[str, Any],
     model: str,
@@ -779,12 +1467,19 @@ def _log_cache_stats(
         _hit_scope = get_current_scope_key() or ""
     except Exception:  # noqa: BLE001
         _hit_scope = ""
+    _request_diagnostics = _get_current_cache_request_diagnostics()
 
     # === (1) DeepSeek 风格 ===
     ds_hit = int(usage.get("prompt_cache_hit_tokens") or 0)
     ds_miss = int(usage.get("prompt_cache_miss_tokens") or 0)
     if ds_hit or ds_miss:
         stats = record_hit(_provider, model, ds_hit, ds_miss, 0)
+        _cohort_diagnostics = _record_cache_cohort_diagnostics(
+            _request_diagnostics,
+            hit_tok=ds_hit,
+            miss_tok=ds_miss,
+            create_tok=0,
+        )
         _logger.info(
             f"cache stats(deepseek) model={model[:20]} hit={ds_hit} "
             f"miss={ds_miss} hit_rate={stats.this_rate:.0%} "
@@ -804,6 +1499,7 @@ def _log_cache_stats(
                 hist=_hist,
                 warm=_warm,
                 scope=_hit_scope,
+                diagnostics=_cohort_diagnostics,
             ),
         )
         # rolling 命中率连续 3 次 < 90% → warn (主人目标 95-98%)
@@ -816,7 +1512,12 @@ def _log_cache_stats(
         try:
             from . import dashboard_state as _dash
 
-            _dash.push_cache_stats(_hit_scope or model, usage, model=model)
+            _dash.push_cache_stats(
+                _hit_scope or model,
+                usage,
+                model=model,
+                diagnostics=_cohort_diagnostics,
+            )
         except Exception:  # noqa: BLE001
             pass
         return
@@ -834,6 +1535,12 @@ def _log_cache_stats(
     if total_input <= 0:
         return
     stats = record_hit(_provider, model, cache_read, input_tokens, cache_create)
+    _cohort_diagnostics = _record_cache_cohort_diagnostics(
+        _request_diagnostics,
+        hit_tok=cache_read,
+        miss_tok=input_tokens,
+        create_tok=cache_create,
+    )
     _logger.info(
         f"cache stats model={model[:20]} read={cache_read} create={cache_create} "
         f"new={input_tokens} hit={stats.this_rate:.0%}"
@@ -850,6 +1557,7 @@ def _log_cache_stats(
             hist=_hist,
             warm=_warm,
             scope=_hit_scope,
+            diagnostics=_cohort_diagnostics,
         ),
     )
     if stats.should_warn:
@@ -862,7 +1570,12 @@ def _log_cache_stats(
     try:
         from . import dashboard_state as _dash
 
-        _dash.push_cache_stats(_hit_scope or model, usage, model=model)
+        _dash.push_cache_stats(
+            _hit_scope or model,
+            usage,
+            model=model,
+            diagnostics=_cohort_diagnostics,
+        )
     except Exception:  # noqa: BLE001
         pass
 
@@ -1315,44 +2028,64 @@ async def _post_chat_completion_raw(
     # 看到 67% / 27% 是各自独立 cache cold 的结果).
     # DeepSeek 文档明确: "多请求公共前缀检测落盘" — 不传 user 时自动跨请求共享 prefix.
 
-    # 主人 2026-05-29 Round 10: dump 完整 payload 到磁盘 (验证 user/stream 等改动真生效)
-    # 放在 payload 完整构造之后, 在 retry loop 之前.
-    try:
-        import time as _t
-        from pathlib import Path as _Path
-        _dump_root = _Path("D:/CattyQQAI/logs/req_dumps")
-        _dump_root.mkdir(parents=True, exist_ok=True)
-        _scope_safe = (get_current_scope_key() or "noscope").replace(
-            ":", "_",
-        ).replace("/", "_").replace("\\", "_")
-        _ts = int(_t.time() * 1000)
-        _dump = _dump_root / f"{_scope_safe}_{_ts}.json"
-        _dump_obj = {
-            "model": model,
-            "base_url_head": base_url[:50],
-            "payload_keys": sorted(payload.keys()),
-            "payload_user": payload.get("user"),
-            "payload_stream": payload.get("stream", False),
-            "stream_param": stream,
-            "enable_cache_param": enable_cache,
-            "scope_key": get_current_scope_key(),
-            "messages": messages,
-            "tools": tools,
-        }
-        _dump_str = json.dumps(_dump_obj, ensure_ascii=False, indent=2, default=str)
-        _dump.write_text(_dump_str, encoding="utf-8")
-        _olds = sorted(_dump_root.glob(f"{_scope_safe}_*.json"))
-        for _o in _olds[:-8]:
-            try:
-                _o.unlink()
-            except Exception:  # noqa: BLE001
-                pass
-    except Exception as _dump_exc:  # noqa: BLE001
-        import traceback as _tb
-        _logger.warning(
-            f"req dump failed: {type(_dump_exc).__name__}: {_dump_exc}\n"
-            + _tb.format_exc()[:600],
-        )
+    _request_cache_diagnostics = _build_cache_request_diagnostics(
+        base_url=base_url,
+        model=model,
+        payload=payload,
+    )
+    _cache_diagnostics_token = _current_cache_request_diagnostics_var.set(
+        _request_cache_diagnostics,
+    )
+
+    # Full request dumps remain available, but only when the single diagnostic
+    # switch is explicitly enabled. The old messages/tools body is preserved.
+    if _cache_request_dump_enabled():
+        try:
+            import time as _t
+            from pathlib import Path as _Path
+
+            _dump_root = _Path("D:/CattyQQAI/logs/req_dumps")
+            _dump_root.mkdir(parents=True, exist_ok=True)
+            _scope_safe = (get_current_scope_key() or "noscope").replace(
+                ":", "_",
+            ).replace("/", "_").replace("\\", "_")
+            _ts = int(_t.time() * 1000)
+            _dump = _dump_root / f"{_scope_safe}_{_ts}.json"
+            _dump_obj = {
+                "model": model,
+                "base_url_head": base_url[:50],
+                "payload_keys": sorted(payload.keys()),
+                "payload_user": payload.get("user"),
+                "payload_stream": payload.get("stream", False),
+                "stream_param": stream,
+                "enable_cache_param": enable_cache,
+                "scope_key": get_current_scope_key(),
+                "messages": messages,
+                "tools": tools,
+                "cohort": _request_cache_diagnostics.get("cohort_metadata"),
+                "wire_tool_hash": _request_cache_diagnostics.get("wire_tool_hash"),
+                "prefix_metadata": {
+                    "prefix_sys_hash": _request_cache_diagnostics.get("prefix_sys_hash"),
+                    "prefix_first_hash": _request_cache_diagnostics.get("prefix_first_hash"),
+                    "message_end_role": _request_cache_diagnostics.get("message_end_role"),
+                },
+                "cache_diagnostics": _request_cache_diagnostics,
+            }
+            _dump_str = json.dumps(_dump_obj, ensure_ascii=False, indent=2, default=str)
+            _dump.write_text(_dump_str, encoding="utf-8")
+            _olds = sorted(_dump_root.glob(f"{_scope_safe}_*.json"))
+            for _o in _olds[:-8]:
+                try:
+                    _o.unlink()
+                except Exception:  # noqa: BLE001
+                    pass
+        except Exception as _dump_exc:  # noqa: BLE001
+            import traceback as _tb
+
+            _logger.warning(
+                f"req dump failed: {type(_dump_exc).__name__}: {_dump_exc}\n"
+                + _tb.format_exc()[:600],
+            )
 
     # === Dashboard stream lifecycle hook (DeepSeek / OpenAI compat 路径) ===
     # 主人 2026-05-28: 让非 Anthropic 路径也能在 dashboard 上看到对话.
@@ -1497,6 +2230,15 @@ async def _post_chat_completion_raw(
             try:
                 from . import dashboard_state as _dash_mod2
                 _dash_mod2.end_stream(_dash_stream_id)
+            except Exception:  # noqa: BLE001
+                pass
+        try:
+            _current_cache_request_diagnostics_var.reset(_cache_diagnostics_token)
+        finally:
+            try:
+                from .nlu.prompt_compressor import clear_anchor_observation
+
+                clear_anchor_observation()
             except Exception:  # noqa: BLE001
                 pass
 
@@ -1684,7 +2426,7 @@ async def _check_mc_gate_or_raise(config: Config) -> None:
     if has_players:
         _logger.info("MC gate: players online at %s:%d, refusing local fallback", host, port)
         raise MCBusyError(
-            "喵呜，MC 群友正在玩游戏中，猫猫这会儿不能用本地脑子顶上来——主人稍等一下再戳。",
+            _mc_busy_public_message(),
             "MC has players online; local 7B fallback is gated off to protect game performance.",
         )
 
@@ -1879,6 +2621,7 @@ async def chat_completion_with_tools(
         _logger.info("tool_chat: first round tool_choice forced: %s", tool_choice)
 
     history: list[ChatMessage] = list(messages)
+    allowed_tool_names = _allowed_tool_names(tools)
 
     # 主人 2026-06-06: 发一轮请求 (按当前路由选端点)。抽成内部 helper, 以便强制 tool_choice 被
     # 端点拒绝时能带着同一批 tools 用 "auto" 无缝重试本轮 (而不是丢掉工具降级成纯聊天)。
@@ -2009,12 +2752,18 @@ async def chat_completion_with_tools(
             _maybe_distill_reply(_reply, source="deepseek")
             return _reply
 
-        # 协议要求:把 assistant 含 tool_calls 的消息原样写回 history
+        normalized_tool_calls, call_specs = _normalize_assistant_tool_calls(
+            tool_calls,
+            round_idx=round_idx,
+        )
+
+        # Normalize missing ids and malformed function envelopes before history writes so
+        # every assistant tool call has an explicit role=tool response in this round.
         assistant_msg: dict[str, Any] = {
             "role": "assistant",
-            "tool_calls": tool_calls,
+            "tool_calls": normalized_tool_calls,
         }
-        # 保留 content(可能为 None / 空字符串都行,OpenAI 协议允许)
+        # Preserve content (None and empty strings are both valid OpenAI protocol values).
         if isinstance(message.get("content"), (str, list)):
             assistant_msg["content"] = message["content"]
         else:
@@ -2023,58 +2772,78 @@ async def chat_completion_with_tools(
             assistant_msg["reasoning_content"] = message["reasoning_content"]
         history.append(assistant_msg)
 
-        # 限制每轮最多执行 N 个 tool_call,超出的直接回 truncated 提示
-        executed: list[tuple[str, str, str]] = []  # (call_id, name, args_json)
-        for call in tool_calls[: max(1, max_calls_per_round)]:
-            if not isinstance(call, dict):
-                continue
-            call_id = str(call.get("id") or "").strip()
-            func = call.get("function") if isinstance(call.get("function"), dict) else {}
-            name = str(func.get("name") or "").strip()
-            args_json = func.get("arguments")
-            if not isinstance(args_json, str):
-                try:
-                    args_json = json.dumps(args_json or {}, ensure_ascii=False)
-                except (TypeError, ValueError):
-                    args_json = "{}"
-            if not call_id or not name:
-                continue
-            executed.append((call_id, name, args_json))
-
-        # 并发执行 tool calls(每个都自己有 TTL 缓存,不会真的并发打爆 memory_store)
-        if executed:
-            # info-level 可观察性:每轮记录 AI 触发了哪些 tool + 参数前缀,
-            # 不输出完整 args(NSFW 搜索/笔记内容可能敏感,只截前 80 字看意图)。
-            for _call_id, name, args_json in executed:
-                _aj = args_json or ""
-                _logger.info(
-                    "tool_call: %s args_len=%d args=%s%s",
-                    name, len(_aj), _aj[:400],
-                    f"...(+{len(_aj)-400} chars)" if len(_aj) > 400 else "",
+        call_limit = max(1, max_calls_per_round)
+        tool_payloads: dict[str, Any] = {}
+        calls_to_execute: list[dict[str, str]] = []
+        execution_call_ids: set[str] = set()
+        for call_idx, call in enumerate(call_specs):
+            args_len, fields, args_hash = _tool_argument_log_summary(call["arguments_json"])
+            _logger.info(
+                "tool_call: name=%s args_len=%d args_fields=%s args_sha256=%s",
+                call["name"],
+                args_len,
+                fields,
+                args_hash,
+            )
+            if call_idx >= call_limit:
+                tool_payloads[call["id"]] = _tool_call_error(
+                    "tool_call_truncated",
+                    "Tool call was not executed because the per-round call limit was reached.",
+                    max_calls_per_round=call_limit,
                 )
-        tool_results = await asyncio.gather(
-            *[tool_executor(name, args_json) for _call_id, name, args_json in executed],
-            return_exceptions=True,
-        )
-        # Phase B1: 收集成功的 tool result 给 cascade 检查用
+            elif call["error_reason"]:
+                tool_payloads[call["id"]] = _tool_call_error(
+                    "invalid_tool_call",
+                    "Tool call must include a valid function object and function name.",
+                    reason=call["error_reason"],
+                )
+            elif call["name"] not in allowed_tool_names:
+                tool_payloads[call["id"]] = _tool_call_error(
+                    "tool_not_allowed",
+                    "The requested tool was not exposed for this request.",
+                    requested_tool=call["name"],
+                )
+            else:
+                calls_to_execute.append(call)
+                execution_call_ids.add(call["id"])
+
+        if calls_to_execute:
+            tool_results = await _execute_tool_calls(tool_executor, calls_to_execute)
+            for call, result in zip(calls_to_execute, tool_results):
+                tool_payloads[call["id"]] = result
+
+        # Phase B1: collect full successful results for cascade checks. History receives
+        # only the safe, bounded projection below; short-circuit checks keep full payloads.
         cascade_inputs: list[tuple[str, Any]] = []
-        # 主人 2026-05-29: tool short-circuit — executor return dict 含 "_short_circuit_reply"
-        # 字段时, 直接 return 那段文本作为最终回复, 跳过 follow-up 主 AI 调用. 用于
-        # catty_imagegen agent 模式 (tool 内部叫 deepseek 出 prompt+短评 + 把图 push 到群,
-        # 主 sonnet 不需要再发 100K+ follow-up — 杜绝 cache miss 二次炸 + tool_use 配对 500).
-        # 只在单 tool_call 一轮短路, 多 call 时让主 AI 接着综合.
         short_circuit_reply: str | None = None
-        for (call_id, name, _args_json), result in zip(executed, tool_results):
+        for call in call_specs:
+            call_id = call["id"]
+            name = call["name"]
+            result = tool_payloads[call_id]
             if isinstance(result, BaseException):
-                payload = {"error": f"{name} 抛异常: {result.__class__.__name__}: {result}"}
-                _logger.warning("Tool %s raised: %s", name, result)
+                args_len, fields, args_hash = _tool_argument_log_summary(call["arguments_json"])
+                payload = _tool_call_error(
+                    "tool_execution_error",
+                    "Tool executor raised an exception.",
+                    exception_type=result.__class__.__name__,
+                )
+                _logger.warning(
+                    "tool_call failed: name=%s args_len=%d args_fields=%s args_sha256=%s error_type=%s",
+                    name,
+                    args_len,
+                    fields,
+                    args_hash,
+                    result.__class__.__name__,
+                )
             elif not isinstance(result, dict):
                 payload = {"value": result}
             else:
                 payload = result
-                cascade_inputs.append((name, payload))
+                if call_id in execution_call_ids:
+                    cascade_inputs.append((name, payload))
             if (
-                len(executed) == 1
+                len(calls_to_execute) == 1
+                and call_id in execution_call_ids
                 and isinstance(payload, dict)
                 and isinstance(payload.get("_short_circuit_reply"), str)
                 and payload["_short_circuit_reply"].strip()
@@ -2084,21 +2853,12 @@ async def chat_completion_with_tools(
                     "tool_chat: %s short-circuit return (reply_len=%d, skip follow-up)",
                     name, len(short_circuit_reply),
                 )
-            # 写 history 时剥掉 _short_circuit_* 内部 sentinel, 避免污染 follow-up token
-            payload_for_history = (
-                {k: v for k, v in payload.items() if not str(k).startswith("_short_circuit") and k != "_deepseek_plan"}
-                if isinstance(payload, dict) else payload
-            )
-            try:
-                content_str = json.dumps(payload_for_history, ensure_ascii=False)
-            except (TypeError, ValueError):
-                content_str = json.dumps({"error": "结果无法序列化为 JSON"}, ensure_ascii=False)
             history.append(
                 {
                     "role": "tool",
                     "tool_call_id": call_id,
                     "name": name,
-                    "content": content_str,
+                    "content": _serialize_tool_result_for_history(payload),
                 }
             )
 
@@ -2113,27 +2873,26 @@ async def chat_completion_with_tools(
         if cascade_inputs:
             try:
                 from .tool_cascade import build_post_tool_hint
-                _cascade_hint = build_post_tool_hint(cascade_inputs)
+                _cascade_hint = build_post_tool_hint(
+                    cascade_inputs,
+                    allowed_tools=allowed_tool_names,
+                )
                 if _cascade_hint:
                     history.append({"role": "system", "content": _cascade_hint})
             except Exception as _cascade_exc:  # noqa: BLE001
                 _logger.debug("tool_cascade check failed (non-fatal): %s", _cascade_exc)
 
         # Phase B3: tool result post-process hint — 防 AI 拿到 result 后复读 JSON / 列字段名
-        if executed:
+        if call_specs:
             history.append(
                 {
                     "role": "system",
-                    "content": (
-                        "请基于以上 tool 结果**用笨猫口吻**回答, **绝不**复读 JSON 字段名 "
-                        "(如 'long_term_summary' / 'matches' / 'extract' 等), "
-                        "**绝不**贴原始字典/数组. 把结果挑出 1-2 个有用点用猫娘语气短句串起来即可."
-                    ),
+                    "content": _tool_result_follow_up_hint(),
                 }
             )
 
         # 处理被截断的 tool_calls:给模型一条提示,下一轮可以继续
-        truncated = len(tool_calls) - len(executed)
+        truncated = max(len(call_specs) - call_limit, 0)
         if truncated > 0:
             history.append(
                 {

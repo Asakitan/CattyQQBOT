@@ -153,6 +153,154 @@ def _clean_inline_text(value: Any, *, max_chars: int) -> str:
     return " ".join(str(value or "").strip().split())[:max_chars]
 
 
+_DECLARED_NAME_MAX_CHARS = 24
+_DECLARED_NAME_TOKEN = r"[\w\u3400-\u9fff·・.\-]{1,24}"
+_DECLARED_NAME_STRONG_PATTERNS: tuple[re.Pattern[str], ...] = (
+    re.compile(rf"(?:^|[\s,，。!！?？;；])我的?(?:名字|姓名)(?:叫|是)\s*[『「\"']?(?P<name>{_DECLARED_NAME_TOKEN})"),
+    re.compile(rf"(?:^|[\s,，。!！?？;；])我叫\s*[『「\"']?(?P<name>{_DECLARED_NAME_TOKEN})"),
+    re.compile(rf"(?:^|[\s,，。!！?？;；])(?:你|大家)?(?:可以|就)?叫我\s*[『「\"']?(?P<name>{_DECLARED_NAME_TOKEN})"),
+    re.compile(
+        rf"(?:^|[\s,，。!！?？;；])(?:以后|今后|往后|之后|请|就)(?:都|直接|就)?"
+        rf"(?:叫|喊|称呼)我\s*[『「\"']?(?P<name>{_DECLARED_NAME_TOKEN})"
+    ),
+    re.compile(
+        rf"(?:^|[\s,，。!！?？;；])记住(?:一下|了)?[,，\s]*我(?:叫|是)\s*"
+        rf"[『「\"']?(?P<name>{_DECLARED_NAME_TOKEN})"
+    ),
+)
+_DECLARED_NAME_WEAK_PATTERN = re.compile(
+    rf"(?:^|[\s,，。!！?？;；])我是\s*[『「\"']?(?P<name>{_DECLARED_NAME_TOKEN})"
+)
+_DECLARED_NAME_WEAK_HINTS = ("再说一次", "再讲一次", "再介绍一次", "记住", "名字", "姓名")
+_DECLARED_NAME_REJECT_EXACT = {
+    "什么", "啥", "谁", "他", "她", "它", "你", "你们", "大家", "本人",
+    "学生", "老师", "医生", "程序员", "工程师", "主播", "机器人", "AI", "ai", "bot",
+}
+_DECLARED_NAME_REJECT_PARTS = (
+    "过来", "过去", "回来", "去做", "帮我", "帮忙", "吃饭", "睡觉", "上班", "上学",
+    "可以", "能不能", "是不是", "怎么办", "为什么", "怎么", "什么", "不要", "不是",
+    "不想", "不打算", "不准备", "你知道", "你觉得", "你记得", "对吧", "是吧",
+    "对不对", "知不知道", "可不可以", "好不好", "行不行",
+)
+_DECLARED_NAME_WEAK_ROLE_SUFFIXES = (
+    "人", "员", "生", "师", "手", "家", "党", "粉", "控", "用户", "玩家", "主播", "经理", "老板", "男", "女",
+)
+_DECLARED_NAME_CLAUSE_MARKERS = (
+    "现在", "目前", "平时", "住在", "住址", "地址", "家住", "家在", "来自", "家乡", "老家",
+    "今年", "年龄", "年纪", "出生", "生日", "身高", "体重", "星座", "性别",
+    "工作", "职业", "学校", "就读", "电话", "手机号", "微信", "爱好",
+    "然后", "而且", "并且", "同时", "另外", "随后", "喜欢", "正在", "准备", "已经", "最近", "很高兴",
+    "不是", "不想", "不打算", "不准备", "不愿", "不用", "不要",
+    "你知道", "你觉得", "你记得", "你认识", "你说", "对不对", "是不是", "知不知道", "能不能", "可不可以", "好不好", "行不行", "对吧", "是吧",
+    "是", "为", "在", "也", "还",
+)
+_DECLARED_NAME_THIRD_PARTY_PREFIX = re.compile(
+    r"(?:他|她|它|别人|有人|群友|朋友|对方)[^,，。!！?？;；\n]{0,16}(?:说|表示|自称|介绍|告诉|提到)$"
+)
+
+
+def _split_declared_name_candidate(value: Any) -> tuple[str, str]:
+    name = str(value or "").strip()
+    boundary_indexes: list[int] = []
+    for marker in _DECLARED_NAME_CLAUSE_MARKERS:
+        index = name.find(marker)
+        if index > 0:
+            boundary_indexes.append(index)
+    age_match = re.search(r"\d{1,3}岁", name)
+    if age_match and age_match.start() > 0:
+        boundary_indexes.append(age_match.start())
+    if not boundary_indexes:
+        return name, ""
+    boundary = min(boundary_indexes)
+    return name[:boundary], name[boundary:]
+
+
+def _has_third_party_declaration_prefix(value: str) -> bool:
+    prefix = str(value or "").rstrip(" \t\r\n,，。!！?？;；:：")[-32:]
+    return bool(
+        _DECLARED_NAME_THIRD_PARTY_PREFIX.search(prefix)
+        or re.search(r"(?:听说|据说)$", prefix)
+        or re.search(r"(?:不要|别|不许|不能|无需|不用)$", prefix)
+    )
+
+
+def _declared_name_suffix_is_question(value: str) -> bool:
+    compact = str(value or "").strip(" \t\r\n,，:：~～")
+    if not compact:
+        return False
+    normalized = compact.rstrip("。!！;；")
+    normalized = re.sub(r"(?:呀|啊|啦|哦|噢|喔)+$", "", normalized)
+    return bool(
+        "?" in compact
+        or "？" in compact
+        or normalized.endswith(
+            (
+                "吗", "嘛", "么", "呢", "吧", "对不对", "是不是", "知不知道",
+                "能不能", "可不可以", "好不好", "行不行", "你知道", "你觉得", "你记得",
+            )
+        )
+    )
+
+
+def _clean_declared_name(value: Any) -> str:
+    name = str(value or "").strip().strip("『』「」\"'` ")
+    name = re.sub(r"(?:就好|就行|即可|好了|吧|呀|啊|哦|噢|啦|喔|呢|吗)+$", "", name).strip()
+    if not name or len(name) > _DECLARED_NAME_MAX_CHARS:
+        return ""
+    if name.isdigit() or name in _DECLARED_NAME_REJECT_EXACT:
+        return ""
+    if any(part in name for part in _DECLARED_NAME_REJECT_PARTS):
+        return ""
+    if not re.fullmatch(_DECLARED_NAME_TOKEN, name):
+        return ""
+    return name
+
+
+def _extract_declared_name(text: str) -> str:
+    """提取当前用户明确自报的名字；最后一条明确声明覆盖前面的声明。"""
+    body = str(text or "").strip()
+    if not body:
+        return ""
+    matches: list[tuple[int, str]] = []
+    for pattern in _DECLARED_NAME_STRONG_PATTERNS:
+        for match in pattern.finditer(body):
+            prefix = body[:match.start()]
+            suffix = body[match.end():]
+            if _has_third_party_declaration_prefix(prefix):
+                continue
+            raw_name, candidate_suffix = _split_declared_name_candidate(match.group("name"))
+            if _declared_name_suffix_is_question(candidate_suffix + suffix):
+                continue
+            if raw_name.endswith(("吗", "嘛", "么", "吧")):
+                continue
+            name = _clean_declared_name(raw_name)
+            if name:
+                matches.append((match.start(), name))
+    for match in _DECLARED_NAME_WEAK_PATTERN.finditer(body):
+        prefix = body[:match.start()]
+        suffix = body[match.end():]
+        hinted = any(hint in prefix for hint in _DECLARED_NAME_WEAK_HINTS)
+        if _has_third_party_declaration_prefix(prefix):
+            continue
+        raw_name, candidate_suffix = _split_declared_name_candidate(match.group("name"))
+        if _declared_name_suffix_is_question(candidate_suffix + suffix):
+            continue
+        if raw_name.endswith(("吗", "嘛", "么", "吧")):
+            continue
+        name = _clean_declared_name(raw_name)
+        if not hinted:
+            trailing = suffix.strip(" \t\r\n,，。!！;；~～")
+            clause_boundary = suffix.lstrip().startswith((",", "，", "。", "!", "！", ";", "；"))
+            if (trailing and not clause_boundary) or name.endswith(_DECLARED_NAME_WEAK_ROLE_SUFFIXES):
+                continue
+        if name:
+            matches.append((match.start(), name))
+    if not matches:
+        return ""
+    matches.sort(key=lambda item: item[0])
+    return matches[-1][1]
+
+
 def _clean_short_list(value: Any, *, max_items: int, max_chars: int) -> list[str]:
     if value is None:
         return []
@@ -634,7 +782,50 @@ class MemoryStore:
         }
         self._save()
 
-    def remember_event(self, event: MessageEvent) -> None:
+    def remember_declared_name(self, user_id: str, text: str) -> str:
+        """记录用户明确自报的全局名字；同一名字重复出现时不刷新或重复写入。"""
+        if not self.enabled:
+            return ""
+        user_id = str(user_id or "").strip()
+        name = _extract_declared_name(text)
+        if not user_id or not name:
+            return ""
+        user = self._data.setdefault("users", {}).setdefault(user_id, {})
+        if str(user.get("preferred_name") or "").strip() == name:
+            return name
+        user["preferred_name"] = name
+        user["preferred_name_updated_at"] = _now()
+        self._save()
+        return name
+
+    def preferred_name_for(self, user_id: str) -> str:
+        user = self._data.get("users", {}).get(str(user_id), {})
+        if not isinstance(user, dict):
+            return ""
+        return str(user.get("preferred_name") or "").strip()
+
+    def effective_name_for(self, user_id: str, group_id: str = "", *, fallback: str = "") -> str:
+        """返回本轮有效名字：自报名字 > 当前群名片 > 最近平台昵称 > fallback/QQ。"""
+        user_id = str(user_id or "").strip()
+        preferred = self.preferred_name_for(user_id)
+        if preferred:
+            return preferred
+        group_id = str(group_id or "").strip()
+        if group_id:
+            group = self._data.get("groups", {}).get(group_id, {})
+            member = group.get("members", {}).get(user_id, {}) if isinstance(group, dict) else {}
+            if isinstance(member, dict):
+                display = str(member.get("display_name") or "").strip()
+                if display and display != user_id:
+                    return display
+        user = self._data.get("users", {}).get(user_id, {})
+        if isinstance(user, dict):
+            display = str(user.get("display_name") or "").strip()
+            if display and display != user_id:
+                return display
+        return str(fallback or user_id).strip()
+
+    def remember_event(self, event: MessageEvent, text: str = "") -> None:
         if not self.enabled:
             return
         user_id = str(event.user_id)
@@ -644,6 +835,8 @@ class MemoryStore:
         user = users.setdefault(user_id, {})
         user["display_name"] = name
         user["last_seen"] = _now()
+        if text:
+            self.remember_declared_name(user_id, text)
         if user_id in self.user_titles:
             user["title"] = self.user_titles[user_id]
 
@@ -671,9 +864,9 @@ class MemoryStore:
         if not self.enabled or not isinstance(event, GroupMessageEvent):
             return
         group_id = str(event.group_id)
-        self.remember_event(event)
-        group = self._data.setdefault("groups", {}).setdefault(group_id, {})
         content = text.strip() if text.strip() else ("[图片]" if has_image else "")
+        self.remember_event(event, text=content)
+        group = self._data.setdefault("groups", {}).setdefault(group_id, {})
         if not content:
             return
 
@@ -708,8 +901,9 @@ class MemoryStore:
     def remember_private_corpus_event(self, event: MessageEvent, text: str, *, has_image: bool = False) -> None:
         if not self.enabled or not isinstance(event, PrivateMessageEvent):
             return
-        self.remember_event(event)
         user_id = str(event.user_id)
+        content = text.strip() if text.strip() else ("[图片]" if has_image else "")
+        self.remember_event(event, text=content)
         user = self._data.setdefault("users", {}).setdefault(user_id, {})
         user.setdefault("private_summary", "")
         user.setdefault("private_profile", {})
@@ -717,7 +911,6 @@ class MemoryStore:
         if not isinstance(corpus, list):
             corpus = []
             user["private_corpus"] = corpus
-        content = text.strip() if text.strip() else ("[图片]" if has_image else "")
         if not content:
             return
         corpus.append(
@@ -1262,7 +1455,7 @@ class MemoryStore:
             _corpus_max, _summary_max = 2000, 1000
         lines = self._corpus_lines_capped(corpus, _corpus_max)
         prompt = (
-            '压缩QQ群长期记忆，省token。只输出JSON：'
+            '压缩QQ群共享事实摘要，省token。只输出JSON：'
             f'{{"summary":"<={_summary_max}字","group_style":"<=40字","meme_hooks":["群梗关键词"],'
             '"members":[{"user_id":"QQ","display_name":"名",'
             '"gender":"男/女/未知","title":"称呼","impression":"<=30字",'
@@ -1293,7 +1486,7 @@ class MemoryStore:
     def build_proactive_context(self, group_id: str, *, recent_limit: int | None = None) -> str:
         group = self._data.get("groups", {}).get(str(group_id), {})
         if not isinstance(group, dict):
-            return f"当前群：{group_id}；暂无长期记忆。"
+            return f"当前群：{group_id}；暂无共享事实。"
         state = self._proactive_state(group)
         self._expire_proactive_pending(state)
         summary = str(group.get("summary") or "").strip() or "暂无"
@@ -1348,7 +1541,7 @@ class MemoryStore:
             _corpus_max, _summary_max = 2000, 1000
         lines = self._corpus_lines_capped(corpus, _corpus_max, hard_msg_cap=self.private_summary_messages)
         prompt = (
-            '压缩QQ私聊记忆，省token。只输出JSON：'
+            '压缩QQ私聊共享事实摘要，省token。只输出JSON：'
             f'{{"summary":"<={_summary_max}字","profile":{{"gender":"男/女/未知",'
             '"title":"称呼","impression":"<=30字","confidence":"低/中/高"}}}}。'
             "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档的旧梗、一次性玩笑或情绪化片段只作背景，"
@@ -1731,8 +1924,16 @@ class MemoryStore:
         # 多人格: 无「主人」概念的人格 (机机) 强制走 master=0 分支, 不给『主人』称呼指令
         _owner_concept = persona is None or getattr(persona, "owner_concept", True)
         user_id = str(event.user_id)
-        name = _sender_name(event)
+        group_id_for_name = str(event.group_id) if isinstance(event, GroupMessageEvent) else ""
+        name = self.effective_name_for(
+            user_id,
+            group_id_for_name,
+            fallback=_sender_name(event),
+        )
         lines = [f"记忆与称呼参数: user={user_id}/{name}"]
+        preferred_name = self.preferred_name_for(user_id)
+        if preferred_name:
+            lines.append(f"user_declared_name={preferred_name};source=user_declared;scope=global")
 
         if isinstance(event, GroupMessageEvent):
             group_id = str(event.group_id)
@@ -1894,6 +2095,12 @@ class MemoryStore:
             display = str(user.get("display_name") or "").strip()
             if display and "display_name" not in result:
                 result["display_name"] = display
+            preferred_name = str(user.get("preferred_name") or "").strip()
+            if preferred_name:
+                result["preferred_name"] = preferred_name
+                result["effective_name"] = preferred_name
+            elif result.get("display_name"):
+                result["effective_name"] = str(result["display_name"])
             private_profile = user.get("private_profile", {})
             if isinstance(private_profile, dict) and private_profile:
                 if "gender" not in result:
@@ -1906,6 +2113,8 @@ class MemoryStore:
             summary = str(user.get("private_summary") or "").strip()
             if summary:
                 result["private_summary"] = summary[:400]
+        if "effective_name" not in result:
+            result["effective_name"] = str(result.get("display_name") or user_id)
         return result
 
     def recall(
@@ -2439,7 +2648,7 @@ class MemoryStore:
             lines.append(f"- {text}{extra}")
 
         prompt = (
-            "压缩游戏长期记忆,只输出 JSON:"
+            "压缩游戏共享事实,只输出 JSON:"
             '{"summary":"<=2000字"}。'
             "把待压缩条目里**反复出现的事实、版本变化、角色机制、活动规则、玩家共识**整合成结构化摘要,"
             "按主题(角色/版本/活动/机制/玩家)分类列出。"
