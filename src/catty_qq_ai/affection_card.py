@@ -21,7 +21,7 @@ import math
 import random
 import time
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 from PIL import Image, ImageDraw
 
@@ -102,6 +102,9 @@ GLYPHS: dict[str, list[str]] = {
     ],
     "★": [  # ★ 小星星
         "00100","00100","11111","01110","11111","10001","00000"
+    ],
+    "⚡": [  # ⚡ 小闪电 (机机卡粒子/装饰)
+        "00110","00100","01110","11111","00100","01000","00000"
     ],
 }
 
@@ -256,6 +259,136 @@ PUSHEEN_PATH = ASSETS_DIR / "pusheen.png"
 # 让本 module 重新 import,这两个 cache 才会被新算法重建
 _PAW_CROPS_CACHE: list[Image.Image] | None = None
 _PUSHEEN_CACHE: Image.Image | None = None
+
+
+# ── 人格 theme (主人 2026-08-10: 机机签到卡用不稳定发电机元素) ─────────
+# catty = 现有 GBC 黄系 + 猫系元素(Pusheen/猫爪/♥★ 粒子), 默认零改动;
+# fadianji = 紫系 + 发电机 sprite/⚡ 散布/⚡★ 粒子。
+THEMES: dict[str, dict[str, Any]] = {
+    "catty": {
+        "bg": BG, "dark": DARK, "light": LIGHT,
+        "heart_fill": HEART_FILL, "heart_edge": HEART_EDGE,
+        "accent": ACCENT, "green": GREEN, "gray": GRAY,
+        "particle_main": "♥", "particle_sub": "★",
+    },
+    "fadianji": {
+        "bg": (240, 230, 250),          # 淡紫底
+        "dark": (72, 45, 110),          # 深紫(边框/标题/标签)
+        "light": (225, 210, 245),
+        "heart_fill": (155, 110, 230),  # 机机紫心
+        "heart_edge": (110, 70, 180),
+        "accent": (250, 200, 60),       # 电光黄(闪电色)
+        "green": (113, 194, 113),
+        "gray": (150, 130, 170),
+        "particle_main": "⚡", "particle_sub": "★",
+    },
+}
+
+
+def _theme(persona: str | None) -> dict[str, Any]:
+    return THEMES.get(str(persona or "").strip().lower(), THEMES["catty"])
+
+
+# ── 机机像素 sprite (不稳定发电机元素, 代码内嵌不依赖外部素材) ─────────
+# 发电机机身 16x16: 紫光环 + 深紫边框 + 淡紫机身 + 亮黄⚡
+_DIANJI_ROWS: tuple[str, ...] = (
+    "....OOOO........",
+    "...OOOOOO.......",
+    "..OOOOOOOO......",
+    "...OOOOOO.......",
+    "....OOOO........",
+    "................",
+    "...XXXXXX.......",
+    "..XXXXXXXXX.....",
+    ".X11111111XX....",
+    ".X1LLL11111X....",
+    ".X1L1111111X....",
+    ".X111LL1111X....",
+    ".X111L11111X....",
+    "..XXXXXXXXXX....",
+    "................",
+    "................",
+)
+# ⚡ 散布 8x8 (替代猫爪, 左下散开)
+_BOLT_ROWS: tuple[str, ...] = (
+    "...LLL..",
+    "..LLL...",
+    ".LLLLL..",
+    "LLLL....",
+    "..LLL...",
+    "...LL...",
+    "..LL....",
+    "........",
+)
+_DIANJI_COLORS: dict[str, tuple[int, int, int]] = {
+    "O": (200, 170, 255),   # 光环紫
+    "X": (72, 45, 110),     # 深紫边框
+    "1": (155, 110, 230),   # 机身淡紫
+    "L": (250, 200, 60),    # 闪电亮黄
+}
+_DIANJI_CACHE: Image.Image | None = None
+_BOLT_CROPS_CACHE: list[Image.Image] | None = None
+
+
+def _sprite_from_rows(rows: tuple[str, ...], colors: dict[str, tuple[int, int, int]]) -> Image.Image:
+    """字符画 → RGBA 像素 sprite (无 fringe, 天然 alpha 二值)。"""
+    img = Image.new("RGBA", (len(rows[0]), len(rows)), (0, 0, 0, 0))
+    px = img.load()
+    for y, row in enumerate(rows):
+        for x, ch in enumerate(row):
+            c = colors.get(ch)
+            if c is not None:
+                px[x, y] = c + (255,)
+    return img
+
+
+def _load_dianji() -> Image.Image | None:
+    """机机角色 sprite (Pusheen 位替换)。
+
+    优先用 assets/fadianji_chibi.png (主人 2026-08-10 提供的 Q 版机机像素图,
+    紫发/光环/翼耳/触手裙), 缺失时 fallback 代码内嵌的发电机 sprite。
+    """
+    global _DIANJI_CACHE
+    if _DIANJI_CACHE is not None:
+        return _DIANJI_CACHE
+    chibi_path = ASSETS_DIR / "fadianji_chibi.png"
+    if chibi_path.exists():
+        try:
+            img = Image.open(chibi_path).convert("RGBA")
+            img = _alpha_threshold(img, 128)
+            # 主人 2026-08-10 二轮: 裁掉四周透明边, 让机机主体充满 sprite (原图
+            # 1024 方图人物居中, 不裁直接放大到 220px 有效视觉还是偏小)。
+            bbox = img.getbbox()
+            if bbox:
+                img = img.crop(bbox)
+            _DIANJI_CACHE = img
+            return _DIANJI_CACHE
+        except Exception:
+            pass
+    _DIANJI_CACHE = _sprite_from_rows(_DIANJI_ROWS, _DIANJI_COLORS)
+    return _DIANJI_CACHE
+
+
+def _load_scatter_crops(persona: str | None) -> list[Image.Image]:
+    """散布素材入口: catty=猫爪 crops, fadianji=⚡ crops (原/左右镜像/上下镜像 3 变体)。"""
+    global _BOLT_CROPS_CACHE
+    if str(persona or "").strip().lower() == "fadianji":
+        if _BOLT_CROPS_CACHE is None:
+            base = _sprite_from_rows(_BOLT_ROWS, _DIANJI_COLORS)
+            _BOLT_CROPS_CACHE = [
+                base,
+                base.transpose(Image.Transpose.FLIP_LEFT_RIGHT),
+                base.transpose(Image.Transpose.FLIP_TOP_BOTTOM),
+            ]
+        return _BOLT_CROPS_CACHE
+    return _load_paw_crops()
+
+
+def _load_character_sprite(persona: str | None) -> Image.Image | None:
+    """右下角角色 sprite 入口: catty=Pusheen, fadianji=发电机。"""
+    if str(persona or "").strip().lower() == "fadianji":
+        return _load_dianji()
+    return _load_pusheen()
 
 
 def _bbox_overlap(a: tuple[int, int, int, int], b: tuple[int, int, int, int]) -> bool:
@@ -620,12 +753,15 @@ PARTICLE_VY_LARGE = 5   # 每帧上升 px(大画布)
 def _particles_for_frame(
     frame_idx: int, level: int, spawn_anchor_lg: tuple[int, int],
     layout_seed: int,
+    persona: str = "catty",
 ) -> list[tuple[str, tuple[int, int, int], int, int, int, float]]:
     """确定性算出当前帧所有 active 粒子,(char, color, x_lg, y_lg, draw_scale, alpha)。
 
     粒子在每 _particle_spawn_period(level) 帧生成,生命 PARTICLE_LIFETIME 帧。
     deterministic:用 (layout_seed + birth_frame) 当 RNG seed,GIF 重生成参数一致。
     """
+    th = _theme(persona)
+    p_main, p_sub = th["particle_main"], th["particle_sub"]
     period = _particle_spawn_period(level)
     out: list[tuple[str, tuple[int, int, int], int, int, int, float]] = []
     for age in range(PARTICLE_LIFETIME):
@@ -637,11 +773,11 @@ def _particles_for_frame(
         x_off = prng.randint(-22, 38)  # 头部上方偏右
         choice = prng.random()
         if choice < 0.55:
-            char, color = "♥", HEART_FILL
+            char, color = p_main, th["heart_fill"]
         elif choice < 0.85:
-            char, color = "★", ACCENT
+            char, color = p_sub, th["accent"]
         else:
-            char, color = "♥", (255, 196, 92)  # 暖黄心
+            char, color = p_main, (255, 196, 92)  # 暖黄心
         draw_scale = 1 + min(2, age // 6)  # 1→2→3 渐大
         if age < 12:
             alpha = 1.0
@@ -656,13 +792,15 @@ def _particles_for_frame(
 def _draw_particle_at(
     target: Image.Image, char: str, color: tuple[int, int, int],
     x: int, y: int, scale: int, alpha: float,
+    *,
+    bg_color: tuple[int, int, int] = BG,
 ) -> None:
-    """像素粒子绘制 — 用 GLYPHS 5x7 字模,alpha 用 BG blend 模拟。"""
+    """像素粒子绘制 — 用 GLYPHS 5x7 字模,alpha 用 bg blend 模拟。"""
     glyph = GLYPHS.get(char) or GLYPHS.get(char.upper())
     if glyph is None or alpha <= 0.01:
         return
     r, g, b = color
-    bgr, bgg, bgb = BG
+    bgr, bgg, bgb = bg_color
     a = max(0.0, min(1.0, alpha))
     fill = (
         int(r * a + bgr * (1 - a)),
@@ -684,18 +822,19 @@ def _draw_particle_at(
 
 # ── 心形 sprite(可任意 scale 缩放) ──────────────────────────────────
 
-def _make_heart_sprite_sm(level: int, is_owner: bool) -> Image.Image:
+def _make_heart_sprite_sm(level: int, is_owner: bool, persona: str = "catty") -> Image.Image:
     """生成包含心形 + LEVEL 数字的 RGBA sprite(模板原尺寸 29x25)。
     后续 NEAREST 缩放到任意 scale,心 + 数字同步缩放。
     """
+    th = _theme(persona)
     sprite = Image.new("RGBA", (HEART_TPL_W, HEART_TPL_H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(sprite)
     for ry, row in enumerate(_HEART_TEMPLATE):
         for rx, c in enumerate(row):
             if c == "1":
-                draw.point((rx, ry), fill=HEART_FILL + (255,))
+                draw.point((rx, ry), fill=th["heart_fill"] + (255,))
             elif c == "2":
-                draw.point((rx, ry), fill=HEART_EDGE + (255,))
+                draw.point((rx, ry), fill=th["heart_edge"] + (255,))
     if is_owner:
         lv_text, lv_scale = "MAX", 1
     elif level >= 10:
@@ -742,12 +881,13 @@ def _decide_paw_layout(
     angle_range: tuple[float, float] = (-45.0, 15.0),
     scatter_zone_x_ratio: float = 0.62,
     scatter_zone_y_ratio: float = 0.55,
+    persona: str = "catty",
 ) -> list[tuple[Image.Image, int, int]]:
     """决定 3 个爪子的位置 + 旋转 + 大小,返回 (rotated_img, base_x, base_y) 列表。
     布局只跑一次,所有帧共用 — 帧间只加 y_offset 浮动。
     """
     r = rng or random
-    crops = _load_paw_crops()
+    crops = _load_scatter_crops(persona)
     if not crops or band_y_max < band_y_min or band_x_max < band_x_min:
         return []
     forbidden = list(forbidden_boxes or [])
@@ -820,69 +960,79 @@ def _render_static_base_small(
     checked_in_today: bool,
     today_gained: int | None,
     mode: str,
+    persona: str = "catty",
 ) -> tuple[Image.Image, dict]:
     """渲染 GIF 各帧共享的静态层(小画布):边框/标题/LEVEL 标签/分隔/POINTS/底栏/星星。
     心形、Pusheen、爪子、粒子是动态层,每帧单独画。
     返回 (base_img_sm, layout_meta)。layout_meta 给主渲染器算位置。
     """
-    img = Image.new("RGB", (CANVAS_W, CANVAS_H), BG)
+    th = _theme(persona)
+    c_bg, c_dark, c_accent, c_gray, c_green = (
+        th["bg"], th["dark"], th["accent"], th["gray"], th["green"],
+    )
+    img = Image.new("RGB", (CANVAS_W, CANVAS_H), c_bg)
     draw = ImageDraw.Draw(img)
 
     # 双层边框
-    _draw_border(draw, 0, 0, CANVAS_W - 1, CANVAS_H - 1, DARK)
-    _draw_border(draw, 2, 2, CANVAS_W - 3, CANVAS_H - 3, DARK)
+    _draw_border(draw, 0, 0, CANVAS_W - 1, CANVAS_H - 1, c_dark)
+    _draw_border(draw, 2, 2, CANVAS_W - 3, CANVAS_H - 3, c_dark)
 
     # 标题条
-    draw.rectangle((3, 3, CANVAS_W - 4, 13), fill=DARK)
+    draw.rectangle((3, 3, CANVAS_W - 4, 13), fill=c_dark)
     title_text = title[:14]
-    _draw_text_centered(draw, CANVAS_W // 2, 5, title_text, BG, scale=1)
+    _draw_text_centered(draw, CANVAS_W // 2, 5, title_text, c_bg, scale=1)
 
     # 心形位置预留(不画心 — 心在大画布动态层画)
     heart_top_y = 16
     heart_bottom_y = heart_top_y + HEART_TPL_H - 1
     lv_label_y = heart_bottom_y + 2
-    _draw_text_centered(draw, CANVAS_W // 2, lv_label_y, "LEVEL", DARK, scale=1)
+    _draw_text_centered(draw, CANVAS_W // 2, lv_label_y, "LEVEL", c_dark, scale=1)
 
     # 分隔虚线
     sep_y = lv_label_y + GLYPH_H + 2
     for x in range(6, CANVAS_W - 6, 3):
-        draw.point((x, sep_y), fill=GRAY)
+        draw.point((x, sep_y), fill=c_gray)
 
     # POINTS
     points_label_y = sep_y + 3
-    _draw_text_centered(draw, CANVAS_W // 2, points_label_y, "POINTS", DARK, scale=1)
+    _draw_text_centered(draw, CANVAS_W // 2, points_label_y, "POINTS", c_dark, scale=1)
     points_text = "INF" if is_owner else _fmt_compact(points)
     big_y = points_label_y + GLYPH_H + 1
-    _draw_text_centered(draw, CANVAS_W // 2, big_y, points_text,
-                        ACCENT if not is_owner else GREEN, scale=2)
+    if str(persona or "").strip().lower() == "fadianji":
+        # 机机卡: 大数字左对齐, 避开右下角放大版机机 (主人 2026-08-10 二轮)
+        _draw_text(draw, 10, big_y, points_text,
+                   c_accent if not is_owner else c_green, scale=2)
+    else:
+        _draw_text_centered(draw, CANVAS_W // 2, big_y, points_text,
+                            c_accent if not is_owner else c_green, scale=2)
 
     # 底栏
     footer_top = CANVAS_H - 14
-    draw.rectangle((3, footer_top, CANVAS_W - 4, CANVAS_H - 4), fill=DARK)
+    draw.rectangle((3, footer_top, CANVAS_W - 4, CANVAS_H - 4), fill=c_dark)
     if mode == "signin":
         if is_owner:
             line = "OWNER MAX"
         else:
             line = f"+{_fmt_compact(today_gained or 0)} GOT IT"
-        _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, line, BG, scale=1)
+        _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, line, c_bg, scale=1)
     else:
         if is_owner or exp_next_level is None or exp_next_level <= 0:
             tip = "OWNER MAX" if is_owner else "MAX LV"
-            _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, tip, BG, scale=1)
+            _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, tip, c_bg, scale=1)
         else:
             _draw_text_centered(
                 draw, CANVAS_W // 2, footer_top + 1,
-                f"EXP {_fmt_compact(exp_current)}/{_fmt_compact(exp_next_level)}", BG, scale=1
+                f"EXP {_fmt_compact(exp_current)}/{_fmt_compact(exp_next_level)}", c_bg, scale=1
             )
             status_y = footer_top + 1 + GLYPH_H + 1
             if status_y + GLYPH_H <= CANVAS_H - 4:
                 status_txt = "DAILY DONE" if checked_in_today else "GET DAILY!"
-                color = GREEN if checked_in_today else ACCENT
+                color = c_green if checked_in_today else c_accent
                 _draw_text_centered(draw, CANVAS_W // 2, status_y, status_txt, color, scale=1)
 
     # 角落星星
-    _draw_text(draw, 5, 4, "*", ACCENT, scale=1)
-    _draw_text(draw, CANVAS_W - 10, 4, "*", ACCENT, scale=1)
+    _draw_text(draw, 5, 4, "*", c_accent, scale=1)
+    _draw_text(draw, CANVAS_W - 10, 4, "*", c_accent, scale=1)
 
     layout = {
         "heart_top_y_sm": heart_top_y,
@@ -906,6 +1056,7 @@ def render_card_frames(
     today_gained: int | None = None,
     mode: str = "summary",
     layout_seed: int | None = None,
+    persona: str = "catty",
 ) -> list[Image.Image]:
     """渲染 GIF 的 GIF_TOTAL_FRAMES 帧。layout_seed 控制爪子布局/粒子初值的随机。
 
@@ -915,6 +1066,7 @@ def render_card_frames(
     3) 爪子布局一次决定(跨帧共享,帧间只 y_offset)
     4) 每帧 base.copy() + 画心 + Pusheen + 爪 + 粒子
     """
+    th = _theme(persona)
     seed = layout_seed if layout_seed is not None else random.randint(0, 1 << 30)
     rng = random.Random(seed)
 
@@ -922,7 +1074,7 @@ def render_card_frames(
         title=title, points=points, exp_current=exp_current,
         exp_next_level=exp_next_level, is_owner=is_owner,
         checked_in_today=checked_in_today, today_gained=today_gained,
-        mode=mode,
+        mode=mode, persona=persona,
     )
     base_lg = base_sm.resize((CANVAS_W * SCALE, CANVAS_H * SCALE),
                              Image.Resampling.NEAREST)
@@ -930,13 +1082,15 @@ def render_card_frames(
     # 心形位置(大画布中心 x、心视觉中心 y)
     heart_cx_lg = (CANVAS_W // 2) * SCALE
     heart_cy_lg = lay["heart_center_y_sm"] * SCALE
-    heart_sprite = _make_heart_sprite_sm(level, is_owner)
+    heart_sprite = _make_heart_sprite_sm(level, is_owner, persona)
 
-    # Pusheen 基础尺寸(大画布 px) + 锚定位置(bottom-right)
-    pusheen = _load_pusheen()
+    # 角色 sprite 基础尺寸(大画布 px) + 锚定位置(bottom-right)
+    # catty=Pusheen / fadianji=发电机 (主人 2026-08-10)
+    # 主人 2026-08-10 二轮: 机机 sprite 放大 (150→260) + 裁剪透明边, 占右下角视觉主位。
+    pusheen = _load_character_sprite(persona)
     pusheen_data: dict | None = None
     if pusheen is not None and pusheen.width > 0:
-        target_w_lg = 150
+        target_w_lg = 260 if str(persona or "").strip().lower() == "fadianji" else 150
         aspect = pusheen.height / pusheen.width
         target_h_lg = max(8, int(round(target_w_lg * aspect)))
         pusheen_base = _resize_rgba_sharp_alpha(pusheen, target_w_lg, target_h_lg)
@@ -974,6 +1128,7 @@ def render_card_frames(
             count=3, target_widths=(60, 90, 130),
             forbidden_boxes=[pusheen_box] if pusheen_box else None,
             rng=rng, angle_range=(-45.0, 15.0),
+            persona=persona,
         )
 
     # 粒子锚点:Pusheen 头顶左偏(头在左上角)
@@ -1011,14 +1166,14 @@ def render_card_frames(
         # 3) 爪子浮动
         for idx, (paw_img, base_x, base_y) in enumerate(paw_layout):
             y_off = _paw_float_offset_sm(fi, idx) * SCALE
-            _paste_text_aware(frame, paw_img, base_x, base_y + y_off)
+            _paste_text_aware(frame, paw_img, base_x, base_y + y_off, bg_color=th["bg"])
 
         # 4) 头顶粒子
         if particle_anchor:
             for char, color, x, y, sc, alpha in _particles_for_frame(
-                fi, level, particle_anchor, layout_seed=seed,
+                fi, level, particle_anchor, layout_seed=seed, persona=persona,
             ):
-                _draw_particle_at(frame, char, color, x, y, sc, alpha)
+                _draw_particle_at(frame, char, color, x, y, sc, alpha, bg_color=th["bg"])
 
         frames.append(frame)
 
@@ -1037,6 +1192,7 @@ def render_card(
     last_amount: int = 0,
     today_gained: int | None = None,
     mode: str = "summary",
+    persona: str = "catty",
 ) -> Image.Image:
     """单帧渲染(取 GIF 首帧)— 兜底/兼容用,正式发卡走 GIF。"""
     frames = render_card_frames(
@@ -1044,6 +1200,7 @@ def render_card(
         exp_current=exp_current, exp_next_level=exp_next_level,
         is_owner=is_owner, checked_in_today=checked_in_today,
         last_amount=last_amount, today_gained=today_gained, mode=mode,
+        persona=persona,
     )
     return frames[0] if frames else Image.new("RGB", (CANVAS_W * SCALE, CANVAS_H * SCALE), BG)
 
@@ -1075,6 +1232,7 @@ def render_card_to_file(
     last_amount: int = 0,
     today_gained: int | None = None,
     mode: str = "summary",
+    persona: str = "catty",
 ) -> Path:
     """渲染并写盘 GIF。返回 .gif 路径,QQ 客户端原生支持。"""
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1083,6 +1241,7 @@ def render_card_to_file(
         exp_current=exp_current, exp_next_level=exp_next_level,
         is_owner=is_owner, checked_in_today=checked_in_today,
         last_amount=last_amount, today_gained=today_gained, mode=mode,
+        persona=persona,
     )
     stamp = f"{user_id}_{mode}_{int(time.time())}"
     digest = hashlib.md5(stamp.encode("utf-8")).hexdigest()[:10]

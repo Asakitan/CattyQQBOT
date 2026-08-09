@@ -386,6 +386,11 @@
         "enabled": false,
         "watches": []
     },
+    "fadianji_state": {
+        "enabled": false,
+        "min_minutes": 60,
+        "max_minutes": 180
+    },
     "proactive": {
         "enabled": true,
         "max_daily_per_group": 5,

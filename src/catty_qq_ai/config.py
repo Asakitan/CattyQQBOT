@@ -630,6 +630,12 @@ class Config(BaseModel):
     catty_body_presence_enabled: bool = False
     catty_body_presence_watches: list[dict[str, Any]] = Field(default_factory=list)
 
+    # ── 机机三状态随机切换 (主人 2026-08-10): 丧女/魅魔/阳光 ──
+    # 每 [min,max] 分钟随机切一次状态, 注入对应基调 hint; 只对 fadianji 生效。
+    catty_fadianji_state_enabled: bool = False
+    catty_fadianji_state_min_minutes: int = 60
+    catty_fadianji_state_max_minutes: int = 180
+
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 

@@ -220,6 +220,9 @@ ambient_store = AmbientStore()
 # 非本体消息 — 本体在场, 备用机让位。内存态, 重启清空。
 from .body_presence import BodyPresenceStore
 body_presence_store = BodyPresenceStore()
+# 机机三状态随机切换 (主人 2026-08-10): 丧女/魅魔/阳光, 落盘 fadianji_state.json。
+from .fadianji_state import FadianjiStateStore
+fadianji_state_store = FadianjiStateStore(config.catty_memory_path)
 # Phase D2: 跨 scope mood overlay — 主人私聊 NSFW P7/P8 后, 10 min 内切群聊仍有余韵.
 # per-user_id (不是 scope) 短期 store, 不持久化.
 from .mood_overlay_store import MoodOverlayStore
@@ -2920,6 +2923,23 @@ def _strip_unicode_emoji_for_send(text: str) -> str:
         # 删除 emoji 后可能残留多余空格；不压中文标点和换行，避免改坏 QQ 语气。
         cleaned = re.sub(r"[ \t]{2,}", " ", cleaned).strip()
     return cleaned
+
+
+# 主人 2026-08-10: 私聊 strip AI 学群聊习惯输出的行首 @人 前缀。
+# 私聊没有 at 概念, 聊天对象就是对方本人 — 回复里 "@昵称" 是错误。
+_AT_MENTION_LINE_PREFIX_RE = re.compile(r"^@[^\s@：:，,]{1,24}(?:[：:，,]\s*|\s+)")
+
+
+def _strip_at_mention_for_private(text: str) -> str:
+    """私聊出站文本: 剥掉每行行首的 @人 前缀 (AI 从群聊上下文里学来的习惯)。
+
+    只剥行首 @xxx + 空白/冒号/逗号 的形态, 不动行中 @ (用户可能让 bot 转述带 @ 的内容)。
+    """
+    if not text or "@" not in text:
+        return text
+    lines = text.split("\n")
+    out = [_AT_MENTION_LINE_PREFIX_RE.sub("", line, count=1) for line in lines]
+    return "\n".join(out)
 
 
 def _sanitize_residual_markers(text: str) -> str:
@@ -5728,6 +5748,8 @@ async def _build_messages(
         "user_id": str(event.user_id),
         # Catty mood: 让 register_catty_persona 用 scope 拉当前 mood 注入 prompt
         "catty_mood_store": None if _persona.feature_disabled("mood") else catty_mood_store,
+        # 机机三状态随机切换 (主人 2026-08-10): 丧女/魅魔/阳光 hint 注入
+        "fadianji_state_store": fadianji_state_store,
         # Scope lorebook: AI 5.5 学到的『这个群专属小事』, _build_character_book BFS pool 里
         # 跟 hardcoded character_book 一起递归扫描, 命中时刷 hit_count。
         "scope_lorebook_store": scope_lorebook_store,
@@ -5768,6 +5790,22 @@ async def _build_messages(
             )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_current_sender_info register failed: {exc}")
+    elif _is_private_event:
+        # 主人 2026-08-10: 私聊语境提醒 — 私聊是跟对方本人 1v1 聊, 结合人物画像;
+        # 不要 @ 人, 不要当群聊广播/对一群人说话 (AI 会从群聊上下文里学 @ 习惯)。
+        try:
+            _priv_lines = [
+                "【私聊语境】",
+                f"- 这是跟 {_user_real_display} 的 1v1 私聊, 聊天对象就是对方本人.",
+                "- 结合他的人物画像 (user_details/user_vibe 段) 聊, 不要 @ 人, 不要当群聊广播/对一群人说话.",
+            ]
+            _st_manager.register_static(
+                "catty_private_context",
+                "\n".join(_priv_lines),
+                order=496,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"catty_private_context register failed: {exc}")
     # 主人 2026-05-28 P5.2: adaptive_drift skeleton 移到 boundary 后, 不再占 cache prefix.
     try:
         from .author_note import build_adaptive_drift_skeleton as _build_drift_skeleton
@@ -8937,6 +8975,9 @@ def _compose_reply_message(
     inline_image_urls: list[str] | None = None,
 ) -> Message:
     text = _strip_unicode_emoji_for_send(text)
+    # 主人 2026-08-10: 私聊 strip 行首 @人 前缀 (私聊没有 at 概念, 对象就是对方本人)
+    if isinstance(event, PrivateMessageEvent):
+        text = _strip_at_mention_for_private(text)
     message = Message()
     if quote:
         quote_segment = _reply_quote_segment(event)
@@ -11238,7 +11279,15 @@ def _send_affection_card(
     next_lv_at = summary.get("next_level_at_exp")
     exp_next = int(next_lv_at) if isinstance(next_lv_at, int) else None
     checked_in = bool(summary.get("last_checkin_date") == _today_local_str())
-    title = "OWNER CARD" if is_owner else "CATTY CARD"
+    # 主人 2026-08-10: 机机人格用不稳定发电机元素的签到卡 (紫系+发电机 sprite/⚡)
+    _card_persona = _persona_for_event(event)
+    _is_fdj_card = _card_persona.name == "fadianji"
+    if is_owner:
+        title = "OWNER CARD"
+    elif _is_fdj_card:
+        title = "FADIANJI CARD"
+    else:
+        title = "CATTY CARD"
     try:
         out_path = _render_affection_card(
             output_dir=Path("pictures/affection_cards"),
@@ -11253,6 +11302,7 @@ def _send_affection_card(
             last_amount=int(summary.get("last_checkin_amount") or 0),
             today_gained=today_gained,
             mode=mode,
+            persona=_card_persona.name,
         )
         try:
             _prune_affection_cards(Path("pictures/affection_cards"), max_files=200)

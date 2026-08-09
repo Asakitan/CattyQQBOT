@@ -958,6 +958,12 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_BODY_PRESENCE_ENABLED", body_presence.get("enabled"))
     _set_env("CATTY_BODY_PRESENCE_WATCHES", body_presence.get("watches"), json_value=True)
 
+    # 机机三状态随机切换 (主人 2026-08-10): 丧女/魅魔/阳光。
+    fadianji_state = _section(data, "fadianji_state")
+    _set_env("CATTY_FADIANJI_STATE_ENABLED", fadianji_state.get("enabled"))
+    _set_env("CATTY_FADIANJI_STATE_MIN_MINUTES", fadianji_state.get("min_minutes"))
+    _set_env("CATTY_FADIANJI_STATE_MAX_MINUTES", fadianji_state.get("max_minutes"))
+
     proactive = _section(data, "proactive")
     _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))
     _set_env("CATTY_PROACTIVE_MAX_DAILY_PER_GROUP", proactive.get("max_daily_per_group"))

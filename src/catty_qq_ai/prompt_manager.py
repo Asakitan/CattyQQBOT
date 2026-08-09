@@ -935,6 +935,17 @@ def register_catty_persona(
         order=502,
     )
 
+    # === Fadianji 三状态随机切换 (主人 2026-08-10): 丧女/魅魔/阳光 ===
+    # order=503 紧跟 menstrual, post-boundary dynamic; 非 fadianji 恒返回空串。
+    _fdj_state_store = ctx.get("fadianji_state_store")
+    if _fdj_state_store is not None:
+        from . import fadianji_state as _fs
+        _reg(
+            "catty_fadianji_state",
+            content_fn=lambda: _fs.build_state_prompt(_fdj_state_store, cfg, persona.name),
+            order=503,
+        )
+
     # === User Vibe Profile - 对方画像 ===
     user_vibe_store = ctx.get("user_vibe_store")
     user_id = ctx.get("user_id", "")
