@@ -925,6 +925,16 @@ def register_catty_persona(
             order=501,  # dynamic (cross-turn cumulative), post-boundary
         )
 
+    # === Menstrual cycle - 机机月经期心情 (主人 2026-08-10) ===
+    # 纯 config 驱动: 吃每轮最新的 cfg (热重载生效), 非 fadianji / 非敏感相位
+    # 返回空串不注入。order=502 紧跟 catty_mood, post-boundary dynamic。
+    from . import menstrual_cycle as _mc
+    _reg(
+        "catty_menstrual",
+        content_fn=lambda: _mc.build_menstrual_prompt(cfg, persona.name),
+        order=502,
+    )
+
     # === User Vibe Profile - 对方画像 ===
     user_vibe_store = ctx.get("user_vibe_store")
     user_id = ctx.get("user_id", "")

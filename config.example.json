@@ -377,6 +377,11 @@
         "default": "fadianji",
         "group_personas": {}
     },
+    "menstrual_cycle": {
+        "enabled": false,
+        "last_period_start": "",
+        "cycle_days": 28
+    },
     "proactive": {
         "enabled": true,
         "max_daily_per_group": 5,

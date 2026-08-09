@@ -947,6 +947,12 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_DEFAULT_PERSONA", persona.get("default"))
     _set_env("CATTY_GROUP_PERSONAS", persona.get("group_personas"), json_value=True)
 
+    # 月经期心情 (主人 2026-08-10): 机机生理状态同步, 纯 config 驱动。
+    menstrual_cycle = _section(data, "menstrual_cycle")
+    _set_env("CATTY_MENSTRUAL_ENABLED", menstrual_cycle.get("enabled"))
+    _set_env("CATTY_MENSTRUAL_LAST_PERIOD_START", menstrual_cycle.get("last_period_start"))
+    _set_env("CATTY_MENSTRUAL_CYCLE_DAYS", menstrual_cycle.get("cycle_days"))
+
     proactive = _section(data, "proactive")
     _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))
     _set_env("CATTY_PROACTIVE_MAX_DAILY_PER_GROUP", proactive.get("max_daily_per_group"))

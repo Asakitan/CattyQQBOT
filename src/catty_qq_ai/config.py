@@ -616,6 +616,14 @@ class Config(BaseModel):
     catty_group_personas: dict[str, str] = Field(default_factory=dict)
     catty_default_persona: str = "catty"
 
+    # ── 月经期心情 (主人 2026-08-10): 机机本人生理状态同步 ──
+    # 按 last_period_start (YYYY-MM-DD, 当天=第1天) + cycle_days 推算周期相位,
+    # 敏感相位 (月经期 / 黄体后期 PMS) 给 fadianji 注入生理状态 hint。
+    # 纯 config 驱动, 改 config.json 即生效 (热重载), 无独立持久化。
+    catty_menstrual_enabled: bool = False
+    catty_menstrual_last_period_start: str = ""  # 空 = 不注入
+    catty_menstrual_cycle_days: int = 28
+
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 
