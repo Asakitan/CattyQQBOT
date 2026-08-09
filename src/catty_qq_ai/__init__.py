@@ -11011,12 +11011,15 @@ def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str
     L0 Composer 拼装 (90K+ 组合, owner 场景)
     L1 yaml pool (精品桶)
     L2 硬编码兜底
-    多人格: 非 catty 人格不走猫娘模板池, 直接极简兜底 (正常情况 AI caption 已按人格生成)。
+    多人格: 非 catty 人格不走猫娘模板池, 用 reply_catalog 的人格文案 (正常情况 AI caption 已按人格生成)。
     """
     if persona is not None and getattr(persona, "name", "catty") != "catty":
+        _catalog = getattr(persona, "reply_catalog", None)
         if bool(result.get("already")):
-            return "今天已经签过了. 明天再来"
-        return "签到成功, 分到账了. 卡片自己看"
+            _fixed = str(getattr(_catalog, "signin_already_fallback", "") or "").strip()
+            return _fixed or "今天已经签过了. 明天再来"
+        _fixed = str(getattr(_catalog, "signin_success_fallback", "") or "").strip()
+        return _fixed or "签到成功, 分到账了. 卡片自己看"
     is_owner = bool(result.get("is_owner"))
     level = int(result.get("level", 1))
     already = bool(result.get("already"))
@@ -11090,9 +11093,11 @@ def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str
 
 def _fallback_caption_summary(summary: dict, user_id: str = "", user_nickname: str = "", persona=None) -> str:
     """积分查询. 主人 2026-05-29 v2: 优先走 affection_summary yaml pool (含时段+去重).
-    多人格: 非 catty 人格直接极简兜底。"""
+    多人格: 非 catty 人格用 reply_catalog 的人格文案。"""
     if persona is not None and getattr(persona, "name", "catty") != "catty":
-        return "积分卡端上来了. 状态自己看"
+        _catalog = getattr(persona, "reply_catalog", None)
+        _fixed = str(getattr(_catalog, "points_summary_fallback", "") or "").strip()
+        return _fixed or "积分卡端上来了. 状态自己看"
     is_owner = bool(summary.get("is_owner"))
     level = int(summary.get("level", 0))
     balance = int(summary.get("points", 0))

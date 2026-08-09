@@ -117,9 +117,11 @@ def _put_pixel(draw: ImageDraw.ImageDraw, x: int, y: int, color: tuple[int, int,
 
 
 def _draw_text(draw: ImageDraw.ImageDraw, x: int, y: int, text: str, color: tuple[int, int, int],
-               *, spacing: int = 1, scale: int = 1) -> int:
-    """逐字符渲染到 (x,y)。返回最终 cursor x。scale=2 表示每像素绘成 2x2。"""
+               *, spacing: int = 1, scale: int = 1, outline: tuple[int, ...] | None = None) -> int:
+    """逐字符渲染到 (x,y)。返回最终 cursor x。scale=2 表示每像素绘成 2x2。
+    outline 非 None 时: 先在填充像素的 8 邻域铺一圈描边色, 再画本体 (像素风白字黑边)。"""
     cursor = x
+    pixels: set[tuple[int, int]] = set()
     for ch in text.upper() if ch_should_upper(text) else text:
         glyph = GLYPHS.get(ch) or GLYPHS.get(ch.upper()) or GLYPHS.get(" ")
         if glyph is None:
@@ -129,13 +131,22 @@ def _draw_text(draw: ImageDraw.ImageDraw, x: int, y: int, text: str, color: tupl
             line = glyph[row]
             for col in range(GLYPH_W):
                 if line[col] == "1":
-                    if scale == 1:
-                        draw.point((cursor + col, y + row), fill=color)
-                    else:
-                        x0 = cursor + col * scale
-                        y0 = y + row * scale
-                        draw.rectangle((x0, y0, x0 + scale - 1, y0 + scale - 1), fill=color)
+                    for dx in range(scale):
+                        for dy in range(scale):
+                            pixels.add((cursor + col * scale + dx, y + row * scale + dy))
         cursor += (GLYPH_W + spacing) * scale
+    if outline is not None and pixels:
+        # 4 邻域 (上下左右) 描边: 5x7 细字模用 8 邻域会把相邻笔画空隙填死, 字形粘连
+        ring: set[tuple[int, int]] = set()
+        for px, py in pixels:
+            for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                pt = (px + dx, py + dy)
+                if pt not in pixels:
+                    ring.add(pt)
+        for pt in ring:
+            draw.point(pt, fill=outline)
+    for pt in pixels:
+        draw.point(pt, fill=color)
     return cursor
 
 
@@ -151,9 +162,10 @@ def _text_width(text: str, *, spacing: int = 1, scale: int = 1) -> int:
 
 
 def _draw_text_centered(draw: ImageDraw.ImageDraw, cx: int, y: int, text: str,
-                        color: tuple[int, int, int], *, spacing: int = 1, scale: int = 1) -> None:
+                        color: tuple[int, int, int], *, spacing: int = 1, scale: int = 1,
+                        outline: tuple[int, ...] | None = None) -> None:
     w = _text_width(text, spacing=spacing, scale=scale)
-    _draw_text(draw, cx - w // 2, y, text, color, spacing=spacing, scale=scale)
+    _draw_text(draw, cx - w // 2, y, text, color, spacing=spacing, scale=scale, outline=outline)
 
 
 def _fmt_compact(n: int) -> str:
@@ -270,6 +282,7 @@ THEMES: dict[str, dict[str, Any]] = {
         "heart_fill": HEART_FILL, "heart_edge": HEART_EDGE,
         "accent": ACCENT, "green": GREEN, "gray": GRAY,
         "particle_main": "♥", "particle_sub": "★",
+        "text": None, "text_outline": None,
     },
     "fadianji": {
         "bg": (240, 230, 250),          # 淡紫底
@@ -281,6 +294,8 @@ THEMES: dict[str, dict[str, Any]] = {
         "green": (113, 194, 113),
         "gray": (150, 130, 170),
         "particle_main": "⚡", "particle_sub": "★",
+        # 主人 2026-08-10: 机机风格字幕 — 白字黑描边
+        "text": (255, 255, 255), "text_outline": (0, 0, 0),
     },
 }
 
@@ -846,7 +861,8 @@ def _make_heart_sprite_sm(level: int, is_owner: bool, persona: str = "catty") ->
     cy = 9  # 心形视觉中心(跟原 _draw_heart heart_visual_cy 一致)
     tx = HEART_TPL_W // 2 - text_w // 2
     ty = cy - text_h // 2
-    _draw_text(draw, tx, ty, lv_text, WHITE + (255,), scale=lv_scale)
+    _heart_outline = (0, 0, 0, 255) if th.get("text_outline") is not None else None
+    _draw_text(draw, tx, ty, lv_text, WHITE + (255,), scale=lv_scale, outline=_heart_outline)
     return sprite
 
 
@@ -970,6 +986,12 @@ def _render_static_base_small(
     c_bg, c_dark, c_accent, c_gray, c_green = (
         th["bg"], th["dark"], th["accent"], th["gray"], th["green"],
     )
+    # 主人 2026-08-10: 机机卡字体统一白字黑描边 (发电机字幕风); catty 保持原配色无描边
+    c_outline = th.get("text_outline")
+    c_text = th.get("text") or c_dark          # 标签/标签文字
+    c_text_bar = th.get("text") or c_bg        # 标题条/底栏条上文字
+    c_text_big = th.get("text") or c_accent    # POINTS 大数字
+    c_text_ok = th.get("text") or c_green      # 主人/已完成态文字
     img = Image.new("RGB", (CANVAS_W, CANVAS_H), c_bg)
     draw = ImageDraw.Draw(img)
 
@@ -980,13 +1002,13 @@ def _render_static_base_small(
     # 标题条
     draw.rectangle((3, 3, CANVAS_W - 4, 13), fill=c_dark)
     title_text = title[:14]
-    _draw_text_centered(draw, CANVAS_W // 2, 5, title_text, c_bg, scale=1)
+    _draw_text_centered(draw, CANVAS_W // 2, 5, title_text, c_text_bar, scale=1, outline=c_outline)
 
     # 心形位置预留(不画心 — 心在大画布动态层画)
     heart_top_y = 16
     heart_bottom_y = heart_top_y + HEART_TPL_H - 1
     lv_label_y = heart_bottom_y + 2
-    _draw_text_centered(draw, CANVAS_W // 2, lv_label_y, "LEVEL", c_dark, scale=1)
+    _draw_text_centered(draw, CANVAS_W // 2, lv_label_y, "LEVEL", c_text, scale=1, outline=c_outline)
 
     # 分隔虚线
     sep_y = lv_label_y + GLYPH_H + 2
@@ -995,16 +1017,16 @@ def _render_static_base_small(
 
     # POINTS
     points_label_y = sep_y + 3
-    _draw_text_centered(draw, CANVAS_W // 2, points_label_y, "POINTS", c_dark, scale=1)
+    _draw_text_centered(draw, CANVAS_W // 2, points_label_y, "POINTS", c_text, scale=1, outline=c_outline)
     points_text = "INF" if is_owner else _fmt_compact(points)
     big_y = points_label_y + GLYPH_H + 1
     if str(persona or "").strip().lower() == "fadianji":
-        # 机机卡: 大数字左对齐, 避开右下角放大版机机 (主人 2026-08-10 二轮)
-        _draw_text(draw, 10, big_y, points_text,
-                   c_accent if not is_owner else c_green, scale=2)
+        # 机机卡: 大数字左对齐偏右, 避开右下角放大版机机; 描边外扩 1px, 再多留 4px 不蹭 POINTS 标签
+        _draw_text(draw, 16, big_y + 4, points_text,
+                   c_text_big if not is_owner else c_text_ok, scale=2, outline=c_outline)
     else:
         _draw_text_centered(draw, CANVAS_W // 2, big_y, points_text,
-                            c_accent if not is_owner else c_green, scale=2)
+                            c_text_big if not is_owner else c_text_ok, scale=2, outline=c_outline)
 
     # 底栏
     footer_top = CANVAS_H - 14
@@ -1014,21 +1036,21 @@ def _render_static_base_small(
             line = "OWNER MAX"
         else:
             line = f"+{_fmt_compact(today_gained or 0)} GOT IT"
-        _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, line, c_bg, scale=1)
+        _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, line, c_text_bar, scale=1, outline=c_outline)
     else:
         if is_owner or exp_next_level is None or exp_next_level <= 0:
             tip = "OWNER MAX" if is_owner else "MAX LV"
-            _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, tip, c_bg, scale=1)
+            _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, tip, c_text_bar, scale=1, outline=c_outline)
         else:
             _draw_text_centered(
                 draw, CANVAS_W // 2, footer_top + 1,
-                f"EXP {_fmt_compact(exp_current)}/{_fmt_compact(exp_next_level)}", c_bg, scale=1
+                f"EXP {_fmt_compact(exp_current)}/{_fmt_compact(exp_next_level)}", c_text_bar, scale=1, outline=c_outline
             )
             status_y = footer_top + 1 + GLYPH_H + 1
             if status_y + GLYPH_H <= CANVAS_H - 4:
                 status_txt = "DAILY DONE" if checked_in_today else "GET DAILY!"
-                color = c_green if checked_in_today else c_accent
-                _draw_text_centered(draw, CANVAS_W // 2, status_y, status_txt, color, scale=1)
+                color = c_text_ok if checked_in_today else c_text_big
+                _draw_text_centered(draw, CANVAS_W // 2, status_y, status_txt, color, scale=1, outline=c_outline)
 
     # 角落星星
     _draw_text(draw, 5, 4, "*", c_accent, scale=1)

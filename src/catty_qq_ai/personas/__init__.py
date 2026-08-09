@@ -42,6 +42,10 @@ class PersonaReplyCatalog:
     web_search_failure_instruction: str = ""
     web_search_disabled_instruction: str = ""
     busy_fallback_reply: str = ""
+    # 签到/积分命令的固定兜底文案 (AI caption 失败时使用)
+    signin_success_fallback: str = ""
+    signin_already_fallback: str = ""
+    points_summary_fallback: str = ""
 
     @property
     def no_reply_fallbacks(self) -> tuple[str, str, str, str]:
@@ -89,6 +93,9 @@ NEUTRAL_REPLY_CATALOG = PersonaReplyCatalog(
         "请说明联网搜索暂时不可用。"
     ),
     busy_fallback_reply="本地服务正被游戏占用，请稍后再试。",
+    signin_success_fallback="签到成功，积分已到账，请查看卡片。",
+    signin_already_fallback="今天已经签过到了，明天再来。",
+    points_summary_fallback="积分卡已生成，请查看。",
 )
 
 

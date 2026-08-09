@@ -645,6 +645,9 @@ FADIANJI_REPLY_CATALOG = PersonaReplyCatalog(
         "请说明联网搜索暂时不可用。"
     ),
     busy_fallback_reply="本地服务正被游戏占着。等会再试。",
+    signin_success_fallback="签了签了。分进账了, 卡自己看。",
+    signin_already_fallback="签过了签过了。一天一签, 明天再来找机。",
+    points_summary_fallback="卡端上来了, 自己看。数字机懒得念。",
 )
 
 
