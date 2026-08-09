@@ -624,6 +624,12 @@ class Config(BaseModel):
     catty_menstrual_last_period_start: str = ""  # 空 = 不注入
     catty_menstrual_cycle_days: int = 28
 
+    # ── 本体避让 (主人 2026-08-10): 机机本体在场时, 分身让位 ──
+    # 本体在群发言后 cooldown 内, 分身忽视该群所有非本体消息; 只有本体本人 @ 才回。
+    # watches: [{"group_id": "...", "user_id": "...", "cooldown_minutes": 30}]
+    catty_body_presence_enabled: bool = False
+    catty_body_presence_watches: list[dict[str, Any]] = Field(default_factory=list)
+
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 
@@ -897,6 +903,21 @@ class Config(BaseModel):
         if isinstance(value, str):
             return {str(key): str(val) for key, val in _parse_json_object(value).items()}
         return {str(key): str(val) for key, val in dict(value).items()}
+
+    @field_validator("catty_body_presence_watches", mode="before")
+    @classmethod
+    def parse_body_presence_watches(cls, value: Any) -> Any:
+        if value is None or value == "":
+            return []
+        if isinstance(value, str):
+            raw = value.strip()
+            if not raw:
+                return []
+            loaded = json.loads(raw)
+            if not isinstance(loaded, list):
+                raise ValueError("catty_body_presence_watches must be a JSON list")
+            return loaded
+        return value
 
     @field_validator("catty_group_user_titles", mode="before")
     @classmethod

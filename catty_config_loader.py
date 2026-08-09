@@ -953,6 +953,11 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_MENSTRUAL_LAST_PERIOD_START", menstrual_cycle.get("last_period_start"))
     _set_env("CATTY_MENSTRUAL_CYCLE_DAYS", menstrual_cycle.get("cycle_days"))
 
+    # 本体避让 (主人 2026-08-10): 机机本体在场时, 分身让位。
+    body_presence = _section(data, "body_presence")
+    _set_env("CATTY_BODY_PRESENCE_ENABLED", body_presence.get("enabled"))
+    _set_env("CATTY_BODY_PRESENCE_WATCHES", body_presence.get("watches"), json_value=True)
+
     proactive = _section(data, "proactive")
     _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))
     _set_env("CATTY_PROACTIVE_MAX_DAILY_PER_GROUP", proactive.get("max_daily_per_group"))

@@ -216,6 +216,10 @@ user_details_store = UserDetailsStore(config.catty_memory_path)
 # 不持久化, 重启清空 (跟 sticky 同性质).
 from .ambient_eavesdrop import AmbientStore
 ambient_store = AmbientStore()
+# 本体避让 (主人 2026-08-10): 机机本体在群发言后, 分身在 cooldown 内忽视该群
+# 非本体消息 — 本体在场, 备用机让位。内存态, 重启清空。
+from .body_presence import BodyPresenceStore
+body_presence_store = BodyPresenceStore()
 # Phase D2: 跨 scope mood overlay — 主人私聊 NSFW P7/P8 后, 10 min 内切群聊仍有余韵.
 # per-user_id (不是 scope) 短期 store, 不持久化.
 from .mood_overlay_store import MoodOverlayStore
@@ -9145,6 +9149,29 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         return False
     state["catty_reply_sources"] = reply_sources
     recent_bot_continuation = _recent_bot_prompted_user(event)
+    # 本体避让 (body_presence, 主人 2026-08-10): 机机本体在群里发言后, 分身在
+    # cooldown 内忽视该群所有非本体消息 — 本体在场, 备用机让位; 只有本体本人 @ 才回。
+    # 本体消息本身 touch 记录后走正常流程 (她 @ 分身则回, 不 @ 则 mention-only gate 照常 drop)。
+    if (
+        isinstance(event, GroupMessageEvent)
+        and bool(getattr(config, "catty_body_presence_enabled", False))
+    ):
+        from .body_presence import parse_watches as _parse_bp_watches
+        _bp_gid = str(getattr(event, "group_id", ""))
+        _bp_uid = str(event.user_id)
+        for _bp_w in _parse_bp_watches(getattr(config, "catty_body_presence_watches", None)):
+            if _bp_w.group_id != _bp_gid:
+                continue
+            if _bp_uid == _bp_w.user_id:
+                body_presence_store.touch(_bp_gid)
+                break
+            if body_presence_store.in_avoid(_bp_gid, _bp_w.cooldown_seconds):
+                logger.info(
+                    f"Body presence avoid: dropped group message (本体在场, 分身让位) "
+                    f"user={_bp_uid} group={_bp_gid} body={_bp_w.user_id} "
+                    f"text={incoming.text[:60]!r}"
+                )
+                return False
     # 机机 (mention_only_trigger, 主人 2026-08-10): 群聊默认只回真 @ 的消息 —
     # 续聊窗口外, 提示词(机机/发电机/机器人)/直接称呼/引用一律不触发, 静默丢。
     if (

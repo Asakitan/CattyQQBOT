@@ -382,6 +382,10 @@
         "last_period_start": "",
         "cycle_days": 28
     },
+    "body_presence": {
+        "enabled": false,
+        "watches": []
+    },
     "proactive": {
         "enabled": true,
         "max_daily_per_group": 5,
