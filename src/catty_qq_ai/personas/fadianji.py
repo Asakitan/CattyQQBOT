@@ -599,4 +599,8 @@ FADIANJI_PERSONA = Persona(
     # 主人 2026-08-02: flash 现在已经够用, 机机主回复不再自动升 pro。
     model_override="deepseek-v4-flash",
     reply_catalog=FADIANJI_REPLY_CATALOG,
+    # 主人 2026-08-10: 机机默认只回真 @ 的消息 (提示词不触发);
+    # @ 触发后最多再续 2 条「和自己有关系」的消息, 无关即结束。
+    mention_only_trigger=True,
+    followup_reply_budget=2,
 )

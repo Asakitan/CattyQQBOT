@@ -140,6 +140,14 @@ class Persona:
     model_override: str | None = None
     # None = 使用默认人格的模块级业务 fallback catalog，避免改变 catty 旧路径。
     reply_catalog: PersonaReplyCatalog | None = None
+    # 机机 (主人 2026-08-10): 群聊非续聊窗口下只回真 @ 的消息 — 提示词/直接称呼/
+    # 引用等一律不触发。False = 沿用 catty 的 mentioned/prefix/directed 多信号触发。
+    mention_only_trigger: bool = False
+    # 机机 (主人 2026-08-10): @ 触发回复后的续聊预算。@ 回复后最多再判断
+    # 「下面 N 条消息和自己有没有关系」: 有关系 → 回复 (+1) 并消耗 1 个预算,
+    # 预算归零或出现无关消息 (主 AI 判 NO_REPLY) → 关窗结束。
+    # None = 旧行为 (每次回复满血刷新窗口); 机机 = 2。
+    followup_reply_budget: int | None = None
 
     def segment_disabled(self, identifier: str) -> bool:
         return identifier in self.disabled_prompt_segments
