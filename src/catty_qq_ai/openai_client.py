@@ -2180,6 +2180,486 @@ async def _stream_chat_completion_attempt(
     }
 
 
+# === Responses API 支持 (主人 2026-08-10) ===
+# opencode.ai zen 网关 (gpt-5.6-luna) 只提供 OpenAI Responses 协议 (/v1/responses),
+# /chat/completions 会直接 404 (HTML 错误页)。策略: 请求侧 chat-completions payload →
+# Responses body; 响应侧 Responses JSON → chat-completions shape, 让 function calling
+# 循环 / _extract_content / cache stats / dashboard 全部零改动复用。_post_chat_completion_raw
+# 是唯一 HTTP 落点, 主回复 / router / fallback / audit / instant 全链路自动生效。
+
+
+def _is_responses_endpoint(base_url: str) -> bool:
+    """URL 路径以 /responses 结尾 → 走 OpenAI Responses API。"""
+    try:
+        path = urlparse((base_url or "").strip()).path.rstrip("/")
+    except Exception:  # noqa: BLE001
+        return False
+    return path.endswith("/responses")
+
+
+def _responses_url(base_url: str) -> str:
+    base = (base_url or "").strip().rstrip("/")
+    if base.endswith("/responses"):
+        return base
+    return f"{base}/responses"
+
+
+def _content_to_responses_parts(content: Any, *, output: bool) -> list[dict[str, Any]]:
+    """chat-completions message content → Responses API content parts.
+
+    - str → [input_text/output_text]
+    - list → text/image_url/image/input_image 各类型映射, 未知类型有 text 保底
+    """
+    if isinstance(content, list):
+        parts: list[dict[str, Any]] = []
+        for item in content:
+            if not isinstance(item, dict):
+                continue
+            item_type = str(item.get("type") or "").lower()
+            if item_type in ("text", "input_text", "output_text"):
+                text = item.get("text")
+                if isinstance(text, str) and text.strip():
+                    parts.append({
+                        "type": "output_text" if output else "input_text",
+                        "text": text,
+                    })
+                continue
+            if item_type in ("image_url", "image", "input_image"):
+                image_url = item.get("image_url")
+                if isinstance(image_url, dict):
+                    url = image_url.get("url")
+                elif isinstance(image_url, str):
+                    url = image_url
+                else:
+                    url = item.get("url")
+                if url:
+                    parts.append({
+                        "type": "input_image",
+                        "image_url": {"url": url},
+                    })
+                continue
+            text = item.get("text")
+            if isinstance(text, str) and text.strip():
+                parts.append({
+                    "type": "output_text" if output else "input_text",
+                    "text": text,
+                })
+        return parts
+    if isinstance(content, str) and content.strip():
+        return [{"type": "output_text" if output else "input_text", "text": content}]
+    return []
+
+
+def _messages_to_responses_input(messages: list[ChatMessage]) -> list[dict[str, Any]]:
+    """chat-completions messages → Responses API input items.
+
+    - system/developer → message item (role 保留, 请求侧再 hoist 成 instructions)
+    - user → message item (input_text / input_image)
+    - assistant → message item (output_text) + 每个 tool_call 一个 function_call item
+      (message item 必须排在 function_call items 之前, API 要求 function_call 跟随关联 message)
+    - tool → function_call_output item
+    """
+    out: list[dict[str, Any]] = []
+    for raw in messages:
+        if not isinstance(raw, dict):
+            continue
+        role = str(raw.get("role") or "").strip()
+        content = raw.get("content")
+
+        if role == "tool":
+            call_id = str(raw.get("tool_call_id") or "")
+            if not call_id:
+                continue
+            if isinstance(content, str):
+                output_text = content
+            elif isinstance(content, list):
+                output_text = "\n".join(
+                    str(part.get("text", "") or "")
+                    for part in content
+                    if isinstance(part, dict)
+                )
+            else:
+                output_text = str(content or "")
+            out.append({
+                "type": "function_call_output",
+                "call_id": call_id,
+                "output": output_text,
+            })
+            continue
+
+        if role == "assistant":
+            parts = _content_to_responses_parts(content, output=True)
+            tool_calls = raw.get("tool_calls") or []
+            if parts:
+                out.append({"type": "message", "role": "assistant", "content": parts})
+            for tool_call in tool_calls:
+                if not isinstance(tool_call, dict):
+                    continue
+                fn = tool_call.get("function") or {}
+                name = str(fn.get("name") or "") if isinstance(fn, dict) else ""
+                if not name:
+                    name = str(tool_call.get("name") or "")
+                arguments = ""
+                if isinstance(fn, dict):
+                    arguments = str(fn.get("arguments") or "")
+                if not arguments:
+                    arguments = str(tool_call.get("arguments") or "")
+                if name:
+                    out.append({
+                        "type": "function_call",
+                        "call_id": str(tool_call.get("id") or ""),
+                        "name": name,
+                        "arguments": arguments,
+                    })
+            continue
+
+        # user / system / developer
+        if role not in ("user", "system", "developer"):
+            role = "user"
+        parts = _content_to_responses_parts(content, output=False)
+        if not parts:
+            parts = [{"type": "input_text", "text": ""}]
+        out.append({"type": "message", "role": role, "content": parts})
+    return out
+
+
+def _tools_to_responses(tools: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
+    """OpenAI function tools → Responses API 扁平形态 (无 function 嵌套, 无空名)。"""
+    out: list[dict[str, Any]] = []
+    for schema in normalize_openai_tool_schemas(tools or []):
+        fn = schema.get("function") or {}
+        name = str(fn.get("name") or "").strip()
+        if not name:
+            continue
+        tool: dict[str, Any] = {"type": "function", "name": name}
+        description = str(fn.get("description") or "").strip()
+        if description:
+            tool["description"] = description
+        parameters = fn.get("parameters")
+        if isinstance(parameters, dict) and parameters:
+            tool["parameters"] = parameters
+        out.append(tool)
+    return out
+
+
+def _tool_choice_to_responses(choice: ToolChoice) -> Any:
+    if choice is None or choice == "auto":
+        return "auto"
+    if choice in ("none", "required"):
+        return choice
+    if isinstance(choice, dict):
+        fn = choice.get("function") or {}
+        name = str(fn.get("name") or "") if isinstance(fn, dict) else ""
+        if not name:
+            name = str(choice.get("name") or "")
+        if name:
+            return {"type": "function", "name": name}
+    return "auto"
+
+
+def _payload_to_responses_body(
+    payload: dict[str, Any],
+    *,
+    stream: bool,
+) -> dict[str, Any]:
+    """chat-completions payload → Responses API request body.
+
+    系统消息 hoist 到顶层 instructions (Responses 标准通道), 其余消息进 input。
+    chat-completions 专属字段 (messages/max_tokens/stream/stream_options/tools/
+    tool_choice) 转换或丢弃; extra_body 只透传白名单字段。
+    """
+    body: dict[str, Any] = {"model": str(payload.get("model") or "")}
+    input_items = _messages_to_responses_input(payload.get("messages") or [])
+    system_texts: list[str] = []
+    rest: list[dict[str, Any]] = []
+    for item in input_items:
+        if item.get("role") == "system":
+            texts = [
+                str(part.get("text") or "")
+                for part in (item.get("content") or [])
+                if isinstance(part, dict)
+                and isinstance(part.get("text"), str)
+                and part["text"].strip()
+            ]
+            if texts:
+                system_texts.append("\n".join(texts))
+            continue
+        rest.append(item)
+    if system_texts:
+        body["instructions"] = "\n\n".join(system_texts)
+    if rest:
+        body["input"] = rest
+    if payload.get("temperature") is not None:
+        body["temperature"] = payload["temperature"]
+    if payload.get("max_tokens") is not None:
+        body["max_output_tokens"] = payload["max_tokens"]
+    tools = payload.get("tools")
+    if tools:
+        converted_tools = _tools_to_responses(tools)
+        if converted_tools:
+            body["tools"] = converted_tools
+            body["tool_choice"] = _tool_choice_to_responses(
+                payload.get("tool_choice") or "auto",
+            )
+    # extra_body 透传白名单 (chat-completions 专属键已在上面转换/丢弃)
+    for key in ("thinking", "reasoning_effort", "store", "metadata", "prompt_cache_key", "user"):
+        if key in payload:
+            body[key] = payload[key]
+    if stream:
+        body["stream"] = True
+    return body
+
+
+def _convert_responses_data(data: dict[str, Any]) -> dict[str, Any]:
+    """Responses API response JSON → chat-completions shape (下游零改动)。
+
+    - output[].message content (output_text / output_image) → message.content / images
+    - output[].function_call → message.tool_calls
+    - output[].reasoning summary → message.reasoning_content
+    - usage: input_tokens/output_tokens → prompt_tokens/completion_tokens,
+      cached_tokens → prompt_tokens_details.cached_tokens (cache stats 可识别)
+    - status → finish_reason (completed=stop / incomplete=length / failed=error)
+    """
+    if isinstance(data.get("choices"), list) and data.get("choices"):
+        return data
+    output = data.get("output") or []
+    text_parts: list[str] = []
+    images: list[dict[str, Any]] = []
+    tool_calls: list[dict[str, Any]] = []
+    reasoning_parts: list[str] = []
+    for item in output:
+        if not isinstance(item, dict):
+            continue
+        item_type = item.get("type")
+        if item_type == "message":
+            for part in item.get("content") or []:
+                if not isinstance(part, dict):
+                    continue
+                part_type = part.get("type")
+                if part_type in ("output_text", "text"):
+                    text = part.get("text")
+                    if isinstance(text, str) and text:
+                        text_parts.append(text)
+                elif part_type == "output_image":
+                    images.append(part)
+        elif item_type == "function_call":
+            call_id = str(item.get("call_id") or item.get("id") or "")
+            tool_calls.append({
+                "id": call_id,
+                "type": "function",
+                "function": {
+                    "name": str(item.get("name") or ""),
+                    "arguments": str(item.get("arguments") or ""),
+                },
+            })
+        elif item_type == "reasoning":
+            for summary in item.get("summary") or []:
+                if isinstance(summary, dict) and isinstance(summary.get("text"), str):
+                    reasoning_parts.append(summary["text"])
+    content = "\n".join(part for part in text_parts if part).strip()
+    message: dict[str, Any] = {"role": "assistant"}
+    message["content"] = content if content else None
+    if images:
+        message["images"] = images
+    if reasoning_parts:
+        message["reasoning_content"] = "\n".join(
+            part for part in reasoning_parts if part
+        ).strip()
+    if tool_calls:
+        message["tool_calls"] = tool_calls
+    status = str(data.get("status") or "completed")
+    if status == "incomplete":
+        finish_reason = "length"
+    elif status == "failed":
+        finish_reason = "error"
+    else:
+        finish_reason = "stop"
+    usage = data.get("usage") or {}
+    converted_usage: dict[str, Any] = {}
+    if isinstance(usage, dict):
+        input_tokens = int(usage.get("input_tokens") or 0)
+        output_tokens = int(usage.get("output_tokens") or 0)
+        converted_usage = {
+            "prompt_tokens": input_tokens,
+            "completion_tokens": output_tokens,
+            "total_tokens": int(usage.get("total_tokens") or (input_tokens + output_tokens)),
+        }
+        details_in = usage.get("input_tokens_details") or {}
+        if isinstance(details_in, dict) and int(details_in.get("cached_tokens") or 0) > 0:
+            converted_usage["prompt_tokens_details"] = {
+                "cached_tokens": int(details_in["cached_tokens"]),
+            }
+        details_out = usage.get("output_tokens_details") or {}
+        if isinstance(details_out, dict) and int(details_out.get("reasoning_tokens") or 0) > 0:
+            converted_usage["completion_tokens_details"] = {
+                "reasoning_tokens": int(details_out["reasoning_tokens"]),
+            }
+    return {
+        "choices": [{"message": message, "finish_reason": finish_reason, "index": 0}],
+        "usage": converted_usage,
+        "model": str(data.get("model") or ""),
+        "id": str(data.get("id") or ""),
+    }
+
+
+async def _stream_responses_attempt(
+    *,
+    url: str,
+    headers: dict[str, str],
+    payload: dict[str, Any],
+    timeout: float,
+    proxy: str,
+    dash_stream_id: str | None,
+    dash_mod: Any,
+) -> dict[str, Any]:
+    """OpenAI Responses API 流式 attempt — SSE 事件拼成 chat-completions shape.
+
+    - response.output_text.delta → dashboard chunk push
+    - response.function_call_arguments.delta → 按 item_id 累积 arguments
+    - response.completed → 权威完整 response → _convert_responses_data
+    - error 事件 → raise OpenAICompatibleError(.status_code=502, caller 会 5xx retry)
+    - HTTP >= 400 → raise OpenAICompatibleError(.status_code, caller 决定重试)
+    """
+    body = _payload_to_responses_body(payload, stream=True)
+    text_accum = ""
+    reasoning_accum = ""
+    tool_calls_by_item: dict[str, dict[str, str]] = {}
+    completed: dict[str, Any] | None = None
+    error_message: str | None = None
+
+    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+        async with client.stream("POST", url, headers=headers, json=body) as response:
+            if response.status_code >= 400:
+                try:
+                    error_text = (await response.aread()).decode("utf-8", "ignore")[:500]
+                except Exception:  # noqa: BLE001
+                    error_text = f"<read failed status={response.status_code}>"
+                err = OpenAICompatibleError(
+                    _catty_http_status_message("AI 接口", response.status_code),
+                    error_text,
+                )
+                err.status_code = response.status_code  # type: ignore[attr-defined]
+                raise err
+
+            async for line in response.aiter_lines():
+                if not line:
+                    continue
+                if line.startswith("data:"):
+                    data_str = line[5:].lstrip()
+                elif line.startswith(":"):
+                    # SSE 注释 (keep-alive heartbeat), 跳过
+                    continue
+                else:
+                    continue
+                if not data_str or data_str == "[DONE]":
+                    continue
+                try:
+                    event = json.loads(data_str)
+                except (ValueError, json.JSONDecodeError):
+                    continue
+                event_type = str(event.get("type") or "")
+
+                if event_type == "response.completed":
+                    completed = event.get("response") or event
+                    continue
+                if event_type == "error":
+                    error_obj = event.get("error") or {}
+                    error_message = str(error_obj.get("message") or "")[:500]
+                    continue
+                if event_type == "response.output_text.delta":
+                    delta = event.get("delta")
+                    if isinstance(delta, str) and delta:
+                        text_accum += delta
+                        if dash_stream_id is not None and dash_mod is not None:
+                            try:
+                                dash_mod.push_event(dash_stream_id, {
+                                    "delta_text": delta,
+                                    "event_type": "responses_chunk",
+                                })
+                            except Exception:  # noqa: BLE001
+                                pass
+                    continue
+                if event_type == "response.reasoning_summary_text.delta":
+                    delta = event.get("delta")
+                    if isinstance(delta, str) and delta:
+                        reasoning_accum += delta
+                    continue
+                if event_type == "response.output_item.added":
+                    item = event.get("item") or {}
+                    if isinstance(item, dict) and item.get("type") == "function_call":
+                        item_id = str(item.get("id") or item.get("item_id") or "")
+                        if item_id:
+                            tool_calls_by_item.setdefault(item_id, {
+                                "name": str(item.get("name") or ""),
+                                "call_id": str(item.get("call_id") or ""),
+                                "arguments": "",
+                            })
+                    continue
+                if event_type == "response.function_call_arguments.delta":
+                    item_id = str(event.get("item_id") or "")
+                    if item_id:
+                        tool_call = tool_calls_by_item.setdefault(item_id, {
+                            "name": "", "call_id": "", "arguments": "",
+                        })
+                        delta = event.get("delta")
+                        if isinstance(delta, str):
+                            tool_call["arguments"] += delta
+                    continue
+                if event_type == "response.output_item.done":
+                    item = event.get("item") or {}
+                    if isinstance(item, dict) and item.get("type") == "function_call":
+                        item_id = str(item.get("id") or item.get("item_id") or "")
+                        if item_id:
+                            tool_call = tool_calls_by_item.setdefault(item_id, {
+                                "name": "", "call_id": "", "arguments": "",
+                            })
+                            if not tool_call["name"]:
+                                tool_call["name"] = str(item.get("name") or "")
+                            if not tool_call["call_id"]:
+                                tool_call["call_id"] = str(item.get("call_id") or "")
+                            if not tool_call["arguments"]:
+                                tool_call["arguments"] = str(item.get("arguments") or "")
+                    continue
+
+    if error_message:
+        err = OpenAICompatibleError("AI 接口流式错误。", error_message)
+        err.status_code = 502  # type: ignore[attr-defined]
+        raise err
+
+    if completed is not None:
+        data = _convert_responses_data(completed)
+        # 个别网关 completed 不带完整 output 文本, 用累积 delta 兜底
+        choice = (data.get("choices") or [{}])[0]
+        message = choice.get("message") or {}
+        if not message.get("content") and text_accum:
+            message["content"] = text_accum
+        if not message.get("reasoning_content") and reasoning_accum:
+            message["reasoning_content"] = reasoning_accum
+        return data
+
+    # 网关没发 response.completed → 用累积 delta 手动拼
+    message: dict[str, Any] = {"role": "assistant"}
+    message["content"] = text_accum if text_accum else None
+    if reasoning_accum:
+        message["reasoning_content"] = reasoning_accum
+    tool_calls: list[dict[str, Any]] = []
+    for item_id, tool_call in tool_calls_by_item.items():
+        tool_calls.append({
+            "id": tool_call["call_id"] or item_id,
+            "type": "function",
+            "function": {
+                "name": tool_call["name"],
+                "arguments": tool_call["arguments"],
+            },
+        })
+    if tool_calls:
+        message["tool_calls"] = tool_calls
+    return {
+        "choices": [{"message": message, "finish_reason": "stop", "index": 0}],
+        "usage": {},
+    }
+
+
 async def _post_chat_completion_raw(
     *,
     base_url: str,
@@ -2394,7 +2874,7 @@ async def _post_chat_completion_raw(
             # 让 messages 结尾 = user. 真实 dump 重放实测: 末尾=system 时 history 死锁不进
             # cache (hit 7808), 改成末尾=user 后 history 进 cache (hit 7808→12224, +30pp).
             # 根因 = DeepSeek 只在 user-end/output-end 落盘 turn 边界单元, 末尾 system 两头不沾.
-            # spark 已在上面把 assistant prefill 改写为 user hint, 因此也能触发这里的折叠。
+            # spark 已在上面把 assistant prefill 改写为 user hint, 因此也能触发这里的折叠.
             collapsed = collapse_trailing_systems_into_last_user(messages)
             if collapsed > 0:
                 _logger.info(
@@ -2597,19 +3077,33 @@ async def _post_chat_completion_raw(
         # 主人:任何 5xx 自动 retry 3 次(共 4 次尝试),3 次都失败才上抛
         # 4xx 是 client error,重试也是一样的错,不重试
         last_error: OpenAICompatibleError | None = None
+        # 主人 2026-08-10: /v1/responses 网关 (gpt-5.6-luna) 只认 Responses 协议 —
+        # body 转换 / 响应转换都在 _responses_* 辅助里, retry 语义不变。
+        _responses_mode = _is_responses_endpoint(base_url)
         for attempt in range(4):
             if stream:
                 # === Streaming branch (主人 2026-05-28 Step 1) ===
                 try:
-                    data = await _stream_chat_completion_attempt(
-                        url=_chat_completions_url(base_url),
-                        headers=headers,
-                        payload=payload,
-                        timeout=timeout,
-                        proxy=proxy,
-                        dash_stream_id=_dash_stream_id,
-                        dash_mod=_dash_mod,
-                    )
+                    if _responses_mode:
+                        data = await _stream_responses_attempt(
+                            url=_responses_url(base_url),
+                            headers=headers,
+                            payload=payload,
+                            timeout=timeout,
+                            proxy=proxy,
+                            dash_stream_id=_dash_stream_id,
+                            dash_mod=_dash_mod,
+                        )
+                    else:
+                        data = await _stream_chat_completion_attempt(
+                            url=_chat_completions_url(base_url),
+                            headers=headers,
+                            payload=payload,
+                            timeout=timeout,
+                            proxy=proxy,
+                            dash_stream_id=_dash_stream_id,
+                            dash_mod=_dash_mod,
+                        )
                 except OpenAICompatibleError as exc:
                     _status = getattr(exc, "status_code", None)
                     if _status and 500 <= _status < 600:
@@ -2646,10 +3140,15 @@ async def _post_chat_completion_raw(
                         pass
                 return data
 
-            # === Non-streaming branch (现有逻辑保留) ===
+            # === Non-streaming branch (现有逻辑保留 + Responses 转换) ===
             async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
                 response = await client.post(
-                    _chat_completions_url(base_url), headers=headers, json=payload,
+                    _responses_url(base_url) if _responses_mode else _chat_completions_url(base_url),
+                    headers=headers,
+                    json=(
+                        _payload_to_responses_body(payload, stream=False)
+                        if _responses_mode else payload
+                    ),
                 )
 
             if response.status_code < 400:
@@ -2659,6 +3158,8 @@ async def _post_chat_completion_raw(
                     raise OpenAICompatibleError(
                         "AI 返回的不是 JSON。", response.text[:500],
                     ) from exc
+                if _responses_mode:
+                    data = _convert_responses_data(data)
                 # === cache hit 监测 (DeepSeek / Anthropic / OpenAI 都识别) ===
                 # 主人 2026-05-28: 改为始终调用, 函数内部自己判断有无 cache 字段
                 # (DeepSeek 路径 enable_cache=False 但仍想看 prompt_cache_hit_tokens).
@@ -3559,7 +4060,7 @@ async def local_critic_completion(
             proxy=config.catty_http_proxy,
             temperature=config.catty_local_critic_temperature,
             max_tokens=request_max_tokens,
-            extra_headers=config.catty_local_critic_extra_headers,
+            extra_headers=config.catty_local_critic_extra_headers or config.catty_openai_extra_headers,
             extra_body=body,
         )
 
@@ -3572,7 +4073,7 @@ async def local_critic_completion(
         proxy=config.catty_http_proxy,
         temperature=config.catty_local_critic_temperature,
         max_tokens=request_max_tokens,
-        extra_headers=config.catty_local_critic_extra_headers,
+        extra_headers=config.catty_local_critic_extra_headers or config.catty_openai_extra_headers,
         extra_body=body,
         request_route="local_critic",
     )
@@ -3629,7 +4130,11 @@ async def chat_completion_summary(config: Config, messages: list[ChatMessage]) -
     return await chat_completion(config, messages)
 
 
-async def chat_completion_instant(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 80) -> str:
+async def chat_completion_instant(
+    config: Config,
+    messages: list[ChatMessage],
+    *,
+    fallback_max_tokens: int = 80) -> str:
     """走 catty_filter_* 配置(spark 这种小快模型)的瞬时完成。
 
     用途:placeholder 等候语、签到/积分卡 caption 这种 1-2 句猫娘短话——
