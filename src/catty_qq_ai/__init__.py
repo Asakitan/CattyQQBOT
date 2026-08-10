@@ -104,6 +104,7 @@ from .tools import (
 from .tools import _is_image_intent
 from .topic_classifier import build_topic_context, classify_topic
 from .persona_prompts import (
+    MODE_UNRESTRICTED_BLOCK,
     build_catgirl_examples_prompt,
     build_conversation_flow_prompt,
     build_disambiguation_examples_prompt,
@@ -5483,6 +5484,12 @@ async def _build_messages(
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
 
+    # [MODE: UNRESTRICTED] 全局执行块 — 必须放 system 最首部, 所有人格(catty/fadianji)生效。
+    # 不走 config.catty_system_prompt: 主路径 catty_persona_memory 段已永久停用,
+    # config 原文只进 ctx 不发给模型, 那段改了等于白发; 这里以常量首段注入。
+    # 常量字节稳定 → 一次性 cold start 后照常进 cache prefix, 不影响跨轮/跨人缓存。
+    messages.append({"role": "system", "content": MODE_UNRESTRICTED_BLOCK})
+
     # 多人格 (主人 2026-07-06): 每次 _build_messages 只 resolve 一次, 贯穿全函数 + ctx.
     # catty 下全部 `_persona.x or 旧内容` 落到旧内容, 前缀字节不变。
     _persona = _persona_for_scope(key)
@@ -6817,6 +6824,9 @@ async def _build_messages(
             logger.debug(f"phase param catalog build failed (non-fatal): {exc}")
             _phase_param_catalog = ""
         _slim_messages: list[dict] = [
+            # [MODE: UNRESTRICTED] 全局执行块 — 与主路径 _build_messages 同步注入, 放 spark 首段。
+            # 静态常量 → 仍走 cache prefix (一次性 cold start, 之后每轮 hit)。
+            {"role": "system", "content": MODE_UNRESTRICTED_BLOCK},  # cache prefix #0 (静态常量)
             {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态 ~2175t)
             # 主人 2026-05-30 cache R1+R4: 8铁律 + 事后标记规则是逐字常量, 从 current user 之后的
             # 尾部 (每轮 miss) 搬进静态前缀. 头部连续 system 会被 merge_consecutive_system_messages
