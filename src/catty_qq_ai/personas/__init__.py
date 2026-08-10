@@ -137,6 +137,9 @@ class Persona:
     disabled_features: frozenset[str] = field(default_factory=frozenset)
     imagegen: PersonaImagegen | None = None
     chat_rhythm: str | None = None              # order 153 QQ 碎句节奏段 (catty=颜文字库原文)
+    # conversation key → 静态 prompt。每轮只选择当前对话的一段, 不把其它会话
+    # prompt 拼入请求。内容必须是模块级常量以保持该会话 cache 稳定。
+    conversation_prompts: tuple[tuple[str, str], ...] = field(default_factory=tuple)
     # 唤醒词 (主人 2026-07-06: 猫娘版是猫的, 机机版是发电机的)。
     # None = 用 config.catty_trigger_prefixes / catty_directed_keywords (catty 默认);
     # 非 None = **整组替换** config 值 (extract_incoming_message 按 scope 生效)。
@@ -161,6 +164,15 @@ class Persona:
 
     def feature_disabled(self, feature: str) -> bool:
         return feature in self.disabled_features
+
+    def conversation_prompt_for(self, conversation_key: str) -> str:
+        normalized = str(conversation_key or "").strip()
+        if not normalized:
+            return ""
+        for target_conversation, prompt in self.conversation_prompts:
+            if normalized == target_conversation:
+                return prompt
+        return ""
 
 
 @dataclass(frozen=True, slots=True)

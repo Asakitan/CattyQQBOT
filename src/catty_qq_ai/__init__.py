@@ -7510,16 +7510,18 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "——『反应』『吐槽』『话题展开』三个真实轮次。"
         )
     else:
-        # 多人格 (主人 2026-07-06): 非 catty (机机) — 1 条短句为主, 连发是情绪爆发不是常态.
+        # 多人格 (主人 2026-07-06): 非 catty (机机) — 单气泡是绝对默认,
+        # 连发只在上头/认真解释/步骤需要时低频出现, 不主动教模型拆两行。
         return (
-            "QQ 回复分段规则——长度分布：大多数回复只有 1 条短句（3-15 字）；"
-            "偶尔 2 条；情绪上头/整活才 3~4 条 3-8 字短气泡连发（换行分条）。"
-            "**连发正例**（仅整活时）：『无敌绘制』『已稳定』『这么简单的道理』『怎么没人发现过』。"
+            "QQ 回复分段规则——机机人格默认单条：大多数回复只有 1 条短句（3-15 字）；"
+            "普通问候、确认、吐槽、安抚、短评、一句技术结论都**只发一条**。"
+            "只有情绪上头、认真解释或确实要分步骤时才低频拆 2 条；3~4 条是极少数爆发/协作连发。"
             "单词就能回的（帅 / 草 / 好好好好）只发一条，别硬凑；"
+            "能合成一句就不要为了显得像 QQ 拆成『我去』『好厉害』这种两段。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
-            f"拆分方法两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
+            f"确实需要拆时两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
             "被拆的前几条结尾少用句号/感叹号，自然些。"
-            f"上限 {max_chunks} 条。"
+            f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
             "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
             "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用换行+「1)」「2)」。"
         )
@@ -8852,8 +8854,8 @@ def _looks_like_qq_short_chat(reply: str) -> bool:
         return False  # 长回复多半是技术答,整段保持
     if any(m in reply for m in _TECHNICAL_FORMATTING_PATTERNS):
         return False  # 有 LaTeX/代码块标记 = 技术格式化,不要拆
-    # 分点列表(出现 2 个及以上 "1. " / "- " / "* " 行首)= 技术列表,不拆
-    if len(re.findall(r"(?:^|\n)\s*(?:[-*]|\d+\.)\s", reply)) >= 2:
+    # 分点列表(出现 2 个及以上 "1. " / "1) " / "- " / "* " 行首)= 技术列表,不拆
+    if len(re.findall(r"(?:^|\n)\s*(?:[-*]|\d+[.)])\s", reply)) >= 2:
         return False
     return True
 
@@ -8877,27 +8879,26 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
 
-    # 路径 1.5 (多人格, 主人 2026-07-06): 非 catty 人格 (机机) 弹幕式换行必须切开 —
-    # 旧路径 2 的三个坑会让"换行了但没分条": >max_chunks 行整段不切 / 总长 >240 不切 /
-    # 单段 >80 不切. 这里放宽: 行数超限用 _cap_reply_chunks 合并尾部, 总长阈值 320,
-    # 只要不是技术格式 (代码/公式/列表) 就按行切.
+    # 路径 1.5 (多人格, 主人 2026-08-10 收敛): 非 catty 人格 (机机) 不再把普通换行
+    # 一律拆成气泡 — 旧逻辑会把「我去\n好厉害」这种一句反应硬发成两条。只有 AI
+    # 显式输出 REPLY_SPLIT_MARKER (路径 1) 才尊重拆分; 裸换行默认合并回单条,
+    # 长技术/列表仍交给路径 3 的 split_reply 兜底。
     if (
         persona is not None
         and getattr(persona, "name", "catty") != "catty"
         and "\n" in reply
         and len(reply) <= 320
         and not any(m in reply for m in _TECHNICAL_FORMATTING_PATTERNS)
-        and len(re.findall(r"(?:^|\n)\s*(?:[-*]|\d+\.)\s", reply)) < 2
+        and len(re.findall(r"(?:^|\n)\s*(?:[-*]|\d+[.)])\s", reply)) < 2
     ):
         segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
         if len(segments) >= 2 and all(len(seg) <= 100 for seg in segments):
-            for index in range(len(segments) - 1):
-                segments[index] = segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
-            return _cap_reply_chunks(segments, max_chunks=max_chunks)
+            merged = " ".join(seg.rstrip(TRAILING_CHAT_PUNCTUATION) for seg in segments)
+            return split_reply(merged, config.catty_reply_max_chars, max_chunks=max_chunks)
 
     # 路径 2:AI 用换行表达"QQ 节奏拆分"(短回复且无技术格式标记)
     # —— 严格限定为短聊场景,避免长技术答里的 \n 被错拆
-    if _looks_like_qq_short_chat(reply):
+    if getattr(persona, "name", "catty") == "catty" and _looks_like_qq_short_chat(reply):
         segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
         # 每段也要短(≤80 字符),才像 QQ 连发节奏;否则更可能是段落不是消息
         if 2 <= len(segments) <= max_chunks and all(len(seg) <= 80 for seg in segments):
@@ -8911,7 +8912,8 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
     # → 按段切. 这样图片里『笨蛋主人到底在干嘛...』『嗯...好胀』那种粘连场景能切开.
     segments_nsfw = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
     if (
-        2 <= len(segments_nsfw) <= max_chunks
+        getattr(persona, "name", "catty") == "catty"
+        and 2 <= len(segments_nsfw) <= max_chunks
         and all(len(seg) <= 260 for seg in segments_nsfw)
         and any(_looks_like_nsfw_segment(seg) for seg in segments_nsfw)
     ):
@@ -11172,7 +11174,13 @@ async def _generate_affection_caption(
     if _cap_persona.name != "catty":
         # 多人格: 用该人格的 core_persona + 提醒段生成签到文案 (机机口吻等)
         if _cap_persona.core_persona:
-            messages.append({"role": "system", "content": _cap_persona.core_persona})
+            _cap_conversation_prompt = _cap_persona.conversation_prompt_for(
+                _conversation_queue_key(event)
+            )
+            _cap_core_prompt = _cap_persona.core_persona
+            if _cap_conversation_prompt:
+                _cap_core_prompt = f"{_cap_core_prompt}\n\n{_cap_conversation_prompt}"
+            messages.append({"role": "system", "content": _cap_core_prompt})
         messages.append(
             {
                 "role": "system",

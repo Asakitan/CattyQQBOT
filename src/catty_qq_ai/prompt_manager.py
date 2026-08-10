@@ -356,9 +356,18 @@ def register_catty_persona(
     # 旧 build_reply_intelligence_prompt / get_description / get_personality /
     # get_scenario / build_reply_self_check_prompt 已不再 register, 内容内嵌到 core_persona.
     from . import catty_core_persona as _ccp
+
+    def _build_core_persona() -> str:
+        base = persona.core_persona or _ccp.CATTY_CORE_PERSONA
+        conversation_prompt = persona.conversation_prompt_for(scope)
+        if not conversation_prompt:
+            return base
+        # 每轮只拼当前 conversation key 对应的一段；其它私聊/群聊 prompt 不进入请求。
+        return f"{base}\n\n{conversation_prompt}"
+
     _reg(
         "catty_core_persona",
-        content_fn=lambda: persona.core_persona or _ccp.CATTY_CORE_PERSONA,
+        content_fn=_build_core_persona,
         order=100,
     )
     # 主人 2026-05-29 (P2): 群聊默认沉默块**仅群聊注入** (私聊 1v1 无意义且带偏 NSFW)。
