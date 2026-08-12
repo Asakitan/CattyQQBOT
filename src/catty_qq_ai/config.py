@@ -521,7 +521,7 @@ class Config(BaseModel):
     # 拦截提醒 AI 现写 (token_billing.ai_gate_reply), 失败兜底固定文案池.
     catty_token_billing_enabled: bool = True
     catty_private_tokens_per_point: int = 5000
-    catty_group_hourly_token_quota: int = 300_000  # 0 = 群聊不限
+    catty_group_hourly_token_quota: int = 3_000_000  # 0 = 群聊不限
 
     # ── 强互动判定 (强制走 DeepSeek 的场景, 积分够才放行) ───────────────────
     # 主人 2026-05-28: NSFW phase>=P3 / 意图 ∈ strong_intents / 情绪强烈 / CPU 信心<阈值.
