@@ -127,6 +127,7 @@ from .reply_markers import (
     REPLY_SPLIT_MARKER,
     TRAILING_CHAT_PUNCTUATION,
     extract_emoji_query as _extract_emoji_query,
+    extract_fadianji_mood as _extract_fadianji_mood,
     extract_inline_images as _extract_inline_images,
     split_chunk_with_image_placeholders as _split_chunk_with_image_placeholders,
     strip_inline_image_markers as _strip_inline_image_markers,
@@ -3505,6 +3506,48 @@ async def _execute_schema_gated_tool_call(
         return await execute_tool_call(name, arguments_json, tool_ctx)
 
 
+_TOOL_NARRATION_LINES: tuple[str, ...] = ("我查一下", "等等哦", "我去翻翻")
+_TOOL_NARRATION_LAST_BY_SCOPE: dict[str, str] = {}
+
+
+def _schedule_tool_narration(matcher: Matcher, event: MessageEvent) -> None:
+    scope = _conversation_queue_key(event)
+    previous = _TOOL_NARRATION_LAST_BY_SCOPE.get(scope)
+    candidates = [line for line in _TOOL_NARRATION_LINES if line != previous]
+    line = random.choice(candidates or list(_TOOL_NARRATION_LINES))
+    _TOOL_NARRATION_LAST_BY_SCOPE[scope] = line
+
+    async def _runner() -> None:
+        try:
+            await matcher.send(Message(line))
+        except asyncio.CancelledError:
+            return
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"tool narration send failed (non-fatal): {type(exc).__name__}: {exc}")
+
+    try:
+        asyncio.create_task(_runner(), name="catty-tool-narration")
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"tool narration task create failed (non-fatal): {type(exc).__name__}: {exc}")
+
+
+def _apply_fadianji_mood_marker(tag: str) -> None:
+    """主人 2026-08-13 (二轮): 主 AI 在回复末尾自报 <<<CATTY_FD_MOOD:tag>>>,
+    harness 提取后驱动事件状态机 — 情绪判断完全交给主 AI, 零额外 API 调用。
+    tag 合法性由 fadianji_state.apply_event 判定 (未知事件透传不动状态)。"""
+    normalized = str(tag or "").strip().lower()
+    if not normalized or normalized == "none":
+        return
+    if fadianji_state_store is None:
+        return
+    try:
+        fadianji_state_store.apply_event(normalized)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(
+            f"fadianji mood marker apply failed (non-fatal): {type(exc).__name__}: {exc}"
+        )
+
+
 def _reply_source_key(event: MessageEvent, message_id: str) -> str:
     scope = _conversation_queue_key(event)
     return f"{scope}:reply-source:{message_id}"
@@ -4950,6 +4993,12 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
         history_tokens_estimate = int(
             count_history_tokens(history) * multiplier + 0.999999
         )
+        # 主人 2026-08-13: AI 压缩 — 超触发阈值先安排后台 AI 蒸馏旧历史,
+        # 硬裁剪仍是安全网, 两条路径互不干扰。
+        if history_tokens_estimate > int(
+            getattr(config, "catty_session_ai_compact_trigger_tokens", 240_000)
+        ):
+            _schedule_session_ai_compact(key)
         if history_tokens_estimate > high_watermark:
             local_trim_budget = int(trim_to_tokens / multiplier) if multiplier > 0 else 0
             trimmed_history = trim_history_to_token_budget(
@@ -5024,6 +5073,122 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
         # 对称于 record_user_message 的处理(23 轮发现的 _sender_name bug 教训):
         # 静默吞异常会掩盖长期 bug,改成 log warning 让真实问题浮出来
         logger.warning(f"activity_feed record_assistant_reply failed: {type(_feed_exc).__name__}: {_feed_exc}")
+
+
+# ── 主人 2026-08-13: 会话历史 AI 压缩 ─────────────────────────────────
+# 超 catty_session_ai_compact_trigger_tokens 时, 后台让主 AI 把最旧一批历史蒸馏成
+# 结构化「前情提要」块, 代替纯硬裁剪的信息损失。单 scope 单飞, 失败不动历史,
+# 现有硬裁剪路径一字不动, 作为压缩未完成时的安全网。
+_AI_COMPACT_BLOCK_PREFIX = "【前情提要·AI压缩】"
+_AI_COMPACT_RUNNING: set[str] = set()
+
+
+def _is_ai_compact_block(message: object) -> bool:
+    return (
+        isinstance(message, dict)
+        and str(message.get("role") or "") in {"user", "system"}
+        and str(message.get("content") or "").startswith(_AI_COMPACT_BLOCK_PREFIX)
+    )
+
+
+def _schedule_session_ai_compact(key: str) -> None:
+    if not bool(getattr(config, "catty_session_ai_compact_enabled", True)):
+        return
+    if key in _AI_COMPACT_RUNNING:
+        return
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        return
+    _AI_COMPACT_RUNNING.add(key)
+    loop.create_task(_run_session_ai_compact(key), name=f"catty-session-ai-compact:{key}")
+
+
+async def _run_session_ai_compact(key: str) -> None:
+    try:
+        cache = _get_session_cache()
+        from .nlu.prompt_compressor import count_history_tokens
+        from .openai_client import (
+            chat_completion_summary,
+            get_current_model_override,
+            get_session_token_estimator_multiplier,
+        )
+
+        source = [m for m in cache.get(key) if not _is_ai_compact_block(m)]
+        if len(source) < 8:
+            return
+        boundary_len = len(source)  # 任务开始时的非压缩块消息数 (追加只发生在末尾)
+        # 最旧一批蒸馏, 最近 ~40% (按 token, 至少 4 条) 原样保留
+        total_tokens = max(count_history_tokens(source), 1)
+        keep_budget = int(total_tokens * 0.4)
+        kept: list = []
+        kept_tokens = 0
+        for message in reversed(source):
+            kept.insert(0, message)
+            kept_tokens += count_history_tokens([message])
+            if kept_tokens >= keep_budget and len(kept) >= 4:
+                break
+        old_span = source[: max(len(source) - len(kept), 0)]
+        if len(old_span) < 6:
+            return
+        lines: list[str] = []
+        for message in old_span:
+            role = str(message.get("role") or "") if isinstance(message, dict) else ""
+            content = str(message.get("content") or "")[:500]
+            if not content.strip():
+                continue
+            tag = "用户" if role == "user" else ("机机" if role == "assistant" else "补充")
+            lines.append(f"{tag}: {content}")
+        transcript = "\n".join(lines)[-60_000:]
+        summary = await chat_completion_summary(
+            config,
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "你是会话压缩器。把以下 QQ 聊天记录蒸馏成结构化中文摘要, 供后续对话当长期上下文。"
+                        "分段输出: 【人物与称呼】【关系与氛围】【重要事件与约定】【反复出现的梗】【未完成事项】;"
+                        " 总字数≤800字; 保留具体名词/时间/承诺; 不编造; 没有内容的分段写「无」。"
+                    ),
+                },
+                {"role": "user", "content": transcript},
+            ],
+        )
+        summary = str(summary or "").strip()
+        if not summary:
+            return
+        block = {
+            "role": "user",
+            "content": (
+                f"{_AI_COMPACT_BLOCK_PREFIX}以下是更早对话的 AI 蒸馏摘要, "
+                f"压缩于 {time.strftime('%Y-%m-%d %H:%M')}, 覆盖 {len(old_span)} 条原始消息。\n{summary}"
+            ),
+        }
+        # 替换前重取并锚定边界: 压缩期间新追加的消息全部保留, 一条不丢。
+        # 头部被裁/锚点变动则放弃本次替换, 不动历史。此后到 flush 无 await, 窗口最小。
+        fresh = [m for m in cache.get(key) if not _is_ai_compact_block(m)]
+        if len(fresh) < boundary_len or fresh[boundary_len - 1] != source[-1]:
+            logger.info(
+                f"session_ai_compact: scope={key} history head changed during compaction, skip replace"
+            )
+            return
+        preserved = fresh[max(boundary_len - len(kept), 0):boundary_len]
+        appended = fresh[boundary_len:]
+        new_history = [block] + preserved + appended
+        cache.set(key, new_history)
+        model = get_current_model_override() or str(getattr(config, "catty_openai_model", "") or "")
+        multiplier = get_session_token_estimator_multiplier(model)
+        estimate = int(count_history_tokens(new_history) * multiplier + 0.999999)
+        cache.update_metadata(key, history_tokens_estimate=estimate, context_updated_at=time.time())
+        cache.flush_sync()
+        logger.info(
+            f"session_ai_compact: scope={key} compressed={len(old_span)} "
+            f"kept={len(preserved)} appended={len(appended)} tokens≈{estimate}"
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"session_ai_compact failed for {key}: {type(exc).__name__}: {exc}")
+    finally:
+        _AI_COMPACT_RUNNING.discard(key)
 
 
 def _build_user_content(incoming: ExtractedMessage, *, image_description: str | None = None) -> object:
@@ -13040,7 +13205,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
         web_search_context = ""
         web_search_query = extract_web_search_query(incoming.text)
-        if web_search_query and config.catty_web_search_enabled:
+        # 主人 2026-08-13: 全量工具暴露时搜索交给模型自主调用, 快路径仅回切模式启用
+        if web_search_query and config.catty_web_search_enabled and not bool(
+            getattr(config, "catty_tools_full_exposure", True)
+        ):
             search_key = search_cooldown_key(event.user_id)
             if not _web_search_exempt(event):
                 now = time.monotonic()
@@ -13054,7 +13222,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 web_search_query,
                 reply_context,
             )
-        elif web_search_query:
+        elif web_search_query and not bool(
+            getattr(config, "catty_tools_full_exposure", True)
+        ):
             web_search_context = reply_context.render(
                 reply_context.catalog.web_search_disabled_instruction
             )
@@ -13333,18 +13503,35 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             persona=_tool_persona,
         )
 
+        _tool_narration_sent = False
+
         async def _tool_executor(
             name: str,
             args_json: str,
             *,
             _allowed_names: set[str] = _allowed_tool_names,
         ) -> dict[str, object]:
-            return await _execute_schema_gated_tool_call(
+            nonlocal _tool_narration_sent
+            result = await _execute_schema_gated_tool_call(
                 name,
                 args_json,
                 tool_ctx,
                 allowed_names=_allowed_names,
             )
+            # 主人 2026-08-13 (Review 修正): 旁白只在工具真实执行成功后才发,
+            # 主人校验/confirm/参数解析/能力闸门失败时不发"我查一下"。
+            if (
+                not _tool_narration_sent
+                and name in _allowed_names
+                and bool(getattr(config, "catty_tool_narration_enabled", True))
+                and getattr(_tool_persona, "name", "") == "fadianji"
+                and isinstance(result, dict)
+                and result.get("error") is None
+                and result.get("ok", True) is not False
+            ):
+                _tool_narration_sent = True
+                _schedule_tool_narration(matcher, event)
+            return result
 
         _forced_tool_choice: str | dict[str, object] = "auto"
         try:
@@ -13987,6 +14174,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         if _persona_for_event(event).name == "fadianji":
             reply = _strip_tone_parenthetical_for_fadianji(reply)
         reply, emoji_query = _extract_emoji_query(reply)
+        # 主人 2026-08-13 (二轮): 机机情绪自报 marker — 任何人格都先剥掉防泄漏,
+        # 只有 fadianji + 开关启用时才喂给事件状态机。
+        reply, _fd_mood_tag = _extract_fadianji_mood(reply)
+        if _fd_mood_tag and _persona_for_event(event).name == "fadianji" and bool(
+            getattr(config, "catty_fadianji_event_mood_enabled", True)
+        ):
+            _apply_fadianji_mood_marker(_fd_mood_tag)
         # 注:梗图由 catty_meme_query 下载并写入 tool_ctx.pending_image_segments,主回复后由发送链路带外送出。
         _save_assistant_training_sample(
             event,
@@ -14020,6 +14214,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         reply_for_send, latex_sources = replace_latex_with_placeholders(_sanitize_reply_text_for_output(reply))
         reply_for_send, inline_image_urls = _extract_inline_images(reply_for_send)
         chunks = _reply_chunks(reply_for_send, persona=_persona_for_event(event))
+
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
         if chunks:
@@ -14306,7 +14501,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # _with_tools / _instant / _codex_instant 拿到 DeepSeek 回复时自动蒸馏到 L3).
         # 这里不再单点触发 — 封装层一处覆盖主链路所有 emit 分支 + NSFW spark + catnify 透传,
         # 且只采 DeepSeek 真正生成的回复 (CPU 自产的 L1/L2/L3 直答不会被蒸回去, 杜绝自循环).
-        await matcher.finish(
+        await matcher.send(
             _compose_reply_message(
                 event,
                 text=final_message,
@@ -14315,6 +14510,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 inline_image_urls=inline_image_urls,
             )
         )
+        await matcher.finish()
 
 
 # ── DEV ENDPOINT: /dev/sim_chat ──────────────────────────────────────────

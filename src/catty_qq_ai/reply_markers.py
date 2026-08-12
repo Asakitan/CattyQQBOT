@@ -22,6 +22,10 @@ MEME_QUERY_SUFFIX = ">>>"
 INLINE_IMAGE_PREFIX = "<<<CATTY_INLINE_IMAGE:"
 INLINE_IMAGE_SUFFIX = ">>>"
 INLINE_IMAGE_PLACEHOLDER = "[图片]"  # history/memory 里替换 INLINE_IMAGE 用,省 token
+# 机机情绪自我标记: 主 AI 在回复末尾自报 <<<CATTY_FD_MOOD:tag>>>, harness 提取后
+# 喂给 fadianji_state 事件状态机; 标记被吃掉, 不出现在发送文本里。
+FADIANJI_MOOD_PREFIX = "<<<CATTY_FD_MOOD:"
+FADIANJI_MOOD_SUFFIX = ">>>"
 TRAILING_CHAT_PUNCTUATION = " \t\r\n。！？!?；;，,、：:…."
 
 
@@ -49,6 +53,10 @@ _INLINE_IMAGE_RE = re.compile(
     r"<{2,4}CATTY_INLINE_IMAGE:([^<>\n]*?)(?:>{2,4}|(?=\n)|\Z)",
     re.MULTILINE,
 )
+_FADIANJI_MOOD_RE = re.compile(
+    r"<{2,4}CATTY_FD_MOOD:([^<>\n]*?)(?:>{2,4}|(?=\n)|\Z)",
+    re.MULTILINE,
+)
 
 
 def extract_emoji_query(reply: str) -> tuple[str, str]:
@@ -70,6 +78,27 @@ def extract_emoji_query(reply: str) -> tuple[str, str]:
 
     cleaned = _EMOJI_QUERY_RE.sub(_sub, reply)
     return cleaned.strip(), selected_query
+
+
+def extract_fadianji_mood(reply: str) -> tuple[str, str]:
+    """提取并删除 ``<<<CATTY_FD_MOOD:tag>>>`` 机机情绪自我标记。
+
+    返回 ``(cleaned_text, first_tag)``;多个 marker 都删,只取第一个非空 tag。
+    tag 合法性由 fadianji_state.apply_event 判定,这里只做提取。
+    """
+    if not reply:
+        return "", ""
+    selected_tag = ""
+
+    def _sub(match: "re.Match[str]") -> str:
+        nonlocal selected_tag
+        tag = (match.group(1) or "").strip()
+        if tag and not selected_tag:
+            selected_tag = tag
+        return ""
+
+    cleaned = _FADIANJI_MOOD_RE.sub(_sub, reply)
+    return cleaned.strip(), selected_tag
 
 
 def extract_meme_queries(reply: str) -> tuple[str, list[tuple[int, str]]]:

@@ -11,12 +11,18 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import html
+import ipaddress
 import json
 import logging
 import re
+import socket
+import sys
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Awaitable, Callable, Collection, Literal
+from urllib.parse import quote, urljoin, urlsplit
 
 import httpx
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
@@ -218,6 +224,105 @@ _WEB_SEARCH_SCHEMA: dict[str, Any] = {
                 },
             },
             "required": ["query"],
+        },
+    },
+}
+
+
+
+_FETCH_URL_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_fetch_url",
+        "description": (
+            "抓取一个公开网页并提取可读文本。适用场景：用户发来链接让帮忙看看、"
+            "需要阅读网页正文、公告、文档或文章内容；也可用于核对链接里的具体信息。"
+            "仅允许 http/https，自动跟随重定向并做 SSRF 防护；HTML 会去掉脚本、样式和标签，"
+            "正文默认最多 4000 字、最多可调到 8000 字，非 HTML 响应最多返回 2000 字。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "url": {"type": "string", "description": "要读取的网页 URL。"},
+                "max_chars": {
+                    "type": "integer",
+                    "description": "正文最大字数，默认 4000，上限 8000。",
+                    "minimum": 1,
+                    "maximum": 8000,
+                },
+            },
+            "required": ["url"],
+        },
+    },
+}
+
+
+_WEATHER_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_weather",
+        "description": (
+            "查询指定城市的当前天气。适用场景：用户问某地现在天气、温度、体感、湿度、"
+            "风向风速，或问出门要不要带伞、穿什么；支持中文城市名。通过 wttr.in 获取，"
+            "无需 API key，失败时返回结构化错误。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "city": {"type": "string", "description": "城市名，例如北京、上海、Tokyo。"},
+            },
+            "required": ["city"],
+        },
+    },
+}
+
+
+_READ_FILE_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_read_file",
+        "description": (
+            "读取沙箱根目录内的 UTF-8 文本文件并返回带行号的片段。仅 bot 拥有者可用。"
+            "适用场景：拥有者让查看项目文件、日志、配置或源码；path 必须是相对沙箱根的路径，"
+            "禁止通过 ../ 逃出沙箱，单文件超过 2MB 会拒绝，默认读取 200 行、最多 500 行。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {"type": "string", "description": "相对沙箱根的文件路径。"},
+                "offset": {"type": "integer", "description": "起始行偏移，默认 0。", "minimum": 0},
+                "limit": {
+                    "type": "integer",
+                    "description": "读取行数，默认 200，上限 500。",
+                    "minimum": 1,
+                    "maximum": 500,
+                },
+            },
+            "required": ["path"],
+        },
+    },
+}
+
+
+_RUN_CODE_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_run_code",
+        "description": (
+            "在沙箱根目录中运行一段 Python 代码并返回合并后的 stdout/stderr 和退出码。"
+            "仅 bot 拥有者可用；模型必须先向用户确认执行意图，确认后才允许把 confirm 设为 true。"
+            "使用当前 Python 解释器、15 秒超时、不经过 shell，输出最多 4000 字；代码只能在沙箱 cwd 中运行。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "code": {"type": "string", "description": "要执行的 Python 源码。"},
+                "confirm": {
+                    "type": "boolean",
+                    "description": "仅在已向拥有者确认执行意图后填写 true。",
+                },
+            },
+            "required": ["code", "confirm"],
         },
     },
 }
@@ -1030,6 +1135,10 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_mc_status": _MC_STATUS_SCHEMA,
     "catty_emoji": _EMOJI_SCHEMA,
     "catty_web_search": _WEB_SEARCH_SCHEMA,
+    "catty_fetch_url": _FETCH_URL_SCHEMA,
+    "catty_weather": _WEATHER_SCHEMA,
+    "catty_read_file": _READ_FILE_SCHEMA,
+    "catty_run_code": _RUN_CODE_SCHEMA,
     "catty_nsfw_search": _NSFW_SEARCH_SCHEMA,
     "catty_image_search": _IMAGE_SEARCH_SCHEMA,
     "catty_meme_query": _MEME_QUERY_SCHEMA,
@@ -1127,6 +1236,36 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
             "query": {"type": "string", "description": "查询词"},
         },
         ["query"],
+    ),
+    "catty_fetch_url": _make_lazy_schema(
+        "catty_fetch_url", "抓取网页正文",
+        {
+            "url": {"type": "string", "description": "网页 URL"},
+            "max_chars": {"type": "integer", "description": "最大字数"},
+        },
+        ["url"],
+    ),
+    "catty_weather": _make_lazy_schema(
+        "catty_weather", "查询城市天气",
+        {"city": {"type": "string", "description": "城市名"}},
+        ["city"],
+    ),
+    "catty_read_file": _make_lazy_schema(
+        "catty_read_file", "读沙箱文本文件",
+        {
+            "path": {"type": "string", "description": "相对路径"},
+            "offset": {"type": "integer", "description": "起始行"},
+            "limit": {"type": "integer", "description": "行数"},
+        },
+        ["path"],
+    ),
+    "catty_run_code": _make_lazy_schema(
+        "catty_run_code", "运行沙箱 Python 代码",
+        {
+            "code": {"type": "string", "description": "Python 代码"},
+            "confirm": {"type": "boolean", "description": "确认执行"},
+        },
+        ["code", "confirm"],
     ),
     "catty_nsfw_search": _make_lazy_schema(
         "catty_nsfw_search", "pixiv/iwara R-18 搜 (私聊限定)",
@@ -1324,6 +1463,10 @@ _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
     "catty_mc_status": ToolCapability(execution_mode="external"),
     "catty_emoji": ToolCapability(execution_mode="write"),
     "catty_web_search": ToolCapability(execution_mode="external"),
+    "catty_fetch_url": ToolCapability(),
+    "catty_weather": ToolCapability(),
+    "catty_read_file": ToolCapability(),
+    "catty_run_code": ToolCapability(execution_mode="external"),
     "catty_nsfw_search": ToolCapability(
         scope="private",
         persona_feature="nsfw_spark",
@@ -1615,6 +1758,218 @@ _MEME_EXPLAIN_COOLDOWN_SECONDS = 30.0
 
 
 # ── 各 tool 的 executor ───────────────────────────────────────────────
+
+
+_TOOL_BROWSER_USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0 Safari/537.36"
+)
+_BLOCKED_HOST_PREFIXES = ("localhost", "127.", "10.", "192.168.", "169.254.")
+
+
+def _sandbox_root(ctx: ToolContext) -> Path:
+    configured = str(getattr(ctx.config, "catty_sandbox_dir", "") or "").strip()
+    return Path(configured or Path.cwd()).resolve()
+
+
+def _sandbox_path(ctx: ToolContext, raw_path: str) -> tuple[Path | None, Path]:
+    root = _sandbox_root(ctx)
+    candidate = (root / raw_path).resolve()
+    if candidate != root and root not in candidate.parents:
+        return None, root
+    return candidate, root
+
+
+def _is_owner(ctx: ToolContext) -> bool:
+    owner_qq = str(getattr(ctx.config, "catty_owner_qq", "") or "").strip()
+    return bool(owner_qq) and ctx.user_id == owner_qq
+
+
+def _blocked_url_host(host: str) -> str | None:
+    normalized = str(host or "").strip().lower().rstrip(".")
+    if not normalized:
+        return "URL 缺少 host"
+    if normalized in {"localhost", "::1", "0.0.0.0"}:
+        return "禁止访问内网或本机地址"
+    if any(normalized.startswith(prefix) for prefix in _BLOCKED_HOST_PREFIXES[1:]):
+        return "禁止访问内网或本机地址"
+    if normalized.startswith("172."):
+        try:
+            if 16 <= int(normalized.split(".", 2)[1]) <= 31:
+                return "禁止访问内网或本机地址"
+        except (IndexError, ValueError):
+            pass
+    try:
+        parsed = ipaddress.ip_address(normalized)
+    except ValueError:
+        parsed = None
+    if parsed is not None and (
+        parsed.is_loopback or parsed.is_private or parsed.is_link_local or parsed.is_unspecified
+    ):
+        return "禁止访问内网或本机地址"
+    try:
+        resolved = socket.getaddrinfo(normalized, None, type=socket.SOCK_STREAM)
+    except socket.gaierror:
+        return None
+    for item in resolved:
+        try:
+            address = ipaddress.ip_address(item[4][0])
+        except (IndexError, ValueError):
+            continue
+        if address.is_loopback or address.is_private or address.is_link_local or address.is_unspecified:
+            return "禁止访问内网或本机地址"
+    return None
+
+
+def _validate_public_url(raw_url: str) -> tuple[str | None, str | None]:
+    url = str(raw_url or "").strip()
+    parsed = urlsplit(url)
+    if parsed.scheme.lower() not in {"http", "https"}:
+        return None, "只允许 http/https URL"
+    try:
+        host = parsed.hostname or ""
+    except ValueError:
+        return None, "URL host 无效"
+    reason = _blocked_url_host(host)
+    return (None, reason) if reason else (url, None)
+
+
+def _html_text(content: str) -> tuple[str, str]:
+    title_match = re.search(r"<title[^>]*>(.*?)</title>", content, flags=re.IGNORECASE | re.DOTALL)
+    title = re.sub(r"\s+", " ", html.unescape(title_match.group(1))).strip() if title_match else ""
+    body = re.sub(r"<(script|style|noscript)\b[^>]*>.*?</\1>", " ", content, flags=re.IGNORECASE | re.DOTALL)
+    body = re.sub(r"<[^>]+>", " ", body)
+    return title, re.sub(r"\s+", " ", html.unescape(body)).strip()
+
+
+
+async def _exec_fetch_url(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    del ctx
+    raw_url = str(args.get("url") or "").strip()
+    if not raw_url:
+        return {"ok": False, "error": "url 不能为空"}
+    url, reason = _validate_public_url(raw_url)
+    if reason:
+        return {"ok": False, "error": reason, "url": raw_url}
+    try:
+        max_chars = max(1, min(int(args.get("max_chars") or 4000), 8000))
+    except (TypeError, ValueError):
+        max_chars = 4000
+    current_url = url
+    try:
+        async with httpx.AsyncClient(timeout=10.0, follow_redirects=False) as client:
+            response: httpx.Response | None = None
+            for _ in range(6):
+                response = await client.get(
+                    current_url,
+                    headers={
+                        "User-Agent": _TOOL_BROWSER_USER_AGENT,
+                        "Accept": "text/html,application/xhtml+xml,text/plain;q=0.9,*/*;q=0.8",
+                    },
+                )
+                if response.status_code not in {301, 302, 303, 307, 308}:
+                    break
+                location = response.headers.get("location")
+                if not location:
+                    return {"ok": False, "error": "网页重定向缺少目标地址", "url": current_url}
+                next_url, reason = _validate_public_url(urljoin(current_url, location))
+                if reason:
+                    return {"ok": False, "error": reason, "url": current_url}
+                current_url = next_url or current_url
+            if response is None:
+                return {"ok": False, "error": "网页没有返回响应", "url": current_url}
+    except httpx.HTTPError as exc:
+        _logger.info("URL fetch failed for %r: %s", raw_url, exc)
+        return {"ok": False, "error": f"网页抓取失败: {exc.__class__.__name__}", "url": current_url}
+    if response.status_code >= 400:
+        return {"ok": False, "error": f"网页返回 HTTP {response.status_code}", "url": current_url, "status_code": response.status_code}
+    content_type = response.headers.get("content-type", "").lower()
+    is_html = "html" in content_type or re.search(r"<html\b|<body\b|<title\b", response.text[:2000], re.IGNORECASE)
+    if is_html:
+        title, body = _html_text(response.text)
+        return {"ok": True, "url": current_url, "status_code": response.status_code, "title": title, "text": body[:max_chars], "truncated": len(body) > max_chars}
+    text_value = response.text
+    limit = min(max_chars, 2000)
+    return {"ok": True, "url": current_url, "status_code": response.status_code, "title": "", "text": text_value[:limit], "truncated": len(text_value) > limit}
+
+
+async def _exec_weather(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    del ctx
+    city = str(args.get("city") or "").strip()
+    if not city:
+        return {"ok": False, "error": "city 不能为空"}
+    url = f"https://wttr.in/{quote(city, safe='')}?format=j1"
+    try:
+        async with httpx.AsyncClient(timeout=10.0, follow_redirects=True) as client:
+            response = await client.get(url, headers={"User-Agent": _TOOL_BROWSER_USER_AGENT, "Accept": "application/json"})
+        if response.status_code >= 400:
+            return {"ok": False, "error": f"天气服务返回 HTTP {response.status_code}", "city": city}
+        payload = response.json()
+        current = payload.get("current_condition", [None])[0]
+        if not isinstance(current, dict):
+            return {"ok": False, "error": "天气服务返回数据缺少 current_condition", "city": city}
+        desc = str((current.get("weatherDesc") or [{"value": "未知"}])[0].get("value") or "未知")
+        temp = str(current.get("temp_C") or "?")
+        feels = str(current.get("FeelsLikeC") or "?")
+        humidity = str(current.get("humidity") or "?")
+        wind_dir = str(current.get("winddir16Point") or "未知")
+        wind_speed = str(current.get("windspeedKmph") or "?")
+        summary = f"{city}现在{desc}，气温 {temp}°C，体感 {feels}°C。湿度 {humidity}% ，{wind_dir}风 {wind_speed} km/h。"
+        return {"ok": True, "city": city, "summary": summary, "condition": desc, "temperature_c": temp, "feels_like_c": feels, "humidity_percent": humidity, "wind_direction": wind_dir, "wind_speed_kmh": wind_speed}
+    except (httpx.HTTPError, ValueError, KeyError, TypeError, IndexError) as exc:
+        _logger.info("Weather lookup failed for %r: %s", city, exc)
+        return {"ok": False, "error": f"天气查询失败: {exc.__class__.__name__}", "city": city}
+
+
+async def _exec_read_file(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if not _is_owner(ctx):
+        return {"ok": False, "error": "仅主人可用"}
+    raw_path = str(args.get("path") or "").strip()
+    if not raw_path:
+        return {"ok": False, "error": "path 不能为空"}
+    try:
+        offset = max(0, int(args.get("offset") or 0))
+        limit = max(1, min(int(args.get("limit") or 200), 500))
+    except (TypeError, ValueError):
+        return {"ok": False, "error": "offset/limit 必须是整数"}
+    path_value, root = _sandbox_path(ctx, raw_path)
+    if path_value is None:
+        return {"ok": False, "error": "路径超出沙箱范围", "sandbox_root": str(root)}
+    try:
+        if not path_value.is_file():
+            return {"ok": False, "error": "文件不存在或不是普通文件", "path": raw_path}
+        if path_value.stat().st_size > 2 * 1024 * 1024:
+            return {"ok": False, "error": "文件超过 2MB，拒绝读取", "path": raw_path}
+        lines = path_value.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError as exc:
+        return {"ok": False, "error": f"读取文件失败: {exc.__class__.__name__}", "path": raw_path}
+    selected = lines[offset:offset + limit]
+    numbered = "\n".join(f"{offset + index + 1}: {line}" for index, line in enumerate(selected))
+    return {"ok": True, "path": raw_path, "sandbox_root": str(root), "offset": offset, "limit": limit, "total_lines": len(lines), "text": numbered, "returned_lines": len(selected)}
+
+
+async def _exec_run_code(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if not _is_owner(ctx):
+        return {"ok": False, "error": "仅主人可用"}
+    code = str(args.get("code") or "")
+    if not code.strip():
+        return {"ok": False, "error": "code 不能为空"}
+    if args.get("confirm") is not True:
+        return {"ok": False, "error": "需要主人确认执行意图后将 confirm 设为 true"}
+    root = _sandbox_root(ctx)
+    if not root.is_dir():
+        return {"ok": False, "error": "沙箱根目录不存在", "sandbox_root": str(root)}
+    process = await asyncio.create_subprocess_exec(sys.executable, "-c", code, cwd=str(root), stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)
+    timed_out = False
+    try:
+        output_bytes, _ = await asyncio.wait_for(process.communicate(), timeout=15.0)
+    except asyncio.TimeoutError:
+        timed_out = True
+        process.kill()
+        output_bytes, _ = await process.communicate()
+    output = output_bytes.decode("utf-8", errors="replace")
+    return {"ok": True, "sandbox_root": str(root), "exit_code": process.returncode, "timed_out": timed_out, "output": output[:4000], "truncated": len(output) > 4000}
+
 
 async def _exec_recall(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     scope = str(args.get("scope") or "").strip()
@@ -4471,6 +4826,10 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_mc_status": _exec_mc_status,
     "catty_emoji": _exec_emoji,
     "catty_web_search": _exec_web_search,
+    "catty_fetch_url": _exec_fetch_url,
+    "catty_weather": _exec_weather,
+    "catty_read_file": _exec_read_file,
+    "catty_run_code": _exec_run_code,
     "catty_nsfw_search": _exec_nsfw_search,
     "catty_image_search": _exec_image_search,
     "catty_meme_query": _exec_meme_query,
@@ -4518,6 +4877,10 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
         "什么番", "哪个动画", "saucenao", "yandex", "tracemoe", "推主",
         "X 账号", "Twitter", "查作者", "查画师",
     ),
+    "catty_fetch_url": ("看链接", "看看链接", "读取网页", "网页正文", "打开链接", "抓网页", "文章链接"),
+    "catty_weather": ("天气", "气温", "温度", "下雨", "带伞", "天气预报", "几度", "体感"),
+    "catty_read_file": ("读文件", "读取文件", "看文件", "看源码", "看日志", "查看配置", "沙箱文件"),
+    "catty_run_code": ("跑代码", "运行代码", "执行代码", "运行 Python", "执行 Python", "沙箱代码"),
     "catty_web_search": (
         "搜", "搜一下", "查", "查一下", "百度", "谷歌", "google", "bing",
         "新闻", "最近怎样", "事件", "热搜", "联网", "上网搜", "最新", "当前",
@@ -4932,12 +5295,10 @@ def available_tool_schemas(
     is_directly_requested: bool = False,
     persona: Any = None,
 ) -> list[dict[str, Any]]:
-    """按 NLU intent 挑 tool schemas — 命中关键词才发对应 tool, 不命中 tools=[].
+    """按配置暴露 tool schemas；默认全量暴露，只有 full_exposure=False 时启用 intent-gate。
 
-    主人 2026-05-28 C15-7: 之前每次发全 19 tools (~21K bytes) 浪费 input. 现 NLU gate:
-    user msg 含画图/搜/记等意图关键词才发对应 tool, AI 看完整 description 决策.
-    大部分闲聊 tools=[], 省 20K+ bytes input.
-    保留所有 tool 功能 (description 完整不砍), 只控制何时发.
+    主人 2026-08-13: AI 优先、不节省 token，默认把全部已注册工具交给模型决策；
+    保留旧 intent-gate 回切路径，配置开关和权限闸门始终有效。
 
     Args:
         config: catty config
@@ -4947,35 +5308,34 @@ def available_tool_schemas(
         is_directly_requested: 当前消息是否直接指向猫猫
         persona: 当前 scope 的 Persona；已禁用的 persona feature 不暴露对应 tool
     """
+    full_exposure = bool(getattr(config, "catty_tools_full_exposure", True))
     enabled = bool(getattr(config, "catty_tools_enabled", True))
     if not enabled:
         return []
 
-    # 主人 2026-05-31 cache follow-up: flash+tools 实测 tools schema 约 6K 字符, 且 API 字段
-    # 序列化在 current-user 动态尾巴之后；即使 tools 自身 byte-stable, current-user 漂移也会让
-    # tools 一起落进 miss 区。恢复「无工具意图 → tools=[]」, 但只门控 schema, 不删 executor；
-    # 命中搜索/画图/记忆/查人/时间/MC/story-arc/图片等意图时仍发对应 tool, 功能不砍。
     has_explicit_image_url = _has_explicit_image_url(user_text)
-    intent_hits = _detect_tool_intent(
-        user_text,
-        has_image,
-        has_explicit_image_url=has_explicit_image_url,
-    )
+    intent_hits: set[str] = set()
+    if not full_exposure:
+        intent_hits = _detect_tool_intent(
+            user_text,
+            has_image,
+            has_explicit_image_url=has_explicit_image_url,
+        )
     if has_image:
         intent_hits.update({"catty_image_search", "catty_nai_director"})
-    # 主人 2026-06-06: 明确画图指令 (should_force_imagegen_tool — force pattern 比
-    # _IMAGE_INTENT_WORDS 宽, 含 自画像/你自己/笨猫 等自指措辞) 即使 NLU 没把 imagegen 命中,
-    # 也强制把 imagegen schema 注入 — 闭合"force=True 但工具不进列表 → 永远不画"的窗口
-    # (与 __init__ 的 force tool_choice 判定是同一根因的上下游)。
+    # 主人 2026-06-06: 明确画图指令仍强制注入 imagegen schema。
     if is_directly_requested and should_force_imagegen_tool(
         user_text, is_directly_requested=True
     ):
         intent_hits.add("catty_imagegen")
     disabled_in_private = _private_disabled_tool_names(config) if is_private else set()
 
-    # The intelligence core is always available; heavy image/media tools remain intent-gated.
-    selected_names = _INTELLIGENCE_CORE_TOOLS | intent_hits
-    _lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", True))
+    selected_names = (
+        set(_LAZY_TOOL_SCHEMAS)
+        if full_exposure
+        else _INTELLIGENCE_CORE_TOOLS | intent_hits
+    )
+    lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", False))
 
     result: list[dict[str, Any]] = []
     for name, lazy_schema in _LAZY_TOOL_SCHEMAS.items():
@@ -4992,8 +5352,15 @@ def available_tool_schemas(
             disabled_in_private=disabled_in_private,
         ) is not None:
             continue
-        schema = ALL_TOOL_SCHEMAS[name] if name in _INTELLIGENCE_CORE_TOOLS or not _lazy else lazy_schema
-        result.append(_schema_for_persona(name, schema, lazy=name not in _INTELLIGENCE_CORE_TOOLS and _lazy, persona=persona))
+        schema = ALL_TOOL_SCHEMAS[name] if (name in _INTELLIGENCE_CORE_TOOLS or not lazy) else lazy_schema
+        result.append(
+            _schema_for_persona(
+                name,
+                schema,
+                lazy=name not in _INTELLIGENCE_CORE_TOOLS and lazy,
+                persona=persona,
+            )
+        )
     return result
 
 

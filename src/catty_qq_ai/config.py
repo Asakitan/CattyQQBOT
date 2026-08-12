@@ -302,7 +302,7 @@ class Config(BaseModel):
     # 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim P5.5:
     # 砍 ~3K tool schema description. OpenAI native 由 _LAZY_TOOL_SCHEMAS 直接返回,
     # Anthropic native 由 convert_openai_tool_to_anthropic 自动转 (cache 字节稳定).
-    catty_tools_lazy_schema_enabled: bool = True
+    catty_tools_lazy_schema_enabled: bool = False
     # ── P5.3 每 N 轮人格 reminder ────────────────────────────────────
     # 长对话防人格漂移. P5.1 core_persona 在 cache prefix 一次 inject, 长对话末段
     # 因 LLM recency bias 可能淡化. 每 N 轮在 user msg 附近 (depth=2) 注入精简
@@ -392,9 +392,11 @@ class Config(BaseModel):
     catty_group_history_scope: str = "group"
     catty_history_turns: int = 3  # Legacy short-history mode only.
     catty_session_context_enabled: bool = True
-    catty_session_context_target_tokens: int = 256_000
-    catty_session_context_trim_to_tokens: int = 192_000
+    catty_session_context_target_tokens: int = 280_000
+    catty_session_context_trim_to_tokens: int = 240_000
     catty_session_context_headroom_tokens: int = 32_000
+    catty_session_ai_compact_enabled: bool = True  # 历史超阈值时用 AI 总结压缩
+    catty_session_ai_compact_trigger_tokens: int = 240_000  # 触发 AI 压缩的历史 token 阈值
     catty_session_cache_persistence_enabled: bool = True
     catty_session_cache_dir: str = "sessions"
     catty_session_cache_max_sessions: int = 200
@@ -635,7 +637,7 @@ class Config(BaseModel):
     catty_fadianji_state_enabled: bool = False
     catty_fadianji_state_min_minutes: int = 60
     catty_fadianji_state_max_minutes: int = 180
-
+    catty_fadianji_event_mood_enabled: bool = True  # 启用事件驱动情绪
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 
@@ -687,11 +689,15 @@ class Config(BaseModel):
     # 单独关闭某段 ST 风 prompt。同上 identifier。
     catty_prompts_disabled: list[str] = Field(default_factory=list)
     # 单次主回复最多允许的 tool 调用轮次(防止模型反复循环调 tool)
-    catty_tools_max_rounds: int = 3
+    catty_tools_max_rounds: int = 8
     # 每个 tool 结果的 in-process LRU TTL(秒);0 表示不缓存
     catty_tools_cache_ttl_seconds: float = 60.0
     # 单次 tool 调用上限(每轮多个 tool_calls 也算)
-    catty_tools_max_calls_per_round: int = 3
+    catty_tools_max_calls_per_round: int = 5
+    catty_tools_full_exposure: bool = True  # 每轮全量暴露 26 个工具，跳过 intent-gate
+    catty_tool_narration_enabled: bool = True  # 工具循环启动时先发送开场短句
+    catty_fallback_tools_enabled: bool = True  # fallback 携带 tools 继续工具循环
+    catty_sandbox_dir: str = ""  # catty_read_file/catty_run_code 沙箱根目录，空=仓库根
     # 私聊场景下额外排除哪些 tool;群聊默认全开
     catty_tools_disabled_in_private: list[str] = Field(default_factory=lambda: ["catty_user_profile"])
 

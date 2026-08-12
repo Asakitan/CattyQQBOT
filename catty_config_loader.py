@@ -543,6 +543,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_AI_FALLBACK_MC_SERVER_PORT", ai_fallback.get("mc_server_port"))
     _set_env("CATTY_AI_FALLBACK_MC_PING_TIMEOUT_SECONDS", ai_fallback.get("mc_ping_timeout_seconds"))
     _set_env("CATTY_AI_FALLBACK_STRIP_SYSTEM_MESSAGES", ai_fallback.get("strip_system_messages"))
+    # 主人 2026-08-13: fallback 携带 tools 继续工具循环
+    _set_env("CATTY_FALLBACK_TOOLS_ENABLED", ai_fallback.get("tools_enabled"))
 
     audit_ai = _section(data, "audit_ai")
     _set_env("CATTY_AUDIT_AI_BASE_URL", audit_ai.get("base_url"))
@@ -713,6 +715,12 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_SCOPE_MEME_ENABLED", tools.get("scope_meme_enabled"))
     _set_env("CATTY_TIMELINE_ENABLED", tools.get("timeline_enabled"))
     _set_env("CATTY_ADAPTIVE_PROMPT_ENABLED", tools.get("adaptive_prompt_enabled"))
+    # 主人 2026-08-13: AI 优先不省 token — 全量工具暴露/轮次上限/沙箱根
+    _set_env("CATTY_TOOLS_MAX_ROUNDS", tools.get("tools_max_rounds"))
+    _set_env("CATTY_TOOLS_MAX_CALLS_PER_ROUND", tools.get("tools_max_calls_per_round"))
+    _set_env("CATTY_TOOLS_LAZY_SCHEMA_ENABLED", tools.get("tools_lazy_schema_enabled"))
+    _set_env("CATTY_TOOLS_FULL_EXPOSURE", tools.get("tools_full_exposure"))
+    _set_env("CATTY_SANDBOX_DIR", tools.get("sandbox_dir"))
 
     web_search = _section(data, "web_search")
     _set_env("CATTY_WEB_SEARCH_ENABLED", web_search.get("enabled"))
@@ -763,6 +771,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_SESSION_CONTEXT_TARGET_TOKENS", chat.get("session_context_target_tokens"))
     _set_env("CATTY_SESSION_CONTEXT_TRIM_TO_TOKENS", chat.get("session_context_trim_to_tokens"))
     _set_env("CATTY_SESSION_CONTEXT_HEADROOM_TOKENS", chat.get("session_context_headroom_tokens"))
+    # 主人 2026-08-13: AI 历史压缩代替硬裁剪 + 工具旁白
+    _set_env("CATTY_SESSION_AI_COMPACT_ENABLED", chat.get("session_ai_compact_enabled"))
+    _set_env("CATTY_SESSION_AI_COMPACT_TRIGGER_TOKENS", chat.get("session_ai_compact_trigger_tokens"))
+    _set_env("CATTY_TOOL_NARRATION_ENABLED", chat.get("tool_narration_enabled"))
     _set_env("CATTY_SESSION_CACHE_PERSISTENCE_ENABLED", chat.get("session_cache_persistence_enabled"))
     _set_env("CATTY_SESSION_CACHE_DIR", chat.get("session_cache_dir"))
     _set_env("CATTY_SESSION_CACHE_MAX_SESSIONS", chat.get("session_cache_max_sessions"))
@@ -975,6 +987,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FADIANJI_STATE_ENABLED", fadianji_state.get("enabled"))
     _set_env("CATTY_FADIANJI_STATE_MIN_MINUTES", fadianji_state.get("min_minutes"))
     _set_env("CATTY_FADIANJI_STATE_MAX_MINUTES", fadianji_state.get("max_minutes"))
+    # 主人 2026-08-13: 事件驱动情绪 (被夸/被拆穿/翻车/起哄 → 得意/破防/暴走)
+    _set_env("CATTY_FADIANJI_EVENT_MOOD_ENABLED", fadianji_state.get("event_mood_enabled"))
 
     proactive = _section(data, "proactive")
     _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))

@@ -3515,6 +3515,11 @@ async def _post_fallback_chat(
     config: Config,
     messages: list[ChatMessage],
     *,
+    tools: list[dict[str, Any]] | None = None,
+    tool_choice: ToolChoice = "auto",
+    tool_executor: Any | None = None,
+    max_rounds: int | None = None,
+    max_calls_per_round: int | None = None,
     request_route: str = "fallback",
 ) -> str:
     await _check_mc_gate_or_raise(config)
@@ -3537,6 +3542,21 @@ async def _post_fallback_chat(
         if dropped > 0:
             _logger.info("fallback: dropped %d system message(s) for %s (persona baked in)", dropped, model)
         messages = stripped
+
+    # 主人 2026-08-13: fallback 也保留 function calling, 云端故障时不退化成纯文本。
+    # 复用 chat_completion_with_tools 的工具循环, 只切换到 fallback endpoint。
+    if tools and tool_executor is not None:
+        return await chat_completion_with_tools(
+            config,
+            messages,
+            tools=tools,
+            tool_executor=tool_executor,
+            max_rounds=max_rounds if max_rounds is not None else 3,
+            max_calls_per_round=max_calls_per_round if max_calls_per_round is not None else 3,
+            tool_choice=tool_choice,
+            _fallback_mode=True,
+            _fallback_request_route=request_route,
+        )
 
     # 内存预算够时让 7B 留在内存复用更快。想要立刻卸载,在 config 的
     # ai_fallback.extra_body 里加 "keep_alive": 0 即可。
@@ -3625,6 +3645,8 @@ async def chat_completion_with_tools(
     router_model: str = "",
     router_label: str = "",
     tool_choice: ToolChoice = "auto",
+    _fallback_mode: bool = False,
+    _fallback_request_route: str = "fallback",
 ) -> str:
     """OpenAI function calling 主回复循环。
 
@@ -3644,11 +3666,40 @@ async def chat_completion_with_tools(
     if not getattr(config, "catty_tools_enabled", True):
         _logger.info("tool_chat: catty_tools_enabled=False → fallback to plain chat_completion")
         return await chat_completion(config, messages)
-    _router_active = bool(router_base_url.strip() and router_api_key.strip() and router_model.strip())
-    if _cloud_is_unhealthy() and not _router_active:
-        # 云端冷却期不带 tools 试,直接走 fallback 链 (router 走独立 endpoint, 不受主云冷却影响)。
-        _logger.info("tool_chat: cloud unhealthy → fallback to plain chat_completion (no tools)")
-        return await chat_completion(config, messages)
+
+    async def _fallback_or_plain(history: list[ChatMessage]) -> str:
+        if (
+            bool(getattr(config, "catty_fallback_tools_enabled", True))
+            and _fallback_is_configured(config)
+        ):
+            try:
+                return await _post_fallback_chat(
+                    config,
+                    history,
+                    tools=tools,
+                    tool_choice=tool_choice,
+                    tool_executor=tool_executor,
+                    max_rounds=max_rounds,
+                    max_calls_per_round=max_calls_per_round,
+                )
+            except MCBusyError:
+                raise
+            except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+                _logger.warning(
+                    "tool_chat: fallback tool loop failed (%s); degrading to plain chat_completion",
+                    exc.__class__.__name__,
+                )
+        return await chat_completion(config, history)
+
+    _router_active = bool(
+        not _fallback_mode
+        and router_base_url.strip()
+        and router_api_key.strip()
+        and router_model.strip()
+    )
+    if _cloud_is_unhealthy() and not _router_active and not _fallback_mode:
+        # 主人 2026-08-13: 云端冷却期先保留 tools 重跑 fallback,失败再走纯文本。
+        return await _fallback_or_plain(messages)
     # 主人 2026-05-28: native_enabled 时 with_tools 走 native /v1/messages 完整 tool
     # calling loop (post_messages_native_data 自动转换 OpenAI tools → Anthropic tools
     # 格式 + history 里 OpenAI 风格 tool 消息 → Anthropic native tool_use/tool_result
@@ -3658,8 +3709,16 @@ async def chat_completion_with_tools(
     _native_route = (
         _route_native(config, "main", config.catty_openai_base_url, _effective_main_model(config))
         and not _router_active
+        and not _fallback_mode
     )
-    if _router_active:
+    if _fallback_mode:
+        _logger.info(
+            "tool_chat: fallback=%s model=%s starting with %d tools (OpenAI-compat)",
+            config.catty_ai_fallback_base_url,
+            config.catty_ai_fallback_model,
+            len(tools),
+        )
+    elif _router_active:
         _logger.info(
             "tool_chat: router=%s model=%s starting with %d tools (OpenAI-compat, bypass main AI)",
             router_label or "custom", router_model, len(tools),
@@ -3731,6 +3790,33 @@ async def chat_completion_with_tools(
                 stream=_router_stream,
                 request_route="router",
             )
+        if _fallback_mode:
+            try:
+                from .prompt_cache import is_claude_endpoint
+                _fallback_stream = not is_claude_endpoint(
+                    config.catty_ai_fallback_base_url,
+                    config.catty_ai_fallback_model,
+                )
+            except Exception:  # noqa: BLE001
+                _fallback_stream = False
+            return await _post_chat_completion_raw(
+                base_url=config.catty_ai_fallback_base_url,
+                api_key=config.catty_ai_fallback_api_key,
+                model=config.catty_ai_fallback_model,
+                messages=history,
+                timeout=config.catty_ai_fallback_request_timeout or config.catty_request_timeout,
+                proxy=config.catty_http_proxy,
+                temperature=config.catty_ai_fallback_temperature,
+                max_tokens=config.catty_ai_fallback_max_tokens,
+                extra_headers=config.catty_ai_fallback_extra_headers or {},
+                extra_body=dict(config.catty_ai_fallback_extra_body or {}),
+                tools=tools,
+                tool_choice=rtc,
+                enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
+                cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
+                stream=_fallback_stream,
+                request_route=_fallback_request_route,
+            )
         try:
             from .prompt_cache import is_claude_endpoint
             _openai_stream = not is_claude_endpoint(
@@ -3761,7 +3847,11 @@ async def chat_completion_with_tools(
     # 故只对 router / openai-compat 路径有意义。
     _force_endpoint_key = (
         f"{router_base_url}|{router_model}" if _router_active
-        else f"{config.catty_openai_base_url}|{_effective_main_model(config)}"
+        else (
+            f"{config.catty_ai_fallback_base_url}|{config.catty_ai_fallback_model}"
+            if _fallback_mode
+            else f"{config.catty_openai_base_url}|{_effective_main_model(config)}"
+        )
     )
 
     for round_idx in range(max(1, max_rounds)):
@@ -3788,23 +3878,32 @@ async def chat_completion_with_tools(
                 try:
                     data = await _dispatch_round("auto")
                 except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc2:
+                    if _fallback_mode:
+                        raise
+                    _mark_cloud_unhealthy(
+                        float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0)),
+                    )
                     _logger.warning(
                         "chat_completion_with_tools: auto retry after forced reject also failed (%s); "
-                        "degrading to plain chat_completion",
+                        "trying fallback tool loop",
                         exc2.__class__.__name__,
                     )
-                    return await chat_completion(config, history)
+                    return await _fallback_or_plain(history)
                 # 仅"auto 重试成功 (而强制失败)"才确认是 tool_choice 维度问题 → 此时才标记端点拒绝强制;
                 # 若 auto 也失败 (端点整体临时挂) 已在上面 return, 不会污染缓存。
                 _mark_forced_tool_choice_blocked(_force_endpoint_key)
             else:
+                if _fallback_mode:
+                    raise
+                _mark_cloud_unhealthy(
+                    float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0)),
+                )
                 _logger.warning(
-                    "chat_completion_with_tools: round %d cloud call failed (%s); degrading to plain chat_completion",
+                    "chat_completion_with_tools: round %d cloud call failed (%s); trying fallback tool loop",
                     round_idx,
                     exc.__class__.__name__,
                 )
-                # 降级到 plain 调用,让原有 fallback/cooldown 逻辑接管(它会自己 mark unhealthy)。
-                return await chat_completion(config, history)
+                return await _fallback_or_plain(history)
 
         try:
             choice = data["choices"][0]
@@ -3815,7 +3914,7 @@ async def chat_completion_with_tools(
 
         if not tool_calls:
             # 模型直接给了最终回复
-            if _cloud_is_unhealthy():
+            if _cloud_is_unhealthy() and not _fallback_mode:
                 _mark_cloud_healthy()
             _reply = _extract_content(data)
             # S6: 有 tools 但模型直接出文本回复 (不经 chat_completion) → 在此蒸馏
@@ -3933,7 +4032,7 @@ async def chat_completion_with_tools(
             )
 
         if short_circuit_reply:
-            if _cloud_is_unhealthy():
+            if _cloud_is_unhealthy() and not _fallback_mode:
                 _mark_cloud_healthy()
             # S6: tool 短路回复 (catty_imagegen agent 模式等, 不经 chat_completion) → 蒸馏
             _maybe_distill_reply(short_circuit_reply, source="deepseek_tool")
@@ -3978,6 +4077,13 @@ async def chat_completion_with_tools(
             "content": "已达到本次主回复的工具调用上限,请直接基于已有信息和上下文给最终回复,不再调用工具。",
         }
     )
+    if _fallback_mode:
+        # 主人 2026-08-13: fallback 工具轮数耗尽后,在 fallback endpoint 纯文本收口。
+        return await _post_fallback_chat(
+            config,
+            history,
+            request_route=_fallback_request_route,
+        )
     return await chat_completion(config, history)
 
 
