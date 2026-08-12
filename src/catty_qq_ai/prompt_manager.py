@@ -401,9 +401,12 @@ def register_catty_persona(
     # 主人 2026-05-28 prompt 优化 C3d: character_book 拆 cache-stable 骨架 + dynamic hit pointer.
     # 骨架: 所有 hardcoded entries 一次列出 (~3K, byte 稳定) → cache 友好, register_static.
     # hit pointer: BFS 命中的 hardcoded entry id list + scope_lorebook 命中 entries content → dynamic.
+    _cache_full_character_book = bool(getattr(persona, "cache_full_character_book", False))
     try:
         _cb_skeleton = _cc.build_character_book_skeleton(
-            persona.character_book, char_name=persona.char_name,
+            persona.character_book,
+            char_name=persona.char_name,
+            include_all=_cache_full_character_book,
         )
         if _cb_skeleton:
             _reg_static(
@@ -415,7 +418,7 @@ def register_catty_persona(
         logger.debug(f"character_book_skeleton register failed: {_cb_sk_exc}")
 
     def _build_character_book_hits() -> str:
-        """BFS 命中: hardcoded entries 只输出 id 列表 (引用骨架) + scope_lorebook 输出完整 content."""
+        """BFS 命中: full-cache persona 只输出 hardcoded 激活指针, scope lore 输出全文."""
         try:
             from types import SimpleNamespace
             if persona.character_book is not None:
@@ -497,9 +500,34 @@ def register_catty_persona(
             scope_contents = [h[2] for h in hits if h[3]]
             lines: list[str] = []
             if keyword_hits:
-                lines.append("【character_book·本轮命中 (按下面内容演)】")
-                for identifier, content in keyword_hits:
-                    lines.append(f"\n— {identifier}\n{content}")
+                if _cache_full_character_book:
+                    lines.append("【character_book·本轮命中 (已缓存全文, 仅激活)】")
+                    hardcoded_by_id = {entry.identifier: entry for entry in hardcoded}
+                    query_lower = (user_text or "").lower()
+                    for identifier, content in keyword_hits:
+                        entry = hardcoded_by_id.get(identifier)
+                        if entry is None:
+                            continue
+                        activation = next(
+                            (
+                                str(key).strip()
+                                for key in entry.keys
+                                if str(key).strip() and str(key).lower() in query_lower
+                            ),
+                            str(entry.keys[0]).strip() if entry.keys else "",
+                        )
+                        excerpt = " ".join(str(content).split())
+                        if len(excerpt) > 96:
+                            excerpt = excerpt[:93].rstrip() + "..."
+                        elif excerpt:
+                            excerpt = excerpt[: max(1, len(excerpt) // 2)].rstrip() + "..."
+                        lines.append(
+                            f"\n— {identifier} activation={activation or '-'}\n摘录: {excerpt}"
+                        )
+                else:
+                    lines.append("【character_book·本轮命中 (按下面内容演)】")
+                    for identifier, content in keyword_hits:
+                        lines.append(f"\n— {identifier}\n{content}")
             if scope_contents:
                 lines.append("【scope_lorebook·本轮命中 (per-scope)】")
                 lines.extend(scope_contents)

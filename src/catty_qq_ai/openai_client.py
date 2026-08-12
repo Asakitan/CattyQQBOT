@@ -743,6 +743,43 @@ def _with_deepseek_thinking_defaults(
     return body
 
 
+def _looks_like_bigmodel_route(base_url: str) -> bool:
+    parsed = urlparse((base_url or "").strip())
+    host = (parsed.hostname or "").lower()
+    return host.endswith("bigmodel.cn") or host.endswith("z.ai")
+
+
+def _with_thinking_max_defaults(
+    base_url: str,
+    api_key: str,
+    model: str,
+    extra_body: dict[str, Any],
+) -> dict[str, Any]:
+    """主人 2026-08-10: 全部 AI 通道思考强度默认拉满 (max), config extra_body 显式值仍可覆盖。
+
+    - Ollama 原生路由: 不动 (走自己的 think/options 开关, reasoning_effort 无意义)。
+    - DeepSeek v4: thinking.enabled + reasoning_effort=max (保持原行为)。
+    - GLM/bigmodel (z.ai): thinking.enabled (GLM 无 effort 档位, enabled 即满档思考)。
+    - 其它 OpenAI-compatible (opencode zen 的 gpt-5.6-luna 等 reasoning 模型): reasoning_effort=max。
+    """
+    body = dict(extra_body or {})
+    if _looks_like_ollama_route(base_url, api_key, body):
+        return body
+    if _looks_like_deepseek_thinking_route(base_url, model):
+        if "thinking" not in body:
+            body["thinking"] = {"type": "enabled"}
+        if "reasoning_effort" not in body:
+            body["reasoning_effort"] = "max"
+        return body
+    if _looks_like_bigmodel_route(base_url):
+        if "thinking" not in body:
+            body["thinking"] = {"type": "enabled"}
+        return body
+    if "reasoning_effort" not in body:
+        body["reasoning_effort"] = "max"
+    return body
+
+
 # 主 AI 多模态输出里的图片(image_url / base64)在文本里用 INLINE_IMAGE 占位符表达,
 # 让发送链路看到后转成 MessageSegment.image。占位符常量在 reply_markers 里统一定义;
 # history 写入前要 strip 掉(否则 base64 会污染 prompt token)。
@@ -2923,7 +2960,7 @@ async def _post_chat_completion_raw(
     except Exception as exc:  # noqa: BLE001
         _logger.warning(f"claude assistant prefill 适配失败 (降级到原 messages): {exc}")
 
-    extra_body = _with_deepseek_thinking_defaults(base_url, model, extra_body)
+    extra_body = _with_thinking_max_defaults(base_url, api_key, model, extra_body)
 
     payload: dict[str, Any] = {
         "model": model,

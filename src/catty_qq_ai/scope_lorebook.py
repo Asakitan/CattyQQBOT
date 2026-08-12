@@ -8,7 +8,7 @@
 为什么 AI 自动总结而不是主人手动:
 - 主人懒得手动维护
 - 群内动态变化(新梗每天有),AI 能从最近 history 抓
-- 主人保留 /lore_show /lore_remove 的最终裁决权
+- 主人保留 /lore_list /lore_delete /lore_clear 的最终裁决权
 
 数据结构:
 - 每条 entry: identifier / keys / content / created_at / last_hit_at / hit_count
@@ -17,12 +17,11 @@
 
 触发学习:
 - 主人发 /lore_summarize 时手动跑一次 spark 总结
-- (后续轮做后台定时, 这一轮先验证 spark 总结质量)
+- 后台定时总结循环已接入运行时
 
 prompt 注入:
 - 集成到 prompt_manager 的 _build_character_book 递归扫描 — scope entries
   跟 character_card 的 hardcoded entries 一起进入 BFS pool, 命中关键词时注入。
-- (本轮先建 store + 命令, 集成留下一轮)
 """
 from __future__ import annotations
 
@@ -67,6 +66,7 @@ class ScopeLoreEntry:
     last_hit_at: float = 0.0
     hit_count: int = 0
     persona: str = _DEFAULT_PERSONA
+    kind: str = "lore"
 
     def to_payload(self) -> dict[str, Any]:
         return {
@@ -77,6 +77,7 @@ class ScopeLoreEntry:
             "last_hit_at": self.last_hit_at,
             "hit_count": self.hit_count,
             "persona": _normalise_persona(self.persona),
+            "kind": str(self.kind or "lore").strip().lower() or "lore",
         }
 
     @classmethod
@@ -99,6 +100,7 @@ class ScopeLoreEntry:
             last_hit_at=float(payload.get("last_hit_at") or 0.0),
             hit_count=int(payload.get("hit_count") or 0),
             persona=_normalise_persona(payload.get("persona")),
+            kind=str(payload.get("kind") or "lore").strip().lower() or "lore",
         )
 
 
@@ -211,6 +213,7 @@ class ScopeLorebookStore:
             len(entry.content.encode("utf-8"))
             + sum(len(k.encode("utf-8")) for k in entry.keys)
             + len(_normalise_persona(entry.persona).encode("utf-8"))
+            + len(str(entry.kind or "lore").encode("utf-8"))
             + 64  # identifier + 时间戳 + JSON 包装的常数开销
         )
 
@@ -236,12 +239,14 @@ class ScopeLorebookStore:
         content: str,
         *,
         persona: str | None = None,
+        kind: str = "lore",
     ) -> ScopeLoreEntry | None:
         """添加一条新 entry。keys 去重 / 去空 / content trim。返回新 entry 或 None(参数无效)。"""
         content = _compact_space(content)[:_MAX_CONTENT_CHARS]
         if not scope or not content:
             return None
         persona_name = _normalise_persona(persona)
+        kind_name = str(kind or "lore").strip().lower() or "lore"
         raw_keys: Iterable[str] = [keys] if isinstance(keys, str) else list(keys or [])
         key_tuple = tuple(
             dict.fromkeys(
@@ -259,6 +264,8 @@ class ScopeLorebookStore:
             for existing in entries:
                 if _normalise_persona(existing.persona) != persona_name:
                     continue
+                if str(existing.kind or "lore").strip().lower() != kind_name:
+                    continue
                 if _normalise_for_dedupe(existing.content) != normalised_content:
                     continue
                 merged_keys = tuple(dict.fromkeys((*existing.keys, *key_tuple)))[:_MAX_KEYS_PER_ENTRY]
@@ -268,13 +275,14 @@ class ScopeLorebookStore:
                 self._last_access[scope] = now
                 return existing
             entry = ScopeLoreEntry(
-                identifier=f"scope_lore_{uuid.uuid4().hex[:8]}",
+                identifier=f"scope_{kind_name}_{uuid.uuid4().hex[:8]}",
                 keys=key_tuple,
                 content=content,
                 created_at=now,
                 last_hit_at=0.0,
                 hit_count=0,
                 persona=persona_name,
+                kind=kind_name,
             )
             entries.append(entry)
             self._last_access[scope] = now
@@ -283,13 +291,21 @@ class ScopeLorebookStore:
             self._dirty = True
         return entry
 
-    def list_entries(self, scope: str, *, persona: str | None = None) -> list[ScopeLoreEntry]:
+    def list_entries(
+        self,
+        scope: str,
+        *,
+        persona: str | None = None,
+        kind: str | None = None,
+    ) -> list[ScopeLoreEntry]:
         """返回 scope 当前人格的 entries 拷贝(按 created_at 升序)。"""
         persona_name = _normalise_persona(persona)
+        kind_name = str(kind or "").strip().lower() or None
         with self._lock:
             entries = [
                 entry for entry in (self._data.get(scope) or [])
                 if _normalise_persona(entry.persona) == persona_name
+                and (kind_name is None or str(entry.kind or "lore").strip().lower() == kind_name)
             ]
         entries.sort(key=lambda e: e.created_at)
         return entries
@@ -320,6 +336,33 @@ class ScopeLorebookStore:
                 self._last_access.pop(scope, None)
             self._dirty = True
             return True
+
+    def clear_scope(
+        self,
+        scope: str,
+        persona: str | None = None,
+        kind: str | None = None,
+    ) -> int:
+        """清理当前 scope / persona 下的 lore 或指定 kind。"""
+        persona_name = _normalise_persona(persona)
+        kind_name = str(kind or "").strip().lower() or None
+        with self._lock:
+            entries = self._data.get(scope) or []
+            kept = [
+                entry for entry in entries
+                if _normalise_persona(entry.persona) != persona_name
+                or (kind_name is not None and str(entry.kind or "lore").strip().lower() != kind_name)
+            ]
+            removed = len(entries) - len(kept)
+            if not removed:
+                return 0
+            if kept:
+                self._data[scope] = kept
+            else:
+                self._data.pop(scope, None)
+                self._last_access.pop(scope, None)
+            self._dirty = True
+            return removed
 
     def mark_hit(
         self,

@@ -570,9 +570,11 @@ class MemoryStore:
         _atomic_write_text(self.path, json.dumps(index, ensure_ascii=False, indent=2) + "\n")
         for user_id, user in self._data.get("users", {}).items():
             if isinstance(user, dict):
+                self._ensure_note_metadata(user, scope="user", entity_id=str(user_id))
                 self._write_entity_file(self._user_file(str(user_id)), "user_id", str(user_id), user)
         for group_id, group in self._data.get("groups", {}).items():
             if isinstance(group, dict):
+                self._ensure_note_metadata(group, scope="group", entity_id=str(group_id))
                 self._write_entity_file(self._group_file(str(group_id)), "group_id", str(group_id), group)
         for game_name, game in self._data.get("games", {}).items():
             if isinstance(game, dict):
@@ -790,13 +792,31 @@ class MemoryStore:
         name = _extract_declared_name(text)
         if not user_id or not name:
             return ""
+        self.set_preferred_name(user_id, name)
+        return name
+
+    def set_preferred_name(self, user_id: str, name: str) -> str:
+        user_id = str(user_id or "").strip()
+        clean_name = str(name or "").strip()[:_DECLARED_NAME_MAX_CHARS]
+        if not user_id or not clean_name:
+            return ""
         user = self._data.setdefault("users", {}).setdefault(user_id, {})
-        if str(user.get("preferred_name") or "").strip() == name:
-            return name
-        user["preferred_name"] = name
+        if str(user.get("preferred_name") or "").strip() == clean_name:
+            return clean_name
+        user["preferred_name"] = clean_name
         user["preferred_name_updated_at"] = _now()
         self._save()
-        return name
+        return clean_name
+
+    def clear_preferred_name(self, user_id: str) -> bool:
+        user_id = str(user_id or "").strip()
+        user = self._data.get("users", {}).get(user_id, {})
+        if not user_id or not isinstance(user, dict) or "preferred_name" not in user:
+            return False
+        user.pop("preferred_name", None)
+        user.pop("preferred_name_updated_at", None)
+        self._save()
+        return True
 
     def preferred_name_for(self, user_id: str) -> str:
         user = self._data.get("users", {}).get(str(user_id), {})
@@ -1543,7 +1563,9 @@ class MemoryStore:
         prompt = (
             '压缩QQ私聊共享事实摘要，省token。只输出JSON：'
             f'{{"summary":"<={_summary_max}字","profile":{{"gender":"男/女/未知",'
-            '"title":"称呼","impression":"<=30字","confidence":"低/中/高"}}}}。'
+            '"title":"称呼","impression":"<=30字","aliases":["别名"],'
+            '"interests":["偏好"],"boundaries":["边界"],"meme_hooks":["相关梗"],'
+            '"confidence":"低/中/高"}}}}。'
             "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档的旧梗、一次性玩笑或情绪化片段只作背景，"
             "除非反复出现或是稳定偏好/边界，否则不要写进长期摘要。"
             "只写偏好、事实、称呼、边界；不要Markdown/emoji。"
@@ -1639,6 +1661,10 @@ class MemoryStore:
                     "confidence": _clean_confidence(raw_profile.get("confidence")),
                     "updated_at": _now(),
                 }
+                for key in ("aliases", "interests", "boundaries", "meme_hooks"):
+                    values = _clean_short_list(raw_profile.get(key), max_items=6, max_chars=24)
+                    if values:
+                        profile[key] = values
                 user["private_profile"] = profile
                 user["gender"] = profile["gender"]
                 user["inferred_title"] = profile["inferred_title"]
@@ -1758,6 +1784,13 @@ class MemoryStore:
                     f"同QQ画像:性别={_clean_gender(profile.get('gender'))},"
                     f"印象={impression[:40]}"
                 )
+            profile_bits: list[str] = []
+            for label, key in (("别名", "aliases"), ("偏好", "interests"), ("边界", "boundaries"), ("相关梗", "meme_hooks")):
+                values = _clean_short_list(profile.get(key), max_items=3, max_chars=12)
+                if values:
+                    profile_bits.append(f"{label}=" + "/".join(values))
+            if profile_bits:
+                lines.append("同QQ画像补充:" + ";".join(profile_bits))
         return lines
 
     def _profile_for(self, user_id: str, group_id: str) -> dict[str, Any]:
@@ -1990,6 +2023,9 @@ class MemoryStore:
                     user_notes_line = self._notes_context_line(user_obj, label="对此用户的笔记")
                     if user_notes_line:
                         lines.append(user_notes_line)
+                    profile_facts = [str(note.get("text") or "").strip()[:60] for note in self._active_notes(user_obj) if isinstance(note, dict) and str(note.get("source") or "") == "profile_fact"]
+                    if profile_facts:
+                        lines.append("长期画像事实=" + "/".join(profile_facts[:4]))
                 lines.extend(self._same_user_memory_lines(user_id))
                 # 主人 2026-05-29 P4: 群友名册(已知群友, 实测 ~1400c)从 prompt 移除, 改 on-demand.
                 # 旧逻辑每轮 dump 全部群友昵称+称呼+印象 = post_boundary 最大 miss 块, 且绝大多数轮
@@ -2022,6 +2058,13 @@ class MemoryStore:
                         f"私聊画像:性别={_clean_gender(profile.get('gender'))},"
                         f"印象={str(profile.get('impression') or '暂无')[:60]}"
                     )
+                    profile_bits: list[str] = []
+                    for label, key in (("别名", "aliases"), ("偏好", "interests"), ("边界", "boundaries"), ("相关梗", "meme_hooks")):
+                        values = _clean_short_list(profile.get(key), max_items=3, max_chars=12)
+                        if values:
+                            profile_bits.append(f"{label}=" + "/".join(values))
+                    if profile_bits:
+                        lines.append("私聊画像补充:" + ";".join(profile_bits))
                 # 用户级 sticky notes
                 user_notes_line = self._notes_context_line(user, label="对此用户的笔记", limit=2)
                 if user_notes_line:
@@ -2110,9 +2153,17 @@ class MemoryStore:
                     result["impression"] = impression[:200]
                 if "confidence" not in result:
                     result["confidence"] = _clean_confidence(private_profile.get("confidence"))
+                for key in ("aliases", "interests", "boundaries", "meme_hooks"):
+                    values = _clean_short_list(private_profile.get(key), max_items=6, max_chars=24)
+                    if values:
+                        result[key] = values
             summary = str(user.get("private_summary") or "").strip()
             if summary:
                 result["private_summary"] = summary[:400]
+        if isinstance(user, dict):
+            profile_facts = [str(note.get("text") or "").strip()[:120] for note in self._active_notes(user) if isinstance(note, dict) and str(note.get("source") or "") == "profile_fact"]
+            if profile_facts:
+                result["profile_facts"] = profile_facts[:8]
         if "effective_name" not in result:
             result["effective_name"] = str(result.get("display_name") or user_id)
         return result
@@ -2698,6 +2749,53 @@ class MemoryStore:
 
     _NOTES_MAX_PER_ENTITY = 50
     _NOTES_DEFAULT_TTL_DAYS = 30
+    _PROFILE_FACTS_MAX_PER_USER = 20
+
+    def _ensure_note_metadata(self, container: dict[str, Any], *, scope: str = "", entity_id: str = "") -> bool:
+        notes = container.get("notes")
+        if not isinstance(notes, list):
+            return False
+        changed = False
+        used: set[str] = set()
+        for index, entry in enumerate(notes):
+            if not isinstance(entry, dict):
+                continue
+            source = str(entry.get("source") or "").strip()[:64] or "legacy"
+            category = str(entry.get("category") or "").strip().lower()[:64] or "note"
+            if entry.get("source") != source:
+                entry["source"] = source
+                changed = True
+            if entry.get("category") != category:
+                entry["category"] = category
+                changed = True
+            note_id = str(entry.get("id") or "").strip()
+            if not note_id or note_id in used:
+                payload = json.dumps([scope, entity_id, entry.get("text") or "", entry.get("time") or "", source, category, index], ensure_ascii=False, separators=(",", ":"))
+                note_id = f"note_{hashlib.sha256(payload.encode('utf-8')).hexdigest()[:16]}"
+                if note_id in used:
+                    note_id = f"{note_id}_{index}"
+                entry["id"] = note_id
+                changed = True
+            used.add(note_id)
+        return changed
+
+    def _note_container(self, scope: str, *, user_id: str = "", group_id: str = "", create: bool = False) -> tuple[dict[str, Any] | None, str, str]:
+        scope_name = str(scope or "").strip().lower()
+        if scope_name == "user":
+            entity_id = str(user_id or "").strip()
+            if not entity_id:
+                return None, scope_name, entity_id
+            root = self._data.setdefault("users", {})
+            container = root.setdefault(entity_id, {}) if create else root.get(entity_id, {})
+            return container if isinstance(container, dict) else None, scope_name, entity_id
+        if scope_name == "group":
+            entity_id = str(group_id or "").strip()
+            if not entity_id:
+                return None, scope_name, entity_id
+            root = self._data.setdefault("groups", {})
+            container = root.setdefault(entity_id, {}) if create else root.get(entity_id, {})
+            return container if isinstance(container, dict) else None, scope_name, entity_id
+        return None, scope_name, ""
 
     def record_note(
         self,
@@ -2709,6 +2807,8 @@ class MemoryStore:
         ttl_days: int | None = None,
         tags: list[str] | None = None,
         event_date: str = "",
+        source: str = "manual",
+        category: str = "note",
     ) -> dict[str, Any]:
         """写一条长期备忘 note。
 
@@ -2730,6 +2830,8 @@ class MemoryStore:
         if len(clean_text) > 200:
             clean_text = clean_text[:200]
         scope = (scope or "").strip().lower()
+        source = str(source or "manual").strip()[:64] or "manual"
+        category = str(category or "note").strip().lower()[:64] or "note"
         if scope == "user":
             if not user_id:
                 return {"ok": False, "error": "scope=user 必须传 user_id"}
@@ -2770,10 +2872,15 @@ class MemoryStore:
         for existing in notes:
             if not isinstance(existing, dict):
                 continue
-            if str(existing.get("text") or "").strip() == clean_text:
+            if (
+                str(existing.get("text") or "").strip() == clean_text
+                and str(existing.get("category") or "note").strip().lower() == category
+            ):
                 exp = _parse_time(existing.get("expires_at") or "")
                 if exp is None or _as_aware_utc(exp) > now_dt:
                     existing["last_seen"] = now_iso
+                    existing["source"] = source
+                    existing["category"] = category
                     if expires_at and (exp is None or _as_aware_utc(exp) < now_dt + timedelta(days=ttl // 2)):
                         existing["expires_at"] = expires_at
                     self._save()
@@ -2782,7 +2889,12 @@ class MemoryStore:
                         "scope": scope, "count": len(notes),
                     }
 
-        entry: dict[str, Any] = {"time": now_iso, "text": clean_text}
+        entry: dict[str, Any] = {
+            "time": now_iso,
+            "text": clean_text,
+            "source": source,
+            "category": category,
+        }
         if expires_at:
             entry["expires_at"] = expires_at
         if tags:
@@ -2792,8 +2904,75 @@ class MemoryStore:
         notes.append(entry)
         if len(notes) > self._NOTES_MAX_PER_ENTITY:
             container["notes"] = notes[-self._NOTES_MAX_PER_ENTITY :]
+        self._ensure_note_metadata(container, scope=scope, entity_id=str(user_id or group_id))
         self._save()
         return {"ok": True, "scope": scope, "count": len(container["notes"])}
+
+    def record_profile_fact(self, user_id: str, text: str, *, category: str = "profile", source: str = "profile_fact", ttl_days: int = 0, tags: list[str] | None = None) -> dict[str, Any]:
+        result = self.record_note(scope="user", user_id=str(user_id), text=text, ttl_days=ttl_days, tags=tags, source=source, category=category)
+        if not result.get("ok"):
+            return result
+        container, scope_name, entity_id = self._note_container("user", user_id=str(user_id))
+        if container is None:
+            return result
+        self._ensure_note_metadata(container, scope=scope_name, entity_id=entity_id)
+        notes = container.get("notes", [])
+        profile_notes = [note for note in notes if isinstance(note, dict) and str(note.get("source") or "") == source]
+        if len(profile_notes) > self._PROFILE_FACTS_MAX_PER_USER:
+            keep_ids = {str(note.get("id") or "") for note in sorted(profile_notes, key=lambda note: str(note.get("time") or ""), reverse=True)[: self._PROFILE_FACTS_MAX_PER_USER]}
+            container["notes"] = [note for note in notes if not isinstance(note, dict) or str(note.get("source") or "") != source or str(note.get("id") or "") in keep_ids]
+            self._save()
+        result["profile_facts_count"] = sum(1 for note in container.get("notes", []) if isinstance(note, dict) and str(note.get("source") or "") == source)
+        return result
+
+    def list_notes(self, scope: str, user_id: str = "", group_id: str = "", *, limit: int = 50, category: str | None = None) -> list[dict[str, Any]]:
+        if not self.enabled:
+            return []
+        container, scope_name, entity_id = self._note_container(scope, user_id=user_id, group_id=group_id)
+        if container is None:
+            return []
+        if self._ensure_note_metadata(container, scope=scope_name, entity_id=entity_id):
+            self._save()
+        category_name = str(category or "").strip().lower() or None
+        active = self._active_notes(container)
+        if category_name:
+            active = [note for note in active if str(note.get("category") or "note").strip().lower() == category_name]
+        return [dict(note) for note in active[: max(1, min(int(limit or 50), self._NOTES_MAX_PER_ENTITY))]]
+
+    def remove_note(self, note_id: str, *, scope: str = "user", user_id: str = "", group_id: str = "") -> bool:
+        container, scope_name, entity_id = self._note_container(scope, user_id=user_id, group_id=group_id)
+        if container is None:
+            return False
+        self._ensure_note_metadata(container, scope=scope_name, entity_id=entity_id)
+        notes = container.get("notes")
+        if not isinstance(notes, list):
+            return False
+        kept = [note for note in notes if not isinstance(note, dict) or str(note.get("id") or "") != str(note_id)]
+        if len(kept) == len(notes):
+            return False
+        container["notes"] = kept
+        self._save()
+        return True
+
+    def clear_notes(self, scope: str, user_id: str = "", group_id: str = "", *, category: str | None = None) -> int:
+        container, scope_name, entity_id = self._note_container(scope, user_id=user_id, group_id=group_id)
+        if container is None:
+            return 0
+        self._ensure_note_metadata(container, scope=scope_name, entity_id=entity_id)
+        notes = container.get("notes")
+        if not isinstance(notes, list):
+            return 0
+        category_name = str(category or "").strip().lower() or None
+        if category_name is None:
+            removed = len(notes)
+            container["notes"] = []
+        else:
+            kept = [note for note in notes if not isinstance(note, dict) or str(note.get("category") or "note").strip().lower() != category_name]
+            removed = len(notes) - len(kept)
+            container["notes"] = kept
+        if removed:
+            self._save()
+        return removed
 
     def _active_notes(self, container: dict[str, Any]) -> list[dict[str, Any]]:
         """从 container[notes] 拿未过期条目,按时间倒序(最新在前)。"""
@@ -2827,17 +3006,9 @@ class MemoryStore:
         limit = max(min(int(limit or 10), 50), 1)
         out: dict[str, Any] = {}
         if user_id:
-            user = self._data.get("users", {}).get(str(user_id), {})
-            if isinstance(user, dict):
-                out["user_notes"] = self._active_notes(user)[:limit]
-            else:
-                out["user_notes"] = []
+            out["user_notes"] = self.list_notes("user", user_id=str(user_id), limit=limit)
         if group_id:
-            group = self._data.get("groups", {}).get(str(group_id), {})
-            if isinstance(group, dict):
-                out["group_notes"] = self._active_notes(group)[:limit]
-            else:
-                out["group_notes"] = []
+            out["group_notes"] = self.list_notes("group", group_id=str(group_id), limit=limit)
         return out
 
     def _notes_context_line(self, container: dict[str, Any], *, label: str, limit: int = 5) -> str:

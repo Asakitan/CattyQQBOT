@@ -467,6 +467,18 @@ class UserDetailsStore:
             self._evict_lru()
             self._dirty = True
 
+    def clear_user(self, user_id: str) -> bool:
+        uid = str(user_id or "").strip()
+        if not uid:
+            return False
+        with self._lock:
+            existed = uid in self._data
+            self._data.pop(uid, None)
+            self._last_access.pop(uid, None)
+            if existed:
+                self._dirty = True
+            return existed
+
     def get_details(
         self,
         user_id: str,

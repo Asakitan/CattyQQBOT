@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import random
 import re
+import sys
 import time
 import threading
 from typing import Any, DefaultDict
@@ -196,8 +197,74 @@ def _apply_bot_cpu_affinity(cfg: Config) -> None:
 
 _apply_bot_cpu_affinity(config)
 
+
+def _memory_sidecar_path(current_config: Config, filename: str) -> Path:
+    memory_path = Path(current_config.catty_memory_path).expanduser()
+    base = memory_path.parent if memory_path.suffix else memory_path
+    return base / filename
+
+
+def _build_persona_emoji_store(current_config: Config, persona: Any) -> EmojiStore:
+    root_value = str(getattr(persona, "emoji_root", "") or "").strip()
+    if not root_value:
+        return EmojiStore(current_config)
+    root = Path(root_value).expanduser()
+    download_value = str(getattr(persona, "emoji_download_dir", "") or "").strip()
+    manifest_value = str(getattr(persona, "emoji_manifest_path", "") or "").strip()
+    download_dir = Path(download_value).expanduser() if download_value else root / "downloaded"
+    manifest_path = Path(manifest_value).expanduser() if manifest_value else root / "manifest.json"
+    bundled_root: Path | None = None
+    bundle_root_value = str(getattr(sys, "_MEIPASS", "") or "").strip()
+    if bundle_root_value:
+        bundled_root = Path(bundle_root_value) / Path(root_value)
+        bundled_manifest = bundled_root / "manifest.json"
+        if not root.exists() and bundled_manifest.is_file():
+            manifest_path = bundled_manifest
+    return EmojiStore(
+        current_config,
+        root=root,
+        download_dir=download_dir,
+        manifest_path=manifest_path,
+        allow_downloads=getattr(persona, "emoji_allow_downloads", None),
+        bundled_root=bundled_root,
+        allow_bundled_fallback=bundled_root is not None,
+    )
+
+
+def _rebuild_persona_emoji_stores(current_config: Config) -> None:
+    global emoji_store, _persona_emoji_stores
+    from .personas import PERSONAS
+
+    catty_store = EmojiStore(current_config)
+    stores: dict[str, EmojiStore] = {"catty": catty_store}
+    for name, persona in PERSONAS.items():
+        if name == "catty" or not getattr(persona, "emoji_root", None):
+            continue
+        stores[name] = _build_persona_emoji_store(current_config, persona)
+    emoji_store = catty_store
+    _persona_emoji_stores = stores
+
+
+def _emoji_store_for_persona(persona: Any) -> EmojiStore:
+    name = str(getattr(persona, "name", "catty") or "catty").strip().lower()
+    store = _persona_emoji_stores.get(name)
+    if store is not None:
+        return store
+    if getattr(persona, "emoji_root", None):
+        store = _build_persona_emoji_store(config, persona)
+        _persona_emoji_stores[name] = store
+        return store
+    return emoji_store
+
+
+def _emoji_store_for_event(event: MessageEvent) -> EmojiStore:
+    return _emoji_store_for_persona(_persona_for_event(event))
+
+
 memory_store = MemoryStore(config)
-emoji_store = EmojiStore(config)
+emoji_store: EmojiStore
+_persona_emoji_stores: dict[str, EmojiStore] = {}
+_rebuild_persona_emoji_stores(config)
 legs_picker = LegsPicker(config)
 affection_store = AffectionStore(config)
 # story_arc 是 SillyTavern 风「scenario 跨多消息延续」: per-scope 多小时滚动话题。
@@ -236,6 +303,12 @@ catty_mood_store = CattyMoodStore(config.catty_memory_path)
 # 长期记忆。per-scope 200KB cap + LRU 压缩,落盘 scope_lorebooks.json。
 from .scope_lorebook import ScopeLorebookStore
 scope_lorebook_store = ScopeLorebookStore(config.catty_memory_path)
+from .daily_timeline import DailyTimelineStore
+timeline_store = DailyTimelineStore(_memory_sidecar_path(config, "daily_timeline.json"))
+from .adaptive_evolution_prompt import AdaptiveEvolutionPromptStore
+adaptive_prompt_store = AdaptiveEvolutionPromptStore(
+    _memory_sidecar_path(config, "adaptive_evolution_prompts.json")
+)
 # 多人格 (主人 2026-07-06): /人格 命令的 per-scope 覆盖持久化。
 # 解析优先级: override > config.catty_group_personas > catty_default_persona。
 from .persona_override_store import PersonaOverrideStore
@@ -287,6 +360,8 @@ async def _managed_store_flush_loop() -> None:
                 ("user_details_store", lambda: user_details_store, lambda _store: 30.0),
                 ("catty_mood_store", lambda: catty_mood_store, lambda _store: 30.0),
                 ("scope_lorebook_store", lambda: scope_lorebook_store, lambda _store: 30.0),
+                ("timeline_store", lambda: timeline_store, lambda _store: 30.0),
+                ("adaptive_prompt_store", lambda: adaptive_prompt_store, lambda _store: 30.0),
                 ("pregnancy_store", lambda: pregnancy_store, lambda _store: 30.0),
             )
             for name, store_getter, interval_getter in specs:
@@ -4248,11 +4323,24 @@ def _load_runtime_config_from_path(path: Path) -> Config | None:
 
 
 def _emoji_paths_for_config(current_config: Config) -> list[Path]:
-    return [
+    paths = [
         Path(current_config.catty_emoji_dir).expanduser(),
         Path(current_config.catty_emoji_download_dir).expanduser(),
         Path(current_config.catty_emoji_manifest_path).expanduser(),
     ]
+    for store in _persona_emoji_stores.values():
+        paths.extend((store.root, store.download_dir, store.manifest_path))
+    return list(dict.fromkeys(paths))
+
+
+def _refresh_all_emoji_stores() -> None:
+    seen: set[int] = set()
+    for store in _persona_emoji_stores.values():
+        marker = id(store)
+        if marker in seen:
+            continue
+        seen.add(marker)
+        store.refresh()
 
 
 def _memory_paths_for_store(store: MemoryStore) -> list[Path]:
@@ -4283,7 +4371,8 @@ def _remember_hot_reload_config_signature(path: Path | None, signature: tuple[in
 
 
 def _apply_runtime_config(new_config: Config) -> None:
-    global config, memory_store, emoji_store, legs_picker, affection_store
+    global config, memory_store, legs_picker, affection_store
+    global timeline_store, adaptive_prompt_store
     # 切实例前先把旧 memory_store 待写的脏数据落盘,避免 hot reload 丢失最近的记忆。
     try:
         if memory_store.flush_sync():
@@ -4295,11 +4384,24 @@ def _apply_runtime_config(new_config: Config) -> None:
             logger.info("affection_store: flushed dirty data before hot reload")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"affection_store: pre-reload flush failed: {exc}")
+    for name, store in (
+        ("timeline_store", timeline_store),
+        ("adaptive_prompt_store", adaptive_prompt_store),
+    ):
+        try:
+            if store.flush_sync():
+                logger.info(f"{name}: flushed data before hot reload")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"{name}: pre-reload flush failed: {exc}")
     config = new_config
     memory_store = MemoryStore(config)
-    emoji_store = EmojiStore(config)
+    _rebuild_persona_emoji_stores(config)
     legs_picker = LegsPicker(config)
     affection_store = AffectionStore(config)
+    timeline_store = DailyTimelineStore(_memory_sidecar_path(config, "daily_timeline.json"))
+    adaptive_prompt_store = AdaptiveEvolutionPromptStore(
+        _memory_sidecar_path(config, "adaptive_evolution_prompts.json")
+    )
     _legs_last_sent_at.clear()
     _keyword_reply_last_sent_at.clear()
     _sync_hot_reload_signatures()
@@ -4537,10 +4639,10 @@ async def _hot_reload_loop() -> None:
         emoji_signature = _emoji_signature_for_config(config)
         if emoji_signature != _hot_reload_emoji_signature:
             try:
-                emoji_store.refresh()
-                logger.info("Hot reloaded emoji files and manifest")
+                _refresh_all_emoji_stores()
+                logger.info("Hot reloaded persona emoji files and manifests")
             except Exception as exc:
-                logger.warning(f"Hot reload failed to refresh emoji store: {exc}")
+                logger.warning(f"Hot reload failed to refresh persona emoji stores: {exc}")
             finally:
                 _sync_hot_reload_signatures()
             continue
@@ -5201,30 +5303,32 @@ def _choose_matching_emoji(
     tags: list[str] | None = None,
     refresh_on_miss: bool = False,
 ) -> EmojiEntry | None:
-    entries = emoji_store.select(query, tags=tags, limit=_emoji_candidate_pool_limit())
+    store = _emoji_store_for_event(event)
+    entries = store.select(query, tags=tags, limit=_emoji_candidate_pool_limit())
     if entries:
         return _select_diverse_emoji(event, entries)
     if refresh_on_miss and config.catty_emoji_enabled:
-        emoji_store.refresh()
-        entries = emoji_store.select(query, tags=tags, limit=_emoji_candidate_pool_limit())
+        store.refresh()
+        entries = store.select(query, tags=tags, limit=_emoji_candidate_pool_limit())
         if entries:
             return _select_diverse_emoji(event, entries)
     return None
 
 
-def _generic_emoji_context(incoming: ExtractedMessage) -> str:
+def _generic_emoji_context(incoming: ExtractedMessage, *, persona: Any = None) -> str:
     if not config.catty_emoji_enabled:
         return ""
     _t = (incoming.text or "").lower()
     # 技术/排错/部署类强请求里 emoji 候选通常是噪音, 且会制造 post-boundary miss。
     if any(k in _t for k in ("cache", "缓存", "kv", "命中", "修复", "测试", "链路", "部署", "编译", "代码", "bug", "报错", "日志")):
         return ""
-    candidates = emoji_store.candidates_text(incoming.text)
+    store = _emoji_store_for_persona(persona)
+    candidates = store.candidates_text(incoming.text)
     # 主人 2026-05-29 A: 没匹配到可用表情候选就不注入 emoji 参数段 (~142c/轮 post_boundary).
     # 本来就没表情可发, 注入空候选的参数纯属浪费 miss token. 零功能损失 (有候选才注入).
     if not (candidates and str(candidates).strip()):
         return ""
-    return _emoji_reply_context(
+    context = _emoji_reply_context(
         {
             "interest": 100,
             "expression": incoming.text,
@@ -5233,6 +5337,8 @@ def _generic_emoji_context(incoming: ExtractedMessage) -> str:
         },
         candidates,
     )
+    guidance = str(getattr(persona, "emoji_guidance", "") or "").strip()
+    return f"{guidance}\n\n{context}" if guidance else context
 
 
 def _should_auto_emoji_reply(incoming: ExtractedMessage, reply: str) -> bool:
@@ -5251,16 +5357,17 @@ def _should_auto_emoji_reply(incoming: ExtractedMessage, reply: str) -> bool:
 
 
 def _choose_auto_emoji(event: MessageEvent, reply: str, incoming: ExtractedMessage) -> EmojiEntry | None:
+    store = _emoji_store_for_event(event)
     candidates = _unique_emoji_entries(
         [
-            *emoji_store.select(reply, limit=_emoji_candidate_pool_limit()),
-            *emoji_store.select(incoming.text, limit=_emoji_candidate_pool_limit()),
+            *store.select(reply, limit=_emoji_candidate_pool_limit()),
+            *store.select(incoming.text, limit=_emoji_candidate_pool_limit()),
         ]
     )
     entry = _select_diverse_emoji(event, candidates)
     if entry is not None:
         return entry
-    candidates = emoji_store.select("", limit=_emoji_candidate_pool_limit())
+    candidates = store.select("", limit=_emoji_candidate_pool_limit())
     return _select_diverse_emoji(event, candidates)
 
 
@@ -5275,6 +5382,7 @@ async def _enrich_emoji_metadata_with_vision_ai(
     *,
     query: str,
     context_text: str,
+    store: EmojiStore,
 ) -> EmojiEntry:
     if not (config.catty_vision_api_key.strip() or _has_api_key()):
         return entry
@@ -5303,7 +5411,7 @@ async def _enrich_emoji_metadata_with_vision_ai(
         tags.append(emoji_query)
     if query:
         tags.append(query)
-    updated = emoji_store.update_metadata(entry, meaning=meaning, tags=tags, source=entry.source, priority=entry.priority)
+    updated = store.update_metadata(entry, meaning=meaning, tags=tags, source=entry.source, priority=entry.priority)
     if updated is not None:
         logger.info(f"Updated emoji metadata with vision AI: {entry.path.name} -> {meaning} [{', '.join(tags[:8])}]")
         return updated
@@ -5319,16 +5427,25 @@ async def _choose_or_download_emoji(
     if not query.strip() or not config.catty_emoji_enabled:
         return None
 
+    store = _emoji_store_for_event(event)
     tags_value = image_analysis.get("emotion_tags")
     tags = [str(tag) for tag in tags_value] if isinstance(tags_value, list) else []
     entry = _choose_matching_emoji(event, query, tags=tags, refresh_on_miss=True)
     if entry is not None:
         return entry
 
-    entry = emoji_store.adopt_downloaded(query, tags=tags)
+    if not store.allow_downloads:
+        return None
+
+    entry = store.adopt_downloaded(query, tags=tags)
     if entry is not None:
         logger.info(f"Adopted downloaded emoji for query {query}: {entry.path}")
-        return await _enrich_emoji_metadata_with_vision_ai(entry, query=query, context_text=incoming.text)
+        return await _enrich_emoji_metadata_with_vision_ai(
+            entry,
+            query=query,
+            context_text=incoming.text,
+            store=store,
+        )
 
     image_urls = list(incoming.image_urls)
     if not image_urls:
@@ -5345,7 +5462,7 @@ async def _choose_or_download_emoji(
             image_data, content_type = await download_binary(config, image_url)
             if content_type and not content_type.lower().startswith("image/"):
                 continue
-            entry = emoji_store.save_downloaded(
+            entry = store.save_downloaded(
                 image_data=image_data,
                 content_type=content_type,
                 source_url=image_url,
@@ -5361,7 +5478,12 @@ async def _choose_or_download_emoji(
             continue
         if entry is not None:
             logger.info(f"Downloaded emoji image for query {query}: {entry.path}")
-            return await _enrich_emoji_metadata_with_vision_ai(entry, query=query, context_text=incoming.text)
+            return await _enrich_emoji_metadata_with_vision_ai(
+                entry,
+                query=query,
+                context_text=incoming.text,
+                store=store,
+            )
     return None
 
 
@@ -5460,6 +5582,61 @@ def _build_recent_image_reference_hint(
     else:
         lines.append("如果需要更早的图（超出本会话最近 3 张），再查找会话图片记忆。")
     return "\n".join(lines)
+
+
+def _build_cognitive_turn_context_sync(
+    *,
+    text: str,
+    persona: Any,
+    scope_key: str,
+    is_private: bool,
+    user_id: str,
+    group_id: str,
+) -> tuple[str, str]:
+    """Build post-boundary system evidence and the current user-role adaptive block."""
+    persona_name = str(getattr(persona, "name", "catty") or "catty")
+    system_parts: list[str] = []
+    if bool(getattr(persona, "semantic_harness_enabled", False)) and str(text or "").strip():
+        try:
+            from .fadianji_harness import build_fadianji_harness_context
+
+            harness = build_fadianji_harness_context(
+                text,
+                persona=persona,
+                scope_key=scope_key,
+                is_private=is_private,
+                user_id=user_id,
+                group_id=group_id,
+                memory_store=memory_store,
+                rag_store=catty_rag_store,
+                book_k=0,
+            )
+            if harness:
+                system_parts.append(harness)
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"fadianji semantic harness failed (non-fatal): {exc}")
+    try:
+        if timeline_store.list(scope_key, persona=persona_name):
+            timeline_prompt = timeline_store.build_prompt(scope_key, persona=persona_name)
+            if timeline_prompt:
+                system_parts.append(timeline_prompt)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"timeline prompt build failed (non-fatal): {exc}")
+    adaptive_prompt = ""
+    try:
+        if adaptive_prompt_store.list_prompts(
+            scope_key,
+            persona=persona_name,
+            include_disabled=False,
+        ):
+            adaptive_prompt = adaptive_prompt_store.build_prompt(
+                scope_key,
+                persona=persona_name,
+                current_user_payload="",
+            )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"adaptive prompt build failed (non-fatal): {exc}")
+    return "\n\n".join(system_parts), adaptive_prompt
 
 
 async def _build_messages(
@@ -6191,6 +6368,22 @@ async def _build_messages(
     # → 让 user 之前的 prefix 100% 静态 (sys static + history anchored) → cache 命中前段所有 token.
     # post_boundary 动态段每轮会变, 放 user 之后只影响 last chunk, 不破坏 prefix hash.
     _user_content_raw = _build_user_content(incoming, image_description=image_description)
+    _cognitive_system_context = ""
+    _adaptive_user_prompt = ""
+    try:
+        _cognitive_system_context, _adaptive_user_prompt = await asyncio.to_thread(
+            _build_cognitive_turn_context_sync,
+            text=str(incoming.text or ""),
+            persona=_persona,
+            scope_key=key,
+            is_private=_is_private_event,
+            user_id=str(event.user_id),
+            group_id=str(getattr(event, "group_id", "") or ""),
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"cognitive turn context failed (non-fatal): {exc}")
+    if _adaptive_user_prompt:
+        _user_content_raw = f"{str(_user_content_raw)}\n\n{_adaptive_user_prompt}"
     messages.append({"role": "user", "content": _user_content_raw})
     # 主人 2026-05-29 Round 19: 合并 post-boundary 段成 1 个 system msg.
     # 群聊 dump 显示 31 个 post-boundary system msg → cache prefix 末尾散乱.
@@ -6205,6 +6398,12 @@ async def _build_messages(
         if _post_chunks:
             _merged_post = "\n\n".join(_post_chunks)
             messages.append({"role": "system", "content": _merged_post})
+    if _cognitive_system_context:
+        _append_internal_system(
+            messages,
+            _cognitive_system_context,
+            label="cognitive evidence and timeline",
+        )
     # 主人 2026-05-29 P0: 延后的 persona_reminder 在此注入为 trailing system (user/post_boundary
     # 之后). system 段不进 history → current user 字节稳定, 前缀不再每轮断. (spark 路径下方会用
     # _slim_messages 覆盖 messages, 故此 reminder 仅作用于非 spark — 与旧行为一致.)
@@ -7520,17 +7719,20 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "——『反应』『吐槽』『话题展开』三个真实轮次。"
         )
     else:
-        # 多人格 (主人 2026-07-06): 非 catty (机机) — 单气泡是绝对默认,
-        # 连发只在上头/认真解释/步骤需要时低频出现, 不主动教模型拆两行。
+        # 多人格 (主人 2026-07-06 / 2026-08-10 五轮): 非 catty (机机) — 分块式连续表达:
+        # 大多数回复一块短句; 内容变长时按自然弱边界拆 2-4 块, 单块不必完整,
+        # 拼起来必须是一句自然完整的话。频率按全量实录 73.4%/18.5%/7.2% 约束。
         return (
-            "QQ 回复分段规则——机机人格默认单条：大多数回复只有 1 条短句（3-15 字）；"
-            "普通问候、确认、吐槽、安抚、短评、一句技术结论都**只发一条**。"
-            "只有情绪上头、认真解释或确实要分步骤时才低频拆 2 条；3~4 条是极少数爆发/协作连发。"
-            "单词就能回的（帅 / 草 / 好好好好）只发一条，别硬凑；"
-            "能合成一句就不要为了显得像 QQ 拆成『我去』『好厉害』这种两段。"
+            "QQ 回复分段规则——机机人格是分块式连续表达（U = C₁ ⊕ C₂ ⊕ … ⊕ Cₖ）："
+            "大多数回复只有 1 块短句（3-15 字），普通问候、确认、吐槽、安抚、短评、一句技术结论都**只发一条**。"
+            "内容变长时，把一句话在词组/短语/从句的自然弱边界处拆成 2-4 个连续块："
+            "单块不必是完整句子（允许句法未完成处切分），但所有块按顺序拼起来必须能还原成一句自然完整的话；"
+            "相邻块自然承接，不换话题，不随机截断词语。"
+            "这不是口吃或犹豫：不堆「……」「呃」「那个」，不自我修正。"
+            "频率按全量实录约束：约 73% 一簇一条、18% 两条、3-4 条 7%——别为了显得像 QQ 硬拆短句。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
-            f"确实需要拆时两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
-            "被拆的前几条结尾少用句号/感叹号，自然些。"
+            f"拆块两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
+            "被拆的前几块结尾少用句号/感叹号，自然些。"
             f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
             "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
             "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用换行+「1)」「2)」。"
@@ -8889,26 +9091,13 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
 
-    # 路径 1.5 (多人格, 主人 2026-08-10 收敛): 非 catty 人格 (机机) 不再把普通换行
-    # 一律拆成气泡 — 旧逻辑会把「我去\n好厉害」这种一句反应硬发成两条。只有 AI
-    # 显式输出 REPLY_SPLIT_MARKER (路径 1) 才尊重拆分; 裸换行默认合并回单条,
-    # 长技术/列表仍交给路径 3 的 split_reply 兜底。
-    if (
-        persona is not None
-        and getattr(persona, "name", "catty") != "catty"
-        and "\n" in reply
-        and len(reply) <= 320
-        and not any(m in reply for m in _TECHNICAL_FORMATTING_PATTERNS)
-        and len(re.findall(r"(?:^|\n)\s*(?:[-*]|\d+[.)])\s", reply)) < 2
-    ):
-        segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
-        if len(segments) >= 2 and all(len(seg) <= 100 for seg in segments):
-            merged = " ".join(seg.rstrip(TRAILING_CHAT_PUNCTUATION) for seg in segments)
-            return split_reply(merged, config.catty_reply_max_chars, max_chunks=max_chunks)
+    # 路径 1.5 已于 2026-08-10 五轮移除: 机机人格是「分块式连续表达」(U=C₁⊕…⊕Cₖ),
+    # 换行分块是她的原生节奏, 不再合并回单条 — 与 catty 同走路径 2 的短聊换行拆分。
+    # 拆分是否合理由 prompt 侧 (分块模型 + 73/18.5/7.2 簇分布) 约束。
 
     # 路径 2:AI 用换行表达"QQ 节奏拆分"(短回复且无技术格式标记)
     # —— 严格限定为短聊场景,避免长技术答里的 \n 被错拆
-    if getattr(persona, "name", "catty") == "catty" and _looks_like_qq_short_chat(reply):
+    if getattr(persona, "name", "catty") in ("catty", "fadianji") and _looks_like_qq_short_chat(reply):
         segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
         # 每段也要短(≤80 字符),才像 QQ 连发节奏;否则更可能是段落不是消息
         if 2 <= len(segments) <= max_chunks and all(len(seg) <= 80 for seg in segments):
@@ -9843,10 +10032,20 @@ _CATTY_STATUS_RE = re.compile(
     r"^\s*/?(catty_status|status|笨猫状态|猫猫状态)\s*$",
     re.IGNORECASE,
 )
-# 主人专属 Scope Lorebook 命令 (/lore_show /lore_remove <id> /lore_summarize)
+# 主人专属 Scope Lorebook 命令。
 # 让笨猫从当前 scope 对话总结出『这个群专属小事』作为长期记忆 lorebook entry。
 _LORE_CMD_RE = re.compile(
-    r"^\s*/?(lore_show|lore_remove|lore_summarize)(?:\s+(\S+))?\s*$",
+    r"^\s*/?(lore_show|lore_list|lore_remove|lore_delete|lore_clear|lore_summarize)(?:\s+(\S+))?\s*$",
+    re.IGNORECASE,
+)
+
+_COGNITIVE_ADMIN_RE = re.compile(
+    r"^\s*/?(profile_show|profile_name_set|profile_name_clear|profile_fact_add|profile_fact_delete|profile_fact_clear|"
+    r"note_list|note_add|note_delete|note_clear|"
+    r"meme_list|meme_add|meme_delete|meme_clear|"
+    r"timeline_list|timeline_add|timeline_update|timeline_done|timeline_delete|timeline_clear|"
+    r"adaptive_list|adaptive_set|adaptive_delete|adaptive_clear)"
+    r"(?:\s+(.*?))?\s*$",
     re.IGNORECASE,
 )
 
@@ -9924,7 +10123,7 @@ async def _catty_status_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
 
 
 async def _lore_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
-    """主人 only 的 scope lorebook 命令 (/lore_show /lore_remove /lore_summarize)。"""
+    """主人 only 的 scope lorebook 命令。"""
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
         return False
     if not _event_is_owner(event):
@@ -9937,6 +10136,19 @@ async def _lore_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         return False
     state["catty_lore_cmd"] = match.group(1).lower()
     state["catty_lore_arg"] = (match.group(2) or "").strip()
+    return True
+
+
+async def _cognitive_admin_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    if not _event_is_owner(event):
+        return False
+    match = _COGNITIVE_ADMIN_RE.match(event_plain_text(event) or "")
+    if not match:
+        return False
+    state["catty_cognitive_admin_cmd"] = match.group(1).lower()
+    state["catty_cognitive_admin_arg"] = (match.group(2) or "").strip()
     return True
 
 
@@ -10053,6 +10265,7 @@ vibe_command_matcher = on_message(rule=_vibe_command_rule, priority=43, block=Tr
 aff_admin_matcher = on_message(rule=_aff_admin_rule, priority=44, block=True)
 catty_status_matcher = on_message(rule=_catty_status_rule, priority=45, block=True)
 lore_cmd_matcher = on_message(rule=_lore_cmd_rule, priority=46, block=True)
+cognitive_admin_matcher = on_message(rule=_cognitive_admin_rule, priority=46, block=True)
 persona_cmd_matcher = on_message(rule=_persona_cmd_rule, priority=48, block=True)
 evolution_cmd_matcher = on_message(rule=_evolution_cmd_rule, priority=47, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
@@ -10760,7 +10973,424 @@ async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
         await matcher.finish(Message(f"喵呜~ dashboard 拼接失败: {exc}"))
 
 
-@lore_cmd_matcher.handle()
+def _split_admin_pipe(value: str) -> tuple[str, str]:
+    left, separator, right = str(value or "").partition("|")
+    return left.strip(), right.strip() if separator else ""
+
+
+def _format_note_rows(rows: list[dict[str, Any]], *, limit: int = 20) -> list[str]:
+    lines: list[str] = []
+    for row in rows[:limit]:
+        lines.append(
+            f"[{row.get('id') or '-'}] {row.get('category') or 'note'}/"
+            f"{row.get('source') or 'manual'}: {row.get('text') or ''}"
+        )
+    if len(rows) > limit:
+        lines.append(f"... 其余 {len(rows) - limit} 条省略")
+    return lines
+
+
+def _execute_profile_note_admin_sync(cmd: str, arg: str, *, group_id: str) -> str | None:
+    if cmd == "profile_show":
+        target = arg.strip()
+        if not re.fullmatch(r"\d{4,12}", target):
+            return "用法：/profile_show <qq>"
+        preferred = memory_store.preferred_name_for(target) or "(未设置)"
+        facts = [
+            row for row in memory_store.list_notes("user", user_id=target, limit=50)
+            if str(row.get("source") or "") == "profile_fact"
+        ]
+        lines = [f"profile · QQ={target}", f"preferred_name: {preferred}", f"profile_facts: {len(facts)}"]
+        lines.extend(_format_note_rows(facts) or ["(无)"])
+        return "\n".join(lines)
+
+    if cmd == "profile_name_set":
+        parts = arg.split(maxsplit=1)
+        if len(parts) != 2 or not re.fullmatch(r"\d{4,12}", parts[0]):
+            return "用法：/profile_name_set <qq> <称呼>"
+        saved = memory_store.set_preferred_name(parts[0], parts[1])
+        return f"已设置 QQ={parts[0]} 的 preferred_name：{saved}" if saved else "设置称呼失败。"
+
+    if cmd == "profile_name_clear":
+        target = arg.strip()
+        if not re.fullmatch(r"\d{4,12}", target):
+            return "用法：/profile_name_clear <qq>"
+        removed = memory_store.clear_preferred_name(target)
+        return f"已清除 QQ={target} 的 preferred_name。" if removed else f"QQ={target} 没有可清除的 preferred_name。"
+
+    if cmd == "profile_fact_add":
+        left, fact = _split_admin_pipe(arg)
+        parts = left.split()
+        if not fact or not parts or not re.fullmatch(r"\d{4,12}", parts[0]):
+            return "用法：/profile_fact_add <qq> [category] | <事实>"
+        result = memory_store.record_profile_fact(
+            parts[0],
+            fact,
+            category=parts[1] if len(parts) > 1 else "profile",
+        )
+        return f"profile fact 已写入：{result}" if result.get("ok") else f"写入失败：{result.get('error', 'unknown')}"
+
+    if cmd == "profile_fact_delete":
+        parts = arg.split()
+        if len(parts) != 2 or not re.fullmatch(r"\d{4,12}", parts[0]):
+            return "用法：/profile_fact_delete <qq> <note_id>"
+        facts = memory_store.list_notes("user", user_id=parts[0], limit=50)
+        allowed = {
+            str(row.get("id") or "") for row in facts
+            if str(row.get("source") or "") == "profile_fact"
+        }
+        if parts[1] not in allowed:
+            return "该 note_id 不是这个用户的 profile fact。"
+        removed = memory_store.remove_note(parts[1], scope="user", user_id=parts[0])
+        return f"已删除 profile fact：{parts[1]}" if removed else "删除失败。"
+
+    if cmd == "profile_fact_clear":
+        target = arg.strip()
+        if not re.fullmatch(r"\d{4,12}", target):
+            return "用法：/profile_fact_clear <qq>"
+        facts = memory_store.list_notes("user", user_id=target, limit=50)
+        removed = sum(
+            1 for row in facts
+            if str(row.get("source") or "") == "profile_fact"
+            and memory_store.remove_note(str(row.get("id") or ""), scope="user", user_id=target)
+        )
+        return f"已清除 QQ={target} 的 profile facts：{removed} 条。"
+
+    if not cmd.startswith("note_"):
+        return None
+    left, text = _split_admin_pipe(arg)
+    parts = left.split()
+    note_scope = parts[0].lower() if parts else ""
+    if note_scope not in {"user", "group"}:
+        return "note 命令的 scope 必须是 user 或 group。"
+    target_user = ""
+    index = 1
+    if note_scope == "user":
+        if len(parts) <= index or not re.fullmatch(r"\d{4,12}", parts[index]):
+            return f"用法：/{cmd} user <qq> ..."
+        target_user = parts[index]
+        index += 1
+    elif not group_id:
+        return "group note 只能在群聊中操作。"
+    target_group = group_id if note_scope == "group" else ""
+
+    if cmd == "note_list":
+        category = parts[index] if len(parts) > index else None
+        rows = memory_store.list_notes(
+            note_scope,
+            user_id=target_user,
+            group_id=target_group,
+            limit=50,
+            category=category,
+        )
+        lines = [f"notes · {note_scope}={target_user or target_group} · {len(rows)} 条"]
+        lines.extend(_format_note_rows(rows) or ["(无)"])
+        return "\n".join(lines)
+
+    if cmd == "note_add":
+        if not text:
+            return "用法：/note_add user <qq> [ttl_days] [category] | <内容>，或 /note_add group [ttl_days] [category] | <内容>"
+        ttl_days: int | None = None
+        if len(parts) > index and re.fullmatch(r"\d+", parts[index]):
+            ttl_days = int(parts[index])
+            index += 1
+        category = parts[index] if len(parts) > index else "note"
+        result = memory_store.record_note(
+            scope=note_scope,
+            text=text,
+            user_id=target_user,
+            group_id=target_group,
+            ttl_days=ttl_days,
+            category=category,
+            source="owner_command",
+        )
+        return f"note 已写入：{result}" if result.get("ok") else f"写入失败：{result.get('error', 'unknown')}"
+
+    if cmd == "note_delete":
+        if len(parts) <= index:
+            return f"用法：/note_delete {note_scope} " + ("<qq> " if note_scope == "user" else "") + "<note_id>"
+        note_id = parts[index]
+        removed = memory_store.remove_note(
+            note_id,
+            scope=note_scope,
+            user_id=target_user,
+            group_id=target_group,
+        )
+        return f"已删除 note：{note_id}" if removed else f"未找到 note：{note_id}"
+
+    if cmd == "note_clear":
+        category = parts[index] if len(parts) > index else None
+        removed = memory_store.clear_notes(
+            note_scope,
+            user_id=target_user,
+            group_id=target_group,
+            category=category,
+        )
+        return f"已清除 {note_scope} notes：{removed} 条" + (f"（category={category}）" if category else "")
+    return None
+
+
+def _execute_meme_admin_sync(cmd: str, arg: str, *, scope: str, persona: str) -> str | None:
+    scope_label = f"scope={scope} persona={persona}"
+    if cmd == "meme_list":
+        entries = scope_lorebook_store.list_entries(scope, persona=persona, kind="meme")
+        lines = [f"scope memes · {scope_label} · {len(entries)} 条"]
+        for entry in entries[:30]:
+            lines.append(f"[{entry.identifier}] {' / '.join(entry.keys)}: {entry.content}")
+        if len(entries) > 30:
+            lines.append(f"... 其余 {len(entries) - 30} 条省略")
+        if not entries:
+            lines.append("(无)")
+        return "\n".join(lines)
+
+    if cmd == "meme_add":
+        keys_text, content = _split_admin_pipe(arg)
+        keys = [item for item in re.split(r"[#，,、/\s]+", keys_text) if item]
+        if not keys or not content:
+            return "用法：/meme_add <key1>#<key2> | <说明>"
+        entry = scope_lorebook_store.add_entry(
+            scope,
+            keys,
+            content,
+            persona=persona,
+            kind="meme",
+        )
+        return f"scope meme 已写入：{entry.identifier}" if entry else "scope meme 写入失败。"
+
+    if cmd == "meme_delete":
+        meme_ids = {
+            entry.identifier
+            for entry in scope_lorebook_store.list_entries(scope, persona=persona, kind="meme")
+        }
+        if not arg or arg not in meme_ids:
+            return "未找到当前 scope/persona 的 meme id；用 /meme_list 查看。"
+        removed = scope_lorebook_store.remove_entry(scope, arg, persona=persona)
+        return f"已删除 scope meme：{arg}" if removed else "删除失败。"
+
+    if cmd == "meme_clear":
+        removed = scope_lorebook_store.clear_scope(scope, persona=persona, kind="meme")
+        return f"已清空 {scope_label} 的 scope memes：{removed} 条；lore 保留。"
+    return None
+
+
+def _valid_admin_day(value: str) -> bool:
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        return False
+    try:
+        from datetime import date as _date
+
+        _date.fromisoformat(value)
+    except ValueError:
+        return False
+    return True
+
+
+def _execute_timeline_admin_sync(cmd: str, arg: str, *, scope: str, persona: str) -> str | None:
+    scope_label = f"scope={scope} persona={persona}"
+    if cmd == "timeline_list":
+        if arg and not _valid_admin_day(arg):
+            return "用法：/timeline_list [YYYY-MM-DD]"
+        rows = timeline_store.list_items(scope, persona=persona, day=arg or None)
+        lines = [f"timeline · {scope_label} · {len(rows)} 条"]
+        for row in rows[:30]:
+            details = f"：{row.get('details')}" if row.get("details") else ""
+            lines.append(
+                f"[{row.get('status')}] {row.get('id')} {row.get('day')} "
+                f"{row.get('title')}{details}"
+            )
+        if len(rows) > 30:
+            lines.append(f"... 其余 {len(rows) - 30} 条省略")
+        if not rows:
+            lines.append("(无)")
+        return "\n".join(lines)
+
+    if cmd == "timeline_add":
+        left, details = _split_admin_pipe(arg)
+        parts = left.split()
+        if not parts:
+            return "用法：/timeline_add [YYYY-MM-DD] <标题> | <详情>"
+        day = ""
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", parts[0]):
+            day = parts.pop(0)
+            if not _valid_admin_day(day):
+                return "timeline 日期无效，应为真实的 YYYY-MM-DD。"
+        title = " ".join(parts).strip()
+        if not title:
+            return "timeline_add 需要标题。"
+        row = timeline_store.add_item(
+            scope,
+            title=title,
+            details=details,
+            day=day or None,
+            persona=persona,
+            source="owner_command",
+        )
+        return f"timeline 已新增：{row.get('id')}" if row else "timeline 新增失败。"
+
+    if cmd == "timeline_update":
+        parts = arg.split(maxsplit=2)
+        if len(parts) != 3:
+            return "用法：/timeline_update <item_id> <title|details|day|due_at|kind|status> <值>"
+        item_id, field_name, value = parts
+        field_map = {
+            "title": "title",
+            "details": "details",
+            "day": "day",
+            "due_at": "due_at",
+            "kind": "kind",
+            "status": "status",
+        }
+        target_field = field_map.get(field_name.lower())
+        if target_field is None:
+            return "timeline_update field 必须是 title/details/day/due_at/kind/status。"
+        if target_field == "day" and not _valid_admin_day(value):
+            return "timeline 日期无效，应为真实的 YYYY-MM-DD。"
+        if target_field == "kind" and value.lower() not in {"planned", "observed"}:
+            return "timeline kind 必须是 planned 或 observed。"
+        if target_field == "status" and value.lower() not in {"open", "done", "cancelled", "overdue"}:
+            return "timeline status 必须是 open/done/cancelled/overdue。"
+        row = timeline_store.update_item(
+            scope,
+            item_id,
+            persona=persona,
+            **{target_field: value},
+        )
+        return f"timeline 已更新：{item_id}" if row else f"未找到 timeline item：{item_id}"
+
+    if cmd == "timeline_done":
+        if not arg:
+            return "用法：/timeline_done <item_id>"
+        row = timeline_store.complete_item(scope, arg, persona=persona)
+        return f"timeline 已完成：{arg}" if row else f"未找到 timeline item：{arg}"
+
+    if cmd == "timeline_delete":
+        if not arg:
+            return "用法：/timeline_delete <item_id>"
+        removed = timeline_store.remove_item(scope, arg, persona=persona)
+        return f"已删除 timeline：{arg}" if removed else f"未找到 timeline item：{arg}"
+
+    if cmd == "timeline_clear":
+        removed = timeline_store.clear_items(scope, persona=persona)
+        return f"已清空 {scope_label} 的 timeline：{removed} 条。"
+    return None
+
+
+def _execute_adaptive_admin_sync(cmd: str, arg: str, *, scope: str, persona: str) -> str | None:
+    scope_label = f"scope={scope} persona={persona}"
+    if cmd == "adaptive_list":
+        rows = adaptive_prompt_store.list_prompts(
+            scope,
+            persona=persona,
+            include_disabled=True,
+        )
+        lines = [f"adaptive prompts · {scope_label} · {len(rows)} 条"]
+        for row in rows:
+            enabled = "on" if row.get("enabled", True) else "off"
+            lines.append(
+                f"[{enabled}] {row.get('id')} name={row.get('reason') or '-'}: "
+                f"{row.get('content')}"
+            )
+        if not rows:
+            lines.append("(无)")
+        return "\n".join(lines)
+
+    if cmd == "adaptive_set":
+        left, content = _split_admin_pipe(arg)
+        parts = left.split()
+        if not parts or not content:
+            return "用法：/adaptive_set <name> [ttl_hours] | <内容>"
+        ttl_hours: float | None = None
+        if len(parts) > 1:
+            try:
+                ttl_hours = float(parts[1])
+            except ValueError:
+                return "ttl_hours 必须是数字。"
+        row = adaptive_prompt_store.upsert_prompt(
+            scope,
+            parts[0],
+            content,
+            persona=persona,
+            ttl_hours=ttl_hours,
+        )
+        return f"adaptive prompt 已写入：{row.get('id')}" if row else "adaptive prompt 写入失败。"
+
+    if cmd == "adaptive_delete":
+        if not arg:
+            return "用法：/adaptive_delete <entry_id>"
+        removed = adaptive_prompt_store.remove_prompt(scope, arg, persona=persona)
+        return f"已删除 adaptive prompt：{arg}" if removed else f"未找到 adaptive prompt：{arg}"
+
+    if cmd == "adaptive_clear":
+        removed = adaptive_prompt_store.clear_prompts(scope, persona=persona)
+        return f"已清空 {scope_label} 的 adaptive prompts：{removed} 条。"
+    return None
+
+
+def _execute_cognitive_admin_command_sync(
+    cmd: str,
+    arg: str,
+    *,
+    scope: str,
+    persona: str,
+    group_id: str,
+) -> str:
+    normalized_cmd = str(cmd or "").strip().lower()
+    normalized_arg = str(arg or "").strip()
+    handlers = (
+        lambda: _execute_profile_note_admin_sync(
+            normalized_cmd,
+            normalized_arg,
+            group_id=group_id,
+        ),
+        lambda: _execute_meme_admin_sync(
+            normalized_cmd,
+            normalized_arg,
+            scope=scope,
+            persona=persona,
+        ),
+        lambda: _execute_timeline_admin_sync(
+            normalized_cmd,
+            normalized_arg,
+            scope=scope,
+            persona=persona,
+        ),
+        lambda: _execute_adaptive_admin_sync(
+            normalized_cmd,
+            normalized_arg,
+            scope=scope,
+            persona=persona,
+        ),
+    )
+    for execute in handlers:
+        result = execute()
+        if result is not None:
+            return result
+    return f"未知 cognitive admin 命令：{normalized_cmd}"
+
+
+@cognitive_admin_matcher.handle()
+async def handle_cognitive_admin(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    if not _event_is_owner(event):
+        return
+    scope = _conversation_queue_key(event)
+    persona_obj = _persona_for_scope(scope)
+    _ensure_session_persona_isolation(scope, persona_obj)
+    try:
+        result = await asyncio.to_thread(
+            _execute_cognitive_admin_command_sync,
+            str(state.get("catty_cognitive_admin_cmd") or ""),
+            str(state.get("catty_cognitive_admin_arg") or ""),
+            scope=scope,
+            persona=persona_obj.name,
+            group_id=str(getattr(event, "group_id", "") or ""),
+        )
+        await matcher.finish(Message(result))
+    except FinishedException:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        await matcher.finish(Message(f"cognitive admin 执行失败：{exc}"))
+
+
 @evolution_cmd_matcher.handle()
 async def handle_evolution_cmd(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     cmd = str(state.get("evolution_cmd", ""))
@@ -10826,6 +11456,7 @@ async def handle_evolution_cmd(matcher: Matcher, event: MessageEvent, state: T_S
     await matcher.finish("嗷呜～未知 evolution 命令喵")
 
 
+@lore_cmd_matcher.handle()
 async def handle_lore_cmd(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     """主人专属 scope lorebook 管理 + 强制触发学习。"""
     if not _event_is_owner(event):
@@ -10837,15 +11468,19 @@ async def handle_lore_cmd(matcher: Matcher, event: MessageEvent, state: T_State)
     _ensure_session_persona_isolation(scope, lore_persona_obj)
     lore_persona = lore_persona_obj.name
     try:
-        if cmd == "lore_show":
-            entries = scope_lorebook_store.list_entries(scope, persona=lore_persona)
+        if cmd in {"lore_show", "lore_list"}:
+            entries = scope_lorebook_store.list_entries(
+                scope,
+                persona=lore_persona,
+                kind="lore",
+            )
             if not entries:
                 await matcher.finish(Message(
-                    f"喵~ 当前 scope ({scope}) 还没学到啥嗷呜, 主人可以用 /lore_summarize 让笨猫总结一次 ฅฅ"
+                    f"当前 scope={scope} persona={lore_persona} 还没有 lore；可用 /lore_summarize 生成。"
                 ))
             size_kb = scope_lorebook_store.scope_byte_size(scope, persona=lore_persona) / 1024.0
             lines: list[str] = [
-                f"🐾 笨猫学到的事 · {scope}",
+                f"lore · scope={scope} · persona={lore_persona}",
                 f"共 {len(entries)} 条 · ~{size_kb:.1f}KB / 200KB",
                 "━" * 18,
             ]
@@ -10856,18 +11491,34 @@ async def handle_lore_cmd(matcher: Matcher, event: MessageEvent, state: T_State)
                 lines.append(f"  · {e.content}")
             await matcher.finish(Message("\n".join(lines)))
 
-        elif cmd == "lore_remove":
+        elif cmd in {"lore_remove", "lore_delete"}:
             if not arg:
+                await matcher.finish(Message("用法：/lore_delete <identifier>"))
+            lore_ids = {
+                entry.identifier
+                for entry in scope_lorebook_store.list_entries(
+                    scope,
+                    persona=lore_persona,
+                    kind="lore",
+                )
+            }
+            if arg not in lore_ids:
                 await matcher.finish(Message(
-                    "杂鱼主人~ 要带 identifier 嗷呜!例: `/lore_remove scope_lore_a1b2c3d4` ฅฅ"
+                    f"未找到当前 scope/persona 的 lore identifier={arg}；用 /lore_list 查看。"
                 ))
             removed = scope_lorebook_store.remove_entry(scope, arg, persona=lore_persona)
             if removed:
-                await matcher.finish(Message(
-                    f"喵~ 已经删掉 {arg} 啦, 笨猫不记得这事了 ฅฅ"
-                ))
+                await matcher.finish(Message(f"已删除 lore：{arg}"))
+            await matcher.finish(Message(f"删除 lore 失败：{arg}"))
+
+        elif cmd == "lore_clear":
+            removed = scope_lorebook_store.clear_scope(
+                scope,
+                persona=lore_persona,
+                kind="lore",
+            )
             await matcher.finish(Message(
-                f"哼~ 没找到 identifier={arg} 的 entry, 用 /lore_show 看看实际 id 嗷呜"
+                f"已清空 scope={scope} persona={lore_persona} 的 lore，共 {removed} 条；scope meme 保留。"
             ))
 
         elif cmd == "lore_summarize":
@@ -10916,6 +11567,7 @@ async def handle_lore_cmd(matcher: Matcher, event: MessageEvent, state: T_State)
                     keys=ed.get("keys", []),
                     content=ed.get("content", ""),
                     persona=lore_persona,
+                    kind="lore",
                 )
                 if entry:
                     added.append(f"[{entry.identifier}] {' / '.join(entry.keys)}: {entry.content}")
@@ -10942,6 +11594,12 @@ async def handle_emoji_save(
     user_tags: list[str] = list(state.get("catty_emoji_save_tags") or [])
 
     async with _locks[_conversation_queue_key(event)]:
+        _save_persona = _persona_for_event(event)
+        _save_store = _emoji_store_for_persona(_save_persona)
+        if not _save_store.allow_downloads:
+            await matcher.finish(Message(
+                f"当前人格 {_save_persona.char_name} 使用只读精选表情库，收藏和联网下载已关闭。"
+            ))
         # 图源优先级: (1) 本条消息附图 → (2) 引用消息附图 → (3) 最近 5min 群图
         image_urls = extract_image_urls(event)
         source = "self"
@@ -10982,7 +11640,7 @@ async def handle_emoji_save(
 
         # 存表情库
         try:
-            entry = emoji_store.save_downloaded(
+            entry = _save_store.save_downloaded(
                 image_data=image_data,
                 content_type=content_type,
                 source_url=url,
@@ -11959,6 +12617,19 @@ async def _flush_scope_lorebook_on_shutdown() -> None:
 
 
 @get_driver().on_shutdown
+async def _flush_cognitive_stores_on_shutdown() -> None:
+    for name, store in (
+        ("timeline_store", timeline_store),
+        ("adaptive_prompt_store", adaptive_prompt_store),
+    ):
+        try:
+            if store.flush_sync():
+                logger.info(f"{name}: flushed data on shutdown")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"{name}: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
 async def _flush_affection_store_on_shutdown() -> None:
     try:
         if affection_store.flush_sync():
@@ -12460,6 +13131,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         image_description_cached = False
         image_analysis: dict[str, object] = {}
         emoji_context = ""
+        _active_emoji_persona = _persona_for_event(event)
+        _active_emoji_store = _emoji_store_for_persona(_active_emoji_persona)
         if incoming.has_image and config.catty_image_vision_enabled:
             # 先查持久缓存:命中=旧图,corpus 已经写过,后面不重复写。
             persistent_summary = memory_store.get_image_summary(incoming.image_keys)
@@ -12508,12 +13181,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 query = str(image_analysis.get("emoji_query") or image_analysis.get("expression") or "")
                 if (
                     incoming.image_urls
+                    and _active_emoji_store.allow_downloads
                     and interest >= config.catty_emoji_save_interest_threshold
                     and bool(image_analysis.get("save_as_emoji"))
                 ):
                     try:
                         image_data, content_type = await download_binary(config, incoming.image_urls[0])
-                        emoji_store.save_downloaded(
+                        _active_emoji_store.save_downloaded(
                             image_data=image_data,
                             content_type=content_type,
                             source_url=incoming.image_urls[0],
@@ -12526,10 +13200,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     except OSError as exc:
                         logger.warning(f"Failed to save high-interest emoji image: {exc}")
                 if interest >= config.catty_emoji_interest_threshold:
-                    candidates = emoji_store.candidates_text(query, tags=tags)
+                    candidates = _active_emoji_store.candidates_text(query, tags=tags)
                     emoji_context = _emoji_reply_context(image_analysis, candidates)
         if not emoji_context:
-            emoji_context = _generic_emoji_context(incoming)
+            emoji_context = _generic_emoji_context(incoming, persona=_active_emoji_persona)
         semantic_reply_split = await _should_request_semantic_reply_split(incoming)
         reply_source_context = _build_reply_source_context(
             reply_sources,
@@ -12614,7 +13288,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             config=config,
             memory_store=memory_store,
             event=event,
-            emoji_store=emoji_store,
+            emoji_store=_emoji_store_for_persona(_tool_persona),
             persona=_tool_persona,  # 多人格: 画图参考图/planner/口吻按 persona
             affection_store=affection_store,
             prepare_nsfw_segments_fn=_prepare_nsfw_image_segments,
@@ -12626,6 +13300,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             story_arc_store=(
                 None if _tool_persona.feature_disabled("story_arc") else story_arc_store
             ),
+            scope_lorebook_store=scope_lorebook_store,
+            timeline_store=timeline_store,
+            adaptive_prompt_store=adaptive_prompt_store,
+            session_cache=_get_session_cache(),
             scope_key=_conversation_queue_key(event),
             # 主人 2026-05-29: catty_imagegen agent 模式拿原话喂给 deepseek 出 plan
             user_text=_user_text_for_intent,

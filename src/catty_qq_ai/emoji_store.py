@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import hashlib
 import json
 import logging
@@ -51,6 +51,11 @@ class EmojiEntry:
     tags: list[str]
     source: str
     priority: int
+    category: str = ""
+    use_when: list[str] = field(default_factory=list)
+    avoid_when: list[str] = field(default_factory=list)
+    intensity: str = "medium"
+    motion: str = "static"
 
 
 def _safe_tokens(text: str) -> list[str]:
@@ -74,6 +79,41 @@ def _safe_tokens(text: str) -> list[str]:
 
 def _clean_query(text: str) -> str:
     return text.strip(QUERY_EDGE_PUNCTUATION)
+
+
+def _metadata_list(value: Any) -> list[str]:
+    if isinstance(value, list):
+        values = value
+    elif value:
+        values = [value]
+    else:
+        values = []
+    result: list[str] = []
+    for item in values:
+        item = str(item).strip()
+        if item and item not in result:
+            result.append(item)
+    return result
+
+
+def _field_match_score(wanted: set[str], values: list[str], *, weight: int) -> int:
+    if not wanted or not values:
+        return 0
+    haystack_tokens: set[str] = set()
+    haystack_text: list[str] = []
+    for value in values:
+        clean_value = str(value or "").strip()
+        if not clean_value:
+            continue
+        haystack_tokens.update(_safe_tokens(clean_value))
+        haystack_text.append(clean_value.lower())
+    token_hits = len(wanted & haystack_tokens)
+    fuzzy_hits = sum(
+        1
+        for token in wanted
+        if token not in haystack_tokens and any(token in text or text in token for text in haystack_text)
+    )
+    return weight * token_hits + (weight // 2) * fuzzy_hits
 
 
 def _match_score(
@@ -124,11 +164,34 @@ def _extension_from(content_type: str, source_url: str) -> str:
 
 
 class EmojiStore:
-    def __init__(self, config: Config) -> None:
+    def __init__(
+        self,
+        config: Config,
+        *,
+        root: str | Path | None = None,
+        download_dir: str | Path | None = None,
+        manifest_path: str | Path | None = None,
+        allow_downloads: bool | None = None,
+        bundled_root: str | Path | None = None,
+        allow_bundled_fallback: bool = True,
+    ) -> None:
         self.enabled = config.catty_emoji_enabled
-        self.root = Path(config.catty_emoji_dir).expanduser()
-        self.download_dir = Path(config.catty_emoji_download_dir).expanduser()
-        self.manifest_path = Path(config.catty_emoji_manifest_path).expanduser()
+        self.root = Path(root if root is not None else config.catty_emoji_dir).expanduser()
+        self.download_dir = Path(
+            download_dir if download_dir is not None else config.catty_emoji_download_dir
+        ).expanduser()
+        self.manifest_path = Path(
+            manifest_path if manifest_path is not None else config.catty_emoji_manifest_path
+        ).expanduser()
+        self.allow_downloads = (
+            bool(allow_downloads)
+            if allow_downloads is not None
+            else bool(getattr(config, "catty_emoji_allow_downloads", True))
+        )
+        self.bundled_root = (
+            Path(bundled_root).expanduser() if bundled_root is not None else None
+        )
+        self.allow_bundled_fallback = bool(allow_bundled_fallback)
         self.max_candidates = max(int(config.catty_emoji_max_candidates), 1)
         self._entries: list[EmojiEntry] = []
         self._manifest: dict[str, Any] = {"version": 1, "emojis": {}}
@@ -136,15 +199,33 @@ class EmojiStore:
             self.refresh()
 
     def _has_emoji_files(self, path: Path) -> bool:
-        return path.is_dir() and any(item.is_file() and item.suffix.lower() in EMOJI_EXTENSIONS for item in path.rglob("*"))
+        if not path.is_dir():
+            return False
+        excluded_download_dir: Path | None = None
+        if not self.allow_downloads:
+            try:
+                download_relative = self.download_dir.resolve().relative_to(self.root.resolve())
+                excluded_download_dir = (path / download_relative).resolve()
+            except ValueError:
+                if path.resolve() == self.root.resolve():
+                    excluded_download_dir = self.download_dir.resolve()
+        for item in path.rglob("*"):
+            if not item.is_file() or item.suffix.lower() not in EMOJI_EXTENSIONS:
+                continue
+            if excluded_download_dir is not None and item.resolve().is_relative_to(excluded_download_dir):
+                continue
+            return True
+        return False
 
     def _use_bundled_root_if_needed(self) -> None:
-        if self._has_emoji_files(self.root):
+        if self._has_emoji_files(self.root) or not self.allow_bundled_fallback:
             return
-        bundle_root_value = getattr(sys, "_MEIPASS", "")
-        if not bundle_root_value:
-            return
-        bundled_root = Path(str(bundle_root_value)) / "emojis"
+        bundled_root = self.bundled_root
+        if bundled_root is None:
+            bundle_root_value = getattr(sys, "_MEIPASS", "")
+            if not bundle_root_value:
+                return
+            bundled_root = Path(str(bundle_root_value)) / "emojis"
         if self._has_emoji_files(bundled_root):
             logger.info("Using bundled emoji directory: %s", bundled_root)
             self.root = bundled_root
@@ -153,7 +234,8 @@ class EmojiStore:
         self._use_bundled_root_if_needed()
         if not self.root.exists():
             self.root.mkdir(parents=True, exist_ok=True)
-        self.download_dir.mkdir(parents=True, exist_ok=True)
+        if self.allow_downloads:
+            self.download_dir.mkdir(parents=True, exist_ok=True)
         self.manifest_path.parent.mkdir(parents=True, exist_ok=True)
         self._manifest = self._load_manifest()
         self._scan_files()
@@ -179,6 +261,9 @@ class EmojiStore:
         emojis = loaded.get("emojis")
         if not isinstance(emojis, dict):
             loaded["emojis"] = {}
+        categories = loaded.get("categories")
+        if categories is not None and not isinstance(categories, dict):
+            loaded["categories"] = {}
         loaded.setdefault("version", 1)
         return loaded
 
@@ -205,6 +290,20 @@ class EmojiStore:
             "priority": 100 if source == "default" else 50,
         }
 
+    def _entry_metadata(self, meta: dict[str, Any]) -> tuple[str, list[str], list[str], str, str]:
+        category = str(meta.get("category") or "").strip()
+        categories = self._manifest.get("categories")
+        category_meta = categories.get(category) if isinstance(categories, dict) else None
+        if not isinstance(category_meta, dict):
+            category_meta = {}
+        use_when = _metadata_list(category_meta.get("use_when"))
+        use_when.extend(item for item in _metadata_list(meta.get("use_when")) if item not in use_when)
+        avoid_when = _metadata_list(category_meta.get("avoid_when"))
+        avoid_when.extend(item for item in _metadata_list(meta.get("avoid_when")) if item not in avoid_when)
+        intensity = str(meta.get("intensity") or "medium").strip() or "medium"
+        motion = str(meta.get("motion") or "static").strip() or "static"
+        return category, use_when, avoid_when, intensity, motion
+
     def _scan_files(self) -> None:
         emojis = self._manifest.setdefault("emojis", {})
         if not isinstance(emojis, dict):
@@ -223,6 +322,8 @@ class EmojiStore:
                 source = "downloaded"
             except ValueError:
                 source = "default"
+            if source == "downloaded" and not self.allow_downloads:
+                continue
             meta = emojis.get(key)
             if not isinstance(meta, dict):
                 if source == "default":
@@ -241,6 +342,7 @@ class EmojiStore:
                 tags = _safe_tokens(str(raw_tags or ""))
             tags.extend(token for token in _safe_tokens(path.stem) if token not in tags)
             meaning = str(meta.get("meaning") or path.stem).strip()
+            category, use_when, avoid_when, intensity, motion = self._entry_metadata(meta)
             entries.append(
                 EmojiEntry(
                     path=path,
@@ -248,6 +350,11 @@ class EmojiStore:
                     tags=tags,
                     source=str(meta.get("source") or source),
                     priority=int(meta.get("priority") or 0),
+                    category=category,
+                    use_when=use_when,
+                    avoid_when=avoid_when,
+                    intensity=intensity,
+                    motion=motion,
                 )
             )
         self._entries = entries
@@ -271,7 +378,12 @@ class EmojiStore:
         lines = []
         for index, entry in enumerate(entries, 1):
             tag_text = ", ".join(entry.tags[:8])
-            lines.append(f"{index}. {entry.meaning} [{tag_text}] source={entry.source}")
+            use_text = ", ".join(entry.use_when[:4]) or "-"
+            avoid_text = ", ".join(entry.avoid_when[:4]) or "-"
+            lines.append(
+                f"{index}. meaning={entry.meaning} category={entry.category or '-'} "
+                f"tags=[{tag_text}] use=[{use_text}] avoid=[{avoid_text}] source={entry.source}"
+            )
         return "\n".join(lines)
 
     def select(self, query: str, *, tags: list[str] | None = None, limit: int | None = None) -> list[EmojiEntry]:
@@ -282,24 +394,40 @@ class EmojiStore:
         for tag in tags or []:
             wanted.update(_safe_tokens(tag))
         if not wanted:
-            return sorted(self._entries, key=lambda entry: entry.priority, reverse=True)[: limit or 1]
+            return sorted(
+                self._entries,
+                key=lambda entry: entry.priority + self._source_bonus(entry.source),
+                reverse=True,
+            )[: limit or 1]
 
         scored: list[tuple[int, EmojiEntry]] = []
         for entry in self._entries:
-            score = _match_score(
-                query,
-                wanted_tags=tags,
-                haystack_tags=entry.tags,
-                meaning=entry.meaning,
-                base_score=entry.priority,
-            )
-            if score <= 0:
+            match_score = self._entry_match_score(wanted, entry)
+            if match_score <= 0:
                 continue
-            if entry.source == "default":
-                score += 30
-            scored.append((score, entry))
+            scored.append((match_score + entry.priority + self._source_bonus(entry.source), entry))
         scored.sort(key=lambda item: item[0], reverse=True)
         return [entry for _score, entry in scored[: limit or 1]]
+
+    @staticmethod
+    def _source_bonus(source: str) -> int:
+        return {"curated": 80, "default": 30, "downloaded": 0}.get(source, 0)
+
+    def _entry_match_score(self, wanted: set[str], entry: EmojiEntry) -> int:
+        score = 0
+        score += _field_match_score(wanted, [entry.meaning], weight=40)
+        score += _field_match_score(wanted, entry.tags, weight=30)
+        categories = self._manifest.get("categories")
+        category_meta = categories.get(entry.category) if isinstance(categories, dict) else None
+        category_values = [entry.category]
+        if isinstance(category_meta, dict):
+            category_values.append(str(category_meta.get("meaning") or ""))
+        score += _field_match_score(wanted, category_values, weight=30)
+        score += _field_match_score(wanted, entry.use_when, weight=25)
+        avoid_score = _field_match_score(wanted, entry.avoid_when, weight=35)
+        if avoid_score:
+            score -= avoid_score * 4 + 100
+        return score
 
     def choose(self, query: str, *, tags: list[str] | None = None, refresh_on_miss: bool = False) -> EmojiEntry | None:
         entries = self.select(query, tags=tags, limit=1)
@@ -312,7 +440,7 @@ class EmojiStore:
 
     def adopt_downloaded(self, query: str, *, tags: list[str] | None = None) -> EmojiEntry | None:
         query = _clean_query(query)
-        if not self.enabled or not query or not self.download_dir.is_dir():
+        if not self.enabled or not self.allow_downloads or not query or not self.download_dir.is_dir():
             return None
         emojis = self._manifest.setdefault("emojis", {})
         if not isinstance(emojis, dict):
@@ -365,7 +493,7 @@ class EmojiStore:
         tags: list[str],
         interest: int,
     ) -> EmojiEntry | None:
-        if not self.enabled or not image_data:
+        if not self.enabled or not self.allow_downloads or not image_data:
             return None
         digest = hashlib.sha256(image_data).hexdigest()[:20]
         suffix = _extension_from(content_type, source_url)
@@ -397,6 +525,11 @@ class EmojiStore:
         tags: list[str],
         source: str | None = None,
         priority: int | None = None,
+        category: str | None = None,
+        use_when: list[str] | None = None,
+        avoid_when: list[str] | None = None,
+        intensity: str | None = None,
+        motion: str | None = None,
     ) -> EmojiEntry | None:
         if not self.enabled:
             return None
@@ -423,6 +556,16 @@ class EmojiStore:
             meta["priority"] = max(min(int(priority), 100), 0)
         else:
             meta.setdefault("priority", entry.priority)
+        if category is not None:
+            meta["category"] = category.strip()
+        if use_when is not None:
+            meta["use_when"] = _metadata_list(use_when)
+        if avoid_when is not None:
+            meta["avoid_when"] = _metadata_list(avoid_when)
+        if intensity is not None:
+            meta["intensity"] = intensity.strip() or "medium"
+        if motion is not None:
+            meta["motion"] = motion.strip() or "static"
         emojis[key] = meta
         self._scan_files()
         self._save_manifest()

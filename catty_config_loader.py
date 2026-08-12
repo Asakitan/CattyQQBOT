@@ -255,6 +255,12 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "request_timeout": 10,
         "engines": ["google", "bing"],
     },
+    "tools": {
+        "profile_memory_enabled": True,
+        "scope_meme_enabled": True,
+        "timeline_enabled": True,
+        "adaptive_prompt_enabled": True,
+    },
     "nsfw_search": {
         "enabled": True,
         "max_results": 4,
@@ -701,6 +707,12 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
         if not resolved_assistant_samples_path.is_absolute():
             resolved_assistant_samples_path = base_dir / resolved_assistant_samples_path
         _set_env("CATTY_LOCAL_TRAINING_ASSISTANT_SAMPLES_PATH", resolved_assistant_samples_path)
+
+    tools = _section(data, "tools")
+    _set_env("CATTY_PROFILE_MEMORY_ENABLED", tools.get("profile_memory_enabled"))
+    _set_env("CATTY_SCOPE_MEME_ENABLED", tools.get("scope_meme_enabled"))
+    _set_env("CATTY_TIMELINE_ENABLED", tools.get("timeline_enabled"))
+    _set_env("CATTY_ADAPTIVE_PROMPT_ENABLED", tools.get("adaptive_prompt_enabled"))
 
     web_search = _section(data, "web_search")
     _set_env("CATTY_WEB_SEARCH_ENABLED", web_search.get("enabled"))

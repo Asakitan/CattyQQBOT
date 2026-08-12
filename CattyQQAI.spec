@@ -24,6 +24,8 @@ datas = [
 ]
 if os.path.isdir('emojis'):
     datas.append(('emojis', 'emojis'))
+if os.path.isdir('fadianji'):
+    datas.append(('fadianji', 'fadianji'))
 if os.path.isdir('scripts'):
     datas.append(('scripts', 'scripts'))
 datas += collect_data_files('nonebot')

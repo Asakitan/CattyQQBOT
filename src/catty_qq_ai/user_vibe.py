@@ -376,6 +376,18 @@ class UserVibeStore:
             self._evict_lru()
             self._dirty = True
 
+    def reset_user(self, user_id: str) -> bool:
+        uid = str(user_id or "").strip()
+        if not uid:
+            return False
+        with self._lock:
+            existed = uid in self._data
+            self._data.pop(uid, None)
+            self._last_access.pop(uid, None)
+            if existed:
+                self._dirty = True
+            return existed
+
     def profile_for(self, user_id: str) -> dict[str, Any]:
         """返回 user 的当前画像。"""
         with self._lock:

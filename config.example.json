@@ -232,6 +232,12 @@
             "bing"
         ]
     },
+    "tools": {
+        "profile_memory_enabled": true,
+        "scope_meme_enabled": true,
+        "timeline_enabled": true,
+        "adaptive_prompt_enabled": true
+    },
     "nsfw_search": {
         "enabled": true,
         "max_results": 4,

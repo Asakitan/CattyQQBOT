@@ -520,7 +520,7 @@ class Config(BaseModel):
     #   每小时只提示一次. 主人全豁免. 两者与 catty_credit_enabled 互不相干.
     # 拦截提醒 AI 现写 (token_billing.ai_gate_reply), 失败兜底固定文案池.
     catty_token_billing_enabled: bool = True
-    catty_private_tokens_per_point: int = 1000
+    catty_private_tokens_per_point: int = 5000
     catty_group_hourly_token_quota: int = 300_000  # 0 = 群聊不限
 
     # ── 强互动判定 (强制走 DeepSeek 的场景, 积分够才放行) ───────────────────
@@ -671,6 +671,10 @@ class Config(BaseModel):
     # 由模型自行判断要不要查询。默认常驻挂载,让上游 prompt cache 命中 tools 部分。
     # 上游返回 400 或 tool 调度异常时会自动降级一次纯文本回复。
     catty_tools_enabled: bool = True
+    catty_profile_memory_enabled: bool = True
+    catty_scope_meme_enabled: bool = True
+    catty_timeline_enabled: bool = True
+    catty_adaptive_prompt_enabled: bool = True
     # 本地解析层(在 system prompt 注入前运行) — 出问题时可临时关掉某层。
     # 合法值: slang / pulse / intent / entity / hints
     # 留空表示全部启用(默认推荐)。例如 ["hints"] 表示只关 hints,其它都开。

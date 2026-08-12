@@ -140,6 +140,16 @@ class Persona:
     # conversation key → 静态 prompt。每轮只选择当前对话的一段, 不把其它会话
     # prompt 拼入请求。内容必须是模块级常量以保持该会话 cache 稳定。
     conversation_prompts: tuple[tuple[str, str], ...] = field(default_factory=tuple)
+    # persona 专属表情包资源；None = 沿用 config.catty_emoji_* 的旧路径。
+    emoji_root: str | None = None
+    emoji_manifest_path: str | None = None
+    emoji_download_dir: str | None = None
+    emoji_allow_downloads: bool | None = None
+    emoji_guidance: str | None = None
+    # False = Catty 旧的 constant-only skeleton；True = 全 character_book 进 cache。
+    cache_full_character_book: bool = False
+    # 语义 harness 默认关闭，避免改变 Catty 的既有 prompt/cache 行为。
+    semantic_harness_enabled: bool = False
     # 唤醒词 (主人 2026-07-06: 猫娘版是猫的, 机机版是发电机的)。
     # None = 用 config.catty_trigger_prefixes / catty_directed_keywords (catty 默认);
     # 非 None = **整组替换** config 值 (extract_incoming_message 按 scope 生效)。

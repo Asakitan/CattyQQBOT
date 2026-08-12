@@ -39,7 +39,9 @@ diagnostics/
 .mcp.json
 tmp/
 .opencode-chat-bridge/
-fadianji/
+fadianji/*
+!fadianji/emoji/
+!fadianji/emoji/**
 
 # ssh-mcp 代理凭据
 scripts/.ssh_mcp_secret.json

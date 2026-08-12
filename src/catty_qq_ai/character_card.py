@@ -744,14 +744,17 @@ def build_character_book_skeleton(
     entries: tuple[CharacterBookEntry, ...] | None = None,
     *,
     char_name: str = "笨猫",
+    include_all: bool = False,
 ) -> str:
-    """character_book entries 骨架 — 只保留 constant entries (永远生效).
+    """character_book entries 骨架 — 默认只保留 constant entries (永远生效).
 
     主人 2026-05-29 Round 22: 砍关键词触发索引 (~1700c). keyword entries 命中时由
     dynamic catty_character_book_hits 注入完整 content, 不需要预先列索引让 AI 知道
     有这些 keys (BFS 命中机制本地完成, AI 看到注入即可). 总 skeleton ~530c.
 
     constant=True entries (唐猫/发言格式 ~2K) 完整保留 — 这些是核心人格私货.
+    include_all=True 时所有 hardcoded entries 都完整进入 skeleton，供拥有稳定大 cache
+    的 persona 使用；调用方应只在 dynamic 段输出命中指针，避免复制全文.
 
     主人 2026-07-06 多人格: entries=None → 笨猫 _CATTY_BOOK (默认路径字节不变);
     非 catty persona 传自己的 entries + char_name。
@@ -765,9 +768,20 @@ def build_character_book_skeleton(
         blocks.append("\n— 常驻段 (始终生效) —")
         for entry in constant_entries:
             blocks.append(f"\n【{entry.identifier}】\n{entry.content}")
-    blocks.append(
-        "\n(关键词触发段命中时由 catty_character_book_hits 段动态注入完整 content.)"
-    )
+    if include_all:
+        keyed_entries = [e for e in book if not e.constant]
+        if keyed_entries:
+            blocks.append("\n— 关键词段 (完整缓存, 命中时只激活) —")
+            for entry in keyed_entries:
+                blocks.append(f"\n【{entry.identifier}】\n{entry.content}")
+        blocks.append(
+            "\n(关键词命中时由 catty_character_book_hits 段动态激活 identifier 与短摘录;"
+            " scope_lorebook 仍注入完整 content.)"
+        )
+    else:
+        blocks.append(
+            "\n(关键词触发段命中时由 catty_character_book_hits 段动态注入完整 content.)"
+        )
     return "\n".join(blocks)
 
 

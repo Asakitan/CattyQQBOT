@@ -137,6 +137,7 @@ async def _build_full_real_flow_messages(event: Any, key: str, incoming: Any) ->
         _conversation_queue_key,
         _display_name,
         _generic_emoji_context,
+        _persona_for_event,
         _remember_recent_conversation_event,
         _should_request_semantic_reply_split,
         _wake_context_prompt,
@@ -252,7 +253,7 @@ async def _build_full_real_flow_messages(event: Any, key: str, incoming: Any) ->
         bot_continuation_context = ""
 
     try:
-        emoji_context = _generic_emoji_context(incoming)
+        emoji_context = _generic_emoji_context(incoming, persona=_persona_for_event(event))
     except Exception:
         emoji_context = ""
     try:
@@ -578,11 +579,16 @@ async def _sim_chat_unlocked(
                     from . import (
                         _available_tool_schemas_for_persona,
                         _conversation_queue_key,
+                        _emoji_store_for_persona,
                         _execute_schema_gated_tool_call,
+                        _get_session_cache,
                         _recent_image_urls_for_scope,
+                        adaptive_prompt_store,
                         affection_store,
                         memory_store,
+                        scope_lorebook_store,
                         story_arc_store,
+                        timeline_store,
                     )
                     from .tools import ToolContext, should_force_imagegen_tool
                     from nonebot.adapters.onebot.v11 import PrivateMessageEvent
@@ -625,6 +631,7 @@ async def _sim_chat_unlocked(
                         config=cfg,
                         memory_store=memory_store,
                         event=event,
+                        emoji_store=_emoji_store_for_persona(_sim_persona),
                         persona=_sim_persona,
                         affection_store=affection_store,
                         input_image_urls=_sim_input_images,
@@ -635,6 +642,10 @@ async def _sim_chat_unlocked(
                             if _sim_persona.feature_disabled("story_arc")
                             else story_arc_store
                         ),
+                        scope_lorebook_store=scope_lorebook_store,
+                        timeline_store=timeline_store,
+                        adaptive_prompt_store=adaptive_prompt_store,
+                        session_cache=_get_session_cache(),
                         scope_key=_sim_tool_scope_key,
                         user_text=_user_text,
                     )

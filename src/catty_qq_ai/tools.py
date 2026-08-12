@@ -726,6 +726,157 @@ _NOW_SCHEMA: dict[str, Any] = {
 }
 
 
+_PROFILE_MEMORY_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_profile_memory",
+        "description": (
+            "写入当前发言用户的长期画像记忆。用于用户明确说『以后叫我 X』『我叫 X』、"
+            "稳定偏好或长期边界时；可以同时写 preferred_name 和 fact。"
+            "不传参数时不要调用，当前用户画像查询使用 catty_user_profile。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "preferred_name": {
+                    "type": "string",
+                    "description": "用户希望长期使用的称呼。",
+                },
+                "fact": {
+                    "type": "string",
+                    "description": "当前用户的一条长期偏好、边界或稳定事实。",
+                },
+                "category": {
+                    "type": "string",
+                    "description": "画像事实分类，例如 preference、boundary、identity。",
+                },
+                "ttl_days": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3650,
+                    "description": "画像事实保留天数；0 表示长期保留。",
+                },
+            },
+            "required": [],
+        },
+    },
+}
+
+
+_SCOPE_MEME_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_scope_meme",
+        "description": (
+            "把当前 scope 和当前人格专属的群/私聊梗写入 lorebook。"
+            "只在梗、玩笑或关键词值得在以后继续识别时调用；scope 和 persona 由当前会话自动决定，"
+            "不要尝试传入其他 scope 或 persona。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "触发这个梗的关键词或说法。",
+                },
+                "content": {
+                    "type": "string",
+                    "description": "给未来自己的简短梗说明。",
+                },
+            },
+            "required": ["keys", "content"],
+        },
+    },
+}
+
+
+_TIMELINE_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_timeline",
+        "description": (
+            "管理当前 scope 和当前人格的日程/计划事项，可 list、add、update、complete、remove。"
+            "用于今天的计划、待办、完成情况和后续安排；scope 与 persona 自动取当前会话，"
+            "不要传跨 scope/persona 参数。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "enum": ["list", "add", "update", "complete", "remove"],
+                    "description": "要执行的时间线操作。",
+                },
+                "item_id": {
+                    "type": "string",
+                    "description": "update、complete、remove 的事项 ID。",
+                },
+                "title": {
+                    "type": "string",
+                    "description": "事项标题。",
+                },
+                "content": {
+                    "type": "string",
+                    "description": "事项详情、计划内容或更新说明。",
+                },
+                "due_at": {
+                    "type": "string",
+                    "description": "可选的时间标记，优先使用 ISO 日期时间。",
+                },
+                "day": {
+                    "type": "string",
+                    "description": "可选日期 YYYY-MM-DD；不传默认今天。",
+                },
+                "kind": {
+                    "type": "string",
+                    "enum": ["planned", "observed"],
+                    "description": "planned=计划，observed=已有真实证据的活动。",
+                },
+                "status": {
+                    "type": "string",
+                    "enum": ["open", "done", "cancelled", "overdue"],
+                    "description": "update 时可选的新状态。",
+                },
+            },
+            "required": ["action"],
+        },
+    },
+}
+
+
+_ADAPTIVE_PROMPT_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_adaptive_prompt",
+        "description": (
+            "管理当前 scope 和当前人格的辅助提示词，可 list 或 upsert。"
+            "用于反复纠正、稳定偏好、回复边界和需要持续适应的说话规则；"
+            "scope 与 persona 自动取当前会话，不接受跨 scope/persona 参数。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "enum": ["list", "upsert"],
+                    "description": "要执行的提示词操作。",
+                },
+                "name": {
+                    "type": "string",
+                    "description": "辅助提示词的稳定名称或键。",
+                },
+                "content": {
+                    "type": "string",
+                    "description": "辅助提示词内容。",
+                },
+            },
+            "required": ["action"],
+        },
+    },
+}
+
+
 _IMAGEGEN_SCHEMA: dict[str, Any] = {
     "type": "function",
     "function": {
@@ -891,6 +1042,10 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_meme_explain": _MEME_EXPLAIN_SCHEMA,
     "catty_remember": _REMEMBER_SCHEMA,
     "catty_recall_notes": _RECALL_NOTES_SCHEMA,
+    "catty_profile_memory": _PROFILE_MEMORY_SCHEMA,
+    "catty_scope_meme": _SCOPE_MEME_SCHEMA,
+    "catty_timeline": _TIMELINE_SCHEMA,
+    "catty_adaptive_prompt": _ADAPTIVE_PROMPT_SCHEMA,
     "catty_imagegen": _IMAGEGEN_SCHEMA,
     "catty_nai_director": _NAI_DIRECTOR_SCHEMA,
     "catty_story_arc_set": _STORY_ARC_SET_SCHEMA,
@@ -1068,6 +1223,48 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
         },
         ["scope"],
     ),
+
+    "catty_profile_memory": _make_lazy_schema(
+        "catty_profile_memory", "记当前用户称呼/长期画像",
+        {
+            "preferred_name": {"type": "string", "description": "称呼"},
+            "fact": {"type": "string", "description": "长期事实"},
+            "category": {"type": "string", "description": "事实分类"},
+            "ttl_days": {"type": "integer", "description": "TTL 天"},
+        },
+        [],
+    ),
+    "catty_scope_meme": _make_lazy_schema(
+        "catty_scope_meme", "记当前 scope 的梗",
+        {
+            "keys": {"type": "array", "items": {"type": "string"}, "description": "关键词"},
+            "content": {"type": "string", "description": "梗说明"},
+        },
+        ["keys", "content"],
+    ),
+    "catty_timeline": _make_lazy_schema(
+        "catty_timeline", "管理当前 scope 待办",
+        {
+            "action": {"type": "string", "enum": ["list", "add", "update", "complete", "remove"], "description": "操作"},
+            "item_id": {"type": "string", "description": "事项 ID"},
+            "title": {"type": "string", "description": "标题"},
+            "content": {"type": "string", "description": "内容"},
+            "due_at": {"type": "string", "description": "时间"},
+            "day": {"type": "string", "description": "日期"},
+            "kind": {"type": "string", "enum": ["planned", "observed"], "description": "计划/实录"},
+            "status": {"type": "string", "enum": ["open", "done", "cancelled", "overdue"], "description": "状态"},
+        },
+        ["action"],
+    ),
+    "catty_adaptive_prompt": _make_lazy_schema(
+        "catty_adaptive_prompt", "管理当前 scope 辅助提示",
+        {
+            "action": {"type": "string", "enum": ["list", "upsert"], "description": "操作"},
+            "name": {"type": "string", "description": "提示键"},
+            "content": {"type": "string", "description": "提示内容"},
+        },
+        ["action"],
+    ),
     "catty_imagegen": _IMAGEGEN_SCHEMA,  # 已是 lazy 模式 (args 空, fca36bb)
     "catty_nai_director": _make_lazy_schema(
         "catty_nai_director", "NAI 改图 (抠图/线稿/上色等)",
@@ -1147,6 +1344,10 @@ _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
     "catty_meme_explain": ToolCapability(execution_mode="external"),
     "catty_remember": ToolCapability(execution_mode="write"),
     "catty_recall_notes": ToolCapability(),
+    "catty_profile_memory": ToolCapability(execution_mode="write"),
+    "catty_scope_meme": ToolCapability(execution_mode="write"),
+    "catty_timeline": ToolCapability(execution_mode="write"),
+    "catty_adaptive_prompt": ToolCapability(execution_mode="write"),
     "catty_imagegen": ToolCapability(
         requires_direct_request=True,
         execution_mode="external",
@@ -1247,6 +1448,7 @@ _TOOL_CAPABILITY_DENIAL_MESSAGES: dict[str, str] = {
     "requires_image": "该工具需要当前或最近上下文中的图片。",
     "requires_direct_request": "该工具只在用户直接请求猫猫时可用。",
     "persona_feature_disabled": "当前人格已关闭该工具对应功能。",
+    "config_disabled": "该工具已被配置禁用。",
 }
 
 
@@ -1255,7 +1457,7 @@ def _tool_capability_error(
     reason: str,
     *,
     persona: Any = None,
-) -> dict[str, str]:
+) -> dict[str, Any]:
     message = _TOOL_CAPABILITY_DENIAL_MESSAGES.get(reason, "该工具当前不可用。")
     if reason == "requires_direct_request":
         message = _persona_text(
@@ -1264,6 +1466,7 @@ def _tool_capability_error(
             "该工具仅在用户明确向当前机器人提出请求时可用。",
         )
     return {
+        "ok": False,
         "error": "tool_not_allowed",
         "tool": name,
         "reason": reason,
@@ -1310,6 +1513,10 @@ class ToolContext:
     # SillyTavern 风 story_arc 写入入口:catty_story_arc_set/clear 走它。
     # 留 None 兼容老路径,executor 自己 guard。
     story_arc_store: "Any | None" = None
+    scope_lorebook_store: Any | None = None
+    timeline_store: Any | None = None
+    adaptive_prompt_store: Any | None = None
+    session_cache: Any | None = None
     # 当前 scope key("group:xxx" / "private:xxx"),__init__ 传进来给 story_arc executor 用。
     scope_key: str = ""
     # 主人 2026-05-28: 当前用户原话(event.get_plaintext() 结果)。catty_imagegen 走
@@ -1360,6 +1567,9 @@ class _TTLCache:
     def __init__(self, max_entries: int = 256) -> None:
         self._data: dict[str, tuple[float, Any]] = {}
         self._max_entries = max(max_entries, 32)
+
+    def clear(self) -> None:
+        self._data.clear()
 
     def get(self, key: str, *, ttl: float) -> Any | None:
         if ttl <= 0:
@@ -1487,6 +1697,176 @@ async def _exec_user_profile(args: dict[str, Any], ctx: ToolContext) -> dict[str
     _profile_cache.put(cache_key, result, ttl=ctx.config.catty_tools_cache_ttl_seconds)
     return result
 
+
+def _current_tool_scope(ctx: ToolContext) -> str:
+    return str(ctx.scope_key or _ctx_scope_key(ctx) or "").strip()
+
+
+def _current_tool_persona(ctx: ToolContext) -> str:
+    return str(getattr(ctx.persona, "name", None) or "catty").strip().lower() or "catty"
+
+
+def _invalidate_memory_caches() -> None:
+    _recall_cache.clear()
+    _profile_cache.clear()
+
+
+def _store_payload(value: Any) -> Any:
+    converter = getattr(value, "to_payload", None)
+    if callable(converter):
+        try:
+            return converter()
+        except Exception:  # noqa: BLE001
+            pass
+    return value
+
+
+async def _exec_profile_memory(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if ctx.memory_store is None:
+        return {"ok": False, "error": "profile memory 不可用(memory_store 未注入)"}
+    if not bool(getattr(ctx.memory_store, "enabled", True)):
+        return {"ok": False, "error": "profile memory 已禁用"}
+    user_id = ctx.user_id
+    if not user_id:
+        return {"ok": False, "error": "拿不到当前发言用户 ID"}
+    preferred_name = str(args.get("preferred_name") or "").strip()
+    fact = str(args.get("fact") or "").strip()
+    category = str(args.get("category") or "profile").strip() or "profile"
+    try:
+        ttl_days = max(0, min(int(args.get("ttl_days") or 0), 3650))
+    except (TypeError, ValueError):
+        ttl_days = 0
+    if not preferred_name and not fact:
+        return {"ok": False, "error": "preferred_name 或 fact 至少填写一个"}
+    payload: dict[str, Any] = {"ok": True, "user_id": user_id}
+    if preferred_name:
+        result = ctx.memory_store.set_preferred_name(user_id, preferred_name)
+        payload["preferred_name"] = preferred_name
+        payload["preferred_name_result"] = _store_payload(result)
+        if not result:
+            _invalidate_memory_caches()
+            return {**payload, "ok": False, "error": "profile memory rejected preferred_name write"}
+    if fact:
+        result = ctx.memory_store.record_profile_fact(
+            user_id,
+            fact,
+            category=category,
+            ttl_days=ttl_days,
+        )
+        payload["fact"] = fact
+        payload["fact_result"] = _store_payload(result)
+        if not isinstance(result, dict) or not result.get("ok"):
+            _invalidate_memory_caches()
+            return {**payload, "ok": False, "error": "profile memory rejected fact write"}
+    _invalidate_memory_caches()
+    return payload
+
+async def _exec_scope_meme(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    store = ctx.scope_lorebook_store
+    scope = _current_tool_scope(ctx)
+    persona = _current_tool_persona(ctx)
+    keys = args.get("keys") or []
+    content = str(args.get("content") or "").strip()
+    if store is None or not scope:
+        return {"ok": False, "error": "scope meme 不可用(store 未注入或当前 scope 缺失)"}
+    if not isinstance(keys, list):
+        keys = [str(keys)]
+    keys = [str(key).strip() for key in keys if str(key).strip()]
+    if not keys or not content:
+        return {"ok": False, "error": "keys 和 content 都不能为空"}
+    entry = store.add_entry(scope, keys, content, kind="meme", persona=persona)
+    entry_payload = _store_payload(entry)
+    identifier = entry_payload.get("identifier") if isinstance(entry_payload, dict) else getattr(entry, "identifier", None)
+    if not entry or not str(identifier or "").strip():
+        return {"ok": False, "error": "scope meme write rejected or returned no identifier", "scope": scope, "persona": persona}
+    return {"ok": True, "scope": scope, "persona": persona, "keys": keys, "content": content, "entry": entry_payload}
+
+async def _exec_timeline(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    store = ctx.timeline_store
+    scope = _current_tool_scope(ctx)
+    persona = _current_tool_persona(ctx)
+    action = str(args.get("action") or "").strip().lower()
+    item_id = str(args.get("item_id") or "").strip()
+    title = str(args.get("title") or "").strip()
+    content = str(args.get("content") or "").strip()
+    due_at = str(args.get("due_at") or "").strip()
+    day = str(args.get("day") or "").strip()
+    kind = str(args.get("kind") or "").strip().lower()
+    status = str(args.get("status") or "").strip().lower()
+    if store is None or not scope:
+        return {"ok": False, "error": "timeline 不可用(store 未注入或当前 scope 缺失)"}
+    if action not in {"list", "add", "update", "complete", "remove"}:
+        return {"ok": False, "error": "action 必须是 list/add/update/complete/remove"}
+    if action == "list":
+        result = store.list_items(scope, persona=persona, day=day or None)
+    elif action == "add":
+        if not title:
+            return {"ok": False, "error": "add 需要 title"}
+        result = store.add_item(scope, title=title, details=content, due_at=due_at, day=day or None, kind=kind if kind in {"planned", "observed"} else "planned", status=status if status in {"open", "done", "cancelled", "overdue"} else "open", source="catty_timeline", persona=persona)
+    elif action == "update":
+        if not item_id:
+            return {"ok": False, "error": "update 需要 item_id"}
+        changes: dict[str, Any] = {}
+        if title:
+            changes["title"] = title
+        if content:
+            changes["details"] = content
+        if due_at:
+            changes["due_at"] = due_at
+        if day:
+            changes["day"] = day
+        if kind in {"planned", "observed"}:
+            changes["kind"] = kind
+        if status in {"open", "done", "cancelled", "overdue"}:
+            changes["status"] = status
+        if not changes:
+            return {"ok": False, "error": "update 至少需要一个要修改的字段"}
+        result = store.update_item(scope, item_id, persona=persona, **changes)
+    elif action == "complete":
+        if not item_id:
+            return {"ok": False, "error": "complete 需要 item_id"}
+        result = store.complete_item(scope, item_id, persona=persona)
+    else:
+        if not item_id:
+            return {"ok": False, "error": "remove 需要 item_id"}
+        result = store.remove_item(scope, item_id, persona=persona)
+    result_payload = _store_payload(result)
+    if action == "list":
+        rejected = result is None or result is False
+    elif action == "remove":
+        rejected = result is not True
+    else:
+        result_id = result_payload.get("id") if isinstance(result_payload, dict) else None
+        rejected = not result or not str(result_id or "").strip()
+    if rejected:
+        return {"ok": False, "error": "timeline operation rejected or returned no item id", "action": action, "scope": scope, "persona": persona, "result": result_payload}
+    return {"ok": True, "action": action, "scope": scope, "persona": persona, "result": result_payload}
+
+async def _exec_adaptive_prompt(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    store = ctx.adaptive_prompt_store
+    scope = _current_tool_scope(ctx)
+    persona = _current_tool_persona(ctx)
+    action = str(args.get("action") or "").strip().lower()
+    name = str(args.get("name") or "").strip()
+    content = str(args.get("content") or "").strip()
+    if store is None or not scope:
+        return {"ok": False, "error": "adaptive prompt 不可用(store 未注入或当前 scope 缺失)"}
+    if action not in {"list", "upsert"}:
+        return {"ok": False, "error": "action 必须是 list/upsert"}
+    if action == "list":
+        result = store.list_prompts(scope, persona=persona)
+    else:
+        if not name or not content:
+            return {"ok": False, "error": "upsert 需要 name 和 content"}
+        result = store.upsert_prompt(scope, name, content, persona=persona)
+    result_payload = _store_payload(result)
+    if action == "upsert":
+        result_id = result_payload.get("id") if isinstance(result_payload, dict) else None
+        if not result or not str(result_id or "").strip():
+            return {"ok": False, "error": "adaptive prompt write rejected or returned no entry id", "action": action, "scope": scope, "persona": persona, "result": result_payload}
+    elif result is None or result is False:
+        return {"ok": False, "error": "adaptive prompt list rejected", "action": action, "scope": scope, "persona": persona, "result": result_payload}
+    return {"ok": True, "action": action, "scope": scope, "persona": persona, "result": result_payload}
 
 async def _exec_mc_status(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     del args
@@ -3883,7 +4263,7 @@ async def _exec_remember(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         return {"error": "scope=group 但当前不是群聊"}
     if scope == "user" and not user_id:
         return {"error": "拿不到当前发言用户 ID"}
-    return ctx.memory_store.record_note(
+    result = ctx.memory_store.record_note(
         scope=scope,
         text=text,
         user_id=user_id,
@@ -3892,6 +4272,8 @@ async def _exec_remember(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         tags=tags,
         event_date=event_date,
     )
+    _invalidate_memory_caches()
+    return result
 
 
 async def _exec_recall_notes(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
@@ -4011,8 +4393,10 @@ async def _exec_recall_user_messages(args: dict[str, Any], ctx: ToolContext) -> 
     # session key 复合 (group_id, user_id) — 跟 build_history_key 同款
     scope_key = f"group:{ctx.group_id}:user:{target_user_id}"
     try:
-        from . import _get_session_cache  # type: ignore
-        cache = _get_session_cache()
+        cache = ctx.session_cache
+        if cache is None:
+            from . import _get_session_cache  # type: ignore
+            cache = _get_session_cache()
         msgs = list(cache.get(scope_key) or [])
     except Exception as exc:  # noqa: BLE001
         return {"error": f"无法拉 session_cache: {exc.__class__.__name__}"}
@@ -4099,6 +4483,10 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_meme_explain": _exec_meme_explain,
     "catty_remember": _exec_remember,
     "catty_recall_notes": _exec_recall_notes,
+    "catty_profile_memory": _exec_profile_memory,
+    "catty_scope_meme": _exec_scope_meme,
+    "catty_timeline": _exec_timeline,
+    "catty_adaptive_prompt": _exec_adaptive_prompt,
     "catty_imagegen": _exec_imagegen,
     "catty_nai_director": _exec_nai_director,
     "catty_story_arc_set": _exec_story_arc_set,
@@ -4132,7 +4520,8 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
     ),
     "catty_web_search": (
         "搜", "搜一下", "查", "查一下", "百度", "谷歌", "google", "bing",
-        "新闻", "最近怎样", "事件", "热搜", "联网", "上网搜",
+        "新闻", "最近怎样", "事件", "热搜", "联网", "上网搜", "最新", "当前",
+        "实时", "今天发生", "截至", "新版本", "不认识", "没听过", "不确定",
     ),
     "catty_nsfw_search": ("pixiv", "p 站", "色图", "本子", "找一张涩"),
     "catty_meme_query": ("梗图", "搜个梗", "meme", "网图", "来张图"),
@@ -4143,13 +4532,30 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
     "catty_game_remember": ("记一下我在玩", "记我玩", "记游戏"),
     "catty_hot_trends": ("热搜", "热点", "trending", "现在火什么", "今日热搜"),
     "catty_now": ("现在几点", "几号", "今天日期", "时间", "周几"),
-    "catty_remember": ("帮我记", "记一下", "记下来", "存一下", "笔记", "remember"),
+    "catty_remember": ("帮我记", "记一下", "记下来", "存一下", "笔记", "remember", "偏好", "边界", "不喜欢", "不要叫我"),
     "catty_recall_notes": ("查笔记", "之前记的", "笔记里", "recall notes"),
-    "catty_recall": ("上次", "之前", "记得", "那次", "刚才"),
+    "catty_recall": ("上次", "之前", "记得", "那次", "刚才", "以前", "还记得吗"),
     "catty_user_profile": ("他是谁", "她是谁", "什么人", "什么样的人", "user profile"),
     "catty_social_account": ("Steam", "B 站", "bilibili", "youtube", "github", "推特"),
     "catty_group_game_tag": ("这群玩什么", "群在玩", "group game"),
     "catty_mc_status": ("MC", "minecraft", "我的世界", "服务器", "mc 在线"),
+
+    "catty_profile_memory": (
+        "以后叫我", "称呼我", "我叫", "记住我叫", "别叫我", "不要叫我",
+        "长期偏好", "稳定偏好", "我的边界", "我的底线", "以后都",
+    ),
+    "catty_scope_meme": (
+        "群里的梗", "群梗", "群玩笑", "这个群的梗", "记个梗", "记住这个梗",
+        "私聊梗", "以后看到这个梗",
+    ),
+    "catty_timeline": (
+        "今天计划", "今日计划", "今天要", "待办", "todo", "计划一下",
+        "完成了", "做完了", "搞定了", "完成这个", "删掉计划", "提醒我",
+    ),
+    "catty_adaptive_prompt": (
+        "总是记错", "你又记错", "以后别这样", "别再这样", "改正一下", "适应一下",
+        "根据我说的", "记住这个规则", "重复说过", "别再",
+    ),
     "catty_story_arc_set": ("开 arc", "记一个故事", "story arc", "开始一条"),
     "catty_story_arc_clear": ("结束 arc", "清掉故事", "arc clear"),
     # P5.6: 群聊提到 @某人 / "X 怎么说" / "X 刚才聊啥" 时 AI 拉 per-user history
@@ -4311,6 +4717,39 @@ def _detect_tool_intent(
         hit.discard("catty_image_search")
     return hit
 
+
+
+_TOOL_CONFIG_FLAGS: dict[str, tuple[str, ...]] = {
+    "catty_web_search": ("catty_web_search_enabled",),
+    "catty_emoji": ("catty_emoji_enabled",),
+    "catty_nsfw_search": ("catty_nsfw_search_enabled",),
+    "catty_image_search": ("catty_image_search_enabled",),
+    "catty_imagegen": ("catty_imagegen_enabled",),
+    "catty_nai_director": ("catty_imagegen_enabled", "catty_imagegen_nai_enabled"),
+    "catty_profile_memory": ("catty_profile_memory_enabled",),
+    "catty_scope_meme": ("catty_scope_meme_enabled",),
+    "catty_timeline": ("catty_timeline_enabled",),
+    "catty_adaptive_prompt": ("catty_adaptive_prompt_enabled",),
+}
+
+
+def _tool_config_enabled(name: str, config: Config) -> bool:
+    flags = _TOOL_CONFIG_FLAGS.get(name)
+    return True if flags is None else all(bool(getattr(config, flag, True)) for flag in flags)
+
+
+_INTELLIGENCE_CORE_TOOLS = frozenset({
+    "catty_recall",
+    "catty_user_profile",
+    "catty_recall_notes",
+    "catty_web_search",
+    "catty_meme_explain",
+    "catty_now",
+    "catty_profile_memory",
+    "catty_scope_meme",
+    "catty_timeline",
+    "catty_adaptive_prompt",
+})
 
 
 _NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
@@ -4532,20 +4971,17 @@ def available_tool_schemas(
         user_text, is_directly_requested=True
     ):
         intent_hits.add("catty_imagegen")
-    if not intent_hits:
-        return []
-
     disabled_in_private = _private_disabled_tool_names(config) if is_private else set()
 
-    # 主人 2026-05-28 P5.5: lazy schema 默认开 — description ≤30 字, properties 极简.
+    # The intelligence core is always available; heavy image/media tools remain intent-gated.
+    selected_names = _INTELLIGENCE_CORE_TOOLS | intent_hits
     _lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", True))
-    _schema_pool = _LAZY_TOOL_SCHEMAS if _lazy else ALL_TOOL_SCHEMAS
 
-    return [
-        _schema_for_persona(name, schema, lazy=_lazy, persona=persona)
-        for name, schema in _schema_pool.items()
-        if name in intent_hits
-        and _tool_capability_denial_reason(
+    result: list[dict[str, Any]] = []
+    for name, lazy_schema in _LAZY_TOOL_SCHEMAS.items():
+        if name not in selected_names or not _tool_config_enabled(name, config):
+            continue
+        if _tool_capability_denial_reason(
             name,
             is_private=is_private,
             is_group=not is_private,
@@ -4554,8 +4990,11 @@ def available_tool_schemas(
             has_explicit_image_url=has_explicit_image_url,
             persona=persona,
             disabled_in_private=disabled_in_private,
-        ) is None
-    ]
+        ) is not None:
+            continue
+        schema = ALL_TOOL_SCHEMAS[name] if name in _INTELLIGENCE_CORE_TOOLS or not _lazy else lazy_schema
+        result.append(_schema_for_persona(name, schema, lazy=name not in _INTELLIGENCE_CORE_TOOLS and _lazy, persona=persona))
+    return result
 
 
 # IDE 风「最近 tool 调用日志」:scope -> deque[(tool_name, args_preview, ts, succeeded)]
@@ -4606,6 +5045,38 @@ def recent_tool_calls_context(scope_key: str) -> str:
     )
 
 
+_TIMELINE_ACTIVITY_TOOLS = frozenset({
+    "catty_web_search",
+    "catty_meme_query",
+    "catty_emoji",
+    "catty_nsfw_search",
+    "catty_image_search",
+    "catty_imagegen",
+    "catty_nai_director",
+    "catty_mc_status",
+})
+
+
+async def _record_timeline_tool_activity(ctx: ToolContext, name: str) -> None:
+    if name not in _TIMELINE_ACTIVITY_TOOLS:
+        return
+    recorder = getattr(ctx.timeline_store, "record_tool_activity", None)
+    scope = _current_tool_scope(ctx)
+    if not callable(recorder) or not scope:
+        return
+    try:
+        value = recorder(
+            scope,
+            name,
+            persona=_current_tool_persona(ctx),
+            success=True,
+        )
+        if hasattr(value, "__await__"):
+            await value
+    except Exception as exc:  # noqa: BLE001
+        _logger.debug("timeline activity recording failed for %s: %s", name, exc)
+
+
 async def execute_tool_call(
     name: str,
     arguments_json: str,
@@ -4624,6 +5095,9 @@ async def execute_tool_call(
     if executor is None:
         _record_tool_call(_ctx_scope_key(ctx), name, "", False)
         return {"error": f"未知 tool: {name}"}
+    if not bool(getattr(ctx.config, "catty_tools_enabled", True)) or not _tool_config_enabled(name, ctx.config):
+        _record_tool_call(_ctx_scope_key(ctx), name, (arguments_json or "")[:60], False)
+        return _tool_capability_error(name, "config_disabled", persona=ctx.persona)
     raw = (arguments_json or "").strip()
     if not raw:
         args: dict[str, Any] = {}
@@ -4661,7 +5135,13 @@ async def execute_tool_call(
         _logger.warning("Tool %s execution failed: %s", name, exc, exc_info=True)
         _record_tool_call(_ctx_scope_key(ctx), name, args_preview, False)
         return {"error": f"{name} 执行失败: {exc.__class__.__name__}: {exc}"}
-    ok = isinstance(result, dict) and not result.get("error")
+    ok = (
+        isinstance(result, dict)
+        and result.get("ok", True) is not False
+        and not result.get("error")
+    )
+    if ok:
+        await _record_timeline_tool_activity(ctx, name)
     _record_tool_call(_ctx_scope_key(ctx), name, args_preview, bool(ok))
     return result
 
@@ -4706,10 +5186,10 @@ def tools_system_hint(persona: Any = None) -> str:
         char = getattr(persona, "char_name", "机器人")
         tone = f"{char}口吻"
     return (
-        "工具调用通用: 1) 真需要才调 (每次=延迟); 闲聊/已知不调.\n"
+        "工具调用通用: 1) 真需要才调 (每次=延迟); 闲聊/已知不调. 你可以在有帮助时自主回忆、搜索或写入长期记忆/计划/适应规则.\n"
         f"2) 画图请求**铁律**: {char}所有图都从 catty_imagegen 出, 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
-        f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'.\n"
-        "4) 详细每 tool 的 trigger/参数/边界看 schema description (NLU intent gate 按 user_text 注入相关 tool)."
+        f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'. 永远不要编造工具结果.\n"
+        "4) 对不确定、陌生或可能过期的当前事实先用 catty_web_search 核实; 详细 trigger/参数/边界看 schema description."
     )
 
 

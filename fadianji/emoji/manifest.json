@@ -1,0 +1,3419 @@
+{
+  "version": 2,
+  "categories": {
+    "greeting_presence": {
+      "meaning": "问候、报到和确认在场",
+      "use_when": [
+        "早安",
+        "晚安",
+        "在吗",
+        "来了",
+        "回来",
+        "问候"
+      ],
+      "avoid_when": [
+        "争执",
+        "严肃求助",
+        "悲伤安慰"
+      ]
+    },
+    "joy_celebration": {
+      "meaning": "开心、庆祝和轻松得意",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功",
+        "夸赞",
+        "好消息"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "affection_flirt": {
+      "meaning": "喜欢、贴贴、害羞和暧昧互动",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱",
+        "亲昵",
+        "害羞"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "care_comfort": {
+      "meaning": "安慰、关心和温柔回应",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病",
+        "安慰",
+        "抱抱"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "sad_tired": {
+      "meaning": "疲惫、低落和想休息",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力",
+        "emo",
+        "低能量"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "anger_conflict": {
+      "meaning": "炸毛、拒绝、吐槽和反击",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝",
+        "对线",
+        "吐槽"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "surprise_confusion": {
+      "meaning": "疑惑、震惊和看不懂的即时反应",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱",
+        "什么",
+        "不懂"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "reaction_action": {
+      "meaning": "拍桌、出击、挥手和强动作反应",
+      "use_when": [
+        "出击",
+        "打",
+        "反击",
+        "冲",
+        "行动",
+        "强烈反应"
+      ],
+      "avoid_when": [
+        "脆弱安慰",
+        "正式说明",
+        "睡觉"
+      ]
+    },
+    "daily_food": {
+      "meaning": "吃饭、日常和生活状态",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活",
+        "收到",
+        "小事"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "meta_technical": {
+      "meaning": "身份确认、机器人梗和技术场景",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错",
+        "配置",
+        "技术"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    }
+  },
+  "emojis": {
+    "013db2a681e99bfa2a5ec720a1d813a5.gif": {
+      "meaning": "挥手后开心蹦跳",
+      "tags": [
+        "挥手",
+        "开心",
+        "蹦跳"
+      ],
+      "category": "greeting_presence",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "早安",
+        "晚安",
+        "在吗",
+        "来了"
+      ],
+      "avoid_when": [
+        "争执",
+        "严肃求助",
+        "悲伤安慰"
+      ]
+    },
+    "026cc26362f95d71c19cfaf023c68b65.gif": {
+      "meaning": "先愣住再夸张摇头",
+      "tags": [
+        "愣住",
+        "摇头",
+        "疑惑"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "0354f4c7f007aa062550bbb02a5b6202.jpg": {
+      "meaning": "害羞又想贴贴",
+      "tags": [
+        "害羞",
+        "喜欢",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 79,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "036acf70f4bba92673cecf46c44173c7.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 86,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "0383d674f31b76140c6ce4d0138c328b.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 93,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "04c80f544138ef6fd889814690390a66.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "05e5db4830658086d87a75120f919fdd.jpg": {
+      "meaning": "震惊到说不出话",
+      "tags": [
+        "震惊",
+        "离谱",
+        "惊讶"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 89,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "07d3a2b13b65f86bf52349a2291db2cf.gif": {
+      "meaning": "扭捏靠近并连续贴贴",
+      "tags": [
+        "扭捏",
+        "靠近",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "0a03ce27e13e8004a242e4622570cb56.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 85,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "0a880267e9ceefbcadb48b073a631255.gif": {
+      "meaning": "来回跺脚表达无语",
+      "tags": [
+        "跺脚",
+        "无语",
+        "吐槽"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "0b28b65ce402ccf34037cd519393db33.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 81,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "0b4a4a6f634a7284b25e22b7a19e3383.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "1059fb91f56db86f0da3c4e4b43fb0d7.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 77,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "12cfb29541236eb770a5b7df63779063.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 84,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "1308a1d1ca5b0dd2307bac4ad15b4c6f.jpg": {
+      "meaning": "害羞又想贴贴",
+      "tags": [
+        "害羞",
+        "喜欢",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 91,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "13576b5f21551363513466c78468375d.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 80,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "157f98c1ebd74301620783ba5c98d3c9.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 87,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "15b6695bcfe09995325af7d66a2f1221.gif": {
+      "meaning": "张开手臂扑过来安慰",
+      "tags": [
+        "扑过来",
+        "抱抱",
+        "安慰"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "15cec49e58024e54c12a2fe905d08b79.gif": {
+      "meaning": "慢慢趴下进入低能量状态",
+      "tags": [
+        "趴下",
+        "疲惫",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "dynamic",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "1661d110b2067981d21e5a4a729d472f.jpg": {
+      "meaning": "生气地炸毛",
+      "tags": [
+        "生气",
+        "炸毛",
+        "反击"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 90,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "17a398a1d2b9a3d8b36babdd3aa5be2d.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 79,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "196515c299c1a3c66b827199be693084.gif": {
+      "meaning": "瞪大眼睛后猛地后仰",
+      "tags": [
+        "瞪眼",
+        "后仰",
+        "震惊"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "1999e264bfea373ca68f0cb57b1023e2.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 93,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "1ab190301b70b748677826cc87fc60c6.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "1aeb21d17e382bcb8a9b4c7f23fbb9b3.gif": {
+      "meaning": "毛发炸起并挥拳反击",
+      "tags": [
+        "炸毛",
+        "挥拳",
+        "反击"
+      ],
+      "category": "reaction_action",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "出击",
+        "打",
+        "反击",
+        "冲"
+      ],
+      "avoid_when": [
+        "脆弱安慰",
+        "正式说明",
+        "睡觉"
+      ]
+    },
+    "1b38e7ea22a43dc81b9e616ac54649b5.gif": {
+      "meaning": "拍桌起身并持续发火",
+      "tags": [
+        "拍桌",
+        "起身",
+        "发火"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "1bff416b1908907a58cb63543df075a5.gif": {
+      "meaning": "原地旋转庆祝成功",
+      "tags": [
+        "旋转",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "1d9017a3676a6359b26f9cec14bbb854.gif": {
+      "meaning": "小跑过来确认你在不在",
+      "tags": [
+        "小跑",
+        "确认",
+        "在吗"
+      ],
+      "category": "greeting_presence",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "早安",
+        "晚安",
+        "在吗",
+        "来了"
+      ],
+      "avoid_when": [
+        "争执",
+        "严肃求助",
+        "悲伤安慰"
+      ]
+    },
+    "1dab6f837d2433e0c8b677b2ae95bd28.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 81,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "20be26d7c49e0d29552e819909c94ca2.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "24bc487a4ec198dbc0fef15623958ed2.jpg": {
+      "meaning": "震惊到说不出话",
+      "tags": [
+        "震惊",
+        "离谱",
+        "惊讶"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 77,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "24e39cf887ae4d123aac9655c6741802.jpg": {
+      "meaning": "生气地炸毛",
+      "tags": [
+        "生气",
+        "炸毛",
+        "反击"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 84,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "26cc31455494787bf818c3e4d7789239.gif": {
+      "meaning": "捂脸扭动表现害羞",
+      "tags": [
+        "捂脸",
+        "扭动",
+        "害羞"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "279853bcef4f9e77c976e455f9662368.jpg": {
+      "meaning": "安静地陪着你",
+      "tags": [
+        "陪伴",
+        "温柔",
+        "在这里"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 80,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "281ab2502ddf0a6ec7d8ed07ba65afdf.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 87,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "305e95ea73d8677d4fd5c0d7dac0b332.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 76,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "33dc49f91022ccf6613c56f452114830.gif": {
+      "meaning": "抱住枕头左右摇摆",
+      "tags": [
+        "抱枕",
+        "摇摆",
+        "撒娇"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "3900bcc97daf2b276db1bfc749bbc1fb.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 90,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "3e32a1969fbc1784a5f1b71aec161e93.gif": {
+      "meaning": "低头叹气后继续躺平",
+      "tags": [
+        "叹气",
+        "低头",
+        "累"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "dynamic",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "3eae175133d7a557c132d5e6ab00c54b.gif": {
+      "meaning": "指着前方发起出击",
+      "tags": [
+        "指向",
+        "出击",
+        "行动"
+      ],
+      "category": "reaction_action",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "出击",
+        "打",
+        "反击",
+        "冲"
+      ],
+      "avoid_when": [
+        "脆弱安慰",
+        "正式说明",
+        "睡觉"
+      ]
+    },
+    "42bffff2f11995aee46e75c2cd5ef8de.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 93,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "4367b30d0f6f9cd91d546a0983aea692.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "44c0cd58ec725f78fdad9aa0afb86550.gif": {
+      "meaning": "连续点头表示收到",
+      "tags": [
+        "点头",
+        "收到",
+        "确认"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "dynamic",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "44f6f26df98f86038a1d7efdca1a3b57.jpg": {
+      "meaning": "生气地炸毛",
+      "tags": [
+        "生气",
+        "炸毛",
+        "反击"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 78,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "4997e810ea46b5b49cdf534a263785f2.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 85,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "4a2bd289c3844a5c16fa5a4cbed450df.gif": {
+      "meaning": "快速摇头拒绝靠近",
+      "tags": [
+        "摇头",
+        "拒绝",
+        "不要"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "4aa277b6df35dde21161563b97ffb0b7.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 81,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "4c44c113f0ac088ca568b05dc1c7fd54.gif": {
+      "meaning": "双手捂脸后偷偷看你",
+      "tags": [
+        "捂脸",
+        "偷看",
+        "害羞"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "4ebfca504d1897fdf6064a8462be23f1.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 77,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "5126bfe59b49de06d55bb5712c33d233.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 84,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "53040bfddf4ac443cb7fc96b1d1b62b0.jpg": {
+      "meaning": "害羞又想贴贴",
+      "tags": [
+        "害羞",
+        "喜欢",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 91,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "53af3131170d2489113b34e87be87920.gif": {
+      "meaning": "原地跳起表达兴奋",
+      "tags": [
+        "跳起",
+        "兴奋",
+        "开心"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "542be739ea307ce234deb26d467bf9a8.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 87,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "5526f2a64b8a9d56472dd09afdf9f0b0.gif": {
+      "meaning": "身体一抖后惊恐后退",
+      "tags": [
+        "发抖",
+        "后退",
+        "害怕"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "5631270ab9bf29b6f7e04100ec894622.jpg": {
+      "meaning": "震惊到说不出话",
+      "tags": [
+        "震惊",
+        "离谱",
+        "惊讶"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 83,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "570111917a0ba644781560f5fe5456ef.gif": {
+      "meaning": "冲上前连续挥动双手",
+      "tags": [
+        "冲刺",
+        "挥手",
+        "强烈反应"
+      ],
+      "category": "reaction_action",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "出击",
+        "打",
+        "反击",
+        "冲"
+      ],
+      "avoid_when": [
+        "脆弱安慰",
+        "正式说明",
+        "睡觉"
+      ]
+    },
+    "58fdeb0befcd169b67a19da4a3028aa6.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 79,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "59a81e01d495586860ac102ef0d1bb5e.gif": {
+      "meaning": "眨眼后露出狡黠笑容",
+      "tags": [
+        "眨眼",
+        "狡黠",
+        "得意"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "5ac90c9c9777c422b92f3c4fb305aa40.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 93,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "5b4e9fc14f4b37beb4a0610f221675cd.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "5b606186baf1d5954063b7a8af97e9a8.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 89,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "5ba6fbf5e821e314c525e1ebfff1dfa0.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 78,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "5bc4f9e41c150a35bd3bd5b4e7e507c9.jpg": {
+      "meaning": "害羞又想贴贴",
+      "tags": [
+        "害羞",
+        "喜欢",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 85,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "5bfba3626609edc83c7080d50886f1f6.gif": {
+      "meaning": "伸手摸摸并轻轻拍拍",
+      "tags": [
+        "摸摸",
+        "拍拍",
+        "安慰"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "dynamic",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "5cdc308accdacb3a1ee0274a9d879699.gif": {
+      "meaning": "翻白眼后转身离开",
+      "tags": [
+        "翻白眼",
+        "转身",
+        "不屑"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "5d0c9dac8b02c4e761e27d875a0b4089.gif": {
+      "meaning": "摇晃身体发出欢呼动作",
+      "tags": [
+        "摇晃",
+        "欢呼",
+        "庆祝"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "5db48c38536dc020dfbf6314e9a61d75.gif": {
+      "meaning": "抬头大笑并挥舞手臂",
+      "tags": [
+        "大笑",
+        "挥臂",
+        "开心"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "6059a0db6f40e6b1d070697bb05b1e17.jpg": {
+      "meaning": "生气地炸毛",
+      "tags": [
+        "生气",
+        "炸毛",
+        "反击"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 84,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "6389a6e038092aa7259f1e96e12c7866.gif": {
+      "meaning": "缩成一团并小幅发抖",
+      "tags": [
+        "缩成一团",
+        "发抖",
+        "脆弱"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "6440469678193cf9b84e65fcc0022c8f.gif": {
+      "meaning": "冲过来做出夸张攻击动作",
+      "tags": [
+        "冲过来",
+        "攻击",
+        "反击"
+      ],
+      "category": "reaction_action",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "出击",
+        "打",
+        "反击",
+        "冲"
+      ],
+      "avoid_when": [
+        "脆弱安慰",
+        "正式说明",
+        "睡觉"
+      ]
+    },
+    "66345606bcaaaddd5f141ff029fb0961.gif": {
+      "meaning": "捂住耳朵抗议并跺脚",
+      "tags": [
+        "捂耳",
+        "抗议",
+        "跺脚"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "6b882cfae33315a4610b87169a3ff287.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 76,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "706cd7805527c7919aa511e906c2b044.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 83,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "719458dc1d1256844d89e7a7725bbbec.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 90,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "76bbe3a50d918ebe747389bb6d943ea2.gif": {
+      "meaning": "原地左右踱步等待回应",
+      "tags": [
+        "踱步",
+        "等待",
+        "催促"
+      ],
+      "category": "greeting_presence",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "早安",
+        "晚安",
+        "在吗",
+        "来了"
+      ],
+      "avoid_when": [
+        "争执",
+        "严肃求助",
+        "悲伤安慰"
+      ]
+    },
+    "7774046da83b7ad2de2b3a023a884041.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 86,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "7f5f13e17567f0d5320769273406228e.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 93,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "84b3d6f11fe2851a13c54580c61403bb.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "86a5660768a90c26075ec8fe39dabcb1.gif": {
+      "meaning": "鼓掌后兴奋地连续点头",
+      "tags": [
+        "鼓掌",
+        "点头",
+        "赞同"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "88faefa9301fc2cd6f3d5807b276f090.jpg": {
+      "meaning": "生气地炸毛",
+      "tags": [
+        "生气",
+        "炸毛",
+        "反击"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 78,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "8e066bce90d36c4a8ee81780edeef43f.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 85,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "90e955403c9e3f171d14ab3fad1a59e2.gif": {
+      "meaning": "摊手表示完全看不懂",
+      "tags": [
+        "摊手",
+        "不懂",
+        "疑惑"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "93d453bf736d9b4ff2bc9ffb9b224620.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 81,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "9452b3439474b71c46d9a66bbc07830a.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "94f1ac0ceaac7bc5b250cd7ff7a4e94a.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 77,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "98344ae1b6a139d26ee345034b042c79.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 84,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "98558ac67a4e96ed1f4ab695bc41d7ce.gif": {
+      "meaning": "拍胸口后摆出自豪姿势",
+      "tags": [
+        "拍胸",
+        "自豪",
+        "得意"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "9a9de066f46b2e99ed54520f9be1e44e.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 80,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "9aed631759c34d2b6f499fcfe8d3f42f.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 87,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "9bb9cf1c92aaff6b78b52d03782b20ad.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 76,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "9bc19e964cf116827bb7be01878dc716.jpg": {
+      "meaning": "震惊到说不出话",
+      "tags": [
+        "震惊",
+        "离谱",
+        "惊讶"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 83,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "9ee4d3ea60a8a647464bf0aae9afdff5.jpg": {
+      "meaning": "生气地炸毛",
+      "tags": [
+        "生气",
+        "炸毛",
+        "反击"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 90,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "a61e053e7b32875c781d785c5b28bd7e.gif": {
+      "meaning": "抱紧自己并慢慢睡着",
+      "tags": [
+        "抱紧",
+        "睡着",
+        "晚安"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "dynamic",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "a70aa8e93ce69f49d70253be1e19d912.jpg": {
+      "meaning": "安静地陪着你",
+      "tags": [
+        "陪伴",
+        "温柔",
+        "在这里"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 86,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "a77be08b98a5c77eb8411bb9ff45ae3f.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 93,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "abbe7a5f19680bfabcf6dd9f5f769b22.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "ae997287ea17b6d82ea36d9d33ea6802.gif": {
+      "meaning": "突然转身快速离开现场",
+      "tags": [
+        "转身",
+        "离开",
+        "拒绝"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "b15eec4207acf51895ff5af5fd8c5022.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 78,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "b1b76f38ae41bb02dfbe4de8e9dc9227.gif": {
+      "meaning": "用力跺脚后抬手宣战",
+      "tags": [
+        "跺脚",
+        "宣战",
+        "生气"
+      ],
+      "category": "reaction_action",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "出击",
+        "打",
+        "反击",
+        "冲"
+      ],
+      "avoid_when": [
+        "脆弱安慰",
+        "正式说明",
+        "睡觉"
+      ]
+    },
+    "b2038dfc8332871dc67e21c99ad75095.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 92,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "b219991ef4c595df3515862e19d704db.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 81,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "b2bf1b4e8622e8436d2f53299b9f8272.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "b6ac49aff7d7c105de7932c8a3653b72.gif": {
+      "meaning": "先惊讶再捂嘴偷笑",
+      "tags": [
+        "惊讶",
+        "捂嘴",
+        "偷笑"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "b82e72fc6b440a229b7964357f501368.gif": {
+      "meaning": "挥舞小旗子迎接你回来",
+      "tags": [
+        "挥旗",
+        "迎接",
+        "回来"
+      ],
+      "category": "greeting_presence",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "早安",
+        "晚安",
+        "在吗",
+        "来了"
+      ],
+      "avoid_when": [
+        "争执",
+        "严肃求助",
+        "悲伤安慰"
+      ]
+    },
+    "bbd9addb3092589a4a5b01fd5283b421.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 91,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "bc046048ae0e4f2db48d2a760269c329.jpg": {
+      "meaning": "安静地陪着你",
+      "tags": [
+        "陪伴",
+        "温柔",
+        "在这里"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 80,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "be2bb49d726a6109169cd3dc5812a956.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 87,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "c0478947e63679f5b3a30f45d387711a.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 76,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "c53613c5495590c8599a48b4013a1819.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 83,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "c6a54e0d5cc656c184dfb4d9a925c20f.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 90,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "c7388b221ced3cb3298cda2aaad26c2d.jpg": {
+      "meaning": "害羞又想贴贴",
+      "tags": [
+        "害羞",
+        "喜欢",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 79,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "cabdc52c2c158ca09200c43fc553b903.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 86,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "cbfa5f62795a30cbc436b8c98b9799cb.gif": {
+      "meaning": "趴在桌边无力摆手",
+      "tags": [
+        "趴桌",
+        "摆手",
+        "疲惫"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "dynamic",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "ce3a34b41278ced9a61388b38082ce63.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "cefaac58a310542d575c1455f1a44fae.gif": {
+      "meaning": "连续鞠躬表示感谢和收到",
+      "tags": [
+        "鞠躬",
+        "感谢",
+        "收到"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "low",
+      "motion": "dynamic",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "cf414141a89d85eb180ac4c496590c68.jpg": {
+      "meaning": "生气地炸毛",
+      "tags": [
+        "生气",
+        "炸毛",
+        "反击"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 78,
+      "intensity": "high",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "d34dedc3a1e6b84f0ebeb1b677b2fd4f.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 85,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "da7cd85bff05d1e214bf4173192bf643.jpg": {
+      "meaning": "安静地陪着你",
+      "tags": [
+        "陪伴",
+        "温柔",
+        "在这里"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 92,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "dad157ce6fe29ae507ae3ee757a78cd0.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 81,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "db6e8a8e24c6190d61a3f62dee6e2a29.gif": {
+      "meaning": "扭头后突然爆发式挥拳",
+      "tags": [
+        "扭头",
+        "爆发",
+        "挥拳"
+      ],
+      "category": "reaction_action",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "high",
+      "motion": "dynamic",
+      "use_when": [
+        "出击",
+        "打",
+        "反击",
+        "冲"
+      ],
+      "avoid_when": [
+        "脆弱安慰",
+        "正式说明",
+        "睡觉"
+      ]
+    },
+    "dbed37e37b30ca194ab6b3b2217e7aa4.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 77,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "dd2dfd4abbdd6effe4dae2eeda28e627.jpg": {
+      "meaning": "疑惑地看着你",
+      "tags": [
+        "疑惑",
+        "问号",
+        "看着你"
+      ],
+      "category": "surprise_confusion",
+      "source": "curated",
+      "priority": 84,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "疑惑",
+        "问号",
+        "震惊",
+        "离谱"
+      ],
+      "avoid_when": [
+        "明确答案",
+        "晚安",
+        "安慰"
+      ]
+    },
+    "dd7ec5a251d51370caabb5e321b6bcaa.jpg": {
+      "meaning": "害羞又想贴贴",
+      "tags": [
+        "害羞",
+        "喜欢",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 91,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "e2e6163732e019b319a42fe266b0ae90.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 80,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    },
+    "e3dc33d9e64bfdae355945f7c0acacfb.jpg": {
+      "meaning": "温柔安慰你",
+      "tags": [
+        "安慰",
+        "抱抱",
+        "关心"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 87,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "e81f7e502e7ba0ca479e60238653b589.jpg": {
+      "meaning": "疲惫地躺平",
+      "tags": [
+        "累",
+        "困",
+        "躺平"
+      ],
+      "category": "sad_tired",
+      "source": "curated",
+      "priority": 76,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "累",
+        "困",
+        "睡觉",
+        "压力"
+      ],
+      "avoid_when": [
+        "好消息",
+        "热烈庆祝",
+        "攻击回应"
+      ]
+    },
+    "ec1ad786e4293e667371f6210d05eb1a.gif": {
+      "meaning": "双手合十撒娇请求贴贴",
+      "tags": [
+        "双手合十",
+        "撒娇",
+        "请求"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "ed2803d916dfcb71729b633896e4bfdb.gif": {
+      "meaning": "大幅挥手后转圈离场",
+      "tags": [
+        "挥手",
+        "转圈",
+        "离场"
+      ],
+      "category": "greeting_presence",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "早安",
+        "晚安",
+        "在吗",
+        "来了"
+      ],
+      "avoid_when": [
+        "争执",
+        "严肃求助",
+        "悲伤安慰"
+      ]
+    },
+    "f0eeac6ddf1618d5441ea48811c2b5bf.jpg": {
+      "meaning": "得意地庆祝",
+      "tags": [
+        "得意",
+        "庆祝",
+        "成功"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 79,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "f1d7f4691062750908cb327aceaf334f.jpg": {
+      "meaning": "安静地陪着你",
+      "tags": [
+        "陪伴",
+        "温柔",
+        "在这里"
+      ],
+      "category": "care_comfort",
+      "source": "curated",
+      "priority": 86,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "难受",
+        "哭",
+        "委屈",
+        "生病"
+      ],
+      "avoid_when": [
+        "庆祝",
+        "嘲讽",
+        "挑衅"
+      ]
+    },
+    "f31bbeefc03b9ac43e07b01dce75103e.jpg": {
+      "meaning": "认真确认身份",
+      "tags": [
+        "机器人",
+        "AI",
+        "机机"
+      ],
+      "category": "meta_technical",
+      "source": "curated",
+      "priority": 93,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "机器人",
+        "AI",
+        "代码",
+        "报错"
+      ],
+      "avoid_when": [
+        "纯撒娇",
+        "哄人",
+        "睡前问候"
+      ]
+    },
+    "f67c0dae033a2bf04d4145d606cd6314.jpg": {
+      "meaning": "日常吃东西",
+      "tags": [
+        "吃饭",
+        "好吃",
+        "日常"
+      ],
+      "category": "daily_food",
+      "source": "curated",
+      "priority": 82,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "吃饭",
+        "好吃",
+        "日常",
+        "生活"
+      ],
+      "avoid_when": [
+        "激烈冲突",
+        "严肃技术结论"
+      ]
+    },
+    "f9552c1f61c4bf89a8e183ee52b27d76.jpg": {
+      "meaning": "开心地笑",
+      "tags": [
+        "开心",
+        "高兴",
+        "笑"
+      ],
+      "category": "joy_celebration",
+      "source": "curated",
+      "priority": 89,
+      "intensity": "low",
+      "motion": "static",
+      "use_when": [
+        "开心",
+        "高兴",
+        "庆祝",
+        "成功"
+      ],
+      "avoid_when": [
+        "难过",
+        "严肃道歉",
+        "冲突"
+      ]
+    },
+    "f97487dcf56d4c3738d841e7d07ab167.gif": {
+      "meaning": "挥手后开心蹦跳",
+      "tags": [
+        "挥手",
+        "开心",
+        "蹦跳"
+      ],
+      "category": "greeting_presence",
+      "source": "curated",
+      "priority": 88,
+      "intensity": "medium",
+      "motion": "dynamic",
+      "use_when": [
+        "早安",
+        "晚安",
+        "在吗",
+        "来了"
+      ],
+      "avoid_when": [
+        "争执",
+        "严肃求助",
+        "悲伤安慰"
+      ]
+    },
+    "fb31b8427c9fcca011887c5c7068e545.jpg": {
+      "meaning": "害羞又想贴贴",
+      "tags": [
+        "害羞",
+        "喜欢",
+        "贴贴"
+      ],
+      "category": "affection_flirt",
+      "source": "curated",
+      "priority": 85,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "喜欢",
+        "贴贴",
+        "撒娇",
+        "夸可爱"
+      ],
+      "avoid_when": [
+        "正式通知",
+        "技术排错",
+        "激烈争执"
+      ]
+    },
+    "fdc8539ace5922667ae83d4316656640.jpg": {
+      "meaning": "无语地吐槽",
+      "tags": [
+        "无语",
+        "吐槽",
+        "嫌弃"
+      ],
+      "category": "anger_conflict",
+      "source": "curated",
+      "priority": 92,
+      "intensity": "medium",
+      "motion": "static",
+      "use_when": [
+        "生气",
+        "无语",
+        "被冒犯",
+        "拒绝"
+      ],
+      "avoid_when": [
+        "安慰脆弱",
+        "认真道歉",
+        "温柔问候"
+      ]
+    }
+  }
+}
