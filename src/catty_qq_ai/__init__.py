@@ -131,6 +131,7 @@ from .reply_markers import (
     split_chunk_with_image_placeholders as _split_chunk_with_image_placeholders,
     strip_inline_image_markers as _strip_inline_image_markers,
     strip_inline_image_placeholders as _strip_inline_image_placeholders,
+    strip_tone_parenthetical as _strip_tone_parenthetical,
 )
 from . import activity_feed
 from .session_cache import SessionCache, format_session_list_for_owner
@@ -3016,6 +3017,16 @@ def _strip_at_mention_for_private(text: str) -> str:
     lines = text.split("\n")
     out = [_AT_MENTION_LINE_PREFIX_RE.sub("", line, count=1) for line in lines]
     return "\n".join(out)
+
+
+# 主人 2026-08-12: 机机人格出站硬过滤「（小声）」式语气/动作注解括号。
+# prompt 侧 (§5 输出格式 / chat_rhythm / voice_guide) 已明文禁止, 模型仍偶发 → 发送前程序剥除。
+# 实现在 reply_markers.strip_tone_parenthetical (轻模块, 可独立测试); 这里只做 persona 门控调用。
+def _strip_tone_parenthetical_for_fadianji(text: str) -> str:
+    cleaned = _strip_tone_parenthetical(text)
+    if cleaned != text:
+        logger.info(f"fadianji tone-paren strip: {text[:60]!r} -> {cleaned[:60]!r}")
+    return cleaned
 
 
 def _sanitize_residual_markers(text: str) -> str:
@@ -9179,6 +9190,9 @@ def _compose_reply_message(
     # 主人 2026-08-10: 私聊 strip 行首 @人 前缀 (私聊没有 at 概念, 对象就是对方本人)
     if isinstance(event, PrivateMessageEvent):
         text = _strip_at_mention_for_private(text)
+    # 主人 2026-08-12: 机机人格出站剥除（小声）式语气/动作注解括号 (prompt 禁令管不住, 程序硬过滤)
+    if _persona_for_event(event).name == "fadianji":
+        text = _strip_tone_parenthetical_for_fadianji(text)
     message = Message()
     if quote:
         quote_segment = _reply_quote_segment(event)
@@ -13969,6 +13983,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 await matcher.finish()
 
         reply = _sanitize_reply_text_for_output(reply)
+        # 机机: 出站前先把（小声）式注解剥掉再进 history/训练样本, 防模型从自己历史里学回去
+        if _persona_for_event(event).name == "fadianji":
+            reply = _strip_tone_parenthetical_for_fadianji(reply)
         reply, emoji_query = _extract_emoji_query(reply)
         # 注:梗图由 catty_meme_query 下载并写入 tool_ctx.pending_image_segments,主回复后由发送链路带外送出。
         _save_assistant_training_sample(
