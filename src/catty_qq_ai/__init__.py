@@ -370,6 +370,14 @@ async def _managed_store_flush_loop() -> None:
                 try:
                     from . import tool_telemetry as _tool_telemetry
                     _tool_telemetry.dump_jsonl(Path(config.catty_memory_path).parent)
+                    # 主人 2026-08-16: style critic 统计同步落盘 (grep critic_stats 即可)
+                    from . import fadianji_style_critic as _style_critic
+                    _critic_stats = _style_critic.get_stats()
+                    # 只在真发生 suspect/rewrite 时落盘, 纯检查不刷 jsonl
+                    if _critic_stats.get("suspect") or _critic_stats.get("rewrite_failed"):
+                        _stats_path = Path(config.catty_memory_path).parent / "tool_telemetry.jsonl"
+                        with _stats_path.open("a", encoding="utf-8") as _sf:
+                            _sf.write(json.dumps({"critic_stats": _critic_stats, "ts": time.time()}, ensure_ascii=False) + "\n")
                 except Exception:
                     pass
             specs = (
@@ -14288,6 +14296,18 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             getattr(config, "catty_fadianji_event_mood_enabled", True)
         ):
             _apply_fadianji_mood_marker(_fd_mood_tag)
+        # 主人 2026-08-16: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写。
+        # 正常短句零开销, 只有漂移回复付一次 audit 小调用; 任何失败都原样放行。
+        if _persona_for_event(event).name == "fadianji" and bool(
+            getattr(config, "catty_style_critic_enabled", True)
+        ):
+            try:
+                from . import fadianji_style_critic
+                reply = await fadianji_style_critic.rewrite_if_needed(
+                    reply, user_text=str(incoming.text or "")[:200], config=config
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"fadianji style critic failed (non-fatal): {type(exc).__name__}: {exc}")
         # 主人 2026-08-15: callback marker — 主 AI 自报 done/open/dismiss 驱动 ledger;
         # 任何人格都先剥掉防泄漏, 再按 scope 应用。
         reply, _cb_marker_payloads = _extract_callback_markers(reply)

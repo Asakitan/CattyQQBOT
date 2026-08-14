@@ -638,6 +638,9 @@ class Config(BaseModel):
     catty_fadianji_state_min_minutes: int = 60
     catty_fadianji_state_max_minutes: int = 180
     catty_fadianji_event_mood_enabled: bool = True  # 启用事件驱动情绪
+    # 主人 2026-08-16: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写
+    catty_style_critic_enabled: bool = True
+    catty_style_critic_min_reply_chars: int = 6  # 短于该字数的回复免检
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 

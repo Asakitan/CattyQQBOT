@@ -35,7 +35,7 @@ class Evidence:
         return {"source": self.source, "scope": self.scope, "text": self.text, "relevance": round(self.relevance, 6), "recency": round(self.recency, 6), "importance": round(self.importance, 6), "authority": round(self.authority, 6), "private": self.private}
 
 
-_DEFAULT_MAX_CHARS = 2800
+_DEFAULT_MAX_CHARS = 4000
 _MEMORY_BAD_TEXT = ("暂无有效", "无文字交流", "无有效信息", "memory disabled")
 
 
@@ -201,7 +201,7 @@ def _rag_evidence(store: Any, text: str, scope: str, persona: Any, private: bool
 
 
 def _scene_evidence(matches: Sequence[SceneMatch]) -> list[Evidence]:
-    return [Evidence(f"scene.{match.source}", match.source_scope, f"{match.trigger} → 机机: {match.reply}（分类={match.category}）", max(0.0, min(1.0, match.score / 8.0)), 0.15, 0.34, 0.38, match.private, 60) for match in matches]
+    return [Evidence(f"scene.{match.source}", match.source_scope, f"{match.trigger} → 机机: {match.reply}（分类={match.category}）", max(0.0, min(1.0, match.score / 4.0)), 0.20, 0.75, 0.72, match.private, 40) for match in matches]
 
 
 def _dedupe_and_sort(evidence: Sequence[Evidence], private: bool) -> list[Evidence]:
@@ -217,9 +217,9 @@ def _dedupe_and_sort(evidence: Sequence[Evidence], private: bool) -> list[Eviden
 
 def _render_packet(flags: QueryFlags, evidence: Sequence[Evidence], scope: str, private: bool, max_chars: int) -> str:
     header = f"【机机·post-boundary evidence】\nscope={scope}; private={1 if private else 0}; intent={flags.intent}; memory_need={1 if flags.memory_need else 0}; anaphora={1 if flags.anaphora else 0}\n"
-    guidance = "【来源与冲突规则】\n当前消息与本轮明确事实 > 同 scope 的 MemoryStore profile/notes/recall > 人格 character_book > 同 scope RAG > scene 真实对话。\nscene 只提供机机的口吻、长度和反应方式，不能覆盖事实、制造实时状态，也不能把私聊证据带入群聊。\n来源冲突时优先直接、较新、scope 一致的事实；无法确认就保留未知，不补写确定结论。\n"
+    guidance = "【来源与冲突规则】\n当前消息与本轮明确事实 > 同 scope 的 MemoryStore profile/notes/recall > 人格 character_book > 同 scope RAG > scene 真实对话。\nscene 真实母本是机机同类情境下的真实反应, 优先模仿她的口吻、长度和反应方式; 不能覆盖事实、制造实时状态, 也不能把私聊证据带入群聊。\n来源冲突时优先直接、较新、scope 一致的事实；无法确认就保留未知，不补写确定结论。\n"
     output = [header]
-    for title, prefix in (("【MemoryStore/事实背景】", "memory."), ("【character_book/角色知识】", "character_book:"), ("【RAG/历史片段】", "rag."), ("【scene/口吻母本】", "scene.")):
+    for title, prefix in (("【MemoryStore/事实背景】", "memory."), ("【character_book/角色知识】", "character_book:"), ("【RAG/历史片段】", "rag."), ("【scene/口吻母本 · 优先模仿】", "scene.")):
         items = [item for item in evidence if item.source.startswith(prefix)]
         if items:
             output.append(title + "\n")
@@ -228,7 +228,7 @@ def _render_packet(flags: QueryFlags, evidence: Sequence[Evidence], scope: str, 
     return rendered if len(rendered) <= max_chars else ("" if max_chars <= 0 else rendered[:max_chars].rstrip())
 
 
-def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_key: str = "", is_private: bool = False, user_id: str = "", group_id: str = "", memory_store: Any = None, rag_store: Any = None, max_chars: int = _DEFAULT_MAX_CHARS, *, scene_k: int = 5, book_k: int = 3, semantic: bool = True, query_flags: QueryFlags | Mapping[str, Any] | None = None) -> dict[str, Any]:
+def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_key: str = "", is_private: bool = False, user_id: str = "", group_id: str = "", memory_store: Any = None, rag_store: Any = None, max_chars: int = _DEFAULT_MAX_CHARS, *, scene_k: int = 8, book_k: int = 3, semantic: bool = True, query_flags: QueryFlags | Mapping[str, Any] | None = None) -> dict[str, Any]:
     scope, private = _scope_value(scope_key, is_private=is_private, user_id=user_id, group_id=group_id)
     if isinstance(query_flags, QueryFlags): flags = query_flags
     elif isinstance(query_flags, Mapping):

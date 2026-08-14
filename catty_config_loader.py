@@ -989,6 +989,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FADIANJI_STATE_MAX_MINUTES", fadianji_state.get("max_minutes"))
     # 主人 2026-08-13: 事件驱动情绪 (被夸/被拆穿/翻车/起哄 → 得意/破防/暴走)
     _set_env("CATTY_FADIANJI_EVENT_MOOD_ENABLED", fadianji_state.get("event_mood_enabled"))
+    # 主人 2026-08-16: 机机出口质检员 (AI 味预筛 + audit 重写)
+    _set_env("CATTY_STYLE_CRITIC_ENABLED", fadianji_state.get("style_critic_enabled"))
+    _set_env("CATTY_STYLE_CRITIC_MIN_REPLY_CHARS", fadianji_state.get("style_critic_min_reply_chars"))
 
     proactive = _section(data, "proactive")
     _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))
