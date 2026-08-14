@@ -30,7 +30,8 @@ from dataclasses import dataclass
 
 _MAX_AMBIENT_PER_SCOPE = 20      # per scope deque size — 30 min 内大概 20 条够拉
 _AMBIENT_TTL_SECONDS = 30 * 60   # 30 分钟过期, 太久的 ambient 没意义
-_PROMPT_MAX_COUNT = 3            # 主人 2026-05-28 C15-6: 6→3, 群聊 ambient 砍半
+_AMBIENT_PROMPT_MAX = 3          # 主人 2026-08-15: 3 条注入, 相关性排序留待后续
+_PROMPT_MAX_COUNT = _AMBIENT_PROMPT_MAX
 _TEXT_TRIM_CHARS = 50            # 主人 2026-05-28 C15-6: 80→50, 单条截更短
 
 
@@ -118,23 +119,25 @@ def build_ambient_prompt(messages: list[AmbientMessage], char_name: str = "笨�
         return ""
     now = time.time()
     lines = [f"【{char_name}·周边对话 (ambient, 听到但没人直接叫你)】"]
-    for m in messages[-1:]:
-        age_s = max(0.0, now - m.ts)
-        if age_s < 120:
-            age_label = "刚刚"
-        elif age_s < 5 * 60:
-            age_label = "几分钟前"
-        elif age_s < 15 * 60:
-            age_label = "十几分钟前"
-        elif age_s < 30 * 60:
-            age_label = "半小时内"
+    recent = messages[-_AMBIENT_PROMPT_MAX:]
+    grouped: list[tuple[AmbientMessage, str, str, int]] = []
+    for m in recent:
+        full_text = " ".join(str(m.text or "").split())
+        text = full_text
+        if len(text) > 80:
+            text = text[:79].rstrip() + "…"
+        if grouped and grouped[-1][1] == full_text:
+            previous, previous_full_text, previous_text, count = grouped[-1]
+            grouped[-1] = (previous, previous_full_text, previous_text, count + 1)
         else:
-            age_label = "半小时前"
+            grouped.append((m, full_text, text, 1))
+    for m, _, text, count in grouped:
         nick = m.nickname or "?"
-        text = " ".join(str(m.text or "").split())
-        if len(text) > 64:
-            text = text[:63].rstrip() + "…"
-        lines.append(f"- [{age_label}] {nick}: {text}")
+        if count > 1:
+            lines.append(f"- {nick}: {text} ×{count}")
+            continue
+        minutes = max(0, int((now - m.ts) // 60))
+        lines.append(f"- {nick}: {text} ({minutes}分钟前)")
     lines.append(
         "↑ 旁听补丁: 当前 user 才是真在跟你说话; 只在明显接梗时轻带一句, 别逐条回应。"
     )

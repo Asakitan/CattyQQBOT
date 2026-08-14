@@ -219,8 +219,9 @@ def split_chunk_with_image_placeholders(chunk_text: str, image_urls: list[str]) 
 #
 # 机机 prompt (§5 输出格式 / chat_rhythm / voice_guide) 已明文禁止「（小声）（轻笑）」式
 # 语气/动作注解, 模型仍偶发 → 出站前程序硬剥。只剥黑名单注解词 (可带 的/着/状/一下 等后缀,
-# 可两词连用如 小声嘀咕); 语料实证玩梗括号（？）（不是）（悲）（去🦌了）（龟速做视频中）
-# 不在名单, 原样保留。（笑死）这类「名单词 + 非后缀字」也不误伤。
+# 也可带 喵/呜/呐 等语气尾词如（小声喵）, 可两词连用如 小声嘀咕); 语料实证玩梗括号
+# （？）（不是）（悲）（去🦌了）（龟速做视频中）不在名单, 原样保留。
+# （笑死）这类「名单词 + 非后缀字(死)」也不误伤 — 死/惨/爆/裂 等强调后缀不进尾词表。
 _TONE_PAREN_BAN_WORDS: tuple[str, ...] = (
     "超小声", "小声", "轻声", "低声", "耳语", "嘀咕", "嘟囔", "咕哝", "喃喃",
     "笑出声", "轻笑", "偷笑", "憋笑", "苦笑", "笑",
@@ -230,7 +231,9 @@ _TONE_PAREN_BAN_WORDS: tuple[str, ...] = (
     "尖叫", "怪叫", "转圈", "跺脚", "跳脚", "黑线", "无语", "冒汗", "冷汗",
 )
 _TONE_PAREN_BAN_ALT = "|".join(sorted(_TONE_PAREN_BAN_WORDS, key=len, reverse=True))
-_TONE_PAREN_SUFFIX = r"(?:的|着|了|状|声|中|一下|说|道|样|脸)?"
+# 后缀: 结构助词/补语 + 语气尾词。主人 2026-08-14: 补 地 + 喵/呜/呐/嘤/呀/哦/呢/吧/嘛/啦/咯
+# 修「（小声喵）」漏过滤; 不加 死/惨/爆/裂(强调后缀, 保（笑死）玩梗)。
+_TONE_PAREN_SUFFIX = r"(?:的|着|了|状|声|中|一下|说|道|样|脸|地|喵|呜|呐|嘤|呀|哦|呢|吧|嘛|啦|咯)?"
 _TONE_PAREN_RE = re.compile(
     r"[（(]\s*(?:" + _TONE_PAREN_BAN_ALT + r")" + _TONE_PAREN_SUFFIX
     + r"(?:" + _TONE_PAREN_BAN_ALT + r")?" + _TONE_PAREN_SUFFIX + r"\s*[）)]"

@@ -134,6 +134,12 @@ from .reply_markers import (
     strip_inline_image_placeholders as _strip_inline_image_placeholders,
     strip_tone_parenthetical as _strip_tone_parenthetical,
 )
+# 主人 2026-08-15: callback ledger — 未完成事项生命周期 (open/done/dismiss),
+# 主 AI 用 <<<CATTY_CB:...>>> marker 自报状态, 审计 P0-1 闭环。
+from .catty_callback_ledger import (
+    CallbackLedger,
+    extract_callback_markers as _extract_callback_markers,
+)
 from . import activity_feed
 from .session_cache import SessionCache, format_session_list_for_owner
 from .context_buckets import TimeBucketContextStore
@@ -293,6 +299,9 @@ body_presence_store = BodyPresenceStore()
 # 机机三状态随机切换 (主人 2026-08-10): 丧女/魅魔/阳光, 落盘 fadianji_state.json。
 from .fadianji_state import FadianjiStateStore
 fadianji_state_store = FadianjiStateStore(config.catty_memory_path)
+# callback ledger (主人 2026-08-15): 未完成事项/承诺/待回调梗的生命周期档案,
+# 落盘 callback_ledger.json。
+callback_ledger = CallbackLedger(config.catty_memory_path)
 # Phase D2: 跨 scope mood overlay — 主人私聊 NSFW P7/P8 后, 10 min 内切群聊仍有余韵.
 # per-user_id (不是 scope) 短期 store, 不持久化.
 from .mood_overlay_store import MoodOverlayStore
@@ -350,10 +359,19 @@ async def _managed_store_flush_loop() -> None:
     所以 hot reload 替换 memory_store / affection_store 后不用再额外起孤儿 loop。
     """
     last_flushed_at: dict[str, float] = defaultdict(float)
+    # 主人 2026-08-15: 工具遥测每 5 分钟追加落盘一次 (tool_telemetry.jsonl)
+    _telemetry_last_dump = 0.0
     while True:
         try:
             await asyncio.sleep(5.0)
             now = time.monotonic()
+            if now - _telemetry_last_dump >= 300.0:
+                _telemetry_last_dump = now
+                try:
+                    from . import tool_telemetry as _tool_telemetry
+                    _tool_telemetry.dump_jsonl(Path(config.catty_memory_path).parent)
+                except Exception:
+                    pass
             specs = (
                 ("memory_store", lambda: memory_store, lambda store: max(float(getattr(store, "save_debounce_seconds", 30.0)), 1.0)),
                 ("affection_store", lambda: affection_store, lambda _store: 5.0),
@@ -3548,6 +3566,37 @@ def _apply_fadianji_mood_marker(tag: str) -> None:
         )
 
 
+# 主人 2026-08-15: multi_turn_callback 检测器 tag → ledger target_type 映射
+_CB_TAG_TO_TYPE = {
+    "future_plan": "plan",
+    "near_intent": "plan",
+    "plan_to_do": "plan",
+    "open_question": "question",
+    "recent_done": "event",
+    "in_progress": "event",
+}
+
+_TOOL_RESULT_IGNORE_TOKENS = {
+    "ok", "success", "result", "data", "error", "true", "false", "none",
+    "name", "type", "args", "content", "status", "code", "message",
+}
+
+
+def _reply_uses_tool_results(reply: str, result_texts: list[str]) -> bool:
+    """粗判回复是否采用了工具结果: 结果文本里的实义词 (≥4 字符) 是否出现在回复中。"""
+    if not reply or not result_texts:
+        return False
+    tokens: set[str] = set()
+    for text in result_texts:
+        for token in re.findall(r"[0-9A-Za-z一-鿿]{4,}", text or ""):
+            if token.lower() in _TOOL_RESULT_IGNORE_TOKENS:
+                continue
+            tokens.add(token)
+            if len(tokens) >= 200:
+                break
+    return any(token in reply for token in tokens)
+
+
 def _reply_source_key(event: MessageEvent, message_id: str) -> str:
     scope = _conversation_queue_key(event)
     return f"{scope}:reply-source:{message_id}"
@@ -5147,8 +5196,10 @@ async def _run_session_ai_compact(key: str) -> None:
                     "role": "system",
                     "content": (
                         "你是会话压缩器。把以下 QQ 聊天记录蒸馏成结构化中文摘要, 供后续对话当长期上下文。"
-                        "分段输出: 【人物与称呼】【关系与氛围】【重要事件与约定】【反复出现的梗】【未完成事项】;"
-                        " 总字数≤800字; 保留具体名词/时间/承诺; 不编造; 没有内容的分段写「无」。"
+                        "分段输出: 【未完成事项】【人物与称呼】【关系与氛围】【重要事件与约定】【反复出现的梗】;"
+                        " 【未完成事项】必须最先写且写全: 没做完的事、机机没兑现的承诺、没回答的问题、待确认的安排, "
+                        "每条一行, 写明相关人和具体内容; 被用户纠正过的事实按纠正后的版本写; "
+                        "总字数≤800字; 保留具体名词/时间/承诺; 不编造; 没有内容的分段写「无」。"
                     ),
                 },
                 {"role": "user", "content": transcript},
@@ -13504,6 +13555,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         )
 
         _tool_narration_sent = False
+        _turn_tool_result_texts: list[str] = []
+        # 主人 2026-08-15: 工具遥测 — 本轮开账 (暴露多少 schema), 调用/采用在后面回填
+        try:
+            from . import tool_telemetry as _tool_telemetry
+            _tool_telemetry.start_turn(
+                history_key,
+                getattr(_tool_persona, "name", "") or "",
+                len(_allowed_tool_names),
+            )
+        except Exception:
+            pass
 
         async def _tool_executor(
             name: str,
@@ -13520,14 +13582,39 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             )
             # 主人 2026-08-13 (Review 修正): 旁白只在工具真实执行成功后才发,
             # 主人校验/confirm/参数解析/能力闸门失败时不发"我查一下"。
+            # 主人 2026-08-15: 成功结果文本同时留档, 供末尾回填遥测的回复采用判定。
+            _tool_succeeded = (
+                isinstance(result, dict)
+                and result.get("error") is None
+                and result.get("ok", True) is not False
+            )
+            if _tool_succeeded:
+                try:
+                    _turn_tool_result_texts.append(json.dumps(result, ensure_ascii=False)[:1500])
+                except Exception:
+                    pass
+            # 主人 2026-08-15 (修正): 遥测在这层记账 — 有真实结果, 能算非空/体积。
+            try:
+                _result_json = json.dumps(result, ensure_ascii=False) if isinstance(result, dict) else str(result)
+                _payload_text = json.dumps(
+                    {k: v for k, v in result.items() if k not in ("ok", "error", "name", "type")},
+                    ensure_ascii=False,
+                ) if isinstance(result, dict) else ""
+                _tool_telemetry.record_call(
+                    history_key,
+                    name,
+                    success=bool(_tool_succeeded),
+                    result_nonempty=bool(_payload_text.strip() and _payload_text not in ("{}", "null")),
+                    result_chars=min(len(_result_json), 5000),
+                )
+            except Exception:
+                pass
             if (
                 not _tool_narration_sent
                 and name in _allowed_names
                 and bool(getattr(config, "catty_tool_narration_enabled", True))
                 and getattr(_tool_persona, "name", "") == "fadianji"
-                and isinstance(result, dict)
-                and result.get("error") is None
-                and result.get("ok", True) is not False
+                and _tool_succeeded
             ):
                 _tool_narration_sent = True
                 _schedule_tool_narration(matcher, event)
@@ -13677,6 +13764,26 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     _unified_text = "【NLU 综合提示】" + " | ".join(_unified_hints)
                     _unified_note = AuthorNote(content=_unified_text, depth=2)
                     messages = inject_author_note(messages, _unified_note)
+
+                # 主人 2026-08-15: callback ledger — 检测器候选入档 + 活跃事项块注入。
+                # 块内含 CATTY_CB marker 协议, 主 AI 自报 done/open/dismiss 驱动生命周期。
+                try:
+                    from .catty_multi_turn_callback import detect_callback_targets
+                    for _tag, _snippet in detect_callback_targets(_recent_user_texts):
+                        callback_ledger.record_candidate(
+                            history_key,
+                            target_type=_CB_TAG_TO_TYPE.get(_tag, "plan"),
+                            source_text=_snippet,
+                            summary=_snippet,
+                            user_id=str(getattr(event, "user_id", "") or ""),
+                        )
+                    _cb_block = callback_ledger.build_prompt_block(history_key)
+                    if _cb_block:
+                        messages = inject_author_note(
+                            messages, AuthorNote(content=_cb_block, depth=2)
+                        )
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"callback_ledger failed: {exc}")
 
                 # 主人 2026-05-29: 跨天感知 — 上一轮对话跟现在跨了日历天就提示"新的一天",
                 # 别无缝续昨天的剧情(私聊沉浸 RP 会把昨晚睡前场景演到第二天下午)。
@@ -14181,6 +14288,23 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             getattr(config, "catty_fadianji_event_mood_enabled", True)
         ):
             _apply_fadianji_mood_marker(_fd_mood_tag)
+        # 主人 2026-08-15: callback marker — 主 AI 自报 done/open/dismiss 驱动 ledger;
+        # 任何人格都先剥掉防泄漏, 再按 scope 应用。
+        reply, _cb_marker_payloads = _extract_callback_markers(reply)
+        for _cb_payload in _cb_marker_payloads:
+            try:
+                callback_ledger.apply_marker(history_key, _cb_payload)
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"callback marker apply failed (non-fatal): {type(exc).__name__}: {exc}")
+        # 工具遥测: 回填"最终回复是否采用了工具结果" (实义词重叠粗判)
+        if _turn_tool_result_texts:
+            try:
+                _tool_telemetry.mark_reply_used(
+                    history_key,
+                    _reply_uses_tool_results(reply, _turn_tool_result_texts),
+                )
+            except Exception:
+                pass
         # 注:梗图由 catty_meme_query 下载并写入 tool_ctx.pending_image_segments,主回复后由发送链路带外送出。
         _save_assistant_training_sample(
             event,

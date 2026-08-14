@@ -5381,6 +5381,8 @@ def _record_tool_call(scope_key: str, name: str, args_preview: str, succeeded: b
         dq = _deque(maxlen=_RECENT_TOOL_CALLS_MAX)
         _RECENT_TOOL_CALLS[scope_key] = dq
     dq.append((name, args_preview[:60], time.monotonic(), succeeded))
+    # 主人 2026-08-15 (修正): 遥测搬到 __init__ 的 executor wrapper 层记账 —
+    # 那里拿得到真实结果文本, 能算 result_nonempty/result_chars; 这里拿不到。
 
 
 def recent_tool_calls_context(scope_key: str) -> str:
