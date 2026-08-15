@@ -8,6 +8,7 @@ import hashlib
 from io import BytesIO
 import json
 import logging
+import re
 import time
 from typing import Any, Callable
 from urllib.parse import urlparse
@@ -69,6 +70,11 @@ def _fallback_is_warm() -> bool:
 
 ChatMessage = dict[str, Any]
 ToolChoice = str | dict[str, Any]
+
+# Some OpenAI-compatible relays keep the SSE connection alive after the final
+# finish_reason. Give a short window for the trailing usage chunk, then close
+# the response instead of letting heartbeat comments keep the turn alive.
+_STREAM_TERMINAL_GRACE_SECONDS = 1.0
 
 # Phase 2B: 请求层只接收 PersonaReplyContext duck type，避免反向 import personas 形成循环。
 # 未设置时严格沿用 Catty 老路径，保证已有调用方和 cache/tool 合约不变。
@@ -2124,7 +2130,33 @@ async def _stream_chat_completion_attempt(
                 err.status_code = response.status_code  # type: ignore[attr-defined]
                 raise err
 
-            async for line in response.aiter_lines():
+            line_iter = response.aiter_lines().__aiter__()
+            terminal_deadline: float | None = None
+            loop = asyncio.get_running_loop()
+            while True:
+                try:
+                    if terminal_deadline is None:
+                        line = await line_iter.__anext__()
+                    else:
+                        remaining = terminal_deadline - loop.time()
+                        if remaining <= 0:
+                            break
+                        line = await asyncio.wait_for(
+                            line_iter.__anext__(),
+                            timeout=remaining,
+                        )
+                except StopAsyncIteration:
+                    break
+                except asyncio.TimeoutError:
+                    if terminal_deadline is not None:
+                        _logger.warning(
+                            "AI stream sent finish_reason without [DONE]/usage; "
+                            "closing after %.1fs terminal grace",
+                            _STREAM_TERMINAL_GRACE_SECONDS,
+                        )
+                        break
+                    raise
+
                 if not line:
                     continue
                 # SSE 标准行: "data: {...}\n\n", 也兼容无 space "data:{...}"
@@ -2144,9 +2176,70 @@ async def _stream_chat_completion_attempt(
                 except (ValueError, json.JSONDecodeError):
                     continue
 
+                if isinstance(chunk, dict) and "error" in chunk:
+                    error_payload = chunk.get("error")
+                    error_data = error_payload if isinstance(error_payload, dict) else {}
+                    error_message = error_data.get("message") or error_data.get("detail")
+                    if not isinstance(error_message, str):
+                        error_message = error_payload if isinstance(error_payload, str) else ""
+                    error_message = error_message.strip()[:500]
+                    error_message = re.sub(
+                        r"(?i)\bBearer\s+[A-Za-z0-9._~+/=-]+",
+                        "Bearer <redacted>",
+                        error_message,
+                    )
+                    error_message = re.sub(
+                        r"(?i)\b(api[_-]?key|access[_-]?token|refresh[_-]?token|token|secret|password)\s*[:=]\s*['\"]?[^,\s'\"}]+",
+                        r"\1=<redacted>",
+                        error_message,
+                    )
+                    error_code = error_data.get("code")
+                    if isinstance(error_code, (dict, list, tuple, set)):
+                        error_code = None
+                    error_code_text = str(error_code).strip()[:128] if error_code is not None else ""
+                    error_status = (
+                        error_data.get("status")
+                        or error_data.get("status_code")
+                        or chunk.get("status")
+                        or chunk.get("status_code")
+                    )
+                    error_status_text = (
+                        str(error_status).strip()[:64]
+                        if error_status is not None and not isinstance(error_status, (dict, list, tuple, set))
+                        else ""
+                    )
+                    status_code: int | None = None
+                    if error_status_text:
+                        try:
+                            status_code = int(error_status_text)
+                        except ValueError:
+                            pass
+                    detail_parts = ["stream_error"]
+                    if error_message:
+                        detail_parts.append(f"message={error_message}")
+                    if error_code_text:
+                        detail_parts.append(f"code={error_code_text}")
+                    if error_status_text:
+                        detail_parts.append(f"status={error_status_text}")
+                    err = OpenAICompatibleError(
+                        _catty_http_status_message("AI 接口", status_code)
+                        if status_code is not None
+                        else "AI 接口返回流式错误，请稍后再试。",
+                        "; ".join(detail_parts),
+                    )
+                    if status_code is not None:
+                        err.status_code = status_code  # type: ignore[attr-defined]
+                    if error_code_text:
+                        err.error_code = error_code_text  # type: ignore[attr-defined]
+                    if error_message:
+                        err.server_message = error_message  # type: ignore[attr-defined]
+                    raise err
+
                 # usage chunk (最后一个; DeepSeek/OpenAI 在 stream_options.include_usage 时返回)
                 if chunk.get("usage"):
                     usage = chunk["usage"]
+                    if finish_reason is not None:
+                        break
 
                 choices = chunk.get("choices") or []
                 if not choices:
@@ -2200,6 +2293,12 @@ async def _stream_chat_completion_attempt(
 
                 if choice.get("finish_reason"):
                     finish_reason = choice["finish_reason"]
+                    if usage is not None:
+                        break
+                    if terminal_deadline is None:
+                        terminal_deadline = (
+                            loop.time() + _STREAM_TERMINAL_GRACE_SECONDS
+                        )
 
     # 拼成跟非流式相同的 dict
     message: dict[str, Any] = {"role": role, "content": text_accum}
@@ -2588,8 +2687,10 @@ async def _stream_responses_attempt(
                     continue
                 else:
                     continue
-                if not data_str or data_str == "[DONE]":
+                if not data_str:
                     continue
+                if data_str == "[DONE]":
+                    break
                 try:
                     event = json.loads(data_str)
                 except (ValueError, json.JSONDecodeError):
@@ -2598,11 +2699,11 @@ async def _stream_responses_attempt(
 
                 if event_type == "response.completed":
                     completed = event.get("response") or event
-                    continue
+                    break
                 if event_type == "error":
                     error_obj = event.get("error") or {}
                     error_message = str(error_obj.get("message") or "")[:500]
-                    continue
+                    break
                 if event_type == "response.output_text.delta":
                     delta = event.get("delta")
                     if isinstance(delta, str) and delta:

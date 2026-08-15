@@ -254,3 +254,31 @@ def strip_tone_parenthetical(text: str) -> str:
     cleaned = re.sub(r"[ \t]{2,}", " ", cleaned)
     lines = [line for line in (ln.strip() for ln in cleaned.split("\n")) if line]
     return "\n".join(lines).strip()
+
+
+def strip_fadianji_catty_tics(text: str) -> str:
+    """Remove Catty's ``喵`` verbal tic from fadianji output.
+
+    Fadianji has its own voice; this runs both before history persistence and on
+    the final send bus so old session examples or auxiliary rewrites cannot leak
+    Catty's tic back into user-visible replies.
+    """
+    if not text or "喵" not in text:
+        return text
+    cleaned = re.sub(
+        r"(?m)^[ \t]*(?:喵呜|喵+)(?:[，,、。.!！?？；;：:~～…]|[ \t])*",
+        "",
+        text,
+    )
+    cleaned = re.sub(
+        r"(?m)(?:[，,、。.!！?？；;：:~～…]|[ \t])*(?:喵呜|喵+)"
+        r"(?:[，,、。.!！?？；;：:~～…]|[ \t])*$",
+        "",
+        cleaned,
+    )
+    cleaned = re.sub(r"喵呜|喵+", "", cleaned)
+    cleaned = re.sub(r"([，,、；;：:])([。.!！?？])", r"\2", cleaned)
+    cleaned = re.sub(r"[ \t]+([，。！？!?；;：:,])", r"\1", cleaned)
+    cleaned = re.sub(r"[ \t]{2,}", " ", cleaned)
+    lines = [line for line in (ln.strip() for ln in cleaned.split("\n")) if line]
+    return "\n".join(lines).strip()

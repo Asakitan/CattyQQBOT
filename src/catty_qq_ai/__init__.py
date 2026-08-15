@@ -133,6 +133,7 @@ from .reply_markers import (
     split_chunk_with_image_placeholders as _split_chunk_with_image_placeholders,
     strip_inline_image_markers as _strip_inline_image_markers,
     strip_inline_image_placeholders as _strip_inline_image_placeholders,
+    strip_fadianji_catty_tics as _strip_fadianji_catty_tics,
     strip_tone_parenthetical as _strip_tone_parenthetical,
 )
 # 主人 2026-08-15: callback ledger — 未完成事项生命周期 (open/done/dismiss),
@@ -2921,7 +2922,9 @@ _NSFW_SEARCH_REQUEST_RE = re.compile(r"\[\[CATTY_NSFW_SEARCH:\s*(.*?)\]\]", re.D
 _nsfw_search_cooldowns: dict[str, float] = {}
 
 
-_RESIDUAL_MARKER_KEEP = {"INLINE_IMAGE", "EMOJI_QUERY", "NO_REPLY", "REPLY_SPLIT"}
+_RESIDUAL_MARKER_KEEP = {
+    "INLINE_IMAGE", "EMOJI_QUERY", "NO_REPLY", "REPLY_SPLIT", "FD_MOOD", "CB",
+}
 
 
 # NSFW 路径回复 post-process: strip 掉 kaomoji 颜文字 (再次保险, 防 prompt 没顶住).
@@ -3076,6 +3079,13 @@ def _strip_tone_parenthetical_for_fadianji(text: str) -> str:
     return cleaned
 
 
+def _strip_catty_tics_for_fadianji(text: str) -> str:
+    cleaned = _strip_fadianji_catty_tics(text)
+    if cleaned != text:
+        logger.info(f"fadianji catty-tic strip: {text[:60]!r} -> {cleaned[:60]!r}")
+    return cleaned
+
+
 def _sanitize_residual_markers(text: str) -> str:
     """清掉所有 ``<<<CATTY_*>>>`` 和 ``[[CATTY_*]]`` 残留 marker,但保留发送链路/后续 stage 还要用的那几个。
 
@@ -3084,6 +3094,7 @@ def _sanitize_residual_markers(text: str) -> str:
     - EMOJI_QUERY: 下一步 ``_extract_emoji_query`` 提取
     - NO_REPLY: 下一步 ``_is_no_reply`` 检测
     - REPLY_SPLIT: 分段发送链路用
+    - FD_MOOD / CB: 在本函数之后由 dedicated extractor 提取并应用
     其它全清(包括过去的 WEB_SEARCH / NSFW_SEARCH / MEME / 未来可能加的新 tool marker)。
     """
     if not text:
@@ -3094,8 +3105,36 @@ def _sanitize_residual_markers(text: str) -> str:
     cleaned = _NSFW_SEARCH_REQUEST_RE.sub("", cleaned)
     cleaned = cleaned.strip()
     if NO_REPLY_MARKER in cleaned and cleaned != NO_REPLY_MARKER:
-        cleaned = cleaned.replace(NO_REPLY_MARKER, "").strip()
+        remainder = cleaned.replace(NO_REPLY_MARKER, "").strip()
+        visible_remainder = _strip_catty_markers(remainder, keep=set()).strip()
+        if visible_remainder:
+            cleaned = remainder
+        else:
+            cleaned = NO_REPLY_MARKER + (f"\n{remainder}" if remainder else "")
     cleaned = _sanitize_reply_text_for_output(cleaned)
+    return cleaned
+
+
+def _fadianji_reply_fallback(event: MessageEvent) -> str:
+    reply_context = _persona_reply_context_for_event(event)
+    return reply_context.render(reply_context.catalog.no_reply_reply_fallback)
+
+
+def _finalize_fadianji_reply(
+    event: MessageEvent,
+    text: str,
+    *,
+    fallback_on_empty: bool = True,
+) -> str:
+    if _persona_for_event(event).name != "fadianji":
+        return str(text or "")
+    cleaned = _sanitize_residual_markers(str(text or ""))
+    if _is_no_reply(cleaned):
+        return _fadianji_reply_fallback(event) if fallback_on_empty else cleaned
+    cleaned = _strip_tone_parenthetical_for_fadianji(cleaned)
+    cleaned = _strip_catty_tics_for_fadianji(cleaned)
+    if fallback_on_empty and not cleaned.strip():
+        return _fadianji_reply_fallback(event)
     return cleaned
 
 
@@ -6281,15 +6320,16 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_private_context register failed: {exc}")
     # 主人 2026-05-28 P5.2: adaptive_drift skeleton 移到 boundary 后, 不再占 cache prefix.
-    try:
-        from .author_note import build_adaptive_drift_skeleton as _build_drift_skeleton
-        _st_manager.register_static(
-            "catty_adaptive_drift_skeleton",
-            _build_drift_skeleton(),
-            order=146,  # 主人 2026-05-29 Round 19: 473→146 byte-stable skeleton 进 cache prefix
-        )
-    except Exception as _drift_sk_exc:  # noqa: BLE001
-        logger.debug(f"adaptive_drift_skeleton register failed: {_drift_sk_exc}")
+    if getattr(persona, "name", "catty") == "catty":
+        try:
+            from .author_note import build_adaptive_drift_skeleton as _build_drift_skeleton
+            _st_manager.register_static(
+                "catty_adaptive_drift_skeleton",
+                _build_drift_skeleton(),
+                order=146,  # 主人 2026-05-29 Round 19: 473→146 byte-stable skeleton 进 cache prefix
+            )
+        except Exception as _drift_sk_exc:  # noqa: BLE001
+            logger.debug(f"adaptive_drift_skeleton register failed: {_drift_sk_exc}")
 
     # 主人 2026-05-28 prompt 优化 C3b: PHI (post_history_instructions) 挪到 boundary 前 cache.
     # 之前注入位置在 history 之后 current user 之前 (ST 风 recency bias), 但 sweep 会捕获
@@ -8131,7 +8171,10 @@ def _soft_directed_reply_prompt(
 
 
 def _is_no_reply(reply: str) -> bool:
-    return reply.strip().strip(TRAILING_CHAT_PUNCTUATION) == NO_REPLY_MARKER
+    if not reply:
+        return False
+    normalized = _strip_catty_markers(str(reply), keep={"NO_REPLY"})
+    return normalized.strip().strip(TRAILING_CHAT_PUNCTUATION) == NO_REPLY_MARKER
 
 
 def _local_critic_enabled() -> bool:
@@ -9382,9 +9425,28 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
 
-    # 机机偶尔会把本应连发的纯中文短口语写成「在呢 咋了 想我了」。
-    # 普通空格在中文短聊里不是排版需求：严格限定为 2-4 个纯中文短块，直接按消息发送；
-    # 含英文、数字、代码、公式或长段落时保持原样，避免误拆技术回复。
+    # 机机场景语料用「 / 」标记原始连发气泡；只在短聊、带空白的独立斜杠形态下识别，
+    # URL、路径、公式里的普通 slash 不会命中。
+    if (
+        getattr(persona, "name", "catty") == "fadianji"
+        and re.search(r"\s+/\s+", reply)
+        and _looks_like_qq_short_chat(reply)
+    ):
+        slash_segments = [
+            segment.strip()
+            for segment in re.split(r"\s+/\s+", reply)
+            if segment.strip()
+        ]
+        if (
+            2 <= len(slash_segments) <= max_chunks + 2
+            and all(len(segment) <= 80 for segment in slash_segments)
+        ):
+            for index in range(len(slash_segments) - 1):
+                slash_segments[index] = slash_segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
+            return _cap_reply_chunks(slash_segments, max_chunks=max_chunks)
+
+    # 机机偶尔会把本应连发的中文短块写成普通空格。只在存在明确口语边界时拆；
+    # 普通分词句（「今天 下午 吃饭 了吗」）仍保持单条，避免把自然文本切碎。
     if (
         getattr(persona, "name", "catty") == "fadianji"
         and "\n" not in reply
@@ -9396,25 +9458,49 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
             if segment.strip()
         ]
         standalone_short_replies = frozenset({
-            "嗯", "哦", "啊", "好", "行", "在", "喂", "唉", "诶",
+            "嗯", "哦", "啊", "好", "行", "在", "喂", "唉", "诶", "咋", "啥",
             "我去", "我靠", "我超", "不是", "真的", "好的", "没事",
             "算了", "谢谢", "笑死", "不知道", "没看懂",
         })
-        sentence_final_particles = frozenset("吗呢吧啊呀哦啦呐嘛了喽咯呗耶哇诶嗷")
+        sentence_final_particles = frozenset("吗呢吧啊呀哦啦呐嘛了喽咯呗耶哇诶嗷没啥")
+        clause_openers = (
+            "但是", "不过", "其实", "然后", "所以", "而且", "结果",
+            "咋", "怎么", "为什么", "几个意思", "啥意思", "什么意思",
+        )
+        natural_phrase_followers = (
+            "这个", "那个", "这", "那", "上午", "中午", "下午", "晚上",
+            "明天", "今天", "昨天", "文件", "东西", "事情",
+        )
         spoken_segments = [
             segment.rstrip(TRAILING_CHAT_PUNCTUATION)
             for segment in spaced_segments
         ]
+
+        def _space_cut_is_boundary(index: int) -> bool:
+            left = spoken_segments[index]
+            right = spoken_segments[index + 1]
+            if not left or not right:
+                return False
+            if any(right.startswith(prefix) for prefix in natural_phrase_followers):
+                return False
+            if left in standalone_short_replies:
+                return True
+            if any(right.startswith(prefix) for prefix in clause_openers):
+                return True
+            return len(left) <= 2 and left[-1] in sentence_final_particles
+
+        boundary_decisions = [
+            _space_cut_is_boundary(index)
+            for index in range(len(spoken_segments) - 1)
+        ]
         if (
-            2 <= len(spaced_segments) <= max_chunks
-            and sum(len(segment) for segment in spoken_segments) <= 24
+            2 <= len(spaced_segments) <= max_chunks + 2
+            and sum(len(segment) for segment in spoken_segments) <= 60
+            and bool(boundary_decisions)
+            and all(boundary_decisions)
             and all(
-                1 <= len(segment) <= 6
+                1 <= len(segment) <= 18
                 and re.fullmatch(r"[\u3400-\u9fff]+", segment)
-                and (
-                    segment in standalone_short_replies
-                    or segment[-1] in sentence_final_particles
-                )
                 for segment in spoken_segments
             )
         ):
@@ -9511,6 +9597,7 @@ def _compose_reply_message(
     # 主人 2026-08-12: 机机人格出站剥除（小声）式语气/动作注解括号 (prompt 禁令管不住, 程序硬过滤)
     if _persona_for_event(event).name == "fadianji":
         text = _strip_tone_parenthetical_for_fadianji(text)
+        text = _strip_catty_tics_for_fadianji(text)
     message = Message()
     if quote:
         quote_segment = _reply_quote_segment(event)
@@ -12924,6 +13011,12 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
         else:
             return
 
+        if _cmd_persona.name == "fadianji":
+            caption = _finalize_fadianji_reply(event, caption)
+            caption = _strip_catty_markers(caption, keep=set()).strip()
+            if not caption:
+                caption = _fadianji_reply_fallback(event)
+
         _remember_bot_reply_for_event(event, caption)
 
         # 组装消息: 文本 caption + 像素卡片;图渲染失败就退化只发文本
@@ -14354,12 +14447,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
                 if _recent_user_texts:
                     try:
-                        _adaptive_note = build_adaptive_drift_note(
-                            _recent_user_texts, is_owner=_user_is_owner,
-                        )
-                        _ad_short = _short(getattr(_adaptive_note, "content", ""), 28)
-                        if _ad_short:
-                            _unified_hints.append(f"vibe:{_ad_short}")
+                        if _persona_for_event(event).name == "catty":
+                            _adaptive_note = build_adaptive_drift_note(
+                                _recent_user_texts, is_owner=_user_is_owner,
+                            )
+                            _ad_short = _short(getattr(_adaptive_note, "content", ""), 28)
+                            if _ad_short:
+                                _unified_hints.append(f"vibe:{_ad_short}")
                     except Exception as exc:  # noqa: BLE001
                         logger.debug(f"adaptive_drift failed: {exc}")
 
@@ -14858,12 +14952,20 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     f"Residual search marker stripped from final reply (had_image_segments={bool(nsfw_image_segments)})"
                 )
                 if not sanitized.strip():
-                    addr = _addr_user(event)
-                    sanitized = (
-                        f"哼～{addr}这种东西也想看喵！(脸红甩尾巴) 嗷呜～ฅฅ"
-                        if nsfw_image_segments
-                        else f"喵呜～猫猫这次没搜到合适的嗷呜，{addr}换个名字再戳人家嘛 (尾巴垂垂)"
-                    )
+                    reply_context = _persona_reply_context_for_event(event)
+                    if reply_context.persona.name == "fadianji":
+                        sanitized = (
+                            "图在这。"
+                            if nsfw_image_segments
+                            else "这次没搜到。换个名字再试。"
+                        )
+                    else:
+                        addr = _addr_user(event)
+                        sanitized = (
+                            f"哼～{addr}这种东西也想看喵！(脸红甩尾巴) 嗷呜～ฅฅ"
+                            if nsfw_image_segments
+                            else f"喵呜～猫猫这次没搜到合适的嗷呜，{addr}换个名字再戳人家嘛 (尾巴垂垂)"
+                        )
                 reply = sanitized
         except MCBusyError as exc:
             logger.info(f"MC busy gate refused local fallback: {exc}")
@@ -14892,6 +14994,20 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 placeholder_task.cancel()
 
         reply = _sanitize_reply_text_for_output(await _apply_local_critic(event, incoming, messages, reply))
+
+        # 控制 marker 先于 NO_REPLY/风格改写提取并应用，marker 不进入用户输出。
+        reply, _fd_mood_tag = _extract_fadianji_mood(reply)
+        if _fd_mood_tag and _persona_for_event(event).name == "fadianji" and bool(
+            getattr(config, "catty_fadianji_event_mood_enabled", True)
+        ):
+            _apply_fadianji_mood_marker(_fd_mood_tag)
+        reply, _cb_marker_payloads = _extract_callback_markers(reply)
+        for _cb_payload in _cb_marker_payloads:
+            try:
+                callback_ledger.apply_marker(history_key, _cb_payload)
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"callback marker apply failed (non-fatal): {type(exc).__name__}: {exc}")
+        reply, emoji_query = _extract_emoji_query(reply)
 
         if _is_no_reply(reply):
             # 主人 2026-05-29 P1b: 私聊**绝不**因 NO_REPLY 冻结历史。
@@ -14930,14 +15046,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 机机: 出站前先把（小声）式注解剥掉再进 history/训练样本, 防模型从自己历史里学回去
         if _persona_for_event(event).name == "fadianji":
             reply = _strip_tone_parenthetical_for_fadianji(reply)
-        reply, emoji_query = _extract_emoji_query(reply)
-        # 主人 2026-08-13 (二轮): 机机情绪自报 marker — 任何人格都先剥掉防泄漏,
-        # 只有 fadianji + 开关启用时才喂给事件状态机。
-        reply, _fd_mood_tag = _extract_fadianji_mood(reply)
-        if _fd_mood_tag and _persona_for_event(event).name == "fadianji" and bool(
-            getattr(config, "catty_fadianji_event_mood_enabled", True)
-        ):
-            _apply_fadianji_mood_marker(_fd_mood_tag)
         # 主人 2026-08-16: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写。
         # 正常短句零开销, 只有漂移回复付一次 audit 小调用; 任何失败都原样放行。
         if _persona_for_event(event).name == "fadianji" and bool(
@@ -14950,14 +15058,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"fadianji style critic failed (non-fatal): {type(exc).__name__}: {exc}")
-        # 主人 2026-08-15: callback marker — 主 AI 自报 done/open/dismiss 驱动 ledger;
-        # 任何人格都先剥掉防泄漏, 再按 scope 应用。
-        reply, _cb_marker_payloads = _extract_callback_markers(reply)
-        for _cb_payload in _cb_marker_payloads:
-            try:
-                callback_ledger.apply_marker(history_key, _cb_payload)
-            except Exception as exc:  # noqa: BLE001
-                logger.debug(f"callback marker apply failed (non-fatal): {type(exc).__name__}: {exc}")
+        if _persona_for_event(event).name == "fadianji":
+            reply = _finalize_fadianji_reply(event, reply)
+            reply, _post_critic_emoji_query = _extract_emoji_query(reply)
+            if _post_critic_emoji_query:
+                emoji_query = _post_critic_emoji_query
         # 工具遥测: 回填"最终回复是否采用了工具结果" (实义词重叠粗判)
         if _turn_tool_result_texts:
             try:
@@ -15280,7 +15385,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _mark_consumed_reply_source_if_sent(event, state)
             await matcher.finish(_compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending))
         _mark_consumed_reply_source_if_sent(event, state)
-        final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
+        if chunks:
+            final_message = chunks[-1]
+        else:
+            _empty_reply_context = _persona_reply_context_for_event(event)
+            final_message = _empty_reply_context.render(
+                _empty_reply_context.catalog.no_reply_reply_fallback,
+            )
         _remember_bot_reply_for_event(event, _chunk_to_history(final_message) if chunks else final_message, open_continuation=not bool(state.get("catty_session_closing")), fresh_mention=bool(incoming.mentioned))
         # S6 (主人 2026-05-29): 蒸馏已上移到 openai_client 回复入口统一处理
         # (set_current_distill_context 在 handle_chat 入口设好上下文, chat_completion /

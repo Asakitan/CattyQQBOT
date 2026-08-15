@@ -305,12 +305,13 @@ async def _build_full_real_flow_messages(event: Any, key: str, incoming: Any) ->
 
         if _recent_user_texts:
             try:
-                _adaptive_note = build_adaptive_drift_note(
-                    _recent_user_texts, is_owner=_user_is_owner,
-                )
-                _ad_short = _short(getattr(_adaptive_note, "content", ""), 28)
-                if _ad_short:
-                    _unified_hints.append(f"vibe:{_ad_short}")
+                if _persona_for_event(event).name == "catty":
+                    _adaptive_note = build_adaptive_drift_note(
+                        _recent_user_texts, is_owner=_user_is_owner,
+                    )
+                    _ad_short = _short(getattr(_adaptive_note, "content", ""), 28)
+                    if _ad_short:
+                        _unified_hints.append(f"vibe:{_ad_short}")
             except Exception:
                 pass
             try:
@@ -689,6 +690,20 @@ async def _sim_chat_unlocked(
                 reset_current_logical_turn(_logical_turn_token)
             if _scope_key_token is not None:
                 reset_current_scope_key(_scope_key_token)
+
+    if live:
+        from . import (
+            _finalize_fadianji_reply,
+            _persona_for_event,
+            _strip_catty_markers,
+        )
+        if _persona_for_event(event).name == "fadianji":
+            if reply == "[AI returned empty]":
+                reply = ""
+            reply = _finalize_fadianji_reply(event, reply)
+            reply = _strip_catty_markers(reply, keep=set()).strip()
+            if not reply:
+                reply = _finalize_fadianji_reply(event, "")
 
     # 主人 2026-05-29: persist 模式 — 复刻 handle_chat 的 _append_history (主链路同一函数),
     # 让多轮 sim 的 history 真实增长 + 到阈值 trim, 测真实 cache 命中(不再用固定 history).
