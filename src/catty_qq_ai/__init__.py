@@ -7967,6 +7967,7 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "频率按全量实录约束：约 73% 一簇一条、18% 两条、3-4 条 7%——别为了显得像 QQ 硬拆短句。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
             f"拆块两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
+            "普通空格不算分块：像『在呢 咋了 想我了』这种连续短口语，要直接拆成三条，别挤在一个气泡里。"
             "被拆的前几块结尾少用句号/感叹号，自然些。"
             f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
             "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
@@ -9325,6 +9326,44 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
             chunks[index] = chunks[index].rstrip(TRAILING_CHAT_PUNCTUATION)
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
+
+    # 机机偶尔会把本应连发的纯中文短口语写成「在呢 咋了 想我了」。
+    # 普通空格在中文短聊里不是排版需求：严格限定为 2-4 个纯中文短块，直接按消息发送；
+    # 含英文、数字、代码、公式或长段落时保持原样，避免误拆技术回复。
+    if (
+        getattr(persona, "name", "catty") == "fadianji"
+        and "\n" not in reply
+        and _looks_like_qq_short_chat(reply)
+    ):
+        spaced_segments = [
+            segment.strip()
+            for segment in re.split(r"[ \t\u3000]+", reply.strip())
+            if segment.strip()
+        ]
+        standalone_short_replies = frozenset({
+            "嗯", "哦", "啊", "好", "行", "在", "喂", "唉", "诶",
+            "我去", "我靠", "我超", "不是", "真的", "好的", "没事",
+            "算了", "谢谢", "笑死", "不知道", "没看懂",
+        })
+        sentence_final_particles = frozenset("吗呢吧啊呀哦啦呐嘛了喽咯呗耶哇诶嗷")
+        spoken_segments = [
+            segment.rstrip(TRAILING_CHAT_PUNCTUATION)
+            for segment in spaced_segments
+        ]
+        if (
+            2 <= len(spaced_segments) <= max_chunks
+            and sum(len(segment) for segment in spoken_segments) <= 24
+            and all(
+                1 <= len(segment) <= 6
+                and re.fullmatch(r"[\u3400-\u9fff]+", segment)
+                and (
+                    segment in standalone_short_replies
+                    or segment[-1] in sentence_final_particles
+                )
+                for segment in spoken_segments
+            )
+        ):
+            return _cap_reply_chunks(spoken_segments, max_chunks=max_chunks)
 
     # 路径 1.5 已于 2026-08-10 五轮移除: 机机人格是「分块式连续表达」(U=C₁⊕…⊕Cₖ),
     # 换行分块是她的原生节奏, 不再合并回单条 — 与 catty 同走路径 2 的短聊换行拆分。
