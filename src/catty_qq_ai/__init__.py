@@ -6320,7 +6320,7 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_private_context register failed: {exc}")
     # 主人 2026-05-28 P5.2: adaptive_drift skeleton 移到 boundary 后, 不再占 cache prefix.
-    if getattr(persona, "name", "catty") == "catty":
+    if _persona_for_event(event).name == "catty":
         try:
             from .author_note import build_adaptive_drift_skeleton as _build_drift_skeleton
             _st_manager.register_static(
