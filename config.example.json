@@ -264,6 +264,30 @@
     "turtle_soup": {
         "cooldown_seconds": 300
     },
+    "qzone": {
+        "_note": "QQ空间动态点赞+机机语料。需 NapCat 侧装 onebot-qzone 桥接插件(GitHub: Gu-Heping/onebot-qzone)才有事件上报。总开关默认关。",
+        "enabled": false,
+        "bridge_auto_start": true,
+        "bridge_workdir": "tools/onebot-qzone",
+        "bridge_node_executable": "node",
+        "bridge_log_path": "logs/qzone_bridge.log",
+        "bridge_base_url": "http://127.0.0.1:5700",
+        "bridge_access_token": "",
+        "poll_interval_seconds": 120.0,
+        "poll_num": 20,
+        "seed_existing": true,
+        "request_timeout_seconds": 30.0,
+        "feed_store_path": "data/qzone_feeds.json",
+        "feed_max_items": 200,
+        "feed_ttl_days": 7,
+        "auto_like_enabled": false,
+        "auto_like_delay_seconds": 90.0,
+        "auto_like_uids": [],
+        "like_action": "send_like",
+        "harness_max_items": 5,
+        "corpus_enabled": true,
+        "corpus_min_likes": 2
+    },
     "chat": {
         "system_prompt": "你是一个接入 QQ 群和私聊的中文 AI 助手。回答要简洁、自然、可靠，适合 QQ 聊天。可以少量自然使用猫系动作或颜文字，但不要刷屏。",
         "trigger_prefixes": [

@@ -1,15 +1,21 @@
 from __future__ import annotations
 
+import json
 import os
+import shutil
 import subprocess
 import sys
 import tarfile
+import threading
 import time
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
-from urllib.request import urlretrieve
+from urllib.request import urlopen, urlretrieve
 import zipfile
+
+
+_QZONE_BRIDGE_START_LOCK = threading.Lock()
 
 
 def _as_bool(value: Any, default: bool = False) -> bool:
@@ -76,6 +82,15 @@ def start_integrated_processes(config: dict[str, Any], config_dir: Path) -> None
     local_training = config.get("local_training", {})
     if isinstance(local_training, dict) and _as_bool(local_training.get("enabled"), default=False):
         _start_local_training(local_training, config_dir)
+
+    qzone = config.get("qzone", {})
+    if isinstance(qzone, dict) and _as_bool(qzone.get("enabled"), default=False) and _as_bool(
+        qzone.get("bridge_auto_start"), default=True
+    ):
+        try:
+            _start_qzone_bridge(qzone, config_dir)
+        except Exception as exc:
+            print(f"Failed to start Qzone bridge: {exc}")
 
     qq = config.get("qq", {})
     if not isinstance(qq, dict):
@@ -596,6 +611,64 @@ def _start_training_dashboard(local_training: dict[str, Any], config_dir: Path) 
     )
     print("Started local training progress window")
 
+
+def _qzone_bridge_is_healthy(base_url: str, timeout: float = 1.5) -> bool:
+    status_url = base_url.rstrip("/") + "/status"
+    try:
+        with urlopen(status_url, timeout=timeout) as response:
+            if response.status >= 500:
+                return False
+            payload = json.loads(response.read())
+            return payload.get("ok") is True
+    except Exception:
+        return False
+
+
+def _start_qzone_bridge(qzone: dict[str, Any], config_dir: Path) -> None:
+    with _QZONE_BRIDGE_START_LOCK:
+        base_url = str(qzone.get("bridge_base_url") or "http://127.0.0.1:5700").strip()
+        if _qzone_bridge_is_healthy(base_url):
+            print(f"Qzone bridge already running at {base_url}; reusing existing process.")
+            return
+
+        workdir = _resolve_path(qzone.get("bridge_workdir", "tools/onebot-qzone"), config_dir)
+        entry = workdir / "dist" / "main.js"
+        if not entry.exists():
+            print(f"Qzone bridge entry not found: {entry}")
+            return
+
+        executable_value = str(qzone.get("bridge_node_executable") or "node").strip()
+        executable_path = Path(executable_value).expanduser()
+        if executable_path.is_absolute():
+            if not executable_path.exists():
+                print(f"Node executable not found: {executable_path}")
+                return
+            node_executable = str(executable_path)
+        else:
+            node_executable = shutil.which(executable_value)
+            if not node_executable:
+                print(f"Node executable not found: {executable_value}")
+                return
+
+        log_path = _resolve_path(qzone.get("bridge_log_path", "logs/qzone_bridge.log"), config_dir)
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        log_file = log_path.open("ab")
+        creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
+        proc = subprocess.Popen(
+            [node_executable, str(entry)],
+            cwd=str(workdir.resolve()),
+            stdout=log_file,
+            stderr=subprocess.STDOUT,
+            env=os.environ.copy(),
+            creationflags=creationflags,
+        )
+        for attempt in range(30):
+            if _qzone_bridge_is_healthy(base_url):
+                break
+            if proc.poll() is not None or attempt == 29:
+                break
+            time.sleep(0.1)
+        print(f"Started Qzone bridge (pid={proc.pid}); log: {log_path}")
 
 def _start_napcat(qq: dict[str, Any], config_dir: Path) -> None:
     workdir = _resolve_path(qq.get("napcat_workdir", "tools/napcat-onekey/bootmain"), config_dir)

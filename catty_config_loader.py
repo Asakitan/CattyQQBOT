@@ -287,6 +287,30 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "turtle_soup": {
         "cooldown_seconds": 300,
     },
+    # QQ空间动态点赞 + 机机语料 (2026-08-15). 需 NapCat 侧装 onebot-qzone 桥接插件.
+    "qzone": {
+        "enabled": False,
+        "bridge_auto_start": True,
+        "bridge_workdir": "tools/onebot-qzone",
+        "bridge_node_executable": "node",
+        "bridge_log_path": "logs/qzone_bridge.log",
+        "bridge_base_url": "http://127.0.0.1:5700",
+        "bridge_access_token": "",
+        "poll_interval_seconds": 120.0,
+        "poll_num": 20,
+        "seed_existing": True,
+        "request_timeout_seconds": 30.0,
+        "feed_store_path": "data/qzone_feeds.json",
+        "feed_max_items": 200,
+        "feed_ttl_days": 7,
+        "auto_like_enabled": False,
+        "auto_like_delay_seconds": 90.0,
+        "auto_like_uids": [],
+        "like_action": "send_like",
+        "harness_max_items": 5,
+        "corpus_enabled": True,
+        "corpus_min_likes": 2,
+    },
     "chat": {
         "system_prompt": "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。",
         "trigger_prefixes": ["ai", "AI", "猫猫"],
@@ -660,6 +684,26 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     # (cpu_engine.L3 + transformers 走的下载路径) 走镜像, 修 L3 启动 hf.co 超时.
     # 复用 nlu_hf_endpoint 字段, 不引入新配置项.
     _set_env("HF_ENDPOINT", _nlu("nlu_hf_endpoint"))
+
+    # ── QQ空间动态点赞 + 机机语料 (2026-08-15) ──────────────────────
+    qzone = _section(data, "qzone")
+    _set_env("CATTY_QZONE_ENABLED", qzone.get("enabled"))
+    _set_env("CATTY_QZONE_BRIDGE_BASE_URL", qzone.get("bridge_base_url"))
+    _set_env("CATTY_QZONE_BRIDGE_ACCESS_TOKEN", qzone.get("bridge_access_token"))
+    _set_env("CATTY_QZONE_POLL_INTERVAL_SECONDS", qzone.get("poll_interval_seconds"))
+    _set_env("CATTY_QZONE_POLL_NUM", qzone.get("poll_num"))
+    _set_env("CATTY_QZONE_SEED_EXISTING", qzone.get("seed_existing"))
+    _set_env("CATTY_QZONE_REQUEST_TIMEOUT_SECONDS", qzone.get("request_timeout_seconds"))
+    _set_env("CATTY_QZONE_FEED_STORE_PATH", qzone.get("feed_store_path"))
+    _set_env("CATTY_QZONE_FEED_MAX_ITEMS", qzone.get("feed_max_items"))
+    _set_env("CATTY_QZONE_FEED_TTL_DAYS", qzone.get("feed_ttl_days"))
+    _set_env("CATTY_QZONE_AUTO_LIKE_ENABLED", qzone.get("auto_like_enabled"))
+    _set_env("CATTY_QZONE_AUTO_LIKE_DELAY_SECONDS", qzone.get("auto_like_delay_seconds"))
+    _set_env("CATTY_QZONE_AUTO_LIKE_UIDS", qzone.get("auto_like_uids"), json_value=True)
+    _set_env("CATTY_QZONE_LIKE_ACTION", qzone.get("like_action"))
+    _set_env("CATTY_QZONE_HARNESS_MAX_ITEMS", qzone.get("harness_max_items"))
+    _set_env("CATTY_QZONE_CORPUS_ENABLED", qzone.get("corpus_enabled"))
+    _set_env("CATTY_QZONE_CORPUS_MIN_LIKES", qzone.get("corpus_min_likes"))
 
     local_critic = _section(data, "local_critic")
     local_critic_extra_body = local_critic.get("extra_body")

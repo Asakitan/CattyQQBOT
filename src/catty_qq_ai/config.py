@@ -638,6 +638,24 @@ class Config(BaseModel):
     catty_fadianji_state_min_minutes: int = 60
     catty_fadianji_state_max_minutes: int = 180
     catty_fadianji_event_mood_enabled: bool = True  # 启用事件驱动情绪
+    # QQ空间动态点赞 + 机机语料 (2026-08-15)
+    catty_qzone_enabled: bool = False
+    catty_qzone_feed_store_path: str = "data/qzone_feeds.json"
+    catty_qzone_feed_max_items: int = 200
+    catty_qzone_feed_ttl_days: int = 7
+    catty_qzone_auto_like_enabled: bool = False
+    catty_qzone_auto_like_delay_seconds: float = 90.0
+    catty_qzone_auto_like_uids: list[str] = Field(default_factory=list)
+    catty_qzone_like_action: str = "send_like"
+    catty_qzone_harness_max_items: int = 5
+    catty_qzone_corpus_enabled: bool = True
+    catty_qzone_corpus_min_likes: int = 2
+    catty_qzone_bridge_base_url: str = "http://127.0.0.1:5700"
+    catty_qzone_bridge_access_token: str = ""
+    catty_qzone_poll_interval_seconds: float = 120.0
+    catty_qzone_poll_num: int = 20
+    catty_qzone_seed_existing: bool = True
+    catty_qzone_request_timeout_seconds: float = 30.0
     # 主人 2026-08-16: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写
     catty_style_critic_enabled: bool = True
     catty_style_critic_min_reply_chars: int = 6  # 短于该字数的回复免检
