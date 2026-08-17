@@ -168,7 +168,14 @@ if loaded_config is not None:
 
     @driver.on_startup
     async def _start_integrations() -> None:
-        start_integrated_processes(loaded_config.data, loaded_config.path.parent)
+        # 2026-08-18: start_integrated_processes is fully synchronous; the qzone
+        # bridge branch polls health 30x1.6s (~50s) while it can't log in. Awaiting
+        # that on_startup delayed uvicorn's listen -> NapCat kept ECONNREFUSED and
+        # the bot looked frozen after every restart. Fire-and-forget on a thread:
+        # server ready in ms, integrations keep starting in the background.
+        asyncio.create_task(
+            asyncio.to_thread(start_integrated_processes, loaded_config.data, loaded_config.path.parent)
+        )
 
 
 if __name__ == "__main__":
