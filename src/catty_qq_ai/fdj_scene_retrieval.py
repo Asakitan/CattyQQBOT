@@ -1,7 +1,8 @@
-"""机机场景检索：真实聊天对母本、类别元数据、scope 隔离与可选本地语义重排。"""
+"""机机场景检索：真实聊天母本、scope 隔离、纯规则 delta 与可选显式语义重排。"""
 from __future__ import annotations
 
-import math
+import hashlib
+import json
 import re
 from collections import OrderedDict
 from dataclasses import dataclass
@@ -16,6 +17,10 @@ _WORD_RE = re.compile(r"[\u4e00-\u9fff]{2,4}")
 _NAME_PAT = re.compile(r"机机|小机|发电机|不稳定发电机|阿机|牢机|机老师|机宝|机神|机皇|机爷|本体")
 _PRIVATE_SCOPE = "private:3670608232"
 _CACHE_LIMIT = 128
+_MIN_LEXICAL_SCORE = 0.55
+_DELTA_SCHEMA_VERSION = 1
+_DELTA_ROOT = Path(__file__).resolve().parent / "data" / "fdj_scene_delta"
+_DELTA_MANIFEST = _DELTA_ROOT / "manifest.json"
 
 
 @dataclass(frozen=True, slots=True)
@@ -67,6 +72,8 @@ class SceneMatch:
 SemanticReranker = Callable[[str, Sequence[SceneRecord]], Mapping[int, float] | Sequence[float] | None]
 _SEMANTIC_RERANKER: SemanticReranker | None = None
 _MATCH_CACHE: OrderedDict[tuple[Any, ...], tuple[SceneMatch, ...]] = OrderedDict()
+_DELTA_SIGNATURE: tuple[Any, ...] | None = None
+_DELTA_ENTRIES: tuple[dict[str, Any], ...] = ()
 
 
 def _bigrams(text: str) -> frozenset[str]:
@@ -86,6 +93,8 @@ def _normalise_heading(value: str) -> str:
 
 
 def _record(trigger: str, reply: str, *, category: str, source: str, source_scope: str) -> SceneRecord:
+    trigger = str(trigger or "").strip()
+    reply = str(reply or "").strip()
     return SceneRecord(trigger, reply, category or "未分类", source, source_scope, _bigrams(trigger), frozenset(_WORD_RE.findall(trigger)))
 
 
@@ -112,12 +121,133 @@ def parse_scene_block(block: str, *, source: str = "group", source_scope: str = 
     return records
 
 
-def _extract_pairs_from_block(block: str) -> list[tuple[str, str]]:
-    return [(item.trigger, item.reply) for item in parse_scene_block(block)]
+def _stable_uid(record: SceneRecord) -> str:
+    raw = "\x1f".join((record.source, record.source_scope, record.category, record.trigger, record.reply))
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-@lru_cache(maxsize=1)
-def _cached_records() -> tuple[SceneRecord, ...]:
+def _valid_delta_scope(value: Any) -> str | None:
+    scope = str(value or "").strip().lower()
+    if scope == "group":
+        return scope
+    if re.fullmatch(r"(?:group|private):[0-9A-Za-z_-]+", scope):
+        return scope
+    return None
+
+
+def _delta_signature() -> tuple[Any, ...]:
+    try:
+        manifest_stat = _DELTA_MANIFEST.stat()
+    except OSError:
+        return (("manifest-missing",),)
+    files: list[tuple[str, int, int]] = []
+    try:
+        data = json.loads(_DELTA_MANIFEST.read_text(encoding="utf-8-sig"))
+        active_files = data.get("active_files", []) if isinstance(data, Mapping) else []
+        if isinstance(active_files, list):
+            for item in active_files:
+                relative = item.get("path") if isinstance(item, Mapping) else item
+                if not isinstance(relative, str):
+                    continue
+                path = (_DELTA_ROOT / relative).resolve()
+                try:
+                    path.relative_to(_DELTA_ROOT.resolve())
+                    stat = path.stat()
+                except (OSError, ValueError):
+                    files.append((relative, -1, -1))
+                else:
+                    files.append((relative, stat.st_mtime_ns, stat.st_size))
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        files.append(("manifest-invalid", -1, -1))
+    return ((manifest_stat.st_mtime_ns, manifest_stat.st_size), tuple(files))
+
+
+def _read_delta_entries() -> tuple[dict[str, Any], ...] | None:
+    try:
+        manifest = json.loads(_DELTA_MANIFEST.read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return None
+    if not isinstance(manifest, Mapping) or manifest.get("schema_version") != _DELTA_SCHEMA_VERSION:
+        return None
+    active_files = manifest.get("active_files")
+    if not isinstance(active_files, list):
+        return None
+    entries: list[dict[str, Any]] = []
+    root = _DELTA_ROOT.resolve()
+    for item in active_files:
+        relative = item.get("path") if isinstance(item, Mapping) else item
+        if not isinstance(relative, str) or not relative or Path(relative).is_absolute():
+            return None
+        path = (root / relative).resolve()
+        try:
+            path.relative_to(root)
+        except ValueError:
+            return None
+        try:
+            with path.open("r", encoding="utf-8") as handle:
+                for line in handle:
+                    if not line.strip():
+                        continue
+                    try:
+                        value = json.loads(line)
+                    except (ValueError, TypeError, json.JSONDecodeError):
+                        continue
+                    if not isinstance(value, Mapping) or value.get("status") != "approved":
+                        continue
+                    uid = str(value.get("record_id") or value.get("uid") or "").strip()
+                    op = str(value.get("op") or "").strip().lower()
+                    if not uid or op not in {"upsert", "delete"}:
+                        continue
+                    if op == "delete":
+                        entries.append({"uid": uid, "op": op})
+                        continue
+                    trigger = str(
+                        value.get("query_text")
+                        or value.get("trigger")
+                        or value.get("primary_trigger")
+                        or ""
+                    ).strip()
+                    reply = str(value.get("reply") or "").strip()
+                    category = str(value.get("category") or "未分类").strip()[:80]
+                    source_scope = _valid_delta_scope(value.get("source_scope", value.get("scope")))
+                    if not trigger or not reply or not source_scope:
+                        continue
+                    entries.append({
+                        "uid": uid,
+                        "op": op,
+                        "trigger": trigger[:320],
+                        "reply": reply[:320],
+                        "category": category or "未分类",
+                        "source_scope": source_scope,
+                        "source": f"fdj_delta:{relative}",
+                    })
+        except OSError:
+            return None
+    return tuple(entries)
+
+
+def _refresh_delta_cache(*, force: bool = False) -> None:
+    global _DELTA_SIGNATURE, _DELTA_ENTRIES
+    signature = _delta_signature()
+    if not force and signature == _DELTA_SIGNATURE:
+        return
+    entries = _read_delta_entries()
+    if entries is None:
+        if _DELTA_SIGNATURE is not None:
+            return
+        entries = ()
+    _DELTA_SIGNATURE = signature
+    _DELTA_ENTRIES = entries
+    _cached_records.cache_clear()
+    _cached_pairs.cache_clear()
+    _MATCH_CACHE.clear()
+
+
+def refresh_scene_delta() -> None:
+    _refresh_delta_cache(force=True)
+
+
+def _base_records() -> list[tuple[str, SceneRecord]]:
     import importlib.util
 
     scenes_path = Path(__file__).resolve().parent / "personas" / "fadianji_scenes.py"
@@ -135,7 +265,30 @@ def _cached_records() -> tuple[SceneRecord, ...]:
         ("今天好难过", "怎么了"), ("对不起刚才说重了", "没事"),
         ("config.json 报错说路径找不到", "启动目录不对, 先看配置路径, 不行把报错丢来"),
     ))
-    return tuple(records)
+    return [(_stable_uid(record), record) for record in records]
+
+
+def _delta_applied_records() -> tuple[SceneRecord, ...]:
+    by_uid = dict(_base_records())
+    order = list(by_uid)
+    for entry in _DELTA_ENTRIES:
+        uid = entry["uid"]
+        if entry["op"] == "delete":
+            by_uid.pop(uid, None)
+            if uid in order:
+                order.remove(uid)
+            continue
+        record = _record(entry["trigger"], entry["reply"], category=entry["category"], source=entry["source"], source_scope=entry["source_scope"])
+        if uid not in by_uid:
+            order.append(uid)
+        by_uid[uid] = record
+    return tuple(by_uid[uid] for uid in order if uid in by_uid)
+
+
+@lru_cache(maxsize=1)
+def _cached_records() -> tuple[SceneRecord, ...]:
+    _refresh_delta_cache()
+    return _delta_applied_records()
 
 
 @lru_cache(maxsize=1)
@@ -169,9 +322,14 @@ def _scope_key(scope_key: str) -> str:
 
 
 def _allowed(record: SceneRecord, scope_key: str, is_private: bool) -> bool:
-    if not record.private:
+    source_scope = record.source_scope.lower()
+    if source_scope == "group":
         return True
-    return (is_private or scope_key.startswith("private:")) and scope_key == _PRIVATE_SCOPE
+    if source_scope.startswith("private:"):
+        return (is_private or scope_key.startswith("private:")) and scope_key == source_scope
+    if source_scope.startswith("group:"):
+        return not is_private and scope_key == source_scope
+    return False
 
 
 def set_scene_semantic_reranker(reranker: SemanticReranker | None) -> None:
@@ -182,62 +340,55 @@ def set_scene_semantic_reranker(reranker: SemanticReranker | None) -> None:
 
 def clear_retrieval_cache() -> None:
     _MATCH_CACHE.clear()
-    _local_embedding_vector.cache_clear()
-
-
-@lru_cache(maxsize=256)
-def _local_embedding_vector(text: str) -> tuple[float, ...] | None:
-    try:
-        try:
-            from .nlu.text2vec_engine import embed_sync_batch
-        except ImportError:
-            from catty_qq_ai.nlu.text2vec_engine import embed_sync_batch
-        values = embed_sync_batch([text])
-        if values is None or len(values) == 0:
-            return None
-        return tuple(float(value) for value in values[0])
-    except Exception:
-        return None
-
-
-def _cosine(left: Sequence[float], right: Sequence[float]) -> float:
-    if not left or not right or len(left) != len(right):
-        return 0.0
-    dot = sum(a * b for a, b in zip(left, right))
-    left_norm = math.sqrt(sum(a * a for a in left))
-    right_norm = math.sqrt(sum(b * b for b in right))
-    return max(0.0, min(1.0, dot / (left_norm * right_norm))) if left_norm and right_norm else 0.0
+    _cached_records.cache_clear()
+    _cached_pairs.cache_clear()
 
 
 def _semantic_scores(query: str, candidates: Sequence[SceneRecord]) -> dict[int, float]:
+    if _SEMANTIC_RERANKER is None:
+        return {}
     try:
-        if _SEMANTIC_RERANKER is not None:
-            result = _SEMANTIC_RERANKER(query, candidates)
-            if result is None:
-                return {}
-            return ({int(index): float(score) for index, score in result.items()} if isinstance(result, Mapping) else {index: float(score) for index, score in enumerate(result)})
-        try:
-            from .nlu.text2vec_engine import embed_sync_batch
-        except ImportError:
-            from catty_qq_ai.nlu.text2vec_engine import embed_sync_batch
-        values = embed_sync_batch([query, *(record.trigger for record in candidates)])
-        if values is None or len(values) != len(candidates) + 1:
+        result = _SEMANTIC_RERANKER(query, candidates)
+        if result is None:
             return {}
-        query_vector = tuple(float(value) for value in values[0])
-        return {
-            index: _cosine(query_vector, tuple(float(value) for value in values[index + 1]))
-            for index in range(len(candidates))
-        }
+        if isinstance(result, Mapping):
+            return {int(index): float(score) for index, score in result.items()}
+        return {index: float(score) for index, score in enumerate(result)}
     except Exception:
         return {}
 
 
-def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private: bool = False, category: str = "", semantic: bool = True) -> list[SceneMatch]:
+def _source_priority(source: str) -> int:
+    if source.startswith("fadianji_seed"):
+        return 2
+    if source.startswith("fdj_delta:"):
+        return 1
+    return 0
+
+
+def _select_diverse(matches: Sequence[SceneMatch], k: int) -> list[SceneMatch]:
+    selected: list[SceneMatch] = []
+    seen_categories: set[str] = set()
+    for diverse_only in (True, False):
+        for item in matches:
+            if item in selected:
+                continue
+            if diverse_only and item.category in seen_categories:
+                continue
+            selected.append(item)
+            seen_categories.add(item.category)
+            if len(selected) >= k:
+                return selected
+    return selected
+
+
+def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private: bool = False, category: str = "", semantic: bool = False) -> list[SceneMatch]:
+    _refresh_delta_cache()
     query = _strip_names(str(text or "").strip())
     if not query or k <= 0:
         return []
     normalized_scope = _scope_key(scope_key)
-    key = (query, int(k), normalized_scope, bool(is_private), str(category or ""), bool(semantic))
+    key = (query, int(k), normalized_scope, bool(is_private), str(category or ""), bool(semantic), _DELTA_SIGNATURE)
     cached = _MATCH_CACHE.get(key)
     if cached is not None:
         _MATCH_CACHE.move_to_end(key)
@@ -257,20 +408,24 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
         if word_hit == 0 and jaccard < 0.25 and category_hit <= 0:
             continue
         scope_bonus = 0.18 if record.private and normalized_scope == _PRIVATE_SCOPE else 0.0
-        lexical.append((lexical_score + scope_bonus, lexical_score, record, scope_bonus))
-    lexical.sort(key=lambda item: (-item[0], -item[1], item[2].source, item[2].category, item[2].trigger, item[2].reply))
+        total = lexical_score + scope_bonus
+        if total < _MIN_LEXICAL_SCORE:
+            continue
+        lexical.append((total, lexical_score, record, scope_bonus))
+    lexical.sort(key=lambda item: (-item[0], -item[1], _source_priority(item[2].source), item[2].source, item[2].category, item[2].trigger, item[2].reply))
     candidates = [item[2] for item in lexical[: max(k * 8, 32)]]
     semantic_scores = _semantic_scores(query, candidates) if semantic and candidates else {}
     best: dict[str, SceneMatch] = {}
+    lexical_by_identity = {id(item[2]): item for item in lexical}
     for index, record in enumerate(candidates):
-        lexical_item = next(item for item in lexical if item[2] is record)
-        total, lexical_score, _, scope_bonus = lexical_item
+        total, lexical_score, _, scope_bonus = lexical_by_identity[id(record)]
         semantic_score = max(0.0, min(1.0, semantic_scores.get(index, 0.0)))
         match = SceneMatch(record.trigger, record.reply, total + semantic_score * 1.5, record.category, record.source, record.source_scope, lexical_score, semantic_score, scope_bonus)
         old = best.get(record.reply)
-        if old is None or (match.score, match.lexical_score, match.trigger) > (old.score, old.lexical_score, old.trigger):
+        if old is None or (match.score, match.lexical_score, -_source_priority(match.source), match.trigger) > (old.score, old.lexical_score, -_source_priority(old.source), old.trigger):
             best[record.reply] = match
-    result = sorted(best.values(), key=lambda item: (-item.score, -item.lexical_score, -item.semantic_score, item.source, item.category, item.trigger, item.reply))[:k]
+    ranked = sorted(best.values(), key=lambda item: (-item.score, -item.lexical_score, -item.semantic_score, _source_priority(item.source), item.source, item.category, item.trigger, item.reply))
+    result = _select_diverse(ranked, int(k))
     packed = tuple(result)
     _MATCH_CACHE[key] = packed
     _MATCH_CACHE.move_to_end(key)
@@ -282,17 +437,28 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
 retrieve_scene_matches = match_scene_pairs
 
 
-def top_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private: bool = False, category: str = "") -> list[tuple[str, str, float]]:
-    return [(item.trigger, item.reply, item.score) for item in match_scene_pairs(text, k=k, scope_key=scope_key, is_private=is_private, category=category)]
+def top_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private: bool = False, category: str = "", semantic: bool = False) -> list[tuple[str, str, float]]:
+    return [(item.trigger, item.reply, item.score) for item in match_scene_pairs(text, k=k, scope_key=scope_key, is_private=is_private, category=category, semantic=semantic)]
 
 
-def build_scene_reference_block(text: str, k: int = 5, is_private: bool = False, *, scope_key: str = "", category: str = "") -> str:
-    matches = match_scene_pairs(text, k=k, scope_key=scope_key, is_private=is_private, category=category)
+def build_scene_reference_block(text: str, k: int = 5, is_private: bool = False, *, scope_key: str = "", category: str = "", semantic: bool = False) -> str:
+    matches = match_scene_pairs(text, k=k, scope_key=scope_key, is_private=is_private, category=category, semantic=semantic)
     if not matches:
         return ""
-    lines = ["【当前消息最像的机机真实聊天记录】(只参考她的口吻和反应方式, 不照抄原文)"]
-    lines.extend(f"历史: {item.trigger} → 机机: {item.reply}" for item in matches)
+    lines = ["【STYLE_EXAMPLE·机机真实聊天母本】只参考口吻、长度和反应方式，不照抄原文"]
+    lines.extend(f"历史: {item.trigger} → 机机: {item.reply}（分类={item.category}）" for item in matches)
     return "\n".join(lines)
 
 
-__all__ = ["SceneMatch", "SceneRecord", "build_scene_reference_block", "clear_retrieval_cache", "match_scene_pairs", "parse_scene_block", "retrieve_scene_matches", "set_scene_semantic_reranker", "top_scene_pairs"]
+__all__ = [
+    "SceneMatch",
+    "SceneRecord",
+    "build_scene_reference_block",
+    "clear_retrieval_cache",
+    "match_scene_pairs",
+    "parse_scene_block",
+    "refresh_scene_delta",
+    "retrieve_scene_matches",
+    "set_scene_semantic_reranker",
+    "top_scene_pairs",
+]

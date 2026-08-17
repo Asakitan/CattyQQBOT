@@ -248,11 +248,11 @@ class Config(BaseModel):
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
     # ── Local NLU enrichment (jieba / text2vec / HanLP) ─────────────────
-    # 主人 2026-05-28 v2: 三库已部署且 v1 验证通过 (A/B 26/30), 默认 flip 到 True.
-    # 失败 graceful fallback 到 legacy regex 路径 (装包问题不会让 bot 起不来).
+    # 主人 2026-08-15: cloud-only runtime。jieba 保留为纯分词；本地 embedding/NER
+    # 与启动 warmup 默认关闭，只有显式配置时才允许加载。
     catty_use_jieba: bool = True
-    catty_use_text2vec: bool = True
-    catty_use_hanlp: bool = True
+    catty_use_text2vec: bool = False
+    catty_use_hanlp: bool = False
     # 主人 2026-05-28 phase 6: ONNX runtime fast path (单 embed 2-3ms vs torch 50-85ms).
     # 已部署验证, 默认 True. 装 optimum/onnxruntime 失败 → 自动 fallback torch.
     catty_text2vec_use_onnx: bool = True
@@ -270,7 +270,7 @@ class Config(BaseModel):
     # 留空 dict 走 prototypes._PER_TOPIC_THRESHOLDS 默认.
     catty_text2vec_topic_threshold_overrides: dict[str, float] = Field(default_factory=dict)
     catty_nlu_cache_dir: str = "src/catty_qq_ai/data/nlu_cache"
-    catty_nlu_warmup_on_startup: bool = True
+    catty_nlu_warmup_on_startup: bool = False
     # 大陆环境 HuggingFace 镜像 (空时不强制改 HF_ENDPOINT, 用环境变量原值)
     catty_nlu_hf_endpoint: str = "https://hf-mirror.com"
     # ── Prompt Compressor (Phase 3): monotonic anchor checkpoint ──────────
@@ -338,14 +338,15 @@ class Config(BaseModel):
     catty_local_critic_reply_gate_user_message_chars: int = 120
     catty_local_critic_reply_gate_plain_text_chars: int = 60
     catty_local_critic_reply_gate_context_chars: int = 80
-    catty_local_critic_warmup_enabled: bool = True
+    catty_local_critic_warmup_enabled: bool = False
     catty_local_critic_warmup_keep_alive: str = "30m"
     catty_local_critic_warmup_interval_seconds: float = 300.0
     catty_local_critic_warmup_request_timeout: float = 60.0
     catty_local_critic_force_direct_reply: bool = True
-    catty_local_critic_collect_training_samples: bool = True
+    catty_local_critic_collect_training_samples: bool = False
     catty_local_critic_training_samples_path: str = "local_critic_samples.jsonl"
-    catty_local_training_collect_assistant_samples: bool = True
+    catty_local_training_enabled: bool = False
+    catty_local_training_collect_assistant_samples: bool = False
     catty_local_training_assistant_samples_path: str = "training/assistant_reply_samples.jsonl"
     catty_web_search_enabled: bool = True
     catty_web_search_cooldown_seconds: int = 60
@@ -392,11 +393,11 @@ class Config(BaseModel):
     catty_group_history_scope: str = "group"
     catty_history_turns: int = 3  # Legacy short-history mode only.
     catty_session_context_enabled: bool = True
-    catty_session_context_target_tokens: int = 280_000
-    catty_session_context_trim_to_tokens: int = 240_000
-    catty_session_context_headroom_tokens: int = 32_000
+    catty_session_context_target_tokens: int = 720_000
+    catty_session_context_trim_to_tokens: int = 640_000
+    catty_session_context_headroom_tokens: int = 64_000
     catty_session_ai_compact_enabled: bool = True  # 历史超阈值时用 AI 总结压缩
-    catty_session_ai_compact_trigger_tokens: int = 240_000  # 触发 AI 压缩的历史 token 阈值
+    catty_session_ai_compact_trigger_tokens: int = 512_000  # 原始历史超过 512K 才触发 AI 压缩
     catty_session_cache_persistence_enabled: bool = True
     catty_session_cache_dir: str = "sessions"
     catty_session_cache_max_sessions: int = 200
@@ -638,6 +639,10 @@ class Config(BaseModel):
     catty_fadianji_state_min_minutes: int = 60
     catty_fadianji_state_max_minutes: int = 180
     catty_fadianji_event_mood_enabled: bool = True  # 启用事件驱动情绪
+    # 主人 2026-08-15: 机机语料加料 — 每轮检索注入的真实对话对数 + 证据包字符上限。
+    # 语料库有 1,641 群聊对 + 385 私聊对, 默认 3 对/4000 字符太省, 放宽让模型多吃例句。
+    catty_fadianji_scene_k: int = 12
+    catty_fadianji_harness_max_chars: int = 12000
     # QQ空间动态点赞 + 机机语料 (2026-08-15)
     catty_qzone_enabled: bool = False
     catty_qzone_feed_store_path: str = "data/qzone_feeds.json"
@@ -656,7 +661,10 @@ class Config(BaseModel):
     catty_qzone_poll_num: int = 20
     catty_qzone_seed_existing: bool = True
     catty_qzone_request_timeout_seconds: float = 30.0
-    # 主人 2026-08-16: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写
+    # 完整群聊真实对话母本作为稳定 cache prefix 常驻；私聊实录仍严格隔离。
+    catty_fadianji_static_scene_bank_enabled: bool = True
+    catty_fadianji_static_scene_bank_max_chars: int = 140_000
+    # 主人 2026-08-15: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写
     catty_style_critic_enabled: bool = True
     catty_style_critic_min_reply_chars: int = 6  # 短于该字数的回复免检
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)

@@ -49,6 +49,7 @@ IGNORED_DIR_NAMES = {
 IGNORED_PATH_PREFIXES = (
     "src/catty_qq_ai/data/cpu_engine",
     "src/catty_qq_ai/data/nlu_cache",
+    "src/catty_qq_ai/data/fdj_scene_delta",
 )
 
 FileSignature = tuple[int, int]

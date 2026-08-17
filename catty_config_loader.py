@@ -171,12 +171,12 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "reply_gate_user_message_chars": 120,
         "reply_gate_plain_text_chars": 60,
         "reply_gate_context_chars": 80,
-        "warmup_enabled": True,
+        "warmup_enabled": False,
         "warmup_keep_alive": "30m",
         "warmup_interval_seconds": 300,
         "warmup_request_timeout": 60,
         "force_direct_reply": True,
-        "collect_training_samples": True,
+        "collect_training_samples": False,
         "training_samples_path": "local_critic_samples.jsonl",
     },
     "local_training": {
@@ -189,7 +189,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "min_samples": 200,
         "min_new_samples": 50,
         "train_command": REPLY_GATE_TRAIN_COMMAND,
-        "collect_assistant_samples": True,
+        "collect_assistant_samples": False,
         "assistant_samples_path": "training/assistant_reply_samples.jsonl",
         "assistant_dataset_path": "training/assistant_reply_dataset.jsonl",
         "assistant_output_dir": "training/assistant_reply_lora",
@@ -321,9 +321,15 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "group_history_scope": "group",
         "history_turns": 16,
         "session_context_enabled": True,
-        "session_context_target_tokens": 256000,
-        "session_context_trim_to_tokens": 192000,
-        "session_context_headroom_tokens": 32000,
+        "session_context_target_tokens": 720000,
+        "session_context_trim_to_tokens": 640000,
+        "session_context_headroom_tokens": 64000,
+        "session_ai_compact_enabled": True,
+        "session_ai_compact_trigger_tokens": 512000,
+        "fadianji_scene_k": 12,
+        "fadianji_harness_max_chars": 12000,
+        "fadianji_static_scene_bank_enabled": True,
+        "fadianji_static_scene_bank_max_chars": 140000,
         "session_cache_persistence_enabled": True,
         "session_cache_dir": "sessions",
         "session_cache_max_sessions": 200,
@@ -746,6 +752,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
         _set_env("CATTY_LOCAL_CRITIC_TRAINING_SAMPLES_PATH", resolved_training_samples_path)
 
     local_training = _section(data, "local_training")
+    _set_env("CATTY_LOCAL_TRAINING_ENABLED", local_training.get("enabled"))
     _set_env("CATTY_LOCAL_TRAINING_COLLECT_ASSISTANT_SAMPLES", local_training.get("collect_assistant_samples"))
     assistant_samples_path = local_training.get("assistant_samples_path")
     if assistant_samples_path:
@@ -819,6 +826,11 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_SESSION_AI_COMPACT_ENABLED", chat.get("session_ai_compact_enabled"))
     _set_env("CATTY_SESSION_AI_COMPACT_TRIGGER_TOKENS", chat.get("session_ai_compact_trigger_tokens"))
     _set_env("CATTY_TOOL_NARRATION_ENABLED", chat.get("tool_narration_enabled"))
+    # 主人 2026-08-15: 机机例句加料 — 每轮检索对数/证据包字符上限
+    _set_env("CATTY_FADIANJI_SCENE_K", chat.get("fadianji_scene_k"))
+    _set_env("CATTY_FADIANJI_HARNESS_MAX_CHARS", chat.get("fadianji_harness_max_chars"))
+    _set_env("CATTY_FADIANJI_STATIC_SCENE_BANK_ENABLED", chat.get("fadianji_static_scene_bank_enabled"))
+    _set_env("CATTY_FADIANJI_STATIC_SCENE_BANK_MAX_CHARS", chat.get("fadianji_static_scene_bank_max_chars"))
     _set_env("CATTY_SESSION_CACHE_PERSISTENCE_ENABLED", chat.get("session_cache_persistence_enabled"))
     _set_env("CATTY_SESSION_CACHE_DIR", chat.get("session_cache_dir"))
     _set_env("CATTY_SESSION_CACHE_MAX_SESSIONS", chat.get("session_cache_max_sessions"))

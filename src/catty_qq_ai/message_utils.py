@@ -525,6 +525,11 @@ def _mentioned_self(self_id: str, event: MessageEvent) -> bool:
     return False
 
 
+def has_real_at_self(self_id: str, event: MessageEvent) -> bool:
+    """Return whether the message contains a structured OneBot @ directed at this bot."""
+    return _mentioned_self(self_id, event)
+
+
 def contains_at_all(event: MessageEvent) -> bool:
     """检测消息里是否包含 @全体成员(OneBot at segment qq=all)。"""
     for segment in event.message:

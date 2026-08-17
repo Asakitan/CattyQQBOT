@@ -370,6 +370,20 @@ def register_catty_persona(
         content_fn=_build_core_persona,
         order=100,
     )
+    if (
+        persona.name == "fadianji"
+        and bool(ctx.get("is_group", False))
+        and bool(getattr(cfg, "catty_fadianji_static_scene_bank_enabled", True))
+    ):
+        from .personas.fadianji_scenes import build_fadianji_group_scene_bank
+
+        _reg_static(
+            "fadianji_static_scene_bank",
+            build_fadianji_group_scene_bank(
+                max(0, int(getattr(cfg, "catty_fadianji_static_scene_bank_max_chars", 140_000) or 0))
+            ),
+            order=102,
+        )
     # 主人 2026-05-29 (P2): 群聊默认沉默块**仅群聊注入** (私聊 1v1 无意义且带偏 NSFW)。
     # order=105 紧跟 core_persona, 仍 < boundary 455 → 群聊 cache prefix; 私聊根本不注册此段
     # → 私聊前缀更短且仍 byte-stable。content 是常量 CATTY_GROUP_SILENCE。
