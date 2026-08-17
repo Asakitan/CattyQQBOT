@@ -310,6 +310,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "harness_max_items": 5,
         "corpus_enabled": True,
         "corpus_min_likes": 2,
+        "cookie_keeper_enabled": False,
+        "cookie_keeper_interval_seconds": 14400.0,
+        "bridge_env_path": "tools/onebot-qzone/.env",
     },
     "chat": {
         "system_prompt": "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。",
@@ -710,6 +713,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_QZONE_HARNESS_MAX_ITEMS", qzone.get("harness_max_items"))
     _set_env("CATTY_QZONE_CORPUS_ENABLED", qzone.get("corpus_enabled"))
     _set_env("CATTY_QZONE_CORPUS_MIN_LIKES", qzone.get("corpus_min_likes"))
+    _set_env("CATTY_QZONE_COOKIE_KEEPER_ENABLED", qzone.get("cookie_keeper_enabled"))
+    _set_env("CATTY_QZONE_COOKIE_KEEPER_INTERVAL_SECONDS", qzone.get("cookie_keeper_interval_seconds"))
+    _set_env("CATTY_QZONE_BRIDGE_ENV_PATH", qzone.get("bridge_env_path"))
 
     local_critic = _section(data, "local_critic")
     local_critic_extra_body = local_critic.get("extra_body")

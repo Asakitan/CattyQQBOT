@@ -11597,6 +11597,202 @@ def _ensure_qzone_bridge_poll_task() -> None:
         _qzone_bridge_poll_task = asyncio.create_task(_qzone_bridge_poll_loop())
 
 
+# ── 主人 2026-08-18: QZone cookie keeper (napcap 免扫码自铸) ─────────────
+# bridge 登录态不再靠 Playwright 扫码: 用 NapCat 的 NT 登录态经 OB11
+# get_credentials(clientkey → ssl.ptlogin2.qq.com/jump) 现场铸 QZone cookie,
+# bridge 活着走 update_cookie 热注入 (bridge 自己写回 .env), bridge 死了就
+# 把 cookie 写进 .env 再拉起 bridge 用 cookie 登录。全程零扫码。
+_qzone_keeper_task: asyncio.Task[None] | None = None
+_qzone_keeper_last_mint_at: float = 0.0
+_QZONE_KEEPER_HEALTH_INTERVAL_SECONDS = 300.0
+
+
+async def _qzone_bridge_status_ok(base_url: str, timeout_seconds: float) -> bool:
+    try:
+        async with httpx.AsyncClient(timeout=max(timeout_seconds, 1.0)) as client:
+            response = await client.get(base_url.rstrip("/") + "/status")
+            payload = response.json()
+        return bool(isinstance(payload, Mapping) and payload.get("ok") is True)
+    except Exception:  # noqa: BLE001
+        return False
+
+
+async def _qzone_bridge_session_valid(base_url: str, access_token: str, timeout_seconds: float) -> bool:
+    try:
+        from .qzone_bridge import call_qzone_action
+
+        data = await call_qzone_action(
+            base_url,
+            "check_cookie",
+            {"probe": False},
+            access_token=access_token,
+            timeout_seconds=timeout_seconds,
+        )
+        return bool(isinstance(data, Mapping) and data.get("valid"))
+    except Exception:  # noqa: BLE001
+        return False
+
+
+async def _qzone_mint_cookies_from_napcat() -> str:
+    bots = list(get_bots().values())
+    if not bots:
+        logger.debug("[qzone-keeper] no bot connected, skip mint")
+        return ""
+    bot = bots[0]
+    last_error: Exception | None = None
+    for domain in ("user.qzone.qq.com", "qzone.qq.com"):
+        try:
+            data = await asyncio.wait_for(
+                bot.call_api("get_credentials", domain=domain), timeout=20.0
+            )
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+            continue
+        cookies = str(data.get("cookies") or "").strip() if isinstance(data, Mapping) else ""
+        if cookies and ("p_skey=" in cookies or "skey=" in cookies):
+            return cookies
+    if last_error is not None:
+        logger.warning(f"[qzone-keeper] mint cookies failed: {last_error}")
+    return ""
+
+
+def _qzone_keeper_env_path() -> Path:
+    raw = str(
+        getattr(config, "catty_qzone_bridge_env_path", "tools/onebot-qzone/.env")
+        or "tools/onebot-qzone/.env"
+    )
+    path = Path(raw)
+    if path.is_absolute():
+        return path
+    base = _runtime_config_path()
+    return (base.parent if base is not None else Path.cwd()) / path
+
+
+def _write_bridge_env_cookie(env_path: Path, cookie_str: str) -> bool:
+    try:
+        text = env_path.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    updates = {
+        "QZONE_COOKIE_STRING": cookie_str,
+        "QZONE_COOKIE": cookie_str,
+        # 主人明确不再扫码: 禁掉 QR fallback, cookie 无效时快速失败等 keeper 下轮重铸,
+        # 而不是 Playwright 挂 300s 扫码。
+        "QZONE_ENABLE_QR": "0",
+    }
+    new_text = text
+    for key, value in updates.items():
+        pattern = re.compile(rf"(?m)^{re.escape(key)}=.*$")
+        if pattern.search(new_text):
+            new_text = pattern.sub(lambda _m, _k=key, _v=value: f"{_k}={_v}", new_text, count=1)
+        else:
+            new_text = new_text.rstrip("\n") + f"\n{key}={value}\n"
+    if new_text == text:
+        return False
+    tmp_path = env_path.with_name(env_path.name + ".keeper.tmp")
+    tmp_path.write_text(new_text, encoding="utf-8")
+    os.replace(tmp_path, env_path)
+    return True
+
+
+def _qzone_keeper_launch_bridge() -> bool:
+    try:
+        config_path = _runtime_config_path()
+        if config_path is None:
+            return False
+        data = json.loads(config_path.read_text(encoding="utf-8-sig"))
+        qzone = data.get("qzone") if isinstance(data, dict) else None
+        if not isinstance(qzone, dict):
+            return False
+        if not qzone.get("enabled") or not qzone.get("bridge_auto_start", True):
+            return False
+        from catty_integrations import _start_qzone_bridge
+
+        _start_qzone_bridge(qzone, config_path.parent)
+        return True
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"[qzone-keeper] bridge launch failed: {exc}")
+        return False
+
+
+async def _qzone_cookie_keeper_once() -> bool:
+    """一轮 keeper: 返回 bridge 当前是否处于健康态 (False 时外层缩短重试间隔)。"""
+    global _qzone_keeper_last_mint_at
+    base_url = str(
+        getattr(config, "catty_qzone_bridge_base_url", "http://127.0.0.1:5700")
+        or "http://127.0.0.1:5700"
+    )
+    access_token = str(getattr(config, "catty_qzone_bridge_access_token", "") or "")
+    timeout = max(float(getattr(config, "catty_qzone_request_timeout_seconds", 30.0) or 30.0), 1.0)
+    interval = max(
+        float(getattr(config, "catty_qzone_cookie_keeper_interval_seconds", 14400.0) or 14400.0),
+        300.0,
+    )
+    now = time.monotonic()
+    status_ok = await _qzone_bridge_status_ok(base_url, timeout)
+    if status_ok:
+        session_valid = await _qzone_bridge_session_valid(base_url, access_token, timeout)
+        if session_valid and now - _qzone_keeper_last_mint_at < interval:
+            return True
+        cookie_str = await _qzone_mint_cookies_from_napcat()
+        if not cookie_str:
+            return True  # bridge 还活着, NapCat 暂时不可用不降级重试
+        try:
+            from .qzone_bridge import call_qzone_action
+
+            await call_qzone_action(
+                base_url,
+                "update_cookie",
+                {"cookie": cookie_str},
+                access_token=access_token,
+                timeout_seconds=timeout,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"[qzone-keeper] update_cookie failed: {exc}")
+            return True
+        _qzone_keeper_last_mint_at = time.monotonic()
+        logger.info("[qzone-keeper] refreshed bridge cookie via update_cookie")
+        return True
+    cookie_str = await _qzone_mint_cookies_from_napcat()
+    if not cookie_str:
+        return False
+    env_path = _qzone_keeper_env_path()
+    env_written = await asyncio.to_thread(_write_bridge_env_cookie, env_path, cookie_str)
+    launched = await asyncio.to_thread(_qzone_keeper_launch_bridge)
+    _qzone_keeper_last_mint_at = time.monotonic()
+    logger.info(
+        f"[qzone-keeper] bridge was down; env_written={env_written} relaunched={launched} "
+        f"env={env_path}"
+    )
+    # bridge 冷启动要几秒, 立即复探一次拿真实结果
+    await asyncio.sleep(8.0)
+    return await _qzone_bridge_status_ok(base_url, timeout)
+
+
+async def _qzone_cookie_keeper_loop() -> None:
+    await asyncio.sleep(30)
+    while True:
+        bridge_healthy = False
+        try:
+            if getattr(config, "catty_qzone_enabled", False) and bool(
+                getattr(config, "catty_qzone_cookie_keeper_enabled", False)
+            ):
+                bridge_healthy = await _qzone_cookie_keeper_once()
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"[qzone-keeper] cycle failed: {exc}")
+        # bridge 死了就 60s 快速重试 (可能只是等 NapCat 回连/bridge 冷启动);
+        # 健康时 300s 常规体检, 续期由 cookie_keeper_interval_seconds (默认 4h) 控制。
+        await asyncio.sleep(60.0 if not bridge_healthy else _QZONE_KEEPER_HEALTH_INTERVAL_SECONDS)
+
+
+def _ensure_qzone_cookie_keeper_task() -> None:
+    global _qzone_keeper_task
+    if _qzone_keeper_task is None or _qzone_keeper_task.done():
+        _qzone_keeper_task = asyncio.create_task(_qzone_cookie_keeper_loop())
+
+
 _qzone_notice_matcher = on_notice(priority=45, block=False)
 
 
@@ -13809,6 +14005,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_scope_lore_auto_summary_loop())
     asyncio.create_task(_catty_rag_backfill_once())
     asyncio.create_task(_catty_rag_prune_loop())
+    _ensure_qzone_cookie_keeper_task()
     # 主人 2026-05-28: NLU warmup — text2vec / hanlp 后台加载,
     # 避免第一条消息撞冷启 (text2vec ~2-5s, hanlp ~5-15s, prototypes build ~30s).
     # catty_nlu_warmup_on_startup=False 时跳过 (默认 True).

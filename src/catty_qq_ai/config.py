@@ -661,6 +661,10 @@ class Config(BaseModel):
     catty_qzone_poll_num: int = 20
     catty_qzone_seed_existing: bool = True
     catty_qzone_request_timeout_seconds: float = 30.0
+    # 主人 2026-08-18: napcap 免扫码自铸 — 用 NapCat NT 登录态换 QZone cookie 写进 bridge .env
+    catty_qzone_cookie_keeper_enabled: bool = False
+    catty_qzone_cookie_keeper_interval_seconds: float = 14400.0
+    catty_qzone_bridge_env_path: str = "tools/onebot-qzone/.env"
     # 完整群聊真实对话母本作为稳定 cache prefix 常驻；私聊实录仍严格隔离。
     catty_fadianji_static_scene_bank_enabled: bool = True
     catty_fadianji_static_scene_bank_max_chars: int = 140_000

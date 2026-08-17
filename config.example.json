@@ -286,7 +286,10 @@
         "like_action": "send_like",
         "harness_max_items": 5,
         "corpus_enabled": true,
-        "corpus_min_likes": 2
+        "corpus_min_likes": 2,
+        "cookie_keeper_enabled": false,
+        "cookie_keeper_interval_seconds": 14400,
+        "bridge_env_path": "tools/onebot-qzone/.env"
     },
     "chat": {
         "system_prompt": "你是一个接入 QQ 群和私聊的中文 AI 助手。回答要简洁、自然、可靠，适合 QQ 聊天。可以少量自然使用猫系动作或颜文字，但不要刷屏。",
