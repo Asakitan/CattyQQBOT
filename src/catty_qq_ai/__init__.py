@@ -13894,14 +13894,20 @@ async def _catty_rag_backfill_once() -> None:
 
     idempotent (upsert), 重启可以再跑覆盖同 doc_id 不重复存。
     sleep 60s 让 bot 先稳定起来再跑(embedding 计算消耗 CPU)。
+
+    主人 2026-08-18 bug 修复: backfill_memory/backfill_lorebook 是重型同步调用
+    (973 users × chromadb upsert + embedding 网络调用), 之前直接在事件循环上跑,
+    实测启动后卡死 event loop 3min49s (01:54:34→01:58:23), 期间 WS 收不到消息、
+    主人私聊『机机在吗』94s 无响应。全部挪进 asyncio.to_thread, 事件循环零阻塞。
+    chromadb client 线程安全, CattyRAGStore 内部有 RLock 护 collection 访问。
     """
     await asyncio.sleep(60)
     if not catty_rag_store.enabled:
         logger.info("catty_rag: backfill skipped (RAG disabled)")
         return
     try:
-        n_mem = catty_rag_store.backfill_memory(memory_store)
-        n_lore = catty_rag_store.backfill_lorebook(scope_lorebook_store)
+        n_mem = await asyncio.to_thread(catty_rag_store.backfill_memory, memory_store)
+        n_lore = await asyncio.to_thread(catty_rag_store.backfill_lorebook, scope_lorebook_store)
         logger.info(f"catty_rag backfill: +{n_mem} memory summaries, +{n_lore} lore entries")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"catty_rag backfill failed: {exc}")
@@ -13923,7 +13929,10 @@ async def _catty_rag_prune_loop() -> None:
             total_dropped = 0
             for key, _msg_count, _last_at in cache.list_sessions():
                 try:
-                    dropped = catty_rag_store.prune_old_docs(key, keep_recent=2000)
+                    # 主人 2026-08-18: 同步 chroma 调用挪进线程, 不卡事件循环
+                    dropped = await asyncio.to_thread(
+                        catty_rag_store.prune_old_docs, key, keep_recent=2000
+                    )
                     if dropped > 0:
                         total_dropped += dropped
                         logger.info(f"catty_rag prune [{key}]: dropped {dropped} old docs")
@@ -13933,7 +13942,7 @@ async def _catty_rag_prune_loop() -> None:
                 logger.info(f"catty_rag prune tick: total dropped {total_dropped}")
             # 主人 2026-05-30: 同时 evict 超 1h 未访问的 collection (释放 HNSW 索引内存)
             try:
-                catty_rag_store.evict_stale_collections()
+                await asyncio.to_thread(catty_rag_store.evict_stale_collections)
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"catty_rag evict_stale failed: {exc}")
         except asyncio.CancelledError:
