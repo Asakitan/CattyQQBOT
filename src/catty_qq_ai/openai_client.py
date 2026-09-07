@@ -765,6 +765,7 @@ def _with_thinking_max_defaults(
 
     - Ollama 原生路由: 不动 (走自己的 think/options 开关, reasoning_effort 无意义)。
     - DeepSeek v4: thinking.enabled + reasoning_effort=max (保持原行为)。
+    - MiMo V2.5: thinking.enabled，不注入接口不支持的 reasoning_effort=max。
     - GLM/bigmodel (z.ai): thinking.enabled (GLM 无 effort 档位, enabled 即满档思考)。
     - 其它 OpenAI-compatible (opencode zen 的 gpt-5.6-luna 等 reasoning 模型): reasoning_effort=max。
     """
@@ -776,6 +777,9 @@ def _with_thinking_max_defaults(
             body["thinking"] = {"type": "enabled"}
         if "reasoning_effort" not in body:
             body["reasoning_effort"] = "max"
+        return body
+    if model.strip().lower() == "mimo-v2.5":
+        body.setdefault("thinking", {"type": "enabled"})
         return body
     if _looks_like_bigmodel_route(base_url):
         if "thinking" not in body:
@@ -2942,7 +2946,7 @@ async def _post_chat_completion_raw(
                 _hoisted = hoist_stable_private_trailing(messages)
                 if _hoisted:
                     _logger.info(
-                        "deepseek prefix opt: hoisted %d stable private trailing → history前 "
+                        "deepseek prefix opt: hoisted %d stable private trailing → history尾 "
                         "(独立 sentinel block, 跨轮稳定进 cache)", _hoisted,
                     )
             elif _scope_early.startswith("group:"):
@@ -2976,14 +2980,14 @@ async def _post_chat_completion_raw(
                     _hoisted = hoist_stable_group_owner_trailing(messages)
                     if _hoisted:
                         _logger.info(
-                            "deepseek prefix opt: hoisted %d stable group-owner trailing → history前 "
+                            "deepseek prefix opt: hoisted %d stable group-owner trailing → history尾 "
                             "(独立 sentinel block, owner-in-group cache)", _hoisted,
                         )
                 else:
                     _hoisted = hoist_stable_group_common_trailing(messages)
                     if _hoisted:
                         _logger.info(
-                            "deepseek prefix opt: hoisted %d stable group-common trailing → history前 "
+                            "deepseek prefix opt: hoisted %d stable group-common trailing → history尾 "
                             "(独立 sentinel block, group common cache)", _hoisted,
                         )
             # (b) 合并开头连续 system → 单条 (前缀更紧凑)
@@ -3135,6 +3139,17 @@ async def _post_chat_completion_raw(
         request_route=request_route,
         request_class=_request_class,
     )
+
+    if urlparse(base_url).hostname == "opencode.ai":
+        header_names = {name.lower() for name in headers}
+        if "user-agent" not in header_names:
+            headers["User-Agent"] = "catty-qq-ai/1.0.0"
+        if "x-opencode-session" not in header_names:
+            session_scope = _scope_for_request or _request_identity["logical_turn_id"]
+            session_seed = f"catty:{api_key.strip()}:{session_scope}"
+            headers["x-opencode-session"] = "catty-" + hashlib.sha256(
+                session_seed.encode("utf-8"),
+            ).hexdigest()[:32]
 
     _request_cache_diagnostics = _build_cache_request_diagnostics(
         base_url=base_url,

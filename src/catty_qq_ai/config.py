@@ -393,11 +393,13 @@ class Config(BaseModel):
     catty_group_history_scope: str = "group"
     catty_history_turns: int = 3  # Legacy short-history mode only.
     catty_session_context_enabled: bool = True
-    catty_session_context_target_tokens: int = 720_000
-    catty_session_context_trim_to_tokens: int = 640_000
-    catty_session_context_headroom_tokens: int = 64_000
+    # 主人 2026-08-18: 群聊历史预算 720K→64K, 防 prompt 膨胀到 160K+.
+    # target-headroom=高水位, 超了硬裁到 trim_to; ai_compact 先于硬裁蒸馏旧历史.
+    catty_session_context_target_tokens: int = 64_000
+    catty_session_context_trim_to_tokens: int = 48_000
+    catty_session_context_headroom_tokens: int = 8_000
     catty_session_ai_compact_enabled: bool = True  # 历史超阈值时用 AI 总结压缩
-    catty_session_ai_compact_trigger_tokens: int = 512_000  # 原始历史超过 512K 才触发 AI 压缩
+    catty_session_ai_compact_trigger_tokens: int = 40_000  # 原始历史超过 40K 触发 AI 压缩
     catty_session_cache_persistence_enabled: bool = True
     catty_session_cache_dir: str = "sessions"
     catty_session_cache_max_sessions: int = 200
@@ -542,7 +544,7 @@ class Config(BaseModel):
     catty_evolution_enabled: bool = False
     catty_evolution_cron: str = "0 3 * * *"
     catty_evolution_samples_per_layer: int = 30
-    catty_evolution_judge_model: str = "deepseek-v4-flash"
+    catty_evolution_judge_model: str = "mimo-v2.5"
     catty_evolution_rollback_neg_feedback_pct: float = 0.2
     catty_evolution_rollback_score_decline_days: int = 3
     catty_evolution_sample_only_group: bool = True
@@ -671,6 +673,18 @@ class Config(BaseModel):
     # 主人 2026-08-15: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写
     catty_style_critic_enabled: bool = True
     catty_style_critic_min_reply_chars: int = 6  # 短于该字数的回复免检
+    # 主人 2026-08-25: 机机语料磁盘库 (scripts/mine_fadianji_corpus.py 产出 → data/fadianji_corpus/)
+    catty_fdj_corpus_enabled: bool = True
+    catty_fdj_corpus_max_pairs: int = 12_000
+    catty_fdj_corpus_semantic_enabled: bool = True  # 轻量哈希余弦语义重排 (无模型依赖)
+    catty_fdj_corpus_lore_enabled: bool = True      # 语料人物画像注入
+    catty_fdj_corpus_lore_max_chars: int = 320
+    catty_fdj_stat_critic_enabled: bool = True      # 统计风格评分前置, 够分免 LLM 质检
+    catty_fdj_stat_critic_pass_score: float = 0.72
+    catty_fdj_echo_enabled: bool = True             # 高置信场景直发语料原句 (超短反应)
+    catty_fdj_echo_probability: float = 0.35
+    catty_fdj_echo_min_score: float = 3.4
+    catty_fdj_echo_cooldown_seconds: float = 120.0
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 

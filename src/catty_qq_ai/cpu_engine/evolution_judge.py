@@ -125,7 +125,7 @@ async def call_judge_async(
     model = (
         str(getattr(config, "catty_evolution_judge_model", "") or "")
         or str(getattr(config, "catty_audit_ai_model", "") or "")
-        or "deepseek-v4-flash"
+        or "mimo-v2.5"
     )
 
     if not api_key:
