@@ -251,6 +251,80 @@ def _feed_evidence(feed_store: Any, scope: str, max_items: int) -> list[Evidence
         ))
     return result
 
+def _fmt_year(ts: Any) -> str:
+    try:
+        value = float(ts or 0)
+    except (TypeError, ValueError):
+        return ""
+    if value <= 0:
+        return ""
+    return datetime.fromtimestamp(value / 1000.0, tz=timezone.utc).strftime("%y.%m")
+
+
+def _corpus_profile_evidence(display_name: str, scope: str, private: bool) -> list[Evidence]:
+    """语料人物画像 (2026-08-25): 离线挖掘的机机×对方互动史, 注入一句旧识底细。"""
+    max_chars = 320
+    try:
+        from . import config as _module_config
+        if not bool(getattr(_module_config.config, "catty_fdj_corpus_lore_enabled", True)):
+            return []
+        max_chars = max(80, int(getattr(_module_config.config, "catty_fdj_corpus_lore_max_chars", 320) or 320))
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        from . import fdj_corpus_store
+    except Exception:  # noqa: BLE001
+        return []
+    profile: Mapping[str, Any] | None = None
+    try:
+        if private:
+            profile = fdj_corpus_store.private_profile(scope)
+            if profile is None and display_name:
+                profile = fdj_corpus_store.lookup_user_profile(display_name)
+        elif display_name:
+            profile = fdj_corpus_store.lookup_user_profile(display_name)
+    except Exception:  # noqa: BLE001
+        return []
+    if not isinstance(profile, Mapping) or not profile:
+        return []
+    parts: list[str] = []
+    name = _clean(profile.get("name"), 40) or "对方"
+    try:
+        triggers = int(profile.get("triggers") or 0)
+    except (TypeError, ValueError):
+        triggers = 0
+    span = "-".join(part for part in (_fmt_year(profile.get("first_ts")), _fmt_year(profile.get("last_ts"))) if part)
+    parts.append(f"机机与{name}共互动 {triggers} 次" + (f"({span})" if span else ""))
+    register = _clean(profile.get("register"), 8)
+    if register:
+        parts.append(f"语气档={register}")
+    avg_len = profile.get("avg_reply_len")
+    if avg_len:
+        parts.append(f"平均回复 {avg_len} 字")
+    addresses = "/".join(_clean(item, 8) for item in (profile.get("addresses") or [])[:4] if _clean(item, 8))
+    if addresses:
+        parts.append(f"常用称呼={addresses}")
+    if not private:
+        terms = "/".join(_clean(item, 10) for item in (profile.get("top_terms") or [])[:5] if _clean(item, 10))
+        if terms:
+            parts.append(f"常聊={terms}")
+    samples = profile.get("samples") or ()
+    if isinstance(samples, Sequence) and samples:
+        valid_samples = [item for item in samples if isinstance(item, Mapping)]
+        if valid_samples:
+            try:
+                target_len = float(avg_len) if avg_len else 6.0
+            except (TypeError, ValueError):
+                target_len = 6.0
+            sample = min(valid_samples, key=lambda item: abs(len(_clean(item.get("reply"), 600)) - target_len))
+            trigger = _clean(sample.get("trigger"), 40)
+            reply = _clean(sample.get("reply"), 60)
+            if trigger and reply:
+                parts.append(f"旧对话例: “{trigger}”→“{reply}”")
+    rendered = _clean("【语料旧识】" + "; ".join(parts), max_chars)
+    return [Evidence("MEMORY.corpus_profile", scope, rendered, 0.8, 0.6, 0.8, 0.85, private, 11)]
+
+
 def _dedupe_and_sort(evidence: Sequence[Evidence], private: bool) -> list[Evidence]:
     chosen: dict[str, Evidence] = {}
     for item in evidence:
@@ -293,14 +367,14 @@ def _scene_query_enabled(text: str, flags: QueryFlags) -> bool:
         return False
     return True
 
-def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_key: str = "", is_private: bool = False, user_id: str = "", group_id: str = "", memory_store: Any = None, rag_store: Any = None, max_chars: int = _DEFAULT_MAX_CHARS, *, scene_k: int = 3, book_k: int = 3, semantic: bool = False, feed_store: Any = None, feed_max_items: int = 5, query_flags: QueryFlags | Mapping[str, Any] | None = None) -> dict[str, Any]:
+def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_key: str = "", is_private: bool = False, user_id: str = "", group_id: str = "", memory_store: Any = None, rag_store: Any = None, max_chars: int = _DEFAULT_MAX_CHARS, *, scene_k: int = 3, book_k: int = 3, semantic: bool = False, feed_store: Any = None, feed_max_items: int = 5, query_flags: QueryFlags | Mapping[str, Any] | None = None, display_name: str = "") -> dict[str, Any]:
     scope, private = _scope_value(scope_key, is_private=is_private, user_id=user_id, group_id=group_id)
     if isinstance(query_flags, QueryFlags): flags = query_flags
     elif isinstance(query_flags, Mapping):
         detected = detect_fadianji_query_flags(text); flags = QueryFlags(_clean(query_flags.get("intent") or detected.intent, 40), bool(query_flags.get("memory_need", detected.memory_need)), bool(query_flags.get("anaphora", detected.anaphora)))
     else: flags = detect_fadianji_query_flags(text)
     scene_matches = match_scene_pairs(text, k=scene_k, scope_key=scope, is_private=private, semantic=semantic) if _scene_query_enabled(text, flags) else []
-    evidence: list[Evidence] = []; evidence.extend(_memory_evidence(memory_store, text, scope, private, str(user_id or ""), str(group_id or ""), flags)); evidence.extend(_feed_evidence(feed_store, scope, max(0, int(feed_max_items or 0)))); evidence.extend(_activate_character_book(text, persona, book_k)); evidence.extend(_rag_evidence(rag_store, text, scope, persona, private)); evidence.extend(_scene_evidence(scene_matches)); evidence = _dedupe_and_sort(evidence, private)
+    evidence: list[Evidence] = []; evidence.extend(_memory_evidence(memory_store, text, scope, private, str(user_id or ""), str(group_id or ""), flags)); evidence.extend(_corpus_profile_evidence(str(display_name or ""), scope, private)); evidence.extend(_feed_evidence(feed_store, scope, max(0, int(feed_max_items or 0)))); evidence.extend(_activate_character_book(text, persona, book_k)); evidence.extend(_rag_evidence(rag_store, text, scope, persona, private)); evidence.extend(_scene_evidence(scene_matches)); evidence = _dedupe_and_sort(evidence, private)
     counts: dict[str, int] = {}
     for item in evidence:
         bucket = "FACT" if item.source.startswith("FACT.") else item.source.split(".", 1)[0]; counts[bucket] = counts.get(bucket, 0) + 1

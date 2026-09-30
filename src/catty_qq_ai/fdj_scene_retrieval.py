@@ -238,7 +238,8 @@ def _refresh_delta_cache(*, force: bool = False) -> None:
         entries = ()
     _DELTA_SIGNATURE = signature
     _DELTA_ENTRIES = entries
-    _cached_records.cache_clear()
+    _RECORDS_CACHE.clear()
+    _CANDIDATE_INDEX_CACHE.clear()
     _cached_pairs.cache_clear()
     _MATCH_CACHE.clear()
 
@@ -285,10 +286,86 @@ def _delta_applied_records() -> tuple[SceneRecord, ...]:
     return tuple(by_uid[uid] for uid in order if uid in by_uid)
 
 
-@lru_cache(maxsize=1)
+def _corpus_max_pairs() -> int:
+    try:
+        from . import config as _module_config
+        if not bool(getattr(_module_config.config, "catty_fdj_corpus_enabled", True)):
+            return 0
+        return max(0, int(getattr(_module_config.config, "catty_fdj_corpus_max_pairs", 12000) or 0))
+    except Exception:  # noqa: BLE001
+        return 12000
+
+
+def _corpus_signature() -> tuple[Any, ...]:
+    try:
+        from . import fdj_corpus_store
+        return fdj_corpus_store.corpus_signature()
+    except Exception:  # noqa: BLE001
+        return (("corpus-unavailable",),)
+
+
+def _corpus_records(existing_pairs: set[tuple[str, str]]) -> tuple[SceneRecord, ...]:
+    limit = _corpus_max_pairs()
+    if limit <= 0:
+        return ()
+    try:
+        from . import fdj_corpus_store
+        entries = fdj_corpus_store.scene_entries(limit=limit)
+    except Exception:  # noqa: BLE001
+        return ()
+    records: list[SceneRecord] = []
+    for entry in entries:
+        trigger = str(entry.get("trigger") or "").strip()
+        reply = str(entry.get("reply") or "").strip()
+        scope = str(entry.get("scope") or "group").strip() or "group"
+        category = str(entry.get("category") or "未分类").strip()[:80] or "未分类"
+        if not trigger or not reply or (trigger, reply) in existing_pairs:
+            continue
+        existing_pairs.add((trigger, reply))
+        records.append(_record(trigger, reply, category=category, source="fdj_corpus", source_scope=scope))
+    return tuple(records)
+
+
+_RECORDS_CACHE: dict[tuple[Any, ...], tuple[SceneRecord, ...]] = {}
+
+
 def _cached_records() -> tuple[SceneRecord, ...]:
+    """精选库 + delta + 语料磁盘库; 按 (delta签名, corpus签名) 手动缓存。"""
     _refresh_delta_cache()
-    return _delta_applied_records()
+    corpus_sig = _corpus_signature()
+    key = (_DELTA_SIGNATURE, corpus_sig)
+    cached = _RECORDS_CACHE.get(key)
+    if cached is None:
+        base = _delta_applied_records()
+        existing_pairs = {(item.trigger, item.reply) for item in base}
+        cached = base + _corpus_records(existing_pairs)
+        _RECORDS_CACHE.clear()
+        _RECORDS_CACHE[key] = cached
+        _cached_pairs.cache_clear()
+        _CANDIDATE_INDEX_CACHE.clear()
+    return cached
+
+
+_CANDIDATE_INDEX_CACHE: dict[tuple[Any, ...], tuple[dict[str, list[int]], dict[str, list[int]]]] = {}
+
+
+def _candidate_index() -> tuple[dict[str, list[int]], dict[str, list[int]]]:
+    """词/分类倒排索引, 给大语料库做候选剪枝 (候选太少时调用方回退全扫)。"""
+    records = _cached_records()
+    key = (_DELTA_SIGNATURE, _corpus_signature(), len(records))
+    cached = _CANDIDATE_INDEX_CACHE.get(key)
+    if cached is not None:
+        return cached
+    word_index: dict[str, list[int]] = {}
+    category_index: dict[str, list[int]] = {}
+    for position, record in enumerate(records):
+        for word in record.trigger_words:
+            word_index.setdefault(word, []).append(position)
+        category_index.setdefault(record.category, []).append(position)
+    built = (word_index, category_index)
+    _CANDIDATE_INDEX_CACHE.clear()
+    _CANDIDATE_INDEX_CACHE[key] = built
+    return built
 
 
 @lru_cache(maxsize=1)
@@ -338,9 +415,29 @@ def set_scene_semantic_reranker(reranker: SemanticReranker | None) -> None:
     clear_retrieval_cache()
 
 
+def _ensure_default_semantic_reranker() -> None:
+    """语料磁盘库可用时自动挂轻量语义通道 (哈希 bigram 余弦, 无模型依赖)。"""
+    if _SEMANTIC_RERANKER is not None:
+        return
+    try:
+        try:
+            from . import config as _module_config
+            enabled = bool(getattr(_module_config.config, "catty_fdj_corpus_semantic_enabled", True))
+        except Exception:  # noqa: BLE001
+            enabled = True
+        if not enabled:
+            return
+        from . import fdj_corpus_store
+        if fdj_corpus_store.corpus_enabled():
+            set_scene_semantic_reranker(fdj_corpus_store.corpus_semantic_reranker)
+    except Exception:  # noqa: BLE001
+        return
+
+
 def clear_retrieval_cache() -> None:
     _MATCH_CACHE.clear()
-    _cached_records.cache_clear()
+    _RECORDS_CACHE.clear()
+    _CANDIDATE_INDEX_CACHE.clear()
     _cached_pairs.cache_clear()
 
 
@@ -361,7 +458,7 @@ def _semantic_scores(query: str, candidates: Sequence[SceneRecord]) -> dict[int,
 def _source_priority(source: str) -> int:
     if source.startswith("fadianji_seed"):
         return 2
-    if source.startswith("fdj_delta:"):
+    if source.startswith("fdj_delta:") or source.startswith("fadianji_"):
         return 1
     return 0
 
@@ -388,7 +485,7 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
     if not query or k <= 0:
         return []
     normalized_scope = _scope_key(scope_key)
-    key = (query, int(k), normalized_scope, bool(is_private), str(category or ""), bool(semantic), _DELTA_SIGNATURE)
+    key = (query, int(k), normalized_scope, bool(is_private), str(category or ""), bool(semantic), _DELTA_SIGNATURE, _corpus_signature())
     cached = _MATCH_CACHE.get(key)
     if cached is not None:
         _MATCH_CACHE.move_to_end(key)
@@ -396,8 +493,23 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
     query_grams = _bigrams(query)
     query_words = frozenset(_WORD_RE.findall(query))
     query_categories = _query_categories(query)
+    records = _cached_records()
+    word_index, category_index = _candidate_index()
+    candidate_positions: set[int] = set()
+    for word in query_words:
+        positions = word_index.get(word)
+        if positions:
+            candidate_positions.update(positions)
+    if category:
+        candidate_positions.update(category_index.get(category, ()))
+    for query_category in query_categories:
+        candidate_positions.update(category_index.get(query_category, ()))
+    if 4 <= len(candidate_positions) < len(records):
+        record_iter = (records[position] for position in sorted(candidate_positions))
+    else:
+        record_iter = iter(records)
     lexical: list[tuple[float, float, SceneRecord, float]] = []
-    for record in _cached_records():
+    for record in record_iter:
         if not _allowed(record, normalized_scope, bool(is_private)) or not record.trigger_bigrams:
             continue
         word_hit = len(query_words & record.trigger_words)
@@ -414,6 +526,8 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
         lexical.append((total, lexical_score, record, scope_bonus))
     lexical.sort(key=lambda item: (-item[0], -item[1], _source_priority(item[2].source), item[2].source, item[2].category, item[2].trigger, item[2].reply))
     candidates = [item[2] for item in lexical[: max(k * 8, 32)]]
+    if semantic and candidates:
+        _ensure_default_semantic_reranker()
     semantic_scores = _semantic_scores(query, candidates) if semantic and candidates else {}
     best: dict[str, SceneMatch] = {}
     lexical_by_identity = {id(item[2]): item for item in lexical}

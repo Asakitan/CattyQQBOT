@@ -333,17 +333,6 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "fadianji_harness_max_chars": 12000,
         "fadianji_static_scene_bank_enabled": True,
         "fadianji_static_scene_bank_max_chars": 140000,
-        "fadianji_corpus_enabled": True,
-        "fadianji_corpus_max_pairs": 12000,
-        "fadianji_corpus_semantic_enabled": True,
-        "fadianji_corpus_lore_enabled": True,
-        "fadianji_corpus_lore_max_chars": 320,
-        "fadianji_stat_critic_enabled": True,
-        "fadianji_stat_critic_pass_score": 0.72,
-        "fadianji_echo_enabled": True,
-        "fadianji_echo_probability": 0.35,
-        "fadianji_echo_min_score": 3.4,
-        "fadianji_echo_cooldown_seconds": 120.0,
         "session_cache_persistence_enabled": True,
         "session_cache_dir": "sessions",
         "session_cache_max_sessions": 200,
@@ -848,18 +837,6 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FADIANJI_HARNESS_MAX_CHARS", chat.get("fadianji_harness_max_chars"))
     _set_env("CATTY_FADIANJI_STATIC_SCENE_BANK_ENABLED", chat.get("fadianji_static_scene_bank_enabled"))
     _set_env("CATTY_FADIANJI_STATIC_SCENE_BANK_MAX_CHARS", chat.get("fadianji_static_scene_bank_max_chars"))
-    # 主人 2026-08-25: 机机语料磁盘库 + 统计 critic + 语料直发
-    _set_env("CATTY_FADIANJI_CORPUS_ENABLED", chat.get("fadianji_corpus_enabled"))
-    _set_env("CATTY_FADIANJI_CORPUS_MAX_PAIRS", chat.get("fadianji_corpus_max_pairs"))
-    _set_env("CATTY_FADIANJI_CORPUS_SEMANTIC_ENABLED", chat.get("fadianji_corpus_semantic_enabled"))
-    _set_env("CATTY_FADIANJI_CORPUS_LORE_ENABLED", chat.get("fadianji_corpus_lore_enabled"))
-    _set_env("CATTY_FADIANJI_CORPUS_LORE_MAX_CHARS", chat.get("fadianji_corpus_lore_max_chars"))
-    _set_env("CATTY_FADIANJI_STAT_CRITIC_ENABLED", chat.get("fadianji_stat_critic_enabled"))
-    _set_env("CATTY_FADIANJI_STAT_CRITIC_PASS_SCORE", chat.get("fadianji_stat_critic_pass_score"))
-    _set_env("CATTY_FADIANJI_ECHO_ENABLED", chat.get("fadianji_echo_enabled"))
-    _set_env("CATTY_FADIANJI_ECHO_PROBABILITY", chat.get("fadianji_echo_probability"))
-    _set_env("CATTY_FADIANJI_ECHO_MIN_SCORE", chat.get("fadianji_echo_min_score"))
-    _set_env("CATTY_FADIANJI_ECHO_COOLDOWN_SECONDS", chat.get("fadianji_echo_cooldown_seconds"))
     _set_env("CATTY_SESSION_CACHE_PERSISTENCE_ENABLED", chat.get("session_cache_persistence_enabled"))
     _set_env("CATTY_SESSION_CACHE_DIR", chat.get("session_cache_dir"))
     _set_env("CATTY_SESSION_CACHE_MAX_SESSIONS", chat.get("session_cache_max_sessions"))

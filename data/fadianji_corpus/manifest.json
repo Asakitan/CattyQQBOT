@@ -1,0 +1,39 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-08-24T18:56:25+00:00",
+ "sources": {
+  "group": {
+   "path": "E:\\VC\\Catty\\tmp\\fdj_group_texts.jsonl",
+   "sha256_16": "597cf0d108a22c1f",
+   "rows": 38810
+  },
+  "private": {
+   "path": "E:\\VC\\Catty\\tmp\\fdj_private_texts.jsonl",
+   "sha256_16": "c0c7a5163a7c5e27",
+   "rows": 2329
+  }
+ },
+ "outputs": {
+  "scene_pairs": {
+   "total": 9131,
+   "group": 8006,
+   "private": 1125,
+   "echo_eligible": 2613
+  },
+  "style_stats": {
+   "group_top_replies": 400,
+   "private_top_replies": 110
+  },
+  "user_profiles": 369
+ },
+ "limits": {
+  "out_dir": "E:\\VC\\Catty\\data\\fadianji_corpus",
+  "group_src": "E:\\VC\\Catty\\tmp\\fdj_group_texts.jsonl",
+  "private_src": "E:\\VC\\Catty\\tmp\\fdj_private_texts.jsonl",
+  "max_group_pairs": 20000,
+  "max_private_pairs": 4000,
+  "max_per_reply": 30,
+  "max_per_category": 1500,
+  "min_user_triggers": 5
+ }
+}

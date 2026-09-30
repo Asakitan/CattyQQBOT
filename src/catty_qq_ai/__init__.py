@@ -6011,6 +6011,7 @@ def _build_cognitive_turn_context_sync(
     is_private: bool,
     user_id: str,
     group_id: str,
+    display_name: str = "",
 ) -> tuple[str, str]:
     """Build post-boundary system evidence and the current user-role adaptive block."""
     persona_name = str(getattr(persona, "name", "catty") or "catty")
@@ -6034,6 +6035,9 @@ def _build_cognitive_turn_context_sync(
                 # 主人 2026-08-15: 例句加料 — 每轮检索对数/证据包上限走配置, 默认 12 对/12000 字符
                 scene_k=max(0, int(getattr(config, "catty_fadianji_scene_k", 12) or 0)),
                 max_chars=max(0, int(getattr(config, "catty_fadianji_harness_max_chars", 12000) or 0)),
+                # 主人 2026-08-25: 语料磁盘库轻量语义重排 (哈希余弦, 无模型依赖)
+                semantic=bool(getattr(config, "catty_fdj_corpus_semantic_enabled", True)),
+                display_name=display_name,
             )
             if harness:
                 system_parts.append(harness)
@@ -6061,6 +6065,99 @@ def _build_cognitive_turn_context_sync(
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"adaptive prompt build failed (non-fatal): {exc}")
     return "\n\n".join(system_parts), adaptive_prompt
+
+
+_FDJ_ECHO_LAST_SENT: dict[str, float] = {}
+_FDJ_ECHO_INTENTS = frozenset({"reaction", "praise", "greeting", "thanks"})
+
+
+async def _maybe_corpus_echo_reply(
+    matcher: Matcher,
+    bot: Bot,
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    history_key: str,
+    *,
+    fresh_mention: bool,
+) -> bool:
+    """语料直发 (2026-08-25 Wave ⑤): 超短反应场景直接发语料原句, 跳过全部 LLM 调用。
+
+    闸门链: 机机人格 → 纯文本短句 → 白名单 intent → top match 总分达标 →
+    该对带 echo 标记 (语料里反复出现的 ≤8 字短回) → 概率 → per-scope 冷却。
+    命中走正常发送总线 + 全套记账 (续聊窗/反复读/RAG/好感/会话历史)。
+    """
+    if _persona_for_event(event).name != "fadianji":
+        return False
+    if not bool(getattr(config, "catty_fdj_echo_enabled", True)):
+        return False
+    text = str(incoming.text or "").strip()
+    if not text or len(text) > 30 or incoming.has_image or incoming.image_keys:
+        return False
+    try:
+        from .fadianji_harness import detect_fadianji_query_flags
+        flags = detect_fadianji_query_flags(text)
+    except Exception:  # noqa: BLE001
+        return False
+    if flags.intent not in _FDJ_ECHO_INTENTS:
+        return False
+    is_private = isinstance(event, PrivateMessageEvent)
+    scope = f"private:{event.user_id}" if is_private else f"group:{getattr(event, 'group_id', '') or ''}"
+    try:
+        from . import fdj_corpus_store
+        if not fdj_corpus_store.corpus_enabled():
+            return False
+        from .fdj_scene_retrieval import match_scene_pairs
+        matches = await asyncio.to_thread(
+            match_scene_pairs,
+            text,
+            1,
+            scope_key=scope,
+            is_private=is_private,
+            semantic=bool(getattr(config, "catty_fdj_corpus_semantic_enabled", True)),
+        )
+    except Exception:  # noqa: BLE001
+        return False
+    if not matches:
+        return False
+    top = matches[0]
+    try:
+        min_score = float(getattr(config, "catty_fdj_echo_min_score", 3.4) or 3.4)
+        probability = float(getattr(config, "catty_fdj_echo_probability", 0.35) or 0.0)
+        cooldown = float(getattr(config, "catty_fdj_echo_cooldown_seconds", 120.0) or 0.0)
+    except (TypeError, ValueError):
+        return False
+    if top.score < min_score or len(top.reply) > 8:
+        return False
+    try:
+        meta = fdj_corpus_store.pair_meta(top.trigger, top.reply)
+    except Exception:  # noqa: BLE001
+        meta = None
+    if not (isinstance(meta, dict) and meta.get("echo")):
+        return False
+    if probability <= 0.0 or random.random() >= probability:
+        return False
+    now = time.time()
+    if now - _FDJ_ECHO_LAST_SENT.get(history_key, 0.0) < cooldown:
+        return False
+    _FDJ_ECHO_LAST_SENT[history_key] = now
+    reply = top.reply
+    logger.info(
+        f"fdj corpus echo: scope={history_key} user={event.user_id} "
+        f"text={text[:30]!r} -> {reply!r} score={top.score:.2f} category={top.category}"
+    )
+    try:
+        _remember_bot_reply_for_event(event, reply, open_continuation=True, fresh_mention=fresh_mention)
+        await matcher.send(
+            _compose_reply_message(
+                event,
+                text=reply,
+                quote=_should_quote_chat_reply(event, incoming),
+            )
+        )
+        _append_history(history_key, str(incoming.history_content or text), reply)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"fdj corpus echo send failed: {exc}")
+    return True
 
 
 async def _build_messages(
@@ -6803,6 +6900,7 @@ async def _build_messages(
             scope_key=key,
             is_private=_is_private_event,
             user_id=str(event.user_id),
+            display_name=str(getattr(incoming, "display_name", "") or ""),
             group_id=str(getattr(event, "group_id", "") or ""),
         )
     except Exception as exc:  # noqa: BLE001
@@ -14257,6 +14355,16 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             )
             await matcher.finish()
 
+        # 主人 2026-08-25 Wave ⑤: 语料直发 — 超短反应场景直接发语料原句,
+        # 跳过 vision/emoji/LLM 全链路 (本来就是机机本人说过的话)。
+        try:
+            if await _maybe_corpus_echo_reply(
+                matcher, bot, event, incoming, history_key, fresh_mention=fresh_mention
+            ):
+                await matcher.finish()
+        except Exception as _echo_exc:  # noqa: BLE001
+            logger.debug(f"fdj corpus echo check failed (non-fatal): {_echo_exc}")
+
         # 主人 2026-05-28: 设置 request-local context，让 LLM 层取得 scope、模型覆盖、
         # persona 文案和蒸馏元数据。回调挂到现有 stack，finish/正常返回/异常均恢复外层 context。
         try:
@@ -15582,9 +15690,26 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             reply = _strip_tone_parenthetical_for_fadianji(reply)
         # 主人 2026-08-15: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写。
         # 正常短句零开销, 只有漂移回复付一次 audit 小调用; 任何失败都原样放行。
+        # 主人 2026-08-25 Wave ⑤: 统计风格评分前置 — 语料统计分够就免 LLM 质检。
+        _fdj_stat_critic_skip = False
         if _persona_for_event(event).name == "fadianji" and bool(
             getattr(config, "catty_style_critic_enabled", True)
-        ):
+        ) and bool(getattr(config, "catty_fdj_stat_critic_enabled", True)):
+            try:
+                from . import fdj_style_stats
+                _fdj_stat_critic_skip = fdj_style_stats.stat_critic_passes(
+                    reply,
+                    scope="private" if isinstance(event, PrivateMessageEvent) else "group",
+                    technical=bool(_turn_tool_audit_result_texts),
+                    user_text=str(incoming.text or ""),
+                )
+            except Exception as _stat_exc:  # noqa: BLE001
+                logger.debug(f"fdj stat critic failed (non-fatal): {_stat_exc}")
+        if _fdj_stat_critic_skip:
+            logger.debug("fdj stat critic passed reply, skip LLM style critic")
+        if _persona_for_event(event).name == "fadianji" and bool(
+            getattr(config, "catty_style_critic_enabled", True)
+        ) and not _fdj_stat_critic_skip:
             try:
                 from . import fadianji_style_critic
                 reply = await fadianji_style_critic.rewrite_if_needed(
