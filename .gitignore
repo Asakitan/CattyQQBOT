@@ -22,7 +22,15 @@ logs/
 file_sync.exe
 file_sync_config.json
 tools/
-tests/
+tests/*
+!tests/test_context_buckets.py
+!tests/test_memory_persistence.py
+!tests/test_memory_hot_reload.py
+!tests/test_anthropic_client_lifecycle.py
+!tests/test_cache_cpu.py
+!tests/test_harness_interface.py
+!tests/test_input_context.py
+!tests/test_local_tool_contracts.py
 backup/
 .sync_tmp/
 .claude/

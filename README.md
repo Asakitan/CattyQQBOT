@@ -273,8 +273,8 @@ emojis/manifest.json   ← 含义 + 标签 + 来源记录
 **会话缓存**：每个群 / 私聊一份独立窗口，key 形如 `group:<群号>` / `private:<QQ>`。
 
 - 持久化到 `sessions/` 目录，重启自动恢复
-- 内存 LRU，超过 `session_cache.max_sessions` 时连同盘上文件一起淘汰
-- dirty 标记 + 后台节流 `session_cache.save_debounce_seconds`，关停 flush 一次
+- 内存 LRU，`session_cache.max_sessions` 只限制驻留内存的会话；持久化开启时，冷会话保留盘上文件，按需懒加载
+- 完成一轮对话后立即原子写盘；dirty 标记 + 后台节流 `session_cache.save_debounce_seconds` 和关停 flush 作为兜底
 
 **Prompt 优化**：system prompt 按"稳定性"排——人格 / 流水线 / 自检放最前面，
 按事件变化的（图片、强制回复、软触发、消息上下文）放后面，配合 OpenAI 系
@@ -345,8 +345,27 @@ ai 列会话
 
 临时不想用守护：设环境变量 `CATTY_NO_HOT_RELOAD=1` 再跑 `start_catty.bat`。
 
-热重载切 `MemoryStore` 实例前会自动 `flush_sync()` 旧实例，给新实例补起 `background_flush_loop`，
-不会丢正在写盘的脏数据。
+热重载切 `MemoryStore` 实例前会先刷写旧实例；临时写盘失败时保留旧配置和待写记忆，
+下轮自动重试，不会把失败的配置版本标为已生效。统一后台 flush 循环每轮读取当前实例，
+无需为每次热重载额外启动任务。记忆文件刷新也会在预写失败时保留原内存。
+
+---
+
+## 离线回归测试
+
+缓存/CPU 基准、本地 harness CLI、工具结果预算与输入上下文改动见
+[缓存、CPU、harness 与输入上下文](docs/PERFORMANCE_AND_HARNESS.md)。
+
+安装项目依赖后运行，无需配置 API Key、登录 QQ 或启动 `bot.py`：
+
+```powershell
+python -m unittest discover -s tests -v
+python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py scripts tests
+```
+
+测试使用临时目录和离线客户端替身，覆盖时间桶、记忆写盘失败后的重试、热重载保护，
+以及 Anthropic 客户端在成功、异常和取消时的资源释放。热重载测试隔离执行入口文件中的
+实际函数，不启动整个插件；这些检查不等同于真实 QQ、模型服务或 Windows 打包集成测试。
 
 ---
 

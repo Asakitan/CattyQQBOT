@@ -2834,6 +2834,13 @@ async def _post_chat_completion_raw(
     if not model.strip():
         raise OpenAICompatibleError("AI 模型名为空。")
 
+    # Cache normalization mutates both messages and tool dictionaries. Keep one
+    # request-owned copy before either path runs, including cache-marker removal.
+    import copy
+    messages = copy.deepcopy(messages)
+    if tools:
+        tools = copy.deepcopy(tools)
+
     headers = {
         "Authorization": f"Bearer {api_key.strip()}",
         "Content-Type": "application/json",
@@ -2852,9 +2859,7 @@ async def _post_chat_completion_raw(
             is_claude_endpoint,
         )
         try:
-            # 深拷贝避免修改调用方 messages (会被多次注入污染)
-            import copy
-            messages = copy.deepcopy(messages)
+            # Input dictionaries are already isolated at the request boundary.
             # 主人 2026-05-28 Phase 1.2: 标位前先剥所有现存 cache_control (defensive single-owner).
             # history messages 持久化回来可能含上一轮 cache_control, 叠 2 份会让 relay 第二轮 500.
             _stripped = 0
@@ -2902,8 +2907,6 @@ async def _post_chat_completion_raw(
             strip_inline_dynamic_segments_from_history,
         )
         if not is_claude_endpoint(base_url, model):
-            import copy as _copy
-            messages = _copy.deepcopy(messages)
             # (a) strip 残留 cache_control (防 DeepSeek 未来严格校验未知字段)
             stripped = strip_all_cache_control(messages, tools)
             if stripped > 0:
@@ -3025,7 +3028,6 @@ async def _post_chat_completion_raw(
                 )
             # (c) tools 字典序排锁死 (QwenLM 翻车: 顺序变→97.5%→81.5%)
             if tools:
-                tools = _copy.deepcopy(tools)
                 reordered = stabilize_tools_order(tools)
                 if reordered:
                     _logger.debug(

@@ -374,6 +374,10 @@ _SPECIAL_CARE_RULES = (
 )
 
 
+class MemoryPersistenceError(RuntimeError):
+    """Pending memory could not be saved; replacing this store would lose data."""
+
+
 def _is_catty_persona(persona) -> bool:
     return persona is None or getattr(persona, "name", "catty") == "catty"
 
@@ -468,12 +472,8 @@ class MemoryStore:
 
     def refresh(self) -> None:
         # 热重载前先把内存里待落盘的脏数据写下去，避免被 _load 直接覆盖。
-        if self._dirty:
-            try:
-                self._persist_now()
-            except Exception as exc:  # noqa: BLE001
-                logger.warning(f"memory_store: refresh pre-flush failed: {exc}")
-            self._dirty = False
+        # 失败必须让调用方知道，并保留原实例的数据供下一轮重试。
+        self.flush_sync(raise_on_error=True)
         self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}, "group_game_tags": {}}
         if self.enabled:
             self._load()
@@ -580,8 +580,12 @@ class MemoryStore:
             if isinstance(game, dict):
                 self._write_entity_file(self._game_file(str(game_name)), "game_name", str(game_name), game)
 
-    def flush_sync(self) -> bool:
-        """如果有脏数据则真正落盘。返回是否实际写了。供 shutdown / hot-reload 钩子调用。"""
+    def flush_sync(self, *, raise_on_error: bool = False) -> bool:
+        """Return whether dirty data was saved; retain it after any write failure.
+
+        Background/shutdown callers log failures and can retry. Callers about to
+        replace in-memory state must use raise_on_error to abort that replacement.
+        """
         if not self.enabled:
             self._dirty = False
             return False
@@ -590,10 +594,11 @@ class MemoryStore:
         try:
             self._persist_now()
         except Exception as exc:  # noqa: BLE001
+            if raise_on_error:
+                raise MemoryPersistenceError(f"memory_store: failed to persist {self.path}: {exc}") from exc
             logger.warning(f"memory_store: flush_sync failed: {exc}")
             return False
-        finally:
-            self._dirty = False
+        self._dirty = False
         return True
 
     async def background_flush_loop(self) -> None:

@@ -1010,14 +1010,12 @@ async def post_messages_native(
     if sdk_base_url.endswith("/v1"):
         sdk_base_url = sdk_base_url[:-3].rstrip("/")
 
-    # AsyncAnthropic 实例不复用 (单次 chat_completion 调用就建一次, 跟 _post_chat_completion 行为一致)
-    # 主人后续若要复用可拉到 module-level singleton
-    client = anthropic.AsyncAnthropic(
-        base_url=sdk_base_url,
-        api_key=api_key,
-        default_headers=headers,
-        timeout=timeout,
-    )
+    # Conversion can pass through ordinary message/tool dictionaries unchanged.
+    # Isolate them once before stripping history or stamping cache breakpoints.
+    from copy import deepcopy
+    messages = deepcopy(messages)
+    if tools:
+        tools = deepcopy(tools)
 
     # Pre-step: OpenAI 风格 tool history (role=tool, assistant.tool_calls) → Anthropic
     # native (assistant.content=[tool_use], user.content=[tool_result]).
@@ -1034,7 +1032,6 @@ async def post_messages_native(
     if tools:
         try:
             from .prompt_cache import stabilize_tools_order
-            tools = list(tools)
             stabilize_tools_order(tools)
         except Exception as _st_exc:  # noqa: BLE001
             logger.debug(f"native stabilize_tools_order failed (non-fatal): {_st_exc}")
@@ -1456,30 +1453,38 @@ async def post_messages_native(
         logger.debug(f"raw_body_dump failed: {_dump_exc}")
 
     try:
-        async with client.beta.messages.stream(**create_kwargs) as stream:
-            try:
-                from . import dashboard_state as _dash
-                _stream_id = _dash.start_stream(model=model)
-            except Exception:  # noqa: BLE001
-                _dash = None
-                _stream_id = None
-            try:
-                async for event in stream:
-                    # event 类型多样: MessageStart, ContentBlockStart, ContentBlockDelta,
-                    # ContentBlockStop, MessageDelta, MessageStop, etc. 不需要逐个处理,
-                    # SDK 内部维护完整 message buffer. 但可以把 text delta 推到 dashboard.
+        # 每次请求独立建 client, 请求准备完成后才分配连接池。
+        # stream 上下文只关闭响应; 外层 client 上下文在成功/异常/取消时关闭连接池。
+        async with anthropic.AsyncAnthropic(
+            base_url=sdk_base_url,
+            api_key=api_key,
+            default_headers=headers,
+            timeout=timeout,
+        ) as client:
+            async with client.beta.messages.stream(**create_kwargs) as stream:
+                try:
+                    from . import dashboard_state as _dash
+                    _stream_id = _dash.start_stream(model=model)
+                except Exception:  # noqa: BLE001
+                    _dash = None
+                    _stream_id = None
+                try:
+                    async for event in stream:
+                        # event 类型多样: MessageStart, ContentBlockStart, ContentBlockDelta,
+                        # ContentBlockStop, MessageDelta, MessageStop, etc. 不需要逐个处理,
+                        # SDK 内部维护完整 message buffer. 但可以把 text delta 推到 dashboard.
+                        if _dash is not None and _stream_id is not None:
+                            try:
+                                _dash.push_event(_stream_id, event)
+                            except Exception:  # noqa: BLE001
+                                pass
+                    response = await stream.get_final_message()
+                finally:
                     if _dash is not None and _stream_id is not None:
                         try:
-                            _dash.push_event(_stream_id, event)
+                            _dash.end_stream(_stream_id)
                         except Exception:  # noqa: BLE001
                             pass
-                response = await stream.get_final_message()
-            finally:
-                if _dash is not None and _stream_id is not None:
-                    try:
-                        _dash.end_stream(_stream_id)
-                    except Exception:  # noqa: BLE001
-                        pass
     except Exception as exc:
         logger.warning("anthropic /v1/messages stream call failed: %s", exc)
         raise

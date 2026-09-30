@@ -60,7 +60,7 @@ from .affection import (
 from .affection_card import prune_cards as _prune_affection_cards, render_card_to_file as _render_affection_card
 from .emoji_store import EmojiEntry, EmojiStore
 from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
-from .memory import MemoryStore
+from .memory import MemoryPersistenceError, MemoryStore
 from .openai_client import (
     _SESSION_HISTORY_MARKER,
     chat_completion_codex_instant,
@@ -4642,11 +4642,9 @@ def _apply_runtime_config(new_config: Config) -> None:
     global config, memory_store, legs_picker, affection_store
     global timeline_store, adaptive_prompt_store, qzone_feed_store, _qzone_feed_store_generation
     # 切实例前先把旧 memory_store 待写的脏数据落盘,避免 hot reload 丢失最近的记忆。
-    try:
-        if memory_store.flush_sync():
-            logger.info("memory_store: flushed dirty data before hot reload")
-    except Exception as exc:  # noqa: BLE001
-        logger.warning(f"memory_store: pre-reload flush failed: {exc}")
+    # 磁盘暂时不可写时保留旧 config/store；交给 watcher 重试，不能继续换实例。
+    if memory_store.flush_sync(raise_on_error=True):
+        logger.info("memory_store: flushed dirty data before hot reload")
     try:
         if affection_store.flush_sync():
             logger.info("affection_store: flushed dirty data before hot reload")
@@ -4890,10 +4888,26 @@ async def _transition_runtime_config(new_config: Config) -> set[str]:
     return changed_scopes
 
 async def _reload_runtime_config_from_path(path: Path) -> bool:
+    previous_env = dict(os.environ)
     new_config = _load_runtime_config_from_path(path)
     if new_config is None:
         return False
-    await _transition_runtime_config(new_config)
+    loaded_env = dict(os.environ)
+    try:
+        await _transition_runtime_config(new_config)
+    except MemoryPersistenceError:
+        # Config parsing updates environment variables synchronously. Roll back
+        # only its changes if the queue-protected transition has to be deferred;
+        # don't overwrite a later environment change made while awaiting locks.
+        for name in previous_env.keys() | loaded_env.keys():
+            before, loaded = previous_env.get(name), loaded_env.get(name)
+            if before == loaded or os.environ.get(name) != loaded:
+                continue
+            if before is None:
+                os.environ.pop(name, None)
+            else:
+                os.environ[name] = before
+        raise
     logger.info(f"Hot reloaded config.json: {path}")
     return True
 
@@ -4913,6 +4927,7 @@ async def _nsfw_phase_flush_loop() -> None:
 
 
 async def _hot_reload_loop() -> None:
+    global _hot_reload_emoji_signature, _hot_reload_memory_signature
     _sync_hot_reload_signatures()
     while True:
         poll_seconds = max(float(config.catty_hot_reload_poll_seconds or 1.5), 0.2)
@@ -4920,7 +4935,17 @@ async def _hot_reload_loop() -> None:
         config_path = _runtime_config_path()
         config_signature = _file_signature(config_path)
         if config_path is not None and config_signature != _hot_reload_config_signature:
-            if await _reload_runtime_config_from_path(config_path):
+            try:
+                reloaded = await _reload_runtime_config_from_path(config_path)
+            except MemoryPersistenceError as exc:
+                logger.warning(f"Hot reload deferred until pending memory is saved: {exc}")
+                # Do not acknowledge this config signature: retry the same edit
+                # on the next poll, without requiring another config-file change.
+                continue
+            if reloaded:
+                # A newer edit may have arrived while waiting for chat queues;
+                # acknowledge only the version that triggered this reload.
+                _remember_hot_reload_config_signature(config_path, config_signature)
                 continue
             _remember_hot_reload_config_signature(config_path, config_signature)
         if not config.catty_hot_reload_enabled:
@@ -4932,9 +4957,10 @@ async def _hot_reload_loop() -> None:
                 logger.info("Hot reloaded persona emoji files and manifests")
             except Exception as exc:
                 logger.warning(f"Hot reload failed to refresh persona emoji stores: {exc}")
-            finally:
-                _sync_hot_reload_signatures()
-            continue
+            else:
+                # refresh() can rewrite manifests itself; acknowledge those
+                # writes, without swallowing pending config/memory changes.
+                _hot_reload_emoji_signature = _emoji_signature_for_config(config)
         memory_signature = _memory_signature_for_store(memory_store)
         if memory_signature != _hot_reload_memory_signature:
             try:
@@ -4942,8 +4968,8 @@ async def _hot_reload_loop() -> None:
                 logger.info("Hot reloaded memory files")
             except Exception as exc:
                 logger.warning(f"Hot reload failed to refresh memory store: {exc}")
-            finally:
-                _sync_hot_reload_signatures()
+            else:
+                _hot_reload_memory_signature = _memory_signature_for_store(memory_store)
         # QQ空间动态见闻 (2026-08-15): 数据文件进程内热重载, 不进守护 WATCH 清单
         if qzone_feed_store is not None:
             try:
@@ -5273,7 +5299,8 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
         trim_threshold = max_messages * 2 if max_messages else 0
         if trim_threshold and len(history) > trim_threshold:
             if (
-                len(history) >= 4
+                max_messages > 2
+                and len(history) >= 4
                 and isinstance(history[0], dict) and history[0].get("role") == "user"
                 and isinstance(history[1], dict) and history[1].get("role") == "assistant"
             ):
@@ -5347,6 +5374,8 @@ def _schedule_session_ai_compact(key: str) -> None:
 
 async def _run_session_ai_compact(key: str) -> None:
     try:
+        from copy import deepcopy
+
         cache = _get_session_cache()
         from .nlu.prompt_compressor import count_history_tokens
         from .openai_client import (
@@ -5355,10 +5384,15 @@ async def _run_session_ai_compact(key: str) -> None:
             get_session_token_estimator_multiplier,
         )
 
-        source = [m for m in cache.get(key) if not _is_ai_compact_block(m)]
+        # Keep an immutable request snapshot, including previous summaries. A later
+        # compaction must carry those facts forward instead of silently replacing
+        # them with a summary of only the remaining raw messages.
+        snapshot = deepcopy(list(cache.get(key)))
+        previous_summaries = [m for m in snapshot if _is_ai_compact_block(m)]
+        source = [m for m in snapshot if not _is_ai_compact_block(m)]
         if len(source) < 8:
             return
-        boundary_len = len(source)  # 任务开始时的非压缩块消息数 (追加只发生在末尾)
+        boundary_len = len(snapshot)  # 完整源前缀；压缩期间只允许末尾追加
         # 最旧一批蒸馏, 最近 ~40% (按 token, 至少 4 条) 原样保留
         total_tokens = max(count_history_tokens(source), 1)
         keep_budget = int(total_tokens * 0.4)
@@ -5381,6 +5415,16 @@ async def _run_session_ai_compact(key: str) -> None:
             tag = "用户" if role == "user" else ("机机" if role == "assistant" else "补充")
             lines.append(f"{tag}: {content}")
         transcript = "\n".join(lines)[-60_000:]
+        if previous_summaries:
+            previous_text = "\n\n".join(
+                str(message.get("content") or "") for message in previous_summaries
+            )
+            # Apply the existing raw-transcript cap before adding summaries, so
+            # the cap cannot drop the only remaining copy of older commitments.
+            transcript = (
+                "已有前情提要（请承接并更新，保留仍有效的事实与未完成事项）：\n"
+                f"{previous_text}\n\n新增待压缩的对话：\n{transcript}"
+            )
         summary = await chat_completion_summary(
             config,
             [
@@ -5409,13 +5453,13 @@ async def _run_session_ai_compact(key: str) -> None:
         }
         # 替换前重取并锚定边界: 压缩期间新追加的消息全部保留, 一条不丢。
         # 头部被裁/锚点变动则放弃本次替换, 不动历史。此后到 flush 无 await, 窗口最小。
-        fresh = [m for m in cache.get(key) if not _is_ai_compact_block(m)]
-        if len(fresh) < boundary_len or fresh[boundary_len - 1] != source[-1]:
+        fresh = list(cache.get(key))
+        if fresh[:boundary_len] != snapshot:
             logger.info(
                 f"session_ai_compact: scope={key} history head changed during compaction, skip replace"
             )
             return
-        preserved = fresh[max(boundary_len - len(kept), 0):boundary_len]
+        preserved = kept
         appended = fresh[boundary_len:]
         new_history = [block] + preserved + appended
         cache.set(key, new_history)

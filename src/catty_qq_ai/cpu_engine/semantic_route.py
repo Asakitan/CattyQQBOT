@@ -89,6 +89,7 @@ class SemanticRouter:
         self._embed_batch_fn = embed_batch_fn
         self._flat_utterances: list[str] = []
         self._flat_route_idx: list[int] = []
+        self._flat_route_weights: np.ndarray | None = None
         self._flat_embeddings: np.ndarray | None = None
         self._prepared = False
         # 磁盘缓存路径
@@ -124,6 +125,11 @@ class SemanticRouter:
             logger.warning("[cpu_engine.L2] no utterances across routes")
             self._prepared = True
             return False
+
+        # 与旧 float(score) * route.weight 一致使用 float64；route 分组顺序不变。
+        self._flat_route_weights = np.asarray(
+            [self._routes[i].weight for i in self._flat_route_idx], dtype=np.float64
+        )
 
         # ── 主人 2026-05-30: 磁盘缓存 ──
         if self._try_load_cache(n_utts):
@@ -256,6 +262,41 @@ class SemanticRouter:
             return None
 
         scores = self._flat_embeddings @ query
+        winner = self._select_winner(scores)
+        if winner is None:
+            return None
+        winner_route_idx, winner_score, winner_utt_idx = winner
+
+        if winner_score < candidate_threshold:
+            return None
+
+        route = self._routes[winner_route_idx]
+        response = random.choice(route.responses) if route.responses else ""
+        return SemanticMatchResult(
+            route_name=route.name,
+            intent=route.intent,
+            response=response,
+            confidence=min(winner_score, 1.0),
+            matched_utterance=self._flat_utterances[winner_utt_idx],
+            is_direct=winner_score >= direct_threshold,
+        )
+
+    def _select_winner(self, scores: "np.ndarray") -> tuple[int, float, int] | None:
+        """按原分组顺序取 weighted max，同分保留最早 route / utterance。"""
+        if self._flat_route_weights is not None and len(scores):
+            with np.errstate(invalid="ignore", over="ignore"):
+                weighted_scores = scores.astype(np.float64, copy=False) * self._flat_route_weights
+            if np.isfinite(weighted_scores).all():
+                # prepare() 按 route 连续展开 utterances；全局首个 max 等价于
+                # 先逐 route 取首个 max、再从 routes 中取首个 max。
+                winner_idx = int(np.argmax(weighted_scores))
+                return (
+                    self._flat_route_idx[winner_idx],
+                    float(weighted_scores[winner_idx]),
+                    winner_idx,
+                )
+
+        # 非 finite 分数的 Python 比较语义与 numpy.argmax 不同，保留原实现兜底。
         best_per_route: dict[int, tuple[float, int]] = {}
         for utt_idx, score in enumerate(scores):
             route_idx = self._flat_route_idx[utt_idx]
@@ -271,19 +312,7 @@ class SemanticRouter:
             best_per_route.items(), key=lambda kv: kv[1][0]
         )
 
-        if winner_score < candidate_threshold:
-            return None
-
-        route = self._routes[winner_route_idx]
-        response = random.choice(route.responses) if route.responses else ""
-        return SemanticMatchResult(
-            route_name=route.name,
-            intent=route.intent,
-            response=response,
-            confidence=min(winner_score, 1.0),
-            matched_utterance=self._flat_utterances[winner_utt_idx],
-            is_direct=winner_score >= direct_threshold,
-        )
+        return winner_route_idx, winner_score, winner_utt_idx
 
 
 # 主人 2026-05-30: CSafeLoader (C-backed LibYAML, 5-10x faster than pure Python safe_load)

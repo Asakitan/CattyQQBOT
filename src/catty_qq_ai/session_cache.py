@@ -66,7 +66,7 @@ def _estimate_history_tokens(messages: Iterable[ChatMessage]) -> int:
 def _coerce_nonnegative_int(value: Any, default: int) -> int:
     try:
         parsed = int(value)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         return default
     return max(parsed, 0)
 
@@ -294,22 +294,23 @@ class SessionCache:
             return 0
         entries: dict[
             str,
-            tuple[float, float, str, list[ChatMessage], SessionMetadata, Path],
+            tuple[float, float, str, SessionMetadata, Path],
         ] = {}
+        # 只保留全盘轻量索引；正文在选出热会话后再读，避免启动峰值等于全部历史。
         for path in self._dir.glob("*.json"):
             entry = self._read_session_file(path)
             if entry is None:
                 continue
-            last_access, _last_turn, key, _messages, _metadata = entry
+            last_access, last_turn, key, _messages, metadata = entry
             previous = entries.get(key)
-            if previous is None or (last_access, path.name) >= (previous[0], previous[5].name):
-                entries[key] = (*entry, path)
+            if previous is None or (last_access, path.name) >= (previous[0], previous[4].name):
+                entries[key] = (last_access, last_turn, key, metadata, path)
 
         cold_entries: list[
-            tuple[float, float, str, list[ChatMessage], SessionMetadata, Path]
+            tuple[float, float, str, SessionMetadata, Path]
         ] = []
         for entry in entries.values():
-            last_access, last_turn, key, messages, metadata, path = entry
+            last_access, last_turn, key, metadata, path = entry
             if key in self._sessions:
                 continue
             self._last_access[key] = last_access
@@ -321,7 +322,13 @@ class SessionCache:
         cold_entries.sort(key=lambda entry: (entry[0], entry[2]))
         available_slots = max(self._max_sessions - len(self._sessions), 0)
         if available_slots:
-            for last_access, last_turn, key, messages, metadata, path in cold_entries[-available_slots:]:
+            for _last_access, _last_turn, key, _metadata, path in cold_entries[-available_slots:]:
+                loaded = self._read_session_file(path)
+                if loaded is None or loaded[2] != key:
+                    # 文件在两次读取之间删除/损坏/换 key 时，不保留失效索引。
+                    self._forget_index(key)
+                    continue
+                last_access, last_turn, _key, messages, metadata = loaded
                 self._sessions[key] = messages
                 self._last_access[key] = last_access
                 self._last_turn_at[key] = last_turn
@@ -344,6 +351,10 @@ class SessionCache:
             if self._write_one(key):
                 written += 1
                 self._dirty.discard(key)
+        if written:
+            # 失败写盘时为了保护 dirty 会话允许临时超限；恢复后重新收缩 RAM。
+            # 本轮写失败的 dirty 不在淘汰阶段重试，保持 written 计数与重试节奏。
+            self._evict_lru(write_dirty=False)
         return written
 
     async def background_flush_loop(self) -> None:
@@ -386,17 +397,16 @@ class SessionCache:
         last_access = _coerce_timestamp(data.get("last_access"), file_mtime)
         # 旧文件没 last_turn → 退回 last_access(对老数据已是最好的"上轮时刻"估计)。
         last_turn = _coerce_timestamp(data.get("last_turn"), last_access)
-        metadata = _default_metadata(cleaned, context_updated_at=last_turn)
-        metadata["history_tokens_estimate"] = _coerce_nonnegative_int(
-            data.get("history_tokens_estimate"),
-            int(metadata["history_tokens_estimate"]),
-        )
-        metadata["trim_epoch"] = _coerce_nonnegative_int(data.get("trim_epoch"), 0)
-        metadata["trim_count"] = _coerce_nonnegative_int(data.get("trim_count"), 0)
-        metadata["context_updated_at"] = _coerce_timestamp(
-            data.get("context_updated_at"),
-            last_turn,
-        )
+        # 缺失/损坏元数据才估算，正常持久化文件无需再次序列化整段 history。
+        history_tokens = _coerce_nonnegative_int(data.get("history_tokens_estimate"), -1)
+        if history_tokens < 0:
+            history_tokens = _estimate_history_tokens(cleaned)
+        metadata: SessionMetadata = {
+            "history_tokens_estimate": history_tokens,
+            "trim_epoch": _coerce_nonnegative_int(data.get("trim_epoch"), 0),
+            "trim_count": _coerce_nonnegative_int(data.get("trim_count"), 0),
+            "context_updated_at": _coerce_timestamp(data.get("context_updated_at"), last_turn),
+        }
         return last_access, last_turn, key, cleaned, metadata
 
     def _load_cold_session(self, key: str) -> list[ChatMessage] | None:
@@ -439,10 +449,12 @@ class SessionCache:
         self._last_turn_at.pop(key, None)
         self._dirty.discard(key)
 
-    def _evict_lru(self) -> None:
+    def _evict_lru(self, *, write_dirty: bool = True) -> None:
         while len(self._sessions) > self._max_sessions:
             oldest_key = next(iter(self._sessions))
             if self._persistence_enabled and oldest_key in self._dirty:
+                if not write_dirty:
+                    break
                 if not self._write_one(oldest_key):
                     logger.warning(
                         f"session_cache: retaining dirty LRU session after failed write: {oldest_key}"
