@@ -101,3 +101,17 @@ prompt 内回复**绝对禁止**出现：
 - **记在 md 里，不要加这种 prompt 内的注释**
 
 所以本文档存在的意义：归档所有决策出处，code 不要再 `# 主人原话『xxx』...`。
+
+## 11. 人格级 NSFW 作用域（2026-10-25）
+
+主人原话：**机机人格的私聊 NSFW 限制放开，私聊可以 NSFW；NSFW 生图路径、积分扣除那些都一样的，NSFW 生图参考使用机机的图片。**
+
+- `Persona.nsfw_scopes` 决定 NSFW 深水（spark / 援交 / nsfw 搜索 / 自动生图）在哪些场景放行。
+  catty 默认 `{"private","group"}` 不变；机机 = `{"private"}`，群聊仍按原限制走擦边。
+- 机机私聊 NSFW 沿用 catty 的 stage matrix / 抗拒强度 / phase / 积分规则；spark 的 slim persona
+  改用人格自己的 `core_persona`，并用 `nsfw_style_override` 把笨猫口吻换回机机。
+- 自动 NSFW 生图（每 N turn 一张，扣 10 积分，主人豁免）参考图取人格 `imagegen`：
+  `ref_nsfw_path` 为空时复用 `ref_path` + `ref_path_extra`，机机即 `Miao/fadianji.png` +
+  `Miao/fadianji2.png`；角色锁用 `nsfw_girl_tags`（缺省回落 `girl_tags`）。
+- 手动画图工具 `catty_imagegen` 仅在人格/场景授权时允许 planner 输出
+  `self_portrait="nsfw"`；未授权场景强制回落 `sfw`。积分公式不变。

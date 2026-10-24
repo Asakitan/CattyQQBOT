@@ -234,7 +234,8 @@ ai 清空记忆缓存
 
 **识图（vision）**：私聊发图直接触发；群里带 @、前缀或指向词时先走 `vision` 模型，
 识别成文字 / 兴趣度 / 表情含义后再交给主模型。GIF / 动态 WebP 会自动取首帧转 PNG。
-`vision` 未单独配置时复用 `ai` 主模型。
+`vision` 未单独配置时复用 `ai` 主模型；此时 `vision` 与主 AI 同 `base_url` + 同 `model`，
+图片会作为 `image_url` block 直接透传进主请求（当前消息与引用旧图都算），不再先跑一次同模型识图。
 
 **本地表情库**：默认把本地表情候选交给 AI 自己挑；AI 没选时按 `emoji.reply_probability` 自动补一张。
 

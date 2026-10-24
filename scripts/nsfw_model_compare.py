@@ -69,10 +69,10 @@ async def _run() -> dict:
     from catty_qq_ai.openai_client import _post_chat_completion
 
     deepseek_spec = {
-        "label": f"{cfg.catty_nsfw_spark_model or 'mimo-v2.5'} (current spark)",
+        "label": f"{cfg.catty_nsfw_spark_model or 'deepseek-v4.1-flash'} (current spark)",
         "base_url": cfg.catty_nsfw_spark_base_url or cfg.catty_filter_base_url,
         "api_key": cfg.catty_nsfw_spark_api_key or cfg.catty_filter_api_key,
-        "model": cfg.catty_nsfw_spark_model or "mimo-v2.5",
+        "model": cfg.catty_nsfw_spark_model or "deepseek-v4.1-flash",
     }
     sonnet_spec = {
         "label": "claude-sonnet-4-6 (new main)",
