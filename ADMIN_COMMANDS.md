@@ -28,8 +28,10 @@
 | `/人格 笨猫` | 当前 scope 切到 `catty` |
 | `/人格 机机` | 当前 scope 切到 `fadianji` |
 | `/人格 默认` | 清除当前 scope 的命令覆盖，回到群配置或默认人格 |
-| `/catty_status` | 查看当前 scope 的综合状态 |
-| `/status`、`/笨猫状态`、`/猫猫状态` | `/catty_status` 的别名 |
+| `/catty_status` | 按当前 scope 人格查看状态：笨猫看 daily_life/心情/好感度等，机机看状态机/语料库/本体避让等 |
+| `/status`、`/笨猫状态`、`/猫猫状态`、`/机机状态`、`/发电机状态` | `/catty_status` 的别名（显示内容仍由当前人格决定） |
+
+`/status` 不写死笨猫：当前 scope 生效人格是 `fadianji` 时输出机机 dashboard（fadianji_state / 续聊预算 / fdj_corpus / 语料旧识 / callback_ledger / body_presence），是 `catty` 时输出笨猫 dashboard。
 
 人格别名：
 
