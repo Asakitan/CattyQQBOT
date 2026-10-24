@@ -255,6 +255,19 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "request_timeout": 10,
         "engines": ["google", "bing"],
     },
+    "auto_fetch": {
+        "enabled": True,
+        "engines": ["duckduckgo", "bing"],
+        "cooldown_seconds": 120,
+        "max_pages": 2,
+        "page_chars": 1200,
+        "total_chars": 2600,
+        "cache_ttl_seconds": 21600,
+        "negative_ttl_seconds": 900,
+        "hourly_budget": 20,
+        "timeout_seconds": 12,
+        "max_question_chars": 300,
+    },
     "tools": {
         "profile_memory_enabled": True,
         "scope_meme_enabled": True,
@@ -329,6 +342,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "session_context_headroom_tokens": 8000,
         "session_ai_compact_enabled": True,
         "session_ai_compact_trigger_tokens": 40000,
+        "quick_ack_enabled": True,
+        "quick_ack_max_chars": 24,
+        "quick_ack_timeout_seconds": 8.0,
         "fadianji_scene_k": 12,
         "fadianji_harness_max_chars": 12000,
         "fadianji_static_scene_bank_enabled": True,
@@ -797,6 +813,19 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_WEB_SEARCH_REQUEST_TIMEOUT", web_search.get("request_timeout"))
     _set_env("CATTY_WEB_SEARCH_ENGINES", web_search.get("engines"), json_value=True)
 
+    auto_fetch = _section(data, "auto_fetch")
+    _set_env("CATTY_AUTO_FETCH_ENABLED", auto_fetch.get("enabled"))
+    _set_env("CATTY_AUTO_FETCH_ENGINES", auto_fetch.get("engines"), json_value=True)
+    _set_env("CATTY_AUTO_FETCH_COOLDOWN_SECONDS", auto_fetch.get("cooldown_seconds"))
+    _set_env("CATTY_AUTO_FETCH_MAX_PAGES", auto_fetch.get("max_pages"))
+    _set_env("CATTY_AUTO_FETCH_PAGE_CHARS", auto_fetch.get("page_chars"))
+    _set_env("CATTY_AUTO_FETCH_TOTAL_CHARS", auto_fetch.get("total_chars"))
+    _set_env("CATTY_AUTO_FETCH_CACHE_TTL_SECONDS", auto_fetch.get("cache_ttl_seconds"))
+    _set_env("CATTY_AUTO_FETCH_NEGATIVE_TTL_SECONDS", auto_fetch.get("negative_ttl_seconds"))
+    _set_env("CATTY_AUTO_FETCH_HOURLY_BUDGET", auto_fetch.get("hourly_budget"))
+    _set_env("CATTY_AUTO_FETCH_TIMEOUT_SECONDS", auto_fetch.get("timeout_seconds"))
+    _set_env("CATTY_AUTO_FETCH_MAX_QUESTION_CHARS", auto_fetch.get("max_question_chars"))
+
     nsfw_search = _section(data, "nsfw_search")
     _set_env("CATTY_NSFW_SEARCH_ENABLED", nsfw_search.get("enabled"))
     _set_env("CATTY_NSFW_SEARCH_MAX_RESULTS", nsfw_search.get("max_results"))
@@ -839,10 +868,13 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_SESSION_CONTEXT_TARGET_TOKENS", chat.get("session_context_target_tokens"))
     _set_env("CATTY_SESSION_CONTEXT_TRIM_TO_TOKENS", chat.get("session_context_trim_to_tokens"))
     _set_env("CATTY_SESSION_CONTEXT_HEADROOM_TOKENS", chat.get("session_context_headroom_tokens"))
-    # 主人 2026-08-13: AI 历史压缩代替硬裁剪 + 工具旁白
+    # 主人 2026-08-13: AI 历史压缩代替硬裁剪
     _set_env("CATTY_SESSION_AI_COMPACT_ENABLED", chat.get("session_ai_compact_enabled"))
     _set_env("CATTY_SESSION_AI_COMPACT_TRIGGER_TOKENS", chat.get("session_ai_compact_trigger_tokens"))
-    _set_env("CATTY_TOOL_NARRATION_ENABLED", chat.get("tool_narration_enabled"))
+    # 主人 2026-10-25: 长任务先发一句模型现写的短回复 (替代固定工具旁白)
+    _set_env("CATTY_QUICK_ACK_ENABLED", chat.get("quick_ack_enabled"))
+    _set_env("CATTY_QUICK_ACK_MAX_CHARS", chat.get("quick_ack_max_chars"))
+    _set_env("CATTY_QUICK_ACK_TIMEOUT_SECONDS", chat.get("quick_ack_timeout_seconds"))
     # 主人 2026-08-15: 机机例句加料 — 每轮检索对数/证据包字符上限
     _set_env("CATTY_FADIANJI_SCENE_K", chat.get("fadianji_scene_k"))
     _set_env("CATTY_FADIANJI_HARNESS_MAX_CHARS", chat.get("fadianji_harness_max_chars"))

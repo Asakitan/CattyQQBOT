@@ -765,7 +765,6 @@ def _with_thinking_max_defaults(
 
     - Ollama 原生路由: 不动 (走自己的 think/options 开关, reasoning_effort 无意义)。
     - DeepSeek v4: thinking.enabled + reasoning_effort=max (保持原行为)。
-    - MiMo V2.5: thinking.enabled，不注入接口不支持的 reasoning_effort=max。
     - GLM/bigmodel (z.ai): thinking.enabled (GLM 无 effort 档位, enabled 即满档思考)。
     - 其它 OpenAI-compatible (opencode zen 的 gpt-5.6-luna 等 reasoning 模型): reasoning_effort=max。
     """
@@ -777,9 +776,6 @@ def _with_thinking_max_defaults(
             body["thinking"] = {"type": "enabled"}
         if "reasoning_effort" not in body:
             body["reasoning_effort"] = "max"
-        return body
-    if model.strip().lower() == "mimo-v2.5":
-        body.setdefault("thinking", {"type": "enabled"})
         return body
     if _looks_like_bigmodel_route(base_url):
         if "thinking" not in body:
@@ -1190,6 +1186,20 @@ def reset_current_model_override(token: contextvars.Token) -> None:
 
 def _effective_main_model(config: Config) -> str:
     return get_current_model_override() or config.catty_openai_model
+
+
+def vision_shares_main_route(config: Config) -> bool:
+    """vision 线与主 AI 是同一线路 (同 base_url + 同 model) 时, 图片不必先跑识图模型。"""
+    main_base = str(getattr(config, "catty_openai_base_url", "") or "").strip()
+    main_model = str(_effective_main_model(config) or "").strip()
+    vision_base = str(getattr(config, "catty_vision_base_url", "") or "").strip() or main_base
+    vision_model = str(getattr(config, "catty_vision_model", "") or "").strip() or main_model
+    if not main_base or not main_model:
+        return False
+    return (
+        vision_model.casefold() == main_model.casefold()
+        and vision_base.rstrip("/").casefold() == main_base.rstrip("/").casefold()
+    )
 
 
 # 主人 2026-07-06 openai-claude-95 §4.1: persona override 防呆告警去重 (per line|endpoint|model)
@@ -3496,6 +3506,17 @@ async def _vision_image_url(config: Config, url: str) -> str:
         data_url = _first_frame_data_url(response.content)
         return data_url or url
     return _first_frame_data_url(response.content) or url
+
+
+async def prepare_passthrough_image_parts(config: Config, image_urls: list[str]) -> list[dict[str, Any]]:
+    """把图片 URL 变成主 AI 请求可直接消费的 image_url content parts (动图转首帧)。"""
+    parts: list[dict[str, Any]] = []
+    for url in image_urls:
+        if not str(url or "").strip():
+            continue
+        prepared_url = await _vision_image_url(config, url)
+        parts.append({"type": "image_url", "image_url": {"url": prepared_url}})
+    return parts
 
 
 def _image_analysis_from_reply(reply: str) -> dict[str, Any]:

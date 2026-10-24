@@ -39,6 +39,16 @@ STATE_RAMPAGE = "rampage"     # 暴走: 被连环逗弄/群友起哄
 _RANDOM_STATES: tuple[str, ...] = (STATE_SANGNV, STATE_SUCCUBUS, STATE_SUNSHINE)
 _ALL_STATES: tuple[str, ...] = _RANDOM_STATES + (STATE_PROUD, STATE_BROKEN, STATE_RAMPAGE)
 
+# /status 展示用中文名 (与 _STATE_HINTS 的标题一致, 单一真相源)。
+STATE_LABELS: dict[str, str] = {
+    STATE_SANGNV: "丧女",
+    STATE_SUCCUBUS: "魅魔",
+    STATE_SUNSHINE: "阳光",
+    STATE_PROUD: "得意",
+    STATE_BROKEN: "破防",
+    STATE_RAMPAGE: "暴走",
+}
+
 _STATE_HINTS: dict[str, str] = {
     STATE_SANGNV: (
         "【机机当前状态 · 丧女】现在低能量: 累、困、不想动, 回复更短更平. "
@@ -179,6 +189,22 @@ class FadianjiStateStore:
                 f"(next switch in {int((self._expires_at - n) / 60)}min)"
             )
             return self._state
+
+    def snapshot(self, *, now: float | None = None) -> dict[str, Any]:
+        """只读快照 (不给 /status 制造状态切换副作用): 当前态、定时轨、覆盖与最近事件。"""
+        n = now if now is not None else time.time()
+        with self._lock:
+            override_active = self._override_state is not None and n < self._override_expires_at
+            override = self._override_state if override_active else None
+            return {
+                "state": override or self._state,
+                "track_state": self._state,
+                "track_remaining_seconds": max(self._expires_at - n, 0.0),
+                "override_state": override,
+                "override_remaining_seconds": max(self._override_expires_at - n, 0.0) if override else 0.0,
+                "last_event": self._last_event,
+                "last_event_seconds_ago": max(n - self._last_event_at, 0.0) if self._last_event else 0.0,
+            }
 
     def apply_event(self, event: str, *, now: float | None = None) -> str | None:
         """应用一次状态事件; 未知事件不动状态, comforted 清除事件覆盖。"""

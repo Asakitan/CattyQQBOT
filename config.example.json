@@ -232,6 +232,22 @@
             "bing"
         ]
     },
+    "auto_fetch": {
+        "enabled": true,
+        "engines": [
+            "duckduckgo",
+            "bing"
+        ],
+        "cooldown_seconds": 120,
+        "max_pages": 2,
+        "page_chars": 1200,
+        "total_chars": 2600,
+        "cache_ttl_seconds": 21600,
+        "negative_ttl_seconds": 900,
+        "hourly_budget": 20,
+        "timeout_seconds": 12,
+        "max_question_chars": 300
+    },
     "tools": {
         "profile_memory_enabled": true,
         "scope_meme_enabled": true,
@@ -310,6 +326,9 @@
         "session_context_headroom_tokens": 8000,
         "session_ai_compact_enabled": true,
         "session_ai_compact_trigger_tokens": 40000,
+        "quick_ack_enabled": true,
+        "quick_ack_max_chars": 24,
+        "quick_ack_timeout_seconds": 8.0,
         "fadianji_scene_k": 12,
         "fadianji_harness_max_chars": 12000,
         "fadianji_static_scene_bank_enabled": true,

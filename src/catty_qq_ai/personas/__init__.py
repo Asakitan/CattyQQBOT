@@ -99,6 +99,10 @@ NEUTRAL_REPLY_CATALOG = PersonaReplyCatalog(
 )
 
 
+# NSFW 深水路径默认两个场景都按原有规则 (catty 不变); 人格可用 nsfw_scopes 收窄。
+NSFW_SCOPES_ALL: frozenset[str] = frozenset({"private", "group"})
+
+
 @dataclass(frozen=True)
 class PersonaImagegen:
     """persona 专属画图配置(自画像参考图 + 外观锁 + planner 人格简介)。"""
@@ -106,6 +110,8 @@ class PersonaImagegen:
     ref_path: str                  # SFW 自画像参考图 (相对 repo 根)
     ref_nsfw_path: str = ""        # NSFW 参考图; 空 = 复用 ref_path
     ref_path_extra: tuple[str, ...] = field(default_factory=tuple)  # 额外参考图(sfw/nsfw 都会带上)
+    # NSFW 自动生图/自画像的角色锁; 空 = 复用 girl_tags。
+    nsfw_girl_tags: str = ""
     planner_brief: str = ""        # 画图 planner (deepseek) 的人格简介段
     short_review_style: str = ""   # 发图配文的口吻说明
     # NAI Precise Reference 力度 (主人 2026-07-06: 1.0 会锁死站姿没动作, 机机降 0.9)。
@@ -168,12 +174,25 @@ class Persona:
     # 预算归零或出现无关消息 (主 AI 判 NO_REPLY) → 关窗结束。
     # None = 旧行为 (每次回复满血刷新窗口); 机机 = 2。
     followup_reply_budget: int | None = None
+    # NSFW 深水可用场景 (NSFW_SCOPES_ALL 的子集)。机机 = 仅私聊, 群聊仍按禁用处理。
+    # 仅当 disabled_features 不含 "nsfw_spark" 时生效。
+    nsfw_scopes: frozenset[str] = NSFW_SCOPES_ALL
+    # 非 catty 人格的 NSFW 口吻校正: 拼在通用 (笨猫) NSFW 模板之后, 覆盖自称/称呼/口癖。
+    nsfw_style_override: str | None = None
+    # NSFW spark 的 assistant prefill; None = 沿用 catty 的 (resist_label, is_private) 表。
+    nsfw_prefill: str | None = None
 
     def segment_disabled(self, identifier: str) -> bool:
         return identifier in self.disabled_prompt_segments
 
     def feature_disabled(self, feature: str) -> bool:
         return feature in self.disabled_features
+
+    def nsfw_allowed(self, *, is_private: bool) -> bool:
+        """当前场景是否允许该人格走 NSFW 深水 (spark / nsfw 搜索 / 自动生图)。"""
+        if self.feature_disabled("nsfw_spark"):
+            return False
+        return ("private" if is_private else "group") in self.nsfw_scopes
 
     def conversation_prompt_for(self, conversation_key: str) -> str:
         normalized = str(conversation_key or "").strip()
@@ -183,6 +202,25 @@ class Persona:
             if normalized == target_conversation:
                 return prompt
         return ""
+
+
+def persona_nsfw_allowed(persona: Any, *, is_private: bool) -> bool:
+    """人格 NSFW 深水闸门 (按场景)。兼容测试里的 SimpleNamespace 代人格。"""
+    if persona is None:
+        return True
+    checker = getattr(persona, "nsfw_allowed", None)
+    if callable(checker):
+        try:
+            return bool(checker(is_private=is_private))
+        except Exception:  # noqa: BLE001
+            pass
+    feature_checker = getattr(persona, "feature_disabled", None)
+    if callable(feature_checker):
+        try:
+            return not bool(feature_checker("nsfw_spark"))
+        except Exception:  # noqa: BLE001
+            return True
+    return True
 
 
 @dataclass(frozen=True, slots=True)

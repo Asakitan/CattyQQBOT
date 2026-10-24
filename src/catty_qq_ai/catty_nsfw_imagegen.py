@@ -5,8 +5,9 @@
   (不看 phase, phase 只用来给 composer 决定画哪个情景。这个函数挂在 NSFW spark
    路径回复成功后, 走到这里就意味着 user 发了 NSFW 触发了 spark, 算一个 turn)
 - 模型: NovelAI v4.5-full
-- **Precise Reference (director_reference_*)**: Miao/miaomiao.png + miaomiaonude.png 两张
-  作为 character&style reference (fidelity=1.0 strength=1.0), 把笨猫角色细节 + 画风锁死
+- **Precise Reference (director_reference_*)**: catty 用 Miao/miaomiao.png + miaomiaonude.png 两张
+  作为 character&style reference (fidelity=1.0 strength=1.0), 把笨猫角色细节 + 画风锁死;
+  其它人格用其 imagegen 参考图 (机机 = Miao/fadianji.png + fadianji2.png, 见 persona 参数)
 - **characterPrompts 双角色锁**: 笨猫 (左) + 主人 (右,黑色剪影 + 无脸)
 - 图片格式: 1024x1536 letterbox PNG base64 (NAI SDK 标准)
 - 扣费: 每张 10 积分 (主人豁免, 非主人余额不够则跳过本次)
@@ -198,6 +199,22 @@ def _find_miao_dir(config) -> Path | None:
         if p.is_dir() and (p / "miaomiao.png").is_file():
             return p
     return None
+
+
+def _persona_nsfw_reference_paths(pi: Any) -> list[Path]:
+    """人格 NSFW 自动生图的参考图: ref_nsfw_path 优先, 空则复用 ref_path, 再叠加 ref_path_extra。"""
+    names = [str(getattr(pi, "ref_nsfw_path", "") or getattr(pi, "ref_path", "") or "")]
+    names.extend(str(n) for n in (getattr(pi, "ref_path_extra", ()) or ()))
+    out: list[Path] = []
+    for name in names:
+        if not name:
+            continue
+        path = Path(name)
+        if not path.is_file():
+            logger.warning(f"nsfw_imagegen: persona ref missing: {path}")
+            continue
+        out.append(path)
+    return out
 
 # phase 描述给 prompt composer 用 (P1-P8 全覆盖, 触发不看 phase 但情景看)
 _PHASE_BRIEF = {
@@ -613,6 +630,7 @@ async def maybe_generate_image(
     user_text: str = "",
     recent_messages: list | None = None,
     pregnancy_state=None,
+    persona: Any = None,
 ) -> Any:
     """每 3 个 user turn 触发, 走 V4.5 + characterPrompts 双角色锁 + director_reference 生图。
 
@@ -682,22 +700,35 @@ async def maybe_generate_image(
     width, height = 832, 1216
     steps = 28
 
-    # Precise Reference: 加载 Miao/ 两张参考图(启动后 cache, 失败则降级到无 reference)
+    # Precise Reference: catty 用 Miao/miaomiaonude.png; 其它人格用其人设参考图 (机机=本人立绘)
     director_ref_b64_list: list[str] = []
-    miao_dir = _find_miao_dir(config)
-    if miao_dir is not None:
-        # 主人 2026-05-30: NSFW 路径只用裸图当参考(miaomiaonude.png), 着装图给普通画像用.
-        for ref_name in ("miaomiaonude.png",):
-            ref_path = miao_dir / ref_name
-            if not ref_path.is_file():
-                continue
-            try:
-                director_ref_b64_list.append(_get_reference_b64(ref_path))
-            except Exception as exc:  # noqa: BLE001
-                logger.warning(f"nsfw_imagegen: ref {ref_name} load failed: {exc}")
+    persona_imagegen = getattr(persona, "imagegen", None)
+    if persona_imagegen is not None:
+        ref_paths = _persona_nsfw_reference_paths(persona_imagegen)
+    else:
+        miao_dir = _find_miao_dir(config)
+        ref_paths = []
+        if miao_dir is not None:
+            # 主人 2026-05-30: NSFW 路径只用裸图当参考(miaomiaonude.png), 着装图给普通画像用.
+            bare_ref = miao_dir / "miaomiaonude.png"
+            if bare_ref.is_file():
+                ref_paths = [bare_ref]
+    for ref_path in ref_paths:
+        try:
+            director_ref_b64_list.append(_get_reference_b64(ref_path))
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"nsfw_imagegen: ref {ref_path.name} load failed: {exc}")
 
-    # characterPrompts 双角色锁: 笨猫 left, 黑影主人 right
-    char_girl = CHARACTER_GIRL_TAGS
+    # characterPrompts 双角色锁: 人格本人 left, 黑影对方 right
+    char_girl = (
+        str(
+            getattr(persona_imagegen, "nsfw_girl_tags", "")
+            or getattr(persona_imagegen, "girl_tags", "")
+            or CHARACTER_GIRL_TAGS
+        )
+        if persona_imagegen is not None
+        else CHARACTER_GIRL_TAGS
+    )
     char_boy = CHARACTER_BOY_TAGS
     char_boy_uc = CHARACTER_BOY_UC
 

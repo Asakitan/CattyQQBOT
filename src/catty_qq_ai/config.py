@@ -353,6 +353,22 @@ class Config(BaseModel):
     catty_web_search_max_results: int = 5
     catty_web_search_request_timeout: float | None = 10.0
     catty_web_search_engines: list[str] = Field(default_factory=lambda: ["google", "bing"])
+    # 知识库缺口自动补网 (主人 2026-10-25): 本地知识库查不到的事实类问题,
+    # 回复前自动 search + 抓正文, 以【联网补全】块注入 prompt。
+    catty_auto_fetch_enabled: bool = True
+    # 自动补网自己的引擎顺序: DuckDuckGo 给的是直链, 比 RSS 跳转壳更抓得到正文
+    catty_auto_fetch_engines: list[str] = Field(
+        default_factory=lambda: ["duckduckgo", "bing"]
+    )
+    catty_auto_fetch_cooldown_seconds: int = 120
+    catty_auto_fetch_max_pages: int = 2
+    catty_auto_fetch_page_chars: int = 1200
+    catty_auto_fetch_total_chars: int = 2600
+    catty_auto_fetch_cache_ttl_seconds: int = 21_600
+    catty_auto_fetch_negative_ttl_seconds: int = 900
+    catty_auto_fetch_hourly_budget: int = 20
+    catty_auto_fetch_timeout_seconds: float = 12.0
+    catty_auto_fetch_max_question_chars: int = 300
     catty_nsfw_search_enabled: bool = True
     catty_nsfw_search_max_results: int = 4
     catty_nsfw_search_request_timeout: float | None = 15.0
@@ -544,7 +560,7 @@ class Config(BaseModel):
     catty_evolution_enabled: bool = False
     catty_evolution_cron: str = "0 3 * * *"
     catty_evolution_samples_per_layer: int = 30
-    catty_evolution_judge_model: str = "mimo-v2.5"
+    catty_evolution_judge_model: str = "deepseek-v4.1-flash"
     catty_evolution_rollback_neg_feedback_pct: float = 0.2
     catty_evolution_rollback_score_decline_days: int = 3
     catty_evolution_sample_only_group: bool = True
@@ -742,7 +758,9 @@ class Config(BaseModel):
     # 单次 tool 调用上限(每轮多个 tool_calls 也算)
     catty_tools_max_calls_per_round: int = 5
     catty_tools_full_exposure: bool = True  # 每轮全量暴露 26 个工具，跳过 intent-gate
-    catty_tool_narration_enabled: bool = True  # 工具循环启动时先发送开场短句
+    catty_quick_ack_enabled: bool = True  # 长任务(查/画/做题)开跑前先发一句模型现写的短回复
+    catty_quick_ack_max_chars: int = 24
+    catty_quick_ack_timeout_seconds: float = 8.0
     catty_fallback_tools_enabled: bool = True  # fallback 携带 tools 继续工具循环
     catty_sandbox_dir: str = ""  # catty_read_file/catty_run_code 沙箱根目录，空=仓库根
     # 私聊场景下额外排除哪些 tool;群聊默认全开
@@ -842,6 +860,7 @@ class Config(BaseModel):
 
     @field_validator(
         "catty_trigger_prefixes", "catty_directed_keywords", "catty_web_search_engines",
+        "catty_auto_fetch_engines",
         "catty_prompt_order", "catty_prompts_disabled", "catty_native_extra_betas",
         mode="before",
     )

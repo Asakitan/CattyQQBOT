@@ -76,6 +76,8 @@ from .openai_client import (
     download_binary,
     _filter_completion,
     local_critic_completion,
+    prepare_passthrough_image_parts,
+    vision_shares_main_route,
 )
 from .action_hints import build_action_hints
 from .author_note import (
@@ -2598,6 +2600,7 @@ _NSFW_PREFILLS: dict[tuple[str, bool], str] = {
 
 def _build_nsfw_spark_override(
     *, is_private: bool, is_owner: bool, affection_level: int, is_nsfw_granted: bool = False,
+    persona: Any = None,
 ) -> str:
     """组合 (scale × stage_cap × resist) 给 spark 模型一段完整 system 指令。"""
     max_stage = _resolve_max_nsfw_stage(
@@ -2618,6 +2621,7 @@ def _build_nsfw_spark_override(
         if forbidden else "  (已达最高 stage 10, 无禁止)"
     )
     scene = "私聊" if is_private else "群聊"
+    _persona_style = str(getattr(persona, "nsfw_style_override", "") or "")
     extra_group = "" if is_private else (
         "\n群聊额外: 允许的 stage 范围内**必须 ENGAGE 接住**(笨猫害羞撒娇地接), 不要因为是群聊就拒绝; "
         "只有 user 明确推进到禁止 stage (e.g. Lv2 user 在群里要 stage 5+) 时才用害羞躲+转话题, "
@@ -2690,6 +2694,8 @@ def _build_nsfw_spark_override(
         f"{fmt_line}"
         f"{meta_anti_leak}"
         f"{owner_call_anchor}{extra_group}{depth_hint}"
+        # 非 catty 人格: 末尾再压一段口吻校正 (recency 最高), 防止模型顺着上面的笨猫模板写。
+        + (f"\n\n{_persona_style}" if _persona_style else "")
     )
 
 
@@ -2950,9 +2956,11 @@ _NSFW_KAOMOJI_RE = re.compile(
 _FIRST_PERSON_ALIASES: tuple[str, ...] = ("人家", "人家", "人家", "人家", "人家", "人家", "人家", "猫猫", "猫猫", "笨猫")
 
 
-def _replace_first_person_nsfw(text: str) -> str:
-    """裸露的『我/我的/让我』替换成笨猫自称."""
+def _replace_first_person_nsfw(text: str, *, persona: Any = None) -> str:
+    """裸露的『我/我的/让我』替换成笨猫自称; 非 catty 人格保持自己的自称。"""
     if not text or "我" not in text:
+        return text
+    if persona is not None and getattr(persona, "name", "catty") != "catty":
         return text
     import random as _r
     out: list[str] = []
@@ -3598,29 +3606,79 @@ async def _execute_schema_gated_tool_call(
         return await execute_tool_call(name, arguments_json, tool_ctx)
 
 
-_TOOL_NARRATION_LINES: tuple[str, ...] = ("我查一下", "等等哦", "我去翻翻")
-_TOOL_NARRATION_LAST_BY_SCOPE: dict[str, str] = {}
+def _schedule_quick_ack(
+    matcher: Matcher,
+    event: MessageEvent,
+    *,
+    persona: Any,
+    kind: str,
+    task_label: str,
+    user_text: str,
+) -> asyncio.Task | None:
+    """长任务 (查资料/画图/做题) 开跑前, 让模型现写一句短回复先发出去。
 
+    替代旧的固定旁白池 (「我去翻翻/我查一下/等等哦」)。生成失败或输出不合格就直接不发,
+    不回退模板。返回 task 句柄, 主回复就绪时 caller 负责 cancel (防回完再冒一句)。
+    """
+    if not kind or not bool(getattr(config, "catty_quick_ack_enabled", True)):
+        return None
+    try:
+        max_chars = int(getattr(config, "catty_quick_ack_max_chars", 24) or 24)
+        timeout = float(getattr(config, "catty_quick_ack_timeout_seconds", 8.0) or 8.0)
+    except (TypeError, ValueError):
+        max_chars, timeout = 24, 8.0
+    from .quick_ack import build_prompt, validate_line
 
-def _schedule_tool_narration(matcher: Matcher, event: MessageEvent) -> None:
-    scope = _conversation_queue_key(event)
-    previous = _TOOL_NARRATION_LAST_BY_SCOPE.get(scope)
-    candidates = [line for line in _TOOL_NARRATION_LINES if line != previous]
-    line = random.choice(candidates or list(_TOOL_NARRATION_LINES))
-    _TOOL_NARRATION_LAST_BY_SCOPE[scope] = line
+    messages = build_prompt(
+        char_name=str(getattr(persona, "char_name", "") or getattr(persona, "name", "bot")),
+        style=str(getattr(persona, "reply_gate_style", "") or ""),
+        kind_label=task_label,
+        user_text=user_text,
+        max_chars=max_chars,
+    )
 
     async def _runner() -> None:
+        from .openai_client import reset_distill_suppressed, set_distill_suppressed
+
+        line = ""
+        token = set_distill_suppressed(True)
+        try:
+            # mimo 思考模型偶发只回 reasoning_content → 空正文; 空就再要一次
+            for _attempt in range(2):
+                try:
+                    raw = await asyncio.wait_for(
+                        chat_completion_codex_instant(config, messages, max_tokens=512),
+                        timeout=max(timeout, 2.0),
+                    )
+                except asyncio.TimeoutError:
+                    logger.info(f"quick_ack timed out after {timeout:.1f}s")
+                    continue
+                except asyncio.CancelledError:
+                    raise
+                except Exception as exc:  # noqa: BLE001
+                    logger.info(f"quick_ack generate failed: {type(exc).__name__}: {exc}")
+                    continue
+                line = validate_line(raw, max_chars=max_chars)
+                if line:
+                    break
+                logger.info(f"quick_ack attempt {_attempt + 1} discarded: {str(raw or '')[:60]!r}")
+        finally:
+            reset_distill_suppressed(token)
+        if not line:
+            return
         try:
             await matcher.send(Message(line))
+            logger.info(f"quick_ack sent: kind={kind} line={line!r}")
         except asyncio.CancelledError:
             return
         except Exception as exc:  # noqa: BLE001
-            logger.debug(f"tool narration send failed (non-fatal): {type(exc).__name__}: {exc}")
+            logger.debug(f"quick_ack send failed (non-fatal): {type(exc).__name__}: {exc}")
 
     try:
-        asyncio.create_task(_runner(), name="catty-tool-narration")
+        return asyncio.create_task(_runner(), name="catty-quick-ack")
     except Exception as exc:  # noqa: BLE001
-        logger.debug(f"tool narration task create failed (non-fatal): {type(exc).__name__}: {exc}")
+        logger.debug(f"quick_ack task create failed (non-fatal): {type(exc).__name__}: {exc}")
+        return None
 
 
 def _apply_fadianji_mood_marker(tag: str) -> None:
@@ -5009,6 +5067,22 @@ async def _build_web_search_context(query: str, reply_context: Any) -> str:
     return format_search_context(query, results)
 
 
+def _auto_fetch_kb_hit(event: MessageEvent, term: str, *, persona: Any = None) -> bool:
+    """本地知识库里是否已有这条记录 — 自动补网的唯一闸门 (纯内存, 不发网络)。"""
+    from .auto_web_fetch import knowledge_base_hit
+
+    return knowledge_base_hit(
+        term,
+        memory_store=memory_store,
+        scope_lorebook_store=scope_lorebook_store,
+        user_details_store=user_details_store,
+        scope_key=_conversation_queue_key(event),
+        persona_name=getattr(persona, "name", None),
+        user_id=str(event.user_id),
+        group_id=str(getattr(event, "group_id", "") or ""),
+    )
+
+
 _NSFW_IMAGE_CACHE_DIR_NAME = "nsfw_cache"
 _NSFW_SENT_REGISTRY_FILENAME = "sent_urls.json"
 _NSFW_SENT_REGISTRY_MAX = 2000
@@ -5478,13 +5552,26 @@ async def _run_session_ai_compact(key: str) -> None:
         _AI_COMPACT_RUNNING.discard(key)
 
 
-def _build_user_content(incoming: ExtractedMessage, *, image_description: str | None = None) -> object:
-    if not incoming.image_urls:
-        return incoming.history_content
-    if image_description:
-        return f"{incoming.history_content}\n图片识别结果：\n{image_description}\n请基于图片识别结果和上下文自然回应。"
-    urls = "\n".join(f"- {url}" for url in incoming.image_urls)
-    return f"{incoming.history_content}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
+def _build_user_content(
+    incoming: ExtractedMessage,
+    *,
+    image_description: str | None = None,
+    image_parts: list[dict[str, Any]] | None = None,
+    quoted_image_parts: list[dict[str, Any]] | None = None,
+) -> object:
+    base = incoming.history_content
+    if incoming.image_urls and not image_parts:
+        if image_description:
+            base = f"{base}\n图片识别结果：\n{image_description}\n请基于图片识别结果和上下文自然回应。"
+        else:
+            urls = "\n".join(f"- {url}" for url in incoming.image_urls)
+            base = f"{base}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
+    if not image_parts and not quoted_image_parts:
+        return base
+    content: list[dict[str, Any]] = [{"type": "text", "text": base}]
+    content.extend(image_parts or [])
+    content.extend(quoted_image_parts or [])
+    return content
 
 
 def _build_emoji_skeleton_text(persona=None) -> str:
@@ -6211,12 +6298,15 @@ async def _build_messages(
     *,
     image_description: str | None = None,
     has_context_image: bool = False,
+    image_parts: list[dict[str, Any]] | None = None,
+    quoted_image_parts: list[dict[str, Any]] | None = None,
     anger_context: str | None = None,
     semantic_reply_split: bool = False,
     group_filter_context: str | None = None,
     special_care_context: str | None = None,
     emoji_context: str | None = None,
     web_search_context: str | None = None,
+    auto_fetch_context: str | None = None,
     star_resonance_context: str | None = None,
     star_resonance_static_context: str | None = None,
     strinova_context: str | None = None,
@@ -6586,6 +6676,8 @@ async def _build_messages(
     # 主人 2026-05-30: 条件注入 — 空内容 skip, 省 post-boundary token
     if web_search_context and web_search_context.strip():
         _st_manager.register_static("catty_web_search", web_search_context, order=600)
+    if auto_fetch_context and auto_fetch_context.strip():
+        _st_manager.register_static("catty_auto_fetch", auto_fetch_context, order=601)
     if star_resonance_static_context and star_resonance_static_context.strip():
         try:
             from .prompt_cache import _SCOPE_PREFIX_SENTINEL as _STAR_SENTINEL
@@ -6933,7 +7025,12 @@ async def _build_messages(
     # 顺序: [pre_boundary static system] + [history] + [user current] + [post_boundary dynamic system]
     # → 让 user 之前的 prefix 100% 静态 (sys static + history anchored) → cache 命中前段所有 token.
     # post_boundary 动态段每轮会变, 放 user 之后只影响 last chunk, 不破坏 prefix hash.
-    _user_content_raw = _build_user_content(incoming, image_description=image_description)
+    _user_content_raw = _build_user_content(
+        incoming,
+        image_description=image_description,
+        image_parts=image_parts,
+        quoted_image_parts=quoted_image_parts,
+    )
     _cognitive_system_context = ""
     _adaptive_user_prompt = ""
     try:
@@ -6950,7 +7047,10 @@ async def _build_messages(
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"cognitive turn context failed (non-fatal): {exc}")
     if _adaptive_user_prompt:
-        _user_content_raw = f"{str(_user_content_raw)}\n\n{_adaptive_user_prompt}"
+        if isinstance(_user_content_raw, list):
+            _user_content_raw.append({"type": "text", "text": _adaptive_user_prompt})
+        else:
+            _user_content_raw = f"{str(_user_content_raw)}\n\n{_adaptive_user_prompt}"
     messages.append({"role": "user", "content": _user_content_raw})
     # 主人 2026-05-29 Round 19: 合并 post-boundary 段成 1 个 system msg.
     # 群聊 dump 显示 31 个 post-boundary system msg → cache prefix 末尾散乱.
@@ -6990,10 +7090,13 @@ async def _build_messages(
     _sticky_until = _NSFW_STICKY_BY_SCOPE.get(_sticky_key, 0.0)
     _sticky_active = _now < _sticky_until
     _hit_deep = _is_deep_nsfw(_utxt)
-    # 多人格 (主人 2026-07-06): 该人格禁用 NSFW 深水路径 (如机机=擦边玩梗为主) →
-    # 深水词/sticky 单闸短路: 不进 spark、不 grant、不破禁、不援交, 擦边话题由
-    # core_persona 的边界规则(自己急刹车)处理。函数尾部另有 prefer_spark 兜底钳制。
-    _nsfw_deep_allowed = not _persona.feature_disabled("nsfw_spark")
+    _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
+    _is_group_chat_pre = not _is_private_chat_pre
+    # 多人格 (主人 2026-07-06): NSFW 深水按人格 + 场景放行。
+    # 机机 (主人 2026-10-25) 只在私聊放行, 群聊仍单闸短路: 不进 spark、不 grant、
+    # 不破禁、不援交, 擦边话题由 core_persona 的边界规则(自己急刹车)处理。
+    from .personas import persona_nsfw_allowed as _persona_nsfw_allowed
+    _nsfw_deep_allowed = _persona_nsfw_allowed(_persona, is_private=_is_private_chat_pre)
     if not _nsfw_deep_allowed:
         _hit_deep = False
         if _sticky_active:
@@ -7057,8 +7160,6 @@ async def _build_messages(
         # user 又明确推进 NSFW → 清掉之前模型自评攒的 EXIT 连击 (重新热起来了, 不退)。
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
         _NSFW_EXIT_FLAG_COUNT.pop(_sticky_key, None)
-    _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
-    _is_group_chat_pre = not _is_private_chat_pre
     # ── 主人 2026-05-28: NSFW grantee 检查 ──
     # 笛笛被主人 NSFW 命令指定后, 在 sticky 期间发消息时 max_stage 直接给 10.
     _user_is_nsfw_granted = False
@@ -7514,6 +7615,7 @@ async def _build_messages(
                     is_private=_is_private_chat, is_owner=_user_is_owner,
                     affection_level=_user_affection_level,
                     is_nsfw_granted=_user_is_nsfw_granted,
+                    persona=_persona,
                 )
             _prefill = BREAKTHROUGH_PREFILLS.get("group_pub") or BREAKTHROUGH_PREFILLS["paid"]
             _resist_label = f"cuckold/{_owner_cuckold_target_id}"
@@ -7546,11 +7648,17 @@ async def _build_messages(
                 is_owner=_user_is_owner,
                 affection_level=_user_affection_level,
                 is_nsfw_granted=_user_is_nsfw_granted,
+                persona=_persona,
             )
             _resist_label = _resolve_nsfw_resist_label(
                 affection_level=_user_affection_level, is_owner=_user_is_owner,
             )
-            _prefill = _NSFW_PREFILLS[(_resist_label, _is_private_chat)]
+            _persona_prefill = getattr(_persona, "nsfw_prefill", None)
+            _prefill = (
+                _persona_prefill
+                if _persona_prefill is not None
+                else _NSFW_PREFILLS[(_resist_label, _is_private_chat)]
+            )
             _max_stage_log = _resolve_max_nsfw_stage(
                 affection_level=_user_affection_level,
                 is_owner=_user_is_owner,
@@ -7572,7 +7680,9 @@ async def _build_messages(
         # catty_core_persona §4 已含 NSFW 妥协铁律, §5 含 REPLY FORMAT, §0 含元身份拒认.
         # 剩 NSFW 表演 phase 矩阵 / 反 OOC 详细 → 留 _NSFW_SPARK_STABLE_BOUNDARY_TEXT 段处理.
         from .catty_core_persona import CATTY_CORE_PERSONA as _CATTY_CORE_PERSONA
-        _slim_persona = _CATTY_CORE_PERSONA
+        # 多人格: 非 catty 人格用自己的 core_persona, 别在 NSFW 里串回笨猫。
+        _slim_persona = str(getattr(_persona, "core_persona", "") or _CATTY_CORE_PERSONA)
+        _persona_nsfw_style = str(getattr(_persona, "nsfw_style_override", "") or "")
         # 【cache 友好结构】把大块 _override (~3000 chars, 对主人静态) 移到 persona 后, 让
         # [persona + override] (~5000 chars / ~2500 tokens) 成为稳定 prefix 每轮 cache hit.
         # history 之后只放一个**短而静态**的 recency reminder 拿 recency bias 又不破坏 cache.
@@ -7601,6 +7711,8 @@ async def _build_messages(
             {"role": "system", "content": _NSFW_STATE_FLAG_INSTRUCTION},  # cache prefix #3 (事后标记规则, 静态)
             *([{"role": "system", "content": _phase_param_catalog}] if _phase_param_catalog else []),
             {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #4 + boundary
+            # 非 catty 人格: 把通用模板里的笨猫口吻换回本人 (静态常量 → 仍在 cache prefix)。
+            *([{"role": "system", "content": _persona_nsfw_style}] if _persona_nsfw_style else []),
         ]
         # 主人 2026-05-31 cache: NSFW phase 状态机全量 catalog 已经在上方稳定前缀里，
         # 本地状态机照算；尾部只发 NSFW_PHASE_PARAMS 让 DeepSeek 选取对应状态。
@@ -7686,7 +7798,12 @@ async def _build_messages(
                 _slim_messages.extend(_filtered_history)
         _slim_messages.append({
             "role": "user",
-            "content": _build_user_content(incoming, image_description=image_description),
+            "content": _build_user_content(
+                incoming,
+                image_description=image_description,
+                image_parts=image_parts,
+                quoted_image_parts=quoted_image_parts,
+            ),
         })
         # 主人 2026-05-30 cache R1+R4: 8铁律(1736字)已搬进静态前缀, user 之后只留 ~110字短指针
         # 拿 recency bias (覆盖延续 + 末尾隐藏标记两个 recency-critical 行为), 尾部 miss 大降.
@@ -10686,11 +10803,12 @@ _AFF_ADMIN_RE = re.compile(
     r"(?:\s+(\d{4,12}))?(?:\s+(-?\d+))?\s*$",
     re.IGNORECASE,
 )
-# 主人专属 /catty_status (别名 /status / /笨猫状态) — 一站式 dashboard 看所有
-# catty layers (daily_life / daily_goals / reunion / mood / story_arc / vibe / affection)
+# 主人专属 /catty_status (别名 /status / /笨猫状态 / /机机状态) — 按当前 scope 人格分发：
+#   catty    → daily_life / daily_goals / reunion / mood / story_arc / vibe / affection
+#   fadianji → fadianji_state / 续聊预算 / fdj_corpus / 语料旧识 / callback_ledger / body_presence
 # 当前 scope + 当前用户(主人本人) 的真实状态。纯只读, blast radius 0。
 _CATTY_STATUS_RE = re.compile(
-    r"^\s*/?(catty_status|status|笨猫状态|猫猫状态)\s*$",
+    r"^\s*/?(catty_status|status|笨猫状态|猫猫状态|机机状态|发电机状态)\s*$",
     re.IGNORECASE,
 )
 # 主人专属 Scope Lorebook 命令。
@@ -12418,17 +12536,18 @@ async def handle_aff_admin(matcher: Matcher, event: MessageEvent, state: T_State
         await matcher.finish(Message(f"喵呜~ 笨猫执行失败嗷呜: {exc}"))
 
 
-@catty_status_matcher.handle()
-async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
-    """主人专属:一站式 dashboard 看所有 catty layers 当前快照。"""
-    if not _event_is_owner(event):
-        return
+def _format_status_span(seconds: float) -> str:
+    minutes = int(max(float(seconds or 0.0), 0.0) // 60)
+    return f"{minutes} min" if minutes >= 1 else "<1 min"
+
+
+def _build_catty_status_lines(event: MessageEvent, scope: str, owner_qq: str) -> list[str]:
+    """笨猫 dashboard: catty 专属层 (daily_life / goals / reunion / mood / story_arc / vibe / affection)。"""
+    del event
     try:
         from . import catty_goals as _cg
         from . import catty_reunion as _cr
         from . import daily_life as _dl
-        scope = _conversation_queue_key(event)
-        owner_qq = str(event.user_id)
 
         lines: list[str] = ["🐾 笨猫 · 全状态 dashboard"]
         lines.append("━" * 18)
@@ -12559,6 +12678,217 @@ async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
         except Exception as exc:  # noqa: BLE001
             lines.append(f"💖 affection: <错误 {exc}>")
 
+        return lines
+    except Exception as exc:  # noqa: BLE001
+        return ["🐾 笨猫 · 全状态 dashboard", f"喵呜~ dashboard 拼接失败: {exc}"]
+
+
+def _build_fadianji_status_lines(event: MessageEvent, scope: str, owner_qq: str) -> list[str]:
+    """机机 dashboard: fadianji 专属层 (状态机 / 续聊 / 语料 / 旧识 / 回调 / 本体避让 / lorebook)。"""
+    lines: list[str] = ["⚡ 机机 · 状态 dashboard"]
+    lines.append("━" * 18)
+    lines.append(f"📍 scope: {scope} | 你: QQ:{owner_qq} | 人格: fadianji (机机)")
+    lines.append("")
+
+    # fadianji_state
+    try:
+        from .fadianji_state import STATE_LABELS
+
+        snap = fadianji_state_store.snapshot()
+        lines.append("🧠 当前状态 (fadianji_state)")
+        if not bool(getattr(config, "catty_fadianji_state_enabled", False)):
+            lines.append("  · 状态机: ✗ 关闭 (catty_fadianji_state_enabled=false)")
+        else:
+            state = str(snap.get("state") or "")
+            lines.append(f"  · 现在: {STATE_LABELS.get(state, state)} ({state})")
+            override = str(snap.get("override_state") or "")
+            if override:
+                lines.append(
+                    f"  · 事件覆盖: {STATE_LABELS.get(override, override)}"
+                    f" 剩 ~{_format_status_span(float(snap.get('override_remaining_seconds') or 0.0))}"
+                )
+            track = str(snap.get("track_state") or "")
+            track_remaining = float(snap.get("track_remaining_seconds") or 0.0)
+            track_note = f"下次随机 ~{_format_status_span(track_remaining)}" if track_remaining > 0 else "待切换"
+            lines.append(f"  · 定时轨: {STATE_LABELS.get(track, track)} ({track_note})")
+            last_event = str(snap.get("last_event") or "")
+            if last_event:
+                lines.append(
+                    f"  · 最近事件: {last_event}"
+                    f" (~{_format_status_span(float(snap.get('last_event_seconds_ago') or 0.0))} 前)"
+                )
+    except Exception as exc:  # noqa: BLE001
+        lines.append(f"🧠 fadianji_state: <错误 {exc}>")
+    lines.append("")
+
+    # 触发方式 / 续聊预算
+    try:
+        persona = _persona_for_scope(scope)
+        budget = getattr(persona, "followup_reply_budget", None)
+        lines.append("💬 触发/续聊 (followup)")
+        lines.append(
+            "  · 群聊触发: 只回真 @"
+            if getattr(persona, "mention_only_trigger", False)
+            else "  · 群聊触发: 多信号 (mention/前缀/直呼)"
+        )
+        if budget is not None:
+            lines.append(f"  · 续聊预算: {int(budget)} 条/次 @")
+        window = _bot_reply_continuations.get(_bot_reply_continuation_key(scope, owner_qq))
+        now_mono = time.monotonic()
+        if window is None or window.expires_at <= now_mono or window.remaining_messages <= 0:
+            lines.append("  · 当前窗口: <未开>")
+        else:
+            lines.append(
+                f"  · 当前窗口: 剩 {window.remaining_messages} 条"
+                f" / ~{int(max(window.expires_at - now_mono, 0.0))}s"
+            )
+    except Exception as exc:  # noqa: BLE001
+        lines.append(f"💬 followup: <错误 {exc}>")
+    lines.append("")
+
+    # fdj_corpus 语料库
+    try:
+        from . import fdj_corpus_store
+
+        lines.append("📚 语料库 (fdj_corpus)")
+        if not fdj_corpus_store.corpus_enabled():
+            lines.append("  · 状态: ✗ 未加载 (data/fadianji_corpus 缺失)")
+        else:
+            manifest = fdj_corpus_store.manifest()
+            outputs = manifest.get("outputs") if isinstance(manifest.get("outputs"), Mapping) else {}
+            pairs = outputs.get("scene_pairs") if isinstance(outputs.get("scene_pairs"), Mapping) else {}
+            styles = outputs.get("style_stats") if isinstance(outputs.get("style_stats"), Mapping) else {}
+            lines.append(
+                f"  · 场景对: {int(pairs.get('total') or 0)}"
+                f" (群 {int(pairs.get('group') or 0)} / 私 {int(pairs.get('private') or 0)}"
+                f" / echo {int(pairs.get('echo_eligible') or 0)})"
+            )
+            lines.append(
+                f"  · 画像: {int(outputs.get('user_profiles') or 0)}"
+                f" | 高频短回: 群 {int(styles.get('group_top_replies') or 0)}"
+                f" / 私 {int(styles.get('private_top_replies') or 0)}"
+            )
+            generated = str(manifest.get("generated_at") or "")[:16].replace("T", " ")
+            if generated:
+                lines.append(f"  · 生成于: {generated}")
+        semantic = bool(getattr(config, "catty_fdj_corpus_semantic_enabled", True))
+        critic = bool(getattr(config, "catty_fdj_stat_critic_enabled", True))
+        echo = bool(getattr(config, "catty_fdj_echo_enabled", True))
+        pass_score = float(getattr(config, "catty_fdj_stat_critic_pass_score", 0.72) or 0.0)
+        echo_prob = float(getattr(config, "catty_fdj_echo_probability", 0.35) or 0.0)
+        echo_cd = int(float(getattr(config, "catty_fdj_echo_cooldown_seconds", 120.0) or 0.0))
+        lines.append(
+            f"  · 语义重排 {'✓' if semantic else '✗'}"
+            f" · 统计免检 {'✓' if critic else '✗'} (≥{pass_score:.2f})"
+            f" · 语料直发 {'✓' if echo else '✗'} ({echo_prob:.0%}, 冷却 {echo_cd}s)"
+        )
+    except Exception as exc:  # noqa: BLE001
+        lines.append(f"📚 fdj_corpus: <错误 {exc}>")
+    lines.append("")
+
+    # 语料旧识
+    try:
+        from . import fdj_corpus_store
+
+        display = _display_name(event)
+        profile = fdj_corpus_store.lookup_user_profile(display)
+        if profile is None and scope.startswith("private:"):
+            profile = fdj_corpus_store.private_profile(scope)
+        lines.append("🧩 你的语料旧识 (corpus profile)")
+        if not isinstance(profile, Mapping) or not profile:
+            lines.append(f"  · {display[:24]}: 语料里没有匹配画像")
+        else:
+            name = str(profile.get("name") or display)[:24]
+            lines.append(
+                f"  · {name} · 互动 {int(profile.get('triggers') or 0)} 次"
+                f" · 语气档 {str(profile.get('register') or '?')}"
+                f" · 平均回复 {profile.get('avg_reply_len') or '?'} 字"
+            )
+            addresses = "/".join(
+                str(item) for item in (profile.get("addresses") or [])[:4] if str(item).strip()
+            )
+            terms = "/".join(
+                str(item) for item in (profile.get("top_terms") or [])[:5] if str(item).strip()
+            )
+            if addresses:
+                lines.append(f"  · 常用称呼: {addresses}")
+            if terms:
+                lines.append(f"  · 常聊: {terms}")
+    except Exception as exc:  # noqa: BLE001
+        lines.append(f"🧩 corpus profile: <错误 {exc}>")
+    lines.append("")
+
+    # callback_ledger
+    try:
+        entries = callback_ledger.active_entries(scope, max_items=3)
+        lines.append("🔖 未完成事项 (callback_ledger)")
+        if not entries:
+            lines.append("  · <无>")
+        for entry in entries:
+            lines.append(f"  · {entry.get('id')} [{entry.get('target_type')}] {entry.get('summary')}")
+    except Exception as exc:  # noqa: BLE001
+        lines.append(f"🔖 callback_ledger: <错误 {exc}>")
+    lines.append("")
+
+    # body_presence (群聊本体避让)
+    if scope.startswith("group:"):
+        try:
+            from .body_presence import parse_watches
+
+            group_id = scope.split(":", 1)[1]
+            lines.append("🎭 本体避让 (body_presence)")
+            if not bool(getattr(config, "catty_body_presence_enabled", False)):
+                lines.append("  · <未启用>")
+            else:
+                watches = [
+                    watch
+                    for watch in parse_watches(getattr(config, "catty_body_presence_watches", None))
+                    if watch.group_id == group_id
+                ]
+                if not watches:
+                    lines.append("  · 本群未配置 watch")
+                else:
+                    avoiding = body_presence_store.in_avoid(group_id, watches[0].cooldown_seconds)
+                    lines.append(
+                        f"  · 本体 QQ:{watches[0].user_id} · {'⏸ 避让中' if avoiding else '▶ 未避让'}"
+                    )
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"🎭 body_presence: <错误 {exc}>")
+        lines.append("")
+
+    # scope_lorebook (persona 分库)
+    try:
+        lore_entries = scope_lorebook_store.list_entries(scope, persona="fadianji")
+        lore_size_kb = scope_lorebook_store.scope_byte_size(scope, persona="fadianji") / 1024.0
+        last_summary = scope_lorebook_store.last_summary_date(scope, persona="fadianji") or "从未"
+        lines.append("📖 学到的事 (scope_lorebook · fadianji)")
+        lines.append(
+            f"  · 共 {len(lore_entries)} 条 · ~{lore_size_kb:.1f}KB / 200KB · 上次自动总结: {last_summary}"
+        )
+    except Exception as exc:  # noqa: BLE001
+        lines.append(f"📖 scope_lorebook: <错误 {exc}>")
+
+    return lines
+
+
+def _status_builder_for_persona(persona_name: str):
+    """人格 → dashboard builder; 未登记的人格继续走笨猫 dashboard。"""
+    if str(persona_name or "").strip().lower() == "fadianji":
+        return _build_fadianji_status_lines
+    return _build_catty_status_lines
+
+
+@catty_status_matcher.handle()
+async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
+    """主人专属 /status: 按当前 scope 的人格分发到各自 dashboard。"""
+    if not _event_is_owner(event):
+        return
+    try:
+        scope = _conversation_queue_key(event)
+        owner_qq = str(event.user_id)
+        persona = _persona_for_scope(scope)
+        builder = _status_builder_for_persona(persona.name)
+        lines = builder(event, scope, owner_qq)
         await matcher.finish(Message("\n".join(lines)))
     except FinishedException:
         raise
@@ -14722,6 +15052,46 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 reply_context.catalog.web_search_disabled_instruction
             )
 
+        # 主人 2026-10-25: 知识库缺口自动补网 — 本地知识库没有的事实类问题,
+        # 回复前自动 search + 抓正文, 以【联网补全】块进 prompt (不依赖模型自觉调 tool)。
+        auto_fetch_context = ""
+        if bool(getattr(config, "catty_auto_fetch_enabled", True)):
+            try:
+                from .auto_web_fetch import format_auto_fetch_context, maybe_auto_fetch
+
+                _auto_fetch_outcome = await asyncio.wait_for(
+                    maybe_auto_fetch(
+                        config,
+                        scope_key=_conversation_queue_key(event),
+                        user_id=str(event.user_id),
+                        text=incoming.text or "",
+                        kb_probe=lambda term: _auto_fetch_kb_hit(
+                            event, term, persona=reply_context.persona
+                        ),
+                        is_exempt=_web_search_exempt(event),
+                    ),
+                    timeout=max(
+                        float(
+                            getattr(config, "catty_auto_fetch_timeout_seconds", 12.0) or 12.0
+                        ),
+                        1.0,
+                    )
+                    + 2.0,
+                )
+                auto_fetch_context = format_auto_fetch_context(_auto_fetch_outcome)
+                if _auto_fetch_outcome.triggered:
+                    logger.info(
+                        f"auto_web_fetch: query={_auto_fetch_outcome.query!r} "
+                        f"reason={_auto_fetch_outcome.reason} ok={_auto_fetch_outcome.ok} "
+                        f"pages={len(_auto_fetch_outcome.pages)} "
+                        f"skipped={_auto_fetch_outcome.skipped!r} "
+                        f"cached={_auto_fetch_outcome.from_cache}"
+                    )
+            except asyncio.TimeoutError:
+                logger.info("auto_web_fetch timeout, skipped this turn")
+            except Exception as _auto_fetch_exc:  # noqa: BLE001
+                logger.debug(f"auto_web_fetch failed (non-fatal): {_auto_fetch_exc}")
+
         current_group_id = event.group_id if isinstance(event, GroupMessageEvent) else None
         # 群标签:除了 config 的内置 group_ids,还要看 memory_store 里主 AI 自己用
         # catty_group_game_tag 打上的群-游戏关联。任一命中就当成 group_related。
@@ -14776,17 +15146,51 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             excluded_urls=list(incoming.image_urls or []),
         )
 
+        _image_attention = bool(
+            _user_text_wants_image_attention(incoming.text)
+            or incoming.mentioned
+            or incoming.replied_to_self
+            or incoming.used_prefix
+            or incoming.directly_requested
+        )
+        # 识图 AI 与主 AI 同线路时, 图片直接进主请求, 不再先跑一次同模型识图。
+        _vision_passthrough = bool(
+            config.catty_image_vision_enabled
+            and _image_attention
+            and vision_shares_main_route(config)
+        )
+        passthrough_image_parts: list[dict[str, Any]] = []
+        passthrough_quoted_image_parts: list[dict[str, Any]] = []
+        if _vision_passthrough:
+            if incoming.image_urls:
+                try:
+                    passthrough_image_parts = await prepare_passthrough_image_parts(
+                        config, incoming.image_urls
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"vision passthrough (incoming) failed: {exc}")
+            if reply_image_pairs:
+                try:
+                    passthrough_quoted_image_parts = await prepare_passthrough_image_parts(
+                        config, [url for url, _key in reply_image_pairs]
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"vision passthrough (quoted) failed: {exc}")
+            if passthrough_image_parts or passthrough_quoted_image_parts:
+                logger.info(
+                    f"vision passthrough: incoming={len(passthrough_image_parts)} "
+                    f"quoted={len(passthrough_quoted_image_parts)} → main AI"
+                )
+
         reply_image_description = ""
-        if reply_image_pairs and config.catty_image_vision_enabled:
+        if (
+            reply_image_pairs
+            and config.catty_image_vision_enabled
+            and not passthrough_quoted_image_parts
+        ):
             _reply_image_urls = [url for url, _key in reply_image_pairs]
             _reply_image_keys = [key for _url, key in reply_image_pairs]
-            if (
-                _user_text_wants_image_attention(incoming.text)
-                or incoming.mentioned
-                or incoming.replied_to_self
-                or incoming.used_prefix
-                or incoming.directly_requested
-            ):
+            if _image_attention:
                 _reply_cached_summary = memory_store.get_image_summary(_reply_image_keys)
                 if _reply_cached_summary:
                     reply_image_description = _reply_cached_summary
@@ -14816,6 +15220,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             if persistent_summary:
                 image_description = persistent_summary
                 image_description_cached = True
+            elif passthrough_image_parts:
+                # 原图已直接挂在主请求上, 不再走识图模型。
+                pass
             else:
                 # 按需识别:_rule 阶段已经按"用户文本是否提及图"决定要不要 eager schedule。
                 # 这里再判一次:如果用户文本里没有图相关词(_user_text_wants_image_attention=False),
@@ -14825,13 +15232,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 文本提到图 → eager 读图; 但「专门指向笨猫」(@笨猫/回复笨猫/前缀呼叫/
                 # 明确求助) 带图、哪怕一个字没打, 也是最强的「看这张图」意图, 强制读图。
                 # 只有真正路过的群闲图(无指向)才继续懒加载省 vision 配额。
-                if (
-                    _user_text_wants_image_attention(incoming.text)
-                    or incoming.mentioned
-                    or incoming.replied_to_self
-                    or incoming.used_prefix
-                    or incoming.directly_requested
-                ):
+                if _image_attention:
                     _schedule_vision_async(
                         incoming.image_keys,
                         incoming.image_urls,
@@ -14893,6 +15294,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             incoming,
             image_description=image_description,
             has_context_image=bool(reply_image_pairs),
+            image_parts=passthrough_image_parts or None,
+            quoted_image_parts=passthrough_quoted_image_parts or None,
             anger_context=anger_context,
             semantic_reply_split=semantic_reply_split,
             group_filter_context=group_filter_context,
@@ -14901,6 +15304,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             web_search_context="\n\n".join(
                 part for part in [web_search_context, fallback_decision_context] if part
             ),
+            auto_fetch_context=auto_fetch_context,
             star_resonance_context=star_resonance_context,
             star_resonance_static_context=star_resonance_static_context,
             strinova_context=strinova_context,
@@ -14996,7 +15400,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             persona=_tool_persona,
         )
 
-        _tool_narration_sent = False
         _turn_tool_result_texts: list[str] = []
         _turn_tool_audit_result_texts: list[str] = []
         _telemetry_turn_id = f"turn_{time.time_ns()}"
@@ -15017,15 +15420,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             *,
             _allowed_names: set[str] = _allowed_tool_names,
         ) -> dict[str, object]:
-            nonlocal _tool_narration_sent
             result = await _execute_schema_gated_tool_call(
                 name,
                 args_json,
                 tool_ctx,
                 allowed_names=_allowed_names,
             )
-            # 主人 2026-08-13 (Review 修正): 旁白只在工具真实执行成功后才发,
-            # 主人校验/confirm/参数解析/能力闸门失败时不发"我查一下"。
             # 主人 2026-08-15: 成功结果文本同时留档, 供末尾回填遥测的回复采用判定。
             _tool_succeeded = (
                 isinstance(result, dict)
@@ -15058,15 +15458,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             except Exception:
                 pass
-            if (
-                not _tool_narration_sent
-                and name in _allowed_names
-                and bool(getattr(config, "catty_tool_narration_enabled", True))
-                and getattr(_tool_persona, "name", "") == "fadianji"
-                and _tool_succeeded
-            ):
-                _tool_narration_sent = True
-                _schedule_tool_narration(matcher, event)
             return result
 
         _forced_tool_choice: str | dict[str, object] = "auto"
@@ -15100,7 +15491,36 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,
         # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
         # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
-        placeholder_task = _spawn_slow_reply_placeholder(matcher, event)
+        # 主人 2026-10-25: 查资料/画图/做题这类必然超时的长任务改成开跑前先发一句模型现写的
+        # 短回复 (替代固定「我去翻翻」池); 已经发先导回复时不再叠 placeholder。
+        _quick_ack_task: asyncio.Task | None = None
+        try:
+            from .quick_ack import detect_task_kind
+
+            _ack_kind, _ack_label = detect_task_kind(
+                _user_text_for_intent,
+                _allowed_tool_names,
+                directed=bool(
+                    incoming.directly_requested
+                    or incoming.mentioned
+                    or isinstance(event, PrivateMessageEvent)
+                ),
+                force_imagegen=_force_imagegen_tool,
+            )
+            if _ack_kind:
+                _quick_ack_task = _schedule_quick_ack(
+                    matcher,
+                    event,
+                    persona=_tool_persona,
+                    kind=_ack_kind,
+                    task_label=_ack_label,
+                    user_text=_user_text_for_intent,
+                )
+        except Exception as _ack_exc:  # noqa: BLE001
+            logger.debug(f"quick_ack schedule failed (non-fatal): {_ack_exc}")
+        placeholder_task = (
+            None if _quick_ack_task is not None else _spawn_slow_reply_placeholder(matcher, event)
+        )
         # SillyTavern 风「Author's Note 深度注入」: 在 chat history 倒数第 N 条之前插入贴身提醒。
         # 比顶部 system prompt 更抗稀释(长对话里顶部容易被遗忘),比 jailbreak 更灵活(可以放在 user 当前消息之前但不是最末)。
         # 1) 关系亲密度 author's note (depth=3): 主人/挚友/陌生 各有一条不同的贴身提醒
@@ -15466,8 +15886,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 reply = _strip_soft_refusal_tail(reply)
                 # post-process strip kaomoji 颜文字 (双保险)
                 reply = _strip_nsfw_kaomoji(reply)
-                # 替换裸露『我』→『人家/猫猫/笨猫』 (NSFW 自称强制)
-                reply = _replace_first_person_nsfw(reply)
+                # 替换裸露『我』→『人家/猫猫/笨猫』 (NSFW 自称强制; 仅 catty)
+                reply = _replace_first_person_nsfw(
+                    reply, persona=_persona_for_event(event),
+                )
                 nsfw_image_segments = []
                 # 主人 2026-05-28: 笨猫第一次被插入(phase>=4)后,每 3 turn 自动 NAI 画一张,扣 10 积分。
                 # 触发由 catty_nsfw_imagegen.maybe_generate_image 自己判断,这里只在 reply 成功时调一次。
@@ -15503,6 +15925,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             user_text=_user_text_now,
                             recent_messages=_spark_messages,
                             pregnancy_state=_preg_st_for_draw,
+                            persona=_persona_for_event(event),
                         ))
                         _nsfw_img_task_started_at = time.monotonic()
                     except Exception as exc:  # noqa: BLE001
@@ -15702,6 +16125,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             # 任何路径都要 cancel placeholder task,避免回完了又冒一句"猫猫想想喵~"。
             if placeholder_task is not None and not placeholder_task.done():
                 placeholder_task.cancel()
+            # 先导短回复同理: 正式答案已经出来就别再补一句。
+            if _quick_ack_task is not None and not _quick_ack_task.done():
+                _quick_ack_task.cancel()
 
         reply = _sanitize_reply_text_for_output(await _apply_local_critic(event, incoming, messages, reply))
         # 主人 2026-08-15: 控制 marker 先于 NO_REPLY/风格改写提取并应用。

@@ -3760,7 +3760,9 @@ def _load_self_portrait_reference_bytes(kind: str, persona: Any = None) -> list[
     return out
 
 
-async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any = None) -> dict[str, Any]:
+async def _deepseek_imagegen_plan(
+    config: Config, user_text: str, persona: Any = None, *, allow_nsfw: bool = False,
+) -> dict[str, Any]:
     """Call deepseek (config.ai_fallback) once, ask it to emit a strict JSON plan.
 
     返回 dict 字段:
@@ -3810,6 +3812,13 @@ async def _deepseek_imagegen_plan(config: Config, user_text: str, persona: Any =
             f"人格简介: {_pi.planner_brief}\n"
             " 不要在 short_review 里出现 OOC / 元评论 / Markdown."
             " 用户没明确说风格时默认 provider=nai. 严禁输出 JSON 以外任何内容."
+            + (
+                '\n  - NSFW 例外 (本轮私聊已获该人格授权): 用户明确要成人/裸体/性场景时,'
+                ' "prompt" 可直接写对应 NAI NSFW tags;'
+                f' "self_portrait" 可填 "nsfw" 用{_char}的本地参考图锁人设;'
+                ' 未明确要 NSFW 时仍按上面的 sfw/null 规则.\n'
+                if allow_nsfw else ""
+            )
         )
     elif _is_catty:
         system_prompt = (
@@ -3940,8 +3949,17 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     _persona = getattr(ctx, "persona", None)
     _is_catty = _is_catty_persona(_persona)
     _persona_imagegen = getattr(_persona, "imagegen", None) if not _is_catty else None
+    # 非 catty 人格: NSFW 自画像只在人格/场景授权的私聊里开放 (机机 = 仅私聊)。
+    _nsfw_allowed = False
+    if _persona_imagegen is not None:
+        from .personas import persona_nsfw_allowed as _persona_nsfw_allowed
+        _nsfw_allowed = _persona_nsfw_allowed(
+            _persona, is_private=bool(getattr(ctx, "is_private", False)),
+        )
     try:
-        plan = await _deepseek_imagegen_plan(ctx.config, user_text, persona=_persona)
+        plan = await _deepseek_imagegen_plan(
+            ctx.config, user_text, persona=_persona, allow_nsfw=_nsfw_allowed,
+        )
     except Exception as exc:  # noqa: BLE001
         _logger.warning(
             "imagegen agent: deepseek plan failed (%s: %s), falling back to default nai",
@@ -3986,6 +4004,9 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
         if isinstance(plan.get("self_portrait"), str) else ""
     if not _is_catty and _persona_imagegen is None:
         self_portrait_kind = ""
+    # 群聊/未授权场景不允许 planner 私自把自画像升到 nsfw。
+    if not _is_catty and self_portrait_kind == "nsfw" and not _nsfw_allowed:
+        self_portrait_kind = "sfw" if _persona_imagegen is not None else ""
     _default_review = (
         "画好啦主人~ ฅฅ"
         if _is_catty
