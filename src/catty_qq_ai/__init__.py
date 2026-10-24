@@ -7528,6 +7528,10 @@ async def _build_messages(
             elif _advertise_paid_active:
                 _paid_content = _build_paid_ad()
             if _paid_content:
+                # 多人格: 援交广告/嘲讽模板是笨猫口吻, 机机追加静态口吻校正
+                _paid_persona_style = str(getattr(_persona, "nsfw_style_override", "") or "")
+                if _paid_persona_style:
+                    _paid_content = f"{_paid_content}\n\n{_paid_persona_style}"
                 # 主人 2026-05-29 P0: 改 trailing system, 不再 inline 进 user content
                 # (旧 inline 下轮变 history 被 strip → 前缀漂移). system 段不进 history.
                 _append_internal_system(messages, _paid_content, label="paid NSFW hint")
@@ -7578,6 +7582,8 @@ async def _build_messages(
                 outcome=_paid_nsfw_outcome,
                 cost=_paid_cost_applied,
                 paid_encounter_count=_paid_enc_count,
+                # 多人格: 援交模板是笨猫口吻, 机机追加一段静态口吻校正
+                persona_style=str(getattr(_persona, "nsfw_style_override", "") or ""),
             )
             _prefill = BREAKTHROUGH_PREFILLS["paid"]
             # 应用 outcome 好感 delta (复用 BREAKTHROUGH_OUTCOME_DELTA: pleasant +50 / unpleasant -25)

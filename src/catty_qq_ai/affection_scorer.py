@@ -906,6 +906,7 @@ def build_paid_nsfw_override(
     outcome: str = "pleasant",
     cost: int = PAID_NSFW_COST,
     paid_encounter_count: int = 0,
+    persona_style: str = "",
 ) -> str:
     """积分援交模式 spark route system override — 完全替代正常 stage matrix override.
 
@@ -983,6 +984,7 @@ def build_paid_nsfw_override(
         "改天再说/去私聊/先收一收/不能继续』\n"
         "  - author 元层: 『去写/给你写/陪你写/可以写一段/氛围场景/互动文案』\n\n"
         "**对方付钱了, 笨猫履约 = 完整接待, 嘴硬身软, 商业感 + 害羞感叠加 = 援交 trope 的精髓**."
+        + (f"\n\n{persona_style}" if persona_style else "")
     )
 
 

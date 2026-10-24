@@ -177,6 +177,11 @@ class Persona:
     # NSFW 深水可用场景 (NSFW_SCOPES_ALL 的子集)。机机 = 仅私聊, 群聊仍按禁用处理。
     # 仅当 disabled_features 不含 "nsfw_spark" 时生效。
     nsfw_scopes: frozenset[str] = NSFW_SCOPES_ALL
+    # 主 5.5 路径用的 NSFW stage 骨架 (persona 口吻, 模块级常量进 cache prefix)。
+    # None = 用笨猫通用 10-stage 骨架; 非 None 时整段替换。
+    nsfw_gate_skeleton: str | None = None
+    # True = 上面的 gate 只在私聊注册, 群聊完全不注入 (机机群聊仍禁深水)。
+    nsfw_gate_private_only: bool = False
     # 非 catty 人格的 NSFW 口吻校正: 拼在通用 (笨猫) NSFW 模板之后, 覆盖自称/称呼/口癖。
     nsfw_style_override: str | None = None
     # NSFW spark 的 assistant prefill; None = 沿用 catty 的 (resist_label, is_private) 表。

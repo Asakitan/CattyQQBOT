@@ -618,7 +618,7 @@ def register_catty_persona(
     _group_stage_floor = 3
 
     def _resolve_stage_cap() -> int:
-        ceiling = 10 if is_owner else max(1, min(int(affection_level), 10))
+        ceiling = 10 if is_owner else max(1, min(int(aff_level), 10))
         if not _is_private_session:
             ceiling = max(_group_stage_floor, min(ceiling, _group_stage_cap))
         return ceiling
@@ -626,11 +626,11 @@ def register_catty_persona(
     def _resolve_resist() -> str:
         if is_owner:
             return "owner"
-        if affection_level >= 8:
+        if aff_level >= 8:
             return "high"
-        if affection_level >= 5:
+        if aff_level >= 5:
             return "mid"
-        if affection_level >= 3:
+        if aff_level >= 3:
             return "low"
         return "stranger"
 
@@ -657,12 +657,17 @@ def register_catty_persona(
         "欲拒还迎 (嘴上不要+身体凑过去); owner 用『主人/笨蛋主人/杂鱼主人』, 非 owner 用对方昵称, "
         "严禁泛指『你/你的』; NSFW 禁 ASCII 颜文字, 用喘息+动作+感官; 笨猫自己达高潮+自己降档."
     )
+    # 多人格: persona 可整段替换骨架 (机机 = 私聊专用 + 机机口吻), 群聊不注册。
+    _persona_gate_skeleton = str(getattr(persona, "nsfw_gate_skeleton", "") or "")
+    _gate_private_only = bool(getattr(persona, "nsfw_gate_private_only", False))
+    _gate_scope_ok = _is_private_session or not _gate_private_only
 
-    _reg_static(
-        "catty_nsfw_gate_skeleton",
-        _NSFW_GATE_SKELETON,
-        order=148,  # 主人 2026-05-29 Round 19: 472→148 静态骨架进 cache prefix (boundary=455 前)
-    )
+    if _gate_scope_ok:
+        _reg_static(
+            "catty_nsfw_gate_skeleton",
+            _persona_gate_skeleton or _NSFW_GATE_SKELETON,
+            order=148,  # 主人 2026-05-29 Round 19: 472→148 静态骨架进 cache prefix (boundary=455 前)
+        )
 
     # ─── 动态参数: 只 ~200 字符, 引用上面骨架 ───
     def _build_nsfw_gate_params() -> str:
@@ -672,16 +677,17 @@ def register_catty_persona(
         scope_cap = "owner" if is_owner else ("private" if _is_private_session else "group")
         return (
             "【NSFW_PARAMS】"
-            f"scene={scene}; owner={1 if is_owner else 0}; Lv={int(affection_level)}; "
+            f"scene={scene}; owner={1 if is_owner else 0}; Lv={int(aff_level)}; "
             f"max_stage={max_stage}; resist={resist}; cap={scope_cap}; "
             "rules=catty_nsfw_gate_skeleton"
         )
 
-    _reg(
-        "catty_nsfw_gate_params",
-        content_fn=_build_nsfw_gate_params,
-        order=487,  # dynamic (Lv + is_owner + scene), post-boundary
-    )
+    if _gate_scope_ok:
+        _reg(
+            "catty_nsfw_gate_params",
+            content_fn=_build_nsfw_gate_params,
+            order=487,  # dynamic (Lv + is_owner + scene), post-boundary
+        )
 
     # === Phase D4: arc continuity — 跨 arc 身体记忆延续 ===
     _user_id_for_arc = ctx.get("user_id", "") or ""

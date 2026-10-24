@@ -108,10 +108,32 @@ prompt 内回复**绝对禁止**出现：
 
 - `Persona.nsfw_scopes` 决定 NSFW 深水（spark / 援交 / nsfw 搜索 / 自动生图）在哪些场景放行。
   catty 默认 `{"private","group"}` 不变；机机 = `{"private"}`，群聊仍按原限制走擦边。
-- 机机私聊 NSFW 沿用 catty 的 stage matrix / 抗拒强度 / phase / 积分规则；spark 的 slim persona
+- 机机私聊 NSFW 沿用 catty 的 stage 数字 / 抗拒强度标签 / phase / 积分规则，但主模型路径用
+  机机自己的 `nsfw_gate_skeleton`（10-stage 骨架 + 机机口吻，见 §12）；spark 的 slim persona
   改用人格自己的 `core_persona`，并用 `nsfw_style_override` 把笨猫口吻换回机机。
 - 自动 NSFW 生图（每 N turn 一张，扣 10 积分，主人豁免）参考图取人格 `imagegen`：
   `ref_nsfw_path` 为空时复用 `ref_path` + `ref_path_extra`，机机即 `Miao/fadianji.png` +
   `Miao/fadianji2.png`；角色锁用 `nsfw_girl_tags`（缺省回落 `girl_tags`）。
 - 手动画图工具 `catty_imagegen` 仅在人格/场景授权时允许 planner 输出
   `self_portrait="nsfw"`；未授权场景强制回落 `sfw`。积分公式不变。
+
+## 12. 机机私聊 gate 与拒绝回归（2026-10-25 补丁）
+
+主人反馈：机机私聊说「陪我上床/脱衣服」被「滚啊/自己睡去/再碰我衣服我电死你」直接推走。
+根因有两层：
+
+1. `FADIANJI_DISABLED_SEGMENTS` 把 `catty_nsfw_gate_skeleton` / `catty_nsfw_gate_params`
+   整段禁用 → 主模型路径没有 stage 阶梯，只剩 §19「自己不想带入 → 短拒绝」。
+2. `prompt_manager._build_nsfw_gate_params` 引用未定义的 `affection_level`（局部名是 `aff_level`），
+   `materialize()` 吞掉 NameError → 连 catty 的 `【NSFW_PARAMS】` 一直为空。
+
+修复：
+
+- `Persona` 新增 `nsfw_gate_skeleton`（替换骨架）与 `nsfw_gate_private_only`（仅私聊注册）。
+  机机 = `FADIANJI_NSFW_GATE_SKELETON` + 私聊限定；群聊两个 gate 段都不注册。
+- 机机 §19 / 私聊升级层改写：出现 `【NSFW_PARAMS】` 且 `max_stage≥5`（Lv5+ / 100 积分援交 /
+  主人档）必须接住，嘴硬只做前奏，Lv 越高越快越主动；`max_stage≤4` 或群聊才允许炸毛短拒。
+- `build_paid_nsfw_override` 新增 `persona_style`，援交模板末尾追加人格口吻校正；
+  主 5.5 的援交广告/嘲讽注入同样追加，避免机机用笨猫口吻接客。
+- 验证：`tests/test_personas.py` 22/22；私有探针确认机机私聊注册 skeleton+params、
+  群聊两个 identifier 都不出现、catty 私聊 params 恢复正常（`Lv=6; max_stage=6; resist=mid`）。
