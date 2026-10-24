@@ -612,43 +612,126 @@ def _start_training_dashboard(local_training: dict[str, Any], config_dir: Path) 
     print("Started local training progress window")
 
 
-def _qzone_bridge_is_healthy(base_url: str, timeout: float = 1.5) -> bool:
+def _qzone_bridge_probe(base_url: str, timeout: float = 1.5) -> dict[str, Any] | None:
+    """返回 bridge /status JSON；连不上或不是 bridge 时返回 None。"""
     status_url = base_url.rstrip("/") + "/status"
     try:
         with urlopen(status_url, timeout=timeout) as response:
-            if response.status >= 500:
-                return False
             payload = json.loads(response.read())
-            return payload.get("ok") is True
     except Exception:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    if not {"ok", "qq", "cookie", "uptime_seconds"} & set(payload):
+        return None
+    return payload
+
+
+def _qzone_bridge_is_healthy(base_url: str, timeout: float = 1.5) -> bool:
+    payload = _qzone_bridge_probe(base_url, timeout)
+    return bool(payload is not None and payload.get("ok") is True)
+
+
+def _qzone_bridge_port(base_url: str) -> int | None:
+    parsed = urlparse(base_url)
+    if parsed.port is not None:
+        return parsed.port
+    if parsed.scheme == "https":
+        return 443
+    if parsed.scheme == "http":
+        return 80
+    return None
+
+
+def _tcp_listen_pids(port: int) -> list[int]:
+    if os.name != "nt":
+        return []
+    try:
+        completed = subprocess.run(
+            ["netstat", "-ano", "-p", "tcp"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            timeout=10,
+        )
+    except Exception:
+        return []
+    pids: set[int] = set()
+    for line in completed.stdout.splitlines():
+        parts = line.split()
+        if len(parts) < 5 or parts[0].upper() != "TCP" or parts[3].upper() != "LISTENING":
+            continue
+        if not parts[1].endswith(f":{port}"):
+            continue
+        if parts[4].isdigit():
+            pids.add(int(parts[4]))
+    return sorted(pids)
+
+
+def _stop_qzone_port_owners(port: int) -> bool:
+    pids = [pid for pid in _tcp_listen_pids(port) if pid != os.getpid()]
+    if not pids:
         return False
+    for pid in pids:
+        try:
+            subprocess.run(
+                ["taskkill", "/PID", str(pid), "/T", "/F"],
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="ignore",
+                timeout=15,
+            )
+        except Exception:
+            continue
+    deadline = time.monotonic() + 5.0
+    while time.monotonic() < deadline:
+        if not _tcp_listen_pids(port):
+            return True
+        time.sleep(0.1)
+    return not _tcp_listen_pids(port)
 
 
-def _start_qzone_bridge(qzone: dict[str, Any], config_dir: Path) -> None:
+def stop_logged_out_qzone_bridge(base_url: str) -> bool:
+    """停掉端口上登录失效的陈旧 bridge；健康或不是 bridge 时不动它。"""
+    probe = _qzone_bridge_probe(base_url)
+    if probe is None or probe.get("ok") is True:
+        return False
+    port = _qzone_bridge_port(base_url)
+    if port is None:
+        return False
+    stopped = _stop_qzone_port_owners(port)
+    if stopped:
+        print(f"Stopped stale logged-out Qzone bridge on port {port}")
+    return stopped
+
+
+def _start_qzone_bridge(qzone: dict[str, Any], config_dir: Path) -> bool:
     with _QZONE_BRIDGE_START_LOCK:
         base_url = str(qzone.get("bridge_base_url") or "http://127.0.0.1:5700").strip()
         if _qzone_bridge_is_healthy(base_url):
             print(f"Qzone bridge already running at {base_url}; reusing existing process.")
-            return
+            return True
 
         workdir = _resolve_path(qzone.get("bridge_workdir", "tools/onebot-qzone"), config_dir)
         entry = workdir / "dist" / "main.js"
         if not entry.exists():
             print(f"Qzone bridge entry not found: {entry}")
-            return
+            return False
 
         executable_value = str(qzone.get("bridge_node_executable") or "node").strip()
         executable_path = Path(executable_value).expanduser()
         if executable_path.is_absolute():
             if not executable_path.exists():
                 print(f"Node executable not found: {executable_path}")
-                return
+                return False
             node_executable = str(executable_path)
         else:
             node_executable = shutil.which(executable_value)
             if not node_executable:
                 print(f"Node executable not found: {executable_value}")
-                return
+                return False
 
         log_path = _resolve_path(qzone.get("bridge_log_path", "logs/qzone_bridge.log"), config_dir)
         log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -662,13 +745,22 @@ def _start_qzone_bridge(qzone: dict[str, Any], config_dir: Path) -> None:
             env=os.environ.copy(),
             creationflags=creationflags,
         )
-        for attempt in range(30):
+        healthy = False
+        for attempt in range(50):
             if _qzone_bridge_is_healthy(base_url):
+                healthy = True
                 break
-            if proc.poll() is not None or attempt == 29:
+            if proc.poll() is not None:
                 break
             time.sleep(0.1)
-        print(f"Started Qzone bridge (pid={proc.pid}); log: {log_path}")
+        if healthy:
+            print(f"Started Qzone bridge (pid={proc.pid}); log: {log_path}")
+            return True
+        print(
+            f"Qzone bridge did not become healthy (pid={proc.pid}, exit={proc.poll()}); "
+            f"log: {log_path}"
+        )
+        return False
 
 def _start_napcat(qq: dict[str, Any], config_dir: Path) -> None:
     workdir = _resolve_path(qq.get("napcat_workdir", "tools/napcat-onekey/bootmain"), config_dir)

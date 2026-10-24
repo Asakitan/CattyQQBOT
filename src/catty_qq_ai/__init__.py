@@ -11749,14 +11749,43 @@ _qzone_keeper_last_mint_at: float = 0.0
 _QZONE_KEEPER_HEALTH_INTERVAL_SECONDS = 300.0
 
 
-async def _qzone_bridge_status_ok(base_url: str, timeout_seconds: float) -> bool:
+async def _qzone_bridge_status(base_url: str, timeout_seconds: float) -> bool | None:
+    """None=连不上 bridge；True/False=bridge HTTP 在线但登录态 ok/失效。"""
     try:
         async with httpx.AsyncClient(timeout=max(timeout_seconds, 1.0)) as client:
             response = await client.get(base_url.rstrip("/") + "/status")
             payload = response.json()
-        return bool(isinstance(payload, Mapping) and payload.get("ok") is True)
     except Exception:  # noqa: BLE001
+        return None
+    if not isinstance(payload, Mapping):
+        return None
+    return payload.get("ok") is True
+
+
+async def _qzone_bridge_status_ok(base_url: str, timeout_seconds: float) -> bool:
+    return await _qzone_bridge_status(base_url, timeout_seconds) is True
+
+
+async def _qzone_bridge_update_cookie(
+    base_url: str,
+    access_token: str,
+    timeout_seconds: float,
+    cookie_str: str,
+) -> bool:
+    try:
+        from .qzone_bridge import call_qzone_action
+
+        data = await call_qzone_action(
+            base_url,
+            "update_cookie",
+            {"cookie": cookie_str},
+            access_token=access_token,
+            timeout_seconds=timeout_seconds,
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"[qzone-keeper] update_cookie failed: {type(exc).__name__}: {exc}")
         return False
+    return bool(isinstance(data, Mapping) and str(data.get("user_id") or "").strip())
 
 
 async def _qzone_bridge_session_valid(base_url: str, access_token: str, timeout_seconds: float) -> bool:
@@ -11794,7 +11823,9 @@ async def _qzone_mint_cookies_from_napcat() -> str:
         if cookies and ("p_skey=" in cookies or "skey=" in cookies):
             return cookies
     if last_error is not None:
-        logger.warning(f"[qzone-keeper] mint cookies failed: {last_error}")
+        logger.warning(
+            f"[qzone-keeper] mint cookies failed: {type(last_error).__name__}: {last_error}"
+        )
     return ""
 
 
@@ -11848,10 +11879,12 @@ def _qzone_keeper_launch_bridge() -> bool:
             return False
         if not qzone.get("enabled") or not qzone.get("bridge_auto_start", True):
             return False
-        from catty_integrations import _start_qzone_bridge
+        from catty_integrations import _start_qzone_bridge, stop_logged_out_qzone_bridge
 
-        _start_qzone_bridge(qzone, config_path.parent)
-        return True
+        stop_logged_out_qzone_bridge(
+            str(qzone.get("bridge_base_url") or "http://127.0.0.1:5700")
+        )
+        return bool(_start_qzone_bridge(qzone, config_path.parent))
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"[qzone-keeper] bridge launch failed: {exc}")
         return False
@@ -11871,39 +11904,43 @@ async def _qzone_cookie_keeper_once() -> bool:
         300.0,
     )
     now = time.monotonic()
-    status_ok = await _qzone_bridge_status_ok(base_url, timeout)
-    if status_ok:
+    status = await _qzone_bridge_status(base_url, timeout)
+    cookie_str = ""
+    if status is True:
         session_valid = await _qzone_bridge_session_valid(base_url, access_token, timeout)
         if session_valid and now - _qzone_keeper_last_mint_at < interval:
             return True
         cookie_str = await _qzone_mint_cookies_from_napcat()
         if not cookie_str:
             return True  # bridge 还活着, NapCat 暂时不可用不降级重试
-        try:
-            from .qzone_bridge import call_qzone_action
-
-            await call_qzone_action(
-                base_url,
-                "update_cookie",
-                {"cookie": cookie_str},
-                access_token=access_token,
-                timeout_seconds=timeout,
-            )
-        except Exception as exc:  # noqa: BLE001
-            logger.warning(f"[qzone-keeper] update_cookie failed: {exc}")
+        if await _qzone_bridge_update_cookie(base_url, access_token, timeout, cookie_str):
+            _qzone_keeper_last_mint_at = time.monotonic()
+            logger.info("[qzone-keeper] refreshed bridge cookie via update_cookie")
             return True
-        _qzone_keeper_last_mint_at = time.monotonic()
-        logger.info("[qzone-keeper] refreshed bridge cookie via update_cookie")
-        return True
-    cookie_str = await _qzone_mint_cookies_from_napcat()
-    if not cookie_str:
-        return False
+        if session_valid:
+            # 只是主动续期失败, 现有会话仍可用: 不重启健康 bridge, 下一轮再试
+            return True
+        logger.warning("[qzone-keeper] bridge session invalid and update_cookie failed; restarting")
+    elif status is False:
+        # 活着的 bridge 未登录: 陈旧进程不会重读 .env, 先热注入 cookie
+        cookie_str = await _qzone_mint_cookies_from_napcat()
+        if not cookie_str:
+            return False
+        if await _qzone_bridge_update_cookie(base_url, access_token, timeout, cookie_str):
+            _qzone_keeper_last_mint_at = time.monotonic()
+            logger.info("[qzone-keeper] restored logged-out bridge via update_cookie")
+            return True
+        logger.warning("[qzone-keeper] live bridge stayed logged out; restarting it")
+    else:
+        cookie_str = await _qzone_mint_cookies_from_napcat()
+        if not cookie_str:
+            return False
     env_path = _qzone_keeper_env_path()
     env_written = await asyncio.to_thread(_write_bridge_env_cookie, env_path, cookie_str)
     launched = await asyncio.to_thread(_qzone_keeper_launch_bridge)
     _qzone_keeper_last_mint_at = time.monotonic()
     logger.info(
-        f"[qzone-keeper] bridge was down; env_written={env_written} relaunched={launched} "
+        f"[qzone-keeper] bridge restart: env_written={env_written} launched={launched} "
         f"env={env_path}"
     )
     # bridge 冷启动要几秒, 立即复探一次拿真实结果
