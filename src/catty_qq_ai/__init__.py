@@ -16235,6 +16235,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     user_text=str(incoming.text or ""),
                     config=config,
                     tool_result_texts=_turn_tool_audit_result_texts,
+                    # NSFW 路由 (spark/sticky) 走成人 RP 润色指令, 不再被 audit 拒答顶掉
+                    nsfw_context=bool(_prefer_spark),
                     context_hint=(
                         f"本轮有 {len(_turn_tool_audit_result_texts)} 条真实工具结果; "
                         "改写只能调整 prose, 不得改变工具调用的成功/失败或返回事实。"

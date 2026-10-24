@@ -137,3 +137,17 @@ prompt 内回复**绝对禁止**出现：
   主 5.5 的援交广告/嘲讽注入同样追加，避免机机用笨猫口吻接客。
 - 验证：`tests/test_personas.py` 22/22；私有探针确认机机私聊注册 skeleton+params、
   群聊两个 identifier 都不出现、catty 私聊 params 恢复正常（`Lv=6; max_stage=6; resist=mid`）。
+
+### 12.1 风格质检拒答 (2026-10-25 二修)
+
+现象：spark 生成的露骨回复被 `fadianji_style_critic.rewrite_if_needed` 送去 audit 改写，
+audit 回「这个我没法改——原回复是露骨性内容，我不能参与改写或润色」，这段拒答被当成改写结果发出去。
+
+- 露骨回合识别：调用方传 `nsfw_context=_prefer_spark`，或 user_text/reply 命中明确性词
+  （强词单个命中、软词 2 个）。
+- 露骨回合不再免检，也不再用「质检员」框架：整段换成 `_NSFW_SYSTEM_PROMPT`
+  （机机本人 RP + 成人向 RP 铁律：允许露骨、必须接住、不审查/不建议换话题、保留动作部位与长度）。
+- 拒答或空正文都重试一次（`_RETRY_ADDENDUM`）；仍失败则保留原回复，绝不把拒答发出去。
+- `catty_audit_ai_max_tokens` 缺省 300→1000：思考模型 reasoning 吃满时会回空正文。
+- 实测：同一 audit 模型在 in-character 框架下能稳定重写露骨草稿（温和/露骨两例均
+  `rewritten=1`）；旧「质检员」框架两次都拒答。
