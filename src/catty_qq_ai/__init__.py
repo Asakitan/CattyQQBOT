@@ -10312,12 +10312,17 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
 
 
 async def _expression_repeat_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
-    # 机机 (mention_only_trigger): 复读也是非 @ 发言, 默认不做 (主人 2026-08-10)
-    if _persona_for_event(event).mention_only_trigger:
-        return False
     repeat_message = _expression_repeat_message(bot, event)
     if repeat_message is None:
         return False
+    # 机机 (mention_only_trigger): 复读是群梗不是回话, 照常参与 (主人 2026-10-25);
+    # 但真在叫机机 / 续聊窗口内的消息留给主回复链路, 不让复读抢掉。
+    if isinstance(event, GroupMessageEvent) and _persona_for_event(event).mention_only_trigger:
+        if _bot_reply_continuation_remaining(event) > 0:
+            return False
+        incoming = extract_incoming_message(str(bot.self_id), event, config)
+        if incoming is not None and (incoming.mentioned or incoming.replied_to_self or incoming.directly_requested):
+            return False
     state["catty_repeat_message"] = repeat_message
     return True
 
