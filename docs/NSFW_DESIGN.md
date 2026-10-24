@@ -151,3 +151,21 @@ audit 回「这个我没法改——原回复是露骨性内容，我不能参�
 - `catty_audit_ai_max_tokens` 缺省 300→1000：思考模型 reasoning 吃满时会回空正文。
 - 实测：同一 audit 模型在 in-character 框架下能稳定重写露骨草稿（温和/露骨两例均
   `rewritten=1`）；旧「质检员」框架两次都拒答。
+
+### 12.2 机机 × 笨猫 的 NSFW 状态/词表分离（2026-10-25 三修）
+
+现象：机机私聊首条刷出 19 行「分镜墙」；随后出现「还怀着呢…」——笨猫的怀孕状态串进了机机；
+phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫。
+
+- 词表：`Persona.nsfw_lexicon` 整组替换。机机把 `笨猫→机机`、`猫耳→翼耳`、`尾巴(根)→尾羽(根)`、
+  `肉垫→手心`、`purring→轻颤`、`喵→''`、`主人→你` 等。`nsfw_phase.apply_persona_lexicon`
+  统一作用于 phase 全量 catalog、起手范例、`_NSFW_RECENCY_REMINDER`、
+  `_NSFW_SPARK_STABLE_BOUNDARY_TEXT`、spark override 与援交 override；catty 无表 → 字节不变。
+- 状态：phase/场景状态按人格隔离（`scope#nsfw=<persona>`），机机推进不污染笨猫的 phase。
+- 怀孕：`PregnancyStore(filename=...)` 支持分库；`_pregnancy_store_for(persona)` 为每个非 catty
+  人格落 `pregnancy_<persona>.json`。机机 `pregnancy` feature 禁用 → 不注入 hint、不记录高潮、
+  不预判生产、NSFW 生图不带孕期状态。
+- 碎片墙：`_collapse_fadianji_fragment_wall` 对 ≥10 行且中位 ≤6 字的「一词一行」输出按 3 段合并，
+  保内容不丢；机机 core §4 同步钉死「一次最多 4 块 / 禁止 10+ 行分镜 / 短问句 1-2 句」。
+- 状态标志：critic/rewrite 之后再做一次 `_extract_nsfw_state_flag` 兜底，`<NSFW_STATE:...>`
+  绝不出站。

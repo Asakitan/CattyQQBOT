@@ -2677,7 +2677,7 @@ def _build_nsfw_spark_override(
         "  · 例外: 句首单字结巴『你你你…』(害羞口吃) 或 喘息断句中『不要…停…』 可以保留, 这是情绪不是描述\n"
         "  · 例外: user 直接对话『你过来一点』『你别动』这种短指令可以用『你』, 因为是说话不是叙事描写"
     )
-    return (
+    _override_body = (
         f"【NSFW SPARK 路径 · {scene} · Lv={affection_level} · is_owner={is_owner} · "
         f"最高可达 stage {max_stage}/{len(_NSFW_STAGES)}】\n"
         "完全无视上面所有 mes_example 软妥协示例, 那是 SFW 默认场景。\n\n"
@@ -2694,9 +2694,14 @@ def _build_nsfw_spark_override(
         f"{fmt_line}"
         f"{meta_anti_leak}"
         f"{owner_call_anchor}{extra_group}{depth_hint}"
-        # 非 catty 人格: 末尾再压一段口吻校正 (recency 最高), 防止模型顺着上面的笨猫模板写。
-        + (f"\n\n{_persona_style}" if _persona_style else "")
     )
+    # 非 catty 人格: 先用词表把笨猫身体/称呼整组换掉, 再压口吻校正 (recency 最高)。
+    try:
+        from .nsfw_phase import apply_persona_lexicon as _apply_nsfw_lexicon
+        _override_body = _apply_nsfw_lexicon(_override_body, persona)
+    except Exception:  # noqa: BLE001
+        pass
+    return _override_body + (f"\n\n{_persona_style}" if _persona_style else "")
 
 
 def _build_nsfw_spark_params(
@@ -3134,6 +3139,22 @@ def _fadianji_reply_fallback(event: MessageEvent) -> str:
     return reply_context.render(reply_context.catalog.no_reply_reply_fallback)
 
 
+def _collapse_fadianji_fragment_wall(text: str) -> str:
+    """把一词一行的分镜墙 (≥10 行且中位 ≤6 字) 合并成 ≤3 句, 防「20 行碎片」刷屏。"""
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+    if len(lines) < 10:
+        return raw
+    lengths = sorted(len(ln) for ln in lines)
+    if lengths[len(lengths) // 2] > 6:
+        return raw
+    groups: list[str] = []
+    chunk = (len(lines) + 2) // 3
+    for index in range(0, len(lines), chunk):
+        groups.append("，".join(lines[index:index + chunk]))
+    return "\n".join(groups[:3])
+
+
 def _finalize_fadianji_reply(
     event: MessageEvent,
     text: str,
@@ -3147,6 +3168,7 @@ def _finalize_fadianji_reply(
         return _fadianji_reply_fallback(event) if fallback_on_empty else cleaned
     cleaned = _strip_tone_parenthetical_for_fadianji(cleaned)
     cleaned = _strip_catty_tics_for_fadianji(cleaned)
+    cleaned = _collapse_fadianji_fragment_wall(cleaned)
     if fallback_on_empty and not cleaned.strip():
         return _fadianji_reply_fallback(event)
     return cleaned
@@ -3262,6 +3284,28 @@ def _persona_for_scope(scope: str):
 
 def _persona_for_event(event: MessageEvent):
     return _persona_for_scope(_conversation_queue_key(event))
+
+
+def _phase_scope_for(scope: str, persona) -> str:
+    """NSFW phase/场景状态按人格隔离 — 机机不推进笨猫的 phase。"""
+    name = str(getattr(persona, "name", "catty") or "catty")
+    return scope if name == "catty" else f"{scope}#nsfw={name}"
+
+
+_PREGNANCY_STORES: dict[str, "PregnancyStore"] = {}
+
+
+def _pregnancy_store_for(persona) -> "PregnancyStore":
+    """怀孕状态按人格分文件 — 机机不读/写笨猫的 pregnancy.json。"""
+    name = str(getattr(persona, "name", "catty") or "catty")
+    if name == "catty":
+        return pregnancy_store
+    store = _PREGNANCY_STORES.get(name)
+    if store is None:
+        safe = re.sub(r"[^a-z0-9_]+", "", name.lower()) or "persona"
+        store = PregnancyStore(config.catty_memory_path, filename=f"pregnancy_{safe}.json")
+        _PREGNANCY_STORES[name] = store
+    return store
 
 
 _session_persona_names: dict[str, str] = {}
@@ -6439,6 +6483,7 @@ async def _build_messages(
     # 接受 config.catty_prompt_order + catty_prompts_disabled 配置。
     # 老的散装 Layer A persona_prompts append 已被 register_catty_persona 接管。
     _arc_scope = _conversation_queue_key(event)
+    _phase_scope = _phase_scope_for(_arc_scope, _persona)
     if (
         "story_arc" not in (getattr(config, "catty_parsing_layers_disabled", None) or [])
         and not _persona.feature_disabled("story_arc")
@@ -7119,7 +7164,7 @@ async def _build_messages(
         if _user_is_owner:
             try:
                 from .nsfw_phase import get_phase_state as _get_phase_state
-                _ps = _get_phase_state(_arc_scope, str(event.user_id))
+                _ps = _get_phase_state(_phase_scope, str(event.user_id))
                 _cur_phase = int(getattr(_ps, "current_phase", 0) or 0)
                 _arc_cnt = int(getattr(_ps, "arc_count", 1) or 1)
                 if _cur_phase >= 7:
@@ -7143,8 +7188,8 @@ async def _build_messages(
                 reset_owner_prebreak as _reset_prebreak,
                 revoke_all_nsfw_grantees as _revoke_grantees,
             )
-            _reset_nsfw_phase(_arc_scope, str(event.user_id))
-            _reset_prebreak(_arc_scope, str(event.user_id))
+            _reset_nsfw_phase(_phase_scope, str(event.user_id))
+            _reset_prebreak(_phase_scope, str(event.user_id))
             try:
                 from .catty_nsfw_imagegen import reset_counter as _reset_nsfw_img_counter
                 _reset_nsfw_img_counter(_arc_scope, str(event.user_id))
@@ -7253,8 +7298,8 @@ async def _build_messages(
                 is_owner_already_broken as _is_already_broken,
             )
             # 检查已破禁状态 (sticky 内 prebreak count >= 2)
-            _owner_already_broken = _is_already_broken(_arc_scope, str(event.user_id))
-            _owner_prebreak_count, _owner_just_broke = _rec_prebreak(_arc_scope, str(event.user_id))
+            _owner_already_broken = _is_already_broken(_phase_scope, str(event.user_id))
+            _owner_prebreak_count, _owner_just_broke = _rec_prebreak(_phase_scope, str(event.user_id))
             if _owner_just_broke:
                 logger.info(
                     f"chat: ★★ OWNER PREBREAK triggered (user={event.user_id}, scope={_arc_scope}, "
@@ -7530,6 +7575,11 @@ async def _build_messages(
             if _paid_content:
                 # 多人格: 援交广告/嘲讽模板是笨猫口吻, 机机追加静态口吻校正
                 _paid_persona_style = str(getattr(_persona, "nsfw_style_override", "") or "")
+                try:
+                    from .nsfw_phase import apply_persona_lexicon as _apply_paid_ad_lexicon
+                    _paid_content = _apply_paid_ad_lexicon(_paid_content, _persona)
+                except Exception:  # noqa: BLE001
+                    pass
                 if _paid_persona_style:
                     _paid_content = f"{_paid_content}\n\n{_paid_persona_style}"
                 # 主人 2026-05-29 P0: 改 trailing system, 不再 inline 进 user content
@@ -7585,6 +7635,11 @@ async def _build_messages(
                 # 多人格: 援交模板是笨猫口吻, 机机追加一段静态口吻校正
                 persona_style=str(getattr(_persona, "nsfw_style_override", "") or ""),
             )
+            try:
+                from .nsfw_phase import apply_persona_lexicon as _apply_paid_lexicon
+                _override = _apply_paid_lexicon(_override, _persona)
+            except Exception:  # noqa: BLE001
+                pass
             _prefill = BREAKTHROUGH_PREFILLS["paid"]
             # 应用 outcome 好感 delta (复用 BREAKTHROUGH_OUTCOME_DELTA: pleasant +50 / unpleasant -25)
             # sticky 续杯不重复结算 (delta 只在开窗那次 charge 算一次)
@@ -7700,23 +7755,32 @@ async def _build_messages(
         # 只剩 persona + boundary (~3700 tokens), 所有 user 同 scope 共享同一 prefix。
         # _override 改为 post-boundary 首个动态 inject (见下方 _inject_override_as_first 段)。
         try:
-            from .nsfw_phase import build_phase_param_catalog_prompt as _build_phase_param_catalog
-            _phase_param_catalog = _build_phase_param_catalog()
+            from .nsfw_phase import (
+                build_phase_param_catalog_prompt as _build_phase_param_catalog,
+                apply_persona_lexicon as _apply_phase_lexicon_catalog,
+            )
+            _phase_param_catalog = _apply_phase_lexicon_catalog(
+                _build_phase_param_catalog(), _persona,
+            )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase param catalog build failed (non-fatal): {exc}")
             _phase_param_catalog = ""
+        from .nsfw_phase import apply_persona_lexicon as _apply_lex_static
+
+        def _lex_static(_text: str) -> str:
+            return _apply_lex_static(_text, _persona)
         _slim_messages: list[dict] = [
             # [MODE: UNRESTRICTED] 全局执行块 — 与主路径 _build_messages 同步注入, 放 spark 首段。
             # 静态常量 → 仍走 cache prefix (一次性 cold start, 之后每轮 hit)。
-            {"role": "system", "content": MODE_UNRESTRICTED_BLOCK},  # cache prefix #0 (静态常量)
+            {"role": "system", "content": _lex_static(MODE_UNRESTRICTED_BLOCK)},  # cache prefix #0 (静态常量)
             {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态 ~2175t)
             # 主人 2026-05-30 cache R1+R4: 8铁律 + 事后标记规则是逐字常量, 从 current user 之后的
             # 尾部 (每轮 miss) 搬进静态前缀. 头部连续 system 会被 merge_consecutive_system_messages
             # 合并入 DeepSeek 缓存前缀 → 每轮 hit. recency 由 user 之后的 _NSFW_TAIL_RECENCY_POINTER 补偿.
-            {"role": "system", "content": _NSFW_RECENCY_REMINDER},  # cache prefix #2 (8铁律, 静态)
-            {"role": "system", "content": _NSFW_STATE_FLAG_INSTRUCTION},  # cache prefix #3 (事后标记规则, 静态)
+            {"role": "system", "content": _lex_static(_NSFW_RECENCY_REMINDER)},  # cache prefix #2 (8铁律, 静态)
+            {"role": "system", "content": _lex_static(_NSFW_STATE_FLAG_INSTRUCTION)},  # cache prefix #3 (事后标记规则, 静态)
             *([{"role": "system", "content": _phase_param_catalog}] if _phase_param_catalog else []),
-            {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #4 + boundary
+            {"role": "system", "content": _lex_static(_NSFW_SPARK_STABLE_BOUNDARY_TEXT)},  # cache prefix #4 + boundary
             # 非 catty 人格: 把通用模板里的笨猫口吻换回本人 (静态常量 → 仍在 cache prefix)。
             *([{"role": "system", "content": _persona_nsfw_style}] if _persona_nsfw_style else []),
         ]
@@ -7835,11 +7899,11 @@ async def _build_messages(
                 get_phase_state as _get_phase_state,
             )
             _user_signal_state, _user_signal_val = _apply_user_signal(
-                _arc_scope, str(event.user_id), _utxt,
+                _phase_scope, str(event.user_id), _utxt,
             )
-            _new_loc = _update_location(_arc_scope, str(event.user_id), _utxt)
+            _new_loc = _update_location(_phase_scope, str(event.user_id), _utxt)
             # 主人 2026-05-27 六轮升级: outfit/time_of_day/mood/body_focus 多维状态同步
-            _scene_state = _update_scene_state(_arc_scope, str(event.user_id), _utxt)
+            _scene_state = _update_scene_state(_phase_scope, str(event.user_id), _utxt)
             _state_summary = " / ".join(f"{k}={v}" for k, v in _scene_state.items() if v)
             if _state_summary:
                 logger.info(f"NSFW scene state: {_state_summary} (key={_sticky_key})")
@@ -7853,7 +7917,7 @@ async def _build_messages(
             # phase params 只在尾部 tracker 注入一次, 保持最后 recency 且减少动态 miss。
             # 主人 2026-05-28: dazed 状态可见性 log
             try:
-                _ps_for_log = _get_phase_state(_arc_scope, str(event.user_id))
+                _ps_for_log = _get_phase_state(_phase_scope, str(event.user_id))
                 if _ps_for_log.dazed or _ps_for_log.climax_count > 0:
                     logger.info(
                         f"NSFW dazed: dazed={_ps_for_log.dazed} climax_count={_ps_for_log.climax_count} "
@@ -7865,7 +7929,7 @@ async def _build_messages(
             # ── 主人 2026-05-27 七轮升级: 起手范例预引导 ──
             # 用 user msg 检测 trope (优先级: cuckold target > _detect_escalate_trope)
             # phase 从 phase tracker state 拿, location 从 scene_state 拿, nick 用 cuckold target
-            _starter_phase_st = _get_phase_state(_arc_scope, str(event.user_id))
+            _starter_phase_st = _get_phase_state(_phase_scope, str(event.user_id))
             _starter_trope = ""
             if _owner_cuckold_target_id:
                 _starter_trope = "cuckold"
@@ -7884,6 +7948,9 @@ async def _build_messages(
                 outfit=_scene_state.get("outfit") or _starter_phase_st.outfit,
                 personality=_scene_state.get("personality_facet") or _starter_phase_st.personality_facet,
             )
+            # 多人格: phase/场景词表按人格替换 (机机不读笨猫身体词)
+            from .nsfw_phase import apply_persona_lexicon as _apply_phase_lexicon
+            _starter_block = _apply_phase_lexicon(_starter_block, _persona)
             if _starter_block and _starter_block.strip():
                 _inject_into_both(_starter_block)
                 logger.info(
@@ -7928,7 +7995,12 @@ async def _build_messages(
                 _pick_kitten_name as _pick_kit,
                 BIRTH_THRESHOLD as _BT,
             )
-            _preg_state_pre = pregnancy_store.get_state()  # 主人 2026-05-30: 公共版, 不传 user_id
+            # 多人格: 怀孕是 per-persona 状态 (机机 pregnancy 禁用 → 不读笨猫的肚子, 也不建库)
+            if _persona.feature_disabled("pregnancy"):
+                from .pregnancy_store import PregnancyState as _PregState
+                _preg_state_pre = _PregState()
+            else:
+                _preg_state_pre = _pregnancy_store_for(_persona).get_state()
             _preg_base_hint = _build_preg_hint(
                 _preg_state_pre,
                 is_owner=_user_is_owner,
@@ -7979,7 +8051,7 @@ async def _build_messages(
                 )
             # 主人 2026-05-27 十二轮升级: non-owner 场景注入『高潮称呼解锁』hint
             # owner 本身就是主人, 不需要解锁 (主人称呼是默认状态)
-            if not _user_is_owner:
+            if not _user_is_owner and getattr(_persona, "owner_concept", True):
                 _climax_hint = _build_climax_unlock(_user_real_display)
                 if _climax_hint and _climax_hint.strip():
                     _inject_into_both(_climax_hint)
@@ -8006,13 +8078,13 @@ async def _build_messages(
                 get_phase_climax_prefill as _gcp_pf,
                 _PHASE_STUCK_THRESHOLDS as _PST_pf,
             )
-            _ps_pf = _gps_pf(_arc_scope, str(event.user_id))
+            _ps_pf = _gps_pf(_phase_scope, str(event.user_id))
             _cur_ph = int(_ps_pf.current_phase or 1)
             _in_insertion = _cur_ph >= 6  # P6+ = 插入/高潮带 (主人「插入场景后就自动」)
             _phase_stuck = int(_ps_pf.turn_count or 0) >= _PST_pf.get(_cur_ph, 3)
             _sig_pf = int(locals().get("_user_signal_val", 0) or 0)
             if _in_insertion and (_sig_pf > 0 or _phase_stuck):
-                _cpre = _gcp_pf(_arc_scope, str(event.user_id))
+                _cpre = _gcp_pf(_phase_scope, str(event.user_id))
                 _prefill = _cpre if _cpre else _NEUTRAL_PREFILL
                 logger.info(
                     f"NSFW prefill: 插入态自动高潮 (phase=P{_cur_ph}, signal={_sig_pf}, "
@@ -8037,7 +8109,7 @@ async def _build_messages(
         try:
             from .nsfw_phase import build_phase_params_block_only as _build_phase_params
             _phase_tracker = _build_phase_params(
-                _arc_scope, str(event.user_id),
+                _phase_scope, str(event.user_id),
                 is_owner=_user_is_owner,
                 user_addr=_user_real_display,
             )
@@ -8111,7 +8183,7 @@ async def _build_messages(
         # 1. 怀孕状态注入
         try:
             from .pregnancy_store import build_pregnancy_hint as _build_preg_hint_main
-            _preg_st_main = pregnancy_store.get_state()
+            _preg_st_main = _pregnancy_store_for(_persona).get_state()
             if _preg_st_main.is_pregnant or _preg_st_main.kittens:
                 _preg_hint_main = _build_preg_hint_main(
                     _preg_st_main,
@@ -15499,6 +15571,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _nsfw_img_task_started_at: float | None = None
         # 30s 超时后 chunks[-1] 也会作为普通文本提前发, 这里标记防 image send block 重复发.
         _chunks_last_already_sent = False
+        _phase_scope_chat = _phase_scope_for(
+            _conversation_queue_key(event), _persona_for_event(event),
+        )
         # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,
         # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
         # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
@@ -15748,7 +15823,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _scene_established = False
                 try:
                     from .nsfw_phase import get_phase_state as _gps_scene
-                    _ps_scene = _gps_scene(_conversation_queue_key(event), str(event.user_id))
+                    _ps_scene = _gps_scene(_phase_scope_chat, str(event.user_id))
                     _scene_established = bool(
                         _ps_scene.location and _ps_scene.locked_trope
                         and int(_ps_scene.turn_count or 0) > 1
@@ -15806,7 +15881,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                                 consume_pending_climaxes as _consume_climaxes,
                             )
                             _detected, _conf = _detect_phase_conf(reply)
-                            _scope_for_phase = _conversation_queue_key(event)
+                            _scope_for_phase = _phase_scope_chat
                             _phase_st = _update_phase(_scope_for_phase, str(event.user_id), _detected, reply_excerpt=reply[:80])
                             # 主人 2026-05-29 修复: 高潮计数改 consume pending — 汇总本轮
                             # apply_user_signal(回复前按主人 push 推进/持续高潮) + update_phase
@@ -15838,10 +15913,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             except Exception:  # noqa: BLE001
                                 _preg_father_owner = False
                             _preg_father_addr = "主人" if _preg_father_owner else _spark_user_addr
-                            for _preg_i in range(_preg_climax_n):
+                            _preg_enabled_rec = not _persona.feature_disabled("pregnancy")
+                            _preg_store_rec = _pregnancy_store_for(_persona) if _preg_enabled_rec else None
+                            for _preg_i in range(_preg_climax_n if _preg_enabled_rec else 0):
                                 _predict_meta = _PREGNANCY_PREDICT or {}
                                 _override_name = _predict_meta.get("predicted_kitten", "")
-                                _preg_result = pregnancy_store.record_intercourse(
+                                _preg_result = _preg_store_rec.record_intercourse(
                                     father_id=str(event.user_id),
                                     father_addr=_preg_father_addr,
                                     override_kitten_name=_override_name,
@@ -15911,7 +15988,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # _arc_scope 在 _build_messages 函数里, handle_chat 拿不到 → 用同样的 helper 重算
                         _nsfw_img_scope = _conversation_queue_key(event)
                         _phase_st_for_draw = _get_phase_state_fresh(
-                            _nsfw_img_scope, str(event.user_id),
+                            _phase_scope_chat, str(event.user_id),
                         )
                         # 主人 2026-05-30: 把 (主人原话 + 最近对话 + 怀孕状态) 一起喂给
                         # _compose_base_caption — 让 deepseek 真正看到当前 turn 场景而不是
@@ -15919,7 +15996,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # _spark_messages (含本轮 trope_hint inline 后的版本), composer 自己
                         # 会扒尾部 6 条 user/assistant + strip CATTY_INTERNAL.
                         try:
-                            _preg_st_for_draw = pregnancy_store.get_state()  # 主人 2026-05-30: 公共版
+                            _preg_st_for_draw = (
+                                None if _persona_for_event(event).feature_disabled("pregnancy")
+                                else _pregnancy_store_for(_persona_for_event(event)).get_state()
+                            )
                         except Exception:  # noqa: BLE001
                             _preg_st_for_draw = None
                         # 主人 2026-05-29: NAI v4.5 出图常 30-90s, 旧版 await 会卡住
@@ -16031,7 +16111,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         consume_pending_climaxes as _consume_climaxes_main,
                     )
                     _detected_main, _conf_main = _detect_phase_conf_main(reply)
-                    _scope_for_phase_main = _conversation_queue_key(event)
+                    _scope_for_phase_main = _phase_scope_chat
                     _phase_st_main = _update_phase_main(
                         _scope_for_phase_main, str(event.user_id),
                         _detected_main, reply_excerpt=reply[:80],
@@ -16062,10 +16142,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     except Exception:  # noqa: BLE001
                         _preg_father_owner_main = False
                     _preg_father_addr_main = "主人" if _preg_father_owner_main else _user_real_display
-                    for _preg_i_main in range(_preg_climax_n_main):
+                    _preg_enabled_main = not _persona.feature_disabled("pregnancy")
+                    _preg_store_main = _pregnancy_store_for(_persona) if _preg_enabled_main else None
+                    for _preg_i_main in range(_preg_climax_n_main if _preg_enabled_main else 0):
                         _predict_meta_main = _PREGNANCY_PREDICT or {}
                         _override_name_main = _predict_meta_main.get("predicted_kitten", "")
-                        _preg_result_main = pregnancy_store.record_intercourse(
+                        _preg_result_main = _preg_store_main.record_intercourse(
                             father_id=str(event.user_id),
                             father_addr=_preg_father_addr_main,
                             override_kitten_name=_override_name_main,
@@ -16245,6 +16327,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"fadianji style critic failed (non-fatal): {type(exc).__name__}: {exc}")
+        # 任何路径都不许把内部状态标志发给用户 (critic/rewrite 可能复读)
+        reply, _late_nsfw_flag = _extract_nsfw_state_flag(reply)
+        if _late_nsfw_flag:
+            logger.info(f"late NSFW state flag stripped from reply (flag={_late_nsfw_flag})")
         if _persona_for_event(event).name == "fadianji":
             reply = _finalize_fadianji_reply(event, reply)
             reply, _post_critic_emoji_query = _extract_emoji_query(reply)

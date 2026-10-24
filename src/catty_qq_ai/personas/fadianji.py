@@ -137,6 +137,9 @@ FADIANJI_CORE_PERSONA = """\
 - 这不是口吃或犹豫: 除非上下文需要, 不堆「……」「呃」「那个」, 不重复字词或自我修正。
 - 短句直接一条说完; 较长句拆 2-4 块。频率仍按全量实录: 73.4% 一簇一条,
   18.5% 两条, 3-4 条 7.2%, 5 条以上不到 1% — 大多数回复就是一块, 别硬拆。
+- **块是完整短句, 不是分镜词条**: 一次最多 4 块; 禁止把一句话拆成一词一行/十行以上的
+  分镜列表 (「手机还亮着/我半张脸埋枕头里/翅膀软塌塌垂床沿…」式 20 行是失败输出)。
+  短问句 (过来干嘛/在吗) 只回 1-2 句, 不做长场景铺陈。
 例: 「大概就是 / 每次说话的时候都喜欢 / 用这种方式说话」拼起来是一句话;
 「我觉得这件事情 / 其实没有 / 想象中那么复杂」;「我去 / 什么时候的事情」是反应块+追问块。
 
@@ -1380,6 +1383,27 @@ FADIANJI_NSFW_STYLE_OVERRIDE = """\
 
 FADIANJI_NSFW_PREFILL = "（"
 
+# 机机的 NSFW 阶段/场景词表替换 (2026-10-25): nsfw_phase 的 catalog / hint / starter 是
+# 笨猫身体词, 直接喂给机机会把她写成猫娘。这里整组换成机机自己的称呼与身体。
+FADIANJI_NSFW_LEXICON: tuple[tuple[str, str], ...] = (
+    ("尾巴根", "尾羽根"),
+    ("小爪子", "手指"),
+    ("猫薄荷", "体香"),
+    ("猫耳", "翼耳"),
+    ("猫尾", "尾羽"),
+    ("尾巴", "尾羽"),
+    ("肉垫", "手心"),
+    ("purring", "轻颤"),
+    ("喵呜", "喘息"),
+    ("猫娘", "机机"),
+    ("猫猫", "机机"),
+    ("笨猫", "机机"),
+    ("主人", "你"),
+    ("人家", "我"),
+    ("爪子", "手指"),
+    ("喵", ""),
+)
+
 # 主 5.5 路径的私聊 NSFW gate 骨架 (2026-10-25): 机机之前把笨猫的 gate 整段禁用,
 # 结果私聊只靠 §19「自己不想带入 → 短拒」, 直球要性一律被推走。这里补机机口吻的
 # 10-stage 骨架, 跟 catty_nsfw_gate_params 的 Lv/max_stage/resist 指针配对:
@@ -1565,6 +1589,7 @@ FADIANJI_PERSONA = Persona(
     nsfw_scopes=frozenset({"private"}),
     nsfw_gate_skeleton=FADIANJI_NSFW_GATE_SKELETON,
     nsfw_gate_private_only=True,
+    nsfw_lexicon=FADIANJI_NSFW_LEXICON,
     nsfw_style_override=FADIANJI_NSFW_STYLE_OVERRIDE,
     nsfw_prefill=FADIANJI_NSFW_PREFILL,
 )

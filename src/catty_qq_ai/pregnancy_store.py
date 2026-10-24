@@ -84,11 +84,11 @@ class PregnancyStore:
     主人 2026-05-30: per-user → 公共版 — 笨猫只有一个全局怀孕状态.
     """
 
-    def __init__(self, memory_path: str | Path):
+    def __init__(self, memory_path: str | Path, *, filename: str = "pregnancy.json"):
         mem_path = Path(memory_path).expanduser()
         if not mem_path.is_absolute():
             mem_path = mem_path.resolve()
-        self._path = mem_path.parent / "pregnancy.json"
+        self._path = mem_path.parent / filename
         self._lock = threading.RLock()
         self._state = PregnancyState()
         self._dirty = False

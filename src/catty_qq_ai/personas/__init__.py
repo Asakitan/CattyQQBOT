@@ -182,6 +182,9 @@ class Persona:
     nsfw_gate_skeleton: str | None = None
     # True = 上面的 gate 只在私聊注册, 群聊完全不注入 (机机群聊仍禁深水)。
     nsfw_gate_private_only: bool = False
+    # NSFW 阶段/场景词表的整组替换表 (from, to)，用于把笨猫词换成该人格的身体/称呼。
+    # 空 = 原样使用 nsfw_phase 的笨猫词表 (catty 不变)。
+    nsfw_lexicon: tuple[tuple[str, str], ...] = ()
     # 非 catty 人格的 NSFW 口吻校正: 拼在通用 (笨猫) NSFW 模板之后, 覆盖自称/称呼/口癖。
     nsfw_style_override: str | None = None
     # NSFW spark 的 assistant prefill; None = 沿用 catty 的 (resist_label, is_private) 表。

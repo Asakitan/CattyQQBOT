@@ -1384,6 +1384,18 @@ def _swap_owner_addr(text: str, is_owner: bool, user_addr: str) -> str:
             .replace("主人", a))
 
 
+def apply_persona_lexicon(text: str, persona: Any = None) -> str:
+    """按人格的 nsfw_lexicon 整组替换笨猫身体/称呼词 (catty 无表 → 原样返回)。"""
+    if not text or persona is None:
+        return text
+    pairs = getattr(persona, "nsfw_lexicon", ()) or ()
+    out = text
+    for src, dst in pairs:
+        if src:
+            out = out.replace(src, dst)
+    return out
+
+
 def build_starter_examples_block(
     phase: int, trope: str = "", location: str = "",
     nick: str = "",
@@ -3388,6 +3400,7 @@ __all__ = [
     "SOUND_DETAILS",
     "TIME_OF_DAY_PRESETS",
     "analyze_user_push_signal",
+    "apply_persona_lexicon",
     "apply_user_signal",
     "build_cuckold_override",
     "build_phase_advance_hint",
