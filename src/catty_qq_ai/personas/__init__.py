@@ -185,6 +185,8 @@ class Persona:
     # NSFW 阶段/场景词表的整组替换表 (from, to)，用于把笨猫词换成该人格的身体/称呼。
     # 空 = 原样使用 nsfw_phase 的笨猫词表 (catty 不变)。
     nsfw_lexicon: tuple[tuple[str, str], ...] = ()
+    # True = NSFW spark 去掉笨猫的 phase 推进表/格式铁律/起手范例, 让模型自由发挥。
+    nsfw_freeform: bool = False
     # 非 catty 人格的 NSFW 口吻校正: 拼在通用 (笨猫) NSFW 模板之后, 覆盖自称/称呼/口癖。
     nsfw_style_override: str | None = None
     # NSFW spark 的 assistant prefill; None = 沿用 catty 的 (resist_label, is_private) 表。

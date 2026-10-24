@@ -169,3 +169,18 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   保内容不丢；机机 core §4 同步钉死「一次最多 4 块 / 禁止 10+ 行分镜 / 短问句 1-2 句」。
 - 状态标志：critic/rewrite 之后再做一次 `_extract_nsfw_state_flag` 兜底，`<NSFW_STATE:...>`
   绝不出站。
+
+### 12.3 机机 NSFW 自由发挥 + 多行拆气泡（2026-10-25 四修）
+
+反馈：回复太死板（固定「(动作)+台词」四行模板、每轮强制推进 phase）、偶尔整段挤在一个泡泡里。
+
+- `Persona.nsfw_freeform`（机机=True）：spark 里不再注入笨猫的
+  `_NSFW_RECENCY_REMINDER` / phase 全量 catalog / `NSFW_PHASE_PARAMS` tracker / 起手范例 /
+  `_NSFW_SPARK_STABLE_BOUNDARY_TEXT`；换成 `_NSFW_FREEFORM_REMINDER`、
+  `_NSFW_FREEFORM_BOUNDARY`（保留 `<<<CACHE_BOUNDARY:catty_stable_prefix>>>` 标记）和
+  `_NSFW_FREEFORM_TAIL_POINTER`。local state 仍照常更新，只是不再强制模型按 phase 表演。
+- `_build_nsfw_spark_override` 对 freeform 用「格式自由」而不是固定 3-5 行 prose。
+- style critic 对 freeform NSFW 用 `_NSFW_FREEFORM_SYSTEM_PROMPT`：只顺口吻，保留长度/分段/
+  露骨程度，不许压短；拒答/空正文仍重试 + 原样放行兜底。
+- 拆气泡：`_reply_chunks` 的 NSFW 多行路径从 catty-only 扩到 `fadianji`，上限放宽到
+  `max(max_chunks, 8)` 后再 `_cap_reply_chunks`；7 行动作/台词不再挤成一个泡泡。

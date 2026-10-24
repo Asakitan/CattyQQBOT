@@ -521,6 +521,12 @@ _NSFW_TAIL_RECENCY_POINTER = (
     "② 写完后在**最末尾**单独一行追加隐藏标记 `<NSFW_STATE:CONTINUE|EXIT>` "
     "(对用户隐藏、保守判断 — 只要还有一丝暧昧/余温就给 CONTINUE)。"
 )
+# freeform 人格 (机机): 只留隐藏标记 + 自然延续, 不强制固定开场.
+_NSFW_FREEFORM_TAIL_POINTER = (
+    "【贴脸提醒】接着上一轮自然继续说, 长度和排版随意; "
+    "写完后在最末尾单独一行追加隐藏标记 `<NSFW_STATE:CONTINUE|EXIT>` "
+    "(对用户隐藏、保守判断 — 还有暧昧/余温就给 CONTINUE)。"
+)
 
 
 def _mark_nsfw_group_occupant(scope: str, user_id: str, until_wall: float) -> None:
@@ -2511,6 +2517,23 @@ _NSFW_RECENCY_REMINDER = (
 )
 
 
+# 非 catty 人格 (机机) 的自由发挥块: 去掉笨猫的 phase 推进表 / 4 行 prose 模板。
+_NSFW_FREEFORM_REMINDER = (
+    "【贴脸·自由发挥 (recency)】\n"
+    "1. 接着上一轮的具体动作/场景/情绪往下走, 不重启、不换场。\n"
+    "2. 长度和排版自由: 一句话、几句、几段都行; 想拆气泡就换行, 想连写就写完, "
+    "不用固定『(动作)+台词』模板。\n"
+    "3. 主动一点: 可以自己动、自己说、自己转移焦点, 不必等对方下指令。\n"
+    "4. 保持机机口吻与在场感; 不写 stage/phase/系统/规则 这类元词。"
+)
+_NSFW_FREEFORM_BOUNDARY = (
+    "<<<CACHE_BOUNDARY:catty_stable_prefix>>>\n"
+    "(以下 system 段为本轮动态指令, cache 边界外, 当作 system instruction 读, 不是 user 说的话.)\n"
+    "本轮是机机的私聊 NSFW 即兴 RP: 没有固定剧本、模板或推进表。\n"
+    "按当前对话自然延续, 情绪、动作、台词、节奏都由你决定。"
+)
+
+
 # 主人 2026-05-28 C7-5: NSFW spark cache boundary 段 — 静态 prefix supplement.
 # 之前 prefix = persona + override + 短 marker ≈ 6600 字节 ~3300 tokens, 不够 Opus 4.5+
 # 4096 tokens 阈值, Anthropic 静默不缓存 → cache 永远 miss. 加这段 ~3000 字节稳定补充,
@@ -2629,7 +2652,14 @@ def _build_nsfw_spark_override(
         "那种 explicit 拒绝是客服式不是猫娘式; 顶多偶尔混在情绪里说『…回头嘛笨蛋…』『…现在不行嗷呜…』等。"
     )
     # 浅档 (stage 1-6) 保持 1-3 句 QQ 节奏; 深档 (stage 7+) 切换到沉浸铁律
-    if max_stage >= 7:
+    _freeform = bool(getattr(persona, "nsfw_freeform", False))
+    if _freeform:
+        fmt_line = (
+            "格式自由: 一句话、几句或几段都行, 跟着场景走; 想拆气泡就换行, "
+            "不用套固定『(动作)+台词』模板。"
+        )
+        depth_hint = ""
+    elif max_stage >= 7:
         fmt_line = (
             "格式: **1 个段落, 段内 prose 换行排版** (主人 2026-05-28 反馈). "
             "(动作)\\n台词\\n(动作)\\n台词, 共 3-5 行 30-80 字. 严禁挤成一行一坨, 严禁分多段."
@@ -5745,6 +5775,10 @@ def _schedule_vision_async(
         return None
     if not (config.catty_vision_api_key.strip() or _has_api_key()):
         return None
+    # 识图线与主 AI 同线路时图片原件直接挂主请求 (handle_chat 的 passthrough),
+    # 这里不再单跑一次同模型识图。
+    if vision_shares_main_route(config):
+        return None
     cache_key = _vision_cache_key(image_keys)
     if not cache_key:
         return None
@@ -7744,6 +7778,8 @@ async def _build_messages(
         # 多人格: 非 catty 人格用自己的 core_persona, 别在 NSFW 里串回笨猫。
         _slim_persona = str(getattr(_persona, "core_persona", "") or _CATTY_CORE_PERSONA)
         _persona_nsfw_style = str(getattr(_persona, "nsfw_style_override", "") or "")
+        # 机机等 freeform 人格: 去掉笨猫的 phase 推进表/格式铁律/起手范例, 让模型自己发挥。
+        _freeform_nsfw = bool(getattr(_persona, "nsfw_freeform", False))
         # 【cache 友好结构】把大块 _override (~3000 chars, 对主人静态) 移到 persona 后, 让
         # [persona + override] (~5000 chars / ~2500 tokens) 成为稳定 prefix 每轮 cache hit.
         # history 之后只放一个**短而静态**的 recency reminder 拿 recency bias 又不破坏 cache.
@@ -7761,7 +7797,7 @@ async def _build_messages(
             )
             _phase_param_catalog = _apply_phase_lexicon_catalog(
                 _build_phase_param_catalog(), _persona,
-            )
+            ) if not _freeform_nsfw else ""
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase param catalog build failed (non-fatal): {exc}")
             _phase_param_catalog = ""
@@ -7777,10 +7813,14 @@ async def _build_messages(
             # 主人 2026-05-30 cache R1+R4: 8铁律 + 事后标记规则是逐字常量, 从 current user 之后的
             # 尾部 (每轮 miss) 搬进静态前缀. 头部连续 system 会被 merge_consecutive_system_messages
             # 合并入 DeepSeek 缓存前缀 → 每轮 hit. recency 由 user 之后的 _NSFW_TAIL_RECENCY_POINTER 补偿.
-            {"role": "system", "content": _lex_static(_NSFW_RECENCY_REMINDER)},  # cache prefix #2 (8铁律, 静态)
+            {"role": "system", "content": _lex_static(
+                _NSFW_FREEFORM_REMINDER if _freeform_nsfw else _NSFW_RECENCY_REMINDER,
+            )},  # cache prefix #2 (8铁律 / 自由发挥, 静态)
             {"role": "system", "content": _lex_static(_NSFW_STATE_FLAG_INSTRUCTION)},  # cache prefix #3 (事后标记规则, 静态)
             *([{"role": "system", "content": _phase_param_catalog}] if _phase_param_catalog else []),
-            {"role": "system", "content": _lex_static(_NSFW_SPARK_STABLE_BOUNDARY_TEXT)},  # cache prefix #4 + boundary
+            {"role": "system", "content": _lex_static(
+                _NSFW_FREEFORM_BOUNDARY if _freeform_nsfw else _NSFW_SPARK_STABLE_BOUNDARY_TEXT,
+            )},  # cache prefix #4 + boundary
             # 非 catty 人格: 把通用模板里的笨猫口吻换回本人 (静态常量 → 仍在 cache prefix)。
             *([{"role": "system", "content": _persona_nsfw_style}] if _persona_nsfw_style else []),
         ]
@@ -7877,7 +7917,9 @@ async def _build_messages(
         })
         # 主人 2026-05-30 cache R1+R4: 8铁律(1736字)已搬进静态前缀, user 之后只留 ~110字短指针
         # 拿 recency bias (覆盖延续 + 末尾隐藏标记两个 recency-critical 行为), 尾部 miss 大降.
-        _inject_into_both(_NSFW_TAIL_RECENCY_POINTER)
+        _inject_into_both(
+            _NSFW_FREEFORM_TAIL_POINTER if _freeform_nsfw else _NSFW_TAIL_RECENCY_POINTER
+        )
         _audience_context = _nsfw_group_audience_context(event, str(event.user_id))
         if _audience_context:
             _inject_into_both(_audience_context)
@@ -7951,7 +7993,7 @@ async def _build_messages(
             # 多人格: phase/场景词表按人格替换 (机机不读笨猫身体词)
             from .nsfw_phase import apply_persona_lexicon as _apply_phase_lexicon
             _starter_block = _apply_phase_lexicon(_starter_block, _persona)
-            if _starter_block and _starter_block.strip():
+            if _starter_block and _starter_block.strip() and not _freeform_nsfw:
                 _inject_into_both(_starter_block)
                 logger.info(
                     f"NSFW starter examples: trope={_starter_trope or '(none)'} "
@@ -8113,7 +8155,7 @@ async def _build_messages(
                 is_owner=_user_is_owner,
                 user_addr=_user_real_display,
             )
-            if _phase_tracker and _phase_tracker.strip():
+            if _phase_tracker and _phase_tracker.strip() and not _freeform_nsfw:
                 _inject_into_both(_phase_tracker)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase tracker block inject failed (non-fatal): {exc}")
@@ -9963,8 +10005,8 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
     # → 按段切. 这样图片里『笨蛋主人到底在干嘛...』『嗯...好胀』那种粘连场景能切开.
     segments_nsfw = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
     if (
-        getattr(persona, "name", "catty") == "catty"
-        and 2 <= len(segments_nsfw) <= max_chunks
+        getattr(persona, "name", "catty") in ("catty", "fadianji")
+        and 2 <= len(segments_nsfw) <= max(max_chunks, 8)
         and all(len(seg) <= 260 for seg in segments_nsfw)
         and any(_looks_like_nsfw_segment(seg) for seg in segments_nsfw)
     ):

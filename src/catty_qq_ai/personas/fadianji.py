@@ -1590,6 +1590,7 @@ FADIANJI_PERSONA = Persona(
     nsfw_gate_skeleton=FADIANJI_NSFW_GATE_SKELETON,
     nsfw_gate_private_only=True,
     nsfw_lexicon=FADIANJI_NSFW_LEXICON,
+    nsfw_freeform=True,
     nsfw_style_override=FADIANJI_NSFW_STYLE_OVERRIDE,
     nsfw_prefill=FADIANJI_NSFW_PREFILL,
 )
