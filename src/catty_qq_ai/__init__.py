@@ -2248,13 +2248,17 @@ _RETREAT_USED_BY_USER: dict[str, set[int]] = {}
 _RETREAT_USED_MAX_USERS = 512  # 防内存爆
 
 
-def _pick_retreat_template(*, is_owner: bool, user_id: str = "", user_text: str = "") -> str:
+def _pick_retreat_template(
+    *, is_owner: bool, user_id: str = "", user_text: str = "", persona: Any = None,
+) -> str:
     """挑一个未给该 user 用过的模板. user 在推节奏时挑 escalate 池, 否则 retreat 池.
     全用完时 reset 重新开始.
 
     主人 2026-05-27 三轮升级: escalate 池按 trope keyword 分 14 个 sub-pool.
     主人 2026-05-27 九轮升级: **任何人 pushing 都用 trope escalate** (不再 require owner),
     模板里的『主人』在 non-owner 场景由 AI 通过 trope_retry_hint 的称呼调整指引替换.
+    主人 2026-10-25: 池子文案全是笨猫身体/称呼, 出模板前按 persona.nsfw_lexicon 整组替换,
+    否则机机兜底时会冒出『主人/人家/猫耳』.
     """
     import random as _r
     is_pushing = _user_is_pushing(user_text)
@@ -2285,7 +2289,11 @@ def _pick_retreat_template(*, is_owner: bool, user_id: str = "", user_text: str 
     available = [i for i in range(len(pool)) if i not in used]
     idx = _r.choice(available)
     used.add(idx)
-    return pool[idx]
+    template = pool[idx]
+    if persona is not None:
+        from .nsfw_phase import apply_persona_lexicon
+        template = apply_persona_lexicon(template, persona)
+    return template
 
 
 _SOFT_REFUSAL_TAIL_PHRASES: tuple[str, ...] = (
@@ -16194,6 +16202,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     is_owner=bool(_user_is_owner),
                     user_id=str(event.user_id),
                     user_text=str(incoming.text or ""),
+                    persona=_persona_for_event(event),
                 )
             except Exception:  # noqa: BLE001
                 return "……"
@@ -16260,12 +16269,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _nsfw_call_error: Exception | None = None
                 _deferral_hit = False
                 _empty_reply_hit = False
+                # 主人 2026-10-25: 空正文 = 思考模型把预算吃在 reasoning 上, 立刻放大预算重试,
+                # 不再一次空回就 fallback 到随机固定模板.
+                _nsfw_max_tokens = 800
                 for _try in range(1, _MAX_NSFW_RETRY + 1):
                     try:
                         reply = await chat_completion_codex_instant(
                             config,
                             _spark_messages,
-                            max_tokens=800,
+                            max_tokens=_nsfw_max_tokens,
                             model_override=_chosen_model,
                             request_route="nsfw_main",
                             timeout_override=float(
@@ -16297,12 +16309,19 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     if not reply.strip():
                         _empty_reply_hit = True
                         _was_refusal = True
+                        _refusal_history.append("<empty>")
+                        _next_budget = min(_nsfw_max_tokens * 2, 3200)
                         logger.warning(
                             f"NSFW empty reply (try {_try}/{_MAX_NSFW_RETRY}, "
-                            f"model={_chosen_model}) → 快速走下一句兜底"
+                            f"model={_chosen_model}, max_tokens={_nsfw_max_tokens}) "
+                            f"→ 立刻放大到 {_next_budget} 重试"
                         )
+                        _nsfw_max_tokens = _next_budget
+                        if _try < _MAX_NSFW_RETRY:
+                            continue
                         break
                     _was_refusal = _is_soft_refusal_reply(reply)
+                    _empty_reply_hit = False
                     if not _was_refusal:
                         # ── 本地 phase tracker (主人 2026-05-27) ──
                         # reply 拿到后从关键词反推当前 phase + 更新本地 state, 下次进 spark
@@ -16394,6 +16413,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         is_owner=_is_owner,
                         user_id=str(event.user_id),
                         user_text=_user_text_now,
+                        persona=_persona_for_event(event),
                     )
                 else:
                     _tag = "fallback+trope" if _is_using_fallback else "main"

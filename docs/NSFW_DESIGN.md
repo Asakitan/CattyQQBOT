@@ -232,3 +232,22 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   connect 超时 15→30s，改用 `httpx.AsyncHTTPTransport(retries=3, proxy=...)`（建连失败重试，
   请求未发出因而不会重复提交任务），去掉 `http2=False` 与 `max_keepalive_connections=0`；
   一次出图的上传/提交/轮询/下载复用同一条长连接。
+
+### 12.6 空正文立刻重试 + 兜底模板按人格换词（2026-10-25 七修）
+
+现象：机机私聊里「射在最里面」之后发来两句「（脸红到耳根, 轻轻按住主人的手腕）嗯…等等…人家还,
+还有点缓不过来啦」「（小声把脸埋进主人胸口）人家好像, 好像有点紧张了…笨蛋主人先亲一会儿,
+哄哄人家…」——不是模型写的，是笨猫专属罐头池，机机叫了「主人/人家」。
+
+- 远端日志证据：`14:54:37 route=nsfw_main` 请求（`hit='射在最里面'`）→ `14:54:44 NSFW empty reply
+  (try 1/3, model=deepseek-v4.1-flash)` → `NSFW reply fallback (... empty=True ...) → retreat
+  template`；`message_sent` 的 raw_message 与 `_RETREAT_OPENER_OWNER[0]` + `_RETREAT_EMOTION_OWNER[0]`
+  逐字一致。即：空正文一次就 `break` 到罐头池，池子文案没有过人格词表。
+- 空正文不再一次兜底：`_nsfw_max_tokens` 800 起步，命中空正文立刻 `continue` 重试并把预算翻倍
+  （上限 3200），三次都空才 retreat；日志同时记 `max_tokens` 与 `<empty>`。思考模型把预算
+  吃在 reasoning 上时这一次能救回来。
+- `_pick_retreat_template(..., persona=...)` 出模板前跑 `apply_persona_lexicon`；`handle_chat`
+  两处调用（软拒兜底 / 错误兜底 `_nsfw_error_fallback_text`）都传 `_persona_for_event(event)`。
+  catty 无词表 → 输出字节不变。
+- 机机词表补三条：`猫尾巴→尾羽`（否则先命中 `猫尾` 会出现「尾羽巴」）、`喵地一声→轻轻一颤`、
+  `笨蛋主人→笨蛋`（否则是「笨蛋你」）。
