@@ -2781,6 +2781,77 @@ def _build_nsfw_spark_params(
     )
 
 
+_NSFW_FREEFORM_INTENSITY: tuple[tuple[int, str], ...] = (
+    (8, "高潮余韵/过敏感, 碰一下就抖"),
+    (7, "高潮余韵/过敏感, 碰一下就抖"),
+    (6, "最激烈的中段"),
+    (5, "最激烈的中段"),
+    (4, "慢慢沉进去"),
+    (3, "慢慢沉进去"),
+    (2, "刚开始, 还在试探"),
+)
+
+
+def _build_nsfw_freeform_state_facts(
+    *,
+    phase: int,
+    turn_count: int,
+    climax_count: int,
+    dazed: bool,
+    location: str = "",
+    outfit: str = "",
+    time_of_day: str = "",
+    mood: str = "",
+    pregnable: bool = False,
+    is_pregnant: bool = False,
+    pregnancy_count: int = 0,
+    birth_threshold: int = 30,
+    kittens: int = 0,
+    father_addr: str = "",
+) -> str:
+    """自由发挥模式下把本地状态当既定事实告诉模型 (不给演法); 高潮/怀孕必须可见。
+
+    主人 2026-10-25: freeform 去掉 phase tracker 之后, 模型不知道已经高潮过几次、
+    也不知道怀没怀上, 于是写起来跟没发生过一样。这里只报事实, 节奏和演法仍由模型自己决定。
+    """
+    intensity = "刚开始"
+    for threshold, text in _NSFW_FREEFORM_INTENSITY:
+        if int(phase) >= threshold:
+            intensity = text
+            break
+    scene_bits = [
+        f"{label}={value}"
+        for label, value in (
+            ("地点", location), ("衣着", outfit), ("时间", time_of_day), ("心情", mood),
+        )
+        if value
+    ]
+    lines = ["【当前状态·既定事实 (别照搬这段, 用身体反应和语气自然体现)】"]
+    if scene_bits:
+        lines.append("- 场景: " + "; ".join(scene_bits))
+    lines.append(f"- 强度: {intensity}")
+    climax_line = f"- 高潮: 已经到过 {max(0, int(climax_count))} 次"
+    if dazed:
+        climax_line += "; 现在还在余韵里, 身体过敏感"
+    elif turn_count:
+        climax_line += f"; 这一场第 {int(turn_count)} 轮"
+    lines.append(climax_line)
+    if pregnable:
+        if is_pregnant:
+            preg_line = (
+                f"- 怀孕: 已怀上 (父={father_addr or '主人'}), 这一胎已经 "
+                f"{max(0, int(pregnancy_count))}/{max(1, int(birth_threshold))} 次高潮"
+            )
+            if kittens:
+                preg_line += f", 已经生过 {int(kittens)} 只"
+            lines.append(preg_line)
+        elif kittens:
+            lines.append(f"- 怀孕: 现在没怀孕, 已经生过 {int(kittens)} 只")
+        else:
+            lines.append("- 怀孕: 现在没怀孕")
+    return "\n".join(lines)
+
+
 def _build_nsfw_slim_persona_bundle() -> str:
     """NSFW spark 专用 — 最小可工作的笨猫人格 bundle, 不带 SFW 长尾。
 
@@ -8365,13 +8436,42 @@ async def _build_messages(
         # 主人原话「phase 能不能放到后面去? 不影响其他的, phase 没有 3000 token 吧?」
         try:
             from .nsfw_phase import build_phase_params_block_only as _build_phase_params
-            _phase_tracker = _build_phase_params(
-                _phase_scope, str(event.user_id),
-                is_owner=_user_is_owner,
-                user_addr=_user_real_display,
-            )
-            if _phase_tracker and _phase_tracker.strip() and not _freeform_nsfw:
-                _inject_into_both(_phase_tracker)
+            if _freeform_nsfw:
+                # 主人 2026-10-25: 自由发挥也要知道既定事实 — 高潮几次、余韵/失神、怀没怀上。
+                from .nsfw_phase import get_phase_state as _get_phase_state_facts
+                _facts_state = _get_phase_state_facts(_phase_scope, str(event.user_id))
+                _preg_facts = locals().get("_preg_state_pre")
+                _facts_block = _build_nsfw_freeform_state_facts(
+                    phase=int(_facts_state.current_phase or 1),
+                    turn_count=int(_facts_state.turn_count or 0),
+                    climax_count=int(_facts_state.climax_count or 0),
+                    dazed=bool(_facts_state.dazed),
+                    location=_facts_state.location or "",
+                    outfit=_facts_state.outfit or "",
+                    time_of_day=_facts_state.time_of_day or "",
+                    mood=_facts_state.mood or "",
+                    pregnable=not _persona.feature_disabled("pregnancy"),
+                    is_pregnant=bool(getattr(_preg_facts, "is_pregnant", False)),
+                    pregnancy_count=int(getattr(_preg_facts, "pregnancy_count", 0) or 0),
+                    birth_threshold=int(locals().get("_BT", 30) or 30),
+                    kittens=len(getattr(_preg_facts, "kittens", ()) or ()),
+                    father_addr=str(getattr(_preg_facts, "father_addr", "") or ""),
+                )
+                _inject_into_both(_facts_block)
+                logger.info(
+                    f"NSFW freeform state facts: phase=P{int(_facts_state.current_phase or 1)} "
+                    f"turn={int(_facts_state.turn_count or 0)} "
+                    f"climax={int(_facts_state.climax_count or 0)} dazed={bool(_facts_state.dazed)} "
+                    f"preg={bool(getattr(_preg_facts, 'is_pregnant', False))} (key={_sticky_key})"
+                )
+            else:
+                _phase_tracker = _build_phase_params(
+                    _phase_scope, str(event.user_id),
+                    is_owner=_user_is_owner,
+                    user_addr=_user_real_display,
+                )
+                if _phase_tracker and _phase_tracker.strip():
+                    _inject_into_both(_phase_tracker)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase tracker block inject failed (non-fatal): {exc}")
         # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 sweep 到 user content.

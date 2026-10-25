@@ -273,3 +273,22 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
 - 覆盖说明：override 里 `_freeform` 分支的格式行改「格式自由」，语气行从「保留唐猫语气」
   换成「保持本人口吻」，catty 不再被固定成 3-5 行 prose。
 - 测试：`tests/test_personas.py` 的 catty 断言从 `nsfw_freeform is False` 改为 True。
+
+### 12.8 自由发挥下也知道高潮与怀孕（2026-10-25 九修）
+
+反馈：自由发挥之后模型不知道已经高潮过、也不知道怀没怀上，写起来像没发生过。
+
+- 新增 `_build_nsfw_freeform_state_facts`：只报既定事实，不给演法。
+  - 场景：地点 / 衣着 / 时间 / 心情（有才写）。
+  - 强度：P1-2「刚开始，还在试探」、P3-4「慢慢沉进去」、P5-6「最激烈的中段」、
+    P7-8「高潮余韵/过敏感，碰一下就抖」——**不出现 P 编号**，避免模型把档位写进台词。
+  - 高潮：已经到过 N 次；失神时补「现在还在余韵里，身体过敏感」，否则带「这一场第 N 轮」。
+  - 怀孕：已怀上（父=主人 / 对方）、这一胎 `pregnancy_count/BIRTH_THRESHOLD` 次高潮、
+    已生几只；未孕写「现在没怀孕」；机机 `pregnancy` feature 禁用 → 整行不出现。
+- 注入点：`_build_messages` 尾部 tracker 处改成二选一——freeform 注入事实块，
+  非 freeform 仍注入 `build_phase_params_block_only`。块内明说「别照搬这段，用身体反应
+  和语气自然体现」，节奏/场景/换场仍由模型自己决定。
+- 原有的 `build_pregnancy_hint` / `build_birth_event_hint` 照旧注入（演法提示），事实块只补
+  「模型原来完全不知情」的部分。
+- 测试：新增 `tests/test_nsfw_freeform_state.py` 6/6（事实字段、失神余韵、强度映射不含编号、
+  孕期进度、未孕/产后、`pregnable=False` 不出怀孕行）。
