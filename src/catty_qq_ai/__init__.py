@@ -3697,6 +3697,133 @@ def _cancel_task_if_pending(task: asyncio.Task | None) -> None:
         task.cancel()
 
 
+# 主人 2026-10-25: 回复和生图解耦 — 文字照常发, 图好了再单独发 (见 handle_chat 的 _reply_done)。
+_IMAGEGEN_INLINE_WAIT_SECONDS = 4.0
+_DEFERRED_DELIVERY_MAX_WAIT_SECONDS = 180.0
+_deferred_delivery_tasks: set[asyncio.Task] = set()
+
+
+def _spawn_deferred_image_delivery(
+    bot: Bot,
+    event: MessageEvent,
+    items: Any,
+    *,
+    after: asyncio.Event,
+    label: str,
+) -> None:
+    """后台等 ``items`` (返回待发图片 segment / 文本列表的协程) 就绪, 且本轮文字发完后再发出去。"""
+
+    async def _runner() -> None:
+        payload = await items
+        if not payload:
+            return
+        try:
+            await asyncio.wait_for(after.wait(), timeout=_DEFERRED_DELIVERY_MAX_WAIT_SECONDS)
+        except asyncio.TimeoutError:
+            logger.info(f"{label}: reply still not finished, sending deferred image anyway")
+        sent = 0
+        for item in payload:
+            message = item if isinstance(item, Message) else Message(item)
+            for attempt in range(2):
+                try:
+                    await bot.send(event, message)
+                    sent += 1
+                    break
+                except OnebotActionFailed as exc:
+                    # 语义模糊: 图很可能已送达, 只是 napcat 没拿到确认; 重试会重复发
+                    logger.warning(f"{label}: deferred send ActionFailed (no retry): {exc}")
+                    break
+                except OnebotNetworkError as exc:
+                    if attempt == 0:
+                        await asyncio.sleep(2.0)
+                        continue
+                    logger.warning(f"{label}: deferred send NetworkError twice, giving up: {exc}")
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"{label}: deferred send failed: {type(exc).__name__}: {exc}")
+                    break
+        logger.info(f"{label}: deferred delivery sent {sent}/{len(payload)} item(s)")
+
+    task = asyncio.create_task(_runner(), name=f"catty-deferred-{label}")
+    _deferred_delivery_tasks.add(task)
+    task.add_done_callback(_deferred_delivery_tasks.discard)
+
+
+async def _segments_from_image_task(task: asyncio.Task) -> list[Any]:
+    try:
+        segment = await task
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"deferred image task failed: {type(exc).__name__}: {exc}")
+        return []
+    return [segment] if segment is not None else []
+
+
+async def _deferred_imagegen_items(task: asyncio.Task, detached_ctx: ToolContext) -> list[Any]:
+    """后台跑完的 catty_imagegen: 出图就发图; 生成失败只发一句道歉 (技术细节只进日志)。"""
+    try:
+        result = await task
+    except Exception as exc:  # noqa: BLE001
+        result = {"error": f"{type(exc).__name__}: {exc}"}
+    images = list(detached_ctx.pending_image_segments)
+    if images:
+        return images
+    if not isinstance(result, dict):
+        return []
+    error = str(result.get("error") or "")
+    if "积分不够" in error or "冷却" in error:
+        # 这类结果正常几秒内就返回、走在线路径; 真落到后台也只记日志, 不发给模型用的提示原文
+        logger.info(f"catty_imagegen (deferred) skipped: {error[:80]}")
+        return []
+    if error or result.get("failed"):
+        from .tools import imagegen_public_failure
+
+        hint = str(result.get("user_facing_hint") or "") or str(
+            imagegen_public_failure(detached_ctx, error).get("user_facing_hint") or ""
+        )
+        return [hint] if hint else []
+    return []
+
+
+async def _imagegen_tool_with_deferred_delivery(
+    name: str,
+    args_json: str,
+    tool_ctx: ToolContext,
+    *,
+    allowed_names: set[str],
+    bot: Bot,
+    event: MessageEvent,
+    after: asyncio.Event,
+) -> dict[str, Any]:
+    """生图工具先在线等几秒: 冷却/积分不足/参数错这类快速结果照旧交给模型;
+    还在画就转后台, 主回复照常写完发完, 图好了再单独发 (不再让整轮回复卡在生图上)。"""
+    from dataclasses import replace as _dc_replace
+
+    detached_ctx = _dc_replace(tool_ctx, pending_image_segments=[])
+    task = asyncio.create_task(
+        _execute_schema_gated_tool_call(name, args_json, detached_ctx, allowed_names=allowed_names)
+    )
+    try:
+        result = await asyncio.wait_for(asyncio.shield(task), timeout=_IMAGEGEN_INLINE_WAIT_SECONDS)
+    except asyncio.TimeoutError:
+        _spawn_deferred_image_delivery(
+            bot, event, _deferred_imagegen_items(task, detached_ctx), after=after, label="catty_imagegen",
+        )
+        logger.info(
+            f"catty_imagegen still running after {_IMAGEGEN_INLINE_WAIT_SECONDS:.0f}s "
+            "→ reply first, image delivered when ready"
+        )
+        return {
+            "ok": True,
+            "status": "generating_in_background",
+            "image_sent": False,
+            "note": (
+                "图片正在后台生成, 画好后会自动单独发出。现在正常回一句话即可: "
+                "不要说图已经发出/已经画好, 也不要再次调用 catty_imagegen。"
+            ),
+        }
+    tool_ctx.pending_image_segments.extend(detached_ctx.pending_image_segments)
+    return result
+
+
 def _schedule_quick_ack(
     matcher: Matcher,
     event: MessageEvent,
@@ -15791,18 +15918,33 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         except Exception:
             pass
 
+        # 本轮文字回复发完 (含 finish/异常退出) 才置位; 后台出的图等它再发, 保证文字在前、图在后。
+        _reply_done = asyncio.Event()
+        _lock_stack.callback(_reply_done.set)
+
         async def _tool_executor(
             name: str,
             args_json: str,
             *,
             _allowed_names: set[str] = _allowed_tool_names,
         ) -> dict[str, object]:
-            result = await _execute_schema_gated_tool_call(
-                name,
-                args_json,
-                tool_ctx,
-                allowed_names=_allowed_names,
-            )
+            if name == "catty_imagegen":
+                result = await _imagegen_tool_with_deferred_delivery(
+                    name,
+                    args_json,
+                    tool_ctx,
+                    allowed_names=_allowed_names,
+                    bot=bot,
+                    event=event,
+                    after=_reply_done,
+                )
+            else:
+                result = await _execute_schema_gated_tool_call(
+                    name,
+                    args_json,
+                    tool_ctx,
+                    allowed_names=_allowed_names,
+                )
             if name == "catty_imagegen" and isinstance(result, dict) and result.get("error"):
                 _img_error_text = str(result.get("error") or "")
                 # 积分不足/冷却不是生成失败，保留原有提示；其余错误一律吞掉并道歉。
@@ -16754,33 +16896,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 restore_latex_placeholders(chunk_text, latex_sources)
             )
 
-        # 主人 2026-05-29: NSFW 自动生图 30s 等图阈值. 在开始发 chunks 之前给图最多 30s
-        # (从 task 创建时间算起) 跟上, 跟上就走老路径 chunks[-1]+image 一起发;
-        # 没跟上就让 chunks 先一句一句发, 图后到追发.
-        if _nsfw_img_task is not None and _nsfw_img_task_started_at is not None:
-            _elapsed = time.monotonic() - _nsfw_img_task_started_at
-            _budget = max(0.0, 30.0 - _elapsed)
-            if _budget > 0 and not _nsfw_img_task.done():
-                try:
-                    _nsfw_seg = await asyncio.wait_for(
-                        asyncio.shield(_nsfw_img_task), timeout=_budget,
-                    )
-                    if _nsfw_seg is not None:
-                        nsfw_image_segments.append(_nsfw_seg)
-                    _nsfw_img_task = None
-                except asyncio.TimeoutError:
-                    logger.info(
-                        f"nsfw_imagegen: 30s 还没出图(elapsed={_elapsed:.1f}s, "
-                        f"budget={_budget:.1f}s) → 先发文字, 图后到追发"
-                    )
-                except Exception as exc:  # noqa: BLE001
-                    logger.warning(
-                        f"nsfw_imagegen auto-draw failed (non-fatal): "
-                        f"{exc.__class__.__name__}: {exc}"
-                    )
-                    _nsfw_img_task = None
-            elif _nsfw_img_task.done():
-                # task 在 chunks 切分等步骤里已经完成 → 取结果
+        # 主人 2026-10-25: 文字按原节奏先发完, 自动配图好了再单独发。旧版发文字前先等图 30s,
+        # 超时后又在本轮 handler 里一直等到出图 (会话锁全程占着, 后续消息排队被丢)。
+        if _nsfw_img_task is not None:
+            if _nsfw_img_task.done():
                 try:
                     _nsfw_seg = _nsfw_img_task.result()
                     if _nsfw_seg is not None:
@@ -16790,7 +16909,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         f"nsfw_imagegen auto-draw failed (non-fatal): "
                         f"{exc.__class__.__name__}: {exc}"
                     )
-                _nsfw_img_task = None
+            else:
+                _spawn_deferred_image_delivery(
+                    bot, event, _segments_from_image_task(_nsfw_img_task), after=_reply_done,
+                    label="nsfw_imagegen",
+                )
+            _nsfw_img_task = None
 
         for chunk in chunks[:-1]:
             _remember_bot_reply_for_event(
@@ -16824,49 +16948,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _mark_consumed_reply_source_if_sent(event, state)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
-        # 主人 2026-05-29: 30s 超时后 task 还在跑 → chunks[-1] 也走一句一句模式提前发,
-        # 然后后台等图就绪, 单独追发. 图就绪用 NAI 自身 timeout (180s) 控制.
-        if _nsfw_img_task is not None:
-            if chunks:
-                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]), open_continuation=not bool(state.get("catty_session_closing")), fresh_mention=fresh_mention)
-                try:
-                    await matcher.send(
-                        _compose_reply_message(
-                            event,
-                            text=chunks[-1],
-                            quote=quote_pending,
-                            latex_sources=latex_sources,
-                            inline_image_urls=inline_image_urls,
-                        )
-                    )
-                except OnebotActionFailed as exc:
-                    logger.warning(
-                        f"chunks[-1] (image-delayed) ActionFailed: {exc}"
-                    )
-                except OnebotNetworkError as exc:
-                    logger.warning(
-                        f"chunks[-1] (image-delayed) NetworkError: {exc}"
-                    )
-                quote_pending = False
-                _mark_consumed_reply_source_if_sent(event, state)
-                if delay_seconds:
-                    await asyncio.sleep(delay_seconds)
-                _chunks_last_already_sent = True
-            # 等图就绪 (NAI curl timeout 180s 兜底), 拿到后进入下方 image send block 追发.
-            try:
-                _nsfw_seg = await _nsfw_img_task
-                if _nsfw_seg is not None:
-                    nsfw_image_segments.append(_nsfw_seg)
-            except Exception as exc:  # noqa: BLE001
-                logger.warning(
-                    f"nsfw_imagegen background await failed: "
-                    f"{exc.__class__.__name__}: {exc}"
-                )
-            _nsfw_img_task = None
-            # 图等回来发现为 None (失败 / 余额不足 / 配额跳过) → chunks 全发完了, 直接 finish.
-            # 否则会落到下方 emoji_entry/fallback 分支再发一次 chunks[-1] 导致重复.
-            if _chunks_last_already_sent and not nsfw_image_segments:
-                await matcher.finish()
         if nsfw_image_segments:
             if chunks and not _chunks_last_already_sent:
                 _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]), open_continuation=not bool(state.get("catty_session_closing")), fresh_mention=fresh_mention)

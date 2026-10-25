@@ -669,14 +669,13 @@ async def _pixelbunny_generate_nsfw(
         poll_seconds,
     )
     proxy_str = str(getattr(config, "catty_http_proxy", "") or "").strip()
+    # 生产到 api.pixelbunny.ai 新建连接要 10-20s 且时常超时 (2026-10-25 实测): 一次生图的
+    # 上传/提交/轮询/下载复用同一条连接, 建连失败由 transport 重试 (请求未发出, 不会重复提交)。
     client_kwargs: dict[str, Any] = {
-        "timeout": httpx.Timeout(timeout, connect=15.0),
+        "timeout": httpx.Timeout(timeout, connect=30.0),
         "follow_redirects": True,
-        "http2": False,
-        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
+        "transport": httpx.AsyncHTTPTransport(retries=3, proxy=proxy_str or None),
     }
-    if proxy_str:
-        client_kwargs["proxy"] = proxy_str
 
     started = time.monotonic()
     job_id = ""
