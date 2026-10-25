@@ -533,7 +533,8 @@ _NSFW_TAIL_RECENCY_POINTER = (
 )
 # freeform 人格 (机机): 只留隐藏标记 + 自然延续, 不强制固定开场.
 _NSFW_FREEFORM_TAIL_POINTER = (
-    "【贴脸提醒】接着上一轮自然继续说, 长度和排版随意; "
+    "【贴脸提醒】接着上一轮自然继续说, 长度随意; 一条气泡写一行、气泡里不换行, "
+    "要连发就在每条之间单独一行 <<<CATTY_REPLY_SPLIT>>>; "
     "写完后在最末尾单独一行追加隐藏标记 `<NSFW_STATE:CONTINUE|EXIT>` "
     "(对用户隐藏、保守判断 — 还有暧昧/余温就给 CONTINUE)。"
 )
@@ -2539,8 +2540,9 @@ _NSFW_RECENCY_REMINDER = (
 _NSFW_FREEFORM_REMINDER = (
     "【贴脸·自由发挥 (recency)】\n"
     "1. 接着上一轮的具体动作/场景/情绪往下走, 不重启; 要不要换场由你判断, 不是定死的。\n"
-    "2. 场景、开场、节奏、篇幅都由你自己决定: 一句话、几句、几段都行; 要连发几条气泡就在块之间"
-    "单独输出一行 <<<CATTY_REPLY_SPLIT>>>, 不写它就是一条消息(换行只是同一条里的换行)。\n"
+    "2. 场景、开场、节奏、篇幅都由你自己决定: 一句话、几句都行; 要连发几条气泡就在每条之间"
+    "单独输出一行 <<<CATTY_REPLY_SPLIT>>>, 每条气泡写成一行、气泡里不换行; 不写标记就只有一条消息"
+    "(裸换行不会拆条)。\n"
     "3. 主动一点: 可以自己动、自己说、自己推进或转移焦点, 不必等对方下指令。\n"
     "4. 保持本人口吻 (自称/称呼/口癖按人格设定) 与在场感; 不写 stage/phase/系统/规则 这类元词。"
 )
@@ -2678,7 +2680,8 @@ def _build_nsfw_spark_override(
     )
     if _freeform:
         fmt_line = (
-            "格式自由: 一句话、几句或几段都行, 跟着场景走; 想拆气泡就换行, "
+            "格式自由: 一句话、几句都行, 跟着场景走; 每条气泡写成一行、气泡里不换行, "
+            f"要连发就在每条之间单独一行 {REPLY_SPLIT_MARKER}, "
             "不用套固定『(动作)+台词』模板。"
         )
         depth_hint = ""
@@ -7261,6 +7264,15 @@ async def _build_messages(
         ) or ""
         if _hints_ctx.strip():
             _st_manager.register_static("catty_action_hints", _hints_ctx, order=799)
+    # 主人 2026-10-25: 拆条规则每轮贴脸重申 (order 810 = 最后一段, 类似 tools 每轮都在场)
+    try:
+        _st_manager.register_static(
+            "catty_reply_split_reminder",
+            _reply_split_reminder_prompt(),
+            order=810,
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"catty_reply_split_reminder register failed: {exc}")
     # apply_config 一次应用所有 order_override / disabled,然后 build_messages
     _st_manager.apply_config(
         order_override=list(getattr(config, "catty_prompt_order", None) or []),
@@ -8872,8 +8884,8 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "这不是口吃或犹豫：不堆「……」「呃」「那个」，不自我修正。"
             "频率按全量实录约束：约 73% 一簇一条、18% 两条、3-4 条 7%——别为了显得像 QQ 硬拆短句。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
-            f"要拆就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；不写它就只有一条消息"
-            "(里面的换行会原样保留在同一个气泡里, 不会被拆开)。"
+            f"要拆就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡写成一行, 气泡里不许换行；"
+            "不写标记就只有一条消息(裸换行不会拆开)。"
             "被拆的前几块结尾少用句号/感叹号，自然些。"
             f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
             "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
@@ -8886,12 +8898,23 @@ def _semantic_reply_split_prompt(persona=None) -> str:
         "用逗号/句号连成一条 QQ 消息发，不要每短句单切。"
         "【真有几个轮次 → 拆 2~3 条】对前文的强反应 + 接下来要说的新事情；技术结论 + 后续追问；强情绪 + 话题展开。"
         f"{_neg}"
-        f"要拆条就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；不写它就只有一条消息"
-        "(里面的换行会原样保留在同一个气泡里, 不会被拆开)。"
+        f"要拆条就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡正文写成一行, 气泡里不要换行；"
+        "不写标记就只有一条消息(裸换行不会拆开)。"
         "被拆的前几条结尾少用句号/感叹号，自然些。"
         f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
         "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
         "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用换行+「1)」「2)」。"
+    )
+
+
+def _reply_split_reminder_prompt() -> str:
+    """每轮贴脸的拆条提醒: 像 tools 一样每轮都在场, 不靠静态 prefix 的记忆力。"""
+    max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
+    return (
+        "【本轮气泡写法 · 硬规则】\n"
+        "- 只发一条: 正文写成一行, 不要换行。\n"
+        f"- 要连发: 每条之间单独一行输出 {REPLY_SPLIT_MARKER}, 最多 {max_chunks} 条; 每条气泡内部不许换行。\n"
+        "- 裸换行不会拆气泡, 只会把同一条消息写成多行。"
     )
 
 
@@ -17099,8 +17122,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             history_text = _strip_inline_image_placeholders(
                 restore_latex_placeholders("\n".join(chunks), latex_sources)
             )
+            # 主人 2026-10-25: 历史用 marker 连接多条气泡, 让模型下一轮能看到自己写过的标记
+            history_prompt_text = (
+                _strip_inline_image_placeholders(
+                    restore_latex_placeholders(REPLY_SPLIT_MARKER.join(chunks), latex_sources)
+                )
+                if len(chunks) > 1
+                else history_text
+            )
         else:
             history_text = _strip_inline_image_markers(reply)
+            history_prompt_text = history_text
         # 主人 2026-05-28 cache 关键修复: 之前 _append_history 存的 user_content 是纯 text
         # (incoming.history_content), 但 _build_messages 内部把 [DYNAMIC_CONTEXT] inline
         # 到 current user msg content 后才发给 Anthropic. 导致:
@@ -17140,7 +17172,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             )
         except Exception:  # noqa: BLE001
             pass
-        _append_history(history_key, _enriched_user_content_for_history, history_text)
+        _append_history(history_key, _enriched_user_content_for_history, history_prompt_text)
         if special_care_context and chunks:
             memory_store.record_special_care_reply_sent(event, history_text)
 

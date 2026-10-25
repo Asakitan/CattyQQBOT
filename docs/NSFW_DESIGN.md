@@ -325,3 +325,31 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
 - 测试：`test_output_control_markers` / `test_persona_memory_isolation` /
   `test_fadianji_nsfw_split_bubbles` 改成「marker 才拆、纯文本单气泡」；`test_personas` 的
   分块断言改成 `普通空格和换行都不算消息边界` + `不写标记就是一条消息`。
+
+### 12.11 拆条规则每轮贴脸 + 单行气泡（2026-10-25 十二修）
+
+- 现场（远端 `bot_live.log` 的 `[message_sent]`，15 轮）：8 轮确实按 marker 拆成 2-4 条
+  （16:29/16:32 私聊 NSFW 各 4 条、16:33 群 4 条、16:36×2、16:42、16:52、16:53），
+  另 7 轮单条里塞了 5-9 个裸换行（16:43/16:51/16:54/16:56）。即拆泡代码正常，
+  是模型漏写 marker + 块内继续换行。
+- `__init__._reply_split_reminder_prompt()`：每轮 post-boundary 注册
+  `catty_reply_split_reminder`（order=810，动态段不进 cache prefix），把三条硬规则
+  贴到最近一条 user 消息里，像 tools 一样每轮都在场：
+  ① 只发一条就写成一行；② 要连发就每条之间单独一行 marker，气泡内不许换行；
+  ③ 裸换行不会拆气泡。
+- prompt 同步（全部改成「一条气泡=一行」）：`_semantic_reply_split_prompt` 两个分支、
+  `_NSFW_FREEFORM_REMINDER` 第 2 条、`_NSFW_FREEFORM_TAIL_POINTER`（spark 尾部贴脸段）、
+  `_build_nsfw_spark_override` 的 freeform `fmt_line`
+  （原文「想拆气泡就换行」）、`FADIANJI_CORE` §4 + `FADIANJI_CHAT_RHYTHM`、
+  `persona_prompts` 人格记忆 / self-check / 碎句节奏段、`fadianji_style_critic` 改写指令
+  （不再要求「照原样分行」，改成保持分段但不擅自加换行）。
+- 顺手清掉会教坏模型的旧写法：`token_billing` 配额提示、`tools` 生图配文的
+  「可换行分条」改成「一条一行, 不换行」（这两条链路不经 `_reply_chunks`，不能写 marker）。
+- 历史里也留 marker：`handle_chat` 另算 `history_prompt_text`（`REPLY_SPLIT_MARKER.join(chunks)`，
+  只有 1 块时退回原文），`_append_history` 用它写 assistant 历史，模型下一轮能看到自己写过的
+  marker；纯换行版 `history_text` 继续给 `record_special_care_reply_sent` 等旁路用。
+  time bucket / activity feed 拿到的是带 marker 的历史文本，marker 在摘要与日志里是无害控制符。
+- 测试：新增 `tests/test_reply_split_reminder.py` 5/5；`test_persona_prompts` 15/15、
+  `test_personas` 22/22、`test_output_control_markers` 9/9、
+  `test_fadianji_nsfw_split_bubbles` 4/4、`test_fadianji_style_critic` 41/41、py_compile
+  exit0、plugin-load-ok。

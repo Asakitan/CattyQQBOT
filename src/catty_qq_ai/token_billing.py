@@ -197,7 +197,7 @@ async def ai_gate_reply(config: Any, persona: Any, kind: str, user_text: str = "
                 "告诉他这个小时你不能再陪他聊了, 让他下个小时再来找你. "
             )
         output_instruction = (
-            "用你的口吻写 1-2 条短句 (可换行分条), 不用 Markdown, "
+            "用你的口吻写 1-2 条短句 (一条一行, 不换行), 不用 Markdown, "
             "对方不是你的主人绝对不要叫他主人, 只输出正文."
         )
     elif kind == "broke":
@@ -207,7 +207,7 @@ async def ai_gate_reply(config: Any, persona: Any, kind: str, user_text: str = "
             "按当前人格说明本次聊不动, 催他去发『签到』领积分再来."
         )
         output_instruction = (
-            "按当前人格的口吻写 1-2 条短句 (可换行分条), 不用 Markdown, "
+            "按当前人格的口吻写 1-2 条短句 (一条一行, 不换行), 不用 Markdown, "
             "必须原样写出『签到』两个字让对方好找, 只用纯文字不用装饰符号或图形表情, 只输出正文."
         )
     else:
@@ -217,7 +217,7 @@ async def ai_gate_reply(config: Any, persona: Any, kind: str, user_text: str = "
             "按当前人格简短说明本小时无法继续聊天，请他下个小时再来。"
         )
         output_instruction = (
-            "按当前人格的口吻写 1-2 条短句 (可换行分条), 不用 Markdown, "
+            "按当前人格的口吻写 1-2 条短句 (一条一行, 不换行), 不用 Markdown, "
             "只用纯文字不用装饰符号或图形表情, 只输出正文."
         )
     messages = [
