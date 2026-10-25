@@ -174,6 +174,12 @@ class Config(BaseModel):
     # 排队雪崩防护使用,排队消息超 25s 才丢弃,所以这里给 15s 是安全的。
     catty_vision_async_enabled: bool = True
     catty_vision_inline_max_wait_seconds: float = 15.0
+    # 联系上下文识图: 被 @/引用/直呼时, 除当前消息与引用消息的图, 还把最近
+    # catty_vision_context_messages 条消息里出现过的图 (最多 max_images 张) 带给主 AI,
+    # 机机才答得上「刚才那张图是怎么做的」。max_age_seconds<=0 表示不按时间过滤。
+    catty_vision_context_messages: int = 16
+    catty_vision_context_max_images: int = 4
+    catty_vision_context_max_age_seconds: float = 1800.0
 
     catty_filter_enabled: bool = True
     catty_filter_base_url: str = ""
@@ -1090,6 +1096,7 @@ class Config(BaseModel):
         "catty_vision_max_tokens",
         "catty_vision_request_timeout",
         "catty_vision_inline_max_wait_seconds",
+        "catty_vision_context_max_age_seconds",
         "catty_reply_queue_max_wait_seconds",
         "catty_filter_temperature",
         "catty_filter_max_tokens",

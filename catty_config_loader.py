@@ -109,6 +109,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "request_timeout": 60,
         "async_enabled": True,
         "inline_max_wait_seconds": 15.0,
+        "context_messages": 16,
+        "context_max_images": 4,
+        "context_max_age_seconds": 1800.0,
     },
     "filter": {
         "enabled": True,
@@ -703,6 +706,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_VISION_REQUEST_TIMEOUT", vision.get("request_timeout"))
     _set_env("CATTY_VISION_ASYNC_ENABLED", vision.get("async_enabled"))
     _set_env("CATTY_VISION_INLINE_MAX_WAIT_SECONDS", vision.get("inline_max_wait_seconds"))
+    _set_env("CATTY_VISION_CONTEXT_MESSAGES", vision.get("context_messages"))
+    _set_env("CATTY_VISION_CONTEXT_MAX_IMAGES", vision.get("context_max_images"))
+    _set_env("CATTY_VISION_CONTEXT_MAX_AGE_SECONDS", vision.get("context_max_age_seconds"))
 
     filter_config = _section(data, "filter")
     _set_env("CATTY_FILTER_ENABLED", filter_config.get("enabled"))

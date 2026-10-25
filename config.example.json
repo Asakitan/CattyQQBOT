@@ -75,7 +75,10 @@
         "max_tokens": 800,
         "request_timeout": 60,
         "async_enabled": true,
-        "inline_max_wait_seconds": 15.0
+        "inline_max_wait_seconds": 15.0,
+        "context_messages": 16,
+        "context_max_images": 4,
+        "context_max_age_seconds": 1800.0
     },
     "filter": {
         "enabled": true,
@@ -252,6 +255,22 @@
         "image_max_dim": 720,
         "image_max_bytes": 600000
     },
+    "self_study": {
+        "enabled": false,
+        "daily_token_budget": 100000000,
+        "corpus_max_tokens": 100000,
+        "context_tokens": 1200,
+        "sources": ["group", "bilibili", "tieba"],
+        "keywords": ["游戏", "外挂", "逆向", "显卡", "二次元", "梗"],
+        "runs_per_day": 6,
+        "interval_minutes": 120,
+        "session_minutes": 8,
+        "active_hours": "09:00-23:30",
+        "pages_per_run": 6,
+        "page_chars": 1500,
+        "request_timeout": 15,
+        "storage_dir": "data/fdj_self_study"
+    },
     "tools": {
         "profile_memory_enabled": true,
         "scope_meme_enabled": true,
@@ -364,6 +383,10 @@
         "image_response_enabled": true,
         "image_vision_enabled": true,
         "reply_queue_max_wait_seconds": 25.0,
+        "reply_hard_deadline_seconds": 60.0,
+        "reply_retry_deadline_seconds": 40.0,
+        "reply_deadline_attempts": 2,
+        "loop_block_warn_seconds": 3.0,
         "reply_human_split_enabled": true,
         "reply_human_split_probability": 0.72,
         "reply_human_split_min_chars": 18,

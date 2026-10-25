@@ -45,6 +45,7 @@ from .message_utils import (
     expression_message_signature,
     extract_incoming_message,
     extract_image_urls,
+    extract_images,
     has_real_at_self,
     mentions_other_user,
     reply_source_from_message,
@@ -3044,6 +3045,9 @@ class RecentConversationMessage:
     created_at: float
     is_bot: bool = False
     target_user_id: str = ""
+    # 这条消息带的图 (url, cache key) — 被 @ 时把前文图片一起带给主 AI。
+    image_urls: tuple[str, ...] = ()
+    image_keys: tuple[str, ...] = ()
 
 
 @dataclass(slots=True)
@@ -3726,6 +3730,47 @@ def _recent_image_urls_for_scope(scope_key: str) -> list[str]:
     return out
 
 
+def _recent_context_images_for_scope(
+    scope_key: str,
+    *,
+    lookback_messages: int,
+    max_images: int,
+    max_age_seconds: float = 1800.0,
+    exclude_urls: set[str] | None = None,
+) -> list[tuple[RecentConversationMessage, str, str, int]]:
+    """最近 lookback_messages 条消息里出现过的图, 供主 AI 联系上下文识图。
+
+    返回 (消息, url, cache key, 距今几条消息), 按时间从旧到新; 已挂上请求的图用
+    exclude_urls 排除, max_images 截断最旧的。
+    """
+    if not scope_key or lookback_messages <= 0 or max_images <= 0:
+        return []
+    recent = _recent_conversation_messages.get(scope_key)
+    if not recent:
+        return []
+    newest_seq = recent[-1].seq
+    floor_seq = newest_seq - lookback_messages + 1
+    now = time.monotonic()
+    seen = {url for url in (exclude_urls or set()) if url}
+    picked: list[tuple[RecentConversationMessage, str, str, int]] = []
+    for item in reversed(recent):
+        if item.seq < floor_seq:
+            break
+        if not item.image_urls:
+            continue
+        if max_age_seconds > 0 and now - item.created_at > max_age_seconds:
+            continue
+        for index, url in enumerate(item.image_urls):
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            key = item.image_keys[index] if index < len(item.image_keys) else url
+            picked.append((item, url, key, max(newest_seq - item.seq, 1)))
+            if len(picked) >= max_images:
+                return list(reversed(picked))
+    return list(reversed(picked))
+
+
 def _tool_schema_name(schema: Any) -> str:
     if not isinstance(schema, dict):
         return ""
@@ -4370,7 +4415,11 @@ def _summarize_text_parsing_for_feed(text: str) -> dict | None:
 
 def _remember_recent_conversation_event(event: MessageEvent, incoming: ExtractedMessage | None = None) -> None:
     text = (incoming.text if incoming is not None else event_plain_text(event)).strip()
-    has_image = incoming.has_image if incoming is not None else bool(extract_image_urls(event))
+    if incoming is not None:
+        images = list(zip(incoming.image_urls or [], incoming.image_keys or []))
+    else:
+        images = extract_images(event)
+    has_image = bool(images)
     if not text and not has_image:
         return
     key = _conversation_queue_key(event)
@@ -4393,6 +4442,8 @@ def _remember_recent_conversation_event(event: MessageEvent, incoming: Extracted
             has_image=has_image,
             created_at=now,
             is_bot=False,
+            image_urls=tuple(url for url, _key in images),
+            image_keys=tuple(image_key for _url, image_key in images),
         )
     )
 
@@ -5935,6 +5986,8 @@ def _build_user_content(
     image_description: str | None = None,
     image_parts: list[dict[str, Any]] | None = None,
     quoted_image_parts: list[dict[str, Any]] | None = None,
+    context_image_parts: list[dict[str, Any]] | None = None,
+    context_image_notes: list[str] | None = None,
     web_image_parts: list[dict[str, Any]] | None = None,
 ) -> object:
     base = incoming.history_content
@@ -5944,11 +5997,22 @@ def _build_user_content(
         else:
             urls = "\n".join(f"- {url}" for url in incoming.image_urls)
             base = f"{base}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
-    if not image_parts and not quoted_image_parts and not web_image_parts:
+    if context_image_notes:
+        base = (
+            f"{base}\n最近几条消息里出现过的图（联系上下文理解，不要说没看到图）:\n"
+            + "\n".join(context_image_notes)
+        )
+    if (
+        not image_parts
+        and not quoted_image_parts
+        and not context_image_parts
+        and not web_image_parts
+    ):
         return base
     content: list[dict[str, Any]] = [{"type": "text", "text": base}]
     content.extend(image_parts or [])
     content.extend(quoted_image_parts or [])
+    content.extend(context_image_parts or [])
     content.extend(web_image_parts or [])
     return content
 
@@ -6684,6 +6748,8 @@ async def _build_messages(
     has_context_image: bool = False,
     image_parts: list[dict[str, Any]] | None = None,
     quoted_image_parts: list[dict[str, Any]] | None = None,
+    context_image_parts: list[dict[str, Any]] | None = None,
+    context_image_notes: list[str] | None = None,
     web_image_parts: list[dict[str, Any]] | None = None,
     anger_context: str | None = None,
     semantic_reply_split: bool = False,
@@ -7428,6 +7494,8 @@ async def _build_messages(
         image_description=image_description,
         image_parts=image_parts,
         quoted_image_parts=quoted_image_parts,
+        context_image_parts=context_image_parts,
+        context_image_notes=context_image_notes,
         web_image_parts=web_image_parts,
     )
     _cognitive_system_context = ""
@@ -8231,6 +8299,8 @@ async def _build_messages(
             "content": _build_user_content(
                 incoming,
                 image_description=image_description,
+                context_image_parts=context_image_parts,
+                context_image_notes=context_image_notes,
                 image_parts=image_parts,
                 quoted_image_parts=quoted_image_parts,
                 web_image_parts=web_image_parts,
@@ -15997,6 +16067,29 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         )
         passthrough_image_parts: list[dict[str, Any]] = []
         passthrough_quoted_image_parts: list[dict[str, Any]] = []
+        # 联系上下文识图: @/引用/直呼时, 最近 N 条消息里的图也一起带给主 AI,
+        # 否则只喂当前消息/引用消息的图, AI 会答「图我这边看不细」。
+        passthrough_context_image_parts: list[dict[str, Any]] = []
+        context_image_notes: list[str] = []
+        context_image_entries: list[tuple[RecentConversationMessage, str, str, int]] = []
+        if config.catty_image_vision_enabled and _image_attention:
+            try:
+                context_image_entries = _recent_context_images_for_scope(
+                    _conversation_queue_key(event),
+                    lookback_messages=int(
+                        getattr(config, "catty_vision_context_messages", 16) or 0
+                    ),
+                    max_images=int(
+                        getattr(config, "catty_vision_context_max_images", 4) or 0
+                    ),
+                    max_age_seconds=float(
+                        getattr(config, "catty_vision_context_max_age_seconds", 1800.0) or 0.0
+                    ),
+                    exclude_urls=set(incoming.image_urls or [])
+                    | {url for url, _key in reply_image_pairs},
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"vision context images lookup failed: {exc}")
         if _vision_passthrough:
             if incoming.image_urls:
                 try:
@@ -16012,10 +16105,61 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     )
                 except Exception as exc:  # noqa: BLE001
                     logger.warning(f"vision passthrough (quoted) failed: {exc}")
-            if passthrough_image_parts or passthrough_quoted_image_parts:
+            context_image_count = 0
+            if context_image_entries:
+
+                async def _prepare_context_image(
+                    entry: tuple[RecentConversationMessage, str, str, int],
+                ) -> list[dict[str, Any]]:
+                    try:
+                        return await prepare_passthrough_image_parts(config, [entry[1]])
+                    except Exception as exc:  # noqa: BLE001
+                        logger.warning(f"vision passthrough (context) failed: {exc}")
+                        return []
+
+                # 并行取图, 别让 4 张前文图串行拖慢首轮回复。
+                _ctx_prepared = await asyncio.gather(
+                    *[_prepare_context_image(entry) for entry in context_image_entries]
+                )
+                for _ctx_idx, ((_ctx_msg, _ctx_url, _ctx_key, _ctx_back), _ctx_parts) in enumerate(
+                    zip(context_image_entries, _ctx_prepared), 1
+                ):
+                    if not _ctx_parts:
+                        continue
+                    _ctx_snippet = " ".join(str(_ctx_msg.text or "").split())
+                    if _ctx_snippet == "[图片]":
+                        _ctx_snippet = ""
+                    _ctx_label = (
+                        f"【前文图{_ctx_idx}】{_ctx_back} 条消息前 "
+                        f"{_ctx_msg.display_name} 发的图"
+                    )
+                    if _ctx_snippet:
+                        _ctx_label += f"，配文：{_ctx_snippet[:80]}"
+                    passthrough_context_image_parts.append({"type": "text", "text": _ctx_label})
+                    passthrough_context_image_parts.extend(_ctx_parts)
+                    context_image_count += 1
+            if (
+                passthrough_image_parts
+                or passthrough_quoted_image_parts
+                or passthrough_context_image_parts
+            ):
                 logger.info(
                     f"vision passthrough: incoming={len(passthrough_image_parts)} "
-                    f"quoted={len(passthrough_quoted_image_parts)} → main AI"
+                    f"quoted={len(passthrough_quoted_image_parts)} "
+                    f"context={context_image_count} → main AI"
+                )
+        elif context_image_entries:
+            # 识图线不是主线路时, 原图塞不进主请求: 有缓存描述就给描述, 否则给 URL。
+            for _ctx_idx, (_ctx_msg, _ctx_url, _ctx_key, _ctx_back) in enumerate(
+                context_image_entries, 1
+            ):
+                try:
+                    _ctx_desc = memory_store.get_image_summary([_ctx_key]) or ""
+                except Exception:  # noqa: BLE001
+                    _ctx_desc = ""
+                context_image_notes.append(
+                    f"- 前文图{_ctx_idx}（{_ctx_back} 条消息前，{_ctx_msg.display_name}）: "
+                    f"{_ctx_desc or _ctx_url}"
                 )
 
         reply_image_description = ""
@@ -16129,9 +16273,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             history_key,
             incoming,
             image_description=image_description,
-            has_context_image=bool(reply_image_pairs),
+            has_context_image=bool(reply_image_pairs) or bool(context_image_entries),
             image_parts=passthrough_image_parts or None,
             quoted_image_parts=passthrough_quoted_image_parts or None,
+            context_image_parts=passthrough_context_image_parts or None,
+            context_image_notes=context_image_notes or None,
             web_image_parts=auto_fetch_image_parts or None,
             anger_context=anger_context,
             semantic_reply_split=semantic_reply_split,
