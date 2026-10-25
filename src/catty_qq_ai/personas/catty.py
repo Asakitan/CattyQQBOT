@@ -92,4 +92,7 @@ CATTY_PERSONA = Persona(
     # 全部内容字段 None = 用 catty_core_persona / character_card / persona_prompts 现有内容
     owner_concept=True,
     reply_gate_style=None,  # None → reply_gate prompt 用原文(含"用笨猫口吻")
+    # 主人 2026-10-25: NSFW 深水路径也改自由发挥 — 不再注入 phase 推进表/起手范例/固定 prefill,
+    # 场景与节奏交给模型, 只留 stage 权限矩阵 + 反 OOC 边界。机机早已同样处理。
+    nsfw_freeform=True,
 )

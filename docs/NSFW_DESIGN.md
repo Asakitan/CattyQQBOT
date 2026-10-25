@@ -251,3 +251,25 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   catty 无词表 → 输出字节不变。
 - 机机词表补三条：`猫尾巴→尾羽`（否则先命中 `猫尾` 会出现「尾羽巴」）、`喵地一声→轻轻一颤`、
   `笨蛋主人→笨蛋`（否则是「笨蛋你」）。
+
+### 12.7 NSFW 自由发挥扩到 catty（2026-10-25 八修）
+
+反馈：NSFW 里模型没有自主发挥空间，固定句式、固定情景。
+
+- `personas/catty.py` 的 `CATTY_PERSONA` 打开 `nsfw_freeform=True`——机机此前已是 True，
+  现在两个人格的深水路径同一套自由发挥骨架。
+- 自由发挥下**不再注入**：phase 参数全量 catalog、`build_phase_params_block_only` 尾部 tracker、
+  `build_starter_examples_block` 起手范例、`_NSFW_RECENCY_REMINDER`（8 铁律 + P1-P8 范例）、
+  `_NSFW_SPARK_STABLE_BOUNDARY_TEXT`（cheatsheet + 各 phase 稳定范本）、trope hint
+  （`_build_trope_retry_hint` 的固定场景脚本与「把床/桌/月光拉进 reply」指令）、
+  罐头 climax prefill（`get_phase_climax_prefill`）。
+- prefill 统一走中性 `（`，让模型先读用户当前消息再自己决定开场；assistant prefill 仍保留，
+  防软拒的锚点作用不变。
+- **保留**：`_build_nsfw_spark_override` 的 stage 权限矩阵 + 抗拒强度 + 反 OOC 元词墙、
+  `<NSFW_STATE:CONTINUE|EXIT>` 标记、`apply_persona_lexicon`、per-persona `nsfw_style_override`。
+- `_NSFW_FREEFORM_REMINDER` / `_NSFW_FREEFORM_BOUNDARY` 改成人格中立文案，明确「场景/开场/节奏/
+  篇幅自己决定，想换场由你判断」，不再写死「机机 / 私聊」。
+- 本地 phase/scene 状态机照旧更新（日志、怀孕计数、sticky 判定都用它），只是不再把 hint 塞进 prompt。
+- 覆盖说明：override 里 `_freeform` 分支的格式行改「格式自由」，语气行从「保留唐猫语气」
+  换成「保持本人口吻」，catty 不再被固定成 3-5 行 prose。
+- 测试：`tests/test_personas.py` 的 catty 断言从 `nsfw_freeform is False` 改为 True。

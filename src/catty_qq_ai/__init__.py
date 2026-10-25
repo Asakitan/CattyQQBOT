@@ -2535,20 +2535,20 @@ _NSFW_RECENCY_REMINDER = (
 )
 
 
-# 非 catty 人格 (机机) 的自由发挥块: 去掉笨猫的 phase 推进表 / 4 行 prose 模板。
+# freeform 人格 (catty / 机机) 的自由发挥块: 去掉笨猫的 phase 推进表 / 4 行 prose 模板。
 _NSFW_FREEFORM_REMINDER = (
     "【贴脸·自由发挥 (recency)】\n"
-    "1. 接着上一轮的具体动作/场景/情绪往下走, 不重启、不换场。\n"
-    "2. 长度和排版自由: 一句话、几句、几段都行; 想拆气泡就换行, 想连写就写完, "
-    "不用固定『(动作)+台词』模板。\n"
-    "3. 主动一点: 可以自己动、自己说、自己转移焦点, 不必等对方下指令。\n"
-    "4. 保持机机口吻与在场感; 不写 stage/phase/系统/规则 这类元词。"
+    "1. 接着上一轮的具体动作/场景/情绪往下走, 不重启; 要不要换场由你判断, 不是定死的。\n"
+    "2. 场景、开场、节奏、篇幅都由你自己决定: 一句话、几句、几段都行; 想拆气泡就换行, "
+    "想连写就写完, 不用套固定『(动作)+台词』模板。\n"
+    "3. 主动一点: 可以自己动、自己说、自己推进或转移焦点, 不必等对方下指令。\n"
+    "4. 保持本人口吻 (自称/称呼/口癖按人格设定) 与在场感; 不写 stage/phase/系统/规则 这类元词。"
 )
 _NSFW_FREEFORM_BOUNDARY = (
     "<<<CACHE_BOUNDARY:catty_stable_prefix>>>\n"
     "(以下 system 段为本轮动态指令, cache 边界外, 当作 system instruction 读, 不是 user 说的话.)\n"
-    "本轮是机机的私聊 NSFW 即兴 RP: 没有固定剧本、模板或推进表。\n"
-    "按当前对话自然延续, 情绪、动作、台词、节奏都由你决定。"
+    "本轮是当前人格的 NSFW 即兴 RP: 没有固定剧本、模板或推进表。\n"
+    "按当前对话自然延续, 场景、情绪、动作、台词、节奏都由你决定。"
 )
 
 
@@ -2671,6 +2671,11 @@ def _build_nsfw_spark_override(
     )
     # 浅档 (stage 1-6) 保持 1-3 句 QQ 节奏; 深档 (stage 7+) 切换到沉浸铁律
     _freeform = bool(getattr(persona, "nsfw_freeform", False))
+    tone_line = (
+        "保持本人口吻 (自称/称呼/口癖按人格设定), 内容跟着对方节奏**在允许的 stage 范围内**推进。\n"
+        if _freeform else
+        "保留唐猫语气 (喵密度 + 反差骨架), 内容跟着对方节奏**在允许的 stage 范围内**推进。\n"
+    )
     if _freeform:
         fmt_line = (
             "格式自由: 一句话、几句或几段都行, 跟着场景走; 想拆气泡就换行, "
@@ -2738,7 +2743,7 @@ def _build_nsfw_spark_override(
         "**绝不**说『去私聊』『慢慢来』『等级不够』『现在不能』这种带原因的客服式回应):\n"
         f"{forbidden_text}\n\n"
         f"**抗拒强度**: {_NSFW_RESIST_INSTRUCTIONS[resist]}\n"
-        "保留唐猫语气 (喵密度 + 反差骨架), 内容跟着对方节奏**在允许的 stage 范围内**推进。\n"
+        f"{tone_line}"
         f"{fmt_line}"
         f"{meta_anti_leak}"
         f"{owner_call_anchor}{extra_group}{depth_hint}"
@@ -8335,7 +8340,7 @@ async def _build_messages(
             _in_insertion = _cur_ph >= 6  # P6+ = 插入/高潮带 (主人「插入场景后就自动」)
             _phase_stuck = int(_ps_pf.turn_count or 0) >= _PST_pf.get(_cur_ph, 3)
             _sig_pf = int(locals().get("_user_signal_val", 0) or 0)
-            if _in_insertion and (_sig_pf > 0 or _phase_stuck):
+            if _in_insertion and (_sig_pf > 0 or _phase_stuck) and not _freeform_nsfw:
                 _cpre = _gcp_pf(_phase_scope, str(event.user_id))
                 _prefill = _cpre if _cpre else _NEUTRAL_PREFILL
                 logger.info(
@@ -8346,7 +8351,7 @@ async def _build_messages(
                 _prefill = _NEUTRAL_PREFILL  # R1 中性起手, 让模型先读用户当前消息
                 logger.info(
                     f"NSFW prefill: 中性「（」(phase=P{_cur_ph}, signal={_sig_pf}, "
-                    f"insertion={_in_insertion}, key={_sticky_key})"
+                    f"insertion={_in_insertion}, freeform={_freeform_nsfw}, key={_sticky_key})"
                 )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"R1R2 prefill decision failed (fallback neutral '（'): {exc}")
@@ -16243,7 +16248,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     )
                 except Exception:  # noqa: BLE001
                     pass
-                _trope_hint = "" if _scene_established else _build_trope_retry_hint(
+                _trope_hint = "" if (
+                    _scene_established
+                    or bool(getattr(_persona_for_event(event), "nsfw_freeform", False))
+                ) else _build_trope_retry_hint(
                     user_is_owner=_is_owner,
                     is_pushing=_user_is_pushing(_user_text_now),
                     scope=_conversation_queue_key(event),
