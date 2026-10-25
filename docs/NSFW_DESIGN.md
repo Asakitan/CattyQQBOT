@@ -311,3 +311,17 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   避免档位码混进正常对话。
 - 测试：`test_personas` 断言改为「pregnancy 不再禁用 + private_only」；
   `test_nsfw_freeform_state` 增加「孩子爸爸=现在和你说话的这个人」「father_addr 为空→另一个人」。
+
+### 12.10 分泡交给模型决定（2026-10-25 十一修）
+
+- _reply_chunks 只认模型自己写的 `<<<CATTY_REPLY_SPLIT>>>`：写了就按它拆，没写就整段一条
+  （消息内部的换行原样保留，不再被拆成多条）。删掉的本地启发式：` / ` 斜杠分泡、
+  普通空格口语边界分泡、裸换行分泡、NSFW 多行分泡，以及 `_collapse_fadianji_fragment_wall`
+  （≥10 行碎片墙合并成 3 段）—— 这几条经常把「一句句发」和「一整段」猜反。
+- 长度兜底仍在：超过 `catty_reply_max_chars` 才由 `split_reply` 在合理换行处切大段。
+- prompt 同步：`_semantic_reply_split_prompt` 两个分支、`FADIANJI_CORE` §4、`FADIANJI_CHAT_RHYTHM`、
+  `build_reply_self_check_prompt`、`_NSFW_FREEFORM_REMINDER` 都改成「要连发就用 marker 分隔，
+  不写就是一条」，NSFW 自由发挥也能自己决定分泡。
+- 测试：`test_output_control_markers` / `test_persona_memory_isolation` /
+  `test_fadianji_nsfw_split_bubbles` 改成「marker 才拆、纯文本单气泡」；`test_personas` 的
+  分块断言改成 `普通空格和换行都不算消息边界` + `不写标记就是一条消息`。

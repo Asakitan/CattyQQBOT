@@ -272,6 +272,22 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "image_max_dim": 720,
         "image_max_bytes": 600000,
     },
+    "self_study": {
+        "enabled": False,
+        "daily_token_budget": 100000000,
+        "corpus_max_tokens": 100000,
+        "context_tokens": 1200,
+        "sources": ["group", "bilibili", "tieba"],
+        "keywords": ["游戏", "外挂", "逆向", "显卡", "二次元", "梗"],
+        "runs_per_day": 6,
+        "interval_minutes": 120,
+        "session_minutes": 8,
+        "active_hours": "09:00-23:30",
+        "pages_per_run": 6,
+        "page_chars": 1500,
+        "request_timeout": 15,
+        "storage_dir": "data/fdj_self_study",
+    },
     "tools": {
         "profile_memory_enabled": True,
         "scope_meme_enabled": True,
@@ -364,6 +380,11 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "fadianji_echo_probability": 0.35,
         "fadianji_echo_min_score": 3.4,
         "fadianji_echo_cooldown_seconds": 120.0,
+        "reply_queue_max_wait_seconds": 25.0,
+        "reply_hard_deadline_seconds": 60.0,
+        "reply_retry_deadline_seconds": 40.0,
+        "reply_deadline_attempts": 2,
+        "loop_block_warn_seconds": 3.0,
         "session_cache_persistence_enabled": True,
         "session_cache_dir": "sessions",
         "session_cache_max_sessions": 200,
@@ -857,7 +878,21 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_AUTO_FETCH_IMAGE_MAX", auto_fetch.get("image_max"))
     _set_env("CATTY_AUTO_FETCH_IMAGE_MAX_DIM", auto_fetch.get("image_max_dim"))
     _set_env("CATTY_AUTO_FETCH_IMAGE_MAX_BYTES", auto_fetch.get("image_max_bytes"))
-
+    self_study = _section(data, "self_study")
+    _set_env("CATTY_SELF_STUDY_ENABLED", self_study.get("enabled"))
+    _set_env("CATTY_SELF_STUDY_DAILY_TOKEN_BUDGET", self_study.get("daily_token_budget"))
+    _set_env("CATTY_SELF_STUDY_CORPUS_MAX_TOKENS", self_study.get("corpus_max_tokens"))
+    _set_env("CATTY_SELF_STUDY_CONTEXT_TOKENS", self_study.get("context_tokens"))
+    _set_env("CATTY_SELF_STUDY_SOURCES", self_study.get("sources"), json_value=True)
+    _set_env("CATTY_SELF_STUDY_KEYWORDS", self_study.get("keywords"), json_value=True)
+    _set_env("CATTY_SELF_STUDY_RUNS_PER_DAY", self_study.get("runs_per_day"))
+    _set_env("CATTY_SELF_STUDY_INTERVAL_MINUTES", self_study.get("interval_minutes"))
+    _set_env("CATTY_SELF_STUDY_SESSION_MINUTES", self_study.get("session_minutes"))
+    _set_env("CATTY_SELF_STUDY_ACTIVE_HOURS", self_study.get("active_hours"))
+    _set_env("CATTY_SELF_STUDY_PAGES_PER_RUN", self_study.get("pages_per_run"))
+    _set_env("CATTY_SELF_STUDY_PAGE_CHARS", self_study.get("page_chars"))
+    _set_env("CATTY_SELF_STUDY_REQUEST_TIMEOUT", self_study.get("request_timeout"))
+    _set_env("CATTY_SELF_STUDY_STORAGE_DIR", self_study.get("storage_dir"))
     nsfw_search = _section(data, "nsfw_search")
     _set_env("CATTY_NSFW_SEARCH_ENABLED", nsfw_search.get("enabled"))
     _set_env("CATTY_NSFW_SEARCH_MAX_RESULTS", nsfw_search.get("max_results"))
@@ -939,6 +974,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGE_RESPONSE_ENABLED", chat.get("image_response_enabled"))
     _set_env("CATTY_IMAGE_VISION_ENABLED", chat.get("image_vision_enabled"))
     _set_env("CATTY_REPLY_QUEUE_MAX_WAIT_SECONDS", chat.get("reply_queue_max_wait_seconds"))
+    _set_env("CATTY_REPLY_HARD_DEADLINE_SECONDS", chat.get("reply_hard_deadline_seconds"))
+    _set_env("CATTY_REPLY_RETRY_DEADLINE_SECONDS", chat.get("reply_retry_deadline_seconds"))
+    _set_env("CATTY_REPLY_DEADLINE_ATTEMPTS", chat.get("reply_deadline_attempts"))
+    _set_env("CATTY_LOOP_BLOCK_WARN_SECONDS", chat.get("loop_block_warn_seconds"))
     social = _section(data, "social")
     _set_env("CATTY_SOCIAL_STEAM", social.get("steam"))
     _set_env("CATTY_REPLY_MAX_CHARS", chat.get("reply_max_chars"))

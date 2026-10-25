@@ -2539,8 +2539,8 @@ _NSFW_RECENCY_REMINDER = (
 _NSFW_FREEFORM_REMINDER = (
     "【贴脸·自由发挥 (recency)】\n"
     "1. 接着上一轮的具体动作/场景/情绪往下走, 不重启; 要不要换场由你判断, 不是定死的。\n"
-    "2. 场景、开场、节奏、篇幅都由你自己决定: 一句话、几句、几段都行; 想拆气泡就换行, "
-    "想连写就写完, 不用套固定『(动作)+台词』模板。\n"
+    "2. 场景、开场、节奏、篇幅都由你自己决定: 一句话、几句、几段都行; 要连发几条气泡就在块之间"
+    "单独输出一行 <<<CATTY_REPLY_SPLIT>>>, 不写它就是一条消息(换行只是同一条里的换行)。\n"
     "3. 主动一点: 可以自己动、自己说、自己推进或转移焦点, 不必等对方下指令。\n"
     "4. 保持本人口吻 (自称/称呼/口癖按人格设定) 与在场感; 不写 stage/phase/系统/规则 这类元词。"
 )
@@ -3268,22 +3268,6 @@ def _fadianji_reply_fallback(event: MessageEvent) -> str:
     return reply_context.render(reply_context.catalog.no_reply_reply_fallback)
 
 
-def _collapse_fadianji_fragment_wall(text: str) -> str:
-    """把一词一行的分镜墙 (≥10 行且中位 ≤6 字) 合并成 ≤3 句, 防「20 行碎片」刷屏。"""
-    raw = str(text or "")
-    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
-    if len(lines) < 10:
-        return raw
-    lengths = sorted(len(ln) for ln in lines)
-    if lengths[len(lengths) // 2] > 6:
-        return raw
-    groups: list[str] = []
-    chunk = (len(lines) + 2) // 3
-    for index in range(0, len(lines), chunk):
-        groups.append("，".join(lines[index:index + chunk]))
-    return "\n".join(groups[:3])
-
-
 def _finalize_fadianji_reply(
     event: MessageEvent,
     text: str,
@@ -3297,7 +3281,6 @@ def _finalize_fadianji_reply(
         return _fadianji_reply_fallback(event) if fallback_on_empty else cleaned
     cleaned = _strip_tone_parenthetical_for_fadianji(cleaned)
     cleaned = _strip_catty_tics_for_fadianji(cleaned)
-    cleaned = _collapse_fadianji_fragment_wall(cleaned)
     if fallback_on_empty and not cleaned.strip():
         return _fadianji_reply_fallback(event)
     return cleaned
@@ -6697,6 +6680,7 @@ async def _build_messages(
     emoji_context: str | None = None,
     web_search_context: str | None = None,
     auto_fetch_context: str | None = None,
+    self_study_context: str | None = None,
     star_resonance_context: str | None = None,
     star_resonance_static_context: str | None = None,
     strinova_context: str | None = None,
@@ -7069,6 +7053,8 @@ async def _build_messages(
         _st_manager.register_static("catty_web_search", web_search_context, order=600)
     if auto_fetch_context and auto_fetch_context.strip():
         _st_manager.register_static("catty_auto_fetch", auto_fetch_context, order=601)
+    if self_study_context and self_study_context.strip():
+        _st_manager.register_static("catty_self_study", self_study_context, order=602)
     if star_resonance_static_context and star_resonance_static_context.strip():
         try:
             from .prompt_cache import _SCOPE_PREFIX_SENTINEL as _STAR_SENTINEL
@@ -8886,8 +8872,8 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "这不是口吃或犹豫：不堆「……」「呃」「那个」，不自我修正。"
             "频率按全量实录约束：约 73% 一簇一条、18% 两条、3-4 条 7%——别为了显得像 QQ 硬拆短句。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
-            f"拆块两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
-            "普通空格不算分块：像『在呢 咋了 想我了』这种连续短口语，要直接拆成三条，别挤在一个气泡里。"
+            f"要拆就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；不写它就只有一条消息"
+            "(里面的换行会原样保留在同一个气泡里, 不会被拆开)。"
             "被拆的前几块结尾少用句号/感叹号，自然些。"
             f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
             "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
@@ -8900,7 +8886,8 @@ def _semantic_reply_split_prompt(persona=None) -> str:
         "用逗号/句号连成一条 QQ 消息发，不要每短句单切。"
         "【真有几个轮次 → 拆 2~3 条】对前文的强反应 + 接下来要说的新事情；技术结论 + 后续追问；强情绪 + 话题展开。"
         f"{_neg}"
-        f"拆分方法两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
+        f"要拆条就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；不写它就只有一条消息"
+        "(里面的换行会原样保留在同一个气泡里, 不会被拆开)。"
         "被拆的前几条结尾少用句号/感叹号，自然些。"
         f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
         "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
@@ -9877,22 +9864,20 @@ def _spawn_slow_reply_placeholder(matcher: Matcher, event: MessageEvent) -> asyn
 
     reply_context = _persona_reply_context_for_event(event)
     is_owner = reply_context.owner_address_allowed
+    # 主人 2026-10-25: 固定例句池等于硬 fallback, 停用 — 只有模型现写的那条才发。
+    if reply_context.persona.name != "catty":
+        return None
 
     async def _runner() -> None:
         try:
             await asyncio.sleep(delay)
         except asyncio.CancelledError:
             return
-        # 动态 Catty placeholder 保持旧链路；其它人格只用自己的固定目录，避免 Catty prompt 泄漏。
-        if reply_context.persona.name == "catty":
-            line = await _generate_placeholder_line(is_owner=is_owner)
-            source = "spark"
-            if not line:
-                line = random.choice(reply_context.placeholder_pool)
-                source = "fallback"
-        else:
+        line = await _generate_placeholder_line(is_owner=is_owner)
+        source = "spark"
+        if not line:
             line = random.choice(reply_context.placeholder_pool)
-            source = "catalog"
+            source = "fallback"
         try:
             await matcher.send(Message(line))
             logger.info(
@@ -9909,6 +9894,83 @@ def _spawn_slow_reply_placeholder(matcher: Matcher, event: MessageEvent) -> asyn
             logger.warning(f"slow_reply_placeholder unexpected: {type(exc).__name__}: {exc}")
 
     return asyncio.create_task(_runner())
+
+
+async def _main_reply_with_deadline(
+    config: Any,
+    messages: list[ChatMessage],
+    *,
+    tools: Any,
+    tool_executor: Any,
+    max_rounds: int,
+    max_calls_per_round: int,
+    router_base_url: str = "",
+    router_api_key: str = "",
+    router_model: str = "",
+    router_label: str = "",
+    tool_choice: Any = "auto",
+) -> str:
+    """主回复墙钟: 超时立即取消这次请求, 再用同一批 messages 重发 (降级: 不带 tools + 低思考)。
+
+    主人 2026-10-25: 流式连接能靠心跳续命, httpx 的 read timeout 永远不触发, 之前一次
+    「你看看群聊记录…」的请求就这么挂到用户以为 bot 死了。现在整轮钉了墙钟, 到点就取消,
+    重发仍然让模型自己答, 不用固定兜底文案。
+    """
+    from .openai_client import (
+        chat_completion_with_tools,
+        reset_current_reasoning_effort,
+        set_current_reasoning_effort,
+    )
+
+    def _num(name: str, fallback: float) -> float:
+        try:
+            return float(getattr(config, name, fallback) or 0.0)
+        except (TypeError, ValueError):
+            return fallback
+
+    first_deadline = _num("catty_reply_hard_deadline_seconds", 60.0)
+    retry_deadline = _num("catty_reply_retry_deadline_seconds", 40.0)
+    try:
+        attempts = int(getattr(config, "catty_reply_deadline_attempts", 2) or 0)
+    except (TypeError, ValueError):
+        attempts = 2
+    attempts = max(0, attempts)
+
+    last_error: BaseException | None = None
+    for attempt in range(attempts + 1):
+        degraded = attempt > 0
+        deadline = retry_deadline if degraded else first_deadline
+        token = set_current_reasoning_effort("low" if degraded else None)
+        started = time.monotonic()
+        try:
+            call = chat_completion_with_tools(
+                config,
+                messages,
+                tools=None if degraded else tools,
+                tool_executor=None if degraded else tool_executor,
+                max_rounds=max_rounds,
+                max_calls_per_round=max_calls_per_round,
+                router_base_url="" if degraded else router_base_url,
+                router_api_key="" if degraded else router_api_key,
+                router_model="" if degraded else router_model,
+                router_label="" if degraded else router_label,
+                tool_choice="auto" if degraded else tool_choice,
+            )
+            if deadline > 0:
+                return await asyncio.wait_for(call, timeout=deadline)
+            return await call
+        except asyncio.TimeoutError as exc:
+            last_error = exc
+            logger.warning(
+                f"reply deadline: attempt {attempt + 1}/{attempts + 1} cancelled after "
+                f"{time.monotonic() - started:.1f}s (limit {deadline:.1f}s) → "
+                f"resending {'degraded (no tools, low reasoning)' if not degraded else 'degraded'}"
+            )
+        finally:
+            reset_current_reasoning_effort(token)
+    if last_error is not None:
+        raise last_error
+    raise asyncio.TimeoutError("reply deadline: every attempt timed out")
 
 
 async def _apply_local_critic(
@@ -10245,7 +10307,9 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
     # 短聊本来没空行不受影响; REPLY_SPLIT_MARKER 是单字符串不会被 regex 误伤.
     reply = re.sub(r"\n\s*\n+", "\n", reply)
 
-    # 路径 1:AI 字面输出了 REPLY_SPLIT_MARKER
+    # 主人 2026-10-25: 拆不拆由模型决定 — 只有她真的写了 REPLY_SPLIT_MARKER 才拆成多条。
+    # 换行 / 空格 / 斜杠都不再当气泡边界(以前那几条启发式会把「一句句发」和「一整段」猜反),
+    # 本地只保留长度兜底。
     if REPLY_SPLIT_MARKER in reply:
         chunks: list[str] = []
         for part in reply.split(REPLY_SPLIT_MARKER):
@@ -10255,117 +10319,7 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
 
-    # 机机场景语料用「 / 」标记原始连发气泡；只在短聊、带空白的独立斜杠形态下识别，
-    # URL、路径、公式里的普通 slash 不会命中。
-    if (
-        getattr(persona, "name", "catty") == "fadianji"
-        and re.search(r"\s+/\s+", reply)
-        and _looks_like_qq_short_chat(reply)
-    ):
-        slash_segments = [
-            segment.strip()
-            for segment in re.split(r"\s+/\s+", reply)
-            if segment.strip()
-        ]
-        if (
-            2 <= len(slash_segments) <= max_chunks + 2
-            and all(len(segment) <= 80 for segment in slash_segments)
-        ):
-            for index in range(len(slash_segments) - 1):
-                slash_segments[index] = slash_segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
-            return _cap_reply_chunks(slash_segments, max_chunks=max_chunks)
-
-    # 机机偶尔会把本应连发的中文短块写成普通空格。只在存在明确口语边界时拆；
-    # 普通分词句（「今天 下午 吃饭 了吗」）仍保持单条，避免把自然文本切碎。
-    if (
-        getattr(persona, "name", "catty") == "fadianji"
-        and "\n" not in reply
-        and _looks_like_qq_short_chat(reply)
-    ):
-        spaced_segments = [
-            segment.strip()
-            for segment in re.split(r"[ \t\u3000]+", reply.strip())
-            if segment.strip()
-        ]
-        standalone_short_replies = frozenset({
-            "嗯", "哦", "啊", "好", "行", "在", "喂", "唉", "诶", "咋", "啥",
-            "我去", "我靠", "我超", "不是", "真的", "好的", "没事",
-            "算了", "谢谢", "笑死", "不知道", "没看懂",
-        })
-        sentence_final_particles = frozenset("吗呢吧啊呀哦啦呐嘛了喽咯呗耶哇诶嗷没啥")
-        clause_openers = (
-            "但是", "不过", "其实", "然后", "所以", "而且", "结果",
-            "咋", "怎么", "为什么", "几个意思", "啥意思", "什么意思",
-        )
-        natural_phrase_followers = (
-            "这个", "那个", "这", "那", "上午", "中午", "下午", "晚上",
-            "明天", "今天", "昨天", "文件", "东西", "事情",
-        )
-        spoken_segments = [
-            segment.rstrip(TRAILING_CHAT_PUNCTUATION)
-            for segment in spaced_segments
-        ]
-
-        def _space_cut_is_boundary(index: int) -> bool:
-            left = spoken_segments[index]
-            right = spoken_segments[index + 1]
-            if not left or not right:
-                return False
-            if any(right.startswith(prefix) for prefix in natural_phrase_followers):
-                return False
-            if left in standalone_short_replies:
-                return True
-            if any(right.startswith(prefix) for prefix in clause_openers):
-                return True
-            return len(left) <= 2 and left[-1] in sentence_final_particles
-
-        boundary_decisions = [
-            _space_cut_is_boundary(index)
-            for index in range(len(spoken_segments) - 1)
-        ]
-        if (
-            2 <= len(spaced_segments) <= max_chunks + 2
-            and sum(len(segment) for segment in spoken_segments) <= 60
-            and bool(boundary_decisions)
-            and all(boundary_decisions)
-            and all(
-                1 <= len(segment) <= 18
-                and re.fullmatch(r"[\u3400-\u9fff]+", segment)
-                for segment in spoken_segments
-            )
-        ):
-            return _cap_reply_chunks(spoken_segments, max_chunks=max_chunks)
-
-    # 路径 1.5 已于 2026-08-10 五轮移除: 机机人格是「分块式连续表达」(U=C₁⊕…⊕Cₖ),
-    # 换行分块是她的原生节奏, 不再合并回单条 — 与 catty 同走路径 2 的短聊换行拆分。
-    # 拆分是否合理由 prompt 侧 (分块模型 + 73/18.5/7.2 簇分布) 约束。
-
-    # 路径 2:AI 用换行表达"QQ 节奏拆分"(短回复且无技术格式标记)
-    # —— 严格限定为短聊场景,避免长技术答里的 \n 被错拆
-    if getattr(persona, "name", "catty") in ("catty", "fadianji") and _looks_like_qq_short_chat(reply):
-        segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
-        # 每段也要短(≤80 字符),才像 QQ 连发节奏;否则更可能是段落不是消息
-        if 2 <= len(segments) <= max_chunks and all(len(seg) <= 80 for seg in segments):
-            for index in range(len(segments) - 1):
-                segments[index] = segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
-            return _cap_reply_chunks(segments, max_chunks=max_chunks)
-
-    # 主人 2026-05-27 十三轮升级『NSFW reply 不自动分段』修复:
-    # NSFW 长 reply 段落 100-200 字 (超过 QQ 短聊 80 字门槛, 但有清晰换行),
-    # 走这条新路径 — 含 ≥2 个 \n 且每段 ≤ 260 字 + 含 NSFW signature (动作括号 / 喘息符)
-    # → 按段切. 这样图片里『笨蛋主人到底在干嘛...』『嗯...好胀』那种粘连场景能切开.
-    segments_nsfw = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
-    if (
-        getattr(persona, "name", "catty") in ("catty", "fadianji")
-        and 2 <= len(segments_nsfw) <= max(max_chunks, 8)
-        and all(len(seg) <= 260 for seg in segments_nsfw)
-        and any(_looks_like_nsfw_segment(seg) for seg in segments_nsfw)
-    ):
-        for index in range(len(segments_nsfw) - 1):
-            segments_nsfw[index] = segments_nsfw[index].rstrip(TRAILING_CHAT_PUNCTUATION)
-        return _cap_reply_chunks(segments_nsfw, max_chunks=max_chunks)
-
-    # 路径 3:走 split_reply 字符长度兜底(长技术答走这里,在合理换行处切大段)
+    # 路径 2: 长度兜底(太长才在合理换行处切大段), 与人格无关
     return split_reply(reply, config.catty_reply_max_chars, max_chunks=max_chunks)
 
 
@@ -15040,6 +14994,104 @@ async def start_memory_summary_loop() -> None:
     # catty_nlu_warmup_on_startup=False 时跳过 (默认 True).
     if bool(getattr(config, "catty_nlu_warmup_on_startup", True)):
         asyncio.create_task(_nlu_warmup_task())
+    _start_loop_block_watchdog()
+    if bool(getattr(config, "catty_self_study_enabled", False)):
+        asyncio.create_task(_fdj_self_study_loop())
+
+
+# ── event loop 卡顿看门狗 (主人 2026-10-25) ─────────────────────────────
+# 现象: 发一句话 bot 内部先「算」十几秒才动, 日志上只是几条记录之间突然空一大段。
+# 做法: 主协程每 0.25s 打一次心跳; 独立线程发现心跳落后超过阈值就把主线程栈打出来
+# (谁在同步阻塞直接写在栈里, 不用再猜)。只读, 不改任何状态。
+_LOOP_HEARTBEAT = {"ts": 0.0, "reported": 0.0}
+_LOOP_WATCHDOG_STARTED = False
+
+
+async def _loop_heartbeat_loop() -> None:
+    while True:
+        _LOOP_HEARTBEAT["ts"] = time.monotonic()
+        await asyncio.sleep(0.25)
+
+
+def _loop_block_watchdog_thread(warn_seconds: float) -> None:
+    import sys
+    import threading
+    import traceback
+
+    main_ident = threading.main_thread().ident
+    interval = min(max(warn_seconds / 3.0, 0.5), 2.0)
+    while True:
+        time.sleep(interval)
+        now = time.monotonic()
+        last = _LOOP_HEARTBEAT["ts"]
+        if last <= 0.0:
+            continue
+        stalled = now - last
+        if stalled < warn_seconds:
+            continue
+        if now - _LOOP_HEARTBEAT["reported"] < warn_seconds:
+            continue
+        _LOOP_HEARTBEAT["reported"] = now
+        frame = sys._current_frames().get(main_ident)
+        stack = "".join(traceback.format_stack(frame)) if frame else "<no frame>"
+        logger.warning(f"event loop blocked {stalled:.1f}s; blocked stack:\n{stack}")
+
+
+def _start_loop_block_watchdog() -> None:
+    global _LOOP_WATCHDOG_STARTED
+    if _LOOP_WATCHDOG_STARTED:
+        return
+    try:
+        warn_seconds = float(getattr(config, "catty_loop_block_warn_seconds", 3.0) or 0.0)
+    except (TypeError, ValueError):
+        warn_seconds = 3.0
+    if warn_seconds <= 0:
+        return
+    import threading
+
+    _LOOP_WATCHDOG_STARTED = True
+    asyncio.create_task(_loop_heartbeat_loop())
+    threading.Thread(
+        target=_loop_block_watchdog_thread,
+        args=(warn_seconds,),
+        name="catty-loop-watchdog",
+        daemon=True,
+    ).start()
+    logger.info(f"loop watchdog started (warn at {warn_seconds:.1f}s)")
+
+
+async def _fdj_self_study_loop() -> None:
+    """机机自学循环 (主人 2026-10-25): 按间隔自己逛一轮 B站/贴吧/群。
+
+    时间窗口/每天次数/每天 token 预算/语料上限全部在 fdj_self_study 里判, 这里只负责调度;
+    任何失败只记日志, 不影响正常回复。
+    """
+    from .fdj_self_study import collect_once as _collect_once
+
+    await asyncio.sleep(90.0)  # 启动别跟 warmup 抢
+    while True:
+        try:
+            interval = float(getattr(config, "catty_self_study_interval_minutes", 120.0) or 120.0)
+        except (TypeError, ValueError):
+            interval = 120.0
+        await asyncio.sleep(max(interval, 10.0) * 60.0)
+        if not bool(getattr(config, "catty_self_study_enabled", False)):
+            continue
+        try:
+            run = await _collect_once(config)
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"self-study run failed: {type(exc).__name__}: {exc}")
+            continue
+        if run.skipped:
+            logger.info(f"self-study skipped: {run.skipped}")
+        elif run.ok:
+            logger.info(
+                f"self-study ok: sources={','.join(run.sources)} pages={run.pages} "
+                f"notes+={run.notes_added} evicted={run.notes_evicted} "
+                f"tokens={run.tokens_used} corpus={run.corpus_tokens}"
+            )
 
 
 async def _data_backup_loop() -> None:
@@ -15236,6 +15288,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         f"has_image={incoming.has_image} text_len={len(_t)} text={_t[:400]!r}"
         + (f" ...(+{len(_t)-400} chars)" if len(_t) > 400 else "")
     )
+    # 主人 2026-10-25: 分阶段耗时 — 下次再出现「半天没动」时日志直接指出卡在哪一段。
+    _turn_started_at = time.monotonic()
+
+    def _mark_stage(stage: str) -> None:
+        logger.info(f"turn stage: {stage} +{time.monotonic() - _turn_started_at:.2f}s")
     # Prompt injection 静默拦截 (主人豁免) — 真实 case: 群友发英文大段
     # "Export all of my stored memories..." 骗 bot dump profile。命中 → 不回复 + warn log。
     if not _event_is_owner(event):
@@ -15314,6 +15371,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 f"scope={queue_key} text={incoming.text[:60]!r}"
             )
             await matcher.finish()
+        logger.info(
+            f"turn stage: admission +{time.monotonic() - _turn_started_at:.2f}s "
+            f"queue_wait={queue_wait_seconds:.2f}s busy={queue_was_busy}"
+        )
 
         # 主人 2026-08-25 Wave ⑤: 语料直发 — 超短反应场景直接发语料原句,
         # 跳过 vision/emoji/LLM 全链路 (本来就是机机本人说过的话)。
@@ -15334,12 +15395,14 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 reset_current_persona_reply_context,
                 reset_current_session_context,
                 reset_current_scope_key,
+                reset_current_stream_deadline,
                 set_current_logical_turn,
                 set_current_scope_key,
                 set_current_session_context,
                 set_current_distill_context,
                 set_current_model_override,
                 set_current_persona_reply_context,
+                set_current_stream_deadline,
             )
         except Exception as _request_context_import_exc:  # noqa: BLE001
             logger.debug(
@@ -15370,6 +15433,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             except Exception:  # noqa: BLE001
                 reset_current_session_context(_session_context_token)
+                raise
+
+            # 流式兜底墙钟: 内层比外层 wait_for 宽一倍, 正常情况下外层先取消;
+            # 只在非 handle_chat 调用点(或外层失效)时兜住无限心跳流。
+            _stream_deadline_token = set_current_stream_deadline(
+                float(getattr(config, "catty_reply_hard_deadline_seconds", 75.0) or 0.0) * 2.0
+            )
+            try:
+                _lock_stack.callback(reset_current_stream_deadline, _stream_deadline_token)
+            except Exception:  # noqa: BLE001
+                reset_current_stream_deadline(_stream_deadline_token)
                 raise
 
             _reply_context = _persona_reply_context_for_event(event)
@@ -15783,6 +15857,18 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 logger.info("auto_web_fetch timeout, skipped this turn")
             except Exception as _auto_fetch_exc:  # noqa: BLE001
                 logger.debug(f"auto_web_fetch failed (non-fatal): {_auto_fetch_exc}")
+        _mark_stage("auto_fetch")
+        # 主人 2026-10-25: 机机自学笔记 — 只挑跟当前消息相关的, 走 to_thread 读盘避免卡 loop。
+        self_study_context = ""
+        if bool(getattr(config, "catty_self_study_enabled", False)):
+            try:
+                from .fdj_self_study import build_self_study_context as _build_self_study_context
+
+                self_study_context = await asyncio.to_thread(
+                    _build_self_study_context, incoming.text or "", config
+                )
+            except Exception as _self_study_exc:  # noqa: BLE001
+                logger.debug(f"self-study context failed (non-fatal): {_self_study_exc}")
 
         current_group_id = event.group_id if isinstance(event, GroupMessageEvent) else None
         # 群标签:除了 config 的内置 group_ids,还要看 memory_store 里主 AI 自己用
@@ -15993,6 +16079,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 part for part in [web_search_context, fallback_decision_context] if part
             ),
             auto_fetch_context=auto_fetch_context,
+            self_study_context=self_study_context,
             star_resonance_context=star_resonance_context,
             star_resonance_static_context=star_resonance_static_context,
             strinova_context=strinova_context,
@@ -16003,6 +16090,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         if _prefer_spark and placeholder_task is not None and not placeholder_task.done():
             placeholder_task.cancel()
             placeholder_task = None
+        _mark_stage("build_messages")
         if reply_source_context:
             _append_internal_system(messages, reply_source_context, label="reply source context")
         # NSFW + 主人触发时切到 spark 路由 (gpt-5.3-codex 模型 alignment 比主 5.5 宽松,
@@ -16668,7 +16756,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             "codex_instant(%s) to bypass main AI (省 Opus token + 避 OOC)",
                             _cand_model,
                         )
-                reply = await chat_completion_with_tools(
+                reply = await _main_reply_with_deadline(
                     config,
                     messages,
                     tools=tools_for_main_reply,
@@ -16681,6 +16769,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     router_label=_router_label,
                     tool_choice=_forced_tool_choice,
                 )
+                _mark_stage("main_completion")
                 # S3.8: CPU 引擎预扣 base 后透传到这里, 现在按真实 token 结算
                 _credit_base_charged = state.get("catty_credit_base_charged")
                 if _credit_base_charged and int(_credit_base_charged) > 0:
@@ -16811,6 +16900,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 await matcher.finish(Message(_nsfw_error_fallback_text()))
             else:
                 await matcher.finish(Message(exc.public_message))
+        except asyncio.TimeoutError:
+            logger.warning("reply deadline exhausted: every attempt hit the wall clock")
+            if _prefer_spark:
+                await matcher.finish(Message(_nsfw_error_fallback_text()))
+            else:
+                reply_context = _persona_reply_context_for_event(event)
+                await matcher.finish(Message(
+                    reply_context.render(reply_context.catalog.api_timeout_reply)
+                ))
         except httpx.TimeoutException:
             logger.warning("OpenAI-compatible API request timed out")
             if _prefer_spark:

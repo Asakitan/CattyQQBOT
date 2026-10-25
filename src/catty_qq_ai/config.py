@@ -724,6 +724,26 @@ class Config(BaseModel):
     catty_fdj_echo_probability: float = 0.35
     catty_fdj_echo_min_score: float = 3.4
     catty_fdj_echo_cooldown_seconds: float = 120.0
+    # 主人 2026-10-25: 机机自学 (自己逛 B站/贴吧/群) — 逛的预算、时段、产出的独立语料库。
+    # 逛出来的笔记单独落 data/fdj_self_study/, 上限 corpus_max_tokens, 超了按得分/时间淘汰。
+    catty_self_study_enabled: bool = False
+    catty_self_study_daily_token_budget: int = 100_000_000  # 每天逛 + 蒸馏的 token 总预算
+    catty_self_study_corpus_max_tokens: int = 100_000      # 自学语料库总上限 (token)
+    catty_self_study_context_tokens: int = 1_200           # 单次回复最多注入多少自学笔记
+    catty_self_study_sources: list[str] = Field(
+        default_factory=lambda: ["group", "bilibili", "tieba"]
+    )
+    catty_self_study_keywords: list[str] = Field(
+        default_factory=lambda: ["游戏", "外挂", "逆向", "显卡", "二次元", "梗"]
+    )
+    catty_self_study_runs_per_day: int = 6
+    catty_self_study_interval_minutes: float = 120.0
+    catty_self_study_session_minutes: float = 8.0    # 单次逛的时长上限
+    catty_self_study_active_hours: str = "09:00-23:30"  # 只在这个时段逛
+    catty_self_study_pages_per_run: int = 6
+    catty_self_study_page_chars: int = 1500
+    catty_self_study_request_timeout: float = 15.0
+    catty_self_study_storage_dir: str = "data/fdj_self_study"
     catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
     catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 
@@ -794,6 +814,12 @@ class Config(BaseModel):
     # 都要装下,12800 偶尔不够长 prompt 转写 + 多轮 + 短评。改 32000 给足缓冲。
     catty_max_tokens: int | None = 32000
     catty_request_timeout: float = 60.0
+    # 主人 2026-10-25: 单轮回复总时限 — 到点直接取消这次请求再重发, 不让用户干等。
+    # 流式连接能靠心跳续命, httpx 的 read timeout 管不住, 所以这里给整轮一个墙钟上限。
+    catty_reply_hard_deadline_seconds: float = 60.0
+    catty_reply_retry_deadline_seconds: float = 40.0
+    catty_reply_deadline_attempts: int = 2  # 超时后重发几次 (每次都不带 tools + 低思考强度)
+    catty_loop_block_warn_seconds: float = 3.0  # event loop 被同步代码卡住多久就打一条告警+栈
     catty_reply_max_chars: int = 1800
     catty_reply_human_split_enabled: bool = True
     catty_reply_human_split_probability: float = 0.35
@@ -884,6 +910,7 @@ class Config(BaseModel):
     @field_validator(
         "catty_trigger_prefixes", "catty_directed_keywords", "catty_web_search_engines",
         "catty_auto_fetch_engines",
+        "catty_self_study_sources", "catty_self_study_keywords",
         "catty_prompt_order", "catty_prompts_disabled", "catty_native_extra_betas",
         mode="before",
     )

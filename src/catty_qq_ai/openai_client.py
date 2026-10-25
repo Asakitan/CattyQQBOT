@@ -735,19 +735,24 @@ def _looks_like_deepseek_thinking_route(base_url: str, model: str) -> bool:
     return host.endswith("deepseek.com") and model_l.startswith("deepseek-v4")
 
 
+# 主人 2026-10-25: 思考强度默认 high — max 在长上下文里会想几分钟才出正文。
+# config 的 extra_body.reasoning_effort 或按轮 contextvar 仍可覆盖。
+_DEFAULT_REASONING_EFFORT = "high"
+
+
 def _with_deepseek_thinking_defaults(
     base_url: str,
     model: str,
     extra_body: dict[str, Any],
 ) -> dict[str, Any]:
-    """Enable DeepSeek v4 thinking mode at max effort unless config overrides it."""
+    """Enable DeepSeek v4 thinking mode at the default effort unless config overrides it."""
     body = dict(extra_body or {})
     if not _looks_like_deepseek_thinking_route(base_url, model):
         return body
     if "thinking" not in body:
         body["thinking"] = {"type": "enabled"}
     if "reasoning_effort" not in body:
-        body["reasoning_effort"] = "max"
+        body["reasoning_effort"] = _DEFAULT_REASONING_EFFORT
     return body
 
 
@@ -763,28 +768,31 @@ def _with_thinking_max_defaults(
     model: str,
     extra_body: dict[str, Any],
 ) -> dict[str, Any]:
-    """主人 2026-08-10: 全部 AI 通道思考强度默认拉满 (max), config extra_body 显式值仍可覆盖。
+    """全部 AI 通道思考强度默认 high (主人 2026-10-25: max 想太久), config extra_body 显式值仍可覆盖。
 
     - Ollama 原生路由: 不动 (走自己的 think/options 开关, reasoning_effort 无意义)。
-    - DeepSeek v4: thinking.enabled + reasoning_effort=max (保持原行为)。
+    - DeepSeek v4: thinking.enabled + reasoning_effort=high。
     - GLM/bigmodel (z.ai): thinking.enabled (GLM 无 effort 档位, enabled 即满档思考)。
-    - 其它 OpenAI-compatible (opencode zen 的 gpt-5.6-luna 等 reasoning 模型): reasoning_effort=max。
+    - 其它 OpenAI-compatible (opencode zen 的 gpt-5.6-luna 等 reasoning 模型): reasoning_effort=high。
     """
     body = dict(extra_body or {})
     if _looks_like_ollama_route(base_url, api_key, body):
         return body
+    # 主人 2026-10-25: 超时重发时按轮降思考强度 (contextvar, 见 set_current_reasoning_effort)
+    effort_override = (globals().get("_current_reasoning_effort_var") and
+                       (_current_reasoning_effort_var.get() or "").strip() or None)
     if _looks_like_deepseek_thinking_route(base_url, model):
         if "thinking" not in body:
             body["thinking"] = {"type": "enabled"}
         if "reasoning_effort" not in body:
-            body["reasoning_effort"] = "max"
+            body["reasoning_effort"] = effort_override or _DEFAULT_REASONING_EFFORT
         return body
     if _looks_like_bigmodel_route(base_url):
         if "thinking" not in body:
             body["thinking"] = {"type": "enabled"}
         return body
     if "reasoning_effort" not in body:
-        body["reasoning_effort"] = "max"
+        body["reasoning_effort"] = effort_override or _DEFAULT_REASONING_EFFORT
     return body
 
 
@@ -1225,6 +1233,47 @@ def get_current_model_override() -> str | None:
 def reset_current_model_override(token: contextvars.Token) -> None:
     """恢复 `set_current_model_override()` 之前的模型覆盖。"""
     _current_model_override_var.reset(token)
+
+
+# 主人 2026-10-25: 单轮墙钟/思考强度覆盖。
+# 流式连接靠心跳续命, httpx 的 read timeout 管不住长思考; 这两条 contextvar 让
+# handle_chat 的「超时 → 取消 → 重发」链路把整轮钉上墙钟, 并在重发时降思考强度。
+_current_stream_deadline_var: contextvars.ContextVar[float] = contextvars.ContextVar(
+    "catty_current_stream_deadline", default=0.0,
+)
+_current_reasoning_effort_var: contextvars.ContextVar[str | None] = contextvars.ContextVar(
+    "catty_current_reasoning_effort", default=None,
+)
+
+
+def set_current_stream_deadline(seconds: float) -> contextvars.Token:
+    """整轮流式上限(秒, 0=不限)。所有走 _stream_chat_completion_attempt 的通道都受它约束。"""
+    try:
+        value = float(seconds or 0.0)
+    except (TypeError, ValueError):
+        value = 0.0
+    return _current_stream_deadline_var.set(max(value, 0.0))
+
+
+def reset_current_stream_deadline(token: contextvars.Token) -> None:
+    _current_stream_deadline_var.reset(token)
+
+
+def get_current_stream_deadline() -> float:
+    return float(_current_stream_deadline_var.get() or 0.0)
+
+
+def set_current_reasoning_effort(effort: str | None) -> contextvars.Token:
+    """按轮覆写 reasoning_effort (None/空 = 恢复默认 high)。只影响本请求上下文。"""
+    return _current_reasoning_effort_var.set((effort or "").strip() or None)
+
+
+def reset_current_reasoning_effort(token: contextvars.Token) -> None:
+    _current_reasoning_effort_var.reset(token)
+
+
+def get_current_reasoning_effort() -> str | None:
+    return _current_reasoning_effort_var.get()
 
 
 def _effective_main_model(config: Config) -> str:
@@ -2191,21 +2240,48 @@ async def _stream_chat_completion_attempt(
             line_iter = response.aiter_lines().__aiter__()
             terminal_deadline: float | None = None
             loop = asyncio.get_running_loop()
+            # 主人 2026-10-25: 整轮墙钟兜底 — 流式心跳会让 read timeout 永远不触发。
+            hard_limit = 0.0
+            try:
+                hard_limit = float(_current_stream_deadline_var.get() or 0.0)
+            except Exception:  # noqa: BLE001
+                hard_limit = 0.0
+            hard_deadline = loop.time() + hard_limit if hard_limit > 0 else None
             while True:
+                wait_remaining: float | None = None
+                if hard_deadline is not None:
+                    wait_remaining = hard_deadline - loop.time()
+                    if wait_remaining <= 0:
+                        _logger.warning(
+                            "AI stream hit %.1fs wall-clock cap; closing with %d chars",
+                            hard_limit, len(text_accum),
+                        )
+                        break
+                if terminal_deadline is not None:
+                    remaining = terminal_deadline - loop.time()
+                    if remaining <= 0:
+                        break
+                    wait_remaining = (
+                        remaining if wait_remaining is None
+                        else min(wait_remaining, remaining)
+                    )
                 try:
-                    if terminal_deadline is None:
+                    if wait_remaining is None:
                         line = await line_iter.__anext__()
                     else:
-                        remaining = terminal_deadline - loop.time()
-                        if remaining <= 0:
-                            break
                         line = await asyncio.wait_for(
                             line_iter.__anext__(),
-                            timeout=remaining,
+                            timeout=wait_remaining,
                         )
                 except StopAsyncIteration:
                     break
                 except asyncio.TimeoutError:
+                    if hard_deadline is not None and loop.time() >= hard_deadline:
+                        _logger.warning(
+                            "AI stream hit %.1fs wall-clock cap; closing with %d chars",
+                            hard_limit, len(text_accum),
+                        )
+                        break
                     if terminal_deadline is not None:
                         _logger.warning(
                             "AI stream sent finish_reason without [DONE]/usage; "
