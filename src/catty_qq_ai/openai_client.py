@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import base64
 from collections import deque
+import contextlib
 import contextvars
 import hashlib
 from io import BytesIO
@@ -10,8 +11,9 @@ import json
 import logging
 import re
 import time
-from typing import Any, Callable
+from typing import Any, AsyncIterator, Callable
 from urllib.parse import urlparse
+import weakref
 
 import httpx
 from PIL import Image, ImageSequence
@@ -951,6 +953,47 @@ def _client_kwargs(timeout: float, proxy: str) -> dict[str, Any]:
     if proxy.strip():
         kwargs["proxy"] = proxy.strip()
     return kwargs
+
+
+# 长连接池: 旧实现每次请求都新建 AsyncClient, 每次重新 TCP+TLS 握手 (生产到 opencode.ai
+# 实测中位 ~0.4s, 偶发 4s+, 抽样里还有握手失败)。按 event loop 缓存 client 复用连接;
+# transport 的 retries 只重试「建连失败」, 那时请求还没发出, 不会重复生成。
+_REAL_HTTPX_ASYNC_CLIENT = httpx.AsyncClient
+_POOLED_HTTP_CLIENTS: "weakref.WeakKeyDictionary[asyncio.AbstractEventLoop, dict[tuple[Any, ...], httpx.AsyncClient]]" = (
+    weakref.WeakKeyDictionary()
+)
+_POOL_CONNECT_RETRIES = 2
+_POOL_KEEPALIVE_EXPIRY_SECONDS = 60.0
+
+
+@contextlib.asynccontextmanager
+async def _http_client(timeout: float, proxy: str) -> AsyncIterator[httpx.AsyncClient]:
+    kwargs = _client_kwargs(timeout, proxy)
+    if httpx.AsyncClient is not _REAL_HTTPX_ASYNC_CLIENT:
+        # 测试会 patch httpx.AsyncClient 注入 fake / MockTransport: 保持每请求新建的旧语义
+        async with httpx.AsyncClient(**kwargs) as client:
+            yield client
+        return
+    clients = _POOLED_HTTP_CLIENTS.setdefault(asyncio.get_running_loop(), {})
+    client_timeout = kwargs["timeout"]
+    proxy_url = str(kwargs.get("proxy") or "")
+    key = (client_timeout.connect, client_timeout.read, client_timeout.write, client_timeout.pool, proxy_url)
+    client = clients.get(key)
+    if client is None or client.is_closed:
+        client = httpx.AsyncClient(
+            transport=httpx.AsyncHTTPTransport(
+                retries=_POOL_CONNECT_RETRIES,
+                proxy=proxy_url or None,
+                limits=httpx.Limits(
+                    max_keepalive_connections=10,
+                    keepalive_expiry=_POOL_KEEPALIVE_EXPIRY_SECONDS,
+                ),
+            ),
+            timeout=client_timeout,
+            follow_redirects=bool(kwargs.get("follow_redirects", True)),
+        )
+        clients[key] = client
+    yield client
 
 
 def _ollama_options(
@@ -1999,9 +2042,10 @@ def _log_cache_stats(
                 diagnostics=_cohort_diagnostics,
             ),
         )
-        # rolling 命中率连续 3 次 < 90% → warn (主人目标 95-98%)
+        # rolling 命中率连续 3 次 < 90% → 提示 (主人目标 95-98%)。主人 2026-10-25: 当前线路
+        # cache 命中不计费, 降到 DEBUG, 不再占主日志 WARNING。
         if stats.should_warn:
-            _logger.warning(
+            _logger.debug(
                 f"deepseek cache rolling hit_rate dropped to {stats.roll_rate:.0%} "
                 f"(target 95-98%), check prefix stability",
             )
@@ -2082,7 +2126,7 @@ def _log_cache_stats(
         ),
     )
     if stats.should_warn:
-        _logger.warning(
+        _logger.debug(
             f"cache rolling hit_rate ({_provider}) dropped to {stats.roll_rate:.0%} "
             f"(target 95-98%), check prefix/breakpoints/TTL",
         )
@@ -2128,7 +2172,7 @@ async def _stream_chat_completion_attempt(
     usage: dict[str, Any] | None = None
     role = "assistant"
 
-    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+    async with _http_client(timeout, proxy) as client:
         async with client.stream(
             "POST", url, headers=headers, json=payload,
         ) as response:
@@ -2677,7 +2721,7 @@ async def _stream_responses_attempt(
     completed: dict[str, Any] | None = None
     error_message: str | None = None
 
-    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+    async with _http_client(timeout, proxy) as client:
         async with client.stream("POST", url, headers=headers, json=body) as response:
             if response.status_code >= 400:
                 try:
@@ -3306,7 +3350,7 @@ async def _post_chat_completion_raw(
                 return data
 
             # === Non-streaming branch (现有逻辑保留 + Responses 转换) ===
-            async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+            async with _http_client(timeout, proxy) as client:
                 response = await client.post(
                     _responses_url(base_url) if _responses_mode else _chat_completions_url(base_url),
                     headers=headers,
@@ -3439,7 +3483,7 @@ async def _post_ollama_chat(
         "Content-Type": "application/json",
         **extra_headers,
     }
-    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+    async with _http_client(timeout, proxy) as client:
         response = await client.post(_ollama_chat_url(base_url), headers=headers, json=payload)
 
     if response.status_code >= 400:
@@ -3498,7 +3542,7 @@ async def _vision_image_url(config: Config, url: str) -> str:
                 return _first_frame_data_url(data) or url
         return url
     timeout = config.catty_vision_request_timeout or config.catty_request_timeout
-    async with httpx.AsyncClient(**_client_kwargs(timeout, config.catty_http_proxy)) as client:
+    async with _http_client(timeout, config.catty_http_proxy) as client:
         response = await client.get(url)
     response.raise_for_status()
     content_type = response.headers.get("content-type", "").lower()
@@ -3547,7 +3591,7 @@ def _image_analysis_from_reply(reply: str) -> dict[str, Any]:
 
 async def download_binary(config: Config, url: str, *, timeout: float | None = None) -> tuple[bytes, str]:
     request_timeout = timeout or config.catty_vision_request_timeout or config.catty_request_timeout
-    async with httpx.AsyncClient(**_client_kwargs(request_timeout, config.catty_http_proxy)) as client:
+    async with _http_client(request_timeout, config.catty_http_proxy) as client:
         response = await client.get(url)
     response.raise_for_status()
     return response.content, response.headers.get("content-type", "")

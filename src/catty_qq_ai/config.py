@@ -369,6 +369,12 @@ class Config(BaseModel):
     catty_auto_fetch_hourly_budget: int = 20
     catty_auto_fetch_timeout_seconds: float = 12.0
     catty_auto_fetch_max_question_chars: int = 300
+    # 网页配图直接进主请求 (主人 2026-10-25): 抓到正文的页面再抽 og:image/img 配图,
+    # 缩到 max_dim 转 JPEG data URL, 以 image_url part 挂到主 AI 的 user 消息上。
+    catty_auto_fetch_image_enabled: bool = True
+    catty_auto_fetch_image_max: int = 2
+    catty_auto_fetch_image_max_dim: int = 720
+    catty_auto_fetch_image_max_bytes: int = 600_000
     catty_nsfw_search_enabled: bool = True
     catty_nsfw_search_max_results: int = 4
     catty_nsfw_search_request_timeout: float | None = 15.0
@@ -625,6 +631,11 @@ class Config(BaseModel):
     catty_memory_reply_boost_max_probability: float = 0.95
     # 记忆落盘 debounce：把高频群消息触发的 _save() 合并成最多每 N 秒一次实际写盘。
     catty_memory_save_debounce_seconds: float = 2.0
+    # 本地数据快照 (backup/data-*.zip): memory/好感/会话等 JSON 断电或误删时能恢复。
+    # 按最新一份快照的时间判断, 部署日频繁重启也只按 interval 拍一份。
+    catty_data_backup_enabled: bool = True
+    catty_data_backup_keep: int = 7
+    catty_data_backup_interval_hours: float = 24.0
     catty_special_group_active_window_enabled: bool = False
     catty_special_group_active_minutes_per_hour: int = 10
     catty_group_titles: dict[str, str] = Field(default_factory=dict)

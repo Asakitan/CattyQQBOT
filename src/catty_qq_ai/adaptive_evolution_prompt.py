@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import threading
 import uuid
@@ -140,7 +141,10 @@ class AdaptiveEvolutionPromptStore:
         self._path.parent.mkdir(parents=True, exist_ok=True)
         temp = self._path.with_suffix(self._path.suffix + ".tmp")
         try:
-            temp.write_text(json.dumps({"version": 1, "scopes": self._data}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            with temp.open("w", encoding="utf-8") as handle:
+                handle.write(json.dumps({"version": 1, "scopes": self._data}, ensure_ascii=False, indent=2) + "\n")
+                handle.flush()
+                os.fsync(handle.fileno())
             temp.replace(self._path)
         except OSError:
             try:

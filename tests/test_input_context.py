@@ -296,6 +296,7 @@ class RequestInputIsolationTests(_IsolatedPackage):
             "_log_cache_stats": lambda *args, **kwargs: None,
             "urlparse": urlparse, "json": json, "asyncio": asyncio,
             "httpx": types.SimpleNamespace(AsyncClient=lambda **kwargs: self._http_client()),
+            "_http_client": lambda timeout, proxy: self._http_client(),
         })
 
     def _http_client(self):

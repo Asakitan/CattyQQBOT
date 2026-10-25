@@ -346,7 +346,10 @@ class QzoneFeedStore:
                 self.path.parent.mkdir(parents=True, exist_ok=True)
                 tmp = self.path.with_suffix(self.path.suffix + ".tmp")
                 try:
-                    tmp.write_text(json.dumps(self._payload_locked(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                    with tmp.open("w", encoding="utf-8") as handle:
+                        handle.write(json.dumps(self._payload_locked(), ensure_ascii=False, indent=2) + "\n")
+                        handle.flush()
+                        os.fsync(handle.fileno())
                     os.replace(tmp, self.path)
                 finally:
                     if tmp.exists():

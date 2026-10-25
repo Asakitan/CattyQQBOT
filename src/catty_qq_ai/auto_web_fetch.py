@@ -13,7 +13,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
 import asyncio
+import base64
 import html as _html
+import io
 import logging
 import re
 import time
@@ -99,8 +101,10 @@ class AutoFetchOutcome:
     reason: str = ""
     skipped: str = ""
     terms: tuple[str, ...] = ()
-    pages: list[dict[str, str]] = field(default_factory=list)
+    pages: list[dict[str, Any]] = field(default_factory=list)
     snippets: list[dict[str, str]] = field(default_factory=list)
+    # 网页配图: {"url", "alt", "page", "data_url"}。data_url 可直接当 image_url part 用
+    images: list[dict[str, Any]] = field(default_factory=list)
     context: str = ""
     from_cache: bool = False
 
@@ -351,6 +355,251 @@ def _readable_body(html_doc: str) -> str:
     return _blocks_text(body)
 
 
+# ── 网页配图 ────────────────────────────────────────────────────────────
+# 图片直接以 image_url part 挂到主请求上 (与 QQ 附图 passthrough 同一形态), 让主 AI 真看到
+# 页面配图 (产品图/截图/版式图), 而不只是读文字。Pillow 负责缩到 max_dim 再转 JPEG 控制体积。
+_META_IMAGE_RE = re.compile(
+    r"<meta\b[^>]*?(?:property|name)\s*=\s*[\"']"
+    r"(?:og:image(?::url|:secure_url)?|twitter:image(?::src)?)[\"'][^>]*>",
+    re.IGNORECASE,
+)
+_IMG_TAG_RE = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
+_IMG_SRC_ATTRS = ("src", "data-src", "data-original", "data-lazy-src", "data-actualsrc")
+_IMG_SKIP_SUFFIXES = (".svg", ".ico")
+_IMG_SKIP_HINTS = (
+    "sprite", "icon", "logo", "avatar", "emoji", "pixel", "blank.", "placeholder",
+    "loading", "spacer", "1x1", "transparent.",
+)
+_IMG_PART_CONTENT_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
+
+
+def _tag_attr(tag: str, name: str) -> str:
+    match = re.search(
+        rf"\b{re.escape(name)}\s*=\s*([\"'])(.*?)\1", tag, re.IGNORECASE | re.DOTALL
+    )
+    return _html.unescape(match.group(2)).strip() if match else ""
+
+
+def _image_src_from_tag(tag: str) -> str:
+    for name in _IMG_SRC_ATTRS:
+        value = _tag_attr(tag, name)
+        if value:
+            return value
+    srcset = _tag_attr(tag, "srcset")
+    if srcset:
+        first = srcset.split(",", 1)[0].strip().split(" ", 1)[0]
+        return first
+    return ""
+
+
+def _normalize_image_url(raw: str, base_url: str) -> str:
+    value = _html.unescape(str(raw or "")).strip()
+    if not value or value.startswith("data:"):
+        return ""
+    absolute = urljoin(base_url, value)
+    parsed = urlsplit(absolute)
+    if parsed.scheme.lower() not in {"http", "https"}:
+        return ""
+    if any(parsed.path.lower().endswith(suffix) for suffix in _IMG_SKIP_SUFFIXES):
+        return ""
+    haystack = absolute.casefold()
+    if any(hint in haystack for hint in _IMG_SKIP_HINTS):
+        return ""
+    return absolute
+
+
+def extract_image_candidates(
+    page_html: str, page_url: str, *, limit: int = 6
+) -> list[dict[str, str]]:
+    """从页面 HTML 抽候选配图: og:image 优先, 其次 article/main 里的图, 最后其它。"""
+    candidates: list[dict[str, str]] = []
+    seen: set[str] = set()
+
+    def _push(raw: str, alt: str = "") -> None:
+        url = _normalize_image_url(raw, page_url)
+        if not url or url in seen:
+            return
+        seen.add(url)
+        candidates.append({"url": url, "alt": str(alt or "").strip()[:80]})
+
+    for match in _META_IMAGE_RE.finditer(page_html):
+        _push(_tag_attr(match.group(0), "content"))
+
+    regions = [(m.start(), m.end()) for m in _MAIN_REGION_RE.finditer(page_html)]
+    primary: list[str] = []
+    secondary: list[str] = []
+    for match in _IMG_TAG_RE.finditer(page_html):
+        in_main = any(start <= match.start() < end for start, end in regions)
+        (primary if in_main else secondary).append(match.group(0))
+    for tag in [*primary, *secondary]:
+        if len(candidates) >= max(int(limit), 1):
+            break
+        _push(_image_src_from_tag(tag), _tag_attr(tag, "alt"))
+    return candidates[: max(int(limit), 1)]
+
+
+def _image_data_url(data: bytes, content_type: str, *, max_dim: int = 720) -> str | None:
+    """图片字节 → data URL。Pillow 可用时缩放转 JPEG, 否则只收体积内的原始格式。"""
+    if not data:
+        return None
+    max_dim = max(int(max_dim), 160)
+    try:
+        from PIL import Image
+    except Exception:  # noqa: BLE001 - 缺 Pillow 时退回原始字节
+        Image = None
+    if Image is not None:
+        try:
+            with Image.open(io.BytesIO(data)) as image:
+                frame = image.convert("RGB")
+        except Exception:  # noqa: BLE001
+            frame = None
+        if frame is not None:
+            try:
+                if max(frame.size) > max_dim:
+                    frame.thumbnail((max_dim, max_dim))
+                buffer = io.BytesIO()
+                frame.save(buffer, format="JPEG", quality=72, optimize=True)
+                payload = buffer.getvalue()
+            except Exception:  # noqa: BLE001
+                payload = b""
+            if payload and len(payload) <= 900_000:
+                return "data:image/jpeg;base64," + base64.b64encode(payload).decode("ascii")
+    if content_type in _IMG_PART_CONTENT_TYPES and len(data) <= 900_000:
+        return f"data:{content_type};base64," + base64.b64encode(data).decode("ascii")
+    return None
+
+
+async def _fetch_public_image(
+    url: str,
+    *,
+    timeout: float,
+    proxy: str | None = None,
+    max_bytes: int = 600_000,
+) -> dict[str, Any] | None:
+    """下载一页配图 (SSRF 校验 / 流式体积上限 / 只收 image/*)。"""
+    try:
+        from .tools import _TOOL_BROWSER_USER_AGENT, _validate_public_url
+    except Exception:  # noqa: BLE001
+        return None
+    current_url, reason = _validate_public_url(url)
+    if reason or not current_url:
+        return None
+    headers = {
+        "User-Agent": _TOOL_BROWSER_USER_AGENT,
+        "Accept": "image/avif,image/webp,image/*;q=0.9,*/*;q=0.5",
+    }
+    limit = max(int(max_bytes), 32_000)
+    try:
+        async with httpx.AsyncClient(
+            timeout=timeout, follow_redirects=False, proxy=proxy or None
+        ) as client:
+            for _ in range(4):
+                async with client.stream("GET", current_url, headers=headers) as response:
+                    if response.status_code in {301, 302, 303, 307, 308}:
+                        location = response.headers.get("location")
+                        if not location:
+                            return None
+                        next_url, reason = _validate_public_url(urljoin(current_url, location))
+                        if reason or not next_url:
+                            return None
+                        current_url = next_url
+                        continue
+                    if response.status_code >= 400:
+                        return None
+                    content_type = (
+                        (response.headers.get("content-type") or "").split(";", 1)[0].strip().lower()
+                    )
+                    if not content_type.startswith("image/"):
+                        return None
+                    declared = response.headers.get("content-length")
+                    try:
+                        if declared and int(declared) > limit:
+                            return None
+                    except ValueError:
+                        pass
+                    chunks: list[bytes] = []
+                    total = 0
+                    async for chunk in response.aiter_bytes():
+                        total += len(chunk)
+                        if total > limit:
+                            return None
+                        chunks.append(chunk)
+                    data = b"".join(chunks)
+                    if not data:
+                        return None
+                    return {"url": current_url, "content_type": content_type, "data": data}
+    except (httpx.HTTPError, ValueError):
+        return None
+    return None
+
+
+def _page_image_candidates(page: dict[str, Any], limit: int) -> list[dict[str, str]]:
+    images = page.get("images") or []
+    candidates: list[dict[str, str]] = []
+    for item in images:
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("url") or "").strip()
+        if not url:
+            continue
+        candidates.append({"url": url, "alt": str(item.get("alt") or "").strip()[:80]})
+        if len(candidates) >= limit:
+            break
+    return candidates
+
+
+async def _collect_page_images(
+    config: Any,
+    outcome: AutoFetchOutcome,
+    *,
+    deadline: float,
+    proxy: str | None,
+) -> None:
+    """把候选配图下载/缩放成 data URL, 挂到 outcome.images (受 deadline 与张数上限约束)。"""
+    limit = max(int(getattr(config, "catty_auto_fetch_image_max", 2) or 0), 0)
+    if limit <= 0 or not outcome.pages:
+        return
+    try:
+        max_bytes = int(getattr(config, "catty_auto_fetch_image_max_bytes", 600_000) or 600_000)
+    except (TypeError, ValueError):
+        max_bytes = 600_000
+    try:
+        max_dim = int(getattr(config, "catty_auto_fetch_image_max_dim", 720) or 720)
+    except (TypeError, ValueError):
+        max_dim = 720
+    for page in outcome.pages:
+        for candidate in _page_image_candidates(page, limit):
+            if len(outcome.images) >= limit:
+                return
+            remaining = deadline - time.monotonic()
+            if remaining < 0.6:
+                return
+            fetched = await _fetch_public_image(
+                candidate["url"],
+                timeout=min(max(remaining, 0.6), 4.0),
+                proxy=proxy,
+                max_bytes=max_bytes,
+            )
+            if not fetched:
+                continue
+            data_url = await asyncio.to_thread(
+                _image_data_url,
+                fetched["data"],
+                fetched["content_type"],
+                max_dim=max_dim,
+            )
+            if not data_url:
+                continue
+            outcome.images.append(
+                {
+                    "url": fetched["url"],
+                    "alt": candidate.get("alt", ""),
+                    "page": str(page.get("url") or ""),
+                    "data_url": data_url,
+                }
+            )
+
+
 # ── 抓正文 ──────────────────────────────────────────────────────────────
 async def _fetch_page_text(
     url: str,
@@ -399,9 +648,11 @@ async def _fetch_page_text(
         return None
     content_type = (response.headers.get("content-type") or "").lower()
     body_text = response.text
+    images: list[dict[str, str]] = []
     if "html" in content_type or "<html" in body_text[:800].lower():
         title, _ignored = _html_text(body_text)
         body = _readable_body(body_text)
+        images = extract_image_candidates(body_text, current_url, limit=6)
     elif "text/" in content_type or not content_type:
         title, body = "", body_text
     else:
@@ -413,6 +664,7 @@ async def _fetch_page_text(
         "url": current_url,
         "title": (title or "").strip(),
         "text": body[: max(int(max_chars), 200)],
+        "images": images,
     }
 
 
@@ -461,6 +713,11 @@ async def maybe_auto_fetch(
     needed, reason = should_auto_fetch(clean)
     if not needed:
         outcome.skipped = reason
+        return outcome
+    # 知识类问句但剥掉虚词后一个实体词都不剩 (「介绍一下自己」「你是什么东西」): 没有可查的
+    # 对象, 搜出来只会是泛页, 还白等一轮搜索超时。
+    if reason in {"kb_question", "entity_question"} and not terms:
+        outcome.skipped = "no_terms"
         return outcome
     # 用户明确要查/时效信息 → 不看知识库直接查; 其余先探本地知识库
     if reason in {"kb_question", "entity_question"} and terms:
@@ -595,6 +852,12 @@ async def maybe_auto_fetch(
         outcome.pages.append(page)
         used += len(page["text"])
 
+    if outcome.pages and bool(getattr(config, "catty_auto_fetch_image_enabled", True)):
+        try:
+            await _collect_page_images(config, outcome, deadline=deadline, proxy=proxy)
+        except Exception as exc:  # noqa: BLE001
+            _logger.debug("auto_web_fetch image collect failed: %s", exc)
+
     outcome.context = format_auto_fetch_context(outcome)
     _cache_put(cache_key, outcome, current)
     return outcome
@@ -617,6 +880,14 @@ def format_auto_fetch_context(outcome: AutoFetchOutcome) -> str:
             title = page.get("title") or page.get("url", "")
             lines.append(f"{index}. {title} <{page.get('url', '')}>")
             lines.append(f"   {page.get('text', '')}")
+        if outcome.images:
+            lines.append(
+                "同一条消息里已经附上这些网页配图 (按上面的网页顺序, 你自己看图里的内容):"
+            )
+            for index, image in enumerate(outcome.images, 1):
+                label = image.get("alt") or image.get("page") or ""
+                lines.append(f"配图{index}: {label} <{image.get('url', '')}>")
+            lines.append("图里的型号/界面/版式可以当事实用; 图和正文冲突时日期/数字以正文为准。")
     elif outcome.snippets:
         lines.append("联网只拿到搜索结果摘要 (没抓到正文), 摘要可以当参考, 但细节别当确定事实:")
         for index, item in enumerate(outcome.snippets, 1):
@@ -632,3 +903,13 @@ def format_auto_fetch_context(outcome: AutoFetchOutcome) -> str:
         " 摘录和你记忆冲突时以摘录为准, 摘录没覆盖的部分不补编。"
     )
     return "\n".join(lines)
+
+
+def image_parts_from_outcome(outcome: AutoFetchOutcome) -> list[dict[str, Any]]:
+    """把 outcome.images 的 data URL 转成主 AI 请求可直接消费的 image_url parts。"""
+    parts: list[dict[str, Any]] = []
+    for image in outcome.images:
+        data_url = str(image.get("data_url") or "")
+        if data_url.startswith("data:image/"):
+            parts.append({"type": "image_url", "image_url": {"url": data_url}})
+    return parts

@@ -246,7 +246,11 @@
         "negative_ttl_seconds": 900,
         "hourly_budget": 20,
         "timeout_seconds": 12,
-        "max_question_chars": 300
+        "max_question_chars": 300,
+        "image_enabled": true,
+        "image_max": 2,
+        "image_max_dim": 720,
+        "image_max_bytes": 600000
     },
     "tools": {
         "profile_memory_enabled": true,

@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import os
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -17,10 +18,17 @@ from .reply_markers import NO_REPLY_MARKER
 
 
 def _atomic_write_text(path: Path, content: str) -> None:
-    """写到 .tmp 再 os.replace 替换目标，防止写一半被中断留下半截 JSON。"""
+    """写到 .tmp、fsync 落盘后再 replace 替换目标，防止写一半被中断留下半截 JSON。
+
+    只 replace 不 fsync 时，断电可能留下「文件名已指向新文件、数据还没落盘」的
+    全 NUL 文件 (2026-07-03 断电一次清零了 383 个 memory 文件)，所以必须先刷盘再换名。
+    """
     tmp = path.with_suffix(path.suffix + ".tmp")
     try:
-        tmp.write_text(content, encoding="utf-8")
+        with tmp.open("w", encoding="utf-8") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
         tmp.replace(path)
     except Exception:
         try:
@@ -29,6 +37,14 @@ def _atomic_write_text(path: Path, content: str) -> None:
         except OSError:
             pass
         raise
+
+
+def _content_digest(text: str) -> bytes:
+    return hashlib.blake2b(text.encode("utf-8"), digest_size=16).digest()
+
+
+def _compact_json(data: Any) -> str:
+    return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
 OWNER_TITLE = "主人"
@@ -467,6 +483,12 @@ class MemoryStore:
         )
         self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}, "group_game_tags": {}}
         self._dirty: bool = False
+        # path → 最近一次落盘/载入内容的摘要: 内容没变的文件 flush 时直接跳过，
+        # 不再每次全量重写 ~1.7k 个文件 (也缩小断电时「正在写」的文件范围)。
+        self._written_digests: dict[str, bytes] = {}
+        # path → 本实例最近一次写入后的 (mtime_ns, size)，删除记为 None。
+        # 热重载 watcher 据此区分「自己 flush 写的」和「外部编辑」。
+        self._own_write_signatures: dict[str, tuple[int, int] | None] = {}
         if self.enabled:
             self._load()
 
@@ -475,8 +497,39 @@ class MemoryStore:
         # 失败必须让调用方知道，并保留原实例的数据供下一轮重试。
         self.flush_sync(raise_on_error=True)
         self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}, "group_game_tags": {}}
+        self._written_digests = {}
         if self.enabled:
             self._load()
+
+    def own_write_signatures(self) -> dict[str, tuple[int, int] | None]:
+        """本实例写入/删除过的文件签名 (path → (mtime_ns, size)；删除为 None)。"""
+        return dict(self._own_write_signatures)
+
+    def _remember_own_write(self, path: Path) -> None:
+        try:
+            stat = path.stat()
+        except OSError:
+            self._own_write_signatures.pop(str(path), None)
+            return
+        self._own_write_signatures[str(path)] = (stat.st_mtime_ns, stat.st_size)
+
+    def _write_if_changed(self, path: Path, content: str, digest: bytes) -> None:
+        key = str(path)
+        if self._written_digests.get(key) == digest:
+            return
+        _atomic_write_text(path, content)
+        self._written_digests[key] = digest
+        self._remember_own_write(path)
+
+    def _quarantine_unreadable(self, path: Path) -> bool:
+        """把解析失败的文件改名留档，避免每次 reload 都静默跳过、之后再被覆盖。"""
+        target = path.with_name(f"{path.name}.corrupt-{datetime.now():%Y%m%d-%H%M%S}")
+        try:
+            path.replace(target)
+        except OSError as exc:
+            logger.warning(f"memory_store: failed to quarantine unreadable file {path}: {exc}")
+            return False
+        return True
 
     def _resolve_storage_dir(self, configured: str, fallback_name: str) -> Path:
         raw = configured.strip()
@@ -500,10 +553,21 @@ class MemoryStore:
 
     def _load(self) -> None:
         if self.path.exists():
+            loaded = None
             try:
-                loaded = json.loads(self.path.read_text(encoding="utf-8-sig"))
-            except (OSError, json.JSONDecodeError):
-                loaded = None
+                index_text = self.path.read_text(encoding="utf-8-sig")
+                loaded = json.loads(index_text)
+            except OSError:
+                pass
+            except ValueError as exc:
+                # 坏掉的 index 下次 flush 会被整个覆盖 (images/anger/tags 全丢)，先留档再说。
+                if self._quarantine_unreadable(self.path):
+                    logger.warning(
+                        f"memory_store: unreadable index {self.path} ({type(exc).__name__}); "
+                        "moved aside as *.corrupt-*"
+                    )
+            else:
+                self._written_digests[str(self.path)] = _content_digest(index_text)
             if isinstance(loaded, dict):
                 self._data["users"] = loaded.get("users", {}) if isinstance(loaded.get("users", {}), dict) else {}
                 self._data["groups"] = loaded.get("groups", {}) if isinstance(loaded.get("groups", {}), dict) else {}
@@ -518,10 +582,16 @@ class MemoryStore:
     def _load_entity_files(self, directory: Path, id_key: str, filename_prefix: str, target: dict[str, Any]) -> None:
         if not directory.is_dir():
             return
+        quarantined: list[str] = []
         for path in sorted(directory.glob("*.json")):
             try:
                 loaded = json.loads(path.read_text(encoding="utf-8-sig"))
-            except (OSError, json.JSONDecodeError):
+            except OSError:
+                continue
+            except ValueError:
+                # JSONDecodeError / UnicodeDecodeError: 文件本身坏了 (如断电后整文件全 NUL)。
+                if self._quarantine_unreadable(path):
+                    quarantined.append(path.name)
                 continue
             if not isinstance(loaded, dict):
                 continue
@@ -536,6 +606,14 @@ class MemoryStore:
                 data = {key: value for key, value in loaded.items() if key not in {id_key, "updated_at"}}
             if data:
                 target[entity_id] = data
+                canonical = directory / f"{filename_prefix}{_safe_storage_id(entity_id)}.json"
+                self._written_digests[str(canonical)] = _content_digest(_compact_json(data))
+        if quarantined:
+            preview = ", ".join(quarantined[:5])
+            logger.warning(
+                f"memory_store: {len(quarantined)} unreadable file(s) in {directory} "
+                f"moved aside as *.corrupt-* (e.g. {preview}); their memory was NOT loaded"
+            )
 
     def _save(self) -> None:
         """标记内存有变更，等 background_flush_loop 或 flush_sync 真正落盘。
@@ -548,9 +626,10 @@ class MemoryStore:
         self._dirty = True
 
     def _persist_now(self) -> None:
-        """全量同步把 self._data 落盘（index + 每个 user/group 一个文件）。
+        """把 self._data 落盘（index + 每个 user/group 一个文件）。
 
-        所有文件都走 atomic write，防止写到一半被中断后留下损坏 JSON。
+        所有文件都走 atomic write，防止写到一半被中断后留下损坏 JSON；
+        内容与上次落盘/载入一致的文件直接跳过。
         """
         if not self.enabled:
             return
@@ -567,7 +646,8 @@ class MemoryStore:
             "user_storage_dir": str(self.user_storage_dir),
             "group_storage_dir": str(self.group_storage_dir),
         }
-        _atomic_write_text(self.path, json.dumps(index, ensure_ascii=False, indent=2) + "\n")
+        index_text = json.dumps(index, ensure_ascii=False, indent=2) + "\n"
+        self._write_if_changed(self.path, index_text, _content_digest(index_text))
         for user_id, user in self._data.get("users", {}).items():
             if isinstance(user, dict):
                 self._ensure_note_metadata(user, scope="user", entity_id=str(user_id))
@@ -636,17 +716,24 @@ class MemoryStore:
             group_file.unlink(missing_ok=True)
         except OSError:
             pass
+        else:
+            self._written_digests.pop(str(group_file), None)
+            if file_existed:
+                self._own_write_signatures[str(group_file)] = None
         self._save()
         return existed or file_existed
 
     def _write_entity_file(self, path: Path, id_key: str, entity_id: str, data: dict[str, Any]) -> None:
+        digest = _content_digest(_compact_json(data))
+        if self._written_digests.get(str(path)) == digest:
+            return
         path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
             id_key: entity_id,
             "updated_at": _now(),
             "data": data,
         }
-        _atomic_write_text(path, json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+        self._write_if_changed(path, json.dumps(payload, ensure_ascii=False, indent=2) + "\n", digest)
 
     def _anger_key(self, event: MessageEvent) -> str:
         if isinstance(event, GroupMessageEvent):

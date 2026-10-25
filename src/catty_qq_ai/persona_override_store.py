@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import os
 import threading
 import time
 from pathlib import Path
@@ -42,10 +43,10 @@ class PersonaOverrideStore:
         tmp = self._path.with_suffix(".json.tmp")
         try:
             self._path.parent.mkdir(parents=True, exist_ok=True)
-            tmp.write_text(
-                json.dumps(self._data, ensure_ascii=False, indent=2),
-                encoding="utf-8",
-            )
+            with tmp.open("w", encoding="utf-8") as handle:
+                handle.write(json.dumps(self._data, ensure_ascii=False, indent=2))
+                handle.flush()
+                os.fsync(handle.fileno())
             tmp.replace(self._path)
         except OSError:
             pass

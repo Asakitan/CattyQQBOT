@@ -9,6 +9,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import os
 import math
 import time
 from collections import OrderedDict
@@ -503,10 +504,10 @@ class SessionCache:
         }
         try:
             self._dir.mkdir(parents=True, exist_ok=True)
-            tmp.write_text(
-                json.dumps(payload, ensure_ascii=False, indent=2),
-                encoding="utf-8",
-            )
+            with tmp.open("w", encoding="utf-8") as handle:
+                handle.write(json.dumps(payload, ensure_ascii=False, indent=2))
+                handle.flush()
+                os.fsync(handle.fileno())
             tmp.replace(path)
             self._paths[key] = path
             # 旧命名 (无 digest) 文件: 仅当 JSON 内 key 确实属于本会话才清理,

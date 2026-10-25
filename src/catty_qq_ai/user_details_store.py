@@ -22,6 +22,7 @@ catty_rag 要 query 才召回. 这个 store 是『可枚举的对方画像细节
 from __future__ import annotations
 
 import json
+import os
 import re
 import threading
 import time
@@ -397,7 +398,10 @@ class UserDetailsStore:
         }
         text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
         try:
-            tmp.write_text(text, encoding="utf-8")
+            with tmp.open("w", encoding="utf-8") as handle:
+                handle.write(text)
+                handle.flush()
+                os.fsync(handle.fileno())
             tmp.replace(self._path)
         except OSError:
             try:

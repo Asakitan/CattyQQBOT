@@ -267,6 +267,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "hourly_budget": 20,
         "timeout_seconds": 12,
         "max_question_chars": 300,
+        "image_enabled": True,
+        "image_max": 2,
+        "image_max_dim": 720,
+        "image_max_bytes": 600000,
     },
     "tools": {
         "profile_memory_enabled": True,
@@ -825,6 +829,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_AUTO_FETCH_HOURLY_BUDGET", auto_fetch.get("hourly_budget"))
     _set_env("CATTY_AUTO_FETCH_TIMEOUT_SECONDS", auto_fetch.get("timeout_seconds"))
     _set_env("CATTY_AUTO_FETCH_MAX_QUESTION_CHARS", auto_fetch.get("max_question_chars"))
+    _set_env("CATTY_AUTO_FETCH_IMAGE_ENABLED", auto_fetch.get("image_enabled"))
+    _set_env("CATTY_AUTO_FETCH_IMAGE_MAX", auto_fetch.get("image_max"))
+    _set_env("CATTY_AUTO_FETCH_IMAGE_MAX_DIM", auto_fetch.get("image_max_dim"))
+    _set_env("CATTY_AUTO_FETCH_IMAGE_MAX_BYTES", auto_fetch.get("image_max_bytes"))
 
     nsfw_search = _section(data, "nsfw_search")
     _set_env("CATTY_NSFW_SEARCH_ENABLED", nsfw_search.get("enabled"))
@@ -1079,6 +1087,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_USER_TITLES", memory.get("user_titles"), json_value=True)
     _set_env("CATTY_GROUP_USER_TITLES", memory.get("group_user_titles"), json_value=True)
     _set_env("CATTY_MEMORY_GAME_SIZE_COMPRESS_THRESHOLD_BYTES", memory.get("game_size_compress_threshold_bytes"))
+    _set_env("CATTY_DATA_BACKUP_ENABLED", memory.get("backup_enabled"))
+    _set_env("CATTY_DATA_BACKUP_KEEP", memory.get("backup_keep"))
+    _set_env("CATTY_DATA_BACKUP_INTERVAL_HOURS", memory.get("backup_interval_hours"))
 
     game_context = _section(data, "game_context")
     _set_env("CATTY_GAME_CONTEXT_STAR_RESONANCE_GROUP_IDS", game_context.get("star_resonance_group_ids"), json_value=True)

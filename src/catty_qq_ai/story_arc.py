@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import threading
 import time
 from dataclasses import dataclass, asdict, field
@@ -874,7 +875,10 @@ class StoryArcStore:
         }
         text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
         try:
-            tmp.write_text(text, encoding="utf-8")
+            with tmp.open("w", encoding="utf-8") as handle:
+                handle.write(text)
+                handle.flush()
+                os.fsync(handle.fileno())
             tmp.replace(self._path)
         except OSError:
             try:

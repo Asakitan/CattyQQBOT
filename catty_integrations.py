@@ -16,6 +16,25 @@ import zipfile
 
 
 _QZONE_BRIDGE_START_LOCK = threading.Lock()
+# 子进程 stdout 直写的日志没有轮转: qzone_bridge.log 从 2026-08-18 起涨到 54MB 没切过。
+# 只能在拉起子进程前切 (运行中的子进程握着句柄, Windows 上改不了名)。
+_CHILD_LOG_MAX_BYTES = 20 * 1024 * 1024
+_CHILD_LOG_BACKUPS = 2
+
+
+def _rotate_child_log(log_path: Path) -> None:
+    try:
+        if log_path.stat().st_size <= _CHILD_LOG_MAX_BYTES:
+            return
+    except OSError:
+        return
+    try:
+        for index in range(_CHILD_LOG_BACKUPS, 0, -1):
+            source = log_path if index == 1 else log_path.with_name(f"{log_path.name}.{index - 1}")
+            if source.exists():
+                os.replace(source, log_path.with_name(f"{log_path.name}.{index}"))
+    except OSError as exc:
+        print(f"Could not rotate {log_path.name}: {exc}")
 
 
 def _as_bool(value: Any, default: bool = False) -> bool:
@@ -552,13 +571,17 @@ def _start_local_training(local_training: dict[str, Any], config_dir: Path) -> N
 
     log_path = _resolve_path(local_training.get("progress_log_path", "training/local_training.log"), config_dir)
     log_path.parent.mkdir(parents=True, exist_ok=True)
+    _rotate_child_log(log_path)
     log_file = log_path.open("ab")
-    subprocess.Popen(
-        args,
-        cwd=str(config_dir),
-        stdout=log_file,
-        stderr=subprocess.STDOUT,
-    )
+    try:
+        subprocess.Popen(
+            args,
+            cwd=str(config_dir),
+            stdout=log_file,
+            stderr=subprocess.STDOUT,
+        )
+    finally:
+        log_file.close()
     try:
         display_log_path = log_path.relative_to(config_dir)
     except ValueError:
@@ -735,16 +758,21 @@ def _start_qzone_bridge(qzone: dict[str, Any], config_dir: Path) -> bool:
 
         log_path = _resolve_path(qzone.get("bridge_log_path", "logs/qzone_bridge.log"), config_dir)
         log_path.parent.mkdir(parents=True, exist_ok=True)
+        _rotate_child_log(log_path)
         log_file = log_path.open("ab")
         creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0
-        proc = subprocess.Popen(
-            [node_executable, str(entry)],
-            cwd=str(workdir.resolve()),
-            stdout=log_file,
-            stderr=subprocess.STDOUT,
-            env=os.environ.copy(),
-            creationflags=creationflags,
-        )
+        try:
+            proc = subprocess.Popen(
+                [node_executable, str(entry)],
+                cwd=str(workdir.resolve()),
+                stdout=log_file,
+                stderr=subprocess.STDOUT,
+                env=os.environ.copy(),
+                creationflags=creationflags,
+            )
+        finally:
+            # 子进程已继承句柄; 父进程这份不关会一直泄漏 (每拉起一次 bridge 多一个)
+            log_file.close()
         healthy = False
         for attempt in range(50):
             if _qzone_bridge_is_healthy(base_url):

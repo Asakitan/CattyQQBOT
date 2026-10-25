@@ -8,6 +8,7 @@ small parameter pointer only.
 from __future__ import annotations
 
 import json
+import os
 import time
 from pathlib import Path
 from typing import Any
@@ -220,7 +221,10 @@ class TimeBucketContextStore:
             path = self._path(scope)
             tmp = path.with_suffix(path.suffix + ".tmp")
             payload = self._data.get(scope) or {"key": scope, "current": None, "finalized": []}
-            tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+            with tmp.open("w", encoding="utf-8") as handle:
+                handle.write(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
+                handle.flush()
+                os.fsync(handle.fileno())
             tmp.replace(path)
             self._dirty.discard(scope)
             return True

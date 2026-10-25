@@ -3445,11 +3445,13 @@ def _save_session_persona_baselines() -> None:
             "scopes": _session_persona_names,
         }
         try:
+            import os as _os  # 局部 import: 测试会把本函数放进隔离命名空间执行
+
             path.parent.mkdir(parents=True, exist_ok=True)
-            tmp.write_text(
-                json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
+            with tmp.open("w", encoding="utf-8") as handle:
+                handle.write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+                handle.flush()
+                _os.fsync(handle.fileno())
             tmp.replace(path)
         except OSError as exc:
             logger.warning(f"persona baseline: failed to save {path}: {exc}")
@@ -3678,6 +3680,11 @@ async def _execute_schema_gated_tool_call(
         if "unexpected keyword argument 'allowed_names'" not in str(exc):
             raise
         return await execute_tool_call(name, arguments_json, tool_ctx)
+
+
+def _cancel_task_if_pending(task: asyncio.Task | None) -> None:
+    if task is not None and not task.done():
+        task.cancel()
 
 
 def _schedule_quick_ack(
@@ -4645,32 +4652,82 @@ def _file_signature(path: Path | None) -> tuple[int, int] | None:
 
 
 def _tree_signature(paths: list[Path], *, suffixes: set[str] | None = None) -> tuple[tuple[str, int, int], ...]:
+    # scandir 的目录项自带 mtime/size, 不再逐文件 stat + resolve(): 旧写法扫一遍
+    # 生产 ~1.7k 个 memory 文件要 ~150ms, 每 1.5s 在事件循环里卡一次。
+    # key 用扫描根拼出来的路径 (与 MemoryStore 写文件时的 str(path) 一致)。
+    import os as _os
+
     entries: list[tuple[str, int, int]] = []
-    seen: set[Path] = set()
+    seen: set[str] = set()
     for root in paths:
+        root_key = _os.path.normcase(_os.path.abspath(str(root)))
+        if root_key in seen:
+            continue
+        seen.add(root_key)
         try:
-            resolved_root = root.resolve()
+            if root.is_file():
+                if suffixes is None or root.suffix.lower() in suffixes:
+                    stat = root.stat()
+                    entries.append((str(root), stat.st_mtime_ns, stat.st_size))
+                continue
+            if not root.is_dir():
+                continue
         except OSError:
             continue
-        if resolved_root in seen:
-            continue
-        seen.add(resolved_root)
-        if root.is_file():
-            candidates = [root]
-        elif root.is_dir():
-            candidates = [path for path in root.rglob("*") if path.is_file()]
-        else:
-            continue
-        for path in candidates:
-            if suffixes is not None and path.suffix.lower() not in suffixes:
-                continue
+        pending = [str(root)]
+        while pending:
+            directory = pending.pop()
             try:
-                stat = path.stat()
-                key = str(path.resolve())
+                with _os.scandir(directory) as iterator:
+                    for entry in iterator:
+                        try:
+                            if entry.is_dir(follow_symlinks=False):
+                                pending.append(entry.path)
+                                continue
+                            if not entry.is_file():
+                                continue
+                            if suffixes is not None and _os.path.splitext(entry.name)[1].lower() not in suffixes:
+                                continue
+                            stat = entry.stat()
+                        except OSError:
+                            continue
+                        entries.append((entry.path, stat.st_mtime_ns, stat.st_size))
             except OSError:
                 continue
-            entries.append((key, stat.st_mtime_ns, stat.st_size))
     return tuple(sorted(entries))
+
+
+def _memory_change_is_self_write(store: object, before: object, after: object) -> bool:
+    """memory 签名的变化是否全部来自本进程 MemoryStore 自己的 flush。
+
+    是 → 只需要更新基线, 不用 refresh。旧行为把 bot 自己的每次落盘都当成外部编辑,
+    活跃时段每小时整库重读 200-300 次。只要有一处变化对不上自写记录 (外部编辑/删除),
+    就按外部修改处理。
+    """
+    getter = getattr(store, "own_write_signatures", None)
+    if not callable(getter):
+        return False
+    try:
+        own = getter()
+    except Exception:  # noqa: BLE001
+        return False
+    if not isinstance(own, dict) or not isinstance(before, tuple) or not isinstance(after, tuple):
+        return False
+    try:
+        before_map = {entry[0]: (entry[1], entry[2]) for entry in before}
+        after_map = {entry[0]: (entry[1], entry[2]) for entry in after}
+    except (TypeError, IndexError):
+        return False
+    changed = [key for key in before_map.keys() | after_map.keys() if before_map.get(key) != after_map.get(key)]
+    if not changed:
+        return False
+    missing = object()
+    for key in changed:
+        expected = own.get(key, missing)
+        actual = after_map.get(key)
+        if expected is missing or expected != actual:
+            return False
+    return True
 
 
 def _config_from_environment() -> Config:
@@ -5095,13 +5152,16 @@ async def _hot_reload_loop() -> None:
                 _hot_reload_emoji_signature = _emoji_signature_for_config(config)
         memory_signature = _memory_signature_for_store(memory_store)
         if memory_signature != _hot_reload_memory_signature:
-            try:
-                memory_store.refresh()
-                logger.info("Hot reloaded memory files")
-            except Exception as exc:
-                logger.warning(f"Hot reload failed to refresh memory store: {exc}")
+            if _memory_change_is_self_write(memory_store, _hot_reload_memory_signature, memory_signature):
+                _hot_reload_memory_signature = memory_signature
             else:
-                _hot_reload_memory_signature = _memory_signature_for_store(memory_store)
+                try:
+                    memory_store.refresh()
+                    logger.info("Hot reloaded memory files")
+                except Exception as exc:
+                    logger.warning(f"Hot reload failed to refresh memory store: {exc}")
+                else:
+                    _hot_reload_memory_signature = _memory_signature_for_store(memory_store)
         # QQ空间动态见闻 (2026-08-15): 数据文件进程内热重载, 不进守护 WATCH 清单
         if qzone_feed_store is not None:
             try:
@@ -5632,6 +5692,7 @@ def _build_user_content(
     image_description: str | None = None,
     image_parts: list[dict[str, Any]] | None = None,
     quoted_image_parts: list[dict[str, Any]] | None = None,
+    web_image_parts: list[dict[str, Any]] | None = None,
 ) -> object:
     base = incoming.history_content
     if incoming.image_urls and not image_parts:
@@ -5640,11 +5701,12 @@ def _build_user_content(
         else:
             urls = "\n".join(f"- {url}" for url in incoming.image_urls)
             base = f"{base}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
-    if not image_parts and not quoted_image_parts:
+    if not image_parts and not quoted_image_parts and not web_image_parts:
         return base
     content: list[dict[str, Any]] = [{"type": "text", "text": base}]
     content.extend(image_parts or [])
     content.extend(quoted_image_parts or [])
+    content.extend(web_image_parts or [])
     return content
 
 
@@ -6378,6 +6440,7 @@ async def _build_messages(
     has_context_image: bool = False,
     image_parts: list[dict[str, Any]] | None = None,
     quoted_image_parts: list[dict[str, Any]] | None = None,
+    web_image_parts: list[dict[str, Any]] | None = None,
     anger_context: str | None = None,
     semantic_reply_split: bool = False,
     group_filter_context: str | None = None,
@@ -7109,6 +7172,7 @@ async def _build_messages(
         image_description=image_description,
         image_parts=image_parts,
         quoted_image_parts=quoted_image_parts,
+        web_image_parts=web_image_parts,
     )
     _cognitive_system_context = ""
     _adaptive_user_prompt = ""
@@ -7913,6 +7977,7 @@ async def _build_messages(
                 image_description=image_description,
                 image_parts=image_parts,
                 quoted_image_parts=quoted_image_parts,
+                web_image_parts=web_image_parts,
             ),
         })
         # 主人 2026-05-30 cache R1+R4: 8铁律(1736字)已搬进静态前缀, user 之后只留 ~110字短指针
@@ -11960,20 +12025,41 @@ async def _qzone_bridge_poll_once() -> int:
     return new_count
 
 
+_QZONE_FAILURE_BACKOFF_CAP_SECONDS = 1800.0
+
+
+def _qzone_failure_backoff(base_seconds: float, failures: int) -> float:
+    """连续失败时指数退避 (封顶 30 分钟)。bridge 掉线那 10 天 (9/30-10/10) 轮询和保活
+    各按固定间隔重试, 每天刷 ~1600 条 WARNING。"""
+    if failures <= 0:
+        return base_seconds
+    return min(base_seconds * (2 ** min(failures - 1, 6)), _QZONE_FAILURE_BACKOFF_CAP_SECONDS)
+
+
+def _log_qzone_failure(prefix: str, failures: int, exc: BaseException) -> None:
+    message = f"{prefix} ({failures}x in a row): {type(exc).__name__}: {exc}"
+    if failures == 1 or failures % 10 == 0:
+        logger.warning(message)
+    else:
+        logger.debug(message)
+
+
 async def _qzone_bridge_poll_loop() -> None:
     """进程内轮询 QZone bridge；开关热改后下一轮自动生效。"""
     await asyncio.sleep(20)
+    failures = 0
     while True:
+        interval = max(float(getattr(config, "catty_qzone_poll_interval_seconds", 120.0) or 120.0), 30.0)
         try:
             if getattr(config, "catty_qzone_enabled", False):
                 await _qzone_bridge_poll_once()
+            failures = 0
         except asyncio.CancelledError:
             raise
         except Exception as exc:  # noqa: BLE001
-            logger.warning(f"[qzone] friend feed poll failed: {exc}")
-        await asyncio.sleep(
-            max(float(getattr(config, "catty_qzone_poll_interval_seconds", 120.0) or 120.0), 30.0)
-        )
+            failures += 1
+            _log_qzone_failure("[qzone] friend feed poll failed", failures, exc)
+        await asyncio.sleep(_qzone_failure_backoff(interval, failures))
 
 
 def _ensure_qzone_bridge_poll_task() -> None:
@@ -12193,20 +12279,30 @@ async def _qzone_cookie_keeper_once() -> bool:
 
 async def _qzone_cookie_keeper_loop() -> None:
     await asyncio.sleep(30)
+    failures = 0
     while True:
+        enabled = bool(getattr(config, "catty_qzone_enabled", False)) and bool(
+            getattr(config, "catty_qzone_cookie_keeper_enabled", False)
+        )
         bridge_healthy = False
         try:
-            if getattr(config, "catty_qzone_enabled", False) and bool(
-                getattr(config, "catty_qzone_cookie_keeper_enabled", False)
-            ):
+            if enabled:
                 bridge_healthy = await _qzone_cookie_keeper_once()
         except asyncio.CancelledError:
             raise
         except Exception as exc:  # noqa: BLE001
-            logger.warning(f"[qzone-keeper] cycle failed: {exc}")
-        # bridge 死了就 60s 快速重试 (可能只是等 NapCat 回连/bridge 冷启动);
+            _log_qzone_failure("[qzone-keeper] cycle failed", failures + 1, exc)
+        if not enabled:
+            await asyncio.sleep(60.0)
+            continue
+        # bridge 死了先 60s 快速重试 (可能只是等 NapCat 回连/bridge 冷启动), 连续失败再指数退避;
         # 健康时 300s 常规体检, 续期由 cookie_keeper_interval_seconds (默认 4h) 控制。
-        await asyncio.sleep(60.0 if not bridge_healthy else _QZONE_KEEPER_HEALTH_INTERVAL_SECONDS)
+        if bridge_healthy:
+            failures = 0
+            await asyncio.sleep(_QZONE_KEEPER_HEALTH_INTERVAL_SECONDS)
+        else:
+            failures += 1
+            await asyncio.sleep(_qzone_failure_backoff(60.0, failures))
 
 
 def _ensure_qzone_cookie_keeper_task() -> None:
@@ -12224,7 +12320,7 @@ async def _handle_qzone_notice(bot: Bot, event: NoticeEvent) -> None:
         return
     payload = _qzone_event_payload(event)
     kind = _qzone_event_kind(payload)
-    logger.info(
+    logger.debug(
         f"[qzone-debug] notice arrived kind={kind!r} "
         f"notice_type={payload.get('notice_type')!r} sub_type={payload.get('sub_type')!r} "
         f"keys={sorted(str(k) for k in payload.keys())!r}"
@@ -12297,7 +12393,7 @@ async def _debug_log_any_notice(bot: Bot, event: NoticeEvent) -> None:
         user_id = getattr(event, "user_id", None)
         target_id = getattr(event, "target_id", None)
         group_id = getattr(event, "group_id", None)
-        logger.info(
+        logger.debug(
             f"[poke-debug] any notice arrived: cls={type(event).__name__} "
             f"notice_type={notice_type!r} sub_type={sub_type!r} "
             f"user_id={user_id!r} target_id={target_id!r} group_id={group_id!r} "
@@ -14419,7 +14515,7 @@ async def _summary_loop() -> None:
                 memory_store.save_group_summary(group_id, summary)
                 logger.info(f"Updated group memory summary for {group_id}")
             except Exception as exc:
-                logger.warning(f"Failed to summarize group memory for {group_id}: {exc}")
+                logger.warning(f"Failed to summarize group memory for {group_id}: {type(exc).__name__}: {exc}")
             finally:
                 set_current_scope_key(None)
         for user_id in memory_store.due_private_user_ids():
@@ -14430,7 +14526,7 @@ async def _summary_loop() -> None:
                 memory_store.save_private_summary(user_id, summary)
                 logger.info(f"Updated private memory summary for {user_id}")
             except Exception as exc:
-                logger.warning(f"Failed to summarize private memory for {user_id}: {exc}")
+                logger.warning(f"Failed to summarize private memory for {user_id}: {type(exc).__name__}: {exc}")
             finally:
                 set_current_scope_key(None)
         for group_id, user_id in memory_store.due_mentioned_members():
@@ -14441,7 +14537,10 @@ async def _summary_loop() -> None:
                 memory_store.save_member_mention_summary(group_id, user_id, summary)
                 logger.info(f"Updated mentioned member profile for {user_id} in group {group_id}")
             except Exception as exc:
-                logger.warning(f"Failed to summarize mentioned member profile for {user_id} in group {group_id}: {exc}")
+                logger.warning(
+                    f"Failed to summarize mentioned member profile for {user_id} in group {group_id}: "
+                    f"{type(exc).__name__}: {exc}"
+                )
             finally:
                 set_current_scope_key(None)
         for game_name in memory_store.due_games_for_summary():
@@ -14646,6 +14745,7 @@ async def start_memory_summary_loop() -> None:
     # 但 intercourse 永远是 1 (跨日重启 reset).
     # 现在由 _managed_store_flush_loop 统一覆盖 pregnancy_store。
     asyncio.create_task(_scope_lore_auto_summary_loop())
+    asyncio.create_task(_data_backup_loop())
     asyncio.create_task(_catty_rag_backfill_once())
     asyncio.create_task(_catty_rag_prune_loop())
     _ensure_qzone_cookie_keeper_task()
@@ -14654,6 +14754,44 @@ async def start_memory_summary_loop() -> None:
     # catty_nlu_warmup_on_startup=False 时跳过 (默认 True).
     if bool(getattr(config, "catty_nlu_warmup_on_startup", True)):
         asyncio.create_task(_nlu_warmup_task())
+
+
+async def _data_backup_loop() -> None:
+    """定期给本地数据拍快照 (backup/data-*.zip), 只保留最近几份。
+
+    按「最新一份快照的时间」决定要不要拍: 部署日一天重启十几次, 也只会按 interval 拍一份。
+    """
+    from . import data_backup as _data_backup
+
+    await asyncio.sleep(600.0)  # 启动后先等 10 分钟, 不跟启动抢 IO
+    while True:
+        try:
+            if bool(getattr(config, "catty_data_backup_enabled", True)):
+                interval_hours = float(getattr(config, "catty_data_backup_interval_hours", 24.0) or 24.0)
+                data_root = Path(config.catty_memory_path).expanduser().parent
+                backup_dir = data_root / "backup"
+                age = _data_backup.newest_snapshot_age_seconds(backup_dir, time.time())
+                if age is None or age >= max(interval_hours, 1.0) * 3600.0:
+                    data_dirs = [
+                        memory_store.user_storage_dir,
+                        memory_store.group_storage_dir,
+                        memory_store.game_storage_dir,
+                        _get_session_cache().directory,
+                    ]
+                    target, count = await asyncio.to_thread(
+                        _data_backup.write_snapshot,
+                        data_root,
+                        data_dirs,
+                        backup_dir,
+                        keep=max(int(getattr(config, "catty_data_backup_keep", 7) or 7), 1),
+                    )
+                    if target is not None:
+                        logger.info(f"data backup: wrote {target} ({count} files)")
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"data backup failed: {type(exc).__name__}: {exc}")
+        await asyncio.sleep(3600.0)
 
 
 async def _nlu_warmup_task() -> None:
@@ -15177,12 +15315,136 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 reply_context.catalog.web_search_disabled_instruction
             )
 
+        # 图源 / 工具清单 / 先导回复要赶在 auto_fetch (最多 ~14s)、识图等待 (最多 15s) 这些
+        # 耗时准备之前: 旧顺序要等它们全部做完才开始调度先导回复和慢回复占位, 查资料类
+        # 请求整段静默。这些值只依赖本条消息和 rule 阶段的引用快照, 提前算不影响后面的 ToolContext。
+        reply_image_pairs = _unique_reply_image_pairs(
+            reply_sources,
+            excluded_urls=list(incoming.image_urls or []),
+        )
+        _recent_imgs = _recent_image_urls_for_scope(_conversation_queue_key(event))
+        # 拉 reply 引用消息里的图作为 tool 可见图源:
+        # 主人在群里引用一张图问『猫猫帮我查作者』时,extract_image_urls 只看当前消息 segment,
+        # 不会包含 reply 图——结果 catty_image_search 找不到图源退化成 web_search 搜"作者"两个字。
+        # 这里复用 rule 阶段的一次性 reply 快照,合并到 input_image_urls 让搜图/imagegen 都能看到；
+        # 不再二次调用 get_msg,当前消息与引用消息同时有图时也都保留。
+        _current_tool_images = list(incoming.image_urls or [])
+        _reply_tool_images = [url for url, _key in reply_image_pairs]
+        _tool_input_images: list[str] = []
+        _seen_tool_images: set[str] = set()
+        for _tool_image_url in [*_current_tool_images, *_reply_tool_images]:
+            if not _tool_image_url or _tool_image_url in _seen_tool_images:
+                continue
+            _seen_tool_images.add(_tool_image_url)
+            _tool_input_images.append(_tool_image_url)
+        if _current_tool_images and _reply_tool_images:
+            _tool_input_image_source = "current+reply"
+        elif _current_tool_images:
+            _tool_input_image_source = "current"
+        elif _reply_tool_images:
+            _tool_input_image_source = "reply"
+        else:
+            _tool_input_image_source = ""
+        if _reply_tool_images:
+            logger.info(
+                f"tool ctx: reused {len(_reply_tool_images)} reply image(s) for {event.user_id}@"
+                f"{getattr(event, 'group_id', 'private')}"
+            )
+        # 主人 2026-05-28 C15-7: NLU intent gate — user msg 含画图/搜/记等关键词才发对应 tool
+        # 不命中 tools=[], 省 ~21K bytes input. 命中时 AI 看完整 description 决策.
+        # 主人 2026-05-29: 提前赋值供 ToolContext.user_text 用 (catty_imagegen agent 模式拿原话)
+        _user_text_for_intent = ""
+        try:
+            _user_text_for_intent = str(event.get_plaintext() or "").strip()
+        except Exception:  # noqa: BLE001
+            try:
+                _user_text_for_intent = str(getattr(event, "raw_message", "") or "").strip()
+            except Exception:  # noqa: BLE001
+                pass
+
+        _tool_persona = _persona_for_event(event)
+        _has_image_for_intent = bool(_tool_input_images or _recent_imgs)
+        tools_for_main_reply, _allowed_tool_names = _available_tool_schemas_for_persona(
+            config,
+            is_private=isinstance(event, PrivateMessageEvent),
+            user_text=_user_text_for_intent,
+            has_image=_has_image_for_intent,
+            is_directly_requested=bool(incoming.directly_requested),
+            persona=_tool_persona,
+        )
+
+        _forced_tool_choice: str | dict[str, object] = "auto"
+        try:
+            _force_imagegen_tool = (
+                should_force_imagegen_tool(
+                    _user_text_for_intent,
+                    is_directly_requested=bool(incoming.directly_requested),
+                )
+                and any(
+                    isinstance(_t, dict)
+                    and (
+                        (_t.get("function") or {}).get("name") == "catty_imagegen"
+                        or _t.get("name") == "catty_imagegen"
+                    )
+                    for _t in (tools_for_main_reply or [])
+                )
+            )
+        except Exception as _force_exc:  # noqa: BLE001
+            logger.debug(f"imagegen force tool_choice check failed: {_force_exc}")
+            _force_imagegen_tool = False
+        if _force_imagegen_tool:
+            _forced_tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
+            logger.info("chat: explicit imagegen request → forcing catty_imagegen tool_choice")
+
+        # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,
+        # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
+        # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
+        # 主人 2026-10-25: 查资料/画图/做题这类必然超时的长任务改成开跑前先发一句模型现写的
+        # 短回复 (替代固定「我去翻翻」池); 已经发先导回复时不再叠 placeholder。
+        _quick_ack_task: asyncio.Task | None = None
+        try:
+            from .quick_ack import detect_task_kind
+
+            _ack_kind, _ack_label = detect_task_kind(
+                _user_text_for_intent,
+                _allowed_tool_names,
+                directed=bool(
+                    incoming.directly_requested
+                    or incoming.mentioned
+                    or isinstance(event, PrivateMessageEvent)
+                ),
+                force_imagegen=_force_imagegen_tool,
+            )
+            if _ack_kind:
+                _quick_ack_task = _schedule_quick_ack(
+                    matcher,
+                    event,
+                    persona=_tool_persona,
+                    kind=_ack_kind,
+                    task_label=_ack_label,
+                    user_text=_user_text_for_intent,
+                )
+        except Exception as _ack_exc:  # noqa: BLE001
+            logger.debug(f"quick_ack schedule failed (non-fatal): {_ack_exc}")
+        placeholder_task = (
+            None if _quick_ack_task is not None else _spawn_slow_reply_placeholder(matcher, event)
+        )
+        # 正常路径在主回复返回后就 cancel (见 provider 调用的 finally); 这里兜底: 准备阶段
+        # 抛错或 finish 提前退出时, 也不能让它们在本轮结束后再冒一句。
+        _lock_stack.callback(_cancel_task_if_pending, _quick_ack_task)
+        _lock_stack.callback(_cancel_task_if_pending, placeholder_task)
+
         # 主人 2026-10-25: 知识库缺口自动补网 — 本地知识库没有的事实类问题,
         # 回复前自动 search + 抓正文, 以【联网补全】块进 prompt (不依赖模型自觉调 tool)。
         auto_fetch_context = ""
+        auto_fetch_image_parts: list[dict[str, Any]] = []
         if bool(getattr(config, "catty_auto_fetch_enabled", True)):
             try:
-                from .auto_web_fetch import format_auto_fetch_context, maybe_auto_fetch
+                from .auto_web_fetch import (
+                    format_auto_fetch_context,
+                    image_parts_from_outcome,
+                    maybe_auto_fetch,
+                )
 
                 _auto_fetch_outcome = await asyncio.wait_for(
                     maybe_auto_fetch(
@@ -15204,11 +15466,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     + 2.0,
                 )
                 auto_fetch_context = format_auto_fetch_context(_auto_fetch_outcome)
+                if _auto_fetch_outcome.images and bool(
+                    getattr(config, "catty_image_vision_enabled", True)
+                ) and vision_shares_main_route(config):
+                    # 主 AI 本身就是识图线路时才直接塞图; 线路不同留文本, 不做二次识图
+                    auto_fetch_image_parts = image_parts_from_outcome(_auto_fetch_outcome)
                 if _auto_fetch_outcome.triggered:
                     logger.info(
                         f"auto_web_fetch: query={_auto_fetch_outcome.query!r} "
                         f"reason={_auto_fetch_outcome.reason} ok={_auto_fetch_outcome.ok} "
                         f"pages={len(_auto_fetch_outcome.pages)} "
+                        f"images={len(auto_fetch_image_parts)} "
                         f"skipped={_auto_fetch_outcome.skipped!r} "
                         f"cached={_auto_fetch_outcome.from_cache}"
                     )
@@ -15264,11 +15532,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _bot_continuation_judgement_prompt(event)
             if state.get("catty_recent_bot_continuation")
             else ""
-        )
-
-        reply_image_pairs = _unique_reply_image_pairs(
-            reply_sources,
-            excluded_urls=list(incoming.image_urls or []),
         )
 
         _image_attention = bool(
@@ -15421,6 +15684,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             has_context_image=bool(reply_image_pairs),
             image_parts=passthrough_image_parts or None,
             quoted_image_parts=passthrough_quoted_image_parts or None,
+            web_image_parts=auto_fetch_image_parts or None,
             anger_context=anger_context,
             semantic_reply_split=semantic_reply_split,
             group_filter_context=group_filter_context,
@@ -15449,47 +15713,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # - input_image_urls: 当前消息附图(用户「同消息」: 发图+@猫猫说画)
         # - recent_image_urls: 最近 N 分钟群里出现的图(用户「分消息」回指: 上一条群友图 + 这条说『基于刚才那张画 X』)
         # - is_directly_requested: 硬 guard - 没指向猫猫的 opportunistic 旁观回复不许 push 内容到群
-        _recent_imgs = _recent_image_urls_for_scope(_conversation_queue_key(event))
-        # 拉 reply 引用消息里的图作为 tool 可见图源:
-        # 主人在群里引用一张图问『猫猫帮我查作者』时,extract_image_urls 只看当前消息 segment,
-        # 不会包含 reply 图——结果 catty_image_search 找不到图源退化成 web_search 搜"作者"两个字。
-        # 这里复用 rule 阶段的一次性 reply 快照,合并到 input_image_urls 让搜图/imagegen 都能看到；
-        # 不再二次调用 get_msg,当前消息与引用消息同时有图时也都保留。
-        _current_tool_images = list(incoming.image_urls or [])
-        _reply_tool_images = [url for url, _key in reply_image_pairs]
-        _tool_input_images: list[str] = []
-        _seen_tool_images: set[str] = set()
-        for _tool_image_url in [*_current_tool_images, *_reply_tool_images]:
-            if not _tool_image_url or _tool_image_url in _seen_tool_images:
-                continue
-            _seen_tool_images.add(_tool_image_url)
-            _tool_input_images.append(_tool_image_url)
-        if _current_tool_images and _reply_tool_images:
-            _tool_input_image_source = "current+reply"
-        elif _current_tool_images:
-            _tool_input_image_source = "current"
-        elif _reply_tool_images:
-            _tool_input_image_source = "reply"
-        else:
-            _tool_input_image_source = ""
-        if _reply_tool_images:
-            logger.info(
-                f"tool ctx: reused {len(_reply_tool_images)} reply image(s) for {event.user_id}@"
-                f"{getattr(event, 'group_id', 'private')}"
-            )
-        # 主人 2026-05-28 C15-7: NLU intent gate — user msg 含画图/搜/记等关键词才发对应 tool
-        # 不命中 tools=[], 省 ~21K bytes input. 命中时 AI 看完整 description 决策.
-        # 主人 2026-05-29: 提前赋值供 ToolContext.user_text 用 (catty_imagegen agent 模式拿原话)
-        _user_text_for_intent = ""
-        try:
-            _user_text_for_intent = str(event.get_plaintext() or "").strip()
-        except Exception:  # noqa: BLE001
-            try:
-                _user_text_for_intent = str(getattr(event, "raw_message", "") or "").strip()
-            except Exception:  # noqa: BLE001
-                pass
-
-        _tool_persona = _persona_for_event(event)
+        # (图源 / 工具清单 / 先导回复已在 auto_fetch 之前算好, 见那里的注释)
         tool_ctx = ToolContext(
             config=config,
             memory_store=memory_store,
@@ -15513,16 +15737,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             scope_key=_conversation_queue_key(event),
             # 主人 2026-05-29: catty_imagegen agent 模式拿原话喂给 deepseek 出 plan
             user_text=_user_text_for_intent,
-        )
-
-        _has_image_for_intent = bool(_tool_input_images or _recent_imgs)
-        tools_for_main_reply, _allowed_tool_names = _available_tool_schemas_for_persona(
-            config,
-            is_private=isinstance(event, PrivateMessageEvent),
-            user_text=_user_text_for_intent,
-            has_image=_has_image_for_intent,
-            is_directly_requested=bool(incoming.directly_requested),
-            persona=_tool_persona,
         )
 
         _turn_tool_result_texts: list[str] = []
@@ -15585,28 +15799,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 pass
             return result
 
-        _forced_tool_choice: str | dict[str, object] = "auto"
-        try:
-            _force_imagegen_tool = (
-                should_force_imagegen_tool(
-                    _user_text_for_intent,
-                    is_directly_requested=bool(incoming.directly_requested),
-                )
-                and any(
-                    isinstance(_t, dict)
-                    and (
-                        (_t.get("function") or {}).get("name") == "catty_imagegen"
-                        or _t.get("name") == "catty_imagegen"
-                    )
-                    for _t in (tools_for_main_reply or [])
-                )
-            )
-        except Exception as _force_exc:  # noqa: BLE001
-            logger.debug(f"imagegen force tool_choice check failed: {_force_exc}")
-            _force_imagegen_tool = False
-        if _force_imagegen_tool:
-            _forced_tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
-            logger.info("chat: explicit imagegen request → forcing catty_imagegen tool_choice")
         nsfw_image_segments: list[MessageSegment] = []
         # 主人 2026-05-29: NSFW 自动生图改后台异步, 文字优先发. 详见下方 chunk loop 前的 30s wait.
         _nsfw_img_task: asyncio.Task | None = None
@@ -15615,39 +15807,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _chunks_last_already_sent = False
         _phase_scope_chat = _phase_scope_for(
             _conversation_queue_key(event), _persona_for_event(event),
-        )
-        # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,
-        # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
-        # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
-        # 主人 2026-10-25: 查资料/画图/做题这类必然超时的长任务改成开跑前先发一句模型现写的
-        # 短回复 (替代固定「我去翻翻」池); 已经发先导回复时不再叠 placeholder。
-        _quick_ack_task: asyncio.Task | None = None
-        try:
-            from .quick_ack import detect_task_kind
-
-            _ack_kind, _ack_label = detect_task_kind(
-                _user_text_for_intent,
-                _allowed_tool_names,
-                directed=bool(
-                    incoming.directly_requested
-                    or incoming.mentioned
-                    or isinstance(event, PrivateMessageEvent)
-                ),
-                force_imagegen=_force_imagegen_tool,
-            )
-            if _ack_kind:
-                _quick_ack_task = _schedule_quick_ack(
-                    matcher,
-                    event,
-                    persona=_tool_persona,
-                    kind=_ack_kind,
-                    task_label=_ack_label,
-                    user_text=_user_text_for_intent,
-                )
-        except Exception as _ack_exc:  # noqa: BLE001
-            logger.debug(f"quick_ack schedule failed (non-fatal): {_ack_exc}")
-        placeholder_task = (
-            None if _quick_ack_task is not None else _spawn_slow_reply_placeholder(matcher, event)
         )
         # SillyTavern 风「Author's Note 深度注入」: 在 chat history 倒数第 N 条之前插入贴身提醒。
         # 比顶部 system prompt 更抗稀释(长对话里顶部容易被遗忘),比 jailbreak 更灵活(可以放在 user 当前消息之前但不是最末)。

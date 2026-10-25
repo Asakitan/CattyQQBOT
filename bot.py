@@ -1,11 +1,44 @@
 import asyncio
 import logging
+import os
 import sys
+import time
 from pathlib import Path
 
 src_path = Path(__file__).with_name("src")
 if src_path.is_dir():
     sys.path.insert(0, str(src_path))
+
+
+def _disable_console_quick_edit() -> None:
+    """关掉控制台「快速编辑」: 开着时在窗口里点一下就进入选择状态, 往控制台写输出的进程
+    会被挂起直到取消选择。2026-10 两次 RDP 重连后 bot 无日志卡死多天, 高度疑似此因。"""
+    if os.name != "nt":
+        return
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.GetStdHandle.argtypes = [wintypes.DWORD]
+        kernel32.GetStdHandle.restype = wintypes.HANDLE
+        kernel32.GetConsoleMode.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+        kernel32.GetConsoleMode.restype = wintypes.BOOL
+        kernel32.SetConsoleMode.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+        kernel32.SetConsoleMode.restype = wintypes.BOOL
+        handle = kernel32.GetStdHandle(wintypes.DWORD(-10 & 0xFFFFFFFF))  # STD_INPUT_HANDLE
+        mode = wintypes.DWORD()
+        if not handle or not kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
+            return
+        enable_quick_edit, enable_extended_flags = 0x0040, 0x0080
+        new_mode = (mode.value | enable_extended_flags) & ~enable_quick_edit
+        if new_mode != mode.value:
+            kernel32.SetConsoleMode(handle, new_mode)
+    except Exception:
+        pass
+
+
+_disable_console_quick_edit()
 
 from catty_config_loader import load_config_to_env
 import nonebot
@@ -65,12 +98,15 @@ def _drop_panel_noise(record: "dict") -> bool:
     return not _is_panel_noise(record)
 
 
+# enqueue: 控制台写入在后台线程完成。控制台被挂起 (QuickEdit 选择/窗口卡顿) 时
+# 同步写 stderr 会把整个事件循环一起卡住, 连文件日志都停。
 logger.add(
     sys.stderr,
     level="INFO",
     format=default_format,
     diagnose=False,
     filter=_drop_panel_noise,
+    enqueue=True,
 )
 
 logger.add(
@@ -160,6 +196,32 @@ driver.register_adapter(OneBotV11Adapter)
 @driver.on_startup
 async def _reinstall_loop_exception_handler() -> None:
     asyncio.get_running_loop().set_exception_handler(_silence_proactor_connection_reset)
+
+
+# 守护进程 (scripts/catty_hot_reload.py) 通过 CATTY_HEARTBEAT_FILE 传入心跳文件:
+# 事件循环每 15s 写一次, 卡死时停更, 守护进程超时后重启 bot。直接跑 bot.py 时不启用。
+_HEARTBEAT_INTERVAL_SECONDS = 15.0
+_heartbeat_file = os.environ.get("CATTY_HEARTBEAT_FILE", "").strip()
+_background_tasks: set[asyncio.Task] = set()
+
+
+async def _supervisor_heartbeat_loop(path: Path) -> None:
+    while True:
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(f"{time.time():.0f}\n", encoding="utf-8")
+        except OSError:
+            pass
+        await asyncio.sleep(_HEARTBEAT_INTERVAL_SECONDS)
+
+
+if _heartbeat_file:
+
+    @driver.on_startup
+    async def _start_supervisor_heartbeat() -> None:
+        task = asyncio.create_task(_supervisor_heartbeat_loop(Path(_heartbeat_file)))
+        _background_tasks.add(task)
+        task.add_done_callback(_background_tasks.discard)
 
 nonebot.load_plugin("catty_qq_ai")
 

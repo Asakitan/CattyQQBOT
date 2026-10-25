@@ -22,6 +22,7 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 import threading
 from datetime import date, datetime, timezone
@@ -160,7 +161,10 @@ class AffectionStore:
         payload = {"version": 1, "users": self._data}
         text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
         try:
-            tmp.write_text(text, encoding="utf-8")
+            with tmp.open("w", encoding="utf-8") as handle:
+                handle.write(text)
+                handle.flush()
+                os.fsync(handle.fileno())
             tmp.replace(self._path)
         except OSError:
             try:

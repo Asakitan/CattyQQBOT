@@ -107,6 +107,49 @@ class MemoryPersistenceTests(unittest.TestCase):
             disabled.refresh()
             persist.assert_not_called()
 
+    def test_flush_rewrites_only_changed_entities(self) -> None:
+        for user_id in ("10001", "10002"):
+            self.store.set_preferred_name(user_id, "old name")
+        self.assertTrue(self.store.flush_sync())
+        self.store.set_preferred_name("10001", "new name")
+        written: list[Path] = []
+        write_text = memory._atomic_write_text
+
+        def record(path, content):
+            written.append(path)
+            write_text(path, content)
+
+        with patch.object(memory, "_atomic_write_text", side_effect=record):
+            self.assertTrue(self.store.flush_sync())
+        self.assertEqual(written, [self.store._user_file("10001")])
+        # 重新载入后再 flush, 没有变化的实体一个都不该重写
+        reloaded = memory.MemoryStore(self.config)
+        reloaded._save()
+        written.clear()
+        with patch.object(memory, "_atomic_write_text", side_effect=record):
+            self.assertTrue(reloaded.flush_sync())
+        self.assertEqual(written, [])
+
+    def test_unreadable_entity_file_is_quarantined_and_reported(self) -> None:
+        self.store.set_preferred_name("10001", "kept")
+        self.assertTrue(self.store.flush_sync())
+        broken = self.store._user_file("10002")
+        broken.write_bytes(b"\x00" * 64)
+        with patch.object(memory, "logger") as fake_logger:
+            restored = memory.MemoryStore(self.config)
+        self.assertEqual(restored.preferred_name_for("10001"), "kept")
+        self.assertFalse(broken.exists())
+        self.assertEqual(len(list(broken.parent.glob("user_10002.json.corrupt-*"))), 1)
+        self.assertTrue(any("unreadable" in str(call) for call in fake_logger.warning.call_args_list))
+
+    def test_unreadable_index_is_kept_before_it_gets_overwritten(self) -> None:
+        self.store.set_preferred_name("10001", "kept")
+        self.assertTrue(self.store.flush_sync())
+        self.store.path.write_bytes(b"\xff\xfe not json")
+        restored = memory.MemoryStore(self.config)
+        self.assertEqual(len(list(self.store.path.parent.glob("memory.json.corrupt-*"))), 1)
+        self.assertEqual(restored.preferred_name_for("10001"), "kept")
+
     def test_atomic_replace_failure_keeps_previous_file_and_retries(self) -> None:
         self.store.set_preferred_name("10001", "old name")
         self.assertTrue(self.store.flush_sync())

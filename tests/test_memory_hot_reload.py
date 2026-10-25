@@ -142,7 +142,9 @@ class MemoryReloadEnvironmentTests(unittest.IsolatedAsyncioTestCase):
 
 class MemoryReloadWatcherTests(unittest.IsolatedAsyncioTestCase):
     def _watcher(self, *, polls: int = 2) -> dict:
-        ns = _runtime_functions("_hot_reload_loop", "_remember_hot_reload_config_signature")
+        ns = _runtime_functions(
+            "_hot_reload_loop", "_remember_hot_reload_config_signature", "_memory_change_is_self_write"
+        )
         ns.update({
             "config": types.SimpleNamespace(catty_hot_reload_poll_seconds=0.2, catty_hot_reload_enabled=True),
             "_sync_hot_reload_signatures": Mock(),
@@ -259,6 +261,27 @@ class MemoryReloadWatcherTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(ns["qzone_feed_store"].refresh.call_count, 3)
             self.assertEqual(ns["_hot_reload_emoji_signature"], signature(ns["config"]))
 
+    async def test_own_flush_updates_baseline_without_reloading(self) -> None:
+        ns = self._watcher()
+        before = (("memory_users/user_1.json", 1, 10),)
+        after = (("memory_users/user_1.json", 2, 12),)
+        ns["_hot_reload_memory_signature"] = before
+        ns["_memory_signature_for_store"].return_value = after
+        ns["memory_store"].own_write_signatures.return_value = {"memory_users/user_1.json": (2, 12)}
+        await self._run_watcher(ns)
+        ns["memory_store"].refresh.assert_not_called()
+        self.assertEqual(ns["_hot_reload_memory_signature"], after)
+
+    async def test_external_edit_next_to_own_flush_still_reloads(self) -> None:
+        ns = self._watcher(polls=1)
+        before = (("memory_users/user_1.json", 1, 10), ("memory_users/user_2.json", 1, 10))
+        after = (("memory_users/user_1.json", 2, 12), ("memory_users/user_2.json", 5, 99))
+        ns["_hot_reload_memory_signature"] = before
+        ns["_memory_signature_for_store"].return_value = after
+        ns["memory_store"].own_write_signatures.return_value = {"memory_users/user_1.json": (2, 12)}
+        await self._run_watcher(ns)
+        ns["memory_store"].refresh.assert_called_once()
+
     async def test_config_edit_during_transition_is_not_silently_acknowledged(self) -> None:
         ns = self._watcher(polls=1)
         ns["_file_signature"].return_value = "parsed config"
@@ -272,6 +295,58 @@ class MemoryReloadWatcherTests(unittest.IsolatedAsyncioTestCase):
         ns["_reload_runtime_config_from_path"] = reload_config
         await self._run_watcher(ns)
         self.assertEqual(ns["_hot_reload_config_signature"], "parsed config")
+
+
+class MemorySelfWriteDetectionTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.config = memory.Config(catty_memory_path=str(Path(temporary.name) / "memory.json"))
+        self.store = memory.MemoryStore(self.config)
+        self.ns = _runtime_functions("_tree_signature", "_memory_change_is_self_write")
+
+    def _signature(self) -> tuple:
+        return self.ns["_tree_signature"](
+            [self.store.path, self.store.group_storage_dir, self.store.user_storage_dir],
+            suffixes={".json"},
+        )
+
+    def test_real_flush_is_recognized_as_self_write(self) -> None:
+        self.store.set_preferred_name("10001", "first")
+        self.assertTrue(self.store.flush_sync())
+        before = self._signature()
+        self.store.set_preferred_name("10001", "second")
+        self.store.set_preferred_name("10002", "new user")
+        self.assertTrue(self.store.flush_sync())
+        after = self._signature()
+        self.assertNotEqual(before, after)
+        self.assertTrue(self.ns["_memory_change_is_self_write"](self.store, before, after))
+
+    def test_external_edit_and_external_delete_are_not_self_writes(self) -> None:
+        self.store.set_preferred_name("10001", "first")
+        self.store.set_preferred_name("10002", "other")
+        self.assertTrue(self.store.flush_sync())
+        before = self._signature()
+        user_file = self.store._user_file("10001")
+        user_file.write_text(user_file.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+        self.assertFalse(self.ns["_memory_change_is_self_write"](self.store, before, self._signature()))
+        edited = self._signature()
+        self.store._user_file("10002").unlink()
+        self.assertFalse(self.ns["_memory_change_is_self_write"](self.store, edited, self._signature()))
+
+    def test_own_group_removal_is_a_self_write(self) -> None:
+        self.store._data["groups"]["200"] = {"summary": "kept"}
+        self.store._save()
+        self.assertTrue(self.store.flush_sync())
+        before = self._signature()
+        self.assertTrue(self.store.remove_group_memory("200"))
+        self.assertTrue(self.store.flush_sync())
+        self.assertTrue(self.ns["_memory_change_is_self_write"](self.store, before, self._signature()))
+
+    def test_non_tuple_signatures_and_mock_stores_fall_back_to_reload(self) -> None:
+        detect = self.ns["_memory_change_is_self_write"]
+        self.assertFalse(detect(Mock(), "old", "new"))
+        self.assertFalse(detect(object(), (), (("a", 1, 1),)))
 
 
 if __name__ == "__main__":
