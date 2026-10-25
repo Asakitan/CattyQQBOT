@@ -397,3 +397,20 @@ retired-term，逐条核对后修了这些「代码自相矛盾」项（不动�
   - 仍保留：`FADIANJI_MES_EXAMPLE` 的写文多行样例（符合「写文可多行」）、
     `_NSFW_RECENCY_REMINDER` / `_NSFW_SPARK_STABLE_BOUNDARY_TEXT` 等非 freeform 旧分支
     （默认不可达，留作回退）、`_local_critic_*` / `_build_proactive_messages` 等死路径清理未动。
+
+### 12.13 短句逐行分条（2026-10-25 十四修）
+
+- 现场：20:34 私聊回复 `raw_message` 是两行（`…招募成分机啊\n胶带还贴着…`），只发了一条，
+  说明模型仍然不写 marker，靠裸换行表达「两条」。
+- `_reply_chunks` 现在的顺序：① 有 `<<<CATTY_REPLY_SPLIT>>>` → 按 marker 拆；
+  ② 没 marker → `_newline_bubble_chunks()`：2 行以上、每行 ≤80 字、没有空行段落、
+  没有 ```/$$/\[ 等技术排版、没有 `1)`/`- ` 行首列表 → 每行一条气泡；
+  ③ 其余走长度兜底。长句/写文/技术列表仍整段，不会被按行拆碎。
+- `_cap_reply_chunks` 超上限的尾部合成一条时改用空格连接，不再用换行制造多行气泡。
+- prompt 统一成同一套口径：810 提醒「短句一行一条（程序按行发）；长句/技术/写文可以多行，
+  不会被拆；想明确控制分条就用 marker」；`_semantic_reply_split_prompt` 两分支、
+  `_NSFW_FREEFORM_REMINDER`、`FADIANJI_CORE` §4、`FADIANJI_CHAT_RHYTHM`、`persona_prompts`、
+  `catty_core_persona` §3 同步。
+- 测试：`test_fadianji_nsfw_split_bubbles` 6/6（短行拆、长行不拆、编号列表不拆、上限合并）、
+  `test_output_control_markers` 10/10、`test_persona_memory_isolation` 22/22、`test_personas` 22/22、
+  `test_reply_split_reminder` 6/6。

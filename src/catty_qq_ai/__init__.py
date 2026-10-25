@@ -2540,9 +2540,9 @@ _NSFW_RECENCY_REMINDER = (
 _NSFW_FREEFORM_REMINDER = (
     "【贴脸·自由发挥 (recency)】\n"
     "1. 接着上一轮的具体动作/场景/情绪往下走, 不重启; 要不要换场由你判断, 不是定死的。\n"
-    "2. 场景、开场、节奏、篇幅都由你自己决定: 一句话、几句都行; 要连发几条气泡就在每条之间"
-    "单独输出一行 <<<CATTY_REPLY_SPLIT>>>, 每条气泡写成一行、气泡里不换行; 不写标记就只有一条消息"
-    "(裸换行不会拆条)。\n"
+    "2. 场景、开场、节奏、篇幅都由你自己决定: 一句话、几句都行; 短句一行一条会按行发, "
+    "想明确控制分条就在每条之间单独输出一行 <<<CATTY_REPLY_SPLIT>>>, 气泡里不换行; "
+    "长句/写文里的换行不会被拆。\n"
     "3. 主动一点: 可以自己动、自己说、自己推进或转移焦点, 不必等对方下指令。\n"
     "4. 保持本人口吻 (自称/称呼/口癖按人格设定) 与在场感; 不写 stage/phase/系统/规则 这类元词。"
 )
@@ -8893,8 +8893,8 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "这不是口吃或犹豫：不堆「……」「呃」「那个」，不自我修正。"
             "频率按全量实录约束：约 73% 一簇一条、18% 两条、3-4 条 7%——别为了显得像 QQ 硬拆短句。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
-            f"要拆就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡默认一行(技术分步/写文可多行, 但换行不产生新气泡)；"
-            "不写标记就只有一条消息(裸换行不会拆开)。"
+            f"想明确控制分条就在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；短句直接一行一条也会按行发；"
+            "长句/技术/写文里的换行不会被拆。"
             "被拆的前几块结尾少用句号/感叹号，自然些。"
             f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
             "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
@@ -8907,8 +8907,8 @@ def _semantic_reply_split_prompt(persona=None) -> str:
         "用逗号/句号连成一条 QQ 消息发，不要每短句单切。"
         "【真有几个轮次 → 拆 2~3 条】对前文的强反应 + 接下来要说的新事情；技术结论 + 后续追问；强情绪 + 话题展开。"
         f"{_neg}"
-        f"要拆条就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡默认一行(技术分步/写文可多行, 但换行不产生新气泡)；"
-        "不写标记就只有一条消息(裸换行不会拆开)。"
+        f"想明确控制分条就在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；短句直接一行一条也会按行发；"
+        "长句/技术/写文里的换行不会被拆。"
         "被拆的前几条结尾少用句号/感叹号，自然些。"
         f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
         "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
@@ -8921,9 +8921,9 @@ def _reply_split_reminder_prompt() -> str:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     return (
         "【本轮气泡写法 · 硬规则】\n"
-        "- 普通聊天一条气泡只写一行; 技术分步/写文可以多行, 但换行不产生新气泡。\n"
-        f"- 要连发: 每条之间单独一行输出 {REPLY_SPLIT_MARKER}, 最多 {max_chunks} 条; 每条气泡内部不许换行。\n"
-        "- 裸换行不会拆气泡, 只会把同一条消息写成多行。"
+        "- 短句一行一条气泡（程序按行发）; 长句/技术分步/写文可以多行, 不会被拆。\n"
+        f"- 想明确控制分条: 每条之间单独一行输出 {REPLY_SPLIT_MARKER}, 最多 {max_chunks} 条; 气泡内不换行。\n"
+        "- 普通空格不算分条, 分条靠换行或标记。"
     )
 
 
@@ -10330,19 +10330,43 @@ def _looks_like_qq_short_chat(reply: str) -> bool:
     return True
 
 
+_LINE_BUBBLE_MAX_CHARS = 80
+
+
+def _newline_bubble_chunks(reply: str) -> list[str]:
+    """短句逐行 = 独立气泡; 长行 / 空行段落 / 技术排版不拆。"""
+    text = str(reply or "").strip()
+    if "\n" not in text:
+        return []
+    lines = [line.strip() for line in text.split("\n")]
+    if any(not line for line in lines):
+        return []
+    lines = [
+        line
+        for line in lines
+        if not re.fullmatch(r"<<<CATTY_[A-Z_]+(?::[^<>]*)?>>>", line)
+    ]
+    if len(lines) < 2:
+        return []
+    if any(len(line) > _LINE_BUBBLE_MAX_CHARS for line in lines):
+        return []
+    joined = "\n".join(lines)
+    if "```" in joined or "$$" in joined or "\\[" in joined or "\\(" in joined:
+        return []
+    if re.search(r"(?m)^\s*(?:[-*]|\d+[.)])\s", joined):
+        return []
+    return lines
+
+
 def _reply_chunks(reply: str, persona=None) -> list[str]:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     reply = _strip_unicode_emoji_for_send(reply)
 
-    # 主人 2026-05-27: NSFW 长 reply (deepseek-v4-flash) 段落间默认双换行,
-    # OneBot 原样发到 QQ 显示成大空白卡片很丑. collapse \n\n+ → \n 保留段落感无空行.
-    # 短聊本来没空行不受影响; REPLY_SPLIT_MARKER 是单字符串不会被 regex 误伤.
-    reply = re.sub(r"\n\s*\n+", "\n", reply)
-
-    # 主人 2026-10-25: 拆不拆由模型决定 — 只有她真的写了 REPLY_SPLIT_MARKER 才拆成多条。
-    # 换行 / 空格 / 斜杠都不再当气泡边界(以前那几条启发式会把「一句句发」和「一整段」猜反),
-    # 本地只保留长度兜底。
+    # 主人 2026-10-25: marker 仍然是明确的分条开关; 没写 marker 时, 短句逐行也按行发
+    # (模型实际就是这么写的), 长行/空行段落/技术排版保持整段。
     if REPLY_SPLIT_MARKER in reply:
+        # 段落间双换行折叠成单换行, 避免同一个气泡里出现大空行
+        reply = re.sub(r"\n\s*\n+", "\n", reply)
         chunks: list[str] = []
         for part in reply.split(REPLY_SPLIT_MARKER):
             chunks.extend(split_reply(part, config.catty_reply_max_chars, max_chunks=max_chunks))
@@ -10351,7 +10375,12 @@ def _reply_chunks(reply: str, persona=None) -> list[str]:
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
 
-    # 路径 2: 长度兜底(太长才在合理换行处切大段), 与人格无关
+    line_chunks = _newline_bubble_chunks(reply)
+    if line_chunks:
+        return _cap_reply_chunks(line_chunks, max_chunks=max_chunks)
+
+    reply = re.sub(r"\n\s*\n+", "\n", reply)
+    # 路径 3: 长度兜底(太长才在合理换行处切大段), 与人格无关
     return split_reply(reply, config.catty_reply_max_chars, max_chunks=max_chunks)
 
 
@@ -10373,10 +10402,11 @@ def _looks_like_nsfw_segment(text: str) -> bool:
 def _cap_reply_chunks(chunks: list[str], *, max_chunks: int) -> list[str]:
     if len(chunks) <= max_chunks:
         return chunks
+    # 超上限的尾部合成一条时用空格而不是换行, 避免又出现多行气泡
     if max_chunks <= 1:
-        joined = "\n".join(chunks).strip()
+        joined = " ".join(chunks).strip()
         return [joined] if joined else []
-    return chunks[: max_chunks - 1] + ["\n".join(chunks[max_chunks - 1 :]).strip()]
+    return chunks[: max_chunks - 1] + [" ".join(chunks[max_chunks - 1 :]).strip()]
 
 
 def _coerce_message_id(message_id: str) -> int | str:
