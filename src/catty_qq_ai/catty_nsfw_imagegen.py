@@ -1,14 +1,17 @@
-"""NSFW 自动生图: 笨猫第一次被插入(phase>=4)后,每 3 turn 用 NovelAI 画一张图。
+"""NSFW 自动生图: 笨猫第一次被插入(phase>=4)后,每 3 turn 画一张。
+
+主人 2026-10-25: 自动 NSFW 也切 Pixelbunny seedream-4.5。
+- 默认 backend=pixelbunny: 参考图上传 /v1/uploads → /v1/edits → 轮询 /v1/jobs/{id}。
+- 旧 NovelAI v4.5-full 代码保留兼容, 仅在 backend 不是 pixelbunny 时使用。
 
 主人 2026-05-28 需求:
 - **触发: 每次 user 发一句 NSFW 消息 = 一个 turn, 每 3 个 turn 画一张**
   (不看 phase, phase 只用来给 composer 决定画哪个情景。这个函数挂在 NSFW spark
    路径回复成功后, 走到这里就意味着 user 发了 NSFW 触发了 spark, 算一个 turn)
-- 模型: NovelAI v4.5-full
 - **Precise Reference (director_reference_*)**: catty 用 Miao/miaomiao.png + miaomiaonude.png 两张
   作为 character&style reference (fidelity=1.0 strength=1.0), 把笨猫角色细节 + 画风锁死;
   其它人格用其 imagegen 参考图 (机机 = Miao/fadianji.png + fadianji2.png, 见 persona 参数)
-- **characterPrompts 双角色锁**: 笨猫 (左) + 主人 (右,黑色剪影 + 无脸)
+- **characterPrompts 双角色锁** (NAI 路径): 笨猫 (左) + 主人 (右,黑色剪影 + 无脸)
 - 图片格式: 1024x1536 letterbox PNG base64 (NAI SDK 标准)
 - 扣费: 每张 10 积分 (主人豁免, 非主人余额不够则跳过本次)
 - prompt: 由 AI(spark/instant) 根据当前 phase + 刚生成的 reply 写 base caption 描述情景
@@ -25,6 +28,7 @@ import shutil
 import tempfile
 import threading
 import time
+import uuid
 import zipfile
 from io import BytesIO
 from pathlib import Path
@@ -618,6 +622,348 @@ async def _compose_base_caption(
     return cleaned[:700]
 
 
+# ── Pixelbunny / seedream-4.5 自动 NSFW 生图 ──
+def _nsfw_imagegen_backend(config) -> str:
+    raw = str(getattr(config, "catty_imagegen_backend", "") or "").strip().lower()
+    if raw == "pixelbunny":
+        return "pixelbunny"
+    if raw == "openai":
+        return "nai"
+    base_url = str(getattr(config, "catty_imagegen_base_url", "") or "").strip().lower()
+    return "pixelbunny" if "api.pixelbunny.ai" in base_url else "nai"
+
+
+def _image_ext_from_bytes(data: bytes, content_type: str = "") -> str:
+    ctype = (content_type or "").lower()
+    if "jpeg" in ctype or "jpg" in ctype or data[:3] == b"\xff\xd8\xff":
+        return ".jpg"
+    if "webp" in ctype or data[:4] == b"RIFF":
+        return ".webp"
+    return ".png"
+
+
+async def _pixelbunny_generate_nsfw(
+    config,
+    *,
+    prompt: str,
+    reference_paths: list[Path],
+) -> dict[str, Any] | None:
+    """提交 seedream-4.5 生成 NSFW 图 → 轮询 job → 下载 bytes。失败返回 None。"""
+    base_url = str(getattr(config, "catty_imagegen_base_url", "") or "").strip().rstrip("/")
+    api_key = str(getattr(config, "catty_imagegen_api_key", "") or "").strip()
+    model = str(
+        getattr(config, "catty_imagegen_nsfw_model", "seedream-4.5")
+        or "seedream-4.5"
+    ).strip()
+    if not base_url or not api_key:
+        logger.warning("nsfw_imagegen(pixelbunny): base_url/api_key 未配置")
+        return None
+
+    timeout = float(getattr(config, "catty_imagegen_timeout_seconds", 300.0) or 300.0)
+    poll_seconds = max(
+        float(getattr(config, "catty_imagegen_pixelbunny_poll_seconds", 2.0) or 2.0),
+        0.5,
+    )
+    poll_timeout = max(
+        float(getattr(config, "catty_imagegen_pixelbunny_poll_timeout_seconds", 300.0) or 300.0),
+        poll_seconds,
+    )
+    proxy_str = str(getattr(config, "catty_http_proxy", "") or "").strip()
+    client_kwargs: dict[str, Any] = {
+        "timeout": httpx.Timeout(timeout, connect=15.0),
+        "follow_redirects": True,
+        "http2": False,
+        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
+    }
+    if proxy_str:
+        client_kwargs["proxy"] = proxy_str
+
+    started = time.monotonic()
+    job_id = ""
+    cost_usd = 0.0
+    try:
+        async with httpx.AsyncClient(**client_kwargs) as client:
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+                "Idempotency-Key": uuid.uuid4().hex,
+            }
+            endpoint = f"{base_url}/images"
+            payload: dict[str, Any] = {
+                "model": model,
+                "prompt": prompt,
+                "aspect_ratio": "9:16",
+                "n": 1,
+            }
+            input_urls: list[str] = []
+            for ref_path in reference_paths[:2]:
+                try:
+                    ref_bytes = ref_path.read_bytes()
+                except OSError as exc:
+                    logger.warning(f"nsfw_imagegen(pixelbunny): ref read failed {ref_path}: {exc}")
+                    continue
+                upload = await client.post(
+                    f"{base_url}/uploads",
+                    headers={"Authorization": f"Bearer {api_key}"},
+                    files={"file": (ref_path.name or "ref.png", ref_bytes, "image/png")},
+                )
+                if upload.status_code >= 400:
+                    logger.warning(
+                        f"nsfw_imagegen(pixelbunny): ref upload HTTP {upload.status_code} "
+                        f"{upload.text[:200]!r}"
+                    )
+                    continue
+                try:
+                    upload_data = upload.json()
+                except ValueError:
+                    continue
+                url = str(upload_data.get("url") or "").strip() if isinstance(upload_data, dict) else ""
+                if url:
+                    input_urls.append(url)
+            if input_urls:
+                endpoint = f"{base_url}/edits"
+                payload["input_images"] = input_urls
+
+            response = await client.post(endpoint, headers=headers, json=payload)
+            if response.status_code >= 400:
+                logger.warning(
+                    f"nsfw_imagegen(pixelbunny): submit HTTP {response.status_code} "
+                    f"{response.text[:300]!r}"
+                )
+                return None
+            data = response.json()
+            if not isinstance(data, dict):
+                return None
+            job = data.get("job") if isinstance(data.get("job"), dict) else data
+            job_id = str(job.get("id") or data.get("job_id") or data.get("id") or "").strip()
+            status = str(job.get("status") or data.get("status") or "").strip().lower()
+            outputs = job.get("outputs") or data.get("outputs")
+            usage = job.get("usage") or data.get("usage")
+            if isinstance(usage, dict):
+                try:
+                    cost_usd = float(usage.get("cost_usd") or cost_usd)
+                except (TypeError, ValueError):
+                    pass
+            deadline = time.monotonic() + poll_timeout
+            while status not in {"succeeded", "completed", "done"}:
+                if not job_id:
+                    logger.warning("nsfw_imagegen(pixelbunny): 没返回 job id")
+                    return None
+                if status in {"failed", "error", "cancelled", "canceled"}:
+                    logger.warning(
+                        f"nsfw_imagegen(pixelbunny): job failed status={status} "
+                        f"{job.get('error') or data.get('error') or ''}"
+                    )
+                    return None
+                if time.monotonic() >= deadline:
+                    logger.warning(f"nsfw_imagegen(pixelbunny): job 轮询超时 {poll_timeout:.0f}s")
+                    return None
+                await asyncio.sleep(poll_seconds)
+                poll = await client.get(
+                    f"{base_url}/jobs/{job_id}",
+                    headers={"Authorization": f"Bearer {api_key}"},
+                )
+                if poll.status_code >= 400:
+                    logger.warning(
+                        f"nsfw_imagegen(pixelbunny): poll HTTP {poll.status_code}"
+                    )
+                    return None
+                data = poll.json()
+                if not isinstance(data, dict):
+                    return None
+                job = data.get("job") if isinstance(data.get("job"), dict) else data
+                status = str(job.get("status") or data.get("status") or "").strip().lower()
+                outputs = job.get("outputs") or data.get("outputs")
+                usage = job.get("usage") or data.get("usage")
+                if isinstance(usage, dict) and usage.get("cost_usd") is not None:
+                    try:
+                        cost_usd = float(usage.get("cost_usd") or 0.0)
+                    except (TypeError, ValueError):
+                        pass
+
+            output_url = ""
+            if isinstance(outputs, list):
+                for item in outputs:
+                    if isinstance(item, str) and item.strip():
+                        output_url = item.strip()
+                        break
+                    if isinstance(item, dict):
+                        candidate = item.get("url") or item.get("output") or item.get("src")
+                        if isinstance(candidate, str) and candidate.strip():
+                            output_url = candidate.strip()
+                            break
+            if not output_url:
+                logger.warning("nsfw_imagegen(pixelbunny): succeeded 但没有 outputs")
+                return None
+            download = await client.get(output_url)
+            if download.status_code >= 400 or not download.content:
+                logger.warning(
+                    f"nsfw_imagegen(pixelbunny): 下载失败 HTTP {download.status_code}"
+                )
+                return None
+            content_type = str(download.headers.get("content-type") or "").lower()
+            if content_type and not content_type.startswith("image/"):
+                logger.warning(
+                    f"nsfw_imagegen(pixelbunny): 输出不是图片 {content_type}"
+                )
+                return None
+            return {
+                "image_bytes": download.content,
+                "content_type": content_type,
+                "cost_usd": cost_usd,
+                "job_id": job_id,
+                "model": model,
+                "elapsed": time.monotonic() - started,
+                "had_reference": bool(input_urls),
+            }
+    except (httpx.HTTPError, asyncio.TimeoutError, ValueError) as exc:
+        logger.warning(
+            f"nsfw_imagegen(pixelbunny): {exc.__class__.__name__}: {exc}"
+        )
+        return None
+
+
+async def _maybe_generate_pixelbunny(
+    *,
+    config,
+    scope_key: str,
+    user_id: str,
+    phase_state,
+    affection_store,
+    current_reply: str,
+    user_text: str,
+    recent_messages: list | None,
+    pregnancy_state,
+    persona: Any,
+) -> Any:
+    if not str(getattr(config, "catty_imagegen_api_key", "") or "").strip():
+        return None
+
+    turn_count, draws_made = _bump_turn(scope_key, user_id)
+    if turn_count % DRAW_INTERVAL != 0:
+        return None
+
+    cost = COST_PER_IMAGE
+    if affection_store is not None and cost > 0:
+        is_owner = bool(affection_store.is_owner(user_id))
+        if not is_owner:
+            balance = int(affection_store.get_points(user_id) or 0)
+            if balance < cost:
+                logger.info(
+                    f"nsfw_imagegen(pixelbunny) skip (balance {balance} < {cost}, "
+                    f"user={user_id}, turn_count={turn_count})"
+                )
+                return None
+
+    phase_int = int(getattr(phase_state, "current_phase", 1) or 1) if phase_state else 1
+    affection_info: dict | None = None
+    if affection_store is not None:
+        try:
+            _lvl_exp = (
+                affection_store.get_level_and_exp(user_id)
+                if hasattr(affection_store, "get_level_and_exp") else None
+            )
+            affection_info = {
+                "is_owner": bool(affection_store.is_owner(user_id)),
+                "level": int(_lvl_exp[0]) if _lvl_exp else None,
+            }
+        except Exception:  # noqa: BLE001
+            affection_info = None
+
+    composed = await _compose_base_caption(
+        config,
+        phase_state,
+        current_reply,
+        user_text=user_text,
+        recent_messages=recent_messages,
+        pregnancy_state=pregnancy_state,
+        affection_info=affection_info,
+    )
+    base_caption = composed or DEFAULT_BASE_CAPTION
+
+    persona_imagegen = getattr(persona, "imagegen", None)
+    if persona_imagegen is not None:
+        ref_paths = _persona_nsfw_reference_paths(persona_imagegen)
+    else:
+        miao_dir = _find_miao_dir(config)
+        ref_paths = []
+        if miao_dir is not None:
+            bare_ref = miao_dir / "miaomiaonude.png"
+            if bare_ref.is_file():
+                ref_paths = [bare_ref]
+
+    char_girl = (
+        str(
+            getattr(persona_imagegen, "nsfw_girl_tags", "")
+            or getattr(persona_imagegen, "girl_tags", "")
+            or CHARACTER_GIRL_TAGS
+        )
+        if persona_imagegen is not None
+        else CHARACTER_GIRL_TAGS
+    )
+    prompt = ", ".join(
+        part for part in (base_caption, char_girl, CHARACTER_BOY_TAGS) if part
+    ).replace("{", "").replace("}", "")
+
+    result = await _pixelbunny_generate_nsfw(
+        config,
+        prompt=prompt,
+        reference_paths=ref_paths,
+    )
+    if not result:
+        logger.warning(
+            f"nsfw_imagegen(pixelbunny) gave up (user={user_id} scope={scope_key} "
+            f"phase=P{phase_int} turn_count={turn_count})"
+        )
+        return None
+
+    image_bytes = result["image_bytes"]
+    cache_dir_raw = str(
+        getattr(config, "catty_imagegen_cache_dir", "pictures/imagegen_cache")
+        or "pictures/imagegen_cache"
+    )
+    cache_dir = Path(cache_dir_raw).expanduser()
+    if not cache_dir.is_absolute():
+        cache_dir = cache_dir.resolve()
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    ext = _image_ext_from_bytes(image_bytes, result.get("content_type", ""))
+    file_path = cache_dir / f"nsfw_auto_{int(time.time()*1000)}{ext}"
+    try:
+        file_path.write_bytes(image_bytes)
+    except OSError as exc:
+        logger.warning(f"nsfw_imagegen(pixelbunny): 写图失败 {exc}")
+        return None
+
+    try:
+        from nonebot.adapters.onebot.v11 import MessageSegment
+    except ImportError:
+        return None
+    segment = MessageSegment.image(file=file_path.resolve().as_uri())
+
+    consume_log = ""
+    if affection_store is not None and cost > 0:
+        try:
+            res = affection_store.consume_points(user_id, cost)
+            consume_log = (
+                f"cost={cost} balance_after={res.get('balance_after')} "
+                f"is_owner={res.get('is_owner')}"
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"nsfw_imagegen(pixelbunny) consume_points failed: {exc}")
+
+    _mark_drawn(scope_key, user_id)
+    logger.info(
+        f"nsfw_imagegen(pixelbunny) ★ drew (user={user_id} scope={scope_key} "
+        f"phase=P{phase_int} turn_count={turn_count} "
+        f"draws_made={draws_made + 1} elapsed={result['elapsed']:.1f}s "
+        f"bytes={len(image_bytes)} file={file_path.name} {consume_log} "
+        f"model={result['model']} job={result['job_id']} "
+        f"cost_usd={result['cost_usd']:.4f} ref={result['had_reference']} "
+        f"ai_composed={'yes' if composed else 'no'} caption={prompt[:200]!r})"
+    )
+    return segment
+
+
 # ── 主入口 ──
 async def maybe_generate_image(
     *,
@@ -632,7 +978,7 @@ async def maybe_generate_image(
     pregnancy_state=None,
     persona: Any = None,
 ) -> Any:
-    """每 3 个 user turn 触发, 走 V4.5 + characterPrompts 双角色锁 + director_reference 生图。
+    """每 3 个 user turn 触发, 默认走 Pixelbunny seedream-4.5 edit/generate。
 
     返回 MessageSegment 或 None。不触发/余额不足/报错都返回 None。
     走到这函数本身就算一个 user turn (调用方 chat handler 在 NSFW spark 成功后才调)。
@@ -642,6 +988,19 @@ async def maybe_generate_image(
     一起传过来, _compose_base_caption 会把场景信息全套丢给 deepseek 让它写对应当下
     场景的 caption (不再瞎默写床上 missionary).
     """
+    if _nsfw_imagegen_backend(config) == "pixelbunny":
+        return await _maybe_generate_pixelbunny(
+            config=config,
+            scope_key=scope_key,
+            user_id=user_id,
+            phase_state=phase_state,
+            affection_store=affection_store,
+            current_reply=current_reply,
+            user_text=user_text,
+            recent_messages=recent_messages,
+            pregnancy_state=pregnancy_state,
+            persona=persona,
+        )
     if not getattr(config, "catty_imagegen_nai_enabled", False):
         return None
     token = str(getattr(config, "catty_imagegen_nai_token", "") or "").strip()

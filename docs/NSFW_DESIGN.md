@@ -114,6 +114,8 @@ prompt 内回复**绝对禁止**出现：
 - 自动 NSFW 生图（每 N turn 一张，扣 10 积分，主人豁免）参考图取人格 `imagegen`：
   `ref_nsfw_path` 为空时复用 `ref_path` + `ref_path_extra`，机机即 `Miao/fadianji.png` +
   `Miao/fadianji2.png`；角色锁用 `nsfw_girl_tags`（缺省回落 `girl_tags`）。
+  2026-10-25 起自动生图也走 Pixelbunny `seedream-4.5`：参考图上传 `/v1/uploads` 后
+  走 `/v1/edits`，再轮询 `/v1/jobs/{id}`；backend 非 pixelbunny 时才走 legacy NovelAI。
 - 手动画图工具 `catty_imagegen` 仅在人格/场景授权时允许 planner 输出
   `self_portrait="nsfw"`；未授权场景强制回落 `sfw`。积分公式不变。
   2026-10-25 起绘图后端切 Pixelbunny：普通绘图 `seedream-5-pro`（V5），
