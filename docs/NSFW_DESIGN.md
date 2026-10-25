@@ -207,3 +207,28 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   `_prefer_spark` 时一律用 `_nsfw_error_fallback_text()` 回一句场景内台词，不解释、不道歉。
 - 绘图模型分流：`ToolContext.nsfw_context`（sticky / 深词 / phase 阈值，或 planner
   `self_portrait=nsfw`）→ `seedream-4.5`；否则 `seedream-5-pro`。
+
+### 12.5 回复与生图解耦：文字先发，图后台补发（2026-10-25 六修）
+
+反馈：出图慢时整轮回复被拖住——文字等在生图后面才肯发，慢的时候会话锁一直被占着，
+后续消息排队。
+
+- `handle_chat` 用 `_reply_done = asyncio.Event()`（`_lock_stack.callback(_reply_done.set)`，
+  finish/异常退出都会置位）标记「本轮文字已发完」。
+- `catty_imagegen` 工具调用改走 `_imagegen_tool_with_deferred_delivery`：`asyncio.wait_for`
+  只在线等 `_IMAGEGEN_INLINE_WAIT_SECONDS`（4s）。冷却/积分不足/参数错这类秒回结果照常
+  交给模型；还在画就返回 `status="generating_in_background"`（`image_sent=False`，
+  附一句「后台生成，画好会单独发出，别说图已发出」），主回复照常写完发出。
+- 超时后 `_spawn_deferred_image_delivery` 起后台 task：等 `_reply_done`（上限
+  `_DEFERRED_DELIVERY_MAX_WAIT_SECONDS`=180s），然后逐条 `bot.send`。`OnebotActionFailed`
+  不重试（语义模糊，可能已送达）；`OnebotNetworkError` 隔 2s 重试一次。
+- 后台结果整理 `_deferred_imagegen_items`：优先取 `ToolContext.pending_image_segments`
+  （detached ctx 单独收集，避免与主线程抢写）；失败只发一句 `imagegen_public_failure`
+  的道歉，积分/冷却只记日志。
+- NSFW 自动配图同理：删掉旧的「发 chunks 前最多等 30s」和「`chunks[-1]` 提前发出 +
+  `await _nsfw_img_task` 阻塞」两段；任务已完成就直接取 segment，未完成就交给后台补发。
+  原先超时后仍在 handler 里死等出图的路径（会话锁全程占着）一并移除。
+- Pixelbunny 连接层（`tools._exec_imagegen_pixelbunny` / `catty_nsfw_imagegen._pixelbunny_generate_nsfw`）：
+  connect 超时 15→30s，改用 `httpx.AsyncHTTPTransport(retries=3, proxy=...)`（建连失败重试，
+  请求未发出因而不会重复提交任务），去掉 `http2=False` 与 `max_keepalive_connections=0`；
+  一次出图的上传/提交/轮询/下载复用同一条长连接。
