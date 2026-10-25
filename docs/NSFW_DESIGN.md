@@ -116,6 +116,8 @@ prompt 内回复**绝对禁止**出现：
   `Miao/fadianji2.png`；角色锁用 `nsfw_girl_tags`（缺省回落 `girl_tags`）。
 - 手动画图工具 `catty_imagegen` 仅在人格/场景授权时允许 planner 输出
   `self_portrait="nsfw"`；未授权场景强制回落 `sfw`。积分公式不变。
+  2026-10-25 起绘图后端切 Pixelbunny：普通绘图 `seedream-5-pro`（V5），
+  NSFW 场景/自画像 `seedream-4.5`；legacy gpt/nai 仅保留兼容路径。
 
 ## 12. 机机私聊 gate 与拒绝回归（2026-10-25 补丁）
 
@@ -184,3 +186,22 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   露骨程度，不许压短；拒答/空正文仍重试 + 原样放行兜底。
 - 拆气泡：`_reply_chunks` 的 NSFW 多行路径从 catty-only 扩到 `fadianji`，上限放宽到
   `max(max_chunks, 8)` 后再 `_cap_reply_chunks`；7 行动作/台词不再挤成一个泡泡。
+
+### 12.4 NSFW 拖延句 / 失败快速兜底（2026-10-25 五修）
+
+反馈：NSFW 里出现光秃秃的「马上」；主调用 ReadTimeout 后要等两分钟才有下一句。
+
+- 远端日志证据：`2026-10-25 13:52:42 slow_reply_placeholder[catalog] sent after 60.0s ...
+  line='马上'`，随后 `13:53:51 codex_instant(deepseek-v4.1-flash) cloud call failed
+  (ReadTimeout); falling back to ...`。所以「马上」是 60s 慢回复占位句，不是模型正文。
+- NSFW 上下文（sticky / 深词 / phase≥阈值）启动时直接不创建占位 task；`_build_messages`
+  返回 `_prefer_spark=True` 后再取消一次，双保险。机机 placeholder 池里的 `马上` 也已移除。
+- spark 回复若整句只有 `马上/等下/稍等/等我/待会` 任一形态（`_NSFW_DEFERRAL_REPLY_RE`），
+  判定为失败，不发送、不重试，立即用 retreat 模板补下一句。
+- spark 调用异常、空正文同样立即 break 到 retreat 模板；不再把异常抛给外层道歉。
+- `chat_completion_codex_instant` 新增 `timeout_override`；`catty_nsfw_request_timeout_seconds`
+  （默认 30s）只作用于 `request_route="nsfw_main"`，主调用超时后快速走 fallback。
+- 外层 `OpenAICompatibleError` / `TimeoutException` / `HTTPError` / `MCBusyError` 在
+  `_prefer_spark` 时一律用 `_nsfw_error_fallback_text()` 回一句场景内台词，不解释、不道歉。
+- 绘图模型分流：`ToolContext.nsfw_context`（sticky / 深词 / phase 阈值，或 planner
+  `self_portrait=nsfw`）→ `seedream-4.5`；否则 `seedream-5-pro`。

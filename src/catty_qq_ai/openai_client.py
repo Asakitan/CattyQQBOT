@@ -4590,6 +4590,7 @@ async def chat_completion_codex_instant(
     max_tokens: int = 800,
     model_override: str = "",
     request_route: str = "spark",
+    timeout_override: float | None = None,
 ) -> str:
     """通用 5.3-codex 短回复路径 — placeholder / 签到 caption / NSFW deep 共用。
     model_override 优先, 否则 catty_nsfw_spark_model, 兜底 catty_filter_model.
@@ -4622,7 +4623,11 @@ async def chat_completion_codex_instant(
         api_key=api_key,
         model=nsfw_model,
         messages=messages,
-        timeout=config.catty_request_timeout,
+        timeout=(
+            float(timeout_override)
+            if timeout_override is not None and float(timeout_override) > 0
+            else config.catty_request_timeout
+        ),
         temperature=config.catty_temperature,
         max_tokens=max_tokens,
         extra_headers=config.catty_filter_extra_headers or config.catty_openai_extra_headers,

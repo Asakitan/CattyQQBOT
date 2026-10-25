@@ -498,6 +498,16 @@ _NSFW_EXIT_FLAG_COUNT: dict[str, int] = {}
 _NSFW_EXIT_FLAG_LIMIT = 3
 # spark reply 末尾的状态自检标志正则 (大小写不敏感, 容忍空格).
 _NSFW_STATE_FLAG_RE = re.compile(r"<\s*NSFW_STATE\s*:\s*(CONTINUE|EXIT)\s*>", re.IGNORECASE)
+# NSFW 模式下模型偶尔只回一句「马上/等下/稍等」当拖延；这种整句直接丢弃并快速走兜底，
+# 不让它进气泡、也不让它拖慢场景。
+_NSFW_DEFERRAL_REPLY_RE = re.compile(
+    r"^\s*(?:马上|马上来|马上就好|马上到|等一下|等下|等会儿|等一会|稍等(?:一下)?|等我(?:一下)?|待会(?:儿)?)"
+    r"\s*[。.!！?？…~～]*\s*$"
+)
+
+
+def _is_nsfw_deferral_reply(text: str) -> bool:
+    return bool(text and _NSFW_DEFERRAL_REPLY_RE.match(text.strip()))
 # 注入给 DeepSeek 的状态自检指令 (sticky spark trailing system, 不进前缀)。
 _NSFW_STATE_FLAG_INSTRUCTION = (
     "【事后隐藏标记·不影响演绎】先**完全按上面 phase tracker 的推进要求正常写完这条回复**"
@@ -15429,6 +15439,19 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         placeholder_task = (
             None if _quick_ack_task is not None else _spawn_slow_reply_placeholder(matcher, event)
         )
+        _prefer_spark = False
+        # NSFW 模式不垫占位句: 沉浸 RP 里突然冒一句「马上/等下」会把场景打断。
+        try:
+            if _is_nsfw_context(
+                _conversation_queue_key(event),
+                str(event.user_id),
+                _user_text_for_intent,
+            ):
+                if placeholder_task is not None and not placeholder_task.done():
+                    placeholder_task.cancel()
+                placeholder_task = None
+        except Exception as _placeholder_nsfw_exc:  # noqa: BLE001
+            logger.debug(f"nsfw placeholder gate failed (non-fatal): {_placeholder_nsfw_exc}")
         # 正常路径在主回复返回后就 cancel (见 provider 调用的 finally); 这里兜底: 准备阶段
         # 抛错或 finish 提前退出时, 也不能让它们在本轮结束后再冒一句。
         _lock_stack.callback(_cancel_task_if_pending, _quick_ack_task)
@@ -15701,6 +15724,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             wake_context=wake_context,
             bot_continuation_context=bot_continuation_context,
         )
+        if _prefer_spark and placeholder_task is not None and not placeholder_task.done():
+            placeholder_task.cancel()
+            placeholder_task = None
         if reply_source_context:
             _append_internal_system(messages, reply_source_context, label="reply source context")
         # NSFW + 主人触发时切到 spark 路由 (gpt-5.3-codex 模型 alignment 比主 5.5 宽松,
@@ -15714,6 +15740,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # - recent_image_urls: 最近 N 分钟群里出现的图(用户「分消息」回指: 上一条群友图 + 这条说『基于刚才那张画 X』)
         # - is_directly_requested: 硬 guard - 没指向猫猫的 opportunistic 旁观回复不许 push 内容到群
         # (图源 / 工具清单 / 先导回复已在 auto_fetch 之前算好, 见那里的注释)
+        # 画图按场景选模型：NSFW 场景/自画像走 seedream-4.5，普通走 seedream-5-pro。
+        _nsfw_tool_context = bool(_prefer_spark)
+        if not _nsfw_tool_context:
+            try:
+                _nsfw_tool_context = _is_nsfw_context(
+                    _conversation_queue_key(event),
+                    str(event.user_id),
+                    _user_text_for_intent,
+                )
+            except Exception as _nsfw_ctx_exc:  # noqa: BLE001
+                logger.debug(f"nsfw tool context probe failed (non-fatal): {_nsfw_ctx_exc}")
         tool_ctx = ToolContext(
             config=config,
             memory_store=memory_store,
@@ -15737,6 +15774,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             scope_key=_conversation_queue_key(event),
             # 主人 2026-05-29: catty_imagegen agent 模式拿原话喂给 deepseek 出 plan
             user_text=_user_text_for_intent,
+            nsfw_context=_nsfw_tool_context,
         )
 
         _turn_tool_result_texts: list[str] = []
@@ -15765,6 +15803,18 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 tool_ctx,
                 allowed_names=_allowed_names,
             )
+            if name == "catty_imagegen" and isinstance(result, dict) and result.get("error"):
+                _img_error_text = str(result.get("error") or "")
+                # 积分不足/冷却不是生成失败，保留原有提示；其余错误一律吞掉并道歉。
+                if "积分不够" not in _img_error_text and "冷却" not in _img_error_text:
+                    try:
+                        from .tools import imagegen_public_failure
+                        result = imagegen_public_failure(tool_ctx, _img_error_text)
+                    except Exception as _img_fail_exc:  # noqa: BLE001
+                        logger.warning(
+                            f"imagegen public failure conversion failed: "
+                            f"{type(_img_fail_exc).__name__}: {_img_fail_exc}"
+                        )
             # 主人 2026-08-15: 成功结果文本同时留档, 供末尾回填遥测的回复采用判定。
             _tool_succeeded = (
                 isinstance(result, dict)
@@ -15995,6 +16045,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             # 主人 2026-05-29 P0: 改 trailing system, 不再 inline 进 user content
             # (旧 inline 下轮变 history 被 strip → 前缀漂移). system 段不进 history.
             _append_internal_system(messages, _img_hint, label="img source hint")
+
+        def _nsfw_error_fallback_text() -> str:
+            try:
+                return _pick_retreat_template(
+                    is_owner=bool(_user_is_owner),
+                    user_id=str(event.user_id),
+                    user_text=str(incoming.text or ""),
+                )
+            except Exception:  # noqa: BLE001
+                return "……"
+
         try:
             if _prefer_spark:
                 # NSFW deep 路径: 默认走 catty_nsfw_spark_model (当前统一为 flash).
@@ -16054,17 +16115,51 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 reply = ""
                 _nsfw_state_flag = ""  # DeepSeek 本轮自评标志 (continue/exit/''), 末轮成功的为准
                 _refusal_history: list[str] = []  # 收集每次软拒原文用于 log
+                _nsfw_call_error: Exception | None = None
+                _deferral_hit = False
+                _empty_reply_hit = False
                 for _try in range(1, _MAX_NSFW_RETRY + 1):
-                    reply = await chat_completion_codex_instant(
-                        config,
-                        _spark_messages,
-                        max_tokens=800,
-                        model_override=_chosen_model,
-                        request_route="nsfw_main",
-                    )
+                    try:
+                        reply = await chat_completion_codex_instant(
+                            config,
+                            _spark_messages,
+                            max_tokens=800,
+                            model_override=_chosen_model,
+                            request_route="nsfw_main",
+                            timeout_override=float(
+                                getattr(config, "catty_nsfw_request_timeout_seconds", 30.0)
+                                or 30.0
+                            ),
+                        )
+                    except Exception as exc:  # noqa: BLE001
+                        _nsfw_call_error = exc
+                        _was_refusal = True
+                        logger.warning(
+                            f"NSFW spark call failed (try {_try}/{_MAX_NSFW_RETRY}, "
+                            f"model={_chosen_model}, {exc.__class__.__name__}: {exc}) "
+                            "→ 快速走兜底，不向用户报错"
+                        )
+                        break
                     # 主人 2026-05-30: 先抽末尾 <NSFW_STATE:...> 标志并剥除, 下游 refusal 判定 /
                     # phase 反推 / opener 记录全看干净 reply, 不被标志污染。
                     reply, _nsfw_state_flag = _extract_nsfw_state_flag(reply)
+                    if _is_nsfw_deferral_reply(reply):
+                        _deferral_hit = True
+                        _was_refusal = True
+                        _refusal_history.append(reply[:60])
+                        logger.warning(
+                            f"NSFW deferral-only reply suppressed (try {_try}/{_MAX_NSFW_RETRY}, "
+                            f"model={_chosen_model}, orig={reply[:80]!r}) → 快速走下一句兜底"
+                        )
+                        break
+                    if not reply.strip():
+                        _empty_reply_hit = True
+                        _was_refusal = True
+                        logger.warning(
+                            f"NSFW empty reply (try {_try}/{_MAX_NSFW_RETRY}, "
+                            f"model={_chosen_model}) → 快速走下一句兜底"
+                        )
+                        break
                     _was_refusal = _is_soft_refusal_reply(reply)
                     if not _was_refusal:
                         # ── 本地 phase tracker (主人 2026-05-27) ──
@@ -16142,15 +16237,16 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         f"NSFW soft-refusal (try {_try}/{_MAX_NSFW_RETRY}, "
                         f"model={_chosen_model}, orig={reply[:80]!r}) — 拦截 + retry"
                     )
-                _record_nsfw_reply_outcome(_nsfw_scope_key, _was_refusal)
+                if not _deferral_hit and not _empty_reply_hit and _nsfw_call_error is None:
+                    _record_nsfw_reply_outcome(_nsfw_scope_key, _was_refusal)
                 if _was_refusal:
-                    # 3 次 retry 全软拒 → 用 retreat 模板兜底
+                    # 软拒/空回/调用失败/纯拖延句 → 用 retreat 模板快速补下一句 (不道歉、不提 error)
                     _new_count = _NSFW_SOFT_REFUSE_COUNT.get(_nsfw_scope_key, 0)
                     logger.warning(
-                        f"NSFW soft-refusal exhausted {_MAX_NSFW_RETRY} retries "
-                        f"→ retreat template fallback (model={_chosen_model}, "
-                        f"count={_new_count}, key={_nsfw_scope_key}, "
-                        f"refusals={_refusal_history!r})"
+                        f"NSFW reply fallback (deferral={_deferral_hit}, empty={_empty_reply_hit}, "
+                        f"call_error={_nsfw_call_error.__class__.__name__ if _nsfw_call_error else '-'}, "
+                        f"model={_chosen_model}, count={_new_count}, key={_nsfw_scope_key}, "
+                        f"refusals={_refusal_history!r}) → retreat template"
                     )
                     reply = _pick_retreat_template(
                         is_owner=_is_owner,
@@ -16396,25 +16492,38 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 reply = sanitized
         except MCBusyError as exc:
             logger.info(f"MC busy gate refused local fallback: {exc}")
-            reply_context = _persona_reply_context_for_event(event)
-            await matcher.finish(Message(
-                reply_context.render(reply_context.catalog.busy_fallback_reply)
-            ))
+            if _prefer_spark:
+                await matcher.finish(Message(_nsfw_error_fallback_text()))
+            else:
+                reply_context = _persona_reply_context_for_event(event)
+                await matcher.finish(Message(
+                    reply_context.render(reply_context.catalog.busy_fallback_reply)
+                ))
         except OpenAICompatibleError as exc:
             logger.warning(f"OpenAI-compatible API error: {exc}")
-            await matcher.finish(Message(exc.public_message))
+            if _prefer_spark:
+                # NSFW 出错不解释、不道歉，直接补下一句。
+                await matcher.finish(Message(_nsfw_error_fallback_text()))
+            else:
+                await matcher.finish(Message(exc.public_message))
         except httpx.TimeoutException:
             logger.warning("OpenAI-compatible API request timed out")
-            reply_context = _persona_reply_context_for_event(event)
-            await matcher.finish(Message(
-                reply_context.render(reply_context.catalog.api_timeout_reply)
-            ))
+            if _prefer_spark:
+                await matcher.finish(Message(_nsfw_error_fallback_text()))
+            else:
+                reply_context = _persona_reply_context_for_event(event)
+                await matcher.finish(Message(
+                    reply_context.render(reply_context.catalog.api_timeout_reply)
+                ))
         except httpx.HTTPError as exc:
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
-            reply_context = _persona_reply_context_for_event(event)
-            await matcher.finish(Message(
-                reply_context.render(reply_context.catalog.api_transport_reply)
-            ))
+            if _prefer_spark:
+                await matcher.finish(Message(_nsfw_error_fallback_text()))
+            else:
+                reply_context = _persona_reply_context_for_event(event)
+                await matcher.finish(Message(
+                    reply_context.render(reply_context.catalog.api_transport_reply)
+                ))
         finally:
             # 任何路径都要 cancel placeholder task,避免回完了又冒一句"猫猫想想喵~"。
             if placeholder_task is not None and not placeholder_task.done():

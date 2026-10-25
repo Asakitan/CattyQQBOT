@@ -60,6 +60,8 @@ class Config(BaseModel):
     catty_imagegen_base_url: str = ""
     catty_imagegen_api_key: str = ""
     catty_imagegen_model: str = "gpt-image-2"
+    # Pixelbunny 后端：普通绘图走 seedream-5-pro，NSFW 上下文/自画像走 seedream-4.5。
+    catty_imagegen_nsfw_model: str = "seedream-4.5"
     catty_imagegen_default_size: str = "1024x1024"
     catty_imagegen_default_quality: str = "low"
     catty_imagegen_default_format: str = "png"
@@ -75,6 +77,14 @@ class Config(BaseModel):
     # 主人贴的账单实测 OpenAI gpt-image-2 经常 150-200s 才完成,HTTPS 走 CF 边缘 124s 就 524,
     # HTTP 直连 origin 没有这个限制。chat_completion 短不受影响,保持 HTTPS。
     catty_imagegen_force_http_scheme: bool = True
+
+    # ── Pixelbunny 路径(backend="pixelbunny") ──
+    # auto: base_url 含 api.pixelbunny.ai 时自动走 Pixelbunny; 否则走原 OpenAI Image API。
+    catty_imagegen_backend: str = "auto"  # auto / openai / pixelbunny
+    catty_imagegen_pixelbunny_webhook_secret: str = ""
+    catty_imagegen_pixelbunny_resolution: str = "1K"  # seedream-5-pro 支持 1K / 2K
+    catty_imagegen_pixelbunny_poll_seconds: float = 2.0
+    catty_imagegen_pixelbunny_poll_timeout_seconds: float = 300.0
 
     # ── NovelAI 路径(provider="nai") ──
     # 主 AI 在 catty_imagegen tool 里选 provider="nai" 时走这条; 二次元/动漫/角色立绘适用。
@@ -190,6 +200,8 @@ class Config(BaseModel):
     # 例: 主 model = gpt-5.5, fallback = gpt-5.3-codex-spark.
     catty_nsfw_fallback_model: str = ""
     catty_nsfw_softrefuse_threshold: int = 2
+    # NSFW spark 单次请求超时：超过就快速切 fallback/兜底，不让用户等 60s+。
+    catty_nsfw_request_timeout_seconds: float = 30.0
     # Anthropic Prompt Caching (ST PR #3085 移植) — 显式注入 cache_control: ephemeral.
     # OpenAI native 是 implicit caching 不需要; Claude / 中间人走 Claude 协议时需要显式标记.
     # 启用后 spark + 主路径都注入 4 个 breakpoint (system tail + messages depth 2/4 + tools tail),

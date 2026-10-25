@@ -1518,7 +1518,7 @@ FADIANJI_REPLY_CATALOG = PersonaReplyCatalog(
     slow_reply_placeholders=(
         "等下",
         "机在看",
-        "马上",
+        "看着呢",
         "我去，整理下",
         "别急",
     ),

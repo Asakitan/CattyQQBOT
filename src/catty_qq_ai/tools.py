@@ -19,6 +19,7 @@ import re
 import socket
 import sys
 import time
+import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Awaitable, Callable, Collection, Literal
@@ -1672,6 +1673,8 @@ class ToolContext:
     # deepseek 代理模式时, 让 deepseek 自己读原话出 NAI/gpt prompt + provider 选择 + 短评,
     # 主 sonnet 那轮直接短路, 省 follow-up 100K+ 重传 + 杜绝 tool_use 配对 500。
     user_text: str = ""
+    # 当前轮是否 NSFW 场景（sticky / 深词 / phase 阈值）。绘图据此选 seedream-4.5 还是 5-pro。
+    nsfw_context: bool = False
 
     @property
     def group_id(self) -> str:
@@ -2817,10 +2820,334 @@ async def _meme_query_impl(keywords: str, ctx: ToolContext) -> dict[str, Any]:
     }
 
 
-# ── catty_imagegen: 主 AI 主动生图(OpenAI Image API + NovelAI) ─────────
+# ── catty_imagegen: 主 AI 主动生图(OpenAI Image API + NovelAI + Pixelbunny) ─────────
 
 _ALLOWED_IMAGEGEN_QUALITY = {"low", "medium", "high", "auto"}
 _IMAGEGEN_FMT_TO_EXT = {"png": ".png", "jpeg": ".jpg", "jpg": ".jpg", "webp": ".webp"}
+
+# Pixelbunny POST /v1/images 用 aspect_ratio，不接受 OpenAI 的 size/quality。
+_PIXELBUNNY_ASPECT_MAP: dict[str, str] = {
+    "portrait": "9:16",
+    "landscape": "16:9",
+    "square": "1:1",
+    "1:1": "1:1",
+    "4:3": "4:3",
+    "3:4": "3:4",
+    "16:9": "16:9",
+    "9:16": "9:16",
+    "3:2": "3:2",
+    "2:3": "2:3",
+    "21:9": "21:9",
+}
+
+
+def _imagegen_backend(config: Config) -> str:
+    raw = str(getattr(config, "catty_imagegen_backend", "") or "").strip().lower()
+    if raw in {"pixelbunny", "openai"}:
+        return raw
+    base_url = str(getattr(config, "catty_imagegen_base_url", "") or "").strip().lower()
+    return "pixelbunny" if "api.pixelbunny.ai" in base_url else "openai"
+
+
+def imagegen_public_failure(ctx: ToolContext, detail: str) -> dict[str, Any]:
+    """生图失败对外只留一句道歉，技术细节只写日志。"""
+    _logger.warning("imagegen failed (detail suppressed from user): %s", detail)
+    apology = _persona_text(
+        getattr(ctx, "persona", None),
+        "呜…这次图没画出来，主人别怪猫猫，等会儿再让猫猫试一次好不好…",
+        "抱歉，这次图没能画出来，请稍后再试。",
+    )
+    return {
+        "ok": False,
+        "image_sent": False,
+        "failed": True,
+        "user_facing_hint": apology,
+        "_short_circuit_reply": apology,
+    }
+
+
+def _pixelbunny_aspect_ratio(aspect: str, size: str) -> str:
+    raw = (aspect or "").strip().lower()
+    if raw in _PIXELBUNNY_ASPECT_MAP:
+        return _PIXELBUNNY_ASPECT_MAP[raw]
+    if size:
+        try:
+            width, height = (int(part) for part in size.lower().split("x", 1))
+        except (TypeError, ValueError):
+            width, height = 0, 0
+        if width > 0 and height > 0:
+            if abs(width - height) <= 1:
+                return "1:1"
+            return "16:9" if width > height else "9:16"
+    return "1:1"
+
+
+def _pixelbunny_output_url(outputs: Any) -> str:
+    if not isinstance(outputs, list):
+        return ""
+    for item in outputs:
+        if isinstance(item, str) and item.strip():
+            return item.strip()
+        if isinstance(item, dict):
+            value = item.get("url") or item.get("output") or item.get("src")
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    return ""
+
+
+async def _pixelbunny_json_request(
+    client: httpx.AsyncClient,
+    method: str,
+    url: str,
+    *,
+    api_key: str,
+    payload: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Idempotency-Key": uuid.uuid4().hex,
+    }
+    if payload is not None:
+        headers["Content-Type"] = "application/json"
+    response = await client.request(method, url, headers=headers, json=payload)
+    if response.status_code >= 400:
+        detail = response.text[:300]
+        raise RuntimeError(f"Pixelbunny HTTP {response.status_code}: {detail}")
+    try:
+        data = response.json()
+    except ValueError as exc:
+        raise RuntimeError(f"Pixelbunny 响应不是 JSON: {exc}") from exc
+    if not isinstance(data, dict):
+        raise RuntimeError("Pixelbunny 响应不是 JSON object")
+    return data
+
+
+async def _exec_imagegen_pixelbunny(
+    *,
+    prompt: str,
+    ctx: ToolContext,
+    quality: str,
+    size: str,
+    image_cost: int,
+    affection: Any,
+    input_image_bytes: bytes | None = None,
+    aspect: str = "",
+    resolution: str = "",
+    nsfw: bool = False,
+) -> dict[str, Any]:
+    from pathlib import Path
+
+    config = ctx.config
+    base_url = str(getattr(config, "catty_imagegen_base_url", "") or "").strip().rstrip("/")
+    api_key = str(getattr(config, "catty_imagegen_api_key", "") or "").strip()
+    if nsfw:
+        model = str(
+            getattr(config, "catty_imagegen_nsfw_model", "seedream-4.5")
+            or "seedream-4.5"
+        ).strip()
+    else:
+        model = str(
+            getattr(config, "catty_imagegen_model", "seedream-5-pro")
+            or "seedream-5-pro"
+        ).strip()
+    if not model.lower().startswith("seedream"):
+        model = "seedream-4.5" if nsfw else "seedream-5-pro"
+    timeout = float(getattr(config, "catty_imagegen_timeout_seconds", 300.0) or 300.0)
+    poll_seconds = max(
+        float(getattr(config, "catty_imagegen_pixelbunny_poll_seconds", 2.0) or 2.0),
+        0.5,
+    )
+    poll_timeout = max(
+        float(getattr(config, "catty_imagegen_pixelbunny_poll_timeout_seconds", 300.0) or 300.0),
+        poll_seconds,
+    )
+    resolution = (
+        resolution
+        or str(getattr(config, "catty_imagegen_pixelbunny_resolution", "1K") or "1K")
+    ).strip().upper()
+    if resolution not in {"1K", "2K"}:
+        resolution = "1K"
+    aspect_ratio = _pixelbunny_aspect_ratio(aspect, size)
+    if model == "seedream-4.5" and aspect_ratio not in {"1:1", "16:9", "9:16", "4:3", "3:4"}:
+        aspect_ratio = "1:1"
+    # seedream-4.5 的模型目录不给 resolution 档位；只有 5-pro 接受 1K/2K。
+    if model != "seedream-5-pro":
+        resolution = ""
+    if not base_url:
+        return {"error": "imagegen base_url 没配,无法生图"}
+    if not api_key:
+        return {"error": "imagegen api_key 没配,无法生图"}
+
+    client_kwargs: dict[str, Any] = {
+        "timeout": httpx.Timeout(timeout, connect=15.0),
+        "follow_redirects": True,
+        "http2": False,
+        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
+    }
+    proxy_str = str(getattr(config, "catty_http_proxy", "") or "").strip()
+    if proxy_str:
+        client_kwargs["proxy"] = proxy_str
+
+    job_id = ""
+    cost_usd = 0.0
+    started = time.monotonic()
+    try:
+        async with httpx.AsyncClient(**client_kwargs) as client:
+            endpoint = f"{base_url}/images"
+            payload: dict[str, Any] = {
+                "model": model,
+                "prompt": prompt,
+                "aspect_ratio": aspect_ratio,
+                "n": 1,
+            }
+            if resolution:
+                payload["resolution"] = resolution
+            if input_image_bytes is not None:
+                upload_headers = {"Authorization": f"Bearer {api_key}"}
+                upload = await client.post(
+                    f"{base_url}/uploads",
+                    headers=upload_headers,
+                    files={"file": ("input.png", input_image_bytes, "image/png")},
+                )
+                if upload.status_code >= 400:
+                    raise RuntimeError(
+                        f"Pixelbunny upload HTTP {upload.status_code}: {upload.text[:200]}"
+                    )
+                upload_data = upload.json()
+                input_url = str(upload_data.get("url") or "").strip()
+                if not input_url:
+                    raise RuntimeError("Pixelbunny upload 没返回 url")
+                endpoint = f"{base_url}/edits"
+                payload["input_images"] = [input_url]
+
+            data = await _pixelbunny_json_request(
+                client, "POST", endpoint, api_key=api_key, payload=payload,
+            )
+            job = data.get("job") if isinstance(data.get("job"), dict) else data
+            usage = (
+                job.get("usage") if isinstance(job.get("usage"), dict)
+                else data.get("usage") if isinstance(data.get("usage"), dict)
+                else {}
+            )
+            try:
+                cost_usd = float(usage.get("cost_usd") or data.get("cost_usd") or 0.0)
+            except (TypeError, ValueError):
+                cost_usd = 0.0
+            job_id = str(job.get("id") or data.get("job_id") or data.get("id") or "").strip()
+            status = str(job.get("status") or data.get("status") or "").strip().lower()
+            outputs = job.get("outputs") or data.get("outputs")
+
+            if status in {"failed", "error", "cancelled", "canceled"}:
+                message = job.get("error") or data.get("error") or status
+                raise RuntimeError(f"Pixelbunny job failed: {message}")
+
+            deadline = time.monotonic() + poll_timeout
+            while status not in {"succeeded", "completed", "done"}:
+                if not job_id:
+                    raise RuntimeError("Pixelbunny 没返回 job id")
+                if time.monotonic() >= deadline:
+                    raise RuntimeError(f"Pixelbunny job 轮询超时 ({poll_timeout:.0f}s)")
+                await asyncio.sleep(poll_seconds)
+                data = await _pixelbunny_json_request(
+                    client, "GET", f"{base_url}/jobs/{job_id}", api_key=api_key,
+                )
+                job = data.get("job") if isinstance(data.get("job"), dict) else data
+                status = str(job.get("status") or data.get("status") or "").strip().lower()
+                outputs = job.get("outputs") or data.get("outputs")
+                usage = job.get("usage") or data.get("usage")
+                if isinstance(usage, dict) and usage.get("cost_usd") is not None:
+                    try:
+                        cost_usd = float(usage.get("cost_usd") or 0.0)
+                    except (TypeError, ValueError):
+                        pass
+                if status in {"failed", "error", "cancelled", "canceled"}:
+                    message = job.get("error") or data.get("error") or status
+                    raise RuntimeError(f"Pixelbunny job failed: {message}")
+
+            output_url = _pixelbunny_output_url(outputs)
+            if not output_url:
+                raise RuntimeError("Pixelbunny job succeeded 但没有 outputs[0]")
+
+            download = await client.get(output_url)
+            if download.status_code >= 400:
+                raise RuntimeError(
+                    f"Pixelbunny 输出下载 HTTP {download.status_code}"
+                )
+            content_type = str(download.headers.get("content-type") or "").lower()
+            image_bytes = download.content
+            if not image_bytes:
+                raise RuntimeError("Pixelbunny 输出为空")
+            if content_type and not content_type.startswith("image/"):
+                raise RuntimeError(f"Pixelbunny 输出不是图片: {content_type}")
+    except (httpx.HTTPError, asyncio.TimeoutError, RuntimeError, ValueError) as exc:
+        return {"error": f"Pixelbunny 生图失败: {exc.__class__.__name__}: {exc}"}
+
+    elapsed = time.monotonic() - started
+    ext = ".png"
+    if "jpeg" in content_type or "jpg" in content_type:
+        ext = ".jpg"
+    elif "webp" in content_type:
+        ext = ".webp"
+    cache_dir = _imagegen_cache_dir(config)
+    file_path = cache_dir / f"imagegen_{int(time.time()*1000)}{ext}"
+    try:
+        file_path.write_bytes(image_bytes)
+    except OSError as exc:
+        return {"error": f"写图片缓存失败: {exc}"}
+
+    try:
+        from nonebot.adapters.onebot.v11 import MessageSegment
+    except ImportError:
+        return {"error": "MessageSegment 不可用,运行环境异常"}
+    ctx.pending_image_segments.append(
+        MessageSegment.image(file=file_path.resolve().as_uri())
+    )
+    _prune_imagegen_cache(config)
+
+    _logger.info(
+        "imagegen[pixelbunny]: model=%s nsfw=%s resolution=%s aspect=%s job=%s bytes=%d "
+        "cost_usd=%.4f elapsed=%.1fs file=%s input=%s prompt_len=%d prompt=%r",
+        model, nsfw, resolution or "-", aspect_ratio, job_id, len(image_bytes),
+        cost_usd, elapsed, file_path.name,
+        "edit" if input_image_bytes is not None else "generate",
+        len(prompt), prompt[:300],
+    )
+
+    consume_result: dict[str, Any] = {}
+    if affection is not None and image_cost > 0 and ctx.user_id:
+        try:
+            consume_result = affection.consume_points(ctx.user_id, image_cost)
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("imagegen: consume_points failed (image still sent): %s", exc)
+    balance_after = int(consume_result.get("balance_after", -1))
+    is_owner_charge = bool(consume_result.get("is_owner"))
+    return {
+        "image_sent": True,
+        "mode": "edit" if input_image_bytes is not None else "generate",
+        "provider": "pixelbunny",
+        "model": model,
+        "nsfw": nsfw,
+        "size": size,
+        "quality": quality,
+        "resolution": resolution,
+        "aspect_ratio": aspect_ratio,
+        "job_id": job_id,
+        "cost_usd": round(cost_usd, 4),
+        "bytes": len(image_bytes),
+        "elapsed_seconds": round(elapsed, 1),
+        "input_image_used": input_image_bytes is not None,
+        "cost": image_cost,
+        "balance_after": balance_after,
+        "is_owner_charge": is_owner_charge,
+        "guidance": _persona_text(
+            ctx.persona,
+            "图已经程序自动发出去了,你只需补 1-2 句短评。"
+            "**禁止**贴 base64 / file 路径 / image_uri 到回复里;**禁止**再调一次 catty_imagegen 重复发。",
+            "图片已经自动发出。只补 1-2 句符合当前人格的短评。"
+            "**禁止**贴 base64 / file 路径 / image_uri 到回复里；**禁止**再次调用 catty_imagegen 重复生成。",
+        ),
+    }
+
 
 # NovelAI 三个标准尺寸(主人指定默认)。Opus 订阅档这三个 + steps<=28 + 单张时免 Anlas。
 _NAI_ASPECT_MAP: dict[str, tuple[int, int]] = {
@@ -4036,7 +4363,18 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     )
 
     # 真正生图
-    if provider == "nai":
+    if _imagegen_backend(ctx.config) == "pixelbunny":
+        rebuilt_args = {
+            "prompt": gen_prompt,
+            "provider": "gpt",
+            "quality": quality if quality in _ALLOWED_IMAGEGEN_QUALITY else "low",
+            "aspect": aspect,
+            "use_input_image": False,
+            "_local_reference_bytes": local_ref_bytes or None,
+            "nsfw": self_portrait_kind == "nsfw" or bool(getattr(ctx, "nsfw_context", False)),
+        }
+        gen_result = await _exec_imagegen(rebuilt_args, ctx)
+    elif provider == "nai":
         gen_result = await _exec_imagegen_nai(
             prompt=gen_prompt,
             negative_prompt=neg,
@@ -4121,7 +4459,7 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
 
     # ── provider 分流: 'nai' 走 NovelAI, 其余走 OpenAI Image API ──
     provider = str(args.get("provider") or "gpt").strip().lower()
-    if provider == "nai":
+    if provider == "nai" and _imagegen_backend(ctx.config) != "pixelbunny":
         if bool(args.get("use_input_image")):
             # NAI 不支持 edit, 把 use_input_image 显式拒掉, AI 才不会以为 silently 忽略了
             return {
@@ -4258,6 +4596,26 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
             break
         if input_image_bytes is None:
             return {"error": "input 候选图全部下载失败,改用 use_input_image=false 走纯生成重试"}
+
+    if _imagegen_backend(ctx.config) == "pixelbunny":
+        local_refs = args.get("_local_reference_bytes")
+        if input_image_bytes is None and isinstance(local_refs, list):
+            input_image_bytes = next(
+                (bytes(item) for item in local_refs if isinstance(item, (bytes, bytearray)) and item),
+                None,
+            )
+        return await _exec_imagegen_pixelbunny(
+            prompt=prompt,
+            ctx=ctx,
+            quality=quality,
+            size=size,
+            image_cost=image_cost,
+            affection=affection,
+            input_image_bytes=input_image_bytes,
+            aspect=str(args.get("aspect") or "").strip(),
+            resolution=str(args.get("resolution") or "").strip(),
+            nsfw=bool(args.get("nsfw")) or bool(getattr(ctx, "nsfw_context", False)),
+        )
 
     url = _imagegen_endpoint_url(base_url, edit=bool(input_image_bytes))
     if not url:

@@ -625,6 +625,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGEGEN_BASE_URL", imagegen.get("base_url"))
     _set_env("CATTY_IMAGEGEN_API_KEY", imagegen.get("api_key"))
     _set_env("CATTY_IMAGEGEN_MODEL", imagegen.get("model"))
+    _set_env("CATTY_IMAGEGEN_NSFW_MODEL", imagegen.get("nsfw_model"))
     _set_env("CATTY_IMAGEGEN_DEFAULT_SIZE", imagegen.get("default_size"))
     _set_env("CATTY_IMAGEGEN_DEFAULT_QUALITY", imagegen.get("default_quality"))
     _set_env("CATTY_IMAGEGEN_DEFAULT_FORMAT", imagegen.get("default_format"))
@@ -634,6 +635,25 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGEGEN_CACHE_DIR", imagegen.get("cache_dir"))
     _set_env("CATTY_IMAGEGEN_CACHE_MAX_FILES", imagegen.get("cache_max_files"))
     _set_env("CATTY_IMAGEGEN_FORCE_HTTP_SCHEME", imagegen.get("force_http_scheme"))
+    _set_env("CATTY_IMAGEGEN_BACKEND", imagegen.get("backend"))
+    pixelbunny_raw = imagegen.get("pixelbunny")
+    pixelbunny = pixelbunny_raw if isinstance(pixelbunny_raw, dict) else {}
+    _set_env(
+        "CATTY_IMAGEGEN_PIXELBUNNY_WEBHOOK_SECRET",
+        pixelbunny.get("webhook_secret"),
+    )
+    _set_env(
+        "CATTY_IMAGEGEN_PIXELBUNNY_RESOLUTION",
+        pixelbunny.get("resolution"),
+    )
+    _set_env(
+        "CATTY_IMAGEGEN_PIXELBUNNY_POLL_SECONDS",
+        pixelbunny.get("poll_seconds"),
+    )
+    _set_env(
+        "CATTY_IMAGEGEN_PIXELBUNNY_POLL_TIMEOUT_SECONDS",
+        pixelbunny.get("poll_timeout_seconds"),
+    )
     nai_raw = imagegen.get("nai")
     nai = nai_raw if isinstance(nai_raw, dict) else {}
     _set_env("CATTY_IMAGEGEN_NAI_ENABLED", nai.get("enabled"))
@@ -679,6 +699,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     # NSFW fallback model (主 model 累计软拒达 threshold 时自动切)
     _set_env("CATTY_NSFW_FALLBACK_MODEL", filter_config.get("nsfw_fallback_model"))
     _set_env("CATTY_NSFW_SOFTREFUSE_THRESHOLD", filter_config.get("nsfw_softrefuse_threshold"))
+    _set_env(
+        "CATTY_NSFW_REQUEST_TIMEOUT_SECONDS",
+        filter_config.get("nsfw_request_timeout_seconds"),
+    )
     _set_env("CATTY_FILTER_EXTRA_HEADERS", filter_config.get("extra_headers"), json_value=True)
     _set_env("CATTY_FILTER_EXTRA_BODY", filter_config.get("extra_body"), json_value=True)
     _set_env("CATTY_FILTER_TEMPERATURE", filter_config.get("temperature"))
