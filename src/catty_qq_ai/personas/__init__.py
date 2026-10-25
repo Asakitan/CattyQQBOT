@@ -187,6 +187,8 @@ class Persona:
     nsfw_lexicon: tuple[tuple[str, str], ...] = ()
     # True = NSFW spark 去掉笨猫的 phase 推进表/格式铁律/起手范例, 让模型自由发挥。
     nsfw_freeform: bool = False
+    # True = 怀孕状态只在私聊读写 (群聊不注入 hint、不记数); 机机 = True。
+    pregnancy_private_only: bool = False
     # 非 catty 人格的 NSFW 口吻校正: 拼在通用 (笨猫) NSFW 模板之后, 覆盖自称/称呼/口癖。
     nsfw_style_override: str | None = None
     # NSFW spark 的 assistant prefill; None = 沿用 catty 的 (resist_label, is_private) 表。

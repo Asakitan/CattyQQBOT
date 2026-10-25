@@ -2808,6 +2808,7 @@ def _build_nsfw_freeform_state_facts(
     birth_threshold: int = 30,
     kittens: int = 0,
     father_addr: str = "",
+    father_is_current: bool = False,
 ) -> str:
     """自由发挥模式下把本地状态当既定事实告诉模型 (不给演法); 高潮/怀孕必须可见。
 
@@ -2838,8 +2839,12 @@ def _build_nsfw_freeform_state_facts(
     lines.append(climax_line)
     if pregnable:
         if is_pregnant:
+            father_desc = (
+                "就是现在和你说话的这个人" if father_is_current
+                else (father_addr.strip() or "另一个人")
+            )
             preg_line = (
-                f"- 怀孕: 已怀上 (父={father_addr or '主人'}), 这一胎已经 "
+                f"- 怀孕: 已怀上 (孩子爸爸={father_desc}), 这一胎已经 "
                 f"{max(0, int(pregnancy_count))}/{max(1, int(birth_threshold))} 次高潮"
             )
             if kittens:
@@ -3430,6 +3435,29 @@ def _pregnancy_store_for(persona) -> "PregnancyStore":
         store = PregnancyStore(config.catty_memory_path, filename=f"pregnancy_{safe}.json")
         _PREGNANCY_STORES[name] = store
     return store
+
+
+def _pregnancy_active_for(persona, event: MessageEvent) -> bool:
+    """本轮怀孕是否生效: 人格没禁用, 且 private_only 人格只在私聊读写。
+
+    主人 2026-10-25: 机机也要怀孕, 但只记私聊 — 群里不注入 hint、不记数、不提高潮受孕。
+    """
+    if persona is None or persona.feature_disabled("pregnancy"):
+        return False
+    if getattr(persona, "pregnancy_private_only", False):
+        return isinstance(event, PrivateMessageEvent)
+    return True
+
+
+def _preg_father_label(persona, event: MessageEvent, *, user_addr: str = "") -> str:
+    """受孕时记下的父亲名字: 有「主人」概念的人格给 owner 记『主人』, 其余记真实昵称。"""
+    try:
+        _is_owner = affection_store.is_owner(str(event.user_id))
+    except Exception:  # noqa: BLE001
+        _is_owner = False
+    if _is_owner and getattr(persona, "owner_concept", True):
+        return "主人"
+    return (user_addr or "").strip() or _display_name(event)
 
 
 _session_persona_names: dict[str, str] = {}
@@ -8323,8 +8351,8 @@ async def _build_messages(
                 _pick_kitten_name as _pick_kit,
                 BIRTH_THRESHOLD as _BT,
             )
-            # 多人格: 怀孕是 per-persona 状态 (机机 pregnancy 禁用 → 不读笨猫的肚子, 也不建库)
-            if _persona.feature_disabled("pregnancy"):
+            # 多人格: 怀孕按人格分库; private_only 人格 (机机) 群里不读也不写。
+            if not _pregnancy_active_for(_persona, event):
                 from .pregnancy_store import PregnancyState as _PregState
                 _preg_state_pre = _PregState()
             else:
@@ -8335,7 +8363,7 @@ async def _build_messages(
                 user_addr=_user_real_display,
             )
             if _preg_base_hint and _preg_base_hint.strip():
-                _inject_into_both(_preg_base_hint)
+                _inject_into_both(_lex_static(_preg_base_hint))
                 logger.info(
                     f"NSFW spark: ★ pregnancy hint injected "
                     f"(user={event.user_id}, is_pregnant={_preg_state_pre.is_pregnant}, "
@@ -8359,7 +8387,7 @@ async def _build_messages(
                     is_owner=_user_is_owner,
                     user_addr=_user_real_display,
                 )
-                _inject_into_both(_birth_hint)
+                _inject_into_both(_lex_static(_birth_hint))
                 logger.info(
                     f"NSFW pregnancy: ★★★ 即将生产 (user={event.user_id}, "
                     f"preg_count={_preg_state_pre.pregnancy_count}+1>={_BT}, "
@@ -8450,12 +8478,15 @@ async def _build_messages(
                     outfit=_facts_state.outfit or "",
                     time_of_day=_facts_state.time_of_day or "",
                     mood=_facts_state.mood or "",
-                    pregnable=not _persona.feature_disabled("pregnancy"),
+                    pregnable=_pregnancy_active_for(_persona, event),
                     is_pregnant=bool(getattr(_preg_facts, "is_pregnant", False)),
                     pregnancy_count=int(getattr(_preg_facts, "pregnancy_count", 0) or 0),
                     birth_threshold=int(locals().get("_BT", 30) or 30),
                     kittens=len(getattr(_preg_facts, "kittens", ()) or ()),
                     father_addr=str(getattr(_preg_facts, "father_addr", "") or ""),
+                    father_is_current=(
+                        str(getattr(_preg_facts, "father_id", "") or "") == str(event.user_id)
+                    ),
                 )
                 _inject_into_both(_facts_block)
                 logger.info(
@@ -8535,8 +8566,8 @@ async def _build_messages(
     # 之前 pregnancy + scene 只在 spark 路径注入, 主路径 (sonnet/日常对话) 完全看不到:
     # 笨猫不知道自己怀孕了、不知道自己在床上/桌上/浴室、穿着什么衣服.
     # 现在给主路径也注入 (精简版, 不影响 cache prefix).
-    # 多人格: 怀孕/NSFW 场景状态是笨猫全局共享状态, 非 catty 人格 (机机) 不注入.
-    if not prefer_spark and not _persona.feature_disabled("pregnancy"):
+    # 多人格: 怀孕/NSFW 场景状态是各人格自己的全局状态; private_only 人格 (机机) 群里不注入。
+    if not prefer_spark and _pregnancy_active_for(_persona, event):
         # 1. 怀孕状态注入
         try:
             from .pregnancy_store import build_pregnancy_hint as _build_preg_hint_main
@@ -8548,7 +8579,9 @@ async def _build_messages(
                     user_addr=_user_real_display,
                 )
                 if _preg_hint_main and _preg_hint_main.strip():
-                    _append_internal_system(messages, _preg_hint_main, label="main preg hint")
+                    _append_internal_system(
+                        messages, _lex_static(_preg_hint_main), label="main preg hint",
+                    )
                     logger.info(
                         f"chat: main path preg hint injected "
                         f"(is_pregnant={_preg_st_main.is_pregnant}, "
@@ -8569,7 +8602,10 @@ async def _build_messages(
                 is_owner=_user_is_owner,
                 user_addr=_user_real_display,
             )
-            if _scene_hint_main and _scene_hint_main.strip():
+            if (
+                _scene_hint_main and _scene_hint_main.strip()
+                and not getattr(_persona, "nsfw_freeform", False)
+            ):
                 _append_internal_system(messages, _scene_hint_main, label="main scene hint")
                 logger.info(
                     f"chat: main path scene hint injected "
@@ -16473,12 +16509,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         try:
                             # 主人 2026-05-31: 主人本人受孕 → father_addr 记「主人」(明确归属),
                             #   非主人受孕才存其昵称. 跟主路径同款.
-                            try:
-                                _preg_father_owner = affection_store.is_owner(str(event.user_id))
-                            except Exception:  # noqa: BLE001
-                                _preg_father_owner = False
-                            _preg_father_addr = "主人" if _preg_father_owner else _spark_user_addr
-                            _preg_enabled_rec = not _persona.feature_disabled("pregnancy")
+                            # 主人 2026-10-25: 没有「主人」概念的人格 (机机) 一律记真实昵称;
+                            #   机机只在私聊计数, 群里不记。
+                            _preg_father_addr = _preg_father_label(
+                                _persona, event, user_addr=_spark_user_addr,
+                            )
+                            _preg_enabled_rec = _pregnancy_active_for(_persona, event)
                             _preg_store_rec = _pregnancy_store_for(_persona) if _preg_enabled_rec else None
                             for _preg_i in range(_preg_climax_n if _preg_enabled_rec else 0):
                                 _predict_meta = _PREGNANCY_PREDICT or {}
@@ -16564,7 +16600,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # 会扒尾部 6 条 user/assistant + strip CATTY_INTERNAL.
                         try:
                             _preg_st_for_draw = (
-                                None if _persona_for_event(event).feature_disabled("pregnancy")
+                                None if not _pregnancy_active_for(_persona_for_event(event), event)
                                 else _pregnancy_store_for(_persona_for_event(event)).get_state()
                             )
                         except Exception:  # noqa: BLE001
@@ -16704,12 +16740,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 try:
                     # 主人 2026-05-31: 主人本人受孕 → father_addr 直接记「主人」(明确归属),
                     #   非主人受孕才存其昵称. 避免孩子父亲被记成裸昵称 → hint 显示混乱.
-                    try:
-                        _preg_father_owner_main = affection_store.is_owner(str(event.user_id))
-                    except Exception:  # noqa: BLE001
-                        _preg_father_owner_main = False
-                    _preg_father_addr_main = "主人" if _preg_father_owner_main else _user_real_display
-                    _preg_enabled_main = not _persona.feature_disabled("pregnancy")
+                    # 主人 2026-10-25: 没有「主人」概念的人格记真实昵称; private_only 人格只在私聊计数.
+                    _preg_father_addr_main = _preg_father_label(
+                        _persona, event, user_addr=_user_real_display,
+                    )
+                    _preg_enabled_main = _pregnancy_active_for(_persona, event)
                     _preg_store_main = _pregnancy_store_for(_persona) if _preg_enabled_main else None
                     for _preg_i_main in range(_preg_climax_n_main if _preg_enabled_main else 0):
                         _predict_meta_main = _PREGNANCY_PREDICT or {}

@@ -1503,7 +1503,7 @@ FADIANJI_DISABLED_SEGMENTS: frozenset[str] = frozenset({
 # 非 prompt 的 handler/路径级功能开关
 FADIANJI_DISABLED_FEATURES: frozenset[str] = frozenset({
     # "nsfw_spark" 不再整组禁用: 主人 2026-10-25 只放开私聊 (nsfw_scopes={"private"})。
-    "pregnancy",
+    # "pregnancy" 不再整组禁用: 主人 2026-10-25 机机也怀孕, 但只记私聊 (pregnancy_private_only)。
     "mood",
     "story_arc",
     "cpu_engine",
@@ -1596,4 +1596,7 @@ FADIANJI_PERSONA = Persona(
     nsfw_freeform=True,
     nsfw_style_override=FADIANJI_NSFW_STYLE_OVERRIDE,
     nsfw_prefill=FADIANJI_NSFW_PREFILL,
+    # 主人 2026-10-25: 机机也怀孕, 但只在私聊记录/提及 — 群里不说肚子里的孩子。
+    # 状态走 pregnancy_fadianji.json (跟笨猫分开), 私聊内所有 user 共用同一份。
+    pregnancy_private_only=True,
 )

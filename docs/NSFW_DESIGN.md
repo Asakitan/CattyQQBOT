@@ -292,3 +292,22 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   「模型原来完全不知情」的部分。
 - 测试：新增 `tests/test_nsfw_freeform_state.py` 6/6（事实字段、失神余韵、强度映射不含编号、
   孕期进度、未孕/产后、`pregnable=False` 不出怀孕行）。
+
+### 12.9 机机也有怀孕，但只在私聊（2026-10-25 十修）
+
+- `FADIANJI_DISABLED_FEATURES` 去掉 `"pregnancy"`；新增 `Persona.pregnancy_private_only=True`（机机）。
+- 统一门控 `_pregnancy_active_for(persona, event)`：人格禁用 → False；`pregnancy_private_only`
+  且当前是群聊 → False。接管 5 处：spark 怀孕 hint、freeform 事实块的怀孕行、主路径怀孕 hint、
+  spark / 主路径的 `record_intercourse` 计数、NSFW 自动配图的 `pregnancy_state`。
+  所以机机在群里既不读肚子、也不计数、更不会提孩子。
+- 分库：机机走 `pregnancy_fadianji.json`（`_pregnancy_store_for`），跟笨猫的 `pregnancy.json`
+  互不影响；store 是全局单份 → 私聊里所有 user 共用同一份进度。
+- 父亲：`_preg_father_label` —— 有「主人」概念的人格给 owner 记 `主人`，机机记真实昵称；
+  freeform 事实块写「孩子爸爸=就是现在和你说话的这个人 / 小明」，所以换个人来私聊时
+  她清楚肚子里的孩子是谁的。
+- 词表：`build_pregnancy_hint` / `build_birth_event_hint` 注入前过 `apply_persona_lexicon`，
+  机机的 prompt 里不会出现「笨猫／猫耳／主人」这类笨猫身体词。
+- 主路径的 `NSFW_PHASE_PARAMS` 场景 tracker 对 freeform 人格不再注入（catty / 机机都是 freeform），
+  避免档位码混进正常对话。
+- 测试：`test_personas` 断言改为「pregnancy 不再禁用 + private_only」；
+  `test_nsfw_freeform_state` 增加「孩子爸爸=现在和你说话的这个人」「father_addr 为空→另一个人」。
