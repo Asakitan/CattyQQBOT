@@ -510,8 +510,8 @@ def _is_nsfw_deferral_reply(text: str) -> bool:
     return bool(text and _NSFW_DEFERRAL_REPLY_RE.match(text.strip()))
 # 注入给 DeepSeek 的状态自检指令 (sticky spark trailing system, 不进前缀)。
 _NSFW_STATE_FLAG_INSTRUCTION = (
-    "【事后隐藏标记·不影响演绎】先**完全按上面 phase tracker 的推进要求正常写完这条回复**"
-    "(该推高潮就推高潮、该换 phase 就换, 绝不为了『维持场景』而停在原地或放慢节奏); "
+    "【事后隐藏标记·不影响演绎】先按本轮注入的场景/自由发挥要求把这条回复正常写完"
+    "(该推高潮就推高潮、该往前就往前, 绝不为了『维持场景』而停在原地或放慢节奏); "
     "写完后, 在**最末尾**单独起一行追加一个隐藏状态标记, 判断场景是否还在延续:\n"
     "- 仍在亲密/调情/情欲/事后余韵场景里(哪怕用户这句没明说) → `<NSFW_STATE:CONTINUE>`\n"
     "- 场景已彻底收尾、双方明显抽离回日常、用户已转去无关话题且无任何余温 → `<NSFW_STATE:EXIT>`\n"
@@ -3742,6 +3742,7 @@ def _available_tool_schemas_for_persona(
     has_image: bool,
     is_directly_requested: bool,
     persona: Any,
+    is_owner: bool,
 ) -> tuple[list[dict[str, Any]], set[str]]:
     schema_kwargs = {
         "is_private": is_private,
@@ -3762,6 +3763,13 @@ def _available_tool_schemas_for_persona(
             schema
             for schema in schemas
             if _tool_schema_name(schema) not in {"catty_story_arc_set", "catty_story_arc_clear"}
+        ]
+    if not is_owner:
+        # read_file / run_code 只对主人开放; 执行器本来就会拒绝, 提前从 schema 里摘掉省一轮空调用
+        schemas = [
+            schema
+            for schema in schemas
+            if _tool_schema_name(schema) not in {"catty_read_file", "catty_run_code"}
         ]
     allowed_names = {_tool_schema_name(schema) for schema in schemas}
     allowed_names.discard("")
@@ -5957,10 +5965,11 @@ def _build_emoji_skeleton_text(persona=None) -> str:
         lib_label, scene_line = "表情包", "被夸 / 撒娇 / 害羞 / 炸毛 / 接梗绷不住 / 玩闹起哄 / 被反撩"
     return (
         f"本地表情库（{lib_label}）由你自己判断要不要发——**不要每条都发，也不要从来不发**，"
+        "本轮能调用 catty_emoji 工具时优先用工具，别再写下面的标记；工具不可用才用标记。"
         "大约每 3~5 条对话挑一条情绪/反应最浓的那条才发，普通陈述、连续刚发过表情、信息密集解释都不发。"
         f"适合发的场景：{scene_line}——"
         "情绪明显且加表情真能强化语气时才发；只是顺嘴说话不发。"
-        "想发就在回复正文末尾**独占一行**字面输出："
+        "想发就在回复正文最后一行的末尾原样写出这个标记（同一行，不另起一行）："
         f"{EMOJI_QUERY_PREFIX}你的表情意图{EMOJI_QUERY_SUFFIX}"
         "（这个标记原样输出，程序读到后挑图发；不要解释、不要变形、不要省略）。"
         "示例："
@@ -8884,12 +8893,12 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "这不是口吃或犹豫：不堆「……」「呃」「那个」，不自我修正。"
             "频率按全量实录约束：约 73% 一簇一条、18% 两条、3-4 条 7%——别为了显得像 QQ 硬拆短句。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
-            f"要拆就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡写成一行, 气泡里不许换行；"
+            f"要拆就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡默认一行(技术分步/写文可多行, 但换行不产生新气泡)；"
             "不写标记就只有一条消息(裸换行不会拆开)。"
             "被拆的前几块结尾少用句号/感叹号，自然些。"
             f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
             "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
-            "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用换行+「1)」「2)」。"
+            "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用「1)」「2)」;技术长答可以多行,但换行不产生新气泡。"
         )
     return (
         "QQ 回复分段规则——按真实人类节奏拆，不要过度拆碎也不要全挤一团："
@@ -8898,12 +8907,12 @@ def _semantic_reply_split_prompt(persona=None) -> str:
         "用逗号/句号连成一条 QQ 消息发，不要每短句单切。"
         "【真有几个轮次 → 拆 2~3 条】对前文的强反应 + 接下来要说的新事情；技术结论 + 后续追问；强情绪 + 话题展开。"
         f"{_neg}"
-        f"要拆条就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡正文写成一行, 气泡里不要换行；"
+        f"要拆条就只在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；每条气泡默认一行(技术分步/写文可多行, 但换行不产生新气泡)；"
         "不写标记就只有一条消息(裸换行不会拆开)。"
         "被拆的前几条结尾少用句号/感叹号，自然些。"
         f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
         "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
-        "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用换行+「1)」「2)」。"
+        "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用「1)」「2)」;技术长答可以多行,但换行不产生新气泡。"
     )
 
 
@@ -8912,7 +8921,7 @@ def _reply_split_reminder_prompt() -> str:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     return (
         "【本轮气泡写法 · 硬规则】\n"
-        "- 只发一条: 正文写成一行, 不要换行。\n"
+        "- 普通聊天一条气泡只写一行; 技术分步/写文可以多行, 但换行不产生新气泡。\n"
         f"- 要连发: 每条之间单独一行输出 {REPLY_SPLIT_MARKER}, 最多 {max_chunks} 条; 每条气泡内部不许换行。\n"
         "- 裸换行不会拆气泡, 只会把同一条消息写成多行。"
     )
@@ -15754,6 +15763,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             has_image=_has_image_for_intent,
             is_directly_requested=bool(incoming.directly_requested),
             persona=_tool_persona,
+            is_owner=bool(affection_store.is_owner(str(event.user_id))),
         )
 
         _forced_tool_choice: str | dict[str, object] = "auto"
@@ -17055,6 +17065,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     tool_result_texts=_turn_tool_audit_result_texts,
                     # NSFW 路由 (spark/sticky) 走成人 RP 润色指令, 不再被 audit 拒答顶掉
                     nsfw_context=bool(_prefer_spark),
+                    freeform=bool(
+                        getattr(_persona_for_event(event), "nsfw_freeform", False)
+                    ),
                     context_hint=(
                         f"本轮有 {len(_turn_tool_audit_result_texts)} 条真实工具结果; "
                         "改写只能调整 prose, 不得改变工具调用的成功/失败或返回事实。"

@@ -73,6 +73,10 @@ _PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
     # user content [DYNAMIC_CONTEXT] 段, 不再进 cache prefix.
     # 唯一 PROTECTED = catty_core_persona, 旧 12 项 → 1 项.
     "catty_core_persona",          # P5.1 新核心人格 (cache prefix base, ~2175 tokens o200k)
+    # 主人 2026-10-25: 拆条提醒每轮贴脸 (order 810 = 最高 order, 倒序 trim 会先丢它);
+    # boundary 被 trim 会让所有动态段并回 cache prefix。两者都不许被 budget trim。
+    "catty_reply_split_reminder",
+    "catty_cache_boundary",
 })
 
 

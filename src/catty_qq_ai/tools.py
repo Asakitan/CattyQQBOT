@@ -485,7 +485,7 @@ _GAME_RECALL_SCHEMA: dict[str, Any] = {
             "之前积累的事实(『上次说的 X 角色削弱是什么时候?』『那个活动奖励是啥?』)。"
             "游戏名建议小写英文(strinova / star_resonance / minecraft / genshin / 等),也接受中文,"
             "后端会自动归一化。返回 matches 数组(time/text/source/url)和可选 long_term_summary。"
-            "不知道游戏名时可以先调一次空 keywords 看 total_facts,或者从 list 看猫猫存过哪些游戏。"
+            "game 是必填项; 不知道游戏名就先问一句或改用 catty_web_search, 别空参调用。"
         ),
         "parameters": {
             "type": "object",
@@ -994,7 +994,8 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
         "description": (
             "用户**直接指向猫猫(@/引用回复/直呼猫猫/笨猫)+ 明确说『画一张/画个/生成/做张/给我画/帮我画 + 主语』**时调这个 tool。\n"
             "**args 留空 {} 即可**——provider 选择 / NAI 标签 prompt / GPT 描述句 / 风格判定 / 参考图 / 报价 / 短评配文 "
-            "全部由后端代理 LLM 自动决定, 图会自动发到群里。**tool 调完本轮直接结束, 你不要再写任何文字回复**(短路本轮 chat)。\n"
+            "全部由后端代理 LLM 自动决定, 图会自动发到群里。**出图很快时 tool 调完本轮直接结束, 不用再写文字**; "
+            "若返回 `generating_in_background`, 照常回一句短话, 图好了会另外补发。\n"
             "**禁触发**: 用户没 @ 猫猫只是闲聊提到画画 / 用户没明确要图只是讨论某物 / 表情梗图够用的场景(走 catty_meme_query)。"
         ),
         "parameters": {
@@ -5984,8 +5985,8 @@ def tools_system_hint(persona: Any = None) -> str:
         tone = f"{char}口吻"
     hint = (
         "工具调用通用: 1) 真需要才调 (每次=延迟); 闲聊/已知不调. 你可以在有帮助时自主回忆、搜索或写入长期记忆/计划/适应规则.\n"
-        f"2) 画图请求**铁律**: {char}所有图都从 catty_imagegen 出, 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
-        f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'. 永远不要编造工具结果.\n"
+        f"2) 原创绘图请求**铁律**: {char}要出图就用 catty_imagegen (本轮开放时), 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
+        f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'; 空结果/未命中不等于事实不存在; 永远不要编造工具结果.\n"
         "4) 对不确定、陌生或可能过期的当前事实先用 catty_web_search 核实; 详细 trigger/参数/边界看 schema description."
     )
     if bool(getattr(persona, "semantic_harness_enabled", False)):

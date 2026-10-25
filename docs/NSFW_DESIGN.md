@@ -349,7 +349,51 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   只有 1 块时退回原文），`_append_history` 用它写 assistant 历史，模型下一轮能看到自己写过的
   marker；纯换行版 `history_text` 继续给 `record_special_care_reply_sent` 等旁路用。
   time bucket / activity feed 拿到的是带 marker 的历史文本，marker 在摘要与日志里是无害控制符。
-- 测试：新增 `tests/test_reply_split_reminder.py` 5/5；`test_persona_prompts` 15/15、
+- 测试：新增 `tests/test_reply_split_reminder.py` 6/6；`test_persona_prompts` 15/15、
   `test_personas` 22/22、`test_output_control_markers` 9/9、
   `test_fadianji_nsfw_split_bubbles` 4/4、`test_fadianji_style_critic` 41/41、py_compile
   exit0、plugin-load-ok。
+
+### 12.12 Prompt 一致性审计修复（2026-10-25 十三修，未部署）
+
+六个只读 review 分片扫了 persona / prompt_manager / `__init__` 常量 / tool schema / config /
+retired-term，逐条核对后修了这些「代码自相矛盾」项（不动人格口吻）：
+
+- **critic 的 freeform 分支从来没生效**：`rewrite_if_needed(..., freeform=...)` 的调用点没传参，
+  `_NSFW_FREEFORM_SYSTEM_PROMPT` 永远选不到，NSFW 草稿一直用「单条短句」版改写指令。现在按
+  `persona.nsfw_freeform` 传参。
+- **`_NSFW_STATE_FLAG_INSTRUCTION` 引用不存在的 phase tracker**（freeform 不注入 tracker）→
+  改成「按本轮注入的场景/自由发挥要求写完」。
+- **单行规则和「技术分步/写文可多行」打架**：810 提醒、`_semantic_reply_split_prompt` 两分支、
+  `persona_prompts` 的 Markdown 段统一成「普通聊天一行；技术分步/写文可多行，但换行不产生新气泡」。
+- **`catty_imagegen` schema 要求「调完不要再写文字」**，但慢图会返回 `generating_in_background`
+  并需要一句回复 → schema 补上该分支。
+- **`tools_system_hint`**：把「所有图都从 catty_imagegen 出」限定为「原创绘图 + 本轮开放时」，
+  并补一行「空结果/未命中 ≠ 事实不存在」。
+- **EMOJI_QUERY 要求独占一行** 与一行气泡冲突 → 改成「写在最后一行末尾，同一行」。
+- **`_PROTECTED_IDENTIFIERS`** 增加 `catty_reply_split_reminder` 与 `catty_cache_boundary`，
+  防止以后开启 `prompt_max_tokens` 时倒序 trim 先丢掉 810 提醒或 boundary。
+- 验证：`test_reply_split_reminder` 6/6、`test_persona_prompts` 15/15、`test_personas` 22/22、
+  `test_fadianji_style_critic` 41/41、`test_output_control_markers` 9/9、
+  `test_persona_memory_isolation` 21/21、`test_reply_message_composition` 36/36、
+  py_compile exit0、plugin-load-ok。
+- 第二轮（适配最新版，2026-10-25）：
+  - `fadianji_scenes.build_fadianji_group_scene_bank()` 渲染时把语料里的旧气泡边界「 / 」转成
+    `<<<CATTY_REPLY_SPLIT>>>`（预算按渲染后文本算，140k 上限不变；实测 139,986 chars / 1,383 个
+    marker / 0 个「 / 」）。表头同步说明，群聊场景段不再教斜杠。
+  - `FADIANJI_FIRST_MES` 改成单行「分机在, 本体忙去了」；§4 示例、常驻语气速查条目改用 marker；
+    §13 删掉引用已删除固定旁白池的括号；§1380 去掉 freeform 不注入的 phase/recency 字样。
+  - `catty_core_persona` §3 补 marker 分条规则；§4 的旧标识符 `catty_nsfw_gate` 改成
+    「NSFW 主人级妥协路径」。
+  - `catty_game_recall` schema 不再承诺空参 list/total（执行器要求 game 必填）。
+  - `catty_read_file` / `catty_run_code` 在 schema 层按 `is_owner` 过滤（此前非主人也会看到，
+    执行器才拒绝）。
+  - 表情骨架补一句「能调 catty_emoji 就用工具，别同时写 EMOJI_QUERY」，减少双路重复发图。
+  - 验证：personas 22/22、persona_prompts 15/15、reply_split_reminder 6/6、style_critic 41/41、
+    output_control_markers 9/9、persona_memory_isolation 21/21、reply_message_composition 36/36、
+    tool contracts 4/11/25/7、config 11/11 + 11/11、emoji 12/12、quick_ack 13/13、fallbacks 10/10、
+    fdj_style_stats 8/8、scene 19/19（需先 import test_personas 注册 `catty_personas_test` 别名）、
+    py_compile exit0、plugin-load-ok。
+  - 仍保留：`FADIANJI_MES_EXAMPLE` 的写文多行样例（符合「写文可多行」）、
+    `_NSFW_RECENCY_REMINDER` / `_NSFW_SPARK_STABLE_BOUNDARY_TEXT` 等非 freeform 旧分支
+    （默认不可达，留作回退）、`_local_critic_*` / `_build_proactive_messages` 等死路径清理未动。

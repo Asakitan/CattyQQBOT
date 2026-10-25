@@ -271,7 +271,7 @@ def build_qq_chat_rhythm_prompt(split_marker: str, persona=None) -> str:
     # 只留颜文字按情绪分类库 + 反例对照 (这两个 self_check 没有, 是表达样本).
     return (
         "【QQ 群友碎句节奏 · 必读】\n"
-        "(规则要点在 self_check 第 5 步; 下面是颜文字库 + 反例对照, 当作风格样本.)\n"
+        "(下面是分条规则 + 颜文字库 + 反例对照, 当作风格样本.)\n"
         f"拆条只用 {split_marker} 单独占一行; 每条气泡写成一行, 气泡里不换行.\n"
         "\n"
         "**颜文字按情绪挑** (整段 0-1 个就够, 大部分句子不要颜文字, 严禁每段末尾都贴):\n"
