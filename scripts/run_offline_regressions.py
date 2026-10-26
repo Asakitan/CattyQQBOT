@@ -31,6 +31,7 @@ MODULES = (
     "test_persona_tool", "test_request_intent", "test_persona_runtime",
     "test_hot_reload", "test_reply_queue_retention",
     "test_skill_store", "test_skill_runtime", "test_skill_tools", "test_skill_disclosure",
+    "test_fdj_proactive", "test_fdj_proactive_config_prompt", "test_fdj_proactive_integration",
 )
 
 _RUNNER = r'''

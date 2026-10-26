@@ -38,11 +38,24 @@
 
 ## 排队与历史预算
 
-聊天锁仍串行处理同一会话。`reply_queue_max_wait_seconds` 只淘汰已过期的非定向群聊插话；已准入的私聊及 `directly_requested/mentioned/replied_to_self` 请求不会因前轮耗时而被丢弃。原准入、mention-only 与续聊开窗规则不变。
+聊天锁仍串行处理同一会话。`reply_queue_max_wait_seconds` 只淘汰已过期的非定向群聊插话；已准入的私聊及 `directly_requested/mentioned/replied_to_self` 请求不会因前轮耗时而被丢弃。机机改为关键词/@/引用或已有续聊准入；其它mention-only人格仍坚持真@，广播/权限/自介守卫与两条续聊预算保持。
 
 请求准备把历史之前的消息及工具 schema 算作前缀，加到会话软目标后再受模型窗口减输出预留的限制。历史按剩余额度保留完整轮次；若最新一轮也装不下，则该请求不带历史，不沿用持久化裁剪器的超预算末轮保留策略。本轮用户及工具后缀原样保留，磁盘历史不因请求裁剪被修改。新增 `prefix_input_tokens` 与 `effective_target_context_tokens` 诊断字段；它们是估算，不是供应商计费token。
 
 ## 执行与恢复
+
+### 机机主动群聊（本地增量）
+
+按既有薄入口、纯构造、独立运行时和明确回执分层，不在 `__init__.py` 再嵌大循环：
+
+- 入口用 `_group_persona_trigger_allowed` 统一主回复、签到积分和复读让位；`_extract_trigger_incoming` 只为机机保留裸唤醒词及已有窗口的普通文本。消息抽取扩展默认关闭。主回复在原 `AsyncExitStack` 登记/释放群忙碌计数，不改变锁顺序或并发容量。
+- `fdj_proactive.py` 负责每群/UTC+8日计划、活动许可、原子claim与sent/failed/unknown。每个root由一个bot进程拥有，多实例由进程内锁协调；I/O经runtime线程执行。
+- `fdj_proactive_prompt.py` 使用当前人格核心、本群会话段及已渲染的节奏模板，复用统一上下文指导，再限定本次只是主动闲聊。当前群JSON背景最多4000字符，无工具schema，不执行历史任务。
+- `fdj_proactive_runtime.FdjProactiveRuntime` 通过显式 `BubbleHost` 注入宿主，不导入插件入口；协调5分钟确认群缓存、活动/人格快照、生成/发送各自限时与回执。每tick最多尝试一群，活跃优先、同层随机；正常新增真人消息允许插嘴，新增bot回复或上下文整批过期则让位。
+- 实际发送前再查作用域、开关、权限、人格、群忙碌、活动许可、slot及日期。先durable claim，再单次安全文本发送；复用 `ReplyDeliveryState`，有效ACK才写recent ledger，不伪造用户turn或给全群开续聊。发送已调用后的异常/取消/超时/畸形ACK均unknown，不重试。
+- `proactive_legacy.py` 接管旧猫娘循环编排，入口薄wrapper提供原候选、额度、发送和错误回调；原prompt/MemoryStore语义不变，新开关不启用旧链路，不保留重复旧loop。
+
+配置与时段见 [机机说明](fadianji-proactive.md)，认领与恢复见 [调度合同](fadianji-proactive-scheduler.md)。该增量已部署到 `D:/CattyQQAI`，28文件双端一致，推送后插件重载并重连。
 
 `_main_reply_with_deadline` 为一轮回复创建 `ToolReplyState`。工具完成时立即写入恢复快照，完整保留 assistant/tool 对应关系；主模型收尾超时后使用回执纯文本重试，不重做副作用。未取得结果的工具明确为未知状态。
 
@@ -60,4 +73,4 @@
 
 ## 验证
 
-`scripts/run_offline_regressions.py` 仅运行已审查清单，逐模块独立进程。在线评测需要显式入口，不参与默认回归。2026-10-27本地验收为55模块884项：874通过、9跳过、1项既有persona_admin浮点失败、0错误，退出1；技能四模块75项通过，350个Python文件语法通过。技能增量已部署：32文件双端哈希一致，远端18文件py_compile与12模块260项回归通过（9跳过），插件重载和重连已确认；真实模型与QQ效果未专项评测，见会话07。
+`scripts/run_offline_regressions.py` 仅运行已审查清单，逐模块独立进程。在线评测需显式入口。当前58模块989项：979通过、9跳过、1项既有persona_admin浮点失败、0错误；机机新104项、消息抽取另26项通过，357文件语法通过。机机增量未部署，见会话08；此前技能部署验证见会话07，真实模型与QQ效果未专项评测。

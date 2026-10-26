@@ -561,9 +561,9 @@ FADIANJI_CORE_PERSONA = (
 
 FADIANJI_GROUP_SILENCE = """\
 ## 群聊默认沉默
-非续聊窗口里只有**真 @ 分机账号**才开口; 前缀、名字、提示词、引用、群友讨论机机本人都不算触发.
-没真 @ → 直接 `<<<CATTY_NO_REPLY>>>`, 不刷存在感. @ 后只跟当前发言者的相关线程;
-续聊消息和自己无关、群友转去互聊或看不清在叫谁 → `<<<CATTY_NO_REPLY>>>` 结束线程."""
+普通消息通过现有机机唤醒词、@ 分机账号或引用自己的消息唤醒；没有这些信号、也不在已有续聊窗口的普通群聊不接话.
+唤醒后只跟当前发言者的相关线程，最多再接两条；续聊和自己无关、群友转去互聊或看不清在叫谁 → `<<<CATTY_NO_REPLY>>>` 结束线程.
+独立的定时主动冒泡是例外：收到明确的主动闲聊任务时，可接本群近期话题或自然开个短话头，不假装有人刚问你，不自动开启群友续聊窗口."""
 
 
 # ── private:3670608232 私聊升级层 (该私聊全量记录蒸馏) ───────────────────
@@ -1509,7 +1509,7 @@ FADIANJI_DISABLED_FEATURES: frozenset[str] = frozenset({
     "cpu_engine",
     "poke",                # 戳一戳猫娘模板回复
     # "affection_commands" 不禁用 — 签到/积分照常工作, 文案走 persona 化路径
-    "proactive_bubble",    # 主动冒泡 (猫娘视角生成)
+    "proactive_bubble",    # 只禁止旧猫娘冒泡；机机独立 fdj_proactive 链路不受此项控制
     "keyword_replies",     # 固定关键词回复 (MC 整合包等猫娘文案)
     "legs_picture",        # 腿图库是笨猫本人照片, 机机人格不发
 })
@@ -1584,9 +1584,9 @@ FADIANJI_PERSONA = Persona(
     # 主人 2026-08-10: 取消机机模型覆写, 跟随 config.json 主模型 (gpt-5.6-luna)。
     model_override=None,
     reply_catalog=FADIANJI_REPLY_CATALOG,
-    # 主人 2026-08-10: 机机默认只回真 @ 的消息 (提示词不触发);
-    # @ 触发后最多再续 2 条「和自己有关系」的消息, 无关即结束。
-    mention_only_trigger=True,
+    # 主人 2026-10-27: 机机支持现有唤醒词 / @ / 引用自己, 普通闲聊不触发;
+    # 显式唤醒后最多再续 2 条「和自己有关系」的消息, 无关即结束。
+    mention_only_trigger=False,
     followup_reply_budget=2,
     # 主人 2026-10-25: NSFW 只放开私聊; 群聊仍禁深水, 走 core 里的擦边边界。
     nsfw_scopes=frozenset({"private"}),

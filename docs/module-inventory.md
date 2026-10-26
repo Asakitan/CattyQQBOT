@@ -5,11 +5,11 @@
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
 | `src/catty_qq_ai/openai_client.py` | 工具回执、前缀与会话预算、逐轮schema更新 → `docs/reply-recovery.md`、`docs/architecture.md` | 动态工具增量已部署 |
-| `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队保留、回复重试、后台交付、确认后记账 → `docs/architecture.md` | 技能provider已部署 |
+| `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配本地完成 |
 | `src/catty_qq_ai/prompt_manager.py` | 学术长度豁免与有效提示词注册 → `docs/prompt-testing.md` | 已部署 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署，生产config.json未改 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
-| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 55模块884项：874通过、9跳过、1既有浮点失败、0错误 |
+| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 58模块989项：979通过、9跳过、1既有浮点失败、0错误 |
 | `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排与工具感知教程 → `docs/harness-evidence.md` | 已部署 |
 | `src/catty_qq_ai/fdj_corpus_store.py` / `catty_config_loader.py` | 语料作用域及 FDJ 配置别名 → `docs/harness-config.md` | 已部署 |
 | `scripts/fadianji_harness_cli.py` / `benchmark_harness.py` | 本地预览、显式生产预算、合成基准 → `docs/prompt-testing.md` | 已部署 |
@@ -22,11 +22,18 @@
 | `src/catty_qq_ai/skill_store.py` | 全局JSON技能、候选检索、SHA校验、原子保存 → `docs/skill-storage.md` | 已部署，本地/远端28项通过 |
 | `src/catty_qq_ai/skill_runtime.py` | 当轮资格、动态schema、公共来源账本、隔离提炼 → `docs/skill-runtime.md` | 已部署，本地/远端26项通过 |
 | `tests/test_skill_*.py` / `test_request_intent.py` | 存储/运行时/工具/真实循环披露与研究提示 → `docs/session-log/session-06.md` | 技能75项及提示33项本地/远端通过，模型效果未专项验证 |
+| `message_utils.py` / `personas/fadianji.py` / 入口触发helper | 机机关键词/@/引用/续聊，裸前缀保留，群聊prompt同步 → `docs/fadianji-proactive.md` | 已部署，双端一致 |
+| `fdj_proactive.py` | 每群随机计划、活动许可、原子认领与重启恢复 → `docs/fadianji-proactive-scheduler.md` | 已部署，40项通过 |
+| `fdj_proactive_runtime.py` / `proactive_legacy.py` | 宿主注入、忙碌/新鲜度/限时/回执；旧循环提取 → `docs/architecture.md` | 已部署，44项集成通过 |
+| `fdj_proactive_prompt.py` / `config.py` / loader / example | 机机短聊提示与12项独立配置 → `docs/fadianji-proactive.md` | 已部署，20项通过 |
+| `tests/test_fdj_proactive*.py` / `test_hot_reload.py` | 状态、配置、真实runtime往返、触发与锁生命周期 → `docs/session-log/session-08.md` | 新104项全通过；热重载23项通过 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-27 | push_zip 部署机机唤醒与活跃冒泡，生产配置与运行数据保持 | 28文件双端SHA-256一致；03:28:38加载、03:28:41重连；远端Shell不可用，未跑远端回归 |
+| 2026-10-27 | 机机唤醒与活跃时段冒泡；同步prompt并拆分旧编排；未部署 | 58模块989项仅1既有浮点失败；新104项与消息抽取26项通过；357文件语法/保持性通过 |
 | 2026-10-27 | push_zip部署默认研究与技能增量，生产配置/运行数据保持 | 32文件双端哈希一致；18文件py_compile通过；远端260项无失败/错误、9跳过；01:54:03重连 |
 | 2026-10-27 | 默认研究提示、按需技能与公共学习；恢复错误回写；未部署 | 技能75项通过；55模块884项仅剩1项既有浮点失败；350文件语法与保持性通过 |
 | 2026-10-27 | 移除 `catty_web_search` 与回切快路径的联网搜索冷却，删除配置项和死辅助函数；其它限流保持 | 800 项中 799 通过、1 项无关浮点断言失败；py_compile 退出0 |

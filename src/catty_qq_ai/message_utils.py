@@ -862,7 +862,10 @@ def _persona_config_view(event: MessageEvent, config: Config) -> Config:
     return _PersonaConfigView(config, list(prefixes), list(keywords))  # type: ignore[return-value]
 
 
-def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, *, replied_to_self: bool = False) -> ExtractedMessage | None:
+def extract_incoming_message(
+    self_id: str, event: MessageEvent, config: Config, *,
+    replied_to_self: bool = False, preserve_bare_prefix: bool = False,
+) -> ExtractedMessage | None:
     if not _allowed_by_config(event, config):
         return None
     config = _persona_config_view(event, config)
@@ -932,6 +935,10 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
         final_text = "群友回复了你的消息但没有附加文字，请自然开口回应。"
     if not final_text and mentioned:
         final_text = "群友 @ 了你但没有附加文字，请自然开口回应。"
+    if not final_text and used_prefix and preserve_bare_prefix and isinstance(event, GroupMessageEvent):
+        # A name-only wake is still real user text. Opt-in keeps other personas'
+        # historical empty-prefix behavior and all earlier admission guards.
+        final_text = text_without_mention.strip()
     if not final_text:
         return None
 

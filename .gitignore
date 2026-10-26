@@ -67,3 +67,5 @@ data/python_sandbox/
 /persona_overrides.json
 # 联网学习的共享技能是运行时数据，不随源码提交。
 /data/skills/
+# 机机主动冒泡计划与发送认领是运行时状态。
+/data/fdj_proactive/

@@ -366,7 +366,7 @@ python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py 
 
 此入口按固定清单逐模块启动独立进程，避免测试替身污染；不执行历史在线评测，也排除尝试读取真实密钥配置的沙箱负例。可重复使用 `--module` 选择清单中的模块。
 
-2026-10-27最新本地验收：55模块884项，874通过、9项按原条件跳过、1项既有 `persona_admin` 浮点deadline断言失败，0错误（完整运行退出1）。技能四模块75项全部通过；覆盖逐轮schema披露、正文完整性、公共抓页回执、跨轮隔离和重复保存，以及既有工具、沙箱、人格、排队与预算。技能增量已部署，32文件双端哈希一致；生产Python3.14.5下12模块260项无失败/错误、9跳过，插件已重载并重连。真实模型/QQ效果未专项验证，见 [开发记录](docs/session-log/session-06.md) 和 [部署记录](docs/session-log/session-07.md)。
+2026-10-27最新验收：58模块989项，979通过、9项按原条件跳过、1项既有 `persona_admin` 浮点deadline断言失败，0错误（完整运行退出1）。机机唤醒与冒泡新增104项全通过，消息抽取另26项通过；覆盖时段/活跃/重启/取消、无关键词沉默、旧链路和热重载合同。机机增量已部署，28文件双端SHA-256一致，推送后插件重载并重连，见 [会话08](docs/session-log/session-08.md)。
 
 Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息，按优先级保留证据；Agent 按实际开放工具补查。CLI 的 `--production-defaults` 只对齐预算；`--compact-json --metadata-only` 可省略正文。接口见 [证据包](docs/harness-evidence.md)，合成检查入口为 `scripts/benchmark_harness.py`。
 
@@ -375,6 +375,8 @@ Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息
 支持 [JSON 自定义人格](docs/persona-json.md)：可导入 [完整示例](docs/examples/personas/sky_guide.json)，也可聊天描述让 AI 填写并保存。定义落在 `data/personas`，保存不自动切换；使用 `/人格 小岚` 或让 AI 根据上下文切换。普通主回复结合前文与补充要求自主选择工具或直接回答，不额外增加规划模型。
 
 支持 [按需技能与联网学习](docs/skill-guidance.md)：默认提示先查相关技能，未知或可能过时的事实查公共权威来源。首轮不塞技能目录，搜索后给候选与加载schema，模型选择后才给正文；核实可复用公共知识后通过抓页回执提炼保存。共享库为 `data/skills`，学习输入不含聊天或画像，模型与正则筛查不等于完整匿名化。`skills.enabled` / `skills.auto_learn_enabled` 默认开启，完整旋钮见 [运行时配置](docs/skill-runtime.md)。该流程保留模型自主工具选择，不保证每轮必定搜索或保存。
+
+机机支持 [关键词唤醒与活跃时段冒泡](docs/fadianji-proactive.md)：不再要求真@，关键词、引用和已有续聊都可进入主回复；普通群聊仍不随便回应。每活跃群每日随机5–10次机会，多数等群友热聊，少量自己起话题；默认00:00–08:00不发、不补数，偶尔晚间冒泡。`fdj_proactive.enabled` 是独立开关，不会启用旧笨猫主动链路；状态在 `data/fdj_proactive`，重启不重抽当天额度。
 
 ---
 

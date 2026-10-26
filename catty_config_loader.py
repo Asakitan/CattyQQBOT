@@ -523,6 +523,20 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "active_window_minutes": 15,
         "active_min_messages": 5,
     },
+    "fdj_proactive": {
+        "enabled": True,
+        "dir": "data/fdj_proactive",
+        "daily_min": 5,
+        "daily_max": 10,
+        "min_interval_minutes": 60,
+        "check_interval_seconds": 60,
+        "active_window_minutes": 15,
+        "active_min_messages": 5,
+        "warm_window_minutes": 360,
+        "night_chance": 0.2,
+        "timeout_seconds": 30,
+        "failure_backoff_minutes": 60,
+    },
     "access": {
         "allowed_user_ids": [],
         "allowed_group_ids": [],
@@ -1333,6 +1347,23 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_PROACTIVE_RECENT_MESSAGES", proactive.get("recent_messages"))
     _set_env("CATTY_PROACTIVE_ACTIVE_WINDOW_MINUTES", proactive.get("active_window_minutes"))
     _set_env("CATTY_PROACTIVE_ACTIVE_MIN_MESSAGES", proactive.get("active_min_messages"))
+
+    fdj_proactive = _section(data, "fdj_proactive")
+    _set_env("CATTY_FDJ_PROACTIVE_ENABLED", fdj_proactive.get("enabled"))
+    fdj_proactive_dir = str(fdj_proactive.get("dir") or "").strip()
+    if fdj_proactive_dir:
+        directory = Path(fdj_proactive_dir).expanduser()
+        _set_env("CATTY_FDJ_PROACTIVE_DIR", directory if directory.is_absolute() else base_dir / directory)
+    _set_env("CATTY_FDJ_PROACTIVE_DAILY_MIN", fdj_proactive.get("daily_min"))
+    _set_env("CATTY_FDJ_PROACTIVE_DAILY_MAX", fdj_proactive.get("daily_max"))
+    _set_env("CATTY_FDJ_PROACTIVE_MIN_INTERVAL_MINUTES", fdj_proactive.get("min_interval_minutes"))
+    _set_env("CATTY_FDJ_PROACTIVE_CHECK_INTERVAL_SECONDS", fdj_proactive.get("check_interval_seconds"))
+    _set_env("CATTY_FDJ_PROACTIVE_ACTIVE_WINDOW_MINUTES", fdj_proactive.get("active_window_minutes"))
+    _set_env("CATTY_FDJ_PROACTIVE_ACTIVE_MIN_MESSAGES", fdj_proactive.get("active_min_messages"))
+    _set_env("CATTY_FDJ_PROACTIVE_WARM_WINDOW_MINUTES", fdj_proactive.get("warm_window_minutes"))
+    _set_env("CATTY_FDJ_PROACTIVE_NIGHT_CHANCE", fdj_proactive.get("night_chance"))
+    _set_env("CATTY_FDJ_PROACTIVE_TIMEOUT_SECONDS", fdj_proactive.get("timeout_seconds"))
+    _set_env("CATTY_FDJ_PROACTIVE_FAILURE_BACKOFF_MINUTES", fdj_proactive.get("failure_backoff_minutes"))
 
     access = _section(data, "access")
     _set_env("CATTY_ALLOWED_USER_IDS", access.get("allowed_user_ids"), json_value=True)

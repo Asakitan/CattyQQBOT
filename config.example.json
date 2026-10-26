@@ -528,6 +528,20 @@
         "active_window_minutes": 15,
         "active_min_messages": 5
     },
+    "fdj_proactive": {
+        "enabled": true,
+        "dir": "data/fdj_proactive",
+        "daily_min": 5,
+        "daily_max": 10,
+        "min_interval_minutes": 60,
+        "check_interval_seconds": 60,
+        "active_window_minutes": 15,
+        "active_min_messages": 5,
+        "warm_window_minutes": 360,
+        "night_chance": 0.2,
+        "timeout_seconds": 30,
+        "failure_backoff_minutes": 60
+    },
     "hot_reload": {
         "enabled": true,
         "poll_seconds": 1.5,

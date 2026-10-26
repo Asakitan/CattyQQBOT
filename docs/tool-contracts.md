@@ -105,7 +105,7 @@
 
 离线测试：`tests/test_persona_tool.py` 20项、`tests/test_request_intent.py` 33项全部通过，覆盖字段与注册表一致、权限、精确回执、上下文承接、教程幂等/预填、实际能力过滤、非强制选择、默认研究及沙箱提示冲突。测试使用替身回调及包壳加载，避免运行插件初始化。
 
-固定离线入口 `E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 验收55模块884项：874通过、9项原条件跳过、1项既有persona_admin浮点失败、0错误（退出1）。最新回执为 `.vscode/handoff/skills-20261027/full-final.log`，PowerShell使用UTF-8输出；未调用真实模型或QQ。
+固定离线入口 `E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 当前验收58模块989项：979通过、9项原条件跳过、1项既有persona_admin浮点失败、0错误（退出1）。最新回执为 `.vscode/handoff/fadianji-bubble-20261027/full-final.log`；机机主动闲聊复用空工具名单的上下文指导，不改主回复工具合同。PowerShell使用UTF-8输出，未调用真实模型或QQ。
 
 ## 按需技能工具
 
@@ -126,6 +126,6 @@
 
 ## 验收口径与历史基线
 
-2026-10-26本地工具与格式回归93项全部通过，包括并发写文件配额；格式依赖已在本地解释器可用。harness v2阶段为622项，人格阶段为782项，排队/预算/文件提示阶段为800项，当时最终均无失败/错误、9项原条件跳过。当前技能增量的884项结果见上方，不将既有浮点失败改记为通过。
+2026-10-26本地工具与格式回归93项全部通过，包括并发写文件配额；格式依赖已在本地解释器可用。harness v2阶段622项、人格阶段782项、排队/预算/文件提示阶段800项，当时最终无失败/错误、9项原条件跳过；技能阶段884项记录见会话06/07。当前机机增量989项结果见上方，不将既有浮点失败改记为通过。
 
 模块名单：`tests.test_file_formats`、`tests.test_tool_audit_fixes`、`tests.test_tool_message_scan`、`tests.test_tool_contracts`、`tests.test_local_tool_contracts`、既有 `tests.test_file_delivery`，并保留工具注册表/dispatcher 回归。新增测试只使用临时目录和 mock：验证 OOXML 可读性、CSV 引号/前导零/文本公式、PDF 中文 CID 与分页、原子失败清理、线程写入、成功/失败沙箱入队、引用图独存/混合顺序及真实发送者召回，不调用外部模型、QQ 或网络。

@@ -2980,10 +2980,29 @@ _user_in_scope_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _conversation_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _group_concurrency_semas: dict[str, asyncio.Semaphore] = {}
 _group_concurrency_sema_capacities: dict[str, int] = {}
+# Counts queued/admitted main replies without serializing group concurrency.
+_active_group_replies: DefaultDict[str, int] = defaultdict(int)
 # Serializes full-group semaphore acquisition between /人格 and config transitions.
 _persona_transition_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 # Prevents /人格 from changing overrides while a config transition selects affected scopes.
 _persona_config_transition_lock = asyncio.Lock()
+
+
+def _release_active_group_reply(scope: str) -> None:
+    remaining = _active_group_replies.get(scope, 0) - 1
+    if remaining > 0:
+        _active_group_replies[scope] = remaining
+    else:
+        _active_group_replies.pop(scope, None)
+
+
+def _fdj_group_reply_busy(scope: str) -> bool:
+    transition = _persona_transition_locks.get(scope)
+    return bool(
+        _active_group_replies.get(scope, 0)
+        or _persona_config_transition_lock.locked()
+        or (transition is not None and transition.locked())
+    )
 
 
 def _user_in_scope_lock_key(event: MessageEvent) -> str:
@@ -4370,16 +4389,16 @@ def _mark_bot_reply_continuation(scope: str, target_user_id: str, *, window_seco
         )
     key = _bot_reply_continuation_key(scope, str(target_user_id))
     existing = _bot_reply_continuations.get(key)
-    # 机机 (followup_reply_budget): @ 触发回复后「下面 N 条」预算 —
+    # 机机 (followup_reply_budget): 显式唤醒回复后「下面 N 条」预算 —
     #   续聊回复每确认一条相关就消耗 1 (+1), 预算归零 → 关窗结束;
-    #   新 @ 触发 (fresh_mention) 则满血重置预算。其它人格保持旧行为: 每次回复满血刷新。
+    #   新显式唤醒 (fresh_mention) 满血重置预算。其它人格保持旧行为: 每次回复满血刷新。
     if budget is not None and existing is not None and not fresh_mention:
         existing.remaining_messages -= 1
         existing.expires_at = now + max(window_seconds, 1.0)
         if existing.remaining_messages <= 0:
             _bot_reply_continuations.pop(key, None)
             logger.info(
-                f"Followup budget exhausted (mention-only persona): "
+                f"Followup budget exhausted (budgeted persona): "
                 f"scope={scope} user={target_user_id} budget={budget}"
             )
         return
@@ -4498,7 +4517,68 @@ def _mention_only_real_at_allowed(event: MessageEvent) -> bool:
 def _fresh_mention_for_event(event: MessageEvent, incoming: ExtractedMessage) -> bool:
     if isinstance(event, GroupMessageEvent) and _persona_for_event(event).mention_only_trigger:
         return has_real_at_self(str(event.self_id), event)
+    if isinstance(event, GroupMessageEvent) and getattr(_persona_for_event(event), "name", "") == "fadianji":
+        return _fdj_explicit_wake(event, incoming)
     return bool(incoming.mentioned)
+
+
+def _fdj_explicit_wake(event: MessageEvent, incoming: ExtractedMessage) -> bool:
+    """只认人格自己的唤醒词、真实 @ 和已解析的引用，不认功能关键词/特别关心。"""
+    if has_real_at_self(str(event.self_id), event) or incoming.replied_to_self:
+        return True
+    persona = _persona_for_event(event)
+    prefixes = getattr(persona, "trigger_prefixes", None) or ()
+    keywords = getattr(persona, "directed_keywords", None) or prefixes
+    text = event_plain_text(event).casefold()
+    return any(
+        str(word).strip().casefold() in text
+        for word in (*prefixes, *keywords)
+        if str(word).strip()
+    )
+
+
+def _group_persona_trigger_allowed(
+    event: MessageEvent, incoming: ExtractedMessage, *, continuation: bool = False,
+) -> bool:
+    """Shared main/command gate; extraction still owns broadcast/bot/ACL guards."""
+    if not isinstance(event, GroupMessageEvent) or continuation:
+        return True
+    persona = _persona_for_event(event)
+    if persona.mention_only_trigger:
+        return _mention_only_real_at_allowed(event)
+    if getattr(persona, "name", "") == "fadianji":
+        return _fdj_explicit_wake(event, incoming)
+    return True
+
+
+def _extract_trigger_incoming(
+    self_id: str, event: MessageEvent, *, replied_to_self: bool = False,
+    continuation: bool = False,
+):
+    extraction_config = config
+    fdj_group = (
+        isinstance(event, GroupMessageEvent)
+        and getattr(_persona_for_event(event), "name", "") == "fadianji"
+    )
+    if (
+        continuation and fdj_group
+    ):
+        class ContinuationConfigView:
+            catty_filter_enabled = False
+            catty_group_require_mention_or_prefix = False
+
+            def __getattr__(self, name):
+                return getattr(config, name)
+
+        # Only avoid the ordinary-text early return. The same extractor still
+        # checks ACL, broadcast, bot-self-intro and short-image admission.
+        extraction_config = ContinuationConfigView()
+    if fdj_group:
+        return extract_incoming_message(
+            self_id, event, extraction_config,
+            replied_to_self=replied_to_self, preserve_bare_prefix=True,
+        )
+    return extract_incoming_message(self_id, event, extraction_config, replied_to_self=replied_to_self)
 
 
 def _direct_reply_required(event: MessageEvent, incoming: ExtractedMessage) -> bool:
@@ -4643,7 +4723,12 @@ def _remember_recent_conversation_event(event: MessageEvent, incoming: Extracted
             text=text or "[图片]",
             has_image=has_image,
             created_at=now,
-            is_bot=False,
+            is_bot=(
+                str(event.user_id) == str(getattr(event, "self_id", ""))
+                or _message_utils_mod._looks_like_marked_bot(event)
+                or str(event.user_id) in {str(uid) for uid in (getattr(config, "catty_ignored_user_ids", ()) or ())}
+                or _looks_like_bot_self_intro(text)
+            ),
             image_urls=tuple(url for url, _key in images),
             image_keys=tuple(image_key for _url, image_key in images),
         )
@@ -4945,7 +5030,13 @@ _WAKE_CONTEXT_SKELETON_TPL = (
 def build_wake_context_skeleton(persona=None) -> str:
     """per-persona static — 跨 sender/scope/turn byte-stable. 进 cache prefix order=154."""
     char = getattr(persona, "char_name", "笨猫") if persona is not None else "笨猫"
-    return _WAKE_CONTEXT_SKELETON_TPL.format(char=char)
+    prompt = _WAKE_CONTEXT_SKELETON_TPL.format(char=char)
+    if getattr(persona, "name", "") == "fadianji":
+        prompt = prompt.replace(
+            "对只认真 @ 的人格，真 @ 唤起时会以当前消息为中心提供前后各最多 10 条调用时已经到达的群消息；不等待未来消息。",
+            "机机由现有唤醒词、@、引用自己或已有两条续聊窗口唤起；只使用调用时已到达的本群消息，不等待未来消息。",
+        )
+    return prompt
 
 
 _BOT_CONTINUATION_SKELETON_TPL = (
@@ -10603,6 +10694,53 @@ async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
         return True
 
 
+def _clean_fdj_proactive_reply(reply: str) -> str:
+    text = str(reply or "")
+    if NO_REPLY_MARKER in text:
+        return ""
+    text = _strip_catty_markers(text.replace(REPLY_SPLIT_MARKER, " "))
+    text = re.sub(r"<NSFW_STATE>.*?</NSFW_STATE>", "", text, flags=re.DOTALL | re.IGNORECASE)
+    text = _strip_tone_parenthetical(_strip_fadianji_catty_tics(text))
+    text = " ".join(text.split()).strip()
+    # No fake fallback and no cut-off sentence: an overlong bubble is unsuitable.
+    return text if 0 < len(text) <= 50 else ""
+
+
+async def _send_fdj_proactive_text(bot: Bot, group_id: str, text: str):
+    return await bot.send_group_msg(
+        group_id=_coerce_group_id(group_id), message=Message(MessageSegment.text(text)),
+    )
+
+
+def _remember_fdj_proactive_text(bot: Bot, group_id: str, text: str, message_id: str) -> None:
+    _remember_bot_conversation_message(
+        f"group:{group_id}", bot_id=str(bot.self_id), text=text,
+        message_id=message_id, update_continuation=False,
+    )
+
+
+_fdj_proactive_runtime = None
+
+
+def _get_fdj_proactive_runtime():
+    global _fdj_proactive_runtime
+    if _fdj_proactive_runtime is None:
+        from .fdj_proactive_runtime import BubbleHost, FdjProactiveRuntime
+        _fdj_proactive_runtime = FdjProactiveRuntime(BubbleHost(
+            config=lambda: config, persona=_persona_for_scope,
+            bots=lambda: list(get_bots().values()),
+            recent=lambda scope: tuple(_recent_conversation_messages.get(scope, ())),
+            busy=_fdj_group_reply_busy, has_api_key=_has_api_key,
+            generate=chat_completion, send_text=_send_fdj_proactive_text,
+            remember=_remember_fdj_proactive_text, clean_text=_clean_fdj_proactive_reply,
+        ))
+    return _fdj_proactive_runtime
+
+
+async def _fdj_proactive_bubble_loop() -> None:
+    await _get_fdj_proactive_runtime().run()
+
+
 _TECHNICAL_FORMATTING_PATTERNS = (
     r"\[",
     r"\]",
@@ -10956,11 +11094,13 @@ async def _reply_targets_self(bot: Bot, event: MessageEvent) -> bool:
 async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     reply_sources = await _resolve_reply_sources(bot, event)
     replied_to_self = any(source.is_current_bot for source in reply_sources)
-    incoming = extract_incoming_message(str(bot.self_id), event, config, replied_to_self=replied_to_self)
+    recent_bot_continuation = _recent_bot_prompted_user(event)
+    incoming = _extract_trigger_incoming(
+        str(bot.self_id), event, replied_to_self=replied_to_self, continuation=recent_bot_continuation,
+    )
     if incoming is None:
         return False
     state["catty_reply_sources"] = reply_sources
-    recent_bot_continuation = _recent_bot_prompted_user(event)
     # 本体避让 (body_presence, 主人 2026-08-10): 机机本体在群里发言后, 分身在
     # cooldown 内忽视该群所有非本体消息 — 本体在场, 备用机让位; 只有本体本人 @ 才回。
     # 本体消息本身 touch 记录后走正常流程 (她 @ 分身则回, 不 @ 则 mention-only gate 照常 drop)。
@@ -10984,20 +11124,14 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
                     f"text={incoming.text[:60]!r}"
                 )
                 return False
-    # 机机 (mention_only_trigger, 主人 2026-08-10): 群聊默认只回真 @ 的消息 —
-    # 续聊窗口外, 提示词(机机/发电机/机器人)/直接称呼/引用一律不触发, 静默丢。
-    if (
-        isinstance(event, GroupMessageEvent)
-        and not recent_bot_continuation
-        and _persona_for_event(event).mention_only_trigger
-        and not _mention_only_real_at_allowed(event)
-    ):
-        logger.info(
-            f"Mention-only persona gate: dropped non-@ group message "
-            f"user={event.user_id} group={getattr(event, 'group_id', '')} "
-            f"text={incoming.text[:60]!r}"
-        )
+    # 其它 mention-only 人格仍保留真 @ 合同；机机有独立的显式唤醒闸门。
+    if not _group_persona_trigger_allowed(event, incoming, continuation=recent_bot_continuation):
         return False
+    if isinstance(event, GroupMessageEvent) and getattr(_persona_for_event(event), "name", "") == "fadianji":
+        if _fdj_explicit_wake(event, incoming):
+            incoming.needs_filter = False
+            incoming.directly_requested = True
+            incoming.opportunistic = False
     _remember_recent_conversation_event(event, incoming)
     if recent_bot_continuation:
         # 续聊窗口活跃 — 用 trigger/direct 信号 (mentioned/used_prefix) 决定续聊/关窗。
@@ -11107,14 +11241,22 @@ async def _expression_repeat_rule(bot: Bot, event: MessageEvent, state: T_State)
     repeat_message = _expression_repeat_message(bot, event)
     if repeat_message is None:
         return False
-    # 机机 (mention_only_trigger): 复读是群梗不是回话, 照常参与 (主人 2026-10-25);
-    # 但真在叫机机 / 续聊窗口内的消息留给主回复链路, 不让复读抢掉。
-    if isinstance(event, GroupMessageEvent) and _persona_for_event(event).mention_only_trigger:
+    # 机机取消 mention-only 后仍需让位主回复；其它人格保持原复读合同。
+    persona = _persona_for_event(event)
+    if isinstance(event, GroupMessageEvent) and (
+        persona.mention_only_trigger or getattr(persona, "name", "") == "fadianji"
+    ):
         if _bot_reply_continuation_remaining(event) > 0:
             return False
-        incoming = extract_incoming_message(str(bot.self_id), event, config)
-        if incoming is not None and (incoming.mentioned or incoming.replied_to_self or incoming.directly_requested):
-            return False
+        if getattr(persona, "name", "") == "fadianji":
+            replied_to_self = await _reply_targets_self(bot, event)
+            incoming = _extract_trigger_incoming(str(bot.self_id), event, replied_to_self=replied_to_self)
+            if incoming is not None and _group_persona_trigger_allowed(event, incoming):
+                return False
+        else:
+            incoming = extract_incoming_message(str(bot.self_id), event, config)
+            if incoming is not None and (incoming.mentioned or incoming.replied_to_self or incoming.directly_requested):
+                return False
     state["catty_repeat_message"] = repeat_message
     return True
 
@@ -11793,20 +11935,17 @@ async def _affection_command_rule(bot: Bot, event: MessageEvent, state: T_State)
     cmd = "signin" if is_signin else "points"
     # 命中关键字后仍要确认指向猫猫(防群友跟别的 bot 签到误命中)
     replied_to_self = await _reply_targets_self(bot, event)
-    incoming = extract_incoming_message(
-        str(bot.self_id), event, config, replied_to_self=replied_to_self
+    continuation = _recent_bot_prompted_user(event)
+    incoming = _extract_trigger_incoming(
+        str(bot.self_id), event, replied_to_self=replied_to_self, continuation=continuation,
     )
     if incoming is None:
         return False
-    # 机机 (mention_only_trigger): 签到/积分命令也只在真 @ (或续聊窗口内) 才触发, 提示词不算
-    if (
-        isinstance(event, GroupMessageEvent)
-        and _persona_for_event(event).mention_only_trigger
-        and not _recent_bot_prompted_user(event)
-        and not _mention_only_real_at_allowed(event)
-    ):
+    # 其它 mention-only 人格仍只认真 @；机机使用同一显式唤醒/已有续聊闸门。
+    if not _group_persona_trigger_allowed(event, incoming, continuation=continuation):
         return False
-    if not incoming.directly_requested:
+    fdj_trigger = isinstance(event, GroupMessageEvent) and getattr(_persona_for_event(event), "name", "") == "fadianji"
+    if not fdj_trigger and not incoming.directly_requested:
         return False
     state["catty_affection_cmd"] = cmd
     return True
@@ -13581,10 +13720,14 @@ def _build_fadianji_status_lines(event: MessageEvent, scope: str, owner_qq: str)
         lines.append(
             "  · 群聊触发: 只回真 @"
             if getattr(persona, "mention_only_trigger", False)
-            else "  · 群聊触发: 多信号 (mention/前缀/直呼)"
+            else (
+                "  · 群聊触发: 机机唤醒词 / @ / 引用自己（普通群聊不触发；定时冒泡独立）"
+                if getattr(persona, "name", "") == "fadianji"
+                else "  · 群聊触发: 多信号 (mention/前缀/直呼)"
+            )
         )
         if budget is not None:
-            lines.append(f"  · 续聊预算: {int(budget)} 条/次 @")
+            lines.append(f"  · 续聊预算: {int(budget)} 条/次显式唤醒")
         window = _bot_reply_continuations.get(_bot_reply_continuation_key(scope, owner_qq))
         now_mono = time.monotonic()
         if window is None or window.expires_at <= now_mono or window.remaining_messages <= 0:
@@ -15309,41 +15452,25 @@ async def _catty_rag_prune_loop() -> None:
             logger.warning(f"_catty_rag_prune_loop tick error: {exc}")
 
 
+def _legacy_proactive_error(group_id: str, exc: Exception) -> None:
+    if isinstance(exc, OpenAICompatibleError):
+        logger.warning(f"Proactive bubble API error for group {group_id}: {exc}")
+    elif isinstance(exc, httpx.HTTPError):
+        logger.warning(f"Proactive bubble transport error for group {group_id}: {exc}")
+    elif _is_removed_from_group_error(exc):
+        _forget_removed_group(group_id, reason="send failed because bot was removed from group")
+    else:
+        logger.warning(f"Failed to send proactive bubble to group {group_id}: {exc}")
+
+
 async def _proactive_bubble_loop() -> None:
-    while True:
-        await asyncio.sleep(max(config.catty_proactive_check_interval_seconds, 60.0))
-        if not config.catty_proactive_enabled or not _has_api_key():
-            continue
-        bots = list(get_bots().values())
-        if not bots:
-            continue
-        for bot in bots:
-            group_ids = await _candidate_group_ids(bot)
-            due_group_ids = memory_store.due_proactive_group_ids(
-                group_ids,
-                max_daily=max(config.catty_proactive_max_daily_per_group, 0),
-                min_interval_minutes=max(config.catty_proactive_min_interval_minutes, 1.0),
-                active_window_minutes=max(config.catty_proactive_active_window_minutes, 0.0),
-                active_min_messages=max(config.catty_proactive_active_min_messages, 0),
-            )
-            # 多人格: 主动冒泡文案是猫娘视角生成, 非 catty 人格的群跳过.
-            due_group_ids = [
-                gid for gid in due_group_ids
-                if not _persona_for_scope(f"group:{gid}").feature_disabled("proactive_bubble")
-            ]
-            for group_id in due_group_ids:
-                try:
-                    await _send_proactive_bubble(bot, group_id)
-                except OpenAICompatibleError as exc:
-                    logger.warning(f"Proactive bubble API error for group {group_id}: {exc}")
-                except httpx.HTTPError as exc:
-                    logger.warning(f"Proactive bubble transport error for group {group_id}: {exc}")
-                except Exception as exc:
-                    if _is_removed_from_group_error(exc):
-                        _forget_removed_group(group_id, reason="send failed because bot was removed from group")
-                    else:
-                        logger.warning(f"Failed to send proactive bubble to group {group_id}: {exc}")
-                await asyncio.sleep(2)
+    from .proactive_legacy import LegacyBubbleHost, run_legacy_proactive_loop
+    await run_legacy_proactive_loop(LegacyBubbleHost(
+        config=lambda: config, has_api_key=_has_api_key,
+        bots=lambda: list(get_bots().values()), candidate_group_ids=_candidate_group_ids,
+        memory=lambda: memory_store, persona=_persona_for_scope,
+        send=_send_proactive_bubble, on_error=_legacy_proactive_error,
+    ))
 
 
 @get_driver().on_startup
@@ -15357,6 +15484,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_nsfw_phase_flush_loop())
     asyncio.create_task(_summary_loop())
     asyncio.create_task(_proactive_bubble_loop())
+    asyncio.create_task(_fdj_proactive_bubble_loop())
     asyncio.create_task(_local_critic_warmup_loop())
     asyncio.create_task(_cpu_engine_warmup_loop())
     asyncio.create_task(_cpu_engine_routes_watch_loop())
@@ -15752,6 +15880,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
     import contextlib as _ctxlib
     async with _ctxlib.AsyncExitStack() as _lock_stack:
+        if isinstance(event, GroupMessageEvent):
+            _active_group_replies[queue_key] += 1
+            _lock_stack.callback(_release_active_group_reply, queue_key)
         async with _persona_config_transition_lock:
             # Config hot reload may change group_history_scope while a request is
             # waiting for admission. Resolve the canonical key only after the

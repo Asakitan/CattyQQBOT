@@ -764,6 +764,20 @@ class Config(BaseModel):
     catty_proactive_active_window_minutes: float = 15.0
     catty_proactive_active_min_messages: int = 5
 
+    # 机机独立冒泡：不读取 catty_proactive_enabled，每群每天仅安排机会、不补配额。
+    catty_fdj_proactive_enabled: bool = True
+    catty_fdj_proactive_dir: str = "data/fdj_proactive"
+    catty_fdj_proactive_daily_min: int = Field(default=5, ge=5, le=10)
+    catty_fdj_proactive_daily_max: int = Field(default=10, ge=5, le=10)
+    catty_fdj_proactive_min_interval_minutes: float = Field(default=60.0, gt=0, allow_inf_nan=False)
+    catty_fdj_proactive_check_interval_seconds: float = Field(default=60.0, gt=0, allow_inf_nan=False)
+    catty_fdj_proactive_active_window_minutes: float = Field(default=15.0, gt=0, allow_inf_nan=False)
+    catty_fdj_proactive_active_min_messages: int = Field(default=5, ge=1)
+    catty_fdj_proactive_warm_window_minutes: float = Field(default=360.0, gt=0, allow_inf_nan=False)
+    catty_fdj_proactive_night_chance: float = Field(default=0.2, ge=0, le=1, allow_inf_nan=False)
+    catty_fdj_proactive_timeout_seconds: float = Field(default=30.0, gt=0, allow_inf_nan=False)
+    catty_fdj_proactive_failure_backoff_minutes: float = Field(default=60.0, gt=0, allow_inf_nan=False)
+
     # ── 游戏记忆库(独立于 user/group 记忆) ──────────────────────────────
     # AI 调 catty_web_search 在游戏群拿到结果时自动 sink;AI 也可以主动用
     # catty_game_remember 写入。catty_game_recall 是双向查询接口。
@@ -916,6 +930,22 @@ class Config(BaseModel):
         if not normalized or "\x00" in normalized:
             raise ValueError("catty_skills_dir must be a nonempty path without NUL")
         return normalized
+
+    @field_validator("catty_fdj_proactive_dir")
+    @classmethod
+    def validate_fdj_proactive_dir(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized or "\x00" in normalized:
+            raise ValueError("catty_fdj_proactive_dir must be a nonempty path without NUL")
+        return normalized
+
+    @model_validator(mode="after")
+    def validate_fdj_proactive_daily_range(self) -> "Config":
+        if self.catty_fdj_proactive_daily_max < self.catty_fdj_proactive_daily_min:
+            raise ValueError("fdj_proactive daily_max must be >= daily_min")
+        if self.catty_fdj_proactive_warm_window_minutes < self.catty_fdj_proactive_active_window_minutes:
+            raise ValueError("fdj_proactive warm_window_minutes must cover active_window_minutes")
+        return self
 
     @field_validator("catty_group_history_scope")
     @classmethod

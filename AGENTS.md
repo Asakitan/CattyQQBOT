@@ -118,13 +118,14 @@
 
 ### 当前增量（2026-10-27）
 
+- **机机触发/冒泡已部署**：已按主人新要求取消真@硬门，统一关键词/@/引用/两条续聊；裸「机机」保留原文，不被空前缀丢弃。每活跃群每日5–10机会，活跃优先，默认UTC+8 08–22点、20%群日最多一个22–24点机会，00–08点不发/不补。`fdj_proactive`独立开关默认true，旧catty主动开关不变。28文件双端SHA-256一致，03:28:38插件加载、03:28:41重连。架构拆为scheduler/store、pure prompt、runtime和legacy循环适配，见session-08。
 - **技能已部署**：在 `f96b5b3`（联网搜索去冷却）基础上，默认研究与技能增量已push_zip到 `D:/CattyQQAI`，32文件双端SHA-256一致。生产Python3.14.5的12模块260项无失败/错误、9跳过，01:54:00插件加载、01:54:03重连；config.json未改。准确信息以 `STATUS.md` 和 `docs/session-log/session-07.md` 为准。
 - **默认研究提示**：`request_intent.py` 的默认上下文提示要求实质任务先查技能；知识库缺口、知识截止后或可能变化的事实查公共权威正文。生产/模拟均保留 `tool_choice=auto`，不按关键词强制调用。
 - **技能按需披露**：`skill_store.py` 存 `data/skills/<id>.json`，`skill_runtime.SkillTurn` 管当轮候选与来源。首轮只有 `catty_skill_search`；候选命中后动态提供 `catty_skill_load` schema，模型选择后才给正文。真实公共抓页回执才开放 `catty_skill_save`，独立提炼不接收聊天、画像或用户身份。正则不保证识别全部私人信息，成功抓页不等于权威认证。
 - **逐轮工具更新**：`tools_provider` 在生产、模拟与云端fallback传递，每次模型请求刷新实际schema和能力提示。动态load/save不能加入静态schema表。默认 `skills.enabled/auto_learn_enabled=true`，配置见 `docs/skill-runtime.md`；共享库不入Git，检索直接读取新版本。
 - **已部署修复必须保留**：JSON人格管理、沙箱独立run/scope与产物快照、真文件格式、工具回执恢复、定向消息排队保留、历史前缀预算，以及源码无需运行即可交付的提示。不得恢复 `_web_search_cooldowns`、`features.search_cooldown_key` 或失效 `catty_system_prompt`。
 - **历史文案定位**：下方2026-10-25配置记录及上方长度约定曾引用的 `chat.system_prompt` 已移除，默认人格内容由角色模块提供；本次研究提示没有修改这些人格/NSFW文本。不要重新添加该配置字段。
-- **默认离线入口**：`E:/Py/python.exe -B -X utf8 scripts/run_offline_regressions.py`，不要用全目录discover触发历史在线评测。55模块884项：874通过、9跳过、1项既有persona_admin浮点deadline失败、0错误；技能75项通过。350个Python文件语法通过，未做真实模型或QQ效果验证。
+- **默认离线入口**：`E:/Py/python.exe -B -X utf8 scripts/run_offline_regressions.py`，不要用全目录discover触发历史在线评测。58模块989项：979通过、9跳过、1项既有persona_admin浮点deadline失败、0错误；新机机104项全通过，消息抽取另26项通过。357个Python文件语法通过，未做真实模型或QQ效果验证。
 - **编辑回写事件**：回退版本已保存在 `.vscode/handoff/skills-20261027/`，源码按开工副本及已部署Git版本修复；来源未确定。后续修改先核对磁盘，别用过期缓冲区覆盖共享文件。
 
 ### 启动拓扑（不要再让新人 `python bot.py`）
@@ -147,8 +148,8 @@
 ### `config.json` 现状（最近一次大改：2026-10-25）
 
 - **默认人格已切机机**：`persona.default = "fadianji"`（2026-08-10，主人要求）。机机人格行为铁律：
-  - **群聊默认只回真 @ 的消息**——`Persona.mention_only_trigger=True`（`_rule` 里非续聊窗口 + 非 `mentioned` 直接 drop；签到/积分命令同受此闸门约束）。**复读例外**（2026-10-25）：`_expression_repeat_rule` 对 mention-only 人格照常复读群梗，只跳过真在叫机机（真 @/引用/唤醒词）和续聊窗口内的消息，避免复读抢掉主回复。提示词（"机机/发电机/机器人"字样）不再触发。
-  - **@ 触发后有「下面两条」续聊预算**——`Persona.followup_reply_budget=2`：窗口内每条消息由主 AI 判「和机机有没有关系」，有关 → 回复并消耗 1 个预算（+1），预算归零或主 AI 判 NO_REPLY（无关）→ 关窗结束；窗口内新 @ 满血重置预算。机机不走 idle 关窗，续聊预算机制在 `_mark_bot_reply_continuation`。
+  - **群聊按显式唤醒触发（本地新规则）**——机机 `mention_only_trigger=False`，统一helper接受机机现有关键词、@及引用自己；无唤醒且无续聊的普通消息不进主回复。签到/积分共用门控，复读对唤醒和续聊让位；其它mention-only人格仍坚持真@。此前只真@规则已被2026-10-27用户要求取代，部署状态看顶部。
+  - **唤醒后有「下面两条」续聊预算**——`followup_reply_budget=2` 保留；普通相关跟进消耗预算，无关NO_REPLY关窗，新的显式唤醒满血重置。关闭旧filter时，已存在的机机普通文本续聊仍能进入相同权限/广播守卫。主动冒泡本身不额外给全群开窗。
   - 私聊不受 mention-only 影响（群里才可能 @）。
   - **私聊 NSFW 是放行的**（2026-10-25）：`Persona.nsfw_scopes={"private"}` + `nsfw_gate_skeleton`（机机口吻 10-stage）+ `nsfw_gate_private_only=True`。好感 Lv5 以上（`max_stage≥5`）或付 100 积分援交就必须接住，Lv 越高越顺从；Lv≤4/群聊才允许炸毛短拒。旧行为（gate 段整段禁用 + §19「自己不想带入→短拒」）会直球拒绝，别回退。
   - **机机 × 笨猫 NSFW 状态分开**（2026-10-25）：`Persona.nsfw_lexicon` 把笨猫词整组换成机机（猫耳→翼耳/尾巴→尾羽/喵→''/主人→你…），作用于 phase catalog、起手范例、spark/援交模板；phase 状态键带 `#nsfw=<persona>`；怀孕按人格分库 `pregnancy_<persona>.json`，机机 `pregnancy_private_only=True` → 只记私聊、群里不读不说，私聊内所有 user 共用一份；`_preg_father_label` 给机机记真实父名，事实块显示「孩子爸爸=…」。
@@ -184,7 +185,7 @@
   - `nsfw_search.pixiv_cookie` —— pixiv 鉴权
   - `image_search.saucenao_api_key` —— saucenao 反向搜图
   - 推代码时 `push_zip` 是打 zip 推到 `D:/CattyQQAI`，**不直接进 git**，但**任何错误日志、日志面板分享、调试输出**都要先 `redact` 再发。
-- **NPC 守护**：`proactive.enabled = false`（主人 2026-05-27 关的）、`filter.anger_enabled = false`、`local_critic` 退场 → 整条「主动冒泡 + 怒气 + 本地 critic」链路都是历史词，**别往这些方向加新功能**。
+- **主动与旧链路分开**：历史 `proactive.enabled=false` 只控制旧笨猫链路；2026-10-27用户明确要求机机恢复活跃时段冒泡，新 `fdj_proactive` 单独控制，旧循环移入 `proactive_legacy.py`。不启用怒气或local_critic，也不把机机的 `proactive_bubble` legacy禁用标记删掉。
 - **`mc_status` 实际是 dead code**：`ai_fallback.mc_gate_enabled = false` 把整个 fallback 通道关死了，`mc_status.py` 还活着只是因为 import 链还在；删要谨慎，不删也行。
 - **NSFW 处理在 `chat.system_prompt` 里以「最高优先」明文钉死**（同音字卖萌 / 主人级反差链 / 女性用户女同不屈后投降），**这是用户硬约束，不要做"安全边界版"**。
 
