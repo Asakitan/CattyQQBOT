@@ -30,6 +30,7 @@ MODULES = (
     "test_persona_store", "test_custom_personas", "test_persona_admin",
     "test_persona_tool", "test_request_intent", "test_persona_runtime",
     "test_hot_reload", "test_reply_queue_retention",
+    "test_skill_store", "test_skill_runtime", "test_skill_tools", "test_skill_disclosure",
 )
 
 _RUNNER = r'''

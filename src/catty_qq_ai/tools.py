@@ -1322,7 +1322,26 @@ _PERSONA_TOOL_SCHEMA: dict[str, Any] = {
 }
 
 
+_SKILL_SEARCH_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_skill_search",
+        "description": "检索相关技能候选，选中后再加载。",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "minLength": 1, "pattern": r"\S"},
+                "limit": {"type": "integer", "minimum": 1, "maximum": 5},
+            },
+            "required": ["query"],
+            "additionalProperties": False,
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
+    "catty_skill_search": _SKILL_SEARCH_SCHEMA,
     "catty_persona": _PERSONA_TOOL_SCHEMA,
     "catty_recall": _RECALL_SCHEMA,
     "catty_scan_messages": _SCAN_MESSAGES_SCHEMA,
@@ -1400,6 +1419,7 @@ def _make_lazy_schema(name: str, short_desc: str, props: dict[str, dict], requir
 
 
 _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
+    "catty_skill_search": _SKILL_SEARCH_SCHEMA,
     "catty_persona": {
         **_PERSONA_TOOL_SCHEMA,
         "function": {
@@ -1710,6 +1730,9 @@ class ToolCapability:
 
 
 _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
+    "catty_skill_search": ToolCapability(),
+    "catty_skill_load": ToolCapability(),
+    "catty_skill_save": ToolCapability(execution_mode="write"),
     "catty_persona": ToolCapability(execution_mode="write"),
     "catty_recall": ToolCapability(),
     "catty_scan_messages": ToolCapability(),
@@ -1931,6 +1954,8 @@ class ToolContext:
     nsfw_context: bool = False
     # 入口注入当前会话的人格管理；工具仅转交允许参数，不自行保存/切换或生成定义。
     persona_manage_fn: Callable[[dict[str, Any]], Awaitable[dict[str, Any]]] | None = None
+    # 本轮技能候选与联网回执；仅实际检索/抓取后创建，不在 schema 枚举时扫库。
+    skill_turn: Any | None = None
 
     @property
     def group_id(self) -> str:
@@ -1959,6 +1984,78 @@ class ToolContext:
             if group_title:
                 return str(group_title)
         return str(self.config.catty_user_titles.get(user_id) or "")
+
+
+_SKILL_TOOL_NAMES = frozenset({
+    "catty_skill_search", "catty_skill_load", "catty_skill_save",
+})
+
+
+def _skill_turn_for_context(ctx: ToolContext) -> Any:
+    turn = getattr(ctx, "skill_turn", None)
+    if turn is None:
+        from .skill_runtime import SkillTurn
+
+        turn = SkillTurn(ctx.config)
+        ctx.skill_turn = turn
+    return turn
+
+
+def skill_tool_schemas(ctx: ToolContext) -> list[dict[str, Any]]:
+    """仅返回本轮运行时实际签发的 load/save schema；不创建会话、不读取技能库。"""
+    if not bool(getattr(ctx.config, "catty_tools_enabled", True)) or not bool(
+        getattr(ctx.config, "catty_skills_enabled", True)
+    ):
+        return []
+    turn = getattr(ctx, "skill_turn", None)
+    if turn is None:
+        return []
+    disabled_in_private = _private_disabled_tool_names(ctx.config)
+    result: list[dict[str, Any]] = []
+    for schema in turn.schemas():
+        if not isinstance(schema, dict):
+            continue
+        function = schema.get("function")
+        if not isinstance(function, dict):
+            continue
+        name = function.get("name")
+        if name not in {"catty_skill_load", "catty_skill_save"}:
+            continue
+        if not _tool_config_enabled(name, ctx.config):
+            continue
+        if _tool_capability_denial_reason(
+            name,
+            is_private=ctx.is_private,
+            is_group=bool(ctx.group_id),
+            has_image=bool(ctx.input_image_urls or ctx.recent_image_urls),
+            is_directly_requested=bool(ctx.is_directly_requested),
+            persona=ctx.persona,
+            disabled_in_private=disabled_in_private,
+        ) is not None:
+            continue
+        result.append(schema)
+    return result
+
+
+async def _exec_skill_action(
+    name: str, method: str, args: dict[str, Any], ctx: ToolContext,
+) -> dict[str, Any]:
+    if not bool(getattr(ctx.config, "catty_tools_enabled", True)) or not _tool_config_enabled(name, ctx.config):
+        return _tool_capability_error(name, "config_disabled", persona=ctx.persona)
+    # 候选 ID / 抓取回执资格由 runtime 硬校验，不能靠直接调用 executor 绕过。
+    return await getattr(_skill_turn_for_context(ctx), method)(args)
+
+
+async def _exec_skill_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    return await _exec_skill_action("catty_skill_search", "search", args, ctx)
+
+
+async def _exec_skill_load(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    return await _exec_skill_action("catty_skill_load", "load", args, ctx)
+
+
+async def _exec_skill_save(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    return await _exec_skill_action("catty_skill_save", "save", args, ctx)
 
 
 # ── 共享 TTL 缓存 ──────────────────────────────────────────────────────
@@ -5888,6 +5985,9 @@ async def _exec_persona(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any
 ToolExecutor = Callable[[dict[str, Any], ToolContext], Awaitable[dict[str, Any]]]
 
 _EXECUTORS: dict[str, ToolExecutor] = {
+    "catty_skill_search": _exec_skill_search,
+    "catty_skill_load": _exec_skill_load,
+    "catty_skill_save": _exec_skill_save,
     "catty_persona": _exec_persona,
     "catty_recall": _exec_recall,
     "catty_scan_messages": _exec_scan_messages,
@@ -6179,6 +6279,9 @@ def _detect_tool_intent(
 
 
 _TOOL_CONFIG_FLAGS: dict[str, tuple[str, ...]] = {
+    "catty_skill_search": ("catty_skills_enabled",),
+    "catty_skill_load": ("catty_skills_enabled",),
+    "catty_skill_save": ("catty_skills_enabled", "catty_skills_auto_learn_enabled"),
     "catty_persona": (),  # 主人权限由入口过滤及 executor 校验，不新增配置开关。
     "catty_web_search": ("catty_web_search_enabled",),
     "catty_emoji": ("catty_emoji_enabled",),
@@ -6204,6 +6307,7 @@ def _tool_config_enabled(name: str, config: Config) -> bool:
 
 
 _INTELLIGENCE_CORE_TOOLS = frozenset({
+    "catty_skill_search",
     "catty_persona",  # “就换刚才那个”从历史解析，不能受当前消息关键词闸门限制。
     "catty_recall",
     "catty_user_profile",
@@ -6559,8 +6663,9 @@ async def execute_tool_call(
     """执行一次 tool_call。args 解析失败/未知 tool/执行抛错都返回结构化 error,
     让主 AI 在下一轮自己看懂出错原因(而不是把异常丢给用户)。
     """
+    raw_preview = "" if name in _SKILL_TOOL_NAMES else (arguments_json or "")[:60]
     if allowed_names is not None and name not in allowed_names:
-        _record_tool_call(_ctx_scope_key(ctx), name, (arguments_json or "")[:60], False)
+        _record_tool_call(_ctx_scope_key(ctx), name, raw_preview, False)
         return _tool_capability_error(name, "not_in_allowlist", persona=ctx.persona)
 
     executor = _EXECUTORS.get(name)
@@ -6568,7 +6673,7 @@ async def execute_tool_call(
         _record_tool_call(_ctx_scope_key(ctx), name, "", False)
         return {"error": f"未知 tool: {name}"}
     if not bool(getattr(ctx.config, "catty_tools_enabled", True)) or not _tool_config_enabled(name, ctx.config):
-        _record_tool_call(_ctx_scope_key(ctx), name, (arguments_json or "")[:60], False)
+        _record_tool_call(_ctx_scope_key(ctx), name, raw_preview, False)
         return _tool_capability_error(name, "config_disabled", persona=ctx.persona)
     raw = (arguments_json or "").strip()
     if not raw:
@@ -6577,10 +6682,10 @@ async def execute_tool_call(
         # 走 lenient_json_object 让 fence / 智能引号 / 尾逗号 / 单引号都能恢复。
         parsed = lenient_json_object(raw)
         if parsed is None:
-            _record_tool_call(_ctx_scope_key(ctx), name, raw[:60], False)
+            _record_tool_call(_ctx_scope_key(ctx), name, "" if name in _SKILL_TOOL_NAMES else raw[:60], False)
             return {"error": "arguments 不是合法 JSON 对象,无法解析"}
         args = parsed
-    args_preview = _short_args_preview(args)
+    args_preview = "" if name in _SKILL_TOOL_NAMES else _short_args_preview(args)
     has_image = bool(ctx.input_image_urls or ctx.recent_image_urls)
     explicit_image_text = ctx.user_text
     if name == "catty_image_search":
@@ -6604,6 +6709,10 @@ async def execute_tool_call(
     try:
         result = await executor(args, ctx)
     except Exception as exc:  # noqa: BLE001
+        if name in _SKILL_TOOL_NAMES:
+            _logger.warning("Tool %s execution failed: %s", name, exc.__class__.__name__)
+            _record_tool_call(_ctx_scope_key(ctx), name, "", False)
+            return {"ok": False, "error": f"{name} 执行失败: {exc.__class__.__name__}"}
         _logger.warning("Tool %s execution failed: %s", name, exc, exc_info=True)
         _record_tool_call(_ctx_scope_key(ctx), name, args_preview, False)
         return {"error": f"{name} 执行失败: {exc.__class__.__name__}: {exc}"}
@@ -6613,6 +6722,19 @@ async def execute_tool_call(
         and not result.get("error")
     )
     if ok:
+        if (
+            name == "catty_fetch_url"
+            and result.get("ok") is True
+            and bool(getattr(ctx.config, "catty_skills_enabled", True))
+        ):
+            try:
+                turn = _skill_turn_for_context(ctx)
+                observed = turn.observe_tool_result(name, result)
+                if isinstance(observed, dict):
+                    # 仅增加回执字段，原正文/URL/成功状态不被学习旁路覆盖。
+                    result = {**observed, **result}
+            except Exception as exc:  # noqa: BLE001
+                _logger.warning("Skill observation failed: %s", exc.__class__.__name__)
         await _record_timeline_tool_activity(ctx, name)
     _record_tool_call(_ctx_scope_key(ctx), name, args_preview, bool(ok))
     return result
@@ -6662,7 +6784,7 @@ def tools_system_hint(persona: Any = None) -> str:
         "可以自主回忆、翻聊天记录、搜索、看图、生成并交付文件或写入长期记忆/计划/适应规则；实际可用能力以本轮 schema 为准.\n"
         f"2) 原创绘图请求**铁律**: {char}要出图就用 catty_imagegen (本轮开放时), 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
         f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'; 空结果/未命中不等于事实不存在; 永远不要编造工具结果.\n"
-        "4) 对不确定、陌生或可能过期的当前事实先用 catty_web_search 核实; 详细 trigger/参数/边界看 schema description.\n"
+        "4) 相关技能先用 catty_skill_search 检索再选择加载；未知或时效事实先用 catty_web_search 查权威来源核实；详细参数/边界看本轮 schema.\n"
         "5) 要回指群里的图或旧消息: catty_scan_messages 翻最近消息/找图 → catty_look_image 看图 → 需要作者出处再 catty_image_search.\n"
         "上下文意图与执行衔接见本轮【上下文请求理解】；这里不重复教程。"
     )

@@ -789,6 +789,14 @@ class Config(BaseModel):
     catty_scope_meme_enabled: bool = True
     catty_timeline_enabled: bool = True
     catty_adaptive_prompt_enabled: bool = True
+    # 技能按需检索/加载；学习仅使用本轮成功抓取网页的回执。
+    catty_skills_enabled: bool = True
+    catty_skills_auto_learn_enabled: bool = True
+    catty_skills_dir: str = "data/skills"
+    catty_skills_search_limit: int = Field(default=3, ge=1, le=5)
+    catty_skills_max_body_chars: int = Field(default=6000, gt=0)
+    catty_skills_learning_timeout_seconds: float = Field(default=20.0, gt=0, allow_inf_nan=False)
+    catty_skills_learning_max_tokens: int = Field(default=2400, gt=0)
     # 本地解析层(在 system prompt 注入前运行) — 出问题时可临时关掉某层。
     # 合法值: slang / pulse / intent / entity / hints
     # 留空表示全部启用(默认推荐)。例如 ["hints"] 表示只关 hints,其它都开。
@@ -900,6 +908,14 @@ class Config(BaseModel):
     @classmethod
     def normalize_base_url(cls, value: str) -> str:
         return value.strip().rstrip("/")
+
+    @field_validator("catty_skills_dir")
+    @classmethod
+    def validate_skills_dir(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized or "\x00" in normalized:
+            raise ValueError("catty_skills_dir must be a nonempty path without NUL")
+        return normalized
 
     @field_validator("catty_group_history_scope")
     @classmethod

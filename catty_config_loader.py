@@ -297,6 +297,15 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "timeline_enabled": True,
         "adaptive_prompt_enabled": True,
     },
+    "skills": {
+        "enabled": True,
+        "auto_learn_enabled": True,
+        "dir": "data/skills",
+        "search_limit": 3,
+        "max_body_chars": 6000,
+        "learning_timeout_seconds": 20,
+        "learning_max_tokens": 2400,
+    },
     "file_delivery": {
         "enabled": True,
         "dir": "data/file_outbox",
@@ -901,6 +910,20 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_TOOLS_LAZY_SCHEMA_ENABLED", tools.get("tools_lazy_schema_enabled"))
     _set_env("CATTY_TOOLS_FULL_EXPOSURE", tools.get("tools_full_exposure"))
     _set_env("CATTY_SANDBOX_DIR", tools.get("sandbox_dir"))
+
+    skills = _section(data, "skills")
+    _set_env("CATTY_SKILLS_ENABLED", skills.get("enabled"))
+    _set_env("CATTY_SKILLS_AUTO_LEARN_ENABLED", skills.get("auto_learn_enabled"))
+    skills_dir = str(skills.get("dir") or "").strip()
+    if skills_dir:
+        resolved_skills_dir = Path(skills_dir).expanduser()
+        if not resolved_skills_dir.is_absolute():
+            resolved_skills_dir = base_dir / resolved_skills_dir
+        _set_env("CATTY_SKILLS_DIR", resolved_skills_dir)
+    _set_env("CATTY_SKILLS_SEARCH_LIMIT", skills.get("search_limit"))
+    _set_env("CATTY_SKILLS_MAX_BODY_CHARS", skills.get("max_body_chars"))
+    _set_env("CATTY_SKILLS_LEARNING_TIMEOUT_SECONDS", skills.get("learning_timeout_seconds"))
+    _set_env("CATTY_SKILLS_LEARNING_MAX_TOKENS", skills.get("learning_max_tokens"))
 
     file_delivery = _section(data, "file_delivery")
     _set_env("CATTY_FILE_DELIVERY_ENABLED", file_delivery.get("enabled"))

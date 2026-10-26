@@ -639,6 +639,14 @@ async def _sim_chat_unlocked(
                         scope_key=_sim_tool_scope_key,
                         user_text=_user_text,
                     )
+
+                    def _tools_provider() -> list[dict]:
+                        from .tools import skill_tool_schemas
+                        schemas = [*_tools, *skill_tool_schemas(_ctx)]
+                        _allowed_tool_names.clear()
+                        _allowed_tool_names.update(s["function"]["name"] for s in schemas)
+                        return schemas
+
                     async def _executor(
                         name: str,
                         args_json: str,
@@ -655,6 +663,7 @@ async def _sim_chat_unlocked(
                         cfg, messages,
                         tools=_tools,
                         tool_executor=_executor,
+                        tools_provider=_tools_provider,
                         max_rounds=int(getattr(cfg, "catty_tools_max_rounds", 3) or 3),
                         max_calls_per_round=int(getattr(cfg, "catty_tools_max_calls_per_round", 3) or 3),
                         tool_choice=_tool_choice,

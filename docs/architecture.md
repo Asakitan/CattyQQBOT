@@ -28,6 +28,14 @@
 
 本轮实际开放 `catty_write_file` 或 `catty_python_run` 时，同一意图段补充可选文件交付能力；只介绍存在的工具。生成正文/源码并不要求执行 Python，短示例仍可直接回复。无工具重试刷新这一段并撤下文件能力，不改内置人格或工具权限。
 
+### 按需技能与公共知识学习
+
+`request_intent.py` 默认提示实质任务先查技能，未知或可能过时的事实查官方/一手正文；主回复仍自主选择工具。首轮仅有 `catty_skill_search` 入口，没有技能库目录、候选或正文。搜索命中后 `SkillTurn` 记录候选ID与SHA，下一次模型请求才增加带候选枚举的 `catty_skill_load`；模型选择后返回完整分块正文。
+
+`execute_tool_call` 观察真实 `catty_fetch_url` 结果，合格的公共正文产生当轮不透明回执并开放 `catty_skill_save`。保存只收回执ID；独立生成请求不带聊天、画像或用户身份，在空ContextVar环境中提炼可共享知识。`skill_store.py` 用文件锁、SHA版本校验及fsync/replace写入 `data/skills/<id>.json`，所有会话共享检索。目录不入Git，保存不会重启bot；下次检索直接读磁盘新版本。
+
+生产和模拟入口把静态工具与 `skill_tool_schemas(ctx)` 合并为 `tools_provider`；`chat_completion_with_tools` 每次模型请求前重新获取schema、允许名称并刷新自有意图提示。云端fallback保留provider及 `ToolReplyState`，deadline文字降级则不带工具/provider。动态schema同样纳入既有模型窗口预算，不预注入技能正文以占用上下文。仅有抓取回执不等于来源权威，正则筛查不保证识别所有隐私；来源判断、模型选择与线上质量仍需实测。
+
 ## 排队与历史预算
 
 聊天锁仍串行处理同一会话。`reply_queue_max_wait_seconds` 只淘汰已过期的非定向群聊插话；已准入的私聊及 `directly_requested/mentioned/replied_to_self` 请求不会因前轮耗时而被丢弃。原准入、mention-only 与续聊开窗规则不变。
@@ -52,4 +60,4 @@
 
 ## 验证
 
-`scripts/run_offline_regressions.py` 仅运行已审查清单，逐模块独立进程。在线评测需要显式入口，不参与默认回归。2026-10-26 最新本地验收为51模块800项、0失败、0错误、9项原条件跳过，并已 push_zip 部署到 `D:/CattyQQAI`；远端18个关键文件哈希一致、py_compile 退出0、六个相关模块通过，真实模型与QQ投递未在本轮调用。
+`scripts/run_offline_regressions.py` 仅运行已审查清单，逐模块独立进程。在线评测需要显式入口，不参与默认回归。2026-10-27本地验收为55模块884项：874通过、9跳过、1项既有persona_admin浮点失败、0错误，退出1；技能四模块75项通过，350个Python文件语法通过。技能增量已部署：32文件双端哈希一致，远端18文件py_compile与12模块260项回归通过（9跳过），插件重载和重连已确认；真实模型与QQ效果未专项评测，见会话07。

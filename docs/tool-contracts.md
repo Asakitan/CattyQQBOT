@@ -1,6 +1,6 @@
 # 工具合同与本地修复
 
-工具与人格基线已于2026-10-26部署到生产（归档提交 `202971c`）；本轮可选文件提示修复已于同日 push_zip 上线并完成远端复跑。内置人格设定、NSFW规则、积分与既有工具权限保持不变；人格管理工具仅主人可用。失效系统提示配置已删除；回复发送回执与沙箱执行器均已接入，见相关模块文档。
+工具与人格基线已于2026-10-26部署（`202971c`），排队/文件提示与联网去冷却也已上线。按需技能与研究提示已在 `f96b5b3` 基础上部署，32文件双端一致，远端12模块260项无失败/错误、9跳过。内置人格设定、NSFW规则、积分与既有工具权限保持不变；人格管理工具仅主人可用。失效系统提示配置已删除；回复发送回执与沙箱执行器均已接入，见相关模块文档。
 
 ## 文件生成与暂存
 
@@ -103,12 +103,29 @@
 - 成功暂存后由系统按原会话后台回传；暂存不是已发送，保存源码不代表编译/运行通过。提示要求依据真实回执说明结果，不虚构文件或下载链接。
 - 生产与模拟器按 `_allowed_tool_names` 刷新提示；spark、模拟器纯文字fallback和deadline文字重试传空名单，撤下自有文件能力段。基础教程、原消息及assistant预填保持，不声称清除了所有静态工具说明。
 
-离线测试：`tests/test_persona_tool.py` 20项、`tests/test_request_intent.py` 20项全部通过，覆盖字段与注册表一致、权限、精确回执、上下文承接、教程幂等/预填、实际能力过滤、非强制选择及沙箱提示冲突。测试使用替身回调及包壳加载，避免运行插件初始化。
+离线测试：`tests/test_persona_tool.py` 20项、`tests/test_request_intent.py` 33项全部通过，覆盖字段与注册表一致、权限、精确回执、上下文承接、教程幂等/预填、实际能力过滤、非强制选择、默认研究及沙箱提示冲突。测试使用替身回调及包壳加载，避免运行插件初始化。
 
-固定离线入口 `E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 验收51模块800项，0失败、0错误、9项原条件跳过。最新回执为 `.vscode/handoff/message-delivery-20261026/all-final.log`，PowerShell使用UTF-8输出；未调用真实模型或QQ。
+固定离线入口 `E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 验收55模块884项：874通过、9项原条件跳过、1项既有persona_admin浮点失败、0错误（退出1）。最新回执为 `.vscode/handoff/skills-20261027/full-final.log`，PowerShell使用UTF-8输出；未调用真实模型或QQ。
+
+## 按需技能工具
+
+| 入口 | 参数 | 开放时点与结果 |
+|---|---|---|
+| `catty_skill_search` | `query`，可选 `limit` | 首轮唯一技能入口；只给相关metadata，默认3项、最多5项，不给正文 |
+| `catty_skill_load` | `id` | 本轮检索有候选后动态开放；ID来自候选枚举，按检索SHA加载；完整正文以最多1000字符的 `instructions` 分块返回 |
+| `catty_skill_save` | `receipt_ids`，可选 `existing_id` | 合格公共抓页回执后开放；只允许当轮来源，更新目标必须本轮已加载；独立提炼并原子保存，不接受模型传入任意正文/URL/时间 |
+
+- `ALL_TOOL_SCHEMAS` 与 `_LAZY_TOOL_SCHEMAS` 均不含load/save；executor与capability注册表覆盖静态工具加这两个动态名称。不能为了让旧测试注册表等长而提前暴露schema。
+- `ToolContext.skill_turn` 按逻辑轮次懒建；`skill_tool_schemas(ctx)` 不为首轮扫描/创建技能库，遵守工具总开关、技能开关、学习开关和私聊禁用配置。资格不跨轮复用。
+- `chat_completion_with_tools(..., tools_provider=None)` 每轮调用provider、深复制schema并重算允许名称；生产与模拟provider返回静态工具加实际动态schema。既有无provider调用不变，`tool_choice=auto` 不变。
+- 仅真实 `catty_fetch_url` 成功的2xx公共正文可被观察为 `skill_receipt_id`；搜索摘要、自动补网缓存、假回执、失败或旧轮来源不提供保存资格。来源时间与片段哈希由执行层生成。
+- `build_skill_research_hint` 仅介绍实际开放入口，先检索/选择/加载，再按需联网核实；提炼共享知识不要求每轮用户再次确认。云端fallback传递动态provider与恢复快照；无工具deadline重试刷新提示并保留已成功回执，不重做保存。
+- 保存线程不会阻塞聊天事件循环；取消发生在提交开始之后时等待同一写入收尾，可能已经写盘，不声称回滚。来源及生成内容都筛查明显私人字段，但不承诺通用匿名化或自动权威认证。
+
+技能四模块75项通过，其中 `test_skill_disclosure` 使用真实工具循环与存储、替身模型/抓页结果验证首轮无正文、搜索后schema、选后完整正文、保存后下轮检索，以及fallback转交恢复状态和无工具降级不重开动态能力；保存幂等由运行时测试验证。详细合同见 [默认提示](skill-guidance.md)、[运行时](skill-runtime.md)、[存储](skill-storage.md)。
 
 ## 验收口径与历史基线
 
-2026-10-26 本地工具与格式回归93项全部通过，包括并发写文件配额；格式依赖已在本地解释器可用。harness v2阶段清单为622项，人格阶段为782项；当前排队、预算与文件提示修复后的完整清单为800项。各阶段最终均无失败/错误、9项原条件跳过。
+2026-10-26本地工具与格式回归93项全部通过，包括并发写文件配额；格式依赖已在本地解释器可用。harness v2阶段为622项，人格阶段为782项，排队/预算/文件提示阶段为800项，当时最终均无失败/错误、9项原条件跳过。当前技能增量的884项结果见上方，不将既有浮点失败改记为通过。
 
 模块名单：`tests.test_file_formats`、`tests.test_tool_audit_fixes`、`tests.test_tool_message_scan`、`tests.test_tool_contracts`、`tests.test_local_tool_contracts`、既有 `tests.test_file_delivery`，并保留工具注册表/dispatcher 回归。新增测试只使用临时目录和 mock：验证 OOXML 可读性、CSV 引号/前导零/文本公式、PDF 中文 CID 与分页、原子失败清理、线程写入、成功/失败沙箱入队、引用图独存/混合顺序及真实发送者召回，不调用外部模型、QQ 或网络。

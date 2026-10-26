@@ -3889,6 +3889,8 @@ async def _post_fallback_chat(
     max_rounds: int | None = None,
     max_calls_per_round: int | None = None,
     request_route: str = "fallback",
+    tools_provider: Any | None = None,
+    reply_state: ToolReplyState | None = None,
 ) -> str:
     await _check_mc_gate_or_raise(config)
 
@@ -3924,6 +3926,8 @@ async def _post_fallback_chat(
             tool_choice=tool_choice,
             _fallback_mode=True,
             _fallback_request_route=request_route,
+            **({"tools_provider": tools_provider} if tools_provider is not None else {}),
+            **({"reply_state": reply_state} if reply_state is not None else {}),
         )
 
     # 内存预算够时让 7B 留在内存复用更快。想要立刻卸载,在 config 的
@@ -4016,6 +4020,7 @@ async def chat_completion_with_tools(
     reply_state: ToolReplyState | None = None,
     _fallback_mode: bool = False,
     _fallback_request_route: str = "fallback",
+    tools_provider: Any | None = None,
 ) -> str:
     """OpenAI function calling 主回复循环。
 
@@ -4054,6 +4059,8 @@ async def chat_completion_with_tools(
                     tool_executor=tool_executor,
                     max_rounds=max_rounds,
                     max_calls_per_round=max_calls_per_round,
+                    **({"tools_provider": tools_provider} if tools_provider is not None else {}),
+                    **({"reply_state": reply_state} if reply_state is not None else {}),
                 )
             except MCBusyError:
                 raise
@@ -4228,6 +4235,17 @@ async def chat_completion_with_tools(
     )
 
     for round_idx in range(max(1, max_rounds)):
+        if tools_provider is not None:
+            next_tools = tools_provider()
+            if not isinstance(next_tools, list):
+                raise TypeError("tools_provider must return a list")
+            tools = deepcopy(next_tools)
+            allowed_tool_names = _allowed_tool_names(tools)
+            from .request_intent import CONTEXT_REQUEST_INTENT_HEADER, append_context_request_hint
+            if any(isinstance(m, dict) and m.get("role") == "system"
+                   and isinstance(m.get("content"), str)
+                   and m["content"].startswith(CONTEXT_REQUEST_INTENT_HEADER + "\n") for m in history):
+                append_context_request_hint(history, allowed_tool_names)
         round_tool_choice: ToolChoice = tool_choice if round_idx == 0 else "auto"
         # 已知该端点拒绝非 auto tool_choice (如 DeepSeek 思考模型) → 直接用 auto, 省一次必败 400。
         if round_tool_choice != "auto" and _forced_tool_choice_blocked(_force_endpoint_key):

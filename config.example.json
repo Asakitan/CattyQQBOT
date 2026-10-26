@@ -276,6 +276,15 @@
         "timeline_enabled": true,
         "adaptive_prompt_enabled": true
     },
+    "skills": {
+        "enabled": true,
+        "auto_learn_enabled": true,
+        "dir": "data/skills",
+        "search_limit": 3,
+        "max_body_chars": 6000,
+        "learning_timeout_seconds": 20,
+        "learning_max_tokens": 2400
+    },
     "file_delivery": {
         "enabled": true,
         "dir": "data/file_outbox",

@@ -366,13 +366,15 @@ python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py 
 
 此入口按固定清单逐模块启动独立进程，避免测试替身污染；不执行历史在线评测，也排除尝试读取真实密钥配置的沙箱负例。可重复使用 `--module` 选择清单中的模块。
 
-2026-10-26最新验收：51模块800项测试，0失败、0错误，9项按原条件跳过。覆盖工具回执、图片取消交付、发送状态、真实文件格式、沙箱归属、动态人格、证据预算，以及定向排队保留、长前缀与会话预算、可选文件交付提示；不等同于真实QQ、模型服务或Windows打包集成测试。排队/预算/文件提示修复已部署，双端关键文件哈希一致，见 [会话04](docs/session-log/session-04.md)。
+2026-10-27最新本地验收：55模块884项，874通过、9项按原条件跳过、1项既有 `persona_admin` 浮点deadline断言失败，0错误（完整运行退出1）。技能四模块75项全部通过；覆盖逐轮schema披露、正文完整性、公共抓页回执、跨轮隔离和重复保存，以及既有工具、沙箱、人格、排队与预算。技能增量已部署，32文件双端哈希一致；生产Python3.14.5下12模块260项无失败/错误、9跳过，插件已重载并重连。真实模型/QQ效果未专项验证，见 [开发记录](docs/session-log/session-06.md) 和 [部署记录](docs/session-log/session-07.md)。
 
 Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息，按优先级保留证据；Agent 按实际开放工具补查。CLI 的 `--production-defaults` 只对齐预算；`--compact-json --metadata-only` 可省略正文。接口见 [证据包](docs/harness-evidence.md)，合成检查入口为 `scripts/benchmark_harness.py`。
 
 `chat.system_prompt` 已从当前配置、模板及运行时字段删除；旧键不再导入。人格正文与场景库仍由原有模块提供。修复细节见 [当前状态](STATUS.md)、[工具合同](docs/tool-contracts.md)、[沙箱产物](docs/code-sandbox.md) 和 [回复恢复](docs/reply-recovery.md)。
 
 支持 [JSON 自定义人格](docs/persona-json.md)：可导入 [完整示例](docs/examples/personas/sky_guide.json)，也可聊天描述让 AI 填写并保存。定义落在 `data/personas`，保存不自动切换；使用 `/人格 小岚` 或让 AI 根据上下文切换。普通主回复结合前文与补充要求自主选择工具或直接回答，不额外增加规划模型。
+
+支持 [按需技能与联网学习](docs/skill-guidance.md)：默认提示先查相关技能，未知或可能过时的事实查公共权威来源。首轮不塞技能目录，搜索后给候选与加载schema，模型选择后才给正文；核实可复用公共知识后通过抓页回执提炼保存。共享库为 `data/skills`，学习输入不含聊天或画像，模型与正则筛查不等于完整匿名化。`skills.enabled` / `skills.auto_learn_enabled` 默认开启，完整旋钮见 [运行时配置](docs/skill-runtime.md)。该流程保留模型自主工具选择，不保证每轮必定搜索或保存。
 
 ---
 

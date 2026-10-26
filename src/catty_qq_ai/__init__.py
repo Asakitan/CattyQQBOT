@@ -10240,6 +10240,7 @@ async def _main_reply_with_deadline(
     router_model: str = "",
     router_label: str = "",
     tool_choice: Any = "auto",
+    tools_provider: Any = None,
 ) -> str:
     """主回复墙钟: 超时立即取消这次请求, 再用同一批 messages 重发 (降级: 不带 tools + 低思考)。
 
@@ -10294,6 +10295,7 @@ async def _main_reply_with_deadline(
                 router_label="" if degraded else router_label,
                 tool_choice="auto" if degraded else tool_choice,
                 reply_state=None if degraded else reply_state,
+                **({"tools_provider": tools_provider} if not degraded and tools_provider is not None else {}),
             )
             if deadline > 0:
                 return await asyncio.wait_for(call, timeout=deadline)
@@ -16664,6 +16666,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _lock_stack.callback(_reply_done.set)
         _scheduled_file_paths: set[str] = set()
 
+        def _tools_provider() -> list[dict[str, Any]]:
+            from .tools import skill_tool_schemas
+            schemas = [*tools_for_main_reply, *skill_tool_schemas(tool_ctx)]
+            _allowed_tool_names.clear()
+            _allowed_tool_names.update(s["function"]["name"] for s in schemas)
+            return schemas
+
         async def _tool_executor(
             name: str,
             args_json: str,
@@ -17282,6 +17291,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     messages,
                     tools=tools_for_main_reply,
                     tool_executor=_tool_executor,
+                    tools_provider=_tools_provider,
                     max_rounds=int(getattr(config, "catty_tools_max_rounds", 3) or 3),
                     max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
                     router_base_url=_router_base,

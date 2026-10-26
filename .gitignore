@@ -65,3 +65,5 @@ data/python_sandbox/
 # 自定义人格与切换指令是运行时数据；示例放在 docs/examples。
 /data/personas/
 /persona_overrides.json
+# 联网学习的共享技能是运行时数据，不随源码提交。
+/data/skills/
