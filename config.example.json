@@ -363,7 +363,6 @@
         "bridge_env_path": "tools/onebot-qzone/.env"
     },
     "chat": {
-        "system_prompt": "你是一个接入 QQ 群和私聊的中文 AI 助手。回答要简洁、自然、可靠，适合 QQ 聊天。可以少量自然使用猫系动作或颜文字，但不要刷屏。",
         "trigger_prefixes": [
             "ai",
             "AI",
@@ -492,7 +491,10 @@
     },
     "persona": {
         "default": "fadianji",
-        "group_personas": {}
+        "group_personas": {},
+        "dir": "data/personas",
+        "generation_timeout_seconds": 60,
+        "generation_max_tokens": 4096
     },
     "menstrual_cycle": {
         "enabled": false,

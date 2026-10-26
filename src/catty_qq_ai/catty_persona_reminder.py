@@ -62,10 +62,10 @@ def should_inject_reminder(scope_id: str, every_n_turns: int = 6) -> bool:
 def build_reminder_text(persona=None) -> str:
     """返回精简 reminder text (~150 token).
 
-    多人格 (主人 2026-07-06): persona.persona_reminder_text 非空时用它;
+    多人格: persona.persona_reminder_text 非 None 时使用，空字符串关闭提醒;
     None / catty → 原 _REMINDER_TEXT 字节不变。
     """
-    if persona is not None and getattr(persona, "persona_reminder_text", None):
+    if persona is not None and getattr(persona, "persona_reminder_text", None) is not None:
         return persona.persona_reminder_text
     return _REMINDER_TEXT
 

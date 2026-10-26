@@ -17,6 +17,7 @@ import json
 import logging
 import zlib
 from collections import OrderedDict
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -178,12 +179,37 @@ def _normalize_name(value: Any) -> str:
     return " ".join(str(value or "").split()).casefold()
 
 
-def lookup_user_profile(display_name: str) -> dict[str, Any] | None:
-    """按 live 昵称/群名片找语料画像: 精确 → 双向长前缀 (≥4字, 取互动最多的)。"""
+def lookup_user_profile(display_name: str, *, scope: str | None = None) -> dict[str, Any] | None:
+    """按昵称查画像；指定 scope 时先隔离来源，None 保留旧索引语义。"""
     name = _normalize_name(display_name)
     if not name:
         return None
     _refresh()
+    if scope is not None:
+        wanted = str(scope).strip().lower()
+        if wanted.startswith("private:") and wanted.removeprefix("private:"):
+            allowed_scopes = {wanted}
+        elif wanted == "group" or (wanted.startswith("group:") and wanted.removeprefix("group:")):
+            allowed_scopes = {"", "group", wanted}
+        else:
+            return None
+        # 不能从 _PROFILE_INDEX 过滤：同名的后写记录已经覆盖了其它 scope。
+        candidates = [
+            (_normalize_name(profile.get("name")), profile)
+            for profile in _PROFILES
+            if str(profile.get("scope") or "").strip().lower() in allowed_scopes
+        ]
+        matches = [profile for key, profile in candidates if key == name]
+        if not matches and len(name) >= 4:
+            matches = [
+                profile for key, profile in candidates
+                if len(key) >= 4 and (key.startswith(name) or name.startswith(key))
+            ]
+        # max 在同分时保留文件先后顺序；不排序/改写共享缓存，返回独立嵌套副本。
+        best = max(matches, key=lambda profile: int(profile.get("triggers") or 0), default=None)
+        return deepcopy(best) if best is not None else None
+
+    # 未传 scope 的调用保留重复昵称后写覆盖、前缀同分先命中的旧行为。
     exact = _PROFILE_INDEX.get(name)
     if exact is not None:
         return exact

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import os
+import tempfile
 import threading
 import time
 from pathlib import Path
@@ -40,16 +41,26 @@ class PersonaOverrideStore:
                 }
 
     def _save_locked(self) -> None:
-        tmp = self._path.with_suffix(".json.tmp")
+        self._write_locked(self._data)
+
+    def _write_locked(self, candidate: dict[str, dict[str, Any]]) -> None:
+        """Write first; callers publish the candidate only after replace succeeds."""
+        self._path.parent.mkdir(parents=True, exist_ok=True)
+        fd, temporary = tempfile.mkstemp(
+            prefix=f".{self._path.name}.", suffix=".tmp", dir=self._path.parent,
+        )
+        tmp = Path(temporary)
         try:
-            self._path.parent.mkdir(parents=True, exist_ok=True)
-            with tmp.open("w", encoding="utf-8") as handle:
-                handle.write(json.dumps(self._data, ensure_ascii=False, indent=2))
+            with os.fdopen(fd, "w", encoding="utf-8") as handle:
+                handle.write(json.dumps(candidate, ensure_ascii=False, indent=2))
                 handle.flush()
                 os.fsync(handle.fileno())
             tmp.replace(self._path)
-        except OSError:
-            pass
+        finally:
+            try:
+                tmp.unlink()
+            except FileNotFoundError:
+                pass
 
     def get(self, scope: str) -> str | None:
         if not scope:
@@ -62,18 +73,23 @@ class PersonaOverrideStore:
         if not scope or not str(persona_name or "").strip():
             return
         with self._lock:
-            self._data[scope] = {
+            candidate = dict(self._data)
+            candidate[scope] = {
                 "persona": str(persona_name).strip(),
                 "set_by": str(set_by or ""),
                 "set_at": time.time(),
             }
-            self._save_locked()
+            self._write_locked(candidate)
+            self._data = candidate
 
     def clear(self, scope: str) -> bool:
         with self._lock:
-            existed = self._data.pop(scope, None) is not None
+            existed = scope in self._data
             if existed:
-                self._save_locked()
+                candidate = dict(self._data)
+                del candidate[scope]
+                self._write_locked(candidate)
+                self._data = candidate
         return existed
 
     def all_overrides(self) -> dict[str, str]:

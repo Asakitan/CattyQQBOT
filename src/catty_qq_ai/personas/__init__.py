@@ -15,6 +15,10 @@ resolve 优先级: override store(命令切换, 持久化) > config.catty_group_
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from collections.abc import Mapping
+import hashlib
+import json
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
@@ -193,6 +197,8 @@ class Persona:
     nsfw_style_override: str | None = None
     # NSFW spark 的 assistant prefill; None = 沿用 catty 的 (resist_label, is_private) 表。
     nsfw_prefill: str | None = None
+    # Runtime-only content identity; builtin definitions keep None forever.
+    definition_revision: str | None = None
 
     def segment_disabled(self, identifier: str) -> bool:
         return identifier in self.disabled_prompt_segments
@@ -303,18 +309,84 @@ PERSONA_ALIASES: dict[str, str] = {
 }
 
 
+_BUILTIN_PERSONAS = dict(PERSONAS)
+_BUILTIN_ALIASES = dict(PERSONA_ALIASES)
+
+
+def persona_revision_identity(persona: Persona) -> str:
+    """Stable history identity: builtin name, or custom name@content-sha256."""
+    if persona.definition_revision is None:
+        return persona.name
+    return f"{persona.name}@{persona.definition_revision}"
+
+
+def install_custom_personas(
+    definitions: Mapping[str, Mapping[str, Any]], *, root: Path | str,
+) -> None:
+    """Validate a whole replacement set before publishing it synchronously.
+
+    Public dict identities and exact builtin Persona objects are retained. There
+    are no awaits or disk writes here; callers serialize publication on their
+    runtime loop and keep a captured Persona object for in-flight turns.
+    """
+    from ..persona_store import PersonaValidationError, validate_persona_definition
+    from ..persona_defaults import materialize_custom_persona
+
+    if not isinstance(definitions, Mapping):
+        raise PersonaValidationError("definitions", "type")
+    candidate = dict(_BUILTIN_PERSONAS)
+    aliases = dict(_BUILTIN_ALIASES)
+    normalized: dict[str, dict[str, Any]] = {}
+    for key, raw in definitions.items():
+        definition = validate_persona_definition(dict(raw) if isinstance(raw, Mapping) else raw)
+        name = definition["name"]
+        if not isinstance(key, str) or key.strip().casefold() != name:
+            raise PersonaValidationError("definitions.name", "name_mismatch")
+        if name in normalized or name in candidate or name in aliases:
+            raise PersonaValidationError("definitions.name", "name_collision")
+        normalized[name] = definition
+
+    reserved_names = set(candidate) | set(normalized)
+    for name, definition in normalized.items():
+        for raw_alias in (definition["char_name"], *definition.get("aliases", [])):
+            alias = raw_alias.strip().casefold()
+            if alias in reserved_names and alias != name:
+                raise PersonaValidationError("definitions.aliases", "alias_collision")
+            if alias in aliases and aliases[alias] != name:
+                raise PersonaValidationError("definitions.aliases", "alias_collision")
+            aliases[alias] = name
+        serialized = json.dumps(
+            definition, ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
+        revision = hashlib.sha256(serialized).hexdigest()
+        candidate[name] = materialize_custom_persona(definition, root=root, revision=revision)
+
+    # Validation/materialization above can fail without changing either registry.
+    # Keep builtin keys present even during publication; don't clear their dict.
+    PERSONAS.update(candidate)
+    for name in tuple(PERSONAS):
+        if name not in candidate:
+            del PERSONAS[name]
+    PERSONA_ALIASES.update(aliases)
+    for alias in tuple(PERSONA_ALIASES):
+        if alias not in aliases:
+            del PERSONA_ALIASES[alias]
+
+
 def normalize_persona_name(raw: str) -> str | None:
     """别名/大小写归一; 未知名返回 None(调用方决定 fallback 还是报错)。"""
     key = str(raw or "").strip()
     if not key:
         return None
-    key = PERSONA_ALIASES.get(key, key).lower()
+    key = key.casefold()
+    key = PERSONA_ALIASES.get(key, key)
     return key if key in PERSONAS else None
 
 
 def get_persona(name: str | None) -> Persona:
     """未知/空名 fallback catty — 人格解析永不抛异常。"""
-    return PERSONAS.get(str(name or "").strip().lower(), CATTY_PERSONA)
+    return PERSONAS.get(normalize_persona_name(name or "") or "", CATTY_PERSONA)
 
 
 def get_reply_catalog(persona: Persona) -> PersonaReplyCatalog:
@@ -362,8 +434,9 @@ def resolve_persona_name(
                 override = override_store.get(candidate)
             except Exception:  # noqa: BLE001
                 override = None
-            if override and override in PERSONAS:
-                return override
+            normalized_override = normalize_persona_name(override or "")
+            if normalized_override:
+                return normalized_override
     if config is not None and scope and scope.startswith("group:"):
         parts = scope.split(":")
         gid = parts[1] if len(parts) > 1 else ""
@@ -389,6 +462,8 @@ __all__ = [
     "build_persona_reply_context",
     "get_persona",
     "get_reply_catalog",
+    "install_custom_personas",
     "normalize_persona_name",
+    "persona_revision_identity",
     "resolve_persona_name",
 ]

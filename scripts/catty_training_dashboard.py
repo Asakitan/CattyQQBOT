@@ -174,12 +174,8 @@ def _test_memory_context(config_path: Path, config: dict[str, Any]) -> str:
 
 def build_model_test_messages(config_path: Path, user_text: str, *, thinking: bool = False) -> list[dict[str, object]]:
     config = _load_json(config_path)
-    chat = _json_object(config.get("chat"))
-    system_prompt = str(chat.get("system_prompt") or "").strip()
     messages: list[dict[str, object]] = []
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
-    messages.append({"role": "system", "content": _PROMPTS.build_persona_memory_prompt(system_prompt)})
+    messages.append({"role": "system", "content": _PROMPTS.build_persona_memory_prompt("")})
     messages.append({"role": "system", "content": _PROMPTS.build_reply_intelligence_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": _PROMPTS.build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER)})
     messages.append({"role": "system", "content": _PROMPTS.build_catgirl_examples_prompt(NO_REPLY_MARKER)})

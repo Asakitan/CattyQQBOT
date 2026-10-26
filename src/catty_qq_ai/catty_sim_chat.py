@@ -528,6 +528,8 @@ async def _sim_chat_unlocked(
             _prefer_spark = bool(_bm_ret[1])
     else:
         messages = _bm_ret  # 兼容老形态
+    from .request_intent import append_context_request_hint
+    append_context_request_hint(messages)
     # 主人 2026-05-29 Round 15: force_spark=True 强制走 spark 路径 (诊断用)
     if force_spark:
         _prefer_spark = True
@@ -583,6 +585,7 @@ async def _sim_chat_unlocked(
                         _emoji_store_for_persona,
                         _execute_schema_gated_tool_call,
                         _get_session_cache,
+                        _persona_manage_for_event,
                         _recent_image_urls_for_scope,
                         adaptive_prompt_store,
                         affection_store,
@@ -591,7 +594,7 @@ async def _sim_chat_unlocked(
                         story_arc_store,
                         timeline_store,
                     )
-                    from .tools import ToolContext, should_force_imagegen_tool
+                    from .tools import ToolContext
                     from nonebot.adapters.onebot.v11 import PrivateMessageEvent
                     _is_private = isinstance(event, PrivateMessageEvent)
                     _user_text = text
@@ -606,30 +609,15 @@ async def _sim_chat_unlocked(
                         has_image=bool(_sim_input_images or _sim_recent_images),
                         is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
                         persona=_sim_persona,
+                        is_owner=bool(affection_store.is_owner(str(event.user_id))),
                     )
+                    from .harness_prompt import append_harness_agent_hint
+                    append_harness_agent_hint(messages, _allowed_tool_names)
                     _tool_choice: str | dict[str, object] = "auto"
-                    try:
-                        _force_imagegen = (
-                            should_force_imagegen_tool(
-                                _user_text,
-                                is_directly_requested=bool(getattr(incoming, "directly_requested", False)),
-                            )
-                            and any(
-                                isinstance(_t, dict)
-                                and (
-                                    (_t.get("function") or {}).get("name") == "catty_imagegen"
-                                    or _t.get("name") == "catty_imagegen"
-                                )
-                                for _t in (_tools or [])
-                            )
-                        )
-                    except Exception:
-                        _force_imagegen = False
-                    if _force_imagegen:
-                        _tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
                     # 构 ToolContext (sim 模式只需基础 3 字段, 其它走 default)
                     _ctx = ToolContext(
                         config=cfg,
+                        persona_manage_fn=lambda args: _persona_manage_for_event(event, args),
                         memory_store=memory_store,
                         event=event,
                         emoji_store=_emoji_store_for_persona(_sim_persona),

@@ -220,6 +220,20 @@ def _persona_nsfw_reference_paths(pi: Any) -> list[Path]:
         out.append(path)
     return out
 
+
+def _persona_nsfw_character_tags(persona: Any) -> str:
+    """An unspecified custom appearance is empty, not the builtin appearance."""
+    imagegen = getattr(persona, "imagegen", None)
+    supplied = (
+        getattr(imagegen, "nsfw_girl_tags", "")
+        or getattr(imagegen, "girl_tags", "")
+    )
+    if supplied:
+        return str(supplied)
+    if getattr(persona, "definition_revision", None) is not None:
+        return ""
+    return CHARACTER_GIRL_TAGS
+
 # phase 描述给 prompt composer 用 (P1-P8 全覆盖, 触发不看 phase 但情景看)
 _PHASE_BRIEF = {
     1: "暧昧/试探阶段, 脸红心跳, 偷瞄主人, 还没动手只是气氛上来(crush blush look)",
@@ -891,15 +905,7 @@ async def _maybe_generate_pixelbunny(
             if bare_ref.is_file():
                 ref_paths = [bare_ref]
 
-    char_girl = (
-        str(
-            getattr(persona_imagegen, "nsfw_girl_tags", "")
-            or getattr(persona_imagegen, "girl_tags", "")
-            or CHARACTER_GIRL_TAGS
-        )
-        if persona_imagegen is not None
-        else CHARACTER_GIRL_TAGS
-    )
+    char_girl = _persona_nsfw_character_tags(persona)
     prompt = ", ".join(
         part for part in (base_caption, char_girl, CHARACTER_BOY_TAGS) if part
     ).replace("{", "").replace("}", "")
@@ -1078,15 +1084,7 @@ async def maybe_generate_image(
             logger.warning(f"nsfw_imagegen: ref {ref_path.name} load failed: {exc}")
 
     # characterPrompts 双角色锁: 人格本人 left, 黑影对方 right
-    char_girl = (
-        str(
-            getattr(persona_imagegen, "nsfw_girl_tags", "")
-            or getattr(persona_imagegen, "girl_tags", "")
-            or CHARACTER_GIRL_TAGS
-        )
-        if persona_imagegen is not None
-        else CHARACTER_GIRL_TAGS
-    )
+    char_girl = _persona_nsfw_character_tags(persona)
     char_boy = CHARACTER_BOY_TAGS
     char_boy_uc = CHARACTER_BOY_UC
 

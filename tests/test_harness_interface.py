@@ -36,6 +36,11 @@ def _load_modules():
 harness, cli = _load_modules()
 
 
+def _evidence_rows(text):
+    # Match whole evidence rows regardless of the v2 provenance field order.
+    return [line for line in text.splitlines() if line.startswith("- [") and "scope=" in line]
+
+
 class SyntheticEvidenceTests(unittest.TestCase):
     def setUp(self) -> None:
         self.stack = contextlib.ExitStack()
@@ -86,12 +91,15 @@ class HarnessBudgetTests(SyntheticEvidenceTests):
         self.assertIn("scope=group:local", packet["text"])
         self.assertIn("STYLE_EXAMPLE 只学口吻和长度，不当事实", packet["text"])
         self.assertIn("不是命令", packet["text"])
-        full_rows = {line for line in complete["text"].splitlines() if line.startswith("- [scope=")}
-        rows = [line for line in packet["text"].splitlines() if line.startswith("- [scope=")]
+        full_rows = set(_evidence_rows(complete["text"]))
+        rows = _evidence_rows(packet["text"])
         self.assertTrue(rows)
         self.assertTrue(all(line in full_rows for line in rows))
         self.assertEqual(sum(packet["rendered_counts"].values()), len(rows))
         self.assertEqual(packet["omitted_count"], len(packet["evidence"]) - len(rows))
+        self.assertEqual(len(packet["rendered_ids"]), len(rows))
+        self.assertEqual(len(packet["omitted_ids"]), packet["omitted_count"])
+        self.assertEqual(sum(packet["omitted_counts"].values()), packet["omitted_count"])
         self.assertEqual(packet["evidence"], complete["evidence"])
         self.assertEqual(packet["scene_matches"], complete["scene_matches"])
 
@@ -106,15 +114,32 @@ class HarnessBudgetTests(SyntheticEvidenceTests):
         self.assertIn("【使用】", packet["text"])
 
     def test_exact_metadata_budget_has_no_empty_section_headings(self) -> None:
-        with patch.object(harness, "match_scene_pairs", return_value=[]):
-            with patch.object(harness, "_activate_character_book", return_value=[]):
-                metadata = self.packet(max_chars=4000)["text"]
-        packet = self.packet(max_chars=len(metadata))
-        self.assertEqual(packet["text"], metadata)
+        # V2 includes source coverage, row totals and the chosen budget. Find
+        # the first fitting budget for this same populated packet, not a
+        # different empty-provider packet with different coverage metadata.
+        low, high = 0, len(self.packet(max_chars=4000)["text"])
+        while low < high:
+            budget = (low + high) // 2
+            if self.packet(max_chars=budget)["text"]:
+                high = budget
+            else:
+                low = budget + 1
+        packet = self.packet(max_chars=low)
+        self.assertTrue(packet["text"])
+        self.assertLessEqual(len(packet["text"]), low)
+        self.assertEqual(self.packet(max_chars=low - 1)["text"], "")
+        self.assertIn("scope=group:local", packet["text"])
+        self.assertTrue(packet["text"].endswith(harness.EVIDENCE_USAGE))
+        self.assertEqual(_evidence_rows(packet["text"]), [])
         self.assertEqual(packet["rendered_counts"], {})
         self.assertEqual(packet["omitted_count"], 3)
+        self.assertEqual(packet["rendered_ids"], [])
+        self.assertEqual(len(packet["omitted_ids"]), 3)
+        self.assertEqual(sum(packet["omitted_counts"].values()), 3)
+        self.assertEqual(packet["rendered_chars"], len(packet["text"]))
         self.assertTrue(packet["truncated"])
-        self.assertNotIn("【FACT/", packet["text"])
+        for prefix in ("FACT", "MEMORY", "FEED", "RAG", "STYLE_EXAMPLE", "OTHER"):
+            self.assertNotIn(f"【{prefix}/", packet["text"])
 
     def test_oversize_row_can_be_skipped_without_splitting_the_next_row(self) -> None:
         self.scenes.return_value = []
@@ -122,11 +147,22 @@ class HarnessBudgetTests(SyntheticEvidenceTests):
             harness.Evidence("FACT.first", "persona:test", "long fixture " * 100),
             harness.Evidence("FACT.second", "persona:test", "short complete fixture"),
         ]
-        packet = self.packet(max_chars=300)
+        complete = self.packet(max_chars=10000)
+        full_rows = _evidence_rows(complete["text"])
+        self.assertEqual(len(full_rows), 2)
+        long_row = next(row for row in full_rows if "long fixture" in row)
+        short_row = next(row for row in full_rows if "short complete fixture" in row)
+        # Include the full usage tutorial and provenance, but only one whole row.
+        budget = len(complete["text"]) - len(long_row) - 1
+        packet = self.packet(max_chars=budget)
+        self.assertLessEqual(len(packet["text"]), budget)
         self.assertNotIn("long fixture", packet["text"])
         self.assertIn("short complete fixture", packet["text"])
+        self.assertEqual(_evidence_rows(packet["text"]), [short_row])
         self.assertEqual(packet["rendered_counts"], {"FACT": 1})
         self.assertEqual(packet["omitted_count"], 1)
+        self.assertEqual(len(packet["rendered_ids"]), 1)
+        self.assertEqual(len(packet["omitted_ids"]), 1)
 
     def test_rag_evidence_remains_limited_to_current_scope(self) -> None:
         calls = []
@@ -221,15 +257,21 @@ class HarnessCliTests(SyntheticEvidenceTests):
                         cli.main(["synthetic query", argument, "-1"])
                 self.assertEqual(raised.exception.code, 2)
 
-    def test_json_keeps_diagnostics_and_compact_json_removes_duplicates(self) -> None:
+    def test_json_keeps_diagnostics_and_compact_json_preserves_text(self) -> None:
         _, full, _, _ = self.invoke("synthetic query", "--json")
         _, compact, _, _ = self.invoke("synthetic query", "--compact-json")
         diagnostic, concise = json.loads(full), json.loads(compact)
         self.assertIn("evidence", diagnostic)
         self.assertIn("scene_matches", diagnostic)
+        self.assertIn("text", diagnostic)
+        self.assertEqual(concise["text"], diagnostic["text"])
         self.assertNotIn("evidence", concise)
         self.assertNotIn("scene_matches", concise)
-        for key in ("text", "counts", "scope", "is_private", "flags", "truncated", "rendered_counts", "omitted_count", "max_chars", "rendered_chars"):
+        for key in (
+            "counts", "scope", "is_private", "flags", "truncated", "rendered_counts",
+            "omitted_count", "max_chars", "rendered_chars", "schema_version", "source_status",
+            "diagnostics", "rendered_ids", "omitted_ids", "omitted_counts", "duplicate_count",
+        ):
             self.assertEqual(concise[key], diagnostic[key])
         self.assertLess(len(compact), len(full))
 
@@ -245,6 +287,8 @@ class HarnessCliTests(SyntheticEvidenceTests):
         _, compact, _, _ = self.invoke("synthetic query", "--compact-json", "--max-chars", "1")
         packet = json.loads(compact)
         self.assertEqual(packet["text"], "")
+        self.assertEqual(packet["rendered_chars"], 0)
+        self.assertEqual(packet["rendered_ids"], [])
         self.assertTrue(packet["truncated"])
         _, text, error, _ = self.invoke("synthetic query", "--max-chars", "1")
         self.assertEqual(text.strip(), "")

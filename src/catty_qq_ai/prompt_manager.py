@@ -296,10 +296,10 @@ def register_catty_persona(
         is_owner          : bool
         is_group          : bool (决定是否注册 catty_group_silence 群聊沉默段; 默认 False=私聊)
         has_image         : bool (决定要不要挂 image_literacy)
+        image_description : str  图片描述(可选, 与当前文本一起用于学术长度豁免检测)
         story_arc_store   : StoryArcStore | None
         no_reply_marker   : str
         reply_split_marker: str
-        system_prompt     : str  (config.catty_system_prompt 原文,作为 persona_memory base)
 
     每段都是 lazy(content_fn),被 disable 不会被调用。
     """
@@ -310,10 +310,16 @@ def register_catty_persona(
     from . import world_info as _wi
 
     # 主人 2026-07-06 多人格: ctx["persona"] 决定内容源与段黑名单。
-    # catty Persona 全字段 None → 每处 `persona.x or 旧常量` 都落到旧常量, 字节不变。
+    # None keeps builtin defaults; explicit empty custom overrides stay empty.
     from .personas import get_persona as _get_persona
     persona = ctx.get("persona") or _get_persona("catty")
     _persona_disabled = persona.disabled_prompt_segments
+
+    def _policy_text(text: str) -> str:
+        if getattr(persona, "definition_revision", None) is not None:
+            from .persona_defaults import neutralize_builtin_identity
+            return neutralize_builtin_identity(text, persona)
+        return text
 
     def _reg(identifier: str, *args: Any, **kwargs: Any) -> None:
         if identifier in _persona_disabled:
@@ -335,7 +341,6 @@ def register_catty_persona(
     arc_store = ctx.get("story_arc_store")
     no_reply = ctx.get("no_reply_marker", "")
     split_marker = ctx.get("reply_split_marker", "")
-    system_prompt = ctx.get("system_prompt", "") or ""
     is_cold_session = bool(ctx.get("is_cold_session", False))
     technical_direct = bool(ctx.get("technical_direct", False))
     self_check_enabled = bool(ctx.get("reply_self_check_enabled", True))
@@ -362,7 +367,7 @@ def register_catty_persona(
     from . import catty_core_persona as _ccp
 
     def _build_core_persona() -> str:
-        base = persona.core_persona or _ccp.CATTY_CORE_PERSONA
+        base = persona.core_persona if persona.core_persona is not None else _ccp.CATTY_CORE_PERSONA
         conversation_prompt = persona.conversation_prompt_for(scope)
         if not conversation_prompt:
             return base
@@ -395,7 +400,7 @@ def register_catty_persona(
     if bool(ctx.get("is_group", False)):
         _reg_static(
             "catty_group_silence",
-            persona.group_silence or _ccp.CATTY_GROUP_SILENCE,
+            persona.group_silence if persona.group_silence is not None else _ccp.CATTY_GROUP_SILENCE,
             order=105,
         )
     # ST V2 character_book: 嵌入式 lorebook — character_card 自带的笨猫私货 entry
@@ -568,7 +573,7 @@ def register_catty_persona(
         )
         _reg_static(
             "catty_daily_affection_gate_skeleton",
-            _build_daily_gate_skeleton(),
+            _policy_text(_build_daily_gate_skeleton()),
             order=147,  # 主人 2026-05-29 Round 19: 471→147 byte-stable skeleton 进 cache prefix
         )
 
@@ -592,7 +597,7 @@ def register_catty_persona(
         from . import affection as _aff_mod
         _reg(
             "catty_relationship_skeleton",
-            content_fn=lambda: _aff_mod.build_relationship_skeleton(),
+            content_fn=lambda: _policy_text(_aff_mod.build_relationship_skeleton()),
             order=152,  # pre-boundary byte-stable skeleton 进 cache prefix
         )
     except Exception as _rel_exc:  # noqa: BLE001
@@ -662,14 +667,14 @@ def register_catty_persona(
         "严禁泛指『你/你的』; NSFW 禁 ASCII 颜文字, 用喘息+动作+感官; 笨猫自己达高潮+自己降档."
     )
     # 多人格: persona 可整段替换骨架 (机机 = 私聊专用 + 机机口吻), 群聊不注册。
-    _persona_gate_skeleton = str(getattr(persona, "nsfw_gate_skeleton", "") or "")
+    _persona_gate_skeleton = getattr(persona, "nsfw_gate_skeleton", None)
     _gate_private_only = bool(getattr(persona, "nsfw_gate_private_only", False))
     _gate_scope_ok = _is_private_session or not _gate_private_only
 
     if _gate_scope_ok:
         _reg_static(
             "catty_nsfw_gate_skeleton",
-            _persona_gate_skeleton or _NSFW_GATE_SKELETON,
+            _persona_gate_skeleton if _persona_gate_skeleton is not None else _policy_text(_NSFW_GATE_SKELETON),
             order=148,  # 主人 2026-05-29 Round 19: 472→148 静态骨架进 cache prefix (boundary=455 前)
         )
 
@@ -833,6 +838,7 @@ def register_catty_persona(
     )
 
     def _build_non_academic_length_guard() -> str:
+        image_description = ctx.get("image_description", "")
         try:
             from .cpu_engine.strong_interaction import detect_academic_signal
             probe_text = "\n".join(
@@ -882,7 +888,11 @@ def register_catty_persona(
     # 100% byte-stable 跨任何 sender/scope/turn → 入 cache prefix.
     _reg(
         "catty_qq_chat_rhythm",
-        content_fn=lambda: _pp.build_qq_chat_rhythm_prompt(split_marker, persona),
+        content_fn=lambda: (
+            persona.chat_rhythm.replace("{split_marker}", split_marker)
+            if persona.chat_rhythm is not None
+            else _pp.build_qq_chat_rhythm_prompt(split_marker, persona)
+        ),
         order=153,
     )
 
@@ -950,12 +960,20 @@ def register_catty_persona(
     if style_examples_enabled:
         _reg(
             "catty_catgirl_examples",
-            content_fn=lambda: _pp.build_catgirl_examples_prompt(no_reply, split_marker),
+            content_fn=lambda: (
+                _cc.render_macros(persona.style_examples, char_name=persona.char_name, user_display="用户")
+                if persona.style_examples is not None
+                else _pp.build_catgirl_examples_prompt(no_reply, split_marker)
+            ),
             order=159,
         )
         _reg(
             "catty_disambiguation",
-            content_fn=lambda: _pp.build_disambiguation_examples_prompt(no_reply),
+            content_fn=lambda: (
+                _cc.render_macros(persona.disambiguation_examples, char_name=persona.char_name, user_display="用户")
+                if persona.disambiguation_examples is not None
+                else _pp.build_disambiguation_examples_prompt(no_reply)
+            ),
             order=160,
         )
         def _mes_example_content() -> str:

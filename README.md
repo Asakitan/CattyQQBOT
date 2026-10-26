@@ -330,7 +330,7 @@ ai 列会话
 
 **训练进度小窗**：`local_training.progress_window_enabled=true` 时启动
 `scripts/catty_training_dashboard.py` 的 Tk 小窗，可视化样本数 / 最近训练状态 / 审批结果 /
-`next_suggestions` / 训练日志，还能用主 AI 的 `chat.system_prompt` 测本地小模型，
+`next_suggestions` / 训练日志，还能用内置人格测试提示测本地小模型，
 打分写入 `model_test_scores_path`。窗口不执行训练命令，也不展示 API key。
 
 ---
@@ -360,13 +360,19 @@ ai 列会话
 安装项目依赖后运行，无需配置 API Key、登录 QQ 或启动 `bot.py`：
 
 ```powershell
-python -m unittest discover -s tests -v
+python scripts/run_offline_regressions.py
 python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py scripts tests
 ```
 
-测试使用临时目录和离线客户端替身，覆盖时间桶、记忆写盘失败后的重试、热重载保护，
-以及 Anthropic 客户端在成功、异常和取消时的资源释放。热重载测试隔离执行入口文件中的
-实际函数，不启动整个插件；这些检查不等同于真实 QQ、模型服务或 Windows 打包集成测试。
+此入口按固定清单逐模块启动独立进程，避免测试替身污染；不执行历史在线评测，也排除尝试读取真实密钥配置的沙箱负例。可重复使用 `--module` 选择清单中的模块。
+
+2026-10-26 本地验收：782 项测试，0 失败、0 错误，9 项按原条件跳过。覆盖工具回执恢复、图片取消交付、发送状态、真实文件格式、沙箱归属、提示构建、配置、动态人格、上下文决策接线和证据预算；不等同于真实 QQ、模型服务或 Windows 打包集成测试。
+
+Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息，按优先级保留证据；Agent 按实际开放工具补查。CLI 的 `--production-defaults` 只对齐预算；`--compact-json --metadata-only` 可省略正文。接口见 [证据包](docs/harness-evidence.md)，合成检查入口为 `scripts/benchmark_harness.py`。
+
+`chat.system_prompt` 已从当前配置、模板及运行时字段删除；旧键不再导入。人格正文与场景库仍由原有模块提供。修复细节见 [当前状态](STATUS.md)、[工具合同](docs/tool-contracts.md)、[沙箱产物](docs/code-sandbox.md) 和 [回复恢复](docs/reply-recovery.md)。
+
+支持 [JSON 自定义人格](docs/persona-json.md)：可导入 [完整示例](docs/examples/personas/sky_guide.json)，也可聊天描述让 AI 填写并保存。定义落在 `data/personas`，保存不自动切换；使用 `/人格 小岚` 或让 AI 根据上下文切换。普通主回复结合前文与补充要求自主选择工具或直接回答，不额外增加规划模型。
 
 ---
 
@@ -389,6 +395,10 @@ python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py 
 
 | 命令 | 作用 |
 | --- | --- |
+| `/人格`、`/人格 <名字>` | 查看当前人格 / 切换当前会话 |
+| `/人格 导入 \| <JSON>` | 校验保存人格，不自动切换 |
+| `/人格 生成 <id> \| <设定>` | 主模型生成人格并保存 |
+| `/人格 指令 <名字> \| <指令>` | 绑定完整消息作为切换指令 |
 | `/aff_show <qq>` | 查那个用户的积分 / 等级 / 签到 / 消费记录 |
 | `/aff_set_points <qq> <n>` | 设积分 |
 | `/aff_add_points <qq> <n>` | 加 / 减积分（可负，下限 0） |

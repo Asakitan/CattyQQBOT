@@ -422,7 +422,6 @@ class Config(BaseModel):
     catty_social_steam: str = ""
     catty_turtle_soup_cooldown_seconds: int = 300
 
-    catty_system_prompt: str = "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。"
     catty_trigger_prefixes: list[str] = Field(default_factory=lambda: ["ai", "AI", "猫猫"])
     catty_enable_private: bool = True
     catty_enable_group: bool = True
@@ -665,6 +664,9 @@ class Config(BaseModel):
     # 人格名见 personas.PERSONAS (catty / fadianji), 支持中文别名 (机机/笨猫)。
     catty_group_personas: dict[str, str] = Field(default_factory=dict)
     catty_default_persona: str = "catty"
+    catty_persona_dir: str = "data/personas"
+    catty_persona_generation_timeout_seconds: float = Field(default=60.0, gt=0, le=600)
+    catty_persona_generation_max_tokens: int = Field(default=4096, ge=256, le=32768)
 
     # ── 月经期心情 (主人 2026-08-10): 机机本人生理状态同步 ──
     # 按 last_period_start (YYYY-MM-DD, 当天=第1天) + cycle_days 推算周期相位,

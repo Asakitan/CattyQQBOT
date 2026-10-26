@@ -3,10 +3,11 @@
 The bot can write/run Python and install wheels without touching the host
 environment:
 
-- work / HOME / TEMP / packages all live under ``data/python_sandbox``;
+- each run has private work / HOME / TEMP; installed packages remain shared;
+- explicit scopes resume successful work and exports are run-owned copies;
 - the child interpreter runs with ``-I -B -X utf8`` and a scrubbed environment;
-- a generated launcher installs audit hooks that deny reads outside the sandbox
-  (plus the Python runtime), writes outside the sandbox, network sockets,
+- a generated launcher installs audit hooks that deny reads outside the run
+    (plus packages and the Python runtime), writes outside the run, network sockets,
   subprocess / ctypes / registry / native file APIs;
 - pip installs only binary wheels into the sandbox ``packages`` dir.
 
@@ -17,14 +18,19 @@ runtime restrictions.  Do not describe it as a hypervisor/container.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import os
 import re
+import shutil
+import stat
 import sys
+import threading
 import time
 import uuid
+import weakref
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 DEFAULT_SANDBOX_DIR = "data/python_sandbox"
 
@@ -148,7 +154,8 @@ import traceback
 CODE_PATH = os.path.realpath(sys.argv[1])
 SANDBOX = os.path.realpath(sys.argv[2])
 WORK = os.path.join(SANDBOX, "work")
-PACKAGES = os.path.join(SANDBOX, "packages")
+PACKAGES = os.path.realpath(sys.argv[3])
+STORAGE = os.path.dirname(PACKAGES)
 
 BLOCKED_MODULES = {
     "ctypes", "_ctypes", "cffi", "_cffi_backend",
@@ -183,6 +190,8 @@ def _inside(value, root):
 
 
 SANDBOX_NORM = _norm(SANDBOX)
+PACKAGES_NORM = _norm(PACKAGES)
+STORAGE_NORM = _norm(STORAGE)
 RUNTIME_ROOTS = set()
 _PREFIX_ROOTS = {_norm(sys.prefix), _norm(sys.base_prefix)}
 for _entry in list(sys.path):
@@ -200,8 +209,11 @@ for _entry in (sys.prefix, sys.base_prefix, os.path.dirname(os.path.realpath(sys
 
 def _allowed_read(value):
     norm = _norm(value)
-    if _inside(norm, SANDBOX_NORM):
+    if _inside(norm, SANDBOX_NORM) or _inside(norm, PACKAGES_NORM):
         return True
+    # A sandbox placed under sys.prefix must not expose sibling runs/scopes.
+    if _inside(norm, STORAGE_NORM):
+        return False
     for root in RUNTIME_ROOTS:
         if _inside(norm, root):
             return True
@@ -381,6 +393,9 @@ class SandboxPaths:
     launcher: Path
 
 
+_ENSURE_LOCK = threading.Lock()
+
+
 def sandbox_paths(config: Any) -> SandboxPaths:
     raw = str(getattr(config, "catty_code_sandbox_dir", "") or DEFAULT_SANDBOX_DIR).strip()
     root = Path(raw or DEFAULT_SANDBOX_DIR).expanduser()
@@ -401,14 +416,20 @@ def ensure_sandbox(config: Any) -> SandboxPaths:
     paths = sandbox_paths(config)
     for directory in (paths.root, paths.work, paths.home, paths.tmp, paths.packages):
         directory.mkdir(parents=True, exist_ok=True)
-    try:
-        current = paths.launcher.read_text(encoding="utf-8")
-    except OSError:
-        current = ""
-    if current != _LAUNCHER_SOURCE:
-        temporary = paths.launcher.with_name(paths.launcher.name + ".tmp")
-        temporary.write_text(_LAUNCHER_SOURCE, encoding="utf-8")
-        temporary.replace(paths.launcher)
+    # Windows denies replacing a file while another thread has it open for
+    # reading. Serialize the whole compare/publish transaction, not just rename.
+    with _ENSURE_LOCK:
+        try:
+            current = paths.launcher.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            current = ""
+        if current != _LAUNCHER_SOURCE:
+            temporary = paths.launcher.with_name(paths.launcher.name + f".{uuid.uuid4().hex}.tmp")
+            try:
+                temporary.write_text(_LAUNCHER_SOURCE, encoding="utf-8")
+                temporary.replace(paths.launcher)
+            finally:
+                temporary.unlink(missing_ok=True)
     return paths
 
 
@@ -466,45 +487,119 @@ def _sandbox_env(paths: SandboxPaths) -> dict[str, str]:
 
 
 async def _read_limited(stream: Any, limit_bytes: int) -> tuple[bytes, bool]:
-    chunks: list[bytes] = []
+    # Retain a bounded prefix and rolling suffix, but always drain the pipe.
+    limit_bytes = max(0, limit_bytes)
+    head_limit = (limit_bytes + 1) // 2
+    tail_limit = limit_bytes - head_limit
+    head = bytearray()
+    tail = bytearray()
     total = 0
-    truncated = False
     while True:
         chunk = await stream.read(8192)
         if not chunk:
             break
-        if total < limit_bytes:
-            take = min(len(chunk), limit_bytes - total)
-            chunks.append(chunk[:take])
-            total += take
-            if take < len(chunk):
-                truncated = True
-        else:
-            truncated = True
-    return b"".join(chunks), truncated
+        total += len(chunk)
+        take = min(len(chunk), head_limit - len(head))
+        head.extend(chunk[:take])
+        if tail_limit:
+            tail.extend(chunk[take:])
+            if len(tail) > tail_limit:
+                del tail[:-tail_limit]
+    truncated = total > limit_bytes
+    marker = b"\n... [stdout truncated] ...\n" if truncated else b""
+    return bytes(head) + marker + bytes(tail), truncated
 
 
 def _decode_output(data: bytes, max_chars: int) -> tuple[str, bool]:
     text = data.decode("utf-8", errors="replace")
     if len(text) > max_chars:
-        return text[:max_chars], True
+        marker = "\n... [stdout truncated] ...\n"
+        if max_chars <= len(marker):
+            return text[-max_chars:] if max_chars > 0 else "", True
+        head = (max_chars - len(marker)) // 2
+        tail = max_chars - len(marker) - head
+        return text[:head] + marker + text[-tail:], True
     return text, False
 
 
-def _is_generated_file(path: Path, work: Path, since: float) -> bool:
-    if path.is_symlink():
-        return False
-    if not path.is_file():
-        return False
-    if "__pycache__" in path.parts:
-        return False
-    if path.name.startswith(".catty_run_") and path.suffix == ".py":
-        return False
+_LIFECYCLE_LOCK = threading.RLock()
+_ACTIVE_PATHS: set[Path] = set()
+_SCOPE_LOCKS: weakref.WeakValueDictionary = weakref.WeakValueDictionary()
+
+
+def _scope_lock(root: Path, identity: str) -> asyncio.Lock:
+    key = (str(root), identity, id(asyncio.get_running_loop()))
+    with _LIFECYCLE_LOCK:
+        lock = _SCOPE_LOCKS.get(key)
+        if lock is None:
+            lock = asyncio.Lock()
+            _SCOPE_LOCKS[key] = lock
+        return lock
+
+
+async def _disk_io(function: Any, *args: Any, **kwargs: Any) -> Any:
+    """Do not release ownership while a cancelled filesystem worker still runs."""
+    task = asyncio.create_task(asyncio.to_thread(function, *args, **kwargs))
     try:
-        stat = path.stat()
-    except OSError:
-        return False
-    return stat.st_mtime >= since - 2.0
+        return await asyncio.shield(task)
+    except asyncio.CancelledError:
+        try:
+            await task
+        except Exception:
+            pass
+        raise
+
+
+def _regular_files(directory: Path) -> Iterable[tuple[Path, os.stat_result]]:
+    """Walk without following symlinks, junctions or other reparse points."""
+    try:
+        root_info = directory.lstat()
+    except FileNotFoundError:
+        return
+    if stat.S_ISLNK(root_info.st_mode) or getattr(root_info, "st_file_attributes", 0) & 0x400:
+        return
+    pending = [directory]
+    while pending:
+        folder = pending.pop()
+        try:
+            with os.scandir(folder) as entries:
+                for entry in entries:
+                    try:
+                        info = entry.stat(follow_symlinks=False)
+                    except OSError:
+                        continue
+                    if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & 0x400:
+                        continue
+                    path = Path(entry.path)
+                    if stat.S_ISDIR(info.st_mode):
+                        pending.append(path)
+                    elif stat.S_ISREG(info.st_mode):
+                        yield path, info
+        except FileNotFoundError:
+            continue
+
+
+def _fingerprint(path: Path, info: os.stat_result) -> tuple[int, int, str]:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for block in iter(lambda: source.read(128 * 1024), b""):
+            digest.update(block)
+    return info.st_size, info.st_mtime_ns, digest.hexdigest()
+
+
+def _work_inventory(work: Path) -> dict[str, tuple[int, int, str]]:
+    return {
+        path.relative_to(work).as_posix(): _fingerprint(path, info)
+        for path, info in _regular_files(work)
+    }
+
+
+def _copy_work(source: Path, destination: Path) -> None:
+    destination.mkdir(parents=True, exist_ok=True)
+    for path, _ in _regular_files(source):
+        target = destination / path.relative_to(source)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, target)
 
 
 def _collect_generated_files(
@@ -513,65 +608,140 @@ def _collect_generated_files(
     *,
     max_files: int,
     max_file_bytes: int,
+    baseline: Mapping[str, tuple[int, int, str]] | None = None,
+    export_dir: Path | None = None,
+    run_id: str = "",
 ) -> list[dict[str, Any]]:
-    found: list[tuple[float, Path, int]] = []
-    try:
-        candidates = list(paths.work.rglob("*"))
-    except OSError:
-        return []
-    for path in candidates:
-        if not _is_generated_file(path, paths.work, since):
-            continue
-        try:
-            size = path.stat().st_size
-        except OSError:
-            continue
-        if size > max_file_bytes:
-            continue
-        found.append((path.stat().st_mtime, path, size))
-    found.sort(key=lambda item: item[0])
+    # ``since`` remains positional for compatibility; a private run plus its
+    # input inventory, never wall-clock rounding, determines ownership.
+    del since
+    before = baseline or {}
     items: list[dict[str, Any]] = []
-    for _, path, size in found[:max_files]:
-        try:
-            relative = path.relative_to(paths.work).as_posix()
-        except ValueError:
-            relative = path.name
+    for path, info in _regular_files(paths.work):
+        if len(items) >= max_files:
+            break
+        if path.name.startswith(".catty_run_") and path.suffix == ".py":
+            continue
+        if info.st_size > max_file_bytes:
+            continue
+        relative = path.relative_to(paths.work).as_posix()
+        if "__pycache__" in path.relative_to(paths.work).parts:
+            continue
+        if relative in before and _fingerprint(path, info) == before[relative]:
+            continue
+        target = path
+        if export_dir is not None:
+            target = export_dir / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            # A copy, not a hardlink: subsequent edits cannot mutate delivery.
+            shutil.copyfile(path, target)
         display = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "_", relative.replace("/", "_")) or path.name
-        items.append({"path": str(path), "name": display[:120], "size": size})
+        items.append({
+            "path": str(target), "name": display[:120], "size": info.st_size,
+            "run_id": run_id,
+        })
     return items
 
 
 def _work_size(paths: SandboxPaths) -> int:
-    total = 0
+    return sum(info.st_size for _, info in _regular_files(paths.work))
+
+
+def _run_paths(base: SandboxPaths, run_id: str) -> SandboxPaths:
+    root = base.root / "runs" / run_id
+    return SandboxPaths(
+        root=root, work=root / "work", home=root / "home", tmp=root / "tmp",
+        packages=base.packages, launcher=root / "_catty_launcher.py",
+    )
+
+
+def _prepare_run(
+    config: Any,
+    paths: SandboxPaths,
+    scope_dir: Path | None,
+    content: str,
+    input_files: Mapping[str, str | bytes] | None,
+) -> dict[str, tuple[int, int, str]]:
+    ensure_sandbox(config)
+    for directory in (paths.root, paths.work, paths.home, paths.tmp):
+        directory.mkdir(parents=True, exist_ok=True)
+    paths.launcher.write_text(_LAUNCHER_SOURCE, encoding="utf-8")
+    if scope_dir is not None:
+        _copy_work(scope_dir / "work", paths.work)
+    for name, value in (input_files or {}).items():
+        relative = Path(str(name).replace("\\", "/"))
+        if (not relative.parts or relative.is_absolute()
+                or ".." in relative.parts or any(":" in part for part in relative.parts)):
+            raise ValueError("input_files 必须使用工作目录内的相对文件名")
+        if not isinstance(value, (str, bytes)):
+            raise ValueError("input_files 内容必须是文本或 bytes")
+        target = paths.work / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(value.encode("utf-8") if isinstance(value, str) else value)
+    if _work_size(paths) > _sandbox_limits(config)["max_work_bytes"]:
+        raise ValueError("沙箱输入超过工作目录大小上限")
+    (paths.root / ".catty_run.py").write_text(content, encoding="utf-8")
+    return _work_inventory(paths.work)
+
+
+def _save_scope_work(paths: SandboxPaths, scope_dir: Path) -> None:
+    scope_dir.mkdir(parents=True, exist_ok=True)
+    staged = scope_dir / (".next-" + paths.root.name)
+    previous = scope_dir / (".old-" + paths.root.name)
+    work = scope_dir / "work"
+    _copy_work(paths.work, staged)
+    if work.exists():
+        work.replace(previous)
     try:
-        for path in paths.work.rglob("*"):
-            if path.is_symlink():
-                continue
-            if path.is_file():
-                try:
-                    total += path.stat().st_size
-                except OSError:
-                    continue
+        staged.replace(work)
     except OSError:
-        return total
-    return total
+        if previous.exists():
+            previous.replace(work)
+        raise
+    shutil.rmtree(previous, ignore_errors=True)
+    os.utime(scope_dir, None)
 
 
-def _remove_generated_files(paths: SandboxPaths, since: float) -> None:
-    try:
-        candidates = list(paths.work.rglob("*"))
-    except OSError:
-        return
-    for path in candidates:
-        if not _is_generated_file(path, paths.work, since):
-            continue
-        try:
-            path.unlink()
-        except OSError:
-            continue
+def _finish_run(
+    paths: SandboxPaths,
+    scope_dir: Path | None,
+    export_dir: Path,
+    baseline: Mapping[str, tuple[int, int, str]],
+    limits: Mapping[str, Any],
+    success: bool,
+) -> tuple[list[dict[str, Any]], bool]:
+    (paths.root / ".catty_run.py").unlink(missing_ok=True)
+    paths.launcher.unlink(missing_ok=True)
+    work_bytes = sum(info.st_size for _, info in _regular_files(paths.root))
+    if work_bytes > limits["max_work_bytes"]:
+        # Never walk/delete sibling runs, exports, shared packages or scope data.
+        shutil.rmtree(paths.root)
+        return [], True
+    files = _collect_generated_files(
+        paths, 0.0, max_files=limits["max_files"],
+        max_file_bytes=limits["max_file_bytes"], baseline=baseline,
+        export_dir=export_dir, run_id=paths.root.name,
+    )
+    if success and scope_dir is not None:
+        _save_scope_work(paths, scope_dir)
+    os.utime(paths.root, None)
+    if export_dir.exists():
+        os.utime(export_dir, None)
+    return files, False
 
 
-async def run_code(config: Any, code: str) -> dict[str, Any]:
+async def run_code(
+    config: Any,
+    code: str,
+    *,
+    scope: str | None = None,
+    input_files: Mapping[str, str | bytes] | None = None,
+) -> dict[str, Any]:
+    """Execute privately; an explicit scope resumes its last successful files.
+
+    Unchanged inputs are not delivered. Failed runs do not advance scope state.
+    ``input_files`` contains relative names and contents, never host file paths.
+    """
     limits = _sandbox_limits(config)
     content = str(code or "")
     if not content.strip():
@@ -581,13 +751,52 @@ async def run_code(config: Any, code: str) -> dict[str, Any]:
             "ok": False,
             "error": f"代码超过上限 ({len(content)} > {limits['max_code_chars']} 字符)",
         }
-    paths = ensure_sandbox(config)
-    code_path = paths.work / f".catty_run_{uuid.uuid4().hex}.py"
-    started = time.time()
+    base = sandbox_paths(config)
+    run_id = uuid.uuid4().hex
+    scope_id = hashlib.sha256(str(scope).encode("utf-8")).hexdigest() if scope else ""
+    scope_dir = base.root / "scopes" / scope_id if scope_id else None
+    paths = _run_paths(base, run_id)
+    export_dir = base.root / "exports" / run_id
+    async with _scope_lock(base.root, scope_id or run_id):
+        active = {paths.root, export_dir}
+        if scope_dir is not None:
+            active.add(scope_dir)
+        with _LIFECYCLE_LOCK:
+            _ACTIVE_PATHS.update(active)
+        try:
+            return await _run_code_in_directory(
+                config, content, input_files, base, paths, scope_dir, export_dir, limits,
+            )
+        finally:
+            with _LIFECYCLE_LOCK:
+                _ACTIVE_PATHS.difference_update(active)
+
+
+async def _run_code_in_directory(
+    config: Any,
+    content: str,
+    input_files: Mapping[str, str | bytes] | None,
+    base: SandboxPaths,
+    paths: SandboxPaths,
+    scope_dir: Path | None,
+    export_dir: Path,
+    limits: Mapping[str, Any],
+) -> dict[str, Any]:
+    run_id = paths.root.name
+    identity = {
+        "sandbox_root": str(base.root), "work_dir": str(paths.work),
+        "run_id": run_id, "files": [], "partial_files": [],
+    }
     try:
-        code_path.write_text(content, encoding="utf-8")
-    except OSError as exc:
-        return {"ok": False, "error": f"写入沙箱代码文件失败: {exc.__class__.__name__}"}
+        baseline = await _disk_io(_prepare_run, config, paths, scope_dir, content, input_files)
+    except (OSError, ValueError) as exc:
+        await _disk_io(shutil.rmtree, paths.root, ignore_errors=True)
+        detail = str(exc) if isinstance(exc, ValueError) else exc.__class__.__name__
+        return {**identity, "ok": False, "error": f"准备沙箱工作目录失败: {detail}"}
+    except asyncio.CancelledError:
+        await _disk_io(shutil.rmtree, paths.root, ignore_errors=True)
+        raise
+    code_path = paths.root / ".catty_run.py"
     limit_bytes = limits["max_output_chars"] * 4 + 4096
     command = [
         sys.executable,
@@ -598,6 +807,7 @@ async def run_code(config: Any, code: str) -> dict[str, Any]:
         str(paths.launcher),
         str(code_path),
         str(paths.root),
+        str(paths.packages),
     ]
     try:
         process = await asyncio.create_subprocess_exec(
@@ -609,11 +819,11 @@ async def run_code(config: Any, code: str) -> dict[str, Any]:
             stderr=asyncio.subprocess.STDOUT,
         )
     except OSError as exc:
-        code_path.unlink(missing_ok=True)
+        await _disk_io(code_path.unlink, missing_ok=True)
         return {
+            **identity,
             "ok": False,
             "error": f"启动沙箱 Python 失败: {exc.__class__.__name__}",
-            "sandbox_root": str(paths.root),
         }
     reader = asyncio.create_task(_read_limited(process.stdout, limit_bytes))
     timed_out = False
@@ -635,40 +845,43 @@ async def run_code(config: Any, code: str) -> dict[str, Any]:
                 pass
         await process.wait()
         reader.cancel()
-        code_path.unlink(missing_ok=True)
+        await asyncio.gather(reader, return_exceptions=True)
+        await _disk_io(code_path.unlink, missing_ok=True)
         raise
     try:
         output_bytes, output_truncated = await asyncio.wait_for(reader, timeout=5.0)
     except asyncio.TimeoutError:
         reader.cancel()
+        await asyncio.gather(reader, return_exceptions=True)
         output_bytes, output_truncated = b"", True
     output, char_truncated = _decode_output(output_bytes, limits["max_output_chars"])
-    files = _collect_generated_files(
-        paths,
-        started,
-        max_files=limits["max_files"],
-        max_file_bytes=limits["max_file_bytes"],
-    )
-    work_bytes = _work_size(paths)
-    work_limit_exceeded = work_bytes > limits["max_work_bytes"]
-    if work_limit_exceeded:
-        _remove_generated_files(paths, started)
-        files = []
-    code_path.unlink(missing_ok=True)
-    ok = not timed_out and process.returncode == 0 and not work_limit_exceeded
+    success = not timed_out and process.returncode == 0
+    try:
+        artifacts, work_limit_exceeded = await _disk_io(
+            _finish_run, paths, scope_dir, export_dir, baseline, limits, success,
+        )
+    except OSError as exc:
+        return {
+            **identity, "ok": False, "exit_code": process.returncode,
+            "timed_out": timed_out, "output": output,
+            "truncated": output_truncated or char_truncated,
+            "error": f"保存沙箱产物失败: {exc.__class__.__name__}",
+        }
+    ok = success and not work_limit_exceeded
     result: dict[str, Any] = {
+        **identity,
         "ok": ok,
-        "sandbox_root": str(paths.root),
         "exit_code": process.returncode,
         "timed_out": timed_out,
         "output": output,
         "truncated": output_truncated or char_truncated,
-        "files": files,
+        "files": artifacts if ok else [],
+        "partial_files": artifacts if not ok else [],
     }
     if timed_out:
         result["error"] = "Python 执行超时"
     elif work_limit_exceeded:
-        result["error"] = "沙箱工作目录超过大小上限，已清理本次生成文件"
+        result["error"] = "沙箱工作目录超过大小上限，已清理本次运行目录"
     elif process.returncode != 0:
         result["error"] = f"Python 非零退出: {process.returncode}"
     return result
@@ -735,7 +948,7 @@ async def install_packages(config: Any, raw_packages: Any) -> dict[str, Any]:
     )
     if error:
         return {"ok": False, "error": error}
-    paths = ensure_sandbox(config)
+    paths = await _disk_io(ensure_sandbox, config)
     try:
         pip_timeout = float(
             getattr(config, "catty_code_sandbox_pip_timeout_seconds", 120.0) or 120.0
@@ -830,7 +1043,33 @@ async def install_packages(config: Any, raw_packages: Any) -> dict[str, Any]:
     return result
 
 
+def _expire_directory(directory: Path, cutoff: float) -> int:
+    # Rename under the ownership lock, then do the potentially large scan and
+    # deletion outside it. A concurrent new scope starts at the original path.
+    with _LIFECYCLE_LOCK:
+        if directory in _ACTIVE_PATHS:
+            return 0
+        try:
+            info = directory.lstat()
+            if (not stat.S_ISDIR(info.st_mode)
+                    or getattr(info, "st_file_attributes", 0) & 0x400
+                    or info.st_mtime > cutoff):
+                return 0
+            expired = directory.with_name(".expired-" + uuid.uuid4().hex)
+            directory.replace(expired)
+        except OSError:
+            return 0
+    try:
+        count = sum(1 for _ in _regular_files(expired))
+        shutil.rmtree(expired)
+        return count
+    except OSError:
+        # The tombstone remains eligible for the next cleanup pass.
+        return 0
+
+
 def cleanup_code_sandbox(config: Any, *, now: float | None = None) -> int:
+    """Synchronous maintenance API; async callers must use asyncio.to_thread."""
     paths = sandbox_paths(config)
     if not paths.root.is_dir():
         return 0
@@ -841,16 +1080,20 @@ def cleanup_code_sandbox(config: Any, *, now: float | None = None) -> int:
         if not directory.is_dir():
             continue
         try:
-            candidates = list(directory.rglob("*"))
+            for path, info in _regular_files(directory):
+                try:
+                    if info.st_mtime <= cutoff:
+                        path.unlink()
+                        removed += 1
+                except OSError:
+                    continue
         except OSError:
             continue
-        for path in candidates:
-            if not path.is_file():
-                continue
-            try:
-                if path.stat().st_mtime <= cutoff:
-                    path.unlink()
-                    removed += 1
-            except OSError:
-                continue
+    for name in ("runs", "exports", "scopes"):
+        try:
+            with os.scandir(paths.root / name) as entries:
+                for entry in entries:
+                    removed += _expire_directory(Path(entry.path), cutoff)
+        except OSError:
+            continue
     return removed

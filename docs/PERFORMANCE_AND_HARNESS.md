@@ -1,6 +1,6 @@
 # 缓存、CPU、harness 与输入上下文
 
-本轮基于 `607cf48`，侧重等价计算、数据完整性、可观察的输出预算和离线可验证接口。没有降低默认会话容量、工具暴露范围或生产 harness 的 `scene_k=12 / book_k=0 / max_chars=12000`，也没有改模型、检索阈值、人格设定或开启新的执行权限；仅纠正了人格说明中已过期的固定“top-3”表述。
+早期性能专项基于 `607cf48`，侧重等价计算、数据完整性、可观察的输出预算和离线可验证接口；下方历史测量保留原口径。2026-10-26 的工具修复与 harness v2 分别见 §6、§7。生产 harness 仍为 `scene_k=12 / book_k=0 / max_chars=12000`，没有降低默认会话容量或工具暴露范围。
 
 ## 1. 缓存与 CPU
 
@@ -46,14 +46,15 @@ python scripts/fadianji_harness_cli.py --text "测试配置问题" --scope group
 - `--json` 保留完整诊断数组；`--compact-json` 去掉重复的 `evidence/scene_matches` 数组，适合交给本地 agent
 - 普通文本默认只输出预算内的证据块；若需要以前附带的完整检索摘要，加 `--details`
 - `--no-semantic` 可以关闭本地轻量重排；不改变生产配置
+- `--production-defaults` 只把未指定预算设成 12/0/12000，不加载真实会话 stores；`--compact-json --metadata-only` 才省略正文，原 compact 的 text 仍保留。
 
 ### 预算与完整性
 
 `max_chars` 是 `text` 的 Unicode 字符预算，不是 token 数，也不是整个 JSON 的长度限制。
 
-渲染先保留完整 scope 和使用边界，再装入完整证据行。装不下的行省略，不把半条证据冒充完整事实；连元信息都放不下时 `text=""`、`truncated=true`。返回的 `rendered_counts/omitted_count/rendered_chars` 对应实际渲染内容，旧 `evidence/scene_matches/counts` 继续保留完整诊断数据。
+渲染先保留完整 scope、来源状态和使用说明，再按 rank 顺序装入完整证据行。装不下的行省略；连元信息都放不下时 `text=""`、`truncated=true`。完整行可能是来源节选，v2 用 `excerpt` 明示，不能把它冒充整篇原文。`rendered_counts/omitted_count/rendered_chars` 对应实际渲染内容，旧 `evidence/scene_matches/counts` 保留完整诊断数据；v2 另有逐条 ID、来源诊断与各类省略计数。
 
-合成12组场景及2条证据，预算12000时完整JSON为11894字符，紧凑JSON为2582字符（减少78.29%）；这是移除重复诊断数组，没有减少已渲染证据。预算500时 `text` 为476字符，省略11条完整证据；调用方应查看截断信息，而不是把没出现的材料当作不存在。
+旧版接口历史测量：合成12组场景及2条证据，预算12000时完整JSON为11894字符，紧凑JSON为2582字符；预算500时 `text` 为476字符，省略11条证据。v2 新增元数据后不沿用这些长度结论；当前测量见 §7。
 
 ## 3. 本地工具的结果契约
 
@@ -92,7 +93,7 @@ python scripts/benchmark_input_context.py --help
 ## 5. 验证与后续边界
 
 ```bash
-python -m unittest discover -s tests -v
+python scripts/run_offline_regressions.py
 python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py scripts tests
 python -m pip check
 git diff --check
@@ -101,3 +102,19 @@ git diff --check
 新增回归用例覆盖冷/热会话、缺失元数据、部分写失败、同分与非有限路由分数、harness作用域和预算、长行续读、执行失败/取消、摘要并发及请求输入不变性。测试隔离实际函数并使用合成数据、临时目录与客户端替身，不启动真实QQ/模型服务。
 
 尚未改变的风险应独立处理：NLU history prime的重复计算与顺序契约、按下标维护的历史anchor在外部裁剪后的重置、L2磁盘缓存的模型身份失效条件、L3同条数内容变更的索引失效、源码里已有的少数YAML解析失败，以及普通长期记忆摘要等待期间的新corpus批次边界。本轮不把这些问题描述为已修复。
+
+## 6. 2026-10-26 工具与回复交付修复
+
+本地已完成、未部署。删除失效 `chat.system_prompt`；沙箱隔离每轮产物并保留同会话持续工作；文件工具编码真实 DOCX/XLSX/PDF；超时恢复保留工具回执；取消中的生图继续交付；主回复历史仅记录已确认发送的内容。人格、NSFW 文案与场景库未改。
+
+固定离线清单按模块独立进程运行：465 项、0 失败、0 错误、9 项原条件跳过。历史测试曾在同进程替换 `nonebot` 导致其它模块导入失败，独立进程入口隔离了该问题。在线消融评测必须显式 `--live`，普通导入不会启动请求。本轮未测线上延迟、缓存命中率或真实 QQ 投递。
+
+## 7. 2026-10-26 Harness v2
+
+本地实现与验收完成，未部署。按优先级选择证据，记录来源状态、ID、来源记录时间、节选和预算省略；提供给 Agent 的每轮教程按实际 schema 推荐补查路径。人物语料先隔离 scope 再匹配昵称；生产传真实群名片与语料配置。关闭的角色书/场景检索不再调用对应 provider。
+
+同一合成 462 字符预算：旧版只保 rank=30 FACT，新版只保 rank=10 MEMORY。25 条合成证据、12000 字符预算、300 次渲染，中位耗时旧版 0.0212 ms、新版 0.1684 ms；两版均渲染25条，正文由6329增至7777字符。来源与时间元数据增加了成本，本次不是单纯压缩 prompt 或线上速度优化。排序后逐行预算为线性核算，避免重复渲染已选条目。
+
+可复验入口 `scripts/benchmark_harness.py` 默认只用合成数据；可通过 `--baseline-zip` 指定可信的本地开工源码快照。预算检查覆盖0、1、128、256、512、12000。实际 QQ、模型服务、在线意图判断质量不在此微基准内。
+
+Harness v2 阶段固定离线清单622项、332个Python文件语法通过；后续 JSON 人格与上下文决策集成后，当前清单为782项、0失败、0错误、9项原条件跳过，343个Python文件语法通过。已有5个人格/NSFW文件哈希及56个名称含NSFW的顶层赋值AST保持。接口详情见 [证据包](harness-evidence.md)、[配置映射](harness-config.md) 与 [预览入口](prompt-testing.md)；当前验收见 [会话03](session-log/session-03.md)。

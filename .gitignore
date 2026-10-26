@@ -62,3 +62,6 @@ data/fdj_self_study/
 data/file_outbox/
 # Python 沙箱工作区/包 (运行时产物, 24h 自动清理)
 data/python_sandbox/
+# 自定义人格与切换指令是运行时数据；示例放在 docs/examples。
+/data/personas/
+/persona_overrides.json

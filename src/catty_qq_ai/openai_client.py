@@ -5,6 +5,8 @@ import base64
 from collections import deque
 import contextlib
 import contextvars
+from copy import deepcopy
+from dataclasses import dataclass, field
 import hashlib
 from io import BytesIO
 import json
@@ -623,28 +625,125 @@ def _serialize_tool_arguments_for_history(arguments_json: str) -> str:
     )
 
 
+def _interrupted_tool_payload(*, cancelled: bool) -> dict[str, Any]:
+    return {
+        "status": "cancelled" if cancelled else "unknown",
+        "execution_status": "unknown",
+        "message": (
+            "No completed tool receipt is available. Side effects may already have occurred; "
+            "do not repeat this call or claim it succeeded or was not executed."
+        ),
+    }
+
+
+def _tool_recovery_payload(result: Any) -> dict[str, Any]:
+    if isinstance(result, asyncio.CancelledError):
+        return _interrupted_tool_payload(cancelled=True)
+    if isinstance(result, BaseException):
+        return _tool_call_error(
+            "tool_execution_error",
+            "Tool executor raised an exception.",
+            exception_type=result.__class__.__name__,
+        )
+    return result if isinstance(result, dict) else {"value": result}
+
+
+@dataclass
+class ToolReplyState:
+    """单轮回复持有的内存回执；仅在同一 event loop 内由一个工具循环写入。
+
+    外层 wait_for 结束取消之后调用 recovery_messages()，用结果做无工具的
+    文字收尾。不重试工具、不写磁盘，也不延长在飞任务的生命周期。
+    """
+
+    _history: list[ChatMessage] | None = field(default=None, init=False, repr=False)
+    _pending: dict[str, int] = field(default_factory=dict, init=False, repr=False)
+    _has_tool_round: bool = field(default=False, init=False, repr=False)
+
+    def _seed(self, messages: list[ChatMessage]) -> None:
+        if self._history is None:
+            self._history = deepcopy(messages)
+
+    def _begin_round(
+        self,
+        history: list[ChatMessage],
+        calls: list[dict[str, str]],
+        known_payloads: dict[str, Any],
+    ) -> None:
+        # 发布时就是完整配对；没有回执的槽位明确标为 unknown。
+        snapshot = deepcopy(history)
+        pending: dict[str, int] = {}
+        for call in calls:
+            call_id = call["id"]
+            if call_id in known_payloads:
+                payload = _tool_recovery_payload(known_payloads[call_id])
+            else:
+                payload = _interrupted_tool_payload(cancelled=False)
+                pending[call_id] = len(snapshot)
+            snapshot.append({
+                "role": "tool",
+                "tool_call_id": call_id,
+                "name": call["name"],
+                "content": _serialize_tool_result_for_history(payload),
+            })
+        self._history = snapshot
+        self._pending = pending
+        self._has_tool_round = True
+
+    def _record_result(self, call: dict[str, str], result: Any) -> None:
+        index = self._pending.get(call["id"])
+        if index is None or self._history is None:
+            return
+        # 同步、无 await；并行完成回调不与快照读取交错。
+        content = _serialize_tool_result_for_history(_tool_recovery_payload(result))
+        self._history[index] = {**self._history[index], "content": content}
+        self._pending.pop(call["id"], None)
+
+    def _cancel_pending(self) -> None:
+        if self._history is None:
+            return
+        content = _serialize_tool_result_for_history(_interrupted_tool_payload(cancelled=True))
+        for index in self._pending.values():
+            self._history[index] = {**self._history[index], "content": content}
+        self._pending.clear()
+
+    def recovery_messages(self) -> list[ChatMessage]:
+        """返回隔离快照；未绑定为 []，尚无工具轮时等于原输入。"""
+        messages = deepcopy(self._history) if self._history is not None else []
+        if self._has_tool_round:
+            messages.append({
+                "role": "system",
+                "content": (
+                    "工具调用阶段已经结束。仅根据已有工具回执给出文字收尾，不再调用或重做工具；"
+                    "cancelled/unknown 状态不代表未执行，不能宣称已成功或未发生副作用。"
+                ),
+            })
+        return messages
+
+
 async def _execute_tool_calls(
     tool_executor: Any,
     calls: list[dict[str, str]],
+    *,
+    on_result: Callable[[dict[str, str], Any], None] | None = None,
 ) -> list[Any]:
-    async def _gather_compatibly() -> list[Any]:
-        return await asyncio.gather(
-            *[
-                tool_executor(call["name"], call["arguments_json"])
-                for call in calls
-            ],
-            return_exceptions=True,
-        )
+    async def _invoke(call: dict[str, str]) -> Any:
+        try:
+            result = await tool_executor(call["name"], call["arguments_json"])
+        except asyncio.CancelledError as exc:
+            if on_result is not None:
+                on_result(call, exc)
+            raise
+        except Exception as exc:  # noqa: BLE001
+            result = exc
+        if on_result is not None:
+            on_result(call, result)
+        return result
 
     async def _execute_serially() -> list[Any]:
         results: list[Any] = []
         for call in calls:
-            try:
-                results.append(
-                    await tool_executor(call["name"], call["arguments_json"])
-                )
-            except Exception as exc:  # noqa: BLE001
-                results.append(exc)
+            results.append(await _invoke(call))
         return results
 
     try:
@@ -674,7 +773,7 @@ async def _execute_tool_calls(
         pending_reads.clear()
         read_results = await asyncio.gather(
             *[
-                tool_executor(calls[index]["name"], calls[index]["arguments_json"])
+                _invoke(calls[index])
                 for index in indexes
             ],
             return_exceptions=True,
@@ -697,13 +796,7 @@ async def _execute_tool_calls(
             pending_reads.append(index)
             continue
         await _flush_reads()
-        try:
-            results[index] = await tool_executor(
-                call["name"],
-                call["arguments_json"],
-            )
-        except Exception as exc:  # noqa: BLE001
-            results[index] = exc
+        results[index] = await _invoke(call)
     await _flush_reads()
     return results
 
@@ -3904,6 +3997,7 @@ async def chat_completion_with_tools(
     router_model: str = "",
     router_label: str = "",
     tool_choice: ToolChoice = "auto",
+    reply_state: ToolReplyState | None = None,
     _fallback_mode: bool = False,
     _fallback_request_route: str = "fallback",
 ) -> str:
@@ -3918,7 +4012,11 @@ async def chat_completion_with_tools(
     省 Opus token 并避开 OOC 触发). 不带 router 时走 catty_openai_* 主通道.
     Native /v1/messages (catty_anthropic_native_enabled=True) 与 router 互斥, 一旦
     router 三件套齐就强制 OpenAI-compat 路径.
+    reply_state 可由父调用跨 deadline attempts 持有；取消后用 recovery_messages()
+    给无工具的文字收尾请求。不传时保留原调用方式，不修改 messages。
     """
+    if reply_state is not None:
+        reply_state._seed(messages)
     if not tools or tool_executor is None:
         _logger.info("tool_chat: tools/executor empty → fallback to plain chat_completion")
         return await chat_completion(config, messages)
@@ -4235,8 +4333,23 @@ async def chat_completion_with_tools(
                 calls_to_execute.append(call)
                 execution_call_ids.add(call["id"])
 
+        if reply_state is not None:
+            reply_state._begin_round(history, call_specs, tool_payloads)
+
         if calls_to_execute:
-            tool_results = await _execute_tool_calls(tool_executor, calls_to_execute)
+            try:
+                if reply_state is None:
+                    tool_results = await _execute_tool_calls(tool_executor, calls_to_execute)
+                else:
+                    tool_results = await _execute_tool_calls(
+                        tool_executor,
+                        calls_to_execute,
+                        on_result=reply_state._record_result,
+                    )
+            except asyncio.CancelledError:
+                if reply_state is not None:
+                    reply_state._cancel_pending()
+                raise
             for call, result in zip(calls_to_execute, tool_results):
                 tool_payloads[call["id"]] = result
 
@@ -4248,7 +4361,9 @@ async def chat_completion_with_tools(
             call_id = call["id"]
             name = call["name"]
             result = tool_payloads[call_id]
-            if isinstance(result, BaseException):
+            if isinstance(result, asyncio.CancelledError):
+                payload = _interrupted_tool_payload(cancelled=True)
+            elif isinstance(result, BaseException):
                 args_len, fields, args_hash = _tool_argument_log_summary(call["arguments_json"])
                 payload = _tool_call_error(
                     "tool_execution_error",

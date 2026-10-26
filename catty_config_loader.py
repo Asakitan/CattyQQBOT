@@ -383,7 +383,6 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "bridge_env_path": "tools/onebot-qzone/.env",
     },
     "chat": {
-        "system_prompt": "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。",
         "trigger_prefixes": ["ai", "AI", "猫猫"],
         "enable_private": True,
         "enable_group": True,
@@ -498,6 +497,13 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "star_resonance_group_ids": [],
         "strinova_group_ids": [],
     },
+    "persona": {
+        "default": "catty",
+        "group_personas": {},
+        "dir": "data/personas",
+        "generation_timeout_seconds": 60,
+        "generation_max_tokens": 4096,
+    },
     "proactive": {
         "enabled": True,
         "max_daily_per_group": 5,
@@ -607,6 +613,9 @@ def _section(data: dict[str, Any], name: str) -> dict[str, Any]:
 
 
 def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
+    # chat.system_prompt 已移除；旧 JSON 忽略，热重载时清掉旧版本导出的环境值。
+    os.environ.pop("CATTY_SYSTEM_PROMPT", None)
+
     server = _section(data, "server")
     _set_env("HOST", server.get("host"))
     _set_env("PORT", server.get("port"))
@@ -1013,7 +1022,6 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_TURTLE_SOUP_COOLDOWN_SECONDS", turtle_soup.get("cooldown_seconds"))
 
     chat = _section(data, "chat")
-    _set_env("CATTY_SYSTEM_PROMPT", chat.get("system_prompt"))
     _set_env("CATTY_TRIGGER_PREFIXES", chat.get("trigger_prefixes"), json_value=True)
     _set_env("CATTY_ENABLE_PRIVATE", chat.get("enable_private"))
     _set_env("CATTY_ENABLE_GROUP", chat.get("enable_group"))
@@ -1049,6 +1057,18 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FADIANJI_ECHO_PROBABILITY", chat.get("fadianji_echo_probability"))
     _set_env("CATTY_FADIANJI_ECHO_MIN_SCORE", chat.get("fadianji_echo_min_score"))
     _set_env("CATTY_FADIANJI_ECHO_COOLDOWN_SECONDS", chat.get("fadianji_echo_cooldown_seconds"))
+    # Config 的字段名是 catty_fdj_*；旧 CATTY_FADIANJI_* 同时保留兼容。
+    _set_env("CATTY_FDJ_CORPUS_ENABLED", chat.get("fadianji_corpus_enabled"))
+    _set_env("CATTY_FDJ_CORPUS_MAX_PAIRS", chat.get("fadianji_corpus_max_pairs"))
+    _set_env("CATTY_FDJ_CORPUS_SEMANTIC_ENABLED", chat.get("fadianji_corpus_semantic_enabled"))
+    _set_env("CATTY_FDJ_CORPUS_LORE_ENABLED", chat.get("fadianji_corpus_lore_enabled"))
+    _set_env("CATTY_FDJ_CORPUS_LORE_MAX_CHARS", chat.get("fadianji_corpus_lore_max_chars"))
+    _set_env("CATTY_FDJ_STAT_CRITIC_ENABLED", chat.get("fadianji_stat_critic_enabled"))
+    _set_env("CATTY_FDJ_STAT_CRITIC_PASS_SCORE", chat.get("fadianji_stat_critic_pass_score"))
+    _set_env("CATTY_FDJ_ECHO_ENABLED", chat.get("fadianji_echo_enabled"))
+    _set_env("CATTY_FDJ_ECHO_PROBABILITY", chat.get("fadianji_echo_probability"))
+    _set_env("CATTY_FDJ_ECHO_MIN_SCORE", chat.get("fadianji_echo_min_score"))
+    _set_env("CATTY_FDJ_ECHO_COOLDOWN_SECONDS", chat.get("fadianji_echo_cooldown_seconds"))
     _set_env("CATTY_SESSION_CACHE_PERSISTENCE_ENABLED", chat.get("session_cache_persistence_enabled"))
     _set_env("CATTY_SESSION_CACHE_DIR", chat.get("session_cache_dir"))
     _set_env("CATTY_SESSION_CACHE_MAX_SESSIONS", chat.get("session_cache_max_sessions"))
@@ -1251,6 +1271,14 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     persona = _section(data, "persona")
     _set_env("CATTY_DEFAULT_PERSONA", persona.get("default"))
     _set_env("CATTY_GROUP_PERSONAS", persona.get("group_personas"), json_value=True)
+    persona_dir = persona.get("dir")
+    if persona_dir is not None:
+        if not isinstance(persona_dir, str) or not persona_dir.strip():
+            raise ValueError("persona.dir must be a nonempty path string")
+        directory = Path(persona_dir).expanduser()
+        _set_env("CATTY_PERSONA_DIR", str(directory if directory.is_absolute() else base_dir / directory))
+    _set_env("CATTY_PERSONA_GENERATION_TIMEOUT_SECONDS", persona.get("generation_timeout_seconds"))
+    _set_env("CATTY_PERSONA_GENERATION_MAX_TOKENS", persona.get("generation_max_tokens"))
 
     # 月经期心情 (主人 2026-08-10): 机机生理状态同步, 纯 config 驱动。
     menstrual_cycle = _section(data, "menstrual_cycle")

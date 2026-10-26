@@ -350,6 +350,13 @@ adaptive_prompt_store = AdaptiveEvolutionPromptStore(
 # 解析优先级: override > config.catty_group_personas > catty_default_persona。
 from .persona_override_store import PersonaOverrideStore
 persona_override_store = PersonaOverrideStore(config.catty_memory_path)
+from .persona_runtime import PersonaRuntime, active_persona_for_scope, bind_turn_persona, reset_turn_persona
+persona_runtime = PersonaRuntime(getattr(config, "catty_persona_dir", "data/personas"))
+try:
+    persona_runtime.load_sync()
+    _rebuild_persona_emoji_stores(config)
+except Exception as _persona_load_error:
+    logger.warning(f"custom persona load failed: {type(_persona_load_error).__name__}")
 # Catty RAG: chromadb 向量记忆 — per-scope chat history 向量化 + 语义召回 top-K。
 # 让笨猫『记得久远的事』 — 关键词没命中但语义相近的旧对话也能召回。
 # graceful fallback: chromadb 未装时 store._enabled=False, add/query 全部 no-op。
@@ -3397,6 +3404,9 @@ def _conversation_queue_key(event: MessageEvent) -> str:
 def _persona_for_scope(scope: str):
     """scope → Persona 单一入口 (全文件禁止散装 resolve)。"""
     from .personas import get_persona, resolve_persona_name
+    pinned = active_persona_for_scope(scope)
+    if pinned is not None:
+        return pinned
     return get_persona(resolve_persona_name(
         scope, config=config, override_store=persona_override_store,
     ))
@@ -3404,6 +3414,74 @@ def _persona_for_scope(scope: str):
 
 def _persona_for_event(event: MessageEvent):
     return _persona_for_scope(_conversation_queue_key(event))
+
+
+async def _persona_manage_for_event(event: MessageEvent, args: dict[str, Any]) -> dict[str, Any]:
+    """Use the same persistence for owner commands and model-selected tools."""
+    if not _event_is_owner(event):
+        return {"ok": False, "error": "owner_only"}
+    runtime = persona_runtime
+    result = await runtime.execute(
+        args, scope=_conversation_queue_key(event), set_by=str(event.user_id),
+        config=config, overrides=persona_override_store,
+    )
+    if result.get("registry_updated"):
+        _rebuild_persona_emoji_stores(config)
+        _sync_hot_reload_signatures()
+    return result
+
+
+def _persona_generation_context(event: MessageEvent) -> str:
+    """Text-only recent context for the explicit generation command."""
+    lines: list[str] = []
+    for message in list(_get_session_cache().get(build_history_key(event, config)))[-40:]:
+        content = message.get("content", "")
+        if isinstance(content, list):
+            content = "\n".join(str(part.get("text") or "") for part in content if isinstance(part, dict) and part.get("type") == "text")
+        if isinstance(content, str) and content.strip():
+            lines.append(f"{message.get('role', 'context')}: {content}")
+    return "\n".join(lines)[-24000:]
+
+
+async def _run_persona_definition_command(event: MessageEvent, command: Any) -> dict[str, Any]:
+    if not _event_is_owner(event):
+        return {"ok": False, "error": "owner_only"}
+    from .persona_admin import generate_persona_definition
+    from .parsers import lenient_json_object
+    runtime = persona_runtime
+    action = command.action
+    if action in {"import", "generate"}:
+        if action == "import":
+            definition = lenient_json_object(command.body)
+            if not isinstance(definition, dict):
+                return {"ok": False, "error": "invalid_json"}
+            name = str(definition.get("name") or "")
+        else:
+            name = command.name
+            definition = None
+        existing = runtime.store.get(name)
+        if existing and not command.overwrite:
+            return {"ok": False, "error": "persona_exists", "name": name, "hint": "更新现有人格请加 覆盖"}
+        if action == "generate":
+            try:
+                definition = await generate_persona_definition(
+                    config, name=name, description=command.body,
+                    existing=existing.get("definition") if existing else None,
+                    context_text=_persona_generation_context(event),
+                )
+            except Exception as exc:
+                return {"ok": False, "error": type(exc).__name__}
+        if runtime is not persona_runtime:
+            return {"ok": False, "error": "persona_runtime_changed", "hint": "人格目录已变，请重试"}
+        return await _persona_manage_for_event(event, {
+            "action": "save", "definition": definition,
+            "overwrite": bool(existing and command.overwrite),
+            "expected_sha256": existing.get("sha256") if existing else None,
+        })
+    return await _persona_manage_for_event(event, {
+        "action": action, "name": command.name, "command": command.command,
+        "overwrite": command.overwrite,
+    })
 
 
 def _phase_scope_for(scope: str, persona) -> str:
@@ -3422,7 +3500,7 @@ def _pregnancy_store_for(persona) -> "PregnancyStore":
         return pregnancy_store
     store = _PREGNANCY_STORES.get(name)
     if store is None:
-        safe = re.sub(r"[^a-z0-9_]+", "", name.lower()) or "persona"
+        safe = re.sub(r"[^a-z0-9_-]+", "", name.lower()) or "persona"
         store = PregnancyStore(config.catty_memory_path, filename=f"pregnancy_{safe}.json")
         _PREGNANCY_STORES[name] = store
     return store
@@ -3652,6 +3730,9 @@ def _ensure_session_persona_isolation(key: str, persona) -> None:
         return
     baseline_scope = _persona_baseline_scope(key)
     current_name = str(getattr(persona, "name", "catty") or "catty")
+    revision = getattr(persona, "definition_revision", None)
+    if revision:
+        current_name = f"{current_name}@{revision}"
     _load_session_persona_baselines()
     previous_name = _session_persona_names.get(baseline_scope)
     baseline_was_missing = previous_name is None
@@ -3841,7 +3922,7 @@ def _available_tool_schemas_for_persona(
     if not is_owner:
         # read_file / run_code / Python 沙箱只对主人开放; 执行器本来就会拒绝,
         # 提前从 schema 里摘掉省一轮空调用 (allow_guests=True 时沙箱对所有人开放)。
-        _owner_gated = {"catty_read_file", "catty_run_code"}
+        _owner_gated = {"catty_read_file", "catty_run_code", "catty_persona"}
         if not bool(getattr(config, "catty_code_sandbox_allow_guests", False)):
             _owner_gated |= {"catty_python_run", "catty_python_install"}
         schemas = [
@@ -4070,6 +4151,13 @@ async def _imagegen_tool_with_deferred_delivery(
     )
     try:
         result = await asyncio.wait_for(asyncio.shield(task), timeout=_IMAGEGEN_INLINE_WAIT_SECONDS)
+    except asyncio.CancelledError:
+        # The shielded generation may already be committed upstream. Keep its
+        # delivery owner even when the main model's deadline cancels this await.
+        _spawn_deferred_image_delivery(
+            bot, event, _deferred_imagegen_items(task, detached_ctx), after=after, label="catty_imagegen",
+        )
+        raise
     except asyncio.TimeoutError:
         _spawn_deferred_image_delivery(
             bot, event, _deferred_imagegen_items(task, detached_ctx), after=after, label="catty_imagegen",
@@ -5240,6 +5328,7 @@ def _remember_hot_reload_config_signature(path: Path | None, signature: tuple[in
 def _apply_runtime_config(new_config: Config) -> None:
     global config, memory_store, legs_picker, affection_store
     global timeline_store, adaptive_prompt_store, qzone_feed_store, _qzone_feed_store_generation
+    global persona_runtime
     # 切实例前先把旧 memory_store 待写的脏数据落盘,避免 hot reload 丢失最近的记忆。
     # 磁盘暂时不可写时保留旧 config/store；交给 watcher 重试，不能继续换实例。
     if memory_store.flush_sync(raise_on_error=True):
@@ -5263,8 +5352,14 @@ def _apply_runtime_config(new_config: Config) -> None:
                 logger.info(f"{name}: flushed data before hot reload")
         except Exception as exc:  # noqa: BLE001
             logger.warning(f"{name}: pre-reload flush failed: {exc}")
+    replacement_personas = None
+    if getattr(config, "catty_persona_dir", "data/personas") != getattr(new_config, "catty_persona_dir", "data/personas"):
+        replacement_personas = PersonaRuntime(new_config.catty_persona_dir)
     config = new_config
     memory_store = MemoryStore(config)
+    if replacement_personas is not None:
+        replacement_personas.publish()
+        persona_runtime = replacement_personas
     _rebuild_persona_emoji_stores(config)
     legs_picker = LegsPicker(config)
     affection_store = AffectionStore(config)
@@ -6711,11 +6806,12 @@ def _build_cognitive_turn_context_sync(
     """Build post-boundary system evidence and the current user-role adaptive block."""
     persona_name = str(getattr(persona, "name", "catty") or "catty")
     system_parts: list[str] = []
-    if bool(getattr(persona, "semantic_harness_enabled", False)) and str(text or "").strip():
+    harness_budget = max(0, int(getattr(config, "catty_fadianji_harness_max_chars", 12000) or 0))
+    if bool(getattr(persona, "semantic_harness_enabled", False)) and str(text or "").strip() and harness_budget:
         try:
-            from .fadianji_harness import build_fadianji_harness_context
+            from .fadianji_harness import build_fadianji_evidence_packet
 
-            harness = build_fadianji_harness_context(
+            packet = build_fadianji_evidence_packet(
                 text,
                 persona=persona,
                 scope_key=scope_key,
@@ -6729,15 +6825,35 @@ def _build_cognitive_turn_context_sync(
                 book_k=0,
                 # 主人 2026-08-15: 例句加料 — 每轮检索对数/证据包上限走配置, 默认 12 对/12000 字符
                 scene_k=max(0, int(getattr(config, "catty_fadianji_scene_k", 12) or 0)),
-                max_chars=max(0, int(getattr(config, "catty_fadianji_harness_max_chars", 12000) or 0)),
+                max_chars=harness_budget,
                 # 主人 2026-08-25: 语料磁盘库轻量语义重排 (哈希余弦, 无模型依赖)
                 semantic=bool(getattr(config, "catty_fdj_corpus_semantic_enabled", True)),
                 display_name=display_name,
+                corpus_profile_enabled=(
+                    bool(getattr(config, "catty_fdj_corpus_enabled", True))
+                    and bool(getattr(config, "catty_fdj_corpus_lore_enabled", True))
+                ),
+                corpus_profile_max_chars=max(0, int(getattr(config, "catty_fdj_corpus_lore_max_chars", 320) or 0)),
             )
+            harness = str(packet.get("text") or "")
             if harness:
                 system_parts.append(harness)
+            logger.debug(
+                f"fadianji harness: rendered={sum(packet.get('rendered_counts', {}).values())} "
+                f"omitted={packet.get('omitted_count', 0)} chars={packet.get('rendered_chars', 0)}"
+            )
+            diagnostics = packet.get("diagnostics") or []
+            if diagnostics:
+                failures = ", ".join(
+                    f"{item.get('source', 'harness')}:{item.get('error_type', 'unknown')}"
+                    for item in diagnostics
+                )
+                logger.warning(f"fadianji harness source failures: {failures}")
         except Exception as exc:  # noqa: BLE001
-            logger.debug(f"fadianji semantic harness failed (non-fatal): {exc}")
+            logger.warning(f"fadianji semantic harness failed: {type(exc).__name__}")
+            failure_note = "【机机·evidence】\nsource_status=harness:error；本轮证据不可用，检索失败不表示没有记录。"
+            if len(failure_note) <= harness_budget:
+                system_parts.append(failure_note)
     try:
         if timeline_store.list(scope_key, persona=persona_name):
             timeline_prompt = timeline_store.build_prompt(scope_key, persona=persona_name)
@@ -6885,8 +7001,7 @@ async def _build_messages(
     messages: list[ChatMessage] = []
 
     # [MODE: UNRESTRICTED] 全局执行块 — 必须放 system 最首部, 所有人格(catty/fadianji)生效。
-    # 不走 config.catty_system_prompt: 主路径 catty_persona_memory 段已永久停用,
-    # config 原文只进 ctx 不发给模型, 那段改了等于白发; 这里以常量首段注入。
+    # 主路径使用独立人格段与此常量，不再保留失效的配置提示词入口。
     # 常量字节稳定 → 一次性 cold start 后照常进 cache prefix, 不影响跨轮/跨人缓存。
     messages.append({"role": "system", "content": MODE_UNRESTRICTED_BLOCK})
 
@@ -6916,9 +7031,7 @@ async def _build_messages(
     is_cold_session = len(history_messages) < HOT_SESSION_MIN_MESSAGES
 
     # ─── Layer A → 全部移到 PromptManager (在 affection 之后统一注册) ───
-    # 留下 catty_system_prompt 原文(persona_memory 拿它当 base)和 reply_gate_approved 这两段散装,
-    # 其它人格/流水线/教学例句 都被 register_catty_persona() 接管。
-    system_prompt = config.catty_system_prompt.strip()
+    # 人格/流水线/教学例句由 register_catty_persona() 接管。
     # 主人 2026-05-29 (P2): 群聊「接话判断/NO_REPLY」块**仅群聊注入**。私聊 1v1 每句都指向笨猫,
     # 这块全是群聊语义 (顺手@/A对B/第三人称/主人跟群友聊也 NO_REPLY), 私聊吃了会被往 NO_REPLY/
     # SFW 躲档带偏 (尤其 NSFW 场景)。私聊从此 system[0] 不再以 reply_gate 文本开头 —— 一次性
@@ -6946,15 +7059,7 @@ async def _build_messages(
         _deferred_pre_persona_segments.append(
             ("catty_force_direct_reply", _direct_reply_required_prompt(incoming, _persona), 489)
         )
-    # 主人 2026-05-29 Round 23: semantic_reply_split prompt 内容 byte-stable
-    # (除 max_chunks 是 config 常量), 跨 sender/scope/turn 都一样, 进 cache prefix 155.
-    # flag=True 时不再注入完整 prompt, 只加一行短指针 (AI 看到拆分允许时去 cache 段查规则).
-    if semantic_reply_split:
-        _deferred_pre_persona_segments.append((
-            "catty_semantic_reply_split_pointer",
-            "【SPLIT】on;rules=semantic_reply_split_skeleton",
-            490,
-        ))
+    # 分泡节奏在稳定段，执行格式在本轮提醒；不再追加第三份重复指针。
     if incoming.opportunistic or group_filter_context:
         _deferred_pre_persona_segments.append(
             ("catty_opportunistic_reply", _opportunistic_reply_prompt(_persona), 491)
@@ -7145,7 +7250,6 @@ async def _build_messages(
         "story_arc_store": None if _persona.feature_disabled("story_arc") else story_arc_store,
         "no_reply_marker": NO_REPLY_MARKER,
         "reply_split_marker": REPLY_SPLIT_MARKER,
-        "system_prompt": system_prompt,
         "is_cold_session": is_cold_session,
         "reply_self_check_enabled": bool(config.catty_reply_self_check_enabled),
         "reply_style_examples_enabled": bool(config.catty_reply_style_examples_enabled),
@@ -7289,8 +7393,7 @@ async def _build_messages(
         )
     except Exception:  # noqa: BLE001
         pass
-    # 主人 2026-05-29 Round 23: semantic_reply_split skeleton 永久进 cache prefix
-    # (内容 byte-stable, max_chunks 是 config 常量), flag=True 时只额外加一行短指针.
+    # 静态段只保留人格节奏和技术排版；两段提示使用同一启用条件。
     try:
         _st_manager.register_static(
             "catty_semantic_reply_split_skeleton",
@@ -7627,7 +7730,7 @@ async def _build_messages(
             scope_key=key,
             is_private=_is_private_event,
             user_id=str(event.user_id),
-            display_name=str(getattr(incoming, "display_name", "") or ""),
+            display_name=_display_name(event),
             group_id=str(getattr(event, "group_id", "") or ""),
         )
     except Exception as exc:  # noqa: BLE001
@@ -8415,16 +8518,14 @@ async def _build_messages(
                 _slim_messages.extend(_filtered_history)
         _slim_messages.append({
             "role": "user",
-            "content": _build_user_content(
-                incoming,
-                image_description=image_description,
-                context_image_parts=context_image_parts,
-                context_image_notes=context_image_notes,
-                image_parts=image_parts,
-                quoted_image_parts=quoted_image_parts,
-                web_image_parts=web_image_parts,
-            ),
+            "content": _user_content_raw,
         })
+        if _cognitive_system_context:
+            _append_internal_system(
+                _slim_messages,
+                _cognitive_system_context,
+                label="cognitive evidence and timeline",
+            )
         # 主人 2026-05-30 cache R1+R4: 8铁律(1736字)已搬进静态前缀, user 之后只留 ~110字短指针
         # 拿 recency bias (覆盖延续 + 末尾隐藏标记两个 recency-critical 行为), 尾部 miss 大降.
         _inject_into_both(
@@ -9059,8 +9160,23 @@ def _expression_repeat_message(bot: Bot, event: MessageEvent) -> Message | None:
     return None
 
 
+def _reply_split_prompt_enabled() -> bool:
+    aliases = {
+        "catty_semantic_reply_split_skeleton",
+        "catty_semantic_reply_split_pointer",
+        "catty_reply_split_reminder",
+    }
+    disabled = {str(name).strip() for name in (getattr(config, "catty_prompts_disabled", None) or [])}
+    return bool(getattr(config, "catty_reply_human_split_enabled", True)) and not (aliases & disabled)
+
+
 def _semantic_reply_split_prompt(persona=None) -> str:
-    max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
+    if not _reply_split_prompt_enabled():
+        return ""
+    formatting = (
+        "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
+        "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用「1)」「2)」;技术长答可以多行,但换行不产生新气泡。"
+    )
     _is_catty = persona is None or getattr(persona, "name", "catty") == "catty"
     if _is_catty:
         _neg = (
@@ -9082,12 +9198,9 @@ def _semantic_reply_split_prompt(persona=None) -> str:
             "这不是口吃或犹豫：不堆「……」「呃」「那个」，不自我修正。"
             "频率按全量实录约束：约 73% 一簇一条、18% 两条、3-4 条 7%——别为了显得像 QQ 硬拆短句。"
             "技术/学术长答按逻辑段落拆，不按字数硬切。"
-            f"想明确控制分条就在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；短句直接一行一条也会按行发；"
-            "长句/技术/写文里的换行不会被拆。"
             "被拆的前几块结尾少用句号/感叹号，自然些。"
-            f"上限 {max_chunks} 条，但只有拆分理由很明确才用。"
-            "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
-            "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用「1)」「2)」;技术长答可以多行,但换行不产生新气泡。"
+            "具体分条格式与条数见【本轮气泡写法】。"
+            f"{formatting}"
         )
     return (
         "QQ 回复分段规则——按真实人类节奏拆，不要过度拆碎也不要全挤一团："
@@ -9096,17 +9209,16 @@ def _semantic_reply_split_prompt(persona=None) -> str:
         "用逗号/句号连成一条 QQ 消息发，不要每短句单切。"
         "【真有几个轮次 → 拆 2~3 条】对前文的强反应 + 接下来要说的新事情；技术结论 + 后续追问；强情绪 + 话题展开。"
         f"{_neg}"
-        f"想明确控制分条就在每条之间单独输出一行 {REPLY_SPLIT_MARKER}；短句直接一行一条也会按行发；"
-        "长句/技术/写文里的换行不会被拆。"
         "被拆的前几条结尾少用句号/感叹号，自然些。"
-        f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
-        "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
-        "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用「1)」「2)」;技术长答可以多行,但换行不产生新气泡。"
+        "短问候和确认默认单条；具体分条格式与条数见【本轮气泡写法】。"
+        f"{formatting}"
     )
 
 
 def _reply_split_reminder_prompt() -> str:
     """每轮贴脸的拆条提醒: 像 tools 一样每轮都在场, 不靠静态 prefix 的记忆力。"""
+    if not _reply_split_prompt_enabled():
+        return ""
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     return (
         "【本轮气泡写法 · 硬规则】\n"
@@ -10138,6 +10250,7 @@ async def _main_reply_with_deadline(
     重发仍然让模型自己答, 不用固定兜底文案。
     """
     from .openai_client import (
+        ToolReplyState,
         chat_completion_with_tools,
         reset_current_reasoning_effort,
         set_current_reasoning_effort,
@@ -10157,6 +10270,7 @@ async def _main_reply_with_deadline(
         attempts = 2
     attempts = max(0, attempts)
 
+    reply_state = ToolReplyState()
     last_error: BaseException | None = None
     for attempt in range(attempts + 1):
         degraded = attempt > 0
@@ -10166,7 +10280,7 @@ async def _main_reply_with_deadline(
         try:
             call = chat_completion_with_tools(
                 config,
-                messages,
+                (reply_state.recovery_messages() or messages) if degraded else messages,
                 tools=None if degraded else tools,
                 tool_executor=None if degraded else tool_executor,
                 max_rounds=max_rounds,
@@ -10176,6 +10290,7 @@ async def _main_reply_with_deadline(
                 router_model="" if degraded else router_model,
                 router_label="" if degraded else router_label,
                 tool_choice="auto" if degraded else tool_choice,
+                reply_state=None if degraded else reply_state,
             )
             if deadline > 0:
                 return await asyncio.wait_for(call, timeout=deadline)
@@ -10318,8 +10433,7 @@ async def _should_request_semantic_reply_split(incoming: ExtractedMessage) -> bo
     回复长度在调 AI 前没法知道,过去用 incoming 用户输入长度做硬阈值是错对象——
     短问题("评价一下我"才十几字)常引出 60+ 字的长回复,但被这里直接挡掉,
     导致整段不拆,看着不像 QQ 聊天。
-    现在统一只看 enabled,让 prompt 始终挂上;prompt 里已写明
-    "只有回复预计不少于约 {min_chars} 个中文字符才拆",AI 自己看着办。
+    现在只看 enabled，静态节奏与每轮格式提示共用同一开关；输出解析保持兼容。
     """
     del incoming
     return bool(config.catty_reply_human_split_enabled)
@@ -10332,12 +10446,9 @@ def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
         group_id,
         recent_limit=max(config.catty_proactive_recent_messages, 1),
     )
-    system_prompt = config.catty_system_prompt.strip()
     messages: list[ChatMessage] = []
     # 主动冒泡也按 cache-friendly 顺序：稳定 prompt 前置；不挂 scene_discrimination（冒泡不需要判断"在叫谁"）。
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
-    persona_memory = build_persona_memory_prompt(system_prompt)
+    persona_memory = build_persona_memory_prompt("")
     if persona_memory:
         messages.append({"role": "system", "content": persona_memory})
     messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
@@ -11466,10 +11577,16 @@ async def _persona_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> bo
     text = event_plain_text(event)
     if not text:
         return False
-    match = _PERSONA_CMD_RE.match(text)
-    if not match:
+    from .persona_admin import parse_persona_command, PersonaCommandParseError
+    try:
+        command = parse_persona_command(text, persona_runtime.store.switch_commands())
+    except PersonaCommandParseError as exc:
+        state["catty_persona_cmd_error"] = str(exc)
+        return True
+    if command is None:
         return False
-    state["catty_persona_cmd_arg"] = (match.group(1) or "").strip()
+    state["catty_persona_command"] = command
+    state["catty_persona_cmd_arg"] = "默认" if command.action == "reset" else command.name
     return True
 # 主人 only 的 affection 管理命令: 改别人的签到/积分/经验状态。
 #   /aff_show <qq>             查概况
@@ -11726,7 +11843,7 @@ aff_admin_matcher = on_message(rule=_aff_admin_rule, priority=44, block=True)
 catty_status_matcher = on_message(rule=_catty_status_rule, priority=45, block=True)
 lore_cmd_matcher = on_message(rule=_lore_cmd_rule, priority=46, block=True)
 cognitive_admin_matcher = on_message(rule=_cognitive_admin_rule, priority=46, block=True)
-persona_cmd_matcher = on_message(rule=_persona_cmd_rule, priority=48, block=True)
+persona_cmd_matcher = on_message(rule=_persona_cmd_rule, priority=20, block=True)
 evolution_cmd_matcher = on_message(rule=_evolution_cmd_rule, priority=47, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
@@ -13013,6 +13130,20 @@ async def handle_persona_command(matcher: Matcher, event: MessageEvent, state: T
     """主人用 `/人格` 查看、`/人格 机机` 切换、`/人格 默认` 清除 override。"""
     if not _event_is_owner(event):
         return
+    if state.get("catty_persona_cmd_error"):
+        await matcher.finish(Message(str(state["catty_persona_cmd_error"])))
+    command = state.get("catty_persona_command")
+    if command is not None and command.action not in {"overview", "switch", "reset"}:
+        result = await _run_persona_definition_command(event, command)
+        if result.get("status") == "saved" and result.get("ok"):
+            await matcher.finish(Message(f"人格已保存：{result['name']}（未切换）。用 /人格 {result['name']} 切换。"))
+        if command.action == "show" and isinstance(result.get("definition"), dict):
+            result = {**result, "definition": {
+                "name": result["definition"].get("name"),
+                "char_name": result["definition"].get("char_name"),
+                "core_persona_excerpt": str(result["definition"].get("core_persona", ""))[:1000],
+            }, "note": "正文为节选，完整 JSON 见 path 文件或聊天工具 show 回执"}
+        await matcher.finish(Message(json.dumps(result, ensure_ascii=False, indent=2)))
     from .personas import PERSONAS, PERSONA_ALIASES, normalize_persona_name, resolve_persona_name
     scope = _conversation_queue_key(event)
     arg = str(state.get("catty_persona_cmd_arg") or "").strip()
@@ -13027,7 +13158,7 @@ async def handle_persona_command(matcher: Matcher, event: MessageEvent, state: T
             f"生效人格: {_effective()}" + (f" (命令覆盖: {override})" if override else " (config/默认)"),
             "可用人格: " + " / ".join(sorted(PERSONAS)),
             "别名: " + " ".join(f"{a}={n}" for a, n in PERSONA_ALIASES.items()),
-            "用法: /人格 <名字> 切换; /人格 默认 清除覆盖",
+            "用法: /人格 <名字> 切换; /人格 默认 清除覆盖; 列表/查看/导入/生成/指令/解绑/重载",
         ]
         await matcher.finish(Message("\n".join(lines)))
 
@@ -13078,11 +13209,15 @@ async def handle_persona_command(matcher: Matcher, event: MessageEvent, state: T
             await _lock_stack.enter_async_context(group_sema)
         if group_lock is not None:
             await _lock_stack.enter_async_context(group_lock)
-        if clear_override:
-            changed = persona_override_store.clear(scope)
-        else:
-            persona_override_store.set(scope, name, set_by=str(event.user_id))
-            changed = True
+        try:
+            if clear_override:
+                changed = persona_override_store.clear(scope)
+            else:
+                persona_override_store.set(scope, name, set_by=str(event.user_id))
+                changed = True
+        except OSError as exc:
+            logger.warning(f"persona override persistence failed: {type(exc).__name__}")
+            await matcher.finish(Message("人格切换未保存，原人格保持；请检查本地目录写入状态。"))
         # 切人格 = 前缀重建 + 旧口吻 history 不能留 (污染新人格), 清空该 scope 会话。
         cleared = _clear_persona_runtime_state(scope) if changed else 0
         effective_persona = _effective()
@@ -14512,9 +14647,6 @@ async def _generate_affection_caption(
             return None
         _p_reply = (str(_p_reply or "")).strip()
         return _p_reply or None
-    system_prompt = config.catty_system_prompt.strip()
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
     messages.append(
         {
             "role": "system",
@@ -14726,10 +14858,7 @@ async def _generate_legs_caption(event: MessageEvent, user_text: str) -> str:
         else "对方是普通用户/群友,**严禁**叫他『主人』(主人只有一个,catty_owner_qq 专属);"
         "称呼对方用『杂鱼』『笨蛋』『你』这种暧昧但不专属的词"
     )
-    system_prompt = config.catty_system_prompt.strip()
     messages: list[ChatMessage] = []
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
     messages.append(
         {
             "role": "system",
@@ -15664,6 +15793,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             f"turn stage: admission +{time.monotonic() - _turn_started_at:.2f}s "
             f"queue_wait={queue_wait_seconds:.2f}s busy={queue_was_busy}"
         )
+        _turn_persona_token = bind_turn_persona(history_key, _persona_for_scope(history_key))
+        _lock_stack.callback(reset_turn_persona, _turn_persona_token)
 
         # 主人 2026-08-25 Wave ⑤: 语料直发 — 超短反应场景直接发语料原句,
         # 跳过 vision/emoji/LLM 全链路 (本来就是机机本人说过的话)。
@@ -16024,27 +16155,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         )
 
         _forced_tool_choice: str | dict[str, object] = "auto"
-        try:
-            _force_imagegen_tool = (
-                should_force_imagegen_tool(
-                    _user_text_for_intent,
-                    is_directly_requested=bool(incoming.directly_requested),
-                )
-                and any(
-                    isinstance(_t, dict)
-                    and (
-                        (_t.get("function") or {}).get("name") == "catty_imagegen"
-                        or _t.get("name") == "catty_imagegen"
-                    )
-                    for _t in (tools_for_main_reply or [])
-                )
-            )
-        except Exception as _force_exc:  # noqa: BLE001
-            logger.debug(f"imagegen force tool_choice check failed: {_force_exc}")
-            _force_imagegen_tool = False
-        if _force_imagegen_tool:
-            _forced_tool_choice = {"type": "function", "function": {"name": "catty_imagegen"}}
-            logger.info("chat: explicit imagegen request → forcing catty_imagegen tool_choice")
+        # 由主模型结合整段上下文选择执行或回答，不用末句关键词强制绘图。
+        _force_imagegen_tool = False
 
         # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,
         # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
@@ -16458,6 +16570,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             wake_context=wake_context,
             bot_continuation_context=bot_continuation_context,
         )
+        from .harness_prompt import append_harness_agent_hint
+        append_harness_agent_hint(messages, () if _prefer_spark else _allowed_tool_names)
+        from .request_intent import append_context_request_hint
+        append_context_request_hint(messages)
         if _prefer_spark and placeholder_task is not None and not placeholder_task.done():
             placeholder_task.cancel()
             placeholder_task = None
@@ -16499,6 +16615,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
         tool_ctx = ToolContext(
             config=config,
+            persona_manage_fn=lambda args: _persona_manage_for_event(event, args),
             recent_messages=_tool_recent_messages,
             describe_images_fn=_describe_images_for_tool,
             memory_store=memory_store,
@@ -17464,13 +17581,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             except Exception:
                 pass
         # 注:梗图由 catty_meme_query 下载并写入 tool_ctx.pending_image_segments,主回复后由发送链路带外送出。
-        _save_assistant_training_sample(
-            event,
-            incoming,
-            messages,
-            _strip_inline_image_markers(_sanitize_reply_text_for_output(reply)),
-            emoji_query=emoji_query,
-        )
         # 主人 2026-05-28: NSFW 模式 (走 spark 路径) 不发表情 — 沉浸感优先,
         # AI 抽的 emoji_query 也丢掉, _should_auto_emoji_reply 也跳过.
         _nsfw_no_emoji = bool(_prefer_spark)
@@ -17499,21 +17609,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
-        if chunks:
-            history_text = _strip_inline_image_placeholders(
-                restore_latex_placeholders("\n".join(chunks), latex_sources)
-            )
-            # 主人 2026-10-25: 历史用 marker 连接多条气泡, 让模型下一轮能看到自己写过的标记
-            history_prompt_text = (
-                _strip_inline_image_placeholders(
-                    restore_latex_placeholders(REPLY_SPLIT_MARKER.join(chunks), latex_sources)
-                )
-                if len(chunks) > 1
-                else history_text
-            )
-        else:
-            history_text = _strip_inline_image_markers(reply)
-            history_prompt_text = history_text
         # 主人 2026-05-28 cache 关键修复: 之前 _append_history 存的 user_content 是纯 text
         # (incoming.history_content), 但 _build_messages 内部把 [DYNAMIC_CONTEXT] inline
         # 到 current user msg content 后才发给 Anthropic. 导致:
@@ -17553,9 +17648,43 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             )
         except Exception:  # noqa: BLE001
             pass
-        _append_history(history_key, _enriched_user_content_for_history, history_prompt_text)
-        if special_care_context and chunks:
-            memory_store.record_special_care_reply_sent(event, history_text)
+        from .reply_delivery import ReplyDeliveryState
+
+        _delivery_state = ReplyDeliveryState()
+
+        def _commit_sent_reply_history() -> None:
+            # Also runs on finish(), cancellation and partial failure.
+            delivered = _delivery_state.delivered_texts()
+            logger.info(f"reply delivery receipts: {_delivery_state.status_counts()}")
+            if not delivered:
+                return
+            delivered_prompt = REPLY_SPLIT_MARKER.join(delivered)
+            try:
+                _append_history(history_key, _enriched_user_content_for_history, delivered_prompt)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"delivered reply history persistence failed: {type(exc).__name__}: {exc}")
+            try:
+                if special_care_context:
+                    memory_store.record_special_care_reply_sent(event, "\n".join(delivered))
+                _save_assistant_training_sample(
+                    event, incoming, messages, delivered_prompt, emoji_query=emoji_query,
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"delivered reply sidecar failed: {type(exc).__name__}: {exc}")
+
+        _lock_stack.callback(_commit_sent_reply_history)
+
+        async def _send_reply_message(message: Message, *, text: str) -> None:
+            await _delivery_state.send(matcher.send, message, history_text=text)
+            try:
+                _remember_bot_reply_for_event(
+                    event, text,
+                    open_continuation=not bool(state.get("catty_session_closing")),
+                    fresh_mention=fresh_mention,
+                )
+                _mark_consumed_reply_source_if_sent(event, state)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"delivered reply side-effect failed: {type(exc).__name__}: {exc}")
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         quote_pending = _should_quote_chat_reply(
@@ -17591,24 +17720,20 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _nsfw_img_task = None
 
         for chunk in chunks[:-1]:
-            _remember_bot_reply_for_event(
-                event,
-                _chunk_to_history(chunk),
-                update_continuation=False,
-            )
             # NapCat → QQ 网关偶发 retcode=1200 "网络连接异常",原本裸 send
             # 抛 ActionFailed 让整轮 matcher 死掉,后面 nsfw_image_segments 里的
             # imagegen 图也跟着不发了(主人观察到的"画图卡住没下文")。这里 catch
             # 让前段失败不影响后段 + 图片发送。
             try:
-                await matcher.send(
+                await _send_reply_message(
                     _compose_reply_message(
                         event,
                         text=chunk,
                         quote=quote_pending,
                         latex_sources=latex_sources,
                         inline_image_urls=inline_image_urls,
-                    )
+                    ),
+                    text=_chunk_to_history(chunk),
                 )
             except OnebotActionFailed as exc:
                 logger.warning(
@@ -17618,29 +17743,29 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 logger.warning(
                     f"chunk send (pre-tail) network timeout, continue: {exc}"
                 )
-            quote_pending = False
-            _mark_consumed_reply_source_if_sent(event, state)
+            else:
+                quote_pending = False
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
         if nsfw_image_segments:
             if chunks and not _chunks_last_already_sent:
-                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]), open_continuation=not bool(state.get("catty_session_closing")), fresh_mention=fresh_mention)
                 try:
-                    await matcher.send(
+                    await _send_reply_message(
                         _compose_reply_message(
                             event,
                             text=chunks[-1],
                             quote=quote_pending,
                             latex_sources=latex_sources,
                             inline_image_urls=inline_image_urls,
-                        )
+                        ),
+                        text=_chunk_to_history(chunks[-1]),
                     )
-                except OnebotActionFailed as exc:
+                except (OnebotActionFailed, OnebotNetworkError) as exc:
                     logger.warning(f"NSFW caption send failed (napcat timeout?): {exc}")
-                quote_pending = False
+                else:
+                    quote_pending = False
                 if delay_seconds:
                     await asyncio.sleep(delay_seconds)
-            _mark_consumed_reply_source_if_sent(event, state)
             sent_count = 0
             failed_count = 0
             retry_count = 0
@@ -17652,7 +17777,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 所以 ActionFailed 不 retry。NetworkError 是 HTTP 层 napcat 都没碰到,可以安全 retry 1 次。
                 for attempt in range(2):
                     try:
-                        await matcher.send(Message(seg))
+                        await _send_reply_message(Message(seg), text="[发送图片]")
                         sent = True
                         if attempt > 0:
                             retry_count += 1
@@ -17690,18 +17815,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 全部都没送出去——大概率是 QQ 服务器对 NSFW 内容的反垃圾审核拦截了
                 try:
                     reply_context = _persona_reply_context_for_event(event)
-                    await matcher.send(Message(
-                        reply_context.render(reply_context.catalog.image_send_failure_reply)
-                    ))
-                except OnebotActionFailed:
+                    failure_reply = reply_context.render(reply_context.catalog.image_send_failure_reply)
+                    await _send_reply_message(Message(failure_reply), text=failure_reply)
+                except (OnebotActionFailed, OnebotNetworkError):
                     pass
             await matcher.finish()
         if emoji_entry:
             if chunks:
-                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]), open_continuation=not bool(state.get("catty_session_closing")), fresh_mention=fresh_mention)
                 if config.catty_reply_mix_emoji_with_text:
-                    _mark_consumed_reply_source_if_sent(event, state)
-                    await matcher.finish(
+                    await _send_reply_message(
                         _compose_reply_message(
                             event,
                             text=chunks[-1],
@@ -17709,32 +17831,29 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             quote=quote_pending,
                             latex_sources=latex_sources,
                             inline_image_urls=inline_image_urls,
-                        )
+                        ),
+                        text=_chunk_to_history(chunks[-1]),
                     )
-                await matcher.send(
+                    await matcher.finish()
+                await _send_reply_message(
                     _compose_reply_message(
                         event,
                         text=chunks[-1],
                         quote=quote_pending,
                         latex_sources=latex_sources,
                         inline_image_urls=inline_image_urls,
-                    )
+                    ),
+                    text=_chunk_to_history(chunks[-1]),
                 )
                 quote_pending = False
-                _mark_consumed_reply_source_if_sent(event, state)
                 if delay_seconds:
                     await asyncio.sleep(delay_seconds)
-            else:
-                emoji_history = str(emoji_entry.meaning or emoji_entry.path.stem).strip()
-                _remember_bot_reply_for_event(
-                    event,
-                    f"[发送表情包: {emoji_history or '表情'}]",
-                    open_continuation=not bool(state.get("catty_session_closing")),
-                    fresh_mention=fresh_mention,
-                )
-                _mark_consumed_reply_source_if_sent(event, state)
-            await matcher.finish(_compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending))
-        _mark_consumed_reply_source_if_sent(event, state)
+            emoji_history = str(emoji_entry.meaning or emoji_entry.path.stem).strip()
+            await _send_reply_message(
+                _compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending),
+                text=f"[发送表情包: {emoji_history or '表情'}]",
+            )
+            await matcher.finish()
         if chunks:
             final_message = chunks[-1]
         else:
@@ -17742,20 +17861,20 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             final_message = _empty_reply_context.render(
                 _empty_reply_context.catalog.no_reply_reply_fallback,
             )
-        _remember_bot_reply_for_event(event, _chunk_to_history(final_message) if chunks else final_message, open_continuation=not bool(state.get("catty_session_closing")), fresh_mention=fresh_mention)
         # S6 (主人 2026-05-29): 蒸馏已上移到 openai_client 回复入口统一处理
         # (set_current_distill_context 在 handle_chat 入口设好上下文, chat_completion /
         # _with_tools / _instant / _codex_instant 拿到 DeepSeek 回复时自动蒸馏到 L3).
         # 这里不再单点触发 — 封装层一处覆盖主链路所有 emit 分支 + NSFW spark + catnify 透传,
         # 且只采 DeepSeek 真正生成的回复 (CPU 自产的 L1/L2/L3 直答不会被蒸回去, 杜绝自循环).
-        await matcher.send(
+        await _send_reply_message(
             _compose_reply_message(
                 event,
                 text=final_message,
                 quote=quote_pending,
                 latex_sources=latex_sources,
                 inline_image_urls=inline_image_urls,
-            )
+            ),
+            text=_chunk_to_history(final_message) if chunks else final_message,
         )
         await matcher.finish()
 
