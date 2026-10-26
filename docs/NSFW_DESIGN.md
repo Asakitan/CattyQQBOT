@@ -354,7 +354,7 @@ phase/场景提示词全是猫耳/尾巴/喵/主人，机机越聊越像笨猫�
   `test_fadianji_nsfw_split_bubbles` 4/4、`test_fadianji_style_critic` 41/41、py_compile
   exit0、plugin-load-ok。
 
-### 12.12 Prompt 一致性审计修复（2026-10-25 十三修，未部署）
+### 12.12 Prompt 一致性审计修复（2026-10-25 十三修，已部署）
 
 六个只读 review 分片扫了 persona / prompt_manager / `__init__` 常量 / tool schema / config /
 retired-term，逐条核对后修了这些「代码自相矛盾」项（不动人格口吻）：

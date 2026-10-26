@@ -79,4 +79,4 @@ stderr 合并至 stdout。读取器持续 drain 管道，不落盘完整 stdout�
 
 兼容测试在 `tests/test_code_sandbox.py`；其中 `SandboxRunTests.test_read_inside_work_is_allowed` 已改用显式输入。不要为了本次验证执行现有 `test_project_config_is_not_readable`（它引用真实项目配置）。
 
-2026-10-26 本地验证：兼容沙箱测试 14 项、隔离与产物测试 22 项全部通过；真实配置读取负例未执行。首次并发测试发现的 Windows launcher 发布冲突已修复并复测通过。整体离线回归 465 项、0 失败、0 错误、9 项原条件跳过；未部署。
+2026-10-26 本地验证：兼容沙箱测试 14 项、隔离与产物测试 22 项全部通过；真实配置读取负例未执行。首次并发测试发现的 Windows launcher 发布冲突已修复并复测通过。整体离线回归 465 项、0 失败、0 错误、9 项原条件跳过；已随 `202971c` 部署。
