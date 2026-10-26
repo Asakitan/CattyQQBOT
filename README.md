@@ -440,7 +440,7 @@ Owner 本身（即 `qq.owner_qq` 配置的 QQ）积分恒为 `OWNER_INFINITY_POI
 | `game_context.star_resonance_group_ids` / `strinova_group_ids` | `[]` / `[]` | 游戏主题群 |
 | `emoji.reply_probability` | `0.85` | AI 未选表情时自动补图概率 |
 | `emoji.interest_threshold` / `save_interest_threshold` | `60` / `85` | 识图入库阈值 |
-| `web_search.cooldown_seconds` / `engines` | `600` / `["google","bing"]` | 联网搜索冷却 / 引擎 |
+| `web_search.engines` | `["google","bing"]` | 联网搜索引擎 |
 | `proactive.max_daily_per_group` / `min_interval_minutes` | `5` / `120` | 主动冒泡上限 / 最小间隔 |
 | `ollama.enabled` / `install_dir` / `models_dir` | `false` / `tools/ollama` / `models/ollama` | 项目内 Ollama |
 | `local_critic.enabled` / `mode` | `false` / `reply_gate_only` | 本地小模型 reply gate |

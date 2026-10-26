@@ -214,8 +214,7 @@ _WEB_SEARCH_SCHEMA: dict[str, Any] = {
             "→ **必走 catty_image_search**,不是搜文字。用 web_search 搜『作者』两字只能找到百科/晋江/阅文,完全无用。"
             "(b) 网络流行语/ACG 词条/二次元角色梗 → **走 catty_meme_explain**(萌娘百科)。"
             "(c) 当前/近期热搜热榜 → **走 catty_hot_trends**。"
-            "\n\n每个 scope+用户有 60s cooldown(主人/特别关心用户豁免)。"
-            "返回 results 数组(title/url/snippet);AI 拿到后基于结果生成最终回复,"
+            "\n\n返回 results 数组(title/url/snippet);AI 拿到后基于结果生成最终回复,"
             "禁止编造不存在的链接,禁止把 marker 文本贴出来。"
         ),
         "parameters": {
@@ -2004,9 +2003,6 @@ class _TTLCache:
 
 _recall_cache = _TTLCache()
 _profile_cache = _TTLCache()
-# 联网搜索按 scope(group/private + user) 做 cooldown,主人/特别关心用户豁免。
-# 沿用原 __init__.py 的 _web_search_cooldowns 行为,只是搬到 tools 模块。
-_web_search_cooldowns: dict[str, float] = {}
 # NSFW 仅在私聊里能调,按 user_id 做 cooldown。
 _nsfw_search_cooldowns: dict[str, float] = {}
 # 反向搜图按 user_id 做 cooldown(主人/特别关心豁免)。
@@ -2750,21 +2746,6 @@ async def _exec_web_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
         return {"error": "query 不能为空"}
     if not getattr(ctx.config, "catty_web_search_enabled", False):
         return {"error": "web_search 已被配置禁用"}
-
-    # 主人/特别关心用户豁免 cooldown(沿用原 _web_search_exempt 语义)
-    is_exempt = bool(ctx.configured_title.strip())
-    cd_seconds = float(getattr(ctx.config, "catty_web_search_cooldown_seconds", 600.0) or 0.0)
-    if not is_exempt and cd_seconds > 0 and ctx.event is not None:
-        scope_id = ctx.group_id or ctx.user_id or "anonymous"
-        cd_key = f"{scope_id}:{ctx.user_id}"
-        now = time.monotonic()
-        last = _web_search_cooldowns.get(cd_key, 0.0)
-        remaining = max(last + cd_seconds - now, 0.0)
-        if remaining > 0:
-            return {
-                "error": f"web_search 冷却剩 {int(remaining)}s,请基于已有知识回答(每 scope+用户 60s 一次)。"
-            }
-        _web_search_cooldowns[cd_key] = now
 
     try:
         results = await search_web(ctx.config, query[:160])
@@ -6268,7 +6249,7 @@ _NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
         "Google/Bing 联网搜索最新信息。只在用户询问新闻、版本、价格、教程、特定事实，"
         "明确要求搜索，或模型知识可能过期时调用。图片出处用 catty_image_search，"
         "网络梗和 ACG 词条用 catty_meme_explain，近期热搜用 catty_hot_trends。"
-        "每个 scope+用户有 cooldown；返回 results，基于结果生成回复，不得编造链接或输出 marker 文本。",
+        "返回 results，基于结果生成回复，不得编造链接或输出 marker 文本。",
         None,
     ),
     "catty_nsfw_search": (

@@ -32,7 +32,6 @@ from .features import (
     extract_web_search_query,
     format_duration_cn,
     is_turtle_soup_request,
-    search_cooldown_key,
     turtle_soup_cooldown_key,
     turtle_soup_remaining,
 )
@@ -3073,7 +3072,6 @@ _recent_conversation_seq: DefaultDict[str, int] = defaultdict(int)
 _bot_reply_continuations: dict[str, BotReplyContinuationState] = {}
 _continuation_updated_turn_ids: "OrderedDict[str, float]" = OrderedDict()
 _CONTINUATION_UPDATED_TURN_MAX = 4096
-_web_search_cooldowns: dict[str, float] = {}
 WEB_SEARCH_REQUEST_PREFIX = "[[CATTY_WEB_SEARCH:"
 WEB_SEARCH_REQUEST_SUFFIX = "]]"
 _WEB_SEARCH_REQUEST_RE = re.compile(r"\[\[CATTY_WEB_SEARCH:\s*(.*?)\]\]", re.DOTALL)
@@ -16089,15 +16087,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         if web_search_query and config.catty_web_search_enabled and not bool(
             getattr(config, "catty_tools_full_exposure", True)
         ):
-            search_key = search_cooldown_key(event.user_id)
-            if not _web_search_exempt(event):
-                now = time.monotonic()
-                search_cooldown = max(config.catty_web_search_cooldown_seconds, 0)
-                last_search = _web_search_cooldowns.get(search_key, 0.0)
-                remaining = max(last_search + search_cooldown - now, 0.0)
-                if remaining > 0:
-                    await matcher.finish(Message(_persona_search_cooldown_message(event, remaining)))
-                _web_search_cooldowns[search_key] = now
             web_search_context = await _build_web_search_context(
                 web_search_query,
                 reply_context,

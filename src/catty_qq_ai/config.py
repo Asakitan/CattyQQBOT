@@ -367,7 +367,6 @@ class Config(BaseModel):
     catty_local_training_collect_assistant_samples: bool = False
     catty_local_training_assistant_samples_path: str = "training/assistant_reply_samples.jsonl"
     catty_web_search_enabled: bool = True
-    catty_web_search_cooldown_seconds: int = 60
     catty_web_search_max_results: int = 5
     catty_web_search_request_timeout: float | None = 10.0
     catty_web_search_engines: list[str] = Field(default_factory=lambda: ["google", "bing"])
@@ -1152,7 +1151,6 @@ class Config(BaseModel):
         "catty_local_critic_reply_gate_context_chars",
         "catty_local_critic_warmup_interval_seconds",
         "catty_local_critic_warmup_request_timeout",
-        "catty_web_search_cooldown_seconds",
         "catty_web_search_max_results",
         "catty_web_search_request_timeout",
         "catty_nsfw_search_max_results",

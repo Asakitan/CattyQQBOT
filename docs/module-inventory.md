@@ -18,11 +18,14 @@
 | `persona_admin.py` / `ADMIN_COMMANDS.md` | 导入、生成、自定义指令与手册 → `docs/persona-generation.md` | 已部署 |
 | `tools.py` / `request_intent.py` / `catty_sim_chat.py` | 上下文意图、可选文件能力，auto 工具选择 → `docs/tool-contracts.md` | 已部署 |
 | `tests/test_reply_queue_retention.py` / `test_request_intent.py` / `test_openai_client.py` / `test_reply_deadline.py` / `test_persona_runtime.py` | 排队准入、工具提示、预算与恢复合同 → `docs/session-log/session-04.md` | 已部署，双端一致 |
+| `tools.py` / `__init__.py` / `features.py` / `config.py` / `catty_config_loader.py` / `config.example.json` | 移除联网搜索冷却、配置项与死辅助函数 → `docs/session-log/session-05.md` | 已部署，双端一致 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-27 | 移除 `catty_web_search` 与回切快路径的联网搜索冷却，删除配置项和死辅助函数；其它限流保持 | 800 项中 799 通过、1 项无关浮点断言失败；py_compile 退出0 |
+| 2026-10-27 | push_zip 推送 11 文件（4 源码、4 根配置/文档、3 文档）；远端 `config.json` 未改 | 11 文件双端 SHA-256 一致；远端 py_compile 退出0；六组测试 OK；01:13:19 重启、01:13:27 OneBot 重连 |
 | 2026-10-26 | 完成工具与提示词一致性修复；删除失效配置，保留人格与 NSFW 文案；未部署 | 465 项离线回归，326 文件语法通过 |
 | 2026-10-26 | 完成 harness v2、来源诊断、作用域、教程与 CLI；保留生产预算和人格 | 622 项离线回归；合成优先级与成本基准通过 |
 | 2026-10-26 | JSON 人格、聊天生成保存/切换、指令绑定、上下文自主决策；管理员手册与示例同步 | 782 项通过；343 文件语法与保持性检查通过 |

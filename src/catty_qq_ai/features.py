@@ -123,7 +123,3 @@ def choose_turtle_soup(key: str, persona_rule_line: str | None = None) -> str:
         f"题面：{soup['question']}\n"
         f"{rule_line}"
     )
-
-
-def search_cooldown_key(user_id: object) -> str:
-    return f"user:{user_id}"

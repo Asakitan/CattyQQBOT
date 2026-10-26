@@ -956,7 +956,6 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
 
     web_search = _section(data, "web_search")
     _set_env("CATTY_WEB_SEARCH_ENABLED", web_search.get("enabled"))
-    _set_env("CATTY_WEB_SEARCH_COOLDOWN_SECONDS", web_search.get("cooldown_seconds"))
     _set_env("CATTY_WEB_SEARCH_MAX_RESULTS", web_search.get("max_results"))
     _set_env("CATTY_WEB_SEARCH_REQUEST_TIMEOUT", web_search.get("request_timeout"))
     _set_env("CATTY_WEB_SEARCH_ENGINES", web_search.get("engines"), json_value=True)

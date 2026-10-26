@@ -1,5 +1,15 @@
 # Catty 当前状态
 
+## 2026-10-27 · 移除联网搜索冷却
+
+- 状态：已 push_zip 部署到 `D:/CattyQQAI`，11 个文件双端 SHA-256 逐个一致。
+- `catty_web_search` 工具不再按 scope+用户限流，删除 `_exec_web_search` 的冷却门与 `tools._web_search_cooldowns`；工具描述同步去掉 60s cooldown 说明。
+- 回切模式（`catty_tools_full_exposure=false`）的自动搜索也不再拦截消息；删除 `__init__._web_search_cooldowns` 与 `features.search_cooldown_key`。
+- 移除 `Config.catty_web_search_cooldown_seconds`、`catty_config_loader` 的同名 env 映射及 `config.example.json` 的 `web_search.cooldown_seconds`；旧 `config.json` 残留键不再被读取。
+- 未改其它限流：NSFW 搜索、反向搜图、热搜、梗百科、生图与 `auto_fetch` 冷却保持原样。
+- 验收：py_compile 退出0、示例 JSON 有效；51 模块 800 项中 799 通过、1 项与本次无关的浮点断言失败（`test_persona_admin.test_repair_shares_one_total_deadline`，`0.05000000000291038 > 0.05`），0 错误、9 跳过。记录见 [session-05](docs/session-log/session-05.md)。
+- 远端 Python 3.14.5：py_compile 退出0；`test_config*` 30、`test_persona_reply_fallbacks` 10、`test_persona_memory_isolation` 22、`test_harness_prompt` 20、`test_prompt_compressor` 36、`test_auto_web_fetch` 20 全 OK；`test_tool_*` 76 项有 6 项远端预存环境失败（8.3 短名临时路径、缺 python-docx/openpyxl/reportlab）。守护进程 01:13:19 重启、01:13:26 加载插件、01:13:27 OneBot 重连。
+
 ## 2026-10-26 · 排队消息与文件交付提示
 
 - 状态：已 push_zip 部署到 `D:/CattyQQAI` 并完成远端验证。
