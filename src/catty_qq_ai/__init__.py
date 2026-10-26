@@ -10255,6 +10255,7 @@ async def _main_reply_with_deadline(
         reset_current_reasoning_effort,
         set_current_reasoning_effort,
     )
+    from .request_intent import append_context_request_hint
 
     def _num(name: str, fallback: float) -> float:
         try:
@@ -10278,9 +10279,13 @@ async def _main_reply_with_deadline(
         token = set_current_reasoning_effort("low" if degraded else None)
         started = time.monotonic()
         try:
+            attempt_messages = messages
+            if degraded:
+                attempt_messages = list(reply_state.recovery_messages() or messages)
+                append_context_request_hint(attempt_messages)
             call = chat_completion_with_tools(
                 config,
-                (reply_state.recovery_messages() or messages) if degraded else messages,
+                attempt_messages,
                 tools=None if degraded else tools,
                 tool_executor=None if degraded else tool_executor,
                 max_rounds=max_rounds,
@@ -15782,13 +15787,22 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             float(getattr(config, "catty_reply_queue_max_wait_seconds", 25.0) or 0.0),
             0.0,
         )
+        queue_is_direct = isinstance(event, PrivateMessageEvent) or bool(
+            incoming.directly_requested or incoming.mentioned or incoming.replied_to_self
+        )
         if queue_was_busy and queue_abandon_threshold > 0 and queue_wait_seconds >= queue_abandon_threshold:
+            # 定向请求不能因为上一轮持锁较久而被当成过时的群聊插话。
+            if not queue_is_direct:
+                logger.info(
+                    f"Abandoning queued reply (waited {queue_wait_seconds:.1f}s >= "
+                    f"{queue_abandon_threshold:.1f}s threshold): user={event.user_id} "
+                    f"scope={queue_key} text={incoming.text[:60]!r}"
+                )
+                await matcher.finish()
             logger.info(
-                f"Abandoning queued reply (waited {queue_wait_seconds:.1f}s >= "
-                f"{queue_abandon_threshold:.1f}s threshold): user={event.user_id} "
-                f"scope={queue_key} text={incoming.text[:60]!r}"
+                f"Keeping queued direct request: wait={queue_wait_seconds:.1f}s "
+                f"threshold={queue_abandon_threshold:.1f}s user={event.user_id} scope={queue_key}"
             )
-            await matcher.finish()
         logger.info(
             f"turn stage: admission +{time.monotonic() - _turn_started_at:.2f}s "
             f"queue_wait={queue_wait_seconds:.2f}s busy={queue_was_busy}"
@@ -16573,7 +16587,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         from .harness_prompt import append_harness_agent_hint
         append_harness_agent_hint(messages, () if _prefer_spark else _allowed_tool_names)
         from .request_intent import append_context_request_hint
-        append_context_request_hint(messages)
+        append_context_request_hint(messages, () if _prefer_spark else _allowed_tool_names)
         if _prefer_spark and placeholder_task is not None and not placeholder_task.done():
             placeholder_task.cancel()
             placeholder_task = None

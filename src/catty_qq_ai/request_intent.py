@@ -26,12 +26,42 @@ CONTEXT_REQUEST_INTENT_PROMPT = (
 )
 
 
-def append_context_request_hint(messages: list[dict]) -> None:
+def build_file_delivery_hint(available_tools=()) -> str:
+    names = set(available_tools)
+    if not names.intersection({"catty_write_file", "catty_python_run"}):
+        return ""
+    lines = [
+        "【本轮文件交付能力】",
+        "完整代码、脚本、文档、报告、表格或清单也可以作为文件交付，不仅能贴在聊天正文里。"
+        "这些是可选能力，由你结合完整上下文和用户期望的交付形式自主选择；"
+        "短示例、解释或用户只要正文时，仍可直接回复文字。",
+    ]
+    if "catty_write_file" in names:
+        lines.append(
+            "本轮提供 catty_write_file：可把已经写好的正文或源码保存为文件，"
+            "如 .txt/.md/.json/.py/.c/.h，也支持生成真实 DOCX/XLSX/PDF；"
+            "只交付源码或文档无需运行代码。"
+        )
+    if "catty_python_run" in names:
+        lines.append(
+            "本轮提供 catty_python_run：需要计算、处理数据或用程序制作产物时，"
+            "可以在沙箱内运行 Python，并交付该次生成的文件。"
+        )
+    lines.append(
+        "成功暂存的文件由系统在本轮文字回复结束后自动回传当前会话，"
+        "群聊回本群，私聊回对方；通常正文补充用途或使用方法即可，不必重复整份内容。"
+        "staged/排队表示已生成待交付，不是已经发送；保存源码也不等于编译或运行通过。"
+        "以实际回执说明结果，不虚构文件、下载链接或验证记录。"
+    )
+    return "\n".join(lines)
+
+
+def append_context_request_hint(messages: list[dict], available_tools=()) -> None:
     """Insert/refresh one system guide after assembly and before an assistant prefill.
 
     Call after the cache boundary has been assembled. This deterministic helper
     only changes the supplied list: other messages retain identity and content.
-    It is independent of persona, tool exposure and harness evidence availability.
+    The base guide is always present; file capabilities reflect actual tool names.
     """
     messages[:] = [
         message for message in messages
@@ -47,4 +77,6 @@ def append_context_request_hint(messages: list[dict]) -> None:
     index = len(messages)
     if messages and messages[-1].get("role") == "assistant" and not messages[-1].get("tool_calls"):
         index -= 1
-    messages.insert(index, {"role": "system", "content": CONTEXT_REQUEST_INTENT_PROMPT})
+    file_hint = build_file_delivery_hint(available_tools)
+    content = CONTEXT_REQUEST_INTENT_PROMPT + ("\n\n" + file_hint if file_hint else "")
+    messages.insert(index, {"role": "system", "content": content})

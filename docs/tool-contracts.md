@@ -1,6 +1,6 @@
 # 工具合同与本地修复
 
-本次修改已于 2026-10-26 部署到生产（归档提交 `202971c`）。内置人格设定、NSFW 规则、积分与既有工具权限保持不变；新增人格管理工具仅主人可用。失效系统提示配置已删除；回复发送回执与沙箱执行器均已接入，见相关模块文档。
+工具与人格基线已于2026-10-26部署到生产（归档提交 `202971c`）；本轮可选文件提示修复已于同日 push_zip 上线并完成远端复跑。内置人格设定、NSFW规则、积分与既有工具权限保持不变；人格管理工具仅主人可用。失效系统提示配置已删除；回复发送回执与沙箱执行器均已接入，见相关模块文档。
 
 ## 文件生成与暂存
 
@@ -91,19 +91,24 @@
 
 `src/catty_qq_ai/request_intent.py` 是无插件、模型、网络、磁盘 I/O 依赖的纯模块。`CONTEXT_REQUEST_INTENT_PROMPT` 是完整教程的单一来源，标题为 `【上下文请求理解】`；`tools_system_hint` 仅增加一条短指针，原 harness v2 指针和教程保持独立。
 
-- `append_context_request_hint(messages: list[dict]) -> None` 原地插入/刷新一个 system 教程，不要求启用 harness 或存在证据包；无工具和空消息列表同样适用。
+- `append_context_request_hint(messages: list[dict], available_tools=()) -> None` 原地插入/刷新一个 system 教程，不要求启用 harness 或存在证据包；无工具和空消息列表同样适用，旧单参数调用保持基础意图说明。
 - 调用方在缓存边界与消息组装完成后调用；教程加在消息末尾，如果末条 assistant 没有 `tool_calls`，则插在预填之前。只移除以自有标题加换行开头（或恰为标题）的 system 消息；其他消息字典、内容、工具回执、harness 教程保持不变。重复调用幂等。
 - 教程合并当前文字、最近历史、引用、补充/纠正及成功回执，区分实际执行、直接回复/讨论、修改和继续；保留目标、范围、格式、语气及仍有效的要求。
 - 举例、讨论或临时扮演不自动要求永久保存、切换或修改设置；“就换刚才那个”“把第二段改短”“继续”从上下文定位，不要求重述已确定参数。
 - 成功动作不重复执行；补充/纠正只执行尚未满足的变更，保存不等于切换、暂存不等于交付。只在缺少实质影响结果的细节或无法消解的歧义时追问，不要求展示内部推理。
 - 生产与模拟器已接入教程、非主人 schema 过滤及 `tool_choice=auto`；取消了按末句关键词强制绘图。入口负责这些操作，helper 与 executor 本身不改变 NSFW 文本。
 
-新增离线测试：`tests/test_persona_tool.py` 20 项、`tests/test_request_intent.py` 13 项全部通过，覆盖 full/lazy/executor 字段及注册表一致、主人优先校验、未注入回调、精确参数与回执、目标缺失、上下文承接、无第二次模型调用、教程语义、幂等/预填与原消息保留。测试使用替身回调及包壳加载，避免运行插件初始化。
+- `build_file_delivery_hint(available_tools=()) -> str` 仅在真实 schema 名单含 `catty_write_file` 或 `catty_python_run` 时生成 `【本轮文件交付能力】`；未知名称、顺序和重复不影响结果。只开放安装工具不算可生成文件。
+- 文件段说明完整代码、源码、文档、表格可选择交付文件，短示例或正文请求仍可文字回答；不新增意图关键词路由，不设置必选工具。`catty_write_file` 可直接保存内容，无需执行代码；Python能力只在实际开放时介绍。
+- 成功暂存后由系统按原会话后台回传；暂存不是已发送，保存源码不代表编译/运行通过。提示要求依据真实回执说明结果，不虚构文件或下载链接。
+- 生产与模拟器按 `_allowed_tool_names` 刷新提示；spark、模拟器纯文字fallback和deadline文字重试传空名单，撤下自有文件能力段。基础教程、原消息及assistant预填保持，不声称清除了所有静态工具说明。
 
-新增模块已加入固定离线清单；`E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 验收50个模块共782项，0失败、0错误、9项原条件跳过。回执为 `.vscode/handoff/persona-all-final.log`，PowerShell 使用 UTF-8 输出；未调用真实模型或QQ。
+离线测试：`tests/test_persona_tool.py` 20项、`tests/test_request_intent.py` 20项全部通过，覆盖字段与注册表一致、权限、精确回执、上下文承接、教程幂等/预填、实际能力过滤、非强制选择及沙箱提示冲突。测试使用替身回调及包壳加载，避免运行插件初始化。
+
+固定离线入口 `E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 验收51模块800项，0失败、0错误、9项原条件跳过。最新回执为 `.vscode/handoff/message-delivery-20261026/all-final.log`，PowerShell使用UTF-8输出；未调用真实模型或QQ。
 
 ## 验收口径与历史基线
 
-2026-10-26 本地工具与格式回归93项全部通过，包括并发写文件配额；格式依赖已在本地解释器可用。harness v2 阶段的固定离线清单为622项。加入人格存储、注册、命令、工具、上下文、运行时及热重载后，当前完整清单为782项；两个阶段均无失败/错误、9项原条件跳过。
+2026-10-26 本地工具与格式回归93项全部通过，包括并发写文件配额；格式依赖已在本地解释器可用。harness v2阶段清单为622项，人格阶段为782项；当前排队、预算与文件提示修复后的完整清单为800项。各阶段最终均无失败/错误、9项原条件跳过。
 
 模块名单：`tests.test_file_formats`、`tests.test_tool_audit_fixes`、`tests.test_tool_message_scan`、`tests.test_tool_contracts`、`tests.test_local_tool_contracts`、既有 `tests.test_file_delivery`，并保留工具注册表/dispatcher 回归。新增测试只使用临时目录和 mock：验证 OOXML 可读性、CSV 引号/前导零/文本公式、PDF 中文 CID 与分页、原子失败清理、线程写入、成功/失败沙箱入队、引用图独存/混合顺序及真实发送者召回，不调用外部模型、QQ 或网络。

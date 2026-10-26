@@ -594,8 +594,7 @@ class Config(BaseModel):
     catty_direct_address_reply_probability: float = 0.9
     catty_image_response_enabled: bool = True
     catty_image_vision_enabled: bool = True
-    # 同会话排队雪崩防护:消息在锁队列里等待超这个秒数就放弃当前消息,
-    # 避免视觉/AI 卡顿后积压消息一起爆出来。
+    # 仅让过期的非定向群聊插话退出队列，已准入的私聊/@/引用/续聊仍按序处理。
     catty_reply_queue_max_wait_seconds: float = 25.0
     catty_emoji_enabled: bool = True
     catty_emoji_dir: str = "emojis"

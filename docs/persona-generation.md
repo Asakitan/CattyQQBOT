@@ -40,4 +40,4 @@
 
 `tests/test_persona_admin.py` 使用真实 schema/validator 与异步模型替身，覆盖旧命令、多行 JSON、完整指令映射、未知子命令、上下文引用、配置副本、生成校验、围栏/宽容解析、一次修复、id 不匹配、共享时限、外部取消和公开主模型入口。测试不初始化 NoneBot、不访问模型或 QQ；不代表在线生成质量或生产切换验收。
 
-该模块31项全部通过；已纳入当前782项固定离线清单，完整结果见 [会话03](session-log/session-03.md)。
+该模块31项全部通过；人格阶段782项集成结果见 [会话03](session-log/session-03.md)，最新固定离线清单800项见 [会话04](session-log/session-04.md)。

@@ -29,7 +29,7 @@ MODULES = (
     "test_cognitive_runtime_integration", "test_qzone_harness_feed",
     "test_persona_store", "test_custom_personas", "test_persona_admin",
     "test_persona_tool", "test_request_intent", "test_persona_runtime",
-    "test_hot_reload",
+    "test_hot_reload", "test_reply_queue_retention",
 )
 
 _RUNNER = r'''

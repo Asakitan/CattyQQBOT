@@ -366,7 +366,7 @@ python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py 
 
 此入口按固定清单逐模块启动独立进程，避免测试替身污染；不执行历史在线评测，也排除尝试读取真实密钥配置的沙箱负例。可重复使用 `--module` 选择清单中的模块。
 
-2026-10-26 本地验收：782 项测试，0 失败、0 错误，9 项按原条件跳过。覆盖工具回执恢复、图片取消交付、发送状态、真实文件格式、沙箱归属、提示构建、配置、动态人格、上下文决策接线和证据预算；不等同于真实 QQ、模型服务或 Windows 打包集成测试。
+2026-10-26最新验收：51模块800项测试，0失败、0错误，9项按原条件跳过。覆盖工具回执、图片取消交付、发送状态、真实文件格式、沙箱归属、动态人格、证据预算，以及定向排队保留、长前缀与会话预算、可选文件交付提示；不等同于真实QQ、模型服务或Windows打包集成测试。排队/预算/文件提示修复已部署，双端关键文件哈希一致，见 [会话04](docs/session-log/session-04.md)。
 
 Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息，按优先级保留证据；Agent 按实际开放工具补查。CLI 的 `--production-defaults` 只对齐预算；`--compact-json --metadata-only` 可省略正文。接口见 [证据包](docs/harness-evidence.md)，合成检查入口为 `scripts/benchmark_harness.py`。
 

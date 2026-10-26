@@ -81,6 +81,7 @@ python scripts/fadianji_harness_cli.py --text "测试配置问题" --scope group
 - 使用不可变源快照，提交前校验完整前缀；等待模型期间的新增消息保留，头裁或同长度内容改动则放弃这次替换
 - 旧版 `history_turns=1` 不再因 `[-0:]` 把整段历史重复拼回，保留最新一轮
 - Native/OpenAI请求准备先隔离 messages/tools，清理动态块、缓存标记和工具排序不会污染调用方历史或共享schema；OpenAI复用这一次拷贝，移除分支内重复拷贝
+- 2026-10-26修复（已部署）：历史之前的前缀及工具schema单独核算，不再挤占64k会话软预算；允许历史额度仍受模型窗口减输出预留约束，按同一校准倍率估算。只裁请求中的完整历史轮次，不改持久化历史或本轮工具后缀；最新历史轮仍装不下时不保留。诊断增加 `prefix_input_tokens` / `effective_target_context_tokens`。这是请求完整性修复，不代表更低延迟。
 
 ```bash
 python scripts/benchmark_input_context.py --help
@@ -101,6 +102,8 @@ git diff --check
 
 新增回归用例覆盖冷/热会话、缺失元数据、部分写失败、同分与非有限路由分数、harness作用域和预算、长行续读、执行失败/取消、摘要并发及请求输入不变性。测试隔离实际函数并使用合成数据、临时目录与客户端替身，不启动真实QQ/模型服务。
 
+最新本地清单51模块800项，0失败、0错误、9跳过；344个Python文件语法通过。新增用例覆盖43.4秒排队的定向消息保留、长人格/工具前缀、模型硬窗口与输出预留、非单位校准倍率、可选文件提示与降级撤回。回执见 [会话04](session-log/session-04.md)，未宣称线上工具选择质量或消息零丢失。
+
 尚未改变的风险应独立处理：NLU history prime的重复计算与顺序契约、按下标维护的历史anchor在外部裁剪后的重置、L2磁盘缓存的模型身份失效条件、L3同条数内容变更的索引失效、源码里已有的少数YAML解析失败，以及普通长期记忆摘要等待期间的新corpus批次边界。本轮不把这些问题描述为已修复。
 
 ## 6. 2026-10-26 工具与回复交付修复
@@ -117,4 +120,4 @@ git diff --check
 
 可复验入口 `scripts/benchmark_harness.py` 默认只用合成数据；可通过 `--baseline-zip` 指定可信的本地开工源码快照。预算检查覆盖0、1、128、256、512、12000。实际 QQ、模型服务、在线意图判断质量不在此微基准内。
 
-Harness v2 阶段固定离线清单622项、332个Python文件语法通过；后续 JSON 人格与上下文决策集成后，当前清单为782项、0失败、0错误、9项原条件跳过，343个Python文件语法通过。已有5个人格/NSFW文件哈希及56个名称含NSFW的顶层赋值AST保持。接口详情见 [证据包](harness-evidence.md)、[配置映射](harness-config.md) 与 [预览入口](prompt-testing.md)；当前验收见 [会话03](session-log/session-03.md)。
+Harness v2阶段固定离线清单622项、332个Python文件语法通过；JSON人格与上下文决策阶段为782项、0失败、0错误、9项原条件跳过，343个Python文件语法通过。该阶段已有5个人格/NSFW文件哈希及56个名称含NSFW的顶层赋值AST保持。接口详情见 [证据包](harness-evidence.md)、[配置映射](harness-config.md) 与 [预览入口](prompt-testing.md)；阶段验收见 [会话03](session-log/session-03.md)，最新验收见§5与会话04。

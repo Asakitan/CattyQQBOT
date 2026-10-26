@@ -1714,7 +1714,18 @@ def _prepare_session_context_payload(
         if runtime_config is not None else 1_000_000
     )
     max_output_tokens = max(int(payload.get("max_tokens") or 0), 0)
-    effective_target = min(target_tokens, max(model_context_tokens - max_output_tokens, 0))
+    prefix_end = first_marked_index if first_marked_index is not None else next(
+        (index for index, message in enumerate(messages)
+         if isinstance(message, dict) and message.get("role") == "user"),
+        len(messages),
+    )
+    prefix_local = count_history_tokens(messages[:prefix_end]) + count_tokens(tools_text)
+    prefix_estimate = int(prefix_local * multiplier + 0.999999)
+    # 长人格前缀不能吃光会话软预算；前缀、历史、本轮与输出仍共用模型硬窗口。
+    effective_target = min(
+        target_tokens + prefix_estimate,
+        max(model_context_tokens - max_output_tokens, 0),
+    )
     non_history_estimate = int(non_history_local * multiplier + 0.999999)
     allowed_history_estimate = max(effective_target - non_history_estimate, 0)
     allowed_history_local = int(allowed_history_estimate / multiplier) if multiplier > 0 else 0
@@ -1723,6 +1734,9 @@ def _prepare_session_context_payload(
     emergency_trimmed = False
     if enabled and marked_history:
         retained_history = trim_history_to_token_budget(marked_history, allowed_history_local)
+        # 持久化裁剪器会保留超预算的末轮，请求期则必须服从实际剩余窗口。
+        if count_history_tokens(retained_history) > allowed_history_local:
+            retained_history = []
         emergency_trimmed = len(retained_history) != len(marked_history)
 
     if first_marked_index is not None:
@@ -1753,6 +1767,8 @@ def _prepare_session_context_payload(
             if isinstance(message, dict) and message.get("role") == "user"
         ),
         "non_history_input_tokens": non_history_estimate,
+        "prefix_input_tokens": prefix_estimate,
+        "effective_target_context_tokens": effective_target,
         "unavoidable_current_turn_tokens": int(current_turn_local * multiplier + 0.999999),
         "target_context_tokens": target_tokens,
         "trim_to_tokens": trim_to_tokens,

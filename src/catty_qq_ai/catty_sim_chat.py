@@ -613,6 +613,7 @@ async def _sim_chat_unlocked(
                     )
                     from .harness_prompt import append_harness_agent_hint
                     append_harness_agent_hint(messages, _allowed_tool_names)
+                    append_context_request_hint(messages, _allowed_tool_names)
                     _tool_choice: str | dict[str, object] = "auto"
                     # 构 ToolContext (sim 模式只需基础 3 字段, 其它走 default)
                     _ctx = ToolContext(
@@ -660,6 +661,7 @@ async def _sim_chat_unlocked(
                     )
                 except Exception as _wt_exc:
                     # tool-path 失败 fallback 到 plain chat_completion (兼容老 sim 测试)
+                    append_context_request_hint(messages)
                     reply_obj = await chat_completion(cfg, messages)
                     reply = f"[with_tools fallback: {type(_wt_exc).__name__}: {_wt_exc}] " + str(reply_obj or "")
                 else:
