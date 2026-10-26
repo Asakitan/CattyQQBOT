@@ -297,6 +297,38 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "timeline_enabled": True,
         "adaptive_prompt_enabled": True,
     },
+    "file_delivery": {
+        "enabled": True,
+        "dir": "data/file_outbox",
+        "ttl_hours": 24,
+        "cleanup_interval_seconds": 3600,
+        "max_chars": 200000,
+        "max_per_turn": 2,
+    },
+    "code_sandbox": {
+        "enabled": True,
+        "dir": "data/python_sandbox",
+        "allow_guests": False,
+        "timeout_seconds": 30,
+        "max_output_chars": 8000,
+        "max_code_chars": 60000,
+        "max_files": 5,
+        "max_file_bytes": 10000000,
+        "max_work_bytes": 50000000,
+        "ttl_hours": 24,
+        "cleanup_interval_seconds": 3600,
+        "max_packages": 5,
+        "pip_timeout_seconds": 120,
+        "pip_index_url": "https://pypi.org/simple",
+        "legacy_run_code_enabled": False,
+        "allowed_packages": [
+            "numpy", "pandas", "matplotlib", "pillow", "openpyxl",
+            "python-docx", "reportlab", "scipy", "sympy", "tabulate",
+            "pyyaml", "beautifulsoup4", "lxml", "xlsxwriter", "seaborn",
+            "plotly", "kaleido", "qrcode", "python-pptx", "pypdf",
+            "pdfplumber", "markdown", "jinja2", "python-dateutil", "pytz",
+        ],
+    },
     "nsfw_search": {
         "enabled": True,
         "max_results": 4,
@@ -860,6 +892,58 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_TOOLS_LAZY_SCHEMA_ENABLED", tools.get("tools_lazy_schema_enabled"))
     _set_env("CATTY_TOOLS_FULL_EXPOSURE", tools.get("tools_full_exposure"))
     _set_env("CATTY_SANDBOX_DIR", tools.get("sandbox_dir"))
+
+    file_delivery = _section(data, "file_delivery")
+    _set_env("CATTY_FILE_DELIVERY_ENABLED", file_delivery.get("enabled"))
+    file_delivery_dir = str(file_delivery.get("dir") or "").strip()
+    if file_delivery_dir:
+        resolved_file_delivery_dir = Path(file_delivery_dir).expanduser()
+        if not resolved_file_delivery_dir.is_absolute():
+            resolved_file_delivery_dir = base_dir / resolved_file_delivery_dir
+        _set_env("CATTY_FILE_DELIVERY_DIR", resolved_file_delivery_dir)
+    _set_env("CATTY_FILE_DELIVERY_TTL_HOURS", file_delivery.get("ttl_hours"))
+    _set_env(
+        "CATTY_FILE_DELIVERY_CLEANUP_INTERVAL_SECONDS",
+        file_delivery.get("cleanup_interval_seconds"),
+    )
+    _set_env("CATTY_FILE_DELIVERY_MAX_CHARS", file_delivery.get("max_chars"))
+    _set_env("CATTY_FILE_DELIVERY_MAX_PER_TURN", file_delivery.get("max_per_turn"))
+
+    code_sandbox = _section(data, "code_sandbox")
+    _set_env("CATTY_CODE_SANDBOX_ENABLED", code_sandbox.get("enabled"))
+    sandbox_dir = str(code_sandbox.get("dir") or "").strip()
+    if sandbox_dir:
+        resolved_sandbox_dir = Path(sandbox_dir).expanduser()
+        if not resolved_sandbox_dir.is_absolute():
+            resolved_sandbox_dir = base_dir / resolved_sandbox_dir
+        _set_env("CATTY_CODE_SANDBOX_DIR", resolved_sandbox_dir)
+    _set_env("CATTY_CODE_SANDBOX_ALLOW_GUESTS", code_sandbox.get("allow_guests"))
+    _set_env("CATTY_CODE_SANDBOX_TIMEOUT_SECONDS", code_sandbox.get("timeout_seconds"))
+    _set_env("CATTY_CODE_SANDBOX_MAX_OUTPUT_CHARS", code_sandbox.get("max_output_chars"))
+    _set_env("CATTY_CODE_SANDBOX_MAX_CODE_CHARS", code_sandbox.get("max_code_chars"))
+    _set_env("CATTY_CODE_SANDBOX_MAX_FILES", code_sandbox.get("max_files"))
+    _set_env("CATTY_CODE_SANDBOX_MAX_FILE_BYTES", code_sandbox.get("max_file_bytes"))
+    _set_env("CATTY_CODE_SANDBOX_MAX_WORK_BYTES", code_sandbox.get("max_work_bytes"))
+    _set_env("CATTY_CODE_SANDBOX_TTL_HOURS", code_sandbox.get("ttl_hours"))
+    _set_env(
+        "CATTY_CODE_SANDBOX_CLEANUP_INTERVAL_SECONDS",
+        code_sandbox.get("cleanup_interval_seconds"),
+    )
+    _set_env("CATTY_CODE_SANDBOX_MAX_PACKAGES", code_sandbox.get("max_packages"))
+    _set_env(
+        "CATTY_CODE_SANDBOX_PIP_TIMEOUT_SECONDS",
+        code_sandbox.get("pip_timeout_seconds"),
+    )
+    _set_env("CATTY_CODE_SANDBOX_PIP_INDEX_URL", code_sandbox.get("pip_index_url"))
+    _set_env(
+        "CATTY_CODE_SANDBOX_LEGACY_RUN_CODE_ENABLED",
+        code_sandbox.get("legacy_run_code_enabled"),
+    )
+    _set_env(
+        "CATTY_CODE_SANDBOX_ALLOWED_PACKAGES",
+        code_sandbox.get("allowed_packages"),
+        json_value=True,
+    )
 
     web_search = _section(data, "web_search")
     _set_env("CATTY_WEB_SEARCH_ENABLED", web_search.get("enabled"))

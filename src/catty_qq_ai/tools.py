@@ -308,6 +308,87 @@ _READ_FILE_SCHEMA: dict[str, Any] = {
 }
 
 
+_WRITE_FILE_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_write_file",
+        "description": (
+            "把一段文本写成 UTF-8 文件，并在本轮回复发完后自动发到当前会话"
+            "（群里发到本群，私聊发给对方）。需要交付长文档、报告、表格、JSON、"
+            "代码片段或整理好的清单时优先用它，不要把长文直接刷在聊天里。"
+            "每次只写一个文件；扩展名不限（.md/.csv/.json/.html/.py/.docx 等都可），"
+            "内容按 UTF-8 文本写入，省略文件名时自动生成。不要另发系统旁白；本轮"
+            "正常简洁回复一句，回复发完后文件自动发出。文件只暂存 24 小时，过期自动删除。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "type": "string",
+                    "description": "文件名，可带文本扩展名；省略时自动生成。",
+                },
+                "content": {
+                    "type": "string",
+                    "description": "文件正文（UTF-8 文本）。",
+                },
+                "format": {
+                    "type": "string",
+                    "description": "扩展名/格式（如 md/csv/json/html）；可省略。",
+                },
+            },
+            "required": ["content"],
+        },
+    },
+}
+
+
+_PYTHON_RUN_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_python_run",
+        "description": (
+            "在隔离沙箱里运行 Python 代码，返回 stdout/stderr 和本次生成的文件。"
+            "仅 bot 拥有者可用。沙箱只允许读写 data/python_sandbox 内的工作目录；"
+            "禁止读取用户目录/项目配置/密钥/聊天记录，禁止网络、subprocess、ctypes、"
+            "注册表或系统命令。需要第三方包先用 catty_python_install 装到沙箱。"
+            "代码生成的文件会在本轮回复发完后自动发到当前会话（最多几个）。"
+            "代码必须自包含；失败返回 ok=false，不要伪造结果。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "code": {"type": "string", "description": "要执行的 Python 源码。"},
+            },
+            "required": ["code"],
+        },
+    },
+}
+
+
+_PYTHON_INSTALL_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_python_install",
+        "description": (
+            "把 Python wheel 包装进隔离沙箱的 packages 目录，不修改系统 Python 环境。"
+            "仅 bot 拥有者可用。packages 传包名数组，可带 ==版本；只允许配置白名单内的包，"
+            "一次最多几个。只使用 --only-binary 装 wheel；装完后 catty_python_run 可直接 import。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "packages": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "包名/版本数组，例如 [\"numpy\", \"pandas==2.2.2\"]。",
+                },
+            },
+            "required": ["packages"],
+        },
+    },
+}
+
+
 _RUN_CODE_SCHEMA: dict[str, Any] = {
     "type": "function",
     "function": {
@@ -1135,8 +1216,84 @@ _STORY_ARC_CLEAR_SCHEMA: dict[str, Any] = {
 }
 
 
+_SCAN_MESSAGES_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_scan_messages",
+        "description": (
+            "检索当前会话最近的聊天消息(滚动缓冲),按关键词/发送者/是否带图筛选,"
+            "返回每条消息的文字、发送者、时间,以及命中消息里的图片引用。"
+            "用户说『刚才那张图/前面说的那个/谁发的图/聊天记录里翻一下』时先用它定位,"
+            "拿到 image_ref 后交给 catty_look_image 看图,或交给 catty_image_search 反查出处。"
+            "只覆盖最近约 80 条实时消息;更久远的长期记忆用 catty_recall,"
+            "单个用户的会话历史用 catty_recall_user_messages。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "关键词,空格/逗号分隔多个词做 AND 匹配;留空=不按文字筛。",
+                },
+                "has_image": {
+                    "type": "boolean",
+                    "description": "true=只看带图消息;不传或 false=不筛。",
+                },
+                "sender": {
+                    "type": "string",
+                    "description": "发送者昵称或 QQ 号的一部分,不区分大小写。",
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "最多返回几条,默认 10。",
+                    "minimum": 1,
+                    "maximum": 30,
+                },
+                "minutes": {
+                    "type": "number",
+                    "description": "只看最近多少分钟内的消息,默认 0=不限。",
+                    "minimum": 0,
+                },
+            },
+            "required": [],
+        },
+    },
+}
+
+
+_LOOK_IMAGE_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_look_image",
+        "description": (
+            "查看一张图片并取回文字描述(画面主体、可见文字、风格、细节)。"
+            "image_ref 三种写法:①catty_scan_messages 返回的 m<消息号>#<图序号>;"
+            "②图片 http(s) 直链;③纯数字=最近图片列表下标(0 最新)。"
+            "用户问『这张图里是什么/你看到了吗/图里写了什么』,或你需要先看清图才能回答时调用。"
+            "只返回描述,不会把图片发出去;反查作者/出处请用 catty_image_search。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "image_ref": {
+                    "type": "string",
+                    "description": "m<消息号>#<图序号> / http(s) 直链 / 最近图片下标。",
+                },
+                "question": {
+                    "type": "string",
+                    "description": "可选:想重点看什么,留空则做通用描述。",
+                },
+            },
+            "required": ["image_ref"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
+    "catty_scan_messages": _SCAN_MESSAGES_SCHEMA,
+    "catty_look_image": _LOOK_IMAGE_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
     "catty_mc_status": _MC_STATUS_SCHEMA,
     "catty_emoji": _EMOJI_SCHEMA,
@@ -1144,6 +1301,9 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_fetch_url": _FETCH_URL_SCHEMA,
     "catty_weather": _WEATHER_SCHEMA,
     "catty_read_file": _READ_FILE_SCHEMA,
+    "catty_write_file": _WRITE_FILE_SCHEMA,
+    "catty_python_run": _PYTHON_RUN_SCHEMA,
+    "catty_python_install": _PYTHON_INSTALL_SCHEMA,
     "catty_run_code": _RUN_CODE_SCHEMA,
     "catty_nsfw_search": _NSFW_SEARCH_SCHEMA,
     "catty_image_search": _IMAGE_SEARCH_SCHEMA,
@@ -1266,6 +1426,31 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
             "limit": {"type": "integer", "description": "行数"},
         },
         ["path"],
+    ),
+    "catty_write_file": _make_lazy_schema(
+        "catty_write_file", "写文本文件并自动发到当前会话（暂存1天）",
+        {
+            "filename": {"type": "string", "description": "文件名"},
+            "content": {"type": "string", "description": "正文"},
+            "format": {"type": "string", "description": "扩展名/格式"},
+        },
+        ["content"],
+    ),
+    "catty_python_run": _make_lazy_schema(
+        "catty_python_run", "在隔离沙箱运行 Python（仅拥有者）",
+        {"code": {"type": "string", "description": "Python 源码"}},
+        ["code"],
+    ),
+    "catty_python_install": _make_lazy_schema(
+        "catty_python_install", "装 Python wheel 到沙箱（仅拥有者）",
+        {
+            "packages": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "包名数组",
+            },
+        },
+        ["packages"],
     ),
     "catty_run_code": _make_lazy_schema(
         "catty_run_code", "仅主人确认后运行Python；15秒超时；cwd不是系统隔离，ok=false代表失败",
@@ -1444,6 +1629,25 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
         },
         ["user_id"],
     ),
+    "catty_scan_messages": _make_lazy_schema(
+        "catty_scan_messages", "检索最近聊天消息/找图",
+        {
+            "query": {"type": "string", "description": "关键词"},
+            "has_image": {"type": "boolean", "description": "只看带图"},
+            "sender": {"type": "string", "description": "发送者"},
+            "limit": {"type": "integer", "description": "条数"},
+            "minutes": {"type": "number", "description": "最近几分钟"},
+        },
+        [],
+    ),
+    "catty_look_image": _make_lazy_schema(
+        "catty_look_image", "看图并返回文字描述",
+        {
+            "image_ref": {"type": "string", "description": "图引用"},
+            "question": {"type": "string", "description": "重点"},
+        },
+        ["image_ref"],
+    ),
 }
 
 
@@ -1467,6 +1671,8 @@ class ToolCapability:
 
 _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
     "catty_recall": ToolCapability(),
+    "catty_scan_messages": ToolCapability(),
+    "catty_look_image": ToolCapability(),
     "catty_user_profile": ToolCapability(),
     "catty_mc_status": ToolCapability(execution_mode="external"),
     "catty_emoji": ToolCapability(execution_mode="write"),
@@ -1474,17 +1680,22 @@ _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
     "catty_fetch_url": ToolCapability(),
     "catty_weather": ToolCapability(),
     "catty_read_file": ToolCapability(),
+    "catty_write_file": ToolCapability(execution_mode="write"),
+    "catty_python_run": ToolCapability(
+        requires_direct_request=True,
+        execution_mode="write",
+    ),
+    "catty_python_install": ToolCapability(
+        requires_direct_request=True,
+        execution_mode="external",
+    ),
     "catty_run_code": ToolCapability(execution_mode="external"),
     "catty_nsfw_search": ToolCapability(
         scope="private",
         persona_feature="nsfw_spark",
         execution_mode="external",
     ),
-    "catty_image_search": ToolCapability(
-        requires_image=True,
-        accepts_explicit_image_url=True,
-        execution_mode="external",
-    ),
+    "catty_image_search": ToolCapability(execution_mode="external"),
     "catty_meme_query": ToolCapability(execution_mode="external"),
     "catty_game_recall": ToolCapability(),
     "catty_game_remember": ToolCapability(execution_mode="write"),
@@ -1499,15 +1710,8 @@ _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
     "catty_scope_meme": ToolCapability(execution_mode="write"),
     "catty_timeline": ToolCapability(execution_mode="write"),
     "catty_adaptive_prompt": ToolCapability(execution_mode="write"),
-    "catty_imagegen": ToolCapability(
-        requires_direct_request=True,
-        execution_mode="external",
-    ),
-    "catty_nai_director": ToolCapability(
-        requires_image=True,
-        requires_direct_request=True,
-        execution_mode="external",
-    ),
+    "catty_imagegen": ToolCapability(execution_mode="external"),
+    "catty_nai_director": ToolCapability(execution_mode="external"),
     "catty_story_arc_set": ToolCapability(
         persona_feature="story_arc",
         execution_mode="write",
@@ -1651,12 +1855,19 @@ class ToolContext:
     # 副作用:executor 把要发的图片塞这里,主回复点收尾时取出来拼到发送链路。
     # 元素类型由 prepare_nsfw_segments_fn 决定(实际是 MessageSegment),tools.py 不依赖具体类型。
     pending_image_segments: list[Any] = field(default_factory=list)
+    # 本轮 catty_write_file 暂存的文件; 主回复发完后由 __init__ 上传到当前 QQ 会话。
+    # 元素: {"path": 磁盘路径, "name": QQ 里显示的文件名}
+    pending_file_deliveries: list[dict[str, str]] = field(default_factory=list)
     # 当前消息(incoming)里附带的图片 URL 列表(QQ CDN 短期链接)。
     # catty_imagegen 走 edit 模式时,优先用这个作为 input image;为空才回退 recent_image_urls。
     input_image_urls: list[str] = field(default_factory=list)
     # 本会话最近 N 分钟群里出现过的图片 URL(由 __init__.py 维护),
     # 支持「分消息回指」: 上一条群友发的图 + 这条说『基于刚才那张画一个 X』。
     recent_image_urls: list[str] = field(default_factory=list)
+    # 当前 scope 最近消息快照 (seq/发送者/文本/时间/图片), 供 catty_scan_messages 检索。
+    recent_messages: list[dict[str, Any]] = field(default_factory=list)
+    # 看图回调: (urls, question) -> 描述文本; __init__ 注入 describe_images, 供 catty_look_image。
+    describe_images_fn: Callable[[list[str], str], Awaitable[str]] | None = None
     # 当前消息是否「直接指向猫猫」(@ / 触发前缀 / 引用回复猫猫)。
     # catty_imagegen 等会主动 push 内容到群里的 tool 必须 guard 这个,
     # 避免 AI 在被动旁观消息(filter 顺便回的)里也乱画图。
@@ -1790,9 +2001,92 @@ def _sandbox_path(ctx: ToolContext, raw_path: str) -> tuple[Path | None, Path]:
     return candidate, root
 
 
+_FILE_DELIVERY_DEFAULT_DIR = "data/file_outbox"
+_FILE_FORMAT_SUFFIXES: dict[str, str] = {
+    "text": ".txt",
+    "markdown": ".md",
+    "md": ".md",
+    "csv": ".csv",
+    "json": ".json",
+    "code": ".txt",
+    "html": ".html",
+    "xml": ".xml",
+    "yaml": ".yaml",
+    "yml": ".yml",
+    "py": ".py",
+    "js": ".js",
+    "ts": ".ts",
+    "sql": ".sql",
+    "log": ".log",
+}
+_WINDOWS_RESERVED_FILE_NAMES = frozenset({
+    "CON", "PRN", "AUX", "NUL",
+    *(f"COM{i}" for i in range(1, 10)),
+    *(f"LPT{i}" for i in range(1, 10)),
+})
+
+
+def _file_delivery_root(config: Config) -> Path:
+    raw = str(getattr(config, "catty_file_delivery_dir", "") or "").strip()
+    root = Path(raw or _FILE_DELIVERY_DEFAULT_DIR).expanduser()
+    if not root.is_absolute():
+        root = Path.cwd() / root
+    return root.resolve()
+
+
+def _sanitize_file_delivery_name(raw_name: str, file_format: str) -> str:
+    name = str(raw_name or "").replace("\\", "/").split("/")[-1].strip()
+    name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "", name).strip(" .")
+    suffix = Path(name).suffix
+    if suffix:
+        stem = name[: -len(suffix)]
+        suffix = suffix[:16]
+    else:
+        stem = name
+        clean_format = re.sub(r"[^A-Za-z0-9]", "", str(file_format or "")).lower()[:12]
+        suffix = _FILE_FORMAT_SUFFIXES.get(
+            clean_format, f".{clean_format}" if clean_format else ".txt"
+        )
+    stem = stem.strip(" .") or "catty-file"
+    if stem.upper() in _WINDOWS_RESERVED_FILE_NAMES:
+        stem = f"catty-{stem}"
+    return f"{stem[:60]}{suffix}"
+
+
+def cleanup_file_outbox(config: Config, *, now: float | None = None) -> int:
+    """删除超过 TTL 的暂存文件; 返回删除数量。"""
+    root = _file_delivery_root(config)
+    if not root.is_dir():
+        return 0
+    try:
+        ttl_hours = float(getattr(config, "catty_file_delivery_ttl_hours", 24.0) or 24.0)
+    except (TypeError, ValueError):
+        ttl_hours = 24.0
+    cutoff = (time.time() if now is None else float(now)) - max(ttl_hours, 0.1) * 3600.0
+    removed = 0
+    for path in root.iterdir():
+        if not path.is_file():
+            continue
+        try:
+            if path.stat().st_mtime <= cutoff:
+                path.unlink()
+                removed += 1
+        except OSError:
+            continue
+    return removed
+
+
 def _is_owner(ctx: ToolContext) -> bool:
     owner_qq = str(getattr(ctx.config, "catty_owner_qq", "") or "").strip()
     return bool(owner_qq) and ctx.user_id == owner_qq
+
+
+def _code_sandbox_allowed(ctx: ToolContext) -> bool:
+    if not bool(getattr(ctx.config, "catty_code_sandbox_enabled", True)):
+        return False
+    if bool(getattr(ctx.config, "catty_code_sandbox_allow_guests", False)):
+        return True
+    return _is_owner(ctx)
 
 
 def _blocked_url_host(host: str) -> str | None:
@@ -1984,6 +2278,99 @@ async def _exec_read_file(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
         "truncated": truncated, "next_offset": next_offset if truncated else None,
         "next_column": next_column if truncated else None,
     }
+
+
+async def _exec_write_file(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if not bool(getattr(ctx.config, "catty_file_delivery_enabled", True)):
+        return {"ok": False, "error": "文件发送功能已关闭"}
+    content = str(args.get("content") or "")
+    if not content.strip():
+        return {"ok": False, "error": "content 不能为空"}
+    try:
+        max_chars = int(getattr(ctx.config, "catty_file_delivery_max_chars", 200_000) or 200_000)
+        max_per_turn = int(getattr(ctx.config, "catty_file_delivery_max_per_turn", 2) or 2)
+        ttl_hours = float(getattr(ctx.config, "catty_file_delivery_ttl_hours", 24.0) or 24.0)
+    except (TypeError, ValueError):
+        max_chars, max_per_turn, ttl_hours = 200_000, 2, 24.0
+    max_chars = max(max_chars, 1_000)
+    max_per_turn = max(1, min(max_per_turn, 10))
+    ttl_hours = max(ttl_hours, 0.1)
+    if len(content) > max_chars:
+        return {
+            "ok": False,
+            "error": f"文件正文超过上限 ({len(content)} > {max_chars} 字符)",
+            "max_chars": max_chars,
+        }
+    if len(ctx.pending_file_deliveries) >= max_per_turn:
+        return {
+            "ok": False,
+            "error": f"本轮最多生成 {max_per_turn} 个文件，已经达到上限",
+        }
+    raw_format = str(args.get("format") or "").strip().lower()
+    file_format = raw_format
+    display_name = _sanitize_file_delivery_name(str(args.get("filename") or ""), file_format)
+    root = _file_delivery_root(ctx.config)
+    try:
+        root.mkdir(parents=True, exist_ok=True)
+    except OSError as exc:
+        return {"ok": False, "error": f"创建文件暂存目录失败: {exc.__class__.__name__}"}
+    stem = Path(display_name).stem
+    suffix = Path(display_name).suffix
+    stored = root / f"{stem}_{time.strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}{suffix}"
+    temporary = stored.with_name(stored.name + ".tmp")
+    try:
+        temporary.write_text(content, encoding="utf-8")
+        temporary.replace(stored)
+    except OSError as exc:
+        try:
+            temporary.unlink(missing_ok=True)
+        except OSError:
+            pass
+        return {"ok": False, "error": f"写入文件失败: {exc.__class__.__name__}"}
+    staged = {"path": str(stored), "name": display_name}
+    ctx.pending_file_deliveries.append(staged)
+    return {
+        "ok": True,
+        "status": "staged",
+        "filename": display_name,
+        "chars": len(content),
+        "expires_in_hours": ttl_hours,
+        "expires_at": time.strftime(
+            "%Y-%m-%d %H:%M:%S", time.localtime(time.time() + ttl_hours * 3600.0)
+        ),
+        "note": (
+            "文件已暂存，本轮回复发完后会自动发到当前会话"
+            "（群聊发到本群，私聊发给对方）。回复里只简短说一句已写好/已生成，"
+            "不要说已经发送；文件到期后自动删除。"
+        ),
+        "_staged_file": staged,
+    }
+
+
+async def _exec_python_run(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if not _code_sandbox_allowed(ctx):
+        return {"ok": False, "error": "仅 bot 拥有者可用"}
+    code = str(args.get("code") or "")
+    from .code_sandbox import run_code
+
+    result = await run_code(ctx.config, code)
+    for item in result.get("files") or []:
+        if not isinstance(item, dict):
+            continue
+        path = str(item.get("path") or "").strip()
+        if not path:
+            continue
+        name = str(item.get("name") or Path(path).name)
+        ctx.pending_file_deliveries.append({"path": path, "name": name})
+    return result
+
+
+async def _exec_python_install(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if not _code_sandbox_allowed(ctx):
+        return {"ok": False, "error": "仅 bot 拥有者可用"}
+    from .code_sandbox import install_packages
+
+    return await install_packages(ctx.config, args.get("packages"))
 
 
 async def _exec_run_code(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
@@ -2555,12 +2942,13 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         return {
             "error": (
                 "没找到可搜的图片:image_url 没传,当前消息没附图,最近群里也没图(5 分钟内/最多 6 张)。"
-                "请用户重新发图或贴图片 URL。"
+                "先调 catty_scan_messages(has_image=true) 翻最近的带图消息,"
+                "把命中的 URL 传进 image_url;确实没有图片再让用户重新发图或贴链接。"
             ),
             "guidance": _persona_text(
                 ctx.persona,
-                "用猫娘人格让用户重新发一张图或贴图片直链。",
-                "让用户重新发送一张图片或提供图片直链。",
+                "先用 catty_scan_messages 找群里的图; 真的没有再用猫娘人格让用户重新发一张图或贴图片直链。",
+                "先调用 catty_scan_messages 查找最近的图片；确实没有图片时再让用户重新发送一张图片或提供图片直链。",
             ),
         }
     if image_index >= len(ordered):
@@ -3712,19 +4100,7 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
         return {"error": "imagegen 已被配置禁用"}
     if not getattr(ctx.config, "catty_imagegen_nai_enabled", False):
         return {"error": "NovelAI 通道未启用 (imagegen.nai.enabled=false)"}
-    if not getattr(ctx, "is_directly_requested", True):
-        return {
-            "error": _persona_text(
-                ctx.persona,
-                "用户没直接 @ 猫猫,不允许主动调 director tool。",
-                "用户未直接指向当前机器人，不能主动调用 director tool。",
-            ),
-            "guidance": _persona_text(
-                ctx.persona,
-                "director 只能在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫) + 明确要求加工时调。",
-                "director 只能在用户明确指向当前机器人（@ / 引用回复 / 直呼）并明确要求加工时调用。",
-            ),
-        }
+    # 主人 2026-10-26: 工具全量交给模型, 不再要求消息先 @/直呼才允许改图。
     req_type = str(args.get("req_type") or "").strip().lower()
     if req_type not in _NAI_DIRECTOR_REQ_TYPES:
         return {"error": f"req_type 必须是 {list(_NAI_DIRECTOR_REQ_TYPES)} 之一,收到: {req_type!r}"}
@@ -4430,22 +4806,7 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
     from pathlib import Path
     if not getattr(ctx.config, "catty_imagegen_enabled", True):
         return {"error": "imagegen 已被配置禁用"}
-    # 硬 guard:不指向猫猫的群消息(filter 顺便回的旁观回复)不允许主动画图,
-    # 避免群里有人随口说『画一张...』就被猫猫接住乱画(主人明确禁止)。
-    # 私聊/直接 @ 猫猫的群消息 is_directly_requested=True,放行。
-    if not getattr(ctx, "is_directly_requested", True):
-        return {
-            "error": _persona_text(
-                ctx.persona,
-                "用户没直接 @ 猫猫,不允许主动画图。把这条 tool_call 取消,改成纯文字回应。",
-                "用户未直接指向当前机器人，不能主动画图。取消这条 tool_call，改成纯文字回应。",
-            ),
-            "guidance": _persona_text(
-                ctx.persona,
-                "imagegen 只在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫)+ 说画时才能调。",
-                "imagegen 只在用户明确指向当前机器人（@ / 引用回复 / 直呼）并明确要求画图时调用。",
-            ),
-        }
+    # 主人 2026-10-26: 工具全量交给模型, 不再要求消息先 @/直呼才允许画图。
     # 主人 2026-05-29: agent 模式 — sonnet 端 schema 已经全空, args.prompt 为空时
     # 走 deepseek 代理决策 (provider/prompt/参考图/短评 全甩给 deepseek), 主 sonnet
     # 那一轮 tool_call 之后 _short_circuit_reply 让 chat loop 直接 return, 杜绝二次 100K+
@@ -5219,6 +5580,163 @@ async def _exec_recall_user_messages(args: dict[str, Any], ctx: ToolContext) -> 
     }
 
 
+_IMAGE_REF_RE = re.compile(r"^m(\d+)#(\d+)$", re.IGNORECASE)
+
+
+def _age_label(seconds: float) -> str:
+    if seconds < 90:
+        return f"{int(max(seconds, 0))}秒前"
+    if seconds < 5400:
+        return f"{int(seconds // 60)}分钟前"
+    return f"{int(seconds // 3600)}小时前"
+
+
+def _message_images(item: dict[str, Any]) -> list[dict[str, Any]]:
+    return [img for img in (item.get("images") or []) if isinstance(img, dict) and img.get("url")]
+
+
+async def _exec_scan_messages(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    query = str(args.get("query") or "").strip().lower()
+    sender = str(args.get("sender") or "").strip().lower()
+    wants_image = bool(args.get("has_image"))
+    try:
+        limit = int(args.get("limit") or 10)
+    except (TypeError, ValueError):
+        limit = 10
+    limit = max(1, min(limit, 30))
+    try:
+        minutes = float(args.get("minutes") or 0)
+    except (TypeError, ValueError):
+        minutes = 0.0
+    max_age_seconds = max(minutes, 0.0) * 60.0
+    terms = [term for term in re.split(r"[\s,，;；]+", query) if term]
+
+    hits: list[dict[str, Any]] = []
+    scanned = 0
+    image_total = 0
+    for item in reversed(list(ctx.recent_messages or [])):
+        if not isinstance(item, dict):
+            continue
+        age = float(item.get("age_seconds") or 0.0)
+        if max_age_seconds > 0 and age > max_age_seconds:
+            continue
+        images = _message_images(item)
+        scanned += 1
+        if wants_image and not images:
+            continue
+        text = str(item.get("text") or "")
+        text_lower = text.lower()
+        if terms and not all(term in text_lower for term in terms):
+            continue
+        display_name = str(item.get("display_name") or "")
+        user_id = str(item.get("user_id") or "")
+        if sender and sender not in display_name.lower() and sender not in user_id:
+            continue
+        seq = item.get("seq")
+        message_ref = f"m{seq}"
+        dumped_images = [
+            {"image_ref": f"{message_ref}#{index}", "url": str(img.get("url") or "")}
+            for index, img in enumerate(images)
+        ]
+        image_total += len(dumped_images)
+        snippet = " ".join(text.split())
+        hits.append(
+            {
+                "ref": message_ref,
+                "ago": _age_label(age),
+                "sender": display_name,
+                "user_id": user_id,
+                "is_bot": bool(item.get("is_bot")),
+                "text": snippet[:200],
+                "images": dumped_images,
+            }
+        )
+        if len(hits) >= limit:
+            break
+
+    return {
+        "scope": ctx.scope_key,
+        "scanned": scanned,
+        "count": len(hits),
+        "image_count": image_total,
+        "messages": hits,
+        "note": _persona_text(
+            ctx.persona,
+            "只看最近约 80 条实时消息; 更早的用 catty_recall。带图消息的 image_ref 可以直接喂 catty_look_image。",
+            "仅覆盖最近约 80 条实时消息；更早的内容用 catty_recall。带图消息的 image_ref 可直接传给 catty_look_image。",
+        ),
+    }
+
+
+async def _exec_look_image(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    image_ref = str(args.get("image_ref") or "").strip()
+    question = str(args.get("question") or "").strip()
+    if not image_ref:
+        return {"error": "image_ref 必填: m<消息号>#<图序号> / http(s) 直链 / 最近图片下标。"}
+
+    url = ""
+    matched = _IMAGE_REF_RE.match(image_ref)
+    if matched:
+        seq = int(matched.group(1))
+        index = int(matched.group(2))
+        target = next(
+            (
+                item
+                for item in (ctx.recent_messages or [])
+                if isinstance(item, dict) and item.get("seq") == seq
+            ),
+            None,
+        )
+        if target is None:
+            return {
+                "error": f"找不到消息 {seq}; 先用 catty_scan_messages 重新定位图引用。",
+            }
+        images = _message_images(target)
+        if index < 0 or index >= len(images):
+            return {
+                "error": f"消息 m{seq} 只有 {len(images)} 张图, 图序号 {index} 越界。",
+            }
+        url = str(images[index].get("url") or "")
+    elif image_ref.lower().startswith(("http://", "https://")):
+        url = image_ref
+    elif image_ref.isdigit():
+        index = int(image_ref)
+        candidates = list(ctx.recent_image_urls or [])
+        if index >= len(candidates):
+            return {
+                "error": f"最近图片只有 {len(candidates)} 张, 下标 {index} 越界; 可先用 catty_scan_messages 找图。",
+            }
+        url = candidates[index]
+    else:
+        return {
+            "error": "image_ref 格式不认; 用 m<消息号>#<图序号> / http(s) 直链 / 最近图片下标。",
+        }
+
+    if not url:
+        return {"error": "图片链接为空, 可能是 QQ CDN 链接已过期。"}
+    describe = ctx.describe_images_fn
+    if describe is None:
+        return {"error": "看图能力未接入(describe_images_fn 为空)。"}
+
+    ask = question or "描述这张图片: 主体、画面内容、可见文字、风格和值得注意的细节。"
+    try:
+        description = str(await describe([url], ask) or "").strip()
+    except Exception as exc:  # noqa: BLE001
+        _logger.warning("look_image failed ref=%s: %s", image_ref[:80], exc)
+        return {"error": f"看图失败: {exc.__class__.__name__}: {exc}"}
+    if not description:
+        return {"ok": False, "error": "视觉模型没有返回描述。", "image_ref": image_ref}
+
+    truncated = len(description) > 1500
+    return {
+        "ok": True,
+        "image_ref": image_ref,
+        "image_url": url[:400],
+        "description": description[:1500],
+        "truncated": truncated,
+    }
+
+
 async def _exec_social_account(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     platform = str(args.get("platform") or "").strip().lower()
     if not platform:
@@ -5251,6 +5769,8 @@ ToolExecutor = Callable[[dict[str, Any], ToolContext], Awaitable[dict[str, Any]]
 
 _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_recall": _exec_recall,
+    "catty_scan_messages": _exec_scan_messages,
+    "catty_look_image": _exec_look_image,
     "catty_user_profile": _exec_user_profile,
     "catty_mc_status": _exec_mc_status,
     "catty_emoji": _exec_emoji,
@@ -5258,6 +5778,9 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_fetch_url": _exec_fetch_url,
     "catty_weather": _exec_weather,
     "catty_read_file": _exec_read_file,
+    "catty_write_file": _exec_write_file,
+    "catty_python_run": _exec_python_run,
+    "catty_python_install": _exec_python_install,
     "catty_run_code": _exec_run_code,
     "catty_nsfw_search": _exec_nsfw_search,
     "catty_image_search": _exec_image_search,
@@ -5309,6 +5832,20 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
     "catty_fetch_url": ("看链接", "看看链接", "读取网页", "网页正文", "打开链接", "抓网页", "文章链接"),
     "catty_weather": ("天气", "气温", "温度", "下雨", "带伞", "天气预报", "几度", "体感"),
     "catty_read_file": ("读文件", "读取文件", "看文件", "看源码", "看日志", "查看配置", "沙箱文件"),
+    "catty_write_file": (
+        "写文件", "写个文件", "写成文件", "生成文件", "导出", "保存成", "存成文件",
+        "写成文档", "整理成文档", "做成文档", "整理成文件", "文件发我", "发我文件",
+        "写个表格", "生成表格", "整理成表格", "写个报告", "生成报告",
+        "txt", "md", "csv", "markdown", "文档",
+    ),
+    "catty_python_run": (
+        "运行代码", "跑代码", "写代码", "写个脚本", "python", "脚本", "数据处理",
+        "分析数据", "计算", "生成文件", "生成表格", "画图", "图表",
+    ),
+    "catty_python_install": (
+        "安装包", "装包", "pip", "资源包", "第三方包", "numpy", "pandas",
+        "matplotlib", "openpyxl", "docx", "pdf",
+    ),
     "catty_run_code": ("跑代码", "运行代码", "执行代码", "运行 Python", "执行 Python", "沙箱代码"),
     "catty_web_search": (
         "搜", "搜一下", "查", "查一下", "百度", "谷歌", "google", "bing",
@@ -5325,6 +5862,14 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
     "catty_hot_trends": ("热搜", "热点", "trending", "现在火什么", "今日热搜"),
     "catty_now": ("现在几点", "几号", "今天日期", "时间", "周几"),
     "catty_remember": ("帮我记", "记一下", "记下来", "存一下", "笔记", "remember", "偏好", "边界", "不喜欢", "不要叫我"),
+    "catty_scan_messages": (
+        "翻聊天", "聊天记录", "找消息", "搜消息", "找图", "那张图", "刚才的图",
+        "前面说的", "谁发的", "群里发的图", "翻一下", "找一下图",
+    ),
+    "catty_look_image": (
+        "看看这张", "看这张图", "这张图", "图里", "看图", "识别一下", "看到了吗",
+        "图里写了什么", "画面",
+    ),
     "catty_recall_notes": ("查笔记", "之前记的", "笔记里", "recall notes"),
     "catty_recall": ("上次", "之前", "记得", "那次", "刚才", "以前", "还记得吗"),
     "catty_user_profile": ("他是谁", "她是谁", "什么人", "什么样的人", "user profile"),
@@ -5517,6 +6062,9 @@ _TOOL_CONFIG_FLAGS: dict[str, tuple[str, ...]] = {
     "catty_nsfw_search": ("catty_nsfw_search_enabled",),
     "catty_image_search": ("catty_image_search_enabled",),
     "catty_imagegen": ("catty_imagegen_enabled",),
+    "catty_write_file": ("catty_file_delivery_enabled",),
+    "catty_python_run": ("catty_code_sandbox_enabled",),
+    "catty_python_install": ("catty_code_sandbox_enabled",),
     "catty_nai_director": ("catty_imagegen_enabled", "catty_imagegen_nai_enabled"),
     "catty_profile_memory": ("catty_profile_memory_enabled",),
     "catty_scope_meme": ("catty_scope_meme_enabled",),
@@ -5526,6 +6074,8 @@ _TOOL_CONFIG_FLAGS: dict[str, tuple[str, ...]] = {
 
 
 def _tool_config_enabled(name: str, config: Config) -> bool:
+    if name == "catty_run_code":
+        return bool(getattr(config, "catty_code_sandbox_legacy_run_code_enabled", False))
     flags = _TOOL_CONFIG_FLAGS.get(name)
     return True if flags is None else all(bool(getattr(config, flag, True)) for flag in flags)
 
@@ -5984,10 +6534,12 @@ def tools_system_hint(persona: Any = None) -> str:
         char = getattr(persona, "char_name", "机器人")
         tone = f"{char}口吻"
     hint = (
-        "工具调用通用: 1) 真需要才调 (每次=延迟); 闲聊/已知不调. 你可以在有帮助时自主回忆、搜索或写入长期记忆/计划/适应规则.\n"
+        "工具调用通用: 1) 全部工具默认开放 (私聊/群聊的结构性限制除外), 自己按需要选 (每次=延迟, 闲聊/已知不用调); "
+        "可以自主回忆、翻聊天记录、搜索、看图或写入长期记忆/计划/适应规则.\n"
         f"2) 原创绘图请求**铁律**: {char}要出图就用 catty_imagegen (本轮开放时), 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
         f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'; 空结果/未命中不等于事实不存在; 永远不要编造工具结果.\n"
-        "4) 对不确定、陌生或可能过期的当前事实先用 catty_web_search 核实; 详细 trigger/参数/边界看 schema description."
+        "4) 对不确定、陌生或可能过期的当前事实先用 catty_web_search 核实; 详细 trigger/参数/边界看 schema description.\n"
+        "5) 要回指群里的图或旧消息: catty_scan_messages 翻最近消息/找图 → catty_look_image 看图 → 需要作者出处再 catty_image_search."
     )
     if bool(getattr(persona, "semantic_harness_enabled", False)):
         hint += (

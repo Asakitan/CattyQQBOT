@@ -37,6 +37,12 @@ _LOOKUP_HINTS = (
     "资料", "攻略", "教程", "最新", "新闻", "热搜", "版本", "价格", "多少钱",
     "什么时候", "上线", "发售", "测评", "参数", "配置",
 )
+_WRITE_HINTS = (
+    "写成文件", "写个文件", "写一份文件", "生成文件", "导出", "保存成", "存成",
+    "写成文档", "整理成文档", "做成文档", "整理成文件", "保存为",
+    "写个表格", "生成表格", "整理成表格", "写个报告", "写份报告", "生成报告",
+    "文件发我", "发我文件", "导出成", "txt", "md文件", "csv", "markdown",
+)
 _URL_RE = re.compile(r"https?://\S+", re.IGNORECASE)
 
 # 固定套话 / 后台过程词: 命中就丢掉重写 (宁可这次不发, 也不回到模板味)
@@ -47,6 +53,15 @@ _FIXED_PHRASES: tuple[str, ...] = (
 _PROCESS_WORDS: tuple[str, ...] = (
     "联网", "搜索", "知识库", "工具", "人工智能", "ai", "http",
 )
+
+
+def is_write_task(text: str, allowed_tool_names: Iterable[str] = ()) -> bool:
+    """写文件任务不发系统先导/占位短回复, 由主模型本轮直接回复。"""
+    allowed = {str(name) for name in allowed_tool_names}
+    if "catty_write_file" not in allowed:
+        return False
+    lowered = str(text or "").casefold()
+    return any(hint in lowered for hint in _WRITE_HINTS)
 
 
 def detect_task_kind(
@@ -64,6 +79,9 @@ def detect_task_kind(
         return "", ""
     allowed = {str(name) for name in allowed_tool_names}
     lowered = clean.casefold()
+    # 写文件任务不发系统先导短回复, 由主模型在本轮直接回复, 回完再发文件。
+    if is_write_task(clean, allowed):
+        return "", ""
     imagegen_ready = force_imagegen or "catty_imagegen" in allowed
     if imagegen_ready and any(hint in lowered for hint in _DRAW_HINTS):
         return KIND_DRAW, KIND_LABELS[KIND_DRAW]

@@ -277,6 +277,38 @@
         "timeline_enabled": true,
         "adaptive_prompt_enabled": true
     },
+    "file_delivery": {
+        "enabled": true,
+        "dir": "data/file_outbox",
+        "ttl_hours": 24,
+        "cleanup_interval_seconds": 3600,
+        "max_chars": 200000,
+        "max_per_turn": 2
+    },
+    "code_sandbox": {
+        "enabled": true,
+        "dir": "data/python_sandbox",
+        "allow_guests": false,
+        "timeout_seconds": 30,
+        "max_output_chars": 8000,
+        "max_code_chars": 60000,
+        "max_files": 5,
+        "max_file_bytes": 10000000,
+        "max_work_bytes": 50000000,
+        "ttl_hours": 24,
+        "cleanup_interval_seconds": 3600,
+        "max_packages": 5,
+        "pip_timeout_seconds": 120,
+        "pip_index_url": "https://pypi.org/simple",
+        "legacy_run_code_enabled": false,
+        "allowed_packages": [
+            "numpy", "pandas", "matplotlib", "pillow", "openpyxl",
+            "python-docx", "reportlab", "scipy", "sympy", "tabulate",
+            "pyyaml", "beautifulsoup4", "lxml", "xlsxwriter", "seaborn",
+            "plotly", "kaleido", "qrcode", "python-pptx", "pypdf",
+            "pdfplumber", "markdown", "jinja2", "python-dateutil", "pytz"
+        ]
+    },
     "nsfw_search": {
         "enabled": true,
         "max_results": 4,

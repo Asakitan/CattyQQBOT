@@ -812,6 +812,38 @@ class Config(BaseModel):
     catty_quick_ack_timeout_seconds: float = 8.0
     catty_fallback_tools_enabled: bool = True  # fallback 携带 tools 继续工具循环
     catty_sandbox_dir: str = ""  # catty_read_file/catty_run_code 沙箱根目录，空=仓库根
+    # 工具写文件 + QQ 回传到发起会话 (2026-10-26)
+    catty_file_delivery_enabled: bool = True
+    catty_file_delivery_dir: str = "data/file_outbox"  # 暂存目录，相对 cwd
+    catty_file_delivery_ttl_hours: float = 24.0  # 暂存一天后自动删除
+    catty_file_delivery_cleanup_interval_seconds: float = 3600.0
+    catty_file_delivery_max_chars: int = 200_000
+    catty_file_delivery_max_per_turn: int = 2
+    # Python 沙箱 (2026-10-26): 写/跑代码 + wheel 安装, 全部限制在 data/python_sandbox
+    catty_code_sandbox_enabled: bool = True
+    catty_code_sandbox_dir: str = "data/python_sandbox"
+    catty_code_sandbox_allow_guests: bool = False
+    catty_code_sandbox_timeout_seconds: float = 30.0
+    catty_code_sandbox_max_output_chars: int = 8_000
+    catty_code_sandbox_max_code_chars: int = 60_000
+    catty_code_sandbox_max_files: int = 5
+    catty_code_sandbox_max_file_bytes: int = 10_000_000
+    catty_code_sandbox_max_work_bytes: int = 50_000_000
+    catty_code_sandbox_ttl_hours: float = 24.0
+    catty_code_sandbox_cleanup_interval_seconds: float = 3600.0
+    catty_code_sandbox_max_packages: int = 5
+    catty_code_sandbox_pip_timeout_seconds: float = 120.0
+    catty_code_sandbox_pip_index_url: str = "https://pypi.org/simple"
+    catty_code_sandbox_legacy_run_code_enabled: bool = False
+    catty_code_sandbox_allowed_packages: list[str] = Field(
+        default_factory=lambda: [
+            "numpy", "pandas", "matplotlib", "pillow", "openpyxl",
+            "python-docx", "reportlab", "scipy", "sympy", "tabulate",
+            "pyyaml", "beautifulsoup4", "lxml", "xlsxwriter", "seaborn",
+            "plotly", "kaleido", "qrcode", "python-pptx", "pypdf",
+            "pdfplumber", "markdown", "jinja2", "python-dateutil", "pytz",
+        ]
+    )
     # 私聊场景下额外排除哪些 tool;群聊默认全开
     catty_tools_disabled_in_private: list[str] = Field(default_factory=lambda: ["catty_user_profile"])
 

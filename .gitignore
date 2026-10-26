@@ -55,3 +55,10 @@ fadianji/*
 scripts/.ssh_mcp_secret.json
 .vscode/handoff/
 .playwright-mcp/
+
+# 机机自学语料库 (运行时产物, 不进 git)
+data/fdj_self_study/
+# 工具写文件暂存 (运行时产物, 24h 自动清理)
+data/file_outbox/
+# Python 沙箱工作区/包 (运行时产物, 24h 自动清理)
+data/python_sandbox/

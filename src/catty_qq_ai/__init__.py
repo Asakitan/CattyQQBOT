@@ -26,6 +26,7 @@ from nonebot.plugin import PluginMetadata
 from nonebot.typing import T_State
 
 from .config import Config, KeywordReplyRule
+from .code_sandbox import CODE_SANDBOX_SYSTEM_PROMPT
 from .features import (
     choose_turtle_soup,
     extract_web_search_query,
@@ -3771,6 +3772,34 @@ def _recent_context_images_for_scope(
     return list(reversed(picked))
 
 
+def _recent_messages_snapshot_for_scope(scope_key: str, *, limit: int = 80) -> list[dict[str, Any]]:
+    """把当前 scope 的最近消息 deque 转成 tool 可检索的纯数据快照。"""
+    recent = _recent_conversation_messages.get(scope_key)
+    if not recent:
+        return []
+    now = time.monotonic()
+    snapshot: list[dict[str, Any]] = []
+    for item in list(recent)[-max(int(limit), 1):]:
+        snapshot.append(
+            {
+                "seq": item.seq,
+                "user_id": item.user_id,
+                "display_name": item.display_name,
+                "text": item.text,
+                "is_bot": item.is_bot,
+                "age_seconds": max(now - item.created_at, 0.0),
+                "images": [
+                    {
+                        "url": url,
+                        "key": item.image_keys[index] if index < len(item.image_keys) else "",
+                    }
+                    for index, url in enumerate(item.image_urls)
+                ],
+            }
+        )
+    return snapshot
+
+
 def _tool_schema_name(schema: Any) -> str:
     if not isinstance(schema, dict):
         return ""
@@ -3810,11 +3839,15 @@ def _available_tool_schemas_for_persona(
             if _tool_schema_name(schema) not in {"catty_story_arc_set", "catty_story_arc_clear"}
         ]
     if not is_owner:
-        # read_file / run_code 只对主人开放; 执行器本来就会拒绝, 提前从 schema 里摘掉省一轮空调用
+        # read_file / run_code / Python 沙箱只对主人开放; 执行器本来就会拒绝,
+        # 提前从 schema 里摘掉省一轮空调用 (allow_guests=True 时沙箱对所有人开放)。
+        _owner_gated = {"catty_read_file", "catty_run_code"}
+        if not bool(getattr(config, "catty_code_sandbox_allow_guests", False)):
+            _owner_gated |= {"catty_python_run", "catty_python_install"}
         schemas = [
             schema
             for schema in schemas
-            if _tool_schema_name(schema) not in {"catty_read_file", "catty_run_code"}
+            if _tool_schema_name(schema) not in _owner_gated
         ]
     allowed_names = {_tool_schema_name(schema) for schema in schemas}
     allowed_names.discard("")
@@ -3852,6 +3885,7 @@ def _cancel_task_if_pending(task: asyncio.Task | None) -> None:
 _IMAGEGEN_INLINE_WAIT_SECONDS = 4.0
 _DEFERRED_DELIVERY_MAX_WAIT_SECONDS = 180.0
 _deferred_delivery_tasks: set[asyncio.Task] = set()
+_file_delivery_lock = asyncio.Lock()
 
 
 def _spawn_deferred_image_delivery(
@@ -3906,6 +3940,88 @@ async def _segments_from_image_task(task: asyncio.Task) -> list[Any]:
         logger.warning(f"deferred image task failed: {type(exc).__name__}: {exc}")
         return []
     return [segment] if segment is not None else []
+
+
+async def _send_staged_file(
+    bot: Bot,
+    event: MessageEvent,
+    item: dict[str, Any],
+    *,
+    label: str,
+) -> bool:
+    """把 catty_write_file 暂存的文件上传到当前群/私聊; 失败时退回 file 消息段。"""
+    raw_path = str(item.get("path") or "").strip()
+    display_name = str(item.get("name") or "").strip()
+    path = Path(raw_path)
+    if not raw_path or not path.is_file():
+        logger.warning(f"{label}: staged file missing: {raw_path!r}")
+        return False
+    display_name = display_name or path.name
+    try:
+        if isinstance(event, GroupMessageEvent):
+            await bot.call_api(
+                "upload_group_file",
+                group_id=int(event.group_id),
+                file=str(path),
+                name=display_name,
+            )
+        else:
+            await bot.call_api(
+                "upload_private_file",
+                user_id=int(event.user_id),
+                file=str(path),
+                name=display_name,
+            )
+        logger.info(f"{label}: uploaded {display_name!r} to current chat")
+        return True
+    except OnebotActionFailed as exc:
+        logger.warning(f"{label}: upload ActionFailed, trying file segment: {exc}")
+    except OnebotNetworkError as exc:
+        logger.warning(f"{label}: upload NetworkError, trying file segment: {exc}")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"{label}: upload failed, trying file segment: {type(exc).__name__}: {exc}")
+    try:
+        await bot.send(
+            event,
+            MessageSegment("file", {"file": path.resolve().as_uri(), "name": display_name}),
+        )
+        logger.info(f"{label}: file segment fallback sent {display_name!r}")
+        return True
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"{label}: file segment fallback failed: {type(exc).__name__}: {exc}")
+    try:
+        await bot.send(event, Message("文件写好了，但这会儿发不出去，等下再试。"))
+    except Exception:  # noqa: BLE001
+        pass
+    return False
+
+
+def _spawn_deferred_file_delivery(
+    bot: Bot,
+    event: MessageEvent,
+    items: list[dict[str, Any]],
+    *,
+    after: asyncio.Event,
+    label: str,
+) -> None:
+    """等本轮文字发完, 再按原会话把工具写好的文件发出去。"""
+    if not items:
+        return
+
+    async def _runner() -> None:
+        try:
+            await asyncio.wait_for(after.wait(), timeout=_DEFERRED_DELIVERY_MAX_WAIT_SECONDS)
+        except asyncio.TimeoutError:
+            logger.info(f"{label}: reply still not finished, sending file anyway")
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            async with _file_delivery_lock:
+                await _send_staged_file(bot, event, item, label=label)
+
+    task = asyncio.create_task(_runner(), name=f"catty-deferred-{label}")
+    _deferred_delivery_tasks.add(task)
+    task.add_done_callback(_deferred_delivery_tasks.discard)
 
 
 async def _deferred_imagegen_items(task: asyncio.Task, detached_ctx: ToolContext) -> list[Any]:
@@ -6815,7 +6931,10 @@ async def _build_messages(
     # web_search/nsfw_search/meme 全部走 tools 字段(OpenAI function calling),
     # 旧的 [[CATTY_WEB_SEARCH]] / [[CATTY_NSFW_SEARCH]] / <<<CATTY_MEME>>> 文本 marker 教学已废弃。
     if getattr(config, "catty_tools_enabled", True):
-        messages.append({"role": "system", "content": tools_system_hint(_persona)})
+        _tools_hint = tools_system_hint(_persona)
+        if bool(getattr(config, "catty_code_sandbox_enabled", True)):
+            _tools_hint = f"{_tools_hint}\n\n{CODE_SANDBOX_SYSTEM_PROMPT}"
+        messages.append({"role": "system", "content": _tools_hint})
 
     # ─── Layer D: 按事件可能变(image_literacy 已迁到 register_catty_persona,这里走 has_image flag) ───
     # 主人 2026-05-28: cache 修复 — 所有 per-sender / per-Lv 动态 prompt 必须**延后到
@@ -15118,6 +15237,7 @@ async def start_memory_summary_loop() -> None:
     # 现在由 _managed_store_flush_loop 统一覆盖 pregnancy_store。
     asyncio.create_task(_scope_lore_auto_summary_loop())
     asyncio.create_task(_data_backup_loop())
+    asyncio.create_task(_file_outbox_cleanup_loop())
     asyncio.create_task(_catty_rag_backfill_once())
     asyncio.create_task(_catty_rag_prune_loop())
     _ensure_qzone_cookie_keeper_task()
@@ -15262,6 +15382,43 @@ async def _data_backup_loop() -> None:
         except Exception as exc:  # noqa: BLE001
             logger.warning(f"data backup failed: {type(exc).__name__}: {exc}")
         await asyncio.sleep(3600.0)
+
+
+async def _file_outbox_cleanup_loop() -> None:
+    """定期删除超过 TTL 的工具暂存文件与 Python 沙箱生成物 (默认 24 小时)。"""
+    from .code_sandbox import cleanup_code_sandbox
+    from .tools import cleanup_file_outbox
+
+    while True:
+        try:
+            file_interval = float(
+                getattr(config, "catty_file_delivery_cleanup_interval_seconds", 3600.0) or 0.0
+            )
+        except (TypeError, ValueError):
+            file_interval = 3600.0
+        try:
+            sandbox_interval = float(
+                getattr(config, "catty_code_sandbox_cleanup_interval_seconds", 3600.0) or 0.0
+            )
+        except (TypeError, ValueError):
+            sandbox_interval = 3600.0
+        intervals = [value for value in (file_interval, sandbox_interval) if value > 0]
+        if not intervals:
+            logger.info("file/sandbox cleanup disabled (interval <= 0)")
+            return
+        try:
+            removed = await asyncio.to_thread(cleanup_file_outbox, config)
+            removed_sandbox = await asyncio.to_thread(cleanup_code_sandbox, config)
+            if removed or removed_sandbox:
+                logger.info(
+                    f"cleanup removed {removed} outbox file(s), "
+                    f"{removed_sandbox} sandbox file(s)"
+                )
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"file/sandbox cleanup failed: {type(exc).__name__}: {exc}")
+        await asyncio.sleep(max(min(intervals), 60.0))
 
 
 async def _nlu_warmup_task() -> None:
@@ -15894,10 +16051,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
         # 主人 2026-10-25: 查资料/画图/做题这类必然超时的长任务改成开跑前先发一句模型现写的
         # 短回复 (替代固定「我去翻翻」池); 已经发先导回复时不再叠 placeholder。
+        # 写文件任务 (is_write_task) 两者都不发, 由主模型直接回复, 回完再发文件。
         _quick_ack_task: asyncio.Task | None = None
+        _write_task = False
         try:
-            from .quick_ack import detect_task_kind
+            from .quick_ack import detect_task_kind, is_write_task
 
+            _write_task = is_write_task(_user_text_for_intent, _allowed_tool_names)
             _ack_kind, _ack_label = detect_task_kind(
                 _user_text_for_intent,
                 _allowed_tool_names,
@@ -15920,7 +16080,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         except Exception as _ack_exc:  # noqa: BLE001
             logger.debug(f"quick_ack schedule failed (non-fatal): {_ack_exc}")
         placeholder_task = (
-            None if _quick_ack_task is not None else _spawn_slow_reply_placeholder(matcher, event)
+            None
+            if (_quick_ack_task is not None or _write_task)
+            else _spawn_slow_reply_placeholder(matcher, event)
         )
         _prefer_spark = False
         # NSFW 模式不垫占位句: 沉浸 RP 里突然冒一句「马上/等下」会把场景打断。
@@ -16324,8 +16486,21 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             except Exception as _nsfw_ctx_exc:  # noqa: BLE001
                 logger.debug(f"nsfw tool context probe failed (non-fatal): {_nsfw_ctx_exc}")
+        _tool_recent_messages = _recent_messages_snapshot_for_scope(
+            _conversation_queue_key(event)
+        )
+
+        async def _describe_images_for_tool(urls: list[str], question: str = "") -> str:
+            return await describe_images(
+                config,
+                list(urls),
+                question or "描述这张图片的内容、主体、可见文字、风格和值得注意的细节。",
+            )
+
         tool_ctx = ToolContext(
             config=config,
+            recent_messages=_tool_recent_messages,
+            describe_images_fn=_describe_images_for_tool,
             memory_store=memory_store,
             event=event,
             emoji_store=_emoji_store_for_persona(_tool_persona),
@@ -16367,6 +16542,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 本轮文字回复发完 (含 finish/异常退出) 才置位; 后台出的图等它再发, 保证文字在前、图在后。
         _reply_done = asyncio.Event()
         _lock_stack.callback(_reply_done.set)
+        _scheduled_file_paths: set[str] = set()
 
         async def _tool_executor(
             name: str,
@@ -16374,6 +16550,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             *,
             _allowed_names: set[str] = _allowed_tool_names,
         ) -> dict[str, object]:
+            _files_before = len(tool_ctx.pending_file_deliveries)
             if name == "catty_imagegen":
                 result = await _imagegen_tool_with_deferred_delivery(
                     name,
@@ -16391,6 +16568,21 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     tool_ctx,
                     allowed_names=_allowed_names,
                 )
+            if isinstance(result, dict):
+                result.pop("_staged_file", None)
+            for _staged_file in tool_ctx.pending_file_deliveries[_files_before:]:
+                if not isinstance(_staged_file, dict):
+                    continue
+                _staged_path = str(_staged_file.get("path") or "")
+                if _staged_path and _staged_path not in _scheduled_file_paths:
+                    _scheduled_file_paths.add(_staged_path)
+                    _spawn_deferred_file_delivery(
+                        bot,
+                        event,
+                        [_staged_file],
+                        after=_reply_done,
+                        label=name or "file",
+                    )
             if name == "catty_imagegen" and isinstance(result, dict) and result.get("error"):
                 _img_error_text = str(result.get("error") or "")
                 # 积分不足/冷却不是生成失败，保留原有提示；其余错误一律吞掉并道歉。
