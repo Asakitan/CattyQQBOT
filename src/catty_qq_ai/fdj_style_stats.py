@@ -26,7 +26,7 @@ _FADIAN_RE = re.compile(r"(?:啊{3,}|呜{3,}|好{3,}|哈{3,}|哦{3,}|嘿{3,}|嘻
 def _config_value(name: str, default: Any) -> Any:
     try:
         from . import config as _module_config
-        return getattr(_module_config.config, name, default)
+        return getattr(getattr(_module_config, "config", _module_config), name, default)
     except Exception:  # noqa: BLE001
         return default
 

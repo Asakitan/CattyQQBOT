@@ -1,5 +1,7 @@
 # JSON 人格运行时
 
+本地审查候选未部署：人格覆盖文件 JSON/编码损坏时保留原文件并禁用写入，错误时间戳归零；失效覆盖会在概览中显示，显式选择当前有效人格时仍会写入新覆盖。命令路径的覆盖落盘在线程执行。安全候选在独立锁文件内重读、合并并原子发布，读取按需刷新；仅协调使用同一锁文件的进程，未部署。
+
 ## 注册与版本
 
 - `personas.install_custom_personas(definitions, *, root)` 接收 `name → definition` 全量快照。先通过 `persona_store.validate_persona_definition` 校验整批定义、名字和别名，再完成所有类型转换，最后同步发布；失败不更改任一公开字典。

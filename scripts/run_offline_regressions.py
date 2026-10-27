@@ -32,6 +32,8 @@ MODULES = (
     "test_persona_tool", "test_request_intent", "test_persona_runtime",
     "test_hot_reload", "test_reply_queue_retention",
     "test_skill_store", "test_skill_runtime", "test_skill_tools", "test_skill_disclosure",
+    "test_cognitive_admin", "test_dashboard_state", "test_sim_chat", "test_harness_audit_regressions",
+    "test_security_image_urls", "test_security_dashboard_auth", "test_security_sandbox_paths", "test_security_persona_concurrency",
     "test_fdj_proactive", "test_fdj_proactive_config_prompt", "test_fdj_proactive_integration", "test_reply_admission",
 )
 

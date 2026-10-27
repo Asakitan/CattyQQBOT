@@ -2,6 +2,14 @@
 
 所有管理命令只对 `config.json` 中配置的主人 QQ 生效。其他用户发送同样文本时，不会获得管理权限。
 
+`/meme_clear`、`/timeline_clear`、`/adaptive_clear` 不接受参数；带参数时显示用法，不清空数据。人格覆盖文件无法解析时保留原文件并禁止写入，需修复或恢复该文件后重试。
+
+### HTTP 管理接口（本地候选，未部署）
+
+`/dashboard`、`/dashboard/state`、`/dashboard/sse`、`/dashboard/_js_test`、`/dev/sim_chat` 与 `/dev/ambient_inject` 共享保护，不影响 OneBot 路由。未设置 `CATTY_ADMIN_TOKEN` 时只允许直接回环请求，并要求本机 Host 和同源 Origin；不要通过会剥除转发头的本机反向代理转发这些接口。
+
+需要远程访问时，在服务进程环境中设置强随机 `CATTY_ADMIN_TOKEN`；所有客户端包括本机都须使用 HTTP Basic（用户名 `catty`、密码为该令牌）。远程请求须经正确配置的 HTTPS，浏览器登录后同源 SSE 使用相同认证；不要把令牌写入项目配置、日志或链接。令牌未配置时远程请求被拒绝。本地恶意进程及错误配置、剥除来源信息的代理不是回环模式的可信边界。
+
 ## 1. Scope、persona 与数据隔离
 
 - **当前 scope**：命令所在的当前私聊或群聊会话；实际 key 由运行时会话配置决定。

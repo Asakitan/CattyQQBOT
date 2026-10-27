@@ -466,6 +466,7 @@ def register_catty_persona(
             # BFS hit collection — 同原算法但只 collect (order, id, content, is_scope)
             hits: list[tuple[int, str, str, bool]] = []
             triggered: set[str] = set()
+            constant_ids = {entry.identifier for entry in book if getattr(entry, "constant", False)}
             cs_haystack = user_text or ""
             lower_haystack = cs_haystack.lower()
             for depth in range(_LB_MAX_DEPTH):
@@ -473,14 +474,14 @@ def register_catty_persona(
                 for entry in book:
                     if entry.identifier in triggered:
                         continue
-                    if len(hits) + len(new_layer) >= _LB_MAX_HITS:
-                        break
                     is_scope = getattr(entry, "_is_scope", False)
                     if getattr(entry, "constant", False):
                         if depth == 0:
                             new_layer.append((entry.order, entry.identifier, entry.content, is_scope))
                             triggered.add(entry.identifier)
                         continue
+                    if sum(item[1] not in constant_ids for item in (*hits, *new_layer)) >= _LB_MAX_HITS:
+                        break
                     for k in (entry.keys or ()):
                         if not k:
                             continue
@@ -502,7 +503,7 @@ def register_catty_persona(
                 if not new_layer:
                     break
                 hits.extend(new_layer)
-                if len(hits) >= _LB_MAX_HITS:
+                if sum(item[1] not in constant_ids for item in hits) >= _LB_MAX_HITS:
                     break
                 extension = "\n".join(h[2] for h in new_layer)
                 cs_haystack = f"{cs_haystack}\n{extension}"

@@ -39,8 +39,8 @@ def _nonnegative_int(value: str) -> int:
 
 def _scope_arg(value: str) -> str:
     scope = value.strip()
-    if not re.fullmatch(r"(?:group|private):[0-9A-Za-z_-]+", scope):
-        raise argparse.ArgumentTypeError("scope 格式应为 group:ID 或 private:ID，例如 group:local")
+    if not re.fullmatch(r"(?:group:[0-9A-Za-z_-]+(?::user:[0-9A-Za-z_-]+)?|private:[0-9A-Za-z_-]+)", scope):
+        raise argparse.ArgumentTypeError("scope 格式应为 group:ID、group:ID:user:ID 或 private:ID")
     return scope
 
 

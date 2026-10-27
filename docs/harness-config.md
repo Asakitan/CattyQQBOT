@@ -1,5 +1,11 @@
 # Harness corpus configuration and scopes
 
+The local audit candidate reads the active package configuration for corpus
+limits and style settings. Retrieval and match cache keys include the effective
+corpus limit, so a changed enable switch or limit is reflected on the next
+lookup. Corpus echo also checks the corpus enable switch. This candidate has
+not been deployed.
+
 ## Configuration aliases
 
 `catty_config_loader._apply_config` keeps the existing `chat.fadianji_*` JSON keys

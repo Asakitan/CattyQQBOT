@@ -149,6 +149,7 @@ _LAUNCHER_SOURCE = r'''"""Generated Catty Python sandbox launcher."""
 import builtins
 import os
 import sys
+import threading
 import traceback
 
 CODE_PATH = os.path.realpath(sys.argv[1])
@@ -175,14 +176,21 @@ BLOCKED_MODULES = {
 }
 
 
+_PATH_NORMALIZING = threading.local()
+
+
 def _text(value):
-    if isinstance(value, bytes):
-        return os.fsdecode(value)
-    return os.fspath(value)
+    return os.fsdecode(value)
 
 
 def _norm(value):
-    return os.path.normcase(os.path.realpath(_text(value)))
+    text = str.__str__(_text(value))
+    previous = getattr(_PATH_NORMALIZING, "active", False)
+    _PATH_NORMALIZING.active = True
+    try:
+        return os.path.normcase(os.path.realpath(text))
+    finally:
+        _PATH_NORMALIZING.active = previous
 
 
 def _inside(value, root):
@@ -325,52 +333,110 @@ sys.dont_write_bytecode = True
 sys.path[:0] = [WORK, PACKAGES]
 sys.argv = [CODE_PATH]
 
+import pathlib as _pathlib
+
 _REAL_STAT = os.stat
+_REAL_LSTAT = os.lstat
 _REAL_ACCESS = os.access
 _REAL_LISTDIR = os.listdir
 _REAL_SCANDIR = os.scandir
 
 
+def _guard_target(path, kwargs):
+    if getattr(_PATH_NORMALIZING, "active", False) or isinstance(path, int):
+        return path
+    path = os.fspath(path)
+    if kwargs.get("dir_fd") is not None and not os.path.isabs(path):
+        raise PermissionError("sandbox: relative dir_fd path denied")
+    if not _allowed_read(path):
+        raise PermissionError("sandbox: path access outside sandbox denied")
+    return path
+
+
 def _guard_stat(path, *args, **kwargs):
-    if not isinstance(path, int) and not _allowed_read(path):
-        raise PermissionError("sandbox: stat outside sandbox denied")
-    return _REAL_STAT(path, *args, **kwargs)
+    return _REAL_STAT(_guard_target(path, kwargs), *args, **kwargs)
+
+
+def _guard_lstat(path, *args, **kwargs):
+    return _REAL_LSTAT(_guard_target(path, kwargs), *args, **kwargs)
 
 
 def _guard_access(path, *args, **kwargs):
-    if not isinstance(path, int) and not _allowed_read(path):
-        raise PermissionError("sandbox: access outside sandbox denied")
-    return _REAL_ACCESS(path, *args, **kwargs)
+    return _REAL_ACCESS(_guard_target(path, kwargs), *args, **kwargs)
 
 
 def _guard_listdir(path=".", *args, **kwargs):
-    if not isinstance(path, int) and not _allowed_read(path):
-        raise PermissionError("sandbox: listdir outside sandbox denied")
-    return _REAL_LISTDIR(path, *args, **kwargs)
+    checked = _guard_target("." if path is None else path, kwargs)
+    return _REAL_LISTDIR(None if path is None else checked, *args, **kwargs)
 
 
 def _guard_scandir(path=".", *args, **kwargs):
-    if not isinstance(path, int) and not _allowed_read(path):
-        raise PermissionError("sandbox: scandir outside sandbox denied")
-    return _REAL_SCANDIR(path, *args, **kwargs)
+    checked = _guard_target("." if path is None else path, kwargs)
+    return _REAL_SCANDIR(None if path is None else checked, *args, **kwargs)
+
+
+def _guard_probe(function):
+    def guarded(path):
+        if getattr(_PATH_NORMALIZING, "active", False) or isinstance(path, int):
+            return function(path)
+        path = os.fspath(path)
+        try:
+            if not _allowed_read(path):
+                return False
+        except (OSError, ValueError):
+            return False
+        return function(path)
+    return guarded
+
+
+def _guard_info(function, stat_result=False):
+    def guarded(info, *args, **kwargs):
+        try:
+            allowed = _allowed_read(info._path)
+        except (OSError, ValueError):
+            allowed = False
+        if not allowed:
+            if stat_result:
+                raise PermissionError("sandbox: path access outside sandbox denied")
+            return False
+        return function(info, *args, **kwargs)
+    return guarded
 
 
 os.stat = _guard_stat
+os.lstat = _guard_lstat
 os.access = _guard_access
 os.listdir = _guard_listdir
 os.scandir = _guard_scandir
-try:
+for _name in ("exists", "lexists", "isfile", "isdir", "islink", "isjunction", "ismount", "isdevdrive"):
+    _function = getattr(os.path, _name, None)
+    if _function is not None:
+        setattr(os.path, _name, _guard_probe(_function))
+if os.name == "nt":
     import nt as _nt
-    _REAL_NT_STAT = _nt.stat
-
-    def _guard_nt_stat(path, *args, **kwargs):
-        if not isinstance(path, int) and not _allowed_read(path):
-            raise PermissionError("sandbox: stat outside sandbox denied")
-        return _REAL_NT_STAT(path, *args, **kwargs)
-
-    _nt.stat = _guard_nt_stat
-except Exception:
-    pass
+    if hasattr(_nt, "stat"):
+        _nt.stat = _guard_stat
+    if hasattr(_nt, "lstat"):
+        _nt.lstat = _guard_lstat
+    for _name in (
+        "_path_exists", "_path_lexists", "_path_isfile", "_path_isdir",
+        "_path_islink", "_path_isjunction", "_path_isdevdrive",
+    ):
+        _function = getattr(_nt, _name, None)
+        if _function is not None:
+            _guarded = _guard_probe(_function)
+            setattr(_nt, _name, _guarded)
+            if hasattr(os, _name):
+                setattr(os, _name, _guarded)
+            if hasattr(os.path, _name):
+                setattr(os.path, _name, _guarded)
+for _info_class in (getattr(_pathlib, "PathInfo", None), getattr(_pathlib, "DirEntryInfo", None)):
+    if _info_class is None:
+        continue
+    for _name in ("exists", "is_file", "is_dir", "is_symlink", "_stat"):
+        _function = getattr(_info_class, _name, None)
+        if _function is not None:
+            setattr(_info_class, _name, _guard_info(_function, _name == "_stat"))
 
 _globals = {"__name__": "__main__", "__file__": CODE_PATH, "__builtins__": builtins}
 try:

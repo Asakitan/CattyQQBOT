@@ -8,13 +8,15 @@ import contextvars
 from copy import deepcopy
 from dataclasses import dataclass, field
 import hashlib
+import ipaddress
 from io import BytesIO
 import json
 import logging
 import re
+import socket
 import time
 from typing import Any, AsyncIterator, Callable
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse, urlsplit, urlunsplit
 import weakref
 
 import httpx
@@ -3711,6 +3713,155 @@ def _data_url_content_type_and_bytes(url: str) -> tuple[str, bytes] | None:
     return content_type, data
 
 
+_IMAGE_DOWNLOAD_MAX_BYTES = 12 * 1024 * 1024
+_IMAGE_MAX_REDIRECTS = 5
+
+
+def _public_image_ip(address: ipaddress.IPv4Address | ipaddress.IPv6Address) -> bool:
+    if not address.is_global or address.is_multicast or address.is_reserved:
+        return False
+    if isinstance(address, ipaddress.IPv6Address):
+        if address.ipv4_mapped is not None or address.sixtofour is not None or address.teredo is not None:
+            return False
+        if address not in ipaddress.ip_network("2000::/3"):
+            return False
+    return True
+
+
+def _parse_public_image_url(raw_url: str) -> tuple[Any, str, int, str]:
+    url = str(raw_url or "")
+    if not url or any(ord(ch) <= 32 or ord(ch) == 127 or ch == "\\" for ch in url):
+        raise ValueError("图片 URL 含无效字符")
+    try:
+        parts = urlsplit(url)
+        host = parts.hostname or ""
+        explicit_port = parts.port
+        if (parts.scheme.lower() not in {"http", "https"} or not host
+                or parts.username is not None or parts.password is not None or "%" in host):
+            raise ValueError("图片 URL 无效")
+        host = host.rstrip(".").encode("idna").decode("ascii").lower()
+        if not host or host == "localhost" or host.endswith((".localhost", ".local")):
+            raise ValueError("禁止访问内网或本机图片地址")
+        port = explicit_port if explicit_port is not None else (443 if parts.scheme.lower() == "https" else 80)
+        if not 1 <= port <= 65535:
+            raise ValueError("图片 URL 端口无效")
+        try:
+            address = ipaddress.ip_address(host)
+        except ValueError:
+            address = None
+        if address is not None and not _public_image_ip(address):
+            raise ValueError("禁止访问内网或本机图片地址")
+        authority = f"[{host}]" if ":" in host else host
+        if explicit_port is not None:
+            authority += f":{port}"
+        return parts, host, port, authority
+    except (UnicodeError, ValueError) as exc:
+        raise ValueError("图片 URL 无效或不允许访问内网地址") from exc
+
+
+async def _resolve_public_image_url(url: str) -> tuple[Any, str, str, list[str]]:
+    parts, host, port, authority = _parse_public_image_url(url)
+    try:
+        literal = ipaddress.ip_address(host)
+    except ValueError:
+        literal = None
+    if literal is not None:
+        return parts, host, authority, [str(literal)]
+    try:
+        records = await asyncio.get_running_loop().getaddrinfo(
+            host, port, family=socket.AF_UNSPEC, type=socket.SOCK_STREAM
+        )
+    except (OSError, UnicodeError) as exc:
+        raise ValueError("图片域名解析失败") from exc
+    addresses: list[str] = []
+    for family, _kind, _proto, _name, sockaddr in records:
+        if family not in (socket.AF_INET, socket.AF_INET6) or not sockaddr:
+            raise ValueError("图片域名解析结果无效")
+        try:
+            address = ipaddress.ip_address(sockaddr[0])
+        except ValueError as exc:
+            raise ValueError("图片域名解析结果无效") from exc
+        if ((family == socket.AF_INET and address.version != 4)
+                or (family == socket.AF_INET6 and address.version != 6)
+                or (family == socket.AF_INET6 and len(sockaddr) > 3 and sockaddr[3])
+                or not _public_image_ip(address)):
+            raise ValueError("图片域名包含非公网地址")
+        if str(address) not in addresses:
+            addresses.append(str(address))
+    if not addresses:
+        raise ValueError("图片域名没有公网地址")
+    return parts, host, authority, addresses
+
+
+async def _download_public_image(url: str, *, timeout: float, proxy: str) -> tuple[bytes, str]:
+    if str(proxy or "").strip():
+        raise ValueError("配置代理时暂不支持安全图片下载")
+
+    async def fetch() -> tuple[bytes, str]:
+        current_url = url
+        for redirects in range(_IMAGE_MAX_REDIRECTS + 1):
+            parts, host, authority, addresses = await _resolve_public_image_url(current_url)
+            next_url = ""
+            last_error: httpx.RequestError | None = None
+            for address in addresses:
+                ip_authority = f"[{address}]" if ":" in address else address
+                if parts.port is not None:
+                    ip_authority += f":{parts.port}"
+                pinned_url = urlunsplit((parts.scheme, ip_authority, parts.path, parts.query, ""))
+                try:
+                    async with httpx.AsyncClient(timeout=timeout, follow_redirects=False, trust_env=False) as client:
+                        async with client.stream(
+                            "GET", pinned_url, headers={"Host": authority},
+                            extensions={"sni_hostname": host},
+                        ) as response:
+                            if response.status_code in {301, 302, 303, 307, 308}:
+                                location = response.headers.get("location", "")
+                                if not location or redirects >= _IMAGE_MAX_REDIRECTS:
+                                    raise ValueError("图片重定向无目标或次数过多")
+                                next_url = urljoin(current_url, location)
+                                next_parts, _, _, _ = _parse_public_image_url(next_url)
+                                if parts.scheme.lower() == "https" and next_parts.scheme.lower() != "https":
+                                    raise ValueError("拒绝图片 HTTPS 降级重定向")
+                                break
+                            response.raise_for_status()
+                            declared = response.headers.get("content-length", "")
+                            if declared.isdigit() and int(declared) > _IMAGE_DOWNLOAD_MAX_BYTES:
+                                raise ValueError("图片超过大小限制")
+                            chunks: list[bytes] = []
+                            size = 0
+                            async for chunk in response.aiter_bytes():
+                                size += len(chunk)
+                                if size > _IMAGE_DOWNLOAD_MAX_BYTES:
+                                    raise ValueError("图片超过大小限制")
+                                chunks.append(chunk)
+                            return b"".join(chunks), response.headers.get("content-type", "")
+                except httpx.RequestError as exc:
+                    last_error = exc
+            if next_url:
+                current_url = next_url
+                continue
+            if last_error is not None:
+                raise last_error
+            raise ValueError("图片下载失败")
+        raise ValueError("图片重定向次数过多")
+
+    return await asyncio.wait_for(fetch(), timeout=float(timeout))
+
+
+def _image_content_type(data: bytes, content_type: str) -> str:
+    mime = str(content_type or "").split(";", 1)[0].strip().lower()
+    if mime.startswith("image/") and re.fullmatch(r"image/[a-z0-9.+-]+", mime):
+        return mime
+    try:
+        with Image.open(BytesIO(data)) as image:
+            mime = Image.MIME.get((image.format or "").upper(), "")
+    except Exception as exc:
+        raise ValueError("下载内容不是可识别的图片") from exc
+    if not mime.startswith("image/"):
+        raise ValueError("下载内容不是可识别的图片")
+    return mime
+
+
 async def _vision_image_url(config: Config, url: str) -> str:
     if url.startswith("data:"):
         parsed = _data_url_content_type_and_bytes(url)
@@ -3719,15 +3870,12 @@ async def _vision_image_url(config: Config, url: str) -> str:
             if _needs_first_frame(url, content_type):
                 return _first_frame_data_url(data) or url
         return url
-    timeout = config.catty_vision_request_timeout or config.catty_request_timeout
-    async with _http_client(timeout, config.catty_http_proxy) as client:
-        response = await client.get(url)
-    response.raise_for_status()
-    content_type = response.headers.get("content-type", "").lower()
-    if not _needs_first_frame(url, content_type):
-        data_url = _first_frame_data_url(response.content)
-        return data_url or url
-    return _first_frame_data_url(response.content) or url
+    data, content_type = await download_binary(config, url)
+    mime = _image_content_type(data, content_type)
+    converted = _first_frame_data_url(data)
+    if converted:
+        return converted
+    return f"data:{mime};base64,{base64.b64encode(data).decode('ascii')}"
 
 
 async def prepare_passthrough_image_parts(config: Config, image_urls: list[str]) -> list[dict[str, Any]]:
@@ -3769,10 +3917,9 @@ def _image_analysis_from_reply(reply: str) -> dict[str, Any]:
 
 async def download_binary(config: Config, url: str, *, timeout: float | None = None) -> tuple[bytes, str]:
     request_timeout = timeout or config.catty_vision_request_timeout or config.catty_request_timeout
-    async with _http_client(request_timeout, config.catty_http_proxy) as client:
-        response = await client.get(url)
-    response.raise_for_status()
-    return response.content, response.headers.get("content-type", "")
+    return await _download_public_image(
+        url, timeout=float(request_timeout), proxy=getattr(config, "catty_http_proxy", "")
+    )
 
 
 def _fallback_is_configured(config: Config) -> bool:

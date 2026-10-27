@@ -95,6 +95,8 @@ Python 调用方可用 tuple 表达数组、set/frozenset 表达集合字段，�
 
 `PersonaOverrideStore` 的公开签名与正常返回值不变：`set(...) -> None`、`clear(...) -> bool`。候选数据先写唯一临时文件、flush/fsync/replace，成功后才替换内存；写入异常向调用方传播，不再吞掉 OSError 后假装已切换/清除。持久化位置与 JSON 格式仍是 `memory_path` 同目录的 `persona_overrides.json`。
 
+本地安全候选在独立 `persona_overrides.json.lock` 上使用 Windows `msvcrt.locking` 或 POSIX `flock`；持锁期间重读当前文件、合并单条操作并原子发布。读取按需刷新，读取失败保留已知快照；损坏文件禁止写入。等待锁最长 10 秒，运行时不要删除锁文件；只协调遵循该锁的进程，不保证其他写入者或网络文件系统。候选未部署。
+
 ## 离线验证范围
 
 `tests/test_persona_store.py` 覆盖字段与现有 dataclass 的静态一致性、未知字段/类型、原文与策略保留、2 MiB、内置/别名/命令冲突、重启、深拷贝、原子失败、发布顺序、磁盘/上次读取 SHA 双校验、坏文件保留、双实例写入与覆盖表错误传播。测试只用标准库和临时目录，不导入活动插件、不联网。

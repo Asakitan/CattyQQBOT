@@ -45,6 +45,8 @@
 
 每次返回唯一 `run_id` 与 `work_dir`；`sandbox_root` 仍是配置根目录。运行代码只可访问自己的 run 目录、读取共享 packages 和既有 Python runtime 范围；不能读取其他 scope/run 或写入 exports。共享 packages 不能被普通运行改写，安装通道和原包名单不变。扫描不跟随符号链接、junction 或其他 reparse point。
 
+本地安全候选对 Windows Python 3.14 的 `nt`/`os.path` 快速路径、`pathlib` 状态和 `stat`/`lstat` 增加读范围检查；候选未部署。本机 Python 3.14.3 的沙箱及并发测试 45 项通过。
+
 这是既有的用户态 best-effort 沙箱，不是容器或操作系统安全边界；共享安装环境也不是每 scope 独立的包版本环境。
 
 `ensure_sandbox` 的共享 launcher 模板在初始化锁内完成读取、比较和原子发布；并发初始化不会同时读/替换同一文件。实际子进程运行各自的私有 launcher，不打开共享模板，从根本上消除 Windows 首次并发运行的文件分享冲突，而不是捕获权限错误重试。

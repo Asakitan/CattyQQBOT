@@ -289,9 +289,10 @@ def _delta_applied_records() -> tuple[SceneRecord, ...]:
 def _corpus_max_pairs() -> int:
     try:
         from . import config as _module_config
-        if not bool(getattr(_module_config.config, "catty_fdj_corpus_enabled", True)):
+        cfg = getattr(_module_config, "config", _module_config)
+        if not bool(getattr(cfg, "catty_fdj_corpus_enabled", True)):
             return 0
-        return max(0, int(getattr(_module_config.config, "catty_fdj_corpus_max_pairs", 12000) or 0))
+        return max(0, int(getattr(cfg, "catty_fdj_corpus_max_pairs", 12000) or 0))
     except Exception:  # noqa: BLE001
         return 12000
 
@@ -330,10 +331,10 @@ _RECORDS_CACHE: dict[tuple[Any, ...], tuple[SceneRecord, ...]] = {}
 
 
 def _cached_records() -> tuple[SceneRecord, ...]:
-    """精选库 + delta + 语料磁盘库; 按 (delta签名, corpus签名) 手动缓存。"""
+    """精选库 + delta + 语料磁盘库; 按来源签名和语料上限缓存。"""
     _refresh_delta_cache()
     corpus_sig = _corpus_signature()
-    key = (_DELTA_SIGNATURE, corpus_sig)
+    key = (_DELTA_SIGNATURE, corpus_sig, _corpus_max_pairs())
     cached = _RECORDS_CACHE.get(key)
     if cached is None:
         base = _delta_applied_records()
@@ -409,7 +410,9 @@ def _allowed(record: SceneRecord, scope_key: str, is_private: bool) -> bool:
     if source_scope.startswith("private:"):
         return (is_private or scope_key.startswith("private:")) and scope_key == source_scope
     if source_scope.startswith("group:"):
-        return not is_private and scope_key == source_scope
+        parts = scope_key.split(":")
+        group_scope = ":".join(parts[:2]) if len(parts) == 4 and parts[2] == "user" and parts[3] else scope_key
+        return not is_private and group_scope == source_scope
     return False
 
 
@@ -426,7 +429,7 @@ def _ensure_default_semantic_reranker() -> None:
     try:
         try:
             from . import config as _module_config
-            enabled = bool(getattr(_module_config.config, "catty_fdj_corpus_semantic_enabled", True))
+            enabled = bool(getattr(getattr(_module_config, "config", _module_config), "catty_fdj_corpus_semantic_enabled", True))
         except Exception:  # noqa: BLE001
             enabled = True
         if not enabled:
@@ -489,7 +492,7 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
     if not query or k <= 0:
         return []
     normalized_scope = _scope_key(scope_key)
-    key = (query, int(k), normalized_scope, bool(is_private), str(category or ""), bool(semantic), _DELTA_SIGNATURE, _corpus_signature())
+    key = (query, int(k), normalized_scope, bool(is_private), str(category or ""), bool(semantic), _DELTA_SIGNATURE, _corpus_signature(), _corpus_max_pairs())
     cached = _MATCH_CACHE.get(key)
     if cached is not None:
         _MATCH_CACHE.move_to_end(key)

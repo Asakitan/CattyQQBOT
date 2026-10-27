@@ -6,7 +6,7 @@
     GET  /dashboard/sse      → Server-Sent Events 实时推送 (cache_stats / stream_*)
     GET  /dashboard/state    → JSON snapshot 当前 active/completed streams
 
-只 listen 127.0.0.1 不开放外网 (NoneBot config 决定 host).
+默认仅允许直接回环请求；配置管理员令牌后可经 HTTPS 认证访问。
 
 数据源: dashboard_state.py 的 module-level state, 由 anthropic_native_client streaming
 和 _log_native_usage push 更新.
@@ -14,11 +14,121 @@
 from __future__ import annotations
 
 import asyncio
+import base64
+import hmac
+import ipaddress
 import json
 import logging
+import os
 from typing import AsyncIterator
+from urllib.parse import urlsplit
+
+from fastapi import HTTPException, Request
 
 logger = logging.getLogger("catty_qq_ai.dashboard")
+
+
+def _is_loopback_address(host: str) -> bool:
+    try:
+        address = ipaddress.ip_address(host)
+    except ValueError:
+        return False
+    if isinstance(address, ipaddress.IPv6Address) and address.ipv4_mapped is not None:
+        address = address.ipv4_mapped
+    return address.is_loopback
+
+
+def _authority(value: str, *, local_only: bool):
+    if not value or any(ord(char) <= 32 or ord(char) == 127 for char in value):
+        return None
+    try:
+        parsed = urlsplit("//" + value)
+        host = (parsed.hostname or "").lower().rstrip(".")
+        port = parsed.port
+    except ValueError:
+        return None
+    if (
+        parsed.netloc != value
+        or parsed.path
+        or parsed.query
+        or parsed.fragment
+        or parsed.username is not None
+        or parsed.password is not None
+        or not host
+        or (local_only and not (host == "localhost" or _is_loopback_address(host)))
+    ):
+        return None
+    return host, port
+
+
+async def require_local_admin(request: Request) -> None:
+    token = os.environ.get("CATTY_ADMIN_TOKEN", "")
+    if token:
+        values = request.headers.getlist("authorization")
+        authorized = False
+        if len(values) == 1:
+            scheme, separator, encoded = values[0].partition(" ")
+            if separator and scheme.lower() == "basic":
+                try:
+                    credentials = base64.b64decode(encoded, validate=True).decode("utf-8")
+                    username, separator, password = credentials.partition(":")
+                    authorized = bool(separator) and hmac.compare_digest(username.encode("utf-8"), b"catty") and hmac.compare_digest(password.encode("utf-8"), token.encode("utf-8"))
+                except (ValueError, UnicodeError):
+                    pass
+        if not authorized:
+            raise HTTPException(status_code=401, detail="Authentication required", headers={"WWW-Authenticate": 'Basic realm="Catty admin"'})
+    else:
+        await _require_direct_loopback(request)
+    hosts = request.headers.getlist("host")
+    authority = _authority(hosts[0], local_only=not bool(token)) if len(hosts) == 1 else None
+    if authority is None:
+        raise HTTPException(status_code=403, detail="Invalid host")
+    client = request.scope.get("client")
+    if token and request.scope.get("scheme") != "https":
+        if not (client and _is_loopback_address(client[0]) and _authority(hosts[0], local_only=True)):
+            raise HTTPException(status_code=403, detail="HTTPS required for remote admin")
+    origins = request.headers.getlist("origin")
+    if origins:
+        if len(origins) != 1:
+            raise HTTPException(status_code=403, detail="Same-origin access required")
+        try:
+            origin = urlsplit(origins[0])
+            origin_authority = _authority(origin.netloc, local_only=not bool(token))
+            scheme = request.scope.get("scheme", "http")
+            default_port = 443 if scheme == "https" else 80
+            same_authority = (
+                origin_authority is not None
+                and origin_authority[0] == authority[0]
+                and (origin_authority[1] if origin_authority[1] is not None else default_port)
+                == (authority[1] if authority[1] is not None else default_port)
+            )
+        except ValueError:
+            same_authority = False
+        if (
+            not same_authority
+            or origin.scheme != scheme
+            or scheme not in ("http", "https")
+            or origin.path
+            or origin.query
+            or origin.fragment
+        ):
+            raise HTTPException(status_code=403, detail="Same-origin access required")
+
+
+async def _require_direct_loopback(request: Request) -> None:
+    forwarded = {
+        b"forwarded", b"x-real-ip", b"x-client-ip", b"client-ip",
+        b"x-cluster-client-ip", b"x-original-forwarded-for",
+        b"cf-connecting-ip", b"true-client-ip", b"via",
+    }
+    names = (name.lower() for name, _ in request.scope.get("headers", ()))
+    if any(name in forwarded or name.startswith(b"x-forwarded-") for name in names):
+        raise HTTPException(status_code=403, detail="Local direct access required")
+    client = request.scope.get("client")
+    if not isinstance(client, (tuple, list)) or not client or not isinstance(client[0], str):
+        raise HTTPException(status_code=403, detail="Local direct access required")
+    if not _is_loopback_address(client[0]):
+        raise HTTPException(status_code=403, detail="Local direct access required")
 
 _DASHBOARD_HTML = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -476,13 +586,14 @@ def mount_dashboard_routes() -> bool:
     """在 NoneBot 的 FastAPI app 上挂 dashboard 路由. 失败返回 False."""
     try:
         from nonebot import get_app
+        from fastapi import Depends
         from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
         app = get_app()
     except Exception as exc:  # noqa: BLE001
         logger.warning("dashboard: fastapi not available (%s), skip mount", exc)
         return False
 
-    @app.get("/dashboard/_js_test", response_class=HTMLResponse)
+    @app.get("/dashboard/_js_test", response_class=HTMLResponse, dependencies=[Depends(require_local_admin)])
     async def _dash_js_test():
         # 极简 inline script 测试 — 如果浏览器/中间设备过滤 inline JS, 这个也跑不起来
         html = (
@@ -503,7 +614,7 @@ def mount_dashboard_routes() -> bool:
             headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
         )
 
-    @app.get("/dashboard", response_class=HTMLResponse)
+    @app.get("/dashboard", response_class=HTMLResponse, dependencies=[Depends(require_local_admin)])
     async def _dash_html(test: str = ""):
         # 主人 2026-05-28: dashboard HTML 加 no-cache, 避免浏览器拿旧版导致 JS bug 修了不生效
         # ?test=1 → 极简 JS test page (诊断浏览器是否阻断 inline script)
@@ -516,11 +627,11 @@ def mount_dashboard_routes() -> bool:
             },
         )
 
-    @app.get("/dashboard/state", response_class=JSONResponse)
+    @app.get("/dashboard/state", response_class=JSONResponse, dependencies=[Depends(require_local_admin)])
     async def _dash_state():
         return JSONResponse(content=await dashboard_state())
 
-    @app.get("/dashboard/sse")
+    @app.get("/dashboard/sse", dependencies=[Depends(require_local_admin)])
     async def _dash_sse():
         return StreamingResponse(
             dashboard_sse_stream(),

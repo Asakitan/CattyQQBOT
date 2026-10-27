@@ -1,5 +1,11 @@
 # Fadianji evidence packet v2
 
+The local audit candidate checks memory identity against the supplied scope on
+every request, including requests without quoted text. For a valid
+`group:G:user:U` history scope, group-level RAG and scene providers use
+`group:G`; their returned evidence remains scope-checked. Character-book
+evidence uses the actual persona name. The candidate has not been deployed.
+
 ## API and compatibility
 
 `src/catty_qq_ai/fadianji_harness.py` exports `Evidence`, `QueryFlags`,

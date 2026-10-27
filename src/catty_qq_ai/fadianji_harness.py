@@ -189,7 +189,7 @@ def _activate_character_book(text: str, persona: Any, limit: int) -> list[Eviden
         if hits:
             scored.append((max(len(str(key)) for key in hits) + len(hits) * 0.25, int(getattr(entry, "order", 100) or 100), str(getattr(entry, "identifier", "character_book")), entry))
     scored.sort(key=lambda item: (-item[0], -item[1], item[2]))
-    return [Evidence(f"FACT.character_book:{identifier}", "persona:fadianji", _clean(getattr(entry, "content", ""), 520), min(1.0, score / 12.0), 0.0, 0.72, 0.78, False, 30, **_excerpt_metadata({}, (getattr(entry, "content", ""), 520))) for score, _order, identifier, entry in scored[: max(0, limit)] if _clean(getattr(entry, "content", ""), 520)]
+    return [Evidence(f"FACT.character_book:{identifier}", f"persona:{_persona_name(persona)}", _clean(getattr(entry, "content", ""), 520), min(1.0, score / 12.0), 0.0, 0.72, 0.78, False, 30, **_excerpt_metadata({}, (getattr(entry, "content", ""), 520))) for score, _order, identifier, entry in scored[: max(0, limit)] if _clean(getattr(entry, "content", ""), 520)]
 
 
 def _call_store(store: Any, method: str, *args: Any, **kwargs: Any) -> Any:
@@ -576,6 +576,8 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
     ``truncated`` is also true when even the complete header/rules do not fit.
     """
     scope, private = _scope_value(scope_key, is_private=is_private, user_id=user_id, group_id=group_id)
+    scope_parts = scope.split(":")
+    provider_scope = ":".join(scope_parts[:2]) if not private and len(scope_parts) == 4 and scope_parts[2] == "user" and scope_parts[3] else scope
     quote_query = _clean(quoted_text, 240)
     if not re.search(r"[^\s,，;；]", quote_query):
         quote_query = ""
@@ -611,7 +613,7 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
     memory_gate = store_gate(memory_store)
     if not memory_gate and not (user_id if private else group_id):
         memory_gate = "skipped"
-    if not memory_gate and quote_query:
+    if not memory_gate:
         scope_parts = scope.split(":")
         expected = str(user_id if private else group_id).strip()
         valid_scope = len(scope_parts) >= 2 and scope_parts[1] == expected
@@ -625,12 +627,12 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
     collect("corpus", lambda: _corpus_profile_evidence(str(display_name or ""), scope, private, corpus_profile_enabled=corpus_profile_enabled, corpus_profile_max_chars=corpus_profile_max_chars, trace=traces["corpus"]), blocked="disabled" if not corpus_profile_enabled or corpus_profile_max_chars <= 0 else "skipped" if not private and not str(display_name or "").strip() else "")
     collect("feed", lambda: _feed_evidence(feed_store, scope, int(feed_max_items)), blocked="disabled" if not feed_max_items or feed_max_items <= 0 else store_gate(feed_store))
     collect("book", lambda: _activate_character_book(text, persona, book_k), blocked="disabled" if book_k <= 0 else "")
-    collect("rag", lambda: _rag_evidence(rag_store, search_query, scope, persona, private, trace=traces["rag"]), blocked=store_gate(rag_store))
+    collect("rag", lambda: _rag_evidence(rag_store, search_query, provider_scope, persona, private, trace=traces["rag"]), blocked=store_gate(rag_store))
 
     def scene_rows() -> list[Evidence]:
         matches = match_scene_pairs(search_query, k=scene_k, scope_key=scope, is_private=private, semantic=semantic)
         for match in matches:
-            if (match.private and (not private or match.source_scope != scope)) or (match.source_scope.startswith("group:") and match.source_scope != scope):
+            if (match.private and (not private or match.source_scope != scope)) or (match.source_scope.startswith("group:") and match.source_scope != provider_scope):
                 traces["scene"].rejected += 1
             else:
                 scene_matches.append(match)

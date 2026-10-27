@@ -351,7 +351,7 @@ _PYTHON_RUN_SCHEMA: dict[str, Any] = {
         "name": "catty_python_run",
         "description": (
             "在隔离沙箱里运行 Python 代码，返回 stdout/stderr 和本次生成的文件。"
-            "仅 bot 拥有者可用。沙箱只允许读写 data/python_sandbox 内的工作目录；"
+            "默认仅 bot 拥有者可用；配置允许访客时也可开放，以本轮 schema 为准。沙箱只允许读写工作目录；"
             "禁止读取用户目录/项目配置/密钥/聊天记录，禁止网络、subprocess、ctypes、"
             "注册表或系统命令。需要第三方包先用 catty_python_install 装到沙箱。"
             "代码生成的文件会在本轮回复发完后自动发到当前会话（最多几个）。"
@@ -374,7 +374,7 @@ _PYTHON_INSTALL_SCHEMA: dict[str, Any] = {
         "name": "catty_python_install",
         "description": (
             "把 Python wheel 包装进隔离沙箱的 packages 目录，不修改系统 Python 环境。"
-            "仅 bot 拥有者可用。packages 传包名数组，可带 ==版本；只允许配置白名单内的包，"
+            "默认仅 bot 拥有者可用；配置允许访客时也可开放，以本轮 schema 为准。packages 传包名数组，可带 ==版本；只允许配置白名单内的包，"
             "一次最多几个。只使用 --only-binary 装 wheel；装完后 catty_python_run 可直接 import。"
         ),
         "parameters": {
@@ -5934,6 +5934,11 @@ async def _exec_look_image(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
 
     if not url:
         return {"error": "图片链接为空, 可能是 QQ CDN 链接已过期。"}
+    try:
+        from .openai_client import _parse_public_image_url
+        _parse_public_image_url(url)
+    except ValueError:
+        return {"error": "图片链接无效或不允许访问内网地址。"}
     source_receipt = _image_source_receipt(ctx, url, image_ref if matched else "")
     describe = ctx.describe_images_fn
     if describe is None:
@@ -6472,20 +6477,16 @@ _NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
         None,
     ),
     "catty_imagegen": (
-        "用户直接指向当前机器人（@ / 引用回复 / 直呼）并明确要求画图、生成图片时调用。\n"
-        "args 留空 {} 即可——provider 选择、NAI 标签 prompt、GPT 描述句、风格判定、参考图、"
-        "报价和短评配文全部由后端代理 LLM 自动决定，图片会自动发到聊天。"
-        "tool 调完本轮直接结束，不要再写文字回复。\n"
-        "禁触发：用户未直接请求当前机器人时只是闲聊提到画画、未明确要图时讨论某物，"
-        "或本地表情图已经足够的场景（走 catty_meme_query）。",
-        "用户直接向当前机器人明确请求画图时调用。args 留空 {}；图片会自动发到聊天，调用后本轮直接结束。",
+        "需要原创绘图或按上下文完成绘图任务时调用，无需先 @、引用或直呼。\n"
+        "args 留空 {}；provider、描述、风格、参考图和报价由后端处理。"
+        "快速出图后可结束本轮；返回 generating_in_background 时照常简短回复，图片稍后发送。"
+        "只需现成表情或梗图时使用 catty_meme_query。",
+        "需要原创绘图时调用，无需先被点名。args 留空 {}；后台生成时可先简短回复。",
     ),
     "catty_nai_director": (
-        "调用 NovelAI Director Tools 对一张已有图片做加工（线稿、抠图、上色、换情绪、去杂物等）。\n"
-        "前置条件：用户消息中必须有图片，优先当前消息附图，没有则使用群最近 5 分钟图片。"
-        "没有图片时直接让用户先发送图片，不要先调用 catty_imagegen。\n"
-        "必须由用户直接指向当前机器人（@ / 直呼）并明确提出具体加工要求时调用；"
-        "不要在闲聊提到描线或抠图时主动调用。\n"
+        "调用 NovelAI Director Tools 对已有图片做加工（线稿、抠图、上色、换情绪、去杂物等）。\n"
+        "优先使用当前或引用图片，也可使用最近图片；无需先被点名，当前消息不必附图。"
+        "工具没有找到可用图片时，可先搜索最近消息或请用户提供图片。\n"
         "调用前先说明此次加工需要扣除的积分，bg-removal 需要明确提醒成本较高。"
         "图片自动发送；image_sent=true 后只补 1-2 句符合当前人格的短评和报价。"
         "禁止贴 base64 或文件路径，也不要重复调用。",
@@ -6839,7 +6840,7 @@ def tools_system_hint(persona: Any = None) -> str:
         char = getattr(persona, "char_name", "机器人")
         tone = f"{char}口吻"
     hint = (
-        "工具调用通用: 1) 全部工具默认开放 (私聊/群聊的结构性限制除外), 自己按需要选 (每次=延迟, 闲聊/已知不用调); "
+        "工具调用通用: 1) 以本轮实际 schema 和权限为准，自己按需要选择可用工具 (每次=延迟, 闲聊/已知不用调); "
         "可以自主回忆、翻聊天记录、搜索、看图、生成并交付文件或写入长期记忆/计划/适应规则；实际可用能力以本轮 schema 为准.\n"
         f"2) 原创绘图请求**铁律**: {char}要出图就用 catty_imagegen (本轮开放时), 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
         f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'; 空结果/未命中不等于事实不存在; 永远不要编造工具结果.\n"

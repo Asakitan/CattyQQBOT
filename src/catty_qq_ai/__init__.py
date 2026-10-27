@@ -3463,7 +3463,7 @@ def _persona_generation_context(event: MessageEvent) -> str:
 async def _run_persona_definition_command(event: MessageEvent, command: Any) -> dict[str, Any]:
     if not _event_is_owner(event):
         return {"ok": False, "error": "owner_only"}
-    from .persona_admin import generate_persona_definition
+    from .persona_admin import PersonaGenerationError, PersonaGenerationTimeoutError, generate_persona_definition
     from .parsers import lenient_json_object
     runtime = persona_runtime
     action = command.action
@@ -3486,6 +3486,10 @@ async def _run_persona_definition_command(event: MessageEvent, command: Any) -> 
                     existing=existing.get("definition") if existing else None,
                     context_text=_persona_generation_context(event),
                 )
+            except PersonaGenerationTimeoutError:
+                return {"ok": False, "error": "generation_timeout", "hint": "人格生成超时，未保存。"}
+            except PersonaGenerationError:
+                return {"ok": False, "error": "generation_failed", "hint": "人格生成请求失败或内容未通过校验，未保存。"}
             except Exception as exc:
                 return {"ok": False, "error": type(exc).__name__}
         if runtime is not persona_runtime:
@@ -7002,6 +7006,9 @@ def _build_cognitive_turn_context_sync(
 ) -> tuple[str, str]:
     """Build post-boundary system evidence and the current user-role adaptive block."""
     persona_name = str(getattr(persona, "name", "catty") or "catty")
+    store_scope = scope_key
+    if not is_private and group_id and user_id and scope_key == f"group:{group_id}:user:{user_id}":
+        store_scope = f"group:{group_id}"
     system_parts: list[str] = []
     harness_budget = max(0, int(getattr(config, "catty_fadianji_harness_max_chars", 12000) or 0))
     if bool(getattr(persona, "semantic_harness_enabled", False)) and (str(text or "").strip() or str(quoted_text or "").strip()) and harness_budget:
@@ -7053,8 +7060,8 @@ def _build_cognitive_turn_context_sync(
             if len(failure_note) <= harness_budget:
                 system_parts.append(failure_note)
     try:
-        if timeline_store.list(scope_key, persona=persona_name):
-            timeline_prompt = timeline_store.build_prompt(scope_key, persona=persona_name)
+        if timeline_store.list(store_scope, persona=persona_name):
+            timeline_prompt = timeline_store.build_prompt(store_scope, persona=persona_name)
             if timeline_prompt:
                 system_parts.append(timeline_prompt)
     except Exception as exc:  # noqa: BLE001
@@ -7062,12 +7069,12 @@ def _build_cognitive_turn_context_sync(
     adaptive_prompt = ""
     try:
         if adaptive_prompt_store.list_prompts(
-            scope_key,
+            store_scope,
             persona=persona_name,
             include_disabled=False,
         ):
             adaptive_prompt = adaptive_prompt_store.build_prompt(
-                scope_key,
+                store_scope,
                 persona=persona_name,
                 current_user_payload="",
             )
@@ -7097,7 +7104,7 @@ async def _maybe_corpus_echo_reply(
     """
     if _persona_for_event(event).name != "fadianji":
         return False
-    if not bool(getattr(config, "catty_fdj_echo_enabled", True)):
+    if not bool(getattr(config, "catty_fdj_echo_enabled", True)) or not bool(getattr(config, "catty_fdj_corpus_enabled", True)):
         return False
     text = str(incoming.text or "").strip()
     if not text or len(text) > 30 or incoming.has_image or incoming.image_keys:
@@ -10459,6 +10466,7 @@ async def _main_reply_with_deadline(
         set_current_reasoning_effort,
     )
     from .request_intent import append_context_request_hint
+    from .harness_prompt import append_harness_agent_hint
 
     def _num(name: str, fallback: float) -> float:
         try:
@@ -10486,6 +10494,7 @@ async def _main_reply_with_deadline(
             if degraded:
                 attempt_messages = list(reply_state.recovery_messages() or messages)
                 append_context_request_hint(attempt_messages)
+                append_harness_agent_hint(attempt_messages, ())
             call = chat_completion_with_tools(
                 config,
                 attempt_messages,
@@ -13473,9 +13482,13 @@ async def handle_persona_command(matcher: Matcher, event: MessageEvent, state: T
 
     if not arg:
         override = persona_override_store.get(scope)
+        if override and normalize_persona_name(override) is None:
+            override_note = f" (失效覆盖: {override}; 用 /人格 默认 清除)"
+        else:
+            override_note = f" (命令覆盖: {override})" if override else " (config/默认)"
         lines = [
             f"当前 scope: {scope}",
-            f"生效人格: {_effective()}" + (f" (命令覆盖: {override})" if override else " (config/默认)"),
+            f"生效人格: {_effective()}" + override_note,
             "可用人格: " + " / ".join(sorted(PERSONAS)),
             "别名: " + " ".join(f"{a}={n}" for a, n in PERSONA_ALIASES.items()),
             "用法: /人格 <名字> 切换; /人格 默认 清除覆盖; 列表/查看/导入/生成/指令/解绑/重载",
@@ -13494,7 +13507,8 @@ async def handle_persona_command(matcher: Matcher, event: MessageEvent, state: T
                 f"不认识的人格『{arg}』。可用: " + " / ".join(sorted(PERSONAS))
                 + "; 别名: " + " ".join(PERSONA_ALIASES)
             ))
-        if name == _effective():
+        stored_override = persona_override_store.get(scope)
+        if name == _effective() and (not stored_override or normalize_persona_name(stored_override) == name):
             await matcher.finish(Message(f"当前已经是 {name} 人格, 不用切。"))
 
     # 覆盖 mutation 和旧口吻状态清理必须跟聊天走同一排队通道：
@@ -13531,9 +13545,9 @@ async def handle_persona_command(matcher: Matcher, event: MessageEvent, state: T
             await _lock_stack.enter_async_context(group_lock)
         try:
             if clear_override:
-                changed = persona_override_store.clear(scope)
+                changed = await asyncio.to_thread(persona_override_store.clear, scope)
             else:
-                persona_override_store.set(scope, name, set_by=str(event.user_id))
+                await asyncio.to_thread(persona_override_store.set, scope, name, set_by=str(event.user_id))
                 changed = True
         except OSError as exc:
             logger.warning(f"persona override persistence failed: {type(exc).__name__}")
@@ -14262,6 +14276,8 @@ def _execute_meme_admin_sync(cmd: str, arg: str, *, scope: str, persona: str) ->
         return f"已删除 scope meme：{arg}" if removed else "删除失败。"
 
     if cmd == "meme_clear":
+        if arg:
+            return "用法：/meme_clear（不接受参数）"
         removed = scope_lorebook_store.clear_scope(scope, persona=persona, kind="meme")
         return f"已清空 {scope_label} 的 scope memes：{removed} 条；lore 保留。"
     return None
@@ -14364,6 +14380,8 @@ def _execute_timeline_admin_sync(cmd: str, arg: str, *, scope: str, persona: str
         return f"已删除 timeline：{arg}" if removed else f"未找到 timeline item：{arg}"
 
     if cmd == "timeline_clear":
+        if arg:
+            return "用法：/timeline_clear（不接受参数）"
         removed = timeline_store.clear_items(scope, persona=persona)
         return f"已清空 {scope_label} 的 timeline：{removed} 条。"
     return None
@@ -14415,6 +14433,8 @@ def _execute_adaptive_admin_sync(cmd: str, arg: str, *, scope: str, persona: str
         return f"已删除 adaptive prompt：{arg}" if removed else f"未找到 adaptive prompt：{arg}"
 
     if cmd == "adaptive_clear":
+        if arg:
+            return "用法：/adaptive_clear（不接受参数）"
         removed = adaptive_prompt_store.clear_prompts(scope, persona=persona)
         return f"已清空 {scope_label} 的 adaptive prompts：{removed} 条。"
     return None
@@ -18227,8 +18247,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 # ── DEV ENDPOINT: /dev/sim_chat ──────────────────────────────────────────
 # 不发到 QQ, 只 mock 一个 OneBot event 走完整 _build_messages, 可选真调 AI 拿 reply.
 # 用途: 通过 rpwsh `Invoke-RestMethod` 触发, 验证 prompt 改动效果 / 智能层串接.
-# 仅监听 127.0.0.1 — 外网不可达 (nonebot fastapi 默认绑 0.0.0.0, 但生产环境
-# bot 端口前面有防火墙规则, 这里加 user_id 鉴权再防误用).
+# 管理接口默认仅直接回环访问，配置令牌后可经 HTTPS 认证。
 # 主人 2026-05-28 C6: FastAPI dashboard 路由 (catty context window + cache 监控)
 @get_driver().on_startup
 async def _mount_catty_dashboard() -> None:
@@ -18246,12 +18265,13 @@ async def _mount_dev_sim_chat_endpoint() -> None:
     try:
         from nonebot import get_app
         app = get_app()
-        from fastapi import Request
+        from fastapi import Depends, Request
+        from .dashboard import require_local_admin
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"dev /dev/sim_chat: fastapi not available ({exc}), skip mount")
         return
 
-    @app.post("/dev/sim_chat")
+    @app.post("/dev/sim_chat", dependencies=[Depends(require_local_admin)])
     async def _dev_sim_chat(req: Request):
         try:
             body = await req.json()
@@ -18320,7 +18340,7 @@ async def _mount_dev_sim_chat_endpoint() -> None:
 
     logger.info("dev /dev/sim_chat endpoint mounted (POST {user_id, text, group_id?, live, history_replace, include_messages, full_context, nickname/card/title/group_name})")
 
-    @app.post("/dev/ambient_inject")
+    @app.post("/dev/ambient_inject", dependencies=[Depends(require_local_admin)])
     async def _dev_ambient_inject(req: Request):
         """开发用: 往 ambient_store 注入一条假 group msg, 测试 ambient prompt 注入流程.
         Body: {scope, user_id, nickname, text}

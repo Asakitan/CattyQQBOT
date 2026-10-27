@@ -78,7 +78,7 @@
 
 ### 参数与默认值
 
-查询可用位置参数或 `--text`；后者非空时优先。默认 scope 为 `group:local`，`--private` 改为 `private:local`；显式 `--scope private:ID` 同样启用私聊模式。`--private` 与显式 `group:ID` 冲突时直接报参数错误，不进入检索。
+查询可用位置参数或 `--text`；后者非空时优先。`--scope` 支持 `group:ID:user:ID` 成员历史键。默认 scope 为 `group:local`，`--private` 改为 `private:local`；显式 `--scope private:ID` 同样启用私聊模式。`--private` 与显式 `group:ID` 冲突时直接报参数错误，不进入检索。
 
 | 参数 | 原有预览默认 | 加 `--production-defaults` 后的未指定项 | 含义 |
 | --- | --- | --- | --- |
