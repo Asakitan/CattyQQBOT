@@ -4,7 +4,9 @@
 
 `/meme_clear`、`/timeline_clear`、`/adaptive_clear` 不接受参数；带参数时显示用法，不清空数据。人格覆盖文件无法解析时保留原文件并禁止写入，需修复或恢复该文件后重试。
 
-### HTTP 管理接口（本地候选，未部署）
+### HTTP 管理接口
+
+该保护已随 2026-10-27 安全并入部署；远端 `test_security_dashboard_auth` 9 项通过。
 
 `/dashboard`、`/dashboard/state`、`/dashboard/sse`、`/dashboard/_js_test`、`/dev/sim_chat` 与 `/dev/ambient_inject` 共享保护，不影响 OneBot 路由。未设置 `CATTY_ADMIN_TOKEN` 时只允许直接回环请求，并要求本机 Host 和同源 Origin；不要通过会剥除转发头的本机反向代理转发这些接口。
 

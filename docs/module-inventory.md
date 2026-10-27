@@ -2,23 +2,23 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
-| `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 基线已部署；Python 3.14 路径检查候选未部署 |
+| `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
-| `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 基线已部署；图片 URL 安全候选未部署 |
-| `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署并并入本地 |
-| `dashboard.py` / `__init__.py` | 管理及开发 HTTP 接口访问 → `ADMIN_COMMANDS.md` | 基线已部署；回环限制和可选令牌鉴权候选未部署 |
+| `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 已部署；图片 URL 安全校验已上线 |
+| `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署 |
+| `dashboard.py` / `__init__.py` | 管理及开发 HTTP 接口访问 → `ADMIN_COMMANDS.md` | 已部署；回环限制与可选令牌鉴权 |
 | `src/catty_qq_ai/prompt_manager.py` | 学术长度豁免与有效提示词注册 → `docs/prompt-testing.md` | 已部署 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署；生产群额度单字段已更新 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
-| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 基线已部署；安全候选1214项、0失败/错误、9跳过，未部署 |
-| `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排、引用检索与工具感知教程 → `docs/harness-evidence.md` | 基线已部署；成员作用域与身份校验候选未部署 |
+| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 已部署；本地1214项、0失败/错误、9跳过 |
+| `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排、引用检索与工具感知教程 → `docs/harness-evidence.md` | 已部署；成员作用域与身份校验已上线 |
 | `reply_admission.py` / `__init__.py` | 同群历史与当前发言者驱动弱唤醒/续聊模型判门 | 已部署；16项纯判门和集成回归通过 |
-| `fdj_scene_retrieval.py` | 昵称归一化精确索引与相关性过滤 | 基线已部署；语料配置和缓存候选未部署 |
+| `fdj_scene_retrieval.py` | 昵称归一化精确索引与相关性过滤 | 已部署；语料配置与缓存键已上线 |
 | `tools.py` / `__init__.py` | 图片发送者、历史来源与同模型原图透传 | 已部署；未验证真实模型识图 |
 | `openai_client.py` / `config.py` / `token_billing.py` | 默认 max 思考与每用户跨群每小时额度 | 已部署；生产额度已更新为3000万 |
 | `src/catty_qq_ai/fdj_corpus_store.py` / `catty_config_loader.py` | 语料作用域及 FDJ 配置别名 → `docs/harness-config.md` | 已部署 |
 | `scripts/fadianji_harness_cli.py` / `benchmark_harness.py` | 本地预览、显式生产预算、合成基准 → `docs/prompt-testing.md` | 已部署 |
-| `persona_store.py` / `persona_override_store.py` | JSON 定义、指令映射、版本与原子发布 → `docs/persona-json.md` | 基线已部署；覆盖表跨进程锁候选未部署 |
+| `persona_store.py` / `persona_override_store.py` | JSON 定义、指令映射、版本与原子发布 → `docs/persona-json.md` | 已部署；覆盖表跨进程锁已上线 |
 | `personas/__init__.py` / `persona_defaults.py` / `persona_runtime.py` | 动态注册、中性默认、逐轮快照与会话切换 → `docs/persona-runtime.md` | 已部署 |
 | `persona_admin.py` / `ADMIN_COMMANDS.md` | 导入、生成、自定义指令与手册 → `docs/persona-generation.md` | 已部署超时舍入修复 |
 | `tools.py` / `request_intent.py` / `catty_sim_chat.py` | 上下文意图、可选文件能力、默认研究与技能提示，auto工具选择 → `docs/tool-contracts.md`、`docs/skill-guidance.md` | 研究增量已部署 |
@@ -40,8 +40,8 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
-| 2026-10-27 | 图片地址、管理接口、Python 3.14 路径及人格覆盖并发安全候选 | Python 3.11 离线1214项、0失败/错误、9跳过；Python 3.14.3 沙箱及并发45项通过；未部署 |
-| 2026-10-27 | Harness、提示词与管理员命令隔离审查候选 | 1185项、0失败/错误、9跳过；未部署，真实模型和QQ未测 |
+| 2026-10-27 | 图片地址、管理接口、Python 3.14 路径及人格覆盖并发安全并入并部署 | 本地1214项、0失败/错误、9跳过；Python 3.14.3 沙箱及并发45项、远端安全/存储/面板79项通过；33文件双端SHA-256一致 |
+| 2026-10-27 | Harness、提示词与管理员命令隔离审查并入部署 | 1185项、0失败/错误、9跳过；随本次安全并入上线 |
 | 2026-10-27 | push_zip 部署隔离候选34文件并并入本地，生产与本地群小时额度由300万调整为3000万 | 34文件双端哈希一致；本地1154项通过；13:38:31插件加载、13:38:34重连、13:40:16配置热重载；远端1154项24失败、6错误、9跳过 |
 | 2026-10-27 | 候选增加群聊判门、图片/发言者归属、引用检索、场景精确召回、max与小时额度 | 64模块1154项、0失败/错误、9跳过；374文件语法通过；未部署或实测模型 |
 | 2026-10-27 | 隔离候选：摘要并发、证据归属、机机普通人格、截止时间与缓存身份 | 63模块1092项、0失败/错误、9跳过；372文件语法通过；原源码未替换，未部署 |

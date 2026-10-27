@@ -1,10 +1,10 @@
 # Fadianji evidence packet v2
 
-The local audit candidate checks memory identity against the supplied scope on
-every request, including requests without quoted text. For a valid
-`group:G:user:U` history scope, group-level RAG and scene providers use
-`group:G`; their returned evidence remains scope-checked. Character-book
-evidence uses the actual persona name. The candidate has not been deployed.
+The local audit fixes were merged and deployed on 2026-10-27. They check memory
+identity against the supplied scope on every request, including requests
+without quoted text. For a valid `group:G:user:U` history scope, group-level
+RAG and scene providers use `group:G`; their returned evidence remains
+scope-checked. Character-book evidence uses the actual persona name.
 
 ## API and compatibility
 
