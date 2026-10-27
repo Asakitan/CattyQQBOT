@@ -224,7 +224,7 @@ def build_adaptive_drift_skeleton() -> str:
     """
     lines = ["【适应口吻·完整 vibe 应对库】"]
     lines.append(
-        "(本轮检测到的 vibe 看 user 之后的 system msg catty_adaptive_drift_pointer; 没检测到 vibe 时本段不生效.)"
+        "(本轮检测到的 vibe 看尾部提示里的 vibe: 指针和 vibe=tag; 没检测到 vibe 时本段不生效.)"
     )
     for tag, hint in _VIBE_DRIFT_HINTS.items():
         lines.append(f"[{tag}] {hint}")

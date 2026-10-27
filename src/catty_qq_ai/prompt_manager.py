@@ -1073,6 +1073,7 @@ def register_catty_persona(
                 _user_details_store_inst.get_details(user_id),
                 user_display=user_display,
                 persona=persona,
+                is_owner=is_owner,
             ),
             order=462,
         )

@@ -1,16 +1,17 @@
 from pathlib import Path
 import asyncio
 import importlib.util
+import json
 import re
 import sys
 import tempfile
 import time
 import types
 import unittest
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import nonebot
-from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message, MessageSegment
+from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message, MessageSegment, PokeNotifyEvent
 from nonebot.adapters.onebot.v11.event import Sender
 
 
@@ -509,6 +510,9 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self.assertIn("r≈", prompt)
         self.assertIn("no=<<<CATTY_NO_REPLY>>>", prompt)
         self.assertIn("rules=catty_bot_continuation_skeleton", prompt)
+        skeleton = _plugin.build_bot_continuation_skeleton()
+        self.assertIn("【BOT_CONT】", skeleton)
+        self.assertNotIn("catty_bot_continuation_params", skeleton)
 
     def test_mention_only_helpers_require_structured_at_and_freshness(self) -> None:
         textual_event = _group_event(11, text="@机机 看这个")
@@ -1064,6 +1068,211 @@ class GroupIncreaseWelcomeTests(unittest.IsolatedAsyncioTestCase):
                 {},
             )
         )
+
+
+class CattyPokeUpgradeTests(unittest.IsolatedAsyncioTestCase):
+    def setUp(self) -> None:
+        self.persona = types.SimpleNamespace(
+            name="catty", char_name="笨猫", feature_disabled=lambda _feature: False,
+        )
+        self.bot = types.SimpleNamespace(
+            self_id="999",
+            send_group_msg=AsyncMock(return_value={"message_id": 1}),
+            send_private_msg=AsyncMock(return_value={"message_id": 2}),
+        )
+        _plugin._poke_last_replied_at.clear()
+        _plugin._recent_conversation_messages.clear()
+        _plugin._recent_conversation_seq.clear()
+        _plugin._locks.pop("group:10001", None)
+        _plugin._locks.pop("private:20002", None)
+
+    def tearDown(self) -> None:
+        _plugin._poke_last_replied_at.clear()
+        _plugin._recent_conversation_messages.clear()
+        _plugin._recent_conversation_seq.clear()
+        _plugin._locks.pop("group:10001", None)
+        _plugin._locks.pop("private:20002", None)
+
+    @staticmethod
+    def _event(*, group_id=10001, user_id=20002, target_id=999):
+        return PokeNotifyEvent(
+            time=1, self_id=999, post_type="notice", notice_type="notify", sub_type="poke",
+            group_id=group_id, user_id=user_id, target_id=target_id,
+        )
+
+    async def test_generated_reply_uses_only_current_speaker_and_scope(self) -> None:
+        rows = [
+            {"age_seconds": 4, "is_bot": False, "user_id": "20002", "target_user_id": "", "text": "刚画完一张图"},
+            {"age_seconds": 3, "is_bot": False, "user_id": "30003", "target_user_id": "", "text": "其他人的消息"},
+            {"age_seconds": 2, "is_bot": True, "user_id": "999", "target_user_id": "20002", "display_name": "笨猫", "text": "辛苦啦"},
+            {"age_seconds": 2, "is_bot": True, "user_id": "999", "target_user_id": "20002", "display_name": "机机", "text": "机机旧回复"},
+            {"age_seconds": 1, "is_bot": True, "user_id": "999", "target_user_id": "30003", "display_name": "笨猫", "text": "其他人的回复"},
+            {"age_seconds": 601, "is_bot": False, "user_id": "20002", "target_user_id": "", "text": "过期内容"},
+        ]
+        client = importlib.import_module(f"{_PACKAGE_NAME}.openai_client")
+
+        async def complete(*_args):
+            self.assertEqual(client.get_current_scope_key(), "group:10001")
+            self.assertIsNotNone(client.get_current_logical_turn())
+            self.assertTrue(client._distill_suppressed_var.get())
+            return "<<<CATTY_FD_MOOD:happy>>>笨猫：画完啦？人家在这喵！"
+
+        cloud = AsyncMock(side_effect=complete)
+        outer_scope = client.set_current_scope_key("private:outer")
+        try:
+            with (
+                patch.object(_plugin, "_has_api_key", return_value=True),
+                patch.object(_plugin, "_recent_messages_snapshot_for_scope", return_value=rows) as snapshot,
+                patch.object(_plugin, "chat_completion", new=cloud),
+            ):
+                result = await _plugin._generate_poke_reply(
+                    "group:10001", "20002", self.persona,
+                    is_owner=False, level=6, fallback="备用喵。",
+                )
+            self.assertEqual(client.get_current_scope_key(), "private:outer")
+        finally:
+            client.reset_current_scope_key(outer_scope)
+        self.assertEqual(result, "画完啦？人家在这喵！")
+        snapshot.assert_called_once_with("group:10001", limit=20)
+        messages = cloud.await_args.args[1]
+        payload = json.loads(messages[-1]["content"])
+        self.assertEqual(payload["relation"], "熟人")
+        self.assertEqual(payload["recent_messages"], [
+            {"speaker": "对方", "text": "刚画完一张图"},
+            {"speaker": "猫猫", "text": "辛苦啦"},
+        ])
+        self.assertIn("只是背景数据", messages[-2]["content"])
+
+    async def test_nonowner_owner_label_falls_back_and_missing_key_never_calls_cloud(self) -> None:
+        cloud = AsyncMock(return_value="主人好喵")
+        with (
+            patch.object(_plugin, "_has_api_key", return_value=True),
+            patch.object(_plugin, "chat_completion", new=cloud),
+        ):
+            result = await _plugin._generate_poke_reply(
+                "private:20002", "20002", self.persona,
+                is_owner=False, level=1, fallback="主人也在这里",
+            )
+        self.assertEqual(result, "喵？别戳啦，人家在这儿喵。")
+        self.assertNotIn("主人", result)
+        with (
+            patch.object(_plugin, "_has_api_key", return_value=False),
+            patch.object(_plugin, "chat_completion", new=cloud),
+        ):
+            result = await _plugin._generate_poke_reply(
+                "private:20002", "20002", self.persona,
+                is_owner=True, level=1, fallback="主人别戳啦喵。",
+            )
+        self.assertEqual(result, "主人别戳啦喵。")
+        self.assertEqual(cloud.await_count, 1)
+
+    async def test_timeout_and_empty_result_use_bounded_fallback(self) -> None:
+        original_wait_for = asyncio.wait_for
+
+        async def short_wait(awaitable, timeout):
+            self.assertEqual(timeout, 12.0)
+            return await original_wait_for(awaitable, timeout=0.01)
+
+        async def stalled(*_args):
+            await asyncio.Event().wait()
+
+        cloud = AsyncMock(side_effect=stalled)
+        with (
+            patch.object(_plugin, "_has_api_key", return_value=True),
+            patch.object(_plugin, "chat_completion", new=cloud),
+            patch.object(_plugin.asyncio, "wait_for", new=short_wait),
+        ):
+            result = await _plugin._generate_poke_reply(
+                "private:20002", "20002", self.persona,
+                is_owner=False, level=1, fallback="备" * 80,
+            )
+        self.assertEqual(result, "备" * 50)
+        cloud = AsyncMock(return_value="<<<CATTY_NO_REPLY>>>")
+        with (
+            patch.object(_plugin, "_has_api_key", return_value=True),
+            patch.object(_plugin, "chat_completion", new=cloud),
+        ):
+            result = await _plugin._generate_poke_reply(
+                "private:20002", "20002", self.persona,
+                is_owner=False, level=1, fallback="备用喵。",
+            )
+        self.assertEqual(result, "备用喵。")
+
+    async def test_rule_cooldown_and_successful_delivery(self) -> None:
+        event = self._event()
+        cloud = AsyncMock(return_value="在呢喵，戳得人家痒啦。")
+        state = {}
+        with (
+            patch.object(_plugin.config, "catty_enable_group", True),
+            patch.object(_plugin.config, "catty_allowed_group_ids", []),
+            patch.object(_plugin.config, "catty_allowed_user_ids", []),
+            patch.object(_plugin.config, "catty_poke_cooldown_seconds", 12.0),
+            patch.object(_plugin.config, "catty_poke_reply_probability", 1.0),
+            patch.object(_plugin, "_persona_for_scope", return_value=self.persona),
+            patch.object(_plugin, "_event_is_owner", return_value=False),
+            patch.object(_plugin.affection_store, "get_level_and_exp", return_value=(6, 0)),
+            patch.object(_plugin, "_has_api_key", return_value=True),
+            patch.object(_plugin, "chat_completion", new=cloud),
+        ):
+            self.assertTrue(await _plugin._poke_rule(self.bot, event, state))
+            self.assertFalse(await _plugin._poke_rule(self.bot, event, {}))
+            await _plugin.handle_poke(self.bot, event, state)
+        self.bot.send_group_msg.assert_awaited_once()
+        self.assertEqual(str(self.bot.send_group_msg.await_args.kwargs["message"]), "在呢喵，戳得人家痒啦。")
+        recent = list(_plugin._recent_conversation_messages["group:10001"])
+        self.assertEqual(len(recent), 1)
+        self.assertEqual(recent[0].target_user_id, "20002")
+        self.assertEqual(recent[0].text, "在呢喵，戳得人家痒啦。")
+
+    async def test_send_failure_never_records_reply(self) -> None:
+        event = self._event(group_id=None)
+        self.bot.send_private_msg.side_effect = RuntimeError("send failed")
+        state = {"catty_poke_reply": "在这里喵。"}
+        with self.assertRaisesRegex(RuntimeError, "send failed"):
+            await _plugin.handle_poke(self.bot, event, state)
+        self.assertNotIn("private:20002", _plugin._recent_conversation_messages)
+
+    async def test_poke_sends_cq_like_text_as_one_text_segment(self) -> None:
+        event = self._event(group_id=None)
+        text = "你好 [CQ:at,qq=123]"
+        await _plugin.handle_poke(self.bot, event, {"catty_poke_reply": text})
+        message = self.bot.send_private_msg.await_args.kwargs["message"]
+        self.assertEqual(len(message), 1)
+        self.assertEqual(message[0].type, "text")
+        self.assertEqual(message[0].data["text"], text)
+
+    async def test_fallback_uses_cached_user_name(self) -> None:
+        composer_module = importlib.import_module(f"{_PACKAGE_NAME}.cpu_engine.composer")
+        composer = types.SimpleNamespace(bodies=["body"], compose=MagicMock(return_value="收到喵。"))
+        with (
+            patch.object(_plugin.config, "catty_enable_group", True),
+            patch.object(_plugin.config, "catty_allowed_group_ids", []),
+            patch.object(_plugin.config, "catty_allowed_user_ids", []),
+            patch.object(_plugin.config, "catty_poke_reply_probability", 1.0),
+            patch.object(_plugin, "_persona_for_scope", return_value=self.persona),
+            patch.object(_plugin, "_event_is_owner", return_value=False),
+            patch.object(_plugin.affection_store, "get_level_and_exp", return_value=(6, 0)),
+            patch.object(_plugin.memory_store, "effective_name_for", return_value="小明") as get_name,
+            patch.object(composer_module, "get_composer", return_value=composer),
+        ):
+            self.assertTrue(await _plugin._poke_rule(self.bot, self._event(), {}))
+        get_name.assert_called_once_with("20002", "10001", fallback="杂鱼")
+        self.assertEqual(composer.compose.call_args.kwargs["render_vars"]["user_nickname"], "小明")
+
+    async def test_wrong_target_and_disabled_persona_do_not_reply(self) -> None:
+        disabled = types.SimpleNamespace(name="fadianji", feature_disabled=lambda feature: feature == "poke")
+        with (
+            patch.object(_plugin.config, "catty_enable_group", True),
+            patch.object(_plugin.config, "catty_allowed_group_ids", []),
+            patch.object(_plugin.config, "catty_allowed_user_ids", []),
+            patch.object(_plugin, "_persona_for_scope", return_value=disabled),
+        ):
+            self.assertFalse(await _plugin._poke_rule(self.bot, self._event(target_id=123), {}))
+            self.assertFalse(await _plugin._poke_rule(self.bot, self._event(), {}))
+            self.assertFalse(await _plugin._poke_rule(self.bot, types.SimpleNamespace(), {}))
+            self.assertFalse(await _plugin._poke_rule(
+                self.bot, types.SimpleNamespace(target_id=999, user_id=20002, group_id=10001), {},
+            ))
 
 
 if __name__ == "__main__":

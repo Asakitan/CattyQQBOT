@@ -3224,8 +3224,8 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         payload["yandex_blocked_hint"] = _persona_text(
             ctx.persona,
             "Yandex(ya.ru 备用域名也)拿到 stub 页,这是真人/X 搜图主力引擎不可用。"
-            "用猫娘人格告诉主人:Yandex 这次没回数据,真人/X 来源搜不到;"
-            "可以让主人去 config.json 的 ai.http_proxy 配个代理重试,或换张更清晰的图。"
+            "用猫娘人格告诉对方:Yandex 这次没回数据,真人/X 来源搜不到;"
+            "可以让对方去 config.json 的 ai.http_proxy 配个代理重试,或换张更清晰的图。"
             "**不要装作搜全了**,SauceNAO/ascii2d 的结果只覆盖二次元。",
             "Yandex（含 ya.ru 备用域名）拿到 stub 页，真人/X 搜图的主力引擎当前不可用。"
             "请如实说明本次没有拿到真人/X 来源；可建议用户在 config.json 的 ai.http_proxy 配置代理后重试，"
@@ -3247,7 +3247,7 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         payload["guidance"] = (
             "搜不到结果时用猫娘人格如实告诉用户没搜到,可以撒娇让 ta 换张更清晰的图或贴原图链接,"
             "**禁止编造作者/番名/链接**。"
-            + (" 本次 yandex 被阻断,如果是真人图请按 yandex_blocked_hint 提醒主人配代理。"
+            + (" 本次 yandex 被阻断,如果是真人图请按 yandex_blocked_hint 提醒对方配代理。"
                if yandex_blocked else "")
         )
     else:
@@ -3255,12 +3255,12 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         if x_twitter_hits:
             x_twitter_note = (
                 f" **❗本轮命中 {len(x_twitter_hits)} 条 X(Twitter) 链接(见 x_twitter_urls),"
-                "无论 similarity 多少,必须**优先复述这些 X 链接给主人 — 主人最关心 X 真人来源,"
+                "无论 similarity 多少,必须**优先复述这些 X 链接给对方 — X 真人来源优先,"
                 "不要因为相似度低就跳过 X 链接只贴二次元 booru。"
                 "**禁止**只贴 Konachan/Pixiv 而把 Twitter 链接埋掉。"
             )
         payload["guidance"] = (
-            "用笨猫人格复述 1-3 条最关键的结果。**主人定的高等级优选铁律(覆盖所有相似度判断)**:"
+            "用笨猫人格复述 1-3 条最关键的结果。**高等级优选铁律(覆盖所有相似度判断)**:"
             "**source=saucenao 或 source=yandex 的结果必须优先复述**(这两个是主力引擎,"
             "results 数组已经按这个规则排序好了 — top N 里 saucenao/yandex 的命中先看,"
             "其它引擎 ascii2d/iqdb/trace.moe 的结果只在 saucenao+yandex 都没有信号时再补)。"
@@ -3271,7 +3271,7 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
             "**绝对禁止**:跳过 saucenao/yandex 结果只贴 ascii2d/iqdb 的链接 — 那是 fallback,不是主答案。"
             + x_twitter_note
             + (" 如果搜出来的全是 booru/Pixiv 二次元站但图本身是真人/自拍,**必须**按 yandex_blocked_hint "
-               "提醒主人配代理(yandex_blocked=True 时)。"
+               "提醒对方配代理(yandex_blocked=True 时)。"
                if yandex_blocked else "")
         )
     if not _is_catty_persona(ctx.persona):
@@ -4730,11 +4730,11 @@ async def _deepseek_imagegen_plan(
         '      SFW 场景填 "sfw" (会自动加 Miao/miaomiao.png 作参考图锁人设);\n'
         '      NSFW/色情/露骨场景填 "nsfw" (会自动加 Miao/miaomiaonude.png);\n'
         '      其他 (画用户/画风景/画 OC) 填 null. self_portrait 命中时强制 provider="nai".\n'
-        '  - "short_review": 1-2 句笨猫语气的短评 (画好后会代替主 AI 发到群里), 必带『喵/喵呜/嗷呜/ฅฅ』之类的语气词,'
+        '  - "short_review": 1-2 句笨猫语气的短评 (画好后会代替主 AI 发到群里), 可带『喵/喵呜/ฅฅ』之类的语气词,'
         ' 软萌+傲娇+小动作. 示例:\n'
-        '      『画好啦~主人看看喜不喜欢嗷呜ฅฅ』\n'
-        '      『哼哼, 这就是人家的样子喵~ (偷瞄主人)』\n'
-        '      『嗷呜~ 才不是特地为主人画的呢! ฅฅ』\n'
+        '      『画好啦~看看喜不喜欢喵ฅฅ』\n'
+        '      『哼哼, 这就是人家的样子喵~ (偷瞄你)』\n'
+        '      『才不是特地为你画的呢喵! ฅฅ』\n'
         '笨猫人格简介: 白毛猫耳少女 155cm, JK 制服, 傲娇撒娇, 嘴硬心软, 叫男性『杂鱼』,'
         ' 自称『人家/猫猫/笨猫』, 不要在 short_review 里出现 OOC / 元评论 / Markdown.\n'
         "用户没明确说风格时默认 provider=nai (二次元最划算). 严禁输出 JSON 以外任何内容."
@@ -4874,7 +4874,7 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
                 "provider": "nai",
                 "prompt": "1girl, white hair, cat ears, JK uniform, golden eyes, cute, anime style",
                 "aspect": "portrait",
-                "short_review": "画好啦主人~ ฅฅ",
+                "short_review": "画好啦喵~ ฅฅ",
             }
         else:
             plan = {
@@ -4902,7 +4902,7 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
     if not _is_catty and self_portrait_kind == "nsfw" and not _nsfw_allowed:
         self_portrait_kind = "sfw" if _persona_imagegen is not None else ""
     _default_review = (
-        "画好啦主人~ ฅฅ"
+        "画好啦喵~ ฅฅ"
         if _is_catty
         else "画好了. 快看" if _persona_imagegen is not None else "画好了. 请查看"
     )
@@ -4910,6 +4910,8 @@ async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[s
         short_review = _default_review
     else:
         short_review = str(plan.get("short_review") or _default_review).strip()
+    if _is_catty and not _is_owner(ctx) and "主人" in short_review:
+        short_review = _default_review
 
     # 自画像 → 强制 NAI + 加本地参考图 (锁人设)
     local_ref_bytes: list[bytes] = []

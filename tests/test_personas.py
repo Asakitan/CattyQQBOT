@@ -77,6 +77,62 @@ class PersonaRegistryTests(unittest.TestCase):
         self.assertFalse(catty.cache_full_character_book)
         self.assertFalse(catty.semantic_harness_enabled)
 
+    def test_catty_prompt_keeps_character_and_contextual_rules(self) -> None:
+        core = _load_module("catty_core_persona")
+        reminder = _load_module("catty_persona_reminder")
+        catty = _personas.get_persona("catty")
+        manager_module = _load_module("prompt_manager")
+        manager = manager_module.PromptManager()
+        manager_module.register_catty_persona(
+            manager,
+            {"config": _FakeConfig(), "persona": catty, "scope": "group:10001", "is_group": True},
+        )
+        joined = "\n".join(m["content"] for m in manager.build_messages() if m.get("role") == "system")
+        self.assertIn(core.CATTY_CORE_PERSONA, joined)
+        self.assertIn(core.CATTY_GROUP_SILENCE, joined)
+        for anchor in (
+            "18 岁猫亚人萌妹", "只对真实主人", "≤50 字",
+            "先接当前发言者和话题", "样本只学口吻", "未实际查到或发送不要说已经完成",
+            "动作描写和颜文字按情绪可选",
+        ):
+            self.assertIn(anchor, core.CATTY_CORE_PERSONA)
+        self.assertIn("当前发言者的相关续聊窗口", core.CATTY_GROUP_SILENCE)
+        self.assertIn("(动作) 和颜文字可选", reminder.build_reminder_text(catty))
+        self.assertNotIn("每条回复必备", core.CATTY_CORE_PERSONA)
+
+    def test_user_details_use_current_owner_and_persona(self) -> None:
+        details_module = _load_module("user_details_store")
+        manager_module = _load_module("prompt_manager")
+        details = {"favorite_foods": ["烤鱼"]}
+        store = types.SimpleNamespace(get_details=lambda _user_id: details)
+        for persona_name, is_owner, expected in (
+            ("catty", True, "主人之前不是说"),
+            ("catty", False, "你之前不是说"),
+            ("fadianji", True, "你之前不是说"),
+            ("fadianji", False, "你之前不是说"),
+        ):
+            with self.subTest(persona=persona_name, is_owner=is_owner):
+                persona = _personas.get_persona(persona_name)
+                prompt = details_module.build_user_details_prompt(details, persona=persona, is_owner=is_owner)
+                self.assertIn(expected, prompt)
+                manager = manager_module.PromptManager()
+                manager_module.register_catty_persona(manager, {
+                    "config": _FakeConfig(), "persona": persona, "scope": "group:1",
+                    "user_id": "123", "user_display": "小明", "is_owner": is_owner,
+                    "user_details_store": store,
+                })
+                registered = next(m["content"] for m in manager.build_messages() if "【已知小明的细节】" in m["content"])
+                self.assertIn(expected, registered)
+                if expected.startswith("你"):
+                    self.assertNotIn("主人", registered)
+        self.assertIn("你之前不是说", details_module.build_user_details_prompt(details))
+
+    def test_adaptive_drift_skeleton_points_to_actual_vibe(self) -> None:
+        text = _load_module("author_note").build_adaptive_drift_skeleton()
+        self.assertIn("vibe:", text)
+        self.assertIn("vibe=tag", text)
+        self.assertNotIn("catty_adaptive_drift_pointer", text)
+
     def test_get_persona_fallback(self) -> None:
         self.assertEqual(_personas.get_persona("nonexistent").name, "catty")
         self.assertEqual(_personas.get_persona("").name, "catty")

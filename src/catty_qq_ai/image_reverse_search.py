@@ -955,7 +955,7 @@ def format_image_search_summary(
         elif "_" in errors:
             lines.append(f"(原因: {errors['_']})")
     lines.append(
-        "AI 复述要求: 用笨猫人格挑 1-3 条最关键的(优先 similarity>80% 或主人明确想要的字段),"
+        "AI 复述要求: 按当前人格挑 1-3 条最关键的(优先 similarity>80% 或用户明确想要的字段),"
         "不要照搬 JSON,不要复读相似度小数;禁止编造没出现在结果里的作者/番名/链接。"
     )
     return "\n".join(lines)

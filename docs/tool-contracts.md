@@ -32,6 +32,7 @@
 
 ## 图片工具
 
+- 反向搜图的用户称谓改为中性称呼、摘要按当前人格表述，保留引擎与 X 链接优先级；猫猫生图短评对访客过滤「主人」并回退中性猫猫配文。该增量已部署。
 - `catty_look_image` 数字引用与 `catty_image_search.image_index` 共用候选：`input_image_urls`（当前图及调用方合并的引用图）在前，`recent_image_urls` 在后，按 URL 去重且保留首次出现顺序。
 - 引用消息中的图即使当前消息无附图、最近图列表为空，也可成为候选；本工具不额外读取事件或改 URL 校验策略。
 - `mSEQ#INDEX` 仍指滚动消息快照中指定消息的图，不受候选去重影响；既可用于 `look_image.image_ref`，也可用于 `image_search.image_url`。无效引用直接报错，不偷偷搜索另一个候选。

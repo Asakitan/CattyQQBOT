@@ -20,6 +20,7 @@
 | `scripts/fadianji_harness_cli.py` / `benchmark_harness.py` | 本地预览、显式生产预算、合成基准 → `docs/prompt-testing.md` | 已部署 |
 | `persona_store.py` / `persona_override_store.py` | JSON 定义、指令映射、版本与原子发布 → `docs/persona-json.md` | 已部署；覆盖表跨进程锁已上线 |
 | `personas/__init__.py` / `persona_defaults.py` / `persona_runtime.py` | 动态注册、中性默认、逐轮快照与会话切换 → `docs/persona-runtime.md` | 已部署 |
+| `catty_core_persona.py` / `catty_persona_reminder.py` / `persona_prompts.py` / `__init__.py` / `tools.py` | 猫猫人格、当前用户称呼及戳戳短回复 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署，双端一致；机机戳戳仍禁用 |
 | `persona_admin.py` / `ADMIN_COMMANDS.md` | 导入、生成、自定义指令与手册 → `docs/persona-generation.md` | 已部署超时舍入修复 |
 | `tools.py` / `request_intent.py` / `catty_sim_chat.py` | 上下文意图、可选文件能力、默认研究与技能提示，auto工具选择 → `docs/tool-contracts.md`、`docs/skill-guidance.md` | 研究增量已部署 |
 | `tests/test_reply_queue_retention.py` / `test_request_intent.py` / `test_openai_client.py` / `test_reply_deadline.py` / `test_persona_runtime.py` | 排队准入、工具提示、预算与恢复合同 → `docs/session-log/session-04.md` | 已部署，双端一致 |
@@ -40,6 +41,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-27 | 猫猫人格、称呼与戳戳升级；保留机机戳戳禁用 | 本地27模块487项，0失败/错误、9跳过；16文件双端一致；远端210项通过；无真实模型/QQ评测 |
 | 2026-10-27 | 图片地址、管理接口、Python 3.14 路径及人格覆盖并发安全并入并部署 | 本地1214项、0失败/错误、9跳过；Python 3.14.3 沙箱及并发45项、远端安全/存储/面板79项通过；33文件双端SHA-256一致 |
 | 2026-10-27 | Harness、提示词与管理员命令隔离审查并入部署 | 1185项、0失败/错误、9跳过；随本次安全并入上线 |
 | 2026-10-27 | push_zip 部署隔离候选34文件并并入本地，生产与本地群小时额度由300万调整为3000万 | 34文件双端哈希一致；本地1154项通过；13:38:31插件加载、13:38:34重连、13:40:16配置热重载；远端1154项24失败、6错误、9跳过 |
