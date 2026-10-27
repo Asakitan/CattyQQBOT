@@ -12,8 +12,18 @@ The caller's evidence wait is bounded to eight seconds, and in-flight RAG querie
 across prompt and evidence paths are limited to four. A saturated RAG source
 raises `RagQueryBusyError`, recorded by the packet as an error rather than an
 empty result. A timeout stops waiting, not the worker thread. The change was
-pushed to `D:/CattyQQAI` on 2026-10-27 21:43 (remote clock); both copies hash
-identically and the plugin reloaded.
+pushed to `D:/CattyQQAI` on 2026-10-27 21:43 (remote clock); the copies then
+matched and the plugin reloaded.
+
+## 2026-10-28 local BGE (deployed and merged locally)
+
+The deployed version raises `RagQueryError` when collection access or an
+embedding request fails, so the evidence packet reports `error` instead of an
+empty result. Model startup runs in a separate process; a query while that
+process is not ready also reports an error. Only a `TypeError` or `ValueError`
+explicitly identifying an unsupported `where` or filter triggers the unfiltered
+retry; client-side persona filtering still applies. It retains the earlier
+bounded-thread implementation and is merged into the local active source.
 
 ## API and compatibility
 

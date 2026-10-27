@@ -184,13 +184,38 @@ class TriggerIntegrationTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_existing_nsfw_context_bypasses_admission(self):
         namespace = _extract({"_model_should_reply_to_group"}, {
+            "__name__": f"{_PKG}.test_runtime", "__package__": _PKG,
             "_conversation_queue_key": lambda event: "group:10001",
+            "_persona_for_event": lambda event: types.SimpleNamespace(nsfw_allowed=lambda **kwargs: True),
+            "_phase_scope_for": lambda scope, persona: scope,
             "_active_nsfw_group_occupant": lambda scope: ("20001", 1.0),
         })
         self.assertTrue(await namespace["_model_should_reply_to_group"](_event(), types.SimpleNamespace(text="测试"), continuation=True))
         namespace["_active_nsfw_group_occupant"] = lambda scope: None
         namespace["_is_nsfw_context"] = lambda scope, user_id, text: True
         self.assertTrue(await namespace["_model_should_reply_to_group"](_event(), types.SimpleNamespace(text="测试"), continuation=True))
+
+    async def test_disabled_group_nsfw_cannot_bypass_admission(self):
+        persona = types.SimpleNamespace(char_name="机机", nsfw_allowed=lambda **kwargs: False)
+        occupant = Mock(return_value=("20001", 1.0))
+        namespace = _extract({"_model_should_reply_to_group"}, {
+            "__name__": f"{_PKG}.test_runtime", "__package__": _PKG,
+            "_conversation_queue_key": lambda event: "group:10001",
+            "_persona_for_event": lambda event: persona,
+            "_phase_scope_for": lambda scope, current: scope,
+            "_active_nsfw_group_occupant": occupant,
+            "_is_nsfw_context": Mock(return_value=True),
+            "_recent_messages_snapshot_for_scope": lambda scope, limit: [],
+            "_event_message_id": lambda event: "",
+            "_display_name": lambda event: "群友",
+        })
+        admission = importlib.import_module(f"{_PKG}.reply_admission")
+        with patch.object(admission, "decide_reply", new_callable=AsyncMock, return_value=False) as decide:
+            self.assertFalse(await namespace["_model_should_reply_to_group"](
+                _event(), types.SimpleNamespace(text="测试"), continuation=True,
+            ))
+        decide.assert_awaited_once()
+        occupant.assert_not_called()
 
     async def test_existing_followup_survives_filter_disabled_without_opening_new_windows(self):
         self.config.catty_filter_enabled = False
@@ -214,12 +239,15 @@ class TriggerIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(await self.ns["_rule"](self.bot, _event("在吗"), {}))
         self.assertTrue(await self.ns["_rule"](self.bot, _event("在吗", at=True), {}))
 
-    async def test_catty_gate_not_narrowed(self):
+    async def test_catty_shares_explicit_wake_gate(self):
         self.persona.name = "catty"
+        self.persona.trigger_prefixes = ("猫猫",)
+        self.persona.directed_keywords = ("猫猫",)
         incoming = types.SimpleNamespace(text="搜索天气", directly_requested=True, mentioned=False,
             replied_to_self=False, used_prefix=False, needs_filter=False, opportunistic=False, has_image=False)
         self.ns["extract_incoming_message"] = lambda *a, **k: incoming
-        self.assertTrue(await self.ns["_rule"](self.bot, _event("搜索天气"), {}))
+        self.assertFalse(await self.ns["_rule"](self.bot, _event("搜索天气"), {}))
+        self.assertTrue(await self.ns["_rule"](self.bot, _event("猫猫 搜索天气"), {}))
 
     async def test_repeat_yields_to_wake_reference_and_continuation(self):
         for event, reply, continuation in (
@@ -709,7 +737,7 @@ class HostWiringTests(unittest.IsolatedAsyncioTestCase):
         start = next(n for n in _TREE.body if isinstance(n, ast.AsyncFunctionDef) and n.name == "start_memory_summary_loop")
         top_level_calls = [ast.unparse(n) for n in start.body if isinstance(n, ast.Expr)]
         self.assertIn("asyncio.create_task(_fdj_proactive_bubble_loop())", top_level_calls)
-        self.assertIn("asyncio.create_task(_proactive_bubble_loop())", top_level_calls)
+        self.assertNotIn("asyncio.create_task(_proactive_bubble_loop())", top_level_calls)
         handler = next(n for n in _TREE.body if isinstance(n, ast.AsyncFunctionDef) and n.name == "handle_chat")
         source = ast.unparse(handler)
         self.assertIn("_active_group_replies[queue_key] += 1", source)

@@ -70,6 +70,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "http_proxy": "",
         "cache_diag_enabled": False,
     },
+    "rag": {
+        "local_bge_enabled": True,
+    },
     "ai_fallback": {
         "enabled": False,
         "base_url": "",
@@ -678,6 +681,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_NATIVE_PREFILL_MODE", ai.get("native_prefill_mode"))
     _set_env("CATTY_NATIVE_EXTRA_BETAS", ai.get("native_extra_betas"), json_value=True)
     _set_env("CATTY_TEST_PROVIDERS", ai.get("test_providers"), json_value=True)
+
+    rag = _section(data, "rag")
+    _set_env("CATTY_RAG_LOCAL_BGE_ENABLED", rag.get("local_bge_enabled"))
 
     ai_fallback = _section(data, "ai_fallback")
     _set_env("CATTY_AI_FALLBACK_ENABLED", ai_fallback.get("enabled"))

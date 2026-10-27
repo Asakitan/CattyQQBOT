@@ -51,7 +51,7 @@ class _FakeConfig:
 
 class PersonaRegistryTests(unittest.TestCase):
     def test_catty_persona_is_pure_default(self) -> None:
-        """catty 实例所有内容字段必须为 None — 保证 prompt 管线走老路径字节不变。"""
+        """猫猫继续使用原有人格内容，回复行为使用共享架构。"""
         catty = _personas.get_persona("catty")
         self.assertEqual(catty.name, "catty")
         self.assertEqual(catty.char_name, "笨猫")
@@ -66,16 +66,16 @@ class PersonaRegistryTests(unittest.TestCase):
         self.assertEqual(catty.disabled_prompt_segments, frozenset())
         self.assertEqual(catty.disabled_features, frozenset())
         self.assertEqual(catty.conversation_prompts, ())
-        # 主人 2026-08-10: catty 保持旧触发/续聊行为
+        # 猫猫保留原唤醒词，续聊与证据编排使用共享机制。
         self.assertFalse(catty.mention_only_trigger)
-        self.assertIsNone(catty.followup_reply_budget)
+        self.assertEqual(catty.followup_reply_budget, 2)
         self.assertIsNone(catty.emoji_root)
         self.assertIsNone(catty.emoji_manifest_path)
         self.assertIsNone(catty.emoji_download_dir)
         self.assertIsNone(catty.emoji_allow_downloads)
         self.assertIsNone(catty.emoji_guidance)
         self.assertFalse(catty.cache_full_character_book)
-        self.assertFalse(catty.semantic_harness_enabled)
+        self.assertTrue(catty.semantic_harness_enabled)
 
     def test_catty_prompt_keeps_character_and_contextual_rules(self) -> None:
         core = _load_module("catty_core_persona")

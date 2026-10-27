@@ -31,7 +31,7 @@ def load_queue_check():
         if "queue_wait_seconds" in names:
             collecting = True
             continue
-        if "_turn_persona_token" in names:
+        if "_persona" in names or "_turn_persona_token" in names:
             break
         if collecting:
             body.append(copy.deepcopy(statement))

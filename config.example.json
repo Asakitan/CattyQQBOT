@@ -38,6 +38,9 @@
         "compaction_trigger_tokens": 150000,
         "cache_diag_enabled": false
     },
+    "rag": {
+        "local_bge_enabled": true
+    },
     "ai_fallback": {
         "enabled": false,
         "base_url": "",

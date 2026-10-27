@@ -7,16 +7,14 @@
   语义近的旧对话也能召回, 让笨猫『记得久远的事』
 
 设计:
-- 用 chromadb PersistentClient + DefaultEmbeddingFunction (内置 all-MiniLM-L6-v2 ONNX)
+- 用 chromadb PersistentClient，默认由独立进程加载已缓存的本地 BGE 模型
 - per-scope collection 隔离 (collection_name = catty_scope_<sanitized_scope>)
 - 每条 user/assistant 消息 add 一次, doc_id = `<scope>:<timestamp>:<role>`
 - 召回 top-K=3 (可调), 按余弦相似度
-- **Graceful fallback**: chromadb import 失败 / init 失败 → store._enabled=False,
-  add/query 都 no-op, catty 主流程不受影响
-- 不重复存: 同一 doc_id 已存就跳过 (用 upsert 而不是 add)
+- chromadb import / init 失败时禁用 store；实际查询失败抛 RagQueryError
+- 同一 doc_id 由 upsert 覆盖；回填会跳过内容和元数据均未变化的条目
 
-落盘到 memory_dir/chroma/ (chromadb 自动用 sqlite + DuckDB)。
-首次启动会下载 ~80MB ONNX embedding 模型, 之后 cache 在 ~/.cache/chroma。
+落盘到 memory_dir/chroma_bge/。默认模型只读取本地缓存，不自动下载。
 """
 from __future__ import annotations
 
@@ -51,6 +49,10 @@ _PERSONA_SPECIFIC_RAG_ROLES = frozenset({"assistant", "lore_entry"})
 
 
 class RagQueryBusyError(RuntimeError):
+    pass
+
+
+class RagQueryError(RuntimeError):
     pass
 
 
@@ -104,11 +106,8 @@ def _sanitize_collection_name(scope: str) -> str:
 class CattyRAGStore:
     """ChromaDB-based per-scope 向量记忆。enabled=False 时全部 no-op。
 
-    Embedding 优先级:
-    1. config.catty_openai_* 配置存在 → OpenAIEmbeddingFunction (推荐, 不依赖本地 ONNX)
-       需要 host 支持 /v1/embeddings 端点 + model 'text-embedding-3-small' 或类似
-    2. fallback: chromadb 默认 ONNX (all-MiniLM-L6-v2)
-       Python 3.14+ 上 onnxruntime wheel DLL 不兼容会自动 disable
+     默认使用独立进程的离线 BGE；显式关闭该开关时保留旧 OpenAI/ONNX 选择。
+     模型不可用时不会自动改用其他向量空间。
     """
 
     def __init__(self, memory_path: str | Path, config: Any = None) -> None:
@@ -122,7 +121,7 @@ class CattyRAGStore:
         self._config = config
         self._client = None
         self._embedding_fn = None  # 显式传给 collection, 不用 chromadb default
-        self._embedding_source: str = ""  # debug: "openai" / "onnx" / ""
+        self._embedding_source: str = ""  # local:bge-small-zh / openai / onnx
         # 主人 2026-05-30: 改 dict → OrderedDict + last_access_at, LRU evict
         self._collections: OrderedDict[str, Any] = OrderedDict()  # name → collection
         self._collection_last_access: dict[str, float] = {}  # name → last access ts
@@ -133,10 +132,7 @@ class CattyRAGStore:
     def _try_init(self) -> None:
         """Try-import chromadb + 初始化 PersistentClient + 选 embedding backend.
 
-        主人 2026-05-30: embedding 优先级改为 本地 bge > OpenAI > chromadb 默认 ONNX:
-        - 本地 bge-small ONNX (text2vec_engine 已加载, 复用免烧 token, 0 网络成本)
-        - OpenAI compatible (走 deepseek API 烧 token, 仅 fallback)
-        - chromadb 默认 ONNX (Python 3.14 DLL fail → disable)
+        默认选择隔离进程本地 BGE；关闭本地开关才选择旧 OpenAI/ONNX 路径。
         """
         try:
             import chromadb  # type: ignore
@@ -144,7 +140,7 @@ class CattyRAGStore:
             self._init_error = f"chromadb not installed: {exc}"
             logger.warning("catty_rag: chromadb not installed, RAG disabled — pip install chromadb to enable")
             return
-        # 选 embedding backend (本地优先, 免烧 deepseek token)
+        # 本地后端异步启动；只有显式关闭时才选择旧后端。
         ef = self._try_local_bge_embedding()
         if ef is None:
             ef = self._try_openai_embedding()
@@ -171,46 +167,24 @@ class CattyRAGStore:
             logger.warning(f"catty_rag: init failed, RAG disabled — {exc}")
 
     def _try_local_bge_embedding(self):  # noqa: ANN202
-        """主人 2026-05-30: 复用本地 bge-small ONNX (text2vec_engine), 不烧 deepseek token.
-
-        text2vec_engine 已经在 NLU warmup 时加载好 ONNX 模型, 这里直接 wrap 成
-        chromadb 接受的 EmbeddingFunction 接口 (callable + name attr).
-        """
-        try:
-            from .nlu.text2vec_engine import embed_sync_batch as _embed_batch
-        except Exception as exc:  # noqa: BLE001
-            logger.debug(f"catty_rag: local bge text2vec_engine import failed: {exc}")
+        if not bool(getattr(self._config, "catty_rag_local_bge_enabled", True)):
             return None
-
-        class _LocalBGEEmbeddingFunction:
-            def __call__(self, input):  # type: ignore[no-untyped-def]
-                if not input:
-                    return []
-                texts = [str(t) for t in input]
-                vecs = _embed_batch(texts)
-                if vecs is None:
-                    # 失败时返回零向量占位, 让 chromadb 不崩 (后续 query 也会返回低分)
-                    return [[0.0] * 512 for _ in texts]
-                # bge-small dim=512, 已 L2-normalized
-                return [v.tolist() for v in vecs]
-
-            @staticmethod
-            def name():  # chromadb 0.5+ 需要 EmbeddingFunction 有 name
-                return "local-bge-small-zh"
-
-        # 探测一下确实能用
-        try:
-            test_vec = _embed_batch(["test"])
-            if test_vec is None or len(test_vec) == 0:
-                logger.debug("catty_rag: local bge probe returned None/empty, skip")
-                return None
-        except Exception as exc:  # noqa: BLE001
-            logger.debug(f"catty_rag: local bge probe failed: {exc}")
-            return None
+        from .rag_embedding_backend import LocalBGEEmbeddingFunction
 
         self._embedding_source = "local:bge-small-zh"
-        logger.info("catty_rag: using LOCAL bge-small ONNX embedding (0 token cost, free)")
-        return _LocalBGEEmbeddingFunction()
+        logger.info("catty_rag: using isolated local BGE embedding")
+        return LocalBGEEmbeddingFunction()
+
+    def start_embedding_worker(self) -> None:
+        if self._enabled:
+            start = getattr(self._embedding_fn, "start", None)
+            if callable(start):
+                start()
+
+    def close(self) -> None:
+        close = getattr(self._embedding_fn, "close", None)
+        if callable(close):
+            close()
 
     def _try_openai_embedding(self):  # noqa: ANN202
         """优先尝试 OpenAI compatible /v1/embeddings (无 ONNX 依赖, Python 3.14 兼容)。
@@ -344,33 +318,46 @@ class CattyRAGStore:
         user_id: str = "",
         ts: float | None = None,
         persona: str | None = None,
-    ) -> None:
-        """添加一条消息到 RAG。重复 doc_id 用 upsert 不会重复存。失败静默。"""
+        skip_unchanged: bool = False,
+    ) -> bool:
+        """添加消息；成功写入返回 True，失败或内容不变返回 False。"""
         if not self._enabled or not scope or not text or not text.strip():
-            return
+            return False
         col = self._get_collection(scope)
         if col is None:
-            return
+            return False
         ts = ts if ts is not None else time.time()
         role_name = str(role or "user").strip() or "user"
         persona_name = _normalise_persona(persona)
         doc_id = f"{int(ts * 1000)}:{role_name}:{user_id or 'na'}"
         if role_name in _PERSONA_SPECIFIC_RAG_ROLES and persona_name != _DEFAULT_PERSONA:
             doc_id = f"{doc_id}:{persona_name}"
+        document = text.strip()[:1500]
+        metadata = {
+            "role": role_name,
+            "user_id": str(user_id) if user_id else "",
+            "ts": ts,
+            "scope": scope,
+            "persona": persona_name,
+        }
         try:
+            get = getattr(col, "get", None)
+            if skip_unchanged and callable(get):
+                try:
+                    existing = get(ids=[doc_id], include=["documents", "metadatas"])
+                except Exception:  # noqa: BLE001
+                    existing = {}
+                if existing.get("documents") == [document] and existing.get("metadatas") == [metadata]:
+                    return False
             col.upsert(
                 ids=[doc_id],
-                documents=[text.strip()[:1500]],  # 单文档 max 1500 字
-                metadatas=[{
-                    "role": role_name,
-                    "user_id": str(user_id) if user_id else "",
-                    "ts": ts,
-                    "scope": scope,
-                    "persona": persona_name,
-                }],
+                documents=[document],
+                metadatas=[metadata],
             )
+            return True
         except Exception as exc:  # noqa: BLE001
-            logger.debug(f"catty_rag.add failed: {exc}")
+            logger.debug("catty_rag.add failed: %s", type(exc).__name__)
+            return False
 
     def query(
         self,
@@ -409,7 +396,7 @@ class CattyRAGStore:
     ) -> list[tuple[float, str, dict[str, Any]]]:
         col = self._get_collection(scope)
         if col is None:
-            return []
+            raise RagQueryError("RAG collection unavailable")
         persona_name = _normalise_persona(persona)
         fetch_n = top_k * 3 if boost_recency else top_k
         fetch_n = max(1, min(fetch_n, _MAX_RECALL_TOP_K))
@@ -424,13 +411,14 @@ class CattyRAGStore:
             else:
                 try:
                     res = col.query(**query_kwargs, where=where)
-                except Exception as exc:  # noqa: BLE001
-                    # 老 Chroma 或 metadata filter 不兼容时退回客户端过滤，仍不泄漏。
-                    logger.debug(f"catty_rag.query persona where fallback: {exc}")
+                except (TypeError, ValueError) as exc:
+                    if not any(word in str(exc).lower() for word in ("where", "filter")):
+                        raise
+                    logger.debug("catty_rag.query persona filter unavailable: %s", type(exc).__name__)
                     res = col.query(**query_kwargs)
         except Exception as exc:  # noqa: BLE001
-            logger.debug(f"catty_rag.query failed: {exc}")
-            return []
+            logger.debug("catty_rag.query failed: %s", type(exc).__name__)
+            raise RagQueryError(f"RAG query failed: {type(exc).__name__}") from exc
         docs = (res.get("documents") or [[]])[0] or []
         metas = (res.get("metadatas") or [[]])[0] or []
         dists = (res.get("distances") or [[]])[0] or []
@@ -491,12 +479,12 @@ class CattyRAGStore:
                 return False
 
     def backfill_memory(self, memory_store: Any) -> int:
-        """从 memory_store 导入所有 group/private/mention summaries 到 RAG (idempotent upsert)。
+        """从 memory_store 导入所有 group/private/mention summaries 到 RAG。
 
         - group summary → scope=`group:<id>`, role=memory_summary
         - private user summary → scope=`private:<id>`, role=memory_summary
         - member-in-group mention summary → scope=`group:<id>`, role=member_profile
-        返回 add 数 (含 upsert)。
+        返回实际写入数；已存在且未变化的条目不计数。
         """
         if not self._enabled:
             return 0
@@ -522,8 +510,8 @@ class CattyRAGStore:
             if summary:
                 try:
                     ts = float(group.get("last_summary_at") or 0.0) or time.time()
-                    self.add(f"group:{group_id}", summary, role="memory_summary", user_id="", ts=ts)
-                    count += 1
+                    if self.add(f"group:{group_id}", summary, role="memory_summary", user_id="", ts=ts, skip_unchanged=True):
+                        count += 1
                 except Exception:  # noqa: BLE001
                     pass
             # member-in-group profiles (每个群友的笨猫印象)
@@ -552,14 +540,15 @@ class CattyRAGStore:
                                 ts = _dt.fromisoformat(str(ts_raw).replace("Z", "+00:00")).timestamp()
                             except Exception:  # noqa: BLE001
                                 ts = time.time()
-                            self.add(
+                            if self.add(
                                 f"group:{group_id}",
                                 text,
                                 role="member_profile",
                                 user_id=str(mp_user_id),
                                 ts=ts,
-                            )
-                            count += 1
+                                skip_unchanged=True,
+                            ):
+                                count += 1
                         except Exception:  # noqa: BLE001
                             continue
         # private users: user["private_summary"] + user["profile"]
@@ -570,9 +559,9 @@ class CattyRAGStore:
             if priv:
                 try:
                     ts = float(user.get("last_private_summary_at") or 0.0) or time.time()
-                    self.add(f"private:{user_id}", priv, role="memory_summary",
-                             user_id=str(user_id), ts=ts)
-                    count += 1
+                    if self.add(f"private:{user_id}", priv, role="memory_summary",
+                                user_id=str(user_id), ts=ts, skip_unchanged=True):
+                        count += 1
                 except Exception:  # noqa: BLE001
                     pass
             # 私聊 user 也有 profile (gender/title/impression) 可以入 RAG 给 private:scope
@@ -591,19 +580,20 @@ class CattyRAGStore:
                 text = " | ".join(parts).strip()
                 if text:
                     try:
-                        self.add(
+                        if self.add(
                             f"private:{user_id}",
                             text,
                             role="user_profile",
                             user_id=str(user_id),
-                        )
-                        count += 1
+                            skip_unchanged=True,
+                        ):
+                            count += 1
                     except Exception:  # noqa: BLE001
                         pass
         return count
 
     def backfill_lorebook(self, scope_lorebook_store: Any) -> int:
-        """从 scope_lorebook 导入所有 entries 到 RAG (idempotent upsert)。"""
+        """从 scope_lorebook 导入 entries，返回实际写入数。"""
         if not self._enabled:
             return 0
         try:
@@ -614,15 +604,16 @@ class CattyRAGStore:
         for scope, entries in data.items():
             for entry in entries or []:
                 try:
-                    self.add(
+                    if self.add(
                         scope,
                         getattr(entry, "content", ""),
                         role="lore_entry",
                         user_id="",
                         ts=float(getattr(entry, "created_at", 0.0) or 0.0) or time.time(),
                         persona=getattr(entry, "persona", None),
-                    )
-                    count += 1
+                        skip_unchanged=True,
+                    ):
+                        count += 1
                 except Exception:  # noqa: BLE001
                     continue
         return count

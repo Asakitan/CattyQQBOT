@@ -52,6 +52,7 @@ class Config(BaseModel):
     catty_cache_hit_input_price_ratio: float = 0.02
     catty_openai_extra_headers: dict[str, str] = Field(default_factory=dict)
     catty_openai_extra_body: dict[str, Any] = Field(default_factory=dict)
+    catty_rag_local_bge_enabled: bool = True
 
     # 主 AI 主动生图(catty_imagegen tool)— 走 OpenAI Image API。
     # base_url/api_key 留空则复用上面 catty_openai_* 同一通道(codex/gpt-5.5 同 host 都行)。
@@ -266,8 +267,8 @@ class Config(BaseModel):
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
     # ── Local NLU enrichment (jieba / text2vec / HanLP) ─────────────────
-    # 主人 2026-08-15: cloud-only runtime。jieba 保留为纯分词；本地 embedding/NER
-    # 与启动 warmup 默认关闭，只有显式配置时才允许加载。
+    # jieba 保留为纯分词；NLU embedding/NER 和 NLU warmup 默认关闭。
+    # RAG 的独立本地 BGE 开关不受这些 NLU 开关影响。
     catty_use_jieba: bool = True
     catty_use_text2vec: bool = False
     catty_use_hanlp: bool = False

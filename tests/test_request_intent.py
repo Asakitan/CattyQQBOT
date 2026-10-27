@@ -88,7 +88,8 @@ class ContextRequestPromptTests(unittest.TestCase):
             self.assertLess(len(pointer), 80)
             self.assertNotIn(intent.CONTEXT_REQUEST_INTENT_PROMPT, hint)
             self.assertNotIn("把当前消息、最近历史", hint)
-            self.assertEqual("【机机·证据使用指南】" in hint, harness)
+            self.assertEqual("【角色·证据使用指南】" in hint, harness)
+            self.assertNotIn("【机机·证据使用指南】", hint)
 
 
 class ContextRequestInjectionTests(unittest.TestCase):

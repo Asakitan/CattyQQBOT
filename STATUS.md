@@ -3,25 +3,25 @@
 ## 2026-10-28 · 共享怀孕/NSFW 状态缺陷修复（已部署）
 
 - 审查共享人格架构下的怀孕与 NSFW 状态链路，修复四处缺陷：①`_build_messages` 对模块级 `_PREGNANCY_PREDICT` 赋值缺 `global`，预选小猫名字从未传出——handle_chat 永远读到空 dict，生产时 AI 预告的名字与落盘随机名不一致；现在每次构建前清零并正确导出，主路径轮不再吃到上一轮 spark（可能另一个人格）的 stale 预判。②`_PREGNANCY_STORES` 分库（如 `pregnancy_fadianji.json`）无任何 flush 覆盖——脏数据只在内存，重启/热重载整段进度丢失；已并入 `_managed_store_flush_loop` 30s 托管落盘与 shutdown flush 钩子。③主路径场景 hint 用裸 `_arc_scope` 读 phase，非 catty 人格会串到笨猫的 phase/场景（机机因 freeform 跳过未受影响，自定义人格受影响）；改用 `_phase_scope`。④CPU 引擎 S3 强互动判定的 phase 读取同样用裸 scope，已按人格归一。
-- **部署事故与修正**：首次 push_zip 用了本地活动 `__init__.py`（RAG 会话未并入本地的旧分支），把生产回退了约 6 分钟（23:14–23:20 远端时间）——`start_embedding_worker` 启动调用、`_stop_rag_embedding_on_shutdown`、复读只在发送成功后记历史、腿图失败中性文案被临时回退；期间两次重启 RAG 本地 BGE 仍正常就绪。已以 `.vscode/handoff/rag-async-20261028/local-bge-deploy-payload` 的已部署基线为底重放 4 处修复（diff 31+/5- 仅为修复本身），23:21 重推后生产恢复：哈希与本地一致、远端 py_compile 退出 0、`start_embedding_worker`/`_stop_rag_embedding_on_shutdown`/4 处修复全部在场、23:20:53 插件加载、23:21:03 OneBot 重连 + BGE worker ready、无 ERROR。本地活动源码同步改为该合并版，本地与生产不再分叉。
+- **部署事故与修正**：首次 push_zip 用了本地活动 `__init__.py`（RAG 会话未并入本地的旧分支），把生产回退了约 6 分钟（23:14–23:20 远端时间）——`start_embedding_worker` 启动调用、`_stop_rag_embedding_on_shutdown`、复读只在发送成功后记历史、腿图失败中性文案被临时回退；期间两次重启 RAG 本地 BGE 仍正常就绪。已以 `.vscode/handoff/rag-async-20261028/local-bge-deploy-payload` 的已部署基线为底重放 4 处修复（diff 31+/5- 仅为修复本身），23:21 重推后生产恢复：哈希与本地一致、远端 py_compile 退出 0、`start_embedding_worker`/`_stop_rag_embedding_on_shutdown`/4 处修复全部在场、23:20:53 插件加载、23:21:03 OneBot 重连 + BGE worker ready、无 ERROR。后来已把部署后的腿图增量和此前遗漏的 RAG 后端、配置及测试补入活动源码。
 - 验证：本地 py_compile/plugin-load-ok；9 个相关测试模块 102 项全绿；远端 `test_shared_persona_integration`（含新增 `SharedPregnancyStateTests` 4 例）18/18、另 8 模块 132 项全通过；功能探针确认分库落盘-重载持久化与 catty 仍指向全局 `pregnancy_store`。未做真实模型/QQ 验证。
-- 部署文件 6 个双端 SHA-256 一致：`__init__.py`（最终 `94e07e3e…`）、`tests/test_shared_persona_integration.py`、`STATUS.md`、`docs/session-log/session-10.md`、`docs/session-log/README.md`、`docs/module-inventory.md`。生产上机机怀孕进度部署后首刷会写入 `pregnancy_fadianji.json`。
+- 该次部署文件 6 个双端 SHA-256 一致：`__init__.py`（当时 `94e07e3e…`）、`tests/test_shared_persona_integration.py`、`STATUS.md`、`docs/session-log/session-10.md`、`docs/session-log/README.md`、`docs/module-inventory.md`。后续生产入口增加了下述腿图修复；生产上机机怀孕进度部署后首刷会写入 `pregnancy_fadianji.json`。
 
-## 2026-10-28 · QQ 发送错误影响与图片记忆（隔离候选，未部署）
+## 2026-10-28 · QQ 发送错误影响与图片记忆（已部署）
 
 - 远端日志中 `retcode=1200 / result=120` 共 59 条：复读 52、主回复 5、腿图 2；最后一次为远端时间 2026-10-27 15:40:12。至 22:48:34 的全日志检查中，本地 BGE 部署后未再出现该错误；23:03:30 再查最近 8000 行仍未见该错误，心跳更新且有发送日志。历史出错时相应消息可能未送达，不代表整个 bot 停摆。
 - NapCat 将 QQ NT 的非零发送回执包装为 `retcode=1200`；该批回执 `errMsg` 为空，`result=120` 的具体业务原因仍未知，不能断言已修复或盲目重发。
-- 隔离候选修复腿图处理器先记文字及图片、后发送的问题：只记录成功发送的文字片段，图片成功后才记录图片；保留现有冷却和重试策略。该修复不改变 QQ NT 的错误码，也不等于解决上游拒绝。
-- 已部署源码的合成回执测试先复现 6 项失败，修复后 8 项通过；隔离集成副本 7 组共 114 项通过，语法和其余顶层 AST 保持性通过。候选在 `.vscode/handoff/qq-120-20261028/candidate`，活动源码和生产未修改；未进行真实 QQ 收发验证。
+- 腿图处理器只记录发送调用成功返回的文字片段，图片发送调用成功返回后才记录图片；保留现有冷却和重试策略。该修复不改变 QQ NT 的错误码，也不等于解决上游拒绝。
+- 首次部署被后续并发部署覆盖，已基于新生产版本重新合入并推送；源文件和测试文件双端哈希一致，远端 8 项测试通过，本地语义相同的合并快照 132 项通过。远端时间 2026-10-27 23:52:56 加载、23:53:00 本地模型就绪、23:53:19 OneBot 重连、23:53:26 心跳更新；此后远端文档读取请求中断，未再复核。已把腿图和此前遗漏的 RAG 交付文件合入活动源码，直接运行 7 组 96 项通过；此前归档提交为 `e639661f48def524555c6954c184cc7403087497`，未进行真实 QQ 收发验证。
 
-## 2026-10-28 · 本地 BGE 隔离与发送失败排查（已部署，本地未合并）
+## 2026-10-28 · 本地 BGE 隔离与发送失败排查（已部署）
 
 - 根因：旧提示构建在事件循环上同步等待 Chroma embedding 网络请求，日志显示阻塞约 190 秒；已部署的 `9140c36` 把查询移出事件循环，但没有修复 embedding 路由。远端隔离请求验证当前聊天线路派生的 `/zen/go/v1/embeddings` 返回 HTTP 404；原先全局 text2vec 关闭导致 RAG 回退到该不支持的线路。404 不证明当时 TLS 等待的具体原因。
 - 已部署版默认在独立子进程离线加载缓存的 `BAAI/bge-small-zh-v1.5`，不启用其他 NLU 模型；主进程不等待模型启动。启动超时 30 秒、推理超时 5 秒，失败后退避重启；未就绪时 RAG 如实报错，不造零向量或换用其他向量空间。开关 `rag.local_bge_enabled` 改动需重启 bot；打包为 frozen 程序时本地 RAG 不可用。
 - 远端发现模型导入前启动 stdin 阻塞读取会卡住 Windows NumPy DLL 初始化；部署版改为模型加载完才启动读取线程，并用父进程句柄监测保证加载期间可退出。隔离样本的 12 条旧向量与本地 BGE 余弦相似度均为 1.0；复制旧索引的实际查询另验证 4 条均为 1.0，不代表已覆盖所有历史数据。
 - `retcode=1200` 是 NapCat 的通用失败包装；日志内部 QQ NT `result=120` 的 `errMsg` 为空，具体业务原因仍未知。部署版修复复读发送失败仍写入历史的问题，图片失败提示不再把未知原因断言为风控；没有对未知回执盲目重发。上游容量不足和偶发连接中断不归因于本地代码。
 - 9 个交付文件已 push_zip 至 `D:/CattyQQAI`，双端 SHA-256 一致；远端时钟 2026-10-27 22:38:52 应用启动、22:38:55 OneBot 连接、22:38:56 本地模型就绪、22:41:03 回填成功写入 445 条记忆和 388 条角色书记录。Python 3.14.5 语法通过，RAG 25 项及人格隔离 22 项通过；生产配置未修改，真实 QQ 发送和上线后的实时 RAG 检索未验证。
-- 部署包本地完整离线清单 1393 项：0 失败、0 错误、9 跳过；部署前远端隔离进程测试 8 项及真实 Chroma、缓存模型、复制旧索引验证通过。活动本地源码未替换；候选合成配置与基准测试 shim 仅供测试，不属于交付文件。
+- 部署包本地完整离线清单 1393 项：0 失败、0 错误、9 跳过；部署前远端隔离进程测试 8 项及真实 Chroma、缓存模型、复制旧索引验证通过。RAG 基线随后已并入本地；候选合成配置与基准测试 shim 仅供测试，不属于交付文件。
 
 ## 2026-10-28 · RAG 查询线程化与事件循环保护（已部署）
 

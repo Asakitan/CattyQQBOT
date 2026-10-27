@@ -15445,34 +15445,32 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
     scope = _conversation_queue_key(event)
     reply_text = await _generate_legs_caption(event, event_plain_text(event))
     reply_chunks = _reply_chunks(reply_text)
-    remembered_reply = "\n".join(reply_chunks) if reply_chunks else reply_text
     async with _locks[scope]:
         _legs_last_sent_at[scope] = time.monotonic()
-        _remember_bot_reply_for_event(event, remembered_reply)
-        _remember_bot_conversation_message(
-            scope,
-            bot_id=str(getattr(event, "self_id", "") or ""),
-            text="[人家自己发出去的腿/脚照片：本喵笨猫自己的腿和脚，不是别人的图]",
-            target_user_id=str(event.user_id),
-            has_image=True,
-        )
-
         quote_pending = isinstance(event, GroupMessageEvent) and _reply_quote_segment(event) is not None
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
-        for chunk in reply_chunks[:-1]:
-            try:
-                await matcher.send(_compose_reply_message(event, text=chunk, quote=quote_pending))
-            except OnebotActionFailed as exc:
-                logger.warning(f"Legs reply text send failed (will still try image): {exc}")
-                break
-            quote_pending = False
-            if delay_seconds:
-                await asyncio.sleep(delay_seconds)
-        if reply_chunks:
-            try:
-                await matcher.send(_compose_reply_message(event, text=reply_chunks[-1], quote=quote_pending))
-            except OnebotActionFailed as exc:
-                logger.warning(f"Legs reply text send failed (will still try image): {exc}")
+        confirmed_chunks = []
+        try:
+            for chunk in reply_chunks[:-1]:
+                try:
+                    await matcher.send(_compose_reply_message(event, text=chunk, quote=quote_pending))
+                except OnebotActionFailed as exc:
+                    logger.warning(f"Legs reply text send failed (will still try image): {exc}")
+                    break
+                confirmed_chunks.append(chunk)
+                quote_pending = False
+                if delay_seconds:
+                    await asyncio.sleep(delay_seconds)
+            if reply_chunks:
+                try:
+                    await matcher.send(_compose_reply_message(event, text=reply_chunks[-1], quote=quote_pending))
+                except OnebotActionFailed as exc:
+                    logger.warning(f"Legs reply text send failed (will still try image): {exc}")
+                else:
+                    confirmed_chunks.append(reply_chunks[-1])
+        finally:
+            if confirmed_chunks:
+                _remember_bot_reply_for_event(event, "\n".join(confirmed_chunks))
 
         image_segment = MessageSegment.image(file=picture.resolve().as_uri())
         sent = False
@@ -15496,7 +15494,15 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
                     await asyncio.sleep(2.0)
                 else:
                     logger.warning(f"Legs image send NetworkError twice (giving up): {exc}")
-        if not sent and last_exc is not None:
+        if sent:
+            _remember_bot_conversation_message(
+                scope,
+                bot_id=str(getattr(event, "self_id", "") or ""),
+                text="[人家自己发出去的腿/脚照片：本喵笨猫自己的腿和脚，不是别人的图]",
+                target_user_id=str(event.user_id),
+                has_image=True,
+            )
+        elif last_exc is not None:
             try:
                 await matcher.send(Message(f"喵呜…图没发成功嗷呜，{_addr_user(event)}过会儿再试 (尾巴垂垂) ฅฅ"))
             except OnebotActionFailed:

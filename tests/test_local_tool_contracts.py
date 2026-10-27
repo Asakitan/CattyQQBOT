@@ -191,7 +191,8 @@ class LocalToolTests(unittest.IsolatedAsyncioTestCase):
         after = self.tools["tools_system_hint"](persona)
         self.assertTrue(after.startswith(before + "\n"))
         self.assertIn("不是可调用工具", after)
-        self.assertIn("【机机·证据使用指南】", after)
+        self.assertIn("【助手·证据使用指南】", after)
+        self.assertNotIn("【机机·证据使用指南】", after)
         self.assertLessEqual(len(after) - len(before), 100)
 
 

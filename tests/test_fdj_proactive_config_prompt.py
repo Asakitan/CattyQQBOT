@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import replace
 from datetime import datetime, timezone
 import importlib
 import importlib.util
@@ -307,11 +306,12 @@ class FdjProactivePromptTests(unittest.TestCase):
         naive = _data(_messages(now=datetime(2026, 10, 27, 10, 30)))
         self.assertEqual(naive["now"], "2026-10-27T10:30:00+08:00")
 
-    def test_non_fdj_private_scope_and_unknown_mode_are_rejected(self):
-        with self.assertRaises(ValueError):
-            _prompt.build_fdj_proactive_messages(
-                replace(_fixture_persona(), name="catty"), scope="group:100", mode="join", recent_messages=[],
-            )
+    def test_shared_persona_allowed_but_invalid_scopes_and_modes_rejected(self):
+        messages = _prompt.build_fdj_proactive_messages(
+            _personas.CATTY_PERSONA, scope="group:100", mode="join", recent_messages=[],
+        )
+        self.assertIn("笨猫", _system(messages))
+        self.assertNotIn("机机本来的聊天节奏", _system(messages))
         for values in ({"scope": "private:100"}, {"scope": "group:"}, {"scope": "group:" + "a" * 129},
                        {"mode": "run"}, {"no_reply_marker": ""}, {"no_reply_marker": "bad\nmarker"}):
             with self.subTest(values=values), self.assertRaises(ValueError):

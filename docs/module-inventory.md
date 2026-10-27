@@ -7,11 +7,11 @@
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
 | `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 已部署；图片 URL 安全校验已上线 |
 | `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署 |
-| `__init__.py` / `tests/test_legs_delivery.py` | 腿图文字及图片按发送回执记历史 → `docs/architecture.md` | 隔离候选未部署；8 项新测试、114 项相关回归通过 |
+| `__init__.py` / `tests/test_legs_delivery.py` | 腿图文字及图片按发送回执记历史 → `docs/architecture.md` | 已部署并合入活动源码；远端 8 项、本地相关回归 96 项通过 |
 | `dashboard.py` / `__init__.py` | 管理及开发 HTTP 接口访问 → `ADMIN_COMMANDS.md` | 已部署；回环限制与可选令牌鉴权 |
 | `src/catty_qq_ai/prompt_manager.py` | 学术长度豁免与有效提示词注册 → `docs/prompt-testing.md` | 已部署 |
 | `catty_rag.py` / `prompt_manager.py` / `__init__.py` | RAG 查询线程化、限时和在途上限，证据编排限时 → `docs/architecture.md` | 已部署；本地 1379 项、远端 221 项通过 |
-| `rag_embedding_backend.py` / `rag_embedding_worker.py` / `catty_rag.py` / `config.py` / loader / `__init__.py` | 独立离线 BGE、生命周期、来源错误、回填计数与发送确认 → `docs/architecture.md` | 已部署、本地未合并；1393 项、远端 47 项通过，模型就绪 |
+| `rag_embedding_backend.py` / `rag_embedding_worker.py` / `catty_rag.py` / `config.py` / loader / `__init__.py` | 独立离线 BGE、生命周期、来源错误、回填计数与发送确认 → `docs/architecture.md` | 已部署、本地已合并 RAG 基线；1393 项、远端 47 项通过，模型就绪 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署；生产群额度单字段已更新 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
 | `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 已部署；本地1214项、0失败/错误、9跳过 |
@@ -46,6 +46,8 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-28 | 补齐已部署的 RAG 后端、配置和测试及腿图发送记忆修复到活动源码 | 10 文件与已部署归档 SHA-256 一致；7 组 96 项通过；真实配置未改 |
+| 2026-10-28 | 腿图发送记忆修复按最新生产基线重推，保留并发怀孕修复；活动源码未并入 | 双端两文件哈希一致；本地 132 项、远端 8 项通过；23:53 OneBot 重连；后续状态未复核 |
 | 2026-10-28 | 共享怀孕/NSFW 状态缺陷修复：`_PREGNANCY_PREDICT` global 导出+临轮清零、分库 30s/shutdown flush、主路径场景与 CPU phase 按人格 scope；部署含一次误推旧分支的 6 分钟回退与基线重放修正 | 双端 6 文件哈希一致；远端 py_compile 退出 0、150 项通过、23:20:53 加载/23:21:03 重连+BGE ready |
 | 2026-10-28 | QQ 发送错误影响排查；腿图失败后误记历史修复，隔离候选未部署 | 远端历史 59 条错误；新测试 8 项及 7 组共 114 项回归通过；真实 QQ 未测 |
 | 2026-10-28 | push_zip 部署 RAG 本地 BGE 与 QQ 发送状态修复，本地源码未合并 | 9 文件双端哈希一致；远端 47 项通过，22:38:55 连接、22:38:56 模型就绪（远端时间） |
