@@ -1,4 +1,4 @@
-"""机机回复前的轻量证据编排。"""
+"""人格回复前的轻量证据编排。"""
 from __future__ import annotations
 
 import hashlib
@@ -142,8 +142,21 @@ def _excerpt_metadata(metadata: Mapping[str, Any], *values: tuple[Any, int]) -> 
 
 def _persona_name(persona: Any) -> str:
     if isinstance(persona, str):
-        return persona.strip().lower() or "fadianji"
-    return str(getattr(persona, "name", "fadianji") or "fadianji").strip().lower()
+        return persona.strip().lower() or "persona"
+    return str(getattr(persona, "name", "") or "persona").strip().lower() or "persona"
+
+
+def _persona_char_name(persona: Any) -> str:
+    if isinstance(persona, str):
+        name = _persona_name(persona)
+        return {"fadianji": "机机", "catty": "笨猫"}.get(name, persona.strip() or name)
+    return " ".join(str(getattr(persona, "char_name", "") or "").split()) or _persona_name(persona)
+
+
+def _fadianji_provider_enabled(persona: Any, attribute: str) -> bool:
+    if isinstance(persona, str):
+        return _persona_name(persona) == "fadianji"
+    return getattr(persona, attribute, None) == "fadianji"
 
 
 def _scope_value(scope_key: str, *, is_private: bool, user_id: str, group_id: str) -> tuple[str, bool]:
@@ -172,8 +185,8 @@ def detect_fadianji_query_flags(text: str) -> QueryFlags:
 
 
 def _book_entries(persona: Any) -> Sequence[Any]:
-    entries = getattr(persona, "character_book", None) if persona is not None and not isinstance(persona, str) else None
-    if entries: return tuple(entries)
+    if not isinstance(persona, str):
+        return tuple(getattr(persona, "character_book", None) or ())
     if _persona_name(persona) != "fadianji": return ()
     from .personas.fadianji import FADIANJI_CHARACTER_BOOK
     return FADIANJI_CHARACTER_BOOK
@@ -328,13 +341,13 @@ def _rag_evidence(store: Any, text: str, scope: str, persona: Any, private: bool
     return result
 
 
-def _scene_evidence(matches: Sequence[SceneMatch]) -> list[Evidence]:
+def _scene_evidence(matches: Sequence[SceneMatch], *, char_name: str = "机机") -> list[Evidence]:
     result: list[Evidence] = []
     for match in matches:
         result.append(Evidence(
             f"STYLE_EXAMPLE.{match.source}",
             match.source_scope,
-            f"{match.trigger} → 机机: {match.reply}（分类={match.category}）",
+            f"{match.trigger} → {char_name}: {match.reply}（分类={match.category}）",
             max(0.0, min(1.0, match.score / 4.0)),
             _recency(getattr(match, "observed_at", None)),
             0.75,
@@ -390,7 +403,7 @@ def _fmt_year(ts: Any) -> str:
         return ""
 
 
-def _corpus_profile_evidence(display_name: str, scope: str, private: bool, *, corpus_profile_enabled: bool = True, corpus_profile_max_chars: int = 320, trace: _SourceTrace | None = None) -> list[Evidence]:
+def _corpus_profile_evidence(display_name: str, scope: str, private: bool, *, corpus_profile_enabled: bool = True, corpus_profile_max_chars: int = 320, trace: _SourceTrace | None = None, char_name: str = "机机") -> list[Evidence]:
     """历史互动统计与口吻样本分开；配置由调用方显式传入。"""
     max_chars = max(0, int(corpus_profile_max_chars))
     if not corpus_profile_enabled or max_chars <= 0 or (not private and not display_name):
@@ -419,7 +432,7 @@ def _corpus_profile_evidence(display_name: str, scope: str, private: bool, *, co
     metadata = _metadata(profile, "last_ts", milliseconds=True)
     metadata["flags"] = tuple(dict.fromkeys((*metadata["flags"], "historical")))
     if private:
-        raw_stats = f"【语料旧识】机机与{name}共互动 {triggers} 次" + (f"({span})" if span else "")
+        raw_stats = f"【语料旧识】{char_name}与{name}共互动 {triggers} 次" + (f"({span})" if span else "")
         stats = _clean(raw_stats, max_chars)
         stats_metadata = _excerpt_metadata(metadata, (raw_stats, max_chars), (profile.get("name"), 40))
         result = [Evidence("MEMORY.corpus_profile", scope, stats, 0.8, _recency(metadata["observed_at"]), 0.8, 0.85, private, 11, **stats_metadata)]
@@ -515,11 +528,11 @@ def _render_row(item: Evidence, *, evidence_id: str | None = None) -> str:
     return f"- [{metadata}] {item.text}\n"
 
 
-def _render_packet_info(flags: QueryFlags, evidence: Sequence[Evidence], scope: str, private: bool, max_chars: int, *, source_status: Mapping[str, Mapping[str, Any]] | None = None) -> dict[str, Any]:
+def _render_packet_info(flags: QueryFlags, evidence: Sequence[Evidence], scope: str, private: bool, max_chars: int, *, source_status: Mapping[str, Mapping[str, Any]] | None = None, char_name: str = "机机") -> dict[str, Any]:
     """Greedily select complete rows in rank order, including all metadata cost."""
     budget = max(0, int(max_chars))
     ordered = sorted(evidence, key=_evidence_order)
-    header = f"【机机·evidence】\nscope={scope}; private={1 if private else 0}; intent={flags.intent}; memory_need={1 if flags.memory_need else 0}; anaphora={1 if flags.anaphora else 0}\n"
+    header = f"【{char_name}·evidence】\nscope={scope}; private={1 if private else 0}; intent={flags.intent}; memory_need={1 if flags.memory_need else 0}; anaphora={1 if flags.anaphora else 0}\n"
     coverage = "sources=" + ",".join(f"{name}:{value['state']}/{value['count']}" for name, value in (source_status or {}).items()) + "\n" if source_status else ""
 
     def summary(count: int) -> str:
@@ -624,7 +637,9 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
         if not valid_scope:
             memory_gate = "scope_mismatch"
     collect("memory", lambda: _memory_evidence(memory_store, text, scope, private, str(user_id or ""), str(group_id or ""), flags, quoted_text=quote_query, trace=traces["memory"]), blocked=memory_gate)
-    collect("corpus", lambda: _corpus_profile_evidence(str(display_name or ""), scope, private, corpus_profile_enabled=corpus_profile_enabled, corpus_profile_max_chars=corpus_profile_max_chars, trace=traces["corpus"]), blocked="disabled" if not corpus_profile_enabled or corpus_profile_max_chars <= 0 else "skipped" if not private and not str(display_name or "").strip() else "")
+    char_name = _persona_char_name(persona)
+    corpus_gate = "disabled" if not _fadianji_provider_enabled(persona, "evidence_corpus_provider") or not corpus_profile_enabled or corpus_profile_max_chars <= 0 else "skipped" if not private and not str(display_name or "").strip() else ""
+    collect("corpus", lambda: _corpus_profile_evidence(str(display_name or ""), scope, private, corpus_profile_enabled=corpus_profile_enabled, corpus_profile_max_chars=corpus_profile_max_chars, trace=traces["corpus"], char_name=char_name), blocked=corpus_gate)
     collect("feed", lambda: _feed_evidence(feed_store, scope, int(feed_max_items)), blocked="disabled" if not feed_max_items or feed_max_items <= 0 else store_gate(feed_store))
     collect("book", lambda: _activate_character_book(text, persona, book_k), blocked="disabled" if book_k <= 0 else "")
     collect("rag", lambda: _rag_evidence(rag_store, search_query, provider_scope, persona, private, trace=traces["rag"]), blocked=store_gate(rag_store))
@@ -636,9 +651,10 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
                 traces["scene"].rejected += 1
             else:
                 scene_matches.append(match)
-        return _scene_evidence(scene_matches)
+        return _scene_evidence(scene_matches, char_name=char_name)
 
-    collect("scene", scene_rows, blocked="disabled" if scene_k <= 0 else "skipped" if not quote_query and not _scene_query_enabled(text, flags) else "")
+    scene_gate = "disabled" if not _fadianji_provider_enabled(persona, "evidence_scene_provider") or scene_k <= 0 else "skipped" if not quote_query and not _scene_query_enabled(text, flags) else ""
+    collect("scene", scene_rows, blocked=scene_gate)
     all_rows = [item for rows in collected.values() for item in rows]
     evidence = _dedupe_and_sort(all_rows, private)
     owners: dict[int, str] = {}
@@ -650,11 +666,15 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
             source_status[name] = trace.status(len(collected[name]), sum(owners[id(item)] == name for item in evidence))
     source_status = {name: source_status[name] for name in traces}
     budget = max(0, int(max_chars))
-    return {**_render_packet_info(flags, evidence, scope, private, budget, source_status=source_status), "schema_version": 2, "scope": scope, "is_private": private, "flags": flags.as_dict(), "evidence": [item.as_dict() for item in evidence], "scene_matches": [match.as_dict() for match in scene_matches], "counts": _bucket_counts(evidence), "max_chars": budget, "source_status": source_status, "diagnostics": [diagnostic for trace in traces.values() for diagnostic in trace.diagnostics], "duplicate_count": len(all_rows) - len(evidence)}
+    return {**_render_packet_info(flags, evidence, scope, private, budget, source_status=source_status, char_name=char_name), "schema_version": 2, "scope": scope, "is_private": private, "flags": flags.as_dict(), "evidence": [item.as_dict() for item in evidence], "scene_matches": [match.as_dict() for match in scene_matches], "counts": _bucket_counts(evidence), "max_chars": budget, "source_status": source_status, "diagnostics": [diagnostic for trace in traces.values() for diagnostic in trace.diagnostics], "duplicate_count": len(all_rows) - len(evidence)}
 
 
 def build_fadianji_harness_context(text: str, persona: Any = "fadianji", scope_key: str = "", is_private: bool = False, user_id: str = "", group_id: str = "", memory_store: Any = None, rag_store: Any = None, max_chars: int = _DEFAULT_MAX_CHARS, **kwargs: Any) -> str:
     return str(build_fadianji_evidence_packet(text, persona, scope_key, is_private, user_id, group_id, memory_store, rag_store, max_chars, **kwargs)["text"])
 
 
-__all__ = ["EVIDENCE_USAGE", "Evidence", "QueryFlags", "build_fadianji_evidence_packet", "build_fadianji_harness_context", "detect_fadianji_query_flags"]
+build_persona_evidence_packet = build_fadianji_evidence_packet
+build_persona_harness_context = build_fadianji_harness_context
+
+
+__all__ = ["EVIDENCE_USAGE", "Evidence", "QueryFlags", "build_fadianji_evidence_packet", "build_fadianji_harness_context", "build_persona_evidence_packet", "build_persona_harness_context", "detect_fadianji_query_flags"]

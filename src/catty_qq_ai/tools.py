@@ -6852,7 +6852,7 @@ def tools_system_hint(persona: Any = None) -> str:
     )
     if bool(getattr(persona, "semantic_harness_enabled", False)):
         hint += (
-            "\n本地 harness 自动提供证据，不是可调用工具；用法见本轮【机机·证据使用指南】，够用不重复查。"
+            f"\n本地 harness 自动提供证据，不是可调用工具；用法见本轮【{char}·证据使用指南】，够用不重复查。"
         )
     return hint
 

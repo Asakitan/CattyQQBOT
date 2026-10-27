@@ -109,6 +109,8 @@ def materialize_custom_persona(
     for key in ("disabled_prompt_segments", "disabled_features", "nsfw_scopes"):
         if key in values:
             values[key] = frozenset(values[key])
+    if "proactive_enabled" not in definition and "proactive_bubble" in values["disabled_features"]:
+        values["proactive_enabled"] = False
     for key in ("trigger_prefixes", "directed_keywords"):
         if key in values and values[key] is not None:
             values[key] = tuple(values[key])

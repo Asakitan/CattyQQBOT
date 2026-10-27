@@ -393,6 +393,43 @@ def _clean_rewrite_result(result: Any) -> str:
     return cleaned
 
 
+def _persona_style_prompt(persona: Any, *, nsfw_turn: bool, freeform: bool) -> str:
+    char_name = str(getattr(persona, "char_name", "") or "当前角色")
+    core = getattr(persona, "core_persona", None)
+    rhythm = getattr(persona, "chat_rhythm", None)
+    is_builtin_catty = (
+        getattr(persona, "name", "") == "catty"
+        and getattr(persona, "definition_revision", None) is None
+    )
+    if is_builtin_catty and core is None:
+        from .catty_core_persona import CATTY_CORE_PERSONA
+        core = CATTY_CORE_PERSONA
+    if is_builtin_catty and rhythm is None:
+        from .persona_prompts import build_qq_chat_rhythm_prompt
+        rhythm = build_qq_chat_rhythm_prompt("消息分隔标记")
+    prompt = (
+        "你是 QQ 回复的风格质检员。只根据当前角色自身的设定和说话节奏调整草稿，"
+        "不要添加其他角色的身份、口癖或例句。保留原回复的事实、立场和解决问题所需的信息，"
+        "不新增信息；双下划线占位符必须逐个原样保留且顺序不变。"
+        "草稿已经符合角色风格时原样输出；直接输出正文，不加解释、引号或前缀。"
+        f"\n\n角色名称：{char_name}"
+    )
+    if core:
+        prompt += "\n\n【角色核心设定】\n" + _strip_markers_for_audit(str(core))
+    if rhythm:
+        prompt += "\n\n【角色聊天节奏】\n" + _strip_markers_for_audit(
+            str(rhythm).replace("{split_marker}", "消息分隔标记")
+        )
+    if nsfw_turn:
+        prompt += "\n\n当前草稿是角色互动，保留原有动作、情绪、描写程度和推进顺序，只调整口吻。"
+        if freeform:
+            prompt += (
+                "自由发挥模式：保留草稿的长度、分段和排版，不许压短、不套固定模板；"
+                "草稿的实际长度和分段优先于角色设定中的默认长度建议。"
+            )
+    return prompt
+
+
 async def rewrite_if_needed(
     reply: str,
     *,
@@ -403,9 +440,13 @@ async def rewrite_if_needed(
     context_hint: str = "",
     nsfw_context: bool = False,
     freeform: bool = False,
+    persona: Any | None = None,
 ) -> str:
-    if not getattr(config, enabled_attr, True):
+    if not getattr(config, enabled_attr, True) or (
+        persona is not None and not getattr(persona, "style_critic_enabled", True)
+    ):
         return reply
+    fadianji_profile = persona is None or getattr(persona, "style_critic_profile", "persona") == "fadianji"
     try:
         min_reply_chars = max(int(getattr(config, "catty_style_critic_min_reply_chars", 6) or 0), 0)
     except (TypeError, ValueError):
@@ -428,13 +469,13 @@ async def rewrite_if_needed(
     if nsfw_turn:
         audit_user_content = (
             f"对方刚说: {_strip_markers_for_audit(user_text)}\n"
-            "机机上一版（双下划线占位符必须逐个原样保留、顺序不变）:\n"
+            f"{'机机' if fadianji_profile else '角色'}上一版（双下划线占位符必须逐个原样保留、顺序不变）:\n"
             f"{protected_reply}"
         )
     else:
         audit_user_content = (
             f"用户: {_strip_markers_for_audit(user_text)}\n"
-            "机机原回复（只改 prose，双下划线占位符必须逐个原样保留、顺序不变）:\n"
+            f"{'机机' if fadianji_profile else '角色'}原回复（只改 prose，双下划线占位符必须逐个原样保留、顺序不变）:\n"
             f"{protected_reply}"
         )
     clean_hint = _strip_markers_for_audit(context_hint)
@@ -464,10 +505,6 @@ async def rewrite_if_needed(
     if max_tokens is None:
         # 思考模型会把 reasoning 吃满后回空正文, 300 太低 (实测 1000 稳定)
         max_tokens = 1000
-    system_prompt = (
-        _NSFW_FREEFORM_SYSTEM_PROMPT if (nsfw_turn and freeform)
-        else (_NSFW_SYSTEM_PROMPT if nsfw_turn else _SYSTEM_PROMPT)
-    )
     audit_kwargs = dict(
         base_url=base_url,
         api_key=api_key,
@@ -493,6 +530,17 @@ async def rewrite_if_needed(
         )
 
     try:
+        if fadianji_profile:
+            system_prompt = (
+                _NSFW_FREEFORM_SYSTEM_PROMPT if (nsfw_turn and freeform)
+                else (_NSFW_SYSTEM_PROMPT if nsfw_turn else _SYSTEM_PROMPT)
+            )
+        else:
+            system_prompt = _persona_style_prompt(
+                persona,
+                nsfw_turn=nsfw_turn,
+                freeform=freeform or bool(getattr(persona, "nsfw_freeform", False)),
+            )
         cleaned = _clean_rewrite_result(
             await _call_audit(system_prompt, "style_critic_rewrite")
         )

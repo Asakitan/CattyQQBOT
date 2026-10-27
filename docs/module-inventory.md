@@ -2,6 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `personas/` / `persona_store.py` / `__init__.py` / `fadianji_harness.py` / `fdj_proactive_runtime.py` / `fadianji_style_critic.py` | 共享群聊判门、证据、风格及主动调度；人格能力和 NSFW 状态隔离 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1367 项、远端 299 项通过（另 1 项既有短路径断言失败） |
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
 | `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 已部署；图片 URL 安全校验已上线 |
@@ -41,6 +42,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-27 | 共享人格回复机制及人格级开关，保留内置角色数据；已合并并部署 | 1367 项、0 失败/错误、9 跳过；381 文件语法通过；32 文件双端哈希一致；远端 299 项仅 1 项既有短路径断言失败 |
 | 2026-10-27 | 猫猫人格、称呼与戳戳升级；保留机机戳戳禁用 | 本地27模块487项，0失败/错误、9跳过；16文件双端一致；远端210项通过；无真实模型/QQ评测 |
 | 2026-10-27 | 图片地址、管理接口、Python 3.14 路径及人格覆盖并发安全并入并部署 | 本地1214项、0失败/错误、9跳过；Python 3.14.3 沙箱及并发45项、远端安全/存储/面板79项通过；33文件双端SHA-256一致 |
 | 2026-10-27 | Harness、提示词与管理员命令隔离审查并入部署 | 1185项、0失败/错误、9跳过；随本次安全并入上线 |

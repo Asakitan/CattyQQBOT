@@ -192,10 +192,18 @@ async def _try_paid_friend_accept(
             PAID_NSFW_COST,
             BREAKTHROUGH_PREFILLS,
         )
-        from . import affection_store
+        from . import affection_store, _persona_for_scope, _phase_scope_for
+        from .personas import persona_nsfw_allowed
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"owner_forward: paid auto-accept import failed: {exc}")
         return
+
+    scope = f"private:{user_id}"
+    persona = _persona_for_scope(scope)
+    if not persona_nsfw_allowed(persona, is_private=True):
+        logger.info(f"owner_forward: paid auto-accept disabled for private persona (user={user_id})")
+        return
+    is_catty = getattr(persona, "name", "") == "catty" and not getattr(persona, "definition_revision", None)
 
     # 1) 先算积分够不够 (主人 2026-05-29: 先判够不够 PAID_NSFW_COST, 不够直接拒绝, 不浪费好友位/不扣分).
     balance = affection_store.get_points(str(user_id))
@@ -213,6 +221,8 @@ async def _try_paid_friend_accept(
                 f"哼，才 {balance} 积分就想包养笨猫？连 {PAID_NSFW_COST} 都凑不齐喵！"
                 f"笨猫才不做亏本买卖～先发『签到』攒够 {PAID_NSFW_COST} 积分再来加好友啦杂鱼～(尾巴一甩) ฅฅ"
             )
+            if not is_catty:
+                nag = f"积分还不够，需要 {PAID_NSFW_COST} 分；先签到攒积分吧。"
             try:
                 await bot.send_private_msg(user_id=user_id, message=nag)
                 _mark_stranger_hinted(user_id)
@@ -246,6 +256,8 @@ async def _try_paid_friend_accept(
                 "哼，积分够了嘛～不过想包养笨猫得先加上好友才算数喵！(尾巴一甩) "
                 "先发个好友申请、附言写上『包养笨猫』，加上了笨猫再…再乖乖履约啦杂鱼～ ฅฅ"
             )
+            if not is_catty:
+                hint = "积分够了，请先发送好友申请，加上好友后再继续。"
             try:
                 await bot.send_private_msg(user_id=user_id, message=hint)
                 _mark_stranger_hinted(user_id)
@@ -262,6 +274,11 @@ async def _try_paid_friend_accept(
         )
         return
 
+    # 等待好友请求期间人格可能发生切换；不得给错误的人格扣费开窗。
+    if _persona_for_scope(scope) is not persona or not persona_nsfw_allowed(persona, is_private=True):
+        logger.info(f"owner_forward: paid persona changed before charge (user={user_id})")
+        return
+
     # 3) 加上好友 → 扣 PAID_NSFW_COST 积分 + 开 sticky 窗口 + 主动开场
     consume = affection_store.consume_points(str(user_id), PAID_NSFW_COST)
     balance_before = int(consume.get("balance_before") or 0)
@@ -269,7 +286,7 @@ async def _try_paid_friend_accept(
         import random as _r
         trope, scene = pick_paid_nsfw_scene()
         outcome = "pleasant" if _r.random() < 0.6 else "unpleasant"
-        sticky_key = f"private:{user_id}:{user_id}"
+        sticky_key = f"{_phase_scope_for(scope, persona)}:{user_id}"
         open_paid_sticky(
             sticky_key, trope=trope, scene=scene, outcome=outcome, cost=PAID_NSFW_COST,
         )
@@ -278,6 +295,8 @@ async def _try_paid_friend_accept(
             f"积分收到了喵…哼，笨猫这就履约。想要就现在私聊笨猫嘛，"
             f"接下来这会儿人家都…都听你的喵（脸红炸毛甩尾巴）ฅฅ"
         )
+        if not is_catty:
+            opener = "积分收到了，接下来私聊吧。"
         try:
             await bot.send_private_msg(user_id=user_id, message=opener)
         except Exception as exc:  # noqa: BLE001
@@ -300,6 +319,8 @@ async def _try_paid_friend_accept(
             f"咦？积分好像不太够了喵…({balance_before}/{PAID_NSFW_COST}) "
             f"先发『签到』补上再私聊笨猫啦杂鱼～(尾巴一甩) ฅฅ"
         )
+        if not is_catty:
+            nag = f"积分不够了（{balance_before}/{PAID_NSFW_COST}），先签到补充吧。"
         try:
             await bot.send_private_msg(user_id=user_id, message=nag)
         except Exception as exc:  # noqa: BLE001

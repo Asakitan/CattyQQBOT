@@ -1,8 +1,8 @@
 """多人格系统 — Persona registry + resolver（单一真相源）。
 
 设计（主人 2026-07-06 plan 多人格系统）:
-- Persona 是 frozen dataclass, 字段默认 None = 「用笨猫现有内容/行为」。
-  catty 实例因此几乎全空 → prompt 管线在 catty 下逐字节走老路径, cache prefix 不变。
+- Persona 是 frozen dataclass, 内容字段默认 None = 「用笨猫现有内容」。
+    catty 实例保留默认内容字段，prompt 文本按既有 builder 加载。
 - 非 catty 人格通过字段覆盖内容, 通过 disabled_prompt_segments / disabled_features
   关掉笨猫强绑定的段和功能(不重写)。
 - 不同 persona = 不同 cache prefix 是预期行为(同私聊/群聊两份前缀);
@@ -128,8 +128,8 @@ class PersonaImagegen:
 class Persona:
     """单个人格的内容包 + 行为开关。
 
-    所有 `str | None` 内容字段: None = 用笨猫默认(现有常量/builder), 保证 catty
-    路径零改动; 非 None = 该 persona 的模块级常量文本。
+    所有 `str | None` 内容字段: None = 用笨猫默认(现有常量/builder);
+    非 None = 该 persona 的模块级常量文本。
     """
     name: str
     char_name: str                              # macro {{char}} + reply_gate 文案插值
@@ -158,8 +158,7 @@ class Persona:
     emoji_guidance: str | None = None
     # False = Catty 旧的 constant-only skeleton；True = 全 character_book 进 cache。
     cache_full_character_book: bool = False
-    # 语义 harness 默认关闭，避免改变 Catty 的既有 prompt/cache 行为。
-    semantic_harness_enabled: bool = False
+    semantic_harness_enabled: bool = True
     # 唤醒词 (主人 2026-07-06: 猫娘版是猫的, 机机版是发电机的)。
     # None = 用 config.catty_trigger_prefixes / catty_directed_keywords (catty 默认);
     # 非 None = **整组替换** config 值 (extract_incoming_message 按 scope 生效)。
@@ -170,14 +169,11 @@ class Persona:
     model_override: str | None = None
     # None = 使用默认人格的模块级业务 fallback catalog，避免改变 catty 旧路径。
     reply_catalog: PersonaReplyCatalog | None = None
-    # 机机 (主人 2026-08-10): 群聊非续聊窗口下只回真 @ 的消息 — 提示词/直接称呼/
-    # 引用等一律不触发。False = 沿用 catty 的 mentioned/prefix/directed 多信号触发。
+    # True 时群聊新唤醒要求真 @；False 时使用当前人格的唤醒词、@ 和引用。
+    # 唤醒后的续聊另由 followup_reply_budget 控制。
     mention_only_trigger: bool = False
-    # 机机 (主人 2026-08-10): @ 触发回复后的续聊预算。@ 回复后最多再判断
-    # 「下面 N 条消息和自己有没有关系」: 有关系 → 回复 (+1) 并消耗 1 个预算,
-    # 预算归零或出现无关消息 (主 AI 判 NO_REPLY) → 关窗结束。
-    # None = 旧行为 (每次回复满血刷新窗口); 机机 = 2。
-    followup_reply_budget: int | None = None
+    # None 保留旧刷新行为，其他值为显式唤醒后的续聊预算。
+    followup_reply_budget: int | None = 2
     # NSFW 深水可用场景 (NSFW_SCOPES_ALL 的子集)。机机 = 仅私聊, 群聊仍按禁用处理。
     # 仅当 disabled_features 不含 "nsfw_spark" 时生效。
     nsfw_scopes: frozenset[str] = NSFW_SCOPES_ALL
@@ -199,6 +195,17 @@ class Persona:
     nsfw_prefill: str | None = None
     # Runtime-only content identity; builtin definitions keep None forever.
     definition_revision: str | None = None
+    group_admission_enabled: bool = True
+    evidence_scene_provider: str = ""
+    evidence_corpus_provider: str = ""
+    corpus_echo_enabled: bool = False
+    style_critic_enabled: bool = True
+    style_critic_profile: str = "persona"
+    output_filter_profile: str = "persona"
+    proactive_enabled: bool = True
+    proactive_config_source: str = "legacy"
+    fadianji_mood_enabled: bool = False
+    fadianji_self_study_enabled: bool = False
 
     def segment_disabled(self, identifier: str) -> bool:
         return identifier in self.disabled_prompt_segments

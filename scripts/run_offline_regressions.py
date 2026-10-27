@@ -22,7 +22,8 @@ MODULES = (
     "test_personas", "test_persona_prompts", "test_reply_split_reminder",
     "test_output_control_markers", "test_persona_memory_isolation",
     "test_reply_message_composition", "test_vision_context_images",
-    "test_fadianji_nsfw_split_bubbles", "test_quick_ack", "test_auto_web_fetch",
+    "test_fadianji_nsfw_split_bubbles", "test_fadianji_nsfw_split", "test_nsfw_freeform_state",
+    "test_quick_ack", "test_auto_web_fetch",
     "test_openai_client",
     "test_fadianji_harness", "test_harness_interface", "test_harness_v2",
     "test_harness_prompt", "test_harness_cli_v2", "test_harness_config_aliases",
@@ -35,6 +36,10 @@ MODULES = (
     "test_cognitive_admin", "test_dashboard_state", "test_sim_chat", "test_harness_audit_regressions",
     "test_security_image_urls", "test_security_dashboard_auth", "test_security_sandbox_paths", "test_security_persona_concurrency",
     "test_fdj_proactive", "test_fdj_proactive_config_prompt", "test_fdj_proactive_integration", "test_reply_admission",
+    "test_shared_persona_capabilities", "test_shared_persona_evidence",
+    "test_shared_persona_proactive", "test_shared_persona_style",
+    "test_shared_persona_integration", "test_shared_persona_nsfw_imagegen",
+    "test_owner_forward", "test_fadianji_style_critic", "test_imagegen_force_tool",
 )
 
 _RUNNER = r'''

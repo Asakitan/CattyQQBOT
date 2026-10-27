@@ -8,6 +8,7 @@ from __future__ import annotations
 import asyncio
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+import inspect
 import logging
 import random
 import time
@@ -54,7 +55,7 @@ class BubbleHost:
     generate: Callable[[Any, list[dict]], Awaitable[str]]
     send_text: Callable[[Any, str, str], Awaitable[Any]]
     remember: Callable[[Any, str, str, str], None]
-    clean_text: Callable[[str], str]
+    clean_text: Callable[..., str]
 
 
 class FdjProactiveRuntime:
@@ -86,13 +87,29 @@ class FdjProactiveRuntime:
             slot_grace_seconds=1800,
         )
 
-    def _stamp(self, cfg: Any) -> tuple:
+    @staticmethod
+    def _config_source(persona: Any) -> str:
+        return getattr(persona, "proactive_config_source", (
+            "fdj" if getattr(persona, "name", "") == "fadianji" else "legacy"
+        ))
+
+    @classmethod
+    def _persona_stamp(cls, persona: Any) -> tuple:
+        return (
+            id(persona), getattr(persona, "name", None),
+            getattr(persona, "definition_revision", None),
+            getattr(persona, "proactive_enabled", True), cls._config_source(persona),
+        )
+
+    def _stamp(self, cfg: Any, persona: Any) -> tuple:
+        source = self._config_source(persona)
+        switch = "catty_fdj_proactive_enabled" if source == "fdj" else "catty_proactive_enabled"
         return (
             id(cfg), self._settings(cfg),
             float(getattr(cfg, "catty_fdj_proactive_timeout_seconds", 30)),
             tuple(sorted(str(g) for g in (getattr(cfg, "catty_allowed_group_ids", ()) or ()))),
             bool(getattr(cfg, "catty_enable_group", True)),
-            bool(getattr(cfg, "catty_fdj_proactive_enabled", True)),
+            source, bool(getattr(cfg, switch, True)),
         )
 
     async def _get_scheduler(self, cfg: Any) -> Any:
@@ -102,30 +119,45 @@ class FdjProactiveRuntime:
             self._scheduler, self._scheduler_key = scheduler, key
         return self._scheduler
 
-    def _enabled(self) -> bool:
-        cfg = self.host.config()
-        return bool(getattr(cfg, "catty_fdj_proactive_enabled", True)) and self.host.has_api_key()
+    def _enabled(self, cfg: Any = None) -> bool:
+        if cfg is None:
+            cfg = self.host.config()
+        return self.host.has_api_key() and (
+            bool(getattr(cfg, "catty_fdj_proactive_enabled", True))
+            or bool(getattr(cfg, "catty_proactive_enabled", True))
+        )
 
-    def _eligible(self, group_id: str, *, persona: Any = None, stamp: Any = None, check_busy: bool = True) -> bool:
+    def _eligible(
+        self, group_id: str, *, persona: Any = None, stamp: Any = None,
+        persona_stamp: Any = None, check_busy: bool = True,
+    ) -> bool:
         cfg = self.host.config()
-        if not self._enabled() or not bool(getattr(cfg, "catty_enable_group", True)):
+        if not self._enabled(cfg) or not bool(getattr(cfg, "catty_enable_group", True)):
             return False
         allowed = {str(g) for g in (getattr(cfg, "catty_allowed_group_ids", ()) or ())}
         if allowed and group_id not in allowed:
             return False
         scope = f"group:{group_id}"
         current = self.host.persona(scope)
-        if getattr(current, "name", "") != "fadianji" or (check_busy and self.host.busy(scope)):
+        if current is None or not getattr(current, "name", "") or (check_busy and self.host.busy(scope)):
+            return False
+        source = self._config_source(current)
+        if source not in {"legacy", "fdj"} or not bool(getattr(current, "proactive_enabled", True)):
+            return False
+        switch = "catty_fdj_proactive_enabled" if source == "fdj" else "catty_proactive_enabled"
+        if not bool(getattr(cfg, switch, True)):
             return False
         if persona is not None and current is not persona:
             return False
-        return stamp is None or self._stamp(cfg) == stamp
+        if persona_stamp is not None and self._persona_stamp(current) != persona_stamp:
+            return False
+        return stamp is None or self._stamp(cfg, current) == stamp
 
-    async def _group_ids(self, bot: Any) -> tuple[str, ...]:
+    async def _group_ids(self, bot: Any, *, refresh: bool = False) -> tuple[str, ...]:
         key = str(bot.self_id)
         now = self.monotonic()
         cached = self._groups.get(key)
-        if cached is not None and 0 <= now - cached[0] < 300:
+        if not refresh and cached is not None and 0 <= now - cached[0] < 300:
             return cached[1]
         try:
             rows = await asyncio.wait_for(bot.get_group_list(), timeout=30)
@@ -188,12 +220,19 @@ class FdjProactiveRuntime:
             getattr(left, name) == getattr(right, name) for name in ("group_id", "day", "slot_id")
         )
 
-    async def send_candidate(self, bot: Any, scheduler: Any, candidate: Any) -> bool:
+    async def send_candidate(
+        self, bot: Any, scheduler: Any, candidate: Any, *, persona: Any = None,
+        stamp: Any = None, persona_stamp: Any = None, context: Any = None,
+    ) -> bool:
         group_id = str(candidate.group_id)
         scope = f"group:{group_id}"
         cfg = self.host.config()
-        stamp = self._stamp(cfg)
-        persona = self.host.persona(scope)
+        if persona is None:
+            persona = self.host.persona(scope)
+        if stamp is None:
+            stamp = self._stamp(cfg, persona)
+        if persona_stamp is None:
+            persona_stamp = self._persona_stamp(persona)
 
         async def skip(reason: str) -> bool:
             await store_call(scheduler.skip, candidate, self.wall(), reason=reason)
@@ -203,10 +242,12 @@ class FdjProactiveRuntime:
             return await skip("settings_changed")
         if self.host.busy(scope):
             return False  # No LLM work yet: let this slot wait for a quieter tick.
-        if not self._eligible(group_id) or group_id not in await self._group_ids(bot):
+        if not self._eligible(group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp):
             return await skip("unavailable")
+        if group_id not in await self._group_ids(bot, refresh=True):
+            return await skip("membership_changed")
         rows, humans, latest = self._snapshot(bot, group_id)
-        if not humans:
+        if not humans or (context is not None and not self._context_fresh(context, latest)):
             return await skip("cold")
         due = await store_call(scheduler.due, group_id, self.wall(), human_times=humans)
         if not self._same_slot(candidate, due):
@@ -220,8 +261,15 @@ class FdjProactiveRuntime:
             return await skip("expired")
         if self.host.busy(scope):
             return False
-        if not self._eligible(group_id, persona=persona, stamp=stamp):
+        _, current_humans, current_context = self._snapshot(bot, group_id)
+        if (
+            not current_humans or not self._context_fresh(latest, current_context)
+            or not self._membership_confirmed(bot, group_id)
+            or not self._window_open(candidate, window)
+            or not self._eligible(group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp)
+        ):
             return await skip("changed_before_generation")
+        rows, _, latest = self._snapshot(bot, group_id)
         generation_started = self.monotonic()
         timeout = max(float(getattr(cfg, "catty_fdj_proactive_timeout_seconds", 30)), .01)
         token = bind_turn_persona(scope, persona)
@@ -243,15 +291,20 @@ class FdjProactiveRuntime:
         finally:
             reset_turn_persona(token)
         try:
-            text = self.host.clean_text(reply)
+            try:
+                inspect.signature(self.host.clean_text).bind(reply, persona)
+            except (TypeError, ValueError):
+                text = self.host.clean_text(reply)
+            else:
+                text = self.host.clean_text(reply, persona)
         except Exception:
             return await skip("invalid_reply")
         if not text:
             return await skip("no_reply")
         # Persona lookup is deliberately outside the bound generation context.
-        if not self._eligible(group_id, persona=persona, stamp=stamp):
+        if not self._eligible(group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp):
             return await skip("changed_after_generation")
-        if group_id not in await self._group_ids(bot):
+        if group_id not in await self._group_ids(bot, refresh=True):
             return await skip("membership_changed")
         _, humans, current_latest = self._snapshot(bot, group_id)
         if not humans or not self._context_fresh(latest, current_latest) or self.monotonic() - generation_started > timeout:
@@ -259,7 +312,7 @@ class FdjProactiveRuntime:
         due = await store_call(scheduler.due, group_id, self.wall(), human_times=humans)
         if not self._same_slot(candidate, due):
             return await skip("expired")
-        if not self._eligible(group_id, persona=persona, stamp=stamp):
+        if not self._eligible(group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp):
             return await skip("changed_before_claim")
         attempt = await store_call(
             lambda: scheduler.claim(candidate, self.wall()),
@@ -273,14 +326,12 @@ class FdjProactiveRuntime:
 
             async def checked_send(message: str) -> Any:
                 nonlocal outcome
-                # wait_for schedules a task: repeat the final guard *inside*
-                # that task so no user reply can enter between guard and send.
                 _, current_humans, current_context = self._snapshot(bot, group_id)
                 if (
                     not current_humans or not self._context_fresh(latest, current_context)
                     or self.monotonic() - generation_started > timeout
                     or not self._window_open(candidate, window)
-                    or not self._eligible(group_id, persona=persona, stamp=stamp)
+                    or not self._eligible(group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp)
                     or not self._membership_confirmed(bot, group_id)
                 ):
                     raise RuntimeError("pre_send_changed")
@@ -292,9 +343,15 @@ class FdjProactiveRuntime:
                     raise ValueError("missing send acknowledgement")
                 return ack
 
+            if group_id not in await self._group_ids(bot, refresh=True):
+                raise RuntimeError("membership_changed")
             ack = await asyncio.wait_for(delivery.send(checked_send, text, history_text=text), timeout=timeout)
             outcome = "sent"
-            self.host.remember(bot, group_id, text, str(ack["message_id"]))
+            token = bind_turn_persona(scope, persona)
+            try:
+                self.host.remember(bot, group_id, text, str(ack["message_id"]))
+            finally:
+                reset_turn_persona(token)
             return True
         except asyncio.CancelledError:
             raise
@@ -310,27 +367,37 @@ class FdjProactiveRuntime:
         async with self._tick_lock:
             cfg = self.host.config()
             scheduler = await self._get_scheduler(cfg)
-            options: list[tuple[Any, str, list[float], bool]] = []
+            options: list[tuple[Any, str, list[float], bool, Any, tuple, tuple, tuple]] = []
             now = self.wall()
             active_seconds = float(getattr(cfg, "catty_fdj_proactive_active_window_minutes", 15)) * 60
             active_min = int(getattr(cfg, "catty_fdj_proactive_active_min_messages", 5))
             for bot in self.host.bots():
                 for group_id in await self._group_ids(bot):
-                    if not self._eligible(group_id, check_busy=False):
+                    current_cfg = self.host.config()
+                    persona = self.host.persona(f"group:{group_id}")
+                    persona_stamp = self._persona_stamp(persona)
+                    stamp = self._stamp(current_cfg, persona)
+                    if not self._eligible(
+                        group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp,
+                        check_busy=False,
+                    ):
                         continue
                     # Busy groups keep their ungenerated opportunity until a
                     # later quiet tick or the scheduler's normal slot expiry.
-                    _, humans, _ = self._snapshot(bot, group_id)
+                    _, humans, context = self._snapshot(bot, group_id)
                     if not humans:
                         continue
                     active = sum(now - stamp <= active_seconds for stamp in humans) >= active_min
-                    options.append((bot, group_id, humans, active))
+                    options.append((bot, group_id, humans, active, persona, stamp, persona_stamp, context))
             self.rng.shuffle(options)
             options.sort(key=lambda row: not row[3])  # active first; random/fair within each tier
-            for bot, group_id, humans, _ in options:
+            for bot, group_id, humans, _, persona, stamp, persona_stamp, context in options:
                 candidate = await store_call(scheduler.due, group_id, self.wall(), human_times=humans)
                 if candidate is not None:
-                    return await self.send_candidate(bot, scheduler, candidate)
+                    return await self.send_candidate(
+                        bot, scheduler, candidate, persona=persona, stamp=stamp,
+                        persona_stamp=persona_stamp, context=context,
+                    )
             return False
 
     async def run(self) -> None:

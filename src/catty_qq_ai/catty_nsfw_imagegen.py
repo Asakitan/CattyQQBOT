@@ -24,6 +24,7 @@ import asyncio
 import base64
 import json
 import os
+import re
 import shutil
 import tempfile
 import threading
@@ -230,9 +231,19 @@ def _persona_nsfw_character_tags(persona: Any) -> str:
     )
     if supplied:
         return str(supplied)
-    if getattr(persona, "definition_revision", None) is not None:
-        return ""
-    return CHARACTER_GIRL_TAGS
+    if persona is None or (
+        getattr(persona, "name", "") == "catty"
+        and getattr(persona, "definition_revision", None) is None
+    ):
+        return CHARACTER_GIRL_TAGS
+    return ""
+
+
+def _is_catty_persona(persona: Any) -> bool:
+    return persona is None or (
+        getattr(persona, "name", "") == "catty"
+        and getattr(persona, "definition_revision", None) is None
+    )
 
 # phase 描述给 prompt composer 用 (P1-P8 全覆盖, 触发不看 phase 但情景看)
 _PHASE_BRIEF = {
@@ -350,6 +361,7 @@ def _format_scene_block(
     user_text: str,
     recent_messages: list | None,
     current_reply: str,
+    persona: Any = None,
 ) -> str:
     """把所有场景信息序列化成给 deepseek 看的人类可读 block。
 
@@ -359,11 +371,20 @@ def _format_scene_block(
     把场景上下文打包丢给 deepseek, 让它的 caption 真正对应当前 turn 的情境.
     """
     lines: list[str] = []
+    is_catty = _is_catty_persona(persona)
 
     # === 1. 阶段 & arc ===
     if phase_state is not None:
         ph = int(getattr(phase_state, "current_phase", 1) or 1)
         brief = _PHASE_BRIEF.get(ph, "")
+        if not is_catty and brief:
+            replacements = {"主人": "对方", "喵呜": "喘息"}
+            replacements.update(
+                (src, dst) for src, dst in (getattr(persona, "nsfw_lexicon", ()) or ())
+                if src
+            )
+            pattern = "|".join(re.escape(src) for src in sorted(replacements, key=len, reverse=True))
+            brief = re.sub(pattern, lambda match: replacements[match.group(0)], brief)
         lines.append(f"[NSFW phase] P{ph} ({brief})")
         if int(getattr(phase_state, "turn_count", 0) or 0) > 0:
             lines.append(f"[phase turn] 当前 phase 已持续 {phase_state.turn_count} 轮")
@@ -404,11 +425,20 @@ def _format_scene_block(
         is_preg = bool(getattr(pregnancy_state, "is_pregnant", False))
         if is_preg:
             pc = int(getattr(pregnancy_state, "pregnancy_count", 0) or 0)
-            father = str(getattr(pregnancy_state, "father_addr", "") or "").strip() or "主人"
-            lines.append(
-                f"[pregnancy] 笨猫已怀孕 (孕中 +{pc}, 父亲:{father}) — 画面可加微凸小腹"
-                "/手扶肚子/孕期柔光, 笨猫表情应有护肚+被操时喊『{father}的孩子还在肚子里轻一点』"
-            )
+            father = str(getattr(pregnancy_state, "father_addr", "") or "")
+            if is_catty:
+                father = father.strip() or "主人"
+                lines.append(
+                    f"[pregnancy] 笨猫已怀孕 (孕中 +{pc}, 父亲:{father}) — 画面可加微凸小腹"
+                    "/手扶肚子/孕期柔光, 笨猫表情应有护肚+被操时喊『{father}的孩子还在肚子里轻一点』"
+                )
+            else:
+                father = father if father.strip() else "对方"
+                char_name = str(getattr(persona, "char_name", "") or "当前角色")
+                lines.append(
+                    f"[pregnancy] {char_name}已怀孕 (孕中 +{pc}, 父亲:{father}) — 画面可加微凸小腹"
+                    f"/手扶肚子/孕期柔光, {char_name}表情应有护肚+被操时喊『{father}的孩子还在肚子里轻一点』"
+                )
         elif int(getattr(pregnancy_state, "total_pregnancies", 0) or 0) > 0:
             lines.append(
                 f"[pregnancy] 经产体 (总怀孕 {pregnancy_state.total_pregnancies} 次)"
@@ -422,7 +452,7 @@ def _format_scene_block(
         if lvl is not None or is_own is not None:
             tags = []
             if is_own:
-                tags.append("真实主人")
+                tags.append("真实主人" if is_catty else "账号所有者")
             if lvl is not None:
                 tags.append(f"Lv={lvl}")
             if tags:
@@ -431,7 +461,10 @@ def _format_scene_block(
     # === 5. 用户原话 (本轮场景指令) — 最关键 ===
     ut = (user_text or "").strip()
     if ut:
-        lines.append(f"[主人本轮原话] {ut[:300]}")
+        if is_catty:
+            lines.append(f"[主人本轮原话] {ut[:300]}")
+        else:
+            lines.append(f"[用户本轮原话] {ut[:300]}")
 
     # === 6. 最近对话 (最多 3 轮 user/assistant) ===
     if recent_messages:
@@ -450,9 +483,10 @@ def _format_scene_block(
                         str(b.get("text", "") or "")
                         for b in content
                         if isinstance(b, dict) and b.get("type") == "text"
-                    ).strip()
+                    )
                 else:
-                    text = str(content or "").strip()
+                    text = str(content or "")
+                text = text.strip()
                 if not text:
                     continue
                 # 砍掉 catty internal hint 包裹避免污染场景理解
@@ -471,7 +505,11 @@ def _format_scene_block(
     # === 7. 笨猫刚生成的 reply (姿态/动作/情绪参考) ===
     cr = (current_reply or "").strip()
     if cr:
-        lines.append(f"[笨猫本轮 reply 片段] {cr[:400]}")
+        if is_catty:
+            lines.append(f"[笨猫本轮 reply 片段] {cr[:400]}")
+        else:
+            char_name = str(getattr(persona, "char_name", "") or "当前角色")
+            lines.append(f"[{char_name}本轮 reply 片段] {cr[:400]}")
 
     return "\n".join(lines)
 
@@ -485,6 +523,7 @@ async def _compose_base_caption(
     recent_messages: list | None = None,
     pregnancy_state=None,
     affection_info: dict | None = None,
+    persona: Any = None,
 ) -> str:
     """让 deepseek 根据完整场景信息写 base caption(情景/构图/动作)。
 
@@ -517,6 +556,7 @@ async def _compose_base_caption(
         user_text=user_text,
         recent_messages=recent_messages,
         current_reply=current_reply,
+        persona=persona,
     )
 
     # 主人 2026-05-30: 大精简 — 旧版逼 deepseek 写 60-150 token 还按 phase 硬塞
@@ -559,6 +599,10 @@ async def _compose_base_caption(
         "格式示例: nsfw, explicit, sex, doggystyle, on desk, classroom, "
         "school uniform disheveled, blush, sweat, orgasm, pregnant, slight belly bulge"
     )
+    if not _is_catty_persona(persona):
+        system_prompt = system_prompt.replace("发色/猫耳/黑影", "外观细节").replace(
+            "[主人本轮原话]", "[用户本轮原话]"
+        )
     user_prompt = (
         "=== 当前场景信息(请严格按此写 caption, 不要瞎想) ===\n"
         f"{scene_block}\n\n"
@@ -891,19 +935,22 @@ async def _maybe_generate_pixelbunny(
         recent_messages=recent_messages,
         pregnancy_state=pregnancy_state,
         affection_info=affection_info,
+        persona=persona,
     )
     base_caption = composed or DEFAULT_BASE_CAPTION
 
     persona_imagegen = getattr(persona, "imagegen", None)
     if persona_imagegen is not None:
         ref_paths = _persona_nsfw_reference_paths(persona_imagegen)
-    else:
+    elif _is_catty_persona(persona):
         miao_dir = _find_miao_dir(config)
         ref_paths = []
         if miao_dir is not None:
             bare_ref = miao_dir / "miaomiaonude.png"
             if bare_ref.is_file():
                 ref_paths = [bare_ref]
+    else:
+        ref_paths = []
 
     char_girl = _persona_nsfw_character_tags(persona)
     prompt = ", ".join(
@@ -1055,6 +1102,7 @@ async def maybe_generate_image(
         recent_messages=recent_messages,
         pregnancy_state=pregnancy_state,
         affection_info=affection_info,
+        persona=persona,
     )
     base_caption = composed or DEFAULT_BASE_CAPTION
     negative = str(
@@ -1069,7 +1117,7 @@ async def maybe_generate_image(
     persona_imagegen = getattr(persona, "imagegen", None)
     if persona_imagegen is not None:
         ref_paths = _persona_nsfw_reference_paths(persona_imagegen)
-    else:
+    elif _is_catty_persona(persona):
         miao_dir = _find_miao_dir(config)
         ref_paths = []
         if miao_dir is not None:
@@ -1077,6 +1125,8 @@ async def maybe_generate_image(
             bare_ref = miao_dir / "miaomiaonude.png"
             if bare_ref.is_file():
                 ref_paths = [bare_ref]
+    else:
+        ref_paths = []
     for ref_path in ref_paths:
         try:
             director_ref_b64_list.append(_get_reference_b64(ref_path))

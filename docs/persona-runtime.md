@@ -1,5 +1,13 @@
 # JSON 人格运行时
 
+## 共享回复机制（已合并并部署）
+
+人格默认启用 `semantic_harness_enabled`、`group_admission_enabled` 和 `style_critic_enabled`，默认续聊预算为 2；显式 `false` 或已保存的 `followup_reply_budget: null` 仍按其原意处理。人格触发词、角色书、核心设定、回复目录和 NSFW 开关独立，不因共享机制而复制机机正文。
+
+`evidence_scene_provider` / `evidence_corpus_provider` 默认空，机机显式选 `fadianji`；`corpus_echo_enabled`、`fadianji_mood_enabled` 和 `fadianji_self_study_enabled` 默认关闭，机机显式开启。`style_critic_profile`、`output_filter_profile` 可选择 `persona` 或 `fadianji`。自定义人格显式启用机机来源或风格时才使用对应资源。
+
+`proactive_enabled` 控制人格参加共享调度，`proactive_config_source` 选择 `legacy` 或 `fdj` 总开关；旧自定义定义若仍禁用 `proactive_bubble` 且未显式设置新开关，保持关闭。切换人格不重建公共调度，每群每日计划共享；实时角色、配置和群上下文在生成及发送前复核。既有猫猫和机机 NSFW 场景范围保留，普通及付费状态按人格区分。离线回归 1367 项、9 跳过；远端 17 模块 299 项仅一个既有 8.3 短路径断言失败，未测真实模型或 QQ。
+
 本地审查修复已随 2026-10-27 安全并入部署：人格覆盖文件 JSON/编码损坏时保留原文件并禁用写入，错误时间戳归零；失效覆盖会在概览中显示，显式选择当前有效人格时仍会写入新覆盖。命令路径的覆盖落盘在线程执行。安全修复在独立锁文件内重读、合并并原子发布，读取按需刷新；仅协调使用同一锁文件的进程。
 
 猫猫人格与戳戳升级已部署：保留猫系口癖、短句和真实主人的专属称谓，让动作与接话按上下文选择，并将用户细节提示的称呼绑定真实 `is_owner` 和人格的主人概念。图片回指、反搜及画图短评不把普通用户叫主人；访客生图短评含「主人」时使用中性猫猫兜底。机机戳戳仍禁用。

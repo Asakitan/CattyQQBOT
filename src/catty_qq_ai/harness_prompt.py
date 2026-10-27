@@ -19,7 +19,7 @@ EVIDENCE_USAGE = (
 )
 
 
-def build_harness_agent_hint(available_tools: Sequence[str]) -> str:
+def build_harness_agent_hint(available_tools: Sequence[str], *, char_name: str = "机机") -> str:
     """Return a Chinese evidence guide mentioning only exposed recipe tools.
 
     ``available_tools`` contains exact ``function.name`` strings from this turn's
@@ -29,7 +29,7 @@ def build_harness_agent_hint(available_tools: Sequence[str]) -> str:
     """
     available = frozenset(available_tools)
     guide = [
-        HARNESS_AGENT_HINT_HEADER,
+        f"【{char_name}·证据使用指南】",
         "本地 harness 是自动整理的证据包，不是可调用工具或执行环境。",
         "FACT=角色知识；MEMORY=画像/笔记/召回；FEED=公开动态，不保证现况；"
         "RAG=历史检索；STYLE_EXAMPLE=口吻参考，不能当本轮事实。",
@@ -81,6 +81,22 @@ def build_harness_agent_hint(available_tools: Sequence[str]) -> str:
     return "\n".join(guide)
 
 
+def _evidence_char_name(content: str) -> str:
+    end = content.find("·evidence】")
+    if end < 0:
+        return ""
+    start = content.rfind("【", 0, end)
+    if start < 0:
+        return ""
+    name = content[start + 1:end]
+    return name if name and "\n" not in name and "\r" not in name else ""
+
+
+def _is_harness_guide(content: str) -> bool:
+    header, separator, _ = content.partition("\n")
+    return bool(separator and header.startswith("【") and header.endswith("·证据使用指南】"))
+
+
 def append_harness_agent_hint(messages: list[dict], available_tools: Sequence[str]) -> None:
     """Inject/refresh only our guide after message assembly, preserving prefills.
 
@@ -88,21 +104,22 @@ def append_harness_agent_hint(messages: list[dict], available_tools: Sequence[st
     caller invokes this after the cache boundary and actual schema selection.
     Existing non-guide messages and their dictionaries are left unchanged.
     """
-    if not any(
-        message.get("role") == "system"
-        and isinstance(message.get("content"), str)
-        and "【机机·evidence】" in message["content"]
-        for message in messages
-    ):
+    char_name = next((
+        name
+        for message in reversed(messages)
+        if message.get("role") == "system" and isinstance(message.get("content"), str)
+        if (name := _evidence_char_name(message["content"]))
+    ), "")
+    if not char_name:
         return
 
-    guide = build_harness_agent_hint(available_tools)
+    guide = build_harness_agent_hint(available_tools, char_name=char_name)
     messages[:] = [
         message for message in messages
         if not (
             message.get("role") == "system"
             and isinstance(message.get("content"), str)
-            and message["content"].startswith(HARNESS_AGENT_HINT_HEADER + "\n")
+            and _is_harness_guide(message["content"])
         )
     ]
     index = len(messages)

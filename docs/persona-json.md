@@ -1,5 +1,11 @@
 # JSON 人格定义与事务存储
 
+## 共享机制新增字段（已合并并部署）
+
+schema 支持布尔字段 `group_admission_enabled`、`corpus_echo_enabled`、`style_critic_enabled`、`proactive_enabled`、`fadianji_mood_enabled`、`fadianji_self_study_enabled`；字段严格校验布尔类型。
+
+`evidence_scene_provider`、`evidence_corpus_provider` 允许 `""` / `"fadianji"`；`style_critic_profile`、`output_filter_profile` 允许 `"persona"` / `"fadianji"`；`proactive_config_source` 允许 `"legacy"` / `"fdj"`。缺省来源为空、通用风格为 `persona`、主动配置源为 `legacy`；完整默认及旧定义兼容规则见 [人格运行时](persona-runtime.md#共享回复机制已合并并部署)。
+
 实现合同见 [persona-contract.md](persona-contract.md)。本页对应 `src/catty_qq_ai/persona_store.py`、`persona_override_store.py` 与离线测试 `tests/test_persona_store.py`；不包含部署或真实聊天验收。
 
 可直接导入 [sky_guide.json](examples/personas/sky_guide.json)。默认目录为 `data/personas`；也可将示例放入其中的 `definitions/sky_guide.json`，再执行 `/人格 重载`。导入和重载均不自动切换当前会话。

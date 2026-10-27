@@ -1,7 +1,6 @@
 """catty(笨猫)Persona 实例 — 默认人格。
 
-**关键约束**: 所有内容字段保持 None → prompt 管线走现有常量/builder 老路径,
-catty 的 cache prefix 逐字节不变(Step 2 用 sim dry-run byte-diff 验收)。
+**关键约束**: 所有内容字段保持 None → prompt 管线走现有常量/builder 路径。
 这里不复制任何挂在 Persona 的 prompt 文本；业务 fallback 目录独立定义且不挂到实例。
 """
 from __future__ import annotations
