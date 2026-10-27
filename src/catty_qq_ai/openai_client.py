@@ -3054,6 +3054,7 @@ async def _post_chat_completion_raw(
     cache_depth: int = 2,
     stream: bool = False,
     request_route: str = "main",
+    max_attempts: int = 4,
 ) -> dict[str, Any]:
     """返回完整 response JSON,供 function calling 链路读 tool_calls。
 
@@ -3169,7 +3170,8 @@ async def _post_chat_completion_raw(
             _logger.info(
                 "deepseek prefix opt: strip_inline_history=%d first_user_len=%d "
                 "first_user_head=%r",
-                strip_hist, _diag_first_user_len, _diag_first_user_preview,
+                strip_hist, _diag_first_user_len,
+                "[persona evolution]" if request_route == "persona_evolution" else _diag_first_user_preview,
             )
             # (a3) 主人 2026-05-31 Stage3: 私聊把 stable trailing system 段(发言者/称呼/今日
             # 小心思/Lv/cb_diet, 5轮字节验证跨轮恒定)hoist 到 history 之前独立 sentinel block,
@@ -3469,7 +3471,7 @@ async def _post_chat_completion_raw(
         # 主人 2026-08-10: /v1/responses 网关 (gpt-5.6-luna) 只认 Responses 协议 —
         # body 转换 / 响应转换都在 _responses_* 辅助里, retry 语义不变。
         _responses_mode = _is_responses_endpoint(base_url)
-        for attempt in range(4):
+        for attempt in range(max(1, int(max_attempts))):
             if stream:
                 # === Streaming branch (主人 2026-05-28 Step 1) ===
                 try:
@@ -3498,7 +3500,7 @@ async def _post_chat_completion_raw(
                     if _status and 500 <= _status < 600:
                         # 5xx → retry
                         last_error = exc
-                        if attempt < 3:
+                        if attempt + 1 < max_attempts:
                             backoff = 0.5 * (2 ** attempt)
                             _logger.info(
                                 f"AI 接口 (stream) {_status} retry {attempt + 1}/3 after {backoff}s",
@@ -3599,7 +3601,7 @@ async def _post_chat_completion_raw(
             last_error = OpenAICompatibleError(
                 _catty_http_status_message("AI 接口", response.status_code), detail,
             )
-            if attempt < 3:
+            if attempt + 1 < max_attempts:
                 backoff = 0.5 * (2 ** attempt)  # 0.5 / 1.0 / 2.0 s
                 _logger.info(
                     f"AI 接口 {response.status_code} retry {attempt + 1}/3 after {backoff}s"

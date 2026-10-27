@@ -666,6 +666,9 @@ class Config(BaseModel):
     catty_persona_dir: str = "data/personas"
     catty_persona_generation_timeout_seconds: float = Field(default=60.0, gt=0, le=600)
     catty_persona_generation_max_tokens: int = Field(default=4096, ge=256, le=32768)
+    catty_persona_evolution_enabled: bool = True
+    catty_persona_evolution_daily_token_budget: int = Field(default=30_000_000, ge=0, le=30_000_000)
+    catty_persona_evolution_interval_minutes: float = Field(default=120.0, ge=10, le=1440)
 
     # ── 月经期心情 (主人 2026-08-10): 机机本人生理状态同步 ──
     # 按 last_period_start (YYYY-MM-DD, 当天=第1天) + cycle_days 推算周期相位,

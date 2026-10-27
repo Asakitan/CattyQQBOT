@@ -7276,6 +7276,17 @@ async def _build_messages(
     # catty 下全部 `_persona.x or 旧内容` 落到旧内容, 前缀字节不变。
     _persona = _persona_for_scope(key)
     _ensure_session_persona_isolation(key, _persona)
+    _evolved_style = ""
+    if bool(getattr(config, "catty_persona_evolution_enabled", True)):
+        try:
+            from .persona_evolution_runtime import persona_base_text
+            from .persona_evolution_store import PersonaEvolutionStore
+
+            _evolved_style, _ = PersonaEvolutionStore(persona_runtime.root).load(
+                _persona.name, persona_base_text(_persona),
+            )
+        except Exception as exc:
+            logger.warning(f"persona evolution load failed: {type(exc).__name__}")
 
     # 主人 2026-05-28 phase 5: per-request NLU cache. 同一条 incoming.text 之前
     # 被 embed 3-4 次 (detect_topics + score_user_message + detect_trend centroid),
@@ -7394,6 +7405,8 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"story_arc auto_trigger failed (non-fatal): {exc}")
     _st_manager = PromptManager()
+    if _evolved_style:
+        _st_manager.register_static("catty_persona_evolution", f"【角色卡·自然表达】\n{_evolved_style}", order=101)
     from .prompt_manager import register_catty_persona as _register_catty_persona
     # 取真实昵称给 {{user}} macro 替换 — 优先 configured_title(主人/特别关心),
     # 否则用 sender.card/nickname,最后 fallback QQ 号。这样 character_card 里
@@ -8672,6 +8685,8 @@ async def _build_messages(
         from .catty_core_persona import CATTY_CORE_PERSONA as _CATTY_CORE_PERSONA
         # 多人格: 非 catty 人格用自己的 core_persona, 别在 NSFW 里串回笨猫。
         _slim_persona = str(getattr(_persona, "core_persona", "") or _CATTY_CORE_PERSONA)
+        if _evolved_style:
+            _slim_persona += f"\n\n【角色卡·自然表达】\n{_evolved_style}"
         _persona_nsfw_style = str(getattr(_persona, "nsfw_style_override", "") or "")
         # 机机等 freeform 人格: 去掉笨猫的 phase 推进表/格式铁律/起手范例, 让模型自己发挥。
         _freeform_nsfw = bool(getattr(_persona, "nsfw_freeform", False))
@@ -15919,6 +15934,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_cpu_engine_warmup_loop())
     asyncio.create_task(_cpu_engine_routes_watch_loop())
     asyncio.create_task(_cpu_engine_evolution_daily_loop())
+    asyncio.create_task(_persona_evolution_loop())
     _ensure_qzone_bridge_poll_task()
     asyncio.create_task(cache.background_flush_loop())
     asyncio.create_task(_managed_store_flush_loop())
@@ -16043,6 +16059,91 @@ async def _fdj_self_study_loop() -> None:
                 f"notes+={run.notes_added} evicted={run.notes_evicted} "
                 f"tokens={run.tokens_used} corpus={run.corpus_tokens}"
             )
+
+
+async def _persona_evolution_tick() -> None:
+    from .persona_evolution_budget import BudgetLedger
+    from .persona_evolution_runtime import evolve_once, persona_base_text, scoped_examples
+    from .persona_evolution_store import PersonaEvolutionStore
+
+    run_config = config
+    if not bool(getattr(run_config, "catty_persona_evolution_enabled", True)):
+        return
+    daily_limit = int(getattr(run_config, "catty_persona_evolution_daily_token_budget", 30_000_000))
+    if daily_limit <= 0:
+        return
+    scopes = sorted(
+        ((scope, list(items)) for scope, items in _recent_conversation_messages.items() if items),
+        key=lambda pair: pair[1][-1].created_at,
+        reverse=True,
+    )
+    attempted: set[str] = set()
+    for scope, recent in scopes:
+        if config is not run_config:
+            break
+        persona = _persona_for_scope(scope)
+        name = str(persona.name)
+        if name in attempted:
+            continue
+        identity = _persona_identity(persona)
+        examples = scoped_examples(recent, identity)
+        if not examples:
+            continue
+        attempted.add(name)
+        runtime = persona_runtime
+        base_text = persona_base_text(persona)
+        store = PersonaEvolutionStore(runtime.root)
+        budget_path = Path(run_config.catty_memory_path).expanduser().parent / "persona_evolution_budget.sqlite3"
+
+        def still_current() -> bool:
+            if config is not run_config or persona_runtime is not runtime:
+                return False
+            current = _persona_for_scope(scope)
+            return _persona_identity(current) == identity and persona_base_text(current) == base_text
+
+        async def commit(revision: str | None, style: str) -> bool:
+            async with _persona_config_transition_lock:
+                async with _persona_transition_locks[_base_persona_scope(scope)]:
+                    if not still_current():
+                        return False
+                    write = asyncio.get_running_loop().run_in_executor(
+                        None, store.save, name, base_text, revision, style,
+                    )
+                    cancelled = False
+                    while True:
+                        try:
+                            saved = await asyncio.shield(write)
+                            break
+                        except asyncio.CancelledError:
+                            cancelled = True
+                    if cancelled:
+                        raise asyncio.CancelledError
+                    return saved
+
+        try:
+            ledger = await asyncio.to_thread(BudgetLedger, budget_path, daily_limit=daily_limit)
+            status = await evolve_once(
+                config=run_config, name=name, base_text=base_text, examples=examples,
+                store=store, ledger=ledger, still_current=still_current, commit=commit,
+            )
+            logger.info(f"persona evolution: persona={name} status={status}")
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            logger.warning(f"persona evolution failed: {type(exc).__name__}")
+
+
+async def _persona_evolution_loop() -> None:
+    await asyncio.sleep(90.0)
+    while True:
+        try:
+            await _persona_evolution_tick()
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            logger.warning(f"persona evolution tick failed: {type(exc).__name__}")
+        interval = float(getattr(config, "catty_persona_evolution_interval_minutes", 120.0) or 120.0)
+        await asyncio.sleep(max(interval, 10.0) * 60.0)
 
 
 async def _data_backup_loop() -> None:

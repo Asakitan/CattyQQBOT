@@ -2,6 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `persona_evolution_budget.py` / `persona_evolution_store.py` / `persona_evolution_runtime.py` / `__init__.py` | 当前人格语气扩展、写回校验及共享日预算 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署并合入；本地新增 49 项、远端新增 49 项通过；真实模型未测 |
 | `personas/` / `persona_store.py` / `__init__.py` / `fadianji_harness.py` / `fdj_proactive_runtime.py` / `fadianji_style_critic.py` | 共享群聊判门、证据、风格及主动调度；人格能力和 NSFW 状态隔离 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1367 项、远端 299 项通过（另 1 项既有短路径断言失败） |
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
@@ -47,6 +48,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-28 | 当前角色语气进化及独立每日 token 预算，已部署并合入 | 13 文件与交付包哈希一致；本地 49 项及 297 项关联回归、远端 49 项及 229 项关联回归通过（关联回归各 9 跳过） |
 | 2026-10-28 | 图片与表情自然接话；修复原图透传提示漏挂，保留原生表情线索 | 8 文件双端一致；本地 1401 项、9 跳过，远端 140 项通过 |
 | 2026-10-28 | 补齐已部署的 RAG 后端、配置和测试及腿图发送记忆修复到活动源码 | 10 文件与已部署归档 SHA-256 一致；7 组 96 项通过；真实配置未改 |
 | 2026-10-28 | 腿图发送记忆修复按最新生产基线重推，保留并发怀孕修复；活动源码未并入 | 双端两文件哈希一致；本地 132 项、远端 8 项通过；23:53 OneBot 重连；后续状态未复核 |

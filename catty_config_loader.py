@@ -515,6 +515,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "dir": "data/personas",
         "generation_timeout_seconds": 60,
         "generation_max_tokens": 4096,
+        "evolution_enabled": True,
+        "evolution_daily_token_budget": 30000000,
+        "evolution_interval_minutes": 120,
     },
     "proactive": {
         "enabled": True,
@@ -1321,6 +1324,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
         _set_env("CATTY_PERSONA_DIR", str(directory if directory.is_absolute() else base_dir / directory))
     _set_env("CATTY_PERSONA_GENERATION_TIMEOUT_SECONDS", persona.get("generation_timeout_seconds"))
     _set_env("CATTY_PERSONA_GENERATION_MAX_TOKENS", persona.get("generation_max_tokens"))
+    _set_env("CATTY_PERSONA_EVOLUTION_ENABLED", persona.get("evolution_enabled"))
+    _set_env("CATTY_PERSONA_EVOLUTION_DAILY_TOKEN_BUDGET", persona.get("evolution_daily_token_budget"))
+    _set_env("CATTY_PERSONA_EVOLUTION_INTERVAL_MINUTES", persona.get("evolution_interval_minutes"))
 
     # 月经期心情 (主人 2026-08-10): 机机生理状态同步, 纯 config 驱动。
     menstrual_cycle = _section(data, "menstrual_cycle")
