@@ -6,6 +6,15 @@ without quoted text. For a valid `group:G:user:U` history scope, group-level
 RAG and scene providers use `group:G`; their returned evidence remains
 scope-checked. Character-book evidence uses the actual persona name.
 
+## 2026-10-28 RAG evidence bounds (deployed)
+
+The caller's evidence wait is bounded to eight seconds, and in-flight RAG queries
+across prompt and evidence paths are limited to four. A saturated RAG source
+raises `RagQueryBusyError`, recorded by the packet as an error rather than an
+empty result. A timeout stops waiting, not the worker thread. The change was
+pushed to `D:/CattyQQAI` on 2026-10-27 21:43 (remote clock); both copies hash
+identically and the plugin reloaded.
+
 ## API and compatibility
 
 `src/catty_qq_ai/fadianji_harness.py` exports `Evidence`, `QueryFlags`,

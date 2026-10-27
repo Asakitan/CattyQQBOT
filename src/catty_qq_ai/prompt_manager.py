@@ -59,8 +59,13 @@ JSON 配置示例(config.json 顶层):
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import asyncio
+import logging
+from dataclasses import dataclass, field, replace
 from typing import Any, Callable
+
+logger = logging.getLogger(__name__)
+_RAG_RECALL_TIMEOUT_SECONDS = 5.0
 
 
 # ── Token budget 保护段(任何情况下都不 trim 掉) ──────────────────────────
@@ -226,6 +231,7 @@ class PromptManager:
         *,
         max_tokens: int | None = None,
         extra_protected: frozenset[str] | None = None,
+        _precomputed: dict[int, dict[str, str] | None] | None = None,
     ) -> list[dict[str, str]]:
         """按 order 升序输出非空 entry 的 system messages。
 
@@ -241,7 +247,10 @@ class PromptManager:
         # 先 materialize 一遍, 保留 (entry, mat, tokens) 三元组用于 trim 决策
         materialized: list[tuple[PromptEntry, dict[str, str], int]] = []
         for entry in sorted_entries:
-            mat = entry.materialize()
+            if _precomputed is not None and id(entry) in _precomputed:
+                mat = _precomputed[id(entry)]
+            else:
+                mat = entry.materialize()
             if mat is None:
                 continue
             tokens = estimate_tokens(mat["content"])
@@ -271,6 +280,28 @@ class PromptManager:
             "max_tokens": max_tokens,
         }
         return out
+
+    async def build_messages_async(
+        self,
+        *,
+        max_tokens: int | None = None,
+        extra_protected: frozenset[str] | None = None,
+    ) -> list[dict[str, str]]:
+        precomputed: dict[int, dict[str, str] | None] = {}
+        for entry in self._entries:
+            if entry.identifier != "catty_rag_recall" or not entry.enabled or entry.content_fn is None:
+                continue
+            try:
+                precomputed[id(entry)] = await asyncio.wait_for(
+                    asyncio.to_thread(replace(entry).materialize),
+                    timeout=_RAG_RECALL_TIMEOUT_SECONDS,
+                )
+            except asyncio.TimeoutError:
+                logger.warning("catty_rag: recall timed out; skipping this recall")
+                precomputed[id(entry)] = None
+        return self.build_messages(
+            max_tokens=max_tokens, extra_protected=extra_protected, _precomputed=precomputed,
+        )
 
     def __len__(self) -> int:
         return sum(1 for e in self._entries if e.enabled)

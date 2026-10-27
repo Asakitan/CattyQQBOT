@@ -24,6 +24,10 @@
 
 认知证据和时间线放在缓存边界后的 system 消息；自适应上下文随本轮 user 内容。重建消息列表时保留这两类内容。生产工具清单确定后追加对应 Agent 教程，无工具线路不推荐具体工具，末尾 assistant prefill 的顺序不变。
 
+### RAG 事件循环保护（已部署）
+
+提示构建只把 `catty_rag_recall` 放入线程，等待最多 5 秒，保持其顺序、停用开关与预算；证据编排最多等待 8 秒。两个入口共享最多 4 个在途 RAG 查询，容量不足报告来源错误；支持 `with_options` 的 embedding 客户端采用 5 秒网络超时并关闭 SDK 重试。超时取消等待但不终止线程，槽位在线程实际结束后释放；网络超时不代表总墙钟上限。2026-10-27 21:43（远端时间）推送后双端哈希一致，远端 Python 3.14.5 语法通过并重新加载插件。
+
 ### JSON 人格与上下文决策
 
 `persona_store.py` 校验并原子保存 `data/personas/definitions/<name>.json`，`switch_commands.json` 保存完整指令映射；`personas.install_custom_personas` 将整批有效定义物化为冻结对象，保留内置对象。`persona_runtime.py` 统一工具/命令的数据操作，更新必须携带此前读取的文件 SHA。坏文件重载保留上次有效定义，部分失败如实回执。

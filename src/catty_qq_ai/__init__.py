@@ -7847,7 +7847,7 @@ async def _build_messages(
     #   current user msg content 末尾. AI 通过 pre-boundary 里固定的指令知道『本轮动态上下文
     #   在 user msg 最后一段 [DYNAMIC_CONTEXT] 标记内』, 读那里拿当前 Lv/mood/scene 等动态信息.
     # 这样 system_blocks 跨轮**全部字节稳定** (只含 pre-boundary), msg[0] cache prefix 能 hit.
-    _pm_output = _st_manager.build_messages(max_tokens=_prompt_max_tokens)
+    _pm_output = await _st_manager.build_messages_async(max_tokens=_prompt_max_tokens)
     _BOUNDARY_TEXT_MARKER = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
     _pre_boundary: list[dict] = []
     _post_boundary: list[dict] = []
@@ -7979,17 +7979,22 @@ async def _build_messages(
     _cognitive_system_context = ""
     _adaptive_user_prompt = ""
     try:
-        _cognitive_system_context, _adaptive_user_prompt = await asyncio.to_thread(
-            _build_cognitive_turn_context_sync,
-            text=str(incoming.text or ""),
-            persona=_persona,
-            scope_key=key,
-            is_private=_is_private_event,
-            user_id=str(event.user_id),
-            display_name=_display_name(event),
-            group_id=str(getattr(event, "group_id", "") or ""),
-            quoted_text=quoted_text,
+        _cognitive_system_context, _adaptive_user_prompt = await asyncio.wait_for(
+            asyncio.to_thread(
+                _build_cognitive_turn_context_sync,
+                text=str(incoming.text or ""),
+                persona=_persona,
+                scope_key=key,
+                is_private=_is_private_event,
+                user_id=str(event.user_id),
+                display_name=_display_name(event),
+                group_id=str(getattr(event, "group_id", "") or ""),
+                quoted_text=quoted_text,
+            ),
+            timeout=8.0,
         )
+    except asyncio.TimeoutError:
+        logger.warning("cognitive turn context timed out; continuing without evidence")
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"cognitive turn context failed (non-fatal): {exc}")
     if _adaptive_user_prompt:

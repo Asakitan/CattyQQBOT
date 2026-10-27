@@ -20,7 +20,7 @@ MODULES = (
     "test_training_dashboard", "test_prompt_cache_deepseek", "test_prompt_compressor",
     "test_cache_cpu", "test_input_context", "test_memory_isolation",
     "test_personas", "test_persona_prompts", "test_reply_split_reminder",
-    "test_output_control_markers", "test_persona_memory_isolation",
+    "test_output_control_markers", "test_persona_memory_isolation", "test_rag_async_prompt",
     "test_reply_message_composition", "test_vision_context_images",
     "test_fadianji_nsfw_split_bubbles", "test_fadianji_nsfw_split", "test_nsfw_freeform_state",
     "test_quick_ack", "test_auto_web_fetch",

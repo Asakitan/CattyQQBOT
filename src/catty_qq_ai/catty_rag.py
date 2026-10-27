@@ -32,6 +32,8 @@ logger = logging.getLogger(__name__)
 
 
 _MAX_RECALL_TOP_K = 5     # query 默认 top-K
+_OPENAI_EMBEDDING_TIMEOUT_SECONDS = 5.0
+_RAG_QUERY_SLOTS = threading.BoundedSemaphore(4)
 _MAX_PER_SCOPE_DOCS = 2000  # per-scope 文档上限, 老的自动 drop
 _RECALL_MIN_SIMILARITY = 0.3  # 余弦相似度低于此值不召回 (噪音过滤)
 # 主人 2026-05-30: 803 users × HNSW 索引 → 17GB 泄漏; LRU 限 100 active scope
@@ -46,6 +48,10 @@ _SHARED_RAG_ROLES = frozenset({
     "user_profile",
 })
 _PERSONA_SPECIFIC_RAG_ROLES = frozenset({"assistant", "lore_entry"})
+
+
+class RagQueryBusyError(RuntimeError):
+    pass
 
 
 def _normalise_persona(persona: str | None) -> str:
@@ -237,6 +243,10 @@ class CattyRAGStore:
                 api_base=api_base,
                 model_name=model_name,
             )
+            client = getattr(ef, "client", None)
+            with_options = getattr(client, "with_options", None)
+            if callable(with_options):
+                ef.client = with_options(timeout=_OPENAI_EMBEDDING_TIMEOUT_SECONDS, max_retries=0)
             self._embedding_source = f"openai:{model_name}@{api_base}"
             logger.info(f"catty_rag: using OpenAI embedding ({model_name} @ {api_base})")
             return ef
@@ -375,6 +385,28 @@ class CattyRAGStore:
         """语义召回当前人格可见的 top-K 历史。省略 persona 时保持 Catty legacy 行为。"""
         if not self._enabled or not scope or not query_text or not query_text.strip():
             return []
+        slots = _RAG_QUERY_SLOTS
+        if not slots.acquire(blocking=False):
+            logger.warning("catty_rag: query workers busy; skipping this recall")
+            raise RagQueryBusyError("RAG query capacity exhausted")
+        try:
+            return self._query(
+                scope, query_text, top_k=top_k, min_similarity=min_similarity,
+                boost_recency=boost_recency, persona=persona,
+            )
+        finally:
+            slots.release()
+
+    def _query(
+        self,
+        scope: str,
+        query_text: str,
+        *,
+        top_k: int,
+        min_similarity: float,
+        boost_recency: bool,
+        persona: str | None,
+    ) -> list[tuple[float, str, dict[str, Any]]]:
         col = self._get_collection(scope)
         if col is None:
             return []
