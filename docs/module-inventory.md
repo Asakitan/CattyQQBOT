@@ -7,9 +7,11 @@
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
 | `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 已部署；图片 URL 安全校验已上线 |
 | `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署 |
+| `__init__.py` / `tests/test_legs_delivery.py` | 腿图文字及图片按发送回执记历史 → `docs/architecture.md` | 隔离候选未部署；8 项新测试、114 项相关回归通过 |
 | `dashboard.py` / `__init__.py` | 管理及开发 HTTP 接口访问 → `ADMIN_COMMANDS.md` | 已部署；回环限制与可选令牌鉴权 |
 | `src/catty_qq_ai/prompt_manager.py` | 学术长度豁免与有效提示词注册 → `docs/prompt-testing.md` | 已部署 |
 | `catty_rag.py` / `prompt_manager.py` / `__init__.py` | RAG 查询线程化、限时和在途上限，证据编排限时 → `docs/architecture.md` | 已部署；本地 1379 项、远端 221 项通过 |
+| `rag_embedding_backend.py` / `rag_embedding_worker.py` / `catty_rag.py` / `config.py` / loader / `__init__.py` | 独立离线 BGE、生命周期、来源错误、回填计数与发送确认 → `docs/architecture.md` | 已部署、本地未合并；1393 项、远端 47 项通过，模型就绪 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署；生产群额度单字段已更新 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
 | `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 已部署；本地1214项、0失败/错误、9跳过 |
@@ -38,11 +40,16 @@
 | `memory.py` / 入口摘要循环 | 摘要快照、并发新增与回执 → `docs/architecture.md` | 已部署；32项记忆测试通过 |
 | `personas/fadianji.py` / `fadianji_scenes.py` | 普通聊天语境与真实样本口吻 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；本地人格与语料测试通过 |
 | `cpu_engine/semantic_route.py` / `corpus_txtai.py` | 模型与有序语料缓存身份 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；29项缓存测试通过，CPU 默认停用 |
+| `src/catty_qq_ai/__init__.py` / `tests/test_shared_persona_integration.py` | 怀孕预判 global 导出与临轮清零、分库 flush 托管、主路径场景/CPU phase 按人格 scope → `docs/session-log/session-10.md` | 已部署（基线+4 修复重放）；新增 4 例，远端 150 项通过 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-28 | 共享怀孕/NSFW 状态缺陷修复：`_PREGNANCY_PREDICT` global 导出+临轮清零、分库 30s/shutdown flush、主路径场景与 CPU phase 按人格 scope；部署含一次误推旧分支的 6 分钟回退与基线重放修正 | 双端 6 文件哈希一致；远端 py_compile 退出 0、150 项通过、23:20:53 加载/23:21:03 重连+BGE ready |
+| 2026-10-28 | QQ 发送错误影响排查；腿图失败后误记历史修复，隔离候选未部署 | 远端历史 59 条错误；新测试 8 项及 7 组共 114 项回归通过；真实 QQ 未测 |
+| 2026-10-28 | push_zip 部署 RAG 本地 BGE 与 QQ 发送状态修复，本地源码未合并 | 9 文件双端哈希一致；远端 47 项通过，22:38:55 连接、22:38:56 模型就绪（远端时间） |
+| 2026-10-28 | RAG 本地 BGE 子进程与 QQ 发送失败本地状态修复；隔离候选未部署 | 1393 项、0 失败/错误、9 跳过；远端隔离进程 8 项及真实缓存模型/复制旧索引验证通过 |
 | 2026-10-28 | RAG 查询线程化与事件循环保护，含证据编排限时；已合并并部署 | 本地 1379 项、0 失败/错误、9 跳过；远端 11 模块 221 项通过；5 文件双端哈希一致 |
 | 2026-10-27 | 共享人格回复机制及人格级开关，保留内置角色数据；已合并并部署 | 1367 项、0 失败/错误、9 跳过；381 文件语法通过；32 文件双端哈希一致；远端 299 项仅 1 项既有短路径断言失败 |
 | 2026-10-27 | 猫猫人格、称呼与戳戳升级；保留机机戳戳禁用 | 本地27模块487项，0失败/错误、9跳过；16文件双端一致；远端210项通过；无真实模型/QQ评测 |

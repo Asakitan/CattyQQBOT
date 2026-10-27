@@ -437,6 +437,17 @@ async def _managed_store_flush_loop() -> None:
                     store.flush_sync()
                 except Exception as exc:  # noqa: BLE001
                     logger.warning(f"{name}: managed background flush failed: {exc}")
+            # 多人格怀孕分库 (pregnancy_<persona>.json) 之前没人 flush — 只在内存里,
+            # 重启/热重载全丢。这里跟全局 pregnancy_store 同款 30s 托管落盘。
+            for preg_name, preg_store in list(_PREGNANCY_STORES.items()):
+                try:
+                    preg_key = f"pregnancy_store:{preg_name}"
+                    if now - last_flushed_at[preg_key] < 30.0:
+                        continue
+                    last_flushed_at[preg_key] = now
+                    preg_store.flush_sync()
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"pregnancy_store:{preg_name}: managed background flush failed: {exc}")
         except asyncio.CancelledError:
             break
         except Exception as exc:  # noqa: BLE001
@@ -4960,8 +4971,7 @@ def _remember_bot_reply_for_event(
         logger.debug(f"anti_repetition record failed (non-fatal): {exc}")
     # Catty RAG: 把笨猫这条 assistant reply 也向量化存进 per-scope chromadb,
     # 让下次 query 能召回笨猫之前怎么回的(避免重复 + 一致性 + 角色发展记忆)。
-    # 主人 2026-05-30: 改 fire-and-forget to_thread 避免阻塞 event loop
-    # (chromadb upsert 走 OpenAI embedding HTTP API 100-500ms, sync 调会卡死)
+    # fire-and-forget to_thread 避免同步 embedding 和 upsert 阻塞 event loop。
     try:
         try:
             _rag_loop = asyncio.get_running_loop()
@@ -8035,6 +8045,11 @@ async def _build_messages(
     #   突破事件 (0.89%) 是唯一打穿锁的口子, 命中后无视 affection cap 直接 spark.
     # - sticky 15s per (scope, user) 续 NSFW 通道, 防『再深一点』等无关键词 followup 失档
     prefer_spark = False
+    # 多人格怀孕预判是模块级 global, 之前 _build_messages 里没写 global → 赋值只落局部,
+    # handle_chat 永远读到空 dict (生产时预选的小猫名字丢了, 落盘变随机名)。
+    # 每次构建先清零: 主路径轮不再吃到上一轮 spark (可能另一个人格) 的 stale 预判。
+    global _PREGNANCY_PREDICT
+    _PREGNANCY_PREDICT = {}
     _utxt = (incoming.text or "")
     _sticky_key = f"{_phase_scope}:{event.user_id}"
     _now = time.time()
@@ -8973,8 +8988,7 @@ async def _build_messages(
                     _inject_into_both(_climax_hint)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"pregnancy hint inject failed (non-fatal): {exc}")
-        # state 暂存到 messages metadata, 让 handle_chat reply 后能拿到
-        # (因为 _build_messages 返回 messages, handle_chat 没法直接拿这两个 local)
+        # state 暂存到模块级 global, 让 handle_chat reply 后能拿到 (含上面临轮清零)
         # 主人 2026-05-30: 公共版 — 全局唯一, 不用 by user dict
         _PREGNANCY_PREDICT = {
             "predicted_kitten": _preg_predicted_kitten,
@@ -9156,9 +9170,10 @@ async def _build_messages(
                 build_phase_params_block_only as _build_phase_params_main2,
                 get_phase_state as _gps_main2,
             )
-            _ps_main2 = _gps_main2(_arc_scope, str(event.user_id))
+            _ps_main2 = _gps_main2(_phase_scope, str(event.user_id))
+            # 多人格: 场景状态按人格隔离 — 读 unsuffixed scope 会串到笨猫的 phase/场景。
             _scene_hint_main = _build_phase_params_main2(
-                _arc_scope, str(event.user_id),
+                _phase_scope, str(event.user_id),
                 is_owner=_user_is_owner,
                 user_addr=_user_real_display,
             )
@@ -11775,7 +11790,10 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         return True
 
     try:
-        phase_state = _ce_get_phase_state(scope, user_id)
+        # 多人格: phase 按 #nsfw=<persona> 隔离 — 裸 scope 会读到笨猫的 phase。
+        phase_state = _ce_get_phase_state(
+            _phase_scope_for(scope, _persona_for_scope(scope)), user_id,
+        )
         nsfw_phase_int = int(getattr(phase_state, "current_phase", 1))
     except Exception:  # noqa: BLE001
         nsfw_phase_int = 1
@@ -15480,7 +15498,7 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
                     logger.warning(f"Legs image send NetworkError twice (giving up): {exc}")
         if not sent and last_exc is not None:
             try:
-                await matcher.send(Message(f"喵呜…图被 QQ 风控拦掉了嗷呜，{_addr_user(event)}过会儿再试 (尾巴垂垂) ฅฅ"))
+                await matcher.send(Message(f"喵呜…图没发成功嗷呜，{_addr_user(event)}过会儿再试 (尾巴垂垂) ฅฅ"))
             except OnebotActionFailed:
                 pass
         await matcher.finish()
@@ -15490,7 +15508,6 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
 async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     async with _locks[_conversation_queue_key(event)]:
         repeat_message = str(state["catty_repeat_message"])
-        _remember_bot_repeat_for_event(event, repeat_message)
         # 用 send + finish 分开,这样 send 网络超时可以被 catch 不让整轮 matcher 报 ERROR;
         # finish() 抛 FinishedException 是正常控制流,不能被 try/except 包住。
         try:
@@ -15499,6 +15516,8 @@ async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state:
             logger.warning(f"expression_repeat send timeout/network: {exc}")
         except OnebotActionFailed as exc:
             logger.warning(f"expression_repeat send action_failed: {exc}")
+        else:
+            _remember_bot_repeat_for_event(event, repeat_message)
         await matcher.finish()
 
 
@@ -15798,7 +15817,7 @@ async def _scope_lore_auto_summary_loop() -> None:
 async def _catty_rag_backfill_once() -> None:
     """启动后跑一次, 把已有 memory_store + scope_lorebook 数据 backfill 到 chromadb RAG。
 
-    idempotent (upsert), 重启可以再跑覆盖同 doc_id 不重复存。
+    固定 doc_id 的未变化条目会跳过；缺少时间戳时 doc_id 可能随运行变化。
     sleep 60s 让 bot 先稳定起来再跑(embedding 计算消耗 CPU)。
 
     主人 2026-08-18 bug 修复: backfill_memory/backfill_lorebook 是重型同步调用
@@ -15898,6 +15917,10 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_scope_lore_auto_summary_loop())
     asyncio.create_task(_data_backup_loop())
     asyncio.create_task(_file_outbox_cleanup_loop())
+    try:
+        catty_rag_store.start_embedding_worker()
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"catty_rag: failed to start embedding worker: {type(exc).__name__}")
     asyncio.create_task(_catty_rag_backfill_once())
     asyncio.create_task(_catty_rag_prune_loop())
     _ensure_qzone_cookie_keeper_task()
@@ -16113,6 +16136,16 @@ async def _nlu_warmup_task() -> None:
 
 
 @get_driver().on_shutdown
+async def _stop_rag_embedding_on_shutdown() -> None:
+    try:
+        await asyncio.wait_for(asyncio.to_thread(catty_rag_store.close), timeout=3.0)
+    except asyncio.TimeoutError:
+        logger.warning("catty_rag: embedding worker shutdown timed out")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"catty_rag: embedding worker shutdown failed: {type(exc).__name__}")
+
+
+@get_driver().on_shutdown
 async def _flush_session_cache_on_shutdown() -> None:
     if _session_cache is None:
         return
@@ -16218,6 +16251,13 @@ async def _flush_pregnancy_store_on_shutdown() -> None:
             logger.info("pregnancy_store: flushed dirty data on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"pregnancy_store: shutdown flush failed: {exc}")
+    # 多人格分库 (pregnancy_<persona>.json) 一起 flush, 否则重启丢整段进度。
+    for preg_name, preg_store in list(_PREGNANCY_STORES.items()):
+        try:
+            if preg_store.flush_sync():
+                logger.info(f"pregnancy_store:{preg_name}: flushed dirty data on shutdown")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"pregnancy_store:{preg_name}: shutdown flush failed: {exc}")
 
 
 @chat_matcher.handle()
@@ -18273,10 +18313,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _nsfw_img_task = None
 
         for chunk in chunks[:-1]:
-            # NapCat → QQ 网关偶发 retcode=1200 "网络连接异常",原本裸 send
-            # 抛 ActionFailed 让整轮 matcher 死掉,后面 nsfw_image_segments 里的
-            # imagegen 图也跟着不发了(主人观察到的"画图卡住没下文")。这里 catch
-            # 让前段失败不影响后段 + 图片发送。
+            # 前段发送失败时继续处理后续气泡和图片。
             try:
                 await _send_reply_message(
                     _compose_reply_message(
@@ -18325,9 +18362,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             for seg in nsfw_image_segments:
                 sent = False
                 last_exc: Exception | None = None
-                # ActionFailed(retcode=1200 等)语义模糊:图很可能已经送达,只是 napcat 没拿到
-                # NT 的确认包,retry 会让 QQ 收到重复图(主人观察到的"偶尔发两次")。
-                # 所以 ActionFailed 不 retry。NetworkError 是 HTTP 层 napcat 都没碰到,可以安全 retry 1 次。
+                # ActionFailed 不确认是否送达；网络错误保留既有一次重试。
                 for attempt in range(2):
                     try:
                         await _send_reply_message(Message(seg), text="[发送图片]")
@@ -18365,7 +18400,6 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 f"(retried_ok={retry_count})"
             )
             if failed_count and not sent_count:
-                # 全部都没送出去——大概率是 QQ 服务器对 NSFW 内容的反垃圾审核拦截了
                 try:
                     reply_context = _persona_reply_context_for_event(event)
                     failure_reply = reply_context.render(reply_context.catalog.image_send_failure_reply)
