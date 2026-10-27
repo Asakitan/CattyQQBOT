@@ -4774,6 +4774,9 @@ def _summarize_text_parsing_for_feed(text: str) -> dict | None:
 
 def _remember_recent_conversation_event(event: MessageEvent, incoming: ExtractedMessage | None = None) -> None:
     text = (incoming.text if incoming is not None else event_plain_text(event)).strip()
+    expression_notes = _message_utils_mod.extract_expression_notes(event)
+    if expression_notes:
+        text = (text + "\n[本条消息表情：" + "；".join(expression_notes) + "]").strip()
     if incoming is not None:
         urls = incoming.image_urls or []
         keys = incoming.image_keys or []
@@ -7511,7 +7514,11 @@ async def _build_messages(
         "group_display": _group_real_display,
         "affection_level": _user_affection_level,
         "is_owner": _user_is_owner,
-        "has_image": bool(image_description or has_context_image),
+        "has_image": bool(
+            incoming.has_image or image_description or has_context_image or image_parts
+            or quoted_image_parts or context_image_parts or context_image_notes or web_image_parts
+        ),
+        "has_expression": bool(getattr(incoming, "has_expression", False)),
         "image_description": image_description or "",
         "story_arc_store": None if _persona.feature_disabled("story_arc") else story_arc_store,
         "no_reply_marker": NO_REPLY_MARKER,

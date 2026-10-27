@@ -120,6 +120,20 @@ def _looks_like_bot_self_intro(text: str) -> bool:
 
 
 EXPRESSION_SEGMENT_TYPES = {"face", "mface", "image"}
+# QQ 表情 ID 参照 NapCat 的 QSid；未列出的含义未知。
+_QQ_FACE_NAMES = {
+    "0": "惊讶", "1": "撇嘴", "2": "色", "3": "发呆", "4": "得意",
+    "5": "流泪", "6": "害羞", "7": "闭嘴", "8": "睡", "9": "大哭",
+    "10": "尴尬", "11": "发怒", "12": "调皮", "13": "呲牙", "14": "微笑",
+    "15": "难过", "16": "酷", "18": "抓狂", "19": "吐", "20": "偷笑",
+    "21": "可爱", "22": "白眼", "23": "傲慢", "24": "饥饿", "96": "冷汗",
+    "172": "眨眼睛", "173": "泪奔", "174": "无奈", "175": "卖萌", "176": "小纠结",
+    "177": "喷血", "178": "斜眼笑", "179": "doge", "182": "笑哭", "183": "我最美",
+    "212": "托腮", "262": "脑阔疼", "263": "沧桑", "264": "捂脸", "265": "辣眼睛",
+    "266": "哦哟", "267": "头秃", "268": "问号脸", "269": "暗中观察", "270": "emm",
+    "271": "吃瓜", "272": "呵呵哒", "277": "汪汪", "307": "喵喵",
+}
+_UNICODE_EMOJI_RE = re.compile(r"[\U0001F1E6-\U0001F1FF\U0001F300-\U0001FAFF\u2600-\u27BF]")
 GENERIC_DIRECTED_MARKERS = {
     "你",
     "妳",
@@ -180,6 +194,7 @@ class ExtractedMessage:
     directly_requested: bool
     needs_filter: bool
     opportunistic: bool = False
+    has_expression: bool = False
 
 
 @dataclass(slots=True)
@@ -196,7 +211,7 @@ class ReplySource:
             self.images = []
 
 
-_CONTROL_CODE_PATTERN = re.compile(r"\[(?:CQ:)?(?:at|reply|image|mface)[:,][^\]]*\]", re.IGNORECASE)
+_CONTROL_CODE_PATTERN = re.compile(r"\[(?:CQ:)?(?:at|reply|image|mface|face)[:,][^\]]*\]", re.IGNORECASE)
 _CONTROL_TAG_PATTERN = re.compile(r"\[(?:CQ:)?(?P<type>at|reply)[:,](?P<data>[^\]]*)\]", re.IGNORECASE)
 _MEDIA_CONTROL_TAG_PATTERN = re.compile(
     r"\[(?:CQ:)?(?P<type>image|mface)[:,](?P<data>[^\]]*)\]",
@@ -279,6 +294,27 @@ def _plain_text(event: MessageEvent) -> str:
 
 def event_plain_text(event: MessageEvent) -> str:
     return _plain_text(event)
+
+
+def extract_expression_notes(event: MessageEvent) -> list[str]:
+    notes: list[str] = []
+    for segment in getattr(event, "message", ()) or ():
+        kind = getattr(segment, "type", "")
+        data = getattr(segment, "data", None) or {}
+        if kind == "face":
+            raw = data.get("raw")
+            raw_name = raw.get("faceText") if isinstance(raw, dict) else ""
+            raw_name = " ".join(str(raw_name or "").split()).strip("/[]【】 ")[:40]
+            name = raw_name or _QQ_FACE_NAMES.get(str(data.get("id", "")), "")
+            notes.append(f"QQ表情：{name}" if name else "QQ表情（含义未知）")
+        elif kind == "mface" or (kind == "image" and data.get("emoji_id")):
+            summary = " ".join(str(data.get("summary") or "").split()).strip("/[]【】 ")[:40]
+            if summary in {"表情", "商城表情", "动画表情", "图片"}:
+                summary = ""
+            notes.append(f"表情包：{summary}" if summary else "表情包")
+        if len(notes) == 8:
+            break
+    return notes
 
 
 def extract_image_urls(event: MessageEvent) -> list[str]:
@@ -895,9 +931,11 @@ def extract_incoming_message(
     image_urls = [url for url, _key in images]
     image_keys = [key for _url, key in images]
     has_image = bool(image_urls)
+    expression_notes = extract_expression_notes(event)
+    has_expression = bool(expression_notes or _UNICODE_EMOJI_RE.search(text))
     text_without_mention, textual_mention = _strip_textual_mention(text, config.catty_trigger_prefixes)
     mentioned = _mentioned_self(self_id, event) or textual_mention
-    if not text and not has_image and not mentioned and not replied_to_self:
+    if not text and not has_image and not has_expression and not mentioned and not replied_to_self:
         return None
 
     text_without_prefix, used_prefix = _strip_prefix(text_without_mention, config.catty_trigger_prefixes)
@@ -931,6 +969,8 @@ def extract_incoming_message(
     final_text = text_without_prefix.strip()
     if not final_text and has_image:
         final_text = "请看这张图片并自然回应。"
+    if not final_text and has_expression:
+        final_text = "对方发了表情，请结合上下文自然回应。"
     if not final_text and replied_to_self:
         final_text = "群友回复了你的消息但没有附加文字，请自然开口回应。"
     if not final_text and mentioned:
@@ -953,6 +993,8 @@ def extract_incoming_message(
         history_content = f"[QQ:{event.user_id}] {final_text}"
         if has_image:
             history_content = f"{history_content}\n[图片数量: {len(image_urls)}]"
+    if expression_notes:
+        history_content += "\n[本条消息表情：" + "；".join(expression_notes) + "]"
 
     return ExtractedMessage(
         text=final_text,
@@ -968,6 +1010,7 @@ def extract_incoming_message(
         directly_requested=directly_requested,
         needs_filter=needs_filter,
         opportunistic=opportunistic,
+        has_expression=has_expression,
     )
 
 

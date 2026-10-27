@@ -208,6 +208,17 @@ class PersonaPromptsTests(unittest.TestCase):
             source,
         )
 
+    def test_visual_conversation_guides_reaction_without_overriding_tasks(self) -> None:
+        prompt = _persona_prompts.build_visual_conversation_prompt()
+        for anchor in (
+            "当前对话、配文、发言者和关系", "按当前人格自然回应", "不要每次套同一种反应",
+            "不要把它们当回复原样念出来", "自然提及与接话有关的细节是可以的",
+            "用户明确要求识别、描述、转录、翻译、解题或分析图片", "不要猜造细节",
+        ):
+            self.assertIn(anchor, prompt)
+        for text in ("主人", "笨猫", "猫娘"):
+            self.assertNotIn(text, prompt)
+
     def test_scene_discrimination_prompt_has_six_step_pipeline(self) -> None:
         prompt = _persona_prompts.build_scene_discrimination_prompt("NOPE")
 

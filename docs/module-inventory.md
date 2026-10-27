@@ -7,6 +7,7 @@
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
 | `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 已部署；图片 URL 安全校验已上线 |
 | `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署 |
+| `message_utils.py` / `persona_prompts.py` / `prompt_manager.py` / `__init__.py` | 表情线索提取及图片、表情按语境自然接话 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1401 项、9 跳过，远端 140 项通过 |
 | `__init__.py` / `tests/test_legs_delivery.py` | 腿图文字及图片按发送回执记历史 → `docs/architecture.md` | 已部署并合入活动源码；远端 8 项、本地相关回归 96 项通过 |
 | `dashboard.py` / `__init__.py` | 管理及开发 HTTP 接口访问 → `ADMIN_COMMANDS.md` | 已部署；回环限制与可选令牌鉴权 |
 | `src/catty_qq_ai/prompt_manager.py` | 学术长度豁免与有效提示词注册 → `docs/prompt-testing.md` | 已部署 |
@@ -46,6 +47,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-28 | 图片与表情自然接话；修复原图透传提示漏挂，保留原生表情线索 | 8 文件双端一致；本地 1401 项、9 跳过，远端 140 项通过 |
 | 2026-10-28 | 补齐已部署的 RAG 后端、配置和测试及腿图发送记忆修复到活动源码 | 10 文件与已部署归档 SHA-256 一致；7 组 96 项通过；真实配置未改 |
 | 2026-10-28 | 腿图发送记忆修复按最新生产基线重推，保留并发怀孕修复；活动源码未并入 | 双端两文件哈希一致；本地 132 项、远端 8 项通过；23:53 OneBot 重连；后续状态未复核 |
 | 2026-10-28 | 共享怀孕/NSFW 状态缺陷修复：`_PREGNANCY_PREDICT` global 导出+临轮清零、分库 30s/shutdown flush、主路径场景与 CPU phase 按人格 scope；部署含一次误推旧分支的 6 分钟回退与基线重放修正 | 双端 6 文件哈希一致；远端 py_compile 退出 0、150 项通过、23:20:53 加载/23:21:03 重连+BGE ready |

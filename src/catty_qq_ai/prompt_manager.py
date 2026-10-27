@@ -369,6 +369,7 @@ def register_catty_persona(
     aff_level = int(ctx.get("affection_level", 0))
     is_owner = bool(ctx.get("is_owner", False))
     has_image = bool(ctx.get("has_image", False))
+    has_expression = bool(ctx.get("has_expression", False))
     arc_store = ctx.get("story_arc_store")
     no_reply = ctx.get("no_reply_marker", "")
     split_marker = ctx.get("reply_split_marker", "")
@@ -966,21 +967,18 @@ def register_catty_persona(
     # 理由: 跟 semantic_perception (order=180) / user_vibe (order=460) / affection_hint (order=484)
     # / scene_detector (order=461) / reply_self_check (order=220) 功能重叠. 各省 ~300-500c dynamic.
     # 总计省 ~2000c per call. 想恢复 → git revert C3a commit.
+    if has_image or has_expression:
+        _reg(
+            "catty_visual_conversation",
+            content_fn=_pp.build_visual_conversation_prompt,
+            order=464,
+        )
     if has_image:
         _reg(
             "catty_image_literacy",
             content_fn=lambda: _pp.build_image_literacy_prompt(persona),
             order=465,  # conditional (has_image), post-boundary
         )
-        # Catty Image Reaction: 根据 image_description 关键词命中给具体情绪反应 hint.
-        _image_desc = ctx.get("image_description", "") or ""
-        if _image_desc:
-            from .catty_image_reaction import build_image_reaction_prompt as _build_image_reaction
-            _reg(
-                "catty_image_reaction",
-                content_fn=lambda: _build_image_reaction(_image_desc),
-                order=467,  # dynamic (image_description), post-boundary
-            )
     # 主人 2026-05-29 P2: 取消「冷会话才注入」门控 + 移进 cache prefix.
     # 旧逻辑 (is_cold_session 才注入, order 478/479/480 post-boundary) 让冷/热会话产生两种静态
     # 前缀变体 → 冷热交替时分裂 DeepSeek 共享缓存池 (实测第 4 个 dump 6758c 变体 vs 主流 9084c).

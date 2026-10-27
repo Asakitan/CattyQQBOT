@@ -3,7 +3,11 @@ from __future__ import annotations
 
 import importlib.util
 import asyncio
+import os
+import subprocess
 import sys
+import tempfile
+import textwrap
 import types
 import unittest
 from pathlib import Path
@@ -124,6 +128,17 @@ class RecentContextImageTests(unittest.TestCase):
         remembered = _plugin._recent_conversation_messages[self._scope()][-1]
         self.assertEqual(remembered.image_urls, ("https://img/from-incoming.jpg",))
         self.assertEqual(remembered.image_keys, ("image:file-from-incoming",))
+
+    def test_recent_messages_keep_native_face_context_without_cq_code(self) -> None:
+        event = _group_event(message_id=14)
+        event.message.append(MessageSegment(type="face", data={"id": "182"}))
+        event.raw_message = str(event.message)
+
+        _plugin._remember_recent_conversation_event(event)
+
+        remembered = _plugin._recent_conversation_messages[self._scope()][-1]
+        self.assertIn("QQ表情：笑哭", remembered.text)
+        self.assertNotIn("CQ:face", remembered.text)
 
     def test_self_echo_before_receipt_is_attributed_to_bound_persona(self) -> None:
         scope = self._scope()
@@ -347,6 +362,83 @@ class VisionContextConfigTests(unittest.TestCase):
             config_module.Config.model_fields["catty_vision_context_max_age_seconds"].default,
             1800.0,
         )
+
+
+class VisualConversationIntegrationTests(unittest.TestCase):
+    def test_real_builder_enables_visual_guidance_for_each_input_route(self):
+        script = textwrap.dedent('''
+            import asyncio, os, sys
+            root = sys.argv[1]
+            sys.path[:0] = [root, os.path.join(root, 'src')]
+            sys.modules['chromadb'] = None
+            import nonebot
+            nonebot.init(log_level='ERROR')
+            assert nonebot.load_plugin('catty_qq_ai') is not None
+            import catty_qq_ai as app
+            from catty_qq_ai.personas import get_persona
+            from nonebot.adapters.onebot.v11 import Message, MessageSegment, PrivateMessageEvent
+            from nonebot.adapters.onebot.v11.event import Sender
+
+            class Rag:
+                enabled = False
+                def add(self, *args, **kwargs): pass
+            app.catty_rag_store = Rag()
+            app._build_cognitive_turn_context_sync = lambda **kwargs: ('', '')
+            image = MessageSegment(type='image', data={'url': 'https://example.test/image'})
+            part = [{'type': 'image_url', 'image_url': {'url': 'data:image/png;base64,AA=='}}]
+            cases = [
+                ('direct image', Message([image]), {'image_parts': part}, True, True),
+                ('image description', Message([image]), {'image_description': '合成截图'}, True, True),
+                ('quoted image', Message('看看引用'), {'quoted_image_parts': part}, True, True),
+                ('context image', Message('看看前文'), {'context_image_parts': part}, True, True),
+                ('web image', Message('查找资料'), {'web_image_parts': part}, True, True),
+                ('native face', Message([MessageSegment(type='face', data={'id': '182'})]), {}, True, False),
+                ('unicode emoji', Message('好好笑😂'), {}, True, False),
+                ('plain text', Message('今天过得怎么样'), {}, False, False),
+            ]
+
+            async def check():
+                for role in ('catty', 'fadianji'):
+                    token = app.bind_turn_persona('private:7', get_persona(role))
+                    try:
+                        for number, (label, msg, kwargs, has_visual, has_image) in enumerate(cases, 1):
+                            event = PrivateMessageEvent(
+                                time=0, self_id=99, post_type='message', sub_type='friend', user_id=7,
+                                message_type='private', message_id=number, message=msg, original_message=msg,
+                                raw_message=str(msg), font=0, sender=Sender(user_id=7, nickname='user'),
+                            )
+                            incoming = app.extract_incoming_message('99', event, app.config)
+                            assert incoming is not None, (role, label, 'not admitted')
+                            messages, _ = await app._build_messages(event, 'private:7', incoming, **kwargs)
+                            system = '\\n'.join(
+                                item['content'] for item in messages
+                                if item.get('role') == 'system' and isinstance(item.get('content'), str)
+                            )
+                            assert ('【图片与表情的接话】' in system) == has_visual, (role, label)
+                            assert ('vision 给的图像描述' in system) == has_image, (role, label)
+                            assert '【笨猫·看图反应' not in system, (role, label)
+                            if label == 'native face':
+                                user = next(item['content'] for item in messages if item.get('role') == 'user')
+                                assert 'QQ表情：笑哭' in str(user), (role, label, user)
+                                assert 'CQ:face' not in str(user), (role, label, user)
+                    finally:
+                        app.reset_turn_persona(token)
+                print('VISUAL_CONVERSATION_INTEGRATION_OK')
+            asyncio.run(check())
+        ''')
+        allowed_env = (
+            "SYSTEMROOT", "WINDIR", "PATH", "PATHEXT", "TEMP", "TMP", "USERPROFILE",
+            "HOMEDRIVE", "HOMEPATH", "LOCALAPPDATA", "APPDATA",
+        )
+        env = {key: os.environ[key] for key in allowed_env if key in os.environ}
+        env["PYTHONUTF8"] = "1"
+        with tempfile.TemporaryDirectory() as directory:
+            result = subprocess.run(
+                [sys.executable, "-B", "-X", "utf8", "-c", script, str(_ROOT)],
+                cwd=directory, env=env, capture_output=True, text=True, encoding="utf-8", timeout=45,
+            )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("VISUAL_CONVERSATION_INTEGRATION_OK", result.stdout)
 
 
 if __name__ == "__main__":

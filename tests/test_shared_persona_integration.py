@@ -150,6 +150,21 @@ class SharedGroupAdmissionTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(await self.namespace["_rule"](self.bot, _event("接着说"), {}))
         self.assertFalse(await self.namespace["_rule"](self.bot, _event("接着说", at_all=True), {}))
 
+    async def test_native_face_keeps_existing_group_wake_and_continuation(self):
+        for name, wake in (("catty", "猫猫"), ("fadianji", "机机"), ("custom", "小青")):
+            self.persona = _persona(name, wake)
+            event = _event("")
+            event.message.append(MessageSegment(type="face", data={"id": "182"}))
+            event.raw_message = str(event.message)
+            with self.subTest(persona=name, route="no-wake"):
+                self.continuation = False
+                self.assertFalse(await self.namespace["_rule"](self.bot, event, {}))
+            with self.subTest(persona=name, route="continuation"):
+                self.continuation = True
+                state = {}
+                self.assertTrue(await self.namespace["_rule"](self.bot, event, state))
+                self.assertIn("QQ表情：笑哭", state["catty_incoming"].history_content)
+
 
 class SharedContinuationTests(unittest.TestCase):
     def setUp(self):
