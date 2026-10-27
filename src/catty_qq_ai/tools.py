@@ -475,6 +475,8 @@ _IMAGE_SEARCH_SCHEMA: dict[str, Any] = {
             "(Yandex 主力,SauceNAO 对真人照片基本搜不到,**别走 artwork**);"
             "不确定二次元还是真人 → auto(同时撒 saucenao + yandex)。"
             "返回 results 数组(source/title/url/similarity/author/extra),"
+            "image_sources 是当前会话内可核对的图片消息发送者，不等于原图作者；"
+            "消息引用只对应指定消息，URL 或下标会列出所有同链接的可见来源，空列表表示未知，不能断言唯一发送者。"
             "AI 拿到后用猫娘人格挑 1-3 条最关键的复述,**不要照搬 JSON、不要复读相似度小数、"
             "不要编造没在 results 里的作者/番名/链接**。X/Twitter 命中时记得点出来"
             "(『嗷呜这张应该是 X 上的 @xxx 发的喵～』),主人对真人来源最关心。"
@@ -1272,6 +1274,8 @@ _LOOK_IMAGE_SCHEMA: dict[str, Any] = {
             "image_ref 三种写法:①catty_scan_messages 返回的 m<消息号>#<图序号>;"
             "②图片 http(s) 直链;③纯数字=当前/引用图在前、最近图在后的去重候选下标(0 起)，与 catty_image_search 同序。"
             "用户问『这张图里是什么/你看到了吗/图里写了什么』,或你需要先看清图才能回答时调用。"
+            "image_sources 是当前会话内可核对的图片消息发送者，不等于原图作者；"
+            "消息引用只对应指定消息，URL 或下标会列出所有同链接的可见来源，空列表表示未知，不能断言唯一发送者。"
             "只返回描述,不会把图片发出去;反查作者/出处请用 catty_image_search。"
         ),
         "parameters": {
@@ -3060,6 +3064,43 @@ def _message_image_url(ctx: ToolContext, seq: int, index: int) -> tuple[str, str
     return str(images[index].get("url") or ""), ""
 
 
+def _message_image_source(item: dict[str, Any], index: int) -> dict[str, Any]:
+    message_ref = f"m{item.get('seq')}"
+    is_bot = item.get("is_bot")
+    return {
+        "message_ref": message_ref,
+        "image_ref": f"{message_ref}#{index}",
+        "user_id": str(item.get("user_id") or ""),
+        "display_name": str(item.get("display_name") or ""),
+        "is_bot": is_bot if isinstance(is_bot, bool) else None,
+    }
+
+
+def _image_source_receipt(ctx: ToolContext, url: str, image_ref: str = "") -> dict[str, Any]:
+    matched = _IMAGE_REF_RE.match(image_ref)
+    sources: list[dict[str, Any]] = []
+    if matched:
+        seq, index = (int(value) for value in matched.groups())
+        target = next((item for item in (ctx.recent_messages or [])
+                       if isinstance(item, dict) and str(item.get("seq")) == str(seq)), None)
+        if target is not None:
+            images = _message_images(target)
+            if index < len(images) and str(images[index].get("url") or "").strip() == url.strip():
+                sources.append(_message_image_source(target, index))
+    else:
+        for item in ctx.recent_messages or []:
+            if not isinstance(item, dict) or not str(item.get("seq", "")).isdigit():
+                continue
+            for index, image in enumerate(_message_images(item)):
+                if str(image.get("url") or "").strip() == url.strip():
+                    sources.append(_message_image_source(item, index))
+    return {
+        "source_scope": ctx.scope_key,
+        "image_source_status": ("message_ref" if matched else "url_matches") if sources else "unknown",
+        "image_sources": sources,
+    }
+
+
 async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     if not getattr(ctx.config, "catty_image_search_enabled", True):
         return {"error": "image_search 已被配置禁用"}
@@ -3076,10 +3117,13 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
     image_index = max(min(image_index, 5), 0)
 
     matched = _IMAGE_REF_RE.match(explicit_url)
+    source_ref = explicit_url if matched else ""
     if matched:
         explicit_url, error = _message_image_url(ctx, int(matched.group(1)), int(matched.group(2)))
         if error:
             return {"error": error}
+        if not explicit_url.lower().startswith(("http://", "https://")):
+            return {"error": "消息图片链接不是可反搜的 http(s) URL。"}
     if not explicit_url.lower().startswith(("http://", "https://")):
         explicit_url = ""
     ordered = _image_candidates(ctx, explicit_url)
@@ -3100,6 +3144,7 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         image_index = 0
     target_url = ordered[image_index]
     image_ref = f"index={image_index} (共 {len(ordered)} 张候选)"
+    source_receipt = _image_source_receipt(ctx, target_url, source_ref)
 
     # cooldown(主人/特别关心豁免)
     is_exempt = bool(ctx.configured_title.strip())
@@ -3156,6 +3201,7 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         "image_index": image_index,
         "image_url": target_url,
         "candidate_count": len(ordered),
+        **source_receipt,
         "count": len(results),
         "results": [
             {
@@ -5734,9 +5780,6 @@ async def _exec_recall_user_messages(args: dict[str, Any], ctx: ToolContext) -> 
         if not isinstance(m, dict):
             continue
         role = str(m.get("role", "?"))
-        recorded_user = str(m.get("user_id") or "")
-        if role == "user" and recorded_user and recorded_user != target_user_id:
-            continue
         content = m.get("content", "")
         if isinstance(content, list):
             content = " ".join(
@@ -5744,8 +5787,18 @@ async def _exec_recall_user_messages(args: dict[str, Any], ctx: ToolContext) -> 
                 if isinstance(b, dict) and b.get("type") == "text"
             )
         content_str = str(content)[:120]
+        recorded_user = str(m.get("user_id") or "").strip()
+        matched_sender = re.match(r"^\[QQ:([^\]]+)\]", content_str)
+        tagged_user = matched_sender.group(1).strip() if matched_sender else ""
+        if tagged_user == "未知":
+            tagged_user = ""
+        if role == "user" and recorded_user and tagged_user and recorded_user != tagged_user:
+            continue
+        recorded_user = recorded_user or tagged_user
+        if role == "user" and recorded_user and recorded_user != target_user_id:
+            continue
         dumped.append({"role": role, "content": content_str,
-                   "user_id": target_user_id if role == "user" else None})
+                   "user_id": (recorded_user or None) if role == "user" else None})
 
     return {
         "user_id": target_user_id,
@@ -5754,7 +5807,7 @@ async def _exec_recall_user_messages(args: dict[str, Any], ctx: ToolContext) -> 
         "source": "session_cache",
         "count": len(dumped),
         "messages": dumped,
-        "note": "当前群该 QQ 的独立对话 history；role=assistant/tool 是对话上下文，不是该用户发言。",
+        "note": "当前群该 QQ 的独立对话 history；缺少发言者标记的记录身份未知，assistant/tool 是对话上下文。",
     }
 
 
@@ -5813,7 +5866,11 @@ async def _exec_scan_messages(args: dict[str, Any], ctx: ToolContext) -> dict[st
         seq = item.get("seq")
         message_ref = f"m{seq}"
         dumped_images = [
-            {"image_ref": f"{message_ref}#{index}", "url": str(img.get("url") or "")}
+            {
+                "image_ref": f"{message_ref}#{index}",
+                "url": str(img.get("url") or ""),
+                "source": _message_image_source(item, index),
+            }
             for index, img in enumerate(images)
         ]
         image_total += len(dumped_images)
@@ -5824,7 +5881,7 @@ async def _exec_scan_messages(args: dict[str, Any], ctx: ToolContext) -> dict[st
                 "ago": _age_label(age),
                 "sender": display_name,
                 "user_id": user_id,
-                "is_bot": bool(item.get("is_bot")),
+                "is_bot": item.get("is_bot") if isinstance(item.get("is_bot"), bool) else None,
                 "text": snippet[:200],
                 "images": dumped_images,
             }
@@ -5877,6 +5934,7 @@ async def _exec_look_image(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
 
     if not url:
         return {"error": "图片链接为空, 可能是 QQ CDN 链接已过期。"}
+    source_receipt = _image_source_receipt(ctx, url, image_ref if matched else "")
     describe = ctx.describe_images_fn
     if describe is None:
         return {"error": "看图能力未接入(describe_images_fn 为空)。"}
@@ -5895,6 +5953,7 @@ async def _exec_look_image(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
         "ok": True,
         "image_ref": image_ref,
         "image_url": url[:400],
+        **source_receipt,
         "description": description[:1500],
         "truncated": truncated,
     }

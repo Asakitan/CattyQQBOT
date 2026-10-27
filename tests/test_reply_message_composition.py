@@ -160,6 +160,33 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self.assertEqual(sources[0].text, "之前的回复")
         self.assertEqual(sources[0].images[0][0], "https://img/reply.jpg")
 
+    def test_quote_with_mismatched_group_is_not_used_for_context(self) -> None:
+        event = types.SimpleNamespace(
+            group_id=10001, message=Message([MessageSegment.reply(88)]),
+            raw_message="[CQ:reply,id=88]", reply=None,
+        )
+        bot = types.SimpleNamespace(self_id="999", get_msg=AsyncMock(return_value={
+            "message_id": 88, "group_id": 10002,
+            "sender": {"user_id": 123, "nickname": "其他群"},
+            "message": [{"type": "text", "data": {"text": "不应引用"}}],
+        }))
+        self.assertEqual(asyncio.run(_plugin._resolve_reply_sources(bot, event)), [])
+        bot.get_msg.return_value["group_id"] = 10001
+        sources = asyncio.run(_plugin._resolve_reply_sources(bot, event))
+        self.assertEqual([source.text for source in sources], ["不应引用"])
+
+    def test_group_admission_uses_filter_route_and_preserves_sender(self) -> None:
+        event = _group_event(text="这个机器人怎么样")
+        incoming = types.SimpleNamespace(text="这个机器人怎么样")
+        completion = AsyncMock(return_value='{"should_reply":true}')
+        with patch.object(_plugin, "_active_nsfw_group_occupant", return_value=None), \
+             patch.object(_plugin, "_is_nsfw_context", return_value=False), \
+             patch.object(_plugin, "chat_completion_codex_instant", completion):
+            admitted = asyncio.run(_plugin._model_should_reply_to_group(event, incoming, continuation=False))
+        self.assertTrue(admitted)
+        self.assertEqual(completion.await_args.kwargs["request_route"], "filter")
+        self.assertIn('"user_id":"20002"', completion.await_args.args[1][1]["content"])
+
     def test_incomplete_event_reply_fetches_each_message_once(self) -> None:
         class FakeBot:
             self_id = "999"

@@ -299,7 +299,7 @@ async def generate_persona_definition(
                 return definition
         raise AssertionError("generation attempt limit")
 
-    remaining = deadline - loop.time()
+    remaining = min(timeout, deadline - loop.time())
     if remaining <= 0:
         raise PersonaGenerationTimeoutError("人格生成超时（含最多一次修复），未保存。")
     try:

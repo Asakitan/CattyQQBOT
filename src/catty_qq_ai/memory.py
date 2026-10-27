@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import copy
 import hashlib
 import json
 import os
@@ -53,6 +54,7 @@ CONTENT_TEMPERATURE_HALF_LIFE_MINUTES = 30.0
 CONTENT_TEMPERATURE_TURN_DECAY = 0.92
 CONTENT_TEMPERATURE_COLD_THRESHOLD = 0.25
 CONTENT_TEMPERATURE_SUMMARY_COLD_THRESHOLD = 0.30
+_SUMMARY_SCOPE_PINS: dict[tuple[str, tuple[str, ...]], int] = {}
 
 
 def _now() -> str:
@@ -483,6 +485,7 @@ class MemoryStore:
         )
         self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}, "group_game_tags": {}}
         self._dirty: bool = False
+        self._summary_snapshots: list[dict[str, Any]] = []
         # path → 最近一次落盘/载入内容的摘要: 内容没变的文件 flush 时直接跳过，
         # 不再每次全量重写 ~1.7k 个文件 (也缩小断电时「正在写」的文件范围)。
         self._written_digests: dict[str, bytes] = {}
@@ -500,6 +503,112 @@ class MemoryStore:
         self._written_digests = {}
         if self.enabled:
             self._load()
+
+    def _summary_holder(self, scope: tuple[str, ...]) -> dict[str, Any] | None:
+        if scope[0] == "private":
+            holder = self._data.get("users", {}).get(scope[1])
+        else:
+            group = self._data.get("groups", {}).get(scope[1])
+            if not isinstance(group, dict):
+                return None
+            holder = group if scope[0] == "group" else group.get("mention_profiles", {}).get(scope[2])
+        return holder if isinstance(holder, dict) else None
+
+    def _summary_guard(self, scope: tuple[str, ...]) -> Any:
+        if scope[0] == "private":
+            user = self._data.get("users", {}).get(scope[1], {})
+            return (user.get("private_summary") or "", user.get("private_profile") or {})
+        group = self._data.get("groups", {}).get(scope[1], {})
+        profiles = group.get("member_profiles") or {}
+        if scope[0] == "mention":
+            return profiles.get(scope[2], {})
+        return (group.get("summary") or "", group.get("group_style") or "", group.get("meme_hooks") or [], profiles)
+
+    def _capture_summary_snapshot(
+        self, scope: tuple[str, ...], corpus: list[Any], selected: list[int],
+    ) -> dict[str, Any] | None:
+        holder = self._summary_holder(scope)
+        key = "private_corpus" if scope[0] == "private" else "corpus"
+        if holder is None or holder.get(key) is not corpus or not selected:
+            return None
+        snapshot = {
+            "store": self, "data": self._data, "scope": scope, "holder": holder,
+            "key": key, "corpus": corpus, "refs": list(corpus), "values": copy.deepcopy(corpus),
+            "selected": frozenset(selected), "initial_length": len(corpus),
+            "guard": copy.deepcopy(self._summary_guard(scope)), "valid": True,
+            "initial_count": int(holder.get("count") or 0) if scope[0] == "mention" else None,
+            "count": int(holder.get("count") or 0) if scope[0] == "mention" else None,
+            "pin": (os.path.normcase(os.path.abspath(self.path)), scope),
+        }
+        self._summary_snapshots.append(snapshot)
+        pin = snapshot["pin"]
+        _SUMMARY_SCOPE_PINS[pin] = _SUMMARY_SCOPE_PINS.get(pin, 0) + 1
+        return snapshot
+
+    def release_summary_snapshot(self, snapshot: dict[str, Any] | None) -> None:
+        if snapshot is not None and snapshot.get("store") is self and any(item is snapshot for item in self._summary_snapshots):
+            snapshot["valid"] = False
+            self._summary_snapshots[:] = [item for item in self._summary_snapshots if item is not snapshot]
+            pin = snapshot["pin"]
+            remaining = _SUMMARY_SCOPE_PINS[pin] - 1
+            if remaining:
+                _SUMMARY_SCOPE_PINS[pin] = remaining
+            else:
+                del _SUMMARY_SCOPE_PINS[pin]
+
+    def _summary_snapshot_matches(
+        self, snapshot: dict[str, Any], scope: tuple[str, ...] | None = None, *, count_delta: int = 0,
+    ) -> bool:
+        if (
+            snapshot.get("store") is not self or not snapshot.get("valid")
+            or snapshot.get("data") is not self._data
+            or (scope is not None and snapshot.get("scope") != scope)
+            or not any(item is snapshot for item in self._summary_snapshots)
+        ):
+            return False
+        holder = self._summary_holder(snapshot["scope"])
+        corpus = snapshot["corpus"]
+        if (
+            holder is not snapshot["holder"] or holder.get(snapshot["key"]) is not corpus
+            or self._summary_guard(snapshot["scope"]) != snapshot["guard"]
+            or len(corpus) != len(snapshot["refs"])
+        ):
+            return False
+        if snapshot["count"] is not None and int(holder.get("count") or 0) != snapshot["count"] + count_delta:
+            return False
+        return all(item is ref and item == value for item, ref, value in zip(corpus, snapshot["refs"], snapshot["values"]))
+
+    def _append_summary_corpus(
+        self, corpus: list[Any], entry: dict[str, Any], limit: int, *, scope: tuple[str, ...], count_delta: int = 0,
+    ) -> None:
+        pending = [snapshot for snapshot in self._summary_snapshots if snapshot["corpus"] is corpus]
+        for snapshot in pending:
+            if not self._summary_snapshot_matches(snapshot, count_delta=count_delta):
+                snapshot["valid"] = False
+        corpus.append(entry)
+        pin = (os.path.normcase(os.path.abspath(self.path)), scope)
+        if not _SUMMARY_SCOPE_PINS.get(pin):
+            del corpus[:-limit]
+            return
+        for snapshot in pending:
+            if snapshot["valid"]:
+                snapshot["refs"].append(entry)
+                snapshot["values"].append(copy.deepcopy(entry))
+                if snapshot["count"] is not None:
+                    snapshot["count"] += count_delta
+
+    def _consume_summary_snapshot(self, snapshot: dict[str, Any]) -> None:
+        corpus = snapshot["corpus"]
+        selected = snapshot["selected"]
+        corpus[:] = [item for index, item in enumerate(corpus) if index not in selected]
+        if snapshot["count"] is not None:
+            initial = snapshot["initial_count"]
+            original = snapshot["values"][:snapshot["initial_length"]]
+            if (
+                len(selected) == len(original) and initial <= len(original)
+                and all(isinstance(item, dict) and not item.get("has_image") for item in original)
+            ):
+                snapshot["holder"]["count"] = snapshot["count"] - initial
 
     def own_write_signatures(self) -> dict[str, tuple[int, int] | None]:
         """本实例写入/删除过的文件签名 (path → (mtime_ns, size)；删除为 None)。"""
@@ -992,8 +1101,7 @@ class MemoryStore:
             text=content,
             has_image=has_image,
         )
-        corpus.append(entry)
-        del corpus[:-self.max_corpus_messages]
+        self._append_summary_corpus(corpus, entry, self.max_corpus_messages, scope=("group", group_id))
 
         mention_profiles = group.setdefault("mention_profiles", {})
         for target_id in _message_mentions(event):
@@ -1003,8 +1111,10 @@ class MemoryStore:
                 target_corpus = []
                 target["corpus"] = target_corpus
             target["count"] = int(target.get("count") or 0) + 1
-            target_corpus.append(entry)
-            del target_corpus[:-self.member_mention_threshold]
+            self._append_summary_corpus(
+                target_corpus, entry, self.member_mention_threshold,
+                scope=("mention", group_id, target_id), count_delta=1,
+            )
         self._record_proactive_human_message(group)
         if self.is_special_care_user(event):
             self._record_special_care_human_message(group, str(event.user_id))
@@ -1025,15 +1135,17 @@ class MemoryStore:
             user["private_corpus"] = corpus
         if not content:
             return
-        corpus.append(
+        self._append_summary_corpus(
+            corpus,
             _new_corpus_entry(
                 user_id=str(event.user_id),
                 display_name=_sender_name(event),
                 text=content,
                 has_image=has_image,
-            )
+            ),
+            self.private_summary_messages,
+            scope=("private", user_id),
         )
-        del corpus[:-self.private_summary_messages]
         self._save()
 
     def remember_image_summary(self, event: MessageEvent, image_summary: str) -> None:
@@ -1056,8 +1168,7 @@ class MemoryStore:
                 text=content,
                 has_image=True,
             )
-            corpus.append(entry)
-            del corpus[:-self.max_corpus_messages]
+            self._append_summary_corpus(corpus, entry, self.max_corpus_messages, scope=("group", group_id))
 
             mention_profiles = group.setdefault("mention_profiles", {})
             for target_id in _message_mentions(event):
@@ -1066,8 +1177,9 @@ class MemoryStore:
                 if not isinstance(target_corpus, list):
                     target_corpus = []
                     target["corpus"] = target_corpus
-                target_corpus.append(entry)
-                del target_corpus[:-self.member_mention_threshold]
+                self._append_summary_corpus(
+                    target_corpus, entry, self.member_mention_threshold, scope=("mention", group_id, target_id),
+                )
             self._save()
             return
 
@@ -1081,15 +1193,17 @@ class MemoryStore:
             if not isinstance(corpus, list):
                 corpus = []
                 user["private_corpus"] = corpus
-            corpus.append(
+            self._append_summary_corpus(
+                corpus,
                 _new_corpus_entry(
                     user_id=str(event.user_id),
                     display_name=_sender_name(event),
                     text=content,
                     has_image=True,
-                )
+                ),
+                self.private_summary_messages,
+                scope=("private", user_id),
             )
-            del corpus[:-self.private_summary_messages]
             self._save()
 
     def due_group_ids(self) -> list[str]:
@@ -1470,6 +1584,7 @@ class MemoryStore:
         *,
         min_temperature: float = 0.0,
         include_temperature: bool = True,
+        selected_indices: list[int] | None = None,
     ) -> list[str]:
         lines: list[str] = []
         selected = corpus[-limit:] if limit > 0 else []
@@ -1490,10 +1605,13 @@ class MemoryStore:
             if include_temperature:
                 temperature_prefix = f"[{_temperature_label(temperature)}] "
             lines.append(f"{temperature_prefix}{name}({user_id}{image}): {text}")
+            if selected_indices is not None:
+                selected_indices.append(start_index + offset)
         return lines
 
     def _corpus_lines_capped(
         self, corpus: list, max_tokens: int, *, hard_msg_cap: int = 300,
+        selected_indices: list[int] | None = None,
     ) -> list[str]:
         """从最新一条倒着累计 corpus lines, 不超 max_tokens token 就停.
 
@@ -1504,14 +1622,17 @@ class MemoryStore:
             from .nlu.prompt_compressor import count_tokens
         except Exception:  # noqa: BLE001
             count_tokens = lambda s: max(len(str(s)) // 2, 1)  # noqa: E731
-        all_lines = self._corpus_lines(corpus, hard_msg_cap)
+        all_indices: list[int] = []
+        all_lines = self._corpus_lines(corpus, hard_msg_cap, selected_indices=all_indices)
         picked: list[str] = []
         acc = 0
-        for line in reversed(all_lines):
+        for index, line in reversed(list(zip(all_indices, all_lines))):
             t = count_tokens(line)
             if acc + t > max_tokens and picked:
                 break
             picked.insert(0, line)
+            if selected_indices is not None:
+                selected_indices.insert(0, index)
             acc += t
         return picked
 
@@ -1551,7 +1672,7 @@ class MemoryStore:
             acc += len(entry)
         return json.dumps(selected, ensure_ascii=False)
 
-    def build_summary_messages(self, group_id: str) -> list[dict[str, object]]:
+    def build_summary_messages(self, group_id: str, *, with_snapshot: bool = False) -> Any:
         group = self._data.get("groups", {}).get(group_id, {})
         corpus = group.get("corpus", []) if isinstance(group, dict) else []
         old_summary = str(group.get("summary") or "") if isinstance(group, dict) else ""
@@ -1565,7 +1686,8 @@ class MemoryStore:
             _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
         except Exception:  # noqa: BLE001
             _corpus_max, _summary_max = 2000, 1000
-        lines = self._corpus_lines_capped(corpus, _corpus_max)
+        selected_indices: list[int] = []
+        lines = self._corpus_lines_capped(corpus, _corpus_max, selected_indices=selected_indices)
         prompt = (
             '压缩QQ群共享事实摘要，省token。只输出JSON：'
             f'{{"summary":"<={_summary_max}字","group_style":"<=40字","meme_hooks":["群梗关键词"],'
@@ -1593,7 +1715,10 @@ class MemoryStore:
             f"旧画像:{old_profiles_compact}\n"
             + "\n".join(lines)
         )
-        return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+        messages = [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+        if with_snapshot:
+            return messages, self._capture_summary_snapshot(("group", group_id), corpus, selected_indices)
+        return messages
 
     def build_proactive_context(self, group_id: str, *, recent_limit: int | None = None) -> str:
         group = self._data.get("groups", {}).get(str(group_id), {})
@@ -1638,7 +1763,7 @@ class MemoryStore:
             ]
         )
 
-    def build_private_summary_messages(self, user_id: str) -> list[dict[str, object]]:
+    def build_private_summary_messages(self, user_id: str, *, with_snapshot: bool = False) -> Any:
         user = self._data.get("users", {}).get(user_id, {})
         corpus = user.get("private_corpus", []) if isinstance(user, dict) else []
         old_summary = str(user.get("private_summary") or "") if isinstance(user, dict) else ""
@@ -1651,7 +1776,10 @@ class MemoryStore:
             _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
         except Exception:  # noqa: BLE001
             _corpus_max, _summary_max = 2000, 1000
-        lines = self._corpus_lines_capped(corpus, _corpus_max, hard_msg_cap=self.private_summary_messages)
+        selected_indices: list[int] = []
+        lines = self._corpus_lines_capped(
+            corpus, _corpus_max, hard_msg_cap=self.private_summary_messages, selected_indices=selected_indices,
+        )
         prompt = (
             '压缩QQ私聊共享事实摘要，省token。只输出JSON：'
             f'{{"summary":"<={_summary_max}字","profile":{{"gender":"男/女/未知",'
@@ -1668,16 +1796,20 @@ class MemoryStore:
             f"旧画像:{json.dumps(old_profile, ensure_ascii=False)}\n"
             + "\n".join(lines)
         )
-        return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+        messages = [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+        if with_snapshot:
+            return messages, self._capture_summary_snapshot(("private", user_id), corpus, selected_indices)
+        return messages
 
-    def build_member_mention_summary_messages(self, group_id: str, user_id: str) -> list[dict[str, object]]:
+    def build_member_mention_summary_messages(self, group_id: str, user_id: str, *, with_snapshot: bool = False) -> Any:
         group = self._data.get("groups", {}).get(group_id, {})
         mentions = group.get("mention_profiles", {}) if isinstance(group, dict) else {}
         mention_data = mentions.get(user_id, {}) if isinstance(mentions, dict) else {}
         corpus = mention_data.get("corpus", []) if isinstance(mention_data, dict) else []
         old_profiles = group.get("member_profiles", {}) if isinstance(group, dict) else {}
         old_profile = old_profiles.get(user_id, {}) if isinstance(old_profiles, dict) else {}
-        lines = self._corpus_lines(corpus, self.member_mention_threshold)
+        selected_indices: list[int] = []
+        lines = self._corpus_lines(corpus, self.member_mention_threshold, selected_indices=selected_indices)
         # 主人 2026-05-28 plan-quizzical-crane Step 3: member impression 140 → 70 字.
         try:
             from . import config as _cfg
@@ -1697,9 +1829,81 @@ class MemoryStore:
             f"群:{group_id}\n目标QQ:{user_id}\n旧画像:{json.dumps(old_profile, ensure_ascii=False)}\n"
             + "\n".join(lines)
         )
-        return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+        messages = [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+        if with_snapshot:
+            return messages, self._capture_summary_snapshot(("mention", group_id, user_id), corpus, selected_indices)
+        return messages
 
-    def save_group_summary(self, group_id: str, summary: str) -> None:
+    @staticmethod
+    def _valid_summary_profile(profile: Any, *, require_user_id: bool = False) -> bool:
+        if not isinstance(profile, dict):
+            return False
+        if require_user_id and (not isinstance(profile.get("user_id"), (str, int)) or not str(profile["user_id"]).strip()):
+            return False
+        for key in ("display_name", "gender", "title", "impression", "evidence", "confidence"):
+            if key in profile and not isinstance(profile[key], str):
+                return False
+        for key in ("aliases", "interests", "boundaries", "meme_hooks"):
+            if key in profile and (
+                not isinstance(profile[key], list) or not all(isinstance(value, str) for value in profile[key])
+            ):
+                return False
+        return True
+
+    def _prepare_summary(
+        self, scope: tuple[str, ...], summary: str, snapshot: dict[str, Any] | None,
+    ) -> tuple[dict[str, Any] | None, str] | None:
+        if snapshot is not None and not self._summary_snapshot_matches(snapshot, scope):
+            self.release_summary_snapshot(snapshot)
+            return None
+        if not isinstance(summary, str) or not summary.strip():
+            self.release_summary_snapshot(snapshot)
+            return None
+        text = summary.strip()
+        if snapshot is not None:
+            fenced = re.fullmatch(r"```(?:json)?\s*\n?(.*?)\s*```", text, re.IGNORECASE | re.DOTALL)
+            try:
+                parsed = json.loads(fenced.group(1) if fenced else text)
+            except (TypeError, ValueError):
+                parsed = None
+            if not isinstance(parsed, dict):
+                self.release_summary_snapshot(snapshot)
+                return None
+        else:
+            parsed = _extract_json_object(text)
+            if parsed is None:
+                if text.startswith(("{", "[", "```")):
+                    return None
+                return None, text
+        kind = scope[0]
+        field = "impression" if kind == "mention" else "summary"
+        valid = isinstance(parsed.get(field), str) and bool(parsed[field].strip())
+        if kind == "group":
+            valid = valid and ("group_style" not in parsed or isinstance(parsed["group_style"], str))
+            valid = valid and ("meme_hooks" not in parsed or (
+                isinstance(parsed["meme_hooks"], list) and all(isinstance(item, str) for item in parsed["meme_hooks"])
+            ))
+            valid = valid and ("members" not in parsed or (
+                isinstance(parsed["members"], list)
+                and all(self._valid_summary_profile(item, require_user_id=True) for item in parsed["members"])
+            ))
+        elif kind == "private":
+            valid = valid and ("profile" not in parsed or self._valid_summary_profile(parsed["profile"]))
+        else:
+            valid = valid and self._valid_summary_profile(parsed)
+            valid = valid and ("user_id" not in parsed or str(parsed["user_id"]).strip() == scope[2])
+        if not valid:
+            self.release_summary_snapshot(snapshot)
+            return None
+        return parsed, text
+
+    def save_group_summary(
+        self, group_id: str, summary: str, *, snapshot: dict[str, Any] | None = None,
+    ) -> bool:
+        result = self._prepare_summary(("group", group_id), summary, snapshot)
+        if result is None:
+            return False
+        parsed, text = result
         group = self._data.setdefault("groups", {}).setdefault(group_id, {})
         # 主人 2026-05-28 plan-quizzical-crane Step 3: 硬截断防 LLM 越界 (即使 prompt 写了
         # <=1000字, LLM 偶尔会塞 2000+ 字进去). cache 友好优先级 > 总结精度.
@@ -1708,9 +1912,8 @@ class MemoryStore:
             _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
         except Exception:  # noqa: BLE001
             _summary_max = 1000
-        parsed = _extract_json_object(summary)
         if parsed is None:
-            group["summary"] = summary.strip()[:_summary_max]
+            group["summary"] = text[:_summary_max]
         else:
             group["summary"] = str(parsed.get("summary") or "").strip()[:_summary_max]
             group_style = _clean_inline_text(parsed.get("group_style"), max_chars=80)
@@ -1728,10 +1931,19 @@ class MemoryStore:
         group["last_summary_at"] = _now()
         group["last_summary_attempt_date"] = _today()
         group["last_summary_attempt_at"] = group["last_summary_at"]
-        group["corpus"] = []
+        if snapshot is not None:
+            self._consume_summary_snapshot(snapshot)
+            self.release_summary_snapshot(snapshot)
         self._save()
+        return True
 
-    def save_private_summary(self, user_id: str, summary: str) -> None:
+    def save_private_summary(
+        self, user_id: str, summary: str, *, snapshot: dict[str, Any] | None = None,
+    ) -> bool:
+        result = self._prepare_summary(("private", user_id), summary, snapshot)
+        if result is None:
+            return False
+        parsed, text = result
         user = self._data.setdefault("users", {}).setdefault(user_id, {})
         # 主人 2026-05-28 plan-quizzical-crane Step 3: 硬截断防 LLM 越界.
         try:
@@ -1739,13 +1951,12 @@ class MemoryStore:
             _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
         except Exception:  # noqa: BLE001
             _summary_max = 1000
-        parsed = _extract_json_object(summary)
         if parsed is None:
-            user["private_summary"] = summary.strip()[:_summary_max]
+            user["private_summary"] = text[:_summary_max]
         else:
             user["private_summary"] = str(parsed.get("summary") or "").strip()[:_summary_max]
             raw_profile = parsed.get("profile", {})
-            if isinstance(raw_profile, dict):
+            if isinstance(raw_profile, dict) and raw_profile:
                 profile = {
                     "gender": _clean_gender(raw_profile.get("gender")),
                     "inferred_title": self._safe_title(user_id, None, raw_profile.get("title")),
@@ -1763,23 +1974,33 @@ class MemoryStore:
                 user["impression"] = profile["impression"]
                 user["profile_confidence"] = profile["confidence"]
         user["last_private_summary_at"] = _now()
-        user["private_corpus"] = []
+        if snapshot is not None:
+            self._consume_summary_snapshot(snapshot)
+            self.release_summary_snapshot(snapshot)
         self._save()
+        return True
 
-    def save_member_mention_summary(self, group_id: str, user_id: str, summary: str) -> None:
+    def save_member_mention_summary(
+        self, group_id: str, user_id: str, summary: str, *, snapshot: dict[str, Any] | None = None,
+    ) -> bool:
+        result = self._prepare_summary(("mention", group_id, user_id), summary, snapshot)
+        if result is None:
+            return False
+        parsed, text = result
         group = self._data.setdefault("groups", {}).setdefault(group_id, {})
-        parsed = _extract_json_object(summary)
         if parsed is None:
-            parsed = {"user_id": user_id, "impression": summary.strip(), "confidence": "低"}
+            parsed = {"user_id": user_id, "impression": text, "confidence": "低"}
         parsed["user_id"] = user_id
         profiles = group.setdefault("member_profiles", {})
         members = group.setdefault("members", {})
         self._save_member_profile(group_id, profiles, members, parsed)
         mention_data = group.setdefault("mention_profiles", {}).setdefault(user_id, {})
         mention_data["last_summary_at"] = _now()
-        mention_data["corpus"] = []
-        mention_data["count"] = 0
+        if snapshot is not None:
+            self._consume_summary_snapshot(snapshot)
+            self.release_summary_snapshot(snapshot)
         self._save()
+        return True
 
     def _save_member_profile(self, group_id: str, profiles: dict[str, Any], members: dict[str, Any], raw_member: Any) -> None:
         if not isinstance(raw_member, dict):

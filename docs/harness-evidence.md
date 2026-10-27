@@ -154,4 +154,21 @@ These tests do not establish live QQ delivery or model compliance with guidance.
 The reviewed offline runner passed 622 tests with 9 existing skips and no
 failures/errors on 2026-10-26. The synthetic 25-row renderer measured 0.1684 ms
 median versus 0.0212 ms for the prior snapshot: provenance has measurable local
-cost. This is not an end-to-end model or QQ latency measurement. Not deployed.
+cost. This is not an end-to-end model or QQ latency measurement. That version
+was deployed with `202971c`.
+
+## 2026-10-27 deployed update
+
+The candidate retains available group-recall speaker names and IDs, including
+explicit unknowns; the prefix shares the row's character budget. Group corpus
+profiles matched only by nickname become historical style examples rather than
+assertions that the current speaker is the same person. Exact private-scope
+profile handling remains unchanged. Bounded quoted text is used as a retrieval
+query for memory, RAG and scene evidence, without becoming evidence or a book
+instruction itself. The entry point rejects explicitly mismatched group metadata;
+quotes without it depend on the event context. Normalized exact-trigger indexing
+now returns all five checked group-scene matches, and implicit category matches
+require lexical overlap. Long quotes and all-term memory matching can still miss.
+The candidate passed 1,154 offline tests with nine skips, its selected files were
+deployed and then merged into the local workspace. Live model and QQ behavior
+remain untested.

@@ -258,12 +258,30 @@ def _recall_evidence(recall: Any, scope: str, private: bool) -> list[Evidence]:
         result.append(Evidence("MEMORY.recall", scope, f"长期摘要: {summary}", 0.7, _recency(metadata["observed_at"]), 0.78, 0.8, private, 20, **metadata))
     for match in recall.get("matches") or ():
         if isinstance(match, Mapping) and _clean(match.get("text"), 320):
-            metadata = _excerpt_metadata(_metadata(match, "time", "ts", "snapshot_at"), (match.get("text"), 320))
-            result.append(Evidence("MEMORY.recall", scope, _clean(match.get("text"), 320), 0.72, _recency(metadata["observed_at"]), 0.62, 0.7, private, 20, **metadata))
+            metadata = _metadata(match, "time", "ts", "snapshot_at")
+            value_limit = 320
+            prefix = ""
+            identity_excerpt = False
+            if not private:
+                labels = []
+                for key, limit in (("display_name", 80), ("user_id", 96)):
+                    raw = " ".join(str(match.get(key) or "").split())
+                    label = json.dumps(raw or "未知", ensure_ascii=False)
+                    if len(label) > limit:
+                        digest = hashlib.sha256(raw.encode("utf-8")).hexdigest()[:12]
+                        label = json.dumps(f"{raw[:8]}~{digest}", ensure_ascii=False)
+                        identity_excerpt = True
+                    labels.append(label)
+                prefix = f"群消息 发言者昵称={labels[0]} UID={labels[1]}："
+                value_limit -= len(prefix)
+            metadata = _excerpt_metadata(metadata, (match.get("text"), value_limit))
+            if identity_excerpt:
+                metadata["flags"] = tuple(dict.fromkeys((*metadata["flags"], "excerpt")))
+            result.append(Evidence("MEMORY.recall", scope, prefix + _clean(match.get("text"), value_limit), 0.72, _recency(metadata["observed_at"]), 0.62, 0.7, private, 20, **metadata))
     return result
 
 
-def _memory_evidence(store: Any, text: str, scope: str, private: bool, user_id: str, group_id: str, flags: QueryFlags, *, trace: _SourceTrace | None = None) -> list[Evidence]:
+def _memory_evidence(store: Any, text: str, scope: str, private: bool, user_id: str, group_id: str, flags: QueryFlags, *, quoted_text: str = "", trace: _SourceTrace | None = None) -> list[Evidence]:
     if store is None: return []
     trace = trace or _SourceTrace("memory")
     result: list[Evidence] = []
@@ -274,11 +292,16 @@ def _memory_evidence(store: Any, text: str, scope: str, private: bool, user_id: 
 
     if user_id and (private or group_id):
         result.extend(trace.call(profile_rows) or [])
-    if (flags.memory_need or flags.anaphora) and (user_id if private else group_id):
+    if (flags.memory_need or flags.anaphora or quoted_text) and (user_id if private else group_id):
         scope_args = {"user_id": user_id} if private else {"group_id": group_id}
-        # Parse each result inside its own failure boundary as well.
-        result.extend(trace.call(lambda: _notes_evidence(_call_store(store, "recall_notes", **scope_args, limit=4), scope, private)) or [])
-        result.extend(trace.call(lambda: _recall_evidence(_call_store(store, "recall", **scope_args, keywords=text, limit=4), scope, private)) or [])
+        current_query = ""
+        if flags.memory_need or flags.anaphora:
+            result.extend(trace.call(lambda: _notes_evidence(_call_store(store, "recall_notes", **scope_args, limit=4), scope, private)) or [])
+            current_query = _clean(text, 160) if quoted_text else text
+            if not quoted_text or re.search(r"[^\s,，;；]", current_query):
+                result.extend(trace.call(lambda: _recall_evidence(_call_store(store, "recall", **scope_args, keywords=current_query, limit=4), scope, private)) or [])
+        if quoted_text and _normalized_text(quoted_text) != _normalized_text(current_query):
+            result.extend(trace.call(lambda: _recall_evidence(_call_store(store, "recall", **scope_args, keywords=quoted_text, limit=4), scope, private)) or [])
     return result
 
 
@@ -395,10 +418,14 @@ def _corpus_profile_evidence(display_name: str, scope: str, private: bool, *, co
     span = "-".join(part for part in (_fmt_year(profile.get("first_ts")), _fmt_year(profile.get("last_ts"))) if part)
     metadata = _metadata(profile, "last_ts", milliseconds=True)
     metadata["flags"] = tuple(dict.fromkeys((*metadata["flags"], "historical")))
-    raw_stats = f"【语料旧识】机机与{name}共互动 {triggers} 次" + (f"({span})" if span else "")
-    stats = _clean(raw_stats, max_chars)
-    stats_metadata = _excerpt_metadata(metadata, (raw_stats, max_chars), (profile.get("name"), 40))
-    result = [Evidence("MEMORY.corpus_profile", scope, stats, 0.8, _recency(metadata["observed_at"]), 0.8, 0.85, private, 11, **stats_metadata)]
+    if private:
+        raw_stats = f"【语料旧识】机机与{name}共互动 {triggers} 次" + (f"({span})" if span else "")
+        stats = _clean(raw_stats, max_chars)
+        stats_metadata = _excerpt_metadata(metadata, (raw_stats, max_chars), (profile.get("name"), 40))
+        result = [Evidence("MEMORY.corpus_profile", scope, stats, 0.8, _recency(metadata["observed_at"]), 0.8, 0.85, private, 11, **stats_metadata)]
+    else:
+        stats = ""
+        result = []
     parts: list[str] = []
     limits: list[tuple[Any, int]] = [(profile.get("register"), 8)]
     register = _clean(profile.get("register"), 8)
@@ -430,6 +457,8 @@ def _corpus_profile_evidence(display_name: str, scope: str, private: bool, *, co
             if trigger and reply:
                 parts.append(f"旧对话例: “{trigger}”→“{reply}”")
                 limits.extend(((sample.get("trigger"), 40), (sample.get("reply"), 60)))
+    if not private:
+        parts.insert(0, "仅供口吻参考，不确认与当前发言者为同一人")
     remaining = max_chars - len(stats)
     if parts and remaining > 0:
         style_metadata = _excerpt_metadata(dict(metadata, flags=tuple(dict.fromkeys((*metadata["flags"], "style_only")))), ("; ".join(parts), remaining), *limits)
@@ -538,7 +567,7 @@ def _scene_query_enabled(text: str, flags: QueryFlags) -> bool:
         return False
     return True
 
-def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_key: str = "", is_private: bool = False, user_id: str = "", group_id: str = "", memory_store: Any = None, rag_store: Any = None, max_chars: int = _DEFAULT_MAX_CHARS, *, scene_k: int = 3, book_k: int = 3, semantic: bool = False, feed_store: Any = None, feed_max_items: int = 5, query_flags: QueryFlags | Mapping[str, Any] | None = None, display_name: str = "", corpus_profile_enabled: bool = True, corpus_profile_max_chars: int = 320) -> dict[str, Any]:
+def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_key: str = "", is_private: bool = False, user_id: str = "", group_id: str = "", memory_store: Any = None, rag_store: Any = None, max_chars: int = _DEFAULT_MAX_CHARS, *, quoted_text: str = "", scene_k: int = 3, book_k: int = 3, semantic: bool = False, feed_store: Any = None, feed_max_items: int = 5, query_flags: QueryFlags | Mapping[str, Any] | None = None, display_name: str = "", corpus_profile_enabled: bool = True, corpus_profile_max_chars: int = 320) -> dict[str, Any]:
     """Build evidence and a bounded prompt without changing store/scope selection.
 
     ``max_chars`` limits only ``text`` (Python characters, not bytes or tokens).
@@ -547,6 +576,11 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
     ``truncated`` is also true when even the complete header/rules do not fit.
     """
     scope, private = _scope_value(scope_key, is_private=is_private, user_id=user_id, group_id=group_id)
+    quote_query = _clean(quoted_text, 240)
+    if not re.search(r"[^\s,，;；]", quote_query):
+        quote_query = ""
+    current_query = _clean(text, 160) if quote_query else text
+    search_query = (quote_query if len(current_query) <= 8 else f"{current_query} {quote_query}") if quote_query else text
     if isinstance(query_flags, QueryFlags): flags = query_flags
     elif isinstance(query_flags, Mapping):
         detected = detect_fadianji_query_flags(text); flags = QueryFlags(_clean(query_flags.get("intent") or detected.intent, 40), bool(query_flags.get("memory_need", detected.memory_need)), bool(query_flags.get("anaphora", detected.anaphora)))
@@ -577,14 +611,24 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
     memory_gate = store_gate(memory_store)
     if not memory_gate and not (user_id if private else group_id):
         memory_gate = "skipped"
-    collect("memory", lambda: _memory_evidence(memory_store, text, scope, private, str(user_id or ""), str(group_id or ""), flags, trace=traces["memory"]), blocked=memory_gate)
+    if not memory_gate and quote_query:
+        scope_parts = scope.split(":")
+        expected = str(user_id if private else group_id).strip()
+        valid_scope = len(scope_parts) >= 2 and scope_parts[1] == expected
+        if private:
+            valid_scope = valid_scope and len(scope_parts) == 2
+        elif len(scope_parts) > 2:
+            valid_scope = valid_scope and len(scope_parts) == 4 and scope_parts[2] == "user" and scope_parts[3] == str(user_id or "").strip()
+        if not valid_scope:
+            memory_gate = "scope_mismatch"
+    collect("memory", lambda: _memory_evidence(memory_store, text, scope, private, str(user_id or ""), str(group_id or ""), flags, quoted_text=quote_query, trace=traces["memory"]), blocked=memory_gate)
     collect("corpus", lambda: _corpus_profile_evidence(str(display_name or ""), scope, private, corpus_profile_enabled=corpus_profile_enabled, corpus_profile_max_chars=corpus_profile_max_chars, trace=traces["corpus"]), blocked="disabled" if not corpus_profile_enabled or corpus_profile_max_chars <= 0 else "skipped" if not private and not str(display_name or "").strip() else "")
     collect("feed", lambda: _feed_evidence(feed_store, scope, int(feed_max_items)), blocked="disabled" if not feed_max_items or feed_max_items <= 0 else store_gate(feed_store))
     collect("book", lambda: _activate_character_book(text, persona, book_k), blocked="disabled" if book_k <= 0 else "")
-    collect("rag", lambda: _rag_evidence(rag_store, text, scope, persona, private, trace=traces["rag"]), blocked=store_gate(rag_store))
+    collect("rag", lambda: _rag_evidence(rag_store, search_query, scope, persona, private, trace=traces["rag"]), blocked=store_gate(rag_store))
 
     def scene_rows() -> list[Evidence]:
-        matches = match_scene_pairs(text, k=scene_k, scope_key=scope, is_private=private, semantic=semantic)
+        matches = match_scene_pairs(search_query, k=scene_k, scope_key=scope, is_private=private, semantic=semantic)
         for match in matches:
             if (match.private and (not private or match.source_scope != scope)) or (match.source_scope.startswith("group:") and match.source_scope != scope):
                 traces["scene"].rejected += 1
@@ -592,7 +636,7 @@ def build_fadianji_evidence_packet(text: str, persona: Any = "fadianji", scope_k
                 scene_matches.append(match)
         return _scene_evidence(scene_matches)
 
-    collect("scene", scene_rows, blocked="disabled" if scene_k <= 0 else "skipped" if not _scene_query_enabled(text, flags) else "")
+    collect("scene", scene_rows, blocked="disabled" if scene_k <= 0 else "skipped" if not quote_query and not _scene_query_enabled(text, flags) else "")
     all_rows = [item for rows in collected.values() for item in rows]
     evidence = _dedupe_and_sort(all_rows, private)
     owners: dict[int, str] = {}

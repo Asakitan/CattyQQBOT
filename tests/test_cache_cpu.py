@@ -45,6 +45,7 @@ def _load_module(name: str, relative_path: str):
 
 session = _load_module("_catty_session_cache_tests", "session_cache.py")
 semantic = _load_module("_catty_semantic_route_tests", "cpu_engine/semantic_route.py")
+corpus = _load_module("_catty_txtai_cache_tests", "cpu_engine/corpus_txtai.py")
 np = semantic.np
 
 
@@ -269,7 +270,7 @@ class SessionCacheTests(unittest.TestCase):
 
 @unittest.skipUnless(semantic._HAS_NUMPY, "optional numpy dependency is unavailable")
 class SemanticRouterTests(unittest.TestCase):
-    def make_router(self, weights=(1.0, 1.0), vectors=None, *, cache_dir=None, embed=None):
+    def make_router(self, weights=(1.0, 1.0), vectors=None, *, cache_dir=None, embed=None, cache_model_id="fake-v1"):
         routes = [
             semantic.SemanticRoute(str(i), "ordinary", [f"{i}:a", f"{i}:b"], [f"response {i}"], weight)
             for i, weight in enumerate(weights)
@@ -277,7 +278,8 @@ class SemanticRouterTests(unittest.TestCase):
         if vectors is None:
             vectors = np.eye(len(routes) * 2, dtype=np.float32)
         router = semantic.SemanticRouter(
-            routes, embed or (lambda texts: vectors), cache_dir=cache_dir, routes_mtime_sig="test"
+            routes, embed or (lambda texts: vectors), cache_dir=cache_dir,
+            routes_mtime_sig="test", cache_model_id=cache_model_id,
         )
         self.assertTrue(router.prepare())
         return router
@@ -369,6 +371,282 @@ class SemanticRouterTests(unittest.TestCase):
         self.assertTrue(router.prepare())
         self.assertEqual(router._flat_route_idx, [1])
         self.assertEqual(router._select_winner(np.asarray([0.5], dtype=np.float32)), (1, 1.0, 0))
+
+    def test_cache_changes_with_model_content_and_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            calls = []
+
+            def embed(vector):
+                def run(texts):
+                    calls.append(list(texts))
+                    return np.tile(np.asarray(vector, dtype=np.float32), (len(texts), 1))
+                return run
+
+            def build(text, model, vector):
+                routes = [semantic.SemanticRoute("r", "ordinary", [text], [text])]
+                result = semantic.SemanticRouter(
+                    routes, embed(vector), cache_dir=directory,
+                    routes_mtime_sig="same", cache_model_id=model,
+                )
+                self.assertTrue(result.prepare())
+                return result
+
+            build("one", "model-a", [1, 0])
+            same = build("one", "model-a", [0, 1])
+            self.assertEqual(len(calls), 1)
+            self.assertEqual(same._flat_embeddings.tolist(), [[1, 0]])
+            changed = build("one", "model-b", [0, 1])
+            self.assertEqual(len(calls), 2)
+            self.assertEqual(changed._flat_embeddings.tolist(), [[0, 1]])
+            self.assertIsNotNone(changed.match("q", embed_query_fn=lambda _: np.array([0, 1], dtype=np.float32)))
+            build("two", "model-b", [1, 0])
+            self.assertEqual(len(calls), 3)
+            np.save(str(Path(directory) / "semantic_l2_embeddings.npy"), np.ones((1, 3), dtype=np.float32))
+            rebuilt = build("two", "model-b", [1, 0])
+            self.assertEqual(len(calls), 4)
+            self.assertEqual(rebuilt._flat_embeddings.shape, (1, 2))
+            self.assertIsNone(rebuilt.match("q", embed_query_fn=lambda _: np.ones(3)))
+            resized = build("two", "model-c", [1, 0, 0])
+            self.assertEqual(len(calls), 5)
+            self.assertEqual(resized._flat_embeddings.shape, (1, 3))
+            meta = Path(directory) / "semantic_l2_metadata.json"
+            meta.write_text(json.dumps({"n_utts": 1, "mtime_sig": "same", "dim": 3}), encoding="utf-8")
+            build("two", "model-c", [1, 0, 0])
+            self.assertEqual(len(calls), 6)
+
+    def test_unknown_model_id_recomputes_without_disabling_or_overwriting_cache(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            self.make_router(cache_dir=directory)
+            path = Path(directory) / "semantic_l2_metadata.json"
+            before = path.read_bytes()
+            calls = []
+
+            def embed(texts):
+                calls.append(list(texts))
+                return np.eye(len(texts), dtype=np.float32)
+
+            routes = [semantic.SemanticRoute("r", "ordinary", ["q"], ["a"])]
+            for _ in range(2):
+                router = semantic.SemanticRouter(routes, embed, cache_dir=directory, routes_mtime_sig="test")
+                self.assertTrue(router.prepare())
+                self.assertIsNotNone(router.match("q", embed_query_fn=lambda _: np.ones(1)))
+            self.assertEqual(len(calls), 2)
+            self.assertEqual(path.read_bytes(), before)
+
+    def test_reordered_utterances_rebuild_even_with_same_mtime(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            calls = []
+
+            def embed(texts):
+                calls.append(list(texts))
+                return np.array([[1, 0] if text == "a" else [0, 1] for text in texts], dtype=np.float32)
+
+            for words in (["a", "b"], ["b", "a"]):
+                routes = [semantic.SemanticRoute("r", "ordinary", list(words), ["answer"])]
+                router = semantic.SemanticRouter(
+                    routes, embed, cache_dir=directory, routes_mtime_sig="same", cache_model_id="stable",
+                )
+                self.assertTrue(router.prepare())
+                result = router.match("q", embed_query_fn=lambda _: np.array([1, 0], dtype=np.float32))
+                self.assertEqual(result.matched_utterance, "a")
+            self.assertEqual(calls, [["a", "b"], ["b", "a"]])
+
+    def test_actual_router_legacy_identity_and_layer_order(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            routes_dir = root / "routes"
+            routes_dir.mkdir()
+            corpus_path = root / "corpus.jsonl"
+            corpus_path.write_text(json.dumps({"q": "target", "a": "l3-answer"}), encoding="utf-8")
+            source = Path(__file__).resolve().parents[1] / "src" / "catty_qq_ai"
+            name = "_catty_cpu_route_test"
+            parent = types.ModuleType(name)
+            parent.__path__ = [str(source)]
+            package = types.ModuleType(name + ".cpu_engine")
+            package.__path__ = [str(source / "cpu_engine")]
+            nlu = types.ModuleType(name + ".nlu")
+            nlu.__path__ = []
+            encoder = types.ModuleType(name + ".nlu.text2vec_engine")
+            beg = types.ModuleType(name + ".cpu_engine.beg_template")
+            beg.load_pool_from_dir = lambda _: None
+            calls = []
+            query = [np.array([0.9, 0], dtype=np.float32)]
+
+            def embed_batch(texts):
+                calls.append(list(texts))
+                return np.tile(np.array([1, 0], dtype=np.float32), (len(texts), 1))
+
+            encoder.embed_sync_batch = embed_batch
+            encoder.embed_sync = lambda _: query[0]
+            modules = {
+                name: parent,
+                name + ".cpu_engine": package,
+                name + ".nlu": nlu,
+                name + ".nlu.text2vec_engine": encoder,
+                name + ".cpu_engine.beg_template": beg,
+            }
+            with patch.dict(sys.modules, modules):
+                module = _load_module(name + ".cpu_engine.router", "cpu_engine/router.py")
+                corpus_module = sys.modules[name + ".cpu_engine.corpus_txtai"]
+                routes = [semantic.SemanticRoute("semantic", "ordinary", ["sample"], ["l2-answer"])]
+                config = types.SimpleNamespace(
+                    catty_cpu_engine_enabled=True,
+                    catty_cpu_engine_routes_dir=str(routes_dir),
+                    catty_cpu_engine_corpus_path=str(corpus_path),
+                    catty_cpu_engine_txtai_index_path=str(root / "index"),
+                    catty_text2vec_model_name="configured-but-not-a-runtime-id",
+                )
+                with patch.object(corpus_module, "_HAS_TXTAI", True), \
+                     patch.object(corpus_module, "Embeddings", FakeTxtai), \
+                     patch.object(module, "load_kw_routes", return_value=[]), \
+                     patch.object(module, "load_sem_routes", return_value=routes), \
+                     patch.object(module, "normalize", side_effect=lambda text: types.SimpleNamespace(cleaned=text, has_image=False, has_voice=False)):
+                    engine = module.CPUEngineRouter(config)
+                    engine.prepare()
+                    self.assertTrue(engine.ready)
+                    self.assertEqual(engine._semantic_router._cache_model_id, "")
+                    self.assertEqual(engine._txtai_corpus._cache_model_id, "")
+                    result = engine.route_sync("target", "private:1")
+                    self.assertEqual((result.layer, result.reply, result.is_low_confidence), ("L2", "l2-answer", False))
+                    query[0] = np.array([0.75, 0], dtype=np.float32)
+                    result = engine.route_sync("target", "private:1")
+                    self.assertEqual((result.layer, result.reply, result.is_low_confidence), ("L3", "l3-answer", False))
+                    result = engine.route_sync("other", "private:1")
+                    self.assertEqual((result.layer, result.is_low_confidence), ("L2", True))
+                    query[0] = np.array([0.72, 0], dtype=np.float32)
+                    self.assertIsNone(engine.route_sync("other", "group:1"))
+                    with patch.object(engine, "_compute_routes_mtime_signature", return_value="changed"):
+                        self.assertTrue(engine.reload_routes_if_changed())
+                    self.assertEqual(len(calls), 2)
+                    hit = types.SimpleNamespace(route_name="keyword", response="l1-answer", intent="ordinary", matched_keyword="target")
+                    engine._keyword_matcher = types.SimpleNamespace(match=lambda text, scope: hit)
+                    result = engine.route_sync("target", "private:1")
+                    self.assertEqual((result.layer, result.reply), ("L1", "l1-answer"))
+
+
+class FakeTxtai:
+    builds = 0
+    loads = 0
+
+    def __init__(self, config=None):
+        self.config = config
+        self.rows = []
+
+    def index(self, rows):
+        type(self).builds += 1
+        self.rows = list(rows)
+
+    def save(self, path):
+        Path(path).mkdir(parents=True, exist_ok=True)
+        (Path(path) / "config").write_text(json.dumps(self.rows), encoding="utf-8")
+
+    def load(self, path):
+        type(self).loads += 1
+        self.rows = json.loads((Path(path) / "config").read_text(encoding="utf-8"))
+
+    def count(self):
+        return len(self.rows)
+
+    def search(self, text, limit=5):
+        return [(qid, 1.0) for qid, q, _ in self.rows if q == text][:limit]
+
+
+class TxtaiCacheIdentityTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.corpus_path = self.root / "corpus.jsonl"
+        self.live_path = self.root / "live.jsonl"
+        self.index_path = self.root / "index"
+        FakeTxtai.builds = FakeTxtai.loads = 0
+        p1 = patch.object(corpus, "_HAS_TXTAI", True)
+        p2 = patch.object(corpus, "Embeddings", FakeTxtai)
+        p1.start()
+        p2.start()
+        self.addCleanup(p1.stop)
+        self.addCleanup(p2.stop)
+
+    def write(self, path, rows):
+        path.write_text("\n".join(json.dumps(row, ensure_ascii=False) for row in rows), encoding="utf-8")
+
+    def make(self, model="model-a", identity="model-a@sha256:aaa"):
+        result = corpus.TxtaiCorpus(
+            self.corpus_path, self.index_path, model_name=model,
+            live_corpus_path=self.live_path, cache_model_id=identity,
+        )
+        self.assertTrue(result.prepare())
+        return result
+
+    def test_order_content_model_and_live_invalidation_then_reuse(self) -> None:
+        a = {"q": "alpha", "a": "answer-a"}
+        b = {"q": "beta", "a": "answer-b"}
+        c = {"q": "gamma", "a": "answer-c"}
+        self.write(self.corpus_path, [a])
+        self.write(self.live_path, [b])
+        first = self.make()
+        self.assertEqual((first.match("beta").qid, first.match("beta").a), (1, "answer-b"))
+        self.make()
+        self.assertEqual((FakeTxtai.builds, FakeTxtai.loads), (1, 1))
+        self.write(self.live_path, [c])
+        updated = self.make()
+        self.assertEqual(FakeTxtai.builds, 2)
+        self.assertIsNone(updated.match("beta"))
+        self.assertEqual((updated.match("gamma").qid, updated.match("gamma").a), (1, "answer-c"))
+        self.write(self.corpus_path, [c])
+        self.write(self.live_path, [a])
+        reordered = self.make()
+        self.assertEqual(FakeTxtai.builds, 3)
+        self.assertEqual((reordered.match("gamma").qid, reordered.match("gamma").a), (0, "answer-c"))
+        self.make()
+        self.assertEqual((FakeTxtai.builds, FakeTxtai.loads), (3, 2))
+        changed_model = self.make(model="model-b", identity="model-b@sha256:bbb")
+        self.assertEqual(FakeTxtai.builds, 4)
+        self.assertEqual(changed_model.match("gamma").a, "answer-c")
+        self.make(model="model-c", identity="model-b@sha256:bbb")
+        self.assertEqual(FakeTxtai.builds, 5)
+
+    def test_answer_and_legacy_metadata_changes_invalidate(self) -> None:
+        self.write(self.corpus_path, [{"q": "alpha", "a": "first"}])
+        self.make()
+        self.write(self.corpus_path, [{"q": "alpha", "a": "second"}])
+        self.assertEqual(self.make().match("alpha").a, "second")
+        self.assertEqual(FakeTxtai.builds, 2)
+        (self.index_path / "catty_index_identity.json").write_text('{"count": 1}', encoding="utf-8")
+        self.make()
+        self.assertEqual(FakeTxtai.builds, 3)
+
+    def test_legacy_id_absent_rebuilds_and_keeps_routing(self) -> None:
+        self.write(self.corpus_path, [{"q": "alpha", "a": "answer-a"}])
+        self.make()
+        before = (self.index_path / "catty_index_identity.json").read_bytes()
+        for _ in range(2):
+            current = self.make(identity=None)
+            self.assertEqual(current.match("alpha").a, "answer-a")
+        self.assertEqual(FakeTxtai.builds, 3)
+        self.assertEqual((self.index_path / "catty_index_identity.json").read_bytes(), before)
+
+    def test_reload_updates_index_identity(self) -> None:
+        self.write(self.corpus_path, [{"q": "alpha", "a": "answer-a"}])
+        current = self.make()
+        self.write(self.corpus_path, [{"q": "beta", "a": "answer-b"}])
+        self.assertTrue(current.reload())
+        self.assertEqual(current.match("beta").a, "answer-b")
+        resumed = self.make()
+        self.assertEqual(FakeTxtai.builds, 2)
+        self.assertEqual(resumed.match("beta").a, "answer-b")
+
+    def test_failed_cache_save_keeps_memory_index_usable_and_invalidates_marker(self) -> None:
+        self.write(self.corpus_path, [{"q": "alpha", "a": "answer-a"}])
+        self.make()
+        self.write(self.corpus_path, [{"q": "beta", "a": "answer-b"}])
+        with patch.object(FakeTxtai, "save", side_effect=OSError("simulated cache failure")):
+            current = self.make()
+        self.assertTrue(current.ready)
+        self.assertEqual(current.match("beta").a, "answer-b")
+        self.assertFalse((self.index_path / "catty_index_identity.json").exists())
+        self.make()
+        self.assertEqual(FakeTxtai.builds, 3)
 
 
 if __name__ == "__main__":

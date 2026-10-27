@@ -96,6 +96,8 @@ class TriggerIntegrationTests(unittest.IsolatedAsyncioTestCase):
             "_reply_targets_self": AsyncMock(side_effect=lambda *args: bool(self.references)),
             "_recent_bot_prompted_user": lambda event: self.continuation,
             "_remember_recent_conversation_event": Mock(),
+            "_model_should_reply_to_group": AsyncMock(return_value=True),
+            "_close_bot_reply_continuation": Mock(),
             "_is_session_closing": lambda text: False,
             "_reset_followup_idle": Mock(), "_bot_reply_continuation_remaining": lambda event: 2 if self.continuation else 0,
             "_has_consumed_reply_source": lambda event: False,
@@ -156,6 +158,39 @@ class TriggerIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.config.catty_allowed_group_ids = set()
         with patch.object(message_utils, "_looks_like_bot_self_intro", return_value=True):
             self.assertFalse(await self.ns["_rule"](self.bot, _event("机机 机器人自介", at=True), {}))
+
+    async def test_weak_wake_and_continuation_require_model_admission(self):
+        gate = self.ns["_model_should_reply_to_group"]
+        gate.return_value = False
+        self.assertFalse(await self.ns["_rule"](self.bot, _event("这个机器人挺有意思"), {}))
+        gate.assert_awaited_once()
+        gate.reset_mock()
+        self.continuation = True
+        self.assertFalse(await self.ns["_rule"](self.bot, _event("接着说"), {}))
+        self.assertTrue(gate.await_args.kwargs["continuation"])
+        self.ns["_close_bot_reply_continuation"].assert_called_once()
+        gate.return_value = True
+        state = {}
+        self.assertTrue(await self.ns["_rule"](self.bot, _event("接着说"), state))
+        self.assertEqual(state["catty_reply_gate_result"], {"should_reply": True, "source": "model"})
+
+    async def test_direct_wake_and_reply_bypass_model_admission(self):
+        self.ns["_model_should_reply_to_group"].return_value = False
+        for event, referenced in ((_event("机机 在吗"), False), (_event("@机机 在吗"), False), (_event("在吗", at=True), False), (_event("接着说"), True)):
+            with self.subTest(event=event.raw_message, referenced=referenced):
+                self.references = [types.SimpleNamespace(is_current_bot=True)] if referenced else []
+                self.assertTrue(await self.ns["_rule"](self.bot, event, {}))
+        self.ns["_model_should_reply_to_group"].assert_not_awaited()
+
+    async def test_existing_nsfw_context_bypasses_admission(self):
+        namespace = _extract({"_model_should_reply_to_group"}, {
+            "_conversation_queue_key": lambda event: "group:10001",
+            "_active_nsfw_group_occupant": lambda scope: ("20001", 1.0),
+        })
+        self.assertTrue(await namespace["_model_should_reply_to_group"](_event(), types.SimpleNamespace(text="测试"), continuation=True))
+        namespace["_active_nsfw_group_occupant"] = lambda scope: None
+        namespace["_is_nsfw_context"] = lambda scope, user_id, text: True
+        self.assertTrue(await namespace["_model_should_reply_to_group"](_event(), types.SimpleNamespace(text="测试"), continuation=True))
 
     async def test_existing_followup_survives_filter_disabled_without_opening_new_windows(self):
         self.config.catty_filter_enabled = False

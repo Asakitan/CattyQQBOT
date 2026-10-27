@@ -35,6 +35,7 @@
 - `mSEQ#INDEX` 仍指滚动消息快照中指定消息的图，不受候选去重影响；既可用于 `look_image.image_ref`，也可用于 `image_search.image_url`。无效引用直接报错，不偷偷搜索另一个候选。
 - 显式 URL/消息图引用优先于数字下标。反搜现有 `image_index` 参数、0–5 范围及无显式图时的越界回到首张行为保留；看图下标越界继续报错。
 - full/lazy 绘图及 NAI director 文案不再要求先 @、直呼或当前消息必须附图；参数、既有计费报价、NSFW 与权限配置不变。
+- 已部署扫描结果的每张图带消息编号、图编号、发送者 QQ、昵称与机器人标记；看图和反搜结果增加 `source_scope`、`image_source_status`、`image_sources`。精确消息引用只返回该消息来源，URL 或数字下标返回同一 URL 在快照中的所有来源，未匹配时明确未知，不猜测发送者。
 
 ## 群内个人发言召回
 
@@ -42,6 +43,7 @@
 
 - `catty_group_history_scope=group`：返回 `scope=group:<群号>`、`source=recent_messages`，不访问不存在的 per-user 历史键；空结果仅代表滚动缓冲没有命中。
 - `catty_group_history_scope=user`：有真实最近发言时优先用它；无命中时仍读取 `group:<群号>:user:<QQ>` 独立历史，返回 `source=session_cache` 和实际 scope。明确标注其它用户的旧记录被排除，assistant/tool 保留为上下文但 `user_id=null`，不能归属为目标用户原话。
+- 独立历史回退还核对消息中的 QQ 标记；无发送者证据的旧记录标为未知，身份字段与正文标记冲突或标记为其他用户时排除。该增量已部署。
 
 ## Harness 证据使用教程
 
@@ -105,7 +107,7 @@
 
 离线测试：`tests/test_persona_tool.py` 20项、`tests/test_request_intent.py` 33项全部通过，覆盖字段与注册表一致、权限、精确回执、上下文承接、教程幂等/预填、实际能力过滤、非强制选择、默认研究及沙箱提示冲突。测试使用替身回调及包壳加载，避免运行插件初始化。
 
-固定离线入口 `E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 当前验收58模块989项：979通过、9项原条件跳过、1项既有persona_admin浮点失败、0错误（退出1）。最新回执为 `.vscode/handoff/fadianji-bubble-20261027/full-final.log`；机机主动闲聊复用空工具名单的上下文指导，不改主回复工具合同。PowerShell使用UTF-8输出，未调用真实模型或QQ。
+固定离线入口 `E:\Py\python.exe -B -X utf8 scripts/run_offline_regressions.py` 在原项目的验收为58模块989项：979通过、9项原条件跳过、1项既有persona_admin浮点失败、0错误（退出1）；隔离候选为64模块1154项，0失败/错误、9跳过。远端隔离回归1154项有24失败、6错误、9跳过；缺少三个文档格式依赖、部分短路径断言不一致，另有生产沙箱外部文件存在性检查异常。未调用真实模型或QQ。
 
 ## 按需技能工具
 

@@ -3836,6 +3836,9 @@ def _recent_context_images_for_scope(
     max_images: int,
     max_age_seconds: float = 1800.0,
     exclude_urls: set[str] | None = None,
+    exclude_message_ids: set[str] | None = None,
+    reference_seq: int | None = None,
+    following_user_id: str = "",
 ) -> list[tuple[RecentConversationMessage, str, str, int]]:
     """最近 lookback_messages 条消息里出现过的图, 供主 AI 联系上下文识图。
 
@@ -3850,24 +3853,48 @@ def _recent_context_images_for_scope(
     newest_seq = recent[-1].seq
     floor_seq = newest_seq - lookback_messages + 1
     now = time.monotonic()
-    seen = {url for url in (exclude_urls or set()) if url}
+    excluded_urls = {url for url in (exclude_urls or set()) if url}
+    excluded_ids = {str(value) for value in (exclude_message_ids or set()) if value}
+    seen: set[tuple[str, str, int, str]] = set()
     picked: list[tuple[RecentConversationMessage, str, str, int]] = []
     for item in reversed(recent):
         if item.seq < floor_seq:
             break
+        if item.message_id and item.message_id in excluded_ids:
+            continue
+        if reference_seq is not None and item.seq > reference_seq and item.user_id != following_user_id:
+            continue
         if not item.image_urls:
             continue
         if max_age_seconds > 0 and now - item.created_at > max_age_seconds:
             continue
         for index, url in enumerate(item.image_urls):
-            if not url or url in seen:
+            occurrence = (item.message_id or str(item.seq), item.user_id, index, url)
+            if not url or url in excluded_urls or occurrence in seen:
                 continue
-            seen.add(url)
+            seen.add(occurrence)
             key = item.image_keys[index] if index < len(item.image_keys) else url
-            picked.append((item, url, key, max(newest_seq - item.seq, 1)))
+            distance = (reference_seq - item.seq) if reference_seq is not None else max(newest_seq - item.seq, 1)
+            picked.append((item, url, key, distance))
             if len(picked) >= max_images:
                 return list(reversed(picked))
     return list(reversed(picked))
+
+
+async def _wait_for_following_sender_image(
+    scope_key: str, user_id: str, after_seq: int, *, timeout_seconds: float = 1.5,
+) -> None:
+    if not scope_key or not user_id or after_seq <= 0 or timeout_seconds <= 0:
+        return
+    deadline = time.monotonic() + timeout_seconds
+    while True:
+        recent = _recent_conversation_messages.get(scope_key, ())
+        if any(item.seq > after_seq and item.user_id == user_id and item.image_urls for item in recent):
+            return
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            return
+        await asyncio.sleep(min(0.1, remaining))
 
 
 def _recent_messages_snapshot_for_scope(scope_key: str, *, limit: int = 80) -> list[dict[str, Any]]:
@@ -3885,6 +3912,8 @@ def _recent_messages_snapshot_for_scope(scope_key: str, *, limit: int = 80) -> l
                 "display_name": item.display_name,
                 "text": item.text,
                 "is_bot": item.is_bot,
+                "target_user_id": item.target_user_id,
+                "message_id": item.message_id,
                 "age_seconds": max(now - item.created_at, 0.0),
                 "images": [
                     {
@@ -4698,7 +4727,9 @@ def _summarize_text_parsing_for_feed(text: str) -> dict | None:
 def _remember_recent_conversation_event(event: MessageEvent, incoming: ExtractedMessage | None = None) -> None:
     text = (incoming.text if incoming is not None else event_plain_text(event)).strip()
     if incoming is not None:
-        images = list(zip(incoming.image_urls or [], incoming.image_keys or []))
+        urls = incoming.image_urls or []
+        keys = incoming.image_keys or []
+        images = [(url, keys[index] if index < len(keys) else url) for index, url in enumerate(urls) if url]
     else:
         images = extract_images(event)
     has_image = bool(images)
@@ -5048,7 +5079,7 @@ _BOT_CONTINUATION_SKELETON_TPL = (
     "短情绪感叹(玩坏了/悲/笑死/哈/绷不住), 第三人称闲聊、自言自语、新话题但没指向{char}、误触发。"
     "不要因刚回过 ta 就抢话刷存在感。确实要回的技术求助: 先给可执行技术结论或最小方案, 再保持{style};"
     "必须优先覆盖用户句尾请求目标。『能不能用 A 给我一个 B 的方式/方案』先答 B, 再说明 A 链路可行性和注意点。"
-    "群消息『昵称(QQ): 正文』里冒号后就是用户完整原文; 正文已成完整问题就按原文回答, 不要说只看到几个词/消息被吃掉/要求重发。"
+    "群历史消息以『[QQ:号码] 正文』标明发言者；未知发言者不能归给当前用户。正文已成完整问题就按原文回答。"
 )
 
 
@@ -5131,10 +5162,12 @@ def _wake_context_prompt(
             continue
         image_marker = " [含图片]" if item.has_image else ""
         speaker = f"{item.display_name}({item.user_id})"
-        if item.is_bot:
+        if item.is_bot and item.user_id == str(getattr(event, "self_id", "")):
             speaker = f"{item.display_name or '笨猫'}自己({item.user_id})"
             if item.target_user_id:
                 speaker += f" -> {item.target_user_id}"
+        elif item.is_bot:
+            speaker += "[其他账号]"
         _short_text = " ".join(str(item.text or "").split())
         if len(_short_text) > 72:
             _short_text = _short_text[:71].rstrip() + "…"
@@ -6161,6 +6194,30 @@ def _is_ai_compact_block(message: object) -> bool:
     )
 
 
+def _group_history_with_speakers(history: list[ChatMessage]) -> list[ChatMessage]:
+    labeled: list[ChatMessage] = []
+    for message in history:
+        if not isinstance(message, dict) or message.get("role") != "user":
+            labeled.append(message)
+            continue
+        content = message.get("content")
+        updated = dict(message)
+        if _is_ai_compact_block(message):
+            if isinstance(content, str) and "系统摘要，非用户发言" not in content[:80]:
+                updated["content"] = content.replace(_AI_COMPACT_BLOCK_PREFIX, _AI_COMPACT_BLOCK_PREFIX + "（系统摘要，非用户发言）", 1)
+        elif isinstance(content, str):
+            if not re.match(r"^\s*\[QQ:[^\]\r\n]+\]", content):
+                updated["content"] = f"[QQ:未知] {content}"
+        elif isinstance(content, list):
+            parts = list(content)
+            first = next((part.get("text", "") for part in parts if isinstance(part, dict) and part.get("type") == "text"), "")
+            if not re.match(r"^\s*\[QQ:[^\]\r\n]+\]", str(first)):
+                parts.insert(0, {"type": "text", "text": "[QQ:未知]"})
+            updated["content"] = parts
+        labeled.append(updated)
+    return labeled
+
+
 def _schedule_session_ai_compact(key: str) -> None:
     if not bool(getattr(config, "catty_session_ai_compact_enabled", True)):
         return
@@ -6214,7 +6271,13 @@ async def _run_session_ai_compact(key: str) -> None:
             content = str(message.get("content") or "")[:500]
             if not content.strip():
                 continue
-            tag = "用户" if role == "user" else ("机机" if role == "assistant" else "补充")
+            if role == "user" and key.startswith("group:"):
+                match = re.match(r"^\s*(\[QQ:[^\]\r\n]+\])\s*", content)
+                tag = match.group(1) if match else "未知发言者"
+                if match:
+                    content = content[match.end():]
+            else:
+                tag = "用户" if role == "user" else ("机器人" if role == "assistant" else "补充")
             lines.append(f"{tag}: {content}")
         transcript = "\n".join(lines)[-60_000:]
         if previous_summaries:
@@ -6237,6 +6300,7 @@ async def _run_session_ai_compact(key: str) -> None:
                         "分段输出: 【未完成事项】【人物与称呼】【关系与氛围】【重要事件与约定】【反复出现的梗】;"
                         " 【未完成事项】必须最先写且写全: 没做完的事、机机没兑现的承诺、没回答的问题、待确认的安排, "
                         "每条一行, 写明相关人和具体内容; 被用户纠正过的事实按纠正后的版本写; "
+                        "群聊按 QQ 号码保留每条事实的发言者，未知时写未知，不把旧话题套到无关的新消息；"
                         "总字数≤800字; 保留具体名词/时间/承诺; 不编造; 没有内容的分段写「无」。"
                     ),
                 },
@@ -6249,7 +6313,7 @@ async def _run_session_ai_compact(key: str) -> None:
         block = {
             "role": "user",
             "content": (
-                f"{_AI_COMPACT_BLOCK_PREFIX}以下是更早对话的 AI 蒸馏摘要, "
+                f"{_AI_COMPACT_BLOCK_PREFIX}（系统摘要，非用户发言）以下是更早对话的 AI 蒸馏摘要, "
                 f"压缩于 {time.strftime('%Y-%m-%d %H:%M')}, 覆盖 {len(old_span)} 条原始消息。\n{summary}"
             ),
         }
@@ -6291,16 +6355,21 @@ def _build_user_content(
     web_image_parts: list[dict[str, Any]] | None = None,
 ) -> object:
     base = incoming.history_content
-    if incoming.image_urls and not image_parts:
+    if incoming.image_urls and not any(part.get("type") == "image_url" for part in (image_parts or [])):
         if image_description:
             base = f"{base}\n图片识别结果：\n{image_description}\n请基于图片识别结果和上下文自然回应。"
         else:
             urls = "\n".join(f"- {url}" for url in incoming.image_urls)
-            base = f"{base}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
+            base = f"{base}\n图片下载地址：\n{urls}\n仅有地址时无法确认图片内容，请如实说明，不要猜。"
     if context_image_notes:
         base = (
-            f"{base}\n最近几条消息里出现过的图（联系上下文理解，不要说没看到图）:\n"
+            f"{base}\n最近几条消息里的图片来源参考（无法确定图片内容时如实说明）:\n"
             + "\n".join(context_image_notes)
+        )
+    if image_parts or quoted_image_parts or context_image_parts or context_image_notes:
+        base += (
+            "\n【图片关联】逐张按标注的消息和发送者理解；不要把其他人的图或旧图当成本轮用户发的图。"
+            "不确定用户指哪张就说明或询问，不要猜；按当前请求自然回答，不必主动逐项描述图片。"
         )
     if (
         not image_parts
@@ -6802,6 +6871,43 @@ def _references_recent_image(text: str) -> bool:
     return bool(_RECENT_IMAGE_REFERENCE_RE.search(text))
 
 
+def _user_requests_context_images(text: str) -> bool:
+    value = str(text or "")
+    return _references_recent_image(value) or any(
+        word in value for word in ("图片", "照片", "截图", "画面", "图中", "这张", "那张", "效果图", "这个效果", "表情包")
+    )
+
+
+def _user_might_send_following_image(text: str) -> bool:
+    value = str(text or "")
+    return _user_requests_context_images(value) or any(
+        word in value for word in ("好看", "可爱", "衣服", "穿搭", "造型", "外观", "效果", "看看", "瞧瞧", "评价")
+    )
+
+
+async def _prepare_labeled_image_parts(
+    sources: list[tuple[str, str]],
+) -> tuple[list[dict[str, Any]], int]:
+    async def prepare(url: str) -> list[dict[str, Any]]:
+        try:
+            return await prepare_passthrough_image_parts(config, [url])
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"vision passthrough image failed: {type(exc).__name__}")
+            return []
+
+    results = await asyncio.gather(*(prepare(url) for url, _label in sources))
+    parts: list[dict[str, Any]] = []
+    count = 0
+    for (_url, label), image_parts in zip(sources, results):
+        if image_parts:
+            parts.append({"type": "text", "text": label})
+            parts.extend(image_parts)
+            count += 1
+        else:
+            parts.append({"type": "text", "text": f"{label}；图片未能读取，内容未知"})
+    return parts, count
+
+
 # 用户文本里出现这些词时,可以判定『他想让猫猫看本条消息附带的图』,值得 eager 跑 vision。
 # 反之(用户发图但只说"哈哈" 或 跟图无关的话),vision 跑了也没人用,纯浪费 API 调用。
 _IMAGE_ATTENTION_HINTS: tuple[str, ...] = (
@@ -6859,7 +6965,7 @@ def _build_recent_image_reference_hint(
             "下面给出当前会话最近的图片记忆(corpus 里 has_image 条目,时间倒序),"
             "请你**优先在这几条里找用户指代的那张**,认出来就基于 vision 描述回答;"
             "如果都对不上,可以用一句猫娘口吻说『人家也没看清这张是啥喵～主人形容下』,"
-            "不要硬猜也不要否认有图。"
+            "不要硬猜。"
         ]
     else:
         lines = [
@@ -6867,12 +6973,13 @@ def _build_recent_image_reference_hint(
             "下面给出当前会话最近的图片记忆（corpus 中 has_image 条目，时间倒序），"
             "请优先在这几条里找用户指代的那张，认出来就基于 vision 描述回答；"
             "如果都对不上，请简要说明暂时不能确定，并请用户补充描述，"
-            "不要硬猜，也不要否认有图。回复时保持当前人格既有的表达方式。"
+            "不要硬猜。回复时保持当前人格既有的表达方式。"
         ]
     for index, img in enumerate(recent_images, 1):
         ts = img.get("time", "")[:19]
-        speaker = img.get("display_name") or img.get("user_id") or "群友"
-        lines.append(f"{index}. [{ts}] {speaker}: {img.get('text', '')}")
+        speaker = img.get("display_name") or "未知"
+        sender_id = img.get("user_id") or "未知"
+        lines.append(f"{index}. [{ts}] {speaker}（QQ {sender_id}）: {img.get('text', '')}")
     if is_catty_legacy:
         lines.append(
             "如果需要更早的图(超出本会话最近 3 张),再考虑调 catty_recall(keywords=『图片内容 关键词』)查 corpus。"
@@ -6891,12 +6998,13 @@ def _build_cognitive_turn_context_sync(
     user_id: str,
     group_id: str,
     display_name: str = "",
+    quoted_text: str = "",
 ) -> tuple[str, str]:
     """Build post-boundary system evidence and the current user-role adaptive block."""
     persona_name = str(getattr(persona, "name", "catty") or "catty")
     system_parts: list[str] = []
     harness_budget = max(0, int(getattr(config, "catty_fadianji_harness_max_chars", 12000) or 0))
-    if bool(getattr(persona, "semantic_harness_enabled", False)) and str(text or "").strip() and harness_budget:
+    if bool(getattr(persona, "semantic_harness_enabled", False)) and (str(text or "").strip() or str(quoted_text or "").strip()) and harness_budget:
         try:
             from .fadianji_harness import build_fadianji_evidence_packet
 
@@ -6907,6 +7015,7 @@ def _build_cognitive_turn_context_sync(
                 is_private=is_private,
                 user_id=user_id,
                 group_id=group_id,
+                quoted_text=quoted_text,
                 memory_store=memory_store,
                 rag_store=catty_rag_store,
                 feed_store=qzone_feed_store,
@@ -7086,6 +7195,7 @@ async def _build_messages(
     other_game_contexts: list[str] | None = None,
     wake_context: str | None = None,
     bot_continuation_context: str | None = None,
+    quoted_text: str = "",
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
 
@@ -7117,6 +7227,8 @@ async def _build_messages(
     # 提前读历史以判定会话热度：≥ HOT_SESSION_MIN_MESSAGES 条历史时跳过最长的教学例句，
     # 模型已经能从历史里看到自身口吻，省下大约 30-40% 的 system token。
     history_messages = list(_get_session_cache().get(key))
+    if isinstance(event, GroupMessageEvent):
+        history_messages = _group_history_with_speakers(history_messages)
     is_cold_session = len(history_messages) < HOT_SESSION_MIN_MESSAGES
 
     # ─── Layer A → 全部移到 PromptManager (在 affection 之后统一注册) ───
@@ -7821,6 +7933,7 @@ async def _build_messages(
             user_id=str(event.user_id),
             display_name=_display_name(event),
             group_id=str(getattr(event, "group_id", "") or ""),
+            quoted_text=quoted_text,
         )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"cognitive turn context failed (non-fatal): {exc}")
@@ -11026,7 +11139,9 @@ async def _resolve_reply_sources(bot: Bot, event: MessageEvent) -> list[ReplySou
     complete_keys: set[str] = set()
 
     reply = getattr(event, "reply", None)
-    if reply is not None:
+    reply_group = reply.get("group_id") if isinstance(reply, dict) else getattr(reply, "group_id", None)
+    event_group = getattr(event, "group_id", None)
+    if reply is not None and not (event_group and reply_group and str(reply_group) != str(event_group)):
         source = reply_source_from_message(reply, self_id=str(bot.self_id))
         if not source.message_id and len(message_ids) == 1:
             source.message_id = message_ids[0]
@@ -11044,6 +11159,10 @@ async def _resolve_reply_sources(bot: Bot, event: MessageEvent) -> list[ReplySou
             message = await bot.get_msg(message_id=_coerce_message_id(message_id))
         except Exception as exc:
             logger.debug(f"Failed to inspect replied message {message_id}: {exc}")
+            continue
+        fetched_group = message.get("group_id") if isinstance(message, dict) else getattr(message, "group_id", None)
+        if event_group and fetched_group and str(fetched_group) != str(event_group):
+            by_key.pop(message_id, None)
             continue
         fetched = reply_source_from_message(
             message,
@@ -11087,8 +11206,51 @@ def _build_reply_source_context(
     return "\n".join(lines)
 
 
+def _reply_source_retrieval_text(sources: list[ReplySource]) -> str:
+    return " ".join(
+        " ".join(str(source.text or "").split())[:240]
+        for source in sources[:2] if str(source.text or "").strip()
+    )[:480]
+
+
 async def _reply_targets_self(bot: Bot, event: MessageEvent) -> bool:
     return any(source.is_current_bot for source in await _resolve_reply_sources(bot, event))
+
+
+async def _model_should_reply_to_group(
+    event: MessageEvent, incoming: ExtractedMessage, *, continuation: bool,
+) -> bool:
+    scope = _conversation_queue_key(event)
+    try:
+        if _active_nsfw_group_occupant(scope) or _is_nsfw_context(scope, str(event.user_id), incoming.text):
+            return True
+    except Exception:
+        return True
+    from .reply_admission import decide_reply
+    from .openai_client import reset_distill_suppressed, set_distill_suppressed
+
+    async def completion(messages: list[dict[str, str]]) -> str:
+        token = set_distill_suppressed(True)
+        try:
+            return await chat_completion_codex_instant(config, messages, max_tokens=512, timeout_override=15.0, request_route="filter")
+        finally:
+            reset_distill_suppressed(token)
+
+    recent = _recent_messages_snapshot_for_scope(scope, limit=12)
+    message_id = _event_message_id(event)
+    if message_id:
+        recent = [item for item in recent if item.get("message_id") != message_id]
+    persona = _persona_for_event(event)
+    return await decide_reply(
+        completion=completion,
+        char_name=str(getattr(persona, "char_name", "机机") or "机机"),
+        current_message={"text": incoming.text, "user_id": str(event.user_id),
+                         "display_name": _display_name(event), "is_bot": False,
+                         "group_id": str(getattr(event, "group_id", "") or "")},
+        recent_messages=recent,
+        is_continuation=continuation,
+        timeout_seconds=15.0,
+    )
 
 
 async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -11133,6 +11295,20 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
             incoming.directly_requested = True
             incoming.opportunistic = False
     _remember_recent_conversation_event(event, incoming)
+    if (
+        isinstance(event, GroupMessageEvent)
+        and getattr(_persona_for_event(event), "name", "") == "fadianji"
+        and not has_real_at_self(str(event.self_id), event)
+        and not incoming.mentioned
+        and not incoming.replied_to_self
+        and not incoming.used_prefix
+    ):
+        allowed = await _model_should_reply_to_group(event, incoming, continuation=recent_bot_continuation)
+        state["catty_reply_gate_result"] = {"should_reply": allowed, "source": "model"}
+        if not allowed:
+            if recent_bot_continuation:
+                _close_bot_reply_continuation(event)
+            return False
     if recent_bot_continuation:
         # 续聊窗口活跃 — 用 trigger/direct 信号 (mentioned/used_prefix) 决定续聊/关窗。
         # 主人 2026-05-29:
@@ -11212,7 +11388,7 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     # _save_local_critic_sample("reply_gate", ...) 调用也一并停掉, 不再为 gate 收集训练样本.
     # state["catty_reply_gate_result"] 保留空 dict 占位, handle_chat 的 _fallback_reply_decision_context
     # 看到没 "fallback" 标记会返回空, 无副作用.
-    state["catty_reply_gate_result"] = {}
+    state.setdefault("catty_reply_gate_result", {})
     if isinstance(event, PrivateMessageEvent):
         gate_allowed = True
     elif _force_direct_reply_enabled(event, incoming):
@@ -15274,42 +15450,63 @@ async def _summary_loop() -> None:
         if not _has_api_key():
             continue
         for group_id in memory_store.due_group_ids():
+            store = memory_store
+            snapshot = None
             try:
-                if not memory_store.claim_group_summary_run(group_id):
+                if not store.claim_group_summary_run(group_id):
                     continue
                 set_current_scope_key(f"summary:group:{group_id}")
-                messages = memory_store.build_summary_messages(group_id)
+                messages, snapshot = store.build_summary_messages(group_id, with_snapshot=True)
+                if snapshot is None:
+                    continue
                 summary = await chat_completion_summary(config, messages)
-                memory_store.save_group_summary(group_id, summary)
-                logger.info(f"Updated group memory summary for {group_id}")
+                if store is memory_store and store.save_group_summary(group_id, summary, snapshot=snapshot):
+                    logger.info(f"Updated group memory summary for {group_id}")
+                else:
+                    logger.warning(f"Discarded group memory summary for {group_id}: invalid or stale snapshot")
             except Exception as exc:
                 logger.warning(f"Failed to summarize group memory for {group_id}: {type(exc).__name__}: {exc}")
             finally:
+                store.release_summary_snapshot(snapshot)
                 set_current_scope_key(None)
         for user_id in memory_store.due_private_user_ids():
+            store = memory_store
+            snapshot = None
             try:
                 set_current_scope_key(f"summary:private:{user_id}")
-                messages = memory_store.build_private_summary_messages(user_id)
+                messages, snapshot = store.build_private_summary_messages(user_id, with_snapshot=True)
+                if snapshot is None:
+                    continue
                 summary = await chat_completion_summary(config, messages)
-                memory_store.save_private_summary(user_id, summary)
-                logger.info(f"Updated private memory summary for {user_id}")
+                if store is memory_store and store.save_private_summary(user_id, summary, snapshot=snapshot):
+                    logger.info(f"Updated private memory summary for {user_id}")
+                else:
+                    logger.warning(f"Discarded private memory summary for {user_id}: invalid or stale snapshot")
             except Exception as exc:
                 logger.warning(f"Failed to summarize private memory for {user_id}: {type(exc).__name__}: {exc}")
             finally:
+                store.release_summary_snapshot(snapshot)
                 set_current_scope_key(None)
         for group_id, user_id in memory_store.due_mentioned_members():
+            store = memory_store
+            snapshot = None
             try:
                 set_current_scope_key(f"summary:mention:{group_id}:{user_id}")
-                messages = memory_store.build_member_mention_summary_messages(group_id, user_id)
+                messages, snapshot = store.build_member_mention_summary_messages(group_id, user_id, with_snapshot=True)
+                if snapshot is None:
+                    continue
                 summary = await chat_completion_summary(config, messages)
-                memory_store.save_member_mention_summary(group_id, user_id, summary)
-                logger.info(f"Updated mentioned member profile for {user_id} in group {group_id}")
+                if store is memory_store and store.save_member_mention_summary(group_id, user_id, summary, snapshot=snapshot):
+                    logger.info(f"Updated mentioned member profile for {user_id} in group {group_id}")
+                else:
+                    logger.warning(f"Discarded mentioned member profile for {user_id} in group {group_id}: invalid or stale snapshot")
             except Exception as exc:
                 logger.warning(
                     f"Failed to summarize mentioned member profile for {user_id} in group {group_id}: "
                     f"{type(exc).__name__}: {exc}"
                 )
             finally:
+                store.release_summary_snapshot(snapshot)
                 set_current_scope_key(None)
         for game_name in memory_store.due_games_for_summary():
             try:
@@ -16070,7 +16267,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         _tb_msg or _tb.pick_broke_reply(getattr(_tb_persona, "name", "catty"))
                     )
             else:
-                _tb_quota = int(getattr(config, "catty_group_hourly_token_quota", 300_000) or 0)
+                _tb_quota = int(getattr(config, "catty_group_hourly_token_quota", 30_000_000) or 0)
                 if _tb_quota > 0:
                     _tb_over, _tb_notified = _tb.group_quota_exceeded(_tb_user_id, _tb_quota)
                     if _tb_over:
@@ -16469,23 +16666,42 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             or incoming.used_prefix
             or incoming.directly_requested
         )
+        _has_quoted_images = any(source.images for source in reply_sources)
         # 识图 AI 与主 AI 同线路时, 图片直接进主请求, 不再先跑一次同模型识图。
         _vision_passthrough = bool(
             config.catty_image_vision_enabled
-            and _image_attention
+            and (_image_attention or incoming.image_urls or _has_quoted_images)
             and vision_shares_main_route(config)
         )
         passthrough_image_parts: list[dict[str, Any]] = []
         passthrough_quoted_image_parts: list[dict[str, Any]] = []
-        # 联系上下文识图: @/引用/直呼时, 最近 N 条消息里的图也一起带给主 AI,
-        # 否则只喂当前消息/引用消息的图, AI 会答「图我这边看不细」。
         passthrough_context_image_parts: list[dict[str, Any]] = []
+        incoming_image_count = quoted_image_count = context_image_count = 0
         context_image_notes: list[str] = []
         context_image_entries: list[tuple[RecentConversationMessage, str, str, int]] = []
-        if config.catty_image_vision_enabled and _image_attention:
+        _image_scope = _conversation_queue_key(event)
+        _current_message_id = _event_message_id(event)
+        _recent_for_image = _recent_conversation_messages.get(_image_scope, ())
+        _current_image_seq = next(
+            (item.seq for item in reversed(_recent_for_image) if _current_message_id and item.message_id == _current_message_id),
+            0,
+        )
+        _wants_context_image = _user_requests_context_images(incoming.text)
+        _wants_following_image = (
+            not incoming.image_urls and not _has_quoted_images
+            and _user_might_send_following_image(incoming.text)
+        )
+        if incoming.image_urls or _has_quoted_images:
+            _wants_context_image = _wants_context_image and any(
+                word in str(incoming.text or "") for word in ("之前", "前面", "刚才", "上一张", "另一张", "对比", "比较")
+            )
+        if config.catty_image_vision_enabled and (_wants_context_image or _wants_following_image):
             try:
+                await _wait_for_following_sender_image(
+                    _image_scope, str(event.user_id), _current_image_seq if _wants_following_image else 0,
+                )
                 context_image_entries = _recent_context_images_for_scope(
-                    _conversation_queue_key(event),
+                    _image_scope,
                     lookback_messages=int(
                         getattr(config, "catty_vision_context_messages", 16) or 0
                     ),
@@ -16495,67 +16711,49 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     max_age_seconds=float(
                         getattr(config, "catty_vision_context_max_age_seconds", 1800.0) or 0.0
                     ),
-                    exclude_urls=set(incoming.image_urls or [])
-                    | {url for url, _key in reply_image_pairs},
+                    exclude_message_ids={_current_message_id} | {
+                        str(source.message_id) for source in reply_sources if source.message_id
+                    },
+                    reference_seq=_current_image_seq or None,
+                    following_user_id=str(event.user_id),
                 )
+                if not _wants_context_image:
+                    context_image_entries = [entry for entry in context_image_entries if entry[3] < 0]
             except Exception as exc:  # noqa: BLE001
                 logger.warning(f"vision context images lookup failed: {exc}")
         if _vision_passthrough:
             if incoming.image_urls:
-                try:
-                    passthrough_image_parts = await prepare_passthrough_image_parts(
-                        config, incoming.image_urls
-                    )
-                except Exception as exc:  # noqa: BLE001
-                    logger.warning(f"vision passthrough (incoming) failed: {exc}")
-            if reply_image_pairs:
-                try:
-                    passthrough_quoted_image_parts = await prepare_passthrough_image_parts(
-                        config, [url for url, _key in reply_image_pairs]
-                    )
-                except Exception as exc:  # noqa: BLE001
-                    logger.warning(f"vision passthrough (quoted) failed: {exc}")
-            context_image_count = 0
+                passthrough_image_parts, incoming_image_count = await _prepare_labeled_image_parts([
+                    (url, f"【当前消息图{index}】发送者：{_display_name(event)}（QQ {event.user_id}）")
+                    for index, url in enumerate(incoming.image_urls, 1)
+                ])
+            if _has_quoted_images:
+                _quoted_sources = [
+                    (url, f"【引用{source_index}图{image_index}】发送者：{source.sender_name or '未知'}（QQ {source.sender_id or '未知'}）")
+                    for source_index, source in enumerate(reply_sources, 1)
+                    for image_index, (url, _key) in enumerate(source.images or [], 1)
+                ]
+                passthrough_quoted_image_parts, quoted_image_count = await _prepare_labeled_image_parts(_quoted_sources)
             if context_image_entries:
-
-                async def _prepare_context_image(
-                    entry: tuple[RecentConversationMessage, str, str, int],
-                ) -> list[dict[str, Any]]:
-                    try:
-                        return await prepare_passthrough_image_parts(config, [entry[1]])
-                    except Exception as exc:  # noqa: BLE001
-                        logger.warning(f"vision passthrough (context) failed: {exc}")
-                        return []
-
-                # 并行取图, 别让 4 张前文图串行拖慢首轮回复。
-                _ctx_prepared = await asyncio.gather(
-                    *[_prepare_context_image(entry) for entry in context_image_entries]
-                )
-                for _ctx_idx, ((_ctx_msg, _ctx_url, _ctx_key, _ctx_back), _ctx_parts) in enumerate(
-                    zip(context_image_entries, _ctx_prepared), 1
-                ):
-                    if not _ctx_parts:
-                        continue
+                _ctx_sources: list[tuple[str, str]] = []
+                for _ctx_idx, (_ctx_msg, _ctx_url, _ctx_key, _ctx_back) in enumerate(context_image_entries, 1):
                     _ctx_snippet = " ".join(str(_ctx_msg.text or "").split())
                     if _ctx_snippet == "[图片]":
                         _ctx_snippet = ""
-                    _ctx_label = (
-                        f"【前文图{_ctx_idx}】{_ctx_back} 条消息前 "
-                        f"{_ctx_msg.display_name} 发的图"
-                    )
+                    _when = f"请求之后 {abs(_ctx_back)} 条消息" if _ctx_back < 0 else f"请求之前 {_ctx_back} 条消息"
+                    _ctx_label = f"【上下文图{_ctx_idx}】{_when}；发送者：{_ctx_msg.display_name or '未知'}（QQ {_ctx_msg.user_id or '未知'}）"
                     if _ctx_snippet:
                         _ctx_label += f"，配文：{_ctx_snippet[:80]}"
-                    passthrough_context_image_parts.append({"type": "text", "text": _ctx_label})
-                    passthrough_context_image_parts.extend(_ctx_parts)
-                    context_image_count += 1
+                    _ctx_sources.append((_ctx_url, _ctx_label))
+                passthrough_context_image_parts, context_image_count = await _prepare_labeled_image_parts(_ctx_sources)
             if (
                 passthrough_image_parts
                 or passthrough_quoted_image_parts
                 or passthrough_context_image_parts
             ):
                 logger.info(
-                    f"vision passthrough: incoming={len(passthrough_image_parts)} "
-                    f"quoted={len(passthrough_quoted_image_parts)} "
+                    f"vision passthrough: incoming={incoming_image_count} "
+                    f"quoted={quoted_image_count} "
                     f"context={context_image_count} → main AI"
                 )
         elif context_image_entries:
@@ -16567,16 +16765,18 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     _ctx_desc = memory_store.get_image_summary([_ctx_key]) or ""
                 except Exception:  # noqa: BLE001
                     _ctx_desc = ""
+                _when = f"请求之后 {abs(_ctx_back)} 条消息" if _ctx_back < 0 else f"请求之前 {_ctx_back} 条消息"
                 context_image_notes.append(
-                    f"- 前文图{_ctx_idx}（{_ctx_back} 条消息前，{_ctx_msg.display_name}）: "
+                    f"- 上下文图{_ctx_idx}（{_when}，{_ctx_msg.display_name or '未知'}，QQ {_ctx_msg.user_id or '未知'}）: "
                     f"{_ctx_desc or _ctx_url}"
                 )
 
         reply_image_description = ""
         if (
             reply_image_pairs
+            and sum(len(source.images or []) for source in reply_sources) == 1
             and config.catty_image_vision_enabled
-            and not passthrough_quoted_image_parts
+            and not quoted_image_count
         ):
             _reply_image_urls = [url for url, _key in reply_image_pairs]
             _reply_image_keys = [key for _url, key in reply_image_pairs]
@@ -16610,7 +16810,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             if persistent_summary:
                 image_description = persistent_summary
                 image_description_cached = True
-            elif passthrough_image_parts:
+            elif incoming_image_count:
                 # 原图已直接挂在主请求上, 不再走识图模型。
                 pass
             else:
@@ -16683,7 +16883,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             history_key,
             incoming,
             image_description=image_description,
-            has_context_image=bool(reply_image_pairs) or bool(context_image_entries),
+            has_context_image=bool(quoted_image_count or context_image_count or reply_image_description or context_image_notes),
             image_parts=passthrough_image_parts or None,
             quoted_image_parts=passthrough_quoted_image_parts or None,
             context_image_parts=passthrough_context_image_parts or None,
@@ -16705,6 +16905,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             other_game_contexts=other_game_contexts,
             wake_context=wake_context,
             bot_continuation_context=bot_continuation_context,
+            quoted_text=_reply_source_retrieval_text(reply_sources),
         )
         from .harness_prompt import append_harness_agent_hint
         append_harness_agent_hint(messages, () if _prefer_spark else _allowed_tool_names)

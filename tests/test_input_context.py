@@ -7,6 +7,7 @@ import copy
 import importlib.util
 import json
 import logging
+import re
 import sys
 import time
 import types
@@ -127,7 +128,7 @@ class CompactionInputTests(_IsolatedPackage):
             "_AI_COMPACT_RUNNING": {"group:offline"},
             "_get_session_cache": lambda: self.cache,
             "config": types.SimpleNamespace(catty_session_context_enabled=False, catty_history_turns=1),
-            "logger": Mock(), "time": time,
+            "logger": Mock(), "time": time, "re": re,
             "_get_time_bucket_context_store": Mock(),
             "activity_feed": Mock(),
         })
@@ -146,6 +147,24 @@ class CompactionInputTests(_IsolatedPackage):
         self.assertEqual(self.cache.messages[-1], raw[-1])
         self.assertEqual(self.cache.writes, 1)
         self.assertEqual(self.cache.flushes, 1)
+
+    async def test_group_compaction_preserves_sender_ids_and_unknowns(self):
+        self.cache.messages = [
+            {"role": "user", "content": "[QQ:101] 甲的消息"},
+            {"role": "assistant", "content": "回复甲"},
+            {"role": "user", "content": "[QQ:202] 乙的消息"},
+            {"role": "assistant", "content": "回复乙"},
+            {"role": "user", "content": "来源未知的旧消息"},
+            {"role": "assistant", "content": "旧回复"},
+            *_history(14),
+        ]
+        await self._compact()
+        transcript = self.inputs[0][-1]["content"]
+        self.assertIn("[QQ:101]: 甲的消息", transcript)
+        self.assertIn("[QQ:202]: 乙的消息", transcript)
+        self.assertIn("未知发言者: 来源未知的旧消息", transcript)
+        self.assertIn("机器人: 回复甲", transcript)
+        self.assertIn("系统摘要，非用户发言", self.cache.messages[0]["content"])
 
     async def test_previous_summaries_survive_raw_transcript_character_cap(self):
         raw = _history(220, width=1000)

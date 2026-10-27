@@ -828,9 +828,8 @@ def _looks_like_deepseek_thinking_route(base_url: str, model: str) -> bool:
     return host.endswith("deepseek.com") and model_l.startswith("deepseek-v4")
 
 
-# 主人 2026-10-25: 思考强度默认 high — max 在长上下文里会想几分钟才出正文。
-# config 的 extra_body.reasoning_effort 或按轮 contextvar 仍可覆盖。
-_DEFAULT_REASONING_EFFORT = "high"
+# 显式 extra_body 优先，其次是按轮覆盖。
+_DEFAULT_REASONING_EFFORT = "max"
 
 
 def _with_deepseek_thinking_defaults(
@@ -861,13 +860,7 @@ def _with_thinking_max_defaults(
     model: str,
     extra_body: dict[str, Any],
 ) -> dict[str, Any]:
-    """全部 AI 通道思考强度默认 high (主人 2026-10-25: max 想太久), config extra_body 显式值仍可覆盖。
-
-    - Ollama 原生路由: 不动 (走自己的 think/options 开关, reasoning_effort 无意义)。
-    - DeepSeek v4: thinking.enabled + reasoning_effort=high。
-    - GLM/bigmodel (z.ai): thinking.enabled (GLM 无 effort 档位, enabled 即满档思考)。
-    - 其它 OpenAI-compatible (opencode zen 的 gpt-5.6-luna 等 reasoning 模型): reasoning_effort=high。
-    """
+    """默认 max；显式配置及逐轮覆盖优先，GLM/Ollama 保持原路由。"""
     body = dict(extra_body or {})
     if _looks_like_ollama_route(base_url, api_key, body):
         return body
@@ -1357,7 +1350,7 @@ def get_current_stream_deadline() -> float:
 
 
 def set_current_reasoning_effort(effort: str | None) -> contextvars.Token:
-    """按轮覆写 reasoning_effort (None/空 = 恢复默认 high)。只影响本请求上下文。"""
+    """按轮覆写 reasoning_effort，None/空恢复默认 max。"""
     return _current_reasoning_effort_var.set((effort or "").strip() or None)
 
 

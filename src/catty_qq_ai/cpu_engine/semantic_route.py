@@ -9,8 +9,7 @@
 - candidate_threshold <= score < direct_threshold (默认 0.70-0.82): 标低信心进 L4 风格化
 - score < candidate_threshold: 透传到 L3
 
-主人 2026-05-30: 磁盘缓存 — 130K utterances 嵌入矩阵存 .npy + metadata.json, 
-用 routes_dir mtime 签名校验, 命中时 np.load() 直接恢复 (~100ms), 跳过嵌入重算.
+磁盘缓存校验稳定模型身份、有序输入、mtime 与矩阵维数；未提供模型身份时重算。
 首次或无缓存时 chunked embed (5K/chunk) + 进度 log.
 
 无 Semantic Router 第三方库依赖: 直接 numpy + text2vec_engine.embed_sync_batch,
@@ -20,6 +19,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import random
 from dataclasses import dataclass, field
@@ -70,9 +70,7 @@ class SemanticMatchResult:
 class SemanticRouter:
     """L2: bge embed 找最近 route.
 
-    主人 2026-05-30: 磁盘缓存 — 130K utterances 嵌入矩阵存 .npy + metadata.json,
-    用 mtime_sig 校验, 命中时 np.load() 直接恢复 (~100ms). 未命中时 chunked embed
-    (5K/chunk) + 进度 log, 避免 130K 一次性嵌入卡死 129s 无输出.
+    缓存仅供显式提供稳定模型身份的调用方使用；其他调用方照常计算。
     """
 
     _EMBED_CHUNK_SIZE = 5000  # 每批嵌 5K 条
@@ -84,6 +82,7 @@ class SemanticRouter:
         *,
         cache_dir: str | Path | None = None,
         routes_mtime_sig: str = "",
+        cache_model_id: str | None = None,
     ) -> None:
         self._routes: list[SemanticRoute] = list(routes)
         self._embed_batch_fn = embed_batch_fn
@@ -100,6 +99,8 @@ class SemanticRouter:
             self._cache_npy = None
             self._cache_meta = None
         self._routes_mtime_sig = routes_mtime_sig
+        self._cache_model_id = cache_model_id if isinstance(cache_model_id, str) and cache_model_id.strip() else ""
+        self._utterances_digest = ""
 
     def prepare(self) -> bool:
         if self._prepared:
@@ -130,6 +131,9 @@ class SemanticRouter:
         self._flat_route_weights = np.asarray(
             [self._routes[i].weight for i in self._flat_route_idx], dtype=np.float64
         )
+        if self._cache_model_id:
+            encoded = json.dumps(self._flat_utterances, ensure_ascii=True, separators=(",", ":"))
+            self._utterances_digest = hashlib.sha256(encoded.encode("ascii")).hexdigest()
 
         # ── 主人 2026-05-30: 磁盘缓存 ──
         if self._try_load_cache(n_utts):
@@ -181,29 +185,30 @@ class SemanticRouter:
 
     # ── 磁盘缓存 helpers ──
     def _try_load_cache(self, n_utts: int) -> bool:
-        if not self._cache_npy or not self._cache_meta:
+        if not self._cache_model_id or not self._cache_npy or not self._cache_meta:
             return False
         if not self._cache_npy.exists() or not self._cache_meta.exists():
             return False
         try:
             meta = json.loads(self._cache_meta.read_text(encoding="utf-8"))
-            if meta.get("n_utts") != n_utts:
-                logger.info(
-                    f"[cpu_engine.L2] cache stale: n_utts mismatch "
-                    f"({meta.get('n_utts')} != {n_utts}), rebuild"
-                )
+            if (
+                meta.get("version") != 2
+                or meta.get("model_id") != self._cache_model_id
+                or meta.get("utterances_sha256") != self._utterances_digest
+                or meta.get("n_utts") != n_utts
+                or meta.get("mtime_sig") != self._routes_mtime_sig
+            ):
+                logger.info("[cpu_engine.L2] cache identity changed, rebuild")
                 return False
-            if meta.get("mtime_sig") != self._routes_mtime_sig:
-                logger.info(
-                    "[cpu_engine.L2] cache stale: mtime_sig changed, rebuild"
-                )
-                return False
-            flat = np.load(str(self._cache_npy))
-            if flat.shape[0] != n_utts:
-                logger.info(
-                    f"[cpu_engine.L2] cache stale: shape mismatch "
-                    f"({flat.shape[0]} != {n_utts}), rebuild"
-                )
+            flat = np.load(str(self._cache_npy), allow_pickle=False)
+            if (
+                flat.ndim != 2
+                or flat.shape[0] != n_utts
+                or not isinstance(meta.get("dim"), int)
+                or meta["dim"] <= 0
+                or flat.shape[1] != meta["dim"]
+            ):
+                logger.info("[cpu_engine.L2] cache shape mismatch, rebuild")
                 return False
             self._flat_embeddings = flat.astype(np.float32, copy=False)
             logger.info(
@@ -216,12 +221,16 @@ class SemanticRouter:
             return False
 
     def _save_cache(self) -> None:
-        if not self._cache_npy or self._flat_embeddings is None:
+        if not self._cache_model_id or not self._cache_npy or not self._cache_meta or self._flat_embeddings is None:
             return
         try:
             self._cache_npy.parent.mkdir(parents=True, exist_ok=True)
+            self._cache_meta.unlink(missing_ok=True)
             np.save(str(self._cache_npy), self._flat_embeddings)
             meta = {
+                "version": 2,
+                "model_id": self._cache_model_id,
+                "utterances_sha256": self._utterances_digest,
                 "n_utts": len(self._flat_utterances),
                 "mtime_sig": self._routes_mtime_sig,
                 "dim": int(self._flat_embeddings.shape[1]),

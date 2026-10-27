@@ -18,6 +18,7 @@ MODULES = (
     "test_sandbox_artifact_isolation", "test_prompt_audit_fixes",
     "test_live_benchmark_import", "test_config", "test_config_loader",
     "test_training_dashboard", "test_prompt_cache_deepseek", "test_prompt_compressor",
+    "test_cache_cpu", "test_input_context", "test_memory_isolation",
     "test_personas", "test_persona_prompts", "test_reply_split_reminder",
     "test_output_control_markers", "test_persona_memory_isolation",
     "test_reply_message_composition", "test_vision_context_images",
@@ -25,13 +26,13 @@ MODULES = (
     "test_openai_client",
     "test_fadianji_harness", "test_harness_interface", "test_harness_v2",
     "test_harness_prompt", "test_harness_cli_v2", "test_harness_config_aliases",
-    "test_fdj_corpus_store", "test_fdj_scene_retrieval",
+    "test_fdj_corpus_store", "test_fdj_scene_retrieval", "test_fdj_style_stats", "test_jiji_flavor_bench",
     "test_cognitive_runtime_integration", "test_qzone_harness_feed",
     "test_persona_store", "test_custom_personas", "test_persona_admin",
     "test_persona_tool", "test_request_intent", "test_persona_runtime",
     "test_hot_reload", "test_reply_queue_retention",
     "test_skill_store", "test_skill_runtime", "test_skill_tools", "test_skill_disclosure",
-    "test_fdj_proactive", "test_fdj_proactive_config_prompt", "test_fdj_proactive_integration",
+    "test_fdj_proactive", "test_fdj_proactive_config_prompt", "test_fdj_proactive_integration", "test_reply_admission",
 )
 
 _RUNNER = r'''

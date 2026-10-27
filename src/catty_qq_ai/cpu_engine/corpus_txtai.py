@@ -9,12 +9,12 @@
     {"q": "你今天吃饭了吗", "a": "嗷呜～吃过啦主人...", "intent": "question",
      "tags": ["daily"], "weight": 1.0, "source": "evolution-2026-05-28"}
 
-txtai 用自己内置的 BAAI/bge-small-zh-v1.5 加载 (和 text2vec_engine 同模型),
-索引到磁盘 (catty_cpu_engine_txtai_index_path) 后续启动直接 load 无需重 build.
+txtai 使用指定模型加载；只有提供稳定模型身份时才复用匹配的持久化索引。
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -66,10 +66,13 @@ class TxtaiCorpus:
         index_path: str | Path,
         model_name: str = "BAAI/bge-small-zh-v1.5",
         live_corpus_path: str | Path | None = None,
+        *,
+        cache_model_id: str | None = None,
     ) -> None:
         self._corpus_path = Path(corpus_path)
         self._index_path = Path(index_path)
         self._model_name = model_name
+        self._cache_model_id = cache_model_id if isinstance(cache_model_id, str) and cache_model_id.strip() else ""
         # S6 (主人 2026-05-29): live 蒸馏语料 (DeepSeek 回答自动写入), 与 bootstrap 静态 corpus 分文件
         self._live_corpus_path = Path(live_corpus_path) if live_corpus_path else None
         self._entries: list[CorpusEntry] = []
@@ -84,6 +87,50 @@ class TxtaiCorpus:
     @property
     def size(self) -> int:
         return len(self._entries)
+
+    def _index_identity(self, entries: list[CorpusEntry]) -> dict[str, Any] | None:
+        if not self._cache_model_id:
+            return None
+        rows = [[e.qid, e.q, e.a, e.intent, e.tags, e.weight, e.source] for e in entries]
+        raw = json.dumps(rows, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+        return {
+            "version": 1,
+            "model_name": self._model_name,
+            "model_id": self._cache_model_id,
+            "count": len(entries),
+            "entries_sha256": hashlib.sha256(raw.encode("ascii")).hexdigest(),
+        }
+
+    def _load_index(self, entries: list[CorpusEntry]) -> Any | None:
+        identity = self._index_identity(entries)
+        if identity is None:
+            return None
+        try:
+            meta = self._index_path / "catty_index_identity.json"
+            if not (self._index_path / "config").exists():
+                return None
+            if json.loads(meta.read_text(encoding="utf-8")) != identity:
+                return None
+            embeddings = Embeddings()
+            embeddings.load(str(self._index_path))
+            if embeddings.count() == len(entries):
+                return embeddings
+        except Exception as exc:
+            logger.info(f"[cpu_engine.L3] cached index unavailable: {exc}")
+        return None
+
+    def _save_index(self, embeddings: Any, entries: list[CorpusEntry]) -> None:
+        identity = self._index_identity(entries)
+        if identity is None:
+            return
+        try:
+            self._index_path.mkdir(parents=True, exist_ok=True)
+            meta = self._index_path / "catty_index_identity.json"
+            meta.unlink(missing_ok=True)
+            embeddings.save(str(self._index_path))
+            meta.write_text(json.dumps(identity, ensure_ascii=True), encoding="utf-8")
+        except Exception as exc:
+            logger.warning(f"[cpu_engine.L3] cache save failed: {exc}")
 
     def prepare(self) -> bool:
         if self._prepared:
@@ -106,29 +153,18 @@ class TxtaiCorpus:
             return False
 
         try:
-            if self._index_path.exists() and (self._index_path / "config").exists():
-                self._embeddings = Embeddings()
-                self._embeddings.load(str(self._index_path))
-                if self._embeddings.count() == len(self._entries):
-                    logger.info(
-                        f"[cpu_engine.L3] loaded index from {self._index_path} "
-                        f"({len(self._entries)} entries)"
-                    )
-                    self._ready = True
-                    return True
-                logger.info(
-                    f"[cpu_engine.L3] index count {self._embeddings.count()} != "
-                    f"corpus {len(self._entries)}, rebuilding"
-                )
+            self._embeddings = self._load_index(self._entries)
+            if self._embeddings is not None:
+                self._ready = True
+                return True
 
             self._embeddings = Embeddings({"path": self._model_name, "content": False})
             self._embeddings.index(
                 [(e.qid, e.q, None) for e in self._entries]
             )
-            self._index_path.mkdir(parents=True, exist_ok=True)
-            self._embeddings.save(str(self._index_path))
+            self._save_index(self._embeddings, self._entries)
             logger.info(
-                f"[cpu_engine.L3] built and saved index: {len(self._entries)} entries"
+                f"[cpu_engine.L3] built index: {len(self._entries)} entries"
             )
             self._ready = True
             return True
@@ -247,8 +283,7 @@ class TxtaiCorpus:
             # 原子替换
             self._entries = new_entries
             self._embeddings = new_embeddings
-            self._index_path.mkdir(parents=True, exist_ok=True)
-            new_embeddings.save(str(self._index_path))
+            self._save_index(new_embeddings, new_entries)
             self._ready = True
             logger.info(
                 f"[cpu_engine.L3] reload OK: rebuilt index with {len(new_entries)} entries"

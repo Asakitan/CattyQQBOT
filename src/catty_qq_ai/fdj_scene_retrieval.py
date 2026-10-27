@@ -346,11 +346,11 @@ def _cached_records() -> tuple[SceneRecord, ...]:
     return cached
 
 
-_CANDIDATE_INDEX_CACHE: dict[tuple[Any, ...], tuple[dict[str, list[int]], dict[str, list[int]]]] = {}
+_CANDIDATE_INDEX_CACHE: dict[tuple[Any, ...], tuple[dict[str, list[int]], dict[str, list[int]], dict[str, list[int]]]] = {}
 
 
-def _candidate_index() -> tuple[dict[str, list[int]], dict[str, list[int]]]:
-    """词/分类倒排索引, 给大语料库做候选剪枝 (候选太少时调用方回退全扫)。"""
+def _candidate_index() -> tuple[dict[str, list[int]], dict[str, list[int]], dict[str, list[int]]]:
+    """词/分类/去昵称精确倒排索引, 候选太少时调用方回退全扫。"""
     records = _cached_records()
     key = (_DELTA_SIGNATURE, _corpus_signature(), len(records))
     cached = _CANDIDATE_INDEX_CACHE.get(key)
@@ -358,11 +358,15 @@ def _candidate_index() -> tuple[dict[str, list[int]], dict[str, list[int]]]:
         return cached
     word_index: dict[str, list[int]] = {}
     category_index: dict[str, list[int]] = {}
+    exact_index: dict[str, list[int]] = {}
     for position, record in enumerate(records):
         for word in record.trigger_words:
             word_index.setdefault(word, []).append(position)
         category_index.setdefault(record.category, []).append(position)
-    built = (word_index, category_index)
+        stripped_trigger = _strip_names(record.trigger)
+        if stripped_trigger:
+            exact_index.setdefault(stripped_trigger, []).append(position)
+    built = (word_index, category_index, exact_index)
     _CANDIDATE_INDEX_CACHE.clear()
     _CANDIDATE_INDEX_CACHE[key] = built
     return built
@@ -494,8 +498,9 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
     query_words = frozenset(_WORD_RE.findall(query))
     query_categories = _query_categories(query)
     records = _cached_records()
-    word_index, category_index = _candidate_index()
-    candidate_positions: set[int] = set()
+    word_index, category_index, exact_index = _candidate_index()
+    exact_positions = set(exact_index.get(query, ()))
+    candidate_positions = set(exact_positions)
     for word in query_words:
         positions = word_index.get(word)
         if positions:
@@ -505,20 +510,24 @@ def match_scene_pairs(text: str, k: int = 5, *, scope_key: str = "", is_private:
     for query_category in query_categories:
         candidate_positions.update(category_index.get(query_category, ()))
     if 4 <= len(candidate_positions) < len(records):
-        record_iter = (records[position] for position in sorted(candidate_positions))
+        record_positions = sorted(candidate_positions)
     else:
-        record_iter = iter(records)
+        record_positions = range(len(records))
     lexical: list[tuple[float, float, SceneRecord, float]] = []
-    for record in record_iter:
+    for position in record_positions:
+        record = records[position]
         if not _allowed(record, normalized_scope, bool(is_private)) or not record.trigger_bigrams:
             continue
-        word_hit = len(query_words & record.trigger_words)
+        exact = position in exact_positions
+        word_hit = len(query_words) if exact else len(query_words & record.trigger_words)
         union = len(query_grams | record.trigger_bigrams)
-        jaccard = len(query_grams & record.trigger_bigrams) / max(1, union)
-        category_hit = 0.8 if category and category == record.category else (0.55 if record.category in query_categories else 0.0)
+        jaccard = 1.0 if exact else len(query_grams & record.trigger_bigrams) / max(1, union)
+        explicit_category = bool(category and category == record.category)
+        category_hit = 0.8 if explicit_category else (0.55 if record.category in query_categories else 0.0)
         lexical_score = word_hit * 2.0 + jaccard * 1.5 + category_hit + (0.05 if len(record.trigger) <= 12 else 0.0)
-        if word_hit == 0 and jaccard < 0.25 and category_hit <= 0:
-            continue
+        if word_hit == 0 and jaccard < 0.25:
+            if category_hit <= 0 or (not explicit_category and jaccard == 0):
+                continue
         scope_bonus = 0.18 if record.private and normalized_scope == _PRIVATE_SCOPE else 0.0
         total = lexical_score + scope_bonus
         if total < _MIN_LEXICAL_SCORE:

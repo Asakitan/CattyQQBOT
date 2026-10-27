@@ -3,7 +3,7 @@
 新积分使用模式, 取代旧 CPU 引擎链路 (catty_credit_enabled, 已随引擎关停):
 - 私聊: 每次回复按本轮真实 token 用量扣积分, 每 catty_private_tokens_per_point
   (默认 1000) token 扣 1 分, 向上取整. 余额 <=0 时拦截不调主 AI, 发撒娇文案要签到.
-- 群聊: 暂不扣积分, 每人每小时 catty_group_hourly_token_quota (默认 300K) token
+- 群聊: 暂不扣积分, 每人每小时 catty_group_hourly_token_quota (默认 30M) token
   额度, 超了拦截 (每小时只提示一次, 之后静默).
 - 主人全豁免.
 - 拦截提醒优先 ai_gate_reply 人格 AI 现写 (codex_instant 便宜通道, 在 turn 桶

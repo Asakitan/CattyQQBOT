@@ -275,6 +275,28 @@ class PersonaRegistryTests(unittest.TestCase):
         self.assertIn("实际输出不要写斜杠或普通空格假装边界", fdj.chat_rhythm or "")
         self.assertIn("catty_adaptive_drift_skeleton", fdj.disabled_prompt_segments)
 
+    def test_fadianji_ordinary_chat_context_and_historical_examples(self) -> None:
+        core = _personas.get_persona("fadianji").core_persona or ""
+        default_reactions = core.split("## 1. 默认反应核", 1)[1].split("## 2. 语气和标点", 1)[0]
+        for anchor in (
+            "真实聊天对是口吻参考", "只借反应、节奏和分寸",
+            "不照抄旧事件或把样本当本轮事实", "先接当前话题、说话人和意图",
+            "有相关记忆就自然接续", "玩笑顺着接",
+            "认真求助或安慰时切认真、给有用回应", "口癖随语境变化, 不反复套同一句",
+        ):
+            with self.subTest(anchor=anchor):
+                self.assertIn(anchor, default_reactions)
+        self.assertNotIn("原文优先", default_reactions)
+        registers = core.split("## 3. 条件语域", 1)[1].split("## 4. 分块式", 1)[0]
+        peak = registers.split("- 发癫 (", 1)[1].split("- 不知道:", 1)[0]
+        self.assertIn("招牌, 情绪峰值", peak)
+        self.assertIn("癫完优先回短软句", peak)
+        self.assertNotIn("招牌, 高频", peak)
+        examples = core.split("## 25. 常驻口吻母本", 1)[1].split("## 27. 聪明办事", 1)[0]
+        self.assertIn("只借反应节奏, 不照抄旧事件", examples)
+        self.assertIn("样本里的直播、画稿等状态不是本轮事实", examples)
+        self.assertIn("适用于当前时点的同 scope 可靠记忆/工具结果明确确认", examples)
+
     def test_fadianji_private_conversation_upgrade_isolation(self) -> None:
         fdj = _personas.get_persona("fadianji")
         private_prompt = fdj.conversation_prompt_for("private:3670608232")

@@ -5,17 +5,21 @@
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
 | `src/catty_qq_ai/openai_client.py` | 工具回执、前缀与会话预算、逐轮schema更新 → `docs/reply-recovery.md`、`docs/architecture.md` | 动态工具增量已部署 |
-| `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配本地完成 |
+| `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署并并入本地 |
 | `src/catty_qq_ai/prompt_manager.py` | 学术长度豁免与有效提示词注册 → `docs/prompt-testing.md` | 已部署 |
-| `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署，生产config.json未改 |
+| `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署；生产群额度单字段已更新 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
-| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 58模块989项：979通过、9跳过、1既有浮点失败、0错误 |
-| `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排与工具感知教程 → `docs/harness-evidence.md` | 已部署 |
+| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 已部署；本地64模块1154项，0失败/错误、9跳过 |
+| `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排、引用检索与工具感知教程 → `docs/harness-evidence.md` | 已部署；保留发言者与同名风格处理 |
+| `reply_admission.py` / `__init__.py` | 同群历史与当前发言者驱动弱唤醒/续聊模型判门 | 已部署；16项纯判门和集成回归通过 |
+| `fdj_scene_retrieval.py` | 昵称归一化精确索引与相关性过滤 | 已部署；5例精确召回5/5 |
+| `tools.py` / `__init__.py` | 图片发送者、历史来源与同模型原图透传 | 已部署；未验证真实模型识图 |
+| `openai_client.py` / `config.py` / `token_billing.py` | 默认 max 思考与每用户跨群每小时额度 | 已部署；生产额度已更新为3000万 |
 | `src/catty_qq_ai/fdj_corpus_store.py` / `catty_config_loader.py` | 语料作用域及 FDJ 配置别名 → `docs/harness-config.md` | 已部署 |
 | `scripts/fadianji_harness_cli.py` / `benchmark_harness.py` | 本地预览、显式生产预算、合成基准 → `docs/prompt-testing.md` | 已部署 |
 | `persona_store.py` / `persona_override_store.py` | JSON 定义、指令映射、版本与原子发布 → `docs/persona-json.md` | 已部署 |
 | `personas/__init__.py` / `persona_defaults.py` / `persona_runtime.py` | 动态注册、中性默认、逐轮快照与会话切换 → `docs/persona-runtime.md` | 已部署 |
-| `persona_admin.py` / `ADMIN_COMMANDS.md` | 导入、生成、自定义指令与手册 → `docs/persona-generation.md` | 已部署 |
+| `persona_admin.py` / `ADMIN_COMMANDS.md` | 导入、生成、自定义指令与手册 → `docs/persona-generation.md` | 已部署超时舍入修复 |
 | `tools.py` / `request_intent.py` / `catty_sim_chat.py` | 上下文意图、可选文件能力、默认研究与技能提示，auto工具选择 → `docs/tool-contracts.md`、`docs/skill-guidance.md` | 研究增量已部署 |
 | `tests/test_reply_queue_retention.py` / `test_request_intent.py` / `test_openai_client.py` / `test_reply_deadline.py` / `test_persona_runtime.py` | 排队准入、工具提示、预算与恢复合同 → `docs/session-log/session-04.md` | 已部署，双端一致 |
 | `tools.py` / `__init__.py` / `features.py` / `config.py` / `catty_config_loader.py` / `config.example.json` | 移除联网搜索冷却、配置项与死辅助函数 → `docs/session-log/session-05.md` | 已部署，双端一致 |
@@ -27,11 +31,17 @@
 | `fdj_proactive_runtime.py` / `proactive_legacy.py` | 宿主注入、忙碌/新鲜度/限时/回执；旧循环提取 → `docs/architecture.md` | 已部署，44项集成通过 |
 | `fdj_proactive_prompt.py` / `config.py` / loader / example | 机机短聊提示与12项独立配置 → `docs/fadianji-proactive.md` | 已部署，20项通过 |
 | `tests/test_fdj_proactive*.py` / `test_hot_reload.py` | 状态、配置、真实runtime往返、触发与锁生命周期 → `docs/session-log/session-08.md` | 新104项全通过；热重载23项通过 |
+| `memory.py` / 入口摘要循环 | 摘要快照、并发新增与回执 → `docs/architecture.md` | 已部署；32项记忆测试通过 |
+| `personas/fadianji.py` / `fadianji_scenes.py` | 普通聊天语境与真实样本口吻 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；本地人格与语料测试通过 |
+| `cpu_engine/semantic_route.py` / `corpus_txtai.py` | 模型与有序语料缓存身份 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；29项缓存测试通过，CPU 默认停用 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-27 | push_zip 部署隔离候选34文件并并入本地，生产与本地群小时额度由300万调整为3000万 | 34文件双端哈希一致；本地1154项通过；13:38:31插件加载、13:38:34重连、13:40:16配置热重载；远端1154项24失败、6错误、9跳过 |
+| 2026-10-27 | 候选增加群聊判门、图片/发言者归属、引用检索、场景精确召回、max与小时额度 | 64模块1154项、0失败/错误、9跳过；374文件语法通过；未部署或实测模型 |
+| 2026-10-27 | 隔离候选：摘要并发、证据归属、机机普通人格、截止时间与缓存身份 | 63模块1092项、0失败/错误、9跳过；372文件语法通过；原源码未替换，未部署 |
 | 2026-10-27 | push_zip 部署机机唤醒与活跃冒泡，生产配置与运行数据保持 | 28文件双端SHA-256一致；03:28:38加载、03:28:41重连；远端Shell不可用，未跑远端回归 |
 | 2026-10-27 | 机机唤醒与活跃时段冒泡；同步prompt并拆分旧编排；未部署 | 58模块989项仅1既有浮点失败；新104项与消息抽取26项通过；357文件语法/保持性通过 |
 | 2026-10-27 | push_zip部署默认研究与技能增量，生产配置/运行数据保持 | 32文件双端哈希一致；18文件py_compile通过；远端260项无失败/错误、9跳过；01:54:03重连 |
