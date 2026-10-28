@@ -331,6 +331,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_per_turn": 1,
         "cooldown_seconds": 300,
         "chance": 0.6,
+        "auto_chance": 0.1,
+        "auto_max_reply_chars": 50,
         "outbox_dir": "data/voice_outbox",
         "outbox_ttl_hours": 24,
         "python": "",
@@ -1012,6 +1014,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_VOICE_MAX_PER_TURN", voice.get("max_per_turn"))
     _set_env("CATTY_VOICE_COOLDOWN_SECONDS", voice.get("cooldown_seconds"))
     _set_env("CATTY_VOICE_CHANCE", voice.get("chance"))
+    _set_env("CATTY_VOICE_AUTO_CHANCE", voice.get("auto_chance"))
+    _set_env("CATTY_VOICE_AUTO_MAX_REPLY_CHARS", voice.get("auto_max_reply_chars"))
     _set_env("CATTY_VOICE_OUTBOX_TTL_HOURS", voice.get("outbox_ttl_hours"))
     _set_env("CATTY_VOICE_WORKER_THREADS", voice.get("worker_threads"))
     _set_env("CATTY_VOICE_WORKER_TIMEOUT_SECONDS", voice.get("worker_timeout_seconds"))

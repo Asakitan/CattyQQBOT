@@ -33,6 +33,8 @@ def _config(**overrides):
         catty_voice_max_per_turn=1,
         catty_voice_cooldown_seconds=600.0,
         catty_voice_chance=1.0,
+        catty_voice_auto_chance=0.1,
+        catty_voice_auto_max_reply_chars=50,
         catty_voice_outbox_dir=str(_ROOT / "tmp" / "test-voice-outbox"),
         catty_voice_outbox_ttl_hours=24.0,
         catty_voice_worker_threads=1,
@@ -192,6 +194,31 @@ class AudioTests(unittest.TestCase):
         removed = voice.cleanup_outbox(_config(catty_voice_outbox_dir=str(directory)))
         self.assertEqual(removed, 1)
         self.assertFalse(stale.exists())
+
+
+class AutoVoiceTests(unittest.TestCase):
+    def test_probability_roll(self) -> None:
+        config = _config()
+        self.assertTrue(voice.auto_eligible(config, "在呢", roll=0.05))
+        self.assertFalse(voice.auto_eligible(config, "在呢", roll=0.5))
+        self.assertFalse(voice.auto_eligible(_config(catty_voice_auto_chance=0.0), "在呢", roll=0.0))
+
+    def test_long_or_technical_reply_is_skipped(self) -> None:
+        config = _config()
+        self.assertFalse(voice.auto_eligible(config, "字" * 51, roll=0.0))
+        self.assertTrue(voice.auto_eligible(config, "字" * 50, roll=0.0))
+        self.assertFalse(voice.auto_eligible(config, "```py\nprint(1)\n```", roll=0.0))
+        self.assertFalse(voice.auto_eligible(config, "公式 $$x^2$$", roll=0.0))
+
+    def test_staged_voice_wins(self) -> None:
+        self.assertFalse(voice.auto_eligible(_config(), "在呢", has_staged_voice=True, roll=0.0))
+
+    def test_auto_pick_returns_ready_clip(self) -> None:
+        payload = voice.auto_pick(_config(), types.SimpleNamespace(name="fadianji"), "group:auto")
+        self.assertIsNotNone(payload)
+        self.assertTrue(Path(payload["path"]).is_file())
+        self.assertEqual(payload["voice"], "fadianji")
+        self.assertTrue(payload["text"])
 
 
 class ToolWiringTests(unittest.TestCase):

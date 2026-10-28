@@ -860,7 +860,10 @@ class Config(BaseModel):
     catty_voice_max_chars: int = 40
     catty_voice_max_per_turn: int = 1
     catty_voice_cooldown_seconds: float = 300.0  # 每会话 5 分钟一条; 主人不受限
-    catty_voice_chance: float = 0.6  # 满足条件时真正发声的概率
+    catty_voice_chance: float = 0.6  # 模型主动调用后的通过概率
+    # 每条消息额外抽一次自动语音; 长回复(默认 >50 字)与技术排版不触发。
+    catty_voice_auto_chance: float = 0.1
+    catty_voice_auto_max_reply_chars: int = 50
     catty_voice_outbox_dir: str = "data/voice_outbox"
     catty_voice_outbox_ttl_hours: float = 24.0
     catty_voice_python: str = ""  # 空 = 当前解释器

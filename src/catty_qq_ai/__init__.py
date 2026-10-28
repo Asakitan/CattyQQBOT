@@ -18927,6 +18927,22 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             _nsfw_img_task = None
 
+        # 主人 2026-10-29: 每条消息按 voice.auto_chance 抽一次自动语音; 长/技术回复不触发。
+        if not _voice_pending:
+            try:
+                from . import voice_reply as _voice_reply
+
+                if _voice_reply.auto_eligible(config, " ".join(reply_for_send.split())):
+                    _auto_voice = _voice_reply.auto_pick(
+                        config, _persona_for_event(event), _conversation_queue_key(event)
+                    )
+                    if _auto_voice:
+                        await _send_voice_message(bot, event, _auto_voice, label="catty_voice_auto")
+            except Exception as _auto_voice_exc:  # noqa: BLE001
+                logger.warning(
+                    f"auto voice failed: {type(_auto_voice_exc).__name__}: {_auto_voice_exc}"
+                )
+
         for chunk in chunks[:-1]:
             # 前段发送失败时继续处理后续气泡和图片。
             try:

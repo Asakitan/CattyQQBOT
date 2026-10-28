@@ -206,6 +206,44 @@ def clip_payload(clip: VoiceClip) -> dict[str, Any]:
     }
 
 
+def auto_eligible(
+    config: Any,
+    reply_text: str,
+    *,
+    has_staged_voice: bool = False,
+    roll: float | None = None,
+) -> bool:
+    """每条消息按 auto_chance 抽一次; 长回复/技术回复(>50 字)与已排语音都不发。"""
+    if has_staged_voice or not voice_enabled(config):
+        return False
+    try:
+        chance = float(getattr(config, "catty_voice_auto_chance", 0.1) or 0.0)
+    except (TypeError, ValueError):
+        chance = 0.1
+    if chance <= 0:
+        return False
+    try:
+        limit = int(getattr(config, "catty_voice_auto_max_reply_chars", 50) or 50)
+    except (TypeError, ValueError):
+        limit = 50
+    text = " ".join(str(reply_text or "").split())
+    if not text or len(text) > limit or "```" in text or "$$" in text:
+        return False
+    draw = roll if roll is not None else random.random()
+    return draw < min(max(chance, 0.0), 1.0)
+
+
+def auto_pick(config: Any, persona: Any = None, scope: str = "") -> dict[str, Any] | None:
+    """随机挑一句现成语音, 供按消息概率触发的自动语音使用。"""
+    clips = load_bank(config, persona)
+    clip = select_clip(clips, "", scope)
+    if clip is None:
+        return None
+    payload = clip_payload(clip)
+    payload["voice"] = voice_name_for(config, persona)
+    return payload
+
+
 def _as_bool(value: Any, default: bool = False) -> bool:
     if isinstance(value, bool):
         return value
