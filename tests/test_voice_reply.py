@@ -290,6 +290,31 @@ class WindowAndBubbleTests(unittest.TestCase):
         )
 
 
+class WorkerTailTests(unittest.TestCase):
+    def test_pad_tail_adds_silence_and_fades(self) -> None:
+        import numpy as np
+
+        worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
+        rate = 32000
+        audio = np.full(rate // 10, 0.5, dtype=np.float64)
+        out = worker._pad_tail(audio, rate)
+        self.assertEqual(len(out), len(audio) + int(rate * worker._TAIL_PAD_SECONDS))
+        self.assertTrue(np.all(out[len(audio):] == 0.0))
+        self.assertLess(out[len(audio) - 1], 0.5)
+        self.assertAlmostEqual(out[0], 0.5)
+
+    def test_trim_keeps_audio_end(self) -> None:
+        import numpy as np
+
+        worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
+        rate = 32000
+        audio = np.zeros(rate * 2, dtype=np.float64)
+        audio[:rate] = 0.4
+        out = worker._trim(audio, rate)
+        self.assertAlmostEqual(out[0], 0.4)
+        self.assertAlmostEqual(len(out), rate * 1.08, delta=2)
+
+
 class ToolWiringTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

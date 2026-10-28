@@ -27,6 +27,11 @@
 - NSFW（spark）回合走同一段：按 `nsfw_bubble_chance`（默认 0.5）抽取后最多念 3 条，避免只在窗口外永远没语音。
 - 语音气泡发送成功后把台词按“已送达”写进本轮交付回执（历史、续聊、自回复队列都拿到）；失败回落文字，尾气泡失败也不再吞掉最后一句。
 - 验证：本地 `test_voice_reply` 28 项、`test_config*` 33 项通过，py_compile 0；远端同样 28/33 通过、5 个文件 SHA-256 与本地一致；bot 01:14:46 加载、01:14:51 重连（远端时钟）。远端 `config.json` 新增 `only_hours`、`bubble_max_chars`、`bubble_max_per_turn`、`bubble_budget_seconds`、`nsfw_bubble_chance`（备份 `config.json.bak_voice_bubble_20261029`）。真实 QQ 多语音条与 NSFW 听感未测。
+### 2026-10-29 · 尾音被削修复
+
+- 取远端 `data/voice_outbox` 最近一段 3.36 秒产物分析：末尾 20ms 仍有约 0.04 幅度，最后 0.2ms 就结束。原因是 `fragment_interval=0.0` 时框架不追加尾部静音，模型输出直接停在最后一个采样点。
+- `voice_worker.py` 裁剪后补 0.25 秒静音 + 8ms 淡出，再归一化写盘；语音库片段本身已带尾巴，保持不变。
+- 本地 `test_voice_reply` 30 项通过；`voice_worker.py` 与测试上传后 SHA-256 与本地一致。远端 py_compile/测试与重载未复跑（远端 PowerShell 被禁用）。
 ## 目标与范围（训练部分）
 
 本地训练米雪儿和不稳定发电机两套 GPT-SoVITS V2 音色；按反馈排查试听中“今天也要开心”的电音。只操作本地音音模型候选和临时实验字件，生产配置、人格与 QQ 链路保持。

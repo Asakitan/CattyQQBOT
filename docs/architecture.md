@@ -10,7 +10,7 @@ QQ 客户端的转文字结果不经过 OneBot；入口在 `_rule` 里用 `_extr
 
 `bank` 后端读取包内 `data/voice_bank/<音色>/bank.json`，按 mood 选片段并避免连续重复，秒级返回。`worker` 后端用独立 GPT-SoVITS 子进程合成模型自己写的一句短话：启动回执握手、240 秒超时、4200MiB 可用内存门槛、空闲 180 秒卸载、关闭时回收；按 `voice.profiles.<音色>` 取 gpt/sovits/参考音，切换音色时先收掉旧 worker 再判断内存；未配置或失败时退回语音库。
 
-远端 worker 使用独立 venv（Python 3.14 + torch/torchaudio 2.11 CPU），预训练 BERT/HuBERT 以 fp16 存放；框架在缺 G2PW 时回退 pypinyin、在缺 `jieba_fast` 时回退 `jieba`，参考音用 soundfile 读取以绕开 torchcodec。`catty_voice_say` 选好的语音在工具调用时就以 `record` 发出去，文字跟在后面或不写；只有 worker 合成超过内联等待时，才由 `_spawn_deferred_voice_delivery` 在文字之后补发（慢路径例外）。ActionFailed 不重试以免重复播报，NetworkError 隔 2 秒重试一次；发送失败只写日志。产物在 `data/voice_outbox`，随既有清理循环按 TTL 删除。
+远端 worker 使用独立 venv（Python 3.14 + torch/torchaudio 2.11 CPU），预训练 BERT/HuBERT 以 fp16 存放；框架在缺 G2PW 时回退 pypinyin、在缺 `jieba_fast` 时回退 `jieba`，参考音用 soundfile 读取以绕开 torchcodec。合成结果裁剪后补 0.25 秒静音并做 8ms 淡出再归一化写盘：`fragment_interval=0` 时框架不追加尾部静音，线上 3.36 秒样本的最后 0.2ms 即结束，播放会像被削掉尾音。`catty_voice_say` 选好的语音在工具调用时就以 `record` 发出去，文字跟在后面或不写；只有 worker 合成超过内联等待时，才由 `_spawn_deferred_voice_delivery` 在文字之后补发（慢路径例外）。ActionFailed 不重试以免重复播报，NetworkError 隔 2 秒重试一次；发送失败只写日志。产物在 `data/voice_outbox`，随既有清理循环按 TTL 删除。
 
 本轮排了语音时，出站文本先经 `reply_markers.strip_voice_generation_narration`：命中“语音正在生成/稍后发出来/马上发给你语音”等整句就删除；删完为空或模型本来没写文字，就跳过整轮文字发送（`matcher.finish()`），语音照常单独到达。工具回执与 schema 都不再出现“生成/稍后/后台”，避免模型照抄。被问“你喜欢我吗/想不想我/爱不爱我”时，schema 建议优先用语音回答、可只发语音，但没有关键词硬分支，是否发声由模型决定。
 

@@ -1,4 +1,9 @@
 # Catty 当前状态
+## 2026-10-29 · 语音尾音补齐（已部署）
+
+- 线上产物检查：`data/voice_outbox` 里一段 3.36 秒的真实语音，末尾 20ms 仍有约 0.04 幅度、最后 0.2ms 就结束，确认是模型输出没有尾巴（`fragment_interval=0.0` 时框架不补尾部静音），播放时听起来被削断。
+- `voice_worker.py` 在裁剪后补 0.25 秒静音并做 8ms 淡出，再归一化写盘；语音库片段本身已带静音尾巴，不改。
+- 本地 `test_voice_reply` 30 项通过；`voice_worker.py` 与测试已上传，SHA-256 与本地一致。远端 py_compile/测试与 bot 重载未复跑（远端 PowerShell 当前被禁用）。
 ## 2026-10-29 · 语音条模式（多气泡 + NSFW，已部署）
 
 - 一条回复拆成多个气泡时，可逐条念成语音：`voice.only_hours="23:00-01:00"` 窗口内一直用语音条，窗口外按 `voice.auto_chance` 抽一条；`voice.bubble_max_chars=40`、`bubble_max_per_turn=3`、`bubble_budget_seconds=45` 控单条长度、条数和一轮合成总预算。

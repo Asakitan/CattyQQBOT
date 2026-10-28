@@ -36,6 +36,22 @@ def _trim(audio, rate: int, threshold: float = 10 ** (-45 / 20), tail: float = 0
     return audio[start:end]
 
 
+# 模型在 fragment_interval=0 时不会留尾巴, 直接补静音并做短淡出, 避免尾音被削平。
+_TAIL_PAD_SECONDS = 0.25
+_FADE_OUT_SECONDS = 0.008
+
+
+def _pad_tail(audio, rate: int):
+    import numpy as np
+
+    audio = np.asarray(audio, dtype=np.float64).copy()
+    fade = min(int(rate * _FADE_OUT_SECONDS), len(audio))
+    if fade > 1:
+        audio[-fade:] *= np.linspace(1.0, 0.0, fade)
+    pad = np.zeros(int(rate * _TAIL_PAD_SECONDS), dtype=np.float64)
+    return np.concatenate([audio, pad])
+
+
 def _write_wav(path: Path, pcm, rate: int) -> float:
     import numpy as np
 
@@ -133,6 +149,7 @@ def main() -> int:
             if not np.isfinite(audio).all() or np.std(audio) < 1e-4:
                 raise ValueError("生成了无效音频")
             audio = _trim(audio, rate)
+            audio = _pad_tail(audio, rate)
             peak = float(np.max(np.abs(audio))) or 1.0
             audio = audio * min(0.89 / peak, 1.0)
             seconds = _write_wav(output, audio * 32768, rate)
