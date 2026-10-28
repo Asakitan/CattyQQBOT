@@ -17836,13 +17836,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     )
             for _staged_voice in tool_ctx.pending_voice_deliveries[_voices_before:]:
                 if isinstance(_staged_voice, dict):
-                    _spawn_deferred_voice_delivery(
-                        bot,
-                        event,
-                        [_staged_voice],
-                        after=_reply_done,
-                        label=name or "voice",
-                    )
+                    # 主人 2026-10-29: 语音先发, 文字跟在后面或不跟; 不再等本轮文字结束。
+                    await _send_voice_message(bot, event, _staged_voice, label=name or "voice")
             if name == "catty_imagegen" and isinstance(result, dict) and result.get("error"):
                 _img_error_text = str(result.get("error") or "")
                 # 积分不足/冷却不是生成失败，保留原有提示；其余错误一律吞掉并道歉。

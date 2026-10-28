@@ -233,6 +233,7 @@ class ToolWiringTests(unittest.TestCase):
         description = self.tools.ALL_TOOL_SCHEMAS["catty_voice_say"]["function"]["description"]
         self.assertIn("你喜欢我吗", description)
         self.assertIn("只发语音", description)
+        self.assertIn("先发出去", description)
         self.assertNotIn("自动发出", description)
 
     def test_executor_rejects_wrong_persona_and_repeat(self) -> None:
