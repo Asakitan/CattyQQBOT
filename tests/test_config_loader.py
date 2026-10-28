@@ -17,6 +17,17 @@ _SPEC.loader.exec_module(_loader)
 
 
 class ConfigLoaderTests(unittest.TestCase):
+    def test_conversation_tool_switches_are_exported(self) -> None:
+        keys = ("session_messages_enabled", "wait_messages_enabled", "close_conversation_enabled")
+        example = json.loads((_MODULE_PATH.parent / "config.example.json").read_text(encoding="utf-8"))
+        for key in keys:
+            self.assertTrue(_loader.DEFAULT_CONFIG["tools"][key])
+            self.assertTrue(example["tools"][key])
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {}, clear=True):
+            _loader._apply_config({"tools": {key: False for key in keys}}, Path(directory))
+            for key in keys:
+                self.assertEqual(os.environ[f"CATTY_{key.upper()}"], "false")
+
     def test_rag_local_bge_switch_is_exported(self) -> None:
         self.assertTrue(_loader.DEFAULT_CONFIG["rag"]["local_bge_enabled"])
         example = json.loads((_MODULE_PATH.parent / "config.example.json").read_text(encoding="utf-8"))

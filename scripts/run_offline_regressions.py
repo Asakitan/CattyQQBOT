@@ -10,6 +10,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = (
+    "test_conversation_tools", "test_insight_memory", "test_purpose_ledger",
+    "test_surfcore_wiring", "test_data_backup",
     "test_tool_history_recovery", "test_reply_deadline", "test_deferred_image_delivery",
     "test_reply_delivery_state", "test_reply_delivery_integration",
     "test_file_formats", "test_tool_audit_fixes", "test_tool_message_scan",

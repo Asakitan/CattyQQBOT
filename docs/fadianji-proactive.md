@@ -1,5 +1,9 @@
 # 机机独立主动群聊
 
+## 目的证据增量（已部署并合入）
+
+共享 runtime 可读取本群、当前人格的目的候选，并将主体、原话和置信度作为不可信背景提供给模型；群友计划不会变成机器人的意愿。生成内容与候选字词关联且 OneBot 返回有效消息 ID 后才记一次投递；相同主体引用该消息的明确反馈可确认、拒绝或完成目标。候选最多投递两次、两次间隔至少 6 小时，调度时段及机会计划不变。文本关联是启发式，未验证真实模型或 QQ；21 文件已部署并合入，远端哈希一致。
+
 ## 共享人格调度（已合并并部署）
 
 本页的 scheduler/runtime 已是多人格共享主动链路，提示使用当前人格自己的核心与节奏；猫猫内容为空时解析原猫猫内容，自定义人格不继承猫猫或机机的人格正文。机机仍按 `fdj_proactive.enabled`，猫猫按 `proactive.enabled`，并分别受人格 `proactive_enabled` 控制。
@@ -56,7 +60,7 @@
 - scheduler：负责每群日期、机会、活跃度、时段与持久化状态；不承担人格文本拼装。
 - `fdj_proactive_prompt.build_fdj_proactive_messages`：纯消息构造，不扫描磁盘、不初始化 NoneBot、不访问配置或网络、不调度或发送。
 
-调用参数为 `persona` 及关键字 `scope`、`mode`、`recent_messages`、`summary=''`、`now=None`、`no_reply_marker=NO_REPLY_MARKER`。仅接受机机和非空 `group:` scope；`mode` 仅为 `join` 或 `topic`。`now` 缺省不读取时钟；传入无时区时间按 UTC+8 解释，带时区时间转换为 UTC+8。
+调用参数为 `persona` 及关键字 `scope`、`mode`、`recent_messages`、`summary=''`、`now=None`、`no_reply_marker=NO_REPLY_MARKER`。接受具名人格和非空 `group:` scope；`mode` 仅为 `join` 或 `topic`。`now` 缺省不读取时钟；传入无时区时间按 UTC+8 解释，带时区时间转换为 UTC+8。
 
 人格段使用 `persona.core_persona`、`persona.conversation_prompt_for(scope)`，并按既有规则渲染 `chat_rhythm` 的 `{split_marker}`；不附加笨猫主动模板，也不删改机机原有猫相关引用或NSFW文案。复用 `request_intent.append_context_request_hint(messages, ())` 的统一上下文/来源/真实回执规则，不暴露工具。其后用本轮主动短聊任务限定背景，避免把旧请求当成新执行任务。
 

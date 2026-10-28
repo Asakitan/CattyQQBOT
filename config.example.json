@@ -274,6 +274,9 @@
         "storage_dir": "data/fdj_self_study"
     },
     "tools": {
+        "session_messages_enabled": true,
+        "wait_messages_enabled": true,
+        "close_conversation_enabled": true,
         "profile_memory_enabled": true,
         "scope_meme_enabled": true,
         "timeline_enabled": true,

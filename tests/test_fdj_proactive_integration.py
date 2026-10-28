@@ -5,6 +5,7 @@ import ast
 import asyncio
 from collections import defaultdict
 from contextvars import ContextVar
+from dataclasses import replace
 import copy
 import importlib
 import json
@@ -370,6 +371,35 @@ class RuntimeIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(scheduler.policy.failure_backoff_seconds, 3600)
         self.assertFalse(await self.runtime.tick())
         self.send.assert_awaited_once()
+
+    async def test_purpose_delivery_requires_matching_text_and_ack(self):
+        goal = {"id": 12, "owner": "member", "owner_id": "123", "text": "我想去跑步",
+                "confidence": .5, "delivery_count": 0, "last_delivery_at": None}
+        candidates = AsyncMock(return_value=[goal])
+        receipt = AsyncMock(return_value=True)
+        self.runtime.host = replace(self.runtime.host, purpose_candidates=candidates, purpose_delivered=receipt)
+        self.generate.return_value = "跑步计划怎么样了"
+        self.assertTrue(await self.runtime.tick())
+        candidates.assert_awaited_once_with("group:10001", "fadianji")
+        receipt.assert_awaited_once_with("group:10001", "fadianji", goal, "88")
+        background = self.prompt.call_args.kwargs["summary"]
+        self.assertIn("我想去跑步", background)
+        self.assertNotIn('"owner_id"', background)
+
+    async def test_purpose_is_not_delivered_on_unconfirmed_or_unrelated_reply(self):
+        goal = {"id": 12, "owner": "member", "owner_id": "123", "text": "我想去跑步",
+                "confidence": .5, "delivery_count": 0, "last_delivery_at": None}
+        receipt = AsyncMock(return_value=True)
+        self.runtime.host = replace(self.runtime.host, purpose_candidates=AsyncMock(return_value=[goal]), purpose_delivered=receipt)
+        self.generate.return_value = "跑步计划怎么样了"
+        self.send.return_value = {}
+        self.assertFalse(await self.runtime.tick())
+        receipt.assert_not_awaited()
+        self.runtime._scheduler = None
+        self.send.return_value = {"message_id": 89}
+        self.generate.return_value = "今天好热"
+        self.assertTrue(await self.runtime.tick())
+        receipt.assert_not_awaited()
 
     async def test_disabled_or_missing_key_no_list_or_llm(self):
         self.cfg.catty_fdj_proactive_enabled = False

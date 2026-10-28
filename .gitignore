@@ -2,6 +2,10 @@
 config.json
 config.local.json
 memory.json
+insight_memory.sqlite3
+insight_memory.sqlite3-*
+purpose_ledger.sqlite3
+purpose_ledger.sqlite3-*
 memory_groups/
 memory_users/
 local_critic_samples.jsonl

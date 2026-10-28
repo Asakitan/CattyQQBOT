@@ -2,6 +2,8 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `tools.py` / `__init__.py` / `catty_sim_chat.py` | 当前会话消息、水位、短等待与自然收尾 → `docs/tool-contracts.md`、`docs/architecture.md` | 已部署并合入；远端哈希一致 |
+| `insight_memory.py` / `purpose_ledger.py` / `fdj_proactive_runtime.py` / `data_backup.py` | 会话/人格隔离的活跃记忆、完整档及目标证据回执 → `docs/persona-runtime.md`、`docs/fadianji-proactive.md` | 已部署并合入；远端哈希一致 |
 | `persona_evolution_budget.py` / `persona_evolution_store.py` / `persona_evolution_runtime.py` / `__init__.py` | 当前人格语气扩展、写回校验及共享日预算 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署并合入；本地新增 49 项、远端新增 49 项通过；真实模型未测 |
 | `personas/` / `persona_store.py` / `__init__.py` / `fadianji_harness.py` / `fdj_proactive_runtime.py` / `fadianji_style_critic.py` | 共享群聊判门、证据、风格及主动调度；人格能力和 NSFW 状态隔离 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1367 项、远端 299 项通过（另 1 项既有短路径断言失败） |
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
@@ -48,6 +50,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-28 | 借鉴 SurfCore：会话工具、分层记忆与目的证据闭环 | 21 文件已部署并合入；远端哈希一致、132 项通过，本地合并后 522 项通过 |
 | 2026-10-28 | 当前角色语气进化及独立每日 token 预算，已部署并合入 | 13 文件与交付包哈希一致；本地 49 项及 297 项关联回归、远端 49 项及 229 项关联回归通过（关联回归各 9 跳过） |
 | 2026-10-28 | 图片与表情自然接话；修复原图透传提示漏挂，保留原生表情线索 | 8 文件双端一致；本地 1401 项、9 跳过，远端 140 项通过 |
 | 2026-10-28 | 补齐已部署的 RAG 后端、配置和测试及腿图发送记忆修复到活动源码 | 10 文件与已部署归档 SHA-256 一致；7 组 96 项通过；真实配置未改 |

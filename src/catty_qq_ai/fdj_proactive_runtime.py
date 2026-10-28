@@ -9,8 +9,10 @@ import asyncio
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 import inspect
+import json
 import logging
 import random
+import re
 import time
 from typing import Any, Awaitable, Callable, Sequence
 
@@ -56,6 +58,16 @@ class BubbleHost:
     send_text: Callable[[Any, str, str], Awaitable[Any]]
     remember: Callable[[Any, str, str, str], None]
     clean_text: Callable[..., str]
+    purpose_candidates: Callable[[str, str], Awaitable[list[dict]]] | None = None
+    purpose_delivered: Callable[[str, str, dict, str], Awaitable[Any]] | None = None
+
+
+def _purpose_mentioned(goal: str, text: str) -> bool:
+    content = re.sub(r"^(?:今天|明天|后天|这周|下周)?(?:我|俺|本人)(?:想要|想|打算|计划|准备|希望|决定|答应|承诺|保证|会|来)", "", goal)
+    content = re.sub(r"[^\w\u3400-\u9fff]", "", content.casefold())
+    reply = re.sub(r"[^\w\u3400-\u9fff]", "", text.casefold())
+    generic = {"今天", "明天", "后天", "这周", "下周", "准备", "计划", "希望", "以后", "现在", "可以", "需要", "帮你"}
+    return any(content[i:i + 2] not in generic and content[i:i + 2] in reply for i in range(len(content) - 1))
 
 
 class FdjProactiveRuntime:
@@ -272,10 +284,27 @@ class FdjProactiveRuntime:
         rows, _, latest = self._snapshot(bot, group_id)
         generation_started = self.monotonic()
         timeout = max(float(getattr(cfg, "catty_fdj_proactive_timeout_seconds", 30)), .01)
+        purpose = None
+        persona_name = str(getattr(persona, "name", "") or "")
+        if self.host.purpose_candidates is not None and persona_name:
+            try:
+                candidates = await asyncio.wait_for(self.host.purpose_candidates(scope, persona_name), timeout=2.0)
+                purpose = next((item for item in candidates if item.get("owner_id") and int(item.get("delivery_count") or 0) < 2 and (
+                    not item.get("last_delivery_at") or self.wall() - float(item["last_delivery_at"]) >= 21600
+                )), None)
+            except Exception as exc:
+                _LOG.info("FDJ purpose lookup skipped: %s", type(exc).__name__)
+        purpose_summary = ""
+        if purpose is not None:
+            purpose_summary = json.dumps({
+                "owner": purpose.get("owner"), "statement": purpose.get("text"),
+                "confidence": purpose.get("confidence"),
+            }, ensure_ascii=False)
         token = bind_turn_persona(scope, persona)
         try:
             messages = build_fdj_proactive_messages(
                 persona, scope=scope, mode=candidate.mode, recent_messages=rows,
+                summary=purpose_summary,
                 now=datetime.fromtimestamp(self.wall(), _LOCAL_TIME),
             )
             reply = await asyncio.wait_for(
@@ -352,6 +381,11 @@ class FdjProactiveRuntime:
                 self.host.remember(bot, group_id, text, str(ack["message_id"]))
             finally:
                 reset_turn_persona(token)
+            if purpose is not None and self.host.purpose_delivered is not None and _purpose_mentioned(str(purpose.get("text") or ""), text):
+                try:
+                    await self.host.purpose_delivered(scope, persona_name, purpose, str(ack["message_id"]))
+                except Exception as exc:
+                    _LOG.info("FDJ purpose receipt skipped: %s", type(exc).__name__)
             return True
         except asyncio.CancelledError:
             raise

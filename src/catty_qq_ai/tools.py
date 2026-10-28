@@ -15,6 +15,7 @@ import html
 import ipaddress
 import json
 import logging
+import math
 import re
 import socket
 import sys
@@ -86,7 +87,8 @@ _RECALL_SCHEMA: dict[str, Any] = {
             "你想知道某个群友/主人以前说过的偏好、决定、梗、称呼;"
             "上下文出现陌生话题但语境暗示曾在群里讨论过。"
             "不要用于查询'此时此刻'的活跃消息(那是实时上下文已经给你的部分)。"
-            "返回内容包含 long_term_summary(长期摘要) 和 matches(命中条目列表)。"
+            "返回内容包含 long_term_summary(长期摘要)、matches(命中条目列表)，"
+            "以及当前会话和当前人格的 archive_matches(已归档记忆)。"
         ),
         "parameters": {
             "type": "object",
@@ -1220,6 +1222,58 @@ _STORY_ARC_CLEAR_SCHEMA: dict[str, Any] = {
 }
 
 
+_SESSION_MESSAGES_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_session_messages",
+        "description": "读取当前会话最近、未读或当前人格自己的消息，或将实际存在的消息标记已读。未读按序号水位判断，不会自动标记；buffer_may_be_incomplete 表示可能有更早消息不在缓冲。",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action": {"type": "string", "enum": ["recent", "unread", "own", "mark_read"], "description": "操作"},
+                "limit": {"type": "integer", "minimum": 1, "maximum": 80, "description": "最多条数，默认20"},
+                "through_seq": {"type": "integer", "minimum": 0, "description": "mark_read 的序号上限，默认当前最新消息"},
+            },
+            "required": ["action"],
+            "additionalProperties": False,
+        },
+    },
+}
+
+_WAIT_MESSAGES_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_wait_messages",
+        "description": "等待当前会话 after_seq 之后的新消息，最多等待3秒；没有实时消息来源时会返回不可用。",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "after_seq": {"type": "integer", "minimum": 0, "description": "当前会话递增序号，默认当前最新序号"},
+                "timeout_seconds": {"type": "number", "minimum": 0, "maximum": 3, "description": "等待秒数，默认3秒"},
+            },
+            "required": [],
+            "additionalProperties": False,
+        },
+    },
+}
+
+_CLOSE_CONVERSATION_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_close_conversation",
+        "description": "提出本会话自然收尾；仅返回 pending，最终需等回复发出且入口校验通过后才可能关闭。",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "reason": {"type": "string", "maxLength": 200, "description": "可选收尾理由"},
+            },
+            "required": [],
+            "additionalProperties": False,
+        },
+    },
+}
+
+
 _SCAN_MESSAGES_SCHEMA: dict[str, Any] = {
     "type": "function",
     "function": {
@@ -1348,6 +1402,9 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_skill_search": _SKILL_SEARCH_SCHEMA,
     "catty_persona": _PERSONA_TOOL_SCHEMA,
     "catty_recall": _RECALL_SCHEMA,
+    "catty_session_messages": _SESSION_MESSAGES_SCHEMA,
+    "catty_wait_messages": _WAIT_MESSAGES_SCHEMA,
+    "catty_close_conversation": _CLOSE_CONVERSATION_SCHEMA,
     "catty_scan_messages": _SCAN_MESSAGES_SCHEMA,
     "catty_look_image": _LOOK_IMAGE_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
@@ -1424,6 +1481,18 @@ def _make_lazy_schema(name: str, short_desc: str, props: dict[str, dict], requir
 
 _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_skill_search": _SKILL_SEARCH_SCHEMA,
+    "catty_session_messages": {
+        **_SESSION_MESSAGES_SCHEMA,
+        "function": {**_SESSION_MESSAGES_SCHEMA["function"], "description": "读当前会话消息或按存在的序号标记已读"},
+    },
+    "catty_wait_messages": {
+        **_WAIT_MESSAGES_SCHEMA,
+        "function": {**_WAIT_MESSAGES_SCHEMA["function"], "description": "等待当前会话新消息，最多3秒"},
+    },
+    "catty_close_conversation": {
+        **_CLOSE_CONVERSATION_SCHEMA,
+        "function": {**_CLOSE_CONVERSATION_SCHEMA["function"], "description": "仅提议收尾，返回pending而非已关闭"},
+    },
     "catty_persona": {
         **_PERSONA_TOOL_SCHEMA,
         "function": {
@@ -1739,6 +1808,9 @@ _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
     "catty_skill_save": ToolCapability(execution_mode="write"),
     "catty_persona": ToolCapability(execution_mode="write"),
     "catty_recall": ToolCapability(),
+    "catty_session_messages": ToolCapability(execution_mode="write"),
+    "catty_wait_messages": ToolCapability(execution_mode="write"),
+    "catty_close_conversation": ToolCapability(execution_mode="write"),
     "catty_scan_messages": ToolCapability(),
     "catty_look_image": ToolCapability(),
     "catty_user_profile": ToolCapability(),
@@ -1960,6 +2032,13 @@ class ToolContext:
     persona_manage_fn: Callable[[dict[str, Any]], Awaitable[dict[str, Any]]] | None = None
     # 本轮技能候选与联网回执；仅实际检索/抓取后创建，不在 schema 枚举时扫库。
     skill_turn: Any | None = None
+    message_snapshot_fn: Callable[[], list[dict[str, Any]]] | None = None
+    message_wait_fn: Callable[[int, float], Awaitable[list[dict[str, Any]]]] | None = None
+    message_cursor_fn: Callable[[str, int], int] | None = None
+    insight_archive_fn: Callable[[str, int], Awaitable[list[dict[str, Any]]]] | None = None
+    pending_closure: dict[str, Any] | None = None
+    deferred_delivery_started: bool = False
+    _message_read_cursor: int = field(default=0, init=False, repr=False)
 
     @property
     def group_id(self) -> str:
@@ -2557,7 +2636,7 @@ async def _exec_run_code(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
     return result
 
 
-async def _exec_recall(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+async def _exec_recall_legacy(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     scope = str(args.get("scope") or "").strip()
     keywords = str(args.get("keywords") or "").strip()
     limit_raw = args.get("limit")
@@ -2623,6 +2702,42 @@ async def _exec_recall(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]
         return result
 
     return {"error": f"未知 scope={scope!r};只接受 current_group / current_user / specific_user。"}
+
+
+async def _exec_recall(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    result = await _exec_recall_legacy(args, ctx)
+    if not isinstance(result, dict) or result.get("error") or ctx.insight_archive_fn is None:
+        return result
+    selected_scope = str(args.get("scope") or "").strip()
+    target_user = ""
+    if selected_scope == "current_user":
+        target_user = ctx.user_id
+    elif selected_scope == "specific_user":
+        target_user = str(args.get("user_id") or "").strip()
+        if not ctx.group_id and target_user != ctx.user_id:
+            return result
+    try:
+        limit = max(1, min(int(args.get("limit") or 6), 20))
+    except (TypeError, ValueError):
+        limit = 6
+    try:
+        records = await ctx.insight_archive_fn(str(args.get("keywords") or "").strip(), 100)
+    except Exception as exc:  # noqa: BLE001
+        return {**result, "archive_error": type(exc).__name__}
+    matches = []
+    for record in records:
+        if target_user and str(record.get("speaker_id") or "") != target_user:
+            continue
+        matches.append({
+            "record_id": record.get("record_id"),
+            "speaker": str(record.get("speaker_name") or "")[:60],
+            "text": str(record.get("text") or "")[:500],
+            "created_at": record.get("created_at"),
+            "active": bool(record.get("active")),
+        })
+        if len(matches) >= limit:
+            break
+    return {**result, "archive_matches": matches}
 
 
 async def _exec_user_profile(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
@@ -5828,6 +5943,158 @@ def _message_images(item: dict[str, Any]) -> list[dict[str, Any]]:
     return [img for img in (item.get("images") or []) if isinstance(img, dict) and img.get("url")]
 
 
+def _conversation_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if not isinstance(rows, list):
+        raise ValueError("message snapshot must be a list")
+    by_seq = {
+        row["seq"]: dict(row)
+        for row in rows
+        if isinstance(row, dict)
+        and isinstance(row.get("seq"), int)
+        and not isinstance(row.get("seq"), bool)
+        and row["seq"] > 0
+    }
+    return [by_seq[seq] for seq in sorted(by_seq)[-80:]]
+
+
+def _conversation_snapshot(ctx: ToolContext) -> list[dict[str, Any]]:
+    rows = ctx.message_snapshot_fn() if ctx.message_snapshot_fn is not None else ctx.recent_messages
+    return _conversation_rows(rows)
+
+
+def _conversation_cursor(ctx: ToolContext, action: str, seq: int = 0) -> int:
+    if ctx.message_cursor_fn is not None:
+        cursor = ctx.message_cursor_fn(action, seq)
+    else:
+        if action == "set":
+            ctx._message_read_cursor = max(ctx._message_read_cursor, seq)
+        cursor = ctx._message_read_cursor
+    if isinstance(cursor, bool) or not isinstance(cursor, int) or cursor < 0:
+        raise ValueError("invalid message cursor")
+    return cursor
+
+
+async def _exec_session_messages(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    unexpected = set(args) - {"action", "limit", "through_seq"}
+    if unexpected:
+        return {"ok": False, "error": "unexpected_argument", "arguments": sorted(unexpected)}
+    action = args.get("action")
+    if action not in ("recent", "unread", "own", "mark_read"):
+        return {"ok": False, "error": "invalid_action"}
+    limit = args.get("limit", 20)
+    if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 80:
+        return {"ok": False, "error": "invalid_limit"}
+    through_seq = args.get("through_seq")
+    if through_seq is not None and (
+        action != "mark_read"
+        or isinstance(through_seq, bool)
+        or not isinstance(through_seq, int)
+        or through_seq < 0
+    ):
+        return {"ok": False, "error": "invalid_through_seq"}
+
+    rows = _conversation_snapshot(ctx)
+    latest_seq = rows[-1]["seq"] if rows else 0
+    cursor = _conversation_cursor(ctx, "get")
+    if action == "mark_read":
+        upper = latest_seq if through_seq is None else through_seq
+        eligible = [row["seq"] for row in rows if cursor < row["seq"] <= upper]
+        if eligible:
+            cursor = _conversation_cursor(ctx, "set", eligible[-1])
+        messages = []
+    elif action == "unread":
+        messages = [row for row in rows if row["seq"] > cursor][:limit]
+    elif action == "own":
+        name = str(getattr(ctx.persona, "name", "catty") or "catty")
+        revision = getattr(ctx.persona, "definition_revision", None)
+        identity = f"{name}@{revision}" if revision else name
+        messages = [
+            row for row in rows
+            if row.get("is_self") is True and row.get("persona_identity") == identity
+        ][-limit:]
+    else:
+        messages = rows[-limit:]
+    return {
+        "ok": True,
+        "action": action,
+        "messages": messages,
+        "count": len(messages),
+        "cursor": cursor,
+        "latest_seq": latest_seq,
+        "oldest_seq": rows[0]["seq"] if rows else 0,
+        "buffer_may_be_incomplete": bool(rows and cursor < rows[0]["seq"] - 1),
+    }
+
+
+async def _exec_wait_messages(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    unexpected = set(args) - {"after_seq", "timeout_seconds"}
+    if unexpected:
+        return {"ok": False, "error": "unexpected_argument", "arguments": sorted(unexpected)}
+    rows = _conversation_snapshot(ctx)
+    latest_seq = rows[-1]["seq"] if rows else 0
+    after_seq = args.get("after_seq", latest_seq)
+    if isinstance(after_seq, bool) or not isinstance(after_seq, int) or after_seq < 0:
+        return {"ok": False, "error": "invalid_after_seq"}
+    timeout = args.get("timeout_seconds", 3.0)
+    if (
+        isinstance(timeout, bool)
+        or not isinstance(timeout, (int, float))
+        or (isinstance(timeout, float) and not math.isfinite(timeout))
+        or timeout < 0
+    ):
+        return {"ok": False, "error": "invalid_timeout"}
+    timeout = float(min(timeout, 3))
+    messages = [row for row in rows if row["seq"] > after_seq]
+    if not messages and timeout > 0:
+        if ctx.message_wait_fn is not None:
+            pending = asyncio.ensure_future(ctx.message_wait_fn(after_seq, timeout))
+            pending.add_done_callback(lambda future: None if future.cancelled() else future.exception())
+            try:
+                done, _ = await asyncio.wait({pending}, timeout=timeout)
+                if pending in done:
+                    waited = _conversation_rows(pending.result())
+                    messages = [row for row in waited if row["seq"] > after_seq]
+            finally:
+                if not pending.done():
+                    pending.cancel()
+            if ctx.message_snapshot_fn is not None:
+                rows = _conversation_snapshot(ctx)
+                messages = _conversation_rows(messages + [row for row in rows if row["seq"] > after_seq])
+        elif ctx.message_snapshot_fn is not None:
+            deadline = asyncio.get_running_loop().time() + timeout
+            while not messages:
+                remaining = deadline - asyncio.get_running_loop().time()
+                if remaining <= 0:
+                    break
+                await asyncio.sleep(min(0.1, remaining))
+                rows = _conversation_snapshot(ctx)
+                messages = [row for row in rows if row["seq"] > after_seq]
+        else:
+            return {"ok": False, "error": "message_wait_unavailable"}
+    latest_seq = max([latest_seq] + [row["seq"] for row in rows] + [row["seq"] for row in messages])
+    return {
+        "ok": True,
+        "status": "messages" if messages else "timeout",
+        "messages": messages,
+        "count": len(messages),
+        "after_seq": after_seq,
+        "latest_seq": latest_seq,
+    }
+
+
+async def _exec_close_conversation(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    unexpected = set(args) - {"reason"}
+    if unexpected:
+        return {"ok": False, "error": "unexpected_argument", "arguments": sorted(unexpected)}
+    reason = args.get("reason", "")
+    if not isinstance(reason, str) or len(reason) > 200:
+        return {"ok": False, "error": "invalid_reason"}
+    rows = _conversation_snapshot(ctx)
+    proposal = {"reason": reason.strip(), "observed_seq": rows[-1]["seq"] if rows else 0}
+    ctx.pending_closure = proposal
+    return {"ok": True, "status": "pending", "closed": False, "pending_closure": dict(proposal)}
+
+
 async def _exec_scan_messages(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     query = str(args.get("query") or "").strip().lower()
     sender = str(args.get("sender") or "").strip().lower()
@@ -6056,6 +6323,9 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_skill_save": _exec_skill_save,
     "catty_persona": _exec_persona,
     "catty_recall": _exec_recall,
+    "catty_session_messages": _exec_session_messages,
+    "catty_wait_messages": _exec_wait_messages,
+    "catty_close_conversation": _exec_close_conversation,
     "catty_scan_messages": _exec_scan_messages,
     "catty_look_image": _exec_look_image,
     "catty_user_profile": _exec_user_profile,
@@ -6349,6 +6619,9 @@ _TOOL_CONFIG_FLAGS: dict[str, tuple[str, ...]] = {
     "catty_skill_load": ("catty_skills_enabled",),
     "catty_skill_save": ("catty_skills_enabled", "catty_skills_auto_learn_enabled"),
     "catty_persona": (),  # 主人权限由入口过滤及 executor 校验，不新增配置开关。
+    "catty_session_messages": ("catty_session_messages_enabled",),
+    "catty_wait_messages": ("catty_wait_messages_enabled",),
+    "catty_close_conversation": ("catty_close_conversation_enabled",),
     "catty_web_search": ("catty_web_search_enabled",),
     "catty_emoji": ("catty_emoji_enabled",),
     "catty_nsfw_search": ("catty_nsfw_search_enabled",),
@@ -6385,6 +6658,10 @@ _INTELLIGENCE_CORE_TOOLS = frozenset({
     "catty_scope_meme",
     "catty_timeline",
     "catty_adaptive_prompt",
+})
+
+_CONVERSATION_TOOLS = frozenset({
+    "catty_session_messages", "catty_wait_messages", "catty_close_conversation",
 })
 
 
@@ -6602,7 +6879,7 @@ def available_tool_schemas(
     selected_names = (
         set(_LAZY_TOOL_SCHEMAS)
         if full_exposure
-        else _INTELLIGENCE_CORE_TOOLS | intent_hits
+        else _INTELLIGENCE_CORE_TOOLS | _CONVERSATION_TOOLS | intent_hits
     )
     lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", False))
 
@@ -6848,6 +7125,7 @@ def tools_system_hint(persona: Any = None) -> str:
         f"3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用{tone}说 '查不到/想不起来'; 空结果/未命中不等于事实不存在; 永远不要编造工具结果.\n"
         "4) 相关技能先用 catty_skill_search 检索再选择加载；未知或时效事实先用 catty_web_search 查权威来源核实；详细参数/边界看本轮 schema.\n"
         "5) 要回指群里的图或旧消息: catty_scan_messages 翻最近消息/找图 → catty_look_image 看图 → 需要作者出处再 catty_image_search.\n"
+        "6) 可读取本会话消息、短暂等待新消息；catty_close_conversation 只提议收尾，pending 不代表已关闭，需等回复发出并由入口校验。\n"
         "上下文意图与执行衔接见本轮【上下文请求理解】；这里不重复教程。"
     )
     if bool(getattr(persona, "semantic_harness_enabled", False)):

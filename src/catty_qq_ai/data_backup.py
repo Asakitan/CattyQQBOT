@@ -7,7 +7,10 @@ memory / 好感 / 会话等 JSON 在磁盘上只有一份: 2026-07-03 断电把 
 from __future__ import annotations
 
 import os
+import sqlite3
+import tempfile
 import zipfile
+from contextlib import closing
 from datetime import datetime
 from pathlib import Path
 from typing import Iterable
@@ -21,6 +24,7 @@ EXCLUDED_ROOT_FILES = frozenset({
     "config.local.json",
     "file_sync_config.json",
 })
+SQLITE_DATA_FILES = ("insight_memory.sqlite3", "purpose_ledger.sqlite3")
 
 
 def snapshot_sources(data_root: Path, data_dirs: Iterable[Path]) -> list[tuple[Path, str]]:
@@ -92,7 +96,8 @@ def write_snapshot(
     目标文件被别人打开时 replace 会失败, 读得越快越不容易撞上 (撞上了 store 下一轮会重试)。
     """
     sources = snapshot_sources(data_root, data_dirs)
-    if not sources:
+    sqlite_sources = [data_root / name for name in SQLITE_DATA_FILES if (data_root / name).is_file()]
+    if not sources and not sqlite_sources:
         return None, 0
     backup_dir.mkdir(parents=True, exist_ok=True)
     stamp = (now or datetime.now()).strftime("%Y%m%d-%H%M%S")
@@ -109,6 +114,14 @@ def write_snapshot(
                         continue
                     archive.writestr(arcname, data)
                     written += 1
+                with tempfile.TemporaryDirectory(dir=backup_dir) as temporary:
+                    for source in sqlite_sources:
+                        snapshot = Path(temporary) / source.name
+                        with closing(sqlite3.connect(source.resolve().as_uri() + "?mode=ro", uri=True, timeout=5)) as live:
+                            with closing(sqlite3.connect(snapshot)) as copy:
+                                live.backup(copy)
+                        archive.write(snapshot, source.name)
+                        written += 1
             raw.flush()
             os.fsync(raw.fileno())
         tmp.replace(target)

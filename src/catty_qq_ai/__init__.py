@@ -214,8 +214,138 @@ _apply_bot_cpu_affinity(config)
 
 def _memory_sidecar_path(current_config: Config, filename: str) -> Path:
     memory_path = Path(current_config.catty_memory_path).expanduser()
-    base = memory_path.parent if memory_path.suffix else memory_path
-    return base / filename
+    return memory_path.parent / filename
+
+
+_layered_store_lock = threading.RLock()
+_layered_stores: dict[tuple[str, str], Any] = {}
+_layered_scope_locks: DefaultDict[str, Any] = defaultdict(threading.RLock)
+_layered_scope_generations: DefaultDict[str, int] = defaultdict(int)
+_layered_run_id = uuid.uuid4().hex
+_LAYERED_SECRET_RE = re.compile(
+    r"(?:api[_ -]?key|access[_ -]?token|password|passphrase|cookie|密钥|密码|令牌|"
+    r"\b(?:sk|oc_sk|pb_live)[-_][A-Za-z0-9_-]{8,})", re.IGNORECASE,
+)
+
+
+def _layered_store(path: Path, kind: str):
+    key = (str(path.resolve()), kind)
+    with _layered_store_lock:
+        store = _layered_stores.get(key)
+        if store is None:
+            if kind == "memory":
+                from .insight_memory import InsightMemory
+                store = InsightMemory(path)
+            else:
+                from .purpose_ledger import PurposeLedger
+                store = PurposeLedger(path)
+            _layered_stores[key] = store
+        return store
+
+
+def _record_layered_event(
+    memory_path: Path, purpose_path: Path, scope: str, persona: str, source_id: str,
+    text: str, owner: str, owner_id: str, speaker_name: str, replies: tuple[str, ...],
+    generation: int,
+) -> None:
+    if not text.strip() or _LAYERED_SECRET_RE.search(text):
+        return
+    from .insight_memory import salient_importance
+    from .purpose_ledger import _feedback_kind, _intent
+    with _layered_scope_locks[scope]:
+        if _layered_scope_generations[scope] != generation:
+            return
+        importance = salient_importance(text) if owner != "self" else 0
+        if importance:
+            _layered_store(memory_path, "memory").remember(
+                scope, persona, source_id, text, speaker_id=owner_id,
+                speaker_name=speaker_name, importance=importance,
+            )
+        if not replies and _intent(text, owner) is None:
+            return
+        ledger = _layered_store(purpose_path, "purpose")
+        if replies and owner_id and _feedback_kind(text) not in (None, "neutral"):
+            for goal in ledger.candidates(scope, persona, limit=100):
+                if goal.get("owner_id") == owner_id and str(goal.get("last_delivery_id") or "") in replies:
+                    ledger.feedback(scope, persona, goal["id"], source_id=source_id, owner_id=owner_id, text=text)
+                    return
+        ledger.observe(scope, persona, source_id, text, owner=owner, owner_id=owner_id)
+
+
+def _finish_layered_task(task: asyncio.Task) -> None:
+    if task.cancelled():
+        return
+    error = task.exception()
+    if error is not None:
+        logger.warning(f"layered context update failed: {type(error).__name__}")
+
+
+def _queue_layered_event(event: MessageEvent) -> asyncio.Task | None:
+    if not memory_store.enabled:
+        return
+    scope = _conversation_queue_key(event)
+    persona = str(getattr(_persona_for_scope(scope), "name", "") or "")
+    if not persona:
+        return
+    message_id = _event_message_id(event)
+    source_id = f"qq:{message_id}" if message_id else f"run:{_layered_run_id}:{time.time_ns()}"
+    memory_path = _memory_sidecar_path(config, "insight_memory.sqlite3")
+    purpose_path = _memory_sidecar_path(config, "purpose_ledger.sqlite3")
+    task = asyncio.create_task(asyncio.to_thread(
+        _record_layered_event, memory_path, purpose_path, scope, persona, source_id,
+        event_plain_text(event), "member" if isinstance(event, GroupMessageEvent) else "user",
+        str(event.user_id), _display_name(event), tuple(reply_message_ids(event)),
+        _layered_scope_generations[scope],
+    ))
+    task.add_done_callback(_finish_layered_task)
+    return task
+
+
+def _queue_layered_self_reply(event: MessageEvent, persona: Any, text: str) -> asyncio.Task | None:
+    if not memory_store.enabled:
+        return
+    import hashlib
+    scope = _conversation_queue_key(event)
+    persona_name = str(getattr(persona, "name", "") or "")
+    if not persona_name:
+        return
+    message_id = _event_message_id(event) or f"{_layered_run_id}:{time.time_ns()}"
+    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()[:20]
+    source_id = f"reply:{message_id}:{digest}"
+    task = asyncio.create_task(asyncio.to_thread(
+        _record_layered_event,
+        _memory_sidecar_path(config, "insight_memory.sqlite3"),
+        _memory_sidecar_path(config, "purpose_ledger.sqlite3"), scope, persona_name,
+        source_id, text, "self", str(event.user_id),
+        str(getattr(persona, "char_name", "") or ""), (), _layered_scope_generations[scope],
+    ))
+    task.add_done_callback(_finish_layered_task)
+    return task
+
+
+def _clear_layered_scope(scope: str, generation: int, memory_path: Path, purpose_path: Path) -> None:
+    with _layered_scope_locks[scope]:
+        if _layered_scope_generations[scope] != generation:
+            return
+        for path, kind in ((memory_path, "memory"), (purpose_path, "purpose")):
+            if path.is_file():
+                _layered_store(path, kind).clear_scope(scope)
+
+
+def _queue_layered_scope_clear(scope: str) -> None:
+    _layered_scope_generations[scope] += 1
+    args = (
+        scope, _layered_scope_generations[scope],
+        _memory_sidecar_path(config, "insight_memory.sqlite3"),
+        _memory_sidecar_path(config, "purpose_ledger.sqlite3"),
+    )
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        _clear_layered_scope(*args)
+    else:
+        task = loop.create_task(asyncio.to_thread(_clear_layered_scope, *args))
+        task.add_done_callback(_finish_layered_task)
 
 
 def _build_persona_emoji_store(current_config: Config, persona: Any) -> EmojiStore:
@@ -3103,6 +3233,9 @@ _group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(Gro
 _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _recent_conversation_messages: DefaultDict[str, deque[RecentConversationMessage]] = defaultdict(lambda: deque(maxlen=80))
 _recent_conversation_seq: DefaultDict[str, int] = defaultdict(int)
+_recent_conversation_waiters: DefaultDict[str, set[asyncio.Event]] = defaultdict(set)
+_recent_conversation_read_cursors: dict[tuple[str, str], int] = {}
+_conversation_closures: dict[tuple[str, str], dict[str, Any]] = {}
 _bot_reply_continuations: dict[str, BotReplyContinuationState] = {}
 _continuation_updated_turn_ids: "OrderedDict[str, float]" = OrderedDict()
 _CONTINUATION_UPDATED_TURN_MAX = 4096
@@ -3946,6 +4079,8 @@ def _recent_messages_snapshot_for_scope(scope_key: str, *, limit: int = 80) -> l
                 "display_name": item.display_name,
                 "text": item.text,
                 "is_bot": item.is_bot,
+                "is_self": item.is_self,
+                "persona_identity": item.persona_identity,
                 "target_user_id": item.target_user_id,
                 "message_id": item.message_id,
                 "age_seconds": max(now - item.created_at, 0.0),
@@ -3959,6 +4094,73 @@ def _recent_messages_snapshot_for_scope(scope_key: str, *, limit: int = 80) -> l
             }
         )
     return snapshot
+
+
+def _signal_recent_conversation(scope_key: str) -> None:
+    for waiter in tuple(_recent_conversation_waiters.get(scope_key, ())):
+        waiter.set()
+
+
+async def _wait_for_recent_conversation(scope_key: str, after_seq: int, timeout: float) -> list[dict[str, Any]]:
+    deadline = time.monotonic() + max(0.0, min(float(timeout), 3.0))
+    waiter = asyncio.Event()
+    _recent_conversation_waiters[scope_key].add(waiter)
+    try:
+        while True:
+            rows = [row for row in _recent_messages_snapshot_for_scope(scope_key) if row["seq"] > after_seq]
+            if rows:
+                return rows
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                return []
+            waiter.clear()
+            try:
+                await asyncio.wait_for(waiter.wait(), remaining)
+            except asyncio.TimeoutError:
+                return []
+    finally:
+        waiters = _recent_conversation_waiters.get(scope_key)
+        if waiters is not None:
+            waiters.discard(waiter)
+            if not waiters:
+                _recent_conversation_waiters.pop(scope_key, None)
+
+
+def _recent_conversation_cursor(scope_key: str, persona_key: str, action: str, through_seq: int) -> int:
+    key = (scope_key, persona_key)
+    current = _recent_conversation_read_cursors.get(key, 0)
+    if action == "set":
+        existing = [row["seq"] for row in _recent_messages_snapshot_for_scope(scope_key) if row["seq"] <= through_seq]
+        if existing:
+            current = max(current, max(existing))
+            _recent_conversation_read_cursors[key] = current
+    return current
+
+
+def _commit_conversation_close(
+    event: MessageEvent, persona_key: str, proposal: Any, delivered: list[str],
+    *, user_text: str, pending_work: bool = False,
+) -> bool:
+    if not isinstance(proposal, dict) or not delivered or pending_work:
+        return False
+    if re.search(r"[?？]|(?:帮我|请帮|查一下|教我|怎么|如何|为什么|能不能)", user_text):
+        return False
+    try:
+        observed_seq = int(proposal.get("observed_seq", 0))
+    except (TypeError, ValueError):
+        return False
+    if observed_seq <= 0:
+        return False
+    scope = _conversation_queue_key(event)
+    recent = _recent_messages_snapshot_for_scope(scope)
+    if any(row["seq"] > observed_seq and not row.get("is_bot") for row in recent):
+        return False
+    _close_bot_reply_continuation(event)
+    _conversation_closures[(scope, persona_key)] = {
+        "at": time.monotonic(),
+        "reason": str(proposal.get("reason") or "")[:120],
+    }
+    return True
 
 
 def _tool_schema_name(schema: Any) -> str:
@@ -4234,11 +4436,13 @@ async def _imagegen_tool_with_deferred_delivery(
     except asyncio.CancelledError:
         # The shielded generation may already be committed upstream. Keep its
         # delivery owner even when the main model's deadline cancels this await.
+        tool_ctx.deferred_delivery_started = True
         _spawn_deferred_image_delivery(
             bot, event, _deferred_imagegen_items(task, detached_ctx), after=after, label="catty_imagegen",
         )
         raise
     except asyncio.TimeoutError:
+        tool_ctx.deferred_delivery_started = True
         _spawn_deferred_image_delivery(
             bot, event, _deferred_imagegen_items(task, detached_ctx), after=after, label="catty_imagegen",
         )
@@ -4818,6 +5022,7 @@ def _remember_recent_conversation_event(event: MessageEvent, incoming: Extracted
             is_self=is_self,
         )
     )
+    _signal_recent_conversation(key)
 
 
 def _remember_bot_conversation_message(
@@ -4880,6 +5085,7 @@ def _remember_bot_conversation_message(
             is_self=True,
         )
     )
+    _signal_recent_conversation(key)
 
 
 _affection_credited_message_ids: "OrderedDict[str, float]" = OrderedDict()
@@ -10847,6 +11053,7 @@ def _is_removed_from_group_error(exc: Exception) -> bool:
 
 def _forget_removed_group(group_id: str, *, reason: str) -> None:
     scope = f"group:{group_id}"
+    _queue_layered_scope_clear(scope)
     removed = memory_store.remove_group_memory(group_id)
     cache = _get_session_cache()
     # 该群下所有 scope 变体（包括按用户隔离的 group:<id>:user:<uid>）都要清掉
@@ -10857,6 +11064,11 @@ def _forget_removed_group(group_id: str, *, reason: str) -> None:
         _expression_repeats.pop(repeat_key, None)
     _group_filter_batches.pop(scope, None)
     _recent_conversation_messages.pop(scope, None)
+    _signal_recent_conversation(scope)
+    for key in [key for key in _recent_conversation_read_cursors if key[0] == scope]:
+        _recent_conversation_read_cursors.pop(key, None)
+    for key in [key for key in _conversation_closures if key[0] == scope]:
+        _conversation_closures.pop(key, None)
     _recent_emoji_paths.pop(scope, None)
     for key in [key for key in _bot_reply_continuations if key.startswith(f"{scope}:")]:
         _bot_reply_continuations.pop(key, None)
@@ -10938,6 +11150,39 @@ def _remember_fdj_proactive_text(bot: Bot, group_id: str, text: str, message_id:
     )
 
 
+async def _proactive_purpose_candidates(scope: str, persona: str) -> list[dict]:
+    path = _memory_sidecar_path(config, "purpose_ledger.sqlite3").resolve()
+    if not memory_store.enabled or not path.is_file():
+        return []
+    generation = _layered_scope_generations[scope]
+
+    def read() -> list[dict]:
+        with _layered_scope_locks[scope]:
+            if _layered_scope_generations[scope] != generation:
+                return []
+            return [
+                {**row, "_store_path": str(path), "_generation": generation}
+                for row in _layered_store(path, "purpose").candidates(scope, persona, limit=5)
+            ]
+
+    return await asyncio.to_thread(read)
+
+
+async def _proactive_purpose_delivered(scope: str, persona: str, goal: dict, message_id: str) -> bool:
+    path = Path(goal["_store_path"])
+    generation = int(goal["_generation"])
+
+    def record() -> bool:
+        with _layered_scope_locks[scope]:
+            if _layered_scope_generations[scope] != generation or not path.is_file():
+                return False
+            return _layered_store(path, "purpose").note_delivery(
+                scope, persona, goal["id"], delivery_id=message_id,
+            )
+
+    return await asyncio.to_thread(record)
+
+
 _fdj_proactive_runtime = None
 
 
@@ -10952,6 +11197,8 @@ def _get_fdj_proactive_runtime():
             busy=_fdj_group_reply_busy, has_api_key=_has_api_key,
             generate=chat_completion, send_text=_send_fdj_proactive_text,
             remember=_remember_fdj_proactive_text, clean_text=_clean_fdj_proactive_reply,
+            purpose_candidates=_proactive_purpose_candidates,
+            purpose_delivered=_proactive_purpose_delivered,
         ))
     return _fdj_proactive_runtime
 
@@ -15640,6 +15887,15 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
     if str(event.user_id) == str(bot.self_id):
         return
     _remember_recent_conversation_event(event)
+    try:
+        if (
+            not _message_utils_mod._looks_like_marked_bot(event)
+            and str(event.user_id) not in {str(uid) for uid in (getattr(config, "catty_ignored_user_ids", ()) or ())}
+            and not _looks_like_bot_self_intro(event_plain_text(event))
+        ):
+            _queue_layered_event(event)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"layered context queue failed: {type(exc).__name__}")
     # Ambient eavesdrop: 群里所有 msg (包括非 @ 笨猫的) push 到 in-memory buffer,
     # 笨猫被触发时拉最近 ambient 注入 prompt 表现"在场"感.
     # observe_matcher 已经 priority=5 block=False 走全部 message events, 完美 piggy-back.
@@ -17298,9 +17554,37 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             except Exception as _nsfw_ctx_exc:  # noqa: BLE001
                 logger.debug(f"nsfw tool context probe failed (non-fatal): {_nsfw_ctx_exc}")
-        _tool_recent_messages = _recent_messages_snapshot_for_scope(
-            _conversation_queue_key(event)
-        )
+        _tool_scope = _conversation_queue_key(event)
+        _tool_persona_identity = _persona_identity(_tool_persona)
+        _tool_persona_name = str(getattr(_tool_persona, "name", "") or "")
+        _insight_path = _memory_sidecar_path(config, "insight_memory.sqlite3")
+        _tool_recent_messages = _recent_messages_snapshot_for_scope(_tool_scope)
+        if memory_store.enabled and _tool_persona_name and _insight_path.is_file():
+            try:
+                _insight_context = await asyncio.wait_for(asyncio.to_thread(
+                    lambda: _layered_store(_insight_path, "memory").context(
+                        _tool_scope, _tool_persona_name, incoming.text, limit=5,
+                    )
+                ), timeout=2.0)
+                if _insight_context:
+                    _append_internal_system(messages, _insight_context, label="active memory")
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"active memory lookup failed: {type(exc).__name__}")
+        _previous_close = _conversation_closures.pop((_tool_scope, _tool_persona_identity), None)
+        if _previous_close and time.monotonic() - _previous_close["at"] < 1200:
+            _append_internal_system(
+                messages, "此前这段会话已自然收尾；现在直接回应新消息，不必重复上次结束语。",
+                label="conversation reopened",
+            )
+
+        async def _insight_archive_for_tool(query: str, limit: int) -> list[dict[str, Any]]:
+            if not memory_store.enabled or not _tool_persona_name or not _insight_path.is_file():
+                return []
+            return await asyncio.to_thread(
+                lambda: _layered_store(_insight_path, "memory").archive(
+                    _tool_scope, _tool_persona_name, query, limit=limit,
+                )
+            )
 
         async def _describe_images_for_tool(urls: list[str], question: str = "") -> str:
             return await describe_images(
@@ -17313,6 +17597,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             config=config,
             persona_manage_fn=lambda args: _persona_manage_for_event(event, args),
             recent_messages=_tool_recent_messages,
+            message_snapshot_fn=lambda: _recent_messages_snapshot_for_scope(_tool_scope),
+            message_wait_fn=lambda after_seq, timeout: _wait_for_recent_conversation(_tool_scope, after_seq, timeout),
+            message_cursor_fn=lambda action, seq: _recent_conversation_cursor(_tool_scope, _tool_persona_identity, action, seq),
+            insight_archive_fn=_insight_archive_for_tool,
             describe_images_fn=_describe_images_for_tool,
             memory_store=memory_store,
             event=event,
@@ -18392,6 +18680,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _mark_consumed_reply_source_if_sent(event, state)
             except Exception as exc:  # noqa: BLE001
                 logger.warning(f"delivered reply side-effect failed: {type(exc).__name__}: {exc}")
+            try:
+                _queue_layered_self_reply(event, _tool_persona, text)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"purpose reply queue failed: {type(exc).__name__}")
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         quote_pending = _should_quote_chat_reply(
@@ -18405,6 +18697,32 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             return _strip_inline_image_placeholders(
                 restore_latex_placeholders(chunk_text, latex_sources)
             )
+
+        def _commit_pending_close() -> None:
+            try:
+                delivered = _delivery_state.delivered_texts()
+                remaining = list(delivered)
+                complete = bool(chunks)
+                for chunk in chunks:
+                    text = _chunk_to_history(chunk)
+                    if text not in remaining:
+                        complete = False
+                        break
+                    remaining.remove(text)
+                counts = _delivery_state.status_counts()
+                _commit_conversation_close(
+                    event, _tool_persona_identity, tool_ctx.pending_closure, delivered,
+                    user_text=incoming.text,
+                    pending_work=(
+                        not complete or bool(counts["pending"] or counts["unconfirmed"])
+                        or bool(tool_ctx.pending_file_deliveries or tool_ctx.pending_image_segments)
+                        or tool_ctx.deferred_delivery_started
+                    ),
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"conversation close failed: {type(exc).__name__}")
+
+        _lock_stack.callback(_commit_pending_close)
 
         # 主人 2026-10-25: 文字按原节奏先发完, 自动配图好了再单独发。旧版发文字前先等图 30s,
         # 超时后又在本轮 handler 里一直等到出图 (会话锁全程占着, 后续消息排队被丢)。
@@ -18420,6 +18738,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         f"{exc.__class__.__name__}: {exc}"
                     )
             else:
+                tool_ctx.deferred_delivery_started = True
                 _spawn_deferred_image_delivery(
                     bot, event, _segments_from_image_task(_nsfw_img_task), after=_reply_done,
                     label="nsfw_imagegen",

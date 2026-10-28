@@ -803,6 +803,9 @@ class Config(BaseModel):
     # 由模型自行判断要不要查询。默认常驻挂载,让上游 prompt cache 命中 tools 部分。
     # 上游返回 400 或 tool 调度异常时会自动降级一次纯文本回复。
     catty_tools_enabled: bool = True
+    catty_session_messages_enabled: bool = True
+    catty_wait_messages_enabled: bool = True
+    catty_close_conversation_enabled: bool = True
     catty_profile_memory_enabled: bool = True
     catty_scope_meme_enabled: bool = True
     catty_timeline_enabled: bool = True

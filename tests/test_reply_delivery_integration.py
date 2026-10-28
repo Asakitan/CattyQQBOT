@@ -42,6 +42,41 @@ def load_delivery_functions(sender):
 
 
 class ReplyDeliveryIntegrationTests(unittest.IsolatedAsyncioTestCase):
+    async def test_close_receipt_rejects_partial_or_deferred_work(self):
+        tree = ast.parse(_ENTRY.read_text(encoding="utf-8"))
+        callback = next(
+            node for node in ast.walk(tree)
+            if isinstance(node, ast.FunctionDef) and node.name == "_commit_pending_close"
+        )
+        context = types.SimpleNamespace(
+            pending_closure={"observed_seq": 1}, pending_file_deliveries=[],
+            pending_image_segments=[], deferred_delivery_started=False,
+        )
+        state = delivery.ReplyDeliveryState()
+        ns = {
+            "_delivery_state": state,
+            "_chunk_to_history": lambda text: text,
+            "chunks": ["first", "second"],
+            "event": object(), "_tool_persona_identity": "catty",
+            "tool_ctx": context, "incoming": types.SimpleNamespace(text="再见"),
+            "_commit_conversation_close": Mock(), "logger": Mock(),
+        }
+        exec(compile(ast.Module(body=[callback], type_ignores=[]), str(_ENTRY), "exec"), ns)
+
+        async def sender(message):
+            return None
+
+        await state.send(sender, "first", history_text="first")
+        ns["_commit_pending_close"]()
+        self.assertTrue(ns["_commit_conversation_close"].call_args.kwargs["pending_work"])
+        await state.send(sender, "second", history_text="second")
+        context.deferred_delivery_started = True
+        ns["_commit_pending_close"]()
+        self.assertTrue(ns["_commit_conversation_close"].call_args.kwargs["pending_work"])
+        context.deferred_delivery_started = False
+        ns["_commit_pending_close"]()
+        self.assertFalse(ns["_commit_conversation_close"].call_args.kwargs["pending_work"])
+
     async def test_partial_delivery_commits_only_confirmed_text(self):
         async def sender(message):
             if message == "second":

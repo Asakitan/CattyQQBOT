@@ -587,6 +587,8 @@ async def _sim_chat_unlocked(
                         _get_session_cache,
                         _persona_manage_for_event,
                         _recent_image_urls_for_scope,
+                        _recent_messages_snapshot_for_scope,
+                        _wait_for_recent_conversation,
                         adaptive_prompt_store,
                         affection_store,
                         memory_store,
@@ -619,6 +621,9 @@ async def _sim_chat_unlocked(
                     _ctx = ToolContext(
                         config=cfg,
                         persona_manage_fn=lambda args: _persona_manage_for_event(event, args),
+                        recent_messages=_recent_messages_snapshot_for_scope(_sim_tool_scope_key),
+                        message_snapshot_fn=lambda: _recent_messages_snapshot_for_scope(_sim_tool_scope_key),
+                        message_wait_fn=lambda after_seq, timeout: _wait_for_recent_conversation(_sim_tool_scope_key, after_seq, timeout),
                         memory_store=memory_store,
                         event=event,
                         emoji_store=_emoji_store_for_persona(_sim_persona),

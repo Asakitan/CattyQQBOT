@@ -295,6 +295,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "storage_dir": "data/fdj_self_study",
     },
     "tools": {
+        "session_messages_enabled": True,
+        "wait_messages_enabled": True,
+        "close_conversation_enabled": True,
         "profile_memory_enabled": True,
         "scope_meme_enabled": True,
         "timeline_enabled": True,
@@ -923,6 +926,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
         _set_env("CATTY_LOCAL_TRAINING_ASSISTANT_SAMPLES_PATH", resolved_assistant_samples_path)
 
     tools = _section(data, "tools")
+    _set_env("CATTY_SESSION_MESSAGES_ENABLED", tools.get("session_messages_enabled"))
+    _set_env("CATTY_WAIT_MESSAGES_ENABLED", tools.get("wait_messages_enabled"))
+    _set_env("CATTY_CLOSE_CONVERSATION_ENABLED", tools.get("close_conversation_enabled"))
     _set_env("CATTY_PROFILE_MEMORY_ENABLED", tools.get("profile_memory_enabled"))
     _set_env("CATTY_SCOPE_MEME_ENABLED", tools.get("scope_meme_enabled"))
     _set_env("CATTY_TIMELINE_ENABLED", tools.get("timeline_enabled"))
