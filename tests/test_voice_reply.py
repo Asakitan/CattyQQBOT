@@ -226,6 +226,14 @@ class ToolWiringTests(unittest.TestCase):
         self.assertEqual(len(ctx.pending_voice_deliveries), 1)
         self.assertTrue(Path(result["_staged_voice"]["path"]).is_file())
         self.assertEqual(result["line"], ctx.pending_voice_deliveries[0]["text"])
+        for banned in ("生成", "稍后", "后台"):
+            self.assertNotIn(banned, result["note"])
+
+    def test_schema_lets_model_choose_voice_for_confession(self) -> None:
+        description = self.tools.ALL_TOOL_SCHEMAS["catty_voice_say"]["function"]["description"]
+        self.assertIn("你喜欢我吗", description)
+        self.assertIn("只发语音", description)
+        self.assertNotIn("自动发出", description)
 
     def test_executor_rejects_wrong_persona_and_repeat(self) -> None:
         catty = asyncio.run(

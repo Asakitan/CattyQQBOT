@@ -256,6 +256,39 @@ def strip_tone_parenthetical(text: str) -> str:
     return "\n".join(lines).strip()
 
 
+_VOICE_NARRATION_RE = re.compile(
+    r"(?:"
+    r"语音[^。！？!?\n]{0,12}(?:生成|合成|处理|制作|渲染|转码)"
+    r"|(?:正在|仍在|还在)[^。！？!?\n]{0,6}(?:生成|合成|处理)[^。！？!?\n]{0,6}语音"
+    r"|(?:生成|合成)[^。！？!?\n]{0,6}语音[^。！？!?\n]{0,8}(?:中|稍后|马上|一会)"
+    r"|语音[^。！？!?\n]{0,10}(?:稍后|马上|一会|等会|待会|晚点|过会)[^。！？!?\n]{0,6}(?:发|送|来|到)"
+    r"|(?:稍后|马上|一会|等会|待会|晚点|过会)[^。！？!?\n]{0,6}(?:发|送|来)[^。！？!?\n]{0,6}语音"
+    r")"
+)
+
+
+def strip_voice_generation_narration(text: str) -> str:
+    """删掉“语音正在生成/稍后发出来”这类过程播报句, 让语音自己悄悄到达。
+
+    只在整句命中时删除; 未命中时原样返回。调用方只在“本轮确实排了语音”时使用,
+    避免误删普通聊天里对语音功能的正常讨论。
+    """
+    if not text or ("语音" not in text and "生成" not in text and "合成" not in text):
+        return text
+    parts = re.split(r"(?<=[。！？!?\n；;])", text)
+    kept: list[str] = []
+    for part in parts:
+        if part and _VOICE_NARRATION_RE.search(part):
+            continue
+        kept.append(part)
+    cleaned = "".join(kept)
+    if cleaned == text:
+        return text
+    cleaned = re.sub(r"[ \t]{2,}", " ", cleaned)
+    lines = [line for line in (ln.strip() for ln in cleaned.split("\n")) if line]
+    return "\n".join(lines).strip()
+
+
 def strip_fadianji_catty_tics(text: str) -> str:
     """Remove Catty's ``喵`` verbal tic from fadianji output.
 

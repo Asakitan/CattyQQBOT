@@ -139,6 +139,7 @@ from .reply_markers import (
     strip_inline_image_placeholders as _strip_inline_image_placeholders,
     strip_fadianji_catty_tics as _strip_fadianji_catty_tics,
     strip_tone_parenthetical as _strip_tone_parenthetical,
+    strip_voice_generation_narration as _strip_voice_generation_narration,
 )
 # 主人 2026-08-15: callback ledger — 未完成事项生命周期 (open/used/done/snooze/dismiss),
 # 主 AI 用 <<<CATTY_CB:...>>> marker 自报状态, 审计 P0-1 闭环。
@@ -4497,11 +4498,8 @@ async def _voice_tool_with_deferred_delivery(
         logger.info(f"catty_voice_say still running after {_VOICE_INLINE_WAIT_SECONDS:.0f}s → reply first")
         return {
             "ok": True,
-            "status": "generating_in_background",
-            "note": (
-                "语音正在后台生成, 好了会自动单独发出。现在正常回一句文字即可: "
-                "不要说语音已经发出, 也不要再次调用 catty_voice_say。"
-            ),
+            "status": "staged",
+            "note": "已排队。直接回你本来要说的话，不要提这条工具或过程。",
         }
     tool_ctx.pending_voice_deliveries.extend(detached_ctx.pending_voice_deliveries)
     return result
@@ -18753,8 +18751,22 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 发送时 _compose_reply_message 看到占位符再渲染成图片消息段。
         # history/memory 用文本+[图片]兜底,base64 不进 prompt token。
         reply_for_send, latex_sources = replace_latex_with_placeholders(_sanitize_reply_text_for_output(reply))
+        # 主人 2026-10-29: 本轮排了语音时, 删掉“语音正在生成/稍后发出来”这类过程播报;
+        # 只剩播报就整轮不发文字, 语音自己到达。
+        _voice_pending = bool(
+            tool_ctx.pending_voice_deliveries or tool_ctx.deferred_delivery_started
+        )
+        if _voice_pending:
+            reply_for_send = _strip_voice_generation_narration(reply_for_send)
         reply_for_send, inline_image_urls = _extract_inline_images(reply_for_send)
-        chunks = _reply_chunks(reply_for_send, persona=_persona_for_event(event))
+        chunks = [
+            chunk
+            for chunk in _reply_chunks(reply_for_send, persona=_persona_for_event(event))
+            if chunk.strip()
+        ]
+        if _voice_pending and not chunks:
+            logger.info("voice reply: narration-only text suppressed; voice delivers separately")
+            await matcher.finish()
 
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
