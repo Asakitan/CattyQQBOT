@@ -2085,6 +2085,8 @@ class ToolContext:
     insight_archive_fn: Callable[[str, int], Awaitable[list[dict[str, Any]]]] | None = None
     pending_closure: dict[str, Any] | None = None
     deferred_delivery_started: bool = False
+    # 本轮 catty_voice_say 合成超时改为后台发送; 与图片/文件的后台交付分开记。
+    deferred_voice_started: bool = False
     _message_read_cursor: int = field(default=0, init=False, repr=False)
 
     @property

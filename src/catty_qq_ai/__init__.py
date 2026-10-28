@@ -4390,6 +4390,10 @@ def _spawn_deferred_file_delivery(
     task.add_done_callback(_deferred_delivery_tasks.discard)
 
 
+def _voice_text_key(text: str) -> str:
+    return " ".join(str(text or "").split())
+
+
 async def _send_voice_message(
     bot: Bot,
     event: MessageEvent,
@@ -4435,6 +4439,7 @@ def _spawn_deferred_voice_delivery(
     *,
     after: asyncio.Event,
     label: str,
+    skip_texts: set[str] | None = None,
 ) -> None:
     """等本轮文字发完, 再把语音按原会话发出去; items 可以是列表或返回列表的协程。"""
 
@@ -4448,6 +4453,9 @@ def _spawn_deferred_voice_delivery(
             logger.info(f"{label}: reply still not finished, sending voice anyway")
         for item in payload:
             if isinstance(item, dict):
+                if skip_texts and _voice_text_key(str(item.get("text") or "")) in skip_texts:
+                    logger.info(f"{label}: skip clip already spoken as a voice bubble")
+                    continue
                 await _send_voice_message(bot, event, item, label=label)
 
     task = asyncio.create_task(_runner(), name=f"catty-deferred-{label}")
@@ -4476,6 +4484,7 @@ async def _voice_tool_with_deferred_delivery(
     bot: Bot,
     event: MessageEvent,
     after: asyncio.Event,
+    voiced_texts: set[str] | None = None,
 ) -> dict[str, Any]:
     """语音库秒回; 本地合成较慢时先回文字, 合成好再单独发语音。"""
     from dataclasses import replace as _dc_replace
@@ -4488,12 +4497,14 @@ async def _voice_tool_with_deferred_delivery(
         result = await asyncio.wait_for(asyncio.shield(task), timeout=_VOICE_INLINE_WAIT_SECONDS)
     except asyncio.TimeoutError:
         tool_ctx.deferred_delivery_started = True
+        tool_ctx.deferred_voice_started = True
         _spawn_deferred_voice_delivery(
             bot,
             event,
             _voice_items_from_task(task, detached_ctx),
             after=after,
             label="catty_voice_say",
+            skip_texts=voiced_texts,
         )
         logger.info(f"catty_voice_say still running after {_VOICE_INLINE_WAIT_SECONDS:.0f}s → reply first")
         return {
@@ -17796,6 +17807,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _reply_done = asyncio.Event()
         _lock_stack.callback(_reply_done.set)
         _scheduled_file_paths: set[str] = set()
+        _turn_voiced_texts: set[str] = set()
 
         def _tools_provider() -> list[dict[str, Any]]:
             from .tools import skill_tool_schemas
@@ -17831,6 +17843,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     bot=bot,
                     event=event,
                     after=_reply_done,
+                    voiced_texts=_turn_voiced_texts,
                 )
             else:
                 result = await _execute_schema_gated_tool_call(
@@ -17859,6 +17872,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 if isinstance(_staged_voice, dict):
                     # 主人 2026-10-29: 语音先发, 文字跟在后面或不跟; 不再等本轮文字结束。
                     await _send_voice_message(bot, event, _staged_voice, label=name or "voice")
+                    _turn_voiced_texts.add(
+                        _voice_text_key(str(_staged_voice.get("text") or ""))
+                    )
             if name == "catty_imagegen" and isinstance(result, dict) and result.get("error"):
                 _img_error_text = str(result.get("error") or "")
                 # 积分不足/冷却不是生成失败，保留原有提示；其余错误一律吞掉并道歉。
@@ -18772,6 +18788,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _voice_pending = bool(
             tool_ctx.pending_voice_deliveries or tool_ctx.deferred_delivery_started
         )
+        # 本轮确定会有语音(工具直发/后台排队), 剩余短气泡也一起念。
+        _voice_queued = bool(
+            tool_ctx.pending_voice_deliveries or tool_ctx.deferred_voice_started
+        ) or bool(_turn_voiced_texts)
         if _voice_pending:
             reply_for_send = _strip_voice_generation_narration(reply_for_send)
         reply_for_send, inline_image_urls = _extract_inline_images(reply_for_send)
@@ -18874,6 +18894,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             text = str(item.get("text") or "").strip()
             if not text:
                 return True
+            _turn_voiced_texts.add(_voice_text_key(text))
             _delivery_state.receipts.append(
                 ReplyDeliveryReceipt(text=_chunk_to_history(text), status="delivered")
             )
@@ -18952,14 +18973,14 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             _nsfw_img_task = None
 
-        # 主人 2026-10-29: 语音条模式 — 逐条把短气泡念成语音; only_hours 内一直用语音。
+        # 主人 2026-10-29: 语音条模式 — 整轮只要有语音, 所有短气泡都念成语音。
         _bubble_voice_items: list[dict[str, Any] | None] = [None] * len(chunks)
         try:
             from . import voice_reply as _voice_reply
 
             _voice_window = _voice_reply.only_window_active(config)
-            _auto_hit = (not _voice_pending) and _voice_reply.auto_eligible(
-                config, " ".join(reply_for_send.split())
+            _auto_hit = _voice_reply.auto_eligible(
+                config, " ".join(reply_for_send.split()), has_staged_voice=_voice_queued
             )
             # 主人 2026-10-29: NSFW(spark) 回合也发语音条 — 按概率把台词气泡念出来。
             _nsfw_hit = (
@@ -18967,11 +18988,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 and bool(chunks)
                 and _voice_reply.nsfw_bubble_draw(config)
             )
-            if (not _voice_pending) and (_voice_window or _auto_hit or _nsfw_hit) and chunks:
+            if (_voice_window or _auto_hit or _nsfw_hit or _voice_queued) and chunks:
                 _voice_name = _voice_reply.voice_name_for(config, _persona_for_event(event))
                 _limit = max(int(getattr(config, "catty_voice_bubble_max_per_turn", 3) or 3), 1)
-                if not _voice_window and not _nsfw_hit:
-                    _limit = 1
                 _budget = float(getattr(config, "catty_voice_bubble_budget_seconds", 45.0) or 45.0)
                 _deadline = time.monotonic() + _budget
                 _made = 0
@@ -18980,6 +18999,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         break
                     _spoken = _voice_reply.spoken_voice_text(config, _chunk)
                     if not _spoken:
+                        continue
+                    if _voice_text_key(_spoken) in _turn_voiced_texts:
+                        # 这句已经用语音说过, 不再补一条文字气泡。
+                        _bubble_voice_items[_index] = {"already_voiced": True}
                         continue
                     try:
                         _result = await _voice_reply.synthesize(
@@ -18998,6 +19021,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             "seconds": _result.get("seconds", 0.0),
                             "voice": _voice_name,
                         }
+                        _turn_voiced_texts.add(_voice_text_key(_spoken))
                         _made += 1
         except Exception as _auto_voice_exc:  # noqa: BLE001
             logger.warning(
@@ -19009,7 +19033,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _bubble_voice_items[_index] if _index < len(_bubble_voice_items) else None
             )
             if _voice_item is not None:
-                await _send_voice_bubble(_voice_item)
+                if not _voice_item.get("already_voiced"):
+                    await _send_voice_bubble(_voice_item)
                 if delay_seconds:
                     await asyncio.sleep(delay_seconds)
                 continue
@@ -19043,7 +19068,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             else None
         )
         if _tail_voice is not None:
-            _chunks_last_already_sent = await _send_voice_bubble(_tail_voice)
+            if _tail_voice.get("already_voiced"):
+                _chunks_last_already_sent = True
+            else:
+                _chunks_last_already_sent = await _send_voice_bubble(_tail_voice)
         if nsfw_image_segments:
             if chunks and not _chunks_last_already_sent:
                 try:
@@ -19115,7 +19143,14 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     pass
             await matcher.finish()
         if emoji_entry:
-            if chunks:
+            if _chunks_last_already_sent:
+                # 最后一句已经用语音发过, 表情单独发, 不再补一遍文字。
+                await _send_reply_message(
+                    _compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending),
+                    text="[发送表情包]",
+                )
+                await matcher.finish()
+            elif chunks:
                 if config.catty_reply_mix_emoji_with_text:
                     await _send_reply_message(
                         _compose_reply_message(

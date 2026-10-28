@@ -22,6 +22,8 @@ QQ 客户端的转文字结果不经过 OneBot；入口在 `_rule` 里用 `_extr
 
 NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`（默认 0.5）抽取，命中后最多念 `bubble_max_per_turn` 条。语音气泡用 `record` 发出，成功后把台词按“已送达”写入本轮交付回执，从而进入历史、续聊和自回复队列；发送失败则回落为文字，尾气泡失败也不会吞掉最后一句。
 
+本轮只要有语音（`catty_voice_say` 直发或后台排队 `deferred_voice_started`），所有短气泡都会转成语音，不再只念一条；同一句已用语音说过时对应气泡不再补文字，晚到的后台语音若台词与已念气泡重复也会跳过。表情包场景最后一句已语音时，表情单独发送，不重复最后一句文字。
+
 ## 本地语音候选（尚未接入运行时）
 
 `tmp/voice-training-20261028-01/` 独立 Python 3.11 环境和 GPT-SoVITS V2 副本负责双音色训练，权重、参考音与试听落在 `models/voice/{michelle,fadianji}/`。本地 CPU 生成成功；远端 CPU 推理和 QQ 语音发送未实现验证，不由 Bot 自动加载这些权重。
