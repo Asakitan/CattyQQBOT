@@ -871,6 +871,8 @@ class Config(BaseModel):
     catty_voice_bubble_budget_seconds: float = 45.0
     # NSFW(spark) 回合同样发语音条: 按这个概率把台词气泡念出来。
     catty_voice_nsfw_bubble_chance: float = 0.5
+    # 用户直接表白/撒娇(喜欢你、爱你、想你)时本轮直接发语音, 不抽概率。
+    catty_voice_affection_trigger: bool = True
     catty_voice_outbox_dir: str = "data/voice_outbox"
     catty_voice_outbox_ttl_hours: float = 24.0
     catty_voice_python: str = ""  # 空 = 当前解释器

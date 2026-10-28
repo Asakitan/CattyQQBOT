@@ -317,6 +317,7 @@
         "bubble_max_per_turn": 3,
         "bubble_budget_seconds": 45,
         "nsfw_bubble_chance": 0.5,
+        "affection_trigger": true,
         "outbox_dir": "data/voice_outbox",
         "outbox_ttl_hours": 24,
         "python": "",

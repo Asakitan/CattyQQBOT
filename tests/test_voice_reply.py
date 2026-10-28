@@ -41,6 +41,7 @@ def _config(**overrides):
         catty_voice_bubble_max_per_turn=3,
         catty_voice_bubble_budget_seconds=45.0,
         catty_voice_nsfw_bubble_chance=0.5,
+        catty_voice_affection_trigger=True,
         catty_voice_outbox_dir=str(_ROOT / "tmp" / "test-voice-outbox"),
         catty_voice_outbox_ttl_hours=24.0,
         catty_voice_worker_threads=1,
@@ -287,6 +288,25 @@ class WindowAndBubbleTests(unittest.TestCase):
         )
         self.assertFalse(
             voice.nsfw_bubble_draw(_config(catty_voice_enabled=False), roll=0.0)
+        )
+
+    def test_affection_triggers_voice(self) -> None:
+        config = _config()
+        self.assertTrue(voice.affection_voice_eligible(config, "机机我喜欢你"))
+        self.assertTrue(voice.affection_voice_eligible(config, "我爱你"))
+        self.assertTrue(voice.affection_voice_eligible(config, "好想你"))
+        self.assertTrue(voice.affection_voice_eligible(config, "要抱抱"))
+        self.assertFalse(voice.affection_voice_eligible(config, "我不喜欢你"))
+        self.assertFalse(voice.affection_voice_eligible(config, "别爱我"))
+        self.assertFalse(voice.affection_voice_eligible(config, "我喜欢这个游戏"))
+        self.assertFalse(voice.affection_voice_eligible(config, ""))
+        self.assertFalse(
+            voice.affection_voice_eligible(
+                _config(catty_voice_affection_trigger=False), "我喜欢你"
+            )
+        )
+        self.assertFalse(
+            voice.affection_voice_eligible(_config(catty_voice_enabled=False), "我喜欢你")
         )
 
 

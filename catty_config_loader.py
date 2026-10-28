@@ -1025,6 +1025,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_VOICE_BUBBLE_MAX_PER_TURN", voice.get("bubble_max_per_turn"))
     _set_env("CATTY_VOICE_BUBBLE_BUDGET_SECONDS", voice.get("bubble_budget_seconds"))
     _set_env("CATTY_VOICE_NSFW_BUBBLE_CHANCE", voice.get("nsfw_bubble_chance"))
+    _set_env("CATTY_VOICE_AFFECTION_TRIGGER", voice.get("affection_trigger"))
     _set_env("CATTY_VOICE_OUTBOX_TTL_HOURS", voice.get("outbox_ttl_hours"))
     _set_env("CATTY_VOICE_WORKER_THREADS", voice.get("worker_threads"))
     _set_env("CATTY_VOICE_WORKER_TIMEOUT_SECONDS", voice.get("worker_timeout_seconds"))

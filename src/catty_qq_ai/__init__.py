@@ -18988,7 +18988,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 and bool(chunks)
                 and _voice_reply.nsfw_bubble_draw(config)
             )
-            if (_voice_window or _auto_hit or _nsfw_hit or _voice_queued) and chunks:
+            # 主人 2026-10-29: 用户直接表白/撒娇也直接触发语音, 不抽概率。
+            _affection_hit = bool(chunks) and _voice_reply.affection_voice_eligible(
+                config, incoming.text
+            )
+            if (
+                _voice_window or _auto_hit or _nsfw_hit or _voice_queued or _affection_hit
+            ) and chunks:
                 _voice_name = _voice_reply.voice_name_for(config, _persona_for_event(event))
                 _limit = max(int(getattr(config, "catty_voice_bubble_max_per_turn", 3) or 3), 1)
                 _budget = float(getattr(config, "catty_voice_bubble_budget_seconds", 45.0) or 45.0)

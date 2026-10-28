@@ -319,6 +319,26 @@ def nsfw_bubble_draw(config: Any, roll: float | None = None) -> bool:
     return draw < min(max(chance, 0.0), 1.0)
 
 
+# 用户直接对 bot 表白/撒娇时不必抽概率, 这一轮直接发语音。
+_AFFECTION_RE = re.compile(
+    r"(?<![不没别])(?:喜欢|爱)(?:你|您|机机|猫猫|笨猫|猫娘)"
+    r"|想你(?:了|啦)?"
+    r"|(?:亲亲|抱抱|贴贴)(?:你)?"
+)
+
+
+def affection_voice_eligible(config: Any, user_text: str) -> bool:
+    """用户这句话在表达爱意/撒娇 → 直接触发语音条, 不走概率。"""
+    if not voice_enabled(config):
+        return False
+    if not _as_bool(getattr(config, "catty_voice_affection_trigger", True), True):
+        return False
+    text = " ".join(str(user_text or "").split())
+    if not text:
+        return False
+    return bool(_AFFECTION_RE.search(text))
+
+
 def _as_bool(value: Any, default: bool = False) -> bool:
     if isinstance(value, bool):
         return value
