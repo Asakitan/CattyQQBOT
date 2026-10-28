@@ -2,7 +2,7 @@ import html
 import logging
 import random
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 
@@ -195,6 +195,9 @@ class ExtractedMessage:
     needs_filter: bool
     opportunistic: bool = False
     has_expression: bool = False
+    has_voice: bool = False
+    # 原始 record 段 data (url/file/file_id/duration); 转写在 __init__ 里异步补上。
+    voice_segments: list[dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass(slots=True)
@@ -319,6 +322,20 @@ def extract_expression_notes(event: MessageEvent) -> list[str]:
 
 def extract_image_urls(event: MessageEvent) -> list[str]:
     return [url for url, _key in extract_images(event)]
+
+
+def extract_voice_segments(event: MessageEvent) -> list[dict[str, Any]]:
+    """收集 record(语音) 段的原始 data; 转写由调用方异步做, 这里只做纯解析。"""
+    segments: list[dict[str, Any]] = []
+    for segment in event.message:
+        if segment.type != "record":
+            continue
+        data = {str(k): v for k, v in dict(segment.data).items()}
+        if any(str(data.get(k) or "").strip() for k in ("url", "file", "file_id")):
+            segments.append(data)
+        if len(segments) >= 2:
+            break
+    return segments
 
 
 def _image_cache_key(segment_type: str, data: dict[str, Any], url: str) -> str:
@@ -931,11 +948,16 @@ def extract_incoming_message(
     image_urls = [url for url, _key in images]
     image_keys = [key for _url, key in images]
     has_image = bool(image_urls)
+    voice_segments = extract_voice_segments(event)
+    has_voice = bool(voice_segments)
     expression_notes = extract_expression_notes(event)
     has_expression = bool(expression_notes or _UNICODE_EMOJI_RE.search(text))
     text_without_mention, textual_mention = _strip_textual_mention(text, config.catty_trigger_prefixes)
     mentioned = _mentioned_self(self_id, event) or textual_mention
-    if not text and not has_image and not has_expression and not mentioned and not replied_to_self:
+    if (
+        not text and not has_image and not has_expression
+        and not has_voice and not mentioned and not replied_to_self
+    ):
         return None
 
     text_without_prefix, used_prefix = _strip_prefix(text_without_mention, config.catty_trigger_prefixes)
@@ -971,6 +993,8 @@ def extract_incoming_message(
         final_text = "请看这张图片并自然回应。"
     if not final_text and has_expression:
         final_text = "对方发了表情，请结合上下文自然回应。"
+    if not final_text and has_voice:
+        final_text = "对方发来一条语音，请自然回应。"
     if not final_text and replied_to_self:
         final_text = "群友回复了你的消息但没有附加文字，请自然开口回应。"
     if not final_text and mentioned:
@@ -1011,6 +1035,8 @@ def extract_incoming_message(
         needs_filter=needs_filter,
         opportunistic=opportunistic,
         has_expression=has_expression,
+        has_voice=has_voice,
+        voice_segments=voice_segments,
     )
 
 

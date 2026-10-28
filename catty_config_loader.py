@@ -343,6 +343,15 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "bert_dir": "",
         "hubert_dir": "",
     },
+    "voice_stt": {
+        "enabled": True,
+        "python": "",
+        "model": "",
+        "dir": "data/voice_inbox",
+        "timeout_seconds": 60,
+        "max_bytes": 8388608,
+        "language": "zh",
+    },
     "code_sandbox": {
         "enabled": True,
         "dir": "data/python_sandbox",
@@ -1026,6 +1035,23 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
         ("hubert_dir", "CATTY_VOICE_HUBERT_DIR"),
     ):
         raw_path = str(voice.get(section_key) or "").strip()
+        if raw_path:
+            resolved = Path(raw_path).expanduser()
+            if not resolved.is_absolute():
+                resolved = base_dir / resolved
+            _set_env(env_name, resolved)
+
+    voice_stt = _section(data, "voice_stt")
+    _set_env("CATTY_VOICE_STT_ENABLED", voice_stt.get("enabled"))
+    _set_env("CATTY_VOICE_STT_TIMEOUT_SECONDS", voice_stt.get("timeout_seconds"))
+    _set_env("CATTY_VOICE_STT_MAX_BYTES", voice_stt.get("max_bytes"))
+    _set_env("CATTY_VOICE_STT_LANGUAGE", voice_stt.get("language"))
+    for section_key, env_name in (
+        ("python", "CATTY_VOICE_STT_PYTHON"),
+        ("model", "CATTY_VOICE_STT_MODEL"),
+        ("dir", "CATTY_VOICE_STT_DIR"),
+    ):
+        raw_path = str(voice_stt.get(section_key) or "").strip()
         if raw_path:
             resolved = Path(raw_path).expanduser()
             if not resolved.is_absolute():

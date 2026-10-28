@@ -2,7 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
-| `voice_reply.py` / `voice_worker.py` / `tools.py` / `__init__.py` / `config.py` / `data/voice_bank/` | 调情短语音：人格→音色映射、双语音库、可选 GPT-SoVITS 子进程、冷却与主人例外 → `docs/voice-candidates.md`、`docs/architecture.md` | 已部署（含远端 worker 与两套模型）；远端 16+22 项通过，真实 QQ 播放未测 |
+| `voice_reply.py` / `voice_worker.py` / `voice_stt.py` / `voice_stt_worker.py` / `tools.py` / `__init__.py` / `config.py` / `data/voice_bank/` | 调情短语音（人格→音色、双语音库、可选 TTS 子进程）+ 语音消息转写（record→faster-whisper） → `docs/voice-candidates.md`、`docs/architecture.md` | 已部署（含远端 worker 与转写）；远端 6+17+22+22 项通过，真实 QQ 播放/语音编码未测 |
 | `tmp/voice-training-20261028-01/` / `tmp/voice-quality-20261028-01/{phrase_ab,whole_refine,acoustic_ab}.py` | 双音色权重与等响度试听 → `models/voice/`、`docs/voice-candidates.md` | 用户首选文件02的4轮候选，selection.json已记录；端到端多句待验，未替换或部署 |
 | `tools.py` / `__init__.py` / `catty_sim_chat.py` | 当前会话消息、水位、短等待与自然收尾 → `docs/tool-contracts.md`、`docs/architecture.md` | 已部署并合入；远端哈希一致 |
 | `insight_memory.py` / `purpose_ledger.py` / `fdj_proactive_runtime.py` / `data_backup.py` | 会话/人格隔离的活跃记忆、完整档及目标证据回执 → `docs/persona-runtime.md`、`docs/fadianji-proactive.md` | 已部署并合入；远端哈希一致 |
@@ -52,6 +52,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-29 | 语音消息转文字：record 段取音频 → 独立 faster-whisper 子进程 → `【语音转写】` 并回消息；纯语音不再丢、失败不编造 | 本地 6 项转写测试通过；远端 6/17/22/22 项通过，py_compile 0；真实片段 4.4s/3.4s 正确；00:11:26 加载、00:11:30 重连 |
 | 2026-10-29 | 语音改为先发语音、文字后跟或不跟；慢合成才在文字后补发 | 本地语音 17/标记 22/工具 22 通过；远端同三组通过，三文件哈希一致，23:57:25 加载、23:57:30 重连 |
 | 2026-10-29 | 语音过程播报出站过滤（只剩播报则整轮无文字）；回执改中性措辞；表白试探由 schema 引导模型用语音回答 | 本地标记 22/语音 17/工具 22 通过；远端同三组通过（22/17/22），5 文件哈希一致，23:42:04 重启加载 |
 | 2026-10-29 | 语音工具改为所有人格暴露、默认米雪儿、机机覆盖为 fadianji；补齐两套语音库、远端权重/配置/独立 venv 与 worker 实测；G2PW 分片合并上线 | 本地 16 项语音、22 项工具通过；远端 16+22 项通过；16 应用/模型 + 5 框架文件哈希一致；G2PW 启用后合成 3.27–3.40s/3.96–4.72s，峰值 3961MiB，23:06:33 加载、23:06:38 重连 |

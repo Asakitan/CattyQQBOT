@@ -14,6 +14,12 @@
 
 `voice.backend=worker` 时由独立 GPT-SoVITS 子进程念模型自己写的短句，按 `voice.profiles.<音色>` 取 gpt/sovits/参考音；启动握手、240 秒超时、4200MiB 内存门槛、空闲 180 秒卸载、关闭回收，未配置或失败自动退回语音库。切换音色会先收掉旧 worker 再判断内存，避免两个模型同时驻留。
 
+## 语音消息转文字（已部署）
+
+QQ 客户端的语音转文字结果不会通过 OneBot 下发；bot 自己取音频后转写。`message_utils.extract_voice_segments` 收集 `record` 段，`voice_stt.transcribe_event` 依次尝试：`url` 下载 → 本地 `file` 路径 → `get_record`（`out_format=wav`）。取到字节后按魔数嗅探格式，写入 `data/voice_inbox/`，再调用 `voice_stt_worker.py`（独立进程，faster-whisper 1.2.1 + ctranslate2 4.8.4 + PyAV 19，模型 `tmp/voice-training-20261028-01/faster-whisper-small`）。
+
+解码由 worker 自己用 PyAV 重采样到 16k 单声道（faster-whisper 1.2 的 `av.open(metadata_errors=…)` 与 av 19 不兼容）。成功时把 `【语音转写】…` 并回文本与历史，纯语音消息也能进入主模型；失败只写“未能识别内容”。SILK 直接跳过不喂给 whisper；相同音频按 SHA-1 缓存 10 分钟。远端两段真实语音（4.4 秒、3.4 秒）返回正确文本；真实 QQ 语音的编码格式与 `get_record` 行为未实测。
+
 ## 远端合成环境（2026-10-29 部署）
 
 - 独立 venv：`D:/CattyQQAI/tmp/voice-runtime/.venv`（Python 3.14.5，torch 2.11.0+cpu、torchaudio 2.11.0+cpu、transformers 4.57.6、librosa 1.0.0、numba 0.68.1、onnxruntime 1.31.1、peft 0.21.2、pytorch-lightning 2.6.6、matplotlib、fast-langdetect、split-lang、resampy、soundfile）。

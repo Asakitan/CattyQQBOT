@@ -1,5 +1,10 @@
 # Catty 当前状态
+## 2026-10-29 · 语音消息转文字（已部署）
 
+- QQ 客户端的“语音转文字”只存在于客户端内部，OneBot/NapCat 不会把转写结果发给 bot；这里改为自己取音频再转写：优先用 record 段的 `url` 下载，其次本地路径，最后回落 `get_record`（wav）。纯语音消息不再被“无文字无图”提前丢掉。
+- 转写放在独立子进程：`voice_stt_worker.py` + faster-whisper 1.2.1 + ctranslate2 4.8.4（py3.14 wheel）+ PyAV 19，模型用已部署的 `tmp/voice-training-20261028-01/faster-whisper-small`。解码由自己用 PyAV 完成（faster-whisper 1.2 的 `av.open(metadata_errors=…)` 与本机 av 19 不兼容）。结果以 `【语音转写】…` 并回消息给主模型；识别失败只写“未能识别内容”，不编造。同一段音频按 SHA-1 缓存 10 分钟。
+- 识别不了的格式（如 QQ 原生 SILK）直接放弃并记空，不喂给 whisper；真实 QQ 语音消息的格式与 `get_record` 行为尚未实测。远端两段真实语音验证：4.4 秒、3.4 秒各返回正确文本。
+- 远端 `test_voice_stt` 6 项、`test_voice_reply` 17 项、`test_reply_markers` 22 项、`test_tool_message_scan` 22 项通过；py_compile 退出 0，bot 00:11:26 加载、00:11:30 重连（远端时钟）。`config.json` 新增 `voice_stt` 段（python 指向语音 venv、模型指 faster-whisper-small），备份 `config.json.bak_stt_*`。
 ## 2026-10-29 · 调情短音音（已部署，含远端 worker）
 
 - 新工具 `catty_voice_say`：模型自己判断对方在调情/暧昧时偶尔回一句 2-4 秒音音，字字回复发完后单独补发；本轮最多 1 条。**所有人格都暴露该工具**，音色按人格解析：默认米雪儿（`voice.default=michelle`），`voice.persona_voices` 可覆盖，机机用 `fadianji`。

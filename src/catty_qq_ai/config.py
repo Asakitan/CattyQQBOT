@@ -872,6 +872,14 @@ class Config(BaseModel):
     catty_voice_repo_dir: str = ""  # GPT-SoVITS 源码根
     catty_voice_bert_dir: str = ""
     catty_voice_hubert_dir: str = ""
+    # 语音消息转文字 (2026-10-29): 独立 faster-whisper 子进程, 失败不编造内容。
+    catty_voice_stt_enabled: bool = True
+    catty_voice_stt_python: str = ""  # 空 = 当前解释器
+    catty_voice_stt_model: str = ""  # CT2 模型目录, 空 = 不转写
+    catty_voice_stt_dir: str = "data/voice_inbox"
+    catty_voice_stt_timeout_seconds: float = 60.0
+    catty_voice_stt_max_bytes: int = 8 * 1024 * 1024
+    catty_voice_stt_language: str = "zh"
     # Python 沙箱 (2026-10-26): 写/跑代码 + wheel 安装, 全部限制在 data/python_sandbox
     catty_code_sandbox_enabled: bool = True
     catty_code_sandbox_dir: str = "data/python_sandbox"

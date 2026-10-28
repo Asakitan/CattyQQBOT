@@ -4980,6 +4980,27 @@ def _extract_trigger_incoming(
     return extract_incoming_message(self_id, event, extraction_config, replied_to_self=replied_to_self)
 
 
+async def _extract_incoming_with_voice(bot: Bot, event: MessageEvent, **kwargs: Any):
+    """抽取消息; 有语音段时先转写, 把结果并回 incoming 供准入与主模型使用。"""
+    incoming = _extract_trigger_incoming(str(bot.self_id), event, **kwargs)
+    if incoming is None or not getattr(incoming, "has_voice", False):
+        return incoming
+    if not bool(getattr(config, "catty_voice_stt_enabled", True)):
+        return incoming
+    try:
+        from . import voice_stt
+
+        text = await voice_stt.transcribe_event(config, bot, incoming.voice_segments)
+        block = voice_stt.format_block(text)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"voice stt failed: {type(exc).__name__}: {exc}")
+        block = "【语音】对方发来一条语音（未能识别内容）。"
+    placeholder = "对方发来一条语音，请自然回应。"
+    incoming.text = block if incoming.text.strip() in {"", placeholder} else f"{block}\n{incoming.text}"
+    incoming.history_content = f"{incoming.history_content}\n{block}"
+    return incoming
+
+
 def _direct_reply_required(event: MessageEvent, incoming: ExtractedMessage) -> bool:
     if isinstance(event, PrivateMessageEvent):
         return True
@@ -11733,8 +11754,8 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     reply_sources = await _resolve_reply_sources(bot, event)
     replied_to_self = any(source.is_current_bot for source in reply_sources)
     recent_bot_continuation = _recent_bot_prompted_user(event)
-    incoming = _extract_trigger_incoming(
-        str(bot.self_id), event, replied_to_self=replied_to_self, continuation=recent_bot_continuation,
+    incoming = await _extract_incoming_with_voice(
+        bot, event, replied_to_self=replied_to_self, continuation=recent_bot_continuation,
     )
     if incoming is None:
         return False

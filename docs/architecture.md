@@ -1,5 +1,9 @@
 # Catty 工具与回复交付架构
 
+## 语音消息转文字（已部署）
+
+QQ 客户端的转文字结果不经过 OneBot；入口在 `_rule` 里用 `_extract_incoming_with_voice` 抽取消息，发现 `record` 段就调用 `voice_stt.transcribe_event`：`url` 下载 / 本地路径 / `get_record` 三选一取音频，嗅探格式后写入 `data/voice_inbox/`，再由独立 `voice_stt_worker.py` 用 faster-whisper（CT2 int8）转写，PyAV 自行解码到 16k 单声道。结果以 `【语音转写】` 并回 `incoming.text/history_content`，纯语音消息因此能进入准入和主模型；失败只给“未能识别内容”，SILK 直接跳过，同一音频缓存 10 分钟。
+
 ## 调情短语音（已部署）
 
 `catty_voice_say` 与其它工具一样由模型自行决定何时调用，schema 明确限定“对方在调情/暧昧/撒娇时偶尔一条”，普通问答不适用。工具对所有人格暴露，音色按人格解析：`voice.default`（默认 `michelle`）兜底，`voice.persona_voices` 覆盖（默认把 `fadianji` 指到机机音色）。执行器再走 `voice_reply.reserve_slot`：每会话 5 分钟冷却 + 概率门（默认 0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。

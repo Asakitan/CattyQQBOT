@@ -322,6 +322,15 @@
         "bert_dir": "",
         "hubert_dir": ""
     },
+    "voice_stt": {
+        "enabled": true,
+        "python": "",
+        "model": "",
+        "dir": "data/voice_inbox",
+        "timeout_seconds": 60,
+        "max_bytes": 8388608,
+        "language": "zh"
+    },
     "code_sandbox": {
         "enabled": true,
         "dir": "data/python_sandbox",
