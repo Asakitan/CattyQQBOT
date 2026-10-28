@@ -54,12 +54,15 @@ def persona_name(persona: Any) -> str:
     return str(getattr(persona, "name", "") or "").strip()
 
 
-def persona_allowed(config: Any, persona: Any) -> bool:
-    allowed = getattr(config, "catty_voice_personas", None)
-    names = {str(item).strip() for item in (allowed or []) if str(item).strip()}
-    if not names:
-        return False
-    return persona_name(persona) in names
+def voice_name_for(config: Any, persona: Any) -> str:
+    """人格 → 音色: 默认音色给所有未单独指定的人格, 指定表可覆盖 (如机机用 fadianji)。"""
+    mapping = getattr(config, "catty_voice_persona_voices", None) or {}
+    name = persona_name(persona)
+    if name and isinstance(mapping, dict):
+        chosen = str(mapping.get(name) or "").strip()
+        if chosen:
+            return chosen
+    return str(getattr(config, "catty_voice_default", "michelle") or "michelle").strip() or "michelle"
 
 
 def backend(config: Any) -> str:
@@ -67,16 +70,11 @@ def backend(config: Any) -> str:
     return value if value in {"bank", "worker"} else "bank"
 
 
-def bank_dir(config: Any, persona: Any = None) -> Path:
+def bank_dir(config: Any, persona: Any = None, voice: str = "") -> Path:
     raw = str(getattr(config, "catty_voice_bank_dir", "") or "").strip()
     base = Path(raw).expanduser() if raw else _DEFAULT_BANK_DIR
-    name = persona_name(persona)
-    if name and (base / name).is_dir():
-        return base / name
-    default_persona = base / "fadianji"
-    if name and not (base / name).is_dir() and default_persona.is_dir():
-        return base
-    return base
+    name = voice or voice_name_for(config, persona)
+    return base / name if name else base
 
 
 def _load_manifest(directory: Path) -> list[VoiceClip]:
@@ -109,8 +107,8 @@ def _load_manifest(directory: Path) -> list[VoiceClip]:
     return clips
 
 
-def load_bank(config: Any, persona: Any = None, *, verify: bool = False) -> list[VoiceClip]:
-    directory = bank_dir(config, persona)
+def load_bank(config: Any, persona: Any = None, *, verify: bool = False, voice: str = "") -> list[VoiceClip]:
+    directory = bank_dir(config, persona, voice)
     manifest = directory / "bank.json"
     if not manifest.is_file():
         return []
@@ -127,9 +125,7 @@ def load_bank(config: Any, persona: Any = None, *, verify: bool = False) -> list
 def tool_available(config: Any, persona: Any = None) -> bool:
     if not voice_enabled(config):
         return False
-    if persona is not None and not persona_allowed(config, persona):
-        return False
-    if backend(config) == "worker" and worker_configured(config):
+    if backend(config) == "worker" and worker_configured(config, voice_name_for(config, persona)):
         return True
     return bool(load_bank(config, persona))
 
@@ -230,15 +226,28 @@ def _worker_setting(config: Any, field: str, default: str = "") -> str:
     return str(getattr(config, field, default) or default).strip()
 
 
-def worker_configured(config: Any) -> bool:
-    required = (
-        "catty_voice_repo_dir",
-        "catty_voice_gpt_path",
-        "catty_voice_sovits_path",
-        "catty_voice_reference_audio",
-        "catty_voice_reference_text",
-    )
-    return all(_worker_setting(config, field) for field in required)
+def voice_profile(config: Any, voice: str) -> dict[str, str]:
+    """取某音色的 worker 配置 (gpt/sovits/reference); 缺项返回空 dict。"""
+    profiles = getattr(config, "catty_voice_profiles", None) or {}
+    if not isinstance(profiles, dict):
+        return {}
+    raw = profiles.get(voice)
+    if not isinstance(raw, dict):
+        return {}
+    fields = {}
+    for key in ("gpt_path", "sovits_path", "reference_audio", "reference_text"):
+        value = str(raw.get(key) or "").strip()
+        if value:
+            fields[key] = value
+    return fields
+
+
+def worker_configured(config: Any, voice: str = "") -> bool:
+    name = voice or str(getattr(config, "catty_voice_default", "michelle") or "michelle")
+    profile = voice_profile(config, name)
+    if not _worker_setting(config, "catty_voice_repo_dir"):
+        return False
+    return all(profile.get(key) for key in ("gpt_path", "sovits_path", "reference_audio", "reference_text"))
 
 
 def outbox_dir(config: Any) -> Path:
@@ -312,34 +321,37 @@ def _lock() -> asyncio.Lock:
     return _WORKER_LOCK
 
 
-def _worker_signature(config: Any) -> str:
+def _worker_signature(config: Any, voice: str) -> str:
+    profile = voice_profile(config, voice)
     parts = [
         _worker_setting(config, "catty_voice_python") or sys.executable,
         str(worker_script(config)),
         _worker_setting(config, "catty_voice_repo_dir"),
-        _worker_setting(config, "catty_voice_gpt_path"),
-        _worker_setting(config, "catty_voice_sovits_path"),
         _worker_setting(config, "catty_voice_bert_dir"),
         _worker_setting(config, "catty_voice_hubert_dir"),
-        _worker_setting(config, "catty_voice_reference_audio"),
-        _worker_setting(config, "catty_voice_reference_text"),
+        voice,
+        profile.get("gpt_path", ""),
+        profile.get("sovits_path", ""),
+        profile.get("reference_audio", ""),
+        profile.get("reference_text", ""),
         str(int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2))),
     ]
     return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()[:16]
 
 
-def _worker_config_path(config: Any) -> Path:
+def _worker_config_path(config: Any, voice: str) -> Path:
     directory = outbox_dir(config)
     directory.mkdir(parents=True, exist_ok=True)
-    path = directory / f"_worker-{_worker_signature(config)}.json"
+    profile = voice_profile(config, voice)
+    path = directory / f"_worker-{_worker_signature(config, voice)}.json"
     payload = {
         "repo_dir": _worker_setting(config, "catty_voice_repo_dir"),
-        "gpt_path": _worker_setting(config, "catty_voice_gpt_path"),
-        "sovits_path": _worker_setting(config, "catty_voice_sovits_path"),
+        "gpt_path": profile.get("gpt_path", ""),
+        "sovits_path": profile.get("sovits_path", ""),
         "bert_dir": _worker_setting(config, "catty_voice_bert_dir"),
         "hubert_dir": _worker_setting(config, "catty_voice_hubert_dir"),
-        "reference_audio": _worker_setting(config, "catty_voice_reference_audio"),
-        "reference_text": _worker_setting(config, "catty_voice_reference_text"),
+        "reference_audio": profile.get("reference_audio", ""),
+        "reference_text": profile.get("reference_text", ""),
         "threads": int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2)),
     }
     encoded = json.dumps(payload, ensure_ascii=False, indent=2)
@@ -402,9 +414,9 @@ async def _schedule_idle_unload(config: Any) -> None:
     worker.idle_task = asyncio.create_task(_unload(), name="catty-voice-idle-unload")
 
 
-async def _ensure_worker(config: Any) -> _Worker:
+async def _ensure_worker(config: Any, voice: str) -> _Worker:
     global _WORKER
-    signature = _worker_signature(config)
+    signature = _worker_signature(config, voice)
     worker = _WORKER
     if worker is not None and worker.signature == signature and worker.process.returncode is None:
         return worker
@@ -413,7 +425,7 @@ async def _ensure_worker(config: Any) -> _Worker:
     if not script.is_file():
         raise FileNotFoundError(f"voice worker script missing: {script}")
     executable = _worker_setting(config, "catty_voice_python") or sys.executable
-    config_path = _worker_config_path(config)
+    config_path = _worker_config_path(config, voice)
     log_path = outbox_dir(config) / "_worker.log"
     log_handle = log_path.open("ab")
     process = await asyncio.create_subprocess_exec(
@@ -454,9 +466,10 @@ async def _ensure_worker(config: Any) -> _Worker:
     return worker
 
 
-async def synthesize(config: Any, text: str, scope: str = "") -> dict[str, Any]:
-    """用独立 worker 合成一句话; 失败返回 ok=False, 由调用方决定是否退回语音库。"""
+async def synthesize(config: Any, text: str, scope: str = "", voice: str = "") -> dict[str, Any]:
+    """用独立 worker 按指定音色合成一句话; 失败返回 ok=False, 调用方决定是否退回语音库。"""
     clean = " ".join(str(text or "").split())
+    voice = voice or str(getattr(config, "catty_voice_default", "michelle") or "michelle")
     try:
         max_chars = int(getattr(config, "catty_voice_max_chars", 40) or 40)
     except (TypeError, ValueError):
@@ -470,16 +483,28 @@ async def synthesize(config: Any, text: str, scope: str = "") -> dict[str, Any]:
             "error": f"语音文本超过上限 ({len(clean)} > {max_chars} 字)",
             "code": "text_too_long",
         }
-    if not worker_configured(config):
+    if not worker_configured(config, voice):
         return {"ok": False, "error": "本地语音合成未配置", "code": "not_configured"}
     min_free = int(_as_float(getattr(config, "catty_voice_min_free_mb", 4800), 4800))
-    free = _free_memory_mb()
-    if free is not None and min_free > 0 and free < min_free:
-        return {
-            "ok": False,
-            "error": f"内存不足 ({free} MiB < {min_free} MiB), 这轮不发语音",
-            "code": "low_memory",
-        }
+    signature = _worker_signature(config, voice)
+    live = _WORKER is not None and _WORKER.signature == signature and _WORKER.process.returncode is None
+    if not live:
+        # 换音色时先把旧 worker 收掉再判断内存, 避免两个模型同时占内存。
+        if _WORKER is not None:
+            async with _lock():
+                await _stop_worker()
+        free = _free_memory_mb()
+        for _ in range(3):
+            if free is None or min_free <= 0 or free >= min_free:
+                break
+            await asyncio.sleep(0.5)
+            free = _free_memory_mb()
+        if free is not None and min_free > 0 and free < min_free:
+            return {
+                "ok": False,
+                "error": f"内存不足 ({free} MiB < {min_free} MiB), 这轮不发语音",
+                "code": "low_memory",
+            }
     timeout = max(_as_float(getattr(config, "catty_voice_worker_timeout_seconds", 120.0), 120.0), 5.0)
     directory = outbox_dir(config)
     directory.mkdir(parents=True, exist_ok=True)
@@ -488,7 +513,7 @@ async def synthesize(config: Any, text: str, scope: str = "") -> dict[str, Any]:
         output = output.with_name(f"{output.stem}-{int(time.time() * 1000) % 1000}.wav")
     async with _lock():
         try:
-            worker = await _ensure_worker(config)
+            worker = await _ensure_worker(config, voice)
         except Exception as exc:  # noqa: BLE001
             return {"ok": False, "error": f"语音进程启动失败: {type(exc).__name__}: {exc}", "code": "spawn_failed"}
         request = json.dumps({"text": clean, "out": str(output)}, ensure_ascii=False) + "\n"

@@ -1,11 +1,12 @@
 # Catty 当前状态
 
-## 2026-10-29 · 调情短语音（已部署）
+## 2026-10-29 · 调情短语音（已部署，含远端 worker）
 
-- 新工具 `catty_voice_say`：模型自己判断对方在调情/暧昧时偶尔回一句 2-4 秒语音，文字回复发完后单独补发；本轮最多 1 条。
-- 默认后端是随源码部署的离线语音库 `src/catty_qq_ai/data/voice_bank/fadianji/`（9 句，害羞/撩/温柔/开心/傲娇），用主人选定的 4 轮声学权重与参考音生成，逐句自动转写存证。另实现可选 `worker` 后端（独立 GPT-SoVITS 子进程，空闲卸载、内存门槛、启动握手），本机真实端到端合成通过，远端未配置故默认不启用。
-- 每会话冷却 5 分钟；主人（`catty_owner_qq`）不受冷却和概率限制，但仍只发 1 条。仅 `voice.personas` 内的人格（默认机机）暴露该工具，语音发送失败只记日志、不重复发。
-- 本地 `test_voice_reply` 15 项、工具扫描 22 项、人格 26 项、配置 16+17 项、quick_ack 14 项通过；插件加载通过。15 个源码/语音库文件与 4 个配置/测试文件已 push_zip 到 `D:/CattyQQAI`，双端 SHA-256 一致，远端 Python 3.14.5 语法通过、语音 15 项与工具扫描 22 项通过；守护进程 21:23:51 与 21:24:05（远端时钟）两次加载插件、21:24:13 OneBot 重连。真实 QQ 语音播放与真机听感未验证。
+- 新工具 `catty_voice_say`：模型自己判断对方在调情/暧昧时偶尔回一句 2-4 秒语音，文字回复发完后单独补发；本轮最多 1 条。**所有人格都暴露该工具**，音色按人格解析：默认米雪儿（`voice.default=michelle`），`voice.persona_voices` 可覆盖，机机用 `fadianji`。
+- 两套离线语音库随源码部署：`data/voice_bank/michelle/` 与 `.../fadianji/` 各 9 句（害羞/撩/温柔/开心/傲娇），分别用对应训练权重与参考音离线生成，逐句有自动转写记录。
+- `worker` 后端已在远端真正跑通：独立 venv（Python 3.14.5 + torch/torchaudio 2.11.0+cpu + transformers 4.57.6 + librosa 1.0.0 等）、BERT/HuBERT 以 fp16 放在 `tmp/voice-runtime/pretrained/`、两套权重与参考音放在 `models/voice/`，`config.json` 已写入 `voice` 段（profiles 两套、backend=worker、5 分钟冷却、每轮 1 条、内存门槛 4200MiB、空闲卸载 180s，备份 `config.json.bak_voice_20261028-224709`）。远端实测合成：米雪儿 3.31 秒、机机 3.07 秒。
+- 依赖适配：G2PW 模型（605MB）未部署，框架在缺模型时回退 pypinyin 常规读音（`is_g2pw=0`）；`jieba_fast` 无 Python 3.14 轮子，回退纯 Python `jieba`；torchaudio 2.11 的 `load` 需要 torchcodec，参考音改由 soundfile 读取。远端 `test_voice_reply` 16 项、工具扫描 22 项通过，16 个应用/模型文件与 5 个框架文件哈希一致；bot 23:06:33 加载、23:06:38 重连（远端时钟），smoke 后可用内存回到 5.83 GiB。
+- 真实 QQ 语音播放与真机听感仍未验证；G2PW 只上传了第一段（335MB）到 `tmp/voice-runtime/g2pw-parts/`，需要更准的多音字时再补第二段并合并。
 
 ## 2026-10-29 · 双音色与发电机局部电音试听（本地候选）
 

@@ -88,6 +88,10 @@ def main() -> int:
         version="v2",
         bert_path=str(config["bert_dir"]),
     )
+    # 没有 G2PW 模型时回退 pypinyin 常规读音, 不阻断合成。
+    g2pw_dir = repo / "GPT_SoVITS" / "text" / "G2PWModel"
+    if not (g2pw_dir / "g2pW.onnx").is_file():
+        os.environ.setdefault("is_g2pw", "0")
     os.chdir(repo)
     sys.path[:0] = [str(repo), str(repo / "GPT_SoVITS")]
     try:

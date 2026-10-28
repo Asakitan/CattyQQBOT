@@ -1408,6 +1408,7 @@ _VOICE_SAY_SCHEMA: dict[str, Any] = {
             "语音在本轮文字回复发完后自动发出，所以你仍要正常写文字。"
             "同一会话有冷却和概率限制，偶尔一条就够；返回 not_now/冷却时不要重试，直接用文字回复。"
             "mood 决定语气；text 可留空，留空时用现成录音并返回实际台词。"
+            "音色按当前人格自动选择，不用指定。"
         ),
         "parameters": {
             "type": "object",
@@ -6358,13 +6359,11 @@ async def _exec_persona(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any
 
 
 async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
-    """把一句短语音加入待发送队列; 冷却/概率由 voice_reply 统一守。"""
+    """把一句短语音加入待发送队列; 音色按人格解析, 冷却/概率由 voice_reply 统一守。"""
     from . import voice_reply as voice
 
     if not voice.voice_enabled(ctx.config):
         return {"ok": False, "error": "语音回复已关闭"}
-    if not voice.persona_allowed(ctx.config, ctx.persona):
-        return {"ok": False, "error": "当前人格没有配置语音"}
     try:
         limit = int(getattr(ctx.config, "catty_voice_max_per_turn", 1) or 1)
     except (TypeError, ValueError):
@@ -6377,6 +6376,7 @@ async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
     if not allowed:
         return {"ok": False, "error": reason, "note": "这轮不要重试语音, 直接用文字回复。"}
 
+    voice_name = voice.voice_name_for(ctx.config, ctx.persona)
     item: dict[str, Any] | None = None
     requested = " ".join(str(args.get("text") or "").split())
     if voice.backend(ctx.config) == "worker":
@@ -6385,10 +6385,10 @@ async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
             clip = voice.select_clip(voice.load_bank(ctx.config, ctx.persona), mood, scope)
             text = clip.text if clip else ""
         if text:
-            result = await voice.synthesize(ctx.config, text, scope)
+            result = await voice.synthesize(ctx.config, text, scope, voice=voice_name)
             if result.get("ok"):
                 item = {"path": result["path"], "text": text, "mood": mood,
-                        "seconds": result.get("seconds", 0.0)}
+                        "seconds": result.get("seconds", 0.0), "voice": voice_name}
             else:
                 _logger.info("catty_voice_say worker fallback: %s", result.get("error"))
     if item is None:
@@ -6396,11 +6396,13 @@ async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
         if clip is None:
             return {"ok": False, "error": "没有可用的语音素材"}
         item = voice.clip_payload(clip)
+        item["voice"] = voice_name
     ctx.pending_voice_deliveries.append(item)
     return {
         "ok": True,
         "status": "staged",
         "mood": item.get("mood"),
+        "voice": item.get("voice"),
         "line": item.get("text"),
         "seconds": item.get("seconds"),
         "note": (
@@ -6770,7 +6772,7 @@ _NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
         "发一句很短的语音，只在对方正在调情、暧昧试探或撒娇时偶尔使用；"
         "普通闲聊、答疑和汇报不要用。语音在本轮文字回复发完后自动发出，"
         "同一会话有冷却和概率限制，被拒绝时直接用文字回复、不要重试。"
-        "mood 决定语气；text 可留空，留空时使用现成录音并返回实际台词。",
+        "mood 决定语气；text 可留空，留空时使用现成录音并返回实际台词；音色按人格自动选择。",
         "调情时偶尔回一句短语音；其余场景用文字",
     ),
     "catty_emoji": (

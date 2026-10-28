@@ -25,7 +25,9 @@ def _config(**overrides):
     base = dict(
         catty_voice_enabled=True,
         catty_voice_backend="bank",
-        catty_voice_personas=["fadianji"],
+        catty_voice_default="michelle",
+        catty_voice_persona_voices={"fadianji": "fadianji"},
+        catty_voice_profiles={},
         catty_voice_bank_dir="",
         catty_voice_max_chars=40,
         catty_voice_max_per_turn=1,
@@ -40,12 +42,8 @@ def _config(**overrides):
         catty_voice_python="",
         catty_voice_worker_script="",
         catty_voice_repo_dir="",
-        catty_voice_gpt_path="",
-        catty_voice_sovits_path="",
         catty_voice_bert_dir="",
         catty_voice_hubert_dir="",
-        catty_voice_reference_audio="",
-        catty_voice_reference_text="",
     )
     base.update(overrides)
     return types.SimpleNamespace(**base)
@@ -72,12 +70,26 @@ class BankTests(unittest.TestCase):
 
     def test_persona_gate(self) -> None:
         config = _config()
-        self.assertTrue(voice.persona_allowed(config, types.SimpleNamespace(name="fadianji")))
-        self.assertFalse(voice.persona_allowed(config, types.SimpleNamespace(name="catty")))
-        self.assertTrue(voice.tool_available(config, types.SimpleNamespace(name="fadianji")))
-        self.assertFalse(voice.tool_available(config, types.SimpleNamespace(name="catty")))
-        self.assertFalse(voice.tool_available(_config(catty_voice_enabled=False),
-                                             types.SimpleNamespace(name="fadianji")))
+        fadianji = types.SimpleNamespace(name="fadianji")
+        catty = types.SimpleNamespace(name="catty")
+        self.assertEqual(voice.voice_name_for(config, fadianji), "fadianji")
+        self.assertEqual(voice.voice_name_for(config, catty), "michelle")
+        self.assertEqual(voice.voice_name_for(config, None), "michelle")
+        self.assertEqual(voice.voice_name_for(_config(catty_voice_default="fadianji"), catty), "fadianji")
+        self.assertTrue(voice.tool_available(config, fadianji))
+        self.assertTrue(voice.tool_available(config, catty))
+        self.assertFalse(voice.tool_available(_config(catty_voice_enabled=False), fadianji))
+
+    def test_both_voice_banks_cover_all_moods(self) -> None:
+        config = _config()
+        for persona in ("fadianji", "catty"):
+            clips = voice.load_bank(config, types.SimpleNamespace(name=persona), verify=True)
+            self.assertGreaterEqual(len(clips), 6, persona)
+            self.assertEqual({clip.mood for clip in clips}, set(voice.MOODS), persona)
+        self.assertNotEqual(
+            voice.bank_dir(config, types.SimpleNamespace(name="fadianji")),
+            voice.bank_dir(config, types.SimpleNamespace(name="catty")),
+        )
 
     def test_mood_alias_and_selection(self) -> None:
         self.assertEqual(voice.mood_of("傲娇"), "tsundere")
@@ -151,12 +163,17 @@ class AudioTests(unittest.TestCase):
         self.assertEqual(asyncio.run(voice.synthesize(config, "在呢"))["code"], "not_configured")
 
     def test_synthesize_memory_guard(self) -> None:
+        fake = str(_BANK_DIR / "bank.json")
         config = _config(
             catty_voice_repo_dir=str(self.directory),
-            catty_voice_gpt_path=str(_BANK_DIR / "bank.json"),
-            catty_voice_sovits_path=str(_BANK_DIR / "bank.json"),
-            catty_voice_reference_audio=str(_BANK_DIR / "bank.json"),
-            catty_voice_reference_text="参考",
+            catty_voice_profiles={
+                "michelle": {
+                    "gpt_path": fake,
+                    "sovits_path": fake,
+                    "reference_audio": fake,
+                    "reference_text": "参考",
+                }
+            },
         )
         with patch.object(voice, "_free_memory_mb", return_value=100):
             result = asyncio.run(voice.synthesize(config, "在呢"))
@@ -211,10 +228,12 @@ class ToolWiringTests(unittest.TestCase):
         self.assertEqual(result["line"], ctx.pending_voice_deliveries[0]["text"])
 
     def test_executor_rejects_wrong_persona_and_repeat(self) -> None:
-        wrong = asyncio.run(
+        catty = asyncio.run(
             self.tools._exec_voice_say({"mood": "shy"}, self._ctx(_config(), persona="catty"))
         )
-        self.assertFalse(wrong["ok"])
+        self.assertTrue(catty["ok"])
+        self.assertEqual(catty["voice"], "michelle")
+        voice._COOLDOWNS.clear()
         ctx = self._ctx(_config())
         self.assertTrue(asyncio.run(self.tools._exec_voice_say({"mood": "soft"}, ctx))["ok"])
         second = asyncio.run(self.tools._exec_voice_say({"mood": "soft"}, ctx))
@@ -224,20 +243,14 @@ class ToolWiringTests(unittest.TestCase):
     def test_schema_exposure_follows_persona(self) -> None:
         config = _config(catty_tools_enabled=True, catty_tools_full_exposure=True,
                          catty_tools_lazy_schema_enabled=False, catty_tools_disabled_in_private=[])
-        names = {
-            schema["function"]["name"]
-            for schema in self.tools.available_tool_schemas(
-                config, is_private=False, persona=types.SimpleNamespace(name="fadianji")
-            )
-        }
-        self.assertIn("catty_voice_say", names)
-        hidden = {
-            schema["function"]["name"]
-            for schema in self.tools.available_tool_schemas(
-                config, is_private=False, persona=types.SimpleNamespace(name="catty")
-            )
-        }
-        self.assertNotIn("catty_voice_say", hidden)
+        for persona in ("fadianji", "catty", "custom"):
+            names = {
+                schema["function"]["name"]
+                for schema in self.tools.available_tool_schemas(
+                    config, is_private=False, persona=types.SimpleNamespace(name=persona)
+                )
+            }
+            self.assertIn("catty_voice_say", names, persona)
         disabled = {
             schema["function"]["name"]
             for schema in self.tools.available_tool_schemas(

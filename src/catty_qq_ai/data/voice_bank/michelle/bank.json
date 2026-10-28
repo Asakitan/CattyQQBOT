@@ -1,0 +1,116 @@
+{
+  "persona": "michelle",
+  "voice": "michelle",
+  "language": "zh",
+  "source": "local synthesis for deployable voice bank",
+  "gpt": "E:\\VC\\Catty\\models\\voice\\michelle\\gpt.ckpt",
+  "gpt_sha256": "17f7658d24a037f12a159af16c06922dc711949e3e396f8d470bf3f9c62afea9",
+  "sovits": "E:\\VC\\Catty\\models\\voice\\michelle\\sovits.pth",
+  "sovits_sha256": "d8b64c20f5bc79f5d98c73b3feac8b116c69ffa6acd4b0b97d7cd2b010769292",
+  "reference": "E:\\VC\\Catty\\models\\voice\\michelle\\reference.wav",
+  "reference_sha256": "abcdcfb299a24ca5363a8670ea6a773cc9a5d016e8d72050a43eb8c9497fc21e",
+  "reference_text": "对了，最近刚推出了一款双人游戏，我很想和你一起玩呢！",
+  "sample_rate": 32000,
+  "transcript_verified": "faster-whisper automatic comparison only",
+  "entries": [
+    {
+      "id": "00-shy",
+      "mood": "shy",
+      "text": "别、别这么看着我啦。",
+      "file": "00-shy.wav",
+      "seconds": 1.8,
+      "sha256": "dde367658d541c482a0951fe1f4bd9cbdd2966e96eacc648eee8f9895c794fe6",
+      "asr_text": "啊 你别这么看着我啦",
+      "asr_similarity": 0.824,
+      "seed_attempt": 2
+    },
+    {
+      "id": "01-shy",
+      "mood": "shy",
+      "text": "你这样…我会当真的。",
+      "file": "01-shy.wav",
+      "seconds": 2.368,
+      "sha256": "e5f5bec7ae4921cbeb3a9273915a2e16bfd6f1484e093ebaff7527eb9c4d0921",
+      "asr_text": "你這樣 我會當真的",
+      "asr_similarity": 1.0,
+      "seed_attempt": 0
+    },
+    {
+      "id": "02-tease",
+      "mood": "tease",
+      "text": "就这点本事还想撩我？",
+      "file": "02-tease.wav",
+      "seconds": 2.628,
+      "sha256": "fbcf709b7700d48b15d32a1e3ac826a6f204c092732296f91f7300f1944429a8",
+      "asr_text": "啊 就這點本事還想聊我",
+      "asr_similarity": 0.842,
+      "seed_attempt": 0
+    },
+    {
+      "id": "03-tease",
+      "mood": "tease",
+      "text": "心跳那么快，被我听见了哦。",
+      "file": "03-tease.wav",
+      "seconds": 3.58,
+      "sha256": "2217f963c497b4e3aa6a6317ac5a165e944be76a6c773c6b964e7228c31b9902",
+      "asr_text": "嗯 心跳那么快 被我听见了",
+      "asr_similarity": 0.909,
+      "seed_attempt": 2
+    },
+    {
+      "id": "04-soft",
+      "mood": "soft",
+      "text": "好啦，过来一点。",
+      "file": "04-soft.wav",
+      "seconds": 2.097,
+      "sha256": "52ae5f47a1500c9e1d0da63a6d0d8e178fb3a5f337f263690c41ff0adbba220d",
+      "asr_text": "好啦,过来一点",
+      "asr_similarity": 1.0,
+      "seed_attempt": 1
+    },
+    {
+      "id": "05-soft",
+      "mood": "soft",
+      "text": "再靠近一点…就一点点。",
+      "file": "05-soft.wav",
+      "seconds": 3.417,
+      "sha256": "26446c08dfe55e17a1c778d7cd387b1c23a4f918cc760c94fc69bd21354ec1be",
+      "asr_text": "啊 再靠近一點 就一點點",
+      "asr_similarity": 0.947,
+      "seed_attempt": 0
+    },
+    {
+      "id": "06-happy",
+      "mood": "happy",
+      "text": "哼，今天心情还不错。",
+      "file": "06-happy.wav",
+      "seconds": 2.11,
+      "sha256": "ff1f75961166c7f8ba26b4aea3c46d66e86b9da88a1be0d5b3a3a42f60516e73",
+      "asr_text": "哼 今天心情还不错",
+      "asr_similarity": 1.0,
+      "seed_attempt": 0
+    },
+    {
+      "id": "07-tsundere",
+      "mood": "tsundere",
+      "text": "才、才不是喜欢你呢。",
+      "file": "07-tsundere.wav",
+      "seconds": 2.075,
+      "sha256": "562181d6c34fdb4c9665ff292e0323ae12105e46e081fb7438194efb693fc471",
+      "asr_text": "啊 才不是喜歡你呢",
+      "asr_similarity": 0.875,
+      "seed_attempt": 0
+    },
+    {
+      "id": "08-tsundere",
+      "mood": "tsundere",
+      "text": "谁要你哄啊，笨蛋。",
+      "file": "08-tsundere.wav",
+      "seconds": 1.503,
+      "sha256": "41cd0f806a43be95e70e4caccbc35fb261d5face830e5c83796abf68b23ea196",
+      "asr_text": "谁要你哄呢 笨蛋",
+      "asr_similarity": 0.857,
+      "seed_attempt": 0
+    }
+  ]
+}

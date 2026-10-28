@@ -851,7 +851,11 @@ class Config(BaseModel):
     # 短语音回复 (2026-10-29): 调情时偶尔发一句; 默认后端是随源码部署的离线语音库。
     catty_voice_enabled: bool = True
     catty_voice_backend: str = "bank"  # bank=现成录音; worker=本地 GPT-SoVITS 子进程
-    catty_voice_personas: list[str] = Field(default_factory=lambda: ["fadianji"])
+    catty_voice_default: str = "michelle"  # 所有未单独指定的人格默认用这个音色
+    catty_voice_persona_voices: dict[str, str] = Field(
+        default_factory=lambda: {"fadianji": "fadianji"}
+    )
+    catty_voice_profiles: dict[str, dict[str, str]] = Field(default_factory=dict)
     catty_voice_bank_dir: str = ""  # 空 = 包内 data/voice_bank
     catty_voice_max_chars: int = 40
     catty_voice_max_per_turn: int = 1
@@ -866,12 +870,8 @@ class Config(BaseModel):
     catty_voice_worker_idle_unload_seconds: float = 180.0
     catty_voice_min_free_mb: int = 4800  # worker 启动前的可用内存门槛
     catty_voice_repo_dir: str = ""  # GPT-SoVITS 源码根
-    catty_voice_gpt_path: str = ""
-    catty_voice_sovits_path: str = ""
     catty_voice_bert_dir: str = ""
     catty_voice_hubert_dir: str = ""
-    catty_voice_reference_audio: str = ""
-    catty_voice_reference_text: str = ""
     # Python 沙箱 (2026-10-26): 写/跑代码 + wheel 安装, 全部限制在 data/python_sandbox
     catty_code_sandbox_enabled: bool = True
     catty_code_sandbox_dir: str = "data/python_sandbox"
@@ -1151,20 +1151,39 @@ class Config(BaseModel):
             return {str(key): str(val) for key, val in _parse_json_object(value).items()}
         return {str(key): str(val) for key, val in dict(value).items()}
 
-    @field_validator("catty_voice_personas", mode="before")
+    @field_validator("catty_voice_persona_voices", mode="before")
     @classmethod
-    def parse_voice_personas(cls, value: Any) -> Any:
+    def parse_voice_persona_voices(cls, value: Any) -> Any:
         if value is None or value == "":
-            return []
+            return {}
         if isinstance(value, str):
             raw = value.strip()
-            if raw.startswith("["):
-                loaded = json.loads(raw)
-                if not isinstance(loaded, list):
-                    raise ValueError("voice personas JSON value must be a list")
-                return [str(item).strip() for item in loaded if str(item).strip()]
-            return _split_text(raw)
-        return value
+            if raw.startswith("{"):
+                loaded = _parse_json_object(raw)
+                return {str(key).strip(): str(val).strip() for key, val in loaded.items() if str(val).strip()}
+            pairs: dict[str, str] = {}
+            for item in _split_text(raw):
+                name, _, voice = item.partition("=")
+                if name.strip() and voice.strip():
+                    pairs[name.strip()] = voice.strip()
+            return pairs
+        return {str(key).strip(): str(val).strip() for key, val in dict(value).items() if str(val).strip()}
+
+    @field_validator("catty_voice_profiles", mode="before")
+    @classmethod
+    def parse_voice_profiles(cls, value: Any) -> Any:
+        if value is None or value == "":
+            return {}
+        if isinstance(value, str):
+            loaded = _parse_json_object(value)
+        else:
+            loaded = dict(value)
+        profiles: dict[str, dict[str, str]] = {}
+        for voice, entry in loaded.items():
+            if not isinstance(entry, dict):
+                raise ValueError(f"voice profile {voice!r} must be an object")
+            profiles[str(voice).strip()] = {str(k).strip(): str(v).strip() for k, v in entry.items() if str(v).strip()}
+        return profiles
 
     @field_validator("catty_body_presence_watches", mode="before")
     @classmethod

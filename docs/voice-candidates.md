@@ -8,11 +8,19 @@
 
 ## 运行时语音库（已部署）
 
-`src/catty_qq_ai/data/voice_bank/fadianji/` 存放 9 句离线语音和 `bank.json`：害羞 2、撩 2、温柔 2、开心 1、傲娇 2，均用主人首选的 4 轮声学权重、训练 GPT 与 `candidates/reference-3d` 参考音生成，32kHz 单声道，逐句做过自动转写记录（`asr_similarity` 0.625–1.000；短句识别会把“这么”听成“这个”，不能当硬门）。
+`src/catty_qq_ai/data/voice_bank/michelle/` 与 `.../fadianji/` 各存 9 句离线语音和 `bank.json`：害羞 2、撩 2、温柔 2、开心 1、傲娇 2。米雪儿用其 8 轮 SoVITS 与 BWIKI 参考音，机机用主人选定的 4 轮 SoVITS 与 `candidates/reference-3d` 参考音，均为 32kHz 单声道，逐句做过自动转写记录（短句识别会把“这么”听成“这个”，不能当硬门）。
 
-`catty_voice_say` 由模型自行判断是否在调情，选 mood 后发一条；每会话 5 分钟冷却、默认 0.6 概率，主人跳过冷却与概率，所有人每轮最多 1 条。`voice.backend=worker` 时改由独立 GPT-SoVITS 子进程念模型自己写的短句（启动握手、超时、内存门槛、空闲卸载；本机真实端到端 4.42 秒/1.33 秒各一次），未配置或失败自动退回语音库。远端只部署了语音库，`config.json` 未改，走代码默认值。
+`catty_voice_say` 对所有人格暴露；默认音色 `michelle`，`voice.persona_voices` 可把某人格指到别的音色（默认 `{"fadianji": "fadianji"}`）。每会话 5 分钟冷却、默认 0.6 概率，主人跳过冷却与概率，所有人每轮最多 1 条。
 
-语音以 `record` 消息在本轮文字后发出；发送失败仅记日志、不重试，避免重复播报。真实 QQ 播放效果未验证。
+`voice.backend=worker` 时由独立 GPT-SoVITS 子进程念模型自己写的短句，按 `voice.profiles.<音色>` 取 gpt/sovits/参考音；启动握手、240 秒超时、4200MiB 内存门槛、空闲 180 秒卸载、关闭回收，未配置或失败自动退回语音库。切换音色会先收掉旧 worker 再判断内存，避免两个模型同时驻留。
+
+## 远端合成环境（2026-10-29 部署）
+
+- 独立 venv：`D:/CattyQQAI/tmp/voice-runtime/.venv`（Python 3.14.5，torch 2.11.0+cpu、torchaudio 2.11.0+cpu、transformers 4.57.6、librosa 1.0.0、numba 0.68.1、onnxruntime 1.31.1、peft 0.21.2、pytorch-lightning 2.6.6、matplotlib、fast-langdetect、split-lang、resampy、soundfile）。
+- 预训练：`tmp/voice-runtime/pretrained/` 下 BERT（fp16，621MiB）与 HuBERT（fp16，180MiB），从 hf-mirror 下载后重存为 fp16，与训练所用本地副本精度一致；`fast_langdetect/lid.176.bin` 125MiB 随框架目录部署。两套训练权重与参考音在 `models/voice/{michelle,fadianji}/`。
+- 框架适配（`tmp/.../gpt-sovits-source/...`，非仓库文件）：`is_g2pw` 恢复为环境变量开关，缺 `G2PWModel` 时回退 pypinyin；`chinese.py`/`chinese2.py`/`tone_sandhi.py` 在无 `jieba_fast` 时回退纯 Python `jieba`；`TTS.py` 用 soundfile 读取参考音，绕开 torchaudio 2.11 的 torchcodec 依赖。本地副本保留同一补丁，G2PW 存在时行为不变。
+- 远端实测：米雪儿 3.31 秒、机机 3.07 秒（各含一次模型加载）；加载峰值工作集约 3.2GiB，空闲卸载后可用内存回到 5.83GiB。G2PW 只上传了第一段（335MB，`tmp/voice-runtime/g2pw-parts/`），未合并，多音字精度暂按 pypinyin 回退。
+- 真实 QQ 语音播放、真机听感、多音字与长句稳定性尚未验证。
 
 ## 发电机参考音与局部电音
 

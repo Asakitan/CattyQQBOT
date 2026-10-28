@@ -323,7 +323,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "voice": {
         "enabled": True,
         "backend": "bank",
-        "personas": ["fadianji"],
+        "default": "michelle",
+        "persona_voices": {"fadianji": "fadianji"},
+        "profiles": {},
         "bank_dir": "",
         "max_chars": 40,
         "max_per_turn": 1,
@@ -338,12 +340,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "worker_idle_unload_seconds": 180,
         "min_free_mb": 4800,
         "repo_dir": "",
-        "gpt_path": "",
-        "sovits_path": "",
         "bert_dir": "",
         "hubert_dir": "",
-        "reference_audio": "",
-        "reference_text": "",
     },
     "code_sandbox": {
         "enabled": True,
@@ -998,7 +996,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     voice = _section(data, "voice")
     _set_env("CATTY_VOICE_ENABLED", voice.get("enabled"))
     _set_env("CATTY_VOICE_BACKEND", voice.get("backend"))
-    _set_env("CATTY_VOICE_PERSONAS", voice.get("personas"), csv_value=True)
+    _set_env("CATTY_VOICE_DEFAULT", voice.get("default"))
+    _set_env("CATTY_VOICE_PERSONA_VOICES", voice.get("persona_voices"), json_value=True)
+    _set_env("CATTY_VOICE_PROFILES", voice.get("profiles"), json_value=True)
     _set_env("CATTY_VOICE_MAX_CHARS", voice.get("max_chars"))
     _set_env("CATTY_VOICE_MAX_PER_TURN", voice.get("max_per_turn"))
     _set_env("CATTY_VOICE_COOLDOWN_SECONDS", voice.get("cooldown_seconds"))
@@ -1022,11 +1022,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
         ("python", "CATTY_VOICE_PYTHON"),
         ("worker_script", "CATTY_VOICE_WORKER_SCRIPT"),
         ("repo_dir", "CATTY_VOICE_REPO_DIR"),
-        ("gpt_path", "CATTY_VOICE_GPT_PATH"),
-        ("sovits_path", "CATTY_VOICE_SOVITS_PATH"),
         ("bert_dir", "CATTY_VOICE_BERT_DIR"),
         ("hubert_dir", "CATTY_VOICE_HUBERT_DIR"),
-        ("reference_audio", "CATTY_VOICE_REFERENCE_AUDIO"),
     ):
         raw_path = str(voice.get(section_key) or "").strip()
         if raw_path:
@@ -1034,7 +1031,6 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
             if not resolved.is_absolute():
                 resolved = base_dir / resolved
             _set_env(env_name, resolved)
-    _set_env("CATTY_VOICE_REFERENCE_TEXT", voice.get("reference_text"))
 
     code_sandbox = _section(data, "code_sandbox")
     _set_env("CATTY_CODE_SANDBOX_ENABLED", code_sandbox.get("enabled"))

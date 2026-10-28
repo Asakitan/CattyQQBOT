@@ -2,11 +2,11 @@
 
 ## 调情短语音（已部署）
 
-`catty_voice_say` 与其它工具一样由模型自行决定何时调用，schema 明确限定“对方在调情/暧昧/撒娇时偶尔一条”，普通问答不适用。执行器先过人格白名单（`voice.personas`，默认仅 `fadianji`），再走 `voice_reply.reserve_slot`：每会话 5 分钟冷却 + 概率门（默认 0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。
+`catty_voice_say` 与其它工具一样由模型自行决定何时调用，schema 明确限定“对方在调情/暧昧/撒娇时偶尔一条”，普通问答不适用。工具对所有人格暴露，音色按人格解析：`voice.default`（默认 `michelle`）兜底，`voice.persona_voices` 覆盖（默认把 `fadianji` 指到机机音色）。执行器再走 `voice_reply.reserve_slot`：每会话 5 分钟冷却 + 概率门（默认 0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。
 
-默认后端 `bank` 读取包内 `data/voice_bank/<persona>/bank.json`，按 mood 选片段并避免连续重复，秒级返回。`worker` 后端用独立 GPT-SoVITS 子进程（`voice_worker.py`）合成模型自己写的一句短话：启动回执握手、超时/内存门槛、空闲卸载、关闭时回收；未配置或失败时退回语音库。
+`bank` 后端读取包内 `data/voice_bank/<音色>/bank.json`，按 mood 选片段并避免连续重复，秒级返回。`worker` 后端用独立 GPT-SoVITS 子进程合成模型自己写的一句短话：启动回执握手、240 秒超时、4200MiB 可用内存门槛、空闲 180 秒卸载、关闭时回收；按 `voice.profiles.<音色>` 取 gpt/sovits/参考音，切换音色时先收掉旧 worker 再判断内存；未配置或失败时退回语音库。
 
-语音走 `ToolContext.pending_voice_deliveries`，本轮文字发完后由 `_spawn_deferred_voice_delivery` 以 `record` 消息发出；ActionFailed 不重试以免重复播报，NetworkError 隔 2 秒重试一次；发送失败只写日志。合成较慢时先回文字，`generating_in_background` 之后再补语音。产物在 `data/voice_outbox`，随既有清理循环按 TTL 删除。
+远端 worker 使用独立 venv（Python 3.14 + torch/torchaudio 2.11 CPU），预训练 BERT/HuBERT 以 fp16 存放；框架在缺 G2PW 时回退 pypinyin、在缺 `jieba_fast` 时回退 `jieba`，参考音用 soundfile 读取以绕开 torchcodec。语音走 `ToolContext.pending_voice_deliveries`，本轮文字发完后由 `_spawn_deferred_voice_delivery` 以 `record` 消息发出；ActionFailed 不重试以免重复播报，NetworkError 隔 2 秒重试一次；发送失败只写日志。合成较慢时先回文字，`generating_in_background` 之后再补语音。产物在 `data/voice_outbox`，随既有清理循环按 TTL 删除。
 
 ## 本地语音候选（尚未接入运行时）
 

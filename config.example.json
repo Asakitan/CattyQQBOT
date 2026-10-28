@@ -302,7 +302,9 @@
     "voice": {
         "enabled": true,
         "backend": "bank",
-        "personas": ["fadianji"],
+        "default": "michelle",
+        "persona_voices": {"fadianji": "fadianji"},
+        "profiles": {},
         "bank_dir": "",
         "max_chars": 40,
         "max_per_turn": 1,
@@ -317,12 +319,8 @@
         "worker_idle_unload_seconds": 180,
         "min_free_mb": 4800,
         "repo_dir": "",
-        "gpt_path": "",
-        "sovits_path": "",
         "bert_dir": "",
-        "hubert_dir": "",
-        "reference_audio": "",
-        "reference_text": ""
+        "hubert_dir": ""
     },
     "code_sandbox": {
         "enabled": true,
