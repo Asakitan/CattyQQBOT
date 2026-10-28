@@ -1,4 +1,9 @@
 # Catty 当前状态
+## 2026-10-29 · 语音冷却 10 秒（群共享，已部署）
+
+- `voice.cooldown_seconds` 从 300 调到 10；冷却键是 `group:<群号>` / `private:<QQ>`，同一群所有人共享一条冷却，私聊各自独立；主人仍跳过冷却与概率。
+- 语音条路径也纳入同一冷却：自动/表白/NSFW 触发时如果本群 10 秒内刚发过语音就不重复发；本轮工具已经发过语音时继续把剩余气泡念完，不再额外等冷却。
+- 本地 `test_voice_reply` 32 项、`test_config*` 33 项、插件加载通过；远端 `config.json` 已改为 10（经文件 API 整文件重写，`voice` 键完整，备份在 `tmp/remote-config/config.json.bak_voice_cd10_20261029`）；5 个代码/测试文件已上传且 SHA-256 与本地一致。远端 Shell 仍被禁用，远端 py_compile/测试/重载时间未复跑。
 ## 2026-10-29 · 表白直接发语音（已部署）
 
 - 用户这句话在表达爱意/撒娇（喜欢你、爱你、想你、亲亲、抱抱、贴贴，排除“不喜欢/别爱”这类否定）时，本轮直接触发语音条，不再等 `auto_chance` 或 `only_hours`；开关 `voice.affection_trigger` 默认 true。

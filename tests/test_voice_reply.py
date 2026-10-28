@@ -140,10 +140,16 @@ class GateTests(unittest.TestCase):
         # 主人不受限, 但普通群友仍被概率/冷却挡下
         self.assertFalse(voice.reserve_slot(config, "group:guest")[0])
 
-    def test_default_cooldown_is_five_minutes(self) -> None:
+    def test_default_cooldown_is_ten_seconds(self) -> None:
         loader = importlib.import_module("catty_config_loader")
-        self.assertEqual(loader.DEFAULT_CONFIG["voice"]["cooldown_seconds"], 300)
+        self.assertEqual(loader.DEFAULT_CONFIG["voice"]["cooldown_seconds"], 10)
         self.assertEqual(loader.DEFAULT_CONFIG["voice"]["max_per_turn"], 1)
+
+    def test_group_cooldown_is_shared(self) -> None:
+        config = _config(catty_voice_cooldown_seconds=10)
+        voice.mark_spoken("group:shared")
+        self.assertGreater(voice.cooldown_remaining(config, "group:shared"), 0)
+        self.assertEqual(voice.cooldown_remaining(config, "group:other"), 0.0)
 
 
 class AudioTests(unittest.TestCase):

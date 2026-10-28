@@ -133,13 +133,19 @@ def tool_available(config: Any, persona: Any = None) -> bool:
 
 def cooldown_remaining(config: Any, scope: str) -> float:
     try:
-        seconds = float(getattr(config, "catty_voice_cooldown_seconds", 300.0) or 0.0)
+        seconds = float(getattr(config, "catty_voice_cooldown_seconds", 10.0) or 0.0)
     except (TypeError, ValueError):
-        seconds = 300.0
+        seconds = 10.0
     if seconds <= 0 or not scope:
         return 0.0
     last = _COOLDOWNS.get(scope, 0.0)
     return max(last + seconds - time.monotonic(), 0.0)
+
+
+def mark_spoken(scope: str) -> None:
+    """记一次发声; 冷却按 scope(群/私聊)共享, 同群所有人共用一条冷却。"""
+    if scope:
+        _COOLDOWNS[scope] = time.monotonic()
 
 
 def reserve_slot(
@@ -151,7 +157,7 @@ def reserve_slot(
 ) -> tuple[bool, str]:
     """占用一次发声机会: 冷却 + 概率。被概率挡下时同样进入冷却, 避免同一轮反复重试。
 
-    主人不受冷却和概率限制 (主人 2026-10-29); 其他人格/群友每 5 分钟最多一条。
+    主人不受冷却和概率限制 (主人 2026-10-29); 其他群友同一群共享冷却, 默认 10 秒。
     """
     if is_owner:
         _COOLDOWNS[scope] = time.monotonic()

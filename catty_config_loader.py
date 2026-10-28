@@ -329,7 +329,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "bank_dir": "",
         "max_chars": 40,
         "max_per_turn": 1,
-        "cooldown_seconds": 300,
+        "cooldown_seconds": 10,
         "chance": 0.6,
         "auto_chance": 0.1,
         "auto_max_reply_chars": 50,

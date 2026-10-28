@@ -859,7 +859,7 @@ class Config(BaseModel):
     catty_voice_bank_dir: str = ""  # 空 = 包内 data/voice_bank
     catty_voice_max_chars: int = 40
     catty_voice_max_per_turn: int = 1
-    catty_voice_cooldown_seconds: float = 300.0  # 每会话 5 分钟一条; 主人不受限
+    catty_voice_cooldown_seconds: float = 10.0  # 每个群/私聊共享 10 秒一条; 主人不受限
     catty_voice_chance: float = 0.6  # 模型主动调用后的通过概率
     # 每条消息额外抽一次自动语音; 长回复(默认 >50 字)与技术排版不触发。
     catty_voice_auto_chance: float = 0.1

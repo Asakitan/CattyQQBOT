@@ -18992,9 +18992,20 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _affection_hit = bool(chunks) and _voice_reply.affection_voice_eligible(
                 config, incoming.text
             )
+            # 语音冷却按群/私聊共享; 本轮工具已经发过语音时不再等冷却。
+            _voice_scope = _conversation_queue_key(event)
+            _cooldown_left = (
+                0.0
+                if (_event_is_owner(event) or _voice_queued)
+                else _voice_reply.cooldown_remaining(config, _voice_scope)
+            )
+            if _cooldown_left > 0 and not _voice_queued and (
+                _voice_window or _auto_hit or _nsfw_hit or _affection_hit
+            ):
+                logger.info(f"bubble voice skipped: group cooldown {int(_cooldown_left)}s left")
             if (
                 _voice_window or _auto_hit or _nsfw_hit or _voice_queued or _affection_hit
-            ) and chunks:
+            ) and chunks and _cooldown_left <= 0:
                 _voice_name = _voice_reply.voice_name_for(config, _persona_for_event(event))
                 _limit = max(int(getattr(config, "catty_voice_bubble_max_per_turn", 3) or 3), 1)
                 _budget = float(getattr(config, "catty_voice_bubble_budget_seconds", 45.0) or 45.0)
@@ -19029,6 +19040,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         }
                         _turn_voiced_texts.add(_voice_text_key(_spoken))
                         _made += 1
+                if _made:
+                    _voice_reply.mark_spoken(_voice_scope)
         except Exception as _auto_voice_exc:  # noqa: BLE001
             logger.warning(
                 f"bubble voice prep failed: {type(_auto_voice_exc).__name__}: {_auto_voice_exc}"
