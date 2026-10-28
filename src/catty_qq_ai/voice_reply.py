@@ -12,6 +12,7 @@ import asyncio
 import hashlib
 import json
 import random
+import re
 import sys
 import time
 import wave
@@ -242,6 +243,80 @@ def auto_pick(config: Any, persona: Any = None, scope: str = "") -> dict[str, An
     payload = clip_payload(clip)
     payload["voice"] = voice_name_for(config, persona)
     return payload
+
+
+def _parse_hhmm(value: str) -> int | None:
+    raw = str(value or "").strip()
+    if not raw or ":" not in raw:
+        return None
+    hours, _, minutes = raw.partition(":")
+    try:
+        return (int(hours) % 24) * 60 + int(minutes)
+    except ValueError:
+        return None
+
+
+def only_window_active(config: Any, now: float | None = None) -> bool:
+    """`voice.only_hours="23:00-01:00"` 内一直用语音条; 空 = 关闭。"""
+    raw = str(getattr(config, "catty_voice_only_hours", "") or "").strip()
+    if "-" not in raw:
+        return False
+    start_raw, _, end_raw = raw.partition("-")
+    start, end = _parse_hhmm(start_raw), _parse_hhmm(end_raw)
+    if start is None or end is None or start == end:
+        return False
+    stamp = time.localtime(now if now is not None else time.time())
+    minute = stamp.tm_hour * 60 + stamp.tm_min
+    if start < end:
+        return start <= minute < end
+    return minute >= start or minute < end
+
+
+def bubble_voice_eligible(config: Any, text: str) -> bool:
+    """单条气泡能不能直接念成语音: 短、无代码/公式/纯链接。"""
+    clean = " ".join(str(text or "").split())
+    if not clean:
+        return False
+    try:
+        limit = int(getattr(config, "catty_voice_bubble_max_chars", 40) or 40)
+    except (TypeError, ValueError):
+        limit = 40
+    if len(clean) > max(limit, 4):
+        return False
+    if "```" in clean or "$$" in clean or "http://" in clean or "https://" in clean:
+        return False
+    if clean[:1] in {"-", "*", "|", "#"} or re.match(r"^\d+[.)]", clean):
+        return False
+    return True
+
+
+_ACTION_SEGMENT_RE = re.compile(r"[（(【\[][^）)】\]]*[）)】\]]")
+
+
+def spoken_voice_text(config: Any, text: str) -> str | None:
+    """去掉动作旁白(括号段)只念台词; 只剩旁白/念不了就返回 None。"""
+    clean = " ".join(str(text or "").split())
+    if not clean:
+        return None
+    spoken = " ".join(_ACTION_SEGMENT_RE.sub(" ", clean).split())
+    spoken = spoken.strip("…~～.。,、" + " ")
+    if not spoken or not bubble_voice_eligible(config, spoken):
+        return None
+    return spoken
+
+
+def nsfw_bubble_draw(config: Any, roll: float | None = None) -> bool:
+    """NSFW 回合里抽一次要不要把气泡念出来 (默认五成)。"""
+    if not voice_enabled(config):
+        return False
+    try:
+        chance = float(getattr(config, "catty_voice_nsfw_bubble_chance", 0.5) or 0.0)
+    except (TypeError, ValueError):
+        chance = 0.5
+    if chance <= 0:
+        return False
+    draw = roll if roll is not None else random.random()
+    return draw < min(max(chance, 0.0), 1.0)
 
 
 def _as_bool(value: Any, default: bool = False) -> bool:

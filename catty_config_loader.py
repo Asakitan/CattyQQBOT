@@ -333,6 +333,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "chance": 0.6,
         "auto_chance": 0.1,
         "auto_max_reply_chars": 50,
+        "only_hours": "",
+        "bubble_max_chars": 40,
+        "bubble_max_per_turn": 3,
+        "bubble_budget_seconds": 45,
         "outbox_dir": "data/voice_outbox",
         "outbox_ttl_hours": 24,
         "python": "",
@@ -1016,6 +1020,11 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_VOICE_CHANCE", voice.get("chance"))
     _set_env("CATTY_VOICE_AUTO_CHANCE", voice.get("auto_chance"))
     _set_env("CATTY_VOICE_AUTO_MAX_REPLY_CHARS", voice.get("auto_max_reply_chars"))
+    _set_env("CATTY_VOICE_ONLY_HOURS", voice.get("only_hours"))
+    _set_env("CATTY_VOICE_BUBBLE_MAX_CHARS", voice.get("bubble_max_chars"))
+    _set_env("CATTY_VOICE_BUBBLE_MAX_PER_TURN", voice.get("bubble_max_per_turn"))
+    _set_env("CATTY_VOICE_BUBBLE_BUDGET_SECONDS", voice.get("bubble_budget_seconds"))
+    _set_env("CATTY_VOICE_NSFW_BUBBLE_CHANCE", voice.get("nsfw_bubble_chance"))
     _set_env("CATTY_VOICE_OUTBOX_TTL_HOURS", voice.get("outbox_ttl_hours"))
     _set_env("CATTY_VOICE_WORKER_THREADS", voice.get("worker_threads"))
     _set_env("CATTY_VOICE_WORKER_TIMEOUT_SECONDS", voice.get("worker_timeout_seconds"))

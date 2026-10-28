@@ -5,6 +5,7 @@ import asyncio
 import importlib
 import importlib.util
 import sys
+import time
 import types
 import unittest
 import wave
@@ -35,6 +36,11 @@ def _config(**overrides):
         catty_voice_chance=1.0,
         catty_voice_auto_chance=0.1,
         catty_voice_auto_max_reply_chars=50,
+        catty_voice_only_hours="",
+        catty_voice_bubble_max_chars=40,
+        catty_voice_bubble_max_per_turn=3,
+        catty_voice_bubble_budget_seconds=45.0,
+        catty_voice_nsfw_bubble_chance=0.5,
         catty_voice_outbox_dir=str(_ROOT / "tmp" / "test-voice-outbox"),
         catty_voice_outbox_ttl_hours=24.0,
         catty_voice_worker_threads=1,
@@ -219,6 +225,69 @@ class AutoVoiceTests(unittest.TestCase):
         self.assertTrue(Path(payload["path"]).is_file())
         self.assertEqual(payload["voice"], "fadianji")
         self.assertTrue(payload["text"])
+
+
+class WindowAndBubbleTests(unittest.TestCase):
+    @staticmethod
+    def _at(hour: int, minute: int) -> float:
+        return time.mktime((2026, 10, 29, hour, minute, 0, 0, 0, -1))
+
+    def test_only_window_same_day(self) -> None:
+        config = _config(catty_voice_only_hours="20:00-22:00")
+        self.assertTrue(voice.only_window_active(config, self._at(20, 0)))
+        self.assertTrue(voice.only_window_active(config, self._at(21, 59)))
+        self.assertFalse(voice.only_window_active(config, self._at(22, 0)))
+        self.assertFalse(voice.only_window_active(config, self._at(12, 0)))
+
+    def test_only_window_overnight(self) -> None:
+        config = _config(catty_voice_only_hours="23:00-01:00")
+        self.assertTrue(voice.only_window_active(config, self._at(23, 30)))
+        self.assertTrue(voice.only_window_active(config, self._at(0, 30)))
+        self.assertFalse(voice.only_window_active(config, self._at(1, 0)))
+
+    def test_only_window_invalid_or_empty_is_off(self) -> None:
+        self.assertFalse(voice.only_window_active(_config(), self._at(23, 30)))
+        self.assertFalse(voice.only_window_active(_config(catty_voice_only_hours="abc"), self._at(23, 30)))
+        self.assertFalse(voice.only_window_active(_config(catty_voice_only_hours="20:00-20:00"), self._at(20, 0)))
+
+    def test_bubble_eligible_short_text(self) -> None:
+        config = _config()
+        self.assertTrue(voice.bubble_voice_eligible(config, "喜欢啊 不然谁陪你熬夜"))
+        self.assertTrue(voice.bubble_voice_eligible(config, "字" * 40))
+        self.assertFalse(voice.bubble_voice_eligible(config, "字" * 41))
+        self.assertFalse(voice.bubble_voice_eligible(config, ""))
+
+    def test_bubble_rejects_code_formula_url_and_list(self) -> None:
+        config = _config()
+        self.assertFalse(voice.bubble_voice_eligible(config, "```py\nprint(1)\n```"))
+        self.assertFalse(voice.bubble_voice_eligible(config, "答案 $$x^2$$"))
+        self.assertFalse(voice.bubble_voice_eligible(config, "看 https://example.com/x"))
+        self.assertFalse(voice.bubble_voice_eligible(config, "- 第一点"))
+        self.assertFalse(voice.bubble_voice_eligible(config, "1. 第一点"))
+
+    def test_spoken_text_strips_action_narration(self) -> None:
+        config = _config()
+        self.assertEqual(
+            voice.spoken_voice_text(config, "（把被子往下拉了一点）……老公，草我"),
+            "老公，草我",
+        )
+        self.assertEqual(
+            voice.spoken_voice_text(config, "……老公，草我 （说完立刻别过脸）"),
+            "老公，草我",
+        )
+        self.assertIsNone(voice.spoken_voice_text(config, "（脸红透了，抓起被子挡了一半）"))
+        self.assertIsNone(voice.spoken_voice_text(config, ""))
+
+    def test_nsfw_bubble_draw_probability(self) -> None:
+        config = _config()
+        self.assertTrue(voice.nsfw_bubble_draw(config, roll=0.1))
+        self.assertFalse(voice.nsfw_bubble_draw(config, roll=0.9))
+        self.assertFalse(
+            voice.nsfw_bubble_draw(_config(catty_voice_nsfw_bubble_chance=0.0), roll=0.0)
+        )
+        self.assertFalse(
+            voice.nsfw_bubble_draw(_config(catty_voice_enabled=False), roll=0.0)
+        )
 
 
 class ToolWiringTests(unittest.TestCase):

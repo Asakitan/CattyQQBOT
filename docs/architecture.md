@@ -16,6 +16,12 @@ QQ 客户端的转文字结果不经过 OneBot；入口在 `_rule` 里用 `_extr
 
 自动语音按 `voice.auto_chance`（默认 0.1）逐条消息抽取：命中且本轮回复 ≤50 字、无代码块/公式时，在文字前先发一句现成语音；模型已调用工具时不重复。
 
+## 语音条模式（已部署）
+
+拆成多个气泡的回复可以逐条念成语音。`voice_reply.only_window_active` 解析 `voice.only_hours`（支持 `23:00-01:00` 跨夜）：窗口内所有可念气泡都转语音；窗口外只有 `auto_chance` 命中时念一条。每轮发送前先按 `bubble_max_chars`（默认 40）过滤，`spoken_voice_text` 会剥掉括号/【】里的动作旁白，只念台词；整条只剩旁白就保持文字。合成条数受 `bubble_max_per_turn`（默认 3）与 `bubble_budget_seconds`（默认 45 秒）限制，超出预算的剩余气泡照常发文字。
+
+NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`（默认 0.5）抽取，命中后最多念 `bubble_max_per_turn` 条。语音气泡用 `record` 发出，成功后把台词按“已送达”写入本轮交付回执，从而进入历史、续聊和自回复队列；发送失败则回落为文字，尾气泡失败也不会吞掉最后一句。
+
 ## 本地语音候选（尚未接入运行时）
 
 `tmp/voice-training-20261028-01/` 独立 Python 3.11 环境和 GPT-SoVITS V2 副本负责双音色训练，权重、参考音与试听落在 `models/voice/{michelle,fadianji}/`。本地 CPU 生成成功；远端 CPU 推理和 QQ 语音发送未实现验证，不由 Bot 自动加载这些权重。

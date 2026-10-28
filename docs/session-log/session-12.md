@@ -21,6 +21,12 @@
 - QQ 客户端转文字不在 OneBot 协议里；新增 `voice_stt.py` + `voice_stt_worker.py`：`record` 段取 `url`/本地路径/`get_record`，PyAV 解码为 16k，独立 faster-whisper（CT2 4.8.4 + av 19 + 已部署 small 模型）转写，以 `【语音转写】` 并回消息与历史。
 - 纯语音消息不再被“无文字无图”丢掉；识别失败只写“未能识别内容”，SILK 直接跳过不编造；相同音频 SHA-1 缓存 10 分钟。远端 `config.json` 新增 `voice_stt` 段（备份 `config.json.bak_stt_*`）。
 - 验证：本地 6 项转写测试通过；远端转写 6/语音 17/标记 22/工具 22 通过，py_compile 退出 0；两段真实语音返回正确文本（4.4 秒、3.4 秒）；bot 00:11:26 加载、00:11:30 重连。真实 QQ 语音编码与 `get_record` 行为未实测。
+### 2026-10-29 · 语音条模式（多气泡 + NSFW）
+
+- 多气泡回复改成可逐条念成语音条：发送前按 `bubble_max_chars` 过滤，`spoken_voice_text` 剥掉括号/【】动作旁白只念台词；`only_hours`（支持跨夜 `23:00-01:00`）窗口内一直语音，窗口外按 `auto_chance` 只念一条。条数与总预算由 `bubble_max_per_turn=3`、`bubble_budget_seconds=45` 限制，超出的气泡照常发文字。
+- NSFW（spark）回合走同一段：按 `nsfw_bubble_chance`（默认 0.5）抽取后最多念 3 条，避免只在窗口外永远没语音。
+- 语音气泡发送成功后把台词按“已送达”写进本轮交付回执（历史、续聊、自回复队列都拿到）；失败回落文字，尾气泡失败也不再吞掉最后一句。
+- 验证：本地 `test_voice_reply` 28 项、`test_config*` 33 项通过，py_compile 0；远端同样 28/33 通过、5 个文件 SHA-256 与本地一致；bot 01:14:46 加载、01:14:51 重连（远端时钟）。远端 `config.json` 新增 `only_hours`、`bubble_max_chars`、`bubble_max_per_turn`、`bubble_budget_seconds`、`nsfw_bubble_chance`（备份 `config.json.bak_voice_bubble_20261029`）。真实 QQ 多语音条与 NSFW 听感未测。
 ## 目标与范围（训练部分）
 
 本地训练米雪儿和不稳定发电机两套 GPT-SoVITS V2 音色；按反馈排查试听中“今天也要开心”的电音。只操作本地音音模型候选和临时实验字件，生产配置、人格与 QQ 链路保持。

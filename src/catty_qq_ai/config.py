@@ -864,6 +864,13 @@ class Config(BaseModel):
     # 每条消息额外抽一次自动语音; 长回复(默认 >50 字)与技术排版不触发。
     catty_voice_auto_chance: float = 0.1
     catty_voice_auto_max_reply_chars: int = 50
+    # 语音条模式: 把短气泡逐条念成语音; only_hours 内一直用语音(如 "23:00-01:00")。
+    catty_voice_only_hours: str = ""
+    catty_voice_bubble_max_chars: int = 40
+    catty_voice_bubble_max_per_turn: int = 3
+    catty_voice_bubble_budget_seconds: float = 45.0
+    # NSFW(spark) 回合同样发语音条: 按这个概率把台词气泡念出来。
+    catty_voice_nsfw_bubble_chance: float = 0.5
     catty_voice_outbox_dir: str = "data/voice_outbox"
     catty_voice_outbox_ttl_hours: float = 24.0
     catty_voice_python: str = ""  # 空 = 当前解释器

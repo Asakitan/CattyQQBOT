@@ -18825,7 +18825,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             )
         except Exception:  # noqa: BLE001
             pass
-        from .reply_delivery import ReplyDeliveryState
+        from .reply_delivery import ReplyDeliveryReceipt, ReplyDeliveryState
 
         _delivery_state = ReplyDeliveryState()
 
@@ -18866,6 +18866,31 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _queue_layered_self_reply(event, _tool_persona, text)
             except Exception as exc:  # noqa: BLE001
                 logger.warning(f"purpose reply queue failed: {type(exc).__name__}")
+
+        async def _send_voice_bubble(item: dict[str, Any]) -> bool:
+            # 语音气泡: 发出去之后把台词当已送达记进本轮历史/续聊。
+            if not await _send_voice_message(bot, event, item, label="catty_voice_bubble"):
+                return False
+            text = str(item.get("text") or "").strip()
+            if not text:
+                return True
+            _delivery_state.receipts.append(
+                ReplyDeliveryReceipt(text=_chunk_to_history(text), status="delivered")
+            )
+            try:
+                _remember_bot_reply_for_event(
+                    event, text,
+                    open_continuation=not bool(state.get("catty_session_closing")),
+                    fresh_mention=fresh_mention,
+                )
+                _mark_consumed_reply_source_if_sent(event, state)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"voice bubble side-effect failed: {type(exc).__name__}: {exc}")
+            try:
+                _queue_layered_self_reply(event, _tool_persona, text)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"purpose reply queue failed: {type(exc).__name__}")
+            return True
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         quote_pending = _should_quote_chat_reply(
@@ -18927,23 +18952,67 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             _nsfw_img_task = None
 
-        # 主人 2026-10-29: 每条消息按 voice.auto_chance 抽一次自动语音; 长/技术回复不触发。
-        if not _voice_pending:
-            try:
-                from . import voice_reply as _voice_reply
+        # 主人 2026-10-29: 语音条模式 — 逐条把短气泡念成语音; only_hours 内一直用语音。
+        _bubble_voice_items: list[dict[str, Any] | None] = [None] * len(chunks)
+        try:
+            from . import voice_reply as _voice_reply
 
-                if _voice_reply.auto_eligible(config, " ".join(reply_for_send.split())):
-                    _auto_voice = _voice_reply.auto_pick(
-                        config, _persona_for_event(event), _conversation_queue_key(event)
-                    )
-                    if _auto_voice:
-                        await _send_voice_message(bot, event, _auto_voice, label="catty_voice_auto")
-            except Exception as _auto_voice_exc:  # noqa: BLE001
-                logger.warning(
-                    f"auto voice failed: {type(_auto_voice_exc).__name__}: {_auto_voice_exc}"
-                )
+            _voice_window = _voice_reply.only_window_active(config)
+            _auto_hit = (not _voice_pending) and _voice_reply.auto_eligible(
+                config, " ".join(reply_for_send.split())
+            )
+            # 主人 2026-10-29: NSFW(spark) 回合也发语音条 — 按概率把台词气泡念出来。
+            _nsfw_hit = (
+                bool(_prefer_spark)
+                and bool(chunks)
+                and _voice_reply.nsfw_bubble_draw(config)
+            )
+            if (not _voice_pending) and (_voice_window or _auto_hit or _nsfw_hit) and chunks:
+                _voice_name = _voice_reply.voice_name_for(config, _persona_for_event(event))
+                _limit = max(int(getattr(config, "catty_voice_bubble_max_per_turn", 3) or 3), 1)
+                if not _voice_window and not _nsfw_hit:
+                    _limit = 1
+                _budget = float(getattr(config, "catty_voice_bubble_budget_seconds", 45.0) or 45.0)
+                _deadline = time.monotonic() + _budget
+                _made = 0
+                for _index, _chunk in enumerate(chunks):
+                    if _made >= _limit or time.monotonic() >= _deadline:
+                        break
+                    _spoken = _voice_reply.spoken_voice_text(config, _chunk)
+                    if not _spoken:
+                        continue
+                    try:
+                        _result = await _voice_reply.synthesize(
+                            config, _spoken, _conversation_queue_key(event), voice=_voice_name
+                        )
+                    except Exception as _voice_exc:  # noqa: BLE001
+                        logger.warning(
+                            f"bubble voice synth failed: {type(_voice_exc).__name__}: {_voice_exc}"
+                        )
+                        continue
+                    if _result.get("ok"):
+                        _bubble_voice_items[_index] = {
+                            "path": _result["path"],
+                            "text": _spoken,
+                            "mood": "soft",
+                            "seconds": _result.get("seconds", 0.0),
+                            "voice": _voice_name,
+                        }
+                        _made += 1
+        except Exception as _auto_voice_exc:  # noqa: BLE001
+            logger.warning(
+                f"bubble voice prep failed: {type(_auto_voice_exc).__name__}: {_auto_voice_exc}"
+            )
 
-        for chunk in chunks[:-1]:
+        for _index, chunk in enumerate(chunks[:-1]):
+            _voice_item = (
+                _bubble_voice_items[_index] if _index < len(_bubble_voice_items) else None
+            )
+            if _voice_item is not None:
+                await _send_voice_bubble(_voice_item)
+                if delay_seconds:
+                    await asyncio.sleep(delay_seconds)
+                continue
             # 前段发送失败时继续处理后续气泡和图片。
             try:
                 await _send_reply_message(
@@ -18968,6 +19037,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 quote_pending = False
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
+        _tail_voice = (
+            _bubble_voice_items[-1]
+            if chunks and len(_bubble_voice_items) == len(chunks)
+            else None
+        )
+        if _tail_voice is not None:
+            _chunks_last_already_sent = await _send_voice_bubble(_tail_voice)
         if nsfw_image_segments:
             if chunks and not _chunks_last_already_sent:
                 try:
@@ -19084,16 +19160,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # _with_tools / _instant / _codex_instant 拿到 DeepSeek 回复时自动蒸馏到 L3).
         # 这里不再单点触发 — 封装层一处覆盖主链路所有 emit 分支 + NSFW spark + catnify 透传,
         # 且只采 DeepSeek 真正生成的回复 (CPU 自产的 L1/L2/L3 直答不会被蒸回去, 杜绝自循环).
-        await _send_reply_message(
-            _compose_reply_message(
-                event,
-                text=final_message,
-                quote=quote_pending,
-                latex_sources=latex_sources,
-                inline_image_urls=inline_image_urls,
-            ),
-            text=_chunk_to_history(final_message) if chunks else final_message,
-        )
+        if _tail_voice is None:
+            await _send_reply_message(
+                _compose_reply_message(
+                    event,
+                    text=final_message,
+                    quote=quote_pending,
+                    latex_sources=latex_sources,
+                    inline_image_urls=inline_image_urls,
+                ),
+                text=_chunk_to_history(final_message) if chunks else final_message,
+            )
         await matcher.finish()
 
 

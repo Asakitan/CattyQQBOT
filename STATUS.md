@@ -1,4 +1,10 @@
 # Catty 当前状态
+## 2026-10-29 · 语音条模式（多气泡 + NSFW，已部署）
+
+- 一条回复拆成多个气泡时，可逐条念成语音：`voice.only_hours="23:00-01:00"` 窗口内一直用语音条，窗口外按 `voice.auto_chance` 抽一条；`voice.bubble_max_chars=40`、`bubble_max_per_turn=3`、`bubble_budget_seconds=45` 控单条长度、条数和一轮合成总预算。
+- NSFW（spark）回合同样支持：按 `voice.nsfw_bubble_chance`（默认 0.5）抽取，最多 `bubble_max_per_turn` 条；只念台词，动作旁白（括号/【】段）去掉，整条只剩旁白就保持文字。
+- 语音气泡发出后，台词按已送达记进本轮历史与续聊；发送失败自动改回发文字（尾气泡失败也不会吞掉最后一句）。语音条仍受 worker 内存门槛与超时保护，预算用完剩余气泡照常发文字。
+- 远端 `test_voice_reply` 28 项、`test_config*` 33 项通过，py_compile 退出 0；5 个文件 SHA-256 与本地一致；bot 01:14:46 加载、01:14:51 重连（远端时钟）。远端 `config.json` 新增 `only_hours`、`bubble_*`、`nsfw_bubble_chance`（备份 `config.json.bak_voice_bubble_20261029`）。真实 QQ 多语音条与 NSFW 听感未测。
 ## 2026-10-29 · 语音消息转文字（已部署）
 
 - QQ 客户端的“语音转文字”只存在于客户端内部，OneBot/NapCat 不会把转写结果发给 bot；这里改为自己取音频再转写：优先用 record 段的 `url` 下载，其次本地路径，最后回落 `get_record`（wav）。纯语音消息不再被“无文字无图”提前丢掉。
