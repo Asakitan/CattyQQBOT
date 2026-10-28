@@ -4246,6 +4246,8 @@ def _cancel_task_if_pending(task: asyncio.Task | None) -> None:
 
 # 主人 2026-10-25: 回复和生图解耦 — 文字照常发, 图好了再单独发 (见 handle_chat 的 _reply_done)。
 _IMAGEGEN_INLINE_WAIT_SECONDS = 4.0
+# 主人 2026-10-29: 调情短语音 — 语音库秒回; 本地合成慢就先发文字再补语音。
+_VOICE_INLINE_WAIT_SECONDS = 6.0
 _DEFERRED_DELIVERY_MAX_WAIT_SECONDS = 180.0
 _deferred_delivery_tasks: set[asyncio.Task] = set()
 _file_delivery_lock = asyncio.Lock()
@@ -4385,6 +4387,124 @@ def _spawn_deferred_file_delivery(
     task = asyncio.create_task(_runner(), name=f"catty-deferred-{label}")
     _deferred_delivery_tasks.add(task)
     task.add_done_callback(_deferred_delivery_tasks.discard)
+
+
+async def _send_voice_message(
+    bot: Bot,
+    event: MessageEvent,
+    item: dict[str, Any],
+    *,
+    label: str,
+) -> bool:
+    """把暂存的短语音按 QQ 语音消息发出; 失败只记日志, 不重复发。"""
+    raw_path = str(item.get("path") or "").strip()
+    path = Path(raw_path)
+    if not raw_path or not path.is_file():
+        logger.warning(f"{label}: staged voice missing: {raw_path!r}")
+        return False
+    payload = path.resolve().as_uri()
+    for attempt in range(2):
+        try:
+            await bot.send(event, MessageSegment.record(file=payload))
+            logger.info(
+                f"{label}: voice sent ({item.get('mood') or '-'}, "
+                f"{float(item.get('seconds') or 0.0):.1f}s)"
+            )
+            return True
+        except OnebotActionFailed as exc:
+            # 语义模糊: 可能已送达, 重试会重复播报
+            logger.warning(f"{label}: voice send ActionFailed (no retry): {exc}")
+            return False
+        except OnebotNetworkError as exc:
+            if attempt == 0:
+                await asyncio.sleep(2.0)
+                continue
+            logger.warning(f"{label}: voice send NetworkError twice, giving up: {exc}")
+            return False
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"{label}: voice send failed: {type(exc).__name__}: {exc}")
+            return False
+    return False
+
+
+def _spawn_deferred_voice_delivery(
+    bot: Bot,
+    event: MessageEvent,
+    items: Any,
+    *,
+    after: asyncio.Event,
+    label: str,
+) -> None:
+    """等本轮文字发完, 再把语音按原会话发出去; items 可以是列表或返回列表的协程。"""
+
+    async def _runner() -> None:
+        payload = items if isinstance(items, list) else await items
+        if not payload:
+            return
+        try:
+            await asyncio.wait_for(after.wait(), timeout=_DEFERRED_DELIVERY_MAX_WAIT_SECONDS)
+        except asyncio.TimeoutError:
+            logger.info(f"{label}: reply still not finished, sending voice anyway")
+        for item in payload:
+            if isinstance(item, dict):
+                await _send_voice_message(bot, event, item, label=label)
+
+    task = asyncio.create_task(_runner(), name=f"catty-deferred-{label}")
+    _deferred_delivery_tasks.add(task)
+    task.add_done_callback(_deferred_delivery_tasks.discard)
+
+
+async def _voice_items_from_task(task: asyncio.Task, detached_ctx: ToolContext) -> list[dict[str, Any]]:
+    """后台合成完成后再取语音; 失败只记日志, 不打扰本轮回复。"""
+    try:
+        result = await task
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"catty_voice_say (deferred) failed: {type(exc).__name__}: {exc}")
+        return []
+    if isinstance(result, dict) and result.get("error"):
+        logger.info(f"catty_voice_say (deferred) skipped: {str(result.get('error'))[:80]}")
+    return [dict(item) for item in detached_ctx.pending_voice_deliveries if isinstance(item, dict)]
+
+
+async def _voice_tool_with_deferred_delivery(
+    name: str,
+    args_json: str,
+    tool_ctx: ToolContext,
+    *,
+    allowed_names: set[str],
+    bot: Bot,
+    event: MessageEvent,
+    after: asyncio.Event,
+) -> dict[str, Any]:
+    """语音库秒回; 本地合成较慢时先回文字, 合成好再单独发语音。"""
+    from dataclasses import replace as _dc_replace
+
+    detached_ctx = _dc_replace(tool_ctx, pending_voice_deliveries=[])
+    task = asyncio.create_task(
+        _execute_schema_gated_tool_call(name, args_json, detached_ctx, allowed_names=allowed_names)
+    )
+    try:
+        result = await asyncio.wait_for(asyncio.shield(task), timeout=_VOICE_INLINE_WAIT_SECONDS)
+    except asyncio.TimeoutError:
+        tool_ctx.deferred_delivery_started = True
+        _spawn_deferred_voice_delivery(
+            bot,
+            event,
+            _voice_items_from_task(task, detached_ctx),
+            after=after,
+            label="catty_voice_say",
+        )
+        logger.info(f"catty_voice_say still running after {_VOICE_INLINE_WAIT_SECONDS:.0f}s → reply first")
+        return {
+            "ok": True,
+            "status": "generating_in_background",
+            "note": (
+                "语音正在后台生成, 好了会自动单独发出。现在正常回一句文字即可: "
+                "不要说语音已经发出, 也不要再次调用 catty_voice_say。"
+            ),
+        }
+    tool_ctx.pending_voice_deliveries.extend(detached_ctx.pending_voice_deliveries)
+    return result
 
 
 async def _deferred_imagegen_items(task: asyncio.Task, detached_ctx: ToolContext) -> list[Any]:
@@ -16465,10 +16585,13 @@ async def _file_outbox_cleanup_loop() -> None:
         try:
             removed = await asyncio.to_thread(cleanup_file_outbox, config)
             removed_sandbox = await asyncio.to_thread(cleanup_code_sandbox, config)
-            if removed or removed_sandbox:
+            from .voice_reply import cleanup_outbox as cleanup_voice_outbox
+
+            removed_voice = await asyncio.to_thread(cleanup_voice_outbox, config)
+            if removed or removed_sandbox or removed_voice:
                 logger.info(
                     f"cleanup removed {removed} outbox file(s), "
-                    f"{removed_sandbox} sandbox file(s)"
+                    f"{removed_sandbox} sandbox file(s), {removed_voice} voice file(s)"
                 )
         except asyncio.CancelledError:
             raise
@@ -16592,6 +16715,16 @@ async def _flush_story_arc_store_on_shutdown() -> None:
             logger.info("story_arc_store: flushed dirty data on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"story_arc_store: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
+async def _stop_voice_worker_on_shutdown() -> None:
+    try:
+        from .voice_reply import aclose as _close_voice_worker
+
+        await _close_voice_worker()
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"voice worker: shutdown failed: {exc}")
 
 
 @get_driver().on_shutdown
@@ -17659,8 +17792,19 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _allowed_names: set[str] = _allowed_tool_names,
         ) -> dict[str, object]:
             _files_before = len(tool_ctx.pending_file_deliveries)
+            _voices_before = len(tool_ctx.pending_voice_deliveries)
             if name == "catty_imagegen":
                 result = await _imagegen_tool_with_deferred_delivery(
+                    name,
+                    args_json,
+                    tool_ctx,
+                    allowed_names=_allowed_names,
+                    bot=bot,
+                    event=event,
+                    after=_reply_done,
+                )
+            elif name == "catty_voice_say":
+                result = await _voice_tool_with_deferred_delivery(
                     name,
                     args_json,
                     tool_ctx,
@@ -17678,6 +17822,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 )
             if isinstance(result, dict):
                 result.pop("_staged_file", None)
+                result.pop("_staged_voice", None)
             for _staged_file in tool_ctx.pending_file_deliveries[_files_before:]:
                 if not isinstance(_staged_file, dict):
                     continue
@@ -17690,6 +17835,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         [_staged_file],
                         after=_reply_done,
                         label=name or "file",
+                    )
+            for _staged_voice in tool_ctx.pending_voice_deliveries[_voices_before:]:
+                if isinstance(_staged_voice, dict):
+                    _spawn_deferred_voice_delivery(
+                        bot,
+                        event,
+                        [_staged_voice],
+                        after=_reply_done,
+                        label=name or "voice",
                     )
             if name == "catty_imagegen" and isinstance(result, dict) and result.get("error"):
                 _img_error_text = str(result.get("error") or "")

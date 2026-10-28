@@ -476,8 +476,15 @@ class FullExposureTests(unittest.TestCase):
         self.assertEqual(
             set(_tools.ALL_TOOL_SCHEMAS) - names,
             # 结构性/安全闸门保留: 群里不给 NSFW 搜索; 沙箱代码工具只给拥有者直呼;
-            # catty_run_code 由 legacy 开关单独控制 (默认关)
-            {"catty_nsfw_search", "catty_run_code", "catty_python_run", "catty_python_install"},
+            # catty_run_code 由 legacy 开关单独控制 (默认关);
+            # 语音工具只在配置了音色的人格下暴露 (默认仅机机)
+            {
+                "catty_nsfw_search",
+                "catty_run_code",
+                "catty_python_run",
+                "catty_python_install",
+                "catty_voice_say",
+            },
         )
 
     def test_image_search_without_image_points_to_scan(self) -> None:

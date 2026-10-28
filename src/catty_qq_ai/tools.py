@@ -1398,7 +1398,38 @@ _SKILL_SEARCH_SCHEMA: dict[str, Any] = {
 }
 
 
+_VOICE_SAY_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_voice_say",
+        "description": (
+            "发一句很短的语音（1 句，约 2-4 秒）。只在对方正在跟你调情、暧昧试探、撒娇黏人，"
+            "或你被撩到想用声音回他一下时使用；普通闲聊、答疑、汇报、争论不要用。"
+            "语音在本轮文字回复发完后自动发出，所以你仍要正常写文字。"
+            "同一会话有冷却和概率限制，偶尔一条就够；返回 not_now/冷却时不要重试，直接用文字回复。"
+            "mood 决定语气；text 可留空，留空时用现成录音并返回实际台词。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "mood": {
+                    "type": "string",
+                    "enum": ["shy", "tease", "soft", "happy", "tsundere"],
+                    "description": "语气：害羞/撩他/温柔/开心/傲娇。",
+                },
+                "text": {
+                    "type": "string",
+                    "description": "可选，要念的一句短话（≤40 字）；留空则用现成录音。",
+                },
+            },
+            "required": ["mood"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
+    "catty_voice_say": _VOICE_SAY_SCHEMA,
     "catty_skill_search": _SKILL_SEARCH_SCHEMA,
     "catty_persona": _PERSONA_TOOL_SCHEMA,
     "catty_recall": _RECALL_SCHEMA,
@@ -1480,6 +1511,14 @@ def _make_lazy_schema(name: str, short_desc: str, props: dict[str, dict], requir
 
 
 _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
+    "catty_voice_say": _make_lazy_schema(
+        "catty_voice_say", "调情时偶尔发一句短语音",
+        {
+            "mood": {"type": "string", "enum": ["shy", "tease", "soft", "happy", "tsundere"], "description": "语气"},
+            "text": {"type": "string", "description": "可选短句"},
+        },
+        ["mood"],
+    ),
     "catty_skill_search": _SKILL_SEARCH_SCHEMA,
     "catty_session_messages": {
         **_SESSION_MESSAGES_SCHEMA,
@@ -1816,6 +1855,7 @@ _TOOL_CAPABILITIES: dict[str, ToolCapability] = {
     "catty_user_profile": ToolCapability(),
     "catty_mc_status": ToolCapability(execution_mode="external"),
     "catty_emoji": ToolCapability(execution_mode="write"),
+    "catty_voice_say": ToolCapability(execution_mode="write"),
     "catty_web_search": ToolCapability(execution_mode="external"),
     "catty_fetch_url": ToolCapability(),
     "catty_weather": ToolCapability(),
@@ -1998,6 +2038,9 @@ class ToolContext:
     # 本轮 catty_write_file 暂存的文件; 主回复发完后由 __init__ 上传到当前 QQ 会话。
     # 元素: {"path": 磁盘路径, "name": QQ 里显示的文件名}
     pending_file_deliveries: list[dict[str, str]] = field(default_factory=list)
+    # 本轮 catty_voice_say 暂存的短语音; 主回复发完后以语音消息单独发出。
+    # 元素: {"path": WAV 路径, "text": 实际台词, "mood": 语气, "seconds": 时长}
+    pending_voice_deliveries: list[dict[str, Any]] = field(default_factory=list)
     # 编码在线程中进行时仍占用本轮配额，避免并发 tool 调用越过数量上限。
     _pending_file_writes: int = field(default=0, init=False, repr=False)
     # 当前消息及引用消息里的图片 URL 列表(QQ CDN 短期链接)，由调用方按顺序合并。
@@ -6314,10 +6357,65 @@ async def _exec_persona(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any
     return result
 
 
+async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    """把一句短语音加入待发送队列; 冷却/概率由 voice_reply 统一守。"""
+    from . import voice_reply as voice
+
+    if not voice.voice_enabled(ctx.config):
+        return {"ok": False, "error": "语音回复已关闭"}
+    if not voice.persona_allowed(ctx.config, ctx.persona):
+        return {"ok": False, "error": "当前人格没有配置语音"}
+    try:
+        limit = int(getattr(ctx.config, "catty_voice_max_per_turn", 1) or 1)
+    except (TypeError, ValueError):
+        limit = 1
+    if len(ctx.pending_voice_deliveries) >= max(limit, 1):
+        return {"ok": False, "error": f"本轮最多 {max(limit, 1)} 条语音"}
+    mood = voice.mood_of(args.get("mood"))
+    scope = _current_tool_scope(ctx) or ctx.scope_key or "unknown"
+    allowed, reason = voice.reserve_slot(ctx.config, scope, is_owner=_is_owner(ctx))
+    if not allowed:
+        return {"ok": False, "error": reason, "note": "这轮不要重试语音, 直接用文字回复。"}
+
+    item: dict[str, Any] | None = None
+    requested = " ".join(str(args.get("text") or "").split())
+    if voice.backend(ctx.config) == "worker":
+        text = requested
+        if not text:
+            clip = voice.select_clip(voice.load_bank(ctx.config, ctx.persona), mood, scope)
+            text = clip.text if clip else ""
+        if text:
+            result = await voice.synthesize(ctx.config, text, scope)
+            if result.get("ok"):
+                item = {"path": result["path"], "text": text, "mood": mood,
+                        "seconds": result.get("seconds", 0.0)}
+            else:
+                _logger.info("catty_voice_say worker fallback: %s", result.get("error"))
+    if item is None:
+        clip = voice.select_clip(voice.load_bank(ctx.config, ctx.persona), mood, scope)
+        if clip is None:
+            return {"ok": False, "error": "没有可用的语音素材"}
+        item = voice.clip_payload(clip)
+    ctx.pending_voice_deliveries.append(item)
+    return {
+        "ok": True,
+        "status": "staged",
+        "mood": item.get("mood"),
+        "line": item.get("text"),
+        "seconds": item.get("seconds"),
+        "note": (
+            "语音会在本轮文字回复发完后自动发出。回复里正常说一句就好，"
+            "不要说已经发了语音或播报文件路径，也不要再调一次。"
+        ),
+        "_staged_voice": item,
+    }
+
+
 # Executor 注册表:name → async callable
 ToolExecutor = Callable[[dict[str, Any], ToolContext], Awaitable[dict[str, Any]]]
 
 _EXECUTORS: dict[str, ToolExecutor] = {
+    "catty_voice_say": _exec_voice_say,
     "catty_skill_search": _exec_skill_search,
     "catty_skill_load": _exec_skill_load,
     "catty_skill_save": _exec_skill_save,
@@ -6370,6 +6468,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
 # AI 看完整 description 决策. 不命中 → tools=[], 省 20K+ bytes input.
 _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
     "catty_persona": ("人格", "角色设定", "切换角色", "persona"),
+    "catty_voice_say": ("语音", "说句话", "发条语音", "想听你声音", "念一句"),
     "catty_emoji": (
         "表情", "表情包", "斗图", "emoji", "发个表情", "来个表情", "挑一只小猫",
         "害羞", "贴贴", "得意", "被夸", "炸毛", "脸红", "绷不住", "委屈", "疑惑",
@@ -6624,6 +6723,7 @@ _TOOL_CONFIG_FLAGS: dict[str, tuple[str, ...]] = {
     "catty_close_conversation": ("catty_close_conversation_enabled",),
     "catty_web_search": ("catty_web_search_enabled",),
     "catty_emoji": ("catty_emoji_enabled",),
+    "catty_voice_say": ("catty_voice_enabled",),
     "catty_nsfw_search": ("catty_nsfw_search_enabled",),
     "catty_image_search": ("catty_image_search_enabled",),
     "catty_imagegen": ("catty_imagegen_enabled",),
@@ -6666,6 +6766,13 @@ _CONVERSATION_TOOLS = frozenset({
 
 
 _NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
+    "catty_voice_say": (
+        "发一句很短的语音，只在对方正在调情、暧昧试探或撒娇时偶尔使用；"
+        "普通闲聊、答疑和汇报不要用。语音在本轮文字回复发完后自动发出，"
+        "同一会话有冷却和概率限制，被拒绝时直接用文字回复、不要重试。"
+        "mood 决定语气；text 可留空，留空时使用现成录音并返回实际台词。",
+        "调情时偶尔回一句短语音；其余场景用文字",
+    ),
     "catty_emoji": (
         "从本地表情库搜索并发送一张表情图。适用场景：需要用表情表达害羞、得意、贴贴、"
         "困惑、笑、撒娇或嘲讽等情绪，用户明确请求表情图，或文字回复后配一张本地表情更自然时。"
@@ -6882,11 +6989,19 @@ def available_tool_schemas(
         else _INTELLIGENCE_CORE_TOOLS | _CONVERSATION_TOOLS | intent_hits
     )
     lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", False))
+    voice_tool_ok: bool | None = None
 
     result: list[dict[str, Any]] = []
     for name, lazy_schema in _LAZY_TOOL_SCHEMAS.items():
         if name not in selected_names or not _tool_config_enabled(name, config):
             continue
+        if name == "catty_voice_say":
+            if voice_tool_ok is None:
+                from .voice_reply import tool_available as _voice_tool_available
+
+                voice_tool_ok = _voice_tool_available(config, persona)
+            if not voice_tool_ok:
+                continue
         if _tool_capability_denial_reason(
             name,
             is_private=is_private,

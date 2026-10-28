@@ -1,5 +1,25 @@
 # Catty 工具与回复交付架构
 
+## 调情短语音（已部署）
+
+`catty_voice_say` 与其它工具一样由模型自行决定何时调用，schema 明确限定“对方在调情/暧昧/撒娇时偶尔一条”，普通问答不适用。执行器先过人格白名单（`voice.personas`，默认仅 `fadianji`），再走 `voice_reply.reserve_slot`：每会话 5 分钟冷却 + 概率门（默认 0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。
+
+默认后端 `bank` 读取包内 `data/voice_bank/<persona>/bank.json`，按 mood 选片段并避免连续重复，秒级返回。`worker` 后端用独立 GPT-SoVITS 子进程（`voice_worker.py`）合成模型自己写的一句短话：启动回执握手、超时/内存门槛、空闲卸载、关闭时回收；未配置或失败时退回语音库。
+
+语音走 `ToolContext.pending_voice_deliveries`，本轮文字发完后由 `_spawn_deferred_voice_delivery` 以 `record` 消息发出；ActionFailed 不重试以免重复播报，NetworkError 隔 2 秒重试一次；发送失败只写日志。合成较慢时先回文字，`generating_in_background` 之后再补语音。产物在 `data/voice_outbox`，随既有清理循环按 TTL 删除。
+
+## 本地语音候选（尚未接入运行时）
+
+`tmp/voice-training-20261028-01/` 独立 Python 3.11 环境和 GPT-SoVITS V2 副本负责双音色训练，权重、参考音与试听落在 `models/voice/{michelle,fadianji}/`。本地 CPU 生成成功；远端 CPU 推理和 QQ 语音发送未实现验证，不由 Bot 自动加载这些权重。
+
+`tmp/voice-quality-20261028-01/phrase_ab.py` 为发电机生成独立进程的单变量对照，读取同一组哈希锁定的模型及参考音；原始波形与日志保存在临时目录，统一 RMS 的试听和完整参数清单位于 `models/voice/fadianji/candidates/phrase-ab/`。只生成候选，不替换正式参考音或权重。详见 [语音候选](voice-candidates.md)。
+
+`whole_refine.py` 复用生成与响度验证，以用户偏好的整句版为基线。在实验进程当前模型实例上包装 `decode`，记录语义 token、音素及 RNG 哈希并显式设置 `noise_scale`，不修改框架源码。新试听独立写入 `candidates/whole-refine/`，按实际结果保存用户反馈和有界 PCM 差异，不覆盖前轮文件。
+
+用户淘汰调参候选后，`acoustic_ab.py` 捕获01的真实解码输入，将语义、音素、参考频谱和RNG存为本地张量快照，再用当前8轮/较早4轮/预训练声学权重逐项重放。每次重载快照并核验哈希，推理配置独立落在实验目录；产物位于 `candidates/acoustic-ab-20261029/`，用于归因而不是运行时音色替换。
+
+同目录 `selection.json` 记录用户首选文件02的4轮检查点及样本哈希，只是实验候选指针，不被 Bot 自动读取。原8轮权重仍在原位置；4轮端到端多句推理尚未验收。
+
 ## 会话、记忆与目的补强（已推送）
 
 观察器在收到消息时先更新当前会话滚动缓冲并唤醒等待者，再在线程记录符合显著条件的记忆和明确目的；不等待磁盘写入，进程突然退出可能丢失尚未提交的记录。消息读取和水位只绑定当前 scope 与人格，最多等待 3 秒。收尾工具只提交提议；本轮全部文本发送调用正常返回、没有更新的真人消息或待交付工作且当前文本不是问句/请求时，才关闭该用户续聊窗口。主回复沿用现有发送状态，不校验消息 ID；直接唤醒和私聊原路径不变。

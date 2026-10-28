@@ -2,6 +2,8 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `voice_reply.py` / `voice_worker.py` / `tools.py` / `__init__.py` / `config.py` / `data/voice_bank/` | 调情短语音：语音库选择、可选 GPT-SoVITS 子进程、冷却与主人例外 → `docs/voice-candidates.md`、`docs/architecture.md` | 已部署；双端 15 文件一致，远端 15+22 项通过，真实 QQ 播放未测 |
+| `tmp/voice-training-20261028-01/` / `tmp/voice-quality-20261028-01/{phrase_ab,whole_refine,acoustic_ab}.py` | 双音色权重与等响度试听 → `models/voice/`、`docs/voice-candidates.md` | 用户首选文件02的4轮候选，selection.json已记录；端到端多句待验，未替换或部署 |
 | `tools.py` / `__init__.py` / `catty_sim_chat.py` | 当前会话消息、水位、短等待与自然收尾 → `docs/tool-contracts.md`、`docs/architecture.md` | 已部署并合入；远端哈希一致 |
 | `insight_memory.py` / `purpose_ledger.py` / `fdj_proactive_runtime.py` / `data_backup.py` | 会话/人格隔离的活跃记忆、完整档及目标证据回执 → `docs/persona-runtime.md`、`docs/fadianji-proactive.md` | 已部署并合入；远端哈希一致 |
 | `persona_evolution_budget.py` / `persona_evolution_store.py` / `persona_evolution_runtime.py` / `__init__.py` | 当前人格语气扩展、写回校验及共享日预算 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署并合入；本地新增 49 项、远端新增 49 项通过；真实模型未测 |
@@ -50,6 +52,11 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-29 | 调情短语音：`catty_voice_say` + 9 句离线语音库 + 可选 worker 子进程；5 分钟冷却、主人免冷却、每轮 1 条 | 本地 15 项语音/22 项工具/26 项人格/33 项配置通过；双端 19 文件哈希一致、远端 py_compile 与 15+22 项通过；21:23:51/21:24:05 加载、21:24:13 重连 |
+| 2026-10-29 | 澄清“第二个”为文件02的较早4轮版，记录首选候选，不是底模03 | selection.json绑定样本及检查点哈希；仅单句重放听评，端到端多句待验 |
+| 2026-10-29 | 记录01前半段更合意/后半仍电音，淘汰其余调参版，固定语义比较8轮/4轮/底模声学权重 | 三组输入张量哈希一致、3.62秒、等RMS及零削波；捕获PCM与01完全一致，权重/框架/共享配置不变 |
+| 2026-10-28 | 以用户偏好的整句02为基线，增加解码噪声、温度、种子及组合对照 | 五组等 RMS、零削波；两组解码配对输入哈希一致；旧基线52个PCM点相差1LSB，失败及有界续验记录保留 |
+| 2026-10-28 | 双音色训练及发电机后半句电音对照，原设置、不分句、种子 7、温度 0.7 | 四组 CPU 生成、检查点/音频哈希与等 RMS 验证通过；原设置复现上一版，音质待听评 |
 | 2026-10-28 | 借鉴 SurfCore：会话工具、分层记忆与目的证据闭环 | 21 文件已部署并合入；远端哈希一致、132 项通过，本地合并后 522 项通过 |
 | 2026-10-28 | 当前角色语气进化及独立每日 token 预算，已部署并合入 | 13 文件与交付包哈希一致；本地 49 项及 297 项关联回归、远端 49 项及 229 项关联回归通过（关联回归各 9 跳过） |
 | 2026-10-28 | 图片与表情自然接话；修复原图透传提示漏挂，保留原生表情线索 | 8 文件双端一致；本地 1401 项、9 跳过，远端 140 项通过 |

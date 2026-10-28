@@ -848,6 +848,30 @@ class Config(BaseModel):
     catty_file_delivery_cleanup_interval_seconds: float = 3600.0
     catty_file_delivery_max_chars: int = 200_000
     catty_file_delivery_max_per_turn: int = 2
+    # 短语音回复 (2026-10-29): 调情时偶尔发一句; 默认后端是随源码部署的离线语音库。
+    catty_voice_enabled: bool = True
+    catty_voice_backend: str = "bank"  # bank=现成录音; worker=本地 GPT-SoVITS 子进程
+    catty_voice_personas: list[str] = Field(default_factory=lambda: ["fadianji"])
+    catty_voice_bank_dir: str = ""  # 空 = 包内 data/voice_bank
+    catty_voice_max_chars: int = 40
+    catty_voice_max_per_turn: int = 1
+    catty_voice_cooldown_seconds: float = 300.0  # 每会话 5 分钟一条; 主人不受限
+    catty_voice_chance: float = 0.6  # 满足条件时真正发声的概率
+    catty_voice_outbox_dir: str = "data/voice_outbox"
+    catty_voice_outbox_ttl_hours: float = 24.0
+    catty_voice_python: str = ""  # 空 = 当前解释器
+    catty_voice_worker_script: str = ""  # 空 = 包内 voice_worker.py
+    catty_voice_worker_threads: int = 2
+    catty_voice_worker_timeout_seconds: float = 120.0
+    catty_voice_worker_idle_unload_seconds: float = 180.0
+    catty_voice_min_free_mb: int = 4800  # worker 启动前的可用内存门槛
+    catty_voice_repo_dir: str = ""  # GPT-SoVITS 源码根
+    catty_voice_gpt_path: str = ""
+    catty_voice_sovits_path: str = ""
+    catty_voice_bert_dir: str = ""
+    catty_voice_hubert_dir: str = ""
+    catty_voice_reference_audio: str = ""
+    catty_voice_reference_text: str = ""
     # Python 沙箱 (2026-10-26): 写/跑代码 + wheel 安装, 全部限制在 data/python_sandbox
     catty_code_sandbox_enabled: bool = True
     catty_code_sandbox_dir: str = "data/python_sandbox"
@@ -1126,6 +1150,21 @@ class Config(BaseModel):
         if isinstance(value, str):
             return {str(key): str(val) for key, val in _parse_json_object(value).items()}
         return {str(key): str(val) for key, val in dict(value).items()}
+
+    @field_validator("catty_voice_personas", mode="before")
+    @classmethod
+    def parse_voice_personas(cls, value: Any) -> Any:
+        if value is None or value == "":
+            return []
+        if isinstance(value, str):
+            raw = value.strip()
+            if raw.startswith("["):
+                loaded = json.loads(raw)
+                if not isinstance(loaded, list):
+                    raise ValueError("voice personas JSON value must be a list")
+                return [str(item).strip() for item in loaded if str(item).strip()]
+            return _split_text(raw)
+        return value
 
     @field_validator("catty_body_presence_watches", mode="before")
     @classmethod

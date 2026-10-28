@@ -320,6 +320,31 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_chars": 200000,
         "max_per_turn": 2,
     },
+    "voice": {
+        "enabled": True,
+        "backend": "bank",
+        "personas": ["fadianji"],
+        "bank_dir": "",
+        "max_chars": 40,
+        "max_per_turn": 1,
+        "cooldown_seconds": 300,
+        "chance": 0.6,
+        "outbox_dir": "data/voice_outbox",
+        "outbox_ttl_hours": 24,
+        "python": "",
+        "worker_script": "",
+        "worker_threads": 2,
+        "worker_timeout_seconds": 120,
+        "worker_idle_unload_seconds": 180,
+        "min_free_mb": 4800,
+        "repo_dir": "",
+        "gpt_path": "",
+        "sovits_path": "",
+        "bert_dir": "",
+        "hubert_dir": "",
+        "reference_audio": "",
+        "reference_text": "",
+    },
     "code_sandbox": {
         "enabled": True,
         "dir": "data/python_sandbox",
@@ -969,6 +994,47 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     )
     _set_env("CATTY_FILE_DELIVERY_MAX_CHARS", file_delivery.get("max_chars"))
     _set_env("CATTY_FILE_DELIVERY_MAX_PER_TURN", file_delivery.get("max_per_turn"))
+
+    voice = _section(data, "voice")
+    _set_env("CATTY_VOICE_ENABLED", voice.get("enabled"))
+    _set_env("CATTY_VOICE_BACKEND", voice.get("backend"))
+    _set_env("CATTY_VOICE_PERSONAS", voice.get("personas"), csv_value=True)
+    _set_env("CATTY_VOICE_MAX_CHARS", voice.get("max_chars"))
+    _set_env("CATTY_VOICE_MAX_PER_TURN", voice.get("max_per_turn"))
+    _set_env("CATTY_VOICE_COOLDOWN_SECONDS", voice.get("cooldown_seconds"))
+    _set_env("CATTY_VOICE_CHANCE", voice.get("chance"))
+    _set_env("CATTY_VOICE_OUTBOX_TTL_HOURS", voice.get("outbox_ttl_hours"))
+    _set_env("CATTY_VOICE_WORKER_THREADS", voice.get("worker_threads"))
+    _set_env("CATTY_VOICE_WORKER_TIMEOUT_SECONDS", voice.get("worker_timeout_seconds"))
+    _set_env("CATTY_VOICE_WORKER_IDLE_UNLOAD_SECONDS", voice.get("worker_idle_unload_seconds"))
+    _set_env("CATTY_VOICE_MIN_FREE_MB", voice.get("min_free_mb"))
+    for section_key, env_name in (
+        ("bank_dir", "CATTY_VOICE_BANK_DIR"),
+        ("outbox_dir", "CATTY_VOICE_OUTBOX_DIR"),
+    ):
+        raw_dir = str(voice.get(section_key) or "").strip()
+        if raw_dir:
+            resolved = Path(raw_dir).expanduser()
+            if not resolved.is_absolute():
+                resolved = base_dir / resolved
+            _set_env(env_name, resolved)
+    for section_key, env_name in (
+        ("python", "CATTY_VOICE_PYTHON"),
+        ("worker_script", "CATTY_VOICE_WORKER_SCRIPT"),
+        ("repo_dir", "CATTY_VOICE_REPO_DIR"),
+        ("gpt_path", "CATTY_VOICE_GPT_PATH"),
+        ("sovits_path", "CATTY_VOICE_SOVITS_PATH"),
+        ("bert_dir", "CATTY_VOICE_BERT_DIR"),
+        ("hubert_dir", "CATTY_VOICE_HUBERT_DIR"),
+        ("reference_audio", "CATTY_VOICE_REFERENCE_AUDIO"),
+    ):
+        raw_path = str(voice.get(section_key) or "").strip()
+        if raw_path:
+            resolved = Path(raw_path).expanduser()
+            if not resolved.is_absolute():
+                resolved = base_dir / resolved
+            _set_env(env_name, resolved)
+    _set_env("CATTY_VOICE_REFERENCE_TEXT", voice.get("reference_text"))
 
     code_sandbox = _section(data, "code_sandbox")
     _set_env("CATTY_CODE_SANDBOX_ENABLED", code_sandbox.get("enabled"))
