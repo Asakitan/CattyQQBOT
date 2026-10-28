@@ -10,9 +10,9 @@
 - 两套离线语音库（各 9 句）随源码部署；`worker` 后端用独立 GPT-SoVITS 子进程念模型自己写的话，按 `voice.profiles.<音色>` 取模型，带启动握手、240 秒超时、4200MiB 内存门槛、空闲 180 秒卸载，失败退回语音库。
 - 冷却：每会话 5 分钟，默认 0.6 概率；主人跳过冷却与概率但仍只发 1 条。
 - 远端落地：独立 venv（Python 3.14.5、torch/torchaudio 2.11.0+cpu、transformers 4.57.6、librosa 1.0.0、pytorch-lightning 2.6.6 等）；BERT/HuBERT 从 hf-mirror 下载后重存 fp16（621/180MiB）；`config.json` 写入 `voice` 段（两套 profiles、backend=worker、min_free 4200），备份 `config.json.bak_voice_20261028-224709`。
-- 依赖适配：缺 G2PW 时 `is_g2pw=0` 回退 pypinyin（605MB 模型只上传了第一段 335MB 未合并）；无 `jieba_fast` 轮子时回退 `jieba`；torchaudio 2.11 的 `load` 需要 torchcodec，参考音改用 soundfile。补丁同时保留在本地框架副本，G2PW 存在时行为不变。
-- 验证：本机 worker 端到端通过；远端 `test_voice_reply` 16 项、工具扫描 22 项通过；16 个应用/模型文件与 5 个框架文件哈希一致；远端实测米雪儿 3.31 秒、机机 3.07 秒，加载峰值约 3.2GiB，空闲卸载后可用内存 5.83GiB；bot 23:06:33 加载、23:06:38 重连（远端时钟）。
-- 未验证：真实 QQ 语音播放、真机听感、多音字（G2PW 未合并）与长句稳定性。
+- 依赖适配：G2PW 已装（`g2pW.onnx` 两段分片合并，SHA-256 与本地训练副本一致，另补 `opencc-python-reimplemented`；`is_g2pw` 开关只作缺模型兜底）；无 `jieba_fast` 轮子时回退 `jieba`；torchaudio 2.11 的 `load` 需要 torchcodec，参考音改用 soundfile。补丁同时保留在本地框架副本。
+- 验证：本机 worker 端到端通过；远端 `test_voice_reply` 16 项、工具扫描 22 项通过；16 个应用/模型文件与 5 个框架文件哈希一致；G2PW 启用后远端实测米雪儿 3.27–3.40 秒、机机 3.96–4.72 秒，worker 峰值工作集 3961 MiB，空闲卸载后可用内存 5.88 GiB；bot 23:06:33 加载、23:06:38 重连（远端时钟）。
+- 未验证：真实 QQ 语音播放、真机听感与长句稳定性。
 
 ## 目标与范围（训练部分）
 

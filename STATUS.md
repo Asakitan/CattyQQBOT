@@ -5,8 +5,9 @@
 - 新工具 `catty_voice_say`：模型自己判断对方在调情/暧昧时偶尔回一句 2-4 秒语音，文字回复发完后单独补发；本轮最多 1 条。**所有人格都暴露该工具**，音色按人格解析：默认米雪儿（`voice.default=michelle`），`voice.persona_voices` 可覆盖，机机用 `fadianji`。
 - 两套离线语音库随源码部署：`data/voice_bank/michelle/` 与 `.../fadianji/` 各 9 句（害羞/撩/温柔/开心/傲娇），分别用对应训练权重与参考音离线生成，逐句有自动转写记录。
 - `worker` 后端已在远端真正跑通：独立 venv（Python 3.14.5 + torch/torchaudio 2.11.0+cpu + transformers 4.57.6 + librosa 1.0.0 等）、BERT/HuBERT 以 fp16 放在 `tmp/voice-runtime/pretrained/`、两套权重与参考音放在 `models/voice/`，`config.json` 已写入 `voice` 段（profiles 两套、backend=worker、5 分钟冷却、每轮 1 条、内存门槛 4200MiB、空闲卸载 180s，备份 `config.json.bak_voice_20261028-224709`）。远端实测合成：米雪儿 3.31 秒、机机 3.07 秒。
-- 依赖适配：G2PW 模型（605MB）未部署，框架在缺模型时回退 pypinyin 常规读音（`is_g2pw=0`）；`jieba_fast` 无 Python 3.14 轮子，回退纯 Python `jieba`；torchaudio 2.11 的 `load` 需要 torchcodec，参考音改由 soundfile 读取。远端 `test_voice_reply` 16 项、工具扫描 22 项通过，16 个应用/模型文件与 5 个框架文件哈希一致；bot 23:06:33 加载、23:06:38 重连（远端时钟），smoke 后可用内存回到 5.83 GiB。
-- 真实 QQ 语音播放与真机听感仍未验证；G2PW 只上传了第一段（335MB）到 `tmp/voice-runtime/g2pw-parts/`，需要更准的多音字时再补第二段并合并。
+- G2PW 已部署：605.79MiB `g2pW.onnx` 由两段分片合并（SHA-256 `2eb3c71f…` 与本地训练副本一致），连同小文件放入框架 `GPT_SoVITS/text/G2PWModel/`，并补装 `opencc-python-reimplemented`；`is_g2pw` 环境开关只保留为缺模型兜底。`jieba_fast` 无 Python 3.14 轮子，回退纯 Python `jieba`；torchaudio 2.11 的 `load` 需要 torchcodec，参考音改由 soundfile 读取。
+- 远端 `test_voice_reply` 16 项、工具扫描 22 项通过，16 个应用/模型文件与 5 个框架文件哈希一致。G2PW 启用后实测米雪儿 3.27–3.40 秒、机机 3.96–4.72 秒，worker 峰值工作集 3961 MiB，空闲卸载后可用内存 5.88 GiB；bot 23:06:33 加载、23:06:38 重连（远端时钟）。
+- 真实 QQ 语音播放与真机听感仍未验证；G2PW 分片与 ModelScope 下载 zip 已清理。
 
 ## 2026-10-29 · 双音色与发电机局部电音试听（本地候选）
 

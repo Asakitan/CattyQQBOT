@@ -17,10 +17,10 @@
 ## 远端合成环境（2026-10-29 部署）
 
 - 独立 venv：`D:/CattyQQAI/tmp/voice-runtime/.venv`（Python 3.14.5，torch 2.11.0+cpu、torchaudio 2.11.0+cpu、transformers 4.57.6、librosa 1.0.0、numba 0.68.1、onnxruntime 1.31.1、peft 0.21.2、pytorch-lightning 2.6.6、matplotlib、fast-langdetect、split-lang、resampy、soundfile）。
-- 预训练：`tmp/voice-runtime/pretrained/` 下 BERT（fp16，621MiB）与 HuBERT（fp16，180MiB），从 hf-mirror 下载后重存为 fp16，与训练所用本地副本精度一致；`fast_langdetect/lid.176.bin` 125MiB 随框架目录部署。两套训练权重与参考音在 `models/voice/{michelle,fadianji}/`。
-- 框架适配（`tmp/.../gpt-sovits-source/...`，非仓库文件）：`is_g2pw` 恢复为环境变量开关，缺 `G2PWModel` 时回退 pypinyin；`chinese.py`/`chinese2.py`/`tone_sandhi.py` 在无 `jieba_fast` 时回退纯 Python `jieba`；`TTS.py` 用 soundfile 读取参考音，绕开 torchaudio 2.11 的 torchcodec 依赖。本地副本保留同一补丁，G2PW 存在时行为不变。
-- 远端实测：米雪儿 3.31 秒、机机 3.07 秒（各含一次模型加载）；加载峰值工作集约 3.2GiB，空闲卸载后可用内存回到 5.83GiB。G2PW 只上传了第一段（335MB，`tmp/voice-runtime/g2pw-parts/`），未合并，多音字精度暂按 pypinyin 回退。
-- 真实 QQ 语音播放、真机听感、多音字与长句稳定性尚未验证。
+- 预训练：`tmp/voice-runtime/pretrained/` 下 BERT（fp16，621MiB）与 HuBERT（fp16，180MiB），从 hf-mirror 下载后重存为 fp16，与训练所用本地副本精度一致；`fast_langdetect/lid.176.bin` 125MiB 随框架目录部署。G2PW 已装到 `GPT_SoVITS/text/G2PWModel/`：605.79MiB `g2pW.onnx` 由两段分片合并，SHA-256 `2eb3c71f…` 与本地训练副本一致，另补 `opencc-python-reimplemented`。两套训练权重与参考音在 `models/voice/{michelle,fadianji}/`。
+- 框架适配（`tmp/.../gpt-sovits-source/...`，非仓库文件）：`is_g2pw` 恢复为环境变量开关（仅缺模型时自动关闭并回退 pypinyin）；`chinese.py`/`chinese2.py`/`tone_sandhi.py` 在无 `jieba_fast` 时回退纯 Python `jieba`；`TTS.py` 用 soundfile 读取参考音，绕开 torchaudio 2.11 的 torchcodec 依赖。本地副本保留同一补丁。
+- 远端实测（G2PW 启用）：米雪儿 3.27–3.40 秒、机机 3.96–4.72 秒（各含一次模型加载）；worker 峰值工作集 3961 MiB，空闲卸载后可用内存 5.88 GiB。
+- 真实 QQ 语音播放、真机听感与长句稳定性尚未验证。
 
 ## 发电机参考音与局部电音
 
