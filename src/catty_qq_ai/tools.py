@@ -1403,13 +1403,14 @@ _VOICE_SAY_SCHEMA: dict[str, Any] = {
     "function": {
         "name": "catty_voice_say",
         "description": (
-            "发一句很短的语音（1 句，约 2-4 秒）。只在对方正在跟你调情、暧昧试探、撒娇黏人，"
-            "或你被撩到想用声音回他一下时使用；普通闲聊、答疑、汇报、争论不要用。"
+            "发一句很短的语音（1 句，约 2-4 秒）。用户明确要求发语音、用语音回复或用语音朗读时优先调用；"
+            "未被明确要求时，只在对方调情、暧昧试探、撒娇黏人或你想用声音回应时偶尔使用。"
             "被问「你喜欢我吗 / 想不想我 / 爱不爱我」这类表白试探时，优先用语音回答，"
             "可以只发语音、不写文字。"
             "语音会先发出去，文字跟在后面或完全不写都行；"
             "回复里不要提语音、生成、等待或稍后发送，也不要说已经发了。"
-            "同一会话有冷却和概率限制，偶尔一条就够；返回冷却提示时不要重试，直接用文字回复。"
+            "同一会话有冷却；主动要求语音不抽概率，自发语音偶尔一条就够。"
+            "返回冷却提示时不要重试，直接用文字回复。"
             "mood 决定整句语气；想让一句话有起伏时用 segments 按语气切 1-4 段，每段单独给 emotion，"
             "模型逐段换参考音合成，听起来会像真人换了口气。"
             "text 可留空，留空时用现成录音并返回实际台词。"
@@ -1539,7 +1540,7 @@ def _make_lazy_schema(name: str, short_desc: str, props: dict[str, dict], requir
 
 _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_voice_say": _make_lazy_schema(
-        "catty_voice_say", "调情时偶尔发一句短语音",
+        "catty_voice_say", "明确要求语音时优先使用，调情时可偶尔发一句",
         {
             "mood": {"type": "string", "enum": ["shy", "tease", "soft", "happy", "tsundere"], "description": "语气"},
             "text": {"type": "string", "description": "可选短句"},
@@ -6430,7 +6431,12 @@ async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
         return {"ok": False, "error": f"本轮最多 {max(limit, 1)} 条语音"}
     mood = voice.mood_of(args.get("mood"))
     scope = _current_tool_scope(ctx) or ctx.scope_key or "unknown"
-    allowed, reason = voice.reserve_slot(ctx.config, scope, is_owner=_is_owner(ctx))
+    allowed, reason = voice.reserve_slot(
+        ctx.config,
+        scope,
+        is_owner=_is_owner(ctx),
+        explicit_request=voice.explicit_voice_requested(ctx.config, ctx.user_text),
+    )
     if not allowed:
         return {"ok": False, "error": reason, "note": "这轮不要重试语音, 直接用文字回复。"}
 
@@ -6839,14 +6845,15 @@ _CONVERSATION_TOOLS = frozenset({
 
 _NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
     "catty_voice_say": (
-        "发一句很短的语音，只在对方正在调情、暧昧试探、撒娇，或被问“你喜欢我吗/想不想我/爱不爱我”"
-        "这类表白试探时使用；这种问题可以只发语音、不写文字。普通闲聊、答疑和汇报不要用。"
+        "发一句很短的语音。用户明确要求发语音、用语音回复或用语音朗读时优先调用；"
+        "未被明确要求时，只在调情、暧昧试探、撒娇或被问“你喜欢我吗/想不想我/爱不爱我”"
+        "这类表白试探时偶尔使用；可以只发语音、不写文字。"
         "语音会先发出去，文字跟在后面或不写都行；回复里不要提语音、生成、等待或稍后发送。"
-        "同一会话有冷却和概率限制，被拒绝时直接用文字回复、不要重试。"
+        "同一会话有冷却；用户明确要求时不抽概率，被拒绝时直接用文字回复、不要重试。"
         "mood 决定整句语气；想让一句话有起伏时用 segments 按语气切 1-4 段，逐段给 emotion，"
         "哪段犹豫、哪段凶、哪段软下来由你判断。"
         "text 可留空，留空时使用现成录音并返回实际台词；音色按人格自动选择。",
-        "被表白试探时用语音回答；其余场景用文字",
+        "用户明确要求语音时优先使用，也可用于表白试探",
     ),
     "catty_emoji": (
         "从本地表情库搜索并发送一张表情图。适用场景：需要用表情表达害羞、得意、贴贴、"

@@ -4441,23 +4441,46 @@ def _spawn_deferred_voice_delivery(
     after: asyncio.Event,
     label: str,
     skip_texts: set[str] | None = None,
+    sent_texts: set[str] | None = None,
+    fallback_text: str = "",
+    fallback_on_failure: bool = False,
 ) -> None:
     """等本轮文字发完, 再把语音按原会话发出去; items 可以是列表或返回列表的协程。"""
 
     async def _runner() -> None:
         payload = items if isinstance(items, list) else await items
-        if not payload:
-            return
         try:
             await asyncio.wait_for(after.wait(), timeout=_DEFERRED_DELIVERY_MAX_WAIT_SECONDS)
         except asyncio.TimeoutError:
             logger.info(f"{label}: reply still not finished, sending voice anyway")
+
+        async def fallback(text: str) -> None:
+            if not fallback_on_failure:
+                return
+            text = str(text or "").strip()
+            if not text and sent_texts:
+                return
+            text = text or "这次语音没有发出去。"
+            if sent_texts and _voice_text_key(text) in sent_texts:
+                return
+            try:
+                await bot.send(event, Message(text))
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"{label}: voice text fallback failed: {type(exc).__name__}")
+
+        if not payload:
+            await fallback(fallback_text)
+            return
         for item in payload:
             if isinstance(item, dict):
                 if skip_texts and _voice_text_key(str(item.get("text") or "")) in skip_texts:
                     logger.info(f"{label}: skip clip already spoken as a voice bubble")
                     continue
-                await _send_voice_message(bot, event, item, label=label)
+                if await _send_voice_message(bot, event, item, label=label):
+                    if skip_texts is not None:
+                        skip_texts.add(_voice_text_key(str(item.get("text") or "")))
+                else:
+                    await fallback(str(item.get("text") or fallback_text))
 
     task = asyncio.create_task(_runner(), name=f"catty-deferred-{label}")
     _deferred_delivery_tasks.add(task)
@@ -4486,25 +4509,28 @@ async def _voice_tool_with_deferred_delivery(
     event: MessageEvent,
     after: asyncio.Event,
     voiced_texts: set[str] | None = None,
+    pending_texts: set[str] | None = None,
+    sent_texts: set[str] | None = None,
+    fallback_on_failure: bool = False,
 ) -> dict[str, Any]:
     """语音库秒回; 本地合成较慢时先回文字, 合成好再单独发语音。"""
     from dataclasses import replace as _dc_replace
 
-    # 工具参数在调用时就已知, 先把台词记进本轮已发声集合, 免得语音条再念一遍同一句。
-    if voiced_texts is not None:
-        try:
-            _arg_payload = json.loads(args_json or "{}")
-        except (TypeError, json.JSONDecodeError):
-            _arg_payload = {}
+    try:
+        _arg_payload = json.loads(args_json or "{}")
+    except (TypeError, json.JSONDecodeError):
+        _arg_payload = {}
+    if not isinstance(_arg_payload, dict):
+        _arg_payload = {}
+    _arg_spoken = ""
+    if isinstance(_arg_payload.get("segments"), list):
+        _arg_spoken = " ".join(
+            " ".join(str(segment.get("text") or "").split())
+            for segment in _arg_payload["segments"][:4]
+            if isinstance(segment, dict) and str(segment.get("text") or "").strip()
+        )
+    if not _arg_spoken:
         _arg_spoken = " ".join(str(_arg_payload.get("text") or "").split())
-        if not _arg_spoken and isinstance(_arg_payload.get("segments"), list):
-            _arg_spoken = " ".join(
-                str(segment.get("text") or "")
-                for segment in _arg_payload["segments"]
-                if isinstance(segment, dict)
-            )
-        if _arg_spoken.strip():
-            voiced_texts.add(_voice_text_key(_arg_spoken))
     detached_ctx = _dc_replace(tool_ctx, pending_voice_deliveries=[])
     task = asyncio.create_task(
         _execute_schema_gated_tool_call(name, args_json, detached_ctx, allowed_names=allowed_names)
@@ -4514,6 +4540,8 @@ async def _voice_tool_with_deferred_delivery(
     except asyncio.TimeoutError:
         tool_ctx.deferred_delivery_started = True
         tool_ctx.deferred_voice_started = True
+        if pending_texts is not None and _arg_spoken.strip():
+            pending_texts.add(_voice_text_key(_arg_spoken))
         _spawn_deferred_voice_delivery(
             bot,
             event,
@@ -4521,6 +4549,9 @@ async def _voice_tool_with_deferred_delivery(
             after=after,
             label="catty_voice_say",
             skip_texts=voiced_texts,
+            sent_texts=sent_texts,
+            fallback_text=_arg_spoken,
+            fallback_on_failure=fallback_on_failure,
         )
         logger.info(f"catty_voice_say still running after {_VOICE_INLINE_WAIT_SECONDS:.0f}s → reply first")
         return {
@@ -17708,6 +17739,14 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         append_harness_agent_hint(messages, () if _prefer_spark else _allowed_tool_names)
         from .request_intent import append_context_request_hint
         append_context_request_hint(messages, () if _prefer_spark else _allowed_tool_names)
+        from .voice_reply import explicit_voice_request_hint
+        _voice_request_hint = explicit_voice_request_hint(
+            config,
+            incoming.text,
+            tool_available=not _prefer_spark and "catty_voice_say" in _allowed_tool_names,
+        )
+        if _voice_request_hint:
+            _append_internal_system(messages, _voice_request_hint, label="explicit voice request")
         if _prefer_spark and placeholder_task is not None and not placeholder_task.done():
             placeholder_task.cancel()
             placeholder_task = None
@@ -17827,6 +17866,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _lock_stack.callback(_reply_done.set)
         _scheduled_file_paths: set[str] = set()
         _turn_voiced_texts: set[str] = set()
+        _turn_pending_voice_texts: set[str] = set()
+        _turn_sent_texts: set[str] = set()
 
         def _tools_provider() -> list[dict[str, Any]]:
             from .tools import skill_tool_schemas
@@ -17854,6 +17895,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     after=_reply_done,
                 )
             elif name == "catty_voice_say":
+                from .voice_reply import explicit_voice_requested
                 result = await _voice_tool_with_deferred_delivery(
                     name,
                     args_json,
@@ -17863,6 +17905,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     event=event,
                     after=_reply_done,
                     voiced_texts=_turn_voiced_texts,
+                    pending_texts=_turn_pending_voice_texts,
+                    sent_texts=_turn_sent_texts,
+                    fallback_on_failure=explicit_voice_requested(config, tool_ctx.user_text),
                 )
             else:
                 result = await _execute_schema_gated_tool_call(
@@ -17890,10 +17935,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             for _staged_voice in tool_ctx.pending_voice_deliveries[_voices_before:]:
                 if isinstance(_staged_voice, dict):
                     # 主人 2026-10-29: 语音先发, 文字跟在后面或不跟; 不再等本轮文字结束。
-                    await _send_voice_message(bot, event, _staged_voice, label=name or "voice")
-                    _turn_voiced_texts.add(
-                        _voice_text_key(str(_staged_voice.get("text") or ""))
-                    )
+                    if await _send_voice_message(bot, event, _staged_voice, label=name or "voice"):
+                        _turn_voiced_texts.add(
+                            _voice_text_key(str(_staged_voice.get("text") or ""))
+                        )
+                    else:
+                        result = {"ok": False, "error": "语音未确认送达", "note": "直接用文字回复。"}
             if name == "catty_imagegen" and isinstance(result, dict) and result.get("error"):
                 _img_error_text = str(result.get("error") or "")
                 # 积分不足/冷却不是生成失败，保留原有提示；其余错误一律吞掉并道歉。
@@ -18804,13 +18851,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         reply_for_send, latex_sources = replace_latex_with_placeholders(_sanitize_reply_text_for_output(reply))
         # 主人 2026-10-29: 本轮排了语音时, 删掉“语音正在生成/稍后发出来”这类过程播报;
         # 只剩播报就整轮不发文字, 语音自己到达。
-        _voice_pending = bool(
-            tool_ctx.pending_voice_deliveries or tool_ctx.deferred_delivery_started
-        )
+        _voice_pending = bool(_turn_voiced_texts or tool_ctx.deferred_voice_started)
         # 本轮确定会有语音(工具直发/后台排队), 剩余短气泡也一起念。
-        _voice_queued = bool(
-            tool_ctx.pending_voice_deliveries or tool_ctx.deferred_voice_started
-        ) or bool(_turn_voiced_texts)
+        _voice_queued = _voice_pending
         if _voice_pending:
             reply_for_send = _strip_voice_generation_narration(reply_for_send)
         reply_for_send, inline_image_urls = _extract_inline_images(reply_for_send)
@@ -18892,6 +18935,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
         async def _send_reply_message(message: Message, *, text: str) -> None:
             await _delivery_state.send(matcher.send, message, history_text=text)
+            _turn_sent_texts.add(_voice_text_key(text))
             try:
                 _remember_bot_reply_for_event(
                     event, text,
@@ -18909,11 +18953,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         async def _send_voice_bubble(item: dict[str, Any]) -> bool:
             # 语音气泡: 发出去之后把台词当已送达记进本轮历史/续聊。
             if not await _send_voice_message(bot, event, item, label="catty_voice_bubble"):
+                _turn_voiced_texts.discard(_voice_text_key(str(item.get("text") or "")))
                 return False
             text = str(item.get("text") or "").strip()
             if not text:
                 return True
             _turn_voiced_texts.add(_voice_text_key(text))
+            _turn_sent_texts.add(_voice_text_key(text))
             _delivery_state.receipts.append(
                 ReplyDeliveryReceipt(text=_chunk_to_history(text), status="delivered")
             )
@@ -19011,6 +19057,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _affection_hit = bool(chunks) and _voice_reply.affection_voice_eligible(
                 config, incoming.text
             )
+            _explicit_voice_hit = bool(chunks) and _voice_reply.explicit_voice_requested(
+                config, incoming.text
+            )
             # 语音冷却按群/私聊共享; 本轮工具已经发过语音时不再等冷却。
             _voice_scope = _conversation_queue_key(event)
             _cooldown_left = (
@@ -19018,12 +19067,18 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 if (_event_is_owner(event) or _voice_queued)
                 else _voice_reply.cooldown_remaining(config, _voice_scope)
             )
+            if _explicit_voice_hit and not _voice_queued and _cooldown_left <= 0:
+                _voice_allowed, _ = _voice_reply.reserve_slot(
+                    config, _voice_scope, is_owner=_event_is_owner(event), explicit_request=True
+                )
+                if not _voice_allowed:
+                    _cooldown_left = max(_voice_reply.cooldown_remaining(config, _voice_scope), 1.0)
             if _cooldown_left > 0 and not _voice_queued and (
-                _voice_window or _auto_hit or _nsfw_hit or _affection_hit
+                _voice_window or _auto_hit or _nsfw_hit or _affection_hit or _explicit_voice_hit
             ):
                 logger.info(f"bubble voice skipped: group cooldown {int(_cooldown_left)}s left")
             if (
-                _voice_window or _auto_hit or _nsfw_hit or _voice_queued or _affection_hit
+                _voice_window or _auto_hit or _nsfw_hit or _voice_queued or _affection_hit or _explicit_voice_hit
             ) and chunks and _cooldown_left <= 0:
                 _voice_name = _voice_reply.voice_name_for(config, _persona_for_event(event))
                 _limit = max(int(getattr(config, "catty_voice_bubble_max_per_turn", 3) or 3), 1)
@@ -19038,7 +19093,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         continue
                     if _voice_text_key(_spoken) in _turn_voiced_texts:
                         # 这句已经用语音说过, 不再补一条文字气泡。
-                        _bubble_voice_items[_index] = {"already_voiced": True}
+                        _bubble_voice_items[_index] = {
+                            "already_voiced": True, "voice_key": _voice_text_key(_spoken),
+                        }
+                        continue
+                    if _voice_text_key(_spoken) in _turn_pending_voice_texts:
                         continue
                     try:
                         _result = await _voice_reply.synthesize(
@@ -19075,11 +19134,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _bubble_voice_items[_index] if _index < len(_bubble_voice_items) else None
             )
             if _voice_item is not None:
-                if not _voice_item.get("already_voiced"):
-                    await _send_voice_bubble(_voice_item)
-                if delay_seconds:
-                    await asyncio.sleep(delay_seconds)
-                continue
+                _voice_sent = (
+                    _voice_item.get("voice_key", _voice_text_key(chunk)) in _turn_voiced_texts
+                    if _voice_item.get("already_voiced")
+                    else await _send_voice_bubble(_voice_item)
+                )
+                if _voice_sent:
+                    if delay_seconds:
+                        await asyncio.sleep(delay_seconds)
+                    continue
             # 前段发送失败时继续处理后续气泡和图片。
             try:
                 await _send_reply_message(
@@ -19111,7 +19174,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         )
         if _tail_voice is not None:
             if _tail_voice.get("already_voiced"):
-                _chunks_last_already_sent = True
+                _chunks_last_already_sent = _tail_voice.get(
+                    "voice_key", _voice_text_key(chunks[-1])
+                ) in _turn_voiced_texts
             else:
                 _chunks_last_already_sent = await _send_voice_bubble(_tail_voice)
         if nsfw_image_segments:

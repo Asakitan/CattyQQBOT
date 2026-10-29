@@ -1,11 +1,13 @@
 """调情短语音: 语音库、冷却/概率、worker 校验与工具接线 (2026-10-29)。"""
 from __future__ import annotations
 
+import ast
 import asyncio
 import importlib
 import importlib.util
 import io
 import json
+import re
 import sys
 import tempfile
 import time
@@ -13,7 +15,7 @@ import types
 import unittest
 import wave
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import AsyncMock, Mock, patch
 
 _ROOT = Path(__file__).resolve().parents[1]
 _PACKAGE_NAME = "catty_voice_test"
@@ -123,6 +125,16 @@ class GateTests(unittest.TestCase):
         self.assertFalse(allowed)
         self.assertIn("文字", reason)
         self.assertGreater(voice.cooldown_remaining(config, "group:chance"), 500)
+
+    def test_explicit_request_skips_chance_but_keeps_cooldown(self) -> None:
+        config = _config(catty_voice_chance=0.0)
+        self.assertEqual(
+            voice.reserve_slot(config, "group:requested", explicit_request=True),
+            (True, ""),
+        )
+        allowed, reason = voice.reserve_slot(config, "group:requested", explicit_request=True)
+        self.assertFalse(allowed)
+        self.assertIn("冷却", reason)
 
     def test_cooldown_blocks_second_call(self) -> None:
         config = _config()
@@ -318,6 +330,47 @@ class WindowAndBubbleTests(unittest.TestCase):
             voice.affection_voice_eligible(_config(catty_voice_enabled=False), "我喜欢你")
         )
 
+    def test_explicit_voice_request(self) -> None:
+        config = _config()
+        for text in (
+            "机机发个语音条骂我",
+            "给我发一条语音",
+            "用语音说一下",
+            "语音回复我",
+            "发条语音",
+            "来一段语音",
+            "发一段语音给我",
+            "语音念出来",
+        ):
+            with self.subTest(text=text):
+                self.assertTrue(voice.explicit_voice_requested(config, text))
+        for text in (
+            "刚才的语音很好听",
+            "别发语音",
+            "不要给我发语音",
+            "我发了条语音",
+            "给你发一条语音",
+            "语音无法识别怎么办",
+            "把这个语音转成文字",
+            "告诉我怎么发语音条",
+            "",
+        ):
+            with self.subTest(text=text):
+                self.assertFalse(voice.explicit_voice_requested(config, text))
+        self.assertFalse(
+            voice.explicit_voice_requested(_config(catty_voice_enabled=False), "发条语音")
+        )
+
+    def test_explicit_voice_hint_tracks_tool_availability(self) -> None:
+        config = _config()
+        with_tool = voice.explicit_voice_request_hint(config, "发条语音", tool_available=True)
+        without_tool = voice.explicit_voice_request_hint(config, "发条语音", tool_available=False)
+        self.assertIn("catty_voice_say", with_tool)
+        self.assertIn("不要声称语音发不了", with_tool)
+        self.assertNotIn("catty_voice_say", without_tool)
+        self.assertIn("尝试转换为语音", without_tool)
+        self.assertEqual(voice.explicit_voice_request_hint(config, "不要发语音", tool_available=True), "")
+
 
 class WorkerTailTests(unittest.TestCase):
     def test_synthetic_voice_banks_are_not_tts_references(self) -> None:
@@ -477,12 +530,31 @@ class ToolWiringTests(unittest.TestCase):
         for banned in ("生成", "稍后", "后台"):
             self.assertNotIn(banned, result["note"])
 
+    def test_explicit_tool_request_skips_probability_but_respects_cooldown(self) -> None:
+        config = _config(catty_voice_chance=0.0)
+        ctx = self._ctx(config)
+        ctx.user_text = "机机发个语音条骂我"
+        result = asyncio.run(self.tools._exec_voice_say({"mood": "soft"}, ctx))
+        self.assertTrue(result["ok"])
+        self.assertEqual(len(ctx.pending_voice_deliveries), 1)
+
+        next_ctx = self._ctx(config)
+        next_ctx.user_text = ctx.user_text
+        blocked = asyncio.run(self.tools._exec_voice_say({"mood": "soft"}, next_ctx))
+        self.assertFalse(blocked["ok"])
+        self.assertIn("冷却", blocked["error"])
+        self.assertEqual(next_ctx.pending_voice_deliveries, [])
+
     def test_schema_lets_model_choose_voice_for_confession(self) -> None:
         description = self.tools.ALL_TOOL_SCHEMAS["catty_voice_say"]["function"]["description"]
         self.assertIn("你喜欢我吗", description)
         self.assertIn("只发语音", description)
         self.assertIn("先发出去", description)
+        self.assertIn("明确要求", description)
         self.assertNotIn("自动发出", description)
+        self.assertIn("明确要求", self.tools._LAZY_TOOL_SCHEMAS["catty_voice_say"]["function"]["description"])
+        non_catty = self.tools._NON_CATTY_SCHEMA_DESCRIPTIONS["catty_voice_say"]
+        self.assertTrue(all("明确要求" in description for description in non_catty))
 
     def test_schema_offers_emotion_segments(self) -> None:
         params = self.tools.ALL_TOOL_SCHEMAS["catty_voice_say"]["function"]["parameters"]
@@ -527,6 +599,238 @@ class ToolWiringTests(unittest.TestCase):
             )
         }
         self.assertNotIn("catty_voice_say", disabled)
+
+
+class VoiceDeliveryTests(unittest.IsolatedAsyncioTestCase):
+    def _load(self, executor, send_voice):
+        source = _ROOT / "src" / "catty_qq_ai" / "__init__.py"
+        tree = ast.parse(source.read_text(encoding="utf-8"))
+        names = {
+            "_voice_text_key", "_spawn_deferred_voice_delivery",
+            "_voice_items_from_task", "_voice_tool_with_deferred_delivery",
+        }
+        functions = [node for node in tree.body if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in names]
+        self.assertEqual(len(functions), len(names))
+        namespace = {
+            "asyncio": asyncio,
+            "json": json,
+            "re": re,
+            "Any": object,
+            "Bot": object,
+            "MessageEvent": object,
+            "ToolContext": object,
+            "Message": lambda text: text,
+            "logger": Mock(),
+            "_VOICE_INLINE_WAIT_SECONDS": 0.01,
+            "_DEFERRED_DELIVERY_MAX_WAIT_SECONDS": 2.0,
+            "_deferred_delivery_tasks": set(),
+            "_execute_schema_gated_tool_call": executor,
+            "_send_voice_message": send_voice,
+        }
+        exec(compile(ast.Module(body=functions, type_ignores=[]), str(source), "exec"), namespace)
+        return namespace
+
+    async def _start_deferred(self, executor, send_voice, arguments=None):
+        tools = importlib.import_module(f"{_PACKAGE_NAME}.tools")
+        namespace = self._load(executor, send_voice)
+        bot = types.SimpleNamespace(send=AsyncMock())
+        context = tools.ToolContext(config=_config(), memory_store=None, event=None, user_text="发条语音")
+        after = asyncio.Event()
+        voiced, pending, sent = set(), set(), set()
+        result = await namespace["_voice_tool_with_deferred_delivery"](
+            "catty_voice_say", json.dumps(arguments or {"mood": "soft", "text": "语音测试"}), context,
+            allowed_names={"catty_voice_say"}, bot=bot, event=object(), after=after,
+            voiced_texts=voiced, pending_texts=pending, sent_texts=sent,
+            fallback_on_failure=True,
+        )
+        return namespace, bot, context, after, voiced, pending, sent, result
+
+    async def test_rejected_tool_is_not_marked_spoken(self) -> None:
+        async def executor(name, arguments, context, *, allowed_names):
+            return {"ok": False, "error": "cooldown"}
+
+        namespace, bot, context, after, voiced, pending, sent, result = await self._start_deferred(
+            executor, AsyncMock(return_value=True)
+        )
+        self.assertFalse(result["ok"])
+        self.assertEqual(voiced, set())
+        self.assertEqual(pending, set())
+        self.assertFalse(context.deferred_voice_started)
+
+    async def test_slow_voice_is_sent_once_after_reply(self) -> None:
+        release = asyncio.Event()
+
+        async def executor(name, arguments, context, *, allowed_names):
+            await release.wait()
+            context.pending_voice_deliveries.append({"text": "语音测试", "path": "fixture.wav"})
+            return {"ok": True}
+
+        send_voice = AsyncMock(return_value=True)
+        namespace, bot, context, after, voiced, pending, sent, result = await self._start_deferred(
+            executor, send_voice
+        )
+        self.assertEqual(result["status"], "staged")
+        self.assertEqual(voiced, set())
+        self.assertEqual(pending, {"语音测试"})
+        release.set()
+        after.set()
+        await asyncio.gather(*namespace["_deferred_delivery_tasks"])
+        send_voice.assert_awaited_once()
+        bot.send.assert_not_awaited()
+
+    async def test_deferred_segments_take_precedence_over_text(self) -> None:
+        release = asyncio.Event()
+
+        async def executor(name, arguments, context, *, allowed_names):
+            await release.wait()
+            context.pending_voice_deliveries.append({"text": "第一句 第二句", "path": "fixture.wav"})
+            return {"ok": True}
+
+        send_voice = AsyncMock(return_value=True)
+        namespace, bot, context, after, voiced, pending, sent, result = await self._start_deferred(
+            executor, send_voice,
+            {"mood": "soft", "text": "不应使用", "segments": [
+                {"text": "第一句", "emotion": "soft"}, {"text": "第二句", "emotion": "shy"},
+            ]},
+        )
+        self.assertEqual(pending, {"第一句第二句"})
+        release.set()
+        after.set()
+        await asyncio.gather(*namespace["_deferred_delivery_tasks"])
+        send_voice.assert_awaited_once()
+        bot.send.assert_not_awaited()
+
+    async def test_slow_voice_failure_falls_back_without_duplicate_text(self) -> None:
+        for already_sent in (False, True):
+            with self.subTest(already_sent=already_sent):
+                release = asyncio.Event()
+
+                async def executor(name, arguments, context, *, allowed_names):
+                    await release.wait()
+                    return {"ok": False, "error": "synthesis failed"}
+
+                namespace, bot, context, after, voiced, pending, sent, result = await self._start_deferred(
+                    executor, AsyncMock(return_value=True)
+                )
+                if already_sent:
+                    sent.add("语音测试")
+                release.set()
+                after.set()
+                await asyncio.gather(*namespace["_deferred_delivery_tasks"])
+                if already_sent:
+                    bot.send.assert_not_awaited()
+                else:
+                    bot.send.assert_awaited_once()
+                    self.assertEqual(bot.send.await_args.args[1], "语音测试")
+
+    async def test_slow_voice_send_failure_falls_back_to_text(self) -> None:
+        release = asyncio.Event()
+
+        async def executor(name, arguments, context, *, allowed_names):
+            await release.wait()
+            context.pending_voice_deliveries.append({"text": "语音测试", "path": "fixture.wav"})
+            return {"ok": True}
+
+        namespace, bot, context, after, voiced, pending, sent, result = await self._start_deferred(
+            executor, AsyncMock(return_value=False)
+        )
+        release.set()
+        after.set()
+        await asyncio.gather(*namespace["_deferred_delivery_tasks"])
+        bot.send.assert_awaited_once()
+        self.assertEqual(bot.send.await_args.args[1], "语音测试")
+
+    async def test_non_tail_voice_send_failure_falls_back_to_text(self) -> None:
+        source = _ROOT / "src" / "catty_qq_ai" / "__init__.py"
+        tree = ast.parse(source.read_text(encoding="utf-8"))
+        handle = next(node for node in tree.body if isinstance(node, ast.AsyncFunctionDef) and node.name == "handle_chat")
+        loop = next(node for node in ast.walk(handle) if isinstance(node, ast.For) and ast.unparse(node.iter) == "enumerate(chunks[:-1])")
+        wrapper = ast.AsyncFunctionDef(
+            name="send_chunks", args=ast.arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]),
+            body=[ast.Assign(targets=[ast.Name(id="quote_pending", ctx=ast.Store())], value=ast.Constant(value=False)), loop],
+            decorator_list=[],
+        )
+        send_text = AsyncMock()
+        namespace = {
+            "chunks": ["第一句", "最后一句"], "_bubble_voice_items": [{"text": "第一句"}, None],
+            "_send_voice_bubble": AsyncMock(return_value=False), "_send_reply_message": send_text,
+            "_compose_reply_message": lambda *args, **kwargs: kwargs["text"],
+            "_chunk_to_history": lambda text: text, "_voice_text_key": lambda text: text,
+            "_turn_voiced_texts": set(), "event": object(), "quote_pending": False,
+            "latex_sources": [], "inline_image_urls": [], "delay_seconds": 0,
+            "OnebotActionFailed": type("ActionFailed", (Exception,), {}),
+            "OnebotNetworkError": type("NetworkError", (Exception,), {}),
+            "logger": Mock(), "asyncio": asyncio,
+        }
+        exec(compile(ast.fix_missing_locations(ast.Module(body=[wrapper], type_ignores=[])), str(source), "exec"), namespace)
+        await namespace["send_chunks"]()
+        send_text.assert_awaited_once()
+        self.assertEqual(send_text.await_args.kwargs["text"], "第一句")
+
+        namespace["chunks"] = ["（动作）第一句", "最后一句"]
+        namespace["_bubble_voice_items"] = [{"already_voiced": True, "voice_key": "第一句"}, None]
+        namespace["_turn_voiced_texts"] = {"第一句"}
+        send_text.reset_mock()
+        await namespace["send_chunks"]()
+        send_text.assert_not_awaited()
+
+        namespace["_turn_voiced_texts"].clear()
+        await namespace["send_chunks"]()
+        send_text.assert_awaited_once()
+        self.assertEqual(send_text.await_args.kwargs["text"], "（动作）第一句")
+
+    async def test_explicit_bubbles_reserve_group_cooldown_before_synthesis(self) -> None:
+        source = _ROOT / "src" / "catty_qq_ai" / "__init__.py"
+        tree = ast.parse(source.read_text(encoding="utf-8"))
+        handle = next(node for node in tree.body if isinstance(node, ast.AsyncFunctionDef) and node.name == "handle_chat")
+        voice_block = next(
+            node for node in ast.walk(handle)
+            if isinstance(node, ast.Try) and node.body
+            and isinstance(node.body[0], ast.ImportFrom)
+            and any(alias.name == "voice_reply" for alias in node.body[0].names)
+        )
+        wrapper = ast.AsyncFunctionDef(
+            name="prepare_bubbles", args=ast.arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]),
+            body=[voice_block, ast.Return(value=ast.Name(id="_bubble_voice_items", ctx=ast.Load()))],
+            decorator_list=[],
+        )
+        code = compile(ast.fix_missing_locations(ast.Module(body=[wrapper], type_ignores=[])), str(source), "exec")
+        config = _config(catty_voice_chance=0.0, catty_voice_auto_chance=0.0, catty_voice_cooldown_seconds=10)
+        voice._COOLDOWNS.clear()
+
+        def make_namespace():
+            namespace = {
+                "__package__": _PACKAGE_NAME, "asyncio": asyncio, "time": time,
+                "config": config, "chunks": ["这是一句语音"], "reply_for_send": "这是一句语音",
+                "_voice_queued": False, "_prefer_spark": False,
+                "incoming": types.SimpleNamespace(text="机机发个语音条骂我"),
+                "event": object(), "_conversation_queue_key": lambda event: "group:explicit-concurrent",
+                "_event_is_owner": lambda event: False,
+                "_persona_for_event": lambda event: types.SimpleNamespace(name="fadianji"),
+                "_bubble_voice_items": [None], "_turn_voiced_texts": set(),
+                "_turn_pending_voice_texts": set(), "_voice_text_key": lambda text: text,
+                "logger": Mock(),
+            }
+            exec(code, namespace)
+            return namespace
+
+        entered = asyncio.Event()
+        release = asyncio.Event()
+
+        async def synthesize(*args, **kwargs):
+            entered.set()
+            await release.wait()
+            return {"ok": True, "path": "fixture.wav", "seconds": 1.0}
+
+        with patch.object(voice, "synthesize", AsyncMock(side_effect=synthesize)) as synth:
+            first = asyncio.create_task(make_namespace()["prepare_bubbles"]())
+            await asyncio.wait_for(entered.wait(), 2.0)
+            second = await make_namespace()["prepare_bubbles"]()
+            self.assertEqual(second, [None])
+            self.assertEqual(synth.await_count, 1)
+            release.set()
+            first_result = await first
+        self.assertEqual(first_result[0]["text"], "这是一句语音")
 
 
 if __name__ == "__main__":

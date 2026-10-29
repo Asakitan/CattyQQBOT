@@ -156,9 +156,11 @@ def reserve_slot(
     *,
     rng: Callable[[], float] | None = None,
     is_owner: bool = False,
+    explicit_request: bool = False,
 ) -> tuple[bool, str]:
     """占用一次发声机会: 冷却 + 概率。被概率挡下时同样进入冷却, 避免同一轮反复重试。
 
+    明确语音请求跳过概率, 仍遵守同一 scope 的冷却。
     主人不受冷却和概率限制 (主人 2026-10-29); 其他群友同一群共享冷却, 默认 10 秒。
     """
     if is_owner:
@@ -167,6 +169,9 @@ def reserve_slot(
     remaining = cooldown_remaining(config, scope)
     if remaining > 0:
         return False, f"语音冷却剩 {int(remaining)} 秒, 这轮只用文字"
+    if explicit_request:
+        _COOLDOWNS[scope] = time.monotonic()
+        return True, ""
     try:
         chance = float(getattr(config, "catty_voice_chance", 0.6))
     except (TypeError, ValueError):
@@ -325,6 +330,44 @@ def nsfw_bubble_draw(config: Any, roll: float | None = None) -> bool:
         return False
     draw = roll if roll is not None else random.random()
     return draw < min(max(chance, 0.0), 1.0)
+
+
+_EXPLICIT_VOICE_NEGATION_RE = re.compile(
+    r"(?:别|不要|不用|不必|无需|禁止|不想|不愿).{0,12}(?:语音|声音)"
+    r"|(?:(?<!给)我(?:刚刚|刚才|之前|已经|给你)?|给你)(?:发|录|发送|传).{0,8}语音"
+    r"|(?:怎么|如何|怎样|教我|告诉我).{0,10}(?:发|发送|录|使用|用).{0,8}语音"
+)
+_EXPLICIT_VOICE_REQUEST_RE = re.compile(
+    r"(?:发|来|整|录)(?:(?:给我|我|一条|一段|一个|一则|一份|条|段|个|则|份|点|一下)){0,4}语音(?:条|消息)?"
+    r"|(?:用|以)(?:你的|机机的|猫猫的)?(?:语音|声音)(?:来)?(?:回|说|讲|念|读|骂|播|聊)"
+    r"|语音(?:条)?(?:回复|回我|回答|说|讲|骂|念|读|播|聊)"
+    r"|(?:想听|听听|听一听)(?:你|你的|机机的|猫猫的)?(?:语音|声音)"
+)
+
+
+def explicit_voice_requested(config: Any, user_text: str) -> bool:
+    if not voice_enabled(config):
+        return False
+    text = "".join(str(user_text or "").split())
+    return bool(
+        text
+        and not _EXPLICIT_VOICE_NEGATION_RE.search(text)
+        and _EXPLICIT_VOICE_REQUEST_RE.search(text)
+    )
+
+
+def explicit_voice_request_hint(config: Any, user_text: str, *, tool_available: bool) -> str:
+    if not explicit_voice_requested(config, user_text):
+        return ""
+    action = (
+        "若本轮提供 catty_voice_say，优先调用并提供要说的短句；否则直接写短句，程序会尝试转换为语音。"
+        if tool_available
+        else "直接写要说的短句，程序会尝试转换为语音。"
+    )
+    return (
+        "用户本轮明确要求语音。" + action
+        + "没有真实失败回执时不要声称语音发不了，也不要凭空说已经发送。"
+    )
 
 
 # 用户直接对 bot 表白/撒娇时不必抽概率, 这一轮直接发语音。

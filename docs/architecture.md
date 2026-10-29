@@ -6,13 +6,15 @@ QQ 客户端的转文字结果不经过 OneBot；入口在 `_rule` 里用 `_extr
 
 ## 调情短语音（已部署）
 
-`catty_voice_say` 与其它工具一样由模型自行决定何时调用，schema 明确限定“对方在调情/暧昧/撒娇时偶尔一条”，普通问答不适用。工具对所有人格暴露，音色按人格解析：`voice.default`（默认 `michelle`）兜底，`voice.persona_voices` 覆盖（默认把 `fadianji` 指到机机音色）。执行器再走 `voice_reply.reserve_slot`：每会话 10 秒冷却 + 概率门（默认 0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。
+`catty_voice_say` 对所有人格暴露，音色按人格解析：`voice.default`（默认 `michelle`）兜底，`voice.persona_voices` 覆盖（默认把 `fadianji` 指到机机音色）。自发语音由模型决定，执行器通过 `voice_reply.reserve_slot` 检查同会话冷却与概率（默认 10 秒、0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。
+
+明确语音请求已部署：识别用户要求发语音或用语音回复的常见表达，排除否定、用户自己发送和询问操作的表达；当轮提示优先调用可用语音工具，并避免没有失败回执就声称无法发送。明确请求跳过随机概率，但仍保留同群冷却和主人豁免；模型未调用工具时，合格短回复走语音条转换。识别是有界规则，不保证覆盖所有说法。
 
 `bank` 后端读取包内 `data/voice_bank/<音色>/bank.json`，按 mood 选片段并避免连续重复，秒级返回。`worker` 后端用独立 GPT-SoVITS 子进程合成模型自己写的一句短话：启动回执握手、240 秒超时、4200MiB 可用内存门槛、空闲 180 秒卸载、关闭时回收；按 `voice.profiles.<音色>` 取 gpt/sovits/参考音，切换音色时先收掉旧 worker 再判断内存；未配置或失败时退回语音库。
 
-远端 worker 使用独立 venv（Python 3.14 + torch/torchaudio 2.11 CPU），预训练 BERT/HuBERT 以 fp16 存放；框架在缺 G2PW 时回退 pypinyin、在缺 `jieba_fast` 时回退 `jieba`，参考音用 soundfile 读取以绕开 torchcodec。合成结果裁剪后补 0.25 秒静音并做 8ms 淡出再归一化写盘：`fragment_interval=0` 时框架不追加尾部静音，线上 3.36 秒样本的最后 0.2ms 即结束，播放会像被削掉尾音。`catty_voice_say` 选好的语音在工具调用时就以 `record` 发出去，文字跟在后面或不写；只有 worker 合成超过内联等待时，才由 `_spawn_deferred_voice_delivery` 在文字之后补发（慢路径例外）。ActionFailed 不重试以免重复播报，NetworkError 隔 2 秒重试一次；发送失败只写日志。产物在 `data/voice_outbox`，随既有清理循环按 TTL 删除。
+远端 worker 使用独立 venv（Python 3.14 + torch/torchaudio 2.11 CPU），预训练 BERT/HuBERT 以 fp16 存放；框架在缺 G2PW 时回退 pypinyin、在缺 `jieba_fast` 时回退 `jieba`，参考音用 soundfile 读取以绕开 torchcodec。合成结果裁剪后补 0.25 秒静音并做 8ms 淡出再归一化写盘：`fragment_interval=0` 时框架不追加尾部静音，线上 3.36 秒样本的最后 0.2ms 即结束，播放会像被削掉尾音。`catty_voice_say` 选好的语音在工具调用时就以 `record` 发出去，文字跟在后面或不写；只有 worker 合成超过内联等待时，才由 `_spawn_deferred_voice_delivery` 在文字之后补发（慢路径例外）。ActionFailed 不重试以免重复播报，NetworkError 隔 2 秒重试一次；明确语音请求失败时回落文字。产物在 `data/voice_outbox`，随既有清理循环按 TTL 删除。
 
-本轮排了语音时，出站文本先经 `reply_markers.strip_voice_generation_narration`：命中“语音正在生成/稍后发出来/马上发给你语音”等整句就删除；删完为空或模型本来没写文字，就跳过整轮文字发送（`matcher.finish()`），语音照常单独到达。工具回执与 schema 都不再出现“生成/稍后/后台”，避免模型照抄。被问“你喜欢我吗/想不想我/爱不爱我”时，schema 建议优先用语音回答、可只发语音，但没有关键词硬分支，是否发声由模型决定。
+本轮排了语音时，出站文本先经 `reply_markers.strip_voice_generation_narration`：命中“语音正在生成/稍后发出来/马上发给你语音”等整句就删除；删完为空或模型本来没写文字，就跳过整轮文字发送（`matcher.finish()`），语音单独到达。工具回执与 schema 都不再出现“生成/稍后/后台”，避免模型照抄。表白或撒娇内容还会由 `affection_voice_eligible` 触发语音条。
 
 自动语音按 `voice.auto_chance`（默认 0.1）逐条消息抽取：命中且本轮回复 ≤50 字、无代码块/公式时，在文字前先发一句现成语音；模型已调用工具时不重复。
 
@@ -32,7 +34,7 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 未配置或没有可用情绪录音时，worker 使用该音色配置的原始参考音，合并分段并一次生成完整句；此时不保证各情绪标签产生明显语气变化。请求的情绪至少有一条可用原始录音时才逐段合成，缺失的情绪回退该音色的默认参考音；`bank` 后端保持原有语音库行为。生产两套音色均未配置情绪录音；参考音目录变化后需重启语音 worker。详见 [语音候选](voice-candidates.md)。
 
-去重：`_voice_text_key` 去掉标点和空白后比较；`catty_voice_say` 在调用时就把参数里的 `text`/`segments` 记进本轮已发声集合。语音条遇到已经念过的气泡只标记 `already_voiced`（不发文字、不重复合成），后台语音到达时同样按这个集合跳过重复台词；同一句用不同标点写出也算同一句。
+语音去重：`_voice_text_key` 去掉标点和空白后比较，分别记录后台待发文本、已发语音和已发文字。后台正在合成的相同文本先以文字发送，随后发送一次语音；合成或发送失败时，明确语音请求按已发送文本去重并回落文字。已成功发声的气泡不重复发送，中间气泡发送失败也回落文字。
 
 图片与表情：vision 描述以“仅作背景，不要复述；除非用户明确问图里是什么”注入；`build_image_literacy_prompt` 明确禁止用“这表情/这图/图中/看起来”开头、禁止念表情包配字，要求把图的情绪当作对方当下的态度直接接话。
 

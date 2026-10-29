@@ -19,6 +19,8 @@ def load_delivery_functions(sender):
     namespace = {
         "Message": object,
         "_delivery_state": delivery.ReplyDeliveryState(),
+        "_turn_sent_texts": set(),
+        "_voice_text_key": lambda text: text,
         "matcher": types.SimpleNamespace(send=sender),
         "state": {},
         "event": object(),
