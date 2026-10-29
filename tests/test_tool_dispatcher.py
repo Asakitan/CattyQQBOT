@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import importlib.util
+import io
 import json
 from pathlib import Path
 import sys
 import types
 import unittest
-from unittest.mock import patch
+from unittest.mock import AsyncMock, patch
+
+from PIL import Image
 
 
 _ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +34,12 @@ def _load_module(name: str):
 _tools = _load_module("tools")
 _client = _load_module("openai_client")
 _cascade = _load_module("tool_cascade")
+
+
+def _test_image_bytes(color: str) -> bytes:
+    buffer = io.BytesIO()
+    Image.new("RGB", (4, 4), color=color).save(buffer, format="PNG")
+    return buffer.getvalue()
 
 
 def _config() -> types.SimpleNamespace:
@@ -619,26 +629,197 @@ class ToolCapabilityTests(unittest.TestCase):
     def test_meme_result_uses_pending_segment_without_base64_payload(self) -> None:
         async def fake_search(_config, _keywords, *, max_results):
             self.assertGreaterEqual(max_results, 1)
-            return ["https://example.invalid/meme.png"]
+            return [_tools.WebImageSearchResult("https://example.invalid/meme.png", "Portrait", "https://example.invalid/source", "Bing")]
 
         async def fake_download(_config, _url, *, timeout):
             self.assertGreater(timeout, 0)
-            return b"fake-image-bytes", "image/png"
+            return _test_image_bytes("red"), "image/png"
 
         ctx = _tools.ToolContext(
             config=_config(),
             memory_store=None,
             event=None,
             download_binary_fn=fake_download,
+            describe_images_fn=AsyncMock(return_value='{"images":[{"index":0,"matches":true,"description":"A character portrait"}]}'),
         )
-        with patch.object(_tools, "search_image_urls", fake_search):
+        with patch.object(_tools, "search_image_results", fake_search):
             result = asyncio.run(_tools._exec_meme_query({"keywords": "测试梗"}, ctx))
 
         serialized = json.dumps(result, ensure_ascii=False)
         self.assertNotIn("base64://", serialized)
+        self.assertNotIn("data:image", serialized)
         self.assertNotIn("image_uri", result)
         self.assertEqual(len(ctx.pending_image_segments), 1)
+        self.assertEqual(result["status"], "queued")
+        self.assertEqual(result["selected"]["page_url"], "https://example.invalid/source")
+        self.assertEqual(result["selected"]["description"], "A character portrait")
+        self.assertNotIn("image_sent", result)
 
+    def test_meme_download_speed_does_not_override_search_rank(self) -> None:
+        async def run_query():
+            secondary_ready = asyncio.Event()
+            primary_bytes = _test_image_bytes("red")
+            secondary_bytes = _test_image_bytes("blue")
+
+            async def fake_search(_config, _keywords, *, max_results):
+                return [
+                    _tools.WebImageSearchResult("https://example.invalid/primary.png"),
+                    _tools.WebImageSearchResult("https://example.invalid/secondary.png"),
+                ]
+
+            async def fake_download(_config, url, *, timeout):
+                if url.endswith("primary.png"):
+                    await secondary_ready.wait()
+                    return primary_bytes, "image/png"
+                secondary_ready.set()
+                return secondary_bytes, "image/png"
+
+            async def fake_describe(urls, question):
+                self.assertIn("character portrait", question)
+                self.assertEqual([base64.b64decode(url.split(",", 1)[1]) for url in urls], [primary_bytes, secondary_bytes])
+                return '{"images":[{"index":1,"matches":true,"description":"Second"},{"index":0,"matches":true,"description":"First"}]}'
+
+            ctx = _tools.ToolContext(
+                config=_config(),
+                memory_store=None,
+                event=None,
+                download_binary_fn=fake_download,
+                describe_images_fn=fake_describe,
+            )
+            with patch.object(_tools, "search_image_results", fake_search):
+                result = await _tools._exec_meme_query({"keywords": "character portrait"}, ctx)
+            self.assertEqual(result["selected"]["image_url"], "https://example.invalid/primary.png")
+            self.assertEqual(len(ctx.pending_image_segments), 1)
+            self.assertEqual(base64.b64decode(ctx.pending_image_segments[0].data["file"][9:]), primary_bytes)
+
+        asyncio.run(run_query())
+
+    def test_meme_rejects_unrelated_picture_and_keeps_selected_source(self) -> None:
+        expected_bytes = _test_image_bytes("blue")
+        candidates = [
+            _tools.WebImageSearchResult("https://example.invalid/banner.png", "Portrait", "https://example.invalid/banner", "Bing"),
+            _tools.WebImageSearchResult("https://example.invalid/portrait.png", "Character portrait", "https://example.invalid/character", "Bing"),
+        ]
+        ctx = _tools.ToolContext(
+            config=_config(), memory_store=None, event=None,
+            pending_image_segments=["existing-image"],
+            download_binary_fn=AsyncMock(return_value=(expected_bytes, "image/png")),
+            describe_images_fn=AsyncMock(return_value='```json\n{"images":[{"index":0,"matches":false,"description":"Education website banner"},{"index":1,"matches":true,"description":"Character standing portrait"}]}\n```'),
+        )
+        with patch.object(_tools, "search_image_results", AsyncMock(return_value=candidates)):
+            result = asyncio.run(_tools._exec_meme_query({"keywords": "character standing portrait"}, ctx))
+        self.assertEqual(result["selected"]["image_url"], candidates[1].image_url)
+        self.assertEqual(result["selected"]["page_url"], candidates[1].page_url)
+        self.assertEqual(result["selected"]["rank"], 2)
+        self.assertEqual(len(ctx.pending_image_segments), 2)
+        self.assertEqual(ctx.pending_image_segments[0], "existing-image")
+        self.assertEqual(base64.b64decode(ctx.pending_image_segments[1].data["file"][9:]), expected_bytes)
+
+    def test_meme_filters_bad_downloads_before_vision_without_losing_rank(self) -> None:
+        for failed_download in ((b"<html>error</html>", "image/png"), (b"", "image/png"),
+                                (b"<html>error</html>", "text/html"), _tools.httpx.ConnectError("unavailable")):
+            with self.subTest(download=type(failed_download).__name__):
+                candidates = [_tools.WebImageSearchResult(f"https://example.invalid/{index}.png") for index in range(2)]
+                describe = AsyncMock(return_value='{"images":[{"index":0,"matches":true,"description":"Portrait"}]}')
+                ctx = _tools.ToolContext(
+                    config=_config(), memory_store=None, event=None,
+                    download_binary_fn=AsyncMock(side_effect=[failed_download, (_test_image_bytes("blue"), "application/octet-stream")]),
+                    describe_images_fn=describe,
+                )
+                with patch.object(_tools, "search_image_results", AsyncMock(return_value=candidates)):
+                    result = asyncio.run(_tools._exec_meme_query({"keywords": "portrait"}, ctx))
+                self.assertEqual(result["selected"]["image_url"], candidates[1].image_url)
+                self.assertEqual(result["selected"]["rank"], 2)
+                self.assertEqual(len(describe.call_args.args[0]), 1)
+
+    def test_meme_does_not_queue_unverified_or_mismatched_images(self) -> None:
+        for response in (
+            "", "not json", "[]", '{"images":[]}',
+            '{"images":[{"index":0,"matches":false,"description":"Unrelated banner"}]}',
+            '{"images":[{"index":0,"matches":"true","description":"Portrait"}]}',
+            '{"images":[{"index":0,"matches":true,"description":""}]}',
+            '{"images":[{"index":2,"matches":true,"description":"Portrait"}]}',
+            '{"images":[{"index":0,"matches":false,"description":"Banner"},{"index":0,"matches":true,"description":"Portrait"}]}',
+        ):
+            with self.subTest(response=response):
+                ctx = _tools.ToolContext(
+                    config=_config(), memory_store=None, event=None,
+                    download_binary_fn=AsyncMock(return_value=(_test_image_bytes("red"), "image/png")),
+                    describe_images_fn=AsyncMock(return_value=response),
+                )
+                with patch.object(_tools, "search_image_results", AsyncMock(return_value=[_tools.WebImageSearchResult("https://example.invalid/image.png")])):
+                    result = asyncio.run(_tools._exec_meme_query({"keywords": "portrait"}, ctx))
+                self.assertFalse(result["ok"])
+                self.assertFalse(result["image_queued"])
+                self.assertEqual(ctx.pending_image_segments, [])
+
+    def test_meme_requires_vision_and_handles_verification_error(self) -> None:
+        for describe in (None, AsyncMock(side_effect=RuntimeError("vision unavailable"))):
+            with self.subTest(available=describe is not None):
+                ctx = _tools.ToolContext(
+                    config=_config(), memory_store=None, event=None,
+                    download_binary_fn=AsyncMock(return_value=(_test_image_bytes("red"), "image/png")),
+                    describe_images_fn=describe,
+                )
+                with patch.object(_tools, "search_image_results", AsyncMock(return_value=[_tools.WebImageSearchResult("https://example.invalid/image.png")])):
+                    result = asyncio.run(_tools._exec_meme_query({"keywords": "portrait"}, ctx))
+                self.assertFalse(result["image_queued"])
+                self.assertEqual(ctx.pending_image_segments, [])
+
+    def test_meme_verification_timeout_cancels_without_queuing(self) -> None:
+        async def run_query():
+            cancelled = asyncio.Event()
+
+            async def blocked_vision(urls, question):
+                try:
+                    await asyncio.Event().wait()
+                finally:
+                    cancelled.set()
+
+            ctx = _tools.ToolContext(
+                config=_config(), memory_store=None, event=None,
+                download_binary_fn=AsyncMock(return_value=(_test_image_bytes("red"), "image/png")),
+                describe_images_fn=blocked_vision,
+            )
+            with (
+                patch.object(_tools, "search_image_results", AsyncMock(return_value=[_tools.WebImageSearchResult("https://example.invalid/image.png")])),
+                patch.object(_tools, "_MEME_VERIFY_TIMEOUT", 0.01),
+            ):
+                result = await _tools._exec_meme_query({"keywords": "portrait"}, ctx)
+            self.assertTrue(cancelled.is_set())
+            self.assertFalse(result["image_queued"])
+            self.assertEqual(ctx.pending_image_segments, [])
+
+        asyncio.run(run_query())
+
+
+    def test_meme_total_timeout_cancels_downloads_without_queuing(self) -> None:
+        async def run_query():
+            cancelled = []
+
+            async def blocked_download(_config, url, *, timeout):
+                try:
+                    await asyncio.Event().wait()
+                finally:
+                    cancelled.append(url)
+
+            describe = AsyncMock()
+            ctx = _tools.ToolContext(
+                config=_config(), memory_store=None, event=None,
+                download_binary_fn=blocked_download, describe_images_fn=describe,
+            )
+            candidates = [_tools.WebImageSearchResult(f"https://example.invalid/{index}.png") for index in range(2)]
+            with (
+                patch.object(_tools, "search_image_results", AsyncMock(return_value=candidates)),
+                patch.object(_tools, "_MEME_TOTAL_TIMEOUT", 0.01),
+            ):
+                result = await _tools._exec_meme_query({"keywords": "portrait"}, ctx)
+            self.assertCountEqual(cancelled, [item.image_url for item in candidates])
+            self.assertFalse(result["image_queued"])
+            self.assertEqual(ctx.pending_image_segments, [])
+            describe.assert_not_awaited()
+
+        asyncio.run(run_query())
 
     def test_intelligence_core_is_always_exposed_and_heavy_tools_stay_gated(self) -> None:
         names = _schema_names(

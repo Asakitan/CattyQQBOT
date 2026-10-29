@@ -1,6 +1,7 @@
 """工具工程缺口回归：只使用 mock 和临时目录，不请求模型/QQ/网络。"""
 from __future__ import annotations
 
+import ast
 import asyncio
 import importlib.util
 import sys
@@ -26,11 +27,114 @@ sys.modules[_SPEC.name] = _tools
 _SPEC.loader.exec_module(_tools)
 
 
+class ImageReceiptAuditTests(unittest.IsolatedAsyncioTestCase):
+    def make_context(self, prepare):
+        return types.SimpleNamespace(
+            config=types.SimpleNamespace(
+                catty_nsfw_search_enabled=True, catty_nsfw_search_cooldown_seconds=0,
+                catty_nsfw_image_send_count=1, catty_nsfw_search_max_results=1,
+            ),
+            is_private=True, user_id="fixture", persona=None,
+            pending_image_segments=["OTHER_TOOL_IMAGE"],
+            prepare_nsfw_segments_fn=prepare,
+        )
+
+    async def test_empty_search_does_not_claim_another_tools_queued_image(self):
+        context = self.make_context(AsyncMock())
+        with patch.object(_tools, "search_nsfw", AsyncMock(return_value=[])):
+            result = await _tools._exec_nsfw_search({"kind": "image", "query": "fixture"}, context)
+        self.assertFalse(result["image_queued"])
+        self.assertEqual(result["images_queued"], 0)
+        self.assertEqual(result["images_already_sent"], 0)
+        self.assertEqual(context.pending_image_segments, ["OTHER_TOOL_IMAGE"])
+
+    async def test_search_reports_only_its_own_queued_images_not_sent(self):
+        found = _tools.NsfwResult("Fixture", "https://example.invalid/item", "fixture")
+        context = self.make_context(AsyncMock(return_value=(["OWN_IMAGE"], [found])))
+        with patch.object(_tools, "search_nsfw", AsyncMock(return_value=[found])):
+            result = await _tools._exec_nsfw_search({"kind": "image", "query": "fixture"}, context)
+        self.assertEqual(result["status"], "queued")
+        self.assertTrue(result["image_queued"])
+        self.assertEqual(result["images_queued"], 1)
+        self.assertEqual(result["images_already_sent"], 0)
+        self.assertEqual(context.pending_image_segments, ["OTHER_TOOL_IMAGE", "OWN_IMAGE"])
+
+    async def test_failed_preparation_does_not_claim_success_from_shared_queue(self):
+        found = _tools.NsfwResult("Fixture", "https://example.invalid/item", "fixture")
+        context = self.make_context(AsyncMock(side_effect=OSError("fixture failure")))
+        with patch.object(_tools, "search_nsfw", AsyncMock(return_value=[found])):
+            result = await _tools._exec_nsfw_search({"kind": "image", "query": "fixture"}, context)
+        self.assertFalse(result["image_queued"])
+        self.assertEqual(result["images_queued"], 0)
+        self.assertEqual(context.pending_image_segments, ["OTHER_TOOL_IMAGE"])
+
+    async def test_parallel_searches_do_not_borrow_each_others_receipts(self):
+        entered = asyncio.Event()
+        release = asyncio.Event()
+        found = _tools.NsfwResult("Fixture", "https://example.invalid/item", "fixture")
+        calls = 0
+
+        async def prepare(results, limit):
+            nonlocal calls
+            calls += 1
+            if calls == 1:
+                entered.set()
+                await release.wait()
+                return [], []
+            return ["SECOND_IMAGE"], [found]
+
+        context = self.make_context(prepare)
+        with patch.object(_tools, "search_nsfw", AsyncMock(return_value=[found])):
+            first = asyncio.create_task(_tools._exec_nsfw_search({"kind": "image", "query": "first"}, context))
+            await entered.wait()
+            try:
+                second = await _tools._exec_nsfw_search({"kind": "image", "query": "second"}, context)
+            finally:
+                release.set()
+            first_result = await first
+        self.assertEqual(first_result["images_queued"], 0)
+        self.assertEqual(second["images_queued"], 1)
+
+
+class ImageGenerationReceiptTests(unittest.TestCase):
+    def test_all_image_producers_report_queued_not_sent(self):
+        tree = ast.parse((_ROOT / "src/catty_qq_ai/tools.py").read_text(encoding="utf-8"))
+        producers = {"_exec_imagegen", "_exec_imagegen_nai", "_exec_imagegen_pixelbunny", "_exec_nai_director"}
+        for function in tree.body:
+            if not isinstance(function, ast.AsyncFunctionDef) or function.name not in producers:
+                continue
+            with self.subTest(producer=function.name):
+                returns = [node.value for node in ast.walk(function)
+                           if isinstance(node, ast.Return) and isinstance(node.value, ast.Dict)
+                           and any(isinstance(key, ast.Constant) and key.value == "image_sent"
+                                   for key in node.value.keys)]
+                self.assertEqual(len(returns), 1)
+                fields = {key.value: value for key, value in zip(returns[0].keys, returns[0].values)
+                          if isinstance(key, ast.Constant)}
+                self.assertFalse(ast.literal_eval(fields["image_sent"]))
+                self.assertTrue(ast.literal_eval(fields["image_queued"]))
+                self.assertEqual(ast.literal_eval(fields["status"]), "queued")
+                self.assertTrue(any(isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+                                    and node.func.id == "_imagegen_output_path" for node in ast.walk(function)))
+
+    def test_image_output_paths_are_unique_with_frozen_clock(self):
+        with tempfile.TemporaryDirectory() as directory:
+            config = types.SimpleNamespace(catty_imagegen_cache_dir=directory)
+            with patch.object(_tools.time, "time", return_value=1234):
+                first = _tools._imagegen_output_path(config, "imagegen", ".png")
+                second = _tools._imagegen_output_path(config, "imagegen", ".png")
+            self.assertNotEqual(first, second)
+            first.write_bytes(b"first")
+            second.write_bytes(b"second")
+            self.assertEqual(first.read_bytes(), b"first")
+            self.assertEqual(second.read_bytes(), b"second")
+
+
 class WriteFileAuditTests(unittest.IsolatedAsyncioTestCase):
     def setUp(self) -> None:
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        self.root = Path(temporary.name)
+        self.root = Path(temporary.name).resolve()
         self.ctx = _tools.ToolContext(
             config=types.SimpleNamespace(catty_file_delivery_dir=str(self.root),
                                          catty_file_delivery_max_per_turn=10),

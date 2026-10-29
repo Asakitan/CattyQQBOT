@@ -2,6 +2,8 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `tools.py` / `__init__.py` / 回执与文件、语音测试 | 单工具排队计数、生成回执、UUID 缓存路径、发送后清理、取消后原会话投递 → `docs/session-log/session-25.md` | 已部署；本地相关 316 项、远端 132 项及插件加载通过；另有 21 个既有夹具错误 |
+| `web_search.py` / `tools.py` / `__init__.py` / 三份搜图与投递测试 | 图片来源保留、同字节视觉核验、按搜索排名选择、语音无文字时继续发图 → `docs/tool-contracts.md`、`docs/session-log/session-24.md` | 已随会话 25 部署；初次八组 152 项通过，真实模型/QQ 未测 |
 | `prompt_cache.py` / `openai_client.py` / `tests/test_responses_ws.py` | 全部聊天 session 活跃度 → 稳定前缀 `12h/30m`，历史短缓存与 WebSocket 换档重放 → `docs/architecture.md`、`docs/session-log/session-23.md` | 全会话版已部署；131 项本地回归，9 跳过，零失败/错误；生产加载未复核 |
 | `voice_reply.py` / `tools.py` / `__init__.py` / 语音与投递测试 | 明确语音请求、群冷却、待发送与已送达区分、失败回落 → `docs/voice-candidates.md`、`docs/session-log/session-21.md` | 三份源码已部署、双端哈希一致；远端语音 49 项通过，生产已加载重连 |
 | `src/catty_qq_ai/openai_client.py` / `persona_admin.py` / `persona_evolution_runtime.py` / `skill_runtime.py` / `config.py` / loader / `config.json` | 主/识图 terra，判门/总结/NSFW 与后台杂活统一 deepseek；次要 AI 线路 `audit_ai → ai_fallback → 主 ai` → `docs/architecture.md`、`docs/session-log/session-20.md` | 已部署；19 文件双端 SHA-256 一致，远端 104 项通过；生产已加载重连 |
@@ -59,6 +61,8 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-30 | 部署图片排队/送达回执、跨工具计数、唯一缓存路径、队列清理、取消后的原会话交接，并补齐生产文档依赖 | 本地相关 316 项、远端 132 项通过，九文件双端一致；02:06:36 加载、02:06:40 重连；既有夹具错误保留 |
+| 2026-10-30 | 修复搜图下载竞速、图片来源丢失与无核验入队，以及语音清空文字后漏发图片；已随会话 25 部署 | 初次八组 152 项通过，后续部署见会话 25；真实模型/QQ 未测 |
 | 2026-10-30 | 部署动态 TTL 全会话版，覆盖私聊、群内独立用户及自定义 session，保留完整 key 隔离与后台排除 | 代码与测试 3 文件解压、0 跳过；本地 131 项、9 跳过；生产加载和真实模型未复核 |
 | 2026-10-30 | 部署群活跃动态 TTL：30 分钟内至少 3 轮用 `12h`，其余 `30m`；去重、隔离和换档重放 | 代码与测试 3 文件解压、0 跳过；本地 130 项、9 跳过，零失败/错误；生产加载和真实模型未复核 |
 | 2026-10-30 | 明确语音请求优先发声，保持冷却并修复后台及发送失败回落 | 本地 148 项通过；三份源码双端一致，远端语音 49 项通过，生产已加载重连 |

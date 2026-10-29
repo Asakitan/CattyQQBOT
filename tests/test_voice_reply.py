@@ -678,6 +678,48 @@ class VoiceDeliveryTests(unittest.IsolatedAsyncioTestCase):
         send_voice.assert_awaited_once()
         bot.send.assert_not_awaited()
 
+    async def test_cancelled_inline_voice_retains_delivery_to_original_event(self) -> None:
+        tools = importlib.import_module(f"{_PACKAGE_NAME}.tools")
+        entered, release, after = asyncio.Event(), asyncio.Event(), asyncio.Event()
+        workers = []
+
+        async def executor(name, arguments, context, *, allowed_names):
+            workers.append(asyncio.current_task())
+            entered.set()
+            await release.wait()
+            context.pending_voice_deliveries.append({"text": "voice fixture", "path": "fixture.wav"})
+            return {"ok": True}
+
+        send_voice = AsyncMock(return_value=True)
+        namespace = self._load(executor, send_voice)
+        namespace["_VOICE_INLINE_WAIT_SECONDS"] = 60
+        original_event = object()
+        bot = types.SimpleNamespace(send=AsyncMock())
+        context = tools.ToolContext(config=_config(), memory_store=None, event=original_event)
+        voiced, pending, sent = set(), set(), set()
+        task = asyncio.create_task(namespace["_voice_tool_with_deferred_delivery"](
+            "catty_voice_say", '{"text":"voice fixture"}', context,
+            allowed_names={"catty_voice_say"}, bot=bot, event=original_event, after=after,
+            voiced_texts=voiced, pending_texts=pending, sent_texts=sent,
+            fallback_on_failure=True,
+        ))
+        await entered.wait()
+        task.cancel()
+        try:
+            with self.assertRaises(asyncio.CancelledError):
+                await task
+            self.assertTrue(context.deferred_voice_started)
+            self.assertEqual(pending, {"voicefixture"})
+            self.assertEqual(len(namespace["_deferred_delivery_tasks"]), 1)
+        finally:
+            release.set()
+            after.set()
+            await asyncio.gather(*workers, *list(namespace["_deferred_delivery_tasks"]), return_exceptions=True)
+        send_voice.assert_awaited_once()
+        self.assertIs(send_voice.await_args.args[1], original_event)
+        self.assertEqual(voiced, {"voicefixture"})
+        bot.send.assert_not_awaited()
+
     async def test_deferred_segments_take_precedence_over_text(self) -> None:
         release = asyncio.Event()
 

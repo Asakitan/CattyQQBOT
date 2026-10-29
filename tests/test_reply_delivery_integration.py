@@ -1,14 +1,27 @@
 from __future__ import annotations
 
 import ast
+import asyncio
 import types
 import unittest
 from pathlib import Path
-from unittest.mock import Mock
+from unittest.mock import AsyncMock, Mock
 
 from test_reply_delivery_state import _module as delivery
 
 _ENTRY = Path(__file__).resolve().parents[1] / "src/catty_qq_ai/__init__.py"
+
+
+class _Finished(Exception):
+    pass
+
+
+class _ActionFailed(Exception):
+    pass
+
+
+class _NetworkError(Exception):
+    pass
 
 
 def load_delivery_functions(sender):
@@ -43,7 +56,76 @@ def load_delivery_functions(sender):
     return namespace
 
 
+def load_media_only_delivery(sender, segments):
+    tree = ast.parse(_ENTRY.read_text(encoding="utf-8"))
+    voice_guard = next(
+        node for node in ast.walk(tree)
+        if isinstance(node, ast.If) and isinstance(node.test, ast.BoolOp)
+        and any(isinstance(value, ast.Name) and value.id == "_voice_pending" for value in node.test.values)
+        and any(isinstance(value, ast.UnaryOp) and isinstance(value.op, ast.Not)
+                and isinstance(value.operand, ast.Name) and value.operand.id == "chunks"
+                for value in node.test.values)
+    )
+    image_branch = next(
+        node for node in ast.walk(tree)
+        if isinstance(node, ast.If) and isinstance(node.test, ast.Name)
+        and node.test.id == "nsfw_image_segments"
+        and any(isinstance(statement, ast.For) for statement in node.body)
+    )
+    function = ast.parse("async def deliver_media():\n    pass\n").body[0]
+    function.body = [voice_guard, image_branch, ast.parse("await matcher.finish()").body[0]]
+    namespace = load_delivery_functions(sender)
+    namespace["matcher"].finish = AsyncMock(side_effect=_Finished)
+    namespace.update({
+        "_voice_pending": True, "chunks": [], "nsfw_image_segments": segments,
+        "tool_ctx": types.SimpleNamespace(pending_image_segments=list(segments)),
+        "emoji_entry": None, "_nsfw_img_task": None,
+        "delay_seconds": 0, "asyncio": asyncio, "Message": lambda value: value,
+        "OnebotActionFailed": _ActionFailed, "OnebotNetworkError": _NetworkError,
+        "_persona_reply_context_for_event": lambda event: types.SimpleNamespace(
+            render=lambda text: text,
+            catalog=types.SimpleNamespace(image_send_failure_reply="Image delivery failed"),
+        ),
+    })
+    module = ast.fix_missing_locations(ast.Module(body=[function], type_ignores=[]))
+    exec(compile(module, str(_ENTRY), "exec"), namespace)
+    return namespace
+
+
 class ReplyDeliveryIntegrationTests(unittest.IsolatedAsyncioTestCase):
+    async def test_media_only_voice_does_not_drop_queued_image(self):
+        sender = AsyncMock()
+        namespace = load_media_only_delivery(sender, ["IMAGE"])
+        with self.assertRaises(_Finished):
+            await namespace["deliver_media"]()
+        sender.assert_awaited_once_with("IMAGE")
+        self.assertEqual(namespace["tool_ctx"].pending_image_segments, [])
+        namespace["_commit_sent_reply_history"]()
+        namespace["_append_history"].assert_called_once_with(
+            "group:fixture", "fixture user", "[发送图片]",
+        )
+
+    async def test_media_only_voice_without_images_remains_silent(self):
+        sender = AsyncMock()
+        namespace = load_media_only_delivery(sender, [])
+        with self.assertRaises(_Finished):
+            await namespace["deliver_media"]()
+        sender.assert_not_awaited()
+        namespace["_commit_sent_reply_history"]()
+        namespace["_append_history"].assert_not_called()
+
+    async def test_media_only_image_send_failure_is_not_recorded_as_success(self):
+        sender = AsyncMock(side_effect=[_ActionFailed("unconfirmed"), None])
+        namespace = load_media_only_delivery(sender, ["IMAGE"])
+        with self.assertRaises(_Finished):
+            await namespace["deliver_media"]()
+        self.assertEqual([call.args[0] for call in sender.call_args_list], ["IMAGE", "Image delivery failed"])
+        self.assertEqual(namespace["tool_ctx"].pending_image_segments, ["IMAGE"])
+        namespace["_commit_sent_reply_history"]()
+        namespace["_append_history"].assert_called_once_with(
+            "group:fixture", "fixture user", "Image delivery failed",
+        )
+
     async def test_close_receipt_rejects_partial_or_deferred_work(self):
         tree = ast.parse(_ENTRY.read_text(encoding="utf-8"))
         callback = next(

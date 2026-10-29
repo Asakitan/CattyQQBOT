@@ -26,6 +26,14 @@ class WebSearchResult:
     source: str = ""
 
 
+@dataclass(slots=True)
+class ImageSearchResult:
+    image_url: str
+    title: str = ""
+    page_url: str = ""
+    source: str = ""
+
+
 def _clean_duckduckgo_url(url: str) -> str:
     parsed = urlparse(url)
     if parsed.netloc.endswith("duckduckgo.com") and parsed.path.startswith("/l/"):
@@ -290,18 +298,54 @@ def _extract_duckduckgo_vqd(html: str) -> str:
     return ""
 
 
-# Bing 图片搜索响应里每个图片是 <a class="iusc" m='{"murl":"https://...","turl":"..."}'>;
-# 提取 m 属性内 JSON 的 murl 字段(原图)。HTML 实体可能被 escape 成 &quot;,unescape 后能 json.loads。
-_BING_IUSC_RE = re.compile(r'<a[^>]+class="iusc"[^>]+m="([^"]+)"', re.DOTALL)
+def _image_result_url(value: Any) -> str:
+    if not isinstance(value, str):
+        return ""
+    value = value.strip()
+    try:
+        parsed = urlparse(value)
+        if parsed.scheme in {"http", "https"} and parsed.hostname:
+            return value
+    except ValueError:
+        pass
+    return ""
 
 
-async def _search_image_urls_bing(
+class _BingImageParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.results: list[ImageSearchResult] = []
+        self._seen: set[str] = set()
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attrs_map = {name: value or "" for name, value in attrs}
+        if tag != "a" or "iusc" not in attrs_map.get("class", "").split():
+            return
+        try:
+            payload = json.loads(attrs_map.get("m", ""))
+        except (ValueError, TypeError):
+            return
+        if not isinstance(payload, dict):
+            return
+        image_url = _image_result_url(payload.get("murl"))
+        if not image_url or image_url in self._seen:
+            return
+        self._seen.add(image_url)
+        self.results.append(ImageSearchResult(
+            image_url=image_url,
+            title=str(payload.get("t") or payload.get("title") or attrs_map.get("aria-label") or "").strip(),
+            page_url=_image_result_url(payload.get("purl")),
+            source="Bing",
+        ))
+
+
+async def _search_images_bing(
     config: Config,
     query: str,
     *,
     max_results: int,
     timeout: float,
-) -> list[str]:
+) -> list[ImageSearchResult]:
     """Bing 图片搜索;国内可直连,不依赖 duckduckgo。失败抛 httpx.HTTPError,让 caller fallback。"""
     headers = {
         "User-Agent": (
@@ -317,28 +361,19 @@ async def _search_image_urls_bing(
         response = await client.get("https://www.bing.com/images/search", params=params, headers=headers)
         response.raise_for_status()
 
-    urls: list[str] = []
-    for match in _BING_IUSC_RE.finditer(response.text):
-        raw = unescape(match.group(1))
-        try:
-            payload = json.loads(raw)
-        except json.JSONDecodeError:
-            continue
-        murl = str(payload.get("murl") or "").strip()
-        if murl.startswith("http") and murl not in urls:
-            urls.append(murl)
-        if len(urls) >= max_results:
-            break
-    return urls
+    parser = _BingImageParser()
+    parser.feed(response.text)
+    parser.close()
+    return parser.results[:max_results]
 
 
-async def _search_image_urls_duckduckgo(
+async def _search_images_duckduckgo(
     config: Config,
     query: str,
     *,
     max_results: int,
     timeout: float,
-) -> list[str]:
+) -> list[ImageSearchResult]:
     """DuckDuckGo 图片搜索 fallback;国内有时连不上。"""
     headers = {
         "User-Agent": (
@@ -362,46 +397,58 @@ async def _search_image_urls_duckduckgo(
         response.raise_for_status()
     data = response.json()
     results = data.get("results") if isinstance(data, dict) else None
-    urls: list[str] = []
+    images: list[ImageSearchResult] = []
+    seen: set[str] = set()
     if not isinstance(results, list):
-        return urls
+        return images
     for item in results:
         if not isinstance(item, dict):
             continue
-        image_url = str(item.get("image") or item.get("thumbnail") or "").strip()
-        if image_url.startswith("http") and image_url not in urls:
-            urls.append(image_url)
-        if len(urls) >= max_results:
+        image_url = _image_result_url(item.get("image") or item.get("thumbnail"))
+        if not image_url or image_url in seen:
+            continue
+        seen.add(image_url)
+        images.append(ImageSearchResult(
+            image_url=image_url,
+            title=str(item.get("title") or "").strip(),
+            page_url=_image_result_url(item.get("url")),
+            source="DuckDuckGo",
+        ))
+        if len(images) >= max_results:
             break
-    return urls
+    return images
 
 
-async def search_image_urls(config: Config, query: str, *, max_results: int = 6) -> list[str]:
+async def search_image_results(config: Config, query: str, *, max_results: int = 6) -> list[ImageSearchResult]:
     """图片搜索:bing 优先(国内可直连),duckduckgo 降级兜底(走代理时可能 work)。
 
     任一源拿到 >= 1 张图就返回;两个都 fail 才返回空列表。
     单源 timeout 取 catty_web_search_request_timeout(默认 10s)的一半,留余量给 fallback。
     """
-    if not query.strip() or not config.catty_web_search_enabled:
+    if not query.strip() or not config.catty_web_search_enabled or max_results <= 0:
         return []
     total_timeout = float(config.catty_web_search_request_timeout or config.catty_request_timeout or 10.0)
     per_engine_timeout = max(min(total_timeout / 2, 8.0), 4.0)
 
     try:
-        urls = await _search_image_urls_bing(config, query, max_results=max_results, timeout=per_engine_timeout)
-        if urls:
-            return urls
+        images = await _search_images_bing(config, query, max_results=max_results, timeout=per_engine_timeout)
+        if images:
+            return images
         _logger.info("Bing image search returned 0 urls for %r,fallback to duckduckgo", query)
     except (httpx.HTTPError, ValueError) as exc:
         _logger.info("Bing image search failed for %r: %s; fallback to duckduckgo", query, exc)
 
     try:
-        return await _search_image_urls_duckduckgo(
+        return await _search_images_duckduckgo(
             config, query, max_results=max_results, timeout=per_engine_timeout
         )
     except (httpx.HTTPError, ValueError) as exc:
         _logger.warning("DuckDuckGo image search also failed for %r: %s", query, exc)
         return []
+
+
+async def search_image_urls(config: Config, query: str, *, max_results: int = 6) -> list[str]:
+    return [result.image_url for result in await search_image_results(config, query, max_results=max_results)]
 
 
 def format_search_context(query: str, results: list[WebSearchResult]) -> str:

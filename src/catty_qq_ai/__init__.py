@@ -4365,7 +4365,7 @@ async def _send_staged_file(
 def _spawn_deferred_file_delivery(
     bot: Bot,
     event: MessageEvent,
-    items: list[dict[str, Any]],
+    items: Any,
     *,
     after: asyncio.Event,
     label: str,
@@ -4375,11 +4375,14 @@ def _spawn_deferred_file_delivery(
         return
 
     async def _runner() -> None:
+        payload = items if isinstance(items, list) else await items
+        if not payload:
+            return
         try:
             await asyncio.wait_for(after.wait(), timeout=_DEFERRED_DELIVERY_MAX_WAIT_SECONDS)
         except asyncio.TimeoutError:
             logger.info(f"{label}: reply still not finished, sending file anyway")
-        for item in items:
+        for item in payload:
             if not isinstance(item, dict):
                 continue
             async with _file_delivery_lock:
@@ -4388,6 +4391,54 @@ def _spawn_deferred_file_delivery(
     task = asyncio.create_task(_runner(), name=f"catty-deferred-{label}")
     _deferred_delivery_tasks.add(task)
     task.add_done_callback(_deferred_delivery_tasks.discard)
+
+
+async def _file_items_from_task(task: asyncio.Task, scheduled_paths: set[str]) -> list[dict[str, str]]:
+    try:
+        result = await task
+    except Exception as exc:
+        logger.warning(f"deferred file tool failed: {type(exc).__name__}")
+        return []
+    if not isinstance(result, dict) or result.get("ok") is False or result.get("error"):
+        return []
+    staged = result.get("_staged_file")
+    items = [staged] if isinstance(staged, dict) else result.get("files")
+    if not isinstance(items, list):
+        return []
+    pending: list[dict[str, str]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        path = str(item.get("path") or "").strip()
+        if not path or path in scheduled_paths:
+            continue
+        scheduled_paths.add(path)
+        pending.append({"path": path, "name": str(item.get("name") or Path(path).name)})
+    return pending
+
+
+async def _file_tool_with_deferred_delivery(
+    name: str,
+    args_json: str,
+    tool_ctx: ToolContext,
+    *,
+    allowed_names: set[str],
+    bot: Bot,
+    event: MessageEvent,
+    after: asyncio.Event,
+    scheduled_paths: set[str],
+) -> dict[str, Any]:
+    task = asyncio.create_task(
+        _execute_schema_gated_tool_call(name, args_json, tool_ctx, allowed_names=allowed_names)
+    )
+    try:
+        return await asyncio.shield(task)
+    except asyncio.CancelledError:
+        tool_ctx.deferred_delivery_started = True
+        _spawn_deferred_file_delivery(
+            bot, event, _file_items_from_task(task, scheduled_paths), after=after, label=name,
+        )
+        raise
 
 
 def _voice_text_key(text: str) -> str:
@@ -4537,7 +4588,7 @@ async def _voice_tool_with_deferred_delivery(
     )
     try:
         result = await asyncio.wait_for(asyncio.shield(task), timeout=_VOICE_INLINE_WAIT_SECONDS)
-    except asyncio.TimeoutError:
+    except (asyncio.CancelledError, asyncio.TimeoutError) as exc:
         tool_ctx.deferred_delivery_started = True
         tool_ctx.deferred_voice_started = True
         if pending_texts is not None and _arg_spoken.strip():
@@ -4553,6 +4604,8 @@ async def _voice_tool_with_deferred_delivery(
             fallback_text=_arg_spoken,
             fallback_on_failure=fallback_on_failure,
         )
+        if isinstance(exc, asyncio.CancelledError):
+            raise
         logger.info(f"catty_voice_say still running after {_VOICE_INLINE_WAIT_SECONDS:.0f}s → reply first")
         return {
             "ok": True,
@@ -17909,6 +17962,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     sent_texts=_turn_sent_texts,
                     fallback_on_failure=explicit_voice_requested(config, tool_ctx.user_text),
                 )
+            elif name in {"catty_write_file", "catty_python_run"}:
+                result = await _file_tool_with_deferred_delivery(
+                    name, args_json, tool_ctx, allowed_names=_allowed_names,
+                    bot=bot, event=event, after=_reply_done,
+                    scheduled_paths=_scheduled_file_paths,
+                )
             else:
                 result = await _execute_schema_gated_tool_call(
                     name,
@@ -18862,7 +18921,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             for chunk in _reply_chunks(reply_for_send, persona=_persona_for_event(event))
             if chunk.strip()
         ]
-        if _voice_pending and not chunks:
+        if (
+            _voice_pending and not chunks
+            and not nsfw_image_segments
+            and emoji_entry is None
+            and _nsfw_img_task is None
+        ):
             logger.info("voice reply: narration-only text suppressed; voice delivers separately")
             await matcher.finish()
 
@@ -19209,6 +19273,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     try:
                         await _send_reply_message(Message(seg), text="[发送图片]")
                         sent = True
+                        for _pending_index, _pending_segment in enumerate(tool_ctx.pending_image_segments):
+                            if _pending_segment is seg:
+                                del tool_ctx.pending_image_segments[_pending_index]
+                                break
                         if attempt > 0:
                             retry_count += 1
                             logger.info(f"NSFW image sent OK on retry attempt {attempt + 1}")
