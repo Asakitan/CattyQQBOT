@@ -41,3 +41,15 @@
 - 新增回归使用真实工具循环和假传输，覆盖当前user/动态证据原样保留、两份固定指南仅出现一次、刷新位置不影响前缀、合法JSON原字节、旧协议、相似文案/用户文本不前移、重复键与敏感内容净化。工具名单不变且参数未净化时续轮只发回执和短提示；能力或参数投影变化时全量重放。
 - 用户明确要求部署后，`src/catty_qq_ai/openai_client.py`、`tests/test_responses_api.py`、`tests/test_responses_ws.py` 经push_zip推送到 `D:/CattyQQAI`，3文件解压、0跳过；另同步STATUS、模块清单、架构、本文/索引、工具合同和技能提示合同。不含并行语音、实际配置和聊天数据。
 - 部署沿用上述本地验收，不重复远端测试、冒烟、模型请求或交付哈希。当前没有新版线上98–99%证据，后续观察同一会话正常请求的真实读写比例。
+
+## 后续：已部署版实况与进一步压缩（2026-10-30已部署）
+
+- `f78637e827007a237c1c7796ac6016c9f50ccb30` 已归档，生产日志确认20:56:39加载。20:59:49同群同33工具组合读取170583、写入67、普通输入4438、总输入175088 token，实际命中97.4%；此前同组合约96.4%。请求内容不同，非固定输入A/B。
+- 20:58:15首轮读取0、写170583、普通4748；20:58:58另一37工具组合读取0、写172410、普通4591。新前缀/工具组合仍需写入，不能将冷样本从总体统计删除。该次日志检查没有发现WS失败、previous_response_not_found或参数错误，出现一次断线记录；未额外调用模型。
+- 官方[缓存指南](https://developers.openai.com/api/docs/guides/prompt-caching)确认默认隐式模式为3个显式加1个隐式写入位置；后置developer不是自动隐式端点。GPT-5.6+不需要新cache key优化路由。指南支持12h但请求级API参考仍列30m，且12h写入费更高；本次不改TTL、key、缓存统计或断点数。
+- 不采用把临时状态移到当前user前的建议：没有把该状态原样存入历史时，下一轮插入位置仍会移动，不能据此声称可复用。也不冻结来源、身份、时间或权限，不提前暴露动态skill工具。
+- `fadianji_harness.py` 在原有完整行预算选完后，把完全相同的来源字段放入来源索引，行内用 `p=P1` 引用，完整保留ID/相关度/正文；JSON、排序、选中与省略集合不变，不用省出的空间补塞证据。索引无净节省则回退，字段可逐字还原。
+- 离线12条合成场景样本（`STYLE_EXAMPLE.fadianji_group_scene`、group、未知时间、style_only）从2088→1262字符、908→721个o200k token，节省187。不同生产证据组合的节省不同，不将此估算写成线上98–99%。
+- `openai_client.py` 在官方GPT-5.6+ Responses主线路工具轮数用尽时保留最后的schemas及指南，用none禁用调用；最终响应不再进入执行器。失败回原纯文字恢复；router、fallback和旧端点不变。`prompt_cache.py`只修正旧的“OpenAI仅隐式缓存”模块说明。
+- 验收一次：harness v2 50、基础harness 17、harness audit 11、Responses WS 19、Responses API 37、主客户端65、回执恢复9、DeepSeek兼容6，共214项，0失败/错误、9跳过；六文件语法及编辑器诊断通过。新增测试覆盖可逆元数据、逐字段隔离、紧预算不重新选行、无收益回退、收尾schemas/none/增量帧、错误恢复与旧端点。
+- 用户确认部署后，`fadianji_harness.py`、`openai_client.py`、`prompt_cache.py`、`test_harness_v2.py`、`test_responses_ws.py`、`test_openai_client.py` 经push_zip推送到 `D:/CattyQQAI`，6文件解压、0跳过；沿用上述本地验收，没有额外模型请求、冒烟或交付哈希。自动重载及最新实际命中率未另行确认；不包含已有 `.gitignore` 变更。

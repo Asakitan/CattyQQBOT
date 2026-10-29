@@ -5317,13 +5317,29 @@ async def chat_completion_with_tools(
                 }
             )
 
-    # 循环达到上限还在调 tool — 强制再发一次纯回复,禁掉 tools。
+    # 循环达到上限还在调 tool — 强制再发一次纯回复，禁止继续调用工具。
     history.append(
         {
             "role": "system",
             "content": "已达到本次主回复的工具调用上限,请直接基于已有信息和上下文给最终回复,不再调用工具。",
         }
     )
+    if _preserve_argument_format and not _router_active and not _fallback_mode:
+        # Official Responses can disable calls without deleting their definitions.
+        # Keep the last exposed schemas and fixed guides byte-stable; this final
+        # request never enters the executor, even if a response contains calls.
+        try:
+            final_reply = _extract_content(await _dispatch_round("none"))
+        except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+            _logger.warning(
+                "tool_chat: Responses final-only request failed (%s); using plain recovery",
+                exc.__class__.__name__,
+            )
+        else:
+            if _cloud_is_unhealthy():
+                _mark_cloud_healthy()
+            _maybe_distill_reply(final_reply, source="deepseek")
+            return final_reply
     if _fallback_mode:
         # 主人 2026-08-13: fallback 工具轮数耗尽后,在 fallback endpoint 纯文本收口。
         return await _post_fallback_chat(

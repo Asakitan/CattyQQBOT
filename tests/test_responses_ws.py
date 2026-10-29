@@ -124,7 +124,7 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         port = server.sockets[0].getsockname()[1]
         return server, port
 
-    async def _run_real_tool_loop(self, arguments, *, change_tools=False):
+    async def _run_real_tool_loop(self, arguments, *, change_tools=False, max_rounds=2):
         frames = []
         executed = []
         provider_calls = []
@@ -192,14 +192,14 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
                 ):
                     result = await openai_client.chat_completion_with_tools(
                         config, messages, tools=tools, tool_executor=executor,
-                        tools_provider=tools_provider, max_rounds=2,
+                        tools_provider=tools_provider, max_rounds=max_rounds,
                     )
         finally:
             openai_client.reset_current_scope_key(scope_token)
             openai_client._reset_cloud_health_for_tests()
         self.assertEqual(result, "done")
         self.assertEqual(executed, [("lookup", arguments)])
-        self.assertEqual(len(provider_calls), 2)
+        self.assertEqual(len(provider_calls), max_rounds)
         self.assertEqual((messages, tools), before)
         self.assertEqual(len(frames), 2)
         return frames
@@ -213,6 +213,17 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(any(item.get("role") == "user" for item in frames[1][0]["input"]))
         self.assertEqual(frames[0][0]["input"][-2]["content"][0]["text"], "current question")
         self.assertEqual(frames[0][0]["input"][-1]["content"][0]["text"], "【TARGET·evidence】\nstate one")
+
+    async def test_tool_limit_final_frame_keeps_schemas_but_disables_calls(self):
+        frames = await self._run_real_tool_loop(' { "query": "TARGET" } ', max_rounds=1)
+        first, final = frames[0][0], frames[1][0]
+        self.assertEqual(final["tools"], first["tools"])
+        self.assertEqual(first["tool_choice"], "auto")
+        self.assertEqual(final["tool_choice"], "none")
+        self.assertEqual(frames[1][1], "resp_1")
+        self.assertEqual([item["type"] for item in final["input"]], ["function_call_output", "message", "message"])
+        self.assertIn("不再调用工具", final["input"][-1]["content"][0]["text"])
+        self.assertFalse(any(item.get("role") == "user" for item in final["input"]))
 
     async def test_real_tool_loop_replays_for_redaction_or_new_capabilities(self):
         for arguments, changed in (('{"token":"SECRET_VALUE"}', False), (' { "query": "TARGET" } ', True)):

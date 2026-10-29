@@ -15,8 +15,9 @@ Anthropic 规则:
 - 默认 TTL: 5 分钟
 - Anthropic header: anthropic-beta: prompt-caching-2024-07-31
 
-OpenAI native API 是 implicit caching (>1024 tokens 自动), 不需要标记;
-但中间人 (hugou.cc) passthrough Claude 协议时仍需显式 cache_control.
+OpenAI 官方 GPT-5.6+ Responses 同时支持隐式缓存和内容块显式断点；
+openai_client 在稳定前缀和历史端点使用 prompt_cache_breakpoint，不用 cache_control。
+较早 OpenAI 模型使用隐式缓存；兼容网关透传 Claude 协议时仍需 cache_control。
 """
 from __future__ import annotations
 

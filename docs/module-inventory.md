@@ -11,8 +11,8 @@
 | `personas/` / `persona_store.py` / `__init__.py` / `fadianji_harness.py` / `fdj_proactive_runtime.py` / `fadianji_style_critic.py` | 共享群聊判门、证据、风格及主动调度；人格能力和 NSFW 状态隔离 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1367 项、远端 299 项通过（另 1 项既有短路径断言失败） |
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
-| `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | Responses 固定指南与工具续轮优化已部署 |
-| `openai_client.py` / `responses_ws.py` / `dashboard_state.py` / Responses 与面板测试 | 官方 Responses 静态与滚动历史断点、固定指南、参数原字节续传、写入统计 → `docs/session-log/session-19.md` | 新优化已部署；本地201项、9跳过，其余通过；此前真实私聊87.2%/86.9%、另一群95.4%，新版效果待观察 |
+| `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 固定指南、工具续轮及保留schemas的none收尾已部署 |
+| `openai_client.py` / `responses_ws.py` / `dashboard_state.py` / Responses 与面板测试 | 官方 Responses 静态与滚动历史断点、固定指南、参数原字节续传、写入统计 → `docs/session-log/session-19.md` | 收尾增量已部署；部署前本地214项、9跳过，其余通过；此前`f78637e`真实热请求97.4%，最新效果待观察 |
 | `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署 |
 | `message_utils.py` / `persona_prompts.py` / `prompt_manager.py` / `__init__.py` | 表情线索提取及图片、表情按语境自然接话 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1401 项、9 跳过，远端 140 项通过 |
 | `__init__.py` / `tests/test_legs_delivery.py` | 腿图文字及图片按发送回执记历史 → `docs/architecture.md` | 已部署并合入活动源码；远端 8 项、本地相关回归 96 项通过 |
@@ -23,7 +23,7 @@
 | `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署；生产群额度单字段已更新 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
 | `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程；包含八个源码自修复测试模块 | 自修复清单已部署；生产保留原清单，已交付的 `test_responses_ws` 未混入 |
-| `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排、引用检索与工具感知教程 → `docs/harness-evidence.md` | 已部署；成员作用域与身份校验已上线 |
+| `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排、引用检索、来源索引与工具感知教程 → `docs/harness-evidence.md` | 作用域、身份校验与无损来源索引已部署；12条合成样本少187 token，线上效果待观察 |
 | `reply_admission.py` / `__init__.py` | 同群历史与当前发言者驱动弱唤醒/续聊模型判门 | 已部署；16项纯判门和集成回归通过 |
 | `fdj_scene_retrieval.py` | 昵称归一化精确索引与相关性过滤 | 已部署；语料配置与缓存键已上线 |
 | `tools.py` / `__init__.py` | 图片发送者、历史来源与同模型原图透传 | 已部署；真实 QQ 会话识图未验证 |
@@ -50,12 +50,13 @@
 | `cpu_engine/semantic_route.py` / `corpus_txtai.py` | 模型与有序语料缓存身份 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；29项缓存测试通过，CPU 默认停用 |
 | `src/catty_qq_ai/__init__.py` / `tests/test_shared_persona_integration.py` | 怀孕预判 global 导出与临轮清零、分库 flush 托管、主路径场景/CPU phase 按人格 scope → `docs/session-log/session-10.md` | 已部署（基线+4 修复重放）；新增 4 例，远端 150 项通过 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / `catty_integrations.py` / RAG / CPU / NLU / 图片工具 | 模型名、端点与密钥路线收口到配置，自动 NSFW 配图可独立选择 Pixelbunny → `docs/session-log/session-13.md`、`docs/session-log/session-16.md` | 已部署；提交版本 18 文件当时与生产一致，客户端缓存修复已另行部署 |
-| `responses_ws.py` / `openai_client.py` / `config.py` / loader / 配置 JSON / `pyproject.toml` | Responses WebSocket 主/识图、增量续聊、连接内缓存与 HTTP 回退；图片直连开关保留安全校验，NSFW 保留 DS → `docs/session-log/session-16.md`、`docs/architecture.md` | 基础、历史断点和固定指南/工具续轮优化已部署；新版真实命中率待观察 |
+| `responses_ws.py` / `openai_client.py` / `config.py` / loader / 配置 JSON / `pyproject.toml` | Responses WebSocket 主/识图、增量续聊、连接内缓存与 HTTP 回退；图片直连开关保留安全校验，NSFW 保留 DS → `docs/session-log/session-16.md`、`docs/architecture.md` | 基础、历史断点、固定指南及工具收尾增量已部署；此前真实热请求97.4%，最新效果待观察 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-30 | 部署证据来源索引和Responses工具限额none收尾；保留原证据选择与工具权限 | 代码/测试6文件解压、0跳过；部署前本地214项、9跳过，其余通过；合成证据908→721 token；未重复冒烟、生产模型请求或哈希 |
 | 2026-10-29 | 部署 Responses 固定指南缓存、消息投影及工具参数原字节续传，保留动态状态与净化 | 源码/测试3文件解压、0跳过；部署前本地201项、9跳过，其余通过；未重复冒烟、生产模型请求或哈希 |
 | 2026-10-29 | 部署历史写入滚动断点与续聊指纹修复，覆盖 66% 命中缺口 | 生产只读确认274条历史连续匹配；本地52项通过；后续真实私聊87.2%/86.9%、另一群95.4%，非同scope A/B |
 | 2026-10-29 | 部署双音色参考音修复；无原始情绪录音时按完整句生成 | 3 文件哈希一致；远端语音 38、配置 33、工具 22 项通过，机器人重连；A/B 和真实 QQ 听感待验 |

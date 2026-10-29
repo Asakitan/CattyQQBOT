@@ -6,6 +6,30 @@ without quoted text. For a valid `group:G:user:U` history scope, group-level
 RAG and scene providers use `group:G`; their returned evidence remains
 scope-checked. Character-book evidence uses the actual persona name.
 
+## 2026-10-30 shared provenance (deployed)
+
+After the existing ranked, full-row budget selection, the text renderer can
+replace repeated provenance with an index. A row's `p=P1` refers to complete
+`scope`, `src`, `time` and optional `event_date`, `confidence`, and `flags` in
+that index; its full ID, relevance, and body remain on the row. Only exactly
+equal rendered metadata shares an entry. Different scopes, sources, dates,
+confidence labels, and flags remain distinct.
+
+The renderer retains the original selected/omitted rows and does not refill
+space saved by the index. It falls back to inline fields unless the complete
+indexed body, including its legend, is shorter. Diagnostic JSON, schema version,
+ordering, IDs, privacy checks, and omission accounting are unchanged. A decoder
+test restores the complete inline text from the indexed representation.
+
+A local 12-row synthetic scene fixture measured 2,088 to 1,262 characters and
+908 to 721 `o200k_base` tokens, saving 187 tokens with identical selected IDs.
+These are offline text counts, not production billing or cache-hit measurements.
+Before deployment, the targeted eight-module regression ran 214 cases: no
+failures/errors and nine existing skips. The code and tests were deployed to
+`D:/CattyQQAI` with six files extracted and none skipped. No additional model
+request, smoke test, delivery hash check, or reload verification was performed;
+the effect on live requests remains unmeasured.
+
 ## 2026-10-28 RAG evidence bounds (deployed)
 
 The caller's evidence wait is bounded to eight seconds, and in-flight RAG queries
@@ -154,10 +178,12 @@ row; this is a ranked greedy selection, not an optimal knapsack solver.
 The renderer reserves a complete scope/intent header, source-state coverage,
 budget/row/omission summary, and `【使用】` plus shared `EVIDENCE_USAGE`. It emits
 headings only for selected rows and may repeat a heading when rank order moves
-back to a bucket. Each row has scope, `src`, stable ID, time, relevance, and any
-supplied event date/confidence/flags. Neither metadata nor rows are sliced to
-fit. If complete mandatory metadata cannot fit, `text=""` and `truncated=True`.
-Row text and IDs are prepared once; selection accounting is linear after sorting.
+back to a bucket. Each row resolves to scope, `src`, stable ID, time, relevance,
+and any supplied event date/confidence/flags; the shared-provenance update
+may place repeated fields in the index described above. Neither metadata nor
+rows are sliced to fit. If complete mandatory metadata cannot fit, `text=""`
+and `truncated=True`. Full row text and IDs are prepared once; selection and
+provenance-index accounting are linear after sorting.
 
 The packet guarantees:
 

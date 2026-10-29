@@ -25,6 +25,24 @@ Evidence = harness.Evidence
 FLAGS = harness.QueryFlags("question", True, False)
 
 
+def expand_provenance(text):
+    """Independent decoder proving the prompt projection loses no row fields."""
+    definitions = {}
+    expanded = []
+    for line in text.splitlines(keepends=True):
+        if line == "【来源索引：行内 p 引用此处完整来源字段】\n":
+            continue
+        definition = re.fullmatch(r"(P\d+): (.*)\n", line)
+        if definition:
+            definitions[definition[1]] = definition[2]
+            continue
+        reference = re.match(r"- \[p=(P\d+) ", line)
+        if reference:
+            line = line.replace(f"p={reference[1]} ", definitions[reference[1]] + " ", 1)
+        expanded.append(line)
+    return "".join(expanded)
+
+
 class AllSubstringMemory:
     def __init__(self, rows=None, failures=()):
         self.rows = rows or {}
@@ -301,6 +319,67 @@ class HarnessV2Tests(unittest.TestCase):
             packet = self.packet(max_chars=10000)
         self.assertEqual(render.call_count, 25)
         self.assert_accounting(packet)
+
+    def test_repeated_provenance_is_lossless_and_retains_diagnostics(self):
+        self.book.return_value = [
+            Evidence("STYLE_EXAMPLE.fixture", "group:test", f"合成口吻样例 {number} 🙂", .5 + number / 100,
+                     observed_at=1700000000, event_date="2026-10-29", confidence="source_label",
+                     flags=("style_only", "historical"))
+            for number in range(12)
+        ]
+        with patch.object(harness, "_compact_evidence_body", side_effect=lambda records, original: original):
+            full = self.packet(max_chars=10000)
+        compact = self.packet(max_chars=10000)
+        self.assertEqual(expand_provenance(compact["text"]), full["text"])
+        self.assertGreater(full["rendered_chars"] - compact["rendered_chars"], 500)
+        self.assertEqual(compact["text"].count('src="STYLE_EXAMPLE.fixture"'), 1)
+        for key in full.keys() - {"text", "rendered_chars"}:
+            self.assertEqual(compact[key], full[key], key)
+        self.assert_accounting(compact)
+
+    def test_compaction_preserves_budget_selection_without_refilling(self):
+        self.book.return_value = [
+            Evidence("MEMORY.fixture", "group:test", ("猫🙂" * (15 + number)) + str(number), rank=number)
+            for number in range(12)
+        ]
+        for budget in (0, 200, 400, 600, 800, 1000, 1600, 2400, 10000):
+            with self.subTest(budget=budget):
+                with patch.object(harness, "_compact_evidence_body", side_effect=lambda records, original: original):
+                    full = self.packet(max_chars=budget)
+                compact = self.packet(max_chars=budget)
+                self.assertEqual(expand_provenance(compact["text"]), full["text"])
+                self.assertLessEqual(compact["rendered_chars"], full["rendered_chars"])
+                for key in full.keys() - {"text", "rendered_chars"}:
+                    self.assertEqual(compact[key], full[key], key)
+                self.assert_accounting(compact)
+
+    def test_shared_provenance_separates_every_metadata_field(self):
+        base = Evidence("STYLE_EXAMPLE.fixture", "group:test", "TARGET", flags=("style_only",))
+        variants = [base, replace(base, source="RAG.fixture"), replace(base, scope="group:other"),
+                    replace(base, observed_at=1700000000), replace(base, event_date="2027-02-03"),
+                    replace(base, confidence='来源 "报告"'), replace(base, flags=("excerpt", "换行\n标记"))]
+        self.book.return_value = [replace(item, text=f"证据 {number}-{copy}")
+                                  for number, item in enumerate(variants) for copy in range(3)]
+        with patch.object(harness, "_compact_evidence_body", side_effect=lambda records, original: original):
+            full = self.packet(max_chars=10000)
+        compact = self.packet(max_chars=10000)
+        self.assertEqual(expand_provenance(compact["text"]), full["text"])
+        self.assertEqual(len(re.findall(r"^P\d+: ", compact["text"], re.MULTILINE)), len(variants))
+        self.book.return_value.reverse()
+        self.assertEqual(self.packet(max_chars=10000), compact)
+        self.assert_accounting(compact)
+
+    def test_provenance_index_is_not_emitted_without_net_savings(self):
+        for rows in ([Evidence("MEMORY.one", "group:test", "single")],
+                     [Evidence("", "", "first"), Evidence("", "", "second")]):
+            with self.subTest(rows=len(rows)):
+                self.book.return_value = rows
+                with patch.object(harness, "_compact_evidence_body", side_effect=lambda records, original: original):
+                    full = self.packet()
+                compact = self.packet()
+                self.assertEqual(compact, full)
+                self.assertNotIn("【来源索引", compact["text"])
+                self.assert_accounting(compact)
 
     def test_missing_store_method_is_unavailable_not_empty(self):
         packet = self.packet(rag_store=SimpleNamespace(), feed_store=SimpleNamespace())

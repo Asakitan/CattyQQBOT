@@ -126,6 +126,12 @@
 
 该线路不再使用 DeepSeek 的末尾 system→user 折叠，工具续轮维持相同的消息投影。合法参数若净化未改变任何值、没有重复键且在原长度预算内，保留模型原始 JSON 的空白和转义；敏感字段、二进制、非法或超长内容继续原净化/摘要。参数内容不同就全量重放，不通过改写服务端输出指纹伪造一致。部署前本地定向201项、9跳过，其余通过；源码/测试已推送，本次未额外远端复跑。
 
+### 工具轮数耗尽后的缓存保留（已部署）
+
+官方GPT-5.6+ Responses主线路达到 `max_rounds` 后，最终文字请求保留末轮schemas及固定指南，设置 `tool_choice=none`，而非撤掉定义。此请求不再刷新/扩展技能能力，也绝不进入工具执行器；无论模型返回何种调用，均不会继续执行副作用。请求或内容提取失败后回到既有纯文字恢复。router、fallback及其它兼容线路保持原行为，正常可调用轮次仍按provider刷新资格。
+
+部署前真实工具循环配合假WebSocket验证：最终帧继续使用 `previous_response_id`，tools不变、choice为none，只新增工具回执和两条收尾提示；执行器仅执行预算内调用。错误恢复、旧模型及兼容端点回归通过；完整定向214项、9跳过，其余通过。相关代码/测试已部署，未追加生产模型请求或确认重载。
+
 ## 按需技能工具
 
 | 入口 | 参数 | 开放时点与结果 |
@@ -136,7 +142,7 @@
 
 - `ALL_TOOL_SCHEMAS` 与 `_LAZY_TOOL_SCHEMAS` 均不含load/save；executor与capability注册表覆盖静态工具加这两个动态名称。不能为了让旧测试注册表等长而提前暴露schema。
 - `ToolContext.skill_turn` 按逻辑轮次懒建；`skill_tool_schemas(ctx)` 不为首轮扫描/创建技能库，遵守工具总开关、技能开关、学习开关和私聊禁用配置。资格不跨轮复用。
-- `chat_completion_with_tools(..., tools_provider=None)` 每轮调用provider、深复制schema并重算允许名称；生产与模拟provider返回静态工具加实际动态schema。既有无provider调用不变，`tool_choice=auto` 不变。
+- `chat_completion_with_tools(..., tools_provider=None)` 每个可调用轮次调用provider、深复制schema并重算允许名称；生产与模拟provider返回静态工具加实际动态schema。既有无provider调用不变，正常阶段 `tool_choice=auto` 不变；Responses限额收尾例外见上节。
 - 仅真实 `catty_fetch_url` 成功的2xx公共正文可被观察为 `skill_receipt_id`；搜索摘要、自动补网缓存、假回执、失败或旧轮来源不提供保存资格。来源时间与片段哈希由执行层生成。
 - `build_skill_research_hint` 仅介绍实际开放入口，先检索/选择/加载，再按需联网核实；提炼共享知识不要求每轮用户再次确认。云端fallback传递动态provider与恢复快照；无工具deadline重试刷新提示并保留已成功回执，不重做保存。
 - 保存线程不会阻塞聊天事件循环；取消发生在提交开始之后时等待同一写入收尾，可能已经写盘，不声称回滚。来源及生成内容都筛查明显私人字段，但不承诺通用匿名化或自动权威认证。

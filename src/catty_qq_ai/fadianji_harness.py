@@ -6,6 +6,7 @@ import inspect
 import json
 import math
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Mapping, Sequence
@@ -510,22 +511,58 @@ def _bucket_counts(evidence: Sequence[Evidence]) -> dict[str, int]:
     return counts
 
 
-def _render_row(item: Evidence, *, evidence_id: str | None = None) -> str:
-    # Keep complete metadata, including long identifiers. If it cannot fit, omit
-    # the whole row; never publish a misleading prefix of an ID/scope/date.
+def _render_provenance(item: Evidence) -> str:
+    """Render the complete shared fields; IDs and scores stay on each row."""
     atom = lambda value: json.dumps(value, ensure_ascii=False, separators=(",", ":"))
     try:
         when = datetime.fromtimestamp(item.observed_at, tz=timezone.utc).isoformat().replace("+00:00", "Z") if item.observed_at is not None else "?"
     except (ValueError, OverflowError, OSError):
         when = "?"
-    metadata = f"scope={atom(item.scope)} src={atom(item.source)} id={evidence_id if evidence_id is not None else item.id} time={when} relevance={item.relevance:.2f}"
+    metadata = f"scope={atom(item.scope)} src={atom(item.source)} time={when}"
     if item.event_date:
         metadata += f" event_date={atom(item.event_date)}"
     if item.confidence:
         metadata += f" confidence={atom(item.confidence)}"
     if item.flags:
         metadata += f" flags={atom(item.flags)}"
+    return metadata
+
+
+def _render_row(item: Evidence, *, evidence_id: str | None = None) -> str:
+    # Budget the full metadata before sharing it; never omit another row merely
+    # to pay for an index, or shorten an identifier/scope/date to make it fit.
+    metadata = f"{_render_provenance(item)} id={evidence_id if evidence_id is not None else item.id} relevance={item.relevance:.2f}"
     return f"- [{metadata}] {item.text}\n"
+
+
+def _compact_evidence_body(records: Sequence[tuple[Evidence, str, str, str]], original: str) -> str:
+    """Share exact provenance only after selection, without refilling the budget."""
+    provenance = [_render_provenance(item) for item, _, _, _ in records]
+    counts = Counter(provenance)
+    references: dict[str, str] = {}
+    for metadata, count in counts.items():
+        if count < 2:
+            continue
+        ref = f"P{len(references) + 1}"
+        definition = f"{ref}: {metadata}\n"
+        if count * (len(metadata) - len(f"p={ref}")) > len(definition):
+            references[metadata] = ref
+    if not references:
+        return original
+    body = ["【来源索引：行内 p 引用此处完整来源字段】\n"]
+    body.extend(f"{ref}: {metadata}\n" for metadata, ref in references.items())
+    previous_bucket = None
+    for (item, item_id, bucket, row), metadata in zip(records, provenance):
+        if bucket != previous_bucket:
+            body.append(_BUCKET_TITLES[bucket] + "\n")
+            previous_bucket = bucket
+        ref = references.get(metadata)
+        body.append(
+            f"- [p={ref} id={item_id} relevance={item.relevance:.2f}] {item.text}\n"
+            if ref is not None else row
+        )
+    compact = "".join(body)
+    return compact if len(compact) < len(original) else original
 
 
 def _render_packet_info(flags: QueryFlags, evidence: Sequence[Evidence], scope: str, private: bool, max_chars: int, *, source_status: Mapping[str, Mapping[str, Any]] | None = None, char_name: str = "机机") -> dict[str, Any]:
@@ -545,6 +582,7 @@ def _render_packet_info(flags: QueryFlags, evidence: Sequence[Evidence], scope: 
         item_id = item.id
         records.append((item, item_id, _evidence_bucket(item), _render_row(item, evidence_id=item_id)))
     selected: list[Evidence] = []
+    selected_records: list[tuple[Evidence, str, str, str]] = []
     omitted: list[Evidence] = []
     rendered_ids: list[str] = []
     omitted_ids: list[str] = []
@@ -559,12 +597,14 @@ def _render_packet_info(flags: QueryFlags, evidence: Sequence[Evidence], scope: 
             body.extend((title, row))
             body_chars += addition_chars
             selected.append(item)
+            selected_records.append((item, item_id, bucket, row))
             rendered_ids.append(item_id)
             previous_bucket = bucket
         else:
             omitted.append(item)
             omitted_ids.append(item_id)
-    rendered = "".join((header, coverage, summary(len(selected)), *body, usage)) if metadata_fits else ""
+    compact_body = _compact_evidence_body(selected_records, "".join(body)) if metadata_fits else ""
+    rendered = "".join((header, coverage, summary(len(selected)), compact_body, usage)) if metadata_fits else ""
     return {"text": rendered, "truncated": bool(omitted) or not metadata_fits, "rendered_counts": _bucket_counts(selected), "omitted_count": len(omitted), "rendered_chars": len(rendered), "rendered_ids": rendered_ids, "omitted_ids": omitted_ids, "omitted_counts": _bucket_counts(omitted)}
 
 

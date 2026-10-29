@@ -1118,6 +1118,45 @@ class ToolChatTests(unittest.TestCase):
         _client._post_chat_completion_raw = self._orig_raw
         _client._reset_cloud_health_for_tests()
 
+    def test_tool_limit_plain_recovery_and_legacy_routes_are_preserved(self) -> None:
+        cases = (
+            ("https://api.openai.com/v1/responses", "gpt-6.1-terra", True),
+            ("https://example.test/v1/responses", "gpt-6.1-terra", False),
+            ("https://api.openai.com/v1/responses", "gpt-5.4", False),
+            ("https://example.test/v1/chat/completions", "deepseek-test", False),
+        )
+        for base_url, model, final_attempt in cases:
+            with self.subTest(base_url=base_url, model=model):
+                calls = []
+
+                async def raw(**kwargs):
+                    calls.append(kwargs)
+                    if len(calls) > 1:
+                        self.assertEqual(kwargs["tool_choice"], "none")
+                        raise _client.OpenAICompatibleError("synthetic failure")
+                    return {"choices": [{"message": {"tool_calls": [{
+                        "id": "call_1", "type": "function",
+                        "function": {"name": "lookup", "arguments": "{}"},
+                    }]}}]}
+
+                config = _client.Config(catty_openai_base_url=base_url, catty_openai_model=model,
+                                        catty_openai_api_key="TOKEN", catty_anthropic_native_enabled=False)
+                executor = AsyncMock(return_value={"value": "TARGET"})
+                tools = [{"type": "function", "function": {"name": "lookup", "parameters": {"type": "object"}}}]
+                with patch.object(_client, "_post_chat_completion_raw", side_effect=raw), \
+                     patch.object(_client, "chat_completion", new_callable=AsyncMock, return_value="recovered") as plain:
+                    reply = asyncio.run(_client.chat_completion_with_tools(
+                        config, [{"role": "user", "content": "TARGET"}], tools=tools,
+                        tool_executor=executor, max_rounds=1,
+                    ))
+                self.assertEqual(reply, "recovered")
+                self.assertEqual(len(calls), 2 if final_attempt else 1)
+                executor.assert_awaited_once_with("lookup", "{}")
+                plain.assert_awaited_once()
+                recovery = plain.call_args.args[1]
+                self.assertTrue(any(item.get("role") == "tool" for item in recovery))
+                self.assertIn("不再调用工具", recovery[-1]["content"])
+
     def test_forced_tool_choice_is_forwarded_and_short_circuits(self) -> None:
         forced = {"type": "function", "function": {"name": "catty_imagegen"}}
         captured: list[dict] = []
