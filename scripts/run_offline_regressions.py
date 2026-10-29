@@ -42,6 +42,9 @@ MODULES = (
     "test_shared_persona_proactive", "test_shared_persona_style",
     "test_shared_persona_integration", "test_shared_persona_nsfw_imagegen",
     "test_owner_forward", "test_fadianji_style_critic", "test_imagegen_force_tool",
+    "test_self_repair_config", "test_self_repair_budget", "test_self_repair_logs",
+    "test_self_repair_agent", "test_self_repair_worker", "test_self_repair_workspace",
+    "test_self_repair_supervisor", "test_self_repair_acceptance",
 )
 
 _RUNNER = r'''

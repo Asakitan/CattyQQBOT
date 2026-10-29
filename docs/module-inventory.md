@@ -2,6 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `src/catty_self_repair/` / `scripts/catty_self_repair.py` / `scripts/catty_hot_reload.py` / `bot.py` / loader / 配置 JSON | 日志触发、独立或缺省主 AI 路由、周预算、源码候选验证、启动健康检查与发布回滚 → `docs/self-repair.md` | 已部署并在生产与本地启用；模板默认关闭；远端隔离 195 项、部署后 160 项通过 |
 | `voice_reply.py` / `voice_worker.py` / `voice_stt.py` / `voice_stt_worker.py` / `tools.py` / `__init__.py` / `config.py` / `data/voice_bank/` | 调情短语音（人格→音色、双语音库、可选 TTS 子进程）+ 语音消息转写（record→faster-whisper）+ 多气泡语音条/NSFW 语音条 → `docs/voice-candidates.md`、`docs/architecture.md` | 已部署（含远端 worker、转写与语音条）；远端 6+28+22+22 项通过，真实 QQ 多语音条播放未测 |
 | `tmp/voice-training-20261028-01/` / `tmp/voice-quality-20261028-01/{phrase_ab,whole_refine,acoustic_ab}.py` | 双音色权重与等响度试听 → `models/voice/`、`docs/voice-candidates.md` | 用户首选文件02的4轮候选，selection.json已记录；端到端多句待验，未替换或部署 |
 | `tools.py` / `__init__.py` / `catty_sim_chat.py` | 当前会话消息、水位、短等待与自然收尾 → `docs/tool-contracts.md`、`docs/architecture.md` | 已部署并合入；远端哈希一致 |
@@ -52,6 +53,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-29 | 启用生产与本地自修复，缺省继承各自主 AI，保留现有配置 | 合并测试本地/远端各 5 项通过；生产真实日志处理一次无改动、一次连接中断，均未发布；配置访问权限已恢复为显式规则 |
 | 2026-10-29 | 修复语音重复发：工具语音与语音条按去标点文本去重，`already_voiced` 不补文字；整句语音改用 `mood` 情绪参考音 | 本地 34 项语音+22 项工具扫描+33 项配置通过；4 文件经文件 API 上传并回读哈希一致；远端 Shell 禁用未复跑 |
 | 2026-10-29 | 语音情感分段（`catty_voice_say.segments` + worker 情绪参考音逐段合成）；图片/表情改为只当情绪接、不复述；`cooldown_remaining` 首启修复 | 本地 34 项语音+17 项 prompt+33 项配置+22 项工具扫描通过；6 文件经文件 API 上传并回读哈希一致；远端 Shell 禁用未复跑 |
 | 2026-10-29 | 语音冷却 300→10 秒，按 `group:`/`private:` 共享；语音条路径也受冷却，本轮工具已发声则不重复等 | 本地 32 项语音+33 项配置通过、插件加载通过；远端 config 已改 10（文件 API 重写）；5 文件哈希一致；远端 Shell 禁用未复跑 |

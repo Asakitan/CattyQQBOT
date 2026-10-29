@@ -1,4 +1,5 @@
 import asyncio
+import json
 import logging
 import os
 import sys
@@ -223,7 +224,30 @@ if _heartbeat_file:
         _background_tasks.add(task)
         task.add_done_callback(_background_tasks.discard)
 
-nonebot.load_plugin("catty_qq_ai")
+_catty_plugin = nonebot.load_plugin("catty_qq_ai")
+
+# 修复发布的启动凭据：旧心跳不能证明新插件成功导入，绑定本次真实 PID。
+_startup_ready_file = os.environ.get("CATTY_SELF_REPAIR_STARTUP_FILE", "").strip()
+if _startup_ready_file:
+
+    @driver.on_startup
+    async def _mark_supervisor_startup_ready() -> None:
+        path = Path(_startup_ready_file)
+        temporary = path.with_name(f"{path.name}.{os.getpid()}.tmp")
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            temporary.write_text(json.dumps({
+                "pid": os.getpid(), "at": time.time(),
+                "plugin_loaded": _catty_plugin is not None,
+            }), encoding="utf-8")
+            temporary.replace(path)
+        except OSError:
+            logger.warning("Could not write supervisor startup readiness marker")
+        finally:
+            try:
+                temporary.unlink(missing_ok=True)
+            except OSError:
+                pass
 
 if loaded_config is not None:
     from catty_integrations import start_integrated_processes

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 import json
 import os
 from pathlib import Path
@@ -18,6 +19,8 @@ DEFAULT_STOP_TIMEOUT_SECONDS = 20.0
 DEFAULT_HEARTBEAT_TIMEOUT_SECONDS = 180.0
 HEARTBEAT_ENV = "CATTY_HEARTBEAT_FILE"
 HEARTBEAT_RELATIVE_PATH = Path("logs") / "bot_heartbeat"
+STARTUP_ENV = "CATTY_SELF_REPAIR_STARTUP_FILE"
+STARTUP_RELATIVE_PATH = Path("logs") / "bot_startup_ready.json"
 # bot 自己退出 (崩溃/启动失败) 后的重启等待; 稳定运行超过 RESET 秒后从头计
 CRASH_BACKOFF_SECONDS = (2.0, 5.0, 15.0, 30.0, 60.0)
 CRASH_BACKOFF_RESET_SECONDS = 600.0
@@ -259,6 +262,7 @@ def _start_bot(root: Path) -> subprocess.Popen[bytes]:
     env = os.environ.copy()
     env["CATTY_HOT_RELOAD_CHILD"] = "1"
     env[HEARTBEAT_ENV] = str(heartbeat_path(root))
+    env[STARTUP_ENV] = str(root / STARTUP_RELATIVE_PATH)
     return subprocess.Popen(
         [sys.executable, str(root / "bot.py")],
         cwd=str(root),
@@ -328,19 +332,50 @@ def _wait_before_crash_restart(root: Path, snapshot: dict[str, FileSignature], d
             return changes
 
 
-def main() -> int:
-    root = _project_root()
-    disable_console_quick_edit()
-    print("Catty hot reload watcher started.", flush=True)
+def _watcher_event(root: Path, level: str, message: str) -> None:
+    """Keep crash/heartbeat evidence even if bot.py fails before logging starts."""
+    print(message, flush=True)
+    try:
+        path = root / "logs/hot_reload.log"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists() and path.stat().st_size > 2_000_000:
+            path.replace(path.with_suffix(".previous.log"))
+        text = message.replace("\r", " ").replace("\n", " ")
+        with path.open("a", encoding="utf-8") as stream:
+            stream.write(f"{datetime.now():%Y-%m-%d %H:%M:%S} | {level} | catty_hot_reload:watcher:0 - {text}\n")
+    except OSError:
+        pass
+
+
+def _stop_for_repair(child: subprocess.Popen[bytes], timeout: float) -> None:
+    _stop_bot(child, timeout)
+    if child.poll() is None:
+        raise RuntimeError("Bot did not terminate; refusing to publish or roll back source files")
+
+
+def _run_watcher(root: Path, repair) -> int:
     crash_streak = 0
     while True:
+        # No bot exists here: recover/apply whole transactions before any import of new code.
+        repair.poll_worker()
+        repair.apply_pending()
         settings = _load_settings(root)
         stop_timeout = _as_float(settings.get("stop_timeout_seconds"), DEFAULT_STOP_TIMEOUT_SECONDS, 1.0)
         beat_path = heartbeat_path(root)
         _clear_heartbeat(beat_path)
-        child = _start_bot(root)
+        _clear_heartbeat(root / STARTUP_RELATIVE_PATH)
+        started_wall = time.time()
+        try:
+            child = _start_bot(root)
+        except OSError:
+            if repair.active:
+                repair.rollback("process_start_failed")
+                continue
+            _watcher_event(root, "ERROR", "Catty process could not be started.")
+            raise
+        repair.bot_started(child.pid, started_wall)
         started_monotonic = time.monotonic()
-        heartbeat = HeartbeatMonitor(beat_path, started_at=time.time())
+        heartbeat = HeartbeatMonitor(beat_path, started_at=started_wall)
         snapshot = snapshot_files(root)
         restart_reason = ""
         try:
@@ -349,15 +384,26 @@ def main() -> int:
                 poll_seconds = _as_float(settings.get("poll_seconds"), DEFAULT_POLL_SECONDS, 0.2)
                 stop_timeout = _as_float(settings.get("stop_timeout_seconds"), DEFAULT_STOP_TIMEOUT_SECONDS, 1.0)
                 time.sleep(poll_seconds)
+                repair.poll_worker()
+                rollback_reason = repair.health_action(running=child.poll() is None)
+                if rollback_reason:
+                    _stop_for_repair(child, stop_timeout)
+                    repair.rollback(rollback_reason)
+                    restart_reason = "repair_rollback"
+                    break
+                if repair.has_ready():
+                    _stop_for_repair(child, stop_timeout)
+                    repair.apply_pending()
+                    restart_reason = "repair_candidate"
+                    break
                 beat_timeout = _as_float(
                     settings.get("heartbeat_timeout_seconds"), DEFAULT_HEARTBEAT_TIMEOUT_SECONDS, 0.0
                 )
                 if heartbeat.is_stale(time.time(), beat_timeout):
-                    print(
-                        f"Catty heartbeat is older than {beat_timeout:.0f}s (event loop frozen?); restarting it.",
-                        flush=True,
-                    )
-                    _stop_bot(child, stop_timeout)
+                    _watcher_event(root, "WARNING", f"Catty heartbeat is older than {beat_timeout:.0f}s (event loop frozen?); restarting it.")
+                    _stop_for_repair(child, stop_timeout)
+                    if repair.active:
+                        repair.rollback("stale_heartbeat")
                     restart_reason = "heartbeat"
                     break
                 if not _as_bool(settings.get("enabled"), default=True):
@@ -377,8 +423,11 @@ def main() -> int:
                     snapshot = current
                     continue
                 print("Hot reload restarting Catty after file changes: " + ", ".join(changes[:8]), flush=True)
-                _stop_bot(child, stop_timeout)
+                _stop_for_repair(child, stop_timeout)
+                if repair.active:
+                    repair.rollback("source_changed_during_health_check")
                 if _self_key(root) in changes:
+                    repair.close()
                     _respawn_watcher(root)
                     return 0
                 restart_reason = "code"
@@ -386,8 +435,17 @@ def main() -> int:
         except KeyboardInterrupt:
             _stop_bot(child, stop_timeout)
             return 130
+        except BaseException:
+            _stop_bot(child, stop_timeout)
+            raise
 
         if restart_reason:
+            crash_streak = 0
+            continue
+
+        rollback_reason = repair.health_action(running=False)
+        if rollback_reason:
+            repair.rollback(rollback_reason)
             crash_streak = 0
             continue
 
@@ -401,7 +459,7 @@ def main() -> int:
             crash_streak = 0
         delay = crash_backoff_seconds(crash_streak)
         crash_streak += 1
-        print(f"Catty exited with code {exit_code} after {ran_for:.0f}s; restarting in {delay:.0f}s.", flush=True)
+        _watcher_event(root, "ERROR", f"Catty exited with code {exit_code} after {ran_for:.0f}s; restarting in {delay:.0f}s.")
         try:
             changes = _wait_before_crash_restart(root, snapshot, delay)
         except KeyboardInterrupt:
@@ -409,8 +467,27 @@ def main() -> int:
         if changes:
             print("Code changed while waiting; restarting Catty now: " + ", ".join(changes[:8]), flush=True)
             if _self_key(root) in changes:
+                repair.close()
                 _respawn_watcher(root)
                 return 0
+
+
+def main() -> int:
+    root = _project_root()
+    disable_console_quick_edit()
+    sys.path.insert(0, str(root / "src"))
+    from catty_self_repair.supervisor import RecoveryBlocked, RepairSupervisor
+
+    repair = RepairSupervisor(root)
+    print("Catty hot reload watcher started.", flush=True)
+    try:
+        repair.start()
+        return _run_watcher(root, repair)
+    except RecoveryBlocked as exc:
+        print(str(exc), flush=True)
+        return 2
+    finally:
+        repair.close()
 
 
 if __name__ == "__main__":
