@@ -136,6 +136,83 @@ class MessagesToResponsesInputTests(unittest.TestCase):
 
 
 class PayloadToResponsesBodyTests(unittest.TestCase):
+    def test_explicit_cache_splits_marker_in_merged_system_message(self) -> None:
+        marker = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
+        bodies = []
+        cache_module = importlib.import_module("catty_qq_ai.prompt_cache")
+        for suffix in ("first context", "second context"):
+            messages = [
+                {"role": "system", "content": "stable rules"},
+                {"role": "system", "content": f"{marker}\n\n{suffix}"},
+                {"role": "user", "content": "question"},
+            ]
+            cache_module.merge_consecutive_system_messages(messages)
+            bodies.append(_client._payload_to_responses_body(
+                {"model": "gpt-6.1-terra", "messages": messages},
+                stream=False,
+                cache_stable_prefix=True,
+            ))
+        self.assertEqual(bodies[0]["input"][0], bodies[1]["input"][0])
+        self.assertEqual(bodies[0]["input"][0]["content"][0]["text"], f"stable rules\n\n{marker}")
+        self.assertEqual(bodies[0]["input"][1]["content"][0]["text"], "\n\nfirst context")
+        self.assertEqual(bodies[1]["input"][1]["content"][0]["text"], "\n\nsecond context")
+
+    def test_explicit_cache_is_gated_by_official_endpoint_and_model(self) -> None:
+        supported = _client._responses_support_explicit_cache
+        self.assertTrue(supported("https://api.openai.com/v1/responses", "gpt-6.1-terra"))
+        self.assertTrue(supported("wss://api.openai.com/v1/responses", "gpt-5.6-luna"))
+        self.assertFalse(supported("https://api.openai.com/v1/responses", "gpt-5.5"))
+        self.assertFalse(supported("https://api.openai.com/v1/responses", "other-model"))
+        self.assertFalse(supported("https://proxy.example/v1/responses", "gpt-6.1-terra"))
+        self.assertFalse(supported("https://api.openai.com.example/v1/responses", "gpt-6.1-terra"))
+        self.assertFalse(supported("http://api.openai.com/v1/responses", "gpt-6.1-terra"))
+
+    def test_explicit_cache_without_leading_boundary_keeps_legacy_conversion(self) -> None:
+        messages = [
+            {"role": "system", "content": "rules"},
+            {"role": "user", "content": "question"},
+            {"role": "system", "content": "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+        ]
+        body = _client._payload_to_responses_body(
+            {"model": "gpt-6.1-terra", "messages": messages},
+            stream=False,
+            cache_stable_prefix=True,
+        )
+        self.assertEqual(body["instructions"], "rules\n\n<<<CACHE_BOUNDARY:catty_stable_prefix>>>")
+        self.assertEqual([item["role"] for item in body["input"]], ["user"])
+
+    def test_explicit_cache_preserves_stable_prefix_and_dynamic_order(self) -> None:
+        marker = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
+        messages = [
+            {"role": "system", "content": "stable rules"},
+            {"role": "system", "content": f"stable boundary\n{marker}"},
+            {"role": "user", "content": "current message"},
+            {"role": "system", "content": "dynamic context one"},
+        ]
+        first = _client._payload_to_responses_body(
+            {"model": "gpt-6.1-terra", "messages": messages},
+            stream=False,
+            cache_stable_prefix=True,
+        )
+        changed_messages = messages[:-1] + [
+            {"role": "system", "content": "dynamic context two"},
+        ]
+        second = _client._payload_to_responses_body(
+            {"model": "gpt-6.1-terra", "messages": changed_messages},
+            stream=False,
+            cache_stable_prefix=True,
+        )
+        self.assertNotIn("instructions", first)
+        self.assertEqual([item["role"] for item in first["input"]], [
+            "developer", "user", "developer",
+        ])
+        stable = first["input"][0]["content"][0]
+        self.assertEqual(stable["text"], f"stable rules\n\nstable boundary\n{marker}")
+        self.assertEqual(stable["prompt_cache_breakpoint"], {"mode": "explicit"})
+        self.assertEqual(first["input"][0], second["input"][0])
+        self.assertEqual(first["input"][-1]["content"][0]["text"], "dynamic context one")
+        self.assertEqual(second["input"][-1]["content"][0]["text"], "dynamic context two")
+
     def test_hoists_system_into_instructions(self) -> None:
         payload = {
             "model": "gpt-5.6-luna",
@@ -191,6 +268,24 @@ class PayloadToResponsesBodyTests(unittest.TestCase):
 
 
 class ConvertResponsesDataTests(unittest.TestCase):
+    def test_cache_write_usage_and_lifetime_mapping(self) -> None:
+        data = _client._convert_responses_data({
+            "output": [],
+            "usage": {
+                "input_tokens": 100,
+                "input_tokens_details": {
+                    "cached_tokens": 60,
+                    "cache_write_tokens": 30,
+                    "cache_write_tokens_details": {"ttl_30m_tokens": 20, "ttl_12h_tokens": 10},
+                },
+            },
+        })
+        self.assertEqual(data["usage"]["prompt_tokens_details"], {
+            "cached_tokens": 60,
+            "cache_write_tokens": 30,
+            "cache_write_tokens_details": {"ttl_30m_tokens": 20, "ttl_12h_tokens": 10},
+        })
+
     def test_text_and_usage_mapping(self) -> None:
         raw = {
             "id": "resp_abc",
@@ -310,6 +405,61 @@ class _FakeSseResponse:
 
 
 class StreamResponsesAttemptTests(unittest.TestCase):
+    def test_native_streaming_sends_explicit_cache_boundary(self) -> None:
+        payload = {
+            "model": "gpt-6.1-terra",
+            "messages": [
+                {"role": "system", "content": "stable <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+                {"role": "user", "content": "question"},
+            ],
+        }
+        asyncio.run(self._run_stream(
+            [{"type": "response.completed", "response": {"status": "completed", "output": []}}],
+            url="https://api.openai.com/v1/responses",
+            payload_override=payload,
+        ))
+        self.assertEqual(
+            self.last_request_body["input"][0]["content"][0]["prompt_cache_breakpoint"],
+            {"mode": "explicit"},
+        )
+
+    def test_native_non_streaming_sends_normalized_cache_boundary(self) -> None:
+        response = MagicMock(status_code=200)
+        response.json.return_value = {"status": "completed", "output": [], "usage": {}}
+        fake_client = MagicMock()
+        fake_client.__aenter__ = AsyncMock(return_value=fake_client)
+        fake_client.__aexit__ = AsyncMock(return_value=False)
+        fake_client.post = AsyncMock(return_value=response)
+        config = types.SimpleNamespace(catty_openai_websocket_enabled=False)
+        with (
+            patch.object(_client, "_get_runtime_config", return_value=config),
+            patch.object(_client, "_http_client", return_value=fake_client),
+            patch.object(_client, "_log_cache_stats"),
+        ):
+            asyncio.run(_client._post_chat_completion_raw(
+                base_url="https://api.openai.com/v1/responses",
+                api_key="TOKEN",
+                model="gpt-6.1-terra",
+                messages=[
+                    {"role": "system", "content": "stable"},
+                    {"role": "system", "content": "<<<CACHE_BOUNDARY:catty_stable_prefix>>> marker note"},
+                    {"role": "user", "content": "question"},
+                    {"role": "system", "content": "dynamic context"},
+                ],
+                timeout=5,
+                proxy="",
+                temperature=None,
+                max_tokens=64,
+                extra_headers={},
+                extra_body={},
+                stream=False,
+                max_attempts=1,
+            ))
+        body = fake_client.post.await_args.kwargs["json"]
+        self.assertEqual(body["input"][0]["content"][0]["prompt_cache_breakpoint"], {"mode": "explicit"})
+        self.assertEqual(body["input"][1]["content"][0]["text"], " marker note")
+        self.assertIn("dynamic context", body["input"][-1]["content"][0]["text"])
+
     def test_completed_event_used_as_authoritative(self) -> None:
         sse_events = [
             {"type": "response.created"},
@@ -398,6 +548,8 @@ class StreamResponsesAttemptTests(unittest.TestCase):
         body: str = "",
         append_done: bool = False,
         fail_if_read_past: bool = False,
+        url: str = _RESPONSES_URL,
+        payload_override: dict | None = None,
     ) -> dict:
         if status_code >= 400:
             lines = [body]
@@ -422,15 +574,15 @@ class StreamResponsesAttemptTests(unittest.TestCase):
                 __aexit__=AsyncMock(return_value=False),
             ),
         )
-        payload = {
+        payload = payload_override or {
             "model": "gpt-5.6-luna",
             "messages": [{"role": "user", "content": "hi"}],
             "stream": True,
         }
         with patch.object(_client, "httpx") as fake_httpx:
             fake_httpx.AsyncClient.return_value = fake_client
-            return await _client._stream_responses_attempt(
-                url=_RESPONSES_URL,
+            result = await _client._stream_responses_attempt(
+                url=url,
                 headers={"Authorization": "Bearer x"},
                 payload=payload,
                 timeout=30.0,
@@ -438,6 +590,8 @@ class StreamResponsesAttemptTests(unittest.TestCase):
                 dash_stream_id=None,
                 dash_mod=None,
             )
+            self.last_request_body = fake_client.stream.call_args.kwargs["json"]
+            return result
 
 
 if __name__ == "__main__":

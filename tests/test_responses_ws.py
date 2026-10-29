@@ -42,6 +42,85 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         port = server.sockets[0].getsockname()[1]
         return server, port
 
+    async def test_explicit_cache_wire_and_previous_response_continuation(self):
+        frames = []
+
+        class FakeTransport:
+            generation = 1
+
+            async def ensure_ready(self):
+                return self.generation
+
+            async def iter_events(self, body, *, stream_id, previous_response_id):
+                frames.append((json.loads(json.dumps(body)), previous_response_id))
+                yield {
+                    "type": "response.completed",
+                    "response": {
+                        "id": f"resp_{len(frames)}",
+                        "output": [{
+                            "type": "message",
+                            "role": "assistant",
+                            "content": [{"type": "output_text", "text": "ok"}],
+                        }],
+                    },
+                }
+
+        config = types.SimpleNamespace(
+            catty_openai_websocket_store=False,
+            catty_openai_websocket_include=[],
+            catty_openai_websocket_previous_response=True,
+            catty_openai_websocket_stream_id="catty",
+        )
+        arguments = dict(
+            config=config,
+            base_url="https://api.openai.com/v1/responses",
+            api_key="TOKEN",
+            extra_headers={},
+            timeout=5,
+            proxy="",
+            dash_stream_id=None,
+            dash_mod=None,
+            scope="private:1",
+        )
+        first_messages = [
+            {"role": "system", "content": "stable <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "hi"},
+            {"role": "system", "content": "context one"},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            cache = responses_ws.ResponseChainCache(Path(directory) / "cache.json", 60)
+            with patch.object(openai_client, "_get_ws_transport", return_value=FakeTransport()):
+                with patch.object(openai_client, "_get_ws_chain_cache", return_value=cache):
+                    await openai_client._stream_responses_ws_attempt(
+                        payload={"model": "gpt-6.1-terra", "messages": first_messages},
+                        **arguments,
+                    )
+                    await openai_client._stream_responses_ws_attempt(
+                        payload={"model": "gpt-6.1-terra", "messages": first_messages + [
+                            {"role": "assistant", "content": "ok"},
+                            {"role": "user", "content": "next"},
+                        ]},
+                        **arguments,
+                    )
+                    await openai_client._stream_responses_ws_attempt(
+                        payload={"model": "gpt-6.1-terra", "messages": [
+                            first_messages[0], first_messages[1],
+                            {"role": "assistant", "content": "ok"},
+                            {"role": "user", "content": "next"},
+                            {"role": "system", "content": "context two"},
+                        ]},
+                        **arguments,
+                    )
+        self.assertEqual(
+            frames[0][0]["input"][0]["content"][0]["prompt_cache_breakpoint"],
+            {"mode": "explicit"},
+        )
+        self.assertIsNone(frames[0][1])
+        self.assertEqual(frames[1][1], "resp_1")
+        self.assertEqual([item["role"] for item in frames[1][0]["input"]], ["user"])
+        self.assertIsNone(frames[2][1])
+        self.assertEqual(frames[0][0]["input"][0], frames[2][0]["input"][0])
+
     async def test_stream_events_and_frame_shape(self):
         async def handler(ws):
             async for raw in ws:

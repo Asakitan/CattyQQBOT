@@ -2295,14 +2295,15 @@ def _log_cache_stats(
         return
 
     # === (2) Anthropic 风格 ===
-    cache_read = int(usage.get("cache_read_input_tokens") or 0)
-    cache_create = int(usage.get("cache_creation_input_tokens") or 0)
-    input_tokens = int(usage.get("input_tokens") or 0)
-    # === (3) OpenAI 风格 (兜底) ===
-    if not (cache_read or cache_create):
+    if any(key in usage for key in ("cache_read_input_tokens", "cache_creation_input_tokens", "input_tokens")):
+        cache_read = int(usage.get("cache_read_input_tokens") or 0)
+        cache_create = int(usage.get("cache_creation_input_tokens") or 0)
+        input_tokens = int(usage.get("input_tokens") or 0)
+    else:
         prompt_details = usage.get("prompt_tokens_details") or {}
         cache_read = int(prompt_details.get("cached_tokens") or 0)
-        input_tokens = int(usage.get("prompt_tokens") or 0) - cache_read
+        cache_create = int(prompt_details.get("cache_write_tokens") or 0)
+        input_tokens = max(int(usage.get("prompt_tokens") or 0) - cache_read - cache_create, 0)
     total_input = cache_read + cache_create + input_tokens
     if total_input <= 0:
         return
@@ -2859,14 +2860,27 @@ def _tool_choice_to_responses(choice: ToolChoice) -> Any:
     return "auto"
 
 
+def _responses_support_explicit_cache(base_url: str, model: str) -> bool:
+    parsed = urlparse(base_url)
+    if parsed.scheme not in ("https", "wss") or parsed.hostname != "api.openai.com":
+        return False
+    match = re.match(r"^gpt-(\d+)(?:\.(\d+))?(?:-|$)", str(model).strip().lower())
+    if not match:
+        return False
+    major = int(match.group(1))
+    minor = int(match.group(2) or 0)
+    return major > 5 or (major == 5 and minor >= 6)
+
+
 def _payload_to_responses_body(
     payload: dict[str, Any],
     *,
     stream: bool,
+    cache_stable_prefix: bool = False,
 ) -> dict[str, Any]:
     """chat-completions payload → Responses API request body.
 
-    系统消息 hoist 到顶层 instructions (Responses 标准通道), 其余消息进 input。
+    默认将系统消息 hoist 到 instructions；支持显式缓存时保留稳定边界和消息顺序。
     chat-completions 专属字段 (messages/max_tokens/stream/stream_options/tools/
     tool_choice) 转换或丢弃; extra_body 只透传白名单字段。
     """
@@ -2874,19 +2888,69 @@ def _payload_to_responses_body(
     input_items = _messages_to_responses_input(payload.get("messages") or [])
     system_texts: list[str] = []
     rest: list[dict[str, Any]] = []
-    for item in input_items:
-        if item.get("role") == "system":
-            texts = [
-                str(part.get("text") or "")
-                for part in (item.get("content") or [])
+    boundary_index = -1
+    if cache_stable_prefix:
+        from .prompt_cache import _CACHE_BOUNDARY_MARKER
+
+        for index, item in enumerate(input_items):
+            if item.get("role") != "system":
+                break
+            if any(
+                _CACHE_BOUNDARY_MARKER in str(part.get("text") or "")
+                for part in item.get("content") or []
                 if isinstance(part, dict)
-                and isinstance(part.get("text"), str)
-                and part["text"].strip()
-            ]
-            if texts:
-                system_texts.append("\n".join(texts))
-            continue
-        rest.append(item)
+            ):
+                boundary_index = index
+                break
+    if boundary_index >= 0:
+        for item in input_items[:boundary_index]:
+            system_texts.append("\n".join(
+                str(part.get("text") or "")
+                for part in item.get("content") or []
+                if isinstance(part, dict) and str(part.get("text") or "").strip()
+            ))
+        boundary_text = "\n".join(
+            str(part.get("text") or "")
+            for part in input_items[boundary_index].get("content") or []
+            if isinstance(part, dict) and str(part.get("text") or "").strip()
+        )
+        marker_end = boundary_text.index(_CACHE_BOUNDARY_MARKER) + len(_CACHE_BOUNDARY_MARKER)
+        system_texts.append(boundary_text[:marker_end])
+        rest.append({
+            "type": "message",
+            "role": "developer",
+            "content": [{
+                "type": "input_text",
+                "text": "\n\n".join(system_texts),
+                "prompt_cache_breakpoint": {"mode": "explicit"},
+            }],
+        })
+        system_texts.clear()
+        boundary_suffix = boundary_text[marker_end:]
+        if boundary_suffix.strip():
+            rest.append({
+                "type": "message",
+                "role": "developer",
+                "content": [{"type": "input_text", "text": boundary_suffix}],
+            })
+        for item in input_items[boundary_index + 1:]:
+            if item.get("role") == "system":
+                item["role"] = "developer"
+            rest.append(item)
+    else:
+        for item in input_items:
+            if item.get("role") == "system":
+                texts = [
+                    str(part.get("text") or "")
+                    for part in (item.get("content") or [])
+                    if isinstance(part, dict)
+                    and isinstance(part.get("text"), str)
+                    and part["text"].strip()
+                ]
+                if texts:
+                    system_texts.append("\n".join(texts))
+                continue
+            rest.append(item)
     if system_texts:
         body["instructions"] = "\n\n".join(system_texts)
     if rest:
@@ -3010,10 +3074,20 @@ def _convert_responses_data(data: dict[str, Any]) -> dict[str, Any]:
             "total_tokens": int(usage.get("total_tokens") or (input_tokens + output_tokens)),
         }
         details_in = usage.get("input_tokens_details") or {}
-        if isinstance(details_in, dict) and int(details_in.get("cached_tokens") or 0) > 0:
-            converted_usage["prompt_tokens_details"] = {
-                "cached_tokens": int(details_in["cached_tokens"]),
-            }
+        if isinstance(details_in, dict):
+            prompt_details: dict[str, Any] = {}
+            for key in ("cached_tokens", "cache_write_tokens"):
+                if key in details_in:
+                    prompt_details[key] = int(details_in.get(key) or 0)
+            write_details = details_in.get("cache_write_tokens_details")
+            if isinstance(write_details, dict):
+                prompt_details["cache_write_tokens_details"] = {
+                    key: int(write_details.get(key) or 0)
+                    for key in ("ttl_30m_tokens", "ttl_12h_tokens")
+                    if key in write_details
+                }
+            if prompt_details:
+                converted_usage["prompt_tokens_details"] = prompt_details
         details_out = usage.get("output_tokens_details") or {}
         if isinstance(details_out, dict) and int(details_out.get("reasoning_tokens") or 0) > 0:
             converted_usage["completion_tokens_details"] = {
@@ -3045,7 +3119,11 @@ async def _stream_responses_attempt(
     - error 事件 → raise OpenAICompatibleError(.status_code=502, caller 会 5xx retry)
     - HTTP >= 400 → raise OpenAICompatibleError(.status_code, caller 决定重试)
     """
-    body = _payload_to_responses_body(payload, stream=True)
+    body = _payload_to_responses_body(
+        payload,
+        stream=True,
+        cache_stable_prefix=_responses_support_explicit_cache(url, payload.get("model") or ""),
+    )
     text_accum = ""
     reasoning_accum = ""
     tool_calls_by_item: dict[str, dict[str, str]] = {}
@@ -3216,7 +3294,11 @@ async def _stream_responses_ws_attempt(
         item_hash,
     )
 
-    body = _payload_to_responses_body(payload, stream=True)
+    body = _payload_to_responses_body(
+        payload,
+        stream=True,
+        cache_stable_prefix=_responses_support_explicit_cache(base_url, payload.get("model") or ""),
+    )
     for key in ("stream", "stream_options", "background"):
         body.pop(key, None)
     store = bool(getattr(config, "catty_openai_websocket_store", False))
@@ -4041,7 +4123,11 @@ async def _post_chat_completion_raw(
                     _responses_url(base_url) if _responses_mode else _chat_completions_url(base_url),
                     headers=headers,
                     json=(
-                        _payload_to_responses_body(payload, stream=False)
+                        _payload_to_responses_body(
+                            payload,
+                            stream=False,
+                            cache_stable_prefix=_responses_support_explicit_cache(base_url, model),
+                        )
                         if _responses_mode else payload
                     ),
                 )

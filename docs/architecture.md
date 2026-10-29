@@ -6,7 +6,7 @@ QQ 客户端的转文字结果不经过 OneBot；入口在 `_rule` 里用 `_extr
 
 ## 调情短语音（已部署）
 
-`catty_voice_say` 与其它工具一样由模型自行决定何时调用，schema 明确限定“对方在调情/暧昧/撒娇时偶尔一条”，普通问答不适用。工具对所有人格暴露，音色按人格解析：`voice.default`（默认 `michelle`）兜底，`voice.persona_voices` 覆盖（默认把 `fadianji` 指到机机音色）。执行器再走 `voice_reply.reserve_slot`：每会话 5 分钟冷却 + 概率门（默认 0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。
+`catty_voice_say` 与其它工具一样由模型自行决定何时调用，schema 明确限定“对方在调情/暧昧/撒娇时偶尔一条”，普通问答不适用。工具对所有人格暴露，音色按人格解析：`voice.default`（默认 `michelle`）兜底，`voice.persona_voices` 覆盖（默认把 `fadianji` 指到机机音色）。执行器再走 `voice_reply.reserve_slot`：每会话 10 秒冷却 + 概率门（默认 0.6）；主人（`catty_owner_qq`）跳过冷却与概率，但仍受“本轮 1 条”限制。
 
 `bank` 后端读取包内 `data/voice_bank/<音色>/bank.json`，按 mood 选片段并避免连续重复，秒级返回。`worker` 后端用独立 GPT-SoVITS 子进程合成模型自己写的一句短话：启动回执握手、240 秒超时、4200MiB 可用内存门槛、空闲 180 秒卸载、关闭时回收；按 `voice.profiles.<音色>` 取 gpt/sovits/参考音，切换音色时先收掉旧 worker 再判断内存；未配置或失败时退回语音库。
 
@@ -81,6 +81,8 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 主模型与识图可走 `wss://api.openai.com/v1/responses`：`responses_ws.py` 维护一个持久连接，发送 `response.create` 帧并按 `stream_id` 把事件路由到对应 lane。续聊用 `previous_response_id` + 只发新增 input items；`store=false` 时服务端只在连接本地内存缓存上一轮，连接换代后本地缓存里的 response id 失效，自动改为完整 input 重放。`data/responses_ws_cache.json` 保存每个 scope 的 response id、已覆盖 input/output item 指纹和 connection generation，TTL 过期或 generation 不匹配即弃用。连接断开、`previous_response_not_found` 或 50 分钟主动换连接都会清缓存并重放一次完整上下文；仍失败时按 `ai.websocket_fallback_http` 回退 HTTP Responses/chat。
 
 未完成请求取消或超时会关闭连接，避免旧事件进入下一轮；连接标识跨实例唯一，失效续聊先释放 lane 再重放。请求侧把 `reasoning_effort` 转成 `reasoning.effort`（`max` 映射为 `high`），识图 URL 使用字符串。NSFW spark 仍走 DeepSeek，普通生图用 OpenAI；自动 NSFW 生图可用 `imagegen.nsfw_backend` 与 `imagegen.pixelbunny.base_url/api_key` 独立保留 Pixelbunny。
+
+已部署的缓存修复将官方 OpenAI GPT-5.6 及以上请求的稳定系统前缀转换为 developer 输入，并在既有标记处设置显式断点；后续系统段保留原有位置，隐式断点继续启用。无标记及其他兼容端点保持原转换。Responses 用量透传读取、写入及期限明细，面板将写入与普通输入分开；缓存命中仍依赖前缀和工具一致、有效期限及服务端路由。部署后生产代码的 WebSocket 合成探针首轮写入 9625、续聊次轮读取 9625 token；真实 QQ 回合未测。
 
 生产机本地 SOCKS `127.0.0.1:11080` 由启动任务维持，加密隧道接跳板 TCP 18080；OpenAI 与 NovelAI 域名经隧道，其他流量直连。`vision.image_download_direct` 默认关闭，生产显式开启后只让图片资源绕过 API 代理，仍逐跳校验公网 IP、固定连接地址并禁止环境代理。真实 QQ 公共头像下载与 Terra WebSocket 识图、两轮增量续聊及 NAI 鉴权通过；生产实际出图、QQ 会话端到端与长期缓存命中未验证。单连接的 named lane 数量上限可能触发 HTTP 回退。
 

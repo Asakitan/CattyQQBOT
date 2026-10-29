@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 import asyncio
+import re
 import time
 import uuid
 from collections import OrderedDict, deque
@@ -35,6 +36,16 @@ _CACHE_BILLING_PROFILES: dict[str, dict[str, float]] = {
     "openai": {
         "cache_read_multiplier": 0.1,
         "cache_create_multiplier": 0.0,
+        "input_multiplier": 1.0,
+    },
+    "openai_gpt56": {
+        "cache_read_multiplier": 0.1,
+        "cache_create_multiplier": 1.25,
+        "input_multiplier": 1.0,
+    },
+    "openai_terra": {
+        "cache_read_multiplier": 0.05,
+        "cache_create_multiplier": 1.25,
         "input_multiplier": 1.0,
     },
     "anthropic": {
@@ -231,7 +242,16 @@ def _resolve_billing_profile(
     if supplied is None and isinstance(diagnostics, Mapping):
         supplied = diagnostics.get("billing_profile")
 
-    default_name = "deepseek" if "deepseek" in (model or "").lower() else provider
+    model_name = (model or "").strip().lower()
+    default_name = "deepseek" if "deepseek" in model_name else provider
+    if default_name == "openai":
+        version = re.match(r"^gpt-(\d+)(?:\.(\d+))?(?:-|$)", model_name)
+        if model_name.startswith(("gpt-6.1-terra", "gpt-6.1-sol")):
+            default_name = "openai_terra"
+        elif version and (int(version.group(1)) > 5 or (
+            int(version.group(1)) == 5 and int(version.group(2) or 0) >= 6
+        )):
+            default_name = "openai_gpt56"
     profile_name = default_name
     overrides: Mapping[str, Any] = {}
     if isinstance(supplied, Mapping):
@@ -304,8 +324,10 @@ def _normalize_cache_usage(
         cache_read = _nonnegative_int(
             prompt_details.get("cached_tokens") if isinstance(prompt_details, Mapping) else 0,
         )
-        cache_create = 0
-        input_tokens = max(_nonnegative_int(usage.get("prompt_tokens")) - cache_read, 0)
+        cache_create = _nonnegative_int(
+            prompt_details.get("cache_write_tokens") if isinstance(prompt_details, Mapping) else 0,
+        )
+        input_tokens = max(_nonnegative_int(usage.get("prompt_tokens")) - cache_read - cache_create, 0)
         output_tokens = _nonnegative_int(usage.get("completion_tokens"))
 
     input_total = cache_read + cache_create + input_tokens
@@ -344,6 +366,19 @@ def _normalize_cache_usage(
         + cache_create * profile["cache_create_multiplier"]
         + input_tokens * profile["input_multiplier"]
     )
+    if provider == "openai" and profile_name in ("openai_gpt56", "openai_terra"):
+        write_details = prompt_details.get("cache_write_tokens_details") if isinstance(prompt_details, Mapping) else None
+        supplied_profile = billing_profile
+        if supplied_profile is None and isinstance(diagnostics, Mapping):
+            supplied_profile = diagnostics.get("billing_profile")
+        custom_create_rate = (
+            isinstance(supplied_profile, Mapping) and "cache_create_multiplier" in supplied_profile
+        ) or (
+            isinstance(diagnostics, Mapping) and "cache_create_multiplier" in diagnostics
+        )
+        if isinstance(write_details, Mapping) and not custom_create_rate:
+            long_write = min(_nonnegative_int(write_details.get("ttl_12h_tokens")), cache_create)
+            billed_input_equiv += long_write * 1.25
     saved_pct = (
         (1 - billed_input_equiv / input_total) * 100
         if input_total > 0

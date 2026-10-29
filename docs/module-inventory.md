@@ -12,6 +12,7 @@
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
 | `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 已部署；图片 URL 安全校验已上线 |
+| `openai_client.py` / `dashboard_state.py` / Responses 与面板测试 | 官方 Responses 稳定前缀断点、缓存写入透传及面板读写计费 → `docs/session-log/session-19.md` | 已部署；远端 136 项中 9 跳过，其余通过；生产代码合成续聊读取 9625 token |
 | `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署 |
 | `message_utils.py` / `persona_prompts.py` / `prompt_manager.py` / `__init__.py` | 表情线索提取及图片、表情按语境自然接话 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1401 项、9 跳过，远端 140 项通过 |
 | `__init__.py` / `tests/test_legs_delivery.py` | 腿图文字及图片按发送回执记历史 → `docs/architecture.md` | 已部署并合入活动源码；远端 8 项、本地相关回归 96 项通过 |
@@ -21,7 +22,7 @@
 | `rag_embedding_backend.py` / `rag_embedding_worker.py` / `catty_rag.py` / `config.py` / loader / `__init__.py` | 独立离线 BGE、生命周期、来源错误、回填计数与发送确认 → `docs/architecture.md` | 已部署、本地已合并 RAG 基线；1393 项、远端 47 项通过，模型就绪 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署；生产群额度单字段已更新 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
-| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程；包含八个源码自修复测试模块 | 自修复清单已部署；生产保留原清单，其尚无的 `test_responses_ws` 未混入 |
+| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程；包含八个源码自修复测试模块 | 自修复清单已部署；生产保留原清单，已交付的 `test_responses_ws` 未混入 |
 | `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排、引用检索与工具感知教程 → `docs/harness-evidence.md` | 已部署；成员作用域与身份校验已上线 |
 | `reply_admission.py` / `__init__.py` | 同群历史与当前发言者驱动弱唤醒/续聊模型判门 | 已部署；16项纯判门和集成回归通过 |
 | `fdj_scene_retrieval.py` | 昵称归一化精确索引与相关性过滤 | 已部署；语料配置与缓存键已上线 |
@@ -48,14 +49,15 @@
 | `personas/fadianji.py` / `fadianji_scenes.py` | 普通聊天语境与真实样本口吻 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；本地人格与语料测试通过 |
 | `cpu_engine/semantic_route.py` / `corpus_txtai.py` | 模型与有序语料缓存身份 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；29项缓存测试通过，CPU 默认停用 |
 | `src/catty_qq_ai/__init__.py` / `tests/test_shared_persona_integration.py` | 怀孕预判 global 导出与临轮清零、分库 flush 托管、主路径场景/CPU phase 按人格 scope → `docs/session-log/session-10.md` | 已部署（基线+4 修复重放）；新增 4 例，远端 150 项通过 |
-| `config.py` / `catty_config_loader.py` / 配置 JSON / `catty_integrations.py` / RAG / CPU / NLU / 图片工具 | 模型名、端点与密钥路线收口到配置，自动 NSFW 配图可独立选择 Pixelbunny → `docs/session-log/session-13.md`、`docs/session-log/session-16.md` | 已部署；提交版本 18 文件与生产一致，工作区客户端另有并行缓存改动 |
-| `responses_ws.py` / `openai_client.py` / `config.py` / loader / 配置 JSON / `pyproject.toml` | Responses WebSocket 主/识图、增量续聊、连接内缓存与 HTTP 回退；图片直连开关保留安全校验，NSFW 保留 DS → `docs/session-log/session-16.md`、`docs/architecture.md` | 已部署；真实两轮增量续聊、QQ 公共图下载与 Terra 识图请求通过 |
+| `config.py` / `catty_config_loader.py` / 配置 JSON / `catty_integrations.py` / RAG / CPU / NLU / 图片工具 | 模型名、端点与密钥路线收口到配置，自动 NSFW 配图可独立选择 Pixelbunny → `docs/session-log/session-13.md`、`docs/session-log/session-16.md` | 已部署；提交版本 18 文件当时与生产一致，客户端缓存修复已另行部署 |
+| `responses_ws.py` / `openai_client.py` / `config.py` / loader / 配置 JSON / `pyproject.toml` | Responses WebSocket 主/识图、增量续聊、连接内缓存与 HTTP 回退；图片直连开关保留安全校验，NSFW 保留 DS → `docs/session-log/session-16.md`、`docs/architecture.md` | 已部署；真实两轮增量续聊、QQ 公共图下载与 Terra 识图请求通过；缓存修复已部署 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
-| 2026-10-29 | 核对 Terra 交付内容并保留后续自修复合并 | 18 文件提交快照与生产一致；隔离回归 321 项、9 跳过；工作区客户端保留并行缓存改动 |
+| 2026-10-29 | 部署 Responses 稳定前缀显式断点与缓存写入用量、面板计费修复 | 5 文件哈希一致；远端 136 项、9 跳过；生产代码合成续聊读取 9625 token；真实 QQ 未测 |
+| 2026-10-29 | 核对 Terra 交付内容并保留后续自修复合并 | 18 文件提交快照当时与生产一致；隔离回归 321 项、9 跳过；客户端缓存改动已另行部署 |
 | 2026-10-29 | 启用生产与本地自修复，缺省继承各自主 AI，保留现有配置 | 合并测试本地/远端各 5 项通过；生产真实日志处理一次无改动、一次连接中断，均未发布；配置访问权限已恢复为显式规则 |
 | 2026-10-29 | 部署 Harness 自修复；缺省继承主 AI、支持 Responses/代理，修复 Windows venv 进程身份及短路径问题 | 24 文件双端一致；本地 255、远端隔离 195/部署后 160 项通过，真实主 AI 两轮合成工具调用成功；默认关闭 |
 | 2026-10-29 | 代理环境增加 `vision.image_download_direct`，图片直连仍校验并固定公网地址 | 后续 4 文件哈希一致；远端 127 项通过（9 跳过）；QQ 公共头像直连与 Terra WebSocket 识图通过 |

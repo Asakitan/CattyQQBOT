@@ -1,4 +1,12 @@
 # Catty 当前状态
+## 2026-10-29 · Responses 缓存边界与统计修复（已部署）
+
+- 官方 OpenAI 的 GPT-5.6 及以上 Responses 请求，在已有稳定标记处设置显式前缀断点并保留隐式缓存；动态系统段保留在原有消息位置，无标记或其它兼容端点保持原转换。
+- Responses 用量保留缓存读取、写入及写入期限，日志与面板区分缓存写入和普通输入；Terra/Sol 面板按默认 30 分钟及 12 小时写入倍率估算，并保留自定义费率覆盖。
+- 生产日志中，19:21–19:25 的三次约 14 万输入请求均为零命中，19:26 和 19:28 的较短请求均命中 98%；不能据此认定所有请求均无缓存，也不能排除工具变化或路由等其它未命中原因。
+- 部署前独立合成 HTTP 探针首轮写入 14014、次轮读取 14002 token；部署后运行生产代码的 WebSocket 合成探针首轮写入 9625、续聊次轮读取 9625 token，实际使用了 `previous_response_id`。真实 QQ 回合未测。
+- 两份源码和三份测试已部署，双端 SHA-256 一致；远端六组 136 项、9 跳过，其余通过。机器人自动重载后心跳和 OneBot 连接正常。首次请求、缓存到期、前缀或工具变化仍可为零。
+
 ## 2026-10-29 · Terra Responses WebSocket 与加密代理（已部署）
 
 - 主模型与识图改为 `https://api.openai.com/v1/responses` + `gpt-6.1-terra`，并启用 Responses WebSocket：`ai.websocket_enabled=true`、`wss://api.openai.com/v1/responses`、`store=false`、`previous_response_id` 续聊、`stream_id` lane、`reasoning.encrypted_content` include。
@@ -8,7 +16,7 @@
 - 生产机的本地 SOCKS 仅监听 `127.0.0.1:11080`，经加密隧道连接跳板 TCP 18080；OpenAI 与 NovelAI 域名走隧道，其他域名直连。旧 GOST 容器已停止但保留，Windows 启动任务和 Linux 服务均已启用。
 - 设置 `vision.image_download_direct=true` 后图片资源直连，保留公网 IP 固定及逐跳校验，解决 API 代理导致图片下载被拒；默认仍关闭。生产机已用 QQ 公共头像样本直连下载，并收到 Terra WebSocket 识图回复。
 - 首批 18 个交付文件及后续 4 个更新文件分别与各自交付包哈希一致；远端首批 228 项（9 跳过）、配置合并 4 项及图片修复 127 项（9 跳过）通过，真实两轮增量续聊、生图工具/模型权限和 NAI 鉴权通过。生产实际出图、真实 QQ 会话收发未测；此前本地 OpenAI 出图成功。
-- 本次提交的 18 个交付文件与生产对齐；配置加载器及模板保留后续已部署的自修复合并。工作区客户端另有未部署的并行缓存改动；隔离生产快照定向回归 321 项、9 跳过，其余通过。
+- 当时提交的 18 个交付文件与生产对齐；配置加载器及模板保留后续已部署的自修复合并，缓存修复已另行部署；隔离生产快照定向回归 321 项、9 跳过，其余通过。
 - WARP 试用后保持断开；为其安装的 Windows 无线组件待重启完成，当前不影响已验证的代理和机器人。离线全量最近一次 1653 项有 42 个既有集成 errors，不能算全绿。
 ## 2026-10-29 · Harness 日志自修复与升级（已部署并启用）
 
@@ -39,28 +47,28 @@
 - 参考音首次生成在 `data/voice_outbox/_ref-<mood>-<hash>.wav`，之后复用；同一情绪最多取约 6 秒片段。
 - 表情/图片：图像描述改为“仅作背景，不要复述；除非用户明确问图里是什么”；图片理解 prompt 增加硬规则，不用“这表情/这图/图中/看起来”开头、不念表情包配字，直接把情绪接到当前情景。
 - 顺带修复：`cooldown_remaining` 对没发过语音的 scope 直接返回 0，之前把 `last=0` 代入导致进程刚启动时被误判在冷却中。
-- 本地 `test_voice_reply` 34 项、`test_persona_prompts` 17 项、`test_config*` 33 项、工具扫描 22 项通过；6 个文件已上传且 SHA-256 与本地一致。远端 Shell 仍被禁用，远端 py_compile/测试/重载未复跑。
+- 本地 `test_voice_reply` 34 项、`test_persona_prompts` 17 项、`test_config*` 33 项、工具扫描 22 项通过；6 个文件已上传且 SHA-256 与本地一致。当时远端 Shell 被禁用，远端 py_compile/测试/重载未复跑。
 ## 2026-10-29 · 语音冷却 10 秒（群共享，已部署）
 
 - `voice.cooldown_seconds` 从 300 调到 10；冷却键是 `group:<群号>` / `private:<QQ>`，同一群所有人共享一条冷却，私聊各自独立；主人仍跳过冷却与概率。
 - 语音条路径也纳入同一冷却：自动/表白/NSFW 触发时如果本群 10 秒内刚发过语音就不重复发；本轮工具已经发过语音时继续把剩余气泡念完，不再额外等冷却。
-- 本地 `test_voice_reply` 32 项、`test_config*` 33 项、插件加载通过；远端 `config.json` 已改为 10（经文件 API 整文件重写，`voice` 键完整，备份在 `tmp/remote-config/config.json.bak_voice_cd10_20261029`）；5 个代码/测试文件已上传且 SHA-256 与本地一致。远端 Shell 仍被禁用，远端 py_compile/测试/重载时间未复跑。
+- 本地 `test_voice_reply` 32 项、`test_config*` 33 项、插件加载通过；远端 `config.json` 已改为 10（经文件 API 整文件重写，`voice` 键完整，备份在 `tmp/remote-config/config.json.bak_voice_cd10_20261029`）；5 个代码/测试文件已上传且 SHA-256 与本地一致。当时远端 Shell 被禁用，远端 py_compile/测试/重载时间未复跑。
 ## 2026-10-29 · 表白直接发语音（已部署）
 
 - 用户这句话在表达爱意/撒娇（喜欢你、爱你、想你、亲亲、抱抱、贴贴，排除“不喜欢/别爱”这类否定）时，本轮直接触发语音条，不再等 `auto_chance` 或 `only_hours`；开关 `voice.affection_trigger` 默认 true。
 - 触发后整轮短气泡都念，动作旁白照旧剥掉；表情包不受影响：最后一句已用语音发过时表情单独发送，不再重复最后一句文字。
-- 本地 `test_voice_reply` 31 项、`test_config*` 33 项、插件加载通过；6 个文件已上传且 SHA-256 与本地一致。远端 Shell 仍被禁用，远端 py_compile/测试/重载未复跑。
+- 本地 `test_voice_reply` 31 项、`test_config*` 33 项、插件加载通过；6 个文件已上传且 SHA-256 与本地一致。当时远端 Shell 被禁用，远端 py_compile/测试/重载未复跑。
 ## 2026-10-29 · 整轮语音条（有语音就全念，已部署）
 
 - 之前一轮先调 `catty_voice_say`、worker 冷启动超过 6 秒转后台，文字先发；语音条逻辑又被“本轮已有语音”挡住，结果出现两条文字 + 一条语音。现在本轮只要确定会有语音（工具直发或后台排队），所有短气泡都念成语音，不再只念一条。
 - 同一句已经用语音说过时，对应气泡不再补文字；晚到的后台语音如果台词与已念气泡相同也跳过。
 - 表情包场景里最后一句已用语音发过时，表情单独发，不重复最后一句文字。
-- 本地 `test_voice_reply` 30 项、工具扫描 22 项、标记 22 项通过；`__init__.py`、`tools.py` 与测试已上传且 SHA-256 一致。远端 Shell 仍被禁用，py_compile/测试/重载未复跑。
+- 本地 `test_voice_reply` 30 项、工具扫描 22 项、标记 22 项通过；`__init__.py`、`tools.py` 与测试已上传且 SHA-256 一致。当时远端 Shell 被禁用，py_compile/测试/重载未复跑。
 ## 2026-10-29 · 语音尾音补齐（已部署）
 
 - 线上产物检查：`data/voice_outbox` 里一段 3.36 秒的真实语音，末尾 20ms 仍有约 0.04 幅度、最后 0.2ms 就结束，确认是模型输出没有尾巴（`fragment_interval=0.0` 时框架不补尾部静音），播放时听起来被削断。
 - `voice_worker.py` 在裁剪后补 0.25 秒静音并做 8ms 淡出，再归一化写盘；语音库片段本身已带静音尾巴，不改。
-- 本地 `test_voice_reply` 30 项通过；`voice_worker.py` 与测试已上传，SHA-256 与本地一致。远端 py_compile/测试与 bot 重载未复跑（远端 PowerShell 当前被禁用）。
+- 本地 `test_voice_reply` 30 项通过；`voice_worker.py` 与测试已上传，SHA-256 与本地一致。远端 py_compile/测试与 bot 重载未复跑（当时远端 PowerShell 被禁用）。
 ## 2026-10-29 · 语音条模式（多气泡 + NSFW，已部署）
 
 - 一条回复拆成多个气泡时，可逐条念成语音：`voice.only_hours="23:00-01:00"` 窗口内一直用语音条，窗口外按 `voice.auto_chance` 抽一条；`voice.bubble_max_chars=40`、`bubble_max_per_turn=3`、`bubble_budget_seconds=45` 控单条长度、条数和一轮合成总预算。
