@@ -376,7 +376,7 @@ def voice_profile(config: Any, voice: str) -> dict[str, str]:
     if not isinstance(raw, dict):
         return {}
     fields = {}
-    for key in ("gpt_path", "sovits_path", "reference_audio", "reference_text"):
+    for key in ("gpt_path", "sovits_path", "reference_audio", "reference_text", "emotion_reference_dir"):
         value = str(raw.get(key) or "").strip()
         if value:
             fields[key] = value
@@ -475,6 +475,7 @@ def _worker_signature(config: Any, voice: str) -> str:
         profile.get("sovits_path", ""),
         profile.get("reference_audio", ""),
         profile.get("reference_text", ""),
+        profile.get("emotion_reference_dir", ""),
         str(bank_dir(config, voice=voice)),
         str(outbox_dir(config)),
         str(int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2))),
@@ -495,6 +496,8 @@ def _worker_config_path(config: Any, voice: str) -> Path:
         "hubert_dir": _worker_setting(config, "catty_voice_hubert_dir"),
         "reference_audio": profile.get("reference_audio", ""),
         "reference_text": profile.get("reference_text", ""),
+        "emotion_reference_dir": str(Path(profile["emotion_reference_dir"]).expanduser().resolve())
+        if profile.get("emotion_reference_dir") else "",
         "bank_dir": str(bank_dir(config, voice=voice)),
         "work_dir": str(outbox_dir(config)),
         "threads": int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2)),

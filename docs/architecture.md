@@ -28,7 +28,9 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 发声冷却按 scope 共享：`group:<群号>` 的 10 秒冷却由同群所有人共用，私聊按 `private:<QQ>` 各自计算；`voice.cooldown_seconds` 默认 10 秒，主人跳过冷却与概率。语音条触发同样受该冷却约束，但本轮 `catty_voice_say` 已经发过语音时不再额外等待，剩余短气泡继续念完。
 
-语音情感：`catty_voice_say` 的 `segments`（1-4 段，每段 `text`+`emotion`）由模型自己判断一句话里哪里犹豫、哪里凶、哪里软；worker 用同音色对应情绪的语音库片段拼成 3-6 秒参考音（`_mood_reference`，写入 `data/voice_outbox/_ref-<mood>-<hash>.wav` 后复用），逐段调用 GPT-SoVITS 再以 90ms 间隔拼接，最后统一裁剪、补尾音和归一化。没有 `segments` 或该情绪缺片段时回退整句/默认参考音，`bank` 后端忽略分段。整句合成也会用 `mood` 对应的情绪参考音；语音条默认 `soft`（NSFW `tease`）。
+语音情感：`catty_voice_say` 的 `segments`（1-4 段，每段 `text`+`emotion`）由模型判断语气。此前部署版使用模型合成的语音库拼接参考音；现可用 `voice.profiles.<音色>.emotion_reference_dir` 指定原始录音，读取标注来源的 `bank.json`，只选择单条 3–10 秒、单声道 PCM16 且有对应文本的录音。声明来自录音不等于已验证听感或转写。
+
+未配置或没有可用情绪录音时，worker 使用该音色配置的原始参考音，合并分段并一次生成完整句；此时不保证各情绪标签产生明显语气变化。请求的情绪至少有一条可用原始录音时才逐段合成，缺失的情绪回退该音色的默认参考音；`bank` 后端保持原有语音库行为。生产两套音色均未配置情绪录音；参考音目录变化后需重启语音 worker。详见 [语音候选](voice-candidates.md)。
 
 去重：`_voice_text_key` 去掉标点和空白后比较；`catty_voice_say` 在调用时就把参数里的 `text`/`segments` 记进本轮已发声集合。语音条遇到已经念过的气泡只标记 `already_voiced`（不发文字、不重复合成），后台语音到达时同样按这个集合跳过重复台词；同一句用不同标点写出也算同一句。
 
@@ -36,7 +38,7 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 ## 本地语音候选（尚未接入运行时）
 
-`tmp/voice-training-20261028-01/` 独立 Python 3.11 环境和 GPT-SoVITS V2 副本负责双音色训练，权重、参考音与试听落在 `models/voice/{michelle,fadianji}/`。本地 CPU 生成成功；远端 CPU 推理和 QQ 语音发送未实现验证，不由 Bot 自动加载这些权重。
+`tmp/voice-training-20261028-01/` 独立 Python 3.11 环境和 GPT-SoVITS V2 副本负责双音色训练，权重、参考音与试听落在 `models/voice/{michelle,fadianji}/`。双音色远端 CPU worker 及参考音修复已部署；本轮试听候选仅在本地，真实 QQ 听感待验证。
 
 `tmp/voice-quality-20261028-01/phrase_ab.py` 为发电机生成独立进程的单变量对照，读取同一组哈希锁定的模型及参考音；原始波形与日志保存在临时目录，统一 RMS 的试听和完整参数清单位于 `models/voice/fadianji/candidates/phrase-ab/`。只生成候选，不替换正式参考音或权重。详见 [语音候选](voice-candidates.md)。
 

@@ -4,13 +4,13 @@
 
 `models/voice/michelle/` 和 `models/voice/fadianji/` 各保存 GPT、SoVITS 权重、参考 WAV、参考文本、试听和清单。训练使用 GPT-SoVITS V2（`b4570b876f5c086819ba84e3215472733c6a7b70`），SoVITS 8 轮、GPT 15 轮。米雪儿 152 条、993.87 秒；发电机 109 条、299.7 秒，自动转写尚未人工校对。
 
-模型和实验目录被 Git 忽略；独立 Python 3.11 环境位于 `tmp/voice-training-20261028-01/.venv/`。训练权重未部署到服务器；运行时使用的是下面的离线语音库，远端 CPU 合成未启用。
+模型和实验目录被 Git 忽略；独立 Python 3.11 环境位于 `tmp/voice-training-20261028-01/.venv/`。双音色权重和 CPU worker 此前已部署；本轮参考音修复已部署，A/B 试听和替代参考音候选只在本地。
 
 ## 运行时语音库（已部署）
 
 `src/catty_qq_ai/data/voice_bank/michelle/` 与 `.../fadianji/` 各存 9 句离线语音和 `bank.json`：害羞 2、撩 2、温柔 2、开心 1、傲娇 2。米雪儿用其 8 轮 SoVITS 与 BWIKI 参考音，机机用主人选定的 4 轮 SoVITS 与 `candidates/reference-3d` 参考音，均为 32kHz 单声道，逐句做过自动转写记录（短句识别会把“这么”听成“这个”，不能当硬门）。
 
-`catty_voice_say` 对所有人格暴露；默认音色 `michelle`，`voice.persona_voices` 可把某人格指到别的音色（默认 `{"fadianji": "fadianji"}`）。每会话 5 分钟冷却、默认 0.6 概率，主人跳过冷却与概率，所有人每轮最多 1 条。
+`catty_voice_say` 对所有人格暴露；默认音色 `michelle`，`voice.persona_voices` 可把某人格指到别的音色（默认 `{"fadianji": "fadianji"}`）。每会话 10 秒冷却、默认 0.6 概率，主人跳过冷却与概率，所有人每轮最多 1 条。
 
 `voice.backend=worker` 时由独立 GPT-SoVITS 子进程念模型自己写的短句，按 `voice.profiles.<音色>` 取 gpt/sovits/参考音；启动握手、240 秒超时、4200MiB 内存门槛、空闲 180 秒卸载、关闭回收，未配置或失败自动退回语音库。切换音色会先收掉旧 worker 再判断内存，避免两个模型同时驻留。
 
@@ -31,7 +31,17 @@ QQ 客户端的语音转文字结果不会通过 OneBot 下发；bot 自己取�
 - 被问“你喜欢我吗/想不想我/爱不爱我”这类表白试探时，schema 建议模型优先用语音回答、可只发语音；没有关键词硬分支，是否发声由模型自己判断。
 - 自动语音：每条消息额外抽一次 `voice.auto_chance`（默认 0.1），命中且本轮回复不超过 50 字、无代码块/公式时先发一句现成语音再发文字；长回复和技术排版不触发，模型已自己调过语音时不重复。
 - 语音条模式：多气泡回复可逐条念成语音条。`voice.only_hours`（如 `23:00-01:00`，支持跨夜）窗口内一直用语音条，窗口外只念一条；单条上限 `bubble_max_chars=40`、每轮 `bubble_max_per_turn=3`、合成预算 `bubble_budget_seconds=45`。NSFW 回合按 `nsfw_bubble_chance`（默认 0.5）抽取，最多 3 条，只念台词、剥掉括号/【】动作旁白；语音气泡按已送达记进历史，发送失败改回文字。
-- 语音情感：`catty_voice_say` 支持 `segments`（1-4 段，每段 `text`+`emotion`），模型自己判断一句话的语气变化；worker 用同音色同情绪的语音库片段拼 3-6 秒参考音逐段合成再拼接（90ms 间隔），`_ref-<mood>-<hash>.wav` 缓存复用，缺该情绪片段时回退默认参考音。分段只在 `worker` 后端生效，总字数仍受 `max_chars` 限制。
+- 语音情感：此前部署版用合成语音库拼接情绪参考音。现不再复用合成素材；无可用原始情绪录音时，`segments` 合为完整句并使用该音色原始参考音，语气随句子自然生成，但各情绪标签不保证可听到区别。分段只在 `worker` 后端生效，总字数仍受 `max_chars` 限制。
+
+## 双音色参考音修复（已部署，试听待确认）
+
+两套 `bank.json` 均注明片段来自本地合成，部分自动转写与原文不一致，复用它们可能放大伪影；听感下降是否完全由此造成仍需验证。生产代码默认使用各音色现有原始参考音，并保留 0.25 秒尾部静音和 8ms 淡出，不改变模型权重或合成参数。生产两套音色均未配置原始情绪录音；远端语音 38、配置 33、工具 22 项及语法检查通过，真实 QQ 听感未测。
+
+`tmp/voice-quality-20261029-reference/` 包含两种音色的 `*-before.wav`（此前合成参考音）与 `*-after.wav`（原始参考音）。每组使用相同文本、权重和随机种子并对齐响度，4 个文件均为 32kHz 单声道、无削波；这些检查不等于听感验收。本地真实 worker 的两次探针均确认使用原始参考音，并将分段请求作为一次完整句生成。
+
+离线 ASR 将米雪儿现用原始参考的试听末尾识别为“开箱”；另用 `prepared/michelle/wavs/0002.wav`、`0005.wav`、`0008.wav` 的原始录音生成三个 `michelle-original-*.wav`，均识别出完整目标句。三个候选的参考文本来自语料清单，尚需人工校对；ASR 不能判断音色或电音，也不据此自动替换现有配置。
+
+如需恢复逐段情绪参考，在 `voice.profiles.<音色>.emotion_reference_dir` 指定专用目录，放入来源明确、文本与内容一致的原始录音及 `bank.json`：`source` 为 `original recordings`，`entries` 每项包含 `file`、`mood` 和 `text`。每条参考音须为单声道 PCM16 WAV、3–10 秒，worker 选用一条，不拼接多条；没有合格录音的情绪回退默认参考音。录音与转写仍需人工核验，目录变动后需重启 worker。
 
 ## 发电机参考音与局部电音
 

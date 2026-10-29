@@ -4,7 +4,10 @@ from __future__ import annotations
 import asyncio
 import importlib
 import importlib.util
+import io
+import json
 import sys
+import tempfile
 import time
 import types
 import unittest
@@ -317,6 +320,13 @@ class WindowAndBubbleTests(unittest.TestCase):
 
 
 class WorkerTailTests(unittest.TestCase):
+    def test_synthetic_voice_banks_are_not_tts_references(self) -> None:
+        worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
+        for voice_name in ("fadianji", "michelle"):
+            bank = _ROOT / "src" / "catty_qq_ai" / "data" / "voice_bank" / voice_name
+            with self.subTest(voice=voice_name):
+                self.assertEqual(worker._mood_groups(bank), {})
+
     def test_pad_tail_adds_silence_and_fades(self) -> None:
         import numpy as np
 
@@ -340,21 +350,96 @@ class WorkerTailTests(unittest.TestCase):
         self.assertAlmostEqual(out[0], 0.4)
         self.assertAlmostEqual(len(out), rate * 1.08, delta=2)
 
-    def test_mood_reference_joins_bank_clips(self) -> None:
+    def test_mood_reference_uses_one_original_recording(self) -> None:
         worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
-        groups = worker._mood_groups(_BANK_DIR)
-        self.assertTrue(groups.get("shy"))
-        work = _ROOT / "tmp" / "test-voice-ref"
-        work.mkdir(parents=True, exist_ok=True)
-        ref = worker._mood_reference("shy", groups, work, {})
-        self.assertIsNotNone(ref)
-        path, text = ref
-        self.assertTrue(Path(path).is_file())
-        self.assertGreater(len(text), 0)
-        with wave.open(str(path), "rb") as handle:
-            seconds = handle.getnframes() / handle.getframerate()
-        self.assertGreater(seconds, 3.0)
-        self.assertIsNone(worker._mood_reference("nope", groups, work, {}))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _write_wav(root / "short.wav", seconds=2.0)
+            _write_wav(root / "valid.wav", seconds=4.0)
+            _write_wav(root / "long.wav", seconds=11.0)
+            entries = [
+                {"file": "short.wav", "mood": "shy", "text": "short"},
+                {"file": "valid.wav", "mood": "shy", "text": "original"},
+                {"file": "long.wav", "mood": "happy", "text": "long"},
+            ]
+            manifest = root / "bank.json"
+            manifest.write_text(json.dumps({"entries": entries}), encoding="utf-8")
+            self.assertEqual(worker._mood_groups(root), {})
+            manifest.write_text(json.dumps({"source": "original recordings", "entries": entries}), encoding="utf-8")
+            groups = worker._mood_groups(root)
+            self.assertEqual(worker._mood_reference("shy", groups, {}), (root / "valid.wav", "original"))
+            self.assertIsNone(worker._mood_reference("happy", groups, {}))
+
+    def test_worker_profile_carries_original_emotion_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config = _config(
+                catty_voice_outbox_dir=str(root),
+                catty_voice_profiles={"fadianji": {"emotion_reference_dir": str(root / "original")}},
+            )
+            payload = json.loads(voice._worker_config_path(config, "fadianji").read_text(encoding="utf-8"))
+            self.assertEqual(payload["emotion_reference_dir"], str((root / "original").resolve()))
+            no_reference = _config(catty_voice_outbox_dir=str(root), catty_voice_profiles={"fadianji": {}})
+            self.assertNotEqual(voice._worker_signature(config, "fadianji"), voice._worker_signature(no_reference, "fadianji"))
+
+    def _run_fake_worker(self, root: Path, emotion_dir: Path | None) -> list[dict]:
+        import numpy as np
+
+        worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
+        reference = root / "reference.wav"
+        _write_wav(reference, seconds=4.0)
+        config = {
+            "repo_dir": str(root), "gpt_path": "gpt", "sovits_path": "sovits",
+            "bert_dir": "bert", "hubert_dir": "hubert",
+            "reference_audio": str(reference), "reference_text": "original reference",
+            "bank_dir": str(_BANK_DIR), "emotion_reference_dir": str(emotion_dir or ""),
+        }
+        config_path = root / "config.json"
+        config_path.write_text(json.dumps(config), encoding="utf-8")
+        request = {
+            "text": "First sentence, second sentence.", "out": str(root / "output.wav"),
+            "segments": [{"text": "First sentence,", "mood": "shy"},
+                         {"text": "second sentence.", "mood": "soft"}],
+        }
+        calls = []
+
+        def run_pipeline(inputs):
+            calls.append(inputs)
+            return [(32000, np.linspace(-4000, 4000, 16000, dtype=np.int16))]
+
+        with (patch.object(worker, "_load_pipeline", return_value=types.SimpleNamespace(run=run_pipeline)),
+              patch.object(worker, "_emit") as emit,
+              patch.object(worker.os, "chdir"),
+              patch.object(worker.sys, "path", list(sys.path)),
+              patch.object(worker.sys, "argv", ["voice_worker", "--config", str(config_path)]),
+              patch.object(worker.sys, "stdin", io.StringIO(json.dumps(request) + "\n")),
+              patch.dict(worker.os.environ)):
+            self.assertEqual(worker.main(), 0)
+        self.assertTrue(emit.call_args_list[-1].args[0]["ok"])
+        return calls
+
+    def test_unavailable_emotion_references_use_one_full_sentence(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            calls = self._run_fake_worker(root, None)
+            self.assertEqual(len(calls), 1)
+            self.assertEqual(calls[0]["text"], "First sentence, second sentence.")
+            self.assertEqual(calls[0]["ref_audio_path"], str((root / "reference.wav").resolve()))
+
+    def test_configured_original_emotion_reference_keeps_segments(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            emotion_dir = root / "original"
+            emotion_dir.mkdir()
+            _write_wav(emotion_dir / "shy.wav", seconds=4.0)
+            (emotion_dir / "bank.json").write_text(json.dumps({
+                "source": "original recordings",
+                "entries": [{"file": "shy.wav", "mood": "shy", "text": "shy reference"}],
+            }), encoding="utf-8")
+            calls = self._run_fake_worker(root, emotion_dir)
+            self.assertEqual([call["text"] for call in calls], ["First sentence,", "second sentence."])
+            self.assertEqual(calls[0]["ref_audio_path"], str((emotion_dir / "shy.wav").resolve()))
+            self.assertEqual(calls[1]["ref_audio_path"], str((root / "reference.wav").resolve()))
 
 
 class ToolWiringTests(unittest.TestCase):

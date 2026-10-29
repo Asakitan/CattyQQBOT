@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import contextlib
-import hashlib
 import json
 import os
 import random
@@ -85,6 +84,10 @@ def _mood_groups(bank_dir: Path) -> dict[str, list[tuple[Path, str]]]:
         raw = json.loads(manifest.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
+    if not isinstance(raw, dict) or str(raw.get("source") or "").strip().lower() not in {
+        "original recording", "original recordings"
+    }:
+        return {}
     groups: dict[str, list[tuple[Path, str]]] = {}
     for entry in raw.get("entries") or []:
         if not isinstance(entry, dict):
@@ -100,38 +103,15 @@ def _mood_groups(bank_dir: Path) -> dict[str, list[tuple[Path, str]]]:
     return groups
 
 
-def _mood_reference(mood: str, groups, work_dir: Path, cache: dict):
-    """把同情绪的多条语音库片段拼成 3-6 秒参考音, 让这一段的语气跟着情绪走。"""
+def _mood_reference(mood: str, groups, cache: dict):
     if mood in cache:
         return cache[mood]
-    rate = None
-    frames: list[bytes] = []
-    texts: list[str] = []
     for path, text in groups.get(mood, []):
         clip_rate, data = _read_pcm(path)
-        if not data:
-            continue
-        if rate is None:
-            rate = clip_rate
-        if clip_rate != rate:
-            continue
-        frames.append(data)
-        texts.append(text)
-        if sum(len(frame) for frame in frames) / (2 * rate) >= 6.0:
-            break
-    if not frames:
-        cache[mood] = None
-        return None
-    key = hashlib.sha1("\n".join(texts).encode("utf-8")).hexdigest()[:10]
-    out = work_dir / f"_ref-{mood}-{key}.wav"
-    if not out.is_file():
-        out.parent.mkdir(parents=True, exist_ok=True)
-        with wave.open(str(out), "wb") as handle:
-            handle.setnchannels(1)
-            handle.setsampwidth(2)
-            handle.setframerate(rate)
-            handle.writeframes(b"".join(frames))
-    cache[mood] = (out, " ".join(texts))
+        if clip_rate > 0 and 3.0 <= len(data) / (2 * clip_rate) <= 10.0:
+            cache[mood] = (path, text)
+            return cache[mood]
+    cache[mood] = None
     return cache[mood]
 
 
@@ -188,10 +168,8 @@ def main() -> int:
         return 3
     _emit({"ok": True, "ready": True})
 
-    work_dir = Path(str(config.get("work_dir") or reference.parent)).resolve()
-    work_dir.mkdir(parents=True, exist_ok=True)
-    bank_root = str(config.get("bank_dir") or "").strip()
-    mood_groups = _mood_groups(Path(bank_root).resolve()) if bank_root else {}
+    reference_root = str(config.get("emotion_reference_dir") or "").strip()
+    mood_groups = _mood_groups(Path(reference_root).resolve()) if reference_root else {}
     mood_refs: dict[str, Any] = {}
 
     for line in sys.stdin:
@@ -227,7 +205,11 @@ def main() -> int:
             parts = []
             rate = 0
             segments = request.get("segments")
-            if isinstance(segments, list):
+            has_emotion_reference = isinstance(segments, list) and any(
+                _mood_reference(str(segment.get("mood") or "").strip().lower(), mood_groups, mood_refs)
+                for segment in segments[:4] if isinstance(segment, dict) and segment.get("text")
+            )
+            if has_emotion_reference:
                 for segment in segments[:4]:
                     if not isinstance(segment, dict):
                         continue
@@ -235,7 +217,7 @@ def main() -> int:
                     if not segment_text:
                         continue
                     mood = str(segment.get("mood") or "").strip().lower()
-                    chosen = _mood_reference(mood, mood_groups, work_dir, mood_refs) if mood else None
+                    chosen = _mood_reference(mood, mood_groups, mood_refs) if mood else None
                     seg_rate, pcm = _synth(
                         segment_text,
                         chosen[0] if chosen else reference,
@@ -247,7 +229,7 @@ def main() -> int:
                     parts.append(np.zeros(int(seg_rate * 0.09), dtype=np.float64))
             if not parts:
                 whole_mood = str(request.get("mood") or "").strip().lower()
-                chosen = _mood_reference(whole_mood, mood_groups, work_dir, mood_refs) if whole_mood else None
+                chosen = _mood_reference(whole_mood, mood_groups, mood_refs) if whole_mood else None
                 rate, pcm = _synth(
                     text,
                     chosen[0] if chosen else reference,
