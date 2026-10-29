@@ -75,3 +75,5 @@ data/python_sandbox/
 /data/fdj_proactive/
 # 自修复周账本、脱敏故障、候选源码及回滚备份是本机运行数据。
 /data/self_repair/
+# Responses WebSocket 续聊缓存（response id / item 指纹，运行时产物）。
+data/responses_ws_cache.json
