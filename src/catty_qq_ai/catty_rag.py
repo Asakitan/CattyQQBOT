@@ -171,9 +171,20 @@ class CattyRAGStore:
             return None
         from .rag_embedding_backend import LocalBGEEmbeddingFunction
 
-        self._embedding_source = "local:bge-small-zh"
-        logger.info("catty_rag: using isolated local BGE embedding")
-        return LocalBGEEmbeddingFunction()
+        model_name = str(
+            getattr(self._config, "catty_rag_local_bge_model", "") or ""
+        ).strip()
+        if not model_name:
+            logger.warning(
+                "catty_rag: catty_rag_local_bge_model is empty; local BGE disabled"
+            )
+            return None
+        self._embedding_source = f"local:{model_name}"
+        logger.info(
+            "catty_rag: using isolated local BGE embedding (model=%s)",
+            model_name,
+        )
+        return LocalBGEEmbeddingFunction(model_name=model_name)
 
     def start_embedding_worker(self) -> None:
         if self._enabled:
@@ -190,7 +201,7 @@ class CattyRAGStore:
         """优先尝试 OpenAI compatible /v1/embeddings (无 ONNX 依赖, Python 3.14 兼容)。
 
         从 config.catty_openai_api_key + catty_openai_base_url 复用。
-        模型名优先 config.catty_embedding_model, 默认 'text-embedding-3-small'。
+        模型名由 config.catty_embedding_model 提供；空则跳过该后端。
         host 不支持 /embeddings 端点会在第一次 upsert 时 fail, 这里只检查配置存在。
         """
         if self._config is None:
@@ -206,10 +217,14 @@ class CattyRAGStore:
         if not api_base.endswith("/v1"):
             # 不强制 /v1 后缀, 因为有的 host 没有 /v1; OpenAI client 会按 base/embeddings 拼
             pass
-        model_name = (
-            getattr(self._config, "catty_embedding_model", "")
-            or "text-embedding-3-small"
-        )
+        model_name = str(
+            getattr(self._config, "catty_embedding_model", "") or ""
+        ).strip()
+        if not model_name:
+            logger.warning(
+                "catty_rag: catty_embedding_model is empty; OpenAI embedding skipped"
+            )
+            return None
         try:
             from chromadb.utils import embedding_functions  # type: ignore
             ef = embedding_functions.OpenAIEmbeddingFunction(

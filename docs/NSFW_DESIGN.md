@@ -114,12 +114,13 @@ prompt 内回复**绝对禁止**出现：
 - 自动 NSFW 生图（每 N turn 一张，扣 10 积分，主人豁免）参考图取人格 `imagegen`：
   `ref_nsfw_path` 为空时复用 `ref_path` + `ref_path_extra`，机机即 `Miao/fadianji.png` +
   `Miao/fadianji2.png`；角色锁用 `nsfw_girl_tags`（缺省回落 `girl_tags`）。
-  2026-10-25 起自动生图也走 Pixelbunny `seedream-4.5`：参考图上传 `/v1/uploads` 后
-  走 `/v1/edits`，再轮询 `/v1/jobs/{id}`；backend 非 pixelbunny 时才走 legacy NovelAI。
+  自动生图可用 `imagegen.nsfw_backend` 独立选择 Pixelbunny 或 NovelAI；留空沿用普通
+  `imagegen.backend` 的原有选择。生产自动配图保留 Pixelbunny `seedream-4.5`，独立地址和
+  密钥位于 `imagegen.pixelbunny.base_url/api_key`；参考图上传后走 `/v1/edits` 并轮询任务。
 - 手动画图工具 `catty_imagegen` 仅在人格/场景授权时允许 planner 输出
   `self_portrait="nsfw"`；未授权场景强制回落 `sfw`。积分公式不变。
-  2026-10-25 起绘图后端切 Pixelbunny：普通绘图 `seedream-5-pro`（V5），
-  NSFW 场景/自画像 `seedream-4.5`；legacy gpt/nai 仅保留兼容路径。
+  生产普通绘图后端为 OpenAI `gpt-image-2`，模型也可选择已启用的 NovelAI；自动 NSFW
+  配图与普通绘图后端分开配置。
 
 ## 12. 机机私聊 gate 与拒绝回归（2026-10-25 补丁）
 

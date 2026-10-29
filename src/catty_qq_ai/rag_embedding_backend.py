@@ -69,7 +69,7 @@ def _error_type(value):
     return "WorkerError"
 
 
-def _child_environment():
+def _child_environment(model_name=""):
     environment = {key: os.environ[key] for key in _ENV_KEYS if key in os.environ}
     environment.update({
         "HF_HUB_OFFLINE": "1",
@@ -79,6 +79,8 @@ def _child_environment():
         "TOKENIZERS_PARALLELISM": "false",
         "CATTY_RAG_PARENT_PID": str(os.getpid()),
     })
+    if model_name:
+        environment["CATTY_RAG_MODEL"] = model_name
     return environment
 
 
@@ -120,8 +122,9 @@ class _Generation:
 
 
 class LocalBGEEmbeddingFunction:
-    def __init__(self, worker_path=None, startup_timeout=30.0, request_timeout=5.0, restart_delay=10.0):
+    def __init__(self, worker_path=None, startup_timeout=30.0, request_timeout=5.0, restart_delay=10.0, model_name=""):
         self._worker_path = Path(worker_path) if worker_path is not None else Path(__file__).with_name("rag_embedding_worker.py")
+        self._model_name = str(model_name or "").strip()
         self._startup_timeout = float(startup_timeout)
         self._request_timeout = float(request_timeout)
         self._restart_delay = float(restart_delay)
@@ -161,6 +164,10 @@ class LocalBGEEmbeddingFunction:
         with self._lock:
             if self._closed:
                 raise LocalBGEClosedError("local BGE worker is closed")
+            if not self._model_name:
+                raise LocalBGENotReadyError(
+                    "local BGE model id is not configured (rag.local_bge_model)"
+                )
             if getattr(sys, "frozen", False):
                 raise LocalBGENotReadyError("local BGE worker is unavailable in a frozen application (RuntimeError)")
             if self._supervisor is not None:
@@ -411,7 +418,7 @@ class LocalBGEEmbeddingFunction:
                         stdin=subprocess.PIPE,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.DEVNULL,
-                        env=_child_environment(),
+                        env=_child_environment(self._model_name),
                         creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0,
                     )
                 except Exception as exc:

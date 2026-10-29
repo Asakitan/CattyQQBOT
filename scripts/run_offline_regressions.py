@@ -27,6 +27,7 @@ MODULES = (
     "test_fadianji_nsfw_split_bubbles", "test_fadianji_nsfw_split", "test_nsfw_freeform_state",
     "test_quick_ack", "test_auto_web_fetch",
     "test_openai_client",
+    "test_responses_ws",
     "test_fadianji_harness", "test_harness_interface", "test_harness_v2",
     "test_harness_prompt", "test_harness_cli_v2", "test_harness_config_aliases",
     "test_fdj_corpus_store", "test_fdj_scene_retrieval", "test_fdj_style_stats", "test_jiji_flavor_bench",

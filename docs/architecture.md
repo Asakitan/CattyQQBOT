@@ -76,6 +76,14 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 已分阶段部署 24 个文件并核对 SHA-256；生产和本地已启用，配置模板默认仍关闭。新守护已加载，插件标记、父子 PID、心跳与 OneBot TCP 连接通过。生产真实日志触发两次处理，一次无改动、一次连接中断，均未发布；真实源码修复效果尚未验证。
 
+### Responses WebSocket 主 / 识图线路（已部署）
+
+主模型与识图可走 `wss://api.openai.com/v1/responses`：`responses_ws.py` 维护一个持久连接，发送 `response.create` 帧并按 `stream_id` 把事件路由到对应 lane。续聊用 `previous_response_id` + 只发新增 input items；`store=false` 时服务端只在连接本地内存缓存上一轮，连接换代后本地缓存里的 response id 失效，自动改为完整 input 重放。`data/responses_ws_cache.json` 保存每个 scope 的 response id、已覆盖 input/output item 指纹和 connection generation，TTL 过期或 generation 不匹配即弃用。连接断开、`previous_response_not_found` 或 50 分钟主动换连接都会清缓存并重放一次完整上下文；仍失败时按 `ai.websocket_fallback_http` 回退 HTTP Responses/chat。
+
+未完成请求取消或超时会关闭连接，避免旧事件进入下一轮；连接标识跨实例唯一，失效续聊先释放 lane 再重放。请求侧把 `reasoning_effort` 转成 `reasoning.effort`（`max` 映射为 `high`），识图 URL 使用字符串。NSFW spark 仍走 DeepSeek，普通生图用 OpenAI；自动 NSFW 生图可用 `imagegen.nsfw_backend` 与 `imagegen.pixelbunny.base_url/api_key` 独立保留 Pixelbunny。
+
+生产机本地 SOCKS `127.0.0.1:11080` 由启动任务维持，加密隧道接跳板 TCP 18080；OpenAI 与 NovelAI 域名经隧道，其他流量直连。`vision.image_download_direct` 默认关闭，生产显式开启后只让图片资源绕过 API 代理，仍逐跳校验公网 IP、固定连接地址并禁止环境代理。真实 QQ 公共头像下载与 Terra WebSocket 识图、两轮增量续聊及 NAI 鉴权通过；生产实际出图、QQ 会话端到端与长期缓存命中未验证。单连接的 named lane 数量上限可能触发 HTTP 回退。
+
 ## 提示词与工具
 
 当前配置由 `catty_config_loader.py` 映射至 `Config`；已删除失效的 `chat.system_prompt`。角色文件及既有专用提示段提供人格内容；`PromptManager` 组装静态段和动态上下文。静态分泡节奏与每轮格式提示共用启用条件，发送端分泡解析保持原行为。
@@ -96,7 +104,7 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 ### 本地 BGE 子进程（已部署并合入本地）
 
-部署版默认用 `rag.local_bge_enabled=true` 为 RAG 单独选择 `BAAI/bge-small-zh-v1.5`，不打开全局 text2vec/NER。宿主启动后台监督线程即返回，子进程只读取本地 Hugging Face 缓存，在 CPU 上生成 512 维向量；缓存缺失或模型加载失败不下载、不切到其他向量空间。关闭开关后保留旧 OpenAI/ONNX 选择，需重启 bot 才应用此开关。
+部署版默认用 `rag.local_bge_enabled=true` 为 RAG 单独选择 `rag.local_bge_model`（默认 `BAAI/bge-small-zh-v1.5`），不打开全局 text2vec/NER；模型 id 经 `CATTY_RAG_MODEL` 传给隔离 worker。宿主启动后台监督线程即返回，子进程只读取本地 Hugging Face 缓存，在 CPU 上生成 512 维向量；缓存缺失或模型加载失败不下载、不切到其他向量空间。关闭开关后保留旧 OpenAI/ONNX 选择，OpenAI embedding 模型名读 `rag.embedding_model`；需重启 bot 才应用此开关。
 
 模型加载期限为 30 秒、单次推理期限为 5 秒，失败时终止对应子进程并退避重启；未就绪、忙碌和错误均不生成伪向量。关闭时回收子进程，Windows 加载期间通过父进程句柄监测；为避免已复现的 NumPy DLL 初始化死锁，stdin 读取线程在模型导入后启动。子进程环境不继承 API 密钥，模型加载禁止联网；打包为 frozen 程序时不递归启动自身，本地 RAG 报不可用。
 

@@ -21,11 +21,11 @@
 | `rag_embedding_backend.py` / `rag_embedding_worker.py` / `catty_rag.py` / `config.py` / loader / `__init__.py` | 独立离线 BGE、生命周期、来源错误、回填计数与发送确认 → `docs/architecture.md` | 已部署、本地已合并 RAG 基线；1393 项、远端 47 项通过，模型就绪 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / 训练面板 | 删除失效系统提示字段；技能配置及env映射 → `docs/skill-runtime.md` | 7项技能默认配置已部署；生产群额度单字段已更新 |
 | `tests/test_prompt_size_ablation.py` | 显式开启的在线评测，导入不执行 | 导入隔离已验收，未在线运行 |
-| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程 | 已部署；本地1214项、0失败/错误、9跳过 |
+| `scripts/run_offline_regressions.py` | 固定清单，每模块独立进程；包含八个源码自修复测试模块 | 自修复清单已部署；生产保留原清单，其尚无的 `test_responses_ws` 未混入 |
 | `src/catty_qq_ai/fadianji_harness.py` / `harness_prompt.py` | v2 证据编排、引用检索与工具感知教程 → `docs/harness-evidence.md` | 已部署；成员作用域与身份校验已上线 |
 | `reply_admission.py` / `__init__.py` | 同群历史与当前发言者驱动弱唤醒/续聊模型判门 | 已部署；16项纯判门和集成回归通过 |
 | `fdj_scene_retrieval.py` | 昵称归一化精确索引与相关性过滤 | 已部署；语料配置与缓存键已上线 |
-| `tools.py` / `__init__.py` | 图片发送者、历史来源与同模型原图透传 | 已部署；未验证真实模型识图 |
+| `tools.py` / `__init__.py` | 图片发送者、历史来源与同模型原图透传 | 已部署；真实 QQ 会话识图未验证 |
 | `openai_client.py` / `config.py` / `token_billing.py` | 默认 max 思考与每用户跨群每小时额度 | 已部署；生产额度已更新为3000万 |
 | `src/catty_qq_ai/fdj_corpus_store.py` / `catty_config_loader.py` | 语料作用域及 FDJ 配置别名 → `docs/harness-config.md` | 已部署 |
 | `scripts/fadianji_harness_cli.py` / `benchmark_harness.py` | 本地预览、显式生产预算、合成基准 → `docs/prompt-testing.md` | 已部署 |
@@ -48,12 +48,21 @@
 | `personas/fadianji.py` / `fadianji_scenes.py` | 普通聊天语境与真实样本口吻 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；本地人格与语料测试通过 |
 | `cpu_engine/semantic_route.py` / `corpus_txtai.py` | 模型与有序语料缓存身份 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；29项缓存测试通过，CPU 默认停用 |
 | `src/catty_qq_ai/__init__.py` / `tests/test_shared_persona_integration.py` | 怀孕预判 global 导出与临轮清零、分库 flush 托管、主路径场景/CPU phase 按人格 scope → `docs/session-log/session-10.md` | 已部署（基线+4 修复重放）；新增 4 例，远端 150 项通过 |
+| `config.py` / `catty_config_loader.py` / 配置 JSON / `catty_integrations.py` / RAG / CPU / NLU / 图片工具 | 模型名、端点与密钥路线收口到配置，自动 NSFW 配图可独立选择 Pixelbunny → `docs/session-log/session-13.md`、`docs/session-log/session-16.md` | 已部署；提交版本 18 文件与生产一致，工作区客户端另有并行缓存改动 |
+| `responses_ws.py` / `openai_client.py` / `config.py` / loader / 配置 JSON / `pyproject.toml` | Responses WebSocket 主/识图、增量续聊、连接内缓存与 HTTP 回退；图片直连开关保留安全校验，NSFW 保留 DS → `docs/session-log/session-16.md`、`docs/architecture.md` | 已部署；真实两轮增量续聊、QQ 公共图下载与 Terra 识图请求通过 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-29 | 核对 Terra 交付内容并保留后续自修复合并 | 18 文件提交快照与生产一致；隔离回归 321 项、9 跳过；工作区客户端保留并行缓存改动 |
 | 2026-10-29 | 启用生产与本地自修复，缺省继承各自主 AI，保留现有配置 | 合并测试本地/远端各 5 项通过；生产真实日志处理一次无改动、一次连接中断，均未发布；配置访问权限已恢复为显式规则 |
+| 2026-10-29 | 部署 Harness 自修复；缺省继承主 AI、支持 Responses/代理，修复 Windows venv 进程身份及短路径问题 | 24 文件双端一致；本地 255、远端隔离 195/部署后 160 项通过，真实主 AI 两轮合成工具调用成功；默认关闭 |
+| 2026-10-29 | 代理环境增加 `vision.image_download_direct`，图片直连仍校验并固定公网地址 | 后续 4 文件哈希一致；远端 127 项通过（9 跳过）；QQ 公共头像直连与 Terra WebSocket 识图通过 |
+| 2026-10-29 | 部署 Terra、模型配置收口及独立 Pixelbunny 自动配图；加密代理监听 18080，本地 SOCKS 11080 | 18 文件哈希一致；远端 228+4 项通过（9 跳过）；真实两轮增量续聊、生产主请求及 NAI 鉴权通过；生产实际出图与 QQ 未测 |
+| 2026-10-29 | 主/识图切 `gpt-6.1-terra` Responses WebSocket（`wss://api.openai.com/v1/responses`）：持久连接、`stream_id` lane、`previous_response_id` 增量续聊、`data/responses_ws_cache.json` 前缀缓存、断线/`previous_response_not_found` 全量重放与 HTTP 回退；`reasoning_effort`→`reasoning.effort`，识图 `image_url` 改字符串；NSFW spark 保持 DS，OpenAI 生图共用新 key | 5 项 WS 传输测试、21 项 Responses API、64 项主客户端通过；离线 1467 项 0 failures/42 既有 errors/9 skipped；真实 Terra 非流式/流式/续聊/工具/识图与 `gpt-image-2` 生图通过；未部署 |
+| 2026-10-29 | 完成 Harness 日志自修复、独立 LLM、周预算一亿 token、冻结候选验证与守护发布/健康回滚；新增八组固定离线测试 | 新增 180 项全通过；完整回归 1653 项、0 failures、42 既有 errors、9 skipped；真实源码 419 文件、两侧各 193 项默认验证比对通过；未调用真实修复模型，未部署 |
+| 2026-10-29 | 模型/端点/兜底 key 收口到 config：新增 `rag.local_bge_model`、`rag.embedding_model`、`imagegen.pixelbunny_model`、`imagegen.nai.endpoint/augment_endpoint`、`cpu_engine.l4_ollama_*`、`evolution.judge_base_url`；BGE worker 通过 `CATTY_RAG_MODEL` 接收模型 id；去掉运行时代码里的 DeepSeek/Ollama/BGE/NovelAI 字面量兜底 | 15 文件 py_compile；8 组定向测试通过；离线清单 1462 项 0 failures/42 errors，错误全部来自两个既有模块（`_extract_incoming_with_voice` 未注入）；11 个敏感配置路径逐项比对未变 |
 | 2026-10-29 | 修复语音重复发：工具语音与语音条按去标点文本去重，`already_voiced` 不补文字；整句语音改用 `mood` 情绪参考音 | 本地 34 项语音+22 项工具扫描+33 项配置通过；4 文件经文件 API 上传并回读哈希一致；远端 Shell 禁用未复跑 |
 | 2026-10-29 | 语音情感分段（`catty_voice_say.segments` + worker 情绪参考音逐段合成）；图片/表情改为只当情绪接、不复述；`cooldown_remaining` 首启修复 | 本地 34 项语音+17 项 prompt+33 项配置+22 项工具扫描通过；6 文件经文件 API 上传并回读哈希一致；远端 Shell 禁用未复跑 |
 | 2026-10-29 | 语音冷却 300→10 秒，按 `group:`/`private:` 共享；语音条路径也受冷却，本轮工具已发声则不重复等 | 本地 32 项语音+33 项配置通过、插件加载通过；远端 config 已改 10（文件 API 重写）；5 文件哈希一致；远端 Shell 禁用未复跑 |

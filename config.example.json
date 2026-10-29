@@ -36,10 +36,24 @@
         "anthropic_native_enabled": false,
         "compaction_enabled": false,
         "compaction_trigger_tokens": 150000,
-        "cache_diag_enabled": false
+        "cache_diag_enabled": false,
+        "websocket_enabled": false,
+        "websocket_url": "",
+        "websocket_store": false,
+        "websocket_previous_response": true,
+        "websocket_stream_id": "catty",
+        "websocket_include": [],
+        "websocket_connect_timeout_seconds": 15,
+        "websocket_idle_timeout_seconds": 300,
+        "websocket_max_age_seconds": 3000,
+        "websocket_cache_ttl_seconds": 3600,
+        "websocket_cache_path": "data/responses_ws_cache.json",
+        "websocket_fallback_http": true
     },
     "rag": {
-        "local_bge_enabled": true
+        "local_bge_enabled": true,
+        "local_bge_model": "BAAI/bge-small-zh-v1.5",
+        "embedding_model": "text-embedding-3-small"
     },
     "ai_fallback": {
         "enabled": false,
@@ -55,7 +69,10 @@
         "mc_gate_enabled": true,
         "mc_server_host": "localhost",
         "mc_server_port": 25565,
-        "mc_ping_timeout_seconds": 3.0
+        "mc_ping_timeout_seconds": 3.0,
+        "auto_build_derived_model": false,
+        "derived_model_name": "catty-7b",
+        "base_model": "qwen2.5:7b"
     },
     "audit_ai": {
         "base_url": "",
@@ -67,6 +84,24 @@
         "max_tokens": 320,
         "request_timeout": 60
     },
+    "imagegen": {
+        "enabled": true,
+        "backend": "auto",
+        "base_url": "",
+        "api_key": "",
+        "model": "gpt-image-2",
+        "pixelbunny_model": "seedream-5-pro",
+        "nsfw_backend": "",
+        "nsfw_model": "seedream-4.5",
+        "pixelbunny": {
+            "base_url": "",
+            "api_key": ""
+        },
+        "nai": {
+            "endpoint": "https://image.novelai.net/ai/generate-image",
+            "augment_endpoint": "https://image.novelai.net/ai/augment-image"
+        }
+    },
     "vision": {
         "base_url": "",
         "api_key": "",
@@ -77,6 +112,7 @@
         "temperature": 0.2,
         "max_tokens": 800,
         "request_timeout": 60,
+        "image_download_direct": false,
         "async_enabled": true,
         "inline_max_wait_seconds": 15.0,
         "context_messages": 16,
@@ -665,6 +701,9 @@
         "l3_distill_min_assistant_len": 8,
         "l3_distill_max_assistant_len": 500,
         "l4_catnify_base_url": "http://127.0.0.1:11434/v1",
-        "l4_catnify_api_key": "ollama"
+        "l4_catnify_api_key": "ollama",
+        "l4_ollama_base_url": "http://127.0.0.1:11434/v1",
+        "l4_ollama_api_key": "ollama",
+        "l4_ollama_model": "qwen2.5:7b"
     }
 }

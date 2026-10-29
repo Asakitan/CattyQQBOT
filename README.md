@@ -236,6 +236,8 @@ ai 清空记忆缓存
 识别成文字 / 兴趣度 / 表情含义后再交给主模型。GIF / 动态 WebP 会自动取首帧转 PNG。
 `vision` 未单独配置时复用 `ai` 主模型；此时 `vision` 与主 AI 同 `base_url` + 同 `model`，
 图片会作为 `image_url` block 直接透传进主请求（当前消息与引用旧图都算），不再先跑一次同模型识图。
+配置了 `ai.http_proxy` 时，设置 `vision.image_download_direct=true` 可让图片资源直连下载；
+主模型请求仍走代理，图片地址继续逐跳校验公网 IP 并固定连接地址。
 
 **本地表情库**：默认把本地表情候选交给 AI 自己挑；AI 没选时按 `emoji.reply_probability` 自动补一张。
 
@@ -427,6 +429,7 @@ Owner 本身（即 `qq.owner_qq` 配置的 QQ）积分恒为 `OWNER_INFINITY_POI
 | `ai.base_url` / `ai.api_key` / `ai.model` | OpenAI / 空 / `gpt-4o-mini` | 主聊天模型 |
 | `audit_ai.*` | 空 → 兜底 `ai.*` | 审核 / 判断 / 训练成果审批模型 |
 | `vision.*` | 空 → 复用 `ai.*` | 图片识别模型 |
+| `vision.image_download_direct` | `false` | 显式允许图片资源直连，保留公网地址校验 |
 | `filter.group_batch_messages` / `group_batch_seconds` | `200` / `1200` | 普通群批量主动判断阈值 |
 | `filter.anger_warn_threshold` / `anger_mute_threshold` | `60` / `100` | 怒气状态阈值（由主 AI 表现） |
 | `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群文字触发前缀 |

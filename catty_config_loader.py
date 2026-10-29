@@ -69,9 +69,23 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "request_timeout": 60,
         "http_proxy": "",
         "cache_diag_enabled": False,
+        "websocket_enabled": False,
+        "websocket_url": "",
+        "websocket_store": False,
+        "websocket_previous_response": True,
+        "websocket_stream_id": "catty",
+        "websocket_include": [],
+        "websocket_connect_timeout_seconds": 15,
+        "websocket_idle_timeout_seconds": 300,
+        "websocket_max_age_seconds": 3000,
+        "websocket_cache_ttl_seconds": 3600,
+        "websocket_cache_path": "data/responses_ws_cache.json",
+        "websocket_fallback_http": True,
     },
     "rag": {
         "local_bge_enabled": True,
+        "local_bge_model": "BAAI/bge-small-zh-v1.5",
+        "embedding_model": "text-embedding-3-small",
     },
     "ai_fallback": {
         "enabled": False,
@@ -89,6 +103,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "mc_server_port": 26843,
         "mc_ping_timeout_seconds": 3.0,
         "strip_system_messages": False,
+        "auto_build_derived_model": False,
+        "derived_model_name": "catty-7b",
+        "base_model": "qwen2.5:7b",
     },
     "audit_ai": {
         "base_url": "",
@@ -110,6 +127,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "temperature": 0.2,
         "max_tokens": 800,
         "request_timeout": 60,
+        "image_download_direct": False,
         "async_enabled": True,
         "inline_max_wait_seconds": 15.0,
         "context_messages": 16,
@@ -743,6 +761,18 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_OPENAI_MODEL", ai.get("model"))
     _set_env("CATTY_OPENAI_EXTRA_HEADERS", ai.get("extra_headers"), json_value=True)
     _set_env("CATTY_OPENAI_EXTRA_BODY", ai.get("extra_body"), json_value=True)
+    _set_env("CATTY_OPENAI_WEBSOCKET_ENABLED", ai.get("websocket_enabled"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_URL", ai.get("websocket_url"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_STORE", ai.get("websocket_store"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_PREVIOUS_RESPONSE", ai.get("websocket_previous_response"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_STREAM_ID", ai.get("websocket_stream_id"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_INCLUDE", ai.get("websocket_include"), json_value=True)
+    _set_env("CATTY_OPENAI_WEBSOCKET_CONNECT_TIMEOUT_SECONDS", ai.get("websocket_connect_timeout_seconds"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_IDLE_TIMEOUT_SECONDS", ai.get("websocket_idle_timeout_seconds"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_MAX_AGE_SECONDS", ai.get("websocket_max_age_seconds"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_CACHE_TTL_SECONDS", ai.get("websocket_cache_ttl_seconds"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_CACHE_PATH", ai.get("websocket_cache_path"))
+    _set_env("CATTY_OPENAI_WEBSOCKET_FALLBACK_HTTP", ai.get("websocket_fallback_http"))
     _set_env("CATTY_TEMPERATURE", ai.get("temperature"))
     _set_env("CATTY_MAX_TOKENS", ai.get("max_tokens"))
     _set_env("CATTY_MODEL_CONTEXT_TOKENS", ai.get("model_context_tokens"))
@@ -764,6 +794,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
 
     rag = _section(data, "rag")
     _set_env("CATTY_RAG_LOCAL_BGE_ENABLED", rag.get("local_bge_enabled"))
+    _set_env("CATTY_RAG_LOCAL_BGE_MODEL", rag.get("local_bge_model"))
+    _set_env("CATTY_EMBEDDING_MODEL", rag.get("embedding_model"))
 
     ai_fallback = _section(data, "ai_fallback")
     _set_env("CATTY_AI_FALLBACK_ENABLED", ai_fallback.get("enabled"))
@@ -799,7 +831,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGEGEN_BASE_URL", imagegen.get("base_url"))
     _set_env("CATTY_IMAGEGEN_API_KEY", imagegen.get("api_key"))
     _set_env("CATTY_IMAGEGEN_MODEL", imagegen.get("model"))
+    _set_env("CATTY_IMAGEGEN_PIXELBUNNY_MODEL", imagegen.get("pixelbunny_model"))
     _set_env("CATTY_IMAGEGEN_NSFW_MODEL", imagegen.get("nsfw_model"))
+    _set_env("CATTY_IMAGEGEN_NSFW_BACKEND", imagegen.get("nsfw_backend"))
     _set_env("CATTY_IMAGEGEN_DEFAULT_SIZE", imagegen.get("default_size"))
     _set_env("CATTY_IMAGEGEN_DEFAULT_QUALITY", imagegen.get("default_quality"))
     _set_env("CATTY_IMAGEGEN_DEFAULT_FORMAT", imagegen.get("default_format"))
@@ -812,6 +846,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGEGEN_BACKEND", imagegen.get("backend"))
     pixelbunny_raw = imagegen.get("pixelbunny")
     pixelbunny = pixelbunny_raw if isinstance(pixelbunny_raw, dict) else {}
+    _set_env("CATTY_IMAGEGEN_PIXELBUNNY_BASE_URL", pixelbunny.get("base_url"))
+    _set_env("CATTY_IMAGEGEN_PIXELBUNNY_API_KEY", pixelbunny.get("api_key"))
     _set_env(
         "CATTY_IMAGEGEN_PIXELBUNNY_WEBHOOK_SECRET",
         pixelbunny.get("webhook_secret"),
@@ -833,6 +869,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGEGEN_NAI_ENABLED", nai.get("enabled"))
     _set_env("CATTY_IMAGEGEN_NAI_TOKEN", nai.get("token"))
     _set_env("CATTY_IMAGEGEN_NAI_MODEL", nai.get("model"))
+    _set_env("CATTY_IMAGEGEN_NAI_ENDPOINT", nai.get("endpoint"))
+    _set_env("CATTY_IMAGEGEN_NAI_AUGMENT_ENDPOINT", nai.get("augment_endpoint"))
     _set_env("CATTY_IMAGEGEN_NAI_DEFAULT_ASPECT", nai.get("default_aspect"))
     _set_env("CATTY_IMAGEGEN_NAI_STEPS", nai.get("steps"))
     _set_env("CATTY_IMAGEGEN_NAI_SCALE", nai.get("scale"))
@@ -854,6 +892,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_VISION_TEMPERATURE", vision.get("temperature"))
     _set_env("CATTY_VISION_MAX_TOKENS", vision.get("max_tokens"))
     _set_env("CATTY_VISION_REQUEST_TIMEOUT", vision.get("request_timeout"))
+    _set_env("CATTY_VISION_IMAGE_DOWNLOAD_DIRECT", vision.get("image_download_direct"))
     _set_env("CATTY_VISION_ASYNC_ENABLED", vision.get("async_enabled"))
     _set_env("CATTY_VISION_INLINE_MAX_WAIT_SECONDS", vision.get("inline_max_wait_seconds"))
     _set_env("CATTY_VISION_CONTEXT_MESSAGES", vision.get("context_messages"))
@@ -1316,6 +1355,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_CPU_ENGINE_L4_TIMEOUT_MS", cpu_engine.get("l4_timeout_ms"))
     # S5 (主人 2026-05-29) 本地 CPU LLM 全量笨猫体质改写 + 自决 DeepSeek 透传
     _set_env("CATTY_CPU_ENGINE_L4_MODE", cpu_engine.get("l4_mode"))
+    _set_env("CATTY_CPU_ENGINE_L4_OLLAMA_BASE_URL", cpu_engine.get("l4_ollama_base_url"))
+    _set_env("CATTY_CPU_ENGINE_L4_OLLAMA_API_KEY", cpu_engine.get("l4_ollama_api_key"))
     _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_MODEL", cpu_engine.get("l4_catnify_model"))
     _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_BASE_URL", cpu_engine.get("l4_catnify_base_url"))
     _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_API_KEY", cpu_engine.get("l4_catnify_api_key"))
@@ -1373,6 +1414,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_EVOLUTION_CRON", evolution.get("cron"))
     _set_env("CATTY_EVOLUTION_SAMPLES_PER_LAYER", evolution.get("samples_per_layer"))
     _set_env("CATTY_EVOLUTION_JUDGE_MODEL", evolution.get("judge_model"))
+    _set_env("CATTY_EVOLUTION_JUDGE_BASE_URL", evolution.get("judge_base_url"))
     _set_env("CATTY_EVOLUTION_ROLLBACK_NEG_FEEDBACK_PCT", evolution.get("rollback_neg_feedback_pct"))
     _set_env("CATTY_EVOLUTION_ROLLBACK_SCORE_DECLINE_DAYS", evolution.get("rollback_score_decline_days"))
     _set_env("CATTY_EVOLUTION_SAMPLE_ONLY_GROUP", evolution.get("sample_only_group"))

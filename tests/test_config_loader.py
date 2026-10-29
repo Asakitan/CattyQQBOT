@@ -17,6 +17,30 @@ _SPEC.loader.exec_module(_loader)
 
 
 class ConfigLoaderTests(unittest.TestCase):
+    def test_vision_image_direct_download_is_opt_in_and_exported(self) -> None:
+        example = json.loads((_MODULE_PATH.parent / "config.example.json").read_text(encoding="utf-8"))
+        self.assertFalse(_loader.DEFAULT_CONFIG["vision"]["image_download_direct"])
+        self.assertFalse(example["vision"]["image_download_direct"])
+        with tempfile.TemporaryDirectory() as directory:
+            for enabled in (False, True):
+                with self.subTest(enabled=enabled), patch.dict(os.environ, {}, clear=True):
+                    _loader._apply_config({"vision": {"image_download_direct": enabled}}, Path(directory))
+                    self.assertEqual(os.environ["CATTY_VISION_IMAGE_DOWNLOAD_DIRECT"], str(enabled).lower())
+
+    def test_separate_nsfw_image_provider_is_exported(self) -> None:
+        data = {
+            "imagegen": {
+                "backend": "openai",
+                "nsfw_backend": "pixelbunny",
+                "pixelbunny": {"base_url": "https://example.test/v1", "api_key": "TOKEN"},
+            },
+        }
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {}, clear=True):
+            _loader._apply_config(data, Path(directory))
+            self.assertEqual(os.environ["CATTY_IMAGEGEN_NSFW_BACKEND"], "pixelbunny")
+            self.assertEqual(os.environ["CATTY_IMAGEGEN_PIXELBUNNY_BASE_URL"], "https://example.test/v1")
+            self.assertEqual(os.environ["CATTY_IMAGEGEN_PIXELBUNNY_API_KEY"], "TOKEN")
+
     def test_conversation_tool_switches_are_exported(self) -> None:
         keys = ("session_messages_enabled", "wait_messages_enabled", "close_conversation_enabled")
         example = json.loads((_MODULE_PATH.parent / "config.example.json").read_text(encoding="utf-8"))

@@ -1,4 +1,15 @@
 # Catty 当前状态
+## 2026-10-29 · Terra Responses WebSocket 与加密代理（已部署）
+
+- 主模型与识图改为 `https://api.openai.com/v1/responses` + `gpt-6.1-terra`，并启用 Responses WebSocket：`ai.websocket_enabled=true`、`wss://api.openai.com/v1/responses`、`store=false`、`previous_response_id` 续聊、`stream_id` lane、`reasoning.encrypted_content` include。
+- `src/catty_qq_ai/responses_ws.py` 管理持久连接、lane 和续聊缓存；取消未完成请求时关闭连接避免迟到帧串线，连接换代不复用旧 response id，失效续聊释放 lane 后全量重放，失败按配置回退 HTTP。
+- 修正 Responses 参数：`reasoning_effort` 转 `reasoning.effort`（`max`→`high`），丢弃 `thinking` 与 `temperature`；识图 `input_image.image_url` 改为官方要求的字符串 URL。
+- NSFW spark 保持 DeepSeek；普通生图走 OpenAI `gpt-image-2`，自动 NSFW 配图用独立的 Pixelbunny 地址、密钥和 `imagegen.nsfw_backend`，保留原生产线路。
+- 生产机的本地 SOCKS 仅监听 `127.0.0.1:11080`，经加密隧道连接跳板 TCP 18080；OpenAI 与 NovelAI 域名走隧道，其他域名直连。旧 GOST 容器已停止但保留，Windows 启动任务和 Linux 服务均已启用。
+- 设置 `vision.image_download_direct=true` 后图片资源直连，保留公网 IP 固定及逐跳校验，解决 API 代理导致图片下载被拒；默认仍关闭。生产机已用 QQ 公共头像样本直连下载，并收到 Terra WebSocket 识图回复。
+- 首批 18 个交付文件及后续 4 个更新文件分别与各自交付包哈希一致；远端首批 228 项（9 跳过）、配置合并 4 项及图片修复 127 项（9 跳过）通过，真实两轮增量续聊、生图工具/模型权限和 NAI 鉴权通过。生产实际出图、真实 QQ 会话收发未测；此前本地 OpenAI 出图成功。
+- 本次提交的 18 个交付文件与生产对齐；配置加载器及模板保留后续已部署的自修复合并。工作区客户端另有未部署的并行缓存改动；隔离生产快照定向回归 321 项、9 跳过，其余通过。
+- WARP 试用后保持断开；为其安装的 Windows 无线组件待重启完成，当前不影响已验证的代理和机器人。离线全量最近一次 1653 项有 42 个既有集成 errors，不能算全绿。
 ## 2026-10-29 · Harness 日志自修复与升级（已部署并启用）
 
 - 新增独立 `self_repair` 配置与 `catty_self_repair` 包，1E 按 UTC+8 自然周一亿 token 实现；与人格语气进化及主聊天预算分开。
@@ -10,12 +21,18 @@
 - 24 个交付文件与生产验收包逐项一致；本地其中 23 个一致，回归清单保留另一会话新增的测试。两端配置已启用并继承各自主 AI；生产真实日志触发两次处理，一次无改动、一次 `RemoteProtocolError`，均未发布，真实 QQ 会话和真实源码修复效果未验证。
 - 配置合并测试本地及生产各 5 项通过；生产原配置留在受限备份目录，目标配置的原访问主体与权限已恢复为显式规则，继承状态由开启变为关闭。一次采样周账本占用 148600 token，含 1 笔未结算预留。此前完整离线清单 1653 项仍有 42 个既有集成 errors；操作与证据见 `docs/self-repair.md`、`docs/session-log/session-18.md`。
 
+## 2026-10-29 · 模型、端点与兜底 key 收口到 config（已部署）
+
+- 盘点运行时代码里的字面量：`evolution_judge` 的 `https://api.deepseek.com/v1` + `deepseek-v4.1-flash`、`ollama_stylize` 的 `127.0.0.1:11434` + `qwen2.5:7b` + `ollama`、`corpus_txtai`/`router`/`text2vec_engine`/`prototypes` 的 `BAAI/bge-small-zh-v1.5`、`rag_embedding_worker` 的 repo id、`catty_rag` 的 `text-embedding-3-small`、NovelAI 生成/加工端点、Pixelbunny 普通绘图模型、`catty_integrations` 的 Ollama URL 与 derived-model 默认值。
+- 新增/补齐配置：`rag.local_bge_model`、`rag.embedding_model`、`imagegen.pixelbunny_model`、`imagegen.nai.endpoint/augment_endpoint`、`cpu_engine.l4_ollama_base_url/api_key/model`、`evolution.judge_base_url`；BGE worker 通过 `CATTY_RAG_MODEL` 接收模型 id。运行时代码不再用字面量兜底，缺配置时明确告警/报错并跳过。
+- `catty_integrations` 的 `ollama.api_url`、`ai_fallback.derived_model_name/base_model` 改为只读 config；`config.json` 与 `config.example.json` 已补键，11 个敏感字段逐项比对未变。
+- 本地及远端定向测试通过；生产配置只新增缺失字段并保留原有其他值，交付与验证详见 `docs/session-log/session-16.md`。完整离线清单的既有 42 个集成 errors 未在本次修复。
 ## 2026-10-29 · 修复语音重复发（已部署）
 
 - 现象：同一句先以工具语音（默认参考音）出现，语音条又把剩余气泡念一遍，看起来像“第一下两个气泡、第二下再一个”。
 - 修复：`_voice_text_key` 去掉标点和空白后比较；`catty_voice_say` 在调用时就把参数里的 `text`/`segments` 记进本轮已发声集合。语音条遇到念过的气泡只标记 `already_voiced`，不再补文字也不再重复合成；后台语音到达时同样按这个集合跳过重复台词。
 - 普通声线补齐：没给 `segments` 的工具语音现在用 `mood` 对应的情绪参考音合成，不再固定默认参考音；语音条默认用 `soft`（NSFW 用 `tease`）。
-- 本地 `test_voice_reply` 34 项、工具扫描 22 项、`test_config*` 33 项通过；4 个文件经文件 API 上传并回读校验 SHA-256 一致。远端 Shell 仍被禁用，远端 py_compile/测试/重载未复跑。
+- 本地 `test_voice_reply` 34 项、工具扫描 22 项、`test_config*` 33 项通过；4 个文件经文件 API 上传并回读校验 SHA-256 一致。当时远端 Shell 被禁用，远端 py_compile/测试/重载未复跑。
 ## 2026-10-29 · 语音情感分段 + 表情按意思接（已部署）
 
 - 语音情感：`catty_voice_say` 新增 `segments`（1-4 段，每段 `text` + `emotion`），由模型自己判断这句话哪里犹豫、哪里凶、哪里软下来；worker 用同音色对应情绪的语音库片段拼出参考音，逐段合成再拼接，不再整句一个调。没有 `segments` 时保持整句合成，`bank` 后端忽略分段，总字数仍受 `max_chars` 限制；对应情绪的参考音不足时回退默认参考音。

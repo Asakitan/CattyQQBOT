@@ -3724,17 +3724,15 @@ async def _exec_imagegen_pixelbunny(
     base_url = str(getattr(config, "catty_imagegen_base_url", "") or "").strip().rstrip("/")
     api_key = str(getattr(config, "catty_imagegen_api_key", "") or "").strip()
     if nsfw:
-        model = str(
-            getattr(config, "catty_imagegen_nsfw_model", "seedream-4.5")
-            or "seedream-4.5"
-        ).strip()
+        model = str(getattr(config, "catty_imagegen_nsfw_model", "") or "").strip()
     else:
-        model = str(
-            getattr(config, "catty_imagegen_model", "seedream-5-pro")
-            or "seedream-5-pro"
-        ).strip()
+        model = str(getattr(config, "catty_imagegen_pixelbunny_model", "") or "").strip()
+    if not model:
+        return {"error": "imagegen.pixelbunny_model / imagegen.nsfw_model 没配,无法生图"}
     if not model.lower().startswith("seedream"):
-        model = "seedream-4.5" if nsfw else "seedream-5-pro"
+        return {
+            "error": f"Pixelbunny 后端需要 seedream 模型,当前配置 {model!r}",
+        }
     timeout = float(getattr(config, "catty_imagegen_timeout_seconds", 300.0) or 300.0)
     poll_seconds = max(
         float(getattr(config, "catty_imagegen_pixelbunny_poll_seconds", 2.0) or 2.0),
@@ -3954,9 +3952,15 @@ _NAI_POSITION_MAP: dict[str, tuple[float, float]] = {
 }
 _NAI_VIBE_REFERENCE_MAX = 4  # NAI UI 实测上限 4 张参考图
 
-# 这两个常量在 module top 提前定义,因为下方 `_NAI_DIRECTOR_SCHEMA` 字面量初始化时要引用。
-_NAI_IMAGE_ENDPOINT = "https://image.novelai.net/ai/generate-image"
-_NAI_AUGMENT_ENDPOINT = "https://image.novelai.net/ai/augment-image"
+
+def _nai_generate_endpoint(config: Any) -> str:
+    """NovelAI 生成端点；只从 config 读取，不在代码里写死。"""
+    return str(getattr(config, "catty_imagegen_nai_endpoint", "") or "").strip()
+
+
+def _nai_augment_endpoint(config: Any) -> str:
+    """NovelAI Director 加工端点；只从 config 读取，不在代码里写死。"""
+    return str(getattr(config, "catty_imagegen_nai_augment_endpoint", "") or "").strip()
 
 
 def _nai_predict_anlas(
@@ -4086,6 +4090,9 @@ async def _exec_imagegen_nai(
     token = str(getattr(ctx.config, "catty_imagegen_nai_token", "") or "").strip()
     if not token:
         return {"error": "NovelAI token 未配置"}
+    endpoint = _nai_generate_endpoint(ctx.config)
+    if not endpoint:
+        return {"error": "imagegen.nai.endpoint 没配,无法走 NovelAI 生图"}
 
     aspect_key = (aspect or "").strip().lower() or str(
         getattr(ctx.config, "catty_imagegen_nai_default_aspect", "portrait") or "portrait"
@@ -4098,7 +4105,9 @@ async def _exec_imagegen_nai(
     scale = float(getattr(ctx.config, "catty_imagegen_nai_scale", 5.0) or 5.0)
     sampler = str(getattr(ctx.config, "catty_imagegen_nai_sampler", "k_euler_ancestral") or "k_euler_ancestral").strip()
     noise_schedule = str(getattr(ctx.config, "catty_imagegen_nai_noise_schedule", "karras") or "karras").strip()
-    model = str(getattr(ctx.config, "catty_imagegen_nai_model", "nai-diffusion-4-5-full") or "nai-diffusion-4-5-full").strip()
+    model = str(getattr(ctx.config, "catty_imagegen_nai_model", "") or "").strip()
+    if not model:
+        return {"error": "imagegen.nai.model 没配,无法走 NovelAI 生图"}
     timeout = float(getattr(ctx.config, "catty_imagegen_nai_timeout_seconds", 180.0) or 180.0)
     default_neg = str(getattr(ctx.config, "catty_imagegen_nai_default_negative", "") or "").strip()
     base_points = int(getattr(ctx.config, "catty_imagegen_nai_base_points", 5) or 5)
@@ -4363,7 +4372,7 @@ async def _exec_imagegen_nai(
     # subprocess curl.exe 100% 稳. 走 curl.exe.
     started = time.monotonic()
     status, body, err = await _nai_curl_post_json(
-        url=_NAI_IMAGE_ENDPOINT,
+        url=endpoint,
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
@@ -4521,6 +4530,9 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
         defry = 0
     defry = max(0, min(5, defry))
 
+    endpoint = _nai_augment_endpoint(ctx.config)
+    if not endpoint:
+        return {"error": "imagegen.nai.augment_endpoint 没配,无法走 NovelAI director"}
     token = str(getattr(ctx.config, "catty_imagegen_nai_token", "") or "").strip()
     if not token:
         return {"error": "NovelAI token 未配置"}
@@ -4646,7 +4658,7 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
     # subprocess curl.exe 100% 稳, 走它
     started = time.monotonic()
     status, body, err = await _nai_curl_post_json(
-        url=_NAI_AUGMENT_ENDPOINT,
+        url=endpoint,
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
@@ -5292,12 +5304,14 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
 
     base_url = str(getattr(ctx.config, "catty_imagegen_base_url", "") or getattr(ctx.config, "catty_openai_base_url", "") or "").strip().rstrip("/")
     api_key = str(getattr(ctx.config, "catty_imagegen_api_key", "") or getattr(ctx.config, "catty_openai_api_key", "") or "").strip()
-    model = str(getattr(ctx.config, "catty_imagegen_model", "gpt-image-2") or "gpt-image-2").strip()
+    model = str(getattr(ctx.config, "catty_imagegen_model", "") or "").strip()
     timeout = float(getattr(ctx.config, "catty_imagegen_timeout_seconds", 120.0) or 120.0)
     if not base_url:
         return {"error": "imagegen base_url 没配,无法生图"}
     if not api_key:
         return {"error": "imagegen api_key 没配,无法生图"}
+    if not model:
+        return {"error": "imagegen.model 没配,无法生图"}
 
     # 决定走 generate 还是 edit 路径
     use_input_image = bool(args.get("use_input_image") or False)

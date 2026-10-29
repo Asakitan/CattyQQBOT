@@ -3,8 +3,9 @@
 主人 2026-05-28 plan: 给 daily_life topic / affection_scorer emotion /
 theory_of_mind trend 提供 encoder-only 语义向量, 算 cosine 相似度.
 
-默认模型: BAAI/bge-small-zh-v1.5 (~95MB, 512 dim). 主人 2026-05-28 phase 5
-切换. 之前用 shibing624/text2vec-base-chinese (~100MB, 768 dim).
+模型名由 config.json 的 catty_text2vec_model_name 提供（默认 BAAI/bge-small-zh-v1.5,
+~95MB, 512 dim）。主人 2026-05-28 phase 5 切换；之前用
+shibing624/text2vec-base-chinese (~100MB, 768 dim)。空值时该后端直接跳过。
 
 特性:
 - HF 走 hf-mirror.com 镜像 (大陆环境), 加载前注入 HF_ENDPOINT
@@ -72,8 +73,7 @@ def _is_onnx_enabled() -> bool:
 
 def _get_model_name() -> str:
     cfg = _config()
-    name = getattr(cfg, "catty_text2vec_model_name", "") if cfg else ""
-    return name or "BAAI/bge-small-zh-v1.5"
+    return str(getattr(cfg, "catty_text2vec_model_name", "") or "").strip() if cfg else ""
 
 
 def _setup_hf_endpoint() -> None:
@@ -110,6 +110,12 @@ def _load_onnx_blocking() -> bool:
             from optimum.onnxruntime import ORTModelForFeatureExtraction  # type: ignore
             from transformers import AutoTokenizer  # type: ignore
             model_name = _get_model_name()
+            if not model_name:
+                logger.warning(
+                    "text2vec ONNX load skipped: catty_text2vec_model_name is empty"
+                )
+                _ONNX_LOAD_FAILED = True
+                return False
             logger.info("loading text2vec ONNX model: %s (first export ~15s)", model_name)
             # 主人 2026-05-30: 关 ONNX BFC arena, 让推理后 buffer 立即释放,
             # 不然 BiasGelu 等层会累积 chunk 撑爆 17GB 内存 (远端 OOM 实测)
@@ -206,6 +212,12 @@ def _load_blocking() -> Any | None:
             _setup_hf_endpoint()
             from text2vec import SentenceModel  # type: ignore
             model_name = _get_model_name()
+            if not model_name:
+                logger.warning(
+                    "text2vec torch load skipped: catty_text2vec_model_name is empty"
+                )
+                _LOAD_FAILED = True
+                return None
             logger.info("loading text2vec torch model: %s (first call ~ 2-5s)", model_name)
             _MODEL = SentenceModel(model_name)
             try:

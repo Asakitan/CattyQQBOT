@@ -144,8 +144,10 @@ class CPUEngineRouter:
             live_corpus_path = getattr(
                 self._config, "catty_cpu_engine_l3_distill_live_corpus_path", ""
             ) or None
-            model_name = getattr(self._config, "catty_text2vec_model_name", "BAAI/bge-small-zh-v1.5")
-            if corpus_path and index_path:
+            model_name = str(
+                getattr(self._config, "catty_text2vec_model_name", "") or ""
+            ).strip()
+            if corpus_path and index_path and model_name:
                 self._txtai_corpus = TxtaiCorpus(
                     corpus_path,
                     index_path,
@@ -155,6 +157,10 @@ class CPUEngineRouter:
                 self._txtai_corpus.prepare()
                 if not self._txtai_corpus.ready:
                     self._txtai_corpus = None
+            elif corpus_path and index_path:
+                logger.warning(
+                    "[cpu_engine] catty_text2vec_model_name is empty; L3 txtai corpus disabled"
+                )
         except Exception as exc:
             logger.exception(f"[cpu_engine] L3 txtai corpus init failed: {exc}")
             self._txtai_corpus = None

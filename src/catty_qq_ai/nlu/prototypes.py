@@ -267,14 +267,13 @@ TREND_ORDER: list[str] = list(TREND_PROTOTYPES.keys())
 def _compute_hash() -> str:
     """所有原型源文本 + model name 一起 hash. 任意改了 → cache 失效."""
     h = hashlib.sha256()
-    cfg_name = "BAAI/bge-small-zh-v1.5"
+    cfg_name = ""
     try:
         from nonebot import get_plugin_config
         from ..config import Config
-        cfg_name = (
-            getattr(get_plugin_config(Config), "catty_text2vec_model_name", "")
-            or cfg_name
-        )
+        cfg_name = str(
+            getattr(get_plugin_config(Config), "catty_text2vec_model_name", "") or ""
+        ).strip()
     except Exception:
         pass
     h.update(cfg_name.encode("utf-8"))

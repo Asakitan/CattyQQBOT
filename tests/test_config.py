@@ -20,6 +20,10 @@ _BILLING_SPEC.loader.exec_module(_billing)
 
 
 class ConfigTests(unittest.TestCase):
+    def test_vision_image_direct_download_defaults_off(self) -> None:
+        self.assertFalse(_config.Config().catty_vision_image_download_direct)
+        self.assertTrue(_config.Config(catty_vision_image_download_direct=True).catty_vision_image_download_direct)
+
     def test_group_hourly_quota_default_is_ten_times_previous_limit(self) -> None:
         quota = _config.Config().catty_group_hourly_token_quota
         self.assertEqual(quota, 30_000_000)
@@ -66,6 +70,23 @@ class ConfigTests(unittest.TestCase):
 
     def test_evolution_judge_defaults_to_deepseek(self) -> None:
         self.assertEqual(_config.Config().catty_evolution_judge_model, "deepseek-v4.1-flash")
+        self.assertEqual(_config.Config().catty_evolution_judge_base_url, "")
+
+    def test_model_routes_are_config_backed(self) -> None:
+        config = _config.Config()
+        self.assertEqual(config.catty_rag_local_bge_model, "BAAI/bge-small-zh-v1.5")
+        self.assertEqual(config.catty_embedding_model, "text-embedding-3-small")
+        self.assertEqual(config.catty_imagegen_pixelbunny_model, "seedream-5-pro")
+        self.assertEqual(
+            config.catty_imagegen_nai_endpoint,
+            "https://image.novelai.net/ai/generate-image",
+        )
+        self.assertEqual(
+            config.catty_imagegen_nai_augment_endpoint,
+            "https://image.novelai.net/ai/augment-image",
+        )
+        self.assertEqual(config.catty_cpu_engine_l4_ollama_base_url, "http://127.0.0.1:11434/v1")
+        self.assertEqual(config.catty_cpu_engine_l4_ollama_model, "qwen2.5:7b")
 
     def test_session_context_defaults_match_runtime_config(self) -> None:
         config = _config.Config()

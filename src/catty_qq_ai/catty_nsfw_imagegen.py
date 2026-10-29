@@ -151,9 +151,8 @@ DEFAULT_NEGATIVE = (
     "sfw, safe, family friendly, clothed sex, fully clothed"
 )
 
-# v4.5 是默认模型 (支持 characterPrompts 双角色 + director_reference Precise Reference)
-NAI_MODEL = "nai-diffusion-4-5-full"
-NAI_ENDPOINT = "https://image.novelai.net/ai/generate-image"
+# v4.5 是默认模型 (支持 characterPrompts 双角色 + director_reference Precise Reference)。
+# 模型与端点均由 config.json 的 imagegen.nai.* 提供，不在代码里写死。
 
 # Precise Reference 标准尺寸 (NAI SDK crop_and_resize 默认), letterbox 黑边居中
 _DIRECTOR_REF_TARGET = (1024, 1536)
@@ -682,6 +681,9 @@ async def _compose_base_caption(
 
 # ── Pixelbunny / seedream-4.5 自动 NSFW 生图 ──
 def _nsfw_imagegen_backend(config) -> str:
+    override = str(getattr(config, "catty_imagegen_nsfw_backend", "") or "").strip().lower()
+    if override in {"pixelbunny", "nai"}:
+        return override
     raw = str(getattr(config, "catty_imagegen_backend", "") or "").strip().lower()
     if raw == "pixelbunny":
         return "pixelbunny"
@@ -707,12 +709,18 @@ async def _pixelbunny_generate_nsfw(
     reference_paths: list[Path],
 ) -> dict[str, Any] | None:
     """提交 seedream-4.5 生成 NSFW 图 → 轮询 job → 下载 bytes。失败返回 None。"""
-    base_url = str(getattr(config, "catty_imagegen_base_url", "") or "").strip().rstrip("/")
-    api_key = str(getattr(config, "catty_imagegen_api_key", "") or "").strip()
-    model = str(
-        getattr(config, "catty_imagegen_nsfw_model", "seedream-4.5")
-        or "seedream-4.5"
+    base_url = str(
+        getattr(config, "catty_imagegen_pixelbunny_base_url", "")
+        or getattr(config, "catty_imagegen_base_url", "") or ""
+    ).strip().rstrip("/")
+    api_key = str(
+        getattr(config, "catty_imagegen_pixelbunny_api_key", "")
+        or getattr(config, "catty_imagegen_api_key", "") or ""
     ).strip()
+    model = str(getattr(config, "catty_imagegen_nsfw_model", "") or "").strip()
+    if not model:
+        logger.warning("nsfw_imagegen(pixelbunny): imagegen.nsfw_model 未配置")
+        return None
     if not base_url or not api_key:
         logger.warning("nsfw_imagegen(pixelbunny): base_url/api_key 未配置")
         return None
@@ -893,7 +901,10 @@ async def _maybe_generate_pixelbunny(
     pregnancy_state,
     persona: Any,
 ) -> Any:
-    if not str(getattr(config, "catty_imagegen_api_key", "") or "").strip():
+    if not str(
+        getattr(config, "catty_imagegen_pixelbunny_api_key", "")
+        or getattr(config, "catty_imagegen_api_key", "") or ""
+    ).strip():
         return None
 
     turn_count, draws_made = _bump_turn(scope_key, user_id)
@@ -1058,6 +1069,11 @@ async def maybe_generate_image(
     token = str(getattr(config, "catty_imagegen_nai_token", "") or "").strip()
     if not token:
         return None
+    nai_model = str(getattr(config, "catty_imagegen_nai_model", "") or "").strip()
+    nai_endpoint = str(getattr(config, "catty_imagegen_nai_endpoint", "") or "").strip()
+    if not nai_model or not nai_endpoint:
+        logger.warning("nsfw_imagegen(nai): imagegen.nai.model/endpoint 未配置")
+        return None
 
     turn_count, draws_made = _bump_turn(scope_key, user_id)
     if turn_count % DRAW_INTERVAL != 0:
@@ -1140,7 +1156,7 @@ async def maybe_generate_image(
 
     payload = {
         "input": base_caption,
-        "model": NAI_MODEL,
+        "model": nai_model,
         "action": "generate",
         "use_new_shared_trial": True,
         "parameters": {
@@ -1246,7 +1262,7 @@ async def maybe_generate_image(
     for attempt in range(1, max_attempts + 1):
         started = time.monotonic()
         status, body, err = await _curl_post_json(
-            url=NAI_ENDPOINT,
+            url=nai_endpoint,
             headers={
                 "Authorization": f"Bearer {token}",
                 "Content-Type": "application/json",

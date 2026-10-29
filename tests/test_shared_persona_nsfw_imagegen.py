@@ -139,6 +139,32 @@ class PersonaSceneTests(unittest.TestCase):
 
 
 class PersonaBackendTests(unittest.IsolatedAsyncioTestCase):
+    async def test_nsfw_pixelbunny_can_use_a_separate_route_and_key(self):
+        config = types.SimpleNamespace(
+            catty_imagegen_backend="openai",
+            catty_imagegen_nsfw_backend="pixelbunny",
+            catty_imagegen_base_url="https://openai.example/v1",
+            catty_imagegen_api_key="OPENAI_TOKEN",
+            catty_imagegen_pixelbunny_base_url="https://pixelbunny.example/v1",
+            catty_imagegen_pixelbunny_api_key="PIXELBUNNY_TOKEN",
+            catty_imagegen_nsfw_model="seedream-4.5",
+        )
+        self.assertEqual(imagegen._nsfw_imagegen_backend(config), "pixelbunny")
+        response = types.SimpleNamespace(status_code=400, text="test")
+        client = types.SimpleNamespace(post=AsyncMock(return_value=response))
+        context = Mock()
+        context.__aenter__ = AsyncMock(return_value=client)
+        context.__aexit__ = AsyncMock(return_value=None)
+        with patch.object(imagegen.httpx, "AsyncClient", return_value=context):
+            await imagegen._pixelbunny_generate_nsfw(
+                config, prompt="test", reference_paths=[]
+            )
+        self.assertEqual(client.post.await_args.args[0], "https://pixelbunny.example/v1/images")
+        self.assertEqual(
+            client.post.await_args.kwargs["headers"]["Authorization"],
+            "Bearer PIXELBUNNY_TOKEN",
+        )
+
     async def test_caption_provider_receives_isolated_template_and_unmodified_input(self):
         config = types.SimpleNamespace(
             catty_ai_fallback_base_url="mock://caption", catty_ai_fallback_api_key="TOKEN",
@@ -185,6 +211,10 @@ class PersonaBackendTests(unittest.IsolatedAsyncioTestCase):
                     config = types.SimpleNamespace(
                         catty_imagegen_backend=backend, catty_imagegen_api_key="TOKEN",
                         catty_imagegen_nai_enabled=True, catty_imagegen_nai_token="TOKEN",
+                        catty_imagegen_nai_model="nai-diffusion-4-5-full",
+                        catty_imagegen_nai_endpoint="https://image.novelai.net/ai/generate-image",
+                        catty_imagegen_nsfw_model="seedream-4.5",
+                        catty_imagegen_pixelbunny_model="seedream-5-pro",
                         catty_imagegen_nai_max_attempts=1,
                     )
                     composer = AsyncMock(return_value="nsfw, explicit, close-up")
@@ -262,6 +292,10 @@ class PersonaBackendTests(unittest.IsolatedAsyncioTestCase):
             config = types.SimpleNamespace(
                 catty_imagegen_backend=backend, catty_imagegen_api_key="TOKEN",
                 catty_imagegen_nai_enabled=True, catty_imagegen_nai_token="TOKEN",
+                catty_imagegen_nai_model="nai-diffusion-4-5-full",
+                catty_imagegen_nai_endpoint="https://image.novelai.net/ai/generate-image",
+                catty_imagegen_nsfw_model="seedream-4.5",
+                catty_imagegen_pixelbunny_model="seedream-5-pro",
             )
             with self.subTest(backend=backend), \
                  patch.object(imagegen, "_bump_turn", return_value=(6, 0)) as bump, \
@@ -297,6 +331,10 @@ class PersonaBackendTests(unittest.IsolatedAsyncioTestCase):
                     config = types.SimpleNamespace(
                         catty_imagegen_backend=backend, catty_imagegen_api_key="TOKEN",
                         catty_imagegen_nai_enabled=True, catty_imagegen_nai_token="TOKEN",
+                        catty_imagegen_nai_model="nai-diffusion-4-5-full",
+                        catty_imagegen_nai_endpoint="https://image.novelai.net/ai/generate-image",
+                        catty_imagegen_nsfw_model="seedream-4.5",
+                        catty_imagegen_pixelbunny_model="seedream-5-pro",
                         catty_imagegen_cache_dir=directory,
                     )
                     store = Mock()

@@ -64,7 +64,7 @@ class TxtaiCorpus:
         self,
         corpus_path: str | Path,
         index_path: str | Path,
-        model_name: str = "BAAI/bge-small-zh-v1.5",
+        model_name: str,
         live_corpus_path: str | Path | None = None,
         *,
         cache_model_id: str | None = None,

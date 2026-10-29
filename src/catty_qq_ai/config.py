@@ -52,7 +52,28 @@ class Config(BaseModel):
     catty_cache_hit_input_price_ratio: float = 0.02
     catty_openai_extra_headers: dict[str, str] = Field(default_factory=dict)
     catty_openai_extra_body: dict[str, Any] = Field(default_factory=dict)
+    # Responses API WebSocket 传输（GPT-6 系列）：长连接 + previous_response_id 续聊 +
+    # 连接内缓存。store=false 时续聊只在该连接内有效，重连后自动全量重放。
+    catty_openai_websocket_enabled: bool = False
+    # 空 = 由 catty_openai_base_url 推导 wss://.../responses。
+    catty_openai_websocket_url: str = ""
+    catty_openai_websocket_store: bool = False
+    catty_openai_websocket_previous_response: bool = True
+    catty_openai_websocket_stream_id: str = "catty"
+    catty_openai_websocket_include: list[str] = Field(default_factory=list)
+    catty_openai_websocket_connect_timeout_seconds: float = 15.0
+    catty_openai_websocket_idle_timeout_seconds: float = 300.0
+    # 官方连接上限 60 分钟；默认 50 分钟主动换连接，留重连余量。
+    catty_openai_websocket_max_age_seconds: float = 3000.0
+    catty_openai_websocket_cache_ttl_seconds: float = 3600.0
+    catty_openai_websocket_cache_path: str = "data/responses_ws_cache.json"
+    catty_openai_websocket_fallback_http: bool = True
     catty_rag_local_bge_enabled: bool = True
+    # RAG 向量模型（config.json 的 rag 段）：
+    #   local_bge_model — 隔离 BGE worker 的 HuggingFace repo id；
+    #   embedding_model — host 支持 /v1/embeddings 时的 OpenAI 兼容模型名。
+    catty_rag_local_bge_model: str = "BAAI/bge-small-zh-v1.5"
+    catty_embedding_model: str = "text-embedding-3-small"
 
     # 主 AI 主动生图(catty_imagegen tool)— 走 OpenAI Image API。
     # base_url/api_key 留空则复用上面 catty_openai_* 同一通道(codex/gpt-5.5 同 host 都行)。
@@ -62,7 +83,9 @@ class Config(BaseModel):
     catty_imagegen_api_key: str = ""
     catty_imagegen_model: str = "gpt-image-2"
     # Pixelbunny 后端：普通绘图走 seedream-5-pro，NSFW 上下文/自画像走 seedream-4.5。
+    catty_imagegen_pixelbunny_model: str = "seedream-5-pro"
     catty_imagegen_nsfw_model: str = "seedream-4.5"
+    catty_imagegen_nsfw_backend: str = ""
     catty_imagegen_default_size: str = "1024x1024"
     catty_imagegen_default_quality: str = "low"
     catty_imagegen_default_format: str = "png"
@@ -82,6 +105,8 @@ class Config(BaseModel):
     # ── Pixelbunny 路径(backend="pixelbunny") ──
     # auto: base_url 含 api.pixelbunny.ai 时自动走 Pixelbunny; 否则走原 OpenAI Image API。
     catty_imagegen_backend: str = "auto"  # auto / openai / pixelbunny
+    catty_imagegen_pixelbunny_base_url: str = ""
+    catty_imagegen_pixelbunny_api_key: str = ""
     catty_imagegen_pixelbunny_webhook_secret: str = ""
     catty_imagegen_pixelbunny_resolution: str = "1K"  # seedream-5-pro 支持 1K / 2K
     catty_imagegen_pixelbunny_poll_seconds: float = 2.0
@@ -94,6 +119,9 @@ class Config(BaseModel):
     catty_imagegen_nai_enabled: bool = False
     catty_imagegen_nai_token: str = ""
     catty_imagegen_nai_model: str = "nai-diffusion-4-5-full"
+    # NovelAI 端点（生成 / Director 加工）；换反代或镜像站时只改 config。
+    catty_imagegen_nai_endpoint: str = "https://image.novelai.net/ai/generate-image"
+    catty_imagegen_nai_augment_endpoint: str = "https://image.novelai.net/ai/augment-image"
     catty_imagegen_nai_default_aspect: str = "portrait"  # portrait / landscape / square
     catty_imagegen_nai_steps: int = 28
     catty_imagegen_nai_scale: float = 5.0
@@ -167,6 +195,7 @@ class Config(BaseModel):
     catty_vision_temperature: float | None = 0.2
     catty_vision_max_tokens: int | None = 800
     catty_vision_request_timeout: float | None = None
+    catty_vision_image_download_direct: bool = False
     # vision 走异步:消息一进来就 fire-and-forget 启 task,主回复链路最多短等
     # catty_vision_inline_max_wait_seconds 秒;等不到就不带 vision 描述直接回,
     # 后台 task 跑完写 memory_store,下一轮自动复用。
@@ -490,6 +519,10 @@ class Config(BaseModel):
     # (主人 ai_fallback 配的是 deepseek.com 兜底, catnify 调它会跑去 DeepSeek 烧 token).
     catty_cpu_engine_l4_catnify_base_url: str = "http://127.0.0.1:11434/v1"
     catty_cpu_engine_l4_catnify_api_key: str = "ollama"
+    # S3 旧 stylize 路径（l4_mode="stylize"）独立配置，避免误用 ai_fallback 的云端端点。
+    catty_cpu_engine_l4_ollama_base_url: str = "http://127.0.0.1:11434/v1"
+    catty_cpu_engine_l4_ollama_api_key: str = "ollama"
+    catty_cpu_engine_l4_ollama_model: str = "qwen2.5:7b"
     # S5.6f (主人 2026-05-29): 实测 qwen2.5:3b cold load 4.9s (磁盘→内存),
     # warm 2.85s; timeout 8s 留 cold 余地, 主人 ≤10s 上限内.
     catty_cpu_engine_l4_catnify_timeout_ms: int = 8000
@@ -584,6 +617,8 @@ class Config(BaseModel):
     catty_evolution_cron: str = "0 3 * * *"
     catty_evolution_samples_per_layer: int = 30
     catty_evolution_judge_model: str = "deepseek-v4.1-flash"
+    # 空 = 复用 audit_ai.base_url，再退回主 ai.base_url；不再在代码里写死厂商端点。
+    catty_evolution_judge_base_url: str = ""
     catty_evolution_rollback_neg_feedback_pct: float = 0.2
     catty_evolution_rollback_score_decline_days: int = 3
     catty_evolution_sample_only_group: bool = True

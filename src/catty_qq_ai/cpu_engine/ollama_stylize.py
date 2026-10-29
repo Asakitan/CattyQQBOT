@@ -3,7 +3,7 @@
 L2/L3 拿到中等信心候选 (score 0.70-0.82) 时, 用 Ollama qwen2.5:7b 加米雪儿人格头
 few-shot 重写为更自然的米雪儿语气. 失败/超时返回 None 让 router 透传到 L5.
 
-复用 catty_ai_fallback_base_url/api_key (本地 Ollama) 但用 L4 专属 timeout (800ms).
+端点/模型走 config.json 的 cpu_engine.l4_ollama_*，用 L4 专属 timeout (800ms)。
 不复用 _post_fallback_chat 完整流程 (它含 MC gate + warmup 长 timeout, 不适合 inline 重写).
 """
 
@@ -36,16 +36,18 @@ async def stylize_candidate(
 
     返回新文本 (str) 或 None (Ollama 不可用/超时/为空).
     """
-    base_url = (
-        str(getattr(config, "catty_ai_fallback_base_url", "") or "").rstrip("/")
-        or "http://127.0.0.1:11434/v1"
-    )
-    api_key = str(getattr(config, "catty_ai_fallback_api_key", "") or "") or "ollama"
-    model = str(
-        getattr(config, "catty_cpu_engine_l4_ollama_model", "")
-        or getattr(config, "catty_ai_fallback_model", "")
-        or "qwen2.5:7b"
-    )
+    base_url = str(
+        getattr(config, "catty_cpu_engine_l4_ollama_base_url", "") or ""
+    ).rstrip("/")
+    api_key = str(getattr(config, "catty_cpu_engine_l4_ollama_api_key", "") or "")
+    model = str(getattr(config, "catty_cpu_engine_l4_ollama_model", "") or "")
+    if not base_url or not model:
+        logger.warning(
+            "[cpu_engine.L4_stylize] config missing: base_url={!r} model={!r} -> skip",
+            base_url,
+            model,
+        )
+        return None
     timeout_ms = timeout_ms if timeout_ms is not None else int(
         getattr(config, "catty_cpu_engine_l4_timeout_ms", 800)
     )

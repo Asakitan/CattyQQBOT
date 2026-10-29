@@ -114,9 +114,9 @@ async def call_judge_async(
         return JudgeReport()
 
     base_url = (
-        str(getattr(config, "catty_audit_ai_base_url", "") or "").rstrip("/")
+        str(getattr(config, "catty_evolution_judge_base_url", "") or "").rstrip("/")
+        or str(getattr(config, "catty_audit_ai_base_url", "") or "").rstrip("/")
         or str(getattr(config, "catty_openai_base_url", "") or "").rstrip("/")
-        or "https://api.deepseek.com/v1"
     )
     api_key = (
         str(getattr(config, "catty_audit_ai_api_key", "") or "")
@@ -125,9 +125,13 @@ async def call_judge_async(
     model = (
         str(getattr(config, "catty_evolution_judge_model", "") or "")
         or str(getattr(config, "catty_audit_ai_model", "") or "")
-        or "deepseek-v4.1-flash"
     )
 
+    if not base_url or not model:
+        logger.warning(
+            "[evolution.judge] config missing: base_url=%r model=%r", base_url, model
+        )
+        return None
     if not api_key:
         logger.warning("[evolution.judge] no api_key configured")
         return None

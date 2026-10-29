@@ -1613,6 +1613,12 @@ async def _post_anthropic_native_chat(
 # (主人 2026-07-06 openai-claude-95 §三: 严格中转可能不认 unknown 参数)
 _PROMPT_CACHE_KEY_BLOCKED: set[str] = set()
 
+# Responses WebSocket 单例：连接/缓存都跨轮复用；配置变化时重建。
+_WS_TRANSPORT: Any = None
+_WS_TRANSPORT_KEY: tuple[Any, ...] | None = None
+_WS_CHAIN_CACHE: Any = None
+_WS_CHAIN_CACHE_KEY: tuple[Any, ...] | None = None
+
 
 def _get_runtime_config() -> Any:
     """拿全局运行时 Config 实例 — 深层无 config 参数的函数用.
@@ -1632,6 +1638,78 @@ def _get_runtime_config() -> Any:
         return _cfg
     except Exception:  # noqa: BLE001
         return None
+
+
+def _get_ws_chain_cache(config: Any) -> Any:
+    """按配置取 Responses WebSocket 续聊缓存单例。"""
+    global _WS_CHAIN_CACHE, _WS_CHAIN_CACHE_KEY
+    from .responses_ws import ResponseChainCache
+
+    path = str(
+        getattr(config, "catty_openai_websocket_cache_path", "")
+        or "data/responses_ws_cache.json"
+    ).strip()
+    ttl = float(
+        getattr(config, "catty_openai_websocket_cache_ttl_seconds", 3600.0) or 0.0
+    )
+    key = (path, ttl)
+    if _WS_CHAIN_CACHE is None or _WS_CHAIN_CACHE_KEY != key:
+        _WS_CHAIN_CACHE = ResponseChainCache(path, ttl)
+        _WS_CHAIN_CACHE_KEY = key
+    return _WS_CHAIN_CACHE
+
+
+def _get_ws_transport(
+    config: Any,
+    *,
+    base_url: str,
+    api_key: str,
+    model: str,
+    extra_headers: dict[str, str],
+    proxy: str,
+) -> Any:
+    """按配置取 Responses WebSocket 连接单例；URL/key/model/header 变化时重建。"""
+    global _WS_TRANSPORT, _WS_TRANSPORT_KEY
+    from .responses_ws import ResponsesWebSocketTransport, responses_ws_url
+
+    url = str(getattr(config, "catty_openai_websocket_url", "") or "").strip()
+    if not url:
+        url = responses_ws_url(base_url)
+    key = (
+        url,
+        str(api_key or "").strip(),
+        str(model or "").strip(),
+        json.dumps(extra_headers or {}, ensure_ascii=False, sort_keys=True),
+        str(proxy or "").strip(),
+    )
+    if _WS_TRANSPORT is not None and _WS_TRANSPORT_KEY != key:
+        old = _WS_TRANSPORT
+        try:
+            asyncio.get_running_loop().create_task(old.close())
+        except RuntimeError:
+            pass
+        _WS_TRANSPORT = None
+    if _WS_TRANSPORT is None:
+        _WS_TRANSPORT = ResponsesWebSocketTransport(
+            url=url,
+            api_key=str(api_key or "").strip(),
+            extra_headers=dict(extra_headers or {}),
+            connect_timeout=float(
+                getattr(config, "catty_openai_websocket_connect_timeout_seconds", 15.0)
+                or 15.0
+            ),
+            idle_timeout=float(
+                getattr(config, "catty_openai_websocket_idle_timeout_seconds", 300.0)
+                or 300.0
+            ),
+            max_age_seconds=float(
+                getattr(config, "catty_openai_websocket_max_age_seconds", 3000.0)
+                or 3000.0
+            ),
+            proxy=str(proxy or "").strip(),
+        )
+        _WS_TRANSPORT_KEY = key
+    return _WS_TRANSPORT
 
 
 _SESSION_HISTORY_MARKER = "_catty_session_history"
@@ -2600,17 +2678,19 @@ def _content_to_responses_parts(content: Any, *, output: bool) -> list[dict[str,
                 continue
             if item_type in ("image_url", "image", "input_image"):
                 image_url = item.get("image_url")
+                detail = str(item.get("detail") or "").strip()
                 if isinstance(image_url, dict):
                     url = image_url.get("url")
+                    detail = str(image_url.get("detail") or detail).strip()
                 elif isinstance(image_url, str):
                     url = image_url
                 else:
                     url = item.get("url")
                 if url:
-                    parts.append({
-                        "type": "input_image",
-                        "image_url": {"url": url},
-                    })
+                    part = {"type": "input_image", "image_url": url}
+                    if detail:
+                        part["detail"] = detail
+                    parts.append(part)
                 continue
             text = item.get("text")
             if isinstance(text, str) and text.strip():
@@ -2697,6 +2777,54 @@ def _messages_to_responses_input(messages: list[ChatMessage]) -> list[dict[str, 
     return out
 
 
+def _responses_output_to_input_items(output: Any) -> list[dict[str, Any]]:
+    """Responses output items → 下一轮 input item 形态（只用于续聊前缀匹配）。
+
+    previous_response_id 已包含上一轮输出；下一轮 messages 里也会带 assistant
+    回复，所以缓存前缀必须把 output 也算进“已覆盖上下文”，否则会把 assistant
+    文本再发一遍。reasoning item 不进入 Catty 的 chat messages，故不参与前缀。
+    """
+    items: list[dict[str, Any]] = []
+    if not isinstance(output, list):
+        return items
+    for item in output:
+        if not isinstance(item, dict):
+            continue
+        item_type = str(item.get("type") or "")
+        if item_type == "message":
+            role = str(item.get("role") or "assistant")
+            parts: list[dict[str, Any]] = []
+            for part in item.get("content") or []:
+                if not isinstance(part, dict):
+                    continue
+                part_type = str(part.get("type") or "")
+                if part_type in ("output_text", "input_text", "text"):
+                    text = part.get("text")
+                    if isinstance(text, str) and text.strip():
+                        parts.append({
+                            "type": "output_text" if role == "assistant" else "input_text",
+                            "text": text,
+                        })
+                elif part_type == "refusal":
+                    refusal = part.get("refusal")
+                    if isinstance(refusal, str) and refusal.strip():
+                        parts.append({"type": "refusal", "refusal": refusal})
+            if parts:
+                items.append({"type": "message", "role": role, "content": parts})
+            continue
+        if item_type == "function_call":
+            name = str(item.get("name") or "")
+            if name:
+                items.append({
+                    "type": "function_call",
+                    "call_id": str(item.get("call_id") or item.get("id") or ""),
+                    "name": name,
+                    "arguments": str(item.get("arguments") or ""),
+                })
+            continue
+    return items
+
+
 def _tools_to_responses(tools: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
     """OpenAI function tools → Responses API 扁平形态 (无 function 嵌套, 无空名)。"""
     out: list[dict[str, Any]] = []
@@ -2763,8 +2891,7 @@ def _payload_to_responses_body(
         body["instructions"] = "\n\n".join(system_texts)
     if rest:
         body["input"] = rest
-    if payload.get("temperature") is not None:
-        body["temperature"] = payload["temperature"]
+    # GPT-6 Terra 等推理模型在 Responses API 拒绝 temperature；不再透传。
     if payload.get("max_tokens") is not None:
         body["max_output_tokens"] = payload["max_tokens"]
     tools = payload.get("tools")
@@ -2776,8 +2903,32 @@ def _payload_to_responses_body(
                 payload.get("tool_choice") or "auto",
             )
     # extra_body 透传白名单 (chat-completions 专属键已在上面转换/丢弃)
-    for key in ("thinking", "reasoning_effort", "store", "metadata", "prompt_cache_key", "user"):
-        if key in payload:
+    # chat-completions 的 reasoning_effort 在 Responses API 里叫 reasoning.effort；
+    # thinking 是 DeepSeek/GLM 的 chat 参数，Responses 不接受，直接丢弃。
+    explicit_reasoning = payload.get("reasoning")
+    if isinstance(explicit_reasoning, dict):
+        body["reasoning"] = explicit_reasoning
+    reasoning_effort = payload.get("reasoning_effort")
+    if reasoning_effort:
+        effort = str(reasoning_effort).strip().lower()
+        if effort in {"max", "xhigh"}:
+            effort = "high"
+        if effort in {"minimal", "low", "medium", "high"}:
+            reasoning = body.get("reasoning")
+            if not isinstance(reasoning, dict):
+                reasoning = {}
+            reasoning.setdefault("effort", effort)
+            body["reasoning"] = reasoning
+    for key in (
+        "store",
+        "metadata",
+        "prompt_cache_key",
+        "user",
+        "include",
+        "service_tier",
+        "reasoning",
+    ):
+        if key in payload and key not in body:
             body[key] = payload[key]
     if stream:
         body["stream"] = True
@@ -3034,6 +3185,279 @@ async def _stream_responses_attempt(
         "choices": [{"message": message, "finish_reason": "stop", "index": 0}],
         "usage": {},
     }
+
+
+async def _stream_responses_ws_attempt(
+    *,
+    config: Any,
+    base_url: str,
+    api_key: str,
+    extra_headers: dict[str, str],
+    payload: dict[str, Any],
+    timeout: float,
+    proxy: str,
+    dash_stream_id: str | None,
+    dash_mod: Any,
+    scope: str,
+    allow_previous: bool = True,
+    allow_retry: bool = True,
+) -> dict[str, Any]:
+    """Responses API WebSocket attempt — 持久连接 + previous_response_id 续聊。
+
+    - 同一连接内用 previous_response_id 只发新增 input items；
+    - store=false 时连接换代后自动全量重放；
+    - 连接断开/previous_response_not_found 时清缓存并重试一次全量；
+    - 失败由调用方决定是否回退 HTTP Responses/chat。
+    """
+    from .responses_ws import (
+        ResponsesWSDisconnected,
+        ResponsesWSError,
+        common_prefix_len,
+        item_hash,
+    )
+
+    body = _payload_to_responses_body(payload, stream=True)
+    for key in ("stream", "stream_options", "background"):
+        body.pop(key, None)
+    store = bool(getattr(config, "catty_openai_websocket_store", False))
+    body["store"] = store
+    include = getattr(config, "catty_openai_websocket_include", None)
+    if include:
+        body["include"] = [str(value) for value in include if str(value).strip()]
+
+    transport = _get_ws_transport(
+        config,
+        base_url=base_url,
+        api_key=api_key,
+        model=str(payload.get("model") or ""),
+        extra_headers=extra_headers,
+        proxy=proxy,
+    )
+    generation = await transport.ensure_ready()
+    input_items = body.get("input")
+    if not isinstance(input_items, list):
+        input_items = []
+    hashes = [item_hash(item) for item in input_items]
+    cache = _get_ws_chain_cache(config)
+
+    previous_id: str | None = None
+    if (
+        allow_previous
+        and scope
+        and bool(getattr(config, "catty_openai_websocket_previous_response", True))
+    ):
+        entry = cache.get(scope)
+        if entry and (
+            store or int(entry.get("generation") or 0) == int(generation)
+        ):
+            entry_hashes = entry.get("item_hashes") or []
+            prefix = common_prefix_len(hashes, entry_hashes)
+            if prefix == len(entry_hashes) and prefix < len(hashes):
+                previous_id = str(entry.get("response_id") or "") or None
+                if previous_id:
+                    body["input"] = input_items[prefix:]
+
+    prefix = str(
+        getattr(config, "catty_openai_websocket_stream_id", "catty") or "catty"
+    ).strip()
+    stream_id = prefix
+    if scope:
+        suffix = hashlib.sha256(scope.encode("utf-8")).hexdigest()[:16]
+        stream_id = f"{prefix}-{suffix}"
+    stream_id = "".join(
+        ch if (ch.isalnum() or ch in "._-") else "-" for ch in stream_id
+    )[:256] or "catty"
+
+    text_accum = ""
+    reasoning_accum = ""
+    tool_calls_by_item: dict[str, dict[str, str]] = {}
+    completed: dict[str, Any] | None = None
+
+    async def _retry_full() -> dict[str, Any]:
+        cache.clear(scope)
+        return await _stream_responses_ws_attempt(
+            config=config,
+            base_url=base_url,
+            api_key=api_key,
+            extra_headers=extra_headers,
+            payload=payload,
+            timeout=timeout,
+            proxy=proxy,
+            dash_stream_id=dash_stream_id,
+            dash_mod=dash_mod,
+            scope=scope,
+            allow_previous=False,
+            allow_retry=False,
+        )
+
+    event_stream = transport.iter_events(
+        body,
+        stream_id=stream_id,
+        previous_response_id=previous_id,
+    )
+    try:
+        async for event in event_stream:
+            event_type = str(event.get("type") or "")
+
+            if event_type == "error":
+                error_obj = event.get("error") or {}
+                code = str(error_obj.get("code") or "")
+                message = str(error_obj.get("message") or "")[:500]
+                status = int(event.get("status") or 400)
+                if code == "previous_response_not_found" and allow_retry:
+                    _logger.warning(
+                        "responses ws previous_response_not_found; replay full input"
+                    )
+                    await event_stream.aclose()
+                    return await _retry_full()
+                err = OpenAICompatibleError("AI 接口 WebSocket 错误。", message)
+                err.status_code = status  # type: ignore[attr-defined]
+                raise err
+
+            if event_type == "response.failed":
+                response = event.get("response") or {}
+                error_obj = response.get("error") or {}
+                code = str(error_obj.get("code") or "")
+                message = str(error_obj.get("message") or "")[:500]
+                status = int(error_obj.get("status") or 502)
+                if code == "previous_response_not_found" and allow_retry:
+                    _logger.warning(
+                        "responses ws previous_response_not_found (failed); "
+                        "replay full input"
+                    )
+                    await event_stream.aclose()
+                    return await _retry_full()
+                err = OpenAICompatibleError("AI 接口 WebSocket 失败。", message)
+                err.status_code = status  # type: ignore[attr-defined]
+                raise err
+
+            if event_type == "response.completed":
+                completed = event.get("response") or event
+                break
+            if event_type == "response.incomplete":
+                completed = event.get("response") or event
+                break
+            if event_type == "response.output_text.delta":
+                delta = event.get("delta")
+                if isinstance(delta, str) and delta:
+                    text_accum += delta
+                    if dash_stream_id is not None and dash_mod is not None:
+                        try:
+                            dash_mod.push_event(dash_stream_id, {
+                                "delta_text": delta,
+                                "event_type": "responses_ws_chunk",
+                            })
+                        except Exception:  # noqa: BLE001
+                            pass
+                continue
+            if event_type == "response.reasoning_summary_text.delta":
+                delta = event.get("delta")
+                if isinstance(delta, str) and delta:
+                    reasoning_accum += delta
+                continue
+            if event_type == "response.output_item.added":
+                item = event.get("item") or {}
+                if isinstance(item, dict) and item.get("type") == "function_call":
+                    item_id = str(item.get("id") or item.get("item_id") or "")
+                    if item_id:
+                        tool_calls_by_item.setdefault(item_id, {
+                            "name": str(item.get("name") or ""),
+                            "call_id": str(item.get("call_id") or ""),
+                            "arguments": "",
+                        })
+                continue
+            if event_type == "response.function_call_arguments.delta":
+                item_id = str(event.get("item_id") or "")
+                if item_id:
+                    tool_call = tool_calls_by_item.setdefault(item_id, {
+                        "name": "", "call_id": "", "arguments": "",
+                    })
+                    delta = event.get("delta")
+                    if isinstance(delta, str):
+                        tool_call["arguments"] += delta
+                continue
+            if event_type == "response.output_item.done":
+                item = event.get("item") or {}
+                if isinstance(item, dict) and item.get("type") == "function_call":
+                    item_id = str(item.get("id") or item.get("item_id") or "")
+                    if item_id:
+                        tool_call = tool_calls_by_item.setdefault(item_id, {
+                            "name": "", "call_id": "", "arguments": "",
+                        })
+                        if not tool_call["name"]:
+                            tool_call["name"] = str(item.get("name") or "")
+                        if not tool_call["call_id"]:
+                            tool_call["call_id"] = str(item.get("call_id") or "")
+                        if not tool_call["arguments"]:
+                            tool_call["arguments"] = str(item.get("arguments") or "")
+                continue
+    except ResponsesWSDisconnected as exc:
+        if allow_retry:
+            _logger.warning("responses ws disconnected (%s); replay full input", exc)
+            return await _retry_full()
+        err = OpenAICompatibleError("AI 接口 WebSocket 断开。", str(exc)[:500])
+        err.status_code = 502  # type: ignore[attr-defined]
+        raise err from exc
+    except ResponsesWSError as exc:
+        code = getattr(exc, "code", None)
+        if code == "previous_response_not_found" and allow_retry:
+            _logger.warning("responses ws previous_response_not_found; replay full input")
+            return await _retry_full()
+        err = OpenAICompatibleError("AI 接口 WebSocket 错误。", str(exc)[:500])
+        err.status_code = int(getattr(exc, "status_code", None) or 502)  # type: ignore[attr-defined]
+        raise err from exc
+    finally:
+        await event_stream.aclose()
+
+    if completed is not None:
+        data = _convert_responses_data(completed)
+        choice = (data.get("choices") or [{}])[0]
+        message = choice.get("message") or {}
+        if not message.get("content") and text_accum:
+            message["content"] = text_accum
+        if not message.get("reasoning_content") and reasoning_accum:
+            message["reasoning_content"] = reasoning_accum
+    else:
+        message = {"role": "assistant", "content": text_accum or None}
+        if reasoning_accum:
+            message["reasoning_content"] = reasoning_accum
+        tool_calls: list[dict[str, Any]] = []
+        for item_id, tool_call in tool_calls_by_item.items():
+            tool_calls.append({
+                "id": tool_call["call_id"] or item_id,
+                "type": "function",
+                "function": {
+                    "name": tool_call["name"],
+                    "arguments": tool_call["arguments"],
+                },
+            })
+        if tool_calls:
+            message["tool_calls"] = tool_calls
+        data = {
+            "choices": [{"message": message, "finish_reason": "stop", "index": 0}],
+            "usage": {},
+        }
+
+    response_id = ""
+    if isinstance(completed, dict):
+        response_id = str(completed.get("id") or "")
+    covered_hashes = list(hashes)
+    if isinstance(completed, dict):
+        covered_hashes.extend(
+            item_hash(item)
+            for item in _responses_output_to_input_items(completed.get("output"))
+        )
+    if scope and response_id and (store or transport.generation == generation):
+        cache.put(
+            scope,
+            response_id=response_id,
+            item_hashes=covered_hashes,
+            generation=int(generation),
+            store=store,
+        )
+    elif scope and not store and transport.generation != generation:
+        cache.clear(scope)
+    return data
 
 
 async def _post_chat_completion_raw(
@@ -3471,7 +3895,87 @@ async def _post_chat_completion_raw(
         # 主人 2026-08-10: /v1/responses 网关 (gpt-5.6-luna) 只认 Responses 协议 —
         # body 转换 / 响应转换都在 _responses_* 辅助里, retry 语义不变。
         _responses_mode = _is_responses_endpoint(base_url)
+        try:
+            _ws_config = _get_runtime_config()
+        except Exception:  # noqa: BLE001 - 离线函数级测试可能只注入部分符号
+            _ws_config = None
+        _ws_enabled = bool(
+            getattr(_ws_config, "catty_openai_websocket_enabled", False)
+        )
+        if _ws_enabled:
+            try:
+                from .prompt_cache import detect_provider as _detect_ws_provider
+
+                _ws_enabled = _detect_ws_provider(base_url, model) == "openai"
+            except Exception:  # noqa: BLE001
+                _ws_enabled = False
         for attempt in range(max(1, int(max_attempts))):
+            if _ws_enabled:
+                try:
+                    data = await _stream_responses_ws_attempt(
+                        config=_ws_config,
+                        base_url=base_url,
+                        api_key=api_key,
+                        extra_headers=extra_headers,
+                        payload=payload,
+                        timeout=timeout,
+                        proxy=proxy,
+                        dash_stream_id=_dash_stream_id,
+                        dash_mod=_dash_mod,
+                        scope=_scope_for_request,
+                    )
+                except OpenAICompatibleError as exc:
+                    if not bool(
+                        getattr(
+                            _ws_config,
+                            "catty_openai_websocket_fallback_http",
+                            True,
+                        )
+                    ):
+                        raise
+                    _logger.warning(
+                        "responses ws failed (status=%s): %s; falling back to HTTP",
+                        getattr(exc, "status_code", None),
+                        str(exc)[:200],
+                    )
+                    _ws_enabled = False
+                except Exception as exc:  # noqa: BLE001
+                    if not bool(
+                        getattr(
+                            _ws_config,
+                            "catty_openai_websocket_fallback_http",
+                            True,
+                        )
+                    ):
+                        err = OpenAICompatibleError(
+                            "AI 接口 WebSocket 失败。",
+                            f"{exc.__class__.__name__}: {exc}"[:500],
+                        )
+                        err.status_code = 502  # type: ignore[attr-defined]
+                        raise err from exc
+                    _logger.warning(
+                        "responses ws failed (%s: %s); falling back to HTTP",
+                        exc.__class__.__name__,
+                        str(exc)[:200],
+                    )
+                    _ws_enabled = False
+                else:
+                    _log_cache_stats(
+                        data,
+                        model,
+                        messages=messages,
+                        base_url=base_url,
+                    )
+                    if _dash_stream_id and _dash_mod is not None:
+                        try:
+                            _dash_mod.end_stream(
+                                _dash_stream_id,
+                                final_usage=data.get("usage"),
+                            )
+                            _dash_stream_id = None
+                        except Exception:  # noqa: BLE001
+                            pass
+                    return data
             if stream:
                 # === Streaming branch (主人 2026-05-28 Step 1) ===
                 try:
@@ -3919,8 +4423,11 @@ def _image_analysis_from_reply(reply: str) -> dict[str, Any]:
 
 async def download_binary(config: Config, url: str, *, timeout: float | None = None) -> tuple[bytes, str]:
     request_timeout = timeout or config.catty_vision_request_timeout or config.catty_request_timeout
+    proxy = getattr(config, "catty_http_proxy", "")
+    if getattr(config, "catty_vision_image_download_direct", False):
+        proxy = ""
     return await _download_public_image(
-        url, timeout=float(request_timeout), proxy=getattr(config, "catty_http_proxy", "")
+        url, timeout=float(request_timeout), proxy=proxy
     )
 
 

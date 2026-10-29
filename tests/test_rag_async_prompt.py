@@ -277,7 +277,9 @@ class RagEmbeddingClientTests(unittest.TestCase):
         chromadb.utils = utils
         store = catty_rag.CattyRAGStore.__new__(catty_rag.CattyRAGStore)
         store._config = types.SimpleNamespace(
-            catty_openai_api_key="TOKEN", catty_openai_base_url="https://example.test/v1",
+            catty_openai_api_key="TOKEN",
+            catty_openai_base_url="https://example.test/v1",
+            catty_embedding_model="example-embedding",
         )
         with mock.patch.dict(sys.modules, {"chromadb": chromadb, "chromadb.utils": utils}):
             self.assertIs(store._try_openai_embedding(), embedding)
@@ -449,7 +451,7 @@ class LocalBGEProcessTests(unittest.TestCase):
             release.wait(2)
             raise OSError("fixture")
 
-        backend = self.backend.LocalBGEEmbeddingFunction(restart_delay=1)
+        backend = self.backend.LocalBGEEmbeddingFunction(restart_delay=1, model_name="fixture-model")
         try:
             with mock.patch.object(self.backend.subprocess, "Popen", side_effect=blocked_spawn):
                 before = time.monotonic()
@@ -467,7 +469,11 @@ class LocalBGEProcessTests(unittest.TestCase):
 
     def test_local_model_selection_is_independent_of_nlu_switch(self):
         store = catty_rag.CattyRAGStore.__new__(catty_rag.CattyRAGStore)
-        store._config = types.SimpleNamespace(catty_rag_local_bge_enabled=True, catty_use_text2vec=False)
+        store._config = types.SimpleNamespace(
+            catty_rag_local_bge_enabled=True,
+            catty_use_text2vec=False,
+            catty_rag_local_bge_model="fixture-model",
+        )
         worker = store._try_local_bge_embedding()
         try:
             self.assertIsInstance(worker, self.backend.LocalBGEEmbeddingFunction)
@@ -503,7 +509,11 @@ class LocalBGEProcessTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "fixture_worker.py"
             path.write_text(script, encoding="utf-8")
-            backend = self.backend.LocalBGEEmbeddingFunction(worker_path=path, restart_delay=0.1)
+            backend = self.backend.LocalBGEEmbeddingFunction(
+                worker_path=path,
+                restart_delay=0.1,
+                model_name="BAAI/bge-small-zh-v1.5",
+            )
             try:
                 backend.start()
                 self.assertTrue(self._wait(lambda: backend.ready), backend._last_error_type)
@@ -533,7 +543,8 @@ class LocalBGEProcessTests(unittest.TestCase):
             ''').replace("FLAG", repr(str(flag)))
             path.write_text(script, encoding="utf-8")
             backend = self.backend.LocalBGEEmbeddingFunction(
-                worker_path=path, startup_timeout=2, request_timeout=0.2, restart_delay=0.05,
+                worker_path=path, startup_timeout=2, request_timeout=0.2,
+                restart_delay=0.05, model_name="fixture-model",
             )
             try:
                 backend.start()
@@ -553,6 +564,7 @@ class LocalBGEProcessTests(unittest.TestCase):
             path.write_text("import threading\nthreading.Event().wait(30)\n", encoding="utf-8")
             backend = self.backend.LocalBGEEmbeddingFunction(
                 worker_path=path, startup_timeout=0.2, restart_delay=10,
+                model_name="fixture-model",
             )
             try:
                 backend.start()
@@ -590,7 +602,7 @@ class LocalBGEProcessTests(unittest.TestCase):
                 [getattr(sys, "_base_executable", sys.executable), "-I", "-c", "import threading; threading.Event().wait(30)"],
                 stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
             )
-            env = self.backend._child_environment()
+            env = self.backend._child_environment("fixture-model")
             env["CATTY_RAG_PARENT_PID"] = str(target.pid)
             child = subprocess.Popen(
                 [sys.executable, "-I", "-B", "-u", "-X", "utf8", str(path)],

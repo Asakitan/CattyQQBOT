@@ -182,6 +182,9 @@ def _offline_audit(event, _args):
 
 
 def _load_model():
+    model_name = os.environ.get("CATTY_RAG_MODEL", "").strip()
+    if not model_name:
+        raise RuntimeError("CATTY_RAG_MODEL is not configured")
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
     os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
@@ -194,9 +197,7 @@ def _load_model():
     from huggingface_hub import snapshot_download
     from text2vec import SentenceModel
 
-    snapshot = snapshot_download(
-        repo_id="BAAI/bge-small-zh-v1.5", local_files_only=True
-    )
+    snapshot = snapshot_download(repo_id=model_name, local_files_only=True)
     return SentenceModel(snapshot, device="cpu")
 
 

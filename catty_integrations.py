@@ -374,7 +374,9 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
     except (TypeError, ValueError):
         num_thread = None
     env = _ollama_env(config_dir, models_relative, num_thread=num_thread)
-    api_url = str(ollama.get("api_url") or "http://127.0.0.1:11434").strip()
+    api_url = str(ollama.get("api_url") or "").strip()
+    if not api_url:
+        raise ValueError("ollama.api_url is required when ollama.auto_start is enabled")
 
     # 主人 2026-05-29: bot 热重启不应连累 ollama。若 ollama 已经在 serve 且 API 健康,
     # 直接复用现有进程 —— 不 kill、不重启, 让 OLLAMA_KEEP_ALIVE=-1 常驻内存的模型
@@ -466,8 +468,8 @@ def _ensure_catty_derived_model(
 ) -> None:
     """Build a Catty-flavored Ollama model from a base model + persona Modelfile.
 
-    Reads ``ai_fallback.derived_model_name`` (default ``catty-7b``) and
-    ``ai_fallback.base_model`` (default ``qwen2.5:7b``). Skips if disabled or
+    Reads ``ai_fallback.derived_model_name`` and ``ai_fallback.base_model`` from
+    config (no code-level fallback). Skips if disabled, unconfigured, or the
     base model isn't pulled yet.
     """
     fallback = config.get("ai_fallback")
@@ -479,9 +481,10 @@ def _ensure_catty_derived_model(
     # 把 auto_build_derived_model=true 打开后才会自己 build。
     if not _as_bool(fallback.get("auto_build_derived_model"), default=False):
         return
-    derived_name = str(fallback.get("derived_model_name") or "catty-7b").strip()
-    base_model = str(fallback.get("base_model") or "qwen2.5:7b").strip()
+    derived_name = str(fallback.get("derived_model_name") or "").strip()
+    base_model = str(fallback.get("base_model") or "").strip()
     if not derived_name or not base_model:
+        print("derived model skipped: ai_fallback.derived_model_name/base_model not configured")
         return
     if not _model_available(executable, base_model, cwd=config_dir, env=env):
         print(f"derived model skipped: base {base_model} not pulled yet")

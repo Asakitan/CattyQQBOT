@@ -197,6 +197,47 @@ class ImageURLSecurityTests(unittest.IsolatedAsyncioTestCase):
             dns.assert_not_called()
         self.assertEqual(calls, [])
 
+    async def test_proxy_direct_opt_in_prepares_pinned_image(self):
+        calls = []
+        client_kwargs = []
+        handler = lambda request: calls.append(request) or httpx.Response(
+            200, content=IMAGE, headers={"content-type": "image/png"}
+        )
+        transport = httpx.MockTransport(handler)
+
+        def direct_client(**kwargs):
+            client_kwargs.append(kwargs)
+            return REAL_CLIENT(transport=transport, **kwargs)
+
+        settings = config(
+            catty_http_proxy="socks5h://127.0.0.1:11080",
+            catty_vision_image_download_direct=True,
+        )
+        with patch.object(client.socket, "getaddrinfo", side_effect=resolver_for({"cdn.example": ["93.184.216.34"]})), \
+                patch.object(client.httpx, "AsyncClient", side_effect=direct_client):
+            parts = await client.prepare_passthrough_image_parts(settings, ["https://cdn.example/a.png"])
+        self.assertEqual(calls[0].url.host, "93.184.216.34")
+        self.assertEqual(calls[0].headers["host"], "cdn.example")
+        self.assertEqual(calls[0].extensions["sni_hostname"], "cdn.example")
+        self.assertFalse(client_kwargs[0]["trust_env"])
+        self.assertNotIn("proxy", client_kwargs[0])
+        self.assertEqual(parts[0]["image_url"]["url"], "data:image/png;base64," + base64.b64encode(IMAGE).decode())
+
+    async def test_proxy_direct_opt_in_revalidates_redirect_dns(self):
+        calls = []
+        handler = lambda request: calls.append(request) or httpx.Response(
+            302, headers={"location": "https://other.example/private"}
+        )
+        settings = config(
+            catty_http_proxy="socks5h://127.0.0.1:11080",
+            catty_vision_image_download_direct=True,
+        )
+        mapping = {"cdn.example": ["93.184.216.34"], "other.example": ["1.1.1.1", "10.0.0.1"]}
+        with patch.object(client.socket, "getaddrinfo", side_effect=resolver_for(mapping)), http_patch(handler):
+            with self.assertRaises(ValueError):
+                await client.download_binary(settings, "https://cdn.example/a.png")
+        self.assertEqual(len(calls), 1)
+
     async def test_real_local_transport_uses_pinned_address_and_host(self):
         observed = []
         class Handler(http.server.BaseHTTPRequestHandler):
