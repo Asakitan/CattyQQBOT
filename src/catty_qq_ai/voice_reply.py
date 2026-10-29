@@ -617,11 +617,13 @@ async def synthesize(
     scope: str = "",
     voice: str = "",
     segments: list[dict[str, Any]] | None = None,
+    mood: str = "",
 ) -> dict[str, Any]:
     """用独立 worker 按指定音色合成一句话; 失败返回 ok=False, 调用方决定是否退回语音库。
 
     segments = [{"text": "...", "mood": "shy"}], 由模型按语气切段并标注情绪;
     每段用同音色对应情绪的参考音合成, 再拼接, 让一句话有起伏。
+    mood 只给整句一个情绪参考音, 用在没有分段的时候。
     """
     clean = " ".join(str(text or "").split())
     voice = voice or str(getattr(config, "catty_voice_default", "michelle") or "michelle")
@@ -674,6 +676,8 @@ async def synthesize(
         request_payload: dict[str, Any] = {"text": clean, "out": str(output)}
         if segments:
             request_payload["segments"] = segments
+        if mood:
+            request_payload["mood"] = mood
         request = json.dumps(request_payload, ensure_ascii=False) + "\n"
         try:
             assert worker.process.stdin is not None and worker.process.stdout is not None

@@ -246,7 +246,13 @@ def main() -> int:
                     parts.append(pcm)
                     parts.append(np.zeros(int(seg_rate * 0.09), dtype=np.float64))
             if not parts:
-                rate, pcm = _synth(text, reference, prompt_text)
+                whole_mood = str(request.get("mood") or "").strip().lower()
+                chosen = _mood_reference(whole_mood, mood_groups, work_dir, mood_refs) if whole_mood else None
+                rate, pcm = _synth(
+                    text,
+                    chosen[0] if chosen else reference,
+                    chosen[1] if chosen else prompt_text,
+                )
                 parts.append(pcm)
             chunks = [(rate, np.clip(np.concatenate(parts) * 32768, -32768, 32767).astype(np.int16))]
             if not chunks:

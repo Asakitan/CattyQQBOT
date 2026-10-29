@@ -6443,7 +6443,7 @@ async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
             text = clip.text if clip else ""
         if text:
             result = await voice.synthesize(
-                ctx.config, text, scope, voice=voice_name, segments=segments or None
+                ctx.config, text, scope, voice=voice_name, segments=segments or None, mood=mood
             )
             if result.get("ok"):
                 item = {"path": result["path"], "text": text, "mood": mood,

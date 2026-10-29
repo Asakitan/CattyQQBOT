@@ -4391,7 +4391,8 @@ def _spawn_deferred_file_delivery(
 
 
 def _voice_text_key(text: str) -> str:
-    return " ".join(str(text or "").split())
+    # 去掉标点和空白再比: "喜欢就喜欢" 与 "喜欢就喜欢。" 算同一句, 避免同一句发两遍语音。
+    return re.sub(r"[\W_]+", "", str(text or ""))
 
 
 async def _send_voice_message(
@@ -4489,6 +4490,21 @@ async def _voice_tool_with_deferred_delivery(
     """语音库秒回; 本地合成较慢时先回文字, 合成好再单独发语音。"""
     from dataclasses import replace as _dc_replace
 
+    # 工具参数在调用时就已知, 先把台词记进本轮已发声集合, 免得语音条再念一遍同一句。
+    if voiced_texts is not None:
+        try:
+            _arg_payload = json.loads(args_json or "{}")
+        except (TypeError, json.JSONDecodeError):
+            _arg_payload = {}
+        _arg_spoken = " ".join(str(_arg_payload.get("text") or "").split())
+        if not _arg_spoken and isinstance(_arg_payload.get("segments"), list):
+            _arg_spoken = " ".join(
+                str(segment.get("text") or "")
+                for segment in _arg_payload["segments"]
+                if isinstance(segment, dict)
+            )
+        if _arg_spoken.strip():
+            voiced_texts.add(_voice_text_key(_arg_spoken))
     detached_ctx = _dc_replace(tool_ctx, pending_voice_deliveries=[])
     task = asyncio.create_task(
         _execute_schema_gated_tool_call(name, args_json, detached_ctx, allowed_names=allowed_names)
@@ -19026,7 +19042,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         continue
                     try:
                         _result = await _voice_reply.synthesize(
-                            config, _spoken, _conversation_queue_key(event), voice=_voice_name
+                            config,
+                            _spoken,
+                            _conversation_queue_key(event),
+                            voice=_voice_name,
+                            mood="tease" if _prefer_spark else "soft",
                         )
                     except Exception as _voice_exc:  # noqa: BLE001
                         logger.warning(
