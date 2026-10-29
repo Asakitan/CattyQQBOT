@@ -1638,6 +1638,7 @@ _WS_TRANSPORT: Any = None
 _WS_TRANSPORT_KEY: tuple[Any, ...] | None = None
 _WS_CHAIN_CACHE: Any = None
 _WS_CHAIN_CACHE_KEY: tuple[Any, ...] | None = None
+_RESPONSES_GROUP_CACHE_TTL: Any = None
 
 
 def _get_runtime_config() -> Any:
@@ -2070,6 +2071,15 @@ def _build_cache_request_diagnostics(
         **session_context,
         **request_identity,
     }
+    responses_cache_ttl = _select_responses_cache_ttl(
+        base_url=base_url,
+        model=model,
+        request_route=request_route,
+        request_class=request_class,
+        request_identity=request_identity,
+    )
+    if responses_cache_ttl is not None:
+        diagnostics["responses_cache_ttl"] = responses_cache_ttl
     runtime_config = _get_runtime_config()
     if provider == "deepseek" and runtime_config is not None:
         diagnostics["cache_hit_billing_multiplier"] = float(
@@ -2892,6 +2902,47 @@ def _responses_support_explicit_cache(base_url: str, model: str) -> bool:
     return major > 5 or (major == 5 and minor >= 6)
 
 
+def _select_responses_cache_ttl(
+    *,
+    base_url: str,
+    model: str,
+    request_route: str,
+    request_class: str,
+    request_identity: dict[str, Any],
+) -> str | None:
+    scope = get_current_scope_key() or ""
+    turn_id = str(request_identity.get("logical_turn_id") or "")
+    if (
+        request_route != "main"
+        or request_class != "chat"
+        or not scope.startswith("group:")
+        or not scope[6:]
+        or not turn_id
+        or not urlparse(base_url).path.rstrip("/").endswith("/responses")
+        or not _responses_support_explicit_cache(base_url, model)
+    ):
+        return None
+    state = get_current_logical_turn()
+    same_turn = bool(
+        state
+        and state.get("scope_key") == scope
+        and state.get("logical_turn_id") == turn_id
+    )
+    if same_turn and state.get("responses_cache_ttl") in ("30m", "12h"):
+        return state["responses_cache_ttl"]
+    global _RESPONSES_GROUP_CACHE_TTL
+    if _RESPONSES_GROUP_CACHE_TTL is None:
+        from .prompt_cache import GroupCacheTTL
+
+        _RESPONSES_GROUP_CACHE_TTL = GroupCacheTTL()
+    ttl = _RESPONSES_GROUP_CACHE_TTL.select(scope, turn_id)
+    if same_turn:
+        state["responses_cache_ttl"] = ttl
+        _current_logical_turn_var.set(state)
+    _logger.info("responses cache policy scope=%s ttl=%s", scope, ttl)
+    return ttl
+
+
 def _mark_responses_history_cache(input_items: list[dict[str, Any]]) -> None:
     """缓存最近两个历史 user 端点，避开本轮动态上下文。
 
@@ -3010,13 +3061,17 @@ def _payload_to_responses_body(
         )
         marker_end = boundary_text.index(_CACHE_BOUNDARY_MARKER) + len(_CACHE_BOUNDARY_MARKER)
         system_texts.append(boundary_text[:marker_end])
+        breakpoint: dict[str, Any] = {"mode": "explicit"}
+        cache_ttl = (_get_current_cache_request_diagnostics() or {}).get("responses_cache_ttl")
+        if cache_ttl in ("30m", "12h"):
+            breakpoint["ttl"] = cache_ttl
         rest.append({
             "type": "message",
             "role": "developer",
             "content": [{
                 "type": "input_text",
                 "text": "\n\n".join(system_texts),
-                "prompt_cache_breakpoint": {"mode": "explicit"},
+                "prompt_cache_breakpoint": breakpoint,
             }],
         })
         system_texts.clear()
@@ -3415,6 +3470,16 @@ async def _stream_responses_ws_attempt(
     if not isinstance(input_items, list):
         input_items = []
     hashes = [item_hash(item) for item in input_items]
+    if hashes and input_items[0].get("role") == "developer":
+        parts = input_items[0].get("content") or []
+        if any(
+            isinstance(part, dict)
+            and (part.get("prompt_cache_breakpoint") or {}).get("ttl") == "12h"
+            for part in parts
+        ):
+            hashes[0] = _canonical_cache_diagnostic_sha256({
+                "item_hash": hashes[0], "stable_cache_ttl": "12h",
+            })
     cache = _get_ws_chain_cache(config)
 
     previous_id: str | None = None

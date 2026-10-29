@@ -31,6 +31,145 @@ def _load_module(name):
 
 responses_ws = _load_module("responses_ws")
 openai_client = _load_module("openai_client")
+prompt_cache = importlib.import_module(f"{_PACKAGE_NAME}.prompt_cache")
+
+
+class GroupCacheTTLTests(unittest.TestCase):
+    def test_three_distinct_turns_promote_and_idle_expires(self):
+        tracker = prompt_cache.GroupCacheTTL()
+        self.assertEqual(tracker.select("group:TARGET", "one", now=0), "30m")
+        self.assertEqual(tracker.select("group:TARGET", "two", now=100), "30m")
+        self.assertEqual(tracker.select("group:TARGET", "three", now=200), "12h")
+        self.assertEqual(tracker.select("group:TARGET", "cold", now=2000), "30m")
+
+    def test_retries_do_not_count_or_change_the_turn_decision(self):
+        tracker = prompt_cache.GroupCacheTTL()
+        for timestamp in range(5):
+            self.assertEqual(tracker.select("group:TARGET", "one", now=timestamp), "30m")
+        self.assertEqual(tracker.select("group:TARGET", "two", now=10), "30m")
+        self.assertEqual(tracker.select("group:TARGET", "three", now=20), "12h")
+        self.assertEqual(tracker.select("group:TARGET", "one", now=30), "30m")
+        self.assertEqual(tracker.select("group:TARGET", "three", now=40), "12h")
+
+    def test_groups_are_isolated_and_other_scopes_do_not_count(self):
+        tracker = prompt_cache.GroupCacheTTL()
+        for turn in ("one", "two", "three"):
+            tracker.select("group:TARGET", turn, now=0)
+            for scope in ("private:TARGET", "summary:group:TARGET", "group:", ""):
+                self.assertEqual(tracker.select(scope, turn, now=0), "30m")
+        self.assertEqual(tracker.select("group:OTHER", "one", now=0), "30m")
+        self.assertEqual(tracker.select("group:TARGET", "", now=0), "30m")
+        self.assertEqual(set(tracker._groups), {"group:TARGET", "group:OTHER"})
+
+    def test_window_excludes_expired_turns_and_bounds_state(self):
+        tracker = prompt_cache.GroupCacheTTL()
+        tracker.select("group:TARGET", "one", now=0)
+        tracker.select("group:TARGET", "two", now=1)
+        self.assertEqual(tracker.select("group:TARGET", "three", now=1800), "30m")
+        with patch.object(tracker, "MAX_GROUPS", 2), patch.object(tracker, "MAX_TURNS", 3):
+            for turn in range(10):
+                tracker.select("group:TARGET", str(turn), now=1801)
+            self.assertEqual(len(tracker._groups["group:TARGET"]), 3)
+            tracker.select("group:OTHER", "one", now=1802)
+            tracker.select("group:THIRD", "one", now=1803)
+            self.assertEqual(set(tracker._groups), {"group:OTHER", "group:THIRD"})
+
+
+class GroupCachePolicyTests(unittest.TestCase):
+    def setUp(self):
+        self.tracker = prompt_cache.GroupCacheTTL()
+        self.now = 0.0
+        select = self.tracker.select
+        for patcher in (
+            patch.object(openai_client, "_RESPONSES_GROUP_CACHE_TTL", self.tracker),
+            patch.object(self.tracker, "select", side_effect=lambda scope, turn: select(scope, turn, now=self.now)),
+            patch.object(openai_client, "_get_runtime_config", return_value=None),
+        ):
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        self.payload = {"model": "gpt-6.1-terra", "messages": [
+            {"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "old question"},
+            {"role": "assistant", "content": "old answer"},
+            {"role": "user", "content": "current question"},
+        ]}
+
+    def _diagnostics(self, *, route="main", request_class="chat", base_url="https://api.openai.com/v1/responses", model="gpt-6.1-terra"):
+        identity = openai_client._next_request_identity(
+            self.payload["messages"], None, request_route=route, request_class=request_class,
+        )
+        return openai_client._build_cache_request_diagnostics(
+            base_url=base_url, model=model, payload=self.payload,
+            request_route=route, request_class=request_class, request_identity=identity,
+        )
+
+    def _turn(self, turn, *, scope="group:TARGET", **kwargs):
+        scope_token = openai_client.set_current_scope_key(scope)
+        turn_token = openai_client.set_current_logical_turn(turn)
+        try:
+            return self._diagnostics(**kwargs)
+        finally:
+            openai_client.reset_current_logical_turn(turn_token)
+            openai_client.reset_current_scope_key(scope_token)
+
+    def test_request_diagnostics_count_only_distinct_group_turns(self):
+        for _ in range(4):
+            self.assertEqual(self._turn("one")["responses_cache_ttl"], "30m")
+        self.assertEqual(self._turn("two")["responses_cache_ttl"], "30m")
+        self.assertEqual(self._turn("three")["responses_cache_ttl"], "12h")
+        self.assertEqual(self._turn("one", scope="group:OTHER")["responses_cache_ttl"], "30m")
+
+    def test_private_auxiliary_legacy_and_gateway_requests_do_not_count(self):
+        cases = (
+            {"scope": "private:TARGET"},
+            {"scope": "summary:group:TARGET"},
+            {"route": "summary"},
+            {"request_class": "auxiliary"},
+            {"base_url": "https://api.openai.com/v1/chat/completions"},
+            {"base_url": "https://proxy.example/v1/responses"},
+            {"model": "gpt-5.5"},
+        )
+        for case in cases:
+            with self.subTest(case=case):
+                for turn in ("one", "two", "three"):
+                    self.assertNotIn("responses_cache_ttl", self._turn(turn, **case))
+        self.assertFalse(self.tracker._groups)
+
+    def test_retry_keeps_bound_ttl_even_after_activity_window_expires(self):
+        self._turn("one")
+        self._turn("two")
+        scope_token = openai_client.set_current_scope_key("group:TARGET")
+        turn_token = openai_client.set_current_logical_turn("three")
+        try:
+            self.assertEqual(self._diagnostics()["responses_cache_ttl"], "12h")
+            self.now = 1900
+            self.assertEqual(self._diagnostics()["responses_cache_ttl"], "12h")
+        finally:
+            openai_client.reset_current_logical_turn(turn_token)
+            openai_client.reset_current_scope_key(scope_token)
+        self.assertEqual(self._turn("cold")["responses_cache_ttl"], "30m")
+
+    def test_only_stable_prefix_gets_long_ttl_in_stream_and_nonstream_bodies(self):
+        self._turn("one")
+        self._turn("two")
+        diagnostics = self._turn("three")
+        original = copy.deepcopy(self.payload)
+        token = openai_client._current_cache_request_diagnostics_var.set(diagnostics)
+        try:
+            for streaming in (False, True):
+                body = openai_client._payload_to_responses_body(
+                    self.payload, stream=streaming, cache_stable_prefix=True,
+                )
+                marks = [part["prompt_cache_breakpoint"] for item in body["input"]
+                         for part in item.get("content", []) if "prompt_cache_breakpoint" in part]
+                self.assertEqual([mark.get("ttl", "30m") for mark in marks], ["12h", "30m"])
+                self.assertNotIn("prompt_cache_options", body)
+                self.assertNotIn("responses_cache_ttl", body)
+            legacy = openai_client._payload_to_responses_body(self.payload, stream=False)
+            self.assertNotIn("prompt_cache_breakpoint", json.dumps(legacy))
+        finally:
+            openai_client._current_cache_request_diagnostics_var.reset(token)
+        self.assertEqual(self.payload, original)
 
 
 class ResponseItemHashTests(unittest.TestCase):
@@ -290,6 +429,76 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
                 "type": "message", "role": "user",
                 "content": [{"type": "input_text", "text": f"current {turn}"}],
             }])
+
+    async def test_dynamic_ttl_switch_replays_once_then_resumes_incremental_input(self):
+        frames = []
+
+        class FakeTransport:
+            generation = 1
+
+            async def ensure_ready(self):
+                return self.generation
+
+            async def iter_events(self, body, *, stream_id, previous_response_id):
+                frames.append((copy.deepcopy(body), previous_response_id))
+                yield {"type": "response.completed", "response": {
+                    "id": f"resp_{len(frames)}",
+                    "output": [{"type": "message", "role": "assistant", "content": [
+                        {"type": "output_text", "text": "ok"},
+                    ]}],
+                }}
+
+        config = types.SimpleNamespace(
+            catty_openai_websocket_store=False,
+            catty_openai_websocket_include=[],
+            catty_openai_websocket_previous_response=True,
+            catty_openai_websocket_stream_id="catty",
+        )
+        tracker = prompt_cache.GroupCacheTTL()
+        select = tracker.select
+        timestamp = 0
+        messages = [{"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"}]
+        scope_token = openai_client.set_current_scope_key("group:TARGET")
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                cache = responses_ws.ResponseChainCache(Path(directory) / "cache.json", 60)
+                with (
+                    patch.object(openai_client, "_get_ws_transport", return_value=FakeTransport()),
+                    patch.object(openai_client, "_get_ws_chain_cache", return_value=cache),
+                    patch.object(openai_client, "_get_runtime_config", return_value=None),
+                    patch.object(openai_client, "_RESPONSES_GROUP_CACHE_TTL", tracker),
+                    patch.object(tracker, "select", side_effect=lambda scope, turn: select(scope, turn, now=timestamp)),
+                ):
+                    for turn, timestamp in enumerate((0, 100, 200, 300, 2200, 2300)):
+                        messages.append({"role": "user", "content": f"current {turn}"})
+                        payload = {"model": "gpt-6.1-terra", "messages": messages}
+                        turn_token = openai_client.set_current_logical_turn(f"turn-{turn}")
+                        try:
+                            identity = openai_client._next_request_identity(messages, None)
+                            diagnostics = openai_client._build_cache_request_diagnostics(
+                                base_url="https://api.openai.com/v1/responses", model="gpt-6.1-terra",
+                                payload=payload, request_identity=identity,
+                            )
+                            token = openai_client._current_cache_request_diagnostics_var.set(diagnostics)
+                            try:
+                                await openai_client._stream_responses_ws_attempt(
+                                    config=config, base_url="https://api.openai.com/v1/responses",
+                                    api_key="TOKEN", extra_headers={}, payload=payload,
+                                    timeout=5, proxy="", dash_stream_id=None, dash_mod=None, scope="group:TARGET",
+                                )
+                            finally:
+                                openai_client._current_cache_request_diagnostics_var.reset(token)
+                        finally:
+                            openai_client.reset_current_logical_turn(turn_token)
+                        messages.append({"role": "assistant", "content": "ok"})
+        finally:
+            openai_client.reset_current_scope_key(scope_token)
+        self.assertEqual([previous for _, previous in frames], [None, "resp_1", None, "resp_3", None, "resp_5"])
+        for index, ttl in ((0, "30m"), (2, "12h"), (4, "30m")):
+            self.assertEqual(frames[index][0]["input"][0]["content"][0]["prompt_cache_breakpoint"]["ttl"], ttl)
+        for index in (1, 3, 5):
+            self.assertEqual(len(frames[index][0]["input"]), 1)
+            self.assertEqual(frames[index][0]["input"][0]["role"], "user")
 
     async def test_explicit_cache_wire_and_previous_response_continuation(self):
         frames = []

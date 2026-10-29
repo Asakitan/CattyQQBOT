@@ -21,7 +21,37 @@ openai_client 在稳定前缀和历史端点使用 prompt_cache_breakpoint，不
 """
 from __future__ import annotations
 
+from collections import OrderedDict
+import time
 from typing import Any
+
+
+class GroupCacheTTL:
+    WINDOW_SECONDS = 1800.0
+    MIN_TURNS = 3
+    MAX_GROUPS = 1024
+    MAX_TURNS = 128
+
+    def __init__(self) -> None:
+        self._groups: OrderedDict[str, OrderedDict[str, tuple[float, str]]] = OrderedDict()
+
+    def select(self, scope: str, turn_id: str, *, now: float | None = None) -> str:
+        if not scope.startswith("group:") or not scope[6:] or not turn_id:
+            return "30m"
+        timestamp = time.monotonic() if now is None else now
+        turns = self._groups.setdefault(scope, OrderedDict())
+        self._groups.move_to_end(scope)
+        while turns and next(iter(turns.values()))[0] <= timestamp - self.WINDOW_SECONDS:
+            turns.popitem(last=False)
+        if turn_id in turns:
+            return turns[turn_id][1]
+        ttl = "12h" if len(turns) + 1 >= self.MIN_TURNS else "30m"
+        turns[turn_id] = (timestamp, ttl)
+        while len(turns) > self.MAX_TURNS:
+            turns.popitem(last=False)
+        while len(self._groups) > self.MAX_GROUPS:
+            self._groups.popitem(last=False)
+        return ttl
 
 
 def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> list[dict]:
