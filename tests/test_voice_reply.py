@@ -340,6 +340,22 @@ class WorkerTailTests(unittest.TestCase):
         self.assertAlmostEqual(out[0], 0.4)
         self.assertAlmostEqual(len(out), rate * 1.08, delta=2)
 
+    def test_mood_reference_joins_bank_clips(self) -> None:
+        worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
+        groups = worker._mood_groups(_BANK_DIR)
+        self.assertTrue(groups.get("shy"))
+        work = _ROOT / "tmp" / "test-voice-ref"
+        work.mkdir(parents=True, exist_ok=True)
+        ref = worker._mood_reference("shy", groups, work, {})
+        self.assertIsNotNone(ref)
+        path, text = ref
+        self.assertTrue(Path(path).is_file())
+        self.assertGreater(len(text), 0)
+        with wave.open(str(path), "rb") as handle:
+            seconds = handle.getnframes() / handle.getframerate()
+        self.assertGreater(seconds, 3.0)
+        self.assertIsNone(worker._mood_reference("nope", groups, work, {}))
+
 
 class ToolWiringTests(unittest.TestCase):
     @classmethod
@@ -382,6 +398,14 @@ class ToolWiringTests(unittest.TestCase):
         self.assertIn("只发语音", description)
         self.assertIn("先发出去", description)
         self.assertNotIn("自动发出", description)
+
+    def test_schema_offers_emotion_segments(self) -> None:
+        params = self.tools.ALL_TOOL_SCHEMAS["catty_voice_say"]["function"]["parameters"]
+        segments = params["properties"]["segments"]
+        self.assertEqual(segments["maxItems"], 4)
+        item = segments["items"]
+        self.assertEqual(item["required"], ["text", "emotion"])
+        self.assertIn("tsundere", item["properties"]["emotion"]["enum"])
 
     def test_executor_rejects_wrong_persona_and_repeat(self) -> None:
         catty = asyncio.run(

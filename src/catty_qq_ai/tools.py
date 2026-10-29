@@ -1410,7 +1410,9 @@ _VOICE_SAY_SCHEMA: dict[str, Any] = {
             "语音会先发出去，文字跟在后面或完全不写都行；"
             "回复里不要提语音、生成、等待或稍后发送，也不要说已经发了。"
             "同一会话有冷却和概率限制，偶尔一条就够；返回冷却提示时不要重试，直接用文字回复。"
-            "mood 决定语气；text 可留空，留空时用现成录音并返回实际台词。"
+            "mood 决定整句语气；想让一句话有起伏时用 segments 按语气切 1-4 段，每段单独给 emotion，"
+            "模型逐段换参考音合成，听起来会像真人换了口气。"
+            "text 可留空，留空时用现成录音并返回实际台词。"
             "音色按当前人格自动选择，不用指定。"
         ),
         "parameters": {
@@ -1424,6 +1426,27 @@ _VOICE_SAY_SCHEMA: dict[str, Any] = {
                 "text": {
                     "type": "string",
                     "description": "可选，要念的一句短话（≤40 字）；留空则用现成录音。",
+                },
+                "segments": {
+                    "type": "array",
+                    "maxItems": 4,
+                    "description": (
+                        "可选，把这句话按语气切成 1-4 段（总字数仍 ≤40）。"
+                        "哪一段该犹豫、哪一段该凶、哪一段软下来，由你判断后分别标注 emotion。"
+                        "填了 segments 就按段合成，text 可省略。"
+                    ),
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "text": {"type": "string", "description": "这一段要念的字。"},
+                            "emotion": {
+                                "type": "string",
+                                "enum": ["shy", "tease", "soft", "happy", "tsundere"],
+                                "description": "这一段的语气。",
+                            },
+                        },
+                        "required": ["text", "emotion"],
+                    },
                 },
             },
             "required": ["mood"],
@@ -1520,6 +1543,22 @@ _LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
         {
             "mood": {"type": "string", "enum": ["shy", "tease", "soft", "happy", "tsundere"], "description": "语气"},
             "text": {"type": "string", "description": "可选短句"},
+            "segments": {
+                "type": "array",
+                "description": "分段语气",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "text": {"type": "string", "description": "这段字"},
+                        "emotion": {
+                            "type": "string",
+                            "enum": ["shy", "tease", "soft", "happy", "tsundere"],
+                            "description": "本段语气",
+                        },
+                    },
+                    "required": ["text", "emotion"],
+                },
+            },
         },
         ["mood"],
     ),
@@ -6384,13 +6423,28 @@ async def _exec_voice_say(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
     voice_name = voice.voice_name_for(ctx.config, ctx.persona)
     item: dict[str, Any] | None = None
     requested = " ".join(str(args.get("text") or "").split())
+    segments: list[dict[str, str]] = []
+    raw_segments = args.get("segments")
+    if isinstance(raw_segments, list):
+        for entry in raw_segments[:4]:
+            if not isinstance(entry, dict):
+                continue
+            segment_text = " ".join(str(entry.get("text") or "").split())
+            if not segment_text:
+                continue
+            segments.append({
+                "text": segment_text,
+                "mood": voice.mood_of(entry.get("emotion") or entry.get("mood")),
+            })
     if voice.backend(ctx.config) == "worker":
-        text = requested
+        text = " ".join(segment["text"] for segment in segments) if segments else requested
         if not text:
             clip = voice.select_clip(voice.load_bank(ctx.config, ctx.persona), mood, scope)
             text = clip.text if clip else ""
         if text:
-            result = await voice.synthesize(ctx.config, text, scope, voice=voice_name)
+            result = await voice.synthesize(
+                ctx.config, text, scope, voice=voice_name, segments=segments or None
+            )
             if result.get("ok"):
                 item = {"path": result["path"], "text": text, "mood": mood,
                         "seconds": result.get("seconds", 0.0), "voice": voice_name}
@@ -6775,7 +6829,9 @@ _NON_CATTY_SCHEMA_DESCRIPTIONS: dict[str, tuple[str | None, str | None]] = {
         "这类表白试探时使用；这种问题可以只发语音、不写文字。普通闲聊、答疑和汇报不要用。"
         "语音会先发出去，文字跟在后面或不写都行；回复里不要提语音、生成、等待或稍后发送。"
         "同一会话有冷却和概率限制，被拒绝时直接用文字回复、不要重试。"
-        "mood 决定语气；text 可留空，留空时使用现成录音并返回实际台词；音色按人格自动选择。",
+        "mood 决定整句语气；想让一句话有起伏时用 segments 按语气切 1-4 段，逐段给 emotion，"
+        "哪段犹豫、哪段凶、哪段软下来由你判断。"
+        "text 可留空，留空时使用现成录音并返回实际台词；音色按人格自动选择。",
         "被表白试探时用语音回答；其余场景用文字",
     ),
     "catty_emoji": (

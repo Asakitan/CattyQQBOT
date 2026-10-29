@@ -6778,7 +6778,10 @@ def _build_user_content(
     base = incoming.history_content
     if incoming.image_urls and not any(part.get("type") == "image_url" for part in (image_parts or [])):
         if image_description:
-            base = f"{base}\n图片识别结果：\n{image_description}\n请基于图片识别结果和上下文自然回应。"
+            base = (
+                f"{base}\n图片识别结果（仅作背景，不要复述；除非用户明确问图里是什么）：\n"
+                f"{image_description}\n结合上下文回应对方的情绪或诉求，不要把画面内容当台词念一遍。"
+            )
         else:
             urls = "\n".join(f"- {url}" for url in incoming.image_urls)
             base = f"{base}\n图片下载地址：\n{urls}\n仅有地址时无法确认图片内容，请如实说明，不要猜。"

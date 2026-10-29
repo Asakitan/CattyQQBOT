@@ -10,12 +10,14 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import hashlib
 import json
 import os
 import random
 import sys
 import wave
 from pathlib import Path
+from typing import Any
 
 PROTOCOL = sys.stdout
 
@@ -63,6 +65,74 @@ def _write_wav(path: Path, pcm, rate: int) -> float:
         handle.setframerate(rate)
         handle.writeframes(data.tobytes())
     return len(data) / float(rate)
+
+
+def _read_pcm(path: Path) -> tuple[int, bytes]:
+    try:
+        with wave.open(str(path), "rb") as handle:
+            if handle.getnchannels() != 1 or handle.getsampwidth() != 2:
+                return 0, b""
+            return handle.getframerate(), handle.readframes(handle.getnframes())
+    except (OSError, wave.Error):
+        return 0, b""
+
+
+def _mood_groups(bank_dir: Path) -> dict[str, list[tuple[Path, str]]]:
+    manifest = bank_dir / "bank.json"
+    if not manifest.is_file():
+        return {}
+    try:
+        raw = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    groups: dict[str, list[tuple[Path, str]]] = {}
+    for entry in raw.get("entries") or []:
+        if not isinstance(entry, dict):
+            continue
+        mood = str(entry.get("mood") or "").strip().lower()
+        name = str(entry.get("file") or "").strip()
+        text = str(entry.get("text") or "").strip()
+        if not mood or not name or not text:
+            continue
+        path = bank_dir / name
+        if path.is_file():
+            groups.setdefault(mood, []).append((path, text))
+    return groups
+
+
+def _mood_reference(mood: str, groups, work_dir: Path, cache: dict):
+    """把同情绪的多条语音库片段拼成 3-6 秒参考音, 让这一段的语气跟着情绪走。"""
+    if mood in cache:
+        return cache[mood]
+    rate = None
+    frames: list[bytes] = []
+    texts: list[str] = []
+    for path, text in groups.get(mood, []):
+        clip_rate, data = _read_pcm(path)
+        if not data:
+            continue
+        if rate is None:
+            rate = clip_rate
+        if clip_rate != rate:
+            continue
+        frames.append(data)
+        texts.append(text)
+        if sum(len(frame) for frame in frames) / (2 * rate) >= 6.0:
+            break
+    if not frames:
+        cache[mood] = None
+        return None
+    key = hashlib.sha1("\n".join(texts).encode("utf-8")).hexdigest()[:10]
+    out = work_dir / f"_ref-{mood}-{key}.wav"
+    if not out.is_file():
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with wave.open(str(out), "wb") as handle:
+            handle.setnchannels(1)
+            handle.setsampwidth(2)
+            handle.setframerate(rate)
+            handle.writeframes(b"".join(frames))
+    cache[mood] = (out, " ".join(texts))
+    return cache[mood]
 
 
 def _load_pipeline(config: dict):
@@ -118,6 +188,12 @@ def main() -> int:
         return 3
     _emit({"ok": True, "ready": True})
 
+    work_dir = Path(str(config.get("work_dir") or reference.parent)).resolve()
+    work_dir.mkdir(parents=True, exist_ok=True)
+    bank_root = str(config.get("bank_dir") or "").strip()
+    mood_groups = _mood_groups(Path(bank_root).resolve()) if bank_root else {}
+    mood_refs: dict[str, Any] = {}
+
     for line in sys.stdin:
         line = line.strip()
         if not line:
@@ -129,18 +205,50 @@ def main() -> int:
             if not text or not str(output):
                 _emit({"ok": False, "error": "text/out 不能为空"})
                 continue
-            with contextlib.redirect_stdout(sys.stderr):
-                chunks = list(pipeline.run({
-                    "text": text, "text_lang": "all_zh", "ref_audio_path": str(reference),
-                    "prompt_text": prompt_text, "prompt_lang": "all_zh",
-                    "text_split_method": "cut0", "batch_size": 1,
-                    "seed": random.randint(1, 10**6), "top_k": 15, "top_p": 1.0,
-                    "temperature": 1.0, "repetition_penalty": 1.35,
-                    "fragment_interval": 0.0, "parallel_infer": False,
-                    "use_cuda_graph": False, "use_flash_attention": False,
-                }))
             import numpy as np
 
+            def _synth(part_text: str, ref_audio, ref_text: str):
+                with contextlib.redirect_stdout(sys.stderr):
+                    chunks = list(pipeline.run({
+                        "text": part_text, "text_lang": "all_zh", "ref_audio_path": str(ref_audio),
+                        "prompt_text": ref_text, "prompt_lang": "all_zh",
+                        "text_split_method": "cut0", "batch_size": 1,
+                        "seed": random.randint(1, 10**6), "top_k": 15, "top_p": 1.0,
+                        "temperature": 1.0, "repetition_penalty": 1.35,
+                        "fragment_interval": 0.0, "parallel_infer": False,
+                        "use_cuda_graph": False, "use_flash_attention": False,
+                    }))
+                if not chunks:
+                    raise ValueError("没有生成音频")
+                pcm = np.concatenate([np.asarray(item).reshape(-1) for _, item in chunks])
+                pcm = pcm.astype(np.float64) / 32768 if pcm.dtype.kind in "iu" else pcm.astype(np.float64)
+                return int(chunks[0][0]), pcm
+
+            parts = []
+            rate = 0
+            segments = request.get("segments")
+            if isinstance(segments, list):
+                for segment in segments[:4]:
+                    if not isinstance(segment, dict):
+                        continue
+                    segment_text = " ".join(str(segment.get("text") or "").split())
+                    if not segment_text:
+                        continue
+                    mood = str(segment.get("mood") or "").strip().lower()
+                    chosen = _mood_reference(mood, mood_groups, work_dir, mood_refs) if mood else None
+                    seg_rate, pcm = _synth(
+                        segment_text,
+                        chosen[0] if chosen else reference,
+                        chosen[1] if chosen else prompt_text,
+                    )
+                    if not parts:
+                        rate = seg_rate
+                    parts.append(pcm)
+                    parts.append(np.zeros(int(seg_rate * 0.09), dtype=np.float64))
+            if not parts:
+                rate, pcm = _synth(text, reference, prompt_text)
+                parts.append(pcm)
+            chunks = [(rate, np.clip(np.concatenate(parts) * 32768, -32768, 32767).astype(np.int16))]
             if not chunks:
                 raise ValueError("没有生成音频")
             rate = int(chunks[0][0])

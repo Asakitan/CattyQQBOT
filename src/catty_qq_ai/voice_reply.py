@@ -138,7 +138,9 @@ def cooldown_remaining(config: Any, scope: str) -> float:
         seconds = 10.0
     if seconds <= 0 or not scope:
         return 0.0
-    last = _COOLDOWNS.get(scope, 0.0)
+    last = _COOLDOWNS.get(scope)
+    if last is None:
+        return 0.0
     return max(last + seconds - time.monotonic(), 0.0)
 
 
@@ -473,6 +475,8 @@ def _worker_signature(config: Any, voice: str) -> str:
         profile.get("sovits_path", ""),
         profile.get("reference_audio", ""),
         profile.get("reference_text", ""),
+        str(bank_dir(config, voice=voice)),
+        str(outbox_dir(config)),
         str(int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2))),
     ]
     return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()[:16]
@@ -491,6 +495,8 @@ def _worker_config_path(config: Any, voice: str) -> Path:
         "hubert_dir": _worker_setting(config, "catty_voice_hubert_dir"),
         "reference_audio": profile.get("reference_audio", ""),
         "reference_text": profile.get("reference_text", ""),
+        "bank_dir": str(bank_dir(config, voice=voice)),
+        "work_dir": str(outbox_dir(config)),
         "threads": int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2)),
     }
     encoded = json.dumps(payload, ensure_ascii=False, indent=2)
@@ -605,8 +611,18 @@ async def _ensure_worker(config: Any, voice: str) -> _Worker:
     return worker
 
 
-async def synthesize(config: Any, text: str, scope: str = "", voice: str = "") -> dict[str, Any]:
-    """用独立 worker 按指定音色合成一句话; 失败返回 ok=False, 调用方决定是否退回语音库。"""
+async def synthesize(
+    config: Any,
+    text: str,
+    scope: str = "",
+    voice: str = "",
+    segments: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """用独立 worker 按指定音色合成一句话; 失败返回 ok=False, 调用方决定是否退回语音库。
+
+    segments = [{"text": "...", "mood": "shy"}], 由模型按语气切段并标注情绪;
+    每段用同音色对应情绪的参考音合成, 再拼接, 让一句话有起伏。
+    """
     clean = " ".join(str(text or "").split())
     voice = voice or str(getattr(config, "catty_voice_default", "michelle") or "michelle")
     try:
@@ -655,7 +671,10 @@ async def synthesize(config: Any, text: str, scope: str = "", voice: str = "") -
             worker = await _ensure_worker(config, voice)
         except Exception as exc:  # noqa: BLE001
             return {"ok": False, "error": f"语音进程启动失败: {type(exc).__name__}: {exc}", "code": "spawn_failed"}
-        request = json.dumps({"text": clean, "out": str(output)}, ensure_ascii=False) + "\n"
+        request_payload: dict[str, Any] = {"text": clean, "out": str(output)}
+        if segments:
+            request_payload["segments"] = segments
+        request = json.dumps(request_payload, ensure_ascii=False) + "\n"
         try:
             assert worker.process.stdin is not None and worker.process.stdout is not None
             worker.process.stdin.write(request.encode("utf-8"))

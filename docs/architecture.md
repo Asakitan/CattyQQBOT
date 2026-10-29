@@ -28,6 +28,10 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 发声冷却按 scope 共享：`group:<群号>` 的 10 秒冷却由同群所有人共用，私聊按 `private:<QQ>` 各自计算；`voice.cooldown_seconds` 默认 10 秒，主人跳过冷却与概率。语音条触发同样受该冷却约束，但本轮 `catty_voice_say` 已经发过语音时不再额外等待，剩余短气泡继续念完。
 
+语音情感：`catty_voice_say` 的 `segments`（1-4 段，每段 `text`+`emotion`）由模型自己判断一句话里哪里犹豫、哪里凶、哪里软；worker 用同音色对应情绪的语音库片段拼成 3-6 秒参考音（`_mood_reference`，写入 `data/voice_outbox/_ref-<mood>-<hash>.wav` 后复用），逐段调用 GPT-SoVITS 再以 90ms 间隔拼接，最后统一裁剪、补尾音和归一化。没有 `segments` 或该情绪缺片段时回退整句/默认参考音，`bank` 后端忽略分段。
+
+图片与表情：vision 描述以“仅作背景，不要复述；除非用户明确问图里是什么”注入；`build_image_literacy_prompt` 明确禁止用“这表情/这图/图中/看起来”开头、禁止念表情包配字，要求把图的情绪当作对方当下的态度直接接话。
+
 ## 本地语音候选（尚未接入运行时）
 
 `tmp/voice-training-20261028-01/` 独立 Python 3.11 环境和 GPT-SoVITS V2 副本负责双音色训练，权重、参考音与试听落在 `models/voice/{michelle,fadianji}/`。本地 CPU 生成成功；远端 CPU 推理和 QQ 语音发送未实现验证，不由 Bot 自动加载这些权重。
