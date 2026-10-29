@@ -2872,6 +2872,30 @@ def _responses_support_explicit_cache(base_url: str, model: str) -> bool:
     return major > 5 or (major == 5 and minor >= 6)
 
 
+def _mark_responses_history_cache(input_items: list[dict[str, Any]]) -> None:
+    """缓存最近两个历史 user 端点，避开本轮动态上下文。
+
+    当前 user 会合入 DYN_SYS，下一轮只保留原始发言；仅在本轮末尾隐式写入
+    无法复用其中的历史前缀。两个历史端点滚动交叠，另留一个显式写入给稳定
+    system 前缀、一个给隐式缓存。只添加缓存元数据，不改角色、正文或顺序。
+    """
+    users = [item for item in input_items if item.get("role") == "user"]
+    marked = 0
+    for item in reversed(users[:-1]):
+        parts = item.get("content")
+        if not isinstance(parts, list) or not parts:
+            continue
+        last = parts[-1]
+        if not isinstance(last, dict) or last.get("type") not in {
+            "input_text", "input_image", "input_file",
+        }:
+            continue
+        last["prompt_cache_breakpoint"] = {"mode": "explicit"}
+        marked += 1
+        if marked == 2:
+            break
+
+
 def _payload_to_responses_body(
     payload: dict[str, Any],
     *,
@@ -2937,6 +2961,7 @@ def _payload_to_responses_body(
             if item.get("role") == "system":
                 item["role"] = "developer"
             rest.append(item)
+        _mark_responses_history_cache(rest)
     else:
         for item in input_items:
             if item.get("role") == "system":

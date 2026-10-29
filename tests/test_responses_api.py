@@ -5,6 +5,7 @@ Responses response→chat-completions shape / 流式 SSE 事件拼装 (mock http
 """
 from pathlib import Path
 import asyncio
+import copy
 import importlib.util
 import importlib
 import json
@@ -136,6 +137,132 @@ class MessagesToResponsesInputTests(unittest.TestCase):
 
 
 class PayloadToResponsesBodyTests(unittest.TestCase):
+    def test_history_breakpoints_reuse_prefix_across_dynamic_turns(self) -> None:
+        cache_module = importlib.import_module("catty_qq_ai.prompt_cache")
+        ws_module = importlib.import_module("catty_qq_ai.responses_ws")
+        stable = {"role": "system", "content": "rules\n<<<CACHE_BOUNDARY:catty_stable_prefix>>>"}
+        history = []
+        for number in range(137):
+            history.extend([
+                {"role": "user", "content": f"historical question {number}"},
+                {"role": "assistant", "content": f"historical answer {number}"},
+            ])
+
+        def build(messages):
+            messages = copy.deepcopy(messages)
+            cache_module.strip_inline_dynamic_segments_from_history(messages)
+            cache_module.hoist_stable_private_trailing(messages)
+            cache_module.merge_consecutive_system_messages(messages)
+            cache_module.collapse_trailing_systems_into_last_user(messages)
+            return _client._payload_to_responses_body(
+                {"model": "gpt-6.1-terra", "messages": messages},
+                stream=True, cache_stable_prefix=True,
+            )
+
+        def explicit_prefixes(body):
+            prefixes = []
+            current = []
+            for item in body["input"]:
+                current.append(ws_module.item_hash(item))
+                if any("prompt_cache_breakpoint" in part for part in item.get("content", [])):
+                    prefixes.append(tuple(current))
+            return prefixes
+
+        first = build([stable, *history,
+            {"role": "user", "content": "first current question"},
+            {"role": "system", "content": "【当前发言者】\nTARGET\n\n【本轮状态】\nstate one"},
+        ])
+        second = build([stable, *history,
+            {"role": "user", "content": "first current question"},
+            {"role": "assistant", "content": "delivered answer"},
+            {"role": "user", "content": "second current question"},
+            {"role": "system", "content": "【当前发言者】\nTARGET\n\n【本轮状态】\nstate two"},
+        ])
+        shared = set(explicit_prefixes(first)) & set(explicit_prefixes(second))
+        # 静态段之后的 273 条历史也有可匹配写入端点；不是仅断言 sys0 相同。
+        self.assertEqual(max(map(len, shared)), len(history))
+        self.assertEqual(len(explicit_prefixes(first)), 3)
+        self.assertEqual(len(explicit_prefixes(second)), 3)
+        self.assertNotIn("prompt_cache_options", first)  # 保留默认隐式缓存。
+        self.assertIn("state one", first["input"][-1]["content"][0]["text"])
+        self.assertIn("state two", second["input"][-1]["content"][0]["text"])
+        self.assertNotEqual(first["input"][-1], second["input"][-1])
+
+    def test_history_breakpoints_preserve_multimodal_content_and_current_user(self) -> None:
+        messages = [
+            {"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "older question"},
+            {"role": "assistant", "content": "older answer"},
+            {"role": "user", "content": [
+                {"type": "text", "text": "historical image"},
+                {"type": "image_url", "image_url": {"url": "https://example.test/old.png", "detail": "low"}},
+            ]},
+            {"role": "assistant", "content": "image answer"},
+            {"role": "user", "content": [
+                {"type": "text", "text": "current image"},
+                {"type": "image_url", "image_url": {"url": "https://example.test/new.png"}},
+            ]},
+            {"role": "system", "content": "current dynamic state"},
+        ]
+        original = copy.deepcopy(messages)
+        body = _client._payload_to_responses_body(
+            {"model": "gpt-6.1-terra", "messages": messages},
+            stream=False, cache_stable_prefix=True,
+        )
+        users = [item for item in body["input"] if item.get("role") == "user"]
+        self.assertEqual(users[1]["content"][-1], {
+            "type": "input_image", "image_url": "https://example.test/old.png",
+            "detail": "low", "prompt_cache_breakpoint": {"mode": "explicit"},
+        })
+        self.assertNotIn("prompt_cache_breakpoint", users[1]["content"][0])
+        self.assertFalse(any("prompt_cache_breakpoint" in part for part in users[-1]["content"]))
+        self.assertNotIn("prompt_cache_breakpoint", body["input"][-1]["content"][0])
+        self.assertEqual(messages, original)
+
+    def test_history_breakpoints_do_not_change_legacy_endpoint_payload(self) -> None:
+        body = _client._payload_to_responses_body({
+            "model": "other-model", "messages": [
+                {"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+                {"role": "user", "content": "old"},
+                {"role": "assistant", "content": "answer"},
+                {"role": "user", "content": "new"},
+            ],
+        }, stream=False)
+        self.assertIn("instructions", body)
+        self.assertNotIn("prompt_cache_breakpoint", json.dumps(body))
+
+    def test_history_breakpoints_handle_short_or_missing_user_history(self) -> None:
+        for history in ([], [{"role": "assistant", "content": "greeting"}]):
+            with self.subTest(history=history):
+                body = _client._payload_to_responses_body({
+                    "model": "gpt-6.1-terra", "messages": [
+                        {"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+                        *history, {"role": "user", "content": "current"},
+                    ],
+                }, stream=False, cache_stable_prefix=True)
+                self.assertEqual(json.dumps(body).count('"prompt_cache_breakpoint"'), 1)
+
+    def test_history_breakpoints_leave_tool_roundtrip_unchanged(self) -> None:
+        messages = [
+            {"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "old"},
+            {"role": "assistant", "content": "answer"},
+            {"role": "user", "content": "current"},
+            {"role": "assistant", "content": None, "tool_calls": [{
+                "id": "call_1", "type": "function",
+                "function": {"name": "lookup", "arguments": '{"text":"TARGET"}'},
+            }]},
+            {"role": "tool", "tool_call_id": "call_1", "content": '{"result":"PAYLOAD"}'},
+            {"role": "system", "content": "current tool hint"},
+        ]
+        body = _client._payload_to_responses_body(
+            {"model": "gpt-6.1-terra", "messages": messages},
+            stream=False, cache_stable_prefix=True,
+        )
+        self.assertEqual(body["input"][4:6], _client._messages_to_responses_input(messages[4:6]))
+        self.assertNotIn("prompt_cache_breakpoint", body["input"][3]["content"][0])
+        self.assertNotIn("prompt_cache_breakpoint", body["input"][-1]["content"][0])
+
     def test_explicit_cache_splits_marker_in_merged_system_message(self) -> None:
         marker = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
         bodies = []

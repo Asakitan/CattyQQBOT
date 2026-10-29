@@ -1,4 +1,5 @@
 import asyncio
+import copy
 import importlib.util
 import json
 import sys
@@ -31,6 +32,48 @@ responses_ws = _load_module("responses_ws")
 openai_client = _load_module("openai_client")
 
 
+class ResponseItemHashTests(unittest.TestCase):
+    def test_only_supported_content_cache_metadata_is_ignored(self):
+        for item_type, field in (("message", "content"), ("function_call_output", "output")):
+            for part in (
+                {"type": "input_text", "text": "TARGET"},
+                {"type": "input_image", "image_url": "https://example.test/image.png", "detail": "low"},
+                {"type": "input_file", "file_id": "file_TARGET"},
+            ):
+                with self.subTest(item_type=item_type, part_type=part["type"]):
+                    plain = {"type": item_type, "role": "user", field: [part]}
+                    marked = copy.deepcopy(plain)
+                    marked[field][0]["prompt_cache_breakpoint"] = {"mode": "explicit"}
+                    original = copy.deepcopy(marked)
+                    self.assertEqual(responses_ws.item_hash(plain), responses_ws.item_hash(marked))
+                    self.assertEqual(marked, original)
+                    changed = copy.deepcopy(marked)
+                    changed[field][0][next(key for key in part if key != "type")] = "changed"
+                    self.assertNotEqual(responses_ws.item_hash(plain), responses_ws.item_hash(changed))
+                    changed = {**marked, "role": "developer"}
+                    self.assertNotEqual(responses_ws.item_hash(plain), responses_ws.item_hash(changed))
+
+    def test_tool_arguments_and_literal_cache_metadata_are_not_ignored(self):
+        for plain in (
+            {"type": "function_call", "name": "lookup", "call_id": "call_1", "arguments": "{}"},
+            {"type": "function_call_output", "call_id": "call_1", "output": "{}"},
+            {"type": "message", "role": "user", "content": [{"type": "input_text", "text": "{}"}]},
+        ):
+            with self.subTest(item_type=plain["type"]):
+                changed = copy.deepcopy(plain)
+                literal = '{"prompt_cache_breakpoint":"PAYLOAD"}'
+                if "arguments" in changed:
+                    changed["arguments"] = literal
+                elif "output" in changed:
+                    changed["output"] = literal
+                else:
+                    changed["content"][0]["text"] = literal
+                self.assertNotEqual(responses_ws.item_hash(plain), responses_ws.item_hash(changed))
+                self.assertNotEqual(responses_ws.item_hash(plain), responses_ws.item_hash({
+                    **plain, "prompt_cache_breakpoint": "not-a-content-block",
+                }))
+
+
 class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.frames: list[dict] = []
@@ -41,6 +84,60 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         self.addAsyncCleanup(server.close)
         port = server.sockets[0].getsockname()[1]
         return server, port
+
+    async def test_rolling_history_markers_keep_append_only_continuation(self):
+        frames = []
+
+        class FakeTransport:
+            generation = 1
+
+            async def ensure_ready(self):
+                return self.generation
+
+            async def iter_events(self, body, *, stream_id, previous_response_id):
+                frames.append((copy.deepcopy(body), previous_response_id))
+                yield {
+                    "type": "response.completed",
+                    "response": {
+                        "id": f"resp_{len(frames)}",
+                        "output": [{"type": "message", "role": "assistant", "content": [
+                            {"type": "output_text", "text": "ok"},
+                        ]}],
+                    },
+                }
+
+        config = types.SimpleNamespace(
+            catty_openai_websocket_store=False,
+            catty_openai_websocket_include=[],
+            catty_openai_websocket_previous_response=True,
+            catty_openai_websocket_stream_id="catty",
+        )
+        messages = [{"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"}]
+        for number in range(4):
+            messages.extend([
+                {"role": "user", "content": f"history {number}"},
+                {"role": "assistant", "content": "ok"},
+            ])
+        with tempfile.TemporaryDirectory() as directory:
+            cache = responses_ws.ResponseChainCache(Path(directory) / "cache.json", 60)
+            with patch.object(openai_client, "_get_ws_transport", return_value=FakeTransport()):
+                with patch.object(openai_client, "_get_ws_chain_cache", return_value=cache):
+                    for turn in range(4):
+                        messages.append({"role": "user", "content": f"current {turn}"})
+                        await openai_client._stream_responses_ws_attempt(
+                            config=config, base_url="https://api.openai.com/v1/responses",
+                            api_key="TOKEN", extra_headers={},
+                            payload={"model": "gpt-6.1-terra", "messages": messages},
+                            timeout=5, proxy="", dash_stream_id=None, dash_mod=None, scope="private:1",
+                        )
+                        messages.append({"role": "assistant", "content": "ok"})
+        self.assertIsNone(frames[0][1])
+        for turn in range(1, 4):
+            self.assertEqual(frames[turn][1], f"resp_{turn}")
+            self.assertEqual(frames[turn][0]["input"], [{
+                "type": "message", "role": "user",
+                "content": [{"type": "input_text", "text": f"current {turn}"}],
+            }])
 
     async def test_explicit_cache_wire_and_previous_response_continuation(self):
         frames = []

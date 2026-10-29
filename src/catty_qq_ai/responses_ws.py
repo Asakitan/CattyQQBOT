@@ -85,9 +85,28 @@ def responses_ws_url(base_url: str) -> str:
 
 
 def item_hash(item: Any) -> str:
-    """稳定 hash 一个 Responses input item，用于计算续聊 delta 前缀。"""
+    """续聊内容指纹：忽略输入块的缓存断点，保留其它所有字段。
+
+    滚动断点的增删不改变模型看到的消息，不能因此废弃 append-only 续聊。
+    仅处理协议内容块，不删除正文或工具参数中同名的业务数据。
+    """
+    normalized = item
+    if isinstance(item, dict):
+        item_type = item.get("type", "message")
+        field = "content" if item_type == "message" else "output"
+        parts = item.get(field)
+        if item_type in {"message", "function_call_output"} and isinstance(parts, list):
+            normalized_parts = [
+                {key: value for key, value in part.items() if key != "prompt_cache_breakpoint"}
+                if isinstance(part, dict)
+                and part.get("type") in {"input_text", "input_image", "input_file"}
+                and "prompt_cache_breakpoint" in part
+                else part
+                for part in parts
+            ]
+            normalized = {**item, field: normalized_parts}
     encoded = json.dumps(
-        item,
+        normalized,
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),

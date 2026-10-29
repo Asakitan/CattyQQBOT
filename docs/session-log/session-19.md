@@ -21,3 +21,12 @@
 
 - 两份源码与三份测试经 `push_zip` 部署至 `D:/CattyQQAI`，逐项 SHA-256 与本地交付包一致；原有四份文件备份在 `tmp/responses-cache-backup-20261029-a7f2/`。
 - 自动重载后机器人心跳正常、OneBot 8080 连接已建立；生产配置和聊天数据未修改。
+
+## 后续：66% 历史缓存命中排查
+
+- 生产 19:59–20:05 的单次请求反复读取 30800 token、写入约 1.4–1.6 万 token，命中 65–69%；31 个工具及前缀保持一致、无历史裁剪。请求间隔仅几十秒，不是 30 分钟过期，也不是累计面板口径。
+- 只读比较生产会话与实际 Responses 续聊指纹：276 条落盘历史中，前 274 条与上轮发送序列连续一致，分歧从最新 user 开始。现有全量隐式写入包含本轮动态上下文，下一轮不会保留这段，历史没有独立写入端点可复用。
+- 本地补最近两个历史 user 内容块的滚动显式断点，保留静态断点与隐式缓存；不裁内容、不改角色、不改变 TTL。WebSocket 内容指纹只忽略协议输入块上的缓存断点，正文、图片、角色和工具参数仍严格比较。
+- 本地一次性运行 `test_responses_api` 33 项、`test_responses_ws` 13 项、`test_prompt_cache_deepseek` 6 项，共 52 项通过；四个代码/测试文件语法和编辑器诊断通过。新增测试覆盖 137 轮历史与动态尾部的共享写入端点、图片不变、当前 user 不标记、工具回执保持、旧端点及四轮 WebSocket 续传。
+- 历史缓存增量的两份源码及两份测试经 `push_zip` 部署至 `D:/CattyQQAI`，四文件均解压成功；基础缓存修复此前归档于 `d64a0cf`。本轮未发送额外生产模型请求，也未重复交付哈希核验；实际线上命中提升幅度尚未验证。
+- 参考官方 [Prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching) 与 [Responses create](https://developers.openai.com/api/reference/resources/responses/methods/create)：内容块的显式断点不会关闭隐式缓存；不在不支持该字段的 assistant `output_text` 上添加断点。
