@@ -1,11 +1,10 @@
 # Catty QQ AI
 
-> 一只接进 QQ 的「笨猫」——基于 NoneBot2 + OneBot v11 的 QQ 聊天 AI 插件，
-> 后端走任何 OpenAI 兼容的 `/v1/chat/completions` 服务。
->
-> **v1.0.0 整版发布** ฅฅ 群聊主动插话、长期记忆 + 群友画像、识图、本地表情、
-> 联网搜索、特别关心、主动冒泡、本地小模型 reply gate、闲时 LoRA 自训、
-> NapCat 一键打包、热重载守护——一锅炖好了喵～
+> 主人好呀，我是住在 QQ 里的猫猫小女仆喵 ฅฅ
+> 平时陪大家聊天、记住熟人和群里的趣事，也会看图、发语音、查资料、画画和做文件。
+> 想换个伙伴一起玩也可以：除了笨猫和机机，主人还能给我添加自己喜欢的人格喵～
+
+Catty 基于 NoneBot2 + OneBot v11，接入支持 Chat Completions、Responses 或兼容接口的模型服务。各项能力都可以按需要配置，陪聊和干活一起来喵。
 
 ---
 
@@ -14,17 +13,19 @@
 - [架构](#架构)
 - [快速开始](#快速开始)
 - [接入 QQ（NapCat）](#接入-qqnapcat)
-- [对话与触发](#对话与触发)
-- [记忆 / 群友画像 / 称呼](#记忆--群友画像--称呼)
-- [识图 / 本地表情 / 联网](#识图--本地表情--联网)
-- [特别关心 & 主动冒泡](#特别关心--主动冒泡)
-- [Prompt & 会话缓存](#prompt--会话缓存)
-- [本地 reply gate & 训练（可选）](#本地-reply-gate--训练可选)
-- [热重载与一键启动](#热重载与一键启动)
+- [人格与对话](#人格与对话)
+- [记忆与会话](#记忆与会话)
+- [图片、表情与语音](#图片表情与语音)
+- [工具、联网与技能](#工具联网与技能)
+- [主动冒泡](#主动冒泡)
+- [模型线路与缓存](#模型线路与缓存)
+- [可选能力](#可选能力)
+- [运行与热重载](#运行与热重载)
+- [离线回归测试](#离线回归测试)
 - [打包 exe](#打包-exe)
 - [主人专属命令](#主人专属命令)
 - [常用配置](#常用配置)
-- [资料来源](#资料来源)
+- [项目文档](#项目文档)
 
 ---
 
@@ -32,18 +33,18 @@
 
 | 组件 | 作用 |
 | --- | --- |
-| **NapCatQQ** | QQ 协议端，登录机器人小号，提供 OneBot v11 事件 / API |
-| **NoneBot2** | Bot 框架，反向 WebSocket 接 NapCat，加载 `catty_qq_ai` 插件 |
-| **catty_qq_ai** | 本项目主体：人格、记忆、识图、表情、训练、命令、热重载等全部在这里 |
-| **OpenAI-compatible API** | 任何兼容 `/v1/chat/completions` 的服务（OpenAI / OpenRouter / vLLM / Ollama OpenAI 端等） |
+| **NapCatQQ** | 帮猫猫登录 QQ，用 OneBot v11 收发消息 |
+| **NoneBot2** | 接收 NapCat 的消息，加载 `catty_qq_ai` 插件 |
+| **catty_qq_ai** | 管理人格、记忆、图片、语音、工具和会话 |
+| **模型服务** | 负责聊天和其他 AI 任务；主回复、识图与后台任务可以分开配置 |
 
-> 提醒：QQ 第三方协议端有账号风控和平台条款风险，先用小号测试，别拿来刷屏 / 群发广告。
+> 初次接入可以先用 QQ 小号试一试，确认消息收发正常再邀请猫猫进群喵。
 
 ---
 
 ## 快速开始
 
-需要 **Python 3.10+**。
+先准备 **Python 3.10+**，在项目目录里创建环境、安装依赖喵：
 
 ```powershell
 python -m venv .venv
@@ -52,54 +53,47 @@ python -m pip install -U pip
 pip install -e .
 ```
 
-复制示例配置并填好 API：
+接着复制一份示例配置，已有配置会保留：
 
 ```powershell
-copy config.example.json config.json
+if (-not (Test-Path .\config.json)) { Copy-Item .\config.example.json .\config.json }
 ```
 
-然后用任意编辑器打开 `config.json` 填好。
-
-至少填好 `ai.base_url` / `ai.api_key` / `ai.model`：
+打开 `config.json`，填好 `ai.base_url`、`ai.api_key` 和 `ai.model`。让猫猫自动启动 NapCat 的话，也填上 `qq.account`；主人专属命令使用 `owner_forward.owner_qq` 识别主人。下面是模型配置的写法：
 
 ```json
 {
   "ai": {
-    "base_url": "https://api.openai.com/v1",
-    "api_key": "<API Key>",
-    "model": "gpt-4o-mini"
+    "base_url": "https://HOST/v1",
+    "api_key": "TOKEN",
+    "model": "TARGET"
   }
 }
 ```
 
-接本地 / 第三方 OpenAI 兼容服务时把 `base_url` 改成它的 `/v1` 根地址即可，例如：
+把 `HOST`、`TOKEN`、`TARGET` 换成自己的服务地址、密钥和模型名；使用 Responses 时可以填写 `/v1/responses` 地址喵。
 
-```json
-{
-  "ai": {
-    "base_url": "http://127.0.0.1:8000/v1",
-    "api_key": "local-or-empty",
-    "model": "qwen2.5-7b-instruct"
-  }
-}
-```
-
-启动 NoneBot：
+准备好以后，启动守护进程：
 
 ```powershell
-python bot.py
+.\.venv\Scripts\python.exe .\scripts\catty_hot_reload.py
 ```
 
-默认监听 `127.0.0.1:8080`。
+猫猫默认在 `127.0.0.1:8080` 等 NapCat 连过来。守护进程会启动 `bot.py`，照看热重载、崩溃重启和心跳；调试时也可以直接运行 `python bot.py`。
 
-> 服务器一键部署：跑 `install_python_env.bat` 自动找 / 装 Python 3.11、建 `.venv`、装依赖，
-> 之后双击 `start_catty.bat` 就能起。安装脚本成功后会自删；以后只用 `start_catty.bat`。
+> Windows 下也可以运行 `install_python_env.bat`，让它创建环境、安装依赖并生成 `start_catty.bat`，以后双击启动就好喵。安装脚本会覆盖同名启动文件，成功后会删除自身。
 
 ---
 
 ## 接入 QQ（NapCat）
 
-项目自带 NapCat Windows 一键包：`tools/napcat-onekey`。
+先给猫猫准备一套 NapCat。可以使用自己安装的版本，也可以运行下面的脚本下载 Windows 一键包：
+
+```powershell
+.\scripts\update_napcat_onekey.ps1
+```
+
+脚本会重新创建 `tools/napcat-onekey`，已有安装请先备份喵。
 
 1. 首次运行 `tools/napcat-onekey/NapCatInstaller.exe` 初始化。
 2. 登录准备当机器人的 QQ 号。
@@ -123,262 +117,108 @@ python bot.py
 }
 ```
 
-`auto_start_napcat=true` 时，Catty 启动会自动拉起 NapCat；`napcat_args` 留空且填了 `qq.account`，
-会把 QQ 号作为启动参数自动传给 NapCat。手动开 NapCat 把 `auto_start_napcat` 改成 `false` 即可。
-
-更新 NapCat 一键包：
-
-```powershell
-.\scripts\update_napcat_onekey.ps1
-```
+`auto_start_napcat=true` 时，猫猫启动时会帮忙拉起 NapCat；填了 `qq.account` 且 `napcat_args` 留空时，会自动带上 QQ 号。想自己启动 NapCat，就把 `auto_start_napcat` 改成 `false`。
 
 ---
 
-## 对话与触发
+## 人格与对话
 
-**私聊**：默认直接回复。
+现在家里住着 `catty`（笨猫）和 `fadianji`（机机），示例配置默认叫机机出来聊天。每个会话可以选自己喜欢的人格，也可以给群设置专属人格喵。
 
-**群聊**：以下情况会让笨猫开口——
-
-- `@机器人`、回复机器人消息、拍了拍机器人
-- 以 `chat.trigger_prefixes`（默认 `ai` / `AI` / `猫猫`）开头
-- 句子里出现 `chat.directed_keywords`（默认 `你` / `猫猫` / `猫娘` / `看看` 等）
-  → 交给主 AI 判断主语 / 呼唤对象 / 是否需要回应
-- **批量主动观察**：积满 `filter.group_batch_messages` 条或等到 `filter.group_batch_seconds` 秒后，
-  把最近一批普通消息丢给 AI 自由判断要不要插话；不插话时会输出内部 `NO_REPLY` 标记，不刷屏
-
-软触发回复倾向按场景给概率：
-
-| 场景 | 概率提示 |
-| --- | --- |
-| 明显喊名（"猫猫你看看"） | `chat.direct_address_reply_probability`（默认 0.9） |
-| 普通软触发 | `chat.soft_directed_reply_probability`（默认 0.65） |
-| 当群语料 / 画像足够（`memory.reply_boost_*`） | 自动加成，上限 `reply_boost_max_probability` |
-
-**复读模式**：群友短时间内连发同一条 QQ 表情 / 图 / 文字，到第 `expression_repeat_threshold` 条时
-笨猫直接复读，不调 AI；机器人自己的消息不计入。
-
-**人工分段**：AI 长回复会按本地概率追加分段提示，由模型按语义自己决定拆几段 / 发几条；
-分段间等待 `chat.reply_human_split_delay_seconds`，最多 `reply_human_split_max_chunks` 条。
-
-清空当前会话（**仅 Bot owner 可发**，群里其他人发同样的话不响应）：
-
-```text
-ai reset
-ai 清空上下文
-```
+- **私聊**：直接发消息就能聊。**群聊**：叫名字、@ 或引用机器人，就能把对应人格叫出来；接上话以后，相关的后续消息也能继续聊。
+- 想找机机时，叫“机机”“小机”或“发电机”都可以。遇到意思不太明确的呼唤和续聊，猫猫会结合上下文判断要不要接话。
+- 群友一起复读时，猫猫也会跟着玩；聊天短句可以自然分成几条气泡，技术解释和长文则保留排版。
+- 主人可以导入 JSON 人格，或描述设定让模型帮忙创建。保存后再用 `/人格 <名字>` 切换；`/人格` 可以查看当前选择。详细操作见 [人格定义](docs/persona-json.md) 和 [管理命令](ADMIN_COMMANDS.md)。
 
 ---
 
-## 记忆 / 群友画像 / 称呼
+## 记忆与会话
 
-笨猫会自动记下见过的群友昵称、最后出现时间，并按 `memory.summary_interval_minutes`
-定时把待压缩语料压成长期摘要 + 群友画像。
+猫猫会整理群摘要、群友画像和熟悉的称呼，聊天时再把相关记忆找出来。人物资料可以跨人格共享，场景状态和各自的近期对话则按会话、人格分别保存喵。
 
-存储拆分（重启不丢）：
+- 会话记录默认放在 `sessions/`；长期记忆分布在 `memory.json`、`memory_groups/`、`memory_users/` 等目录，重启后也能接着用。
+- 值得记住的事件、计划和约定会进入显著记忆或目的账本，给之后的聊天和主动冒泡提供线索。
+- 称呼、特别关心、摘要周期和数据备份可以在 `memory` 段调整；主人也能用 [管理命令](ADMIN_COMMANDS.md) 查看和整理资料。
 
-```
-memory.json                  ← 索引
-memory_groups/group_<群号>.json
-memory_users/user_<QQ>.json
-```
-
-每条待压缩语料带 `content_temperature`——新内容温度高、随时间自然降温；低温的旧梗 / 脏话 /
-攻击性称呼只作背景，摘要和主动冒泡都被提醒不要重新主动续聊。
-
-主回复线程额外注入一段「笨猫人格记忆」固定身份和口吻，避免模型客服腔 / 报告腔 / 第三人称谈笨猫。
-
-**称呼配置**（优先级：群内专属 > 全局 > 群默认 > 「群友」）：
-
-```json
-{
-  "memory": {
-    "user_titles":        { "<用户QQ>": "群主" },
-    "group_titles":       { "<群号>": "社员" },
-    "group_user_titles":  { "<群号>": { "<用户QQ>": "群主" } }
-  }
-}
-```
-
-**游戏主题群**（注入本地游戏背景，无需联网）：
-
-```json
-{
-  "game_context": {
-    "star_resonance_group_ids": [],
-    "strinova_group_ids":       []
-  }
-}
-```
-
-目前内置《星痕共鸣》/ Blue Protocol: Star Resonance 和《卡拉彼丘》/ Strinova 的轻量本地语料，
-需要赛季 / 强度榜 / 兑换码这类最新信息时仍然建议触发联网搜索。
-
-查看当前 scope 的记忆（**仅 Bot owner 可发**，避免内部状态被群友刷出来）：
-
-```text
-ai 查看记忆
-ai 查看人物信息
-```
-
-清空当前 scope 的待压缩缓存（**仅 Bot owner 可发**，保留长期摘要 / 画像）：
-
-```text
-ai 清空缓存
-ai 清空记忆缓存
-```
+`config.json` 和运行数据里可能有密钥或私人聊天，留在自己的机器上就好喵。
 
 ---
 
-## 识图 / 本地表情 / 联网
+## 图片、表情与语音
 
-**识图（vision）**：私聊发图直接触发；群里带 @、前缀或指向词时先走 `vision` 模型，
-识别成文字 / 兴趣度 / 表情含义后再交给主模型。GIF / 动态 WebP 会自动取首帧转 PNG。
-`vision` 未单独配置时复用 `ai` 主模型；此时 `vision` 与主 AI 同 `base_url` + 同 `model`，
-图片会作为 `image_url` block 直接透传进主请求（当前消息与引用旧图都算），不再先跑一次同模型识图。
-配置了 `ai.http_proxy` 时，设置 `vision.image_download_direct=true` 可让图片资源直连下载；
-主模型请求仍走代理，图片地址继续逐跳校验公网 IP 并固定连接地址。
+- **看图**：当前图片、引用的图片和近期聊天里的图片都可以结合上下文来看；`vision.context_*` 控制回看的范围。同一识图和主回复线路可以把图片直接交给主模型喵。
+- **表情与画画**：猫猫会根据聊天气氛挑表情，也能按配置搜索图片、生成或加工图片。搜图时会保留来源并检查候选内容，选好后再安排发送。
+- **语音回复**：`voice` 可以使用现成语音库 `bank`，也可以接 TTS `worker` 念出新台词；不同人格能使用不同音色。主人说想听语音，或者碰上自动语音、语音气泡时，猫猫就有机会开口啦。
+- **听语音**：`voice_stt` 用 faster-whisper 和 PyAV 转写可解码的语音，再把文字带进对话；原始 SILK 等暂时无法解码的音频会跳过。
 
-**本地表情库**：默认把本地表情候选交给 AI 自己挑；AI 没选时按 `emoji.reply_probability` 自动补一张。
-
-```
-emojis/                ← 默认表情
-emojis/downloaded/     ← 高兴趣图片自动入库
-emojis/manifest.json   ← 含义 + 标签 + 来源记录
-```
-
-未登记的图会自动补入 manifest；AI 点名了本地没有的表情时，会先尝试收养下载目录里的匹配图，
-再通过图片搜索下载到 `emoji.download_dir`，并由 `vision` 生成 `meaning/tags` 后写回 manifest。
-
-**联网搜索**：群友明确说"联网搜索 / 上网查 / 搜一下 / 查一下"才触发；优先用主 AI 自带联网能力，
-主 AI 不支持就如实告知，不编造。普通用户 10 分钟 1 次；配了专属称呼的用户不受冷却限制。
-
-**海龟汤**：群里有人喊"海龟汤"会直接开题；每群 5 分钟 1 次，冷却内用猫系语气提醒。
+TTS worker 和语音转写需要另外准备运行环境与模型；音色、参考音和路径都在 `voice` / `voice_stt` 段配置，详见 [示例配置](config.example.json) 和 [语音说明](docs/voice-candidates.md)。
 
 ---
 
-## 特别关心 & 主动冒泡
+## 工具、联网与技能
 
-**特别关心**（`memory.special_care_user_ids` / `group_special_care_user_ids`）：
-命中用户群聊发言时不等批量 filter，直接交主 AI 判断是否自然跟上去；
-若 AI 判断不合适会输出不回复标记。笨猫接话后会跟踪窗口内对方有没有理她，
-没被理时把一点「败犬感 / 酸酸失落」交给主 AI 自由表现（**不硬编码句子**）。
+除了聊天，猫猫还会按当前开放的工具查网页、翻最近的消息、找图片、画图和做文件。图片、文件或语音做好后，有时会在文字回复之后送到当前会话喵。
 
-**主动冒泡**（`proactive`）：每天每群最多 `max_daily_per_group`（默认 5）次，
-实际次数随群互动分和当天发言量浮动。冒泡会参考群摘要 / 群友画像 / 近期聊天 / 上次接话情况，
-方向从游戏话题、现实生活感、或当前群适合的话题里挑。
-冒泡没人理时会自动降低该群互动分。
+- **联网**：`web_search` 负责搜索，`auto_fetch` 可以在需要时补充网页正文和配图；自动补全有独立的缓存和预算设置。
+- **技能**：遇到任务时，猫猫可以按需搜索、学习和使用技能，公共知识会保存在 `data/skills/`，以后也能接着用。
+- **文件与代码**：`catty_write_file` 保存文本文件，`catty_python_run` 在独立工作目录运行 Python，并把成功生成的文件交回来。Python 工作区使用用户态隔离，详细边界见 [Python 沙箱](docs/code-sandbox.md)。
+
+工具会根据配置、人格和权限开放；想看看具体用法，可以翻 [工具合同](docs/tool-contracts.md) 和 [技能运行时](docs/skill-runtime.md)。
 
 ---
 
-## Prompt & 会话缓存
+## 主动冒泡
 
-**会话缓存**：每个群 / 私聊一份独立窗口，key 形如 `group:<群号>` / `private:<QQ>`。
+群里热闹的时候，猫猫和机机也会挑合适的时机冒个泡，聊聊大家最近在说什么。每天的机会按群安排，具体何时开口会参考活跃时段和近期消息喵。
 
-- 持久化到 `sessions/` 目录，重启自动恢复
-- 内存 LRU，`session_cache.max_sessions` 只限制驻留内存的会话；持久化开启时，冷会话保留盘上文件，按需懒加载
-- 完成一轮对话后立即原子写盘；dirty 标记 + 后台节流 `session_cache.save_debounce_seconds` 和关停 flush 作为兜底
-
-**Prompt 优化**：system prompt 按"稳定性"排——人格 / 流水线 / 自检放最前面，
-按事件变化的（图片、强制回复、软触发、消息上下文）放后面，配合 OpenAI 系
-prompt cache 前缀命中可让输入 token 走 0.1× 价。
-
-历史攒到 12 条（≈6 轮）后自动**跳过教学型例句**（节省约 30~40% system token），
-冷会话依旧挂全套例句保证起手风格。
-
-Bot owner（`qq.owner_qq` 配置的 QQ 号）在**私聊里**才能列会话（群里发同样的话不响应）：
-
-```text
-ai 会话列表
-ai 列会话
-/sessions
-```
+机机的开关是 `fdj_proactive.enabled`，笨猫的开关是 `proactive.enabled`；共享调度的时间和节奏在 `fdj_proactive` 里调整。详细规则见 [主动调度](docs/fadianji-proactive.md)。
 
 ---
 
-## 本地 reply gate & 训练（可选）
+## 模型线路与缓存
 
-**`local_critic`** 默认关闭，回复取舍主要交给主 AI。需要时可接 OpenAI 兼容的本地小模型
-（例如 Ollama 的 `qwen2.5:1.5b`），默认 `mode=reply_gate_only`，只做入口粗筛。
+想把不同工作交给不同模型的话，可以在配置里分工喵：`ai` 负责主回复，`vision` 负责识图，`filter` / `audit_ai` 负责判断和审核，`ai_fallback` 可以处理后台总结与会话压缩。人格生成、语气进化和技能提炼会依次选择可用的 `audit_ai`、`ai_fallback` 或主 `ai`。
 
-- @、回复、前缀、私聊、明显喊名属于硬触发，直接进主 AI，不等本地模型
-- 实时 gate 通过 `think=false` / 独立短 token / 独立短 timeout 控制在 1~5 秒
-- 超时 / 坏 JSON 自动退回硬判断 fallback
-- `warmup_enabled=true` 时启动通过 Ollama 原生 `/api/generate` 空 prompt 预热，
-  按 `warmup_interval_seconds` 刷新 `warmup_keep_alive`，减少冷启动
-
-**`local_training`**：可把 reply gate 样本和主模型上下文 / 回复同时收集成数据集。
-- 走 `audit_ai`（审核 / 判断 / 训练成果审批）做成果验收，审核模型只输出
-  `allow_apply / allow_merge / next_suggestions` JSON，不直接执行命令
-- `auto_fill_training_commands=true` 时，空 train 命令会落到项目内安全 wrapper
-  `scripts/local_lora_train.py`，wrapper 只跑配置里指定的 `backend_command`，不让主 AI 跑任意 shell
-- 闲时判定：默认按本地时间 + 安静时间窗，或开 `mc_idle_check_enabled` 走
-  **MC Server List Ping**——MC 有人在线绝不训，无人持续 `mc_idle_min_minutes` 才允许启训
-- MC 不可达按"不训"处理，保护游戏不被误抢资源
-
-**项目内 Ollama**：`ollama.enabled=true` 时启动会自动部署便携 Ollama 到 `tools/ollama`，
-模型放到 `models/ollama`（**两者必须在项目内**，避免把模型装出项目）。
-手动同样部署：
-
-```powershell
-.\scripts\start_ollama_local.ps1
-```
-
-加 `-SkipPull` 跳过下载默认模型。
-
-**训练 MCP server**：`scripts/catty_training_mcp_server.py` 可作为 stdio MCP server，
-提供 `training_status` 和 `training_config_summary` 两个工具供外部 MCP 客户端查询，
-不会返回 API key。
-
-**训练进度小窗**：`local_training.progress_window_enabled=true` 时启动
-`scripts/catty_training_dashboard.py` 的 Tk 小窗，可视化样本数 / 最近训练状态 / 审批结果 /
-`next_suggestions` / 训练日志，还能用内置人格测试提示测本地小模型，
-打分写入 `model_test_scores_path`。窗口不执行训练命令，也不展示 API key。
+Responses 支持 WebSocket 连接和 `previous_response_id` 增量续聊，也可以按配置回退 HTTP。符合条件的官方 Responses 主请求还会根据会话活跃度选择缓存期限；设置项在 `ai.websocket_*`，细节见 [架构说明](docs/architecture.md)。
 
 ---
 
-## 热重载与一键启动
+## 可选能力
 
-`start_catty.bat` 默认先起 `scripts/catty_hot_reload.py` 守护，再由守护进程拉起 `bot.py`。
+- **本地语言处理**：`nlu` 可以接 jieba、text2vec 和 HanLP。示例默认关闭；需要时用 `pip install -e ".[nlu]"` 安装依赖，再准备对应模型。
+- **本地模型与训练**：项目保留 Ollama 和训练相关配置，示例里的 `ollama.enabled`、`local_training.enabled` 默认关闭，需要时再按环境启用。
+- **源码自修复**：打开 `self_repair.enabled` 后，可以根据日志生成源码候选并跑固定验证；`auto_apply` 控制是否交给守护进程应用，健康检查失败时会回滚。示例默认关闭，候选验证会在本机执行 Python，开启前可以先看看 [自修复说明](docs/self-repair.md)。
+
+---
+
+## 运行与热重载
+
+日常运行时，`scripts/catty_hot_reload.py` 会先照看好环境，再拉起 `bot.py`。安装脚本生成的 `start_catty.bat` 也是走这条线路喵。
 
 | 文件 | 行为 |
 | --- | --- |
-| `config.json` / `emojis/manifest.json` / `emojis/` / `memory.json` / `memory_groups/` / `memory_users/` | 运行中自动重读，**不重启** |
+| `config.json` / `emojis/manifest.json` / `emojis/` / `memory.json` / `memory_groups/` / `memory_users/` | 运行中自动重读，继续聊天 |
 | `src/` / `scripts/` / `bot.py` / `catty_config_loader.py` / `catty_integrations.py` / `pyproject.toml` / `CattyQQAI.spec` / `README.md` | 触发子进程**自动重启** |
 
-临时不想用守护：设环境变量 `CATTY_NO_HOT_RELOAD=1` 再跑 `start_catty.bat`。
-
-热重载切 `MemoryStore` 实例前会先刷写旧实例；临时写盘失败时保留旧配置和待写记忆，
-下轮自动重试，不会把失败的配置版本标为已生效。统一后台 flush 循环每轮读取当前实例，
-无需为每次热重载额外启动任务。记忆文件刷新也会在预写失败时保留原内存。
+使用 `start_catty.bat` 时，设置 `CATTY_NO_HOT_RELOAD=1` 可以直接运行 `bot.py`，方便调试。重载记忆前猫猫会先保存待写内容；临时写入失败时留待下一轮重试。
 
 ---
 
 ## 离线回归测试
 
-缓存/CPU 基准、本地 harness CLI、工具结果预算与输入上下文改动见
-[缓存、CPU、harness 与输入上下文](docs/PERFORMANCE_AND_HARNESS.md)。
-
-安装项目依赖后运行，无需配置 API Key、登录 QQ 或启动 `bot.py`：
+改完东西想检查一下的话，安装项目依赖后就可以跑离线清单喵：
 
 ```powershell
-python scripts/run_offline_regressions.py
-python -m compileall -q src bot.py catty_config_loader.py catty_integrations.py scripts tests
+python -B -X utf8 scripts/run_offline_regressions.py
 ```
 
-此入口按固定清单逐模块启动独立进程，避免测试替身污染；不执行历史在线评测，也排除尝试读取真实密钥配置的沙箱负例。可重复使用 `--module` 选择清单中的模块。
+清单按模块启动独立进程；只想检查几个模块时，可以重复使用 `--module`：
 
-2026-10-27最新验收：58模块989项，979通过、9项按原条件跳过、1项既有 `persona_admin` 浮点deadline断言失败，0错误（完整运行退出1）。机机唤醒与冒泡新增104项全通过，消息抽取另26项通过；覆盖时段/活跃/重启/取消、无关键词沉默、旧链路和热重载合同。机机增量已部署，28文件双端SHA-256一致，推送后插件重载并重连，见 [会话08](docs/session-log/session-08.md)。
+```powershell
+python -B -X utf8 scripts/run_offline_regressions.py --module test_config --module test_config_loader
+```
 
-Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息，按优先级保留证据；Agent 按实际开放工具补查。CLI 的 `--production-defaults` 只对齐预算；`--compact-json --metadata-only` 可省略正文。接口见 [证据包](docs/harness-evidence.md)，合成检查入口为 `scripts/benchmark_harness.py`。
-
-`chat.system_prompt` 已从当前配置、模板及运行时字段删除；旧键不再导入。人格正文与场景库仍由原有模块提供。修复细节见 [当前状态](STATUS.md)、[工具合同](docs/tool-contracts.md)、[沙箱产物](docs/code-sandbox.md) 和 [回复恢复](docs/reply-recovery.md)。
-
-支持 [JSON 自定义人格](docs/persona-json.md)：可导入 [完整示例](docs/examples/personas/sky_guide.json)，也可聊天描述让 AI 填写并保存。定义落在 `data/personas`，保存不自动切换；使用 `/人格 小岚` 或让 AI 根据上下文切换。普通主回复结合前文与补充要求自主选择工具或直接回答，不额外增加规划模型。
-
-支持 [按需技能与联网学习](docs/skill-guidance.md)：默认提示先查相关技能，未知或可能过时的事实查公共权威来源。首轮不塞技能目录，搜索后给候选与加载schema，模型选择后才给正文；核实可复用公共知识后通过抓页回执提炼保存。共享库为 `data/skills`，学习输入不含聊天或画像，模型与正则筛查不等于完整匿名化。`skills.enabled` / `skills.auto_learn_enabled` 默认开启，完整旋钮见 [运行时配置](docs/skill-runtime.md)。该流程保留模型自主工具选择，不保证每轮必定搜索或保存。
-
-机机支持 [关键词唤醒与活跃时段冒泡](docs/fadianji-proactive.md)：不再要求真@，关键词、引用和已有续聊都可进入主回复；普通群聊仍不随便回应。每活跃群每日随机5–10次机会，多数等群友热聊，少量自己起话题；默认00:00–08:00不发、不补数，偶尔晚间冒泡。`fdj_proactive.enabled` 是独立开关，不会启用旧笨猫主动链路；状态在 `data/fdj_proactive`，重启不重抽当天额度。
+测试记录在 [当前状态](STATUS.md) 和 [会话记录](docs/session-log/README.md)；模型、语音与 QQ 的实际收发可以接好服务后再试喵。
 
 ---
 
@@ -389,21 +229,19 @@ Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息
 .\.venv\Scripts\pyinstaller.exe --noconfirm --clean CattyQQAI.spec
 ```
 
-产物在 `dist/CattyQQAI.exe`。把 `config.json` 和 `tools/napcat-onekey` 放在 exe 同目录即可。
-启动时优先读取当前目录 / exe 同目录的 `config.json`；找不到会自动生成默认配置。
+打包完成后，可以在 `dist/CattyQQAI.exe` 找到猫猫。运行前记得准备模型配置、OneBot 连接，以及需要使用的 NapCat 和语音环境。这个 exe 从 `bot.py` 启动；日常开发的守护进程则使用上面的脚本。
 
 ---
 
 ## 主人专属命令
 
-只有 `config.json` 的 `qq.owner_qq`（= `catty_owner_qq`）匹配的 QQ 能用。
-完整列表见 [ADMIN_COMMANDS.md](ADMIN_COMMANDS.md)，常用速查：
+先在 `config.json` 的 `owner_forward.owner_qq` 填上主人的 QQ，猫猫就知道这些管理命令该听谁的啦。完整列表见 [ADMIN_COMMANDS.md](ADMIN_COMMANDS.md)，常用的先摆在这里喵：
 
 | 命令 | 作用 |
 | --- | --- |
 | `/人格`、`/人格 <名字>` | 查看当前人格 / 切换当前会话 |
 | `/人格 导入 \| <JSON>` | 校验保存人格，不自动切换 |
-| `/人格 生成 <id> \| <设定>` | 主模型生成人格并保存 |
+| `/人格 生成 <id> \| <设定>` | 次要 AI 线路生成人格并保存 |
 | `/人格 指令 <名字> \| <指令>` | 绑定完整消息作为切换指令 |
 | `/aff_show <qq>` | 查那个用户的积分 / 等级 / 签到 / 消费记录 |
 | `/aff_set_points <qq> <n>` | 设积分 |
@@ -413,85 +251,35 @@ Harness v2 提供来源状态、时间、逐条 ID、节选与预算省略信息
 | `/vibe_reset <qq>` | 清掉用户画像 |
 | `收藏` / `存表情` / `/saveemoji` | 把当前 / 引用 / 最近群图入表情库（可带 tag） |
 
-Owner 本身（即 `qq.owner_qq` 配置的 QQ）积分恒为 `OWNER_INFINITY_POINTS`、等级恒为 `LEVEL_CAP`，免每日签到次数限制。
-
 ---
 
 ## 常用配置
 
-完整配置请看 [config.example.json](config.example.json)；下表只挑最常调的：
+常用的设置都放在下面啦，完整字段和默认值可以翻 [config.example.json](config.example.json)，实际运行时读取自己的 `config.json`。密钥留在本机配置里就好喵。
 
-| 路径 | 默认值 | 说明 |
-| --- | --- | --- |
-| `server.host` / `server.port` | `127.0.0.1` / `8080` | NoneBot 监听 |
-| `qq.onebot_reverse_ws_url` | `ws://127.0.0.1:8080/onebot/v11/` | NapCat 反向 WS |
-| `qq.auto_start_napcat` | `true` | 启动时自动拉起 NapCat |
-| `ai.base_url` / `ai.api_key` / `ai.model` | OpenAI / 空 / `gpt-4o-mini` | 主聊天模型 |
-| `audit_ai.*` | 空 → 兜底 `ai.*` | 审核 / 判断 / 训练成果审批模型 |
-| `vision.*` | 空 → 复用 `ai.*` | 图片识别模型 |
-| `vision.image_download_direct` | `false` | 显式允许图片资源直连，保留公网地址校验 |
-| `filter.group_batch_messages` / `group_batch_seconds` | `200` / `1200` | 普通群批量主动判断阈值 |
-| `filter.anger_warn_threshold` / `anger_mute_threshold` | `60` / `100` | 怒气状态阈值（由主 AI 表现） |
-| `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群文字触发前缀 |
-| `chat.directed_keywords` | `["你","猫猫","猫娘","看看",…]` | 群软触发词 |
-| `chat.soft_directed_reply_probability` | `0.65` | 普通软触发的回复倾向 |
-| `chat.direct_address_reply_probability` | `0.9` | 明显喊名的回复倾向 |
-| `chat.history_turns` | `16` | 单会话保留上下文轮数 |
-| `chat.reply_max_chars` | `1800` | 单条上限，超过自动切分 |
-| `chat.reply_human_split_*` | — | 语义分段：开关 / 概率 / 最小长度 / 最大段数 / 延迟 |
-| `session_cache.persistence_enabled` / `dir` / `max_sessions` | `true` / `sessions` / `200` | 会话持久化 + LRU |
-| `memory.summary_interval_minutes` | `30` | 群语料压缩周期 |
-| `memory.reply_boost_*` | — | 语料 / 摘要 / 画像够时的回复倾向加成 |
-| `memory.user_titles` / `group_titles` / `group_user_titles` | `{}` | 称呼三层 |
-| `memory.special_care_user_ids` / `group_special_care_user_ids` | `[]` / `{}` | 特别关心 |
-| `game_context.star_resonance_group_ids` / `strinova_group_ids` | `[]` / `[]` | 游戏主题群 |
-| `emoji.reply_probability` | `0.85` | AI 未选表情时自动补图概率 |
-| `emoji.interest_threshold` / `save_interest_threshold` | `60` / `85` | 识图入库阈值 |
-| `web_search.engines` | `["google","bing"]` | 联网搜索引擎 |
-| `proactive.max_daily_per_group` / `min_interval_minutes` | `5` / `120` | 主动冒泡上限 / 最小间隔 |
-| `ollama.enabled` / `install_dir` / `models_dir` | `false` / `tools/ollama` / `models/ollama` | 项目内 Ollama |
-| `local_critic.enabled` / `mode` | `false` / `reply_gate_only` | 本地小模型 reply gate |
-| `local_training.enabled` / `mc_idle_check_enabled` | `false` / `false` | 本地训练 / MC 闲时判定 |
-| `hot_reload.enabled` / `restart_on_code_change` | `true` / `true` | 热重载 / 代码改动自动重启 |
+| 配置段 | 用途 |
+| --- | --- |
+| `server` / `qq` / `owner_forward.owner_qq` | 监听地址、NapCat 连接与主人身份 |
+| `ai` / `vision` / `filter` / `audit_ai` / `ai_fallback` | 主回复、识图、判门、审核和后台模型线路 |
+| `persona` / `chat` / `memory` | 人格、聊天节奏、会话与长期记忆；会话缓存使用 `chat.session_cache_*` |
+| `web_search` / `auto_fetch` / `skills` | 搜索、自动补网与共享技能 |
+| `imagegen` / `emoji` / `voice` / `voice_stt` | 生图、表情、语音合成与转写 |
+| `file_delivery` / `code_sandbox` | 文件交付与受限 Python 工作区 |
+| `fdj_proactive` / `proactive.enabled` | 共享主动调度与人格开关 |
+| `self_repair` / `hot_reload` | 可选源码自修复与守护进程 |
+| `nlu` / `ollama` / `local_training` | 可选本地语言处理、模型和训练 |
 
-
-```json
-{
-  "ai_local_backup": {
-    "_note": "复制覆盖到 ai 节点即可切到本地 Qwen2.5-7B",
-    "base_url": "http://127.0.0.1:11434/v1",
-    "api_key": "ollama",
-    "model": "qwen2.5:7b",
-    "max_tokens": 4096,
-    "extra_body": {"think": false}
-  }
-}
-```
-
-### `ai.extra_headers` / `extra_body` 示例
-
-```json
-{
-  "ai": {
-    "extra_headers": {
-      "HTTP-Referer": "https://example.com",
-      "X-Title": "Catty QQ AI"
-    },
-    "extra_body": { "top_p": 0.9 }
-  }
-}
-```
+想调整角色设定，可以从人格模块或自定义人格定义入手喵。
 
 ---
 
-## 资料来源
+## 项目文档
 
-- NoneBot2：<https://github.com/nonebot/nonebot2>
-- NoneBot OneBot 适配器：<https://github.com/nonebot/adapter-onebot>
-- OneBot 连接配置文档：<https://onebot.adapters.nonebot.dev/docs/guide/setup/>
-- NapCatQQ OneBot 网络基础：<https://www.napcat.wiki/onebot/network>
-- OpenAI Chat Completions API：<https://platform.openai.com/docs/api-reference/chat/create-chat-completion>
+- 看进度和测试：[当前状态](STATUS.md)、[会话记录](docs/session-log/README.md)。
+- 看猫猫怎么工作：[架构说明](docs/architecture.md)、[模块清单](docs/module-inventory.md)。
+- 管理和创作角色：[管理命令](ADMIN_COMMANDS.md)、[人格定义](docs/persona-json.md)、[人格运行时](docs/persona-runtime.md)。
+- 使用工具：[工具合同](docs/tool-contracts.md)、[Python 沙箱](docs/code-sandbox.md)、[技能运行时](docs/skill-runtime.md)、[自修复](docs/self-repair.md)。
 
----
+想读代码的话，可以从 [bot.py](bot.py)、[配置加载器](catty_config_loader.py)、[聊天插件](src/catty_qq_ai/__init__.py)、[模型客户端](src/catty_qq_ai/openai_client.py) 和 [守护进程](scripts/catty_hot_reload.py) 开始喵。
 
-> 1.0.0 整版的笨猫长好啦~ 部署完先用小号测一轮，别一上来就把她拉去主力群里炸毛喵 ฅฅ
+> 仓库推送负责同步 Git；运行中的服务器请使用自己的部署流程。主人准备好以后，猫猫就在 QQ 等你啦喵～
