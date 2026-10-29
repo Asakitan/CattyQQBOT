@@ -140,6 +140,7 @@
 - **历史字案定位**：下方2026-10-25配置记录及上方长度约定曾引用的 `chat.system_prompt` 已移除，默认人格内容由角色模块提供；本次研究提示没有修改这些人格/NSFW字本。不要重新添加该配置字段。
 - **默认离线入口**：`E:/Py/python.exe -B -X utf8 scripts/run_offline_regressions.py`，不要用全目录discover触发历史在线评测。58模块989项：979通过、9跳过、1项既有persona_admin浮点deadline失败、0错误；新机机104项全通过，消息抽取另26项通过。357个Python字件音法通过，未做真实模型或QQ效果验证。
 - **编辑回写事件**：回退版本已保存在 `.vscode/handoff/skills-20261027/`，源码按开工副本及已部署Git版本修复；来源未确定。后续修改先核对磁盘，别用过期缓冲区覆盖共享字件。
+- **模型分层（2026-10-30 已部署）**：主回复 `ai` 与识图 `vision` 都是 `gpt-6.1-terra` @ Responses；判门/群过滤器/Qzone 判赞/`ai_gate_reply` 走 filter/audit 线，后台总结与会话压缩走 `ai_fallback`，NSFW 主生成走 `nsfw_spark_model`——三条线都指向 opencode zen go 的 `deepseek-v4.1-flash`。人格语气进化、人格定义生成、技能提炼统一走新增的 `openai_client.chat_completion_aux`（`audit_ai → ai_fallback → 主 ai`，不挂工具）；人格进化预算预留上限改为 `min(audit_ai.context_tokens, 32K) + 4K`。`self_repair` 已显式配 deepseek，不再继承主 AI。19 文件双端一致，远端 104 项通过；细节见 `docs/session-log/session-20.md`。
 
 ### 启动拓扑（不要再让新人 `python bot.py`）
 

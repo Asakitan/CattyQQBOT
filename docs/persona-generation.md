@@ -28,8 +28,8 @@
 
 `generate_persona_definition(config, *, name, description, existing=None, context_text='', completion_fn=None)` 返回 `validate_persona_definition` 规范化后的定义字典，无文件写入、保存、切换、后台任务或草稿状态。
 
-- 注入接口为异步 `completion_fn(config, messages) -> str`；默认延迟导入公开的 `openai_client.chat_completion`，不使用 codex/spark 辅助路线，不传工具。默认请求用现有 `set_distill_suppressed` 临时关闭回复蒸馏，并在 `finally` 恢复，避免定义 JSON 被当成真实聊天回复写入训练/记忆。
-- 复制配置后设置 `catty_max_tokens = catty_persona_generation_max_tokens`（默认 4096）；不改变调用方配置、端点或模型。
+- 注入接口为异步 `completion_fn(config, messages) -> str`；默认延迟导入 `openai_client.chat_completion_aux`（次要 AI 线路：`audit_ai` → `ai_fallback` → 主 ai），不挂工具，主模型不参与人格 JSON 生成。默认请求用现有 `set_distill_suppressed` 临时关闭回复蒸馏，并在 `finally` 恢复，避免定义 JSON 被当成真实聊天回复写入训练/记忆。
+- 复制配置后设置 `catty_max_tokens = catty_persona_generation_max_tokens`（默认 4096）；不改变调用方配置、端点或模型选择。
 - `catty_persona_generation_timeout_seconds` 默认 60 秒，必须为正有限数；整个生成最多两次模型调用，由同一个绝对截止时间与单个 `asyncio.wait_for` 约束。只有输出 JSON/校验失败可修复一次；传输错误与超时不重试。
 - 提示提供真实 `PERSONA_SCHEMA`，把 `description`、`quoted_context`、`existing_definition` 作为 JSON 引用资料。保留身份、语气、关系和行为意图，不额外改写政策或添加默认禁用设定；前文可解析代词，不要求目标名出现在最后一句。
 - 用现有 `lenient_json_loads` 接受普通或带围栏 JSON；返回值必须是单个对象并通过真实校验器。请求 id 须为规范小写形式，并与生成 `name` 完全相等；不靠本地替换 id 把生成错误伪装成功。
@@ -38,6 +38,6 @@
 
 ## 离线验证
 
-`tests/test_persona_admin.py` 使用真实 schema/validator 与异步模型替身，覆盖旧命令、多行 JSON、完整指令映射、未知子命令、上下文引用、配置副本、生成校验、围栏/宽容解析、一次修复、id 不匹配、共享时限、外部取消和公开主模型入口。测试不初始化 NoneBot、不访问模型或 QQ；不代表在线生成质量或生产切换验收。
+`tests/test_persona_admin.py` 使用真实 schema/validator 与异步模型替身，覆盖旧命令、多行 JSON、完整指令映射、未知子命令、上下文引用、配置副本、生成校验、围栏/宽容解析、一次修复、id 不匹配、共享时限、外部取消和次要 AI 线路入口。测试不初始化 NoneBot、不访问模型或 QQ；不代表在线生成质量或生产切换验收。
 
 人格生成将剩余等待时间限于配置值，避免浮点舍入略微越限；对应32项通过，已并入当前源码。人格阶段782项集成结果见 [会话03](session-log/session-03.md)，本轮见 [会话09](session-log/session-09.md)。

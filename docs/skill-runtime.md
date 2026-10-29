@@ -37,6 +37,8 @@ URL 检查不重新联网：拒绝非 HTTP(S)、凭据 userinfo、本地/私网 
 
 ## 隔离生成与隐私边界
 
+提炼请求走 `openai_client.chat_completion_aux`（`audit_ai` → `ai_fallback` → 主 ai 的次要 AI 线路），只做纯文本请求、不挂工具，不占用主回复与识图模型。
+
 内部生成仅使用固定中文系统提示和账本中的公共 `title/url/text`。不接收、不拼接聊天记录、用户画像、私聊原文、检索 query、用户 ID 或旧技能正文。生成任务在全新的 `contextvars.Context()` 中运行，防止主回复 scope、session、persona、蒸馏上下文等隐式传递。
 
 `completion_fn(config, messages)` 可注入 async 函数或返回字符串的函数。默认实现懒加载 `openai_client.chat_completion`，临时 `set_distill_suppressed(True)`，在 `finally` 恢复。传入配置是深复制副本，`catty_max_tokens` 使用技能学习预算；剥除 extra_body 中的消息、用户、metadata、工具及覆盖 token 预算字段，不改原配置。

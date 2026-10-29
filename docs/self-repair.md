@@ -4,7 +4,7 @@
 
 ## 配置入口
 
-`self_repair.enabled` 的模板默认值为 `false`，关闭时不会发送修复请求；当前生产及本地配置均已启用。启用后若 `self_repair.model` 为空、缺省或 `TARGET`，整条模型路由继承各自 `ai` 的 `base_url`、`api_key`、`model` 和 `http_proxy`；主模型或凭据变化会触发重新加载。仍可填写独立的 `model`、`base_url`、`api_key` 及可选 `http_proxy`，显式模型不会与主 AI 路由混用，也不会在失败后切线。
+`self_repair.enabled` 的模板默认值为 `false`，关闭时不会发送修复请求；当前生产及本地配置均已启用。启用后若 `self_repair.model` 为空、缺省或 `TARGET`，整条模型路由继承各自 `ai` 的 `base_url`、`api_key`、`model` 和 `http_proxy`；主模型或凭据变化会触发重新加载。仍可填写独立的 `model`、`base_url`、`api_key` 及可选 `http_proxy`，显式模型不会与主 AI 路由混用，也不会在失败后切线。本机已改为显式 opencode zen go 的 `deepseek-v4.1-flash`，继承关闭。
 
 支持 OpenAI-compatible Chat Completions 和 `/responses` HTTP，模型需支持函数工具调用并返回完整输入/输出 `usage`。Responses 使用 `store=false`，逐轮回放带加密推理项的完整上下文；不借用主聊天 WebSocket 连接或续聊缓存。首次部署需让新版 `scripts/catty_hot_reload.py` 重启一次，此后 `self_repair` 配置由守护和 worker 热读。
 

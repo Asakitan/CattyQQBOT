@@ -2,6 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `src/catty_qq_ai/openai_client.py` / `persona_admin.py` / `persona_evolution_runtime.py` / `skill_runtime.py` / `config.py` / loader / `config.json` | 主/识图 terra，判门/总结/NSFW 与后台杂活统一 deepseek；次要 AI 线路 `audit_ai → ai_fallback → 主 ai` → `docs/architecture.md`、`docs/session-log/session-20.md` | 已部署；19 文件双端 SHA-256 一致，远端 104 项通过；生产已加载重连 |
 | `src/catty_self_repair/` / `scripts/catty_self_repair.py` / `scripts/catty_hot_reload.py` / `bot.py` / loader / 配置 JSON | 日志触发、独立或缺省主 AI 路由、周预算、源码候选验证、启动健康检查与发布回滚 → `docs/self-repair.md` | 已部署并在生产与本地启用；模板默认关闭；远端隔离 195 项、部署后 160 项通过 |
 | `voice_reply.py` / `voice_worker.py` / `voice_stt.py` / `voice_stt_worker.py` / `tools.py` / `__init__.py` / `config.py` / `data/voice_bank/` | 调情短语音（人格→音色、双语音库、可选 TTS 子进程）+ 语音消息转写（record→faster-whisper）+ 多气泡语音条/NSFW 语音条 → `docs/voice-candidates.md`、`docs/architecture.md` | 参考音修复已部署；本地双音色真实 worker 通过，远端 38 项语音测试通过，真实 QQ 听感待验 |
 | `tmp/voice-training-20261028-01/` / `tmp/voice-quality-20261028-01/{phrase_ab,whole_refine,acoustic_ab}.py` | 双音色权重与等响度试听 → `models/voice/`、`docs/voice-candidates.md` | 用户首选文件02的4轮候选，selection.json已记录；端到端多句待验，未替换或部署 |
@@ -56,6 +57,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-30 | 模型路由收口：主/识图 terra，判门/总结/NSFW/后台杂活 deepseek；新增次要 AI 线路并切人格进化/生成/技能提炼 | 本地 243 + 212 项通过（9 跳过）；19 文件双端一致，远端 104 项通过，生产已加载重连 |
 | 2026-10-30 | 部署证据来源索引和Responses工具限额none收尾；保留原证据选择与工具权限 | 代码/测试6文件解压、0跳过；部署前本地214项、9跳过，其余通过；合成证据908→721 token；未重复冒烟、生产模型请求或哈希 |
 | 2026-10-29 | 部署 Responses 固定指南缓存、消息投影及工具参数原字节续传，保留动态状态与净化 | 源码/测试3文件解压、0跳过；部署前本地201项、9跳过，其余通过；未重复冒烟、生产模型请求或哈希 |
 | 2026-10-29 | 部署历史写入滚动断点与续聊指纹修复，覆盖 66% 命中缺口 | 生产只读确认274条历史连续匹配；本地52项通过；后续真实私聊87.2%/86.9%、另一群95.4%，非同scope A/B |

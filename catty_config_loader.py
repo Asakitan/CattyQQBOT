@@ -116,6 +116,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "temperature": 0.1,
         "max_tokens": 320,
         "request_timeout": 60,
+        "context_tokens": 128000,
     },
     "vision": {
         "base_url": "",
@@ -825,6 +826,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_AUDIT_AI_TEMPERATURE", audit_ai.get("temperature"))
     _set_env("CATTY_AUDIT_AI_MAX_TOKENS", audit_ai.get("max_tokens"))
     _set_env("CATTY_AUDIT_AI_REQUEST_TIMEOUT", audit_ai.get("request_timeout"))
+    _set_env("CATTY_AUDIT_AI_CONTEXT_TOKENS", audit_ai.get("context_tokens"))
 
     imagegen = _section(data, "imagegen")
     _set_env("CATTY_IMAGEGEN_ENABLED", imagegen.get("enabled"))

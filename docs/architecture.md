@@ -64,6 +64,14 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 共享主动调度复用 `fdj_proactive` 的每群每日计划和节奏，猫猫开关读 `proactive.enabled`，机机开关读 `fdj_proactive.enabled`；旧猫猫的节奏字段不再映射。机机场景及语料须由人格显式选择，其心情和自学也各有独立开关。离线回归 1367 项、9 跳过；远端 17 模块 299 项仅一个既有 8.3 短路径断言失败。未测真实模型或 QQ。
 
+## 模型分层（已部署）
+
+主回复与识图固定走 `ai` / `vision`（当前 `gpt-6.1-terra` @ Responses）；两者同线路时图片原件直接进主请求。判门（`reply_admission`、`_model_should_reply_to_group`）、群过滤器、Qzone 判赞与 `token_billing.ai_gate_reply` 走 filter/audit 线；后台总结与会话 AI 压缩走 `ai_fallback`；NSFW 主生成走 `nsfw_spark_model`。这三条线在生产都指向 opencode zen go 的 `deepseek-v4.1-flash`。
+
+非聊天后台任务统一经 `openai_client.aux_route()`：`audit_ai` → `ai_fallback` → 主 ai 逐级取三件套，`chat_completion_aux()` 只做纯文本请求、不挂工具。人格语气进化、人格定义生成、技能提炼走这条线；线路缺失时才回落到主模型。`audit_ai.context_tokens`（默认 128000）只用于人格进化的预算预留，单次预留上限为 `min(上下文, 32K) + 4K` 输出。
+
+`self_repair` 有独立路由段：缺省（空 / `TARGET`）继承 `ai`；本机改为显式 opencode zen go 的 deepseek 三件套，继承关闭。
+
 ## 运行入口
 
 `start_catty.bat` → `scripts/catty_hot_reload.py` → `bot.py` → NoneBot 插件 `src/catty_qq_ai/__init__.py`。RAG 本地模型由插件独立监督子进程，部署通道不变。
@@ -126,7 +134,7 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 `persona_store.py` 校验并原子保存 `data/personas/definitions/<name>.json`，`switch_commands.json` 保存完整指令映射；`personas.install_custom_personas` 将整批有效定义物化为冻结对象，保留内置对象。`persona_runtime.py` 统一工具/命令的数据操作，更新必须携带此前读取的文件 SHA。坏文件重载保留上次有效定义，部分失败如实回执。
 
-`persona_admin.py` 解析直接管理命令；生成命令通过无工具主模型请求得到 JSON，最多一次修复，共享60秒默认截止时间。普通聊天不增加规划模型：主回复根据上下文直接填写 `catty_persona` 的定义参数。保存不自动切换，工具权限与 scope 来自真实事件。
+`persona_admin.py` 解析直接管理命令；生成命令通过无工具的次要 AI 线路（`audit_ai` → `ai_fallback` → 主 ai）得到 JSON，最多一次修复，共享60秒默认截止时间。普通聊天不增加规划模型：主回复根据上下文直接填写 `catty_persona` 的定义参数。保存不自动切换，工具权限与 scope 来自真实事件。
 
 `handle_chat` 准入后用 ContextVar 固定本轮 Persona。工具切换只保存覆盖选择，不重入已持有的聊天锁；下轮按 `name@definition_revision` 清理旧口吻历史。直接切换命令保留原来的转场锁顺序。人格目录配置变更重建注册表；手工改 JSON 后显式重载。
 
@@ -134,7 +142,7 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 后台调度从单个会话的近期消息筛选当前人格示例，按人格基底和现有语气请求模型生成可替换的表达扩展。`persona_evolution_store.py` 以基底摘要和文件 SHA 校验后原子发布；同人格会话共享扩展，原角色正文不改。运行配置或人格变化会使旧任务在生成前或写入前失效，写盘取消时等待实际线程结束再释放转场锁。
 
-`persona_evolution_budget.py` 为所有人格维护独立 SQLite 日账本，按配置模型上下文与输出上限预留，凭服务商 usage 结算；未确认的请求持续占用预留。该机制依赖服务商遵守限额并准确返回 usage，最低配置额度不会自动上调。样本发送模型接口，语义提示不能保证私人信息不会进入共享扩展。详细配置与验证见 [人格运行时](persona-runtime.md)。
+`persona_evolution_budget.py` 为所有人格维护独立 SQLite 日账本，按次要 AI 线路的上下文上限（`audit_ai.context_tokens`）与本次输入上限（32K）加输出上限预留，凭服务商 usage 结算；未确认的请求持续占用预留。该机制依赖服务商遵守限额并准确返回 usage，最低配置额度不会自动上调。样本发送模型接口，语义提示不能保证私人信息不会进入共享扩展。详细配置与验证见 [人格运行时](persona-runtime.md)。
 
 `request_intent.py` 在缓存边界后追加唯一的上下文意图说明；生产与模拟入口均使用 `tool_choice=auto`，不再按末句关键词强制绘图。模型结合前文、引用、补充、纠正和成功回执决定执行或回复，指代明确就沿用参数。
 

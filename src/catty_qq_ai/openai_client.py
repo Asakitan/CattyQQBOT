@@ -5723,6 +5723,117 @@ async def chat_completion_codex_instant(
     return reply
 
 
+@dataclass(frozen=True)
+class AuxRoute:
+    """次要 AI 线路 (后台杂活专用)。
+
+    主回复 (chat_completion / chat_completion_with_tools) 与识图 (vision) 永远
+    走 ai / vision 段；人格进化、人格定义生成、技能提炼、审计与风格质检这类
+    后台任务统一走这里的线路，避免烧主模型。
+    """
+
+    base_url: str
+    api_key: str
+    model: str
+    timeout: float | None
+    temperature: float | None
+    max_tokens: int | None
+    extra_headers: dict[str, str]
+    extra_body: dict[str, Any]
+    context_tokens: int
+
+
+def aux_route(config: Config) -> AuxRoute:
+    """按 audit_ai → ai_fallback → 主 ai 的顺序选次要线路。
+
+    audit_ai 缺三件套时逐级回退；三处都缺时返回主 ai 线路（调用方会得到
+    正常错误，而不是静默不发请求）。
+    """
+    main_context = int(getattr(config, "catty_model_context_tokens", 0) or 0)
+    audit_context = int(getattr(config, "catty_audit_ai_context_tokens", 0) or 0)
+    if audit_context <= 0:
+        audit_context = min(main_context, 128_000) if main_context > 0 else 128_000
+    fallback_context = min(main_context, 128_000) if main_context > 0 else 128_000
+    candidates = (
+        AuxRoute(
+            base_url=str(getattr(config, "catty_audit_ai_base_url", "") or "").strip(),
+            api_key=str(getattr(config, "catty_audit_ai_api_key", "") or "").strip(),
+            model=str(getattr(config, "catty_audit_ai_model", "") or "").strip(),
+            timeout=getattr(config, "catty_audit_ai_request_timeout", None),
+            temperature=getattr(config, "catty_audit_ai_temperature", None),
+            max_tokens=getattr(config, "catty_audit_ai_max_tokens", None),
+            extra_headers=dict(getattr(config, "catty_audit_ai_extra_headers", {}) or {}),
+            extra_body=dict(getattr(config, "catty_audit_ai_extra_body", {}) or {}),
+            context_tokens=audit_context,
+        ),
+        AuxRoute(
+            base_url=str(getattr(config, "catty_ai_fallback_base_url", "") or "").strip(),
+            api_key=str(getattr(config, "catty_ai_fallback_api_key", "") or "").strip(),
+            model=str(getattr(config, "catty_ai_fallback_model", "") or "").strip(),
+            timeout=getattr(config, "catty_ai_fallback_request_timeout", None),
+            temperature=getattr(config, "catty_ai_fallback_temperature", None),
+            max_tokens=getattr(config, "catty_ai_fallback_max_tokens", None),
+            extra_headers=dict(getattr(config, "catty_ai_fallback_extra_headers", {}) or {}),
+            extra_body=dict(getattr(config, "catty_ai_fallback_extra_body", {}) or {}),
+            context_tokens=fallback_context,
+        ),
+        AuxRoute(
+            base_url=str(getattr(config, "catty_openai_base_url", "") or "").strip(),
+            api_key=str(getattr(config, "catty_openai_api_key", "") or "").strip(),
+            model=str(getattr(config, "catty_openai_model", "") or "").strip(),
+            timeout=getattr(config, "catty_request_timeout", None),
+            temperature=getattr(config, "catty_temperature", None),
+            max_tokens=getattr(config, "catty_max_tokens", None),
+            extra_headers=dict(getattr(config, "catty_openai_extra_headers", {}) or {}),
+            extra_body=dict(getattr(config, "catty_openai_extra_body", {}) or {}),
+            context_tokens=main_context or 128_000,
+        ),
+    )
+    for candidate in candidates:
+        if candidate.base_url and candidate.api_key and candidate.model:
+            return candidate
+    return candidates[-1]
+
+
+async def chat_completion_aux(
+    config: Config,
+    messages: list[ChatMessage],
+    *,
+    max_tokens: int | None = None,
+    timeout: float | None = None,
+    temperature: float | None = None,
+    request_route: str = "aux",
+) -> str:
+    """次要 AI 纯文本完成: aux_route() 选出的线路，不挂工具。
+
+    仅服务后台任务 (人格进化 / 人格定义生成 / 技能提炼 / 审计)。失败时
+    _post_with_fallback 仍会降级到 ai_fallback，不会把错误吞成空串。
+    """
+    route = aux_route(config)
+    if not route.base_url or not route.api_key or not route.model:
+        raise OpenAICompatibleError("次要 AI 线路未配置。")
+    request_timeout = timeout if timeout is not None else route.timeout
+    if request_timeout is None or float(request_timeout) <= 0:
+        request_timeout = float(getattr(config, "catty_request_timeout", 60.0) or 60.0)
+    request_max_tokens = max_tokens if max_tokens is not None else route.max_tokens
+    if request_max_tokens is None or int(request_max_tokens) <= 0:
+        request_max_tokens = 1024
+    return await _post_with_fallback(
+        config,
+        base_url=route.base_url,
+        api_key=route.api_key,
+        model=route.model,
+        messages=messages,
+        timeout=float(request_timeout),
+        temperature=temperature if temperature is not None else route.temperature,
+        max_tokens=int(request_max_tokens),
+        extra_headers=route.extra_headers,
+        extra_body=route.extra_body,
+        label=f"aux({route.model})",
+        line=request_route,
+    )
+
+
 async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
     use_filter_route = bool(config.catty_filter_model.strip())
     base_url = (

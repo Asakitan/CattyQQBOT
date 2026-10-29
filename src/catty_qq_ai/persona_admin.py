@@ -249,13 +249,19 @@ async def generate_persona_definition(
     ]
     if completion_fn is None:
         # Lazy import keeps parsing/testing independent of the network client.
-        from .openai_client import chat_completion, reset_distill_suppressed, set_distill_suppressed
+        from .openai_client import chat_completion_aux, reset_distill_suppressed, set_distill_suppressed
 
         async def plain_completion(request: Any, prompt: list[dict[str, str]]) -> str:
             # This is definition data, not a chat reply to feed into L3 memory.
             token = set_distill_suppressed(True)
             try:
-                return await chat_completion(request, prompt)
+                # 人格定义生成是偶发后台任务：走次要 AI 线路，不烧主模型。
+                return await chat_completion_aux(
+                    request,
+                    prompt,
+                    max_tokens=int(getattr(request, "catty_max_tokens", 0) or 0) or None,
+                    request_route="persona_definition",
+                )
             finally:
                 reset_distill_suppressed(token)
 

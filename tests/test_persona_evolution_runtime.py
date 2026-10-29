@@ -26,6 +26,29 @@ sys.modules[PACKAGE] = package
 client = types.ModuleType(f"{PACKAGE}.openai_client")
 client._extract_content = lambda response: response["choices"][0]["message"]["content"]
 client._post_chat_completion_raw = AsyncMock()
+
+
+def _fixture_aux_route(config):
+    return types.SimpleNamespace(
+        base_url=str(getattr(config, "catty_audit_ai_base_url", "") or "").strip()
+        or str(getattr(config, "catty_ai_fallback_base_url", "") or "").strip()
+        or str(getattr(config, "catty_openai_base_url", "") or "").strip(),
+        api_key=str(getattr(config, "catty_audit_ai_api_key", "") or "").strip()
+        or str(getattr(config, "catty_ai_fallback_api_key", "") or "").strip()
+        or str(getattr(config, "catty_openai_api_key", "") or "").strip(),
+        model=str(getattr(config, "catty_audit_ai_model", "") or "").strip()
+        or str(getattr(config, "catty_ai_fallback_model", "") or "").strip()
+        or str(getattr(config, "catty_openai_model", "") or "").strip(),
+        timeout=getattr(config, "catty_request_timeout", None),
+        temperature=getattr(config, "catty_temperature", None),
+        max_tokens=None,
+        extra_headers={},
+        extra_body=dict(getattr(config, "catty_openai_extra_body", {}) or {}),
+        context_tokens=int(getattr(config, "catty_model_context_tokens", 0) or 128_000),
+    )
+
+
+client.aux_route = _fixture_aux_route
 sys.modules[client.__name__] = client
 runtime = importlib.import_module(f"{PACKAGE}.persona_evolution_runtime")
 store_module = importlib.import_module(f"{PACKAGE}.persona_evolution_store")

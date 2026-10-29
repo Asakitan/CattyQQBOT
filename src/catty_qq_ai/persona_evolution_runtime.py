@@ -5,11 +5,14 @@ import json
 import time
 from typing import Any, Awaitable, Callable
 
-from .openai_client import _extract_content, _post_chat_completion_raw
+from .openai_client import _extract_content, _post_chat_completion_raw, aux_route
 from .persona_evolution_budget import BudgetLedger
 from .persona_evolution_store import PersonaEvolutionStore, build_evolution_messages, parse_evolution_response
 
 _MAX_OUTPUT_TOKENS = 4096
+# build_evolution_messages 最多 40 条 × 600 字 + persona 正文；32K 足够覆盖真实输入，
+# 不再拿整条线路的上下文窗口做每次预留（旧口径 1M/次 会白吃日预算）。
+_MAX_INPUT_TOKENS = 32_000
 
 
 def persona_base_text(persona: Any) -> str:
@@ -87,39 +90,38 @@ async def evolve_once(
 ) -> str:
     if not bool(getattr(config, "catty_persona_evolution_enabled", True)):
         return "disabled"
-    api_key = str(getattr(config, "catty_openai_api_key", "") or "").strip()
-    model = str(getattr(config, "catty_openai_model", "") or "").strip()
-    base_url = str(getattr(config, "catty_openai_base_url", "") or "").strip()
-    if not api_key or not model or not base_url:
+    # 语气进化属于后台杂活：走次要 AI 线路 (audit_ai/deepseek)，不占主模型。
+    route = aux_route(config)
+    if not route.base_url or not route.api_key or not route.model:
         return "route_unavailable"
-    context_limit = int(getattr(config, "catty_model_context_tokens", 0) or 0)
+    context_limit = int(route.context_tokens or 0)
     if context_limit <= 0:
         return "context_limit_unavailable"
     current, revision = await asyncio.to_thread(store.load, name, base_text)
     messages = build_evolution_messages(name, base_text, current, examples)
-    reserved = context_limit + _MAX_OUTPUT_TOKENS
+    reserved = min(context_limit, _MAX_INPUT_TOKENS) + _MAX_OUTPUT_TOKENS
     reservation = await asyncio.to_thread(ledger.reserve, reserved)
     if reservation is None:
         return "budget_exhausted"
     if not still_current():
         await asyncio.to_thread(ledger.settle, reservation, 0)
         return "stale"
-    configured_body = getattr(config, "catty_openai_extra_body", {}) or {}
+    configured_body = route.extra_body
     extra_body = {
         key: configured_body[key]
         for key in ("thinking", "reasoning_effort")
         if isinstance(configured_body, dict) and key in configured_body
     }
     data = await _post_chat_completion_raw(
-        base_url=base_url,
-        api_key=api_key,
-        model=model,
+        base_url=route.base_url,
+        api_key=route.api_key,
+        model=route.model,
         messages=messages,
-        timeout=float(getattr(config, "catty_request_timeout", 60.0) or 60.0),
+        timeout=float(route.timeout or getattr(config, "catty_request_timeout", 60.0) or 60.0),
         proxy=str(getattr(config, "catty_http_proxy", "") or ""),
-        temperature=getattr(config, "catty_temperature", None),
+        temperature=route.temperature,
         max_tokens=_MAX_OUTPUT_TOKENS,
-        extra_headers=dict(getattr(config, "catty_openai_extra_headers", {}) or {}),
+        extra_headers=dict(route.extra_headers or {}),
         extra_body=extra_body,
         tools=None,
         stream=False,

@@ -491,11 +491,11 @@ class SkillTurnTests(unittest.IsolatedAsyncioTestCase):
         fake.set_distill_suppressed = flag.set
         fake.reset_distill_suppressed = flag.reset
 
-        async def broken(config, messages):
+        async def broken(config, messages, **kwargs):
             self.assertTrue(flag.get())
             raise RuntimeError("failed")
 
-        fake.chat_completion = broken
+        fake.chat_completion_aux = broken
         with patch.dict(sys.modules, {fake.__name__: fake}), patch.object(_PACKAGE, "openai_client", fake, create=True):
             with self.assertRaises(RuntimeError):
                 await runtime._default_completion(_config(), [])

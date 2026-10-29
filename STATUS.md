@@ -1,4 +1,13 @@
 # Catty 当前状态
+## 2026-10-30 · 模型路由收口（已部署）
+
+- 主回复与识图仍为 `https://api.openai.com/v1/responses` + `gpt-6.1-terra`；两者同线路，当前图/引用图/上下文图直接进主请求。
+- 判门、群过滤器、Qzone 判赞与 `token_billing.ai_gate_reply` 走 filter/audit 线；后台总结与会话 AI 压缩走 `ai_fallback`；NSFW 主生成走 `nsfw_spark_model`。这些段全部指向 opencode zen go 的 `deepseek-v4.1-flash`。
+- 新增次要 AI 统一线路 `aux_route()` / `chat_completion_aux()`（`audit_ai` → `ai_fallback` → 主 ai，不挂工具）；人格语气进化、人格定义生成、技能提炼改走该线路，不再消耗 terra。
+- 人格进化的预算预留改为 `min(线路上下文, 32K) + 4K`；新增 `audit_ai.context_tokens`（默认 128000，env `CATTY_AUDIT_AI_CONTEXT_TOKENS`）。
+- `self_repair` 由占位 `HOST/TOKEN/TARGET` 改为显式 deepseek 三件套，继承主 AI 关闭。
+- 本地 243 + 212 项定向回归通过（9 跳过）；真实配置解析确认主线/辅助线各就位。19 文件 push_zip 至 `D:/CattyQQAI`，0 跳过，双端 SHA-256 一致；远端 Python 3.14.5 语法检查通过，`test_config` / `test_config_loader` / `test_persona_admin` / `test_persona_evolution_runtime` / `test_skill_runtime` 共 104 项通过。生产 00:24:42 初始化、00:24:47 插件加载、00:24:51 OneBot 重连；真实模型与 QQ 效果未专项验证。
+
 ## 2026-10-30 · 缓存实况与重复输入优化（已部署）
 
 - `f78637e` 于生产时间20:56:39加载；20:59:49同群同工具组合的真实请求读取170583、写入67、普通未缓存4438、总输入175088 token，命中97.4%，此前同组合约96.4%。这是正常聊天观察，不是固定输入A/B；重载后的首轮与另一工具组合仍有0%样本。

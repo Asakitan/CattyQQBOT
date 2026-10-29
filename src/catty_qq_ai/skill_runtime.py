@@ -186,7 +186,13 @@ async def _default_completion(config: Any, messages: list[dict[str, str]]) -> st
 
     token = openai_client.set_distill_suppressed(True)
     try:
-        return await openai_client.chat_completion(config, messages)
+        # 技能提炼是后台杂活：走次要 AI 线路，不烧主模型。
+        return await openai_client.chat_completion_aux(
+            config,
+            messages,
+            max_tokens=int(getattr(config, "catty_max_tokens", 0) or 0) or None,
+            request_route="skill_learning",
+        )
     finally:
         openai_client.reset_distill_suppressed(token)
 

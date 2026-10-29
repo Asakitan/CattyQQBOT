@@ -185,6 +185,8 @@ class Config(BaseModel):
     catty_audit_ai_temperature: float | None = 0.1
     catty_audit_ai_max_tokens: int | None = 320
     catty_audit_ai_request_timeout: float | None = 60.0
+    # 次要 AI 线路的上下文上限 (人格进化按它做预算预留)，不沿用主模型 1M 窗口。
+    catty_audit_ai_context_tokens: int = 128_000
 
     catty_vision_base_url: str = ""
     catty_vision_api_key: str = ""

@@ -408,9 +408,9 @@ class PersonaGenerationTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("TOKEN", str(caught.exception))
         complete.assert_awaited_once()
 
-    async def test_default_route_is_public_plain_chat_without_tools(self):
+    async def test_default_route_uses_aux_plain_chat_without_tools(self):
         client = types.ModuleType(f"{_PKG}.openai_client")
-        client.chat_completion = AsyncMock(return_value=response())
+        client.chat_completion_aux = AsyncMock(return_value=response())
         client.set_distill_suppressed = Mock(return_value=object())
         client.reset_distill_suppressed = Mock()
         with patch.dict(sys.modules, {client.__name__: client}):
@@ -418,22 +418,25 @@ class PersonaGenerationTests(unittest.IsolatedAsyncioTestCase):
                 config(), name="sky_guide", description="小岚",
             )
         self.assertEqual(result["name"], "sky_guide")
-        client.chat_completion.assert_awaited_once()
-        self.assertEqual(len(client.chat_completion.call_args.args), 2)
-        self.assertEqual(client.chat_completion.call_args.kwargs, {})
-        self.assertEqual(client.chat_completion.call_args.args[0].catty_openai_model, "main-model-fixture")
+        client.chat_completion_aux.assert_awaited_once()
+        self.assertEqual(len(client.chat_completion_aux.call_args.args), 2)
+        self.assertEqual(
+            client.chat_completion_aux.call_args.kwargs,
+            {"max_tokens": 4096, "request_route": "persona_definition"},
+        )
+        self.assertEqual(client.chat_completion_aux.call_args.args[0].catty_max_tokens, 4096)
         client.set_distill_suppressed.assert_called_once_with(True)
         client.reset_distill_suppressed.assert_called_once_with(client.set_distill_suppressed.return_value)
 
     async def test_default_route_restores_distillation_on_cancellation(self):
         client = types.ModuleType(f"{_PKG}.openai_client")
-        client.chat_completion = AsyncMock(side_effect=asyncio.CancelledError)
+        client.chat_completion_aux = AsyncMock(side_effect=asyncio.CancelledError)
         client.set_distill_suppressed = Mock(return_value=object())
         client.reset_distill_suppressed = Mock()
         with patch.dict(sys.modules, {client.__name__: client}):
             with self.assertRaises(asyncio.CancelledError):
                 await admin.generate_persona_definition(config(), name="sky_guide", description="小岚")
-        client.chat_completion.assert_awaited_once()
+        client.chat_completion_aux.assert_awaited_once()
         client.reset_distill_suppressed.assert_called_once_with(client.set_distill_suppressed.return_value)
 
     async def test_generation_does_not_persist_any_file(self):
