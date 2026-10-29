@@ -360,7 +360,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "outbox_ttl_hours": 24,
         "python": "",
         "worker_script": "",
-        "worker_threads": 2,
+        "worker_threads": 5,
         "worker_timeout_seconds": 120,
         "worker_idle_unload_seconds": 180,
         "min_free_mb": 4800,

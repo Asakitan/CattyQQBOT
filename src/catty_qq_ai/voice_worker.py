@@ -115,22 +115,37 @@ def _mood_reference(mood: str, groups, cache: dict):
     return cache[mood]
 
 
+def _model_version(config: dict) -> str:
+    version = str(config.get("version") or "v2").strip().lower()
+    if version not in {"v2", "v5turbo"}:
+        raise ValueError(f"不支持的语音模型版本: {version}")
+    return version
+
+
 def _load_pipeline(config: dict):
     import torch
 
-    from TTS_infer_pack.TTS import TTS
+    from TTS_infer_pack.TTS import TTS, TTS_Config
 
-    threads = int(config.get("threads") or 2)
-    torch.set_num_threads(max(threads, 1))
-    return TTS({"custom": {
+    threads = max(int(config.get("threads") or 5), 1)
+    torch.set_num_threads(threads)
+    torch.set_num_interop_threads(1)
+    version = _model_version(config)
+    configuration = TTS_Config({"custom": {
         "device": "cpu",
         "is_half": False,
-        "version": "v2",
+        "version": version,
         "t2s_weights_path": config["gpt_path"],
         "vits_weights_path": config["sovits_path"],
         "bert_base_path": config["bert_dir"],
         "cnhuhbert_base_path": config["hubert_dir"],
     }})
+    work_dir = Path(config.get("work_dir") or Path(config["reference_audio"]).parent)
+    work_dir.mkdir(parents=True, exist_ok=True)
+    configuration.configs_path = str(work_dir / f"_tts-infer-{version}.yaml")
+    pipeline = TTS(configuration)
+    pipeline._catty_torch_threads = torch.get_num_threads()
+    return pipeline
 
 
 def main() -> int:
@@ -138,6 +153,11 @@ def main() -> int:
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
     config = json.loads(Path(args.config).read_text(encoding="utf-8"))
+    try:
+        model_version = _model_version(config)
+    except ValueError as exc:
+        _emit({"ok": False, "error": str(exc), "fatal": True})
+        return 2
     repo = Path(config["repo_dir"]).resolve()
     reference = Path(config["reference_audio"]).resolve()
     prompt_text = str(config["reference_text"] or "").strip()
@@ -151,8 +171,10 @@ def main() -> int:
     os.environ.update(
         HF_HUB_OFFLINE="1",
         TRANSFORMERS_OFFLINE="1",
-        version="v2",
+        version=model_version,
         bert_path=str(config["bert_dir"]),
+        OMP_NUM_THREADS=str(max(int(config.get("threads") or 5), 1)),
+        MKL_NUM_THREADS=str(max(int(config.get("threads") or 5), 1)),
     )
     # 没有 G2PW 模型时回退 pypinyin 常规读音, 不阻断合成。
     g2pw_dir = repo / "GPT_SoVITS" / "text" / "G2PWModel"
@@ -166,7 +188,10 @@ def main() -> int:
     except Exception as exc:  # noqa: BLE001
         _emit({"ok": False, "error": f"模型加载失败: {type(exc).__name__}: {exc}", "fatal": True})
         return 3
-    _emit({"ok": True, "ready": True})
+
+    ready = {"ok": True, "ready": True, "version": model_version,
+             "threads": getattr(pipeline, "_catty_torch_threads", max(int(config.get("threads") or 5), 1))}
+    _emit(ready)
 
     reference_root = str(config.get("emotion_reference_dir") or "").strip()
     mood_groups = _mood_groups(Path(reference_root).resolve()) if reference_root else {}
@@ -186,16 +211,19 @@ def main() -> int:
             import numpy as np
 
             def _synth(part_text: str, ref_audio, ref_text: str):
+                inputs = {
+                    "text": part_text, "text_lang": "all_zh", "ref_audio_path": str(ref_audio),
+                    "prompt_text": ref_text, "prompt_lang": "all_zh",
+                    "text_split_method": "cut0", "batch_size": 1,
+                    "seed": random.randint(1, 10**6), "top_k": 15, "top_p": 1.0,
+                    "temperature": 1.0, "repetition_penalty": 1.35,
+                    "fragment_interval": 0.0, "parallel_infer": False,
+                    "use_cuda_graph": False, "use_flash_attention": False,
+                }
+                if model_version == "v5turbo":
+                    inputs.update(sample_steps=4, cfg_rate=0.0)
                 with contextlib.redirect_stdout(sys.stderr):
-                    chunks = list(pipeline.run({
-                        "text": part_text, "text_lang": "all_zh", "ref_audio_path": str(ref_audio),
-                        "prompt_text": ref_text, "prompt_lang": "all_zh",
-                        "text_split_method": "cut0", "batch_size": 1,
-                        "seed": random.randint(1, 10**6), "top_k": 15, "top_p": 1.0,
-                        "temperature": 1.0, "repetition_penalty": 1.35,
-                        "fragment_interval": 0.0, "parallel_infer": False,
-                        "use_cuda_graph": False, "use_flash_attention": False,
-                    }))
+                    chunks = list(pipeline.run(inputs))
                 if not chunks:
                     raise ValueError("没有生成音频")
                 pcm = np.concatenate([np.asarray(item).reshape(-1) for _, item in chunks])

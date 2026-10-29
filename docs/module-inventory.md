@@ -2,6 +2,8 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `tmp/v5_cpu_20261030/v5_cpu_probe.py` | 服务器直接下载 V5 权重、隔离 CPU 推理与内存监测 → `docs/voice-candidates.md` | 二线程六句验证完成；后续正式 worker 五线程已部署，无模型本地上传 |
+| `tmp/voice_samples_20261030/generate.py` | 双音色 V2/V2ProPlus/V5 Turbo 对照生成 → 同目录试听 WAV、内嵌音频页面与参数清单 | 本地 18 条试听及浏览器解码通过；用户整体首选 V5 Turbo，未部署 |
 | `README.md` | 项目入口说明、启动配置和当前功能索引 → `docs/session-log/session-27.md` | 文档已更新；目录、链接、JSON 和配置映射检查通过 |
 | `tests/test_shared_persona_integration.py` / `tests/test_fdj_proactive_integration.py` | AST 夹具加载真实 `_extract_incoming_with_voice`，恢复共享人格判门验证 → `docs/session-log/session-26.md` | 已部署；本地与生产两模块各 69 项全通过，消除 42 个 NameError，生产源码与断言不变 |
 | `tools.py` / `__init__.py` / 回执与文件、语音测试 | 单工具排队计数、生成回执、UUID 缓存路径、发送后清理、取消后原会话投递 → `docs/session-log/session-25.md` | 已部署；本地相关 316 项、远端 132 项及插件加载通过；当时夹具错误已在会话 26 修复并部署 |
@@ -10,7 +12,7 @@
 | `voice_reply.py` / `tools.py` / `__init__.py` / 语音与投递测试 | 明确语音请求、群冷却、待发送与已送达区分、失败回落 → `docs/voice-candidates.md`、`docs/session-log/session-21.md` | 三份源码已部署、双端哈希一致；远端语音 49 项通过，生产已加载重连 |
 | `src/catty_qq_ai/openai_client.py` / `persona_admin.py` / `persona_evolution_runtime.py` / `skill_runtime.py` / `config.py` / loader / `config.json` | 主/识图 terra，判门/总结/NSFW 与后台杂活统一 deepseek；次要 AI 线路 `audit_ai → ai_fallback → 主 ai` → `docs/architecture.md`、`docs/session-log/session-20.md` | 已部署；19 文件双端 SHA-256 一致，远端 104 项通过；生产已加载重连 |
 | `src/catty_self_repair/` / `scripts/catty_self_repair.py` / `scripts/catty_hot_reload.py` / `bot.py` / loader / 配置 JSON | 日志触发、独立或缺省主 AI 路由、周预算、源码候选验证、启动健康检查与发布回滚 → `docs/self-repair.md` | 已部署并在生产与本地启用；模板默认关闭；远端隔离 195 项、部署后 160 项通过 |
-| `voice_reply.py` / `voice_worker.py` / `voice_stt.py` / `voice_stt_worker.py` / `tools.py` / `__init__.py` / `config.py` / `data/voice_bank/` | 调情短语音（人格→音色、双语音库、可选 TTS 子进程）+ 语音消息转写（record→faster-whisper）+ 多气泡语音条/NSFW 语音条 → `docs/voice-candidates.md`、`docs/architecture.md` | 参考音修复已部署；本地双音色真实 worker 通过，远端 38 项语音测试通过，真实 QQ 听感待验 |
+| `voice_reply.py` / `voice_worker.py` / `voice_stt.py` / `voice_stt_worker.py` / `tools.py` / `__init__.py` / `config.py` / `data/voice_bank/` | 调情短语音（人格→音色、双语音库、可选 TTS 子进程）+ 语音消息转写（record→faster-whisper）+ 多气泡语音条/NSFW 语音条 → `docs/voice-candidates.md`、`docs/architecture.md` | V5 Turbo 五线程已部署；正式 worker 六句及远端语音 54 项通过，QQ 听感待验 |
 | `tmp/voice-training-20261028-01/` / `tmp/voice-quality-20261028-01/{phrase_ab,whole_refine,acoustic_ab}.py` | 双音色权重与等响度试听 → `models/voice/`、`docs/voice-candidates.md` | 用户首选文件02的4轮候选，selection.json已记录；端到端多句待验，未替换或部署 |
 | `tools.py` / `__init__.py` / `catty_sim_chat.py` | 当前会话消息、水位、短等待与自然收尾 → `docs/tool-contracts.md`、`docs/architecture.md` | 已部署并合入；远端哈希一致 |
 | `insight_memory.py` / `purpose_ledger.py` / `fdj_proactive_runtime.py` / `data_backup.py` | 会话/人格隔离的活跃记忆、完整档及目标证据回执 → `docs/persona-runtime.md`、`docs/fadianji-proactive.md` | 已部署并合入；远端哈希一致 |
@@ -63,6 +65,8 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-30 | 部署 V5 Turbo 五线程语音，保留原始参考音与既有发送行为 | 六个源码/测试文件哈希一致；远端 54/33/22 项通过，正式 worker 六句通过，配置其他字段和 ACL 保持 |
+| 2026-10-30 | 生成双音色三模型对照试听，保留原始 WAV 与参数哈希；记录用户首选 V5 Turbo | 五个权重哈希核验；18 条等响度 WAV 与浏览器解码通过，线上未改 |
 | 2026-10-30 | 更新 README 的猫女仆式项目介绍、启动流程、功能和配置索引 | 47 个链接及锚点、2 个 JSON 示例、配置字段与 Git 跟踪目标检查通过；仅文档变更 |
 | 2026-10-30 | 修复共享人格与主动调度集成测试漏加载语音抽取包装函数；不改人格设计或生产源码 | 修复前 69 项、42 个同因 NameError；修复后本地及生产各 69 项全通过，两份测试双端一致，未重跑完整离线清单 |
 | 2026-10-30 | 部署图片排队/送达回执、跨工具计数、唯一缓存路径、队列清理、取消后的原会话交接，并补齐生产文档依赖 | 本地相关 316 项、远端 132 项通过，九文件双端一致；02:06:36 加载、02:06:40 重连；既有夹具错误保留 |

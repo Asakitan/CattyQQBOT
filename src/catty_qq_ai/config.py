@@ -914,7 +914,7 @@ class Config(BaseModel):
     catty_voice_outbox_ttl_hours: float = 24.0
     catty_voice_python: str = ""  # 空 = 当前解释器
     catty_voice_worker_script: str = ""  # 空 = 包内 voice_worker.py
-    catty_voice_worker_threads: int = 2
+    catty_voice_worker_threads: int = 5
     catty_voice_worker_timeout_seconds: float = 120.0
     catty_voice_worker_idle_unload_seconds: float = 180.0
     catty_voice_min_free_mb: int = 4800  # worker 启动前的可用内存门槛

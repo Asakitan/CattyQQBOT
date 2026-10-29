@@ -1,5 +1,31 @@
 # 本地语音候选
 
+## 2026-10-30 · V5 Turbo 五线程（已部署）
+
+生产两套音色都使用 `voice.profiles.<音色>.version="v5turbo"`，共享官方 `s1v3.ckpt`、`s2Gv5turbo.pth` 和 V5 声码器，保留各自原始参考音。`voice.worker_threads=5`；worker 为 CPU float32、5 个计算线程、1 个跨算子线程，V5 固定 4 步采样。未指定版本的旧 profile 仍按 V2 处理。
+
+三份新权重已由服务器直接下载，固定 revision 和 SHA-256 均核验；部署时只在服务器内部复制到原框架的 `GPT_SoVITS/pretrained_models/`，没有本地上传模型。模型版本进入 worker 签名，切换时重建进程；推理 YAML 写入语音输出目录，不再写共享框架配置。
+
+正式 worker 五线程实测两套音色各三句，启动回执均确认 `v5turbo` 和 5 线程，输出均为 48 kHz 单声道 PCM16。机机单句 11.47–16.87 秒，米雪儿 11.11–12.36 秒；峰值工作集 5501 MiB，最低可用内存 1501 MiB。随机输出与二线程测试不同，不能据此给出严格提速比例。实测回执在 `D:/CattyQQAI/tmp/v5-deploy-20261030-b37e5c/preflight/worker-probe.json`。
+
+六个源码、模板和测试文件已发布且哈希一致；服务器语音 54、配置 33、工具 22 项通过，本地分别为 54、37、22 项。真实配置仅修改语音版本、权重路径和线程数，其余设置与 ACL 核验不变；未复测 QQ 转码与真机听感。
+
+此前二线程隔离测试在 `D:/CattyQQAI/tmp/v5-cpu-20261030-c70a9f/` 完成六句，单句 14.93–25.93 秒，峰值工作集 5468 MiB；样本已取回 `tmp/voice_samples_20261030/server_cpu/`。首轮因隔离副本缺少语言识别缓存失败，补齐服务器已有缓存后通过，失败日志仍保留。
+
+## 2026-10-30 · 模型升级试听
+
+试听位于 `tmp/voice_samples_20261030/`，直接打开 `index.html`；每种音色、每句话可横向对比三个模型，共 18 条。页面内嵌 WAV，独立文件仍按 `fadianji/`、`michelle/` 和模型分目录保存；`raw/` 保留合成原件，`comparison.json` 记录参数与哈希。
+
+| 组别 | 权重与推理方式 | 原生采样率 |
+| --- | --- | --- |
+| V2 | 现有微调权重；机机采用已选的 4 轮声学模型 | 32 kHz |
+| V2ProPlus | 官方 `s1v3.ckpt` + `s2Gv2ProPlus.pth`，零样本 | 32 kHz |
+| V5 Turbo | 官方 `s1v3.ckpt` + `s2Gv5turbo.pth` 与 V5 声码器，零样本，4 步 | 48 kHz |
+
+每个音色沿用相同原始参考音及文本，三句覆盖既有电音问题句、亲昵短句和普通完整句。使用本机 RTX 5070 Ti Laptop GPU、CUDA 半精度、seed 42；保持各版本原生采样率，不做降噪、EQ 或超分，试听全局 RMS 为 0.086228。固定种子不代表跨模型生成过程完全相同。
+
+新增五个权重按 `weights.json` 中官方仓库 revision 和 SHA-256 核验。18 条 PCM WAV 无静音或削波，页面中 18 条均通过浏览器解码。用户反馈“v5效果最好”，本轮整体首选 V5 Turbo，记录在 `selection.json`；后续已完成服务器 CPU 验证与五线程部署，见上节。ASR 验收和 QQ 转码仍未测试。
+
 ## 模型与范围
 
 `models/voice/michelle/` 和 `models/voice/fadianji/` 各保存 GPT、SoVITS 权重、参考 WAV、参考文本、试听和清单。训练使用 GPT-SoVITS V2（`b4570b876f5c086819ba84e3215472733c6a7b70`），SoVITS 8 轮、GPT 15 轮。米雪儿 152 条、993.87 秒；发电机 109 条、299.7 秒，自动转写尚未人工校对。

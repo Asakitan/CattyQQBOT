@@ -435,13 +435,59 @@ class WorkerTailTests(unittest.TestCase):
             no_reference = _config(catty_voice_outbox_dir=str(root), catty_voice_profiles={"fadianji": {}})
             self.assertNotEqual(voice._worker_signature(config, "fadianji"), voice._worker_signature(no_reference, "fadianji"))
 
-    def _run_fake_worker(self, root: Path, emotion_dir: Path | None) -> list[dict]:
+    def test_v5_profile_changes_worker_identity(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            config = _config(catty_voice_outbox_dir=directory, catty_voice_worker_threads=5,
+                             catty_voice_profiles={"fadianji": {"version": "v5turbo"}})
+            payload = json.loads(voice._worker_config_path(config, "fadianji").read_text(encoding="utf-8"))
+            self.assertEqual(payload["version"], "v5turbo")
+            self.assertEqual(payload["threads"], 5)
+            baseline = _config(catty_voice_outbox_dir=directory, catty_voice_worker_threads=5,
+                               catty_voice_profiles={"fadianji": {}})
+            self.assertNotEqual(voice._worker_signature(config, "fadianji"), voice._worker_signature(baseline, "fadianji"))
+
+    def test_v5_pipeline_uses_cpu_five_threads_and_private_config(self) -> None:
+        worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
+        torch_module = types.ModuleType("torch")
+        torch_module.set_num_threads = Mock()
+        torch_module.set_num_interop_threads = Mock()
+        torch_module.get_num_threads = Mock(return_value=5)
+        module = types.ModuleType("TTS_infer_pack.TTS")
+        configuration = types.SimpleNamespace(configs_path="unused")
+        module.TTS_Config = Mock(return_value=configuration)
+        pipeline = types.SimpleNamespace()
+        module.TTS = Mock(return_value=pipeline)
+        package = types.ModuleType("TTS_infer_pack")
+        package.__path__ = []
+        with tempfile.TemporaryDirectory() as directory, patch.dict(sys.modules, {
+            "torch": torch_module, "TTS_infer_pack": package, "TTS_infer_pack.TTS": module,
+        }):
+            result = worker._load_pipeline(dict(version="v5turbo", threads=5, work_dir=directory,
+                gpt_path="gpt", sovits_path="sovits", bert_dir="bert", hubert_dir="hubert"))
+            self.assertIs(result, pipeline)
+            self.assertEqual(result._catty_torch_threads, 5)
+            torch_module.set_num_threads.assert_called_once_with(5)
+            torch_module.set_num_interop_threads.assert_called_once_with(1)
+            options = module.TTS_Config.call_args.args[0]["custom"]
+            self.assertEqual(options["version"], "v5turbo")
+            self.assertEqual(options["device"], "cpu")
+            self.assertFalse(options["is_half"])
+            self.assertEqual(Path(configuration.configs_path).parent, Path(directory))
+
+    def test_unknown_worker_version_is_rejected(self) -> None:
+        worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
+        self.assertEqual(worker._model_version({}), "v2")
+        with self.assertRaises(ValueError):
+            worker._model_version({"version": "unsupported"})
+
+    def _run_fake_worker(self, root: Path, emotion_dir: Path | None, version: str = "v2") -> list[dict]:
         import numpy as np
 
         worker = importlib.import_module(f"{_PACKAGE_NAME}.voice_worker")
         reference = root / "reference.wav"
         _write_wav(reference, seconds=4.0)
         config = {
+            "version": version,
             "repo_dir": str(root), "gpt_path": "gpt", "sovits_path": "sovits",
             "bert_dir": "bert", "hubert_dir": "hubert",
             "reference_audio": str(reference), "reference_text": "original reference",
@@ -468,6 +514,9 @@ class WorkerTailTests(unittest.TestCase):
               patch.object(worker.sys, "stdin", io.StringIO(json.dumps(request) + "\n")),
               patch.dict(worker.os.environ)):
             self.assertEqual(worker.main(), 0)
+        self.assertEqual(len(emit.call_args_list), 2)
+        self.assertTrue(emit.call_args_list[0].args[0]["ready"])
+        self.assertEqual(emit.call_args_list[0].args[0]["version"], version)
         self.assertTrue(emit.call_args_list[-1].args[0]["ok"])
         return calls
 
@@ -478,6 +527,13 @@ class WorkerTailTests(unittest.TestCase):
             self.assertEqual(len(calls), 1)
             self.assertEqual(calls[0]["text"], "First sentence, second sentence.")
             self.assertEqual(calls[0]["ref_audio_path"], str((root / "reference.wav").resolve()))
+
+    def test_v5_requests_four_step_synthesis(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            calls = self._run_fake_worker(Path(directory), None, version="v5turbo")
+            self.assertEqual(len(calls), 1)
+            self.assertEqual(calls[0]["sample_steps"], 4)
+            self.assertEqual(calls[0]["cfg_rate"], 0.0)
 
     def test_configured_original_emotion_reference_keeps_segments(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

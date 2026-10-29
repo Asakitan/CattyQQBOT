@@ -419,7 +419,7 @@ def voice_profile(config: Any, voice: str) -> dict[str, str]:
     if not isinstance(raw, dict):
         return {}
     fields = {}
-    for key in ("gpt_path", "sovits_path", "reference_audio", "reference_text", "emotion_reference_dir"):
+    for key in ("gpt_path", "sovits_path", "reference_audio", "reference_text", "emotion_reference_dir", "version"):
         value = str(raw.get(key) or "").strip()
         if value:
             fields[key] = value
@@ -519,9 +519,10 @@ def _worker_signature(config: Any, voice: str) -> str:
         profile.get("reference_audio", ""),
         profile.get("reference_text", ""),
         profile.get("emotion_reference_dir", ""),
+        profile.get("version", "v2"),
         str(bank_dir(config, voice=voice)),
         str(outbox_dir(config)),
-        str(int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2))),
+        str(int(_as_float(getattr(config, "catty_voice_worker_threads", 5), 5))),
     ]
     return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()[:16]
 
@@ -533,6 +534,7 @@ def _worker_config_path(config: Any, voice: str) -> Path:
     path = directory / f"_worker-{_worker_signature(config, voice)}.json"
     payload = {
         "repo_dir": _worker_setting(config, "catty_voice_repo_dir"),
+        "version": profile.get("version", "v2"),
         "gpt_path": profile.get("gpt_path", ""),
         "sovits_path": profile.get("sovits_path", ""),
         "bert_dir": _worker_setting(config, "catty_voice_bert_dir"),
@@ -543,7 +545,7 @@ def _worker_config_path(config: Any, voice: str) -> Path:
         if profile.get("emotion_reference_dir") else "",
         "bank_dir": str(bank_dir(config, voice=voice)),
         "work_dir": str(outbox_dir(config)),
-        "threads": int(_as_float(getattr(config, "catty_voice_worker_threads", 2), 2)),
+        "threads": int(_as_float(getattr(config, "catty_voice_worker_threads", 5), 5)),
     }
     encoded = json.dumps(payload, ensure_ascii=False, indent=2)
     if not path.is_file() or path.read_text(encoding="utf-8") != encoded:
