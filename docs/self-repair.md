@@ -64,6 +64,6 @@
 
 本地及远端配置合并测试各 5 项通过；原生产配置保存在仅管理员及 SYSTEM 可访问的备份目录。替换后目标配置的原访问主体和权限恢复为显式规则，继承状态由开启变为关闭；未复制或提交真实配置。
 
-此前完整离线回归 1653 项、0 failures、42 errors、9 skipped；剩余错误均为既有两个群聊集成模块的 `_extract_incoming_with_voice` 未注入。完整证据见 [会话 17](session-log/session-17.md) 和 [会话 18](session-log/session-18.md)。
+此前完整离线回归 1653 项、0 failures、42 errors、9 skipped；当时错误均为两个群聊集成模块的 `_extract_incoming_with_voice` 未注入。该夹具遗漏已在 [会话 26](session-log/session-26.md) 修复并部署，本地和生产两模块各 69 项全通过，未重跑完整离线清单。自修复部署证据见 [会话 17](session-log/session-17.md) 和 [会话 18](session-log/session-18.md)。
 
 模块细节：[周预算](self-repair-budget.md)、[日志](self-repair-logs.md)、[模型与 worker](self-repair-agent.md)、[候选、验证与发布](self-repair-workspace.md)。

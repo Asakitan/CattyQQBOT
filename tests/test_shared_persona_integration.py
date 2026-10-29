@@ -84,7 +84,7 @@ class SharedGroupAdmissionTests(unittest.IsolatedAsyncioTestCase):
         self.gate = AsyncMock(return_value=True)
         self.namespace = _load(
             {"_fdj_explicit_wake", "_mention_only_real_at_allowed", "_fresh_mention_for_event",
-             "_group_persona_trigger_allowed", "_extract_trigger_incoming", "_rule"},
+             "_group_persona_trigger_allowed", "_extract_trigger_incoming", "_extract_incoming_with_voice", "_rule"},
             {
                 "GroupMessageEvent": GroupMessageEvent, "PrivateMessageEvent": PrivateMessageEvent,
                 "config": self.config, "logger": Mock(), "_persona_for_event": lambda event: self.persona,

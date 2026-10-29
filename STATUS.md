@@ -1,10 +1,16 @@
 # Catty 当前状态
+## 2026-10-30 · 共享人格集成测试夹具修复（已部署）
+
+- 失败发生在 `_rule` 调用 `_extract_incoming_with_voice` 时：生产函数已存在，但两个 AST 测试夹具没有把它加载进测试命名空间。这是测试依赖遗漏，不是人格判门的有意设计。
+- `test_shared_persona_integration` 和 `test_fdj_proactive_integration` 补齐真实函数加载，保留所有原断言；本地由 69 项、42 errors 恢复为 69 项全部通过，生产同组 69 项全部通过。
+- 两份测试已部署并与本地 SHA-256 一致，生产入口文件与本地一致；生产源码、人格内容和配置未变。未重跑完整离线清单或真实 QQ。详情见 `docs/session-log/session-26.md`。
+
 ## 2026-10-30 · 工具回执与异步投递审查（已部署）
 
 - 图片搜索只报告本次新增的 `images_queued`，不再借用其它工具的队列或声称已经发送；四个生图/图片加工入口统一返回 `status=queued/image_queued=true/image_sent=false`。
 - 生成图片使用独立 UUID 缓存路径，避免同毫秒完成的任务覆盖彼此；图片确认发出后才移除对应待发对象，失败项不伪装成功。
 - 语音等待被主请求取消后，已开始的合成仍交给原会话的后台投递；文件工具也保留完成后的投递负责者，继续共用原有配额和路径去重，失败/部分产物不发送。
-- 本轮相关检查 316 项通过、九文件语法及编辑器诊断正常、独立插件加载通过。额外运行的 `test_shared_persona_integration` 仍有 21 个既有夹具错误（19 项用例，缺 `_extract_incoming_with_voice`），其 `_rule` 与 HEAD 的 AST 完全相同，本轮未改该路径。
+- 本轮相关检查 316 项通过、九文件语法及编辑器诊断正常、独立插件加载通过。当时额外运行的 `test_shared_persona_integration` 有 21 个既有夹具错误（19 项用例，缺 `_extract_incoming_with_voice`），其 `_rule` 与 HEAD 的 AST 完全相同，本轮未改该路径；该夹具错误后来已在会话 26 修复并部署。
 - 上述增量与会话 24 的搜图修复已部署；九个源码/测试文件双端一致，远端六组 132 项及独立插件加载通过。补齐生产已声明但缺失的 python-docx/openpyxl/reportlab，测试临时目录规范化以兼容 Windows 短路径。
 - 生产在远端时间 02:06:36 加载插件、02:06:40 重连 OneBot；配置哈希未变，人格和 NSFW 策略未修改，真实模型与 QQ 端到端未测。详见 `docs/session-log/session-25.md`。
 

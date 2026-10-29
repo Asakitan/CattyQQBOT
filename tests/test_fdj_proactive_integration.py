@@ -112,7 +112,8 @@ class TriggerIntegrationTests(unittest.IsolatedAsyncioTestCase):
         }
         _extract({
             "_fdj_explicit_wake", "_mention_only_real_at_allowed", "_fresh_mention_for_event",
-            "_group_persona_trigger_allowed", "_extract_trigger_incoming", "_rule", "_expression_repeat_rule", "_affection_command_rule",
+            "_group_persona_trigger_allowed", "_extract_trigger_incoming", "_extract_incoming_with_voice",
+            "_rule", "_expression_repeat_rule", "_affection_command_rule",
         }, self.ns)
         message_utils.set_persona_resolver(lambda event: self.persona)
         self.addCleanup(message_utils.set_persona_resolver, None)
