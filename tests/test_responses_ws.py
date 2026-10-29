@@ -51,15 +51,19 @@ class GroupCacheTTLTests(unittest.TestCase):
         self.assertEqual(tracker.select("group:TARGET", "one", now=30), "30m")
         self.assertEqual(tracker.select("group:TARGET", "three", now=40), "12h")
 
-    def test_groups_are_isolated_and_other_scopes_do_not_count(self):
+    def test_sessions_are_isolated_and_empty_scopes_do_not_count(self):
         tracker = prompt_cache.GroupCacheTTL()
-        for turn in ("one", "two", "three"):
-            tracker.select("group:TARGET", turn, now=0)
-            for scope in ("private:TARGET", "summary:group:TARGET", "group:", ""):
-                self.assertEqual(tracker.select(scope, turn, now=0), "30m")
-        self.assertEqual(tracker.select("group:OTHER", "one", now=0), "30m")
-        self.assertEqual(tracker.select("group:TARGET", "", now=0), "30m")
-        self.assertEqual(set(tracker._groups), {"group:TARGET", "group:OTHER"})
+        scopes = ("group:TARGET", "private:TARGET", "group:TARGET:user:OTHER", "session:TARGET")
+        for scope in scopes:
+            with self.subTest(scope=scope):
+                self.assertEqual(tracker.select(scope, "one", now=0), "30m")
+                self.assertEqual(tracker.select(scope, "two", now=100), "30m")
+                self.assertEqual(tracker.select(scope, "three", now=200), "12h")
+                self.assertEqual(tracker.select(scope, "cold", now=2000), "30m")
+        for scope in ("", " "):
+            self.assertEqual(tracker.select(scope, "one", now=0), "30m")
+        self.assertEqual(tracker.select("private:TARGET", "", now=0), "30m")
+        self.assertEqual(set(tracker._groups), set(scopes))
 
     def test_window_excludes_expired_turns_and_bounds_state(self):
         tracker = prompt_cache.GroupCacheTTL()
@@ -112,16 +116,19 @@ class GroupCachePolicyTests(unittest.TestCase):
             openai_client.reset_current_logical_turn(turn_token)
             openai_client.reset_current_scope_key(scope_token)
 
-    def test_request_diagnostics_count_only_distinct_group_turns(self):
-        for _ in range(4):
-            self.assertEqual(self._turn("one")["responses_cache_ttl"], "30m")
-        self.assertEqual(self._turn("two")["responses_cache_ttl"], "30m")
-        self.assertEqual(self._turn("three")["responses_cache_ttl"], "12h")
+    def test_request_diagnostics_count_distinct_turns_in_all_chat_sessions(self):
+        for scope in ("group:TARGET", "private:TARGET", "group:TARGET:user:OTHER", "session:TARGET"):
+            with self.subTest(scope=scope):
+                for _ in range(4):
+                    self.assertEqual(self._turn("one", scope=scope)["responses_cache_ttl"], "30m")
+                self.assertEqual(self._turn("two", scope=scope)["responses_cache_ttl"], "30m")
+                self.assertEqual(self._turn("three", scope=scope)["responses_cache_ttl"], "12h")
         self.assertEqual(self._turn("one", scope="group:OTHER")["responses_cache_ttl"], "30m")
 
-    def test_private_auxiliary_legacy_and_gateway_requests_do_not_count(self):
+    def test_empty_auxiliary_legacy_and_gateway_requests_do_not_count(self):
         cases = (
-            {"scope": "private:TARGET"},
+            {"scope": ""},
+            {"scope": " "},
             {"scope": "summary:group:TARGET"},
             {"route": "summary"},
             {"request_class": "auxiliary"},
@@ -431,6 +438,14 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
             }])
 
     async def test_dynamic_ttl_switch_replays_once_then_resumes_incremental_input(self):
+        await self._assert_dynamic_ttl_switch_for_scope("group:TARGET")
+
+    async def test_private_and_custom_sessions_keep_dynamic_ttl_continuation(self):
+        for scope in ("private:TARGET", "group:TARGET:user:OTHER", "session:TARGET"):
+            with self.subTest(scope=scope):
+                await self._assert_dynamic_ttl_switch_for_scope(scope)
+
+    async def _assert_dynamic_ttl_switch_for_scope(self, session_scope):
         frames = []
 
         class FakeTransport:
@@ -458,7 +473,7 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         select = tracker.select
         timestamp = 0
         messages = [{"role": "system", "content": "rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"}]
-        scope_token = openai_client.set_current_scope_key("group:TARGET")
+        scope_token = openai_client.set_current_scope_key(session_scope)
         try:
             with tempfile.TemporaryDirectory() as directory:
                 cache = responses_ws.ResponseChainCache(Path(directory) / "cache.json", 60)
@@ -484,7 +499,7 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
                                 await openai_client._stream_responses_ws_attempt(
                                     config=config, base_url="https://api.openai.com/v1/responses",
                                     api_key="TOKEN", extra_headers={}, payload=payload,
-                                    timeout=5, proxy="", dash_stream_id=None, dash_mod=None, scope="group:TARGET",
+                                    timeout=5, proxy="", dash_stream_id=None, dash_mod=None, scope=session_scope,
                                 )
                             finally:
                                 openai_client._current_cache_request_diagnostics_var.reset(token)

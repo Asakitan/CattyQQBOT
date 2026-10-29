@@ -36,7 +36,7 @@ class GroupCacheTTL:
         self._groups: OrderedDict[str, OrderedDict[str, tuple[float, str]]] = OrderedDict()
 
     def select(self, scope: str, turn_id: str, *, now: float | None = None) -> str:
-        if not scope.startswith("group:") or not scope[6:] or not turn_id:
+        if not scope.strip() or not turn_id:
             return "30m"
         timestamp = time.monotonic() if now is None else now
         turns = self._groups.setdefault(scope, OrderedDict())

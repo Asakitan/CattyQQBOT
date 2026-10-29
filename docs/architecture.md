@@ -102,9 +102,9 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 收尾增量（已部署）：官方GPT-5.6+ Responses主线路的工具循环到达轮数上限后，仍通过同一路由发送末轮工具定义和原指南，但设置 `tool_choice=none`。响应不会再次进入工具执行器；失败保留原纯文字恢复路径。可调用阶段仍逐轮刷新provider，router、fallback及其它端点保持原收尾逻辑。部署前假传输验证保留 `previous_response_id`，只补工具回执与两条收尾提示；未额外验证自动重载或线上效果。
 
-群活跃动态 TTL（已部署，生产加载未复核）：`prompt_cache.GroupCacheTTL` 只统计官方 GPT-5.6+ Responses 的 `main/chat` 群主请求，以 scope 和 `logical_turn_id` 去重。滚动 1800 秒内至少 3 个不同回合（含本轮）选 `12h`，否则选 `30m`；截止时间上的旧回合已过期。同一逻辑回合的 TTL 绑定到请求上下文，工具续调、HTTP 重试与 WebSocket 重放不重复计数、不在回合中途换档。计数使用单调时钟，最多保留 1024 群、每群 128 回合；不落盘，重启从冷状态重新统计。私聊、摘要/辅助线路、旧模型及兼容网关不参与。
+会话活跃动态 TTL（全会话版已部署，生产加载未复核）：`prompt_cache.GroupCacheTTL` 保留旧名称与接口，但计数器不再限制 scope 前缀；请求入口只统计有非空 session key 的官方 GPT-5.6+ Responses `main/chat` 请求，包括群聊、私聊、群内独立用户及自定义 session。以完整 scope 和 `logical_turn_id` 去重，相同 QQ 或群号的不同 session 不混用计数。滚动 1800 秒内至少 3 个不同回合（含本轮）选 `12h`，否则选 `30m`；截止时间上的旧回合已过期。同一逻辑回合的 TTL 绑定到请求上下文，工具续调、HTTP 重试与 WebSocket 重放不重复计数、不在回合中途换档。计数使用单调时钟，最多保留 1024 个 session、每个 128 回合；不落盘，重启从冷状态重新统计。空 key、摘要/辅助线路、旧模型及兼容网关不参与。
 
-选择结果经 `responses_cache_ttl` 请求诊断进入稳定 developer 内容块的 `prompt_cache_breakpoint.ttl`；两条历史断点与隐式缓存仍为默认 `30m`，不把动态上下文整体延长。WebSocket 在首个稳定项为 `12h` 时额外区分续传指纹，升降档各重放完整 input 一次，随后恢复 `previous_response_id` 增量；通用 `item_hash` 继续忽略滚动缓存元数据。日志记录 `responses cache policy scope=... ttl=...`。升档需要重新付费写入，降档只影响后续写入，不撤回服务端已有的长缓存，也不保证相同前缀必然命中。离线 130 项定向回归、9 跳过，其余通过；未测生产费用及真实模型。
+选择结果经 `responses_cache_ttl` 请求诊断进入稳定 developer 内容块的 `prompt_cache_breakpoint.ttl`；两条历史断点与隐式缓存仍为默认 `30m`，不把动态上下文整体延长。WebSocket 在首个稳定项为 `12h` 时额外区分续传指纹，升降档各重放完整 input 一次，随后恢复 `previous_response_id` 增量；通用 `item_hash` 继续忽略滚动缓存元数据。日志记录 `responses cache policy scope=... ttl=...`。升档需要重新付费写入，降档只影响后续写入，不撤回服务端已有的长缓存，也不保证相同前缀必然命中。全会话版离线 131 项定向回归、9 跳过，其余通过，包含私聊与自定义 session 换档续传；未测生产费用及真实模型。
 
 生产机本地 SOCKS `127.0.0.1:11080` 由启动任务维持，加密隧道接跳板 TCP 18080；OpenAI 与 NovelAI 域名经隧道，其他流量直连。`vision.image_download_direct` 默认关闭，生产显式开启后只让图片资源绕过 API 代理，仍逐跳校验公网 IP、固定连接地址并禁止环境代理。真实 QQ 公共头像下载与 Terra WebSocket 识图、两轮增量续聊及 NAI 鉴权通过；生产实际出图、QQ 会话端到端与长期缓存命中未验证。单连接的 named lane 数量上限可能触发 HTTP 回退。
 

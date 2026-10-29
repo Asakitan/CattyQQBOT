@@ -2915,8 +2915,8 @@ def _select_responses_cache_ttl(
     if (
         request_route != "main"
         or request_class != "chat"
-        or not scope.startswith("group:")
-        or not scope[6:]
+        or not scope.strip()
+        or _request_class_for_route(request_route, scope) != "chat"
         or not turn_id
         or not urlparse(base_url).path.rstrip("/").endswith("/responses")
         or not _responses_support_explicit_cache(base_url, model)
