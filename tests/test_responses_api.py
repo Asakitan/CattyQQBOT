@@ -505,6 +505,88 @@ class ConvertResponsesDataTests(unittest.TestCase):
         self.assertEqual(again["choices"][0]["message"]["content"], "x")
 
 
+class ResponsesGuideCacheTests(unittest.TestCase):
+    def setUp(self):
+        self.request = importlib.import_module("catty_qq_ai.request_intent")
+        self.harness = importlib.import_module("catty_qq_ai.harness_prompt")
+        self.names = ["catty_write_file", "catty_python_run", "catty_skill_search", "catty_web_search", "catty_fetch_url"]
+        self.tools = [{"type": "function", "function": {
+            "name": name, "parameters": {"type": "object", "properties": {}},
+        }} for name in self.names]
+
+    def messages(self, question="question", state="state one"):
+        messages = [
+            {"role": "system", "content": "stable rules"},
+            {"role": "system", "content": "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "old question"},
+            {"role": "assistant", "content": "old answer"},
+            {"role": "user", "content": question},
+            {"role": "system", "content": "【TARGET·evidence】\n" + state},
+        ]
+        self.harness.append_harness_agent_hint(messages, self.names)
+        self.request.append_context_request_hint(messages, self.names)
+        return messages
+
+    def body(self, messages, **kwargs):
+        return _client._payload_to_responses_body(
+            {"model": "gpt-6.1-terra", "messages": messages, "tools": self.tools},
+            stream=True, **kwargs,
+        )
+
+    def test_exact_guides_cached_once_without_moving_live_evidence(self):
+        messages = self.messages()
+        before = copy.deepcopy(messages)
+        first = self.body(messages, cache_stable_prefix=True)
+        second = self.body(self.messages("next question", "state two"), cache_stable_prefix=True)
+        prefix = first["input"][0]
+        self.assertEqual(prefix, second["input"][0])
+        self.assertEqual(prefix["content"][0]["prompt_cache_breakpoint"], {"mode": "explicit"})
+        texts = "\n".join(part.get("text", "") for item in first["input"] for part in item.get("content", []))
+        for guide in (messages[-1]["content"], messages[-2]["content"]):
+            self.assertIn(guide, prefix["content"][0]["text"])
+            self.assertEqual(texts.count(guide), 1)
+        self.assertEqual([item["role"] for item in first["input"]], ["developer", "user", "assistant", "user", "developer"])
+        self.assertEqual(first["input"][-1]["content"][0]["text"], before[-3]["content"])
+        self.assertIn("state two", second["input"][-1]["content"][0]["text"])
+        self.assertEqual(messages, before)
+
+    def test_refresh_position_does_not_change_fixed_prefix(self):
+        messages = self.messages()
+        initial = self.body(messages, cache_stable_prefix=True)
+        messages.extend([
+            {"role": "assistant", "tool_calls": [{"id": "call_1", "type": "function", "function": {"name": "catty_web_search", "arguments": "{}"}}]},
+            {"role": "tool", "tool_call_id": "call_1", "content": "result"},
+        ])
+        self.request.append_context_request_hint(messages, self.names)
+        followup = self.body(messages, cache_stable_prefix=True)
+        self.assertEqual(initial["input"], followup["input"][:len(initial["input"])])
+        self.assertEqual(followup["input"][-1]["type"], "function_call_output")
+
+    def test_changed_or_untrusted_guides_stay_in_place(self):
+        for variant in ("custom", "user", "stale_tools"):
+            with self.subTest(variant=variant):
+                messages = self.messages()
+                if variant == "custom":
+                    messages[-1]["content"] += "\noperator override"
+                elif variant == "user":
+                    messages[-1]["role"] = "user"
+                else:
+                    self.request.append_context_request_hint(messages, [*self.names, "catty_skill_load"])
+                guide = messages[-1]["content"]
+                body = self.body(messages, cache_stable_prefix=True)
+                self.assertNotIn(guide, body["input"][0]["content"][0]["text"])
+                self.assertEqual(body["input"][-1]["content"][0]["text"], guide)
+
+    def test_legacy_conversion_and_missing_boundary_keep_existing_shape(self):
+        messages = self.messages()
+        legacy = self.body(messages, cache_stable_prefix=False)
+        self.assertIn(messages[-1]["content"], legacy["instructions"])
+        self.assertEqual([item["role"] for item in legacy["input"]], ["user", "assistant", "user"])
+        messages.pop(1)
+        missing = self.body(messages, cache_stable_prefix=True)
+        self.assertEqual(missing, self.body(messages, cache_stable_prefix=False))
+
+
 class _FakeSseResponse:
     def __init__(
         self,
@@ -585,7 +667,9 @@ class StreamResponsesAttemptTests(unittest.TestCase):
         body = fake_client.post.await_args.kwargs["json"]
         self.assertEqual(body["input"][0]["content"][0]["prompt_cache_breakpoint"], {"mode": "explicit"})
         self.assertEqual(body["input"][1]["content"][0]["text"], " marker note")
-        self.assertIn("dynamic context", body["input"][-1]["content"][0]["text"])
+        self.assertEqual(body["input"][-2]["content"][0]["text"], "question")
+        self.assertEqual(body["input"][-1]["role"], "developer")
+        self.assertEqual(body["input"][-1]["content"][0]["text"], "dynamic context")
 
     def test_completed_event_used_as_authoritative(self) -> None:
         sse_events = [

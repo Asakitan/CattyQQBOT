@@ -1,5 +1,6 @@
 import asyncio
 import copy
+import importlib
 import importlib.util
 import json
 import sys
@@ -74,6 +75,44 @@ class ResponseItemHashTests(unittest.TestCase):
                 }))
 
 
+class ResponsesToolArgumentFormatTests(unittest.TestCase):
+    def test_clean_arguments_keep_exact_server_bytes_only_when_requested(self):
+        raw = ' {\n "query" : "\\u4f60\\u597d", "limit" : 1\n} '
+        calls = [{"id": "call_1", "type": "function", "function": {"name": "lookup", "arguments": raw}}]
+        before = copy.deepcopy(calls)
+        normalized, specs = openai_client._normalize_assistant_tool_calls(calls, round_idx=0, preserve_argument_format=True)
+        self.assertEqual(normalized[0]["function"]["arguments"], raw)
+        self.assertEqual(specs[0]["arguments_json"], raw)
+        self.assertEqual(calls, before)
+        legacy, _ = openai_client._normalize_assistant_tool_calls(calls, round_idx=0)
+        self.assertNotEqual(legacy[0]["function"]["arguments"], raw)
+        self.assertEqual(json.loads(legacy[0]["function"]["arguments"]), json.loads(raw))
+
+    def test_sanitization_always_takes_priority_over_continuation(self):
+        cases = [
+            ('{"token":"SECRET_VALUE"}', "SECRET_VALUE"),
+            ('{"nested":{"password":"SECRET_VALUE"}}', "SECRET_VALUE"),
+            ('{"token":"SECRET_VALUE","token":"<redacted>"}', "SECRET_VALUE"),
+            ('{"nested":{"cookie":"SECRET_VALUE","cookie":"<redacted>"}}', "SECRET_VALUE"),
+            ('{"payload":"data:text/plain;base64,UEFZTE9BRA=="}', "data:text/plain"),
+            ('{"query":"SECRET_VALUE"', "SECRET_VALUE"),
+        ]
+        for raw, forbidden in cases:
+            with self.subTest(raw=raw):
+                result = openai_client._serialize_tool_arguments_for_history(raw, preserve_format=True)
+                self.assertNotEqual(result, raw)
+                self.assertNotIn(forbidden, result)
+                json.loads(result)
+
+    def test_duplicate_keys_and_oversized_whitespace_use_bounded_projection(self):
+        for raw in ('{"n":1,"n":2}', '{"nested":{"n":1,"n":2}}', " " * 4100 + '{"query":"TARGET"}'):
+            with self.subTest(length=len(raw)):
+                result = openai_client._serialize_tool_arguments_for_history(raw, preserve_format=True)
+                self.assertNotEqual(result, raw)
+                self.assertEqual(json.loads(result), json.loads(raw))
+                self.assertLessEqual(len(result), openai_client._TOOL_HISTORY_MAX_ARGUMENT_JSON_CHARS)
+
+
 class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.frames: list[dict] = []
@@ -84,6 +123,108 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         self.addAsyncCleanup(server.close)
         port = server.sockets[0].getsockname()[1]
         return server, port
+
+    async def _run_real_tool_loop(self, arguments, *, change_tools=False):
+        frames = []
+        executed = []
+        provider_calls = []
+
+        class FakeTransport:
+            generation = 1
+
+            async def ensure_ready(self):
+                return self.generation
+
+            async def iter_events(self, body, *, stream_id, previous_response_id):
+                frames.append((copy.deepcopy(body), previous_response_id))
+                output = [{"type": "function_call", "call_id": "call_1", "name": "lookup", "arguments": arguments}] if len(frames) == 1 else [
+                    {"type": "message", "role": "assistant", "content": [{"type": "output_text", "text": "done"}]},
+                ]
+                yield {"type": "response.completed", "response": {"id": f"resp_{len(frames)}", "status": "completed", "output": output}}
+
+        def schemas(names):
+            return [{"type": "function", "function": {"name": name, "parameters": {"type": "object", "properties": {}}}} for name in names]
+
+        names = ["lookup", "catty_skill_search"]
+        tools = schemas(names)
+
+        def tools_provider():
+            provider_calls.append(True)
+            return schemas(names + (["catty_skill_load"] if change_tools and len(provider_calls) > 1 else []))
+
+        async def executor(name, raw):
+            executed.append((name, raw))
+            return {"status": "ok", "value": "TARGET"}
+
+        request = importlib.import_module(f"{_PACKAGE_NAME}.request_intent")
+        harness = importlib.import_module(f"{_PACKAGE_NAME}.harness_prompt")
+        messages = [
+            {"role": "system", "content": "stable rules <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "old question"},
+            {"role": "assistant", "content": "old answer"},
+            {"role": "user", "content": "current question"},
+            {"role": "system", "content": "【TARGET·evidence】\nstate one"},
+        ]
+        harness.append_harness_agent_hint(messages, names)
+        request.append_context_request_hint(messages, names)
+        before = copy.deepcopy((messages, tools))
+        config = openai_client.Config(
+            catty_openai_base_url="https://api.openai.com/v1/responses",
+            catty_openai_model="gpt-6.1-terra", catty_openai_api_key="TOKEN",
+            catty_anthropic_native_enabled=False, catty_tools_enabled=True,
+            catty_openai_websocket_enabled=True, catty_openai_websocket_store=False,
+            catty_openai_websocket_previous_response=True,
+            catty_openai_websocket_fallback_http=False,
+        )
+        scope_token = openai_client.set_current_scope_key("private:1")
+        openai_client._reset_cloud_health_for_tests()
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                cache = responses_ws.ResponseChainCache(Path(directory) / "cache.json", 60)
+                with (
+                    patch.object(openai_client, "_get_runtime_config", return_value=config),
+                    patch.object(openai_client, "_get_ws_transport", return_value=FakeTransport()),
+                    patch.object(openai_client, "_get_ws_chain_cache", return_value=cache),
+                    patch.object(openai_client, "_http_client", side_effect=AssertionError("unexpected HTTP")),
+                    patch.object(openai_client, "_log_cache_stats"),
+                    patch.object(openai_client, "_maybe_distill_reply"),
+                    patch.object(openai_client, "_cache_request_dump_enabled", return_value=False),
+                ):
+                    result = await openai_client.chat_completion_with_tools(
+                        config, messages, tools=tools, tool_executor=executor,
+                        tools_provider=tools_provider, max_rounds=2,
+                    )
+        finally:
+            openai_client.reset_current_scope_key(scope_token)
+            openai_client._reset_cloud_health_for_tests()
+        self.assertEqual(result, "done")
+        self.assertEqual(executed, [("lookup", arguments)])
+        self.assertEqual(len(provider_calls), 2)
+        self.assertEqual((messages, tools), before)
+        self.assertEqual(len(frames), 2)
+        return frames
+
+    async def test_real_tool_loop_sends_only_new_result_and_followup_hint(self):
+        frames = await self._run_real_tool_loop(' {\n "query" : "\\u4f60\\u597d"\n} ')
+        self.assertIsNone(frames[0][1])
+        self.assertEqual(frames[1][1], "resp_1")
+        self.assertEqual([item["type"] for item in frames[1][0]["input"]], ["function_call_output", "message"])
+        self.assertEqual(frames[1][0]["input"][1]["role"], "developer")
+        self.assertFalse(any(item.get("role") == "user" for item in frames[1][0]["input"]))
+        self.assertEqual(frames[0][0]["input"][-2]["content"][0]["text"], "current question")
+        self.assertEqual(frames[0][0]["input"][-1]["content"][0]["text"], "【TARGET·evidence】\nstate one")
+
+    async def test_real_tool_loop_replays_for_redaction_or_new_capabilities(self):
+        for arguments, changed in (('{"token":"SECRET_VALUE"}', False), (' { "query": "TARGET" } ', True)):
+            with self.subTest(redacted=not changed):
+                frames = await self._run_real_tool_loop(arguments, change_tools=changed)
+                self.assertIsNone(frames[1][1])
+                self.assertNotIn("SECRET_VALUE", json.dumps(frames[1][0]))
+                if changed:
+                    self.assertIn("本轮提供 catty_skill_load", frames[1][0]["input"][0]["content"][0]["text"])
+                else:
+                    calls = [item for item in frames[1][0]["input"] if item["type"] == "function_call"]
+                    self.assertIn("<redacted>", calls[0]["arguments"])
 
     async def test_rolling_history_markers_keep_append_only_continuation(self):
         frames = []

@@ -359,6 +359,7 @@ def _normalize_assistant_tool_calls(
     raw_tool_calls: Any,
     *,
     round_idx: int,
+    preserve_argument_format: bool = False,
 ) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
     raw_calls = raw_tool_calls if isinstance(raw_tool_calls, list) else [raw_tool_calls]
     normalized_calls: list[dict[str, Any]] = []
@@ -402,7 +403,9 @@ def _normalize_assistant_tool_calls(
                 "type": "function",
                 "function": {
                     "name": history_name,
-                    "arguments": _serialize_tool_arguments_for_history(arguments_json),
+                    "arguments": _serialize_tool_arguments_for_history(
+                        arguments_json, preserve_format=preserve_argument_format,
+                    ),
                 },
             }
         )
@@ -570,9 +573,18 @@ def _serialize_tool_result_for_history(payload: Any) -> str:
     )
 
 
-def _serialize_tool_arguments_for_history(arguments_json: str) -> str:
+def _serialize_tool_arguments_for_history(arguments_json: str, *, preserve_format: bool = False) -> str:
+    duplicate_keys = False
+
+    def collect_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        nonlocal duplicate_keys
+        result = dict(pairs)
+        if len(result) != len(pairs):
+            duplicate_keys = True
+        return result
+
     try:
-        parsed = json.loads(arguments_json)
+        parsed = json.loads(arguments_json, object_pairs_hook=collect_pairs)
     except (TypeError, ValueError):
         return json.dumps(
             {
@@ -614,6 +626,14 @@ def _serialize_tool_arguments_for_history(arguments_json: str) -> str:
             separators=(",", ":"),
         )
     if len(content) <= _TOOL_HISTORY_MAX_ARGUMENT_JSON_CHARS:
+        # A Responses continuation refers to the actual server output, including
+        # JSON whitespace/escaping. Keep those bytes only when the full history
+        # sanitizer is a no-op. Duplicates can hide discarded sensitive values.
+        if (
+            preserve_format and not duplicate_keys and sanitized == parsed
+            and len(arguments_json) <= _TOOL_HISTORY_MAX_ARGUMENT_JSON_CHARS
+        ):
+            return arguments_json
         return content
     return json.dumps(
         {
@@ -2875,8 +2895,8 @@ def _responses_support_explicit_cache(base_url: str, model: str) -> bool:
 def _mark_responses_history_cache(input_items: list[dict[str, Any]]) -> None:
     """缓存最近两个历史 user 端点，避开本轮动态上下文。
 
-    当前 user 会合入 DYN_SYS，下一轮只保留原始发言；仅在本轮末尾隐式写入
-    无法复用其中的历史前缀。两个历史端点滚动交叠，另留一个显式写入给稳定
+    本轮动态 developer 段不会存入聊天历史；仅在整轮末尾隐式写入无法复用
+    其中的历史前缀。两个历史端点滚动交叠，另留一个显式写入给稳定
     system 前缀、一个给隐式缓存。只添加缓存元数据，不改角色、正文或顺序。
     """
     users = [item for item in input_items if item.get("role") == "user"]
@@ -2896,6 +2916,52 @@ def _mark_responses_history_cache(input_items: list[dict[str, Any]]) -> None:
             break
 
 
+def _hoist_responses_cache_guides(
+    items: list[dict[str, Any]], boundary_index: int, tools: list[dict[str, Any]] | None,
+) -> int:
+    """Move exact generated guides before the stable boundary, not live context.
+
+    Capability wording is matched against this request's actual schemas. Header
+    lookalikes, retrieved text, user messages and changed/custom guides stay put.
+    This operates only on the converter's new input items, never caller history.
+    """
+    from .harness_prompt import _is_harness_guide, build_harness_agent_hint
+    from .request_intent import append_context_request_hint
+
+    names = _allowed_tool_names(tools or [])
+    expected: list[dict[str, Any]] = []
+    append_context_request_hint(expected, names)
+    request_guide = expected[0]["content"]
+    selected: list[tuple[int, int, dict[str, Any]]] = []
+    for index in range(boundary_index + 1, len(items)):
+        item = items[index]
+        parts = item.get("content")
+        if item.get("role") != "system" or not isinstance(parts, list) or len(parts) != 1:
+            continue
+        part = parts[0]
+        if not isinstance(part, dict) or part.get("type") != "input_text":
+            continue
+        text = part.get("text")
+        if not isinstance(text, str):
+            continue
+        if text == request_guide:
+            selected.append((0, index, item))
+        elif _is_harness_guide(text):
+            header = text.partition("\n")[0]
+            char_name = header[1:-len("·证据使用指南】")]
+            if char_name and text == build_harness_agent_hint(names, char_name=char_name):
+                selected.append((1, index, item))
+    if not selected:
+        return boundary_index
+    removed = {index for _, index, _ in selected}
+    items[:] = [item for index, item in enumerate(items) if index not in removed]
+    # Request guidance can be refreshed after a tool result. Its source position
+    # must not change the cached order of the two independent constant guides.
+    guides = [item for _, _, item in sorted(selected, key=lambda entry: entry[:2])]
+    items[boundary_index:boundary_index] = guides
+    return boundary_index + len(guides)
+
+
 def _payload_to_responses_body(
     payload: dict[str, Any],
     *,
@@ -2904,7 +2970,8 @@ def _payload_to_responses_body(
 ) -> dict[str, Any]:
     """chat-completions payload → Responses API request body.
 
-    默认将系统消息 hoist 到 instructions；支持显式缓存时保留稳定边界和消息顺序。
+    默认将系统消息 hoist 到 instructions；显式缓存仅前移精确生成的固定说明，
+    动态消息保留角色及顺序。
     chat-completions 专属字段 (messages/max_tokens/stream/stream_options/tools/
     tool_choice) 转换或丢弃; extra_body 只透传白名单字段。
     """
@@ -2927,6 +2994,9 @@ def _payload_to_responses_body(
                 boundary_index = index
                 break
     if boundary_index >= 0:
+        boundary_index = _hoist_responses_cache_guides(
+            input_items, boundary_index, payload.get("tools"),
+        )
         for item in input_items[:boundary_index]:
             system_texts.append("\n".join(
                 str(part.get("text") or "")
@@ -3656,7 +3726,8 @@ async def _post_chat_completion_raw(
 
     # === DeepSeek KV cache 前缀稳定优化 (OpenAI compat path 专属) ===
     # 主人 2026-05-28: DeepSeek 硬盘缓存是服务端自动 token 级精确前缀匹配,
-    # 不需要 cache_control 字段, 但前缀必须字节稳定. 仅在非 Claude 端点跑.
+    # 不需要 cache_control 字段, 但前缀必须字节稳定. 官方 Responses 不使用
+    # DeepSeek 的末尾折叠/历史尾 hoist：首轮和工具续轮必须保持同一消息投影。
     # 参考: dist/deepseek硬盘缓存规则.txt + QwenLM/qwen-code#4065.
     try:
         from .prompt_cache import (
@@ -3672,7 +3743,11 @@ async def _post_chat_completion_raw(
             strip_all_cache_control,
             strip_inline_dynamic_segments_from_history,
         )
-        if not is_claude_endpoint(base_url, model):
+        if _is_responses_endpoint(base_url) and _responses_support_explicit_cache(base_url, model):
+            strip_all_cache_control(messages, tools)
+            if tools:
+                stabilize_tools_order(tools)
+        elif not is_claude_endpoint(base_url, model):
             # (a) strip 残留 cache_control (防 DeepSeek 未来严格校验未知字段)
             stripped = strip_all_cache_control(messages, tools)
             if stripped > 0:
@@ -4985,13 +5060,16 @@ async def chat_completion_with_tools(
 
     # 强制 tool_choice 的目标端点 (用于"该端点不支持强制"的能力缓存)。native 不透传 tool_choice,
     # 故只对 router / openai-compat 路径有意义。
-    _force_endpoint_key = (
-        f"{router_base_url}|{router_model}" if _router_active
-        else (
-            f"{config.catty_ai_fallback_base_url}|{config.catty_ai_fallback_model}"
-            if _fallback_mode
-            else f"{config.catty_openai_base_url}|{_effective_main_model(config)}"
-        )
+    if _router_active:
+        _round_base_url, _round_model = router_base_url, router_model
+    elif _fallback_mode:
+        _round_base_url, _round_model = config.catty_ai_fallback_base_url, config.catty_ai_fallback_model
+    else:
+        _round_base_url, _round_model = config.catty_openai_base_url, _effective_main_model(config)
+    _force_endpoint_key = f"{_round_base_url}|{_round_model}"
+    _preserve_argument_format = (
+        not _native_route and _is_responses_endpoint(_round_base_url)
+        and _responses_support_explicit_cache(_round_base_url, _round_model)
     )
 
     for round_idx in range(max(1, max_rounds)):
@@ -5075,6 +5153,7 @@ async def chat_completion_with_tools(
         normalized_tool_calls, call_specs = _normalize_assistant_tool_calls(
             tool_calls,
             round_idx=round_idx,
+            preserve_argument_format=_preserve_argument_format,
         )
 
         # Normalize missing ids and malformed function envelopes before history writes so

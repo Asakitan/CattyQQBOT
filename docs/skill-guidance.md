@@ -6,6 +6,7 @@
 - `CONTEXT_REQUEST_INTENT_PROMPT` 保留上下文目标、执行/回复/修改/继续、真实回执和去重规则，并包含通用知识核实原则。没有可用工具时，最终提示仍严格等于该 base 常量；不承诺联网或技能能力。
 - `build_skill_research_hint(available_tools=()) -> str` 只按精确工具名生成能力指导；空名单、安装工具及近似名称不产生技能段。不读取技能库，不附技能目录、metadata 列表、正文或工具 schema。
 - `append_context_request_hint` 在原有自有 system 段中依次拼接 base、文件交付提示、技能联网提示；位于缓存边界之后、assistant prefill 之前。刷新时移除旧自有段，再根据实际工具名单重建，避免保留已撤回的能力承诺；其它消息对象和内容不变。
+- 已部署的官方 GPT-5.6+ Responses 转换在发送时将精确匹配上述生成器和实际工具名单的完整指南移到稳定断点前；构造器与逐轮工具披露不变。名单变化后重新生成/匹配，不冻结旧能力；相似标题、自定义文字和用户文本不前移。详见 [工具合同](tool-contracts.md)。
 - 保留既有文件交付选择与上下文意图，不改变 `tool_choice=auto`，不改人格或 NSFW，不恢复 `chat.system_prompt`。
 
 ## 分阶段入口

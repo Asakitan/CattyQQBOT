@@ -11,8 +11,8 @@
 | `personas/` / `persona_store.py` / `__init__.py` / `fadianji_harness.py` / `fdj_proactive_runtime.py` / `fadianji_style_critic.py` | 共享群聊判门、证据、风格及主动调度；人格能力和 NSFW 状态隔离 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1367 项、远端 299 项通过（另 1 项既有短路径断言失败） |
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
-| `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | 已部署；图片 URL 安全校验已上线 |
-| `openai_client.py` / `responses_ws.py` / `dashboard_state.py` / Responses 与面板测试 | 官方 Responses 静态与滚动历史断点、续聊内容匹配、缓存写入透传及面板读写计费 → `docs/session-log/session-19.md` | 已部署；历史断点增量本地 52 项通过，线上命中提升待验证 |
+| `src/catty_qq_ai/openai_client.py` | 工具回执、前缀、逐轮schema与图片下载 → `docs/tool-contracts.md` | Responses 固定指南与工具续轮优化已部署 |
+| `openai_client.py` / `responses_ws.py` / `dashboard_state.py` / Responses 与面板测试 | 官方 Responses 静态与滚动历史断点、固定指南、参数原字节续传、写入统计 → `docs/session-log/session-19.md` | 新优化已部署；本地201项、9跳过，其余通过；此前真实私聊87.2%/86.9%、另一群95.4%，新版效果待观察 |
 | `src/catty_qq_ai/__init__.py` / `reply_delivery.py` | 排队、回复恢复、宿主适配与确认后记账 → `docs/architecture.md` | 技能provider已部署；机机新适配已部署 |
 | `message_utils.py` / `persona_prompts.py` / `prompt_manager.py` / `__init__.py` | 表情线索提取及图片、表情按语境自然接话 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1401 项、9 跳过，远端 140 项通过 |
 | `__init__.py` / `tests/test_legs_delivery.py` | 腿图文字及图片按发送回执记历史 → `docs/architecture.md` | 已部署并合入活动源码；远端 8 项、本地相关回归 96 项通过 |
@@ -50,13 +50,14 @@
 | `cpu_engine/semantic_route.py` / `corpus_txtai.py` | 模型与有序语料缓存身份 → `docs/PERFORMANCE_AND_HARNESS.md` | 已部署；29项缓存测试通过，CPU 默认停用 |
 | `src/catty_qq_ai/__init__.py` / `tests/test_shared_persona_integration.py` | 怀孕预判 global 导出与临轮清零、分库 flush 托管、主路径场景/CPU phase 按人格 scope → `docs/session-log/session-10.md` | 已部署（基线+4 修复重放）；新增 4 例，远端 150 项通过 |
 | `config.py` / `catty_config_loader.py` / 配置 JSON / `catty_integrations.py` / RAG / CPU / NLU / 图片工具 | 模型名、端点与密钥路线收口到配置，自动 NSFW 配图可独立选择 Pixelbunny → `docs/session-log/session-13.md`、`docs/session-log/session-16.md` | 已部署；提交版本 18 文件当时与生产一致，客户端缓存修复已另行部署 |
-| `responses_ws.py` / `openai_client.py` / `config.py` / loader / 配置 JSON / `pyproject.toml` | Responses WebSocket 主/识图、增量续聊、连接内缓存与 HTTP 回退；图片直连开关保留安全校验，NSFW 保留 DS → `docs/session-log/session-16.md`、`docs/architecture.md` | 基础链路和滚动历史断点增量已部署；真实两轮增量续聊、QQ 公共图下载与 Terra 识图请求通过；新增断点线上效果待验证 |
+| `responses_ws.py` / `openai_client.py` / `config.py` / loader / 配置 JSON / `pyproject.toml` | Responses WebSocket 主/识图、增量续聊、连接内缓存与 HTTP 回退；图片直连开关保留安全校验，NSFW 保留 DS → `docs/session-log/session-16.md`、`docs/architecture.md` | 基础、历史断点和固定指南/工具续轮优化已部署；新版真实命中率待观察 |
 
 ## 更新记录
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
-| 2026-10-29 | 部署历史写入滚动断点与续聊指纹修复，覆盖 66% 命中缺口 | 生产只读确认 274 条历史连续匹配；本地 52 项通过，线上提升待验证，无额外冒烟或哈希 |
+| 2026-10-29 | 部署 Responses 固定指南缓存、消息投影及工具参数原字节续传，保留动态状态与净化 | 源码/测试3文件解压、0跳过；部署前本地201项、9跳过，其余通过；未重复冒烟、生产模型请求或哈希 |
+| 2026-10-29 | 部署历史写入滚动断点与续聊指纹修复，覆盖 66% 命中缺口 | 生产只读确认274条历史连续匹配；本地52项通过；后续真实私聊87.2%/86.9%、另一群95.4%，非同scope A/B |
 | 2026-10-29 | 部署双音色参考音修复；无原始情绪录音时按完整句生成 | 3 文件哈希一致；远端语音 38、配置 33、工具 22 项通过，机器人重连；A/B 和真实 QQ 听感待验 |
 | 2026-10-29 | 部署 Responses 稳定前缀显式断点与缓存写入用量、面板计费修复 | 5 文件哈希一致；远端 136 项、9 跳过；生产代码合成续聊读取 9625 token；真实 QQ 未测 |
 | 2026-10-29 | 核对 Terra 交付内容并保留后续自修复合并 | 18 文件提交快照当时与生产一致；隔离回归 321 项、9 跳过；客户端缓存改动已另行部署 |
