@@ -183,7 +183,7 @@ class PayloadToResponsesBodyTests(unittest.TestCase):
         self.assertEqual(max(map(len, shared)), len(history))
         self.assertEqual(len(explicit_prefixes(first)), 3)
         self.assertEqual(len(explicit_prefixes(second)), 3)
-        self.assertNotIn("prompt_cache_options", first)  # 保留默认隐式缓存。
+        self.assertEqual(first["prompt_cache_options"], {"mode": "implicit", "ttl": "12h"})
         self.assertIn("state one", first["input"][-1]["content"][0]["text"])
         self.assertIn("state two", second["input"][-1]["content"][0]["text"])
         self.assertNotEqual(first["input"][-1], second["input"][-1])
@@ -212,7 +212,7 @@ class PayloadToResponsesBodyTests(unittest.TestCase):
         users = [item for item in body["input"] if item.get("role") == "user"]
         self.assertEqual(users[1]["content"][-1], {
             "type": "input_image", "image_url": "https://example.test/old.png",
-            "detail": "low", "prompt_cache_breakpoint": {"mode": "explicit"},
+            "detail": "low", "prompt_cache_breakpoint": {"mode": "explicit", "ttl": "12h"},
         })
         self.assertNotIn("prompt_cache_breakpoint", users[1]["content"][0])
         self.assertFalse(any("prompt_cache_breakpoint" in part for part in users[-1]["content"]))
@@ -335,7 +335,7 @@ class PayloadToResponsesBodyTests(unittest.TestCase):
         ])
         stable = first["input"][0]["content"][0]
         self.assertEqual(stable["text"], f"stable rules\n\nstable boundary\n{marker}")
-        self.assertEqual(stable["prompt_cache_breakpoint"], {"mode": "explicit"})
+        self.assertEqual(stable["prompt_cache_breakpoint"], {"mode": "explicit", "ttl": "12h"})
         self.assertEqual(first["input"][0], second["input"][0])
         self.assertEqual(first["input"][-1]["content"][0]["text"], "dynamic context one")
         self.assertEqual(second["input"][-1]["content"][0]["text"], "dynamic context two")
@@ -540,7 +540,7 @@ class ResponsesGuideCacheTests(unittest.TestCase):
         second = self.body(self.messages("next question", "state two"), cache_stable_prefix=True)
         prefix = first["input"][0]
         self.assertEqual(prefix, second["input"][0])
-        self.assertEqual(prefix["content"][0]["prompt_cache_breakpoint"], {"mode": "explicit"})
+        self.assertEqual(prefix["content"][0]["prompt_cache_breakpoint"], {"mode": "explicit", "ttl": "12h"})
         texts = "\n".join(part.get("text", "") for item in first["input"] for part in item.get("content", []))
         for guide in (messages[-1]["content"], messages[-2]["content"]):
             self.assertIn(guide, prefix["content"][0]["text"])
@@ -584,6 +584,7 @@ class ResponsesGuideCacheTests(unittest.TestCase):
         self.assertEqual([item["role"] for item in legacy["input"]], ["user", "assistant", "user"])
         messages.pop(1)
         missing = self.body(messages, cache_stable_prefix=True)
+        self.assertEqual(missing.pop("prompt_cache_options"), {"mode": "implicit", "ttl": "12h"})
         self.assertEqual(missing, self.body(messages, cache_stable_prefix=False))
 
 
@@ -629,7 +630,7 @@ class StreamResponsesAttemptTests(unittest.TestCase):
         ))
         self.assertEqual(
             self.last_request_body["input"][0]["content"][0]["prompt_cache_breakpoint"],
-            {"mode": "explicit"},
+            {"mode": "explicit", "ttl": "12h"},
         )
 
     def test_native_non_streaming_sends_normalized_cache_boundary(self) -> None:
@@ -665,7 +666,7 @@ class StreamResponsesAttemptTests(unittest.TestCase):
                 max_attempts=1,
             ))
         body = fake_client.post.await_args.kwargs["json"]
-        self.assertEqual(body["input"][0]["content"][0]["prompt_cache_breakpoint"], {"mode": "explicit"})
+        self.assertEqual(body["input"][0]["content"][0]["prompt_cache_breakpoint"], {"mode": "explicit", "ttl": "12h"})
         self.assertEqual(body["input"][1]["content"][0]["text"], " marker note")
         self.assertEqual(body["input"][-2]["content"][0]["text"], "question")
         self.assertEqual(body["input"][-1]["role"], "developer")

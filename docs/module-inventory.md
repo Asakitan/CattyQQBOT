@@ -21,7 +21,7 @@
 | `tests/test_shared_persona_integration.py` / `tests/test_fdj_proactive_integration.py` | AST 夹具加载真实 `_extract_incoming_with_voice`，恢复共享人格判门验证 → `docs/session-log/session-26.md` | 已部署；本地与生产两模块各 69 项全通过，消除 42 个 NameError，生产源码与断言不变 |
 | `tools.py` / `__init__.py` / 回执与文件、语音测试 | 单工具排队计数、生成回执、UUID 缓存路径、发送后清理、取消后原会话投递 → `docs/session-log/session-25.md` | 已部署；本地相关 316 项、远端 132 项及插件加载通过；当时夹具错误已在会话 26 修复并部署 |
 | `web_search.py` / `tools.py` / `__init__.py` / 三份搜图与投递测试 | 图片来源保留、同字节视觉核验、按搜索排名选择、语音无文字时继续发图 → `docs/tool-contracts.md`、`docs/session-log/session-24.md` | 已随会话 25 部署；初次八组 152 项通过，真实模型/QQ 未测 |
-| `prompt_cache.py` / `openai_client.py` / `tests/test_responses_ws.py` | 全部聊天 session 活跃度 → 稳定前缀 `12h/30m`，历史短缓存与 WebSocket 换档重放 → `docs/architecture.md`、`docs/session-log/session-23.md` | 全会话版已部署；131 项本地回归，9 跳过，零失败/错误；生产加载未复核 |
+| `openai_client.py` / `__init__.py` / Responses 与 prompt audit 测试 | 官方受支持请求从首轮固定12h，特别关心规则移出静态区，保留历史锚点与增量续聊 → `docs/architecture.md`、`docs/session-log/session-33.md` | 已部署；本地和生产各163项中154通过、9跳过，五文件哈希一致；旧动态计数不再用于请求 |
 | `voice_reply.py` / `tools.py` / `__init__.py` / 语音与投递测试 | 明确语音请求、群冷却、待发送与已送达区分、失败回落 → `docs/voice-candidates.md`、`docs/session-log/session-21.md` | 三份源码已部署、双端哈希一致；远端语音 49 项通过，生产已加载重连 |
 | `src/catty_qq_ai/openai_client.py` / `persona_admin.py` / `persona_evolution_runtime.py` / `skill_runtime.py` / `config.py` / loader / `config.json` | 主/识图 terra，判门/总结/NSFW 与后台杂活统一 deepseek；次要 AI 线路 `audit_ai → ai_fallback → 主 ai` → `docs/architecture.md`、`docs/session-log/session-20.md` | 已部署；19 文件双端 SHA-256 一致，远端 104 项通过；生产已加载重连 |
 | `src/catty_self_repair/` / `scripts/catty_self_repair.py` / `scripts/catty_hot_reload.py` / `bot.py` / loader / 配置 JSON | 日志触发、独立或缺省主 AI 路由、周预算、源码候选验证、启动健康检查与发布回滚 → `docs/self-repair.md` | 已部署并在生产与本地启用；模板默认关闭；远端隔离 195 项、部署后 160 项通过 |
@@ -76,8 +76,11 @@
 
 ## 更新记录
 
+2026-10-30 缓存观察：新版49工具指纹在6次主请求中稳定；群聊静态变化已定位到同群不同发言者触发的特别关心规则。会话33将该规则移到动态区，并将支持的缓存写入统一为12h；此前31.87%读率属于旧动态版本，不能当作新版本实测。
+
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-30 | 首轮统一12h，特别关心条件规则移到边界后；滚动断点不再触发WS全量重放 | 已部署；本地和生产各163项中154通过、9跳过，五文件哈希一致；未发模型测试请求，见session33 |
 | 2026-10-30 | 双向附件顺序已部署：2 分钟单次等待和 10 分钟元数据，消息/通知恢复原请求 | 本地与生产各 142 项通过，六文件哈希一致、配置未变；15:59 插件重载 |
 | 2026-10-30 | 先发文件后明确请求再读，仅内存保留 256 组/10 分钟元数据，模型接收精简引用 | 四模块 134 项通过；身份隔离、过期、闲聊与否定读取负例通过；未部署 |
 | 2026-10-30 | 无指向附件及普通群上传通知不下载、不入库、不触发模型判门；修复文件名兼容及缓存名文档识别 | 四模块 125 项，0 失败/错误/跳过；未部署，原附件与真实 QQ 未复验 |

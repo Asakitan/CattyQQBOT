@@ -8225,7 +8225,7 @@ async def _build_messages(
     if special_care_context:
         try:
             from .memory import build_special_care_rules as _build_special_care_rules
-            _st_manager.register_static("catty_special_care_rules", _build_special_care_rules(_persona), order=163)
+            _st_manager.register_static("catty_special_care_rules", _build_special_care_rules(_persona), order=493)
         except Exception as _scr_exc:  # noqa: BLE001
             logger.debug(f"catty_special_care_rules register failed: {_scr_exc}")
     if not incoming.has_image:

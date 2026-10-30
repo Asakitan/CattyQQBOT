@@ -2928,12 +2928,7 @@ def _select_responses_cache_ttl(
     scope = get_current_scope_key() or ""
     turn_id = str(request_identity.get("logical_turn_id") or "")
     if (
-        request_route != "main"
-        or request_class != "chat"
-        or not scope.strip()
-        or _request_class_for_route(request_route, scope) != "chat"
-        or not turn_id
-        or not urlparse(base_url).path.rstrip("/").endswith("/responses")
+        not urlparse(base_url).path.rstrip("/").endswith("/responses")
         or not _responses_support_explicit_cache(base_url, model)
     ):
         return None
@@ -2943,14 +2938,9 @@ def _select_responses_cache_ttl(
         and state.get("scope_key") == scope
         and state.get("logical_turn_id") == turn_id
     )
-    if same_turn and state.get("responses_cache_ttl") in ("30m", "12h"):
-        return state["responses_cache_ttl"]
-    global _RESPONSES_GROUP_CACHE_TTL
-    if _RESPONSES_GROUP_CACHE_TTL is None:
-        from .prompt_cache import GroupCacheTTL
-
-        _RESPONSES_GROUP_CACHE_TTL = GroupCacheTTL()
-    ttl = _RESPONSES_GROUP_CACHE_TTL.select(scope, turn_id)
+    if same_turn and state.get("responses_cache_ttl") == "12h":
+        return "12h"
+    ttl = "12h"
     if same_turn:
         state["responses_cache_ttl"] = ttl
         _current_logical_turn_var.set(state)
@@ -2976,7 +2966,7 @@ def _mark_responses_history_cache(input_items: list[dict[str, Any]]) -> None:
             "input_text", "input_image", "input_file",
         }:
             continue
-        last["prompt_cache_breakpoint"] = {"mode": "explicit"}
+        last["prompt_cache_breakpoint"] = {"mode": "explicit", "ttl": "12h"}
         marked += 1
         if marked == 2:
             break
@@ -2992,7 +2982,7 @@ def _apply_responses_history_anchor(body: dict[str, Any]) -> None:
     diagnostics = _get_current_cache_request_diagnostics() or {}
     ttl = diagnostics.get("responses_cache_ttl")
     scope = str(diagnostics.get("conversation_id") or get_current_scope_key() or "")
-    if ttl not in ("12h", "30m") or not scope:
+    if ttl not in ("12h", "30m") or not scope.strip():
         return
     from pathlib import Path
     from .prompt_cache import HistoryCacheAnchors
@@ -3024,10 +3014,10 @@ def _apply_responses_history_anchor(body: dict[str, Any]) -> None:
     if index is not None:
         for candidate, _ in candidates:
             items[candidate]["content"][-1].pop("prompt_cache_breakpoint", None)
-        items[index]["content"][-1]["prompt_cache_breakpoint"] = {"mode": "explicit", "ttl": ttl}
+        items[index]["content"][-1]["prompt_cache_breakpoint"] = {"mode": "explicit", "ttl": "12h"}
         latest = candidates[-1][0]
         if latest != index:
-            items[latest]["content"][-1]["prompt_cache_breakpoint"] = {"mode": "explicit"}
+            items[latest]["content"][-1]["prompt_cache_breakpoint"] = {"mode": "explicit", "ttl": "12h"}
     diagnostics.update({
         "wire_cache_settings_hash": settings_hash,
         "history_cache_anchor": index,
@@ -3100,6 +3090,8 @@ def _payload_to_responses_body(
     tool_choice) 转换或丢弃; extra_body 只透传白名单字段。
     """
     body: dict[str, Any] = {"model": str(payload.get("model") or "")}
+    if cache_stable_prefix:
+        body["prompt_cache_options"] = {"mode": "implicit", "ttl": "12h"}
     input_items = _messages_to_responses_input(payload.get("messages") or [])
     system_texts: list[str] = []
     rest: list[dict[str, Any]] = []
@@ -3134,10 +3126,7 @@ def _payload_to_responses_body(
         )
         marker_end = boundary_text.index(_CACHE_BOUNDARY_MARKER) + len(_CACHE_BOUNDARY_MARKER)
         system_texts.append(boundary_text[:marker_end])
-        breakpoint: dict[str, Any] = {"mode": "explicit"}
-        cache_ttl = (_get_current_cache_request_diagnostics() or {}).get("responses_cache_ttl")
-        if cache_ttl in ("30m", "12h"):
-            breakpoint["ttl"] = cache_ttl
+        breakpoint: dict[str, Any] = {"mode": "explicit", "ttl": "12h"}
         rest.append({
             "type": "message",
             "role": "developer",
@@ -3545,16 +3534,6 @@ async def _stream_responses_ws_attempt(
     if not isinstance(input_items, list):
         input_items = []
     hashes = [item_hash(item) for item in input_items]
-    long_breakpoints = [
-        (index, part_index)
-        for index, item in enumerate(input_items)
-        for part_index, part in enumerate(item.get("content") or [])
-        if isinstance(part, dict) and (part.get("prompt_cache_breakpoint") or {}).get("ttl") == "12h"
-    ]
-    if hashes and long_breakpoints:
-        hashes[0] = _canonical_cache_diagnostic_sha256({
-            "item_hash": hashes[0], "long_breakpoints": long_breakpoints,
-        })
     if hashes:
         hashes[0] = _canonical_cache_diagnostic_sha256({
             "item_hash": hashes[0], "settings": _responses_cache_settings(body),

@@ -111,6 +111,20 @@ class GroupCacheTTLTests(unittest.TestCase):
 
 
 class GroupCachePolicyTests(unittest.TestCase):
+    def test_first_request_and_every_breakpoint_use_twelve_hours(self):
+        diagnostics = self._turn("first")
+        self.assertEqual(diagnostics["responses_cache_ttl"], "12h")
+        token = openai_client._current_cache_request_diagnostics_var.set(diagnostics)
+        try:
+            body = openai_client._payload_to_responses_body(self.payload, stream=True, cache_stable_prefix=True)
+        finally:
+            openai_client._current_cache_request_diagnostics_var.reset(token)
+        self.assertEqual(body["prompt_cache_options"], {"mode": "implicit", "ttl": "12h"})
+        marks = [part["prompt_cache_breakpoint"] for item in body["input"]
+                 for part in item.get("content", []) if "prompt_cache_breakpoint" in part]
+        self.assertTrue(marks)
+        self.assertTrue(all(mark["ttl"] == "12h" for mark in marks))
+
     def setUp(self):
         self.tracker = prompt_cache.GroupCacheTTL()
         self.now = 0.0
@@ -149,22 +163,29 @@ class GroupCachePolicyTests(unittest.TestCase):
             openai_client.reset_current_logical_turn(turn_token)
             openai_client.reset_current_scope_key(scope_token)
 
-    def test_request_diagnostics_count_distinct_turns_in_all_chat_sessions(self):
+    def test_request_diagnostics_use_twelve_hours_for_every_turn(self):
         for scope in ("group:TARGET", "private:TARGET", "group:TARGET:user:OTHER", "session:TARGET"):
             with self.subTest(scope=scope):
                 for _ in range(4):
-                    self.assertEqual(self._turn("one", scope=scope)["responses_cache_ttl"], "30m")
-                self.assertEqual(self._turn("two", scope=scope)["responses_cache_ttl"], "30m")
+                    self.assertEqual(self._turn("one", scope=scope)["responses_cache_ttl"], "12h")
+                self.assertEqual(self._turn("two", scope=scope)["responses_cache_ttl"], "12h")
                 self.assertEqual(self._turn("three", scope=scope)["responses_cache_ttl"], "12h")
-        self.assertEqual(self._turn("one", scope="group:OTHER")["responses_cache_ttl"], "30m")
+        self.assertEqual(self._turn("one", scope="group:OTHER")["responses_cache_ttl"], "12h")
 
-    def test_empty_auxiliary_legacy_and_gateway_requests_do_not_count(self):
+    def test_empty_and_auxiliary_official_requests_also_use_twelve_hours(self):
         cases = (
             {"scope": ""},
             {"scope": " "},
             {"scope": "summary:group:TARGET"},
             {"route": "summary"},
             {"request_class": "auxiliary"},
+        )
+        for case in cases:
+            with self.subTest(case=case):
+                self.assertEqual(self._turn("one", **case)["responses_cache_ttl"], "12h")
+
+    def test_legacy_and_gateway_requests_do_not_receive_ttl(self):
+        cases = (
             {"base_url": "https://api.openai.com/v1/chat/completions"},
             {"base_url": "https://proxy.example/v1/responses"},
             {"model": "gpt-5.5"},
@@ -187,7 +208,7 @@ class GroupCachePolicyTests(unittest.TestCase):
         finally:
             openai_client.reset_current_logical_turn(turn_token)
             openai_client.reset_current_scope_key(scope_token)
-        self.assertEqual(self._turn("cold")["responses_cache_ttl"], "30m")
+        self.assertEqual(self._turn("cold")["responses_cache_ttl"], "12h")
 
     def test_fixed_history_anchor_survives_growth_and_cold_requests(self):
         self._turn("one")
@@ -211,10 +232,10 @@ class GroupCachePolicyTests(unittest.TestCase):
         first_history = first["input"][1]
         self.assertEqual(first_history, second["input"][1])
         self.assertEqual(first_history["content"][-1]["prompt_cache_breakpoint"]["ttl"], "12h")
-        self.assertEqual(second["input"][3]["content"][-1]["prompt_cache_breakpoint"], {"mode": "explicit"})
+        self.assertEqual(second["input"][3]["content"][-1]["prompt_cache_breakpoint"], {"mode": "explicit", "ttl": "12h"})
         self.now = 1900
         cold = build(grown, self._turn("cold"))
-        self.assertEqual(cold["input"][1]["content"][-1]["prompt_cache_breakpoint"]["ttl"], "30m")
+        self.assertEqual(cold["input"][1]["content"][-1]["prompt_cache_breakpoint"]["ttl"], "12h")
         self.assertEqual(len(openai_client._RESPONSES_HISTORY_ANCHORS.entries), 1)
 
     def test_changed_history_prefix_does_not_keep_old_anchor(self):
@@ -247,7 +268,7 @@ class GroupCachePolicyTests(unittest.TestCase):
                 marks = [part["prompt_cache_breakpoint"] for item in body["input"]
                          for part in item.get("content", []) if "prompt_cache_breakpoint" in part]
                 self.assertEqual([mark.get("ttl", "30m") for mark in marks], ["12h", "12h"])
-                self.assertNotIn("prompt_cache_options", body)
+                self.assertEqual(body["prompt_cache_options"], {"mode": "implicit", "ttl": "12h"})
                 self.assertNotIn("responses_cache_ttl", body)
             legacy = openai_client._payload_to_responses_body(self.payload, stream=False)
             self.assertNotIn("prompt_cache_breakpoint", json.dumps(legacy))
@@ -596,10 +617,10 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
                         messages.append({"role": "assistant", "content": "ok"})
         finally:
             openai_client.reset_current_scope_key(scope_token)
-        self.assertEqual([previous for _, previous in frames], [None, "resp_1", None, "resp_3", None, "resp_5"])
-        for index, ttl in ((0, "30m"), (2, "12h"), (4, "30m")):
-            self.assertEqual(frames[index][0]["input"][0]["content"][0]["prompt_cache_breakpoint"]["ttl"], ttl)
-        for index in (1, 3, 5):
+        self.assertEqual([previous for _, previous in frames], [None, "resp_1", "resp_2", "resp_3", "resp_4", "resp_5"])
+        self.assertEqual(frames[0][0]["input"][0]["content"][0]["prompt_cache_breakpoint"]["ttl"], "12h")
+        self.assertTrue(all(frame[0]["prompt_cache_options"]["ttl"] == "12h" for frame in frames))
+        for index in (1, 2, 3, 4, 5):
             self.assertEqual(len(frames[index][0]["input"]), 1)
             self.assertEqual(frames[index][0]["input"][0]["role"], "user")
 
@@ -674,7 +695,7 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
                     )
         self.assertEqual(
             frames[0][0]["input"][0]["content"][0]["prompt_cache_breakpoint"],
-            {"mode": "explicit"},
+            {"mode": "explicit", "ttl": "12h"},
         )
         self.assertIsNone(frames[0][1])
         self.assertEqual(frames[1][1], "resp_1")
