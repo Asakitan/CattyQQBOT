@@ -3239,6 +3239,8 @@ _recent_conversation_messages: DefaultDict[str, deque[RecentConversationMessage]
 _recent_conversation_seq: DefaultDict[str, int] = defaultdict(int)
 _recent_conversation_waiters: DefaultDict[str, set[asyncio.Event]] = defaultdict(set)
 _recent_conversation_read_cursors: dict[tuple[str, str], int] = {}
+from .mention_followup import MentionFollowups, merge_mention_events
+_mention_followups = MentionFollowups()
 _conversation_closures: dict[tuple[str, str], dict[str, Any]] = {}
 _bot_reply_continuations: dict[str, BotReplyContinuationState] = {}
 _continuation_updated_turn_ids: "OrderedDict[str, float]" = OrderedDict()
@@ -5653,14 +5655,28 @@ def _wake_context_prompt(
             (incoming.mentioned or incoming.replied_to_self or incoming.used_prefix or incoming.directed_strength == "direct_address")
             and any(k in _t for k in ("cache", "缓存", "kv", "命中", "修复", "测试", "链路", "部署", "编译", "代码", "bug", "报错", "日志"))
         )
+    context_persona = _persona_for_event(event)
+    group_context_required = bool(
+        isinstance(event, GroupMessageEvent)
+        and getattr(context_persona, "group_admission_enabled", True)
+        and not getattr(context_persona, "mention_only_trigger", False)
+    )
     centered_real_at = bool(
         isinstance(event, GroupMessageEvent)
-        and _persona_for_event(event).mention_only_trigger
+        and context_persona.mention_only_trigger
         and has_real_at_self(str(event.self_id), event)
     )
     if centered_real_at:
         start = max(0, current_index - _WAKE_REAL_AT_RADIUS)
         end = min(len(recent), current_index + _WAKE_REAL_AT_RADIUS + 1)
+    elif group_context_required:
+        start, end = _recent_context_window(
+            recent, current_index,
+            _wake_context_message_limit(
+                event, incoming, group_filter_context=group_filter_context,
+                bot_continuation=bot_continuation, recent=recent, current_index=current_index,
+            ),
+        )
     else:
         start = max(0, current_index - 1)
         end = min(len(recent), current_index + 1)
@@ -5688,10 +5704,10 @@ def _wake_context_prompt(
         if index == current_index:
             current_seq = item.seq
             continue
-        if technical_direct and not centered_real_at:
+        if technical_direct and not centered_real_at and not group_context_required:
             continue
         _itxt = (item.text or "").strip()
-        if not centered_real_at and _itxt and len(_itxt) >= 5 and _itxt in _hist_norm:
+        if not centered_real_at and not group_context_required and _itxt and len(_itxt) >= 5 and _itxt in _hist_norm:
             continue
         image_marker = " [含图片]" if item.has_image else ""
         speaker = f"{item.display_name}({item.user_id})"
@@ -11948,6 +11964,10 @@ async def _model_should_reply_to_group(
 
 
 async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    if isinstance(event, GroupMessageEvent) and _mention_followups.is_consumed(
+        event, _persona_identity(_persona_for_event(event)),
+    ):
+        return False
     reply_sources = await _resolve_reply_sources(bot, event)
     replied_to_self = any(source.is_current_bot for source in reply_sources)
     recent_bot_continuation = _recent_bot_prompted_user(event)
@@ -11988,6 +12008,27 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
                 return False
     if not _group_persona_trigger_allowed(event, incoming, continuation=recent_bot_continuation):
         return False
+    if isinstance(event, GroupMessageEvent) and has_real_at_self(str(event.self_id), event):
+        mention_persona = _persona_for_event(event)
+        mention_identity = _persona_identity(mention_persona)
+        mention_config = config
+        pending_mention = _mention_followups.begin(event, mention_identity)
+        if pending_mention is None:
+            return False
+        following = await _mention_followups.collect(pending_mention)
+        if (config is not mention_config or _persona_for_event(event) is not mention_persona
+            or _persona_identity(mention_persona) != mention_identity):
+            return False
+        if following:
+            merged_event = merge_mention_events(event, following)
+            incoming = await _extract_incoming_with_voice(
+                bot, merged_event, replied_to_self=replied_to_self,
+                continuation=recent_bot_continuation,
+            )
+            if incoming is None:
+                return False
+            state["catty_followup_message_ids"] = [str(item.message_id) for item in following]
+        state["catty_mention_waited"] = True
     if isinstance(event, GroupMessageEvent) and bool(getattr(_persona_for_event(event), "group_admission_enabled", True)):
         if _fdj_explicit_wake(event, incoming):
             incoming.needs_filter = False
@@ -16229,6 +16270,8 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
     if str(event.user_id) == str(bot.self_id):
         return
     _remember_recent_conversation_event(event)
+    if isinstance(event, GroupMessageEvent):
+        _mention_followups.observe(event, _persona_identity(_persona_for_event(event)))
     try:
         if (
             not _message_utils_mod._looks_like_marked_bot(event)
@@ -18942,10 +18985,16 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 主人 2026-08-15: 机机出口质检员 — AI 味预筛 + audit 通道按机机口吻重写。
         # 正常短句零开销, 只有漂移回复付一次 audit 小调用; 任何失败都原样放行。
         # 主人 2026-08-25 Wave ⑤: 统计风格评分前置 — 语料统计分够就免 LLM 质检。
+        from . import fadianji_style_critic
+        from .personas import build_persona_reply_context
+        _style_reply_context = build_persona_reply_context(_persona, is_owner=_event_is_owner(event))
+        _unexpected_script = fadianji_style_critic.has_unexpected_script_fragment(
+            reply, user_text=str(incoming.text or ""), context_hint=wake_context or "",
+        )
         _fdj_stat_critic_skip = False
         if getattr(_persona, "style_critic_profile", "persona") == "fadianji" and bool(
             getattr(config, "catty_style_critic_enabled", True)
-        ) and bool(getattr(_persona, "style_critic_enabled", True)) and bool(getattr(config, "catty_fdj_stat_critic_enabled", True)):
+        ) and bool(getattr(_persona, "style_critic_enabled", True)) and bool(getattr(config, "catty_fdj_stat_critic_enabled", True)) and not _unexpected_script:
             try:
                 from . import fdj_style_stats
                 _fdj_stat_critic_skip = fdj_style_stats.stat_critic_passes(
@@ -18958,9 +19007,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 logger.debug(f"fdj stat critic failed (non-fatal): {_stat_exc}")
         if _fdj_stat_critic_skip:
             logger.debug("fdj stat critic passed reply, skip LLM style critic")
-        if bool(getattr(_persona, "style_critic_enabled", True)) and bool(
+        if _unexpected_script or (bool(getattr(_persona, "style_critic_enabled", True)) and bool(
             getattr(config, "catty_style_critic_enabled", True)
-        ) and not _fdj_stat_critic_skip:
+        ) and not _fdj_stat_critic_skip):
             try:
                 from . import fadianji_style_critic
                 reply = await fadianji_style_critic.rewrite_if_needed(
@@ -18975,13 +19024,23 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         getattr(_persona_for_event(event), "nsfw_freeform", False)
                     ),
                     context_hint=(
+                        (wake_context + "\n" if wake_context else "") + (
                         f"本轮有 {len(_turn_tool_audit_result_texts)} 条真实工具结果; "
                         "改写只能调整 prose, 不得改变工具调用的成功/失败或返回事实。"
-                        if _turn_tool_audit_result_texts else ""
+                        if _turn_tool_audit_result_texts else "")
+                    ),
+                    fallback_reply=(
+                        _style_reply_context.render(
+                            _style_reply_context.catalog.api_transport_reply,
+                        ) if _unexpected_script else None
                     ),
                 )
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"fadianji style critic failed (non-fatal): {type(exc).__name__}: {exc}")
+        if fadianji_style_critic.has_unexpected_script_fragment(
+            reply, user_text=str(incoming.text or ""), context_hint=wake_context or "",
+        ):
+            reply = _style_reply_context.render(_style_reply_context.catalog.api_transport_reply)
         # 任何路径都不许把内部状态标志发给用户 (critic/rewrite 可能复读)
         reply, _late_nsfw_flag = _extract_nsfw_state_flag(reply)
         if _late_nsfw_flag:

@@ -88,6 +88,11 @@ class SharedGroupAdmissionTests(unittest.IsolatedAsyncioTestCase):
             {
                 "GroupMessageEvent": GroupMessageEvent, "PrivateMessageEvent": PrivateMessageEvent,
                 "config": self.config, "logger": Mock(), "_persona_for_event": lambda event: self.persona,
+                "_persona_identity": lambda persona: persona.name,
+                "_mention_followups": types.SimpleNamespace(
+                    is_consumed=Mock(return_value=False), begin=Mock(return_value=object()),
+                    collect=AsyncMock(return_value=[]),
+                ),
                 "event_plain_text": message_utils.event_plain_text, "has_real_at_self": message_utils.has_real_at_self,
                 "extract_incoming_message": message_utils.extract_incoming_message,
                 "_resolve_reply_sources": AsyncMock(side_effect=lambda *args: self.references),
@@ -140,6 +145,45 @@ class SharedGroupAdmissionTests(unittest.IsolatedAsyncioTestCase):
         self.gate.return_value = False
         self.assertFalse(await self.namespace["_rule"](self.bot, _event("接着说"), {}))
         self.namespace["_close_bot_reply_continuation"].assert_called_once()
+
+    async def test_at_following_text_is_read_once_with_original_sender(self):
+        collector_module = importlib.import_module(f"{_PKG}.mention_followup")
+        wake = _event("", at=True)
+        following = _event("和我相亲")
+        following.message_id = 18
+        stranger = _event("别人的话", user=30001)
+        stranger.message_id = 19
+
+        async def collect_window(seconds):
+            self.assertEqual(seconds, 10.0)
+            collector.observe(stranger, self.persona.name)
+            collector.observe(following, self.persona.name)
+
+        collector = collector_module.MentionFollowups(clock=lambda: 100.0, sleep=collect_window)
+        collector.observe(wake, self.persona.name)
+        self.namespace["_mention_followups"] = collector
+        self.namespace["merge_mention_events"] = collector_module.merge_mention_events
+        state = {}
+        self.assertTrue(await self.namespace["_rule"](self.bot, wake, state))
+        self.assertIn("和我相亲", state["catty_incoming"].text)
+        self.assertNotIn("别人的话", state["catty_incoming"].text)
+        self.assertEqual(state["catty_followup_message_ids"], ["18"])
+        self.assertEqual(wake.user_id, 20001)
+        self.assertFalse(await self.namespace["_rule"](self.bot, following, {}))
+        self.gate.assert_not_awaited()
+
+    async def test_persona_switch_during_at_window_cancels_old_turn(self):
+        collector_module = importlib.import_module(f"{_PKG}.mention_followup")
+
+        async def collect_window(seconds):
+            self.persona = _persona("custom", "小青", definition_revision="v2")
+
+        collector = collector_module.MentionFollowups(clock=lambda: 100.0, sleep=collect_window)
+        self.namespace["_mention_followups"] = collector
+        state = {}
+        self.assertFalse(await self.namespace["_rule"](self.bot, _event("", at=True), state))
+        self.assertNotIn("catty_incoming", state)
+        self.assertFalse(collector.pending)
 
     async def test_existing_continuation_when_filter_is_disabled(self):
         self.persona = _persona("custom", "小青")

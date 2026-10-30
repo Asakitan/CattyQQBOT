@@ -107,6 +107,24 @@ class RecentContextImageTests(unittest.TestCase):
     def _scope(self, group_id: int = 10001) -> str:
         return f"group:{group_id}"
 
+    def test_fadianji_wake_keeps_group_context_and_following_sender_message(self) -> None:
+        earlier = _group_event(user_id=30001, message_id=40, text="大家在聊周末的相亲安排")
+        earlier.sender.card = "群友甲"
+        middle = _group_event(user_id=30002, message_id=41, text="我说的是游戏里的活动")
+        middle.sender.card = "群友乙"
+        wake = _group_event(user_id=20002, message_id=42, mention_self=True)
+        following = _group_event(user_id=20002, message_id=43, text="和我相亲")
+        for event in (earlier, middle, wake, following):
+            _plugin._remember_recent_conversation_event(event)
+        persona = types.SimpleNamespace(name="fadianji", mention_only_trigger=False)
+        with patch.object(_plugin, "_persona_for_event", return_value=persona):
+            context = _plugin._wake_context_prompt(wake, _incoming(text=""))
+        self.assertIn("大家在聊周末的相亲安排", context)
+        self.assertIn("群友甲(30001)", context)
+        self.assertIn("群友乙(30002)", context)
+        self.assertIn("和我相亲", context)
+        self.assertIn("20002", context)
+
     def test_records_image_urls_and_keys_per_message(self) -> None:
         event = _group_event(message_id=11, text="这是ds1017搓的", image_url="https://img/a.jpg")
 
@@ -117,6 +135,23 @@ class RecentContextImageTests(unittest.TestCase):
         self.assertEqual(len(remembered.image_keys), 1)
         self.assertTrue(remembered.image_keys[0].startswith("image:"))
         self.assertEqual(remembered.text, "这是ds1017搓的")
+
+    def test_wake_keeps_same_text_from_distinct_people_even_if_in_history(self) -> None:
+        first = _group_event(user_id=30001, message_id=50, text="完全相同的群聊内容")
+        second = _group_event(user_id=30002, message_id=51, text="完全相同的群聊内容")
+        wake = _group_event(user_id=20002, message_id=52, mention_self=True)
+        for event in (first, second, wake):
+            _plugin._remember_recent_conversation_event(event)
+        persona = types.SimpleNamespace(name="fadianji", mention_only_trigger=False)
+        history = [{"role": "user", "content": "[QQ:30001] 完全相同的群聊内容"}]
+        with (
+            patch.object(_plugin, "_persona_for_event", return_value=persona),
+            patch.object(_plugin, "_get_session_cache", return_value={"group:10001": history}),
+        ):
+            context = _plugin._wake_context_prompt(wake, _incoming(text=""))
+        self.assertEqual(context.count("完全相同的群聊内容"), 2)
+        self.assertIn("(30001)", context)
+        self.assertIn("(30002)", context)
 
     def test_records_images_from_incoming_without_reparsing_event(self) -> None:
         event = _group_event(message_id=12, text="看这张")

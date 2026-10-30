@@ -172,6 +172,11 @@ class TriggerIntegrationTests(unittest.IsolatedAsyncioTestCase):
             "GroupMessageEvent": GroupMessageEvent, "PrivateMessageEvent": PrivateMessageEvent,
             "config": self.config, "logger": Mock(),
             "_persona_for_event": lambda event: self.persona,
+            "_persona_identity": lambda persona: persona.name,
+            "_mention_followups": types.SimpleNamespace(
+                is_consumed=Mock(return_value=False), begin=Mock(return_value=object()),
+                collect=AsyncMock(return_value=[]),
+            ),
             "event_plain_text": message_utils.event_plain_text,
             "has_real_at_self": message_utils.has_real_at_self,
             "extract_incoming_message": message_utils.extract_incoming_message,

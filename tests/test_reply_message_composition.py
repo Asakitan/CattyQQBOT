@@ -797,10 +797,11 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         prompt = _plugin._wake_context_prompt(event, loose_incoming, group_filter_context=True)
         rows = _wake_context_rows(prompt)
 
-        self.assertEqual(len(rows), 1)
+        self.assertEqual(len(rows), 15)
         self.assertIn("catty_wake_current", prompt)
         self.assertIn("recent_seq=#000030", prompt)
-        self.assertIn("第29条", rows[0])
+        self.assertIn("第15条", rows[0])
+        self.assertIn("第29条", rows[-1])
         self.assertNotIn("第30条", "\n".join(rows))
 
     def test_wake_context_sorts_by_time_and_deduplicates_message_ids(self) -> None:
@@ -828,8 +829,8 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         rows = _wake_context_rows(prompt)
 
         row_texts = [row.split(": ", 1)[1].split(" <-", 1)[0] for row in rows]
-        self.assertEqual(row_texts, ["重复"])
-        self.assertEqual(len(rows), 1)
+        self.assertEqual(row_texts, ["早", "重复"])
+        self.assertEqual(len(rows), 2)
         self.assertIn("recent_seq=#000001", prompt)
 
     def test_group_filter_reply_does_not_quote_unselected_current_message(self) -> None:

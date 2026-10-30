@@ -174,6 +174,17 @@ def _has_short_obvious_smell(text: str) -> bool:
     return any(term in lowered for term in (*_CUSTOMER_SERVICE_TERMS, *_AI_REVEAL_TERMS))
 
 
+def has_unexpected_script_fragment(reply: str, *, user_text: str = "", context_hint: str = "") -> bool:
+    prose, _ = _protect_opaque_spans(str(reply or ""))
+    fragments = re.findall(r"[\u0d80-\u0dff]+", prose)
+    source = f"{user_text}\n{context_hint}"
+    if not fragments or not re.search(r"[\u3400-\u9fff]", f"{prose}\n{user_text}"):
+        return False
+    if re.search(r"sinhala|僧伽罗|僧迦罗|锡兰语", source, re.IGNORECASE):
+        return False
+    return any(fragment not in source for fragment in fragments)
+
+
 def _is_adult_creative_turn(reply: str, user_text: str) -> bool:
     """成人创作模式判定: 创作请求词命中 user_text, 或回复本体成人内容词 ≥2。"""
     if _ADULT_REQUEST_RE.search(str(user_text or "")):
@@ -256,12 +267,16 @@ def check_ai_smell(
     *,
     user_text: str = "",
     min_reply_chars: int = 6,
+    context_hint: str = "",
 ) -> tuple[bool, list[str]]:
     _STATS["checked"] += 1
     text = str(reply or "")
     stripped = text.strip()
     if "<<<CATTY_NO_REPLY>>>" in text or _is_pure_emoji_or_image(stripped):
         return False, []
+    if has_unexpected_script_fragment(text, user_text=user_text, context_hint=context_hint):
+        _STATS["suspect"] += 1
+        return True, ["无来源的异常字符片段"]
     # 成人创作模式: 写小黄文是长散文, 豁免全部预筛 (长度/结构/格式味全免)。
     if _is_adult_creative_turn(text, user_text):
         return False, []
@@ -441,10 +456,13 @@ async def rewrite_if_needed(
     nsfw_context: bool = False,
     freeform: bool = False,
     persona: Any | None = None,
+    fallback_reply: str | None = None,
 ) -> str:
-    if not getattr(config, enabled_attr, True) or (
+    unexpected_script = has_unexpected_script_fragment(reply, user_text=user_text, context_hint=context_hint)
+    fallback = fallback_reply if unexpected_script and fallback_reply is not None else reply
+    if not unexpected_script and (not getattr(config, enabled_attr, True) or (
         persona is not None and not getattr(persona, "style_critic_enabled", True)
-    ):
+    )):
         return reply
     fadianji_profile = persona is None or getattr(persona, "style_critic_profile", "persona") == "fadianji"
     try:
@@ -455,15 +473,16 @@ async def rewrite_if_needed(
         reply,
         user_text=user_text,
         min_reply_chars=min_reply_chars,
+        context_hint=context_hint,
     )
     if not suspect or len(str(reply or "")) > _MAX_AUDIT_REPLY_CHARS:
-        return reply
+        return fallback
     base_url = str(getattr(config, "catty_audit_ai_base_url", "") or "").strip()
     api_key = str(getattr(config, "catty_audit_ai_api_key", "") or "").strip()
     model = str(getattr(config, "catty_audit_ai_model", "") or "").strip()
     if not base_url or not api_key or not model:
         _STATS["rewrite_failed"] += 1
-        return reply
+        return fallback
     nsfw_turn = bool(nsfw_context) or _is_nsfw_turn(str(reply or ""), user_text)
     protected_reply, protected_values = _protect_opaque_spans(str(reply or ""))
     if nsfw_turn:
@@ -481,6 +500,8 @@ async def rewrite_if_needed(
     clean_hint = _strip_markers_for_audit(context_hint)
     if clean_hint:
         audit_user_content += f"\n\n上下文提示:\n{clean_hint}"
+    if unexpected_script:
+        audit_user_content += "\n草稿混入了无来源的异常字符。结合用户和群聊上下文重说这一句，不保留异常字符，不改变发言者或回复对象。"
     audit_results = [
         _strip_markers_for_audit(str(item))[:2000]
         for item in (tool_result_texts or [])
@@ -555,7 +576,7 @@ async def rewrite_if_needed(
         if _looks_like_rewrite_refusal(cleaned) or not cleaned:
             _STATS["rewrite_failed"] += 1
             logger.info("style critic rewrite refused/empty twice; keeping original reply")
-            return reply
+            return fallback
         restored = _restore_opaque_spans(cleaned, protected_values)
         if (
             not restored
@@ -563,15 +584,16 @@ async def rewrite_if_needed(
             or any(term in restored for term in _CUSTOMER_SERVICE_TERMS)
             or (source_polarity == {"success"} and "failure" in _fact_polarity(restored))
             or (source_polarity == {"failure"} and "success" in _fact_polarity(restored))
+            or has_unexpected_script_fragment(restored, user_text=user_text, context_hint=context_hint)
         ):
             _STATS["rewrite_failed"] += 1
-            return reply
+            return fallback
         _STATS["rewritten"] += 1
         return restored
     except Exception:  # noqa: BLE001
         _STATS["rewrite_failed"] += 1
         logger.debug("fadianji style critic rewrite failed", exc_info=True)
-        return reply
+        return fallback
 
 
 def get_stats() -> dict[str, int]:
