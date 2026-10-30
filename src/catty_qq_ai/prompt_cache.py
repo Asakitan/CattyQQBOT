@@ -22,8 +22,71 @@ openai_client 在稳定前缀和历史端点使用 prompt_cache_breakpoint，不
 from __future__ import annotations
 
 from collections import OrderedDict
+import json
+import logging
+import os
+from pathlib import Path
 import time
 from typing import Any
+
+
+class HistoryCacheAnchors:
+    MAX_ENTRIES = 1024
+    TTL_SECONDS = 12 * 3600
+
+    def __init__(self, path: str | Path | None = None) -> None:
+        self.path = Path(path) if path is not None else None
+        self.entries: OrderedDict[str, dict[str, Any]] = OrderedDict()
+        if self.path is not None:
+            try:
+                raw = json.loads(self.path.read_text(encoding="utf-8"))
+                if isinstance(raw, dict):
+                    for key, value in list(raw.items())[-self.MAX_ENTRIES:]:
+                        if (
+                            isinstance(key, str) and isinstance(value, dict)
+                            and isinstance(value.get("index"), int) and value["index"] >= 0
+                            and isinstance(value.get("hash"), str)
+                            and isinstance(value.get("expires"), (int, float))
+                        ):
+                            self.entries[key] = value
+            except (OSError, ValueError):
+                pass
+
+    def select(
+        self, key: str, candidates: list[tuple[int, str]], *, promote: bool,
+        now: float | None = None,
+    ) -> tuple[int | None, bool]:
+        timestamp = time.time() if now is None else now
+        entry = self.entries.get(key)
+        if entry is not None:
+            if entry["expires"] > timestamp and (entry["index"], entry["hash"]) in candidates:
+                self.entries.move_to_end(key)
+                return entry["index"], False
+            self.entries.pop(key)
+        if not promote or not candidates:
+            if entry is not None:
+                self._save()
+            return None, False
+        index, digest = candidates[-1]
+        self.entries[key] = {"index": index, "hash": digest, "expires": timestamp + self.TTL_SECONDS}
+        while len(self.entries) > self.MAX_ENTRIES:
+            self.entries.popitem(last=False)
+        self._save()
+        return index, True
+
+    def _save(self) -> None:
+        if self.path is None:
+            return
+        staging = self.path.with_name(self.path.name + ".tmp")
+        try:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            with staging.open("w", encoding="utf-8") as stream:
+                json.dump(self.entries, stream, separators=(",", ":"), allow_nan=False)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(staging, self.path)
+        except (OSError, ValueError) as exc:
+            logging.getLogger("catty_qq_ai").warning("history cache anchors not persisted: %s", type(exc).__name__)
 
 
 class GroupCacheTTL:

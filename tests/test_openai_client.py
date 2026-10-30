@@ -328,6 +328,29 @@ class VisionPassthroughTests(unittest.TestCase):
 
 
 class OpenAIClientTests(unittest.TestCase):
+    def test_responses_final_only_keeps_tools_without_executor(self) -> None:
+        config = _client.Config(
+            catty_openai_model="gpt-6.1-terra", catty_openai_api_key="TOKEN",
+            catty_openai_base_url="https://api.openai.com/v1/responses",
+        )
+        tools = [{"type": "function", "function": {"name": "lookup"}}]
+        response = {"choices": [{"message": {"content": "done", "tool_calls": [
+            {"id": "ignored", "function": {"name": "lookup", "arguments": "{}"}},
+        ]}}]}
+        executor = AsyncMock()
+        with (
+            patch.object(_client, "_post_chat_completion_raw", new_callable=AsyncMock, return_value=response) as post,
+            patch.object(_client, "_maybe_distill_reply"),
+        ):
+            reply = asyncio.run(_client.chat_completion_with_tools(
+                config, [{"role": "user", "content": "TARGET"}], tools=tools,
+                tool_executor=executor, tool_choice="none",
+            ))
+        self.assertEqual(reply, "done")
+        self.assertEqual(post.call_args.kwargs["tools"], tools)
+        self.assertEqual(post.call_args.kwargs["tool_choice"], "none")
+        executor.assert_not_awaited()
+
     def test_request_class_distinguishes_chat_and_auxiliary_routes(self) -> None:
         self.assertEqual(_client._request_class_for_route("main", "private:1"), "chat")
         self.assertEqual(_client._request_class_for_route("router", "group:2"), "chat")
@@ -335,9 +358,54 @@ class OpenAIClientTests(unittest.TestCase):
         self.assertEqual(_client._request_class_for_route("summary", "private:1"), "auxiliary")
         self.assertEqual(_client._request_class_for_route("imagegen_plan", "private:1"), "auxiliary")
         self.assertEqual(_client._request_class_for_route("imagegen_caption", "group:2"), "auxiliary")
+        self.assertEqual(_client._request_class_for_route("proactive", "group:2"), "auxiliary")
         self.assertEqual(_client._request_class_for_route("spark", "private:1"), "auxiliary")
         self.assertEqual(_client._request_class_for_route("nsfw_main", "private:1"), "chat")
         self.assertEqual(_client._request_class_for_route("main", "summary:group:2"), "auxiliary")
+
+    def test_proactive_uses_deepseek_auxiliary_route_without_tools(self) -> None:
+        config = _client.Config(
+            catty_openai_model="gpt-6.1-terra", catty_openai_api_key="MAIN_TOKEN",
+            catty_openai_base_url="https://api.openai.com/v1/responses",
+            catty_audit_ai_model="deepseek-v4.1-flash", catty_audit_ai_api_key="AUX_TOKEN",
+            catty_audit_ai_base_url="https://opencode.ai/zen/go/v1/chat/completions",
+        )
+        messages = [{"role": "user", "content": "TARGET"}]
+        with patch.object(_client, "_post_with_fallback", new_callable=AsyncMock, return_value="reply") as post:
+            self.assertTrue(_client.proactive_model_configured(config))
+            self.assertEqual(asyncio.run(_client.chat_completion_proactive(config, messages)), "reply")
+        self.assertEqual(post.await_count, 1)
+        self.assertEqual(post.call_args.kwargs["model"], "deepseek-v4.1-flash")
+        self.assertEqual(post.call_args.kwargs["api_key"], "AUX_TOKEN")
+        self.assertEqual(post.call_args.kwargs["line"], "proactive")
+        self.assertNotIn("tools", post.call_args.kwargs)
+        self.assertEqual(post.call_args.kwargs["messages"], messages)
+
+    def test_proactive_does_not_fall_back_to_main_model_without_deepseek(self) -> None:
+        config = _client.Config(
+            catty_openai_model="gpt-6.1-terra", catty_openai_api_key="MAIN_TOKEN",
+            catty_openai_base_url="https://api.openai.com/v1/responses",
+            catty_audit_ai_model="", catty_audit_ai_api_key="", catty_audit_ai_base_url="",
+            catty_ai_fallback_model="", catty_ai_fallback_api_key="", catty_ai_fallback_base_url="",
+        )
+        with patch.object(_client, "_post_with_fallback", new_callable=AsyncMock) as post:
+            self.assertFalse(_client.proactive_model_configured(config))
+            with self.assertRaises(_client.OpenAICompatibleError):
+                asyncio.run(_client.chat_completion_proactive(config, []))
+        post.assert_not_awaited()
+
+    def test_proactive_skips_non_deepseek_audit_and_never_uses_main(self) -> None:
+        config = _client.Config(
+            catty_openai_model="deepseek-main", catty_openai_api_key="MAIN_TOKEN",
+            catty_audit_ai_model="other-model", catty_audit_ai_api_key="AUDIT_TOKEN",
+            catty_audit_ai_base_url="https://audit.example/v1",
+            catty_ai_fallback_model="deepseek-v4.1-flash", catty_ai_fallback_api_key="FALLBACK_TOKEN",
+            catty_ai_fallback_base_url="https://fallback.example/v1",
+        )
+        route = _client.aux_route(config, deepseek_only=True)
+        self.assertEqual(route.api_key, "FALLBACK_TOKEN")
+        config.catty_ai_fallback_api_key = ""
+        self.assertFalse(_client.proactive_model_configured(config))
 
     def test_codex_instant_separates_auxiliary_spark_from_nsfw_main(self) -> None:
         config = _client.Config(

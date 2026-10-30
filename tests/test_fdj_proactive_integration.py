@@ -73,6 +73,39 @@ def _event(text="今天吃什么", *, at=False, at_all=False, uid=20001):
     )
 
 
+class ProactiveRouteIntegrationTests(unittest.IsolatedAsyncioTestCase):
+    async def test_runtime_host_uses_dedicated_proactive_completion(self):
+        generate = AsyncMock(return_value="reply")
+        configured = Mock(return_value=True)
+        namespace = _extract({"_get_fdj_proactive_runtime"}, {
+            "__package__": _PKG,
+            "_fdj_proactive_runtime": None,
+            "config": object(),
+            "_persona_for_scope": Mock(), "get_bots": Mock(return_value={}),
+            "_recent_conversation_for_scope": Mock(), "_fdj_group_reply_busy": Mock(),
+            "proactive_model_configured": configured,
+            "chat_completion_proactive": generate,
+            "_send_fdj_proactive_text": AsyncMock(), "_remember_fdj_proactive_text": Mock(),
+            "_clean_fdj_proactive_reply": Mock(), "_proactive_purpose_candidates": AsyncMock(),
+            "_proactive_purpose_delivered": AsyncMock(),
+        })
+        host = namespace["_get_fdj_proactive_runtime"]().host
+        self.assertIs(host.generate, generate)
+        self.assertTrue(host.has_api_key())
+        configured.assert_called_once_with(namespace["config"])
+
+    async def test_legacy_bubble_uses_dedicated_proactive_completion(self):
+        generate = AsyncMock(return_value="NO_REPLY")
+        namespace = _extract({"_send_proactive_bubble"}, {
+            "_locks": {"group:42": asyncio.Lock()}, "config": object(),
+            "_build_proactive_messages": Mock(return_value=[]),
+            "chat_completion_proactive": generate,
+            "_is_no_reply": lambda value: True,
+        })
+        self.assertFalse(await namespace["_send_proactive_bubble"](object(), "42"))
+        generate.assert_awaited_once_with(namespace["config"], [])
+
+
 class TriggerIntegrationTests(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
         self.persona = types.SimpleNamespace(

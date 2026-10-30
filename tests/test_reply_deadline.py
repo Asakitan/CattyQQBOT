@@ -44,6 +44,35 @@ def _cfg(**overrides):
 
 
 class ReplyDeadlineTests(unittest.IsolatedAsyncioTestCase):
+    async def test_responses_retry_keeps_schemas_and_effort_but_never_executes_tools(self) -> None:
+        config = plugin.Config(
+            catty_openai_base_url="https://api.openai.com/v1/responses",
+            catty_openai_api_key="TOKEN", catty_openai_model="gpt-6.1-terra",
+            catty_reply_hard_deadline_seconds=0.01, catty_reply_retry_deadline_seconds=1,
+            catty_reply_deadline_attempts=1,
+        )
+        initial = [{"type": "function", "function": {"name": "lookup"}}]
+        final = initial + [{"type": "function", "function": {"name": "loaded"}}]
+        calls = []
+
+        async def fake(config, messages, **kwargs):
+            calls.append((kwargs, openai_client.get_current_reasoning_effort()))
+            if len(calls) == 1:
+                kwargs["reply_state"]._remember_request(messages, final)
+                await asyncio.Event().wait()
+            return "done"
+
+        with patch.object(openai_client, "chat_completion_with_tools", fake):
+            reply = await plugin._main_reply_with_deadline(
+                config, [{"role": "user", "content": "TARGET"}], tools=initial,
+                tool_executor=object(), max_rounds=2, max_calls_per_round=1,
+            )
+        self.assertEqual(reply, "done")
+        self.assertEqual(calls[1][0]["tools"], final)
+        self.assertEqual(calls[1][0]["tool_choice"], "none")
+        self.assertIsNone(calls[1][0]["tool_executor"])
+        self.assertIsNone(calls[1][1])
+
     async def test_degraded_retry_withdraws_file_capability_without_mutating_original(self) -> None:
         from catty_qq_ai.request_intent import append_context_request_hint
 

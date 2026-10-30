@@ -679,12 +679,20 @@ class ToolReplyState:
     """
 
     _history: list[ChatMessage] | None = field(default=None, init=False, repr=False)
+    _tools: list[dict[str, Any]] | None = field(default=None, init=False, repr=False)
     _pending: dict[str, int] = field(default_factory=dict, init=False, repr=False)
     _has_tool_round: bool = field(default=False, init=False, repr=False)
 
     def _seed(self, messages: list[ChatMessage]) -> None:
         if self._history is None:
             self._history = deepcopy(messages)
+
+    def _remember_request(self, history: list[ChatMessage], tools: list[dict[str, Any]]) -> None:
+        self._history = deepcopy(history)
+        self._tools = deepcopy(tools)
+
+    def recovery_tools(self) -> list[dict[str, Any]] | None:
+        return deepcopy(self._tools)
 
     def _begin_round(
         self,
@@ -1639,6 +1647,8 @@ _WS_TRANSPORT_KEY: tuple[Any, ...] | None = None
 _WS_CHAIN_CACHE: Any = None
 _WS_CHAIN_CACHE_KEY: tuple[Any, ...] | None = None
 _RESPONSES_GROUP_CACHE_TTL: Any = None
+_RESPONSES_HISTORY_ANCHORS: Any = None
+_RESPONSES_HISTORY_ANCHORS_KEY: str | None = None
 
 
 def _get_runtime_config() -> Any:
@@ -1944,6 +1954,7 @@ def _request_class_for_route(route: str, scope: str) -> str:
         "vision",
         "imagegen_plan",
         "imagegen_caption",
+        "proactive",
         "spark",
     }:
         return "auxiliary"
@@ -2967,6 +2978,64 @@ def _mark_responses_history_cache(input_items: list[dict[str, Any]]) -> None:
             break
 
 
+def _responses_cache_settings(body: dict[str, Any]) -> dict[str, Any]:
+    return {name: value for name, value in body.items() if name not in {
+        "input", "stream", "metadata", "max_output_tokens", "store", "include", "tool_choice",
+    }}
+
+
+def _apply_responses_history_anchor(body: dict[str, Any]) -> None:
+    diagnostics = _get_current_cache_request_diagnostics() or {}
+    ttl = diagnostics.get("responses_cache_ttl")
+    scope = str(diagnostics.get("conversation_id") or get_current_scope_key() or "")
+    if ttl not in ("12h", "30m") or not scope:
+        return
+    from pathlib import Path
+    from .prompt_cache import HistoryCacheAnchors
+    from .responses_ws import item_hash
+
+    global _RESPONSES_HISTORY_ANCHORS, _RESPONSES_HISTORY_ANCHORS_KEY
+    config = _get_runtime_config()
+    path = None
+    if config is not None:
+        cache_path = Path(str(getattr(config, "catty_openai_websocket_cache_path", "") or "data/responses_ws_cache.json"))
+        path = str(cache_path.with_name(cache_path.stem + ".anchors.json"))
+    if _RESPONSES_HISTORY_ANCHORS is None or _RESPONSES_HISTORY_ANCHORS_KEY != path:
+        _RESPONSES_HISTORY_ANCHORS = HistoryCacheAnchors(path)
+        _RESPONSES_HISTORY_ANCHORS_KEY = path
+    items = body.get("input") or []
+    users = [index for index, item in enumerate(items) if item.get("role") == "user"]
+    history = set(users[:-1])
+    candidates = []
+    digest = hashlib.sha256()
+    for index, item in enumerate(items):
+        digest.update(item_hash(item).encode("ascii"))
+        parts = item.get("content") or []
+        if index in history and parts and parts[-1].get("type") in {"input_text", "input_image", "input_file"}:
+            candidates.append((index, digest.hexdigest()))
+    settings = _responses_cache_settings(body)
+    settings_hash = _canonical_cache_diagnostic_sha256(settings)
+    key = _canonical_cache_diagnostic_sha256({"scope": scope, "settings": settings_hash})
+    index, created = _RESPONSES_HISTORY_ANCHORS.select(key, candidates, promote=ttl == "12h")
+    if index is not None:
+        for candidate, _ in candidates:
+            items[candidate]["content"][-1].pop("prompt_cache_breakpoint", None)
+        items[index]["content"][-1]["prompt_cache_breakpoint"] = {"mode": "explicit", "ttl": ttl}
+        latest = candidates[-1][0]
+        if latest != index:
+            items[latest]["content"][-1]["prompt_cache_breakpoint"] = {"mode": "explicit"}
+    diagnostics.update({
+        "wire_cache_settings_hash": settings_hash,
+        "history_cache_anchor": index,
+        "history_cache_anchor_created": created,
+    })
+    _current_cache_request_diagnostics_var.set(diagnostics)
+    _logger.info(
+        "responses cache layout settings=%s prefix=%s ttl=%s history_anchor=%s new_anchor=%s",
+        settings_hash[:12], item_hash(items[0])[:12] if items else "-", ttl, index, created,
+    )
+
+
 def _hoist_responses_cache_guides(
     items: list[dict[str, Any]], boundary_index: int, tools: list[dict[str, Any]] | None,
 ) -> int:
@@ -3144,6 +3213,8 @@ def _payload_to_responses_body(
     ):
         if key in payload and key not in body:
             body[key] = payload[key]
+    if boundary_index >= 0:
+        _apply_responses_history_anchor(body)
     if stream:
         body["stream"] = True
     return body
@@ -3470,16 +3541,20 @@ async def _stream_responses_ws_attempt(
     if not isinstance(input_items, list):
         input_items = []
     hashes = [item_hash(item) for item in input_items]
-    if hashes and input_items[0].get("role") == "developer":
-        parts = input_items[0].get("content") or []
-        if any(
-            isinstance(part, dict)
-            and (part.get("prompt_cache_breakpoint") or {}).get("ttl") == "12h"
-            for part in parts
-        ):
-            hashes[0] = _canonical_cache_diagnostic_sha256({
-                "item_hash": hashes[0], "stable_cache_ttl": "12h",
-            })
+    long_breakpoints = [
+        (index, part_index)
+        for index, item in enumerate(input_items)
+        for part_index, part in enumerate(item.get("content") or [])
+        if isinstance(part, dict) and (part.get("prompt_cache_breakpoint") or {}).get("ttl") == "12h"
+    ]
+    if hashes and long_breakpoints:
+        hashes[0] = _canonical_cache_diagnostic_sha256({
+            "item_hash": hashes[0], "long_breakpoints": long_breakpoints,
+        })
+    if hashes:
+        hashes[0] = _canonical_cache_diagnostic_sha256({
+            "item_hash": hashes[0], "settings": _responses_cache_settings(body),
+        })
     cache = _get_ws_chain_cache(config)
 
     previous_id: str | None = None
@@ -4938,6 +5013,27 @@ async def chat_completion_with_tools(
     """
     if reply_state is not None:
         reply_state._seed(messages)
+    if (
+        tools and tool_choice == "none" and not _fallback_mode
+        and not (router_base_url.strip() and router_api_key.strip() and router_model.strip())
+        and getattr(config, "catty_tools_enabled", True)
+        and _is_responses_endpoint(config.catty_openai_base_url)
+        and _responses_support_explicit_cache(config.catty_openai_base_url, _effective_main_model(config))
+    ):
+        data = await _post_chat_completion_raw(
+            base_url=config.catty_openai_base_url, api_key=config.catty_openai_api_key,
+            model=_effective_main_model(config), messages=messages,
+            timeout=config.catty_request_timeout, proxy=config.catty_http_proxy,
+            temperature=config.catty_temperature, max_tokens=config.catty_max_tokens,
+            extra_headers=config.catty_openai_extra_headers,
+            extra_body=config.catty_openai_extra_body, tools=tools, tool_choice="none",
+            enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
+            cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
+            stream=True, request_route="main",
+        )
+        reply = _extract_content(data)
+        _maybe_distill_reply(reply, source="deepseek")
+        return reply
     if not tools or tool_executor is None:
         _logger.info("tool_chat: tools/executor empty → fallback to plain chat_completion")
         return await chat_completion(config, messages)
@@ -5019,6 +5115,8 @@ async def chat_completion_with_tools(
     # 端点拒绝时能带着同一批 tools 用 "auto" 无缝重试本轮 (而不是丢掉工具降级成纯聊天)。
     # history 是同一个 list 对象, loop 体 append 后闭包下次调用会读到最新内容。
     async def _dispatch_round(rtc: ToolChoice) -> dict[str, Any]:
+        if reply_state is not None:
+            reply_state._remember_request(history, tools)
         if _native_route:
             from .anthropic_native_client import post_messages_native_data
             from .prompt_cache import resolve_cache_ttl
@@ -5808,7 +5906,7 @@ class AuxRoute:
     context_tokens: int
 
 
-def aux_route(config: Config) -> AuxRoute:
+def aux_route(config: Config, *, deepseek_only: bool = False) -> AuxRoute:
     """按 audit_ai → ai_fallback → 主 ai 的顺序选次要线路。
 
     audit_ai 缺三件套时逐级回退；三处都缺时返回主 ai 线路（调用方会得到
@@ -5854,9 +5952,14 @@ def aux_route(config: Config) -> AuxRoute:
             context_tokens=main_context or 128_000,
         ),
     )
-    for candidate in candidates:
-        if candidate.base_url and candidate.api_key and candidate.model:
+    for candidate in candidates[:2] if deepseek_only else candidates:
+        if (
+            candidate.base_url and candidate.api_key and candidate.model
+            and (not deepseek_only or candidate.model.lower().startswith("deepseek-"))
+        ):
             return candidate
+    if deepseek_only:
+        raise OpenAICompatibleError("主动冒泡需要已配置的 DeepSeek 辅助线路。")
     return candidates[-1]
 
 
@@ -5868,13 +5971,14 @@ async def chat_completion_aux(
     timeout: float | None = None,
     temperature: float | None = None,
     request_route: str = "aux",
+    _route: AuxRoute | None = None,
 ) -> str:
     """次要 AI 纯文本完成: aux_route() 选出的线路，不挂工具。
 
     仅服务后台任务 (人格进化 / 人格定义生成 / 技能提炼 / 审计)。失败时
     _post_with_fallback 仍会降级到 ai_fallback，不会把错误吞成空串。
     """
-    route = aux_route(config)
+    route = _route or aux_route(config)
     if not route.base_url or not route.api_key or not route.model:
         raise OpenAICompatibleError("次要 AI 线路未配置。")
     request_timeout = timeout if timeout is not None else route.timeout
@@ -5896,6 +6000,20 @@ async def chat_completion_aux(
         extra_body=route.extra_body,
         label=f"aux({route.model})",
         line=request_route,
+    )
+
+
+def proactive_model_configured(config: Config) -> bool:
+    try:
+        aux_route(config, deepseek_only=True)
+    except OpenAICompatibleError:
+        return False
+    return True
+
+
+async def chat_completion_proactive(config: Config, messages: list[ChatMessage]) -> str:
+    return await chat_completion_aux(
+        config, messages, request_route="proactive", _route=aux_route(config, deepseek_only=True),
     )
 
 

@@ -34,6 +34,34 @@ openai_client = _load_module("openai_client")
 prompt_cache = importlib.import_module(f"{_PACKAGE_NAME}.prompt_cache")
 
 
+class HistoryCacheAnchorsTests(unittest.TestCase):
+    def test_anchor_stays_fixed_and_remains_available_when_session_cools(self):
+        anchors = prompt_cache.HistoryCacheAnchors()
+        self.assertEqual(anchors.select("scope", [(2, "a")], promote=False, now=0), (None, False))
+        self.assertEqual(anchors.select("scope", [(2, "a")], promote=True, now=1), (2, True))
+        candidates = [(2, "a"), (4, "b")]
+        self.assertEqual(anchors.select("scope", candidates, promote=True, now=2), (2, False))
+        self.assertEqual(anchors.select("scope", candidates, promote=False, now=1802), (2, False))
+        self.assertEqual(anchors.select("scope", candidates, promote=False, now=43201), (None, False))
+        self.assertEqual(anchors.select("scope", candidates, promote=True, now=43202), (4, True))
+
+    def test_changed_prefix_and_tool_variants_do_not_reuse_wrong_anchor(self):
+        anchors = prompt_cache.HistoryCacheAnchors()
+        self.assertEqual(anchors.select("tools-a", [(2, "a")], promote=True, now=0), (2, True))
+        self.assertEqual(anchors.select("tools-b", [(2, "a")], promote=False, now=1), (None, False))
+        self.assertEqual(anchors.select("tools-a", [(2, "changed")], promote=False, now=2), (None, False))
+        self.assertEqual(anchors.select("tools-a", [(2, "changed")], promote=True, now=3), (2, True))
+
+    def test_anchor_metadata_survives_restart_without_saving_message_text(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "anchors.json"
+            anchors = prompt_cache.HistoryCacheAnchors(path)
+            anchors.select("key", [(3, "hash")], promote=True, now=10)
+            restored = prompt_cache.HistoryCacheAnchors(path)
+            self.assertEqual(restored.select("key", [(3, "hash"), (5, "new")], promote=False, now=20), (3, False))
+            self.assertEqual(json.loads(path.read_text())["key"], {"index": 3, "hash": "hash", "expires": 43210})
+
+
 class GroupCacheTTLTests(unittest.TestCase):
     def test_three_distinct_turns_promote_and_idle_expires(self):
         tracker = prompt_cache.GroupCacheTTL()
@@ -86,6 +114,8 @@ class GroupCachePolicyTests(unittest.TestCase):
         select = self.tracker.select
         for patcher in (
             patch.object(openai_client, "_RESPONSES_GROUP_CACHE_TTL", self.tracker),
+            patch.object(openai_client, "_RESPONSES_HISTORY_ANCHORS", prompt_cache.HistoryCacheAnchors()),
+            patch.object(openai_client, "_RESPONSES_HISTORY_ANCHORS_KEY", None),
             patch.object(self.tracker, "select", side_effect=lambda scope, turn: select(scope, turn, now=self.now)),
             patch.object(openai_client, "_get_runtime_config", return_value=None),
         ):
@@ -156,7 +186,51 @@ class GroupCachePolicyTests(unittest.TestCase):
             openai_client.reset_current_scope_key(scope_token)
         self.assertEqual(self._turn("cold")["responses_cache_ttl"], "30m")
 
-    def test_only_stable_prefix_gets_long_ttl_in_stream_and_nonstream_bodies(self):
+    def test_fixed_history_anchor_survives_growth_and_cold_requests(self):
+        self._turn("one")
+        self._turn("two")
+        hot = self._turn("three")
+
+        def build(payload, diagnostics):
+            token = openai_client._current_cache_request_diagnostics_var.set(diagnostics)
+            try:
+                return openai_client._payload_to_responses_body(payload, stream=True, cache_stable_prefix=True)
+            finally:
+                openai_client._current_cache_request_diagnostics_var.reset(token)
+
+        first = build(self.payload, hot)
+        grown = copy.deepcopy(self.payload)
+        grown["messages"].extend([
+            {"role": "assistant", "content": "delivered"},
+            {"role": "user", "content": "new current"},
+        ])
+        second = build(grown, hot)
+        first_history = first["input"][1]
+        self.assertEqual(first_history, second["input"][1])
+        self.assertEqual(first_history["content"][-1]["prompt_cache_breakpoint"]["ttl"], "12h")
+        self.assertEqual(second["input"][3]["content"][-1]["prompt_cache_breakpoint"], {"mode": "explicit"})
+        self.now = 1900
+        cold = build(grown, self._turn("cold"))
+        self.assertEqual(cold["input"][1]["content"][-1]["prompt_cache_breakpoint"]["ttl"], "30m")
+        self.assertEqual(len(openai_client._RESPONSES_HISTORY_ANCHORS.entries), 1)
+
+    def test_changed_history_prefix_does_not_keep_old_anchor(self):
+        self._turn("one")
+        self._turn("two")
+        hot = self._turn("three")
+        token = openai_client._current_cache_request_diagnostics_var.set(hot)
+        try:
+            openai_client._payload_to_responses_body(self.payload, stream=True, cache_stable_prefix=True)
+            original = copy.deepcopy(next(iter(openai_client._RESPONSES_HISTORY_ANCHORS.entries.values())))
+            changed = copy.deepcopy(self.payload)
+            changed["messages"][1]["content"] = "changed history"
+            openai_client._payload_to_responses_body(changed, stream=True, cache_stable_prefix=True)
+            replacement = next(iter(openai_client._RESPONSES_HISTORY_ANCHORS.entries.values()))
+        finally:
+            openai_client._current_cache_request_diagnostics_var.reset(token)
+        self.assertNotEqual(original["hash"], replacement["hash"])
+
+    def test_stable_prefix_and_fixed_history_get_long_ttl_in_stream_and_nonstream_bodies(self):
         self._turn("one")
         self._turn("two")
         diagnostics = self._turn("three")
@@ -169,7 +243,7 @@ class GroupCachePolicyTests(unittest.TestCase):
                 )
                 marks = [part["prompt_cache_breakpoint"] for item in body["input"]
                          for part in item.get("content", []) if "prompt_cache_breakpoint" in part]
-                self.assertEqual([mark.get("ttl", "30m") for mark in marks], ["12h", "30m"])
+                self.assertEqual([mark.get("ttl", "30m") for mark in marks], ["12h", "12h"])
                 self.assertNotIn("prompt_cache_options", body)
                 self.assertNotIn("responses_cache_ttl", body)
             legacy = openai_client._payload_to_responses_body(self.payload, stream=False)
@@ -270,7 +344,7 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         port = server.sockets[0].getsockname()[1]
         return server, port
 
-    async def _run_real_tool_loop(self, arguments, *, change_tools=False, max_rounds=2):
+    async def _run_real_tool_loop(self, arguments, *, change_tools=False, change_description=False, max_rounds=2):
         frames = []
         executed = []
         provider_calls = []
@@ -289,7 +363,10 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
                 yield {"type": "response.completed", "response": {"id": f"resp_{len(frames)}", "status": "completed", "output": output}}
 
         def schemas(names):
-            return [{"type": "function", "function": {"name": name, "parameters": {"type": "object", "properties": {}}}} for name in names]
+            return [{"type": "function", "function": {
+                "name": name, "description": "changed" if change_description and len(provider_calls) > 1 else "original",
+                "parameters": {"type": "object", "properties": {}},
+            }} for name in names]
 
         names = ["lookup", "catty_skill_search"]
         tools = schemas(names)
@@ -370,6 +447,12 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([item["type"] for item in final["input"]], ["function_call_output", "message", "message"])
         self.assertIn("不再调用工具", final["input"][-1]["content"][0]["text"])
         self.assertFalse(any(item.get("role") == "user" for item in final["input"]))
+
+    async def test_same_named_tool_schema_change_replays_full_input(self):
+        frames = await self._run_real_tool_loop('{"query":"TARGET"}', change_description=True)
+        self.assertIsNone(frames[1][1])
+        self.assertEqual([tool["name"] for tool in frames[0][0]["tools"]], [tool["name"] for tool in frames[1][0]["tools"]])
+        self.assertNotEqual(frames[0][0]["tools"], frames[1][0]["tools"])
 
     async def test_real_tool_loop_replays_for_redaction_or_new_capabilities(self):
         for arguments, changed in (('{"token":"SECRET_VALUE"}', False), (' { "query": "TARGET" } ', True)):
@@ -482,6 +565,8 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
                     patch.object(openai_client, "_get_ws_chain_cache", return_value=cache),
                     patch.object(openai_client, "_get_runtime_config", return_value=None),
                     patch.object(openai_client, "_RESPONSES_GROUP_CACHE_TTL", tracker),
+                    patch.object(openai_client, "_RESPONSES_HISTORY_ANCHORS", prompt_cache.HistoryCacheAnchors()),
+                    patch.object(openai_client, "_RESPONSES_HISTORY_ANCHORS_KEY", None),
                     patch.object(tracker, "select", side_effect=lambda scope, turn: select(scope, turn, now=timestamp)),
                 ):
                     for turn, timestamp in enumerate((0, 100, 200, 300, 2200, 2300)):

@@ -70,6 +70,7 @@ from .openai_client import (
     analyze_images_for_reply,
     assess_user_anger,
     chat_completion,
+    chat_completion_proactive,
     chat_completion_summary,
     chat_completion_with_tools,
     summarize_scope_lore,
@@ -78,6 +79,7 @@ from .openai_client import (
     _filter_completion,
     local_critic_completion,
     prepare_passthrough_image_parts,
+    proactive_model_configured,
     vision_shares_main_route,
 )
 from .action_hints import build_action_hints
@@ -11007,7 +11009,7 @@ async def _main_reply_with_deadline(
     tool_choice: Any = "auto",
     tools_provider: Any = None,
 ) -> str:
-    """主回复墙钟: 超时立即取消这次请求, 再用同一批 messages 重发 (降级: 不带 tools + 低思考)。
+    """主回复墙钟: 超时取消后恢复；Responses 保留定义并禁用调用，其余线路低思考重试。
 
     主人 2026-10-25: 流式连接能靠心跳续命, httpx 的 read timeout 永远不触发, 之前一次
     「你看看群聊记录…」的请求就这么挂到用户以为 bot 死了。现在整轮钉了墙钟, 到点就取消,
@@ -11015,6 +11017,9 @@ async def _main_reply_with_deadline(
     """
     from .openai_client import (
         ToolReplyState,
+        _effective_main_model,
+        _is_responses_endpoint,
+        _responses_support_explicit_cache,
         chat_completion_with_tools,
         reset_current_reasoning_effort,
         set_current_reasoning_effort,
@@ -11035,24 +11040,36 @@ async def _main_reply_with_deadline(
     except (TypeError, ValueError):
         attempts = 2
     attempts = max(0, attempts)
+    preserve_cache = bool(
+        tools and not (router_base_url and router_api_key and router_model)
+        and _is_responses_endpoint(str(getattr(config, "catty_openai_base_url", "")))
+        and _responses_support_explicit_cache(
+            str(getattr(config, "catty_openai_base_url", "")), _effective_main_model(config),
+        )
+    )
 
     reply_state = ToolReplyState()
     last_error: BaseException | None = None
     for attempt in range(attempts + 1):
         degraded = attempt > 0
         deadline = retry_deadline if degraded else first_deadline
-        token = set_current_reasoning_effort("low" if degraded else None)
+        token = set_current_reasoning_effort("low" if degraded and not preserve_cache else None)
         started = time.monotonic()
         try:
             attempt_messages = messages
+            attempt_tools = tools
             if degraded:
                 attempt_messages = list(reply_state.recovery_messages() or messages)
-                append_context_request_hint(attempt_messages)
-                append_harness_agent_hint(attempt_messages, ())
+                if preserve_cache:
+                    attempt_tools = reply_state.recovery_tools() or tools
+                else:
+                    attempt_tools = None
+                    append_context_request_hint(attempt_messages)
+                    append_harness_agent_hint(attempt_messages, ())
             call = chat_completion_with_tools(
                 config,
                 attempt_messages,
-                tools=None if degraded else tools,
+                tools=attempt_tools,
                 tool_executor=None if degraded else tool_executor,
                 max_rounds=max_rounds,
                 max_calls_per_round=max_calls_per_round,
@@ -11060,7 +11077,7 @@ async def _main_reply_with_deadline(
                 router_api_key="" if degraded else router_api_key,
                 router_model="" if degraded else router_model,
                 router_label="" if degraded else router_label,
-                tool_choice="auto" if degraded else tool_choice,
+                tool_choice=("none" if preserve_cache else "auto") if degraded else tool_choice,
                 reply_state=None if degraded else reply_state,
                 **({"tools_provider": tools_provider} if not degraded and tools_provider is not None else {}),
             )
@@ -11072,7 +11089,7 @@ async def _main_reply_with_deadline(
             logger.warning(
                 f"reply deadline: attempt {attempt + 1}/{attempts + 1} cancelled after "
                 f"{time.monotonic() - started:.1f}s (limit {deadline:.1f}s) → "
-                f"resending {'degraded (no tools, low reasoning)' if not degraded else 'degraded'}"
+                f"resending {'final-only (schemas kept)' if preserve_cache else 'degraded (no tools, low reasoning)'}"
             )
         finally:
             reset_current_reasoning_effort(token)
@@ -11354,7 +11371,7 @@ def _record_proactive_send_failure(group_id: str, exc: Exception) -> None:
 async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
     async with _locks[f"group:{group_id}"]:
         messages = _build_proactive_messages(group_id)
-        reply = await chat_completion(config, messages)
+        reply = await chat_completion_proactive(config, messages)
         if _is_no_reply(reply):
             return False
         chunks = _reply_chunks(reply)
@@ -11447,8 +11464,8 @@ def _get_fdj_proactive_runtime():
             config=lambda: config, persona=_persona_for_scope,
             bots=lambda: list(get_bots().values()),
             recent=_recent_conversation_for_scope,
-            busy=_fdj_group_reply_busy, has_api_key=_has_api_key,
-            generate=chat_completion, send_text=_send_fdj_proactive_text,
+            busy=_fdj_group_reply_busy, has_api_key=lambda: proactive_model_configured(config),
+            generate=chat_completion_proactive, send_text=_send_fdj_proactive_text,
             remember=_remember_fdj_proactive_text, clean_text=_clean_fdj_proactive_reply,
             purpose_candidates=_proactive_purpose_candidates,
             purpose_delivered=_proactive_purpose_delivered,
