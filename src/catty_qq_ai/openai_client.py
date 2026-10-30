@@ -6064,9 +6064,29 @@ def proactive_model_configured(config: Config) -> bool:
     return True
 
 
-async def chat_completion_proactive(config: Config, messages: list[ChatMessage]) -> str:
+async def chat_completion_proactive(
+    config: Config, messages: list[ChatMessage], *,
+    tools: list[dict[str, Any]] | None = None, tool_executor: Any | None = None,
+) -> str:
+    route = aux_route(config, deepseek_only=True)
+    if tools and tool_executor is not None and getattr(config, "catty_tools_enabled", True):
+        routed_config = config.model_copy(update={
+            "catty_ai_fallback_base_url": route.base_url,
+            "catty_ai_fallback_api_key": route.api_key,
+            "catty_ai_fallback_model": route.model,
+            "catty_ai_fallback_request_timeout": route.timeout,
+            "catty_ai_fallback_temperature": route.temperature,
+            "catty_ai_fallback_max_tokens": route.max_tokens,
+            "catty_ai_fallback_extra_headers": dict(route.extra_headers),
+            "catty_ai_fallback_extra_body": dict(route.extra_body),
+        })
+        return await chat_completion_with_tools(
+            routed_config, messages, tools=tools, tool_executor=tool_executor,
+            max_rounds=3, max_calls_per_round=2,
+            _fallback_mode=True, _fallback_request_route="proactive",
+        )
     return await chat_completion_aux(
-        config, messages, request_route="proactive", _route=aux_route(config, deepseek_only=True),
+        config, messages, request_route="proactive", _route=route,
     )
 
 

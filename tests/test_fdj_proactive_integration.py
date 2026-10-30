@@ -74,6 +74,54 @@ def _event(text="今天吃什么", *, at=False, at_all=False, uid=20001):
 
 
 class ProactiveRouteIntegrationTests(unittest.IsolatedAsyncioTestCase):
+    async def test_image_tools_read_only_current_group_images(self):
+        tools_module = importlib.import_module(f"{_PKG}.tools")
+        describe = AsyncMock(return_value="画面是服装商品截图。")
+        snapshot = Mock(return_value=[{
+            "seq": 17, "display_name": "群友", "user_id": "123", "text": "[图片]",
+            "is_bot": False, "images": [{"url": "https://images.example/outfit.png"}],
+        }])
+        namespace = _extract({"_proactive_image_tools"}, {
+            "__package__": _PKG, "config": Config(), "json": json,
+            "ToolContext": tools_module.ToolContext, "memory_store": object(),
+            "_persona_for_scope": Mock(return_value=None),
+            "_recent_messages_snapshot_for_scope": snapshot, "describe_images": describe,
+        })
+        schemas, execute = namespace["_proactive_image_tools"]("group:10001")
+        self.assertEqual({schema["function"]["name"] for schema in schemas}, {
+            "catty_scan_messages", "catty_look_image",
+        })
+        scanned = await execute("catty_scan_messages", '{"has_image":true}')
+        self.assertEqual(scanned["messages"][0]["images"][0]["image_ref"], "m17#0")
+        result = await execute("catty_look_image", '{"image_ref":"m17#0","question":"图里是什么？"}')
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["description"], "画面是服装商品截图。")
+        describe.assert_awaited_once_with(namespace["config"], ["https://images.example/outfit.png"], "图里是什么？")
+        for reference in ("m18#0", "https://other.example/private.png", [], None):
+            denied = await execute("catty_look_image", json.dumps({"image_ref": reference}))
+            self.assertFalse(denied["ok"])
+        self.assertFalse((await execute("catty_write_file", "{}"))["ok"])
+        self.assertFalse((await execute("catty_look_image", "[]"))["ok"])
+        self.assertEqual(describe.await_count, 1)
+        snapshot.assert_called_once_with("group:10001")
+
+    async def test_image_tools_absent_when_disabled_empty_or_not_group(self):
+        tools_module = importlib.import_module(f"{_PKG}.tools")
+        config = Config(catty_image_vision_enabled=False)
+        snapshot = Mock(return_value=[])
+        namespace = _extract({"_proactive_image_tools"}, {
+            "__package__": _PKG, "config": config, "json": json,
+            "ToolContext": tools_module.ToolContext, "memory_store": object(),
+            "_persona_for_scope": Mock(), "_recent_messages_snapshot_for_scope": snapshot,
+            "describe_images": AsyncMock(),
+        })
+        factory = namespace["_proactive_image_tools"]
+        self.assertEqual(factory("group:10001"), ([], None))
+        snapshot.assert_not_called()
+        config.catty_image_vision_enabled = True
+        self.assertEqual(factory("private:123"), ([], None))
+        self.assertEqual(factory("group:10001"), ([], None))
+
     async def test_runtime_host_uses_dedicated_proactive_completion(self):
         generate = AsyncMock(return_value="reply")
         configured = Mock(return_value=True)
@@ -88,6 +136,7 @@ class ProactiveRouteIntegrationTests(unittest.IsolatedAsyncioTestCase):
             "_send_fdj_proactive_text": AsyncMock(), "_remember_fdj_proactive_text": Mock(),
             "_clean_fdj_proactive_reply": Mock(), "_proactive_purpose_candidates": AsyncMock(),
             "_proactive_purpose_delivered": AsyncMock(),
+            "_proactive_image_tools": Mock(return_value=([], None)),
         })
         host = namespace["_get_fdj_proactive_runtime"]().host
         self.assertIs(host.generate, generate)
@@ -392,6 +441,22 @@ class RuntimeIntegrationTests(unittest.IsolatedAsyncioTestCase):
     def row(self, index=1, *, bot=False, age=10, uid="123"):
         return types.SimpleNamespace(seq=index, created_at=self.clock.mono-age,
             is_bot=bot, user_id=uid, display_name="群友", text=f"话题{index}")
+
+    async def test_image_only_message_reaches_prompt_and_tool_enabled_generation(self):
+        image = self.row(17)
+        image.text = ""
+        image.image_urls = ("https://images.example/outfit.png",)
+        self.recent["group:10001"].append(image)
+        schemas = [{"type": "function", "function": {"name": "catty_look_image"}}]
+        executor = AsyncMock()
+        factory = Mock(return_value=(schemas, executor))
+        self.runtime.host = replace(self.runtime.host, image_tools=factory)
+        self.assertTrue(await self.runtime.tick())
+        factory.assert_called_once_with("group:10001")
+        self.assertEqual(self.prompt.call_args.kwargs["recent_messages"][-1]["image_refs"], ["m17#0"])
+        self.assertEqual(self.prompt.call_args.kwargs["available_tools"], ("catty_look_image",))
+        self.assertIs(self.generate.call_args.kwargs["tool_executor"], executor)
+        self.assertEqual(self.generate.call_args.kwargs["tools"], schemas)
 
     async def test_switch_independent_defaults_ack_ledger_and_clock_conversion(self):
         self.assertTrue(await self.runtime.tick())

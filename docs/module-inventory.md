@@ -2,6 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `fdj_proactive_runtime.py` / `fdj_proactive_prompt.py` / `openai_client.py` / `__init__.py` / 主动与客户端测试 | 当前群图片引用、按需只读看图、DeepSeek 工具闭环 → `docs/fadianji-proactive.md`、`docs/session-log/session-34.md` | 已部署；本地和生产各 138 项通过，七文件一致，16:39:18 重连；真实模型/QQ 未测 |
 | `task_host.py` / `knowledge_base.py` / `__init__.py` / 附件与共享人格测试 | 明确准入、双向文件顺序、限时元数据/等待、模型文件标识与格式识别 → `docs/agent-tasks.md`、`docs/session-log/session-32.md` | 已部署；本地与生产各 142 项通过，六文件双端哈希一致；配置与旧知识库未改 |
 | `tool_switches.py` / `tools.py` / `openai_client.py` / `agent_delegate.py` / `__init__.py` | 完整工具目录、角色开关、同回复启停、执行权限及共享静态前缀 → `docs/session-log/session-31.md` | 已部署；53 文件双端哈希一致，生产任务相关 20 组通过（短路径测试修正后 26/26）；14:34 重载无错误 |
 | `task_contracts.py` / `task_store.py` / `task_runtime.py` / `task_accounting.py` / `affection.py` | 持久任务、计划、同用户日额度、积分冻结/结算与重启恢复 → `docs/agent-tasks.md` | 本地完成；未知用量保留预留、未知交付不重发；未部署 |
@@ -80,6 +81,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-30 | 主动接话按需读取当前群原图；限定两项只读工具，保留独立 DeepSeek 生成 | 已部署；本地与生产各 138 项通过，七文件一致，插件加载及重连正常；见 session34 |
 | 2026-10-30 | 首轮统一12h，特别关心条件规则移到边界后；滚动断点不再触发WS全量重放 | 已部署；本地和生产各163项中154通过、9跳过，五文件哈希一致；未发模型测试请求，见session33 |
 | 2026-10-30 | 双向附件顺序已部署：2 分钟单次等待和 10 分钟元数据，消息/通知恢复原请求 | 本地与生产各 142 项通过，六文件哈希一致、配置未变；15:59 插件重载 |
 | 2026-10-30 | 先发文件后明确请求再读，仅内存保留 256 组/10 分钟元数据，模型接收精简引用 | 四模块 134 项通过；身份隔离、过期、闲聊与否定读取负例通过；未部署 |

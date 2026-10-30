@@ -394,6 +394,61 @@ class OpenAIClientTests(unittest.TestCase):
                 asyncio.run(_client.chat_completion_proactive(config, []))
         post.assert_not_awaited()
 
+    def test_proactive_image_tool_loop_keeps_aux_route_and_visual_receipt(self) -> None:
+        config = _client.Config(
+            catty_openai_model="gpt-6.1-terra", catty_openai_api_key="MAIN_TOKEN",
+            catty_openai_base_url="https://api.openai.com/v1/responses",
+            catty_audit_ai_model="deepseek-v4.1-flash", catty_audit_ai_api_key="AUX_TOKEN",
+            catty_audit_ai_base_url="https://aux.example/v1", catty_audit_ai_max_tokens=1024,
+        )
+        schemas = [{"type": "function", "function": {"name": "catty_look_image"}}]
+        tool_reply = {"choices": [{"message": {"role": "assistant", "content": None, "tool_calls": [{
+            "id": "look-1", "type": "function", "function": {
+                "name": "catty_look_image", "arguments": '{"image_ref":"m17#0"}',
+            },
+        }]}}]}
+        receipt = {"ok": True, "description": "服装商品截图"}
+        executor = AsyncMock(return_value=receipt)
+        with (
+            patch.object(_client, "_post_chat_completion_raw", new_callable=AsyncMock, side_effect=[
+                tool_reply, {"choices": [{"message": {"content": "这套衣服挺有意思"}}]},
+            ]) as post,
+            patch.object(_client, "chat_completion", new_callable=AsyncMock) as main,
+            patch.object(_client, "_maybe_distill_reply"),
+        ):
+            result = asyncio.run(_client.chat_completion_proactive(
+                config, [{"role": "user", "content": "TARGET"}], tools=schemas, tool_executor=executor,
+            ))
+        self.assertEqual(result, "这套衣服挺有意思")
+        executor.assert_awaited_once_with("catty_look_image", '{"image_ref":"m17#0"}')
+        main.assert_not_awaited()
+        self.assertEqual(post.await_count, 2)
+        for call in post.await_args_list:
+            self.assertEqual(call.kwargs["model"], "deepseek-v4.1-flash")
+            self.assertEqual(call.kwargs["api_key"], "AUX_TOKEN")
+            self.assertEqual(call.kwargs["request_route"], "proactive")
+        tool_messages = [message for message in post.await_args_list[-1].kwargs["messages"] if message["role"] == "tool"]
+        self.assertEqual(json.loads(tool_messages[0]["content"]), receipt)
+        self.assertEqual(config.catty_ai_fallback_api_key, "")
+
+    def test_proactive_tool_failure_never_retries_on_main(self) -> None:
+        config = _client.Config(
+            catty_openai_model="gpt-6.1-terra", catty_openai_api_key="MAIN_TOKEN",
+            catty_audit_ai_model="deepseek-v4.1-flash", catty_audit_ai_api_key="AUX_TOKEN",
+            catty_audit_ai_base_url="https://aux.example/v1",
+        )
+        with (
+            patch.object(_client, "_post_chat_completion_raw", new_callable=AsyncMock,
+                         side_effect=_client.OpenAICompatibleError("TARGET")),
+            patch.object(_client, "chat_completion", new_callable=AsyncMock) as main,
+        ):
+            with self.assertRaises(_client.OpenAICompatibleError):
+                asyncio.run(_client.chat_completion_proactive(
+                    config, [], tools=[{"type": "function", "function": {"name": "catty_look_image"}}],
+                    tool_executor=AsyncMock(),
+                ))
+        main.assert_not_awaited()
+
     def test_proactive_skips_non_deepseek_audit_and_never_uses_main(self) -> None:
         config = _client.Config(
             catty_openai_model="deepseek-main", catty_openai_api_key="MAIN_TOKEN",

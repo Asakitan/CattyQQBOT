@@ -176,6 +176,22 @@ class FdjProactiveConfigTests(unittest.TestCase):
 
 
 class FdjProactivePromptTests(unittest.TestCase):
+    def test_image_refs_and_read_tools_are_available_on_demand(self):
+        recent = [{
+            "speaker": "群友", "text": "[图片]", "is_bot": False,
+            "image_refs": ["m17#0", "m17#1"],
+        }]
+        messages = _messages(
+            recent_messages=recent,
+            available_tools=("catty_scan_messages", "catty_look_image"),
+        )
+        self.assertEqual(_data(messages)["recent_messages"], recent)
+        system = _system(messages)
+        self.assertIn("catty_look_image", system)
+        self.assertIn("catty_scan_messages", system)
+        self.assertIn("先看图再接话", system)
+        self.assertNotIn("不用工具", system)
+
     def test_real_persona_core_and_rhythm_are_preserved_without_catty_template(self):
         persona = _personas.FADIANJI_PERSONA
         messages = _prompt.build_fdj_proactive_messages(

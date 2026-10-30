@@ -1,6 +1,6 @@
 """Independent FDJ bubbles: host adapters in, one durable delivery attempt out.
 
-No plugin import, user-turn fabrication, tool execution or legacy proactive quota.
+No plugin import, user-turn fabrication or legacy proactive quota.
 All scheduler I/O is drained on cancellation; an invoked send is never retried.
 """
 from __future__ import annotations
@@ -54,12 +54,13 @@ class BubbleHost:
     recent: Callable[[str], Sequence[Any]]
     busy: Callable[[str], bool]
     has_api_key: Callable[[], bool]
-    generate: Callable[[Any, list[dict]], Awaitable[str]]
+    generate: Callable[..., Awaitable[str]]
     send_text: Callable[[Any, str, str], Awaitable[Any]]
     remember: Callable[[Any, str, str, str], None]
     clean_text: Callable[..., str]
     purpose_candidates: Callable[[str, str], Awaitable[list[dict]]] | None = None
     purpose_delivered: Callable[[str, str, dict, str], Awaitable[Any]] | None = None
+    image_tools: Callable[[str], tuple[list[dict], Any]] | None = None
 
 
 def _purpose_mentioned(goal: str, text: str) -> bool:
@@ -204,12 +205,19 @@ class FdjProactiveRuntime:
                 continue
             is_bot = bool(item.is_bot) or str(item.user_id) == str(bot.self_id)
             text = str(item.text or "").strip()
+            image_urls = tuple(getattr(item, "image_urls", ()) or ())
+            if image_urls and not text:
+                text = "[图片]"
             if not text:
                 continue
-            rows.append({"speaker": str(item.display_name), "text": text, "is_bot": is_bot})
+            row = {"speaker": str(item.display_name), "text": text, "is_bot": is_bot}
+            seq = getattr(item, "seq", None)
+            if image_urls and isinstance(seq, int) and seq > 0:
+                row["image_refs"] = [f"m{seq}#{index}" for index, url in enumerate(image_urls[:4]) if url]
+            rows.append(row)
             if not is_bot:
                 humans.append(now - age)
-            context.append((is_bot, getattr(item, "seq", None), item.created_at, str(item.user_id), text))
+            context.append((is_bot, seq, item.created_at, str(item.user_id), text, image_urls))
         return rows, humans, tuple(context)
 
     @staticmethod
@@ -302,13 +310,16 @@ class FdjProactiveRuntime:
             }, ensure_ascii=False)
         token = bind_turn_persona(scope, persona)
         try:
+            tools, executor = self.host.image_tools(scope) if self.host.image_tools is not None else ([], None)
             messages = build_fdj_proactive_messages(
                 persona, scope=scope, mode=candidate.mode, recent_messages=rows,
                 summary=purpose_summary,
                 now=datetime.fromtimestamp(self.wall(), _LOCAL_TIME),
+                available_tools=tuple(tool["function"]["name"] for tool in tools),
             )
+            tool_options = {"tools": tools, "tool_executor": executor} if tools and executor is not None else {}
             reply = await asyncio.wait_for(
-                self.host.generate(cfg, messages),
+                self.host.generate(cfg, messages, **tool_options),
                 timeout=timeout,
             )
         except asyncio.CancelledError:

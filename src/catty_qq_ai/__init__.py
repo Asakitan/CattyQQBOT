@@ -11479,6 +11479,48 @@ async def _proactive_purpose_delivered(scope: str, persona: str, goal: dict, mes
 _fdj_proactive_runtime = None
 
 
+def _proactive_image_tools(scope: str) -> tuple[list[dict], Any]:
+    if not scope.startswith("group:") or not config.catty_image_vision_enabled or not config.catty_tools_enabled:
+        return [], None
+    from .tools import _SCAN_MESSAGES_SCHEMA, _LOOK_IMAGE_SCHEMA, _exec_scan_messages, _exec_look_image
+
+    recent = _recent_messages_snapshot_for_scope(scope)
+    image_refs = {
+        f"m{item['seq']}#{index}"
+        for item in recent for index, image in enumerate(item.get("images", ()))
+        if image.get("url")
+    }
+    if not image_refs:
+        return [], None
+
+    async def describe(urls: list[str], question: str) -> str:
+        return await describe_images(config, urls, question)
+
+    context = ToolContext(
+        config=config, memory_store=memory_store, event=None,
+        persona=_persona_for_scope(scope), scope_key=scope,
+        recent_messages=recent, describe_images_fn=describe,
+    )
+
+    async def execute(name: str, arguments_json: str) -> dict:
+        try:
+            arguments = json.loads(arguments_json)
+        except (ValueError, TypeError):
+            return {"ok": False, "error": "invalid_arguments"}
+        if not isinstance(arguments, dict):
+            return {"ok": False, "error": "invalid_arguments"}
+        if name == "catty_scan_messages":
+            return await _exec_scan_messages(arguments, context)
+        if name == "catty_look_image":
+            reference = arguments.get("image_ref")
+            if not isinstance(reference, str) or reference not in image_refs:
+                return {"ok": False, "error": "use_current_group_image_ref"}
+            return await _exec_look_image(arguments, context)
+        return {"ok": False, "error": "tool_not_allowed"}
+
+    return [_SCAN_MESSAGES_SCHEMA, _LOOK_IMAGE_SCHEMA], execute
+
+
 def _get_fdj_proactive_runtime():
     global _fdj_proactive_runtime
     if _fdj_proactive_runtime is None:
@@ -11492,6 +11534,7 @@ def _get_fdj_proactive_runtime():
             remember=_remember_fdj_proactive_text, clean_text=_clean_fdj_proactive_reply,
             purpose_candidates=_proactive_purpose_candidates,
             purpose_delivered=_proactive_purpose_delivered,
+            image_tools=_proactive_image_tools,
         ))
     return _fdj_proactive_runtime
 
