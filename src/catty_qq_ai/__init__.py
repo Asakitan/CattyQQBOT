@@ -11913,6 +11913,12 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     )
     if incoming is None:
         return False
+    if (
+        isinstance(event, GroupMessageEvent)
+        and any(getattr(segment, "type", "") == "file" for segment in event.get_message())
+        and not (incoming.directly_requested or incoming.mentioned or incoming.replied_to_self)
+    ):
+        return False
     state["catty_reply_sources"] = reply_sources
     # 本体避让 (body_presence, 主人 2026-08-10): 机机本体在群里发言后, 分身在
     # cooldown 内忽视该群所有非本体消息 — 本体在场, 备用机让位; 只有本体本人 @ 才回。
@@ -18305,6 +18311,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             # 主人 2026-05-29 P0: 改 trailing system, 不再 inline 进 user content
             # (旧 inline 下轮变 history 被 strip → 前缀漂移). system 段不进 history.
             _append_internal_system(messages, _img_hint, label="img source hint")
+
+        _attachment_hint = _task_host.attachment_prompt(tool_ctx)
+        if _attachment_hint:
+            _append_internal_system(messages, _attachment_hint, label="attachment metadata")
 
         def _nsfw_error_fallback_text() -> str:
             try:

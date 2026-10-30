@@ -42,10 +42,12 @@ class Segment:
 
 
 class Event:
-    def __init__(self, text="", *, user_id="42", group_id="7", bot_id="99", files=(), message_id=1):
+    def __init__(self, text="", *, user_id="42", group_id="7", bot_id="99", files=(), message_id=1, directed=False):
         self.user_id, self.group_id, self.self_id = int(user_id), int(group_id) if group_id is not None else None, int(bot_id)
         self.message_id = message_id
         self.message = [Segment.text(text)] if text else []
+        if directed:
+            self.message.append(Segment("at", {"qq": bot_id}))
         self.message.extend(Segment("file", item) for item in files)
         self.raw_message = text
 
@@ -189,12 +191,22 @@ class HostTests(unittest.IsolatedAsyncioTestCase):
         installed = host_module.install_task_center(namespace)
         self.assertIs(installed, host_module.install_task_center(namespace))
         installed.service_factory, installed.context_type = FakeService, Context
+        installed.downloader = self.host.downloader
         await driver.startups[0]()
         try:
             self.assertEqual(len(registrations), 2)
             self.assertTrue(all(item["priority"] < 10 and item["block"] for item in registrations))
             self.assertTrue(await registrations[0]["rule"](Event("/任务"), {}))
             self.assertFalse(await registrations[0]["rule"](Event("hello"), {}))
+            upload = Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10)
+            self.assertFalse(await registrations[0]["rule"](upload, {}))
+            self.assertEqual(self.downloads, [])
+            request = Event("看一下", directed=True, message_id=11)
+            self.assertFalse(await registrations[0]["rule"](request, {}))
+            context = installed._new_context(request, self.persona)
+            await installed.attach(context, self.bot, request, "turn")
+            self.assertEqual([item["id"] for item in context.incoming_files], ["previous-file"])
+            self.assertEqual(len(self.downloads), 1)
         finally:
             await driver.shutdowns[0]()
 
@@ -234,13 +246,13 @@ class HostTests(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(await self.host.context_factory(identity, record))
 
     async def test_file_path_is_never_read_and_pure_file_is_handled(self):
-        event = Event(files=[{"name": "secret.txt", "file": "C:\\private\\secret.txt"}])
+        event = Event(directed=True, files=[{"name": "secret.txt", "file": "C:\\private\\secret.txt"}])
         self.assertTrue(self.host.handles(event))
         result = await self.host.handle(self.bot, event, {})
         self.assertFalse(result["ok"])
         self.assertEqual(self.downloads, [])
         self.assertEqual(self.host.service.calls, [])
-        event = Event(files=[{"id": "qq-file", "name": "notes.txt"}])
+        event = Event(directed=True, files=[{"id": "qq-file", "name": "notes.txt"}])
         result = await self.host.handle(self.bot, event, {})
         self.assertTrue(result["ok"])
         self.assertEqual(len(self.downloads), 1)
@@ -249,16 +261,54 @@ class HostTests(unittest.IsolatedAsyncioTestCase):
     async def test_file_uri_and_oversize_rejected_before_download(self):
         for file in ({"id": "x", "name": "x.txt", "url": "file:///C:/secret"},
                      {"id": "x", "name": "x.txt", "url": "http://public.example/x", "size": host_module.MAX_FILE_BYTES + 1}):
-            result = await self.host.handle(self.bot, Event(files=[file]), {})
+            result = await self.host.handle(self.bot, Event(directed=True, files=[file]), {})
             self.assertFalse(result["ok"])
         self.assertEqual(self.downloads, [])
 
     async def test_unknown_format_is_not_reported_as_ingested(self):
-        result = await self.host.handle(self.bot, Event(files=[{"id": "unknown.exe", "name": "unknown.exe"}]), {})
+        result = await self.host.handle(self.bot, Event(directed=True, files=[{"id": "unknown.exe", "name": "unknown.exe"}]), {})
         self.assertFalse(result["ok"])
         self.assertEqual(result["files"][0]["error"], "unsupported_format")
 
-    async def test_upload_notice_uses_message_acl_and_independent_context(self):
+    async def test_file_name_aliases_are_preserved(self):
+        for field in ("file_name", "filename"):
+            with self.subTest(field=field):
+                event = Event(directed=True, files=[{"file_id": "document-id", field: "notes.txt"}])
+                result = await self.host.handle(self.bot, event, {})
+                self.assertTrue(result["ok"])
+                self.assertEqual(result["files"][0]["name"], "notes.txt")
+
+    async def test_empty_notice_file_does_not_create_phantom_attachment(self):
+        event = Event(files=[{"id": "document-id", "name": "notes.txt"}])
+        event.notice_type = "group_upload"
+        event.file = {}
+        files = host_module.extract_incoming_files(event)
+        self.assertEqual(len(files), 1)
+        self.assertEqual(files[0]["name"], "notes.txt")
+
+    async def test_message_and_upload_notice_are_processed_once(self):
+        event = Event(directed=True, files=[{"id": "document-id", "name": "Cache_2edbb1880e2ed474"}])
+        await self.host.handle(self.bot, event, {})
+        notice = Event()
+        notice.notice_type = "group_upload"
+        notice.file = {"id": "document-id", "name": "notes.txt"}
+        await self.host.handle(self.bot, notice, {})
+        self.assertEqual(len(self.downloads), 1)
+        self.assertEqual(len(self.host.service.calls), 1)
+        self.assertEqual(sum(method.startswith("send_") for method, _ in self.bot.calls), 1)
+
+    async def test_same_file_id_in_other_scope_is_not_suppressed(self):
+        for group_id in ("7", "8"):
+            await self.host.handle(self.bot, Event(group_id=group_id, directed=True, files=[{"id": "document-id", "name": "notes.txt"}]), {})
+        self.assertEqual(len(self.downloads), 2)
+        self.assertEqual(len(self.host.service.calls), 2)
+
+    async def test_file_errors_are_readable_instead_of_internal_codes(self):
+        receipt = self.host._format_receipt({"ok": False, "files": [{"name": "attachment.bin", "ok": False, "error": "unsupported_format"}]})
+        self.assertNotIn("unsupported_format", receipt)
+        self.assertIn("PDF", receipt)
+
+    async def test_upload_notice_is_ignored_before_context_lookup(self):
         class UploadNotice(Event):
             notice_type = "group_upload"
             file = {"id": "notice-file", "name": "notice.txt"}
@@ -269,10 +319,259 @@ class HostTests(unittest.IsolatedAsyncioTestCase):
         notice = UploadNotice()
         result = await self.host.handle(self.bot, notice, {})
         self.assertTrue(result["ok"])
-        context = self.host.service.calls[-1][3]
-        self.assertIsInstance(context.event, Event)
-        self.assertNotIsInstance(context.event, UploadNotice)
-        self.assertEqual(context.event.group_id, 7)
+        self.assertTrue(result["ignored"])
+        self.assertFalse(self.host.handles(notice))
+        self.assertEqual(self.bot.calls, [])
+        self.assertEqual(self.downloads, [])
+        self.assertEqual(self.host.service.calls, [])
+        self.assertEqual(self.host.trace_store.query(), [])
+
+    async def test_unaddressed_group_upload_never_downloads_or_imports(self):
+        for text in ("", "sharing a file"):
+            with self.subTest(text=text):
+                event = Event(text, files=[{"id": "unrelated", "name": "notes.txt"}])
+                self.assertFalse(self.host.handles(event))
+                result = await self.host.handle(self.bot, event, {})
+                self.assertTrue(result["ignored"])
+        self.assertEqual(self.bot.calls, [])
+        self.assertEqual(self.downloads, [])
+        self.assertEqual(self.host.service.calls, [])
+        self.assertEqual(self.host.trace_store.query(), [])
+
+    async def test_main_reply_continuation_cannot_download_unaddressed_file(self):
+        event = Event("sharing a file", files=[{"id": "unrelated", "name": "notes.txt"}])
+        context = self.host._new_context(event, self.persona)
+        context.is_directly_requested = False
+        await self.host.attach(context, self.bot, event, "turn")
+        self.assertEqual(context.incoming_files, [])
+        self.assertEqual(self.bot.calls, [])
+        self.assertEqual(self.downloads, [])
+
+    async def test_explicit_main_reply_can_download_requested_file(self):
+        event = Event("please read this file", files=[{"id": "document-id", "name": "notes.txt"}])
+        context = self.host._new_context(event, self.persona)
+        context.is_directly_requested = True
+        await self.host.attach(context, self.bot, event, "turn")
+        self.assertEqual(len(context.incoming_files), 1)
+        self.assertEqual(len(self.downloads), 1)
+        self.assertEqual(self.host.service.calls, [])
+
+    async def test_previous_file_is_downloaded_only_when_next_message_requests_it(self):
+        upload = Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10)
+        self.host.observe_files(upload)
+        self.assertEqual(self.downloads, [])
+        self.assertEqual(self.bot.calls, [])
+        self.assertEqual(self.host.service.calls, [])
+        request = Event("看一下", directed=True, message_id=11)
+        self.host.observe_files(request)
+        context = self.host._new_context(request, self.persona)
+        await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual([item["id"] for item in context.incoming_files], ["previous-file"])
+        self.assertEqual(len(self.downloads), 1)
+        self.assertEqual(self.host.service.calls, [])
+        hint = self.host.attachment_prompt(context)
+        self.assertIn("previous-file", hint)
+        self.assertIn("notes.txt", hint)
+        self.assertIn("ingest_file", hint)
+        self.assertNotIn("document body", hint)
+        self.assertNotIn("https://", hint)
+
+    async def test_read_request_before_upload_is_resumed_once(self):
+        request = Event("看一下我接下来发的文件", directed=True, message_id=10)
+        self.host.observe_files(request)
+        upload = Event(files=[{"id": "next-file", "name": "notes.txt"}], message_id=11)
+        self.host.observe_files(upload)
+        self.assertEqual(self.downloads, [])
+        self.assertTrue(self.host.prepare_file_message(upload))
+        self.assertIn("看一下我接下来发的文件", host_module.event_text(upload))
+        self.assertTrue(self.host._attachments_requested(upload))
+        self.assertFalse(self.host.handles(upload))
+        context = self.host._new_context(upload, self.persona)
+        await self.host.attach(context, self.bot, upload, "turn")
+        self.assertEqual([item["id"] for item in context.incoming_files], ["next-file"])
+        self.assertEqual(len(self.downloads), 1)
+        self.assertFalse(self.host.prepare_file_message(Event(files=[{"id": "another", "name": "other.txt"}], message_id=12)))
+
+    async def test_pending_request_supports_existing_nickname_extraction(self):
+        self.namespace["_extract_trigger_incoming"] = lambda bot_id, event: types.SimpleNamespace(text="看一下", directly_requested=True)
+        self.host.observe_files(Event("机机看一下", message_id=10))
+        upload = Event(files=[{"id": "next-file", "name": "notes.txt"}], message_id=11)
+        self.host.observe_files(upload)
+        self.assertTrue(self.host.prepare_file_message(upload))
+        self.assertIn("看一下", host_module.event_text(upload))
+
+    async def test_pending_upload_notice_resumes_original_message_flow_once(self):
+        resumed_events = []
+        async def dispatch(bot, event):
+            resumed_events.append(event)
+            self.assertFalse(getattr(event, "notice_type", ""))
+            self.assertIn("分析接下来发的文件", host_module.event_text(event))
+            context = self.host._new_context(event, self.persona)
+            await self.host.attach(context, bot, event, "resumed")
+            self.assertEqual([item["id"] for item in context.incoming_files], ["notice-file"])
+        self.namespace["_task_dispatch_message"] = dispatch
+        self.host.observe_files(Event("分析接下来发的文件", directed=True, message_id=10))
+        notice = Event(message_id=0)
+        notice.notice_type = "group_upload"
+        notice.file = {"id": "notice-file", "name": "notes.txt", "busid": 102}
+        self.host.observe_files(notice)
+        self.assertTrue(await self.host.resume_file_notice(self.bot, notice))
+        self.assertFalse(await self.host.resume_file_notice(self.bot, notice))
+        self.assertEqual(len(resumed_events), 1)
+        self.assertEqual(len(self.downloads), 1)
+
+    async def test_broadcast_cannot_arm_pending_file_read(self):
+        request = Event("看一下", directed=True, message_id=10)
+        request.message.append(Segment("at", {"qq": "all"}))
+        self.host.observe_files(request)
+        upload = Event(files=[{"id": "broadcast-file", "name": "notes.txt"}], message_id=11)
+        self.host.observe_files(upload)
+        self.assertFalse(self.host.prepare_file_message(upload))
+        self.assertEqual(self.downloads, [])
+
+    async def test_pending_read_request_is_scoped_and_expires(self):
+        real_time = host_module.time
+        request = Event("看一下", directed=True, message_id=10)
+        with patch.object(host_module, "time", types.SimpleNamespace(monotonic=lambda: 0.0)):
+            self.host.observe_files(request)
+        for upload in (Event(user_id="43", files=[{"id": "other-user", "name": "notes.txt"}], message_id=11),
+                       Event(group_id="8", files=[{"id": "other-group", "name": "notes.txt"}], message_id=11)):
+            self.assertFalse(self.host.prepare_file_message(upload))
+        with patch.object(host_module, "time", types.SimpleNamespace(monotonic=lambda: 121.0, time=real_time.time)):
+            self.assertFalse(self.host.prepare_file_message(Event(files=[{"id": "late", "name": "notes.txt"}], message_id=12)))
+        self.assertEqual(self.downloads, [])
+
+    async def test_pending_read_is_cancelled_by_own_unrelated_message(self):
+        self.host.observe_files(Event("看一下", directed=True, message_id=10))
+        self.host.observe_files(Event("不用看了", message_id=11))
+        upload = Event(files=[{"id": "cancelled", "name": "notes.txt"}], message_id=12)
+        self.host.observe_files(upload)
+        self.assertFalse(self.host.prepare_file_message(upload))
+        self.assertEqual(self.downloads, [])
+
+    async def test_future_file_request_does_not_read_an_older_file(self):
+        self.host.observe_files(Event(files=[{"id": "older", "name": "old.txt"}], message_id=9))
+        request = Event("看一下我接下来发的文件", directed=True, message_id=10)
+        self.host.observe_files(request)
+        context = self.host._new_context(request, self.persona)
+        await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual(context.incoming_files, [])
+        upload = Event(files=[{"id": "next-file", "name": "notes.txt"}], message_id=11)
+        self.host.observe_files(upload)
+        self.assertTrue(self.host.prepare_file_message(upload))
+
+    async def test_recent_file_metadata_has_bounded_memory_and_no_payload(self):
+        for user in range(host_module.MAX_RECENT_FILE_SCOPES + 2):
+            event = Event(user_id=str(1000 + user), files=[{
+                "id": f"file-{user}", "name": "notes.txt", "url": "https://cdn.example/document.txt",
+                "content": b"MUST_NOT_BE_CACHED", "arbitrary": "MUST_NOT_BE_CACHED",
+            }])
+            self.host.observe_files(event)
+        self.assertEqual(len(self.host._recent_files), host_module.MAX_RECENT_FILE_SCOPES)
+        for record in self.host._recent_files.values():
+            for item in record["files"]:
+                self.assertEqual(set(item), {"id", "name", "url", "busid", "size"})
+                self.assertNotIn("content", item)
+        self.assertEqual(self.downloads, [])
+        self.assertEqual(self.bot.calls, [])
+
+    async def test_explicit_old_file_reference_is_allowed_after_intervening_text(self):
+        self.host.observe_files(Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10))
+        self.host.observe_files(Event("换个话题", message_id=11))
+        request = Event("帮我读一下刚才的文件", directed=True, message_id=12)
+        self.host.observe_files(request)
+        context = self.host._new_context(request, self.persona)
+        await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual([item["id"] for item in context.incoming_files], ["previous-file"])
+
+    async def test_negative_read_request_does_not_download_previous_file(self):
+        self.host.observe_files(Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10))
+        request = Event("不要读刚才的文件", directed=True, message_id=11)
+        self.host.observe_files(request)
+        context = self.host._new_context(request, self.persona)
+        await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual(context.incoming_files, [])
+        self.assertEqual(self.host.attachment_prompt(context), "")
+        self.assertEqual(self.downloads, [])
+
+    async def test_recent_file_is_not_downloaded_for_unaddressed_request_or_greeting(self):
+        self.host.observe_files(Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10))
+        for request in (Event("看一下", message_id=11), Event("你好", directed=True, message_id=12)):
+            self.host.observe_files(request)
+            context = self.host._new_context(request, self.persona)
+            await self.host.attach(context, self.bot, request, "turn")
+            self.assertEqual(context.incoming_files, [])
+        self.assertEqual(self.downloads, [])
+
+    async def test_recent_file_lookup_is_scoped_to_user_group_bot_and_persona(self):
+        self.host.observe_files(Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10))
+        for request in (Event("看看刚才的文件", directed=True, user_id="43", message_id=11),
+                        Event("看看刚才的文件", directed=True, group_id="8", message_id=11),
+                        Event("看看刚才的文件", directed=True, bot_id="100", message_id=11)):
+            context = self.host._new_context(request, self.persona)
+            await self.host.attach(context, self.bot, request, "turn")
+            self.assertEqual(context.incoming_files, [])
+        self.persona = types.SimpleNamespace(name="catty")
+        request = Event("看看刚才的文件", directed=True, message_id=11)
+        context = self.host._new_context(request, self.persona)
+        await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual(context.incoming_files, [])
+        self.assertEqual(self.downloads, [])
+
+    async def test_expired_recent_file_is_not_downloaded(self):
+        real_time = host_module.time
+        with patch.object(host_module, "time", types.SimpleNamespace(monotonic=lambda: 0.0)):
+            self.host.observe_files(Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10))
+        request = Event("看看刚才的文件", directed=True, message_id=11)
+        context = self.host._new_context(request, self.persona)
+        with patch.object(host_module, "time", types.SimpleNamespace(monotonic=lambda: 601.0, time=real_time.time)):
+            await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual(context.incoming_files, [])
+        self.assertEqual(self.downloads, [])
+
+    async def test_generic_look_does_not_reuse_a_file_after_intervening_own_text(self):
+        self.host.observe_files(Event(files=[{"id": "previous-file", "name": "notes.txt"}], message_id=10))
+        self.host.observe_files(Event("换个话题", message_id=11))
+        request = Event("看一下", directed=True, message_id=12)
+        self.host.observe_files(request)
+        context = self.host._new_context(request, self.persona)
+        await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual(context.incoming_files, [])
+        self.assertEqual(self.downloads, [])
+
+    async def test_upload_notice_can_be_referenced_without_eager_download(self):
+        notice = Event(message_id=0)
+        notice.notice_type = "group_upload"
+        notice.file = {"id": "notice-file", "name": "notes.txt", "busid": 102}
+        self.host.observe_files(notice)
+        self.assertEqual(self.bot.calls, [])
+        request = Event("读一下刚才的附件", directed=True, message_id=11)
+        self.host.observe_files(request)
+        context = self.host._new_context(request, self.persona)
+        await self.host.attach(context, self.bot, request, "turn")
+        self.assertEqual([item["id"] for item in context.incoming_files], ["notice-file"])
+        self.assertEqual(len(self.downloads), 1)
+        self.assertIn(("get_group_file_url", {"file_id": "notice-file", "group_id": 7, "busid": 102}), self.bot.calls)
+
+    async def test_private_upload_and_reply_to_bot_are_direct(self):
+        private_event = Event(group_id=None, files=[{"id": "private-file", "name": "private.txt"}])
+        self.assertTrue(self.host.handles(private_event))
+        self.assertTrue((await self.host.handle(self.bot, private_event, {}))["ok"])
+        reply_event = Event(files=[{"id": "reply-file", "name": "reply.txt"}])
+        reply_event.reply = {"sender": {"user_id": 99}}
+        self.assertTrue(self.host.handles(reply_event))
+        self.assertTrue((await self.host.handle(self.bot, reply_event, {}))["ok"])
+        self.assertEqual(len(self.downloads), 2)
+
+    async def test_mentions_of_others_or_everyone_do_not_request_files(self):
+        for target in ("all", "123"):
+            event = Event(bot_id=target, directed=True, files=[{"id": "unrelated", "name": "notes.txt"}]) if target != "all" else Event(files=[{"id": "unrelated", "name": "notes.txt"}])
+            event.self_id = 99
+            if target == "all":
+                event.message.append(Segment("at", {"qq": "all"}))
+            self.assertFalse(self.host.handles(event))
+            self.assertTrue((await self.host.handle(self.bot, event, {}))["ignored"])
+        self.assertEqual(self.downloads, [])
 
     async def test_private_recovery_checks_friendship_and_cached_event_expiry(self):
         identity = contracts.TaskIdentity("42", "private:42", "fadianji")

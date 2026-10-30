@@ -222,6 +222,47 @@ class KnowledgeBaseTests(unittest.TestCase):
         self.assertEqual(self.store.search(self.identity, "secrettoken"), [])
         self.assertEqual(self.store.search(self.identity, "publictoken")[0]["title"], "Manual")
 
+    def test_cached_attachment_names_are_resolved_from_document_content(self):
+        fixtures = (
+            ("Cache_2edbb1880e2ed474", b"cachedtexttoken", ".txt", "cachedtexttoken"),
+            ("attachment.bin", b"<!DOCTYPE html><html><title>Cached</title><p>cachedhtmltoken</p></html>", ".html", "cachedhtmltoken"),
+        )
+        for name, content, extension, query in fixtures:
+            with self.subTest(name=name):
+                document = self.store.ingest_bytes(self.identity, name, content)
+                self.assertEqual(document["name"], name + extension)
+                self.assertEqual(self.store.read_artifact(self.identity, document["artifact_id"]), content)
+                self.assertTrue(self.store.search(self.identity, query))
+
+    def test_cached_binary_and_explicit_unsupported_extensions_stay_rejected(self):
+        for name, content in (("attachment.bin", b"\x89PNG\r\n\x1a\n\x00"),
+                              ("Cache_unknown", b"MZ\x00\x01"),
+                              ("program.exe", b"plain text does not make an executable a document")):
+            with self.subTest(name=name), self.assertRaises(KnowledgeBaseError) as caught:
+                self.store.ingest_bytes(self.identity, name, content)
+            self.assertEqual(caught.exception.code, "unsupported_format")
+        self.assertEqual(self.store.list_documents(self.identity), [])
+
+    @unittest.skipUnless(importlib.util.find_spec("docx") and importlib.util.find_spec("openpyxl"), "office parsers are optional dependencies")
+    def test_cached_office_documents_are_detected_and_parsed(self):
+        from docx import Document
+        from openpyxl import Workbook
+        document = Document()
+        document.add_paragraph("cachewordtoken")
+        word_output = io.BytesIO()
+        document.save(word_output)
+        workbook = Workbook()
+        workbook.active.append(["cachesheettoken"])
+        sheet_output = io.BytesIO()
+        workbook.save(sheet_output)
+        workbook.close()
+        for name, content, extension, query in (("Cache_word", word_output.getvalue(), ".docx", "cachewordtoken"),
+                                                ("attachment.bin", sheet_output.getvalue(), ".xlsx", "cachesheettoken")):
+            with self.subTest(extension=extension):
+                result = self.store.ingest_bytes(self.identity, name, content)
+                self.assertEqual(result["name"], name + extension)
+                self.assertTrue(self.store.search(self.identity, query))
+
     def test_rejects_paths_limits_empty_text_and_empty_html(self):
         for name in ("../a.txt", "..\\a.txt", "C:\\a.txt", "/a.txt", "file.txt:stream", "bad\x00.txt", "bad.exe"):
             with self.subTest(name=name), self.assertRaises(KnowledgeBaseError):

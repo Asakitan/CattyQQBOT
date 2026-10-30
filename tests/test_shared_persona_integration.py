@@ -150,6 +150,46 @@ class SharedGroupAdmissionTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(await self.namespace["_rule"](self.bot, _event("接着说"), {}))
         self.assertFalse(await self.namespace["_rule"](self.bot, _event("接着说", at_all=True), {}))
 
+    async def test_unaddressed_file_never_uses_model_gate_even_during_continuation(self):
+        for continuation in (False, True):
+            self.continuation = continuation
+            event = _event("分享文件")
+            event.message.append(MessageSegment(type="file", data={"id": "document-id", "name": "notes.txt"}))
+            with self.subTest(continuation=continuation):
+                self.assertFalse(await self.namespace["_rule"](self.bot, event, {}))
+        self.gate.assert_not_awaited()
+        self.namespace["_remember_recent_conversation_event"].assert_not_called()
+
+    async def test_addressed_file_preserves_normal_reply_admission(self):
+        event = _event("读一下这个文件", at=True)
+        event.message.append(MessageSegment(type="file", data={"id": "document-id", "name": "notes.txt"}))
+        state = {}
+        self.assertTrue(await self.namespace["_rule"](self.bot, event, state))
+        self.assertTrue(state["catty_incoming"].directly_requested)
+
+    async def test_pending_file_request_restores_native_event_and_original_instruction(self):
+        host_module = importlib.import_module(f"{_PKG}.task_host")
+        host = host_module.TaskHost({
+            "config": self.config,
+            "affection_store": types.SimpleNamespace(is_owner=lambda user: False),
+            "_persona_for_scope": lambda scope: self.persona,
+            "_task_event_allowed": lambda event, config: True,
+            "MessageSegment": MessageSegment,
+        })
+        host.service = types.SimpleNamespace(policy=types.SimpleNamespace(enabled=True))
+        request = _event("分析接下来发的文件", at=True)
+        host.observe_files(request)
+        upload = _event("")
+        upload.message_id = 18
+        upload.message.append(MessageSegment(type="file", data={"id": "document-id", "name": "notes.txt"}))
+        host.observe_files(upload)
+        self.assertTrue(host.prepare_file_message(upload))
+        state = {}
+        self.assertTrue(await self.namespace["_rule"](self.bot, upload, state))
+        self.assertTrue(state["catty_incoming"].directly_requested)
+        self.assertIn("分析接下来发的文件", state["catty_incoming"].text)
+        self.gate.assert_not_awaited()
+
     async def test_native_face_keeps_existing_group_wake_and_continuation(self):
         for name, wake in (("catty", "猫猫"), ("fadianji", "机机"), ("custom", "小青")):
             self.persona = _persona(name, wake)

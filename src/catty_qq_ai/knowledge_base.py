@@ -194,6 +194,33 @@ def _check_archive(content: bytes, settings: KnowledgeBaseSettings) -> None:
         raise KnowledgeBaseError("invalid_archive") from None
 
 
+def _document_extension(content: bytes, settings: KnowledgeBaseSettings) -> str:
+    if content.startswith(b"%PDF-"):
+        return ".pdf"
+    if content.startswith((b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08")):
+        _check_archive(content, settings)
+        with zipfile.ZipFile(io.BytesIO(content)) as archive:
+            names = set(archive.namelist())
+        if "[Content_Types].xml" in names:
+            if "word/document.xml" in names:
+                return ".docx"
+            if "xl/workbook.xml" in names:
+                return ".xlsx"
+        raise KnowledgeBaseError("unsupported_format")
+    if content.startswith((b"MZ", b"\x7fELF", b"\x89PNG", b"\xff\xd8\xff", b"GIF87a", b"GIF89a",
+                           b"RIFF", b"OggS", b"fLaC", b"ID3", b"\x1f\x8b")) or content[4:8] == b"ftyp":
+        raise KnowledgeBaseError("unsupported_format")
+    try:
+        text = _decode_text(content)
+    except KnowledgeBaseError:
+        raise KnowledgeBaseError("unsupported_format") from None
+    if re.match(r"\s*(?:<!doctype\s+html\b|<html\b)", text, re.IGNORECASE):
+        return ".html"
+    if re.search(r"(?m)^#{1,6}\s+\S", text):
+        return ".md"
+    return ".txt"
+
+
 def _parse_payload(content: bytes, extension: str, settings: KnowledgeBaseSettings) -> list[dict[str, Any]]:
     sections: list[dict[str, Any]] = []
     total_chars = 0
@@ -526,6 +553,16 @@ class KnowledgeBase:
         return {"ok": True, **result, **extra}
 
     def ingest_bytes(self, identity: TaskIdentity, name: str, content: bytes, source: str = "") -> dict[str, Any]:
+        try:
+            self._name(name)
+        except KnowledgeBaseError as exc:
+            if exc.code != "unsupported_format" or Path(name).suffix.lower() not in {"", ".bin"}:
+                raise
+            if not isinstance(content, bytes):
+                raise KnowledgeBaseError("invalid_content") from None
+            if len(content) > self.settings.max_upload_bytes:
+                raise KnowledgeBaseError("upload_too_large") from None
+            name = self._name(name + _document_extension(content, self.settings))
         return self._ingest(identity, name, content, source)
 
     def ingest_text(self, identity: TaskIdentity, name: str, content: str, source: str = "") -> dict[str, Any]:
