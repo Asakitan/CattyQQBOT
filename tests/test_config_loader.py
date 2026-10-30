@@ -17,6 +17,15 @@ _SPEC.loader.exec_module(_loader)
 
 
 class ConfigLoaderTests(unittest.TestCase):
+    def test_task_settings_export_as_one_resolved_object(self) -> None:
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {}, clear=True):
+            _loader._apply_config({"agent_tasks": {"daily_token_limit": 1234}}, Path(directory))
+            actual = json.loads(os.environ["CATTY_AGENT_TASKS"])
+            self.assertEqual(actual["daily_token_limit"], 1234)
+            self.assertEqual(Path(actual["data_dir"]), (Path(directory) / "data/agent_tasks").resolve())
+        example = json.loads((_MODULE_PATH.parent / "config.example.json").read_text(encoding="utf-8"))
+        self.assertEqual(example["agent_tasks"]["worker_model"], "deepseek-v4.1-flash")
+
     def test_vision_image_direct_download_is_opt_in_and_exported(self) -> None:
         example = json.loads((_MODULE_PATH.parent / "config.example.json").read_text(encoding="utf-8"))
         self.assertFalse(_loader.DEFAULT_CONFIG["vision"]["image_download_direct"])

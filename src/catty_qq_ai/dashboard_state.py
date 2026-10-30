@@ -635,6 +635,16 @@ def push_cache_stats(
         except Exception:  # noqa: BLE001
             pass
     _broadcast({"type": "cache_stats", **normalized})
+    if request_class == "chat":
+        try:
+            from .task_trace import record_model_usage
+            record_model_usage({
+                "input_tokens": input_total,
+                "output_tokens": int(normalized["output_tokens"]),
+                "cached_tokens": int(normalized["cache_read"]),
+            })
+        except Exception:
+            pass
 
 
 def push_session_context_stats(

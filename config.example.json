@@ -1,4 +1,33 @@
 {
+    "agent_tasks": {
+        "enabled": true,
+        "data_dir": "data/agent_tasks",
+        "timezone": "Asia/Shanghai",
+        "worker_model": "deepseek-v4.1-flash",
+        "daily_token_limit": 600000,
+        "daily_attempt_limit": 20,
+        "per_user_active": 1,
+        "global_concurrency": 4,
+        "worker_parallel": 2,
+        "max_agents": 3,
+        "max_depth": 1,
+        "quote_ttl_seconds": 300,
+        "max_input_tokens": 64000,
+        "max_output_tokens": 4096,
+        "summary_max_chars": 1500,
+        "main_dispatch_enabled": true,
+        "main_input_target": 22000,
+        "main_input_limit": 0,
+        "main_recent_messages": 8,
+        "tiers": {
+            "light": {"free_per_day": 3, "points": 20, "max_tokens": 32000},
+            "standard": {"free_per_day": 1, "points": 80, "max_tokens": 128000},
+            "deep": {"free_per_day": 0, "points": 200, "max_tokens": 256000}
+        },
+        "mcp": {"enabled": true, "servers": []},
+        "knowledge": {"enabled": true, "max_file_bytes": 20971520},
+        "extensions": {"enabled_ids": []}
+    },
     "server": {
         "host": "127.0.0.1",
         "port": 8080,

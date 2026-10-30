@@ -1,5 +1,21 @@
 # Catty 工具与回复交付架构
 
+## 任务中心与主模型调度（本地完成，未部署）
+
+NoneBot 入口通过 `task_host` 绑定真实发言者、会话和人格，启动/关闭 `TaskService`。`catty_delegate`、`catty_schedule` 等工具只传任务参数，不接受模型提供的权限、价格或模型路由；持久任务由 SQLite `TaskStore` 保存，`TaskRuntime` 认领并执行。需要扣分的任务先报价并等待真实确认，积分仍在 `AffectionStore` 原账本中冻结，收到交付回执后结算，失败退款。完成状态与积分结算是可恢复的两阶段操作；中断任务显式续跑，未知交付不自动重发。
+
+`TaskBudget` 在每次网络请求前预留输入和最大输出，收到真实 usage 后结算，未知用量保留预留。所有子代理使用显式 DeepSeek 辅助线路，不回落主 AI；角色工具集合与真实用户权限取交集，根任务共享预算和并发限制。完整产物落盘，主回复只接收短摘要、来源和产物引用。
+
+`dispatch_context` 默认 `main_input_limit=0`：保留完整人格、历史、图片和原始调用回执，不再额外裁至 25K。来源档案仍按用户、会话、人格隔离，`catty_context` 提供只读分页，旧 system 文本读回不取得指令权限。正数 limit 仅保留为显式启用的兼容投影模式。
+
+`complete_tool_catalog` 为主模型提供完整已注册目录，原权限集合单独保留。`tool_switches.ToolSwitches` 在当前输入尾部表达小型角色开关表，执行前校验开关；`catty_tool_switch` 只能启停已许可工具，下一轮生效。schema 不因开关变化而删改，所有调用仍获得配对回执。DS 共享静态 system，角色差异只在短表中表达，角色默认集合不是权限提升入口。主回复保留配置中的八轮工具预算，任务角色仍按各自档位预算执行。
+
+`knowledge_base` 为 TXT/MD/HTML/PDF/DOCX/XLSX 和公共 URL 建立来源分块、FTS5 及可选本地向量索引；向量未就绪时明确显示语义待补录。`mcp_runtime` 管理管理员预置 stdio/Streamable HTTP 客户端和工具许可。`extension_runtime` 管理可信 Python 扩展的清单、命名空间、生命周期及在途卸载；它不是代码沙箱。
+
+`task_dashboard` 提供 `/dashboard/tasks` 与原管理鉴权，写操作校验同源和版本；只允许修改 `agent_tasks`，保留配置备份。诊断 ZIP 只含脱敏配置/元数据，不含聊天或知识库原文。`task_trace` 将父回合、工具和任务关联起来，不记录正文。
+
+初版 1,979 项回归与投影样本是会话 29 的历史验证。角色开关版最后完成全量为 1,989 项、0 失败/错误、9 跳过；后续 DS 15 项、主链路 3 项定向检查通过，重复全量按用户要求取消。真实 HTTP 保留超 25K 前缀及图片，五轮开关/历史/看图/收尾通过；未测线上质量或真实费用。配置、额度及后续验收见 [任务说明](agent-tasks.md)。
+
 ## 语音消息转文字（已部署）
 
 QQ 客户端的转文字结果不经过 OneBot；入口在 `_rule` 里用 `_extract_incoming_with_voice` 抽取消息，发现 `record` 段就调用 `voice_stt.transcribe_event`：`url` 下载 / 本地路径 / `get_record` 三选一取音频，嗅探格式后写入 `data/voice_inbox/`，再由独立 `voice_stt_worker.py` 用 faster-whisper（CT2 int8）转写，PyAV 自行解码到 16k 单声道。结果以 `【语音转写】` 并回 `incoming.text/history_content`，纯语音消息因此能进入准入和主模型；失败只给“未能识别内容”，SILK 直接跳过，同一音频缓存 10 分钟。
@@ -95,6 +111,8 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 主模型与识图可走 `wss://api.openai.com/v1/responses`：`responses_ws.py` 维护一个持久连接，发送 `response.create` 帧并按 `stream_id` 把事件路由到对应 lane。续聊用 `previous_response_id` + 只发新增 input items；`store=false` 时服务端只在连接本地内存缓存上一轮，连接换代后本地缓存里的 response id 失效，自动改为完整 input 重放。`data/responses_ws_cache.json` 保存每个 scope 的 response id、已覆盖 input/output item 指纹和 connection generation，TTL 过期或 generation 不匹配即弃用。连接断开、`previous_response_not_found` 或 50 分钟主动换连接都会清缓存并重放一次完整上下文；仍失败时按 `ai.websocket_fallback_http` 回退 HTTP Responses/chat。
 
 未完成请求取消或超时会关闭连接，避免旧事件进入下一轮；连接标识跨实例唯一，失效续聊先释放 lane 再重放。请求侧把 `reasoning_effort` 转成 `reasoning.effort`（`max` 映射为 `high`），识图 URL 使用字符串。NSFW spark 仍走 DeepSeek，普通生图用 OpenAI；自动 NSFW 生图可用 `imagegen.nsfw_backend` 与 `imagegen.pixelbunny.base_url/api_key` 独立保留 Pixelbunny。
+
+图片请求组装补丁（2026-10-30，已部署）：群友单独 @、无附加文字/表情/语音且未带当前图或引用图时，`_is_bare_image_wakeup` 开启前文图片收集。`_recent_context_images_for_scope(preceding_user_id=...)` 仅选请求之前该发送者的最后一条消息，不跳过其中的文字去回捞更老的图；继续检查同群、消息窗口、张数和有效期。图片按原有标签及 `image_url` 部件进主请求，再转换为 Responses `input_image`。本地 59 项回归通过，包含实际回环 WebSocket 收帧的 PNG 原字节、增量输入及断线完整重放；未改传输实现、模型或配置，真实 QQ 尚未验证。
 
 已部署的缓存修复将官方 OpenAI GPT-5.6 及以上请求的稳定系统前缀转换为 developer 输入，并在既有标记处设置显式断点；后续系统段保留原有位置，隐式断点继续启用。无标记及其他兼容端点保持原转换。Responses 用量透传读取、写入及期限明细，面板将写入与普通输入分开；缓存命中仍依赖前缀和工具一致、有效期限及服务端路由。部署后生产代码的 WebSocket 合成探针首轮写入 9625、续聊次轮读取 9625 token；真实 QQ 回合未测。
 
@@ -194,7 +212,7 @@ NSFW（spark）回合走同一段逻辑，额外按 `voice.nsfw_bubble_chance`�
 
 `ToolReplyState` 同时保存最后实际请求和 schemas。官方 Responses 超时恢复保留这份定义与原请求级思考配置，使用 `tool_choice=none` 和空执行器直接收尾；即使服务端错误返回调用也不会执行。保留已成功工具回执，不刷新技能或重新执行副作用。其它模型和兼容端点仍使用原先无工具、低思考恢复。期限、取消与失败传播规则不变。
 
-共享与旧冒泡入口改用 `chat_completion_proactive`；`aux_route(deepseek_only=True)` 仅从 audit/fallback 两条完整 DeepSeek 配置中选择，不选主 AI。请求类别 `proactive` 归为 auxiliary，不参与主聊天活跃计数。无配置时 runtime 不生成；生成失败保持原机会失败处理。人格文本、调度、群成员与忙碌检查、发送确认不变。源码与测试已部署，未复核生产加载、真实费用或命中变化。
+共享与旧冒泡入口改用 `chat_completion_proactive`；`aux_route(deepseek_only=True)` 仅从 audit/fallback 两条完整 DeepSeek 配置中选择，不选主 AI。请求类别 `proactive` 归为 auxiliary，不参与主聊天活跃计数。无配置时 runtime 不生成；生成失败保持原机会失败处理。人格文本、调度、群成员与忙碌检查、发送确认不变。源码与测试已部署；10月30日新日志确认固定断点1293稳定、同热前缀47次加权命中96.58%、超时恢复保留schemas并命中97.1%。非固定输入A/B，真实费用与主动输出未验证。
 
 ### 猫猫戳戳
 

@@ -10,6 +10,12 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = (
+    "test_tool_switches",
+    "test_dispatch_context", "test_main_dispatch_integration",
+    "test_task_contracts", "test_task_tools", "test_affection_task_points",
+    "test_task_store", "test_task_runtime", "test_task_accounting", "test_agent_delegate",
+    "test_mcp_runtime", "test_extension_runtime", "test_knowledge_base",
+    "test_task_dashboard", "test_task_service", "test_task_host", "test_task_trace",
     "test_conversation_tools", "test_insight_memory", "test_purpose_ledger",
     "test_surfcore_wiring", "test_data_backup",
     "test_tool_history_recovery", "test_reply_deadline", "test_deferred_image_delivery",

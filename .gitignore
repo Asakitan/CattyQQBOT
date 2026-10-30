@@ -77,3 +77,4 @@ data/python_sandbox/
 /data/self_repair/
 # Responses WebSocket 续聊缓存（response id / item 指纹，运行时产物）。
 data/responses_ws_cache.json
+/data/agent_tasks/

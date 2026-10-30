@@ -2,7 +2,14 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
-| `prompt_cache.py` / `openai_client.py` / `__init__.py` / 缓存、deadline 与主动测试 | 固定长历史断点、请求设置指纹、保留 schemas 的超时收尾、DeepSeek 主动冒泡 → `docs/session-log/session-28.md` | 已部署；220 项中 211 通过、9 跳过；真实命中与费用未验证 |
+| `tool_switches.py` / `tools.py` / `openai_client.py` / `agent_delegate.py` / `__init__.py` | 完整工具目录、角色开关、同回复启停、执行权限及共享静态前缀 → `docs/session-log/session-31.md` | 已部署；53 文件双端哈希一致，生产任务相关 20 组通过（短路径测试修正后 26/26）；14:34 重载无错误 |
+| `task_contracts.py` / `task_store.py` / `task_runtime.py` / `task_accounting.py` / `affection.py` | 持久任务、计划、同用户日额度、积分冻结/结算与重启恢复 → `docs/agent-tasks.md` | 本地完成；未知用量保留预留、未知交付不重发；未部署 |
+| `agent_delegate.py` / `task_service.py` / `task_tools.py` / `task_host.py` / `task_trace.py` / `tools.py` / `__init__.py` | 严格 DS 路由、权限与宿主接线、产物回执和元数据追踪 → `docs/architecture.md`、`docs/session-log/session-29.md` | 本地完成；固定清单 1,979 项、0 失败/错误、9 跳过；真实模型/QQ 未测 |
+| `dispatch_context.py` / `openai_client.py` / `task_contracts.py` | 默认完整前缀、`main_input_limit=0`、来源档案与身份隔离分页读取 → `docs/agent-tasks.md` | 已部署；37 项来源/兼容投影及完整 HTTP 载荷验证通过；旧 25K 默认已取消；线上费用未测 |
+| `mcp_runtime.py` / `knowledge_base.py` / `extension_runtime.py` | MCP v1 stdio/HTTP、文档 FTS/向量索引、管理员可信扩展生命周期 → `docs/agent-tasks.md` | 本地完成；真实本地 stdio 与退出测试通过；外部服务器、向量模型及扩展需管理员配置 |
+| `task_dashboard.py` / `web/task-center.html` / `config.py` / loader / 配置 JSON / `pyproject.toml` | 任务管理、配置版本/回滚、脱敏诊断与安装资源 → `docs/agent-tasks.md` | 本地完成；API 26 项及桌面/手机布局、上传检索、临时配置保存通过；未部署 |
+| `__init__.py` / `tests/test_vision_context_images.py` / `tests/test_responses_ws.py` | 裸 @ 承接同发送者上一条图片，原图字节与 WebSocket 续聊/重连验证 → `docs/session-log/session-30.md`、`docs/architecture.md` | 已部署并归档 `eedd6fe`；本地 59 项通过；生产加载未复核、真实 QQ 未测 |
+| `prompt_cache.py` / `openai_client.py` / `__init__.py` / 缓存、deadline 与主动测试 | 固定长历史断点、请求设置指纹、保留 schemas 的超时收尾、DeepSeek 主动冒泡 → `docs/session-log/session-28.md` | 已部署；本地211通过、9跳过；线上同热前缀47次加权96.58%，费用未验证 |
 | `docs/voice-research-20261030.md` | 自然对话、原生情绪、音素/音符对齐与 CPU 唱歌的 21 份一手来源 | 调研完成；13 个项目及 W3C，运行时代码与原模型未改，未做新模型测试 |
 | `tmp/voice_identity_20261030/{flow,score_voice,report,audit_words,phrase_probe}.py` | CPU 失败方案存档、分阶段转写和原模型整句对照 → `docs/voice-candidates.md` | 原模型已由用户确认；错误 B 来源移除、附加处理停用，新升级未完成，未部署 |
 | `tmp/voice_emotions_20261030/{generate,timbre_review,melody}.py` | 情绪候选、原声核对页及旋律自检 → `docs/voice-candidates.md` | 24 条候选格式通过，机机 12 条及旧 B 已否决；五段旧录音/试听来源核验，等待声线确认；唱歌暂停 |
@@ -70,6 +77,10 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-30 | 完整工具目录与短角色开关分离，取消默认 25K 裁剪，DS 静态前缀统一 | 最后全量 1,989 项、0 失败/错误、9 跳过；后续定向通过，重复全量已取消且未重跑；未部署 |
+| 2026-10-30 | 本地实现 AstrBot 借鉴任务中心、限额积分、DS 委派、MCP/知识库/扩展及主请求 25K 门控 | 固定清单 1,979 项、0 失败/错误、9 跳过；本地 MCP stdio、主请求载荷和桌面/手机管理页通过；未部署/提交、真实模型/QQ 未测 |
+| 2026-10-30 | 只读核对缓存强化后的真实新回复；未改运行时代码 | 同热前缀47次96.58%、零次零命中，续轮最高99.7%；最近24次含另一前缀冷写为94.47%，非固定A/B |
+| 2026-10-30 | 修复先发图再单独 @ 时前文原图未进入请求；仅承接同发送者上一条图片，保留窗口与来源隔离 | 图片上下文 23 项、WebSocket 36 项通过；实收帧验证 PNG 原字节、增量及重连重放；已部署，四文件双端哈希一致，生产加载未复核 |
 | 2026-10-30 | 部署固定历史缓存、Responses 超时恢复与 DeepSeek 主动冒泡分线 | 代码/测试 7 文件解压、0 跳过；本地 211 通过、9 跳过；未发生产模型请求 |
 | 2026-10-30 | 汇总 21 份一手语音/歌声实现资料，明确保持原模型的调用层改进与独立 CPU SVS 路线 | 来源表/引用编号核对；区分文档能力、本地事实及未验证项，未改运行时 |
 | 2026-10-30 | 固定用户已确认正常的原模型与参考音，移除试验中错误的 B 来源，不再重测原模型 | 仅验证状态和失败路径退出；无新合成、无权重更换、无部署 |

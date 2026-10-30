@@ -26,6 +26,8 @@ from .config import Config
 from .mc_status import mc_has_players
 from .parsers import lenient_json_object, unwrap_content_block_repr
 from .reply_markers import INLINE_IMAGE_PREFIX, INLINE_IMAGE_SUFFIX
+from .task_accounting import begin_worker_request, check_worker_model, check_worker_route, current_worker_accounting, settle_worker_request
+from .task_contracts import TaskError
 
 
 _logger = logging.getLogger("catty_qq_ai")
@@ -1538,7 +1540,7 @@ def _maybe_distill_reply(reply: str, *, source: str) -> None:
       3. 当前 async context 有 distill ctx 且 user_text 非空 (= 经过 handle_chat 入口)
       4. scope 是 private:* / group:* (排除 summary: / sim: / 空 scope)
     """
-    if _distill_suppressed_var.get():
+    if _distill_suppressed_var.get() or current_worker_accounting() is not None:
         return
     hook = _reply_distill_hook
     if hook is None or not reply or not reply.strip():
@@ -1591,6 +1593,8 @@ async def _post_anthropic_native_chat(
     全部在 post_messages_native 内部 sweep+split_system 之后由
     _apply_anthropic_cache_breakpoints 统一标. caller 不再插 marker.
     """
+    if current_worker_accounting() is not None:
+        raise TaskError("worker_route_mismatch", "task workers require the metered compatible route")
     from .anthropic_native_client import post_messages_native
 
     # 主人 2026-07-06 openai-claude-95 §2.5: prefill 收口 — 外部 adapt 已删,
@@ -3805,6 +3809,13 @@ async def _post_chat_completion_raw(
         OpenAI native 是 implicit caching 不需要此参数.
     cache_depth: 倒数第 N 处 role 切换打 breakpoint, ST 推荐 2.
     """
+    if request_route == "main" and current_worker_accounting() is None:
+        from .dispatch_context import get_dispatch_stats, project_active_request
+        messages, tools = project_active_request(messages, tools)
+        dispatch_stats = get_dispatch_stats()
+        if dispatch_stats:
+            _logger.info("dispatch_input scope=%s original=%s projected=%s limit=%s", get_current_scope_key(), dispatch_stats.get("original_tokens"), dispatch_stats.get("projected_tokens"), dispatch_stats.get("hard_tokens", 25000))
+    check_worker_route(base_url, api_key, model)
     if not base_url.strip():
         raise OpenAICompatibleError("AI 接口地址为空。")
     if not model.strip():
@@ -4223,6 +4234,7 @@ async def _post_chat_completion_raw(
             _ws_config = None
         _ws_enabled = bool(
             getattr(_ws_config, "catty_openai_websocket_enabled", False)
+            and current_worker_accounting() is None
         )
         if _ws_enabled:
             try:
@@ -4300,6 +4312,7 @@ async def _post_chat_completion_raw(
                     return data
             if stream:
                 # === Streaming branch (主人 2026-05-28 Step 1) ===
+                task_request = begin_worker_request(model, payload)
                 try:
                     if _responses_mode:
                         data = await _stream_responses_attempt(
@@ -4347,6 +4360,7 @@ async def _post_chat_completion_raw(
                         continue
                     # 4xx 直接抛
                     raise
+                settle_worker_request(task_request, data)
                 _log_cache_stats(data, model, messages=messages, base_url=base_url)
                 # 流式分支: chunk 已经 chunk-by-chunk 推过, 这里只 end_stream
                 if _dash_stream_id and _dash_mod is not None:
@@ -4359,6 +4373,7 @@ async def _post_chat_completion_raw(
 
             # === Non-streaming branch (现有逻辑保留 + Responses 转换) ===
             async with _http_client(timeout, proxy) as client:
+                task_request = begin_worker_request(model, payload)
                 response = await client.post(
                     _responses_url(base_url) if _responses_mode else _chat_completions_url(base_url),
                     headers=headers,
@@ -4381,6 +4396,7 @@ async def _post_chat_completion_raw(
                     ) from exc
                 if _responses_mode:
                     data = _convert_responses_data(data)
+                settle_worker_request(task_request, data)
                 # === cache hit 监测 (DeepSeek / Anthropic / OpenAI 都识别) ===
                 # 主人 2026-05-28: 改为始终调用, 函数内部自己判断有无 cache 字段
                 # (DeepSeek 路径 enable_cache=False 但仍想看 prompt_cache_hit_tokens).
@@ -4471,6 +4487,8 @@ async def _post_ollama_chat(
     extra_headers: dict[str, str],
     extra_body: dict[str, Any],
 ) -> str:
+    if current_worker_accounting() is not None:
+        raise TaskError("worker_route_mismatch", "task workers require the metered compatible route")
     if not base_url.strip():
         raise OpenAICompatibleError("Ollama 接口地址为空。")
     if not model.strip():
@@ -4865,6 +4883,7 @@ async def _post_fallback_chat(
     max_calls_per_round: int | None = None,
     request_route: str = "fallback",
     tools_provider: Any | None = None,
+    tool_switches: Any | None = None,
     reply_state: ToolReplyState | None = None,
 ) -> str:
     await _check_mc_gate_or_raise(config)
@@ -4902,6 +4921,7 @@ async def _post_fallback_chat(
             _fallback_mode=True,
             _fallback_request_route=request_route,
             **({"tools_provider": tools_provider} if tools_provider is not None else {}),
+            **({"tool_switches": tool_switches} if tool_switches is not None else {}),
             **({"reply_state": reply_state} if reply_state is not None else {}),
         )
 
@@ -4996,6 +5016,7 @@ async def chat_completion_with_tools(
     _fallback_mode: bool = False,
     _fallback_request_route: str = "fallback",
     tools_provider: Any | None = None,
+    tool_switches: Any | None = None,
 ) -> str:
     """OpenAI function calling 主回复循环。
 
@@ -5011,6 +5032,21 @@ async def chat_completion_with_tools(
     reply_state 可由父调用跨 deadline attempts 持有；取消后用 recovery_messages()
     给无工具的文字收尾请求。不传时保留原调用方式，不修改 messages。
     """
+    worker_context = current_worker_accounting()
+    if worker_context is not None:
+        check_worker_model(router_model)
+        if _fallback_mode or not router_base_url.strip() or not router_api_key.strip():
+            raise TaskError("worker_route_mismatch", "task workers require their explicit auxiliary route")
+
+    async def _worker_plain(history: list[ChatMessage]) -> str:
+        data = await _post_chat_completion_raw(
+            base_url=router_base_url, api_key=router_api_key, model=router_model,
+            messages=history, timeout=config.catty_request_timeout, proxy=config.catty_http_proxy,
+            temperature=config.catty_temperature, max_tokens=config.catty_max_tokens,
+            extra_headers={}, extra_body={}, stream=True, request_route="agent_worker",
+        )
+        return _extract_content(data)
+
     if reply_state is not None:
         reply_state._seed(messages)
     if (
@@ -5035,13 +5071,19 @@ async def chat_completion_with_tools(
         _maybe_distill_reply(reply, source="deepseek")
         return reply
     if not tools or tool_executor is None:
+        if worker_context is not None:
+            return await _worker_plain(messages)
         _logger.info("tool_chat: tools/executor empty → fallback to plain chat_completion")
         return await chat_completion(config, messages)
     if not getattr(config, "catty_tools_enabled", True):
+        if worker_context is not None:
+            return await _worker_plain(messages)
         _logger.info("tool_chat: catty_tools_enabled=False → fallback to plain chat_completion")
         return await chat_completion(config, messages)
 
     async def _fallback_or_plain(history: list[ChatMessage]) -> str:
+        if worker_context is not None:
+            return await _worker_plain(history)
         if (
             bool(getattr(config, "catty_fallback_tools_enabled", True))
             and _fallback_is_configured(config)
@@ -5056,6 +5098,7 @@ async def chat_completion_with_tools(
                     max_rounds=max_rounds,
                     max_calls_per_round=max_calls_per_round,
                     **({"tools_provider": tools_provider} if tools_provider is not None else {}),
+                    **({"tool_switches": tool_switches} if tool_switches is not None else {}),
                     **({"reply_state": reply_state} if reply_state is not None else {}),
                 )
             except MCBusyError:
@@ -5110,6 +5153,16 @@ async def chat_completion_with_tools(
 
     history: list[ChatMessage] = list(messages)
     allowed_tool_names = _allowed_tool_names(tools)
+    if tool_switches is not None:
+        original_executor = tool_executor
+
+        async def switched_executor(name: str, arguments_json: str):
+            from .tool_switches import SWITCH_TOOL_NAME
+            if name == SWITCH_TOOL_NAME:
+                return tool_switches.apply(arguments_json)
+            return await original_executor(name, arguments_json)
+
+        tool_executor = switched_executor
 
     # 主人 2026-06-06: 发一轮请求 (按当前路由选端点)。抽成内部 helper, 以便强制 tool_choice 被
     # 端点拒绝时能带着同一批 tools 用 "auto" 无缝重试本轮 (而不是丢掉工具降级成纯聊天)。
@@ -5120,10 +5173,12 @@ async def chat_completion_with_tools(
         if _native_route:
             from .anthropic_native_client import post_messages_native_data
             from .prompt_cache import resolve_cache_ttl
+            from .dispatch_context import project_active_request
+            native_messages, native_tools = project_active_request(history, tools)
             # native /v1/messages 当前不透传 tool_choice — 一律走 provider auto。
             _native_payload: dict[str, Any] = {
-                "messages": history,
-                "tools": tools,
+                "messages": native_messages,
+                "tools": native_tools,
                 "max_tokens": config.catty_max_tokens or 4096,
             }
             _native_model = _effective_main_model(config)
@@ -5135,7 +5190,7 @@ async def chat_completion_with_tools(
             )
             try:
                 return await post_messages_native_data(
-                    config, _native_payload["messages"], tools=tools,
+                    config, _native_payload["messages"], tools=_native_payload["tools"],
                     metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
                     model=_native_model,
                     cache_ttl=resolve_cache_ttl(config, "main"),
@@ -5247,6 +5302,10 @@ async def chat_completion_with_tools(
                    and isinstance(m.get("content"), str)
                    and m["content"].startswith(CONTEXT_REQUEST_INTENT_HEADER + "\n") for m in history):
                 append_context_request_hint(history, allowed_tool_names)
+        if tool_switches is not None:
+            tools = tool_switches.refresh(tools)
+            allowed_tool_names = _allowed_tool_names(tools)
+            tool_switches.update_messages(history)
         round_tool_choice: ToolChoice = tool_choice if round_idx == 0 else "auto"
         # 已知该端点拒绝非 auto tool_choice (如 DeepSeek 思考模型) → 直接用 auto, 省一次必败 400。
         if round_tool_choice != "auto" and _forced_tool_choice_blocked(_force_endpoint_key):
@@ -5272,9 +5331,10 @@ async def chat_completion_with_tools(
                 except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc2:
                     if _fallback_mode:
                         raise
-                    _mark_cloud_unhealthy(
-                        float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0)),
-                    )
+                    if worker_context is None:
+                        _mark_cloud_unhealthy(
+                            float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0)),
+                        )
                     _logger.warning(
                         "chat_completion_with_tools: auto retry after forced reject also failed (%s); "
                         "trying fallback tool loop",
@@ -5287,9 +5347,10 @@ async def chat_completion_with_tools(
             else:
                 if _fallback_mode:
                     raise
-                _mark_cloud_unhealthy(
-                    float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0)),
-                )
+                if worker_context is None:
+                    _mark_cloud_unhealthy(
+                        float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0)),
+                    )
                 _logger.warning(
                     "chat_completion_with_tools: round %d cloud call failed (%s); trying fallback tool loop",
                     round_idx,
@@ -5306,7 +5367,7 @@ async def chat_completion_with_tools(
 
         if not tool_calls:
             # 模型直接给了最终回复
-            if _cloud_is_unhealthy() and not _fallback_mode:
+            if _cloud_is_unhealthy() and not _fallback_mode and worker_context is None:
                 _mark_cloud_healthy()
             _reply = _extract_content(data)
             # S6: 有 tools 但模型直接出文本回复 (不经 chat_completion) → 在此蒸馏
@@ -5365,6 +5426,8 @@ async def chat_completion_with_tools(
                     "The requested tool was not exposed for this request.",
                     requested_tool=call["name"],
                 )
+            elif tool_switches is not None and tool_switches.denial(call["name"]) is not None:
+                tool_payloads[call["id"]] = tool_switches.denial(call["name"])
             else:
                 calls_to_execute.append(call)
                 execution_call_ids.add(call["id"])
@@ -5442,7 +5505,7 @@ async def chat_completion_with_tools(
             )
 
         if short_circuit_reply:
-            if _cloud_is_unhealthy() and not _fallback_mode:
+            if _cloud_is_unhealthy() and not _fallback_mode and worker_context is None:
                 _mark_cloud_healthy()
             # S6: tool 短路回复 (catty_imagegen agent 模式等, 不经 chat_completion) → 蒸馏
             _maybe_distill_reply(short_circuit_reply, source="deepseek_tool")
@@ -5503,6 +5566,8 @@ async def chat_completion_with_tools(
                 _mark_cloud_healthy()
             _maybe_distill_reply(final_reply, source="deepseek")
             return final_reply
+    if worker_context is not None:
+        return await _worker_plain(history)
     if _fallback_mode:
         # 主人 2026-08-13: fallback 工具轮数耗尽后,在 fallback endpoint 纯文本收口。
         return await _post_fallback_chat(
@@ -5750,6 +5815,15 @@ async def _post_with_fallback(
     异常直接跳 line fallback, 跳过了 compat 一级)。
     """
     _line = line or "other"
+    if current_worker_accounting() is not None:
+        check_worker_model(model)
+        return _extract_content(await _post_chat_completion_raw(
+            base_url=base_url, api_key=api_key, model=model, messages=messages,
+            timeout=timeout, proxy=config.catty_http_proxy, temperature=temperature,
+            max_tokens=max_tokens, extra_headers=extra_headers, extra_body=extra_body,
+            enable_cache=enable_cache, cache_depth=cache_depth, stream=True,
+            request_route=_line,
+        ))
     try:
         # native /v1/messages 路径优先 (per-line 路由: 总闸 + override + detect_provider)
         if _route_native(config, _line, base_url, model):

@@ -279,6 +279,7 @@ python -B -X utf8 scripts/run_offline_regressions.py --module test_config --modu
 - 看猫猫怎么工作：[架构说明](docs/architecture.md)、[模块清单](docs/module-inventory.md)。
 - 管理和创作角色：[管理命令](ADMIN_COMMANDS.md)、[人格定义](docs/persona-json.md)、[人格运行时](docs/persona-runtime.md)。
 - 使用工具：[工具合同](docs/tool-contracts.md)、[Python 沙箱](docs/code-sandbox.md)、[技能运行时](docs/skill-runtime.md)、[自修复](docs/self-repair.md)。
+- 管理长任务：[任务中心、积分与 DS 子代理](docs/agent-tasks.md)，后台入口为 `/dashboard/tasks`。
 
 想读代码的话，可以从 [bot.py](bot.py)、[配置加载器](catty_config_loader.py)、[聊天插件](src/catty_qq_ai/__init__.py)、[模型客户端](src/catty_qq_ai/openai_client.py) 和 [守护进程](scripts/catty_hot_reload.py) 开始喵。
 

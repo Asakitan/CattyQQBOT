@@ -322,6 +322,35 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "timeline_enabled": True,
         "adaptive_prompt_enabled": True,
     },
+    "agent_tasks": {
+        "enabled": True,
+        "data_dir": "data/agent_tasks",
+        "timezone": "Asia/Shanghai",
+        "worker_model": "deepseek-v4.1-flash",
+        "daily_token_limit": 600000,
+        "daily_attempt_limit": 20,
+        "per_user_active": 1,
+        "global_concurrency": 4,
+        "worker_parallel": 2,
+        "max_agents": 3,
+        "max_depth": 1,
+        "quote_ttl_seconds": 300,
+        "max_input_tokens": 64000,
+        "max_output_tokens": 4096,
+        "summary_max_chars": 1500,
+        "main_dispatch_enabled": True,
+        "main_input_target": 22000,
+        "main_input_limit": 0,
+        "main_recent_messages": 8,
+        "tiers": {
+            "light": {"free_per_day": 3, "points": 20, "max_tokens": 32000},
+            "standard": {"free_per_day": 1, "points": 80, "max_tokens": 128000},
+            "deep": {"free_per_day": 0, "points": 200, "max_tokens": 256000},
+        },
+        "mcp": {"enabled": True, "servers": []},
+        "knowledge": {"enabled": True, "max_file_bytes": 20971520},
+        "extensions": {"enabled_ids": []},
+    },
     "skills": {
         "enabled": True,
         "auto_learn_enabled": True,
@@ -1054,6 +1083,13 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_TOOLS_LAZY_SCHEMA_ENABLED", tools.get("tools_lazy_schema_enabled"))
     _set_env("CATTY_TOOLS_FULL_EXPOSURE", tools.get("tools_full_exposure"))
     _set_env("CATTY_SANDBOX_DIR", tools.get("sandbox_dir"))
+
+    agent_tasks = dict(_section(data, "agent_tasks"))
+    task_data_dir = Path(str(agent_tasks.get("data_dir") or "data/agent_tasks")).expanduser()
+    if not task_data_dir.is_absolute():
+        task_data_dir = base_dir / task_data_dir
+    agent_tasks["data_dir"] = str(task_data_dir.resolve())
+    _set_env("CATTY_AGENT_TASKS", agent_tasks, json_value=True)
 
     skills = _section(data, "skills")
     _set_env("CATTY_SKILLS_ENABLED", skills.get("enabled"))

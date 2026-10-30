@@ -2130,6 +2130,13 @@ class ToolContext:
     deferred_delivery_started: bool = False
     # 本轮 catty_voice_say 合成超时改为后台发送; 与图片/文件的后台交付分开记。
     deferred_voice_started: bool = False
+    task_service: Any | None = None
+    task_turn_id: str = ""
+    task_root_id: str = ""
+    task_budget: Any | None = None
+    dispatch_context_id: str = ""
+    tool_switches: Any | None = None
+    incoming_files: list[dict[str, Any]] = field(default_factory=list)
     _message_read_cursor: int = field(default=0, init=False, repr=False)
 
     @property
@@ -6615,6 +6622,15 @@ _EXECUTORS: dict[str, ToolExecutor] = {
 }
 
 
+from .task_tools import TASK_TOOL_SCHEMAS, task_executor
+
+for _task_tool_name, _task_tool_schema in TASK_TOOL_SCHEMAS.items():
+    ALL_TOOL_SCHEMAS[_task_tool_name] = _task_tool_schema
+    _LAZY_TOOL_SCHEMAS[_task_tool_name] = _task_tool_schema
+    _TOOL_CAPABILITIES[_task_tool_name] = ToolCapability(execution_mode="external")
+    _EXECUTORS[_task_tool_name] = task_executor(_task_tool_name)
+
+
 # ── 对外 API ───────────────────────────────────────────────────────────
 
 # 主人 2026-05-28 C15-7: NLU intent → 只发命中意图相关的 tools, 不命中 tools=[]
@@ -6893,6 +6909,9 @@ _TOOL_CONFIG_FLAGS: dict[str, tuple[str, ...]] = {
 
 
 def _tool_config_enabled(name: str, config: Config) -> bool:
+    if name in TASK_TOOL_SCHEMAS:
+        settings = getattr(config, "catty_agent_tasks", {})
+        return isinstance(settings, dict) and bool(settings.get("enabled", True))
     if name == "catty_run_code":
         return bool(getattr(config, "catty_code_sandbox_legacy_run_code_enabled", False))
     flags = _TOOL_CONFIG_FLAGS.get(name)
@@ -6912,7 +6931,7 @@ _INTELLIGENCE_CORE_TOOLS = frozenset({
     "catty_scope_meme",
     "catty_timeline",
     "catty_adaptive_prompt",
-})
+}) | frozenset(TASK_TOOL_SCHEMAS)
 
 _CONVERSATION_TOOLS = frozenset({
     "catty_session_messages", "catty_wait_messages", "catty_close_conversation",
@@ -7184,6 +7203,12 @@ def available_tool_schemas(
 
 
 # IDE 风「最近 tool 调用日志」:scope -> deque[(tool_name, args_preview, ts, succeeded)]
+def complete_tool_catalog(config: Config, *, persona: Any = None) -> list[dict[str, Any]]:
+    if not bool(getattr(config, "catty_tools_enabled", True)):
+        return []
+    return [_schema_for_persona(name, schema, lazy=False, persona=persona) for name, schema in ALL_TOOL_SCHEMAS.items()]
+
+
 # 主回复 build_context 时注入,让 AI 看到自己 N 分钟内已对当前会话调过哪些 tool,
 # 避免重复调浪费时间。TTL 600s,每 scope 最多 8 条(LRU)。
 from collections import deque as _deque
@@ -7392,6 +7417,7 @@ def tools_system_hint(persona: Any = None) -> str:
         char = getattr(persona, "char_name", "机器人")
         tone = f"{char}口吻"
     hint = (
+        "完整工具目录保持可见；本轮 [Current tool switches] 决定开关，关闭不等于工具不存在；权限禁止的工具不能开启。\n"
         "工具调用通用: 1) 以本轮实际 schema 和权限为准，自己按需要选择可用工具 (每次=延迟, 闲聊/已知不用调); "
         "可以自主回忆、翻聊天记录、搜索、看图、生成并交付文件或写入长期记忆/计划/适应规则；实际可用能力以本轮 schema 为准.\n"
         f"2) 原创绘图请求**铁律**: {char}要出图就用 catty_imagegen (本轮开放时), 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"

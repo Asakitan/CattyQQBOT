@@ -26,6 +26,7 @@ from nonebot.plugin import PluginMetadata
 from nonebot.typing import T_State
 
 from .config import Config, KeywordReplyRule
+from .task_host import install_task_center, traced_tool_call
 from .code_sandbox import CODE_SANDBOX_SYSTEM_PROMPT
 from .features import (
     choose_turtle_soup,
@@ -11028,6 +11029,7 @@ async def _main_reply_with_deadline(
     router_label: str = "",
     tool_choice: Any = "auto",
     tools_provider: Any = None,
+    tool_switches: Any = None,
 ) -> str:
     """主回复墙钟: 超时取消后恢复；Responses 保留定义并禁用调用，其余线路低思考重试。
 
@@ -11100,6 +11102,7 @@ async def _main_reply_with_deadline(
                 tool_choice=("none" if preserve_cache else "auto") if degraded else tool_choice,
                 reply_state=None if degraded else reply_state,
                 **({"tools_provider": tools_provider} if not degraded and tools_provider is not None else {}),
+                **({"tool_switches": tool_switches} if not degraded and tool_switches is not None else {}),
             )
             if deadline > 0:
                 return await asyncio.wait_for(call, timeout=deadline)
@@ -17054,6 +17057,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _persona = _persona_for_scope(history_key)
         _turn_persona_token = bind_turn_persona(history_key, _persona)
         _lock_stack.callback(reset_turn_persona, _turn_persona_token)
+        _task_turn_id = _task_host.bind_turn(event, state, _lock_stack, _persona)
         fresh_mention = _fresh_mention_for_event(event, incoming)
 
         # 主人 2026-08-25 Wave ⑤: 语料直发 — 超短反应场景直接发语料原句,
@@ -17404,6 +17408,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             persona=_tool_persona,
             is_owner=bool(affection_store.is_owner(str(event.user_id))),
         )
+        from .tools import complete_tool_catalog
+        tools_for_main_reply = complete_tool_catalog(config, persona=_tool_persona)
+        _base_allowed_tool_names = frozenset(_allowed_tool_names)
 
         _forced_tool_choice: str | dict[str, object] = "auto"
         # 由主模型结合整段上下文选择执行或回答，不用末句关键词强制绘图。
@@ -17938,6 +17945,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             user_text=_user_text_for_intent,
             nsfw_context=_nsfw_tool_context,
         )
+        from .tool_switches import ToolSwitches
+        tool_ctx.tool_switches = ToolSwitches(
+            f"main:{_tool_persona.name}", permitted=lambda: _allowed_tool_names,
+        )
+        await _task_host.attach(tool_ctx, bot, event, _task_turn_id)
 
         _turn_tool_result_texts: list[str] = []
         _turn_tool_audit_result_texts: list[str] = []
@@ -17963,12 +17975,14 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
         def _tools_provider() -> list[dict[str, Any]]:
             from .tools import skill_tool_schemas
-            schemas = [*tools_for_main_reply, *skill_tool_schemas(tool_ctx)]
+            skill_schemas = skill_tool_schemas(tool_ctx)
+            schemas = list({s["function"]["name"]: s for s in [*tools_for_main_reply, *skill_schemas]}.values())
             _allowed_tool_names.clear()
-            _allowed_tool_names.update(s["function"]["name"] for s in schemas)
+            _allowed_tool_names.update(_base_allowed_tool_names)
+            _allowed_tool_names.update(s["function"]["name"] for s in skill_schemas)
             return schemas
 
-        async def _tool_executor(
+        async def _tool_executor_untraced(
             name: str,
             args_json: str,
             *,
@@ -18084,6 +18098,16 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             except Exception:
                 pass
             return result
+
+        async def _tool_executor(
+            name: str,
+            args_json: str,
+            *,
+            _allowed_names: set[str] = _allowed_tool_names,
+        ) -> dict[str, object]:
+            return await traced_tool_call(
+                _tool_executor_untraced, name, args_json, _allowed_names=_allowed_names,
+            )
 
         nsfw_image_segments: list[MessageSegment] = []
         # 主人 2026-05-29: NSFW 自动生图改后台异步, 文字优先发. 详见下方 chunk loop 前的 30s wait.
@@ -18619,6 +18643,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     tools=tools_for_main_reply,
                     tool_executor=_tool_executor,
                     tools_provider=_tools_provider,
+                    tool_switches=tool_ctx.tool_switches,
                     max_rounds=int(getattr(config, "catty_tools_max_rounds", 3) or 3),
                     max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
                     router_base_url=_router_base,
@@ -19544,3 +19569,6 @@ async def _mount_dev_sim_chat_endpoint() -> None:
             return {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
 
     logger.info("dev /dev/ambient_inject endpoint mounted (POST {scope, user_id, nickname, text})")
+
+
+_task_host = install_task_center(globals())

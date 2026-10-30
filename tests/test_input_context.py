@@ -296,7 +296,11 @@ class RequestInputIsolationTests(_IsolatedPackage):
             patched = patch.object(Path, method)
             patched.start()
             self.addCleanup(patched.stop)
+        accounting = importlib.import_module(f"{self.package_name}.task_accounting")
         self.openai_namespace = _load_functions("openai_client.py", {"_post_chat_completion_raw"}, {
+            **{name: getattr(accounting, name) for name in (
+                "check_worker_route", "current_worker_accounting", "begin_worker_request", "settle_worker_request",
+            )},
             "__package__": self.package_name,
             "_logger": logging.getLogger("offline-input-test"),
             "OpenAICompatibleError": RuntimeError,

@@ -53,6 +53,9 @@ def _parameters(schema: dict) -> dict:
 
 def _literal_executor_argument_fields(executor: object) -> set[str]:
     """Return literal fields read from an executor's `args` mapping."""
+    accepted = getattr(executor, "accepted_arguments", None)
+    if accepted is not None:
+        return set(accepted)
     tree = ast.parse(textwrap.dedent(inspect.getsource(executor)))
     fields: set[str] = set()
     for node in ast.walk(tree):

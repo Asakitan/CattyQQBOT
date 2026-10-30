@@ -25,6 +25,8 @@ import json
 import os
 import random
 import threading
+from contextlib import contextmanager
+from copy import deepcopy
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -57,6 +59,39 @@ IMAGE_COST_HIGH = 300
 IMAGE_COST_AUTO = 150
 
 OWNER_INFINITY_POINTS = 9_999_999
+_ACCOUNT_FILE_LOCKS: dict[str, Any] = {}
+_ACCOUNT_FILE_LOCKS_GUARD = threading.Lock()
+
+
+@contextmanager
+def _account_file_lock(path: Path):
+    key = os.path.normcase(str(path.resolve()))
+    with _ACCOUNT_FILE_LOCKS_GUARD:
+        lock = _ACCOUNT_FILE_LOCKS.setdefault(key, threading.RLock())
+    with lock:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.with_suffix(path.suffix + ".lock").open("a+b") as handle:
+            if os.name == "nt":
+                import msvcrt
+
+                if handle.seek(0, os.SEEK_END) == 0:
+                    handle.write(b"\0")
+                    handle.flush()
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+                try:
+                    yield
+                finally:
+                    handle.seek(0)
+                    msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+                try:
+                    yield
+                finally:
+                    fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
 def _today_local() -> str:
@@ -138,6 +173,7 @@ class AffectionStore:
         self._data: dict[str, dict[str, Any]] = {}
         self._dirty = False
         self._load()
+        self._persisted = deepcopy(self._data)
 
     # ── 加载/持久化 ────────────────────────────────────────────────
     def _load(self) -> None:
@@ -175,16 +211,118 @@ class AffectionStore:
             raise
 
     def flush_sync(self) -> bool:
-        with self._lock:
-            if not self._dirty:
-                return False
+        try:
+            with self._points_transaction():
+                dirty = self._dirty
+            return dirty
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"affection_store: flush failed: {exc}")
+            return False
+
+    def _refresh_points_locked(self) -> None:
+        disk: dict[str, dict[str, Any]] = {}
+        if self._path.exists():
+            raw = json.loads(self._path.read_text(encoding="utf-8-sig"))
+            if not isinstance(raw, dict):
+                raise ValueError("invalid account ledger")
+            users = raw.get("users", raw)
+            if not isinstance(users, dict):
+                raise ValueError("invalid account users")
+            disk = {str(key): value for key, value in users.items() if isinstance(value, dict)}
+        merged = deepcopy(disk)
+        for uid, record in self._data.items() if self._dirty else ():
+            previous = self._persisted.get(uid, {})
+            pending = {key: deepcopy(value) for key, value in record.items() if key not in previous or previous[key] != value}
+            if pending:
+                merged.setdefault(uid, {}).update(pending)
+        self._data = merged
+        self._persisted = deepcopy(disk)
+
+    @contextmanager
+    def _points_transaction(self, *, persist: bool = True):
+        with self._lock, _account_file_lock(self._path):
+            before = deepcopy(self._data)
+            persisted = deepcopy(self._persisted)
+            dirty = self._dirty
             try:
-                self._atomic_write()
-            except Exception as exc:  # noqa: BLE001
-                logger.warning(f"affection_store: flush failed: {exc}")
-                return False
-            self._dirty = False
-            return True
+                self._refresh_points_locked()
+                yield
+                if persist and self._dirty:
+                    self._atomic_write()
+                    self._dirty = False
+                    self._persisted = deepcopy(self._data)
+            except BaseException:
+                self._data = before
+                self._persisted = persisted
+                self._dirty = dirty
+                raise
+
+    @staticmethod
+    def _held_points(record: dict[str, Any]) -> int:
+        entries = record.get("task_points", {})
+        if not isinstance(entries, dict):
+            raise ValueError("invalid task point ledger")
+        return sum(
+            max(int(entry.get("cost", 0)), 0)
+            for entry in entries.values()
+            if isinstance(entry, dict) and entry.get("state") == "reserved" and not entry.get("exempt")
+        )
+
+    def reserve_task_points(self, user_id: str | int, task_id: str, cost: int) -> dict[str, Any]:
+        if not isinstance(task_id, str) or not task_id or len(task_id) > 256 or type(cost) is not int or cost < 0:
+            raise ValueError("invalid task point reservation")
+        uid = str(user_id)
+        try:
+            with self._points_transaction():
+                record = self._record(uid)
+                entries = record.setdefault("task_points", {})
+                existing = entries.get(task_id)
+                if existing is not None:
+                    if existing.get("cost") != cost:
+                        return {"ok": False, "error": "reservation_conflict", "task_id": task_id}
+                    return {"ok": existing.get("state") == "reserved", "state": existing.get("state"), "task_id": task_id, "cost": cost}
+                exempt = self.is_owner(uid)
+                balance = max(int(record.get("points", 0)) - self._held_points(record), 0)
+                if not exempt and balance < cost:
+                    return {"ok": False, "error": "insufficient_points", "shortfall": cost - balance, "balance": balance}
+                entries[task_id] = {"cost": cost, "state": "reserved", "exempt": exempt}
+                record["updated_at"] = _now_iso()
+                self._dirty = True
+                return {"ok": True, "state": "reserved", "task_id": task_id, "cost": cost, "balance": OWNER_INFINITY_POINTS if exempt else balance - cost}
+        except (OSError, ValueError) as exc:
+            logger.warning(f"affection_store: task reservation failed: {type(exc).__name__}")
+            return {"ok": False, "error": "persistence_failed", "task_id": task_id}
+
+    def settle_task_points(self, user_id: str | int, task_id: str, charge: bool) -> dict[str, Any]:
+        if not isinstance(task_id, str) or not task_id or type(charge) is not bool:
+            raise ValueError("invalid task point settlement")
+        uid = str(user_id)
+        state = "charged" if charge else "refunded"
+        try:
+            with self._points_transaction():
+                record = self._record(uid)
+                entries = record.setdefault("task_points", {})
+                entry = entries.get(task_id)
+                if entry is None:
+                    if charge:
+                        return {"ok": False, "error": "reservation_missing", "task_id": task_id}
+                    entries[task_id] = {"cost": 0, "state": "refunded", "exempt": self.is_owner(uid)}
+                elif entry.get("state") != "reserved":
+                    return {"ok": entry.get("state") == state, "state": entry.get("state"), "task_id": task_id, "cost": entry.get("cost", 0)}
+                else:
+                    cost = int(entry.get("cost", 0))
+                    if charge and not entry.get("exempt"):
+                        if int(record.get("points", 0)) < cost:
+                            return {"ok": False, "error": "balance_conflict", "task_id": task_id}
+                        record["points"] = int(record.get("points", 0)) - cost
+                        record["total_consumed"] = int(record.get("total_consumed", 0)) + cost
+                    entry["state"] = state
+                record["updated_at"] = _now_iso()
+                self._dirty = True
+                return {"ok": True, "state": state, "task_id": task_id, "cost": entries[task_id]["cost"]}
+        except (OSError, ValueError) as exc:
+            logger.warning(f"affection_store: task settlement failed: {type(exc).__name__}")
+            return {"ok": False, "error": "persistence_failed", "task_id": task_id}
 
     async def background_flush_loop(self) -> None:
         import asyncio
@@ -222,6 +360,7 @@ class AffectionStore:
                 "updated_at": _now_iso(),
             }
             self._data[user_id] = rec
+            self._persisted.setdefault(user_id, deepcopy(rec))
         return rec
 
     # ── 查询接口 ──────────────────────────────────────────────────
@@ -229,8 +368,9 @@ class AffectionStore:
         uid = str(user_id)
         if self.is_owner(uid):
             return OWNER_INFINITY_POINTS
-        with self._lock:
-            return int(self._record(uid).get("points") or 0)
+        with self._points_transaction(persist=False):
+            record = self._record(uid)
+            return max(int(record.get("points") or 0) - self._held_points(record), 0)
 
     def get_level_and_exp(self, user_id: str | int) -> tuple[int, int]:
         uid = str(user_id)
@@ -267,7 +407,7 @@ class AffectionStore:
         """执行签到。返回 {success, already, gained, balance, level, ...}。"""
         uid = str(user_id)
         today = _today_local()
-        with self._lock:
+        with self._points_transaction():
             rec = self._record(uid)
             last = str(rec.get("last_checkin_date") or "")
             # 主人豁免每日一次限制,可反复签;普通用户仍只能一次
@@ -276,7 +416,7 @@ class AffectionStore:
                 return {
                     "success": False,
                     "already": True,
-                    "balance": self.get_points(uid),
+                    "balance": max(int(rec.get("points", 0)) - self._held_points(rec), 0),
                     "level": level,
                     "last_amount": int(rec.get("last_checkin_amount") or 0),
                 }
@@ -315,7 +455,7 @@ class AffectionStore:
                 "base": base,
                 "bonus": bonus,
                 "level": level,
-                "balance": int(rec["points"]),
+                "balance": int(rec["points"]) - self._held_points(rec),
             }
 
     def add_exp(self, user_id: str | int, amount: int = 1) -> dict[str, Any]:
@@ -390,9 +530,9 @@ class AffectionStore:
                 "balance_after": OWNER_INFINITY_POINTS,
                 "cost": cost,
             }
-        with self._lock:
+        with self._points_transaction():
             rec = self._record(uid)
-            balance = int(rec.get("points") or 0)
+            balance = max(int(rec.get("points") or 0) - self._held_points(rec), 0)
             if balance < cost:
                 level = _level_from_exp(int(rec.get("exp") or 0))
                 lo, hi = predict_checkin_range(level)
@@ -406,7 +546,7 @@ class AffectionStore:
                     "checkin_range_today": (lo, hi),
                 }
             new_balance = balance - cost
-            rec["points"] = new_balance
+            rec["points"] = int(rec.get("points") or 0) - cost
             rec["total_consumed"] = int(rec.get("total_consumed") or 0) + cost
             rec["updated_at"] = _now_iso()
             self._dirty = True
@@ -458,9 +598,10 @@ class AffectionStore:
         """直接把某用户积分设成 value(>=0)。主人本身不受影响(永远无限)。"""
         uid = str(user_id)
         new_val = max(int(value), 0)
-        with self._lock:
+        with self._points_transaction():
             rec = self._record(uid)
             old = int(rec.get("points") or 0)
+            new_val = max(new_val, self._held_points(rec))
             rec["points"] = new_val
             rec["updated_at"] = _now_iso()
             self._dirty = True
@@ -469,10 +610,10 @@ class AffectionStore:
     def admin_add_points(self, user_id: str | int, delta: int) -> dict[str, Any]:
         """给某用户加(或减)积分。结果 clamp 到 [0, +∞)。"""
         uid = str(user_id)
-        with self._lock:
+        with self._points_transaction():
             rec = self._record(uid)
             old = int(rec.get("points") or 0)
-            new_val = max(old + int(delta), 0)
+            new_val = max(old + int(delta), self._held_points(rec))
             rec["points"] = new_val
             rec["updated_at"] = _now_iso()
             self._dirty = True
@@ -504,7 +645,7 @@ class AffectionStore:
         """
         uid = str(user_id)
         today = _today_local()
-        with self._lock:
+        with self._points_transaction():
             rec = self._record(uid)
             level = LEVEL_CAP if self.is_owner(uid) else _level_from_exp(int(rec.get("exp") or 0))
             base = random.randint(CHECKIN_BASE_MIN, CHECKIN_BASE_MAX)
@@ -530,16 +671,22 @@ class AffectionStore:
             return {
                 "ok": True, "is_owner": False, "user_id": uid,
                 "gained": gained, "base": base, "bonus": bonus,
-                "level": level, "balance": int(rec["points"]),
+                "level": level, "balance": int(rec["points"]) - self._held_points(rec),
             }
 
     def admin_reset_record(self, user_id: str | int) -> dict[str, Any]:
         """整条记录清空(积分/经验/签到/消费 全归零)。主人本人调这个无意义,因为他永远无限。"""
         uid = str(user_id)
-        with self._lock:
+        with self._points_transaction():
             existed = uid in self._data
+            record = self._record(uid)
+            if self._held_points(record):
+                return {"ok": False, "user_id": uid, "error": "task_points_reserved"}
+            entries = deepcopy(record.get("task_points", {}))
             self._data.pop(uid, None)
             if existed:
+                if entries:
+                    self._record(uid)["task_points"] = entries
                 self._dirty = True
         return {"ok": True, "user_id": uid, "existed": existed}
 

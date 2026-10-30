@@ -45,6 +45,17 @@ class KeywordReplyRule(BaseModel):
 
 
 class Config(BaseModel):
+    catty_agent_tasks: dict[str, Any] = Field(default_factory=lambda: {"enabled": True})
+
+    @field_validator("catty_agent_tasks", mode="before")
+    @classmethod
+    def parse_agent_tasks(cls, value: Any) -> Any:
+        if value is None:
+            return {}
+        if isinstance(value, str):
+            return _parse_json_object(value)
+        return value
+
     catty_openai_base_url: str = "https://api.openai.com/v1"
     catty_openai_api_key: str = ""
     catty_openai_model: str = "gpt-4o-mini"
