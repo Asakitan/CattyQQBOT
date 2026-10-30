@@ -25,6 +25,7 @@ E:/Py/python.exe -B -X utf8 -m unittest discover -s tests -p test_responses_ws.p
 
 ## 部署状态与剩余事项
 
-- 本地基线 `a2664da7096e136abbe22c4d6e12760dfba12e9b`；未提交、未部署。
-- 待部署代码 `src/catty_qq_ai/__init__.py`，测试 `tests/test_vision_context_images.py`、`tests/test_responses_ws.py`；状态、模块映射、架构和会话索引同步。
-- 用户确认部署后才按既有 `push_zip` 流程交付，再验证真实 QQ 的先发图后 @ 场景。
+- 以生产原文件为基线应用本次三处改动，未携带同工作区任务中心会话的未完成代码；生产入口不含 `task_host` 或 `traced_tool_call`。
+- 部署按既有 `push_zip` 通道完成：`src/catty_qq_ai/__init__.py`、`tests/test_vision_context_images.py`、`tests/test_responses_ws.py`、本文件均 0 跳过，双端 SHA-256 逐项一致（入口 `bc50f411…`、两份测试 `a3117024…`/`0a6c1309…`、本文 `a41ba054…`）。
+- 归档提交 `eedd6fe`（仅入口、两份测试与本文件；入口文件与生产内容逐字节一致，仅 CRLF/LF 差异），已推送到 `origin/master`。共享状态与架构文档因并行会话仍在编辑，留在工作区未单独提交。
+- 远端 Shell 当前被禁用，未在生产执行 `py_compile` 或测试；生产加载与真实 QQ 的“先发图、单独 @”结果待观察。
