@@ -1,4 +1,5 @@
 import asyncio
+import base64
 import copy
 import importlib
 import importlib.util
@@ -7,9 +8,11 @@ import sys
 import tempfile
 import types
 import unittest
+from io import BytesIO
 from pathlib import Path
 from unittest.mock import patch
 
+from PIL import Image
 from websockets.asyncio.server import serve
 
 
@@ -678,6 +681,98 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([item["role"] for item in frames[1][0]["input"]], ["user"])
         self.assertIsNone(frames[2][1])
         self.assertEqual(frames[0][0]["input"][0], frames[2][0]["input"][0])
+
+    async def test_image_bytes_survive_incremental_input_and_reconnect_replay(self):
+        async def handler(ws):
+            async for raw in ws:
+                frame = json.loads(raw)
+                self.frames.append(frame)
+                await ws.send(json.dumps({
+                    "stream_id": frame["stream_id"],
+                    "type": "response.completed",
+                    "response": {
+                        "id": f"resp_{len(self.frames)}",
+                        "status": "completed",
+                        "output": [{
+                            "type": "message", "role": "assistant",
+                            "content": [{"type": "output_text", "text": "ok"}],
+                        }],
+                    },
+                }))
+
+        _, port = await self._serve(handler)
+        transport = responses_ws.ResponsesWebSocketTransport(
+            url=f"ws://127.0.0.1:{port}/v1/responses", api_key="TOKEN",
+        )
+        self.addAsyncCleanup(transport.close)
+        config = types.SimpleNamespace(
+            catty_openai_websocket_store=False,
+            catty_openai_websocket_include=[],
+            catty_openai_websocket_previous_response=True,
+            catty_openai_websocket_stream_id="catty",
+        )
+        image_buffer = BytesIO()
+        Image.new("RGB", (32, 24), (40, 160, 220)).save(image_buffer, format="PNG")
+        image_bytes = image_buffer.getvalue()
+        image_url = "data:image/png;base64," + base64.b64encode(image_bytes).decode("ascii")
+        image_parts = await openai_client.prepare_passthrough_image_parts(config, [image_url])
+        label = "[context image 1] sender=TARGET; previous message"
+        messages = [
+            {"role": "system", "content": "rules"},
+            {"role": "user", "content": "hello"},
+        ]
+        arguments = dict(
+            config=config, base_url="https://api.openai.com/v1/responses",
+            api_key="TOKEN", extra_headers={}, timeout=5, proxy="",
+            dash_stream_id=None, dash_mod=None, scope="group:image-wakeup",
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            cache = responses_ws.ResponseChainCache(Path(directory) / "cache.json", 60)
+            with (
+                patch.object(openai_client, "_get_ws_transport", return_value=transport),
+                patch.object(openai_client, "_get_ws_chain_cache", return_value=cache),
+                patch.object(openai_client, "_get_runtime_config", return_value=None),
+            ):
+                await openai_client._stream_responses_ws_attempt(
+                    payload={"model": "gpt-6.1-terra", "messages": messages}, **arguments,
+                )
+                messages = messages + [
+                    {"role": "assistant", "content": "ok"},
+                    {"role": "user", "content": [
+                        {"type": "text", "text": label}, *image_parts,
+                    ]},
+                ]
+                await openai_client._stream_responses_ws_attempt(
+                    payload={"model": "gpt-6.1-terra", "messages": messages}, **arguments,
+                )
+                messages = messages + [
+                    {"role": "assistant", "content": "ok"},
+                    {"role": "user", "content": "continue"},
+                ]
+                await openai_client._stream_responses_ws_attempt(
+                    payload={"model": "gpt-6.1-terra", "messages": messages}, **arguments,
+                )
+                await transport._drop_connection("test reconnect")
+                await openai_client._stream_responses_ws_attempt(
+                    payload={"model": "gpt-6.1-terra", "messages": messages}, **arguments,
+                )
+
+        self.assertEqual(len(self.frames), 4)
+        self.assertEqual(self.frames[1]["previous_response_id"], "resp_1")
+        self.assertEqual(len(self.frames[1]["input"]), 1)
+        self.assertEqual(self.frames[1]["input"][0]["content"][0]["text"], label)
+        self.assertEqual(self.frames[2]["previous_response_id"], "resp_2")
+        self.assertEqual(self.frames[2]["input"], [{
+            "type": "message", "role": "user",
+            "content": [{"type": "input_text", "text": "continue"}],
+        }])
+        self.assertNotIn("previous_response_id", self.frames[3])
+        for frame in (self.frames[1], self.frames[3]):
+            parts = [part for item in frame["input"] for part in item.get("content", [])]
+            images = [part for part in parts if part.get("type") == "input_image"]
+            self.assertEqual(len(images), 1)
+            self.assertEqual(images[0]["image_url"], image_url)
+            self.assertEqual(base64.b64decode(images[0]["image_url"].split(",", 1)[1]), image_bytes)
 
     async def test_stream_events_and_frame_shape(self):
         async def handler(ws):

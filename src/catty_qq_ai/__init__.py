@@ -4009,6 +4009,7 @@ def _recent_context_images_for_scope(
     exclude_message_ids: set[str] | None = None,
     reference_seq: int | None = None,
     following_user_id: str = "",
+    preceding_user_id: str = "",
 ) -> list[tuple[RecentConversationMessage, str, str, int]]:
     """最近 lookback_messages 条消息里出现过的图, 供主 AI 联系上下文识图。
 
@@ -4022,6 +4023,14 @@ def _recent_context_images_for_scope(
         return []
     newest_seq = recent[-1].seq
     floor_seq = newest_seq - lookback_messages + 1
+    if preceding_user_id:
+        recent = tuple(
+            item for item in recent
+            if item.user_id == preceding_user_id
+            and not item.is_bot
+            and not item.is_self
+            and (reference_seq is None or item.seq < reference_seq)
+        )[-1:]
     now = time.monotonic()
     excluded_urls = {url for url in (exclude_urls or set()) if url}
     excluded_ids = {str(value) for value in (exclude_message_ids or set()) if value}
@@ -7401,6 +7410,17 @@ def _user_requests_context_images(text: str) -> bool:
     value = str(text or "")
     return _references_recent_image(value) or any(
         word in value for word in ("图片", "照片", "截图", "画面", "图中", "这张", "那张", "效果图", "这个效果", "表情包")
+    )
+
+
+def _is_bare_image_wakeup(event: MessageEvent, incoming: ExtractedMessage) -> bool:
+    return bool(
+        isinstance(event, GroupMessageEvent)
+        and incoming.mentioned
+        and not incoming.image_urls
+        and not incoming.has_expression
+        and not incoming.has_voice
+        and not event.get_plaintext().strip()
     )
 
 
@@ -17584,7 +17604,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             (item.seq for item in reversed(_recent_for_image) if _current_message_id and item.message_id == _current_message_id),
             0,
         )
-        _wants_context_image = _user_requests_context_images(incoming.text)
+        _bare_image_wakeup = not _has_quoted_images and _is_bare_image_wakeup(event, incoming)
+        _wants_context_image = _user_requests_context_images(incoming.text) or _bare_image_wakeup
         _wants_following_image = (
             not incoming.image_urls and not _has_quoted_images
             and _user_might_send_following_image(incoming.text)
@@ -17614,6 +17635,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     },
                     reference_seq=_current_image_seq or None,
                     following_user_id=str(event.user_id),
+                    preceding_user_id=str(event.user_id) if _bare_image_wakeup else "",
                 )
                 if not _wants_context_image:
                     context_image_entries = [entry for entry in context_image_entries if entry[3] < 0]

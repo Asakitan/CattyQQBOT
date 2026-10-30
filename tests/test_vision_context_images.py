@@ -50,8 +50,11 @@ def _group_event(
     image_url: str = "",
     image_file: str = "",
     group_id: int = 10001,
+    mention_self: bool = False,
 ) -> GroupMessageEvent:
     segments: list[MessageSegment] = []
+    if mention_self:
+        segments.append(MessageSegment.at(999))
     if image_url:
         segments.append(
             MessageSegment(
@@ -253,6 +256,81 @@ class RecentContextImageTests(unittest.TestCase):
             ),
             [],
         )
+
+    def test_bare_mention_selects_previous_image_from_same_sender(self) -> None:
+        _plugin._remember_recent_conversation_event(
+            _group_event(message_id=1, image_url="https://img/scores.png")
+        )
+        _plugin._remember_recent_conversation_event(
+            _group_event(user_id=30003, message_id=2, image_url="https://img/other.png")
+        )
+        event = _group_event(message_id=3, mention_self=True)
+        incoming = _message_utils.extract_incoming_message("999", event, _plugin.config)
+        self.assertIsNotNone(incoming)
+        _plugin._remember_recent_conversation_event(event, incoming)
+
+        self.assertTrue(_plugin._is_bare_image_wakeup(event, incoming))
+        entries = _plugin._recent_context_images_for_scope(
+            self._scope(), lookback_messages=16, max_images=4,
+            reference_seq=_plugin._recent_conversation_messages[self._scope()][-1].seq,
+            preceding_user_id=str(event.user_id),
+        )
+
+        self.assertEqual([entry[1] for entry in entries], ["https://img/scores.png"])
+        self.assertEqual(entries[0][0].user_id, str(event.user_id))
+        self.assertEqual(entries[0][3], 2)
+
+    def test_bare_mention_does_not_skip_same_sender_text_to_reuse_old_image(self) -> None:
+        _plugin._remember_recent_conversation_event(
+            _group_event(message_id=1, image_url="https://img/old.png")
+        )
+        _plugin._remember_recent_conversation_event(
+            _group_event(message_id=2, text="今天几点下班")
+        )
+        event = _group_event(message_id=3, mention_self=True)
+        _plugin._remember_recent_conversation_event(event)
+
+        entries = _plugin._recent_context_images_for_scope(
+            self._scope(), lookback_messages=16, max_images=4,
+            reference_seq=_plugin._recent_conversation_messages[self._scope()][-1].seq,
+            preceding_user_id=str(event.user_id),
+        )
+
+        self.assertEqual(entries, [])
+
+    def test_bare_mention_does_not_borrow_other_group_or_expired_image(self) -> None:
+        _plugin._remember_recent_conversation_event(
+            _group_event(message_id=1, image_url="https://img/expired.png")
+        )
+        _plugin._recent_conversation_messages[self._scope()][-1].created_at -= 3600.0
+        _plugin._remember_recent_conversation_event(
+            _group_event(message_id=2, image_url="https://img/other-group.png", group_id=555)
+        )
+        event = _group_event(message_id=3, mention_self=True)
+        _plugin._remember_recent_conversation_event(event)
+
+        entries = _plugin._recent_context_images_for_scope(
+            self._scope(), lookback_messages=16, max_images=4, max_age_seconds=1800.0,
+            reference_seq=_plugin._recent_conversation_messages[self._scope()][-1].seq,
+            preceding_user_id=str(event.user_id),
+        )
+
+        self.assertEqual(entries, [])
+
+    def test_mention_with_words_expression_or_image_is_not_bare_wakeup(self) -> None:
+        events = [
+            _group_event(mention_self=True, text="今天几点下班"),
+            _group_event(mention_self=True, image_url="https://img/current.png"),
+            _group_event(),
+        ]
+        expression = _group_event(mention_self=True)
+        expression.message.append(MessageSegment(type="face", data={"id": "182"}))
+        events.append(expression)
+        for event in events:
+            with self.subTest(message=str(event.message)):
+                incoming = _message_utils.extract_incoming_message("999", event, _plugin.config)
+                if incoming is not None:
+                    self.assertFalse(_plugin._is_bare_image_wakeup(event, incoming))
 
     def test_same_url_from_different_senders_retains_both_origins(self) -> None:
         for uid, mid in ((100, 1), (200, 2)):
