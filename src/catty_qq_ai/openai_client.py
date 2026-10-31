@@ -2256,6 +2256,22 @@ def _log_cache_stats(
     except Exception:  # noqa: BLE001
         _hit_scope = ""
     _request_diagnostics = _get_current_cache_request_diagnostics()
+    if _provider == "openai":
+        prompt_details = usage.get("prompt_tokens_details")
+        write_details = prompt_details.get("cache_write_tokens_details") if isinstance(prompt_details, dict) else None
+        write_details = write_details if isinstance(write_details, dict) else {}
+        counts = {
+            label: value if type(value) is int and value >= 0 else "unknown"
+            for label, value in (
+                ("30m", write_details.get("ttl_30m_tokens")),
+                ("12h", write_details.get("ttl_12h_tokens")),
+            )
+        }
+        route = str((_request_diagnostics or {}).get("request_route") or "unknown")
+        _logger.info(
+            f"responses cache writes model={model[:40]} route={route} scope={_hit_scope} "
+            f"write_30m={counts['30m']} write_12h={counts['12h']}"
+        )
     _is_auxiliary = (
         str((_request_diagnostics or {}).get("request_class") or "").strip().lower()
         == "auxiliary"

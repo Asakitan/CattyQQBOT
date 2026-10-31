@@ -12699,6 +12699,10 @@ _EVOLUTION_CMD_RE = re.compile(
     r"^\s*[#/]?(evolve|rollback_evolution)(?:\s+(\d+))?\s*$",
     re.IGNORECASE,
 )
+_PERSONA_EVOLUTION_CMD_RE = re.compile(
+    r"^\s*[#/](?:人格进化|persona_evolve)(?:\s+(.*))?\s*$",
+    re.IGNORECASE,
+)
 
 
 async def _evolution_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -12707,6 +12711,11 @@ async def _evolution_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> 
     text = event_plain_text(event)
     if not text:
         return False
+    persona_match = _PERSONA_EVOLUTION_CMD_RE.match(text)
+    if persona_match:
+        state["evolution_cmd"] = "persona_evolve"
+        state["evolution_arg"] = persona_match.group(1) or ""
+        return True
     m = _EVOLUTION_CMD_RE.match(text)
     if not m:
         return False
@@ -15353,8 +15362,36 @@ async def handle_cognitive_admin(matcher: Matcher, event: MessageEvent, state: T
 
 @evolution_cmd_matcher.handle()
 async def handle_evolution_cmd(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    if not _event_is_owner(event):
+        return
     cmd = str(state.get("evolution_cmd", ""))
     arg = str(state.get("evolution_arg", ""))
+    if cmd == "persona_evolve":
+        if arg.strip():
+            await matcher.finish("用法：/人格进化；只更新当前会话的人格，不接受参数。")
+            return
+        scope = _conversation_queue_key(event)
+        await matcher.send("开始为当前会话的人格生成一次语气更新；不会开启定时进化。")
+        try:
+            result = await _evolve_persona_for_scope(scope)
+        except Exception as exc:
+            logger.warning(f"manual persona evolution failed: {type(exc).__name__}")
+            await matcher.finish("本次人格进化失败，请查看日志。")
+            return
+        results = {
+            "updated": "人格语气已更新；定时进化仍关闭。",
+            "unchanged": "本次语气与现有内容一致；定时进化仍关闭。",
+            "disabled": "人格语气扩展总开关已关闭，本次未生成。",
+            "insufficient_samples": "当前会话缺少足够的本人格回复样本，本次未生成。",
+            "budget_exhausted": "人格进化的今日预算不足，本次未生成。",
+            "route_unavailable": "人格进化模型线路未配置，本次未生成。",
+            "context_limit_unavailable": "人格进化模型上下文额度未配置，本次未生成。",
+            "usage_unconfirmed": "本次用量未确认，未发布新语气。",
+            "invalid_response": "本次模型结果未通过校验，未发布新语气。",
+            "stale": "会话人格或配置已变化，未发布本次结果。",
+        }
+        await matcher.finish(results.get(result, "本次未发布新的人格语气。"))
+        return
     if cmd == "evolve":
         try:
             from .cpu_engine.evolution_pipeline import run_evolution_once
@@ -16575,7 +16612,6 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_cpu_engine_warmup_loop())
     asyncio.create_task(_cpu_engine_routes_watch_loop())
     asyncio.create_task(_cpu_engine_evolution_daily_loop())
-    asyncio.create_task(_persona_evolution_loop())
     _ensure_qzone_bridge_poll_task()
     asyncio.create_task(cache.background_flush_loop())
     asyncio.create_task(_managed_store_flush_loop())
@@ -16702,89 +16738,61 @@ async def _fdj_self_study_loop() -> None:
             )
 
 
-async def _persona_evolution_tick() -> None:
+async def _evolve_persona_for_scope(scope: str) -> str:
     from .persona_evolution_budget import BudgetLedger
     from .persona_evolution_runtime import evolve_once, persona_base_text, scoped_examples
     from .persona_evolution_store import PersonaEvolutionStore
 
     run_config = config
     if not bool(getattr(run_config, "catty_persona_evolution_enabled", True)):
-        return
+        return "disabled"
     daily_limit = int(getattr(run_config, "catty_persona_evolution_daily_token_budget", 30_000_000))
     if daily_limit <= 0:
-        return
-    scopes = sorted(
-        ((scope, list(items)) for scope, items in _recent_conversation_messages.items() if items),
-        key=lambda pair: pair[1][-1].created_at,
-        reverse=True,
+        return "budget_exhausted"
+    persona = _persona_for_scope(scope)
+    name = str(persona.name)
+    identity = _persona_identity(persona)
+    recent = list(_recent_conversation_messages.get(scope, ()))
+    examples = scoped_examples(recent, identity)
+    if not examples:
+        return "insufficient_samples"
+    runtime = persona_runtime
+    base_text = persona_base_text(persona)
+    store = PersonaEvolutionStore(runtime.root)
+    budget_path = Path(run_config.catty_memory_path).expanduser().parent / "persona_evolution_budget.sqlite3"
+
+    def still_current() -> bool:
+        if config is not run_config or persona_runtime is not runtime:
+            return False
+        current = _persona_for_scope(scope)
+        return _persona_identity(current) == identity and persona_base_text(current) == base_text
+
+    async def commit(revision: str | None, style: str) -> bool:
+        async with _persona_config_transition_lock:
+            async with _persona_transition_locks[_base_persona_scope(scope)]:
+                if not still_current():
+                    return False
+                write = asyncio.get_running_loop().run_in_executor(
+                    None, store.save, name, base_text, revision, style,
+                )
+                cancelled = False
+                while True:
+                    try:
+                        saved = await asyncio.shield(write)
+                        break
+                    except asyncio.CancelledError:
+                        cancelled = True
+                if cancelled:
+                    raise asyncio.CancelledError
+                return saved
+
+    ledger = await asyncio.to_thread(BudgetLedger, budget_path, daily_limit=daily_limit)
+    status = await evolve_once(
+        config=run_config, name=name, base_text=base_text, examples=examples,
+        store=store, ledger=ledger, still_current=still_current, commit=commit,
     )
-    attempted: set[str] = set()
-    for scope, recent in scopes:
-        if config is not run_config:
-            break
-        persona = _persona_for_scope(scope)
-        name = str(persona.name)
-        if name in attempted:
-            continue
-        identity = _persona_identity(persona)
-        examples = scoped_examples(recent, identity)
-        if not examples:
-            continue
-        attempted.add(name)
-        runtime = persona_runtime
-        base_text = persona_base_text(persona)
-        store = PersonaEvolutionStore(runtime.root)
-        budget_path = Path(run_config.catty_memory_path).expanduser().parent / "persona_evolution_budget.sqlite3"
-
-        def still_current() -> bool:
-            if config is not run_config or persona_runtime is not runtime:
-                return False
-            current = _persona_for_scope(scope)
-            return _persona_identity(current) == identity and persona_base_text(current) == base_text
-
-        async def commit(revision: str | None, style: str) -> bool:
-            async with _persona_config_transition_lock:
-                async with _persona_transition_locks[_base_persona_scope(scope)]:
-                    if not still_current():
-                        return False
-                    write = asyncio.get_running_loop().run_in_executor(
-                        None, store.save, name, base_text, revision, style,
-                    )
-                    cancelled = False
-                    while True:
-                        try:
-                            saved = await asyncio.shield(write)
-                            break
-                        except asyncio.CancelledError:
-                            cancelled = True
-                    if cancelled:
-                        raise asyncio.CancelledError
-                    return saved
-
-        try:
-            ledger = await asyncio.to_thread(BudgetLedger, budget_path, daily_limit=daily_limit)
-            status = await evolve_once(
-                config=run_config, name=name, base_text=base_text, examples=examples,
-                store=store, ledger=ledger, still_current=still_current, commit=commit,
-            )
-            logger.info(f"persona evolution: persona={name} status={status}")
-        except asyncio.CancelledError:
-            raise
-        except Exception as exc:
-            logger.warning(f"persona evolution failed: {type(exc).__name__}")
-
-
-async def _persona_evolution_loop() -> None:
-    await asyncio.sleep(90.0)
-    while True:
-        try:
-            await _persona_evolution_tick()
-        except asyncio.CancelledError:
-            raise
-        except Exception as exc:
-            logger.warning(f"persona evolution tick failed: {type(exc).__name__}")
-        interval = float(getattr(config, "catty_persona_evolution_interval_minutes", 120.0) or 120.0)
-        await asyncio.sleep(max(interval, 10.0) * 60.0)
+    logger.info(f"manual persona evolution: persona={name} status={status}")
+    return status
 
 
 async def _data_backup_loop() -> None:

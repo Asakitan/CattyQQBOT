@@ -221,18 +221,18 @@ class PersonaEvolutionRuntimeTests(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(runtime._reported_total({"usage": {}}))
 
 
-def load_tick(namespace):
+def load_scope_evolution(namespace):
     source = ROOT / "src" / "catty_qq_ai" / "__init__.py"
     parsed = ast.parse(source.read_text(encoding="utf-8"))
-    node = next(item for item in parsed.body if isinstance(item, ast.AsyncFunctionDef) and item.name == "_persona_evolution_tick")
+    node = next(item for item in parsed.body if isinstance(item, ast.AsyncFunctionDef) and item.name == "_evolve_persona_for_scope")
     module = ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[]))
     values = {"__package__": PACKAGE, "asyncio": asyncio, "Path": Path, **namespace}
     exec(compile(module, str(source), "exec"), values)
-    return values["_persona_evolution_tick"]
+    return values["_evolve_persona_for_scope"]
 
 
-class PersonaEvolutionTickTests(unittest.IsolatedAsyncioTestCase):
-    async def test_real_tick_shares_card_by_persona_without_touching_other_card(self):
+class PersonaEvolutionScopeTests(unittest.IsolatedAsyncioTestCase):
+    async def test_manual_run_only_updates_the_requested_scope_persona(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             config = types.SimpleNamespace(
@@ -259,14 +259,17 @@ class PersonaEvolutionTickTests(unittest.IsolatedAsyncioTestCase):
                 data = json.loads(kwargs["messages"][1]["content"])
                 return response(style=f"{data['name']} 的自然语气")
             with patch.object(runtime, "_post_chat_completion_raw", request):
-                await load_tick(namespace)()
+                evolve_scope = load_scope_evolution(namespace)
+                self.assertEqual(await evolve_scope("group:a"), "updated")
+                self.assertFalse((manager.root / "evolution" / "fadianji.json").exists())
+                self.assertEqual(await evolve_scope("private:b"), "updated")
             store = store_module.PersonaEvolutionStore(manager.root)
             self.assertEqual(store.load("catty", runtime.persona_base_text(active["group:a"]))[0], "catty 的自然语气")
             self.assertEqual(store.load("fadianji", runtime.persona_base_text(active["private:b"]))[0], "fadianji 的自然语气")
             self.assertFalse((manager.root / "evolution" / "other.json").exists())
             self.assertEqual(budget_module.BudgetLedger(root / "persona_evolution_budget.sqlite3").used_today(), 20)
 
-    async def test_real_tick_checks_current_role_after_response(self):
+    async def test_manual_run_checks_current_role_after_response(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             config = types.SimpleNamespace(
@@ -294,7 +297,7 @@ class PersonaEvolutionTickTests(unittest.IsolatedAsyncioTestCase):
                 return response()
 
             with patch.object(runtime, "_post_chat_completion_raw", request):
-                task = asyncio.create_task(load_tick(namespace)())
+                task = asyncio.create_task(load_scope_evolution(namespace)("group:a"))
                 await asyncio.wait_for(started.wait(), 5)
                 active["group:a"] = persona("fadianji")
                 finish.set()
@@ -335,7 +338,7 @@ class PersonaEvolutionTickTests(unittest.IsolatedAsyncioTestCase):
 
             with patch.object(runtime, "_post_chat_completion_raw", AsyncMock(return_value=response())), \
                  patch.object(store_module.PersonaEvolutionStore, "save", delayed_save):
-                task = asyncio.create_task(load_tick(namespace)())
+                task = asyncio.create_task(load_scope_evolution(namespace)("group:a"))
                 try:
                     self.assertTrue(await asyncio.to_thread(entered.wait, 5))
                     task.cancel()

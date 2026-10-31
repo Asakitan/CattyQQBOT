@@ -23,7 +23,7 @@
 | `tests/test_shared_persona_integration.py` / `tests/test_fdj_proactive_integration.py` | AST 夹具加载真实 `_extract_incoming_with_voice`，恢复共享人格判门验证 → `docs/session-log/session-26.md` | 已部署；本地与生产两模块各 69 项全通过，消除 42 个 NameError，生产源码与断言不变 |
 | `tools.py` / `__init__.py` / 回执与文件、语音测试 | 单工具排队计数、生成回执、UUID 缓存路径、发送后清理、取消后原会话投递 → `docs/session-log/session-25.md` | 已部署；本地相关 316 项、远端 132 项及插件加载通过；当时夹具错误已在会话 26 修复并部署 |
 | `web_search.py` / `tools.py` / `__init__.py` / 三份搜图与投递测试 | 图片来源保留、同字节视觉核验、按搜索排名选择、语音无文字时继续发图 → `docs/tool-contracts.md`、`docs/session-log/session-24.md` | 已随会话 25 部署；初次八组 152 项通过，真实模型/QQ 未测 |
-| `openai_client.py` / `__init__.py` / Responses 与 prompt audit 测试 | 官方受支持请求从首轮固定12h，特别关心规则移出静态区，保留历史锚点与增量续聊 → `docs/architecture.md`、`docs/session-log/session-33.md` | 已部署；本地和生产各163项中154通过、9跳过，五文件哈希一致；旧动态计数不再用于请求 |
+| `openai_client.py` / `__init__.py` / Responses 与 prompt audit 测试 | 官方受支持请求从首轮固定12h，特别关心规则移出静态区，保留历史锚点与增量续聊 → `docs/architecture.md`、`docs/session-log/session-33.md` | 已部署；双端各154通过/9跳过；修复后87条策略均12h，34条保留写入回执推导30m为0；进化段前置导致部分重写，两次同前缀归零仍未归因 |
 | `voice_reply.py` / `tools.py` / `__init__.py` / 语音与投递测试 | 明确语音请求、群冷却、待发送与已送达区分、失败回落 → `docs/voice-candidates.md`、`docs/session-log/session-21.md` | 三份源码已部署、双端哈希一致；远端语音 49 项通过，生产已加载重连 |
 | `src/catty_qq_ai/openai_client.py` / `persona_admin.py` / `persona_evolution_runtime.py` / `skill_runtime.py` / `config.py` / loader / `config.json` | 主/识图 terra，判门/总结/NSFW 与后台杂活统一 deepseek；次要 AI 线路 `audit_ai → ai_fallback → 主 ai` → `docs/architecture.md`、`docs/session-log/session-20.md` | 已部署；19 文件双端 SHA-256 一致，远端 104 项通过；生产已加载重连 |
 | `src/catty_self_repair/` / `scripts/catty_self_repair.py` / `scripts/catty_hot_reload.py` / `bot.py` / loader / 配置 JSON | 日志触发、独立或缺省主 AI 路由、周预算、源码候选验证、启动健康检查与发布回滚 → `docs/self-repair.md` | 已部署并在生产与本地启用；模板默认关闭；远端隔离 195 项、部署后 160 项通过 |
@@ -31,7 +31,7 @@
 | `tmp/voice-training-20261028-01/` / `tmp/voice-quality-20261028-01/{phrase_ab,whole_refine,acoustic_ab}.py` | 双音色权重与等响度试听 → `models/voice/`、`docs/voice-candidates.md` | 用户首选文件02的4轮候选，selection.json已记录；端到端多句待验，未替换或部署 |
 | `tools.py` / `__init__.py` / `catty_sim_chat.py` | 当前会话消息、水位、短等待与自然收尾 → `docs/tool-contracts.md`、`docs/architecture.md` | 已部署并合入；远端哈希一致 |
 | `insight_memory.py` / `purpose_ledger.py` / `fdj_proactive_runtime.py` / `data_backup.py` | 会话/人格隔离的活跃记忆、完整档及目标证据回执 → `docs/persona-runtime.md`、`docs/fadianji-proactive.md` | 已部署并合入；远端哈希一致 |
-| `persona_evolution_budget.py` / `persona_evolution_store.py` / `persona_evolution_runtime.py` / `__init__.py` | 当前人格语气扩展、写回校验及共享日预算 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署并合入；本地新增 49 项、远端新增 49 项通过；真实模型未测 |
+| `persona_evolution_budget.py` / `persona_evolution_store.py` / `persona_evolution_runtime.py` / `__init__.py` | 主人命令触发当前会话人格的一次进化、原扩展保留、写回校验与共享日预算 → `docs/persona-runtime.md`、`docs/session-log/session-36.md` | 手动模式已部署；双端各196项中187通过、9跳过，五文件哈希一致；启动定时循环已移除 |
 | `personas/` / `persona_store.py` / `__init__.py` / `fadianji_harness.py` / `fdj_proactive_runtime.py` / `fadianji_style_critic.py` | 共享群聊判门、证据、风格及主动调度；人格能力和 NSFW 状态隔离 → `docs/persona-runtime.md`、`docs/architecture.md` | 已部署；本地 1367 项、远端 299 项通过（另 1 项既有短路径断言失败） |
 | `src/catty_qq_ai/code_sandbox.py` | Python 工作区、产物快照、运行日志 → `docs/code-sandbox.md` | 已部署；Python 3.14 路径检查已上线 |
 | `src/catty_qq_ai/tools.py` / `file_formats.py` | 工具 schema、真实文件格式、图片与群历史引用 → `docs/tool-contracts.md` | 技能接线已部署 |
@@ -82,6 +82,9 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-10-31 | 关闭人格自动进化，新增主人一次性命令和原始30m/12h回执日志 | 已部署；双端各196项中187通过、9跳过，五文件一致；09:27重载重连，未调用真实进化模型，见会话36 |
+| 2026-10-31 | 只读核对30m历史柱与低命中来源，未改运行时 | 最后30m策略为10月30日15:11:23；34条保留写入回执推导均12h；两次进化后换前缀、一次摘要回退，另两次同前缀归零待定位 |
+| 2026-10-30 | 只读复核固定12h后的38次自然主请求，不改运行时 | 热群25次加权93.19%、稳定私聊10次90.94%、三个其他scope冷写；17:40同组零命中仍待定位，见会话33 |
 | 2026-10-30 | @ 后 10 秒收集、群聊人物上下文及无来源异文字符检查 | 已部署；双端各 281 项通过，九文件一致；三份缓存/传输文件字节未变，见 session35 |
 | 2026-10-30 | 主动接话按需读取当前群原图；限定两项只读工具，保留独立 DeepSeek 生成 | 已部署；本地与生产各 138 项通过，七文件一致，插件加载及重连正常；见 session34 |
 | 2026-10-30 | 首轮统一12h，特别关心条件规则移到边界后；滚动断点不再触发WS全量重放 | 已部署；本地和生产各163项中154通过、9跳过，五文件哈希一致；未发模型测试请求，见session33 |
