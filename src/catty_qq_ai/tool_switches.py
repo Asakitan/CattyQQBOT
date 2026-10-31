@@ -93,10 +93,14 @@ class ToolSwitches:
             + json.dumps(flags, ensure_ascii=True, separators=(",", ":"))
         )
 
-    def update_messages(self, messages: list[dict[str, Any]]) -> None:
+    def update_messages(self, messages: list[dict[str, Any]], *, append_only: bool = False) -> None:
         marker = {"role": "system", "name": SWITCH_MESSAGE_NAME, "content": self.marker()}
         for index in range(len(messages) - 1, -1, -1):
             if messages[index].get("role") == "system" and messages[index].get("name") == SWITCH_MESSAGE_NAME:
+                if messages[index] == marker:
+                    return
+                if append_only:
+                    break
                 messages[index] = marker
                 return
         messages.append(marker)

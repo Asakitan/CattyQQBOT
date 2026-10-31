@@ -1,4 +1,5 @@
 from pathlib import Path
+import ast
 import asyncio
 import importlib.util
 import json
@@ -11,8 +12,9 @@ import unittest
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import nonebot
-from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message, MessageSegment, PokeNotifyEvent
+from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message, MessageSegment, PokeNotifyEvent, PrivateMessageEvent
 from nonebot.adapters.onebot.v11.event import Sender
+from nonebot.exception import FinishedException
 
 
 _ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +62,16 @@ def _group_event(message_id: int = 123, text: str = "猫猫看这个", *, mentio
         font=0,
         sender=Sender(user_id=20002, nickname="群友", card="群友"),
         group_id=10001,
+    )
+
+
+def _private_event() -> PrivateMessageEvent:
+    message = Message("在吗")
+    return PrivateMessageEvent(
+        time=0, self_id=999, post_type="message", sub_type="friend",
+        user_id=20002, message_type="private", message_id=456,
+        message=message, original_message=message, raw_message="在吗", font=0,
+        sender=Sender(user_id=20002, nickname="群友"),
     )
 
 
@@ -850,31 +862,51 @@ class ReplyMessageCompositionTests(unittest.TestCase):
             _plugin._should_quote_chat_reply(event, loose_incoming, group_filter_context="批量窗口")
         )
 
-    def test_direct_trigger_no_reply_is_forced_without_local_critic(self) -> None:
-        event = _group_event(456)
-        incoming = _plugin.extract_incoming_message(str(event.self_id), event, _plugin.config)
-        assert incoming is not None
-        original_chat_completion = _plugin.chat_completion
-
-        async def fake_chat_completion(config, messages):
-            return "来啦主人～这个人家接住了喵"
-
-        _plugin.config.catty_local_critic_enabled = False
+    def test_no_reply_is_preserved_for_direct_group_and_private_events(self) -> None:
         _plugin.config.catty_local_critic_force_direct_reply = True
-        _plugin.chat_completion = fake_chat_completion
-        try:
-            reply = asyncio.run(
-                _plugin._apply_local_critic(
-                    event,
-                    incoming,
-                    [],
-                    _plugin.NO_REPLY_MARKER,
-                )
-            )
-        finally:
-            _plugin.chat_completion = original_chat_completion
+        for event in (_group_event(456), _private_event()):
+            incoming = _plugin.extract_incoming_message(str(event.self_id), event, _plugin.config)
+            assert incoming is not None
+            for critic_enabled in (False, True):
+                with self.subTest(scope=event.message_type, critic=critic_enabled):
+                    _plugin.config.catty_local_critic_enabled = critic_enabled
+                    with (
+                        patch.object(_plugin, "chat_completion", new_callable=AsyncMock) as completion,
+                        patch.object(_plugin, "_local_critic_completion_with_retry", new_callable=AsyncMock) as critic,
+                        patch.object(_plugin, "_fallback_required_reply") as fallback,
+                    ):
+                        reply = asyncio.run(_plugin._apply_local_critic(
+                            event, incoming, [], _plugin.NO_REPLY_MARKER,
+                        ))
+                    self.assertEqual(reply, _plugin.NO_REPLY_MARKER)
+                    completion.assert_not_awaited()
+                    critic.assert_not_awaited()
+                    fallback.assert_not_called()
 
-        self.assertEqual(reply, "来啦你～这个人家接住了喵")
+    def test_private_no_reply_delivery_guard_finishes_without_message(self) -> None:
+        tree = ast.parse(Path(_plugin.__file__).read_text(encoding="utf-8-sig"))
+        handler = next(node for node in tree.body if isinstance(node, ast.AsyncFunctionDef) and node.name == "handle_chat")
+        guards = [node for node in ast.walk(handler) if isinstance(node, ast.If)
+                  and isinstance(node.test, ast.Call) and isinstance(node.test.func, ast.Name)
+                  and node.test.func.id == "_is_no_reply"]
+        self.assertEqual(len(guards), 1)
+        probe = ast.parse("async def check_guard():\n    pass\n")
+        probe.body[0].body = guards
+        finish = AsyncMock(side_effect=FinishedException)
+        completion = AsyncMock(side_effect=AssertionError("NO_REPLY must not be rewritten"))
+        namespace = {
+            **vars(_plugin), "reply": _plugin.NO_REPLY_MARKER,
+            "event": _private_event(), "incoming": types.SimpleNamespace(text="在吗"),
+            "state": {}, "_turn_tool_audit_result_texts": [],
+            "matcher": types.SimpleNamespace(finish=finish),
+            "chat_completion": completion,
+            "_bot_reply_continuation_remaining": lambda event: 0,
+        }
+        exec(compile(ast.fix_missing_locations(probe), "<no-reply-delivery>", "exec"), namespace)
+        with self.assertRaises(FinishedException):
+            asyncio.run(namespace["check_guard"]())
+        finish.assert_awaited_once_with()
+        completion.assert_not_awaited()
 
 
 class GroupIncreaseWelcomeTests(unittest.IsolatedAsyncioTestCase):

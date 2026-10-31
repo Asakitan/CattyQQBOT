@@ -109,16 +109,6 @@ class PersonaReplyFallbackTests(unittest.TestCase):
                         expected,
                     )
 
-            forced = _plugin._force_reply_messages(
-                event,
-                [{"role": "user", "content": "在吗"}],
-                {},
-            )
-            self.assertEqual(
-                forced[-1]["content"],
-                context.render(context.catalog.force_reply_instruction),
-            )
-
     def test_fadianji_finalizer_falls_back_after_catty_tic_strip(self) -> None:
         fadianji = _personas.get_persona("fadianji")
 

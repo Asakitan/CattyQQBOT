@@ -8142,11 +8142,10 @@ async def _build_messages(
         _st_manager.register_static("catty_self_study", self_study_context, order=602)
     if star_resonance_static_context and star_resonance_static_context.strip():
         try:
-            from .prompt_cache import _SCOPE_PREFIX_SENTINEL as _STAR_SENTINEL
             _st_manager.register_static(
                 "catty_star_resonance_static",
-                _STAR_SENTINEL + star_resonance_static_context,
-                order=164,
+                star_resonance_static_context,
+                order=609,
             )
         except Exception as _star_static_exc:  # noqa: BLE001
             logger.debug(f"catty_star_resonance_static register failed: {_star_static_exc}")
@@ -8345,11 +8344,20 @@ async def _build_messages(
         ) or ""
         if _hints_ctx.strip():
             _st_manager.register_static("catty_action_hints", _hints_ctx, order=799)
-    # 主人 2026-10-25: 拆条规则每轮贴脸重申 (order 810 = 最后一段, 类似 tools 每轮都在场)
     try:
+        from .openai_client import _effective_main_model, _is_responses_endpoint, _responses_support_explicit_cache
+        _split_reminder = _reply_split_reminder_prompt()
+        if (
+            _split_reminder
+            and "catty_reply_split_rules" not in (getattr(config, "catty_prompts_disabled", None) or [])
+            and _is_responses_endpoint(config.catty_openai_base_url)
+            and _responses_support_explicit_cache(config.catty_openai_base_url, _effective_main_model(config))
+        ):
+            _st_manager.register_static("catty_reply_split_rules", _split_reminder, order=164)
+            _split_reminder = "【本轮气泡写法】按前文完整规则分条；技术、列表、公式、代码保持原排版。"
         _st_manager.register_static(
             "catty_reply_split_reminder",
-            _reply_split_reminder_prompt(),
+            _split_reminder,
             order=810,
         )
     except Exception as exc:  # noqa: BLE001
@@ -10676,21 +10684,6 @@ def _local_critic_rewrite_messages(
     ]
 
 
-def _force_reply_messages(
-    event: MessageEvent,
-    messages: list[ChatMessage],
-    audit_result: dict[str, object],
-) -> list[ChatMessage]:
-    # 这种 system 状态描述, 改成中性"再回一次"指令; 内部 audit 状态走 logger。
-    hint = str(audit_result.get("rewrite_hint") or audit_result.get("reason") or "").strip()
-    logger.debug(f"force_reply: re-prompting after NO_REPLY draft, hint={hint[:200]!r}")
-    reply_context = _persona_reply_context_for_event(event)
-    force_prompt = reply_context.render(reply_context.catalog.force_reply_instruction)
-    if hint:
-        force_prompt += f"\n方向: {hint[:500]}"
-    return [*messages, {"role": "assistant", "content": NO_REPLY_MARKER}, {"role": "user", "content": force_prompt}]
-
-
 def _fallback_required_reply(event: MessageEvent, incoming: ExtractedMessage) -> str:
     reply_context = _persona_reply_context_for_event(event)
     catalog = reply_context.catalog
@@ -10875,43 +10868,6 @@ def _save_assistant_training_sample(
             file.write(json.dumps(record, ensure_ascii=False) + "\n")
     except OSError as exc:
         logger.warning(f"Failed to save assistant training sample: {exc}")
-
-
-async def _resolve_no_reply(
-    event: MessageEvent,
-    incoming: ExtractedMessage,
-    messages: list[ChatMessage],
-    reply: str,
-) -> str:
-    audit_result: dict[str, object] = {
-        "should_reply": True,
-        "confidence": 100,
-        "reason": "main model returned NO_REPLY after local reply gate approved",
-        "rewrite_hint": "",
-    }
-
-    final_reply = reply
-    try:
-        rewritten = await chat_completion(config, _force_reply_messages(event, messages, audit_result))
-    except OpenAICompatibleError as exc:
-        logger.warning(f"Forced reply API error: {exc}")
-    except httpx.HTTPError as exc:
-        logger.warning(f"Forced reply transport error: {exc}")
-    else:
-        rewritten = _sanitize_residual_markers(rewritten)
-        try:
-            from . import regex_script as _rs
-            rewritten = _rs.apply_output_scripts(rewritten, is_owner=_event_is_owner(event))
-        except Exception as exc:  # noqa: BLE001
-            logger.debug(f"regex_script apply_output_scripts failed (forced reply): {exc}")
-        if rewritten.strip() and not _is_no_reply(rewritten):
-            final_reply = rewritten
-
-    if _is_no_reply(final_reply):
-        final_reply = _fallback_required_reply(event, incoming)
-
-    _save_local_critic_sample(event, incoming, reply, {"reply_gate_rewrite": audit_result}, final_reply)
-    return final_reply
 
 
 def _placeholder_prompt(is_owner: bool) -> str:
@@ -11147,8 +11103,6 @@ async def _apply_local_critic(
     if not reply.strip():
         reply = NO_REPLY_MARKER
     if _is_no_reply(reply):
-        if _force_direct_reply_enabled(event, incoming):
-            return await _resolve_no_reply(event, incoming, messages, reply)
         return reply
     if not _local_critic_post_check_enabled():
         return reply
@@ -18945,46 +18899,31 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 
         reply, emoji_query = _extract_emoji_query(reply)
         if _is_no_reply(reply):
-            # 主人 2026-05-29 P1b: 私聊**绝不**因 NO_REPLY 冻结历史。
-            # 旧问题: 私聊主模型返回 NO_REPLY → matcher.finish() 在 _append_history 前退出
-            # → 那轮 user/assistant 都不写 history → 跨天"早上好"后历史仍冻在昨晚 NSFW。
-            # _apply_local_critic 的 force_direct 路径(7137-7139)只在 catty_local_critic_force_direct_reply
-            # 为真时才兜底; 这里再加一道与该 flag 解耦的私聊硬保险, 强制兜底回复后**落到
-            # 下方 _append_history**(11111) 把这轮记进 history, 解冻历史。
-            # 群聊维持原 NO_REPLY 抑制(不强回, 直接 finish 不写 history), 防刷屏不变。
-            if isinstance(event, PrivateMessageEvent):
-                logger.info(
-                    "Main AI chose NO_REPLY in private chat → forcing reply (P1b: "
-                    f"never freeze private history): user={event.user_id} "
-                    f"text={incoming.text[:80]!r}"
-                )
-                reply = _sanitize_reply_text_for_output(await _resolve_no_reply(event, incoming, messages, reply))
-            if _is_no_reply(reply):
-                if state.get("catty_session_closing"):
-                    # closing intent 但主 AI 没回道别 → 也关窗退出会话跟踪
+            if state.get("catty_session_closing"):
+                # closing intent 但主 AI 没回道别 → 也关窗退出会话跟踪
+                _close_bot_reply_continuation(event)
+            elif state.get("catty_recent_bot_continuation"):
+                if _persona_for_event(event).followup_reply_budget is not None:
+                    # 机机: 续聊消息跟机机没关系 (主 AI 判 NO_REPLY) → 立即结束
                     _close_bot_reply_continuation(event)
-                elif state.get("catty_recent_bot_continuation"):
-                    if _persona_for_event(event).followup_reply_budget is not None:
-                        # 机机: 续聊消息跟机机没关系 (主 AI 判 NO_REPLY) → 立即结束
-                        _close_bot_reply_continuation(event)
-                    else:
-                        _decrement_bot_reply_continuation(event)
-                logger.info(
-                    f"Main AI chose NO_REPLY after wake context: user={event.user_id} "
-                    f"group={getattr(event, 'group_id', '')} "
-                    f"continuation_remaining={_bot_reply_continuation_remaining(event)} "
-                    f"text={incoming.text[:80]!r}"
-                )
-                if _turn_tool_audit_result_texts:
-                    try:
-                        _tool_telemetry.mark_reply_used(
-                            history_key,
-                            turn_id=_telemetry_turn_id,
-                            usage="not_used",
-                        )
-                    except Exception:
-                        pass
-                await matcher.finish()
+                else:
+                    _decrement_bot_reply_continuation(event)
+            logger.info(
+                f"Main AI chose NO_REPLY after wake context: user={event.user_id} "
+                f"group={getattr(event, 'group_id', '')} "
+                f"continuation_remaining={_bot_reply_continuation_remaining(event)} "
+                f"text={incoming.text[:80]!r}"
+            )
+            if _turn_tool_audit_result_texts:
+                try:
+                    _tool_telemetry.mark_reply_used(
+                        history_key,
+                        turn_id=_telemetry_turn_id,
+                        usage="not_used",
+                    )
+                except Exception:
+                    pass
+            await matcher.finish()
 
         reply = _sanitize_reply_text_for_output(reply)
         # 机机: 出站前先把（小声）式注解剥掉再进 history/训练样本, 防模型从自己历史里学回去

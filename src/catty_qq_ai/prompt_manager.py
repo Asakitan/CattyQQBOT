@@ -81,6 +81,7 @@ _PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
     # 主人 2026-10-25: 拆条提醒每轮贴脸 (order 810 = 最高 order, 倒序 trim 会先丢它);
     # boundary 被 trim 会让所有动态段并回 cache prefix。两者都不许被 budget trim。
     "catty_reply_split_reminder",
+    "catty_reply_split_rules",
     "catty_cache_boundary",
 })
 

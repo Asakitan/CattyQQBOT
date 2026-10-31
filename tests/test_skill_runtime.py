@@ -157,7 +157,7 @@ class SkillTurnTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("private_extra", encoded)
         schemas = self.turn.schemas()
         self.assertEqual([item["function"]["name"] for item in schemas], ["catty_skill_load"])
-        self.assertEqual(schemas[0]["function"]["parameters"]["properties"]["id"]["enum"], ["python-venv"])
+        self.assertNotIn("enum", schemas[0]["function"]["parameters"]["properties"]["id"])
         loaded = await self.turn.load({"id": "python-venv"})
         self.assertEqual(loaded["sha256"], sha)
         self.assertEqual("".join(loaded["skill"]["instructions"]), _definition()["body"])
@@ -188,8 +188,25 @@ class SkillTurnTests(unittest.IsolatedAsyncioTestCase):
         await self.turn.search({"query": "no-match"})
         await self.turn.save({"receipt_ids": [receipt]})
         self.assertEqual([s["function"]["name"] for s in before], [s["function"]["name"] for s in self.turn.schemas()])
-        before[0]["function"]["parameters"]["properties"]["id"]["enum"].clear()
-        self.assertEqual(self.turn.schemas()[0]["function"]["parameters"]["properties"]["id"]["enum"], ["python-venv"])
+        before[0]["function"]["parameters"]["properties"]["id"]["maxLength"] = 0
+        self.assertEqual(self.turn.schemas()[0]["function"]["parameters"]["properties"]["id"]["maxLength"], 64)
+
+    async def test_schema_bytes_ignore_candidates_receipts_and_loaded_versions(self):
+        self.store.put()
+        second = self.make_turn()
+        await self.turn.search({"query": "Python"})
+        await second.search({"query": "Python"})
+        first_receipt = self.receipt(self.turn)
+        second_receipt = self.receipt(second)
+        self.assertNotEqual(first_receipt, second_receipt)
+        original = self.turn.schemas()
+        self.assertEqual(original, second.schemas())
+        await self.turn.load({"id": "python-venv"})
+        self.assertEqual(self.turn.schemas(), original)
+        self.assertNotIn(first_receipt, json.dumps(original))
+        self.assertNotIn("python-venv", json.dumps(original))
+        self.assertFalse((await second.save({"receipt_ids": [first_receipt]}))["ok"])
+        self.assertFalse((await second.save({"receipt_ids": [second_receipt], "existing_id": "python-venv"}))["ok"])
 
     async def test_fetch_ledger_requires_actual_success_body_and_public_url(self):
         invalid = [
@@ -235,6 +252,15 @@ class SkillTurnTests(unittest.IsolatedAsyncioTestCase):
         fourth = self.turn.observe_tool_result("catty_fetch_url", _fetch(url="https://example.com/four"))
         self.assertNotIn("skill_receipt_id", fourth)
         self.assertEqual(len(self.turn._ledger), 3)
+
+    async def test_nullable_update_target_creates_without_overwrite_permission(self):
+        receipt = self.receipt()
+        parameters = self.turn.schemas()[0]["function"]["parameters"]
+        self.assertEqual(parameters["properties"]["existing_id"]["type"], ["string", "null"])
+        self.assertEqual(set(parameters["required"]), {"receipt_ids", "existing_id"})
+        result = await self.turn.save({"receipt_ids": [receipt], "existing_id": None})
+        self.assertTrue(result["ok"], result)
+        self.assertEqual(self.store.save_calls[-1][1:], (False, None))
 
     async def test_plain_text_without_title_gets_hostname_not_invented_authority(self):
         receipt = self.receipt(title="")

@@ -2,6 +2,8 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `openai_client.py` / `skill_runtime.py` / `tool_switches.py` / `prompt_manager.py` / `nlu/prompt_compressor.py` / `__init__.py` / 九份缓存测试 | 追加工具/能力说明、固定schema、共享自动key、条件资料与格式缓存、预算及回执诊断 → `docs/skill-runtime.md`、`docs/session-log/session-39.md` | 已部署；17份代码/测试一致，生产361项中352通过、9跳过；97–98%待自然流量验证 |
+| `__init__.py` / `tests/test_reply_message_composition.py` / `tests/test_persona_reply_fallbacks.py` | 尊重群聊、显式唤醒及私聊的NO_REPLY，移除强制补答；缓存审查 → `docs/persona-runtime.md`、`docs/session-log/session-37.md` | 已随缓存修复部署；本地和生产消息出口48项、人格目录10项通过 |
 | `mention_followup.py` / `__init__.py` / `fadianji_style_critic.py` / 收集、人物、图片与风格测试 | @ 后 10 秒同人消息归并、群聊多人物上下文、异常短句审校 → `docs/persona-runtime.md`、`docs/session-log/session-35.md` | 已部署；本地与生产各 281 项通过，九文件一致，16:54:47 重连；缓存实现与人格正文未改 |
 | `fdj_proactive_runtime.py` / `fdj_proactive_prompt.py` / `openai_client.py` / `__init__.py` / 主动与客户端测试 | 当前群图片引用、按需只读看图、DeepSeek 工具闭环 → `docs/fadianji-proactive.md`、`docs/session-log/session-34.md` | 已部署；本地和生产各 138 项通过，七文件一致，16:39:18 重连；真实模型/QQ 未测 |
 | `task_host.py` / `knowledge_base.py` / `__init__.py` / 附件与共享人格测试 | 明确准入、双向文件顺序、限时元数据/等待、模型文件标识与格式识别 → `docs/agent-tasks.md`、`docs/session-log/session-32.md` | 已部署；本地与生产各 142 项通过，六文件双端哈希一致；配置与旧知识库未改 |
@@ -82,6 +84,9 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-11-01 | 部署缓存前缀、追加工具及NO_REPLY修复 | 17份代码/测试一致；生产361项中352通过、9跳过，00:14:14重连；真实命中与QQ效果待观察，见会话39 |
+| 2026-11-01 | 修复动态工具/指南与条件游戏前缀漂移，合并自动缓存核算，减少重复说明并补预算与诊断 | 本地351项中342通过、9跳过，15份修改文件无诊断；未发收费请求或部署，见会话38 |
+| 2026-11-01 | NO_REPLY不再被强制补答，完成缓存路径与生产样本审查 | 本地58项通过；真实转换器复现撤工具、条件游戏前缀、随机技能回执schema；未调用云模型或部署，见会话37 |
 | 2026-10-31 | 关闭人格自动进化，新增主人一次性命令和原始30m/12h回执日志 | 已部署；双端各196项中187通过、9跳过，五文件一致；09:27重载重连，未调用真实进化模型，见会话36 |
 | 2026-10-31 | 只读核对30m历史柱与低命中来源，未改运行时 | 最后30m策略为10月30日15:11:23；34条保留写入回执推导均12h；两次进化后换前缀、一次摘要回退，另两次同前缀归零待定位 |
 | 2026-10-30 | 只读复核固定12h后的38次自然主请求，不改运行时 | 热群25次加权93.19%、稳定私聊10次90.94%、三个其他scope冷写；17:40同组零命中仍待定位，见会话33 |

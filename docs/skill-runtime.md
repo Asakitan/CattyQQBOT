@@ -6,18 +6,22 @@
 
 已部署到 `D:/CattyQQAI`，运行时26项、存储28项、工具15项、真实循环披露6项在本地和远端Python3.14.5均通过；未调用真实模型专项验证提炼质量。部署记录见 [会话07](session-log/session-07.md)。
 
+2026-11-01缓存更新已部署：固定按需schema，官方Responses以尾部`additional_tools`和能力说明加载新增定义，保留首轮工具前缀。本地与生产运行时28项、披露闭环9项及相关HTTP/WS回归通过；候选、来源与更新权限不放宽，见[会话39](session-log/session-39.md)。
+
 ## 公开接口与接入次序
 
 - `SkillTurn(config: Any, *, completion_fn=None)`：每个逻辑聊天轮次创建一个实例；没有 `scope`、`user`、`messages` 参数。构造及 `schemas()` 不打开、不扫描技能库。不要跨轮复用实例。
 - `await search(args: dict) -> dict`：参数 `query`（非空、最多 500 字符），可选 `limit`。默认最多3个候选，可配置到5个，且受回执长度上限限制；仅保留当轮实际返回的 `id → sha256` 资格，最多24个累计候选。候选不含正文，即便底层意外返回正文也会投影丢弃。
 - `await load(args: dict) -> dict`：仅接受 `id`，必须为当轮候选，并按检索时 SHA 重新读存储。成功回执为 `{ok, skill: {id, title, description, keywords, body_chars, updated_at, sources, instructions}, sha256}`，不返回 `body`。只有成功交付回执才记录更新资格。
 - `observe_tool_result(name: str, result: dict) -> dict`：同步；由可信执行器在实际工具完成后调用，返回新字典，不修改原结果。成功公共抓页结果增加不透明的 `skill_receipt_id`；输入中伪造的同名字段总是移除。
-- `await save(args: dict) -> dict`：仅接受 `receipt_ids`（1～3 个不重复的当轮回执）及可选 `existing_id`。不接受主模型提交的正文、URL、时间、来源或 `shareable`。返回有界 `{ok, status, id, sha256}`，失败为 `{ok: false, error}`。
+- `await save(args: dict) -> dict`：仅接受 `receipt_ids`（1～3 个不重复的当轮回执）及 `existing_id`。当前工具schema要求新建传null、更新传本轮已加载ID；运行时仍兼容旧调用省略该字段。不接受主模型提交的正文、URL、时间、来源或 `shareable`。返回有界 `{ok, status, id, sha256}`，失败为 `{ok: false, error}`。
 - `schemas() -> list[dict]`：OpenAI-compatible 动态 function schema，仅含当前开放的 `catty_skill_load` / `catty_skill_save`，永不包含 `catty_skill_search`。
 
 调用方首轮仅注册技能类入口 `catty_skill_search`；其它非技能工具的既有策略不由本模块变更。搜索有候选后再将动态 load schema 送给主模型，由模型选择是否加载。只有实际成功的公共 `catty_fetch_url` 正文才开放 save。没有匹配知识时仅提示“搜索→抓公共页”，不捏造技能、不自行联网、不强制工具调用，`tool_choice` 保持 `auto`。
 
-动态工具名称一旦开放，在本轮保持；后续空搜索、保存完成不会删除名称，避免 native 历史工具名失配。候选、SHA、来源及更新资格每次仍校验。`id` / `receipt_ids` 的枚举值来自当前实例；schema 每次返回独立结构，调用方修改它不能改资格账本。配置关闭优先于名称保持规则。
+动态工具名称一旦开放，在本轮保持；后续空搜索、保存完成不会删除名称，避免 native 历史工具名失配。候选、SHA、来源及更新资格每次仍校验。schema只保留固定类型、长度和结构，不携带候选/回执/版本枚举；ID必须从真实检索或抓页回执中选择，不能用宽字符串schema绕过执行器资格。每次返回独立结构，调用方修改它不能改账本。配置关闭优先于名称保持规则。
+
+官方受支持Responses保留首轮顶层工具目录，新增load/save定义仅在开放时追加到输入尾部，能力说明同步追加；不是提前把两项工具塞进静态表。权限撤销或同名定义变化则按新目录重建。普通线路仍逐轮更新顶层工具。追加定义计入原token预算，超时/限额收尾保留定义与回执且禁用执行器。
 
 ## 正文及回执预算
 
@@ -75,4 +79,4 @@ URL 检查不重新联网：拒绝非 HTTP(S)、凭据 userinfo、本地/私网 
 
 也可单独执行：`E:/Py/python.exe -B -X utf8 -m unittest discover -s tests -p test_skill_runtime.py -v`。
 
-专项测试覆盖无扫描构造、空搜索、检索不泄露正文、候选 enum、load SHA、动态名称保持、观察结果非原地修改、失败/假来源/跨轮拒绝、正文/URL/时间参数注入、公共字段与 ContextVar 隔离、无 title 资料、显式 PII/凭据拒绝、分享 false/无效 JSON、默认蒸馏恢复、超时取消无写、并发重复幂等、更新 SHA 冲突、下轮全局复用，以及通过**真实现有 history serializer**保留 6000 字正文。另有真实 `SkillStore` 临时目录往返，不能用双桩全绿代替合同兼容验证。
+专项测试覆盖无扫描构造、空搜索、检索不泄露正文、固定schema/候选资格、load SHA、动态名称保持、观察结果非原地修改、失败/假来源/跨轮拒绝、正文/URL/时间参数注入、公共字段与 ContextVar 隔离、无 title 资料、显式 PII/凭据拒绝、分享 false/无效 JSON、默认蒸馏恢复、超时取消无写、并发重复幂等、更新 SHA 冲突、下轮全局复用，以及通过**真实现有 history serializer**保留 6000 字正文。另有真实 `SkillStore` 临时目录往返，不能用双桩全绿代替合同兼容验证。

@@ -282,7 +282,7 @@ class CacheCohortTests(unittest.TestCase):
                 try:
                     with patch.object(client._logger, "info") as logged:
                         client._log_cache_stats(
-                            {"usage": {"prompt_tokens": 182468, "prompt_tokens_details": details}},
+                            {"id": "resp_fixture", "usage": {"prompt_tokens": 182468, "prompt_tokens_details": details}},
                             "gpt-6.1-terra", base_url="https://api.openai.com/v1/responses",
                         )
                 finally:
@@ -292,6 +292,7 @@ class CacheCohortTests(unittest.TestCase):
                 self.assertEqual(len(receipts), 1)
                 self.assertIn("route=receipt_test", receipts[0])
                 self.assertIn(expected, receipts[0])
+                self.assertIn("response_id=resp_fixture", receipts[0])
 
     def test_auxiliary_usage_stays_out_of_shared_rolling_metrics(self) -> None:
         diagnostics = {
@@ -494,6 +495,32 @@ class CacheCohortTests(unittest.TestCase):
             },
         }]
         self.assertEqual(client._wire_tool_hash(openai_shape), client._wire_tool_hash(anthropic_shape))
+
+    def test_new_responses_share_automatic_key_without_changing_explicit_keys(self) -> None:
+        endpoint = "https://api.openai.com/v1/responses"
+        model = "gpt-6.1-terra"
+        for scope in ("group:TARGET_A", "group:TARGET_B", "private:TARGET", ""):
+            with self.subTest(scope=scope):
+                payload = {}
+                client._apply_openai_prompt_cache_key(payload, base_url=endpoint, model=model, scope=scope)
+                self.assertEqual(payload, {"prompt_cache_key": "catty:shared"})
+        payload = {"prompt_cache_key": "explicit-customer-key"}
+        client._apply_openai_prompt_cache_key(payload, base_url=endpoint, model=model, scope="group:TARGET")
+        self.assertEqual(payload["prompt_cache_key"], "explicit-customer-key")
+
+    def test_legacy_and_blocked_cache_keys_keep_existing_rules(self) -> None:
+        for endpoint, model in (
+            ("https://api.openai.com/v1/responses", "gpt-5.5"),
+            ("https://api.openai.com/v1/chat/completions", "gpt-6.1-terra"),
+        ):
+            with self.subTest(endpoint=endpoint, model=model):
+                payload = {}
+                client._apply_openai_prompt_cache_key(payload, base_url=endpoint, model=model, scope="group:TARGET")
+                self.assertEqual(payload["prompt_cache_key"], "catty:group:TARGET")
+                with patch.object(client, "_PROMPT_CACHE_KEY_BLOCKED", {f"{endpoint}|{model}"}):
+                    blocked = {}
+                    client._apply_openai_prompt_cache_key(blocked, base_url=endpoint, model=model, scope="group:TARGET")
+                    self.assertEqual(blocked, {})
 
     def test_deepseek_payload_still_has_no_user_or_prompt_cache_key(self) -> None:
         captured: list[dict] = []

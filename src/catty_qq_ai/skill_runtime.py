@@ -343,18 +343,19 @@ class SkillTurn:
         if self._load_open:
             result.append(_schema(
                 "catty_skill_load", "加载本轮检索候选的完整通用技能；是否加载由你判断，正文仅此步提供。",
-                {"id": {"type": "string", "enum": list(self._candidates)}}, ["id"],
+                {"id": {"type": "string", "minLength": 1, "maxLength": 64,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}}, ["id"],
             ))
         if self._save_open and self._learning_enabled():
             properties: dict[str, Any] = {
-                "receipt_ids": {"type": "array", "items": {"type": "string", "enum": list(self._ledger)},
+                "receipt_ids": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 128},
                                 "minItems": 1, "maxItems": 3, "uniqueItems": True},
+                "existing_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 64,
+                                "description": "新建时传 null；仅更新本轮已经加载的技能，使用已加载版本的 SHA 防冲突。"},
             }
-            if self._loaded:
-                properties["existing_id"] = {"type": "string", "enum": list(self._loaded), "description": "仅更新本轮已经加载的技能，使用已加载版本的 SHA 防冲突。"}
             result.append(_schema(
                 "catty_skill_save", "可选：根据本轮公共抓页回执提炼可共享技能；只传回执，不能提交正文、URL或时间。抓取不等于权威，私人信息不得共享。",
-                properties, ["receipt_ids"],
+                properties, ["receipt_ids", "existing_id"],
             ))
         return result
 
@@ -413,7 +414,7 @@ class SkillTurn:
         if len(set(receipts)) != len(receipts) or any(item not in self._ledger for item in receipts):
             return _error("unknown_or_duplicate_receipt")
         existing_id = args.get("existing_id")
-        if "existing_id" in args and (not _valid_id(existing_id) or existing_id not in self._loaded):
+        if existing_id is not None and (not _valid_id(existing_id) or existing_id not in self._loaded):
             return _error("update_requires_loaded_skill")
         expected_sha = self._loaded.get(existing_id) if existing_id else None
         key = (tuple(sorted(receipts)), existing_id, expected_sha)

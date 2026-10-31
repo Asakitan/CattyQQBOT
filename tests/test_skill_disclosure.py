@@ -93,12 +93,109 @@ class SkillDisclosureTests(unittest.IsolatedAsyncioTestCase):
         self.executed.append(name)
         return await tools.execute_tool_call(name, args_json, self.ctx, allowed_names=self.allowed)
 
-    async def run_loop(self):
+    async def run_loop(self, messages=None, **overrides):
         return await client.chat_completion_with_tools(
-            self.cfg, [{"role": "user", "content": "验证缓存，PRIVATE_CHAT_SENTINEL"}],
+            self.cfg, messages if messages is not None else [{"role": "user", "content": "验证缓存，PRIVATE_CHAT_SENTINEL"}],
             tools=self.base, tool_executor=self.executor, tools_provider=self.provider,
-            max_rounds=8, max_calls_per_round=3, tool_choice="auto",
+            max_rounds=overrides.pop("max_rounds", 8), max_calls_per_round=3, tool_choice="auto", **overrides,
         )
+
+    async def test_responses_append_skill_definitions_and_keep_cached_prefix_for_final_none(self):
+        self.cfg.catty_openai_base_url = "https://api.openai.com/v1/responses"
+        self.cfg.catty_openai_model = "gpt-6.1-terra"
+        self.assertTrue(self.store.save_verified(definition())["ok"])
+        messages = [
+            {"role": "system", "content": "Stable fixture. " * 2000},
+            {"role": "system", "content": "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "验证缓存"},
+        ]
+        intent.append_context_request_hint(messages, names(self.base))
+        state = client.ToolReplyState()
+        bodies = []
+
+        async def post(**kwargs):
+            self.wire.append(deepcopy(kwargs))
+            with patch.object(client, "_apply_responses_history_anchor"):
+                body = client._payload_to_responses_body(
+                    {"model": self.cfg.catty_openai_model, "messages": kwargs["messages"],
+                     "tools": kwargs["tools"], "tool_choice": kwargs["tool_choice"]},
+                    stream=True, cache_stable_prefix=True,
+                )
+            if bodies:
+                self.assertEqual(client._responses_cache_settings(body), client._responses_cache_settings(bodies[0]))
+                self.assertEqual(body["input"][:len(bodies[-1]["input"])], bodies[-1]["input"])
+            bodies.append(deepcopy(body))
+            self.assertEqual(kwargs["tools"], self.base)
+            if len(self.wire) == 1:
+                self.assertFalse(any(item.get("type") == "additional_tools" for item in body["input"]))
+                return response(("catty_skill_search", {"query": "HTTP缓存"}))
+            additions = [item for item in body["input"] if item.get("type") == "additional_tools"]
+            self.assertEqual(len(additions), 1)
+            self.assertEqual(additions[0]["tools"][0]["name"], "catty_skill_load")
+            if len(self.wire) == 2:
+                return response(("catty_skill_load", {"id": "cache-validation"}))
+            self.assertEqual(kwargs["tool_choice"], "none")
+            self.assertEqual(sum(message.get("role") == "system" and message.get("content") == client._tool_result_follow_up_hint()
+                                 for message in kwargs["messages"]), 1)
+            return final()
+
+        self.raw.side_effect = post
+        self.assertEqual(await self.run_loop(messages, max_rounds=2, reply_state=state), "已完成")
+        self.assertEqual(self.executed, ["catty_skill_search", "catty_skill_load"])
+        self.assertEqual(state.recovery_tools(), self.base)
+        self.assertTrue(any(item.get("type") == "additional_tools" for item in state.recovery_messages()))
+
+    async def test_responses_fetch_then_save_appends_stable_nullable_definition(self):
+        self.cfg.catty_openai_base_url = "https://api.openai.com/v1/responses"
+        self.cfg.catty_openai_model = "gpt-6.1-terra"
+
+        async def generate(config, messages):
+            self.assertNotIn("PRIVATE_CHAT_SENTINEL", json.dumps(messages))
+            result = definition()
+            result.pop("sources")
+            result["shareable"] = True
+            return json.dumps(result, ensure_ascii=False)
+
+        async def fetch(args, ctx):
+            return {"ok": True, "url": "https://example.org/cache", "status_code": 200,
+                    "title": "Cache reference", "text": "Public reference fixture."}
+
+        self.ctx.skill_turn = runtime.SkillTurn(self.cfg, completion_fn=generate)
+
+        async def post(**kwargs):
+            self.wire.append(deepcopy(kwargs))
+            self.assertEqual(kwargs["tools"], self.base)
+            if len(self.wire) == 1:
+                return response(("catty_fetch_url", {"url": "https://example.org/cache"}))
+            addition = next(message for message in kwargs["messages"] if message.get("type") == "additional_tools")
+            self.assertEqual(addition["tools"][0]["name"], "catty_skill_save")
+            parameters = addition["tools"][0]["parameters"]
+            self.assertEqual(parameters["properties"]["existing_id"]["type"], ["string", "null"])
+            self.assertEqual(set(parameters["required"]), {"receipt_ids", "existing_id"})
+            receipt = json.loads(next(message["content"] for message in reversed(kwargs["messages"]) if message.get("role") == "tool"))
+            if len(self.wire) == 2:
+                return response(("catty_skill_save", {"receipt_ids": [receipt["skill_receipt_id"]], "existing_id": None}))
+            self.assertTrue(receipt["ok"], receipt)
+            return final()
+
+        self.raw.side_effect = post
+        with patch.dict(tools._EXECUTORS, {"catty_fetch_url": fetch}):
+            self.assertEqual(await self.run_loop(), "已完成")
+        self.assertEqual(self.executed, ["catty_fetch_url", "catty_skill_save"])
+
+    def test_responses_catalog_rebuilds_for_revoked_or_changed_definitions(self):
+        first = [{"type": "function", "function": {"name": "lookup", "description": "original"}}]
+        loaded = {"type": "function", "function": {"name": "loaded"}}
+        catalog = client._ResponsesToolCatalog()
+        history = [{"role": "user", "content": "TARGET"}]
+        self.assertEqual(catalog.refresh(history, first), first)
+        self.assertEqual(catalog.refresh(history, first + [loaded]), first)
+        self.assertEqual(history[-1]["type"], "additional_tools")
+        self.assertEqual(catalog.refresh(history, first), first)
+        self.assertFalse(any(item.get("type") == "additional_tools" for item in history))
+        changed = deepcopy(first)
+        changed[0]["function"]["description"] = "updated"
+        self.assertEqual(catalog.refresh(history, changed), changed)
 
     async def test_search_then_selection_loads_complete_body_only_after_choice(self):
         self.assertTrue(self.store.save_verified(definition())["ok"])

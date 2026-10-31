@@ -478,15 +478,19 @@ class ResponsesWSTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([tool["name"] for tool in frames[0][0]["tools"]], [tool["name"] for tool in frames[1][0]["tools"]])
         self.assertNotEqual(frames[0][0]["tools"], frames[1][0]["tools"])
 
-    async def test_real_tool_loop_replays_for_redaction_or_new_capabilities(self):
+    async def test_real_tool_loop_replays_redaction_but_appends_new_capabilities(self):
         for arguments, changed in (('{"token":"SECRET_VALUE"}', False), (' { "query": "TARGET" } ', True)):
             with self.subTest(redacted=not changed):
                 frames = await self._run_real_tool_loop(arguments, change_tools=changed)
-                self.assertIsNone(frames[1][1])
                 self.assertNotIn("SECRET_VALUE", json.dumps(frames[1][0]))
                 if changed:
-                    self.assertIn("本轮提供 catty_skill_load", frames[1][0]["input"][0]["content"][0]["text"])
+                    self.assertEqual(frames[1][1], "resp_1")
+                    self.assertEqual(frames[0][0]["tools"], frames[1][0]["tools"])
+                    additions = [item for item in frames[1][0]["input"] if item["type"] == "additional_tools"]
+                    self.assertEqual(additions[0]["tools"][0]["name"], "catty_skill_load")
+                    self.assertIn("本轮提供 catty_skill_load", json.dumps(frames[1][0]["input"], ensure_ascii=False))
                 else:
+                    self.assertIsNone(frames[1][1])
                     calls = [item for item in frames[1][0]["input"] if item["type"] == "function_call"]
                     self.assertIn("<redacted>", calls[0]["arguments"])
 

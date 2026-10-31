@@ -6,7 +6,9 @@ import copy
 from pathlib import Path
 import re
 import unittest
-from types import SimpleNamespace
+from types import ModuleType, SimpleNamespace
+from unittest.mock import Mock, patch
+import sys
 
 
 _ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +67,45 @@ class ReplySplitReminderTests(unittest.TestCase):
         source = _INIT_PATH.read_text(encoding="utf-8")
         self.assertIn('"catty_reply_split_reminder"', source)
         self.assertIn("order=810", source)
+
+    def test_responses_cache_full_rules_and_keep_short_turn_reminder(self) -> None:
+        tree = ast.parse(_INIT_PATH.read_text(encoding="utf-8"))
+        builder = next(node for node in tree.body if isinstance(node, ast.AsyncFunctionDef) and node.name == "_build_messages")
+        registration = next(node for node in ast.walk(builder) if isinstance(node, ast.Try)
+                            and any(isinstance(child, ast.Constant) and child.value == "catty_reply_split_rules"
+                                    for child in ast.walk(node)))
+        package = ModuleType("_split_cache_fixture")
+        package.__path__ = []
+        client = ModuleType(package.__name__ + ".openai_client")
+        client._effective_main_model = lambda config: config.catty_openai_model
+        client._is_responses_endpoint = lambda endpoint: endpoint.endswith("/responses")
+        client._responses_support_explicit_cache = lambda endpoint, model: endpoint.startswith("https://api.openai.com/") and model == "gpt-6.1-terra"
+        executable = ast.fix_missing_locations(ast.Module(body=[copy.deepcopy(registration)], type_ignores=[]))
+        for endpoint, model, disabled, cached in (
+            ("https://api.openai.com/v1/responses", "gpt-6.1-terra", [], True),
+            ("https://api.openai.com/v1/responses", "gpt-5.5", [], False),
+            ("https://api.deepseek.com/v1", "deepseek-chat", [], False),
+            ("https://api.openai.com/v1/responses", "gpt-6.1-terra", ["catty_reply_split_rules"], False),
+        ):
+            with self.subTest(endpoint=endpoint, model=model, disabled=disabled):
+                manager = Mock()
+                namespace = {
+                    "__package__": package.__name__, "_st_manager": manager,
+                    "config": SimpleNamespace(catty_openai_base_url=endpoint, catty_openai_model=model, catty_prompts_disabled=disabled),
+                    "_reply_split_reminder_prompt": _REMINDER, "logger": Mock(),
+                }
+                with patch.dict(sys.modules, {package.__name__: package, client.__name__: client}):
+                    exec(compile(executable, str(_INIT_PATH), "exec"), namespace)
+                calls = manager.register_static.call_args_list
+                if cached:
+                    self.assertEqual(calls[0].args, ("catty_reply_split_rules", _REMINDER()))
+                    self.assertEqual(calls[0].kwargs["order"], 164)
+                    self.assertLess(len(calls[-1].args[1]), len(_REMINDER()))
+                else:
+                    self.assertEqual(len(calls), 1)
+                    self.assertEqual(calls[0].args[1], _REMINDER())
+                self.assertEqual(calls[-1].args[0], "catty_reply_split_reminder")
+                self.assertEqual(calls[-1].kwargs["order"], 810)
 
     def test_history_keeps_own_marker(self) -> None:
         source = _INIT_PATH.read_text(encoding="utf-8")

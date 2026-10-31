@@ -202,6 +202,11 @@ def _msg_text(msg: Any) -> str:
 
 def count_message_tokens(message: Any) -> int:
     """Estimate one wire/history message using the existing tokenizer path."""
+    if isinstance(message, dict) and message.get("type") == "additional_tools":
+        import json
+        return count_tokens(json.dumps(
+            message.get("tools") or [], ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+        ))
     return count_tokens(_msg_text(message))
 
 

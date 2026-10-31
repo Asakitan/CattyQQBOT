@@ -82,6 +82,20 @@ class ToolSwitchTests(unittest.TestCase):
         first.apply('{"disable":["catty_look_image"]}')
         self.assertIsNone(second.denial("catty_look_image"))
 
+    def test_append_only_marker_keeps_sent_prefix_and_skips_identical_updates(self):
+        state = switches.ToolSwitches("main")
+        state.refresh(self.catalog)
+        messages = [{"role": "user", "content": "TARGET"}]
+        state.update_messages(messages, append_only=True)
+        original = copy.deepcopy(messages)
+        state.apply('{"disable":["catty_web_search"]}')
+        state.update_messages(messages, append_only=True)
+        self.assertEqual(messages[:len(original)], original)
+        self.assertEqual(len(messages), 3)
+        self.assertIn('"off":["catty_web_search"]', messages[-1]["content"])
+        state.update_messages(messages, append_only=True)
+        self.assertEqual(len(messages), 3)
+
 
 if __name__ == "__main__":
     unittest.main()

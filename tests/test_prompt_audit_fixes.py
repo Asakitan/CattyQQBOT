@@ -151,5 +151,29 @@ class SpecialCareCacheBoundaryTests(unittest.TestCase):
                     manager.register_static.assert_not_called()
 
 
+class ConditionalGameCacheBoundaryTests(unittest.TestCase):
+    def test_topic_selected_game_reference_stays_after_static_boundary(self):
+        source_path = _SOURCE.with_name("__init__.py")
+        tree = ast.parse(source_path.read_text(encoding="utf-8"))
+        builder = next(node for node in tree.body
+                       if isinstance(node, ast.AsyncFunctionDef) and node.name == "_build_messages")
+        registration = next(node for node in ast.walk(builder)
+                            if isinstance(node, ast.If) and isinstance(node.test, ast.BoolOp)
+                            and any(isinstance(child, ast.Constant) and child.value == "catty_star_resonance_static"
+                                    for child in ast.walk(node)))
+        executable = ast.fix_missing_locations(ast.Module(body=[copy.deepcopy(registration)], type_ignores=[]))
+        for context in ("", " ", "unchanged selected game reference"):
+            with self.subTest(context=context):
+                manager = Mock()
+                namespace = {"star_resonance_static_context": context, "_st_manager": manager, "logger": Mock()}
+                exec(compile(executable, str(source_path), "exec"), namespace)
+                if context.strip():
+                    manager.register_static.assert_called_once_with(
+                        "catty_star_resonance_static", context, order=609,
+                    )
+                else:
+                    manager.register_static.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()

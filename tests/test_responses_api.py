@@ -615,6 +615,55 @@ class _FakeSseResponse:
 
 
 class StreamResponsesAttemptTests(unittest.TestCase):
+    def test_http_pipeline_keeps_appended_tools_and_shared_scope_accounting(self) -> None:
+        response = MagicMock(status_code=200)
+        response.json.return_value = {"id": "resp_fixture", "status": "completed", "output": [], "usage": {}}
+        fake_client = MagicMock()
+        fake_client.__aenter__ = AsyncMock(return_value=fake_client)
+        fake_client.__aexit__ = AsyncMock(return_value=False)
+        fake_client.post = AsyncMock(return_value=response)
+        config = types.SimpleNamespace(
+            catty_openai_websocket_enabled=False, catty_openai_prompt_cache_key_enabled=True,
+            catty_session_context_enabled=False,
+        )
+        messages = [
+            {"role": "system", "content": "stable <<<CACHE_BOUNDARY:catty_stable_prefix>>>"},
+            {"role": "user", "content": "TARGET"},
+            {"role": "system", "content": "current facts"},
+        ]
+        root_tools = [{"type": "function", "function": {"name": "search", "parameters": {"type": "object", "properties": {}}}}]
+        addition = {"type": "additional_tools", "role": "developer", "tools": [
+            {"type": "function", "name": "load", "parameters": {"type": "object", "properties": {}}},
+        ]}
+        bodies = []
+        with (
+            patch.object(_client, "_get_runtime_config", return_value=config),
+            patch.object(_client, "_http_client", return_value=fake_client),
+            patch.object(_client, "_apply_responses_history_anchor"),
+            patch.object(_client, "_log_cache_stats"),
+        ):
+            for scope, current in (
+                ("group:TARGET_A", messages),
+                ("group:TARGET_A", [*messages, addition]),
+                ("group:TARGET_B", messages),
+            ):
+                token = _client.set_current_scope_key(scope)
+                try:
+                    asyncio.run(_client._post_chat_completion_raw(
+                        base_url="https://api.openai.com/v1/responses", api_key="TOKEN", model="gpt-6.1-terra",
+                        messages=copy.deepcopy(current), timeout=5, proxy="", temperature=None,
+                        max_tokens=64, extra_headers={}, extra_body={}, tools=root_tools,
+                        stream=False, max_attempts=1,
+                    ))
+                finally:
+                    _client.reset_current_scope_key(token)
+                bodies.append(copy.deepcopy(fake_client.post.await_args.kwargs["json"]))
+        self.assertEqual(bodies[0]["prompt_cache_key"], "catty:shared")
+        self.assertEqual(_client._responses_cache_settings(bodies[0]), _client._responses_cache_settings(bodies[1]))
+        self.assertEqual(bodies[1]["input"][:len(bodies[0]["input"])], bodies[0]["input"])
+        self.assertEqual(bodies[1]["input"][-1], addition)
+        self.assertEqual(bodies[0], bodies[2])
+
     def test_native_streaming_sends_explicit_cache_boundary(self) -> None:
         payload = {
             "model": "gpt-6.1-terra",

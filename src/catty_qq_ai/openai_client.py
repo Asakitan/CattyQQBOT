@@ -1645,6 +1645,17 @@ async def _post_anthropic_native_chat(
 # (主人 2026-07-06 openai-claude-95 §三: 严格中转可能不认 unknown 参数)
 _PROMPT_CACHE_KEY_BLOCKED: set[str] = set()
 
+def _apply_openai_prompt_cache_key(
+    payload: dict[str, Any], *, base_url: str, model: str, scope: str,
+) -> None:
+    """Keep explicit keys; share automatic accounting on supported Responses."""
+    if f"{base_url}|{model}" in _PROMPT_CACHE_KEY_BLOCKED:
+        return
+    if _is_responses_endpoint(base_url) and _responses_support_explicit_cache(base_url, model):
+        payload.setdefault("prompt_cache_key", "catty:shared")
+    elif scope:
+        payload.setdefault("prompt_cache_key", f"catty:{scope}")
+
 # Responses WebSocket 单例：连接/缓存都跨轮复用；配置变化时重建。
 _WS_TRANSPORT: Any = None
 _WS_TRANSPORT_KEY: tuple[Any, ...] | None = None
@@ -2268,9 +2279,15 @@ def _log_cache_stats(
             )
         }
         route = str((_request_diagnostics or {}).get("request_route") or "unknown")
+        response_id = str(data.get("id") or "")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,128}", response_id):
+            response_id = "unknown"
+        boundaries = (_request_diagnostics or {}).get("wire_cache_boundary_hashes") or {}
+        boundary_label = ",".join(f"{index}:{digest[:12]}" for index, digest in boundaries.items()) or "-"
         _logger.info(
             f"responses cache writes model={model[:40]} route={route} scope={_hit_scope} "
-            f"write_30m={counts['30m']} write_12h={counts['12h']}"
+            f"write_30m={counts['30m']} write_12h={counts['12h']} "
+            f"response_id={response_id} boundaries={boundary_label}"
         )
     _is_auxiliary = (
         str((_request_diagnostics or {}).get("request_class") or "").strip().lower()
@@ -2780,6 +2797,9 @@ def _messages_to_responses_input(messages: list[ChatMessage]) -> list[dict[str, 
         if not isinstance(raw, dict):
             continue
         role = str(raw.get("role") or "").strip()
+        if raw.get("type") == "additional_tools" and role == "developer":
+            out.append(deepcopy(raw))
+            continue
         content = raw.get("content")
 
         if role == "tool":
@@ -2988,6 +3008,35 @@ def _mark_responses_history_cache(input_items: list[dict[str, Any]]) -> None:
             break
 
 
+class _ResponsesToolCatalog:
+    def __init__(self) -> None:
+        self.root_tools: list[dict[str, Any]] | None = None
+        self.current: dict[str, str] = {}
+        self.context_guide: str | None = None
+
+    def refresh(self, history: list[ChatMessage], tools: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        schemas = _tools_to_responses(tools)
+        current = {
+            str(schema.get("name") or schema.get("type")): json.dumps(schema, ensure_ascii=False, separators=(",", ":"))
+            for schema in schemas
+        }
+        added = [schema for schema in schemas if str(schema.get("name") or schema.get("type")) not in self.current]
+        reset = (
+            self.root_tools is None
+            or any(current.get(name) != value for name, value in self.current.items())
+            or [name for name in current if name in self.current] != list(self.current)
+            or any(schema.get("type") != "function" for schema in added)
+        )
+        if reset:
+            history[:] = [message for message in history if message.get("type") != "additional_tools"]
+            self.root_tools = deepcopy(tools)
+            self.context_guide = None
+        elif added:
+            history.append({"type": "additional_tools", "role": "developer", "tools": deepcopy(added)})
+        self.current = current
+        return self.root_tools
+
+
 def _responses_cache_settings(body: dict[str, Any]) -> dict[str, Any]:
     return {name: value for name, value in body.items() if name not in {
         "input", "stream", "metadata", "max_output_tokens", "store", "include", "tool_choice",
@@ -3018,8 +3067,10 @@ def _apply_responses_history_anchor(body: dict[str, Any]) -> None:
     history = set(users[:-1])
     candidates = []
     digest = hashlib.sha256()
+    prefix_hashes: dict[int, str] = {}
     for index, item in enumerate(items):
         digest.update(item_hash(item).encode("ascii"))
+        prefix_hashes[index] = digest.hexdigest()
         parts = item.get("content") or []
         if index in history and parts and parts[-1].get("type") in {"input_text", "input_image", "input_file"}:
             candidates.append((index, digest.hexdigest()))
@@ -3038,6 +3089,12 @@ def _apply_responses_history_anchor(body: dict[str, Any]) -> None:
         "wire_cache_settings_hash": settings_hash,
         "history_cache_anchor": index,
         "history_cache_anchor_created": created,
+        "wire_cache_boundary_hashes": {
+            str(position): prefix_hashes[position]
+            for position, item in enumerate(items)
+            if any(isinstance(part, dict) and part.get("prompt_cache_breakpoint")
+                   for part in item.get("content") or [])
+        },
     })
     _current_cache_request_diagnostics_var.set(diagnostics)
     _logger.info(
@@ -4076,11 +4133,6 @@ async def _post_chat_completion_raw(
         # include_usage: 让最后一个 chunk 返回 usage (DeepSeek / OpenAI 都支持)
         payload["stream_options"] = {"include_usage": True}
 
-    # === OpenAI 隐式缓存路由亲和 (主人 2026-07-06 openai-claude-95 §三) ===
-    # prompt_cache_key = "catty:{scope}" 让同 scope 请求落同一缓存分片 (官方建议按会话粒度).
-    # 红线: 只对 detect_provider=='openai' 的端点注入 — DeepSeek 绝不发 user/prompt_cache_key
-    # (下方 Round 10 注释是铁证: 传 user 会把 DeepSeek 公共前缀 cache 分裂成独立 namespace).
-    # 双 gate: provider 判别 + config 开关 (默认关); 端点拒收 400/422 时由 retry 层剥参拉黑.
     try:
         from .prompt_cache import detect_provider as _detect_provider
 
@@ -4094,8 +4146,9 @@ async def _post_chat_completion_raw(
                     _pck_scope = get_current_scope_key() or ""
                 except Exception:  # noqa: BLE001
                     _pck_scope = ""
-                if _pck_scope and f"{base_url}|{model}" not in _PROMPT_CACHE_KEY_BLOCKED:
-                    payload["prompt_cache_key"] = f"catty:{_pck_scope}"
+                _apply_openai_prompt_cache_key(
+                    payload, base_url=base_url, model=model, scope=_pck_scope,
+                )
     except Exception:  # noqa: BLE001
         pass
 
@@ -5077,6 +5130,7 @@ async def chat_completion_with_tools(
         return await chat_completion(config, messages)
 
     async def _fallback_or_plain(history: list[ChatMessage]) -> str:
+        history = [message for message in history if message.get("type") != "additional_tools"]
         if worker_context is not None:
             return await _worker_plain(history)
         if (
@@ -5148,6 +5202,7 @@ async def chat_completion_with_tools(
 
     history: list[ChatMessage] = list(messages)
     allowed_tool_names = _allowed_tool_names(tools)
+    request_tools = tools
     if tool_switches is not None:
         original_executor = tool_executor
 
@@ -5164,7 +5219,7 @@ async def chat_completion_with_tools(
     # history 是同一个 list 对象, loop 体 append 后闭包下次调用会读到最新内容。
     async def _dispatch_round(rtc: ToolChoice) -> dict[str, Any]:
         if reply_state is not None:
-            reply_state._remember_request(history, tools)
+            reply_state._remember_request(history, request_tools)
         if _native_route:
             from .anthropic_native_client import post_messages_native_data
             from .prompt_cache import resolve_cache_ttl
@@ -5263,7 +5318,7 @@ async def chat_completion_with_tools(
             max_tokens=config.catty_max_tokens,
             extra_headers=config.catty_openai_extra_headers,
             extra_body=config.catty_openai_extra_body,
-            tools=tools,
+            tools=request_tools,
             tool_choice=rtc,
             enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
             cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
@@ -5284,6 +5339,7 @@ async def chat_completion_with_tools(
         not _native_route and _is_responses_endpoint(_round_base_url)
         and _responses_support_explicit_cache(_round_base_url, _round_model)
     )
+    responses_catalog = _ResponsesToolCatalog() if _preserve_argument_format and not _router_active and not _fallback_mode else None
 
     for round_idx in range(max(1, max_rounds)):
         if tools_provider is not None:
@@ -5292,15 +5348,28 @@ async def chat_completion_with_tools(
                 raise TypeError("tools_provider must return a list")
             tools = deepcopy(next_tools)
             allowed_tool_names = _allowed_tool_names(tools)
+        if tool_switches is not None:
+            tools = tool_switches.refresh(tools)
+            allowed_tool_names = _allowed_tool_names(tools)
+        request_tools = responses_catalog.refresh(history, tools) if responses_catalog is not None else tools
+        if tools_provider is not None:
             from .request_intent import CONTEXT_REQUEST_INTENT_HEADER, append_context_request_hint
             if any(isinstance(m, dict) and m.get("role") == "system"
                    and isinstance(m.get("content"), str)
                    and m["content"].startswith(CONTEXT_REQUEST_INTENT_HEADER + "\n") for m in history):
-                append_context_request_hint(history, allowed_tool_names)
+                if responses_catalog is None:
+                    append_context_request_hint(history, allowed_tool_names)
+                else:
+                    guidance: list[ChatMessage] = []
+                    append_context_request_hint(guidance, allowed_tool_names)
+                    current_guide = guidance[0]["content"]
+                    if responses_catalog.context_guide is None:
+                        append_context_request_hint(history, allowed_tool_names)
+                    elif responses_catalog.context_guide != current_guide:
+                        history.extend(guidance)
+                    responses_catalog.context_guide = current_guide
         if tool_switches is not None:
-            tools = tool_switches.refresh(tools)
-            allowed_tool_names = _allowed_tool_names(tools)
-            tool_switches.update_messages(history)
+            tool_switches.update_messages(history, append_only=responses_catalog is not None)
         round_tool_choice: ToolChoice = tool_choice if round_idx == 0 else "auto"
         # 已知该端点拒绝非 auto tool_choice (如 DeepSeek 思考模型) → 直接用 auto, 省一次必败 400。
         if round_tool_choice != "auto" and _forced_tool_choice_blocked(_force_endpoint_key):
@@ -5521,12 +5590,9 @@ async def chat_completion_with_tools(
 
         # Phase B3: tool result post-process hint — 防 AI 拿到 result 后复读 JSON / 列字段名
         if call_specs:
-            history.append(
-                {
-                    "role": "system",
-                    "content": _tool_result_follow_up_hint(),
-                }
-            )
+            result_hint = {"role": "system", "content": _tool_result_follow_up_hint()}
+            if result_hint not in history:
+                history.append(result_hint)
 
         # 处理被截断的 tool_calls:给模型一条提示,下一轮可以继续
         truncated = max(len(call_specs) - call_limit, 0)
