@@ -350,7 +350,10 @@ class BubbleScheduler:
                 return False
         return 8 <= datetime.fromtimestamp(now, _TZ).hour < 24
 
-    def due(self, group_id: str, now: float, *, human_times: Sequence[float]) -> BubbleCandidate | None:
+    def due(
+        self, group_id: str, now: float, *, human_times: Sequence[float],
+        last_message_at: float | None = None,
+    ) -> BubbleCandidate | None:
         group_id, now = _group_id(group_id), _timestamp(now)
         with _LOCK:
             # Keep issued evidence for skip even after its SEND permission expires;
@@ -363,6 +366,20 @@ class BubbleScheduler:
             policy = BubblePolicy(**state["plan"]["policy"])
             warm = sorted((float(t) for t in human_times if _finite(t)
                            and now - policy.warm_window_seconds <= t <= now), reverse=True)
+            if last_message_at is None:
+                newest_message = warm[0] if warm else 0.0
+            elif _finite(last_message_at) and last_message_at <= now:
+                newest_message = float(last_message_at)
+            else:
+                newest_message = 0.0
+            latest_bubble = max(
+                (attempt["finished_at"] for attempt in state["attempts"]
+                 if attempt["outcome"] == "unknown"),
+                default=state["last_send_at"] or 0.0,
+            )
+            latest_bubble = max(latest_bubble, state["last_send_at"] or 0.0)
+            if latest_bubble and newest_message <= latest_bubble:
+                return None
             active = [t for t in warm if t >= now - policy.active_window_seconds]
             for slot in state["plan"]["slots"]:
                 if slot["state"] != "open" or not slot["at"] <= now < slot["expires_at"]:

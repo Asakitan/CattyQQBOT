@@ -44,10 +44,12 @@ class SurfcoreWiringTests(unittest.TestCase):
                     tasks.append(task)
                 return task
             app._queue_layered_event = queue
-            def event(message_id, text, *, user=7, group=1, reply=None):
+            def event(message_id, text, *, user=7, group=1, reply=None, segment=None):
                 message = Message()
                 if reply is not None:
                     message += MessageSegment.reply(reply)
+                if segment is not None:
+                    message += segment
                 message += MessageSegment.text(text)
                 return GroupMessageEvent(time=0, self_id=999, post_type='message', sub_type='normal',
                     user_id=user, message_type='group', message_id=message_id, message=message,
@@ -105,6 +107,16 @@ class SurfcoreWiringTests(unittest.TestCase):
                 await asyncio.to_thread(app._record_layered_event, memory_path, purpose_path, 'group:1', 'catty',
                     'qq:1', '我喜欢喝咖啡', 'member', '7', '群友', (), old_generation)
                 assert memory.archive('group:1', 'catty') == []
+                runtime = app._get_fdj_proactive_runtime()
+                await observe(event(8, '', group=3, segment=MessageSegment.record('fixture.wav')))
+                assert '3' in runtime._last_group_messages
+                await observe(event(9, '自己的消息', user=999, group=4))
+                assert '4' not in runtime._last_group_messages
+                app._remember_bot_conversation_message('group:5', bot_id='999', text='后来发出的消息', message_id='10')
+                assert '5' in runtime._last_group_messages
+                await app._debug_log_any_notice(bot, types.SimpleNamespace(notice_type='group_upload', group_id=6))
+                await app._debug_log_any_notice(bot, types.SimpleNamespace(notice_type='group_recall', group_id=7))
+                assert '6' in runtime._last_group_messages and '7' not in runtime._last_group_messages
                 print('SURFCORE_REAL_PLUGIN_WIRING_OK')
             asyncio.run(main())
         ''')

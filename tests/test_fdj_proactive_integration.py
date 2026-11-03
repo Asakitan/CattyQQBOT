@@ -380,7 +380,7 @@ class FakeScheduler:
         self.on_claim = None
         self.window = None
 
-    def due(self, group_id, now, *, human_times):
+    def due(self, group_id, now, *, human_times, last_message_at=None):
         self.human_times.append(list(human_times))
         if group_id in self.done or not human_times:
             return None

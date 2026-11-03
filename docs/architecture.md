@@ -254,6 +254,7 @@ OpenAI用量日志新增`responses cache writes`，按实际回执记录`write_3
 - `fdj_proactive.py` 负责每群/UTC+8日计划、活动许可、原子claim与sent/failed/unknown。每个root由一个bot进程拥有，多实例由进程内锁协调；I/O经runtime线程执行。
 - `fdj_proactive_prompt.py` 使用当前人格核心、本群会话段及已渲染的节奏模板，复用统一上下文指导，再限定本次只是主动闲聊。当前群JSON背景最多4000字符，含有界图片引用，不执行历史任务。
 - `fdj_proactive_runtime.FdjProactiveRuntime` 通过显式 `BubbleHost` 注入宿主，不导入插件入口；协调5分钟确认群缓存、活动/人格快照、生成/发送各自限时与回执。每tick最多尝试一群，活跃优先、同层随机；正常新增真人消息允许插嘴，新增bot回复或上下文整批过期则让位。
+- 群活动门槛：群消息观察器、群文件上传通知及已确认的本机群消息记录最近活动时间；确认或未知主动发送后，scheduler 先要求同群新活动才允许生成。单调检查点排除主动消息本身，持久发送状态跨重启保留，活动时间为内存状态；原真人活动条件不变。本增量已部署，验证见 [会话40](session-log/session-40.md)。
 - `BubbleHost.image_tools` 注入当前群快照的消息检索和看图能力；只接受本轮快照中的 `m<seq>#<index>` 图片引用。`chat_completion_proactive` 复用既有工具循环，最多三轮、每轮两次，固定所选 DeepSeek 辅助线；看图回调调用既有视觉链路，描述作为工具回执进入下一轮。无图或关闭视觉/工具时仍为纯文本生成，读取和生成共享原生成超时。
 - 主动看图增量已部署，本地与生产各 138 项定向回归通过，七份源码/测试一致，插件加载与 OneBot 重连正常；真实模型自主选图和 QQ 效果尚未验证。
 - 实际发送前再查作用域、开关、权限、人格、群忙碌、活动许可、slot及日期。先durable claim，再单次安全文本发送；复用 `ReplyDeliveryState`，有效ACK才写recent ledger，不伪造用户turn或给全群开续聊。发送已调用后的异常/取消/超时/畸形ACK均unknown，不重试。

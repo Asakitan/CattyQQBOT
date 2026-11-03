@@ -360,6 +360,40 @@ class BubbleSchedulerTests(unittest.TestCase):
             reopened = BubbleScheduler(self.root, self.policy)
             self.assertEqual(reopened.status("100", now + 1), before)
 
+    def test_next_bubble_waits_for_a_new_human_message_across_restart(self):
+        policy = replace(self.policy, min_gap_seconds=1, active_window_seconds=21600)
+        scheduler = BubbleScheduler(self.root, policy)
+        slots = self.slots(scheduler)
+        candidate, now, attempt = self.claimed(scheduler, slot=slots[0])
+        sent_at = now + 1
+        self.assertTrue(scheduler.finish("100", attempt, "sent", sent_at))
+        later = slots[1]["at"] + 1
+        old_messages = self.hot(now)
+        reopened = BubbleScheduler(self.root, policy)
+        self.assertIsNone(reopened.due("100", later, human_times=old_messages))
+        self.assertIsNone(reopened.due("100", later, human_times=old_messages + [sent_at]))
+        self.assertIsNotNone(reopened.due("100", later, human_times=old_messages + [sent_at + 1]))
+        self.assertIsNotNone(reopened.due("100", later, human_times=old_messages,
+                          last_message_at=sent_at + 1))
+        self.assertIsNone(reopened.due("100", later, human_times=old_messages,
+                           last_message_at=later + 1))
+
+    def test_unconfirmed_send_waits_for_new_activity_but_failure_does_not(self):
+        policy = replace(self.policy, min_gap_seconds=1, failure_backoff_seconds=1,
+                         active_window_seconds=21600)
+        scheduler = BubbleScheduler(self.root, policy)
+        for group, outcome in (("100", "unknown"), ("101", "failed")):
+            slots = self.slots(scheduler, group=group)
+            _, now, attempt = self.claimed(scheduler, group=group, slot=slots[0])
+            self.assertTrue(scheduler.finish(group, attempt, outcome, now + 1))
+            later = slots[1]["at"] + 1
+            old_messages = self.hot(now)
+            reopened = BubbleScheduler(self.root, policy)
+            candidate = reopened.due(group, later, human_times=old_messages)
+            self.assertEqual(candidate is None, outcome == "unknown")
+            self.assertIsNotNone(reopened.due(group, later, human_times=old_messages,
+                                              last_message_at=now + 2))
+
     def test_cross_day_rolling_gap_is_not_reset(self):
         policy = replace(self.policy, min_gap_seconds=86400, night_chance=1)
         scheduler = BubbleScheduler(self.root, policy)

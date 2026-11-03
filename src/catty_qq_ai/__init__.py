@@ -5349,6 +5349,8 @@ def _remember_bot_conversation_message(
             is_self=True,
         )
     )
+    if key.startswith("group:"):
+        _get_fdj_proactive_runtime().record_group_message(key[6:])
     _signal_recent_conversation(key)
 
 
@@ -14139,6 +14141,8 @@ async def _debug_log_any_notice(bot: Bot, event: NoticeEvent) -> None:
         user_id = getattr(event, "user_id", None)
         target_id = getattr(event, "target_id", None)
         group_id = getattr(event, "group_id", None)
+        if notice_type == "group_upload" and group_id is not None:
+            _get_fdj_proactive_runtime().record_group_message(str(group_id))
         logger.debug(
             f"[poke-debug] any notice arrived: cls={type(event).__name__} "
             f"notice_type={notice_type!r} sub_type={sub_type!r} "
@@ -16260,6 +16264,8 @@ async def handle_poke(bot: Bot, event: PokeNotifyEvent, state: T_State) -> None:
 async def observe_memory(bot: Bot, event: MessageEvent) -> None:
     if str(event.user_id) == str(bot.self_id):
         return
+    if isinstance(event, GroupMessageEvent):
+        _get_fdj_proactive_runtime().record_group_message(str(event.group_id))
     _remember_recent_conversation_event(event)
     if isinstance(event, GroupMessageEvent):
         _mention_followups.observe(event, _persona_identity(_persona_for_event(event)))

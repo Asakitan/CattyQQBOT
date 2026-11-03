@@ -85,7 +85,22 @@ class FdjProactiveRuntime:
         self._scheduler: Any = None
         self._scheduler_key: Any = None
         self._groups: dict[str, tuple[float, tuple[str, ...]]] = {}
+        self._last_group_messages: dict[str, float] = {}
+        self._last_group_bubbles: dict[str, float] = {}
         self._tick_lock = asyncio.Lock()
+
+    def record_group_message(self, group_id: str) -> None:
+        self._last_group_messages[str(group_id)] = self.monotonic()
+
+    def _last_message_at(self, group_id: str) -> float:
+        now, mono = self.wall(), self.monotonic()
+        observed = self._last_group_messages.get(group_id)
+        if observed is None or not 0 <= observed <= mono:
+            return 0.0
+        last_bubble = self._last_group_bubbles.get(group_id)
+        if last_bubble is not None and observed <= last_bubble:
+            return 0.0
+        return max(0.0, now - (mono - observed))
 
     def _settings(self, cfg: Any) -> tuple[str, BubblePolicy]:
         return str(getattr(cfg, "catty_fdj_proactive_dir", "data/fdj_proactive")), BubblePolicy(
@@ -269,7 +284,8 @@ class FdjProactiveRuntime:
         rows, humans, latest = self._snapshot(bot, group_id)
         if not humans or (context is not None and not self._context_fresh(context, latest)):
             return await skip("cold")
-        due = await store_call(scheduler.due, group_id, self.wall(), human_times=humans)
+        due = await store_call(scheduler.due, group_id, self.wall(), human_times=humans,
+                               last_message_at=self._last_message_at(group_id))
         if not self._same_slot(candidate, due):
             return await skip("expired")
         status = await store_call(scheduler.status, group_id, self.wall())
@@ -349,7 +365,8 @@ class FdjProactiveRuntime:
         _, humans, current_latest = self._snapshot(bot, group_id)
         if not humans or not self._context_fresh(latest, current_latest) or self.monotonic() - generation_started > timeout:
             return await skip("stale_context")
-        due = await store_call(scheduler.due, group_id, self.wall(), human_times=humans)
+        due = await store_call(scheduler.due, group_id, self.wall(), human_times=humans,
+                               last_message_at=self._last_message_at(group_id))
         if not self._same_slot(candidate, due):
             return await skip("expired")
         if not self._eligible(group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp):
@@ -361,6 +378,7 @@ class FdjProactiveRuntime:
         if not attempt:
             return await skip("claim_rejected")
         outcome = "failed"
+        sent_at = None
         try:
             delivery = ReplyDeliveryState()
 
@@ -392,6 +410,8 @@ class FdjProactiveRuntime:
                 self.host.remember(bot, group_id, text, str(ack["message_id"]))
             finally:
                 reset_turn_persona(token)
+            sent_at = self.wall()
+            self._last_group_bubbles[group_id] = self.monotonic()
             if purpose is not None and self.host.purpose_delivered is not None and _purpose_mentioned(str(purpose.get("text") or ""), text):
                 try:
                     await self.host.purpose_delivered(scope, persona_name, purpose, str(ack["message_id"]))
@@ -404,7 +424,10 @@ class FdjProactiveRuntime:
             _LOG.info("FDJ delivery %s: %s", outcome, type(exc).__name__)
             return False
         finally:
-            await store_call(scheduler.finish, group_id, attempt, outcome, self.wall())
+            if outcome == "unknown":
+                self._last_group_bubbles[group_id] = self.monotonic()
+            await store_call(scheduler.finish, group_id, attempt, outcome,
+                             sent_at if sent_at is not None else self.wall())
 
     async def tick(self) -> bool:
         if self._tick_lock.locked() or not self._enabled():
@@ -437,7 +460,8 @@ class FdjProactiveRuntime:
             self.rng.shuffle(options)
             options.sort(key=lambda row: not row[3])  # active first; random/fair within each tier
             for bot, group_id, humans, _, persona, stamp, persona_stamp, context in options:
-                candidate = await store_call(scheduler.due, group_id, self.wall(), human_times=humans)
+                candidate = await store_call(scheduler.due, group_id, self.wall(), human_times=humans,
+                                             last_message_at=self._last_message_at(group_id))
                 if candidate is not None:
                     return await self.send_candidate(
                         bot, scheduler, candidate, persona=persona, stamp=stamp,

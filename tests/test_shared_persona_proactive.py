@@ -118,7 +118,7 @@ class FakeScheduler:
         self.skips = []
         self.finishes = []
 
-    def due(self, group_id, now, *, human_times):
+    def due(self, group_id, now, *, human_times, last_message_at=None):
         self.due_calls += 1
         if self.on_due is not None:
             self.on_due()
@@ -368,6 +368,69 @@ class SharedRuntimeTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(status["sent"], 1)
             self.send.assert_awaited_once()
             self.remember.assert_called_once()
+
+    async def test_real_scheduler_waits_for_any_new_message_before_generating(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.cfg.catty_fdj_proactive_dir = directory
+            self.cfg.catty_fdj_proactive_daily_min = 5
+            self.cfg.catty_fdj_proactive_daily_max = 5
+            self.cfg.catty_fdj_proactive_active_window_minutes = 360
+            self.clock.wall = datetime(2026, 10, 27, 7, tzinfo=runtime._LOCAL_TIME).timestamp()
+            self.engine.scheduler_factory = runtime.BubbleScheduler
+            scheduler = await self.engine._get_scheduler(self.cfg)
+            status = await runtime.store_call(scheduler.status, "10001", self.clock.wall)
+            first, second = status["slots"][:2]
+            self.clock.advance(first["at"] + 1 - self.clock.wall)
+            self.rows = [self.row(index) for index in range(5)]
+            self.remember.side_effect = lambda *args: self.engine.record_group_message("10001")
+            self.assertTrue(await self.engine.tick())
+            self.clock.advance(second["at"] + 1 - self.clock.wall)
+            self.clock.wall += 1
+            self.assertFalse(await self.engine.tick())
+            self.engine = runtime.FdjProactiveRuntime(
+                self.host, wall=lambda: self.clock.wall, monotonic=lambda: self.clock.mono,
+                rng=random.Random(4),
+            )
+            self.assertFalse(await self.engine.tick())
+            self.engine.record_group_message("20002")
+            self.assertFalse(await self.engine.tick())
+            self.generate.assert_awaited_once()
+            self.engine.record_group_message("10001")
+            self.assertTrue(await self.engine.tick())
+            self.assertEqual(self.generate.await_count, 2)
+            self.assertEqual(self.send.await_count, 2)
+
+    async def test_new_message_during_delivery_bookkeeping_is_not_lost(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.cfg.catty_fdj_proactive_dir = directory
+            self.cfg.catty_fdj_proactive_daily_min = 5
+            self.cfg.catty_fdj_proactive_daily_max = 5
+            self.cfg.catty_fdj_proactive_active_window_minutes = 360
+            self.clock.wall = datetime(2026, 10, 27, 7, tzinfo=runtime._LOCAL_TIME).timestamp()
+            self.engine.scheduler_factory = runtime.BubbleScheduler
+            goal = {"owner_id": "123", "text": "我想去跑步", "delivery_count": 0}
+
+            async def record_receipt(*args):
+                self.clock.advance(1)
+                self.engine.record_group_message("10001")
+
+            self.engine.host = replace(
+                self.host, purpose_candidates=AsyncMock(return_value=[goal]),
+                purpose_delivered=record_receipt,
+            )
+            self.generate.return_value = "跑步怎么样了"
+            self.remember.side_effect = lambda *args: self.engine.record_group_message("10001")
+            scheduler = await self.engine._get_scheduler(self.cfg)
+            status = await runtime.store_call(scheduler.status, "10001", self.clock.wall)
+            first, second = status["slots"][:2]
+            self.clock.advance(first["at"] + 1 - self.clock.wall)
+            self.rows = [self.row(index) for index in range(5)]
+            self.assertTrue(await self.engine.tick())
+            status = await runtime.store_call(scheduler.status, "10001", self.clock.wall)
+            self.assertEqual(status["last_send_at"], first["at"] + 1)
+            self.clock.advance(second["at"] + 1 - self.clock.wall)
+            self.assertTrue(await self.engine.tick())
+            self.assertEqual(self.generate.await_count, 2)
 
 
 if __name__ == "__main__":

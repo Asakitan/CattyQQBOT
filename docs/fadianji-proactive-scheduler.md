@@ -4,14 +4,14 @@
 
 ## 范围与接口
 
-实现位于 `src/catty_qq_ai/fdj_proactive.py`，测试位于 `tests/test_fdj_proactive.py`。它是机机专用的新调度与存储层，不启动 NoneBot，不访问网络，不调用模型，不发 QQ 消息，也不修改其他人格的主动行为。入口负责确认当前人格、维护真人活动时间、生成回复、调用发送接口。
+实现位于 `src/catty_qq_ai/fdj_proactive.py`，测试位于 `tests/test_fdj_proactive.py`。它是各人格共享的调度与存储层，不启动 NoneBot，不访问网络，不调用模型，也不发 QQ 消息。入口负责确认当前人格、维护活动时间、生成回复、调用发送接口。
 
 固定公共接口：
 
 - `BubblePolicy`：冻结 dataclass；字段与默认值见下表。
 - `BubbleCandidate(group_id, day, slot_id, mode, night)`：冻结 dataclass；`mode` 为 `join` 或 `topic`。
 - `BubbleScheduler(root: str | Path, policy: BubblePolicy)`：构造时无文件扫描或读写。
-- `due(group_id, now, *, human_times) -> BubbleCandidate | None`
+- `due(group_id, now, *, human_times, last_message_at=None) -> BubbleCandidate | None`
 - `claim(candidate, now) -> str | None`
 - `finish(group_id, attempt_id, outcome, now) -> bool`
 - `skip(candidate, now, reason='unsuitable') -> bool`
@@ -42,7 +42,11 @@
 - **00:00–08:00 绝不发送**。午夜可以准备次日元数据，但不触发消息。错过有效期立即标记 `expired`，不追赶、不补发、不将剩余额度搬到下一天。有效期仍在时，群友变活跃后可自然触发。
 - 日内读取已持久化的策略与计划；热配置/实例重建不重新抽额度。新策略从下一 UTC+8 日期的新计划开始生效。
 
-真人时间由调用方提供；机器人消息、撤回事件、非消息事件应由入口过滤。本模块不存储这些时间，也不存聊天正文、用户 ID、昵称或调用方传入的 `reason`。未来时间、NaN、无穷和非数值活动会被忽略；窗口左边界包含在内。
+真人时间由调用方提供；`human_times` 中由入口过滤机器人消息、撤回事件及非消息事件。本模块不存储这些时间，也不存聊天正文、用户 ID、昵称或调用方传入的 `reason`。未来时间、NaN、无穷和非数值活动会被忽略；窗口左边界包含在内。
+
+确认发送或发送结果未知后，下一次候选还须有晚于最近发送或未知结果时间的同群新消息。`last_message_at` 为入口提供的最新群活动 Unix 时间，包含其他机器人的群消息、已确认的本机后续群消息和群文件上传；省略时兼容使用 `human_times`。无新活动时 `due` 直接返回 None，不调用模型，也不提前消费机会。明确失败不设置新的发送门槛；真人活跃度和原时间窗口仍单独检查。
+
+入口只在内存保存最新群活动和单调时钟检查点，主动消息本身不解除门槛。调度文件保留确认发送及未知发送记录；进程重启后须重新观察同群活动。发送结果未知按记录结果时刻保守处理，不将它记成确认送达。
 
 ## 调用顺序与幂等
 
@@ -93,4 +97,4 @@
 
 测试直接用独立包壳加载本模块，仅使用临时数据和注入时间；40 项用例包含 400 个 group/day 计划的配额、75% 活动约束、夜间上限与分布性质，以及活跃/冷群、午夜、过期、跨日间隔、并发认领、重启恢复、幂等、路径、写入/读取失败和隐私元数据检查。
 
-40项本地全通过，无跳过；集成另用真实scheduler/runtime和临时JSON验证发送一次、重复tick不重复发送及重建额度保持。项目回归使用 `scripts/run_offline_regressions.py`，不触发在线评测discover；当前58模块989项仅1项既有persona_admin浮点失败，见 [会话08](session-log/session-08.md)。本模块已随会话08部署，双端SHA-256一致；未做真实QQ发送或跨进程共用root验证。
+本次主动相关定向测试双端各 137 项通过，真实插件事件接线各 1 项、普通回复各 48 项通过；覆盖新消息门槛、重启、群隔离、未知回执和发送后的记账时序。该增量已部署，七份源码及测试双端一致；未做真实 QQ 发送或跨进程共用 root 验证。历史部署见 [会话08](session-log/session-08.md)，本次见 [会话40](session-log/session-40.md)。

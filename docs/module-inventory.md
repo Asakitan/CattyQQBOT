@@ -2,6 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `fdj_proactive.py` / `fdj_proactive_runtime.py` / `__init__.py` / 主动与事件接线测试 | 已发送或发送结果未知后等待同群新消息再生成 → `docs/fadianji-proactive-scheduler.md`、`docs/session-log/session-40.md` | 已部署；双端各通过主动链路 137 项、插件接线 1 项、普通回复 48 项，七文件一致 |
 | `openai_client.py` / `skill_runtime.py` / `tool_switches.py` / `prompt_manager.py` / `nlu/prompt_compressor.py` / `__init__.py` / 九份缓存测试 | 追加工具/能力说明、固定schema、共享自动key、条件资料与格式缓存、预算及回执诊断 → `docs/skill-runtime.md`、`docs/session-log/session-39.md` | 已部署；17份代码/测试一致，生产361项中352通过、9跳过；97–98%待自然流量验证 |
 | `__init__.py` / `tests/test_reply_message_composition.py` / `tests/test_persona_reply_fallbacks.py` | 尊重群聊、显式唤醒及私聊的NO_REPLY，移除强制补答；缓存审查 → `docs/persona-runtime.md`、`docs/session-log/session-37.md` | 已随缓存修复部署；本地和生产消息出口48项、人格目录10项通过 |
 | `mention_followup.py` / `__init__.py` / `fadianji_style_critic.py` / 收集、人物、图片与风格测试 | @ 后 10 秒同人消息归并、群聊多人物上下文、异常短句审校 → `docs/persona-runtime.md`、`docs/session-log/session-35.md` | 已部署；本地与生产各 281 项通过，九文件一致，16:54:47 重连；缓存实现与人格正文未改 |
@@ -84,6 +85,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-11-04 | 主动发送后等待同群新消息或文件上传，再调用生成 | 已部署；双端各通过主动链路 137 项、插件接线 1 项、普通回复 48 项，七文件一致，02:22:40 重连；见会话40 |
 | 2026-11-01 | 部署缓存前缀、追加工具及NO_REPLY修复 | 17份代码/测试一致；生产361项中352通过、9跳过，00:14:14重连；真实命中与QQ效果待观察，见会话39 |
 | 2026-11-01 | 修复动态工具/指南与条件游戏前缀漂移，合并自动缓存核算，减少重复说明并补预算与诊断 | 本地351项中342通过、9跳过，15份修改文件无诊断；未发收费请求或部署，见会话38 |
 | 2026-11-01 | NO_REPLY不再被强制补答，完成缓存路径与生产样本审查 | 本地58项通过；真实转换器复现撤工具、条件游戏前缀、随机技能回执schema；未调用云模型或部署，见会话37 |
