@@ -1,4 +1,11 @@
 # Catty 当前状态
+## 2026-11-04 · 主动群聊图片语境（已部署）
+
+- 主动接话先判断当前话题、对话对象和图片用途；不把群里的问句都当作问自己，不因配图中缺少某个对象便断言图片与话题无关。无人点名时仍可自然参与，明确要求看图时仍可分析，含义不明可追问或静默。
+- 当前群最近消息附带距生成时的整数秒数，帮助模型理解前后文时效；图片引用和原有限额、调度、看图与发送检查保留。主动提示明确 `NO_REPLY` 是允许输出的沉默标记。
+- 生产只读日志确认截图来自主动 `join`：14:44:17 发图提问，14:46:08 生成，期间两条群友消息已到达；模型调用两次看图后于 14:46:23 发言。日志未保留完整提示与看图参数，不推断具体图片选择。
+- 已通过 `push_zip` 部署四个文件，双端 SHA-256 一致；生产 Python 3.14.5 主动链路 119 项、共享人格 19 项及两份源码 `py_compile` 通过。14:58:34 插件加载、14:58:55 OneBot 重连，心跳正常、加载后无 ERROR。未改生产配置和人格正文，未发模型探针，真实模型效果待观察。见 `docs/session-log/session-41.md`。
+
 ## 2026-11-04 · 主模型切回 DeepSeek（本地与生产配置，已部署）
 
 - 本地与生产 `config.json` 的 `ai` 段从 `https://api.openai.com/v1/responses` + `gpt-6.1-terra` 切回 `https://opencode.ai/zen/go/v1/chat/completions` + `deepseek-v4.1-flash`（复用 `oc_sk` 密钥）；`websocket_enabled=false`、`websocket_url=""`、`openai_prompt_cache_key_enabled=false`、`websocket_previous_response=false`、`extra_body={}`，`anthropic_native_enabled` / `compaction_enabled` 保持 false。生产独有的 `http_proxy=socks5h://127.0.0.1:11080` 保留，vision 等 OpenAI 侧继续走加密中继。

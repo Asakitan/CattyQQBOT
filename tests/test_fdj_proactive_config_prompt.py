@@ -190,7 +190,29 @@ class FdjProactivePromptTests(unittest.TestCase):
         self.assertIn("catty_look_image", system)
         self.assertIn("catty_scan_messages", system)
         self.assertIn("先看图再接话", system)
+        self.assertIn("没人点名时也可以自然参与", system)
+        self.assertIn("旧消息不一定还是当前话题", system)
+        self.assertIn("结合配文和上下文判断它的作用与文字指代", system)
+        self.assertIn("图文相邻不等于文字一定在问画面", system)
+        self.assertIn("不能因为画面没有某人或某物就断言两者无关", system)
+        self.assertIn("明确要看图时正常分析", system)
+        self.assertIn("无法确认指代或答案时不编造", system)
         self.assertNotIn("不用工具", system)
+
+    def test_recent_message_age_is_bounded_and_preserves_image_association(self):
+        recent = [
+            {"speaker": "甲", "text": "这个火羽是谁", "is_bot": False,
+             "age_seconds": 112, "image_refs": ["m17#0"]},
+            {"speaker": "乙", "text": "我就看看切片", "is_bot": False, "age_seconds": 13},
+            {"speaker": "丙", "text": "估计没有吧", "is_bot": False, "age_seconds": 6},
+            {"speaker": "丁", "text": "后续", "is_bot": False, "age_seconds": True},
+        ]
+        messages = _messages(recent_messages=recent)
+        rows = _data(messages)["recent_messages"]
+        self.assertEqual(rows[:3], recent[:3])
+        self.assertNotIn("age_seconds", rows[3])
+        self.assertIn("age_seconds 是距本轮开始的秒数", _system(messages))
+        self.assertIn("缺失时不要猜时间", _system(messages))
 
     def test_real_persona_core_and_rhythm_are_preserved_without_catty_template(self):
         persona = _personas.FADIANJI_PERSONA
@@ -221,7 +243,8 @@ class FdjProactivePromptTests(unittest.TestCase):
             with self.subTest(mode=mode):
                 for text in (f"mode={mode}", phrase, "一条一行", "≤50字", "不用工具",
                              "不声称联网", "后台动作", "历史任务", "不使用固定开场池",
-                             "不编造实时资讯或自身真实经历", "NO_REPLY", _prompt.NO_REPLY_MARKER):
+                             "不编造实时资讯或自身真实经历", "除需要沉默时输出指定的 NO_REPLY 标记外",
+                             "NO_REPLY", _prompt.NO_REPLY_MARKER):
                     self.assertIn(text, system)
 
     def test_shared_context_hint_uses_no_tools_or_operation_schema(self):

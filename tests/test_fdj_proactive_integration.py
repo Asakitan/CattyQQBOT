@@ -459,6 +459,7 @@ class RuntimeIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(await self.runtime.tick())
         factory.assert_called_once_with("group:10001")
         self.assertEqual(self.prompt.call_args.kwargs["recent_messages"][-1]["image_refs"], ["m17#0"])
+        self.assertEqual(self.prompt.call_args.kwargs["recent_messages"][-1]["age_seconds"], 10)
         self.assertEqual(self.prompt.call_args.kwargs["available_tools"], ("catty_look_image",))
         self.assertIs(self.generate.call_args.kwargs["tool_executor"], executor)
         self.assertEqual(self.generate.call_args.kwargs["tools"], schemas)

@@ -225,7 +225,7 @@ class FdjProactiveRuntime:
                 text = "[图片]"
             if not text:
                 continue
-            row = {"speaker": str(item.display_name), "text": text, "is_bot": is_bot}
+            row = {"speaker": str(item.display_name), "text": text, "is_bot": is_bot, "age_seconds": int(age)}
             seq = getattr(item, "seq", None)
             if image_urls and isinstance(seq, int) and seq > 0:
                 row["image_refs"] = [f"m{seq}#{index}" for index, url in enumerate(image_urls[:4]) if url]
