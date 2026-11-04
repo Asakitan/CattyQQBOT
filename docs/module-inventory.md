@@ -2,6 +2,7 @@
 
 | 源码 | 职责 / 交付目标 | Status |
 | --- | --- | --- |
+| `fdj_proactive_prompt.py` / `fdj_proactive_runtime.py` / 主动提示与集成测试 | 主动冒泡默认不描述图片，仅明确问图时看图；发送前拦截未请求的画面描述 → `docs/fadianji-proactive.md`、`docs/session-log/session-41.md` | 已部署；双端哈希一致，本地主动链路 123 项及共享人格 19 项通过，15:14:44 加载、15:14:48 重连；远端 unittest 未跑，真实模型和 QQ 未测 |
 | `fdj_proactive_prompt.py` / `fdj_proactive_runtime.py` / 主动提示与集成测试 | 主动接话判断图片用途、问题指代及消息时效，明确静默标记 → `docs/fadianji-proactive.md`、`docs/session-log/session-41.md` | 已部署；双端哈希一致，生产主动链路 119 项及共享人格 19 项通过，14:58:34 加载、14:58:55 重连；真实模型和 QQ 未测 |
 | `fdj_proactive.py` / `fdj_proactive_runtime.py` / `__init__.py` / 主动与事件接线测试 | 已发送或发送结果未知后等待同群新消息再生成 → `docs/fadianji-proactive-scheduler.md`、`docs/session-log/session-40.md` | 已部署；双端各通过主动链路 137 项、插件接线 1 项、普通回复 48 项，七文件一致 |
 | `openai_client.py` / `skill_runtime.py` / `tool_switches.py` / `prompt_manager.py` / `nlu/prompt_compressor.py` / `__init__.py` / 九份缓存测试 | 追加工具/能力说明、固定schema、共享自动key、条件资料与格式缓存、预算及回执诊断 → `docs/skill-runtime.md`、`docs/session-log/session-39.md` | 已部署；17份代码/测试一致，生产361项中352通过、9跳过；97–98%待自然流量验证 |
@@ -86,6 +87,7 @@
 
 | 日期 | 变更 | 验证 |
 | --- | --- | --- |
+| 2026-11-04 | 主动冒泡默认不描述图片，仅明确问图时看图，未请求描述发送前跳过 | 四文件双端一致；本地 123 项主动链路及 19 项共享人格通过，15:14:48 重连；远端测试接口禁用，见会话41追加 |
 | 2026-11-04 | 主动图片按群聊语境和相对时间判断，明确 `NO_REPLY` 例外 | 四文件双端一致；本地与生产 119 项主动链路、22 项最终提示及 19 项共享人格通过，14:58:55 重连，见会话41 |
 | 2026-11-04 | 主动发送后等待同群新消息或文件上传，再调用生成 | 已部署；双端各通过主动链路 137 项、插件接线 1 项、普通回复 48 项，七文件一致，02:22:40 重连；见会话40 |
 | 2026-11-01 | 部署缓存前缀、追加工具及NO_REPLY修复 | 17份代码/测试一致；生产361项中352通过、9跳过，00:14:14重连；真实命中与QQ效果待观察，见会话39 |

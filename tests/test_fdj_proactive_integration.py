@@ -464,6 +464,44 @@ class RuntimeIntegrationTests(unittest.IsolatedAsyncioTestCase):
         self.assertIs(self.generate.call_args.kwargs["tool_executor"], executor)
         self.assertEqual(self.generate.call_args.kwargs["tools"], schemas)
 
+    async def test_unrequested_image_description_is_skipped(self):
+        image = self.row(17)
+        image.text = ""
+        image.image_urls = ("https://images.example/dog.png",)
+        self.recent["group:10001"].append(image)
+        self.generate.return_value = "图里就一只狗躺那睡着了"
+        self.assertFalse(await self.runtime.tick())
+        self.send.assert_not_awaited()
+        self.assertEqual(self.factories[0].skips, ["unrequested_image_description"])
+
+    async def test_explicit_image_request_allows_description(self):
+        image = self.row(17)
+        image.text = ""
+        image.image_urls = ("https://images.example/dog.png",)
+        ask = self.row(18)
+        ask.text = "图里是什么"
+        self.recent["group:10001"].extend([image, ask])
+        self.generate.return_value = "图里是一只睡着的狗"
+        self.assertTrue(await self.runtime.tick())
+        self.send.assert_awaited_once()
+
+    async def test_stale_image_request_does_not_license_description(self):
+        image = self.row(17)
+        image.text = ""
+        image.image_urls = ("https://images.example/dog.png",)
+        ask = self.row(18, age=400)
+        ask.text = "图里是什么"
+        self.recent["group:10001"].extend([image, ask])
+        self.generate.return_value = "图里是一只睡着的狗"
+        self.assertFalse(await self.runtime.tick())
+        self.send.assert_not_awaited()
+        self.assertEqual(self.factories[0].skips, ["unrequested_image_description"])
+
+    async def test_map_phrase_is_not_treated_as_image_description(self):
+        self.generate.return_value = "地图上有个标记"
+        self.assertTrue(await self.runtime.tick())
+        self.send.assert_awaited_once()
+
     async def test_switch_independent_defaults_ack_ledger_and_clock_conversion(self):
         self.assertTrue(await self.runtime.tick())
         self.send.assert_awaited_once()

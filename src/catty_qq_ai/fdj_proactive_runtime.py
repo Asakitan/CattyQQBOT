@@ -23,6 +23,28 @@ from .reply_delivery import ReplyDeliveryState
 
 _LOG = logging.getLogger(__name__)
 _LOCAL_TIME = timezone(timedelta(hours=8))
+_EXPLICIT_IMAGE_REQUEST_RE = re.compile(
+    r"(?:(?<!地)图里|(?<!地)图中|(?<!地)图上|图片里|图片上|照片里|照片上|这张图|这图|截图).{0,8}"
+    r"(?:是什么|是谁|啥|什么|哪|出处|来源|角色|识别|分析)"
+    r"|(?:看|识别|认|分析|描述).{0,6}(?:这张|这个|图|照片|截图)"
+    r"|(?:什么|哪个|哪部)(?:图|角色)|出处"
+)
+_IMAGE_CONTENT_RE = re.compile(
+    r"(?<!地)图里|(?<!地)图中|(?<!地)图上|图片里|图片上|照片里|照片上|画面里|画面上|看起来像|看上去像"
+)
+
+
+def _explicit_image_request(rows: Sequence[dict]) -> bool:
+    for row in rows:
+        if not isinstance(row, dict) or row.get("is_bot") is True:
+            continue
+        age = row.get("age_seconds")
+        if type(age) is int and age > 300:
+            continue
+        text = row.get("text")
+        if type(text) is str and _EXPLICIT_IMAGE_REQUEST_RE.search(text):
+            return True
+    return False
 
 
 async def _drain(task: asyncio.Task) -> Any:
@@ -357,6 +379,8 @@ class FdjProactiveRuntime:
             return await skip("invalid_reply")
         if not text:
             return await skip("no_reply")
+        if not _explicit_image_request(rows) and _IMAGE_CONTENT_RE.search(text):
+            return await skip("unrequested_image_description")
         # Persona lookup is deliberately outside the bound generation context.
         if not self._eligible(group_id, persona=persona, stamp=stamp, persona_stamp=persona_stamp):
             return await skip("changed_after_generation")
