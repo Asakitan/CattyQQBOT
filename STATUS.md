@@ -1,4 +1,11 @@
 # Catty 当前状态
+## 2026-11-04 · 主模型本地切回 DeepSeek（仅本地配置，未部署）
+
+- 本地 `config.json` 的 `ai` 段从 `https://api.openai.com/v1/responses` + `gpt-6.1-terra` 切回 `https://opencode.ai/zen/go/v1/chat/completions` + `deepseek-v4.1-flash`（复用 `oc_sk` 密钥）；`websocket_enabled=false`、`websocket_url=""`、`openai_prompt_cache_key_enabled=false`、`extra_body={}`，`anthropic_native_enabled` / `compaction_enabled` 保持 false。
+- `vision` 仍为 Terra Responses，`vision_shares_main_route` 不再成立，图片改走既有 `describe_images` 链路，不再直进主请求。
+- 校验：JSON 可解析；`catty_config_loader.load_config_to_env()` 映射出 `CATTY_OPENAI_MODEL=deepseek-v4.1-flash`、`CATTY_OPENAI_BASE_URL=.../chat/completions`、WS 与 prompt_cache_key 均为 false、`extra_body={}`；`tests/test_config.py` 18 项、`tests/test_config_loader.py` 20 项通过。`detect_provider` 对 opencode 域名按模型名判为 `deepseek`，WS 与 prompt_cache_key 分支不会启用。
+- 切换前备份 `backup/config-20261104-main-model-rollback/config.before.json`（原文件 SHA-256 `CE10B211D52343193AA2F34DECDC7990208AE863BAB294683E9CF3FDA3985CEA`）。生产 `D:/CattyQQAI` 配置未推送、未改动。
+
 ## 2026-11-04 · 主动冒泡等待新消息（已部署）
 
 - 同群主动消息确认送达或发送结果未知后，须先观察到该群的其他新消息或群文件上传，才会再次进入主动生成；无新消息时不发模型请求。不同群互不解锁，冒泡自身不算新消息。
