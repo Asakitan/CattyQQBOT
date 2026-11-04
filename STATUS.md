@@ -1,10 +1,11 @@
 # Catty 当前状态
-## 2026-11-04 · 主模型本地切回 DeepSeek（仅本地配置，未部署）
+## 2026-11-04 · 主模型切回 DeepSeek（本地与生产配置，已部署）
 
-- 本地 `config.json` 的 `ai` 段从 `https://api.openai.com/v1/responses` + `gpt-6.1-terra` 切回 `https://opencode.ai/zen/go/v1/chat/completions` + `deepseek-v4.1-flash`（复用 `oc_sk` 密钥）；`websocket_enabled=false`、`websocket_url=""`、`openai_prompt_cache_key_enabled=false`、`extra_body={}`，`anthropic_native_enabled` / `compaction_enabled` 保持 false。
+- 本地与生产 `config.json` 的 `ai` 段从 `https://api.openai.com/v1/responses` + `gpt-6.1-terra` 切回 `https://opencode.ai/zen/go/v1/chat/completions` + `deepseek-v4.1-flash`（复用 `oc_sk` 密钥）；`websocket_enabled=false`、`websocket_url=""`、`openai_prompt_cache_key_enabled=false`、`websocket_previous_response=false`、`extra_body={}`，`anthropic_native_enabled` / `compaction_enabled` 保持 false。生产独有的 `http_proxy=socks5h://127.0.0.1:11080` 保留，vision 等 OpenAI 侧继续走加密中继。
+- 生产 `ai.websocket_include` 已删除：该字段没有 `field_validator`，热重载会把 loader 导出的 `'[]'` 字符串直接交给 `Config.model_validate`，导致整次重载被跳过（13:25:52 实测告警），删键后回退默认空列表。
 - `vision` 仍为 Terra Responses，`vision_shares_main_route` 不再成立，图片改走既有 `describe_images` 链路，不再直进主请求。
-- 校验：JSON 可解析；`catty_config_loader.load_config_to_env()` 映射出 `CATTY_OPENAI_MODEL=deepseek-v4.1-flash`、`CATTY_OPENAI_BASE_URL=.../chat/completions`、WS 与 prompt_cache_key 均为 false、`extra_body={}`；`tests/test_config.py` 18 项、`tests/test_config_loader.py` 20 项通过。`detect_provider` 对 opencode 域名按模型名判为 `deepseek`，WS 与 prompt_cache_key 分支不会启用。
-- 切换前备份 `backup/config-20261104-main-model-rollback/config.before.json`（原文件 SHA-256 `CE10B211D52343193AA2F34DECDC7990208AE863BAB294683E9CF3FDA3985CEA`）。生产 `D:/CattyQQAI` 配置未推送、未改动。
+- 校验：本地 `load_config_to_env()` 映射出 deepseek 线路与关闭的 WS、prompt_cache_key；`tests/test_config.py` 18 项、`tests/test_config_loader.py` 20 项通过；用机器人同款 `_config_from_environment` 预演生产新配置校验通过。生产写入 SHA-256 `c1213b8dd92db2793cec247476d6100e4331eb458ae63242d68907e892571d2e`，13:26:48 日志 `Hot reloaded config.json`，之后无新告警。
+- 备份：本地 `backup/config-20261104-main-model-rollback/config.before.json`、`config.prod.before.json`（生产切换前 SHA-256 `21a47c9f851f1b5147690fe3f791da7031abce94fe1766533188a38ad117167a`）；回滚方式为重新上传该文件。切换后尚未出现新的自然主请求，真实 DeepSeek 回复待线上流量观察。
 
 ## 2026-11-04 · 主动冒泡等待新消息（已部署）
 
